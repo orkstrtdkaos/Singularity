@@ -86,7 +86,7 @@ import { rankVoices, pickVoice, speakableText, chunkForSpeech, renderProseHtml }
 import { harmGateFor, harmTargetFor, departureGateFor, isConsequentialMove, isSpeechAct, isRemoteContact, personDestination, sanitizeOfferIntent, intentNoteFor, splitLedgerEvents } from "./engine/intent.js"; // SNG-145: intent confirmation for costly acts (Law 9 in the play loop); SNG-188: speech-act guard; SNG-228: person-as-place guard; CCODE-158: one departure definition for both doors; CCODE-159: remote contact is not travel
 import { resolveWaygateTransit, routeGmMoveTo, isNetworkGate, networkGatesFrom, gateHopCost, aimsOpen } from "./engine/waygate.js";
 import { routeBetween, routeLine, twoWayRoads } from "./engine/journey.js";
-import { planJob, suggestTeam, jobPoolOf, jobRouteOf, jobCost, jobWages, jobEffects, sayEffects, settleDueJobs, degreeWord, jobOpposition, mainNeedOf, jobCraftsOf, bestCraftFor, OUTCOMES as JOB_OUTCOMES, errandOdds, detachForJob, jobPersonFor, jobUnitFor } from "./engine/jobs.js";   // CCODE-420 · CCODE-428 · CCODE-431
+import { planJob, suggestTeam, jobPoolOf, jobRouteOf, jobCost, jobWages, jobEffects, sayEffects, settleDueJobs, degreeWord, jobOpposition, mainNeedOf, jobCraftsOf, bestCraftFor, OUTCOMES as JOB_OUTCOMES, errandOdds, detachForJob, jobPersonFor, jobUnitFor, workCraftsOf, workDayChance, workHeads } from "./engine/jobs.js";   // CCODE-420 · CCODE-428 · CCODE-431
 import { ensureJobs, postJob, sendOnJob, awayOnJob, untoldJobs, markJobsTold, dropJob, detachedFrom } from "./engine/jobstate.js";   // CCODE-420 · CCODE-431
 import { sendCaravan, caravansOf } from "./engine/caravan.js";   // R49: a caravan is a delegate + a route + a load   // SNG-331 §1 / SNG-386 §4.4: two named options over roads + gates // SNG-148: waygates — map control routes named/hub; GM offer via the registry row. SNG-243 §4: the gate network
 import { skillDetail, npcDetail, itemDetail, relationshipsParagraph, craftRollsLine, craftRollsShort } from "./engine/entityDetail.js";
@@ -112,6 +112,7 @@ import { derivedLevel, authoredFor } from "./engine/npcsheet.js";   // CCODE-422
 import { musterCapacityOf, queueHoldingEvent } from "./engine/holdings.js";
 import { ARMORY_SLOTS, SLOT_WORDS, armoryTable, armoryOf, armoryLine, makersAt, setForgeOrder, outfitContingent, gearPrice, sellGear } from "./engine/armory.js";   // CCODE-445: the armory
 import { STANCE_NAMES, FIGHT_FAMILIES, FAMILY_WORDS, FAMILY_LANDS, stanceTable, stanceOf, allocateTurn, allyChoice, partyRound } from "./engine/orderofbattle.js";   // CCODE-448: the order of battle
+import { workTable, workOf, workAt, workersAt, assignWork, unassignWork } from "./engine/holdwork.js";   // CCODE-450: standing work
 import { homeOf, isHome, makeHome } from "./engine/home.js";   // CCODE-369: a home is a place that is yours   // CCODE-360: an invitation carried by someone you both know
 import { runWakeGeneration } from "./engine/wake.js"; // SNG-204 Phase 2: open wakes generate the next thread
 import { addAssignment, delegationRefusal, activeDelegates, MISSION_KINDS, MISSION_KIND_IDS, canSendOn, sayFamilies } from "./engine/assignments.js"; // SNG-191 §4: the world honours delegated work
@@ -175,7 +176,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.3.1";
+const APP_VERSION = "2.3.2";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -13900,6 +13901,15 @@ function wireHoldingOffers() {
   };
   // ⛔ CCODE-440: a hold is a local market — sell what you carry, and change money, where you stand
   for (const btn of app.querySelectorAll("[data-hold-sellpack]")) btn.onclick = () => showSellFromPack(btn.dataset.holdSellpack, again);
+  // ⛔ CCODE-450: put someone to standing work, or take them off it
+  for (const s of app.querySelectorAll("[data-work-add]")) s.onchange = () => {
+    if (!s.value) return;
+    const r = assignWork(character, s.dataset.workAdd, s.dataset.kind, s.value, { table: workTable(CONTENT.rules?.holdWork || null) });
+    if (!r.ok) alert(r.why);
+    else saveCharacter(character);
+    again();
+  };
+  for (const b of app.querySelectorAll("[data-work-drop]")) b.onclick = () => { unassignWork(character, b.dataset.workDrop, b.dataset.kind, b.dataset.id); saveCharacter(character); again(); };
   for (const btn of app.querySelectorAll("[data-hold-exchange]")) btn.onclick = () => showChangeMoney(again);
   // ⛔ CCODE-444: a hold keeps valuables — put in and taken out where you stand; a kept well or sink is switched on and off from its card
   for (const btn of app.querySelectorAll("[data-hold-vault]")) btn.onclick = () => showVaultDeposit(btn.dataset.holdVault, again);
@@ -13999,7 +14009,39 @@ function holdCfgNow() {
 // ⛔ `manageId` OPENS THE POPUP Erik asked for. The card is for READING — the four things he named — and
 // every control that CHANGES the place lives behind one button, because the two were interleaved and
 // neither could be used.
+/** ⛔ CCODE-450 — who can be put to standing work: people in your bands and their hands, not at your side, not keeping a hold or on its
+ *  watch, not out on a job or an errand, and not already at work (the jobs pool leaves those out). One sheet each per render. */
+let _workMemo = null;
+function workCraftsCached(id) {
+  if (!_workMemo) _workMemo = new Map();
+  if (!_workMemo.has(id)) {
+    let crafts = [];
+    try { crafts = workCraftsOf(character, id, { content: CONTENT, abilityCatalog: fullCatalog(), worldDay: (() => { try { return absoluteWorldDay(); } catch { return null; } })(), fnIndex: FN_INDEX }); } catch { crafts = []; }
+    _workMemo.set(id, crafts);
+  }
+  return _workMemo.get(id);
+}
+let _workCands = null;
+function workCandidates() {
+  if (_workCands) return _workCands;
+  let pool = [];
+  try { pool = jobPoolOf(character, { content: CONTENT, abilityCatalog: fullCatalog(), worldDay: (() => { try { return absoluteWorldDay(); } catch { return null; } })(), locations: CONTENT.locations }); } catch { pool = []; }
+  const onErrand = new Set(Object.values(character.worldState?.assignments || {}).filter(a => a && a.status !== "done").map(a => String(a.npcId)));
+  // ⚠️ POSTED IS READ OFF THE HOLDS, not off the pool's `from`: a band member who is also on a garrison is listed under the band first
+  // (Calvar, on the Fell Pell's watch, was offered for foraging) — a keeper, a guard and a crew hand already have their post.
+  const posted = new Set((character.holdings || []).flatMap(h => [...(Array.isArray(h?.garrison) ? h.garrison : []), ...(Array.isArray(h?.crew) ? h.crew : []), h?.steward]).filter(Boolean).map(String));
+  _workCands = pool.filter(p => !p.isYou && p.from !== "at your side" && !posted.has(String(p.id))
+    && !awayOnJob(character, p.id) && !onErrand.has(String(p.id)));
+  return _workCands;
+}
+function workerName(id) {
+  const m = /^unit:(.+):(\d+)$/.exec(String(id));
+  if (m) { const b = (character.bands || []).find(x => x && String(x.id) === m[1]); const c = b?.contingents?.[Number(m[2])]; return `${c?.n || 0} ${c?.kind || "hands"} of ${b?.name || "a band"}`; }
+  return character.npcRegistry?.[id]?.name || CONTENT.npcs?.[id]?.name || CONTENT.companions?.[id]?.name || String(id);
+}
+
 function renderHoldingsTab(manageId = null) {
+  _workMemo = null; _workCands = null;   // CCODE-450: one sheet per worker per render
   bannerFrom("holds");   // CCODE-355
   const rules = CONTENT.rules;
   const ladder = rules.subAttributeLadder;
@@ -14130,6 +14172,23 @@ function renderHoldingsTab(manageId = null) {
           if (!line && !m.cap) return "";
           const atHold = hereNow()?.id === h.locationId;
           return `<div class="hint hold-has hold-armory"><span class="hold-ctl-label">armory</span><span>${esc(line || "empty")}</span>${m.cap ? `<span class="armory-make"><select data-make-gear aria-label="What to make">${Object.entries(A.gear).map(([k, g]) => `<option value="${esc(k)}"${h.forgeOrder?.gear === k ? " selected" : ""}>${esc(g.many)}</option>`).join("")}</select><input type="number" class="armory-count" min="1" max="999" step="1" value="${h.forgeOrder?.left || 10}" data-make-count aria-label="How many"><button class="opt" data-make-order="${esc(h.id)}" title="${esc(`Makes ${m.cap} a pass (${m.by.join(", ")}), from the store's raw material`)}">${h.forgeOrder ? "Change the order" : "Make"}</button>${h.forgeOrder ? `<button class="opt" data-make-stop="${esc(h.id)}">Stop</button>` : ""}</span>` : ""}${atHold && Object.values(armoryOf(h)).some(n => n > 0) ? `<button class="opt" data-sell-gear="${esc(h.id)}" title="Sell gear from the armory, at this place's price for arms, in its own money">Sell gear</button>` : ""}</div>`; })()}
+        ${(() => {   // ⛔ CCODE-450: standing work — who is put to what the hold needs, and what comes of it
+          const T = workTable(CONTENT.rules?.holdWork || null);
+          const at = workersAt(h);
+          const cands = workCandidates();
+          const wage = (Number(CONTENT.rules?.economy?.holdStore?.growth?.wagePerHand) || 0) * at.reduce((a, [, id]) => a + Math.max(1, workHeads(character, id)), 0);
+          const rows = Object.entries(T.kinds).map(([k, K]) => {
+            const ids = (workOf(h)[k] || []).map(String);
+            const perPass = ids.reduce((a, id) => a + workDayChance(workCraftsCached(id), k, T) * 3 * Math.max(1, workHeads(character, id)), 0);
+            const banked = Number(h.workBank?.[k]) || 0;
+            return `<div class="hw-row"><span class="hw-kind">${esc(K.label)}<small>${esc(K.what)}</small></span>
+              <span class="hw-who">${ids.map(id => `<button class="hw-chip" data-work-drop="${esc(h.id)}" data-kind="${esc(k)}" data-id="${esc(id)}" title="Take them off this work">${esc(workerName(id))} ✕</button>`).join("")}${cands.length ? `<select data-work-add="${esc(h.id)}" data-kind="${esc(k)}" aria-label="${esc(`Put someone to ${K.label.toLowerCase()}`)}"><option value="">+ put someone to it</option>${cands.map(p => `<option value="${esc(p.id)}">${esc(p.short || p.name)} — ${Math.round(100 * workDayChance(workCraftsCached(p.id), k, T))}% a good day</option>`).join("")}</select>` : ""}</span>
+              <span class="hw-gain">${ids.length ? `${perPass.toFixed(1)} good days a pass${K.per ? ` · ${banked} of ${K.per} banked` : " · while it lasts"}` : ""}</span></div>`;
+          }).join("");
+          return `<details class="hw"${at.length ? " open" : ""}><summary>Standing work${at.length ? ` — ${at.length} at it, ${esc(String(wage))} ${esc(CONTENT.rules?.economy?.holdStore?.upkeepCurrency || "crystal")} a pass in wages` : ""}</summary>
+            <p class="hint">People with no job, put to what the hold needs. They stay here and are nobody else's while they work it, and each is paid a hand's wage a pass, in the money of this place. Scouting, crafting and teaching come with the hold's levels.</p>
+            <div class="hw-rows">${rows}</div></details>`;
+        })()}
         ${h.fromAssignment ? `<div class="hint">from work you delegated</div>` : ""}
         <div class="opt-row" style="margin-top:6px">
           <button class="opt" data-hold-manage="${esc(h.id)}" title="Add what was built, change who keeps it, sell the store, give it up">⚙ Manage this place</button>
@@ -16339,12 +16398,12 @@ function bandMembersOf(band) {
   (band?.contingents || []).forEach((c, i) => {
     if (!c) return;
     if (c.npcId) {
-      if (awayOnJob(character, c.npcId)) return;
+      if (awayOnJob(character, c.npcId) || workAt(character, c.npcId)) return;   // CCODE-450: nor anyone at standing work
       const p = jobPersonFor(character, c.npcId, ctx);
       if (p) out.push({ ...p, roleFams: (c.does || []).map(String) });
     } else {
       const u = jobUnitFor(character, band.id, i, ctx);
-      if (u) out.push({ ...u, label: c.kind || "hands" });
+      if (u && !workAt(character, u.id)) out.push({ ...u, label: c.kind || "hands" });
     }
   });
   return out;

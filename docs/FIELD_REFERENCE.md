@@ -665,7 +665,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `intensity` | 432 | `root`×432 | ✅ READ | `battle_turn.js`, `canon.js`, `craftmechanics.js` |
 | `plainly` | 432 | `root`×432 | ✅ READ | `generate.js`, `gm.js`, `narration_voice.js` |
 | `tree` | 432 | `root`×432 | ✅ READ | `backfill.js`, `braids.js`, `capabilities.js` |
-| `bounds` | 430 | `root`×430 | ✅ READ | `death.js`, `gm.js` |
+| `bounds` | 430 | `root`×430 | ✅ READ | `death.js`, `gm.js`, `holdwork.js` |
 | `mechanic` | 425 | `root`×425 | ✅ READ | `battle_turn.js`, `braids.js`, `capabilities.js` |
 | `challengeTypes` | 417 | `root`×417 | ✅ READ | `journeyroad.js` |
 | `energyCost` | 414 | `root`×414 | ✅ READ | `battle_turn.js`, `braids.js`, `capabilities.js` |
@@ -703,7 +703,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `traditionV2` | 21 | `root`×21 | ⛔ DARK | — |
 | `imposes` | 21 | `tree`×21 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `skill_battle.js` |
 | `touchTier` | 18 | `root`×18 | ✅ READ | `capabilities.js` |
-| `upkeep` | 18 | `root`×18 | ✅ READ | `combatants.js`, `holdings.js`, `app.js` |
+| `upkeep` | 18 | `root`×18 | ✅ READ | `combatants.js`, `holdings.js`, `holdwork.js` |
 | `schoolAffinity` | 18 | `root`×18 | ✅ READ | `app.js` |
 | `obscure` | 16 | `root`×16 | ✅ READ | `encounters.js`, `npcsheet.js`, `skill_battle.js` |
 | `variance` | 15 | `mechanic`×15 | ✅ READ | `craftmechanics.js`, `app.js` |

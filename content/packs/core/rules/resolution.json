@@ -1396,5 +1396,82 @@
     "RESTORE": 0.5
    }
   }
+ },
+ "holdWork": {
+  "note": "CCODE-450 — standing work at a hold: what each kind needs (the families whose best craft makes a good day), how many good days bank one lasting result (per; 0 = it works while it is done), and the dials. CCode's stand-in: the Fell Pell prototype's numbers, which Erik reviewed in rounds 5–6. Aevi's to change; engine/holdwork.js lays these over its own defaults. Scouting, crafting and teaching are not offered until their effect is built.",
+  "dials": {
+   "tendYield": 1.25,
+   "keptUpkeep": 0.9,
+   "huntEase": 1,
+   "trainCap": 3,
+   "daysPerPass": 3
+  },
+  "kinds": {
+   "forage": {
+    "label": "Foraging",
+    "needs": [
+     "SUSTAIN",
+     "KNOW"
+    ],
+    "per": 1
+   },
+   "hunt": {
+    "label": "Hunting",
+    "needs": [
+     "HARM",
+     "KNOW"
+    ],
+    "per": 2
+   },
+   "train": {
+    "label": "Training",
+    "needs": [
+     "HARM",
+     "PROTECT"
+    ],
+    "per": 10
+   },
+   "mend": {
+    "label": "Mending the place",
+    "needs": [
+     "SHAPE",
+     "RESTORE"
+    ],
+    "per": 8
+   },
+   "guard": {
+    "label": "Guarding",
+    "needs": [
+     "PROTECT",
+     "HARM"
+    ],
+    "per": 0
+   },
+   "patrol": {
+    "label": "Patrolling",
+    "needs": [
+     "MOVE",
+     "PROTECT",
+     "KNOW"
+    ],
+    "per": 0
+   },
+   "tend": {
+    "label": "Tending",
+    "needs": [
+     "SUSTAIN",
+     "RESTORE"
+    ],
+    "per": 0
+   },
+   "keep": {
+    "label": "Keeping the accounts",
+    "needs": [
+     "KNOW",
+     "INFLUENCE"
+    ],
+    "per": 0
+   }
+  }
  }
 }

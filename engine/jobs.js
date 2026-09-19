@@ -35,6 +35,7 @@ import { ensureJobs, dueJobs, landJob, JOB_FAMILIES } from "./jobstate.js";
 import { smartClamp } from "./namematch.js";
 import { MISSION_KINDS } from "./assignments.js";   // ⛔ CCODE-428: an errand's kind names the family it wants
 import { familiesFromEvidence } from "./combatants.js"; // …and a standing charge's own words name its family
+import { workAt, workTable } from "./holdwork.js";   // ⛔ CCODE-450: whoever is at standing work is nobody else's
 
 /** The five ways a roll lands, in the resolver's own words, best first. */
 export const OUTCOMES = ["crit_success", "success", "partial", "failure", "crit_failure"];
@@ -415,6 +416,7 @@ export function jobPoolOf(character, ctx = {}) {
   const add = (id, locationId, from) => {
     const key = String(id);
     if (seen.has(key)) return;
+    if (key !== "player" && workAt(character, key)) { seen.add(key); return; }   // ⛔ CCODE-450: at work at a hold — nobody else's
     seen.add(key);
     const p = jobPersonFor(character, key, ctx);
     if (p) out.push({ ...p, locationId: key === "player" ? here : locationId, from });
@@ -426,7 +428,7 @@ export function jobPoolOf(character, ctx = {}) {
   for (const r of atSideRows(character, opts)) if (r.id) add(r.id, here, "at your side");
   for (const r of poolRows(character, opts)) {
     // ⛔ CCODE-431: a band's hands — one member of a team, `n` of them
-    if (!r.id) { if (r.kind === "hands") { const u = jobUnitFor(character, r.unitId, r.contingentIndex, ctx); if (u && !seen.has(u.id)) { seen.add(u.id); out.push(u); } } continue; }
+    if (!r.id) { if (r.kind === "hands") { const u = jobUnitFor(character, r.unitId, r.contingentIndex, ctx); if (u && !seen.has(u.id) && !workAt(character, u.id)) { seen.add(u.id); out.push(u); } } continue; }
     // a keeper stands at the hold they keep — that is where a job would send them FROM
     const kept = (character?.holdings || []).find(h => h && String(h.steward) === String(r.id) && h.locationId);
     if (kept) { add(r.id, kept.locationId, `keeping ${kept.name || "a hold"}`); continue; }
@@ -475,6 +477,29 @@ export function jobUnitFor(character, bandId, index, ctx = {}) {
   return { id: unitMemberId(bandId, index), isUnit: true, bandId: String(bandId), index, n: num(c.n, 0), quality, level, does, what: c.what || null,
     name, short: name, isYou: false, sheet: { attributes: sheet?.attributes || {}, subAttributes: sheet?.subAttributes || {} },
     skills: [], wits: num(sheet?.subAttributes?.wits, 2), regionsKnown: {}, abilities: [], loyalty: 0, locationId, from: `with ${band.name || "the band"}` };
+}
+
+/** ⛔ CCODE-450 — A WORKER'S CRAFTS ON AN ORDINARY DAY (no opposition): a person by id, or a band's hands as `unit:<band>:<i>`. Pure. */
+export function workCraftsOf(character, id, ctx = {}) {
+  const u = parseUnitMemberId(id);
+  const m = u ? jobUnitFor(character, u.bandId, u.index, ctx) : jobPersonFor(character, id, ctx);
+  return m ? jobCraftsOf(m, { rules: ctx.content?.rules || {}, fnIndex: ctx.fnIndex || null, opposed: 0 }) : [];
+}
+/** ⛔ A GOOD DAY OF STANDING WORK: the chance their best craft for any of the work's needs lands (a partial half) — the prototype's rule,
+ *  read through the Jobs tab's own dice. The tick and the screen both ask this. Pure. */
+export function workDayChance(crafts, kind, table = null) {
+  const K = (table || workTable()).kinds[kind];
+  if (!K) return 0;
+  let best = 0;
+  for (const c of crafts || []) if (K.needs.includes(c.family)) best = Math.max(best, num(c.odds?.crit_success, 0) + num(c.odds?.success, 0) + 0.5 * num(c.odds?.partial, 0));
+  return best;
+}
+/** How many hands a worker is — a person one, a band's contingent its heads. Pure. */
+export function workHeads(character, id) {
+  const u = parseUnitMemberId(id);
+  if (!u) return 1;
+  const b = (character?.bands || []).find(x => x && String(x.id) === u.bandId);
+  return Math.max(0, num(b?.contingents?.[u.index]?.n, 0));
 }
 
 /** ⛔ CCODE-431 — SENT OUT, THEY LEAVE. A band's hands on a job are not in the band: its strength, a fight and a call all see it without

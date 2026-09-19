@@ -54,7 +54,9 @@ import { enterDeathState, deepenDeaths, deathDepth, isRetrievable, resolveRetrie
 import { absoluteWorldDay, worldDayAt, worldCount, readClock, positionedPlace } from "./worldtime.js";
 import { voyageTick, whereaboutsOf } from "./carriage.js";   // ⛔ B6b: a voyage arrives on world time, and where she is now is where she can be raided
 import { advanceAssignment, progressAgainst, problemCost } from "./assignments.js"; // SNG-191 §4: the world advances delegated work
-import { rollErrands } from "./jobs.js";                 // ⛔ CCODE-428: …by the job's own dice
+import { rollErrands, workCraftsOf, workDayChance, workHeads } from "./jobs.js";   // ⛔ CCODE-428: …by the job's own dice · CCODE-450: standing work
+import { tickWork, workMods, workTable, workersAt } from "./holdwork.js";   // ⛔ CCODE-450
+import { payAt, saidPaid } from "./money.js";   // ⛔ CCODE-450: those at standing work are paid, in the money of the hold's place
 import { buildFunctionIndex } from "./functions.js";     // the verb → family index the dice read a person's crafts through
 import { seedArc, fomentArc, surfaceableArcs, markSurfaced, seasonalPressure } from "./latentarcs.js"; // SNG-191 §7: the world's own agenda
 import { ensureCanonStore, promotionCandidates, promoteInto, canonForViewer, applyCanonLook } from "./canon.js";   // CCODE-422: where a look lands
@@ -643,7 +645,8 @@ export function advanceHoldings({ character, now = Date.now(), ladder = null, co
     const grew = growHolding(character, h, { cfg: holdCfg, npcs: content?.npcs || {}, npcCfg: content?.rules?.npcStanding || {},
       worldCount: count, day: (() => { try { return absoluteWorldDay(); } catch { return null; } })(), nameOf: (id) => character?.npcRegistry?.[id]?.name || content?.npcs?.[id]?.name || id });
     const st = tickStore(character, h, { cfg: holdCfg, economy: content?.rules?.economy || null, npcCfg: content?.rules?.npcStanding || {}, locations: content?.locations || {},   // v2 §1: the keeper's tier joins the raid product and sets the floor; runner fees read the gate nearby
-      regionId: loc?.regionId || null, dangerLevel: Number(loc?.dangerLevel) || 0, rng, day: (() => { try { return absoluteWorldDay(); } catch { return null; } })(),
+      regionId: loc?.regionId || null, dangerLevel: Math.max(0, (Number(loc?.dangerLevel) || 0) - workMods(h).dangerEase),   // ⛔ CCODE-450: a hunted place is safer
+      rng, day: (() => { try { return absoluteWorldDay(); } catch { return null; } })(),
       density: holdingGround(h, { locations: content?.locations || {}, substrate: content?.substrateModel || null }),
       people: { ...(content?.npcs || {}), ...(character?.npcRegistry || {}) },
       // ✅ R46b: pilgrims come for the MEANING of the place, the hold's own aura included
@@ -655,6 +658,26 @@ export function advanceHoldings({ character, now = Date.now(), ladder = null, co
     // ⛔ CCODE-445 — THE FORGE WORKS THE ORDER, from what the store has left after the pass; a stall is said once
     const made = tickArmory(h, { cfg: holdCfg, armory: content?.rules?.economy?.armory || null });
     if (made?.said) news.push(made.said);
+    // ⛔ CCODE-450 — STANDING WORK: the pass's wage first (Erik: "if soldiers are working or active on a job they get paid" — a hand's wage a
+    // head, in the money of the hold's place), then each worker's days are rolled on the Jobs tab's dice, and what banked pays what lasts.
+    // ⚠️ Unpaid, nobody works the pass, and that is said.
+    const atWork = workersAt(h);
+    if (atWork.length) {
+      const wT = workTable(content?.rules?.holdWork || null);
+      const heads = atWork.reduce((a, [, id]) => a + Math.max(1, workHeads(character, id)), 0);
+      const wage = heads * (Number(holdCfg?.growth?.wagePerHand) || 0);
+      const paid = wage > 0 ? payAt(character, wage, loc?.regionId || null, content?.rules?.economy || null, { worldState: character.worldState }) : { ok: true };
+      if (!paid.ok) news.push(`Nobody at work at ${h.name || "your hold"} was paid this pass, so nobody worked — ${paid.why || "the purse could not cover it"}.`);
+      else {
+        const wctx = { content, worldDay: (() => { try { return absoluteWorldDay(); } catch { return null; } })(), fnIndex: buildFunctionIndex(content?.functionVocabulary || {}) };
+        const memo = new Map();
+        const craftsOf = (id) => { if (!memo.has(id)) memo.set(id, workCraftsOf(character, id, wctx)); return memo.get(id); };
+        const w = tickWork(character, h, { goodDayOf: (id, kind) => workDayChance(craftsOf(id), kind, wT), headsOf: (id) => workHeads(character, id), rng, table: wT });
+        for (let i = 0; i < w.mend; i++) advanceHolding(h, "progress", count, "mended by the people at work there");
+        for (const line of w.said) news.push(line);
+        if (wage > 0 && paid.ok) h.history = [...(h.history || []), { at: count, from: h.condition, to: h.condition, note: `paid ${saidPaid(paid)} to ${heads} at work` }].slice(-12);
+      }
+    }
     moved++;
   }
   // ⛔ CCODE-435 (SNG-627 `housing`): hands with no home hold sleep in your barracks, or are quartered at a cost — once a pass, its own counter

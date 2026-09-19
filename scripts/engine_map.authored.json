@@ -480,5 +480,10 @@
     "purpose": "The order of battle: a stance (cautious, balanced, aggressive) cuts a side's turn into slots, each person takes the slot they are best at relative to the rest (an optimal assignment), hands split by the same weights; an ally's craft is chosen by their stance and preferred crafts; the party's round is rolled and told to the GM.",
     "playerVisibleSurface": "The Party tab (stance, brought forward, preferred crafts, Roll a round), each band's 'One turn of the band, by stance' panel on the Bands tab, and the Legion tab's matrix and commander.",
     "whatMakesItFire": "Opening those tabs, changing a stance or a preference, and every fight turn with allies, when the party's round is told to the GM."
+  },
+  "holdwork.js": {
+    "purpose": "Standing work at a hold: people and a band's hands put to what the hold needs between jobs — foraging, hunting, training, mending, guarding, patrolling, tending, keeping the accounts. Each good day (their best craft for the work landing) banks toward what lasts, or the work changes the hold while it is done: the watch, the raid's danger, the yields, the upkeep.",
+    "playerVisibleSurface": "Each hold's 'Standing work' on the Holdings tab: who is at what, with each candidate's chance of a good day, the good days a pass, what is banked, and the wages.",
+    "whatMakesItFire": "A player putting someone to work at a hold; then every pass of the world tick, when the workers are paid and their days are rolled."
   }
 }

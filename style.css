@@ -2031,3 +2031,16 @@ table.ob-matrix { border-collapse: collapse; width: 100%; min-width: 640px; font
 .ob-matrix .c { text-align: center; }
 .ob-matrix tr.total td { color: var(--accent); font-weight: 600; }
 .ob-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; border: 1px solid var(--ink-dim); vertical-align: middle; }
+
+/* ⛔ CCODE-450 — standing work on a hold's card */
+.hw { margin: 8px 0 4px; border: 1px solid var(--border); border-radius: 10px; padding: 6px 10px; background: var(--panel); }
+.hw summary { cursor: pointer; color: var(--ink-dim); font-size: 13px; }
+.hw-rows { display: grid; gap: 6px; margin-top: 6px; }
+.hw-row { display: grid; grid-template-columns: minmax(0, 170px) minmax(0, 1fr) auto; gap: 8px; align-items: center; padding: 7px 9px; border-radius: 7px; background: var(--panel2); font-size: 12px; }
+.hw-kind { color: var(--ink); font-weight: 600; }
+.hw-kind small { display: block; color: var(--ink-dim); font-weight: 400; }
+.hw-who { display: flex; flex-wrap: wrap; gap: 5px; align-items: center; min-width: 0; }
+.hw-who select { font-size: 12px; padding: 3px 6px; max-width: 100%; }
+.hw-chip { background: rgba(212, 162, 74, 0.14); color: var(--accent); border: 1px solid var(--accent); border-radius: 999px; padding: 1px 8px; font: 11px var(--font-ui); cursor: pointer; }
+.hw-gain { color: var(--ok); font-variant-numeric: tabular-nums; white-space: nowrap; }
+@media (max-width: 680px) { .hw-row { grid-template-columns: 1fr; } .hw-gain { white-space: normal; } }

@@ -29,7 +29,8 @@ import { legionClash, contingentsFromPeople, contingentsOf } from "./melee.js";
 import { isMoored, carriageOf } from "./carriage.js";   // ⛔ SPEC_mobile_holdings §4: moored is raidable, moving is not   // R46a: a detected raid is a FIGHT, resolved unattended
 import { smartClamp } from "./namematch.js";   // an evidence quote is prose — cut at a word, never mid-word
 import { isNetworkGate } from "./waygate.js";   // runner fees: a NETWORK gate near a relay post brings traffic
-import { walkingDays } from "./worldmap.js";     // …within gateWithinDays of it
+import { walkingDays } from "./worldmap.js";
+import { workMods } from "./holdwork.js";   // ⛔ CCODE-450: standing work — who joins the watch, the yields and the upkeep while it is done     // …within gateWithinDays of it
 
 export const HOLDING_KINDS = ["post", "enterprise"];
 /** ⚠️ WHICH SIDE AN UNKNOWN WORD FALLS ON. A holding that PRODUCES is an enterprise; everything else holds
@@ -702,8 +703,14 @@ export function resolveRaid(character, holding, { cfg = null, dangerLevel = 0, r
     // ⚠️ BEFORE THIS, NO CALLER INJECTED `contributionsOf` AT ALL — `does` fell through to `p.contributions`,
     // which a registry record has never carried, so EVERY defender landed in the anonymous block. The named/plain
     // split existed and nothing could ever reach the named half.
-    const defenders = contingentsFromPeople(watchOf(holding, cfg).map(id => people?.[id] || character?.npcRegistry?.[id] || { id, name: id }),
+    const defenders = contingentsFromPeople(watchOf(holding, cfg).filter(id => !/^unit:/.test(String(id))).map(id => people?.[id] || character?.npcRegistry?.[id] || { id, name: id }),
       { levelOf: (p) => Number(p?.level) || 1, contributionsOf: (p) => contributionsOf(p, { evidence: true }) });
+    // ⛔ CCODE-450: a band's hands put to guarding or patrolling meet the raiders as what they are — their heads, at their quality
+    for (const id of watchOf(holding, cfg).filter(x => /^unit:/.test(String(x)))) {
+      const m = /^unit:(.+):(\d+)$/.exec(String(id));
+      const c = m ? (character?.bands || []).find(b => b && String(b.id) === m[1])?.contingents?.[Number(m[2])] : null;
+      if (c && Number(c.n) > 0) defenders.push({ n: Number(c.n), quality: Math.max(1, Number(c.quality) || 1), what: c.kind || "hands" });
+    }
   const stone = defenceOf(holding, cfg);
   if (stone > 0) defenders.push({ n: 1, quality: stone, what: "the walls" });
   const raiders = [{ n: Math.max(1, Math.round(dangerLevel)), quality: Math.max(1, Math.round(dangerLevel / 2)), what: "raiders" }];
@@ -727,6 +734,8 @@ export function resolveRaid(character, holding, { cfg = null, dangerLevel = 0, r
 /** Who is WATCHING: people posted on the garrison, plus a feature that keeps a watch (sentries, a tower). Stone does not see. */
 export function watchOf(holding, cfg = null) {
   const ids = Array.isArray(holding?.garrison) ? [...holding.garrison] : [];
+  // ⛔ CCODE-450: whoever is put to guarding or patrolling stands the watch too — people by id, a band's hands as `unit:<band>:<i>`
+  for (const id of workMods(holding).watch) if (!ids.includes(id)) ids.push(id);
   for (const f of featuresOf(holding)) {
     const def = featureDef(f.kind, cfg);
     if (def?.watch) for (let i = 0; i < (Number(f.count) || 1); i++) ids.push(`${f.kind}:${i}`);
@@ -748,7 +757,8 @@ export function upkeepFor(holding, cfg) {
   for (const f of featuresOf(holding)) { const def = featureDef(f.kind, cfg); feats += (Number(def?.upkeep) || 0) * (Number(f.count) || 1); }
   const hands = Array.isArray(holding.crew) ? holding.crew.length : 0;
   const wage = Number(cfg.growth?.wagePerHand) || 0;
-  return Math.max(0, (Number(u) || 0) + guards * perGuard + feats + hands * wage);
+  // ⛔ CCODE-450: a tenth less while someone keeps the accounts
+  return Math.max(0, ((Number(u) || 0) + guards * perGuard + feats + hands * wage) * workMods(holding).upkeepMult);
 }
 export function storeTotal(holding) {
   return Object.values(holding?.store || {}).reduce((a, n) => a + (Number(n) || 0), 0);
@@ -795,7 +805,9 @@ export function tickStore(character, holding, { cfg = null, economy = null, regi
   if (!holding || !cfg) return null;
   const out = { yielded: null, upkeep: 0, short: 0, raid: null, full: false, justFull: false };
   // ✅ features: a post with a mine yields — every material feature adds its goods beside the hold's own kind
-  const ys = yieldsFor(holding, cfg, { density });
+  // ⛔ CCODE-450: a quarter more while someone tends it — said on the yield, so the store line and the news agree
+  const tendMult = workMods(holding).yieldMult;
+  const ys = yieldsFor(holding, cfg, { density }).map(y => (tendMult !== 1 && y.units > 0 ? { ...y, units: Math.round(y.units * tendMult), tended: true } : y));
   for (const y of ys) {
     if (!(y.units > 0)) continue;
     holding.store = holding.store && typeof holding.store === "object" ? holding.store : {};

@@ -6921,14 +6921,17 @@ console.log("\n── §73 · appoint a keeper · take a handed-over hold back �
     && app73.indexOf('data-hold-keeper="${esc(h.id)}"') < app73.indexOf('data-hold-transfer="${esc(h.id)}"'));
   // the finding
   const writers = [...rd("engine/worldtick.js").matchAll(/advanceHolding\(h, ([^,]+),/g)].map(m => m[1]);
-  check("§73: ⚠️ Q18, as the truth it is — the tick is the ONLY writer of a hold's condition and it only stalls or slips; nothing in play raises one",
+  // ⚠️ CCODE-450 CHANGED THE TRUTH THIS DOCUMENTS, on the prototype Erik reviewed ("Mending the place — every 8 good days, the hold's
+  // condition rises a step"): the tick has a SECOND writer now, and it only raises, and only from days banked by people put to mending.
+  check("§73: ⚠️ Q18, as the truth it is — the pass itself only stalls or slips a hold's condition; the one thing in play that raises one is standing work's mending, from days banked by people put to it (CCODE-450)",
     // ⚠️ THE SHAPE CHANGED, THE FACT DID NOT. SPEC_holdings_tempo replaced the literal ternary with an `outcome`
     // that is "stall" by default and becomes "problem" only after `passesPerSlip` unkept passes. The tick
     // still only stalls or slips; nothing in play raises a condition; a RAID may now slip one (an event),
     // and that lives in holdings.js, which is not a writer this check counts — it counts the tick.
-    writers.length === 1 && writers[0] === "outcome"
+    writers.length === 2 && writers[0] === "outcome" && writers[1] === '"progress"'
     && /let outcome = "stall"/.test(rd("engine/worldtick.js")) && /outcome = "problem"/.test(rd("engine/worldtick.js"))
-    && !/advanceHolding\(h, "(progress|done)"/.test(rd("engine/worldtick.js"))
+    && /for \(let i = 0; i < w\.mend; i\+\+\) advanceHolding\(h, "progress", count, "mended by the people at work there"\);/.test(rd("engine/worldtick.js"))
+    && !/advanceHolding\(h, "done"/.test(rd("engine/worldtick.js"))
     && !/advanceHolding\(/.test(app73) && /Q18/.test(rd("docs/RULINGS.md")));
 }
 /* ═════ §74 — A HOLD GROWS (Q18, Erik: "please build it", 2026-09-05) ═════ */
@@ -23458,6 +23461,65 @@ console.log("\n── §329 · a companion's level is the higher of the characte
   check("§329: ⛔ MAREN IS HERSELF — her record resolves to the legendary warden, and she stands at her own derived level (63 on world day 81), not Silas's 33; a companion who is nobody's record keeps the character's level as the floor; and the floor still lifts her beside a level-70 character",
     maren >= 60 && maren < 70 && aevi === 33 && young === 70
     && /return Math\.max\(entry \? derivedOf\(entry\) : 0, num\(character\?\.level, 0\) \|\| 0\);/.test(F329), JSON.stringify({ maren, aevi, young }));
+}
+
+// ══════════ §330 · CCODE-450 — STANDING WORK AT A HOLD ══════════
+// The Fell Pell prototype's Holds tab: people with no job put to what a hold needs; each good day banks toward what lasts, or the work changes
+// the hold while it is done. Erik: "proceed with your build steps."
+console.log("\n── §330 · standing work — only the kinds whose effect is wired, one place at a time, the hold's own readers change, and the days bank ──");
+{
+  const HW = await import("../engine/holdwork.js");
+  const H330 = await import("../engine/holdings.js");
+  const { loadContentHeadless: lch330 } = await import("./headless_content.mjs");
+  const C330 = await lch330();
+  const T = HW.workTable();
+  check("§330: ⚑ ONLY WHAT IS WIRED IS OFFERED — foraging, hunting, training, mending, guarding, patrolling, tending, keeping the accounts; scouting, crafting and teaching wait (a row that does nothing would be a claim about a mechanism)",
+    Object.keys(T.kinds).sort().join() === "forage,guard,hunt,keep,mend,patrol,tend,train" && !T.kinds.scout && !T.kinds.craft && !T.kinds.teach);
+  const mk = () => ({ holdings: [{ id: "h1", name: "Fell Pell", locationId: "mill", condition: "holding", steward: "pell", store: {} }, { id: "h2", name: "Made Gate", locationId: "gate" }],
+    bands: [{ id: "b1", name: "Ridge", contingents: [{ n: 4, quality: 1, does: ["HARM"], from: "h1" }, { n: 3, quality: 3, does: ["HARM"], from: "h1" }, { n: 5, quality: 1, from: "elsewhere" }] }] });
+  const who = mk();
+  const a1 = HW.assignWork(who, "h1", "forage", "dara");
+  const busy = HW.workAt(who, "dara");
+  const twice = HW.assignWork(who, "h2", "hunt", "dara");
+  const nope = HW.assignWork(who, "h1", "scout", "mara");
+  HW.unassignWork(who, "h1", "forage", "dara");
+  check("§330: ⛔ ONE PLACE AT A TIME — put to foraging, they are busy there; a second hold is refused and says where they are; an unoffered kind is refused; taken off, they are free",
+    a1.ok && busy?.holdId === "h1" && busy.kind === "forage" && !twice.ok && /already foraging at Fell Pell/.test(twice.why) && !nope.ok && HW.workAt(who, "dara") === null && !who.holdings[0].work
+    && !HW.assignWork({ holdings: [{ id: "h1", name: "Fell Pell", garrison: ["calvar"], steward: "pell" }] }, "h1", "forage", "calvar").ok
+    && !HW.assignWork({ holdings: [{ id: "h1", name: "Fell Pell", garrison: ["calvar"], steward: "pell" }] }, "h1", "forage", "pell").ok);
+  const w = mk(), h = w.holdings[0];
+  HW.assignWork(w, "h1", "forage", "dara"); HW.assignWork(w, "h1", "hunt", "mara"); HW.assignWork(w, "h1", "train", "calvar"); HW.assignWork(w, "h1", "mend", "fendt");
+  h.workBank = { train: 9, mend: 6 };
+  const r1 = HW.tickWork(w, h, { goodDayOf: () => 1, rng: () => 0 });
+  check("§330: ⛔ THE DAYS BANK TOWARD WHAT LASTS — three good days forage three raw material; hunting pays a living stock for two and banks the third; training lifts the hands raised HERE a step (the least trained first, never past the cap, never the ones raised elsewhere); mending returns a condition step for the tick to take",
+    h.store.raw_material === 3 && h.store.living_stock === 1 && h.workBank.hunt === 1 && r1.mend === 1 && h.workBank.mend === 1
+    && w.bands[0].contingents[0].quality === 2 && w.bands[0].contingents[1].quality === 3 && w.bands[0].contingents[2].quality === 1 && h.workBank.train === 2
+    && r1.said.some(s => /Foraging at Fell Pell brought in 3 raw material\./.test(s)), JSON.stringify({ store: h.store, bank: h.workBank, q: w.bands[0].contingents.map(c => c.quality), mend: r1.mend }));
+  const u = mk(), hu = u.holdings[0];
+  HW.assignWork(u, "h1", "forage", "unit:b1:0");
+  HW.tickWork(u, hu, { goodDayOf: () => 1, headsOf: () => 4, rng: () => 0 });
+  check("§330: ⛑ …and a band's hands work as hands — four of them forage twelve good days in a pass", hu.store.raw_material === 12, JSON.stringify(hu.store));
+  const cfg = { ...C330.rules.economy.holdStore, features: C330.rules.economy.holdFeatures };
+  const base = { id: "hx", name: "Hx", kind: "enterprise", yields: "raw_material", condition: "thriving", locationId: "x", store: {}, garrison: ["g1"], crew: [] };
+  const plain = JSON.parse(JSON.stringify(base)), tended = JSON.parse(JSON.stringify(base));
+  tended.work = { tend: ["dara"], keep: ["mara"], guard: ["unit:b1:0"], patrol: ["fendt"] };
+  H330.tickStore({ holdings: [plain] }, plain, { cfg });
+  H330.tickStore({ holdings: [tended] }, tended, { cfg });
+  const yPlain = plain.store.raw_material || 0, yTended = tended.store.raw_material || 0;
+  check("§330: ⛔ THE HOLD'S OWN READERS CHANGE WHILE THE WORK IS DONE — the guards and the walkers stand the watch (people and hands); the accounts kept, upkeep is a tenth less; tended, the yield is a quarter more",
+    H330.watchOf(tended, cfg).includes("unit:b1:0") && H330.watchOf(tended, cfg).includes("fendt") && H330.watchOf(tended, cfg).includes("g1")
+    && Math.abs(H330.upkeepFor(tended, cfg) - 0.9 * H330.upkeepFor(plain, cfg)) < 1e-9 && H330.upkeepFor(plain, cfg) > 0
+    && yPlain > 0 && yTended === Math.round(yPlain * 1.25), JSON.stringify({ yPlain, yTended, up: [H330.upkeepFor(plain, cfg), H330.upkeepFor(tended, cfg)] }));
+  const W330 = rd("engine/worldtick.js").replace(/\r\n/g, "\n");
+  const J330 = rd("engine/jobs.js").replace(/\r\n/g, "\n");
+  const A330 = rd("app.js").replace(/\r\n/g, "\n").split("\n").filter(l => !/^\s*\/\//.test(l)).join("\n");
+  check("§330: ⛔ PAID, ROLLED, AND NOBODY ELSE'S — the tick pays a hand's wage a head in the place's money before any day is rolled (unpaid, nobody works, and it is said); the days are the Jobs tab's dice; a hunted place's raid danger eases; the jobs pool and a band's turn leave the workers out; the Holdings tab puts people to work",
+    /const paid = wage > 0 \? payAt\(character, wage, loc\?\.regionId \|\| null, content\?\.rules\?\.economy \|\| null,/.test(W330) && /was paid this pass, so nobody worked/.test(W330)
+    && /goodDayOf: \(id, kind\) => workDayChance\(craftsOf\(id\), kind, wT\)/.test(W330) && /dangerLevel: Math\.max\(0, \(Number\(loc\?\.dangerLevel\) \|\| 0\) - workMods\(h\)\.dangerEase\)/.test(W330)
+    && /if \(key !== "player" && workAt\(character, key\)\) \{ seen\.add\(key\); return; \}/.test(J330)
+    && /workAt\(character, c\.npcId\)\) return;/.test(A330) && /\[data-work-add\]"\)\) s\.onchange/.test(A330) && /\[data-work-drop\]"\)\) b\.onclick/.test(A330));
+  const gm = HW.workSaid({ work: { forage: ["dara"], train: ["unit:b1:0"] } }, { nameOf: (id) => (id === "dara" ? "Dara Holt" : "the hands of Ridge") });
+  check("§330: ⛑ THE GM IS TOLD who is at work at each hold", gm === " — at work: Dara Holt foraging, the hands of Ridge training", gm);
 }
 
 /* ══════════ REPORT ══════════ */

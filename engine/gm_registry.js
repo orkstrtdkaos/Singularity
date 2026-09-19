@@ -36,6 +36,7 @@ import { smartClamp } from "./namematch.js";   // prose is clamped, never sliced
 import { commandSlots, canRaiseBand } from "./melee.js";   // the three scales of company
 import { rosterForGM } from "./fellowship.js";   // SNG-541: the GM is told the roster, derived, instead of a stored count
 import { armorySaid, armoryTable } from "./armory.js";   // CCODE-445: a hold's armory, and what its forge is making
+import { workSaid } from "./holdwork.js";   // CCODE-450: who is at standing work there
 import { bearingsToKnown } from "./worldmap.js";   // SNG-386 §4.3: which way the road runs
 import { holdingsForGM, debtsForGM } from "./holdings.js";
 import { purseLine } from "./purse.js";     // ⛔ CCODE-441: the GM is shown the purse —
@@ -315,7 +316,9 @@ export const GM_CONTEXT = [
       // SPEC_holding_attributes: the join — the narrator knows when you are standing in a place you hold
       { hereId: env.location?.id || env.character?.currentLocationId || null, nameOf: (id) => env.character?.npcRegistry?.[id]?.name || env.CONTENT?.npcs?.[id]?.name || id,
         cfg: env.CONTENT?.rules?.economy?.holdStore || null, items: env.CONTENT?.items || null,
-        sayArmory: (h) => armorySaid(h, armoryTable(env.CONTENT?.rules?.economy?.armory || null)) }) },   // ⛔ CCODE-429: and each hold's room · CCODE-444: its vault · CCODE-445: its armory
+        sayArmory: (h) => armorySaid(h, armoryTable(env.CONTENT?.rules?.economy?.armory || null))
+          + workSaid(h, { nameOf: (id) => (/^unit:/.test(String(id)) ? `the hands of ${(env.character?.bands || []).find(b => b && String(id).startsWith(`unit:${b.id}:`))?.name || "a band"}`
+            : (env.character?.npcRegistry?.[id]?.name || env.CONTENT?.npcs?.[id]?.name || id)) }) }) },   // ⛔ CCODE-429: and each hold's room · CCODE-444: its vault · CCODE-445: its armory
   // ⛔ CCODE-441 — THE PURSE AND THE MONEY OF THE PLACE. The GM was never shown the purse, so it could not be honest about a price or
   // know what the character could pay; and it had no op to move money. Both halves arrive together (exchangeOps in the contract).
   { key: "moneyDetail", builder: "purse.purseLine + money.moneyLine", carries: ["purse", "the money of the place"],

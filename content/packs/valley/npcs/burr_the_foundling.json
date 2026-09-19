@@ -14,7 +14,6 @@
  "spectrum": {
   "mechanical_spiritual": 0.4,
   "death_life": 0.4,
-  "individual_collective": -0.2,
   "concrete_abstract": -0.4
  },
  "voiceHints": "Feral-gentle, more at ease with beasts than people, uses grove-words for things. Doesn't know he's the subject of an argument. Wondering, watchful, quick to bond with anyone who treats the Glade as kin.",
@@ -59,5 +58,11 @@
  "tier": "riffraff",
  "_tiered_20260914": "⛑ SNG-590 — TIERED 2026-09-14. The low bands were reported as having no people; they had people and no TIER, so a tier-based filter could not see them. Placed by what the role already says: a child or a stall-holder is riffraff, someone known in one town is notable, a name a whole reach would recognise is regional. ⚠️ These are not lesser characters — they are the cast a level-15 player can meet without meeting somebody who matters to the world.",
  "vocation": "WALKER",
- "_vocationWhy": "⛑ SNG-620 — `vocation` and `domains`, the two fields `coverage.mjs` put at 35% and 61%. ⛔ `vocation` is the CLOSED ENUM OF NINE UNIVERSAL ROLES and is how a stranger reads what somebody is FOR. ⚠️ Assigned from each person's own `role` and `assistTags`, never from their tradition: a Mason who tends the dying is an ATTENDANT."
+ "_vocationWhy": "⛑ SNG-620 — `vocation` and `domains`, the two fields `coverage.mjs` put at 35% and 61%. ⛔ `vocation` is the CLOSED ENUM OF NINE UNIVERSAL ROLES and is how a stranger reads what somebody is FOR. ⚠️ Assigned from each person's own `role` and `assistTags`, never from their tradition: a Mason who tends the dying is an ATTENDANT.",
+ "_retiredAxes_20260919": {
+  "_why": "⛔ SNG-633 — TWO AXES RETIRED, AND NOT MAPPED ONTO ANOTHER. `individual_collective` and `tradition_innovation` were authored on 33 records and existed nowhere else: not in `world_node_atlas.axisOrder`, which is TWELVE ORDERED SLOTS and the thing `axisVector` is derived from on every location; not in the GM prompt; and with zero readers in the engine. ⚠️ Erik: 'I don't recall intentionally making these axes — it likely happened along the way. I'm worried about losing coherence.' He was right and I was wrong: I argued to ADD them because they describe real territory, and the twelve is a GEOMETRY rather than a count — a thirteenth means widening a twelve-slot vector on 143 locations and changing a build-time seam. ⛑ AND I DID NOT FOLD THEM INTO A NEIGHBOURING AXIS, because most of these records ALREADY CARRY the nearest candidate with a different authored value — Kestrel's Roost has its own `chaos_order`, and merging would have overwritten a real number with a guess. **The values are preserved below rather than converted, so nothing is lost if they are ever made real.**",
+  "preserved": {
+   "Burr.individual_collective": -0.2
+  }
+ }
 }

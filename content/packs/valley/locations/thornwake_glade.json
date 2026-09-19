@@ -7,7 +7,6 @@
  "spectrum": {
   "mechanical_spiritual": 0.6,
   "death_life": 0.5,
-  "individual_collective": -0.2,
   "concrete_abstract": -0.4,
   "chaos_order": -0.3
  },
@@ -78,5 +77,11 @@
  "_regionSplit": "⛔ SNG-387: was `valley`. The valley spanned 90 WALKING DAYS — 30% of the way round the world — with a 53° longitude gap splitting it cleanly in two. ⚠️ These six say what they are in their own descriptions: 'where the sonic civilization meets the valley floor', 'the rim of the Radiant Plateau', 'built on stilts by people who wanted out from under BOTH CITIES'. This is not the Valley. It is the country BETWEEN the two craft-family civilisations, and being between them is its whole identity. Erik: 'the Valley is not the whole world.'",
  "tier": "settlement",
  "parentId": "disputed_zone_fringe",
- "appearance": "A grove of old trees grown into deliberate arrangements — trunks curving to frame gaps, clearings that read as rooms with entrances. Thorn thickets forming walls. Green light, deep leaf-litter, and nothing quite random."
+ "appearance": "A grove of old trees grown into deliberate arrangements — trunks curving to frame gaps, clearings that read as rooms with entrances. Thorn thickets forming walls. Green light, deep leaf-litter, and nothing quite random.",
+ "_retiredAxes_20260919": {
+  "_why": "⛔ SNG-633 — TWO AXES RETIRED, AND NOT MAPPED ONTO ANOTHER. `individual_collective` and `tradition_innovation` were authored on 33 records and existed nowhere else: not in `world_node_atlas.axisOrder`, which is TWELVE ORDERED SLOTS and the thing `axisVector` is derived from on every location; not in the GM prompt; and with zero readers in the engine. ⚠️ Erik: 'I don't recall intentionally making these axes — it likely happened along the way. I'm worried about losing coherence.' He was right and I was wrong: I argued to ADD them because they describe real territory, and the twelve is a GEOMETRY rather than a count — a thirteenth means widening a twelve-slot vector on 143 locations and changing a build-time seam. ⛑ AND I DID NOT FOLD THEM INTO A NEIGHBOURING AXIS, because most of these records ALREADY CARRY the nearest candidate with a different authored value — Kestrel's Roost has its own `chaos_order`, and merging would have overwritten a real number with a guess. **The values are preserved below rather than converted, so nothing is lost if they are ever made real.**",
+  "preserved": {
+   "Thornwake Glade.individual_collective": -0.2
+  }
+ }
 }

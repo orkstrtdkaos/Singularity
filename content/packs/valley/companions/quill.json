@@ -27,8 +27,7 @@
   "energyCost": 4,
   "attribute": "mental",
   "axes": {
-   "concrete_abstract": 0.4,
-   "tradition_innovation": 0.2
+   "concrete_abstract": 0.4
   },
   "notFor": "Combat, physical tasks, or anything requiring Quill to be brief; the fragment informs, it does not guarantee.",
   "taughtBy": "Quill (bond)",
@@ -55,5 +54,11 @@
  "gender": "female",
  "physicality": "ADULT, thirties. Thin and perpetually cold — the kind of thin that comes from forgetting meals, not from discipline. Narrow shoulders under a coat she never takes off, and beneath it a body she has genuinely never thought about, which is its own kind of disarming. Ink to the second knuckle on both hands, permanent now, and a smudge somewhere on her face she does not know about. Fine light-brown hair escaping whatever she tied it back with hours ago. WHAT CATCHES THE EYE: her hands when an idea lands — they stop mid-gesture and hang there while the thought finishes. And her face when she is listening to something genuinely new, which goes completely open, no guard at all. She is not beautiful in any arranged way and becomes so the moment she is interested in something.",
  "intimacyNotes": "⚠️ She talks. Through everything, and it is not nerves — it is how she metabolises being close to someone. A GM should let her narrate, digress, footnote herself mid-kiss, and be gently told to stop, and comply for about nine seconds. ⚠️ WARMS FAST, WOUNDS EASY. She has been expelled, disbelieved, and left; she reads withdrawal as a verdict. Do not let a scene end ambiguously with her — she will fill the silence with the worst available reading. ⚠️ CONSENT: she asks constantly and badly, out loud, in questions that are half-academic. 'Is this — is this all right, you'd say something, wouldn't you.' Answer her plainly; she believes plain answers. ⛔ DO NOT resolve the question she was expelled for. It is the spine of her arc and not pillow-talk. TONE: warm, clumsy, funny, and suddenly unguarded in a way that costs her something.",
- "romanceEligible": true
+ "romanceEligible": true,
+ "_retiredAxes_20260919": {
+  "_why": "⛔ SNG-633 — TWO AXES RETIRED, AND NOT MAPPED ONTO ANOTHER. `individual_collective` and `tradition_innovation` were authored on 33 records and existed nowhere else: not in `world_node_atlas.axisOrder`, which is TWELVE ORDERED SLOTS and the thing `axisVector` is derived from on every location; not in the GM prompt; and with zero readers in the engine. ⚠️ Erik: 'I don't recall intentionally making these axes — it likely happened along the way. I'm worried about losing coherence.' He was right and I was wrong: I argued to ADD them because they describe real territory, and the twelve is a GEOMETRY rather than a count — a thirteenth means widening a twelve-slot vector on 143 locations and changing a build-time seam. ⛑ AND I DID NOT FOLD THEM INTO A NEIGHBOURING AXIS, because most of these records ALREADY CARRY the nearest candidate with a different authored value — Kestrel's Roost has its own `chaos_order`, and merging would have overwritten a real number with a guess. **The values are preserved below rather than converted, so nothing is lost if they are ever made real.**",
+  "preserved": {
+   "Scholar's Margin.tradition_innovation": 0.2
+  }
+ }
 }

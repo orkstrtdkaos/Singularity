@@ -6,9 +6,7 @@
  "communityId": "valley.kestrels_roost",
  "spectrum": {
   "chaos_order": -0.4,
-  "individual_collective": -0.3,
   "falsehood_truth": -0.3,
-  "tradition_innovation": 0.3,
   "concrete_abstract": -0.2
  },
  "tags": [
@@ -78,5 +76,12 @@
  "parentId": "disputed_zone_fringe",
  "_regionWas": "valley",
  "_reRegioned_20260906": "⛑ MOVED FROM `valley` TO `the_echo_vale`, 2026-09-06. ⛔ NOT A POSITION CHANGE — IT DID NOT MOVE. ⚠️ SNG-387 flagged it 'stranded 4.3× its region's typical spread', and the cause was membership, not geography. ⚑ THE ROADS SAY SO AND ALWAYS DID: of its four connections, `radiant_plateau_edge` and `old_switchback` are the_echo_vale, `tumbledown_market` is unspooling, and only `disputed_zone_fringe` is valley. ⛔ THREE OF FOUR NEIGHBOURS WERE OUTSIDE THE REGION IT CLAIMED. ✅ MEASURED BOTH WAYS: in `valley` its median distance to peers is 28.9° against a regional typical of 5.6° — a ratio of 5.1, stranded. In `the_echo_vale` it is 33.8° against 15.2° — a ratio of 2.2, inside the bound and inside a region that is genuinely spread out. ⚑ AND THE FICTION AGREES: 'a shelf of stone and timber wedged where three trails meet below the high pass — the last stop before the mountains… everyone passing between the plateau, the wilds.' ⚠️ THE PLATEAU IS THE ECHO VALE'S. It was never a valley town; it is the pass ABOVE the valley, and it has 17 mentions in Erik's save so its position is anchored by play and was never in question.",
- "appearance": "A shelf of stone and timber wedged into a mountainside where three trails meet — a long shingle-roofed building braced against the rock, with a rail along the drop. Firewood stacked under the eaves, high peaks behind."
+ "appearance": "A shelf of stone and timber wedged into a mountainside where three trails meet — a long shingle-roofed building braced against the rock, with a rail along the drop. Firewood stacked under the eaves, high peaks behind.",
+ "_retiredAxes_20260919": {
+  "_why": "⛔ SNG-633 — TWO AXES RETIRED, AND NOT MAPPED ONTO ANOTHER. `individual_collective` and `tradition_innovation` were authored on 33 records and existed nowhere else: not in `world_node_atlas.axisOrder`, which is TWELVE ORDERED SLOTS and the thing `axisVector` is derived from on every location; not in the GM prompt; and with zero readers in the engine. ⚠️ Erik: 'I don't recall intentionally making these axes — it likely happened along the way. I'm worried about losing coherence.' He was right and I was wrong: I argued to ADD them because they describe real territory, and the twelve is a GEOMETRY rather than a count — a thirteenth means widening a twelve-slot vector on 143 locations and changing a build-time seam. ⛑ AND I DID NOT FOLD THEM INTO A NEIGHBOURING AXIS, because most of these records ALREADY CARRY the nearest candidate with a different authored value — Kestrel's Roost has its own `chaos_order`, and merging would have overwritten a real number with a guess. **The values are preserved below rather than converted, so nothing is lost if they are ever made real.**",
+  "preserved": {
+   "Kestrel's Roost.individual_collective": -0.3,
+   "Kestrel's Roost.tradition_innovation": 0.3
+  }
+ }
 }

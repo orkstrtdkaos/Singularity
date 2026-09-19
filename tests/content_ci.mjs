@@ -739,6 +739,34 @@ for (const pack of PACKS) {
     marooned.length === 0, marooned.slice(0, 8).map((p) => "[" + p + "]").join(" · "));
   let mainCells = 0, landCells = 0;
   for (let i = 0; i < comp.length; i++) { if (built.type[i] === 1 || built.type[i] === 2) { landCells++; if (comp[i] === 1) mainCells++; } }
+  // ⛔ SNG-633 — AN AXIS NOBODY DECLARED. Three off-atlas axes accumulated quietly because nothing refused one at
+  // authoring time: `order_chaos` (a REVERSED duplicate of chaos_order, 6 records, zero readers) and
+  // `individual_collective` + `tradition_innovation` (33 records, in no atlas, no prompt, no engine). Each was
+  // coherent, each was inert, and each was written by something that had a plausible name and no list to check it
+  // against. ⚠️ THE TWELVE IS A GEOMETRY, NOT A COUNT: `axisVector` is twelve ordered slots derived from
+  // `world_node_atlas.axisOrder`, so a thirteenth axis is not an addition, it is a change of shape.
+  {
+    const KNOWN_NON_AXIS = new Set(["schema_version", "days_per", "per_head"]);
+    const ATLAS = new Set(rj("content/packs/valley/lore/world_node_atlas.json").axisOrder || []);
+    const offAtlas = [];
+    // ⛑ SCOPED TO WHERE AXES LIVE — `spectrum` and `axes` bags only. A first cut scanned every `foo_bar: number`
+    // key and flagged 146, most of them power systems (`wild_nanite`, `ordered_nanite`) that are not axes at all.
+    const scan = (o, file) => {
+      if (Array.isArray(o)) return o.forEach(x => scan(x, file));
+      if (!o || typeof o !== "object") return;
+      for (const [k, v] of Object.entries(o)) {
+        if ((k === "spectrum" || k === "axes") && v && typeof v === "object" && !Array.isArray(v)) {
+          for (const [ax, val] of Object.entries(v)) {
+            if (typeof val === "number" && !ATLAS.has(ax)) offAtlas.push(`${file}:${ax}`);
+          }
+        } else scan(v, file);
+      }
+    };
+    check("SNG-633: every authored axis is one of the twelve in world_node_atlas.axisOrder",
+      offAtlas.length === 0,
+      `${offAtlas.length} off-atlas axis value(s): ${[...new Set(offAtlas)].slice(0, 6).join(", ")} — the twelve is the shape axisVector is derived from, so a new axis is a change of geometry, not an addition`);
+  }
+
   check("SNG-391: the mainland carries ≥90% of all land", mainCells / landCells >= 0.9,
     (mainCells / landCells * 100).toFixed(1) + "%");
 

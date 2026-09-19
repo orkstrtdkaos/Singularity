@@ -303,8 +303,7 @@
    "energyCost": 4,
    "attribute": "mental",
    "axes": {
-    "concrete_abstract": 0.4,
-    "tradition_innovation": 0.2
+    "concrete_abstract": 0.4
    },
    "tradition": "cogitant",
    "powerSystem": "metaphysical",
@@ -637,8 +636,7 @@
    "energyCost": 7,
    "attribute": "practical",
    "axes": {
-    "mechanical_spiritual": -0.6,
-    "tradition_innovation": -0.3
+    "mechanical_spiritual": -0.6
    },
    "tradition": "enginewright",
    "powerSystem": "precursor",
@@ -866,8 +864,7 @@
    "energyCost": 5,
    "attribute": "practical",
    "axes": {
-    "death_life": 0.6,
-    "tradition_innovation": -0.2
+    "death_life": 0.6
    },
    "tradition": "rootkin",
    "powerSystem": "metaphysical",
@@ -979,8 +976,7 @@
    "energyCost": 3,
    "attribute": "practical",
    "axes": {
-    "instinct_analysis": 0.2,
-    "tradition_innovation": -0.2
+    "instinct_analysis": 0.2
    },
    "tradition": "wright",
    "powerSystem": "metaphysical",
@@ -1082,5 +1078,14 @@
    "_plainlyAdded_20260908": "⛔ NO `plainly` AT ALL. ⚠️ FOUND BY THE TIER-2 SWEEP AS A SIDE EFFECT: checking that no stock gloss remained surfaced ten crafts with NO GLOSS, which the wrong-gloss and thin-gloss passes could not see because both looked for a phrase. ⛑ EIGHT ARE AEVI'S BOND GRANTS, authored 2026-09-05, and she gave every one a `tree`, a `mechanic`, `bounds` and an `intensity` — and no line telling the GM what changes. ⚑ A COMPANION'S GRANT IS THE CRAFT A GM NARRATES MOST OFTEN, because the companion is present every scene."
   }
  ],
- "_sng510": "⛔ SNG-510: grants rewritten SELF-CONTAINED. CCode measured that `progression.abilitiesForGM` sends ONLY the rank the player holds — `tree.find(t => t.rank === owned.level)` — so a grant opening 'ADDS RANGE. Throw it' referred to an r1 the model never sees. ⚠️ STRIPPING THE OPENER WAS NOT ENOUGH: 'it' and 'the same force' had no antecedent either. Each rank now names its own craft, its own effect and its own numbers."
+ "_sng510": "⛔ SNG-510: grants rewritten SELF-CONTAINED. CCode measured that `progression.abilitiesForGM` sends ONLY the rank the player holds — `tree.find(t => t.rank === owned.level)` — so a grant opening 'ADDS RANGE. Throw it' referred to an r1 the model never sees. ⚠️ STRIPPING THE OPENER WAS NOT ENOUGH: 'it' and 'the same force' had no antecedent either. Each rank now names its own craft, its own effect and its own numbers.",
+ "_retiredAxes_20260919": {
+  "_why": "⛔ SNG-633 — TWO AXES RETIRED, AND NOT MAPPED ONTO ANOTHER. `individual_collective` and `tradition_innovation` were authored on 33 records and existed nowhere else: not in `world_node_atlas.axisOrder`, which is TWELVE ORDERED SLOTS and the thing `axisVector` is derived from on every location; not in the GM prompt; and with zero readers in the engine. ⚠️ Erik: 'I don't recall intentionally making these axes — it likely happened along the way. I'm worried about losing coherence.' He was right and I was wrong: I argued to ADD them because they describe real territory, and the twelve is a GEOMETRY rather than a count — a thirteenth means widening a twelve-slot vector on 143 locations and changing a build-time seam. ⛑ AND I DID NOT FOLD THEM INTO A NEIGHBOURING AXIS, because most of these records ALREADY CARRY the nearest candidate with a different authored value — Kestrel's Roost has its own `chaos_order`, and merging would have overwritten a real number with a guess. **The values are preserved below rather than converted, so nothing is lost if they are ever made real.**",
+  "preserved": {
+   "Scholar's Margin.tradition_innovation": 0.2,
+   "Old Procedure.tradition_innovation": -0.3,
+   "Taking Root.tradition_innovation": -0.2,
+   "A Second Pair of Hands.tradition_innovation": -0.2
+  }
+ }
 }

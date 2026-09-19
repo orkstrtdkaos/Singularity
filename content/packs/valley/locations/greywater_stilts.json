@@ -5,8 +5,6 @@
  "regionId": "the_echo_vale",
  "communityId": "echo_vale.greywater_stilts",
  "spectrum": {
-  "individual_collective": 0.5,
-  "tradition_innovation": 0.4,
   "chaos_order": -0.2,
   "mechanical_spiritual": -0.3,
   "concrete_abstract": -0.3
@@ -81,5 +79,12 @@
   "depth": 0
  },
  "_movedForFlat_20260906": "⛑ MOVED 0.67° TO FIT THE LAND. Erik 2026-09-06: 'the land is set now — WE WILL MOVE THINGS AS NEEDED TO FIT.' ⛔ THE PROBLEM: SNG-404 asserts 'the one town she called NOISE stays below the usability cut', and after the terrain settled Greywater measured relief 0.020 against a cut of 0.018 — ⚠️ SO THE LAND SAID IT HAD A USABLE SLOPE. ⛔ A TOWN ON STILTS OVER A MARSH CANNOT SIT ON ONE: 'dead flat, and the water is the only direction that matters' is the whole of what Greywater IS. ✅ NEW GROUND MEASURES 0.009 — comfortably noise, which is what the fiction requires. ⚑ It stays in `the_echo_vale`, keeps its marsh, and its river distance barely moves (4.94° from 5.03°). ⚠️ AEVI'S ORIGINAL HAND-READING WAS 0.002 AND THE ENGINE NOW SAYS 0.020 AT THE OLD POINT — she did not mis-measure a stable world; the world moved under a fixed reading, twice (SNG-427, SNG-434, and the 09-06 gate move). ⛔ THE FIX IS THE TOWN, NOT THE NUMBER: adjusting the reading would have made the record agree with a slope the town cannot stand on.",
- "appearance": "A town raised on timber stilts over grey marsh water, buildings linked by rope-walks and plank bridges at first-floor height. Ladders drop to moored punts below. Reed beds all around, open sky, no solid ground visible."
+ "appearance": "A town raised on timber stilts over grey marsh water, buildings linked by rope-walks and plank bridges at first-floor height. Ladders drop to moored punts below. Reed beds all around, open sky, no solid ground visible.",
+ "_retiredAxes_20260919": {
+  "_why": "⛔ SNG-633 — TWO AXES RETIRED, AND NOT MAPPED ONTO ANOTHER. `individual_collective` and `tradition_innovation` were authored on 33 records and existed nowhere else: not in `world_node_atlas.axisOrder`, which is TWELVE ORDERED SLOTS and the thing `axisVector` is derived from on every location; not in the GM prompt; and with zero readers in the engine. ⚠️ Erik: 'I don't recall intentionally making these axes — it likely happened along the way. I'm worried about losing coherence.' He was right and I was wrong: I argued to ADD them because they describe real territory, and the twelve is a GEOMETRY rather than a count — a thirteenth means widening a twelve-slot vector on 143 locations and changing a build-time seam. ⛑ AND I DID NOT FOLD THEM INTO A NEIGHBOURING AXIS, because most of these records ALREADY CARRY the nearest candidate with a different authored value — Kestrel's Roost has its own `chaos_order`, and merging would have overwritten a real number with a guess. **The values are preserved below rather than converted, so nothing is lost if they are ever made real.**",
+  "preserved": {
+   "The Greywater Stilts.individual_collective": 0.5,
+   "The Greywater Stilts.tradition_innovation": 0.4
+  }
+ }
 }

@@ -45,6 +45,29 @@ export function roadDistances(fromId, locations = {}, { banned = null } = {}) {
   return { dist, prev };
 }
 
+/** ⛔ CCODE-416 (Erik: "fix the travel bugs") — A ROAD GOES BOTH WAYS, and this makes it so for every place in the map it is handed.
+ *  ⚑ A place the game grows lists its neighbour, and the mint adds the neighbour's road back — but only in that session's memory: the
+ *  neighbour is authored, its list comes from content on the next load, and the road back is gone. `roadDistances` walks only what a
+ *  place lists, so after a reload a grown place could be walked OUT of and never walked TO — Threshold Post, listing the Crossing, sat
+ *  unreachable by road from everywhere, and a traveller who could not aim a gate had no way there at all.
+ *  ⚠️ The authored world is already symmetric (no road in content runs one way — §297 holds it), so this only ever adds the road back
+ *  to a place that named its neighbour. Idempotent: a road already listed both ways is left alone. Mutates `locations`; returns the
+ *  number of roads it made two-way. */
+export function twoWayRoads(locations = {}) {
+  let added = 0;
+  for (const [id, l] of Object.entries(locations || {})) {
+    for (const n of (Array.isArray(l?.connections) ? l.connections : [])) {
+      const back = locations[n];
+      if (!back || n === id) continue;
+      const list = Array.isArray(back.connections) ? back.connections : [];
+      if (list.includes(id)) continue;
+      back.connections = [...list, id];
+      added++;
+    }
+  }
+  return added;
+}
+
 /** The path itself, walked back out of a `roadDistances` result. Null when the place was never reached. */
 export function pathFrom({ dist, prev }, fromId, toId) {
   if (!dist || dist[toId] === undefined) return null;

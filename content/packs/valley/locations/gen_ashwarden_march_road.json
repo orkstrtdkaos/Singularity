@@ -1,7 +1,7 @@
 {
  "id": "gen-ashwarden-march-road",
  "name": "The Ashwarden March Road",
- "regionId": "the_palelands",
+ "regionId": "valley",
  "descriptionSeed": "A place the road led to — Ashwarden March Road. The fiction brought you here before the map knew its name.",
  "tags": [
   "transitional"
@@ -36,7 +36,7 @@
  },
  "dangerLevel": 2,
  "schemaVersion": 1,
- "communityId": "ashwarden.cairnhold",
+ "communityId": "valley.millbrook",
  "loreRefs": [],
  "encounterFlavor": "",
  "questSeeds": [],
@@ -67,14 +67,14 @@
  ],
  "axisVectorNote": "Derived from the authored spectrum against world_node_atlas.axisOrder (SNG-180). Disposition — what this place IS. Distinct from world position.",
  "tier": "site",
- "parentId": "cairnhold",
+ "parentId": "millbrook",
  "worldPos": {
-  "colatitude": 76,
-  "longitude": 74,
+  "colatitude": 20.24,
+  "longitude": 251.72,
   "depth": 0
  },
- "worldPosNote": "inherited from cairnhold — SNG-396: a room is at its building's coordinates",
- "worldPosInherited": true,
+ "worldPosNote": "⛔ CCODE-416 — PLACED ON ERIK'S WORD (2026-09-06, confirmed 2026-09-18): the March cluster stands beside Millbrook — the Pale March waygate, two hours to the fork on the Ashwarden March road, two hours on to Stillwater's Trouble; the Made Gate's mouth beside the Whistling Woman Post, its watch. SNG-396 had given it an INHERITED position — a room is at its building's coordinates — and this is not a room: it is a place of its own.",
  "provenance": "SNG-396 — authored in play, promoted from the saves. ⛔ The march road out of the Palelands. Raven's Home sits on it; Erik placed Raven's Home at Cairnhold.",
- "appearance": "A grey stone road running straight across open heath, bordered by low cairns at regular intervals. Worn wheel-ruts in the surface. Wide empty country on both sides and a pale sky."
+ "appearance": "A grey stone road running straight across open heath, bordered by low cairns at regular intervals. Worn wheel-ruts in the surface. Wide empty country on both sides and a pale sky.",
+ "_placedBy": "erik-2026-09-06-hub-is-the-crossing"
 }

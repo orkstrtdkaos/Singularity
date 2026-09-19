@@ -1,18 +1,23 @@
 {
  "id": "gen-waygate",
- "name": "The March Waygate",
- "regionId": "the_palelands",
+ "name": "The Pale March Waygate",
+ "regionId": "valley",
  "parentId": "gen-ashwarden-march-road",
  "_promotedFromSubPlace": true,
- "descriptionSeed": "A place the road led to — Waygate. The fiction brought you here before the map knew its name.",
+ "descriptionSeed": "The waygate the Hub's crossroads opens onto the Pale March. A couple of hours' walk to the fork in the road, and Stillwater's Trouble beyond it.",
  "tags": [
-  "transitional"
+  "transitional",
+  "waygate"
  ],
+ "waygate": true,
+ "waygateTier": 2,
  "connections": [
   "millbrook",
   "gen-the-ent-grove",
   "gen-ashwarden-march-road"
  ],
+ "waygateDefaultTo": "the_crossing",
+ "networkCapable": true,
  "_gen": {
   "entityId": "gen-waygate",
   "type": "location",
@@ -44,7 +49,7 @@
  },
  "dangerLevel": 2,
  "schemaVersion": 1,
- "communityId": "ashwarden.cairnhold",
+ "communityId": "valley.millbrook",
  "loreRefs": [],
  "encounterFlavor": "",
  "questSeeds": [],
@@ -76,12 +81,12 @@
  "axisVectorNote": "Derived from the authored spectrum against world_node_atlas.axisOrder (SNG-180). Disposition — what this place IS. Distinct from world position.",
  "tier": "site",
  "worldPos": {
-  "colatitude": 76,
-  "longitude": 74,
+  "colatitude": 20.2,
+  "longitude": 251.63,
   "depth": 0
  },
- "worldPosNote": "inherited from gen-ashwarden-march-road — SNG-396: a room is at its building's coordinates",
- "worldPosInherited": true,
- "provenance": "SNG-396 — authored in play, promoted from the saves. Already carried this parent. ⚠️ NOT the Made Gate — a separate record.",
- "appearance": "A standing stone arch on open ground, its opening holding a still dark plane. Worn ground approaches it from both sides. No structure around it."
+ "worldPosNote": "⛔ CCODE-416 — PLACED ON ERIK'S WORD (2026-09-06, confirmed 2026-09-18): the March cluster stands beside Millbrook — the Pale March waygate, two hours to the fork on the Ashwarden March road, two hours on to Stillwater's Trouble; the Made Gate's mouth beside the Whistling Woman Post, its watch. SNG-396 had given it an INHERITED position — a room is at its building's coordinates — and this is not a room: it is a place of its own.",
+ "provenance": "SNG-396 — authored in play, promoted from the saves. Already carried this parent. ⚠️ NOT the Made Gate — a separate record. ⛔ CCODE-416: made a GATE here as reconcile 47 made it in Silas's save on Erik's word (2026-09-06: \"SwT is not far from the waygate in the Pale March… we walked a couple hours to a fork\") — the promoted copy predated that and carried no `waygate`, and content wins an id clash at load, so the gate Erik walked out of was a plain place to every save, his included.",
+ "appearance": "A standing stone arch on open ground, its opening holding a still dark plane. Worn ground approaches it from both sides. No structure around it.",
+ "_placedBy": "erik-2026-09-06-hub-is-the-crossing"
 }

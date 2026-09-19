@@ -47,7 +47,7 @@ import { groundForDecl, groundTag, substrateVerdict, locationDensity, carriedSub
 import { sceneImage, itemImage, artworkStyle, getArtMode, setArtMode, imagesEnabled, ensureImage, aestheticFor, regenPromptFor, onImageMinted, onComposedLookup, swapImageUrl, forgetImageUrl, bustedURL, isBustedURL, mintAction, IMAGE_MIN_BYTES, regenerateImage, acceptImage, isGeneratedImage, toggleKeep, likenessClause, houseStyleFor, sanitizeImagePrompt, imageURLFor, isMinorSubject, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor, lookFor} from "./engine/art.js"; // SNG-401: draw it again without destroying the one they have
 import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, regionExtent, bendRoad, roadNetwork, clipToFrame } from "./engine/worldglobe.js";
 import { glyphFor, drawGlyph } from "./engine/mapicons.mjs";   // SNG-409 §4: a pole must never read as a town   // SNG-390: the globe, read-only
-import { walkingDays, milesFor, worldPosForGenerated, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout, fieldBlobs, fieldAlpha } from "./engine/worldmap.js";
+import { walkingDays, milesFor, worldPosForGenerated, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout, fieldBlobs, fieldAlpha, placeLabels } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
 import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities, isKinAdjacent, kinSecondaryOptions, domainsLegal, domainOf, domainOfTradition, sectOf } from "./engine/traditions.js";
 import { sheetFor as personSheetFor, battleSkillsFor, playerSheetFor } from "./engine/npcsheet.js";  // the person-keyed sheet, and SNG-571's player-facing one
@@ -84,7 +84,7 @@ import { assembleGMContext } from "./engine/gm_registry.js"; // BATCH-11 §23: t
 import { rankVoices, pickVoice, speakableText, chunkForSpeech, renderProseHtml } from "./engine/narration_voice.js"; // SNG-155: read aloud at the table; SNG-190 §4: render engine asides, never raw asterisks
 import { harmGateFor, harmTargetFor, departureGateFor, isConsequentialMove, isSpeechAct, isRemoteContact, personDestination, sanitizeOfferIntent, intentNoteFor, splitLedgerEvents } from "./engine/intent.js"; // SNG-145: intent confirmation for costly acts (Law 9 in the play loop); SNG-188: speech-act guard; SNG-228: person-as-place guard; CCODE-158: one departure definition for both doors; CCODE-159: remote contact is not travel
 import { resolveWaygateTransit, routeGmMoveTo, isNetworkGate, networkGatesFrom, gateHopCost } from "./engine/waygate.js";
-import { routeBetween, routeLine } from "./engine/journey.js";
+import { routeBetween, routeLine, twoWayRoads } from "./engine/journey.js";
 import { sendCaravan, caravansOf } from "./engine/caravan.js";   // R49: a caravan is a delegate + a route + a load   // SNG-331 §1 / SNG-386 §4.4: two named options over roads + gates // SNG-148: waygates — map control routes named/hub; GM offer via the registry row. SNG-243 §4: the gate network
 import { skillDetail, npcDetail, itemDetail, relationshipsParagraph, craftRollsLine, craftRollsShort } from "./engine/entityDetail.js";
 import { collapseScenePresence, canonicalPersonId, personArtSeed, applyNpcUpdates, findExistingNpc, genderUnsaid, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier, backfillNpcGender, reconcileGeneratedNpcWithMeet, npcFearsForGM, npcReactionsForGM, repairUnnamedPeople } from "./engine/npcs.js";   // SNG-431 §1: the pre-namer saves get their names
@@ -167,7 +167,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.79";
+const APP_VERSION = "2.0.80";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -4748,6 +4748,8 @@ function refreshPortraitMilestone(c, prevLevel) {
 function hydrateGeneratedIntoContent(c) {
   ensureGenerated(c);
   for (const rec of generatedRecords(c, "location")) if (!CONTENT.locations[rec.id]) CONTENT.locations[rec.id] = rec;
+  // ⛔ CCODE-416: and the roads to them run both ways again — the road back is an edit to an authored neighbour, which a reload undoes
+  try { twoWayRoads(CONTENT.locations); } catch { /* the map is never the thing that fails a load */ }
   for (const rec of generatedRecords(c, "npc")) if (!CONTENT.npcs[rec.id]) CONTENT.npcs[rec.id] = rec;
   // SNG-296 — A GENERATED ITEM MUST REACH THE CATALOG, or it is a record nothing can equip. The whole
   // mechanical path for gear runs through the catalog: `fromCatalog`/`resolveInventoryItem` re-link an
@@ -11123,23 +11125,40 @@ function paintRegionMap(regionId) {
   }
 
   // the places, by their real position and their authored kind
+  // ⛔ CCODE-416: a promoted stub (superseded, or aliased onto its canonical place) is not drawn — the schematic below already
+  // drops it (regionTierNodes); and a name that would land on another yields to it (`placeLabels`), the glyph still drawn
   const here = character.currentLocationId;
+  const aliased416 = character?.locationAliases || {};
+  const marks416 = [];
   for (const id of Object.keys(CONTENT.locations)) {
     const l = CONTENT.locations[id];
     if (!l?.worldPos || (l.regionId || l.region) !== regionId) continue;
+    if (l.supersededBy || aliased416[id]) continue;
     const p = base.toScreen(l.worldPos.longitude, l.worldPos.colatitude - 90, W, H);
     if (p.x < -20 || p.y < -20 || p.x > W + 20 || p.y > H + 20) continue;
-    const meta = _terrain.locations[id] || {};
+    marks416.push({ id, l, p, name: String(l.name || id).slice(0, 22) });
+  }
+  const LABEL_FONT = "600 10px system-ui, sans-serif";
+  ctx.font = LABEL_FONT;
+  const rank416 = (m) => (m.id === here ? 0 : m.l.waygate ? 1 : m.l.tier === "site" ? 3 : 2);
+  const labels416 = placeLabels(marks416.map(m => ({ id: m.id, x: m.p.x, y: m.p.y + 18, w: ctx.measureText(m.name).width, h: 10, rank: rank416(m) })));
+  for (const m of marks416) {
+    const meta = _terrain.locations[m.id] || {};
     const g = glyphFor({ ...meta, k: meta.k });
-    if (g) drawGlyph(ctx, g, p.x, p.y, id === here ? 9 : 7, {});
-    ctx.fillStyle = "rgba(232,230,221,0.85)";
-    ctx.font = "600 10px system-ui, sans-serif";
-    ctx.textAlign = "center";
-    ctx.fillText(String(l.name || id).slice(0, 22), p.x, p.y + 18);
-    if (id === here) {
-      ctx.strokeStyle = "#e8c14a"; ctx.lineWidth = 1.6;
-      ctx.beginPath(); ctx.arc(p.x, p.y, 13, 0, Math.PI * 2); ctx.stroke();
-    }
+    if (g) drawGlyph(ctx, g, m.p.x, m.p.y, m.id === here ? 9 : 7, {});
+  }
+  ctx.fillStyle = "rgba(232,230,221,0.85)";
+  ctx.font = LABEL_FONT;
+  ctx.textAlign = "center";
+  for (const m of marks416) {
+    if (!labels416.shown.has(m.id)) continue;
+    const more = labels416.hiddenBy[m.id];
+    ctx.fillText(m.name + (more ? ` +${more}` : ""), m.p.x, m.p.y + 18);
+  }
+  const hereMark = marks416.find(m => m.id === here);
+  if (hereMark) {
+    ctx.strokeStyle = "#e8c14a"; ctx.lineWidth = 1.6;
+    ctx.beginPath(); ctx.arc(hereMark.p.x, hereMark.p.y, 13, 0, Math.PI * 2); ctx.stroke();
   }
 }
 

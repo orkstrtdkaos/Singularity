@@ -1,7 +1,7 @@
 {
  "id": "gen-stillwater-s-trouble",
  "name": "Stillwater's Trouble",
- "regionId": "the_palelands",
+ "regionId": "valley",
  "parentId": "gen-ashwarden-march-road",
  "_promotedFromSubPlace": true,
  "descriptionSeed": "A place the road led to — Stillwater'S Trouble. The fiction brought you here before the map knew its name.",
@@ -10,7 +10,8 @@
  ],
  "connections": [
   "gen-ashwarden-march-road",
-  "the_reclamation_site"
+  "the_reclamation_site",
+  "gen-the-made-gate"
  ],
  "_gen": {
   "entityId": "gen-stillwater-s-trouble",
@@ -39,7 +40,7 @@
  "supersededBy": "the_old_warden_post",
  "dangerLevel": 2,
  "schemaVersion": 1,
- "communityId": "ashwarden.cairnhold",
+ "communityId": "valley.millbrook",
  "loreRefs": [],
  "encounterFlavor": "",
  "questSeeds": [],
@@ -71,12 +72,12 @@
  "axisVectorNote": "Derived from the authored spectrum against world_node_atlas.axisOrder (SNG-180). Disposition — what this place IS. Distinct from world position.",
  "tier": "site",
  "worldPos": {
-  "colatitude": 76,
-  "longitude": 74,
+  "colatitude": 20.277,
+  "longitude": 251.809,
   "depth": 0
  },
- "worldPosNote": "inherited from gen-ashwarden-march-road — SNG-396: a room is at its building's coordinates",
- "worldPosInherited": true,
+ "worldPosNote": "⛔ CCODE-416 — PLACED ON ERIK'S WORD (2026-09-06, confirmed 2026-09-18): the March cluster stands beside Millbrook — the Pale March waygate, two hours to the fork on the Ashwarden March road, two hours on to Stillwater's Trouble; the Made Gate's mouth beside the Whistling Woman Post, its watch. SNG-396 had given it an INHERITED position — a room is at its building's coordinates — and this is not a room: it is a place of its own.",
  "provenance": "SNG-396 — authored in play, promoted from the saves. Already carried this parent. ⚠️ A site of a site — the schema must allow depth 2.",
- "appearance": "A stretch of flat still water gone dull and filmed, reeds dying back at the edges. Bare mud where the waterline dropped. Nothing moving on the surface."
+ "appearance": "A stretch of flat still water gone dull and filmed, reeds dying back at the edges. Bare mud where the waterline dropped. Nothing moving on the surface.",
+ "_placedBy": "erik-2026-09-06-hub-is-the-crossing"
 }

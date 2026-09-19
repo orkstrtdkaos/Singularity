@@ -548,6 +548,26 @@ export function bearingsToKnown(from, locations = {}, { isKnown = null, limit = 
 /** Geodesic distance in WALKING DAYS, at Erik's year-to-walk scale: antipode-to-antipode (πR) is
  *  300 days, so a radius is 300/π days. Waygates become infrastructure and a pilgrimage to your
  *  antipode is a life event, which is the point. */
+/** ⛔ CCODE-416 — A LABEL THAT WOULD LAND ON ANOTHER IS NOT DRAWN, and the one that stays says how many it covers.
+ *  The region's ground map draws every place at its real position, and real positions cluster: Millbrook, its store, its
+ *  road, the March waygate, the fork, the hollow and the Made Gate all sit within a quarter-day, and their names printed on
+ *  top of each other as one unreadable smear. Greedy by `rank` (lower first — where you stand, then gates, then settlements,
+ *  then sites), ties in the order given. Each item is a label's box: `x` its centre, `y` its baseline, `w`/`h` its size.
+ *  The PLACE is still drawn by the caller; only its name yields. Pure → { shown: Set of ids, hiddenBy: { shownId: n } }. */
+export function placeLabels(items = [], { pad = 2 } = {}) {
+  const boxes = [], shown = new Set(), hiddenBy = {};
+  const order = items.map((it, i) => ({ it, i })).sort((a, b) => ((a.it.rank ?? 9) - (b.it.rank ?? 9)) || (a.i - b.i));
+  for (const { it } of order) {
+    const w = Math.max(0, Number(it.w) || 0), h = Math.max(0, Number(it.h) || 0);
+    const box = { id: it.id, l: it.x - w / 2 - pad, r: it.x + w / 2 + pad, t: it.y - h - pad, b: it.y + pad };
+    const hit = boxes.find(o => box.l < o.r && o.l < box.r && box.t < o.b && o.t < box.b);
+    if (hit) { hiddenBy[hit.id] = (hiddenBy[hit.id] || 0) + 1; continue; }
+    boxes.push(box);
+    shown.add(it.id);
+  }
+  return { shown, hiddenBy };
+}
+
 export function walkingDays(a, b, opts = {}) {
   const d = geodesic(a, b, opts);
   return d == null ? null : d * (300 / Math.PI);

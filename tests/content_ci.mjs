@@ -596,9 +596,10 @@ for (const pack of PACKS) {
   // ⚠️ AND ABSOLUTE DISTANCE-TO-REGION FIRES ON EXACTLY THE CASE SHE SAID NOT TO: the ten worst are
   // all `the_foothills`, the waypoint ring that spans all longitudes BY DESIGN.
   // ✅ What discriminates is being an OUTLIER WITHIN YOUR OWN REGION — median distance to your peers over
-  // your region's own median. Scale-free, so a spread ring is judged against its own spread. Today: median
-  // 1.00, 90th percentile 1.57, max 2.37 (`the_slow_stair`). The Hollowing, the case that prompted all of
-  // this, sits at 1.27 now that the split has landed.
+  // your region's own median. Scale-free, so a spread ring is judged against its own spread. Measured
+  // 2026-09-18 (sites out, CCODE-416): median 1.00, 90th percentile 1.77, max 2.84 (`the_mountain_pass` —
+  // the valley is eight places, so one more settlement moves it). The Hollowing, the case that prompted all
+  // of this, sits at 1.21.
   const outliers = (() => {
     // ⛔ AN INHERITED POSITION IS NOT AN INDEPENDENT SAMPLE. SNG-396 promoted 17 places play authored,
     // each at its parent's exact coordinates because a room is at its building. Counting them here put
@@ -608,8 +609,13 @@ for (const pack of PACKS) {
     // four outliers; without, zero. The ruler moved, not the places. Same insight as the terrain seed
     // rule one file over — a co-located record adds no observation, and averaging it in is how a
     // statistic quietly stops describing the thing it is named for.
+    // ⛔ CCODE-416 — AND A SITE IS THE SAME CASE ONE STEP OUT. SNG-398 defines a site as within ONE DAY of its
+    // parent, so at region scale its position is its parent's again. Placing Erik's March cluster (a fork, a
+    // waygate and a hollow, each a site a quarter-day from Millbrook) made Millbrook's spot vote four times and
+    // three untouched valley places read 4.4–5.7x — measured both ways again: sites counted, 5.75 max; sites
+    // out, 2.84 (the Made Gate is a ratified SETTLEMENT 0.15 days from Millbrook, and it counts).
     const placed = locs387.filter(l => l.worldPos && Number.isFinite(l.worldPos.colatitude) && Number.isFinite(l.worldPos.longitude)
-      && !l.worldPosInherited);
+      && !l.worldPosInherited && l.tier !== "site");
     const vec = (l) => {
       const th = l.worldPos.colatitude * Math.PI / 180, ph = l.worldPos.longitude * Math.PI / 180;
       return { x: Math.sin(th) * Math.cos(ph), y: Math.sin(th) * Math.sin(ph), z: Math.cos(th) };

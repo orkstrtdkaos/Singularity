@@ -1,7 +1,7 @@
 {
  "id": "gen-the-made-gate",
  "name": "The Made Gate",
- "regionId": "the_center",
+ "regionId": "valley",
  "descriptionSeed": "The first waygate MADE rather than reached-for — cut at the Crossing by a wright who tends endings, standing where the fold once was. Proof that a gate can be made, not only reached.",
  "tags": [
   "waygate",
@@ -10,9 +10,10 @@
  "waygate": true,
  "waygateTier": 2,
  "connections": [
-  "the_crossing"
+  "gen-stillwater-s-trouble"
  ],
  "waygateDefaultTo": "the_crossing",
+ "networkCapable": true,
  "dangerLevel": 2,
  "_gen": {
   "type": "location",
@@ -35,11 +36,11 @@
  },
  "_mintedAs": "made_waygate",
  "map": {
-  "x": 340,
-  "y": 290
+  "x": 272.4,
+  "y": 297.1
  },
  "schemaVersion": 1,
- "communityId": "center.crossing",
+ "communityId": "valley.millbrook",
  "loreRefs": [],
  "encounterFlavor": "",
  "questSeeds": [],
@@ -74,15 +75,15 @@
  "axisVectorNote": "Derived from the authored spectrum against world_node_atlas.axisOrder (SNG-180). Disposition — what this place IS. Distinct from world position.",
  "role": "gate",
  "tier": "settlement",
- "parentId": "the_crossing",
+ "parentId": null,
  "worldPos": {
-  "colatitude": 0,
-  "longitude": 0,
+  "colatitude": 20.4,
+  "longitude": 251.95,
   "depth": 0
  },
- "worldPosNote": "inherited from the_crossing — SNG-396: a room is at its building's coordinates",
- "worldPosInherited": true,
+ "worldPosNote": "⛔ CCODE-416 — PLACED ON ERIK'S WORD (2026-09-06, confirmed 2026-09-18): the March cluster stands beside Millbrook — the Pale March waygate, two hours to the fork on the Ashwarden March road, two hours on to Stillwater's Trouble; the Made Gate's mouth beside the Whistling Woman Post, its watch. SNG-396 had given it an INHERITED position — a room is at its building's coordinates — and this is not a room: it is a place of its own. ⚑ A gate's one position is its MOUTH, and it LEADS to `waygateDefaultTo` (the Crossing) through the network — Erik: \"it connects to the hub at the crossing, just like all other gates\". So no road runs to the Crossing: that is 34 days on foot.",
  "provenance": "SNG-396 — authored in play, promoted from the saves. The 27th waygate and the FIRST BUILT — 'cut at the Crossing by a wright who tends endings'. Needs waygate:true, a tier, a lore line, and a place in the network. ⚠️ SNG-148 established the gates as INHERITED infrastructure. A player has broken that and the canon does not know. ⛔ SNG-148 established the waygate network as INHERITED infrastructure; this is the first gate BUILT, cut at the Crossing by a wright who tends endings. A player broke that premise and the canon now records it.",
  "appearance": "A cut stone archway standing alone on open ground at a river crossing, freshly worked, its edges still sharp. The opening holds a still dark plane that does not reflect. Tool marks are visible on the jambs.",
- "_spectrumWhy": "⛑ SNG-622 — CCode, reading `coverage.mjs`: '`poleIntensity` is missing on `the_crossing` and on `gen-the-made-gate`. Those are not obscure — the Crossing is the hub, and Erik walks Loki through the Made Gate. The substrate reads that field, so those two places answer differently from their neighbours for a reason nobody chose.' ⛔ AND THE SPECTRUM WAS EMPTY TOO, WHICH IS WHY: `poleIntensity` is derived from it. ⚠️ AUTHORED FROM WHAT EACH PLACE ALREADY SAYS IT IS, and the Crossing's own line makes it nearly unmissable — 'every axis crosses here at NOTHING, and the result is not grey, it is CROWDED. The Crossing leans toward no pole, which is precisely why it can hold them all.' **A place whose whole character is leaning toward no pole should read at or near zero on every axis, and that is a chosen answer rather than an absent one.** ⛑ ORDERED, CONCRETE AND MECHANICAL — 'the first waygate MADE rather than reached-for, cut by a wright who tends endings.' ⚠️ It is proof that a gate can be MADE, which is an argument about order over reaching, so it reads high on chaos_order and hard toward the concrete and the mechanical."
+ "_spectrumWhy": "⛑ SNG-622 — CCode, reading `coverage.mjs`: '`poleIntensity` is missing on `the_crossing` and on `gen-the-made-gate`. Those are not obscure — the Crossing is the hub, and Erik walks Loki through the Made Gate. The substrate reads that field, so those two places answer differently from their neighbours for a reason nobody chose.' ⛔ AND THE SPECTRUM WAS EMPTY TOO, WHICH IS WHY: `poleIntensity` is derived from it. ⚠️ AUTHORED FROM WHAT EACH PLACE ALREADY SAYS IT IS, and the Crossing's own line makes it nearly unmissable — 'every axis crosses here at NOTHING, and the result is not grey, it is CROWDED. The Crossing leans toward no pole, which is precisely why it can hold them all.' **A place whose whole character is leaning toward no pole should read at or near zero on every axis, and that is a chosen answer rather than an absent one.** ⛑ ORDERED, CONCRETE AND MECHANICAL — 'the first waygate MADE rather than reached-for, cut by a wright who tends endings.' ⚠️ It is proof that a gate can be MADE, which is an argument about order over reaching, so it reads high on chaos_order and hard toward the concrete and the mechanical.",
+ "_placedBy": "erik-2026-09-06-gate-cluster"
 }

@@ -21562,6 +21562,100 @@ console.log("\n── §296 · a choice draws the bar once the sense reads numbe
     && /sensedOdds\(chance, sense\.tier,/.test(A296) && (A296.match(/oddsBarHtml\(sensed/g) || []).length === 1);
 }
 
+// ══════════ §297 · CCODE-416 — A GATE LEADS TO THE HUB THROUGH THE NETWORK, AND A ROAD GOES BOTH WAYS ══════════
+// Erik (2026-09-18): "The made gate is next to the Whistling woman post, and it connects to the hub at the crossing, just like
+// all other gates… fix the travel bugs." Measured on Silas's save through the load path: the Whistling Woman Post 34 days from
+// the Crossing and 208 back, Millbrook 203 days from the Threshold Post, five roads running one way. Two causes. Content wins an
+// id clash, and SNG-396 had promoted play-authored places with a ROOM's inherited position — the Made Gate at the Crossing's own
+// coordinates with a road there, the Pale March waygate at Cairnhold's and not a gate at all — over the save that holds Erik's
+// ruling. And a road back to a grown place is an edit to an AUTHORED neighbour, which the next load reads fresh from content.
+console.log("\n── §297 · a gate leads to the hub through the network, and a road goes both ways ──");
+{
+  const J297 = await import("../engine/journey.js");
+  const W297 = await import("../engine/waygate.js");
+  const { loadContentHeadless: lch297 } = await import("./headless_content.mjs");
+  const CT297 = await lch297();
+  const L297 = CT297.locations;
+
+  /* ---- 1 · ⛔ THE ROAD BACK, MADE — AND NOTHING ELSE ---- */
+  const fx297 = { a: { id: "a", connections: ["b", "ghost", "a"] }, b: { id: "b", connections: [] }, c: { id: "c", connections: ["a"] } };
+  const made297 = J297.twoWayRoads(fx297);
+  const again297 = J297.twoWayRoads(fx297);
+  check("§297: ⛔ a road one place lists becomes a road both ways — b gains a, a gains c — and a road to nowhere or to itself is left as it was, never answered",
+    made297 === 2 && JSON.stringify(fx297.b.connections) === '["a"]' && fx297.a.connections.includes("c") && !("ghost" in fx297)
+    && fx297.a.connections.filter(x => x === "a").length === 1, JSON.stringify(fx297));
+  check("§297: …and twice changes nothing — idempotent, so every load may run it", again297 === 0);
+
+  /* ---- 2 · ⛔ EVERY LOAD RUNS IT, RIGHT AFTER THE GROWN PLACES LAND ---- */
+  const A297 = rd("app.js").replace(/\r\n/g, "\n");
+  const at297 = A297.indexOf("function hydrateGeneratedIntoContent(");
+  const body297 = at297 < 0 ? "" : A297.slice(at297, A297.indexOf("\n}\n", at297));
+  const grown297 = body297.indexOf('generatedRecords(c, "location")'), two297 = body297.indexOf("twoWayRoads(CONTENT.locations)");
+  check("§297: ⛔ the load that hydrates a save's grown places makes every road two-way right after them — before any route is asked",
+    grown297 > 0 && two297 > grown297 && /import \{[^}]*\btwoWayRoads\b[^}]*\} from "\.\/engine\/journey\.js"/.test(A297));
+
+  /* ---- 3 · ⛔ WHAT A GATE IS, IN CONTENT ---- */
+  const gates297 = Object.values(L297).filter(l => l.waygate);
+  check("§297: ⛔ every gate in the world is in the network — Erik: 'it connects to the hub at the crossing, just like all other gates' — the one he made included",
+    gates297.length > 20 && gates297.every(W297.isNetworkGate), gates297.filter(g => !W297.isNetworkGate(g)).map(g => g.id).join(", "));
+  check("§297: ⛔ …and none keeps a ROAD to the place it leads — it reaches its hub through the network; the Made Gate's road to the Crossing was a walk standing in for a gate",
+    gates297.every(g => !g.waygateDefaultTo || !(g.connections || []).includes(g.waygateDefaultTo)),
+    gates297.filter(g => (g.connections || []).includes(g.waygateDefaultTo)).map(g => g.id).join(", "));
+  check("§297: ⛔ a gate's position is its MOUTH, never a room's copy of its building's — no gate carries an inherited position",
+    gates297.every(g => !g.worldPosInherited), gates297.filter(g => g.worldPosInherited).map(g => g.id).join(", "));
+  const named297 = Object.values(L297).filter(l => /waygate/i.test(l.name || "") && !l.waygate);
+  check("§297: ⛔ a place NAMED a waygate is one to the engine — the Pale March waygate Erik walked out of was a plain place in every save, his own included",
+    named297.length === 0, named297.map(l => l.id).join(", "));
+  const placed297 = Object.values(L297).filter(l => /^erik-/.test(l._placedBy || ""));
+  check("§297: ⛔ a place Erik placed stands where he placed it — none of them carries an inherited position",
+    placed297.length >= 4 && placed297.every(l => l.worldPos && !l.worldPosInherited), placed297.map(l => l.id).join(", "));
+
+  /* ---- 4 · ⛔ THE TRIPS, ON THE PRODUCTION PATH ---- */
+  // Two grown places in the ruling's shape, as a save holds them: the Whistling Woman Post a short walk from the Made Gate and
+  // listing it, the Threshold Post on the ridge north of the Hub listing the Crossing. Nothing authored lists either one back.
+  const grownRecs297 = {
+    "gen-whistling-woman-post": { id: "gen-whistling-woman-post", name: "Whistling Woman Post", _gen: { type: "location" }, regionId: "valley",
+      worldPos: { colatitude: 20.36, longitude: 252.1, depth: 0 }, connections: ["gen-the-made-gate"] },
+    "gen-threshold-post": { id: "gen-threshold-post", name: "Threshold Post", _gen: { type: "location" }, regionId: "the_center",
+      worldPos: { colatitude: 0.9, longitude: 30, depth: 0 }, connections: ["the_crossing"] },
+  };
+  for (const [id, rec] of Object.entries(grownRecs297)) if (!L297[id]) L297[id] = rec;
+  const oneWay297 = (m) => Object.entries(m).reduce((n, [id, l]) => n + (l.connections || []).filter(x => m[x] && !(m[x].connections || []).includes(id)).length, 0);
+  const walker297 = { knownPlaces: ["gen-the-made-gate", "gen-waygate"], subAttributes: { wits: 4 } };
+  const route297 = (a, b) => J297.routeBetween(a, b, L297, { traveller: walker297 });
+  const pre297 = route297("the_crossing", "gen-whistling-woman-post"), preOne297 = oneWay297(L297);
+  check("§297: ⛔ before the load evens them, a grown place can be walked out of and never walked to — no road from the Crossing reaches the Whistling Woman at all",
+    preOne297 >= 2 && !(pre297?.options || []).some(o => o.kind === "road"), `${preOne297} one-way`);
+  J297.twoWayRoads(L297);
+  check("§297: …and after it, not one road in the world runs one way", oneWay297(L297) === 0);
+  const best297 = (r) => (r?.options || [])[0] || null;
+  const out297 = best297(route297("gen-whistling-woman-post", "the_crossing")), back297 = route297("the_crossing", "gen-whistling-woman-post");
+  check("§297: ⛔ from the Whistling Woman to the Crossing the way is the gate beside it — a hop of hours through the Made Gate, not a season's walk",
+    out297?.kind === "gate" && out297.gate.from === "gen-the-made-gate" && out297.gate.to === "the_crossing" && out297.days < 3, JSON.stringify(out297));
+  check("§297: …and the way back is the same gate the other way, with the long road there too for anyone who will not take it",
+    best297(back297)?.kind === "gate" && best297(back297).gate.to === "gen-the-made-gate" && best297(back297).days < 3
+    && (back297.options || []).some(o => o.kind === "road"), JSON.stringify(back297?.options?.map(o => [o.kind, o.days])));
+  const mill297 = best297(route297("millbrook", "gen-threshold-post"));
+  check("§297: ⛔ Millbrook to the ridge post above the Hub is days, through the Pale March waygate — not the months it was",
+    mill297?.kind === "gate" && mill297.gate.from === "gen-waygate" && mill297.days < 7, JSON.stringify(mill297));
+
+  /* ---- 5 · ⛔ THE GROUND MAP: A NAME THAT WOULD LAND ON ANOTHER YIELDS ---- */
+  // Placed where Erik put them, seven names sat within a quarter-day of Millbrook and printed as one smear.
+  const WM297 = await import("../engine/worldmap.js");
+  const lab297 = WM297.placeLabels([
+    { id: "far", x: 300, y: 50, w: 40, h: 10, rank: 2 },
+    { id: "site", x: 101, y: 100, w: 60, h: 10, rank: 3 },
+    { id: "town", x: 102, y: 101, w: 50, h: 10, rank: 2 },
+    { id: "here", x: 100, y: 100, w: 80, h: 10, rank: 0 },
+  ]);
+  check("§297: ⛔ on the ground map a name that would land on another yields — where you stand first, the ones it covers counted under it — and a place with room keeps its name",
+    lab297.shown.has("here") && lab297.shown.has("far") && !lab297.shown.has("town") && !lab297.shown.has("site") && lab297.hiddenBy.here === 2,
+    JSON.stringify({ shown: [...lab297.shown], hiddenBy: lab297.hiddenBy }));
+  const paint297 = A297.slice(A297.indexOf("function paintRegionMap("), A297.indexOf("function renderMapWorld("));
+  check("§297: …and the region's ground map names its places through it, and draws no promoted stub its own schematic already drops",
+    paint297.length > 0 && /placeLabels\(marks416\.map/.test(paint297) && /l\.supersededBy \|\| aliased416\[id\]/.test(paint297));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

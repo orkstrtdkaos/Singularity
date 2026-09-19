@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
   "id": "dev_report",
-  "at": "2026-09-19T11:33:51.828Z",
-  "build": "2.0.93",
+  "at": "2026-09-19T18:27:22.664Z",
+  "build": "2.2.0",
   "character": {
     "id": "char-mrhs8286",
     "name": "Silas Weir",
     "playerKey": "player-s9z9u1",
     "level": 33,
-    "rev": 2171,
+    "rev": 2172,
     "day": 18,
-    "turns": 374,
+    "turns": 373,
     "countingSince": "2026-09-16T22:18:48.671Z",
     "countsCoverWholeLife": false
   },
@@ -65,19 +65,19 @@
   },
   "ops": {
     "emitted": {
-      "sceneSummary": 374,
-      "choices": 373,
-      "characterDeltas": 200,
-      "scene": 374,
-      "npcUpdates": 324,
+      "sceneSummary": 373,
+      "choices": 372,
+      "characterDeltas": 199,
+      "scene": 373,
+      "npcUpdates": 323,
       "factUpdates": 42,
       "placeUpdates": 80,
-      "codexUpdates": 223,
+      "codexUpdates": 222,
       "timeOps": 328,
       "imagePrompt": 44,
-      "sceneEnded": 147,
+      "sceneEnded": 146,
       "itemUpdates": 9,
-      "questUpdates": 52,
+      "questUpdates": 51,
       "offer": 58,
       "moveTo": 20,
       "delegateOps": 6,
@@ -92,7 +92,7 @@
       "_applyFailedOp": 8,
       "newEncounter": 3,
       "encounterOps": 1,
-      "gambitApt": 74,
+      "gambitApt": 73,
       "markDefiningMoment": 1,
       "_engineClosedScene": 6,
       "gambitOps": 1,
@@ -121,6 +121,7 @@
       "deathOps",
       "debtOps",
       "deriveItem",
+      "exchangeOps",
       "holdTrades",
       "holdingOps",
       "imageMedium",
@@ -135,8 +136,8 @@
       "unlockPrecursor",
       "unlockSubstrate"
     ],
-    "neverCount": 19,
-    "knownCount": 47,
+    "neverCount": 20,
+    "knownCount": 48,
     "unknown": {
       "sceneSummary": 6
     },
@@ -174,58 +175,50 @@
     }
   },
   "fireTests": {
-    "at": "2026-09-19T11:32:12.047Z",
-    "build": "2.0.93",
+    "at": "2026-09-16T22:18:49.207Z",
+    "build": "2.0.36",
     "results": [
-      {
-        "op": "jobOps",
-        "verdict": "applied",
-        "moved": [
-          "jobs"
-        ],
-        "why": null
-      },
       {
         "op": "debtOps",
         "verdict": "no-op",
         "moved": [],
-        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, sessions, worldState)"
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
       },
       {
         "op": "projectOps",
         "verdict": "no-op",
         "moved": [],
-        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, sessions, worldState)"
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
       },
       {
         "op": "deathOps",
         "verdict": "no-op",
         "moved": [],
-        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, sessions, worldState)"
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
       },
       {
         "op": "markTeacher",
         "verdict": "no-op",
         "moved": [],
-        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, sessions, worldState)"
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
       },
       {
         "op": "deriveItem",
         "verdict": "no-op",
         "moved": [],
-        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, sessions, worldState)"
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
       },
       {
         "op": "unlockSubstrate",
         "verdict": "no-op",
         "moved": [],
-        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, sessions, worldState)"
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
       },
       {
         "op": "unlockPrecursor",
         "verdict": "no-op",
         "moved": [],
-        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, sessions, worldState)"
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
       },
       {
         "op": "arcOps",
@@ -237,19 +230,19 @@
         "op": "offerPromotion",
         "verdict": "no-op",
         "moved": [],
-        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, sessions, worldState)"
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
       },
       {
         "op": "offerAcquisition",
         "verdict": "no-op",
         "moved": [],
-        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, sessions, worldState)"
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
       },
       {
         "op": "offerIntent",
         "verdict": "no-op",
         "moved": [],
-        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, sessions, worldState)"
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
       },
       {
         "op": "holdingOps",
@@ -263,19 +256,19 @@
         "op": "bandOps",
         "verdict": "no-op",
         "moved": [],
-        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, sessions, worldState)"
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
       },
       {
         "op": "adoptSchool",
         "verdict": "no-op",
         "moved": [],
-        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, sessions, worldState)"
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
       },
       {
         "op": "newAbility",
         "verdict": "no-op",
         "moved": [],
-        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, sessions, worldState)"
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
       }
     ]
   },

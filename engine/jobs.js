@@ -274,6 +274,27 @@ export function rollJob(dist, rng = Math.random) {
 
 /** ⛔ WHAT A JOB COSTS TO SEND — a negative crystal stake is its materials and wages, paid when the team sets out, whatever comes of it.
  *  Pure. */
+/** ⛔ CCODE-442 — SOLDIERS ON A JOB ARE PAID. Erik: "If soldiers are working or active on a job they get paid. If they're eating then part
+ *  of that pay is in food. But the hold stores are meant to be for battles and journeys... so it might make sense to have the everyday food
+ *  be something that happens narratively and explained through the pay they already get." ⛑ A band's hands and a hold's guards sent on a
+ *  job cost `wagePerHand` a head for every pass (three days) they are away — the authored wage of a hand asked to come and work. People
+ *  who are not soldiers are not paid here. ⚠️ No ration is kept and no store is drawn: their food is bought out of the wage, and the GM is
+ *  told so. → { heads, units, guards, passes, perHead, value }. Pure. */
+export function jobWages(character, team = [], plan = null, { wagePerHand = 3, nowHours = 0, passHours = 72 } = {}) {
+  const guardIds = new Set((character?.holdings || []).flatMap(h => (h && Array.isArray(h.garrison) ? h.garrison.map(String) : [])));
+  let units = 0, guards = 0;
+  for (const m of Array.isArray(team) ? team : []) {
+    const id = String(m?.id ?? m ?? "");
+    if (m?.isUnit || /^unit:/.test(id)) units += Math.max(0, num(m?.n, 0));
+    else if (guardIds.has(id)) guards += 1;
+  }
+  const heads = units + guards;
+  const hours = Math.max(0, num(plan?.backAtHours, 0) - num(nowHours, 0));
+  const passes = heads ? Math.max(1, Math.ceil(hours / Math.max(1, num(passHours, 72)) - 1e-9)) : 0;
+  const perHead = Math.max(0, num(wagePerHand, 0));
+  return { heads, units, guards, passes, perHead, value: heads * perHead * passes };
+}
+
 export function jobCost(job) {
   const c = num(job?.stakes?.crystal, 0);
   return c < 0 ? -Math.round(c) : 0;
@@ -564,6 +585,8 @@ export function jobsForGM(character, { content = {} } = {}) {
   const away = (J.out || []).filter(Boolean);
   if (away.length) out.push(`OUT ON JOBS — these people are away and must not appear in a scene until they are back: `
     + away.map(e => `${who(e)} on "${e.job?.label}" at ${place(e.job?.where)}, back on day ${Math.floor(num(e.backAtHours, 0) / 24)}`).join("; ") + ".");
+  // ⛔ CCODE-442 (Erik): soldiers out are PAID, and eat from it — never from a hold's store, which is for battles and journeys
+  if (away.some(e => num(e?.wages?.heads, 0) > 0)) out.push(`SOLDIERS ON JOBS ARE PAID — their wage covers the time away, and their food is bought out of it; they carry no rations from a hold's store.`);
   const board = (J.board || []).filter(Boolean);
   if (board.length) out.push(`OFFERED, NOT YET TAKEN — the player chooses who to send from the Jobs tab, and the dice decide it when they are back; never resolve one yourself: `
     + board.map(j => `"${j.label}" (level ${j.level}, at ${place(j.where)}${j.from ? `, for ${j.from}` : ""})`).join("; ") + ".");

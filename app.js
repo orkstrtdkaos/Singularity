@@ -86,7 +86,7 @@ import { rankVoices, pickVoice, speakableText, chunkForSpeech, renderProseHtml }
 import { harmGateFor, harmTargetFor, departureGateFor, isConsequentialMove, isSpeechAct, isRemoteContact, personDestination, sanitizeOfferIntent, intentNoteFor, splitLedgerEvents } from "./engine/intent.js"; // SNG-145: intent confirmation for costly acts (Law 9 in the play loop); SNG-188: speech-act guard; SNG-228: person-as-place guard; CCODE-158: one departure definition for both doors; CCODE-159: remote contact is not travel
 import { resolveWaygateTransit, routeGmMoveTo, isNetworkGate, networkGatesFrom, gateHopCost, aimsOpen } from "./engine/waygate.js";
 import { routeBetween, routeLine, twoWayRoads } from "./engine/journey.js";
-import { planJob, suggestTeam, jobPoolOf, jobRouteOf, jobCost, jobEffects, sayEffects, settleDueJobs, degreeWord, jobOpposition, mainNeedOf, jobCraftsOf, bestCraftFor, OUTCOMES as JOB_OUTCOMES, errandOdds, detachForJob } from "./engine/jobs.js";   // CCODE-420 · CCODE-428 · CCODE-431
+import { planJob, suggestTeam, jobPoolOf, jobRouteOf, jobCost, jobWages, jobEffects, sayEffects, settleDueJobs, degreeWord, jobOpposition, mainNeedOf, jobCraftsOf, bestCraftFor, OUTCOMES as JOB_OUTCOMES, errandOdds, detachForJob } from "./engine/jobs.js";   // CCODE-420 · CCODE-428 · CCODE-431
 import { ensureJobs, postJob, sendOnJob, awayOnJob, untoldJobs, markJobsTold, dropJob, detachedFrom } from "./engine/jobstate.js";   // CCODE-420 · CCODE-431
 import { sendCaravan, caravansOf } from "./engine/caravan.js";   // R49: a caravan is a delegate + a route + a load   // SNG-331 §1 / SNG-386 §4.4: two named options over roads + gates // SNG-148: waygates — map control routes named/hub; GM offer via the registry row. SNG-243 §4: the gate network
 import { skillDetail, npcDetail, itemDetail, relationshipsParagraph, craftRollsLine, craftRollsShort } from "./engine/entityDetail.js";
@@ -173,7 +173,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.1.3";
+const APP_VERSION = "2.1.4";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -15857,7 +15857,10 @@ function renderJobsTab(selId = null) {
       const youGo = team.some(p => p.isYou);
       // ⛔ CCODE-437: a job is paid for, and pays, in the money of the place it is done
       const jobReg = CONTENT.locations?.[job.where]?.regionId || null, eco437 = CONTENT.rules?.economy || null;
-      const costDry = cost > 0 ? payAt(character, cost, jobReg, eco437, { dry: true }) : null;
+      // ⛔ CCODE-442 (Erik: soldiers "working or active on a job … get paid", their food inside the pay): the wage joins the cost
+      const wage442 = jobWages(character, team, plan, { wagePerHand: Number(CONTENT.rules?.economy?.holdStore?.growth?.wagePerHand ?? 3), nowHours });
+      const due442 = cost + wage442.value;
+      const costDry = due442 > 0 ? payAt(character, due442, jobReg, eco437, { dry: true }) : null;
       const short = !!(costDry && !costDry.ok);
       const moneyAt = (v, earned) => (earned ? incomeHere : priceHere)(v, jobReg, eco437).label;
       planHtml = `<div class="job-plan">
@@ -15868,9 +15871,10 @@ function renderJobsTab(selId = null) {
         <div class="codex-f"><strong>The work</strong> <span>${esc(jobHours(plan.work.hours))} of ${esc(JOB_WORK[plan.work.family] || "work")}${fastName ? ` — ${esc(fastName)} carries it` : ""}</span></div>
         <div class="codex-f"><strong>The road</strong> <span>${plan.trip.there > 0 ? `${esc(jobDays(plan.trip.there))} each way${slowName ? `, at ${esc(slowName)}'s pace` : ""}${slow?.way ? ` — ${esc(slow.way)}` : ""}` : "they are already there"}</span></div>
         <div class="codex-f"><strong>Back</strong> <span>day ${Math.floor(plan.backAtHours / 24)} — ${esc(jobDays(plan.days))} from now${youGo ? ` <span class="hint">· you go yourself, so that time passes for you</span>` : ""}</span></div>
+        ${wage442.heads ? `<div class="codex-f" data-job-wages><strong>Wages</strong> <span>${wage442.heads} ${wage442.heads === 1 ? "soldier" : "soldiers"} × ${esc(priceHere(wage442.perHead, jobReg, eco437).label)} × ${wage442.passes} ${wage442.passes === 1 ? "pass" : "passes"} away — ${esc(priceHere(wage442.value, jobReg, eco437).label)}, and their food comes out of it</span></div>` : ""}
         <table class="job-pays"><tbody>${JOB_OUTCOMES.map(k => `<tr><td><i class="o-${k}"></i>${esc(degreeWord(k).replace(/^an? /, ""))} <span class="hint">${Math.round(100 * (plan.dist[k] || 0))}%</span></td>
           <td>${esc(sayEffects(jobEffects(job, k, CONTENT.rules), team, { money: moneyAt }).join("; "))}</td></tr>`).join("")}</tbody></table>
-        <button class="btn" id="job-send"${short ? " disabled" : ""}>Send ${esc(team.map(p => (p.isYou ? "yourself" : p.short)).join(", "))}${cost ? ` — ${esc(priceHere(cost, jobReg, eco437).label)}` : ""}</button>
+        <button class="btn" id="job-send"${short ? " disabled" : ""}>Send ${esc(team.map(p => (p.isYou ? "yourself" : p.short)).join(", "))}${due442 ? ` — ${esc(priceHere(due442, jobReg, eco437).label)}` : ""}</button>
         ${short ? `<span class="hint bad">${esc(costDry.why)}.</span>` : ""}
       </div>`;
     }
@@ -15973,12 +15977,15 @@ function renderJobsTab(selId = null) {
     const plan = planJob(job, team, ctx);
     const cost = jobCost(job);
     const jobReg2 = CONTENT.locations?.[job.where]?.regionId || null;
-    if (cost > 0) { const d = payAt(character, cost, jobReg2, CONTENT.rules?.economy || null, { dry: true }); if (!d.ok) { alert(d.why); return; } }
+    const wage442s = jobWages(character, team, plan, { wagePerHand: Number(CONTENT.rules?.economy?.holdStore?.growth?.wagePerHand ?? 3), nowHours });   // CCODE-442
+    const due442s = cost + wage442s.value;
+    if (due442s > 0) { const d = payAt(character, due442s, jobReg2, CONTENT.rules?.economy || null, { dry: true }); if (!d.ok) { alert(d.why); return; } }
     const r = sendOnJob(character, job.id, team.map(p => p.id), plan, { nowHours, day: clk.day, names: Object.fromEntries(team.map(p => [p.id, p.isYou ? character.name : p.short])) });
     if (!r.ok) { alert(r.why); return; }
     // ⛔ CCODE-431: THEY LEAVE — the hands out of their band, a guard off the watch, until they are back
     detachForJob(character, r.entry);
-    if (cost > 0) payAt(character, cost, jobReg2, CONTENT.rules?.economy || null);   // CCODE-437
+    if (due442s > 0) payAt(character, due442s, jobReg2, CONTENT.rules?.economy || null);   // CCODE-437 · CCODE-442: the cost and the wages
+    if (wage442s.heads) r.entry.wages = { heads: wage442s.heads, passes: wage442s.passes, value: wage442s.value };
     delete _jobsUi.pick[job.id];
     _jobsUi.sel = null;
     // ⛔ YOU GO YOURSELF: the time is yours — the clock runs the job's length and it is settled when you are back

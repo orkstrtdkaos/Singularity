@@ -21911,7 +21911,7 @@ console.log("\n── §300 · jobs — sent, timed, and decided by the dice the
     && A300.indexOf("markJobsTold(character, jobsTold420)") > A300.indexOf("if (!result.ok) { renderPlay(null, { error: result.error }); return null; }"));
   check("§300: …and the Jobs tab is a tab, whose send refuses before it charges and runs the clock when you go yourself",
     /id="tab-jobs"/.test(A300) && /go\("tab-jobs", \(\) => renderJobsTab\(\)\)/.test(A300)
-    && A300.indexOf("const r = sendOnJob(character, job.id") < A300.indexOf("if (cost > 0) payAt(character, cost, jobReg2")
+    && A300.indexOf("const r = sendOnJob(character, job.id") < A300.indexOf("if (due442s > 0) payAt(character, due442s, jobReg2")
     && /if \(team\.some\(p => p\.isYou\)\) \{ advanceClock\(character\.clock, plan\.backAtHours - nowHours\); settleJobsNow\(\); \}/.test(A300));
   const whole300 = JB.planJob({ ...job300, effort: 0.01 }, [{ id: "a", skills: [] }], { rules: RU300, fnIndex: fnIndex300, routeOf: () => ({ days: 0 }), nowHours: 442 });
   check("§300: ⚠️ …and a return is a WHOLE hour, at least one ahead — the clock floors its hour, so a job due at a fraction of one never comes home",
@@ -22876,7 +22876,7 @@ console.log("\n── §316 · money by place — what a place pays in, what it 
     && /const r = payAt\(character, up, regionId, economy\);/.test(flows[0][1]) && /earnAt\(character, earned, regionId, economy, \{ origin: "traded" \}\)/.test(flows[0][1])
     && /const r = payAt\(character, q\.cost, regionId, economy\);/.test(flows[0][1]) && /earnAt\(character, total, regionId, economy, \{ origin: "traded" \}\)/.test(flows[1][1])
     && /const e = earnAt\(character, fx\.crystal, reg437, eco437, \{ origin: "reward" \}\)/.test(flows[2][1]) && /const paid = payAt\(buyer, total, regionId, economy\);/.test(flows[3][1])
-    && /const paid = payAt\(character, cost\.total, region, eco437/.test(flows[4][1]) && /if \(cost > 0\) payAt\(character, cost, jobReg2/.test(flows[4][1]),
+    && /const paid = payAt\(character, cost\.total, region, eco437/.test(flows[4][1]) && /if \(due442s > 0\) payAt\(character, due442s, jobReg2/.test(flows[4][1]),
     hard.join(" | "));
   const HT316 = await import("../engine/holdtrade.js");
   const buyer = { id: "b1", name: "B", purse: { crystal: 0, coin: 0, paper: 0, marks: 0, scrip: { the_palelands: 100 } }, inventory: [] };
@@ -23068,6 +23068,29 @@ console.log("\n── §320 · the GM's money door — shown the purse and the m
   check("§320: ⛑ the turn applies it by where the character stands, and a refusal is said under the beat — a purchase the purse could not cover never stands in the story",
     /const rec = applyMoneyOps\(character, turn\.exchangeOps \|\| \[\], \{\n\s*regionId: hereRegionId\(\), economy: CONTENT\.rules\?\.economy \|\| null/.test(A320)
     && /`The purse did not move: \$\{refused441\.join\("; "\)\}\.`/.test(A320));
+}
+
+// ══════════ §321 · CCODE-442 — SOLDIERS ON A JOB ARE PAID ══════════
+// Erik 2026-09-19: "If soldiers are working or active on a job they get paid. If they're eating then part of that pay is in food. But the
+// hold stores are meant to be for battles and journeys... so the everyday food [happens] narratively and explained through the pay."
+console.log("\n── §321 · soldiers on a job are paid — a wage a head a pass away, their food inside it, no store drawn ──");
+{
+  const JB321 = await import("../engine/jobs.js");
+  const ch = { holdings: [{ id: "h", garrison: ["g1", "g2"] }] };
+  const team = [{ id: "unit:band-a:0", isUnit: true, n: 12 }, { id: "g1" }, { id: "pell" }, { id: "player", isYou: true }];
+  const w = JB321.jobWages(ch, team, { backAtHours: 100 + 7 * 24 }, { wagePerHand: 3, nowHours: 100 });
+  const none = JB321.jobWages(ch, [{ id: "pell" }, { id: "player", isYou: true }], { backAtHours: 400 }, { wagePerHand: 3, nowHours: 100 });
+  check("§321: ⛔ a band's hands and a hold's guards cost the authored wage a head for every pass away — people who are not soldiers cost nothing here",
+    w.units === 12 && w.guards === 1 && w.heads === 13 && w.passes === 3 && w.value === 13 * 3 * 3 && none.heads === 0 && none.value === 0,
+    JSON.stringify({ w, none }));
+  const A321 = rd("app.js").replace(/\r\n/g, "\n").split("\n").filter(l => !/^\s*\/\//.test(l)).join("\n");
+  check("§321: …and the wage joins the job's cost — shown before the send, refused whole if the purse cannot carry both, paid in the place's money",
+    /const due442 = cost \+ wage442\.value;/.test(A321) && /data-job-wages><strong>Wages<\/strong>/.test(A321) && /and their food comes out of it/.test(A321)
+    && /const due442s = cost \+ wage442s\.value;/.test(A321) && /if \(due442s > 0\) \{ const d = payAt\(character, due442s, jobReg2/.test(A321)
+    && /if \(due442s > 0\) payAt\(character, due442s, jobReg2/.test(A321) && /r\.entry\.wages = \{ heads: wage442s\.heads/.test(A321));
+  const back = JB321.jobsForGM({ jobs: { back: [], board: [], out: [{ team: ["unit:band-a:0"], job: { label: "clear the road", where: "x" }, backAtHours: 300, wages: { heads: 12 } }] } }, { content: { locations: {} } });
+  check("§321: ⛔ the GM is told they are paid and eat from it — never from a hold's store, which is for battles and journeys",
+    /SOLDIERS ON JOBS ARE PAID — their wage covers the time away, and their food is bought out of it; they carry no rations from a hold's store\./.test(back || ""), String(back).slice(0, 200));
 }
 
 /* ══════════ REPORT ══════════ */

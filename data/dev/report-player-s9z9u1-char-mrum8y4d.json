@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
   "id": "dev_report",
-  "at": "2026-09-17T23:31:47.699Z",
-  "build": "2.0.61",
+  "at": "2026-09-20T01:05:34.291Z",
+  "build": "2.3.5",
   "character": {
     "id": "char-mrum8y4d",
     "name": "Loki",
     "playerKey": "player-s9z9u1",
     "level": 8,
-    "rev": 763,
-    "day": 4,
-    "turns": 207,
+    "rev": 785,
+    "day": 5,
+    "turns": 211,
     "countingSince": "2026-09-14T22:51:56.913Z",
     "countsCoverWholeLife": false
   },
@@ -93,41 +93,53 @@
         "key": "spectrumId",
         "value": "mechanical_spiritual",
         "why": "not a number"
+      },
+      {
+        "at": "2026-09-18T00:15:19.977Z",
+        "key": "spectrumId",
+        "value": "concrete_abstract",
+        "why": "not a number"
+      },
+      {
+        "at": "2026-09-18T00:32:56.033Z",
+        "key": "spectrumId",
+        "value": 0,
+        "why": "not a spectrum id"
       }
     ],
-    "axesDroppedN": 13,
+    "axesDroppedN": 15,
     "handoverRefused": [],
     "handoverRefusedN": 0
   },
   "ops": {
     "emitted": {
-      "sceneSummary": 207,
-      "choices": 207,
-      "characterDeltas": 94,
-      "scene": 207,
+      "sceneSummary": 211,
+      "choices": 211,
+      "characterDeltas": 98,
+      "scene": 211,
       "placeUpdates": 25,
-      "codexUpdates": 115,
-      "timeOps": 172,
+      "codexUpdates": 118,
+      "timeOps": 174,
       "offer": 26,
       "generateRequest": 6,
-      "sceneEnded": 78,
-      "npcUpdates": 165,
+      "sceneEnded": 81,
+      "npcUpdates": 168,
       "moveTo": 6,
-      "gambitApt": 41,
+      "gambitApt": 44,
       "deeds": 8,
-      "questUpdates": 26,
+      "questUpdates": 29,
       "standingOps": 3,
       "factUpdates": 9,
       "stageOps": 7,
       "encounterOps": 9,
       "ledgerEvents": 6,
       "newEncounter": 3,
-      "imagePrompt": 25,
+      "imagePrompt": 26,
       "scene_ended": 1,
       "stateOps": 2,
-      "_engineClosedScene": 2,
+      "_engineClosedScene": 3,
       "discovery": 3,
-      "intentsHeard": 4
+      "intentsHeard": 5
     },
     "outcomes": {
       "offer": {
@@ -145,11 +157,13 @@
       "debtOps",
       "delegateOps",
       "deriveItem",
+      "exchangeOps",
       "gambitOps",
       "holdTrades",
       "holdingOps",
       "imageMedium",
       "itemUpdates",
+      "jobOps",
       "markDefiningMoment",
       "markTeacher",
       "newAbility",
@@ -162,10 +176,10 @@
       "unlockPrecursor",
       "unlockSubstrate"
     ],
-    "neverCount": 23,
-    "knownCount": 46,
+    "neverCount": 25,
+    "knownCount": 48,
     "unknown": {
-      "sceneSummary": 30
+      "sceneSummary": 35
     },
     "inProse": {},
     "emptyClaims": 0
@@ -186,7 +200,7 @@
         "knownFacts": 10,
         "skillsObserved": 6,
         "deeds": 0,
-        "domains": 8,
+        "domains": 10,
         "inventory": 0
       }
     },
@@ -201,8 +215,8 @@
     }
   },
   "fireTests": {
-    "at": "2026-09-17T23:30:23.978Z",
-    "build": "2.0.61",
+    "at": "2026-09-16T21:46:04.474Z",
+    "build": "2.0.36",
     "results": [
       {
         "op": "debtOps",
@@ -689,8 +703,8 @@
     }
   },
   "world": {
-    "locations": 142,
+    "locations": 144,
     "abilities": 441,
-    "npcs": 156
+    "npcs": 161
   }
 }

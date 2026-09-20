@@ -302,24 +302,28 @@
         "player": "Approach the keeper and ask plainly what has passed through here recently — especially anyone asking about sealed gates or the Hub crossing.",
         "summary": "At the Wayhouse in deep night, Maren the keeper reveals that an enginewright from Pressureholt has passed through asking about interference at the Hub—and that someone in the lower Annex called the Architect is quietly asking about travelers carrying strange knowledge.",
         "narration": "You cross the main hall toward the hearth, your footsteps quiet on stone. The keeper looks up from her ledger as you approach—Maren, she calls herself, though her hands move like someone who has done this work for decades. She sets down her cup with the slowness of someone accustomed to patience.\n\n\"The Hub crossing,\" you say plainly. \"Anyone come through asking about it? About sealed gates, or about what lies beneath the Null Stone?\"\n\nMaren's eyes measure you for a moment—not with suspicion, but with the careful assessment of someone who reads routes the way other people read weather. \"You're not the first to ask,\" she says. Her voice is steady, unsurprised. \"Three days back, a runner came through from Pressureholt. Young woman, enginewright bearing—asked me straight about interference patterns at the Hub network. Said the station there had clocked something new in the lattice-lock. She took the direct spoke to the Crossing and didn't stop to rest.\"\n\nMaren turns a page in her ledger, running one weathered finger down a column of notations. \"Before that, a man in the lower Annex—the one they call the Architect, though that's not a title I'd trust—he sent word down the road asking after anyone coming through with strange questions about the waygate network. Paid coin for the asking, which means he's not just curious.\" She looks up at you again. \"The water crisis cleared three days ago, and since then the network's been humming different. You can hear it if you stand still in the yard long enough. That's what brought the enginewright through, I'd wager."
+      },
+      {
+        "player": "Thank her and ask after Sister Venri and a young woman healer that may have been here recently.",
+        "summary": "At the Wayhouse in deep night, Maren reveals that Sister Venri has passed through recently with a young woman healer — both moving with clear intent, heading toward the outward Reaches.",
+        "narration": "You nod your thanks to Maren, and her eyes settle back to the ledger — the exchange closing quietly. But you linger at the edge of the hearth, where the warmth still reaches you.\n\n\"Sister Venri,\" you say. \"Has she come through here? Or a young woman healer — someone new to the work, maybe.\" You watch Maren's face as you ask it, reading the small shifts: a pause in her breathing, a flicker at the corner of her mouth before she answers.\n\nMaren sets her glasses down carefully on the cord around her neck. \"Sister Venri passed through twice,\" she says. Her voice has taken on a different register — not warmer, but more considered, as though the question has moved into different territory. \"Once heading outward toward the Unlit reaches, and once returning with someone at her side. A young woman. Healer's kit, steady hands, the kind of quiet that means listening rather than fear.\"\n\nShe looks at you directly now. \"That was eight days ago. They didn't stay long — Venri was moving with purpose.\" Maren's eyes narrow slightly. \"You looking for them, or looking to know what they were looking for?\""
       }
     ],
     "lastTurn": {
-      "narration": "You cross the main hall toward the hearth, your footsteps quiet on stone. The keeper looks up from her ledger as you approach—Maren, she calls herself, though her hands move like someone who has done this work for decades. She sets down her cup with the slowness of someone accustomed to patience.\n\n\"The Hub crossing,\" you say plainly. \"Anyone come through asking about it? About sealed gates, or about what lies beneath the Null Stone?\"\n\nMaren's eyes measure you for a moment—not with suspicion, but with the careful assessment of someone who reads routes the way other people read weather. \"You're not the first to ask,\" she says. Her voice is steady, unsurprised. \"Three days back, a runner came through from Pressureholt. Young woman, enginewright bearing—asked me straight about interference patterns at the Hub network. Said the station there had clocked something new in the lattice-lock. She took the direct spoke to the Crossing and didn't stop to rest.\"\n\nMaren turns a page in her ledger, running one weathered finger down a column of notations. \"Before that, a man in the lower Annex—the one they call the Architect, though that's not a title I'd trust—he sent word down the road asking after anyone coming through with strange questions about the waygate network. Paid coin for the asking, which means he's not just curious.\" She looks up at you again. \"The water crisis cleared three days ago, and since then the network's been humming different. You can hear it if you stand still in the yard long enough. That's what brought the enginewright through, I'd wager.",
-      "sceneSummary": "At the Wayhouse in deep night, Maren the keeper reveals that an enginewright from Pressureholt has passed through asking about interference at the Hub—and that someone in the lower Annex called the Architect is quietly asking about travelers carrying strange knowledge.",
+      "narration": "You nod your thanks to Maren, and her eyes settle back to the ledger — the exchange closing quietly. But you linger at the edge of the hearth, where the warmth still reaches you.\n\n\"Sister Venri,\" you say. \"Has she come through here? Or a young woman healer — someone new to the work, maybe.\" You watch Maren's face as you ask it, reading the small shifts: a pause in her breathing, a flicker at the corner of her mouth before she answers.\n\nMaren sets her glasses down carefully on the cord around her neck. \"Sister Venri passed through twice,\" she says. Her voice has taken on a different register — not warmer, but more considered, as though the question has moved into different territory. \"Once heading outward toward the Unlit reaches, and once returning with someone at her side. A young woman. Healer's kit, steady hands, the kind of quiet that means listening rather than fear.\"\n\nShe looks at you directly now. \"That was eight days ago. They didn't stay long — Venri was moving with purpose.\" Maren's eyes narrow slightly. \"You looking for them, or looking to know what they were looking for?\"",
+      "sceneSummary": "At the Wayhouse in deep night, Maren reveals that Sister Venri has passed through recently with a young woman healer — both moving with clear intent, heading toward the outward Reaches.",
       "choices": [
         {
-          "label": "Ask Maren if she knows who this Architect is, and whether he's the type to hire someone to stop travelers.",
+          "label": "Tell Maren you're looking for them both — explain why plainly",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {
-            "falsehood_truth": 0.1,
-            "violence_peace": 0.1
+            "falsehood_truth": 0.3
           },
           "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "study"
+            "negotiate"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -328,50 +332,29 @@
           "emergenceId": null
         },
         {
-          "label": "Ask what route the enginewright woman took, and whether Maren can route you after her to the Crossing or another gate that might let you reach Pressureholt faster.",
+          "label": "Ask which direction they were headed when they left — track the road",
           "attribute": "practical",
           "subAttribute": "wits",
           "axes": {
-            "space_time": -0.3,
-            "mechanical_spiritual": 0.1
+            "space_time": -0.2
           },
           "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "travel"
+            "scout"
           ],
-          "abilityId": null,
+          "abilityId": "wayfinding",
           "energyCost": null,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Tell Maren plainly about the Revel that came to break the Null Stone, and ask if she's heard anything about who paid for it or why someone fears what the sealed chamber might reveal.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "falsehood_truth": 0.3,
-            "violence_peace": 0.2
-          },
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "reveal"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Use Prism Sight to read what Maren's face and hands tell you about which part of her answer carries weight and which is measured caution.",
+          "label": "Use Prism Sight to read Maren's face — catch what she's not saying about them",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "falsehood_truth": 0.2,
-            "dark_light": 0.1
+            "falsehood_truth": 0.4
           },
           "difficulty": "easy",
           "opposedDifficulty": null,
@@ -380,6 +363,24 @@
           ],
           "abilityId": "prism_sight",
           "energyCost": 3,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask what supplies or gear they took with them — what were they planning for",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {
+            "concrete_abstract": -0.2
+          },
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
@@ -398,7 +399,11 @@
         {
           "op": "progress",
           "questId": "the-taken-from-the-city",
-          "note": "Maren reports an enginewright from Pressureholt asked about interference at the Hub network three days ago, and an 'Architect' in the lower Annex is quietly asking about travelers with dangerous knowledge—the question of who sent the Revel is sharpening."
+          "title": "The Taken",
+          "summary": "Someone was brought from the city to the Unlit Deep, and the city is pretending it did not happen.",
+          "giver": "the elder of the Unlit Deep",
+          "note": "Maren reports Sister Venri has passed through twice in recent days with a young woman healer — both heading toward the outward Reaches with clear purpose. The healer may be connected to the city, or to what brought Sable to the Deep.",
+          "xpReward": null
         }
       ],
       "standingOps": [],
@@ -407,72 +412,56 @@
       "arcOps": [],
       "adoptSchool": null,
       "offer": {
-        "thing": "A quiet path opens: the enginewright from Pressureholt went through asking the same questions you're asking, and the keeper has her route logged.",
-        "from": "Maren's own trade—she sees travelers the way water reads stone, and she offers the pattern because you asked plainly"
+        "thing": "A keeper who reads routes the way other people read weather, and who has already seen the shape of what Loki is reaching for.",
+        "from": "Maren's years of watching travelers pass through this threshold — she has learned to read the weight of a real question when one is asked."
       },
       "stageOps": [],
       "scene": {
-        "setting": "The Wayhouse main hall, deep night, late summer. Stone walls, open timber frame. Three steady lamps. Fire in the hearth at the far end. Maps and route-logs covering every wall. The waygate hums faintly in the yard outside—its lattice-work visible through the open yard.",
+        "setting": "The Wayhouse main hall, deep night, late summer. Stone walls, open timber frame. Three steady lamps casting warm light. A fire burning low in the hearth at the far end. Maps and route-logs covering every wall. The waygate visible through the open yard, its lattice-work catching starlight and humming faintly.",
         "npcsPresent": [
           {
             "name": "Maren Oast",
-            "state": "Seated by the fire with her ledger open, reading glasses on a cord, cup at her elbow. Watching you with the careful measure of someone who has learned to read distance."
+            "state": "Seated by the fire with her ledger, glasses on their cord, watching you with the careful assessment of someone who reads distance the way a ship-captain reads tide. Waiting for your next question."
           }
         ],
         "objects": [
           "A long central table with route-logs and ledger",
-          "Maps covering the walls",
+          "Maps covering every wall",
           "Three steady lamps",
-          "A fire in the hearth",
-          "The waygate visible through the open yard, lattice-work catching starlight"
+          "Fire in the hearth",
+          "The waygate visible through the open yard"
         ],
         "threads": [
-          "Who is the Architect in the lower Annex, and is he the one who sent the Revel?",
-          "What did the enginewright from Pressureholt find at the Hub, and where did she go after the Crossing?",
-          "Why does someone fear what lies beneath the Null Stone enough to hire breaking and to ask questions about travelers?"
+          "Who is the Architect in the lower Annex, and did he send the Revel or something else?",
+          "What is Sister Venri's connection to the Unlit Deep and to Sable?",
+          "Why is the young woman healer moving toward the outward Reaches with Venri — is she searching for something, or being taken somewhere?"
         ]
       },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "maren-oast",
-          "note": "Loki asked plainly about sealed gates and the Hub crossing. Maren answered without deflection—she reads the question as honest and provides useful detail about recent traffic. She measures Loki's intent carefully but does not hide what she knows.",
-          "learned": [
-            "An enginewright from Pressureholt passed through three days ago asking about interference patterns at the Hub network lattice-lock.",
-            "Someone called the Architect in the lower Annex is quietly asking after travelers carrying dangerous knowledge—paid coin for the asking.",
-            "The water crisis cleared three days ago, and the waygate network has been humming differently since."
-          ]
-        }
-      ],
+      "npcUpdates": [],
       "intentsHeard": [],
       "factUpdates": [],
-      "placeUpdates": [
-        {
-          "note": "The Wayhouse keeper maintains a ledger of recent passage. An enginewright from Pressureholt asking about Hub interference (three days ago). Quiet inquiries from 'the Architect' in the lower Annex about travelers carrying sealed knowledge."
-        }
-      ],
+      "placeUpdates": [],
       "discovery": null,
       "codexUpdates": [
         {
-          "topic": "the-architect-in-the-lower-annex",
-          "label": "The Architect",
+          "topic": "sister-venri",
+          "label": "Sister Venri",
           "kind": "person",
-          "fact": "Someone in the lower Annex called by this title is quietly asking after travelers carrying knowledge about sealed gates and the Hub crossing. He paid coin for the asking, which suggests serious concern—not mere curiosity.",
+          "fact": "Sister Venri has passed through the Wayhouse twice recently — once heading outward toward the Unlit reaches, and once returning with a young woman healer at her side. Both were moving with clear purpose. They departed eight days ago.",
           "links": [
-            "the-hub-crossing",
-            "the-revel-sent-to-break-the-stone",
-            "the-taken-from-the-city"
+            "the-taken-from-the-city",
+            "the-wayhouse"
           ]
         },
         {
-          "topic": "the-pressureholt-enginewright",
-          "label": "The Pressureholt Enginewright",
+          "topic": "young-woman-healer",
+          "label": "The Young Woman Healer",
           "kind": "person",
-          "fact": "A young woman, enginewright bearing, came through the Wayhouse three days ago asking Maren about interference patterns at the Hub network lattice-lock. She took the direct spoke to the Crossing without stopping to rest. Her interest in the sealed network suggests either she was sent to investigate or she is pursuing the same questions as Loki.",
+          "fact": "A young woman healer with steady hands and the quiet of someone who listens rather than fears has been traveling with Sister Venri. She carries a healer's kit. She may be connected to the city, or to what brought Sable into the Unlit Deep. Last seen eight days ago, heading outward with Venri toward the unlit reaches.",
           "links": [
-            "the-hub-crossing",
-            "pressureholt",
-            "vessa-torquen"
+            "sister-venri",
+            "the-taken-from-the-city",
+            "the-wayhouse"
           ]
         }
       ],
@@ -492,7 +481,7 @@
       "unlockSubstrate": null,
       "timeOps": {
         "hoursPassed": 0.5,
-        "why": "a careful conversation by the fire, unhurried"
+        "why": "a careful conversation at the hearth"
       },
       "moveTo": null,
       "stateOps": [],
@@ -503,30 +492,35 @@
       "newAbility": null,
       "gambitOps": null,
       "gambitApt": false,
+      "markDefiningMoment": null,
+      "markTeacher": null,
+      "offerPromotion": null,
+      "offerAcquisition": null,
+      "offerIntent": null,
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The Wayhouse main hall, deep night, late summer. Stone walls, open timber frame. Three steady lamps. Fire in the hearth at the far end. Maps and route-logs covering every wall. The waygate hums faintly in the yard outside—its lattice-work visible through the open yard.",
+      "setting": "The Wayhouse main hall, deep night, late summer. Stone walls, open timber frame. Three steady lamps casting warm light. A fire burning low in the hearth at the far end. Maps and route-logs covering every wall. The waygate visible through the open yard, its lattice-work catching starlight and humming faintly.",
       "npcsPresent": [
         {
           "name": "Maren Oast",
-          "state": "Seated by the fire with her ledger open, reading glasses on a cord, cup at her elbow. Watching you with the careful meas"
+          "state": "Seated by the fire with her ledger, glasses on their cord, watching you with the careful assessment of someone who reads"
         }
       ],
       "objects": [
         "A long central table with route-logs and ledger",
-        "Maps covering the walls",
+        "Maps covering every wall",
         "Three steady lamps",
-        "A fire in the hearth",
-        "The waygate visible through the open yard, lattice-work catching starlight"
+        "Fire in the hearth",
+        "The waygate visible through the open yard"
       ],
       "threads": [
-        "Who is the Architect in the lower Annex, and is he the one who sent the Revel?",
-        "What did the enginewright from Pressureholt find at the Hub, and where did she go after the Crossing?",
-        "Why does someone fear what lies beneath the Null Stone enough to hire breaking and to ask questions about travelers?"
+        "Who is the Architect in the lower Annex, and did he send the Revel or something else?",
+        "What is Sister Venri's connection to the Unlit Deep and to Sable?",
+        "Why is the young woman healer moving toward the outward Reaches with Venri — is she searching for something, or being taken somewhere?"
       ]
     },
-    "beats": 2,
+    "beats": 3,
     "subPlace": null
   },
   "clock": {
@@ -552,14 +546,14 @@
       "locationEntityId": "the-unlit-deep",
       "status": "active",
       "progress": [
-        "The vast chamber beneath the Null Stone has been reached and assessed—it is a pre-Transition water-works sealed deliberately, with a river moving through worked darkness. The regulator housing awaits at the far end. The chamber is the question, and the question is still unanswered.",
         "The chamber beneath the Null Stone has acknowledged a harmonic question—the notation pulses with response, the water shifts to harmony. The regulator at the far end remains unread; the question continues to wait.",
         "The chamber beneath the Null Stone is not a mechanism but a listener—it poses questions to the river and reads the answer through the notation. The threshold where questions are asked has been identified in the eastern alcove.",
         "The sealed chamber beneath the Null Stone is the mechanism built to pose the regulator's question—both to the water's readiness and to the supplicant's integrity. Halvex reads it as a mutual test: the alcove is the threshold where the answer is shaped.",
         "The sealed chamber beneath the Null Stone is revealed as a pre-Transition water-works built to pose a mutual question—between supplicant and stone, between water's readiness and asker's integrity. The chamber listens and answers in harmonic resonance. Halvex has relinquished the mandate to break.",
         "The sealed chamber beneath the Null Stone has revealed itself as a pre-Transition water-works designed to pose and answer mutual questions—a threshold where supplicant and stone measure each other's readiness. The chamber listens in harmonic resonance. Cy's old procedure suggests the apparatus measures whether the asker is ready to receive truthful answers, not merely whether they can pose a question.",
         "The chamber listens in harmonic resonance. The alcove measures whether a supplicant is ready to receive honest answers. The thread now turns toward who sent the Revel to break the stone, and what they feared the chamber would reveal.",
-        "Maren reports an enginewright from Pressureholt asked about interference at the Hub network three days ago, and an 'Architect' in the lower Annex is quietly asking about travelers with dangerous knowledge—the question of who sent the Revel is sharpening."
+        "Maren reports an enginewright from Pressureholt asked about interference at the Hub network three days ago, and an 'Architect' in the lower Annex is quietly asking about travelers with dangerous knowledge—the question of who sent the Revel is sharpening.",
+        "Maren reports Sister Venri has passed through twice in recent days with a young woman healer — both heading toward the outward Reaches with clear purpose. The healer may be connected to the city, or to what brought Sable to the Deep."
       ],
       "aliases": [],
       "startedAt": "2026-07-24T21:30:43.637Z"
@@ -1721,10 +1715,6 @@
     "turnsSinceOffer": 0,
     "recentOffers": [
       {
-        "thing": "The opened seam glowing faintly from within—a passage descending into cold dark and the sound of moving water far below.",
-        "from": "The Null Stone's answer to honest asking—it listened and it tested, and it chose to trust what you promised."
-      },
-      {
         "thing": "The consensus—all three of your companions affirm the descent without hesitation or doubt, each for their own reason.",
         "from": "The trust already built between you: Vessin's committed bond, Cy's assigned purpose, and the clear stakes of what waits below."
       },
@@ -1739,6 +1729,10 @@
       {
         "thing": "A quiet path opens: the enginewright from Pressureholt went through asking the same questions you're asking, and the keeper has her route…",
         "from": "Maren's own trade—she sees travelers the way water reads stone, and she offers the pattern because you asked plainly"
+      },
+      {
+        "thing": "A keeper who reads routes the way other people read weather, and who has already seen the shape of what Loki is reaching for.",
+        "from": "Maren's years of watching travelers pass through this threshold — she has learned to read the weight of a real question when one is asked."
       }
     ],
     "wantProgress": {
@@ -9257,6 +9251,37 @@
         "aliases": [],
         "createdDay": 5,
         "updatedDay": 5
+      },
+      "sister-venri": {
+        "id": "sister-venri",
+        "label": "Sister Venri",
+        "kind": "person",
+        "facts": [
+          "[d5] Sister Venri has passed through the Wayhouse twice recently — once heading outward toward the Unlit reaches, and once returning with a young woman healer at her side. Both were moving with clear purpose. They departed eight days ago."
+        ],
+        "links": [
+          "the-taken-from-the-city",
+          "the-wayhouse"
+        ],
+        "aliases": [],
+        "createdDay": 5,
+        "updatedDay": 5
+      },
+      "young-woman-healer": {
+        "id": "young-woman-healer",
+        "label": "The Young Woman Healer",
+        "kind": "person",
+        "facts": [
+          "[d5] A young woman healer with steady hands and the quiet of someone who listens rather than fears has been traveling with Sister Venri. She carries a healer's kit. She may be connected to the city, or to what brought Sable into the Unlit Deep. Last seen eight days ago, heading outward with Venri…"
+        ],
+        "links": [
+          "sister-venri",
+          "the-taken-from-the-city",
+          "the-wayhouse"
+        ],
+        "aliases": [],
+        "createdDay": 5,
+        "updatedDay": 5
       }
     },
     "mergeUndo": [
@@ -9556,17 +9581,17 @@
     ]
   },
   "tendencies": {
-    "devotion": 1.2533619575386896,
-    "cerebral": 14.808588992165513,
-    "social": 13.101304644806659,
-    "strategic": 13.571095663150238,
-    "cautious": 6.6762039512436,
-    "amorous": 8.089072793761812,
-    "generous": 5.1804413576927635,
-    "ruthless": 0.31393462321795884,
-    "risky": 0.25656153615932026,
-    "patient": 0.07006234164486871,
-    "deception": 0.08155619473008346
+    "devotion": 1.2220279086002224,
+    "cerebral": 14.438374267361375,
+    "social": 12.773772028686492,
+    "strategic": 13.231818271571482,
+    "cautious": 6.509298852462511,
+    "amorous": 7.886845973917766,
+    "generous": 5.050930323750444,
+    "ruthless": 0.30608625763750985,
+    "risky": 0.25014749775533723,
+    "patient": 0.068310783103747,
+    "deception": 0.07951728986183138
   },
   "aptitudes": [
     "strategist",
@@ -9575,7 +9600,7 @@
     "faithful",
     "charmer"
   ],
-  "actionCount": 183,
+  "actionCount": 184,
   "grantsVersion": 1,
   "precursorAccess": [
     "address_sense"
@@ -10575,8 +10600,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789908147065,
-  "rev": 795,
+  "updatedAt": 1789908284977,
+  "rev": 796,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -11524,7 +11549,7 @@
     "the_quickwood": 101,
     "the_center": 50,
     "valley": 1,
-    "the_open_reach": 2
+    "the_open_reach": 3
   },
   "opLossPending": false,
   "sessions": [
@@ -11643,10 +11668,10 @@
     {
       "id": "sess-15",
       "startedAt": "2026-09-20T12:21:21.358Z",
-      "lastAt": "2026-09-20T12:42:27.057Z",
+      "lastAt": "2026-09-20T12:44:44.972Z",
       "startDay": 82,
       "endDay": 82,
-      "beats": 3
+      "beats": 4
     }
   ],
   "establishedFacts": [
@@ -11713,7 +11738,7 @@
   ],
   "_opLedger": {
     "offer": {
-      "applied": 32,
+      "applied": 33,
       "rejected": 2,
       "lastWhy": "rejected-shape"
     },
@@ -11730,21 +11755,21 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 214,
-    "choices": 214,
-    "characterDeltas": 101,
-    "scene": 214,
+    "sceneSummary": 215,
+    "choices": 215,
+    "characterDeltas": 102,
+    "scene": 215,
     "placeUpdates": 27,
-    "codexUpdates": 120,
-    "timeOps": 176,
-    "offer": 28,
+    "codexUpdates": 121,
+    "timeOps": 177,
+    "offer": 29,
     "generateRequest": 6,
-    "sceneEnded": 84,
+    "sceneEnded": 85,
     "npcUpdates": 171,
     "moveTo": 7,
-    "gambitApt": 46,
+    "gambitApt": 47,
     "deeds": 8,
-    "questUpdates": 31,
+    "questUpdates": 32,
     "standingOps": 3,
     "factUpdates": 9,
     "stageOps": 7,
@@ -11759,7 +11784,7 @@
     "intentsHeard": 5,
     "delegateOps": 1
   },
-  "_opTurns": 214,
+  "_opTurns": 215,
   "customAbilities": {
     "mirror-bright": {
       "id": "mirror-bright",
@@ -12594,7 +12619,7 @@
     "woo": 1,
     "rapport": 9,
     "retreat": 1,
-    "ask": 4,
+    "ask": 5,
     "help": 7,
     "study": 9,
     "investigate": 7,
@@ -12942,404 +12967,404 @@
   },
   "_promptRows": {
     "character": {
-      "reached": 26,
-      "produced": 26
+      "reached": 27,
+      "produced": 27
     },
     "location": {
-      "reached": 26,
-      "produced": 26
+      "reached": 27,
+      "produced": 27
     },
     "region": {
-      "reached": 26,
-      "produced": 26
+      "reached": 27,
+      "produced": 27
     },
     "groundDetail": {
-      "reached": 26,
+      "reached": 27,
       "produced": 21
     },
     "lore": {
-      "reached": 26,
-      "produced": 23
+      "reached": 27,
+      "produced": 24
     },
     "traditionMotiveDetail": {
-      "reached": 26,
-      "produced": 26
+      "reached": 27,
+      "produced": 27
     },
     "sheetsDetail": {
-      "reached": 26,
-      "produced": 21
+      "reached": 27,
+      "produced": 22
     },
     "rules": {
-      "reached": 26,
-      "produced": 26
+      "reached": 27,
+      "produced": 27
     },
     "recentTurns": {
-      "reached": 26,
-      "produced": 23
+      "reached": 27,
+      "produced": 24
     },
     "timeLabel": {
-      "reached": 26,
-      "produced": 26
+      "reached": 27,
+      "produced": 27
     },
     "npcRegistryDetail": {
-      "reached": 26,
-      "produced": 26
+      "reached": 27,
+      "produced": 27
     },
     "mintedUnmetDetail": {
-      "reached": 26,
-      "produced": 26
+      "reached": 27,
+      "produced": 27
     },
     "npcSeedDetail": {
-      "reached": 26,
+      "reached": 27,
       "produced": 24
     },
     "traditionVocab": {
-      "reached": 26,
-      "produced": 26
+      "reached": 27,
+      "produced": 27
     },
     "standingDetail": {
-      "reached": 26,
-      "produced": 26
+      "reached": 27,
+      "produced": 27
     },
     "recalledDetail": {
-      "reached": 26,
+      "reached": 27,
       "produced": 1
     },
     "bearingsDetail": {
-      "reached": 26,
-      "produced": 26
+      "reached": 27,
+      "produced": 27
     },
     "caravansDetail": {
-      "reached": 26,
+      "reached": 27,
       "produced": 0
     },
     "commandDetail": {
-      "reached": 26,
-      "produced": 26
+      "reached": 27,
+      "produced": 27
     },
     "presenceDetail": {
-      "reached": 26,
+      "reached": 27,
       "produced": 17
     },
     "worthHereDetail": {
-      "reached": 26,
+      "reached": 27,
       "produced": 0
     },
     "inventoryDetail": {
-      "reached": 26,
-      "produced": 26
+      "reached": 27,
+      "produced": 27
     },
     "sceneState": {
-      "reached": 26,
-      "produced": 23
+      "reached": 27,
+      "produced": 24
     },
     "holdingsDetail": {
-      "reached": 26,
-      "produced": 26
+      "reached": 27,
+      "produced": 27
     },
     "debtsDetail": {
-      "reached": 26,
+      "reached": 27,
       "produced": 0
     },
     "carriedDetail": {
-      "reached": 26,
+      "reached": 27,
       "produced": 0
     },
     "abilityLawDetail": {
-      "reached": 26,
-      "produced": 26
+      "reached": 27,
+      "produced": 27
     },
     "questsDetail": {
-      "reached": 26,
-      "produced": 26
+      "reached": 27,
+      "produced": 27
     },
     "structuredQuestsDetail": {
-      "reached": 26,
+      "reached": 27,
       "produced": 0
     },
     "traditionArcDetail": {
-      "reached": 26,
+      "reached": 27,
       "produced": 0
     },
     "npcErrandsDetail": {
-      "reached": 26,
+      "reached": 27,
       "produced": 0
     },
     "codexDetail": {
-      "reached": 26,
-      "produced": 26
+      "reached": 27,
+      "produced": 27
     },
     "companionsDetail": {
-      "reached": 26,
-      "produced": 26
+      "reached": 27,
+      "produced": 27
     },
     "placeMemoryDetail": {
-      "reached": 26,
-      "produced": 24
+      "reached": 27,
+      "produced": 25
     },
     "agesMissingDetail": {
-      "reached": 26,
-      "produced": 26
+      "reached": 27,
+      "produced": 27
     },
     "newsDetail": {
-      "reached": 26,
-      "produced": 26
+      "reached": 27,
+      "produced": 27
     },
     "worldArcsDetail": {
-      "reached": 26,
-      "produced": 26
+      "reached": 27,
+      "produced": 27
     },
     "legendsPursuableDetail": {
-      "reached": 26,
+      "reached": 27,
       "produced": 12
     },
     "wakesDetail": {
-      "reached": 26,
+      "reached": 27,
       "produced": 0
     },
     "arcMoodDetail": {
-      "reached": 26,
-      "produced": 26
+      "reached": 27,
+      "produced": 27
     },
     "reachableDeadDetail": {
-      "reached": 26,
-      "produced": 26
+      "reached": 27,
+      "produced": 27
     },
     "threatToPlayer": {
-      "reached": 26,
+      "reached": 27,
       "produced": 0
     },
     "guardiansDetail": {
-      "reached": 26,
+      "reached": 27,
       "produced": 0
     },
     "resolution": {
-      "reached": 26,
-      "produced": 18
+      "reached": 27,
+      "produced": 19
     },
     "playerInput": {
-      "reached": 26,
+      "reached": 27,
       "produced": 8
     },
     "exactWords": {
-      "reached": 26,
-      "produced": 12
+      "reached": 27,
+      "produced": 13
     },
     "travelDirective": {
-      "reached": 26,
+      "reached": 27,
       "produced": 1
     },
     "itemAdvance": {
-      "reached": 26,
+      "reached": 27,
       "produced": 0
     },
     "encounterWeaveDetail": {
-      "reached": 26,
-      "produced": 3
+      "reached": 27,
+      "produced": 4
     },
     "encounterOfferDetail": {
-      "reached": 26,
+      "reached": 27,
       "produced": 3
     },
     "fightFramingDetail": {
-      "reached": 26,
+      "reached": 27,
       "produced": 0
     },
     "abilityGrantDetail": {
-      "reached": 26,
+      "reached": 27,
       "produced": 0
     },
     "stageRevealDetail": {
-      "reached": 26,
+      "reached": 27,
       "produced": 0
     },
     "itemEvolveDetail": {
-      "reached": 26,
+      "reached": 27,
       "produced": 0
     },
     "worldPressureDetail": {
-      "reached": 26,
+      "reached": 27,
       "produced": 0
     },
     "offerDetail": {
-      "reached": 26,
+      "reached": 27,
       "produced": 2
     },
     "teacherOfferDetail": {
-      "reached": 26,
+      "reached": 27,
       "produced": 0
     },
     "substrateDetail": {
-      "reached": 26,
+      "reached": 27,
       "produced": 6
     },
     "romanceGuidanceDetail": {
-      "reached": 26,
+      "reached": 27,
       "produced": 1
     },
     "factsDetail": {
-      "reached": 26,
-      "produced": 26
+      "reached": 27,
+      "produced": 27
     },
     "evolvedItemsDetail": {
-      "reached": 26,
+      "reached": 27,
       "produced": 0
     },
     "opLossNote": {
-      "reached": 26,
+      "reached": 27,
       "produced": 0
     },
     "emergenceDetail": {
-      "reached": 26,
+      "reached": 27,
       "produced": 0
     },
     "perilNote": {
-      "reached": 26,
+      "reached": 27,
       "produced": 0
     },
     "encounterDetail": {
-      "reached": 26,
+      "reached": 27,
       "produced": 4
     },
     "masteryDetail": {
-      "reached": 26,
-      "produced": 26
+      "reached": 27,
+      "produced": 27
     },
     "bookkeepingRestate": {
-      "reached": 26,
+      "reached": 27,
       "produced": 0
     },
     "anomalyDetail": {
-      "reached": 26,
-      "produced": 26
+      "reached": 27,
+      "produced": 27
     },
     "repairPanelDetail": {
-      "reached": 26,
-      "produced": 26
+      "reached": 27,
+      "produced": 27
     },
     "teacherDetail": {
-      "reached": 26,
+      "reached": 27,
       "produced": 0
     },
     "toolkitDetail": {
-      "reached": 26,
-      "produced": 26
+      "reached": 27,
+      "produced": 27
     },
     "availableEncounters": {
-      "reached": 26,
-      "produced": 22
+      "reached": 27,
+      "produced": 23
     },
     "partyDetail": {
-      "reached": 26,
+      "reached": 27,
       "produced": 0
     },
     "ratingDetail": {
-      "reached": 26,
-      "produced": 26
+      "reached": 27,
+      "produced": 27
     },
     "registerDetail": {
-      "reached": 26,
-      "produced": 26
+      "reached": 27,
+      "produced": 27
     },
     "legendDetail": {
-      "reached": 26,
+      "reached": 27,
       "produced": 1
     },
     "livingWorldDetail": {
-      "reached": 26,
+      "reached": 27,
       "produced": 0
     },
     "assignmentsDetail": {
-      "reached": 26,
+      "reached": 27,
       "produced": 0
     },
     "latentArcsDetail": {
-      "reached": 26,
-      "produced": 26
+      "reached": 27,
+      "produced": 27
     },
     "seasonalDetail": {
-      "reached": 26,
-      "produced": 26
+      "reached": 27,
+      "produced": 27
     },
     "schoolsDetail": {
-      "reached": 26,
-      "produced": 26
+      "reached": 27,
+      "produced": 27
     },
     "sharedCanonDetail": {
-      "reached": 26,
-      "produced": 3
+      "reached": 27,
+      "produced": 4
     },
     "worldCountLabel": {
-      "reached": 26,
-      "produced": 26
+      "reached": 27,
+      "produced": 27
     },
     "waygateDetail": {
-      "reached": 26,
-      "produced": 26
+      "reached": 27,
+      "produced": 27
     },
     "readAloudDetail": {
-      "reached": 26,
-      "produced": 26
+      "reached": 27,
+      "produced": 27
     },
     "scenePacingDetail": {
-      "reached": 26,
+      "reached": 27,
       "produced": 13
     },
     "wishesDetail": {
-      "reached": 6,
+      "reached": 7,
       "produced": 0
     },
     "worldMovedOnDetail": {
-      "reached": 6,
+      "reached": 7,
       "produced": 2
     },
     "companionLivesDetail": {
-      "reached": 6,
-      "produced": 6
+      "reached": 7,
+      "produced": 7
     },
     "homeDetail": {
-      "reached": 6,
+      "reached": 7,
       "produced": 0
     },
     "invitationsDetail": {
-      "reached": 6,
+      "reached": 7,
       "produced": 0
     },
     "bandsJoinedDetail": {
-      "reached": 6,
+      "reached": 7,
       "produced": 0
     },
     "travelersHereDetail": {
-      "reached": 6,
+      "reached": 7,
       "produced": 1
     },
     "travelersDetail": {
-      "reached": 6,
+      "reached": 7,
       "produced": 0
     },
     "journeyDetail": {
-      "reached": 4,
+      "reached": 5,
       "produced": 0
     },
     "journeyUnderwayDetail": {
-      "reached": 4,
+      "reached": 5,
       "produced": 0
     },
     "holdsNearDetail": {
-      "reached": 4,
+      "reached": 5,
       "produced": 1
     },
     "moneyDetail": {
-      "reached": 3,
-      "produced": 3
+      "reached": 4,
+      "produced": 4
     },
     "jobsDetail": {
-      "reached": 3,
+      "reached": 4,
       "produced": 0
     }
   },
   "_opUnknown": {
-    "sceneSummary": 38
+    "sceneSummary": 39
   },
   "_bandNotes": null,
   "_opCountingSince": "2026-09-14T22:51:56.913Z",

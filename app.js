@@ -104,7 +104,7 @@ import { scopeLegacyMintedIds } from "./engine/fates.js";   // CCODE-384: the pe
 import { planJourney, journeyLine, chosenWay, chooseWay, journeyArrivalPrompt, provisionsCarried, logJourneyOn, refreshJourneyOn, dropJourneyOn, completeJourneyOn, journeyCraftsOf } from "./engine/journeyplan.js";   // CCODE-387: a journey is agreed, readied, then walked
 import { ensureLegsOn, beginRoadOn, currentLeg, roadStandsAt, legEarnsGambit, energyAfterLeg, walkLegOn, spendRoadOn, legGambitFor, aroundLeg, noteLegGambitOn, stopRoadOn,
   roadLine, perilousLegsOf, noteRoadOn, endJourneyOn, roadOutcome, legFailurePrompt, roadRules, dangerWord as roadDangerWord } from "./engine/journeyroad.js";   // CCODE-390: the road, walked leg by leg
-import { travelersHere, travelerHereLine, whereOf } from "./engine/travelers.js";   // CCODE-359: another traveler is here   // CCODE-354: the world moved on, counted by beats
+import { travelersHere, travelerHereLine, whereOf, ledgerPeopleFor } from "./engine/travelers.js";   // CCODE-359: another traveler is here   // CCODE-354: the world moved on, counted by beats
 import { makeInvitation, incomingInvitations, sentInvitations, joinBandLocally, bandPhrase } from "./engine/invitations.js";
 import { newsNearness, nearFirst } from "./engine/newsvoice.js";   // CCODE-367: nearby news stands out
 // ⛔ CCODE-404: what a person BRINGS to a unit is the same question the party screen asks of them (CCODE-402), answered the same way.
@@ -178,7 +178,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.4.0";
+const APP_VERSION = "2.4.1";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -9674,7 +9674,13 @@ function applyTurn(turn, resolution, playerWords = null) {
       // be c" — and this text is now read back to other players' GMs as the whole of what the world saw.
       where: location.id, what: smartClamp(String(e.what || "").trim(), 200), tags: e.tags || [],
       spectrumDeltas: e.spectrumDeltas || {}, visibility: e.visibility || "witnessed",
-      impactsLocal: !!e.impactsLocal // SNG-041: crosses the far-world/local boundary to whoever it affects
+      impactsLocal: !!e.impactsLocal, // SNG-041: crosses the far-world/local boundary to whoever it affects
+      // ⛔ CCODE-461: WHO IT IS ABOUT, AS A KEY. The reader on the other side is keyed by PERSON and every row
+      // ever written named nobody it could key on. ⚠️ Derived HERE from this character's own registry rather than
+      // asked of the model — the writer already knows who was in the scene, and a key the model invents is a key
+      // nobody can look up.
+      people: ledgerPeopleFor({ what: String(e.what || ""), registry: character.npcRegistry || {},
+        presentNames: (sceneState?.npcsPresent || []).map(n => n?.name).filter(Boolean) }),
     }));
     // SNG-145 trigger 3 (irreversible): an impactsLocal event reaches ANOTHER player's area — it
     // waits in escrow for this player's confirm. Narration stands; only propagation is gated.
@@ -15343,7 +15349,11 @@ function questResolveCtx() {
         who: character.id, playerKey: character.playerKey || getPlayerKey(),
         where: character.currentLocationId ?? null, what: String(ev?.what || ""),
         tags: Array.isArray(ev?.tags) ? ev.tags.slice(0, 4).map(String) : [],
-        spectrumDeltas: {}, visibility: ev?.visibility || "witnessed", impactsLocal: false };
+        spectrumDeltas: {}, visibility: ev?.visibility || "witnessed", impactsLocal: false,
+        // ⛔ CCODE-461: the SECOND row constructor, and it has to carry the key too — a quest ending is exactly
+        // the kind of row another player's GM will be handed, and exactly the kind that names people.
+        people: ledgerPeopleFor({ what: String(ev?.what || ""), registry: character.npcRegistry || {},
+          presentNames: (sceneState?.npcsPresent || []).map(n => n?.name).filter(Boolean) }) };
       if (row.what) appendLedger([row], character.id).catch(err => console.warn("[ledger]", err?.message));
     },
   };

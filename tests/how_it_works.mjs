@@ -24211,6 +24211,83 @@ console.log("\n── §336 · a decision inside a stage, and an ending that can
     JSON.stringify({ outcomes: /failure/i.test(law336.required.outcomes), stages: /choices/.test(law336.required.stages), truth: !!law336.optional.truth }));
 }
 
+// ══════════ §337 · CCODE-461 — A LEDGER ROW CARRIES ITS PEOPLE, AND THE READER KEYS ON THEM ══════════
+// Erik: "I want the world scenes to be fixed and to promote more npcs to the One World state." Aevi measured the first half and
+// corrected herself on it: world/scenes/ is not broken (a scene file exists only when two players CO-PLAY, and nobody has since
+// Sept 7). ⛔ THE DEFECT IS THAT THE READER IS KEYED BY PERSON AND THE ROWS NAME NO PERSON — `peopleInTheirStory` binds a row to
+// somebody by matching their NAME against the row's PROSE, and Courtney's row says "A wayhouse healer".
+console.log("\n── §337 · who a shared-world row is about ──");
+{
+  const TV = await import("../engine/travelers.js");
+  const ledgerRows = [];
+  for (const f of readdirSync(join(root, "world/ledger")).filter(x => x.endsWith(".json"))) {
+    const j = rj(`world/ledger/${f}`);
+    ledgerRows.push(...(Array.isArray(j) ? j : (j.events || j.rows || [])));
+  }
+  const saves337 = new Map();
+  for (const d of readdirSync(join(root, "characters"))) {
+    let files = []; try { files = readdirSync(join(root, `characters/${d}`)); } catch { continue; }
+    for (const f of files.filter(x => x.endsWith(".json"))) { try { const j = rj(`characters/${d}/${f}`); if (j?.id) saves337.set(j.id, j); } catch { /* a save mid-write is not this gate's business */ } }
+  }
+  check("§337: ⚠️ the fixture reads the REAL shared ledger and the REAL saves — a zero here would pass every claim below vacuously",
+    ledgerRows.length >= 40 && saves337.size >= 5, `${ledgerRows.length} rows · ${saves337.size} saves`);
+
+  // ⛔ THE STATE THE SPEC FOUND, AND IT IS ABSOLUTE. Not "most rows are vague" — NO row has ever carried a person key.
+  const keyed337 = ledgerRows.filter(r => Array.isArray(r.people) && r.people.length);
+  check("§337: ⛔ EVERY ROW WRITTEN BEFORE THIS CARRIES NO PERSON KEY AT ALL — so the person-keyed reader has never had anything to key on, and the fallback below is not a courtesy, it is the whole of the shared world's history. ⚠️ This check INVERTS the day rows start being written: when it goes red, delete it and assert the new rows instead",
+    keyed337.length === 0, `${keyed337.length} of ${ledgerRows.length} rows carry people[]`);
+
+  // ⛔ THE WRITER USES THE READER'S OWN MATCHER — driven over every live row against its own author's registry.
+  const normName337 = (s) => String(s || "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+  let checkedRows = 0, missed = [];
+  for (const r of ledgerRows) {
+    const save = saves337.get(r.who);
+    if (!save?.npcRegistry) continue;
+    checkedRows++;
+    const got = new Set(TV.ledgerPeopleFor({ what: r.what, registry: save.npcRegistry }).map(p => p.id));
+    // whoever the READER would find in this prose must be in what the WRITER produced
+    for (const p of Object.values(save.npcRegistry)) {
+      if (!p?.id || !p?.name) continue;
+      const seenByReader = TV.peopleInTheirStory({ id: "x", name: "x" }, [r], { registry: { [p.id]: p } }).length > 0;
+      if (seenByReader && !got.has(p.id)) missed.push(`${r.worldDay}:${p.id}`);
+    }
+  }
+  check("§337: ⛔ THE WRITER PRODUCES EVERY PERSON THE READER WOULD HAVE FOUND — driven over every live row against that row's own author's registry, not a fixture. ⚠️ The two share ONE matcher (`hasWords`, whole words, four characters) and live in one file for exactly this reason: a writer that matched differently would hand back a key the reader would never have made, and the disagreement would be invisible until somebody's GM invented a person who already existed",
+    checkedRows >= 30 && missed.length === 0, `${checkedRows} rows driven · misses: ${missed.slice(0, 5).join(", ") || "none"}`);
+
+  // ⛑ COURTNEY'S ROW, WHICH IS THE ONE THE SPEC WAS WRITTEN ABOUT.
+  const vreniRow = ledgerRows.find(r => /wayhouse healer/i.test(r.what || ""));
+  const adel = vreniRow ? saves337.get(vreniRow.who) : null;
+  const byProse = adel ? TV.ledgerPeopleFor({ what: vreniRow.what, registry: adel.npcRegistry }) : [];
+  const byScene = adel ? TV.ledgerPeopleFor({ what: vreniRow.what, registry: adel.npcRegistry, presentNames: ["Sister Vreni"] }) : [];
+  check("§337: ⛑ …AND A ROW WRITTEN BY ROLE IS RESCUED BY WHO WAS STANDING THERE — \"A wayhouse healer named a patient\" names nobody, and the writer had `sister-vreni` (\"Wayhouse sister from the pass road wayhouse\") in the very registry it was reading. ⚠️ The two kinds of evidence are LABELLED, because they are not equally strong: `named` is what the words say, `present` is only who was there, and a row about a boar must not be filed under the woman standing next to it",
+    !!vreniRow && !!adel && byProse.length === 0
+    && byScene.length === 1 && byScene[0].id === "sister-vreni" && byScene[0].why === "present"
+    && byScene[0].role && /wayhouse/i.test(byScene[0].role),
+    JSON.stringify({ prose: byProse, scene: byScene }));
+
+  // ⛔ AND THE READER BINDS ON THE KEY — while the fifty unkeyed rows still read exactly as they did.
+  const namedRow = ledgerRows.find(r => /Mara Wells/.test(r.what || ""));
+  const anySave = [...saves337.values()].find(s => s?.npcRegistry?.["mara-wells"]);
+  const asUnkeyed = anySave ? TV.peopleInTheirStory({ id: "t", name: "t" }, [{ ...namedRow }], { registry: anySave.npcRegistry }) : [];
+  const asKeyed = anySave ? TV.peopleInTheirStory({ id: "t", name: "t" }, [{ ...namedRow, people: [{ id: "mara-wells", name: "Mara Wells" }] }], { registry: anySave.npcRegistry }) : [];
+  const wrongKey = anySave ? TV.peopleInTheirStory({ id: "t", name: "t" }, [{ what: "somebody did a thing", people: [{ id: "mara-wells", name: "Mara Wells" }] }], { registry: anySave.npcRegistry }) : [];
+  check("§337: ⛔ THE READER TAKES THE KEY WHEN THERE IS ONE AND THE PROSE WHEN THERE IS NOT — a row that names who it is about beats a guess at what the writer already knew; a key binds a row whose prose names nobody; and the fallback NEVER EXPIRES, because a reader that understood only the new shape would have emptied the shared world's entire history on the day it shipped",
+    asUnkeyed.some(p => p.name === "Mara Wells" && p.deeds.length === 1)
+    && asKeyed.some(p => p.name === "Mara Wells" && p.deeds.length === 1)
+    && wrongKey.some(p => p.name === "Mara Wells" && p.deeds.length === 1),
+    JSON.stringify({ unkeyed: asUnkeyed.map(p => p.name), keyed: asKeyed.map(p => p.name) }));
+
+  // ⛔ BOTH ROW CONSTRUCTORS, AND THE COLLAPSE.
+  const A337 = rd("app.js"), W337 = rd("engine/worldtick.js");
+  const constructors = (A337.match(/appendLedger\(/g) || []).length;
+  check("§337: ⛔ EVERY DOOR A ROW IS BUILT AT CARRIES THE KEY, AND THE COLLAPSE UNIONS IT — app.js builds a row in two places (the turn's `ledgerEvents` and a quest ending's `recordLedger`) and the turn one is a strict field ALLOWLIST, so a field not named there is dropped in silence. ⚠️ And `collapseLedgerEvents` already unioned `tags` and `impactsLocal`: a `people[]` left out of that union would mean the survivor of two accounts of one beat forgot whoever only the other account named",
+    (A337.match(/people: ledgerPeopleFor\(/g) || []).length === 2 && constructors >= 2
+    && /import \{[^}]*\bledgerPeopleFor\b[^}]*\} from "\.\/engine\/travelers\.js"/.test(A337)
+    && /twin\.people = \[\.\.\.by\.values\(\)\]/.test(W337),
+    `${(A337.match(/people: ledgerPeopleFor\(/g) || []).length} constructors carry it · ${constructors} appendLedger call sites`);
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

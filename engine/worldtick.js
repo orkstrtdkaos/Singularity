@@ -1052,6 +1052,13 @@ export function collapseLedgerEvents(entries = [], { withinMinutes = 20, overlap
     if (String(e.what || "").length > String(twin.what || "").length) twin.what = e.what;
     twin.tags = [...new Set([...(twin.tags || []), ...(e.tags || [])])];
     twin.impactsLocal = twin.impactsLocal || e.impactsLocal;
+    // ⛔ CCODE-461: AND THE PEOPLE UNION TOO. Tags and impactsLocal already did; a `people[]` left out here would
+    // mean the survivor of two accounts of one beat silently forgot whoever only the other account named.
+    if ((twin.people || []).length || (e.people || []).length) {
+      const by = new Map();
+      for (const p of [...(twin.people || []), ...(e.people || [])]) if (p?.id && !by.has(p.id)) by.set(p.id, p);
+      twin.people = [...by.values()];
+    }
     twin.collapsed = (twin.collapsed || 1) + 1;
   }
   return out;

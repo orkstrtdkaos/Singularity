@@ -201,6 +201,42 @@ function hasWords(haystack, needle) {
   return new RegExp(`(^| )${needle.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}( |$)`).test(haystack);
 }
 
+/** ⛔ WHO A LEDGER ROW IS ABOUT, AS A KEY RATHER THAN AS PROSE. Aevi's finding (`SPEC_aevi_ledger_names_and_npc
+ *  _promotion.md`): *"the reader keyed by PERSON reads these"* — and measured over all three months, **not one of
+ *  the fifty rows carries a person key of any kind.** So the pipe is whole and the payload is anonymous.
+ *
+ *  ⚠️ THE CASE THAT PROVES IT. Courtney's row reads *"A wayhouse healer named a patient whose pulse has worsened
+ *  overnight"*. At that moment her own registry held `sister-vreni` — "Sister Vreni", *"Wayhouse sister from the
+ *  pass road wayhouse"*. ⛑ The writer had her, with the very role it then paraphrased, and dropped her; the next
+ *  GM to read that row invented a Vreni, because nothing told it there already was one.
+ *
+ *  ⛔ TWO KINDS OF EVIDENCE, AND THEY ARE LABELLED, because they are not equally strong:
+ *   • `named`   — the prose says their name, matched by `hasWords`, THE READER'S OWN MATCHER. A writer that
+ *                 matched differently from the reader would hand back a key the reader would not have made.
+ *   • `present` — they were in the scene this beat. ⚠️ Weaker on purpose: a row about a boar names nobody and is
+ *                 not about the woman standing there. Kept because it is the ONLY thing that can rescue a row
+ *                 written by role, and `why` lets a reader weigh it rather than having to trust it.
+ *  ⛑ PURE, and deliberately here rather than in app.js: this and `peopleInTheirStory` must use one matcher, or
+ *  the writer and the reader disagree about who a row is about. */
+export function ledgerPeopleFor({ what = "", registry = {}, presentNames = [] } = {}) {
+  const text = normName(what);
+  const present = new Set((presentNames || []).map(n => normName(n)).filter(Boolean));
+  const out = [];
+  const seen = new Set();
+  for (const r of Object.values(registry || {})) {
+    if (!r?.id || !r?.name || seen.has(r.id)) continue;
+    const k = normName(r.name);
+    if (!k) continue;
+    const named = hasWords(text, k) || (r.aliases || []).some(a => hasWords(text, normName(a)));
+    const here = present.has(k);
+    if (!named && !here) continue;
+    seen.add(r.id);
+    out.push({ id: r.id, name: String(r.name).trim(), role: r.role ? String(r.role).slice(0, 80) : null, why: named ? "named" : "present" });
+  }
+  // the ones the words actually name come first, and the list is capped: a row is a sentence, not a census
+  return out.sort((a, b) => (a.why === b.why ? 0 : a.why === "named" ? -1 : 1)).slice(0, 6);
+}
+
 /** ⛔ THE OTHER TRAVELERS THESE WORDS NAME.
  *
  *  Full name as whole words, or the GIVEN name alone — because nobody says "Silas Weir" twice in a conversation.
@@ -281,8 +317,20 @@ export function peopleInTheirStory(traveler, deeds, { sceneNames = [], registry 
   };
   for (const n of scene) consider(n, true);
   for (const r of Object.values(registry || {})) if (r?.name) consider(r.name, sceneSet.has(normName(r.name)));
+  // ⛔ THE KEY FIRST, THE PROSE SECOND (CCODE-461). A row that carries `people[]` says who it is about; matching
+  // its prose is a guess at what the writer already knew. ⚠️ The fallback is not optional and never expires: the
+  // fifty rows written before this existed carry no key at all, and a reader that only understood the new shape
+  // would have quietly emptied the shared world's whole history on the day it shipped.
+  const idOf = new Map();
+  for (const r of Object.values(registry || {})) if (r?.id && r?.name) idOf.set(r.id, normName(r.name));
   for (const [k, p] of people) {
-    for (const d of deeds) if (hasWords(normName(d.what), k)) p.deeds.push(d);
+    for (const d of deeds) {
+      const keyed = Array.isArray(d.people) && d.people.length;
+      const hit = keyed
+        ? d.people.some(x => (x?.id && idOf.get(x.id) === k) || (x?.name && normName(x.name) === k))
+        : hasWords(normName(d.what), k);
+      if (hit) p.deeds.push(d);
+    }
   }
   const ids = new Map(Object.values(registry || {}).filter(r => r?.id && r?.name).map(r => [r.id, normName(r.name)]));
   for (const v of Array.isArray(canon) ? canon : []) {

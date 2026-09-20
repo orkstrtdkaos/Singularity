@@ -3,16 +3,100 @@
   "title": "LedgerEvent",
   "description": "Append-only world consequence. Players APPEND these; only the world-tick consolidates them into region state. Nobody ever edits region files directly. This is what lets multiple characters share one persistent world without write conflicts.",
   "type": "object",
-  "required": ["schemaVersion", "at", "who", "where", "what"],
+  "required": [
+    "schemaVersion",
+    "at",
+    "who",
+    "where",
+    "what"
+  ],
   "properties": {
-    "schemaVersion": { "type": "integer" },
-    "at": { "type": "string", "description": "ISO timestamp" },
-    "who": { "type": "string", "description": "characterId (or 'world' for tick-generated events)" },
-    "playerKey": { "type": "string" },
-    "where": { "type": "string", "description": "locationId" },
-    "what": { "type": "string", "description": "Short factual description, e.g. 'records_stolen: filtration purity logs taken from Radiant array office'" },
-    "tags": { "type": "array", "items": { "type": "string" } },
-    "spectrumDeltas": { "type": "object", "additionalProperties": { "type": "number" } },
-    "visibility": { "type": "string", "enum": ["public", "witnessed", "hidden"], "default": "witnessed" }
-  }
+    "schemaVersion": {
+      "type": "integer"
+    },
+    "at": {
+      "type": "string",
+      "description": "ISO timestamp"
+    },
+    "who": {
+      "type": "string",
+      "description": "characterId (or 'world' for tick-generated events)"
+    },
+    "playerKey": {
+      "type": "string"
+    },
+    "where": {
+      "type": "string",
+      "description": "locationId"
+    },
+    "what": {
+      "type": "string",
+      "description": "Short factual description, e.g. 'records_stolen: filtration purity logs taken from Radiant array office'"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "spectrumDeltas": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "number"
+      }
+    },
+    "visibility": {
+      "type": "string",
+      "enum": [
+        "public",
+        "witnessed",
+        "private",
+        "hidden",
+        "unseen"
+      ],
+      "default": "witnessed"
+    },
+    "worldDay": {
+      "type": "integer",
+      "description": "absolute world day, shared across every device"
+    },
+    "impactsLocal": {
+      "type": "boolean",
+      "description": "SNG-041/145: crosses into another player's area, so it waits in escrow for a confirm"
+    },
+    "people": {
+      "type": "array",
+      "description": "⛔ CCODE-461: WHO THE ROW IS ABOUT, as a key rather than as prose. The reader on the other side is keyed by person; before this, no row carried one. Derived at the writer from the author's own npcRegistry.",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "the author's npcRegistry key"
+          },
+          "name": {
+            "type": "string"
+          },
+          "role": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "why": {
+            "enum": [
+              "named",
+              "present"
+            ],
+            "description": "named = the prose says so; present = they were merely in the scene, which is weaker and labelled so a reader can weigh it"
+          }
+        }
+      }
+    }
+  },
+  "_note": "⚠️ NOTHING READS THIS FILE. The effective validator is the field allowlist in app.js where a row is built (two places: the turn's `ledgerEvents` and a quest ending's `recordLedger`), and a field absent from THAT is dropped in silence whatever this says. Kept accurate as documentation — it drifted before (no `worldDay`, no `impactsLocal`, and a `visibility` enum missing two of the values in live rows). CCODE-461."
 }

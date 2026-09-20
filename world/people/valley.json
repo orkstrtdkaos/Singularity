@@ -398,7 +398,7 @@
       }
     },
     "the_undefeated": {
-      "status": "wounded",
+      "status": "stopped",
       "diedWorldDay": 41,
       "killedBy": "thornmother_sealed",
       "returnedFromDeath": {
@@ -407,11 +407,13 @@
       },
       "woundedUntilDay": 89,
       "woundedBy": "the_starless",
-      "sinceWorldDay": 81,
-      "atWorldDay": 81,
+      "sinceWorldDay": 82,
+      "stoppedUntilDay": 85,
+      "stoppedBy": "the_starless",
+      "atWorldDay": 82,
       "fateBy": {
-        "characterId": "char-mrhs8286",
-        "name": "Silas Weir"
+        "characterId": "char-mr5ns3hh",
+        "name": "Adelheid"
       }
     },
     "the_doubting_lattice": {
@@ -551,6 +553,17 @@
       "fateBy": {
         "characterId": "char-msgpisca",
         "name": "Splarf"
+      }
+    },
+    "the_penitent_maw": {
+      "status": "stopped",
+      "sinceWorldDay": 82,
+      "stoppedUntilDay": 85,
+      "stoppedBy": "the_starless",
+      "atWorldDay": 82,
+      "fateBy": {
+        "characterId": "char-mr5ns3hh",
+        "name": "Adelheid"
       }
     }
   }

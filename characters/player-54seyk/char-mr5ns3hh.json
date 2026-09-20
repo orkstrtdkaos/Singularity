@@ -42,6 +42,10 @@
       "abilityId": "drumline_stride",
       "level": 1,
       "native": true
+    },
+    {
+      "abilityId": "chord_of_mending",
+      "level": 1
     }
   ],
   "alignment": {
@@ -5846,7 +5850,7 @@
     "wits": 4
   },
   "pendingSubPoints": 0,
-  "skillPoints": 2,
+  "skillPoints": 0,
   "discoveries": [],
   "codex": {
     "schemaVersion": 1,
@@ -6209,16 +6213,11 @@
     "uses": {
       "echo_sense": 8,
       "sonic_resonance": 2,
-      "tremor_sense": 4
+      "tremor_sense": 4,
+      "chord_of_mending": 6
     },
     "coActivations": {},
-    "aspirations": [
-      {
-        "abilityId": "chord_of_mending",
-        "since": "2026-07-08T17:56:44.256Z",
-        "progress": 6
-      }
-    ],
+    "aspirations": [],
     "lastUsed": {
       "tremor_sense": 80,
       "echo_sense": 80
@@ -6487,8 +6486,8 @@
   "bands": [],
   "_silasGrantsRevoked": true,
   "reconcileVersion": 72,
-  "updatedAt": 1789874035996,
-  "rev": 73,
+  "updatedAt": 1789874089804,
+  "rev": 75,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -6816,5 +6815,31 @@
   "questImages": {
     "quest-the-wyrm-of-endings-stage-s1": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Figures%20on%20a%20high%20ridge%20tracking%20a%20hill-sized%20dragon%20in%20distant%20flight%2C%20a%20swathe%20of%20grey%20stilled%20land%20marking%20where%20it%20has%20passed.%2C%20mild%20peril%2C%20no%20gore%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=60123&nologo=true",
     "quest-the-patient-who-is-not-sick-enough-stage-s1": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/a%20healer's%20hands%20taking%20a%20pulse%20at%20a%20man's%20wrist%20in%20a%20stone-floored%20infirmary%2C%20morning%20light%2C%20herbs%20drying%20overhead%2C%20mild%20peril%2C%20no%20gore%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=16250&nologo=true"
+  },
+  "_suggestCache": {
+    "level": 2,
+    "picks": [
+      {
+        "abilityId": "chord_of_mending",
+        "why": "This is the aspiration they declared at 6/10 progress — they said they wanted it, it's reachable now, and it gives their sound-craft a restorative dimension their all-sensing, no-healing kit entirely lacks.",
+        "fit": "aspiration"
+      },
+      {
+        "abilityId": "sound_read",
+        "why": "A cerebral, strategic mason who leans hard on Echo Sense and Tremor Sense already reads spaces through vibration — Sound Read adds structural diagnosis by touch, deepening exactly the information-gathering mode they actually play in, for just 1pt.",
+        "fit": "strength"
+      },
+      {
+        "abilityId": "thingcraft",
+        "why": "They have no way to appraise or protect against deception about materials and objects — a strategist-scholar who never uses Stillness Field or Drumline Stride is clearly not a mover or blocker, but a reader; Thingcraft fills the material-truth gap their sonic senses can't cover when a thing is still.",
+        "fit": "gap"
+      },
+      {
+        "abilityId": "stone_read",
+        "why": "At 1pt it costs half what most picks do, flows directly from their mason domain in the same plain-method school they already train, and adds tactile material-truth to complement the acoustic truth they already hold — a natural, low-cost deepening of their signature information stack.",
+        "fit": "synergy"
+      }
+    ],
+    "note": "They have 2 skill points and Chord of Mending is the declared destination — taking it now is the move; the remaining 0pt (or 1pt if Stone-Read pairs with it) leaves little room to add more this level, so the real choice is: claim the aspiration now, or bank toward a richer combo next level."
   }
 }

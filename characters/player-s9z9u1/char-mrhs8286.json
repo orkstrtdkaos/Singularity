@@ -6840,33 +6840,6 @@
       {
         "day": 18,
         "worldDay": 81,
-        "text": "Overseer Grael of the Edge District has not been seen at home in a long while — whatever is happening has all of them.",
-        "tier": "murmur",
-        "section": "world",
-        "locationId": "radiant_plateau_edge"
-      },
-      {
-        "day": 18,
-        "worldDay": 81,
-        "text": "The Hollow King of the Wild Half has not been seen at home in a long while — whatever is happening has all of them.",
-        "tier": "murmur",
-        "section": "world",
-        "locationId": "the_maw"
-      },
-      {
-        "day": 18,
-        "worldDay": 81,
-        "text": "Saehara the Undefeated has dug in over The Poles Pull.",
-        "tier": "murmur",
-        "section": "world",
-        "figureId": "the_undefeated",
-        "arcId": "arc_the_poles_pull",
-        "locationId": "the_great_coliseum",
-        "placedBy": "figureId"
-      },
-      {
-        "day": 18,
-        "worldDay": 81,
         "text": "Ossian: Ossian secured a brief audience with the deputy registrar at the North Gate Registry, leaving a formal letter of intent to be placed on record — a small bureaucratic foothold, but a real one.",
         "tier": "ambient",
         "section": "world",
@@ -7039,13 +7012,46 @@
         "tier": "ambient",
         "section": "world",
         "figureId": "logana"
+      },
+      {
+        "day": 18,
+        "worldDay": 82,
+        "text": "At Whistling Woman Post you sold Trade-Knives (pair) for 4 crystal.",
+        "tier": "event",
+        "section": "yours"
+      },
+      {
+        "day": 18,
+        "worldDay": 82,
+        "text": "The Starless One turned The Penitent Maw back. The Penitent Maw learned something, which is worse for everyone else.",
+        "tier": "event",
+        "section": "world",
+        "kind": "clash",
+        "winnerId": "the_starless",
+        "loserId": "the_penitent_maw",
+        "outcome": "stopped",
+        "locationId": "the_slow_stair",
+        "placedBy": "winnerId"
+      },
+      {
+        "day": 18,
+        "worldDay": 82,
+        "text": "The Starless One turned Saehara the Undefeated back. Saehara the Undefeated learned something, which is worse for everyone else.",
+        "tier": "event",
+        "section": "world",
+        "kind": "clash",
+        "winnerId": "the_starless",
+        "loserId": "the_undefeated",
+        "outcome": "stopped",
+        "locationId": "the_slow_stair",
+        "placedBy": "winnerId"
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-09-20T02:40:56.239Z",
+    "lastSharedReadAt": "2026-09-20T11:35:59.502Z",
     "lastTickWorldDay": 82,
     "lastCanonWorldDay": 82,
-    "lastGenCount": 1970,
+    "lastGenCount": 1979,
     "turnsSinceOffer": 4,
     "recentOffers": [
       {
@@ -7583,7 +7589,7 @@
         "kind": "decision",
         "premise": "The valley's miller has been quietly shorting grain weights for two seasons to cover a debt owed to a creditor in the Center, and a farmer is beginning to suspect.",
         "cause": "The valley is agricultural and the mill sits at the heart of its trade, making the miller both trusted and positioned to deceive — and debts flow toward…",
-        "stage": 25,
+        "stage": 26,
         "seededAtCount": 673,
         "surfaced": true,
         "fate": "growing",
@@ -7609,7 +7615,7 @@
         "kind": "decision",
         "premise": "An elder in the Palelands has privately decided to abandon the eastern settlements and consolidate survivors westward, but has told no one, and is already quietly redirecting the communal seed-stores.",
         "cause": "The silting wells are not new to her — she recognized the pattern a season before anyone else, and has been watching it confirm her fear ever since.",
-        "stage": 23,
+        "stage": 24,
         "seededAtCount": 795,
         "surfaced": true,
         "fate": "growing",
@@ -7732,7 +7738,7 @@
         "kind": "decision",
         "premise": "The creditor whose debt the miller is covering has begun drafting a succession of his lending contracts to a junior associate — not from generosity, but because he is quietly preparing to disappear…",
         "cause": "The Center's lending house depends on the creditor's personal reputation as surety for a web of agreements; his private knowledge that the books are unsound…",
-        "stage": 10,
+        "stage": 11,
         "seededAtCount": 1721,
         "surfaced": true,
         "fate": "growing",
@@ -7769,7 +7775,7 @@
         "kind": "decision",
         "premise": "A senior courier dispatcher has quietly begun rerouting the fastest riders away from the eastern Palelands run, prioritizing Center-to-valley traffic, and the eastern settlements' messages are…",
         "cause": "The Center's commerce depends on the valley's grain flow, and with murmurs of trouble in the east, the dispatcher is protecting the routes that pay — a…",
-        "stage": 9,
+        "stage": 10,
         "seededAtCount": 1839,
         "surfaced": true,
         "fate": "growing",
@@ -7782,7 +7788,7 @@
         "kind": "decision",
         "premise": "A junior courier who runs documents between the lending house and its valley clients has begun holding certain receipts an extra day before delivery, giving herself time to read them — she has not…",
         "cause": "The Center's lending house routes sensitive financial correspondence through low-paid runners who are expected to be illiterate; this courier is not.",
-        "stage": 9,
+        "stage": 10,
         "seededAtCount": 1886,
         "surfaced": true,
         "fate": "growing",
@@ -12860,7 +12866,7 @@
         }
       },
       "the_undefeated": {
-        "status": "wounded",
+        "status": "stopped",
         "diedWorldDay": 41,
         "killedBy": "thornmother_sealed",
         "returnedFromDeath": {
@@ -12869,7 +12875,13 @@
         },
         "woundedUntilDay": 89,
         "woundedBy": "the_starless",
-        "sinceWorldDay": 81
+        "sinceWorldDay": 82,
+        "stoppedUntilDay": 85,
+        "stoppedBy": "the_starless",
+        "fateBy": {
+          "characterId": "char-mr5ns3hh",
+          "name": "Adelheid"
+        }
       },
       "the_war_ender": {
         "status": "stopped",
@@ -13157,6 +13169,16 @@
         "fateBy": {
           "characterId": "char-msgpisca",
           "name": "Splarf"
+        }
+      },
+      "the_penitent_maw": {
+        "status": "stopped",
+        "sinceWorldDay": 82,
+        "stoppedUntilDay": 85,
+        "stoppedBy": "the_starless",
+        "fateBy": {
+          "characterId": "char-mr5ns3hh",
+          "name": "Adelheid"
         }
       }
     },
@@ -14752,7 +14774,11 @@
         ]
       }
     ],
-    "newsSpread": {},
+    "newsSpread": {
+      "char-mr5ns3hh::2026-09-20T03:09:42.247Z": [
+        "waystone"
+      ]
+    },
     "lastEpicDeathDay": 76,
     "figureCares": {
       "halvex_coil": [
@@ -15582,7 +15608,7 @@
     "fatesReadWorldDay": 82,
     "companionWishSeen": {},
     "quarteredAtCount": 1962,
-    "updatesToldTo": "2.3.5",
+    "updatesToldTo": "2.3.6",
     "newsLog": [
       {
         "day": 18,
@@ -15968,6 +15994,42 @@
         "worldDay": 82,
         "text": "The game was updated to v2.3.5 — 4 new, 1 fixed.",
         "loggedAt": "2026-09-20T02:41:12.620Z"
+      },
+      {
+        "day": 18,
+        "worldDay": 82,
+        "text": "At Whistling Woman Post you sold Trade-Knives (pair) for 4 crystal.",
+        "tier": "event",
+        "section": "yours",
+        "loggedAt": "2026-09-20T11:36:07.089Z"
+      },
+      {
+        "day": 18,
+        "worldDay": 82,
+        "text": "The Starless One turned The Penitent Maw back. The Penitent Maw learned something, which is worse for everyone else.",
+        "tier": "event",
+        "section": "world",
+        "kind": "clash",
+        "winnerId": "the_starless",
+        "loserId": "the_penitent_maw",
+        "outcome": "stopped",
+        "locationId": "the_slow_stair",
+        "placedBy": "winnerId",
+        "loggedAt": "2026-09-20T11:36:07.089Z"
+      },
+      {
+        "day": 18,
+        "worldDay": 82,
+        "text": "The Starless One turned Saehara the Undefeated back. Saehara the Undefeated learned something, which is worse for everyone else.",
+        "tier": "event",
+        "section": "world",
+        "kind": "clash",
+        "winnerId": "the_starless",
+        "loserId": "the_undefeated",
+        "outcome": "stopped",
+        "locationId": "the_slow_stair",
+        "placedBy": "winnerId",
+        "loggedAt": "2026-09-20T11:36:07.089Z"
       }
     ]
   },
@@ -19833,8 +19895,8 @@
     }
   ],
   "portrait": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1789873132542,
-  "rev": 2207,
+  "updatedAt": 1789904167089,
+  "rev": 2209,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -27492,7 +27554,7 @@
     },
     {
       "text": "At Whistling Woman Post you sold Trade-Knives (pair) for 4 crystal.",
-      "announced": false
+      "announced": true
     }
   ],
   "sceneImages": {

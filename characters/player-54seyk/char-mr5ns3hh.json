@@ -6,7 +6,7 @@
   "origin": "harmonic",
   "background": "medic",
   "level": 2,
-  "xp": 110,
+  "xp": 115,
   "attributes": {
     "physical": 2,
     "mental": 5,
@@ -46,6 +46,10 @@
     {
       "abilityId": "chord_of_mending",
       "level": 1
+    },
+    {
+      "abilityId": "motes_vigil",
+      "level": 1
     }
   ],
   "alignment": {
@@ -60,7 +64,7 @@
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 129,
-  "energy": 119,
+  "energy": 114,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -117,6 +121,24 @@
       "qty": 1,
       "description": "A two-node cutting from the uncatalogued east-terrace plants, wrapped in boiled linen. Root angle (20° below horizontal, south-southeast) and node spacing noted in charcoal on the margin. Pale sap at the cut end — no name for it yet.",
       "consumable": false
+    },
+    {
+      "id": null,
+      "name": "Usnea Lichen (wrapped)",
+      "kind": "consumable",
+      "qty": 1,
+      "description": "Gray-green old-man's beard lichen, four tufts harvested from the second-terrace stone walls and the north-facing elder bark. Wrapped in boiled linen. Gently antibiotic — good for drawing a sealed deep infection while stronger medicine is fetched. Enough for a first preparation, not a full course.",
+      "consumable": true,
+      "_contract": {
+        "verdict": "reject",
+        "missing": [
+          "id"
+        ],
+        "vague": [
+          "effect-resolvable",
+          "consumable-spends-to-something"
+        ]
+      }
     }
   ],
   "deeds": [
@@ -262,46 +284,51 @@
         "player": "Check the medicine shelf again — given what the numbers show, think through what grows on the high terraces that could treat what this looks like, and what could be mistaken for it",
         "summary": "Adelheid read the shelf against the patient's numbers and saw the shape of what is killing him — a deep infection sealed beneath healed skin — but the high-terrace plant that treats it has a dangerous look-alike she cannot yet reliably distinguish from memory alone.",
         "narration": "You turn back to the shelf with the patient's numbers in mind — 68 at dawn, climbing toward 75 on waking, nailbed color slow at three seconds, skin warm and dry. A body spending more than its situation demands. You run the possibilities in the order a working healer would: his wound is clean, the fever is low and steady, the presentation is almost ordinary. Almost.\n\nThe shelf gives you part of what you need. The yarrow and willow bark are there for fever-work, and the meadowsweet will ease the ache he is not admitting to. But what the numbers point toward — a deep infection walled in beneath a healed surface, spreading in the blood rather than showing at the skin — wants something the shelf does not have. Calendula would help at the wound site if you opened it again. Goldenrod, taken as a strong infusion, would support the blood itself, push the body toward clearing what it cannot see. You have goldenrod in the satchel, enough for two or three days' infusions.\n\nThe harder question is what grows on the high terraces. You know the terraces have not been harvested in two seasons — Vreni said so without saying so, the way a careful woman names a gap she has learned to manage around. What you are trying to picture is the difference between two plants that grow near each other up there: one a true cleanser, used before the Transition by valley healers for exactly this kind of seated infection, and one that looks nearly identical and would do the opposite — would seal the inflammation in tighter and drive the fever faster. You can name the cleanser. The look-alike you know by its branching only, not its name, and the branching is almost the same.\n\nYou are not certain enough, not yet. The goldenrod will buy him time. But the terrace plants are a two-hour climb, and you would need to see them in your hands to be sure of the difference.\n\n*✦ The Patient Who Is Not Sick Enough — Codex: it has to be opened again, which is the thing nobody wants to do to a man who is finally walking. And it has to be opened with something to give him at the same time, or you will take away the only thing holding him up..*"
+      },
+      {
+        "player": "Go out and find usnea lichen",
+        "summary": "Adelheid slipped out at dawn and gathered usnea lichen from the terrace walls and the elder at the field's edge — a partial harvest, enough to begin a preparation and buy the patient time while she climbs for fever-root.",
+        "narration": "The wayhouse is still quiet when you slip out, Vreni's careful nod following you to the door — she'll watch him. The sluice-road is cold and pale in the early light, the stone cut running silver with dew, and the autumn air carries the smell of wet earth and something faintly resinous from the coppice below.\n\nYou know usnea when you see it — the old-man's beard lichen, gray-green and finely branched, hanging from bark in cool shaded places. It is good for deep infections, gently antibiotic, and the terraces here are old enough that the stone walls and elder trees at their edges might hold it. The high terraces are where you want to be, but you are working quickly and the light is thin.\n\nYou find some. Not a full course — the walls of the second terrace hold three reasonable tufts, and the elder at the field's edge carries a fourth, larger clump where the bark is rough and north-facing. It is enough for a first preparation, enough to begin drawing the infection while you go up for the fever-root that will do the real work. You pull the tufts clean, shake off the bark grit, and wrap them in a length of boiled linen from the satchel. They smell faintly of cold rain and old wood.\n\nAevi drifts up from your shoulder and hovers briefly near the largest clump, motes brightening with interest. \"Not the cure,\" she says quietly, into your ear. \"But a mercy while you climb for the rest.\" She is not wrong.\n\n*✦ Usnea Lichen (wrapped) — added to your pack.*\n*  Usnea Lichen (wrapped) carries no mechanical effect yet — it is a story item until one is set.*"
       }
     ],
     "lastTurn": {
-      "narration": "You turn back to the shelf with the patient's numbers in mind — 68 at dawn, climbing toward 75 on waking, nailbed color slow at three seconds, skin warm and dry. A body spending more than its situation demands. You run the possibilities in the order a working healer would: his wound is clean, the fever is low and steady, the presentation is almost ordinary. Almost.\n\nThe shelf gives you part of what you need. The yarrow and willow bark are there for fever-work, and the meadowsweet will ease the ache he is not admitting to. But what the numbers point toward — a deep infection walled in beneath a healed surface, spreading in the blood rather than showing at the skin — wants something the shelf does not have. Calendula would help at the wound site if you opened it again. Goldenrod, taken as a strong infusion, would support the blood itself, push the body toward clearing what it cannot see. You have goldenrod in the satchel, enough for two or three days' infusions.\n\nThe harder question is what grows on the high terraces. You know the terraces have not been harvested in two seasons — Vreni said so without saying so, the way a careful woman names a gap she has learned to manage around. What you are trying to picture is the difference between two plants that grow near each other up there: one a true cleanser, used before the Transition by valley healers for exactly this kind of seated infection, and one that looks nearly identical and would do the opposite — would seal the inflammation in tighter and drive the fever faster. You can name the cleanser. The look-alike you know by its branching only, not its name, and the branching is almost the same.\n\nYou are not certain enough, not yet. The goldenrod will buy him time. But the terrace plants are a two-hour climb, and you would need to see them in your hands to be sure of the difference.\n\n*✦ The Patient Who Is Not Sick Enough — Codex: it has to be opened again, which is the thing nobody wants to do to a man who is finally walking. And it has to be opened with something to give him at the same time, or you will take away the only thing holding him up..*",
-      "sceneSummary": "Adelheid read the shelf against the patient's numbers and saw the shape of what is killing him — a deep infection sealed beneath healed skin — but the high-terrace plant that treats it has a dangerous look-alike she cannot yet reliably distinguish from memory alone.",
+      "narration": "The wayhouse is still quiet when you slip out, Vreni's careful nod following you to the door — she'll watch him. The sluice-road is cold and pale in the early light, the stone cut running silver with dew, and the autumn air carries the smell of wet earth and something faintly resinous from the coppice below.\n\nYou know usnea when you see it — the old-man's beard lichen, gray-green and finely branched, hanging from bark in cool shaded places. It is good for deep infections, gently antibiotic, and the terraces here are old enough that the stone walls and elder trees at their edges might hold it. The high terraces are where you want to be, but you are working quickly and the light is thin.\n\nYou find some. Not a full course — the walls of the second terrace hold three reasonable tufts, and the elder at the field's edge carries a fourth, larger clump where the bark is rough and north-facing. It is enough for a first preparation, enough to begin drawing the infection while you go up for the fever-root that will do the real work. You pull the tufts clean, shake off the bark grit, and wrap them in a length of boiled linen from the satchel. They smell faintly of cold rain and old wood.\n\nAevi drifts up from your shoulder and hovers briefly near the largest clump, motes brightening with interest. \"Not the cure,\" she says quietly, into your ear. \"But a mercy while you climb for the rest.\" She is not wrong.\n\n*✦ Usnea Lichen (wrapped) — added to your pack.*\n*  Usnea Lichen (wrapped) carries no mechanical effect yet — it is a story item until one is set.*",
+      "sceneSummary": "Adelheid slipped out at dawn and gathered usnea lichen from the terrace walls and the elder at the field's edge — a partial harvest, enough to begin a preparation and buy the patient time while she climbs for fever-root.",
       "choices": [
         {
-          "label": "Tell the patient plainly what you suspect — a deep infection sealed beneath the wound — and that you need to open it again and look",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Bring the usnea back to the wayhouse and prepare a first application for the patient now, before climbing",
+          "attribute": "practical",
+          "subAttribute": "craft",
           "axes": {
-            "falsehood_truth": 0.5,
-            "death_life": 0.3
+            "death_life": 0.3,
+            "destruction_creation": 0.2
           },
-          "difficulty": "normal",
+          "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "honest",
             "help",
-            "negotiate"
+            "craft",
+            "sustain"
           ],
-          "abilityId": null,
-          "energyCost": null,
+          "abilityId": "chord_of_mending",
+          "energyCost": 10,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Ask Vreni what she knows of the high-terrace plants — whether she has ever harvested them, and whether she can describe the two that grow together there",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Head up to the third and fourth terraces immediately — find the fever-root before the light gets steep and the look-alike grows harder to read",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "axes": {
-            "concrete_abstract": -0.3,
-            "falsehood_truth": 0.3
+            "death_life": 0.4,
+            "concrete_abstract": -0.2
           },
-          "difficulty": "easy",
+          "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
+            "travel",
             "study",
-            "negotiate",
             "careful"
           ],
           "abilityId": null,
@@ -311,138 +338,125 @@
           "emergenceId": null
         },
         {
-          "label": "Start the goldenrod infusion now — buy him time — and set out for the high terraces as soon as it is brewing to see the plants in your hands",
-          "attribute": "practical",
-          "subAttribute": "craft",
+          "label": "Ask Aevi to help you read the terrace plants from here — let her pattern-sense run over what is visible before you commit to the climb",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "axes": {
-            "death_life": 0.4,
-            "destruction_creation": 0.3
+            "concrete_abstract": 0.2,
+            "mechanical_spiritual": 0.1
           },
           "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "help",
+            "study",
             "careful",
-            "sustain"
+            "scout"
           ],
-          "abilityId": "chord_of_mending",
-          "energyCost": 10,
+          "abilityId": "echo_sense",
+          "energyCost": 4,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
       ],
-      "deeds": [],
       "characterDeltas": {
         "health": 0,
         "energy": 0,
-        "xp": 0
-      },
-      "ledgerEvents": [],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "the-patient-who-is-not-sick-enough",
-          "note": "Adelheid identified the likely cause — a deep infection sealed beneath a healed wound surface, spreading in the blood — and named the treatment: goldenrod for now, and a high-terrace plant she cannot yet safely distinguish from its dangerous look-alike."
-        }
-      ],
-      "stageOps": [
-        {
-          "questId": "the-patient-who-is-not-sick-enough",
-          "stageId": "s2",
-          "evidence": "Adelheid reasoned from pulse, nailbed color, and wound presentation to a clear diagnosis: deep infection sealed beneath healed skin, spreading in blood — the wound must be reopened and the terrace cleanser obtained, but cannot be confused with its look-alike."
-        }
-      ],
-      "scene": {
-        "setting": "Inside the wayhouse — low stone room, hearth banked to orange coals, gray dawn light strengthening at the window. Trestle table with Adelheid's notes and the Medic's Satchel open beside them.",
-        "npcsPresent": [
+        "inventoryAdd": [
           {
-            "name": "Sister Vreni",
-            "state": "standing near the hearth, watching Adelheid with quiet attention, her own cup held in both hands"
-          },
-          {
-            "name": "The Patient",
-            "state": "behind the far curtain, pretending at ease; pulse 68 at dawn, climbing"
+            "name": "Usnea Lichen (wrapped)",
+            "kind": "consumable",
+            "description": "Gray-green old-man's beard lichen, four tufts harvested from the second-terrace stone walls and the north-facing elder bark. Wrapped in boiled linen. Gently antibiotic — good for drawing a sealed deep infection while stronger medicine is fetched. Enough for a first preparation, not a full course.",
+            "consumable": true,
+            "effects": {}
           }
         ],
-        "objects": [
-          "Medic's Satchel open on trestle table",
-          "jar shelf: stocked with Adelheid's additions — yarrow, willow bark, meadowsweet, goldenrod present",
-          "Adelheid's notes on the patient's numbers",
-          "second cup of tea — untouched on the ledge beside the pallet",
-          "curtained pallets — far curtain drawn closed again",
-          "iron pot — cold, valerian dregs"
-        ],
-        "threads": [
-          "Patient's infection is deep and sealed — wound must be reopened; he does not know this yet",
-          "High-terrace cleanser plant has a dangerous look-alike — cannot be safely distinguished from memory alone",
-          "Goldenrod in the satchel will buy time but is not the cure",
-          "Patient gave a false or shortened name — two parties have asked after him at the gate",
-          "Three weeks ago: travelers heading upstream would have passed through here — Vreni not yet asked",
-          "Aevi matched the Precursor pulse at the runnel — not yet discussed"
-        ]
+        "inventoryRemove": [],
+        "xp": 2
       },
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "sister-vreni",
-          "note": "Watched Adelheid work through the shelf against the patient's numbers — reading gaps and possibilities with a healer's discipline",
-          "statusNote": "At the wayhouse; holding the patient's dawn pulse count; watching Adelheid reason toward a diagnosis"
+          "name": "Sister Vreni",
+          "note": "Watched Adelheid go without comment — is holding the patient at the wayhouse while Adelheid gathers",
+          "statusNote": "At the wayhouse, watching the patient while Adelheid gathers on the terraces"
         }
       ],
+      "scene": {
+        "setting": "Outside on the sluice-road and the second terrace, early dawn, cold autumn light on dew-wet stone. The wayhouse is a few minutes back down the road; the upper terraces rise ahead. Aevi drifts near Adelheid's shoulder.",
+        "npcsPresent": [
+          {
+            "name": "Aevi",
+            "state": "hovering near the harvested lichen, motes bright with interest, then settling back to Adelheid's shoulder"
+          }
+        ],
+        "objects": [
+          "Usnea Lichen (wrapped) — four tufts in boiled linen, just harvested",
+          "Medic's Satchel — open, needle and linen visible",
+          "Stone terrace walls — second terrace, old mortar, north-facing elder at the field's edge"
+        ],
+        "threads": [
+          "Patient behind the wayhouse curtain — infection is sealed and spreading; usnea buys time, fever-root is still needed",
+          "Third and fourth terraces — fever-root and its look-alike hush-leaf grow in the same stony beds; daylight is the ally here",
+          "Two parties have asked after the patient by name at the gate — he gave a false or shortened name"
+        ]
+      },
       "codexUpdates": [
         {
           "topic": "the-patient-who-is-not-sick-enough",
           "label": "The Patient Who Is Not Sick Enough",
           "kind": "mystery",
-          "fact": "The presenting wound is not the cause — a deep infection has been sealed beneath healed skin and is spreading in the blood. Treatment requires reopening the wound and a high-terrace cleanser plant, which has a dangerous look-alike that must be identified by sight. Goldenrod infusion will buy time. The terrace plants have not been harvested in two seasons.",
+          "fact": "Usnea lichen — old-man's beard, gray-green and finely branched — grows on the second-terrace stone walls and the north-facing elder bark above the wayhouse. Gently antibiotic; a first preparation can begin drawing the deep infection while fever-root is fetched from the higher terraces.",
           "links": [
             "maras-errand",
             "sister-vreni",
             "millbrook",
-            "the-patient-who-is-not-sick-enough"
+            "uncatalogued-terrace-plants"
           ]
         }
       ],
+      "placeUpdates": [
+        {
+          "note": "Usnea lichen confirmed growing on the second-terrace north-facing stone walls and the elder at the field's edge — harvestable in early autumn at dawn.",
+          "subPlace": {
+            "name": "Second Terrace — Elder and Stone Walls",
+            "parent": "Millbrook",
+            "note": "North-facing elder bark and old mortar walls hold usnea lichen; harvested dawn of day 3.",
+            "visited": true
+          }
+        }
+      ],
       "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A short morning examination and reasoning session at the medicine shelf"
+        "hoursPassed": 0.5,
+        "why": "A quick dawn foray along the sluice-road to the second terrace and back — half an hour of careful harvesting in cold early light"
       },
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Inside the wayhouse — low stone room, hearth banked to orange coals, gray dawn light strengthening at the window. Trestle table with Adelheid's notes and the Medic's Satchel open beside them.",
+      "setting": "Outside on the sluice-road and the second terrace, early dawn, cold autumn light on dew-wet stone. The wayhouse is a few minutes back down the road; the upper terraces rise ahead. Aevi drifts near Adelheid's shoulder.",
       "npcsPresent": [
         {
-          "name": "Sister Vreni",
-          "state": "standing near the hearth, watching Adelheid with quiet attention, her own cup held in both hands"
-        },
-        {
-          "name": "The Patient",
-          "state": "behind the far curtain, pretending at ease; pulse 68 at dawn, climbing"
+          "name": "Aevi",
+          "state": "hovering near the harvested lichen, motes bright with interest, then settling back to Adelheid's shoulder"
         }
       ],
       "objects": [
-        "Medic's Satchel open on trestle table",
-        "jar shelf: stocked with Adelheid's additions — yarrow, willow bark, meadowsweet,",
-        "Adelheid's notes on the patient's numbers",
-        "second cup of tea — untouched on the ledge beside the pallet",
-        "curtained pallets — far curtain drawn closed again",
-        "iron pot — cold, valerian dregs"
+        "Usnea Lichen (wrapped) — four tufts in boiled linen, just harvested",
+        "Medic's Satchel — open, needle and linen visible",
+        "Stone terrace walls — second terrace, old mortar, north-facing elder at the fiel"
       ],
       "threads": [
-        "Patient's infection is deep and sealed — wound must be reopened; he does not know this yet",
-        "High-terrace cleanser plant has a dangerous look-alike — cannot be safely distinguished from memory alone",
-        "Goldenrod in the satchel will buy time but is not the cure",
-        "Patient gave a false or shortened name — two parties have asked after him at the gate",
-        "Three weeks ago: travelers heading upstream would have passed through here — Vreni not yet asked"
+        "Patient behind the wayhouse curtain — infection is sealed and spreading; usnea buys time, fever-root is still needed",
+        "Third and fourth terraces — fever-root and its look-alike hush-leaf grow in the same stony beds; daylight is the ally here",
+        "Two parties have asked after the patient by name at the gate — he gave a false or shortened name"
       ]
     },
-    "beats": 9,
+    "beats": 10,
     "subPlace": {
-      "slug": "the-wayhouse",
-      "name": "The Wayhouse",
-      "day": 2
+      "slug": "second-terrace-elder-and-stone-walls",
+      "name": "Second Terrace — Elder and Stone Walls",
+      "day": 3
     }
   },
   "clock": {
@@ -965,7 +979,6 @@
       },
       "relationship": 3,
       "history": [
-        "[d2] Fell in beside Adelheid at the garden gate and is walking the sluice-road back to the wayhouse with her, pace unhurried and sure.",
         "[d2] Noticed Aevi's teal motes flicker but chose not to ask — a considered silence, not ignorance",
         "[d2] Stopped when Adelheid crouched at the runnel — waited without pressing, hands folded, patient",
         "[d2] Resumed walking when Adelheid rose from the runnel — mentioned the wayhouse keeps a light in the window; did not ask what was found at the stone",
@@ -974,7 +987,8 @@
         "[d2] Accepted Adelheid's medicines with careful hands, named the patient she is worried about — a man insisting he is fine whose pulse has already shifted overnight",
         "[d3] Took the patient's dawn pulse as requested — has the number ready; set a second tea cup by Adelheid's pallet without being asked",
         "[d3] Delivered the dawn pulse count — 68, counted twice — before Adelheid was fully risen. Watched her examine the patient without interfering.",
-        "[d3] Watched Adelheid work through the shelf against the patient's numbers — reading gaps and possibilities with a healer's discipline"
+        "[d3] Watched Adelheid work through the shelf against the patient's numbers — reading gaps and possibilities with a healer's discipline",
+        "[d3] Watched Adelheid go without comment — is holding the patient at the wayhouse while Adelheid gathers"
       ],
       "knownFacts": [
         "A mother arrived two days ago with a child running a four-day fever; the wayhouse managed but it was close.",
@@ -996,12 +1010,12 @@
       "gender": "woman",
       "pronouns": "she/her",
       "age": 44,
-      "statusNote": "At the wayhouse; holding the patient's dawn pulse count; watching Adelheid reason toward a diagnosis",
+      "statusNote": "At the wayhouse, watching the patient while Adelheid gathers on the terraces",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 3
       },
-      "met": 15,
+      "met": 16,
       "domains": {
         "primary": "mason"
       },
@@ -1012,7 +1026,6 @@
     "millbrook": {
       "visits": 3,
       "notes": [
-        "[d1] One stem cut cleanly two nodes up on Day 1 midday — pale sap bead at the wound. The plant registered the cut with a momentary hum-spike. The cutting is in Adelheid's possession.",
         "[d1] The silver-stemmed plant roots angle south-southeast at approximately twenty degrees below horizontal, directed toward the Echo River—traced by Echo Sense and confirmed by careful observation. The root system is unified and deep, descending past the terrace foundation. The internal hum travels…",
         "[d1] The Wet Meadows are impassable at dusk in early spring—melt runoff has created standing water and treacherous ground. The river is visible through the tree-line but cannot be reached without serious difficulty.",
         "[d2] The Wet Meadows are impassable at night in early spring — melt water has risen past the terrace drops, standing channels block all southbound approaches. The river is audible but unreachable after dark.",
@@ -1023,7 +1036,8 @@
         "[d2] The Precursor pulse runs directly beneath the sluice-road — confirmed by Echo Sense through the drainage runnel stone at the upper terrace outlet. The road sits over the signal's south-southeast line.",
         "[d2] A low stone single-room building set into the hillside at the top of the sluice-road — working hearth, trestle table, two candles, curtained pallets, shelf of stoppered labeled jars, dried herbs in the rafters. First visited night of day 2.",
         "[d2] Medicine shelf inventory read: valerian-and-hops (open), elderflower (half), plantain (full), yarrow (good), comfrey root (one nearly spent, one sealed), clove oil, feverfew (nearly gone), willow bark (solid), meadowsweet (quarter-jar). Missing: calendula, goldenrod, lemon balm, honey. Empty honey…",
-        "[d2] Adelheid shared medicines from her Medic's Satchel with the wayhouse — calendula oil, goldenrod, yarrow, meadowsweet added to the shelf"
+        "[d2] Adelheid shared medicines from her Medic's Satchel with the wayhouse — calendula oil, goldenrod, yarrow, meadowsweet added to the shelf",
+        "[d3] Usnea lichen confirmed growing on the second-terrace north-facing stone walls and the elder at the field's edge — harvestable in early autumn at dawn."
       ],
       "flags": {
         "plant_hum_confirmed": "day1",
@@ -1085,6 +1099,14 @@
           "lastSeen": 2,
           "visited": true,
           "note": "Medicine shelf partially restocked with Adelheid's own supplies; patient behind far curtain with a worsening but concealed condition"
+        },
+        "second-terrace-elder-and-stone-walls": {
+          "name": "Second Terrace — Elder and Stone Walls",
+          "parentId": "millbrook",
+          "day": 3,
+          "lastSeen": 3,
+          "visited": true,
+          "note": "North-facing elder bark and old mortar walls hold usnea lichen; harvested dawn of day 3."
         }
       },
       "vectorsKnown": [
@@ -1092,9 +1114,9 @@
         "concrete_abstract"
       ],
       "lastEntered": {
-        "slug": "the-wayhouse",
-        "name": "The Wayhouse",
-        "day": 2
+        "slug": "second-terrace-elder-and-stone-walls",
+        "name": "Second Terrace — Elder and Stone Walls",
+        "day": 3
       },
       "lastVisit": 2,
       "_containmentNotes": [
@@ -1388,7 +1410,7 @@
         "locationId": "gen-mara-wells-store"
       }
     ],
-    "turnsSinceOffer": 3,
+    "turnsSinceOffer": 4,
     "recentOffers": [
       {
         "thing": "Mara offers direct access to work as a way of centering yourself—and uses that time to shift the conversation toward the real question…",
@@ -6077,7 +6099,8 @@
           "[d2] Adelheid accepted Sister Vreni's invitation to the pass-road wayhouse. The wayhouse is on the sluice-road — the road Silas would have traveled three weeks ago — and gives Adelheid a position on the upstream route without requiring a direct search.",
           "[d2] Mara's last instruction before Adelheid left: take the stone-cut path, not the wet meadow margin — and tell me what the wayhouse sees. She is using Adelheid as her road-eyes on the upstream route.",
           "[d3] The Patient Who Is Not Sick Enough — Dawn pulse 68 (Vreni's count), rising to 74-75 on brief waking and talking. Nailbed color return slow — three seconds where two is ordinary. Skin warm and dry, wound clean and closed. A body spending more than its situation demands, compensating carefully. The…",
-          "[d3] The Patient Who Is Not Sick Enough — The presenting wound is not the cause — a deep infection has been sealed beneath healed skin and is spreading in the blood. Treatment requires reopening the wound and a high-terrace cleanser plant, which has a dangerous look-alike that must be identified by…"
+          "[d3] The Patient Who Is Not Sick Enough — The presenting wound is not the cause — a deep infection has been sealed beneath healed skin and is spreading in the blood. Treatment requires reopening the wound and a high-terrace cleanser plant, which has a dangerous look-alike that must be identified by…",
+          "[d3] The Patient Who Is Not Sick Enough — Usnea lichen — old-man's beard, gray-green and finely branched — grows on the second-terrace stone walls and the north-facing elder bark above the wayhouse. Gently antibiotic; a first preparation can begin drawing the deep infection while fever-root is fetched…"
         ],
         "links": [
           "mara-wells",
@@ -6267,13 +6290,19 @@
         "to": "maras-errand",
         "why": "beat",
         "day": 3
+      },
+      {
+        "label": "The Patient Who Is Not Sick Enough",
+        "to": "maras-errand",
+        "why": "beat",
+        "day": 3
       }
     ]
   },
   "grantsVersion": 1,
   "customAbilities": {},
   "companionBonds": {
-    "aevi": 5.75
+    "aevi": 6
   },
   "practice": {
     "schemaVersion": 1,
@@ -6348,16 +6377,16 @@
   "itemReclaimVersion": 1,
   "nameRepairVersion": 1,
   "tendencies": {
-    "generous": 5.0622641494698595,
-    "social": 5.565969293364408,
-    "cerebral": 19.531248329269033,
-    "cautious": 15.50468606499258,
-    "strategic": 13.735329700549133,
-    "carousing": 0.7031791944763348,
-    "risky": 0.3524707741736013,
-    "ruthless": 0.8038891383985791,
-    "patient": 0.49218598109595263,
-    "craft": 1.6339909851088494
+    "generous": 4.935707545733113,
+    "social": 5.426820061030298,
+    "cerebral": 20.042967121037307,
+    "cautious": 15.117068913367765,
+    "strategic": 14.391946458035404,
+    "carousing": 0.6855997146144265,
+    "risky": 0.34365900481926126,
+    "ruthless": 0.7837919099386146,
+    "patient": 0.4798813315685538,
+    "craft": 1.5931412104811282
   },
   "aptitudes": [
     "strategist",
@@ -6365,11 +6394,11 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 79,
+  "actionCount": 80,
   "bondLogFrom": null,
   "teachers": {},
   "regionsKnown": {
-    "valley": 40
+    "valley": 41
   },
   "company": [],
   "forkChoices": {},
@@ -6553,8 +6582,8 @@
   "bands": [],
   "_silasGrantsRevoked": true,
   "reconcileVersion": 72,
-  "updatedAt": 1789906832316,
-  "rev": 82,
+  "updatedAt": 1789907606004,
+  "rev": 83,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -6567,7 +6596,7 @@
   "featureOffers": [],
   "_pinsInitialized": true,
   "_opUnknown": {
-    "sceneSummary": 40
+    "sceneSummary": 41
   },
   "_applyFailures": null,
   "sessions": [
@@ -6606,23 +6635,23 @@
     {
       "id": "sess-5",
       "startedAt": "2026-09-20T12:14:30.871Z",
-      "lastAt": "2026-09-20T12:19:56.742Z",
+      "lastAt": "2026-09-20T12:33:25.972Z",
       "startDay": 82,
       "endDay": 82,
-      "beats": 2
+      "beats": 3
     }
   ],
   "_debtReceipts": [],
   "_bandNotes": null,
   "skillUses": {
-    "scout": 7,
+    "scout": 8,
     "study": 11,
     "ask": 3,
     "travel": 7,
     "coerce": 1,
     "threaten": 1,
     "meditate": 1,
-    "investigate": 4,
+    "investigate": 5,
     "analyze": 1,
     "retreat": 1,
     "careful": 9,
@@ -6646,18 +6675,18 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 35,
-    "choices": 35,
+    "sceneSummary": 36,
+    "choices": 36,
     "questUpdates": 23,
-    "scene": 35,
-    "npcUpdates": 31,
-    "placeUpdates": 12,
-    "codexUpdates": 25,
-    "timeOps": 28,
+    "scene": 36,
+    "npcUpdates": 32,
+    "placeUpdates": 13,
+    "codexUpdates": 26,
+    "timeOps": 29,
     "imagePrompt": 8,
     "gambitApt": 21,
-    "sceneEnded": 26,
-    "characterDeltas": 24,
+    "sceneEnded": 27,
+    "characterDeltas": 25,
     "offer": 14,
     "stateOps": 2,
     "deeds": 6,
@@ -6667,7 +6696,7 @@
     "_engineClosedScene": 1,
     "stageOps": 1
   },
-  "_opTurns": 35,
+  "_opTurns": 36,
   "_opCountingSince": "2026-09-15T23:58:48.348Z",
   "gallery": [
     {
@@ -6845,6 +6874,14 @@
       "day": 3,
       "worldDay": 82,
       "actionCount": 78
+    },
+    {
+      "companionId": "aevi",
+      "kind": "assist",
+      "delta": 0.25,
+      "day": 3,
+      "worldDay": 82,
+      "actionCount": 79
     }
   ],
   "companionMemory": {

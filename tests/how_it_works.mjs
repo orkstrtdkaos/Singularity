@@ -8368,15 +8368,26 @@ console.log("\n── §92 · the def is the source at read time · the snapshot
   check("§92: ⛔ …and the WHITELIST is gone — `title` and `imagePrompt` were authored on every stage and dropped on every copy",
     hyd.stages.every(st => st.title) && hyd.stages.some(st => st.imagePrompt));
 
-  // ── ⚑ THE RECORD STILL WINS WHERE PLAY WROTE SOMETHING
-  const played = Q92.hydrateQuest({ id: "the-stag-that-wont-die", stages: [{ id: "s1", objective: "what the player's own beat established" }] }, C92.quests);
-  check("§92: ⚑ …but the RECORD wins where it carries something — the def supplies words, it does not overwrite play",
+  // ── ⚑ THE LINE BETWEEN THEM, AND CCODE-458 MOVED IT ONE LEVEL DOWN
+  // ⚠️ THIS CHECK USED TO ASSERT THE OPPOSITE — that a stage's `objective` on the record beat the def's, "the def supplies
+  // words, it does not overwrite play". ⛔ But nothing in the engine has ever written a word onto a stage (asserted below,
+  // against the sources), so what it was really defending was the FROZEN COPY the minter makes — and that copy is why
+  // Aevi's fix for a stage that gives away its own answer reached nobody already playing (CCODE-458, measured on
+  // Courtney's live save). The rule is OWNERSHIP: the author owns the words, play owns the state.
+  const wordWrite = /\.stages\s*\[[^\]]*\]\s*\.\s*(objective|condition|change|title|truth)\s*=[^=]/;
+  const played = Q92.hydrateQuest({ id: "the-stag-that-wont-die", stageIndex: 1, completedStages: ["s1"], stages: [{ id: "s1", objective: "a stale frozen copy", _severed: true }] }, C92.quests);
+  check("§92: ⛔ THE AUTHOR OWNS THE WORDS AND PLAY OWNS THE STATE — a stage's authored prose comes from the def even when the record carries a copy of it, because a content fix must reach a started quest; every scrap of play state survives untouched; and the `_severed` \"this was cut short\" marker is DROPPED once the def has made the sentence whole, so the GM is not told to avoid quoting an objective that is now perfectly good. ⚠️ The licence for this is that NOTHING in the engine writes a word onto a stage — asserted against the sources, not assumed",
+    played.stages[0].objective !== "a stale frozen copy" && !!played.stages[0].objective
+    && played.stageIndex === 1 && played.completedStages.join() === "s1" && !played.stages[0]._severed
+    && !wordWrite.test(rd("engine/quests.js")) && !wordWrite.test(rd("app.js")) && !wordWrite.test(rd("engine/corrections.js")),
     played.stages[0].objective === "what the player's own beat established" && !!played.stages[0].condition);
 
   // ── ⬜ AND WHERE THE DEF IS GONE, THE SNAPSHOT IS THE ANSWER
   const orphan = { id: "a-quest-whose-content-was-retired", stages: [{ id: "s1", objective: "the only copy left" }] };
   check("§92: ⬜ content retired under a live save — the snapshot survives, which is why a thin one is kept",
     Q92.hydrateQuest(orphan, C92.quests).stages[0].objective === "the only copy left");
+  check("§92: ⚑ …and a RETIRED def is still the one case the snapshot answers — with no def to find, the record is returned whole and untouched, which is what makes the frozen copy worth keeping at all",
+    Q92.hydrateQuest({ id: "a-quest-no-content-has", stages: [{ id: "s1", objective: "the only copy left" }] }, C92.quests).stages[0].objective === "the only copy left");
 
   // ── ⚠️ A TRAILING EMPTY EXTRA GOES; ONE THE PLAYER HAS PASSED DOES NOT
   const extra = Q92.hydrateQuest({ id: "the-mercy-that-wont-ask", stageIndex: 0, stages: [{}, {}, {}, {}] }, C92.quests);
@@ -8390,7 +8401,9 @@ console.log("\n── §92 · the def is the source at read time · the snapshot
   const gmSrc = rd("engine/gm_registry.js"), qSrc = rd("engine/quests.js");
   check("§92: ⛔ the GM's readers go THROUGH the def — a hydrator nothing calls would be this spec's own defect",
     /defs: env\.CONTENT\.quests/.test(gmSrc) && /questsForGM\(env\.character, env\.CONTENT\.quests\)/.test(gmSrc)
-    && /opts\.defs \? questsFor\(character, opts\.defs\)/.test(qSrc));
+    // ⚠️ CCODE-458 renamed the GM's own read to `questsForGMView` — the player door now STRIPS the GM-eyes truth, so the GM
+    // needed a door of its own. The invariant is unchanged and is what this asserts: the GM's block is built from the def.
+    && /opts\.defs \? questsForGMView\(character, opts\.defs\)/.test(qSrc));
 
   // ── ⚑ AND THE MEASURED DIFFERENCE, END TO END: the GM's own block gains the stage it was missing.
   const save92 = { quests: [{ id: "the-stag-that-wont-die", status: "active", structured: true, stageIndex: 0, completedStages: [], stages: [{}, {}, {}], routes: {} }] };
@@ -15920,6 +15933,11 @@ console.log("\n── §228 · the stage arrived with its arity and none of its 
   for (const d of defs228) for (const st of (d.stages || [])) if (st && typeof st === "object") for (const k of Object.keys(st)) authoredKeys.add(k);
   check("§228: the corpus really was read — a zero here would pass the claim below vacuously",
     authoredKeys.size >= 6, `${authoredKeys.size} distinct stage fields across ${defs228.length} quests`);
+  // ⛔ ONE FIELD IS EXCLUDED ON PURPOSE AND IT IS NAMED HERE, because an unexplained exception to this gate is how the
+  // whitelist came back. `truth` is the GM-eyes drawer (CCODE-458): writing a secret into the save would duplicate it away
+  // from the content that owns it and leave a stale copy outliving the author's correction. `hydrateQuest` fetches it from
+  // the def for the GM, so it fails ABSENT rather than EXPOSED — the direction a spoiler field must fail in.
+  const EXCLUDED228 = ["truth"];
   const dropped = [];
   for (const d of defs228.slice(0, 40)) {
     const c = { quests: [], worldState: {} };
@@ -15927,11 +15945,16 @@ console.log("\n── §228 · the stage arrived with its arity and none of its 
     const stored = c.quests[0]?.stages || [];
     (d.stages || []).forEach((src, i) => {
       if (!src || typeof src !== "object") return;
-      for (const k of Object.keys(src)) if (stored[i] && !(k in stored[i])) dropped.push(`${d.id}.${k}`);
+      for (const k of Object.keys(src)) if (stored[i] && !(k in stored[i]) && !EXCLUDED228.includes(k)) dropped.push(`${d.id}.${k}`);
     });
   }
-  check("§228: ⛔ NO authored stage field is dropped on the way into the save",
+  check("§228: ⛔ NO authored stage field is dropped on the way into the save — except `truth`, which is excluded on purpose and by name",
     dropped.length === 0, [...new Set(dropped)].slice(0, 6).join(", ") || "every field of every stage survives");
+  const probe228 = { id: "_x", name: "x", stages: [{ id: "s1", objective: "o", condition: "c", truth: "GM-EYES-ONLY: the secret" }], outcomes: [{ id: "a", name: "A", summary: "s", effects: [] }] };
+  const stored228 = Q228.structuredQuestRecord(probe228).stages[0];
+  check("§228: ⛑ …and that exclusion is PROVED, not just permitted — a stage carrying a `truth` stores its every other word and stores no secret",
+    stored228.objective === "o" && stored228.condition === "c" && !("truth" in stored228),
+    JSON.stringify(Object.keys(stored228)));
 
   /* ---- 3 · ⚠️ AND THE PROSE IS STILL NORMALISED, because that was the whitelist's one real job ---- */
   // ⛑ A literal "\\n" out of authored JSON has to become a newline or it renders as two characters on the
@@ -23934,6 +23957,97 @@ console.log("\n── §334 · the field — the authored 44 named, any window a
     && !/^\s*import\s/m.test(srcTxt) && !/elevationGrid|encoding\.|layers\./.test(srcTxt)
     && spreadTiny > 0.02,
     JSON.stringify({ floor: FD.TERRAIN_FEATURE_FLOOR_DEG, finestTerrainCell: terrainCell, fieldSpreadAcross_0_2deg: +spreadTiny.toFixed(4) }));
+}
+
+// ══════════ §335 · CCODE-458 — A QUEST GETS A DRAWER, AND A CONTENT FIX REACHES A STARTED QUEST ══════════
+// Aevi's finding from Courtney's play (cc4678624): "quests have no GM-eyes. EVERY FIELD A QUEST HAS IS TOLD." `premise` and
+// `stakes` render in full, and `objective`, `condition` and `change` are the GM's brief, which the GM is instructed to pay out
+// plainly — so an author holding a secret had nowhere to put it except somewhere it gets said, and one quest's stakes duly gave
+// away two later stages before the first was done. ⛑ "This is not an author being careless. It is a schema with no drawer."
+//
+// ⚠️ AND MEASURING THE FIX FOUND A SECOND THING, WHICH IS THE ONE THAT WOULD HAVE BITTEN ERIK'S NEXT ASK. Reads went through the
+// def (`hydrateQuest`, SNG-542) but WRITES read the frozen copy in the save — so an ending AUTHORED AFTER A QUEST STARTED drew a
+// button off the def and then refused it off the record: "unknown outcome". Every save in flight, and exactly the path a new
+// FAILURE ending takes.
+console.log("\n── §335 · the GM-eyes drawer, and the def reaching a started quest ──");
+{
+  const QS = await import("../engine/quests.js");
+  const def335 = {
+    id: "the_fixture_patient", name: "The Fixture", region: "valley", tier: "local", giver: "somebody", axis: "death_life",
+    premise: "A man came down off the road with a wound that had been cleaned properly.",
+    stakes: "He has perhaps four days of looking fine left.",
+    truth: "GM-EYES-ONLY: he is not called what he says he is.",
+    stages: [
+      { id: "s1", title: "He looks well", objective: "Count a resting pulse and count it again.", condition: "Two sets, six hours apart.", change: "Codex: dawn pulse 96, evening 112." },
+      { id: "s2", title: "Name it", objective: "Find the real fault rather than the presenting one.", condition: "State a diagnosis and say which observations support it.", change: "Codex: it has to be opened again.",
+        truth: "GM-EYES-ONLY: a deep infection walled in beneath a healed surface, spreading in the blood." },
+    ],
+    outcomes: [{ id: "treated", name: "Treated", summary: "He lives.", effects: [] }],
+  };
+  const mk335 = () => { const c = { name: "Fixture", quests: [], actionCount: 0 }; QS.startStructuredQuest(c, def335); return c; };
+
+  // ⛔ THE DRAWER, AND THE PLAYER DOOR NEVER RETURNS IT. The exclusion is by DELETION at the one call a player surface makes,
+  // not by nine renderers each remembering a filter — the same shape as `worldArcsPublic`, and for the same reason.
+  const c335 = mk335();
+  const seen = QS.questsFor(c335, [def335]);
+  const gm335 = QS.questsForGMView(c335, [def335]);
+  const anyTruth = (q) => !!(q.truth || (q.stages || []).some(s => s?.truth) || (q.outcomes || []).some(o => o?.truth));
+  check("§335: ⛔ A QUEST HAS A GM-EYES DRAWER AND THE PLAYER DOOR NEVER RETURNS IT — `truth` is what the character is there to work out, and `questsFor` (the call every player surface makes) comes back with it deleted from the quest, from every stage and from every outcome, while the GM's own read keeps it. Aevi: \"an author holding a secret has nowhere to put it except somewhere it gets said\" — and spoiler discipline is INHERITED here, not re-decided at each of the nine surfaces that draw a quest",
+    !anyTruth(seen[0]) && anyTruth(gm335[0]) && gm335[0].truth === def335.truth && gm335[0].stages[1].truth === def335.stages[1].truth
+    && !("truth" in QS.structuredQuestRecord(def335)) && !QS.structuredQuestRecord(def335).stages.some(s => "truth" in s),
+    JSON.stringify({ playerSees: Object.keys(seen[0]).includes("truth"), gmSees: !!gm335[0].truth, inTheSaveFile: "truth" in QS.structuredQuestRecord(def335) }));
+
+  // ⛔ THE DEF WINS ON THE WORDS. Measured on Courtney's live save before the fix: editing `stakes` reached her and editing a
+  // stage's `objective`, `condition` or `change` did NOT — the record carries frozen copies and was spread LAST. So an author
+  // fixing a stage that gives away its own answer fixed it for nobody already playing.
+  const c336 = mk335();
+  const edited335 = JSON.parse(JSON.stringify(def335));
+  edited335.stakes = "REWRITTEN stakes.";
+  edited335.stages[0].objective = "REWRITTEN objective.";
+  edited335.stages[0].condition = "REWRITTEN condition.";
+  edited335.stages[0].change = "REWRITTEN change.";
+  edited335.stages[1].truth = "REWRITTEN truth.";
+  c336.quests[0].stageIndex = 1; c336.quests[0].completedStages = ["s1"];   // play state the record owns
+  const after = QS.questsFor(c336, [edited335])[0];
+  check("§335: ⛔ A CONTENT FIX REACHES A STARTED QUEST, ONE LEVEL FURTHER DOWN THAN IT DID — the def wins on every authored WORD of a stage, exactly as it already won on `premise` and `stakes`, while the record keeps every scrap of play state. The half that was missing is the half an author needs: re-cutting a stage's reveal from a conclusion to the observations that earn it used to reach nobody already playing",
+    after.stakes === "REWRITTEN stakes." && after.stages[0].objective === "REWRITTEN objective."
+    && after.stages[0].condition === "REWRITTEN condition." && after.stages[0].change === "REWRITTEN change."
+    && QS.questsForGMView(c336, [edited335])[0].stages[1].truth === "REWRITTEN truth."
+    && after.stageIndex === 1 && JSON.stringify(after.completedStages) === JSON.stringify(["s1"]),
+    JSON.stringify({ objective: after.stages[0].objective, stageIndex: after.stageIndex, completed: after.completedStages }));
+
+  // ⛔ THE REVEAL PAID OUT IS THE AUTHORED ONE, and the stage gate reads the def's stages too.
+  const c337 = mk335();
+  const recut = JSON.parse(JSON.stringify(def335));
+  recut.stages[0].change = "Codex: dawn pulse 96, evening 112. Nailbed two seconds this morning, nearer four now.";
+  const adv = QS.advanceStructuredQuest(c337, { questId: def335.id, stageId: "s1", evidence: "She counted it twice." }, { defs: [recut] });
+  check("§335: ⛑ AND THE EARNED REVEAL IS THE AUTHORED ONE — `change` is paid into the player's progress off the DEF, so re-cutting a reveal from a MEANING to a MEASUREMENT lands on a quest already in play. Aevi's rule for a diagnostic quest: deliver observations, withhold interpretation — a conclusion in the reveal is the quest answering the question the player is there to answer",
+    adv.ok === true && adv.change === recut.stages[0].change
+    && (c337.quests[0].progress || []).includes(recut.stages[0].change)
+    && !(c337.quests[0].progress || []).includes(def335.stages[0].change),
+    JSON.stringify({ ok: adv.ok, paid: adv.change }));
+
+  // ⛔ THE DEAD BUTTON. The screen draws the endings off the def; resolve looked them up on the frozen record.
+  const c338 = mk335();
+  const grown = JSON.parse(JSON.stringify(def335));
+  grown.outcomes.push({ id: "he_dies", name: "Too Late", summary: "He dies.", effects: [] });
+  c338.quests[0].stageIndex = def335.stages.length; c338.quests[0].awaitingResolution = true;
+  const drew = QS.questsFor(c338, [grown])[0].outcomes.some(o => o.id === "he_dies");
+  const pressed = QS.resolveStructuredQuest(c338, def335.id, "he_dies", { defs: [grown] });
+  const stale = QS.resolveStructuredQuest(mk335(), def335.id, "he_dies", {});   // no defs → the old frozen read
+  check("§335: ⛔ AN ENDING AUTHORED AFTER A QUEST STARTED IS A LIVE BUTTON, NOT A DEAD ONE — the screen already drew it from the def while `resolveStructuredQuest` looked it up on the save's frozen copy and answered \"unknown outcome\", on every save in flight. ⚠️ That is the exact path a new FAILURE ending takes, so a quest could not be taught to end badly without this: the read and the write have to agree about what the endings ARE",
+    drew === true && pressed.ok === true && c338.quests[0].outcomeId === "he_dies"
+    && stale.ok === false && stale.why === "unknown outcome",
+    JSON.stringify({ rendered: drew, resolved: pressed.ok, withoutTheDefs: stale.why }));
+
+  // ⛑ AND THE TWO DIRECTIVES MUST NOT BE CONFUSED.
+  const c339 = mk335();
+  const gmLines = QS.structuredQuestsForGM(c339, { defs: [def335] }).join("\n");
+  check("§335: ⛔ THE GM IS TOLD WHICH KIND OF TRUTH EACH ONE IS, BECAUSE THE TWO DIRECTIVES ARE OPPOSITE — a stage's `change` is an EARNED reveal the GM states PLAINLY the moment the stage closes; `truth` is a GM-eyes secret the player is there to work out, and gm.js rule 4 governs it: earned fragments, never plainly. ⚠️ A drawer that arrives under the same instruction as the reveal is just one more place the answer gets said",
+    /GM-EYES-ONLY/.test(gmLines) && gmLines.includes(def335.truth) && gmLines.includes(def335.stages[0].change)
+    && /NEVER state this plainly/.test(gmLines) && /STATE PLAINLY/.test(gmLines)
+    && !/GM-EYES-ONLY[^\n]*dawn pulse/.test(gmLines),
+    JSON.stringify({ carriesTruth: /GM-EYES-ONLY/.test(gmLines), carriesChange: gmLines.includes(def335.stages[0].change) }));
 }
 
 /* ══════════ REPORT ══════════ */

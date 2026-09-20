@@ -206,6 +206,33 @@ export function questDefIndex(defs) {
  *  ⚠️ Stages are matched by ID where the record has one and by INDEX where it does not (a blank stage has
  *  neither), and a record with MORE stages than its def keeps the extras: `the-mercy-that-wont-ask` carries
  *  four against a def of three, and dropping one would be losing progress to fix prose. PURE. */
+/** The stage keys that are AUTHORED PROSE rather than play state. The def owns these; the record owns the rest. */
+const STAGE_WORDS = ["title", "objective", "condition", "change", "imagePrompt", "unlockHint", "reveals", "truth"];
+
+/** ⛔ GM-EYES, AND THE PLAYER FUNCTION NEVER RETURNS IT. `truth` is what the author knows and the player is
+ *  there to work out — the diagnosis under the symptom, who the patient really is, which of two parties at
+ *  the gate means him harm.
+ *
+ *  ⚠️ AEVI'S FINDING, WHICH IS A SCHEMA FINDING AND NOT AN AUTHORING ONE: "EVERY FIELD A QUEST HAS IS TOLD."
+ *  `premise` and `stakes` render in full, and `objective`, `condition` and `change` are the GM's brief, which
+ *  the GM pays out. So an author holding a secret had nowhere to put it except somewhere it gets said — and
+ *  one quest's `stakes` duly gave away two later stages. ⛑ "This is not an author being careless. It is a
+ *  schema with no drawer."
+ *
+ *  ⛑ THE EXCLUSION IS BY DELETION, NOT BY EVERY RENDERER REMEMBERING — the same shape as `worldArcsPublic`
+ *  in worldtick.js, and for the same reason: spoiler discipline is INHERITED, not re-decided at each of the
+ *  nine surfaces that draw a quest. `questsFor` is the call a player consumer makes and it comes back
+ *  already stripped, so a new quest screen cannot leak a secret by forgetting a filter nobody told it about.
+ *  ⚠️ Arcs also proved the positive half — `publicFace`, the line that IS for the player. Six quest defs
+ *  already carry one and nothing has ever read it; that half is still open. PURE. */
+export function questPublic(q) {
+  if (!q || typeof q !== "object") return q;
+  const { truth, ...rest } = q;
+  if (Array.isArray(rest.stages)) rest.stages = rest.stages.map(s => { if (!s || typeof s !== "object") return s; const { truth: _t, ...r } = s; return r; });
+  if (Array.isArray(rest.outcomes)) rest.outcomes = rest.outcomes.map(o => { if (!o || typeof o !== "object") return o; const { truth: _t, ...r } = o; return r; });
+  return rest;
+}
+
 export function hydrateQuest(record, defs) {
   if (!record) return record;
   const def = questDefIndex(defs)[normQuestId(record.id || record.questId)];
@@ -216,8 +243,15 @@ export function hydrateQuest(record, defs) {
   const stages = (record.stages || []).map((s, i) => {
     const d = (s && s.id && byId[s.id]) || defStages[i] || null;
     if (!d) return s;                                        // an extra stage the def does not have — keep it
-    // the DEF supplies the words; the RECORD keeps anything play wrote onto the stage.
-    return { ...d, ...Object.fromEntries(Object.entries(s || {}).filter(([, v]) => v != null && v !== "")) };
+    // ⛔ THE DEF WINS ON THE WORDS, one level down from premise and stakes — and it did NOT, which is why
+    // "a content fix must reach a started quest" was only half true. ⚠️ MEASURED on Courtney's live save
+    // (CCODE-458): editing `stakes` reached her; editing a stage's `objective`, `condition` or `change` did
+    // NOT, because `structuredQuestRecord` copies those words into the record and the record was spread
+    // LAST. So an author fixing a stage that gives away its own answer fixed it for nobody already playing.
+    // ⛑ Nothing in the engine writes onto a stage object — grepped, zero assignments — so every non-word
+    // key here is play state and still wins.
+    const kept = Object.fromEntries(Object.entries(s || {}).filter(([k, v]) => v != null && v !== "" && !STAGE_WORDS.includes(k)));
+    return { ...d, ...kept };
   });
   // ⚠️ A TRAILING EMPTY EXTRA IS DROPPED, and only a trailing empty one. `the-mercy-that-wont-ask` carries
   // FOUR stages against a def of three, and the fourth is `{}` — it preserves nothing and renders as nothing.
@@ -227,6 +261,14 @@ export function hydrateQuest(record, defs) {
   while (stages.length > floor && !Object.keys(stages[stages.length - 1] || {}).length) stages.pop();
   // a def with MORE stages than the record: the content grew under a started quest, so the new ones appear.
   for (let i = stages.length; i < defStages.length; i++) stages.push({ ...defStages[i] });
+  // ⛔ AND THE "CUT SHORT" WARNING MUST NOT SURVIVE THE REPAIR. SNG-343 marks a stage `_severed` when a
+  // store-time cap cut its objective mid-word, and the GM is told to restate it rather than quote it. Now
+  // that the DEF supplies the words, the sentence is whole again — so leaving the marker on would have the
+  // GM refusing to quote a perfectly good objective, which is a message describing a mechanism that no
+  // longer exists. ⚠️ `routes` was ALREADY def-wins before this change, so `_severedRoutes` has been stale
+  // that whole time for every quest whose def still carries routes.
+  for (const s of stages) if (s && s._severed && byId[s.id]?.objective) delete s._severed;
+  const severedRoutes = def.routes ? [] : (record._severedRoutes || []);
   // ⚠️ THE DEF CALLS IT `name` AND THE RECORD CALLS IT `title` — the same family of mismatch as the id
   // shape, and it left the GM reading the literal word `undefined` as a quest's name. ⛔ Every field the
   // snapshot used to copy is listed here, because a whitelist that forgets one is exactly how this started.
@@ -240,15 +282,38 @@ export function hydrateQuest(record, defs) {
     // ⛑ THE DEF WINS on the prose: that is the whole point — a content fix must reach a started quest.
     premise: def.premise ?? record.premise,
     stakes: def.stakes ?? record.stakes,
+    // ⛔ AND THE GM-EYES TRUTH COMES FROM THE DEF, FULL STOP — the record never carries it (CCODE-458), so if
+    // this line is missing the secret does not exist as far as the GM is concerned. ⚠️ Which is exactly the
+    // whitelist failure the comment above warns about, caught by §335 on the first run: the drawer was built,
+    // the stage half worked, and the quest half was dropped by the one list that had to name it.
+    truth: def.truth ?? record.truth,
     routes: def.routes ?? record.routes,
+    _severedRoutes: severedRoutes.length ? severedRoutes : undefined,
     outcomes: def.outcomes ?? record.outcomes,
     stages,
   };
 }
 
-/** PURE. Every quest on a character, read through the def. The one call a consumer should make. */
+/** PURE. Every quest on a character, read through the def, WITH THE GM-EYES TRUTH REMOVED. The one call a
+ *  PLAYER-FACING consumer should make — and the reason a player surface cannot leak `truth` by omission. */
 export function questsFor(character, defs) {
+  return (character?.quests || []).map(q => questPublic(hydrateQuest(q, defs)));
+}
+
+/** PURE. The same read, for the GM only — `truth` intact. ⚠️ Nothing that renders to a screen may call this. */
+export function questsForGMView(character, defs) {
   return (character?.quests || []).map(q => hydrateQuest(q, defs));
+}
+
+/** ⛔ THE RECORD TO WRITE AND THE WORDS TO READ ARE DIFFERENT OBJECTS, and every write path below needs both.
+ *  ⚠️ MEASURED (CCODE-458): `resolveStructuredQuest` looked its outcome up on the FROZEN record, so an ending
+ *  ADDED to content after a quest started rendered a button — the screen reads the hydrated quest — and then
+ *  answered "unknown outcome" when the player pressed it. A dead button on every save in flight, and exactly
+ *  the path a new FAILURE ending would have taken. ⛑ So: read through the def, write to the record. */
+function questPair(character, questId, ctx = {}) {
+  const record = (character?.quests || []).find(x => x.id === slugify(questId) && x.structured) || null;
+  if (!record) return { record: null, view: null };
+  return { record, view: ctx.defs ? hydrateQuest(record, ctx.defs) : record };
 }
 /** Active-quest block for the GM prompt. */
 export function questsForGM(character, defs = null) {
@@ -339,9 +404,14 @@ export function structuredQuestRecord(def) {
     // ⚠️ SO THE RECORD CARRIES WHAT THE STAGE HAD, minus nothing, with prose normalised where prose lives. An
     // authored field added tomorrow rides along instead of being silently dropped — and §228 fails if the
     // corpus grows a stage field this does not keep.
+    // ⛔ ONE FIELD IS DELIBERATELY NOT CARRIED, AND IT IS THE ONLY ONE: `truth`. A GM-eyes secret written into
+    // the save is a secret in a file, duplicated away from the content that owns it, and a stale copy of it
+    // would outlive the author's own correction. ⛑ SAFE BY DEFAULT: `hydrateQuest` fetches it from the def for
+    // the GM, so if anything goes wrong — retired content, a def that cannot be found — the secret is ABSENT
+    // rather than exposed, which is the direction a spoiler field should fail in. §228 names this exception.
     stages: (def.stages || []).map(s => {
       if (!s || typeof s !== "object") return s;
-      const out = { ...s };
+      const { truth: _gmEyes, ...out } = s;
       for (const k of ["objective", "condition", "change", "title", "unlockHint"]) {
         if (typeof out[k] === "string") out[k] = normalizeProse(out[k]);
       }
@@ -467,9 +537,9 @@ export function stageRequirementsMet(character, stage, ctx = {}) {
 
 export function advanceStructuredQuest(character, op = {}, ctx = {}) {
   const qid = op.questId ? slugify(op.questId) : null;
-  const q = (character.quests || []).find(x => x.id === qid && x.structured);
+  const { record: q, view } = questPair(character, qid, ctx);
   if (!q || q.status !== "active") return { ok: false, why: "no-such-quest", questId: qid };
-  const stages = q.stages || [];
+  const stages = (view || q).stages || [];   // the WORDS and the requirements come off the def; the writes go to q
   const current = stages[q.stageIndex || 0];
   // ALREADY-DONE IS CHECKED FIRST, ahead of the stage-order gate. Once a stage completes the index
   // has moved past it, so a re-report would otherwise come back "not-current-stage" — true, but the
@@ -499,7 +569,7 @@ export function advanceStructuredQuest(character, op = {}, ctx = {}) {
     return { ok: false, why: "requirements-unmet", questId: qid, stageId: op.stageId, missing: req.missing };
   }
 
-  const r = completeQuestStage(character, q.id, op.stageId);   // the EXISTING applier, unchanged
+  const r = completeQuestStage(character, q.id, op.stageId, ctx);   // the EXISTING applier, now def-aware
   if (!r.ok) return { ok: false, why: r.why, questId: qid };
   // The reason the stage advanced is visible to the player, beside the authored change note.
   q.progress = [...(q.progress || []), `↳ ${evidence}`].slice(-12);
@@ -511,10 +581,11 @@ export function advanceStructuredQuest(character, op = {}, ctx = {}) {
   return { ok: true, questId: q.id, title: q.title, change: r.change, stage: r.stage, nextStage: r.nextStage, awaitingResolution: !!q.awaitingResolution };
 }
 
-export function completeQuestStage(character, questId, stageId) {
-  const q = (character.quests || []).find(x => x.id === slugify(questId) && x.structured);
+export function completeQuestStage(character, questId, stageId, ctx = {}) {
+  const { record: q, view } = questPair(character, questId, ctx);
   if (!q || q.status !== "active") return { ok: false, why: "no active structured quest" };
-  const si = q.stages.findIndex(s => s.id === stageId);
+  const words = (view || q).stages || [];
+  const si = (q.stages || []).findIndex(s => s.id === stageId);
   if (si < 0) return { ok: false, why: "unknown stage" };
   q.completedStages = q.completedStages || [];
   if (!q.completedStages.includes(stageId)) q.completedStages.push(stageId);
@@ -523,7 +594,10 @@ export function completeQuestStage(character, questId, stageId) {
   // Counting from the quest's start would make a late stage inherit a debt it never incurred: stage 3 of a
   // long quest would open already satisfied, which is the opposite of what the requirement is for.
   q.stageStartedAt = Number(character?.actionCount) || 0;
-  const change = q.stages[si].change;
+  // ⛔ THE REVEAL PAID OUT IS THE AUTHORED ONE, NOT THE FROZEN ONE. Re-cutting a stage's `change` — from a
+  // conclusion to the observations that earn it — is precisely the fix Aevi's finding asks for, and it used
+  // to reach nobody already playing.
+  const change = (words[si] || q.stages[si] || {}).change;
   if (change && !(q.progress || []).includes(change)) q.progress = [...(q.progress || []), change].slice(-12);
   // CCODE-16: the invariant "every stage behind you → the decision opens" lives HERE, in the one applier
   // BOTH write paths go through (the GM-op path via advanceStructuredQuest, and the manual "Mark this stage
@@ -532,7 +606,7 @@ export function completeQuestStage(character, questId, stageId) {
   // NOT auto-resolve: awaitingResolution only unlocks the outcome menu; choosing the ending stays the player's.
   const done = (q.completedStages.length >= q.stages.length) || (q.stageIndex >= q.stages.length);
   if (done && !q.awaitingResolution) q.awaitingResolution = true;
-  return { ok: true, change, stage: q.stages[si], nextStage: q.stages[q.stageIndex] || null };
+  return { ok: true, change, stage: words[si] || q.stages[si], nextStage: words[q.stageIndex] || q.stages[q.stageIndex] || null };
 }
 
 /** SNG-BATCH-10 BOUNDARY-1 CLOSE: apply an outcome's MACHINE-READABLE effects[] deterministically.
@@ -945,9 +1019,11 @@ export function creditQuestGiver(character, quest) {
 }
 
 export function resolveStructuredQuest(character, questId, outcomeId, ctx = {}) {
-  const q = (character.quests || []).find(x => x.id === slugify(questId) && x.structured);
+  const { record: q, view } = questPair(character, questId, ctx);
   if (!q || q.status !== "active") return { ok: false, why: "not an active structured quest" };
-  const outcome = q.outcomes.find(o => o.id === outcomeId);
+  // ⛔ THE ENDINGS COME OFF THE DEF. The screen already drew them from the def; looking them up here on the
+  // frozen record is what made a newly authored ending a button that refuses itself.
+  const outcome = ((view || q).outcomes || []).find(o => o.id === outcomeId);
   if (!outcome) return { ok: false, why: "unknown outcome" };
   q.status = "resolved";
   creditQuestGiver(character, q);   // ⛔ R37a's sibling: the person who set you on it grew by it
@@ -1078,7 +1154,7 @@ export function routesForCharacter(quest, character) {
 export function structuredQuestsForGM(character, opts = {}) {
   // ⛔ READ THROUGH THE DEF. The record is progress; the words are content. Without this the GM was handed
   // three live quests whose every stage was `{}` and narrated around the hole.
-  const active = (opts.defs ? questsFor(character, opts.defs) : (character.quests || []))
+  const active = (opts.defs ? questsForGMView(character, opts.defs) : (character.quests || []))
     .filter(q => q.structured && q.status === "active");
   if (!active.length) return null;
   const npcs = opts.npcs || {};
@@ -1105,6 +1181,13 @@ export function structuredQuestsForGM(character, opts = {}) {
     }
     // SNG-162 §1: the stage the model may report against, named explicitly. Without the id in the    // SNG-162 §1: the stage the model may report against, named explicitly. Without the id in the
     // prompt the GM cannot emit a stageOp that passes the current-stage gate.
+    // ⛔ THE GM-EYES DRAWER, AND IT IS THE OPPOSITE DIRECTIVE TO `change`. A stage's `change` is an EARNED
+    // truth the GM states PLAINLY once the stage closes; `truth` is what the player is there to WORK OUT, and
+    // gm.js rule 4 governs it — "reveal it only in earned fragments, never plainly". ⚠️ The two must not be
+    // confused, or the drawer becomes another place the answer gets said.
+    for (const [what, text] of [["THIS QUEST", q.truth], ["THIS STAGE", stage?.truth]]) {
+      if (text) line += `\n  GM-EYES-ONLY — ${what} (NEVER state this plainly; it is what the character is here to work out. Deliver OBSERVATIONS and withhold the INTERPRETATION): ${text}`;
+    }
     if (stage?.id && !q.awaitingResolution) {
       line += `\n  CURRENT STAGE ID: "${stage.id}" — if the character's actions THIS BEAT satisfy that condition, emit stageOps for it.`;
       // SNG-239: hand the GM the EARNED REVEAL this stage unlocks — the plain truth to STATE (not a secret to

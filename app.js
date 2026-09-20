@@ -178,7 +178,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.3.7";
+const APP_VERSION = "2.3.8";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -9321,7 +9321,7 @@ function applyTurn(turn, resolution, playerWords = null) {
     _applyPhase = "stageOps";
     const advanced = [], refusedStages = [];
     for (const op of turn.stageOps.slice(0, 3)) {
-      const r = advanceStructuredQuest(character, op, { day: dayNow });
+      const r = advanceStructuredQuest(character, op, { day: dayNow, defs: CONTENT?.quests || null });
       if (r.ok) advanced.push(r); else refusedStages.push(r);
     }
     for (const r of advanced) {
@@ -15254,6 +15254,9 @@ function resolveQuestOutcome(questId, outcomeId, { onDone } = {}) {
   if (!confirm(`Resolve "${q.title}" as “${o.name}”? This is permanent and changes the world.`)) return;
   const day = readClock(character.clock).day;
   const r = resolveStructuredQuest(character, q.id, outcomeId, {
+    // ⛔ CCODE-458: the endings come off the DEF. Without this an ending authored after the quest started
+    // drew a button and then refused it — "unknown outcome" — on every save already in flight.
+    defs: CONTENT?.quests || null,
     worldDay: absoluteWorldDay(), nowISO: new Date().toISOString(),
     // SNG-282: WHERE it was resolved, so the deed it records has somewhere to travel FROM. A deed with no
     // community is a deed `spreadDeeds` skips — the record would exist and never reach anyone.
@@ -15371,7 +15374,7 @@ function renderStructuredQuestDetail(q) {
   </div>`);
   document.getElementById("sq-back").onclick = () => renderQuestLog();
   for (const b of app.querySelectorAll("[data-stagedone]")) b.onclick = () => {
-    const r = completeQuestStage(character, q.id, b.dataset.stagedone);
+    const r = completeQuestStage(character, q.id, b.dataset.stagedone, { defs: CONTENT?.quests || null });
     if (r.ok) { saveCharacter(character); renderStructuredQuestDetail(myQuests().find(x => x.id === q.id)); }
   };
   // SNG-244: the ending buttons and the in-play decision strip both route through resolveQuestOutcome — one path.

@@ -16,6 +16,18 @@
   "next": [],
   "releases": [
     {
+      "version": "2.3.8",
+      "date": "2026-09-20",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "Quests stop telling you the answer",
+          "summary": "A quest can now keep a secret from you, and a correction to a quest reaches the one you are already playing.",
+          "detail": "A quest had nowhere to keep anything back: every field an author could write was a field somebody said out loud, so a quest about working out what is wrong with a patient told you what was wrong with him. Quests now have a place for the things you are meant to work out yourself — the guide knows them, and will let you earn them rather than hand them over. And a fix to a quest now reaches a quest you have already started, including an ending that was added after you began; before, a new ending would appear as a button that refused to do anything."
+        }
+      ]
+    },
+    {
       "version": "2.3.7",
       "date": "2026-09-20",
       "entries": [

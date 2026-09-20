@@ -1404,11 +1404,29 @@ function runSuite() {
   // writer-with-no-reader family belongs — and a requirement could not cite it, so the guard existed
   // and the ledger could not point at it. Same dialect (ok/FAIL), same normalisation at the door.
   for (const f of ["tests/smoke.mjs", "tests/content_ci.mjs", "tests/wiring_audit.mjs"]) {
-    try { parts.push(execFileSync(process.execPath, [join(root, f)], { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 })); }
-    catch (e) { parts.push(String(e.stdout || "")); }
+    let o = "";
+    try { o = execFileSync(process.execPath, [join(root, f)], { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 }); }
+    catch (e) { o = String(e.stdout || ""); }
+    // ⛔ DID IT FINISH? A suite that DIED halfway still hands back everything it printed before it died, and
+    // every gate below that point then reads as MISSING. ⚠️ Aevi read one such run as "96 requirements name a
+    // gate the suite does not contain" and went looking for 96 renamed gates; nothing had been renamed —
+    // `content_ci` had not reached the end. A missing gate and an unfinished suite are DIFFERENT CLAIMS, and
+    // the ledger has to be able to say which one it is saying.
+    // ⛑ The marker is each suite's own terminal line, which it prints in BOTH directions — red or green — so
+    // this tests completion and never outcome. A red suite is expected data here; a truncated one is not.
+    if (!DONE[f].test(o)) unfinished.push(f);
+    parts.push(o);
   }
   return parts.join("\n");
 }
+
+// each suite's last line, in both of its two shapes: it finished, whether or not it was happy
+const DONE = {
+  "tests/smoke.mjs": /^(All smoke tests passed\.|\d+ FAILURE\(S\))\s*$/m,
+  "tests/content_ci.mjs": /^Content CI: (all checks passed\.|\d+ FAILURE\(S\))\s*$/m,
+  "tests/wiring_audit.mjs": /^Wiring audit: (all checks passed\.|\d+ FAILURE\(S\).*)$/m,
+};
+const unfinished = [];
 
 const out = runSuite();
 const lines = out.split(/\r?\n/);
@@ -1427,9 +1445,16 @@ const fail = (msg) => { failures++; problems.push(msg); };
 
 if (results.size === 0) fail("the suite produced no PASS/FAIL lines — the ledger has nothing to stand on");
 
+// ⛔ AN UNFINISHED SUITE IS NOT A SET OF MISSING GATES. Say so once, loudly, and refuse to accuse the rows
+// whose gates live in it — reporting them as "not found" is a true sentence about the output and a false one
+// about the world, and the false one is what somebody acts on.
+let unverifiable = 0;
+for (const f of unfinished) fail(`⛔ ${f} DID NOT FINISH — it stopped before its own terminal line, so every gate it holds is UNVERIFIABLE. This is not a missing gate and not a rename: run that suite on its own and fix why it stopped.`);
+
 for (const row of LEDGER) {
   for (const gate of row.gates) {
     const hits = [...results.keys()].filter(k => k.includes(gate));
+    if (hits.length === 0 && unfinished.length) { unverifiable++; continue; }
     if (hits.length === 0) fail(`${row.id}: gate not found in the suite — "${gate}"`);
     else if (hits.length > 1) fail(`${row.id}: AMBIGUOUS gate "${gate}" matches ${hits.length} checks — a row cannot say which one it stands on`);
     else if (results.get(hits[0]) !== "PASS") fail(`${row.id}: gate is RED — "${hits[0]}"`);
@@ -1475,6 +1500,7 @@ in §4d so any number here can be re-derived rather than trusted.
 function sayVerdict() {
   if (failures) {
     console.log(`LEDGER: ${failures} PROBLEM(S) — a requirement is claiming a verification that is missing, ambiguous, or red:`);
+    if (unverifiable) console.log(`  (and ${unverifiable} further gate(s) could not be checked at all, because the suite holding them did not finish — they are NOT reported as missing)`);
     for (const p of problems) console.log("  · " + p);
   } else {
     console.log(`LEDGER: ok — ${LEDGER.length} requirements, ${gateCount} gates, every one found and green.`);

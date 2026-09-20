@@ -2153,6 +2153,84 @@ for (const pack of PACKS) {
   }
   ok(`SNG-238 §5b: content-shape sweep — ${swept} structured quests checked against consumer-read fields (title / stage id+objective+condition / outcome name+summary)`);
 
+  // ── CCODE-458 · THE GM-EYES DRAWER MUST STAY SHUT ──────────────────────────────────────────────────────
+  // Aevi's finding (cc4678624), from Courtney's play: a structured quest had NO GM-eyes field at any level —
+  // not `truth`, not `gmOnly`, not `secret` — so "EVERY FIELD A QUEST HAS IS TOLD". `premise` and `stakes`
+  // render in full; `objective`, `condition` and `change` are the GM's brief and the GM pays them out. ⛑ "This
+  // is not an author being careless. It is a schema with no drawer." `truth` is the drawer.
+  //
+  // ⚠️ SHE PROPOSED A DIFFERENT GATE AND I MEASURED IT BEFORE BUILDING IT — "no sentence in `stakes` may share
+  // a distinctive noun phrase with a `change` or `objective` of a stage beyond the first." Across all 25
+  // authored quests: at a run of THREE content words it flags four and MISSES the leak it was designed for,
+  // because the patient's stakes give away *"something that looks very like it"* and *"he is not called what
+  // he says he is"* and no later stage repeats those words. At a run of TWO it flags twelve, and the patient
+  // quest's flag lands on *"four days"* — the one sentence her own finding calls ALREADY RIGHT.
+  // ⛔ A detector that fires on the sentence you must keep and stays silent on the two you must cut teaches
+  // the wrong edit. Word overlap measures ADJACENCY; a spoiler is a SEMANTIC fact, and prose cannot be asked.
+  //
+  // ⛑ SO THE GATE ASKS THE AUTHOR'S OWN DECLARATION INSTEAD: whatever a quest marks `truth` must not also be
+  // written where the player reads it. It cannot accuse a quest that declares nothing, and it bites the moment
+  // the drawer is used — which is the only moment anything can know what the secret actually IS.
+  {
+    const STOP = new Set("a an and are as at be been but by for from had has have he her him his if in into is it its of on or she that the their them then there these they this to was were what when which who will with you your not no one own more most very".split(" "));
+    const cw = (s) => String(s || "").toLowerCase().replace(/[^a-z0-9\s-]/g, " ").split(/\s+/).filter(w => w && !STOP.has(w));
+    const RUN = 4;   // four consecutive CONTENT words is a restatement, not an echo
+    /** every run of RUN content words of `secret` that also appears in `open`. PURE. */
+    const restated = (secret, open) => {
+      const A = cw(secret), B = cw(open), out = [];
+      if (A.length < RUN || B.length < RUN) return out;
+      const grams = new Set();
+      for (let i = 0; i + RUN <= B.length; i++) grams.add(B.slice(i, i + RUN).join(" "));
+      for (let i = 0; i + RUN <= A.length; i++) { const g = A.slice(i, i + RUN).join(" "); if (grams.has(g)) out.push(g); }
+      return [...new Set(out)];
+    };
+    /** every field of a quest the PLAYER reads, named rather than inferred. */
+    const playerFacing = (q) => {
+      const out = [["premise", q.premise], ["stakes", q.stakes]];
+      for (const s of q.stages || []) for (const f of ["title", "objective", "condition", "change"]) if (s?.[f]) out.push([`stage ${s.id || "?"}.${f}`, s[f]]);
+      for (const o of q.outcomes || []) { if (o?.summary) out.push([`outcome ${o.id}.summary`, o.summary]); for (const n of o?.narration || []) out.push([`outcome ${o.id}.narration`, n]); }
+      for (const r of Object.values(q.routes || {})) if (r) out.push(["routes", r]);
+      return out;
+    };
+    const leaksIn = (q) => {
+      const secrets = [["quest", q.truth]];
+      for (const s of q.stages || []) if (s?.truth) secrets.push([`stage ${s.id || "?"}`, s.truth]);
+      for (const o of q.outcomes || []) if (o?.truth) secrets.push([`outcome ${o.id}`, o.truth]);
+      const bad = [];
+      for (const [where, secret] of secrets) {
+        if (!secret) continue;
+        for (const [field, text] of playerFacing(q)) {
+          const hits = restated(secret, text);
+          if (hits.length) bad.push(`${where}.truth is restated in ${field} — "${hits[0]}"`);
+        }
+      }
+      return bad;
+    };
+    // ⛔ THE FIXTURE, BECAUSE THE LIVE POPULATION IS ZERO TODAY. A gate over a field nothing declares yet
+    // passes by having nothing to look at, which is the exact shape of a check that never fires. So the
+    // detector is proved on a quest built to leak and on one built not to, right here, every run.
+    const leaky = { id: "_fixture_leaky", truth: "a deep infection walled in beneath a healed surface, spreading in the blood",
+      stakes: "He has four days. It is a deep infection walled in beneath a healed surface and nobody has said so.",
+      stages: [{ id: "s1", objective: "Take a full set of observations twice." }], outcomes: [] };
+    const tight = { id: "_fixture_tight", truth: "a deep infection walled in beneath a healed surface, spreading in the blood",
+      stakes: "He has perhaps four days of looking fine left.",
+      stages: [{ id: "s1", objective: "Count a resting pulse and count it again." }], outcomes: [] };
+    check("[quest] CCODE-458 · the GM-eyes detector actually fires — a `truth` restated in `stakes` is caught, and a quest that keeps its secret is not accused",
+      leaksIn(leaky).length === 1 && leaksIn(tight).length === 0,
+      `leaky → ${JSON.stringify(leaksIn(leaky))} · tight → ${JSON.stringify(leaksIn(tight))}`);
+
+    const withTruth = [];
+    for (const [src, def] of questDefs) {
+      if (!def || (!def.stages && !def.outcomes)) continue;
+      const declares = def.truth || (def.stages || []).some(s => s?.truth) || (def.outcomes || []).some(o => o?.truth);
+      if (!declares) continue;
+      withTruth.push(def.id);
+      const bad = leaksIn(def);
+      check(`[quest] "${def.id}" keeps its GM-eyes truth OUT of everything the player reads`, bad.length === 0, `${src}: ${bad.join(" · ")}`);
+    }
+    ok(`CCODE-458: GM-eyes containment — ${withTruth.length} of ${questDefs.length} quests declare a \`truth\`${withTruth.length ? ": " + withTruth.join(", ") : " (none yet — the drawer is new; the detector above is proved on a fixture so it cannot pass by having nothing to look at)"}`);
+  }
+
   // --- SNG-238 §5b (all content types), DRIVEN BY Aevi's consumer-required-subfield map (§5d) ---
   // CCODE-55 (SNG-250 §4): the map was PROMOTED out of po/staged_content into
   // content/packs/core/rules/consumer_required_subfields.json and registered in the core manifest, so it is

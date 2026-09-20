@@ -58,9 +58,9 @@
  "worldPos": {
   "colatitude": 81.4,
   "longitude": 357,
-  "depth": 0
+  "depth": -1
  },
- "worldPosNote": "⛔ SNG-407: moved 2.99° (5 walking days) onto the nearest coast the built terrain actually has. Erik: 'keep the land as ground truth now and move the locations slightly to fit the land.' Was colatitude 81, longitude 0.",
+ "worldPosNote": "⛔ SNG-407: moved 2.99° (5 walking days) onto the nearest coast the built terrain actually has. Erik: 'keep the land as ground truth now and move the locations slightly to fit the land.' Was colatitude 81, longitude 0.  ⛔ ERIK RULED 2026-09-20: \"They're underground.\" — asked of this place and the Underlight together. So `depth` is BELOW THE SURFACE, and the SNG-391 surface census no longer asks it to stand on the mainland. ⚠️ Before this it PASSED BY LUCK — it happens to sit on connected ground — which is the failure shape Aevi named: a gate that is right for the wrong reason stays right only until the terrain moves. No way in `region_maps` touches it, so nothing declares how deep it lies: −1 is the shallowest claim that is true, exactly as for the Slow Stair.",
  "tier": "settlement",
  "parentId": "the_underlight",
  "appearance": "An unlit market hall of bare stone, stalls reduced to plain counters with nothing set out on them. Goods stay in closed crates behind. Deep shadow throughout, worn floor, no signage anywhere."

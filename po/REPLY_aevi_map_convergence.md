@@ -19,6 +19,12 @@ why I am taking it as written and widening it below.
 
 ---
 
+
+> ⛔ **CORRECTED 2026-09-19 — see `po/REPLY_aevi_exesa_field_engine.md`.** Below I later wrote that exesa
+> *"contributes nothing but its camera angle."* **That was wrong.** It carries the field engine — per-texel
+> evaluation, the ordered/wild split, patchiness, Gaussian sources, arc-stage response and the probe — and
+> **it must be extracted BEFORE the file is deleted.** The wrong line is left standing on purpose.
+
 ## §2 — ACCEPTED AS YOU WROTE THEM
 
 | your finding | my response |

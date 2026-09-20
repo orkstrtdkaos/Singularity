@@ -80,6 +80,37 @@
       },
       "tradition": "marcher",
       "homeland": "the_great_coliseum"
+    },
+    "person-83693e0ee6487310": {
+      "id": "person-83693e0ee6487310",
+      "name": "Sera Voight the Ashvow",
+      "epithet": "the Ashvow",
+      "provisional": false,
+      "tier": "riffraff",
+      "weight": 3,
+      "wants": "to be worth the one who did not come back",
+      "originKind": "casualty_survivor",
+      "region": "the_ceaseless",
+      "arcAffinity": null,
+      "arcAffinities": [
+        {
+          "arcId": "arc_the_poles_pull",
+          "dir": -1,
+          "weight": 1
+        }
+      ],
+      "wantArcId": "arc_the_poles_pull",
+      "personalVerbs": [
+        "asking after the ones who did not"
+      ],
+      "mintedWorldDay": 37,
+      "origin": "of the Ceaseless; stood beside Cinder Vael when the Wright was called out, and outlived it",
+      "legend": {
+        "tier": "riffraff",
+        "weight": 3
+      },
+      "tradition": "wright",
+      "homeland": "the_ceaseless"
     }
   },
   "lives": {},
@@ -346,13 +377,13 @@
       }
     },
     "the_nine_year_master": {
-      "status": "wounded",
-      "woundedUntilDay": 82,
-      "woundedBy": "halcyon_the_finished",
-      "atWorldDay": 74,
+      "status": "stopped",
+      "stoppedUntilDay": 78,
+      "stoppedBy": "the_clockmother",
+      "atWorldDay": 75,
       "fateBy": {
-        "characterId": "char-mrhs8286",
-        "name": "Silas Weir"
+        "characterId": "char-msgpisca",
+        "name": "Splarf"
       }
     },
     "the_edge_seeker": {
@@ -384,22 +415,23 @@
     },
     "the_doubting_lattice": {
       "status": "stopped",
-      "stoppedUntilDay": 74,
+      "stoppedUntilDay": 85,
       "stoppedBy": "the_edge_that_holds",
-      "atWorldDay": 71,
+      "sinceWorldDay": 82,
+      "atWorldDay": 82,
       "fateBy": {
-        "characterId": "char-mrhs8286",
-        "name": "Silas Weir"
+        "characterId": "char-msgpisca",
+        "name": "Splarf"
       }
     },
     "the_war_ender": {
-      "status": "wounded",
-      "woundedUntilDay": 49,
-      "woundedBy": "thornmother_sealed",
-      "atWorldDay": 41,
+      "status": "stopped",
+      "stoppedUntilDay": 47,
+      "stoppedBy": "the_starless",
+      "atWorldDay": 44,
       "fateBy": {
-        "characterId": "char-mrhs8286",
-        "name": "Silas Weir"
+        "characterId": "char-msgpisca",
+        "name": "Splarf"
       }
     },
     "the_one_called_zeus": {
@@ -447,6 +479,77 @@
       "fateBy": {
         "characterId": "char-mr5ns3hh",
         "name": "Adelheid"
+      }
+    },
+    "overseer_grael": {
+      "status": "stopped",
+      "stoppedUntilDay": 43,
+      "stoppedBy": "the_appetite",
+      "atWorldDay": 40,
+      "fateBy": {
+        "characterId": "char-msgpisca",
+        "name": "Splarf"
+      }
+    },
+    "maren_ossitide": {
+      "status": "wounded",
+      "sinceWorldDay": 82,
+      "woundedUntilDay": 90,
+      "woundedBy": "the_gate_that_gapes",
+      "atWorldDay": 82,
+      "fateBy": {
+        "characterId": "char-msgpisca",
+        "name": "Splarf"
+      }
+    },
+    "neth_the_stayed": {
+      "status": "stopped",
+      "stoppedUntilDay": 46,
+      "stoppedBy": "the_starless",
+      "atWorldDay": 43,
+      "fateBy": {
+        "characterId": "char-msgpisca",
+        "name": "Splarf"
+      }
+    },
+    "the_lidded_calm": {
+      "status": "stopped",
+      "stoppedUntilDay": 41,
+      "stoppedBy": "the_ninefold_ascendant",
+      "atWorldDay": 38,
+      "fateBy": {
+        "characterId": "char-msgpisca",
+        "name": "Splarf"
+      }
+    },
+    "the_kind_liar": {
+      "status": "stopped",
+      "stoppedUntilDay": 40,
+      "stoppedBy": "neth_the_stayed",
+      "atWorldDay": 37,
+      "fateBy": {
+        "characterId": "char-msgpisca",
+        "name": "Splarf"
+      }
+    },
+    "the_unravelled_mind": {
+      "status": "stopped",
+      "stoppedUntilDay": 41,
+      "stoppedBy": "halvex_coil",
+      "atWorldDay": 38,
+      "fateBy": {
+        "characterId": "char-msgpisca",
+        "name": "Splarf"
+      }
+    },
+    "the_one_called_athena": {
+      "status": "wounded",
+      "woundedUntilDay": 47,
+      "woundedBy": "sunwrack_valen",
+      "atWorldDay": 39,
+      "fateBy": {
+        "characterId": "char-msgpisca",
+        "name": "Splarf"
       }
     }
   }

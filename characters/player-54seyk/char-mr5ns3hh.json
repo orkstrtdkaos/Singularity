@@ -47,7 +47,7 @@
   "alignment": {
     "mechanical_spiritual": 0.015,
     "concrete_abstract": -0.043750000000000004,
-    "chaos_order": 0.010000000000000002,
+    "chaos_order": 0.019500000000000003,
     "destruction_creation": 0.015,
     "violence_peace": 0.015
   },
@@ -242,18 +242,23 @@
         "player": "Tell Vreni plainly what the shelf is short of — name the gaps, offer what the Medic's Satchel can spare",
         "summary": "Adelheid named the wayhouse's supply gaps and opened her satchel — Vreni accepted the offering and named the patient who is not quite as fine as he claims.",
         "narration": "You name them one by one, the way a working healer does — not a complaint, just a fact. Calendula, gone. Lemon balm, not there at all. Honey, the empty jar at the end. Feverfew down to a pinch, which is not enough for a fever that wants fighting. Goldenrod, absent.\n\nVreni listens without moving. Her eyes track the shelf as you speak, confirming each gap against her own knowledge of it — you can see her doing it, the small nods, the way her mouth tightens once at the feverfew. When you finish she is quiet for a moment, and then she says: \"The comfrey has been doing the work of three things it was never meant to do.\" It is not an apology. It is the plain accounting of a house run hard.\n\nYou set down your cup and open the Medic's Satchel on the trestle table. What you have is modest but honest: a roll of dried yarrow flowers that will stretch the shelf's own stock, a folded paper of meadowsweet, a small stoppered vial of calendula-infused oil — not the dried flower, but something — and a square of pressed goldenrod wrapped in oilcloth. You lay them out side by side. \"Not a resupply,\" you say, \"but the gaps that matter most.\"\n\nVreni comes to the table. She picks up the calendula vial and holds it to the candle, reading the clarity of the oil. Then she sets it down carefully, exactly where it was, and looks at you. \"The patient in the far pallet,\" she says, her voice dropping a register. \"He came in two days ago with a wound on his forearm he says a farm tool made. I cleaned it and it closed well. But his pulse this morning was not what it was last night.\" She pauses. \"He says he is fine. He is very insistent about it.\"\n\n*You feel it settle into you — a new steadiness. (Level 2: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*"
+      },
+      {
+        "player": "Sleep first — it is deep night, and a rested healer reads more than a tired one; ask Vreni to note his pulse at dawn and tell you the number",
+        "summary": "Adelheid slept the night at the wayhouse; Vreni will note the patient's dawn pulse.",
+        "narration": "You tell Vreni plainly: wake me at first light with his pulse count, and you'll take the second set yourself after breakfast. She nods once — the nod of someone who already thought of it and is relieved to have been asked rather than having to suggest it herself. She shows you to the nearer curtained pallet, sets a second cup of tea on the small ledge beside it in case you wake in the night, and then moves back to the hearth without further ceremony.\n\nAevi drifts to the windowsill and dims almost entirely — the few motes that remain pulse very slowly, like a breath held and released. The dried herbs in the rafters smell of summer that has already passed: chamomile and something resinous you don't have a name for yet.\n\nYou are asleep before the candle on the trestle table burns to its collar."
       }
     ],
     "lastTurn": {
-      "narration": "You name them one by one, the way a working healer does — not a complaint, just a fact. Calendula, gone. Lemon balm, not there at all. Honey, the empty jar at the end. Feverfew down to a pinch, which is not enough for a fever that wants fighting. Goldenrod, absent.\n\nVreni listens without moving. Her eyes track the shelf as you speak, confirming each gap against her own knowledge of it — you can see her doing it, the small nods, the way her mouth tightens once at the feverfew. When you finish she is quiet for a moment, and then she says: \"The comfrey has been doing the work of three things it was never meant to do.\" It is not an apology. It is the plain accounting of a house run hard.\n\nYou set down your cup and open the Medic's Satchel on the trestle table. What you have is modest but honest: a roll of dried yarrow flowers that will stretch the shelf's own stock, a folded paper of meadowsweet, a small stoppered vial of calendula-infused oil — not the dried flower, but something — and a square of pressed goldenrod wrapped in oilcloth. You lay them out side by side. \"Not a resupply,\" you say, \"but the gaps that matter most.\"\n\nVreni comes to the table. She picks up the calendula vial and holds it to the candle, reading the clarity of the oil. Then she sets it down carefully, exactly where it was, and looks at you. \"The patient in the far pallet,\" she says, her voice dropping a register. \"He came in two days ago with a wound on his forearm he says a farm tool made. I cleaned it and it closed well. But his pulse this morning was not what it was last night.\" She pauses. \"He says he is fine. He is very insistent about it.\"\n\n*You feel it settle into you — a new steadiness. (Level 2: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*",
-      "sceneSummary": "Adelheid named the wayhouse's supply gaps and opened her satchel — Vreni accepted the offering and named the patient who is not quite as fine as he claims.",
+      "narration": "You tell Vreni plainly: wake me at first light with his pulse count, and you'll take the second set yourself after breakfast. She nods once — the nod of someone who already thought of it and is relieved to have been asked rather than having to suggest it herself. She shows you to the nearer curtained pallet, sets a second cup of tea on the small ledge beside it in case you wake in the night, and then moves back to the hearth without further ceremony.\n\nAevi drifts to the windowsill and dims almost entirely — the few motes that remain pulse very slowly, like a breath held and released. The dried herbs in the rafters smell of summer that has already passed: chamomile and something resinous you don't have a name for yet.\n\nYou are asleep before the candle on the trestle table burns to its collar.",
+      "sceneSummary": "Adelheid slept the night at the wayhouse; Vreni will note the patient's dawn pulse.",
       "choices": [
         {
-          "label": "Go to the patient now and take his pulse yourself — count it properly, back of the hand to his forehead, two fingers on the wrist",
-          "attribute": "practical",
-          "subAttribute": "craft",
+          "label": "Take the dawn pulse count Vreni recorded, then sit with the patient — examine the arm wound and watch his colour and breathing while you talk",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "axes": {
-            "death_life": 0.4,
+            "death_life": 0.3,
             "concrete_abstract": -0.3
           },
           "difficulty": "easy",
@@ -269,187 +274,127 @@
           "emergenceId": null
         },
         {
-          "label": "Ask Vreni what else she has noticed — the colour of his skin, whether he sweats at night, whether he ate",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Ask Vreni, over the morning tea, whether anyone passed through heading upstream three weeks ago — describe Silas Weir and his instruments",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "axes": {
-            "concrete_abstract": -0.2,
-            "falsehood_truth": 0.2
+            "falsehood_truth": 0.2,
+            "concrete_abstract": -0.2
           },
-          "difficulty": "very easy",
+          "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "study",
+            "investigate",
             "plan"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Sleep first — it is deep night, and a rested healer reads more than a tired one; ask Vreni to note his pulse at dawn and tell you the number",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Step outside at first light — stand on the cleared shelf of ground and use Tremor Sense to read whether the Precursor pulse reaches this high",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "axes": {
-            "chaos_order": 0.2
+            "mechanical_spiritual": -0.2,
+            "concrete_abstract": 0.2
           },
-          "difficulty": "very easy",
+          "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "careful",
-            "plan"
+            "study",
+            "careful"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
+          "abilityId": "tremor_sense",
+          "energyCost": 4,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
       ],
-      "deeds": [
-        {
-          "description": "Shared medicines from her own satchel with the understocked wayhouse — named every gap and gave what could fill them",
-          "tags": [
-            "generosity",
-            "healer"
-          ],
-          "weight": 1,
-          "communityId": "valley.millbrook"
-        }
-      ],
       "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
+        "health": 3,
+        "energy": 40,
         "xp": 0
       },
-      "ledgerEvents": [
+      "timeOps": {
+        "hoursPassed": 7,
+        "why": "slept through deep night to first light of day 3"
+      },
+      "scene": {
+        "setting": "Inside the wayhouse — low stone room set into the hillside, hearth now banked to orange coals, first gray light at the window. Trestle table with the remains of last night's candles. Early autumn dawn outside.",
+        "npcsPresent": [
+          {
+            "name": "Sister Vreni",
+            "state": "moving quietly near the hearth — has already been up to note the patient's dawn pulse, cup in hand"
+          },
+          {
+            "name": "Aevi",
+            "state": "still on the windowsill, motes brightening slowly as the light grows, watching the hills outside"
+          }
+        ],
+        "objects": [
+          "iron pot — cold now, valerian dregs",
+          "jar shelf: valerian-and-hops (open), elderflower (half), plantain (full), yarrow (good), comfrey root (one nearly spent, one sealed), clove oil, feverfew (nearly gone), willow bark (solid), meadowsweet (quarter-jar)",
+          "Medic's Satchel open on the trestle table",
+          "second cup of tea — left on the ledge beside the pallet, untouched",
+          "curtained pallets — far curtain still closed, patient within"
+        ],
+        "threads": [
+          "Vreni has the dawn pulse count — not yet given to Adelheid",
+          "Patient behind the far curtain — second observation needed to satisfy the quest stage",
+          "Three weeks ago: travelers heading upstream would have passed through here — Vreni not yet asked",
+          "Aevi matched the Precursor pulse at the runnel — not yet discussed"
+        ]
+      },
+      "npcUpdates": [
         {
-          "what": "A wayhouse healer named a patient whose pulse has worsened overnight — two days in, insisting he is fine",
-          "tags": [
-            "health",
-            "patient",
-            "concealment"
+          "op": "update",
+          "npcId": "sister-vreni",
+          "note": "Took the patient's dawn pulse as requested — has the number ready; set a second tea cup by Adelheid's pallet without being asked",
+          "skillsObserved": [
+            "anticipatory care — prepared what was needed before it was requested"
           ],
-          "visibility": "witnessed",
-          "spectrumDeltas": {},
-          "impactsLocal": false
+          "statusNote": "At the wayhouse; holds the patient's dawn pulse count, waiting to give it to Adelheid"
         }
       ],
       "questUpdates": [
         {
           "op": "progress",
           "questId": "the-patient-who-is-not-sick-enough",
-          "note": "Vreni named the patient directly — a man who came in two days ago with an arm wound he calls fine, whose pulse has already changed overnight. The first observation is now possible."
+          "note": "First set of observations deferred to morning — Vreni took the dawn pulse as arranged; second set pending Adelheid's waking examination."
         }
-      ],
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "sister-vreni",
-          "note": "Accepted Adelheid's medicines with careful hands, named the patient she is worried about — a man insisting he is fine whose pulse has already shifted overnight",
-          "learned": [
-            "The patient arrived two days ago with a forearm wound he attributes to a farm tool; it closed cleanly but his pulse this morning was faster than last night",
-            "He is insistent that he is fine — unusually so"
-          ],
-          "skillsObserved": [
-            "honest and precise in naming what she does not know"
-          ],
-          "relationshipDelta": 1,
-          "statusNote": "At the wayhouse; has just named the patient to Adelheid and is watching to see what she does next"
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "the-patient-who-is-not-sick-enough",
-          "label": "The Patient at the Wayhouse",
-          "kind": "mystery",
-          "fact": "A man arrived two days ago with a forearm wound he says a farm tool made — wound closed cleanly, but his pulse was faster this morning than last night, and he is insistently fine in a way that is itself a symptom. Vreni is worried and has not named him.",
-          "links": [
-            "sister-vreni",
-            "millbrook",
-            "the-patient-who-is-not-sick-enough",
-            "maras-errand"
-          ]
-        }
-      ],
-      "scene": {
-        "setting": "Inside the wayhouse — low stone room set into the hillside, hearth burning low and red, one lit window, deep night outside. Trestle table with two candles; Adelheid's medicines laid out on the table beside her open Medic's Satchel.",
-        "npcsPresent": [
-          {
-            "name": "Sister Vreni",
-            "state": "standing at the trestle table, having just named the patient — watching Adelheid steadily, waiting"
-          },
-          {
-            "name": "Aevi",
-            "state": "motes drifted back to the jar shelf, dimmed and quiet near the meadowsweet"
-          }
-        ],
-        "objects": [
-          "iron pot of valerian-and-hops tea on the hearthstone",
-          "cup of tea on the table",
-          "jar shelf: valerian-and-hops (open), elderflower (half), plantain leaf (full), yarrow (good stock), comfrey root (one nearly spent, one sealed), clove oil, feverfew (almost gone), willow bark (solid), meadowsweet (quarter-jar), empty honey jar",
-          "Medic's Satchel open on the trestle table",
-          "medicines laid out: dried yarrow flowers, folded paper of meadowsweet, small vial of calendula-infused oil, pressed goldenrod in oilcloth",
-          "silver-stemmed cutting (linen-wrapped) in pack",
-          "curtained pallets — one with a patient behind the far curtain"
-        ],
-        "threads": [
-          "Patient behind the far curtain — wound on forearm, insisting he is fine, pulse already faster overnight",
-          "Vreni watching to see what Adelheid does next",
-          "Three weeks ago: travelers heading upstream would have passed through here",
-          "Aevi unconsciously matched the Precursor pulse at the runnel — not yet asked about it"
-        ]
-      },
-      "offer": {
-        "thing": "Behind the far curtain, audible now that the room is quiet — a man's breathing, a little too even, the kind of careful breath a person takes when they are pretending to be asleep",
-        "from": "What the patient fears: being seen clearly before he is ready to be"
-      },
-      "placeUpdates": [
-        {
-          "note": "Adelheid shared medicines from her Medic's Satchel with the wayhouse — calendula oil, goldenrod, yarrow, meadowsweet added to the shelf",
-          "subPlace": {
-            "name": "The Wayhouse",
-            "parent": "millbrook",
-            "note": "Medicine shelf partially restocked with Adelheid's own supplies; patient behind far curtain with a worsening but concealed condition",
-            "visited": true
-          }
-        }
-      ],
-      "sceneEnded": false
+      ]
     },
     "sceneState": {
-      "setting": "Inside the wayhouse — low stone room set into the hillside, hearth burning low and red, one lit window, deep night outside. Trestle table with two candles; Adelheid's medicines laid out on the table beside her open Medic's Satchel.",
+      "setting": "Inside the wayhouse — low stone room set into the hillside, hearth now banked to orange coals, first gray light at the window. Trestle table with the remains of last night's candles. Early autumn dawn outside.",
       "npcsPresent": [
         {
           "name": "Sister Vreni",
-          "state": "standing at the trestle table, having just named the patient — watching Adelheid steadily, waiting"
+          "state": "moving quietly near the hearth — has already been up to note the patient's dawn pulse, cup in hand"
         },
         {
           "name": "Aevi",
-          "state": "motes drifted back to the jar shelf, dimmed and quiet near the meadowsweet"
+          "state": "still on the windowsill, motes brightening slowly as the light grows, watching the hills outside"
         }
       ],
       "objects": [
-        "iron pot of valerian-and-hops tea on the hearthstone",
-        "cup of tea on the table",
-        "jar shelf: valerian-and-hops (open), elderflower (half), plantain leaf (full), y",
+        "iron pot — cold now, valerian dregs",
+        "jar shelf: valerian-and-hops (open), elderflower (half), plantain (full), yarrow",
         "Medic's Satchel open on the trestle table",
-        "medicines laid out: dried yarrow flowers, folded paper of meadowsweet, small via",
-        "silver-stemmed cutting (linen-wrapped) in pack",
-        "curtained pallets — one with a patient behind the far curtain"
+        "second cup of tea — left on the ledge beside the pallet, untouched",
+        "curtained pallets — far curtain still closed, patient within"
       ],
       "threads": [
-        "Patient behind the far curtain — wound on forearm, insisting he is fine, pulse already faster overnight",
-        "Vreni watching to see what Adelheid does next",
-        "Three weeks ago: travelers heading upstream would have passed through here",
-        "Aevi unconsciously matched the Precursor pulse at the runnel — not yet asked about it"
+        "Vreni has the dawn pulse count — not yet given to Adelheid",
+        "Patient behind the far curtain — second observation needed to satisfy the quest stage",
+        "Three weeks ago: travelers heading upstream would have passed through here — Vreni not yet asked",
+        "Aevi matched the Precursor pulse at the runnel — not yet discussed"
       ]
     },
-    "beats": 6,
+    "beats": 7,
     "subPlace": {
       "slug": "the-wayhouse",
       "name": "The Wayhouse",
@@ -459,7 +404,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 3,
-    "hour": 0,
+    "hour": 7,
     "realAnchor": null
   },
   "companions": [
@@ -787,7 +732,8 @@
       "stageIndex": 0,
       "completedStages": [],
       "progress": [
-        "Vreni named the patient directly — a man who came in two days ago with an arm wound he calls fine, whose pulse has already changed overnight. The first observation is now possible."
+        "Vreni named the patient directly — a man who came in two days ago with an arm wound he calls fine, whose pulse has already changed overnight. The first observation is now possible.",
+        "First set of observations deferred to morning — Vreni took the dawn pulse as arranged; second set pending Adelheid's waking examination."
       ],
       "aliases": [],
       "startedAt": "2026-09-20T03:05:17.338Z",
@@ -965,7 +911,6 @@
       },
       "relationship": 3,
       "history": [
-        "[d2] Accepted Adelheid's answer with quiet satisfaction. Named the wayhouse's position on the sluice-road above the Wet Meadows without prompting, and the fever-child case that showed the real need. The geography places her exactly where travelers heading upstream would pass through.",
         "[d2] Had the grace to look at the seedling beds while Mara gave her read — she understands she is in the middle of something larger and does not press.",
         "[d2] Named her departure time as tonight and extended the open invitation to walk the sluice-road together by moonlight — an hour and a half to two hours up to the wayhouse.",
         "[d2] Fell in beside Adelheid at the garden gate and is walking the sluice-road back to the wayhouse with her, pace unhurried and sure.",
@@ -974,7 +919,8 @@
         "[d2] Resumed walking when Adelheid rose from the runnel — mentioned the wayhouse keeps a light in the window; did not ask what was found at the stone",
         "[d2] Brought Adelheid to the wayhouse and set tea on the hearth without ceremony — the act of a practical host, not a performance of welcome",
         "[d2] Watched Adelheid read the medicine shelf without speaking — a considering silence, the look of someone who has just confirmed something she suspected",
-        "[d2] Accepted Adelheid's medicines with careful hands, named the patient she is worried about — a man insisting he is fine whose pulse has already shifted overnight"
+        "[d2] Accepted Adelheid's medicines with careful hands, named the patient she is worried about — a man insisting he is fine whose pulse has already shifted overnight",
+        "[d3] Took the patient's dawn pulse as requested — has the number ready; set a second tea cup by Adelheid's pallet without being asked"
       ],
       "knownFacts": [
         "The wayhouse sits on the sluice-road above the Wet Meadows — any traveler heading upstream three weeks ago would have passed through.",
@@ -987,19 +933,20 @@
         "He is insistent that he is fine — unusually so"
       ],
       "skillsObserved": [
-        "honest and precise in naming what she does not know"
+        "honest and precise in naming what she does not know",
+        "anticipatory care — prepared what was needed before it was requested"
       ],
       "status": "active",
       "sex": "female",
       "gender": "woman",
       "pronouns": "she/her",
       "age": 44,
-      "statusNote": "At the wayhouse; has just named the patient to Adelheid and is watching to see what she does next",
+      "statusNote": "At the wayhouse; holds the patient's dawn pulse count, waiting to give it to Adelheid",
       "lastSeen": {
         "locationId": "millbrook",
-        "day": 2
+        "day": 3
       },
-      "met": 12,
+      "met": 13,
       "domains": {
         "primary": "mason"
       },
@@ -1386,7 +1333,7 @@
         "locationId": "gen-mara-wells-store"
       }
     ],
-    "turnsSinceOffer": 0,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "Mara offers direct access to work as a way of centering yourself—and uses that time to shift the conversation toward the real question…",
@@ -6335,16 +6282,16 @@
   "itemReclaimVersion": 1,
   "nameRepairVersion": 1,
   "tendencies": {
-    "generous": 4.409799652153122,
-    "social": 6.00519285178985,
-    "cerebral": 18.9416526420408,
-    "cautious": 15.702555811114907,
-    "strategic": 13.793575428364345,
-    "carousing": 0.7586686971541231,
-    "risky": 0.3802850612301368,
-    "ruthless": 0.8673258965510051,
-    "patient": 0.5310255194818012,
-    "craft": 0.6840206855639235
+    "generous": 4.299554660849294,
+    "social": 5.855063030495104,
+    "cerebral": 18.46811132598978,
+    "cautious": 16.309991915837035,
+    "strategic": 14.448736042655236,
+    "carousing": 0.73970197972527,
+    "risky": 0.37077793469938336,
+    "ruthless": 0.8456427491372299,
+    "patient": 0.5177498814947562,
+    "craft": 0.6669201684248254
   },
   "aptitudes": [
     "strategist",
@@ -6352,11 +6299,11 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 76,
+  "actionCount": 77,
   "bondLogFrom": null,
   "teachers": {},
   "regionsKnown": {
-    "valley": 37
+    "valley": 38
   },
   "company": [],
   "forkChoices": {},
@@ -6540,8 +6487,8 @@
   "bands": [],
   "_silasGrantsRevoked": true,
   "reconcileVersion": 72,
-  "updatedAt": 1789873782241,
-  "rev": 71,
+  "updatedAt": 1789874010236,
+  "rev": 72,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -6554,7 +6501,7 @@
   "featureOffers": [],
   "_pinsInitialized": true,
   "_opUnknown": {
-    "sceneSummary": 37
+    "sceneSummary": 38
   },
   "_applyFailures": null,
   "sessions": [
@@ -6585,10 +6532,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-09-20T03:00:30.698Z",
-      "lastAt": "2026-09-20T03:09:42.218Z",
+      "lastAt": "2026-09-20T03:13:30.222Z",
       "startDay": 82,
       "endDay": 82,
-      "beats": 3
+      "beats": 4
     }
   ],
   "_debtReceipts": [],
@@ -6604,7 +6551,7 @@
     "investigate": 4,
     "analyze": 1,
     "retreat": 1,
-    "careful": 8,
+    "careful": 9,
     "urgent": 1,
     "confront": 1,
     "defer": 1,
@@ -6613,7 +6560,7 @@
     "practical": 1,
     "negotiate": 4,
     "help": 3,
-    "plan": 2,
+    "plan": 3,
     "rapport": 2,
     "calm": 2,
     "craft": 1
@@ -6625,18 +6572,18 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 33,
-    "choices": 33,
-    "questUpdates": 21,
-    "scene": 33,
-    "npcUpdates": 29,
+    "sceneSummary": 34,
+    "choices": 34,
+    "questUpdates": 22,
+    "scene": 34,
+    "npcUpdates": 30,
     "placeUpdates": 12,
     "codexUpdates": 24,
-    "timeOps": 26,
+    "timeOps": 27,
     "imagePrompt": 8,
     "gambitApt": 21,
     "sceneEnded": 26,
-    "characterDeltas": 22,
+    "characterDeltas": 23,
     "offer": 14,
     "stateOps": 2,
     "deeds": 6,
@@ -6645,7 +6592,7 @@
     "moveTo": 4,
     "_engineClosedScene": 1
   },
-  "_opTurns": 33,
+  "_opTurns": 34,
   "_opCountingSince": "2026-09-15T23:58:48.348Z",
   "gallery": [
     {

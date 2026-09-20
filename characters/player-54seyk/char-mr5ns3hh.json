@@ -5,8 +5,8 @@
   "name": "Adelheid",
   "origin": "harmonic",
   "background": "medic",
-  "level": 1,
-  "xp": 97,
+  "level": 2,
+  "xp": 102,
   "attributes": {
     "physical": 2,
     "mental": 4,
@@ -47,13 +47,15 @@
   "alignment": {
     "mechanical_spiritual": 0.015,
     "concrete_abstract": -0.043750000000000004,
-    "chaos_order": 0.010000000000000002
+    "chaos_order": 0.010000000000000002,
+    "destruction_creation": 0.015,
+    "violence_peace": 0.015
   },
-  "attunement": 1,
-  "maxHealth": 25,
-  "health": 14,
-  "maxEnergy": 116,
-  "energy": 12,
+  "attunement": 2,
+  "maxHealth": 30,
+  "health": 30,
+  "maxEnergy": 121,
+  "energy": 121,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -185,6 +187,20 @@
       "spread": [],
       "day": 2,
       "worldDay": 78
+    },
+    {
+      "at": "2026-09-20T03:09:42.218Z",
+      "locationId": "millbrook",
+      "communityId": "valley.millbrook",
+      "description": "Shared medicines from her own satchel with the understocked wayhouse — named every gap and gave what could fill them",
+      "tags": [
+        "generosity",
+        "healer"
+      ],
+      "weight": 1,
+      "spread": [],
+      "day": 2,
+      "worldDay": 82
     }
   ],
   "relationships": {},
@@ -221,158 +237,219 @@
         "player": "Take the cup and look more carefully at the shelf of jars — read what medicines the wayhouse keeps and what it is short of",
         "summary": "Adelheid takes her tea and reads the wayhouse medicine shelf — notes the gaps: no calendula, no lemon balm, no honey, and feverfew nearly spent.",
         "narration": "Vreni lifts the iron pot from the hearthstone and pours without ceremony — the valerian smell rises warm and a little bitter, and you take the cup in both hands. The heat settles into your fingers.\n\nThe jar shelf runs the full width of the wall above the hearth, each vessel stoppered with cork or wax and labeled in a cramped backward-slanting hand. You read along it while the tea cools: valerian-and-hops, already open and recently used; dried elderflower, a half-jar; plantain leaf, nearly full; yarrow, good stock; comfrey root, two jars — one almost gone, one sealed; a small dark bottle labeled simply *oil, clove*; feverfew, a pinch left at most; willow bark, a solid amount; and at the far end, a jar of what you recognize as dried meadowsweet by the pale florets still visible through the glass, a quarter-jar remaining. There is no calendula. No goldenrod. No lemon balm. No honey — none at all — and the small jar that might once have held it has been washed and left empty at the shelf's end, stopper out.\n\nYou know a wayhouse medicine shelf by what it runs short of. Feverfew nearly gone tells you headaches have been frequent — travelers coming in over the pass with altitude and tension both. The comfrey already cracked open says someone has been dealing with bruises or sprains. The missing honey is the quieter note: honey is a healer's glue and a sweetener both, and a house without it manages, but it feels the absence. Aevi drifts to the shelf's far end, her motes brightening faintly at the meadowsweet jar — curiosity, or just the warmth of the hearth.\n\nVreni watches you read the shelf the way you would watch someone speak a language you recognize. She does not interrupt."
+      },
+      {
+        "player": "Tell Vreni plainly what the shelf is short of — name the gaps, offer what the Medic's Satchel can spare",
+        "summary": "Adelheid named the wayhouse's supply gaps and opened her satchel — Vreni accepted the offering and named the patient who is not quite as fine as he claims.",
+        "narration": "You name them one by one, the way a working healer does — not a complaint, just a fact. Calendula, gone. Lemon balm, not there at all. Honey, the empty jar at the end. Feverfew down to a pinch, which is not enough for a fever that wants fighting. Goldenrod, absent.\n\nVreni listens without moving. Her eyes track the shelf as you speak, confirming each gap against her own knowledge of it — you can see her doing it, the small nods, the way her mouth tightens once at the feverfew. When you finish she is quiet for a moment, and then she says: \"The comfrey has been doing the work of three things it was never meant to do.\" It is not an apology. It is the plain accounting of a house run hard.\n\nYou set down your cup and open the Medic's Satchel on the trestle table. What you have is modest but honest: a roll of dried yarrow flowers that will stretch the shelf's own stock, a folded paper of meadowsweet, a small stoppered vial of calendula-infused oil — not the dried flower, but something — and a square of pressed goldenrod wrapped in oilcloth. You lay them out side by side. \"Not a resupply,\" you say, \"but the gaps that matter most.\"\n\nVreni comes to the table. She picks up the calendula vial and holds it to the candle, reading the clarity of the oil. Then she sets it down carefully, exactly where it was, and looks at you. \"The patient in the far pallet,\" she says, her voice dropping a register. \"He came in two days ago with a wound on his forearm he says a farm tool made. I cleaned it and it closed well. But his pulse this morning was not what it was last night.\" She pauses. \"He says he is fine. He is very insistent about it.\"\n\n*You feel it settle into you — a new steadiness. (Level 2: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*"
       }
     ],
     "lastTurn": {
-      "narration": "Vreni lifts the iron pot from the hearthstone and pours without ceremony — the valerian smell rises warm and a little bitter, and you take the cup in both hands. The heat settles into your fingers.\n\nThe jar shelf runs the full width of the wall above the hearth, each vessel stoppered with cork or wax and labeled in a cramped backward-slanting hand. You read along it while the tea cools: valerian-and-hops, already open and recently used; dried elderflower, a half-jar; plantain leaf, nearly full; yarrow, good stock; comfrey root, two jars — one almost gone, one sealed; a small dark bottle labeled simply *oil, clove*; feverfew, a pinch left at most; willow bark, a solid amount; and at the far end, a jar of what you recognize as dried meadowsweet by the pale florets still visible through the glass, a quarter-jar remaining. There is no calendula. No goldenrod. No lemon balm. No honey — none at all — and the small jar that might once have held it has been washed and left empty at the shelf's end, stopper out.\n\nYou know a wayhouse medicine shelf by what it runs short of. Feverfew nearly gone tells you headaches have been frequent — travelers coming in over the pass with altitude and tension both. The comfrey already cracked open says someone has been dealing with bruises or sprains. The missing honey is the quieter note: honey is a healer's glue and a sweetener both, and a house without it manages, but it feels the absence. Aevi drifts to the shelf's far end, her motes brightening faintly at the meadowsweet jar — curiosity, or just the warmth of the hearth.\n\nVreni watches you read the shelf the way you would watch someone speak a language you recognize. She does not interrupt.",
-      "sceneSummary": "Adelheid takes her tea and reads the wayhouse medicine shelf — notes the gaps: no calendula, no lemon balm, no honey, and feverfew nearly spent.",
+      "narration": "You name them one by one, the way a working healer does — not a complaint, just a fact. Calendula, gone. Lemon balm, not there at all. Honey, the empty jar at the end. Feverfew down to a pinch, which is not enough for a fever that wants fighting. Goldenrod, absent.\n\nVreni listens without moving. Her eyes track the shelf as you speak, confirming each gap against her own knowledge of it — you can see her doing it, the small nods, the way her mouth tightens once at the feverfew. When you finish she is quiet for a moment, and then she says: \"The comfrey has been doing the work of three things it was never meant to do.\" It is not an apology. It is the plain accounting of a house run hard.\n\nYou set down your cup and open the Medic's Satchel on the trestle table. What you have is modest but honest: a roll of dried yarrow flowers that will stretch the shelf's own stock, a folded paper of meadowsweet, a small stoppered vial of calendula-infused oil — not the dried flower, but something — and a square of pressed goldenrod wrapped in oilcloth. You lay them out side by side. \"Not a resupply,\" you say, \"but the gaps that matter most.\"\n\nVreni comes to the table. She picks up the calendula vial and holds it to the candle, reading the clarity of the oil. Then she sets it down carefully, exactly where it was, and looks at you. \"The patient in the far pallet,\" she says, her voice dropping a register. \"He came in two days ago with a wound on his forearm he says a farm tool made. I cleaned it and it closed well. But his pulse this morning was not what it was last night.\" She pauses. \"He says he is fine. He is very insistent about it.\"\n\n*You feel it settle into you — a new steadiness. (Level 2: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*",
+      "sceneSummary": "Adelheid named the wayhouse's supply gaps and opened her satchel — Vreni accepted the offering and named the patient who is not quite as fine as he claims.",
       "choices": [
         {
-          "label": "Tell Vreni plainly what the shelf is short of — name the gaps, offer what the Medic's Satchel can spare",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Go to the patient now and take his pulse yourself — count it properly, back of the hand to his forehead, two fingers on the wrist",
+          "attribute": "practical",
+          "subAttribute": "craft",
           "axes": {
-            "destruction_creation": 0.3,
-            "violence_peace": 0.3
+            "death_life": 0.4,
+            "concrete_abstract": -0.3
           },
           "difficulty": "easy",
+          "opposedDifficulty": null,
           "intentTags": [
-            "help",
-            "negotiate"
+            "study",
+            "help"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Ask Vreni about the travelers who came through three weeks ago — anyone heading upstream, carrying instruments",
+          "label": "Ask Vreni what else she has noticed — the colour of his skin, whether he sweats at night, whether he ate",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "falsehood_truth": 0.3,
-            "concrete_abstract": -0.2
-          },
-          "difficulty": "easy",
-          "intentTags": [
-            "investigate",
-            "ask"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false
-        },
-        {
-          "label": "Sit at the trestle, drink the tea, and let the silence settle — let Vreni speak first",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "chaos_order": 0.2,
-            "violence_peace": 0.4
+            "concrete_abstract": -0.2,
+            "falsehood_truth": 0.2
           },
           "difficulty": "very easy",
+          "opposedDifficulty": null,
           "intentTags": [
-            "calm",
-            "sustain"
+            "study",
+            "plan"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Sleep first — it is deep night, and a rested healer reads more than a tired one; ask Vreni to note his pulse at dawn and tell you the number",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {
+            "chaos_order": 0.2
+          },
+          "difficulty": "very easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "careful",
+            "plan"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
-      "scene": {
-        "setting": "Inside the wayhouse — low stone room set into the hillside, hearth burning low and red, one lit window, night outside. Trestle table with two candles, dried herbs in the rafters.",
-        "npcsPresent": [
-          {
-            "name": "Sister Vreni",
-            "state": "standing near the hearth, watching Adelheid read the shelf with quiet attention; has not spoken"
-          },
-          {
-            "name": "Aevi",
-            "state": "motes drifted to the far end of the jar shelf, brightening faintly near the meadowsweet jar"
-          }
-        ],
-        "objects": [
-          "iron pot of valerian-and-hops tea on the hearthstone",
-          "cup of tea in Adelheid's hands",
-          "jar shelf: valerian-and-hops (open, recent), elderflower (half), plantain leaf (full), yarrow (good), comfrey root (one nearly gone, one sealed), clove oil (small dark bottle), feverfew (almost spent), willow bark (solid), meadowsweet (quarter-jar)",
-          "empty washed honey jar at shelf's end, stopper out",
-          "silver-stemmed cutting (linen-wrapped) in pack",
-          "Medic's Satchel"
-        ],
-        "threads": [
-          "Vreni watching Adelheid read the shelf — has not spoken, waiting",
-          "Three weeks ago: travelers heading upstream would have passed through here",
-          "Aevi unconsciously matched the Precursor pulse at the runnel — not yet asked about it",
-          "Wayhouse has had no resident healer since the equinox"
-        ]
+      "deeds": [
+        {
+          "description": "Shared medicines from her own satchel with the understocked wayhouse — named every gap and gave what could fill them",
+          "tags": [
+            "generosity",
+            "healer"
+          ],
+          "weight": 1,
+          "communityId": "valley.millbrook"
+        }
+      ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
       },
+      "ledgerEvents": [
+        {
+          "what": "A wayhouse healer named a patient whose pulse has worsened overnight — two days in, insisting he is fine",
+          "tags": [
+            "health",
+            "patient",
+            "concealment"
+          ],
+          "visibility": "witnessed",
+          "spectrumDeltas": {},
+          "impactsLocal": false
+        }
+      ],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "the-patient-who-is-not-sick-enough",
+          "note": "Vreni named the patient directly — a man who came in two days ago with an arm wound he calls fine, whose pulse has already changed overnight. The first observation is now possible."
+        }
+      ],
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "sister-vreni",
-          "note": "Watched Adelheid read the medicine shelf without speaking — a considering silence, the look of someone who has just confirmed something she suspected",
+          "note": "Accepted Adelheid's medicines with careful hands, named the patient she is worried about — a man insisting he is fine whose pulse has already shifted overnight",
           "learned": [
-            "Adelheid reads a medicine shelf the way a working healer does — gap by gap, not label by label"
-          ]
+            "The patient arrived two days ago with a forearm wound he attributes to a farm tool; it closed cleanly but his pulse this morning was faster than last night",
+            "He is insistent that he is fine — unusually so"
+          ],
+          "skillsObserved": [
+            "honest and precise in naming what she does not know"
+          ],
+          "relationshipDelta": 1,
+          "statusNote": "At the wayhouse; has just named the patient to Adelheid and is watching to see what she does next"
         }
       ],
       "codexUpdates": [
         {
-          "topic": "sister-vreni",
-          "label": "Sister Vreni",
-          "kind": "person",
-          "entityId": "sister-vreni",
-          "fact": "The wayhouse medicine shelf shows recent heavy use of comfrey and feverfew, and is entirely out of honey and calendula — the gaps of a house managing travelers under strain without a resident healer to replenish it.",
+          "topic": "the-patient-who-is-not-sick-enough",
+          "label": "The Patient at the Wayhouse",
+          "kind": "mystery",
+          "fact": "A man arrived two days ago with a forearm wound he says a farm tool made — wound closed cleanly, but his pulse was faster this morning than last night, and he is insistently fine in a way that is itself a symptom. Vreni is worried and has not named him.",
           "links": [
+            "sister-vreni",
             "millbrook",
+            "the-patient-who-is-not-sick-enough",
             "maras-errand"
           ]
         }
       ],
+      "scene": {
+        "setting": "Inside the wayhouse — low stone room set into the hillside, hearth burning low and red, one lit window, deep night outside. Trestle table with two candles; Adelheid's medicines laid out on the table beside her open Medic's Satchel.",
+        "npcsPresent": [
+          {
+            "name": "Sister Vreni",
+            "state": "standing at the trestle table, having just named the patient — watching Adelheid steadily, waiting"
+          },
+          {
+            "name": "Aevi",
+            "state": "motes drifted back to the jar shelf, dimmed and quiet near the meadowsweet"
+          }
+        ],
+        "objects": [
+          "iron pot of valerian-and-hops tea on the hearthstone",
+          "cup of tea on the table",
+          "jar shelf: valerian-and-hops (open), elderflower (half), plantain leaf (full), yarrow (good stock), comfrey root (one nearly spent, one sealed), clove oil, feverfew (almost gone), willow bark (solid), meadowsweet (quarter-jar), empty honey jar",
+          "Medic's Satchel open on the trestle table",
+          "medicines laid out: dried yarrow flowers, folded paper of meadowsweet, small vial of calendula-infused oil, pressed goldenrod in oilcloth",
+          "silver-stemmed cutting (linen-wrapped) in pack",
+          "curtained pallets — one with a patient behind the far curtain"
+        ],
+        "threads": [
+          "Patient behind the far curtain — wound on forearm, insisting he is fine, pulse already faster overnight",
+          "Vreni watching to see what Adelheid does next",
+          "Three weeks ago: travelers heading upstream would have passed through here",
+          "Aevi unconsciously matched the Precursor pulse at the runnel — not yet asked about it"
+        ]
+      },
+      "offer": {
+        "thing": "Behind the far curtain, audible now that the room is quiet — a man's breathing, a little too even, the kind of careful breath a person takes when they are pretending to be asleep",
+        "from": "What the patient fears: being seen clearly before he is ready to be"
+      },
       "placeUpdates": [
         {
-          "note": "Medicine shelf inventory read: valerian-and-hops (open), elderflower (half), plantain (full), yarrow (good), comfrey root (one nearly spent, one sealed), clove oil, feverfew (nearly gone), willow bark (solid), meadowsweet (quarter-jar). Missing: calendula, goldenrod, lemon balm, honey. Empty honey jar at shelf-end.",
+          "note": "Adelheid shared medicines from her Medic's Satchel with the wayhouse — calendula oil, goldenrod, yarrow, meadowsweet added to the shelf",
           "subPlace": {
             "name": "The Wayhouse",
-            "parent": "Millbrook",
-            "note": "Medicine shelf catalogued — short on feverfew, out of honey and calendula; comfrey in use",
+            "parent": "millbrook",
+            "note": "Medicine shelf partially restocked with Adelheid's own supplies; patient behind far curtain with a worsening but concealed condition",
             "visited": true
           }
         }
       ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "a brief settling-in — tea poured, shelf read"
-      }
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Inside the wayhouse — low stone room set into the hillside, hearth burning low and red, one lit window, night outside. Trestle table with two candles, dried herbs in the rafters.",
+      "setting": "Inside the wayhouse — low stone room set into the hillside, hearth burning low and red, one lit window, deep night outside. Trestle table with two candles; Adelheid's medicines laid out on the table beside her open Medic's Satchel.",
       "npcsPresent": [
         {
           "name": "Sister Vreni",
-          "state": "standing near the hearth, watching Adelheid read the shelf with quiet attention; has not spoken"
+          "state": "standing at the trestle table, having just named the patient — watching Adelheid steadily, waiting"
         },
         {
           "name": "Aevi",
-          "state": "motes drifted to the far end of the jar shelf, brightening faintly near the meadowsweet jar"
+          "state": "motes drifted back to the jar shelf, dimmed and quiet near the meadowsweet"
         }
       ],
       "objects": [
         "iron pot of valerian-and-hops tea on the hearthstone",
-        "cup of tea in Adelheid's hands",
-        "jar shelf: valerian-and-hops (open, recent), elderflower (half), plantain leaf (",
-        "empty washed honey jar at shelf's end, stopper out",
+        "cup of tea on the table",
+        "jar shelf: valerian-and-hops (open), elderflower (half), plantain leaf (full), y",
+        "Medic's Satchel open on the trestle table",
+        "medicines laid out: dried yarrow flowers, folded paper of meadowsweet, small via",
         "silver-stemmed cutting (linen-wrapped) in pack",
-        "Medic's Satchel"
+        "curtained pallets — one with a patient behind the far curtain"
       ],
       "threads": [
-        "Vreni watching Adelheid read the shelf — has not spoken, waiting",
+        "Patient behind the far curtain — wound on forearm, insisting he is fine, pulse already faster overnight",
+        "Vreni watching to see what Adelheid does next",
         "Three weeks ago: travelers heading upstream would have passed through here",
-        "Aevi unconsciously matched the Precursor pulse at the runnel — not yet asked about it",
-        "Wayhouse has had no resident healer since the equinox"
+        "Aevi unconsciously matched the Precursor pulse at the runnel — not yet asked about it"
       ]
     },
-    "beats": 5,
+    "beats": 6,
     "subPlace": {
       "slug": "the-wayhouse",
       "name": "The Wayhouse",
@@ -381,8 +458,8 @@
   },
   "clock": {
     "schemaVersion": 1,
-    "day": 2,
-    "hour": 23,
+    "day": 3,
+    "hour": 0,
     "realAnchor": null
   },
   "companions": [
@@ -709,7 +786,9 @@
       ],
       "stageIndex": 0,
       "completedStages": [],
-      "progress": [],
+      "progress": [
+        "Vreni named the patient directly — a man who came in two days ago with an arm wound he calls fine, whose pulse has already changed overnight. The first observation is now possible."
+      ],
       "aliases": [],
       "startedAt": "2026-09-20T03:05:17.338Z",
       "startedWorldDay": 82
@@ -884,9 +963,8 @@
         "locationId": "gen-mara-wells-store",
         "day": 2
       },
-      "relationship": 2,
+      "relationship": 3,
       "history": [
-        "[d2] Extended a clear, warm invitation to Adelheid to serve as resident healer at the pass-road wayhouse, now without one since the equinox. She named the traveler's healed thigh wound as the reason she sought her out.",
         "[d2] Accepted Adelheid's answer with quiet satisfaction. Named the wayhouse's position on the sluice-road above the Wet Meadows without prompting, and the fever-child case that showed the real need. The geography places her exactly where travelers heading upstream would pass through.",
         "[d2] Had the grace to look at the seedling beds while Mara gave her read — she understands she is in the middle of something larger and does not press.",
         "[d2] Named her departure time as tonight and extended the open invitation to walk the sluice-road together by moonlight — an hour and a half to two hours up to the wayhouse.",
@@ -895,30 +973,33 @@
         "[d2] Stopped when Adelheid crouched at the runnel — waited without pressing, hands folded, patient",
         "[d2] Resumed walking when Adelheid rose from the runnel — mentioned the wayhouse keeps a light in the window; did not ask what was found at the stone",
         "[d2] Brought Adelheid to the wayhouse and set tea on the hearth without ceremony — the act of a practical host, not a performance of welcome",
-        "[d2] Watched Adelheid read the medicine shelf without speaking — a considering silence, the look of someone who has just confirmed something she suspected"
+        "[d2] Watched Adelheid read the medicine shelf without speaking — a considering silence, the look of someone who has just confirmed something she suspected",
+        "[d2] Accepted Adelheid's medicines with careful hands, named the patient she is worried about — a man insisting he is fine whose pulse has already shifted overnight"
       ],
       "knownFacts": [
-        "The wayhouse above the pass road has had no resident healer since the equinox — the previous healer returned to her family.",
-        "The wayhouse is on the sluice-road above Millbrook and sees all travelers heading upstream.",
         "The wayhouse sits on the sluice-road above the Wet Meadows — any traveler heading upstream three weeks ago would have passed through.",
         "A mother arrived two days ago with a child running a four-day fever; the wayhouse managed but it was close.",
         "She witnessed Mara Wells endorse Adelheid's departure — she now understands the invitation has a layer beyond the wayhouse's medical need.",
         "Some travelers carry unusual companions that it is polite not to inquire after at night on a steep road",
         "The wayhouse keeps valerian-and-hops tea on hand — a healer's house stocking what travelers need after a hard road",
-        "Adelheid reads a medicine shelf the way a working healer does — gap by gap, not label by label"
+        "Adelheid reads a medicine shelf the way a working healer does — gap by gap, not label by label",
+        "The patient arrived two days ago with a forearm wound he attributes to a farm tool; it closed cleanly but his pulse this morning was faster than last night",
+        "He is insistent that he is fine — unusually so"
       ],
-      "skillsObserved": [],
+      "skillsObserved": [
+        "honest and precise in naming what she does not know"
+      ],
       "status": "active",
       "sex": "female",
       "gender": "woman",
       "pronouns": "she/her",
       "age": 44,
-      "statusNote": "Inside the wayhouse at the top of the sluice-road; fire going, tea on the hearthstone",
+      "statusNote": "At the wayhouse; has just named the patient to Adelheid and is watching to see what she does next",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
       },
-      "met": 11,
+      "met": 12,
       "domains": {
         "primary": "mason"
       },
@@ -929,7 +1010,6 @@
     "millbrook": {
       "visits": 3,
       "notes": [
-        "[d1] Echo Sense confirmed: the east-edge plant roots are unified and deep, angled south-southeast — the hum has a direction and a system behind it.",
         "[d1] One stem cut cleanly two nodes up on Day 1 midday — pale sap bead at the wound. The plant registered the cut with a momentary hum-spike. The cutting is in Adelheid's possession.",
         "[d1] The silver-stemmed plant roots angle south-southeast at approximately twenty degrees below horizontal, directed toward the Echo River—traced by Echo Sense and confirmed by careful observation. The root system is unified and deep, descending past the terrace foundation. The internal hum travels…",
         "[d1] The Wet Meadows are impassable at dusk in early spring—melt runoff has created standing water and treacherous ground. The river is visible through the tree-line but cannot be reached without serious difficulty.",
@@ -940,7 +1020,8 @@
         "[d2] Mara Wells' Store has a working garden beyond its side wall—beds in spring turning, plants breaking through early-season earth. Available for tending.",
         "[d2] The Precursor pulse runs directly beneath the sluice-road — confirmed by Echo Sense through the drainage runnel stone at the upper terrace outlet. The road sits over the signal's south-southeast line.",
         "[d2] A low stone single-room building set into the hillside at the top of the sluice-road — working hearth, trestle table, two candles, curtained pallets, shelf of stoppered labeled jars, dried herbs in the rafters. First visited night of day 2.",
-        "[d2] Medicine shelf inventory read: valerian-and-hops (open), elderflower (half), plantain (full), yarrow (good), comfrey root (one nearly spent, one sealed), clove oil, feverfew (nearly gone), willow bark (solid), meadowsweet (quarter-jar). Missing: calendula, goldenrod, lemon balm, honey. Empty honey…"
+        "[d2] Medicine shelf inventory read: valerian-and-hops (open), elderflower (half), plantain (full), yarrow (good), comfrey root (one nearly spent, one sealed), clove oil, feverfew (nearly gone), willow bark (solid), meadowsweet (quarter-jar). Missing: calendula, goldenrod, lemon balm, honey. Empty honey…",
+        "[d2] Adelheid shared medicines from her Medic's Satchel with the wayhouse — calendula oil, goldenrod, yarrow, meadowsweet added to the shelf"
       ],
       "flags": {
         "plant_hum_confirmed": "day1",
@@ -1001,7 +1082,7 @@
           "day": 2,
           "lastSeen": 2,
           "visited": true,
-          "note": "Medicine shelf catalogued — short on feverfew, out of honey and calendula; comfrey in use"
+          "note": "Medicine shelf partially restocked with Adelheid's own supplies; patient behind far curtain with a worsening but concealed condition"
         }
       },
       "vectorsKnown": [
@@ -1305,12 +1386,8 @@
         "locationId": "gen-mara-wells-store"
       }
     ],
-    "turnsSinceOffer": 5,
+    "turnsSinceOffer": 0,
     "recentOffers": [
-      {
-        "thing": "Mara offering physical work as a grounding—garden beds needing hands, the store's back room work waiting",
-        "from": "Mara's reading of Adelheid's exhaustion and her own practice: keep people moving when they're wound tight, let work speak before words do"
-      },
       {
         "thing": "Mara offers direct access to work as a way of centering yourself—and uses that time to shift the conversation toward the real question…",
         "from": "Mara's read of who you are (someone who works rather than sits in uncertainty) and what you need (steady ground before the next weight)"
@@ -1326,6 +1403,10 @@
       {
         "thing": "The sluice channel beside the road is running — and Aevi brightens slightly as she tastes the water moving past, the same instinct that…",
         "from": "Aevi's established sensitivity to nanite and Precursor activity in water, and the fact that this channel feeds from upstream near the…"
+      },
+      {
+        "thing": "Behind the far curtain, audible now that the room is quiet — a man's breathing, a little too even, the kind of careful breath a person…",
+        "from": "What the patient fears: being seen clearly before he is ready to be"
       }
     ],
     "offscreenCursor": 5,
@@ -5817,8 +5898,8 @@
     "craft": 4,
     "wits": 4
   },
-  "pendingSubPoints": 0,
-  "skillPoints": 0,
+  "pendingSubPoints": 1,
+  "skillPoints": 2,
   "discoveries": [],
   "codex": {
     "schemaVersion": 1,
@@ -6133,13 +6214,15 @@
           "[d2] Wayhouse sister from the pass road wayhouse",
           "[d2] The wayhouse she serves on the pass road above Millbrook has had no resident healer since the equinox; she tracked down Adelheid specifically because the traveler's wound was closed with unusual care. She extended a warm, direct invitation to come and serve.",
           "[d2] The wayhouse she serves sits on the sluice-road above the Wet Meadows — travelers heading upstream pass through it. She named this without prompting after Adelheid accepted the invitation.",
-          "[d2] The wayhouse medicine shelf shows recent heavy use of comfrey and feverfew, and is entirely out of honey and calendula — the gaps of a house managing travelers under strain without a resident healer to replenish it."
+          "[d2] The wayhouse medicine shelf shows recent heavy use of comfrey and feverfew, and is entirely out of honey and calendula — the gaps of a house managing travelers under strain without a resident healer to replenish it.",
+          "[d2] The Patient at the Wayhouse — A man arrived two days ago with a forearm wound he says a farm tool made — wound closed cleanly, but his pulse was faster this morning than last night, and he is insistently fine in a way that is itself a symptom. Vreni is worried and has not named him."
         ],
         "links": [
           "millbrook",
           "maras-errand",
           "silas-weir",
-          "echo-river-contamination"
+          "echo-river-contamination",
+          "the-patient-who-is-not-sick-enough"
         ],
         "aliases": [],
         "createdDay": 2,
@@ -6159,12 +6242,20 @@
         "entityId": "person-617fc1f9d32fdabd",
         "updatedDay": 2
       }
-    }
+    },
+    "refused": [
+      {
+        "label": "The Patient at the Wayhouse",
+        "to": "sister-vreni",
+        "why": "beat",
+        "day": 2
+      }
+    ]
   },
   "grantsVersion": 1,
   "customAbilities": {},
   "companionBonds": {
-    "aevi": 4.75
+    "aevi": 5.25
   },
   "practice": {
     "schemaVersion": 1,
@@ -6244,29 +6335,28 @@
   "itemReclaimVersion": 1,
   "nameRepairVersion": 1,
   "tendencies": {
-    "generous": 3.49723041246474,
-    "social": 5.133531130040872,
-    "cerebral": 19.42733604311877,
-    "cautious": 16.10518544729734,
-    "strategic": 14.147256849604457,
-    "carousing": 0.7781217406708955,
-    "risky": 0.3900359602360377,
-    "ruthless": 0.889565022103595,
-    "patient": 0.5446415584428731,
-    "craft": 0.70155967750146
+    "generous": 4.409799652153122,
+    "social": 6.00519285178985,
+    "cerebral": 18.9416526420408,
+    "cautious": 15.702555811114907,
+    "strategic": 13.793575428364345,
+    "carousing": 0.7586686971541231,
+    "risky": 0.3802850612301368,
+    "ruthless": 0.8673258965510051,
+    "patient": 0.5310255194818012,
+    "craft": 0.6840206855639235
   },
   "aptitudes": [
     "strategist",
     "scholar",
-    "tactician",
     "sage",
     "stalwart"
   ],
-  "actionCount": 75,
+  "actionCount": 76,
   "bondLogFrom": null,
   "teachers": {},
   "regionsKnown": {
-    "valley": 36
+    "valley": 37
   },
   "company": [],
   "forkChoices": {},
@@ -6450,8 +6540,8 @@
   "bands": [],
   "_silasGrantsRevoked": true,
   "reconcileVersion": 72,
-  "updatedAt": 1789873517349,
-  "rev": 70,
+  "updatedAt": 1789873782241,
+  "rev": 71,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -6464,7 +6554,7 @@
   "featureOffers": [],
   "_pinsInitialized": true,
   "_opUnknown": {
-    "sceneSummary": 36
+    "sceneSummary": 37
   },
   "_applyFailures": null,
   "sessions": [
@@ -6495,10 +6585,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-09-20T03:00:30.698Z",
-      "lastAt": "2026-09-20T03:02:43.213Z",
+      "lastAt": "2026-09-20T03:09:42.218Z",
       "startDay": 82,
       "endDay": 82,
-      "beats": 2
+      "beats": 3
     }
   ],
   "_debtReceipts": [],
@@ -6521,8 +6611,8 @@
     "trust": 1,
     "endure": 1,
     "practical": 1,
-    "negotiate": 3,
-    "help": 2,
+    "negotiate": 4,
+    "help": 3,
     "plan": 2,
     "rapport": 2,
     "calm": 2,
@@ -6535,27 +6625,27 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 32,
-    "choices": 32,
-    "questUpdates": 20,
-    "scene": 32,
-    "npcUpdates": 28,
-    "placeUpdates": 11,
-    "codexUpdates": 23,
+    "sceneSummary": 33,
+    "choices": 33,
+    "questUpdates": 21,
+    "scene": 33,
+    "npcUpdates": 29,
+    "placeUpdates": 12,
+    "codexUpdates": 24,
     "timeOps": 26,
     "imagePrompt": 8,
     "gambitApt": 21,
-    "sceneEnded": 25,
-    "characterDeltas": 21,
-    "offer": 13,
+    "sceneEnded": 26,
+    "characterDeltas": 22,
+    "offer": 14,
     "stateOps": 2,
-    "deeds": 5,
+    "deeds": 6,
     "factUpdates": 4,
-    "ledgerEvents": 3,
+    "ledgerEvents": 4,
     "moveTo": 4,
     "_engineClosedScene": 1
   },
-  "_opTurns": 32,
+  "_opTurns": 33,
   "_opCountingSince": "2026-09-15T23:58:48.348Z",
   "gallery": [
     {
@@ -6593,7 +6683,7 @@
   ],
   "_opLedger": {
     "offer": {
-      "applied": 15,
+      "applied": 16,
       "rejected": 1,
       "lastWhy": "rejected-shape"
     },
@@ -6699,6 +6789,14 @@
       "day": 2,
       "worldDay": 80,
       "actionCount": 71
+    },
+    {
+      "companionId": "aevi",
+      "kind": "deed",
+      "delta": 0.5,
+      "day": 2,
+      "worldDay": 82,
+      "actionCount": 75
     }
   ],
   "companionMemory": {
@@ -6726,6 +6824,11 @@
       {
         "text": "Moved fast and sure through the muddy spring streets to reach the mill before the day's full work began",
         "weight": 0,
+        "day": 2
+      },
+      {
+        "text": "Shared medicines from her own satchel with the understocked wayhouse — named every gap and gave what could fill them",
+        "weight": 1,
         "day": 2
       }
     ]

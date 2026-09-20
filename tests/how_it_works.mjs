@@ -12321,11 +12321,27 @@ console.log("\n── §188 · who has thrown in with you: plural bands, a deriv
     /^The Fellowship of the Fell Pell — six sworn, one here$/.test(FW.rosterLine(silas, sOpts))
     && sRows.length === 6 && sRows.every(r => r.kind === "person" && r.name && r.level >= 1 && r.verbs)
     && sRows.find(r => r.id === "pell").atSide === true, FW.rosterLine(silas, sOpts));
-  check("§188: ⛔ LIVE — a place under a day off reads `within the day`, never `no distance at all`, which would put a man both elsewhere and here",
-    (() => { const a = sRows.find(r => r.id === "aldric");
-      const w = FW.wherePerson(a, { locations: L188, generated: silas.generated?.location || {}, holdings: silas.holdings || [], hereId: silas.currentLocationId, worldDay: 19 });
-      return /^at Millbrook, within the day/.test(w.line); })(),
-    FW.wherePerson(sRows.find(r => r.id === "aldric"), { locations: L188, generated: silas.generated?.location || {}, holdings: silas.holdings || [], hereId: silas.currentLocationId, worldDay: 19 }).line);
+  // ⛔ THIS PINNED A MAN'S POSITION AND THE MAN MOVED. It asserted that ALDRIC reads "at Millbrook, within the day" — true when
+  // it was written, and false the moment Silas walked to Millbrook, because Aldric is now HERE. ⚠️ A gate over somebody's live
+  // save that names a person and a place goes red for a game being played correctly, which teaches everyone to re-baseline
+  // past it. ⛑ The RULE is in the check's own title and it is invariant under anybody walking anywhere: no distance at all
+  // means HERE, and any distance at all means NOT here. Asserted over all six, plus the sub-day wording driven on a place
+  // measured to be under a day away rather than on whoever happens to be standing there.
+  {
+    const w188 = (row) => FW.wherePerson(row, { locations: L188, generated: silas.generated?.location || {}, holdings: silas.holdings || [], hereId: silas.currentLocationId, worldDay: 19 });
+    const placed = sRows.map(r => ({ id: r.id, ...w188(r) })).filter(x => x.days != null);
+    const saysHere = (x) => /^here\b/.test(x.line);
+    // ⚠️ THE TWO BANDS `dayWord` ACTUALLY DRAWS, taken from ITS threshold (0.75) rather than from a guess at it: my
+    // first cut said "under a day", picked a place 0.9 days off, and failed on prose that was perfectly correct.
+    const measured = Object.keys(L188).map(id => w188({ entry: { lastSeen: { locationId: id, day: 5 } } })).filter(x => x.days != null && x.days > 0);
+    const underADay = measured.find(x => x.days < 0.75);
+    const aDayOrMore = measured.find(x => x.days >= 0.75);
+    check("§188: ⛔ LIVE — NO DISTANCE AT ALL MEANS HERE, AND ANY DISTANCE AT ALL MEANS NOT HERE, which is what stops a man being written as both elsewhere and in the room; and a place under a day off reads `within the day` rather than collapsing to nothing",
+      placed.length >= 5 && placed.every(x => saysHere(x) === (x.days === 0))
+      && !!underADay && /within the day/.test(underADay.line) && !saysHere(underADay)
+      && !!aDayOrMore && /(one day|two days|\d+ days)/.test(aDayOrMore.line) && !saysHere(aDayOrMore),
+      JSON.stringify({ rows: placed.map(x => `${x.id}@${x.days}${saysHere(x) ? " here" : ""}`), underADay: underADay?.line, further: aDayOrMore?.line }));
+  }
   check("§188: …and each of the six is placed by a named basis, with no slug and no invented position",
     (() => {
       const w = sRows.map(r => FW.wherePerson(r, { locations: L188, generated: silas.generated?.location || {}, holdings: silas.holdings || [], hereId: silas.currentLocationId, worldDay: 19 }));

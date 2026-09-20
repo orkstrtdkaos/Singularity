@@ -2,6 +2,34 @@
   "schemaVersion": 1,
   "regionId": "valley",
   "holds": {
+    "char-mrum8y4d:the_standing_annex": {
+      "key": "char-mrum8y4d:the_standing_annex",
+      "id": "the_standing_annex",
+      "ownerId": "char-mrum8y4d",
+      "ownerName": "Loki",
+      "name": "The Standing Annex",
+      "kind": "enterprise",
+      "describedAs": "floating tower",
+      "locationId": "gen-the-made-gate",
+      "placeName": "The Made Gate",
+      "settlementId": "millbrook",
+      "settlementName": "Millbrook",
+      "worldPos": {
+        "colatitude": 20.4,
+        "longitude": 251.95,
+        "depth": 0
+      },
+      "keeperId": "traveler-woman",
+      "keeperName": "Vessin Tallow-bark",
+      "condition": "thriving",
+      "has": [
+        "a watchtower",
+        "a shrine"
+      ],
+      "guardedBy": [
+        "Kael"
+      ]
+    },
     "char-mrhs8286:hold-fendt::warden-of-the-threshold-post-at-the-ridg": {
       "key": "char-mrhs8286:hold-fendt::warden-of-the-threshold-post-at-the-ridg",
       "id": "hold-fendt::warden-of-the-threshold-post-at-the-ridg",
@@ -29,7 +57,17 @@
         "a Watch — people posted, and they SEE",
         "a relay station — the network's node"
       ],
-      "guardedBy": []
+      "guardedBy": [],
+      "trades": {
+        "goods": [
+          {
+            "goods": "raw_material",
+            "name": "hide, sinew, timber, ore",
+            "units": 20,
+            "each": 4
+          }
+        ]
+      }
     },
     "char-mrhs8286:hold-cassiel-ord::full-reconstruction-of-the-raven-s-home-": {
       "key": "char-mrhs8286:hold-cassiel-ord::full-reconstruction-of-the-raven-s-home-",
@@ -60,7 +98,23 @@
       ],
       "guardedBy": [
         "Siol"
-      ]
+      ],
+      "trades": {
+        "goods": [
+          {
+            "goods": "mech_parts",
+            "name": "working parts",
+            "units": 6,
+            "each": 7
+          },
+          {
+            "goods": "living_stock",
+            "name": "seed, cuttings, livestock",
+            "units": 6,
+            "each": 20
+          }
+        ]
+      }
     },
     "char-mrhs8286:the-fell-pell": {
       "key": "char-mrhs8286:the-fell-pell",
@@ -91,7 +145,23 @@
       ],
       "guardedBy": [
         "Calvar"
-      ]
+      ],
+      "trades": {
+        "goods": [
+          {
+            "goods": "raw_material",
+            "name": "hide, sinew, timber, ore",
+            "units": 7,
+            "each": 4
+          },
+          {
+            "goods": "mech_parts",
+            "name": "working parts",
+            "units": 7,
+            "each": 4
+          }
+        ]
+      }
     },
     "char-mrhs8286:whistling-woman-post": {
       "key": "char-mrhs8286:whistling-woman-post",
@@ -119,7 +189,10 @@
         "a keeper's hut",
         "a shrine"
       ],
-      "guardedBy": []
+      "guardedBy": [],
+      "trades": {
+        "goods": []
+      }
     },
     "char-mrhs8286:hold-made-gate": {
       "key": "char-mrhs8286:hold-made-gate",
@@ -150,35 +223,17 @@
       ],
       "guardedBy": [
         "Bryn Calowell"
-      ]
-    },
-    "char-mrum8y4d:the_standing_annex": {
-      "key": "char-mrum8y4d:the_standing_annex",
-      "id": "the_standing_annex",
-      "ownerId": "char-mrum8y4d",
-      "ownerName": "Loki",
-      "name": "The Standing Annex",
-      "kind": "enterprise",
-      "describedAs": "floating tower",
-      "locationId": "gen-the-made-gate",
-      "placeName": "The Made Gate",
-      "settlementId": "millbrook",
-      "settlementName": "Millbrook",
-      "worldPos": {
-        "colatitude": 20.4,
-        "longitude": 251.95,
-        "depth": 0
-      },
-      "keeperId": "traveler-woman",
-      "keeperName": "Vessin Tallow-bark",
-      "condition": "thriving",
-      "has": [
-        "a watchtower",
-        "a shrine"
       ],
-      "guardedBy": [
-        "Kael"
-      ]
+      "trades": {
+        "goods": [
+          {
+            "goods": "raw_material",
+            "name": "hide, sinew, timber, ore",
+            "units": 7,
+            "each": 4
+          }
+        ]
+      }
     }
   }
 }

@@ -69,7 +69,8 @@ const walkDir = (d) => {
 };
 try { walkDir(join(root, "characters")); } catch { /* no saves on this machine */ }
 
-const IS_IMG = (v) => typeof v === "string" && v.includes("image.pollinations.ai");
+// ⚠️ CCODE-455: BOTH HOSTS. A save part-way through the move holds some of each, and a count that saw only one would report the move as a loss.
+const IS_IMG = (v) => typeof v === "string" && (v.includes("image.pollinations.ai") || v.includes("singularity-art.orkstrtdkaos.workers.dev"));
 const where = new Map();      // url -> [ "file :: a.b.c", … ]
 const collect = (o, file, path, seen) => {
   if (!o || typeof o !== "object" || seen.has(o)) return;

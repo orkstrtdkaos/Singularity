@@ -62,7 +62,7 @@ const rlOld = `${rl?.name}: ${rl?.description || ""}`;
 const RADIANT = "white-gold core, hard cyan edge, black cast shadows with knife borders";
 
 const url = (prompt, w, h, seed, bust) =>
-  `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=${w}&height=${h}&seed=${seed}&nologo=true&_cb=${bust}`;
+  `https://singularity-art.orkstrtdkaos.workers.dev/prompt/${encodeURIComponent(prompt)}?width=${w}&height=${h}&seed=${seed}&nologo=true&_cb=${bust}`;   // CCODE-455: our own service
 
 const VARIANTS = [
   // ⚠️ A / RL_A ARE THE CURRENT LIVE SHAPE, reproduced exactly — the control. Without it the grid compares

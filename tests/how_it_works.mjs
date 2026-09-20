@@ -23355,12 +23355,15 @@ console.log("\n── §326 · a refusing picture service is named, not retried 
     ART326.serviceRefusal(500, body) === "unpaid" && ART326.serviceRefusal(402, "Insufficient balance") === "unpaid"
     && ART326.serviceRefusal(500, '{"error":"Internal Server Error"}') === null && ART326.serviceRefusal(200, body) === null && ART326.serviceRefusal(503, "") === null);
   check("§326: ⛑ …and what the player is told says what happened and that what they have is safe — never 'try again'",
-    /charge for new pictures/.test(ART326.ART_REFUSED_SAID) && /the pictures you already have still show/.test(ART326.ART_REFUSED_SAID) && !/try/i.test(ART326.ART_REFUSED_SAID));
+    // ⛔ CCODE-455: one constant became four reasons (`refusedSaid`), because "a service still being set up" is not "a service that tried
+    // and failed" — and the player is owed the difference. The property is the same for every one of them.
+    ["unpaid", "unbuilt", "undrawn", "unasked"].every(w => /the pictures you already have still show/.test(ART326.refusedSaid(w)) && !/try/i.test(ART326.refusedSaid(w)))
+    && /charges for new pictures/.test(ART326.refusedSaid("unpaid")) && new Set(["unpaid", "unbuilt", "undrawn", "unasked"].map(w => ART326.refusedSaid(w))).size === 4);
   const A326 = rd("app.js").replace(/\r\n/g, "\n").split("\n").filter(l => !/^\s*\/\//.test(l)).join("\n");
   check("§326: ⛔ A REFUSAL DELETES NOTHING — the probe reads the body on a failed response and STILL answers 'unknown', which `mintAction` leaves alone; the viewer and the gallery's retry ask before promising",
     /if \(!res\.ok\) \{[\s\S]{0,300}const refused = serviceRefusal\(res\.status, body\);\n\s*if \(refused\) _artRefusal = \{ why: refused, at: Date\.now\(\) \};\n\s*return \{ verdict: "unknown",/.test(A326)
     && /shownImg\.onerror = async \(\) => \{[\s\S]{0,200}const refused = await artRefusalOf\(it\.url\);/.test(A326)
-    && /\[data-galretry\]"\)\) b\.onclick = async \(\) => \{[\s\S]{0,200}if \(await artRefusalOf\(/.test(A326)
+    && /\[data-galretry\]"\)\) b\.onclick = async \(\) => \{[\s\S]{0,250}const refusal = await artRefusalOf\(/.test(A326)
     && ART326.mintAction("unknown", 0, 2) === "leave");
 }
 
@@ -23685,6 +23688,69 @@ console.log("\n── §332 · a band on a mission — sent or refused with a re
     /const r = sendBandOnMission\(character, bandId, \{/.test(A332) && /return bandDialsOf\(CONTENT\);/.test(A332)
     && /if \(a\.bandId\) bandNews\.push\(\.\.\.bandMissionOutcome\(character, a, outcome, \{ content \}\)\);/.test(W332)
     && (C332.rules.martial?.callCostPerHead == null || dials.callCostPerHead === C332.rules.martial.callCostPerHead), JSON.stringify({ callCostPerHead: dials.callCostPerHead }));
+}
+
+// ══════════ §333 · CCODE-455 — THE GAME ASKS OUR OWN PICTURE SERVICE ══════════
+// Pollinations began charging on 2026-09-19 (§326) and answers every NEW picture with 500 "Insufficient balance". `worker/src/index.js`
+// is our own service on Erik's account: it keeps every picture it serves and, on an address it has not seen, asks the OLD service first
+// and keeps THOSE bytes — so the 279 pictures still out there keep their faces, and only what nobody can give us any more is redrawn.
+console.log("\n── §333 · the picture service — one host, an old address rewritten exactly, every save moved once, and each refusal said in its own words ──");
+{
+  const ART = await import("../engine/art.js");
+  const RC = await import("../engine/reconcile.js");
+  const OLD = "https://image.pollinations.ai";
+  const S = ART.ART_SERVICE;
+  const minted = ART.imageURLFor("npc", "a grey-haired smith at an anvil", "pell-1");
+  const old1 = `${OLD}/prompt/Pell%3A%20a%20smith%2C%20soot%20on%20her%20forearms?width=1024&height=320&seed=94371&nologo=true`;
+  const healed = `${OLD}/prompt/x?width=512&height=512&seed=7&nologo=true&_cb=1758300000000_1`;
+  check("§333: ⛔ ONE HOST, AND THE SHAPE OF THE ADDRESS UNCHANGED — a mint is our service's `/prompt/<encoded>` with the same width, height, seed and `nologo`, which is what makes moving an old address a REWRITE rather than a re-mint",
+    minted.startsWith(`${S}/prompt/`) && /\?width=\d+&height=\d+&seed=\d+&nologo=true$/.test(minted) && decodeURIComponent(minted).includes("grey-haired smith")
+    && !minted.includes("pollinations"), minted.slice(0, 120));
+  check("§333: ⛑ AN OLD ADDRESS IS POINTED AT THE SERVICE, EXACTLY — path and whole query carried over, `_cb` INCLUDED (a healed record's good bytes live under its busted address); an address already ours, an authored path, and prose that merely names the old host are returned untouched",
+    ART.servicedURL(old1) === `${S}${old1.slice(OLD.length)}` && ART.servicedURL(healed).endsWith("&_cb=1758300000000_1") && ART.servicedURL(healed).startsWith(`${S}/prompt/`)
+    && ART.servicedURL(minted) === minted && ART.servicedURL("content/packs/valley/assets/thornmother.png") === "content/packs/valley/assets/thornmother.png"
+    && ART.servicedURL("a sign reading image.pollinations.ai above the door") === "a sign reading image.pollinations.ai above the door"
+    && ART.servicedURL("") === "" && ART.servicedURL(null) === "");
+  check("§333: ⛔ BOTH HOSTS ARE STILL 'GENERATED' — every record in play names the old one, and answering 'authored' for it would make the game refuse to redraw a picture it drew itself; an authored path is neither",
+    ART.isGeneratedImage(old1) && ART.isGeneratedImage(minted) && !ART.isGeneratedImage("content/packs/valley/assets/thornmother.png") && !ART.isGeneratedImage(""));
+  // ⛔ THE SAVE IS MOVED ONCE, IN EVERY SHAPE A PICTURE ADDRESS IS STORED IN — a record's `image`, a `portrait`, `figureImages`, a gallery
+  // entry, a news item — because "rewrite it where it is read" is the shape of bug that leaves two readers behind.
+  const save = () => ({
+    id: "char-test", reconcileVersion: 71, name: "Tester",
+    portrait: `${OLD}/prompt/a%20face?width=768&height=768&seed=11&nologo=true`,
+    npcRegistry: { pell: { id: "pell", name: "Pell", image: old1, note: "her forge stands at image.pollinations.ai in no sense at all" } },
+    figureImages: { "whois-pell": `${OLD}/prompt/whois?width=512&height=512&seed=3&nologo=true` },
+    gallery: [{ url: healed, caption: "the ridge road" }, { url: "content/packs/valley/assets/thornmother.png", caption: "authored" }],
+    worldState: { news: [{ text: "a picture came", image: `${OLD}/prompt/news?width=1024&height=320&seed=5&nologo=true` }] },
+    // ⛔ A MAP KEYED BY THE ADDRESS — the one Silas's save had and the first cut of this step left behind
+    composedImages: { [`${OLD}/prompt/raw?width=1024&height=320&seed=9&nologo=true`]: `${OLD}/prompt/composed?width=1024&height=320&seed=9&nologo=true` },
+  });
+  const w = save();
+  RC.reconcile(w, "character", {});
+  const strings = [];
+  (function walk(o, d) { if (!o || typeof o !== "object" || d > 8) return; for (const v of Object.values(o)) { if (typeof v === "string") strings.push(v); else walk(v, d + 1); } })(w, 0);
+  const again = JSON.parse(JSON.stringify(w));
+  RC.reconcile(again, "character", {});
+  check("§333: ⛔ EVERY PICTURE ADDRESS IN A SAVE MOVES ONCE (step 72) — the portrait, a record's image, a figure's, a gallery entry (its `_cb` kept), a news item, AND A MAP KEYED BY THE ADDRESS (`composedImages`, which the first cut left behind on Silas's save — a composed picture nobody could find again); an authored path and prose that names the old host are untouched; and the step is idempotent",
+    strings.filter(s => s.startsWith(OLD)).length === 0 && strings.filter(s => s.startsWith(`${S}/prompt/`)).length === 6
+    && Object.keys(w.composedImages).every(k => k.startsWith(`${S}/prompt/`)) && Object.keys(w.composedImages).length === 1
+    && w.gallery[0].url.endsWith("&_cb=1758300000000_1") && w.gallery[1].url === "content/packs/valley/assets/thornmother.png"
+    && /image\.pollinations\.ai in no sense/.test(w.npcRegistry.pell.note) && w.reconcileVersion >= 72
+    && JSON.stringify(again) === JSON.stringify(w),
+    JSON.stringify({ moved: strings.filter(s => s.startsWith(`${S}/prompt/`)).length, left: strings.filter(s => s.startsWith(OLD)).length }));
+  const body = `{"error":"Internal Server Error","message":"Gen Sana request failed with 402: {\"message\":\"Insufficient balance\"}"}`;
+  const reasons = {
+    unpaid: ART.serviceRefusal(500, body),
+    unbuilt: ART.serviceRefusal(503, "this service has no store bound yet, so it cannot keep a picture — nothing of yours is lost\n"),
+    undrawn: ART.serviceRefusal(502, "the drawing failed: 5006: Error: something\n"),
+    unasked: ART.serviceRefusal(403, "this picture has not been drawn yet, and this request did not come from the game\n"),
+  };
+  check("§333: ⛔ OUR SERVICE'S REFUSALS ARE READ IN ITS OWN WORDS — a store not bound yet, a drawing that failed, and a request that is not the game are three DIFFERENT things, and none of them is the old service's 'unpaid'; a plain failure and any success are still nothing",
+    reasons.unpaid === "unpaid" && reasons.unbuilt === "unbuilt" && reasons.undrawn === "undrawn" && reasons.unasked === "unasked"
+    && ART.serviceRefusal(500, "gateway blew up") === null && ART.serviceRefusal(200, body) === null, JSON.stringify(reasons));
+  const A333 = rd("app.js").replace(/\r\n/g, "\n").split("\n").filter(l => !/^\s*\/\//.test(l)).join("\n");
+  check("§333: ⛑ AND THE PLAYER IS TOLD THE ONE THAT HAPPENED — the viewer's caption and the gallery's retry ask `refusedSaid` for the reason they met, rather than one fixed sentence about a service the game no longer uses",
+    /refusedSaid\(refused\.why \|\| refused\)/.test(A333) && /refusedSaid\(refusal\.why \|\| refusal\)/.test(A333) && !/ART_REFUSED_SAID/.test(A333));
 }
 
 /* ══════════ REPORT ══════════ */

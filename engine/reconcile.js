@@ -19,6 +19,7 @@ import { canRaiseBand, raiseBand } from "./melee.js";   // R49: the fellowship t
 import { worldPosForGenerated } from "./worldmap.js";
 import { grantMartialKit, retiredBaselineIds } from "./martial.js";
 import { applyLadderGrants } from "./ladder.js";
+import { servicedURL } from "./art.js";   // ⛔ step 72: the pictures now ask our own service
 import { credit, debit } from "./purse.js";   // R48: the purse has ONE door in, and it records an origin · step 48: and one door out
 import { mergeCodexTopics, ensureCodex, applyCodexUpdates, foldTopicsByIdPrefix } from "./codex.js";   // step 43: the named fold
 import { mergeRecovery, mergeReceiptLine } from "./recovery.js";   // step 41: the Settings door's merge, run where every copy passes
@@ -2380,6 +2381,43 @@ export const CHARACTER_STEPS = [
       if (coin) parts.push(`${coin} crystal`);
       console.log(`[reconcile] silas-only-grants-revoked: ${parts.join(" · ")}`);
       return { notes: [`${parts.join(" and ")} came to you by a fault in the world's bookkeeping — they belonged to another story, and they are gone from your sheet. Nothing you earned was touched, and anything already spent stays spent.`] };
+    }
+  },
+  {
+    version: 72, id: "pictures-to-our-service", playerFacing: false,
+    // ⛔ CCODE-455 — EVERY PICTURE ADDRESS IN THE SAVE, POINTED AT THE SERVICE THAT CAN STILL ANSWER IT. Pollinations began charging on
+    // 2026-09-19; our own Worker keeps what it serves and, on an address it has not seen, asks the old service first and keeps THOSE
+    // bytes — so this rewrite changes where a picture is fetched from and never which picture it is.
+    //
+    // ⛑ ONE PASS OVER THE SAVE RATHER THAN A REWRITE AT EVERY READ. A picture address is stored in a dozen shapes — a record's `image`,
+    // a `portrait`, `figureImages`, a gallery entry, a news item, a chronicle beat — and "rewrite it where it is read" is exactly the
+    // shape of bug this project keeps finding: four readers changed, two missed, and the two that were missed are the ones a player uses.
+    // The save is walked once, every string that begins with the old host is moved, and after that no reader has to know anything.
+    //
+    // ⚠️ IT TOUCHES NOTHING ELSE. `servicedURL` returns a string it does not recognise unchanged, so a prompt that merely mentions the old
+    // host, an authored path, and every other string in the save come through untouched.
+    //
+    // ⛔ AND A KEY IS AN ADDRESS TOO. Measured on Silas's save the first time this ran: 292 addresses moved and TWO were left, both of them
+    // KEYS — `composedImages` is keyed by the raw picture's address and holds the composed one. Moving only the values would have left every
+    // composed picture he has unfindable, and `mintURL` would have composed a new one over the top of it. The same trap as CCODE-439's
+    // placeholder-as-key, one layer down: when a map is keyed by a thing, migrating the thing means migrating the key.
+    apply: (c) => {
+      let moved = 0;
+      const seen = new Set();
+      const walk = (o, depth) => {
+        if (!o || typeof o !== "object" || depth > 14 || seen.has(o)) return;
+        seen.add(o);
+        const isArray = Array.isArray(o);
+        for (const [k, v] of Object.entries(o)) {
+          if (typeof v === "string") { const s = servicedURL(v); if (s !== v) { o[k] = s; moved++; } }
+          else if (v && typeof v === "object") walk(v, depth + 1);
+          if (!isArray) { const nk = servicedURL(k); if (nk !== k) { o[nk] = o[k]; delete o[k]; moved++; } }
+        }
+      };
+      walk(c, 0);
+      if (!moved) return {};
+      console.log(`[reconcile] ccode-455: ${moved} picture address(es) now ask our own service`);
+      return {};
     }
   },
   // Future steps register here — e.g. innate-talent GRANT (offers[], when talent content

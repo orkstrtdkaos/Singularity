@@ -99,8 +99,24 @@ function seedFrom(s) {
   return Math.abs(h) % 100000;
 }
 
-function pollinationsURL(prompt, { width = 1024, height = 320, seed = 42, style = IMAGE_STYLE } = {}) {
-  return `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt + ", " + style)}?width=${width}&height=${height}&seed=${seed}&nologo=true`;
+/** ⛔ CCODE-455 — WHERE A PICTURE COMES FROM, IN ONE PLACE. Pollinations began charging on 2026-09-19 and answers every NEW picture with
+ *  500 "Insufficient balance"; `worker/src/index.js` is our own service, on Erik's Cloudflare account, which keeps every picture it serves
+ *  and — on an address it has not seen — asks the OLD service first and keeps those bytes, so a face the players already know does not
+ *  change. ⚠️ THE SHAPE OF THE ADDRESS IS DELIBERATELY UNCHANGED: every stored URL in every save is the same path and the same query, and
+ *  only the host in front of it moved, which is what makes `servicedURL` a rewrite rather than a re-mint. */
+export const ART_SERVICE = "https://singularity-art.orkstrtdkaos.workers.dev";
+const OLD_ART_HOST = /^https?:\/\/image\.pollinations\.ai\//i;
+
+function pictureURL(prompt, { width = 1024, height = 320, seed = 42, style = IMAGE_STYLE } = {}) {
+  return `${ART_SERVICE}/prompt/${encodeURIComponent(prompt + ", " + style)}?width=${width}&height=${height}&seed=${seed}&nologo=true`;
+}
+
+/** ⛑ CCODE-455 — AN OLD ADDRESS, POINTED AT THE SERVICE THAT CAN STILL ANSWER IT. The path and the whole query ride across untouched —
+ *  `_cb` INCLUDED, because a healed record's good bytes live under its busted address (SNG-435) and the service asks the old service with
+ *  exactly what it is given. Anything that is not an old picture address comes back as it went in. Pure. */
+export function servicedURL(url) {
+  const u = String(url || "");
+  return OLD_ART_HOST.test(u) ? u.replace(OLD_ART_HOST, `${ART_SERVICE}/`) : u;
 }
 
 /** ⛔ CCODE-193 §2 — EVERY MINT PASSES THROUGH HERE, so "every image" means every image.
@@ -166,10 +182,25 @@ export function onComposedLookup(fn) { _composedFor = typeof fn === "function" ?
  *  response: "unpaid" when it is that refusal, else null. ⚠️ It never makes a verdict: a refusal says nothing about stored bytes. Pure. */
 export function serviceRefusal(status, bodyText = "") {
   if (!(Number(status) >= 400)) return null;
-  return /INSUFFICIENT_BALANCE|Insufficient balance/i.test(String(bodyText || "")) ? "unpaid" : null;
+  const body = String(bodyText || "");
+  if (/INSUFFICIENT_BALANCE|Insufficient balance/i.test(body)) return "unpaid";
+  // ⛔ CCODE-455 — AND OUR OWN SERVICE'S REFUSALS, IN ITS OWN WORDS (`worker/src/index.js`). Each is a DIFFERENT thing that went wrong and
+  // the player is owed the difference: a service still being set up is not a service that tried and failed.
+  if (/has no store bound|has no drawer bound/i.test(body)) return "unbuilt";
+  if (/the drawing failed|came back with nothing in it/i.test(body)) return "undrawn";
+  if (/did not come from the game|drawing is switched off/i.test(body)) return "unasked";
+  return null;
 }
-/** What a player is told when it is the refusal — what happened, and that what they have is safe. No "try again": it cannot help. */
-export const ART_REFUSED_SAID = "the picture service has begun to charge for new pictures, so none can be drawn right now — the pictures you already have still show";
+
+/** What a player is told for each refusal — what happened, and that what they have is safe. ⚠️ NEVER "try again": a retry is a new request
+ *  the same service refuses the same way, and a promise that cannot be kept is worse than the refusal. Pure. */
+const REFUSAL_SAID = {
+  unpaid: "the old picture service now charges for new pictures — the pictures you already have still show",
+  unbuilt: "the picture service is not finished being set up, so nothing can be drawn yet — the pictures you already have still show",
+  undrawn: "the picture service could not draw this one — the pictures you already have still show",
+  unasked: "this picture has not been drawn yet, and it cannot be drawn from here — the pictures you already have still show",
+};
+export function refusedSaid(why) { return REFUSAL_SAID[String(why || "")] || REFUSAL_SAID.undrawn; }
 
 /** Smallest response that can be a real picture. Aevi's floor, with margin: the smallest healthy image she
  *  measured was ~18 KB, and the poisoned ones are 0. */
@@ -743,7 +774,7 @@ export function imageURLFor(kind, safePrompt, seedKey = "", { aesthetic = null, 
   const size = IMG_SIZES[kind] || IMG_SIZES.moment;
   // CCODE-179: the wrapper follows the PEOPLE when we know them; the medium never moves —
   // ⛔ CCODE-357: except for a picture a CHARACTER made, which is in the medium they made it in.
-  return pollinationsURL(safePrompt, { ...size, seed: seedFrom(String(seedKey) || safePrompt), style: artworkStyle(medium) || houseStyleFor(aesthetic) });
+  return pictureURL(safePrompt, { ...size, seed: seedFrom(String(seedKey) || safePrompt), style: artworkStyle(medium) || houseStyleFor(aesthetic) });
 }
 
 // ---------- SNG-035: persist-once (born-with-image) ----------
@@ -964,7 +995,10 @@ export function regenerateImage(record, kind, { ratingLevel = 2, isMinor = null,
  *  authoring." An authored image is a path or URL that content shipped; a generated one came from the
  *  provider. So the discriminator is simply where the picture came from. Pure. */
 export function isGeneratedImage(url) {
-  return /image\.pollinations\.ai/i.test(String(url || ""));
+  const u = String(url || "");
+  // ⚠️ BOTH HOSTS, FOR AS LONG AS ANY SAVE NAMES THE OLD ONE (CCODE-455): a record that has not been through the reconcile step yet is
+  // still a generated picture, and answering "authored" for it would make the game refuse to redraw a picture it drew itself.
+  return OLD_ART_HOST.test(u) || u.startsWith(`${ART_SERVICE}/`);
 }
 
 /** SNG-401 §3: the player looked at both and chose one. NOW it becomes the subject's image, and the seed

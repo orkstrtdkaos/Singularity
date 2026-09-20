@@ -584,7 +584,7 @@ globalThis.localStorage.setItem("singularity.artMode", "generate");
 const testLoc = { id: "millbrook", name: "Millbrook", descriptionSeed: "a village", image: "content/packs/valley/assets/millbrook.jpg" };
 const sc1 = sceneImage(testLoc, { setting: "Inside a low-beamed cottage, fire banked, rain on the shutters" });
 const sc2 = sceneImage(testLoc, { setting: "On the river dock at dusk, gray-green water lapping the pilings" });
-check("generate mode: scene setting drives the image", sc1.includes("pollinations") && sc1 !== sc2);
+check("generate mode: scene setting drives the image", sc1.includes("/prompt/") && sc1 !== sc2);
 check("same setting = same image (stable seed)", sc1 === sceneImage(testLoc, { setting: "Inside a low-beamed cottage, fire banked, rain on the shutters" }));
 globalThis.localStorage.setItem("singularity.artMode", "static");
 check("static mode falls back to the location banner", sceneImage(testLoc, { setting: "anywhere" }) === testLoc.image);
@@ -2783,7 +2783,7 @@ await (async () => {
   check("SNG-053: appearance/lineage also count as form; default is a stated 'a person'", /^a scaled/.test(characterPromptSeed({ appearance: "a scaled serpent-kin" })) && /^a person/.test(characterPromptSeed({ name: "Jo", origin: "valley" })));
   check("SNG-053: a generated NPC prompt leads with its form", /^a hulking stone construct/.test(assembleImagePrompt("npc", { name: "Gate", role: "guards the arch", appearance: "a hulking stone construct" })));
   check("SNG-035: assembleImagePrompt(location) uses the descriptionSeed", /old mill/i.test(assembleImagePrompt("location", { name: "Mill", descriptionSeed: "an old mill by the water" })));
-  check("SNG-035: imageURLFor builds a keyless Pollinations URL with the encoded prompt", (() => { const u = imageURLFor("npc", "a brave knight", "knight-1"); return u.startsWith("https://image.pollinations.ai/prompt/") && /brave/.test(u) && /nologo=true/.test(u); })());
+  check("SNG-035: imageURLFor builds a keyless Pollinations URL with the encoded prompt", (() => { const u = imageURLFor("npc", "a brave knight", "knight-1"); return u.startsWith("https://singularity-art.orkstrtdkaos.workers.dev/prompt/") && /brave/.test(u) && /nologo=true/.test(u); })());
 
   // persist-once (born-with-image) — needs art generation ON
   localStorage.setItem("singularity.artMode", "generate");
@@ -15386,7 +15386,7 @@ await (async () => {
   const p1 = pell();
   const drawn = regenerateImage(p1, "npc", { ratingLevel: 2, attempt: 1 });
   check("401 §3 THE RULE: a draw does NOT touch the record (the old face survives)", p1.image === "ORIGINAL" && !p1.imagePinned && !p1.imageSeedKey);
-  check("401: …and it returns a real, different picture to look at beside it", !!drawn?.url && drawn.url !== "ORIGINAL" && /image\.pollinations/.test(drawn.url));
+  check("401: …and it returns a real, different picture to look at beside it", !!drawn?.url && drawn.url !== "ORIGINAL" && /\/prompt\//.test(drawn.url));
 
   // §2 — a re-roll is the SAME prompt with a NEW seed. Same seed would redraw the same face.
   const d2 = regenerateImage(pell(), "npc", { ratingLevel: 2, attempt: 2 });

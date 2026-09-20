@@ -61,7 +61,8 @@ export default {
     // different picture, and keying on it would store the same picture twice and lose the healed record's bytes.
     // ⚠️ …AND CARRIES THE REFERENCE. The same words drawn out of a different picture, or at a different strength, are a different
     // picture, so a key that ignored them would hand back the first one forever.
-    const ref = url.searchParams.get("ref") || "";
+    const refList = url.searchParams.getAll("ref").filter(Boolean).slice(0, 4);   // ⛔ FLUX.2 takes up to four
+    const ref = refList.join(",");
     const strength = Math.min(1, Math.max(0.05, Number(url.searchParams.get("strength")) || 0.5));
     // ⚠️ …AND THE WAY IT WAS DRAWN. A probe that asked a different model with a different field is a different picture, and while the keys
     // were the same one probe's answer — FLUX.2's own sample image, branded in red — came back as the finished scene for every later ask.
@@ -79,8 +80,13 @@ export default {
       const may = mayDraw(request, env);
       if (!may.ok) return refuse(403, may.why);
       if (!env.AI) return refuse(503, "this service has no drawer bound yet, so a new picture cannot be drawn");
-      const from = await refBytes(ref, request, store);
-      if (!from.ok) return refuse(400, `the reference picture could not be read: ${from.why}`);
+      const refs = [];
+      for (const one of refList) {
+        const got = await refBytes(one, request, store);
+        if (!got.ok) return refuse(400, `a reference picture could not be read: ${got.why}`);
+        refs.push(got);
+      }
+      const from = refs[0];
 
       // ⚑ …and the same knobs for a PLAIN (JSON) call, so a different model and a different name for the picture field can be tried by
       // changing a URL. `@cf/stabilityai/stable-diffusion-xl-base-1.0` is documented to take `image`/`image_b64` and answers "input tensor
@@ -110,26 +116,24 @@ export default {
       // ⚑ CCODE-456 — FINDING THE SHAPE OF A CALL NOBODY DOCUMENTS. Cloudflare publishes FLUX.2's input as an opaque `multipart`, so the
       // field names are discoverable only by asking the model and reading what it says back. These four knobs (`m`, `field`, `wrap`, and
       // the presence of `ref`) make that a matter of changing a URL instead of redeploying, and every answer comes back as plain words.
+      // ⛔ CCODE-456b — FLUX.2 TAKES UP TO FOUR REFERENCES, and its shape is published in the klein-9b changelog rather than in the
+      // model's schema (which says only "multipart"): the fields are NUMBERED — `input_image_0` … `input_image_3` — and the body is a
+      // STREAM. Every name I guessed and every body I built by hand answered "Invalid input"; that is the whole of why. ⚠️ Each reference
+      // must be under 512×512, so a picture of ours that is bigger has to be made smaller before it can guide anything.
       const flux = url.searchParams.get("m");
       if (flux) {
-        const field = url.searchParams.get("field") || "input_image";
-        const wrap = url.searchParams.get("wrap") || "buffer";
+        const model = flux.startsWith("@cf/") ? flux : `@cf/black-forest-labs/${flux}`;
         try {
           const fd = new FormData();
           fd.append("prompt", prompt);
-          fd.append(field, new Blob([from.bytes], { type: "image/jpeg" }), "reference.jpg");
-          const req = new Request("https://ai.invalid/", { method: "POST", body: fd });
-          const model = flux.startsWith("@cf/") ? flux : `@cf/black-forest-labs/${flux}`;
-          // ⚑ `wrap=form` hands the FormData to the binding as it stands — the schema's opaque `multipart` may be how the docs SAY
-          // "this model takes a multipart request" rather than a wrapper the caller has to build.
-          const buf = wrap === "form" ? null : await req.arrayBuffer();
-          const out = wrap === "form" ? await env.AI.run(model, fd)
-            : await env.AI.run(model, { multipart: { body: wrap === "array" ? [...new Uint8Array(buf)] : wrap === "base64" ? base64(new Uint8Array(buf)) : buf, contentType: req.headers.get("content-type") } });
+          refs.forEach((r, i) => fd.append(`input_image_${i}`, new Blob([r.bytes], { type: "image/jpeg" }), `reference_${i}.jpg`));
+          const form = new Request("https://ai.invalid/", { method: "POST", body: fd });
+          const out = await env.AI.run(model, { multipart: { body: form.body, contentType: form.headers.get("content-type") } });
           const drawn = await bytesOf(out);
           if (!drawn || drawn.length < MIN_BYTES) return refuse(502, "that call was accepted and came back with nothing in it");
-          await store.put(key, drawn, "image/jpeg", meta(`from:${flux}:${field}`, prompt, seed));
+          await store.put(key, drawn, "image/jpeg", meta(`from:${flux}:${refs.length}`, prompt, seed));
           return new Response(drawn, { headers: { "content-type": "image/jpeg", ...kept("drawn-from") } });
-        } catch (e) { return refuse(502, `${flux} · field=${field} · wrap=${wrap} — ${String(e?.message || e).slice(0, 300)}`); }
+        } catch (e) { return refuse(502, `${flux} · ${refs.length} reference(s) — ${String(e?.message || e).slice(0, 300)}`); }
       }
 
       try {

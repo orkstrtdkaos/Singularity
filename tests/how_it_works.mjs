@@ -17226,9 +17226,17 @@ console.log("\n── §243 · one person, one stack ──");
   const reg242 = save242.npcRegistry || {};
 
   /* ---- 1 · ⛑ THE RESOLVER READS THE REGISTRY, SUFFIX AND ALL ---- */
+  // ⚠️ ASKED AS THE RULE, NOT AS THE IDS THAT HAPPENED TO BE IN THE SAVE THE DAY THIS WAS WRITTEN. Play merged
+  // `churn-revel-orchestrator` INTO `halvex_coil` — the very merge this section exists to make — and a check that
+  // pinned the old id called the feature working as a regression.
+  const lands242 = (caption, wanted) => {
+    const who = N242.subjectFromCaption(caption, reg242);
+    const rec = who ? reg242[who] : null;
+    return !!rec && wanted.test(`${who} ${rec.name || ""} ${(rec.aliases || []).join(" ")} ${(rec.alsoKnownAs || []).join(" ")}`);
+  };
   check("§243: ⛑ a caption resolves to the person the registry already knows",
-    N242.subjectFromCaption("Vessin Tallow-bark", reg242) === "traveler-woman"
-    && N242.subjectFromCaption("The Churn-Revel orchestrator", reg242) === "churn-revel-orchestrator");
+    lands242("Vessin Tallow-bark", /vessin/i) && lands242("The Churn-Revel orchestrator", /halvex|churn-revel/i),
+    JSON.stringify({ vessin: N242.subjectFromCaption("Vessin Tallow-bark", reg242), orchestrator: N242.subjectFromCaption("The Churn-Revel orchestrator", reg242) }));
   // ⚠️ THE BOND SUFFIX IS WHY ONE PERSON WAS TWO CAPTIONS. "— devoted", "· courting": a thing that happened TO
   // them, not a different them.
   check("§243: ⚠️ …and the bond suffix does not make a second person of them",

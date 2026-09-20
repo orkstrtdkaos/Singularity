@@ -16,6 +16,18 @@
   "next": [],
   "releases": [
     {
+      "version": "2.3.7",
+      "date": "2026-09-20",
+      "entries": [
+        {
+          "kind": "internal",
+          "title": "The power field knows what it is standing on",
+          "summary": "The field engine reads the world's forty-four authored power sources by name, and can be sampled at any scale.",
+          "detail": "The extracted field engine was reading a baked list of forty-three anonymous sources, so it could tell you how strong the ground was and not what it belonged to. It now reads the authored records: the Axis Gate is the Axis Gate, a crystal well, and whether the nanite around it is ordered, wild or cleared comes from the region it sits in. The same evaluator can now be asked for any window of the world at any resolution, which is what the world, region and location maps will each draw from — one field instead of three that disagree."
+        }
+      ]
+    },
+    {
       "version": "2.3.6",
       "date": "2026-09-20",
       "entries": [

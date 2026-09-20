@@ -23770,98 +23770,170 @@ console.log("\n── §333 · the picture service — one host, an old address 
 // ══════════ §334 · CCODE-457 — THE POWER FIELD IS A SURFACE, EVALUATED EVERYWHERE ══════════
 // Erik: "the exesa prototype's way of showing and applying all of the power sources — that was most of the work we did." Aevi had
 // filed the page for deletion, measured what it DUPLICATED, and concluded it contributed nothing; her correction
-// (po/REPLY_aevi_exesa_field_engine.md) lists the ten things it does that nothing else does. They are extracted here BEFORE the page
-// goes — "deleting it without extracting it would have thrown away the part that was hard."
-console.log("\n── §334 · the field — evaluated per texel, sinks pull down, wild goes patchy, the story moves the ground, and one membership line ──");
+// (po/REPLY_aevi_exesa_field_engine.md) lists the ten things it does that nothing else does, and po/SPEC_aevi_field_engine.md is the
+// contract they were built to. ⚠️ THIS SECTION IS HER ACCEPTANCE, RUN — po/REVIEW_aevi_field_engine_acceptance.md: A2/A4/A5 passed
+// the first build and stay gated here so they cannot quietly stop passing; A3 FAILED and was the reason the page is still on disk;
+// A6 she revised herself after reading SNG-414 in the ledger, and the revision is gated instead of what she first asked for.
+console.log("\n── §334 · the field — the authored 44 named, any window at any resolution, the story moving the ground, and one membership line ──");
 {
   const FD = await import("../engine/field.js");
-  // a small, complete world: two regions, a WELL and a SINK, an ordered region and a wild one, a city and a road
-  const data = {
+  const { loadContentHeadless: lch334 } = await import("./headless_content.mjs");
+  const C334 = await lch334();
+  const model334 = rj("content/packs/core/world/field_model.json");
+  const terrain334 = rj("content/packs/core/world/terrain.json");
+  const data334 = FD.fieldDataFrom(terrain334.fields, model334, { content: C334, substrate: rj("content/packs/core/rules/the_substrate.json") });
+  const world334 = FD.makeField(data334);
+
+  // ⛔ A3 — THE AUTHORED 44, NAMED AND STATED, AND THIS IS THE ONE HER REVIEW FAILED. The first build synthesised the anchors
+  // (`source 1`, `source 2`…) off the bake's 43 anonymous rows, so the probe answered "source 12, +0.16" where it had to answer
+  // "The Axis Gate, a crystal well" — and she blocked the prototype's deletion over it, because that assembled list of named
+  // sources existed in the page and nowhere else. ⚠️ THE RULE, NOT THE INSTANCE: every anchor's name is the CONTENT RECORD'S name,
+  // and probing a source's own ground names that source — asserted across all 44 rather than pinned to the one she quoted.
+  const src334 = data334.sources;
+  const st334 = src334.reduce((a, s) => (a[s.state] = (a[s.state] || 0) + 1, a), {});
+  const selfNamed334 = src334.filter(s => world334.probe(s.lat, s.lon).nearest.anchor?.name === s.name).length;
+  check("§334: ⛔ THE FIELD READS THE AUTHORED 44, NAMED AND STATED — NOT THE BAKE'S 43 ANONYMOUS ROWS. A bake is a lower layer than its source: it drops the NAME and the STATE and it is missing two of the forty-four outright, so a probe built on it cannot say which anchor the ground under you belongs to. Every name here is the content record's own; the well/nexus kind is DERIVED from the sign of the draw, never authored twice; and probing a source's own ground names that source, for all 44",
+    src334.length === 44 && selfNamed334 === 44
+    && src334.every(s => s.name === (C334.locations?.[s.id]?.name || null) && !/^source \d+$/.test(s.name))
+    && src334.every(s => (s.strength >= 0) === (s.kind === "crystal well"))
+    && st334.o === 20 && st334.w === 12 && st334.c === 12
+    && (terrain334.fields.sources || []).length === 43
+    && ["archive_hollow", "waystone"].every(id => src334.some(s => s.id === id)),
+    JSON.stringify({ authored: src334.length, baked: (terrain334.fields.sources || []).length, namedFromContent: selfNamed334, states: st334, wells: src334.filter(s => s.kind === "crystal well").length, nexuses: src334.filter(s => s.kind === "veil nexus").length }));
+
+  // a small, complete world for the mechanics: two regions, a WELL and a SINK, an ordered region and a wild one, a city and a road
+  const fx334 = {
     voters: [[-60, -110, "valley"], [10, 60, "palelands"]],
     densByRegion: { valley: 0.7, palelands: 0.3 },
     nanByRegion: { valley: ["o", 0.9], palelands: ["w", 0.8] },
-    sources: [[-60, -110, 0.25, 0.09], [10, 60, -0.20, 0.09]],
-    anchors: [["Well", -60, -110, 0.3, 0.05, "o"], ["Nexus", 10, 60, -0.4, 0.06, "w"]],
-    meaning: [["City", -60, -110, 0.8, 0.5, 0.5]],
+    sources: [
+      { id: "well", name: "The Well", lat: -60, lon: -110, strength: 0.25, radius: 0.09, state: "o", kind: "crystal well" },
+      { id: "nexus", name: "The Nexus", lat: 10, lon: 60, strength: -0.20, radius: 0.09, state: "w", kind: "veil nexus" },
+    ],
+    means: [["City", -60, -110, 0.8, 0.5, 0.5]],
     roads: [[-60, -110, 10, 60]],
+    bands: { precursor: { center: 0.7, width: 0.15 } },
+    places: [["Millbrook", -60, -110]],
+    waygates: [["Near Gate", -59, -109], ["Far Gate", 40, 40]],
   };
-  const G = FD.makeGrids(data, { width: 72, height: 36 });
-  const bands = { precursor: { center: 0.7, width: 0.15 } };
-  const opts = { bands, anchors: data.anchors };
-  const iWell = FD.indexAt(G, -110, -60), iSink = FD.indexAt(G, 60, 10);
-  const plain = FD.makeGrids({ ...data, sources: [] }, { width: 72, height: 36 });
-  check("§334: ⛔ EVALUATED PER TEXEL, AND A SOURCE IS A GAUSSIAN WITH A SIGN — the well raises the ground above its region's vote and the SINK PULLS IT DOWN, which is the half of \"showing and applying\" that the first audit dropped; every texel has a value, because a field is a surface and not a set of pins",
-    G.base.length === 72 * 36 && [...G.base].every(v => v >= 0 && v <= 1)
-    && G.base[iWell] > plain.base[iWell] && G.base[iSink] < plain.base[iSink]
-    && [...G.base].filter(v => v > 0).length === G.base.length,
-    JSON.stringify({ well: [+plain.base[iWell].toFixed(3), +G.base[iWell].toFixed(3)], sink: [+plain.base[iSink].toFixed(3), +G.base[iSink].toFixed(3)] }));
+  const F334 = FD.makeField(fx334);
+  const bare334 = FD.makeField({ ...fx334, sources: [] });
+  const win334 = F334.sampleWindow({ w: 72, h: 36 });
+  check("§334: ⛔ EVALUATED AT A POINT, AND A SOURCE IS A GAUSSIAN WITH A SIGN — the well raises the ground above its region's vote and the SINK PULLS IT DOWN, which is the half of \"showing and applying\" that the first audit dropped; and a reading exists everywhere, because a field is a surface and not a set of pins",
+    F334.densityAt(-60, -110) > bare334.densityAt(-60, -110) && F334.densityAt(10, 60) < bare334.densityAt(10, 60)
+    && win334.base.length === 72 * 36 && [...win334.base].every(v => v > 0 && v <= 1),
+    JSON.stringify({ well: [+bare334.densityAt(-60, -110).toFixed(3), +F334.densityAt(-60, -110).toFixed(3)], sink: [+bare334.densityAt(10, 60).toFixed(3), +F334.densityAt(10, 60).toFixed(3)] }));
+
+  const nWell = F334.naniteAt(-60, -110), nSink = F334.naniteAt(10, 60);
   check("§334: ⛔ ORDERED AND WILD ARE TWO ACCUMULATORS, NOT ONE FIELD WITH A FLAG — a region's authored state is one or the other, but the FIELD mixes, because the vote blends neighbours; and WILD IS PATCHY while ordered ground stays even (\"scattered thin along the old routes and gone feral IN PATCHES\")",
-    G.ordered[iWell] > 0.5 && G.wild[iWell] < 0.2 && G.wild[iSink] > 0.2 && G.ordered[iSink] < 0.2
+    nWell.ordered > 0.5 && nWell.wild < 0.2 && nSink.wild > 0.2 && nSink.ordered < 0.2
     && (() => {
-      const row = (grid, y) => [...Array(72)].map((_, x) => grid[y * 72 + x]);
       const spread = (xs) => Math.max(...xs) - Math.min(...xs);
-      const wildRow = row(G.wild, Math.floor(FD.indexAt(G, 60, 10) / 72)), ordRow = row(G.ordered, Math.floor(iWell / 72));
-      return spread(wildRow.filter(v => v > 0.05)) > 0.1 && spread(ordRow.filter(v => v > 0.05)) < spread(wildRow.filter(v => v > 0.05));
+      const rowAt = (lat) => F334.sampleWindow({ lat0: lat - 1, lat1: lat + 1, lon0: -180, lon1: 180, w: 72, h: 1 });
+      const w = [...rowAt(10).wild].filter(v => v > 0.05), o = [...rowAt(-60).ordered].filter(v => v > 0.05);
+      return spread(w) > 0.1 && spread(o) < spread(w);
     })(),
-    JSON.stringify({ atWell: [+G.ordered[iWell].toFixed(2), +G.wild[iWell].toFixed(2)], atSink: [+G.ordered[iSink].toFixed(2), +G.wild[iSink].toFixed(2)] }));
-  const lit = [{ kind: "precursor", rgb: [74, 150, 255], on: true }, { kind: "wild", rgb: [90, 224, 120], on: true }];
-  const mixed = FD.paint(G, lit, { ...opts, mix: true }), owned = FD.paint(G, lit, { ...opts, mix: false });
-  check("§334: ⛔ A PICTURE, AND TWO BLEND MODES THAT ANSWER TWO QUESTIONS — `mix` sums and normalises (how much field is here); otherwise the strongest source wins the texel (which source owns this ground). Both fill a w×h×3 texture",
-    mixed.length === 72 * 36 * 3 && owned.length === mixed.length && mixed.some((v, i) => v !== owned[i]),
-    `${[...mixed].filter((v, i) => v !== owned[i]).length} of ${mixed.length} channels differ`);
-  const cov = FD.coverage(G, "precursor", opts);
-  check("§334: ⛑ COVERAGE IS AN INSTRUMENT, NOT A LEGEND — the share of the world a source holds above the membership line, so \"I thought that was everywhere\" is answerable",
-    cov > 0 && cov < 1 && Math.abs(cov - FD.coverage(G, "precursor", { ...opts, stride: 1 })) < 0.25, `${(cov * 100).toFixed(1)}%`);
-  // ⚠️ ASKED OF THE WHOLE WORLD, NOT ONE TEXEL. Two fixtures in a row "passed" by comparing nothing to nothing: on dense
-  // ground the veil is already zero, and standing on the nexus pins it to one. A field that answers to the story answers
-  // EVERYWHERE, so that is what this counts.
-  const moved = (() => {
-    let n = 0;
-    for (let i = 0; i < G.base.length; i++) {
-      const { lat, lon } = FD.texelCentre(i, G.width, G.height);
-      const a = FD.strengthAt("veil", G, i, { ...opts, lat, lon, stages: {} });
-      const b = FD.strengthAt("veil", G, i, { ...opts, lat, lon, stages: { arc_the_disagreement: 4 } });
-      if (a !== b) n++;
-    }
-    return n;
-  })();
-  check("§334: ⛔ THE FIELD ANSWERS TO THE STORY — an arc above stage one moves the ground across the world (\"the ground is not where it was authored\"), and POLARISE pushes AWAY from the membership line rather than up or down: above it rises, below it falls, and exactly on it nothing moves",
-    moved > G.base.length * 0.1
+    JSON.stringify({ atWell: [+nWell.ordered.toFixed(2), +nWell.wild.toFixed(2)], atSink: [+nSink.ordered.toFixed(2), +nSink.wild.toFixed(2)] }));
+
+  const kinds334 = ["precursor", "wild"];
+  const mixed334 = F334.texture({ window: win334, kinds: kinds334, mode: "mix" });
+  const owned334 = F334.texture({ window: win334, kinds: kinds334, mode: "max" });
+  check("§334: ⛔ A PICTURE, AND TWO BLEND MODES THAT ANSWER TWO QUESTIONS — `mix` sums and normalises (how much field is here); `max` gives the texel to the strongest source (which source owns this ground). Both fill a w×h×3 texture off the same window",
+    mixed334.length === 72 * 36 * 3 && owned334.length === mixed334.length && mixed334.some((v, i) => v !== owned334[i]),
+    `${[...mixed334].filter((v, i) => v !== owned334[i]).length} of ${mixed334.length} channels differ`);
+
+  const cov334 = F334.coverage("precursor", { window: win334 });
+  check("§334: ⛑ COVERAGE IS AN INSTRUMENT, NOT A LEGEND — the share of a window above the membership line, so \"I thought that was everywhere\" is answerable; and it is the same number at any sampling stride",
+    cov334 > 0 && cov334 < 1 && Math.abs(cov334 - F334.coverage("precursor", { window: win334, stride: 1 })) < 0.25, `${(cov334 * 100).toFixed(1)}%`);
+
+  // ⚠️ ASKED OF THE WHOLE WORLD, NOT ONE POINT. Two fixtures in a row "passed" by comparing nothing to nothing: on dense ground the
+  // veil is already zero, and standing on the nexus pins it to one. A field that answers to the story answers EVERYWHERE.
+  const beforeAll = [...win334.base].map((_, i) => F334.strengthAt("veil", win334.lats[i], win334.lons[i]));
+  const moved334 = F334.withArcStages({ arc_the_disagreement: 4 });
+  const afterAll = [...win334.base].map((_, i) => moved334.strengthAt("veil", win334.lats[i], win334.lons[i]));
+  const stillAll = [...win334.base].map((_, i) => F334.strengthAt("veil", win334.lats[i], win334.lons[i]));
+  const nMoved = beforeAll.filter((v, i) => v !== afterAll[i]).length;
+  check("§334: ⛔ THE FIELD ANSWERS TO THE STORY, AND MOVING IT RETURNS A NEW FIELD — an arc above stage one shifts the ground across the world (\"the ground is not where it was authored\"), POLARISE pushes AWAY from the membership line rather than up or down, and `withArcStages` NEVER MUTATES: the caller still reading the authored world reads every one of its readings unchanged",
+    nMoved > beforeAll.length * 0.1
+    && moved334 !== F334 && Object.keys(F334.arcStages).length === 0
+    && stillAll.every((v, i) => v === beforeAll[i])
     && FD.arcShift("veil", 0.5, { arc_the_disagreement: 4 }) > 0
     && FD.arcShift("precursor", 0.9, { arc_the_poles_pull: 2 }) > 0 && FD.arcShift("precursor", 0.1, { arc_the_poles_pull: 2 }) < 0
     && FD.arcShift("precursor", FD.MEMBERSHIP, { arc_the_poles_pull: 2 }) === 0
     && FD.arcShift("veil", 0.5, {}) === 0 && FD.arcShift("veil", 0.5, { arc_the_disagreement: 1 }) === 0,
-    JSON.stringify({ movedTexels: moved, of: G.base.length, polariseHigh: +FD.arcShift("precursor", 0.9, { arc_the_poles_pull: 2 }).toFixed(3), polariseLow: +FD.arcShift("precursor", 0.1, { arc_the_poles_pull: 2 }).toFixed(3) }));
-  const probe = FD.probeAt(G, -110, -60, { ...opts, places: [["Millbrook", -60, -110]], waygates: [["Near Gate", -59, -109], ["Far Gate", 40, 40]] });
-  check("§334: ⛑ THE PROBE SAYS WHY A PLACE READS THE WAY IT DOES — density, what stands nearest, a waygate only if it is within six degrees, and EVERY source's contribution with in/out; and a crystal well is told from a veil nexus, which are opposite things sitting in one list",
-    probe.nearestPlace?.name === "Millbrook" && probe.nearestWaygate?.name === "Near Gate"
-    && probe.nearestWell?.name === "Well" && probe.nearestNexus?.name === "Nexus"
-    && probe.sources.length === FD.FIELD_KINDS.length && probe.sources.every(s => typeof s.inside === "boolean")
-    && probe.sources.find(s => s.kind === "nanite").inside === true && probe.sources.find(s => s.kind === "veil").inside === false
-    && FD.probeAt(G, 40, 40, { ...opts, waygates: [["Far Gate", -60, -110]] }).nearestWaygate === null,
-    JSON.stringify({ place: probe.nearestPlace, gate: probe.nearestWaygate, well: probe.nearestWell, nexus: probe.nearestNexus }));
+    JSON.stringify({ movedReadings: nMoved, of: beforeAll.length, polariseHigh: +FD.arcShift("precursor", 0.9, { arc_the_poles_pull: 2 }).toFixed(3), polariseLow: +FD.arcShift("precursor", 0.1, { arc_the_poles_pull: 2 }).toFixed(3) }));
+
+  // ⚠️ THE SECOND PROBE STANDS FAR FROM EVERY GATE AND EVERY ANCHOR IN THE FIXTURE, which is the point of a reach: the old version
+  // of this check stood ON a gate and re-handed the probe a shorter list to make it vanish — proving the argument, not the rule.
+  const p334 = F334.probe(-60, -110), far334 = F334.probe(0, -30);
+  check("§334: ⛑ THE PROBE SAYS WHY A PLACE READS THE WAY IT DOES — density, what stands nearest, a waygate only within six degrees and an ANCHOR only within nine, and every register's contribution with in/out against the membership line; and a crystal well is told from a veil nexus, which are opposite things sitting in one list",
+    p334.nearest.place?.name === "Millbrook" && p334.nearest.waygate?.name === "Near Gate"
+    && p334.nearest.anchor?.name === "The Well" && p334.nearest.anchor?.kind === "crystal well"
+    && far334.nearest.waygate === null && far334.nearest.anchor === null
+    && p334.contributions.length === FD.FIELD_KINDS.length && p334.contributions.every(c => typeof c.in === "boolean" && c.label)
+    && p334.contributions.find(c => c.kind === "nanite").in === true && p334.contributions.find(c => c.kind === "veil").in === false,
+    JSON.stringify({ place: p334.nearest.place?.name, gate: p334.nearest.waygate?.name, anchor: p334.nearest.anchor, in: p334.contributions.filter(c => c.in).map(c => c.label), outOfReach: { gate: far334.nearest.waygate, anchor: far334.nearest.anchor } }));
+
   const srcTxt = rd("engine/field.js");
   check("§334: ⛔ ONE MEMBERSHIP LINE, NAMED ONCE AND USED THREE TIMES — in/out, the coverage share, and POLARISE's pivot. Aevi: \"one constant in three places: it must move to `field.js` as a named export, not be re-typed\"",
     FD.MEMBERSHIP === 0.55 && (srcTxt.match(/0\.55/g) || []).length === 1 && /export const MEMBERSHIP = 0\.55;/.test(srcTxt)
     && (srcTxt.match(/MEMBERSHIP/g) || []).length >= 5, `${(srcTxt.match(/0\.55/g) || []).length} literal(s), ${(srcTxt.match(/MEMBERSHIP/g) || []).length} uses of the name`);
+
   // ⛔ THE ADAPTER, AND THE SILENT ZERO IT EXISTS TO PREVENT
-  const model334 = JSON.parse(rd("content/packs/core/world/field_model.json"));
-  const terrain334 = JSON.parse(rd("content/packs/core/world/terrain.json"));
-  const data334 = FD.fieldDataFrom(terrain334.fields, model334, { substrate: JSON.parse(rd("content/packs/core/rules/the_substrate.json")) });
-  const G334 = FD.makeGrids(data334, { width: 72, height: 36 });
-  const withBands = FD.coverage(G334, "precursor", { bands: data334.bands, anchors: data334.anchors });
-  const without = FD.coverage(G334, "precursor", { bands: {}, anchors: data334.anchors });
+  const withBands = world334.coverage("precursor", { window: world334.sampleWindow({ w: 72, h: 36 }) });
+  const without = FD.makeField({ ...data334, bands: {} }).coverage("precursor", { window: world334.sampleWindow({ w: 72, h: 36 }) });
   check("§334: ⛔ THE BANDS RIDE WITH THE DATA, BECAUSE A MISSING TABLE READS AS AN EMPTY WORLD — asking `the_substrate.sourceBands` for `precursor` answers nothing (it is bands per authored SOURCE, not per field kind), and the reading came back a silent zero for every band-driven kind until the model carried its own bands; and the extracted model holds the three tables that lived only in the prototype",
     Object.keys(data334.bands).length >= 5 && withBands > 0.2 && without === 0
-    && data334.voters.length > 100 && data334.sources.length > 20 && Object.keys(data334.nanByRegion).length === 39
+    && data334.voters.length > 100 && Object.keys(data334.nanByRegion).length === 39
     && Object.values(model334.regions).filter(r => r.state === "ordered").length === 21
     && Object.values(model334.regions).filter(r => r.state === "wild").length === 10
     && Object.values(model334.regions).filter(r => r.state === "clear").length === 8,
-    JSON.stringify({ bands: Object.keys(data334.bands), withBands: +(withBands * 100).toFixed(0) + "%", without: +(without * 100).toFixed(0) + "%", voters: data334.voters.length, sources: data334.sources.length }));
-  check("§334: ⚠️ THE ANTIMERIDIAN IS WHERE EVERY MAP BREAKS ONCE — a longitude difference wraps the short way, and the vote carries longitude convergence, so a degree at the pole is not a degree at the equator",
+    JSON.stringify({ bands: Object.keys(data334.bands), withBands: +(withBands * 100).toFixed(0) + "%", without: +(without * 100).toFixed(0) + "%", voters: data334.voters.length }));
+
+  // ⛔ A4 — THE ANTIMERIDIAN, UNWRAPPED INSIDE `sampleWindow` SO NO CALLER CAN GET IT WRONG. SNG-414 found it first (min/max gave
+  // the Centre a 394° window and Umbral Depths 485° — not a possible width for anything) and Aevi's region prototype rediscovered
+  // it; a window given lon0 > lon1 crosses ±180 and its longitudes run on past 180 rather than jumping.
+  const cross334 = F334.sampleWindow({ lat0: -20, lat1: 20, lon0: 170, lon1: -170, w: 16, h: 8 });
+  check("§334: ⚠️ THE ANTIMERIDIAN IS WHERE EVERY MAP BREAKS ONCE, AND THE WINDOW UNWRAPS IT ONCE SO NOBODY ELSE HAS TO — a window from 170° to −170° is twenty degrees wide, not three hundred and forty; a longitude difference wraps the short way; and the vote carries longitude convergence, so a degree at the pole is not a degree at the equator",
     FD.lonDelta(179, -179) === -2 && FD.lonDelta(-179, 179) === 2 && FD.lonDelta(10, 5) === 5
+    && cross334.span === 20 && cross334.lons[0] > 170 && cross334.lons[15] < -170
+    && [...cross334.base].every((v, i) => Math.abs(v - F334.densityAt(cross334.lats[i], cross334.lons[i])) < 1e-6)
     && FD.voteWeight(-60, 179, -60, -179, Math.cos(-60 * Math.PI / 180)) > FD.voteWeight(-60, 179, -60, 100, Math.cos(-60 * Math.PI / 180))
-    && FD.voteWeight(0, 0, 0, 10, 1) < FD.voteWeight(80, 0, 80, 10, Math.cos(80 * Math.PI / 180)));
+    && FD.voteWeight(0, 0, 0, 10, 1) < FD.voteWeight(80, 0, 80, 10, Math.cos(80 * Math.PI / 180)),
+    JSON.stringify({ span: cross334.span, first: +cross334.lons[0].toFixed(1), last: +cross334.lons[15].toFixed(1) }));
+
+  // ⛔ A6 AS AEVI REVISED IT — "a windowed sampler for the FIELD only, so region and location can resolve a radiusWorld 0.09 source
+  // without a 7200-wide global grid", and one value at three resolutions.
+  const anchor334 = src334.find(s => s.id === "the_axis_gate") || src334[0];
+  const direct334 = world334.densityAt(anchor334.lat, anchor334.lon);
+  const nearestTo = (win, lat, lon) => { let b = 0, bd = Infinity; for (let i = 0; i < win.lats.length; i++) { const d = Math.abs(win.lats[i] - lat) + Math.abs(FD.lonDelta(win.lons[i], lon)); if (d < bd) { bd = d; b = i; } } return b; };
+  const errs334 = [8, 32, 128].map((n) => {
+    const w = world334.sampleWindow({ lat0: anchor334.lat - 0.5, lat1: anchor334.lat + 0.5, lon0: anchor334.lon - 0.5, lon1: anchor334.lon + 0.5, w: n, h: n });
+    return Math.abs(w.base[nearestTo(w, anchor334.lat, anchor334.lon)] - direct334);
+  });
+  const globe334 = world334.sampleWindow({ w: 288, h: 144 });
+  let insideBox = 0;
+  for (let i = 0; i < globe334.lats.length; i++) if (Math.abs(globe334.lats[i] - anchor334.lat) <= 0.25 && Math.abs(FD.lonDelta(globe334.lons[i], anchor334.lon)) <= 0.25) insideBox++;
+  check("§334: ⛔ ONE VALUE AT ANY RESOLUTION, AND THAT IS WHY `sampleWindow` IS THE EXTRACTION — `strengthAt` takes a lat/lon and no grid, so a reading cannot depend on the resolution somebody happened to ask at; a window refines toward the point value instead of disagreeing with it; and a half-degree box around an authored source contains NO TEXEL AT ALL of a 288×144 global grid, which is the whole reason the region and location tiers need their own window rather than a bigger world one",
+    errs334[0] >= errs334[1] && errs334[1] >= errs334[2] && errs334[2] < 1e-5
+    && insideBox === 0
+    && world334.sampleWindow({ lat0: anchor334.lat - 0.25, lat1: anchor334.lat + 0.25, lon0: anchor334.lon - 0.25, lon1: anchor334.lon + 0.25, w: 48, h: 48 }).base.length === 48 * 48,
+    JSON.stringify({ source: anchor334.name, windowedError: errs334.map(e => +e.toFixed(6)), globalTexelsInAHalfDegreeBox: insideBox }));
+
+  // ⛔ A6.3 — THE FLOOR, ASSERTED RATHER THAN PAPERED OVER. Aevi, after reading SNG-414: "a windowed sampler cannot buy TERRAIN
+  // detail that does not exist… THE LOCATION TIER MUST NOT DRAW LANDFORM. THERE IS NONE AT THAT SCALE." The bake's own cells say
+  // it: the finest terrain raster it carries is coarser than the floor, so a location window reads ONE cell of ground — while the
+  // FIELD keeps resolving below it, which is what that tier draws, alongside the built things.
+  const eg334 = terrain334.encoding.elevationGrid, tg334 = terrain334.encoding.grid;
+  const terrainCell = Math.min(Math.max(360 / eg334.w, 180 / eg334.h), Math.max(360 / tg334.w, 180 / tg334.h));
+  const wildest = (() => { let b = 0; for (let i = 0; i < globe334.wild.length; i++) if (globe334.wild[i] > globe334.wild[b]) b = i; return b; })();
+  const tiny = world334.sampleWindow({ lat0: globe334.lats[wildest] - 0.1, lat1: globe334.lats[wildest] + 0.1, lon0: globe334.lons[wildest] - 0.1, lon1: globe334.lons[wildest] + 0.1, w: 24, h: 24 });
+  const spreadTiny = Math.max(...tiny.wild) - Math.min(...tiny.wild);
+  check("§334: ⛔ THE TERRAIN FLOOR IS A FACT ABOUT THE GENERATOR, NOT A TOLERANCE TO WIDEN — SNG-414 measured total variation per degree rising ×2.09 from 2°→1°, ×1.27 from 1°→0.5°, then FLAT: below a quarter degree the world generator has no features, and the bake's own finest raster cell is coarser than that floor. So a location-tier window buys FIELD detail and never LANDFORM, the tier draws BUILT things, and this module cannot smuggle terrain in either way — it reads no raster and imports nothing",
+    FD.TERRAIN_FEATURE_FLOOR_DEG === 0.25 && terrainCell >= FD.TERRAIN_FEATURE_FLOOR_DEG * 2
+    && !/^\s*import\s/m.test(srcTxt) && !/elevationGrid|encoding\.|layers\./.test(srcTxt)
+    && spreadTiny > 0.02,
+    JSON.stringify({ floor: FD.TERRAIN_FEATURE_FLOOR_DEG, finestTerrainCell: terrainCell, fieldSpreadAcross_0_2deg: +spreadTiny.toFixed(4) }));
 }
 
 /* ══════════ REPORT ══════════ */

@@ -71,7 +71,7 @@ import { carriageOf, voyageOf, isMoored, canSail, sailHolding, voyageLine, featu
 import { roomOf, roomRefusal, promotionOffer, promoteHolding, trainingAt, mountsAt, healingAt, quarteringOf, vaultOf, chargeOf, chargeWord, depositToVault, withdrawFromVault, holdingFieldSources } from "./engine/holdings.js";   // ⛔ CCODE-429: a hold has room · CCODE-430: a yard trains   // B6b: the holding that moves
 import { featureCost, allFeatures, refreshImprovement, canBeAskedToWork, holdingFactsLine, answerFeatureOffer, holdingLedger, addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, yieldsFor, upkeepFor, appointKeeper, reclaimHolding, improveHolding, setCrew, setGarrison, holdingGround, addFeature, removeFeature, renameHolding, featureKinds, residentsOf, holdingMeaningAura, holdingFieldDelta } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
 import { buildDevReport, unknownOpsIn } from "./engine/devreport.js";   // SNG-559: the Play/Dev instrument
-import { makeGrids, probeAt, fieldDataFrom } from "./engine/field.js";   // CCODE-457: why the ground here reads the way it does
+import { makeField, fieldDataFrom } from "./engine/field.js";   // CCODE-457: why the ground here reads the way it does
 import { FIRE_TESTS, diffKeys } from "./engine/firetests.js";   // SNG-560: the parts that have never been used
 import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, roleBadges, teacherOfferReady, applyPartyOps, activeCompany, formerCompany } from "./engine/company.js";
 import { unitsOf, unitLine, poolRows, atSideRows, wherePerson, canBringForward, rosterLine, levelOfPerson } from "./engine/fellowship.js";
@@ -178,7 +178,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.3.6";
+const APP_VERSION = "2.3.7";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2842,24 +2842,30 @@ function normalisedCatalogId(id, catalog = null) {
  *  ⚠️ Built ONCE per session and only when the world's own numbers are loaded — this is telemetry, and telemetry
  *  that makes a session slower is telemetry nobody leaves on. A coarse grid, because a reading is a number and
  *  not a picture. */
-let _fieldGrids = null;
+let _field = null;
 function fieldReadingHere() {
   try {
     const fields = _terrain?.fields;
     if (!fields?.voters?.length) return null;   // the map has not been opened this session — say nothing rather than guess
-    const data = fieldDataFrom(fields, WORLD_FIELD_MODEL, { substrate: CONTENT?.rules?.the_substrate || null });
-    if (!_fieldGrids) _fieldGrids = makeGrids(data, { width: 144, height: 72 });
     const here = CONTENT?.locations?.[character?.currentLocationId] || character?.generated?.location?.[character?.currentLocationId] || null;
     const wp = here?.worldPos;
     if (!wp) return null;
+    // ⛔ THE FIELD READS CONTENT, NOT THE BAKE (Aevi's A3). The bake holds 43 ANONYMOUS rows — two of the 44 missing,
+    // no name, no state — so a probe built on it answers "source 12, +0.16" where it should answer "The Axis Gate, a
+    // crystal well". ⚠️ Built only once CONTENT is in hand, or the cached field would be the nameless one forever.
+    if (!_field && CONTENT?.locations) {
+      const data = fieldDataFrom(fields, WORLD_FIELD_MODEL, { content: CONTENT, substrate: CONTENT?.rules?.the_substrate || null });
+      _field = makeField(data);
+    }
+    if (!_field) return null;
     const lat = Number(wp.colatitude) - 90;
     const lon = Number(wp.longitude) > 180 ? Number(wp.longitude) - 360 : Number(wp.longitude);
-    // ⚠️ THE BANDS COME WITH THE DATA. Asking `the_substrate.sourceBands` for `precursor` answers nothing — it is a
-    // table of bands per authored SOURCE — and the reading came back a silent zero for every band-driven kind.
-    const p = probeAt(_fieldGrids, lon, lat, { bands: data.bands, anchors: data.anchors });
+    const p = _field.probe(lat, lon);
+    const a = p.nearest.anchor;
     return { where: character?.currentLocationId || null, lat: Math.round(lat * 10) / 10, lon: Math.round(lon * 10) / 10,
       density: Math.round(p.density * 100) / 100, ordered: Math.round(p.ordered * 100) / 100, wild: Math.round(p.wild * 100) / 100,
-      inside: p.sources.filter(s => s.inside).map(s => s.kind) };
+      anchor: a ? `${a.name} — a ${a.kind}, ${a.degrees}° off` : null,
+      inside: p.contributions.filter(c => c.in).map(c => c.kind) };
   } catch { return null; }   // ⚠️ a reading that throws must never cost a beat — the same rule as the rest of this file
 }
 

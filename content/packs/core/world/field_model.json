@@ -1,0 +1,276 @@
+{
+ "schemaVersion": 1,
+ "id": "field_model",
+ "kind": "world",
+ "_note": "⛔ THE FIELD'S OWN NUMBERS — the bands each power reads in, what the nanite is doing in each region, and the arcs whose stages move the ground. ⚑ EXTRACTED FROM `exesa_field.html` BEFORE THAT PAGE WAS DELETED (CCODE-457). Every table here existed in one prototype page and NOWHERE ELSE: the canon bake keeps the nanite STATE as an enum (0 clear · 1 ordered · 2 wild) and drops the MAGNITUDE, and `rules/the_substrate.json`'s `sourceBands` is a different thing — bands per authored SOURCE, not per field kind. ⚠️ `engine/field.js` is the ENGINE; this is the DATA it reads.",
+ "_provenance": "exesa_field.html — `const NAN` and the `m` block, lifted verbatim 2026-09-20. The bake's enum agrees one-to-one with the letters.",
+ "_counts": {
+  "ordered": 21,
+  "wild": 10,
+  "clear": 8
+ },
+ "bands": {
+  "precursor": {
+   "center": 0.9,
+   "width": 0.2
+  },
+  "nanite": {
+   "center": 0.9,
+   "width": 0.2
+  },
+  "metaphysical": {
+   "center": 0.15,
+   "width": 0.22
+  },
+  "body": null,
+  "wild": {
+   "center": 0.32,
+   "width": 0.2
+  },
+  "veil": {
+   "center": 0.1,
+   "width": 0.2
+  }
+ },
+ "arcs": [
+  {
+   "id": "arc_the_poles_pull",
+   "name": "The Poles Pull",
+   "scale": "world",
+   "stage": 1,
+   "stages": 4
+  },
+  {
+   "id": "arc_what_wakes_beneath",
+   "name": "What Wakes Beneath",
+   "scale": "world",
+   "stage": 1,
+   "stages": 4
+  },
+  {
+   "id": "arc_manifestation_storm",
+   "name": "The Second Manifestation",
+   "scale": "world",
+   "stage": 1,
+   "stages": 4
+  },
+  {
+   "id": "arc_block_bleed",
+   "name": "The Bleeding Grammar",
+   "scale": "regional",
+   "stage": 1,
+   "stages": 3
+  },
+  {
+   "id": "arc_green_schism",
+   "name": "The Green Schism",
+   "scale": "regional",
+   "stage": 1,
+   "stages": 3
+  },
+  {
+   "id": "arc_the_disagreement",
+   "name": "The Disagreement",
+   "scale": "cosmic",
+   "stage": 1,
+   "stages": 4
+  }
+ ],
+ "regions": {
+  "the_gearlands": {
+   "state": "ordered",
+   "value": 0.95,
+   "bakedEnum": 1
+  },
+  "the_lattice_cities": {
+   "state": "ordered",
+   "value": 0.9,
+   "bakedEnum": 1
+  },
+  "the_making": {
+   "state": "ordered",
+   "value": 0.85,
+   "bakedEnum": 1
+  },
+  "the_reasoned_hold": {
+   "state": "ordered",
+   "value": 0.8,
+   "bakedEnum": 1
+  },
+  "the_ascent": {
+   "state": "ordered",
+   "value": 0.82,
+   "bakedEnum": 1
+  },
+  "the_kept_reach": {
+   "state": "ordered",
+   "value": 0.8,
+   "bakedEnum": 1
+  },
+  "the_pattern_reach": {
+   "state": "ordered",
+   "value": 0.78,
+   "bakedEnum": 1
+  },
+  "the_center": {
+   "state": "ordered",
+   "value": 0.7,
+   "bakedEnum": 1
+  },
+  "the_veiled_reach": {
+   "state": "ordered",
+   "value": 0.6,
+   "bakedEnum": 1
+  },
+  "the_numinous_reach": {
+   "state": "ordered",
+   "value": 0.55,
+   "bakedEnum": 1
+  },
+  "radiant_wastes": {
+   "state": "wild",
+   "value": 0.7,
+   "bakedEnum": 2
+  },
+  "the_foothills": {
+   "state": "ordered",
+   "value": 0.6,
+   "bakedEnum": 1
+  },
+  "unspooling": {
+   "state": "wild",
+   "value": 0.85,
+   "bakedEnum": 2
+  },
+  "the_quickwood": {
+   "state": "wild",
+   "value": 0.75,
+   "bakedEnum": 2
+  },
+  "the_feeling_coast": {
+   "state": "wild",
+   "value": 0.55,
+   "bakedEnum": 2
+  },
+  "the_descent": {
+   "state": "wild",
+   "value": 0.6,
+   "bakedEnum": 2
+  },
+  "umbral_depths": {
+   "state": "wild",
+   "value": 0.5,
+   "bakedEnum": 2
+  },
+  "manifest_domain": {
+   "state": "clear",
+   "value": 0.08,
+   "bakedEnum": 0
+  },
+  "somatic_reaches": {
+   "state": "clear",
+   "value": 0.05,
+   "bakedEnum": 0
+  },
+  "riven_marches": {
+   "state": "clear",
+   "value": 0.12,
+   "bakedEnum": 0
+  },
+  "the_palelands": {
+   "state": "clear",
+   "value": 0.06,
+   "bakedEnum": 0
+  },
+  "the_given_land": {
+   "state": "clear",
+   "value": 0.04,
+   "bakedEnum": 0
+  },
+  "the_unmade": {
+   "state": "clear",
+   "value": 0.15,
+   "bakedEnum": 0
+  },
+  "the_stark_reach": {
+   "state": "clear",
+   "value": 0.2,
+   "bakedEnum": 0
+  },
+  "the_open_reach": {
+   "state": "wild",
+   "value": 0.35,
+   "bakedEnum": 2
+  },
+  "valley": {
+   "state": "wild",
+   "value": 0.4,
+   "bakedEnum": 2
+  },
+  "the_echo_vale": {
+   "state": "ordered",
+   "value": 0.5,
+   "bakedEnum": 1
+  },
+  "foothill_dusklow": {
+   "state": "ordered",
+   "value": 0.62,
+   "bakedEnum": 1
+  },
+  "foothill_gearsflat": {
+   "state": "ordered",
+   "value": 0.78,
+   "bakedEnum": 1
+  },
+  "foothill_greenmarch": {
+   "state": "wild",
+   "value": 0.5,
+   "bakedEnum": 2
+  },
+  "foothill_greyhearth": {
+   "state": "clear",
+   "value": 0.4,
+   "bakedEnum": 0
+  },
+  "foothill_hardline": {
+   "state": "ordered",
+   "value": 0.65,
+   "bakedEnum": 1
+  },
+  "foothill_kindlerow": {
+   "state": "ordered",
+   "value": 0.72,
+   "bakedEnum": 1
+  },
+  "foothill_longshore": {
+   "state": "ordered",
+   "value": 0.68,
+   "bakedEnum": 1
+  },
+  "foothill_plainstead": {
+   "state": "ordered",
+   "value": 0.55,
+   "bakedEnum": 1
+  },
+  "foothill_stair_hollow": {
+   "state": "ordered",
+   "value": 0.58,
+   "bakedEnum": 1
+  },
+  "foothill_the_low_market": {
+   "state": "ordered",
+   "value": 0.66,
+   "bakedEnum": 1
+  },
+  "foothill_the_worn_yard": {
+   "state": "ordered",
+   "value": 0.7,
+   "bakedEnum": 1
+  },
+  "foothill_thinwater": {
+   "state": "wild",
+   "value": 0.45,
+   "bakedEnum": 2
+  }
+ }
+}

@@ -58,7 +58,7 @@ export function fieldCoverage(records, fields) {
 
 /** The whole report, derived from the save plus the small tallies play keeps. Pure — no I/O, no globals,
  *  so the suite can build one from a fixture and assert its shape without a browser or a network. */
-export function buildDevReport(character, { build = null, vocabulary = [], promptRows = null, contentCounts = null } = {}) {
+export function buildDevReport(character, { build = null, vocabulary = [], promptRows = null, contentCounts = null, field = null } = {}) {
   const c = character || {};
   // ⛔ SNG-547 O5: a dropped axis is a CONTRACT failure — the model answered the shape wrongly and the turn
   // read as clean. It belongs beside the op-emission counts, which is the other place this report says "the
@@ -89,6 +89,9 @@ export function buildDevReport(character, { build = null, vocabulary = [], promp
     id: "dev_report",
     at: new Date().toISOString(),
     build,
+    // ⛔ CCODE-457 — WHAT THE GROUND UNDER THE PLAYER IS MADE OF, read off the one field evaluator. null when the
+    // world's numbers are not loaded this session, which is a different fact from "the ground is empty here".
+    field,
     character: { id: c.id || null, name: c.name || null, playerKey: c.playerKey || null, level: c.level ?? null,
       rev: c.rev ?? null, day: c.clock?.day ?? null, turns,
       // ⛔ SNG-560: WHEN THE COUNTING STARTED. Without it every zero in this report is ambiguous — "never happened" and

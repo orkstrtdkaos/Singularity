@@ -485,5 +485,10 @@
     "purpose": "Standing work at a hold: people and a band's hands put to what the hold needs between jobs — foraging, hunting, training, mending, guarding, patrolling, tending, keeping the accounts. Each good day (their best craft for the work landing) banks toward what lasts, or the work changes the hold while it is done: the watch, the raid's danger, the yields, the upkeep.",
     "playerVisibleSurface": "Each hold's 'Standing work' on the Holdings tab: who is at what, with each candidate's chance of a good day, the good days a pass, what is banked, and the wages.",
     "whatMakesItFire": "A player putting someone to work at a hold; then every pass of the world tick, when the workers are paid and their days are rolled."
+  },
+  "field.js": {
+    "purpose": "The power field as a SURFACE: substrate density from the region vote plus sources applied as Gaussians (a negative strength is a sink that draws the field down), ordered and wild nanite as two accumulators that overlap because the vote blends neighbours, wild made patchy because the corpus says it went feral in patches, meaning derived from places and carried along roads, and arc stages that shift every texel — the field answers to the story.",
+    "playerVisibleSurface": "Nothing yet: extracted from the exesa prototype ahead of the map work, so the field can be a layer at the world, region and location tiers off ONE evaluator instead of three.",
+    "whatMakesItFire": "A map tier asking for the field: `makeGrids` once per world, then `paint` for the picture, `coverage` for how much of the world a source holds, and `probeAt` when somebody asks why a place reads the way it does."
   }
 }

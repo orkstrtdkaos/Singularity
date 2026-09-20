@@ -154,13 +154,15 @@ function check(name, ok, detail = "") {
 // already existed — it would be absurd to fix it by creating a third." The field is EVALUATED per texel and never
 // interpolated between markers; when `engine/field.js` is extracted from exesa it is the only place that may do it.
 {
+  // ⚠️ A POWER FIELD, NOT ANY FUNCTION WITH "FIELD" IN ITS NAME. The first cut counted `areaFieldAt`, which is the
+  // contested-area ELLIPSE (SNG-409 §5: "a contested territory currently looks like a village") — a different
+  // question about a different thing, and accusing it would have pushed someone to merge two unrelated ideas.
   const evaluators = [];
   for (const f of CODE) {
     if (f.startsWith("tests/")) continue;
     const src = read(f);
-    // a per-texel evaluator: it walks a texture and sums source contributions
+    // a per-texel evaluator walks a texture and sums source contributions
     if (/Uint8ClampedArray\s*\(/.test(src) && /exp\s*\(\s*-/.test(src)) evaluators.push(`${f} (per-texel accumulation)`);
-    else if (/export\s+function\s+(areaFieldAt|fieldAt|evaluateField)\s*\(/.test(src)) evaluators.push(`${f} (${(src.match(/export\s+function\s+(areaFieldAt|fieldAt|evaluateField)/) || [])[1]})`);
   }
   check("7 · ONE FIELD EVALUATOR — the field is a surface, evaluated once, read by every tier",
     evaluators.length === 1, `evaluators: ${evaluators.join(" · ") || "none"}`);

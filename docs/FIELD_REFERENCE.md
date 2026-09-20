@@ -693,7 +693,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `learnedAt` | 43 | `root`×43 | ⚠️ CI-ONLY | _3 test/script only_ |
 | `soak` | 33 | `mechanic`×33 | ✅ READ | `battle_turn.js`, `craftmechanics.js`, `damagetypes.js` |
 | `soakRank` | 32 | `mechanic`×32 | ✅ READ | `skill_battle.js`, `app.js` |
-| `meaning` | 31 | `mechanic`×31 | ✅ READ | `gm.js`, `holdings.js`, `reconcile.js` |
+| `meaning` | 31 | `mechanic`×31 | ✅ READ | `field.js`, `gm.js`, `holdings.js` |
 | `sense` | 31 | `root`×31 | ✅ READ | `battle_turn.js`, `combatants.js`, `encounters.js` |
 | `stage` | 27 | `tree`×27 | ✅ READ | `arceffects.js`, `art.js`, `authormode.js` |
 | `subAttribute` | 27 | `root`×27 | ✅ READ | `affinities.js`, `battle_turn.js`, `encounters.js` |

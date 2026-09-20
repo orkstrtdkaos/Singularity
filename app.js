@@ -71,6 +71,7 @@ import { carriageOf, voyageOf, isMoored, canSail, sailHolding, voyageLine, featu
 import { roomOf, roomRefusal, promotionOffer, promoteHolding, trainingAt, mountsAt, healingAt, quarteringOf, vaultOf, chargeOf, chargeWord, depositToVault, withdrawFromVault, holdingFieldSources } from "./engine/holdings.js";   // ⛔ CCODE-429: a hold has room · CCODE-430: a yard trains   // B6b: the holding that moves
 import { featureCost, allFeatures, refreshImprovement, canBeAskedToWork, holdingFactsLine, answerFeatureOffer, holdingLedger, addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, yieldsFor, upkeepFor, appointKeeper, reclaimHolding, improveHolding, setCrew, setGarrison, holdingGround, addFeature, removeFeature, renameHolding, featureKinds, residentsOf, holdingMeaningAura, holdingFieldDelta } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
 import { buildDevReport, unknownOpsIn } from "./engine/devreport.js";   // SNG-559: the Play/Dev instrument
+import { makeGrids, probeAt, fieldDataFrom } from "./engine/field.js";   // CCODE-457: why the ground here reads the way it does
 import { FIRE_TESTS, diffKeys } from "./engine/firetests.js";   // SNG-560: the parts that have never been used
 import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, roleBadges, teacherOfferReady, applyPartyOps, activeCompany, formerCompany } from "./engine/company.js";
 import { unitsOf, unitLine, poolRows, atSideRows, wherePerson, canBringForward, rosterLine, levelOfPerson } from "./engine/fellowship.js";
@@ -823,6 +824,10 @@ document.addEventListener("click", (ev) => {
   if (ev.target?.closest?.("[data-whats-new-dismiss]")) { ev.preventDefault(); markVersionSeen(); return; }
   if (ev.target?.closest?.("[data-change-money]")) { ev.preventDefault(); showChangeMoney(() => { try { renderCharacterScreen(); } catch { /* the purse is redrawn next time */ } }); }   // CCODE-440
 });
+// ⛑ CCODE-457: the field's own numbers — bands, arcs and the nanite table — EXTRACTED from the prototype before it
+// is deleted. Each of those three lived in one page and nowhere else.
+let WORLD_FIELD_MODEL = null;
+fetch("content/packs/core/world/field_model.json?v=" + APP_VERSION).then((r) => (r.ok ? r.json() : null)).then((n) => { WORLD_FIELD_MODEL = n && typeof n === "object" ? n : null; }).catch(() => { WORLD_FIELD_MODEL = null; });
 fetch("content/packs/core/world/scale.json?v=" + APP_VERSION).then((r) => (r.ok ? r.json() : null)).then((s) => { WORLD_SCALE = s && typeof s === "object" ? s : null; }).catch(() => { WORLD_SCALE = null; });
 let busy = false;
 let _discoverAutoRan = false; // SNG-087: auto-run cross-device discovery at most once per session
@@ -2831,8 +2836,36 @@ function normalisedCatalogId(id, catalog = null) {
   return cat[under] ? under : null;               // ⚠️ never invents a craft that is not there
 }
 
+/** ⛔ CCODE-457 — WHY THE GROUND HERE READS THE WAY IT DOES, in the report Erik already gets every session. The
+ *  field is EVALUATED (engine/field.js), never interpolated between markers, and the probe is its debugging
+ *  surface: density, ordered and wild, and every source's contribution with in/out.
+ *  ⚠️ Built ONCE per session and only when the world's own numbers are loaded — this is telemetry, and telemetry
+ *  that makes a session slower is telemetry nobody leaves on. A coarse grid, because a reading is a number and
+ *  not a picture. */
+let _fieldGrids = null;
+function fieldReadingHere() {
+  try {
+    const fields = _terrain?.fields;
+    if (!fields?.voters?.length) return null;   // the map has not been opened this session — say nothing rather than guess
+    const data = fieldDataFrom(fields, WORLD_FIELD_MODEL, { substrate: CONTENT?.rules?.the_substrate || null });
+    if (!_fieldGrids) _fieldGrids = makeGrids(data, { width: 144, height: 72 });
+    const here = CONTENT?.locations?.[character?.currentLocationId] || character?.generated?.location?.[character?.currentLocationId] || null;
+    const wp = here?.worldPos;
+    if (!wp) return null;
+    const lat = Number(wp.colatitude) - 90;
+    const lon = Number(wp.longitude) > 180 ? Number(wp.longitude) - 360 : Number(wp.longitude);
+    // ⚠️ THE BANDS COME WITH THE DATA. Asking `the_substrate.sourceBands` for `precursor` answers nothing — it is a
+    // table of bands per authored SOURCE — and the reading came back a silent zero for every band-driven kind.
+    const p = probeAt(_fieldGrids, lon, lat, { bands: data.bands, anchors: data.anchors });
+    return { where: character?.currentLocationId || null, lat: Math.round(lat * 10) / 10, lon: Math.round(lon * 10) / 10,
+      density: Math.round(p.density * 100) / 100, ordered: Math.round(p.ordered * 100) / 100, wild: Math.round(p.wild * 100) / 100,
+      inside: p.sources.filter(s => s.inside).map(s => s.kind) };
+  } catch { return null; }   // ⚠️ a reading that throws must never cost a beat — the same rule as the rest of this file
+}
+
 function devReportNow() {
   return buildDevReport(character, {
+    field: fieldReadingHere(),
     build: APP_VERSION,
     vocabulary: [...OP_VOCABULARY].filter(k => k !== "narration" && k !== "choices"),
     promptRows: character?._promptRows || null,

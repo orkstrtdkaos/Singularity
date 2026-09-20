@@ -23767,6 +23767,103 @@ console.log("\n── §333 · the picture service — one host, an old address 
     /refusedSaid\(refused\.why \|\| refused\)/.test(A333) && /refusedSaid\(refusal\.why \|\| refusal\)/.test(A333) && !/ART_REFUSED_SAID/.test(A333));
 }
 
+// ══════════ §334 · CCODE-457 — THE POWER FIELD IS A SURFACE, EVALUATED EVERYWHERE ══════════
+// Erik: "the exesa prototype's way of showing and applying all of the power sources — that was most of the work we did." Aevi had
+// filed the page for deletion, measured what it DUPLICATED, and concluded it contributed nothing; her correction
+// (po/REPLY_aevi_exesa_field_engine.md) lists the ten things it does that nothing else does. They are extracted here BEFORE the page
+// goes — "deleting it without extracting it would have thrown away the part that was hard."
+console.log("\n── §334 · the field — evaluated per texel, sinks pull down, wild goes patchy, the story moves the ground, and one membership line ──");
+{
+  const FD = await import("../engine/field.js");
+  // a small, complete world: two regions, a WELL and a SINK, an ordered region and a wild one, a city and a road
+  const data = {
+    voters: [[-60, -110, "valley"], [10, 60, "palelands"]],
+    densByRegion: { valley: 0.7, palelands: 0.3 },
+    nanByRegion: { valley: ["o", 0.9], palelands: ["w", 0.8] },
+    sources: [[-60, -110, 0.25, 0.09], [10, 60, -0.20, 0.09]],
+    anchors: [["Well", -60, -110, 0.3, 0.05, "o"], ["Nexus", 10, 60, -0.4, 0.06, "w"]],
+    meaning: [["City", -60, -110, 0.8, 0.5, 0.5]],
+    roads: [[-60, -110, 10, 60]],
+  };
+  const G = FD.makeGrids(data, { width: 72, height: 36 });
+  const bands = { precursor: { center: 0.7, width: 0.15 } };
+  const opts = { bands, anchors: data.anchors };
+  const iWell = FD.indexAt(G, -110, -60), iSink = FD.indexAt(G, 60, 10);
+  const plain = FD.makeGrids({ ...data, sources: [] }, { width: 72, height: 36 });
+  check("§334: ⛔ EVALUATED PER TEXEL, AND A SOURCE IS A GAUSSIAN WITH A SIGN — the well raises the ground above its region's vote and the SINK PULLS IT DOWN, which is the half of \"showing and applying\" that the first audit dropped; every texel has a value, because a field is a surface and not a set of pins",
+    G.base.length === 72 * 36 && [...G.base].every(v => v >= 0 && v <= 1)
+    && G.base[iWell] > plain.base[iWell] && G.base[iSink] < plain.base[iSink]
+    && [...G.base].filter(v => v > 0).length === G.base.length,
+    JSON.stringify({ well: [+plain.base[iWell].toFixed(3), +G.base[iWell].toFixed(3)], sink: [+plain.base[iSink].toFixed(3), +G.base[iSink].toFixed(3)] }));
+  check("§334: ⛔ ORDERED AND WILD ARE TWO ACCUMULATORS, NOT ONE FIELD WITH A FLAG — a region's authored state is one or the other, but the FIELD mixes, because the vote blends neighbours; and WILD IS PATCHY while ordered ground stays even (\"scattered thin along the old routes and gone feral IN PATCHES\")",
+    G.ordered[iWell] > 0.5 && G.wild[iWell] < 0.2 && G.wild[iSink] > 0.2 && G.ordered[iSink] < 0.2
+    && (() => {
+      const row = (grid, y) => [...Array(72)].map((_, x) => grid[y * 72 + x]);
+      const spread = (xs) => Math.max(...xs) - Math.min(...xs);
+      const wildRow = row(G.wild, Math.floor(FD.indexAt(G, 60, 10) / 72)), ordRow = row(G.ordered, Math.floor(iWell / 72));
+      return spread(wildRow.filter(v => v > 0.05)) > 0.1 && spread(ordRow.filter(v => v > 0.05)) < spread(wildRow.filter(v => v > 0.05));
+    })(),
+    JSON.stringify({ atWell: [+G.ordered[iWell].toFixed(2), +G.wild[iWell].toFixed(2)], atSink: [+G.ordered[iSink].toFixed(2), +G.wild[iSink].toFixed(2)] }));
+  const lit = [{ kind: "precursor", rgb: [74, 150, 255], on: true }, { kind: "wild", rgb: [90, 224, 120], on: true }];
+  const mixed = FD.paint(G, lit, { ...opts, mix: true }), owned = FD.paint(G, lit, { ...opts, mix: false });
+  check("§334: ⛔ A PICTURE, AND TWO BLEND MODES THAT ANSWER TWO QUESTIONS — `mix` sums and normalises (how much field is here); otherwise the strongest source wins the texel (which source owns this ground). Both fill a w×h×3 texture",
+    mixed.length === 72 * 36 * 3 && owned.length === mixed.length && mixed.some((v, i) => v !== owned[i]),
+    `${[...mixed].filter((v, i) => v !== owned[i]).length} of ${mixed.length} channels differ`);
+  const cov = FD.coverage(G, "precursor", opts);
+  check("§334: ⛑ COVERAGE IS AN INSTRUMENT, NOT A LEGEND — the share of the world a source holds above the membership line, so \"I thought that was everywhere\" is answerable",
+    cov > 0 && cov < 1 && Math.abs(cov - FD.coverage(G, "precursor", { ...opts, stride: 1 })) < 0.25, `${(cov * 100).toFixed(1)}%`);
+  // ⚠️ ASKED OF THE WHOLE WORLD, NOT ONE TEXEL. Two fixtures in a row "passed" by comparing nothing to nothing: on dense
+  // ground the veil is already zero, and standing on the nexus pins it to one. A field that answers to the story answers
+  // EVERYWHERE, so that is what this counts.
+  const moved = (() => {
+    let n = 0;
+    for (let i = 0; i < G.base.length; i++) {
+      const { lat, lon } = FD.texelCentre(i, G.width, G.height);
+      const a = FD.strengthAt("veil", G, i, { ...opts, lat, lon, stages: {} });
+      const b = FD.strengthAt("veil", G, i, { ...opts, lat, lon, stages: { arc_the_disagreement: 4 } });
+      if (a !== b) n++;
+    }
+    return n;
+  })();
+  check("§334: ⛔ THE FIELD ANSWERS TO THE STORY — an arc above stage one moves the ground across the world (\"the ground is not where it was authored\"), and POLARISE pushes AWAY from the membership line rather than up or down: above it rises, below it falls, and exactly on it nothing moves",
+    moved > G.base.length * 0.1
+    && FD.arcShift("veil", 0.5, { arc_the_disagreement: 4 }) > 0
+    && FD.arcShift("precursor", 0.9, { arc_the_poles_pull: 2 }) > 0 && FD.arcShift("precursor", 0.1, { arc_the_poles_pull: 2 }) < 0
+    && FD.arcShift("precursor", FD.MEMBERSHIP, { arc_the_poles_pull: 2 }) === 0
+    && FD.arcShift("veil", 0.5, {}) === 0 && FD.arcShift("veil", 0.5, { arc_the_disagreement: 1 }) === 0,
+    JSON.stringify({ movedTexels: moved, of: G.base.length, polariseHigh: +FD.arcShift("precursor", 0.9, { arc_the_poles_pull: 2 }).toFixed(3), polariseLow: +FD.arcShift("precursor", 0.1, { arc_the_poles_pull: 2 }).toFixed(3) }));
+  const probe = FD.probeAt(G, -110, -60, { ...opts, places: [["Millbrook", -60, -110]], waygates: [["Near Gate", -59, -109], ["Far Gate", 40, 40]] });
+  check("§334: ⛑ THE PROBE SAYS WHY A PLACE READS THE WAY IT DOES — density, what stands nearest, a waygate only if it is within six degrees, and EVERY source's contribution with in/out; and a crystal well is told from a veil nexus, which are opposite things sitting in one list",
+    probe.nearestPlace?.name === "Millbrook" && probe.nearestWaygate?.name === "Near Gate"
+    && probe.nearestWell?.name === "Well" && probe.nearestNexus?.name === "Nexus"
+    && probe.sources.length === FD.FIELD_KINDS.length && probe.sources.every(s => typeof s.inside === "boolean")
+    && probe.sources.find(s => s.kind === "nanite").inside === true && probe.sources.find(s => s.kind === "veil").inside === false
+    && FD.probeAt(G, 40, 40, { ...opts, waygates: [["Far Gate", -60, -110]] }).nearestWaygate === null,
+    JSON.stringify({ place: probe.nearestPlace, gate: probe.nearestWaygate, well: probe.nearestWell, nexus: probe.nearestNexus }));
+  const srcTxt = rd("engine/field.js");
+  check("§334: ⛔ ONE MEMBERSHIP LINE, NAMED ONCE AND USED THREE TIMES — in/out, the coverage share, and POLARISE's pivot. Aevi: \"one constant in three places: it must move to `field.js` as a named export, not be re-typed\"",
+    FD.MEMBERSHIP === 0.55 && (srcTxt.match(/0\.55/g) || []).length === 1 && /export const MEMBERSHIP = 0\.55;/.test(srcTxt)
+    && (srcTxt.match(/MEMBERSHIP/g) || []).length >= 5, `${(srcTxt.match(/0\.55/g) || []).length} literal(s), ${(srcTxt.match(/MEMBERSHIP/g) || []).length} uses of the name`);
+  // ⛔ THE ADAPTER, AND THE SILENT ZERO IT EXISTS TO PREVENT
+  const model334 = JSON.parse(rd("content/packs/core/world/field_model.json"));
+  const terrain334 = JSON.parse(rd("content/packs/core/world/terrain.json"));
+  const data334 = FD.fieldDataFrom(terrain334.fields, model334, { substrate: JSON.parse(rd("content/packs/core/rules/the_substrate.json")) });
+  const G334 = FD.makeGrids(data334, { width: 72, height: 36 });
+  const withBands = FD.coverage(G334, "precursor", { bands: data334.bands, anchors: data334.anchors });
+  const without = FD.coverage(G334, "precursor", { bands: {}, anchors: data334.anchors });
+  check("§334: ⛔ THE BANDS RIDE WITH THE DATA, BECAUSE A MISSING TABLE READS AS AN EMPTY WORLD — asking `the_substrate.sourceBands` for `precursor` answers nothing (it is bands per authored SOURCE, not per field kind), and the reading came back a silent zero for every band-driven kind until the model carried its own bands; and the extracted model holds the three tables that lived only in the prototype",
+    Object.keys(data334.bands).length >= 5 && withBands > 0.2 && without === 0
+    && data334.voters.length > 100 && data334.sources.length > 20 && Object.keys(data334.nanByRegion).length === 39
+    && Object.values(model334.regions).filter(r => r.state === "ordered").length === 21
+    && Object.values(model334.regions).filter(r => r.state === "wild").length === 10
+    && Object.values(model334.regions).filter(r => r.state === "clear").length === 8,
+    JSON.stringify({ bands: Object.keys(data334.bands), withBands: +(withBands * 100).toFixed(0) + "%", without: +(without * 100).toFixed(0) + "%", voters: data334.voters.length, sources: data334.sources.length }));
+  check("§334: ⚠️ THE ANTIMERIDIAN IS WHERE EVERY MAP BREAKS ONCE — a longitude difference wraps the short way, and the vote carries longitude convergence, so a degree at the pole is not a degree at the equator",
+    FD.lonDelta(179, -179) === -2 && FD.lonDelta(-179, 179) === 2 && FD.lonDelta(10, 5) === 5
+    && FD.voteWeight(-60, 179, -60, -179, Math.cos(-60 * Math.PI / 180)) > FD.voteWeight(-60, 179, -60, 100, Math.cos(-60 * Math.PI / 180))
+    && FD.voteWeight(0, 0, 0, 10, 1) < FD.voteWeight(80, 0, 80, 10, Math.cos(80 * Math.PI / 180)));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

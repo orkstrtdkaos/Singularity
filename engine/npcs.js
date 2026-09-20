@@ -319,7 +319,14 @@ export function applyNpcUpdates(character, updates = [], ctx = {}) {
       // DESCRIPTIVE words as a label and sets `nameUnknown`, which `nameOf` in names.js has read since
       // SNG-111 and which nothing has ever written: a reader with no writer, closed here. `setNpcName`
       // still overwrites the label the moment the player learns the real name.
-      const first = personName({ proposed: prettifyNpcName(String(u.name || id)), role: u.role, max: 60 });
+      // ⛔ CCODE-462 — THE POOLS, WHICH THIS CALL HAS NEVER PASSED. `personName` reads `pools ? mintedName(…) : null`,
+      // so the minting limb has been unreachable from the one door that creates a person in play: the namer could
+      // only ever relabel, never name. ⚠️ `nameUnknown` appeared in ZERO of 128 live records, and names.js already
+      // said why — "a reader with no writer, the fourth door again". Both halves are closed now: the detector sees
+      // a role in the name field, and the pools make a real name available the moment it does.
+      const first = personName({ proposed: prettifyNpcName(String(u.name || id)), role: u.role, max: 60,
+        pools: ctx.rules?.mintedNames || null, taken: Object.values(reg).map(x => x?.trueName || x?.name).filter(Boolean),
+        nameNotYetLearned: true });
       // ⛔ CCODE-421: a person met under an AUTHORED person's name is that person — keyed by their authored id, so the world's record of
       // them and yours are one. Four saves met Mara Wells as `mara-wells` while the world knew her as `water_keeper`.
       const authoredMet = !first.nameUnknown && ctx.npcs ? authoredPersonNamed(first.name, ctx.npcs) : null;
@@ -328,6 +335,10 @@ export function applyNpcUpdates(character, updates = [], ctx = {}) {
         id,
         name: first.name,
         nameUnknown: first.nameUnknown || undefined,
+        // ⛔ THE NAME THE WORLD KNOWS, whether or not this character does — Erik's ruling. GM-EYES: the registry
+        // block hands it to the GM under the same discipline as any other unearned truth, so the fiction stays
+        // consistent about who this person is and can reveal it when the player earns it.
+        trueName: first.trueName || undefined,
         role: String(u.role || "").slice(0, 100),
         description: smartClamp(String(u.description || ""), 600), // SNG-152: model prose — word boundary, generous
         firstMet: { locationId: ctx.locationId || null, day: ctx.day ?? null },
@@ -389,8 +400,11 @@ export function applyNpcUpdates(character, updates = [], ctx = {}) {
     // SNG-431 §1: the same namer on the fill-in-a-blank path. A second writer spelling its own rule is how
     // the create path and the update path drift apart.
     if (u.name && !n.name) {
-      const late = personName({ proposed: String(u.name), role: u.role || n.role, max: 60 });
+      const late = personName({ proposed: String(u.name), role: u.role || n.role, max: 60,
+        pools: ctx.rules?.mintedNames || null, taken: Object.values(reg).map(x => x?.trueName || x?.name).filter(Boolean),
+        nameNotYetLearned: true });
       n.name = late.name;
+      if (late.trueName && !n.trueName) n.trueName = late.trueName;
       if (late.nameUnknown) n.nameUnknown = true;
     }
     if (u.role) {
@@ -448,6 +462,7 @@ export function applyNpcUpdates(character, updates = [], ctx = {}) {
         n.name = newName;
         n.nameRevealed = true;
         delete n.nameUnknown;   // SNG-431: the label was standing in for a name they now have
+        delete n.trueName;      // CCODE-462: learned — so there is one name again, not a public one and a private one
         // ⛔ CCODE-421 — A NAME THE WORLD ALREADY HAS IS A PERSON THE WORLD ALREADY HAS. Erik's ruling on Loki's Halvex: the play is canon
         // and the authored person is adapted to it — so a stranger revealed as a legend BECOMES that legend's record, one id, and
         // `linkedByReveal` is what an author's review finds. (Never when the authored id is already someone else in this registry.)
@@ -954,7 +969,7 @@ export function npcRegistryForGM(character, { locationId = null, sceneNpcNames =
           (d.acknowledgeTone ? ` TONE (earned approval; sharp when crossed): ${d.acknowledgeTone}` : "")
         : ` ⟡ DRIVEN: ${d.driveSummary || (d.wants || [])[0] || "has their own wants"}`;
     }
-    return `- ${n.name}${Array.isArray(n.aliases) && n.aliases.length ? ` (also called ${n.aliases.slice(-3).join(", ")})` : ""}${n.role ? ` (${n.role})` : ""}${n.gender || n.pronouns ? ` [${[n.gender, n.pronouns].filter(Boolean).join(", ")} — use these pronouns]` : ""} — ${relationshipBand(n.relationship)} (${n.relationship}), status: ${n.status}.` +
+    return `- ${n.name}${n.trueName && n.nameUnknown ? ` [GM-EYES-ONLY — their name is ${n.trueName}; ${character.name || "this character"} has NOT learned it. Keep them consistent as that person, refer to them as the character would, and let the name be EARNED — never state it plainly unasked. When the fiction gives it, emit revealName: "${n.trueName}"]` : ""}${Array.isArray(n.aliases) && n.aliases.length ? ` (also called ${n.aliases.slice(-3).join(", ")})` : ""}${n.role ? ` (${n.role})` : ""}${n.gender || n.pronouns ? ` [${[n.gender, n.pronouns].filter(Boolean).join(", ")} — use these pronouns]` : ""} — ${relationshipBand(n.relationship)} (${n.relationship}), status: ${n.status}.` +
       // ⛔ CCODE-385: what is TRUE of them now, from another traveler's story, beside what this character knows — for the GM to let surface
       (n.worldLife && ((n.worldLife.role && n.worldLife.role !== n.role) || (n.worldLife.status && n.worldLife.status !== n.status))
         ? ` IN THE WORLD NOW (true, from another traveler's story; this character may not know it yet — let it surface the way news does): ${[

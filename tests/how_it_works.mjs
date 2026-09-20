@@ -24288,6 +24288,127 @@ console.log("\n── §337 · who a shared-world row is about ──");
     `${(A337.match(/people: ledgerPeopleFor\(/g) || []).length} constructors carry it · ${constructors} appendLedger call sites`);
 }
 
+// ══════════ §338 · CCODE-462 — EVERYBODY HAS A NAME, WHETHER OR NOT YOU HAVE LEARNED IT ══════════
+// Erik, on finding "The Messenger" and "Hostel-keeper" sitting in the NAME field of the shared-world promotion list: "when the
+// Hostel-keeper and the messenger are met FIRST, the GM needs to name them and open the initial npc sheet. That will allow the gate
+// to work fine." And: "Whether or not the PC learns their name, they'll have one."
+// ⛑ THE MACHINERY ALREADY EXISTED AND WAS UNREACHABLE. `personName` mints from the authored pools; `nameUnknown` records that the
+// player has not learned it; the reveal path moves the real name in and aliases the label. ⛔ Two things stopped any of it firing:
+// the placeholder detector only knew the literal word "unknown", and the one door that creates a person in play called the namer
+// WITHOUT the pools, so its minting limb was dead by omission of an argument. `nameUnknown` appeared in 0 of 128 live records.
+console.log("\n── §338 · a person met in play has a name ──");
+{
+  const NM = await import("../engine/names.js");
+  const NPC = await import("../engine/npcs.js");
+  const SH = await import("../engine/npcsheet.js");
+  const { loadContentHeadless: lch338 } = await import("./headless_content.mjs");
+  const C338 = await lch338();
+  const ctx338 = { locationId: "millbrook", day: 3, rules: C338.rules, npcs: C338.npcs };
+
+  // ⛔ THE DETECTOR, DRIVEN OVER EVERY PERSON IN EVERY LIVE SAVE — because a detector that fires on the wrong rows renames
+  // somebody real, and the one that already exists in npcs.js does exactly that.
+  const people338 = new Map();
+  for (const d of readdirSync(join(root, "characters"))) {
+    let files = []; try { files = readdirSync(join(root, `characters/${d}`)); } catch { continue; }
+    for (const f of files.filter(x => x.endsWith(".json"))) {
+      let j; try { j = rj(`characters/${d}/${f}`); } catch { continue; }
+      for (const [k, v] of Object.entries(j.npcRegistry || {})) if (v?.name) {
+        const prev = people338.get(k);
+        if (!prev || (Number(v.met) || 0) > prev.met) people338.set(k, { name: v.name, role: v.role || "", met: Number(v.met) || 0 });
+      }
+    }
+  }
+  const live338 = [...people338.values()];
+  const caught = live338.filter(p => NM.looksLikeRole(p.name, p.role));
+  const MUST_CATCH = ["The Stranger", "Hostel-keeper", "The Messenger", "Waystation morning runner", "Redline duelist"];
+  const MUST_SPARE = ["Sister Vreni", "Warden Coll", "Keeper Ilma", "Mara Wells", "Edvar Crane", "Pell Ran Marsh", "Cevaine", "Piotr"];
+  check("§338: ⛔ A ROLE IN THE NAME FIELD IS FOUND, AND A REAL NAME IS NEVER TOUCHED — measured over every person in every live save before the detector was written, because one that fires on the wrong row renames somebody who has a name. Three signals: it opens with an article, or every word of it is already in the ROLE, or it carries a lower-case word mid-name (a person's name is Title Case throughout; a description is not, and particles are exempt so \"Pell Ran Marsh\" and \"Vessin Tallow-bark\" survive)",
+    live338.length >= 90
+    && MUST_CATCH.every(n => live338.some(p => p.name === n) ? caught.some(p => p.name === n) : true)
+    && MUST_SPARE.every(n => !caught.some(p => p.name === n))
+    && caught.length > 8 && caught.length < live338.length * 0.25,
+    `${caught.length} of ${live338.length} caught · spared every one of: ${MUST_SPARE.join(", ")}`);
+
+  check("§338: ⛔ AND IT IS NOT THE DETECTOR THAT ALREADY EXISTED — `nameIsUnknown` in npcs.js matches the bare words warden|keeper|stranger|…, so it calls \"Warden Coll\" and \"Keeper Ilma\" unnamed. Harmless where it is used, which is swapping a display label in a sidebar; ruinous at the door that MINTS a name, because it would give a real person a new one",
+    NPC.nameIsUnknown({ name: "Warden Coll" }) === true && NM.looksLikeRole("Warden Coll", "Edge District Warden") === false
+    && NPC.nameIsUnknown({ name: "Keeper Ilma" }) === true && NM.looksLikeRole("Keeper Ilma", "") === false
+    && NM.looksLikeRole("Hostel-keeper", "Keeper of the Marchward hostel") === true,
+    JSON.stringify({ warden: [NPC.nameIsUnknown({ name: "Warden Coll" }), NM.looksLikeRole("Warden Coll", "Edge District Warden")] }));
+
+  // ⛔ THE MEET PATH, DRIVEN. This is the door, and the pools it never passed are what made the namer decorative.
+  const mk338 = () => ({ name: "Adelheid", npcRegistry: {} });
+  const meet338 = (c, name, role) => { NPC.applyNpcUpdates(c, [{ op: "meet", npcId: name.toLowerCase().replace(/[^a-z]+/g, "-"), name, role }], ctx338); return c.npcRegistry[Object.keys(c.npcRegistry).pop()]; };
+  const roleMet = meet338(mk338(), "Hostel-keeper", "Keeper of the Marchward hostel");
+  const realMet = meet338(mk338(), "Mara Wells", "Millbrook civic manager");
+  check("§338: ⛔ SOMEBODY MET UNDER A ROLE LEAVES THE DOOR WITH A NAME — Erik: \"whether or not the PC learns their name, they'll have one.\" The world knows it from the first beat; the player still calls them what they called them, and `nameUnknown` says which is which. ⚠️ The pools reach the namer at last: `personName` reads `pools ? mintedName(…) : null` and this call site has never passed them, so its minting limb was dead by the omission of one argument",
+    !!roleMet.trueName && roleMet.trueName !== roleMet.name && roleMet.nameUnknown === true
+    && roleMet.name === "Hostel-keeper"
+    && realMet.name === "Mara Wells" && !realMet.trueName && !realMet.nameUnknown,
+    JSON.stringify({ called: roleMet.name, trueName: roleMet.trueName, real: realMet.name }));
+
+  check("§338: ⛑ …AND A BYNAME IS EARNED, SO A STRANGER DOES NOT GET ONE — `mintedName` composes \"Ravel the Late Arrival\" because it exists to name FIGURES the world tells stories about. The hostel-keeper met an hour ago is Ravel; an epithet on them reads as a myth nobody told. The full form stays as the collision escalation, which is what the authored pools already do",
+    (() => { const c = mk338(); const seen = [];
+      for (const [n, r] of [["Hostel-keeper", "Keeper of the hostel"], ["Grey-braided woman", "Millbrook local"], ["A Mason", "Traveling laborer"]]) seen.push(meet338(c, n, r).trueName);
+      return seen.every(Boolean) && seen.some(n => !/ the /.test(n)) && new Set(seen).size === seen.length; })(),
+    "each met stranger gets a distinct plain name");
+
+  // ⛔ GM-EYES, THE SAME DISCIPLINE AS A QUEST'S `truth`.
+  const cGM = mk338(); meet338(cGM, "The Messenger", "A sent thing, tasked with delivery");
+  const gmBlock = String(NPC.npcRegistryForGM(cGM, { locationId: "millbrook", rules: C338.rules }) || "");
+  check("§338: ⛔ THE GM IS TOLD THE NAME AND TOLD NOT TO SAY IT — the same discipline as a quest's GM-eyes `truth`: the fiction has to stay consistent about who this person IS without handing the player something they have not earned, and the GM is given the exact `revealName` to emit when the fiction gives it up",
+    /GM-EYES-ONLY/.test(gmBlock) && /has NOT learned it/.test(gmBlock) && /never state it plainly/.test(gmBlock)
+    && /revealName/.test(gmBlock) && gmBlock.includes(cGM.npcRegistry["the-messenger"].trueName),
+    gmBlock.slice(0, 140));
+
+  // ⛑ AND WHEN IT IS EARNED THERE IS ONE NAME AGAIN.
+  const cRev = mk338(); const before = meet338(cRev, "Hostel-keeper", "Keeper of the Marchward hostel");
+  const theirName = before.trueName;
+  NPC.applyNpcUpdates(cRev, [{ op: "update", npcId: "hostel-keeper", revealName: theirName }], ctx338);
+  const after = cRev.npcRegistry["hostel-keeper"];
+  check("§338: ⛑ AND WHEN THE FICTION GIVES THE NAME UP THERE IS ONE NAME AGAIN — the label becomes an alias, the history records that it was revealed, and both the not-yet-learned flag and the private copy are gone. Two names for one person is a state to pass THROUGH, never one to keep",
+    after.name === theirName && (after.aliases || []).includes("Hostel-keeper")
+    && after.nameRevealed === true && !after.nameUnknown && !after.trueName
+    && (after.history || []).some(h => /name is revealed/i.test(h)),
+    JSON.stringify({ name: after.name, aliases: after.aliases, trueName: after.trueName }));
+
+  // ⛔ THE SHEET OPENS ON THE BEAT YOU MEET THEM.
+  const sheetMet = SH.playerSheetFor(before, { day: 3 });
+  const stub = SH.playerSheetFor({ id: "keeper_ilma", name: "Keeper Ilma", history: [], knownFacts: [], skillsObserved: [], relationship: 0 }, { day: 3 });
+  check("§338: ⛔ THE INITIAL SHEET OPENS ON THE BEAT YOU MEET SOMEBODY — a record born from a `meet` carries `firstMet` and `met >= 1`, which are the stamps of having stood in front of a person, so the sheet stops telling you that you have not met the one you just spoke to. ⚠️ Narrow on purpose: a quest effect also writes a registry record, with neither stamp — a name you have been TOLD, not somebody you have met — and that one still reads \"you have not met them properly\", which is true",
+    sheetMet?.met === true && /watched|know them/.test(sheetMet.reveal.why)
+    && stub?.met === false && /not met them properly/.test(stub.reveal.why),
+    JSON.stringify({ met: sheetMet?.met, why: sheetMet?.reveal?.why, stub: stub?.reveal?.why }));
+
+  // ⛔ AND THE RULING REACHES THE PEOPLE ALREADY MET — driven THROUGH THE RUNNER at its version gate, never by
+  // calling `apply` on a copy: a step proven that way has never met the gate, which is exactly how one repair sat
+  // unrun on a live save at the wrong reconcileVersion.
+  {
+    const RC338 = await import("../engine/reconcile.js");
+    const old338 = { name: "Old Save", reconcileVersion: 72,
+      npcRegistry: {
+        "the-messenger": { id: "the-messenger", name: "The Messenger", role: "A sent thing, tasked with delivery", met: 3 },
+        "mara-wells": { id: "mara-wells", name: "Mara Wells", role: "Millbrook civic manager", met: 20 },
+        "corvin": { id: "corvin", name: "Corvin Teth", role: "Runner", nameRevealed: true, met: 5 },
+      } };
+    RC338.reconcile(old338, "character", { content: C338 });
+    const msg = old338.npcRegistry["the-messenger"], mara = old338.npcRegistry["mara-wells"], corv = old338.npcRegistry["corvin"];
+    check("§338: ⛑ AND THE RULING REACHES THE PEOPLE ALREADY MET — step 73, through the runner's version gate. ⚠️ IT RENAMES NOBODY: what the character calls them stays exactly where it is, and all it writes is the name the WORLD has plus the flag saying this character has not learned it. ⛔ Precedent, and the reason this is a rule rather than another repair: reconcile already carries a hand-written line turning ONE person, \"The Runner\", into \"Corvin Teth\" — one person, by hand, because there was no rule. A name the player already learned is left alone",
+      msg.name === "The Messenger" && !!msg.trueName && msg.nameUnknown === true
+      && mara.name === "Mara Wells" && !mara.trueName
+      && corv.name === "Corvin Teth" && !corv.trueName
+      && old338.reconcileVersion >= 73,
+      JSON.stringify({ messenger: msg.trueName, mara: mara.trueName || null, revealed: corv.trueName || null, version: old338.reconcileVersion }));
+  }
+
+  // ⛔ AND THE CONTRACT ASKS FOR IT, because the engine cannot mint what the model never writes down.
+  const gmSrc338 = rd("engine/gm.js");
+  check("§338: ⛔ AND THE CONTRACT ASKS FOR A NAME — it was the ONE field in the whole npcUpdates entry whose spec was literally \"...\", in a contract where age, sex, gender and pronouns each carry a paragraph; and rule 14 went further and blessed \"The Runner\" as an acceptable placeholder. ⚠️ An engine rule the prompt contradicts is a rule that loses",
+    /THEIR NAME, and a role is not one/.test(gmSrc338)
+    && /Never leave this blank and never put a description here/.test(gmSrc338)
+    && /A LABEL IS NOT A NAME/.test(gmSrc338)
+    && !/a placeholder such as The Runner or the courier/.test(gmSrc338));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

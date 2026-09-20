@@ -17,6 +17,7 @@ import { addHolding, addFeature, setGarrison } from "./holdings.js";
 import { carriageOf } from "./carriage.js";   // ⛔ step 61: a carriage the one reader that matters declines is no carriage at all        // R49: the forge the fiction built; step 44: the features and the gate
 import { canRaiseBand, raiseBand } from "./melee.js";   // R49: the fellowship the fiction already named
 import { worldPosForGenerated } from "./worldmap.js";
+import { personName, looksLikeRole } from "./names.js";   // ⛔ step 73: everyone already met has the name the world knows them by
 import { grantMartialKit, retiredBaselineIds } from "./martial.js";
 import { applyLadderGrants } from "./ladder.js";
 import { servicedURL } from "./art.js";   // ⛔ step 72: the pictures now ask our own service
@@ -2417,6 +2418,40 @@ export const CHARACTER_STEPS = [
       walk(c, 0);
       if (!moved) return {};
       console.log(`[reconcile] ccode-455: ${moved} picture address(es) now ask our own service`);
+      return {};
+    }
+  },
+  {
+    version: 73, id: "everyone-already-met-has-a-name", playerFacing: false,
+    // ⛔ CCODE-462 — ERIK'S RULING, APPLIED BACKWARDS. "When the Hostel-keeper and the messenger are met first,
+    // the GM needs to name them… whether or not the PC learns their name, they'll have one." That is closed at
+    // the door now; these are the people who came through it before it was.
+    //
+    // ⚠️ IT DOES NOT RENAME ANYBODY. What the character calls them is what the character calls them — the label
+    // stays exactly where it is, and all this writes is the name the WORLD has for them plus the flag saying the
+    // character has not learned it. The existing reveal path does the rest if the fiction ever gives it up.
+    // ⛑ Precedent, and the reason this is a step rather than a one-off: `reconcile.js` already carries a
+    // hand-written repair turning ONE person, "The Runner", into "Corvin Teth". One person, by hand, because
+    // there was no rule. This is the rule.
+    apply: (c, ctx = {}) => {
+      const reg = c?.npcRegistry;
+      if (!reg || typeof reg !== "object") return {};
+      const pools = ctx.content?.rules?.mintedNames || null;
+      if (!pools) return {};   // ⚠️ no pools, no invention — absent stays absent
+      const taken = Object.values(reg).map(n => n?.trueName || n?.name).filter(Boolean);
+      let named = 0;
+      for (const n of Object.values(reg)) {
+        if (!n || typeof n !== "object" || !n.name) continue;
+        if (n.trueName || n.nameRevealed) continue;              // already has one, or the player knows it
+        if (!looksLikeRole(n.name, n.role || "")) continue;      // a real name is left alone
+        const got = personName({ proposed: n.name, role: n.role || "", pools, taken, nameNotYetLearned: true, max: 60 });
+        if (!got.trueName) continue;
+        n.trueName = got.trueName;
+        n.nameUnknown = true;
+        taken.push(got.trueName);
+        named++;
+      }
+      if (named) console.log(`[reconcile] ccode-462: ${named} person(s) already met now have the name the world knows them by`);
       return {};
     }
   },

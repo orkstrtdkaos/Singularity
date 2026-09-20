@@ -341,7 +341,15 @@ export function playerSheetFor(entry, { day = null, cfg = {}, roleAttributes = n
   const history = arr(entry.history);
   // ⚠️ MET is not the same as KNOWN. A name in the registry with no history, no facts and no relationship is someone
   // you walked past — the sheet must say so rather than render an empty form that looks like a missing record.
-  const met = !!(history.length || learned.length || witnessed.length || (entry.relationship ?? 0) !== 0);
+  // ⛑ ERIK (CCODE-462): "when the Hostel-keeper and the messenger are met FIRST, the GM needs to name them
+  // and OPEN THE INITIAL NPC SHEET." A record born from an `op: "meet"` carries `firstMet` (where and what day)
+  // and `met >= 1`, and those are the stamps of an actual meeting — so the sheet opens on the beat you meet
+  // somebody, instead of telling you that you have not met the person you just spoke to.
+  // ⚠️ THE DISTINCTION ABOVE STILL HOLDS AND IS WHY THIS IS NARROW: a quest effect (`npc_state`, `ally`) also
+  // writes a registry record, with no `firstMet` and no `met` — a name you have been TOLD, not somebody you
+  // have stood in front of. Those still read "you have not met them properly", which is true.
+  const met = !!(entry.firstMet || (Number(entry.met) || 0) > 0
+    || history.length || learned.length || witnessed.length || (entry.relationship ?? 0) !== 0);
   // ⛔ THE NUMBERS NEED EVIDENCE, AND THE EVIDENCE IS HAVING WATCHED THEM WORK. Not relationship — you can be fond of
   // someone whose capability you have never seen, and fondness is not knowledge of their reach.
   const seenAct = witnessed.length > 0;

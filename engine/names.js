@@ -155,6 +155,34 @@ export const NAME_KINDS = KINDS;
  *  gate that stays green while the writer drifts. */
 export const PLACEHOLDER_NAME = /unknown|unnamed|placeholder|\(name/i;
 
+/** ⛔ A ROLE WEARING A NAME FIELD. `PLACEHOLDER_NAME` above catches a model writing the literal word
+ *  "unknown" — it does NOT catch the thing the model actually does, which is to put what somebody IS where
+ *  their name goes: "Hostel-keeper", "The Messenger", "Waystation morning runner".
+ *
+ *  ⚠️ MEASURED BEFORE IT WAS BUILT, over all 104 people in the live saves, because a detector that fires on
+ *  the wrong rows renames somebody real. Three signals, and the union catches 16 and spares every one of
+ *  the actual names — Sister Vreni, Warden Coll, Keeper Ilma, Mara Wells, Pell Ran Marsh all survive:
+ *    1. it opens with an article        — "The Stranger", "A Mason"
+ *    2. every word of it is in the ROLE — "Hostel-keeper" against "Keeper of the Marchward hostel"
+ *    3. a lower-case word mid-name      — "Waystation morning runner", "Redline duelist". A person's name is
+ *                                         Title Case throughout; a description is not. Particles are exempt,
+ *                                         so "Vessin Tallow-bark" and "Pell Ran Marsh" are safe.
+ *  ⛔ AND IT IS NOT `nameIsUnknown` (npcs.js), WHICH ALREADY EXISTS AND MUST NOT BE USED HERE: that one
+ *  matches the bare words `warden|keeper|stranger|…`, so it calls "Warden Coll" and "Keeper Ilma" unnamed.
+ *  Harmless where it is used — swapping a display label — and ruinous at the door that MINTS a name. PURE. */
+const NAME_PARTICLE = new Set(["of", "the", "a", "an", "and", "de", "du", "van", "von", "der", "al", "ap", "bin", "ibn"]);
+const nameWords = (s) => String(s || "").toLowerCase().replace(/[^a-z0-9\s-]/g, " ").split(/[\s-]+/).filter(w => w.length > 2);
+export function looksLikeRole(name, role = "") {
+  const n = String(name || "").trim();
+  if (!n) return false;
+  if (/^(the|a|an)\s+/i.test(n)) return true;
+  const words = n.split(/\s+/);
+  if (words.length > 1 && words.slice(1).some(w => /^[a-z]/.test(w) && !NAME_PARTICLE.has(w.toLowerCase()))) return true;
+  const inRole = new Set(nameWords(role));
+  const mine = nameWords(n);
+  return mine.length > 0 && inRole.size > 0 && mine.every(w => inRole.has(w));
+}
+
 /** ⛔ A NAME THAT LONG IS A SENTENCE (Aevi). Applies to what the ENGINE mints — authored names are
  *  authorship, and three of them are longer on purpose. */
 export const MINTED_NAME_MAX = 40;
@@ -164,10 +192,12 @@ export const MINTED_NAME_MAX = 40;
  *  the key into `personalVerbsByOrigin`, so renaming it would silently empty that pool. */
 export const ORIGIN_KIND_ALIAS = { vacancy_filled: "vacancy" };
 
-/** True when this string is a disclaimer wearing a name field. */
-export function isPlaceholderName(s) {
+/** True when this string is a disclaimer — or a ROLE — wearing a name field. ⚠️ `role` is optional and the
+ *  test is strictly weaker without it: signal 2 needs something to compare against. Callers that have the
+ *  role must pass it, or "Hostel-keeper" reads as a name. */
+export function isPlaceholderName(s, role = "") {
   const t = String(s || "").trim();
-  return !t || PLACEHOLDER_NAME.test(t);
+  return !t || PLACEHOLDER_NAME.test(t) || looksLikeRole(t, role);
 }
 
 /** A resolved name as a person would SAY it mid-sentence. Aevi: *"a double article on a raw id, and the id
@@ -299,10 +329,27 @@ export function mintedName({ tradition = null, originKind = "_default", pools = 
  *  @returns {{name:string, nameUnknown:boolean, minted:boolean, byname?:string}}
  */
 export function personName({ proposed = "", role = "", pools = null, tradition = null,
-                            originKind = "_default", rng = Math.random, taken = [], max = 60 } = {}) {
+                            originKind = "_default", rng = Math.random, taken = [], max = 60,
+                            nameNotYetLearned = false } = {}) {
   const raw = String(proposed || "").trim();
-  if (raw && !PLACEHOLDER_NAME.test(raw)) return { name: raw.slice(0, max), nameUnknown: false, minted: false };
+  if (raw && !isPlaceholderName(raw, role)) return { name: raw.slice(0, max), nameUnknown: false, minted: false };
   const m = pools ? mintedName({ tradition, originKind, pools, rng, taken }) : null;
+  // ⛔ ERIK'S RULING (CCODE-462): "WHETHER OR NOT THE PC LEARNS THEIR NAME, THEY'LL HAVE ONE." So when the
+  // caller says the player has not learned it, the minted name is the person's TRUE name and what the
+  // player calls them stays the descriptor — the character does not magically know a stranger's name
+  // because the engine invented one. ⛑ `nameUnknown` then means what it has always meant and what
+  // `nameOf` already reads, and the existing reveal path moves the true name into `name` when it is earned.
+  // ⚠️ Default false, because the other three callers mint PUBLIC figures whose names the world says aloud.
+  if (m && nameNotYetLearned) {
+    // ⚠️ A BYNAME IS EARNED, AND THIS PERSON HAS NOT EARNED ONE. `mintedName` composes "Ravel the Late
+    // Arrival" because it exists to name FIGURES — people the world has started telling stories about. The
+    // hostel-keeper you met an hour ago is Ravel, or Ravel Holt; an epithet on them reads as a myth nobody
+    // told. ⛑ So the plain name is taken from the parts, and the full one is the fallback when the plain
+    // form would collide with somebody already in this registry — uniqueness is what `taken` bought.
+    const plain = [m.given, m.surname].filter(Boolean).join(" ").trim();
+    const clash = plain && (taken || []).some(x => String(x).toLowerCase() === plain.toLowerCase());
+    return { name: descriptorLabel(raw, role, max), trueName: (plain && !clash ? plain : m.name), byname: m.byname, nameUnknown: true, minted: true };
+  }
   if (m) return { name: m.name, byname: m.byname, nameUnknown: false, minted: true };
   return { name: descriptorLabel(raw, role, max), nameUnknown: true, minted: false };
 }

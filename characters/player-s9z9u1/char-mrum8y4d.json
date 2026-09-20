@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 8,
-  "xp": 780,
+  "xp": 785,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -109,7 +109,7 @@
   ],
   "alignment": {
     "mechanical_spiritual": -0.034,
-    "falsehood_truth": 0.2018599062875,
+    "falsehood_truth": 0.206766910973125,
     "demonic_angelic": -0.020000000000000004,
     "dark_light": 0.135,
     "concrete_abstract": 0.05,
@@ -119,7 +119,7 @@
   "maxHealth": 73,
   "health": 73,
   "maxEnergy": 151,
-  "energy": 89,
+  "energy": 84,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -297,83 +297,92 @@
         "player": null,
         "summary": "Loki arrives at the Wayhouse in deep night, finds it calm and nearly empty, and meets the keeper of routes.",
         "narration": "The Wayhouse rises before you in the deep night — a structure of stone and open timber, its own lights burning steady against the dark. The waygate itself stands in the yard beyond, lattice-work of cold silver catching the starlight, and even from here you can feel its hum: a low, patient thing, waiting. The building itself smells of old paper, lamp-oil, and the particular dust that accumulates in places people pass through without staying.\n\nInside, the main hall is lit by three steady lamps. Maps cover every wall — some pinned, some hung, some simply leaning in stacks — and the air carries the texture of a place that has learned to hold the weight of distance without flinching. A long table runs down the center, topped with route-logs and a ledger the size of a child's torso. At the far end, a fire moves in the hearth. The room is empty except for an older woman in a charcoal coat, seated by the fire with a cup of something steaming, reading glasses on a cord around her neck.\n\nCy clicks forward on the stone floor, lamp raised, and comes to rest against your boot. It has been quiet since the Hub crossing. The night outside is still — late summer holding its breath before the shift toward autumn — and the Wayhouse feels like a threshold that hasn't yet decided which way the wind is blowing."
+      },
+      {
+        "player": "Approach the keeper and ask plainly what has passed through here recently — especially anyone asking about sealed gates or the Hub crossing.",
+        "summary": "At the Wayhouse in deep night, Maren the keeper reveals that an enginewright from Pressureholt has passed through asking about interference at the Hub—and that someone in the lower Annex called the Architect is quietly asking about travelers carrying strange knowledge.",
+        "narration": "You cross the main hall toward the hearth, your footsteps quiet on stone. The keeper looks up from her ledger as you approach—Maren, she calls herself, though her hands move like someone who has done this work for decades. She sets down her cup with the slowness of someone accustomed to patience.\n\n\"The Hub crossing,\" you say plainly. \"Anyone come through asking about it? About sealed gates, or about what lies beneath the Null Stone?\"\n\nMaren's eyes measure you for a moment—not with suspicion, but with the careful assessment of someone who reads routes the way other people read weather. \"You're not the first to ask,\" she says. Her voice is steady, unsurprised. \"Three days back, a runner came through from Pressureholt. Young woman, enginewright bearing—asked me straight about interference patterns at the Hub network. Said the station there had clocked something new in the lattice-lock. She took the direct spoke to the Crossing and didn't stop to rest.\"\n\nMaren turns a page in her ledger, running one weathered finger down a column of notations. \"Before that, a man in the lower Annex—the one they call the Architect, though that's not a title I'd trust—he sent word down the road asking after anyone coming through with strange questions about the waygate network. Paid coin for the asking, which means he's not just curious.\" She looks up at you again. \"The water crisis cleared three days ago, and since then the network's been humming different. You can hear it if you stand still in the yard long enough. That's what brought the enginewright through, I'd wager."
       }
     ],
     "lastTurn": {
-      "narration": "The Wayhouse rises before you in the deep night — a structure of stone and open timber, its own lights burning steady against the dark. The waygate itself stands in the yard beyond, lattice-work of cold silver catching the starlight, and even from here you can feel its hum: a low, patient thing, waiting. The building itself smells of old paper, lamp-oil, and the particular dust that accumulates in places people pass through without staying.\n\nInside, the main hall is lit by three steady lamps. Maps cover every wall — some pinned, some hung, some simply leaning in stacks — and the air carries the texture of a place that has learned to hold the weight of distance without flinching. A long table runs down the center, topped with route-logs and a ledger the size of a child's torso. At the far end, a fire moves in the hearth. The room is empty except for an older woman in a charcoal coat, seated by the fire with a cup of something steaming, reading glasses on a cord around her neck.\n\nCy clicks forward on the stone floor, lamp raised, and comes to rest against your boot. It has been quiet since the Hub crossing. The night outside is still — late summer holding its breath before the shift toward autumn — and the Wayhouse feels like a threshold that hasn't yet decided which way the wind is blowing.",
-      "sceneSummary": "Loki arrives at the Wayhouse in deep night, finds it calm and nearly empty, and meets the keeper of routes.",
-      "scene": {
-        "setting": "The Wayhouse interior, deep night, late summer. Stone walls, open timber frame. Three steady lamps. Fire in the hearth at the far end. Maps and route-logs everywhere. The waygate hums faintly in the yard outside.",
-        "npcsPresent": [
-          {
-            "name": "The keeper",
-            "state": "Seated by the fire, reading glasses on a cord, cup in hand, unhurried"
-          }
-        ],
-        "objects": [
-          "A long central table with route-logs and a ledger",
-          "Maps covering the walls",
-          "Three steady lamps",
-          "A fire in the hearth",
-          "The waygate visible through the open yard"
-        ],
-        "threads": [
-          "Who runs the Wayhouse and what they know of recent passage",
-          "The deliberately sealed waygate network at the Hub crossing",
-          "News from the valley and the reaches beyond"
-        ]
-      },
+      "narration": "You cross the main hall toward the hearth, your footsteps quiet on stone. The keeper looks up from her ledger as you approach—Maren, she calls herself, though her hands move like someone who has done this work for decades. She sets down her cup with the slowness of someone accustomed to patience.\n\n\"The Hub crossing,\" you say plainly. \"Anyone come through asking about it? About sealed gates, or about what lies beneath the Null Stone?\"\n\nMaren's eyes measure you for a moment—not with suspicion, but with the careful assessment of someone who reads routes the way other people read weather. \"You're not the first to ask,\" she says. Her voice is steady, unsurprised. \"Three days back, a runner came through from Pressureholt. Young woman, enginewright bearing—asked me straight about interference patterns at the Hub network. Said the station there had clocked something new in the lattice-lock. She took the direct spoke to the Crossing and didn't stop to rest.\"\n\nMaren turns a page in her ledger, running one weathered finger down a column of notations. \"Before that, a man in the lower Annex—the one they call the Architect, though that's not a title I'd trust—he sent word down the road asking after anyone coming through with strange questions about the waygate network. Paid coin for the asking, which means he's not just curious.\" She looks up at you again. \"The water crisis cleared three days ago, and since then the network's been humming different. You can hear it if you stand still in the yard long enough. That's what brought the enginewright through, I'd wager.",
+      "sceneSummary": "At the Wayhouse in deep night, Maren the keeper reveals that an enginewright from Pressureholt has passed through asking about interference at the Hub—and that someone in the lower Annex called the Architect is quietly asking about travelers carrying strange knowledge.",
       "choices": [
         {
-          "label": "Approach the keeper and ask plainly what has passed through here recently — especially anyone asking about sealed gates or the Hub crossing.",
+          "label": "Ask Maren if she knows who this Architect is, and whether he's the type to hire someone to stop travelers.",
           "attribute": "social",
-          "subAttribute": "presence",
+          "subAttribute": "rapport",
           "axes": {
-            "falsehood_truth": 0.3
+            "falsehood_truth": 0.1,
+            "violence_peace": 0.1
           },
           "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "study",
-            "ask"
+            "study"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Read the route-logs and ledger on the central table — See the Made Thing will show you what has been written and rewritten, crossed out and restored, the patterns of traffic and what someone wanted hidden.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "falsehood_truth": 0.4
-          },
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study",
-            "read"
-          ],
-          "abilityId": "see_the_made_thing",
-          "energyCost": 2,
-          "trivial": false
-        },
-        {
-          "label": "Use Wayfinding to read the Wayhouse itself — the routes marked on maps, the worn paths on the floor, where people wait longest, which routes are traveled most, which gates draw fear.",
+          "label": "Ask what route the enginewright woman took, and whether Maren can route you after her to the Crossing or another gate that might let you reach Pressureholt faster.",
           "attribute": "practical",
           "subAttribute": "wits",
           "axes": {
-            "concrete_abstract": -0.2
+            "space_time": -0.3,
+            "mechanical_spiritual": 0.1
+          },
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "travel"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Tell Maren plainly about the Revel that came to break the Null Stone, and ask if she's heard anything about who paid for it or why someone fears what the sealed chamber might reveal.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "falsehood_truth": 0.3,
+            "violence_peace": 0.2
           },
           "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
-            "study",
-            "read"
+            "reveal"
           ],
-          "abilityId": "wayfinding",
-          "energyCost": 4,
-          "trivial": false
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use Prism Sight to read what Maren's face and hands tell you about which part of her answer carries weight and which is measured caution.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "falsehood_truth": 0.2,
+            "dark_light": 0.1
+          },
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "prism_sight",
+          "energyCost": 3,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
       "deeds": [],
@@ -385,60 +394,139 @@
         "xp": 0
       },
       "ledgerEvents": [],
-      "questUpdates": [],
-      "standingOps": [],
-      "offer": {
-        "thing": "The keeper notices Cy and does not look away — a small acknowledgment, a nod that reads like recognition of a thing seen before, or understood.",
-        "from": "What Cy is (a Precursor-made thing moving through the world) and what the Wayhouse keeper would know (that such things are rare and that their presence matters)"
-      },
-      "factUpdates": [],
-      "placeUpdates": [
+      "questUpdates": [
         {
-          "note": "The waygate at the Wayhouse hub remains operational, but the network out of the Hub crossing is sealed with doubled interference patterns — only the direct spoke to the Crossing is clear. This is known to the Wayhouse keeper."
+          "op": "progress",
+          "questId": "the-taken-from-the-city",
+          "note": "Maren reports an enginewright from Pressureholt asked about interference at the Hub network three days ago, and an 'Architect' in the lower Annex is quietly asking about travelers with dangerous knowledge—the question of who sent the Revel is sharpening."
         }
       ],
-      "codexUpdates": [],
+      "standingOps": [],
+      "delegateOps": [],
+      "jobOps": [],
+      "arcOps": [],
+      "adoptSchool": null,
+      "offer": {
+        "thing": "A quiet path opens: the enginewright from Pressureholt went through asking the same questions you're asking, and the keeper has her route logged.",
+        "from": "Maren's own trade—she sees travelers the way water reads stone, and she offers the pattern because you asked plainly"
+      },
+      "stageOps": [],
+      "scene": {
+        "setting": "The Wayhouse main hall, deep night, late summer. Stone walls, open timber frame. Three steady lamps. Fire in the hearth at the far end. Maps and route-logs covering every wall. The waygate hums faintly in the yard outside—its lattice-work visible through the open yard.",
+        "npcsPresent": [
+          {
+            "name": "Maren Oast",
+            "state": "Seated by the fire with her ledger open, reading glasses on a cord, cup at her elbow. Watching you with the careful measure of someone who has learned to read distance."
+          }
+        ],
+        "objects": [
+          "A long central table with route-logs and ledger",
+          "Maps covering the walls",
+          "Three steady lamps",
+          "A fire in the hearth",
+          "The waygate visible through the open yard, lattice-work catching starlight"
+        ],
+        "threads": [
+          "Who is the Architect in the lower Annex, and is he the one who sent the Revel?",
+          "What did the enginewright from Pressureholt find at the Hub, and where did she go after the Crossing?",
+          "Why does someone fear what lies beneath the Null Stone enough to hire breaking and to ask questions about travelers?"
+        ]
+      },
       "npcUpdates": [
         {
-          "op": "meet",
-          "npcId": "wayhouse-keeper",
-          "name": "Maren Oast",
-          "role": "Keeper of the Wayhouse — tends the logs, routes travelers, reads the network's state",
-          "age": 62,
-          "sex": "female",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "description": "Broad-shouldered, grey-streaked hair pulled back in a practical knot. Reading glasses on a cord. Charcoal coat with many pockets. Hands that have mended maps and ledgers for decades. Eyes that measure distance the way a ship-captain measures tide.",
+          "op": "update",
+          "npcId": "maren-oast",
+          "note": "Loki asked plainly about sealed gates and the Hub crossing. Maren answered without deflection—she reads the question as honest and provides useful detail about recent traffic. She measures Loki's intent carefully but does not hide what she knows.",
           "learned": [
-            "Maren recognizes the presence of Precursor-made things — she does not question Cy, only nods"
+            "An enginewright from Pressureholt passed through three days ago asking about interference patterns at the Hub network lattice-lock.",
+            "Someone called the Architect in the lower Annex is quietly asking after travelers carrying dangerous knowledge—paid coin for the asking.",
+            "The water crisis cleared three days ago, and the waygate network has been humming differently since."
           ]
         }
       ],
       "intentsHeard": [],
+      "factUpdates": [],
+      "placeUpdates": [
+        {
+          "note": "The Wayhouse keeper maintains a ledger of recent passage. An enginewright from Pressureholt asking about Hub interference (three days ago). Quiet inquiries from 'the Architect' in the lower Annex about travelers carrying sealed knowledge."
+        }
+      ],
+      "discovery": null,
+      "codexUpdates": [
+        {
+          "topic": "the-architect-in-the-lower-annex",
+          "label": "The Architect",
+          "kind": "person",
+          "fact": "Someone in the lower Annex called by this title is quietly asking after travelers carrying knowledge about sealed gates and the Hub crossing. He paid coin for the asking, which suggests serious concern—not mere curiosity.",
+          "links": [
+            "the-hub-crossing",
+            "the-revel-sent-to-break-the-stone",
+            "the-taken-from-the-city"
+          ]
+        },
+        {
+          "topic": "the-pressureholt-enginewright",
+          "label": "The Pressureholt Enginewright",
+          "kind": "person",
+          "fact": "A young woman, enginewright bearing, came through the Wayhouse three days ago asking Maren about interference patterns at the Hub network lattice-lock. She took the direct spoke to the Crossing without stopping to rest. Her interest in the sealed network suggests either she was sent to investigate or she is pursuing the same questions as Loki.",
+          "links": [
+            "the-hub-crossing",
+            "pressureholt",
+            "vessa-torquen"
+          ]
+        }
+      ],
+      "holdingOps": [],
+      "holdTrades": [],
+      "debtOps": [],
+      "exchangeOps": [],
+      "partyOps": [],
+      "generateRequest": [],
+      "encounterOps": [],
+      "projectOps": [],
+      "bandOps": [],
+      "strikeOps": [],
+      "deathOps": [],
+      "newEncounter": null,
+      "unlockPrecursor": null,
+      "unlockSubstrate": null,
+      "timeOps": {
+        "hoursPassed": 0.5,
+        "why": "a careful conversation by the fire, unhurried"
+      },
+      "moveTo": null,
+      "stateOps": [],
+      "itemUpdates": [],
+      "deriveItem": null,
+      "imagePrompt": null,
+      "imageMedium": null,
+      "newAbility": null,
+      "gambitOps": null,
+      "gambitApt": false,
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The Wayhouse interior, deep night, late summer. Stone walls, open timber frame. Three steady lamps. Fire in the hearth at the far end. Maps and route-logs everywhere. The waygate hums faintly in the yard outside.",
+      "setting": "The Wayhouse main hall, deep night, late summer. Stone walls, open timber frame. Three steady lamps. Fire in the hearth at the far end. Maps and route-logs covering every wall. The waygate hums faintly in the yard outside—its lattice-work visible through the open yard.",
       "npcsPresent": [
         {
-          "name": "The keeper",
-          "state": "Seated by the fire, reading glasses on a cord, cup in hand, unhurried"
+          "name": "Maren Oast",
+          "state": "Seated by the fire with her ledger open, reading glasses on a cord, cup at her elbow. Watching you with the careful meas"
         }
       ],
       "objects": [
-        "A long central table with route-logs and a ledger",
+        "A long central table with route-logs and ledger",
         "Maps covering the walls",
         "Three steady lamps",
         "A fire in the hearth",
-        "The waygate visible through the open yard"
+        "The waygate visible through the open yard, lattice-work catching starlight"
       ],
       "threads": [
-        "Who runs the Wayhouse and what they know of recent passage",
-        "The deliberately sealed waygate network at the Hub crossing",
-        "News from the valley and the reaches beyond"
+        "Who is the Architect in the lower Annex, and is he the one who sent the Revel?",
+        "What did the enginewright from Pressureholt find at the Hub, and where did she go after the Crossing?",
+        "Why does someone fear what lies beneath the Null Stone enough to hire breaking and to ask questions about travelers?"
       ]
     },
-    "beats": 1,
+    "beats": 2,
     "subPlace": null
   },
   "clock": {
@@ -464,14 +552,14 @@
       "locationEntityId": "the-unlit-deep",
       "status": "active",
       "progress": [
-        "Descended into the vast sealed chamber beneath the Null Stone. The chamber is a pre-Transition water-works of impossible scale, deliberately sealed, with notation-marked walls and a river moving through darkness. The regulator's question persists: what is this water, and what is it meant to carry?",
         "The vast chamber beneath the Null Stone has been reached and assessed—it is a pre-Transition water-works sealed deliberately, with a river moving through worked darkness. The regulator housing awaits at the far end. The chamber is the question, and the question is still unanswered.",
         "The chamber beneath the Null Stone has acknowledged a harmonic question—the notation pulses with response, the water shifts to harmony. The regulator at the far end remains unread; the question continues to wait.",
         "The chamber beneath the Null Stone is not a mechanism but a listener—it poses questions to the river and reads the answer through the notation. The threshold where questions are asked has been identified in the eastern alcove.",
         "The sealed chamber beneath the Null Stone is the mechanism built to pose the regulator's question—both to the water's readiness and to the supplicant's integrity. Halvex reads it as a mutual test: the alcove is the threshold where the answer is shaped.",
         "The sealed chamber beneath the Null Stone is revealed as a pre-Transition water-works built to pose a mutual question—between supplicant and stone, between water's readiness and asker's integrity. The chamber listens and answers in harmonic resonance. Halvex has relinquished the mandate to break.",
         "The sealed chamber beneath the Null Stone has revealed itself as a pre-Transition water-works designed to pose and answer mutual questions—a threshold where supplicant and stone measure each other's readiness. The chamber listens in harmonic resonance. Cy's old procedure suggests the apparatus measures whether the asker is ready to receive truthful answers, not merely whether they can pose a question.",
-        "The chamber listens in harmonic resonance. The alcove measures whether a supplicant is ready to receive honest answers. The thread now turns toward who sent the Revel to break the stone, and what they feared the chamber would reveal."
+        "The chamber listens in harmonic resonance. The alcove measures whether a supplicant is ready to receive honest answers. The thread now turns toward who sent the Revel to break the stone, and what they feared the chamber would reveal.",
+        "Maren reports an enginewright from Pressureholt asked about interference at the Hub network three days ago, and an 'Architect' in the lower Annex is quietly asking about travelers with dangerous knowledge—the question of who sent the Revel is sharpening."
       ],
       "aliases": [],
       "startedAt": "2026-07-24T21:30:43.637Z"
@@ -1367,7 +1455,8 @@
     "the_wayhouse": {
       "visits": 1,
       "notes": [
-        "[d5] The waygate at the Wayhouse hub remains operational, but the network out of the Hub crossing is sealed with doubled interference patterns — only the direct spoke to the Crossing is clear. This is known to the Wayhouse keeper."
+        "[d5] The waygate at the Wayhouse hub remains operational, but the network out of the Hub crossing is sealed with doubled interference patterns — only the direct spoke to the Crossing is clear. This is known to the Wayhouse keeper.",
+        "[d5] The Wayhouse keeper maintains a ledger of recent passage. An enginewright from Pressureholt asking about Hub interference (three days ago). Quiet inquiries from 'the Architect' in the lower Annex about travelers carrying sealed knowledge."
       ],
       "flags": {},
       "lastVisit": 5,
@@ -1632,10 +1721,6 @@
     "turnsSinceOffer": 0,
     "recentOffers": [
       {
-        "thing": "Halvex Coil naming himself plainly and the cost of staying",
-        "from": "Your recognition of his hunger and the partnership you offered—he is answerable now, and that is the breaking he feared most"
-      },
-      {
         "thing": "The opened seam glowing faintly from within—a passage descending into cold dark and the sound of moving water far below.",
         "from": "The Null Stone's answer to honest asking—it listened and it tested, and it chose to trust what you promised."
       },
@@ -1650,6 +1735,10 @@
       {
         "thing": "The keeper notices Cy and does not look away — a small acknowledgment, a nod that reads like recognition of a thing seen before, or…",
         "from": "What Cy is (a Precursor-made thing moving through the world) and what the Wayhouse keeper would know (that such things are rare and that…"
+      },
+      {
+        "thing": "A quiet path opens: the enginewright from Pressureholt went through asking the same questions you're asking, and the keeper has her route…",
+        "from": "Maren's own trade—she sees travelers the way water reads stone, and she offers the pattern because you asked plainly"
       }
     ],
     "wantProgress": {
@@ -9136,6 +9225,38 @@
         "createdDay": 5,
         "entityId": "wayhouse-keeper",
         "updatedDay": 5
+      },
+      "the-architect-in-the-lower-annex": {
+        "id": "the-architect-in-the-lower-annex",
+        "label": "The Architect",
+        "kind": "person",
+        "facts": [
+          "[d5] Someone in the lower Annex called by this title is quietly asking after travelers carrying knowledge about sealed gates and the Hub crossing. He paid coin for the asking, which suggests serious concern—not mere curiosity."
+        ],
+        "links": [
+          "the-hub-crossing",
+          "the-revel-sent-to-break-the-stone",
+          "the-taken-from-the-city"
+        ],
+        "aliases": [],
+        "createdDay": 5,
+        "updatedDay": 5
+      },
+      "the-pressureholt-enginewright": {
+        "id": "the-pressureholt-enginewright",
+        "label": "The Pressureholt Enginewright",
+        "kind": "person",
+        "facts": [
+          "[d5] A young woman, enginewright bearing, came through the Wayhouse three days ago asking Maren about interference patterns at the Hub network lattice-lock. She took the direct spoke to the Crossing without stopping to rest. Her interest in the sealed network suggests either she was sent to investigate…"
+        ],
+        "links": [
+          "the-hub-crossing",
+          "pressureholt",
+          "vessa-torquen"
+        ],
+        "aliases": [],
+        "createdDay": 5,
+        "updatedDay": 5
       }
     },
     "mergeUndo": [
@@ -9435,17 +9556,17 @@
     ]
   },
   "tendencies": {
-    "devotion": 1.2854994436294254,
-    "cerebral": 14.162655376580014,
-    "social": 13.437235533135034,
-    "strategic": 13.919072475025885,
-    "cautious": 6.8473886679421545,
-    "amorous": 8.296484916678782,
-    "generous": 5.3132731873771935,
-    "ruthless": 0.32198422894149625,
-    "risky": 0.2631400370864823,
-    "patient": 0.07185881194345509,
-    "deception": 0.08364737921034202
+    "devotion": 1.2533619575386896,
+    "cerebral": 14.808588992165513,
+    "social": 13.101304644806659,
+    "strategic": 13.571095663150238,
+    "cautious": 6.6762039512436,
+    "amorous": 8.089072793761812,
+    "generous": 5.1804413576927635,
+    "ruthless": 0.31393462321795884,
+    "risky": 0.25656153615932026,
+    "patient": 0.07006234164486871,
+    "deception": 0.08155619473008346
   },
   "aptitudes": [
     "strategist",
@@ -9454,7 +9575,7 @@
     "faithful",
     "charmer"
   ],
-  "actionCount": 182,
+  "actionCount": 183,
   "grantsVersion": 1,
   "precursorAccess": [
     "address_sense"
@@ -10454,8 +10575,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789907994153,
-  "rev": 794,
+  "updatedAt": 1789908147065,
+  "rev": 795,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -11403,7 +11524,7 @@
     "the_quickwood": 101,
     "the_center": 50,
     "valley": 1,
-    "the_open_reach": 1
+    "the_open_reach": 2
   },
   "opLossPending": false,
   "sessions": [
@@ -11522,10 +11643,10 @@
     {
       "id": "sess-15",
       "startedAt": "2026-09-20T12:21:21.358Z",
-      "lastAt": "2026-09-20T12:39:54.149Z",
+      "lastAt": "2026-09-20T12:42:27.057Z",
       "startDay": 82,
       "endDay": 82,
-      "beats": 2
+      "beats": 3
     }
   ],
   "establishedFacts": [
@@ -11592,7 +11713,7 @@
   ],
   "_opLedger": {
     "offer": {
-      "applied": 31,
+      "applied": 32,
       "rejected": 2,
       "lastWhy": "rejected-shape"
     },
@@ -11609,21 +11730,21 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 213,
-    "choices": 213,
-    "characterDeltas": 100,
-    "scene": 213,
-    "placeUpdates": 26,
-    "codexUpdates": 119,
-    "timeOps": 175,
-    "offer": 27,
+    "sceneSummary": 214,
+    "choices": 214,
+    "characterDeltas": 101,
+    "scene": 214,
+    "placeUpdates": 27,
+    "codexUpdates": 120,
+    "timeOps": 176,
+    "offer": 28,
     "generateRequest": 6,
-    "sceneEnded": 83,
-    "npcUpdates": 170,
+    "sceneEnded": 84,
+    "npcUpdates": 171,
     "moveTo": 7,
-    "gambitApt": 45,
+    "gambitApt": 46,
     "deeds": 8,
-    "questUpdates": 30,
+    "questUpdates": 31,
     "standingOps": 3,
     "factUpdates": 9,
     "stageOps": 7,
@@ -11638,7 +11759,7 @@
     "intentsHeard": 5,
     "delegateOps": 1
   },
-  "_opTurns": 213,
+  "_opTurns": 214,
   "customAbilities": {
     "mirror-bright": {
       "id": "mirror-bright",
@@ -12473,9 +12594,9 @@
     "woo": 1,
     "rapport": 9,
     "retreat": 1,
-    "ask": 3,
+    "ask": 4,
     "help": 7,
-    "study": 8,
+    "study": 9,
     "investigate": 7,
     "charm": 1,
     "comfort": 1,
@@ -12821,404 +12942,404 @@
   },
   "_promptRows": {
     "character": {
-      "reached": 25,
-      "produced": 25
+      "reached": 26,
+      "produced": 26
     },
     "location": {
-      "reached": 25,
-      "produced": 25
+      "reached": 26,
+      "produced": 26
     },
     "region": {
-      "reached": 25,
-      "produced": 25
+      "reached": 26,
+      "produced": 26
     },
     "groundDetail": {
-      "reached": 25,
+      "reached": 26,
       "produced": 21
     },
     "lore": {
-      "reached": 25,
-      "produced": 22
+      "reached": 26,
+      "produced": 23
     },
     "traditionMotiveDetail": {
-      "reached": 25,
-      "produced": 25
+      "reached": 26,
+      "produced": 26
     },
     "sheetsDetail": {
-      "reached": 25,
+      "reached": 26,
       "produced": 21
     },
     "rules": {
-      "reached": 25,
-      "produced": 25
+      "reached": 26,
+      "produced": 26
     },
     "recentTurns": {
-      "reached": 25,
-      "produced": 22
+      "reached": 26,
+      "produced": 23
     },
     "timeLabel": {
-      "reached": 25,
-      "produced": 25
+      "reached": 26,
+      "produced": 26
     },
     "npcRegistryDetail": {
-      "reached": 25,
-      "produced": 25
+      "reached": 26,
+      "produced": 26
     },
     "mintedUnmetDetail": {
-      "reached": 25,
-      "produced": 25
+      "reached": 26,
+      "produced": 26
     },
     "npcSeedDetail": {
-      "reached": 25,
+      "reached": 26,
       "produced": 24
     },
     "traditionVocab": {
-      "reached": 25,
-      "produced": 25
+      "reached": 26,
+      "produced": 26
     },
     "standingDetail": {
-      "reached": 25,
-      "produced": 25
+      "reached": 26,
+      "produced": 26
     },
     "recalledDetail": {
-      "reached": 25,
+      "reached": 26,
       "produced": 1
     },
     "bearingsDetail": {
-      "reached": 25,
-      "produced": 25
+      "reached": 26,
+      "produced": 26
     },
     "caravansDetail": {
-      "reached": 25,
+      "reached": 26,
       "produced": 0
     },
     "commandDetail": {
-      "reached": 25,
-      "produced": 25
+      "reached": 26,
+      "produced": 26
     },
     "presenceDetail": {
-      "reached": 25,
+      "reached": 26,
       "produced": 17
     },
     "worthHereDetail": {
-      "reached": 25,
+      "reached": 26,
       "produced": 0
     },
     "inventoryDetail": {
-      "reached": 25,
-      "produced": 25
+      "reached": 26,
+      "produced": 26
     },
     "sceneState": {
-      "reached": 25,
-      "produced": 22
+      "reached": 26,
+      "produced": 23
     },
     "holdingsDetail": {
-      "reached": 25,
-      "produced": 25
+      "reached": 26,
+      "produced": 26
     },
     "debtsDetail": {
-      "reached": 25,
+      "reached": 26,
       "produced": 0
     },
     "carriedDetail": {
-      "reached": 25,
+      "reached": 26,
       "produced": 0
     },
     "abilityLawDetail": {
-      "reached": 25,
-      "produced": 25
+      "reached": 26,
+      "produced": 26
     },
     "questsDetail": {
-      "reached": 25,
-      "produced": 25
+      "reached": 26,
+      "produced": 26
     },
     "structuredQuestsDetail": {
-      "reached": 25,
+      "reached": 26,
       "produced": 0
     },
     "traditionArcDetail": {
-      "reached": 25,
+      "reached": 26,
       "produced": 0
     },
     "npcErrandsDetail": {
-      "reached": 25,
+      "reached": 26,
       "produced": 0
     },
     "codexDetail": {
-      "reached": 25,
-      "produced": 25
+      "reached": 26,
+      "produced": 26
     },
     "companionsDetail": {
-      "reached": 25,
-      "produced": 25
+      "reached": 26,
+      "produced": 26
     },
     "placeMemoryDetail": {
-      "reached": 25,
-      "produced": 23
+      "reached": 26,
+      "produced": 24
     },
     "agesMissingDetail": {
-      "reached": 25,
-      "produced": 25
+      "reached": 26,
+      "produced": 26
     },
     "newsDetail": {
-      "reached": 25,
-      "produced": 25
+      "reached": 26,
+      "produced": 26
     },
     "worldArcsDetail": {
-      "reached": 25,
-      "produced": 25
+      "reached": 26,
+      "produced": 26
     },
     "legendsPursuableDetail": {
-      "reached": 25,
+      "reached": 26,
       "produced": 12
     },
     "wakesDetail": {
-      "reached": 25,
+      "reached": 26,
       "produced": 0
     },
     "arcMoodDetail": {
-      "reached": 25,
-      "produced": 25
+      "reached": 26,
+      "produced": 26
     },
     "reachableDeadDetail": {
-      "reached": 25,
-      "produced": 25
+      "reached": 26,
+      "produced": 26
     },
     "threatToPlayer": {
-      "reached": 25,
+      "reached": 26,
       "produced": 0
     },
     "guardiansDetail": {
-      "reached": 25,
+      "reached": 26,
       "produced": 0
     },
     "resolution": {
-      "reached": 25,
-      "produced": 17
+      "reached": 26,
+      "produced": 18
     },
     "playerInput": {
-      "reached": 25,
+      "reached": 26,
       "produced": 8
     },
     "exactWords": {
-      "reached": 25,
+      "reached": 26,
       "produced": 12
     },
     "travelDirective": {
-      "reached": 25,
+      "reached": 26,
       "produced": 1
     },
     "itemAdvance": {
-      "reached": 25,
+      "reached": 26,
       "produced": 0
     },
     "encounterWeaveDetail": {
-      "reached": 25,
+      "reached": 26,
       "produced": 3
     },
     "encounterOfferDetail": {
-      "reached": 25,
+      "reached": 26,
       "produced": 3
     },
     "fightFramingDetail": {
-      "reached": 25,
+      "reached": 26,
       "produced": 0
     },
     "abilityGrantDetail": {
-      "reached": 25,
+      "reached": 26,
       "produced": 0
     },
     "stageRevealDetail": {
-      "reached": 25,
+      "reached": 26,
       "produced": 0
     },
     "itemEvolveDetail": {
-      "reached": 25,
+      "reached": 26,
       "produced": 0
     },
     "worldPressureDetail": {
-      "reached": 25,
+      "reached": 26,
       "produced": 0
     },
     "offerDetail": {
-      "reached": 25,
+      "reached": 26,
       "produced": 2
     },
     "teacherOfferDetail": {
-      "reached": 25,
+      "reached": 26,
       "produced": 0
     },
     "substrateDetail": {
-      "reached": 25,
+      "reached": 26,
       "produced": 6
     },
     "romanceGuidanceDetail": {
-      "reached": 25,
+      "reached": 26,
       "produced": 1
     },
     "factsDetail": {
-      "reached": 25,
-      "produced": 25
+      "reached": 26,
+      "produced": 26
     },
     "evolvedItemsDetail": {
-      "reached": 25,
+      "reached": 26,
       "produced": 0
     },
     "opLossNote": {
-      "reached": 25,
+      "reached": 26,
       "produced": 0
     },
     "emergenceDetail": {
-      "reached": 25,
+      "reached": 26,
       "produced": 0
     },
     "perilNote": {
-      "reached": 25,
+      "reached": 26,
       "produced": 0
     },
     "encounterDetail": {
-      "reached": 25,
+      "reached": 26,
       "produced": 4
     },
     "masteryDetail": {
-      "reached": 25,
-      "produced": 25
+      "reached": 26,
+      "produced": 26
     },
     "bookkeepingRestate": {
-      "reached": 25,
+      "reached": 26,
       "produced": 0
     },
     "anomalyDetail": {
-      "reached": 25,
-      "produced": 25
+      "reached": 26,
+      "produced": 26
     },
     "repairPanelDetail": {
-      "reached": 25,
-      "produced": 25
+      "reached": 26,
+      "produced": 26
     },
     "teacherDetail": {
-      "reached": 25,
+      "reached": 26,
       "produced": 0
     },
     "toolkitDetail": {
-      "reached": 25,
-      "produced": 25
+      "reached": 26,
+      "produced": 26
     },
     "availableEncounters": {
-      "reached": 25,
-      "produced": 21
+      "reached": 26,
+      "produced": 22
     },
     "partyDetail": {
-      "reached": 25,
+      "reached": 26,
       "produced": 0
     },
     "ratingDetail": {
-      "reached": 25,
-      "produced": 25
+      "reached": 26,
+      "produced": 26
     },
     "registerDetail": {
-      "reached": 25,
-      "produced": 25
+      "reached": 26,
+      "produced": 26
     },
     "legendDetail": {
-      "reached": 25,
+      "reached": 26,
       "produced": 1
     },
     "livingWorldDetail": {
-      "reached": 25,
+      "reached": 26,
       "produced": 0
     },
     "assignmentsDetail": {
-      "reached": 25,
+      "reached": 26,
       "produced": 0
     },
     "latentArcsDetail": {
-      "reached": 25,
-      "produced": 25
+      "reached": 26,
+      "produced": 26
     },
     "seasonalDetail": {
-      "reached": 25,
-      "produced": 25
+      "reached": 26,
+      "produced": 26
     },
     "schoolsDetail": {
-      "reached": 25,
-      "produced": 25
+      "reached": 26,
+      "produced": 26
     },
     "sharedCanonDetail": {
-      "reached": 25,
-      "produced": 2
+      "reached": 26,
+      "produced": 3
     },
     "worldCountLabel": {
-      "reached": 25,
-      "produced": 25
+      "reached": 26,
+      "produced": 26
     },
     "waygateDetail": {
-      "reached": 25,
-      "produced": 25
+      "reached": 26,
+      "produced": 26
     },
     "readAloudDetail": {
-      "reached": 25,
-      "produced": 25
+      "reached": 26,
+      "produced": 26
     },
     "scenePacingDetail": {
-      "reached": 25,
+      "reached": 26,
       "produced": 13
     },
     "wishesDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "worldMovedOnDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 2
     },
     "companionLivesDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "homeDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "invitationsDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "bandsJoinedDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "travelersHereDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 1
     },
     "travelersDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "journeyDetail": {
-      "reached": 3,
+      "reached": 4,
       "produced": 0
     },
     "journeyUnderwayDetail": {
-      "reached": 3,
+      "reached": 4,
       "produced": 0
     },
     "holdsNearDetail": {
-      "reached": 3,
+      "reached": 4,
       "produced": 1
     },
     "moneyDetail": {
-      "reached": 2,
-      "produced": 2
+      "reached": 3,
+      "produced": 3
     },
     "jobsDetail": {
-      "reached": 2,
+      "reached": 3,
       "produced": 0
     }
   },
   "_opUnknown": {
-    "sceneSummary": 37
+    "sceneSummary": 38
   },
   "_bandNotes": null,
   "_opCountingSince": "2026-09-14T22:51:56.913Z",

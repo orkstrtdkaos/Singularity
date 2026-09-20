@@ -1,7 +1,7 @@
 # THE APPARATUS — every harness, what it is for, and whether it runs
 
 ⛔ **ERIK, 2026-08-29: *"I want this to be a well oiled factory."*** ⚠️ **A factory you cannot see is not
-well oiled.** 110 harnesses across `tests/` and `scripts/`, and before this document nobody could say which
+well oiled.** 111 harnesses across `tests/` and `scripts/`, and before this document nobody could say which
 were gates, which were reports, and which had quietly stopped being wired into anything.
 
 ```bash
@@ -10,7 +10,7 @@ node scripts/apparatus.mjs --md     # …as markdown for §5
 node scripts/run_tests.mjs --ratchet    # the gates, blocking only on regression
 ```
 
-**Last measured: 2026-09-20 · v2.3.5 · 110 files.**
+**Last measured: 2026-09-20 · v2.3.5 · 111 files.**
 
 ---
 
@@ -180,6 +180,7 @@ worthless.
 | `tests/wiring_shape` | ○ REPORT | — | SNG-303: the wiring is checkable, so it does not have to be remembered |
 | `tests/world_endgame` | ○ REPORT | — | — |
 | `tests/world_presets` | ○ REPORT | — | — |
+| `scripts/map_convergence_check` | 🔧 TOOL+SELFTEST | 8 | ⛔ ONE PROJECTION, ONE TERRAIN, ONE FIELD, ONE DISTANCE, ONE MAP |
 | `scripts/verify_scene_merge` | 🔧 TOOL+SELFTEST | 8 | BATCH-11 146a live acceptance test (Law 7) |
 | `scripts/bump_version` | 🔧 TOOL+SELFTEST | 6 | SNG-274: the version moves, and it moves in ONE step |
 | `scripts/safe_delete` | 🔧 TOOL+SELFTEST | 5 | CCODE-283 |

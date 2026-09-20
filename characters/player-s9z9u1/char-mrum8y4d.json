@@ -398,19 +398,6 @@
       "outcomeName": "Veilwright",
       "resolvedAt": "2026-07-27T17:35:33.860Z",
       "resolvedWorldDay": 27
-    },
-    {
-      "id": "journey-gen-the-standing-annex-82",
-      "kind": "journey",
-      "structured": false,
-      "status": "active",
-      "title": "Journey to The Standing Annex",
-      "summary": "about 1 day on foot · 1 ration for the road — you carry 0 (1 short) · 1 night in the open · the worst of the road: The Standing Annex (dangerous) · with Vessin Tallow-bark and Halvex Coil. Ready yourself — rations, your people, what you leave behind — and set out when you are ready.",
-      "progress": [],
-      "giver": null,
-      "startedAt": "2026-09-20T12:21:21.368Z",
-      "startedAtDay": 5,
-      "journeyDestId": "gen-the-standing-annex"
     }
   ],
   "npcRegistry": {
@@ -10242,8 +10229,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789906881370,
-  "rev": 790,
+  "updatedAt": 1789907890854,
+  "rev": 791,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -13279,58 +13266,5 @@
     "out": [],
     "back": []
   },
-  "journey": {
-    "id": "journey-gen-the-standing-annex-82",
-    "destId": "gen-the-standing-annex",
-    "destName": "The Standing Annex",
-    "fromId": "gen-the-made-gate",
-    "fromName": "The Made Gate",
-    "createdWorldDay": 82,
-    "options": [
-      {
-        "key": "road-0",
-        "kind": "road",
-        "label": "on foot",
-        "days": 1,
-        "energy": 0,
-        "path": [
-          "gen-the-made-gate",
-          "gen-the-standing-annex"
-        ],
-        "gate": null,
-        "worst": {
-          "id": "gen-the-standing-annex",
-          "name": "The Standing Annex",
-          "level": 2
-        },
-        "nights": 1,
-        "roofs": 0,
-        "camps": 1,
-        "legs": [
-          {
-            "i": 0,
-            "fromId": "gen-the-made-gate",
-            "toId": "gen-the-standing-annex",
-            "fromName": "The Made Gate",
-            "toName": "The Standing Annex",
-            "days": 0.9998460789114456,
-            "danger": 2,
-            "roof": false,
-            "gate": null
-          }
-        ]
-      }
-    ],
-    "chosenKey": "road-0",
-    "soleWay": true,
-    "rations": {
-      "needed": 1,
-      "carried": 0
-    },
-    "company": [
-      "Vessin Tallow-bark",
-      "Halvex Coil"
-    ],
-    "crafts": {}
-  }
+  "journey": null
 }

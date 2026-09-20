@@ -1,18 +1,24 @@
 {
   "schemaVersion": 1,
   "id": "dev_report",
-  "at": "2026-09-13T23:27:14.170Z",
-  "build": "1.9.502",
+  "at": "2026-09-20T01:36:08.599Z",
+  "build": "2.3.5",
   "character": {
     "id": "char-msgpisca",
     "name": "Splarf",
     "playerKey": "player-s9z9u1",
     "level": 2,
-    "rev": 275,
+    "rev": 278,
     "day": 4,
     "turns": 57,
     "countingSince": null,
     "countsCoverWholeLife": false
+  },
+  "contract": {
+    "axesDropped": [],
+    "axesDroppedN": 0,
+    "handoverRefused": [],
+    "handoverRefusedN": 0
   },
   "ops": {
     "emitted": {
@@ -59,9 +65,13 @@
       "delegateOps",
       "deriveItem",
       "discovery",
+      "exchangeOps",
       "gambitOps",
+      "holdTrades",
       "holdingOps",
+      "imageMedium",
       "intentsHeard",
+      "jobOps",
       "markTeacher",
       "newAbility",
       "offerAcquisition",
@@ -70,11 +80,12 @@
       "partyOps",
       "projectOps",
       "stateOps",
+      "strikeOps",
       "unlockPrecursor",
       "unlockSubstrate"
     ],
-    "neverCount": 20,
-    "knownCount": 43,
+    "neverCount": 25,
+    "knownCount": 48,
     "unknown": {},
     "inProse": {},
     "emptyClaims": 0
@@ -112,8 +123,8 @@
   "fireTests": null,
   "promptRows": null,
   "world": {
-    "locations": 138,
-    "abilities": 438,
-    "npcs": 151
+    "locations": 146,
+    "abilities": 441,
+    "npcs": 168
   }
 }

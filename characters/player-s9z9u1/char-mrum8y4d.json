@@ -289,12 +289,162 @@
     "Halvex reads the sealed chamber's true purpose: a mutual test between supplicant and stone, where the alcove serves as threshold for an exchange of readiness.",
     "Loki instructs Halvex and Vessin to continue reading the sealed chamber while Cy learns its language, then departs the Hub crossing to find someone—leaving Veln to gather the others and bring them to the Standing Annex when their work below is done."
   ],
-  "currentLocationId": "gen-the-made-gate",
-  "activeScene": null,
+  "currentLocationId": "the_wayhouse",
+  "activeScene": {
+    "locationId": "the_wayhouse",
+    "turns": [
+      {
+        "player": null,
+        "summary": "Loki arrives at the Wayhouse in deep night, finds it calm and nearly empty, and meets the keeper of routes.",
+        "narration": "The Wayhouse rises before you in the deep night — a structure of stone and open timber, its own lights burning steady against the dark. The waygate itself stands in the yard beyond, lattice-work of cold silver catching the starlight, and even from here you can feel its hum: a low, patient thing, waiting. The building itself smells of old paper, lamp-oil, and the particular dust that accumulates in places people pass through without staying.\n\nInside, the main hall is lit by three steady lamps. Maps cover every wall — some pinned, some hung, some simply leaning in stacks — and the air carries the texture of a place that has learned to hold the weight of distance without flinching. A long table runs down the center, topped with route-logs and a ledger the size of a child's torso. At the far end, a fire moves in the hearth. The room is empty except for an older woman in a charcoal coat, seated by the fire with a cup of something steaming, reading glasses on a cord around her neck.\n\nCy clicks forward on the stone floor, lamp raised, and comes to rest against your boot. It has been quiet since the Hub crossing. The night outside is still — late summer holding its breath before the shift toward autumn — and the Wayhouse feels like a threshold that hasn't yet decided which way the wind is blowing."
+      }
+    ],
+    "lastTurn": {
+      "narration": "The Wayhouse rises before you in the deep night — a structure of stone and open timber, its own lights burning steady against the dark. The waygate itself stands in the yard beyond, lattice-work of cold silver catching the starlight, and even from here you can feel its hum: a low, patient thing, waiting. The building itself smells of old paper, lamp-oil, and the particular dust that accumulates in places people pass through without staying.\n\nInside, the main hall is lit by three steady lamps. Maps cover every wall — some pinned, some hung, some simply leaning in stacks — and the air carries the texture of a place that has learned to hold the weight of distance without flinching. A long table runs down the center, topped with route-logs and a ledger the size of a child's torso. At the far end, a fire moves in the hearth. The room is empty except for an older woman in a charcoal coat, seated by the fire with a cup of something steaming, reading glasses on a cord around her neck.\n\nCy clicks forward on the stone floor, lamp raised, and comes to rest against your boot. It has been quiet since the Hub crossing. The night outside is still — late summer holding its breath before the shift toward autumn — and the Wayhouse feels like a threshold that hasn't yet decided which way the wind is blowing.",
+      "sceneSummary": "Loki arrives at the Wayhouse in deep night, finds it calm and nearly empty, and meets the keeper of routes.",
+      "scene": {
+        "setting": "The Wayhouse interior, deep night, late summer. Stone walls, open timber frame. Three steady lamps. Fire in the hearth at the far end. Maps and route-logs everywhere. The waygate hums faintly in the yard outside.",
+        "npcsPresent": [
+          {
+            "name": "The keeper",
+            "state": "Seated by the fire, reading glasses on a cord, cup in hand, unhurried"
+          }
+        ],
+        "objects": [
+          "A long central table with route-logs and a ledger",
+          "Maps covering the walls",
+          "Three steady lamps",
+          "A fire in the hearth",
+          "The waygate visible through the open yard"
+        ],
+        "threads": [
+          "Who runs the Wayhouse and what they know of recent passage",
+          "The deliberately sealed waygate network at the Hub crossing",
+          "News from the valley and the reaches beyond"
+        ]
+      },
+      "choices": [
+        {
+          "label": "Approach the keeper and ask plainly what has passed through here recently — especially anyone asking about sealed gates or the Hub crossing.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "falsehood_truth": 0.3
+          },
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study",
+            "ask"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false
+        },
+        {
+          "label": "Read the route-logs and ledger on the central table — See the Made Thing will show you what has been written and rewritten, crossed out and restored, the patterns of traffic and what someone wanted hidden.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "falsehood_truth": 0.4
+          },
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study",
+            "read"
+          ],
+          "abilityId": "see_the_made_thing",
+          "energyCost": 2,
+          "trivial": false
+        },
+        {
+          "label": "Use Wayfinding to read the Wayhouse itself — the routes marked on maps, the worn paths on the floor, where people wait longest, which routes are traveled most, which gates draw fear.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {
+            "concrete_abstract": -0.2
+          },
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study",
+            "read"
+          ],
+          "abilityId": "wayfinding",
+          "energyCost": 4,
+          "trivial": false
+        }
+      ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [],
+      "standingOps": [],
+      "offer": {
+        "thing": "The keeper notices Cy and does not look away — a small acknowledgment, a nod that reads like recognition of a thing seen before, or understood.",
+        "from": "What Cy is (a Precursor-made thing moving through the world) and what the Wayhouse keeper would know (that such things are rare and that their presence matters)"
+      },
+      "factUpdates": [],
+      "placeUpdates": [
+        {
+          "note": "The waygate at the Wayhouse hub remains operational, but the network out of the Hub crossing is sealed with doubled interference patterns — only the direct spoke to the Crossing is clear. This is known to the Wayhouse keeper."
+        }
+      ],
+      "codexUpdates": [],
+      "npcUpdates": [
+        {
+          "op": "meet",
+          "npcId": "wayhouse-keeper",
+          "name": "Maren Oast",
+          "role": "Keeper of the Wayhouse — tends the logs, routes travelers, reads the network's state",
+          "age": 62,
+          "sex": "female",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "description": "Broad-shouldered, grey-streaked hair pulled back in a practical knot. Reading glasses on a cord. Charcoal coat with many pockets. Hands that have mended maps and ledgers for decades. Eyes that measure distance the way a ship-captain measures tide.",
+          "learned": [
+            "Maren recognizes the presence of Precursor-made things — she does not question Cy, only nods"
+          ]
+        }
+      ],
+      "intentsHeard": [],
+      "sceneEnded": false
+    },
+    "sceneState": {
+      "setting": "The Wayhouse interior, deep night, late summer. Stone walls, open timber frame. Three steady lamps. Fire in the hearth at the far end. Maps and route-logs everywhere. The waygate hums faintly in the yard outside.",
+      "npcsPresent": [
+        {
+          "name": "The keeper",
+          "state": "Seated by the fire, reading glasses on a cord, cup in hand, unhurried"
+        }
+      ],
+      "objects": [
+        "A long central table with route-logs and a ledger",
+        "Maps covering the walls",
+        "Three steady lamps",
+        "A fire in the hearth",
+        "The waygate visible through the open yard"
+      ],
+      "threads": [
+        "Who runs the Wayhouse and what they know of recent passage",
+        "The deliberately sealed waygate network at the Hub crossing",
+        "News from the valley and the reaches beyond"
+      ]
+    },
+    "beats": 1,
+    "subPlace": null
+  },
   "clock": {
     "schemaVersion": 1,
     "day": 5,
-    "hour": 0,
+    "hour": 1,
     "realAnchor": null
   },
   "companions": [
@@ -924,6 +1074,36 @@
       },
       "domainsSource": "derived",
       "imagePinned": true
+    },
+    "wayhouse-keeper": {
+      "id": "wayhouse-keeper",
+      "name": "Maren Oast",
+      "role": "Keeper of the Wayhouse — tends the logs, routes travelers, reads the network's state",
+      "description": "Broad-shouldered, grey-streaked hair pulled back in a practical knot. Reading glasses on a cord. Charcoal coat with many pockets. Hands that have mended maps and ledgers for decades. Eyes that measure distance the way a ship-captain measures tide.",
+      "firstMet": {
+        "locationId": "the_wayhouse",
+        "day": 5
+      },
+      "relationship": 0,
+      "history": [],
+      "knownFacts": [
+        "Maren recognizes the presence of Precursor-made things — she does not question Cy, only nods"
+      ],
+      "skillsObserved": [],
+      "status": "active",
+      "sex": "female",
+      "gender": "woman",
+      "pronouns": "she/her",
+      "age": 62,
+      "domains": {
+        "primary": "horizon"
+      },
+      "domainsSource": "derived",
+      "lastSeen": {
+        "locationId": "the_wayhouse",
+        "day": 5
+      },
+      "met": 1
     }
   },
   "placeMemory": {
@@ -1183,6 +1363,17 @@
       "_containmentNotes": [
         "\"The Sealed Chamber\" was placed in the_unlit_deep (the fiction named it), not gen-the-made-gate"
       ]
+    },
+    "the_wayhouse": {
+      "visits": 1,
+      "notes": [
+        "[d5] The waygate at the Wayhouse hub remains operational, but the network out of the Hub crossing is sealed with doubled interference patterns — only the direct spoke to the Crossing is clear. This is known to the Wayhouse keeper."
+      ],
+      "flags": {},
+      "lastVisit": 5,
+      "vectorsKnown": [
+        "space_time"
+      ]
     }
   },
   "worldState": {
@@ -1435,15 +1626,11 @@
     ],
     "unseenNews": [],
     "lastGenCount": 1980,
-    "lastSharedReadAt": "2026-09-20T12:16:38.412Z",
+    "lastSharedReadAt": "2026-09-20T12:39:31.394Z",
     "lastTickWorldDay": 82,
     "lastCanonWorldDay": 82,
-    "turnsSinceOffer": 8,
+    "turnsSinceOffer": 0,
     "recentOffers": [
-      {
-        "thing": "Halvex Coil—the Churn-Revel orchestrator, now named, now searching for answers that do not fit neat shapes",
-        "from": "your own hunger recognized in another; the partnership you offered and he accepted"
-      },
       {
         "thing": "Halvex Coil naming himself plainly and the cost of staying",
         "from": "Your recognition of his hunger and the partnership you offered—he is answerable now, and that is the breaking he feared most"
@@ -1459,6 +1646,10 @@
       {
         "thing": "Cy's acknowledgment that the chamber's scale exceeds its own records—a statement of limits that opens a deeper thread",
         "from": "Cy's nature as a Precursor mechanism carrying knowledge it does not know it carries; the chamber itself, which is larger than the…"
+      },
+      {
+        "thing": "The keeper notices Cy and does not look away — a small acknowledgment, a nod that reads like recognition of a thing seen before, or…",
+        "from": "What Cy is (a Precursor-made thing moving through the world) and what the Wayhouse keeper would know (that such things are rare and that…"
       }
     ],
     "wantProgress": {
@@ -8919,6 +9110,32 @@
         "createdDay": 3,
         "entityId": "halvex_coil",
         "updatedDay": 4
+      },
+      "the-wayhouse": {
+        "id": "the-wayhouse",
+        "label": "The Wayhouse",
+        "kind": "place",
+        "facts": [
+          "[d5] you have walked here"
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": 5,
+        "entityId": "the-wayhouse",
+        "updatedDay": 5
+      },
+      "wayhouse-keeper": {
+        "id": "wayhouse-keeper",
+        "label": "Maren Oast",
+        "kind": "person",
+        "facts": [
+          "[d5] Keeper of the Wayhouse — tends the logs, routes travelers, reads the network's state"
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": 5,
+        "entityId": "wayhouse-keeper",
+        "updatedDay": 5
       }
     },
     "mergeUndo": [
@@ -9315,6 +9532,14 @@
   "nativeGrantsVersion": 2,
   "reconcileVersion": 72,
   "gallery": [
+    {
+      "kind": "location",
+      "prompt": "The Wayhouse",
+      "url": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/The%20Wayhouse%3A%20One%20long%20stone%20building%20alone%20at%20a%20crossroads%2C%20with%20a%20lamp%20on%20a%20pole%20outside%20and%20a%20board%20of%20pinned%20notes%20by%20the%20door.%20Stabling%20at%20one%20end%2C%20a%20wide%20common%20room%20at%20the%20other.%20Roads%20leaving%20in%20every%20direction.%2C%20adventurous%2C%20mild%2C%20no%20gore%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20a%20child%2C%20fully%20clothed%2C%20non-sexual%2C%20wholesome%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=91201&nologo=true",
+      "caption": "The Wayhouse",
+      "worldDay": 82,
+      "at": "2026-09-20T12:39:31.100Z"
+    },
     {
       "kind": "moment",
       "prompt": "The vast sealed chamber glows soft phosphorescent blue—notation bands radiating from an alcove like branches, each one brightening in measured sequence. Water moves through deliberate darkness below. ",
@@ -10229,8 +10454,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789907890854,
-  "rev": 791,
+  "updatedAt": 1789907994153,
+  "rev": 794,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -11177,7 +11402,8 @@
     "umbral_depths": 54,
     "the_quickwood": 101,
     "the_center": 50,
-    "valley": 1
+    "valley": 1,
+    "the_open_reach": 1
   },
   "opLossPending": false,
   "sessions": [
@@ -11296,10 +11522,10 @@
     {
       "id": "sess-15",
       "startedAt": "2026-09-20T12:21:21.358Z",
-      "lastAt": "2026-09-20T12:21:21.358Z",
+      "lastAt": "2026-09-20T12:39:54.149Z",
       "startDay": 82,
       "endDay": 82,
-      "beats": 1
+      "beats": 2
     }
   ],
   "establishedFacts": [
@@ -11366,7 +11592,7 @@
   ],
   "_opLedger": {
     "offer": {
-      "applied": 30,
+      "applied": 31,
       "rejected": 2,
       "lastWhy": "rejected-shape"
     },
@@ -11383,17 +11609,17 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 212,
-    "choices": 212,
-    "characterDeltas": 99,
-    "scene": 212,
-    "placeUpdates": 25,
+    "sceneSummary": 213,
+    "choices": 213,
+    "characterDeltas": 100,
+    "scene": 213,
+    "placeUpdates": 26,
     "codexUpdates": 119,
     "timeOps": 175,
-    "offer": 26,
+    "offer": 27,
     "generateRequest": 6,
-    "sceneEnded": 82,
-    "npcUpdates": 169,
+    "sceneEnded": 83,
+    "npcUpdates": 170,
     "moveTo": 7,
     "gambitApt": 45,
     "deeds": 8,
@@ -11412,7 +11638,7 @@
     "intentsHeard": 5,
     "delegateOps": 1
   },
-  "_opTurns": 212,
+  "_opTurns": 213,
   "customAbilities": {
     "mirror-bright": {
       "id": "mirror-bright",
@@ -11623,6 +11849,10 @@
     {
       "at": "2026-07-24T20:02:25.766Z",
       "reason": "jumped to The Unlit Deep (the_unlit_deep)"
+    },
+    {
+      "at": "2026-09-20T12:39:31.100Z",
+      "reason": "jumped to The Wayhouse (the_wayhouse)"
     }
   ],
   "locationImages": {
@@ -11632,7 +11862,8 @@
     "grovehome": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Grovehome%3A%20Where%20the%20Rootkin%20meet%20the%20world%20%E2%80%94%20the%20only%20Quickwood%20settlement%20that%20keeps%20human%20hours%2C%20because%20trade%20requires%20it%20and%20the%20Rootkin%20find%20that%20funny.%20Grovehome%20is%20patient%20in%20a%20way%20that%20reads%20as%20either%20profound%20hospitality%20or%20maddening%20obstruction%20depending%20on%20how%20much%20of%20a%20hurry%20you%20are%20in.%20Deals%20here%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=16046&nologo=true",
     "gen-the-waygate-path": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/The%20Waygate%20Path%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20The%20Waygate%20Path.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=24527&nologo=true",
     "the_crossing": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/The%20Crossing%3A%20Every%20axis%20crosses%20here%20at%20nothing%2C%20and%20the%20result%20is%20not%20grey%20%E2%80%94%20it%20is%20CROWDED.%20The%20Crossing%20leans%20toward%20no%20pole%2C%20which%20is%20precisely%20why%20it%20can%20hold%20them%20all%3A%20an%20Umbral%20and%20a%20Blazeborn%20drink%20at%20the%20same%20table%20because%20neither%20has%20the%20standing%20to%20make%20the%20other%20leave.%20The%20poles%20are%20lonely%20places.%20The%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=24144&nologo=true",
-    "the_quickwood_eaves": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/The%20Quickwood%20Eaves%3A%20Where%20the%20grown%20city%20thins%20into%20ordinary%20forest%20and%20ordinary%20forest%20thins%20into%20the%20Deepwood.%20The%20Eaves%20are%20the%20Rootkin's%20front%20door%20and%20they%20have%20deliberately%20not%20marked%20it%20%E2%80%94%20you%20know%20you%20have%20arrived%20when%20the%20trees%20start%20being%20interested%20in%20you.%20A%20waygate%20stands%20among%20the%20eaves-trees%2C%20grown%20around%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=86347&nologo=true"
+    "the_quickwood_eaves": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/The%20Quickwood%20Eaves%3A%20Where%20the%20grown%20city%20thins%20into%20ordinary%20forest%20and%20ordinary%20forest%20thins%20into%20the%20Deepwood.%20The%20Eaves%20are%20the%20Rootkin's%20front%20door%20and%20they%20have%20deliberately%20not%20marked%20it%20%E2%80%94%20you%20know%20you%20have%20arrived%20when%20the%20trees%20start%20being%20interested%20in%20you.%20A%20waygate%20stands%20among%20the%20eaves-trees%2C%20grown%20around%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=86347&nologo=true",
+    "the_wayhouse": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/The%20Wayhouse%3A%20One%20long%20stone%20building%20alone%20at%20a%20crossroads%2C%20with%20a%20lamp%20on%20a%20pole%20outside%20and%20a%20board%20of%20pinned%20notes%20by%20the%20door.%20Stabling%20at%20one%20end%2C%20a%20wide%20common%20room%20at%20the%20other.%20Roads%20leaving%20in%20every%20direction.%2C%20adventurous%2C%20mild%2C%20no%20gore%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20a%20child%2C%20fully%20clothed%2C%20non-sexual%2C%20wholesome%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=91201&nologo=true"
   },
   "customEncounters": {
     "re-re_raider_duel": {
@@ -12590,404 +12821,404 @@
   },
   "_promptRows": {
     "character": {
-      "reached": 24,
-      "produced": 24
+      "reached": 25,
+      "produced": 25
     },
     "location": {
-      "reached": 24,
-      "produced": 24
+      "reached": 25,
+      "produced": 25
     },
     "region": {
-      "reached": 24,
-      "produced": 24
+      "reached": 25,
+      "produced": 25
     },
     "groundDetail": {
-      "reached": 24,
+      "reached": 25,
       "produced": 21
     },
     "lore": {
-      "reached": 24,
-      "produced": 21
+      "reached": 25,
+      "produced": 22
     },
     "traditionMotiveDetail": {
-      "reached": 24,
-      "produced": 24
+      "reached": 25,
+      "produced": 25
     },
     "sheetsDetail": {
-      "reached": 24,
+      "reached": 25,
       "produced": 21
     },
     "rules": {
-      "reached": 24,
-      "produced": 24
+      "reached": 25,
+      "produced": 25
     },
     "recentTurns": {
-      "reached": 24,
+      "reached": 25,
       "produced": 22
     },
     "timeLabel": {
-      "reached": 24,
-      "produced": 24
+      "reached": 25,
+      "produced": 25
     },
     "npcRegistryDetail": {
-      "reached": 24,
-      "produced": 24
+      "reached": 25,
+      "produced": 25
     },
     "mintedUnmetDetail": {
-      "reached": 24,
-      "produced": 24
+      "reached": 25,
+      "produced": 25
     },
     "npcSeedDetail": {
-      "reached": 24,
+      "reached": 25,
       "produced": 24
     },
     "traditionVocab": {
-      "reached": 24,
-      "produced": 24
+      "reached": 25,
+      "produced": 25
     },
     "standingDetail": {
-      "reached": 24,
-      "produced": 24
+      "reached": 25,
+      "produced": 25
     },
     "recalledDetail": {
-      "reached": 24,
+      "reached": 25,
       "produced": 1
     },
     "bearingsDetail": {
-      "reached": 24,
-      "produced": 24
+      "reached": 25,
+      "produced": 25
     },
     "caravansDetail": {
-      "reached": 24,
+      "reached": 25,
       "produced": 0
     },
     "commandDetail": {
-      "reached": 24,
-      "produced": 24
+      "reached": 25,
+      "produced": 25
     },
     "presenceDetail": {
-      "reached": 24,
+      "reached": 25,
       "produced": 17
     },
     "worthHereDetail": {
-      "reached": 24,
+      "reached": 25,
       "produced": 0
     },
     "inventoryDetail": {
-      "reached": 24,
-      "produced": 24
+      "reached": 25,
+      "produced": 25
     },
     "sceneState": {
-      "reached": 24,
+      "reached": 25,
       "produced": 22
     },
     "holdingsDetail": {
-      "reached": 24,
-      "produced": 24
+      "reached": 25,
+      "produced": 25
     },
     "debtsDetail": {
-      "reached": 24,
+      "reached": 25,
       "produced": 0
     },
     "carriedDetail": {
-      "reached": 24,
+      "reached": 25,
       "produced": 0
     },
     "abilityLawDetail": {
-      "reached": 24,
-      "produced": 24
+      "reached": 25,
+      "produced": 25
     },
     "questsDetail": {
-      "reached": 24,
-      "produced": 24
+      "reached": 25,
+      "produced": 25
     },
     "structuredQuestsDetail": {
-      "reached": 24,
+      "reached": 25,
       "produced": 0
     },
     "traditionArcDetail": {
-      "reached": 24,
+      "reached": 25,
       "produced": 0
     },
     "npcErrandsDetail": {
-      "reached": 24,
+      "reached": 25,
       "produced": 0
     },
     "codexDetail": {
-      "reached": 24,
-      "produced": 24
+      "reached": 25,
+      "produced": 25
     },
     "companionsDetail": {
-      "reached": 24,
-      "produced": 24
+      "reached": 25,
+      "produced": 25
     },
     "placeMemoryDetail": {
-      "reached": 24,
+      "reached": 25,
       "produced": 23
     },
     "agesMissingDetail": {
-      "reached": 24,
-      "produced": 24
+      "reached": 25,
+      "produced": 25
     },
     "newsDetail": {
-      "reached": 24,
-      "produced": 24
+      "reached": 25,
+      "produced": 25
     },
     "worldArcsDetail": {
-      "reached": 24,
-      "produced": 24
+      "reached": 25,
+      "produced": 25
     },
     "legendsPursuableDetail": {
-      "reached": 24,
+      "reached": 25,
       "produced": 12
     },
     "wakesDetail": {
-      "reached": 24,
+      "reached": 25,
       "produced": 0
     },
     "arcMoodDetail": {
-      "reached": 24,
-      "produced": 24
+      "reached": 25,
+      "produced": 25
     },
     "reachableDeadDetail": {
-      "reached": 24,
-      "produced": 24
+      "reached": 25,
+      "produced": 25
     },
     "threatToPlayer": {
-      "reached": 24,
+      "reached": 25,
       "produced": 0
     },
     "guardiansDetail": {
-      "reached": 24,
+      "reached": 25,
       "produced": 0
     },
     "resolution": {
-      "reached": 24,
+      "reached": 25,
       "produced": 17
     },
     "playerInput": {
-      "reached": 24,
-      "produced": 7
+      "reached": 25,
+      "produced": 8
     },
     "exactWords": {
-      "reached": 24,
+      "reached": 25,
       "produced": 12
     },
     "travelDirective": {
-      "reached": 24,
+      "reached": 25,
       "produced": 1
     },
     "itemAdvance": {
-      "reached": 24,
+      "reached": 25,
       "produced": 0
     },
     "encounterWeaveDetail": {
-      "reached": 24,
+      "reached": 25,
       "produced": 3
     },
     "encounterOfferDetail": {
-      "reached": 24,
+      "reached": 25,
       "produced": 3
     },
     "fightFramingDetail": {
-      "reached": 24,
+      "reached": 25,
       "produced": 0
     },
     "abilityGrantDetail": {
-      "reached": 24,
+      "reached": 25,
       "produced": 0
     },
     "stageRevealDetail": {
-      "reached": 24,
+      "reached": 25,
       "produced": 0
     },
     "itemEvolveDetail": {
-      "reached": 24,
+      "reached": 25,
       "produced": 0
     },
     "worldPressureDetail": {
-      "reached": 24,
+      "reached": 25,
       "produced": 0
     },
     "offerDetail": {
-      "reached": 24,
-      "produced": 1
+      "reached": 25,
+      "produced": 2
     },
     "teacherOfferDetail": {
-      "reached": 24,
+      "reached": 25,
       "produced": 0
     },
     "substrateDetail": {
-      "reached": 24,
+      "reached": 25,
       "produced": 6
     },
     "romanceGuidanceDetail": {
-      "reached": 24,
+      "reached": 25,
       "produced": 1
     },
     "factsDetail": {
-      "reached": 24,
-      "produced": 24
+      "reached": 25,
+      "produced": 25
     },
     "evolvedItemsDetail": {
-      "reached": 24,
+      "reached": 25,
       "produced": 0
     },
     "opLossNote": {
-      "reached": 24,
+      "reached": 25,
       "produced": 0
     },
     "emergenceDetail": {
-      "reached": 24,
+      "reached": 25,
       "produced": 0
     },
     "perilNote": {
-      "reached": 24,
+      "reached": 25,
       "produced": 0
     },
     "encounterDetail": {
-      "reached": 24,
+      "reached": 25,
       "produced": 4
     },
     "masteryDetail": {
-      "reached": 24,
-      "produced": 24
+      "reached": 25,
+      "produced": 25
     },
     "bookkeepingRestate": {
-      "reached": 24,
+      "reached": 25,
       "produced": 0
     },
     "anomalyDetail": {
-      "reached": 24,
-      "produced": 24
+      "reached": 25,
+      "produced": 25
     },
     "repairPanelDetail": {
-      "reached": 24,
-      "produced": 24
+      "reached": 25,
+      "produced": 25
     },
     "teacherDetail": {
-      "reached": 24,
+      "reached": 25,
       "produced": 0
     },
     "toolkitDetail": {
-      "reached": 24,
-      "produced": 24
+      "reached": 25,
+      "produced": 25
     },
     "availableEncounters": {
-      "reached": 24,
-      "produced": 20
+      "reached": 25,
+      "produced": 21
     },
     "partyDetail": {
-      "reached": 24,
+      "reached": 25,
       "produced": 0
     },
     "ratingDetail": {
-      "reached": 24,
-      "produced": 24
+      "reached": 25,
+      "produced": 25
     },
     "registerDetail": {
-      "reached": 24,
-      "produced": 24
+      "reached": 25,
+      "produced": 25
     },
     "legendDetail": {
-      "reached": 24,
+      "reached": 25,
       "produced": 1
     },
     "livingWorldDetail": {
-      "reached": 24,
+      "reached": 25,
       "produced": 0
     },
     "assignmentsDetail": {
-      "reached": 24,
+      "reached": 25,
       "produced": 0
     },
     "latentArcsDetail": {
-      "reached": 24,
-      "produced": 24
+      "reached": 25,
+      "produced": 25
     },
     "seasonalDetail": {
-      "reached": 24,
-      "produced": 24
+      "reached": 25,
+      "produced": 25
     },
     "schoolsDetail": {
-      "reached": 24,
-      "produced": 24
+      "reached": 25,
+      "produced": 25
     },
     "sharedCanonDetail": {
-      "reached": 24,
-      "produced": 1
+      "reached": 25,
+      "produced": 2
     },
     "worldCountLabel": {
-      "reached": 24,
-      "produced": 24
+      "reached": 25,
+      "produced": 25
     },
     "waygateDetail": {
-      "reached": 24,
-      "produced": 24
+      "reached": 25,
+      "produced": 25
     },
     "readAloudDetail": {
-      "reached": 24,
-      "produced": 24
+      "reached": 25,
+      "produced": 25
     },
     "scenePacingDetail": {
-      "reached": 24,
+      "reached": 25,
       "produced": 13
     },
     "wishesDetail": {
-      "reached": 4,
+      "reached": 5,
       "produced": 0
     },
     "worldMovedOnDetail": {
-      "reached": 4,
+      "reached": 5,
       "produced": 2
     },
     "companionLivesDetail": {
-      "reached": 4,
-      "produced": 4
+      "reached": 5,
+      "produced": 5
     },
     "homeDetail": {
-      "reached": 4,
+      "reached": 5,
       "produced": 0
     },
     "invitationsDetail": {
-      "reached": 4,
+      "reached": 5,
       "produced": 0
     },
     "bandsJoinedDetail": {
-      "reached": 4,
+      "reached": 5,
       "produced": 0
     },
     "travelersHereDetail": {
-      "reached": 4,
+      "reached": 5,
       "produced": 1
     },
     "travelersDetail": {
-      "reached": 4,
+      "reached": 5,
       "produced": 0
     },
     "journeyDetail": {
-      "reached": 2,
+      "reached": 3,
       "produced": 0
     },
     "journeyUnderwayDetail": {
-      "reached": 2,
+      "reached": 3,
       "produced": 0
     },
     "holdsNearDetail": {
-      "reached": 2,
+      "reached": 3,
       "produced": 1
     },
     "moneyDetail": {
-      "reached": 1,
-      "produced": 1
+      "reached": 2,
+      "produced": 2
     },
     "jobsDetail": {
-      "reached": 1,
+      "reached": 2,
       "produced": 0
     }
   },
   "_opUnknown": {
-    "sceneSummary": 36
+    "sceneSummary": 37
   },
   "_bandNotes": null,
   "_opCountingSince": "2026-09-14T22:51:56.913Z",

@@ -6,7 +6,7 @@
   "origin": "harmonic",
   "background": "medic",
   "level": 2,
-  "xp": 102,
+  "xp": 110,
   "attributes": {
     "physical": 2,
     "mental": 5,
@@ -50,16 +50,17 @@
   ],
   "alignment": {
     "mechanical_spiritual": 0.015,
-    "concrete_abstract": -0.043750000000000004,
+    "concrete_abstract": -0.073734375,
     "chaos_order": 0.019500000000000003,
     "destruction_creation": 0.015,
-    "violence_peace": 0.015
+    "violence_peace": 0.015,
+    "death_life": 0.015
   },
   "attunement": 2,
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 129,
-  "energy": 129,
+  "energy": 119,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -251,45 +252,36 @@
         "player": "Sleep first — it is deep night, and a rested healer reads more than a tired one; ask Vreni to note his pulse at dawn and tell you the number",
         "summary": "Adelheid slept the night at the wayhouse; Vreni will note the patient's dawn pulse.",
         "narration": "You tell Vreni plainly: wake me at first light with his pulse count, and you'll take the second set yourself after breakfast. She nods once — the nod of someone who already thought of it and is relieved to have been asked rather than having to suggest it herself. She shows you to the nearer curtained pallet, sets a second cup of tea on the small ledge beside it in case you wake in the night, and then moves back to the hearth without further ceremony.\n\nAevi drifts to the windowsill and dims almost entirely — the few motes that remain pulse very slowly, like a breath held and released. The dried herbs in the rafters smell of summer that has already passed: chamomile and something resinous you don't have a name for yet.\n\nYou are asleep before the candle on the trestle table burns to its collar."
+      },
+      {
+        "player": "Take the dawn pulse count Vreni recorded, then sit with the patient — examine the arm wound and watch his colour and breathing while you talk",
+        "summary": "Adelheid took the dawn pulse from Vreni, sat with the patient, examined the wound and watched his color — the numbers are telling the truth his manner is not.",
+        "narration": "Vreni meets you at the curtain before you have fully risen — she has the number ready, offered in the same flat tone she uses for everything: sixty-eight beats, counted twice, one minute apart. Fast. Not alarmingly so, not yet, but fast for a man lying still in a cool room at first light. You hold the figure beside last night's nothing and feel the gap between them.\n\nYou draw the far curtain back gently. The patient is a man somewhere in his thirties, broad through the shoulders, with the particular stillness of someone pretending harder than sleep requires. His coloring is good at first glance — olive skin, no obvious pallor — but you sit on the low stool beside him and you watch, and what you watch does not quite match the first glance. You ask him how he slept. He says fine. You ask if he is warm. He says comfortable. While he answers you press two fingers lightly to the inside of his wrist and count, and the number comes back higher than sixty-eight — closer to seventy-four, seventy-five, the kind of climb you would expect from waking and talking and nothing more, except that his voice is level and his body is still and nothing in his manner suggests effort. You ask to look at the arm.\n\nThe wound is clean. Whoever closed it did good work — the edges are neat, no redness at the margin, no heat when you lay the back of your hand along the skin above it. A farm tool, he says again, and you say yes, it looks that way, and you press one thumbnail briefly against the nailbed of his unwounded hand and watch the color return. It is slow. Not absent — slow. Three seconds where two would be ordinary. His skin is dry now, and warm, but underneath the warmth there is something the numbers are quietly insisting on: a body spending more than the situation asks for, holding a line it has not admitted it is holding.\n\nYou tell him to rest another hour and you will look in again. He thanks you with the ease of a man who has had a good deal of practice being thanked for cooperating. You let the curtain fall and carry the numbers to the trestle table where the light is better, and you set them down beside Vreni's dawn count and look at what they say together.\n\n*✦ The Patient Who Is Not Sick Enough — Codex: his pulse is fast and getting faster, his skin is warm and dry and then cool and damp, and the colour is slower back into the nailbed than it was this morning. His blood pressure has not moved, and that is the frightening part: a body this good at compensating is a body spending everything it has to look ordinary..*"
+      },
+      {
+        "player": "Check the medicine shelf again — given what the numbers show, think through what grows on the high terraces that could treat what this looks like, and what could be mistaken for it",
+        "summary": "Adelheid read the shelf against the patient's numbers and saw the shape of what is killing him — a deep infection sealed beneath healed skin — but the high-terrace plant that treats it has a dangerous look-alike she cannot yet reliably distinguish from memory alone.",
+        "narration": "You turn back to the shelf with the patient's numbers in mind — 68 at dawn, climbing toward 75 on waking, nailbed color slow at three seconds, skin warm and dry. A body spending more than its situation demands. You run the possibilities in the order a working healer would: his wound is clean, the fever is low and steady, the presentation is almost ordinary. Almost.\n\nThe shelf gives you part of what you need. The yarrow and willow bark are there for fever-work, and the meadowsweet will ease the ache he is not admitting to. But what the numbers point toward — a deep infection walled in beneath a healed surface, spreading in the blood rather than showing at the skin — wants something the shelf does not have. Calendula would help at the wound site if you opened it again. Goldenrod, taken as a strong infusion, would support the blood itself, push the body toward clearing what it cannot see. You have goldenrod in the satchel, enough for two or three days' infusions.\n\nThe harder question is what grows on the high terraces. You know the terraces have not been harvested in two seasons — Vreni said so without saying so, the way a careful woman names a gap she has learned to manage around. What you are trying to picture is the difference between two plants that grow near each other up there: one a true cleanser, used before the Transition by valley healers for exactly this kind of seated infection, and one that looks nearly identical and would do the opposite — would seal the inflammation in tighter and drive the fever faster. You can name the cleanser. The look-alike you know by its branching only, not its name, and the branching is almost the same.\n\nYou are not certain enough, not yet. The goldenrod will buy him time. But the terrace plants are a two-hour climb, and you would need to see them in your hands to be sure of the difference.\n\n*✦ The Patient Who Is Not Sick Enough — Codex: it has to be opened again, which is the thing nobody wants to do to a man who is finally walking. And it has to be opened with something to give him at the same time, or you will take away the only thing holding him up..*"
       }
     ],
     "lastTurn": {
-      "narration": "You tell Vreni plainly: wake me at first light with his pulse count, and you'll take the second set yourself after breakfast. She nods once — the nod of someone who already thought of it and is relieved to have been asked rather than having to suggest it herself. She shows you to the nearer curtained pallet, sets a second cup of tea on the small ledge beside it in case you wake in the night, and then moves back to the hearth without further ceremony.\n\nAevi drifts to the windowsill and dims almost entirely — the few motes that remain pulse very slowly, like a breath held and released. The dried herbs in the rafters smell of summer that has already passed: chamomile and something resinous you don't have a name for yet.\n\nYou are asleep before the candle on the trestle table burns to its collar.",
-      "sceneSummary": "Adelheid slept the night at the wayhouse; Vreni will note the patient's dawn pulse.",
+      "narration": "You turn back to the shelf with the patient's numbers in mind — 68 at dawn, climbing toward 75 on waking, nailbed color slow at three seconds, skin warm and dry. A body spending more than its situation demands. You run the possibilities in the order a working healer would: his wound is clean, the fever is low and steady, the presentation is almost ordinary. Almost.\n\nThe shelf gives you part of what you need. The yarrow and willow bark are there for fever-work, and the meadowsweet will ease the ache he is not admitting to. But what the numbers point toward — a deep infection walled in beneath a healed surface, spreading in the blood rather than showing at the skin — wants something the shelf does not have. Calendula would help at the wound site if you opened it again. Goldenrod, taken as a strong infusion, would support the blood itself, push the body toward clearing what it cannot see. You have goldenrod in the satchel, enough for two or three days' infusions.\n\nThe harder question is what grows on the high terraces. You know the terraces have not been harvested in two seasons — Vreni said so without saying so, the way a careful woman names a gap she has learned to manage around. What you are trying to picture is the difference between two plants that grow near each other up there: one a true cleanser, used before the Transition by valley healers for exactly this kind of seated infection, and one that looks nearly identical and would do the opposite — would seal the inflammation in tighter and drive the fever faster. You can name the cleanser. The look-alike you know by its branching only, not its name, and the branching is almost the same.\n\nYou are not certain enough, not yet. The goldenrod will buy him time. But the terrace plants are a two-hour climb, and you would need to see them in your hands to be sure of the difference.\n\n*✦ The Patient Who Is Not Sick Enough — Codex: it has to be opened again, which is the thing nobody wants to do to a man who is finally walking. And it has to be opened with something to give him at the same time, or you will take away the only thing holding him up..*",
+      "sceneSummary": "Adelheid read the shelf against the patient's numbers and saw the shape of what is killing him — a deep infection sealed beneath healed skin — but the high-terrace plant that treats it has a dangerous look-alike she cannot yet reliably distinguish from memory alone.",
       "choices": [
         {
-          "label": "Take the dawn pulse count Vreni recorded, then sit with the patient — examine the arm wound and watch his colour and breathing while you talk",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "death_life": 0.3,
-            "concrete_abstract": -0.3
-          },
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study",
-            "help"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Vreni, over the morning tea, whether anyone passed through heading upstream three weeks ago — describe Silas Weir and his instruments",
+          "label": "Tell the patient plainly what you suspect — a deep infection sealed beneath the wound — and that you need to open it again and look",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {
-            "falsehood_truth": 0.2,
-            "concrete_abstract": -0.2
+            "falsehood_truth": 0.5,
+            "death_life": 0.3
           },
-          "difficulty": "easy",
+          "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
-            "investigate",
-            "plan"
+            "honest",
+            "help",
+            "negotiate"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -298,57 +290,94 @@
           "emergenceId": null
         },
         {
-          "label": "Step outside at first light — stand on the cleared shelf of ground and use Tremor Sense to read whether the Precursor pulse reaches this high",
+          "label": "Ask Vreni what she knows of the high-terrace plants — whether she has ever harvested them, and whether she can describe the two that grow together there",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "mechanical_spiritual": -0.2,
-            "concrete_abstract": 0.2
+            "concrete_abstract": -0.3,
+            "falsehood_truth": 0.3
           },
           "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
             "study",
+            "negotiate",
             "careful"
           ],
-          "abilityId": "tremor_sense",
-          "energyCost": 4,
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Start the goldenrod infusion now — buy him time — and set out for the high terraces as soon as it is brewing to see the plants in your hands",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "axes": {
+            "death_life": 0.4,
+            "destruction_creation": 0.3
+          },
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "help",
+            "careful",
+            "sustain"
+          ],
+          "abilityId": "chord_of_mending",
+          "energyCost": 10,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
       ],
+      "deeds": [],
       "characterDeltas": {
-        "health": 3,
-        "energy": 40,
+        "health": 0,
+        "energy": 0,
         "xp": 0
       },
-      "timeOps": {
-        "hoursPassed": 7,
-        "why": "slept through deep night to first light of day 3"
-      },
+      "ledgerEvents": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "the-patient-who-is-not-sick-enough",
+          "note": "Adelheid identified the likely cause — a deep infection sealed beneath a healed wound surface, spreading in the blood — and named the treatment: goldenrod for now, and a high-terrace plant she cannot yet safely distinguish from its dangerous look-alike."
+        }
+      ],
+      "stageOps": [
+        {
+          "questId": "the-patient-who-is-not-sick-enough",
+          "stageId": "s2",
+          "evidence": "Adelheid reasoned from pulse, nailbed color, and wound presentation to a clear diagnosis: deep infection sealed beneath healed skin, spreading in blood — the wound must be reopened and the terrace cleanser obtained, but cannot be confused with its look-alike."
+        }
+      ],
       "scene": {
-        "setting": "Inside the wayhouse — low stone room set into the hillside, hearth now banked to orange coals, first gray light at the window. Trestle table with the remains of last night's candles. Early autumn dawn outside.",
+        "setting": "Inside the wayhouse — low stone room, hearth banked to orange coals, gray dawn light strengthening at the window. Trestle table with Adelheid's notes and the Medic's Satchel open beside them.",
         "npcsPresent": [
           {
             "name": "Sister Vreni",
-            "state": "moving quietly near the hearth — has already been up to note the patient's dawn pulse, cup in hand"
+            "state": "standing near the hearth, watching Adelheid with quiet attention, her own cup held in both hands"
           },
           {
-            "name": "Aevi",
-            "state": "still on the windowsill, motes brightening slowly as the light grows, watching the hills outside"
+            "name": "The Patient",
+            "state": "behind the far curtain, pretending at ease; pulse 68 at dawn, climbing"
           }
         ],
         "objects": [
-          "iron pot — cold now, valerian dregs",
-          "jar shelf: valerian-and-hops (open), elderflower (half), plantain (full), yarrow (good), comfrey root (one nearly spent, one sealed), clove oil, feverfew (nearly gone), willow bark (solid), meadowsweet (quarter-jar)",
-          "Medic's Satchel open on the trestle table",
-          "second cup of tea — left on the ledge beside the pallet, untouched",
-          "curtained pallets — far curtain still closed, patient within"
+          "Medic's Satchel open on trestle table",
+          "jar shelf: stocked with Adelheid's additions — yarrow, willow bark, meadowsweet, goldenrod present",
+          "Adelheid's notes on the patient's numbers",
+          "second cup of tea — untouched on the ledge beside the pallet",
+          "curtained pallets — far curtain drawn closed again",
+          "iron pot — cold, valerian dregs"
         ],
         "threads": [
-          "Vreni has the dawn pulse count — not yet given to Adelheid",
-          "Patient behind the far curtain — second observation needed to satisfy the quest stage",
+          "Patient's infection is deep and sealed — wound must be reopened; he does not know this yet",
+          "High-terrace cleanser plant has a dangerous look-alike — cannot be safely distinguished from memory alone",
+          "Goldenrod in the satchel will buy time but is not the cure",
+          "Patient gave a false or shortened name — two parties have asked after him at the gate",
           "Three weeks ago: travelers heading upstream would have passed through here — Vreni not yet asked",
           "Aevi matched the Precursor pulse at the runnel — not yet discussed"
         ]
@@ -357,48 +386,59 @@
         {
           "op": "update",
           "npcId": "sister-vreni",
-          "note": "Took the patient's dawn pulse as requested — has the number ready; set a second tea cup by Adelheid's pallet without being asked",
-          "skillsObserved": [
-            "anticipatory care — prepared what was needed before it was requested"
-          ],
-          "statusNote": "At the wayhouse; holds the patient's dawn pulse count, waiting to give it to Adelheid"
+          "note": "Watched Adelheid work through the shelf against the patient's numbers — reading gaps and possibilities with a healer's discipline",
+          "statusNote": "At the wayhouse; holding the patient's dawn pulse count; watching Adelheid reason toward a diagnosis"
         }
       ],
-      "questUpdates": [
+      "codexUpdates": [
         {
-          "op": "progress",
-          "questId": "the-patient-who-is-not-sick-enough",
-          "note": "First set of observations deferred to morning — Vreni took the dawn pulse as arranged; second set pending Adelheid's waking examination."
+          "topic": "the-patient-who-is-not-sick-enough",
+          "label": "The Patient Who Is Not Sick Enough",
+          "kind": "mystery",
+          "fact": "The presenting wound is not the cause — a deep infection has been sealed beneath healed skin and is spreading in the blood. Treatment requires reopening the wound and a high-terrace cleanser plant, which has a dangerous look-alike that must be identified by sight. Goldenrod infusion will buy time. The terrace plants have not been harvested in two seasons.",
+          "links": [
+            "maras-errand",
+            "sister-vreni",
+            "millbrook",
+            "the-patient-who-is-not-sick-enough"
+          ]
         }
-      ]
+      ],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "A short morning examination and reasoning session at the medicine shelf"
+      },
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Inside the wayhouse — low stone room set into the hillside, hearth now banked to orange coals, first gray light at the window. Trestle table with the remains of last night's candles. Early autumn dawn outside.",
+      "setting": "Inside the wayhouse — low stone room, hearth banked to orange coals, gray dawn light strengthening at the window. Trestle table with Adelheid's notes and the Medic's Satchel open beside them.",
       "npcsPresent": [
         {
           "name": "Sister Vreni",
-          "state": "moving quietly near the hearth — has already been up to note the patient's dawn pulse, cup in hand"
+          "state": "standing near the hearth, watching Adelheid with quiet attention, her own cup held in both hands"
         },
         {
-          "name": "Aevi",
-          "state": "still on the windowsill, motes brightening slowly as the light grows, watching the hills outside"
+          "name": "The Patient",
+          "state": "behind the far curtain, pretending at ease; pulse 68 at dawn, climbing"
         }
       ],
       "objects": [
-        "iron pot — cold now, valerian dregs",
-        "jar shelf: valerian-and-hops (open), elderflower (half), plantain (full), yarrow",
-        "Medic's Satchel open on the trestle table",
-        "second cup of tea — left on the ledge beside the pallet, untouched",
-        "curtained pallets — far curtain still closed, patient within"
+        "Medic's Satchel open on trestle table",
+        "jar shelf: stocked with Adelheid's additions — yarrow, willow bark, meadowsweet,",
+        "Adelheid's notes on the patient's numbers",
+        "second cup of tea — untouched on the ledge beside the pallet",
+        "curtained pallets — far curtain drawn closed again",
+        "iron pot — cold, valerian dregs"
       ],
       "threads": [
-        "Vreni has the dawn pulse count — not yet given to Adelheid",
-        "Patient behind the far curtain — second observation needed to satisfy the quest stage",
-        "Three weeks ago: travelers heading upstream would have passed through here — Vreni not yet asked",
-        "Aevi matched the Precursor pulse at the runnel — not yet discussed"
+        "Patient's infection is deep and sealed — wound must be reopened; he does not know this yet",
+        "High-terrace cleanser plant has a dangerous look-alike — cannot be safely distinguished from memory alone",
+        "Goldenrod in the satchel will buy time but is not the cure",
+        "Patient gave a false or shortened name — two parties have asked after him at the gate",
+        "Three weeks ago: travelers heading upstream would have passed through here — Vreni not yet asked"
       ]
     },
-    "beats": 7,
+    "beats": 9,
     "subPlace": {
       "slug": "the-wayhouse",
       "name": "The Wayhouse",
@@ -733,15 +773,25 @@
           ]
         }
       ],
-      "stageIndex": 0,
-      "completedStages": [],
+      "stageIndex": 2,
+      "completedStages": [
+        "s1",
+        "s2"
+      ],
       "progress": [
         "Vreni named the patient directly — a man who came in two days ago with an arm wound he calls fine, whose pulse has already changed overnight. The first observation is now possible.",
-        "First set of observations deferred to morning — Vreni took the dawn pulse as arranged; second set pending Adelheid's waking examination."
+        "First set of observations deferred to morning — Vreni took the dawn pulse as arranged; second set pending Adelheid's waking examination.",
+        "Full set of observations complete — pulse climbing, color slow, wound clean and not the problem. The numbers say what his manner will not.",
+        "Codex: his pulse is fast and getting faster, his skin is warm and dry and then cool and damp, and the colour is slower back into the nailbed than it was this morning. His blood pressure has not moved, and that is the frightening part: a body this good at compensating is a body spending everything it has to look ordinary.",
+        "↳ Adelheid took Vreni's dawn pulse count (68), sat with the patient, examined the wound and watched his color — nailbed return slow at 3 seconds, pulse climbing to 74-75 on waking; two sets of…",
+        "Adelheid identified the likely cause — a deep infection sealed beneath a healed wound surface, spreading in the blood — and named the treatment: goldenrod for now, and a high-terrace plant she cannot yet safely distinguish from its dangerous look-alike.",
+        "Codex: it has to be opened again, which is the thing nobody wants to do to a man who is finally walking. And it has to be opened with something to give him at the same time, or you will take away the only thing holding him up.",
+        "↳ Adelheid reasoned from pulse, nailbed color, and wound presentation to a clear diagnosis: deep infection sealed beneath healed skin, spreading in blood — the wound must be reopened and the terrace…"
       ],
       "aliases": [],
       "startedAt": "2026-09-20T03:05:17.338Z",
-      "startedWorldDay": 82
+      "startedWorldDay": 82,
+      "stageStartedAt": 79
     }
   ],
   "npcRegistry": {
@@ -915,8 +965,6 @@
       },
       "relationship": 3,
       "history": [
-        "[d2] Had the grace to look at the seedling beds while Mara gave her read — she understands she is in the middle of something larger and does not press.",
-        "[d2] Named her departure time as tonight and extended the open invitation to walk the sluice-road together by moonlight — an hour and a half to two hours up to the wayhouse.",
         "[d2] Fell in beside Adelheid at the garden gate and is walking the sluice-road back to the wayhouse with her, pace unhurried and sure.",
         "[d2] Noticed Aevi's teal motes flicker but chose not to ask — a considered silence, not ignorance",
         "[d2] Stopped when Adelheid crouched at the runnel — waited without pressing, hands folded, patient",
@@ -924,33 +972,36 @@
         "[d2] Brought Adelheid to the wayhouse and set tea on the hearth without ceremony — the act of a practical host, not a performance of welcome",
         "[d2] Watched Adelheid read the medicine shelf without speaking — a considering silence, the look of someone who has just confirmed something she suspected",
         "[d2] Accepted Adelheid's medicines with careful hands, named the patient she is worried about — a man insisting he is fine whose pulse has already shifted overnight",
-        "[d3] Took the patient's dawn pulse as requested — has the number ready; set a second tea cup by Adelheid's pallet without being asked"
+        "[d3] Took the patient's dawn pulse as requested — has the number ready; set a second tea cup by Adelheid's pallet without being asked",
+        "[d3] Delivered the dawn pulse count — 68, counted twice — before Adelheid was fully risen. Watched her examine the patient without interfering.",
+        "[d3] Watched Adelheid work through the shelf against the patient's numbers — reading gaps and possibilities with a healer's discipline"
       ],
       "knownFacts": [
-        "The wayhouse sits on the sluice-road above the Wet Meadows — any traveler heading upstream three weeks ago would have passed through.",
         "A mother arrived two days ago with a child running a four-day fever; the wayhouse managed but it was close.",
         "She witnessed Mara Wells endorse Adelheid's departure — she now understands the invitation has a layer beyond the wayhouse's medical need.",
         "Some travelers carry unusual companions that it is polite not to inquire after at night on a steep road",
         "The wayhouse keeps valerian-and-hops tea on hand — a healer's house stocking what travelers need after a hard road",
         "Adelheid reads a medicine shelf the way a working healer does — gap by gap, not label by label",
         "The patient arrived two days ago with a forearm wound he attributes to a farm tool; it closed cleanly but his pulse this morning was faster than last night",
-        "He is insistent that he is fine — unusually so"
+        "He is insistent that he is fine — unusually so",
+        "The patient's pulse was 68 at dawn — fast for a still man in a cool room"
       ],
       "skillsObserved": [
         "honest and precise in naming what she does not know",
-        "anticipatory care — prepared what was needed before it was requested"
+        "anticipatory care — prepared what was needed before it was requested",
+        "Precise observation — counted the pulse twice before reporting it"
       ],
       "status": "active",
       "sex": "female",
       "gender": "woman",
       "pronouns": "she/her",
       "age": 44,
-      "statusNote": "At the wayhouse; holds the patient's dawn pulse count, waiting to give it to Adelheid",
+      "statusNote": "At the wayhouse; holding the patient's dawn pulse count; watching Adelheid reason toward a diagnosis",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 3
       },
-      "met": 13,
+      "met": 15,
       "domains": {
         "primary": "mason"
       },
@@ -1084,7 +1135,7 @@
   },
   "worldState": {
     "schemaVersion": 1,
-    "lastTickDay": 2,
+    "lastTickDay": 3,
     "eventStages": {
       "water_crisis": {
         "stage": 2,
@@ -1307,8 +1358,8 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-09-20T02:48:44.039Z",
-    "lastGenCount": 1970,
+    "lastSharedReadAt": "2026-09-20T12:20:27.278Z",
+    "lastGenCount": 1980,
     "newsSpread": {},
     "arcStages": {
       "arc_what_wakes_beneath": {
@@ -1337,7 +1388,7 @@
         "locationId": "gen-mara-wells-store"
       }
     ],
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 3,
     "recentOffers": [
       {
         "thing": "Mara offers direct access to work as a way of centering yourself—and uses that time to shift the conversation toward the real question…",
@@ -5615,7 +5666,7 @@
     "figureWokeDay": {
       "the_deep_lantern": 82
     },
-    "updatesToldTo": "2.3.5",
+    "updatesToldTo": "2.3.6",
     "newsLog": [
       {
         "day": 2,
@@ -6024,7 +6075,9 @@
           "[d1] Mara's note is enclosed in the cloth bundle Piotr holds. He will not open it or reveal its contents; he is waiting for Adelheid to do so, or to return it unopened to Mara herself. The note contains the explanation Piotr himself is bound not to give.",
           "[d1] Mara's written instructions to Piotr remain sealed inside the cloth bundle. Piotr will not open it or share its contents until Adelheid either reads it herself or returns it unopened to Mara.",
           "[d2] Adelheid accepted Sister Vreni's invitation to the pass-road wayhouse. The wayhouse is on the sluice-road — the road Silas would have traveled three weeks ago — and gives Adelheid a position on the upstream route without requiring a direct search.",
-          "[d2] Mara's last instruction before Adelheid left: take the stone-cut path, not the wet meadow margin — and tell me what the wayhouse sees. She is using Adelheid as her road-eyes on the upstream route."
+          "[d2] Mara's last instruction before Adelheid left: take the stone-cut path, not the wet meadow margin — and tell me what the wayhouse sees. She is using Adelheid as her road-eyes on the upstream route.",
+          "[d3] The Patient Who Is Not Sick Enough — Dawn pulse 68 (Vreni's count), rising to 74-75 on brief waking and talking. Nailbed color return slow — three seconds where two is ordinary. Skin warm and dry, wound clean and closed. A body spending more than its situation demands, compensating carefully. The…",
+          "[d3] The Patient Who Is Not Sick Enough — The presenting wound is not the cause — a deep infection has been sealed beneath healed skin and is spreading in the blood. Treatment requires reopening the wound and a high-terrace cleanser plant, which has a dangerous look-alike that must be identified by…"
         ],
         "links": [
           "mara-wells",
@@ -6032,12 +6085,14 @@
           "uncatalogued-terrace-plants",
           "silas-weir",
           "sister-vreni",
-          "echo-river-contamination"
+          "echo-river-contamination",
+          "millbrook",
+          "the-patient-who-is-not-sick-enough"
         ],
         "aliases": [],
         "createdDay": 1,
         "entityId": "maras-errand",
-        "updatedDay": 2
+        "updatedDay": 3
       },
       "precursor-layer": {
         "id": "precursor-layer",
@@ -6200,13 +6255,25 @@
         "to": "sister-vreni",
         "why": "beat",
         "day": 2
+      },
+      {
+        "label": "The Patient Who Is Not Sick Enough",
+        "to": "maras-errand",
+        "why": "beat",
+        "day": 3
+      },
+      {
+        "label": "The Patient Who Is Not Sick Enough",
+        "to": "maras-errand",
+        "why": "beat",
+        "day": 3
       }
     ]
   },
   "grantsVersion": 1,
   "customAbilities": {},
   "companionBonds": {
-    "aevi": 5.25
+    "aevi": 5.75
   },
   "practice": {
     "schemaVersion": 1,
@@ -6281,16 +6348,16 @@
   "itemReclaimVersion": 1,
   "nameRepairVersion": 1,
   "tendencies": {
-    "generous": 4.299554660849294,
-    "social": 5.855063030495104,
-    "cerebral": 18.46811132598978,
-    "cautious": 16.309991915837035,
-    "strategic": 14.448736042655236,
-    "carousing": 0.73970197972527,
-    "risky": 0.37077793469938336,
-    "ruthless": 0.8456427491372299,
-    "patient": 0.5177498814947562,
-    "craft": 0.6669201684248254
+    "generous": 5.0622641494698595,
+    "social": 5.565969293364408,
+    "cerebral": 19.531248329269033,
+    "cautious": 15.50468606499258,
+    "strategic": 13.735329700549133,
+    "carousing": 0.7031791944763348,
+    "risky": 0.3524707741736013,
+    "ruthless": 0.8038891383985791,
+    "patient": 0.49218598109595263,
+    "craft": 1.6339909851088494
   },
   "aptitudes": [
     "strategist",
@@ -6298,11 +6365,11 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 77,
+  "actionCount": 79,
   "bondLogFrom": null,
   "teachers": {},
   "regionsKnown": {
-    "valley": 38
+    "valley": 40
   },
   "company": [],
   "forkChoices": {},
@@ -6486,8 +6553,8 @@
   "bands": [],
   "_silasGrantsRevoked": true,
   "reconcileVersion": 72,
-  "updatedAt": 1789874349722,
-  "rev": 77,
+  "updatedAt": 1789906832316,
+  "rev": 82,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -6496,11 +6563,11 @@
     "creature": {},
     "item": {}
   },
-  "_lastProjectDay": 2,
+  "_lastProjectDay": 3,
   "featureOffers": [],
   "_pinsInitialized": true,
   "_opUnknown": {
-    "sceneSummary": 38
+    "sceneSummary": 40
   },
   "_applyFailures": null,
   "sessions": [
@@ -6535,13 +6602,21 @@
       "startDay": 82,
       "endDay": 82,
       "beats": 4
+    },
+    {
+      "id": "sess-5",
+      "startedAt": "2026-09-20T12:14:30.871Z",
+      "lastAt": "2026-09-20T12:19:56.742Z",
+      "startDay": 82,
+      "endDay": 82,
+      "beats": 2
     }
   ],
   "_debtReceipts": [],
   "_bandNotes": null,
   "skillUses": {
     "scout": 7,
-    "study": 9,
+    "study": 11,
     "ask": 3,
     "travel": 7,
     "coerce": 1,
@@ -6558,11 +6633,11 @@
     "endure": 1,
     "practical": 1,
     "negotiate": 4,
-    "help": 3,
+    "help": 4,
     "plan": 3,
     "rapport": 2,
     "calm": 2,
-    "craft": 1
+    "craft": 2
   },
   "aptitudeEarnCount": {
     "tactician": 1,
@@ -6571,27 +6646,28 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 34,
-    "choices": 34,
-    "questUpdates": 22,
-    "scene": 34,
-    "npcUpdates": 30,
+    "sceneSummary": 35,
+    "choices": 35,
+    "questUpdates": 23,
+    "scene": 35,
+    "npcUpdates": 31,
     "placeUpdates": 12,
-    "codexUpdates": 24,
-    "timeOps": 27,
+    "codexUpdates": 25,
+    "timeOps": 28,
     "imagePrompt": 8,
     "gambitApt": 21,
     "sceneEnded": 26,
-    "characterDeltas": 23,
+    "characterDeltas": 24,
     "offer": 14,
     "stateOps": 2,
     "deeds": 6,
     "factUpdates": 4,
     "ledgerEvents": 4,
     "moveTo": 4,
-    "_engineClosedScene": 1
+    "_engineClosedScene": 1,
+    "stageOps": 1
   },
-  "_opTurns": 34,
+  "_opTurns": 35,
   "_opCountingSince": "2026-09-15T23:58:48.348Z",
   "gallery": [
     {
@@ -6753,6 +6829,22 @@
       "day": 2,
       "worldDay": 82,
       "actionCount": 75
+    },
+    {
+      "companionId": "aevi",
+      "kind": "assist",
+      "delta": 0.25,
+      "day": 3,
+      "worldDay": 82,
+      "actionCount": 77
+    },
+    {
+      "companionId": "aevi",
+      "kind": "assist",
+      "delta": 0.25,
+      "day": 3,
+      "worldDay": 82,
+      "actionCount": 78
     }
   ],
   "companionMemory": {

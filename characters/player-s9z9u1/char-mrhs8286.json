@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 33,
-  "xp": 3246,
+  "xp": 3274,
   "attributes": {
     "physical": 5,
     "mental": 8,
@@ -208,13 +208,13 @@
     "demonic_angelic": 0.013499999999999998,
     "dark_light": -0.15000000000000002,
     "space_time": 0.1,
-    "destruction_creation": -0.05
+    "destruction_creation": 0
   },
   "attunement": 32,
   "maxHealth": 201,
   "health": 201,
   "maxEnergy": 292,
-  "energy": 251,
+  "energy": 227,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -2376,6 +2376,21 @@
       "spread": [],
       "day": 18,
       "worldDay": 78
+    },
+    {
+      "at": "2026-09-20T11:54:19.222Z",
+      "locationId": "gen-whistling-woman-post",
+      "communityId": null,
+      "description": "Held a catastrophic structural failure sound while a vast machine continued its work—asked something without voice to keep listening while broken, and it obeyed.",
+      "tags": [
+        "craft",
+        "valor",
+        "communion"
+      ],
+      "weight": 2,
+      "spread": [],
+      "day": 18,
+      "worldDay": 82
     }
   ],
   "relationships": {},
@@ -2483,51 +2498,42 @@
         "player": "Use OPEN Material to remove the broken pieces at the same time as Raised thing to rebuild those pieces in place.",
         "summary": "In the reclamation system's hollow, Silas attempts a braided working to unmake and remake the catastrophic bearing failure—but the scale of the system's continuing pulse is too vast, and the working scatters under the strain.",
         "narration": "You descend again into the seam where the system's pulse runs, the waymarker held steady in one hand, and you reach toward the broken place with both crafts braided tight—Open Material to strip the shattered bearing down to its component pieces, and Raised Thing to rebuild those same pieces into something whole again, all in one breath, one working.\n\nThe pull begins. You can feel the bearing's fracture-lines sing under your touch—metal and worn stone, the old mechanism's own structure wanting to come apart. You draw the working into the seam, asking it to unmake and remake in a single motion, to show the system what it was before the break, what it could be again.\n\nBut the system is too large. The working is too small. The bearing is part of a mechanism that has been running for forty years, and the strain of holding that enormous patient pulse while you ask it to release one tiny piece is like asking a river to stop flowing while you repair a single stone in its bed. The pull frays. The working scatters. The bearing is still broken, still singing its broken song, and your hands are shaking with the reach you extended and could not hold.\n\nMaren's shadow falls across the seam. She does not speak. She does not need to. The working failed not because it was wrong, but because the scale was wrong—because you tried to repair a machine's wound while the machine is still bleeding."
+      },
+      {
+        "player": "Reach toward the bearing again with just Raised Thing—rebuild only what you can hold, and hold it while the system continues its work.",
+        "summary": "In the reclamation system's hollow, Silas Weir learns that the catastrophic bearing failure cannot be unmade and remade—but it can be held sound while the system continues its work. Maren affirms the path forward: tend from outside, ask the system to listen, trust it to finish.",
+        "narration": "You pull back from the scattered working and breathe—one long, steady breath—and then you reach again into the seam, this time with only Raised Thing held bright in your hands. No unmaking. No doubling the working. Just the craft that knows how to hold something sound under pressure, how to make a thing want to stay whole.\n\nYou touch the bearing's shattered edges and you ask it plainly: *Stay.* Not forever. Not past the system's own work. Just long enough for the seam to finish what it was meant to finish.\n\nThe bearing answers. Metal sings—not a scream this time, but a note that holds. The fractured pieces settle into alignment under your touch, and the system's pulse moves through them, patient and certain, no longer tearing itself wider. The break is not healed. But it is held. And held is enough.\n\nMaren's hand finds your shoulder from above, her grip steady and warm. When you climb back toward the light, her eyes are on you—the warden's complete attention, and in it, acknowledgment: *You have done what needs doing. The rest is the system's to finish.*\n\nThe waymarker's channels still listen. The seam still sings. And the remedy, at last, is clear: the system must continue hearing—must listen to the valley's need and to your father's new order both—while the break it carries completes its deepening. Tend it from outside. Ask it to go on. Trust what it was made to do."
       }
     ],
     "lastTurn": {
-      "narration": "You descend again into the seam where the system's pulse runs, the waymarker held steady in one hand, and you reach toward the broken place with both crafts braided tight—Open Material to strip the shattered bearing down to its component pieces, and Raised Thing to rebuild those same pieces into something whole again, all in one breath, one working.\n\nThe pull begins. You can feel the bearing's fracture-lines sing under your touch—metal and worn stone, the old mechanism's own structure wanting to come apart. You draw the working into the seam, asking it to unmake and remake in a single motion, to show the system what it was before the break, what it could be again.\n\nBut the system is too large. The working is too small. The bearing is part of a mechanism that has been running for forty years, and the strain of holding that enormous patient pulse while you ask it to release one tiny piece is like asking a river to stop flowing while you repair a single stone in its bed. The pull frays. The working scatters. The bearing is still broken, still singing its broken song, and your hands are shaking with the reach you extended and could not hold.\n\nMaren's shadow falls across the seam. She does not speak. She does not need to. The working failed not because it was wrong, but because the scale was wrong—because you tried to repair a machine's wound while the machine is still bleeding.",
-      "sceneSummary": "In the reclamation system's hollow, Silas attempts a braided working to unmake and remake the catastrophic bearing failure—but the scale of the system's continuing pulse is too vast, and the working scatters under the strain.",
+      "narration": "You pull back from the scattered working and breathe—one long, steady breath—and then you reach again into the seam, this time with only Raised Thing held bright in your hands. No unmaking. No doubling the working. Just the craft that knows how to hold something sound under pressure, how to make a thing want to stay whole.\n\nYou touch the bearing's shattered edges and you ask it plainly: *Stay.* Not forever. Not past the system's own work. Just long enough for the seam to finish what it was meant to finish.\n\nThe bearing answers. Metal sings—not a scream this time, but a note that holds. The fractured pieces settle into alignment under your touch, and the system's pulse moves through them, patient and certain, no longer tearing itself wider. The break is not healed. But it is held. And held is enough.\n\nMaren's hand finds your shoulder from above, her grip steady and warm. When you climb back toward the light, her eyes are on you—the warden's complete attention, and in it, acknowledgment: *You have done what needs doing. The rest is the system's to finish.*\n\nThe waymarker's channels still listen. The seam still sings. And the remedy, at last, is clear: the system must continue hearing—must listen to the valley's need and to your father's new order both—while the break it carries completes its deepening. Tend it from outside. Ask it to go on. Trust what it was made to do.",
+      "sceneSummary": "In the reclamation system's hollow, Silas Weir learns that the catastrophic bearing failure cannot be unmade and remade—but it can be held sound while the system continues its work. Maren affirms the path forward: tend from outside, ask the system to listen, trust it to finish.",
       "choices": [
         {
-          "label": "Ask Maren what shoring would require—how much material, what kind of knowledge, what the cost in effort would be.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
+          "label": "Climb out of the hollow and bring word back to the post—the remedy is clear, and Mara needs to hear it before the convene votes at noon.",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "axes": {
+            "chaos_order": 0.3
+          },
           "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "study",
-            "careful"
+            "travel"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Reach toward the bearing again with just Raised Thing—rebuild only what you can hold, and hold it while the system continues its work.",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "axes": {},
-          "difficulty": "very hard",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "craft",
-            "endure"
-          ],
-          "abilityId": "raised_thing",
-          "energyCost": 4,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Climb back to the threshold and tell Mara the system cannot be repaired from inside its own pulse—the break must be shored from the structure itself, from outside.",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {},
+          "label": "Ask Maren to read the seam one more time with you—to confirm together that the system will hold, and that the valley's remedy is sound.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "falsehood_truth": 0.4
+          },
           "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
@@ -2535,41 +2541,86 @@
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Ask the waymarker directly what the system needs to hold the break steady long enough for the filtration work to complete.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": "hard",
+          "label": "Set a boundary-ward at the hollow's entrance—mark it plainly so Mara's crew knows the system is attended and the seam must not be disturbed.",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "axes": {
+            "chaos_order": 0.3
+          },
+          "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
-            "study"
+            "craft"
           ],
-          "abilityId": "order_sense",
+          "abilityId": "boundary_stone",
           "energyCost": 2,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
+        },
+        {
+          "label": "Ask Maren plainly: what does she need from you now, and what will she do when you have gone?",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "falsehood_truth": 0.4
+          },
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
-      "deeds": [],
+      "deeds": [
+        {
+          "description": "Held a catastrophic structural failure sound while a vast machine continued its work—asked something without voice to keep listening while broken, and it obeyed.",
+          "tags": [
+            "craft",
+            "valor",
+            "communion"
+          ],
+          "weight": 2,
+          "communityId": null
+        }
+      ],
       "characterDeltas": {
         "health": 0,
-        "energy": -8,
+        "energy": -35,
         "inventoryAdd": [],
         "inventoryRemove": [],
-        "xp": 0
+        "xp": 20
       },
-      "ledgerEvents": [],
+      "ledgerEvents": [
+        {
+          "what": "The reclamation system's bearing failure has been held sound—it will not widen further while the system completes its work.",
+          "tags": [
+            "remedy",
+            "craft",
+            "watershed"
+          ],
+          "visibility": "witnessed",
+          "spectrumDeltas": {},
+          "impactsLocal": true
+        }
+      ],
       "questUpdates": [
         {
           "op": "progress",
           "questId": "the-light-that-will-not-dim",
-          "note": "The reclamation system's structural failure is now understood: a bearing gave way three days ago, deepening with every pulse. The remedy is not to repair it from inside, but to shore it from outside while it completes its work."
+          "title": "The Light That Will Not Dim",
+          "summary": "Find who benefits from the light winning.",
+          "giver": "high_luminary",
+          "note": "The water crisis is structural—the reclamation system's bearing failure proves the pole-pull is real. The readings Silas retrieved from Grael's archive carry the proof. The convene votes at noon.",
+          "xpReward": null
         }
       ],
       "standingOps": [],
@@ -2577,36 +2628,53 @@
       "jobOps": [],
       "arcOps": [],
       "adoptSchool": null,
-      "offer": null,
+      "offer": {
+        "thing": "Maren's full attention and the weight of her acknowledgment—a legendary warden affirming that what you have done is the remedy the valley needs.",
+        "from": "The craft of holding what cannot be healed, only tended. Maren has buried more than she has known; she knows when a thing is finished and when a thing is only held long enough to finish itself."
+      },
       "stageOps": [],
       "scene": {
-        "setting": "Deep in the moorland hollow beneath the ridge, in the reclamation system's waking chamber. Stone walls worn smooth by the system's pulse. The seam where the failure lies runs deep and patient beneath your feet, still bleeding its slow song into the darkness.",
+        "setting": "Deep in the moorland hollow beneath the ridge, in the reclamation system's waking chamber. Stone walls worn smooth by the system's pulse. The seam where the failure lies runs deep and patient beneath your feet—no longer widening, held sound by Raised Thing, singing its note of continuing work.",
         "npcsPresent": [
           {
             "name": "Maren Ossitide",
-            "state": "Standing at the threshold above, watching. Her complete attention gathered at the seam, reading the break beneath the stone as you work. Her shadow falls across the light when the working scatters."
+            "state": "Standing at the threshold above, her complete attention gathered at the seam. One hand rests steady on your shoulder. Her eyes track the waking machinery with the patience of someone who has attended a thousand endings."
           }
         ],
         "objects": [
           "The waymarker, held steady in one hand, its channels still open and listening",
-          "The deep seam where the system's pulse lives, still moving beneath the stone",
+          "The deep seam where the system's pulse lives, now held sound, still moving beneath the stone",
           "Stone walls worn smooth by centuries of the system's work"
         ],
         "threads": [
-          "What shoring a break this vast would require—materials, knowledge, reach",
-          "Whether the system can hold long enough to finish the filtration work",
-          "The convene vote at noon today on pole-pull as the crisis's source"
+          "Whether the system will hold long enough to finish the filtration work",
+          "The convene vote at noon today on pole-pull as the crisis's source—and whether Mara will have the proof in time to present it"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "maren-ossitide",
-          "note": "Watched the braided working fail under the scale of the system's pulse. Did not move. Did not speak until the working scattered. The warden's judgment is plain: this is not a repair that can be done from inside."
+          "name": "Maren Ossitide",
+          "role": "Legendary Ashwarden warden; co-keeper of the universal shrine; attending the reclamation system's waking",
+          "learned": [
+            "She can read a pre-Transition system's catastrophic failure and name its moment plainly—three days, a bearing or seal, the old mechanism giving way",
+            "She affirms that a system can be tended from outside while broken—asked to listen, asked to continue hearing, asked to finish its work"
+          ],
+          "note": "At the seam's threshold, Maren watched Silas hold the bearing sound and laid a hand on his shoulder—acknowledgment without words. The warden recognizes when the remedy is found.",
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "In the reclamation system's hollow, reading the seam with complete attention. Will attend the system's final work while Silas carries word to the valley."
         }
       ],
       "intentsHeard": [],
-      "factUpdates": [],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "The reclamation system's bearing failure has been held sound using Raised Thing—it will not widen further while the system continues its work to completion. The remedy is not to repair the old mechanism, but to ask the system to listen to both its original purpose and Silas's father's new order, and to tend the break from outside.",
+          "subjectId": null
+        }
+      ],
       "placeUpdates": [],
       "discovery": null,
       "codexUpdates": [
@@ -2614,14 +2682,12 @@
           "topic": "the-water-crisis",
           "label": "The Water Crisis",
           "kind": "mystery",
-          "fact": "The reclamation system's catastrophic bearing failure cannot be repaired from inside its own pulse. A braided working of Open Material and Raised Thing scattered under the strain of the system's continuing pulse. The break must be shored from the structure itself—from outside the seam—while the system completes its filtration work.",
+          "entityId": null,
+          "fact": "The reclamation system's bearing failure is now held sound. The remedy is not to stop the system or to repair it from within—it is to ask the system to continue hearing while tending the break from outside. The filtration will complete. The watershed will clear.",
           "links": [
-            "huginn",
-            "maren-ossitide",
+            "the-light-that-will-not-dim",
             "whistling-woman-post",
-            "the-poles-pull",
-            "silas-father-the-fold-weir",
-            "what-wakes-beneath",
+            "maren-ossitide",
             "the-received-ending"
           ]
         }
@@ -2629,6 +2695,7 @@
       "holdingOps": [],
       "holdTrades": [],
       "debtOps": [],
+      "exchangeOps": [],
       "partyOps": [],
       "generateRequest": [],
       "encounterOps": [],
@@ -2639,38 +2706,46 @@
       "newEncounter": null,
       "unlockPrecursor": null,
       "unlockSubstrate": null,
-      "timeOps": null,
+      "timeOps": {
+        "hoursPassed": 0,
+        "why": "The hollow holds the moment—deep night, the work continuing, time measured in the system's pulse"
+      },
       "moveTo": null,
       "stateOps": [],
       "itemUpdates": [],
       "deriveItem": null,
-      "imagePrompt": null,
+      "imagePrompt": "A warden's hand on a wright's shoulder in the deep stone—one who has buried more than she has known, affirming that the remedy is held, that the broken thing can be tended, that the work will finish. Behind them, the seam sings its steady note, no longer widening.",
       "imageMedium": null,
       "newAbility": null,
       "gambitOps": null,
       "gambitApt": false,
-      "sceneEnded": false
+      "markDefiningMoment": null,
+      "markTeacher": null,
+      "offerPromotion": null,
+      "offerAcquisition": null,
+      "offerIntent": null,
+      "sceneEnded": false,
+      "momentArt": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/A%20warden's%20hand%20on%20a%20wright's%20shoulder%20in%20the%20deep%20stone%E2%80%94one%20who%20has%20buried%20more%20than%20she%20has%20known%2C%20affirming%20that%20the%20remedy%20is%20held%2C%20that%20the%20broken%20thing%20can%20be%20tended%2C%20that%20the%20work%20will%20finish.%20Behind%20them%2C%20the%20seam%20sings%20its%20steady%20note%2C%20no%20longer%20widening.%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=10999&nologo=true"
     },
     "sceneState": {
-      "setting": "Deep in the moorland hollow beneath the ridge, in the reclamation system's waking chamber. Stone walls worn smooth by the system's pulse. The seam where the failure lies runs deep and patient beneath your feet, still bleeding its slow song into the darkness.",
+      "setting": "Deep in the moorland hollow beneath the ridge, in the reclamation system's waking chamber. Stone walls worn smooth by the system's pulse. The seam where the failure lies runs deep and patient beneath your feet—no longer widening, held sound by Raised Thing, singing its note of continuing work.",
       "npcsPresent": [
         {
           "name": "Maren Ossitide",
-          "state": "Standing at the threshold above, watching. Her complete attention gathered at the seam, reading the break beneath the st"
+          "state": "Standing at the threshold above, her complete attention gathered at the seam. One hand rests steady on your shoulder. She"
         }
       ],
       "objects": [
         "The waymarker, held steady in one hand, its channels still open and listening",
-        "The deep seam where the system's pulse lives, still moving beneath the stone",
+        "The deep seam where the system's pulse lives, now held sound, still moving benea",
         "Stone walls worn smooth by centuries of the system's work"
       ],
       "threads": [
-        "What shoring a break this vast would require—materials, knowledge, reach",
-        "Whether the system can hold long enough to finish the filtration work",
-        "The convene vote at noon today on pole-pull as the crisis's source"
+        "Whether the system will hold long enough to finish the filtration work",
+        "The convene vote at noon today on pole-pull as the crisis's source—and whether Mara will have the proof in time to present it"
       ]
     },
-    "beats": 4,
+    "beats": 5,
     "subPlace": null
   },
   "clock": {
@@ -3722,14 +3797,14 @@
         "s1"
       ],
       "progress": [
-        "Archive layout and watchers mapped via Veth. Grael's seal-question remains: what does he fear ending? Answer must be true or the seal hardens. Three days to convene.",
         "Readings retrieved from Archive at cost of triggering warden-mark. Veth will know. Convene in three days.",
         "Readings retrieved from Archive—concrete proof that pole-pull is the real cause. Three days before convene votes on whether to accept the evidence. Calvar can present; the method of retrieval (cabinet broken, warden-mark triggered) is a liability.",
         "Readings retrieved and urgent—Bryn Calowell, a Radiant who understands the Archive's technical language, is being brought to the post to help decode and contextualize them for presentation.",
         "The universal shrine at the Made Gate stands as completed proof that balance holds—and is now actively defended against foreclosure. The valley has tangible evidence that all-traditions work when each comes in good faith.",
         "The universal shrine stands as completed proof that balance holds—and is now actively defended against foreclosure through Named Exclusion. The valley has tangible evidence that all-traditions work when each comes in good faith, and a pilgrimage path that will draw them back.",
         "The water crisis's true source is now known: a pre-Transition reclamation system waking under two nested orders—the original purpose (prepare the watershed) and Silas's father's new instruction (complete gently and stop). The system is failing structurally as it works, deepening a catastrophic break that occurred three days ago. The remedy is not to stop it but to ask it to continue while the break is shored.",
-        "The reclamation system's structural failure is now understood: a bearing gave way three days ago, deepening with every pulse. The remedy is not to repair it from inside, but to shore it from outside while it completes its work."
+        "The reclamation system's structural failure is now understood: a bearing gave way three days ago, deepening with every pulse. The remedy is not to repair it from inside, but to shore it from outside while it completes its work.",
+        "The water crisis is structural—the reclamation system's bearing failure proves the pole-pull is real. The readings Silas retrieved from Grael's archive carry the proof. The convene votes at noon."
       ],
       "aliases": [],
       "startedAt": "2026-07-24T12:58:53.302Z",
@@ -5662,7 +5737,6 @@
       },
       "relationship": 2,
       "history": [
-        "[d17] Revealed in full warden-form at the completion of the universal shrine; accepted Silas's invitation to join the party; accepted co-wardenship of the Named Exclusion threshold at the Made Gate; seated at table for dinner in human form, fully embodied and unhidden; scarred hands and weathered face…",
         "[d17] Sits at the table in the Whistling Woman post in warden-form, revealed and no longer hidden. Accepted co-wardenship of the universal shrine. Present and attentive as Silas recalls the introductions.",
         "[d18] Accepted Silas's invitation to fly north over the moorland to scout what moves wrong in the dark. Rises in full warden-form, steady and unhurried.",
         "[d18] Departed the Whistling Woman post at deep night in warden-form, rising on shadow-wings with Silas to scout the moorland stirring north. Said: 'I have waited fifteen years to fly with you again. I am ready.' Flying steady and attentive beside him.",
@@ -5671,17 +5745,18 @@
         "[d18] Received Silas's naming as the seed of the singularity and answered 'Yes'—recognition, not agreement. Folded her wings beside his and dove with him into the hollow. The system accepted the reach.",
         "[d18] You know this person's name now: Maren (Marrow) Ossitide (was \"Maren Ossitide\")",
         "[d18] Maren named the reclamation site's purpose aloud—to prepare the watershed—and revealed she can reach the system directly. She dove with Silas into the hollow. Now stands at the threshold, scarred hands steady, waiting to see what the system will accept from warden and wright together.",
-        "[d18] At the reclamation system's threshold, Maren reads the waking-moment aloud as a system that was never meant to wake alone. She understood Silas's use of Memory as a bridge and pressed her own hand against the lattice to focus the system's attention. She is steady. She is present. She is reading."
+        "[d18] At the reclamation system's threshold, Maren reads the waking-moment aloud as a system that was never meant to wake alone. She understood Silas's use of Memory as a bridge and pressed her own hand against the lattice to focus the system's attention. She is steady. She is present. She is reading.",
+        "[d18] At the seam's threshold, Maren watched Silas hold the bearing sound and laid a hand on his shoulder—acknowledgment without words. The warden recognizes when the remedy is found."
       ],
       "knownFacts": [
-        "She allowed the revelation at the shrine's completion—not before, not after, but at that exact threshold",
-        "She accepted Silas's invitation to travel with the company without ceremony or condition",
         "She is comfortable in human form among the party, seated at a common table, present for dinner and counsel",
         "The luminescence is not a death—Deathsense finds nothing ending, but something that was made to sleep is breaking",
         "The reclamation site's original instruction still runs in its bones beneath the new order given",
         "The system is unfinished—the old purpose is still moving toward completion",
         "A system made to prepare can wake without listening to anything but its own purpose",
-        "The harm it causes is not malice—it is a machine doing exactly what it was made to do, forever, without the capacity to hear what else is breaking"
+        "The harm it causes is not malice—it is a machine doing exactly what it was made to do, forever, without the capacity to hear what else is breaking",
+        "She can read a pre-Transition system's catastrophic failure and name its moment plainly—three days, a bearing or seal, the old mechanism giving way",
+        "She affirms that a system can be tended from outside while broken—asked to listen, asked to continue hearing, asked to finish its work"
       ],
       "skillsObserved": [
         "Judgment of endings and what they mean",
@@ -5699,7 +5774,7 @@
       "kin": "sworn",
       "image": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/timeless%20grey%20highlights%20attention%20eyes%20feathers%20full%20figure%2C%20great%20death%20raven%20beautiful%20powerful%20woman%2C%20Maren%20(Marrow)%20Ossitide%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=20894&nologo=true",
       "_portraitTier": "sworn",
-      "statusNote": "Active, at the reclamation system's hollow, in warden-form, reading the system's purpose with complete attention",
+      "statusNote": "In the reclamation system's hollow, reading the seam with complete attention. Will attend the system's final work while Silas carries word to the valley.",
       "domains": {
         "primary": "ashwarden"
       },
@@ -5708,7 +5783,7 @@
         "locationId": "gen-whistling-woman-post",
         "day": 18
       },
-      "met": 12,
+      "met": 13,
       "aliases": [
         "Huginn",
         "Marrow",
@@ -7052,12 +7127,8 @@
     "lastTickWorldDay": 82,
     "lastCanonWorldDay": 82,
     "lastGenCount": 1979,
-    "turnsSinceOffer": 4,
+    "turnsSinceOffer": 0,
     "recentOffers": [
-      {
-        "thing": "Bryn Calowell arrives with news that the Threshold Post is complete and ready, and that something in the moorland north is moving wrong",
-        "from": "Fendt's concern transmitted through Logana, and the world's own stirring that Deni named—the moorland's silence has become active, and the…"
-      },
       {
         "thing": "Maren's listening—she hears something in the dark that the message confirms. Her attention is not casual.",
         "from": "What Wakes Beneath stirring in the moorland; Maren's warden-sense carrying news before the words did"
@@ -7073,6 +7144,10 @@
       {
         "thing": "The waymarker's lattice reveals itself as a listening-place—not a carrier of bonds but a threshold that *answers* them",
         "from": "your father's work, still unfinished, still waiting for what it was made to receive"
+      },
+      {
+        "thing": "Maren's full attention and the weight of her acknowledgment—a legendary warden affirming that what you have done is the remedy the valley…",
+        "from": "The craft of holding what cannot be healed, only tended. Maren has buried more than she has known; she knows when a thing is finished and…"
       }
     ],
     "wantProgress": {
@@ -16506,7 +16581,6 @@
         "label": "The Water Crisis",
         "kind": "mystery",
         "facts": [
-          "[d16] The universal shrine at the Made Gate stands as proof that balance can hold—the pole-pull's ending is not marked by any single tradition claiming victory, but by all peoples standing in one unmarked, open place.",
           "[d17] The universal shrine at the Made Gate stands as proof that balance can hold—the pole-pull's ending is not marked by any single tradition claiming victory, but by all peoples standing in one unmarked, open place. Marrow affirmed this as the shrine's true purpose.",
           "[d13] Warden Coll confirmed: the committee can move on a named authority and a signed witness account without a full council vote. He asked for the document roll, a signed statement naming Grael, and a check-in protocol before Silas enters the Zone. Formal aid requests to the Rootkin and Cogitants are…",
           "[d13] Warden Coll witnessed the shadow-architecture of the valley's water infrastructure raised from the Waymarker and The Shadow Work on his desk — the conduit-lines, intake sleeves, and Disputed Zone survey-grid fringe all visible for thirty seconds before the detail at the failure points blurred. He…",
@@ -16529,17 +16603,18 @@
           "[d18] The reclamation system wakes with two orders nested together: the original purpose (prepare the watershed) and Silas's father's instruction (complete the task and stop, with attention paid). The system hears both and is executing both. The remedy is not to stop it but to ask it to continue…",
           "[d18] The reclamation system's waking moment carries a catastrophic echo—something gave way all at once in its history, metal shrieking against stone. The system's pulse continues beneath the failure, patient and certain, but it wakes over a break that is still there.",
           "[d18] The reclamation system carries two orders nested together. The original purpose runs beneath Silas's father's new instruction. The system wakes gently, learning to listen—but it wakes over a catastrophic structural break that occurred three days ago. The break deepens with every pulse. The remedy…",
-          "[d18] The reclamation system's catastrophic bearing failure cannot be repaired from inside its own pulse. A braided working of Open Material and Raised Thing scattered under the strain of the system's continuing pulse. The break must be shored from the structure itself—from outside the seam—while the…"
+          "[d18] The reclamation system's catastrophic bearing failure cannot be repaired from inside its own pulse. A braided working of Open Material and Raised Thing scattered under the strain of the system's continuing pulse. The break must be shored from the structure itself—from outside the seam—while the…",
+          "[d18] The reclamation system's bearing failure is now held sound. The remedy is not to stop the system or to repair it from within—it is to ask the system to continue hearing while tending the break from outside. The filtration will complete. The watershed will clear."
         ],
         "links": [
-          "huginn",
           "maren-ossitide",
           "whistling-woman-post",
           "the-poles-pull",
           "silas-father-the-fold-weir",
           "overseer-grael",
           "what-wakes-beneath",
-          "the-received-ending"
+          "the-received-ending",
+          "the-light-that-will-not-dim"
         ],
         "aliases": [
           "The Water Crisis (ongoing)"
@@ -16575,7 +16650,8 @@
           "[d16] The moorland's substrate lattice is measurably thin—craft-work here runs starved and unpredictable. Unknown cause or extent.",
           "[d16] The buried readings in Grael's cabinet are the only proof the committee will accept that pole-pull is the real cause. Three days before the convene decision.",
           "[d16] Proof retrieved: the Archive's buried readings show pole-pull as the true cause. The readings are dated, numbered, and undeniable. Grael sealed them away.",
-          "[d16] The readings are retrieved and proof is concrete—the pole-pull is the true cause, documented in dated measurements from the Archive. Presentation to the convene in three days will determine whether the valley accepts the evidence and pivots to long-term mitigation or continues the blame-game."
+          "[d16] The readings are retrieved and proof is concrete—the pole-pull is the true cause, documented in dated measurements from the Archive. Presentation to the convene in three days will determine whether the valley accepts the evidence and pivots to long-term mitigation or continues the blame-game.",
+          "[d16] The universal shrine at the Made Gate stands as proof that balance can hold—the pole-pull's ending is not marked by any single tradition claiming victory, but by all peoples standing in one unmarked, open place."
         ]
       },
       "dara-holt-the-ditch-mother": {
@@ -18653,22 +18729,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 21.185997805658943,
-    "cerebral": 19.16825699333934,
-    "social": 12.556575548614251,
-    "generous": 6.503068210584988,
-    "cautious": 4.628139137327623,
-    "physical": 0.13977039627597204,
-    "risky": 0.40607046549315123,
-    "ruthless": 0.07296853297329249,
-    "carousing": 0.7665084186024721,
-    "amorous": 1.8021209544210757,
-    "patient": 0.24534276353283024,
-    "stealth": 0.000002550184668879075,
-    "devotion": 0.10420896536210839,
-    "craft": 3.0308780598523453,
-    "leadership": 1.6910400689631067,
-    "deception": 0.012212459361102823
+    "strategic": 20.656347860517467,
+    "cerebral": 18.689050568505856,
+    "social": 12.242661159898894,
+    "generous": 6.340491505320363,
+    "cautious": 4.512435658894432,
+    "physical": 0.13627613636907274,
+    "risky": 0.39591870385582245,
+    "ruthless": 0.07114431964896017,
+    "carousing": 0.7473457081374103,
+    "amorous": 1.7570679305605488,
+    "patient": 1.2392091944445094,
+    "stealth": 0.000002486430052157098,
+    "devotion": 0.10160374122805567,
+    "craft": 3.9551061083560364,
+    "leadership": 1.648764067239029,
+    "deception": 0.011907147877075253
   },
   "aptitudes": [
     "strategist",
@@ -18677,10 +18753,18 @@
     "tactician",
     "sage"
   ],
-  "actionCount": 996,
+  "actionCount": 997,
   "grantsVersion": 1,
   "reconcileVersion": 72,
   "gallery": [
+    {
+      "kind": "moment",
+      "prompt": "A warden's hand on a wright's shoulder in the deep stone—one who has buried more than she has known, affirming that the remedy is held, that the broken thing can be tended, that the work will finish. ",
+      "url": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/A%20warden's%20hand%20on%20a%20wright's%20shoulder%20in%20the%20deep%20stone%E2%80%94one%20who%20has%20buried%20more%20than%20she%20has%20known%2C%20affirming%20that%20the%20remedy%20is%20held%2C%20that%20the%20broken%20thing%20can%20be%20tended%2C%20that%20the%20work%20will%20finish.%20Behind%20them%2C%20the%20seam%20sings%20its%20steady%20note%2C%20no%20longer%20widening.%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=10999&nologo=true",
+      "caption": "In the reclamation system's hollow, Silas Weir learns that the catastrophic bearing failur",
+      "worldDay": 82,
+      "at": "2026-09-20T11:54:19.257Z"
+    },
     {
       "kind": "battle",
       "prompt": "Two figures — a grey-haired wanderer in layered road-worn cloth, and a guardian at a breached wall — the wanderer drives through, reeling but upright, ash-grey hair loose, crossing the threshold betwe",
@@ -19845,8 +19929,8 @@
     }
   ],
   "portrait": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1789905071700,
-  "rev": 2214,
+  "updatedAt": 1789905259257,
+  "rev": 2217,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -23431,6 +23515,12 @@
       "text": "The reclamation system's catastrophic failure occurred three days ago—a bearing or seal gave way in the old mechanism. The system continues winding over this break, deepening it with every pulse. The break cannot repair itself; it must be shored from outside while the system completes its work.",
       "day": 18,
       "subjectId": null
+    },
+    {
+      "id": "f65",
+      "text": "The reclamation system's bearing failure has been held sound using Raised Thing—it will not widen further while the system continues its work to completion. The remedy is not to repair the old mechanism, but to ask the system to listen to both its original purpose and Silas's father's new order…",
+      "day": 18,
+      "subjectId": null
     }
   ],
   "practice": {
@@ -23474,7 +23564,7 @@
       "open_material": 2,
       "the_attended_end": 46,
       "echo_memory": 1,
-      "raised_thing": 1
+      "raised_thing": 2
     },
     "coActivations": {
       "lightsense+numen_sense": 1,
@@ -23582,7 +23672,7 @@
       "wildcraft": 74,
       "open_material": 81,
       "echo_memory": 81,
-      "raised_thing": 81
+      "raised_thing": 82
     }
   },
   "companionBonds": {
@@ -24381,7 +24471,7 @@
   "syncedAt": 1789699239405,
   "teachers": {},
   "regionsKnown": {
-    "valley": 699,
+    "valley": 700,
     "the_palelands": 6,
     "the_center": 151,
     "the_echo_vale": 14
@@ -24725,6 +24815,14 @@
       "lastAt": "2026-09-19T11:32:11.571Z",
       "startDay": 81,
       "endDay": 81,
+      "beats": 1
+    },
+    {
+      "id": "sess-38",
+      "startedAt": "2026-09-20T11:54:19.222Z",
+      "lastAt": "2026-09-20T11:54:19.222Z",
+      "startDay": 82,
+      "endDay": 82,
       "beats": 1
     }
   ],
@@ -25247,25 +25345,25 @@
     "gen-whistling-woman-post": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Small%20wooden%20watchpost%20beside%20a%20shimmering%20dark%20portal%2C%20woman%20silhouetted%20in%20doorway%20whistling%2C%20dusty%20road%20converging%20toward%20her%2C%20twilight%20atmosphere.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=34173&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 373,
-    "choices": 372,
-    "characterDeltas": 199,
-    "scene": 373,
-    "npcUpdates": 323,
-    "factUpdates": 42,
+    "sceneSummary": 374,
+    "choices": 373,
+    "characterDeltas": 200,
+    "scene": 374,
+    "npcUpdates": 324,
+    "factUpdates": 43,
     "placeUpdates": 80,
-    "codexUpdates": 222,
-    "timeOps": 328,
-    "imagePrompt": 44,
-    "sceneEnded": 146,
+    "codexUpdates": 223,
+    "timeOps": 329,
+    "imagePrompt": 45,
+    "sceneEnded": 147,
     "itemUpdates": 9,
-    "questUpdates": 51,
-    "offer": 58,
+    "questUpdates": 52,
+    "offer": 59,
     "moveTo": 20,
     "delegateOps": 6,
-    "deeds": 26,
+    "deeds": 27,
     "standingOps": 6,
-    "ledgerEvents": 15,
+    "ledgerEvents": 16,
     "discovery": 6,
     "stageOps": 16,
     "generateRequest": 13,
@@ -25274,7 +25372,7 @@
     "_applyFailedOp": 8,
     "newEncounter": 3,
     "encounterOps": 1,
-    "gambitApt": 73,
+    "gambitApt": 74,
     "markDefiningMoment": 1,
     "_engineClosedScene": 6,
     "gambitOps": 1,
@@ -25282,7 +25380,7 @@
     "partyOps": 3,
     "stateOps": 1
   },
-  "_opTurns": 373,
+  "_opTurns": 374,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -25290,7 +25388,7 @@
   },
   "_opLedger": {
     "offer": {
-      "applied": 63,
+      "applied": 64,
       "rejected": 2,
       "lastWhy": "rejected-shape"
     },
@@ -25404,11 +25502,6 @@
         "day": 14
       },
       {
-        "text": "Retrieved proof of the water crisis's true cause—buried readings from the sealed Archive cabinet—at the cost of breaking Grael's seal-mark and triggering the March's warden-alert.",
-        "weight": 2,
-        "day": 16
-      },
-      {
         "text": "Forged a novel craft-braiding that manifests shadow as persistent structural model—a threshold-post's purpose made visible and revisable in real time.",
         "weight": 2,
         "day": 16
@@ -25450,6 +25543,11 @@
       },
       {
         "text": "Reached into a waking pre-Transition system and named the source of its harm—not to stop it, but to ask it to hear.",
+        "weight": 2,
+        "day": 18
+      },
+      {
+        "text": "Held a catastrophic structural failure sound while a vast machine continued its work—asked something without voice to keep listening while broken, and it obeyed.",
         "weight": 2,
         "day": 18
       }
@@ -25545,7 +25643,25 @@
   "_stageOpRefusals": [
     "the-water-crisis: no-such-quest"
   ],
-  "_pendingLedger": [],
+  "_pendingLedger": [
+    {
+      "schemaVersion": 1,
+      "at": "2026-09-20T11:54:19.241Z",
+      "worldDay": 82,
+      "who": "char-mrhs8286",
+      "playerKey": "player-s9z9u1",
+      "where": "gen-whistling-woman-post",
+      "what": "The reclamation system's bearing failure has been held sound—it will not widen further while the system completes its work.",
+      "tags": [
+        "remedy",
+        "craft",
+        "watershed"
+      ],
+      "spectrumDeltas": {},
+      "visibility": "witnessed",
+      "impactsLocal": true
+    }
+  ],
   "locationState": {},
   "_applyFailures": null,
   "activeEncounter": null,
@@ -26538,7 +26654,7 @@
     "negotiate": 4,
     "prepare": 16,
     "investigate": 8,
-    "craft": 8,
+    "craft": 9,
     "help": 11,
     "discipline": 2,
     "persuade": 3,
@@ -26562,7 +26678,8 @@
     "announce": 3,
     "retrieve": 1,
     "listen": 1,
-    "consult": 1
+    "consult": 1,
+    "endure": 1
   },
   "aptitudeEarnCount": {
     "silver_tongue": 1,
@@ -26800,6 +26917,14 @@
       "day": 18,
       "worldDay": 81,
       "actionCount": 993
+    },
+    {
+      "companionId": "marrow",
+      "kind": "deed",
+      "delta": 0.5,
+      "day": 18,
+      "worldDay": 82,
+      "actionCount": 996
     }
   ],
   "_standingOpRefusals": [
@@ -27642,447 +27767,459 @@
   ],
   "_promptRows": {
     "character": {
-      "reached": 6,
-      "produced": 6
+      "reached": 7,
+      "produced": 7
     },
     "location": {
-      "reached": 6,
-      "produced": 6
+      "reached": 7,
+      "produced": 7
     },
     "region": {
-      "reached": 6,
-      "produced": 6
+      "reached": 7,
+      "produced": 7
     },
     "groundDetail": {
-      "reached": 6,
+      "reached": 7,
       "produced": 0
     },
     "lore": {
-      "reached": 6,
+      "reached": 7,
       "produced": 0
     },
     "traditionMotiveDetail": {
-      "reached": 6,
-      "produced": 6
+      "reached": 7,
+      "produced": 7
     },
     "sheetsDetail": {
-      "reached": 6,
+      "reached": 7,
       "produced": 0
     },
     "rules": {
-      "reached": 6,
-      "produced": 6
+      "reached": 7,
+      "produced": 7
     },
     "recentTurns": {
-      "reached": 6,
-      "produced": 5
+      "reached": 7,
+      "produced": 6
     },
     "timeLabel": {
-      "reached": 6,
-      "produced": 6
+      "reached": 7,
+      "produced": 7
     },
     "npcRegistryDetail": {
-      "reached": 6,
-      "produced": 6
+      "reached": 7,
+      "produced": 7
     },
     "mintedUnmetDetail": {
-      "reached": 6,
-      "produced": 6
+      "reached": 7,
+      "produced": 7
     },
     "npcSeedDetail": {
-      "reached": 6,
-      "produced": 6
+      "reached": 7,
+      "produced": 7
     },
     "traditionVocab": {
-      "reached": 6,
-      "produced": 6
+      "reached": 7,
+      "produced": 7
     },
     "standingDetail": {
-      "reached": 6,
-      "produced": 6
+      "reached": 7,
+      "produced": 7
     },
     "recalledDetail": {
-      "reached": 6,
+      "reached": 7,
       "produced": 0
     },
     "bearingsDetail": {
-      "reached": 6,
-      "produced": 6
+      "reached": 7,
+      "produced": 7
     },
     "caravansDetail": {
-      "reached": 6,
+      "reached": 7,
       "produced": 0
     },
     "commandDetail": {
-      "reached": 6,
-      "produced": 6
+      "reached": 7,
+      "produced": 7
     },
     "presenceDetail": {
-      "reached": 6,
-      "produced": 6
+      "reached": 7,
+      "produced": 7
     },
     "worthHereDetail": {
-      "reached": 6,
+      "reached": 7,
       "produced": 0
     },
     "inventoryDetail": {
-      "reached": 6,
-      "produced": 6
+      "reached": 7,
+      "produced": 7
     },
     "sceneState": {
-      "reached": 6,
-      "produced": 5
-    },
-    "holdingsDetail": {
-      "reached": 6,
+      "reached": 7,
       "produced": 6
     },
+    "holdingsDetail": {
+      "reached": 7,
+      "produced": 7
+    },
     "debtsDetail": {
-      "reached": 6,
+      "reached": 7,
       "produced": 0
     },
     "carriedDetail": {
-      "reached": 6,
+      "reached": 7,
       "produced": 0
     },
     "abilityLawDetail": {
-      "reached": 6,
-      "produced": 6
+      "reached": 7,
+      "produced": 7
     },
     "questsDetail": {
-      "reached": 6,
-      "produced": 6
+      "reached": 7,
+      "produced": 7
     },
     "structuredQuestsDetail": {
-      "reached": 6,
-      "produced": 6
+      "reached": 7,
+      "produced": 7
     },
     "traditionArcDetail": {
-      "reached": 6,
-      "produced": 6
+      "reached": 7,
+      "produced": 7
     },
     "npcErrandsDetail": {
-      "reached": 6,
-      "produced": 6
+      "reached": 7,
+      "produced": 7
     },
     "codexDetail": {
-      "reached": 6,
-      "produced": 6
+      "reached": 7,
+      "produced": 7
     },
     "companionsDetail": {
-      "reached": 6,
-      "produced": 6
+      "reached": 7,
+      "produced": 7
     },
     "placeMemoryDetail": {
-      "reached": 6,
-      "produced": 6
+      "reached": 7,
+      "produced": 7
     },
     "agesMissingDetail": {
-      "reached": 6,
-      "produced": 6
+      "reached": 7,
+      "produced": 7
     },
     "newsDetail": {
-      "reached": 6,
-      "produced": 6
+      "reached": 7,
+      "produced": 7
     },
     "worldArcsDetail": {
-      "reached": 6,
-      "produced": 6
+      "reached": 7,
+      "produced": 7
     },
     "legendsPursuableDetail": {
-      "reached": 6,
-      "produced": 6
+      "reached": 7,
+      "produced": 7
     },
     "wakesDetail": {
-      "reached": 6,
+      "reached": 7,
       "produced": 0
     },
     "arcMoodDetail": {
-      "reached": 6,
-      "produced": 6
+      "reached": 7,
+      "produced": 7
     },
     "reachableDeadDetail": {
-      "reached": 6,
-      "produced": 6
+      "reached": 7,
+      "produced": 7
     },
     "threatToPlayer": {
-      "reached": 6,
+      "reached": 7,
       "produced": 0
     },
     "guardiansDetail": {
-      "reached": 6,
+      "reached": 7,
       "produced": 0
     },
     "resolution": {
-      "reached": 6,
-      "produced": 6
+      "reached": 7,
+      "produced": 7
     },
     "playerInput": {
-      "reached": 6,
+      "reached": 7,
       "produced": 0
     },
     "exactWords": {
-      "reached": 6,
+      "reached": 7,
       "produced": 5
     },
     "travelDirective": {
-      "reached": 6,
+      "reached": 7,
       "produced": 0
     },
     "itemAdvance": {
-      "reached": 6,
+      "reached": 7,
       "produced": 0
     },
     "encounterWeaveDetail": {
-      "reached": 6,
+      "reached": 7,
       "produced": 0
     },
     "encounterOfferDetail": {
-      "reached": 6,
+      "reached": 7,
       "produced": 0
     },
     "fightFramingDetail": {
-      "reached": 6,
+      "reached": 7,
       "produced": 0
     },
     "abilityGrantDetail": {
-      "reached": 6,
+      "reached": 7,
       "produced": 0
     },
     "stageRevealDetail": {
-      "reached": 6,
+      "reached": 7,
       "produced": 0
     },
     "itemEvolveDetail": {
-      "reached": 6,
+      "reached": 7,
       "produced": 0
     },
     "worldPressureDetail": {
-      "reached": 6,
+      "reached": 7,
       "produced": 1
     },
     "offerDetail": {
-      "reached": 6,
+      "reached": 7,
       "produced": 0
     },
     "teacherOfferDetail": {
-      "reached": 6,
+      "reached": 7,
       "produced": 0
     },
     "substrateDetail": {
-      "reached": 6,
+      "reached": 7,
       "produced": 2
     },
     "romanceGuidanceDetail": {
-      "reached": 6,
+      "reached": 7,
       "produced": 0
     },
     "factsDetail": {
-      "reached": 6,
-      "produced": 6
+      "reached": 7,
+      "produced": 7
     },
     "evolvedItemsDetail": {
-      "reached": 6,
+      "reached": 7,
       "produced": 0
     },
     "opLossNote": {
-      "reached": 6,
+      "reached": 7,
       "produced": 0
     },
     "emergenceDetail": {
-      "reached": 6,
+      "reached": 7,
       "produced": 0
     },
     "perilNote": {
-      "reached": 6,
+      "reached": 7,
       "produced": 0
     },
     "encounterDetail": {
-      "reached": 6,
+      "reached": 7,
       "produced": 0
     },
     "masteryDetail": {
-      "reached": 6,
-      "produced": 6
+      "reached": 7,
+      "produced": 7
     },
     "bookkeepingRestate": {
-      "reached": 6,
+      "reached": 7,
       "produced": 0
     },
     "anomalyDetail": {
-      "reached": 6,
-      "produced": 6
+      "reached": 7,
+      "produced": 7
     },
     "repairPanelDetail": {
-      "reached": 6,
-      "produced": 6
+      "reached": 7,
+      "produced": 7
     },
     "teacherDetail": {
-      "reached": 6,
+      "reached": 7,
       "produced": 0
     },
     "toolkitDetail": {
-      "reached": 6,
-      "produced": 6
+      "reached": 7,
+      "produced": 7
     },
     "availableEncounters": {
-      "reached": 6,
-      "produced": 6
+      "reached": 7,
+      "produced": 7
     },
     "partyDetail": {
-      "reached": 6,
+      "reached": 7,
       "produced": 0
     },
     "ratingDetail": {
-      "reached": 6,
-      "produced": 6
+      "reached": 7,
+      "produced": 7
     },
     "registerDetail": {
-      "reached": 6,
-      "produced": 6
+      "reached": 7,
+      "produced": 7
     },
     "legendDetail": {
-      "reached": 6,
+      "reached": 7,
       "produced": 0
     },
     "livingWorldDetail": {
-      "reached": 6,
-      "produced": 6
+      "reached": 7,
+      "produced": 7
     },
     "assignmentsDetail": {
-      "reached": 6,
-      "produced": 6
+      "reached": 7,
+      "produced": 7
     },
     "latentArcsDetail": {
-      "reached": 6,
-      "produced": 6
+      "reached": 7,
+      "produced": 7
     },
     "seasonalDetail": {
-      "reached": 6,
-      "produced": 6
+      "reached": 7,
+      "produced": 7
     },
     "schoolsDetail": {
-      "reached": 6,
-      "produced": 6
+      "reached": 7,
+      "produced": 7
     },
     "sharedCanonDetail": {
-      "reached": 6,
-      "produced": 0
+      "reached": 7,
+      "produced": 1
     },
     "wishesDetail": {
-      "reached": 6,
+      "reached": 7,
       "produced": 0
     },
     "worldMovedOnDetail": {
-      "reached": 6,
+      "reached": 7,
       "produced": 0
     },
     "companionLivesDetail": {
-      "reached": 6,
-      "produced": 6
+      "reached": 7,
+      "produced": 7
     },
     "homeDetail": {
-      "reached": 6,
+      "reached": 7,
       "produced": 0
     },
     "invitationsDetail": {
-      "reached": 6,
+      "reached": 7,
       "produced": 0
     },
     "bandsJoinedDetail": {
-      "reached": 6,
+      "reached": 7,
       "produced": 0
     },
     "travelersHereDetail": {
-      "reached": 6,
+      "reached": 7,
       "produced": 0
     },
     "travelersDetail": {
-      "reached": 6,
+      "reached": 7,
       "produced": 0
     },
     "worldCountLabel": {
-      "reached": 6,
-      "produced": 6
+      "reached": 7,
+      "produced": 7
     },
     "waygateDetail": {
-      "reached": 6,
+      "reached": 7,
       "produced": 0
     },
     "readAloudDetail": {
-      "reached": 6,
-      "produced": 6
+      "reached": 7,
+      "produced": 7
     },
     "scenePacingDetail": {
-      "reached": 6,
+      "reached": 7,
       "produced": 3
     },
     "journeyDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "journeyUnderwayDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "holdsNearDetail": {
-      "reached": 5,
-      "produced": 0
+      "reached": 6,
+      "produced": 1
     },
     "jobsDetail": {
-      "reached": 5,
-      "produced": 0
+      "reached": 6,
+      "produced": 1
+    },
+    "moneyDetail": {
+      "reached": 1,
+      "produced": 1
     }
   },
   "_opUnknown": {
-    "sceneSummary": 6
+    "sceneSummary": 7
   },
   "_opCountingSince": "2026-09-16T22:18:48.671Z",
   "_fireTests": {
-    "at": "2026-09-16T22:18:49.207Z",
-    "build": "2.0.36",
+    "at": "2026-09-20T11:54:19.721Z",
+    "build": "2.3.6",
     "results": [
+      {
+        "op": "jobOps",
+        "verdict": "applied",
+        "moved": [
+          "jobs"
+        ],
+        "why": null
+      },
       {
         "op": "debtOps",
         "verdict": "no-op",
         "moved": [],
-        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, sessions, worldState)"
       },
       {
         "op": "projectOps",
         "verdict": "no-op",
         "moved": [],
-        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, sessions, worldState)"
       },
       {
         "op": "deathOps",
         "verdict": "no-op",
         "moved": [],
-        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, sessions, worldState)"
       },
       {
         "op": "markTeacher",
         "verdict": "no-op",
         "moved": [],
-        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, sessions, worldState)"
       },
       {
         "op": "deriveItem",
         "verdict": "no-op",
         "moved": [],
-        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, sessions, worldState)"
       },
       {
         "op": "unlockSubstrate",
         "verdict": "no-op",
         "moved": [],
-        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, sessions, worldState)"
       },
       {
         "op": "unlockPrecursor",
         "verdict": "no-op",
         "moved": [],
-        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, sessions, worldState)"
       },
       {
         "op": "arcOps",
@@ -28094,19 +28231,19 @@
         "op": "offerPromotion",
         "verdict": "no-op",
         "moved": [],
-        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, sessions, worldState)"
       },
       {
         "op": "offerAcquisition",
         "verdict": "no-op",
         "moved": [],
-        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, sessions, worldState)"
       },
       {
         "op": "offerIntent",
         "verdict": "no-op",
         "moved": [],
-        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, sessions, worldState)"
       },
       {
         "op": "holdingOps",
@@ -28120,19 +28257,19 @@
         "op": "bandOps",
         "verdict": "no-op",
         "moved": [],
-        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, sessions, worldState)"
       },
       {
         "op": "adoptSchool",
         "verdict": "no-op",
         "moved": [],
-        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, sessions, worldState)"
       },
       {
         "op": "newAbility",
         "verdict": "no-op",
         "moved": [],
-        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, sessions, worldState)"
       }
     ]
   },

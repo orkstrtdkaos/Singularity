@@ -6,7 +6,7 @@
   "origin": "harmonic",
   "background": "medic",
   "level": 2,
-  "xp": 120,
+  "xp": 128,
   "attributes": {
     "physical": 2,
     "mental": 5,
@@ -49,13 +49,13 @@
     },
     {
       "abilityId": "motes_vigil",
-      "level": 1
+      "level": 2
     }
   ],
   "alignment": {
     "mechanical_spiritual": 0.015,
-    "concrete_abstract": -0.073734375,
-    "chaos_order": 0.019500000000000003,
+    "concrete_abstract": -0.08504765625,
+    "chaos_order": 0.023525000000000004,
     "destruction_creation": 0.02425,
     "violence_peace": 0.015,
     "death_life": 0.04278749999999999
@@ -64,7 +64,7 @@
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 129,
-  "energy": 90,
+  "energy": 83,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -299,152 +299,142 @@
         "player": "Climb to the third terrace now — daylight is the ally here, and the light is still good",
         "summary": "Adelheid climbed to the third terrace at dawn and correctly identified fever-root against its lookalike by stem shape, harvesting a full four-day course.",
         "narration": "You leave Vreni with the patient and the second usnea tuft, your satchel repacked and the linen already clean from the morning's work. The sluice-road is dry this early in autumn — none of the spring melt that made the Wet Meadows treacherous; the stone-cut path climbs steadily through the terrace gardens in good clear light, the sun just clearing the eastern ridge and throwing long pale shadows across the terraced walls.\n\nThe third terrace is twenty minutes up. You know the character of the ground before you reach it — stony, thin-soiled, south-facing where the second terrace catches rain but this one sheds it, which is exactly the condition that fever-root prefers. When you crest the last stone step, the bed opens before you: low plants in the sparse grass between the old retaining wall and the drop to the terrace below. Gray undersides on the leaves. Squared stems. Hush-leaf grows here too, close enough in the same bed that a careless eye would take them for the same plant — but the stems are the whole of the difference, and you know it: fever-root squares, hush-leaf rounds. You pinch a stem between finger and thumb on the nearest plant and feel the corner of it — square, firm, right.\n\nAevi drifts forward from your shoulder and hovers over the bed, her motes brightening slightly in the autumn light. She does not speak; she is simply looking, the way she does when something catches her attention. The terraces are quiet up here, a breeze off the ridge, the sound of the village below completely gone. You work methodically along the bed, harvesting the squared-stemmed plants and leaving the round ones untouched, wrapping each small bundle in the spare linen from the bottom of your satchel. Four days' worth comes together faster than you expected — the terrace has not been worked in two seasons, which means it is full.\n\n*✦ The Patient Who Is Not Sick Enough — Codex: fever-root has a squared stem and hush-leaf's is round, which is the whole of the difference and is enough. You have four days' worth and the terraces have another season in them if somebody works them. The walk down in the dusk is the first time in a week you have not been thinking about him..*"
+      },
+      {
+        "player": "Use Echo Sense across the terrace wall before leaving — the patient's false name and the two parties at the gate are still open questions, and the high terraces might show who is moving on the roads below",
+        "summary": "Echo Sense from the terrace wall revealed two parties on the roads below — one patient set of heavy boots that stopped and turned back at the junction, one watcher on the ridge path who has been still too long for comfort — neither yet at the wayhouse door.",
+        "narration": "You set the fever-root bundles down on the flat of the retaining wall and press one hand against the stone. The terrace is solid here — old cut-block, dense and still transmitting — and Echo Sense opens like an eye blinking wide.\n\nThe signal is clean and clear in the early light. Below and hubward, the sluice-road runs empty; two walkers moved on it earlier, their footfall-ghosts still readable in the stone's memory of weight. One set of prints — measured, deliberate, heavierbooted — came up from the village before dawn and stopped at the first terrace junction, then turned back. The other came from further spinward along the ridge path and has not come closer since. Two people, two directions. Neither of them is together, and neither has reached the wayhouse.\n\nAevi brightens against your shoulder. \"The heavier one stopped at the junction,\" she says quietly. \"The ridge-path one is waiting.\" A pause. \"They are not waiting for the same reason. The boots that stopped and turned back — those are patient boots. The other set has been still for longer than patience usually holds.\"\n\nYou pull the sense back before it costs you more than the morning warrants — a conserve touch, not a reach. You have what you need: two parties, neither at the door yet, and time enough to return to the wayhouse before either moves. The fever-root is in your hands. The road down is clear."
       }
     ],
     "lastTurn": {
-      "narration": "You leave Vreni with the patient and the second usnea tuft, your satchel repacked and the linen already clean from the morning's work. The sluice-road is dry this early in autumn — none of the spring melt that made the Wet Meadows treacherous; the stone-cut path climbs steadily through the terrace gardens in good clear light, the sun just clearing the eastern ridge and throwing long pale shadows across the terraced walls.\n\nThe third terrace is twenty minutes up. You know the character of the ground before you reach it — stony, thin-soiled, south-facing where the second terrace catches rain but this one sheds it, which is exactly the condition that fever-root prefers. When you crest the last stone step, the bed opens before you: low plants in the sparse grass between the old retaining wall and the drop to the terrace below. Gray undersides on the leaves. Squared stems. Hush-leaf grows here too, close enough in the same bed that a careless eye would take them for the same plant — but the stems are the whole of the difference, and you know it: fever-root squares, hush-leaf rounds. You pinch a stem between finger and thumb on the nearest plant and feel the corner of it — square, firm, right.\n\nAevi drifts forward from your shoulder and hovers over the bed, her motes brightening slightly in the autumn light. She does not speak; she is simply looking, the way she does when something catches her attention. The terraces are quiet up here, a breeze off the ridge, the sound of the village below completely gone. You work methodically along the bed, harvesting the squared-stemmed plants and leaving the round ones untouched, wrapping each small bundle in the spare linen from the bottom of your satchel. Four days' worth comes together faster than you expected — the terrace has not been worked in two seasons, which means it is full.\n\n*✦ The Patient Who Is Not Sick Enough — Codex: fever-root has a squared stem and hush-leaf's is round, which is the whole of the difference and is enough. You have four days' worth and the terraces have another season in them if somebody works them. The walk down in the dusk is the first time in a week you have not been thinking about him..*",
-      "sceneSummary": "Adelheid climbed to the third terrace at dawn and correctly identified fever-root against its lookalike by stem shape, harvesting a full four-day course.",
+      "narration": "You set the fever-root bundles down on the flat of the retaining wall and press one hand against the stone. The terrace is solid here — old cut-block, dense and still transmitting — and Echo Sense opens like an eye blinking wide.\n\nThe signal is clean and clear in the early light. Below and hubward, the sluice-road runs empty; two walkers moved on it earlier, their footfall-ghosts still readable in the stone's memory of weight. One set of prints — measured, deliberate, heavierbooted — came up from the village before dawn and stopped at the first terrace junction, then turned back. The other came from further spinward along the ridge path and has not come closer since. Two people, two directions. Neither of them is together, and neither has reached the wayhouse.\n\nAevi brightens against your shoulder. \"The heavier one stopped at the junction,\" she says quietly. \"The ridge-path one is waiting.\" A pause. \"They are not waiting for the same reason. The boots that stopped and turned back — those are patient boots. The other set has been still for longer than patience usually holds.\"\n\nYou pull the sense back before it costs you more than the morning warrants — a conserve touch, not a reach. You have what you need: two parties, neither at the door yet, and time enough to return to the wayhouse before either moves. The fever-root is in your hands. The road down is clear.",
+      "sceneSummary": "Echo Sense from the terrace wall revealed two parties on the roads below — one patient set of heavy boots that stopped and turned back at the junction, one watcher on the ridge path who has been still too long for comfort — neither yet at the wayhouse door.",
       "choices": [
         {
-          "label": "Check the fourth terrace too before descending — a second season's growth may mean more than enough, and the patient deserves a full course with margin",
+          "label": "Head straight back to the wayhouse — the fever-root is in hand and the window is still open",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "axes": {
+            "death_life": 0.3
+          },
+          "difficulty": "very easy",
+          "intentTags": [
+            "travel",
+            "careful"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Take a longer look at the ridge-path watcher from here before descending — still and waiting that long is worth a second read",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "death_life": 0.3,
             "concrete_abstract": -0.2
-          },
-          "difficulty": "very easy",
-          "intentTags": [
-            "scout",
-            "careful",
-            "sustain"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Turn back now — you have what you came for, and Vreni said 'before dark'; the patient has been alone long enough",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {
-            "death_life": 0.2,
-            "chaos_order": 0.2
-          },
-          "difficulty": "very easy",
-          "intentTags": [
-            "careful",
-            "sustain",
-            "travel"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Use Echo Sense across the terrace wall before leaving — the patient's false name and the two parties at the gate are still open questions, and the high terraces might show who is moving on the roads below",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "concrete_abstract": -0.3,
-            "chaos_order": 0.1
           },
           "difficulty": "easy",
           "intentTags": [
             "scout",
             "study"
           ],
-          "abilityId": "echo_sense",
+          "abilityId": "tremor_sense",
           "energyCost": 4,
+          "trivial": false
+        },
+        {
+          "label": "Descend but take the field-edge path rather than the sluice-road — approach the wayhouse from the blind side of the ridge-path watcher",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "axes": {
+            "violence_peace": 0.2,
+            "chaos_order": -0.1
+          },
+          "difficulty": "easy",
+          "intentTags": [
+            "travel",
+            "careful",
+            "sneak"
+          ],
           "trivial": false
         }
       ],
-      "stageOps": [
-        {
-          "questId": "the-patient-who-is-not-sick-enough",
-          "stageId": "s3",
-          "evidence": "Adelheid reached the third terrace, correctly identified fever-root against hush-leaf by squared versus round stem, and harvested a full four-day course."
-        }
-      ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": -4,
+        "xp": 0
+      },
       "scene": {
-        "setting": "Third terrace above Millbrook — stony, thin-soiled, south-facing beds between the old retaining wall and the drop to the terrace below; clear early-autumn morning light, breeze off the ridge.",
+        "setting": "Third terrace above Millbrook — stony south-facing beds at the retaining wall's flat top; clear early-autumn morning, sun just over the eastern ridge, long pale shadows across the terrace stones.",
         "npcsPresent": [
           {
             "name": "Aevi",
-            "state": "hovering over the fever-root bed, motes slightly brightened, quietly attentive"
+            "state": "brightened against Adelheid's shoulder, watching the roads below with focused attention"
           }
         ],
         "objects": [
-          "Fever-root harvest — several small bundles wrapped in spare linen, a full four-day course",
-          "Hush-leaf plants — left untouched in the same stony beds, round-stemmed",
+          "Fever-root harvest — several small bundles wrapped in spare linen, resting on the retaining wall",
+          "Hush-leaf plants — left untouched in the same stony beds",
           "Medic's Satchel — repacked, harvest added",
-          "Usnea Lichen (wrapped) — two remaining tufts, still in the satchel"
+          "Usnea Lichen (wrapped) — two remaining tufts in the satchel"
         ],
         "threads": [
-          "Patient back at the wayhouse — compress applied, infection still spreading, fever-root now in hand",
-          "Two parties came to the gate asking for the patient by name he did not give",
-          "Fourth terrace not yet checked — may hold additional margin"
+          "Heavy-booted figure stopped at the first terrace junction before dawn, then turned back — patient, not urgent",
+          "Ridge-path watcher has been still too long — waiting for something specific",
+          "Patient at the wayhouse — compress applied, fever-root now in hand, time narrowing",
+          "Fourth terrace not yet checked"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "aevi",
-          "note": "Accompanied Adelheid to the third terrace; drifted forward over the fever-root bed and brightened with quiet interest, neither speaking nor interfering.",
-          "statusNote": "Present on the third terrace with Adelheid; attentive, quiet."
+          "name": "Aevi",
+          "note": "Noted the distinction between the two watchers unprompted — heavy boots stopped at the junction are patient, the ridge-path stillness is a different quality of waiting.",
+          "learned": [
+            "Two parties on the roads below the terrace — heavy-booted figure came from the village before dawn and stopped at the first junction; ridge-path figure has been motionless longer than patience ordinarily holds"
+          ],
+          "statusNote": "Traveling with Adelheid on the third terrace; motes brightened during the Echo Sense reading"
         }
       ],
       "codexUpdates": [
         {
           "topic": "the-patient-who-is-not-sick-enough",
           "label": "The Patient Who Is Not Sick Enough",
-          "kind": "event",
-          "fact": "Fever-root has a squared stem; hush-leaf's is round — that is the whole of the difference, and it is enough. A full four-day course harvested from the third terrace, which has two seasons of untouched growth in it.",
+          "kind": "mystery",
+          "fact": "Two parties are moving on the roads below the terrace at dawn — one set of heavy, deliberate boots came up from the village and stopped at the first terrace junction before turning back; a second figure on the ridge path has been motionless longer than ordinary patience. They are not working together.",
           "links": [
             "maras-errand",
-            "sister-vreni",
             "millbrook",
-            "uncatalogued-terrace-plants"
+            "sister-vreni"
           ]
         }
       ],
-      "placeUpdates": [
-        {
-          "note": "Third terrace fever-root bed confirmed well-stocked after two unworked seasons — fever-root (squared stem) and hush-leaf (round stem) grow in the same stony beds; correctly distinguished and partially harvested dawn of day 3.",
-          "subPlace": {
-            "name": "Third Terrace — Fever-Root Beds",
-            "parent": "Millbrook",
-            "note": "Stony south-facing terrace beds holding fever-root and hush-leaf; squared vs round stem is the identification key; partially harvested day 3 dawn.",
-            "visited": true
-          }
-        }
-      ],
       "timeOps": {
-        "hoursPassed": 0.5,
-        "why": "Twenty-minute climb to the third terrace and a careful harvest"
+        "hoursPassed": 0.25,
+        "why": "a brief, economical Echo Sense reading from the terrace wall"
       }
     },
     "sceneState": {
-      "setting": "Third terrace above Millbrook — stony, thin-soiled, south-facing beds between the old retaining wall and the drop to the terrace below; clear early-autumn morning light, breeze off the ridge.",
+      "setting": "Third terrace above Millbrook — stony south-facing beds at the retaining wall's flat top; clear early-autumn morning, sun just over the eastern ridge, long pale shadows across the terrace stones.",
       "npcsPresent": [
         {
           "name": "Aevi",
-          "state": "hovering over the fever-root bed, motes slightly brightened, quietly attentive"
+          "state": "brightened against Adelheid's shoulder, watching the roads below with focused attention"
         }
       ],
       "objects": [
-        "Fever-root harvest — several small bundles wrapped in spare linen, a full four-d",
-        "Hush-leaf plants — left untouched in the same stony beds, round-stemmed",
+        "Fever-root harvest — several small bundles wrapped in spare linen, resting on th",
+        "Hush-leaf plants — left untouched in the same stony beds",
         "Medic's Satchel — repacked, harvest added",
-        "Usnea Lichen (wrapped) — two remaining tufts, still in the satchel"
+        "Usnea Lichen (wrapped) — two remaining tufts in the satchel"
       ],
       "threads": [
-        "Patient back at the wayhouse — compress applied, infection still spreading, fever-root now in hand",
-        "Two parties came to the gate asking for the patient by name he did not give",
-        "Fourth terrace not yet checked — may hold additional margin"
+        "Heavy-booted figure stopped at the first terrace junction before dawn, then turned back — patient, not urgent",
+        "Ridge-path watcher has been still too long — waiting for something specific",
+        "Patient at the wayhouse — compress applied, fever-root now in hand, time narrowing",
+        "Fourth terrace not yet checked"
       ]
     },
-    "beats": 12,
+    "beats": 13,
     "subPlace": {
       "slug": "third-terrace-fever-root-beds",
       "name": "Third Terrace — Fever-Root Beds",
@@ -1383,8 +1373,8 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-09-20T12:20:27.278Z",
-    "lastGenCount": 1980,
+    "lastSharedReadAt": "2026-09-20T22:30:51.896Z",
+    "lastGenCount": 1990,
     "newsSpread": {},
     "arcStages": {
       "arc_what_wakes_beneath": {
@@ -1413,7 +1403,7 @@
         "locationId": "gen-mara-wells-store"
       }
     ],
-    "turnsSinceOffer": 6,
+    "turnsSinceOffer": 7,
     "recentOffers": [
       {
         "thing": "Mara offers direct access to work as a way of centering yourself—and uses that time to shift the conversation toward the real question…",
@@ -5691,7 +5681,7 @@
     "figureWokeDay": {
       "the_deep_lantern": 82
     },
-    "updatesToldTo": "2.3.6",
+    "updatesToldTo": "2.4.3",
     "newsLog": [
       {
         "day": 2,
@@ -5904,6 +5894,22 @@
         "worldDay": 82,
         "text": "The game was updated to v2.3.5 — 15 new, 8 fixed, 1 changed.",
         "loggedAt": "2026-09-20T02:48:54.960Z"
+      },
+      {
+        "kind": "update",
+        "section": "world",
+        "version": "2.4.2",
+        "worldDay": 82,
+        "text": "The game was updated to v2.4.2 — 1 new, 3 fixed.",
+        "loggedAt": "2026-09-20T22:20:30.047Z"
+      },
+      {
+        "kind": "update",
+        "section": "world",
+        "version": "2.4.3",
+        "worldDay": 82,
+        "text": "The game was updated to v2.4.3 — 1 new.",
+        "loggedAt": "2026-09-20T22:30:58.959Z"
       }
     ]
   },
@@ -6097,7 +6103,6 @@
         "label": "Mara's Errand",
         "kind": "lore",
         "facts": [
-          "[d1] Mara's note is enclosed in the cloth bundle Piotr holds. He will not open it or reveal its contents; he is waiting for Adelheid to do so, or to return it unopened to Mara herself. The note contains the explanation Piotr himself is bound not to give.",
           "[d1] Mara's written instructions to Piotr remain sealed inside the cloth bundle. Piotr will not open it or share its contents until Adelheid either reads it herself or returns it unopened to Mara.",
           "[d2] Adelheid accepted Sister Vreni's invitation to the pass-road wayhouse. The wayhouse is on the sluice-road — the road Silas would have traveled three weeks ago — and gives Adelheid a position on the upstream route without requiring a direct search.",
           "[d2] Mara's last instruction before Adelheid left: take the stone-cut path, not the wet meadow margin — and tell me what the wayhouse sees. She is using Adelheid as her road-eyes on the upstream route.",
@@ -6105,7 +6110,8 @@
           "[d3] The Patient Who Is Not Sick Enough — The presenting wound is not the cause — a deep infection has been sealed beneath healed skin and is spreading in the blood. Treatment requires reopening the wound and a high-terrace cleanser plant, which has a dangerous look-alike that must be identified by…",
           "[d3] The Patient Who Is Not Sick Enough — Usnea lichen — old-man's beard, gray-green and finely branched — grows on the second-terrace stone walls and the north-facing elder bark above the wayhouse. Gently antibiotic; a first preparation can begin drawing the deep infection while fever-root is fetched…",
           "[d3] Usnea lichen prepared as a warm compress and applied to the patient's sealed forearm wound — draws the deep infection toward the surface and provides gentle antibiotic action. Buys time; does not cure. Fever-root from the third and fourth terraces is the necessary next step.",
-          "[d3] The Patient Who Is Not Sick Enough — Fever-root has a squared stem; hush-leaf's is round — that is the whole of the difference, and it is enough. A full four-day course harvested from the third terrace, which has two seasons of untouched growth in it."
+          "[d3] The Patient Who Is Not Sick Enough — Fever-root has a squared stem; hush-leaf's is round — that is the whole of the difference, and it is enough. A full four-day course harvested from the third terrace, which has two seasons of untouched growth in it.",
+          "[d3] The Patient Who Is Not Sick Enough — Two parties are moving on the roads below the terrace at dawn — one set of heavy, deliberate boots came up from the village and stopped at the first terrace junction before turning back; a second figure on the ridge path has been motionless longer than ordinary…"
         ],
         "links": [
           "mara-wells",
@@ -6120,7 +6126,13 @@
         "aliases": [],
         "createdDay": 1,
         "entityId": "maras-errand",
-        "updatedDay": 3
+        "updatedDay": 3,
+        "summary": "Mara has sent Adelheid upstream on the sluice-road with instructions to use the pass-road wayhouse as a vantage point and report what it sees. Piotr carries Mara's sealed written instructions and a note explaining the errand's purpose, which he will not open or share until Adelheid either reads the note herself or returns it unopened to Mara. The patient at the wayhouse has a deep sealed infection spreading through the blood beneath a closed wound; immediate treatment requires usnea lichen (old-man's-beard, gray-green and finely branched, found on second-terrace stone walls and north-facing elder bark) applied as a warm compress to draw the infection toward the surface, followed by a…",
+        "summarisedAt": 8,
+        "summaryDay": 3,
+        "archive": [
+          "[d1] Mara's note is enclosed in the cloth bundle Piotr holds. He will not open it or reveal its contents; he is waiting for Adelheid to do so, or to return it unopened to Mara herself. The note contains the explanation Piotr himself is bound not to give."
+        ]
       },
       "precursor-layer": {
         "id": "precursor-layer",
@@ -6307,18 +6319,24 @@
         "to": "maras-errand",
         "why": "beat",
         "day": 3
+      },
+      {
+        "label": "The Patient Who Is Not Sick Enough",
+        "to": "maras-errand",
+        "why": "beat",
+        "day": 3
       }
     ]
   },
   "grantsVersion": 1,
   "customAbilities": {},
   "companionBonds": {
-    "aevi": 6
+    "aevi": 6.25
   },
   "practice": {
     "schemaVersion": 1,
     "uses": {
-      "echo_sense": 8,
+      "echo_sense": 9,
       "sonic_resonance": 2,
       "tremor_sense": 4,
       "chord_of_mending": 7
@@ -6327,7 +6345,7 @@
     "aspirations": [],
     "lastUsed": {
       "tremor_sense": 80,
-      "echo_sense": 80,
+      "echo_sense": 82,
       "chord_of_mending": 82
     }
   },
@@ -6385,20 +6403,20 @@
   "backfillVersion": 1,
   "sharedSceneId": null,
   "opLossPending": false,
-  "syncedAt": 1789762966413,
+  "syncedAt": 1789908041278,
   "itemReclaimVersion": 1,
   "nameRepairVersion": 1,
   "tendencies": {
-    "generous": 5.66700698566254,
-    "social": 5.158870820516927,
-    "cerebral": 19.053345619436087,
-    "cautious": 15.370663635770232,
-    "strategic": 13.681344101669906,
-    "carousing": 0.6517482287053391,
-    "risky": 0.3266908414563102,
-    "ruthless": 0.7450921843853955,
-    "patient": 1.4311871908223563,
-    "craft": 2.489479863213622
+    "generous": 5.525331811020976,
+    "social": 5.029899050004003,
+    "cerebral": 19.577011978950186,
+    "cautious": 14.986397044875975,
+    "strategic": 14.339310499128157,
+    "carousing": 0.6354545229877057,
+    "risky": 0.3185235704199025,
+    "ruthless": 0.7264648797757606,
+    "patient": 1.3954075110517974,
+    "craft": 2.4272428666332817
   },
   "aptitudes": [
     "strategist",
@@ -6406,11 +6424,11 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 82,
+  "actionCount": 83,
   "bondLogFrom": null,
   "teachers": {},
   "regionsKnown": {
-    "valley": 43
+    "valley": 44
   },
   "company": [],
   "forkChoices": {},
@@ -6593,9 +6611,9 @@
   "holdings": [],
   "bands": [],
   "_silasGrantsRevoked": true,
-  "reconcileVersion": 72,
-  "updatedAt": 1789908041278,
-  "rev": 85,
+  "reconcileVersion": 73,
+  "updatedAt": 1789943458960,
+  "rev": 93,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -6608,7 +6626,7 @@
   "featureOffers": [],
   "_pinsInitialized": true,
   "_opUnknown": {
-    "sceneSummary": 43
+    "sceneSummary": 44
   },
   "_applyFailures": null,
   "sessions": [
@@ -6651,13 +6669,21 @@
       "startDay": 82,
       "endDay": 82,
       "beats": 5
+    },
+    {
+      "id": "sess-6",
+      "startedAt": "2026-09-20T22:26:07.740Z",
+      "lastAt": "2026-09-20T22:26:07.740Z",
+      "startDay": 82,
+      "endDay": 82,
+      "beats": 1
     }
   ],
   "_debtReceipts": [],
   "_bandNotes": null,
   "skillUses": {
-    "scout": 8,
-    "study": 11,
+    "scout": 9,
+    "study": 12,
     "ask": 3,
     "travel": 8,
     "coerce": 1,
@@ -6688,18 +6714,18 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 38,
-    "choices": 38,
+    "sceneSummary": 39,
+    "choices": 39,
     "questUpdates": 24,
-    "scene": 38,
-    "npcUpdates": 34,
+    "scene": 39,
+    "npcUpdates": 35,
     "placeUpdates": 15,
-    "codexUpdates": 28,
-    "timeOps": 31,
+    "codexUpdates": 29,
+    "timeOps": 32,
     "imagePrompt": 8,
     "gambitApt": 21,
     "sceneEnded": 28,
-    "characterDeltas": 26,
+    "characterDeltas": 27,
     "offer": 14,
     "stateOps": 2,
     "deeds": 6,
@@ -6709,7 +6735,7 @@
     "_engineClosedScene": 1,
     "stageOps": 2
   },
-  "_opTurns": 38,
+  "_opTurns": 39,
   "_opCountingSince": "2026-09-15T23:58:48.348Z",
   "gallery": [
     {
@@ -6895,6 +6921,14 @@
       "day": 3,
       "worldDay": 82,
       "actionCount": 79
+    },
+    {
+      "companionId": "aevi",
+      "kind": "assist",
+      "delta": 0.25,
+      "day": 3,
+      "worldDay": 82,
+      "actionCount": 82
     }
   ],
   "companionMemory": {
@@ -7003,5 +7037,44 @@
     "board": [],
     "out": [],
     "back": []
+  },
+  "_pendingIntent": {
+    "kind": "departure",
+    "act": "The Wayhouse is about 168.8 days away: about 168.8 days on foot, by way of The Axis Gate · 85 rations for the road — you carry 0 (85 short) · 166 nights in the open, 2 under a roof · the worst of the road: The Axis Gate (dangerous) · alone.",
+    "cost": "A journey is readied before it is walked — plan it, gather rations and your people, and set out when you are ready.",
+    "options": [
+      {
+        "id": "plan",
+        "label": "Plan the journey to The Wayhouse"
+      },
+      {
+        "id": "go",
+        "label": "Set out now"
+      },
+      {
+        "id": "stay",
+        "label": "Stay here"
+      }
+    ],
+    "default": "plan",
+    "journeyDestId": "the_wayhouse",
+    "resume": {
+      "choice": {
+        "label": "Descend but take the field-edge path rather than the sluice-road — approach the wayhouse from the blind side of the ridge-path watcher",
+        "attribute": "physical",
+        "subAttribute": "agility",
+        "axes": {
+          "violence_peace": 0.2,
+          "chaos_order": -0.1
+        },
+        "difficulty": "easy",
+        "intentTags": [
+          "travel",
+          "careful",
+          "sneak"
+        ],
+        "trivial": false
+      }
+    }
   }
 }

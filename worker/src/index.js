@@ -46,7 +46,9 @@ export default {
 
     const width = int(url.searchParams.get("width"), 1024);
     const height = int(url.searchParams.get("height"), 320);
-    const seed = int(url.searchParams.get("seed"), 42);
+    // ⚠️ A SEED IS NOT A SIZE. It was read through `int`, which caps at 4096 — and `seedFrom` in engine/art.js returns up to 99,999, so
+    // every seed above 4,096 collapsed to the same number and two different pictures would have shared one key in the store.
+    const seed = Math.abs(Math.trunc(Number(url.searchParams.get("seed")))) || 0;
     // ⚠️ THE KEY DROPS `_cb`. A cache-buster is a way of asking the OLD service again (SNG-435); it never meant a
     // different picture, and keying on it would store the same picture twice and lose the healed record's bytes.
     const key = await keyFor(prompt, width, height, seed);
@@ -58,7 +60,26 @@ export default {
     if (hit) return new Response(request.method === "HEAD" ? null : hit.bytes, { headers: { "content-type": hit.type, ...(hit.size ? { "content-length": String(hit.size) } : {}), ...kept("kept") } });
 
     // ── 2 · preserve first: the old address, rebuilt exactly
-    const old = await keep(store, key, `${OLD_HOST}${url.pathname}${url.search}`, "preserved", { prompt, seed });
+    // ⚠️ EXACTLY means exactly: the old service caches by the whole address, so one extra parameter of ours turns a HIT into a MISS —
+    // and a miss now answers "Insufficient balance", which reads as "the picture is gone" when it is not. Only `_debug`, which is ours
+    // and never theirs, comes off.
+    // (a string edit, not URLSearchParams, because re-encoding a query is its own way of changing the address)
+    const theirs = url.search.replace(/([?&])_debug=[^&]*(&|$)/g, (m, p1, p2) => (p2 ? p1 : "")).replace(/[?&]$/, "");
+    const address = `${OLD_HOST}${url.pathname}${theirs}`;
+    // ⚑ `?_debug=1` SAYS WHAT THE PRESERVE ATTEMPT MET — it draws nothing and stores nothing. This exists because the first
+    // deploy fell through to the drawer and the reason was invisible from outside: a picture that IS still out there must not
+    // be re-drawn by mistake, and "it didn't work" is not a fault report.
+    if (url.searchParams.get("_debug") === "1") {
+      const out = { key, prompt: prompt.slice(0, 120), width, height, seed, address: address.slice(0, 300), store: store ? "bound" : "none", ai: env.AI ? "bound" : "none" };
+      const tried = await keep(store, key, address, "preserved", { prompt, seed });
+      out.preserved = tried.ok;
+      out.bytes = tried.ok ? tried.bytes.length : 0;
+      out.type = tried.type || null;
+      if (!tried.ok) out.why = tried.why || "unknown";
+      out.mayDraw = mayDraw(request, env);
+      return new Response(JSON.stringify(out, null, 1), { headers: { "content-type": "application/json", "cache-control": "no-store", ...cors() } });
+    }
+    const old = await keep(store, key, address, "preserved", { prompt, seed });
     if (old.ok) return new Response(old.bytes, { headers: { "content-type": old.type, ...kept("preserved") } });
 
     // ── 3 · draw it
@@ -66,10 +87,13 @@ export default {
     if (!may.ok) return refuse(403, may.why);
     try {
       if (!env.AI) return refuse(503, "this service has no drawer bound yet, so a new picture cannot be drawn");
-      const out = await env.AI.run(MODEL, { prompt, seed, steps: STEPS });
+      // ⚠️ NO SEED HERE: `flux-1-schnell` takes `prompt` and `steps` and refuses anything else ("Additional or unevaluated properties
+      // '/seed' at '/' not allowed"). Stability does not come from the seed any more — it comes from the STORE: the first drawing of an
+      // address is kept forever and every later ask returns those same bytes. The seed still separates addresses, which is its other job.
+      const out = await env.AI.run(MODEL, { prompt, steps: STEPS });
       const bytes = await bytesOf(out);
       if (!bytes || bytes.length < MIN_BYTES) return refuse(502, "the drawing came back with nothing in it");
-      await store.put(key, bytes, "image/jpeg", { how: "drawn", model: MODEL, seed: String(seed), at: new Date().toISOString(), prompt: prompt.slice(0, 800) });
+      await store.put(key, bytes, "image/jpeg", meta("drawn", prompt, seed));
       return new Response(bytes, { headers: { "content-type": "image/jpeg", ...kept("drawn") } });
     } catch (e) {
       // ⚠️ SAY WHICH REFUSAL THIS IS. engine/art.js reads the body to tell "the service will not draw" from "a
@@ -82,16 +106,21 @@ export default {
 /** Ask the old address for the picture it still holds, and keep it. Never keeps a short body. */
 async function keep(store, key, address, how, { prompt = "", seed = 0 } = {}) {
   try {
-    const res = await fetch(address, { headers: { accept: "image/*" }, cf: { cacheTtl: 0 } });
-    if (!res.ok) return { ok: false };
+    const res = await fetch(address, { headers: { accept: "image/*" } });
+    if (!res.ok) return { ok: false, why: `the old service answered ${res.status}` };
     const type = res.headers.get("content-type") || "";
-    if (!/^image\//i.test(type)) return { ok: false };
+    if (!/^image\//i.test(type)) return { ok: false, why: `the old service answered ${type || "nothing"}` };
     const bytes = new Uint8Array(await res.arrayBuffer());
-    if (bytes.length < MIN_BYTES) return { ok: false };
-    await store.put(key, bytes, type, { how, from: address.slice(0, 900), seed: String(seed), at: new Date().toISOString(), prompt: prompt.slice(0, 800) });
+    if (bytes.length < MIN_BYTES) return { ok: false, why: `only ${bytes.length} bytes came back` };
+    await store.put(key, bytes, type, meta(how, prompt, seed));
     return { ok: true, bytes, type };
-  } catch { return { ok: false }; }
+  } catch (e) { return { ok: false, why: String(e?.message || e).slice(0, 200) }; }
 }
+
+/** ⚠️ WHAT IS REMEMBERED BESIDE A PICTURE, AND HOW LITTLE. Workers KV allows ONE KILOBYTE of metadata an entry — a longer one throws, the
+ *  keep fails, and a picture that is still out there looks gone. The prompt is in the address already; a short note of it is a convenience,
+ *  never the record. */
+const meta = (how, prompt, seed) => ({ how, seed: String(seed), at: new Date().toISOString().slice(0, 10), prompt: String(prompt || "").slice(0, 300) });
 
 /** ⛑ THE STORE, WHICHEVER ONE IS BOUND — R2 (`PICTURES`) or Workers KV (`PICTURES_KV`). Two lines of difference,
  *  and it means the picture service does not have to be redeployed if the store underneath it ever changes.

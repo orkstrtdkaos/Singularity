@@ -1167,7 +1167,8 @@
       "domains": {
         "primary": "stillhold"
       },
-      "domainsSource": "derived"
+      "domainsSource": "derived",
+      "imagePinned": true
     }
   },
   "placeMemory": {
@@ -1463,38 +1464,6 @@
       {
         "day": 4,
         "worldDay": 80,
-        "text": "Cinder Vael, the Wright Who Would Not Stop is spoken of: arguing with Halcyon by letter, for twenty years, about finishing.",
-        "tier": "murmur",
-        "section": "world",
-        "locationId": "the_ceaseless"
-      },
-      {
-        "day": 4,
-        "worldDay": 80,
-        "text": "The Last Walker of the Sealed Wood is spoken of: carving in green wood, which cracks.",
-        "tier": "murmur",
-        "section": "world",
-        "locationId": "the_greenward"
-      },
-      {
-        "day": 4,
-        "worldDay": 80,
-        "text": "Overseer Grael of the Edge District has not been seen at home in a long while — whatever is happening has all of them.",
-        "tier": "murmur",
-        "section": "world",
-        "locationId": "radiant_plateau_edge"
-      },
-      {
-        "day": 4,
-        "worldDay": 80,
-        "text": "The Hollow King of the Wild Half has not been seen at home in a long while — whatever is happening has all of them.",
-        "tier": "murmur",
-        "section": "world",
-        "locationId": "the_maw"
-      },
-      {
-        "day": 4,
-        "worldDay": 80,
         "text": "A lone traveler: Kael reached the waypoint inn at Duskhollow and traded his ford news for a meal and a bed, finding the innkeeper had already heard a murmur of it — confirmation that sharpens his credibility and points him toward a ferryman who knows the crossing firsthand.",
         "tier": "ambient",
         "section": "world",
@@ -1660,11 +1629,58 @@
         "tier": "event",
         "section": "world",
         "figureId": "lone-traveler-eastfork-warning"
+      },
+      {
+        "day": 5,
+        "worldDay": 82,
+        "text": "Word reaches you: A wayhouse healer named a patient whose pulse has worsened overnight — two days in, insisting he is fine (near millbrook)",
+        "tier": "event",
+        "section": "elsewhere",
+        "locationId": "millbrook"
+      },
+      {
+        "day": 5,
+        "worldDay": 82,
+        "text": "The Gate That Gapes broke Maren Ossitide, Who Buried the Drowned Year — a stranger, and now an enemy. Maren Ossitide is out of the reckoning while the wound holds.",
+        "tier": "event",
+        "section": "world",
+        "kind": "clash",
+        "winnerId": "the_gate_that_gapes",
+        "loserId": "maren_ossitide",
+        "outcome": "wounded",
+        "locationId": "the_unlanded",
+        "placedBy": "winnerId"
+      },
+      {
+        "day": 5,
+        "worldDay": 82,
+        "text": "The One Who Ended the Long War broke Valen Sunwrack, Who Left No Shadow Standing — a stranger, and now an enemy. Valen Sunwrack is out of the reckoning while the wound holds.",
+        "tier": "event",
+        "section": "world",
+        "kind": "clash",
+        "winnerId": "the_war_ender",
+        "loserId": "sunwrack_valen",
+        "outcome": "wounded",
+        "locationId": "the_stillhold",
+        "placedBy": "winnerId"
+      },
+      {
+        "day": 5,
+        "worldDay": 82,
+        "text": "Kesh Ardent, the Edge That Holds turned The One Who Doubts the Proof back. The One learned something, which is worse for everyone else.",
+        "tier": "event",
+        "section": "world",
+        "kind": "clash",
+        "winnerId": "the_edge_that_holds",
+        "loserId": "the_doubting_lattice",
+        "outcome": "stopped",
+        "locationId": "the_redline",
+        "placedBy": "winnerId"
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 1968,
-    "lastSharedReadAt": "2026-09-20T00:59:53.456Z",
+    "lastGenCount": 1980,
+    "lastSharedReadAt": "2026-09-20T12:16:38.412Z",
     "lastTickWorldDay": 82,
     "lastCanonWorldDay": 82,
     "turnsSinceOffer": 7,
@@ -1903,7 +1919,7 @@
         "kind": "decision",
         "premise": "Someone who keeps the count of what has been unmade has begun rounding down, telling themselves the difference is noise — but the rounding has a direction, and it has been consistent for long enough…",
         "cause": "The act of counting the unmade requires a decision about what constitutes a thing distinct enough to be counted, and that threshold has always been left to…",
-        "stage": 4,
+        "stage": 5,
         "seededAtCount": 1917,
         "surfaced": true,
         "fate": "growing",
@@ -1916,7 +1932,7 @@
         "kind": "decision",
         "premise": "The person who holds authority to formally designate what has been unmade as 'resolved' has not done so for anything in years, and the backlog of unresolved unmakings is beginning to press against…",
         "cause": "In the_unmade, the act of resolution is itself an act of power, and the authority-holder has quietly discovered that unresolved things remain partially…",
-        "stage": 0,
+        "stage": 1,
         "seededAtCount": 1968,
         "surfaced": false,
         "fate": "growing",
@@ -6977,7 +6993,11 @@
         "want": null
       }
     },
-    "newsSpread": {},
+    "newsSpread": {
+      "char-mr5ns3hh::2026-09-20T03:09:42.247Z": [
+        "valley.the_reclamation_site"
+      ]
+    },
     "epicStatus": {
       "the_final_argument": {
         "status": "stopped",
@@ -7017,8 +7037,13 @@
       },
       "sunwrack_valen": {
         "status": "wounded",
-        "woundedUntilDay": 85,
-        "woundedBy": "the_unbending_witness"
+        "woundedUntilDay": 90,
+        "woundedBy": "the_war_ender",
+        "sinceWorldDay": 82,
+        "fateBy": {
+          "characterId": "char-mrhs8286",
+          "name": "Silas Weir"
+        }
       },
       "the_first_moot": {
         "status": "wounded",
@@ -7172,12 +7197,12 @@
         }
       },
       "the_nine_year_master": {
-        "status": "wounded",
-        "woundedUntilDay": 82,
-        "woundedBy": "halcyon_the_finished",
+        "status": "stopped",
+        "stoppedUntilDay": 78,
+        "stoppedBy": "the_clockmother",
         "fateBy": {
-          "characterId": "char-mrhs8286",
-          "name": "Silas Weir"
+          "characterId": "char-msgpisca",
+          "name": "Splarf"
         }
       },
       "the_edge_seeker": {
@@ -7190,7 +7215,7 @@
         }
       },
       "the_undefeated": {
-        "status": "wounded",
+        "status": "stopped",
         "diedWorldDay": 41,
         "killedBy": "thornmother_sealed",
         "returnedFromDeath": {
@@ -7199,28 +7224,31 @@
         },
         "woundedUntilDay": 89,
         "woundedBy": "the_starless",
-        "sinceWorldDay": 81,
+        "sinceWorldDay": 82,
+        "stoppedUntilDay": 85,
+        "stoppedBy": "the_starless",
         "fateBy": {
-          "characterId": "char-mrhs8286",
-          "name": "Silas Weir"
+          "characterId": "char-mr5ns3hh",
+          "name": "Adelheid"
         }
       },
       "the_doubting_lattice": {
         "status": "stopped",
-        "stoppedUntilDay": 74,
+        "stoppedUntilDay": 85,
         "stoppedBy": "the_edge_that_holds",
+        "sinceWorldDay": 82,
         "fateBy": {
-          "characterId": "char-mrhs8286",
-          "name": "Silas Weir"
+          "characterId": "char-msgpisca",
+          "name": "Splarf"
         }
       },
       "the_war_ender": {
-        "status": "wounded",
-        "woundedUntilDay": 49,
-        "woundedBy": "thornmother_sealed",
+        "status": "stopped",
+        "stoppedUntilDay": 47,
+        "stoppedBy": "the_starless",
         "fateBy": {
-          "characterId": "char-mrhs8286",
-          "name": "Silas Weir"
+          "characterId": "char-msgpisca",
+          "name": "Splarf"
         }
       },
       "the_one_called_zeus": {
@@ -7268,6 +7296,80 @@
       },
       "the_hour_hoarder": {
         "status": "active"
+      },
+      "overseer_grael": {
+        "status": "stopped",
+        "stoppedUntilDay": 43,
+        "stoppedBy": "the_appetite",
+        "fateBy": {
+          "characterId": "char-msgpisca",
+          "name": "Splarf"
+        }
+      },
+      "maren_ossitide": {
+        "status": "wounded",
+        "sinceWorldDay": 82,
+        "woundedUntilDay": 90,
+        "woundedBy": "the_gate_that_gapes",
+        "fateBy": {
+          "characterId": "char-msgpisca",
+          "name": "Splarf"
+        }
+      },
+      "neth_the_stayed": {
+        "status": "stopped",
+        "stoppedUntilDay": 46,
+        "stoppedBy": "the_starless",
+        "fateBy": {
+          "characterId": "char-msgpisca",
+          "name": "Splarf"
+        }
+      },
+      "the_lidded_calm": {
+        "status": "stopped",
+        "stoppedUntilDay": 41,
+        "stoppedBy": "the_ninefold_ascendant",
+        "fateBy": {
+          "characterId": "char-msgpisca",
+          "name": "Splarf"
+        }
+      },
+      "the_kind_liar": {
+        "status": "stopped",
+        "stoppedUntilDay": 40,
+        "stoppedBy": "neth_the_stayed",
+        "fateBy": {
+          "characterId": "char-msgpisca",
+          "name": "Splarf"
+        }
+      },
+      "the_unravelled_mind": {
+        "status": "stopped",
+        "stoppedUntilDay": 41,
+        "stoppedBy": "halvex_coil",
+        "fateBy": {
+          "characterId": "char-msgpisca",
+          "name": "Splarf"
+        }
+      },
+      "the_one_called_athena": {
+        "status": "wounded",
+        "woundedUntilDay": 47,
+        "woundedBy": "sunwrack_valen",
+        "fateBy": {
+          "characterId": "char-msgpisca",
+          "name": "Splarf"
+        }
+      },
+      "the_penitent_maw": {
+        "status": "stopped",
+        "sinceWorldDay": 82,
+        "stoppedUntilDay": 85,
+        "stoppedBy": "the_starless",
+        "fateBy": {
+          "characterId": "char-mr5ns3hh",
+          "name": "Adelheid"
+        }
       }
     },
     "unavenged": {
@@ -7754,6 +7856,37 @@
         },
         "tradition": "marcher",
         "homeland": "the_great_coliseum"
+      },
+      {
+        "id": "person-83693e0ee6487310",
+        "name": "Sera Voight the Ashvow",
+        "epithet": "the Ashvow",
+        "provisional": false,
+        "tier": "riffraff",
+        "weight": 3,
+        "wants": "to be worth the one who did not come back",
+        "originKind": "casualty_survivor",
+        "region": "the_ceaseless",
+        "arcAffinity": null,
+        "arcAffinities": [
+          {
+            "arcId": "arc_the_poles_pull",
+            "dir": -1,
+            "weight": 1
+          }
+        ],
+        "wantArcId": "arc_the_poles_pull",
+        "personalVerbs": [
+          "asking after the ones who did not"
+        ],
+        "mintedWorldDay": 37,
+        "origin": "of the Ceaseless; stood beside Cinder Vael when the Wright was called out, and outlived it",
+        "legend": {
+          "tier": "riffraff",
+          "weight": 3
+        },
+        "tradition": "wright",
+        "homeland": "the_ceaseless"
       }
     ],
     "fatesReadWorldDay": 82,
@@ -7774,7 +7907,7 @@
     "figureWokeDay": {
       "halvex_coil": 82
     },
-    "updatesToldTo": "2.3.5",
+    "updatesToldTo": "2.3.6",
     "newsLog": [
       {
         "day": 4,
@@ -7998,6 +8131,57 @@
         "worldDay": 82,
         "text": "The game was updated to v2.3.5 — 15 new, 8 fixed, 1 changed.",
         "loggedAt": "2026-09-20T01:00:05.315Z"
+      },
+      {
+        "day": 5,
+        "worldDay": 82,
+        "text": "Word reaches you: A wayhouse healer named a patient whose pulse has worsened overnight — two days in, insisting he is fine (near millbrook)",
+        "tier": "event",
+        "section": "elsewhere",
+        "locationId": "millbrook",
+        "loggedAt": "2026-09-20T12:16:44.208Z"
+      },
+      {
+        "day": 5,
+        "worldDay": 82,
+        "text": "The Gate That Gapes broke Maren Ossitide, Who Buried the Drowned Year — a stranger, and now an enemy. Maren Ossitide is out of the reckoning while the wound holds.",
+        "tier": "event",
+        "section": "world",
+        "kind": "clash",
+        "winnerId": "the_gate_that_gapes",
+        "loserId": "maren_ossitide",
+        "outcome": "wounded",
+        "locationId": "the_unlanded",
+        "placedBy": "winnerId",
+        "loggedAt": "2026-09-20T12:16:44.208Z"
+      },
+      {
+        "day": 5,
+        "worldDay": 82,
+        "text": "The One Who Ended the Long War broke Valen Sunwrack, Who Left No Shadow Standing — a stranger, and now an enemy. Valen Sunwrack is out of the reckoning while the wound holds.",
+        "tier": "event",
+        "section": "world",
+        "kind": "clash",
+        "winnerId": "the_war_ender",
+        "loserId": "sunwrack_valen",
+        "outcome": "wounded",
+        "locationId": "the_stillhold",
+        "placedBy": "winnerId",
+        "loggedAt": "2026-09-20T12:16:44.208Z"
+      },
+      {
+        "day": 5,
+        "worldDay": 82,
+        "text": "Kesh Ardent, the Edge That Holds turned The One Who Doubts the Proof back. The One learned something, which is worse for everyone else.",
+        "tier": "event",
+        "section": "world",
+        "kind": "clash",
+        "winnerId": "the_edge_that_holds",
+        "loserId": "the_doubting_lattice",
+        "outcome": "stopped",
+        "locationId": "the_redline",
+        "placedBy": "winnerId",
+        "loggedAt": "2026-09-20T12:16:44.208Z"
       }
     ]
   },
@@ -10279,8 +10463,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789866005319,
-  "rev": 785,
+  "updatedAt": 1789906604211,
+  "rev": 789,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -13230,5 +13414,10 @@
   "_retiredAxes": {
     "spectrumId": -0.1263017118375945,
     "value": -0.07300000000000001
+  },
+  "jobs": {
+    "board": [],
+    "out": [],
+    "back": []
   }
 }

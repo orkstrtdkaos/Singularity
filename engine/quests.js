@@ -1025,14 +1025,30 @@ function xpHint(outcome, ctx = {}) {
  *  ⛔ IDEMPOTENT BY RECORD, not by caller: the quest ids already credited live on the person, so the live path and the one-shot
  *  backfill cannot double-count each other, and a re-run of either is free. A FAILED quest credits nobody. Returns the id credited
  *  or null. */
+/** ⛔ A `giver` STRING RESOLVED TO THE PERSON IT MEANS, or null. PURE, and extracted because it now has a
+ *  second reader: promotion into the shared world (CCODE-463) must not mint a person called
+ *  "Warden Council bulletin (Lower Terrace)", and the resolution that already refuses to CREDIT such a
+ *  string is the same resolution that should refuse to publish it.
+ *  ⛑ The ladder, in order: strip "(via|through|from …)" FIRST so a messenger is discarded rather than
+ *  credited, then any remaining parenthetical gloss; then the raw string as a key, the bare string as a key,
+ *  its slug as a key, and finally a name match. A name nobody in this registry holds resolves to nobody. */
+export function giverRegistryId(registry, giver) {
+  const reg = registry || {};
+  const raw = String(giver || "").trim();
+  if (!raw) return null;
+  const bare = raw.replace(/\s*\((?:via|through|from)\b[^)]*\)/gi, " ").replace(/\s*\([^)]*\)/g, " ").replace(/\s+/g, " ").trim();
+  if (!bare) return null;
+  const hit = reg[raw] || reg[bare] || reg[slugify(bare)] || resolveByName(bare, Object.values(reg));
+  return hit?.id || null;
+}
+
 export function creditQuestGiver(character, quest) {
   const reg = character?.npcRegistry || {};
   const qid = quest?.id ? slugify(quest.id) : null;
   const raw = String(quest?.giver || "").trim();
   if (!qid || !raw) return null;
-  const bare = raw.replace(/\s*\((?:via|through|from)\b[^)]*\)/gi, " ").replace(/\s*\([^)]*\)/g, " ").replace(/\s+/g, " ").trim();
-  if (!bare) return null;
-  const hit = reg[raw] || reg[bare] || reg[slugify(bare)] || resolveByName(bare, Object.values(reg));
+  const hitId = giverRegistryId(reg, raw);
+  const hit = hitId ? (reg[hitId] || Object.values(reg).find(n => n?.id === hitId)) : null;
   if (!hit || !hit.id) return null;
   const credited = Array.isArray(hit.creditedQuests) ? hit.creditedQuests : [];
   if (credited.includes(qid)) return null;

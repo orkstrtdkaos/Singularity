@@ -24409,6 +24409,95 @@ console.log("\n── §338 · a person met in play has a name ──");
     && !/a placeholder such as The Runner or the courier/.test(gmSrc338));
 }
 
+// ══════════ §339 · CCODE-463 — THE PEOPLE WORTH KNOWING REACH THE SHARED WORLD ══════════
+// Erik: "I want the world scenes to be fixed and to PROMOTE MORE NPCS to the One World state." Aevi's numbers made the case and
+// they are stark: 100 authored people, 14 quest givers across the live saves, and NOT ONE of them in shared `people` or `fates`.
+// Sister Vreni had been met seventeen times with a full local record — name, role, description, the count itself — and not one byte
+// of it reached the world, so the next GM to meet her in a ledger row invented a second Vreni.
+// ⛑ `lives` was the right home and it was EMPTY: `{}`, never once written. Two gates starved it — `sharedPersonIds` built its id set
+// from authored content ids (underscored) so a hyphenated registry key never matched, and `lifeOf` published only STAMPED CHANGES,
+// so a person nobody's role had changed was never published however many times they had been met.
+console.log("\n── §339 · who the shared world gets to know ──");
+{
+  const FT = await import("../engine/fates.js");
+  const QG = await import("../engine/quests.js");
+  const NR = await import("../engine/names.js");
+  const by339 = { characterId: "char-x", name: "Tester" };
+  const mk339 = (reg, quests = []) => ({ id: "char-x", name: "Tester", npcRegistry: reg, quests });
+  const promoteFor = (c) => { const g = new Set(); for (const q of c.quests || []) { const id = QG.giverRegistryId(c.npcRegistry, q?.giver); if (id) g.add(id); }
+    return FT.promotableIds(c, { giverIds: g, atMet: 3, isRole: NR.looksLikeRole }); };
+
+  const reg339 = {
+    "sister-vreni": { id: "sister-vreni", name: "Sister Vreni", role: "Wayhouse sister", description: "Unhurried.", met: 17, firstMet: { locationId: "the_kindly_rest", day: 2 }, knownFacts: ["she cannot sleep"], relationship: 3, history: ["h"] },
+    "one-meeting": { id: "one-meeting", name: "Toran Fell", role: "A carter", met: 1 },
+    "the-giver": { id: "the-giver", name: "Aldric", role: "Smokehouse man", met: 1 },
+    "still-a-role": { id: "still-a-role", name: "Hostel-keeper", role: "Keeper of the Marchward hostel", met: 9 },
+  };
+  const c339 = mk339(reg339, [{ id: "q1", giver: "Aldric (smokehouse man)" }, { id: "q2", giver: "Warden Council bulletin (Lower Terrace)" }]);
+  const got = promoteFor(c339);
+  check("§339: ⛔ TWO DOORS INTO THE SHARED WORLD, WHICHEVER FIRES FIRST — they GAVE a quest (a multi-stage relationship IS the world caring), or `met >= 3` (three separate meetings is a person, not a passerby). ⚠️ A giver is resolved through the SAME ladder that decides whether to CREDIT one, so \"Warden Council bulletin (Lower Terrace)\" resolves to nobody and is published as nobody — Aevi's §4a, which would otherwise have minted a bulletin as a person",
+    got.has("sister-vreni") && got.has("the-giver") && !got.has("one-meeting")
+    && QG.giverRegistryId(reg339, "Warden Council bulletin (Lower Terrace)") === null
+    && QG.giverRegistryId(reg339, "Aldric (smokehouse man)") === "the-giver",
+    JSON.stringify({ promoted: [...got] }));
+
+  check("§339: ⛔ AND A JOB TITLE IS STILL REFUSED, EVEN NOW THAT THE DOOR NAMES PEOPLE — CCODE-462 closed this at first meeting, so a person met today is named from the first beat and the third meeting is a person with a name. ⚠️ The guard stays because a save older than that repair, or a path nobody has thought of, must never put \"Hostel-keeper\" into the world's canon as a human being. Met nine times and still not published",
+    !got.has("still-a-role")
+    && promoteFor(mk339({ ...reg339, "still-a-role": { ...reg339["still-a-role"], trueName: "Ravel" } })).has("still-a-role"),
+    "refused at met 9 under a role; admitted the moment they have a name");
+
+  const lives339 = FT.livesOfWorld(c339, new Set(), { by: by339, introduce: got });
+  const vreni = lives339.find(l => l.id === "sister-vreni");
+  const blob = JSON.stringify(lives339);
+  check("§339: ⛔ THE PERSON, NEVER THE KNOWING — Aevi: \"A life is public; what Adelheid privately learned, suspects or feels about Vreni is hers.\" So who they are, where and when they were first seen, and who met them; and NOT `knownFacts`, NOT `relationship`, NOT `history`. ⚠️ `canonForViewer` could NOT have done this job, which she reached for: it filters on CONTENT RATING and knows nothing about privacy, so every private fact would have gone straight through it",
+    !!vreni && vreni.name === "Sister Vreni" && vreni.intro.role === "Wayhouse sister"
+    && vreni.intro.firstSeenDay === 2 && vreni.intro.where === "the_kindly_rest" && vreni.intro.metBy.name === "Tester"
+    && !/knownFacts|relationship|history|cannot sleep/.test(blob),
+    JSON.stringify(vreni?.intro));
+
+  check("§339: ⛑ AND IT CARRIES THE KEY THE OTHER HALF JOINS ON — `fates` (\"what became of them\") is keyed in the content shape with underscores and the registry is hyphenated, which is two of the four namespaces this world keys people in. A life carries `canonId` so the two halves of one sentence about one person can be put back together",
+    vreni.id === "sister-vreni" && vreni.canonId === "sister_vreni");
+
+  // ⛔ THE SILENT NO-OP THIS CLASS OF CHANGE ALWAYS HAS
+  const foldOnce = FT.foldLives({ schemaVersion: 1, regionId: "valley", lives: {} }, lives339);
+  const foldTwice = FT.foldLives(foldOnce.store, lives339);
+  check("§339: ⛔ AN INTRODUCTION COUNTS AS SOMETHING NEW, OR PROMOTION SILENTLY DOES NOTHING — `sameLife` decides whether a life is worth writing, and it compared only the role/status aspects; a life carrying an introduction and one without read as SAYING THE SAME THING, so the fold declined to write and `lives` would have stayed `{}` with every part of this working. ⚠️ And it is idempotent: publishing the same people twice changes nothing the second time",
+    foldOnce.changed.length === lives339.length && foldTwice.changed.length === 0
+    && Object.keys(foldOnce.store.lives).length === lives339.length,
+    `first fold wrote ${foldOnce.changed.length}, second wrote ${foldTwice.changed.length}`);
+
+  // ⛑ WHO INTRODUCED THEM IS A THING THAT HAPPENED ONCE
+  const later = { id: "sister-vreni", name: "Sister Vreni", canonId: "sister_vreni",
+    intro: { role: "Wayhouse sister", description: null, firstSeenDay: 40, where: "millbrook", metBy: { characterId: "char-y", name: "Someone Later" } } };
+  const merged = FT.mergeLife(vreni, later), mergedOther = FT.mergeLife(later, vreni);
+  check("§339: ⛑ THE EARLIEST INTRODUCTION STANDS, WHICH IS THE OPPOSITE RULE TO EVERY OTHER ASPECT HERE AND IS THE RIGHT ONE — a role and a status are answered by the LATEST account, because they change; who introduced a person to the world happened once, and it happened to whoever met them first. Symmetric, so the order two travelers publish in cannot decide it",
+    merged.intro.firstSeenDay === 2 && merged.intro.metBy.name === "Tester"
+    && mergedOther.intro.firstSeenDay === 2 && mergedOther.intro.metBy.name === "Tester",
+    JSON.stringify({ merged: merged.intro.metBy.name, reversed: mergedOther.intro.metBy.name }));
+
+  // ⛔ AND OVER THE REAL SAVES, WHICH IS THE ONLY PLACE THE BAR CAN BE JUDGED
+  let store339 = { schemaVersion: 1, regionId: "valley", lives: {} };
+  let saves = 0;
+  for (const d of readdirSync(join(root, "characters"))) {
+    let files = []; try { files = readdirSync(join(root, `characters/${d}`)); } catch { continue; }
+    for (const f of files.filter(x => x.endsWith(".json"))) {
+      let j; try { j = rj(`characters/${d}/${f}`); } catch { continue; }
+      if (!j.npcRegistry) continue;
+      saves++;
+      const p = promoteFor(j);
+      store339 = FT.foldLives(store339, FT.livesOfWorld(j, new Set(), { by: { characterId: j.id, name: j.name }, introduce: p })).store;
+    }
+  }
+  const published = Object.values(store339.lives);
+  const roleNamed = published.filter(l => NR.looksLikeRole(l.name, l.intro?.role || ""));
+  const priv = JSON.stringify(published);
+  check("§339: ⛔ DRIVEN OVER EVERY LIVE SAVE, BECAUSE A BAR CAN ONLY BE JUDGED AGAINST THE PEOPLE IT ADMITS — the shared world's `lives` has been `{}` since it was built; these saves fill it, folding the same person met by several travelers into one row. ⚠️ NOT ONE of them is published under a job title, and not one carries anything the character privately knows",
+    saves >= 8 && published.length >= 40 && roleNamed.length === 0
+    && !/knownFacts|relationship\"|\"history\"/.test(priv)
+    && published.every(l => l.name && l.canonId),
+    `${published.length} people across ${saves} saves · ${roleNamed.length} under a job title`);
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

@@ -31,7 +31,7 @@ import { milestoneEffects } from "./ladder.js";
 // SNG-431 §1 — ⛔ "worldtick.js does not import names.js at all" (Aevi). That sentence IS the ticket: the
 // file that creates people had no access to the file that names them. `personName` is the one namer;
 // `nameOf`/`asSpoken` are what stop an origin line saying "of the the_ceaseless" at a player.
-import { personName, mintedWants, nameOf, asSpoken } from "./names.js";
+import { personName, mintedWants, nameOf, asSpoken, looksLikeRole } from "./names.js";
 // SNG-433: the sentences a fight is reported in are AUTHORED. This holds only the decisions the prose
 // cannot make for itself — which variant, how a name shortens, and when to drop a slot.
 import { newsVoiceOf, clashLine, fragmentLine, strikeLine, figureFlavor, newsNearness, pickIndex } from "./newsvoice.js";
@@ -47,7 +47,8 @@ import { boundFigures } from "./companionlives.js";   // SNG-597 §3: a companio
 import { decayWakes, wakeArcPush } from "./wake.js"; // SNG-204: wakes decay on the tick + lean on connected arcs
 import { FATES_PATH, WOUND_DAYS, STOP_DAYS, fatesOfWorld, foldFates, adoptFates, fateNews,   // CCODE-381: a legend's fate is the world's
   personIdFor, mintKey, sharedPeopleOf, foldPeople, adoptPeople, birthNews,   // CCODE-384: and the people it makes
-  sharedPersonIds, livesOfWorld, foldLives, adoptLives, lifeNews } from "./fates.js";   // CCODE-385: and what is true of the people it holds
+  sharedPersonIds, livesOfWorld, foldLives, adoptLives, lifeNews, promotableIds } from "./fates.js";   // CCODE-385: and what is true of the people it holds · CCODE-463: and who the world should know at all
+import { giverRegistryId } from "./quests.js";   // ⛔ CCODE-463: a giver resolved by the SAME ladder that decides whether to credit them
 import { HOLDS_PATH, holdCardsOf, holdCardsChanged, mergeHoldCards } from "./sharedholds.js";   // CCODE-383: a hold nearby is known
 import { TRADES_PATH, settleOrders, refundOrders, mergeOrders } from "./holdtrade.js";   // CCODE-388: trading with another player's hold
 import { enterDeathState, deepenDeaths, deathDepth, isRetrievable, resolveRetrieval } from "./death.js"; // SNG-209: a killed figure ENTERS the death state; the clock sinks untended deaths toward sealed
@@ -1441,7 +1442,15 @@ export async function syncSharedFates({ character, content, publish = true, now 
       const minePeople = sharedPeopleOf(ws);
       const mine = fatesOfWorld(ws, [...authoredIds, ...minePeople.map(f => f.id)], { by });
       // ⛔ CCODE-385: the lives this world has seen change go up with them
-      const myLives = livesOfWorld(character, sharedPersonIds(content, character), { by });
+      // ⛔ CCODE-463 — AEVI'S §3, AND ERIK'S GO-AHEAD AFTER THE NAMING LANDED: "that will allow the gate to work
+      // fine." Promote on either door — they GAVE a quest, or `met >= 3` — and publish WHO THEY ARE.
+      // ⚠️ The giver is resolved through the same ladder that decides whether to credit one, so
+      // "Warden Council bulletin (Lower Terrace)" resolves to nobody and is published as nobody; and a name
+      // that is still a job title is refused even now, because a save older than the repair may hold one.
+      const giverIds = new Set();
+      for (const q of character?.quests || []) { const g = giverRegistryId(character?.npcRegistry, q?.giver); if (g) giverIds.add(g); }
+      const promote = promotableIds(character, { giverIds, atMet: 3, isRole: looksLikeRole });
+      const myLives = livesOfWorld(character, sharedPersonIds(content, character), { by, introduce: promote });
       await pushMergedFile(FATES_PATH, (remote) => {
         const people = foldPeople(remote, minePeople);
         const lives = foldLives(people.store, myLives);

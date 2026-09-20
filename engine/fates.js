@@ -1,4 +1,6 @@
 // fates.js — ⛔ CCODE-381, shared lives (second stage): A LEGEND'S FATE IS THE WORLD'S.
+import { smartClamp } from "./namematch.js";   // CCODE-463: the public record is clamped at a word, never sliced mid-word
+
 //
 // Erik 2026-09-16: "The world changes for everyone." — and of the people in it, "they must, they do… careers, do deeds, and die."
 //
@@ -356,6 +358,71 @@ export function sharedPersonIds(content = {}, character = null) {
   return ids;
 }
 
+/** ⛔ WHO THE SHARED WORLD SHOULD KNOW ABOUT. Aevi's spec §3, and the numbers made her case: 100 authored
+ *  people, 14 quest givers across the live saves, and NOT ONE of them in shared `people` or `fates`. Sister
+ *  Vreni had been met seventeen times, with a full local record, and not one byte of it reached the world —
+ *  so the next GM to see her in a ledger row invented a second Vreni.
+ *
+ *  ⛑ TWO WAYS IN, WHICHEVER FIRES FIRST, and they are Aevi's:
+ *    · they GAVE a quest — a multi-stage relationship is the world caring
+ *    · `met >= 3` — three separate meetings is a person, not a passerby
+ *
+ *  ⚠️ AND THE BAR ONLY WORKS BECAUSE EVERYBODY NOW HAS A NAME. Measured before CCODE-462: `met >= 3` took in
+ *  68 people, and the bottom of that list held "The Messenger", "Hostel-keeper", "Waystation morning runner"
+ *  — roles sitting in the name field, which promotion would have published as people, permanently. Erik's
+ *  ruling closed that at the door: a person met in play is named from the first beat, so the third meeting
+ *  is a person with a name. ⛔ The guard stays anyway, because a save that predates the repair or a record
+ *  built by some path nobody has thought of yet must not put a job title into the world's canon.
+ *  ⛑ A giver is resolved through the SAME ladder that decides whether to credit them, so
+ *  "Warden Council bulletin (Lower Terrace)" resolves to nobody and is published as nobody. PURE. */
+export function promotableIds(character, { giverIds = null, atMet = 3, isRole = null } = {}) {
+  const reg = character?.npcRegistry || {};
+  const givers = giverIds instanceof Set ? giverIds : new Set(giverIds || []);
+  const out = new Set();
+  for (const [id, n] of Object.entries(reg)) {
+    if (!n || !n.id) continue;
+    const nameForWorld = n.trueName || n.name;
+    if (!nameForWorld) continue;
+    // ⛔ a job title is not a person, whoever put it there
+    if (typeof isRole === "function" && !n.trueName && isRole(nameForWorld, n.role || "")) continue;
+    if (givers.has(id) || (Number(n.met) || 0) >= atMet) out.add(id);
+  }
+  return out;
+}
+
+/** ⛔ WHO THIS PERSON IS — the record `lives` was always for, against `fates`' "what became of them".
+ *
+ *  ⚠️ THE PERSON, NEVER THE KNOWING. Aevi: *"A life is public; what Adelheid privately learned, suspects or
+ *  feels about Vreni is hers."* So: who they are, where and when they were first seen, and who met them —
+ *  and NOT `knownFacts`, NOT `relationship`, NOT `history`, NOT a private status note. ⛑ `canonForViewer`
+ *  could not have done this job: it filters on CONTENT RATING and knows nothing about privacy, so the lens
+ *  she reached for would have passed every private fact straight through.
+ *
+ *  ⛔ AND THE NAME IT PUBLISHES IS THE ONE THE WORLD KNOWS — `trueName` when this character has not learned
+ *  it yet (CCODE-462). The world is not ignorant of a person because one traveler has not been introduced;
+ *  and `adoptLives` will not hand that name back to a character who calls them something else, because it
+ *  folds only on a matching full name. They still have to earn it. PURE. */
+export function introductionOf(n, { by = null } = {}) {
+  if (!n?.id) return null;
+  const name = n.trueName || n.name;
+  if (!name) return null;
+  const who = (x) => (x ? { characterId: x.characterId ?? null, name: x.name ?? null } : null);
+  const first = n.firstMet && typeof n.firstMet === "object" ? n.firstMet : null;
+  return {
+    id: n.id, name,
+    canonId: String(n.id).toLowerCase().replace(/-/g, "_"),   // the key `fates` and content use, so the two halves join
+    intro: {
+      // CLAMPED, NOT SLICED. `.slice` cuts mid-word, and this text is the PUBLIC record of who a person is —
+      // the one place a severed sentence is read back to somebody else's GM as the whole of what is known.
+      role: n.role ? smartClamp(String(n.role), 120) : null,
+      description: n.description ? smartClamp(String(n.description), 240) : null,
+      firstSeenDay: num(first?.day),
+      where: first?.locationId || null,
+      metBy: who(by),
+    },
+  };
+}
+
 /** What this world has seen change in a person's life, stamped. Null when nothing is stamped. Pure. */
 export function lifeOf(n, { by = null } = {}) {
   if (!n?.id) return null;
@@ -395,7 +462,17 @@ function laterAspect(a, b, since, by, fields, { dies = false } = {}) {
 export function mergeLife(a, b) {
   if (!a) return b || null;
   if (!b) return a;
+  // ⛔ THE EARLIEST INTRODUCTION STANDS, which is the opposite rule to every other aspect here and is the
+  // right one: a life's role and status are answered by the LATEST account, because they change — but who
+  // introduced a person to the world is a thing that happened once, and the first traveler to meet them is
+  // the one it happened to. ⚠️ A day-less introduction never displaces a dated one.
+  const ia = a.intro, ib = b.intro;
+  const da = num(ia?.firstSeenDay), db = num(ib?.firstSeenDay);
+  const intro = (!ia && !ib) ? null
+    : (!ib ? ia : (!ia ? ib : (db == null ? ia : (da == null ? ib : (da <= db ? ia : ib)))));
   return { id: a.id || b.id, name: a.name || b.name,
+    ...(a.canonId || b.canonId ? { canonId: a.canonId || b.canonId } : {}),
+    ...(intro ? { intro } : {}),
     ...laterAspect(a, b, "roleSince", "roleBy", ROLE_FIELDS),
     ...laterAspect(a, b, "statusSince", "statusBy", STATUS_FIELDS, { dies: true }) };
 }
@@ -403,8 +480,12 @@ export function mergeLife(a, b) {
 /** Whether two lives say the same thing. Pure. */
 export function sameLife(a, b) {
   if (!a || !b) return !a && !b;
+  // ⚠️ THE INTRODUCTION IS PART OF THE KEY. Without it `foldLives` compares a life carrying one against a
+  // life without, decides they say the same thing, and never writes — which is a promotion that silently
+  // does nothing, the exact shape of the bug this whole pass exists to end.
   const key = (x) => JSON.stringify([normName(String(x.name || "")), x.role ?? null, num(x.roleSince), personKey(x.roleBy), x.status ?? null,
-    x.statusNote ?? null, num(x.statusSince), personKey(x.statusBy), num(x.returnedFromDeath?.day)]);
+    x.statusNote ?? null, num(x.statusSince), personKey(x.statusBy), num(x.returnedFromDeath?.day),
+    x.intro?.role ?? null, x.intro?.description ?? null, num(x.intro?.firstSeenDay), x.intro?.where ?? null, personKey(x.intro?.metBy)]);
   return key(a) === key(b);
 }
 
@@ -424,12 +505,19 @@ export function foldLives(store, lives = [], { regionId = "valley" } = {}) {
 }
 
 /** Every stamped life this world holds, for the people whose lives can be shared. Pure. */
-export function livesOfWorld(character, ids = new Set(), { by = null } = {}) {
+export function livesOfWorld(character, ids = new Set(), { by = null, introduce = null } = {}) {
+  const intro = introduce instanceof Set ? introduce : new Set(introduce || []);
   const out = [];
   for (const [id, n] of Object.entries(character?.npcRegistry || {})) {
-    if (!ids.has(id)) continue;
+    if (!ids.has(id) && !intro.has(id)) continue;
     const l = lifeOf(n, { by });
-    if (l) out.push(l);
+    // ⛔ AND THIS IS THE SECOND GATE THAT STARVED `lives` TO ZERO. It published only STAMPED CHANGES — a role
+    // or a status with a `since` day — so a person nobody's role had changed was never published at all,
+    // however many times they had been met. Sister Vreni at seventeen meetings has no `roleSince`.
+    const i = intro.has(id) ? introductionOf(n, { by }) : null;
+    if (l && i) out.push({ ...i, ...l, canonId: i.canonId, intro: i.intro });
+    else if (l) out.push(l);
+    else if (i) out.push(i);
   }
   return out;
 }

@@ -734,38 +734,22 @@ for (const pack of PACKS) {
   // and 104 of 104 land-wanting locations stand on ONE mainland. The census FORM stays — Aevi: "census-
   // not-sentence beats the binary in the spec" — with an empty expected set: anyone appearing here is
   // marooned by a REGRESSION, and a dead bridge floods this list with ~43 names at once.
-  // ⛔ ERIK RULED 2026-09-20 (c): THE CENSUS TESTS PLACES REACHED ACROSS THE SURFACE. The red that prompted it was
-  // `[-22.2, 0]`, which is `the_slow_stair` — a waygate settlement in `umbral_depths`.
+  // ⛔ ERIK RULED 2026-09-20, live: "the Slow Stair is under ground." The census tests places reached across the
+  // SURFACE; the world declares which ones are not, and this reads the declaration. ⚠️ Nobody widens a threshold:
+  // nothing about the land moved, and a place that does not declare itself below is still counted.
   //
-  // ⚠️ AND THE OBVIOUS READING OF IT IS WRONG, WHICH IS WHY THIS READS THE ROUTE AND NOT THE PLACE. The Slow Stair
-  // is not underground: its record says `depth: 0` and its way ends at `level: 0` — "⛔ THE WAY OUT, AND IT CLIMBS
-  // THE WHOLE WAY — days of it… The dark thinning by degrees until it is only evening." It is the surface MOUTH of
-  // an underground country. What is below the surface is the ROAD: its single way descends to −3 before it climbs
-  // out, and nothing walks to it across the ground.
+  // ⛑ ON THE LOCATION, AND AEVI MEASURED WHY NOT ANYWHERE ELSE (`po/RULING_aevi_slow_stair.md`): not on the KIND,
+  // because `the_slow_stair` is a `waygate` and waygates elsewhere are surface places; not on the REGION, because
+  // the Umbral Depths holds `the_harborward` — a HARBOUR with a surface coast. "A vertical country, not a buried
+  // one: a shoreline at the top and a stair at the bottom."
   //
-  // ⛑ SO THE RULE IS THE ONE THE WORLD ALREADY DECLARES: a location whose EVERY way runs below the surface is not
-  // required to stand on the mainland. `region_maps.json` carries `level` on every waypoint — the fact lives in
-  // content, and this reads it. ⚠️ NOT A WIDENED THRESHOLD: nothing about the land moved, and a place with even one
-  // surface way is still counted. Four places qualify today, all of them the Umbral cluster.
-  const fromBelow = (() => {
-    const ways = [];
-    (function collect(o) {
-      if (!o || typeof o !== "object") return;
-      if (Array.isArray(o.ways)) ways.push(...o.ways);
-      for (const v of Object.values(o)) if (v && typeof v === "object") collect(v);
-    })(rj("content/packs/core/world/region_maps.json"));
-    const seen = {};
-    for (const w of ways) {
-      const levels = (w.waypoints || []).map((p) => Number(p.level) || 0);
-      const surface = levels.every((l) => l === 0);
-      for (const id of [w.from, w.to]) {
-        if (!id) continue;
-        (seen[id] = seen[id] || { surface: 0, below: 0 })[surface ? "surface" : "below"]++;
-      }
-    }
-    return new Set(Object.entries(seen).filter(([, c]) => c.surface === 0 && c.below > 0).map(([id]) => id));
-  })();
-  // the census counts coordinates; the exemption is declared about PLACES, so the two are joined by position
+  // ⚠️ AND NOT DERIVED FROM THE WAYS, WHICH I TRIED FIRST AND WHICH PROVES HER POINT BY FAILING IT. A rule that
+  // exempts "a location whose every way runs below the surface" is computable — and it exempts THE HARBOUR, whose
+  // ways happen to run below. A derivation that excuses the wrong place is worse than a field somebody must
+  // remember, because nobody ever reads it again.
+  const belowSurface = new Set(Object.entries(canon.locs || {})
+    .filter(([, l]) => Number(l?.worldPos?.depth) < 0).map(([id]) => id));
+  // the census counts coordinates; the declaration is made about PLACES, so the two are joined by position
   const placeAt = (lat, lon) => {
     for (const [id, l] of Object.entries(canon.locs || {})) {
       const wp = l?.worldPos;
@@ -775,13 +759,13 @@ for (const pack of PACKS) {
     return null;
   };
   const offMainland = canon.gp.landwant.filter((p) => comp[idxOf(p[0], p[1])] !== 1);
-  const exempt = [], marooned = [];
+  const excused = [], marooned = [];
   for (const p of offMainland) {
     const id = placeAt(p[0], p[1]);
-    (id && fromBelow.has(id) ? exempt : marooned).push(id ? `${id} [${p}]` : `[${p}]`);
+    (id && belowSurface.has(id) ? excused : marooned).push(id ? `${id} [${p}]` : `[${p}]`);
   }
-  // ⛑ CENSUS, NOT SENTENCE: what was excused is SAID, every run, so an exemption can never become a hiding place.
-  console.log(`      · reached only from below, so not required on the mainland: ${exempt.length ? exempt.join(" · ") : "none"} (of ${fromBelow.size} declared: ${[...fromBelow].join(", ")})`);
+  // ⛑ CENSUS, NOT SENTENCE: what was excused is SAID, every run, so a declaration can never become a hiding place.
+  console.log(`      · declared below the surface, so not asked to stand on the mainland: ${excused.length ? excused.join(" · ") : "none"} (of ${belowSurface.size} declared below in all: ${[...belowSurface].slice(0, 8).join(", ")}${belowSurface.size > 8 ? " …" : ""})`);
   check("SNG-391: off-mainland is EXACTLY the designed archipelago — a dead bridge floods this census",
     marooned.length === 0, marooned.slice(0, 8).join(" · "));
   let mainCells = 0, landCells = 0;

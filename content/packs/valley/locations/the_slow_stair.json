@@ -61,9 +61,9 @@
  "worldPos": {
   "colatitude": 67.8,
   "longitude": 0,
-  "depth": 0
+  "depth": -1
  },
- "worldPosNote": "⛔ SNG-407: moved 2.79° (5 walking days) onto the nearest coast the built terrain actually has. Erik: 'keep the land as ground truth now and move the locations slightly to fit the land.' Was colatitude 68, longitude 3.",
+ "worldPosNote": "⛔ SNG-407: moved 2.79° (5 walking days) onto the nearest coast the built terrain actually has. Erik: 'keep the land as ground truth now and move the locations slightly to fit the land.' Was colatitude 68, longitude 3.  ⛔ ERIK RULED 2026-09-20, live: \"the Slow Stair is under ground.\" So `depth` is BELOW THE SURFACE, and the surface-connectivity census (SNG-391) does not ask it to stand on the mainland. ⚠️ THE FACT IS RULED, THE MAGNITUDE IS NOT: −1 is the shallowest claim that is true, not a measurement. region_maps' way profile (−3 → −2 → 0) describes the ROAD, which climbs the whole way out; it is not the settlement's access depth, as Aevi measured in po/RULING_aevi_slow_stair.md §2.",
  "tier": "settlement",
  "parentId": "the_underlight",
  "appearance": "A vast stair cut into rock, climbing for days in long flights and broad landings. The dark thins by degrees toward the top — first a grey suggestion, then real light at the far opening. Worn treads, rail cut into the wall."

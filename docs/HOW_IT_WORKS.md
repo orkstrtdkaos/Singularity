@@ -2409,3 +2409,24 @@ is read in three places including the portrait prompt. ✅ **The field is fine; 
 **`renderFormStep` is DARK CODE, not a dead feature** — the distinction `scripts/safe_delete.mjs` exists to
 make, and the reason its verdict is never the word "delete".
 
+---
+
+## 12.6 · ✅ A PLACE YOU REACH BY DESCENDING IS NOT ASKED TO STAND ON THE MAINLAND (Erik ruled 2026-09-20)
+
+**Erik, live: *"the Slow Stair is under ground."*** ⛔ The world's surface-connectivity census (SNG-391) had been
+red on one point, `[-22.2, 0]`, which is **The Slow Stair** — a waygate settlement in the Umbral Depths, nineteen
+degrees south of the rest of its region and touching no mainland.
+
+⚑ **The gate was never wrong about the geometry.** It was asking a surface question of a population that includes
+a place you reach by descending, **and the content never said so.** ⛑ So the location declares it —
+`worldPos.depth` below zero — and the census reads the declaration and prints what it excused, every run.
+
+⚠️ **NOT ON THE KIND AND NOT ON THE REGION, and Aevi measured why:** the Slow Stair's kind is `waygate`, and
+waygates elsewhere are surface places; its region holds `the_harborward`, **a harbour with a surface coast**. ⛔
+**The Umbral Depths is a vertical country, not a buried one — a shoreline at the top and a stair at the bottom.**
+
+⚠️ **AND NOT DERIVED FROM THE ROADS.** A rule that excuses "a location whose every way runs below the surface" is
+computable, and it excuses **the harbour** — because its ways happen to run below. ⛑ **A derivation that excuses
+the wrong place is worse than a field somebody has to remember**, because nobody reads it again. The fact is
+ruled; the magnitude is not: −1 is the shallowest claim that is true, and the road's own profile (−3 → −2 → 0)
+describes the ROAD, which climbs the whole way out.

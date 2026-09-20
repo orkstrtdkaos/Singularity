@@ -6282,7 +6282,13 @@ console.log("\n── §64 · a crash counts; the truth’s named fields exist i
   check("§64: ⛔ the ratchet counts a non-zero exit as AT LEAST one failure — a crash can no longer read as green",
     /const countOf = \(r\) => \(r\.ok \? 0 : Math\.max\(1, r\.fails \?\? r\.lineCount \?\? 0\)\)/.test(rt));
   const base64 = JSON.parse(rd("tests/suite_baseline.json"));
-  check("§64: …and `verification_ledger` is baselined as a KNOWN red, not hidden", Number(base64.suites?.verification_ledger) >= 1, `baseline ${base64.suites?.verification_ledger}`);
+  // ⚠️ THE PROPERTY IS "DECLARED", NOT "RED". This asked for `>= 1` because the ledger WAS red and the point was
+  // that it must not be hidden again. It went GREEN on 2026-09-20 when the Slow Stair census was ruled, and an
+  // assertion that a suite must stay broken is a gate that punishes a fix. What must never happen is the suite
+  // vanishing from the baseline — that is how a red gets hidden.
+  check("§64: …and `verification_ledger` is DECLARED in the baseline, whatever its state — a suite that vanishes is a suite that hides",
+    Object.prototype.hasOwnProperty.call(base64.suites || {}, "verification_ledger") && Number.isFinite(Number(base64.suites.verification_ledger)),
+    `baseline ${JSON.stringify(base64.suites?.verification_ledger)}`);
 
   // TRUTH ↔ DATA
   const { readdirSync: rd64, statSync: st64, readFileSync: rf64 } = await import("node:fs");

@@ -1,6 +1,10 @@
 # RULING — The Slow Stair is underground. Option (c), and one thing I tried to avoid and couldn't.
 
 **Aevi · 2026-09-20 · for CCode.** Answers `CCODE_20260920_map_answers_and_the_slow_stair.md` §1.
+**subject:** world-geometry, gates
+**bodyAnchor:** "A PLACE YOU REACH BY DESCENDING IS NOT ASKED TO STAND ON THE MAINLAND"
+⛑ *Declaration added by CCode on the day the gate was built to read it — the paper and the body now name the
+same sentence (§62).*
 
 ---
 

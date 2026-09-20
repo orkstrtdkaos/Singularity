@@ -113,7 +113,68 @@
       "homeland": "the_ceaseless"
     }
   },
-  "lives": {},
+  "lives": {
+    "mara-wells": {
+      "id": "mara-wells",
+      "name": "Mara Wells",
+      "canonId": "mara_wells",
+      "intro": {
+        "role": "Millbrook civic manager",
+        "description": "A sharp-eyed woman in a patched green coat; worker's hands, a planner's bearing, dry unhurried speech. Spotted Adelheid's satchel and Harmonic stitching before a word was exchanged.",
+        "firstSeenDay": 1,
+        "where": "millbrook",
+        "metBy": {
+          "characterId": "char-mr5ns3hh",
+          "name": "Adelheid"
+        }
+      }
+    },
+    "piotr": {
+      "id": "piotr",
+      "name": "Piotr",
+      "canonId": "piotr",
+      "intro": {
+        "role": "Terrace farmer, Terrace Three east",
+        "description": "A compact man in his fifties with gray-streaked hair; kneels in his field patching irrigation channels, hands permanently clay-stained. Speaks minimally. Recognized the bundle before he recognized Adelheid.",
+        "firstSeenDay": 1,
+        "where": "millbrook",
+        "metBy": {
+          "characterId": "char-mr5ns3hh",
+          "name": "Adelheid"
+        }
+      }
+    },
+    "edvar-crane": {
+      "id": "edvar-crane",
+      "name": "Edvar Crane",
+      "canonId": "edvar_crane",
+      "intro": {
+        "role": "Mill resident and water-reader",
+        "description": "A tall man with river-pale eyes and the particular stillness of someone who has listened to water for a long time. Gray-threaded dark hair, work-worn hands.",
+        "firstSeenDay": 2,
+        "where": "gen-mara-wells-store",
+        "metBy": {
+          "characterId": "char-mr5ns3hh",
+          "name": "Adelheid"
+        }
+      }
+    },
+    "sister-vreni": {
+      "id": "sister-vreni",
+      "name": "Sister Vreni",
+      "canonId": "sister_vreni",
+      "intro": {
+        "role": "Wayhouse sister from the pass road wayhouse",
+        "description": "A woman in a pale gray habit, hands folded, unhurried in her manner. She does not step where she has not been invited. Speaks plainly and without performance.",
+        "firstSeenDay": 2,
+        "where": "gen-mara-wells-store",
+        "metBy": {
+          "characterId": "char-mr5ns3hh",
+          "name": "Adelheid"
+        }
+      }
+    }
+  },
   "fates": {
     "sister_alder": {
       "status": "stopped",

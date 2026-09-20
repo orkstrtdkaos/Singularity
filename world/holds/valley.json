@@ -2,34 +2,6 @@
   "schemaVersion": 1,
   "regionId": "valley",
   "holds": {
-    "char-mrum8y4d:the_standing_annex": {
-      "key": "char-mrum8y4d:the_standing_annex",
-      "id": "the_standing_annex",
-      "ownerId": "char-mrum8y4d",
-      "ownerName": "Loki",
-      "name": "The Standing Annex",
-      "kind": "enterprise",
-      "describedAs": "floating tower",
-      "locationId": "gen-the-made-gate",
-      "placeName": "The Made Gate",
-      "settlementId": "the_crossing",
-      "settlementName": "The Crossing",
-      "worldPos": {
-        "colatitude": 0,
-        "longitude": 0,
-        "depth": 0
-      },
-      "keeperId": "traveler-woman",
-      "keeperName": "Vessin Tallow-bark",
-      "condition": "thriving",
-      "has": [
-        "a watchtower",
-        "a shrine"
-      ],
-      "guardedBy": [
-        "Kael"
-      ]
-    },
     "char-mrhs8286:hold-fendt::warden-of-the-threshold-post-at-the-ridg": {
       "key": "char-mrhs8286:hold-fendt::warden-of-the-threshold-post-at-the-ridg",
       "id": "hold-fendt::warden-of-the-threshold-post-at-the-ridg",
@@ -178,6 +150,34 @@
       ],
       "guardedBy": [
         "Bryn Calowell"
+      ]
+    },
+    "char-mrum8y4d:the_standing_annex": {
+      "key": "char-mrum8y4d:the_standing_annex",
+      "id": "the_standing_annex",
+      "ownerId": "char-mrum8y4d",
+      "ownerName": "Loki",
+      "name": "The Standing Annex",
+      "kind": "enterprise",
+      "describedAs": "floating tower",
+      "locationId": "gen-the-made-gate",
+      "placeName": "The Made Gate",
+      "settlementId": "millbrook",
+      "settlementName": "Millbrook",
+      "worldPos": {
+        "colatitude": 20.4,
+        "longitude": 251.95,
+        "depth": 0
+      },
+      "keeperId": "traveler-woman",
+      "keeperName": "Vessin Tallow-bark",
+      "condition": "thriving",
+      "has": [
+        "a watchtower",
+        "a shrine"
+      ],
+      "guardedBy": [
+        "Kael"
       ]
     }
   }

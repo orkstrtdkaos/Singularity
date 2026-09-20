@@ -1708,8 +1708,8 @@
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 1980,
-    "lastSharedReadAt": "2026-09-20T12:39:31.394Z",
+    "lastGenCount": 1981,
+    "lastSharedReadAt": "2026-09-20T13:31:48.148Z",
     "lastTickWorldDay": 82,
     "lastCanonWorldDay": 82,
     "turnsSinceOffer": 0,
@@ -1834,7 +1834,7 @@
         "kind": "shortage",
         "premise": "The shallow wells that sustain the scattered settlements are dropping faster each season than anyone has yet admitted aloud.",
         "cause": "The Palelands' sparse, chalky soil has always demanded more water to work than it naturally holds, and the settlements were founded at the margins of what the…",
-        "stage": 57,
+        "stage": 58,
         "seededAtCount": 660,
         "surfaced": true,
         "fate": "growing",
@@ -1909,7 +1909,7 @@
         "kind": "shortage",
         "premise": "Certain materials or substances needed for whatever work the Unmade does are being quietly stockpiled by one practitioner at the expense of communal supply, because she no longer trusts the…",
         "cause": "The Unmade is a place where things are taken apart, and grief for what is lost has no formal channel — it is expected to simply disperse, as everything else…",
-        "stage": 20,
+        "stage": 21,
         "seededAtCount": 1675,
         "surfaced": true,
         "fate": "growing",
@@ -1935,7 +1935,7 @@
         "kind": "shortage",
         "premise": "A foundational material used in the Making's core work has quietly been substituted with an inferior source for several production cycles, and nothing built from it has yet been tested under real…",
         "cause": "The two workshops already deadlocked over the shared tool have each independently begun sourcing their own materials rather than drawing from the common…",
-        "stage": 13,
+        "stage": 14,
         "seededAtCount": 1826,
         "surfaced": true,
         "fate": "growing",
@@ -7936,7 +7936,7 @@
     "figureWokeDay": {
       "halvex_coil": 82
     },
-    "updatesToldTo": "2.3.6",
+    "updatesToldTo": "2.3.8",
     "newsLog": [
       {
         "day": 4,
@@ -8211,6 +8211,14 @@
         "locationId": "the_redline",
         "placedBy": "winnerId",
         "loggedAt": "2026-09-20T12:16:44.208Z"
+      },
+      {
+        "kind": "update",
+        "section": "world",
+        "version": "2.3.8",
+        "worldDay": 82,
+        "text": "The game was updated to v2.3.8 — 1 fixed.",
+        "loggedAt": "2026-09-20T13:31:52.752Z"
       }
     ]
   },
@@ -10600,8 +10608,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789908284977,
-  "rev": 796,
+  "updatedAt": 1789911112752,
+  "rev": 798,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -11755,21 +11763,21 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 215,
-    "choices": 215,
-    "characterDeltas": 102,
-    "scene": 215,
+    "sceneSummary": 214,
+    "choices": 214,
+    "characterDeltas": 101,
+    "scene": 214,
     "placeUpdates": 27,
-    "codexUpdates": 121,
-    "timeOps": 177,
-    "offer": 29,
+    "codexUpdates": 120,
+    "timeOps": 176,
+    "offer": 28,
     "generateRequest": 6,
-    "sceneEnded": 85,
+    "sceneEnded": 84,
     "npcUpdates": 171,
     "moveTo": 7,
-    "gambitApt": 47,
+    "gambitApt": 46,
     "deeds": 8,
-    "questUpdates": 32,
+    "questUpdates": 31,
     "standingOps": 3,
     "factUpdates": 9,
     "stageOps": 7,
@@ -11784,7 +11792,7 @@
     "intentsHeard": 5,
     "delegateOps": 1
   },
-  "_opTurns": 215,
+  "_opTurns": 214,
   "customAbilities": {
     "mirror-bright": {
       "id": "mirror-bright",
@@ -13598,15 +13606,6 @@
       "opsEmitted": [],
       "asked": "What is the Revel's name?",
       "locationId": "the_crossing"
-    },
-    {
-      "at": "2026-09-20T12:46:07.684Z",
-      "channel": "ask",
-      "kind": "refused-with-no-ops",
-      "phrase": "I can't",
-      "opsEmitted": [],
-      "asked": "Loki is trying to meet up with another PC Adelheid.  You should know sister venri from her story... do you not?",
-      "locationId": "the_wayhouse"
     }
   ],
   "battleImages": {

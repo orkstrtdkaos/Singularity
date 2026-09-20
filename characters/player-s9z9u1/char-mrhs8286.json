@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 33,
-  "xp": 3284,
+  "xp": 3289,
   "attributes": {
     "physical": 5,
     "mental": 8,
@@ -214,7 +214,7 @@
   "maxHealth": 201,
   "health": 201,
   "maxEnergy": 292,
-  "energy": 211,
+  "energy": 201,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -2475,9 +2475,9 @@
     "Deep night at the Whistling Woman post: Bryn Calowell arrives to report that the Threshold Post is complete and ready—frame, lodge, temple, and mine all sound—but the moorland's stirring has caught Fendt's attention. The silence is wrong, and something moves wrong within it.",
     "In the hollow beneath the moorland, Silas reads his father's waymarker through the Working Model—revealing three bond-channels and a listening lattice that was never meant to be merely carried, but answered."
   ],
-  "currentLocationId": "gen-whistling-woman-post",
+  "currentLocationId": "millbrook",
   "activeScene": {
-    "locationId": "gen-whistling-woman-post",
+    "locationId": "millbrook",
     "turns": [
       {
         "player": "First, listen to the system and hear it's waking - map it with the Waymarker.... The show Maren.",
@@ -2508,81 +2508,74 @@
         "player": "Use Kept Breath on the waking entity.",
         "summary": "In the reclamation system's hollow, Silas attempts to sustain the waking mechanism's vitality with Kept Breath—a craft meant for living things. The working fails; the mechanism has no vitality Kept Breath can read. Maren stands steady, naming the limit plainly.",
         "narration": "You reach deeper into the seam, past the held bearing, toward the thing that wakes beneath—the vast mechanism's own animating current. Kept Breath rises in your hands like purple mist, that violet ward-work that should soak harm, should stand between and shield. You push it down into the seam toward the mechanism's pulse, asking it to hold, to sustain, to keep the waking thing's vitality whole while it completes its work.\n\nBut Kept Breath is a craft made for living things. It knows the shape of a body, the way harm lands on flesh and bone and will. This is something else—a machine that wakes without lungs, that moves without blood. The purple mist reaches for a vitality it cannot find. It tries to soak a harm that does not land on anything Kept Breath has ever learned to read.\n\nThe working scatters. Not violently—it simply unravels like mist in sunlight, dispersing into the seam without purchase. The mechanism's pulse runs on unchanged. Behind you, Maren's hand is still steady on your shoulder, but you feel her shift slightly—a small adjustment in her weight, as if bracing.\n\n\"That one's not for machines,\" she says quietly. It is not a rebuke. It is a warden naming a limit plainly, the way they do."
+      },
+      {
+        "player": "Head back to meet your party in Millbrook.",
+        "summary": "Silas and Maren depart the reclamation system with the bearing held sound and return through the Made Gate to Millbrook, arriving in late afternoon with the proof of pole-pull to present at the convene vote.",
+        "narration": "You descend from the seam's threshold as Maren steps back, her attention already turning toward the way forward. The purple mist of the failed working disperses into the stone around you, leaving only the bearing held sound—not healed, but held. The system's pulse continues its work, obedient and patient, listening now to both its orders at once.\n\nYou emerge into the hollow's upper chamber and begin the ascent toward daylight. The moorland is waiting. Millbrook is waiting. The convene votes at noon, and the readings you carry—the proof that the pole-pull is real, that the crisis runs deeper than any single tradition's failing—have to reach the committee before the vote closes the question. Three days of road narrowed to hours. Maren moves beside you, corvid-shape settling back around her like a cloak she has worn so long it fits better than flesh.\n\nThe journey through the Made Gate takes two hours. You and Maren step through together—the threshold answers both of you—and emerge at the south approach to the waystation. From there, the road to Millbrook is clear and fast. You make it by late afternoon: the forge comes into view first, smoke still rising from the smithy, and then the mill-house beyond it, the terraced gardens bronze with the coming season.\n\nPell is waiting at the forge threshold. She sees you emerge from the road and straightens—no greeting, no surprise, just the shift of weight that means *you're back*. Behind her, Veth stands in the doorway, and beyond, in the mill-yard, you catch sight of Mara checking the supply-store doors for the afternoon cycle. The party is whole, the village is holding, and the evidence is in your hands."
       }
     ],
     "lastTurn": {
-      "narration": "You reach deeper into the seam, past the held bearing, toward the thing that wakes beneath—the vast mechanism's own animating current. Kept Breath rises in your hands like purple mist, that violet ward-work that should soak harm, should stand between and shield. You push it down into the seam toward the mechanism's pulse, asking it to hold, to sustain, to keep the waking thing's vitality whole while it completes its work.\n\nBut Kept Breath is a craft made for living things. It knows the shape of a body, the way harm lands on flesh and bone and will. This is something else—a machine that wakes without lungs, that moves without blood. The purple mist reaches for a vitality it cannot find. It tries to soak a harm that does not land on anything Kept Breath has ever learned to read.\n\nThe working scatters. Not violently—it simply unravels like mist in sunlight, dispersing into the seam without purchase. The mechanism's pulse runs on unchanged. Behind you, Maren's hand is still steady on your shoulder, but you feel her shift slightly—a small adjustment in her weight, as if bracing.\n\n\"That one's not for machines,\" she says quietly. It is not a rebuke. It is a warden naming a limit plainly, the way they do.",
-      "sceneSummary": "In the reclamation system's hollow, Silas attempts to sustain the waking mechanism's vitality with Kept Breath—a craft meant for living things. The working fails; the mechanism has no vitality Kept Breath can read. Maren stands steady, naming the limit plainly.",
+      "narration": "You descend from the seam's threshold as Maren steps back, her attention already turning toward the way forward. The purple mist of the failed working disperses into the stone around you, leaving only the bearing held sound—not healed, but held. The system's pulse continues its work, obedient and patient, listening now to both its orders at once.\n\nYou emerge into the hollow's upper chamber and begin the ascent toward daylight. The moorland is waiting. Millbrook is waiting. The convene votes at noon, and the readings you carry—the proof that the pole-pull is real, that the crisis runs deeper than any single tradition's failing—have to reach the committee before the vote closes the question. Three days of road narrowed to hours. Maren moves beside you, corvid-shape settling back around her like a cloak she has worn so long it fits better than flesh.\n\nThe journey through the Made Gate takes two hours. You and Maren step through together—the threshold answers both of you—and emerge at the south approach to the waystation. From there, the road to Millbrook is clear and fast. You make it by late afternoon: the forge comes into view first, smoke still rising from the smithy, and then the mill-house beyond it, the terraced gardens bronze with the coming season.\n\nPell is waiting at the forge threshold. She sees you emerge from the road and straightens—no greeting, no surprise, just the shift of weight that means *you're back*. Behind her, Veth stands in the doorway, and beyond, in the mill-yard, you catch sight of Mara checking the supply-store doors for the afternoon cycle. The party is whole, the village is holding, and the evidence is in your hands.",
+      "sceneSummary": "Silas and Maren depart the reclamation system with the bearing held sound and return through the Made Gate to Millbrook, arriving in late afternoon with the proof of pole-pull to present at the convene vote.",
       "choices": [
         {
-          "label": "Ask Maren what the system needs instead — what craft speaks its language.",
+          "label": "Show Pell the readings and ask her to get them to Mara immediately — the committee vote is tomorrow at noon.",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {},
           "difficulty": "very easy",
+          "trivial": true,
           "opposedDifficulty": null,
-          "intentTags": [
-            "study"
-          ],
+          "intentTags": [],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Reach toward the bearing again with what you know holds sound — Raised Thing alone, and hold it while Maren listens.",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {
-            "chaos_order": 0.2
-          },
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "craft",
-            "study"
-          ],
-          "abilityId": "raised_thing",
-          "energyCost": 2,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Step back from the seam and ask the system itself what it needs — speak to the waking thing plainly.",
+          "label": "Walk straight to Mara Wells's store and brief her on the readings, the system, and the timeline before the vote.",
           "attribute": "social",
           "subAttribute": "presence",
-          "axes": {
-            "mechanical_spiritual": -0.3
-          },
-          "difficulty": "hard",
+          "axes": {},
+          "difficulty": "easy",
+          "trivial": false,
           "opposedDifficulty": null,
           "intentTags": [
-            "study"
+            "report"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Descend fully into the seam and read the mechanism's structure with Order-Sense — understand what it is before asking anything of it.",
-          "attribute": "mental",
+          "label": "Ask Pell and Veth what has happened in Millbrook while you were away — what news, what has shifted, what the village is ready to hear.",
+          "attribute": "social",
           "subAttribute": "insight",
-          "axes": {
-            "chaos_order": 0.3,
-            "concrete_abstract": 0.2
-          },
-          "difficulty": "normal",
+          "axes": {},
+          "difficulty": "very easy",
+          "trivial": true,
           "opposedDifficulty": null,
           "intentTags": [
-            "study"
+            "scout"
           ],
-          "abilityId": "order_sense",
-          "energyCost": 2,
-          "trivial": false,
+          "abilityId": null,
+          "energyCost": null,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Maren what she is going to do — whether she intends to stay in Millbrook before the vote, or return to the moorland north.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": "very easy",
+          "trivial": true,
+          "opposedDifficulty": null,
+          "intentTags": [],
+          "abilityId": null,
+          "energyCost": null,
           "encounterId": null,
           "emergenceId": null
         }
@@ -2590,45 +2583,94 @@
       "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": -8,
+        "energy": -10,
         "inventoryAdd": [],
         "inventoryRemove": [],
         "xp": 0
       },
       "ledgerEvents": [],
-      "questUpdates": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "the-light-that-will-not-dim",
+          "note": "Arrived in Millbrook with the buried readings that prove pole-pull is the structural cause of the water crisis. The convene votes tomorrow at noon."
+        }
+      ],
       "standingOps": [],
       "delegateOps": [],
       "jobOps": [],
       "arcOps": [],
-      "adoptSchool": null,
-      "offer": null,
+      "offer": {
+        "thing": "Maren's quiet question — whether she stays or returns north — surfaces the weight of what comes after the vote. The valley will need watching, and so will the moorland.",
+        "from": "The legendary warden's own presence at Silas's side; the threshold question of what it means to have her here, and what it costs to have her absent"
+      },
       "stageOps": [],
       "scene": {
-        "setting": "Deep in the moorland hollow beneath the ridge, in the reclamation system's waking chamber. Stone walls worn smooth by the system's pulse. The seam where the failure lies runs deep and patient beneath your feet — now held sound by Raised Thing, but the mechanism's vast animating current still moves untouched. The purple mist of your failed working dissipates into the stone.",
+        "setting": "Millbrook village at late afternoon — the forge at the south entry, smoke rising, the mill-house and terraced gardens beyond, the village settling into early-autumn routines. The road from the north is clear and plain.",
         "npcsPresent": [
           {
+            "name": "Pell Ran Marsh",
+            "state": "Standing in the forge threshold, watching the road. Straightens as Silas and Maren emerge from it. No surprise; the simple weight-shift of readiness."
+          },
+          {
+            "name": "Veth (Stillwater) Ondra",
+            "state": "Standing in the doorway behind Pell, present and steady. Eyes tracking the arrival."
+          },
+          {
+            "name": "Mara Wells",
+            "state": "In the mill-yard checking the supply-store doors for the afternoon cycle. Visible but not yet aware of the arrival."
+          },
+          {
+            "name": "Huginn",
+            "state": "Perched on Silas's shoulder, silent and observant as always. The moorland is behind them now."
+          },
+          {
             "name": "Maren Ossitide",
-            "state": "Standing at the threshold above, her hand still steady on your shoulder. Her attention gathered at the seam. Waiting."
+            "state": "At Silas's side, corvid-form settled back around her like a worn cloak. Still and present."
           }
         ],
         "objects": [
-          "The waymarker, held steady in one hand, its channels still open and listening",
-          "The deep seam where the system's pulse lives, now held sound but still moving",
-          "Stone walls worn smooth by centuries of the system's work",
-          "Dispersing purple mist — the failed ward-work"
+          "The buried water readings — proof of pole-pull as the crisis's structural cause",
+          "The waymarker, held by Silas",
+          "Memory, the shadow-spear, carried across the journey",
+          "Silas's pack and travel kit"
         ],
         "threads": [
-          "Whether the system can be sustained in any form other than Raised Thing's bracing hold",
-          "What craft speaks to an unwaking machine in its own language",
-          "The convene vote at noon today on pole-pull as the crisis's source — and whether time will hold long enough"
+          "Whether Pell and Veth will have news of how the village has shifted while they were away",
+          "How much time remains before the convene vote at noon tomorrow",
+          "What Maren intends to do — whether she stays in Millbrook or returns to watch the moorland north",
+          "Whether Mara is ready to receive the readings and move them to the committee"
         ]
       },
-      "npcUpdates": [],
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "pell-ran-marsh",
+          "statusNote": "At Millbrook forge, present and ready. Silas and Maren have just arrived from the reclamation system with the readings.",
+          "note": "Saw Silas and Maren emerge from the north road at late afternoon. Made no performance of it — simply the readiness that comes from knowing they were coming back."
+        },
+        {
+          "op": "update",
+          "npcId": "veth-stillwater-ondra",
+          "statusNote": "At Millbrook, present in the forge doorway. Witness to Silas's arrival with the readings.",
+          "note": "Present as Silas returned. No word yet — watching to see what comes next."
+        },
+        {
+          "op": "update",
+          "npcId": "mara-wells",
+          "statusNote": "At Millbrook mill-yard, checking the supply-store doors. About to learn that the readings have been retrieved.",
+          "note": "Working her afternoon rounds when Silas and Maren arrived. Unaware of the return as of this moment."
+        },
+        {
+          "op": "update",
+          "npcId": "maren-ossitide",
+          "statusNote": "At Millbrook with Silas Weir. Corvid-form settled; present and waiting to see what the village holds.",
+          "note": "Descended with Silas from the reclamation system and made the journey through the Made Gate together. Now in Millbrook at late afternoon, presence still settling."
+        }
+      ],
       "intentsHeard": [],
       "factUpdates": [],
       "placeUpdates": [],
-      "discovery": null,
       "codexUpdates": [],
       "holdingOps": [],
       "holdTrades": [],
@@ -2644,50 +2686,60 @@
       "newEncounter": null,
       "unlockPrecursor": null,
       "unlockSubstrate": null,
-      "timeOps": null,
-      "moveTo": null,
-      "stateOps": [],
-      "itemUpdates": [],
-      "deriveItem": null,
-      "imagePrompt": null,
+      "timeOps": {
+        "hoursPassed": 2.4,
+        "why": "2-hour passage through the Made Gate, 0.4 days of travel from the waystation to Millbrook, arriving in late afternoon"
+      },
+      "moveTo": {
+        "location": "millbrook",
+        "why": "Departed the reclamation system beneath the moorland and returned through the Made Gate to Whistling Woman Post, then made the 0.4-day journey south to Millbrook, arriving in late afternoon with the buried readings to present at the convene vote."
+      },
+      "imagePrompt": "Silas and Maren emerge from the north road into Millbrook at late afternoon — the warden in corvid-form at his shoulder, Memory's shadow-spear held steady in one hand, the other carrying the scroll of buried water readings. Pell waits at the forge threshold, unmoved and ready. Behind her, Veth in the doorway. Huginn perched dark against the fading gold. The village settling into the gathering that comes before the decision.",
       "imageMedium": null,
-      "newAbility": null,
-      "gambitOps": null,
-      "gambitApt": false,
-      "markDefiningMoment": null,
-      "markTeacher": null,
-      "offerPromotion": null,
-      "offerAcquisition": null,
-      "offerIntent": null,
-      "sceneEnded": false
+      "stateOps": [],
+      "sceneEnded": false,
+      "momentArt": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Silas%20and%20Maren%20emerge%20from%20the%20north%20road%20into%20Millbrook%20at%20late%20afternoon%20%E2%80%94%20the%20warden%20in%20corvid-form%20at%20his%20shoulder%2C%20Memory's%20shadow-spear%20held%20steady%20in%20one%20hand%2C%20the%20other%20carrying%20the%20scroll%20of%20buried%20water%20readings.%20Pell%20waits%20at%20the%20forge%20threshold%2C%20unmoved%20and%20ready.%20Behind%20her%2C%20Veth%20in%20th%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=87661&nologo=true"
     },
     "sceneState": {
-      "setting": "Deep in the moorland hollow beneath the ridge, in the reclamation system's waking chamber. Stone walls worn smooth by the system's pulse. The seam where the failure lies runs deep and patient beneath your feet — now held sound by Raised Thing, but the mechanism's vast animating current still moves untouched. The purple mist of your failed working dissipates into the stone.",
+      "setting": "Millbrook village at late afternoon — the forge at the south entry, smoke rising, the mill-house and terraced gardens beyond, the village settling into early-autumn routines. The road from the north is clear and plain.",
       "npcsPresent": [
         {
-          "name": "Maren Ossitide",
-          "state": "Standing at the threshold above, her hand still steady on your shoulder. Her attention gathered at the seam. Waiting."
+          "name": "Pell Ran Marsh",
+          "state": "Standing in the forge threshold, watching the road. Straightens as Silas and Maren emerge from it. No surprise; the simp"
+        },
+        {
+          "name": "Veth (Stillwater) Ondra",
+          "state": "Standing in the doorway behind Pell, present and steady. Eyes tracking the arrival."
+        },
+        {
+          "name": "Mara Wells",
+          "state": "In the mill-yard checking the supply-store doors for the afternoon cycle. Visible but not yet aware of the arrival."
+        },
+        {
+          "name": "Huginn",
+          "state": "Perched on Silas's shoulder, silent and observant as always. The moorland is behind them now. · At Silas's side, corvid-form settled back around her like a worn cloak. Still and present."
         }
       ],
       "objects": [
-        "The waymarker, held steady in one hand, its channels still open and listening",
-        "The deep seam where the system's pulse lives, now held sound but still moving",
-        "Stone walls worn smooth by centuries of the system's work",
-        "Dispersing purple mist — the failed ward-work"
+        "The buried water readings — proof of pole-pull as the crisis's structural cause",
+        "The waymarker, held by Silas",
+        "Memory, the shadow-spear, carried across the journey",
+        "Silas's pack and travel kit"
       ],
       "threads": [
-        "Whether the system can be sustained in any form other than Raised Thing's bracing hold",
-        "What craft speaks to an unwaking machine in its own language",
-        "The convene vote at noon today on pole-pull as the crisis's source — and whether time will hold long enough"
+        "Whether Pell and Veth will have news of how the village has shifted while they were away",
+        "How much time remains before the convene vote at noon tomorrow",
+        "What Maren intends to do — whether she stays in Millbrook or returns to watch the moorland north",
+        "Whether Mara is ready to receive the readings and move them to the committee"
       ]
     },
-    "beats": 6,
+    "beats": 7,
     "subPlace": null
   },
   "clock": {
     "schemaVersion": 1,
     "day": 18,
-    "hour": 20,
+    "hour": 22,
     "realAnchor": null
   },
   "companions": [
@@ -3733,14 +3785,14 @@
         "s1"
       ],
       "progress": [
-        "Readings retrieved from Archive at cost of triggering warden-mark. Veth will know. Convene in three days.",
         "Readings retrieved from Archive—concrete proof that pole-pull is the real cause. Three days before convene votes on whether to accept the evidence. Calvar can present; the method of retrieval (cabinet broken, warden-mark triggered) is a liability.",
         "Readings retrieved and urgent—Bryn Calowell, a Radiant who understands the Archive's technical language, is being brought to the post to help decode and contextualize them for presentation.",
         "The universal shrine at the Made Gate stands as completed proof that balance holds—and is now actively defended against foreclosure. The valley has tangible evidence that all-traditions work when each comes in good faith.",
         "The universal shrine stands as completed proof that balance holds—and is now actively defended against foreclosure through Named Exclusion. The valley has tangible evidence that all-traditions work when each comes in good faith, and a pilgrimage path that will draw them back.",
         "The water crisis's true source is now known: a pre-Transition reclamation system waking under two nested orders—the original purpose (prepare the watershed) and Silas's father's new instruction (complete gently and stop). The system is failing structurally as it works, deepening a catastrophic break that occurred three days ago. The remedy is not to stop it but to ask it to continue while the break is shored.",
         "The reclamation system's structural failure is now understood: a bearing gave way three days ago, deepening with every pulse. The remedy is not to repair it from inside, but to shore it from outside while it completes its work.",
-        "The water crisis is structural—the reclamation system's bearing failure proves the pole-pull is real. The readings Silas retrieved from Grael's archive carry the proof. The convene votes at noon."
+        "The water crisis is structural—the reclamation system's bearing failure proves the pole-pull is real. The readings Silas retrieved from Grael's archive carry the proof. The convene votes at noon.",
+        "Arrived in Millbrook with the buried readings that prove pole-pull is the structural cause of the water crisis. The convene votes tomorrow at noon."
       ],
       "aliases": [],
       "startedAt": "2026-07-24T12:58:53.302Z",
@@ -4147,7 +4199,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d16] At the Whistling Woman post in deep night—Pell has eaten well and is moving toward rest, present and unhurried. The child she carries is steady beneath the novel-depth work.",
         "[d16] Deep night at the Whistling Woman post—Pell took what she wanted from Silas without hesitation or performance. Steady, certain, unashamed. Appetite satisfied and present together.",
         "[d16] Deep night at the Whistling Woman post—Silas traced the shape of her with plain words and plain touch. She received it the way she receives true things: without ornament, and asking for more tomorrows. The child she carries is steady; she is at rest.",
         "[d16] Sleeping deeply, settled and present, her grip on Silas's hand holding even in rest—asking for more tomorrows, and the three of them held together in the dark.",
@@ -4156,7 +4207,8 @@
         "[d16] At the Whistling Woman post in late afternoon—walked the grounds with Silas, assessed the post's strategic value, and named it as a threshold that proves the valley can make new things. Her reading: the post's power is not in garrison but in what it *represents*. She understands the stakes.",
         "[d16] At the table with Silas, co-crafting the shadow-model of the post. She makes small adjustments with ironsense-reading, and names the work as viable—'We can build from this.' Present, attentive, working partnership.",
         "[d18] Setting to ready the packs for the road south to Millbrook. Understands without question that she and Silas move together toward what needs striking.",
-        "[d18] Received word of Silas's departure northward. Nodded once—no question, no performance. Already thinking ahead to the road south, to Mara, to what the vote will mean for the water crews. Hand-clasp and release. Ready to move."
+        "[d18] Received word of Silas's departure northward. Nodded once—no question, no performance. Already thinking ahead to the road south, to Mara, to what the vote will mean for the water crews. Hand-clasp and release. Ready to move.",
+        "[d18] Saw Silas and Maren emerge from the north road at late afternoon. Made no performance of it — simply the readiness that comes from knowing they were coming back."
       ],
       "knownFacts": [
         "The gambit succeeded at cost — the warden-mark was triggered",
@@ -4177,7 +4229,7 @@
         "reading structural intent through ironsense while another cr"
       ],
       "status": "active",
-      "statusNote": "Active, at the Whistling Woman post, preparing for road south to Millbrook",
+      "statusNote": "At Millbrook forge, present and ready. Silas and Maren have just arrived from the reclamation system with the readings.",
       "lastSeen": {
         "locationId": "gen-whistling-woman-post",
         "day": 18
@@ -4196,7 +4248,7 @@
         "primary": "ashwarden"
       },
       "domainsSource": "derived",
-      "met": 35,
+      "met": 36,
       "imageSeedKey": "pell#r3",
       "imagePinned": true
     },
@@ -4211,7 +4263,6 @@
       },
       "relationship": 8,
       "history": [
-        "[d13] Took Silas's instruction without argument — wrote the note for Gweth Callow herself and set it with the morning errands. Her read of Gweth as the human lever that can move smallholders is now in play.",
         "[d13] Sealed a message for the march road waystation without hesitation — a water-reading request, leave it on the hook if the post is dark. Efficient, no ceremony.",
         "[d13] Lodging arranged for Crane and Veth without hesitation — two names in the ledger, Torval's rooms above the grain store named.",
         "[d14] Present at dawn planning session — ledger closed, full attention given. Said she wondered when this conversation was coming.",
@@ -4220,7 +4271,8 @@
         "[d14] Received the shadow-sheet message — the work is done, the wells will clear first, the watershed will follow.",
         "[d14] Shadow-message received at the supply store counter—Fendt and crew ordered to the ridge node to begin construction of the Threshold Post. The network's northern anchor is now Mara's responsibility to stage.",
         "[d15] Exchanged shadow-sheet messages at night on Day 15—confirmed the Whistling Woman post is operational and the relay mechanism tested. Mara reported Coll filed the amended petition naming pole-pull, the Radiant leadership is quiet (dangerous kind), and Calvar's crew moves to secondary sleeve repairs…",
-        "[d16] Received urgent shadow-tablet message about the retrieved readings. Responded with tactical assessment: Calvar can present, chain-of-custody matters, Dara's crews can move faster if the vote goes pole-pull. Moving fast herself—already acting on the news."
+        "[d16] Received urgent shadow-tablet message about the retrieved readings. Responded with tactical assessment: Calvar can present, chain-of-custody matters, Dara's crews can move faster if the vote goes pole-pull. Moving fast herself—already acting on the news.",
+        "[d18] Working her afternoon rounds when Silas and Maren arrived. Unaware of the return as of this moment."
       ],
       "knownFacts": [
         "Fendt is being assigned as warden of the Threshold Post—a new post at the ridge relay node",
@@ -4241,16 +4293,16 @@
         "reading a political situation plainly and naming it without "
       ],
       "status": "active",
-      "statusNote": "At Millbrook, receipt of urgent message, moving to coordinate response",
+      "statusNote": "At Millbrook mill-yard, checking the supply-store doors. About to learn that the readings have been retrieved.",
       "lastSeen": {
         "locationId": "gen-whistling-woman-post",
-        "day": 16
+        "day": 18
       },
       "gender": "woman",
       "pronouns": "she/her",
       "image": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/a%20person%2C%20character%20portrait%2C%20named%20Mara%20Wells%2C%20woman%2C%20Village%20supply%20store%20operator%2C%20Millbrook%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=8967&nologo=true",
       "_portraitTier": "devoted",
-      "met": 10,
+      "met": 11,
       "domains": {
         "primary": "mason"
       },
@@ -5810,7 +5862,7 @@
   },
   "placeMemory": {
     "millbrook": {
-      "visits": 5,
+      "visits": 6,
       "notes": [
         "[d5] The brigandine and short sword — Pell's father's gear — pulled from the chest under the second bench on World-day 18 evening. Both sound and ready. The chest is open.",
         "[d5] Pell's short sword rune-bound at the forge on World-day 18 evening — four threads seated rough but holding. The lamp-black vial is spent down and the tooling leather is marked from the work.",
@@ -5930,7 +5982,7 @@
         "chaos_order",
         "death_life"
       ],
-      "lastVisit": 14,
+      "lastVisit": 18,
       "_containmentNotes": [
         "\"Old Bothy — North Verge of the Left Branch\" was placed in gen-waygate (the fiction named it), not millbrook"
       ]
@@ -7067,12 +7119,8 @@
     "lastTickWorldDay": 82,
     "lastCanonWorldDay": 82,
     "lastGenCount": 1984,
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 0,
     "recentOffers": [
-      {
-        "thing": "Maren's listening—she hears something in the dark that the message confirms. Her attention is not casual.",
-        "from": "What Wakes Beneath stirring in the moorland; Maren's warden-sense carrying news before the words did"
-      },
       {
         "thing": "Maren's acceptance and readiness to fly—a warden who will ride into the moorland's wrongness without hesitation.",
         "from": "her bond with Silas and her ancient charge to attend what is changing in the world"
@@ -7088,6 +7136,10 @@
       {
         "thing": "Maren's full attention and the weight of her acknowledgment—a legendary warden affirming that what you have done is the remedy the valley…",
         "from": "The craft of holding what cannot be healed, only tended. Maren has buried more than she has known; she knows when a thing is finished and…"
+      },
+      {
+        "thing": "Maren's quiet question — whether she stays or returns north — surfaces the weight of what comes after the vote. The valley will need…",
+        "from": "The legendary warden's own presence at Silas's side; the threshold question of what it means to have her here, and what it costs to have…"
       }
     ],
     "wantProgress": {
@@ -18677,22 +18729,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 20.13993916400453,
-    "cerebral": 18.221824304293207,
-    "social": 11.936594630901421,
-    "generous": 7.1819792176873545,
-    "cautious": 5.399624767422071,
-    "physical": 0.13286923295984593,
-    "risky": 0.3860207362594269,
-    "ruthless": 0.06936571165773617,
-    "carousing": 0.728662065433975,
-    "amorous": 1.713141232296535,
-    "patient": 1.2082289645833966,
-    "stealth": 0.000002424269300853171,
-    "devotion": 0.09906364769735428,
-    "craft": 3.8562284556471353,
-    "leadership": 1.6075449655580532,
-    "deception": 0.011609469180148371
+    "strategic": 19.636440684904418,
+    "cerebral": 17.766278696685877,
+    "social": 11.638179765128886,
+    "generous": 7.00242973724517,
+    "cautious": 5.264634148236519,
+    "physical": 0.12954750213584978,
+    "risky": 0.3763702178529412,
+    "ruthless": 0.06763156886629276,
+    "carousing": 0.7104455137981257,
+    "amorous": 1.6703127014891215,
+    "patient": 1.1780232404688116,
+    "stealth": 0.0000023636625683318413,
+    "devotion": 0.09658705650492042,
+    "craft": 3.759822744255957,
+    "leadership": 1.5673563414191019,
+    "deception": 0.01131923245064466
   },
   "aptitudes": [
     "strategist",
@@ -18701,10 +18753,18 @@
     "tactician",
     "sage"
   ],
-  "actionCount": 998,
+  "actionCount": 999,
   "grantsVersion": 1,
   "reconcileVersion": 73,
   "gallery": [
+    {
+      "kind": "moment",
+      "prompt": "Silas and Maren emerge from the north road into Millbrook at late afternoon — the warden in corvid-form at his shoulder, Memory's shadow-spear held steady in one hand, the other carrying the scroll of",
+      "url": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Silas%20and%20Maren%20emerge%20from%20the%20north%20road%20into%20Millbrook%20at%20late%20afternoon%20%E2%80%94%20the%20warden%20in%20corvid-form%20at%20his%20shoulder%2C%20Memory's%20shadow-spear%20held%20steady%20in%20one%20hand%2C%20the%20other%20carrying%20the%20scroll%20of%20buried%20water%20readings.%20Pell%20waits%20at%20the%20forge%20threshold%2C%20unmoved%20and%20ready.%20Behind%20her%2C%20Veth%20in%20th%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=87661&nologo=true",
+      "caption": "Silas and Maren depart the reclamation system with the bearing held sound and return throu",
+      "worldDay": 82,
+      "at": "2026-09-20T16:59:39.122Z"
+    },
     {
       "kind": "moment",
       "prompt": "A warden's hand on a wright's shoulder in the deep stone—one who has buried more than she has known, affirming that the remedy is held, that the broken thing can be tended, that the work will finish. ",
@@ -19877,8 +19937,8 @@
     }
   ],
   "portrait": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1789923551970,
-  "rev": 2227,
+  "updatedAt": 1789923579122,
+  "rev": 2229,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -24778,10 +24838,10 @@
     {
       "id": "sess-39",
       "startedAt": "2026-09-20T16:57:46.648Z",
-      "lastAt": "2026-09-20T16:57:46.648Z",
+      "lastAt": "2026-09-20T16:59:39.060Z",
       "startDay": 82,
       "endDay": 82,
-      "beats": 1
+      "beats": 2
     }
   ],
   "company": [
@@ -25303,21 +25363,21 @@
     "gen-whistling-woman-post": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Small%20wooden%20watchpost%20beside%20a%20shimmering%20dark%20portal%2C%20woman%20silhouetted%20in%20doorway%20whistling%2C%20dusty%20road%20converging%20toward%20her%2C%20twilight%20atmosphere.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=34173&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 375,
-    "choices": 374,
-    "characterDeltas": 201,
-    "scene": 375,
-    "npcUpdates": 324,
+    "sceneSummary": 376,
+    "choices": 375,
+    "characterDeltas": 202,
+    "scene": 376,
+    "npcUpdates": 325,
     "factUpdates": 43,
     "placeUpdates": 80,
     "codexUpdates": 223,
-    "timeOps": 329,
-    "imagePrompt": 45,
-    "sceneEnded": 148,
+    "timeOps": 330,
+    "imagePrompt": 46,
+    "sceneEnded": 149,
     "itemUpdates": 9,
-    "questUpdates": 52,
-    "offer": 59,
-    "moveTo": 20,
+    "questUpdates": 53,
+    "offer": 60,
+    "moveTo": 21,
     "delegateOps": 6,
     "deeds": 27,
     "standingOps": 6,
@@ -25338,7 +25398,7 @@
     "partyOps": 3,
     "stateOps": 1
   },
-  "_opTurns": 375,
+  "_opTurns": 376,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -25346,7 +25406,7 @@
   },
   "_opLedger": {
     "offer": {
-      "applied": 64,
+      "applied": 65,
       "rejected": 2,
       "lastWhy": "rejected-shape"
     },
@@ -25354,6 +25414,11 @@
       "applied": 4,
       "rejected": 2,
       "lastWhy": "refused-capacity"
+    },
+    "moveTo": {
+      "applied": 1,
+      "rejected": 0,
+      "lastWhy": null
     }
   },
   "braids": [
@@ -26584,7 +26649,7 @@
     }
   ],
   "skillUses": {
-    "travel": 13,
+    "travel": 14,
     "careful": 9,
     "study": 17,
     "scout": 13,
@@ -28104,7 +28169,7 @@
     }
   },
   "_opUnknown": {
-    "sceneSummary": 8
+    "sceneSummary": 9
   },
   "_opCountingSince": "2026-09-16T22:18:48.671Z",
   "_fireTests": {

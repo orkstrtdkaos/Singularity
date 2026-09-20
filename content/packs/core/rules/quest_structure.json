@@ -1,81 +1,84 @@
 {
-  "schemaVersion": 1,
-  "id": "quest_structure",
-  "kind": "rules",
-  "note": "SNG-065 — the shape a quest must have. Authored by Aevi 2026-07-11 on Erik's direction: 'I want the quests to be meaningful and have some concrete structure.'",
-  "theRule": "IF YOU CANNOT NAME THE COST OF IGNORING IT, IT IS NOT A QUEST. It is an errand. Errands are fine; they are not quests and must not be logged as such.",
-  "required": {
-    "premise": "The situation, plainly. Two sentences.",
-    "stakes": "What is at risk, and WHO PAYS if the player walks away. Mandatory. This is the field that separates a quest from a fetch.",
-    "axis": "The axis this quest lives ON. A quest is a TENSION BETWEEN TWO POLES — that is what makes it a dilemma instead of a chore. If you cannot name the axis, the quest has no spine.",
-    "traditions": "Which peoples' crafts open routes through it. Feeds the multi-route requirement.",
-    "stages": "2-5. Each: objective (one sentence, player-statable) + condition (ENGINE-TESTABLE: place reached / person spoken to / thing obtained / truth learned / roll passed) + change (what shifts in the world when this stage lands). NO vague 'investigate further'.",
-    "routes": "Force, guile, care, reason, craft, concealment, truth, endurance. A quest with ONE solution is a lock, not a story. Routes fan across the great circle so a player's domains change how they approach it.",
-    "outcomes": "2-4 BRANCHED endings. NOT success/fail — WHICH success. Each names its own consequences.",
-    "consequences": "MANDATORY, per outcome. TWO PARTS, BOTH REQUIRED: (1) `narration` — the authored prose (the chronicle voice). (2) `effects[]` — MACHINE-READABLE deltas the engine APPLIES. Prose alone is NOT a consequence: the engine cannot parse 'Veilwright: lowered' into a delta, so a prose-only outcome changes nothing durable and therefore is not a quest (see theRule). Effect types: `npc_state{npc,state,note}` · `disposition{people,delta}` · `codex_fact{text,secret?}` · `world_event{text,propagates,delayDays}` · `location_state{location,change}` · `quest_seed{text}` · `ally{npc}` · `xp{amount}`. At least one effect must be DURABLE and FINDABLE later."
+ "schemaVersion": 1,
+ "id": "quest_structure",
+ "kind": "rules",
+ "note": "SNG-065 — the shape a quest must have. Authored by Aevi 2026-07-11 on Erik's direction: 'I want the quests to be meaningful and have some concrete structure.'",
+ "theRule": "IF YOU CANNOT NAME THE COST OF IGNORING IT, IT IS NOT A QUEST. It is an errand. Errands are fine; they are not quests and must not be logged as such.",
+ "required": {
+  "premise": "The situation, plainly. Two sentences.",
+  "stakes": "What is at risk, and WHO PAYS if the player walks away. Mandatory. This is the field that separates a quest from a fetch.",
+  "axis": "The axis this quest lives ON. A quest is a TENSION BETWEEN TWO POLES — that is what makes it a dilemma instead of a chore. If you cannot name the axis, the quest has no spine.",
+  "traditions": "Which peoples' crafts open routes through it. Feeds the multi-route requirement.",
+  "stages": "2-5. Each: objective (one sentence, player-statable) + condition (ENGINE-TESTABLE: place reached / person spoken to / thing obtained / truth learned / roll passed) + change (what shifts in the world when this stage lands). NO vague 'investigate further'. ⛑ A STAGE MAY ALSO ASK FOR A DECISION — `choices: {prompt, options[]}`, where an option is `{id, name, summary, cost, effects[], opens[], forecloses[]}`. Erik: \"I want the quest to have decisions she needs to make — give the patient x or y or z medicine... with specific effects that help or hinder progress.\" The option's `effects[]` are paid through the same applier the endings use, so a decision mid-quest is as durable and findable as an ending. `forecloses` shuts endings; `opens` names an ending this option makes reachable, and choosing a DIFFERENT option of the same stage shuts it. ⚠️ `cost` IS MANDATORY ON AN OPTION THAT CAN SHUT A DOOR — guard (3) above: the player must be able to see what they are risking. An undecided stage forecloses NOTHING; the shutting comes from having chosen otherwise, never from not having chosen.",
+  "routes": "Force, guile, care, reason, craft, concealment, truth, endurance. A quest with ONE solution is a lock, not a story. Routes fan across the great circle so a player's domains change how they approach it.",
+  "outcomes": "2-4 BRANCHED endings. The default is NOT success/fail but WHICH success — force, guile and care lead to DIFFERENT endings, not better and worse ones, and each names its own consequences. ⛑ ERIK, 2026-09-20, OVERTURNING THE ABSOLUTE FORM OF THAT LINE: \"the quest must be able to lead to failure... in this case, death of the patient, which aevi avoided at first.\" So WHEN SOMETHING IS GENUINELY AT STAKE, ONE ENDING MAY BE A FAILURE — mark it `failure: true` and the quest ends `failed` rather than `resolved`. ⚠️ THREE GUARDS, and they are what keep this from becoming a punishment: (1) A FAILURE MUST BE EARNED by what the player did or did not do — a decision taken, a deadline let run out — never by a roll and never by a route (design law 2 stands: never punish the route). (2) A FAILURE PAYS ITS CONSEQUENCES like any other ending: effects, deed, chronicle, wake. An ending that costs nothing did not happen. (3) THE PLAYER MUST HAVE BEEN ABLE TO SEE IT COMING — the cost of an option, the days remaining. A failure nobody could have avoided is a cutscene.",
+  "consequences": "MANDATORY, per outcome. TWO PARTS, BOTH REQUIRED: (1) `narration` — the authored prose (the chronicle voice). (2) `effects[]` — MACHINE-READABLE deltas the engine APPLIES. Prose alone is NOT a consequence: the engine cannot parse 'Veilwright: lowered' into a delta, so a prose-only outcome changes nothing durable and therefore is not a quest (see theRule). Effect types: `npc_state{npc,state,note}` · `disposition{people,delta}` · `codex_fact{text,secret?}` · `world_event{text,propagates,delayDays}` · `location_state{location,change}` · `quest_seed{text}` · `ally{npc}` · `xp{amount}`. At least one effect must be DURABLE and FINDABLE later."
+ },
+ "optional": {
+  "legend": "The SNG-042 figure this touches, if any.",
+  "giver": "NPC id.",
+  "region": "Where it lives.",
+  "tier": "riffraff / regional / epic — scales with the player's arc.",
+  "truth": "⛔ GM-EYES. The thing the player is THERE TO WORK OUT — the diagnosis under the symptom, who the patient really is. Authorable on the quest, on a stage, or on an outcome. Never rendered, never written into a save, and handed to the GM under the 'earned fragments, never plainly' rule. ⚠️ THIS IS THE OPPOSITE OF A STAGE'S `change`, which is an EARNED reveal the GM states PLAINLY the moment the stage closes. If you put an answer in `change` or in `objective` or in `stakes`, it gets said. ⛑ Aevi, from Courtney's play: 'DELIVER OBSERVATIONS. WITHHOLD INTERPRETATION.' A diagnostic quest that names the mechanism has answered the question the player came to answer.",
+  "deadlineDays": "⛔ THE QUEST CAN RUN OUT OF TIME. `deadlineDays` (whole days from when the quest was taken, on the SHARED world clock, not the character's), `deadlineOutcome` (which of this quest's endings the clock reaches — it must be one of them, or the deadline is reported as a content fault and the quest lives), and `deadlineWarnDays` (default 2). ⚠️ THIS IS THE OTHER HALF OF FAILURE, and the important half: an ending the player has to CHOOSE off a menu is not a failure the world imposes. If the stakes say 'he has perhaps four days of looking fine left', write `deadlineDays: 4` and let it be TRUE. ⛑ The warning fires once, and the days remaining show on the quest screen — guard (3): the player must have been able to see it coming. ⚠️ ABSOLUTE WORLD DAYS ON PURPOSE: character days are advanced by the player, so a dying man you could keep alive by refusing to sleep is an exploit, not a deadline. Omit it and the quest never runs out, which stays the default for everything already written."
+ },
+ "designLaws": [
+  "The best quests have no clean exit. Someone is worse off whatever you choose; the quest is about WHO, and that is the player's to answer for.",
+  "Never punish the route. Force, guile, and care are all legitimate; they lead to DIFFERENT outcomes, not better and worse ones.",
+  "The consequence must be findable later. If the player cannot go back and SEE what they did, it did not happen.",
+  "A quest should make at least one person permanently different — including, sometimes, the player.",
+  "⚠️ EACH STAGE MUST NEED SOMETHING THE STAGE BEFORE IT PRODUCED — see `stageChain`. If a player could do stage 3 first, you have written three errands with a shared title.",
+  "⚠️ NEVER USE A TIME FLOOR TO MAKE A STAGE FEEL SUBSTANTIAL. Density comes from what a stage REQUIRES, never from how long it is held open.",
+  "⚠️ A DECISION IS NOT A DILEMMA UNLESS BOTH DOORS COST SOMETHING. If one option is simply correct, you have written a quiz. The patient's three medicines work because the right one costs four days you do not have, the wrong one is indistinguishable in the dusk, and the safe one only buys a day."
+ ],
+ "effectVocabulary": {
+  "npc_state": "an NPC's life/standing/death changes",
+  "disposition": "a PEOPLE's stance toward you (+/- integer)",
+  "codex_fact": "a permanent, findable record; `secret:true` = yours alone",
+  "world_event": "propagates on the shared clock; `delayDays` = when it reaches you",
+  "event_resolve": "a world EVENT is answered for everyone (`eventId`) — the shared record carries the outcome, who and when, and the event stops advancing (CCODE-354)",
+  "location_state": "a place changes",
+  "quest_seed": "this outcome opens the next thing",
+  "ally": "an NPC becomes bound to you",
+  "xp": "engine-clamped"
+ },
+ "stageChain": {
+  "_theLaw": "⚠️ EACH STAGE MUST NEED SOMETHING THE STAGE BEFORE IT PRODUCED. This is the law that makes a sequence into a story. Erik, from play: 'if you can learn, obtain, and deliver the required objectives in 3 beats it's not really a quest.' The cause was not that stages closed too fast — it was that THEY DID NOT NEED EACH OTHER, so the order never mattered and nothing accumulated.",
+  "_theTest": "⚠️ ASK IT OUT LOUD BEFORE YOU WRITE STAGE 3: COULD A PLAYER DO STAGE 3 FIRST?\nIf yes, you have written three errands with a shared title. If no — because stage 3 needs the name stage 2 found, and stage 2 needs the document stage 1 took — you have written a quest.\nFAILS THE TEST: (1) find the filing (2) find the clerk (3) write back. Each is findable alone; the order is decoration.\nPASSES THE TEST: (1) take the filing — it names a seal you cannot read (2) find who owns that seal, which only the filing tells you (3) write back, which needs the filing AS EVIDENCE and the clerk AS ADDRESSEE.\n⚠️ THE DIFFERENCE IS ONE SENTENCE PER STAGE: each one must END by producing the thing the next one NEEDS.",
+  "howToChain": {
+   "learn→act": "stage 1 finds out WHO or WHERE; stage 2 requires that name and cannot begin without it",
+   "obtain→use": "stage 1 takes the thing; stage 2 needs it in hand — and ⚠️ if the player loses it, the quest bends rather than breaking",
+   "act→consequence": "stage 1 makes something true; stage 2 exists BECAUSE it is true, and would not otherwise",
+   "meet→trust": "stage 1 encounters someone; stage 2 needs them to help, which they will not do on first meeting"
   },
-  "optional": {
-    "legend": "The SNG-042 figure this touches, if any.",
-    "giver": "NPC id.",
-    "region": "Where it lives.",
-    "tier": "riffraff / regional / epic — scales with the player's arc."
-  },
-  "designLaws": [
-    "The best quests have no clean exit. Someone is worse off whatever you choose; the quest is about WHO, and that is the player's to answer for.",
-    "Never punish the route. Force, guile, and care are all legitimate; they lead to DIFFERENT outcomes, not better and worse ones.",
-    "The consequence must be findable later. If the player cannot go back and SEE what they did, it did not happen.",
-    "A quest should make at least one person permanently different — including, sometimes, the player.",
-    "⚠️ EACH STAGE MUST NEED SOMETHING THE STAGE BEFORE IT PRODUCED — see `stageChain`. If a player could do stage 3 first, you have written three errands with a shared title.",
-    "⚠️ NEVER USE A TIME FLOOR TO MAKE A STAGE FEEL SUBSTANTIAL. Density comes from what a stage REQUIRES, never from how long it is held open."
-  ],
-  "effectVocabulary": {
-    "npc_state": "an NPC's life/standing/death changes",
-    "disposition": "a PEOPLE's stance toward you (+/- integer)",
-    "codex_fact": "a permanent, findable record; `secret:true` = yours alone",
-    "world_event": "propagates on the shared clock; `delayDays` = when it reaches you",
-    "event_resolve": "a world EVENT is answered for everyone (`eventId`) — the shared record carries the outcome, who and when, and the event stops advancing (CCODE-354)",
-    "location_state": "a place changes",
-    "quest_seed": "this outcome opens the next thing",
-    "ally": "an NPC becomes bound to you",
-    "xp": "engine-clamped"
-  },
-  "stageChain": {
-    "_theLaw": "⚠️ EACH STAGE MUST NEED SOMETHING THE STAGE BEFORE IT PRODUCED. This is the law that makes a sequence into a story. Erik, from play: 'if you can learn, obtain, and deliver the required objectives in 3 beats it's not really a quest.' The cause was not that stages closed too fast — it was that THEY DID NOT NEED EACH OTHER, so the order never mattered and nothing accumulated.",
-    "_theTest": "⚠️ ASK IT OUT LOUD BEFORE YOU WRITE STAGE 3: COULD A PLAYER DO STAGE 3 FIRST?\nIf yes, you have written three errands with a shared title. If no — because stage 3 needs the name stage 2 found, and stage 2 needs the document stage 1 took — you have written a quest.\nFAILS THE TEST: (1) find the filing (2) find the clerk (3) write back. Each is findable alone; the order is decoration.\nPASSES THE TEST: (1) take the filing — it names a seal you cannot read (2) find who owns that seal, which only the filing tells you (3) write back, which needs the filing AS EVIDENCE and the clerk AS ADDRESSEE.\n⚠️ THE DIFFERENCE IS ONE SENTENCE PER STAGE: each one must END by producing the thing the next one NEEDS.",
-    "howToChain": {
-      "learn→act": "stage 1 finds out WHO or WHERE; stage 2 requires that name and cannot begin without it",
-      "obtain→use": "stage 1 takes the thing; stage 2 needs it in hand — and ⚠️ if the player loses it, the quest bends rather than breaking",
-      "act→consequence": "stage 1 makes something true; stage 2 exists BECAUSE it is true, and would not otherwise",
-      "meet→trust": "stage 1 encounters someone; stage 2 needs them to help, which they will not do on first meeting"
-    },
-    "requiresField": "Every stage after the first should carry `requires[]` naming what the earlier stage produced — `learn` a fact, `obtain` an item, `speak` to a person, `reach` a place. THE ENGINE REFUSES A STAGE WHOSE REQUIREMENTS ARE UNMET AND TELLS YOU WHY, so the chain is enforced rather than merely described.",
-    "⚠️_notATimer": "Do NOT reach for `beats` to make a stage feel substantial. A minimum-beats floor is a TIMER, and a timer makes a fast quest slow rather than making a thin quest dense. Use `beats` ONLY where waiting IS the content — a vigil, a stakeout, a reply that has to travel, a growing season. A THIN STAGE IS FIXED BY GIVING IT A REAL REQUIREMENT, NEVER BY MAKING THE PLAYER WAIT FOR IT.",
-    "⚠️_notAFetchQuest": "The requirement is not busywork; it is THE THING THAT MUST BE TRUE BEFORE THE NEXT SCENE CAN HAPPEN. The test: if a player described how they satisfied the stage and it sounded like a story, it is right. If it sounded like an errand list, it is wrong. A stage needing a name, a document and two days of travel is a story; a stage needing three tokens is a checklist.",
-    "stagesShouldNotAllBeFindable": "⚠️ AT LEAST ONE STAGE SHOULD BE ABOUT A PERSON DECIDING SOMETHING, not about locating an object. A quest made only of retrievals has no one in it."
-  },
-  "routeReveal": {
-    "_theRule": "⚠️ A ROUTE'S LABEL MAY BE VISIBLE; ITS REASONING MAY NOT. Erik, from play: 'it gave away some things with the greyed out approaches.' He was right, and the fault is in how I authored them — I wrote routes as EXPLANATIONS rather than OPTIONS.",
+  "requiresField": "Every stage after the first should carry `requires[]` naming what the earlier stage produced — `learn` a fact, `obtain` an item, `speak` to a person, `reach` a place. THE ENGINE REFUSES A STAGE WHOSE REQUIREMENTS ARE UNMET AND TELLS YOU WHY, so the chain is enforced rather than merely described.",
+  "⚠️_notATimer": "Do NOT reach for `beats` to make a stage feel substantial. A minimum-beats floor is a TIMER, and a timer makes a fast quest slow rather than making a thin quest dense. Use `beats` ONLY where waiting IS the content — a vigil, a stakeout, a reply that has to travel, a growing season. A THIN STAGE IS FIXED BY GIVING IT A REAL REQUIREMENT, NEVER BY MAKING THE PLAYER WAIT FOR IT.",
+  "⚠️_notAFetchQuest": "The requirement is not busywork; it is THE THING THAT MUST BE TRUE BEFORE THE NEXT SCENE CAN HAPPEN. The test: if a player described how they satisfied the stage and it sounded like a story, it is right. If it sounded like an errand list, it is wrong. A stage needing a name, a document and two days of travel is a story; a stage needing three tokens is a checklist.",
+  "stagesShouldNotAllBeFindable": "⚠️ AT LEAST ONE STAGE SHOULD BE ABOUT A PERSON DECIDING SOMETHING, not about locating an object. A quest made only of retrievals has no one in it."
+ },
+ "routeReveal": {
+  "_theRule": "⚠️ A ROUTE'S LABEL MAY BE VISIBLE; ITS REASONING MAY NOT. Erik, from play: 'it gave away some things with the greyed out approaches.' He was right, and the fault is in how I authored them — I wrote routes as EXPLANATIONS rather than OPTIONS.",
+  "wrong": "Answer — the clerk signed because the filing was technically correct and no one from the pass appeared to contest it.",
+  "right": "Answer — there is a person whose signature made this legal. You have not found out why yet.",
+  "why": "The wrong version prints THE DISCOVERY OF STAGE 2 before stage 1 begins. A route should name what you could DO and what it would cost you — never what you would learn by doing it. The reasoning belongs to the stage that earns it.",
+  "examples": [
+   {
     "wrong": "Answer — the clerk signed because the filing was technically correct and no one from the pass appeared to contest it.",
     "right": "Answer — there is a person whose signature made this legal. You have not found out why yet.",
-    "why": "The wrong version prints THE DISCOVERY OF STAGE 2 before stage 1 begins. A route should name what you could DO and what it would cost you — never what you would learn by doing it. The reasoning belongs to the stage that earns it.",
-    "examples": [
-      {
-        "wrong": "Answer — the clerk signed because the filing was technically correct and no one from the pass appeared to contest it.",
-        "right": "Answer — there is a person whose signature made this legal. You have not found out why yet.",
-        "why": "the wrong version prints the DISCOVERY of stage 2 before stage 1 begins"
-      },
-      {
-        "wrong": "Repair — the common-right traditions Splarf has assembled over two years are enough to file a counter-claim; it will be slow and inglorious but it will hold.",
-        "right": "Repair — you may know enough law to answer this on its own terms. It would be slow.",
-        "why": "the wrong version answers 'will it work?', which is the question the stage exists to make the player sweat"
-      },
-      {
-        "wrong": "Name — the document is valid, the clerk acted legally, and the law as written does not reach Hoss's case.",
-        "right": "Name — you could say plainly what was done and who did it. Nothing would be undone by it.",
-        "why": "the wrong version delivers the quest's whole THESIS in a route label; there is nothing left to arrive at"
-      }
-    ],
-    "_theShape": "⚠️ A ROUTE IS A DOOR, NOT A SUMMARY. Name what the player could DO and what it would COST them. Never name what they would LEARN by doing it, whether it would WORK, or what it would MEAN. Those three belong to the stage that earns them.\nA good route fits in one line and leaves a question open. If yours needs two sentences to explain the reasoning, the reasoning is stage content and you have written it in the wrong place.",
-    "_lengthIsATell": "⚠️ IF A ROUTE RUNS PAST ABOUT EIGHTY CHARACTERS, IT HAS PROBABLY STOPPED BEING AN OPTION AND STARTED BEING AN EXPLANATION. Length is the cheapest signal that this rule is being broken."
-  }
+    "why": "the wrong version prints the DISCOVERY of stage 2 before stage 1 begins"
+   },
+   {
+    "wrong": "Repair — the common-right traditions Splarf has assembled over two years are enough to file a counter-claim; it will be slow and inglorious but it will hold.",
+    "right": "Repair — you may know enough law to answer this on its own terms. It would be slow.",
+    "why": "the wrong version answers 'will it work?', which is the question the stage exists to make the player sweat"
+   },
+   {
+    "wrong": "Name — the document is valid, the clerk acted legally, and the law as written does not reach Hoss's case.",
+    "right": "Name — you could say plainly what was done and who did it. Nothing would be undone by it.",
+    "why": "the wrong version delivers the quest's whole THESIS in a route label; there is nothing left to arrive at"
+   }
+  ],
+  "_theShape": "⚠️ A ROUTE IS A DOOR, NOT A SUMMARY. Name what the player could DO and what it would COST them. Never name what they would LEARN by doing it, whether it would WORK, or what it would MEAN. Those three belong to the stage that earns them.\nA good route fits in one line and leaves a question open. If yours needs two sentences to explain the reasoning, the reasoning is stage content and you have written it in the wrong place.",
+  "_lengthIsATell": "⚠️ IF A ROUTE RUNS PAST ABOUT EIGHTY CHARACTERS, IT HAS PROBABLY STOPPED BEING AN OPTION AND STARTED BEING AN EXPLANATION. Length is the cheapest signal that this rule is being broken."
+ }
 }

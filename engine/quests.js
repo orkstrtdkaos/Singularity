@@ -106,7 +106,17 @@ export function applyQuestUpdates(character, updates = [], ctx = {}) {
       if (op === "progress") {
         if (u.note) existing.progress = [...(existing.progress || []), clampNote(u.note)].slice(-8);
         notes.push(`Quest updated: ${existing.title}`);
-      } else if (op === "complete" && existing.structured) {
+      } else if ((op === "complete" || op === "fail") && existing.structured) {
+        // ⛔ CCODE-459 — AND THE SAME IS NOW TRUE OF `fail`, WHICH WAS LEFT OPEN WHEN `complete` WAS CLOSED.
+        // A flat `fail` set status "failed" right here and paid NOTHING: no effects, no deed, no chronicle,
+        // no wake. That was survivable only while failure was impossible to author — `quest_structure.json`
+        // said "NOT success/fail — WHICH success", so nothing was ever lost by a failure that did nothing.
+        // ⚑ Erik overturned that ("the quest must be able to lead to failure... death of the patient"), so a
+        // failure now has consequences to pay, and a path that skips them is a patient who dies and leaves
+        // the world unchanged. ⛑ A structured quest ends ONE way: through an outcome.
+        // ⚠️ The endings the player is offered may by then be only the bad ones — a decision can foreclose
+        // the rest. The world narrows the doors; the player still walks through one.
+
         // SNG-204/235 bug (Silas's waygate): a STRUCTURED quest resolves ONLY via its OUTCOME decision
         // (resolveStructuredQuest — the sole path that fires effects/wakes/waygates + records the ending). A
         // flat GM `complete` op used to set status "completed" here, silently BYPASSING that — so the wake
@@ -114,7 +124,9 @@ export function applyQuestUpdates(character, updates = [], ctx = {}) {
         // chooses the ending, the engine pays out), never flat-complete a structured quest.
         existing.awaitingResolution = true;
         if (u.note) existing.progress = [...(existing.progress || []), clampNote(u.note)].slice(-8);
-        notes.push(`Quest ready to resolve: ${existing.title} — its ending is yours to choose (that's what fires its effects).`);
+        notes.push(op === "fail"
+          ? `${existing.title} has gone wrong — how it ends is still yours to face (that's what fires its consequences).`
+          : `Quest ready to resolve: ${existing.title} — its ending is yours to choose (that's what fires its effects).`);
       } else if (op === "complete" || op === "fail") {
         existing.status = op === "complete" ? "completed" : "failed";
       // ⚠️ ONLY A COMPLETION CREDITS. A quest that failed is not work the giver is the better for.
@@ -270,10 +282,21 @@ export function hydrateQuest(record, defs) {
   for (const s of stages) if (s && s._severed && byId[s.id]?.objective) delete s._severed;
   const severedRoutes = def.routes ? [] : (record._severedRoutes || []);
   // ⚠️ THE DEF CALLS IT `name` AND THE RECORD CALLS IT `title` — the same family of mismatch as the id
-  // shape, and it left the GM reading the literal word `undefined` as a quest's name. ⛔ Every field the
-  // snapshot used to copy is listed here, because a whitelist that forgets one is exactly how this started.
+  // shape, and it left the GM reading the literal word `undefined` as a quest's name.
+  //
+  // ⛔ AND THE LIST BELOW IS NO LONGER THE WHOLE CONTRACT, BECAUSE THE LIST WAS THE DEFECT. It dropped a
+  // field three times: `title` and `imagePrompt` on every stage (SNG-542), then `truth` the hour the GM-eyes
+  // drawer was built (CCODE-458), then `deadlineDays` the hour a quest could first run out of time
+  // (CCODE-459b) — each caught only because something downstream was being measured at that moment, and each
+  // "fixed" by adding one more name to a list that had just been proven unable to hold one.
+  // ⛑ SO THE DEF IS THE BASE AND THE RECORD IS LAID OVER IT: every key the record carries wins, which is
+  // every scrap of play state, and every key only the def has arrives instead of being silently dropped. An
+  // authored field added tomorrow reaches a started quest without anybody remembering this function exists.
+  // ⚠️ The explicit lines below still stand, and they are the OPPOSITE direction — the handful of fields
+  // where the DEF must beat a record that also has them, because they are words rather than state.
   const fromDef = (recKey, defKey = recKey) => (record[recKey] != null && record[recKey] !== "" ? record[recKey] : def[defKey]);
   return {
+    ...def,
     ...record,
     title: record.title || def.name || def.title || null,
     axis: fromDef("axis"),
@@ -1018,6 +1041,158 @@ export function creditQuestGiver(character, quest) {
   return hit.id;
 }
 
+/** ⛔ A DECISION INSIDE A STAGE, WITH CONSEQUENCES THAT OUTLIVE IT. Erik: *"I want the quest to have decisions
+ *  she needs to make — give the patient x or y or z medicine... with specific effects that help or hinder
+ *  progress."*
+ *
+ *  ⚠️ EVERY CHOICE A QUEST OFFERED UNTIL NOW WAS THE LAST ONE. `outcomes[]` is 2–4 branched endings chosen at
+ *  the decision point, and between the first beat and that point a quest asked the player for NOTHING it
+ *  remembered — routes are display text with no selection behind them, and a stage's only verb is "advance".
+ *  So a quest about which of two lookalike plants you carry down the hill could not be told which one you
+ *  carried. ⛑ The shape is the one the endings already use — `{id, name, summary, effects[]}` — because a
+ *  decision mid-quest and a decision at the end are the same act at different times.
+ *
+ *  ⛑ AND A CHOICE STEERS THE ENDINGS, which is what "helps or hinders progress" has to MEAN mechanically:
+ *  an option may `forecloses` endings (that door is shut now) and may `opens` one (an ending nobody can reach
+ *  without having chosen it). ⚠️ `opens` is read from the OPTIONS, never authored a second time on the
+ *  outcome — an availability rule written in two places is a rule that disagrees with itself. PURE. */
+export function stageChoice(quest, stageId) {
+  const st = (quest?.stages || []).find(s => s && s.id === stageId);
+  const ch = st?.choices;
+  if (!ch || !Array.isArray(ch.options) || !ch.options.length) return null;
+  const taken = quest?.decisions?.[stageId]?.option || null;
+  return { stageId, prompt: ch.prompt || "", options: ch.options, taken, pending: !taken };
+}
+
+/** Every stage of this quest that is asking for a decision and has not had one. PURE. */
+export function pendingChoices(quest) {
+  const out = [];
+  for (const s of quest?.stages || []) { const c = stageChoice(quest, s?.id); if (c?.pending) out.push(c); }
+  return out;
+}
+
+/** ⛔ WHICH ENDINGS ARE STILL REACHABLE, AND WHY THE OTHERS ARE NOT — derived from the decisions actually
+ *  taken, so the reason is always nameable rather than a door that is silently missing. PURE. */
+export function outcomeAvailability(quest) {
+  const outcomes = quest?.outcomes || [];
+  const decisions = quest?.decisions || {};
+  const closed = new Map();      // outcomeId → why
+  // ⛔ ONLY A DECISION ACTUALLY TAKEN SHUTS ANYTHING. The first cut of this shut an ending because no choice
+  // had yet OPENED it — so a player who reached the decision point without ever pressing the stage's button
+  // was offered the failure and nothing else. ⚠️ A stage's choice is not guaranteed to be taken: the GM can
+  // close a stage from play, and a quest that punishes a button nobody was told to press is a trap, not a
+  // dilemma. ⛑ So the foreclosure comes from HAVING CHOSEN OTHERWISE, never from not having chosen.
+  for (const s of quest?.stages || []) {
+    const took = decisions[s?.id]?.option;
+    if (!took) continue;                                     // undecided stages forbid nothing
+    const opts = s?.choices?.options || [];
+    const mine = opts.find(o => o.id === took);
+    if (!mine) continue;
+    for (const id of mine.forecloses || []) closed.set(id, `you chose ${mine.name || mine.id}`);
+    // an ending only ANOTHER option of this same stage would have opened is shut by having chosen this one
+    for (const o of opts) {
+      if (o.id === took) continue;
+      for (const id of o.opens || []) {
+        if ((mine.opens || []).includes(id)) continue;
+        if (!closed.has(id)) closed.set(id, `you chose ${mine.name || mine.id} instead`);
+      }
+    }
+  }
+  return {
+    open: outcomes.filter(o => !closed.has(o.id)),
+    closed: outcomes.filter(o => closed.has(o.id)).map(o => ({ ...o, why: closed.get(o.id) })),
+  };
+}
+
+/** ⛔ TAKE THE DECISION. Its effects are paid THROUGH THE SAME APPLIER the endings use, so a choice mid-quest
+ *  is as durable and as findable as an ending — design law 3: "if the player cannot go back and SEE what they
+ *  did, it did not happen." ⚠️ ONE DECISION PER STAGE, and it does not unmake itself: re-choosing is refused
+ *  rather than silently re-applied, because an effect paid twice is a world that drifted. */
+export function chooseAtStage(character, questId, stageId, optionId, ctx = {}) {
+  const { record: q, view } = questPair(character, questId, ctx);
+  if (!q || q.status !== "active") return { ok: false, why: "not an active structured quest" };
+  const ch = stageChoice(view || q, stageId);
+  if (!ch) return { ok: false, why: "this stage asks for no decision" };
+  if (ch.taken) return { ok: false, why: "already decided", taken: ch.taken };
+  const opt = ch.options.find(o => o.id === optionId);
+  if (!opt) return { ok: false, why: "unknown option" };
+  q.decisions = q.decisions || {};
+  q.decisions[stageId] = { option: opt.id, name: opt.name || opt.id, at: ctx.nowISO || null, worldDay: ctx.worldDay ?? null };
+  let applied = [], xp = 0;
+  if (Array.isArray(opt.effects) && opt.effects.length) ({ applied, xp } = applyQuestEffects(character, q, opt.effects, ctx));
+  if (xp) character.xp = (character.xp || 0) + xp;
+  // the decision is visible beside the stage's own note — the player must be able to see what they chose
+  const line = `↳ ${opt.name || opt.id}${opt.summary ? ` — ${opt.summary}` : ""}`;
+  if (!(q.progress || []).includes(line)) q.progress = [...(q.progress || []), line].slice(-12);
+  return { ok: true, questId: q.id, stageId, option: opt.id, name: opt.name || opt.id, applied, xp, availability: outcomeAvailability(view ? { ...view, decisions: q.decisions } : q) };
+}
+
+/** ⛔ NO DEADLINE AT ALL. The sentinel a crisis stage already uses for "never again" (`days: 999`), kept so a
+ *  quest can say out loud that it does not run out rather than saying nothing and being guessed at. */
+export const NO_DEADLINE = 900;
+
+/** ⛔ WHEN THIS QUEST RUNS OUT, IN ABSOLUTE WORLD DAYS — or null, which means it never does.
+ *
+ *  ⚠️ DERIVED, NOT STAMPED. `startedWorldDay` has been written on every structured quest since the day the
+ *  record was designed and read by NOTHING; it is the stamp this was waiting for. Deriving from it rather
+ *  than writing a second field means a deadline AUTHORED LATER reaches a quest already in play — the same
+ *  rule as every other word the def owns — and there is no backfill to forget.
+ *  ⛑ AND IT FAILS ABSENT: a save with no `startedWorldDay` has no deadline, so the worst an old save can do
+ *  is not run out. A clock that starts itself at "now" would kill a patient somebody treated a month ago.
+ *  ⚠️ ABSOLUTE WORLD DAYS, NEVER CHARACTER DAYS. Character days are player-advanced and therefore gameable —
+ *  worldtick.js says so in its own comment — and a dying man you can keep alive by refusing to sleep is not
+ *  a deadline, it is an exploit. PURE. */
+export function questDeadline(quest) {
+  const days = Number(quest?.deadlineDays);
+  if (!Number.isFinite(days) || days <= 0 || days >= NO_DEADLINE) return null;
+  // ⛔ `Number(null)` IS 0, AND 0 IS FINITE. A quest whose `startedWorldDay` is null — which is every quest
+  // begun before the stamp had a reader, and any quest a GM minted — would have computed a deadline of
+  // world-day 0 + days and been ALREADY OVERDUE on the next beat. ⚠️ Measured before it shipped: a save with
+  // no stamp came back "LAPSED, overdue by 995 days", which is every old quest in the world dying at once
+  // the first time this ran. Absence must stay absence; it must never be converted into an answer.
+  const raw = quest?.startedWorldDay;
+  if (raw == null || raw === "") return null;
+  const from = Number(raw);
+  if (!Number.isFinite(from)) return null;
+  return { day: from + days, days, outcomeId: quest.deadlineOutcome || null, warnWithin: Math.max(1, Number(quest.deadlineWarnDays) || 2) };
+}
+
+/** ⛔ WHICH QUESTS HAVE RUN OUT, AND WHICH ARE ABOUT TO. Erik: "the quest must be able to lead to failure."
+ *  A failure the player has to CHOOSE off a menu is not one — the patient's four days have to be able to
+ *  simply pass.
+ *
+ *  ⛑ A DETECTOR, NOT A RESOLVER, and deliberately: a structured quest ends exactly one way, through
+ *  `resolveStructuredQuest`, which is what pays the effects, the deed, the chronicle and the wake. Handing
+ *  back what SHOULD end lets the caller end it through that one door with the full context it needs, instead
+ *  of a second ending path that quietly pays less than the first.
+ *  ⚠️ AND THE WARNING IS THE LAW'S THIRD GUARD — "the player must have been able to see it coming. A failure
+ *  nobody could have avoided is a cutscene." It latches on the quest so it is said once, not every beat.
+ *  PURE except for that one latch. */
+export function questDeadlines(character, ctx = {}) {
+  const worldDay = Number(ctx.worldDay);
+  const out = { lapsing: [], lapsed: [] };
+  if (!Number.isFinite(worldDay)) return out;                 // no clock, no verdict — never guess one
+  const quests = ctx.defs ? questsForGMView(character, ctx.defs) : (character?.quests || []);
+  for (const q of quests) {
+    if (!q?.structured || q.status !== "active") continue;
+    const dl = questDeadline(q);
+    if (!dl) continue;
+    const rec = (character.quests || []).find(x => x.id === q.id);
+    if (worldDay >= dl.day) {
+      // ⚠️ AN ENDING THAT DOES NOT EXIST IS NOT AN ENDING. A deadline naming an outcome the quest does not
+      // carry must NOT quietly end it — it is reported so somebody fixes the content, and the quest lives.
+      const outcome = (q.outcomes || []).find(o => o.id === dl.outcomeId);
+      if (!outcome) { out.lapsing.push({ questId: q.id, title: q.title, daysLeft: 0, broken: `deadlineOutcome "${dl.outcomeId}" is not one of this quest's endings` }); continue; }
+      out.lapsed.push({ questId: q.id, title: q.title, outcomeId: outcome.id, outcomeName: outcome.name || outcome.id, onDay: dl.day, overdueBy: worldDay - dl.day });
+    } else if (worldDay >= dl.day - dl.warnWithin) {
+      if (rec && rec.deadlineWarned) continue;
+      if (rec) rec.deadlineWarned = true;
+      out.lapsing.push({ questId: q.id, title: q.title, daysLeft: dl.day - worldDay });
+    }
+  }
+  return out;
+}
+
 export function resolveStructuredQuest(character, questId, outcomeId, ctx = {}) {
   const { record: q, view } = questPair(character, questId, ctx);
   if (!q || q.status !== "active") return { ok: false, why: "not an active structured quest" };
@@ -1025,8 +1200,27 @@ export function resolveStructuredQuest(character, questId, outcomeId, ctx = {}) 
   // frozen record is what made a newly authored ending a button that refuses itself.
   const outcome = ((view || q).outcomes || []).find(o => o.id === outcomeId);
   if (!outcome) return { ok: false, why: "unknown outcome" };
-  q.status = "resolved";
-  creditQuestGiver(character, q);   // ⛔ R37a's sibling: the person who set you on it grew by it
+  // ⛔ AN ENDING MAY BE A FAILURE, AND ERIK RULED IT SO (CCODE-459): "the quest must be able to lead to
+  // failure... death of the patient, which aevi avoided at first." ⚠️ This overturns a line of the authoring
+  // law — `quest_structure.json` said "NOT success/fail — WHICH success" — and the law is edited with it,
+  // because an engine and a law that disagree are worse than either rule alone.
+  // ⛑ A FAILURE IS A REAL ENDING, NOT AN ABSENCE OF ONE: it pays its effects, records its deed, writes its
+  // chronicle line and leaves its wake exactly as any other does. The only thing that differs is the word
+  // the log ends on — and that a failed quest, like a resolved one, does not re-open.
+  q.status = outcome.failure ? "failed" : "resolved";
+  q.failed = !!outcome.failure || undefined;
+  // ⚠️ AND A DECISION THAT SHUT THIS DOOR SHUTS IT HERE TOO. The screen offers only what is open, but the
+  // screen is not the gate — the SNG-244 decision strip and author mode reach this same function.
+  {
+    const avail = outcomeAvailability({ ...(view || q), decisions: q.decisions });
+    const shut = avail.closed.find(o => o.id === outcome.id);
+    if (shut) { q.status = "active"; q.failed = undefined; return { ok: false, why: "that ending is closed", because: shut.why }; }
+  }
+  // ⛔ R37a's sibling: the person who set you on it grew by it — AND ONLY ON A COMPLETION. The freeform path
+  // has said so since it was written ("a quest that failed is not work the giver is the better for"), and
+  // making failure a real ending here left this line firing for both. Caught by §191, which is a gate about
+  // WHO GETS CREDIT and was right to go red.
+  if (!outcome.failure) creditQuestGiver(character, q);
   q.outcomeId = outcome.id; q.outcomeName = outcome.name;
   q.resolvedAt = ctx.nowISO || null; q.resolvedWorldDay = ctx.worldDay ?? null;
   // ⛔ CCODE-354: A WORLD-TIER ENDING GOES ON THE SHARED RECORD. Silas ended What the Water Remembers on world-day 26 and it
@@ -1186,7 +1380,10 @@ export function structuredQuestsForGM(character, opts = {}) {
     // gm.js rule 4 governs it — "reveal it only in earned fragments, never plainly". ⚠️ The two must not be
     // confused, or the drawer becomes another place the answer gets said.
     for (const [what, text] of [["THIS QUEST", q.truth], ["THIS STAGE", stage?.truth]]) {
-      if (text) line += `\n  GM-EYES-ONLY — ${what} (NEVER state this plainly; it is what the character is here to work out. Deliver OBSERVATIONS and withhold the INTERPRETATION): ${text}`;
+      // ⚠️ THE LABEL IS THE ENGINE'S, NOT THE AUTHOR'S. The house convention prefixes such a string
+      // "GM-EYES-ONLY:" by hand (water_crisis, precursor_mechanism), and printing both reads as a stutter in
+      // the one place the prompt has to be crisp about which kind of truth this is.
+      if (text) line += `\n  GM-EYES-ONLY — ${what} (NEVER state this plainly; it is what the character is here to work out. Deliver OBSERVATIONS and withhold the INTERPRETATION): ${String(text).replace(/^\s*GM[- ]EYES[- ]ONLY\s*:?\s*/i, "")}`;
     }
     if (stage?.id && !q.awaitingResolution) {
       line += `\n  CURRENT STAGE ID: "${stage.id}" — if the character's actions THIS BEAT satisfy that condition, emit stageOps for it.`;
@@ -1195,6 +1392,25 @@ export function structuredQuestsForGM(character, opts = {}) {
       // image may accompany it but never replace it. This is the concrete payoff the quest exists to deliver.
       if (stage.change) line += `\n  WHEN SATISFIED, STATE PLAINLY (the earned reveal — SNG-239, an EARNED truth, not a GM-eyes secret): ${stage.change}`;
     }
+    // ⛔ CCODE-459: A DECISION INSIDE THE STAGE, brought into the fiction for the same reason the ending is —
+    // a choice that lives only in a panel is a choice half the players never learn they had.
+    for (const c of pendingChoices(q)) {
+      if (c.stageId !== stage?.id) continue;
+      line += `\n  ⚑ THIS STAGE ASKS FOR A DECISION AND IT HAS NOT BEEN MADE: ${c.prompt || "the character must choose"} — options: ${c.options.map(o => o.name || o.id).join(" / ")}. Put the moment in front of the character THIS BEAT and let them choose. Do NOT choose for them, and do NOT narrate a consequence of any option until one is taken.`;
+    }
+    // ⛔ CCODE-459b: AND IF THE CLOCK IS RUNNING, SAY SO. The law's third guard is that a failure must have
+    // been seeable coming; a GM that does not know the days are counting cannot make them felt.
+    {
+      const dl = questDeadline(q);
+      if (dl && Number.isFinite(Number(opts.worldDay))) {
+        const left = dl.day - Number(opts.worldDay);
+        line += left <= 0
+          ? `\n  ⛔ THIS QUEST'S TIME HAS RUN OUT. Play the consequence; do not offer more time.`
+          : `\n  ⏳ ${left} day(s) left before this runs out, and it ends badly if it does. Let the pressure be FELT — in what the character can see, never as a number read aloud.`;
+      }
+    }
+    const decided = Object.entries(q.decisions || {});
+    if (decided.length) line += `\n  ALREADY DECIDED (play it as done, and let it cost what it costs): ${decided.map(([sid, d]) => `${sid} → ${d.name || d.option}`).join("; ")}`;
     // SNG-162 §2: at the decision point the GM brings the choice into the FICTION rather than
     // leaving it to a panel the player may never open.
     if (q.awaitingResolution) {

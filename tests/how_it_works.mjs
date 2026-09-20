@@ -2043,7 +2043,7 @@ console.log("\n── §171 · the repair note measures the state ──");
   // it is on the list because the list is every family app.js applies, and a family nobody listed is the thing this catches.
   // ⚠️ CCODE-388 adds `holdTrades` on the same terms: a sale is made in a turn, never from a question (`ASK_FORBIDDEN`).
   check("§171: …and the fingerprint covers what the op families write — every family app.js applies is one this gate knows",
-    fams171.length >= 16 && fams171.every(f => ["bandOps", "codexUpdates", "deathOps", "debtOps", "encounterOps", "exchangeOps", "factUpdates", "holdingOps", "newEncounter", "npcUpdates", "partyOps", "placeUpdates", "projectOps", "questUpdates", "refusalSignal", "relationshipDeltas", "strikeOps", "holdTrades"].includes(f)), fams171.join(","));
+    fams171.length >= 16 && fams171.every(f => ["bandOps", "codexUpdates", "deathOps", "debtOps", "encounterOps", "exchangeOps", "factUpdates", "holdingOps", "newEncounter", "npcUpdates", "partyOps", "placeUpdates", "projectOps", "questUpdates", "questDeadlines", "refusalSignal", "relationshipDeltas", "strikeOps", "holdTrades"].includes(f)), fams171.join(","));
 }
 
 /* ══════════ §172 — A BEAT'S BOOKKEEPING THAT DID NOT LAND IS RESTATED, NOT LOST (Erik 2026-09-12: "make sure I don't lose anything") ══════════ */
@@ -12350,7 +12350,12 @@ console.log("\n── §189 · one reader for every player-facing quest surface,
   // `character.quests` directly"). ⚠️ THE READS LEFT ARE DELIBERATE AND NONE OF THEM TOUCHES PROSE: the dev-mode writer (two
   // lines), a Set of ids for the turn context, and two lookups by `arcId`. A count, because a spelling ban would forbid the
   // writer too — and it may only go DOWN.
-  const rawReads = (A189.match(/character\??\.quests/g) || []).length;
+  // ⚠️ COUNTED IN CODE, NOT IN COMMENTS — and this is not a loosening, it is the gate's own bug. A comment
+  // cannot read anything, and the line that tripped this was a comment saying *do not add a raw read here*.
+  // ⛔ A rule you cannot write down beside the code without breaking it is a rule that will be broken quietly
+  // instead. The offenders check below has always skipped comment lines; the count simply never did.
+  const codeLines189 = A189.split(/\r?\n/).filter(l => !/^\s*(\/\/|\*|\/\*)/.test(l)).join("\n");
+  const rawReads = (codeLines189.match(/character\??\.quests/g) || []).length;
   check(`§189: ⛔ the raw reads left in app.js are ${rawReads} and every one of them is prose-free — the dev-mode writer (4), a Set of ids, two arcId lookups (may only go DOWN)`,
     rawReads <= 7, `${rawReads} raw reads`);
   const proseWords = /\b(title|objective|summary|premise|stakes|stages|progress|condition)\b/;
@@ -12524,10 +12529,29 @@ console.log("\n── §191 · the meetings already on the record, the quest its
   const twice = Q191.creditQuestGiver(g4, { id: "q6", giver: "Aldric" });
   check("§191: ⛔ the quest ids already credited live ON THE PERSON, so the live path and the backfill cannot pay twice",
     twice === null && g4.npcRegistry.aldric.completions === 1 && g4.npcRegistry.aldric.creditedQuests.join() === "q6");
-  check("§191: …and the live path credits on a completion at BOTH doors, and never on a failure",
-    /q\.status = "resolved";\s*\n\s*creditQuestGiver\(character, q\);/.test(rd("engine/quests.js"))
-    && /if \(existing\.status === "completed"\) creditQuestGiver\(character, existing\);/.test(rd("engine/quests.js"))
-    && !/failed"\) creditQuestGiver/.test(rd("engine/quests.js")));
+  // ⚠️ THIS CHECK USED TO PIN THE SOURCE LINE `q.status = "resolved";` FOLLOWED BY THE CREDIT, and CCODE-459 —
+  // which made an ending able to be a FAILURE — changed that line and turned this red. ⛑ It was right to go red:
+  // the credit was firing unconditionally, so a quest that ended with the patient dead still thanked the person
+  // who sent you. ⛔ But a source-text pin could only say WHICH LINE, never WHAT HAPPENED, so it is now driven:
+  // two resolutions, one of each kind, on the same fixture.
+  {
+    const def191 = { id: "credit_fixture", name: "Credit", axis: "death_life", premise: "p", stakes: "s",
+      stages: [{ id: "s1", title: "t", objective: "o", condition: "c" }],
+      outcomes: [{ id: "won", name: "Won", summary: "s", effects: [] }, { id: "lost", name: "Lost", summary: "s", failure: true, effects: [] }] };
+    const run191 = (outcomeId) => {
+      const c = { name: "T", quests: [], actionCount: 0, npcRegistry: { aldric: { id: "aldric", name: "Aldric" } } };
+      Q191.startStructuredQuest(c, { ...def191, giver: "Aldric" });
+      c.quests[0].stageIndex = 1; c.quests[0].awaitingResolution = true;
+      const r = Q191.resolveStructuredQuest(c, def191.id, outcomeId, { defs: [{ ...def191, giver: "Aldric" }] });
+      return { ok: r.ok, status: c.quests[0].status, credited: c.npcRegistry.aldric.completions || 0 };
+    };
+    const won = run191("won"), lost = run191("lost");
+    check("§191: ⛔ THE GIVER IS CREDITED BY A COMPLETION AND NEVER BY A FAILURE — \"a quest that failed is not work the giver is the better for\", which the freeform path has enforced since it was written and the structured path did not once an ending could BE a failure. Driven at both doors rather than pinned to a source line",
+      won.ok && won.status === "resolved" && won.credited === 1
+      && lost.ok && lost.status === "failed" && lost.credited === 0
+      && /if \(existing\.status === "completed"\) creditQuestGiver\(character, existing\);/.test(rd("engine/quests.js")),
+      JSON.stringify({ won, lost }));
+  }
 
   /* ---- 2 · STEP 55, THROUGH THE RUNNER. ⚠️ Not `apply` on a copy: a step proven that way has never met the version gate, which
        is exactly how the braid repair sat unrun on Silas's save at reconcileVersion 49. ---- */
@@ -24042,12 +24066,140 @@ console.log("\n── §335 · the GM-eyes drawer, and the def reaching a starte
 
   // ⛑ AND THE TWO DIRECTIVES MUST NOT BE CONFUSED.
   const c339 = mk335();
-  const gmLines = QS.structuredQuestsForGM(c339, { defs: [def335] }).join("\n");
+  const gmLines = String(QS.structuredQuestsForGM(c339, { defs: [def335] }) || "");   // it returns ONE joined string, not an array
   check("§335: ⛔ THE GM IS TOLD WHICH KIND OF TRUTH EACH ONE IS, BECAUSE THE TWO DIRECTIVES ARE OPPOSITE — a stage's `change` is an EARNED reveal the GM states PLAINLY the moment the stage closes; `truth` is a GM-eyes secret the player is there to work out, and gm.js rule 4 governs it: earned fragments, never plainly. ⚠️ A drawer that arrives under the same instruction as the reveal is just one more place the answer gets said",
-    /GM-EYES-ONLY/.test(gmLines) && gmLines.includes(def335.truth) && gmLines.includes(def335.stages[0].change)
+    // ⚠️ The BODY, not the authored string: the engine strips the author's own "GM-EYES-ONLY:" prefix so the
+    // label is not stuttered, and asserting the verbatim string would be asserting the stutter.
+    /GM-EYES-ONLY/.test(gmLines) && gmLines.includes(def335.truth.replace(/^GM-EYES-ONLY:\s*/, "")) && gmLines.includes(def335.stages[0].change)
+    && !/GM-EYES-ONLY — THIS QUEST[^\n]*GM-EYES-ONLY/.test(gmLines)
     && /NEVER state this plainly/.test(gmLines) && /STATE PLAINLY/.test(gmLines)
     && !/GM-EYES-ONLY[^\n]*dawn pulse/.test(gmLines),
     JSON.stringify({ carriesTruth: /GM-EYES-ONLY/.test(gmLines), carriesChange: gmLines.includes(def335.stages[0].change) }));
+}
+
+// ══════════ §336 · CCODE-459 — A QUEST CAN NOW BE LOST, AND IT ASKS BEFORE IT LOSES YOU ══════════
+// Erik, from Courtney's play: "I want the quest to have decisions she needs to make — give the patient x or y or z medicine... with
+// specific effects that help or hinder progress. And the quest must be able to lead to failure... in this case, death of the patient,
+// which aevi avoided at first."
+// ⚠️ SHE DID NOT AVOID IT BY OVERSIGHT — `quest_structure.json` said so: "outcomes: 2-4 BRANCHED endings. NOT success/fail — WHICH
+// success." ⛑ So this is a RULING, and the LAW moves with the engine: that file reaches the GM prompt (smoke 341b), and an engine
+// that can fail a quest beside a law that forbids failure is two instructions arguing in front of the model.
+console.log("\n── §336 · a decision inside a stage, and an ending that can go wrong ──");
+{
+  const QC = await import("../engine/quests.js");
+  const def336 = {
+    id: "the_fixture_choice", name: "The Fixture", region: "valley", tier: "local", giver: "somebody", axis: "death_life",
+    premise: "A man came down off the road.", stakes: "He has perhaps four days of looking fine left.",
+    stages: [{ id: "s1", title: "Give him something", objective: "Open what was closed, and give him something at the same time.",
+      condition: "A course is begun.", change: "Codex: it has to be opened again.",
+      choices: { prompt: "He needs something now, and you have three things in the basket.", options: [
+        { id: "fever_root", name: "Fever-root", summary: "The squared stem.", cost: "A full four-day course, and he has four days.",
+          effects: [{ type: "codex_fact", text: "Fever-root, squared stem, begun on the eleventh day." }], opens: ["kept"], forecloses: ["he_dies"] },
+        { id: "hush_leaf", name: "Hush-leaf", summary: "The round stem, taken in the dusk.", cost: "It slows a heart already working as hard as it can.",
+          effects: [{ type: "codex_fact", text: "Hush-leaf was given in place of fever-root." }], forecloses: ["kept"] },
+      ] } }],
+    outcomes: [
+      { id: "kept", name: "Treated, and Kept", summary: "He lives.", effects: [{ type: "xp", amount: 40 }] },
+      { id: "he_dies", name: "Too Late", summary: "He dies on the fourth morning.", failure: true,
+        narration: ["He is cool by the time the light is in the window."], effects: [{ type: "codex_fact", text: "He died at the Kindly Rest." }, { type: "xp", amount: 10 }] },
+    ],
+  };
+  const mk336 = () => { const c = { name: "Fixture", quests: [], actionCount: 0, xp: 0 }; QC.startStructuredQuest(c, def336); return c; };
+  const ctx336 = { defs: [def336], worldDay: 82, recordFact: () => {} };
+  const atEnd = (c) => { c.quests[0].stageIndex = def336.stages.length; c.quests[0].awaitingResolution = true; return c; };
+
+  const c336 = mk336();
+  const pend = QC.pendingChoices(QC.questsFor(c336, [def336])[0]);
+  const took = QC.chooseAtStage(c336, def336.id, "s1", "hush_leaf", ctx336);
+  const again = QC.chooseAtStage(c336, def336.id, "s1", "fever_root", ctx336);
+  check("§336: ⛔ A STAGE CAN ASK FOR A DECISION, AND IT STAYS MADE — every choice a quest offered until now was the LAST one: `outcomes[]` at the decision point, with nothing between the first beat and the end that the quest remembered. A quest about which of two lookalike plants you carry down the hill could not be told which one you carried. ⚠️ One decision per stage, and a second is REFUSED rather than silently re-applied — an effect paid twice is a world that drifted",
+    pend.length === 1 && pend[0].options.length === 2 && took.ok === true
+    && c336.quests[0].decisions.s1.option === "hush_leaf"
+    && again.ok === false && again.why === "already decided"
+    && (c336.quests[0].progress || []).some(p => /Hush-leaf/.test(p)),
+    JSON.stringify({ pending: pend.length, taken: took.ok, second: again.why }));
+
+  check("§336: ⛑ AND ITS EFFECTS ARE PAID THROUGH THE SAME APPLIER THE ENDINGS USE — design law 3: \"if the player cannot go back and SEE what they did, it did not happen.\" A decision mid-quest is as durable and as findable as an ending, because it is the same act at a different time",
+    (took.applied || []).length >= 1, JSON.stringify(took.applied));
+
+  // ⛔ THE TRAP THE FIRST CUT OF THIS HAD, caught by running it: an ending was shut because no decision had yet OPENED it, so a player
+  // standing at the decision point having never pressed the button was offered the failure and nothing else.
+  const fresh336 = QC.questsFor(mk336(), [def336])[0];
+  const before = QC.outcomeAvailability(fresh336);
+  const after = QC.outcomeAvailability({ ...QC.questsFor(c336, [def336])[0], decisions: c336.quests[0].decisions });
+  check("§336: ⛔ A DECISION STEERS THE ENDINGS, AND AN UNDECIDED ONE FORECLOSES NOTHING — this is what \"help or hinder progress\" has to MEAN mechanically: the door shuts because you chose otherwise, NEVER because you have not chosen. ⚠️ A stage's decision is not guaranteed to be taken — the GM can close a stage from play — so a quest that punishes a button nobody was told to press is a trap, not a dilemma; and every shut door can say WHY it shut",
+    before.open.length === 2 && before.closed.length === 0
+    && after.open.length === 1 && after.open[0].id === "he_dies"
+    && after.closed.length === 1 && after.closed[0].id === "kept" && /Hush-leaf/.test(after.closed[0].why),
+    JSON.stringify({ before: before.open.map(o => o.id), after: after.open.map(o => o.id), why: after.closed[0]?.why }));
+
+  const shut = QC.resolveStructuredQuest(atEnd(c336), def336.id, "kept", ctx336);
+  check("§336: ⛔ AND THE CLOSED ENDING IS REFUSED AT THE ENGINE, NOT MERELY HIDDEN ON THE SCREEN — the decision strip and author mode reach the same resolver, so a door the screen declines to draw has to be a door the engine declines to open; and a refusal leaves the quest ACTIVE rather than half-ended",
+    shut.ok === false && shut.why === "that ending is closed" && /Hush-leaf/.test(shut.because || "")
+    && c336.quests[0].status === "active" && !c336.quests[0].outcomeId,
+    JSON.stringify({ why: shut.why, because: shut.because, status: c336.quests[0].status }));
+
+  const died = QC.resolveStructuredQuest(c336, def336.id, "he_dies", ctx336);
+  check("§336: ⛔ A FAILURE IS A REAL ENDING, NOT THE ABSENCE OF ONE — it pays its effects, records its deed, writes its chronicle line and leaves its wake exactly as any other ending does, and the log ends on `failed`. ⚠️ An ending that costs nothing did not happen, which is the whole reason a quest could not simply be marked failed",
+    died.ok === true && c336.quests[0].status === "failed" && c336.quests[0].failed === true
+    && c336.quests[0].outcomeId === "he_dies" && c336.xp > 0
+    && (c336.chronicle || []).some(e => e.kind === "quest_resolved" && e.outcome === "Too Late")
+    && (c336.deeds || []).some(d => /Too Late/.test(d.description || "")),
+    JSON.stringify({ status: c336.quests[0].status, xp: c336.xp, deeds: (c336.deeds || []).length }));
+
+  // ⛔ AND THE FLAT `fail` OP CAN NO LONGER SKIP ALL OF THAT. It was left open when `complete` was closed — survivable only while
+  // failure was impossible to author, because nothing was lost by a failure that did nothing.
+  const c337 = mk336();
+  QC.applyQuestUpdates(c337, [{ op: "fail", questId: def336.id, title: "The Fixture" }], {});
+  check("§336: ⛔ A STRUCTURED QUEST ENDS ONE WAY — THROUGH AN OUTCOME — AND THE FLAT `fail` OP NO LONGER BYPASSES IT. It used to set the status right there and pay NOTHING: no effects, no deed, no chronicle, no wake, which is a patient who dies and leaves the world unchanged. ⛑ It now surfaces the decision instead, exactly as `complete` was made to; the endings still open may by then be only the bad ones",
+    c337.quests[0].status === "active" && c337.quests[0].awaitingResolution === true && !c337.quests[0].failed,
+    JSON.stringify({ status: c337.quests[0].status, awaiting: c337.quests[0].awaitingResolution }));
+
+  // ⛔ THE OTHER HALF OF FAILURE, AND THE IMPORTANT HALF. An ending the player picks off a menu is not one the
+  // world imposes; "he has perhaps four days of looking fine left" has to be able to be TRUE.
+  const dd336 = { ...def336, deadlineDays: 4, deadlineOutcome: "he_dies", deadlineWarnDays: 2 };
+  const mkd = (stamp) => { const c = { name: "Fixture", quests: [], actionCount: 0, xp: 0 }; QC.startStructuredQuest(c, dd336, { worldDay: stamp }); c.quests[0].startedWorldDay = stamp; return c; };
+  const at = (c, day) => QC.questDeadlines(c, { worldDay: day, defs: [dd336] });
+  const warned = mkd(82);
+  const firstWarn = at(warned, 85), secondWarn = at(warned, 85);
+  const blown = at(mkd(82), 90);
+  // ⚠️ AND THE BROKEN FIXTURE MUST BE HANDED THE BROKEN DEF. The first cut built the quest from a def naming a
+  // missing ending and then read it back against the GOOD def — so hydration put the working ending back and the
+  // check proved nothing. The def is the source of this field; a fixture that does not pass it asks a different
+  // question and answers it correctly.
+  const badDef336 = { ...dd336, deadlineOutcome: "nope" };
+  const broken336 = QC.questDeadlines((() => { const c = { name: "F", quests: [], actionCount: 0 }; QC.startStructuredQuest(c, badDef336, { worldDay: 82 }); return c; })(), { worldDay: 99, defs: [badDef336] });
+  check("§336: ⛔ A QUEST CAN RUN OUT OF TIME, AND THAT IS THE HALF OF FAILURE THE WORLD IMPOSES — the days pass whether or not anybody is watching, the warning fires ONCE rather than every beat, and a deadline naming an ending the quest does not carry is reported as a CONTENT FAULT rather than quietly ending it on an outcome that would pay nothing. ⚠️ Absolute world days on purpose: character days are player-advanced, and a dying man you can keep alive by refusing to sleep is an exploit, not a deadline",
+    firstWarn.lapsing.length === 1 && firstWarn.lapsing[0].daysLeft === 1 && secondWarn.lapsing.length === 0
+    && at(mkd(82), 82).lapsing.length === 0 && at(mkd(82), 82).lapsed.length === 0
+    && blown.lapsed.length === 1 && blown.lapsed[0].outcomeId === "he_dies" && blown.lapsed[0].overdueBy === 4
+    && broken336.lapsed.length === 0 && /not one of this quest's endings/.test(broken336.lapsing[0]?.broken || ""),
+    JSON.stringify({ warnOnce: [firstWarn.lapsing.length, secondWarn.lapsing.length], lapsed: blown.lapsed[0]?.outcomeName, broken: !!broken336.lapsing[0]?.broken }));
+
+  check("§336: ⛔ AND A SAVE WITH NO START STAMP CAN NEVER RUN OUT — `Number(null)` is 0 and 0 is finite, so the first cut of this computed a deadline of world-day 0 and came back \"LAPSED, overdue by 995 days\", which is every old quest in the world dying at once on the first beat after the update. ⛑ Absence stays absence and is never converted into an answer; the worst an unstamped save can do is not run out",
+    [null, undefined, ""].every(s => { const r = at(mkd(s), 99999); return r.lapsed.length === 0 && r.lapsing.length === 0; })
+    && QC.questDeadline({ deadlineDays: 4, startedWorldDay: null }) === null
+    && QC.questDeadline({ deadlineDays: 4, startedWorldDay: 82 })?.day === 86
+    && QC.questDeadline({ deadlineDays: QC.NO_DEADLINE, startedWorldDay: 82 }) === null,
+    JSON.stringify({ nullStamp: QC.questDeadline({ deadlineDays: 4, startedWorldDay: null }), stamped: QC.questDeadline({ deadlineDays: 4, startedWorldDay: 82 })?.day }));
+
+  // ⛑ AND THE DEF REACHES IT WITHOUT ANYBODY ADDING A NAME TO A LIST — the read-side whitelist dropped a field
+  // three times (`title`, `truth`, and `deadlineDays` an hour apart), so the def is now the BASE of the read.
+  const grown336 = QC.questsFor(mkd(82), [dd336])[0];
+  check("§336: ⛔ AN AUTHORED FIELD REACHES A STARTED QUEST WITHOUT BEING NAMED IN A LIST FIRST — `hydrateQuest` returned a WHITELIST, and it dropped a field three separate times: every stage's `title` (SNG-542), then `truth` the hour the GM-eyes drawer was built, then `deadlineDays` the hour a quest could first run out. Each was \"fixed\" by adding one more name to a list that had just been proven unable to hold one. ⛑ The def is the base and the record is laid over it, so play state still wins and an authored field added tomorrow arrives by itself",
+    grown336.deadlineDays === 4 && grown336.deadlineOutcome === "he_dies"
+    && grown336.startedWorldDay === 82 && grown336.stageIndex === 0
+    && !/deadlineDays/.test(JSON.stringify(QC.structuredQuestRecord(dd336))),
+    JSON.stringify({ deadlineDays: grown336.deadlineDays, inTheSave: /deadlineDays/.test(JSON.stringify(QC.structuredQuestRecord(dd336))) }));
+
+  const law336 = rj("content/packs/core/rules/quest_structure.json");
+  check("§336: ⛑ AND THE LAW MOVED WITH THE ENGINE, BECAUSE THE LAW IS WHAT THE GM READS — `quest_structure.json` said \"NOT success/fail — WHICH success\", which is why no failure was ever authored; it now records Erik's ruling and its three guards (a failure must be EARNED, must PAY its consequences, and must have been SEEABLE coming), the stage-choice shape, and `truth`. ⚠️ An engine that can fail a quest beside a law that forbids it is two instructions arguing in front of the model",
+    /must be able to lead to\s*failure/i.test(law336.required.outcomes) && /failure: true/.test(law336.required.outcomes)
+    && /EARNED/.test(law336.required.outcomes) && /PAYS ITS\s*CONSEQUENCES/i.test(law336.required.outcomes) && /SEE IT COMING/i.test(law336.required.outcomes)
+    && /choices/.test(law336.required.stages) && /forecloses/.test(law336.required.stages)
+    && /GM-EYES/.test(law336.optional.truth || "")
+    && law336.designLaws.some(l => /BOTH DOORS COST SOMETHING/.test(l)),
+    JSON.stringify({ outcomes: /failure/i.test(law336.required.outcomes), stages: /choices/.test(law336.required.stages), truth: !!law336.optional.truth }));
 }
 
 /* ══════════ REPORT ══════════ */

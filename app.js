@@ -15,7 +15,7 @@ import { gmTurn, refusalSignal, reNarrateRich, parseIntent, gmAsk, generateBio, 
 import { buildBattlePrompt, battleKey } from "./engine/battleprompt.js"; // SNG-400b: the battle image is a prompt BUILD, not a string join
 import { namesToAvoid, namesMatch } from "./engine/namematch.js"; // CCODE-166: the codebase already knew how to match a fuller name to a known one
 import { affiliationAt, buildPeopleVocab } from "./engine/affiliation.js"; // SNG-185 · CCODE-413: the whole chain, one implementation
-import { applyQuestUpdates, questsFor, questsForGM, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM, slugify, advanceStructuredQuest } from "./engine/quests.js";
+import { applyQuestUpdates, questsFor, questsForGM, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM, slugify, advanceStructuredQuest, stageChoice, outcomeAvailability, chooseAtStage, questDeadlines, questDeadline } from "./engine/quests.js";
 import { applyStateOps, describeCorrection, detectAnomalies, anomaliesForGM } from "./engine/corrections.js";
 import { applyAuthorOps, AUTHOR_OPS } from "./engine/authormode.js"; // SNG-207b: the author god-mode (dev-gated, separate surface)
 import { getApiKey, setApiKey, callClaude, callClaudeJSON, parseLooseJSON, setCallObserver, MODELS } from "./engine/claude.js";
@@ -178,7 +178,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.3.8";
+const APP_VERSION = "2.4.0";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -6374,6 +6374,7 @@ function armBuildWatch() {
 async function maybeTick() {
   const currentDay = readClock(character.clock).day;
   settleJobsNow();   // ⛔ CCODE-420: …and on a journey, a rest, or opening the game after the days went by
+  runQuestDeadlines();   // ⛔ CCODE-459b: …and a patient nobody treated for a week is not still waiting
   // ⛔ CCODE-239 — BANKED WORK ADVANCES WITH THE DAYS, at the one choke point the clock passes through.
   // ⚠️ BY THE DELTA, NOT BY THE CALL. `maybeTick` fires on re-entry as well as on a clock jump, so
   // ticking one day per call would pay a project for opening the app. The last day paid is remembered on
@@ -9356,6 +9357,7 @@ function applyTurn(turn, resolution, playerWords = null) {
   const hours = declared ? Math.max(0.25, declaredHours) : beatDefault;
   advanceClock(character.clock, hours);
   settleJobsNow();   // ⛔ CCODE-420: a team whose time is up comes home on the beat that passes it
+  applyStep("questDeadlines", () => runQuestDeadlines(turn));   // ⛔ CCODE-459b: and a quest whose time is up ends on it
   if (declared && hours >= 2) autoVerifyLeg("b8-time", `narrative time moved ${hours}h via timeOps`); // SNG-051 auto-verify
   // BATCH-12 §3c: the company you keep earns standing with their people, on the IN-GAME DAY. Erik's
   // Calvar case — a willing Radiant teacher travelling with him and zero Radiant standing, because
@@ -15247,13 +15249,46 @@ function questsAtDecision() { return myQuests().filter(questAtDecision); }
 // SNG-244: the ONE resolve action, shared by the quest-detail ending buttons AND the in-play decision strip — so
 // the strip is a genuine shortcut to the existing ending-selection, not a parallel resolve path (the spec guard).
 // De-dupes the SNG-235 ctx sink bundle that both callers need. onDone lets a caller override the after-render.
-function resolveQuestOutcome(questId, outcomeId, { onDone } = {}) {
-  const q = myQuests().find(x => x.id === questId);
-  const o = q && (q.outcomes || []).find(x => x.id === outcomeId);
-  if (!q || !o) return;
-  if (!confirm(`Resolve "${q.title}" as “${o.name}”? This is permanent and changes the world.`)) return;
+/** ⛔ CCODE-459b — THE DAYS RUN OUT WHETHER OR NOT ANYONE IS WATCHING. Erik: "the quest must be able to
+ *  lead to failure... death of the patient." An ending the player has to CHOOSE is not a failure the world
+ *  imposes; a stakes line reading "he has perhaps four days of looking fine left" has to be able to be true.
+ *
+ *  ⛑ Called from TWO places, for the reason `settleJobsNow` is: per beat, so the day the clock passes is the
+ *  beat it lands on; and on every load, so a player who closes the tab for a week comes back to a world that
+ *  went on without them. ⚠️ Every failure swallowed — a pass that can cost a beat is worse than one that
+ *  occasionally misses a day. */
+function runQuestDeadlines(turn = null) {
+  try {
+    // ⚠️ NO GUARD READING `character.quests` HERE. §189 ratchets the raw reads of the record left in app.js and
+    // they may only go DOWN; the detector already answers "nothing" for a character with no quests.
+    const dl = questDeadlines(character, { worldDay: absoluteWorldDay(), defs: CONTENT?.quests || null });
+    const said = [];
+    for (const w of dl.lapsing) {
+      // ⚠️ A DEADLINE NAMING AN ENDING THE QUEST DOES NOT HAVE IS A CONTENT FAULT, NOT A DEATH. Reported so
+      // somebody fixes it; the quest lives, because ending it on an outcome that does not exist would pay nothing.
+      if (w.broken) { console.warn(`[quest deadline] ${w.questId}: ${w.broken}`); continue; }
+      said.push(`*✦ ${w.title} — ${w.daysLeft} day${w.daysLeft === 1 ? "" : "s"} left.*`);
+    }
+    for (const L of dl.lapsed) {
+      const r = resolveStructuredQuest(character, L.questId, L.outcomeId, questResolveCtx());
+      if (!r.ok) { console.warn(`[quest deadline] ${L.questId} could not end: ${r.why}`); continue; }
+      said.push(`*✦ ${L.title} — ${L.outcomeName}. The time for it ran out.*`);
+    }
+    if (said.length) {
+      if (turn) turn.narration = (turn.narration || "") + "\n\n" + said.join("\n");
+      saveCharacter(character);
+    }
+    return said;
+  } catch (err) { console.warn("[quest deadline]", err?.message); return []; }
+}
+
+/** ⛔ CCODE-459b — THE ONE RESOLUTION CONTEXT, because there is now more than one way a quest can end. The
+ *  player chooses an ending; a DEADLINE can also end one, and an ending reached by the clock has to pay
+ *  exactly what an ending reached by a decision pays — the effects, the deed, the chronicle, the wake.
+ *  ⚠️ A second ending path with a thinner context is how a patient dies and the world does not notice. */
+function questResolveCtx() {
   const day = readClock(character.clock).day;
-  const r = resolveStructuredQuest(character, q.id, outcomeId, {
+  return {
     // ⛔ CCODE-458: the endings come off the DEF. Without this an ending authored after the quest started
     // drew a button and then refused it — "unknown outcome" — on every save already in flight.
     defs: CONTENT?.quests || null,
@@ -15311,7 +15346,16 @@ function resolveQuestOutcome(questId, outcomeId, { onDone } = {}) {
         spectrumDeltas: {}, visibility: ev?.visibility || "witnessed", impactsLocal: false };
       if (row.what) appendLedger([row], character.id).catch(err => console.warn("[ledger]", err?.message));
     },
-  });
+  };
+}
+
+function resolveQuestOutcome(questId, outcomeId, { onDone } = {}) {
+  const q = myQuests().find(x => x.id === questId);
+  const o = q && (q.outcomes || []).find(x => x.id === outcomeId);
+  if (!q || !o) return;
+  if (!confirm(`Resolve "${q.title}" as “${o.name}”? This is permanent and changes the world.`)) return;
+  const day = readClock(character.clock).day;
+  const r = resolveStructuredQuest(character, q.id, outcomeId, questResolveCtx());
   if (r.ok) {
     saveCharacter(character);
     const say = a => a.type === "world_event" ? "a ripple spreads through the world"
@@ -15344,6 +15388,15 @@ function renderStructuredQuestDetail(q) {
       <div class="quest-stage-obj">${done ? "✓ " : current ? "▶ " : "○ "}${esc(s.objective)}</div>
       <div class="hint">${esc(s.condition)}</div>
       ${done && s.change ? `<div class="codex-fact" style="margin-top:4px">${esc(s.change)}</div>` : ""}
+      ${/* ⛔ CCODE-459: THE DECISION THIS STAGE ASKS FOR. Erik: "I want the quest to have decisions she needs
+            to make — give the patient x or y or z medicine... with specific effects that help or hinder
+            progress." ⚠️ Shown while the stage is CURRENT and kept visible once taken, because what you chose
+            is a thing you must be able to go back and see (design law 3). A taken decision is not re-offered:
+            the engine refuses a second one, and a button that only ever refuses is a lie. */""}
+      ${(() => { const c = stageChoice(q, s.id); if (!c || (!current && !c.taken) || resolved) return "";
+        if (c.taken) { const t = c.options.find(o => o.id === c.taken); return `<div class="quest-decision-taken hint" style="margin-top:6px;text-transform:none">You chose: <strong>${esc(t?.name || c.taken)}</strong>${t?.summary ? ` — ${esc(t.summary)}` : ""}</div>`; }
+        return `<div class="quest-decision" style="margin-top:8px"><div class="hint" style="text-transform:none;margin-bottom:6px">${esc(c.prompt || "You have to decide.")}</div>
+          ${c.options.map(o => `<button class="opt" data-choose="${esc(s.id)}" data-opt="${esc(o.id)}" style="display:block;width:100%;text-align:left;margin:4px 0"><strong>${esc(o.name || o.id)}</strong>${o.summary ? `<div class="hint" style="text-transform:none">${esc(o.summary)}</div>` : ""}${o.cost ? `<div class="hint" style="text-transform:none;opacity:.8">${esc(o.cost)}</div>` : ""}</button>`).join("")}</div>`; })()}
       ${current && !resolved ? `<button class="btn secondary" data-stagedone="${esc(s.id)}" style="margin-top:6px">Mark this stage met</button>` : ""}
     </div>`; };
   // SNG-238 §3b: the quest's iconic header image (generate-on-view, cached). Aevi authored q.image as a prompt.
@@ -15354,6 +15407,13 @@ function renderStructuredQuestDetail(q) {
     <h2 style="margin-top:4px">${esc(q.title)}</h2>
     <p class="map-details-desc">${mdProse(q.premise)}</p>
     <div class="quest-stakes"><span class="quest-stakes-label">What's at stake</span> ${mdProse(q.stakes)}</div>
+    ${/* ⛔ CCODE-459b: THE CLOCK, SHOWN ONLY WHEN IT IS RUNNING. The law's third guard is that a failure must
+          have been seeable coming. ⚠️ And death.js's rule in the other direction — a days-left line printed
+          beside a thing that has no deadline is a message claiming a mechanism that is not running — so a quest
+          without one shows nothing at all here rather than a reassuring blank. */""}
+    ${(() => { if (resolved) return ""; const dl = questDeadline(q); if (!dl) return "";
+      const left = dl.day - absoluteWorldDay();
+      return `<div class="quest-deadline hint" style="margin-top:6px;text-transform:none">${left > 0 ? `<strong>${left} day${left === 1 ? "" : "s"}</strong> left.` : "<strong>The time for this has run out.</strong>"}</div>`; })()}
     ${resolved ? `<div class="quest-outcome-banner"><strong>Outcome:</strong> ${esc(q.outcomeName || "resolved")}</div>` : ""}
     <h3 class="codex-title" style="font-size:15px;margin-top:16px">Stages</h3>
     ${q.stages.map(stageRow).join("")}
@@ -15365,7 +15425,11 @@ function renderStructuredQuestDetail(q) {
           ENDING stays the player's, and it surfaces when it's time. */""}
     ${atDecision ? `<h3 class="codex-title" style="font-size:15px;margin-top:16px">Resolve — decide what the truth is for</h3>
       <div class="hint" style="margin-bottom:8px">Every stage is behind you. Every ending is a real ending — what you choose changes the world durably, and you'll be able to go back and see it.</div>
-      ${q.outcomes.map(o => { const oimg = imagesEnabled() ? ensureQuestArt(o.imagePrompt, `quest-${q.id}-out-${o.id}`) : null; return `<button class="opt quest-outcome-btn" data-outcome="${esc(o.id)}" style="display:block;width:100%;text-align:left;margin:4px 0">
+      ${/* ⛔ CCODE-459: THE DECISIONS ALREADY TAKEN HAVE SHUT SOME OF THESE DOORS, and a door a decision shut
+            is not offered. ⚠️ Nor is it LISTED as shut — naming an ending you can no longer reach is a spoiler
+            for a quest you are still inside. The engine refuses a closed ending too; this is the courtesy, not
+            the gate. */""}
+      ${outcomeAvailability(q).open.map(o => { const oimg = imagesEnabled() ? ensureQuestArt(o.imagePrompt, `quest-${q.id}-out-${o.id}`) : null; return `<button class="opt quest-outcome-btn" data-outcome="${esc(o.id)}" style="display:block;width:100%;text-align:left;margin:4px 0">
         ${oimg ? `<img class="quest-outcome-img" data-lightbox="quest" src="${esc(oimg)}" alt="" loading="lazy" onerror="this.style.display='none'">` : ""}<strong>${esc(o.name)}</strong><div class="hint" style="text-transform:none">${esc(o.summary)}</div></button>`; }).join("")}`
     : !resolved ? `<div class="hint" style="margin-top:16px">This isn't finished yet. Play it — the stages close as you actually do them, and the endings appear when you reach the decision.</div>`
     : `<h3 class="codex-title" style="font-size:15px;margin-top:16px">What you did</h3>
@@ -15376,6 +15440,21 @@ function renderStructuredQuestDetail(q) {
   for (const b of app.querySelectorAll("[data-stagedone]")) b.onclick = () => {
     const r = completeQuestStage(character, q.id, b.dataset.stagedone, { defs: CONTENT?.quests || null });
     if (r.ok) { saveCharacter(character); renderStructuredQuestDetail(myQuests().find(x => x.id === q.id)); }
+  };
+  for (const b of app.querySelectorAll("[data-choose]")) b.onclick = () => {
+    const opt = (stageChoice(q, b.dataset.choose)?.options || []).find(o => o.id === b.dataset.opt);
+    if (!confirm(`Give him ${opt?.name || b.dataset.opt}?${opt?.cost ? `\n\n${opt.cost}` : ""}\n\nThis is a decision, and it stays made.`)) return;
+    const day = readClock(character.clock).day;
+    const r = chooseAtStage(character, q.id, b.dataset.choose, b.dataset.opt, {
+      defs: CONTENT?.quests || null, worldDay: absoluteWorldDay(), nowISO: new Date().toISOString(), content: CONTENT,
+      recordEvent: ev => applyFactUpdates(character, [{ op: "add", text: ev.text }], { day }),
+      recordFact: f => applyFactUpdates(character, [{ op: "add", text: f.text }], { day }),
+      recordCodex: entry => applyCodexUpdates(character, [entry], { day }),
+      recordStanding: ops => applyStandingOps(character, ops, { rules: CONTENT.rules, day }),
+    });
+    if (!r.ok) { alert(r.why); return; }
+    saveCharacter(character);
+    renderStructuredQuestDetail(myQuests().find(x => x.id === q.id));
   };
   // SNG-244: the ending buttons and the in-play decision strip both route through resolveQuestOutcome — one path.
   for (const b of app.querySelectorAll("[data-outcome]")) b.onclick = () => resolveQuestOutcome(q.id, b.dataset.outcome);

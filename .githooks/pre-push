@@ -52,4 +52,13 @@ if [ $? -ne 0 ]; then
   echo "  ⛔ REGRESSION — push blocked. Something got worse than tests/suite_baseline.json."
   exit 1
 fi
+# ⛔ CCODE-460 — AND NOW SOMETHING WRITES THE MARK, WHICH NOTHING DID. The skip above reads
+# $GIT_DIR/ratchet-verified-tree and the "ship script" its comment credits does not write it — a repo-wide
+# grep finds the two hook copies and one gate, and no producer at all. So the skip has never once fired, and
+# §180 stayed green because it asserts the hook CONTAINS the logic, never that the file it reads is written
+# by anybody. A reader with no writer is the same defect this project keeps finding in its own content.
+# ⚠️ THE COST IS NOT THEORETICAL: while a player is in a session the app pushes a save every minute or two,
+# so a push loses the ref race, rebases, and pays the whole suite again on a tree the suite just passed —
+# five rejections in a row on 2026-09-20. A retry now skips, and so does a rebase that brought only saves.
+git rev-parse 'HEAD^{tree}' > "$GITDIR/ratchet-verified-tree" 2>/dev/null || true
 exit 0

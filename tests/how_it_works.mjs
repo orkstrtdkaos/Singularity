@@ -2372,8 +2372,17 @@ console.log("\n── §180 · the suites run in a pool; the hook skips a tree t
     /import \{ spawnSync, spawn \} from "node:child_process";/.test(runner180) && /RUN_TESTS_SERIAL/.test(runner180) && /RUN_TESTS_JOBS/.test(runner180)
     && /for \(const \[name, cmd, args\] of \(serial \? run : \[\]\)\) \{/.test(runner180) && /pooled\[i\] = await runOne\(run\[i\]\)/.test(runner180) && /results\.push\(\.\.\.pooled\)/.test(runner180));
   const hook180 = rd(".githooks/pre-push"), hook180b = rd("scripts/hooks/pre-push");
-  check("§180: ⛔ the hook skips the ratchet for the tree the ship script verified, or one that differs only under characters/ — and runs it for anything else; both tracked copies are one text",
-    hook180 === hook180b && /ratchet-verified-tree/.test(hook180) && /grep -v '\^characters\/'/.test(hook180) && /node scripts\/run_tests\.mjs --ratchet --quiet/.test(hook180) && /exit 1/.test(hook180));
+  // ⛔ CCODE-460: AND SOMETHING MUST WRITE THE MARK. This check asserted the hook CONTAINS the skip and never that
+  // the file it reads is written by anyone — and nothing was writing it, so the skip had never fired once while the
+  // gate stayed green. ⚠️ A reader with no writer, in the verification layer itself: the same defect this suite exists
+  // to catch in content. The producer is the hook's own successful run, which is the only place that can honestly say
+  // "these suites passed on this exact tree".
+  const writesMark180 = /git rev-parse 'HEAD\^\{tree\}' > "\$GITDIR\/ratchet-verified-tree"/.test(hook180);
+  check("§180: ⛔ the hook skips the ratchet for a tree already verified, or one that differs only under characters/, runs it for anything else — AND WRITES THE MARK IT READS, which nothing did; both tracked copies are one text",
+    hook180 === hook180b && /ratchet-verified-tree/.test(hook180) && /grep -v '\^characters\/'/.test(hook180)
+    && /node scripts\/run_tests\.mjs --ratchet --quiet/.test(hook180) && /exit 1/.test(hook180)
+    && writesMark180 && hook180.indexOf("MARK=$(head -1") < hook180.indexOf("git rev-parse 'HEAD^{tree}' >"),
+    writesMark180 ? "reads and writes the mark" : "⛔ the mark is READ and never WRITTEN — the skip cannot fire");
   const base180 = JSON.parse(rd("tests/suite_baseline.json"));
   // ⛔ 2026-09-12: this pinned content_ci at 8 and smoke at 0 beside the claim it exists to make — so LOWERING content_ci to 6 on Erik's
   // authorisation (B2, §185) reddened the gate that records that lowering is legitimate. A number allowed to fall is not a fixture.

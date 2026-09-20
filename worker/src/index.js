@@ -24,6 +24,14 @@ const MODEL = "@cf/black-forest-labs/flux-1-schnell";
 const STEPS = 4;
 const A_YEAR = 31536000;
 
+/** ⛔ CCODE-456 — A PICTURE DRAWN FROM A PICTURE. `flux-1-schnell` takes a prompt and nothing else; SDXL takes a REFERENCE (`image_b64`),
+ *  how far it may move from it (`strength` 0–1), and a real width and height. So `?ref=<a picture this service already knows>` draws the
+ *  new picture out of the old one — the way to keep a face the players know when the scene around it changes.
+ *  ⚠️ THE REFERENCE MUST BE ONE OF OURS. It is resolved to a key in our own store (or preserved from the old service), never fetched from
+ *  wherever a caller points: a public endpoint that fetches any URL on demand is an open proxy, and this one holds someone's account. */
+const REF_MODEL = "@cf/stabilityai/stable-diffusion-xl-base-1.0";
+const REF_STEPS = 20;
+
 /** ⛔ WHO MAY SPEND A DRAW. Reading costs nothing; DRAWING spends the account's daily neurons, and this address is
  *  public. So an R2 hit and a preserved picture answer anybody, and a NEW drawing answers only the game — by the
  *  browser's own `Referer`/`Origin`, which is not proof, but is the difference between a bounded cost and an open
@@ -51,7 +59,14 @@ export default {
     const seed = Math.abs(Math.trunc(Number(url.searchParams.get("seed")))) || 0;
     // ⚠️ THE KEY DROPS `_cb`. A cache-buster is a way of asking the OLD service again (SNG-435); it never meant a
     // different picture, and keying on it would store the same picture twice and lose the healed record's bytes.
-    const key = await keyFor(prompt, width, height, seed);
+    // ⚠️ …AND CARRIES THE REFERENCE. The same words drawn out of a different picture, or at a different strength, are a different
+    // picture, so a key that ignored them would hand back the first one forever.
+    const ref = url.searchParams.get("ref") || "";
+    const strength = Math.min(1, Math.max(0.05, Number(url.searchParams.get("strength")) || 0.5));
+    // ⚠️ …AND THE WAY IT WAS DRAWN. A probe that asked a different model with a different field is a different picture, and while the keys
+    // were the same one probe's answer — FLUX.2's own sample image, branded in red — came back as the finished scene for every later ask.
+    const how = ["j", "m", "field", "wrap", "mask", "maskfield", "maskas"].map(p => url.searchParams.get(p)).filter(Boolean).join("|");
+    const key = await keyFor(`${prompt}${ref ? `|ref:${ref}|s:${strength}` : ""}${how ? `|how:${how}` : ""}`, width, height, seed);
 
     // ── 1 · the store
     const store = storeOf(env);
@@ -59,7 +74,77 @@ export default {
     const hit = await store.get(key);
     if (hit) return new Response(request.method === "HEAD" ? null : hit.bytes, { headers: { "content-type": hit.type, ...(hit.size ? { "content-length": String(hit.size) } : {}), ...kept("kept") } });
 
-    // ── 2 · preserve first: the old address, rebuilt exactly
+    // ── 2 · a picture drawn from a picture (CCODE-456) — never preserved from the old service, because it never drew this one
+    if (ref) {
+      const may = mayDraw(request, env);
+      if (!may.ok) return refuse(403, may.why);
+      if (!env.AI) return refuse(503, "this service has no drawer bound yet, so a new picture cannot be drawn");
+      const from = await refBytes(ref, request, store);
+      if (!from.ok) return refuse(400, `the reference picture could not be read: ${from.why}`);
+
+      // ⚑ …and the same knobs for a PLAIN (JSON) call, so a different model and a different name for the picture field can be tried by
+      // changing a URL. `@cf/stabilityai/stable-diffusion-xl-base-1.0` is documented to take `image`/`image_b64` and answers "input tensor
+      // `image` is not present in the model" for both, so which deployed model actually has the tensor is a question only asking settles.
+      const json = url.searchParams.get("j");
+      if (json) {
+        const field = url.searchParams.get("field") || "image";
+        try {
+          const input = { prompt, strength, num_steps: REF_STEPS };
+          input[field] = field.endsWith("_b64") ? base64(from.bytes) : Array.from(from.bytes);
+          // ⛑ AN INPAINTING MODEL REPAINTS WHERE THE MASK IS WHITE, so a mask that is white everywhere IS image-to-image. Workers have no
+          // canvas, so the mask is a greyscale PNG written by hand, at the reference's own size (the model requires they match).
+          if (url.searchParams.get("mask")) {
+            const png = await whitePng(from.width, from.height);
+            input[url.searchParams.get("maskfield") || "mask_image"] = url.searchParams.get("maskas") === "b64" ? base64(png) : Array.from(png);
+          }
+          if (url.searchParams.get("wh") !== "no") { input.width = width; input.height = height; }
+          const out = await env.AI.run(json.startsWith("@cf/") ? json : `@cf/${json}`, input);
+          const drawn = await bytesOf(out);
+          if (!drawn || drawn.length < MIN_BYTES) return refuse(502, "that call was accepted and came back with nothing in it");
+          const type = out instanceof ReadableStream ? "image/png" : "image/jpeg";
+          await store.put(key, drawn, type, meta(`from:${json}:${field}`, prompt, seed));
+          return new Response(drawn, { headers: { "content-type": type, ...kept("drawn-from") } });
+        } catch (e) { return refuse(502, `${json} · field=${field} — ${String(e?.message || e).slice(0, 300)}`); }
+      }
+
+      // ⚑ CCODE-456 — FINDING THE SHAPE OF A CALL NOBODY DOCUMENTS. Cloudflare publishes FLUX.2's input as an opaque `multipart`, so the
+      // field names are discoverable only by asking the model and reading what it says back. These four knobs (`m`, `field`, `wrap`, and
+      // the presence of `ref`) make that a matter of changing a URL instead of redeploying, and every answer comes back as plain words.
+      const flux = url.searchParams.get("m");
+      if (flux) {
+        const field = url.searchParams.get("field") || "input_image";
+        const wrap = url.searchParams.get("wrap") || "buffer";
+        try {
+          const fd = new FormData();
+          fd.append("prompt", prompt);
+          fd.append(field, new Blob([from.bytes], { type: "image/jpeg" }), "reference.jpg");
+          const req = new Request("https://ai.invalid/", { method: "POST", body: fd });
+          const model = flux.startsWith("@cf/") ? flux : `@cf/black-forest-labs/${flux}`;
+          // ⚑ `wrap=form` hands the FormData to the binding as it stands — the schema's opaque `multipart` may be how the docs SAY
+          // "this model takes a multipart request" rather than a wrapper the caller has to build.
+          const buf = wrap === "form" ? null : await req.arrayBuffer();
+          const out = wrap === "form" ? await env.AI.run(model, fd)
+            : await env.AI.run(model, { multipart: { body: wrap === "array" ? [...new Uint8Array(buf)] : wrap === "base64" ? base64(new Uint8Array(buf)) : buf, contentType: req.headers.get("content-type") } });
+          const drawn = await bytesOf(out);
+          if (!drawn || drawn.length < MIN_BYTES) return refuse(502, "that call was accepted and came back with nothing in it");
+          await store.put(key, drawn, "image/jpeg", meta(`from:${flux}:${field}`, prompt, seed));
+          return new Response(drawn, { headers: { "content-type": "image/jpeg", ...kept("drawn-from") } });
+        } catch (e) { return refuse(502, `${flux} · field=${field} · wrap=${wrap} — ${String(e?.message || e).slice(0, 300)}`); }
+      }
+
+      try {
+        // ⚠️ `image`, AS A PLAIN ARRAY OF BYTES. `image_b64` is documented but the deployed model answers "input tensor `image` is not
+        // present in the model" for it; the array is what Workers AI's own img2img examples pass.
+        const out = await env.AI.run(REF_MODEL, { prompt, image: Array.from(from.bytes), strength, width, height, num_steps: REF_STEPS, seed });
+        const drawn = await bytesOf(out);
+        if (!drawn || drawn.length < MIN_BYTES) return refuse(502, "the drawing came back with nothing in it");
+        const type = out instanceof ReadableStream ? "image/png" : "image/jpeg";
+        await store.put(key, drawn, type, meta(`from:${strength}`, prompt, seed));
+        return new Response(drawn, { headers: { "content-type": type, ...kept("drawn-from") } });
+      } catch (e) { return refuse(502, `the drawing failed: ${String(e?.message || e).slice(0, 200)}`); }
+    }
+
+    // ── 3 · preserve first: the old address, rebuilt exactly
     // ⚠️ EXACTLY means exactly: the old service caches by the whole address, so one extra parameter of ours turns a HIT into a MISS —
     // and a miss now answers "Insufficient balance", which reads as "the picture is gone" when it is not. Only `_debug`, which is ours
     // and never theirs, comes off.
@@ -148,6 +233,53 @@ function storeOf(env) {
     };
   }
   return null;
+}
+
+/** ⛔ CCODE-456 — THE REFERENCE PICTURE'S BYTES, and only from our own store. `ref` is a picture ADDRESS: ours, the old service's, or just
+ *  the `/prompt/…` part of either. It is resolved to the same key the picture would be stored under, and preserved from the old service if
+ *  we have not seen it yet. ⚠️ Anything else is refused rather than fetched — this endpoint is public, and an image fetcher that will pull
+ *  any URL on request is an open proxy standing in someone's account. */
+async function refBytes(ref, request, store) {
+  let path;
+  try {
+    const here = new URL(request.url);
+    const u = new URL(ref, `${here.origin}/`);
+    if (u.origin !== here.origin && u.origin !== OLD_HOST) return { ok: false, why: "a reference must be a picture this service knows" };
+    path = `${u.pathname}${u.search}`;
+  } catch { return { ok: false, why: "that is not an address" }; }
+  if (!path.startsWith("/prompt/")) return { ok: false, why: "a reference must be a picture address" };
+  let prompt;
+  try { prompt = decodeURIComponent(path.slice("/prompt/".length).split("?")[0]); } catch { return { ok: false, why: "that address cannot be read" }; }
+  const q = new URLSearchParams(path.includes("?") ? path.slice(path.indexOf("?")) : "");
+  const width = int(q.get("width"), 1024), height = int(q.get("height"), 320);
+  const key = await keyFor(prompt, width, height, Math.abs(Math.trunc(Number(q.get("seed")))) || 0);
+  const hit = await store.get(key);
+  if (hit) return { ok: true, width, height, bytes: hit.bytes instanceof Uint8Array ? hit.bytes : new Uint8Array(await new Response(hit.bytes).arrayBuffer()) };
+  const kept = await keep(store, key, `${OLD_HOST}${path}`, "preserved", { prompt, seed: 0 });
+  return kept.ok ? { ok: true, bytes: kept.bytes, width, height } : { ok: false, why: kept.why || "it is not in the store and the old service no longer has it" };
+}
+
+/** ⛑ A WHITE GREYSCALE PNG, WRITTEN BY HAND — a Worker has no canvas, and an inpainting model needs a mask the size of its picture.
+ *  ⚠️ COMPRESSED, with the platform's own deflate: uncompressed it is 328 KB for one 512×640 mask, which becomes megabytes of JSON on the
+ *  way to the model and is dropped before it arrives ("missing required input mask_image" for a field that was plainly sent). 1.6 KB. */
+async function whitePng(width, height, value = 255) {
+  const be32 = (n) => [(n >>> 24) & 255, (n >>> 16) & 255, (n >>> 8) & 255, n & 255];
+  const table = [];
+  for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1; table[n] = c >>> 0; }
+  const crc32 = (buf) => { let crc = 0xffffffff; for (const b of buf) crc = table[(crc ^ b) & 0xff] ^ (crc >>> 8); return (crc ^ 0xffffffff) >>> 0; };
+  const chunk = (type, data) => { const body = [...[...type].map(c => c.charCodeAt(0)), ...data]; return [...be32(data.length), ...body, ...be32(crc32(Uint8Array.from(body)))]; };
+  const raw = new Uint8Array(height * (1 + width));
+  for (let y = 0; y < height; y++) { const o = y * (1 + width); raw[o] = 0; raw.fill(value, o + 1, o + 1 + width); }
+  const z = new Uint8Array(await new Response(new Blob([raw]).stream().pipeThrough(new CompressionStream("deflate"))).arrayBuffer());
+  return Uint8Array.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a,
+    ...chunk("IHDR", [...be32(width), ...be32(height), 8, 0, 0, 0, 0]), ...chunk("IDAT", [...z]), ...chunk("IEND", [])]);
+}
+
+/** Bytes as base64, in chunks — `String.fromCharCode(...bytes)` on a whole picture blows the stack. */
+function base64(bytes) {
+  let s = "";
+  for (let i = 0; i < bytes.length; i += 8192) s += String.fromCharCode(...bytes.subarray(i, i + 8192));
+  return btoa(s);
 }
 
 /** The R2 key: what the picture IS, and nothing about how it was asked for. */

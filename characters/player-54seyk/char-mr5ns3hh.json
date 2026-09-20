@@ -407,6 +407,312 @@
         "Adelheid accepted Sister Vreni's invitation to serve at the pass-road wayhouse on the sluice-road — the road Silas Weir traveled three weeks ago. The wayhouse is a natural vantage point on the upstream route and may hold witness to his passage."
       ],
       "startedAt": "2026-07-08T18:17:05.695Z"
+    },
+    {
+      "id": "the-wyrm-of-endings",
+      "title": "The Wyrm of Endings",
+      "structured": true,
+      "status": "active",
+      "premise": "The Ashen Wyrm has been seen on the far ridges — a dragon of the death-pole, hill-sized, its breath the grey stillness of everything stopping at once. Where it flies, the season ends. It does not hunt; it PASSES, and what it passes over is done. Keeper Ilma convenes the traditions: this dragon is the Ashwardens' own mercy become a weather, and it is a saga, not an encounter. The Wyrm is not an aberration but a symptom: the death-pole itself is leaning harder into its extreme, and the Ashen Wyrm is that pull made flesh — the edge of the world getting sharper, and hungrier for stillness.",
+      "stakes": "Domain-scale. A valley's worth of endings on the wing. The largest mercy the valley will ever be asked to give.",
+      "axis": "death_life",
+      "traditions": [
+        "ashwarden",
+        "marcher",
+        "seraphic",
+        "mason"
+      ],
+      "giver": "keeper_ilma",
+      "legend": null,
+      "region": "valley",
+      "tier": "epic",
+      "arcId": null,
+      "locationId": null,
+      "boundToCharacter": null,
+      "boundToPlayer": null,
+      "legendNpc": null,
+      "stages": [
+        {
+          "id": "s1",
+          "title": "Track a domain-scale flight and read where it will pass",
+          "objective": "This is a saga — the traditions convene. Begin by tracking the Wyrm's flight across the ridges and reading where it will pass next, so the valley can be warned.",
+          "condition": "Track the Ashen Wyrm's flight and read where it will pass.",
+          "imagePrompt": "Figures on a high ridge tracking a hill-sized dragon in distant flight, a swathe of grey stilled land marking where it has passed."
+        },
+        {
+          "id": "s2",
+          "title": "Survive its stilling breath across a valley",
+          "objective": "Where it flies, craft and blood slow toward stopping. Survive its passing — ward a valley's worth of people against the grey stillness of its breath.",
+          "condition": "Survive and ward against the Ashen Wyrm's stilling breath.",
+          "imagePrompt": "A warded gathering of people beneath a passing dragon's grey breath, wards straining, the world greying at the edges of the shelter."
+        },
+        {
+          "id": "s3",
+          "title": "Wound a hill, and find the one thing that touches it",
+          "objective": "It is hill-sized and passes untouched by ordinary force. Find the one thing that can touch it, and land the first real wound — the work of many hands.",
+          "condition": "Find what can wound the Wyrm, and land the first blow.",
+          "imagePrompt": "Many figures loosing a coordinated strike at a hill-sized dragon, one blow finding a true mark, grey blood on the ridge-stone."
+        },
+        {
+          "id": "s4",
+          "title": "End it, together — no single hand does this",
+          "objective": "The last stand. End the Ashen Wyrm together, or turn it from the valley at terrible cost. The largest mercy the valley will ever give.",
+          "condition": "End the Ashen Wyrm — together, at scale.",
+          "imagePrompt": "A hill-sized death-dragon brought down at last on a ridge at dusk by a gathered host, the stilled season thawing green behind them."
+        }
+      ],
+      "routes": {},
+      "outcomes": [
+        {
+          "id": "felled",
+          "name": "The Wyrm Felled",
+          "summary": "The dragon falls; the stilled season returns.",
+          "narration": [
+            "Together, the traditions bring the Ashen Wyrm down. The ridges it stilled thaw back to life.",
+            "It is the largest ending anyone living has given. No one celebrates. They keep it, the way Ashwardens keep all endings."
+          ],
+          "effects": [
+            {
+              "type": "npc_state",
+              "npc": "the_ashen_wyrm",
+              "state": "slain",
+              "note": "the stilled season returns to the ridges"
+            },
+            {
+              "type": "disposition",
+              "people": "ashwarden",
+              "delta": 3
+            },
+            {
+              "type": "disposition",
+              "people": "marcher",
+              "delta": 2
+            },
+            {
+              "type": "arc_stage",
+              "note": "a saga completed; the valley remembers who stood",
+              "arcId": "the_ashen_wyrm",
+              "push": -2,
+              "weight": 2,
+              "_migrated_20260913": "⛔ SNG-552 CORRECTED (Aevi 2026-09-13, on CCode's finding). Originally `world_arc` + `arc` + note. I measured it against `case \"arc_stage\"` — THE WRONG HANDLER — concluded 11 of 11 were inert, and renamed `arc`→`arcId`. ⚠️ `case \"world_arc\"` reads `e.arc`, so they WERE firing, as a flat unsigned +1 regardless of what their prose said; my rename then made them fire not at all. **I shipped a regression on a bad measurement.** ⛑ Now migrated to `arc_stage`, which already has the exact shape and signs by `to − from` or `push`, with `weight` 1–3 and `note` left free as prose."
+            }
+          ]
+        },
+        {
+          "id": "passed_on",
+          "name": "It Passed On",
+          "summary": "Unslain; the wyrm moves beyond reach.",
+          "narration": [
+            "You cannot bring it down, but you turn it — the Ashen Wyrm flies on, beyond the valley's edge.",
+            "It is a saga left open. Somewhere else, a season is ending."
+          ],
+          "effects": [
+            {
+              "type": "npc_state",
+              "npc": "the_ashen_wyrm",
+              "state": "departed",
+              "note": "unslain; a standing world-threat elsewhere"
+            },
+            {
+              "type": "arc_stage",
+              "note": "open saga; may return",
+              "arcId": "the_ashen_wyrm",
+              "push": 1,
+              "weight": 2,
+              "_migrated_20260913": "⛔ SNG-552 CORRECTED (Aevi 2026-09-13, on CCode's finding). Originally `world_arc` + `arc` + note. I measured it against `case \"arc_stage\"` — THE WRONG HANDLER — concluded 11 of 11 were inert, and renamed `arc`→`arcId`. ⚠️ `case \"world_arc\"` reads `e.arc`, so they WERE firing, as a flat unsigned +1 regardless of what their prose said; my rename then made them fire not at all. **I shipped a regression on a bad measurement.** ⛑ Now migrated to `arc_stage`, which already has the exact shape and signs by `to − from` or `push`, with `weight` 1–3 and `note` left free as prose."
+            }
+          ]
+        }
+      ],
+      "stageIndex": 0,
+      "completedStages": [],
+      "progress": [],
+      "aliases": [],
+      "startedAt": "2026-09-20T03:05:02.466Z",
+      "startedWorldDay": 82
+    },
+    {
+      "id": "the-patient-who-is-not-sick-enough",
+      "title": "The Patient Who Is Not Sick Enough",
+      "structured": true,
+      "status": "active",
+      "premise": "A man came down off the Mountain Pass road eleven days ago with a wound in his thigh that had been cleaned properly by somebody who knew how. It closed. He eats, he walks the court, he thanks people. Sister Vreni cannot say what is wrong and will not say he is well, and she has stopped being able to sleep about it. She is asking you because she has read your hands and because the house has nobody else who was trained to look at a person rather than at a wound.",
+      "stakes": "He has perhaps four days of looking fine left. What treats him grows on the high terraces the house has not harvested in two seasons, beside something that looks very like it and will finish him faster than the thing in his blood. And he is not called what he says he is, which is the second reason two parties have come to the gate asking after him politely.",
+      "axis": "death_life",
+      "traditions": [
+        "rootkin",
+        "numinous",
+        "syllogist",
+        "stillhold"
+      ],
+      "giver": "sister_vreni",
+      "legend": null,
+      "region": "valley",
+      "tier": "local",
+      "arcId": null,
+      "locationId": null,
+      "boundToCharacter": "Adelheid",
+      "boundToPlayer": null,
+      "legendNpc": null,
+      "stages": [
+        {
+          "id": "s1",
+          "title": "He looks well, and he is not",
+          "objective": "Assess him properly rather than looking at the wound. Count a resting pulse and count it again; watch the colour come back into a pressed nailbed; put the back of your hand on him. The wound is clean and closed and is not the problem, and the numbers are the only thing in the room that is telling the truth.",
+          "condition": "Take a full set of observations on Danic twice, at least six hours apart — or have Sister Vreni take the second set while you sleep.",
+          "change": "Codex: his pulse is fast and getting faster, his skin is warm and dry and then cool and damp, and the colour is slower back into the nailbed than it was this morning. His blood pressure has not moved, and that is the frightening part: a body this good at compensating is a body spending everything it has to look ordinary.",
+          "imagePrompt": "a healer's hands taking a pulse at a man's wrist in a stone-floored infirmary, morning light, herbs drying overhead"
+        },
+        {
+          "id": "s2",
+          "title": "Name what is actually wrong",
+          "objective": "The wound was cleaned well and closed over something. It is not the cut that is killing him; it is what the cut let in and what the closing shut away from the air. Find the real fault rather than the presenting one — and be able to say what you are treating before you treat it.",
+          "condition": "Reach the right answer: a deep infection walled in beneath a healed surface, spreading in the blood. Physician's Tome, a Rootkin's read of the flesh, or plain stubborn observation all get there.",
+          "change": "Codex: it has to be opened again, which is the thing nobody wants to do to a man who is finally walking. And it has to be opened with something to give him at the same time, or you will take away the only thing holding him up.",
+          "imagePrompt": "an infirmary table, clean linen, a lamp brought close, a healer's face working something out"
+        },
+        {
+          "id": "s3",
+          "title": "Go up and bring back the right one",
+          "objective": "Fever-root grows on the third and fourth terraces, which have not been properly harvested in two seasons. So does hush-leaf, in the same stony beds, at the same height, with the same grey underside — and hush-leaf slows a heart that is already working as hard as it can. Harvest what you actually need, and be certain, and come down before dark.",
+          "condition": "Reach the high terraces, identify fever-root correctly against its lookalike, and harvest enough for a full course.",
+          "change": "Codex: fever-root has a squared stem and hush-leaf's is round, which is the whole of the difference and is enough. You have four days' worth and the terraces have another season in them if somebody works them. The walk down in the dusk is the first time in a week you have not been thinking about him.",
+          "imagePrompt": "stone-edged herb terraces on a steep slope at evening, a basket, the valley far below"
+        },
+        {
+          "id": "s4",
+          "title": "Open it, and hear what he says",
+          "objective": "Treat him: open what was closed, carry him through the hours when he gets worse before he gets better, and stay. Somewhere in that night he will tell you what his name is, because people do, and because he has worked out that you already know he has been lying.",
+          "condition": "See the treatment through to morning.",
+          "change": "Codex: his name is not Danic. The two parties at the gate are not looking for the same man and only one of them means him harm — and you now know which, because he told you, at three in the morning, while you were holding a lamp.",
+          "imagePrompt": "a lamp on a stone sill before dawn, a chair pulled close to a bed, somebody awake and steady"
+        }
+      ],
+      "routes": {
+        "syllogist": "Work the sequence. Count what you can count, twice, six hours apart, and let the trend say what the snapshot will not.",
+        "rootkin": "Go up and read the ground. What grows where tells you what the terrace will give you and what it will not.",
+        "numinous": "Sit with him. A person who is frightened of being found tells you more by what he will not discuss than by any answer.",
+        "stillhold": "Do not hurry it. He is not in danger this hour, and the house has been hurrying for two years."
+      },
+      "outcomes": [
+        {
+          "id": "treated_and_kept",
+          "name": "Treated, and Kept",
+          "summary": "He lives, and the house keeps his secret — and decides, having discussed it, that this is what it is for.",
+          "narration": [
+            "Danic mends over about nine days and is walking the court properly by the end of them. Sister Vreni asks you to stay on: the high terraces need someone who will actually climb them, and the house needs somebody who can look at a person.",
+            "The kinder of the two parties is told where he is. The other is told nothing, courteously, twice."
+          ],
+          "effects": [
+            {
+              "type": "npc_state",
+              "npc": "sister_vreni",
+              "state": "allied",
+              "why": "she asked you to stay on, which for her is the whole of a friendship"
+            },
+            {
+              "type": "location_state",
+              "location": "the_kindly_rest",
+              "change": "the high terraces are being worked again, and the house has a second pair of trained hands",
+              "permanent": true
+            },
+            {
+              "type": "standing",
+              "people": "rootkin",
+              "delta": 2,
+              "why": "you brought the right leaf down off a terrace nobody had worked in two seasons"
+            },
+            {
+              "type": "standing",
+              "people": "numinous",
+              "delta": 2,
+              "why": "you sat with a frightened man through the worst of it and did not ask him anything"
+            },
+            {
+              "type": "world_fact",
+              "kind": "deed",
+              "text": "A healer new to the valley opened a closed wound at the Kindly Rest, named the infection under it, and brought fever-root down off the high terraces to treat it. The man lived.",
+              "permanent": true
+            }
+          ]
+        },
+        {
+          "id": "treated_and_told",
+          "name": "Treated, and Told",
+          "summary": "He lives, and you tell the truth about who he is to whoever asks — including the party that means him harm.",
+          "narration": [
+            "Danic mends, and is gone within the week, and does not say goodbye. Sister Vreni does not reproach you; she says the house has to be able to answer honestly or it is not a sanctuary, it is a hiding place. She does not sound certain.",
+            "The harder party thanks you. You will find out later what for."
+          ],
+          "effects": [
+            {
+              "type": "npc_state",
+              "npc": "sister_vreni",
+              "state": "cordial",
+              "why": "she does not reproach you and she has not settled it either — she says the house has to be able to answer honestly or it is a hiding place, and she does not sound certain"
+            },
+            {
+              "type": "location_state",
+              "location": "the_kindly_rest",
+              "change": "the house is discussing what it is for, out loud, for the first time in years",
+              "permanent": true
+            },
+            {
+              "type": "standing",
+              "people": "verist",
+              "delta": 2,
+              "why": "you answered what you were asked, exactly, and did not decide on his behalf"
+            },
+            {
+              "type": "standing",
+              "people": "ashwarden",
+              "delta": 2,
+              "why": "you treated him fully and let the consequence be his own"
+            },
+            {
+              "type": "world_fact",
+              "kind": "deed",
+              "text": "A healer at the Kindly Rest treated a man under a false name and then answered plainly when he was asked after. The house is still discussing it.",
+              "permanent": true
+            }
+          ]
+        },
+        {
+          "id": "hush_leaf",
+          "name": "The Wrong Leaf",
+          "summary": "You harvested the lookalike. He does not die of it, and he does not recover on the schedule he had.",
+          "narration": [
+            "The round stem was the tell and you were tired and it was getting dark. Hush-leaf slows a heart; his was the only thing holding him up. He loses three days you did not have, and the house loses some of the margin it had with him.",
+            "Sister Vreni is kind about it and writes it down in the house book, which is worse."
+          ],
+          "effects": [
+            {
+              "type": "location_state",
+              "location": "the_kindly_rest",
+              "change": "the wrong leaf is written in the house book, in Sister Vreni's hand, kindly",
+              "permanent": true
+            },
+            {
+              "type": "standing",
+              "people": "rootkin",
+              "delta": -1,
+              "why": "a herbalist who takes the round stem home is a herbalist who hurried"
+            },
+            {
+              "type": "world_fact",
+              "kind": "deed",
+              "text": "Hush-leaf was brought down off the high terraces in place of fever-root at the Kindly Rest, and a man who was compensating well stopped compensating for three days.",
+              "permanent": true
+            }
+          ]
+        }
+      ],
+      "stageIndex": 0,
+      "completedStages": [],
+      "progress": [],
+      "aliases": [],
+      "startedAt": "2026-09-20T03:05:17.338Z",
+      "startedWorldDay": 82
     }
   ],
   "npcRegistry": {
@@ -6144,8 +6450,8 @@
   "bands": [],
   "_silasGrantsRevoked": true,
   "reconcileVersion": 72,
-  "updatedAt": 1789873363221,
-  "rev": 66,
+  "updatedAt": 1789873517349,
+  "rev": 70,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -6252,6 +6558,22 @@
   "_opTurns": 32,
   "_opCountingSince": "2026-09-15T23:58:48.348Z",
   "gallery": [
+    {
+      "kind": "quest",
+      "prompt": "a healer's hands taking a pulse at a man's wrist in a stone-floored infirmary, morning light, herbs drying overhead",
+      "url": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/a%20healer's%20hands%20taking%20a%20pulse%20at%20a%20man's%20wrist%20in%20a%20stone-floored%20infirmary%2C%20morning%20light%2C%20herbs%20drying%20overhead%2C%20mild%20peril%2C%20no%20gore%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=16250&nologo=true",
+      "caption": "",
+      "worldDay": 82,
+      "at": "2026-09-20T03:05:17.348Z"
+    },
+    {
+      "kind": "quest",
+      "prompt": "Figures on a high ridge tracking a hill-sized dragon in distant flight, a swathe of grey stilled land marking where it has passed.",
+      "url": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Figures%20on%20a%20high%20ridge%20tracking%20a%20hill-sized%20dragon%20in%20distant%20flight%2C%20a%20swathe%20of%20grey%20stilled%20land%20marking%20where%20it%20has%20passed.%2C%20mild%20peril%2C%20no%20gore%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=60123&nologo=true",
+      "caption": "",
+      "worldDay": 82,
+      "at": "2026-09-20T03:05:02.483Z"
+    },
     {
       "kind": "location",
       "prompt": "Mara Wells' Store",
@@ -6440,5 +6762,9 @@
     "paper": 0,
     "marks": 0,
     "scrip": {}
+  },
+  "questImages": {
+    "quest-the-wyrm-of-endings-stage-s1": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Figures%20on%20a%20high%20ridge%20tracking%20a%20hill-sized%20dragon%20in%20distant%20flight%2C%20a%20swathe%20of%20grey%20stilled%20land%20marking%20where%20it%20has%20passed.%2C%20mild%20peril%2C%20no%20gore%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=60123&nologo=true",
+    "quest-the-patient-who-is-not-sick-enough-stage-s1": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/a%20healer's%20hands%20taking%20a%20pulse%20at%20a%20man's%20wrist%20in%20a%20stone-floored%20infirmary%2C%20morning%20light%2C%20herbs%20drying%20overhead%2C%20mild%20peril%2C%20no%20gore%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=16250&nologo=true"
   }
 }

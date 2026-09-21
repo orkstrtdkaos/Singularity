@@ -289,244 +289,118 @@
     "Halvex reads the sealed chamber's true purpose: a mutual test between supplicant and stone, where the alcove serves as threshold for an exchange of readiness.",
     "Loki instructs Halvex and Vessin to continue reading the sealed chamber while Cy learns its language, then departs the Hub crossing to find someone—leaving Veln to gather the others and bring them to the Standing Annex when their work below is done."
   ],
-  "currentLocationId": "the_wayhouse",
+  "currentLocationId": "the_kindly_rest",
   "activeScene": {
-    "locationId": "the_wayhouse",
+    "locationId": "the_kindly_rest",
     "turns": [
       {
         "player": null,
-        "summary": "Loki arrives at the Wayhouse in deep night, finds it calm and nearly empty, and meets the keeper of routes.",
-        "narration": "The Wayhouse rises before you in the deep night — a structure of stone and open timber, its own lights burning steady against the dark. The waygate itself stands in the yard beyond, lattice-work of cold silver catching the starlight, and even from here you can feel its hum: a low, patient thing, waiting. The building itself smells of old paper, lamp-oil, and the particular dust that accumulates in places people pass through without staying.\n\nInside, the main hall is lit by three steady lamps. Maps cover every wall — some pinned, some hung, some simply leaning in stacks — and the air carries the texture of a place that has learned to hold the weight of distance without flinching. A long table runs down the center, topped with route-logs and a ledger the size of a child's torso. At the far end, a fire moves in the hearth. The room is empty except for an older woman in a charcoal coat, seated by the fire with a cup of something steaming, reading glasses on a cord around her neck.\n\nCy clicks forward on the stone floor, lamp raised, and comes to rest against your boot. It has been quiet since the Hub crossing. The night outside is still — late summer holding its breath before the shift toward autumn — and the Wayhouse feels like a threshold that hasn't yet decided which way the wind is blowing."
-      },
-      {
-        "player": "Approach the keeper and ask plainly what has passed through here recently — especially anyone asking about sealed gates or the Hub crossing.",
-        "summary": "At the Wayhouse in deep night, Maren the keeper reveals that an enginewright from Pressureholt has passed through asking about interference at the Hub—and that someone in the lower Annex called the Architect is quietly asking about travelers carrying strange knowledge.",
-        "narration": "You cross the main hall toward the hearth, your footsteps quiet on stone. The keeper looks up from her ledger as you approach—Maren, she calls herself, though her hands move like someone who has done this work for decades. She sets down her cup with the slowness of someone accustomed to patience.\n\n\"The Hub crossing,\" you say plainly. \"Anyone come through asking about it? About sealed gates, or about what lies beneath the Null Stone?\"\n\nMaren's eyes measure you for a moment—not with suspicion, but with the careful assessment of someone who reads routes the way other people read weather. \"You're not the first to ask,\" she says. Her voice is steady, unsurprised. \"Three days back, a runner came through from Pressureholt. Young woman, enginewright bearing—asked me straight about interference patterns at the Hub network. Said the station there had clocked something new in the lattice-lock. She took the direct spoke to the Crossing and didn't stop to rest.\"\n\nMaren turns a page in her ledger, running one weathered finger down a column of notations. \"Before that, a man in the lower Annex—the one they call the Architect, though that's not a title I'd trust—he sent word down the road asking after anyone coming through with strange questions about the waygate network. Paid coin for the asking, which means he's not just curious.\" She looks up at you again. \"The water crisis cleared three days ago, and since then the network's been humming different. You can hear it if you stand still in the yard long enough. That's what brought the enginewright through, I'd wager."
-      },
-      {
-        "player": "Thank her and ask after Sister Venri and a young woman healer that may have been here recently.",
-        "summary": "At the Wayhouse in deep night, Maren reveals that Sister Venri has passed through recently with a young woman healer — both moving with clear intent, heading toward the outward Reaches.",
-        "narration": "You nod your thanks to Maren, and her eyes settle back to the ledger — the exchange closing quietly. But you linger at the edge of the hearth, where the warmth still reaches you.\n\n\"Sister Venri,\" you say. \"Has she come through here? Or a young woman healer — someone new to the work, maybe.\" You watch Maren's face as you ask it, reading the small shifts: a pause in her breathing, a flicker at the corner of her mouth before she answers.\n\nMaren sets her glasses down carefully on the cord around her neck. \"Sister Venri passed through twice,\" she says. Her voice has taken on a different register — not warmer, but more considered, as though the question has moved into different territory. \"Once heading outward toward the Unlit reaches, and once returning with someone at her side. A young woman. Healer's kit, steady hands, the kind of quiet that means listening rather than fear.\"\n\nShe looks at you directly now. \"That was eight days ago. They didn't stay long — Venri was moving with purpose.\" Maren's eyes narrow slightly. \"You looking for them, or looking to know what they were looking for?\""
+        "summary": "Woken in the deep night at the Kindly Rest by visitors moving through the house with clear purpose—heading downward.",
+        "narration": "You wake in the deep night to the sound of footsteps on stone.\n\nThe Kindly Rest is quiet at this hour—the bell has not rung for some time, and the terraces outside are dark shapes against a darker sky. You are in one of the small rooms on the second level, the kind kept for travelers who come through bleeding or broken. Your gear is stacked neat against the wall. Cy is coiled on the sill, lamp extinguished, lens closed in what passes for sleep.\n\nBut the footsteps are real. Two sets, maybe three, moving with purpose through the lower corridor. Unhurried. Not fleeing, not searching—moving like people who know where they are going.\n\nVoices follow, too soft to catch words. One of them stops. A door opens somewhere below—you hear the hinges' old creak—and then the footsteps resume, this time going down into the cellars where the drying lofts give way to older stone.\n\nCy's lens irises open with a soft click."
       }
     ],
     "lastTurn": {
-      "narration": "You nod your thanks to Maren, and her eyes settle back to the ledger — the exchange closing quietly. But you linger at the edge of the hearth, where the warmth still reaches you.\n\n\"Sister Venri,\" you say. \"Has she come through here? Or a young woman healer — someone new to the work, maybe.\" You watch Maren's face as you ask it, reading the small shifts: a pause in her breathing, a flicker at the corner of her mouth before she answers.\n\nMaren sets her glasses down carefully on the cord around her neck. \"Sister Venri passed through twice,\" she says. Her voice has taken on a different register — not warmer, but more considered, as though the question has moved into different territory. \"Once heading outward toward the Unlit reaches, and once returning with someone at her side. A young woman. Healer's kit, steady hands, the kind of quiet that means listening rather than fear.\"\n\nShe looks at you directly now. \"That was eight days ago. They didn't stay long — Venri was moving with purpose.\" Maren's eyes narrow slightly. \"You looking for them, or looking to know what they were looking for?\"",
-      "sceneSummary": "At the Wayhouse in deep night, Maren reveals that Sister Venri has passed through recently with a young woman healer — both moving with clear intent, heading toward the outward Reaches.",
-      "choices": [
-        {
-          "label": "Tell Maren you're looking for them both — explain why plainly",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "falsehood_truth": 0.3
-          },
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "negotiate"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask which direction they were headed when they left — track the road",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {
-            "space_time": -0.2
-          },
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "scout"
-          ],
-          "abilityId": "wayfinding",
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Use Prism Sight to read Maren's face — catch what she's not saying about them",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "falsehood_truth": 0.4
-          },
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": "prism_sight",
-          "energyCost": 3,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask what supplies or gear they took with them — what were they planning for",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {
-            "concrete_abstract": -0.2
-          },
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        }
-      ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
-      },
-      "ledgerEvents": [],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "the-taken-from-the-city",
-          "title": "The Taken",
-          "summary": "Someone was brought from the city to the Unlit Deep, and the city is pretending it did not happen.",
-          "giver": "the elder of the Unlit Deep",
-          "note": "Maren reports Sister Venri has passed through twice in recent days with a young woman healer — both heading toward the outward Reaches with clear purpose. The healer may be connected to the city, or to what brought Sable to the Deep.",
-          "xpReward": null
-        }
-      ],
-      "standingOps": [],
-      "delegateOps": [],
-      "jobOps": [],
-      "arcOps": [],
-      "adoptSchool": null,
-      "offer": {
-        "thing": "A keeper who reads routes the way other people read weather, and who has already seen the shape of what Loki is reaching for.",
-        "from": "Maren's years of watching travelers pass through this threshold — she has learned to read the weight of a real question when one is asked."
-      },
-      "stageOps": [],
+      "narration": "You wake in the deep night to the sound of footsteps on stone.\n\nThe Kindly Rest is quiet at this hour—the bell has not rung for some time, and the terraces outside are dark shapes against a darker sky. You are in one of the small rooms on the second level, the kind kept for travelers who come through bleeding or broken. Your gear is stacked neat against the wall. Cy is coiled on the sill, lamp extinguished, lens closed in what passes for sleep.\n\nBut the footsteps are real. Two sets, maybe three, moving with purpose through the lower corridor. Unhurried. Not fleeing, not searching—moving like people who know where they are going.\n\nVoices follow, too soft to catch words. One of them stops. A door opens somewhere below—you hear the hinges' old creak—and then the footsteps resume, this time going down into the cellars where the drying lofts give way to older stone.\n\nCy's lens irises open with a soft click.",
+      "sceneSummary": "Woken in the deep night at the Kindly Rest by visitors moving through the house with clear purpose—heading downward.",
       "scene": {
-        "setting": "The Wayhouse main hall, deep night, late summer. Stone walls, open timber frame. Three steady lamps casting warm light. A fire burning low in the hearth at the far end. Maps and route-logs covering every wall. The waygate visible through the open yard, its lattice-work catching starlight and humming faintly.",
+        "setting": "A small healing room on the second level of the Kindly Rest, deep night. Stone walls, a narrow window overlooking the terraces, a single oil lamp unlit on the table. Your gear stacked against the wall.",
         "npcsPresent": [
           {
-            "name": "Maren Oast",
-            "state": "Seated by the fire with her ledger, glasses on their cord, watching you with the careful assessment of someone who reads distance the way a ship-captain reads tide. Waiting for your next question."
+            "name": "Cy",
+            "state": "Lens iris opening, alert, coiled on the sill"
           }
         ],
         "objects": [
-          "A long central table with route-logs and ledger",
-          "Maps covering every wall",
-          "Three steady lamps",
-          "Fire in the hearth",
-          "The waygate visible through the open yard"
+          "Your bedroll and pack stacked against the wall",
+          "An oil lamp on the table, unlit",
+          "A narrow window overlooking dark terraces"
         ],
         "threads": [
-          "Who is the Architect in the lower Annex, and did he send the Revel or something else?",
-          "What is Sister Venri's connection to the Unlit Deep and to Sable?",
-          "Why is the young woman healer moving toward the outward Reaches with Venri — is she searching for something, or being taken somewhere?"
+          "Who is moving through the Kindly Rest at this hour and heading downward into the cellars?",
+          "Why is Cy alert to their presence?"
         ]
       },
-      "npcUpdates": [],
-      "intentsHeard": [],
-      "factUpdates": [],
-      "placeUpdates": [],
-      "discovery": null,
-      "codexUpdates": [
+      "choices": [
         {
-          "topic": "sister-venri",
-          "label": "Sister Venri",
-          "kind": "person",
-          "fact": "Sister Venri has passed through the Wayhouse twice recently — once heading outward toward the Unlit reaches, and once returning with a young woman healer at her side. Both were moving with clear purpose. They departed eight days ago.",
-          "links": [
-            "the-taken-from-the-city",
-            "the-wayhouse"
-          ]
+          "label": "Rise quietly and follow the sound—stay in the corridors and listen closer.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": "easy",
+          "intentTags": [
+            "scout",
+            "careful"
+          ],
+          "trivial": false
         },
         {
-          "topic": "young-woman-healer",
-          "label": "The Young Woman Healer",
-          "kind": "person",
-          "fact": "A young woman healer with steady hands and the quiet of someone who listens rather than fears has been traveling with Sister Venri. She carries a healer's kit. She may be connected to the city, or to what brought Sable into the Unlit Deep. Last seen eight days ago, heading outward with Venri toward the unlit reaches.",
-          "links": [
-            "sister-venri",
-            "the-taken-from-the-city",
-            "the-wayhouse"
+          "label": "Light the lamp and go down to the lower floor directly—meet whoever it is face-on.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
+          "difficulty": "normal",
+          "intentTags": [
+            "confrontation",
+            "direct"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Use Prism Sight to read the light-traces in the corridor below—see what just moved through.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": "normal",
+          "abilityId": "prism_sight",
+          "energyCost": 3,
+          "intentTags": [
+            "scout",
+            "study"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Wake Cy fully and ask what it has perceived—it may have sensed something you did not.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": "very easy",
+          "trivial": true,
+          "intentTags": [
+            "help"
           ]
         }
       ],
-      "holdingOps": [],
-      "holdTrades": [],
-      "debtOps": [],
-      "exchangeOps": [],
-      "partyOps": [],
-      "generateRequest": [],
-      "encounterOps": [],
-      "projectOps": [],
-      "bandOps": [],
-      "strikeOps": [],
-      "deathOps": [],
-      "newEncounter": null,
-      "unlockPrecursor": null,
-      "unlockSubstrate": null,
-      "timeOps": {
-        "hoursPassed": 0.5,
-        "why": "a careful conversation at the hearth"
-      },
-      "moveTo": null,
-      "stateOps": [],
-      "itemUpdates": [],
-      "deriveItem": null,
-      "imagePrompt": null,
-      "imageMedium": null,
-      "newAbility": null,
-      "gambitOps": null,
-      "gambitApt": false,
-      "markDefiningMoment": null,
-      "markTeacher": null,
-      "offerPromotion": null,
-      "offerAcquisition": null,
-      "offerIntent": null,
-      "sceneEnded": false
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
+      }
     },
     "sceneState": {
-      "setting": "The Wayhouse main hall, deep night, late summer. Stone walls, open timber frame. Three steady lamps casting warm light. A fire burning low in the hearth at the far end. Maps and route-logs covering every wall. The waygate visible through the open yard, its lattice-work catching starlight and humming faintly.",
+      "setting": "A small healing room on the second level of the Kindly Rest, deep night. Stone walls, a narrow window overlooking the terraces, a single oil lamp unlit on the table. Your gear stacked against the wall.",
       "npcsPresent": [
         {
-          "name": "Maren Oast",
-          "state": "Seated by the fire with her ledger, glasses on their cord, watching you with the careful assessment of someone who reads"
+          "name": "Cy",
+          "state": "Lens iris opening, alert, coiled on the sill"
         }
       ],
       "objects": [
-        "A long central table with route-logs and ledger",
-        "Maps covering every wall",
-        "Three steady lamps",
-        "Fire in the hearth",
-        "The waygate visible through the open yard"
+        "Your bedroll and pack stacked against the wall",
+        "An oil lamp on the table, unlit",
+        "A narrow window overlooking dark terraces"
       ],
       "threads": [
-        "Who is the Architect in the lower Annex, and did he send the Revel or something else?",
-        "What is Sister Venri's connection to the Unlit Deep and to Sable?",
-        "Why is the young woman healer moving toward the outward Reaches with Venri — is she searching for something, or being taken somewhere?"
+        "Who is moving through the Kindly Rest at this hour and heading downward into the cellars?",
+        "Why is Cy alert to their presence?"
       ]
     },
-    "beats": 3,
+    "beats": 1,
     "subPlace": null
   },
   "clock": {
     "schemaVersion": 1,
     "day": 5,
-    "hour": 1,
+    "hour": 2,
     "realAnchor": null
   },
   "companions": [
@@ -1459,6 +1333,18 @@
       "vectorsKnown": [
         "space_time"
       ]
+    },
+    "the_kindly_rest": {
+      "visits": 1,
+      "notes": [],
+      "flags": {},
+      "lastVisit": 5,
+      "vectorsKnown": [
+        "violence_peace",
+        "chaos_order",
+        "death_life",
+        "mechanical_spiritual"
+      ]
     }
   },
   "worldState": {
@@ -1697,10 +1583,10 @@
     ],
     "unseenNews": [],
     "lastGenCount": 1992,
-    "lastSharedReadAt": "2026-09-21T00:06:11.579Z",
+    "lastSharedReadAt": "2026-09-21T00:09:28.648Z",
     "lastTickWorldDay": 83,
     "lastCanonWorldDay": 83,
-    "turnsSinceOffer": 0,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "The consensus—all three of your companions affirm the descent without hesitation or doubt, each for their own reason.",
@@ -9793,6 +9679,19 @@
         "aliases": [],
         "createdDay": 5,
         "updatedDay": 5
+      },
+      "the-kindly-rest": {
+        "id": "the-kindly-rest",
+        "label": "The Kindly Rest",
+        "kind": "place",
+        "facts": [
+          "[d5] you have walked here"
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": 5,
+        "entityId": "the-kindly-rest",
+        "updatedDay": 5
       }
     },
     "mergeUndo": [
@@ -10189,6 +10088,14 @@
   "nativeGrantsVersion": 2,
   "reconcileVersion": 73,
   "gallery": [
+    {
+      "kind": "location",
+      "prompt": "The Kindly Rest",
+      "url": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/The%20Kindly%20Rest%3A%20Low%20buildings%20of%20pale%20stone%20around%20three%20sides%20of%20a%20planted%20court%2C%20roofed%20in%20weathered%20shingle%20with%20deep%20eaves.%20Drying%20lofts%20stand%20open%20under%20the%20roofline%2C%20hung%20with%20cut%20herbs%20in%20bunches.%20Terraced%20beds%20step%20down%20the%20slope%20in%20stone-edged%20rows%2C%20a%20covered%20walk%20runs%20the%20inner%20faces%2C%20and%20water%20is%20led%20thr%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=91172&nologo=true",
+      "caption": "The Kindly Rest",
+      "worldDay": 83,
+      "at": "2026-09-21T00:09:28.240Z"
+    },
     {
       "kind": "battle",
       "prompt": "Two figures — a woman speaking, and a man in dark cloth holding an unlit lamp — her voice empties his face as she utters syllables no language holds; he stands unmoved, giving no ground, while the lam",
@@ -11121,8 +11028,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789949200128,
-  "rev": 807,
+  "updatedAt": 1789949384526,
+  "rev": 810,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -12074,7 +11981,7 @@
     "umbral_depths": 54,
     "the_quickwood": 101,
     "the_center": 50,
-    "valley": 1,
+    "valley": 2,
     "the_open_reach": 3
   },
   "opLossPending": false,
@@ -12198,6 +12105,14 @@
       "startDay": 82,
       "endDay": 82,
       "beats": 4
+    },
+    {
+      "id": "sess-16",
+      "startedAt": "2026-09-21T00:09:44.522Z",
+      "lastAt": "2026-09-21T00:09:44.522Z",
+      "startDay": 83,
+      "endDay": 83,
+      "beats": 1
     }
   ],
   "establishedFacts": [
@@ -12281,10 +12196,10 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 214,
-    "choices": 214,
-    "characterDeltas": 101,
-    "scene": 214,
+    "sceneSummary": 215,
+    "choices": 215,
+    "characterDeltas": 102,
+    "scene": 215,
     "placeUpdates": 27,
     "codexUpdates": 120,
     "timeOps": 176,
@@ -12310,7 +12225,7 @@
     "intentsHeard": 5,
     "delegateOps": 1
   },
-  "_opTurns": 214,
+  "_opTurns": 215,
   "customAbilities": {
     "mirror-bright": {
       "id": "mirror-bright",
@@ -12511,7 +12426,8 @@
     "gen-the-passage-below-the-unlit-deep",
     "grovehome",
     "gen-the-waygate-path",
-    "gen-the-standing-annex"
+    "gen-the-standing-annex",
+    "the_kindly_rest"
   ],
   "_devActions": [
     {
@@ -12525,6 +12441,10 @@
     {
       "at": "2026-09-20T12:39:31.100Z",
       "reason": "jumped to The Wayhouse (the_wayhouse)"
+    },
+    {
+      "at": "2026-09-21T00:09:28.240Z",
+      "reason": "jumped to The Kindly Rest (the_kindly_rest)"
     }
   ],
   "locationImages": {
@@ -12535,7 +12455,8 @@
     "gen-the-waygate-path": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/The%20Waygate%20Path%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20The%20Waygate%20Path.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=24527&nologo=true",
     "the_crossing": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/The%20Crossing%3A%20Every%20axis%20crosses%20here%20at%20nothing%2C%20and%20the%20result%20is%20not%20grey%20%E2%80%94%20it%20is%20CROWDED.%20The%20Crossing%20leans%20toward%20no%20pole%2C%20which%20is%20precisely%20why%20it%20can%20hold%20them%20all%3A%20an%20Umbral%20and%20a%20Blazeborn%20drink%20at%20the%20same%20table%20because%20neither%20has%20the%20standing%20to%20make%20the%20other%20leave.%20The%20poles%20are%20lonely%20places.%20The%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=24144&nologo=true",
     "the_quickwood_eaves": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/The%20Quickwood%20Eaves%3A%20Where%20the%20grown%20city%20thins%20into%20ordinary%20forest%20and%20ordinary%20forest%20thins%20into%20the%20Deepwood.%20The%20Eaves%20are%20the%20Rootkin's%20front%20door%20and%20they%20have%20deliberately%20not%20marked%20it%20%E2%80%94%20you%20know%20you%20have%20arrived%20when%20the%20trees%20start%20being%20interested%20in%20you.%20A%20waygate%20stands%20among%20the%20eaves-trees%2C%20grown%20around%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=86347&nologo=true",
-    "the_wayhouse": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/The%20Wayhouse%3A%20One%20long%20stone%20building%20alone%20at%20a%20crossroads%2C%20with%20a%20lamp%20on%20a%20pole%20outside%20and%20a%20board%20of%20pinned%20notes%20by%20the%20door.%20Stabling%20at%20one%20end%2C%20a%20wide%20common%20room%20at%20the%20other.%20Roads%20leaving%20in%20every%20direction.%2C%20adventurous%2C%20mild%2C%20no%20gore%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20a%20child%2C%20fully%20clothed%2C%20non-sexual%2C%20wholesome%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=91201&nologo=true"
+    "the_wayhouse": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/The%20Wayhouse%3A%20One%20long%20stone%20building%20alone%20at%20a%20crossroads%2C%20with%20a%20lamp%20on%20a%20pole%20outside%20and%20a%20board%20of%20pinned%20notes%20by%20the%20door.%20Stabling%20at%20one%20end%2C%20a%20wide%20common%20room%20at%20the%20other.%20Roads%20leaving%20in%20every%20direction.%2C%20adventurous%2C%20mild%2C%20no%20gore%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20a%20child%2C%20fully%20clothed%2C%20non-sexual%2C%20wholesome%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=91201&nologo=true",
+    "the_kindly_rest": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/The%20Kindly%20Rest%3A%20Low%20buildings%20of%20pale%20stone%20around%20three%20sides%20of%20a%20planted%20court%2C%20roofed%20in%20weathered%20shingle%20with%20deep%20eaves.%20Drying%20lofts%20stand%20open%20under%20the%20roofline%2C%20hung%20with%20cut%20herbs%20in%20bunches.%20Terraced%20beds%20step%20down%20the%20slope%20in%20stone-edged%20rows%2C%20a%20covered%20walk%20runs%20the%20inner%20faces%2C%20and%20water%20is%20led%20thr%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=91172&nologo=true"
   },
   "customEncounters": {
     "re-re_raider_duel": {
@@ -13494,410 +13415,410 @@
   },
   "_promptRows": {
     "character": {
-      "reached": 27,
-      "produced": 27
+      "reached": 28,
+      "produced": 28
     },
     "location": {
-      "reached": 27,
-      "produced": 27
+      "reached": 28,
+      "produced": 28
     },
     "region": {
-      "reached": 27,
-      "produced": 27
+      "reached": 28,
+      "produced": 28
     },
     "groundDetail": {
-      "reached": 27,
+      "reached": 28,
       "produced": 21
     },
     "lore": {
-      "reached": 27,
-      "produced": 24
+      "reached": 28,
+      "produced": 25
     },
     "traditionMotiveDetail": {
-      "reached": 27,
-      "produced": 27
+      "reached": 28,
+      "produced": 28
     },
     "sheetsDetail": {
-      "reached": 27,
+      "reached": 28,
       "produced": 22
     },
     "rules": {
-      "reached": 27,
-      "produced": 27
+      "reached": 28,
+      "produced": 28
     },
     "recentTurns": {
-      "reached": 27,
+      "reached": 28,
       "produced": 24
     },
     "timeLabel": {
-      "reached": 27,
-      "produced": 27
+      "reached": 28,
+      "produced": 28
     },
     "npcRegistryDetail": {
-      "reached": 27,
-      "produced": 27
+      "reached": 28,
+      "produced": 28
     },
     "mintedUnmetDetail": {
-      "reached": 27,
-      "produced": 27
+      "reached": 28,
+      "produced": 28
     },
     "npcSeedDetail": {
-      "reached": 27,
+      "reached": 28,
       "produced": 24
     },
     "traditionVocab": {
-      "reached": 27,
-      "produced": 27
+      "reached": 28,
+      "produced": 28
     },
     "standingDetail": {
-      "reached": 27,
-      "produced": 27
+      "reached": 28,
+      "produced": 28
     },
     "recalledDetail": {
-      "reached": 27,
+      "reached": 28,
       "produced": 1
     },
     "bearingsDetail": {
-      "reached": 27,
-      "produced": 27
+      "reached": 28,
+      "produced": 28
     },
     "caravansDetail": {
-      "reached": 27,
+      "reached": 28,
       "produced": 0
     },
     "commandDetail": {
-      "reached": 27,
-      "produced": 27
+      "reached": 28,
+      "produced": 28
     },
     "presenceDetail": {
-      "reached": 27,
-      "produced": 17
+      "reached": 28,
+      "produced": 18
     },
     "worthHereDetail": {
-      "reached": 27,
+      "reached": 28,
       "produced": 0
     },
     "inventoryDetail": {
-      "reached": 27,
-      "produced": 27
+      "reached": 28,
+      "produced": 28
     },
     "sceneState": {
-      "reached": 27,
+      "reached": 28,
       "produced": 24
     },
     "holdingsDetail": {
-      "reached": 27,
-      "produced": 27
+      "reached": 28,
+      "produced": 28
     },
     "debtsDetail": {
-      "reached": 27,
+      "reached": 28,
       "produced": 0
     },
     "carriedDetail": {
-      "reached": 27,
+      "reached": 28,
       "produced": 0
     },
     "abilityLawDetail": {
-      "reached": 27,
-      "produced": 27
+      "reached": 28,
+      "produced": 28
     },
     "questsDetail": {
-      "reached": 27,
-      "produced": 27
+      "reached": 28,
+      "produced": 28
     },
     "structuredQuestsDetail": {
-      "reached": 27,
+      "reached": 28,
       "produced": 0
     },
     "traditionArcDetail": {
-      "reached": 27,
+      "reached": 28,
       "produced": 0
     },
     "npcErrandsDetail": {
-      "reached": 27,
+      "reached": 28,
       "produced": 0
     },
     "codexDetail": {
-      "reached": 27,
-      "produced": 27
+      "reached": 28,
+      "produced": 28
     },
     "companionsDetail": {
-      "reached": 27,
-      "produced": 27
+      "reached": 28,
+      "produced": 28
     },
     "placeMemoryDetail": {
-      "reached": 27,
+      "reached": 28,
       "produced": 25
     },
     "agesMissingDetail": {
-      "reached": 27,
-      "produced": 27
+      "reached": 28,
+      "produced": 28
     },
     "newsDetail": {
-      "reached": 27,
-      "produced": 27
+      "reached": 28,
+      "produced": 28
     },
     "worldArcsDetail": {
-      "reached": 27,
-      "produced": 27
+      "reached": 28,
+      "produced": 28
     },
     "legendsPursuableDetail": {
-      "reached": 27,
+      "reached": 28,
       "produced": 12
     },
     "wakesDetail": {
-      "reached": 27,
+      "reached": 28,
       "produced": 0
     },
     "arcMoodDetail": {
-      "reached": 27,
-      "produced": 27
+      "reached": 28,
+      "produced": 28
     },
     "reachableDeadDetail": {
-      "reached": 27,
-      "produced": 27
+      "reached": 28,
+      "produced": 28
     },
     "threatToPlayer": {
-      "reached": 27,
+      "reached": 28,
       "produced": 0
     },
     "guardiansDetail": {
-      "reached": 27,
+      "reached": 28,
       "produced": 0
     },
     "resolution": {
-      "reached": 27,
+      "reached": 28,
       "produced": 19
     },
     "playerInput": {
-      "reached": 27,
-      "produced": 8
+      "reached": 28,
+      "produced": 9
     },
     "exactWords": {
-      "reached": 27,
+      "reached": 28,
       "produced": 13
     },
     "travelDirective": {
-      "reached": 27,
+      "reached": 28,
       "produced": 1
     },
     "itemAdvance": {
-      "reached": 27,
+      "reached": 28,
       "produced": 0
     },
     "encounterWeaveDetail": {
-      "reached": 27,
+      "reached": 28,
       "produced": 4
     },
     "encounterOfferDetail": {
-      "reached": 27,
+      "reached": 28,
       "produced": 3
     },
     "fightFramingDetail": {
-      "reached": 27,
+      "reached": 28,
       "produced": 0
     },
     "abilityGrantDetail": {
-      "reached": 27,
+      "reached": 28,
       "produced": 0
     },
     "stageRevealDetail": {
-      "reached": 27,
+      "reached": 28,
       "produced": 0
     },
     "itemEvolveDetail": {
-      "reached": 27,
+      "reached": 28,
       "produced": 0
     },
     "worldPressureDetail": {
-      "reached": 27,
+      "reached": 28,
       "produced": 0
     },
     "offerDetail": {
-      "reached": 27,
+      "reached": 28,
       "produced": 2
     },
     "teacherOfferDetail": {
-      "reached": 27,
+      "reached": 28,
       "produced": 0
     },
     "substrateDetail": {
-      "reached": 27,
+      "reached": 28,
       "produced": 6
     },
     "romanceGuidanceDetail": {
-      "reached": 27,
+      "reached": 28,
       "produced": 1
     },
     "factsDetail": {
-      "reached": 27,
-      "produced": 27
+      "reached": 28,
+      "produced": 28
     },
     "evolvedItemsDetail": {
-      "reached": 27,
+      "reached": 28,
       "produced": 0
     },
     "opLossNote": {
-      "reached": 27,
+      "reached": 28,
       "produced": 0
     },
     "emergenceDetail": {
-      "reached": 27,
+      "reached": 28,
       "produced": 0
     },
     "perilNote": {
-      "reached": 27,
+      "reached": 28,
       "produced": 0
     },
     "encounterDetail": {
-      "reached": 27,
+      "reached": 28,
       "produced": 4
     },
     "masteryDetail": {
-      "reached": 27,
-      "produced": 27
+      "reached": 28,
+      "produced": 28
     },
     "bookkeepingRestate": {
-      "reached": 27,
+      "reached": 28,
       "produced": 0
     },
     "anomalyDetail": {
-      "reached": 27,
-      "produced": 27
+      "reached": 28,
+      "produced": 28
     },
     "repairPanelDetail": {
-      "reached": 27,
-      "produced": 27
+      "reached": 28,
+      "produced": 28
     },
     "teacherDetail": {
-      "reached": 27,
+      "reached": 28,
       "produced": 0
     },
     "toolkitDetail": {
-      "reached": 27,
-      "produced": 27
+      "reached": 28,
+      "produced": 28
     },
     "availableEncounters": {
-      "reached": 27,
-      "produced": 23
+      "reached": 28,
+      "produced": 24
     },
     "partyDetail": {
-      "reached": 27,
+      "reached": 28,
       "produced": 0
     },
     "ratingDetail": {
-      "reached": 27,
-      "produced": 27
+      "reached": 28,
+      "produced": 28
     },
     "registerDetail": {
-      "reached": 27,
-      "produced": 27
+      "reached": 28,
+      "produced": 28
     },
     "legendDetail": {
-      "reached": 27,
+      "reached": 28,
       "produced": 1
     },
     "livingWorldDetail": {
-      "reached": 27,
+      "reached": 28,
       "produced": 0
     },
     "assignmentsDetail": {
-      "reached": 27,
+      "reached": 28,
       "produced": 0
     },
     "latentArcsDetail": {
-      "reached": 27,
-      "produced": 27
+      "reached": 28,
+      "produced": 28
     },
     "seasonalDetail": {
-      "reached": 27,
-      "produced": 27
+      "reached": 28,
+      "produced": 28
     },
     "schoolsDetail": {
-      "reached": 27,
-      "produced": 27
+      "reached": 28,
+      "produced": 28
     },
     "sharedCanonDetail": {
-      "reached": 27,
-      "produced": 4
+      "reached": 28,
+      "produced": 5
     },
     "worldCountLabel": {
-      "reached": 27,
-      "produced": 27
+      "reached": 28,
+      "produced": 28
     },
     "waygateDetail": {
-      "reached": 27,
+      "reached": 28,
       "produced": 27
     },
     "readAloudDetail": {
-      "reached": 27,
-      "produced": 27
+      "reached": 28,
+      "produced": 28
     },
     "scenePacingDetail": {
-      "reached": 27,
+      "reached": 28,
       "produced": 13
     },
     "wishesDetail": {
-      "reached": 7,
+      "reached": 8,
       "produced": 0
     },
     "worldMovedOnDetail": {
-      "reached": 7,
+      "reached": 8,
       "produced": 2
     },
     "companionLivesDetail": {
-      "reached": 7,
-      "produced": 7
+      "reached": 8,
+      "produced": 8
     },
     "homeDetail": {
-      "reached": 7,
+      "reached": 8,
       "produced": 0
     },
     "invitationsDetail": {
-      "reached": 7,
+      "reached": 8,
       "produced": 0
     },
     "bandsJoinedDetail": {
-      "reached": 7,
+      "reached": 8,
       "produced": 0
     },
     "travelersHereDetail": {
-      "reached": 7,
+      "reached": 8,
       "produced": 1
     },
     "travelersDetail": {
-      "reached": 7,
+      "reached": 8,
       "produced": 0
     },
     "journeyDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "journeyUnderwayDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "holdsNearDetail": {
-      "reached": 5,
-      "produced": 1
+      "reached": 6,
+      "produced": 2
     },
     "moneyDetail": {
-      "reached": 4,
-      "produced": 4
+      "reached": 5,
+      "produced": 5
     },
     "jobsDetail": {
-      "reached": 4,
+      "reached": 5,
       "produced": 0
     }
   },
   "_opUnknown": {
-    "sceneSummary": 39
+    "sceneSummary": 40
   },
   "_bandNotes": null,
   "_opCountingSince": "2026-09-14T22:51:56.913Z",
   "_fireTests": {
-    "at": "2026-09-20T12:21:21.587Z",
-    "build": "2.3.6",
+    "at": "2026-09-21T00:09:44.734Z",
+    "build": "2.4.3",
     "results": [
       {
         "op": "jobOps",

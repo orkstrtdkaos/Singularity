@@ -773,7 +773,8 @@
         "locationId": "the_unlit_deep",
         "day": 1
       },
-      "met": 10
+      "met": 10,
+      "sex": "male"
     },
     "unlit-elder": {
       "id": "unlit-elder",
@@ -825,7 +826,8 @@
       },
       "met": 10,
       "trueName": "Dane",
-      "nameUnknown": true
+      "nameUnknown": true,
+      "sex": "male"
     },
     "taken-person": {
       "id": "taken-person",
@@ -11415,8 +11417,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789999096663,
-  "rev": 859,
+  "updatedAt": 1790007985323,
+  "rev": 860,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -14621,6 +14623,38 @@
       "why": "practice records showed rank 1; rank 2 was an error",
       "worldDay": 83,
       "at": "2026-09-21T13:58:16.655Z"
+    },
+    {
+      "kind": "gender",
+      "id": "standing-unlit",
+      "from": {
+        "gender": "unknown",
+        "pronouns": "they/them"
+      },
+      "to": {
+        "sex": "male",
+        "gender": "unknown",
+        "pronouns": "they/them"
+      },
+      "why": "repaired via the Repair panel",
+      "worldDay": 83,
+      "at": "2026-09-21T16:26:25.322Z"
+    },
+    {
+      "kind": "gender",
+      "id": "unlit-elder",
+      "from": {
+        "gender": "unknown",
+        "pronouns": "they/them"
+      },
+      "to": {
+        "sex": "male",
+        "gender": "unknown",
+        "pronouns": "they/them"
+      },
+      "why": "repaired via the Repair panel",
+      "worldDay": 83,
+      "at": "2026-09-21T16:26:25.322Z"
     }
   ],
   "_axesDropped": [

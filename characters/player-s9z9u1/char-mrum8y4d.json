@@ -329,11 +329,193 @@
     "At the Kindly Rest in early morning, Loki learns the patient lies in the cellars below and is awake, asking after Ravel. The path forward is clear."
   ],
   "currentLocationId": "the_kindly_rest",
-  "activeScene": null,
+  "activeScene": {
+    "locationId": "the_kindly_rest",
+    "turns": [
+      {
+        "player": "Descend to the cellars with Ravel and Estry to meet the patient",
+        "summary": "Loki descends into the cellars of the Kindly Rest and meets Sable in the small lamp-lit room where they have recovered. Ravel and Estry are present. The threshold between waiting and action is crossed.",
+        "narration": "You follow Ravel and Estry down the stone stairs into the Kindly Rest's cellars. The air cools as you descend — cool air, then cold air, then the particular chill of deep places. Lantern light swings across damp stone. The herb smell grows stronger: dried things, growing things, root-smell, the green-dark scent of fermentation and careful keeping.\n\nAt the bottom, the cellars open into a long chamber lined with shelves. Bundles of herbs hang from the ceiling. Clay jars stand in rows, each one marked with careful notation — dates, ingredients, purposes. Ravel moves through this place like she has been here before, or like she reads the language of medicine in the arrangement itself. Estry follows at her shoulder, steady and present.\n\nOne door at the far end stands open. Light spills from it — lamp-glow, warmer than the lantern-light. You step through and find yourself in a smaller room, almost a cell, where a person sits upright on a narrow bed. They turn their head at the sound of footsteps.\n\nThis is Sable. Awake. Eyes clear. The fever is gone, and in its place is a quiet watchfulness — the look of someone who has been waiting for a particular moment and knows it has arrived. Ravel stops at the threshold, her breath steadying. Estry places one hand gently on her back — a touch that says *I am here, you are not alone in this*.\n\nSable's gaze finds you last. Recognition flickers there, and something else — a question waiting to be asked."
+      }
+    ],
+    "lastTurn": {
+      "narration": "You follow Ravel and Estry down the stone stairs into the Kindly Rest's cellars. The air cools as you descend — cool air, then cold air, then the particular chill of deep places. Lantern light swings across damp stone. The herb smell grows stronger: dried things, growing things, root-smell, the green-dark scent of fermentation and careful keeping.\n\nAt the bottom, the cellars open into a long chamber lined with shelves. Bundles of herbs hang from the ceiling. Clay jars stand in rows, each one marked with careful notation — dates, ingredients, purposes. Ravel moves through this place like she has been here before, or like she reads the language of medicine in the arrangement itself. Estry follows at her shoulder, steady and present.\n\nOne door at the far end stands open. Light spills from it — lamp-glow, warmer than the lantern-light. You step through and find yourself in a smaller room, almost a cell, where a person sits upright on a narrow bed. They turn their head at the sound of footsteps.\n\nThis is Sable. Awake. Eyes clear. The fever is gone, and in its place is a quiet watchfulness — the look of someone who has been waiting for a particular moment and knows it has arrived. Ravel stops at the threshold, her breath steadying. Estry places one hand gently on her back — a touch that says *I am here, you are not alone in this*.\n\nSable's gaze finds you last. Recognition flickers there, and something else — a question waiting to be asked.",
+      "sceneSummary": "Loki descends into the cellars of the Kindly Rest and meets Sable in the small lamp-lit room where they have recovered. Ravel and Estry are present. The threshold between waiting and action is crossed.",
+      "choices": [
+        {
+          "label": "Speak first — ask Sable directly what they want to say",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "falsehood_truth": 0.3,
+            "concrete_abstract": -0.2
+          },
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "ask",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Let Ravel take the lead — watch and listen to understand what passes between them",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "falsehood_truth": 0.1,
+            "concrete_abstract": 0.2
+          },
+          "difficulty": "very easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study",
+            "help"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use Appetite-Sense to read what Sable is refusing to admit to themselves",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "falsehood_truth": 0.4,
+            "emotional_logical": -0.3
+          },
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "read",
+            "study"
+          ],
+          "abilityId": "appetite_sense",
+          "energyCost": 2,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        }
+      ],
+      "deeds": [],
+      "characterDeltas": {},
+      "ledgerEvents": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "the-taken-from-the-city",
+          "title": "The Taken",
+          "summary": "Someone was brought from the city to the Unlit Deep, and the city is pretending it did not happen.",
+          "giver": "the elder of the Unlit Deep",
+          "note": "Loki has descended to the cellars of the Kindly Rest and stands face to face with Sable. The patient is awake, aware, and waiting. Ravel and Estry are present. The next moment will determine what Sable chooses to do or say."
+        }
+      ],
+      "standingOps": [],
+      "delegateOps": [],
+      "jobOps": [],
+      "arcOps": [],
+      "adoptSchool": null,
+      "offer": null,
+      "stageOps": [],
+      "scene": {
+        "setting": "A small lamp-lit room in the cellars of the Kindly Rest, reached by stone stairs from the main herb-storage chamber. Damp stone walls, a narrow bed, one lamp burning steady. Early morning, the air cool and still.",
+        "npcsPresent": [
+          {
+            "name": "Ravel",
+            "state": "Standing at the threshold, breath steadying, waiting to see what Sable will do or say. Hand at her side, posture open. Eyes on Sable."
+          },
+          {
+            "name": "Estry",
+            "state": "Just behind Ravel with one hand on her back — present, steady, supporting without speaking. Watching Sable with calm assessment."
+          },
+          {
+            "name": "Sable",
+            "state": "Sitting upright on the narrow bed, awake and clear-eyed. The fever is gone. Watching Loki with recognition and a waiting question in their gaze."
+          }
+        ],
+        "objects": [
+          "narrow bed",
+          "one lamp burning on a stone shelf",
+          "stone walls, damp and cool"
+        ],
+        "threads": [
+          "What will Sable choose to do or say now that the threshold has been crossed?",
+          "What does Ravel's presence mean to Sable, and what will it trigger?",
+          "Why did someone bring Sable from the city to the Unlit Deep, and what are they hiding?"
+        ]
+      },
+      "npcUpdates": [],
+      "intentsHeard": [],
+      "factUpdates": [],
+      "placeUpdates": [],
+      "discovery": null,
+      "codexUpdates": [],
+      "holdingOps": [],
+      "holdTrades": [],
+      "debtOps": [],
+      "exchangeOps": [],
+      "partyOps": [],
+      "generateRequest": [],
+      "encounterOps": [],
+      "projectOps": [],
+      "bandOps": [],
+      "strikeOps": [],
+      "deathOps": [],
+      "newEncounter": null,
+      "unlockPrecursor": null,
+      "unlockSubstrate": null,
+      "timeOps": null,
+      "moveTo": null,
+      "stateOps": [],
+      "itemUpdates": [],
+      "deriveItem": null,
+      "imagePrompt": null,
+      "imageMedium": null,
+      "newAbility": null,
+      "gambitOps": null,
+      "gambitApt": false,
+      "sceneEnded": false
+    },
+    "sceneState": {
+      "setting": "A small lamp-lit room in the cellars of the Kindly Rest, reached by stone stairs from the main herb-storage chamber. Damp stone walls, a narrow bed, one lamp burning steady. Early morning, the air cool and still.",
+      "npcsPresent": [
+        {
+          "name": "Ravel",
+          "state": "Standing at the threshold, breath steadying, waiting to see what Sable will do or say. Hand at her side, posture open. E"
+        },
+        {
+          "name": "Estry",
+          "state": "Just behind Ravel with one hand on her back — present, steady, supporting without speaking. Watching Sable with calm ass"
+        },
+        {
+          "name": "Sable",
+          "state": "Sitting upright on the narrow bed, awake and clear-eyed. The fever is gone. Watching Loki with recognition and a waiting"
+        }
+      ],
+      "objects": [
+        "narrow bed",
+        "one lamp burning on a stone shelf",
+        "stone walls, damp and cool"
+      ],
+      "threads": [
+        "What will Sable choose to do or say now that the threshold has been crossed?",
+        "What does Ravel's presence mean to Sable, and what will it trigger?",
+        "Why did someone bring Sable from the city to the Unlit Deep, and what are they hiding?"
+      ]
+    },
+    "beats": 1,
+    "subPlace": null
+  },
   "clock": {
     "schemaVersion": 1,
     "day": 5,
-    "hour": 10,
+    "hour": 11,
     "realAnchor": null
   },
   "companions": [
@@ -353,14 +535,14 @@
       "locationEntityId": "the-unlit-deep",
       "status": "active",
       "progress": [
-        "The sealed chamber beneath the Null Stone is revealed as a pre-Transition water-works built to pose a mutual question—between supplicant and stone, between water's readiness and asker's integrity. The chamber listens and answers in harmonic resonance. Halvex has relinquished the mandate to break.",
         "The sealed chamber beneath the Null Stone has revealed itself as a pre-Transition water-works designed to pose and answer mutual questions—a threshold where supplicant and stone measure each other's readiness. The chamber listens in harmonic resonance. Cy's old procedure suggests the apparatus measures whether the asker is ready to receive truthful answers, not merely whether they can pose a question.",
         "The chamber listens in harmonic resonance. The alcove measures whether a supplicant is ready to receive honest answers. The thread now turns toward who sent the Revel to break the stone, and what they feared the chamber would reveal.",
         "Maren reports an enginewright from Pressureholt asked about interference at the Hub network three days ago, and an 'Architect' in the lower Annex is quietly asking about travelers with dangerous knowledge—the question of who sent the Revel is sharpening.",
         "Maren reports Sister Venri has passed through twice in recent days with a young woman healer — both heading toward the outward Reaches with clear purpose. The healer may be connected to the city, or to what brought Sable to the Deep.",
         "Loki has agreed to travel with Ravel and Estry. Their next destination and purpose remain unspoken but pressing. The patient at the Kindly Rest—who broke a fever three days ago—is the immediate thread.",
         "Loki has accepted companionship with Ravel and Estry and is traveling with them to the Kindly Rest patient—the reason they came in deep night. The next step is to reach and meet the person who broke fever three days ago.",
-        "The patient in the cellars is awake and aware. The threshold to meeting them is directly ahead. Ravel and Estry are moving to them now."
+        "The patient in the cellars is awake and aware. The threshold to meeting them is directly ahead. Ravel and Estry are moving to them now.",
+        "Loki has descended to the cellars of the Kindly Rest and stands face to face with Sable. The patient is awake, aware, and waiting. Ravel and Estry are present. The next moment will determine what Sable chooses to do or say."
       ],
       "aliases": [],
       "startedAt": "2026-07-24T21:30:43.637Z"
@@ -1595,7 +1777,7 @@
     "lastSharedReadAt": "2026-09-21T13:39:50.051Z",
     "lastTickWorldDay": 83,
     "lastCanonWorldDay": 83,
-    "turnsSinceOffer": 0,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "The woman's steady recognition—she read not just the deception but the technique itself, and named it as something she understands.",
@@ -11164,8 +11346,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789998516532,
-  "rev": 856,
+  "updatedAt": 1789998617227,
+  "rev": 857,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -12163,7 +12345,7 @@
     "umbral_depths": 54,
     "the_quickwood": 101,
     "the_center": 50,
-    "valley": 15,
+    "valley": 16,
     "the_open_reach": 3
   },
   "opLossPending": false,
@@ -12299,10 +12481,10 @@
     {
       "id": "sess-17",
       "startedAt": "2026-09-21T13:48:36.527Z",
-      "lastAt": "2026-09-21T13:48:36.527Z",
+      "lastAt": "2026-09-21T13:50:17.225Z",
       "startDay": 83,
       "endDay": 83,
-      "beats": 1
+      "beats": 2
     }
   ],
   "establishedFacts": [
@@ -12404,21 +12586,21 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 226,
-    "choices": 226,
+    "sceneSummary": 227,
+    "choices": 227,
     "characterDeltas": 112,
-    "scene": 226,
+    "scene": 227,
     "placeUpdates": 28,
     "codexUpdates": 129,
     "timeOps": 182,
     "offer": 33,
     "generateRequest": 7,
-    "sceneEnded": 95,
+    "sceneEnded": 96,
     "npcUpdates": 180,
     "moveTo": 7,
-    "gambitApt": 55,
+    "gambitApt": 56,
     "deeds": 10,
-    "questUpdates": 33,
+    "questUpdates": 34,
     "standingOps": 3,
     "factUpdates": 12,
     "stageOps": 7,
@@ -12435,7 +12617,7 @@
     "scene_summary": 1,
     "partyOps": 1
   },
-  "_opTurns": 226,
+  "_opTurns": 227,
   "customAbilities": {
     "mirror-bright": {
       "id": "mirror-bright",
@@ -13776,404 +13958,404 @@
   },
   "_promptRows": {
     "character": {
-      "reached": 41,
-      "produced": 41
+      "reached": 42,
+      "produced": 42
     },
     "location": {
-      "reached": 41,
-      "produced": 41
+      "reached": 42,
+      "produced": 42
     },
     "region": {
-      "reached": 41,
-      "produced": 41
+      "reached": 42,
+      "produced": 42
     },
     "groundDetail": {
-      "reached": 41,
+      "reached": 42,
       "produced": 21
     },
     "lore": {
-      "reached": 41,
-      "produced": 38
+      "reached": 42,
+      "produced": 39
     },
     "traditionMotiveDetail": {
-      "reached": 41,
-      "produced": 41
+      "reached": 42,
+      "produced": 42
     },
     "sheetsDetail": {
-      "reached": 41,
+      "reached": 42,
       "produced": 25
     },
     "rules": {
-      "reached": 41,
-      "produced": 41
+      "reached": 42,
+      "produced": 42
     },
     "recentTurns": {
-      "reached": 41,
+      "reached": 42,
       "produced": 37
     },
     "timeLabel": {
-      "reached": 41,
-      "produced": 41
+      "reached": 42,
+      "produced": 42
     },
     "npcRegistryDetail": {
-      "reached": 41,
-      "produced": 41
+      "reached": 42,
+      "produced": 42
     },
     "mintedUnmetDetail": {
-      "reached": 41,
-      "produced": 41
+      "reached": 42,
+      "produced": 42
     },
     "npcSeedDetail": {
-      "reached": 41,
+      "reached": 42,
       "produced": 24
     },
     "traditionVocab": {
-      "reached": 41,
-      "produced": 41
+      "reached": 42,
+      "produced": 42
     },
     "standingDetail": {
-      "reached": 41,
-      "produced": 41
+      "reached": 42,
+      "produced": 42
     },
     "recalledDetail": {
-      "reached": 41,
+      "reached": 42,
       "produced": 1
     },
     "bearingsDetail": {
-      "reached": 41,
-      "produced": 41
+      "reached": 42,
+      "produced": 42
     },
     "caravansDetail": {
-      "reached": 41,
+      "reached": 42,
       "produced": 0
     },
     "commandDetail": {
-      "reached": 41,
-      "produced": 41
+      "reached": 42,
+      "produced": 42
     },
     "presenceDetail": {
-      "reached": 41,
-      "produced": 31
+      "reached": 42,
+      "produced": 32
     },
     "worthHereDetail": {
-      "reached": 41,
+      "reached": 42,
       "produced": 0
     },
     "inventoryDetail": {
-      "reached": 41,
-      "produced": 41
+      "reached": 42,
+      "produced": 42
     },
     "sceneState": {
-      "reached": 41,
+      "reached": 42,
       "produced": 37
     },
     "holdingsDetail": {
-      "reached": 41,
-      "produced": 41
+      "reached": 42,
+      "produced": 42
     },
     "debtsDetail": {
-      "reached": 41,
+      "reached": 42,
       "produced": 0
     },
     "carriedDetail": {
-      "reached": 41,
+      "reached": 42,
       "produced": 0
     },
     "abilityLawDetail": {
-      "reached": 41,
-      "produced": 41
+      "reached": 42,
+      "produced": 42
     },
     "questsDetail": {
-      "reached": 41,
-      "produced": 41
+      "reached": 42,
+      "produced": 42
     },
     "structuredQuestsDetail": {
-      "reached": 41,
+      "reached": 42,
       "produced": 0
     },
     "traditionArcDetail": {
-      "reached": 41,
+      "reached": 42,
       "produced": 0
     },
     "npcErrandsDetail": {
-      "reached": 41,
+      "reached": 42,
       "produced": 0
     },
     "codexDetail": {
-      "reached": 41,
-      "produced": 41
+      "reached": 42,
+      "produced": 42
     },
     "companionsDetail": {
-      "reached": 41,
-      "produced": 41
+      "reached": 42,
+      "produced": 42
     },
     "placeMemoryDetail": {
-      "reached": 41,
-      "produced": 32
+      "reached": 42,
+      "produced": 33
     },
     "agesMissingDetail": {
-      "reached": 41,
-      "produced": 41
+      "reached": 42,
+      "produced": 42
     },
     "newsDetail": {
-      "reached": 41,
-      "produced": 41
+      "reached": 42,
+      "produced": 42
     },
     "worldArcsDetail": {
-      "reached": 41,
-      "produced": 41
+      "reached": 42,
+      "produced": 42
     },
     "legendsPursuableDetail": {
-      "reached": 41,
+      "reached": 42,
       "produced": 12
     },
     "wakesDetail": {
-      "reached": 41,
+      "reached": 42,
       "produced": 0
     },
     "arcMoodDetail": {
-      "reached": 41,
-      "produced": 41
+      "reached": 42,
+      "produced": 42
     },
     "reachableDeadDetail": {
-      "reached": 41,
-      "produced": 41
+      "reached": 42,
+      "produced": 42
     },
     "threatToPlayer": {
-      "reached": 41,
+      "reached": 42,
       "produced": 0
     },
     "guardiansDetail": {
-      "reached": 41,
+      "reached": 42,
       "produced": 0
     },
     "resolution": {
-      "reached": 41,
-      "produced": 32
+      "reached": 42,
+      "produced": 33
     },
     "playerInput": {
-      "reached": 41,
+      "reached": 42,
       "produced": 9
     },
     "exactWords": {
-      "reached": 41,
+      "reached": 42,
       "produced": 23
     },
     "travelDirective": {
-      "reached": 41,
+      "reached": 42,
       "produced": 1
     },
     "itemAdvance": {
-      "reached": 41,
+      "reached": 42,
       "produced": 0
     },
     "encounterWeaveDetail": {
-      "reached": 41,
+      "reached": 42,
       "produced": 5
     },
     "encounterOfferDetail": {
-      "reached": 41,
+      "reached": 42,
       "produced": 3
     },
     "fightFramingDetail": {
-      "reached": 41,
+      "reached": 42,
       "produced": 0
     },
     "abilityGrantDetail": {
-      "reached": 41,
+      "reached": 42,
       "produced": 0
     },
     "stageRevealDetail": {
-      "reached": 41,
+      "reached": 42,
       "produced": 0
     },
     "itemEvolveDetail": {
-      "reached": 41,
+      "reached": 42,
       "produced": 0
     },
     "worldPressureDetail": {
-      "reached": 41,
+      "reached": 42,
       "produced": 2
     },
     "offerDetail": {
-      "reached": 41,
+      "reached": 42,
       "produced": 2
     },
     "teacherOfferDetail": {
-      "reached": 41,
+      "reached": 42,
       "produced": 0
     },
     "substrateDetail": {
-      "reached": 41,
+      "reached": 42,
       "produced": 13
     },
     "romanceGuidanceDetail": {
-      "reached": 41,
+      "reached": 42,
       "produced": 4
     },
     "factsDetail": {
-      "reached": 41,
-      "produced": 41
+      "reached": 42,
+      "produced": 42
     },
     "evolvedItemsDetail": {
-      "reached": 41,
+      "reached": 42,
       "produced": 0
     },
     "opLossNote": {
-      "reached": 41,
+      "reached": 42,
       "produced": 0
     },
     "emergenceDetail": {
-      "reached": 41,
+      "reached": 42,
       "produced": 0
     },
     "perilNote": {
-      "reached": 41,
+      "reached": 42,
       "produced": 0
     },
     "encounterDetail": {
-      "reached": 41,
+      "reached": 42,
       "produced": 4
     },
     "masteryDetail": {
-      "reached": 41,
-      "produced": 41
+      "reached": 42,
+      "produced": 42
     },
     "bookkeepingRestate": {
-      "reached": 41,
+      "reached": 42,
       "produced": 0
     },
     "anomalyDetail": {
-      "reached": 41,
-      "produced": 40
-    },
-    "repairPanelDetail": {
-      "reached": 41,
+      "reached": 42,
       "produced": 41
     },
+    "repairPanelDetail": {
+      "reached": 42,
+      "produced": 42
+    },
     "teacherDetail": {
-      "reached": 41,
+      "reached": 42,
       "produced": 0
     },
     "toolkitDetail": {
-      "reached": 41,
-      "produced": 41
+      "reached": 42,
+      "produced": 42
     },
     "availableEncounters": {
-      "reached": 41,
-      "produced": 37
+      "reached": 42,
+      "produced": 38
     },
     "partyDetail": {
-      "reached": 41,
+      "reached": 42,
       "produced": 0
     },
     "ratingDetail": {
-      "reached": 41,
-      "produced": 41
+      "reached": 42,
+      "produced": 42
     },
     "registerDetail": {
-      "reached": 41,
-      "produced": 41
+      "reached": 42,
+      "produced": 42
     },
     "legendDetail": {
-      "reached": 41,
+      "reached": 42,
       "produced": 1
     },
     "livingWorldDetail": {
-      "reached": 41,
-      "produced": 12
+      "reached": 42,
+      "produced": 13
     },
     "assignmentsDetail": {
-      "reached": 41,
+      "reached": 42,
       "produced": 0
     },
     "latentArcsDetail": {
-      "reached": 41,
-      "produced": 41
+      "reached": 42,
+      "produced": 42
     },
     "seasonalDetail": {
-      "reached": 41,
-      "produced": 41
+      "reached": 42,
+      "produced": 42
     },
     "schoolsDetail": {
-      "reached": 41,
-      "produced": 41
+      "reached": 42,
+      "produced": 42
     },
     "sharedCanonDetail": {
-      "reached": 41,
-      "produced": 18
+      "reached": 42,
+      "produced": 19
     },
     "worldCountLabel": {
-      "reached": 41,
-      "produced": 41
+      "reached": 42,
+      "produced": 42
     },
     "waygateDetail": {
-      "reached": 41,
+      "reached": 42,
       "produced": 27
     },
     "readAloudDetail": {
-      "reached": 41,
-      "produced": 41
+      "reached": 42,
+      "produced": 42
     },
     "scenePacingDetail": {
-      "reached": 41,
-      "produced": 19
+      "reached": 42,
+      "produced": 20
     },
     "wishesDetail": {
-      "reached": 21,
+      "reached": 22,
       "produced": 0
     },
     "worldMovedOnDetail": {
-      "reached": 21,
+      "reached": 22,
       "produced": 2
     },
     "companionLivesDetail": {
-      "reached": 21,
+      "reached": 22,
       "produced": 18
     },
     "homeDetail": {
-      "reached": 21,
+      "reached": 22,
       "produced": 0
     },
     "invitationsDetail": {
-      "reached": 21,
+      "reached": 22,
       "produced": 0
     },
     "bandsJoinedDetail": {
-      "reached": 21,
+      "reached": 22,
       "produced": 0
     },
     "travelersHereDetail": {
-      "reached": 21,
+      "reached": 22,
       "produced": 1
     },
     "travelersDetail": {
-      "reached": 21,
+      "reached": 22,
       "produced": 0
     },
     "journeyDetail": {
-      "reached": 19,
+      "reached": 20,
       "produced": 0
     },
     "journeyUnderwayDetail": {
-      "reached": 19,
+      "reached": 20,
       "produced": 0
     },
     "holdsNearDetail": {
-      "reached": 19,
-      "produced": 15
+      "reached": 20,
+      "produced": 16
     },
     "moneyDetail": {
-      "reached": 18,
-      "produced": 18
+      "reached": 19,
+      "produced": 19
     },
     "jobsDetail": {
-      "reached": 18,
+      "reached": 19,
       "produced": 0
     }
   },
   "_opUnknown": {
-    "sceneSummary": 53,
+    "sceneSummary": 54,
     "scene_summary": 1
   },
   "_bandNotes": null,

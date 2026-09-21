@@ -13,7 +13,7 @@
 import { SUBS, syncParentAttributes } from "./progression.js";
 import { isMinorSubject } from "./art.js";
 import { smartClamp, namesMatch } from "./namematch.js"; // SNG-152 (missed in the first sweep — see below)
-import { BOND_TYPES, ROMANTIC_STAGES, applyNpcUpdates, findExistingNpc } from "./npcs.js"; // SNG-207/213: register + correct reuse the registry helpers
+import { BOND_TYPES, ROMANTIC_STAGES, applyNpcUpdates, findExistingNpc, normalizeSex } from "./npcs.js"; // SNG-207/213: register + correct reuse the registry helpers
 import { addItem } from "./inventory.js"; // SNG-207 §2: grant-story-conferred-item
 
 const CORRECTABLE_FIELDS = new Set(["background", "origin", "nativeTradition", "form"]);
@@ -279,12 +279,20 @@ export function applyStateOps(character, ops = [], ctx = {}) {
       case "correctNpcGender": {
         const n = character.npcRegistry?.[op.id];
         if (!n) { refused.push({ op, reason: `no known person "${op.id}"` }); break; }
-        if (op.gender == null && op.pronouns == null) { refused.push({ op, reason: "correctNpcGender needs a gender and/or pronouns" }); break; }
-        const from = { gender: n.gender, pronouns: n.pronouns };
-        if (op.gender != null) n.gender = String(op.gender).slice(0, 40) || null;
+        if (op.gender == null && op.pronouns == null && op.sex == null) { refused.push({ op, reason: "correctNpcGender needs a sex, a gender and/or pronouns" }); break; }
+        const from = { sex: n.sex, gender: n.gender, pronouns: n.pronouns };
+        // ⛔ CCODE-467 — AND THE PLAYER MAY NOW SAY THE SEX, which is the field that GATES (R24, romanceability).
+        // ⚠️ Through the same clamp as every other door: `male|female|none`, and anything else is refused rather
+        // than stored, so a repair cannot write the absence-wearing-an-answer this op exists to undo.
+        if (op.sex != null) {
+          const sx = normalizeSex(op.sex);
+          if (!sx) { refused.push({ op, reason: `sex must be male, female or none — "${op.sex}" is not a value` }); break; }
+          n.sex = sx;
+        }
+        if (op.gender != null) n.gender = String(op.gender).slice(0, 40).toLowerCase() || null;
         if (op.pronouns != null) n.pronouns = String(op.pronouns).slice(0, 40) || null;
         if (n.image) { delete n.image; delete n._portraitTier; } // re-mint the portrait with the corrected gender
-        log(character, { kind: "gender", id: op.id, from, to: { gender: n.gender, pronouns: n.pronouns }, why }, ctx);
+        log(character, { kind: "gender", id: op.id, from, to: { sex: n.sex, gender: n.gender, pronouns: n.pronouns }, why }, ctx);
         applied.push({ npcGender: op.id });
         break;
       }

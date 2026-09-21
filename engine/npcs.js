@@ -214,7 +214,9 @@ export function agesMissingForGM(character, { sceneNpcNames = [], limit = 6 } = 
   // because a being of motes has no sex and needs nothing authored to exclude them. ⚡ MEASURED: `sex` is recorded for
   // 6 of 54 people across two live saves, so 48 are excluded from romance by a field NOTHING EVER ASKED FOR. A gate
   // whose answer nobody collects is not a gate, it is a wall. ⚠️ It is asked for, never inferred (SNG-143).
-  const noSex = live.filter(n => n.sex == null || String(n.sex).trim() === "").sort(order).slice(0, limit);
+  // ⛔ CCODE-467: THROUGH `sexUnsaid`, so a record carrying "unknown" surfaces. It passed `n.sex == null` and
+  // was therefore invisible to the one line that asks for the answer — Veln's trap, on the field that gates.
+  const noSex = live.filter(n => sexUnsaid(n)).sort(order).slice(0, limit);
   const lines = [];
   if (noAge.length) lines.push(`NO RECORDED AGE — age is the gate for every adult-only interaction: ${noAge.map(n => n.name || n.id).join(", ")}. `
     + `Emit npcUpdates {"op":"update","npcId":…,"age":N} with a number. ADULT IS 18. Give a grown person a grown person's age; never describe an adult in teenage terms.`);
@@ -360,8 +362,15 @@ export function applyNpcUpdates(character, updates = [], ctx = {}) {
         // and it means correcting a RENDERING never silently changes who may be romanced.
         // ⛔ NEVER INFERRED (SNG-143). Absent stays absent — and absent is a HARD EXCLUSION, which is the
         // right value for a being that HAS no sex, not an omission waiting to be filled in.
-        sex: u.sex ? String(u.sex).slice(0, 40) : null,
-        gender: u.gender ? String(u.gender).slice(0, 40) : null,       // SNG-143: sex/gender is explicit DATA, captured the first time they appear (never inferred at render)
+        // ⛔ CCODE-467 — THE CREATE DOOR DID NOT CLAMP AND THE UPDATE DOOR DID, which is the whole of how
+        // `sex: "unknown"` reached a live record: the model generalised rule 14B's gender escape hatch onto a
+        // field with no such value, and only one of the two doors said no. ⚠️ Anything outside the vocabulary
+        // is DROPPED, so the field reads absent rather than falsely truthy (SNG-594's lesson, on a new field).
+        sex: normalizeSex(u.sex),
+        // ⚠️ AND GENDER IS LOWER-CASED, because it is presentation and it will be grouped one day: the live
+        // saves carry `Man` 2 against `man` 34 and `Woman` 1 against `woman` 40 (Aevi). Harmless until the
+        // first `groupBy`, and free to fix now.
+        gender: u.gender ? String(u.gender).slice(0, 40).toLowerCase() : null,       // SNG-143: sex/gender is explicit DATA, captured the first time they appear (never inferred at render)
         pronouns: u.pronouns ? String(u.pronouns).slice(0, 40) : null,
         // ⛔ SNG-556 — AGE IS A RECORD, NOT AN ADJECTIVE. The minor floor ran on PROSE and only on the generated-NPC
         // path; a person the GM MET carried their age in `description`, which no floor read. Recording it makes the
@@ -425,8 +434,8 @@ export function applyNpcUpdates(character, updates = [], ctx = {}) {
     // nobody collects. ⚠️ Filling a blank is not a change: it answers the question R24 asks, and it is one-way. A genuine
     // correction to a RECORDED sex still belongs to the player, through the repair ops, never to the GM mid-beat.
     if (u.sex && (n.sex == null || String(n.sex).trim() === "")) {
-      const sx = String(u.sex).trim().toLowerCase();
-      if (["male", "female", "none"].includes(sx)) {
+      const sx = normalizeSex(u.sex);   // CCODE-467: one vocabulary, named once
+      if (sx) {
         n.sex = sx;
         n.history = [...(n.history || []), `[d${ctx.day ?? "?"}] Sex recorded: ${sx}.`].slice(-CAPS.history);
       }
@@ -1047,9 +1056,33 @@ export function mergeDuplicateNpcs(character, dropTokens = []) {
  *
  *  ⬜ AND HE IS NOT WRONG ABOUT THE FICTION EITHER. The chronicle carries the GM's own "Ms Ashpause is on HER
  *  way over here" — the prose settled on she/her two turns before the record was consulted. */
+/** ⛔ THE THREE WORDS THAT ARE AN ABSENCE WEARING AN ANSWER. Shared by both fields below, because SNG-594 was
+ *  exactly this — `"unknown"` is truthy, so a record carrying it passed every `!n.gender` test and could never
+ *  reach the one screen where somebody could say who she was. */
+const UNSAID_WORDS = new Set(["", "unknown", "unclear", "unspecified", "none given", "not stated", "tbd", "?"]);
+
+/** ⛔ THE SEX VOCABULARY, AND IT IS NOT THE GENDER ONE (Aevi, 2026-09-20). `sex` gates romanceability (R24);
+ *  `gender` gates nothing and is presentation the player may correct. So they do not deserve the same
+ *  tolerance: a gender MAY be unsettled and "unknown" is a legitimate answer there, and a sex may NOT be.
+ *  ⛑ `none` is the answer for a being that has none — a construct, a made thing — and `unknown` is not a
+ *  value at all. ⚠️ Anything else is DROPPED rather than stored, so the field reads ABSENT instead of falsely
+ *  truthy: a record carrying `sex: "unknown"` passes every `!n.sex` check and is invisible in exactly the way
+ *  Veln Ashpause was. PURE. */
+export const SEX_VALUES = ["male", "female", "none"];
+export function normalizeSex(v) {
+  const s = String(v ?? "").trim().toLowerCase();
+  return SEX_VALUES.includes(s) ? s : null;
+}
+
+/** ⛔ Has anybody actually said what this person's sex is? The same shape as `genderUnsaid`, and the reason it
+ *  exists: 90 of 104 people in the live saves carry no sex at all, which makes them quietly un-romanceable
+ *  with nothing in the game saying why. */
+export function sexUnsaid(n) {
+  return !normalizeSex(n?.sex);
+}
+
 export function genderUnsaid(n) {
-  const g = String(n?.gender || "").trim().toLowerCase();
-  return !g || g === "unknown" || g === "unclear" || g === "unspecified";
+  return UNSAID_WORDS.has(String(n?.gender || "").trim().toLowerCase());
 }
 
 export function backfillNpcGender(character) {

@@ -91,7 +91,7 @@ import { planJob, suggestTeam, jobPoolOf, jobRouteOf, jobCost, jobWages, jobEffe
 import { ensureJobs, postJob, sendOnJob, awayOnJob, untoldJobs, markJobsTold, dropJob, detachedFrom } from "./engine/jobstate.js";   // CCODE-420 · CCODE-431
 import { sendCaravan, caravansOf } from "./engine/caravan.js";   // R49: a caravan is a delegate + a route + a load   // SNG-331 §1 / SNG-386 §4.4: two named options over roads + gates // SNG-148: waygates — map control routes named/hub; GM offer via the registry row. SNG-243 §4: the gate network
 import { skillDetail, npcDetail, itemDetail, relationshipsParagraph, craftRollsLine, craftRollsShort } from "./engine/entityDetail.js";
-import { collapseScenePresence, canonicalPersonId, personArtSeed, applyNpcUpdates, findExistingNpc, genderUnsaid, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier, backfillNpcGender, reconcileGeneratedNpcWithMeet, npcFearsForGM, npcReactionsForGM, repairUnnamedPeople } from "./engine/npcs.js";   // SNG-431 §1: the pre-namer saves get their names
+import { collapseScenePresence, canonicalPersonId, personArtSeed, applyNpcUpdates, findExistingNpc, genderUnsaid, sexUnsaid, SEX_VALUES, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier, backfillNpcGender, reconcileGeneratedNpcWithMeet, npcFearsForGM, npcReactionsForGM, repairUnnamedPeople } from "./engine/npcs.js";   // SNG-431 §1: the pre-namer saves get their names
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM, findSubPlaceParent, lastEnteredSubPlace } from "./engine/places.js";
 import { activeArcEffects, craftCostNote, encounterBias, effectsInPlainWords, npcMoodLines, travelCostFactor } from "./engine/arceffects.js";   // SNG-273: an advanced arc is something you FEEL
 import { knownIndex, whoIs, figureArtRecord } from "./engine/whois.js";   // SNG-299: who is that, and where do I read more
@@ -178,7 +178,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.4.5";
+const APP_VERSION = "2.4.6";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -15116,12 +15116,23 @@ function renderRepairScreen(note = "") {
         // `gender: "unknown"` with a defaulted `they/them`, so she was filed with the ALREADY-SET people and
         // never appeared in the warning list — the one place he could have told the game she is a woman.
         // ⚠️ The engine would not decide and would not let him decide either, which is the worst of both.
+        // ⛔ CCODE-467 — AND SEX IS HERE TOO, WHICH IS THE FIELD THAT GATES. Aevi measured it: `gender` is set on
+        // 84% of people and `sex` on 13%, because rule 14B names gender by name and sex lived only inside a
+        // schema string. ⚠️ An unset sex means the person can never be romanced (R24) and NOTHING in the game
+        // said why — so 90 of 104 people were quietly excluded by a blank.
+        // ⛑ THE TWO ARE NOT THE SAME KIND OF FIELD and the screen says so: gender is free text and may honestly
+        // be unsettled; sex is a three-value choice, and `none` — for a being that HAS none — is the answer,
+        // never a blank and never "unknown".
         const all = Object.values(character.npcRegistry);
-        const unset = all.filter(n => genderUnsaid(n));
+        const needs = (n) => genderUnsaid(n) || sexUnsaid(n);
+        const unset = all.filter(needs);
+        const noSex = all.filter(n => sexUnsaid(n)).length;
         const head = unset.length
-          ? `<p class="hint" style="margin-bottom:6px">⚠️ ${unset.length} of ${all.length} have no gender recorded — those are listed first, and their portraits are guessing.</p>` : "";
-        return head + [...unset, ...all.filter(n => !genderUnsaid(n))].map(n => `
-        <div class="cs-attr"><span class="cs-attr-name" style="width:auto; flex:1">${esc(n.name || n.id)} <span class="hint">${esc(n.gender || n.pronouns || "— unset —")}</span></span>
+          ? `<p class="hint" style="margin-bottom:6px">⚠️ ${unset.length} of ${all.length} are missing something — those are listed first. ${noSex ? `<strong>${noSex}</strong> have no sex recorded, and a person without one can never be romanced.` : ""} A portrait with no gender is guessing.</p>` : "";
+        return head + [...unset, ...all.filter(n => !needs(n))].map(n => `
+        <div class="cs-attr" style="flex-wrap:wrap"><span class="cs-attr-name" style="width:auto; flex:1 1 100%">${esc(n.name || n.id)}
+          <span class="hint">${esc(n.gender || n.pronouns || "gender unset")} · sex ${esc(n.sex || "unset")}${isDevMode() ? ` · <code>${esc(n.id)}</code>` : ""}</span></span>
+          <select data-npcsex="${esc(n.id)}" style="max-width:150px"><option value="">— sex: leave as is —</option>${SEX_VALUES.map(v => `<option value="${v}" ${String(n.sex || "").toLowerCase() === v ? "selected" : ""}>${v === "none" ? "none (a being with no sex)" : v}</option>`).join("")}</select>
           <input data-npcgender="${esc(n.id)}" placeholder="woman / man / …" value="" style="max-width:160px"></div>`).join("");
       })()}
     </div>` : ""}
@@ -15158,6 +15169,14 @@ function renderRepairScreen(note = "") {
       const s = v.toLowerCase();
       const pr = /\b(woman|female|she|girl|lady)\b/.test(s) ? "she/her" : /\b(man|male|he|boy|guy)\b/.test(s) ? "he/him" : /\b(nonbinary|non-binary|enby|they|nb)\b/.test(s) ? "they/them" : undefined;
       ops.push({ op: "correctNpcGender", id: inp.dataset.npcgender, gender: v, pronouns: pr, why });
+    }
+    // ⛔ CCODE-467: the sex control is its own pass — a person may need their sex said while their gender is
+    // left exactly as it is, and an empty selection means "leave as is", never "clear it".
+    for (const sel of app.querySelectorAll("[data-npcsex]")) {
+      const v = String(sel.value || "").trim();
+      if (!v) continue;
+      if (v === String(character.npcRegistry?.[sel.dataset.npcsex]?.sex || "").toLowerCase()) continue;
+      ops.push({ op: "correctNpcGender", id: sel.dataset.npcsex, sex: v, why });
     }
     // SNG-137: one-click fixes for the anomalies the game spotted — each maps to a repair op
     for (const cb of app.querySelectorAll("[data-fix]:checked")) {

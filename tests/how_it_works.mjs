@@ -4509,10 +4509,19 @@ console.log("\n── §41 · R24 · sex is set at generation ──");
     [{}, { sex: "none" }, { sex: "f" }].every(p => typeof R(p).why === "string" && R(p).why.length > 4));
 
   // ⛔ THE MINT SETS IT. Not on first render — at generation, which is the whole ruling.
-  const src41 = readFileSync(join(root, "engine/npcs.js"), "utf8");
-  check("§41: the NPC mint writes `sex` as its own field", /\bsex:\s*u\.sex\s*\?/.test(src41));
-  check("§41: …and still writes gender separately, so the two never collapse",
-    /\bgender:\s*u\.gender\s*\?/.test(src41));
+  // ⚠️ THIS PINNED THE SPELLING `sex: u.sex ?` AND CCODE-467 CHANGED IT — to `normalizeSex(u.sex)`, which is
+  // STRICTER than what the pin was defending. A source pin cannot tell a tightening from a removal, so it is
+  // driven now: mint a person and look at the record.
+  const c41 = { name: "T", npcRegistry: {} };   // N41 is already in scope, a few lines up
+  N41.applyNpcUpdates(c41, [{ op: "meet", npcId: "p41", name: "Vess Coll", role: "carter", sex: "female", gender: "woman", pronouns: "she/her" }], { locationId: "x", day: 1 });
+  const r41 = c41.npcRegistry.p41;
+  check("§41: the NPC mint writes `sex` as its own field — at generation, which is the whole ruling, and not derived at render",
+    r41?.sex === "female" && "sex" in r41);
+  check("§41: …and still writes gender separately, so the two never collapse — and an illegal sex is dropped rather than stored, so the field is ABSENT instead of falsely truthy (CCODE-467)",
+    r41.gender === "woman" && r41.sex !== r41.gender
+    && (() => { const c = { name: "T", npcRegistry: {} };
+      N41.applyNpcUpdates(c, [{ op: "meet", npcId: "q", name: "Nym Ardo", role: "x", sex: "unknown", gender: "woman" }], { locationId: "x", day: 1 });
+      return c.npcRegistry.q.sex === null && c.npcRegistry.q.gender === "woman"; })());
 
   // ⛔ AND PC CREATION ASKS FOR IT — the fourth door, again.
   const app41 = readFileSync(join(root, "app.js"), "utf8");
@@ -17431,9 +17440,15 @@ console.log("\n── §244 · an unknown gender is the absence of an answer, no
   check("§244: ⛔ the sheet's corrector lists everyone nobody has decided about, Veln among them",
     unsaid244.some(n => n.id === "hourkeeper-confluence") && unsaid244.length >= 3,
     `${unsaid244.length} of ${Object.keys(save244.npcRegistry || {}).length} unsaid`);
-  check("§244: ⛑ …and app.js asks the same predicate, so the two readers cannot disagree again",
-    /const unset = all\.filter\(n => genderUnsaid\(n\)\);/.test(A244)
-    && /all\.filter\(n => !genderUnsaid\(n\)\)/.test(A244));
+  // ⚠️ THIS PINNED THE EXPRESSION `all.filter(n => genderUnsaid(n))`, and CCODE-467 widened the list to take in
+  // the people missing a SEX as well. The rule it defends is unchanged and is the one that matters: app.js
+  // ASKS THE ENGINE and spells no predicate of its own, which is what stops the two readers drifting apart.
+  check("§244: ⛑ …and app.js asks the ENGINE's predicate rather than spelling its own, so the two readers cannot disagree again — and it now asks about `sex` too, which is the field that actually gates",
+    /import \{[^}]*\bgenderUnsaid\b[^}]*\} from "\.\/engine\/npcs\.js"/.test(A244)
+    && /import \{[^}]*\bsexUnsaid\b[^}]*\} from "\.\/engine\/npcs\.js"/.test(A244)
+    && /genderUnsaid\(n\) \|\| sexUnsaid\(n\)/.test(A244)
+    // ⛔ and NO local copy of the rule: the words that mean "nobody has said" live in one file only
+    && !/["'`]unknown["'`]\s*\|\|[^\n]*["'`]unclear["'`]/.test(A244));
   // ⬜ AND `sex` IS STILL NOT PRONOUNS. Veln keeps `sex: "male"` and `they/them`, and that is not a
   // contradiction the engine may resolve — only the person playing can say how she is addressed.
   check("§244: ⬜ …and nothing anywhere derives a pronoun from `sex`",
@@ -24627,6 +24642,62 @@ console.log("\n── §341 · which of the two silences is this ──");
     && /setSyncConfig\(before\);/.test(A341)
     && /Test the connection<\/strong> button/.test(A341)
     && /answers \\u201cnot found\\u201d to a token that cannot read it|answers \u201cnot found\u201d to a token that cannot read it/.test(A341));
+}
+
+// ══════════ §342 · CCODE-467 — `sex` LANDED ON 13% OF PEOPLE AND `gender` ON 84%, AND THE DIFFERENCE WAS WHICH RULE SHOUTS ══════════
+// Erik, on Loki meeting Estry: "the GM totally failed to apply a sex. We know the GM MUST do this unless it's a sexless construct."
+// ⛑ Aevi measured it across the live saves and the cause is not the model being careless — it is following the prompt's emphasis
+// exactly. Rule 14B names gender and pronouns, by number, in its own paragraph, and NEVER MENTIONS SEX: the requirement lived only
+// inside the single-line JSON schema blob, thousands of characters long.
+// ⛔ AND "unknown" WAS REACHING A FIELD THAT HAS NO SUCH VALUE — the model generalising 14B's gender escape hatch onto a field
+// where it is illegal. ⚠️ Which is SNG-594 exactly, on a new field: "unknown" is TRUTHY, so a record carrying it passes every
+// `!n.sex` check and can never surface for repair — invisible in the same way Veln Ashpause was.
+console.log("\n── §342 · the field that gates, and the rule that never named it ──");
+{
+  const NPX = await import("../engine/npcs.js");
+  const COX = await import("../engine/corrections.js");
+
+  check("§342: ⛔ `sex` HAS ITS OWN VOCABULARY AND \"unknown\" IS NOT IN IT — male, female, or `none` for a being that genuinely has none, which is a REAL answer and not a way of declining to answer. ⚠️ Anything else is DROPPED so the field reads ABSENT rather than falsely truthy: that is the whole of the SNG-594 lesson, and a record carrying \"unknown\" would pass every `!n.sex` check and never reach the one screen where somebody could say who they are",
+    NPX.normalizeSex("male") === "male" && NPX.normalizeSex("Female") === "female" && NPX.normalizeSex("NONE") === "none"
+    && NPX.normalizeSex("unknown") === null && NPX.normalizeSex("unclear") === null && NPX.normalizeSex("woman") === null
+    && NPX.normalizeSex("") === null && NPX.normalizeSex(null) === null
+    && NPX.sexUnsaid({ sex: "unknown" }) === true && NPX.sexUnsaid({ sex: "none" }) === false && NPX.sexUnsaid({}) === true,
+    JSON.stringify(["male", "Female", "unknown", "woman"].map(v => `${v}→${NPX.normalizeSex(v)}`)));
+
+  // ⛔ THE CREATE DOOR DID NOT CLAMP AND THE UPDATE DOOR DID, which is how it got into a live record at all.
+  const ctx342 = { locationId: "x", day: 1 };
+  const c342 = { name: "T", npcRegistry: {} };
+  NPX.applyNpcUpdates(c342, [{ op: "meet", npcId: "a", name: "Ana Vell", role: "scout", sex: "unknown", gender: "Woman", pronouns: "she/her" }], ctx342);
+  NPX.applyNpcUpdates(c342, [{ op: "meet", npcId: "b", name: "Bex Orr", role: "smith", sex: "Female", gender: "woman" }], ctx342);
+  NPX.applyNpcUpdates(c342, [{ op: "meet", npcId: "d", name: "Dun Mote", role: "construct", sex: "none" }], ctx342);
+  check("§342: ⛔ BOTH DOORS CLAMP NOW, AND ONLY ONE DID — the UPDATE branch checked the vocabulary and the CREATE branch stored whatever arrived, so a person met for the first time could be born carrying an illegal sex while the same value was refused an hour later. ⛑ And `gender` is lower-cased on the way in, because it is presentation that will be grouped one day: the live saves carry `Man` 2 against `man` 34 and `Woman` 1 against `woman` 40",
+    c342.npcRegistry.a.sex === null && NPX.sexUnsaid(c342.npcRegistry.a) === true
+    && c342.npcRegistry.a.gender === "woman"
+    && c342.npcRegistry.b.sex === "female" && c342.npcRegistry.d.sex === "none",
+    JSON.stringify(Object.fromEntries(Object.entries(c342.npcRegistry).map(([k, n]) => [k, `${n.sex}/${n.gender}`]))));
+
+  const good342 = COX.applyStateOps(c342, [{ op: "correctNpcGender", id: "a", sex: "female", why: "Erik says so" }], {});
+  const bad342 = COX.applyStateOps(c342, [{ op: "correctNpcGender", id: "a", sex: "unknown", why: "x" }], {});
+  check("§342: ⛔ AND THE PLAYER CAN SAY IT — `correctNpcGender` took a gender and pronouns and could not touch the field that actually GATES. It now takes a sex, through the same clamp, and refuses an illegal one with a reason rather than storing it: a repair must not be able to write the very absence-wearing-an-answer it exists to undo",
+    good342.applied?.some(a => a.npcGender === "a") && c342.npcRegistry.a.sex === "female"
+    && (bad342.refused || []).some(r => /must be male, female or none/.test(r.reason || "")),
+    JSON.stringify({ set: c342.npcRegistry.a.sex, refused: (bad342.refused || []).map(r => r.reason) }));
+
+  const gmSrc342 = rd("engine/gm.js");
+  check("§342: ⛔ THE RULE NAMES IT NOW, WITH THE SAME FORCE — 84% against 13% is the gap between a rule with its own number and a requirement buried in a schema string, and the model was following the emphasis precisely. ⚠️ And the rule states the ASYMMETRY, because the two fields look alike and are not: gender is presentation and gates nothing and MAY be unsettled; sex gates whether a person can ever be romanced, and a blank is indistinguishable from a deliberate exclusion",
+    /ON "meet", SEX, gender and pronouns ARE REQUIRED/.test(gmSrc342)
+    && /"unknown" IS NOT A VALUE FOR "sex"/.test(gmSrc342)
+    && /SEX GATES WHETHER A PERSON CAN EVER BE\s*ROMANCED/.test(gmSrc342)
+    && /"none" is a REAL ANSWER you are choosing/.test(gmSrc342)
+    && /the engine DROPS IT/.test(gmSrc342));
+
+  const A342 = rd("app.js");
+  check("§342: ⛑ AND THERE IS A CONTROL FOR IT — Erik: \"make sure I have a way to change/edit this while in dev view.\" The repair list had a free-text box for gender and nothing at all for sex. It now carries a three-value chooser beside it, ordered so the people missing one come first, saying how many can never be romanced; an empty selection means LEAVE AS IS rather than clear it; and in dev mode each row shows the registry id, so the person on screen can be matched to the record",
+    /data-npcsex=/.test(A342) && /SEX_VALUES\.map/.test(A342)
+    && /— sex: leave as is —/.test(A342)
+    && /op: "correctNpcGender", id: sel\.dataset\.npcsex, sex: v/.test(A342)
+    && /isDevMode\(\) \? ` · <code>\$\{esc\(n\.id\)\}<\/code>` : ""/.test(A342)
+    && /can never be romanced/.test(A342));
 }
 
 /* ══════════ REPORT ══════════ */

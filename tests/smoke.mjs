@@ -71,6 +71,10 @@ let failures = 0;
 // so an intermittent gate printed nothing but its own name and had to be re-derived by hand. A
 // diagnostic that is written and never rendered is the same writer-with-no-reader shape as anywhere
 // else; it is just cheaper to fix here. Printed on FAILURE only, so a green run stays scannable.
+/** ⛔ A SOURCE TEST THAT READS COMMENTS IS A TEST THAT FIRES ON ITS OWN DOCUMENTATION — three did today.
+ *  A comment cannot call anything, so a ban on a call must not see one. */
+function codeOnly(src) { return String(src || "").split(/\r?\n/).filter(l => !/^\s*(\/\/|\*|\/\*)/.test(l)).join("\n"); }
+
 function check(name, cond, detail = null) {
   console.log(`${cond ? "PASS" : "FAIL"}  ${name}`);
   if (!cond) { failures++; if (detail) console.log(`        ↳ ${typeof detail === "function" ? detail() : detail}`); }
@@ -15026,14 +15030,20 @@ await (async () => {
     const block = start < 0 ? "" : appG.slice(start, end > start ? end : undefined);
     check("370: the gender repair list is not capped — a cap on a repair tool is a repair you cannot perform",
       start > 0 && !/npcRegistry\)\.slice\(0,\s*\d+\)/.test(block));
-    check("370: …and the people with NO gender are listed first, because they are who the control is for",
+    check("370: …and the people MISSING SOMETHING are listed first, because they are who the control is for",
       // ⛔ SNG-594: this pinned `!n.gender && !n.pronouns`, and "unknown" is a TRUTHY string — so Veln
       // Ashpause, carrying `gender: "unknown"` with a defaulted they/them, was filed with the already-set
-      // people and never appeared in the one control Erik could have corrected her with. ⛑ The predicate is
-      // shared with the deriver now, so the two readers cannot disagree again; this asserts the ORDERING.
-      /const unset = all\.filter\(n => genderUnsaid\(n\)\)/.test(block) && /\[\.\.\.unset,/.test(block));
-    check("370: …and the screen SAYS how many are unrecorded rather than leaving it to be noticed",
-      /have no gender recorded/.test(block));
+      // people and never appeared in the one control Erik could have corrected her with.
+      // ⚠️ AND THEN IT PINNED THE REPLACEMENT EXPRESSION, so widening the list to the people missing a SEX
+      // (CCODE-467) turned it red for being made better. ⛑ The rule is the ORDERING and the SOURCE of the
+      // predicate: the unmet come first, and the test for "unmet" is the engine's, never spelled here.
+      /\[\.\.\.unset,/.test(block)
+      && /genderUnsaid\(n\)/.test(block) && /sexUnsaid\(n\)/.test(block)
+      // ⚠️ IN CODE, NOT IN COMMENTS — the third gate today to fire on its own documentation: this very block
+      // CARRIES the paragraph explaining SNG-594, which necessarily contains the word it is banning.
+      && !/["'`]unknown["'`]/.test(codeOnly(block)));
+    check("370: …and the screen SAYS how many are unrecorded rather than leaving it to be noticed — and now says the COST of the one that gates, because a count nobody can read a consequence into is just a number",
+      /are missing something/.test(block) && /have no sex recorded/.test(block) && /can never be romanced/.test(block));
   }
 
   // The DOM pass: text nodes only, every match, and never inside an existing control.

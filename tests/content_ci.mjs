@@ -2228,7 +2228,53 @@ for (const pack of PACKS) {
       const bad = leaksIn(def);
       check(`[quest] "${def.id}" keeps its GM-eyes truth OUT of everything the player reads`, bad.length === 0, `${src}: ${bad.join(" · ")}`);
     }
-    ok(`CCODE-458: GM-eyes containment — ${withTruth.length} of ${questDefs.length} quests declare a \`truth\`${withTruth.length ? ": " + withTruth.join(", ") : " (none yet — the drawer is new; the detector above is proved on a fixture so it cannot pass by having nothing to look at)"}`);
+    // ── CCODE-466 · "INSIDE" HAS TO MEAN INSIDE ─────────────────────────────────────────────────────────────
+  // Erik's queued ruling, via Aevi's review §6: "The Coliseum, the registry and the street are IN the Crossing.
+  // They stop being terrain points and take a local offset from their parent."
+  //
+  // ⛑ MEASURED FIRST, AND THE CORPUS ALREADY KEEPS THE RULE — for one tier. Of 91 parented locations with a
+  // position: every one of the 17 at tier `site` sits within a DAY of its parent (max 0.8), and the two the
+  // ruling names — the registry and the street — are already at 0.0. ⛔ The 74 at tier `settlement` sit a
+  // median of 17.7 days from the place they are "in", up to 234.
+  //
+  // ⚠️ SO `parentId` CARRIES TWO MEANINGS AND THE TIER IS WHICH ONE: a `site` is physically inside its parent;
+  // a `settlement` belongs to it. That is a real distinction and worth keeping — but `worldmap.js:132` does not
+  // make it. It hides any child whose parent is in the same region and DRAWS IT NESTED INSIDE that parent, so
+  // 62 places are drawn inside somewhere they are weeks away from. The Crossing's own four — the Axis Gate
+  // (13.3 days), the Hundred Markets (15.0), the Quiet House (18.3), the Great Coliseum (11.7) — are drawn as
+  // districts of the hub and walked as a fortnight's journey.
+  //
+  // ⛔ THE GATE LOCKS THE HALF THAT IS TRUE, because that is the half that gives "inside" a meaning: a `site`
+  // is inside. ⚠️ The other 62 are REPORTED, not failed — a check that is red on arrival walls off every other
+  // piece of work, and re-coordinating 62 authored places is a ruling, not a repair. `the_null_stone` (0.6
+  // days, a site of the Crossing) is the authored shape the four should take.
+  {
+    const WMc = await import("../engine/worldmap.js");
+    const { loadContentHeadless: lch466 } = await import("./headless_content.mjs");
+    const C466 = await lch466();
+    const kids = [];
+    for (const l of Object.values(C466.locations || {})) {
+      const pid = l?.parentId || l?.containerId;
+      if (!pid) continue;
+      const p = C466.locations[pid];
+      if (!p?.worldPos || !l?.worldPos) continue;
+      let d = null; try { d = WMc.walkingDays(p, l); } catch { /* unplaceable pair is not this check's business */ }
+      if (d == null || !Number.isFinite(d)) continue;
+      kids.push({ id: l.id, parent: pid, tier: l.tier || null, days: d,
+        nested: !!((l.regionId || l.region) && (l.regionId || l.region) === (p.regionId || p.region)) });
+    }
+    const sites = kids.filter(k => k.tier === "site");
+    const strayed = sites.filter(k => k.days > 1);
+    check("[place] CCODE-466 · a SITE is inside the place it is a site of — within a day's walk of its parent, which is what makes `parentId` mean \"in\" rather than \"belongs to\". Every one of the authored sites already keeps this; it is locked here so the day one is authored a fortnight from its own parent, it is caught rather than drawn as a district of it",
+      sites.length >= 12 && strayed.length === 0,
+      strayed.length ? strayed.map(k => `${k.id} is ${k.days.toFixed(1)} days from ${k.parent}`).join(" · ") : `${sites.length} sites, furthest ${Math.max(...sites.map(k => k.days)).toFixed(2)} days`);
+
+    const drawnInside = kids.filter(k => k.nested);
+    const far = drawnInside.filter(k => k.days > 1);
+    ok(`CCODE-466: ⚠️ ${far.length} of ${drawnInside.length} places the region map DRAWS NESTED inside their parent are more than a day from it — "inside" and "belongs to" share one field, and the map reads it the first way. Erik's ruling names the Crossing's: ${kids.filter(k => k.parent === "the_crossing" && k.days > 1).sort((a, b) => b.days - a.days).map(k => `${k.id} ${k.days.toFixed(1)}d`).join(", ")}. Reported, not failed: re-coordinating authored places is a ruling, not a repair`);
+  }
+
+  ok(`CCODE-458: GM-eyes containment — ${withTruth.length} of ${questDefs.length} quests declare a \`truth\`${withTruth.length ? ": " + withTruth.join(", ") : " (none yet — the drawer is new; the detector above is proved on a fixture so it cannot pass by having nothing to look at)"}`);
   }
 
   // --- SNG-238 §5b (all content types), DRIVEN BY Aevi's consumer-required-subfield map (§5d) ---

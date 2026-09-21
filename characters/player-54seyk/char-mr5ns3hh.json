@@ -6,7 +6,7 @@
   "origin": "harmonic",
   "background": "medic",
   "level": 2,
-  "xp": 141,
+  "xp": 144,
   "attributes": {
     "physical": 2,
     "mental": 5,
@@ -55,17 +55,17 @@
   "alignment": {
     "mechanical_spiritual": 0.015,
     "concrete_abstract": -0.08504765625,
-    "chaos_order": 0.017348750000000003,
+    "chaos_order": 0.0114813125,
     "destruction_creation": 0.02425,
     "violence_peace": 0.0380375,
     "death_life": 0.05564812499999999,
-    "falsehood_truth": 0.020000000000000004
+    "falsehood_truth": 0.03900000000000001
   },
   "attunement": 2,
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 129,
-  "energy": 68,
+  "energy": 63,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -247,83 +247,88 @@
         "player": "Ask Vreni plainly what she already knows about who he is — she has had two days alone with him",
         "summary": "Vreni named what she had quietly gathered — the wound's wrong angle, the man's vigil-habit — and turned the question back to Adelheid: do you know who he is?",
         "narration": "Vreni is at the trestle when you ask, rolling the second compress linen with the careful attention she gives everything — not hurrying, not stalling. You put it plainly: she has had two days alone with him. Whatever his name is, she already knows, or suspects, that it is not Danic.\n\nShe sets the linen down. Looks at her hands a moment.\n\n\"I know the wound is not from a farm tool,\" she says. \"The angle is wrong for that. And I know he listened at the door the first morning — I heard him sit up and hold still for a long time, then lie back down when I came in from the yard.\" A pause. \"A man checks a perimeter before he sleeps. Farmers don't do that.\" She picks the linen up again. \"I have not asked his name a second time because I did not believe the first answer and asking again would only make him less likely to give me a real one.\"\n\nShe finishes rolling the compress and sets it in line with the others. Her eyes come up to yours — steady, not unkind.\n\n\"I thought you might know more than I do. You came recommended by Mara Wells, and Mara Wells does not send people to places she does not need watched.\" She says it without accusation. \"So. Do you know who he is?\""
+      },
+      {
+        "player": "Go to him now — he is awake, and he heard this exchange, and it is time to let him speak first",
+        "summary": "Adelheid drew the curtain and faced the patient — who was awake, watching, and offered gratitude and a careful observation in place of his name.",
+        "narration": "You cross the room in four steps and draw the curtain back.\n\nHe is lying on his side, one arm folded under his head, and he does not pretend to have been sleeping. The forearm is wrapped in fresh linen — Vreni's work, clean and tight — and his eyes are open and steady. They are the eyes of someone who has been deciding something for the last several minutes. He is younger than you expected. Older than he looks when he is scared.\n\nHe lets you look at him for a moment. Then: \"The compress is good. Better than what I had.\" His voice is level, unhurried — a man who has learned to keep it that way. He is choosing what to give you, and this is the opening offer: gratitude, named plainly. Not his name.\n\nBehind you, Vreni's linen rolling has gone quiet.\n\nYou wait. He watches you waiting. Something in his calculation shifts — just slightly — because you did not reach for reassurance or try to fill the silence, and he had been prepared for that. His gaze moves briefly to the satchel by the door, the harvest bundle beside it, and comes back to you. \"You came from the terrace,\" he says. It is not a question. He has placed you already, or most of you. \"The high beds.\"\n\nThat is as far as he goes. The name is still behind his teeth. He will not speak it first — not yet, not quite — but he is no longer facing away from the door."
       }
     ],
     "lastTurn": {
-      "narration": "Vreni is at the trestle when you ask, rolling the second compress linen with the careful attention she gives everything — not hurrying, not stalling. You put it plainly: she has had two days alone with him. Whatever his name is, she already knows, or suspects, that it is not Danic.\n\nShe sets the linen down. Looks at her hands a moment.\n\n\"I know the wound is not from a farm tool,\" she says. \"The angle is wrong for that. And I know he listened at the door the first morning — I heard him sit up and hold still for a long time, then lie back down when I came in from the yard.\" A pause. \"A man checks a perimeter before he sleeps. Farmers don't do that.\" She picks the linen up again. \"I have not asked his name a second time because I did not believe the first answer and asking again would only make him less likely to give me a real one.\"\n\nShe finishes rolling the compress and sets it in line with the others. Her eyes come up to yours — steady, not unkind.\n\n\"I thought you might know more than I do. You came recommended by Mara Wells, and Mara Wells does not send people to places she does not need watched.\" She says it without accusation. \"So. Do you know who he is?\"",
-      "sceneSummary": "Vreni named what she had quietly gathered — the wound's wrong angle, the man's vigil-habit — and turned the question back to Adelheid: do you know who he is?",
+      "narration": "You cross the room in four steps and draw the curtain back.\n\nHe is lying on his side, one arm folded under his head, and he does not pretend to have been sleeping. The forearm is wrapped in fresh linen — Vreni's work, clean and tight — and his eyes are open and steady. They are the eyes of someone who has been deciding something for the last several minutes. He is younger than you expected. Older than he looks when he is scared.\n\nHe lets you look at him for a moment. Then: \"The compress is good. Better than what I had.\" His voice is level, unhurried — a man who has learned to keep it that way. He is choosing what to give you, and this is the opening offer: gratitude, named plainly. Not his name.\n\nBehind you, Vreni's linen rolling has gone quiet.\n\nYou wait. He watches you waiting. Something in his calculation shifts — just slightly — because you did not reach for reassurance or try to fill the silence, and he had been prepared for that. His gaze moves briefly to the satchel by the door, the harvest bundle beside it, and comes back to you. \"You came from the terrace,\" he says. It is not a question. He has placed you already, or most of you. \"The high beds.\"\n\nThat is as far as he goes. The name is still behind his teeth. He will not speak it first — not yet, not quite — but he is no longer facing away from the door.",
+      "sceneSummary": "Adelheid drew the curtain and faced the patient — who was awake, watching, and offered gratitude and a careful observation in place of his name.",
       "choices": [
         {
-          "label": "Tell Vreni what you know — that he is likely Silas Weir, a Harmonic the water-readers have been looking for, and that two parties have come to this gate for him with different intentions",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "falsehood_truth": 0.5,
-            "chaos_order": -0.2
-          },
-          "difficulty": "easy",
-          "intentTags": [
-            "negotiate",
-            "help"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Ask her first what the two parties at the gate actually said — exactly — before you say anything about what you know",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "falsehood_truth": 0.2,
-            "concrete_abstract": -0.3
-          },
-          "difficulty": "easy",
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Tell her only that you believe him to be in real danger from one of those parties — and that the treatment must continue regardless of his name",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "falsehood_truth": -0.1,
-            "violence_peace": 0.3
-          },
-          "difficulty": "normal",
-          "intentTags": [
-            "negotiate",
-            "deceive"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Go to him now — he is awake, and he heard this exchange, and it is time to let him speak first",
+          "label": "Give him your name first — plainly, without condition — and let that be the weight you put on his side of the scale",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {
             "falsehood_truth": 0.4,
-            "chaos_order": -0.1
+            "violence_peace": 0.3
+          },
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "calm",
+            "negotiate"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Tell him what you know — the wound's angle, Silas Weir, the road upstream — and that knowing it means you are not here to report him to anyone",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "falsehood_truth": 0.5,
+            "chaos_order": -0.2
           },
           "difficulty": "normal",
+          "opposedDifficulty": null,
           "intentTags": [
-            "negotiate",
-            "careful"
+            "persuade",
+            "negotiate"
           ],
-          "trivial": false
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Sit on the edge of the trestle where he can see you clearly and say nothing — let the silence do what words cannot",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "falsehood_truth": 0.2,
+            "violence_peace": 0.4
+          },
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "calm",
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
       "scene": {
-        "setting": "The wayhouse interior, early dawn light coming gray-gold through the single window. Hearth warm, trestle clear except for rolled compresses and a small iron pot. Two curtained pallets at the far wall — one occupied.",
+        "setting": "The wayhouse interior, early dawn light gray-gold through the single window. Hearth warm, trestle clear of Vreni's work. The far curtain is drawn back — the patient visible, lying on his side, watching.",
         "npcsPresent": [
           {
             "name": "Sister Vreni",
-            "state": "Standing at the trestle, compress linen rolled and set, watching Adelheid steadily, question open in the air between them."
+            "state": "Standing at the trestle, linen rolling stilled, listening without moving."
           },
           {
             "name": "The patient (not Danic)",
-            "state": "Behind the curtain — breathing audible, slow and deliberate in the way of someone listening rather than sleeping."
+            "state": "Lying on the pallet, forearm wrapped, eyes open — steady, assessing, having offered gratitude and placed Adelheid on the high terrace. Not yet ready to give his name."
           }
         ],
         "objects": [
@@ -334,65 +339,44 @@
           "Two candles burnt low"
         ],
         "threads": [
-          "Vreni has asked Adelheid directly: do you know who he is?",
-          "The patient is awake behind the curtain and very likely listening",
-          "The decision point is here — what Adelheid tells Vreni, and when, shapes what comes next for all three of them"
+          "The patient has acknowledged Adelheid without giving his name — he placed her on the high terrace and is waiting",
+          "Vreni has gone still and is listening",
+          "The name is still unsaid — and he knows it needs to cross the distance somehow"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "sister-vreni",
-          "name": "Sister Vreni",
-          "note": "Named what she had quietly gathered in two days alone with the patient — wrong wound angle, vigil-habit — and turned the question back to Adelheid without pressure or accusation.",
+          "note": "Went still when Adelheid drew the curtain — stopped rolling linen; listening without intervening.",
+          "statusNote": "At the wayhouse trestle, holding still as the patient and Adelheid begin to face each other.",
           "learned": [
-            "The wound's angle is inconsistent with a farm tool — she noticed this independently and said nothing until asked",
-            "The patient listened at the door the first morning, held still at her approach, then lay back down — she reads this as a trained perimeter check",
-            "She stopped asking his name after the first answer because she did not believe it and did not want to narrow the distance further",
-            "She has deduced that Mara Wells sent Adelheid here as a watcher, not only as a healer"
-          ],
-          "skillsObserved": [
-            "Forensic wound observation — noted angle inconsistency without prompting",
-            "Behavioral reading — identified vigil-habit from a single morning's movement",
-            "Strategic patience — held her knowledge close until a trust exchange became possible"
-          ],
-          "relationshipDelta": 1,
-          "statusNote": "At the wayhouse trestle, compress rolled, the question she asked now sitting in the room between her and Adelheid"
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "the-patient-who-is-not-sick-enough",
-          "label": "The Patient Who Is Not Sick Enough",
-          "kind": "mystery",
-          "fact": "Vreni independently gathered two pieces of evidence: the wound's angle is inconsistent with a farm tool, and the patient performed a trained perimeter-check on his first morning — sitting up to listen at the door before lying back down when she entered. She has held this knowledge quietly for two days. She believes Mara sent Adelheid here as a watcher. The question now sits open between them: does Adelheid know who he is?",
-          "links": [
-            "maras-errand",
-            "sister-vreni",
-            "silas-weir",
-            "mara-wells"
+            "The patient acknowledged the compress as good — better than what he had — before offering any name"
           ]
         }
       ],
-      "offer": {
-        "thing": "The curtain behind the patient stirs — not the draft. He is awake, and the quality of his breathing has changed. He has heard Vreni's question.",
-        "from": "The patient's own vigil-habit — Vreni named it, and it is operating now, the same as it did at the door on his first morning here"
-      },
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "the-patient-who-is-not-sick-enough",
+          "note": "Adelheid drew the curtain and faced the patient directly — he is awake, acknowledged her, placed her on the high terrace, but has not yet given his name. The approach landed partially: gratitude offered, name withheld."
+        }
+      ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief, careful exchange at the wayhouse trestle — a few minutes, no more"
+        "why": "A brief direct exchange — minutes at the curtain"
       }
     },
     "sceneState": {
-      "setting": "The wayhouse interior, early dawn light coming gray-gold through the single window. Hearth warm, trestle clear except for rolled compresses and a small iron pot. Two curtained pallets at the far wall — one occupied.",
+      "setting": "The wayhouse interior, early dawn light gray-gold through the single window. Hearth warm, trestle clear of Vreni's work. The far curtain is drawn back — the patient visible, lying on her side, watching.",
       "npcsPresent": [
         {
           "name": "Sister Vreni",
-          "state": "Standing at the trestle, compress linen rolled and set, watching Adelheid steadily, question open in the air between the"
+          "state": "Standing at the trestle, linen rolling stilled, listening without moving."
         },
         {
           "name": "The patient (not Danic)",
-          "state": "Behind the curtain — breathing audible, slow and deliberate in the way of someone listening rather than sleeping."
+          "state": "Lying on the pallet, forearm wrapped, eyes open — steady, assessing, having offered gratitude and placed Adelheid on the"
         }
       ],
       "objects": [
@@ -403,12 +387,12 @@
         "Two candles burnt low"
       ],
       "threads": [
-        "Vreni has asked Adelheid directly: do you know who she is?",
-        "The patient is awake behind the curtain and very likely listening",
-        "The decision point is here — what Adelheid tells Vreni, and when, shapes what comes next for all three of them"
+        "The patient has acknowledged Adelheid without giving his name — he placed her on the high terrace and is waiting",
+        "Vreni has gone still and is listening",
+        "The name is still unsaid — and he knows it needs to cross the distance somehow"
       ]
     },
-    "beats": 1,
+    "beats": 2,
     "subPlace": {
       "slug": "third-terrace-fever-root-beds",
       "name": "Third Terrace — Fever-Root Beds",
@@ -751,16 +735,14 @@
         "s4"
       ],
       "progress": [
-        "↳ Adelheid took Vreni's dawn pulse count (68), sat with the patient, examined the wound and watched his color — nailbed return slow at 3 seconds, pulse climbing to 74-75 on waking; two sets of…",
-        "Adelheid identified the likely cause — a deep infection sealed beneath a healed wound surface, spreading in the blood — and named the treatment: goldenrod for now, and a high-terrace plant she cannot yet safely distinguish from its dangerous look-alike.",
-        "Codex: it has to be opened again, which is the thing nobody wants to do to a man who is finally walking. And it has to be opened with something to give him at the same time, or you will take away the only thing holding him up.",
         "↳ Adelheid reasoned from pulse, nailbed color, and wound presentation to a clear diagnosis: deep infection sealed beneath healed skin, spreading in blood — the wound must be reopened and the terrace…",
         "Usnea compress applied to the sealed forearm wound — a first antibiotic measure buying time. Fever-root from the high terraces is the remaining necessity.",
         "Codex: fever-root has a squared stem and hush-leaf's is round, which is the whole of the difference and is enough. You have four days' worth and the terraces have another season in them if somebody works them. The walk down in the dusk is the first time in a week you have not been thinking about him.",
         "↳ Adelheid reached the third terrace, correctly identified fever-root against hush-leaf by squared versus round stem, and harvested a full four-day course.",
         "Treatment handed off to Vreni — full course briefed, timing set, danger signs named. The patient is stable. The next stage is to see the treatment through to morning: sitting with him through the night when it gets worse.",
         "Codex: his name is not Danic. The two parties at the gate are not looking for the same man and only one of them means him harm — and you now know which, because he told you, at three in the morning, while you were holding a lamp.",
-        "↳ Adelheid laid out the full fever-root course to Vreni — dosing sequence, timing, worse-before-better warning, and the midnight decision sign — and Vreni absorbed and confirmed it precisely."
+        "↳ Adelheid laid out the full fever-root course to Vreni — dosing sequence, timing, worse-before-better warning, and the midnight decision sign — and Vreni absorbed and confirmed it precisely.",
+        "Adelheid drew the curtain and faced the patient directly — he is awake, acknowledged her, placed her on the high terrace, but has not yet given his name. The approach landed partially: gratitude offered, name withheld."
       ],
       "aliases": [],
       "startedAt": "2026-09-20T03:05:17.338Z",
@@ -940,7 +922,6 @@
       },
       "relationship": 4,
       "history": [
-        "[d2] Watched Adelheid read the medicine shelf without speaking — a considering silence, the look of someone who has just confirmed something she suspected",
         "[d2] Accepted Adelheid's medicines with careful hands, named the patient she is worried about — a man insisting he is fine whose pulse has already shifted overnight",
         "[d3] Took the patient's dawn pulse as requested — has the number ready; set a second tea cup by Adelheid's pallet without being asked",
         "[d3] Delivered the dawn pulse count — 68, counted twice — before Adelheid was fully risen. Watched her examine the patient without interfering.",
@@ -949,17 +930,18 @@
         "[d3] Had water heating before Adelheid returned — anticipated the preparation. Stood in the doorway as Adelheid packed and said 'before dark' in the same flat tone she uses for pulse-counts.",
         "[d3] Watched Adelheid come in from the back of the wayhouse — read the approach without comment; kept the fire and the second compress ready. Nodded once at the satchel.",
         "[d3] Absorbed the full fever-root course precisely — repeated it back in her own order, accurate. Moved to the hearth without prompting. Made an oblique acknowledgment that the patient's stated name is not his real one.",
-        "[d3] Named what she had quietly gathered in two days alone with the patient — wrong wound angle, vigil-habit — and turned the question back to Adelheid without pressure or accusation."
+        "[d3] Named what she had quietly gathered in two days alone with the patient — wrong wound angle, vigil-habit — and turned the question back to Adelheid without pressure or accusation.",
+        "[d3] Went still when Adelheid drew the curtain — stopped rolling linen; listening without intervening."
       ],
       "knownFacts": [
-        "He is insistent that he is fine — unusually so",
         "The patient's pulse was 68 at dawn — fast for a still man in a cool room",
         "Vreni prepared the hearth water before being asked — she reads the work as well as she reads a pulse",
         "Adelheid approached from the field-edge path, not the sluice-road — a deliberate choice she does not ask about",
         "Full fever-root treatment protocol: first dose now, second midday, third evening cooler; worse-before-better tonight; darkening wound tracking versus narrowing is the midnight decision point",
         "The wound's angle is inconsistent with a farm tool — she noticed this independently and said nothing until asked",
         "The patient listened at the door the first morning, held still at her approach, then lay back down — she reads this as a trained perimeter check",
-        "She stopped asking his name after the first answer because she did not believe it and did not want to narrow the distance further"
+        "She stopped asking his name after the first answer because she did not believe it and did not want to narrow the distance further",
+        "The patient acknowledged the compress as good — better than what he had — before offering any name"
       ],
       "skillsObserved": [
         "anticipatory care — prepared what was needed before it was requested",
@@ -974,12 +956,12 @@
       "gender": "woman",
       "pronouns": "she/her",
       "age": 44,
-      "statusNote": "At the wayhouse trestle, compress rolled, the question she asked now sitting in the room between her and Adelheid",
+      "statusNote": "At the wayhouse trestle, holding still as the patient and Adelheid begin to face each other.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 3
       },
-      "met": 20,
+      "met": 21,
       "domains": {
         "primary": "mason"
       },
@@ -1397,7 +1379,7 @@
         "locationId": "gen-mara-wells-store"
       }
     ],
-    "turnsSinceOffer": 0,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "Mara has named the choice that binds everything: find Silas Weir before the Harmonics do, or send word and let them decide his fate",
@@ -7010,17 +6992,17 @@
   "itemReclaimVersion": 1,
   "nameRepairVersion": 1,
   "tendencies": {
-    "generous": 6.09620558903052,
-    "social": 5.662009089799803,
-    "cerebral": 19.14513708717728,
-    "cautious": 14.84090759851559,
-    "strategic": 13.29052436715286,
-    "carousing": 0.5889769820173079,
-    "risky": 0.2952265574021593,
-    "ruthless": 0.6733307844284114,
-    "patient": 2.2683465335637742,
-    "craft": 2.249712806340932,
-    "stealth": 0.9506249999999999
+    "generous": 5.9438004493047565,
+    "social": 6.5204588625548086,
+    "cerebral": 18.666508659997845,
+    "cautious": 15.4698849085527,
+    "strategic": 12.958261257974039,
+    "carousing": 0.5742525574668752,
+    "risky": 0.2878458934671053,
+    "ruthless": 0.6564975148177011,
+    "patient": 2.21163787022468,
+    "craft": 2.1934699861824085,
+    "stealth": 0.9268593749999999
   },
   "aptitudes": [
     "strategist",
@@ -7028,11 +7010,11 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 86,
+  "actionCount": 87,
   "bondLogFrom": null,
   "teachers": {},
   "regionsKnown": {
-    "valley": 47
+    "valley": 48
   },
   "company": [],
   "forkChoices": {},
@@ -7216,8 +7198,8 @@
   "bands": [],
   "_silasGrantsRevoked": true,
   "reconcileVersion": 77,
-  "updatedAt": 1790018321887,
-  "rev": 104,
+  "updatedAt": 1790018589039,
+  "rev": 105,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -7230,7 +7212,7 @@
   "featureOffers": [],
   "_pinsInitialized": true,
   "_opUnknown": {
-    "sceneSummary": 47
+    "sceneSummary": 48
   },
   "_applyFailures": null,
   "sessions": [
@@ -7285,10 +7267,10 @@
     {
       "id": "sess-7",
       "startedAt": "2026-09-21T19:08:38.532Z",
-      "lastAt": "2026-09-21T19:18:41.863Z",
+      "lastAt": "2026-09-21T19:23:09.020Z",
       "startDay": 83,
       "endDay": 83,
-      "beats": 3
+      "beats": 4
     }
   ],
   "_debtReceipts": [],
@@ -7304,14 +7286,14 @@
     "investigate": 5,
     "analyze": 1,
     "retreat": 1,
-    "careful": 11,
+    "careful": 12,
     "urgent": 1,
     "confront": 1,
     "defer": 1,
     "trust": 1,
     "endure": 1,
     "practical": 1,
-    "negotiate": 5,
+    "negotiate": 6,
     "help": 6,
     "plan": 3,
     "rapport": 2,
@@ -7327,14 +7309,14 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 42,
-    "choices": 42,
-    "questUpdates": 25,
-    "scene": 42,
-    "npcUpdates": 38,
+    "sceneSummary": 43,
+    "choices": 43,
+    "questUpdates": 26,
+    "scene": 43,
+    "npcUpdates": 39,
     "placeUpdates": 15,
     "codexUpdates": 31,
-    "timeOps": 35,
+    "timeOps": 36,
     "imagePrompt": 8,
     "gambitApt": 21,
     "sceneEnded": 30,
@@ -7348,7 +7330,7 @@
     "_engineClosedScene": 2,
     "stageOps": 3
   },
-  "_opTurns": 42,
+  "_opTurns": 43,
   "_opCountingSince": "2026-09-15T23:58:48.348Z",
   "gallery": [
     {

@@ -388,221 +388,30 @@
       }
     ],
     "lastTurn": {
-      "narration": "You step back from the threshold, and the question settles into place between you both—not a plea, but an honest asking. Your voice carries the weight of what has passed: *Please, don't let me hold you up any longer. I would like to accompany you and your companion, if you would allow.*\n\nRavel's hand is still in yours. She does not pull it away. Her eyes search yours for a long moment—reading not for falsecraft or hunger now, but for the shape of what you are asking. The recognition is still there, unguarded and complete.\n\n\"Yes,\" she says. The word is quiet. It is also final. \"Estry—\" she calls toward the cellars, her voice carrying down the stone stairs with the tone of someone used to being heard. \"We are not going alone.\"\n\nFrom below, a pause. Then the younger person's voice returns, uncertain still but steadying: \"Understood.\" They emerge from the dark of the cellars a moment later, moving carefully up the worn stone steps. Their eyes are careful and bright, taking in Loki with fresh assessment now that the shape of the night has changed. They do not speak, but their stillness has shifted—no longer the waiting-in-shadow of before, but the readiness of someone who has just become part of something larger than themselves.\n\nRavel releases your hand and turns toward the open cellar door, but not away. Toward. Toward the patient who broke a fever three days ago. Toward the next thing that needs answering. And toward you, moving into it together.",
-      "sceneSummary": "At the cellar landing of the Kindly Rest in early dawn, Loki asked to travel with Ravel and Estry—and was accepted. The walls between Loki and Ravel stand open entirely.",
-      "choices": [
+      "holdingOps": [
         {
-          "label": "Descend with them into the cellars to meet the patient who brought them here",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "help"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "op": "removeCompanion",
+          "npcId": "halvex-coil"
         },
         {
-          "label": "Ask Ravel privately why she came to the Kindly Rest—what brought her and Estry in deep night",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "falsehood_truth": 0.3
-          },
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "op": "removeCompanion",
+          "npcId": "tessvel-cairn"
         },
         {
-          "label": "Ask Estry directly—offer them the courtesy of a question before the descent, rather than assumptions",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "help"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Step toward the stairs yourself and wait—let them set the pace of what comes next",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {
-            "chaos_order": 0.2
-          },
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        }
-      ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
-      },
-      "ledgerEvents": [],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "the-taken-from-the-city",
-          "note": "Loki has agreed to travel with Ravel and Estry. Their next destination and purpose remain unspoken but pressing. The patient at the Kindly Rest—who broke a fever three days ago—is the immediate thread."
-        }
-      ],
-      "standingOps": [],
-      "delegateOps": [],
-      "jobOps": [],
-      "arcOps": [],
-      "adoptSchool": null,
-      "offer": {
-        "thing": "Estry, moving from the cellars with new readiness—no longer hidden, but present and evaluating",
-        "from": "Ravel's acceptance of Loki's request to travel; the shape of the night has changed and they are now three instead of two"
-      },
-      "stageOps": [],
-      "scene": {
-        "setting": "The cellar landing of the Kindly Rest, grey dawn light seeping down the worn stone stairs. Herb-scented air warm and still. The heavy cellar door stands open to the darkness below.",
-        "npcsPresent": [
-          {
-            "name": "Ravel",
-            "state": "Hand released from Loki's, turning toward the cellars—walls open entirely, moving forward into the next thing that needs answering"
-          },
-          {
-            "name": "Estry",
-            "state": "Emerging from the cellars, moving carefully up the worn stone steps, eyes bright and assessing—no longer waiting in shadow, but readied as part of something larger"
-          }
-        ],
-        "objects": [
-          "The worn stone stairs",
-          "The open cellar door",
-          "Warm herb-scented air rising from below",
-          "The darkness beyond"
-        ],
-        "threads": [
-          "The patient who broke a fever three days ago—still unmet, still the reason for this night",
-          "What brought Ravel and Estry to the Kindly Rest in deep night—their purpose unspoken but urgent",
-          "Where they are traveling after this—the direction they move when they leave",
-          "How the house staff will react to the three of them departing together in morning"
-        ]
-      },
-      "npcUpdates": [
-        {
-          "op": "update",
+          "op": "addCompanion",
           "npcId": "ravel",
           "name": "Ravel",
-          "status": "active",
-          "statusNote": "Traveling with Loki and Estry. Walls down entirely. Moving toward the patient in the cellars, and toward whatever comes after.",
-          "note": "Accepted Loki's request to travel together. Said 'Yes' with quiet finality.",
-          "learned": [
-            "Her craft is old—not ancient like Precursor work, but old in the way understanding itself is old.",
-            "She has done work that left calluses on her palms—care and precision in her hands.",
-            "She carries decades of weight carefully, layer on layer."
-          ]
+          "role": "Traveler — came to the Kindly Rest in deep night with Estry; walls open, traveling together now"
         },
         {
-          "op": "update",
+          "op": "addCompanion",
           "npcId": "estry",
           "name": "Estry",
-          "status": "active",
-          "statusNote": "Traveling with Loki and Ravel. Emerged from the cellars when called. Readied as part of something larger than themselves.",
-          "note": "Acknowledged Ravel's statement without hesitation. Emerged from the cellars as Ravel called—no resistance, only readiness.",
-          "learned": [
-            "Their eyes are bright and careful, taking in the world with precision.",
-            "They move with the readiness of someone who has learned to wait and listen.",
-            "They have not spoken a name or asked a question—only acknowledged and acted."
-          ]
+          "role": "Traveler — companion to Ravel, patient in the waiting, now emerging from the cellars"
         }
       ],
-      "intentsHeard": [
-        "Loki's intent to accompany Ravel and Estry was followed — they accepted the request and are now traveling together."
-      ],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "Loki accepted companionship with Ravel and Estry—the three now travel together from the Kindly Rest.",
-          "subjectId": "ravel"
-        }
-      ],
-      "placeUpdates": [],
-      "discovery": null,
-      "codexUpdates": [
-        {
-          "topic": "what-descended-with-them",
-          "label": "What Descended With Them",
-          "kind": "lore",
-          "fact": "The woman named Ravel came to the Kindly Rest with Estry in deep night to reach a patient who broke a fever three days ago. Loki accepted their invitation to travel together.",
-          "links": [
-            "the-kindly-rest",
-            "ravel",
-            "estry"
-          ]
-        }
-      ],
-      "holdingOps": [],
-      "holdTrades": [],
-      "debtOps": [],
-      "exchangeOps": [],
-      "partyOps": [
-        {
-          "op": "join",
-          "npcId": "ravel",
-          "why": "Accepted Loki's request to travel together—the bargain struck at the cellar threshold now moves into the world"
-        },
-        {
-          "op": "join",
-          "npcId": "estry",
-          "why": "Traveling with Ravel and Loki—acknowledged and readied as part of the three"
-        }
-      ],
-      "generateRequest": [],
-      "encounterOps": [],
-      "projectOps": [],
-      "bandOps": [],
-      "strikeOps": [],
-      "deathOps": [],
-      "newEncounter": null,
-      "unlockPrecursor": null,
-      "unlockSubstrate": null,
-      "timeOps": {
-        "hoursPassed": 0.5,
-        "why": "Early dawn conversation at the cellar landing—time has moved slightly while the bargain was spoken and accepted"
-      },
-      "moveTo": null,
-      "stateOps": [],
-      "itemUpdates": [],
-      "deriveItem": null,
-      "imagePrompt": null,
-      "imageMedium": null,
-      "newAbility": null,
-      "gambitOps": null,
-      "gambitApt": false,
-      "sceneEnded": false
+      "narration": "",
+      "sceneSummary": null
     },
     "sceneState": {
       "setting": "The cellar landing of the Kindly Rest, grey dawn light seeping down the worn stone stairs. Herb-scented air warm and still. The heavy cellar door stands open to the darkness below.",
@@ -635,7 +444,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 5,
-    "hour": 8,
+    "hour": 9,
     "realAnchor": null
   },
   "companions": [
@@ -1901,7 +1710,7 @@
     "lastSharedReadAt": "2026-09-21T00:21:47.405Z",
     "lastTickWorldDay": 83,
     "lastCanonWorldDay": 83,
-    "turnsSinceOffer": 0,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "A keeper who reads routes the way other people read weather, and who has already seen the shape of what Loki is reaching for.",
@@ -11386,8 +11195,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789954146557,
-  "rev": 832,
+  "updatedAt": 1789954244746,
+  "rev": 834,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -12513,10 +12322,10 @@
     {
       "id": "sess-16",
       "startedAt": "2026-09-21T00:09:44.522Z",
-      "lastAt": "2026-09-21T01:25:31.427Z",
+      "lastAt": "2026-09-21T01:30:44.741Z",
       "startDay": 83,
       "endDay": 83,
-      "beats": 11
+      "beats": 12
     }
   ],
   "establishedFacts": [

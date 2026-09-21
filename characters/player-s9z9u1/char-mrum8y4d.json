@@ -11602,8 +11602,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790022647583,
-  "rev": 865,
+  "updatedAt": 1790022660028,
+  "rev": 866,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -12593,6 +12593,15 @@
       "joinedDay": 77,
       "leftDay": 83,
       "departedWhy": "you parted ways"
+    },
+    {
+      "npcId": "sable",
+      "roles": [
+        "ally"
+      ],
+      "teaches": null,
+      "liaisonFor": null,
+      "joinedDay": 83
     }
   ],
   "_pinsInitialized": true,
@@ -15093,14 +15102,5 @@
   "aurasOff": {
     "coil": true
   },
-  "pendingCompanyOffers": [
-    {
-      "npcId": "sable",
-      "name": "sable",
-      "roles": [
-        "ally"
-      ],
-      "why": "She has accepted Loki's offer of shelter and partnership to follow the thread of her departure from the city."
-    }
-  ]
+  "pendingCompanyOffers": []
 }

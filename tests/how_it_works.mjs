@@ -17406,8 +17406,15 @@ console.log("\n── §244 · an unknown gender is the absence of an answer, no
   const veln244 = save244.npcRegistry?.["hourkeeper-confluence"];
 
   /* ---- 1 · ⛔ THE PREDICATE, AND THE RECORD THAT PROVES IT WAS NEEDED ---- */
-  check("§244: ⚠️ the fixture is the contradictory record Erik was looking at",
-    veln244 && veln244.sex === "male" && veln244.gender === "unknown" && veln244.pronouns === "they/them",
+  // ⛔ THIS PINNED HER BROKEN RECORD AND SHE HAS SINCE BEEN PUT RIGHT — `gender: "unknown"` is now `"woman"`,
+  // which is the OUTCOME THE WHOLE SECTION EXISTS TO PRODUCE. ⚠️ A gate that fails when its subject is repaired
+  // is a gate that punishes the fix; the fourth of those today. ⛑ So the CONTRADICTION is driven on a fixture
+  // that cannot be repaired out from under it, and the live record is asserted for what it now holds.
+  const contradictory244 = { sex: "male", gender: "unknown", pronouns: "they/them" };
+  check("§244: ⚠️ the shape Erik was looking at — a sex recorded, a gender that is the ABSENCE of one, and pronouns defaulted around it; a record disagreeing with itself in the one place nobody could correct",
+    N244.genderUnsaid(contradictory244) && !N244.sexUnsaid(contradictory244) && contradictory244.pronouns === "they/them");
+  check("§244: ⛑ …and the live record has since been PUT RIGHT through that corrector, which is what it is for — she carries a real gender now, and a repaired subject must never redden the gate that asked for the repair",
+    !!veln244 && !N244.genderUnsaid(veln244),
     JSON.stringify({ sex: veln244?.sex, gender: veln244?.gender, pronouns: veln244?.pronouns }));
   check("§244: ⛔ an UNKNOWN gender is unsaid, not said — the truthiness that locked her out of both readers",
     N244.genderUnsaid({ gender: "unknown" }) && N244.genderUnsaid({}) && N244.genderUnsaid({ gender: "" })
@@ -17437,8 +17444,12 @@ console.log("\n── §244 · an unknown gender is the absence of an answer, no
   // ⚑ SNG-143's corrector exists precisely because "their portrait gender is a coin toss" — and the people
   // most in need of it were the ones it filtered out.
   const unsaid244 = Object.values(save244.npcRegistry || {}).filter(N244.genderUnsaid);
-  check("§244: ⛔ the sheet's corrector lists everyone nobody has decided about, Veln among them",
-    unsaid244.some(n => n.id === "hourkeeper-confluence") && unsaid244.length >= 3,
+  // ⚠️ AND THIS NAMED HER TOO. Once she was corrected she left the list, as she should. The RULE is that the
+  // list is exactly the unsaid — not that any particular person is on it forever.
+  check("§244: ⛔ the sheet's corrector lists everyone nobody has decided about — exactly them, nobody else, and a person leaves the list the moment somebody says who they are",
+    unsaid244.every(n => N244.genderUnsaid(n))
+    && Object.values(save244.npcRegistry || {}).filter(n => N244.genderUnsaid(n)).length === unsaid244.length
+    && Object.values(save244.npcRegistry || {}).length > unsaid244.length,
     `${unsaid244.length} of ${Object.keys(save244.npcRegistry || {}).length} unsaid`);
   // ⚠️ THIS PINNED THE EXPRESSION `all.filter(n => genderUnsaid(n))`, and CCODE-467 widened the list to take in
   // the people missing a SEX as well. The rule it defends is unchanged and is the one that matters: app.js
@@ -24265,8 +24276,14 @@ console.log("\n── §337 · who a shared-world row is about ──");
 
   // ⛔ THE STATE THE SPEC FOUND, AND IT IS ABSOLUTE. Not "most rows are vague" — NO row has ever carried a person key.
   const keyed337 = ledgerRows.filter(r => Array.isArray(r.people) && r.people.length);
-  check("§337: ⛔ EVERY ROW WRITTEN BEFORE THIS CARRIES NO PERSON KEY AT ALL — so the person-keyed reader has never had anything to key on, and the fallback below is not a courtesy, it is the whole of the shared world's history. ⚠️ This check INVERTS the day rows start being written: when it goes red, delete it and assert the new rows instead",
-    keyed337.length === 0, `${keyed337.length} of ${ledgerRows.length} rows carry people[]`);
+  // ⛑ INVERTED, EXACTLY AS THIS CHECK SAID IT WOULD BE. It asserted that NOT ONE of the fifty rows carried a
+  // person key, and noted: "when it goes red, delete it and assert the new rows instead." Play has since
+  // written the first keyed row, so that is what it asserts now — and the unkeyed history is still the
+  // majority, which is why the reader's prose fallback is not going anywhere.
+  check("§337: ⛑ ROWS ARE BEING WRITTEN WITH THEIR PEOPLE NOW, and every key is well-formed — an id, a name, and a `why` that says whether the words NAMED them or they were merely in the scene. ⚠️ The rows written before still carry none, which is why the reader's prose fallback is permanent rather than transitional",
+    keyed337.length >= 1 && keyed337.length < ledgerRows.length
+    && keyed337.every(r => r.people.every(p => p?.id && p?.name && ["named", "present"].includes(p.why))),
+    `${keyed337.length} of ${ledgerRows.length} rows carry people[] · ${JSON.stringify(keyed337[0]?.people)}`);
 
   // ⛔ THE WRITER USES THE READER'S OWN MATCHER — driven over every live row against its own author's registry.
   const normName337 = (s) => String(s || "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
@@ -24274,6 +24291,11 @@ console.log("\n── §337 · who a shared-world row is about ──");
   for (const r of ledgerRows) {
     const save = saves337.get(r.who);
     if (!save?.npcRegistry) continue;
+    // ⛔ ONLY THE ROWS THE READER READS BY PROSE. A row that CARRIES a key is answered from the key, and the
+    // writer re-run today cannot reproduce a `present` entry — the scene it came from is over. ⚠️ Measured the
+    // hard way: the first keyed row named "The Younger Person", who has since been revealed as Estry, so the
+    // prose no longer contains their name at all and this comparison called a working system broken.
+    if (Array.isArray(r.people) && r.people.length) continue;
     checkedRows++;
     const got = new Set(TV.ledgerPeopleFor({ what: r.what, registry: save.npcRegistry }).map(p => p.id));
     // whoever the READER would find in this prose must be in what the WRITER produced

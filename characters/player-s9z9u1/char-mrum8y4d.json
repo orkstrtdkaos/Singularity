@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 8,
-  "xp": 785,
+  "xp": 790,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -119,7 +119,7 @@
   "maxHealth": 73,
   "health": 73,
   "maxEnergy": 151,
-  "energy": 84,
+  "energy": 79,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -297,110 +297,168 @@
         "player": null,
         "summary": "Woken in the deep night at the Kindly Rest by visitors moving through the house with clear purpose—heading downward.",
         "narration": "You wake in the deep night to the sound of footsteps on stone.\n\nThe Kindly Rest is quiet at this hour—the bell has not rung for some time, and the terraces outside are dark shapes against a darker sky. You are in one of the small rooms on the second level, the kind kept for travelers who come through bleeding or broken. Your gear is stacked neat against the wall. Cy is coiled on the sill, lamp extinguished, lens closed in what passes for sleep.\n\nBut the footsteps are real. Two sets, maybe three, moving with purpose through the lower corridor. Unhurried. Not fleeing, not searching—moving like people who know where they are going.\n\nVoices follow, too soft to catch words. One of them stops. A door opens somewhere below—you hear the hinges' old creak—and then the footsteps resume, this time going down into the cellars where the drying lofts give way to older stone.\n\nCy's lens irises open with a soft click."
+      },
+      {
+        "player": "Rise quietly and follow the sound—stay in the corridors and listen closer.",
+        "summary": "Woken by late-night visitors moving through the Kindly Rest with purpose, Loki follows them down to the cellars and overhears two people discussing a patient—someone brought in recently who broke a fever three days ago.",
+        "narration": "You slide from your bedroll without sound, boots finding the cold stone. Cy's lens opens—a thin vertical slice of awareness—but the companion does not move. That restraint means *watch*, not *warn*.\n\nThe stairs down are worn smooth at the center, darker than the rest. You keep to the edge where the stone is rougher, where a footfall would scatter less. The voices grow clearer as you descend, but still held low—the rhythm of people who know the house and do not wish to wake it.\n\nTwo voices, you think. A woman's—steady, measured. And someone else, younger maybe, asking a question you do not quite catch. The words resolve as you reach the landing: \"—still sleeping?\" \"Since we brought her in.\" A pause. \"The fever broke three days ago.\"\n\nThey are moving away from you now, toward the cellars where the herb stores run deep. You hear a door open—heavy wood, old hinges—and the temperature drops audibly. One of them descends further. The other waits at the threshold, a silhouette in the faint light that bleeds from the room above.\n\nYou have not been seen. The stairs are quiet. The house sleeps around you."
       }
     ],
     "lastTurn": {
-      "narration": "You wake in the deep night to the sound of footsteps on stone.\n\nThe Kindly Rest is quiet at this hour—the bell has not rung for some time, and the terraces outside are dark shapes against a darker sky. You are in one of the small rooms on the second level, the kind kept for travelers who come through bleeding or broken. Your gear is stacked neat against the wall. Cy is coiled on the sill, lamp extinguished, lens closed in what passes for sleep.\n\nBut the footsteps are real. Two sets, maybe three, moving with purpose through the lower corridor. Unhurried. Not fleeing, not searching—moving like people who know where they are going.\n\nVoices follow, too soft to catch words. One of them stops. A door opens somewhere below—you hear the hinges' old creak—and then the footsteps resume, this time going down into the cellars where the drying lofts give way to older stone.\n\nCy's lens irises open with a soft click.",
-      "sceneSummary": "Woken in the deep night at the Kindly Rest by visitors moving through the house with clear purpose—heading downward.",
+      "narration": "You slide from your bedroll without sound, boots finding the cold stone. Cy's lens opens—a thin vertical slice of awareness—but the companion does not move. That restraint means *watch*, not *warn*.\n\nThe stairs down are worn smooth at the center, darker than the rest. You keep to the edge where the stone is rougher, where a footfall would scatter less. The voices grow clearer as you descend, but still held low—the rhythm of people who know the house and do not wish to wake it.\n\nTwo voices, you think. A woman's—steady, measured. And someone else, younger maybe, asking a question you do not quite catch. The words resolve as you reach the landing: \"—still sleeping?\" \"Since we brought her in.\" A pause. \"The fever broke three days ago.\"\n\nThey are moving away from you now, toward the cellars where the herb stores run deep. You hear a door open—heavy wood, old hinges—and the temperature drops audibly. One of them descends further. The other waits at the threshold, a silhouette in the faint light that bleeds from the room above.\n\nYou have not been seen. The stairs are quiet. The house sleeps around you.",
+      "sceneSummary": "Woken by late-night visitors moving through the Kindly Rest with purpose, Loki follows them down to the cellars and overhears two people discussing a patient—someone brought in recently who broke a fever three days ago.",
       "scene": {
-        "setting": "A small healing room on the second level of the Kindly Rest, deep night. Stone walls, a narrow window overlooking the terraces, a single oil lamp unlit on the table. Your gear stacked against the wall.",
+        "setting": "The stairwell and landing of the Kindly Rest's lower level, deep night. Stone walls, the air cooling noticeably as you descend. A heavy cellar door stands open ahead, light spilling from within; one figure waits in the doorway while another descends further into the cellars below.",
         "npcsPresent": [
           {
-            "name": "Cy",
-            "state": "Lens iris opening, alert, coiled on the sill"
+            "name": "Unknown woman (voice steady, measured)",
+            "state": "Standing at the threshold of the cellar door, waiting while her companion descends"
+          },
+          {
+            "name": "Unknown younger person",
+            "state": "Descended into the cellars, moving among the stored herbs"
           }
         ],
         "objects": [
-          "Your bedroll and pack stacked against the wall",
-          "An oil lamp on the table, unlit",
-          "A narrow window overlooking dark terraces"
+          "The stairwell's worn stone steps",
+          "A heavy cellar door, open, spilling warm light",
+          "Shadows pooling in the corners of the landing"
         ],
         "threads": [
-          "Who is moving through the Kindly Rest at this hour and heading downward into the cellars?",
-          "Why is Cy alert to their presence?"
+          "Who is the patient they brought in—and why?",
+          "Why are they moving through the house at this hour with such clear purpose?",
+          "What does 'brought her in' mean—did they carry her from outside, or bring her from another part of the house?"
         ]
+      },
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
       },
       "choices": [
         {
-          "label": "Rise quietly and follow the sound—stay in the corridors and listen closer.",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {},
-          "difficulty": "easy",
-          "intentTags": [
-            "scout",
-            "careful"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Light the lamp and go down to the lower floor directly—meet whoever it is face-on.",
+          "label": "Step into view at the landing and ask plainly who they are and what they're doing.",
           "attribute": "social",
           "subAttribute": "presence",
-          "axes": {},
+          "axes": {
+            "falsehood_truth": 0.5,
+            "violence_peace": 0.3
+          },
           "difficulty": "normal",
           "intentTags": [
-            "confrontation",
-            "direct"
+            "ask"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": false
         },
         {
-          "label": "Use Prism Sight to read the light-traces in the corridor below—see what just moved through.",
+          "label": "Stay hidden and continue listening—move closer to the open cellar door to hear what they say next.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {
+            "falsehood_truth": -0.3,
+            "chaos_order": 0.2
+          },
+          "difficulty": "normal",
+          "intentTags": [
+            "sneak",
+            "scout"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false
+        },
+        {
+          "label": "Wake Sister Vreni or another healer in the house—bring them down to speak with these visitors openly.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "falsehood_truth": 0.4,
+            "violence_peace": 0.6
+          },
+          "difficulty": "easy",
+          "intentTags": [
+            "ask",
+            "help"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Use Prism Sight to read the light-history of the cellar—see what brought them here, or what they came to collect.",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {},
+          "axes": {
+            "falsehood_truth": 0.6,
+            "concrete_abstract": 0.2
+          },
           "difficulty": "normal",
-          "abilityId": "prism_sight",
-          "energyCost": 3,
           "intentTags": [
             "scout",
             "study"
           ],
+          "abilityId": "prism_sight",
+          "energyCost": 3,
           "trivial": false
-        },
+        }
+      ],
+      "deeds": [],
+      "ledgerEvents": [],
+      "questUpdates": [],
+      "standingOps": [],
+      "npcUpdates": [],
+      "codexUpdates": [
         {
-          "label": "Wake Cy fully and ask what it has perceived—it may have sensed something you did not.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": "very easy",
-          "trivial": true,
-          "intentTags": [
-            "help"
+          "topic": "the-kindly-rest-night-visitors",
+          "label": "Late-Night Arrivals",
+          "kind": "mystery",
+          "fact": "Two visitors moved through the Kindly Rest in deep night with clear purpose—a woman with a steady voice and someone younger. They were discussing a patient who was brought in recently and broke a fever three days ago. They descended into the herb cellars.",
+          "links": [
+            "the-kindly-rest"
           ]
         }
       ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0
-      }
+      "sceneEnded": false,
+      "generateRequest": [
+        {
+          "type": "arc",
+          "hint": "Two visitors moved through the Kindly Rest in deep night with clear purpose—a woman with a steady voice and someone younger. They were discussing a patient who was brought in recently and broke a fever three days ago. They descended into…",
+          "fromMystery": true,
+          "why": "R49 — a mystery must arrive with its story, not as a hook: Late-Night Arrivals"
+        }
+      ]
     },
     "sceneState": {
-      "setting": "A small healing room on the second level of the Kindly Rest, deep night. Stone walls, a narrow window overlooking the terraces, a single oil lamp unlit on the table. Your gear stacked against the wall.",
+      "setting": "The stairwell and landing of the Kindly Rest's lower level, deep night. Stone walls, the air cooling noticeably as you descend. A heavy cellar door stands open ahead, light spilling from within; one figure waits in the doorway while another descends further into the cellars below.",
       "npcsPresent": [
         {
-          "name": "Cy",
-          "state": "Lens iris opening, alert, coiled on the sill"
+          "name": "Unknown woman (voice steady, measured)",
+          "state": "Standing at the threshold of the cellar door, waiting while her companion descends"
+        },
+        {
+          "name": "Unknown younger person",
+          "state": "Descended into the cellars, moving among the stored herbs"
         }
       ],
       "objects": [
-        "Your bedroll and pack stacked against the wall",
-        "An oil lamp on the table, unlit",
-        "A narrow window overlooking dark terraces"
+        "The stairwell's worn stone steps",
+        "A heavy cellar door, open, spilling warm light",
+        "Shadows pooling in the corners of the landing"
       ],
       "threads": [
-        "Who is moving through the Kindly Rest at this hour and heading downward into the cellars?",
-        "Why is Cy alert to their presence?"
+        "Who is the patient they brought in—and why?",
+        "Why are they moving through the house at this hour with such clear purpose?",
+        "What does 'brought her in' mean—did they carry her from outside, or bring her from another part of the house?"
       ]
     },
-    "beats": 1,
+    "beats": 2,
     "subPlace": null
   },
   "clock": {
     "schemaVersion": 1,
     "day": 5,
-    "hour": 2,
+    "hour": 3,
     "realAnchor": null
   },
   "companions": [
@@ -1583,10 +1641,10 @@
     ],
     "unseenNews": [],
     "lastGenCount": 1992,
-    "lastSharedReadAt": "2026-09-21T00:09:28.648Z",
+    "lastSharedReadAt": "2026-09-21T00:11:52.261Z",
     "lastTickWorldDay": 83,
     "lastCanonWorldDay": 83,
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 2,
     "recentOffers": [
       {
         "thing": "The consensus—all three of your companions affirm the descent without hesitation or doubt, each for their own reason.",
@@ -8135,7 +8193,7 @@
       "the_undefeated": 83,
       "the_one_called_zeus": 83
     },
-    "updatesToldTo": "2.4.3",
+    "updatesToldTo": "2.4.4",
     "newsLog": [
       {
         "day": 4,
@@ -8605,6 +8663,14 @@
         "worldDay": 83,
         "text": "The game was updated to v2.4.3 — 1 new, 2 fixed.",
         "loggedAt": "2026-09-21T00:06:23.658Z"
+      },
+      {
+        "kind": "update",
+        "section": "world",
+        "version": "2.4.4",
+        "worldDay": 83,
+        "text": "The game was updated to v2.4.4 — 1 fixed.",
+        "loggedAt": "2026-09-21T00:11:55.983Z"
       }
     ]
   },
@@ -9685,7 +9751,8 @@
         "label": "The Kindly Rest",
         "kind": "place",
         "facts": [
-          "[d5] you have walked here"
+          "[d5] you have walked here",
+          "[d5] Late-Night Arrivals — Two visitors moved through the Kindly Rest in deep night with clear purpose—a woman with a steady voice and someone younger. They were discussing a patient who was brought in recently and broke a fever three days ago. They descended into the herb cellars."
         ],
         "links": [],
         "aliases": [],
@@ -9988,20 +10055,21 @@
         "why": "beat",
         "day": 5
       }
-    ]
+    ],
+    "deferredMysteries": []
   },
   "tendencies": {
-    "devotion": 1.2220279086002224,
-    "cerebral": 14.438374267361375,
-    "social": 12.773772028686492,
-    "strategic": 13.231818271571482,
-    "cautious": 6.509298852462511,
-    "amorous": 7.886845973917766,
-    "generous": 5.050930323750444,
-    "ruthless": 0.30608625763750985,
-    "risky": 0.25014749775533723,
-    "patient": 0.068310783103747,
-    "deception": 0.07951728986183138
+    "devotion": 1.1914772108852167,
+    "cerebral": 14.07741491067734,
+    "social": 12.45442772796933,
+    "strategic": 13.901022814782195,
+    "cautious": 7.346566381150947,
+    "amorous": 7.689674824569821,
+    "generous": 4.9246570656566835,
+    "ruthless": 0.2984341011965721,
+    "risky": 0.2438938103114538,
+    "patient": 0.06660301352615332,
+    "deception": 0.0775293576152856
   },
   "aptitudes": [
     "strategist",
@@ -10010,7 +10078,7 @@
     "faithful",
     "charmer"
   ],
-  "actionCount": 184,
+  "actionCount": 185,
   "grantsVersion": 1,
   "precursorAccess": [
     "address_sense"
@@ -10086,7 +10154,7 @@
     }
   ],
   "nativeGrantsVersion": 2,
-  "reconcileVersion": 73,
+  "reconcileVersion": 74,
   "gallery": [
     {
       "kind": "location",
@@ -11028,8 +11096,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789949384526,
-  "rev": 810,
+  "updatedAt": 1789949549468,
+  "rev": 813,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -11981,7 +12049,7 @@
     "umbral_depths": 54,
     "the_quickwood": 101,
     "the_center": 50,
-    "valley": 2,
+    "valley": 3,
     "the_open_reach": 3
   },
   "opLossPending": false,
@@ -12109,10 +12177,10 @@
     {
       "id": "sess-16",
       "startedAt": "2026-09-21T00:09:44.522Z",
-      "lastAt": "2026-09-21T00:09:44.522Z",
+      "lastAt": "2026-09-21T00:12:29.461Z",
       "startDay": 83,
       "endDay": 83,
-      "beats": 1
+      "beats": 2
     }
   ],
   "establishedFacts": [
@@ -12201,11 +12269,11 @@
     "characterDeltas": 102,
     "scene": 215,
     "placeUpdates": 27,
-    "codexUpdates": 120,
+    "codexUpdates": 121,
     "timeOps": 176,
     "offer": 28,
-    "generateRequest": 6,
-    "sceneEnded": 84,
+    "generateRequest": 7,
+    "sceneEnded": 85,
     "npcUpdates": 171,
     "moveTo": 7,
     "gambitApt": 46,
@@ -13060,9 +13128,9 @@
     "plan": 10,
     "discuss": 1,
     "travel": 8,
-    "scout": 4,
+    "scout": 5,
     "prepare": 5,
-    "careful": 8,
+    "careful": 9,
     "woo": 1,
     "rapport": 9,
     "retreat": 1,
@@ -13415,410 +13483,410 @@
   },
   "_promptRows": {
     "character": {
-      "reached": 28,
-      "produced": 28
+      "reached": 29,
+      "produced": 29
     },
     "location": {
-      "reached": 28,
-      "produced": 28
+      "reached": 29,
+      "produced": 29
     },
     "region": {
-      "reached": 28,
-      "produced": 28
+      "reached": 29,
+      "produced": 29
     },
     "groundDetail": {
-      "reached": 28,
+      "reached": 29,
       "produced": 21
     },
     "lore": {
-      "reached": 28,
-      "produced": 25
+      "reached": 29,
+      "produced": 26
     },
     "traditionMotiveDetail": {
-      "reached": 28,
-      "produced": 28
+      "reached": 29,
+      "produced": 29
     },
     "sheetsDetail": {
-      "reached": 28,
+      "reached": 29,
       "produced": 22
     },
     "rules": {
-      "reached": 28,
-      "produced": 28
+      "reached": 29,
+      "produced": 29
     },
     "recentTurns": {
-      "reached": 28,
-      "produced": 24
+      "reached": 29,
+      "produced": 25
     },
     "timeLabel": {
-      "reached": 28,
-      "produced": 28
+      "reached": 29,
+      "produced": 29
     },
     "npcRegistryDetail": {
-      "reached": 28,
-      "produced": 28
+      "reached": 29,
+      "produced": 29
     },
     "mintedUnmetDetail": {
-      "reached": 28,
-      "produced": 28
+      "reached": 29,
+      "produced": 29
     },
     "npcSeedDetail": {
-      "reached": 28,
+      "reached": 29,
       "produced": 24
     },
     "traditionVocab": {
-      "reached": 28,
-      "produced": 28
+      "reached": 29,
+      "produced": 29
     },
     "standingDetail": {
-      "reached": 28,
-      "produced": 28
+      "reached": 29,
+      "produced": 29
     },
     "recalledDetail": {
-      "reached": 28,
+      "reached": 29,
       "produced": 1
     },
     "bearingsDetail": {
-      "reached": 28,
-      "produced": 28
+      "reached": 29,
+      "produced": 29
     },
     "caravansDetail": {
-      "reached": 28,
+      "reached": 29,
       "produced": 0
     },
     "commandDetail": {
-      "reached": 28,
-      "produced": 28
+      "reached": 29,
+      "produced": 29
     },
     "presenceDetail": {
-      "reached": 28,
-      "produced": 18
+      "reached": 29,
+      "produced": 19
     },
     "worthHereDetail": {
-      "reached": 28,
+      "reached": 29,
       "produced": 0
     },
     "inventoryDetail": {
-      "reached": 28,
-      "produced": 28
+      "reached": 29,
+      "produced": 29
     },
     "sceneState": {
-      "reached": 28,
-      "produced": 24
+      "reached": 29,
+      "produced": 25
     },
     "holdingsDetail": {
-      "reached": 28,
-      "produced": 28
+      "reached": 29,
+      "produced": 29
     },
     "debtsDetail": {
-      "reached": 28,
+      "reached": 29,
       "produced": 0
     },
     "carriedDetail": {
-      "reached": 28,
+      "reached": 29,
       "produced": 0
     },
     "abilityLawDetail": {
-      "reached": 28,
-      "produced": 28
+      "reached": 29,
+      "produced": 29
     },
     "questsDetail": {
-      "reached": 28,
-      "produced": 28
+      "reached": 29,
+      "produced": 29
     },
     "structuredQuestsDetail": {
-      "reached": 28,
+      "reached": 29,
       "produced": 0
     },
     "traditionArcDetail": {
-      "reached": 28,
+      "reached": 29,
       "produced": 0
     },
     "npcErrandsDetail": {
-      "reached": 28,
+      "reached": 29,
       "produced": 0
     },
     "codexDetail": {
-      "reached": 28,
-      "produced": 28
+      "reached": 29,
+      "produced": 29
     },
     "companionsDetail": {
-      "reached": 28,
-      "produced": 28
+      "reached": 29,
+      "produced": 29
     },
     "placeMemoryDetail": {
-      "reached": 28,
+      "reached": 29,
       "produced": 25
     },
     "agesMissingDetail": {
-      "reached": 28,
-      "produced": 28
+      "reached": 29,
+      "produced": 29
     },
     "newsDetail": {
-      "reached": 28,
-      "produced": 28
+      "reached": 29,
+      "produced": 29
     },
     "worldArcsDetail": {
-      "reached": 28,
-      "produced": 28
+      "reached": 29,
+      "produced": 29
     },
     "legendsPursuableDetail": {
-      "reached": 28,
+      "reached": 29,
       "produced": 12
     },
     "wakesDetail": {
-      "reached": 28,
+      "reached": 29,
       "produced": 0
     },
     "arcMoodDetail": {
-      "reached": 28,
-      "produced": 28
+      "reached": 29,
+      "produced": 29
     },
     "reachableDeadDetail": {
-      "reached": 28,
-      "produced": 28
+      "reached": 29,
+      "produced": 29
     },
     "threatToPlayer": {
-      "reached": 28,
+      "reached": 29,
       "produced": 0
     },
     "guardiansDetail": {
-      "reached": 28,
+      "reached": 29,
       "produced": 0
     },
     "resolution": {
-      "reached": 28,
-      "produced": 19
+      "reached": 29,
+      "produced": 20
     },
     "playerInput": {
-      "reached": 28,
+      "reached": 29,
       "produced": 9
     },
     "exactWords": {
-      "reached": 28,
+      "reached": 29,
       "produced": 13
     },
     "travelDirective": {
-      "reached": 28,
+      "reached": 29,
       "produced": 1
     },
     "itemAdvance": {
-      "reached": 28,
+      "reached": 29,
       "produced": 0
     },
     "encounterWeaveDetail": {
-      "reached": 28,
+      "reached": 29,
       "produced": 4
     },
     "encounterOfferDetail": {
-      "reached": 28,
+      "reached": 29,
       "produced": 3
     },
     "fightFramingDetail": {
-      "reached": 28,
+      "reached": 29,
       "produced": 0
     },
     "abilityGrantDetail": {
-      "reached": 28,
+      "reached": 29,
       "produced": 0
     },
     "stageRevealDetail": {
-      "reached": 28,
+      "reached": 29,
       "produced": 0
     },
     "itemEvolveDetail": {
-      "reached": 28,
+      "reached": 29,
       "produced": 0
     },
     "worldPressureDetail": {
-      "reached": 28,
+      "reached": 29,
       "produced": 0
     },
     "offerDetail": {
-      "reached": 28,
+      "reached": 29,
       "produced": 2
     },
     "teacherOfferDetail": {
-      "reached": 28,
+      "reached": 29,
       "produced": 0
     },
     "substrateDetail": {
-      "reached": 28,
+      "reached": 29,
       "produced": 6
     },
     "romanceGuidanceDetail": {
-      "reached": 28,
+      "reached": 29,
       "produced": 1
     },
     "factsDetail": {
-      "reached": 28,
-      "produced": 28
+      "reached": 29,
+      "produced": 29
     },
     "evolvedItemsDetail": {
-      "reached": 28,
+      "reached": 29,
       "produced": 0
     },
     "opLossNote": {
-      "reached": 28,
+      "reached": 29,
       "produced": 0
     },
     "emergenceDetail": {
-      "reached": 28,
+      "reached": 29,
       "produced": 0
     },
     "perilNote": {
-      "reached": 28,
+      "reached": 29,
       "produced": 0
     },
     "encounterDetail": {
-      "reached": 28,
+      "reached": 29,
       "produced": 4
     },
     "masteryDetail": {
-      "reached": 28,
-      "produced": 28
+      "reached": 29,
+      "produced": 29
     },
     "bookkeepingRestate": {
-      "reached": 28,
+      "reached": 29,
       "produced": 0
     },
     "anomalyDetail": {
-      "reached": 28,
-      "produced": 28
+      "reached": 29,
+      "produced": 29
     },
     "repairPanelDetail": {
-      "reached": 28,
-      "produced": 28
+      "reached": 29,
+      "produced": 29
     },
     "teacherDetail": {
-      "reached": 28,
+      "reached": 29,
       "produced": 0
     },
     "toolkitDetail": {
-      "reached": 28,
-      "produced": 28
+      "reached": 29,
+      "produced": 29
     },
     "availableEncounters": {
-      "reached": 28,
-      "produced": 24
+      "reached": 29,
+      "produced": 25
     },
     "partyDetail": {
-      "reached": 28,
+      "reached": 29,
       "produced": 0
     },
     "ratingDetail": {
-      "reached": 28,
-      "produced": 28
+      "reached": 29,
+      "produced": 29
     },
     "registerDetail": {
-      "reached": 28,
-      "produced": 28
+      "reached": 29,
+      "produced": 29
     },
     "legendDetail": {
-      "reached": 28,
+      "reached": 29,
       "produced": 1
     },
     "livingWorldDetail": {
-      "reached": 28,
+      "reached": 29,
       "produced": 0
     },
     "assignmentsDetail": {
-      "reached": 28,
+      "reached": 29,
       "produced": 0
     },
     "latentArcsDetail": {
-      "reached": 28,
-      "produced": 28
+      "reached": 29,
+      "produced": 29
     },
     "seasonalDetail": {
-      "reached": 28,
-      "produced": 28
+      "reached": 29,
+      "produced": 29
     },
     "schoolsDetail": {
-      "reached": 28,
-      "produced": 28
+      "reached": 29,
+      "produced": 29
     },
     "sharedCanonDetail": {
-      "reached": 28,
-      "produced": 5
+      "reached": 29,
+      "produced": 6
     },
     "worldCountLabel": {
-      "reached": 28,
-      "produced": 28
+      "reached": 29,
+      "produced": 29
     },
     "waygateDetail": {
-      "reached": 28,
+      "reached": 29,
       "produced": 27
     },
     "readAloudDetail": {
-      "reached": 28,
-      "produced": 28
+      "reached": 29,
+      "produced": 29
     },
     "scenePacingDetail": {
-      "reached": 28,
+      "reached": 29,
       "produced": 13
     },
     "wishesDetail": {
-      "reached": 8,
+      "reached": 9,
       "produced": 0
     },
     "worldMovedOnDetail": {
-      "reached": 8,
+      "reached": 9,
       "produced": 2
     },
     "companionLivesDetail": {
-      "reached": 8,
-      "produced": 8
+      "reached": 9,
+      "produced": 9
     },
     "homeDetail": {
-      "reached": 8,
+      "reached": 9,
       "produced": 0
     },
     "invitationsDetail": {
-      "reached": 8,
+      "reached": 9,
       "produced": 0
     },
     "bandsJoinedDetail": {
-      "reached": 8,
+      "reached": 9,
       "produced": 0
     },
     "travelersHereDetail": {
-      "reached": 8,
+      "reached": 9,
       "produced": 1
     },
     "travelersDetail": {
-      "reached": 8,
+      "reached": 9,
       "produced": 0
     },
     "journeyDetail": {
-      "reached": 6,
+      "reached": 7,
       "produced": 0
     },
     "journeyUnderwayDetail": {
-      "reached": 6,
+      "reached": 7,
       "produced": 0
     },
     "holdsNearDetail": {
-      "reached": 6,
-      "produced": 2
+      "reached": 7,
+      "produced": 3
     },
     "moneyDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "jobsDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     }
   },
   "_opUnknown": {
-    "sceneSummary": 40
+    "sceneSummary": 41
   },
   "_bandNotes": null,
   "_opCountingSince": "2026-09-14T22:51:56.913Z",
   "_fireTests": {
-    "at": "2026-09-21T00:09:44.734Z",
-    "build": "2.4.3",
+    "at": "2026-09-20T12:21:21.587Z",
+    "build": "2.3.6",
     "results": [
       {
         "op": "jobOps",

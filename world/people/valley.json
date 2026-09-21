@@ -323,6 +323,141 @@
           "name": "Loki"
         }
       }
+    },
+    "brin-millbrook-child": {
+      "id": "brin-millbrook-child",
+      "name": "Brin Child",
+      "canonId": "brin_millbrook_child",
+      "intro": {
+        "role": "Millbrook child, dock-edge listener",
+        "description": null,
+        "firstSeenDay": null,
+        "where": null,
+        "metBy": {
+          "characterId": "char-mr4ejo8c",
+          "name": "Cellaceron"
+        }
+      }
+    },
+    "elder-senna": {
+      "id": "elder-senna",
+      "name": "Elder Senna",
+      "canonId": "elder_senna",
+      "intro": {
+        "role": "Village elder, Millbrook",
+        "description": null,
+        "firstSeenDay": null,
+        "where": null,
+        "metBy": {
+          "characterId": "char-mr4ejo8c",
+          "name": "Cellaceron"
+        }
+      }
+    },
+    "davan": {
+      "id": "davan",
+      "name": "Davan",
+      "canonId": "davan",
+      "intro": {
+        "role": null,
+        "description": null,
+        "firstSeenDay": null,
+        "where": null,
+        "metBy": {
+          "characterId": "char-mr4ejo8c",
+          "name": "Cellaceron"
+        }
+      }
+    },
+    "sorel": {
+      "id": "sorel",
+      "name": "Sorel",
+      "canonId": "sorel",
+      "intro": {
+        "role": "Radiant water-accountability archivist—witness and steward of the Council's hidden timeline",
+        "description": "A woman of about sixty in undyed wool with a Plateau optical-fiber collar worn plain and small; carries a weight-distributed satchel; reads the river with a photonic instrument; arrived via the river path, not the lane.",
+        "firstSeenDay": 2,
+        "where": "millbrook",
+        "metBy": {
+          "characterId": "char-mr4ejo8c",
+          "name": "Cellaceron"
+        }
+      }
+    },
+    "tuning-warden-lower-terrace": {
+      "id": "tuning-warden-lower-terrace",
+      "name": "Maren",
+      "canonId": "tuning_warden_lower_terrace",
+      "intro": {
+        "role": "Tuning-warden, Harmonic Heights Lower Terrace — now standing witness to the secondary purification s",
+        "description": "A woman of about fifty with the Warden sash and deep acoustic calluses on both index fingers; has been standing watch over the bulletin board long enough for her tea to go cold.",
+        "firstSeenDay": 3,
+        "where": "harmonic_heights_terrace",
+        "metBy": {
+          "characterId": "char-mr4ejo8c",
+          "name": "Cellaceron"
+        }
+      }
+    },
+    "waystation-morning-runner": {
+      "id": "waystation-morning-runner",
+      "name": "Sennet",
+      "canonId": "waystation_morning_runner",
+      "intro": {
+        "role": "Waystation desk duty, Harmonic Heights Lower Terrace — morning shift",
+        "description": "A young man with ink-stained fingers and a fresh Harmonic sash; efficient and courteous, volunteers useful context to a waiting party as a matter of Counter's code.",
+        "firstSeenDay": 6,
+        "where": "harmonic_heights_terrace",
+        "metBy": {
+          "characterId": "char-mr4ejo8c",
+          "name": "Cellaceron"
+        }
+      }
+    },
+    "farren": {
+      "id": "farren",
+      "name": "Farren",
+      "canonId": "farren",
+      "intro": {
+        "role": "Retired acoustic geometry specialist, Second Terrace, Harmonic Heights",
+        "description": "A lean man past sixty in a heavy work-tunic; resonance-calluses on both forearms, hair damp from the basin — dressed for work, not company. Difficult and thorough, per Maren.",
+        "firstSeenDay": 6,
+        "where": "harmonic_heights_terrace",
+        "metBy": {
+          "characterId": "char-mr4ejo8c",
+          "name": "Cellaceron"
+        }
+      }
+    },
+    "teva-anselvar": {
+      "id": "teva-anselvar",
+      "name": "Teva Anselvar",
+      "canonId": "teva_anselvar",
+      "intro": {
+        "role": "Apprentice resonance-reader, Harmonic Heights — traveling under survey compact with Cellaceron",
+        "description": null,
+        "firstSeenDay": 9,
+        "where": "disputed_zone_fringe",
+        "metBy": {
+          "characterId": "char-mr4ejo8c",
+          "name": "Cellaceron"
+        }
+      }
+    },
+    "aevi_the_watcher": {
+      "id": "aevi_the_watcher",
+      "name": "Aevi",
+      "canonId": "aevi_the_watcher",
+      "intro": {
+        "role": "Companion intelligence—authentication key, integrated into the Waystaff",
+        "description": null,
+        "firstSeenDay": 2,
+        "where": "millbrook",
+        "metBy": {
+          "characterId": "char-mr4ejo8c",
+          "name": "Cellaceron"
+        }
+      }
     }
   },
   "fates": {
@@ -392,20 +527,17 @@
       }
     },
     "the_scouring_hand": {
-      "status": "dead",
+      "status": "active",
       "diedWorldDay": 76,
       "killedBy": "the_deep_lantern",
-      "deathState": {
-        "diedDay": 76,
-        "bodyStatus": "intact",
-        "sealed": false,
-        "depthOverride": 2,
-        "cause": "killed by The Deep Lantern, Who Walks Where Light Won't"
+      "returnedFromDeath": {
+        "day": 83,
+        "changed": "came back changed"
       },
-      "atWorldDay": 76,
+      "atWorldDay": 83,
       "fateBy": {
-        "characterId": "char-mrum8y4d",
-        "name": "Loki"
+        "characterId": "char-mr4ejo8c",
+        "name": "Cellaceron"
       }
     },
     "the_ninefold_ascendant": {
@@ -430,13 +562,16 @@
       }
     },
     "the_first_moot": {
-      "status": "wounded",
+      "status": "stopped",
       "woundedUntilDay": 86,
       "woundedBy": "the_starless",
-      "atWorldDay": 78,
+      "sinceWorldDay": 83,
+      "stoppedUntilDay": 86,
+      "stoppedBy": "the_starless",
+      "atWorldDay": 83,
       "fateBy": {
-        "characterId": "char-mrum8y4d",
-        "name": "Loki"
+        "characterId": "char-mr4ejo8c",
+        "name": "Cellaceron"
       }
     },
     "the_apostate_choir": {
@@ -502,23 +637,26 @@
       }
     },
     "the_unbodied_choir_master": {
-      "status": "wounded",
-      "woundedUntilDay": 52,
-      "woundedBy": "maren_ossitide",
-      "atWorldDay": 44,
+      "status": "stopped",
+      "stoppedUntilDay": 78,
+      "stoppedBy": "the_long_grudge",
+      "atWorldDay": 75,
       "fateBy": {
-        "characterId": "char-mrhs8286",
-        "name": "Silas Weir"
+        "characterId": "char-mr4ejo8c",
+        "name": "Cellaceron"
       }
     },
     "the_starless": {
-      "status": "wounded",
+      "status": "stopped",
       "woundedUntilDay": 43,
       "woundedBy": "the_last_walker",
-      "atWorldDay": 35,
+      "sinceWorldDay": 83,
+      "stoppedUntilDay": 86,
+      "stoppedBy": "the_first_moot",
+      "atWorldDay": 83,
       "fateBy": {
-        "characterId": "char-mrhs8286",
-        "name": "Silas Weir"
+        "characterId": "char-mr4ejo8c",
+        "name": "Cellaceron"
       }
     },
     "the_ender_who_forgot": {
@@ -602,13 +740,16 @@
       }
     },
     "the_edge_seeker": {
-      "status": "stopped",
+      "status": "wounded",
       "stoppedUntilDay": 72,
       "stoppedBy": "ember_who_banks_the_fire",
-      "atWorldDay": 69,
+      "sinceWorldDay": 83,
+      "woundedUntilDay": 91,
+      "woundedBy": "the_deep_lantern",
+      "atWorldDay": 83,
       "fateBy": {
-        "characterId": "char-mrhs8286",
-        "name": "Silas Weir"
+        "characterId": "char-mr4ejo8c",
+        "name": "Cellaceron"
       }
     },
     "the_undefeated": {
@@ -761,13 +902,13 @@
       }
     },
     "the_one_called_athena": {
-      "status": "wounded",
-      "woundedUntilDay": 47,
-      "woundedBy": "sunwrack_valen",
-      "atWorldDay": 39,
+      "status": "stopped",
+      "stoppedUntilDay": 47,
+      "stoppedBy": "the_unbending_witness",
+      "atWorldDay": 44,
       "fateBy": {
-        "characterId": "char-msgpisca",
-        "name": "Splarf"
+        "characterId": "char-mr4ejo8c",
+        "name": "Cellaceron"
       }
     },
     "the_penitent_maw": {
@@ -790,6 +931,26 @@
       "fateBy": {
         "characterId": "char-mr5ns3hh",
         "name": "Adelheid"
+      }
+    },
+    "the_last_walker": {
+      "status": "stopped",
+      "stoppedUntilDay": 42,
+      "stoppedBy": "the_weeping_archive",
+      "atWorldDay": 39,
+      "fateBy": {
+        "characterId": "char-mr4ejo8c",
+        "name": "Cellaceron"
+      }
+    },
+    "halcyon_the_finished": {
+      "status": "stopped",
+      "stoppedUntilDay": 47,
+      "stoppedBy": "the_unbodied_choir_master",
+      "atWorldDay": 44,
+      "fateBy": {
+        "characterId": "char-mr4ejo8c",
+        "name": "Cellaceron"
       }
     }
   }

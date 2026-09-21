@@ -6,7 +6,7 @@
   "origin": "harmonic",
   "background": "medic",
   "level": 2,
-  "xp": 133,
+  "xp": 138,
   "attributes": {
     "physical": 2,
     "mental": 5,
@@ -57,14 +57,14 @@
     "concrete_abstract": -0.08504765625,
     "chaos_order": 0.017348750000000003,
     "destruction_creation": 0.02425,
-    "violence_peace": 0.02425,
-    "death_life": 0.04278749999999999
+    "violence_peace": 0.0380375,
+    "death_life": 0.05564812499999999
   },
   "attunement": 2,
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 129,
-  "energy": 78,
+  "energy": 73,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -235,7 +235,8 @@
     "Adelheid wakes rested at Mara Wells' Store and eats before the dawn conversation; Mara refuses again to explain the map's full meaning or the Precursor system's destination, naming only that this question is what keeps her awake.",
     "Adelheid learned that Silas Weir's instrument was built for listening, not transmission — and that he was at the sluice-turn three weeks before the contamination deepened, likely hearing the Precursor system's signal. The scene closed with the arrival of Sister Vreni, a wayhouse sister seeking the healer who closed a traveler's wound, bearing a warm invitation.",
     "Adelheid exchanged a last word with Mara — be her road-eyes — and walked out into the moonlit night with Sister Vreni, taking the stone-cut sluice-road up from the terrace gardens.",
-    "Adelheid descended the terrace by the field-edge path, slipping past the ridge watcher's sightline and reaching the wayhouse unseen — fever-root harvest in hand, compress still warm inside."
+    "Adelheid descended the terrace by the field-edge path, slipping past the ridge watcher's sightline and reaching the wayhouse unseen — fever-root harvest in hand, compress still warm inside.",
+    "Adelheid briefed Sister Vreni on the full fever-root course at the wayhouse trestle at dawn — first dose now, second at midday, third in the evening cooler; worse-before-better expected tonight; darkening wound tracking is the sign to send for Millbrook. Vreni absorbed it precisely and repeated it back in her own order. The patient is stable. The scene ended in the quiet of the wayhouse at early dawn, the treatment handed off, and the patient's unnamed status quietly acknowledged by them both."
   ],
   "currentLocationId": "millbrook",
   "activeScene": null,
@@ -567,28 +568,30 @@
           ]
         }
       ],
-      "stageIndex": 3,
+      "stageIndex": 4,
       "completedStages": [
         "s1",
         "s2",
-        "s3"
+        "s3",
+        "s4"
       ],
       "progress": [
-        "First set of observations deferred to morning — Vreni took the dawn pulse as arranged; second set pending Adelheid's waking examination.",
-        "Full set of observations complete — pulse climbing, color slow, wound clean and not the problem. The numbers say what his manner will not.",
-        "Codex: his pulse is fast and getting faster, his skin is warm and dry and then cool and damp, and the colour is slower back into the nailbed than it was this morning. His blood pressure has not moved, and that is the frightening part: a body this good at compensating is a body spending everything it has to look ordinary.",
         "↳ Adelheid took Vreni's dawn pulse count (68), sat with the patient, examined the wound and watched his color — nailbed return slow at 3 seconds, pulse climbing to 74-75 on waking; two sets of…",
         "Adelheid identified the likely cause — a deep infection sealed beneath a healed wound surface, spreading in the blood — and named the treatment: goldenrod for now, and a high-terrace plant she cannot yet safely distinguish from its dangerous look-alike.",
         "Codex: it has to be opened again, which is the thing nobody wants to do to a man who is finally walking. And it has to be opened with something to give him at the same time, or you will take away the only thing holding him up.",
         "↳ Adelheid reasoned from pulse, nailbed color, and wound presentation to a clear diagnosis: deep infection sealed beneath healed skin, spreading in blood — the wound must be reopened and the terrace…",
         "Usnea compress applied to the sealed forearm wound — a first antibiotic measure buying time. Fever-root from the high terraces is the remaining necessity.",
         "Codex: fever-root has a squared stem and hush-leaf's is round, which is the whole of the difference and is enough. You have four days' worth and the terraces have another season in them if somebody works them. The walk down in the dusk is the first time in a week you have not been thinking about him.",
-        "↳ Adelheid reached the third terrace, correctly identified fever-root against hush-leaf by squared versus round stem, and harvested a full four-day course."
+        "↳ Adelheid reached the third terrace, correctly identified fever-root against hush-leaf by squared versus round stem, and harvested a full four-day course.",
+        "Treatment handed off to Vreni — full course briefed, timing set, danger signs named. The patient is stable. The next stage is to see the treatment through to morning: sitting with him through the night when it gets worse.",
+        "Codex: his name is not Danic. The two parties at the gate are not looking for the same man and only one of them means him harm — and you now know which, because he told you, at three in the morning, while you were holding a lamp.",
+        "↳ Adelheid laid out the full fever-root course to Vreni — dosing sequence, timing, worse-before-better warning, and the midnight decision sign — and Vreni absorbed and confirmed it precisely."
       ],
       "aliases": [],
       "startedAt": "2026-09-20T03:05:17.338Z",
       "startedWorldDay": 82,
-      "stageStartedAt": 82
+      "stageStartedAt": 85,
+      "awaitingResolution": true
     }
   ],
   "npcRegistry": {
@@ -762,7 +765,6 @@
       },
       "relationship": 3,
       "history": [
-        "[d2] Resumed walking when Adelheid rose from the runnel — mentioned the wayhouse keeps a light in the window; did not ask what was found at the stone",
         "[d2] Brought Adelheid to the wayhouse and set tea on the hearth without ceremony — the act of a practical host, not a performance of welcome",
         "[d2] Watched Adelheid read the medicine shelf without speaking — a considering silence, the look of someone who has just confirmed something she suspected",
         "[d2] Accepted Adelheid's medicines with careful hands, named the patient she is worried about — a man insisting he is fine whose pulse has already shifted overnight",
@@ -771,34 +773,36 @@
         "[d3] Watched Adelheid work through the shelf against the patient's numbers — reading gaps and possibilities with a healer's discipline",
         "[d3] Watched Adelheid go without comment — is holding the patient at the wayhouse while Adelheid gathers",
         "[d3] Had water heating before Adelheid returned — anticipated the preparation. Stood in the doorway as Adelheid packed and said 'before dark' in the same flat tone she uses for pulse-counts.",
-        "[d3] Watched Adelheid come in from the back of the wayhouse — read the approach without comment; kept the fire and the second compress ready. Nodded once at the satchel."
+        "[d3] Watched Adelheid come in from the back of the wayhouse — read the approach without comment; kept the fire and the second compress ready. Nodded once at the satchel.",
+        "[d3] Absorbed the full fever-root course precisely — repeated it back in her own order, accurate. Moved to the hearth without prompting. Made an oblique acknowledgment that the patient's stated name is not his real one."
       ],
       "knownFacts": [
-        "Some travelers carry unusual companions that it is polite not to inquire after at night on a steep road",
         "The wayhouse keeps valerian-and-hops tea on hand — a healer's house stocking what travelers need after a hard road",
         "Adelheid reads a medicine shelf the way a working healer does — gap by gap, not label by label",
         "The patient arrived two days ago with a forearm wound he attributes to a farm tool; it closed cleanly but his pulse this morning was faster than last night",
         "He is insistent that he is fine — unusually so",
         "The patient's pulse was 68 at dawn — fast for a still man in a cool room",
         "Vreni prepared the hearth water before being asked — she reads the work as well as she reads a pulse",
-        "Adelheid approached from the field-edge path, not the sluice-road — a deliberate choice she does not ask about"
+        "Adelheid approached from the field-edge path, not the sluice-road — a deliberate choice she does not ask about",
+        "Full fever-root treatment protocol: first dose now, second midday, third evening cooler; worse-before-better tonight; darkening wound tracking versus narrowing is the midnight decision point"
       ],
       "skillsObserved": [
         "honest and precise in naming what she does not know",
         "anticipatory care — prepared what was needed before it was requested",
-        "Precise observation — counted the pulse twice before reporting it"
+        "Precise observation — counted the pulse twice before reporting it",
+        "precise retention under instruction — repeated a multi-step protocol back accurately in her own sequence"
       ],
       "status": "active",
       "sex": "female",
       "gender": "woman",
       "pronouns": "she/her",
       "age": 44,
-      "statusNote": "At the wayhouse trestle, compress soaking; holding the patient steady while Adelheid returns with fever-root",
+      "statusNote": "At the wayhouse hearth, administering first fever-root dose; holding the watch through the day",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 3
       },
-      "met": 18,
+      "met": 19,
       "domains": {
         "primary": "mason"
       },
@@ -1216,7 +1220,7 @@
         "locationId": "gen-mara-wells-store"
       }
     ],
-    "turnsSinceOffer": 8,
+    "turnsSinceOffer": 9,
     "recentOffers": [
       {
         "thing": "Mara offers direct access to work as a way of centering yourself—and uses that time to shift the conversation toward the real question…",
@@ -6491,7 +6495,8 @@
           "[d3] The Patient Who Is Not Sick Enough — Usnea lichen — old-man's beard, gray-green and finely branched — grows on the second-terrace stone walls and the north-facing elder bark above the wayhouse. Gently antibiotic; a first preparation can begin drawing the deep infection while fever-root is fetched…",
           "[d3] Usnea lichen prepared as a warm compress and applied to the patient's sealed forearm wound — draws the deep infection toward the surface and provides gentle antibiotic action. Buys time; does not cure. Fever-root from the third and fourth terraces is the necessary next step.",
           "[d3] The Patient Who Is Not Sick Enough — Fever-root has a squared stem; hush-leaf's is round — that is the whole of the difference, and it is enough. A full four-day course harvested from the third terrace, which has two seasons of untouched growth in it.",
-          "[d3] The Patient Who Is Not Sick Enough — Two parties are moving on the roads below the terrace at dawn — one set of heavy, deliberate boots came up from the village and stopped at the first terrace junction before turning back; a second figure on the ridge path has been motionless longer than ordinary…"
+          "[d3] The Patient Who Is Not Sick Enough — Two parties are moving on the roads below the terrace at dawn — one set of heavy, deliberate boots came up from the village and stopped at the first terrace junction before turning back; a second figure on the ridge path has been motionless longer than ordinary…",
+          "[d3] The Patient Who Is Not Sick Enough — Vreni's oblique remark — 'whatever his name is' — confirms she already knows or strongly suspects his stated name is false. She has had two days alone with him and has not said so directly until now."
         ],
         "links": [
           "mara-wells",
@@ -6733,6 +6738,12 @@
         "to": "maras-errand",
         "why": "beat",
         "day": 3
+      },
+      {
+        "label": "The Patient Who Is Not Sick Enough",
+        "to": "maras-errand",
+        "why": "beat",
+        "day": 3
       }
     ]
   },
@@ -6815,17 +6826,17 @@
   "itemReclaimVersion": 1,
   "nameRepairVersion": 1,
   "tendencies": {
-    "generous": 5.387198515745451,
-    "social": 4.904151573753903,
-    "cerebral": 19.08758667947643,
-    "cautious": 15.611737118754075,
-    "strategic": 13.980827736649953,
-    "carousing": 0.619568159913013,
-    "risky": 0.31056048115940493,
-    "ruthless": 0.7083032577813665,
-    "patient": 1.3605223232755024,
-    "craft": 2.3665617949674496,
-    "stealth": 1
+    "generous": 6.252518552851815,
+    "social": 4.781547784410055,
+    "cerebral": 18.610397012489518,
+    "cautious": 15.221443690785222,
+    "strategic": 13.631307043233704,
+    "carousing": 0.6040789559151876,
+    "risky": 0.3027964691304198,
+    "ruthless": 0.6905956763368323,
+    "patient": 2.326509265193615,
+    "craft": 2.3073977500932634,
+    "stealth": 0.975
   },
   "aptitudes": [
     "strategist",
@@ -6833,11 +6844,11 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 84,
+  "actionCount": 85,
   "bondLogFrom": null,
   "teachers": {},
   "regionsKnown": {
-    "valley": 45
+    "valley": 46
   },
   "company": [],
   "forkChoices": {},
@@ -7021,8 +7032,8 @@
   "bands": [],
   "_silasGrantsRevoked": true,
   "reconcileVersion": 77,
-  "updatedAt": 1790017718563,
-  "rev": 102,
+  "updatedAt": 1790018114219,
+  "rev": 103,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -7035,7 +7046,7 @@
   "featureOffers": [],
   "_pinsInitialized": true,
   "_opUnknown": {
-    "sceneSummary": 45
+    "sceneSummary": 46
   },
   "_applyFailures": null,
   "sessions": [
@@ -7090,10 +7101,10 @@
     {
       "id": "sess-7",
       "startedAt": "2026-09-21T19:08:38.532Z",
-      "lastAt": "2026-09-21T19:08:38.532Z",
+      "lastAt": "2026-09-21T19:15:14.195Z",
       "startDay": 83,
       "endDay": 83,
-      "beats": 1
+      "beats": 2
     }
   ],
   "_debtReceipts": [],
@@ -7117,12 +7128,12 @@
     "endure": 1,
     "practical": 1,
     "negotiate": 4,
-    "help": 5,
+    "help": 6,
     "plan": 3,
     "rapport": 2,
     "calm": 2,
     "craft": 3,
-    "sustain": 1,
+    "sustain": 2,
     "sneak": 1
   },
   "aptitudeEarnCount": {
@@ -7132,17 +7143,17 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 40,
-    "choices": 40,
-    "questUpdates": 24,
-    "scene": 40,
-    "npcUpdates": 36,
+    "sceneSummary": 41,
+    "choices": 41,
+    "questUpdates": 25,
+    "scene": 41,
+    "npcUpdates": 37,
     "placeUpdates": 15,
-    "codexUpdates": 29,
-    "timeOps": 33,
+    "codexUpdates": 30,
+    "timeOps": 34,
     "imagePrompt": 8,
     "gambitApt": 21,
-    "sceneEnded": 29,
+    "sceneEnded": 30,
     "characterDeltas": 27,
     "offer": 14,
     "stateOps": 3,
@@ -7151,9 +7162,9 @@
     "ledgerEvents": 4,
     "moveTo": 4,
     "_engineClosedScene": 2,
-    "stageOps": 2
+    "stageOps": 3
   },
-  "_opTurns": 40,
+  "_opTurns": 41,
   "_opCountingSince": "2026-09-15T23:58:48.348Z",
   "gallery": [
     {

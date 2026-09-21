@@ -305,7 +305,7 @@
       }
     ],
     "lastTurn": {
-      "narration": "You slide from your bedroll without sound, boots finding the cold stone. Cy's lens opens—a thin vertical slice of awareness—but the companion does not move. That restraint means *watch*, not *warn*.\n\nThe stairs down are worn smooth at the center, darker than the rest. You keep to the edge where the stone is rougher, where a footfall would scatter less. The voices grow clearer as you descend, but still held low—the rhythm of people who know the house and do not wish to wake it.\n\nTwo voices, you think. A woman's—steady, measured. And someone else, younger maybe, asking a question you do not quite catch. The words resolve as you reach the landing: \"—still sleeping?\" \"Since we brought her in.\" A pause. \"The fever broke three days ago.\"\n\nThey are moving away from you now, toward the cellars where the herb stores run deep. You hear a door open—heavy wood, old hinges—and the temperature drops audibly. One of them descends further. The other waits at the threshold, a silhouette in the faint light that bleeds from the room above.\n\nYou have not been seen. The stairs are quiet. The house sleeps around you.",
+      "narration": "You slide from your bedroll without sound, boots finding the cold stone. Cy's lens opens—a thin vertical slice of awareness—but the companion does not move. That restraint means *watch*, not *warn*.\n\nThe stairs down are worn smooth at the center, darker than the rest. You keep to the edge where the stone is rougher, where a footfall would scatter less. The voices grow clearer as you descend, but still held low—the rhythm of people who know the house and do not wish to wake it.\n\nTwo voices, you think. A woman's—steady, measured. And someone else, younger maybe, asking a question you do not quite catch. The words resolve as you reach the landing: \"—still sleeping?\" \"Since we brought her in.\" A pause. \"The fever broke three days ago.\"\n\nThey are moving away from you now, toward the cellars where the herb stores run deep. You hear a door open—heavy wood, old hinges—and the temperature drops audibly. One of them descends further. The other waits at the threshold, a silhouette in the faint light that bleeds from the room above.\n\nYou have not been seen. The stairs are quiet. The house sleeps around you.\n\n*✦ The world grows — **What Descended With Them** begins to stir as a thread of its own.*",
       "sceneSummary": "Woken by late-night visitors moving through the Kindly Rest with purpose, Loki follows them down to the cellars and overhears two people discussing a patient—someone brought in recently who broke a fever three days ago.",
       "scene": {
         "setting": "The stairwell and landing of the Kindly Rest's lower level, deep night. Stone walls, the air cooling noticeably as you descend. A heavy cellar door stands open ahead, light spilling from within; one figure waits in the doorway while another descends further into the cellars below.",
@@ -9759,6 +9759,19 @@
         "createdDay": 5,
         "entityId": "the-kindly-rest",
         "updatedDay": 5
+      },
+      "what-descended-with-them": {
+        "id": "what-descended-with-them",
+        "label": "What Descended With Them",
+        "kind": "lore",
+        "facts": [
+          "[d5] Two visitors came to the Kindly Rest in the deep of an early-autumn night and went below with a purpose they did not name to the staff. The patient they discuss"
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": 5,
+        "entityId": "what-descended-with-them",
+        "updatedDay": 5
       }
     },
     "mergeUndo": [
@@ -11096,8 +11109,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789949549468,
-  "rev": 813,
+  "updatedAt": 1789949567883,
+  "rev": 814,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -12019,7 +12032,49 @@
         }
       }
     },
-    "arc": {},
+    "arc": {
+      "what-descended-with-them": {
+        "id": "what-descended-with-them",
+        "name": "What Descended With Them",
+        "scale": "local",
+        "pressure": "quiet and accumulating",
+        "tendency": "Two visitors came to the Kindly Rest in the deep of an early-autumn night and went below with a purpose they did not name to the staff. The patient they discussed broke his fever three days ago, which should be a good sign — the Rest's healers read it as one. But the fever did not break because he recovered. It broke because something in him went still and cool and is no longer spending heat on resistance. He is peaceful now in the way that worries the experienced and reassures the untrained. The woman with the steady voice knows what that stillness means. The younger one is there to learn, or to carry something back, or both. What they descended to do — whether it is a mercy, an extraction, a sealing, or a waking — has not yet changed the rooms above. It will. The Kindly Rest is a place where peace is not performed but practiced, where life is tended as a serious discipline, where the spiritual is ordinary and the orderly is kind. Whatever those two carried down with them is not against any of those things on its face. That is what makes it dangerous to miss.",
+        "crossesRegions": [
+          "The Kindly Rest"
+        ],
+        "hingeNpcs": [
+          "the_woman_with_the_steady_voice",
+          "the_younger_visitor",
+          "the_patient_who_broke_his_fever",
+          "the_night_tender_on_watch"
+        ],
+        "ifIgnored": "The patient is gone by morning, transferred or dead or simply absent in a way the paperwork will be made to cover. The woman and her companion do not return. The night tender who saw them descend remembers it as ordinary because it felt ordinary, and the Rest's deep peace makes unusual things feel less urgent in the moment than they are. Three weeks on, someone else is brought in with the same pattern — a fever that is taking too long, then breaks too cleanly, then stillness. The Rest has become a place these arrivals know about and use, and no one on staff has language for what is being done to their patients yet.",
+        "ifEngaged": "The mystery must be met below, not above. The lower rooms of the Kindly Rest are where the hardest cases are kept, where the spiritual work of tending the almost-lost is done quietly and without ceremony. What the woman was doing to the patient is a function that sits between sealing and binding — she was closing something in him before it could open, which she believes was a kindness, and she is not simply wrong. The younger visitor is the real question: they are being trained in this work, they are not certain they agree with it, and they left something behind, deliberately, where a careful person will find it. The arc's resolution lives in what the Rest decides it is and what it is willing to tend.",
+        "schemaVersion": 1,
+        "_gen": {
+          "entityId": "what-descended-with-them",
+          "type": "arc",
+          "birthWeight": 12,
+          "engagementScore": 0,
+          "tier": "fresh",
+          "rating": "R+",
+          "provenance": {
+            "playerKey": "player-s9z9u1",
+            "characterId": "char-mrum8y4d",
+            "locationId": "the_kindly_rest",
+            "day": 5,
+            "worldDay": null,
+            "hint": "Two visitors moved through the Kindly Rest in deep night with clear purpose—a woman with a steady voice and someone youn",
+            "why": "R49 — a mystery must arrive with its story, not as a hook: Late-Night Arrivals"
+          },
+          "attentionHistory": [],
+          "createdDay": 5,
+          "repaired": true,
+          "stubbed": false,
+          "romanceEligible": true
+        }
+      }
+    },
     "creature": {},
     "item": {}
   },
@@ -13885,8 +13940,8 @@
   "_bandNotes": null,
   "_opCountingSince": "2026-09-14T22:51:56.913Z",
   "_fireTests": {
-    "at": "2026-09-20T12:21:21.587Z",
-    "build": "2.3.6",
+    "at": "2026-09-21T00:12:29.640Z",
+    "build": "2.4.4",
     "results": [
       {
         "op": "jobOps",

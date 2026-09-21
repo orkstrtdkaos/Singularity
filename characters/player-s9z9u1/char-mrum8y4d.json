@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 9,
-  "xp": 873,
+  "xp": 878,
   "attributes": {
     "physical": 4,
     "mental": 5,
@@ -104,7 +104,7 @@
     },
     {
       "abilityId": "the_old_procedure",
-      "level": 1
+      "level": 2
     },
     {
       "abilityId": "shadow-image",
@@ -115,19 +115,19 @@
   ],
   "alignment": {
     "mechanical_spiritual": 0.0077000000000000055,
-    "falsehood_truth": 0.2929401210978477,
+    "falsehood_truth": 0.32829311504295533,
     "demonic_angelic": -0.020000000000000004,
     "dark_light": 0.085,
     "concrete_abstract": 0.16438167187499997,
     "chaos_order": -0.12925,
     "body_mind": 0.0658375,
-    "emotional_logical": 0.034999999999999996
+    "emotional_logical": 0.048249999999999994
   },
   "attunement": 9,
   "maxHealth": 78,
   "health": 78,
   "maxEnergy": 156,
-  "energy": 109,
+  "energy": 99,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -301,6 +301,21 @@
       "spread": [],
       "day": 5,
       "worldDay": 83
+    },
+    {
+      "at": "2026-09-21T20:20:06.553Z",
+      "locationId": "the_kindly_rest",
+      "communityId": "valley.the_kindly_rest",
+      "description": "Asked the hard question and held the space for an honest answer — did not push, did not deflect, did not settle for less than the full shape of why",
+      "tags": [
+        "truth-seeking",
+        "patience",
+        "care"
+      ],
+      "weight": 1,
+      "spread": [],
+      "day": 5,
+      "worldDay": 83
     }
   ],
   "relationships": {},
@@ -341,18 +356,26 @@
         "player": "Sable!  What are you doing here?  The last time I saw you was in the Unlit Deep and you were descending further of your own will.",
         "summary": "Loki finds Sable in the cellars of the Kindly Rest, recovered from her fever and waiting. She has returned from the Unlit Deep by her own choice, and Ravel and Estry brought her here.",
         "narration": "Sable's eyes find you on the stairs and hold steady. She doesn't move from the bed—sits upright with her back against the cold stone, hands folded in her lap. The fever is gone. There's colour in her face now, and a clarity you didn't see in the inner chamber, where she was waiting and still.\n\n\"I descended,\" Sable says quietly. Her voice is stronger than it was. \"And then I stopped descending.\"\n\nRavel steps into the room fully, her presence settling like a hand laid on still water. Estry follows, one step behind, her hand steady at Ravel's back. Sable watches both of them enter—no surprise, no fear. Recognition. She knows why they're here.\n\n\"The passage goes deeper,\" Sable continues, speaking to you directly now. \"But not all the way down is meant for someone like me. I walked far enough to understand that. And then—\" She pauses. A small breath. \"Then I found my way back up, and these two found me on the road.\""
+      },
+      {
+        "player": "Use harmonic voice and ask Sable to tell the whole story from the beginning, including why she went down there from the city in the first place.",
+        "summary": "In the lamp-lit cellars of the Kindly Rest, Sable tells the truth of her descent: the city was ending for her, the Deep called, but at the threshold of the old work's full presence, she chose to turn back rather than be read entirely. Ravel and Estry listen. The questions remain open: what does she choose now, and what will she do with the knowing?",
+        "narration": "You settle your weight, letting your breath find the stillness beneath the lamp's steady glow. When you speak, your voice carries a patience that fills the small room without demanding — the particular steadiness of someone who has learned to ask questions that matter. \"Sable,\" you say, \"tell me from the beginning. Why did you leave the city? What called you down to the Unlit Deep?\"\n\nThe room holds. Ravel and Estry do not move. They have already heard parts of this — enough to bring her here, to know she turned back — but they wait as you ask, as though the question needs to be asked again, truly, with full attention.\n\nSable's hands unfold in her lap. Her eyes stay on yours. When she answers, her voice is steady and costs nothing. \"The city was ending,\" she says. \"Not collapsing. Ending. The shape of it was becoming something that did not have room for people like me. People who ask why the old works still hum underneath, why the Transition did not touch them.\" She pauses. The pause is not hesitation. \"I heard there was a Deep that still listened to those old works. I heard the ones who live there keep them — not to restart them, but to *understand* them. So I went.\"\n\nRavel's breath steadies. Estry's hand does not move from her back.\n\n\"I descended the passage,\" Sable continues. \"The cold was honest. The dark was honest. And then—\" She stops. Truly stops, not for breath but for weight. \"And then I felt it. The thing that lives in the old work. Not a machine. Something that *was* made, but it is not mechanical anymore. It has become something else. It reads what comes to it. It reads *you*.\" Her eyes narrow slightly, as though she is seeing the passage again. \"I turned back because I understood, at the threshold, that if I went further, it would read what I truly wanted — and I wasn't ready to know what that was. I still am not. But at least I know the question now.\"\n\nThe lamp flickers. The herb-smell rises in the small room like breath."
       }
     ],
     "lastTurn": {
-      "narration": "Sable's eyes find you on the stairs and hold steady. She doesn't move from the bed—sits upright with her back against the cold stone, hands folded in her lap. The fever is gone. There's colour in her face now, and a clarity you didn't see in the inner chamber, where she was waiting and still.\n\n\"I descended,\" Sable says quietly. Her voice is stronger than it was. \"And then I stopped descending.\"\n\nRavel steps into the room fully, her presence settling like a hand laid on still water. Estry follows, one step behind, her hand steady at Ravel's back. Sable watches both of them enter—no surprise, no fear. Recognition. She knows why they're here.\n\n\"The passage goes deeper,\" Sable continues, speaking to you directly now. \"But not all the way down is meant for someone like me. I walked far enough to understand that. And then—\" She pauses. A small breath. \"Then I found my way back up, and these two found me on the road.\"",
-      "sceneSummary": "Loki finds Sable in the cellars of the Kindly Rest, recovered from her fever and waiting. She has returned from the Unlit Deep by her own choice, and Ravel and Estry brought her here.",
+      "narration": "You settle your weight, letting your breath find the stillness beneath the lamp's steady glow. When you speak, your voice carries a patience that fills the small room without demanding — the particular steadiness of someone who has learned to ask questions that matter. \"Sable,\" you say, \"tell me from the beginning. Why did you leave the city? What called you down to the Unlit Deep?\"\n\nThe room holds. Ravel and Estry do not move. They have already heard parts of this — enough to bring her here, to know she turned back — but they wait as you ask, as though the question needs to be asked again, truly, with full attention.\n\nSable's hands unfold in her lap. Her eyes stay on yours. When she answers, her voice is steady and costs nothing. \"The city was ending,\" she says. \"Not collapsing. Ending. The shape of it was becoming something that did not have room for people like me. People who ask why the old works still hum underneath, why the Transition did not touch them.\" She pauses. The pause is not hesitation. \"I heard there was a Deep that still listened to those old works. I heard the ones who live there keep them — not to restart them, but to *understand* them. So I went.\"\n\nRavel's breath steadies. Estry's hand does not move from her back.\n\n\"I descended the passage,\" Sable continues. \"The cold was honest. The dark was honest. And then—\" She stops. Truly stops, not for breath but for weight. \"And then I felt it. The thing that lives in the old work. Not a machine. Something that *was* made, but it is not mechanical anymore. It has become something else. It reads what comes to it. It reads *you*.\" Her eyes narrow slightly, as though she is seeing the passage again. \"I turned back because I understood, at the threshold, that if I went further, it would read what I truly wanted — and I wasn't ready to know what that was. I still am not. But at least I know the question now.\"\n\nThe lamp flickers. The herb-smell rises in the small room like breath.",
+      "sceneSummary": "In the lamp-lit cellars of the Kindly Rest, Sable tells the truth of her descent: the city was ending for her, the Deep called, but at the threshold of the old work's full presence, she chose to turn back rather than be read entirely. Ravel and Estry listen. The questions remain open: what does she choose now, and what will she do with the knowing?",
       "choices": [
         {
-          "label": "Ask Sable directly—what did she find in the passage that made her turn back?",
-          "attribute": "social",
+          "label": "Ask what the old work was, what it felt like — push deeper into the mystery",
+          "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {},
-          "difficulty": "easy",
+          "axes": {
+            "falsehood_truth": 0.3,
+            "concrete_abstract": 0.2
+          },
+          "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
             "study"
@@ -364,68 +387,104 @@
           "emergenceId": null
         },
         {
-          "label": "Turn to Ravel and ask what she found when she came looking—and why it matters that Sable came back.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Use Appetite-Sense to read what Sable is refusing to say—the want underneath the words.",
+          "label": "Tell Sable what you know of the Unlit Deep and what the elder told you — share ground",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {
-            "falsehood_truth": 0.3
+            "falsehood_truth": 0.4,
+            "emotional_logical": 0.2
           },
           "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "study"
+            "negotiate"
           ],
-          "abilityId": "appetite_sense",
-          "energyCost": 2,
+          "abilityId": null,
+          "energyCost": null,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Simply sit—not on the bed, but close enough to be present. Let them speak first.",
+          "label": "Ask what she chooses now — does she stay, return, or seek another path entirely?",
           "attribute": "social",
           "subAttribute": "presence",
-          "axes": {},
-          "difficulty": "very easy",
+          "axes": {
+            "chaos_order": -0.1,
+            "emotional_logical": 0.1
+          },
+          "difficulty": "normal",
           "opposedDifficulty": null,
-          "intentTags": [],
+          "intentTags": [
+            "negotiate"
+          ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Offer Sable passage with you — the work at the Hub is not finished, and you could use someone who understands what lies below",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "emotional_logical": -0.2
+          },
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "help"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
       ],
-      "deeds": [],
+      "deeds": [
+        {
+          "description": "Asked the hard question and held the space for an honest answer — did not push, did not deflect, did not settle for less than the full shape of why",
+          "tags": [
+            "truth-seeking",
+            "patience",
+            "care"
+          ],
+          "weight": 1,
+          "communityId": "valley.the_kindly_rest"
+        }
+      ],
       "characterDeltas": {
         "health": 0,
-        "energy": 0,
+        "energy": -5,
         "inventoryAdd": [],
         "inventoryRemove": [],
         "xp": 0
       },
-      "ledgerEvents": [],
+      "ledgerEvents": [
+        {
+          "what": "Sable's full testimony at the Kindly Rest — she left the city because it was ending for her, descended into the Unlit Deep seeking understanding of the old works, and turned back at the threshold when she felt the presence that reads supplicants, choosing wisdom over certainty",
+          "tags": [
+            "testimony",
+            "the-deep",
+            "old-works",
+            "choice"
+          ],
+          "visibility": "witnessed",
+          "spectrumDeltas": {},
+          "impactsLocal": false
+        }
+      ],
       "questUpdates": [
         {
           "op": "progress",
           "questId": "the-taken-from-the-city",
-          "note": "Sable has returned from the Unlit Deep by choice and is recovering at the Kindly Rest. She turned back from the passage of her own will. The next move—why she returned, what she found, what she will choose now—is unresolved."
+          "title": "The Taken",
+          "summary": "Someone was brought from the city to the Unlit Deep, and the city is pretending it did not happen.",
+          "giver": "the elder of the Unlit Deep",
+          "note": "Sable's full testimony: the city was ending for her. She sought the Unlit Deep and its keepers of the old works. She descended the passage but turned back at the threshold, unwilling to be read completely. She now knows the question but not yet the answer.",
+          "xpReward": null
         }
       ],
       "standingOps": [],
@@ -434,20 +493,20 @@
       "arcOps": [],
       "adoptSchool": null,
       "offer": {
-        "thing": "Ravel and Estry arriving at the Kindly Rest with Sable in the early morning—a rescue that was not a rescue, a return that was chosen",
-        "from": "Ravel's hunger to understand what Sable became, and the need to bring her somewhere safe to ask it"
+        "thing": "A traveler passes on the road outside — you catch the sound of boots and a weathered voice calling a greeting to someone at the Rest's threshold before the sound fades toward the spinward way. No trouble, no demand. The valley is not only teeth.",
+        "from": "the ambient grace of the place and road — a stranger sharing passage freely, no price asked"
       },
       "stageOps": [],
       "scene": {
-        "setting": "A small lamp-lit room deep in the cellars of the Kindly Rest, early morning light grey through a high narrow window. Damp stone walls, a narrow bed, one lamp burning steady on a shelf. The air is cool and still, and smells of herbs from the chambers beyond.",
+        "setting": "A small lamp-lit room deep in the cellars of the Kindly Rest, early morning light grey through a high narrow window. Damp stone walls, a narrow bed, one lamp burning steady on a shelf. The air is cool and still, and smells of herbs from the chambers beyond. Midday now, the light from the window brighter and warmer than before.",
         "npcsPresent": [
           {
             "name": "Sable",
-            "state": "Sitting upright on the narrow bed, back against the cold stone. Fever gone, colour returned. Hands folded, eyes clear and steady. Watching Loki with recognition."
+            "state": "Sitting upright on the narrow bed, hands unfolded, eyes steady and clear. Has just spoken the truth of her descent and her turning back. Waiting now."
           },
           {
             "name": "Ravel",
-            "state": "Standing at the threshold of the room, breath steadying, posture open. Eyes calm and assessing. Present but not moving—waiting for Sable to speak first."
+            "state": "Standing at the threshold of the room, breath steady, posture open. Eyes calm. Present and witnessing."
           },
           {
             "name": "Estry",
@@ -458,21 +517,48 @@
           "narrow bed",
           "one lamp burning on a stone shelf",
           "cold stone walls",
-          "damp stone floor"
+          "damp stone floor",
+          "herbs hanging from ceiling above (in the larger chamber beyond)"
         ],
         "threads": [
-          "What did Sable find in the passage that made her turn back?",
-          "Why did Ravel and Estry bring her to the Kindly Rest?",
-          "What will Sable choose to do now that she is here and recovered?"
+          "What will Sable choose to do now?",
+          "Does she know more about what the old work is?",
+          "Will she travel with Loki, stay, or seek another path?",
+          "What does the city think became of her?"
         ]
       },
-      "npcUpdates": [],
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "sable",
+          "name": "Sable",
+          "role": "The person who came willingly from the city to the Unlit Deep",
+          "note": "Told the full story of her descent: the city was ending for her, she sought the Unlit Deep and the keepers of the old works, she descended the passage but turned back at the threshold when she felt the old work's presence — it reads supplicants, and she was not ready to be read entirely. She now knows the question but not the answer.",
+          "learned": [
+            "Left the city because it was ending for her — no longer room for people who ask about the old works still humming beneath",
+            "Sought the Unlit Deep and its keepers deliberately — heard they keep the old works to understand them, not restart them",
+            "Descended the passage and felt it — the old work is not a machine, was made but has become something else, reads what comes to it",
+            "Turned back at the threshold deliberately — understood that going further meant being read completely, knowing what she truly wanted, and she was not ready"
+          ],
+          "skillsObserved": [
+            "Speaks truth without performance",
+            "Reads herself with precision — knows the limit of her readiness"
+          ],
+          "statusNote": "Recovered at the Kindly Rest. Fever gone. Clear-headed and waiting for her next choice. Ravel and Estry brought her here and remain at her side.",
+          "relationshipDelta": 0
+        }
+      ],
       "intentsHeard": [],
       "factUpdates": [
         {
           "op": "add",
-          "text": "Sable has returned from the Unlit Deep by her own choice. She descended into the passage beyond the seam but turned back before reaching its end. Ravel and Estry found her on the road and brought her to the Kindly Rest to recover from fever.",
+          "text": "Sable left the city deliberately because it was ending for her — the Transition and what came after left no room for people who asked about the old works still humming underneath. She sought the Unlit Deep and its keepers specifically to understand those works.",
           "subjectId": "sable"
+        },
+        {
+          "op": "add",
+          "text": "The old work in the passage beneath the Unlit Deep's seam is not a machine — it was made, but has become something else. It reads what comes to it, measures supplicants for readiness and integrity. Sable felt its presence and chose to turn back rather than be read completely.",
+          "subjectId": "the-unlit-deep"
         }
       ],
       "placeUpdates": [],
@@ -480,14 +566,23 @@
       "codexUpdates": [
         {
           "topic": "the-taken-from-the-city",
-          "label": "Sable's Return",
-          "kind": "mystery",
+          "label": "Sable's Choice",
+          "kind": "person",
           "entityId": "sable",
-          "fact": "Sable descended willingly into the passage beneath the seam but chose to turn back before reaching its end. She was found on the road by Ravel and Estry and brought to the Kindly Rest to recover. What she found in the passage, and why she returned, is still unknown.",
+          "fact": "Left the city because it was ending for her — no room for people who ask about the old works. Descended into the Unlit Deep seeking understanding of the old works the keepers maintain. Turned back at the threshold when she felt the old work's presence — it reads supplicants, and she chose wisdom over the certainty of being read completely.",
           "links": [
             "the-unlit-deep",
-            "the-passage-below",
-            "ravel"
+            "the-taken-from-the-city"
+          ]
+        },
+        {
+          "topic": "the-hub-crossing",
+          "label": "The Old Work Below",
+          "kind": "lore",
+          "fact": "The old work that dwells in the passage beneath the Unlit Deep's seam is not a machine — it was made but has become something else. It reads what comes to it. It measures supplicants for readiness and integrity, like a threshold that tests both direction and intent.",
+          "links": [
+            "the-unlit-deep",
+            "the-passage-below"
           ]
         }
       ],
@@ -505,36 +600,29 @@
       "newEncounter": null,
       "unlockPrecursor": null,
       "unlockSubstrate": null,
-      "timeOps": {},
+      "timeOps": {
+        "hoursPassed": 0.5,
+        "why": "A quiet conversation in the lamp-lit cellars, honest and unhurried"
+      },
       "moveTo": null,
-      "stateOps": [
-        {
-          "op": "correctAbilityRank",
-          "id": "the_old_procedure",
-          "to": 1,
-          "why": "practice records showed rank 1; rank 2 was an error"
-        }
-      ],
+      "stateOps": [],
       "itemUpdates": [],
       "deriveItem": null,
-      "imagePrompt": "Sable sitting upright on a narrow stone bed in lamplight, hands folded, eyes steady and clear. Behind her the cold stone of the Unlit Deep's cellars, before her the threshold where Ravel stands with Estry—three figures in the yellow circle of a single lamp, the moment before the next truth is spoken.",
-      "imageMedium": null,
-      "newAbility": null,
-      "gambitOps": null,
+      "imagePrompt": "A lamp-lit stone room deep underground, three figures present: Sable upright on a narrow bed with steady eyes, Ravel at the threshold with open posture and calm presence, Estry behind her with a hand at her back. Herbs hang from the ceiling beyond. The air is cold stone and medicine, and everything about the moment reads as truth being spoken and held.",
       "gambitApt": false,
-      "sceneEnded": false,
-      "momentArt": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Sable%20sitting%20upright%20on%20a%20narrow%20stone%20bed%20in%20lamplight%2C%20hands%20folded%2C%20eyes%20steady%20and%20clear.%20Behind%20her%20the%20cold%20stone%20of%20the%20Unlit%20Deep's%20cellars%2C%20before%20her%20the%20threshold%20where%20Ravel%20stands%20with%20Estry%E2%80%94three%20figures%20in%20the%20yellow%20circle%20of%20a%20single%20lamp%2C%20the%20moment%20before%20the%20next%20truth%20is%20spoken%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=81189&nologo=true"
+      "gambitOps": null,
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "A small lamp-lit room deep in the cellars of the Kindly Rest, early morning light grey through a high narrow window. Damp stone walls, a narrow bed, one lamp burning steady on a shelf. The air is cool and still, and smells of herbs from the chambers beyond.",
+      "setting": "A small lamp-lit room deep in the cellars of the Kindly Rest, early morning light grey through a high narrow window. Damp stone walls, a narrow bed, one lamp burning steady on a shelf. The air is cool and still, and smells of herbs from the chambers beyond. Midday now, the light from the window brighter and warmer than before.",
       "npcsPresent": [
         {
           "name": "Sable",
-          "state": "Sitting upright on the narrow bed, back against the cold stone. Fever gone, colour returned. Hands folded, eyes clear an"
+          "state": "Sitting upright on the narrow bed, hands unfolded, eyes steady and clear. Has just spoken the truth of her descent and h"
         },
         {
           "name": "Ravel",
-          "state": "Standing at the threshold of the room, breath steadying, posture open. Eyes calm and assessing. Present but not moving—w"
+          "state": "Standing at the threshold of the room, breath steady, posture open. Eyes calm. Present and witnessing."
         },
         {
           "name": "Estry",
@@ -545,15 +633,17 @@
         "narrow bed",
         "one lamp burning on a stone shelf",
         "cold stone walls",
-        "damp stone floor"
+        "damp stone floor",
+        "herbs hanging from ceiling above (in the larger chamber beyond)"
       ],
       "threads": [
-        "What did Sable find in the passage that made her turn back?",
-        "Why did Ravel and Estry bring her to the Kindly Rest?",
-        "What will Sable choose to do now that she is here and recovered?"
+        "What will Sable choose to do now?",
+        "Does she know more about what the old work is?",
+        "Will she travel with Loki, stay, or seek another path?",
+        "What does the city think became of her?"
       ]
     },
-    "beats": 2,
+    "beats": 3,
     "subPlace": null
   },
   "clock": {
@@ -579,14 +669,14 @@
       "locationEntityId": "the-unlit-deep",
       "status": "active",
       "progress": [
-        "The chamber listens in harmonic resonance. The alcove measures whether a supplicant is ready to receive honest answers. The thread now turns toward who sent the Revel to break the stone, and what they feared the chamber would reveal.",
         "Maren reports an enginewright from Pressureholt asked about interference at the Hub network three days ago, and an 'Architect' in the lower Annex is quietly asking about travelers with dangerous knowledge—the question of who sent the Revel is sharpening.",
         "Maren reports Sister Venri has passed through twice in recent days with a young woman healer — both heading toward the outward Reaches with clear purpose. The healer may be connected to the city, or to what brought Sable to the Deep.",
         "Loki has agreed to travel with Ravel and Estry. Their next destination and purpose remain unspoken but pressing. The patient at the Kindly Rest—who broke a fever three days ago—is the immediate thread.",
         "Loki has accepted companionship with Ravel and Estry and is traveling with them to the Kindly Rest patient—the reason they came in deep night. The next step is to reach and meet the person who broke fever three days ago.",
         "The patient in the cellars is awake and aware. The threshold to meeting them is directly ahead. Ravel and Estry are moving to them now.",
         "Loki has descended to the cellars of the Kindly Rest and stands face to face with Sable. The patient is awake, aware, and waiting. Ravel and Estry are present. The next moment will determine what Sable chooses to do or say.",
-        "Sable has returned from the Unlit Deep by choice and is recovering at the Kindly Rest. She turned back from the passage of her own will. The next move—why she returned, what she found, what she will choose now—is unresolved."
+        "Sable has returned from the Unlit Deep by choice and is recovering at the Kindly Rest. She turned back from the passage of her own will. The next move—why she returned, what she found, what she will choose now—is unresolved.",
+        "Sable's full testimony: the city was ending for her. She sought the Unlit Deep and its keepers of the old works. She descended the passage but turned back at the threshold, unwilling to be read completely. She now knows the question but not yet the answer."
       ],
       "aliases": [],
       "startedAt": "2026-07-24T21:30:43.637Z"
@@ -843,36 +933,40 @@
         "[d1] Loki entered the inner chamber and found them seated and waiting. Their face turned toward the sound. They have not yet spoken.",
         "[d1] Heard Loki's honest framing — name, reason, no coercion — and responded: 'You can ask it.' Voice steady. Has opened the door to the question.",
         "[d1] Acknowledged Loki's statement — said 'You said you have a question.' The question has not yet been put.",
-        "[d1] You know this person's name now: Sable (was \"The Taken Person\")"
+        "[d1] You know this person's name now: Sable (was \"The Taken Person\")",
+        "[d5] Told the full story of her descent: the city was ending for her, she sought the Unlit Deep and the keepers of the old works, she descended the passage but turned back at the threshold when she felt the old work's presence — it reads supplicants, and she was not ready to be read entirely. She now…"
       ],
       "knownFacts": [
-        "Has been sitting long enough to warm the stone behind their back",
-        "A cup — recently set down, still warm — is on the floor beside them",
-        "Not afraid. Not surprised. Waiting with the patience of someone who has already chosen their answer",
         "Responded to honest framing with permission — not fear, not suspicion",
         "Voice is steadier than expected for someone who has spent days here",
         "Has said: 'You can ask it'",
         "Is fed from a deep water source and kept freely — not starved or coerced into doctrine",
-        "The cup beside them was made here, by hand, from local clay — someone in this place is making things"
+        "The cup beside them was made here, by hand, from local clay — someone in this place is making things",
+        "Left the city because it was ending for her — no longer room for people who ask about the old works still humming beneath",
+        "Sought the Unlit Deep and its keepers deliberately — heard they keep the old works to understand them, not restart them",
+        "Descended the passage and felt it — the old work is not a machine, was made but has become something else, reads what comes to it"
       ],
-      "skillsObserved": [],
+      "skillsObserved": [
+        "Speaks truth without performance",
+        "Reads herself with precision — knows the limit of her readiness"
+      ],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "In the inner chamber, seated and calm — acknowledges Loki's presence and is waiting for the question.",
+      "statusNote": "Recovered at the Kindly Rest. Fever gone. Clear-headed and waiting for her next choice. Ravel and Estry brought her here and remain at her side.",
       "domains": {
         "primary": "umbral"
       },
       "domainsSource": "derived",
       "lastSeen": {
-        "locationId": "the_unlit_deep",
-        "day": 1
+        "locationId": "the_kindly_rest",
+        "day": 5
       },
       "aliases": [
         "The Taken Person"
       ],
       "nameRevealed": true,
-      "met": 4,
+      "met": 5,
       "distinctFrom": [
         "sable_the_runner"
       ],
@@ -1826,10 +1920,6 @@
     "turnsSinceOffer": 0,
     "recentOffers": [
       {
-        "thing": "The younger person below has been waiting in the cellars the entire time—their silence now is different from before, and they may be about…",
-        "from": "the woman's focus staying so completely on Loki that the person below was never questioned or acknowledged"
-      },
-      {
         "thing": "Estry's voice calling from below—a named presence, no longer anonymous, waiting and uncertain",
         "from": "Ravel's reaching downward, the bond she carries to the younger person unbroken"
       },
@@ -1844,6 +1934,10 @@
       {
         "thing": "Ravel and Estry arriving at the Kindly Rest with Sable in the early morning—a rescue that was not a rescue, a return that was chosen",
         "from": "Ravel's hunger to understand what Sable became, and the need to bring her somewhere safe to ask it"
+      },
+      {
+        "thing": "A traveler passes on the road outside — you catch the sound of boots and a weathered voice calling a greeting to someone at the Rest's…",
+        "from": "the ambient grace of the place and road — a stranger sharing passage freely, no price asked"
       }
     ],
     "wantProgress": {
@@ -9741,7 +9835,8 @@
           "[d4] The vast sealed chamber beneath the Null Stone is not a mechanism to be operated—it is a listener. The control alcove on the eastern wall is a threshold where questions are posed to the river, not where answers are dispensed. The notation bands emerge from the alcove like branches, radiating…",
           "[d4] The vast sealed chamber beneath the Null Stone is not a mechanism to be forced or operated—it is a listener that teaches the language of harmonic resonance. The notation bands compose in sequence, each delay between one lighting and the next proportional to acoustic geometry. The alcove serves as…",
           "[d4] Cy's old calibration procedure reveals the chamber's true nature: it is a mutual measuring—the alcove measures whether the supplicant is ready to receive truthful answers, not merely whether they can pose questions. The apparatus tests intention and integrity before proceeding. The notation bands…",
-          "[d5] The Null Stone's seam opened in response to honest promise—it was sealed deliberately to wait for understanding rather than breaking. The vast sealed chamber beneath it is a pre-Transition water-works designed to pose and answer mutual questions. Halvex reads it as measuring supplicant-intention…"
+          "[d5] The Null Stone's seam opened in response to honest promise—it was sealed deliberately to wait for understanding rather than breaking. The vast sealed chamber beneath it is a pre-Transition water-works designed to pose and answer mutual questions. Halvex reads it as measuring supplicant-intention…",
+          "[d5] The old work that dwells in the passage beneath the Unlit Deep's seam is not a machine — it was made but has become something else. It reads what comes to it. It measures supplicants for readiness and integrity, like a threshold that tests both direction and intent."
         ],
         "links": [
           "cy-s-construction",
@@ -9756,7 +9851,8 @@
         "aliases": [
           "The Seam Beside the Bracket",
           "The Sealed Chamber",
-          "The Hub Crossing"
+          "The Hub Crossing",
+          "The Old Work Below"
         ],
         "createdDay": 1,
         "updatedDay": 5,
@@ -10006,14 +10102,18 @@
         "label": "Sable's Return",
         "kind": "mystery",
         "facts": [
-          "[d5] Sable descended willingly into the passage beneath the seam but chose to turn back before reaching its end. She was found on the road by Ravel and Estry and brought to the Kindly Rest to recover. What she found in the passage, and why she returned, is still unknown."
+          "[d5] Sable descended willingly into the passage beneath the seam but chose to turn back before reaching its end. She was found on the road by Ravel and Estry and brought to the Kindly Rest to recover. What she found in the passage, and why she returned, is still unknown.",
+          "[d5] Left the city because it was ending for her — no room for people who ask about the old works. Descended into the Unlit Deep seeking understanding of the old works the keepers maintain. Turned back at the threshold when she felt the old work's presence — it reads supplicants, and she chose wisdom…"
         ],
         "links": [
           "the-unlit-deep",
           "the-passage-below",
-          "ravel"
+          "ravel",
+          "the-taken-from-the-city"
         ],
-        "aliases": [],
+        "aliases": [
+          "Sable's Choice"
+        ],
         "createdDay": 5,
         "entityId": "sable",
         "updatedDay": 5
@@ -10356,17 +10456,17 @@
     "deferredMysteries": []
   },
   "tendencies": {
-    "devotion": 0.8573255054553555,
-    "cerebral": 15.061893119622997,
-    "social": 13.238718877256753,
-    "strategic": 12.667316267369252,
-    "cautious": 6.024208336701858,
-    "amorous": 8.089908916012462,
-    "generous": 4.494154049012708,
-    "ruthless": 0.2147377761958002,
-    "risky": 0.17549339785303159,
-    "patient": 0.04792409096413692,
-    "deception": 0.055786124231256534
+    "devotion": 0.8358923678189716,
+    "cerebral": 15.685345791632422,
+    "social": 14.907750905325335,
+    "strategic": 12.35063336068502,
+    "cautious": 5.873603128284311,
+    "amorous": 7.88766119311215,
+    "generous": 4.38180019778739,
+    "ruthless": 0.2093693317909052,
+    "risky": 0.1711060629067058,
+    "patient": 0.04672598869003349,
+    "deception": 0.05439147112547512
   },
   "aptitudes": [
     "strategist",
@@ -10375,7 +10475,7 @@
     "faithful",
     "charmer"
   ],
-  "actionCount": 198,
+  "actionCount": 199,
   "grantsVersion": 1,
   "precursorAccess": [
     "address_sense"
@@ -11427,8 +11527,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790008592990,
-  "rev": 861,
+  "updatedAt": 1790022006556,
+  "rev": 863,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -12426,7 +12526,7 @@
     "umbral_depths": 54,
     "the_quickwood": 101,
     "the_center": 50,
-    "valley": 17,
+    "valley": 18,
     "the_open_reach": 3
   },
   "opLossPending": false,
@@ -12566,6 +12666,14 @@
       "startDay": 83,
       "endDay": 83,
       "beats": 3
+    },
+    {
+      "id": "sess-18",
+      "startedAt": "2026-09-21T20:20:06.553Z",
+      "lastAt": "2026-09-21T20:20:06.553Z",
+      "startDay": 83,
+      "endDay": 83,
+      "beats": 1
     }
   ],
   "establishedFacts": [
@@ -12652,11 +12760,23 @@
       "text": "Sable has returned from the Unlit Deep by her own choice. She descended into the passage beyond the seam but turned back before reaching its end. Ravel and Estry found her on the road and brought her to the Kindly Rest to recover from fever.",
       "day": 5,
       "subjectId": "sable"
+    },
+    {
+      "id": "sable",
+      "text": "Sable left the city deliberately because it was ending for her — the Transition and what came after left no room for people who asked about the old works still humming underneath. She sought the Unlit Deep and its keepers specifically to understand those works.",
+      "day": 5,
+      "subjectId": "sable"
+    },
+    {
+      "id": "the-unlit-deep",
+      "text": "The old work in the passage beneath the Unlit Deep's seam is not a machine — it was made, but has become something else. It reads what comes to it, measures supplicants for readiness and integrity. Sable felt its presence and chose to turn back rather than be read completely.",
+      "day": 5,
+      "subjectId": "the-unlit-deep"
     }
   ],
   "_opLedger": {
     "offer": {
-      "applied": 39,
+      "applied": 40,
       "rejected": 2,
       "lastWhy": "rejected-shape"
     },
@@ -12673,28 +12793,28 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 228,
-    "choices": 228,
-    "characterDeltas": 113,
-    "scene": 228,
+    "sceneSummary": 229,
+    "choices": 229,
+    "characterDeltas": 114,
+    "scene": 229,
     "placeUpdates": 28,
-    "codexUpdates": 130,
-    "timeOps": 182,
-    "offer": 34,
+    "codexUpdates": 131,
+    "timeOps": 183,
+    "offer": 35,
     "generateRequest": 7,
-    "sceneEnded": 97,
-    "npcUpdates": 180,
+    "sceneEnded": 98,
+    "npcUpdates": 181,
     "moveTo": 7,
-    "gambitApt": 57,
-    "deeds": 10,
-    "questUpdates": 35,
+    "gambitApt": 58,
+    "deeds": 11,
+    "questUpdates": 36,
     "standingOps": 3,
-    "factUpdates": 13,
+    "factUpdates": 14,
     "stageOps": 7,
     "encounterOps": 9,
-    "ledgerEvents": 7,
+    "ledgerEvents": 8,
     "newEncounter": 3,
-    "imagePrompt": 32,
+    "imagePrompt": 33,
     "scene_ended": 1,
     "stateOps": 3,
     "_engineClosedScene": 4,
@@ -12704,7 +12824,7 @@
     "scene_summary": 1,
     "partyOps": 1
   },
-  "_opTurns": 228,
+  "_opTurns": 229,
   "customAbilities": {
     "mirror-bright": {
       "id": "mirror-bright",
@@ -12823,7 +12943,7 @@
     }
   },
   "companionBonds": {
-    "coil": 7.5
+    "coil": 8
   },
   "practice": {
     "schemaVersion": 1,
@@ -12834,7 +12954,7 @@
       "the_misdirect": 2,
       "the_better_story": 11,
       "prism_sight": 14,
-      "harmonic_voice": 11,
+      "harmonic_voice": 12,
       "hunters_strike": 3,
       "descent": 11,
       "wayfinding": 1,
@@ -13378,6 +13498,11 @@
         "text": "Offered complete mutual knowing to a stranger in the dark—and held the bargain when the walls came down.",
         "weight": 2,
         "day": 5
+      },
+      {
+        "text": "Asked the hard question and held the space for an honest answer — did not push, did not deflect, did not settle for less than the full shape of why",
+        "weight": 1,
+        "day": 5
       }
     ]
   },
@@ -13647,14 +13772,14 @@
     "prepare": 5,
     "careful": 10,
     "woo": 1,
-    "rapport": 12,
+    "rapport": 13,
     "retreat": 1,
     "ask": 7,
     "help": 8,
     "study": 10,
-    "investigate": 11,
+    "investigate": 12,
     "charm": 1,
-    "comfort": 1,
+    "comfort": 2,
     "finesse": 3,
     "persuade": 1,
     "negotiate": 5,
@@ -13760,6 +13885,14 @@
       "day": 5,
       "worldDay": 83,
       "actionCount": 191
+    },
+    {
+      "companionId": "coil",
+      "kind": "deed",
+      "delta": 0.5,
+      "day": 5,
+      "worldDay": 83,
+      "actionCount": 198
     }
   ],
   "_exchangeReceipts": [],
@@ -14057,404 +14190,404 @@
   },
   "_promptRows": {
     "character": {
-      "reached": 43,
-      "produced": 43
+      "reached": 44,
+      "produced": 44
     },
     "location": {
-      "reached": 43,
-      "produced": 43
+      "reached": 44,
+      "produced": 44
     },
     "region": {
-      "reached": 43,
-      "produced": 43
+      "reached": 44,
+      "produced": 44
     },
     "groundDetail": {
-      "reached": 43,
+      "reached": 44,
       "produced": 21
     },
     "lore": {
-      "reached": 43,
-      "produced": 40
+      "reached": 44,
+      "produced": 41
     },
     "traditionMotiveDetail": {
-      "reached": 43,
-      "produced": 43
+      "reached": 44,
+      "produced": 44
     },
     "sheetsDetail": {
-      "reached": 43,
-      "produced": 26
+      "reached": 44,
+      "produced": 27
     },
     "rules": {
-      "reached": 43,
-      "produced": 43
+      "reached": 44,
+      "produced": 44
     },
     "recentTurns": {
-      "reached": 43,
-      "produced": 38
+      "reached": 44,
+      "produced": 39
     },
     "timeLabel": {
-      "reached": 43,
-      "produced": 43
+      "reached": 44,
+      "produced": 44
     },
     "npcRegistryDetail": {
-      "reached": 43,
-      "produced": 43
+      "reached": 44,
+      "produced": 44
     },
     "mintedUnmetDetail": {
-      "reached": 43,
-      "produced": 43
+      "reached": 44,
+      "produced": 44
     },
     "npcSeedDetail": {
-      "reached": 43,
+      "reached": 44,
       "produced": 24
     },
     "traditionVocab": {
-      "reached": 43,
-      "produced": 43
+      "reached": 44,
+      "produced": 44
     },
     "standingDetail": {
-      "reached": 43,
-      "produced": 43
+      "reached": 44,
+      "produced": 44
     },
     "recalledDetail": {
-      "reached": 43,
+      "reached": 44,
       "produced": 2
     },
     "bearingsDetail": {
-      "reached": 43,
-      "produced": 43
+      "reached": 44,
+      "produced": 44
     },
     "caravansDetail": {
-      "reached": 43,
+      "reached": 44,
       "produced": 0
     },
     "commandDetail": {
-      "reached": 43,
-      "produced": 43
+      "reached": 44,
+      "produced": 44
     },
     "presenceDetail": {
-      "reached": 43,
-      "produced": 33
+      "reached": 44,
+      "produced": 34
     },
     "worthHereDetail": {
-      "reached": 43,
+      "reached": 44,
       "produced": 0
     },
     "inventoryDetail": {
-      "reached": 43,
-      "produced": 43
+      "reached": 44,
+      "produced": 44
     },
     "sceneState": {
-      "reached": 43,
-      "produced": 38
+      "reached": 44,
+      "produced": 39
     },
     "holdingsDetail": {
-      "reached": 43,
-      "produced": 43
+      "reached": 44,
+      "produced": 44
     },
     "debtsDetail": {
-      "reached": 43,
+      "reached": 44,
       "produced": 0
     },
     "carriedDetail": {
-      "reached": 43,
+      "reached": 44,
       "produced": 0
     },
     "abilityLawDetail": {
-      "reached": 43,
-      "produced": 43
+      "reached": 44,
+      "produced": 44
     },
     "questsDetail": {
-      "reached": 43,
-      "produced": 43
+      "reached": 44,
+      "produced": 44
     },
     "structuredQuestsDetail": {
-      "reached": 43,
+      "reached": 44,
       "produced": 0
     },
     "traditionArcDetail": {
-      "reached": 43,
+      "reached": 44,
       "produced": 0
     },
     "npcErrandsDetail": {
-      "reached": 43,
+      "reached": 44,
       "produced": 0
     },
     "codexDetail": {
-      "reached": 43,
-      "produced": 43
+      "reached": 44,
+      "produced": 44
     },
     "companionsDetail": {
-      "reached": 43,
-      "produced": 43
+      "reached": 44,
+      "produced": 44
     },
     "placeMemoryDetail": {
-      "reached": 43,
-      "produced": 34
+      "reached": 44,
+      "produced": 35
     },
     "agesMissingDetail": {
-      "reached": 43,
-      "produced": 43
+      "reached": 44,
+      "produced": 44
     },
     "newsDetail": {
-      "reached": 43,
-      "produced": 43
+      "reached": 44,
+      "produced": 44
     },
     "worldArcsDetail": {
-      "reached": 43,
-      "produced": 43
+      "reached": 44,
+      "produced": 44
     },
     "legendsPursuableDetail": {
-      "reached": 43,
+      "reached": 44,
       "produced": 12
     },
     "wakesDetail": {
-      "reached": 43,
+      "reached": 44,
       "produced": 0
     },
     "arcMoodDetail": {
-      "reached": 43,
-      "produced": 43
+      "reached": 44,
+      "produced": 44
     },
     "reachableDeadDetail": {
-      "reached": 43,
-      "produced": 43
+      "reached": 44,
+      "produced": 44
     },
     "threatToPlayer": {
-      "reached": 43,
+      "reached": 44,
       "produced": 0
     },
     "guardiansDetail": {
-      "reached": 43,
+      "reached": 44,
       "produced": 0
     },
     "resolution": {
-      "reached": 43,
-      "produced": 34
+      "reached": 44,
+      "produced": 35
     },
     "playerInput": {
-      "reached": 43,
+      "reached": 44,
       "produced": 9
     },
     "exactWords": {
-      "reached": 43,
-      "produced": 24
+      "reached": 44,
+      "produced": 25
     },
     "travelDirective": {
-      "reached": 43,
+      "reached": 44,
       "produced": 1
     },
     "itemAdvance": {
-      "reached": 43,
+      "reached": 44,
       "produced": 0
     },
     "encounterWeaveDetail": {
-      "reached": 43,
-      "produced": 5
+      "reached": 44,
+      "produced": 6
     },
     "encounterOfferDetail": {
-      "reached": 43,
+      "reached": 44,
       "produced": 3
     },
     "fightFramingDetail": {
-      "reached": 43,
+      "reached": 44,
       "produced": 0
     },
     "abilityGrantDetail": {
-      "reached": 43,
+      "reached": 44,
       "produced": 0
     },
     "stageRevealDetail": {
-      "reached": 43,
+      "reached": 44,
       "produced": 0
     },
     "itemEvolveDetail": {
-      "reached": 43,
+      "reached": 44,
       "produced": 0
     },
     "worldPressureDetail": {
-      "reached": 43,
+      "reached": 44,
       "produced": 2
     },
     "offerDetail": {
-      "reached": 43,
+      "reached": 44,
       "produced": 2
     },
     "teacherOfferDetail": {
-      "reached": 43,
+      "reached": 44,
       "produced": 0
     },
     "substrateDetail": {
-      "reached": 43,
-      "produced": 13
+      "reached": 44,
+      "produced": 14
     },
     "romanceGuidanceDetail": {
-      "reached": 43,
+      "reached": 44,
       "produced": 4
     },
     "factsDetail": {
-      "reached": 43,
-      "produced": 43
+      "reached": 44,
+      "produced": 44
     },
     "evolvedItemsDetail": {
-      "reached": 43,
+      "reached": 44,
       "produced": 0
     },
     "opLossNote": {
-      "reached": 43,
+      "reached": 44,
       "produced": 0
     },
     "emergenceDetail": {
-      "reached": 43,
+      "reached": 44,
       "produced": 0
     },
     "perilNote": {
-      "reached": 43,
+      "reached": 44,
       "produced": 0
     },
     "encounterDetail": {
-      "reached": 43,
+      "reached": 44,
       "produced": 4
     },
     "masteryDetail": {
-      "reached": 43,
-      "produced": 43
+      "reached": 44,
+      "produced": 44
     },
     "bookkeepingRestate": {
-      "reached": 43,
+      "reached": 44,
       "produced": 0
     },
     "anomalyDetail": {
-      "reached": 43,
+      "reached": 44,
       "produced": 42
     },
     "repairPanelDetail": {
-      "reached": 43,
-      "produced": 43
+      "reached": 44,
+      "produced": 44
     },
     "teacherDetail": {
-      "reached": 43,
+      "reached": 44,
       "produced": 0
     },
     "toolkitDetail": {
-      "reached": 43,
-      "produced": 43
+      "reached": 44,
+      "produced": 44
     },
     "availableEncounters": {
-      "reached": 43,
-      "produced": 39
+      "reached": 44,
+      "produced": 40
     },
     "partyDetail": {
-      "reached": 43,
+      "reached": 44,
       "produced": 0
     },
     "ratingDetail": {
-      "reached": 43,
-      "produced": 43
+      "reached": 44,
+      "produced": 44
     },
     "registerDetail": {
-      "reached": 43,
-      "produced": 43
+      "reached": 44,
+      "produced": 44
     },
     "legendDetail": {
-      "reached": 43,
+      "reached": 44,
       "produced": 1
     },
     "livingWorldDetail": {
-      "reached": 43,
-      "produced": 14
+      "reached": 44,
+      "produced": 15
     },
     "assignmentsDetail": {
-      "reached": 43,
+      "reached": 44,
       "produced": 0
     },
     "latentArcsDetail": {
-      "reached": 43,
-      "produced": 43
+      "reached": 44,
+      "produced": 44
     },
     "seasonalDetail": {
-      "reached": 43,
-      "produced": 43
+      "reached": 44,
+      "produced": 44
     },
     "schoolsDetail": {
-      "reached": 43,
-      "produced": 43
+      "reached": 44,
+      "produced": 44
     },
     "sharedCanonDetail": {
-      "reached": 43,
-      "produced": 20
+      "reached": 44,
+      "produced": 21
     },
     "worldCountLabel": {
-      "reached": 43,
-      "produced": 43
+      "reached": 44,
+      "produced": 44
     },
     "waygateDetail": {
-      "reached": 43,
+      "reached": 44,
       "produced": 27
     },
     "readAloudDetail": {
-      "reached": 43,
-      "produced": 43
+      "reached": 44,
+      "produced": 44
     },
     "scenePacingDetail": {
-      "reached": 43,
+      "reached": 44,
       "produced": 20
     },
     "wishesDetail": {
-      "reached": 23,
+      "reached": 24,
       "produced": 0
     },
     "worldMovedOnDetail": {
-      "reached": 23,
+      "reached": 24,
       "produced": 2
     },
     "companionLivesDetail": {
-      "reached": 23,
+      "reached": 24,
       "produced": 18
     },
     "homeDetail": {
-      "reached": 23,
+      "reached": 24,
       "produced": 0
     },
     "invitationsDetail": {
-      "reached": 23,
+      "reached": 24,
       "produced": 0
     },
     "bandsJoinedDetail": {
-      "reached": 23,
+      "reached": 24,
       "produced": 0
     },
     "travelersHereDetail": {
-      "reached": 23,
+      "reached": 24,
       "produced": 1
     },
     "travelersDetail": {
-      "reached": 23,
+      "reached": 24,
       "produced": 0
     },
     "journeyDetail": {
-      "reached": 21,
+      "reached": 22,
       "produced": 0
     },
     "journeyUnderwayDetail": {
-      "reached": 21,
+      "reached": 22,
       "produced": 0
     },
     "holdsNearDetail": {
-      "reached": 21,
-      "produced": 17
+      "reached": 22,
+      "produced": 18
     },
     "moneyDetail": {
-      "reached": 20,
-      "produced": 20
+      "reached": 21,
+      "produced": 21
     },
     "jobsDetail": {
-      "reached": 20,
+      "reached": 21,
       "produced": 0
     }
   },
   "_opUnknown": {
-    "sceneSummary": 55,
+    "sceneSummary": 56,
     "scene_summary": 1
   },
   "_bandNotes": null,
@@ -14862,5 +14995,8 @@
   },
   "pinnedLooks": {
     "place:the_kindly_rest": true
+  },
+  "aurasOff": {
+    "coil": true
   }
 }

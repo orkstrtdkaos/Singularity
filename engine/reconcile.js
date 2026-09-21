@@ -17,7 +17,8 @@ import { addHolding, addFeature, setGarrison } from "./holdings.js";
 import { carriageOf } from "./carriage.js";   // ⛔ step 61: a carriage the one reader that matters declines is no carriage at all        // R49: the forge the fiction built; step 44: the features and the gate
 import { canRaiseBand, raiseBand } from "./melee.js";   // R49: the fellowship the fiction already named
 import { worldPosForGenerated } from "./worldmap.js";
-import { personName, looksLikeRole } from "./names.js";   // ⛔ step 73: everyone already met has the name the world knows them by
+import { personName, looksLikeRole } from "./names.js";
+import { sexFromGender, sexUnsaid, normalizeSex } from "./npcs.js";   // ⛔ step 75: Erik's ruling — the sex matches the gender, and gender leads   // ⛔ step 73: everyone already met has the name the world knows them by
 import { grantMartialKit, retiredBaselineIds } from "./martial.js";
 import { applyLadderGrants } from "./ladder.js";
 import { servicedURL } from "./art.js";   // ⛔ step 72: the pictures now ask our own service
@@ -2470,6 +2471,32 @@ export const CHARACTER_STEPS = [
       if (!g || g.kind !== "departure") return {};
       c._pendingIntent = null;
       console.log(`[reconcile] ccode-464: a held departure to ${g.journeyDestId || "somewhere"} cleared — nothing had committed`);
+      return {};
+    }
+  },
+  {
+    version: 75, id: "the-sex-matches-the-gender", playerFacing: false,
+    // ⛔ ERIK'S RULING (2026-09-21): "the sex matches gender. only in the case of an entity without a sex
+    // might you also not have a gender." Asked which leads, he ruled GENDER LEADS — so a gender already on
+    // the record settles the sex, and the ~73 people carrying a gender and no sex stop being un-romanceable
+    // by omission.
+    // ⚠️ IT NEVER INVENTS ONE. `nonbinary` settles no sex, and neither does "unknown": those stay unset and
+    // stay on the repair list, because a person whose record does not say is a question, not a default.
+    // ⛑ AND IT CORRECTS A DISAGREEMENT IN THE RULED DIRECTION: Veln Ashpause carries `sex: "male"` beside
+    // `gender: "woman"`, and §244 exists because Erik wanted her recorded as a woman. Gender-leads keeps her a
+    // woman and fixes the sex; sex-leads would have undone the very correction that section was built for.
+    apply: (c) => {
+      const reg = c?.npcRegistry;
+      if (!reg || typeof reg !== "object") return {};
+      let filled = 0, corrected = 0;
+      for (const n of Object.values(reg)) {
+        if (!n || typeof n !== "object") continue;
+        const want = sexFromGender(n.gender);
+        if (!want) continue;                       // the gender settles nothing — leave it to be asked
+        if (sexUnsaid(n)) { n.sex = want; filled++; continue; }
+        if (normalizeSex(n.sex) !== want) { n.sex = want; corrected++; }
+      }
+      if (filled || corrected) console.log(`[reconcile] ccode-468: ${filled} sex(es) settled from a recorded gender, ${corrected} corrected to agree with it`);
       return {};
     }
   },

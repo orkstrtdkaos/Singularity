@@ -91,7 +91,7 @@ import { planJob, suggestTeam, jobPoolOf, jobRouteOf, jobCost, jobWages, jobEffe
 import { ensureJobs, postJob, sendOnJob, awayOnJob, untoldJobs, markJobsTold, dropJob, detachedFrom } from "./engine/jobstate.js";   // CCODE-420 · CCODE-431
 import { sendCaravan, caravansOf } from "./engine/caravan.js";   // R49: a caravan is a delegate + a route + a load   // SNG-331 §1 / SNG-386 §4.4: two named options over roads + gates // SNG-148: waygates — map control routes named/hub; GM offer via the registry row. SNG-243 §4: the gate network
 import { skillDetail, npcDetail, itemDetail, relationshipsParagraph, craftRollsLine, craftRollsShort } from "./engine/entityDetail.js";
-import { collapseScenePresence, canonicalPersonId, personArtSeed, applyNpcUpdates, findExistingNpc, genderUnsaid, sexUnsaid, SEX_VALUES, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier, backfillNpcGender, reconcileGeneratedNpcWithMeet, npcFearsForGM, npcReactionsForGM, repairUnnamedPeople } from "./engine/npcs.js";   // SNG-431 §1: the pre-namer saves get their names
+import { collapseScenePresence, canonicalPersonId, personArtSeed, applyNpcUpdates, findExistingNpc, genderUnsaid, sexUnsaid, SEX_VALUES, sexFromGender, sexGenderAgree, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier, backfillNpcGender, reconcileGeneratedNpcWithMeet, npcFearsForGM, npcReactionsForGM, repairUnnamedPeople } from "./engine/npcs.js";   // SNG-431 §1: the pre-namer saves get their names
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM, findSubPlaceParent, lastEnteredSubPlace } from "./engine/places.js";
 import { activeArcEffects, craftCostNote, encounterBias, effectsInPlainWords, npcMoodLines, travelCostFactor } from "./engine/arceffects.js";   // SNG-273: an advanced arc is something you FEEL
 import { knownIndex, whoIs, figureArtRecord } from "./engine/whois.js";   // SNG-299: who is that, and where do I read more
@@ -178,7 +178,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.4.6";
+const APP_VERSION = "2.4.7";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -15168,7 +15168,10 @@ function renderRepairScreen(note = "") {
       const v = (inp.value || "").trim(); if (!v) continue;
       const s = v.toLowerCase();
       const pr = /\b(woman|female|she|girl|lady)\b/.test(s) ? "she/her" : /\b(man|male|he|boy|guy)\b/.test(s) ? "he/him" : /\b(nonbinary|non-binary|enby|they|nb)\b/.test(s) ? "they/them" : undefined;
-      ops.push({ op: "correctNpcGender", id: inp.dataset.npcgender, gender: v, pronouns: pr, why });
+      // ⛔ CCODE-468 (Erik's ruling): naming a gender names the sex, because the two agree and gender leads.
+      // ⚠️ A gender that settles no sex — nonbinary — sends none, leaving it open to be answered.
+      const sx = sexFromGender(v);
+      ops.push({ op: "correctNpcGender", id: inp.dataset.npcgender, gender: v, pronouns: pr, ...(sx ? { sex: sx } : {}), why });
     }
     // ⛔ CCODE-467: the sex control is its own pass — a person may need their sex said while their gender is
     // left exactly as it is, and an empty selection means "leave as is", never "clear it".

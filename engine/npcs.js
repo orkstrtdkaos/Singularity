@@ -366,7 +366,12 @@ export function applyNpcUpdates(character, updates = [], ctx = {}) {
         // `sex: "unknown"` reached a live record: the model generalised rule 14B's gender escape hatch onto a
         // field with no such value, and only one of the two doors said no. ⚠️ Anything outside the vocabulary
         // is DROPPED, so the field reads absent rather than falsely truthy (SNG-594's lesson, on a new field).
-        sex: normalizeSex(u.sex),
+        // ⛔ CCODE-468 — AND THE GENDER SETTLES IT WHEN THE SEX IS NOT GIVEN, or disagrees with it. Erik's
+        // ruling: the two match, and gender leads. ⚠️ So a GM that writes a woman and forgets the sex still
+        // produces a record that agrees with itself, which is most of how the 13% became 13%.
+        sex: normalizeSex(u.sex) && sexFromGender(u.gender) && normalizeSex(u.sex) !== sexFromGender(u.gender)
+          ? sexFromGender(u.gender)
+          : (normalizeSex(u.sex) || sexFromGender(u.gender)),
         // ⚠️ AND GENDER IS LOWER-CASED, because it is presentation and it will be grouped one day: the live
         // saves carry `Man` 2 against `man` 34 and `Woman` 1 against `woman` 40 (Aevi). Harmless until the
         // first `groupBy`, and free to fix now.
@@ -433,6 +438,12 @@ export function applyNpcUpdates(character, updates = [], ctx = {}) {
     // and nothing has ever asked since. Absence is a hard exclusion by design, so those 48 are romance-locked by a field
     // nobody collects. ⚠️ Filling a blank is not a change: it answers the question R24 asks, and it is one-way. A genuine
     // correction to a RECORDED sex still belongs to the player, through the repair ops, never to the GM mid-beat.
+    // ⛔ CCODE-468: a GENDER arriving later settles a sex nobody ever gave — the same rule as the create door,
+    // so the two cannot drift apart depending on which door a person came through (CCODE-467's lesson).
+    if (u.gender && sexUnsaid(n)) {
+      const fromG = sexFromGender(u.gender);
+      if (fromG) { n.sex = fromG; n.history = [...(n.history || []), `[d${ctx.day ?? "?"}] Sex recorded as ${fromG}, from the gender on the record.`].slice(-CAPS.history); }
+    }
     if (u.sex && (n.sex == null || String(n.sex).trim() === "")) {
       const sx = normalizeSex(u.sex);   // CCODE-467: one vocabulary, named once
       if (sx) {
@@ -1072,6 +1083,46 @@ export const SEX_VALUES = ["male", "female", "none"];
 export function normalizeSex(v) {
   const s = String(v ?? "").trim().toLowerCase();
   return SEX_VALUES.includes(s) ? s : null;
+}
+
+/** ⛔ ERIK'S RULING (2026-09-21): "THE SEX MATCHES GENDER. Only in the case of an entity without a sex might
+ *  you also not have a gender." Asked which of the two leads, he ruled GENDER LEADS — so a recorded gender
+ *  settles the sex, and not the other way round.
+ *
+ *  ⚑ WHICH DIRECTION IT IS MATTERS MORE THAN THE RULE. Veln Ashpause carries `sex: "male"` with
+ *  `gender: "woman"`, and SNG-594/§244 exists because Erik wanted the game to record that she is a woman.
+ *  Sex-leads would have flipped her back to a man — undoing the very correction that section was built for.
+ *  ⛑ Gender-leads keeps her a woman and gives her the sex to match, and it fills in the ~73 people who
+ *  already have a gender recorded and no sex, which is most of the backfill.
+ *
+ *  ⚠️ AND IT ONLY ANSWERS WHERE THE GENDER ACTUALLY DETERMINES ONE. `nonbinary` does not — such a person HAS
+ *  a sex and the record simply does not say which, so it stays unset and goes on the list for somebody to
+ *  answer. Deriving one there would be inventing a fact, which is the failure this whole area keeps having.
+ *
+ *  ⛔ THE TRAP, NAMED: "woman" CONTAINS "man". A substring test answers `male` for every woman in the world,
+ *  which is the Pell-rendered-male bug spelled with a regex. Whole words, and the female words asked first.
+ *  ⛑ Measured against the live vocabulary, which is small: woman 44 · man 37 · nonbinary 4 · unknown 2 ·
+ *  boy 1 · "female creature" 1. PURE. */
+const FEMALE_WORDS = /\b(?:woman|women|female|girl|lady|matron|mother|daughter|sister|she)\b/i;
+const MALE_WORDS = /\b(?:man|men|male|boy|lad|gentleman|father|son|brother|he)\b/i;
+export function sexFromGender(gender) {
+  const g = String(gender ?? "").trim();
+  if (!g || UNSAID_WORDS.has(g.toLowerCase())) return null;
+  if (/\bnon-?binary\b|\benby\b|\bagender\b|\bgenderfluid\b/i.test(g)) return null;   // a real gender that settles no sex
+  if (FEMALE_WORDS.test(g)) return "female";   // asked FIRST, because "woman" contains "man"
+  if (MALE_WORDS.test(g)) return "male";
+  return null;
+}
+
+/** ⛔ DO THE TWO AGREE? Used by the gate and by the repair screen; `none` is the one sex allowed to have no
+ *  gender beside it, which is the second half of the ruling. A gender that settles no sex (nonbinary) cannot
+ *  disagree with anything. PURE. */
+export function sexGenderAgree(n) {
+  const s = normalizeSex(n?.sex);
+  const want = sexFromGender(n?.gender);
+  if (s === "none") return true;                  // a being with no sex may have no gender
+  if (!s || !want) return true;                   // nothing recorded to disagree with
+  return s === want;
 }
 
 /** ⛔ Has anybody actually said what this person's sex is? The same shape as `genderUnsaid`, and the reason it

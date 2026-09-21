@@ -4517,11 +4517,15 @@ console.log("\n── §41 · R24 · sex is set at generation ──");
   const r41 = c41.npcRegistry.p41;
   check("§41: the NPC mint writes `sex` as its own field — at generation, which is the whole ruling, and not derived at render",
     r41?.sex === "female" && "sex" in r41);
-  check("§41: …and still writes gender separately, so the two never collapse — and an illegal sex is dropped rather than stored, so the field is ABSENT instead of falsely truthy (CCODE-467)",
+  // ⚠️ THE DROP IS ONLY OBSERVABLE WHERE THE GENDER SETTLES NOTHING. This fixture used `gender: "woman"`, and
+  // under Erik's ruling (CCODE-468) a woman's sex is now FILLED IN from her gender — so the record came back
+  // female and the check read a working derivation as a failed clamp. `nonbinary` is a real gender that
+  // determines no sex, which is where an illegal value has nowhere to be rescued from.
+  check("§41: …and still writes gender separately, so the two never collapse — and an illegal sex with no gender to settle it is DROPPED rather than stored, so the field is ABSENT instead of falsely truthy (CCODE-467)",
     r41.gender === "woman" && r41.sex !== r41.gender
     && (() => { const c = { name: "T", npcRegistry: {} };
-      N41.applyNpcUpdates(c, [{ op: "meet", npcId: "q", name: "Nym Ardo", role: "x", sex: "unknown", gender: "woman" }], { locationId: "x", day: 1 });
-      return c.npcRegistry.q.sex === null && c.npcRegistry.q.gender === "woman"; })());
+      N41.applyNpcUpdates(c, [{ op: "meet", npcId: "q", name: "Nym Ardo", role: "x", sex: "unknown", gender: "nonbinary" }], { locationId: "x", day: 1 });
+      return c.npcRegistry.q.sex === null && c.npcRegistry.q.gender === "nonbinary"; })());
 
   // ⛔ AND PC CREATION ASKS FOR IT — the fourth door, again.
   const app41 = readFileSync(join(root, "app.js"), "utf8");
@@ -24689,12 +24693,15 @@ console.log("\n── §342 · the field that gates, and the rule that never nam
   // ⛔ THE CREATE DOOR DID NOT CLAMP AND THE UPDATE DOOR DID, which is how it got into a live record at all.
   const ctx342 = { locationId: "x", day: 1 };
   const c342 = { name: "T", npcRegistry: {} };
-  NPX.applyNpcUpdates(c342, [{ op: "meet", npcId: "a", name: "Ana Vell", role: "scout", sex: "unknown", gender: "Woman", pronouns: "she/her" }], ctx342);
+  // ⚠️ `nonbinary` ON PURPOSE (CCODE-468): a gender that settles no sex is the only place an illegal value has
+  // nothing to be rescued from, so it is where the CLAMP is visible. With `gender: "woman"` the ruling now
+  // fills the sex in, which is right, and would hide what this check is about.
+  NPX.applyNpcUpdates(c342, [{ op: "meet", npcId: "a", name: "Ana Vell", role: "scout", sex: "unknown", gender: "Nonbinary", pronouns: "they/them" }], ctx342);
   NPX.applyNpcUpdates(c342, [{ op: "meet", npcId: "b", name: "Bex Orr", role: "smith", sex: "Female", gender: "woman" }], ctx342);
   NPX.applyNpcUpdates(c342, [{ op: "meet", npcId: "d", name: "Dun Mote", role: "construct", sex: "none" }], ctx342);
   check("§342: ⛔ BOTH DOORS CLAMP NOW, AND ONLY ONE DID — the UPDATE branch checked the vocabulary and the CREATE branch stored whatever arrived, so a person met for the first time could be born carrying an illegal sex while the same value was refused an hour later. ⛑ And `gender` is lower-cased on the way in, because it is presentation that will be grouped one day: the live saves carry `Man` 2 against `man` 34 and `Woman` 1 against `woman` 40",
     c342.npcRegistry.a.sex === null && NPX.sexUnsaid(c342.npcRegistry.a) === true
-    && c342.npcRegistry.a.gender === "woman"
+    && c342.npcRegistry.a.gender === "nonbinary"
     && c342.npcRegistry.b.sex === "female" && c342.npcRegistry.d.sex === "none",
     JSON.stringify(Object.fromEntries(Object.entries(c342.npcRegistry).map(([k, n]) => [k, `${n.sex}/${n.gender}`]))));
 
@@ -24720,6 +24727,76 @@ console.log("\n── §342 · the field that gates, and the rule that never nam
     && /op: "correctNpcGender", id: sel\.dataset\.npcsex, sex: v/.test(A342)
     && /isDevMode\(\) \? ` · <code>\$\{esc\(n\.id\)\}<\/code>` : ""/.test(A342)
     && /can never be romanced/.test(A342));
+}
+
+// ══════════ §343 · CCODE-468 — THE SEX MATCHES THE GENDER, AND THE GENDER LEADS ══════════
+// Erik's ruling, 2026-09-21: "the sex matches gender. only in the case of an entity without a sex might you also not have a
+// gender." ⚠️ NO SUCH RULE EXISTED — app.js said the opposite ("gender/pronouns … gate nothing"), and the rule-14B text shipped
+// the day before asserted the two were independent fields. ⛑ Asked which of them leads, he ruled GENDER LEADS.
+// ⚑ WHICH DIRECTION IT IS MATTERS MORE THAN THE RULE. Veln Ashpause carries `gender: "woman"` beside `sex: "male"`, and §244
+// exists because Erik wanted the game to record that she is a woman. Sex-leads would have flipped her back to a man — undoing
+// the very correction that section was built for. Gender-leads keeps her a woman and fixes the sex to match.
+console.log("\n── §343 · the sex matches the gender ──");
+{
+  const NG = await import("../engine/npcs.js");
+
+  check("§343: ⛔ A GENDER SETTLES THE SEX, AND \"woman\" CONTAINS \"man\" — a substring test answers `male` for every woman in the world, which is the Pell-rendered-male bug spelled with a regex. Whole words, and the female words asked FIRST. ⛑ Measured against the live vocabulary, which is small: woman 44 · man 37 · nonbinary 4 · unknown 2 · boy 1 · \"female creature\" 1",
+    NG.sexFromGender("woman") === "female" && NG.sexFromGender("Woman") === "female"
+    && NG.sexFromGender("man") === "male" && NG.sexFromGender("boy") === "male"
+    && NG.sexFromGender("female creature") === "female" && NG.sexFromGender("lady") === "female"
+    && NG.sexFromGender("a quiet man of the roads") === "male",
+    JSON.stringify(["woman", "man", "boy", "female creature"].map(g => `${g}→${NG.sexFromGender(g)}`)));
+
+  check("§343: ⛔ AND IT NEVER INVENTS ONE — `nonbinary` is a real gender that settles NO sex: such a person HAS one and the record simply does not say which, so it stays unset and stays on the list for somebody to answer. \"unknown\" and a blank settle nothing either. ⚠️ Deriving a sex where the gender does not determine it would be inventing a fact, which is the failure this whole area keeps having",
+    NG.sexFromGender("nonbinary") === null && NG.sexFromGender("non-binary") === null && NG.sexFromGender("enby") === null
+    && NG.sexFromGender("unknown") === null && NG.sexFromGender("") === null && NG.sexFromGender(null) === null);
+
+  check("§343: ⛑ AND ONLY A BEING WITH NO SEX MAY STAND WITHOUT A GENDER — the second half of the ruling, and the one case where one of the two may be absent alone. A `none` needs no gender; a gender that settles no sex cannot disagree with anything",
+    NG.sexGenderAgree({ sex: "none" }) === true && NG.sexGenderAgree({ sex: "none", gender: null }) === true
+    && NG.sexGenderAgree({ sex: "female", gender: "woman" }) === true
+    && NG.sexGenderAgree({ sex: "male", gender: "woman" }) === false
+    && NG.sexGenderAgree({ sex: "male", gender: "nonbinary" }) === true
+    && NG.sexGenderAgree({ sex: null, gender: "man" }) === true);
+
+  // ⛔ BOTH WRITE DOORS, because CCODE-467's whole lesson was that only one of them clamped.
+  const ctx343 = { locationId: "x", day: 1 };
+  const born = () => { const c = { name: "T", npcRegistry: {} }; return c; };
+  const c1 = born(); NG.applyNpcUpdates(c1, [{ op: "meet", npcId: "a", name: "Ilsa Vane", role: "carter", gender: "woman", pronouns: "she/her" }], ctx343);
+  const c2 = born(); NG.applyNpcUpdates(c2, [{ op: "meet", npcId: "b", name: "Roth Dane", role: "smith", sex: "female", gender: "man" }], ctx343);
+  const c3 = born(); NG.applyNpcUpdates(c3, [{ op: "meet", npcId: "c", name: "Sen Ilm", role: "reader" }], ctx343);
+  NG.applyNpcUpdates(c3, [{ op: "update", npcId: "c", gender: "woman" }], ctx343);
+  check("§343: ⛔ BOTH DOORS OBEY IT AND THE GENDER WINS EITHER WAY — a GM that writes a woman and forgets the sex still produces a record that agrees with itself, which is most of how 13% became 13%; a sex that disagrees with the gender is corrected TOWARD the gender; and a gender arriving on a later beat settles a sex nobody ever gave. ⚠️ One rule at both doors, because the last defect here was a clamp on one of them only",
+    c1.npcRegistry.a.sex === "female" && c1.npcRegistry.a.gender === "woman"
+    && c2.npcRegistry.b.sex === "male" && c2.npcRegistry.b.gender === "man"
+    && c3.npcRegistry.c.sex === "female"
+    && (c3.npcRegistry.c.history || []).some(h => /Sex recorded as female, from the gender/.test(h)),
+    JSON.stringify({ forgotten: c1.npcRegistry.a.sex, disagreed: c2.npcRegistry.b.sex, later: c3.npcRegistry.c.sex }));
+
+  const gm343 = rd("engine/gm.js");
+  check("§343: ⛑ AND THE RULE SAYS SO, replacing the text that said the opposite — the day before, 14B asserted these were independent fields, which is what the engine believed too",
+    /AND THE TWO AGREE \(ERIK'S RULING\)/.test(gm343)
+    && /ONLY A BEING WITH NO SEX MAY HAVE NO GENDER/.test(gm343)
+    && /the engine fills it in from the gender/.test(gm343)
+    && /nonbinary \u2014 is a real answer/.test(gm343));
+
+  // ⛑ AND IT REACHES THE PEOPLE ALREADY ON THE RECORD — through the runner, at its version gate.
+  {
+    const RC343 = await import("../engine/reconcile.js");
+    const old343 = { name: "Old", reconcileVersion: 74, npcRegistry: {
+      veln: { id: "veln", name: "Veln Ashpause", sex: "male", gender: "woman", pronouns: "she/her" },
+      blank: { id: "blank", name: "Ada Corr", gender: "woman" },
+      nb: { id: "nb", name: "Wren Sall", gender: "nonbinary" },
+      mote: { id: "mote", name: "The Mote", sex: "none" },
+      quiet: { id: "quiet", name: "Somebody" },
+    } };
+    RC343.reconcile(old343, "character", { content: null });
+    const r = old343.npcRegistry;
+    check("§343: ⛑ AND THE PEOPLE ALREADY ON THE RECORD ARE SETTLED — 77 sexes across the live saves come straight off a gender that was already written down, so the backfill Erik was facing drops from 90 people to 30, and those 30 are exactly the ones nobody has described at all. ⛔ Veln goes male→female and STAYS A WOMAN, which is the whole reason the direction was his to choose; a nonbinary record is left open; a being with no sex is left alone",
+      r.veln.sex === "female" && r.veln.gender === "woman"
+      && r.blank.sex === "female" && r.nb.sex === undefined && r.mote.sex === "none" && r.quiet.sex === undefined
+      && old343.reconcileVersion >= 75,
+      JSON.stringify(Object.fromEntries(Object.entries(r).map(([k, n]) => [k, `${n.sex}/${n.gender || "—"}`]))));
+  }
 }
 
 /* ══════════ REPORT ══════════ */

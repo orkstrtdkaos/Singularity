@@ -47,7 +47,7 @@
     },
     {
       "abilityId": "better_story",
-      "level": 2,
+      "level": 1,
       "native": true
     },
     {
@@ -104,7 +104,7 @@
     },
     {
       "abilityId": "the_old_procedure",
-      "level": 2
+      "level": 1
     },
     {
       "abilityId": "shadow-image",
@@ -988,8 +988,8 @@
       ],
       "skillsObserved": [],
       "status": "active",
-      "gender": "unknown",
-      "pronouns": "they/them",
+      "gender": "woman",
+      "pronouns": "she/her",
       "statusNote": "At the Hub crossing, acting as guide and gatherer for the others. Will deliver them to the Standing Annex.",
       "domains": {
         "primary": "hourkeeper"
@@ -1144,8 +1144,8 @@
       ],
       "status": "active",
       "sex": "unknown",
-      "gender": "unknown",
-      "pronouns": "they/them",
+      "gender": "man",
+      "pronouns": "he/him",
       "statusNote": "Standing at the Hub crossing, tracking the chaos with fore-knowledge",
       "lastSeen": {
         "locationId": "gen-the-made-gate",
@@ -1325,8 +1325,8 @@
       "skillsObserved": [],
       "status": "active",
       "sex": "unknown",
-      "gender": "unknown",
-      "pronouns": "they/them",
+      "gender": "woman",
+      "pronouns": "she/her",
       "age": 22,
       "domains": {
         "primary": "mason"
@@ -11353,8 +11353,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789954387985,
-  "rev": 835,
+  "updatedAt": 1789955656368,
+  "rev": 836,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -14432,6 +14432,69 @@
       "why": "player: same person (A lone traveler → Kael)",
       "worldDay": 76,
       "at": "2026-09-14T23:26:18.319Z"
+    },
+    {
+      "kind": "gender",
+      "id": "hourkeeper-confluence",
+      "from": {
+        "gender": "unknown",
+        "pronouns": "they/them"
+      },
+      "to": {
+        "gender": "woman",
+        "pronouns": "she/her"
+      },
+      "why": "repaired via the Repair panel",
+      "worldDay": 83,
+      "at": "2026-09-21T01:54:16.367Z"
+    },
+    {
+      "kind": "gender",
+      "id": "kael-road-warden",
+      "from": {
+        "gender": "unknown",
+        "pronouns": "they/them"
+      },
+      "to": {
+        "gender": "man",
+        "pronouns": "he/him"
+      },
+      "why": "repaired via the Repair panel",
+      "worldDay": 83,
+      "at": "2026-09-21T01:54:16.367Z"
+    },
+    {
+      "kind": "gender",
+      "id": "younger-visitor",
+      "from": {
+        "gender": "unknown",
+        "pronouns": "they/them"
+      },
+      "to": {
+        "gender": "woman",
+        "pronouns": "she/her"
+      },
+      "why": "repaired via the Repair panel",
+      "worldDay": 83,
+      "at": "2026-09-21T01:54:16.367Z"
+    },
+    {
+      "kind": "abilityRank",
+      "id": "better_story",
+      "from": 2,
+      "to": 1,
+      "why": "repaired via the Repair panel",
+      "worldDay": 83,
+      "at": "2026-09-21T01:54:16.367Z"
+    },
+    {
+      "kind": "abilityRank",
+      "id": "the_old_procedure",
+      "from": 2,
+      "to": 1,
+      "why": "repaired via the Repair panel",
+      "worldDay": 83,
+      "at": "2026-09-21T01:54:16.367Z"
     }
   ],
   "_axesDropped": [

@@ -11418,8 +11418,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789997843096,
-  "rev": 848,
+  "updatedAt": 1789997941723,
+  "rev": 851,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -13481,7 +13481,7 @@
       "kind": "enterprise",
       "name": "The Standing Annex",
       "locationId": "gen-the-made-gate",
-      "steward": "traveler-woman",
+      "steward": "halvex_coil",
       "obligation": null,
       "condition": "thriving",
       "claimedDay": 3,
@@ -13541,6 +13541,18 @@
           "from": "thriving",
           "to": "thriving",
           "note": "Vessin Tallow-bark appointed keeper"
+        },
+        {
+          "at": 2005,
+          "from": "thriving",
+          "to": "thriving",
+          "note": "Halvex Coil appointed keeper (was Vessin Tallow-bark)"
+        },
+        {
+          "at": 2005,
+          "from": "thriving",
+          "to": "thriving",
+          "note": "hands: Tessvel Cairn, Vessin Tallow-bark"
         }
       ],
       "carriage": {
@@ -13593,9 +13605,11 @@
         "kael-road-warden"
       ],
       "crew": [
-        "tessvel-cairn"
+        "tessvel-cairn",
+        "traveler-woman"
       ],
-      "growthPasses": 2
+      "growthPasses": 2,
+      "trade": true
     }
   ],
   "_lastProjectDay": 5,
@@ -13993,6 +14007,10 @@
     },
     {
       "text": "Vessin Tallow-bark keeps The Standing Annex now.",
+      "announced": false
+    },
+    {
+      "text": "Halvex Coil keeps The Standing Annex now; Vessin Tallow-bark is released from it.",
       "announced": false
     }
   ],

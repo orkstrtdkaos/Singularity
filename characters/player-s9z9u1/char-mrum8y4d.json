@@ -760,7 +760,8 @@
       "bondStage": "courting",
       "image": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/a%20person%2C%20character%20portrait%2C%20named%20Tessvel%20Cairn%2C%20woman%2C%20Junior%20wright%20on%20posting-duty%20at%20the%20Eastern%20Intake%20notice%20board%2C%20courting%20romantic%20to%20Loki%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=98414&nologo=true",
       "_portraitTier": "devoted",
-      "met": 10
+      "met": 10,
+      "sex": "female"
     },
     "standing-unlit": {
       "id": "standing-unlit",
@@ -910,7 +911,8 @@
       "met": 4,
       "distinctFrom": [
         "sable_the_runner"
-      ]
+      ],
+      "sex": "female"
     },
     "ossivyn-tallow": {
       "id": "ossivyn-tallow",
@@ -951,7 +953,8 @@
         "locationId": "the_slow_orchard",
         "day": 1
       },
-      "met": 8
+      "met": 8,
+      "sex": "male"
     },
     "hourkeeper-confluence": {
       "id": "hourkeeper-confluence",
@@ -1004,7 +1007,7 @@
       "peopleSource": "generated",
       "appearance": "A human woman, late fifties, with the pale-olive complexion of someone who lives under canopy rather than sky. The grey coat falls to mid-calf, unmarked, unweathered, impossibly clean for the Orchard's mud-season — early spring has not touched it. Her hair is cut short and practical, silver at the temples, darker beneath. She carries no visible instrument of timekeeping; her hands are the instruments, folded at her waist, utterly still. Her eyes are already somewhere past you.",
       "met": 10,
-      "sex": "male",
+      "sex": "female",
       "age": 47
     },
     "the-stranger-aggressor": {
@@ -1037,7 +1040,8 @@
         "locationId": "the_slow_orchard",
         "day": 1
       },
-      "met": 1
+      "met": 1,
+      "sex": "male"
     },
     "traveler-woman": {
       "id": "traveler-woman",
@@ -1099,7 +1103,8 @@
       "bondType": "romantic",
       "bondStage": "committed",
       "met": 15,
-      "imagePinned": true
+      "imagePinned": true,
+      "sex": "female"
     },
     "kael-road-warden": {
       "id": "kael-road-warden",
@@ -1142,7 +1147,7 @@
         "Reads acoustic shifts and water-current changes with the precision of a road-warden who has learned to read the land…"
       ],
       "status": "active",
-      "sex": "unknown",
+      "sex": "male",
       "gender": "man",
       "pronouns": "he/him",
       "statusNote": "Standing at the Hub crossing, tracking the chaos with fore-knowledge",
@@ -1329,7 +1334,7 @@
         "Comfortable with non-verbal communication and presence"
       ],
       "status": "active",
-      "sex": "unknown",
+      "sex": "female",
       "gender": "woman",
       "pronouns": "she/her",
       "age": 26,
@@ -1668,19 +1673,6 @@
       {
         "day": 5,
         "worldDay": 82,
-        "text": "The One Who Ended the Long War broke Valen Sunwrack, Who Left No Shadow Standing — a stranger, and now an enemy. Valen Sunwrack is out of the reckoning while the wound holds.",
-        "tier": "event",
-        "section": "world",
-        "kind": "clash",
-        "winnerId": "the_war_ender",
-        "loserId": "sunwrack_valen",
-        "outcome": "wounded",
-        "locationId": "the_stillhold",
-        "placedBy": "winnerId"
-      },
-      {
-        "day": 5,
-        "worldDay": 82,
         "text": "Kesh Ardent, the Edge That Holds turned The One Who Doubts the Proof back. The One learned something, which is worse for everyone else.",
         "tier": "event",
         "section": "world",
@@ -1859,11 +1851,18 @@
         "text": "Something has been building in the unmade: The person who holds authority to formally designate what has been unmade as 'resolved' has not done so for anything in years, and the backlog of unresolved unmakings is beginning to press against…",
         "tier": "event",
         "section": "world"
+      },
+      {
+        "day": 5,
+        "worldDay": 83,
+        "text": "The Standing Annex has lost its keeper.",
+        "tier": "event",
+        "section": "yours"
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 2003,
-    "lastSharedReadAt": "2026-09-21T11:59:27.320Z",
+    "lastGenCount": 2005,
+    "lastSharedReadAt": "2026-09-21T13:12:05.844Z",
     "lastTickWorldDay": 83,
     "lastCanonWorldDay": 83,
     "turnsSinceOffer": 3,
@@ -2108,7 +2107,7 @@
         "kind": "decision",
         "premise": "Someone who keeps the count of what has been unmade has begun rounding down, telling themselves the difference is noise — but the rounding has a direction, and it has been consistent for long enough…",
         "cause": "The act of counting the unmade requires a decision about what constitutes a thing distinct enough to be counted, and that threshold has always been left to…",
-        "stage": 6,
+        "stage": 7,
         "seededAtCount": 1917,
         "surfaced": true,
         "fate": "growing",
@@ -2121,7 +2120,7 @@
         "kind": "decision",
         "premise": "The person who holds authority to formally designate what has been unmade as 'resolved' has not done so for anything in years, and the backlog of unresolved unmakings is beginning to press against…",
         "cause": "In the_unmade, the act of resolution is itself an act of power, and the authority-holder has quietly discovered that unresolved things remain partially…",
-        "stage": 2,
+        "stage": 3,
         "seededAtCount": 1968,
         "surfaced": true,
         "fate": "growing",
@@ -8340,7 +8339,7 @@
       "the_undefeated": 83,
       "the_one_called_zeus": 83
     },
-    "updatesToldTo": "2.4.6",
+    "updatesToldTo": "2.4.8",
     "newsLog": [
       {
         "day": 4,
@@ -8850,6 +8849,14 @@
         "worldDay": 83,
         "text": "The game was updated to v2.4.6 — 1 fixed.",
         "loggedAt": "2026-09-21T11:59:36.661Z"
+      },
+      {
+        "kind": "update",
+        "section": "world",
+        "version": "2.4.8",
+        "worldDay": 83,
+        "text": "The game was updated to v2.4.8 — 1 fixed, 1 changed.",
+        "loggedAt": "2026-09-21T13:12:09.901Z"
       }
     ]
   },
@@ -10445,7 +10452,7 @@
     }
   ],
   "nativeGrantsVersion": 2,
-  "reconcileVersion": 74,
+  "reconcileVersion": 76,
   "gallery": [
     {
       "kind": "moment",
@@ -11403,8 +11410,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789991976661,
-  "rev": 842,
+  "updatedAt": 1789996329905,
+  "rev": 845,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -13514,7 +13521,13 @@
           "to": "thriving",
           "note": "hands: Tessvel Cairn"
         },
-        "[d78] sailed from the_crossing to gen-the-made-gate, 0.0 days, with you aboard"
+        "[d78] sailed from the_crossing to gen-the-made-gate, 0.0 days, with you aboard",
+        {
+          "at": null,
+          "from": "thriving",
+          "to": "thriving",
+          "note": "Vessin Tallow-bark is keeping it again — the record had lost her, the log had not"
+        }
       ],
       "carriage": {
         "moves": "powered",

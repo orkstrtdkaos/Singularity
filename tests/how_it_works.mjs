@@ -24875,6 +24875,70 @@ console.log("\n── §344 · the keeper, and the income without one ──");
   }
 }
 
+// ══════════ §345 · CCODE-470 — THE CARD, THE VERB, AND THE SECOND READER ══════════
+// Erik, with a screenshot of the Holdings tab: "it still doesn't have a place for me to choose Vessin as the keeper and has it
+// unkept. also is suggesting Fell Pell thinks for Loki when it's Silas' place."
+// ⛔ THREE THINGS, AND THE THIRD IS ONE I MADE AN HOUR EARLIER. The card said "unkept · nobody — it will not climb", offered
+// Add hands / Post a guard / Stand them down, and had NO WAY TO APPOINT A KEEPER: that verb lived only behind "Manage this
+// place", while the person he wanted was already in the card's own dropdown. ⛔ An offer about THE FELL PELL — Silas's hold —
+// sat on Loki's screen and, worse, on Loki's SAVE. ⛔ And "income vs keep" still read "0 in" for a hold that now earns.
+console.log("\n── §345 · the card, the verb, and the second reader ──");
+{
+  const HZ = await import("../engine/holdings.js");
+  const { loadContentHeadless: lch345 } = await import("./headless_content.mjs");
+  const C345 = await lch345();
+  const cfg345 = C345.rules?.economy?.holdStore, eco345 = C345.rules?.economy;
+
+  // ⛔ THE SECOND READER. `tickStore` SELLS and `holdingLedger` PROJECTS the sale onto the card, and each spelled the share for
+  // itself — so teaching the tick that the hands sell left the card saying a hold that now earns earns nothing.
+  const shapes = [
+    ["kept", { steward: "v", crew: ["t"] }],
+    ["hands, no keeper", { steward: null, crew: ["t"], garrison: ["k"] }],
+    ["watch only", { steward: null, crew: [], garrison: ["k"] }],
+    ["nobody at all", { steward: null, crew: [], garrison: [] }],
+  ];
+  const rows = shapes.map(([label, over]) => {
+    const base = { id: "h", kind: "enterprise", name: "A Hold", condition: "thriving", store: { raw_material: 8 }, crew: [], garrison: [], history: [], ...over };
+    const projected = HZ.holdingLedger({ ...base }, { economy: eco345, cfg: cfg345, regionId: "the_open_reach" })?.perPass?.sells ?? null;
+    const live = { ...base };
+    const out = HZ.tickStore({ name: "T", npcRegistry: {}, purse: {}, holdings: [live] }, live, { cfg: cfg345, economy: eco345, regionId: "the_open_reach", rng: () => 0.99, day: 80 });
+    return { label, share: HZ.sellShareFor(base, cfg345), projected, actual: out?.keeperSold?.crystal ?? 0 };
+  });
+  check("§345: ⛔ THE CARD'S PROJECTION AND THE PASS'S ACTUAL SALE COME FROM ONE RULE — they were two copies, and Erik's screenshot caught them disagreeing within the hour: the tick had been taught that the hands sell and the card still read `steward ? keeperSells : 0`, so a hold that now earns showed \"−12 (0 in, 12 out)\" — the OLD design's exact sentence, printed over new behaviour. ⚠️ Driven across every shape a hold can be in, because a shared helper that only one of them calls is the same bug wearing a function name",
+    rows.every(r => r.projected === r.actual)
+    && rows.find(r => r.label === "kept").share === 0.5
+    && rows.find(r => r.label === "hands, no keeper").share === 0.25
+    && rows.find(r => r.label === "watch only").share === 0.25
+    && rows.find(r => r.label === "nobody at all").share === 0
+    && rows.find(r => r.label === "nobody at all").actual === 0
+    && rows.find(r => r.label === "hands, no keeper").actual > 0,
+    JSON.stringify(rows));
+
+  const A345 = rd("app.js");
+  const codeOnly345 = (s) => String(s || "").split(NEWLINE_RE).filter(l => !/^\s*(\/\/|\*|\/\*)/.test(l)).join("\n");
+  check("§345: ⛔ AND THE CARD THAT NAMES THE PROBLEM CARRIES THE VERB FOR IT — a card reading \"unkept · nobody — it will not climb\" that offers three people-verbs and not the one he needed is worse than a card that says nothing. ⛑ It reads the SAME select the other verbs on that row read, so there is one selection and one rule, and the label says which act it is when a keeper is already in place",
+    /data-hold-keeper-here=/.test(A345)
+    && /Make keeper instead/.test(A345) && /an unkept hold cannot climb/.test(A345)
+    && /data-hold-hand="\$\{id\}"/.test(A345)
+    && /appointKeeper\(character, id, to,/.test(codeOnly345(A345)));
+
+  check("§345: ⛔ AN OFFER ABOUT A HOLD YOU DO NOT OWN IS NOT SHOWN — the Fell Pell is Silas's, and that offer was written onto Loki's save and Brynjar's, who holds nothing at all. `queueFeatureOffers` iterates `character.holdings`, so it cannot have produced them there: the array crossed between characters (the CCODE-427 class — swapping `character` is not sealing). ⛑ Filtered at the READ door, because that is true whatever the route in was, and scrubbed by the writer that owns the array",
+    /const ownHold = new Set\(\(character\.holdings \|\| \[\]\)\.map/.test(A345)
+    && /\.filter\(\(\{ o \}\) => ownHold\.has\(o\?\.holdingId\)\)/.test(A345)
+    && /character\.featureOffers = character\.featureOffers\.filter\(o => o && own\.has\(o\.holdingId\)\)/.test(rd("engine/holdings.js")));
+
+  {
+    const RC345 = await import("../engine/reconcile.js");
+    const leaked = { name: "L", reconcileVersion: 76, npcRegistry: {}, holdings: [{ id: "mine", name: "Mine" }],
+      featureOffers: [{ holdingId: "the-fell-pell", holdingName: "The Fell Pell", kind: "forge", why: "w", from: "its own record" },
+                      { holdingId: "mine", holdingName: "Mine", kind: "mine", why: "w", from: "its own record" }] };
+    RC345.reconcile(leaked, "character", { content: null });
+    check("§345: ⛑ …AND THE ONES ALREADY WRITTEN DOWN ARE CLEARED, keeping the character's own. Nothing is lost: the answer path already refused an offer whose holding it could not find, so those rows could never do anything but confuse, and a real one is re-queued by the next world pass",
+      (leaked.featureOffers || []).length === 1 && leaked.featureOffers[0].holdingId === "mine" && leaked.reconcileVersion >= 77,
+      JSON.stringify(leaked.featureOffers));
+  }
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

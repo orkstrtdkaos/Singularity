@@ -16,6 +16,18 @@
   "next": [],
   "releases": [
     {
+      "version": "2.4.9",
+      "date": "2026-09-21",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "Appoint a keeper from the card that says you have none",
+          "summary": "The holdings card now lets you make someone keeper, shows what an unkept hold really earns, and stops suggesting things about other characters' places.",
+          "detail": "A holding card could tell you it was unkept and that it would not climb, and give you no way to appoint anybody — the control was hidden behind Manage this place. It is on the card now, using the same list of people the other buttons use. The income line was also still reading as though an unkept hold sells nothing, and it under-counted what was already in the store. And a suggestion about a holding belonging to another of your characters no longer appears on this one."
+        }
+      ]
+    },
+    {
       "version": "2.4.8",
       "date": "2026-09-21",
       "entries": [

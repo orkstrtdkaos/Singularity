@@ -178,7 +178,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.4.8";
+const APP_VERSION = "2.4.9";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -14095,6 +14095,19 @@ function wireHoldingOffers() {
     appointKeeper(character, id, to, { day: absoluteWorldDay(), worldCount: worldCount(), nameOf: (x) => character?.npcRegistry?.[x]?.name || CONTENT.npcs?.[x]?.name || x });
     saveCharacter(character); again();
   };
+  // ⛔ CCODE-470 — THE VERB WAS ONLY IN THE EXPANDED PANEL. The card Erik was looking at said "unkept" and
+  // "nobody — it will not climb", offered Add hands / Post a guard / Stand them down, and had NO WAY TO
+  // APPOINT ONE: the keeper control lived behind "Manage this place". ⚠️ A card that names a problem and
+  // withholds the verb for it is worse than a card that says nothing — and the person he wanted was already
+  // in that dropdown, because it is `askable()` and she is in his company.
+  // ⛑ It reads the SAME select the other verbs on the row read, so there is one selection and one rule.
+  for (const btn of app.querySelectorAll("[data-hold-keeper-here]")) btn.onclick = () => {
+    const id = btn.dataset.holdKeeperHere;
+    const to = app.querySelector(`[data-hold-hand="${id}"]`)?.value || null;
+    if (!to) return;
+    appointKeeper(character, id, to, { day: absoluteWorldDay(), worldCount: worldCount(), nameOf: (x) => character?.npcRegistry?.[x]?.name || CONTENT.npcs?.[x]?.name || x });
+    saveCharacter(character); again();
+  };
   for (const btn of app.querySelectorAll("[data-hold-transfer]")) btn.onclick = () => {
     const id = btn.dataset.holdTransfer;
     const sel = app.querySelector(`[data-hold-to="${id}"]`);
@@ -14281,7 +14294,7 @@ function renderHoldingsTab(manageId = null) {
           return `<div class="hint">grows: ${h.steward ? `one rung every ${g.passesPerClimb || 4} passes under a keeper, as far as their standing allows` : "<em>not while nobody keeps it</em>"}${done ? ` · improved with ${done}` : ""}${hands ? ` · hands: ${hands}` : ""}${guards ? ` · watch: ${guards}` : ""}</div>
         <div class="hold-controls">
           ${crafts.length ? `<div class="hold-ctl"><span class="hold-ctl-label">Put a craft to it</span><select data-hold-craft="${esc(h.id)}">${crafts.map(d => `<option value="${esc(d.id)}">${esc(d.name || d.id)}</option>`).join("")}</select><button class="opt" data-hold-improve="${esc(h.id)}" title="Put a craft you carry to the place — it comes up a rung, once per craft">Apply</button></div>` : ""}
-          ${people.length ? `<div class="hold-ctl"><span class="hold-ctl-label">People</span><select data-hold-hand="${esc(h.id)}">${people.map(id => `<option value="${esc(id)}">${esc(nameOf(id))}</option>`).join("")}</select><button class="opt" data-hold-crew="${esc(h.id)}" title="Put them to work here — more hands, more yield (up to ${g.maxHands || 0})">Add hands</button><button class="opt" data-hold-guard="${esc(h.id)}" title="Post them on watch — halves a raid, costs ${g.garrisonUpkeepPerHand || 0} crystal a pass">Post a guard</button>${(h.crew || []).length || (h.garrison || []).length ? `<button class="opt" data-hold-clear="${esc(h.id)}" title="Stand the hands and the watch down">Stand them down</button>` : ""}</div>` : ((h.crew || []).length || (h.garrison || []).length ? `<div class="hold-ctl"><span class="hold-ctl-label">People</span><button class="opt" data-hold-clear="${esc(h.id)}" title="Stand the hands and the watch down">Stand them down</button></div>` : "")}
+          ${people.length ? `<div class="hold-ctl"><span class="hold-ctl-label">People</span><select data-hold-hand="${esc(h.id)}">${people.map(id => `<option value="${esc(id)}">${esc(nameOf(id))}</option>`).join("")}</select><button class="opt" data-hold-crew="${esc(h.id)}" title="Put them to work here — more hands, more yield (up to ${g.maxHands || 0})">Add hands</button><button class="opt" data-hold-guard="${esc(h.id)}" title="Post them on watch — halves a raid, costs ${g.garrisonUpkeepPerHand || 0} crystal a pass">Post a guard</button><button class="opt" data-hold-keeper-here="${esc(h.id)}" title="${h.steward ? "Make them keeper instead — the place stays yours; they run it" : "Make them keeper — the place stays yours, they run it, and an unkept hold cannot climb"}">${h.steward ? "Make keeper instead" : "Make keeper"}</button>${(h.crew || []).length || (h.garrison || []).length ? `<button class="opt" data-hold-clear="${esc(h.id)}" title="Stand the hands and the watch down">Stand them down</button>` : ""}</div>` : ((h.crew || []).length || (h.garrison || []).length ? `<div class="hold-ctl"><span class="hold-ctl-label">People</span><button class="opt" data-hold-clear="${esc(h.id)}" title="Stand the hands and the watch down">Stand them down</button></div>` : "")}
           ${(() => { // ✅ B6b: sail her. The places her own graph reaches from where she lies, with the days at her speed — and when she cannot go, the reason in the row.
             if (!car || voy) return "";
             const here = CONTENT.locations?.[h.locationId] || null;
@@ -14342,7 +14355,16 @@ function renderHoldingsTab(manageId = null) {
   }).join("");
 
   // ⚑ SPEC_world_guesses — the world noticed a feature the record lacks, and asks. It never writes.
-  const featRows = (character.featureOffers || []).map((o, i) => `<div class="codex-f" style="border-left:2px solid var(--accent,#b08d57);padding-left:8px;margin-top:6px">
+  // ⛔ CCODE-470 — AN OFFER ABOUT A HOLD YOU DO NOT OWN. Erik: "is suggesting Fell Pell thinks for Loki when
+  // it's Silas' place." The Fell Pell is Silas's, and the offer is PERSISTED on two other saves — Loki's, whose
+  // only hold is the Standing Annex, and Brynjar's, who holds nothing at all. `queueFeatureOffers` iterates
+  // `character.holdings`, so it cannot have produced them for those two: the array itself crossed between
+  // characters, which is the CCODE-427 class — swapping `character` is not sealing.
+  // ⛑ FILTERED AT THE READ DOOR, because that is true whatever the route in was: an offer about a place you do
+  // not hold is meaningless, and `answerFeatureOffer` already refuses it ("the holding is gone"), so the row
+  // could only ever confuse. Step 77 clears the ones already written down.
+  const ownHold = new Set((character.holdings || []).map(h => h && h.id).filter(Boolean));
+  const featRows = (character.featureOffers || []).map((o, i) => ({ o, i })).filter(({ o }) => ownHold.has(o?.holdingId)).map(({ o, i }) => `<div class="codex-f" style="border-left:2px solid var(--accent,#b08d57);padding-left:8px;margin-top:6px">
     <div>${esc(o.holdingName)} reads as if it has <strong>${esc(o.kind)}</strong>.</div>
     <div class="hint" style="margin-top:2px">${esc(o.why)} — from ${esc(o.from)}</div>
     <div class="opt-row" style="margin-top:4px">

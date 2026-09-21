@@ -801,6 +801,21 @@ export function serviceIncome(character, holding, { cfg = null, locations = {}, 
   return { crystal: Math.round(base * traffic), traffic, gate: gate?.id || null, ramp, stations: stations.length };
 }
 
+/** ⛔ WHAT SHARE OF THE STORE GOES TO MARKET IN A PASS — ONE DEFINITION, because there are two readers and
+ *  they were two copies. `tickStore` does the selling; `holdingLedger` PROJECTS it onto the card as "income
+ *  vs keep". ⚠️ Erik's screenshot caught them disagreeing an hour after the rule changed: the tick had been
+ *  taught that the hands sell (CCODE-469) and the panel still read `steward ? keeperSells : 0`, so a hold
+ *  that now earns showed "−12 (0 in, 12 out)" — the old design's exact sentence, on a card describing new
+ *  behaviour. ⛑ A keeper sells `keeperSells`; the hands sell `handsSell`; a place with nobody on it sells
+ *  nothing, which is the part of the old rule that was always right. PURE. */
+export function sellShareFor(holding, cfg) {
+  if (!holding) return 0;
+  if (holding.steward) return Math.max(0, Math.min(1, Number(cfg?.keeperSells ?? 0.5)));
+  const hands = (holding.crew || []).length + (holding.garrison || []).length;
+  if (hands > 0) return Math.max(0, Math.min(1, Number(cfg?.handsSell ?? 0.25)));
+  return 0;
+}
+
 export function tickStore(character, holding, { cfg = null, economy = null, regionId = null, dangerLevel = 0, rng = Math.random, day = null, density = null, meaning = 0, people = {}, npcCfg = {}, locations = {} } = {}) {
   const keeperFloorEffects = (() => { try { const t = holding?.steward ? keeperTierOf(character, holding, { npcs: people, npcCfg, day }) : null; const fl = holding?.steward ? keeperFloorFor(t, cfg?.growth) : null; return fl ? { keeperFloor: fl } : null; } catch { return null; } })();
   if (!holding || !cfg) return null;
@@ -833,15 +848,12 @@ export function tickStore(character, holding, { cfg = null, economy = null, regi
   // and only a keeper lifts the condition floor — but a place with people in it is no longer a place that
   // earns nothing. ⛔ AND A PLACE WITH NOBODY IN IT STILL EARNS NOTHING, which is the part of the old rule
   // that was right: an empty hold has nobody to carry anything to market.
-  const sellHands = (holding.crew || []).length + (holding.garrison || []).length;
-  if ((holding.steward || sellHands > 0) && regionId) {
+  if (sellShareFor(holding, cfg) > 0 && regionId) {
     // ⛑ HALF, MEASURED. Every share fixes the drain; the choice is between a hold that pays and a hold with
     // stock worth carrying. Over ten passes of the Fell Pell: 0.9 nets +256 and leaves 1 unit (14 crystal in
     // the Gearlands); 0.5 nets +224 and leaves 9 (130); 0.25 nets +148 and leaves 28 (403). ⚑ Half is where
     // the hold is clearly profitable AND the surplus is worth a caravan — which is the whole point of both.
-    const share = holding.steward
-      ? Math.max(0, Math.min(1, Number(cfg?.keeperSells ?? 0.5)))
-      : Math.max(0, Math.min(1, Number(cfg?.handsSell ?? 0.25)));
+    const share = sellShareFor(holding, cfg);   // CCODE-470b: the same number the card projects
     const sold = {}; let earned = 0;
     for (const [g, n] of Object.entries(holding.store || {})) {
       const units = Math.round((Number(n) || 0) * share);
@@ -1349,6 +1361,11 @@ export function inferFeatures(holding, { location = null, chronicle = [], cfg = 
  *  (hold, kind) is never offered twice while it stands. */
 export function queueFeatureOffers(character, { locations = {}, cfg = null, worldCount = null } = {}) {
   ensureHoldings(character);
+  // ⛔ CCODE-470: SCRUB WHAT IS ALREADY THERE. Two live saves carry an offer about a hold they do not own —
+  // one of them holds nothing at all — so the array has crossed between characters at least once. This pass
+  // owns the array; an entry naming somebody else's place is not this character's business and goes.
+  const own = new Set((character.holdings || []).map(h => h && h.id).filter(Boolean));
+  if (Array.isArray(character.featureOffers)) character.featureOffers = character.featureOffers.filter(o => o && own.has(o.holdingId));
   const offers = character.featureOffers || (character.featureOffers = []);
   const added = [];
   for (const h of character.holdings || []) {
@@ -1450,14 +1467,17 @@ export function residentsOf(holding, cfg = null) {
  *  same numbers in the same order.
  *
  *  ⛑ `net` IS THE HONEST ONE: what the purse actually feels each pass. A kept place sells `keeperSells` of
- *  what it made and pays its keep; an unkept one pays the keep and banks everything, which reads as a
- *  NEGATIVE net and a rising `banked` — the exact shape a player should be able to see before it costs them.
+ *  what it made and pays its keep; a place with HANDS but no keeper sells `handsSell` (CCODE-469); a place with
+ *  NOBODY on it pays the keep and banks everything, which reads as a negative net and a rising `banked` — the
+ *  exact shape a player should be able to see before it costs them.
+ *  ⚠️ THE SHARE COMES FROM `sellShareFor`, WHICH `tickStore` ALSO USES. This paragraph used to describe a rule
+ *  this function spelled for itself, and the two drifted within the hour.
  *  PURE. */
 export function holdingLedger(holding, { economy = null, cfg = null, regionId = null, density = null, character = null, locations = {} } = {}) {
   if (!holding) return null;
   const yields = yieldsFor(holding, cfg, { density }) || [];
   const upkeep = upkeepFor(holding, cfg) || 0;
-  const share = holding.steward ? Math.max(0, Math.min(1, Number(cfg?.keeperSells ?? 0.5))) : 0;
+  const share = sellShareFor(holding, cfg);   // ⛔ CCODE-470b: ONE definition — this was the second copy, and it was the stale one
 
   // what a pass MAKES, valued where the place stands
   let made = 0, madeUnits = 0;
@@ -1466,10 +1486,27 @@ export function holdingLedger(holding, { economy = null, cfg = null, regionId = 
     madeUnits += Number(y.units) || 0;
     if (w) made += Math.round((Number(y.units) || 0) * w.each);
   }
-  // ⚠️ THE KEEPER SELLS A SHARE OF THE STORE, NOT OF THIS PASS'S YIELD — the same rounding `tickStore` does,
-  // over the store as it will stand once the yield lands, or the panel would promise a number the pass misses.
-  const soldUnits = Math.round((storeTotal(holding) + madeUnits) * share);
-  const sells = share > 0 ? Math.round(made * share) : 0;
+  // ⚠️ THE SALE IS A SHARE OF THE STORE, NOT OF THIS PASS'S YIELD — the same rounding `tickStore` does, over
+  // the store as it will stand once the yield lands, or the panel promises a number the pass misses.
+  // ⛔ CCODE-470c — AND THE VALUE DID NOT FOLLOW THE UNITS. `soldUnits` was counted over store + yield, exactly
+  // as above, while `sells` was `made * share` — the value of THIS PASS ALONE. So the card under-promised by
+  // whatever was already in the shed: 36 where the pass paid 65, on a hold with eight raw material banked.
+  // ⛑ Valued GOOD BY GOOD over the post-yield store, with `tickStore`'s own per-good rounding, so the two
+  // agree by construction rather than by coincidence. Found by the gate that asserts they agree at all.
+  const after = { ...(holding.store || {}) };
+  for (const y of yields) after[y.goods] = (Number(after[y.goods]) || 0) + (Number(y.units) || 0);
+  let sells = 0, soldUnits = 0;
+  if (share > 0) {
+    for (const [g, n] of Object.entries(after)) {
+      const units = Math.round((Number(n) || 0) * share);
+      if (units <= 0) continue;
+      const w = unitWorth(g, { economy, regionId, cfg });
+      if (!w) continue;
+      const val = Math.round(units * w.each);
+      if (val <= 0) continue;
+      soldUnits += units; sells += val;
+    }
+  }
 
   const nameOf = (id) => character?.npcRegistry?.[id]?.name || id;
   const crew = [...new Set(holding.crew || [])].filter(Boolean);

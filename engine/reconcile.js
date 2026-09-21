@@ -2539,6 +2539,27 @@ export const CHARACTER_STEPS = [
       return notes.length ? { notes } : {};
     }
   },
+  {
+    version: 77, id: "an-offer-about-somebody-elses-place", playerFacing: false,
+    // ⛔ CCODE-470 — Erik: "is suggesting Fell Pell thinks for Loki when it's Silas' place." The Fell Pell is
+    // Silas's hold, and the offer about it is written down on TWO other saves: Loki's, whose only hold is the
+    // Standing Annex, and Brynjar's, who holds nothing at all. ⚠️ `queueFeatureOffers` iterates
+    // `character.holdings`, so it cannot have produced them there — the array crossed between characters,
+    // which is the CCODE-427 class (swapping `character` is not sealing).
+    // ⛑ Clearing them loses nothing: the answer path already refuses an offer whose holding it cannot find,
+    // so these rows could never do anything but confuse. A real offer is re-queued by the next world pass.
+    apply: (c) => {
+      const offers = c?.featureOffers;
+      if (!Array.isArray(offers) || !offers.length) return {};
+      const own = new Set((Array.isArray(c.holdings) ? c.holdings : []).map(h => h && h.id).filter(Boolean));
+      const keep = offers.filter(o => o && own.has(o.holdingId));
+      if (keep.length === offers.length) return {};
+      const dropped = offers.filter(o => !keep.includes(o)).map(o => `${o?.holdingName || o?.holdingId}`);
+      c.featureOffers = keep;
+      console.log(`[reconcile] ccode-470: ${dropped.length} feature offer(s) about a hold this character does not own, cleared — ${dropped.join(", ")}`);
+      return {};
+    }
+  },
   // Future steps register here — e.g. innate-talent GRANT (offers[], when talent content
   // lands with SNG-017), Reach-tradition eligibility surfacing, universal-role tagging.
 ];

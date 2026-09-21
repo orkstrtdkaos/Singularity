@@ -308,6 +308,36 @@
         "characterName": "Silas Weir"
       },
       "foundWorldDay": 74
+    },
+    "falsecraft+umbracraft": {
+      "braidKey": "falsecraft+umbracraft",
+      "name": "Shadow-Image",
+      "description": "Braid Umbracraft's concealment with Falsecraft's false-form: become absent while creating a visible echo of yourself. The technique costs the energy of both crafts combined (8 total at current rank). It breaks if either the shadow-concealment or the false image is directly addressed or touched—but…",
+      "notFor": "What lies outside this braid's own reach — it is not either parent whole, only the single new craft their braiding makes.",
+      "emergentFunction": null,
+      "tree": [
+        {
+          "name": "Seeing Dark · Fitting Mask",
+          "grants": "Umbracraft and Falsecraft run as one craft: Umbracraft — See truly in lightlessness; wrap yourself and a small space in concealment; find and use the…; Falsecraft — Craft a convincing illusion or disguise; tell a lie built well enough to hold; SPOT a…",
+          "cannot": "Total light defeats it; concealment hides, it does not defend. · Illusion is not substance — tested hard, it fails; a Verity read can…"
+        },
+        {
+          "name": "Past Finding · Standing Lie",
+          "grants": "At this depth the braid carries what each parent reaches here: Umbracraft — Hide a person, a truth, or a thing so well even a searcher who knows it's there can't find it…; Falsecraft — Build an untruth that holds under scrutiny — a false history, a cover…",
+          "cannot": "Harboring something makes you responsible for it; some things should not… · A lie built on discoverable fact cracks when the fact surfaces; the…"
+        }
+      ],
+      "namedBy": "player",
+      "sourceNames": [
+        "Umbracraft",
+        "Falsecraft"
+      ],
+      "contributedBy": {
+        "playerKey": "player-s9z9u1",
+        "characterId": "char-mrum8y4d",
+        "characterName": "Loki"
+      },
+      "foundWorldDay": 83
     }
   },
   "canonPairing": "⛔ SNG-344: THE PAIR IS CANON — this file and content/packs/core/rules/combination_recipes.json are NOT competitors and neither supersedes the other. Zero ids in common, and they key differently (braidKey 'a+b' here vs parts:[a,b] there). This file is the NAMING authority; content/packs/core/rules/combination_recipes.json is the MECHANICAL authority. One NAMES a braid, the other RESOLVES it. Do not merge, do not delete, do not 'reconcile' by dropping either — the join is an authored crosswalk (Aevi, SNG-344), not an engine merge. ⚠️ THREE OF THE SEVEN NAMED BRAIDS ALREADY HAVE A MECHANICAL RECIPE HERE UNDER A DIFFERENT NAME: Undying Ledger = the_double_register, Shatterlight = the_sounding, The Hollowing Sight = the_counted_end. Those are naming COLLISIONS to resolve, not blanks to fill — one pairing must not surface two names to the player.",

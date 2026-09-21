@@ -173,6 +173,141 @@
           "name": "Adelheid"
         }
       }
+    },
+    "tessvel-cairn": {
+      "id": "tessvel-cairn",
+      "name": "Tessvel Cairn",
+      "canonId": "tessvel_cairn",
+      "intro": {
+        "role": "Junior wright on posting-duty at the Eastern Intake notice board",
+        "description": "Young, rust-orange coat with three mismatched patches on the left sleeve, ink-stained at the right fingertip. Efficient, self-critical, sensitive about her junior rank.",
+        "firstSeenDay": 1,
+        "where": "pressureholt",
+        "metBy": {
+          "characterId": "char-mrum8y4d",
+          "name": "Loki"
+        }
+      }
+    },
+    "standing-unlit": {
+      "id": "standing-unlit",
+      "name": "Standing Unlit",
+      "canonId": "standing_unlit",
+      "intro": {
+        "role": "Cult member, guardian of the outer chamber",
+        "description": "Grey-robed, motionless until now — detached from the wall shadows. Precise, still, gentle-voiced. Hands coming up from the robe with an intent that doesn't need a weapon.",
+        "firstSeenDay": 1,
+        "where": "the_unlit_deep",
+        "metBy": {
+          "characterId": "char-mrum8y4d",
+          "name": "Loki"
+        }
+      }
+    },
+    "unlit-elder": {
+      "id": "unlit-elder",
+      "name": "Dane",
+      "canonId": "unlit_elder",
+      "intro": {
+        "role": "Seated elder of the Unlit Deep's outer chamber",
+        "description": "Grey-robed, seated by the pale blue flame, face not yet seen. Voice quieter than the Standing Unlit's and worn smooth to its function, like an old tool. Has not moved.",
+        "firstSeenDay": 1,
+        "where": "the_unlit_deep",
+        "metBy": {
+          "characterId": "char-mrum8y4d",
+          "name": "Loki"
+        }
+      }
+    },
+    "taken-person": {
+      "id": "taken-person",
+      "name": "Sable",
+      "canonId": "taken_person",
+      "intro": {
+        "role": "The person who came willingly from the city to the Unlit Deep",
+        "description": "Seated against the far wall of the inner chamber, knees drawn up. Heat-trace reads clearly against cold stone — they have sat here long enough to warm the wall behind them. Head tilted, then lifted at the sound of a step. Calm. Already…",
+        "firstSeenDay": 1,
+        "where": "the_unlit_deep",
+        "metBy": {
+          "characterId": "char-mrum8y4d",
+          "name": "Loki"
+        }
+      }
+    },
+    "ossivyn-tallow": {
+      "id": "ossivyn-tallow",
+      "name": "Ossivyn Tallow",
+      "canonId": "ossivyn_tallow",
+      "intro": {
+        "role": "Tender of the Slow Orchard",
+        "description": "A broad-shouldered man in a worn planting coat, standing easy in a knee-deep hole with a spade. Patient in the way of someone who works in forty-year increments.",
+        "firstSeenDay": 1,
+        "where": "the_slow_orchard",
+        "metBy": {
+          "characterId": "char-mrum8y4d",
+          "name": "Loki"
+        }
+      }
+    },
+    "hourkeeper-confluence": {
+      "id": "hourkeeper-confluence",
+      "name": "Veln Ashpause",
+      "canonId": "hourkeeper_confluence",
+      "intro": {
+        "role": "Hourkeeper who perceives time differently",
+        "description": "Grey-coated, motionless, arrived without sound from the brush. Watching with an expression of terrible sympathy that belongs to someone carrying knowledge they cannot share.",
+        "firstSeenDay": 1,
+        "where": "the_slow_orchard",
+        "metBy": {
+          "characterId": "char-mrum8y4d",
+          "name": "Loki"
+        }
+      }
+    },
+    "traveler-woman": {
+      "id": "traveler-woman",
+      "name": "Vessin Tallow-bark",
+      "canonId": "traveler_woman",
+      "intro": {
+        "role": "Lone traveler; reader of falsecrafts; partner",
+        "description": "Grey-green practical coat, hair pinned back in a way that has half come undone. Dry, careful voice. Appraising eyes that price things before deciding.",
+        "firstSeenDay": 1,
+        "where": "grovehome",
+        "metBy": {
+          "characterId": "char-mrum8y4d",
+          "name": "Loki"
+        }
+      }
+    },
+    "kael-road-warden": {
+      "id": "kael-road-warden",
+      "name": "Kael",
+      "canonId": "kael_road_warden",
+      "intro": {
+        "role": "Road-warden; a traveler who moves between the reaches and carries true news",
+        "description": "Weathered by the road, grey-streaked hair, coat faded to brown from colors it once held. Eyes that read roads and people with steady assessment. Hands sure and observant.",
+        "firstSeenDay": 3,
+        "where": "the_crossing",
+        "metBy": {
+          "characterId": "char-mrum8y4d",
+          "name": "Loki"
+        }
+      }
+    },
+    "halvex_coil": {
+      "id": "halvex_coil",
+      "name": "Halvex Coil",
+      "canonId": "halvex_coil",
+      "intro": {
+        "role": "Master of coordinated chaos, now questioning their mandate",
+        "description": "Hoarse voice, sharp features softening now, eyes that calculate and estimate. He moves like someone used to reading a room for weak points.",
+        "firstSeenDay": 3,
+        "where": "the_crossing",
+        "metBy": {
+          "characterId": "char-mrum8y4d",
+          "name": "Loki"
+        }
+      }
     }
   },
   "fates": {
@@ -468,13 +603,13 @@
       },
       "woundedUntilDay": 89,
       "woundedBy": "the_starless",
-      "sinceWorldDay": 82,
-      "stoppedUntilDay": 85,
+      "sinceWorldDay": 83,
+      "stoppedUntilDay": 86,
       "stoppedBy": "the_starless",
-      "atWorldDay": 82,
+      "atWorldDay": 83,
       "fateBy": {
-        "characterId": "char-mr5ns3hh",
-        "name": "Adelheid"
+        "characterId": "char-mrum8y4d",
+        "name": "Loki"
       }
     },
     "the_doubting_lattice": {
@@ -490,12 +625,13 @@
     },
     "the_war_ender": {
       "status": "stopped",
-      "stoppedUntilDay": 47,
+      "stoppedUntilDay": 86,
       "stoppedBy": "the_starless",
-      "atWorldDay": 44,
+      "sinceWorldDay": 83,
+      "atWorldDay": 83,
       "fateBy": {
-        "characterId": "char-msgpisca",
-        "name": "Splarf"
+        "characterId": "char-mrum8y4d",
+        "name": "Loki"
       }
     },
     "the_one_called_zeus": {
@@ -506,13 +642,13 @@
         "day": 80,
         "changed": "came back changed"
       },
-      "sinceWorldDay": 81,
-      "stoppedUntilDay": 84,
-      "stoppedBy": "sunwrack_valen",
-      "atWorldDay": 81,
+      "sinceWorldDay": 83,
+      "stoppedUntilDay": 86,
+      "stoppedBy": "the_starless",
+      "atWorldDay": 83,
       "fateBy": {
-        "characterId": "char-mrhs8286",
-        "name": "Silas Weir"
+        "characterId": "char-mrum8y4d",
+        "name": "Loki"
       }
     },
     "the_one_called_loki": {

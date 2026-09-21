@@ -178,7 +178,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.4.7";
+const APP_VERSION = "2.4.8";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -8826,7 +8826,23 @@ function applyTurn(turn, resolution, playerWords = null) {
       if (kind === "claim") { const made = addHolding(character, { id, kind: op.kind || "post", name: op.name, rename: op.rename === true, locationId: op.locationId || location.id, steward: op.steward || null, obligation: op.obligation || null, day: absoluteWorldDay() })
         if (!made) console.warn("[holdingOps] CLAIM REFUSED by addHolding — nothing was added:", JSON.stringify(op).slice(0, 160));   // prose-cap-ok: a console diagnostic
       }
-      else if (kind === "steward") { const h = (character.holdings || []).find(x => x.id === id); if (h) h.steward = op.steward || null; }
+      // ⛔ CCODE-469 — THIS IS HOW ERIK LOST VESSIN. `h.steward = op.steward || null` meant a steward op whose
+      // payload was missing or unresolvable REMOVED the keeper: no history, no event, no refusal, nothing said.
+      // ⚠️ The proper door refuses exactly that — `appointKeeper` returns null on `!npcId` — and this path wrote
+      // the field raw, straight past it. The Standing Annex kept producing and stopped selling, and the only
+      // trace was `steward: null` beside a history line saying she had been appointed.
+      // ⛑ An op that means "set the keeper" may no longer mean "remove the keeper" by saying nothing. Naming
+      // somebody appoints them, with the history and the event; naming nobody is REFUSED and surfaced. Letting
+      // a keeper go is `release: true` — a verb, said out loud, because it costs the place its sales.
+      else if (kind === "steward") {
+        const h = (character.holdings || []).find(x => x.id === id);
+        if (!h) console.warn("[holdingOps] steward op for a holding that is not held:", id);   // prose-cap-ok: a console diagnostic
+        else if (op.steward) appointKeeper(character, id, op.steward, { day: absoluteWorldDay(), worldCount: worldCount(), nameOf: (x) => character?.npcRegistry?.[x]?.name || CONTENT.npcs?.[x]?.name || x });
+        else if (op.release === true) { const was = h.steward; h.steward = null;
+          h.history = [...(h.history || []), { at: worldCount(), from: h.condition, to: h.condition, note: `${character?.npcRegistry?.[was]?.name || was || "the keeper"} released from keeping it` }].slice(-12);
+          said(`${h.name || h.id} has no keeper now — it will hold what it makes rather than sell it.`); }
+        else { character._applyFailures = [...(character._applyFailures || []), { op: "holdingOps.steward", at: new Date().toISOString(), message: `a steward op for ${id} named nobody — the keeper was NOT removed (use release: true to let one go)` }].slice(-10); }
+      }
       // ⛔ SPEC_holding_release_transfer — this was a bare filter: the obligation vanished, the steward was silently
       // un-charged, nothing was said. Both exits are operations now, recorded and announced once by the tick.
       else if (kind === "release") releaseHolding(character, id, { reason: op.reason || op.why || null, day: absoluteWorldDay(), worldCount: worldCount() });

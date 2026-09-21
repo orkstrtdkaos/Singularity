@@ -2500,6 +2500,45 @@ export const CHARACTER_STEPS = [
       return {};
     }
   },
+  {
+    version: 76, id: "the-keeper-the-history-still-names", playerFacing: true,
+    // ⛔ CCODE-469 — ERIK: "it lost its keeper somehow… i shouldn't have lost her." He did not lose HER: Vessin
+    // Tallow-bark is in his registry, alive, met fifteen times. He lost the FIELD, because a steward op with an
+    // empty payload wrote `null` straight past the door that refuses exactly that.
+    //
+    // ⛑ AND THE HISTORY IS THE EVIDENCE, WHICH IS WHY THIS IS A REPAIR AND NOT A GUESS. A holding's own log
+    // records "X appointed keeper", and a keeper who is let go gets a matching line. So: no steward, an
+    // appointment on the record, NO release after it, and that person still on the registry and not dead or
+    // departed — then the record disagrees with itself and the log is the half that was written on purpose.
+    // ⚠️ It restores nobody the log does not name, and nobody who left.
+    apply: (c) => {
+      const holds = Array.isArray(c?.holdings) ? c.holdings : [];
+      const reg = c?.npcRegistry || {};
+      const notes = [];
+      for (const h of holds) {
+        if (!h || h.steward) continue;
+        const log = Array.isArray(h.history) ? h.history : [];
+        let named = null;
+        for (const row of log) {                        // last word wins: a later release cancels an earlier appointment
+          const note = String((row && typeof row === "object" ? row.note : row) || "");
+          const app = /^(.+?) appointed keeper/.exec(note);
+          if (app) { named = app[1].trim(); continue; }
+          if (/released from keeping it|is released from it|handed (it )?over|transferred/i.test(note)) named = null;
+        }
+        if (!named) continue;
+        const hit = Object.entries(reg).find(([, n]) => n && String(n.name || "").trim().toLowerCase() === named.toLowerCase());
+        if (!hit) continue;
+        const [id, person] = hit;
+        const status = String(person.status || "").toLowerCase();
+        if (status === "dead" || status === "departed") continue;
+        h.steward = id;
+        h.history = [...log, { at: null, from: h.condition, to: h.condition, note: `${named} is keeping it again — the record had lost her, the log had not` }].slice(-12);
+        notes.push(`${named} is keeping ${h.name || h.id} again — the record had lost the keeper your own log still named.`);
+      }
+      if (notes.length) console.log(`[reconcile] ccode-469: ${notes.length} keeper(s) restored from the holding's own history`);
+      return notes.length ? { notes } : {};
+    }
+  },
   // Future steps register here — e.g. innate-talent GRANT (offers[], when talent content
   // lands with SNG-017), Reach-tradition eligibility surfacing, universal-role tagging.
 ];

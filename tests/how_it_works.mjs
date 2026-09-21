@@ -33,6 +33,7 @@ const PG_ADDITIVE = /ranks\s+are\s+additive/i;
 const PG_WHERE_EVERYTHING_IS = /part\s+i½\s*·\s*where\s+everything\s+is/i;
 
 
+const NEWLINE_RE = new RegExp(String.fromCharCode(13) + "?" + String.fromCharCode(10));   // a literal escape here has been eaten three times today
 let pass = 0; const fails = [], gaps = [];
 function check(name, ok, detail = "") {
   if (ok) { pass++; console.log(`ok    ${name}`); }
@@ -24796,6 +24797,81 @@ console.log("\n── §343 · the sex matches the gender ──");
       && r.blank.sex === "female" && r.nb.sex === undefined && r.mote.sex === "none" && r.quiet.sex === undefined
       && old343.reconcileVersion >= 75,
       JSON.stringify(Object.fromEntries(Object.entries(r).map(([k, n]) => [k, `${n.sex}/${n.gender || "—"}`]))));
+  }
+}
+
+// ══════════ §344 · CCODE-469 — A HOLD WITH PEOPLE IN IT IS NOT A HOLD THAT EARNS NOTHING ══════════
+// Erik: "Loki's standing Annex … lost its keeper somehow and now it doesn't have any income. It should still make income without
+// a keeper AND i shouldn't have lost her." ⛑ Both halves were true and they were two different defects.
+// ⛔ HE DID NOT LOSE HER. Vessin Tallow-bark is on his registry, alive, met fifteen times — he lost the FIELD. `holdingOps`
+// with `kind: "steward"` did `h.steward = op.steward || null`, so an op whose payload was missing or unresolvable REMOVED the
+// keeper: no history, no event, no refusal, nothing said. The proper door, `appointKeeper`, refuses exactly that on `!npcId`,
+// and this path wrote the field raw straight past it.
+// ⛔ AND "NO KEEPER MEANS NO SALE" READ "no keeper" AS "nobody there". The Annex is thriving, has a watchtower, a shrine, a hand
+// and a guard standing on it, seven raw material in the shed worth 50 crystal — and four in arrears with nothing coming in.
+console.log("\n── §344 · the keeper, and the income without one ──");
+{
+  const HD = await import("../engine/holdings.js");
+  const { loadContentHeadless: lch344 } = await import("./headless_content.mjs");
+  const C344 = await lch344();
+  const cfg344 = C344.rules?.economy?.holdStore;
+  const econ344 = C344.rules?.economy;
+
+  check("§344: ⛑ THE SHARES ARE CONTENT NOW, AND ONE OF THEM NEVER WAS — `keeperSells` lived only as a default inside the code (`cfg?.keeperSells ?? 0.5`), so the number Erik would want to turn was not a dial at all. Both are authored, with the measurement that chose the keeper's half recorded beside them",
+    Number(cfg344?.keeperSells) === 0.5 && Number(cfg344?.handsSell) === 0.25
+    && /a hold still earns without a keeper/i.test(String(cfg344?._sellShares_20260921 || "")),
+    JSON.stringify({ keeperSells: cfg344?.keeperSells, handsSell: cfg344?.handsSell }));
+
+  // ⛔ DRIVEN, ON A HOLD SHAPED LIKE THE ANNEX.
+  const annex = (over) => ({ id: "h", kind: "enterprise", name: "The Standing Annex", condition: "thriving",
+    store: { raw_material: 8 }, crew: [], garrison: [], history: [], ...over });
+  const pass = (h) => { const c = { name: "L", npcRegistry: {}, purse: {}, holdings: [h] };
+    return { out: HD.tickStore(c, h, { cfg: cfg344, economy: econ344, regionId: "the_open_reach", rng: () => 0.99, day: 80 }), h }; };
+
+  const kept = pass(annex({ steward: "vess", crew: ["tess"] }));
+  const handsOnly = pass(annex({ steward: null, crew: ["tess"], garrison: ["kael"] }));
+  const empty = pass(annex({ steward: null }));
+  check("§344: ⛔ A HOLD WITH PEOPLE IN IT EARNS — the hands sell at HALF what a keeper sells, so a keeper is plainly still worth having (twice the turnover, and only a keeper lifts the condition floor) and a thriving place with a hand and a guard on it is no longer a place that earns nothing. ⛑ AND A PLACE WITH NOBODY IN IT STILL EARNS NOTHING, which is the half of the old rule that was right: an empty hold has nobody to carry anything to market",
+    kept.out?.keeperSold?.crystal > 0 && handsOnly.out?.keeperSold?.crystal > 0
+    && handsOnly.out.keeperSold.crystal < kept.out.keeperSold.crystal
+    && !empty.out?.keeperSold,
+    JSON.stringify({ keeper: kept.out?.keeperSold?.crystal, hands: handsOnly.out?.keeperSold?.crystal, empty: empty.out?.keeperSold || null }));
+
+  check("§344: ⛑ …AND THE NEWS NAMES WHOEVER ACTUALLY SOLD IT, so a line cannot credit a keeper for something a hand did — `byKeeper` says which it was, because the sentence a player reads has to match the mechanism that produced it",
+    kept.out.keeperSold.byKeeper === true && kept.out.keeperSold.by === "vess"
+    && handsOnly.out.keeperSold.byKeeper === false && handsOnly.out.keeperSold.by === "tess",
+    JSON.stringify({ kept: kept.out.keeperSold.by, hands: handsOnly.out.keeperSold.by }));
+
+  const A344 = rd("app.js");
+  const codeOnly344 = (s) => String(s || "").split(NEWLINE_RE).filter(l => !/^\s*(\/\/|\*|\/\*)/.test(l)).join("\n");
+  check("§344: ⛔ AND AN OP THAT MEANS \"SET THE KEEPER\" CAN NO LONGER MEAN \"REMOVE THE KEEPER\" BY SAYING NOTHING — naming somebody appoints them through the door that records it; naming nobody is REFUSED and surfaced on `_applyFailures` rather than silently emptying the field; and letting a keeper go is `release: true`, a verb said out loud, because it costs the place its sales",
+    // ⚠️ CODE, NOT COMMENTS — the FOURTH source assertion today to fire on its own documentation: the comment
+    // above this fix necessarily quotes the line it removed.
+    !/h\.steward = op\.steward \|\| null/.test(codeOnly344(A344))
+    && /else if \(op\.steward\) appointKeeper\(character, id, op\.steward/.test(A344)
+    && /else if \(op\.release === true\)/.test(A344)
+    && /named nobody — the keeper was NOT removed/.test(A344)
+    && /it will hold what it makes rather than sell it/.test(A344));
+
+  // ⛑ AND HER NAME COMES BACK OFF THE HOLDING'S OWN LOG.
+  {
+    const RC344 = await import("../engine/reconcile.js");
+    const mk = (over) => ({ name: "L", reconcileVersion: 75, npcRegistry: {
+        vess: { id: "vess", name: "Vessin Tallow-bark", status: "active" },
+        gone: { id: "gone", name: "Orin Past", status: "departed" },
+      }, holdings: [{ id: "h", name: "The Standing Annex", condition: "thriving", steward: null, history: [], ...over }] });
+    const named = mk({ history: [{ note: "Vessin Tallow-bark appointed keeper" }] });
+    const released = mk({ history: [{ note: "Vessin Tallow-bark appointed keeper" }, { note: "Vessin Tallow-bark released from keeping it" }] });
+    const departed = mk({ history: [{ note: "Orin Past appointed keeper" }] });
+    const unnamed = mk({ history: [{ note: "built a shrine (the fiction)" }] });
+    for (const c of [named, released, departed, unnamed]) RC344.reconcile(c, "character", { content: null });
+    check("§344: ⛑ AND THE KEEPER THE HISTORY STILL NAMES IS GIVEN BACK — the holding's own log records \"X appointed keeper\", so a record with no steward, an appointment on it and NO release after it is a record disagreeing with itself, and the log is the half that was written on purpose. ⚠️ It restores nobody the log does not name, nobody it released, and nobody who has died or departed — evidence, not a guess",
+      named.holdings[0].steward === "vess"
+      && released.holdings[0].steward === null
+      && departed.holdings[0].steward === null
+      && unnamed.holdings[0].steward === null
+      && (named.holdings[0].history || []).some(r => /keeping it again/.test(r?.note || "")),
+      JSON.stringify({ named: named.holdings[0].steward, released: released.holdings[0].steward, departed: departed.holdings[0].steward, unnamed: unnamed.holdings[0].steward }));
   }
 }
 

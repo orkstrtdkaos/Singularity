@@ -824,13 +824,24 @@ export function tickStore(character, holding, { cfg = null, economy = null, regi
   // ⚠️ NOT THE WHOLE STORE, ON PURPOSE: 8 raw material is 32 in the valley and 115 in the Gearlands, and a
   // keeper who cleared the shelves every pass would make a caravan pointless. She sells the week's work here
   // and keeps stock back — the surplus is what a caravan carries somewhere better.
-  // ⛑ AND NO KEEPER MEANS NO SALE, which is the whole meaning of having none.
-  if (holding.steward && regionId) {
+  // ⛔ ERIK'S RULING (CCODE-469): "It should still make income without a keeper." The line below used to read
+  // "no keeper means no sale, which is the whole meaning of having none" — and the Standing Annex proved what
+  // that costs: thriving, a watchtower, a shrine, a hand and a guard on the ground, seven raw material in the
+  // shed, four in arrears, and nothing coming in. ⚠️ "No keeper" was being read as "nobody there", and the
+  // record plainly said otherwise.
+  // ⛑ SO THE HANDS SELL, AT HALF WHAT A KEEPER SELLS. A keeper is still worth having — twice the turnover,
+  // and only a keeper lifts the condition floor — but a place with people in it is no longer a place that
+  // earns nothing. ⛔ AND A PLACE WITH NOBODY IN IT STILL EARNS NOTHING, which is the part of the old rule
+  // that was right: an empty hold has nobody to carry anything to market.
+  const sellHands = (holding.crew || []).length + (holding.garrison || []).length;
+  if ((holding.steward || sellHands > 0) && regionId) {
     // ⛑ HALF, MEASURED. Every share fixes the drain; the choice is between a hold that pays and a hold with
     // stock worth carrying. Over ten passes of the Fell Pell: 0.9 nets +256 and leaves 1 unit (14 crystal in
     // the Gearlands); 0.5 nets +224 and leaves 9 (130); 0.25 nets +148 and leaves 28 (403). ⚑ Half is where
     // the hold is clearly profitable AND the surplus is worth a caravan — which is the whole point of both.
-    const share = Math.max(0, Math.min(1, Number(cfg?.keeperSells ?? 0.5)));
+    const share = holding.steward
+      ? Math.max(0, Math.min(1, Number(cfg?.keeperSells ?? 0.5)))
+      : Math.max(0, Math.min(1, Number(cfg?.handsSell ?? 0.25)));
     const sold = {}; let earned = 0;
     for (const [g, n] of Object.entries(holding.store || {})) {
       const units = Math.round((Number(n) || 0) * share);
@@ -846,7 +857,8 @@ export function tickStore(character, holding, { cfg = null, economy = null, regi
     if (earned > 0) {
       // ⛔ CCODE-437: the keeper is paid in the money of the place it sells — a Reach's scrip in a Reach
       const cr = earnAt(character, earned, regionId, economy, { origin: "traded" });
-      if (cr.ok) out.keeperSold = { by: holding.steward, goods: sold, crystal: earned, said: saidEarned(cr) };
+      // ⚠️ `by` NAMES WHOEVER ACTUALLY SOLD IT, so the news cannot say a keeper did something a hand did.
+      if (cr.ok) out.keeperSold = { by: holding.steward || (holding.crew || [])[0] || (holding.garrison || [])[0], byKeeper: !!holding.steward, goods: sold, crystal: earned, said: saidEarned(cr) };
     }
   }
   const alms = pilgrimIncome(holding, { cfg, meaning });

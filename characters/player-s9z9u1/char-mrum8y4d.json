@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 8,
-  "xp": 792,
+  "xp": 794,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -37,7 +37,7 @@
     },
     {
       "abilityId": "falsecraft",
-      "level": 1,
+      "level": 2,
       "native": true
     },
     {
@@ -109,10 +109,10 @@
   ],
   "alignment": {
     "mechanical_spiritual": -0.034,
-    "falsehood_truth": 0.206766910973125,
+    "falsehood_truth": 0.15642856542446873,
     "demonic_angelic": -0.020000000000000004,
     "dark_light": 0.135,
-    "concrete_abstract": 0.0675,
+    "concrete_abstract": 0.094125,
     "chaos_order": -0.05,
     "body_mind": 0.034999999999999996
   },
@@ -120,7 +120,7 @@
   "maxHealth": 73,
   "health": 73,
   "maxEnergy": 151,
-  "energy": 77,
+  "energy": 69,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -308,93 +308,80 @@
         "player": "creap closer to them and use appetite sense",
         "summary": "Loki attempts to read the visitors' true want with Appetite-Sense but is caught in the act—the woman at the cellar door turns and faces them directly, unsurprised.",
         "narration": "You move down the last three steps with the weight distributed low, keeping to the shadow where the cellar door's light does not quite reach. The woman at the threshold is still turned away, watching her younger companion descend into the herb cellars below. You reach the landing and settle your breathing, extending your senses the way Appetite-Sense teaches—reaching for the hunger underneath what people will admit to themselves they want.\n\nBut the moment you reach for it, the woman turns. Not startled. Aware. Her eyes find you in the dark with the ease of someone used to finding things in it. \"Someone there,\" she says, not loud, and her hand comes up—not a weapon, just a palm raised. The younger voice from below stops mid-word.\n\nYou have been read before you could read. The woman's hunger—and it is there, solid and real—stays locked behind her own understanding of herself. She knows you reached for it. The question in her eyes is not alarm. It is assessment."
+      },
+      {
+        "player": "use falsecraft to show a cat walk through the hall and into the other room.",
+        "summary": "Caught mid-deception at the cellar landing of the Kindly Rest—the woman sees through a false cat and names the truth directly.",
+        "narration": "You reach for Falsecraft—that quick, practiced shimmer where nothing becomes something just solid enough to believe. A grey tabby, sleek and unhurried, materializes in the threshold light and pads into the corridor with the absolute certainty of a cat who belongs here.\n\nBut the woman does not follow it.\n\nShe watches the cat traverse the hall, then turns her gaze back to you on the landing. There is no surprise in her face, no distraction—only a steady assessment, as if the cat was a thing she already knew would happen. When she speaks, her voice carries no accusation, only fact. \"That's not real,\" she says. \"And you're still here.\"\n\nThe younger person pauses in the cellars below. You hear their footsteps stop. The woman raises her hand again—that same unhurried gesture—and her weight shifts slightly forward. Not threatening. But present. Waiting for your answer."
       }
     ],
     "lastTurn": {
-      "narration": "You move down the last three steps with the weight distributed low, keeping to the shadow where the cellar door's light does not quite reach. The woman at the threshold is still turned away, watching her younger companion descend into the herb cellars below. You reach the landing and settle your breathing, extending your senses the way Appetite-Sense teaches—reaching for the hunger underneath what people will admit to themselves they want.\n\nBut the moment you reach for it, the woman turns. Not startled. Aware. Her eyes find you in the dark with the ease of someone used to finding things in it. \"Someone there,\" she says, not loud, and her hand comes up—not a weapon, just a palm raised. The younger voice from below stops mid-word.\n\nYou have been read before you could read. The woman's hunger—and it is there, solid and real—stays locked behind her own understanding of herself. She knows you reached for it. The question in her eyes is not alarm. It is assessment.",
-      "sceneSummary": "Loki attempts to read the visitors' true want with Appetite-Sense but is caught in the act—the woman at the cellar door turns and faces them directly, unsurprised.",
+      "narration": "You reach for Falsecraft—that quick, practiced shimmer where nothing becomes something just solid enough to believe. A grey tabby, sleek and unhurried, materializes in the threshold light and pads into the corridor with the absolute certainty of a cat who belongs here.\n\nBut the woman does not follow it.\n\nShe watches the cat traverse the hall, then turns her gaze back to you on the landing. There is no surprise in her face, no distraction—only a steady assessment, as if the cat was a thing she already knew would happen. When she speaks, her voice carries no accusation, only fact. \"That's not real,\" she says. \"And you're still here.\"\n\nThe younger person pauses in the cellars below. You hear their footsteps stop. The woman raises her hand again—that same unhurried gesture—and her weight shifts slightly forward. Not threatening. But present. Waiting for your answer.\n\n*▲ Practiced — **Falsecraft** is fluent now (rank 2), earned through use.*",
+      "sceneSummary": "Caught mid-deception at the cellar landing of the Kindly Rest—the woman sees through a false cat and names the truth directly.",
       "choices": [
         {
-          "label": "Step into the light where she can see you plainly—no more hiding. Ask who she is and what brought her here in the deep night.",
+          "label": "Stand and speak plainly—ask what they're doing here",
           "attribute": "social",
           "subAttribute": "presence",
           "axes": {
             "falsehood_truth": 0.6,
-            "violence_peace": 0.2
+            "chaos_order": 0.2
           },
           "difficulty": "normal",
-          "opposedDifficulty": null,
           "intentTags": [
-            "confront"
+            "negotiate"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": false
         },
         {
-          "label": "Turn and retreat back up the stairs before she can move—you can return when the house is awake and ask questions in daylight.",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {
-            "violence_peace": 0.4,
-            "chaos_order": -0.3
-          },
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "careful",
-            "retreat"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Use Falsecraft to shape yourself into a face she will not recognize—another traveler, sleepwalking, lost—and let her draw her own conclusion.",
+          "label": "Use Wrong Reality to reshape how she reads this moment",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "falsehood_truth": -0.8,
-            "chaos_order": 0.2
+            "falsehood_truth": -0.7,
+            "chaos_order": -0.3
           },
           "difficulty": "hard",
-          "opposedDifficulty": null,
           "intentTags": [
-            "deceive",
-            "careful"
+            "deceive"
           ],
-          "abilityId": "falsecraft",
-          "energyCost": 6,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "abilityId": "wrong_reality",
+          "energyCost": 4,
+          "trivial": false
         },
         {
-          "label": "Call out to her—name yourself and ask plainly what patient they brought in, and why they moved her in the night.",
+          "label": "Retreat back up the stairs—you don't have to be here",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "axes": {
+            "chaos_order": -0.4,
+            "violence_peace": 0.5
+          },
+          "difficulty": "easy",
+          "intentTags": [
+            "retreat"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Step forward and ask what patient they came for",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {
-            "falsehood_truth": 0.7,
-            "chaos_order": 0.4
+            "falsehood_truth": 0.4,
+            "demonic_angelic": 0.3
           },
           "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "intentTags": [
+            "ask"
+          ],
+          "trivial": false
         }
       ],
       "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": 0,
+        "energy": -2,
         "inventoryAdd": [],
         "inventoryRemove": [],
         "xp": 0
@@ -402,142 +389,81 @@
       "ledgerEvents": [],
       "questUpdates": [],
       "standingOps": [],
-      "delegateOps": [],
-      "jobOps": [],
-      "arcOps": [],
-      "adoptSchool": null,
-      "offer": null,
-      "stageOps": [],
-      "scene": {
-        "setting": "The cellar landing of the Kindly Rest, deep night. Stone walls, the air cool and steady. A heavy cellar door stands open ahead, spilling warm herb-scented light. The woman stands at the threshold, turned now to face the darkness of the landing where you stand.",
-        "npcsPresent": [
-          {
-            "name": "The woman with the steady voice",
-            "state": "Turned from the cellar door to face the landing, one hand raised in a gesture that is not quite a halt—assessing, waiting for your next move"
-          },
-          {
-            "name": "The younger person",
-            "state": "In the cellars below, descended among the stored herbs, now silent and waiting"
-          }
-        ],
-        "objects": [
-          "The worn stone steps",
-          "The heavy cellar door, open, light spilling through",
-          "Shadows pooling on the landing where you stand",
-          "The herb-scented warmth rising from below"
-        ],
-        "threads": [
-          "Who is the patient they brought in—and why?",
-          "What does the woman know about your presence here?",
-          "What will happen if the younger person emerges while you are still on the landing?",
-          "Why are they moving a healed patient in the deep night?"
-        ]
-      },
       "npcUpdates": [
         {
-          "op": "meet",
-          "npcId": "steady-voice-woman",
-          "name": "the woman with the steady voice",
-          "role": "visitor at the Kindly Rest",
-          "age": 45,
-          "sex": "female",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "description": "Grey-streaked hair pulled back with a single pin. A coat of deep green, worn at the cuffs. Eyes that read the dark the way other people read daylight. Hands steady and capable.",
-          "note": "Turned to face Loki as they descended the stairs—was aware of their presence before they reached the landing. Raised one hand in a gesture of assessment rather than alarm. The hunger Loki reached for is real but locked behind her own understanding of herself."
-        },
-        {
-          "op": "meet",
-          "npcId": "younger-visitor",
-          "name": "the younger person",
-          "role": "visitor at the Kindly Rest",
-          "age": 24,
-          "sex": "unknown",
-          "gender": "unknown",
-          "pronouns": "they/them",
-          "description": "Voice younger, slightly uncertain. Descended into the cellars ahead of the woman. Now silent and waiting below.",
-          "note": "Stopped mid-question when the woman turned to face the landing. Waiting in the cellars to see what happens next."
-        }
-      ],
-      "intentsHeard": [],
-      "factUpdates": [],
-      "placeUpdates": [],
-      "discovery": null,
-      "codexUpdates": [
-        {
-          "topic": "what-descended-with-them",
-          "label": "What Descended With Them",
-          "kind": "event",
-          "fact": "The woman with the steady voice was aware of Loki's presence before they reached the landing—she turned and faced them with assessment, not alarm. Her hunger is real but locked behind her own understanding of herself.",
-          "links": [
-            "the-kindly-rest",
-            "the-taken-from-the-city"
+          "op": "update",
+          "npcId": "the-woman-with-the",
+          "note": "Sees through Falsecraft without hesitation—recognizes deception as deception and does not look away from it. Names the truth plainly and waits for Loki's answer.",
+          "learned": [
+            "Does not shy from confrontation when something untrue is placed between them"
+          ],
+          "skillsObserved": [
+            "Can read through rank-1 Falsecraft",
+            "Unafraid to name a lie directly"
           ]
         }
       ],
-      "holdingOps": [],
-      "holdTrades": [],
-      "debtOps": [],
-      "exchangeOps": [],
-      "partyOps": [],
-      "generateRequest": [],
-      "encounterOps": [],
-      "projectOps": [],
-      "bandOps": [],
-      "strikeOps": [],
-      "deathOps": [],
-      "newEncounter": null,
-      "unlockPrecursor": null,
-      "unlockSubstrate": null,
-      "timeOps": null,
-      "moveTo": null,
-      "stateOps": [],
-      "itemUpdates": [],
-      "deriveItem": null,
-      "imagePrompt": null,
-      "imageMedium": null,
-      "newAbility": null,
-      "gambitOps": null,
-      "gambitApt": false,
-      "markDefiningMoment": null,
-      "markTeacher": null,
-      "offerPromotion": null,
-      "offerAcquisition": null,
-      "offerIntent": null,
-      "sceneEnded": false
+      "scene": {
+        "setting": "The cellar landing of the Kindly Rest, deep night. Stone walls. The heavy cellar door stands open, spilling warm herb-scented light. A false grey tabby pads into the corridor beyond, unhurried and utterly unconvincing. The woman stands at the threshold, turned fully toward you now, one hand still raised—that same assessing gesture.",
+        "npcsPresent": [
+          {
+            "name": "The woman with the steady voice",
+            "state": "Watching you with full attention, hand raised, weight slightly forward—present and waiting for your response. She has named the lie and is waiting to see what you do next."
+          },
+          {
+            "name": "The younger person",
+            "state": "Paused in the cellars below—footsteps stopped mid-descent after hearing the woman's voice."
+          }
+        ],
+        "objects": [
+          "The worn stone stairs",
+          "The heavy open cellar door",
+          "Shadows on the landing",
+          "The false grey tabby, now disappearing into the corridor",
+          "Warm herb-scented air rising from the cellars"
+        ],
+        "threads": [
+          "Why did the woman see through the Falsecraft so easily?",
+          "Who is the patient they came for?",
+          "Will the younger person emerge from the cellars?",
+          "What does the woman want from you now?"
+        ]
+      },
+      "scene_summary": "The false cat fails—the woman sees it for what it is and names the truth plainly, waiting for your answer."
     },
     "sceneState": {
-      "setting": "The cellar landing of the Kindly Rest, deep night. Stone walls, the air cool and steady. A heavy cellar door stands open ahead, spilling warm herb-scented light. The woman stands at the threshold, turned now to face the darkness of the landing where you stand.",
+      "setting": "The cellar landing of the Kindly Rest, deep night. Stone walls. The heavy cellar door stands open, spilling warm herb-scented light. A false grey tabby pads into the corridor beyond, unhurried and utterly unconvincing. The woman stands at the threshold, turned fully toward you now, one hand still raised—that same assessing gesture.",
       "npcsPresent": [
         {
           "name": "The woman with the steady voice",
-          "state": "Turned from the cellar door to face the landing, one hand raised in a gesture that is not quite a halt—assessing, waitin"
+          "state": "Watching you with full attention, hand raised, weight slightly forward—present and waiting for your response. She has na"
         },
         {
           "name": "The younger person",
-          "state": "In the cellars below, descended among the stored herbs, now silent and waiting"
+          "state": "Paused in the cellars below—footsteps stopped mid-descent after hearing the woman's voice."
         }
       ],
       "objects": [
-        "The worn stone steps",
-        "The heavy cellar door, open, light spilling through",
-        "Shadows pooling on the landing where you stand",
-        "The herb-scented warmth rising from below"
+        "The worn stone stairs",
+        "The heavy open cellar door",
+        "Shadows on the landing",
+        "The false grey tabby, now disappearing into the corridor",
+        "Warm herb-scented air rising from the cellars"
       ],
       "threads": [
-        "Who is the patient they brought in—and why?",
-        "What does the woman know about your presence here?",
-        "What will happen if the younger person emerges while you are still on the landing?",
-        "Why are they moving a healed patient in the deep night?"
+        "Why did the woman see through the Falsecraft so easily?",
+        "Who is the patient they came for?",
+        "Will the younger person emerge from the cellars?",
+        "What does the woman want from you now?"
       ]
     },
-    "beats": 3,
+    "beats": 4,
     "subPlace": null
   },
   "clock": {
     "schemaVersion": 1,
     "day": 5,
-    "hour": 4,
+    "hour": 5,
     "realAnchor": null
   },
   "companions": [
@@ -1787,7 +1713,7 @@
     "lastSharedReadAt": "2026-09-21T00:21:47.405Z",
     "lastTickWorldDay": 83,
     "lastCanonWorldDay": 83,
-    "turnsSinceOffer": 3,
+    "turnsSinceOffer": 4,
     "recentOffers": [
       {
         "thing": "The consensus—all three of your companions affirm the descent without hesitation or doubt, each for their own reason.",
@@ -10253,17 +10179,17 @@
     "deferredMysteries": []
   },
   "tendencies": {
-    "devotion": 1.1616902806130862,
-    "cerebral": 14.725479537910408,
-    "social": 12.143067034770096,
-    "strategic": 14.55349724441264,
-    "cautious": 8.162902221622174,
-    "amorous": 7.497432953955576,
-    "generous": 4.801540639015267,
-    "ruthless": 0.2909732486666578,
-    "risky": 0.23779646505366744,
-    "patient": 0.06493793818799948,
-    "deception": 0.07559112367490345
+    "devotion": 1.132648023597759,
+    "cerebral": 14.357342549462647,
+    "social": 11.839490358900843,
+    "strategic": 14.189659813302324,
+    "cautious": 7.958829666081619,
+    "amorous": 7.309997130106686,
+    "generous": 4.681502123039885,
+    "ruthless": 0.2836989174499914,
+    "risky": 0.23185155342732575,
+    "patient": 0.06331448973329949,
+    "deception": 0.07370134558303086
   },
   "aptitudes": [
     "strategist",
@@ -10272,7 +10198,7 @@
     "faithful",
     "charmer"
   ],
-  "actionCount": 186,
+  "actionCount": 187,
   "grantsVersion": 1,
   "precursorAccess": [
     "address_sense"
@@ -11290,8 +11216,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789951732382,
-  "rev": 817,
+  "updatedAt": 1789951917916,
+  "rev": 818,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -12285,7 +12211,7 @@
     "umbral_depths": 54,
     "the_quickwood": 101,
     "the_center": 50,
-    "valley": 4,
+    "valley": 5,
     "the_open_reach": 3
   },
   "opLossPending": false,
@@ -12413,10 +12339,10 @@
     {
       "id": "sess-16",
       "startedAt": "2026-09-21T00:09:44.522Z",
-      "lastAt": "2026-09-21T00:48:52.374Z",
+      "lastAt": "2026-09-21T00:51:57.913Z",
       "startDay": 83,
       "endDay": 83,
-      "beats": 3
+      "beats": 4
     }
   ],
   "establishedFacts": [
@@ -12500,17 +12426,17 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 216,
-    "choices": 216,
-    "characterDeltas": 103,
-    "scene": 216,
+    "sceneSummary": 217,
+    "choices": 217,
+    "characterDeltas": 104,
+    "scene": 217,
     "placeUpdates": 27,
     "codexUpdates": 122,
     "timeOps": 176,
     "offer": 28,
     "generateRequest": 7,
     "sceneEnded": 86,
-    "npcUpdates": 172,
+    "npcUpdates": 173,
     "moveTo": 7,
     "gambitApt": 47,
     "deeds": 8,
@@ -12527,9 +12453,10 @@
     "_engineClosedScene": 3,
     "discovery": 3,
     "intentsHeard": 5,
-    "delegateOps": 1
+    "delegateOps": 1,
+    "scene_summary": 1
   },
-  "_opTurns": 216,
+  "_opTurns": 217,
   "customAbilities": {
     "mirror-bright": {
       "id": "mirror-bright",
@@ -12584,7 +12511,7 @@
     "schemaVersion": 1,
     "uses": {
       "see_the_made_thing": 33,
-      "falsecraft": 7,
+      "falsecraft": 8,
       "the_wrong_reality": 5,
       "the_misdirect": 2,
       "the_better_story": 11,
@@ -12619,12 +12546,12 @@
       {
         "abilityId": "unbearable_word",
         "since": "2026-09-16T21:20:54.754Z",
-        "progress": 3
+        "progress": 4
       }
     ],
     "lastUsed": {
       "see_the_made_thing": 80,
-      "falsecraft": 69,
+      "falsecraft": 83,
       "the_wrong_reality": 32,
       "the_misdirect": 31,
       "the_better_story": 32,
@@ -13377,13 +13304,14 @@
     "investigate": 8,
     "charm": 1,
     "comfort": 1,
-    "finesse": 1,
+    "finesse": 2,
     "persuade": 1,
     "negotiate": 3,
     "truth": 1,
     "devote": 1,
     "romantic": 1,
-    "consult": 1
+    "consult": 1,
+    "misdirect": 1
   },
   "aptitudeEarnCount": {
     "faithful": 1,
@@ -13720,404 +13648,405 @@
   },
   "_promptRows": {
     "character": {
-      "reached": 30,
-      "produced": 30
+      "reached": 31,
+      "produced": 31
     },
     "location": {
-      "reached": 30,
-      "produced": 30
+      "reached": 31,
+      "produced": 31
     },
     "region": {
-      "reached": 30,
-      "produced": 30
+      "reached": 31,
+      "produced": 31
     },
     "groundDetail": {
-      "reached": 30,
+      "reached": 31,
       "produced": 21
     },
     "lore": {
-      "reached": 30,
-      "produced": 27
+      "reached": 31,
+      "produced": 28
     },
     "traditionMotiveDetail": {
-      "reached": 30,
-      "produced": 30
+      "reached": 31,
+      "produced": 31
     },
     "sheetsDetail": {
-      "reached": 30,
+      "reached": 31,
       "produced": 22
     },
     "rules": {
-      "reached": 30,
-      "produced": 30
+      "reached": 31,
+      "produced": 31
     },
     "recentTurns": {
-      "reached": 30,
-      "produced": 26
+      "reached": 31,
+      "produced": 27
     },
     "timeLabel": {
-      "reached": 30,
-      "produced": 30
+      "reached": 31,
+      "produced": 31
     },
     "npcRegistryDetail": {
-      "reached": 30,
-      "produced": 30
+      "reached": 31,
+      "produced": 31
     },
     "mintedUnmetDetail": {
-      "reached": 30,
-      "produced": 30
+      "reached": 31,
+      "produced": 31
     },
     "npcSeedDetail": {
-      "reached": 30,
+      "reached": 31,
       "produced": 24
     },
     "traditionVocab": {
-      "reached": 30,
-      "produced": 30
+      "reached": 31,
+      "produced": 31
     },
     "standingDetail": {
-      "reached": 30,
-      "produced": 30
+      "reached": 31,
+      "produced": 31
     },
     "recalledDetail": {
-      "reached": 30,
+      "reached": 31,
       "produced": 1
     },
     "bearingsDetail": {
-      "reached": 30,
-      "produced": 30
+      "reached": 31,
+      "produced": 31
     },
     "caravansDetail": {
-      "reached": 30,
+      "reached": 31,
       "produced": 0
     },
     "commandDetail": {
-      "reached": 30,
-      "produced": 30
+      "reached": 31,
+      "produced": 31
     },
     "presenceDetail": {
-      "reached": 30,
-      "produced": 20
+      "reached": 31,
+      "produced": 21
     },
     "worthHereDetail": {
-      "reached": 30,
+      "reached": 31,
       "produced": 0
     },
     "inventoryDetail": {
-      "reached": 30,
-      "produced": 30
+      "reached": 31,
+      "produced": 31
     },
     "sceneState": {
-      "reached": 30,
-      "produced": 26
+      "reached": 31,
+      "produced": 27
     },
     "holdingsDetail": {
-      "reached": 30,
-      "produced": 30
+      "reached": 31,
+      "produced": 31
     },
     "debtsDetail": {
-      "reached": 30,
+      "reached": 31,
       "produced": 0
     },
     "carriedDetail": {
-      "reached": 30,
+      "reached": 31,
       "produced": 0
     },
     "abilityLawDetail": {
-      "reached": 30,
-      "produced": 30
+      "reached": 31,
+      "produced": 31
     },
     "questsDetail": {
-      "reached": 30,
-      "produced": 30
+      "reached": 31,
+      "produced": 31
     },
     "structuredQuestsDetail": {
-      "reached": 30,
+      "reached": 31,
       "produced": 0
     },
     "traditionArcDetail": {
-      "reached": 30,
+      "reached": 31,
       "produced": 0
     },
     "npcErrandsDetail": {
-      "reached": 30,
+      "reached": 31,
       "produced": 0
     },
     "codexDetail": {
-      "reached": 30,
-      "produced": 30
+      "reached": 31,
+      "produced": 31
     },
     "companionsDetail": {
-      "reached": 30,
-      "produced": 30
+      "reached": 31,
+      "produced": 31
     },
     "placeMemoryDetail": {
-      "reached": 30,
+      "reached": 31,
       "produced": 25
     },
     "agesMissingDetail": {
-      "reached": 30,
-      "produced": 30
+      "reached": 31,
+      "produced": 31
     },
     "newsDetail": {
-      "reached": 30,
-      "produced": 30
+      "reached": 31,
+      "produced": 31
     },
     "worldArcsDetail": {
-      "reached": 30,
-      "produced": 30
+      "reached": 31,
+      "produced": 31
     },
     "legendsPursuableDetail": {
-      "reached": 30,
+      "reached": 31,
       "produced": 12
     },
     "wakesDetail": {
-      "reached": 30,
+      "reached": 31,
       "produced": 0
     },
     "arcMoodDetail": {
-      "reached": 30,
-      "produced": 30
+      "reached": 31,
+      "produced": 31
     },
     "reachableDeadDetail": {
-      "reached": 30,
-      "produced": 30
+      "reached": 31,
+      "produced": 31
     },
     "threatToPlayer": {
-      "reached": 30,
+      "reached": 31,
       "produced": 0
     },
     "guardiansDetail": {
-      "reached": 30,
+      "reached": 31,
       "produced": 0
     },
     "resolution": {
-      "reached": 30,
-      "produced": 21
+      "reached": 31,
+      "produced": 22
     },
     "playerInput": {
-      "reached": 30,
+      "reached": 31,
       "produced": 9
     },
     "exactWords": {
-      "reached": 30,
-      "produced": 14
+      "reached": 31,
+      "produced": 15
     },
     "travelDirective": {
-      "reached": 30,
+      "reached": 31,
       "produced": 1
     },
     "itemAdvance": {
-      "reached": 30,
+      "reached": 31,
       "produced": 0
     },
     "encounterWeaveDetail": {
-      "reached": 30,
+      "reached": 31,
       "produced": 4
     },
     "encounterOfferDetail": {
-      "reached": 30,
+      "reached": 31,
       "produced": 3
     },
     "fightFramingDetail": {
-      "reached": 30,
+      "reached": 31,
       "produced": 0
     },
     "abilityGrantDetail": {
-      "reached": 30,
+      "reached": 31,
       "produced": 0
     },
     "stageRevealDetail": {
-      "reached": 30,
+      "reached": 31,
       "produced": 0
     },
     "itemEvolveDetail": {
-      "reached": 30,
+      "reached": 31,
       "produced": 0
     },
     "worldPressureDetail": {
-      "reached": 30,
+      "reached": 31,
       "produced": 0
     },
     "offerDetail": {
-      "reached": 30,
+      "reached": 31,
       "produced": 2
     },
     "teacherOfferDetail": {
-      "reached": 30,
+      "reached": 31,
       "produced": 0
     },
     "substrateDetail": {
-      "reached": 30,
-      "produced": 7
+      "reached": 31,
+      "produced": 8
     },
     "romanceGuidanceDetail": {
-      "reached": 30,
+      "reached": 31,
       "produced": 1
     },
     "factsDetail": {
-      "reached": 30,
-      "produced": 30
+      "reached": 31,
+      "produced": 31
     },
     "evolvedItemsDetail": {
-      "reached": 30,
+      "reached": 31,
       "produced": 0
     },
     "opLossNote": {
-      "reached": 30,
+      "reached": 31,
       "produced": 0
     },
     "emergenceDetail": {
-      "reached": 30,
+      "reached": 31,
       "produced": 0
     },
     "perilNote": {
-      "reached": 30,
+      "reached": 31,
       "produced": 0
     },
     "encounterDetail": {
-      "reached": 30,
+      "reached": 31,
       "produced": 4
     },
     "masteryDetail": {
-      "reached": 30,
-      "produced": 30
+      "reached": 31,
+      "produced": 31
     },
     "bookkeepingRestate": {
-      "reached": 30,
+      "reached": 31,
       "produced": 0
     },
     "anomalyDetail": {
-      "reached": 30,
-      "produced": 30
+      "reached": 31,
+      "produced": 31
     },
     "repairPanelDetail": {
-      "reached": 30,
-      "produced": 30
+      "reached": 31,
+      "produced": 31
     },
     "teacherDetail": {
-      "reached": 30,
+      "reached": 31,
       "produced": 0
     },
     "toolkitDetail": {
-      "reached": 30,
-      "produced": 30
+      "reached": 31,
+      "produced": 31
     },
     "availableEncounters": {
-      "reached": 30,
-      "produced": 26
+      "reached": 31,
+      "produced": 27
     },
     "partyDetail": {
-      "reached": 30,
+      "reached": 31,
       "produced": 0
     },
     "ratingDetail": {
-      "reached": 30,
-      "produced": 30
+      "reached": 31,
+      "produced": 31
     },
     "registerDetail": {
-      "reached": 30,
-      "produced": 30
+      "reached": 31,
+      "produced": 31
     },
     "legendDetail": {
-      "reached": 30,
+      "reached": 31,
       "produced": 1
     },
     "livingWorldDetail": {
-      "reached": 30,
-      "produced": 1
+      "reached": 31,
+      "produced": 2
     },
     "assignmentsDetail": {
-      "reached": 30,
+      "reached": 31,
       "produced": 0
     },
     "latentArcsDetail": {
-      "reached": 30,
-      "produced": 30
+      "reached": 31,
+      "produced": 31
     },
     "seasonalDetail": {
-      "reached": 30,
-      "produced": 30
+      "reached": 31,
+      "produced": 31
     },
     "schoolsDetail": {
-      "reached": 30,
-      "produced": 30
+      "reached": 31,
+      "produced": 31
     },
     "sharedCanonDetail": {
-      "reached": 30,
-      "produced": 7
+      "reached": 31,
+      "produced": 8
     },
     "worldCountLabel": {
-      "reached": 30,
-      "produced": 30
+      "reached": 31,
+      "produced": 31
     },
     "waygateDetail": {
-      "reached": 30,
+      "reached": 31,
       "produced": 27
     },
     "readAloudDetail": {
-      "reached": 30,
-      "produced": 30
+      "reached": 31,
+      "produced": 31
     },
     "scenePacingDetail": {
-      "reached": 30,
+      "reached": 31,
       "produced": 13
     },
     "wishesDetail": {
-      "reached": 10,
+      "reached": 11,
       "produced": 0
     },
     "worldMovedOnDetail": {
-      "reached": 10,
+      "reached": 11,
       "produced": 2
     },
     "companionLivesDetail": {
-      "reached": 10,
-      "produced": 10
+      "reached": 11,
+      "produced": 11
     },
     "homeDetail": {
-      "reached": 10,
+      "reached": 11,
       "produced": 0
     },
     "invitationsDetail": {
-      "reached": 10,
+      "reached": 11,
       "produced": 0
     },
     "bandsJoinedDetail": {
-      "reached": 10,
+      "reached": 11,
       "produced": 0
     },
     "travelersHereDetail": {
-      "reached": 10,
+      "reached": 11,
       "produced": 1
     },
     "travelersDetail": {
-      "reached": 10,
+      "reached": 11,
       "produced": 0
     },
     "journeyDetail": {
-      "reached": 8,
+      "reached": 9,
       "produced": 0
     },
     "journeyUnderwayDetail": {
-      "reached": 8,
+      "reached": 9,
       "produced": 0
     },
     "holdsNearDetail": {
-      "reached": 8,
-      "produced": 4
+      "reached": 9,
+      "produced": 5
     },
     "moneyDetail": {
-      "reached": 7,
-      "produced": 7
+      "reached": 8,
+      "produced": 8
     },
     "jobsDetail": {
-      "reached": 7,
+      "reached": 8,
       "produced": 0
     }
   },
   "_opUnknown": {
-    "sceneSummary": 42
+    "sceneSummary": 43,
+    "scene_summary": 1
   },
   "_bandNotes": null,
   "_opCountingSince": "2026-09-14T22:51:56.913Z",

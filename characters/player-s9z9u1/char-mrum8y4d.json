@@ -1862,7 +1862,7 @@
     ],
     "unseenNews": [],
     "lastGenCount": 2005,
-    "lastSharedReadAt": "2026-09-21T13:12:05.844Z",
+    "lastSharedReadAt": "2026-09-21T13:36:33.433Z",
     "lastTickWorldDay": 83,
     "lastCanonWorldDay": 83,
     "turnsSinceOffer": 3,
@@ -8339,7 +8339,7 @@
       "the_undefeated": 83,
       "the_one_called_zeus": 83
     },
-    "updatesToldTo": "2.4.8",
+    "updatesToldTo": "2.4.9",
     "newsLog": [
       {
         "day": 4,
@@ -8857,6 +8857,14 @@
         "worldDay": 83,
         "text": "The game was updated to v2.4.8 — 1 fixed, 1 changed.",
         "loggedAt": "2026-09-21T13:12:09.901Z"
+      },
+      {
+        "kind": "update",
+        "section": "world",
+        "version": "2.4.9",
+        "worldDay": 83,
+        "text": "The game was updated to v2.4.9 — 1 fixed.",
+        "loggedAt": "2026-09-21T13:36:37.328Z"
       }
     ]
   },
@@ -10452,7 +10460,7 @@
     }
   ],
   "nativeGrantsVersion": 2,
-  "reconcileVersion": 76,
+  "reconcileVersion": 77,
   "gallery": [
     {
       "kind": "moment",
@@ -11410,8 +11418,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789996329905,
-  "rev": 845,
+  "updatedAt": 1789997843096,
+  "rev": 848,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -13473,7 +13481,7 @@
       "kind": "enterprise",
       "name": "The Standing Annex",
       "locationId": "gen-the-made-gate",
-      "steward": null,
+      "steward": "traveler-woman",
       "obligation": null,
       "condition": "thriving",
       "claimedDay": 3,
@@ -13527,6 +13535,12 @@
           "from": "thriving",
           "to": "thriving",
           "note": "Vessin Tallow-bark is keeping it again — the record had lost her, the log had not"
+        },
+        {
+          "at": 2005,
+          "from": "thriving",
+          "to": "thriving",
+          "note": "Vessin Tallow-bark appointed keeper"
         }
       ],
       "carriage": {
@@ -13585,15 +13599,7 @@
     }
   ],
   "_lastProjectDay": 5,
-  "featureOffers": [
-    {
-      "holdingId": "the-fell-pell",
-      "holdingName": "The Fell Pell",
-      "kind": "forge",
-      "why": "the record reads: “forge”",
-      "from": "its own record"
-    }
-  ],
+  "featureOffers": [],
   "_debtReceipts": [],
   "skillUses": {
     "plan": 10,
@@ -13984,6 +13990,10 @@
     {
       "text": "The Standing Annex has a shrine now, the fiction's work.",
       "announced": true
+    },
+    {
+      "text": "Vessin Tallow-bark keeps The Standing Annex now.",
+      "announced": false
     }
   ],
   "figureImages": {

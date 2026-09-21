@@ -190,6 +190,38 @@ export function isConsequentialMove(fromId, toId, locations) {
  *  move (see isConsequentialMove — shared with the moveTo applier since CCODE-158) while an adjacent
  *  step in the same region proceeds without a prompt. Returns null only when there is no travel
  *  intent, or the move is an ordinary adjacent step. The gate runs BEFORE the GM is called. */
+/** ⛔ A DESTINATION GUESSED FROM THE WORDS, WHEN NOTHING NAMED ONE. The trusted paths come first in
+ *  `travelIntentOf` — an explicit `travelTo` from the parser, then a real travel phrase ("head back to X").
+ *  This is the last resort: the beat is TAGGED travel and no phrase resolved, so the words are scanned for
+ *  any place the world knows.
+ *
+ *  ⛔ AND A PLACE NAME CAN BE A COMMON NOUN, WHICH IS HOW THIS STRANDED A PLAYER (CCODE-464). "approach the
+ *  wayhouse from the blind side" matched `the_wayhouse` — "The Wayhouse", the ONLY location in the corpus
+ *  whose whole name is a bare common noun, sitting in another region 168 days away — while the wayhouse the
+ *  fiction meant was The Kindly Rest, down the hill. It raised a departure gate for a five-month journey,
+ *  and the scan took the FIRST match in object order, which is not a choice at all.
+ *
+ *  ⛑ SO A GUESS STAYS IN THE REGION THE CHARACTER IS STANDING IN. Somebody who truly means to leave it says
+ *  so, and the two trusted paths carry that. A weak guess is not a licence to begin a journey of months —
+ *  and when the words name only places elsewhere, the honest answer is that there is no travel intent here,
+ *  not that there is one to the first row that matched. PURE. */
+export function guessedDestination(text, locations = {}, hereId = null) {
+  const hay = String(text || "").toLowerCase();
+  if (!hay) return null;
+  const here = locations?.[hereId] || null;
+  const hereRegion = here?.regionId || here?.region || null;
+  const hits = [];
+  for (const l of Object.values(locations || {})) {
+    const n = String(l?.name || "").toLowerCase();
+    if (n && n.length > 2 && hay.includes(n)) hits.push(l);
+  }
+  if (!hits.length) return null;
+  // the longest name that matched, so "The Kindly Rest" beats a shorter name inside it
+  const local = hits.filter(l => (l.regionId || l.region) && hereRegion && (l.regionId || l.region) === hereRegion)
+    .sort((a, b) => String(b.name).length - String(a.name).length)[0];
+  return local ? local.name : null;   // named a place, but not one around here: no departure on a guess
+}
+
 export function departureGateFor(travelIntent, character, locations) {
   if (!travelIntent || (!travelIntent.destId && !travelIntent.ref)) return null; // not a travel intent
   const here = locations?.[character?.currentLocationId];

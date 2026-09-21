@@ -24514,6 +24514,63 @@ console.log("\n── §339 · who the shared world gets to know ──");
     `${published.length} people across ${saves} saves · ${roleNamed.length} under a job title`);
 }
 
+// ══════════ §340 · CCODE-464 — A GATE THAT CANNOT BE ANSWERED IS A SAVE THAT CANNOT BE PLAYED ══════════
+// Erik, from Courtney's play: "adelheids save wasn't able to proceed when the 3rd option was selected."
+// ⛔ NOT A ROLL. Her third choice read "Descend but take the field-edge path rather than the sluice-road — approach the wayhouse
+// from the blind side of the ridge-path watcher" — a step down a hill. It raised a DEPARTURE GATE offering a journey of 168.8
+// days, 85 rations short, to The Wayhouse: the only location in the corpus whose whole name is a bare common noun, in another
+// region entirely, while the wayhouse the fiction meant was The Kindly Rest, down the slope.
+// ⛔ AND IT WAS A LOOP. Declining threw the act away, the departure gate never recorded its ask, and taking the choice again
+// raised the same gate. Measured on her save: `_pendingIntent` held, `_intentAsked` null, the same beat for thirteen turns.
+console.log("\n── §340 · the departure nobody asked for ──");
+{
+  const IT = await import("../engine/intent.js");
+  const { loadContentHeadless: lch340 } = await import("./headless_content.mjs");
+  const C340 = await lch340();
+  const L340 = C340.locations;
+
+  // ⛔ THE CORPUS FACT THE WHOLE BUG RESTS ON — and it is one row, which is why nobody saw it coming.
+  const bareNoun = Object.values(L340).filter(l => /^(the\s+)?(wayhouse|mill|market|inn|bridge|gate|well|square|hostel|chapel|forge|dock|harbou?r|crossing|rest)$/i.test(String(l.name || "").trim()));
+  check("§340: ⚠️ A PLACE NAME CAN BE A COMMON NOUN, and exactly one in this world is — \"The Wayhouse\". A beat that says \"the wayhouse\" meaning the one down the hill matches it by substring, and it lives in another region five months away. ⛑ Gated so the day somebody authors \"The Mill\" or \"The Crossing\" as a whole name, this section is what says why it matters",
+    bareNoun.length >= 1 && bareNoun.some(l => l.id === "the_wayhouse"),
+    bareNoun.map(l => `${l.name} [${l.regionId}]`).join(", "));
+
+  const herWords = "Descend but take the field-edge path rather than the sluice-road — approach the wayhouse from the blind side of the ridge-path watcher";
+  const hereValley = "millbrook";
+  check("§340: ⛔ A GUESS STAYS IN THE REGION THE CHARACTER IS STANDING IN — her exact words, against the real world: the only place they name is in `the_open_reach` and she is in `valley`, so there is NO travel intent and no gate. ⚠️ The honest answer when the words name only places elsewhere is that there is none, not that there is one to whichever row matched first",
+    IT.guessedDestination(herWords, L340, hereValley) === null,
+    JSON.stringify(IT.guessedDestination(herWords, L340, hereValley)));
+
+  // ⛑ AND IT MUST STILL FIND A REAL LOCAL DESTINATION, or the fix is just a mute button
+  const localName = L340[hereValley]?.name;
+  const nearby = Object.values(L340).find(l => l.id !== hereValley && (l.regionId || l.region) === (L340[hereValley]?.regionId) && String(l.name || "").length > 4);
+  check("§340: ⛑ …AND IT STILL FINDS A PLACE THAT IS ACTUALLY AROUND HERE, or the fix would just be a mute button on travel — a beat naming somewhere in this region still yields it, and the longest name wins so a short name sitting inside a longer one cannot steal it",
+    !!nearby && IT.guessedDestination(`make for ${nearby.name} before dark`, L340, hereValley) === nearby.name
+    && IT.guessedDestination(`stay put at ${localName}`, L340, hereValley) === localName,
+    `${nearby?.name} · ${localName}`);
+
+  // ⛔ THE LOOP: a declined departure must be an ANSWER, not a question asked again
+  const A340 = rd("app.js");
+  check("§340: ⛔ A DECLINED DEPARTURE IS AN ANSWER, NOT THE SAME QUESTION AGAIN — the resumed choice carries the same words, so without a mark on it the same words raise the same gate and the player cannot take that action AT ALL. ⚠️ And declining must not throw the act away when the destination was only GUESSED: \"descend by the field-edge path\" is a step down a hill, and dropping it is what left her on one beat. A destination she NAMED is different — there, staying means staying",
+    /if \(action\.departureDeclined\) return null;/.test(A340)
+    && /if \(g\.guessed\) \{/.test(A340) && /departureDeclined: true/.test(A340)
+    && /depGate\.guessed = !!ti387\.guessed;/.test(A340)
+    && /const choice = \{ \.\.\.g\.resume\.choice \};/.test(A340));
+
+  // ⛑ AND HER SAVE IS UNSTUCK ON LOAD — through the runner, at its version gate
+  {
+    const RC340 = await import("../engine/reconcile.js");
+    const stuck = { name: "Stuck", reconcileVersion: 73, npcRegistry: {},
+      _pendingIntent: { kind: "departure", journeyDestId: "the_wayhouse", act: "…", options: [], resume: { choice: { label: "x" } } } };
+    RC340.reconcile(stuck, "character", { content: C340 });
+    const harm = { name: "Asked", reconcileVersion: 73, npcRegistry: {}, _pendingIntent: { kind: "harm", act: "…", options: [] } };
+    RC340.reconcile(harm, "character", { content: C340 });
+    check("§340: ⛑ AND A HELD DEPARTURE IS CLEARED ON LOAD, which is safe by the gate's OWN design — \"reload-safe: the card reappears; nothing has committed\". No energy spent, no roll made, nobody moved; a gate the player actually wants raises itself again the moment they take that action. ⚠️ Only a DEPARTURE: a harm gate is a different question and is left standing",
+      stuck._pendingIntent === null && harm._pendingIntent?.kind === "harm" && stuck.reconcileVersion >= 74,
+      JSON.stringify({ departure: stuck._pendingIntent, harm: harm._pendingIntent?.kind }));
+  }
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

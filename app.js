@@ -84,7 +84,7 @@ import { fallbackPersonalArc, buildPersonalArcPrompt, sanitizePersonalArc, arcDe
 import { staleBuild, onStaleBuild, deployedBuild, isNewerBuild, runningBuild, BUILD_CHECK_MS } from "./engine/build.js";   // CCODE-394/396: an old build does not write, and the reload is offered
 import { assembleGMContext } from "./engine/gm_registry.js"; // BATCH-11 §23: the GM context is a DECLARED registry, iterated — never hand-listed
 import { rankVoices, pickVoice, speakableText, chunkForSpeech, renderProseHtml } from "./engine/narration_voice.js"; // SNG-155: read aloud at the table; SNG-190 §4: render engine asides, never raw asterisks
-import { harmGateFor, harmTargetFor, departureGateFor, isConsequentialMove, isSpeechAct, isRemoteContact, personDestination, sanitizeOfferIntent, intentNoteFor, splitLedgerEvents } from "./engine/intent.js"; // SNG-145: intent confirmation for costly acts (Law 9 in the play loop); SNG-188: speech-act guard; SNG-228: person-as-place guard; CCODE-158: one departure definition for both doors; CCODE-159: remote contact is not travel
+import { harmGateFor, harmTargetFor, departureGateFor, guessedDestination, isConsequentialMove, isSpeechAct, isRemoteContact, personDestination, sanitizeOfferIntent, intentNoteFor, splitLedgerEvents } from "./engine/intent.js"; // SNG-145: intent confirmation for costly acts (Law 9 in the play loop); SNG-188: speech-act guard; SNG-228: person-as-place guard; CCODE-158: one departure definition for both doors; CCODE-159: remote contact is not travel
 import { resolveWaygateTransit, routeGmMoveTo, isNetworkGate, networkGatesFrom, gateHopCost, aimsOpen } from "./engine/waygate.js";
 import { routeBetween, routeLine, twoWayRoads } from "./engine/journey.js";
 import { planJob, suggestTeam, jobPoolOf, jobRouteOf, jobCost, jobWages, jobEffects, sayEffects, settleDueJobs, degreeWord, jobOpposition, mainNeedOf, jobCraftsOf, bestCraftFor, OUTCOMES as JOB_OUTCOMES, errandOdds, detachForJob, jobPersonFor, workCraftsOf, workDayChance, workHeads, bandTeamOf, sendBandOnMission, bandMissionParty } from "./engine/jobs.js";   // CCODE-420 · CCODE-428 · CCODE-431
@@ -178,7 +178,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.4.3";
+const APP_VERSION = "2.4.4";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -10177,6 +10177,7 @@ async function onChoice(choice) {
       depGate.options = [{ id: "plan", label: `Plan the journey to ${plan387.destName}` }, { id: "go", label: "Set out now" }, { id: "stay", label: "Stay here" }];
       depGate.default = "plan";
       depGate.journeyDestId = ti387.destId;
+      depGate.guessed = !!ti387.guessed;   // ⛔ CCODE-464: a guessed destination declines differently from a named one
     }
     const gate = harmGate || depGate;
     if (gate) {
@@ -10796,6 +10797,11 @@ const NOT_A_PLACE = /^(?:there|here|him|her|them|it|me|us|you|home|back|inside|o
  *  Returns {ref,name,destId} or null; destId null (trusted only) means "mint on arrival." */
 function travelIntentOf(action) {
   if (!action) return null;
+  // ⛔ CCODE-464 — THEY WERE ASKED AND THEY SAID THEY ARE NOT LEAVING. Without this the answer is not an
+  // answer: the resumed choice carries the same words, the same words raise the same gate, and the player
+  // cannot take that action at all. ⚠️ Courtney's save, measured: `_pendingIntent` held a departure to a
+  // place 168 days away, `_intentAsked` was null, and every attempt at the third choice landed back on it.
+  if (action.departureDeclined) return null;
   // SNG-188 §4: DISCUSSING travel is not DOING it. A label led by a speech verb (announce, confide,
   // tell, discuss, plan…) is a conversation about a journey, never a departure — however many
   // place-names it holds. The code belt behind the parser prompt: a travelTo the model set on a speech
@@ -10828,13 +10834,15 @@ function travelIntentOf(action) {
   const m = text.match(TRAVEL_PHRASE);
   let cand = m ? m[1].trim().replace(/\s+/g, " ") : null;
   if ((!cand || NOT_A_PLACE.test(cand.replace(/^the\s+/i, "").trim())) && tags.includes("travel")) {
-    cand = null; // tagged travel, no clean phrase → find a KNOWN place named in the words
-    for (const l of Object.values(CONTENT.locations)) { const n = (l.name || "").toLowerCase(); if (n && n.length > 2 && text.toLowerCase().includes(n)) { cand = l.name; break; } }
+    // ⛔ CCODE-464: the rule lives in engine/intent.js, beside the gate it feeds, so it can be DRIVEN by a
+    // test instead of pinned as a string in app.js where nothing can reach it.
+    cand = guessedDestination(text, CONTENT.locations, character?.currentLocationId);
+    if (!cand) return null;   // named a place, but not one around here — not a departure on a guess
   }
   if (!cand) return null;
   const destId = resolveLocationId(cand, CONTENT.locations, { here: CONTENT.locations?.[character?.currentLocationId] || null });
   if (!destId) return null; // a guessed phrase that isn't a real place is NOT a travel intent (no over-move)
-  return { ref: cand, name: CONTENT.locations[destId].name, destId };
+  return { ref: cand, name: CONTENT.locations[destId].name, destId, guessed: true };
 }
 
 /** SNG-122: the per-turn directive that FORCES the GM to emit moveTo for a travel intent, and enumerates
@@ -10885,6 +10893,16 @@ async function answerIntent(optionId) {
       if (plan) { logJourney(plan); saveCharacter(character); await setOutOnJourney(); return; }
     }
     if (g.kind === "departure" && optionId !== "go") {
+      // ⛔ CCODE-464 — DECLINING A DEPARTURE MUST NOT THROW THE ACT AWAY. When the destination was only
+      // GUESSED, the player never asked to travel: "descend by the field-edge path" is a step down a hill,
+      // and answering "stay" used to drop it, leaving the same choice to raise the same gate next time.
+      // ⛑ The act proceeds, marked as declined so nothing reads a journey into it. A destination the player
+      // NAMED is different — there, "stay" means what it says and the road keeps.
+      if (g.guessed) {
+        saveCharacter(character);
+        await onChoice({ ...g.resume.choice, departureDeclined: true });
+        return;
+      }
       saveCharacter(character);
       renderPlay(character.activeScene?.lastTurn || null, { aside: "You hold at the boundary — the road will keep." });
       return;

@@ -2455,6 +2455,24 @@ export const CHARACTER_STEPS = [
       return {};
     }
   },
+  {
+    version: 74, id: "a-departure-nobody-asked-for", playerFacing: false,
+    // ⛔ CCODE-464 — A HELD GATE THAT CANNOT BE ANSWERED IS A SAVE THAT CANNOT BE PLAYED. Courtney's third
+    // choice raised a departure to a place 168 days away, guessed from the words "the wayhouse" in a beat
+    // about walking down a hill; declining it threw the act away, and taking the choice again raised the same
+    // gate. A loop with no exit.
+    //
+    // ⛑ CLEARING IT IS SAFE BY THE GATE'S OWN DESIGN — "reload-safe: the card reappears; nothing has
+    // committed." No energy is spent, no roll is made, nobody has moved. A gate the player genuinely wants
+    // raises itself again the moment they take that action, and the parser will no longer raise this one.
+    apply: (c) => {
+      const g = c?._pendingIntent;
+      if (!g || g.kind !== "departure") return {};
+      c._pendingIntent = null;
+      console.log(`[reconcile] ccode-464: a held departure to ${g.journeyDestId || "somewhere"} cleared — nothing had committed`);
+      return {};
+    }
+  },
   // Future steps register here — e.g. innate-talent GRANT (offers[], when talent content
   // lands with SNG-017), Reach-tradition eligibility surfacing, universal-role tagging.
 ];

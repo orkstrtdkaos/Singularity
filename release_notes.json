@@ -16,6 +16,18 @@
   "next": [],
   "releases": [
     {
+      "version": "2.4.4",
+      "date": "2026-09-21",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "A choice that could not be taken",
+          "summary": "Picking an option that mentioned a place by a common name could raise a journey you never asked for, and leave you unable to go on.",
+          "detail": "Choosing to walk down to the wayhouse could be read as setting out for a place of that name five months away — and the question it raised could not be answered: declining threw the action away, and taking it again asked the same question. A guess at where you mean to go now stays in the region you are standing in, saying no to a journey lets you get on with what you were actually doing, and any such question already waiting on a save is cleared when it loads."
+        }
+      ]
+    },
+    {
       "version": "2.4.3",
       "date": "2026-09-20",
       "entries": [

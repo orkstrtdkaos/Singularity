@@ -1300,8 +1300,7 @@
     },
     "steady-voice-woman": {
       "id": "steady-voice-woman",
-      "name": "The Woman With The",
-      "nameUnknown": true,
+      "name": "Ravel",
       "trueName": "Ravel",
       "role": "visitor at the Kindly Rest",
       "description": "Grey-streaked hair pulled back with a single pin. A coat of deep green, worn at the cuffs. Eyes that read the dark the way other people read daylight. Hands steady and capable.",
@@ -1311,7 +1310,8 @@
       },
       "relationship": 0,
       "history": [
-        "[d5] Turned to face Loki as they descended the stairs—was aware of their presence before they reached the landing. Raised one hand in a gesture of assessment rather than alarm. The hunger Loki reached for is real but locked behind her own understanding of herself."
+        "[d5] Turned to face Loki as they descended the stairs—was aware of their presence before they reached the landing. Raised one hand in a gesture of assessment rather than alarm. The hunger Loki reached for is real but locked behind her own understanding of herself.",
+        "[d5] You know this person's name now: Ravel (was \"The Woman With The\")"
       ],
       "knownFacts": [],
       "skillsObserved": [],
@@ -1328,12 +1328,15 @@
         "locationId": "the_kindly_rest",
         "day": 5
       },
-      "met": 1
+      "met": 1,
+      "aliases": [
+        "The Woman With The"
+      ],
+      "nameRevealed": true
     },
     "younger-visitor": {
       "id": "younger-visitor",
-      "name": "The Younger Person",
-      "nameUnknown": true,
+      "name": "Estry",
       "trueName": "Estry",
       "role": "visitor at the Kindly Rest",
       "description": "Voice younger, slightly uncertain. Descended into the cellars ahead of the woman. Now silent and waiting below.",
@@ -1344,7 +1347,8 @@
       "relationship": 0,
       "history": [
         "[d5] Stopped mid-question when the woman turned to face the landing. Waiting in the cellars to see what happens next.",
-        "[d5] Paused in the cellars below throughout the entire exchange at the landing. They did not speak, did not move—only listened. Their silence has changed. They are waiting for something now."
+        "[d5] Paused in the cellars below throughout the entire exchange at the landing. They did not speak, did not move—only listened. Their silence has changed. They are waiting for something now.",
+        "[d5] You know this person's name now: Estry (was \"The Younger Person\")"
       ],
       "knownFacts": [
         "They are listening to what the woman does, and her attention shapes their own readiness to act",
@@ -1366,7 +1370,11 @@
         "day": 5
       },
       "met": 2,
-      "statusNote": "In the cellars below the Kindly Rest, waiting—their next move depends on the woman's"
+      "statusNote": "In the cellars below the Kindly Rest, waiting—their next move depends on the woman's",
+      "aliases": [
+        "The Younger Person"
+      ],
+      "nameRevealed": true
     }
   },
   "placeMemory": {
@@ -11378,8 +11386,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789953931430,
-  "rev": 828,
+  "updatedAt": 1789954144116,
+  "rev": 831,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -12364,7 +12372,9 @@
       ],
       "teaches": null,
       "liaisonFor": null,
-      "joinedDay": 77
+      "joinedDay": 77,
+      "leftDay": 83,
+      "departedWhy": "you parted ways"
     }
   ],
   "_pinsInitialized": true,

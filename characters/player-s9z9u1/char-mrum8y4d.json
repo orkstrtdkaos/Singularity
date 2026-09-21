@@ -1672,33 +1672,6 @@
     "news": [
       {
         "day": 5,
-        "worldDay": 82,
-        "text": "Kesh Ardent, the Edge That Holds turned The One Who Doubts the Proof back. The One learned something, which is worse for everyone else.",
-        "tier": "event",
-        "section": "world",
-        "kind": "clash",
-        "winnerId": "the_edge_that_holds",
-        "loserId": "the_doubting_lattice",
-        "outcome": "stopped",
-        "locationId": "the_redline",
-        "placedBy": "winnerId"
-      },
-      {
-        "day": 5,
-        "worldDay": 83,
-        "text": "The Standing Annex's keeper sold 8 raw material for 32 crystal.",
-        "tier": "event",
-        "section": "yours"
-      },
-      {
-        "day": 5,
-        "worldDay": 83,
-        "text": "3 crystal left at The Standing Annex by those who came to it.",
-        "tier": "event",
-        "section": "yours"
-      },
-      {
-        "day": 5,
         "worldDay": 83,
         "text": "Halvex Coil, the Rewriter has been asking after where The Scouring Hand lies — wanting them back from the dark.",
         "tier": "event",
@@ -1858,11 +1831,32 @@
         "text": "The Standing Annex has lost its keeper.",
         "tier": "event",
         "section": "yours"
+      },
+      {
+        "day": 5,
+        "worldDay": 83,
+        "text": "Vessin Tallow-bark keeps The Standing Annex now.",
+        "tier": "event",
+        "section": "yours"
+      },
+      {
+        "day": 5,
+        "worldDay": 83,
+        "text": "Halvex Coil keeps The Standing Annex now; Vessin Tallow-bark is released from it.",
+        "tier": "event",
+        "section": "yours"
+      },
+      {
+        "day": 5,
+        "worldDay": 83,
+        "text": "The Standing Annex has lost its keeper.",
+        "tier": "event",
+        "section": "yours"
       }
     ],
     "unseenNews": [],
     "lastGenCount": 2005,
-    "lastSharedReadAt": "2026-09-21T13:36:33.433Z",
+    "lastSharedReadAt": "2026-09-21T13:39:50.051Z",
     "lastTickWorldDay": 83,
     "lastCanonWorldDay": 83,
     "turnsSinceOffer": 3,
@@ -8865,6 +8859,22 @@
         "worldDay": 83,
         "text": "The game was updated to v2.4.9 — 1 fixed.",
         "loggedAt": "2026-09-21T13:36:37.328Z"
+      },
+      {
+        "day": 5,
+        "worldDay": 83,
+        "text": "Vessin Tallow-bark keeps The Standing Annex now.",
+        "tier": "event",
+        "section": "yours",
+        "loggedAt": "2026-09-21T13:39:55.075Z"
+      },
+      {
+        "day": 5,
+        "worldDay": 83,
+        "text": "Halvex Coil keeps The Standing Annex now; Vessin Tallow-bark is released from it.",
+        "tier": "event",
+        "section": "yours",
+        "loggedAt": "2026-09-21T13:39:55.075Z"
       }
     ]
   },
@@ -11418,8 +11428,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789997941723,
-  "rev": 851,
+  "updatedAt": 1789997995079,
+  "rev": 855,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -13481,18 +13491,12 @@
       "kind": "enterprise",
       "name": "The Standing Annex",
       "locationId": "gen-the-made-gate",
-      "steward": "halvex_coil",
+      "steward": null,
       "obligation": null,
       "condition": "thriving",
       "claimedDay": 3,
       "lastMovedWorldCount": 1992,
       "history": [
-        {
-          "at": 1826,
-          "from": "holding",
-          "to": "thriving",
-          "note": "improved with Maintained Veil"
-        },
         {
           "at": 1826,
           "from": "thriving",
@@ -13553,6 +13557,12 @@
           "from": "thriving",
           "to": "thriving",
           "note": "hands: Tessvel Cairn, Vessin Tallow-bark"
+        },
+        {
+          "at": 2005,
+          "from": "thriving",
+          "to": "thriving",
+          "note": "hands: Tessvel Cairn, Vessin Tallow-bark, Veln Ashpause"
         }
       ],
       "carriage": {
@@ -13606,7 +13616,8 @@
       ],
       "crew": [
         "tessvel-cairn",
-        "traveler-woman"
+        "traveler-woman",
+        "hourkeeper-confluence"
       ],
       "growthPasses": 2,
       "trade": true
@@ -14007,11 +14018,11 @@
     },
     {
       "text": "Vessin Tallow-bark keeps The Standing Annex now.",
-      "announced": false
+      "announced": true
     },
     {
       "text": "Halvex Coil keeps The Standing Annex now; Vessin Tallow-bark is released from it.",
-      "announced": false
+      "announced": true
     }
   ],
   "figureImages": {

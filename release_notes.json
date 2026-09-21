@@ -16,6 +16,18 @@
   "next": [],
   "releases": [
     {
+      "version": "2.4.5",
+      "date": "2026-09-21",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "When the cloud list is empty, it says why",
+          "summary": "An empty list of cloud characters now tells you whether the world is empty or the app simply cannot see it — and Settings can test the connection.",
+          "detail": "If the repository details or access token were wrong, the app said “no players found” — the same thing it says when the shared world really is empty — because a private repository answers “not found” to a token that cannot read it. It now tells the two apart and says which one it is, and Settings has a Test the connection button that checks what you have typed before you save it."
+        }
+      ]
+    },
+    {
       "version": "2.4.4",
       "date": "2026-09-21",
       "entries": [

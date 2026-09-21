@@ -191,7 +191,39 @@ async function ghPutViaGitData(path, contentStr, message) {
 /** List file names in a repo directory. Returns [] if missing. */
 export async function ghList(path) {
   const meta = await ghGet(path);
-  return Array.isArray(meta) ? meta.map(f => f.name) : [];
+  if (Array.isArray(meta)) return meta.map(f => f.name);
+  // ⛔ CCODE-465 — A 404 IS TWO DIFFERENT FACTS AND THIS RETURNED THE SAME EMPTY LIST FOR BOTH. "There is
+  // nothing at that path yet" and "we cannot see this repository at all" are opposite answers, and the second
+  // is what a WRONG OR UNDER-SCOPED TOKEN looks like: ⚠️ GitHub answers a private repo with 404, never 403,
+  // so as not to leak that it exists. So a mistyped token produced "No players found in the shared repo yet —
+  // make a character here and it'll sync up", which is a sentence about an empty repo, told to somebody whose
+  // characters were all sitting in it. ⛑ Ask the repo root: if that cannot be seen either, say so.
+  if (meta === null) {
+    let root = null;
+    try { root = await ghGet(""); } catch { throw new Error("GH_NO_REPO"); }
+    if (root === null) throw new Error("GH_NO_REPO");
+  }
+  return [];
+}
+
+/** ⛔ CAN WE SEE THE REPO, AND IS THE TOKEN ACCEPTED — in words, not in a status code. Courtney entered a
+ *  token on her phone and the app told her neither that it worked nor that it did not; there was no way for
+ *  anyone to find out short of reading a network tab. ⚠️ Never throws: every answer is an answer. */
+export async function checkSync() {
+  const { owner, repo, pat } = getSyncConfig();
+  if (!owner || !repo) return { ok: false, why: "No owner or repository is set." };
+  if (!pat) return { ok: false, why: "No access token is set, so only a public repository could be read." };
+  let players = null;
+  try { players = await ghList("players/"); }
+  catch (e) {
+    const code = String(e?.message || e);
+    if (code === "GH_NO_REPO") return { ok: false, why: `Cannot see ${owner}/${repo}. Check the owner and the repository name — and note that a PRIVATE repository answers "not found" to a token that cannot read it, so this is what a wrong or under-scoped token looks like too.` };
+    if (/_(401|403)$/.test(code)) return { ok: false, why: "The access token was refused. Check it was pasted whole, and that it has contents access to this repository." };
+    return { ok: false, why: `Could not reach GitHub (${code}).` };
+  }
+  return { ok: true, why: players.length
+    ? `Connected to ${owner}/${repo} — ${players.length} player${players.length === 1 ? "" : "s"} in the shared world.`
+    : `Connected to ${owner}/${repo}, and it holds no players yet. Make a character here and it will sync up.` };
 }
 
 /** ⛔ SNG-554 — THE ANSWER, IN GITHUB'S OWN WORDS: `Invalid request. "sha" wasn't supplied.`

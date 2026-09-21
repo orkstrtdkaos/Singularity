@@ -24571,6 +24571,64 @@ console.log("\n── §340 · the departure nobody asked for ──");
   }
 }
 
+// ══════════ §341 · CCODE-465 — "NO PLAYERS FOUND" WAS A SENTENCE ABOUT AN EMPTY REPO, TOLD TO SOMEBODY WHOSE CHARACTERS WERE IN IT ══════════
+// Erik: "on courtney's phone, she couldn't see the cloud list of characters… i didn't verify she entered all the pat and api
+// key's in correctly though." ⛔ There was no way for either of them to find out. The cloud list read `players/`, got an empty
+// array, and said "No players found in the shared repo yet. Make a character here and it'll sync up."
+// ⚠️ AND AN EMPTY ARRAY WAS TWO DIFFERENT FACTS. `ghGet` returns null on 404 and `ghList` turned that into `[]` — so "there is
+// nothing at that path" and "we cannot see this repository at all" produced the same screen. GitHub answers a PRIVATE repo with
+// 404 and never 403, precisely so it does not leak that the repo exists — so a mistyped or under-scoped token looks EXACTLY like
+// an empty world.
+console.log("\n── §341 · which of the two silences is this ──");
+{
+  // a fetch that answers whatever this case needs, so the real code runs against real statuses
+  const realFetch = globalThis.fetch, realLS = globalThis.localStorage;
+  const store = new Map([["singularity.gh.owner", "someone"], ["singularity.gh.repo", "theirrepo"], ["singularity.gh.pat", "tok"]]);
+  globalThis.localStorage = { getItem: k => (store.has(k) ? store.get(k) : null), setItem: (k, v) => store.set(k, v), removeItem: k => store.delete(k) };
+  const answer = (map) => { globalThis.fetch = async (url) => {
+    const path = String(url).split("/contents/")[1] ?? "";
+    const hit = Object.entries(map).find(([p]) => p === path);
+    const v = hit ? hit[1] : { status: 404 };
+    return { ok: v.status === 200, status: v.status, json: async () => v.body ?? null, text: async () => "" };
+  }; };
+  const SY = await import(`../engine/sync.js?cachebust=${Date.now()}`);
+
+  answer({ "players/": { status: 200, body: [{ name: "player-abc" }, { name: "player-def" }] } });
+  const good = await SY.checkSync();
+
+  answer({ "": { status: 200, body: [{ name: "README.md" }] } });   // repo visible, players/ absent
+  const emptyWorld = await SY.checkSync();
+
+  answer({});                                                        // nothing visible at all — a private repo, refused
+  let invisible = null; try { invisible = await SY.checkSync(); } catch (e) { invisible = { ok: false, why: String(e) }; }
+
+  answer({ "players/": { status: 401 } });
+  const refused = await SY.checkSync();
+
+  check("§341: ⛔ AN EMPTY LIST AND AN INVISIBLE REPOSITORY ARE DIFFERENT ANSWERS, AND THE APP SAID THE SAME THING FOR BOTH — GitHub answers a PRIVATE repo with 404 rather than 403, so as not to leak that it exists, which means a mistyped or under-scoped token looks exactly like a world with nobody in it. ⛑ `ghList` now asks the repo ROOT before it reports emptiness, and each case comes back in words somebody can act on",
+    good.ok && /2 players/.test(good.why)
+    && emptyWorld.ok && /holds no players yet/.test(emptyWorld.why)
+    && !invisible.ok && /Cannot see someone\/theirrepo/.test(invisible.why) && /private/i.test(invisible.why)
+    && !refused.ok && /token was refused/i.test(refused.why),
+    JSON.stringify({ good: good.why, empty: emptyWorld.why, invisible: invisible.why, refused: refused.why }));
+
+  check("§341: ⛑ …AND EVERY ANSWER IS AN ANSWER — `checkSync` never throws, whatever GitHub does, because a diagnosis that crashes is not a diagnosis; and with nothing configured it says THAT rather than asking the network",
+    (() => { store.set("singularity.gh.pat", ""); return true; })()
+    && !(await SY.checkSync()).ok && /No access token/.test((await SY.checkSync()).why),
+    (await SY.checkSync()).why);
+
+  globalThis.fetch = realFetch;
+  if (realLS === undefined) delete globalThis.localStorage; else globalThis.localStorage = realLS;
+
+  // ⛑ AND SOMEBODY CAN ACTUALLY RUN IT — the button is the whole point: Courtney had no way to tell.
+  const A341 = rd("app.js");
+  check("§341: ⛔ AND THERE IS A WAY TO FIND OUT FROM THE PHONE ITSELF — a Test the connection button beside the token, which checks what is TYPED rather than what is saved, so a token can be tried before it is committed and put back afterwards. ⚠️ That is the actual gap: not that the token was wrong, but that nothing anywhere would say so",
+    /id="set-synctest"/.test(A341) && /const r = await checkSync\(\);/.test(A341)
+    && /setSyncConfig\(before\);/.test(A341)
+    && /Test the connection<\/strong> button/.test(A341)
+    && /answers \\u201cnot found\\u201d to a token that cannot read it|answers \u201cnot found\u201d to a token that cannot read it/.test(A341));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

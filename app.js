@@ -30,7 +30,7 @@ import { receiptLine, roundVerdict } from "./engine/roundreceipt.js"; // the rou
 import { mintableBraidsFor, buildBraidDef, mintBraid, braidKey, registerDiscoveryAbility, braidsAwaitingMoment } from "./engine/braids.js"; // SNG-197 p2: in-play braid mint + the moment; SNG-226: a discovery becomes a usable craft; SNG-592: whose moment a ledger row is
 import { ensureRecipeStore, buildRecipeRecord, recipeFor, recipeToAuthored, mergeRecipes, firstFinderName } from "./engine/recipes.js"; // SNG-201: shared braid recipes
 import { braidPlacement, compositionAngle, leanOffset, wheelRejects, inTraditions, matchesFunction, creationPool } from "./engine/wheelgeom.js"; // SNG-202: place a craft on the wheel by its composition
-import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger, fetchRemoteCharacter, resolveSaveConflict, pushMergedFile, pushOwnedFile, ghList, fetchRepoJSON, raceTimeout } from "./engine/sync.js";
+import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger, fetchRemoteCharacter, resolveSaveConflict, pushMergedFile, pushOwnedFile, ghList, fetchRepoJSON, raceTimeout, checkSync } from "./engine/sync.js";
 import { buildFeedPost, appendFeedPost, feedForViewer, FEED_PATH } from "./engine/feed.js"; // SNG-168 §2: the world feed (post a turn to the family — never canon)
 // ⚠️ `composeImagePrompt` ONLY. I imported `COMPOSED_MAX` beside it and never called it — the
 // importedNeverCalled ratchet caught it on the next run, which is the same "built, shipped, unreachable"
@@ -178,7 +178,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.4.4";
+const APP_VERSION = "2.4.5";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -3951,7 +3951,9 @@ function renderSettings(note = "") {
       <input id="set-owner" value="${esc(sc.owner)}" placeholder="GitHub owner (e.g. orkstrtdkaos)" style="margin-bottom:6px">
       <input id="set-repo" value="${esc(sc.repo)}" placeholder="Repo (e.g. Singularity)" style="margin-bottom:6px">
       <input id="set-pat" type="password" value="${esc(sc.pat)}" placeholder="GitHub PAT with contents:write">
-      <div class="hint">When set, your character, player profile, and world events back up to the shared repo. Leave empty for local-only play.</div></div>
+      <div class="hint">When set, your character, player profile, and world events back up to the shared repo. Leave empty for local-only play.</div>
+      <button class="btn secondary" id="set-synctest" style="margin-top:6px">Test the connection</button>
+      <div id="set-syncresult" class="hint" style="margin-top:6px"></div></div>
     <div class="field"><label>Content rating — the ceiling for this profile</label>
       <select id="set-rating">
         ${RATING_ORDER.map(r => `<option value="${r}" ${ratingCeiling(profile) === r ? "selected" : ""} ${isMinorProfile(profile) && RATING_LEVEL[r] > RATING_LEVEL["PG-13"] ? "disabled" : ""}>${r}${r === "R+" ? " — maximum intensity, all details" : ""}</option>`).join("")}
@@ -4015,6 +4017,25 @@ function renderSettings(note = "") {
     };
     input.click();
   };
+  // ⛔ CCODE-465 — TEST IT FROM HERE, because there was no way to find out. Courtney entered a token on her
+  // phone, saw an empty list of characters, and neither she nor Erik could tell whether the token was wrong
+  // or the world was empty — the app said the same thing either way. ⚠️ It tests what is TYPED, not what is
+  // saved, so somebody can check a token before committing it.
+  {
+    const btn = document.getElementById("set-synctest");
+    if (btn) btn.onclick = async () => {
+      const out = document.getElementById("set-syncresult");
+      const before = getSyncConfig();
+      out.textContent = "Asking GitHub…";
+      btn.disabled = true;
+      try {
+        setSyncConfig({ owner: document.getElementById("set-owner").value, repo: document.getElementById("set-repo").value, pat: document.getElementById("set-pat").value });
+        const r = await checkSync();
+        out.textContent = `${r.ok ? "\u2713" : "\u26d4"} ${r.why}`;
+      } catch (e) { out.textContent = `\u26d4 ${String(e?.message || e)}`; }
+      finally { setSyncConfig(before); btn.disabled = false; }   // the typed values are not committed by a test
+    };
+  }
   document.getElementById("set-save").onclick = () => {
     profile.displayName = document.getElementById("set-player").value.trim();
     profile.wishes = smartClamp(String(document.getElementById("set-wishes")?.value || "").trim(), 600) || null;   // CCODE-355: clamped on a word, like every other prose store
@@ -4159,7 +4180,17 @@ async function renderDiscover(note = "") {
   const body = document.getElementById("disc-body");
   let keys;
   try { keys = await ghList("players/"); }
-  catch (e) { body.innerHTML = `<div class="insight">Couldn't reach the repo (${esc(String(e.message || e).slice(0, 80))}). Check your sync settings in Settings.</div>`; return; }
+  catch (e) {
+    // ⛔ CCODE-465: in words. "GH_NO_REPO" is not a sentence anybody can act on, and the commonest cause of it
+    // is a token that cannot read a PRIVATE repo — which GitHub reports as "not found", never as "refused".
+    const code = String(e?.message || e);
+    const why = code === "GH_NO_REPO"
+      ? "We can't see that repository. Check the owner and the name in Settings — and if it is private, check the access token: GitHub answers \u201cnot found\u201d to a token that cannot read it."
+      : /_(401|403)$/.test(code) ? "The access token was refused. Check it was pasted whole, and that it has contents access to the repository."
+      : `Couldn't reach GitHub (${esc(code.slice(0, 60))}).`;
+    body.innerHTML = `<div class="insight">${esc(why)}</div><div class="hint" style="margin-top:6px">Settings has a <strong>Test the connection</strong> button that says which part is wrong.</div>`;
+    return;
+  }
   if (!keys.length) { body.innerHTML = "<div class='insight'>No players found in the shared repo yet. Make a character here and it'll sync up.</div>"; return; }
   // fetch each profile for a display name (best-effort — a missing profile still shows its key)
   const profiles = [];

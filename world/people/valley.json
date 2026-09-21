@@ -337,13 +337,16 @@
       }
     },
     "halvex_coil": {
-      "status": "wounded",
+      "status": "stopped",
       "woundedUntilDay": 77,
       "woundedBy": "the_appetite",
-      "atWorldDay": 69,
+      "sinceWorldDay": 83,
+      "stoppedUntilDay": 86,
+      "stoppedBy": "the_long_grudge",
+      "atWorldDay": 83,
       "fateBy": {
-        "characterId": "char-mrum8y4d",
-        "name": "Loki"
+        "characterId": "char-mr5ns3hh",
+        "name": "Adelheid"
       }
     },
     "sunwrack_valen": {
@@ -773,6 +776,17 @@
       "stoppedUntilDay": 85,
       "stoppedBy": "the_starless",
       "atWorldDay": 82,
+      "fateBy": {
+        "characterId": "char-mr5ns3hh",
+        "name": "Adelheid"
+      }
+    },
+    "the_still_lattice": {
+      "status": "stopped",
+      "sinceWorldDay": 83,
+      "stoppedUntilDay": 86,
+      "stoppedBy": "cinder_vael",
+      "atWorldDay": 83,
       "fateBy": {
         "characterId": "char-mr5ns3hh",
         "name": "Adelheid"

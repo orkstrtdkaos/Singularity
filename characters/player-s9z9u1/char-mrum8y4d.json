@@ -7,8 +7,8 @@
   "nativeTradition": "enginewright",
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
-  "level": 8,
-  "xp": 794,
+  "level": 9,
+  "xp": 810,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -105,22 +105,28 @@
     {
       "abilityId": "the_old_procedure",
       "level": 2
+    },
+    {
+      "abilityId": "shadow-image",
+      "level": 1,
+      "braided": true,
+      "discovered": true
     }
   ],
   "alignment": {
     "mechanical_spiritual": -0.034,
-    "falsehood_truth": 0.15642856542446873,
+    "falsehood_truth": 0.10860713715324527,
     "demonic_angelic": -0.020000000000000004,
-    "dark_light": 0.135,
-    "concrete_abstract": 0.094125,
-    "chaos_order": -0.05,
+    "dark_light": 0.085,
+    "concrete_abstract": 0.144125,
+    "chaos_order": -0.115,
     "body_mind": 0.034999999999999996
   },
-  "attunement": 8,
-  "maxHealth": 73,
-  "health": 73,
-  "maxEnergy": 151,
-  "energy": 69,
+  "attunement": 9,
+  "maxHealth": 78,
+  "health": 78,
+  "maxEnergy": 156,
+  "energy": 156,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -313,75 +319,101 @@
         "player": "use falsecraft to show a cat walk through the hall and into the other room.",
         "summary": "Caught mid-deception at the cellar landing of the Kindly Rest—the woman sees through a false cat and names the truth directly.",
         "narration": "You reach for Falsecraft—that quick, practiced shimmer where nothing becomes something just solid enough to believe. A grey tabby, sleek and unhurried, materializes in the threshold light and pads into the corridor with the absolute certainty of a cat who belongs here.\n\nBut the woman does not follow it.\n\nShe watches the cat traverse the hall, then turns her gaze back to you on the landing. There is no surprise in her face, no distraction—only a steady assessment, as if the cat was a thing she already knew would happen. When she speaks, her voice carries no accusation, only fact. \"That's not real,\" she says. \"And you're still here.\"\n\nThe younger person pauses in the cellars below. You hear their footsteps stop. The woman raises her hand again—that same unhurried gesture—and her weight shifts slightly forward. Not threatening. But present. Waiting for your answer."
+      },
+      {
+        "player": "use umbracraft to conceal yourself in shadows while you use falsecraft to show yourself walk out of the room.",
+        "summary": "Caught mid-deception at the cellar landing, Loki braids Umbracraft and Falsecraft into a discovery—becoming shadow while an illusion walks away—and the woman at the threshold reads both the technique and the truth beneath it.",
+        "narration": "You do not move. Instead, you reach down into the shadow pooled at the landing's edge—the deep, old darkness that gathers where the cellar light fails—and you *ask* it the way Umbracraft teaches. Not a hiding place. A *becoming*.\n\nThe shadow takes you. You feel the shift like water closing over your head, and suddenly the light that reaches the landing does not touch what you are anymore. You are the absence where something was, and the woman's eyes—even those steady, careful eyes—cannot quite fix you in it.\n\nAt the same moment, you *build* with Falsecraft: another you, solid enough to believe, stepping backward from the threshold with the gait of someone caught and choosing retreat. The false image turns, and walks—not running, not panicked—toward the corridor where the cat went. It moves with your own weight, your own hesitation, the small truth that makes a lie convincing.\n\nThe woman watches the false you go. She does not follow. But her hand lowers, and her expression shifts—not confusion, but *recognition*. As if she has just read a question she did not know was being asked, and found the answer written in shadow and false light.\n\n\"Clever,\" she says quietly. Not to the departing image. To the *absence* where you stand.\n\nThe younger person, paused on the cellars below, has gone still. Waiting.\n\n*✦ New technique discovered: **Shadow-Image** — it's yours now, ready to use.*\n\n*You feel it settle into you — a new steadiness. (Level 9: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*"
       }
     ],
     "lastTurn": {
-      "narration": "You reach for Falsecraft—that quick, practiced shimmer where nothing becomes something just solid enough to believe. A grey tabby, sleek and unhurried, materializes in the threshold light and pads into the corridor with the absolute certainty of a cat who belongs here.\n\nBut the woman does not follow it.\n\nShe watches the cat traverse the hall, then turns her gaze back to you on the landing. There is no surprise in her face, no distraction—only a steady assessment, as if the cat was a thing she already knew would happen. When she speaks, her voice carries no accusation, only fact. \"That's not real,\" she says. \"And you're still here.\"\n\nThe younger person pauses in the cellars below. You hear their footsteps stop. The woman raises her hand again—that same unhurried gesture—and her weight shifts slightly forward. Not threatening. But present. Waiting for your answer.\n\n*▲ Practiced — **Falsecraft** is fluent now (rank 2), earned through use.*",
-      "sceneSummary": "Caught mid-deception at the cellar landing of the Kindly Rest—the woman sees through a false cat and names the truth directly.",
+      "narration": "You do not move. Instead, you reach down into the shadow pooled at the landing's edge—the deep, old darkness that gathers where the cellar light fails—and you *ask* it the way Umbracraft teaches. Not a hiding place. A *becoming*.\n\nThe shadow takes you. You feel the shift like water closing over your head, and suddenly the light that reaches the landing does not touch what you are anymore. You are the absence where something was, and the woman's eyes—even those steady, careful eyes—cannot quite fix you in it.\n\nAt the same moment, you *build* with Falsecraft: another you, solid enough to believe, stepping backward from the threshold with the gait of someone caught and choosing retreat. The false image turns, and walks—not running, not panicked—toward the corridor where the cat went. It moves with your own weight, your own hesitation, the small truth that makes a lie convincing.\n\nThe woman watches the false you go. She does not follow. But her hand lowers, and her expression shifts—not confusion, but *recognition*. As if she has just read a question she did not know was being asked, and found the answer written in shadow and false light.\n\n\"Clever,\" she says quietly. Not to the departing image. To the *absence* where you stand.\n\nThe younger person, paused on the cellars below, has gone still. Waiting.\n\n*✦ New technique discovered: **Shadow-Image** — it's yours now, ready to use.*\n\n*You feel it settle into you — a new steadiness. (Level 9: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*",
+      "sceneSummary": "Caught mid-deception at the cellar landing, Loki braids Umbracraft and Falsecraft into a discovery—becoming shadow while an illusion walks away—and the woman at the threshold reads both the technique and the truth beneath it.",
       "choices": [
         {
-          "label": "Stand and speak plainly—ask what they're doing here",
+          "label": "Step out of the shadow and speak plainly—she has already seen through you, so the mask is pointless.",
           "attribute": "social",
           "subAttribute": "presence",
           "axes": {
             "falsehood_truth": 0.6,
-            "chaos_order": 0.2
+            "demonic_angelic": 0.2
           },
           "difficulty": "normal",
+          "opposedDifficulty": null,
           "intentTags": [
-            "negotiate"
+            "reveal"
           ],
-          "trivial": false
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Use Wrong Reality to reshape how she reads this moment",
+          "label": "Stay concealed in the shadow and wait—let her show what she wants, now that she knows you're listening.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "falsehood_truth": -0.7,
-            "chaos_order": -0.3
+            "falsehood_truth": -0.2,
+            "dark_light": -0.4
           },
-          "difficulty": "hard",
+          "difficulty": "normal",
+          "opposedDifficulty": null,
           "intentTags": [
-            "deceive"
+            "study",
+            "careful"
           ],
-          "abilityId": "wrong_reality",
-          "energyCost": 4,
-          "trivial": false
+          "abilityId": "appetite_sense",
+          "energyCost": 2,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Retreat back up the stairs—you don't have to be here",
+          "label": "Call Cy to you from upstairs—let the woman hear something move above, breaking her attention.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {
+            "falsehood_truth": -0.3,
+            "chaos_order": -0.2
+          },
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "misdirect",
+            "risky"
+          ],
+          "abilityId": "harmonic_voice",
+          "energyCost": 3,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Descend quietly past her into the cellars—follow the younger person deeper while she is still watching the false image.",
           "attribute": "physical",
           "subAttribute": "agility",
           "axes": {
-            "chaos_order": -0.4,
-            "violence_peace": 0.5
+            "chaos_order": -0.3,
+            "dark_light": -0.4
           },
-          "difficulty": "easy",
+          "difficulty": "hard",
+          "opposedDifficulty": null,
           "intentTags": [
-            "retreat"
+            "sneak",
+            "move"
           ],
-          "trivial": false
-        },
-        {
-          "label": "Step forward and ask what patient they came for",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "falsehood_truth": 0.4,
-            "demonic_angelic": 0.3
-          },
-          "difficulty": "normal",
-          "intentTags": [
-            "ask"
-          ],
-          "trivial": false
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
       "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": -2,
+        "energy": -8,
         "inventoryAdd": [],
         "inventoryRemove": [],
         "xp": 0
@@ -389,81 +421,144 @@
       "ledgerEvents": [],
       "questUpdates": [],
       "standingOps": [],
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "the-woman-with-the",
-          "note": "Sees through Falsecraft without hesitation—recognizes deception as deception and does not look away from it. Names the truth plainly and waits for Loki's answer.",
-          "learned": [
-            "Does not shy from confrontation when something untrue is placed between them"
-          ],
-          "skillsObserved": [
-            "Can read through rank-1 Falsecraft",
-            "Unafraid to name a lie directly"
-          ]
-        }
-      ],
+      "delegateOps": [],
+      "jobOps": [],
+      "arcOps": [],
+      "adoptSchool": null,
+      "offer": {
+        "thing": "The woman's steady recognition—she read not just the deception but the technique itself, and named it as something she understands.",
+        "from": "Her own craft and hunger: someone who teaches falsecrafts or wields them well enough to read them, and who is asking something that requires her to be *seen* seeing through you."
+      },
+      "stageOps": [],
       "scene": {
-        "setting": "The cellar landing of the Kindly Rest, deep night. Stone walls. The heavy cellar door stands open, spilling warm herb-scented light. A false grey tabby pads into the corridor beyond, unhurried and utterly unconvincing. The woman stands at the threshold, turned fully toward you now, one hand still raised—that same assessing gesture.",
+        "setting": "The cellar landing of the Kindly Rest, deep night falling toward dawn. Stone walls worn smooth at the center of the stairs. The cellar door stands open, spilling warm herb-scented light. The woman stands at the threshold, hand lowered now, watching the empty corridor where the false image walked. The younger person is paused in the cellars below, footsteps stopped.",
         "npcsPresent": [
           {
             "name": "The woman with the steady voice",
-            "state": "Watching you with full attention, hand raised, weight slightly forward—present and waiting for your response. She has named the lie and is waiting to see what you do next."
+            "state": "Standing at the cellar threshold, hand lowered, watching the corridor with the expression of someone who has just read an answer to a question she did not know she was asking."
           },
           {
             "name": "The younger person",
-            "state": "Paused in the cellars below—footsteps stopped mid-descent after hearing the woman's voice."
+            "state": "Paused in the cellars below, silent and waiting. Footsteps have stopped mid-descent."
           }
         ],
         "objects": [
           "The worn stone stairs",
           "The heavy open cellar door",
-          "Shadows on the landing",
-          "The false grey tabby, now disappearing into the corridor",
-          "Warm herb-scented air rising from the cellars"
+          "Shadows pooling at the landing's edge",
+          "Warm herb-scented air rising from below",
+          "The corridor beyond (where the false image walked)"
         ],
         "threads": [
-          "Why did the woman see through the Falsecraft so easily?",
-          "Who is the patient they came for?",
-          "Will the younger person emerge from the cellars?",
-          "What does the woman want from you now?"
+          "What does the woman want from you now that she has seen through both deceptions?",
+          "Who is the patient they came for—the one who broke a fever three days ago?",
+          "Who is the younger person waiting in the cellars, and what is their role in this visit?",
+          "Will Loki step out of concealment or wait to learn more?"
         ]
       },
-      "scene_summary": "The false cat fails—the woman sees it for what it is and names the truth plainly, waiting for your answer."
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "the-woman-with-the",
+          "name": "The woman with the steady voice",
+          "note": "She saw through the false cat without moving. She sees through the braided shadow-and-falsecraft decoy without flinching. She named the technique as if she already knew it was possible. She is not angry or alarmed—only assessing, and now *recognizing*.",
+          "learned": [
+            "Reads falsecrafts with the ease of someone who wields them or teaches them.",
+            "Does not respond with hostility to deception—only with steady naming of what is real.",
+            "Her hunger is locked behind her own understanding of herself, but it is real and it is present."
+          ],
+          "skillsObserved": [
+            "Reads and penetrates falsecrafts at rank 2 or higher",
+            "Moves and acts with absolute calm in the presence of deception",
+            "Understands shadow-craft and knows what Umbracraft looks like when it is done right"
+          ]
+        }
+      ],
+      "intentsHeard": [],
+      "factUpdates": [],
+      "placeUpdates": [],
+      "discovery": {
+        "name": "Shadow-Image",
+        "description": "Braid Umbracraft's concealment with Falsecraft's false-form: become absent while creating a visible echo of yourself. The technique costs the energy of both crafts combined (8 total at current rank). It breaks if either the shadow-concealment or the false image is directly addressed or touched—but while it holds, neither can be clearly seen or followed. The false image moves as you choose; your actual position remains hidden."
+      },
+      "codexUpdates": [
+        {
+          "topic": "the-woman-with-the-steady-voice",
+          "label": "The Woman at the Kindly Rest",
+          "kind": "person",
+          "entityId": "the-woman-with-the",
+          "fact": "She reads falsecrafts—not by seeing through them, but by *seeing* the act of building them. She recognized the braided shadow-and-image technique the moment it was deployed, and named it with the calm of someone who understands such work from the inside. She is not hostile to deception, only honest about what is real.",
+          "links": [
+            "the-kindly-rest",
+            "what-descended-with-them"
+          ]
+        }
+      ],
+      "holdingOps": [],
+      "holdTrades": [],
+      "debtOps": [],
+      "exchangeOps": [],
+      "partyOps": [],
+      "generateRequest": [],
+      "encounterOps": [],
+      "projectOps": [],
+      "bandOps": [],
+      "strikeOps": [],
+      "deathOps": [],
+      "newEncounter": null,
+      "unlockPrecursor": null,
+      "unlockSubstrate": null,
+      "timeOps": null,
+      "moveTo": null,
+      "stateOps": [],
+      "itemUpdates": [],
+      "deriveItem": null,
+      "imagePrompt": "A figure steps backward into corridor shadow—but the step is false, a ghost-weight of falsecraft—while in the pooled darkness behind it, something that was a person becomes the absence where they were. Umbral dark, and light that cannot quite touch it. Behind the false image's shoulder, nothing at all, and yet a *presence* in the nothing.",
+      "imageMedium": null,
+      "newAbility": null,
+      "gambitOps": null,
+      "gambitApt": false,
+      "markDefiningMoment": null,
+      "markTeacher": null,
+      "offerPromotion": null,
+      "offerAcquisition": null,
+      "offerIntent": null,
+      "sceneEnded": false,
+      "momentArt": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/A%20figure%20steps%20backward%20into%20corridor%20shadow%E2%80%94but%20the%20step%20is%20false%2C%20a%20ghost-weight%20of%20falsecraft%E2%80%94while%20in%20the%20pooled%20darkness%20behind%20it%2C%20something%20that%20was%20a%20person%20becomes%20the%20absence%20where%20they%20were.%20Umbral%20dark%2C%20and%20light%20that%20cannot%20quite%20touch%20it.%20Behind%20the%20false%20image's%20shoulder%2C%20nothing%20at%20a%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=34096&nologo=true"
     },
     "sceneState": {
-      "setting": "The cellar landing of the Kindly Rest, deep night. Stone walls. The heavy cellar door stands open, spilling warm herb-scented light. A false grey tabby pads into the corridor beyond, unhurried and utterly unconvincing. The woman stands at the threshold, turned fully toward you now, one hand still raised—that same assessing gesture.",
+      "setting": "The cellar landing of the Kindly Rest, deep night falling toward dawn. Stone walls worn smooth at the center of the stairs. The cellar door stands open, spilling warm herb-scented light. The woman stands at the threshold, hand lowered now, watching the empty corridor where the false image walked. The younger person is paused in the cellars below, footsteps stopped.",
       "npcsPresent": [
         {
           "name": "The woman with the steady voice",
-          "state": "Watching you with full attention, hand raised, weight slightly forward—present and waiting for your response. She has na"
+          "state": "Standing at the cellar threshold, hand lowered, watching the corridor with the expression of someone who has just read a"
         },
         {
           "name": "The younger person",
-          "state": "Paused in the cellars below—footsteps stopped mid-descent after hearing the woman's voice."
+          "state": "Paused in the cellars below, silent and waiting. Footsteps have stopped mid-descent."
         }
       ],
       "objects": [
         "The worn stone stairs",
         "The heavy open cellar door",
-        "Shadows on the landing",
-        "The false grey tabby, now disappearing into the corridor",
-        "Warm herb-scented air rising from the cellars"
+        "Shadows pooling at the landing's edge",
+        "Warm herb-scented air rising from below",
+        "The corridor beyond (where the false image walked)"
       ],
       "threads": [
-        "Why did the woman see through the Falsecraft so easily?",
-        "Who is the patient they came for?",
-        "Will the younger person emerge from the cellars?",
-        "What does the woman want from you now?"
+        "What does the woman want from you now that she has seen through both deceptions?",
+        "Who is the patient they came for—the one who broke a fever three days ago?",
+        "Who is the younger person waiting in the cellars, and what is their role in this visit?",
+        "Will Loki step out of concealment or wait to learn more?"
       ]
     },
-    "beats": 4,
+    "beats": 5,
     "subPlace": null
   },
   "clock": {
     "schemaVersion": 1,
     "day": 5,
-    "hour": 5,
+    "hour": 6,
     "realAnchor": null
   },
   "companions": [
@@ -1713,12 +1808,8 @@
     "lastSharedReadAt": "2026-09-21T00:21:47.405Z",
     "lastTickWorldDay": 83,
     "lastCanonWorldDay": 83,
-    "turnsSinceOffer": 4,
+    "turnsSinceOffer": 0,
     "recentOffers": [
-      {
-        "thing": "The consensus—all three of your companions affirm the descent without hesitation or doubt, each for their own reason.",
-        "from": "The trust already built between you: Vessin's committed bond, Cy's assigned purpose, and the clear stakes of what waits below."
-      },
       {
         "thing": "Cy's acknowledgment that the chamber's scale exceeds its own records—a statement of limits that opens a deeper thread",
         "from": "Cy's nature as a Precursor mechanism carrying knowledge it does not know it carries; the chamber itself, which is larger than the…"
@@ -1734,6 +1825,10 @@
       {
         "thing": "A keeper who reads routes the way other people read weather, and who has already seen the shape of what Loki is reaching for.",
         "from": "Maren's years of watching travelers pass through this threshold — she has learned to read the weight of a real question when one is asked."
+      },
+      {
+        "thing": "The woman's steady recognition—she read not just the deception but the technique itself, and named it as something she understands.",
+        "from": "Her own craft and hunger: someone who teaches falsecrafts or wields them well enough to read them, and who is asking something that…"
       }
     ],
     "wantProgress": {
@@ -8780,8 +8875,8 @@
     "craft": 4,
     "wits": 5
   },
-  "pendingSubPoints": 0,
-  "skillPoints": 2,
+  "pendingSubPoints": 1,
+  "skillPoints": 4,
   "discoveries": [
     {
       "key": "maintained_veil:illusion-as-emotional-mi",
@@ -8793,6 +8888,19 @@
       ],
       "discoveredDay": 4,
       "image": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Mirror-Bright%20%E2%80%94%20Spin%20an%20illusion%20of%20the%20target's%20own%20work%E2%80%94their%20chaos%2C%20their%20making%2C%20their%20hunger%E2%80%94reflected%20back%20at%20them%20with%20perfect%20clarity.%20The%20illusion%20does%20not%20deceive%3B%20it%20WITNESSES.%20It%20costs%20the%20same%20as%20Maintained%20Veil%20and%20requires%20you%20to%20have%20seen%20their%20work%20clearly%20enough%20to%20echo%20it.%20When%E2%80%A6%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=35093&nologo=true",
+      "_momentShown": true
+    },
+    {
+      "key": "falsecraft+umbracraft:shadow-concealment-paire",
+      "id": "shadow-image",
+      "name": "Shadow-Image",
+      "description": "Braid Umbracraft's concealment with Falsecraft's false-form: become absent while creating a visible echo of yourself. The technique costs the energy of both crafts combined (8 total at current rank). It breaks if either the shadow-concealment or the false image is directly addressed or touched—but…",
+      "abilities": [
+        "umbracraft",
+        "falsecraft"
+      ],
+      "discoveredDay": 5,
+      "image": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Shadow-Image%20%E2%80%94%20Braid%20Umbracraft's%20concealment%20with%20Falsecraft's%20false-form%3A%20become%20absent%20while%20creating%20a%20visible%20echo%20of%20yourself.%20The%20technique%20costs%20the%20energy%20of%20both%20crafts%20combined%20(8%20total%20at%20current%20rank).%20It%20breaks%20if%20either%20the%20shadow-concealment%20or%20the%20false%20image%20is%20directly%20addressed%E2%80%A6%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=11317&nologo=true",
       "_momentShown": true
     }
   ],
@@ -9879,6 +9987,22 @@
         "createdDay": 5,
         "entityId": "younger-visitor",
         "updatedDay": 5
+      },
+      "the-woman-with-the": {
+        "id": "the-woman-with-the",
+        "label": "The Woman at the Kindly Rest",
+        "kind": "person",
+        "facts": [
+          "[d5] She reads falsecrafts—not by seeing through them, but by *seeing* the act of building them. She recognized the braided shadow-and-image technique the moment it was deployed, and named it with the calm of someone who understands such work from the inside. She is not hostile to deception, only…"
+        ],
+        "links": [
+          "the-kindly-rest",
+          "what-descended-with-them"
+        ],
+        "aliases": [],
+        "createdDay": 5,
+        "entityId": "the-woman-with-the",
+        "updatedDay": 5
       }
     },
     "mergeUndo": [
@@ -10179,17 +10303,17 @@
     "deferredMysteries": []
   },
   "tendencies": {
-    "devotion": 1.132648023597759,
-    "cerebral": 14.357342549462647,
-    "social": 11.839490358900843,
-    "strategic": 14.189659813302324,
-    "cautious": 7.958829666081619,
-    "amorous": 7.309997130106686,
-    "generous": 4.681502123039885,
-    "ruthless": 0.2836989174499914,
-    "risky": 0.23185155342732575,
-    "patient": 0.06331448973329949,
-    "deception": 0.07370134558303086
+    "devotion": 1.104331823007815,
+    "cerebral": 13.99840898572608,
+    "social": 11.543503099928321,
+    "strategic": 13.834918317969766,
+    "cautious": 7.759858924429579,
+    "amorous": 7.127247201854019,
+    "generous": 4.564464569963888,
+    "ruthless": 0.27660644451374156,
+    "risky": 0.2260552645916426,
+    "patient": 0.061731627489967,
+    "deception": 0.07185881194345509
   },
   "aptitudes": [
     "strategist",
@@ -10198,7 +10322,7 @@
     "faithful",
     "charmer"
   ],
-  "actionCount": 187,
+  "actionCount": 188,
   "grantsVersion": 1,
   "precursorAccess": [
     "address_sense"
@@ -10276,6 +10400,22 @@
   "nativeGrantsVersion": 2,
   "reconcileVersion": 74,
   "gallery": [
+    {
+      "kind": "moment",
+      "prompt": "A figure steps backward into corridor shadow—but the step is false, a ghost-weight of falsecraft—while in the pooled darkness behind it, something that was a person becomes the absence where they were",
+      "url": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/A%20figure%20steps%20backward%20into%20corridor%20shadow%E2%80%94but%20the%20step%20is%20false%2C%20a%20ghost-weight%20of%20falsecraft%E2%80%94while%20in%20the%20pooled%20darkness%20behind%20it%2C%20something%20that%20was%20a%20person%20becomes%20the%20absence%20where%20they%20were.%20Umbral%20dark%2C%20and%20light%20that%20cannot%20quite%20touch%20it.%20Behind%20the%20false%20image's%20shoulder%2C%20nothing%20at%20a%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=34096&nologo=true",
+      "caption": "Caught mid-deception at the cellar landing, Loki braids Umbracraft and Falsecraft into a d",
+      "worldDay": 83,
+      "at": "2026-09-21T00:56:14.479Z"
+    },
+    {
+      "kind": "discovery",
+      "prompt": "Braid Umbracraft's concealment with Falsecraft's false-form: become absent while creating a visible echo of yourself. The technique costs the energy of both crafts combined (8 total at current rank). ",
+      "url": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Shadow-Image%20%E2%80%94%20Braid%20Umbracraft's%20concealment%20with%20Falsecraft's%20false-form%3A%20become%20absent%20while%20creating%20a%20visible%20echo%20of%20yourself.%20The%20technique%20costs%20the%20energy%20of%20both%20crafts%20combined%20(8%20total%20at%20current%20rank).%20It%20breaks%20if%20either%20the%20shadow-concealment%20or%20the%20false%20image%20is%20directly%20addressed%E2%80%A6%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=11317&nologo=true",
+      "caption": "Shadow-Image",
+      "worldDay": 83,
+      "at": "2026-09-21T00:56:14.467Z"
+    },
     {
       "kind": "location",
       "prompt": "The Kindly Rest",
@@ -11216,8 +11356,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789951917916,
-  "rev": 818,
+  "updatedAt": 1789952174479,
+  "rev": 821,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -12211,7 +12351,7 @@
     "umbral_depths": 54,
     "the_quickwood": 101,
     "the_center": 50,
-    "valley": 5,
+    "valley": 6,
     "the_open_reach": 3
   },
   "opLossPending": false,
@@ -12339,10 +12479,10 @@
     {
       "id": "sess-16",
       "startedAt": "2026-09-21T00:09:44.522Z",
-      "lastAt": "2026-09-21T00:51:57.913Z",
+      "lastAt": "2026-09-21T00:56:14.463Z",
       "startDay": 83,
       "endDay": 83,
-      "beats": 4
+      "beats": 5
     }
   ],
   "establishedFacts": [
@@ -12409,7 +12549,7 @@
   ],
   "_opLedger": {
     "offer": {
-      "applied": 33,
+      "applied": 34,
       "rejected": 2,
       "lastWhy": "rejected-shape"
     },
@@ -12426,19 +12566,19 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 217,
-    "choices": 217,
-    "characterDeltas": 104,
-    "scene": 217,
+    "sceneSummary": 218,
+    "choices": 218,
+    "characterDeltas": 105,
+    "scene": 218,
     "placeUpdates": 27,
-    "codexUpdates": 122,
+    "codexUpdates": 123,
     "timeOps": 176,
-    "offer": 28,
+    "offer": 29,
     "generateRequest": 7,
-    "sceneEnded": 86,
-    "npcUpdates": 173,
+    "sceneEnded": 87,
+    "npcUpdates": 174,
     "moveTo": 7,
-    "gambitApt": 47,
+    "gambitApt": 48,
     "deeds": 8,
     "questUpdates": 31,
     "standingOps": 3,
@@ -12447,16 +12587,16 @@
     "encounterOps": 9,
     "ledgerEvents": 6,
     "newEncounter": 3,
-    "imagePrompt": 26,
+    "imagePrompt": 27,
     "scene_ended": 1,
     "stateOps": 2,
     "_engineClosedScene": 3,
-    "discovery": 3,
+    "discovery": 4,
     "intentsHeard": 5,
     "delegateOps": 1,
     "scene_summary": 1
   },
-  "_opTurns": 217,
+  "_opTurns": 218,
   "customAbilities": {
     "mirror-bright": {
       "id": "mirror-bright",
@@ -12502,6 +12642,74 @@
         "discoveredFrom": "maintained_veil:illusion-as-emotional-mi",
         "presented": true
       }
+    },
+    "shadow-image": {
+      "id": "shadow-image",
+      "name": "Shadow-Image",
+      "tradition": "umbral",
+      "powerSystem": "umbral",
+      "levelReq": 3,
+      "energyCost": 10,
+      "attribute": "mental",
+      "functions": [
+        "conceal",
+        "command"
+      ],
+      "harmRung": "none",
+      "effectTags": [],
+      "nativeOrCombination": "combination",
+      "description": "Braid Umbracraft's concealment with Falsecraft's false-form: become absent while creating a visible echo of yourself. The technique costs the energy of both crafts combined (8 total at current rank). It breaks if either the shadow-concealment or the false image is directly addressed or touched—but…",
+      "notFor": "What lies outside this braid's own reach — it is not either parent whole, only the single new craft their braiding makes.",
+      "narrationHints": "Braid Umbracraft's concealment with Falsecraft's false-form: become absent while creating a visible echo of yourself. The technique costs the energy of both crafts combined (8 total at current…",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Seeing Dark · Fitting Mask",
+          "grants": "Umbracraft and Falsecraft run as one craft: Umbracraft — See truly in lightlessness; wrap yourself and a small space in concealment; find and use the…; Falsecraft — Craft a convincing illusion or disguise; tell a lie built well enough to hold; SPOT a…",
+          "cannot": "Total light defeats it; concealment hides, it does not defend. · Illusion is not substance — tested hard, it fails; a Verity read can…",
+          "functions": [
+            "conceal",
+            "command"
+          ]
+        },
+        {
+          "rank": 2,
+          "name": "Past Finding · Standing Lie",
+          "grants": "At this depth the braid carries what each parent reaches here: Umbracraft — Hide a person, a truth, or a thing so well even a searcher who knows it's there can't find it…; Falsecraft — Build an untruth that holds under scrutiny — a false history, a cover…",
+          "cannot": "Harboring something makes you responsible for it; some things should not… · A lie built on discoverable fact cracks when the fact surfaces; the…",
+          "functions": [
+            "conceal",
+            "command"
+          ]
+        }
+      ],
+      "minted": {
+        "kind": "discovery",
+        "from": [
+          "umbracraft",
+          "falsecraft"
+        ],
+        "requiresPoles": [
+          "umbral",
+          "veilwright"
+        ],
+        "tension": {
+          "steps": 1,
+          "band": "adjacent",
+          "factor": 1
+        },
+        "mintedAt": null,
+        "namedBy": "player",
+        "tier": 3,
+        "emergent": null,
+        "enriched": true,
+        "sourceNames": [
+          "Umbracraft",
+          "Falsecraft"
+        ],
+        "discoveredFrom": "falsecraft+umbracraft:shadow-concealment-paire",
+        "presented": true
+      }
     }
   },
   "companionBonds": {
@@ -12511,7 +12719,7 @@
     "schemaVersion": 1,
     "uses": {
       "see_the_made_thing": 33,
-      "falsecraft": 8,
+      "falsecraft": 9,
       "the_wrong_reality": 5,
       "the_misdirect": 2,
       "the_better_story": 11,
@@ -12525,7 +12733,7 @@
       "better_story": 1,
       "maintained_veil": 2,
       "appetite_sense": 16,
-      "umbracraft": 1
+      "umbracraft": 2
     },
     "coActivations": {
       "falsecraft+the_wrong_reality": 1,
@@ -12535,7 +12743,8 @@
       "harmonic_voice+the_better_story": 1,
       "falsecraft+misdirect": 2,
       "better_story+harmonic_voice": 1,
-      "maintained_veil+prism_sight": 1
+      "maintained_veil+prism_sight": 1,
+      "falsecraft+umbracraft": 1
     },
     "aspirations": [
       {
@@ -12546,7 +12755,7 @@
       {
         "abilityId": "unbearable_word",
         "since": "2026-09-16T21:20:54.754Z",
-        "progress": 4
+        "progress": 5
       }
     ],
     "lastUsed": {
@@ -12564,7 +12773,7 @@
       "wrong_reality": 76,
       "better_story": 76,
       "maintained_veil": 79,
-      "umbracraft": 79,
+      "umbracraft": 83,
       "appetite_sense": 83
     }
   },
@@ -13304,14 +13513,14 @@
     "investigate": 8,
     "charm": 1,
     "comfort": 1,
-    "finesse": 2,
+    "finesse": 3,
     "persuade": 1,
     "negotiate": 3,
     "truth": 1,
     "devote": 1,
     "romantic": 1,
     "consult": 1,
-    "misdirect": 1
+    "misdirect": 2
   },
   "aptitudeEarnCount": {
     "faithful": 1,
@@ -13648,404 +13857,404 @@
   },
   "_promptRows": {
     "character": {
-      "reached": 31,
-      "produced": 31
+      "reached": 32,
+      "produced": 32
     },
     "location": {
-      "reached": 31,
-      "produced": 31
+      "reached": 32,
+      "produced": 32
     },
     "region": {
-      "reached": 31,
-      "produced": 31
+      "reached": 32,
+      "produced": 32
     },
     "groundDetail": {
-      "reached": 31,
+      "reached": 32,
       "produced": 21
     },
     "lore": {
-      "reached": 31,
-      "produced": 28
+      "reached": 32,
+      "produced": 29
     },
     "traditionMotiveDetail": {
-      "reached": 31,
-      "produced": 31
+      "reached": 32,
+      "produced": 32
     },
     "sheetsDetail": {
-      "reached": 31,
+      "reached": 32,
       "produced": 22
     },
     "rules": {
-      "reached": 31,
-      "produced": 31
+      "reached": 32,
+      "produced": 32
     },
     "recentTurns": {
-      "reached": 31,
-      "produced": 27
+      "reached": 32,
+      "produced": 28
     },
     "timeLabel": {
-      "reached": 31,
-      "produced": 31
+      "reached": 32,
+      "produced": 32
     },
     "npcRegistryDetail": {
-      "reached": 31,
-      "produced": 31
+      "reached": 32,
+      "produced": 32
     },
     "mintedUnmetDetail": {
-      "reached": 31,
-      "produced": 31
+      "reached": 32,
+      "produced": 32
     },
     "npcSeedDetail": {
-      "reached": 31,
+      "reached": 32,
       "produced": 24
     },
     "traditionVocab": {
-      "reached": 31,
-      "produced": 31
+      "reached": 32,
+      "produced": 32
     },
     "standingDetail": {
-      "reached": 31,
-      "produced": 31
+      "reached": 32,
+      "produced": 32
     },
     "recalledDetail": {
-      "reached": 31,
+      "reached": 32,
       "produced": 1
     },
     "bearingsDetail": {
-      "reached": 31,
-      "produced": 31
+      "reached": 32,
+      "produced": 32
     },
     "caravansDetail": {
-      "reached": 31,
+      "reached": 32,
       "produced": 0
     },
     "commandDetail": {
-      "reached": 31,
-      "produced": 31
+      "reached": 32,
+      "produced": 32
     },
     "presenceDetail": {
-      "reached": 31,
-      "produced": 21
+      "reached": 32,
+      "produced": 22
     },
     "worthHereDetail": {
-      "reached": 31,
+      "reached": 32,
       "produced": 0
     },
     "inventoryDetail": {
-      "reached": 31,
-      "produced": 31
+      "reached": 32,
+      "produced": 32
     },
     "sceneState": {
-      "reached": 31,
-      "produced": 27
+      "reached": 32,
+      "produced": 28
     },
     "holdingsDetail": {
-      "reached": 31,
-      "produced": 31
+      "reached": 32,
+      "produced": 32
     },
     "debtsDetail": {
-      "reached": 31,
+      "reached": 32,
       "produced": 0
     },
     "carriedDetail": {
-      "reached": 31,
+      "reached": 32,
       "produced": 0
     },
     "abilityLawDetail": {
-      "reached": 31,
-      "produced": 31
+      "reached": 32,
+      "produced": 32
     },
     "questsDetail": {
-      "reached": 31,
-      "produced": 31
+      "reached": 32,
+      "produced": 32
     },
     "structuredQuestsDetail": {
-      "reached": 31,
+      "reached": 32,
       "produced": 0
     },
     "traditionArcDetail": {
-      "reached": 31,
+      "reached": 32,
       "produced": 0
     },
     "npcErrandsDetail": {
-      "reached": 31,
+      "reached": 32,
       "produced": 0
     },
     "codexDetail": {
-      "reached": 31,
-      "produced": 31
+      "reached": 32,
+      "produced": 32
     },
     "companionsDetail": {
-      "reached": 31,
-      "produced": 31
+      "reached": 32,
+      "produced": 32
     },
     "placeMemoryDetail": {
-      "reached": 31,
+      "reached": 32,
       "produced": 25
     },
     "agesMissingDetail": {
-      "reached": 31,
-      "produced": 31
+      "reached": 32,
+      "produced": 32
     },
     "newsDetail": {
-      "reached": 31,
-      "produced": 31
+      "reached": 32,
+      "produced": 32
     },
     "worldArcsDetail": {
-      "reached": 31,
-      "produced": 31
+      "reached": 32,
+      "produced": 32
     },
     "legendsPursuableDetail": {
-      "reached": 31,
+      "reached": 32,
       "produced": 12
     },
     "wakesDetail": {
-      "reached": 31,
+      "reached": 32,
       "produced": 0
     },
     "arcMoodDetail": {
-      "reached": 31,
-      "produced": 31
+      "reached": 32,
+      "produced": 32
     },
     "reachableDeadDetail": {
-      "reached": 31,
-      "produced": 31
+      "reached": 32,
+      "produced": 32
     },
     "threatToPlayer": {
-      "reached": 31,
+      "reached": 32,
       "produced": 0
     },
     "guardiansDetail": {
-      "reached": 31,
+      "reached": 32,
       "produced": 0
     },
     "resolution": {
-      "reached": 31,
-      "produced": 22
+      "reached": 32,
+      "produced": 23
     },
     "playerInput": {
-      "reached": 31,
+      "reached": 32,
       "produced": 9
     },
     "exactWords": {
-      "reached": 31,
-      "produced": 15
+      "reached": 32,
+      "produced": 16
     },
     "travelDirective": {
-      "reached": 31,
+      "reached": 32,
       "produced": 1
     },
     "itemAdvance": {
-      "reached": 31,
+      "reached": 32,
       "produced": 0
     },
     "encounterWeaveDetail": {
-      "reached": 31,
-      "produced": 4
+      "reached": 32,
+      "produced": 5
     },
     "encounterOfferDetail": {
-      "reached": 31,
+      "reached": 32,
       "produced": 3
     },
     "fightFramingDetail": {
-      "reached": 31,
+      "reached": 32,
       "produced": 0
     },
     "abilityGrantDetail": {
-      "reached": 31,
+      "reached": 32,
       "produced": 0
     },
     "stageRevealDetail": {
-      "reached": 31,
+      "reached": 32,
       "produced": 0
     },
     "itemEvolveDetail": {
-      "reached": 31,
+      "reached": 32,
       "produced": 0
     },
     "worldPressureDetail": {
-      "reached": 31,
+      "reached": 32,
       "produced": 0
     },
     "offerDetail": {
-      "reached": 31,
+      "reached": 32,
       "produced": 2
     },
     "teacherOfferDetail": {
-      "reached": 31,
+      "reached": 32,
       "produced": 0
     },
     "substrateDetail": {
-      "reached": 31,
-      "produced": 8
+      "reached": 32,
+      "produced": 9
     },
     "romanceGuidanceDetail": {
-      "reached": 31,
+      "reached": 32,
       "produced": 1
     },
     "factsDetail": {
-      "reached": 31,
-      "produced": 31
+      "reached": 32,
+      "produced": 32
     },
     "evolvedItemsDetail": {
-      "reached": 31,
+      "reached": 32,
       "produced": 0
     },
     "opLossNote": {
-      "reached": 31,
+      "reached": 32,
       "produced": 0
     },
     "emergenceDetail": {
-      "reached": 31,
+      "reached": 32,
       "produced": 0
     },
     "perilNote": {
-      "reached": 31,
+      "reached": 32,
       "produced": 0
     },
     "encounterDetail": {
-      "reached": 31,
+      "reached": 32,
       "produced": 4
     },
     "masteryDetail": {
-      "reached": 31,
-      "produced": 31
+      "reached": 32,
+      "produced": 32
     },
     "bookkeepingRestate": {
-      "reached": 31,
+      "reached": 32,
       "produced": 0
     },
     "anomalyDetail": {
-      "reached": 31,
-      "produced": 31
+      "reached": 32,
+      "produced": 32
     },
     "repairPanelDetail": {
-      "reached": 31,
-      "produced": 31
+      "reached": 32,
+      "produced": 32
     },
     "teacherDetail": {
-      "reached": 31,
+      "reached": 32,
       "produced": 0
     },
     "toolkitDetail": {
-      "reached": 31,
-      "produced": 31
+      "reached": 32,
+      "produced": 32
     },
     "availableEncounters": {
-      "reached": 31,
-      "produced": 27
+      "reached": 32,
+      "produced": 28
     },
     "partyDetail": {
-      "reached": 31,
+      "reached": 32,
       "produced": 0
     },
     "ratingDetail": {
-      "reached": 31,
-      "produced": 31
+      "reached": 32,
+      "produced": 32
     },
     "registerDetail": {
-      "reached": 31,
-      "produced": 31
+      "reached": 32,
+      "produced": 32
     },
     "legendDetail": {
-      "reached": 31,
+      "reached": 32,
       "produced": 1
     },
     "livingWorldDetail": {
-      "reached": 31,
-      "produced": 2
+      "reached": 32,
+      "produced": 3
     },
     "assignmentsDetail": {
-      "reached": 31,
+      "reached": 32,
       "produced": 0
     },
     "latentArcsDetail": {
-      "reached": 31,
-      "produced": 31
+      "reached": 32,
+      "produced": 32
     },
     "seasonalDetail": {
-      "reached": 31,
-      "produced": 31
+      "reached": 32,
+      "produced": 32
     },
     "schoolsDetail": {
-      "reached": 31,
-      "produced": 31
+      "reached": 32,
+      "produced": 32
     },
     "sharedCanonDetail": {
-      "reached": 31,
-      "produced": 8
+      "reached": 32,
+      "produced": 9
     },
     "worldCountLabel": {
-      "reached": 31,
-      "produced": 31
+      "reached": 32,
+      "produced": 32
     },
     "waygateDetail": {
-      "reached": 31,
+      "reached": 32,
       "produced": 27
     },
     "readAloudDetail": {
-      "reached": 31,
-      "produced": 31
+      "reached": 32,
+      "produced": 32
     },
     "scenePacingDetail": {
-      "reached": 31,
+      "reached": 32,
       "produced": 13
     },
     "wishesDetail": {
-      "reached": 11,
+      "reached": 12,
       "produced": 0
     },
     "worldMovedOnDetail": {
-      "reached": 11,
+      "reached": 12,
       "produced": 2
     },
     "companionLivesDetail": {
-      "reached": 11,
-      "produced": 11
+      "reached": 12,
+      "produced": 12
     },
     "homeDetail": {
-      "reached": 11,
+      "reached": 12,
       "produced": 0
     },
     "invitationsDetail": {
-      "reached": 11,
+      "reached": 12,
       "produced": 0
     },
     "bandsJoinedDetail": {
-      "reached": 11,
+      "reached": 12,
       "produced": 0
     },
     "travelersHereDetail": {
-      "reached": 11,
+      "reached": 12,
       "produced": 1
     },
     "travelersDetail": {
-      "reached": 11,
+      "reached": 12,
       "produced": 0
     },
     "journeyDetail": {
-      "reached": 9,
+      "reached": 10,
       "produced": 0
     },
     "journeyUnderwayDetail": {
-      "reached": 9,
+      "reached": 10,
       "produced": 0
     },
     "holdsNearDetail": {
-      "reached": 9,
-      "produced": 5
+      "reached": 10,
+      "produced": 6
     },
     "moneyDetail": {
-      "reached": 8,
-      "produced": 8
+      "reached": 9,
+      "produced": 9
     },
     "jobsDetail": {
-      "reached": 8,
+      "reached": 9,
       "produced": 0
     }
   },
   "_opUnknown": {
-    "sceneSummary": 43,
+    "sceneSummary": 44,
     "scene_summary": 1
   },
   "_bandNotes": null,
@@ -14267,6 +14476,17 @@
       "name": "Mirror-Bright",
       "tier": null,
       "mintedAt": 4,
+      "discovered": true
+    },
+    {
+      "id": "shadow-image",
+      "from": [
+        "umbracraft",
+        "falsecraft"
+      ],
+      "name": "Shadow-Image",
+      "tier": 3,
+      "mintedAt": 5,
       "discovered": true
     }
   ],

@@ -104,7 +104,7 @@
     },
     {
       "abilityId": "the_old_procedure",
-      "level": 1
+      "level": 2
     },
     {
       "abilityId": "shadow-image",
@@ -1668,27 +1668,6 @@
       {
         "day": 5,
         "worldDay": 82,
-        "text": "Word reaches you: A wayhouse healer named a patient whose pulse has worsened overnight — two days in, insisting he is fine (near millbrook)",
-        "tier": "event",
-        "section": "elsewhere",
-        "locationId": "millbrook"
-      },
-      {
-        "day": 5,
-        "worldDay": 82,
-        "text": "The Gate That Gapes broke Maren Ossitide, Who Buried the Drowned Year — a stranger, and now an enemy. Maren Ossitide is out of the reckoning while the wound holds.",
-        "tier": "event",
-        "section": "world",
-        "kind": "clash",
-        "winnerId": "the_gate_that_gapes",
-        "loserId": "maren_ossitide",
-        "outcome": "wounded",
-        "locationId": "the_unlanded",
-        "placedBy": "winnerId"
-      },
-      {
-        "day": 5,
-        "worldDay": 82,
         "text": "The One Who Ended the Long War broke Valen Sunwrack, Who Left No Shadow Standing — a stranger, and now an enemy. Valen Sunwrack is out of the reckoning while the wound holds.",
         "tier": "event",
         "section": "world",
@@ -1866,11 +1845,25 @@
         "tier": "ambient",
         "section": "world",
         "figureId": "standing-unlit"
+      },
+      {
+        "day": 5,
+        "worldDay": 83,
+        "text": "The Standing Annex has lost its keeper.",
+        "tier": "event",
+        "section": "yours"
+      },
+      {
+        "day": 5,
+        "worldDay": 83,
+        "text": "Something has been building in the unmade: The person who holds authority to formally designate what has been unmade as 'resolved' has not done so for anything in years, and the backlog of unresolved unmakings is beginning to press against…",
+        "tier": "event",
+        "section": "world"
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 1992,
-    "lastSharedReadAt": "2026-09-21T00:21:47.405Z",
+    "lastGenCount": 2003,
+    "lastSharedReadAt": "2026-09-21T11:59:27.320Z",
     "lastTickWorldDay": 83,
     "lastCanonWorldDay": 83,
     "turnsSinceOffer": 3,
@@ -2115,7 +2108,7 @@
         "kind": "decision",
         "premise": "Someone who keeps the count of what has been unmade has begun rounding down, telling themselves the difference is noise — but the rounding has a direction, and it has been consistent for long enough…",
         "cause": "The act of counting the unmade requires a decision about what constitutes a thing distinct enough to be counted, and that threshold has always been left to…",
-        "stage": 5,
+        "stage": 6,
         "seededAtCount": 1917,
         "surfaced": true,
         "fate": "growing",
@@ -2128,11 +2121,12 @@
         "kind": "decision",
         "premise": "The person who holds authority to formally designate what has been unmade as 'resolved' has not done so for anything in years, and the backlog of unresolved unmakings is beginning to press against…",
         "cause": "In the_unmade, the act of resolution is itself an act of power, and the authority-holder has quietly discovered that unresolved things remain partially…",
-        "stage": 1,
+        "stage": 2,
         "seededAtCount": 1968,
-        "surfaced": false,
+        "surfaced": true,
         "fate": "growing",
-        "lastMovedCount": 1968
+        "lastMovedCount": 1968,
+        "surfacedAtCount": 2003
       },
       "making-material-claim": {
         "id": "making-material-claim",
@@ -8346,7 +8340,7 @@
       "the_undefeated": 83,
       "the_one_called_zeus": 83
     },
-    "updatesToldTo": "2.4.5",
+    "updatesToldTo": "2.4.6",
     "newsLog": [
       {
         "day": 4,
@@ -8832,6 +8826,30 @@
         "worldDay": 83,
         "text": "The game was updated to v2.4.5 — 1 fixed.",
         "loggedAt": "2026-09-21T00:21:51.403Z"
+      },
+      {
+        "day": 5,
+        "worldDay": 83,
+        "text": "The Standing Annex has lost its keeper.",
+        "tier": "event",
+        "section": "yours",
+        "loggedAt": "2026-09-21T11:59:36.661Z"
+      },
+      {
+        "day": 5,
+        "worldDay": 83,
+        "text": "Something has been building in the unmade: The person who holds authority to formally designate what has been unmade as 'resolved' has not done so for anything in years, and the backlog of unresolved unmakings is beginning to press against…",
+        "tier": "event",
+        "section": "world",
+        "loggedAt": "2026-09-21T11:59:36.661Z"
+      },
+      {
+        "kind": "update",
+        "section": "world",
+        "version": "2.4.6",
+        "worldDay": 83,
+        "text": "The game was updated to v2.4.6 — 1 fixed.",
+        "loggedAt": "2026-09-21T11:59:36.661Z"
       }
     ]
   },
@@ -9954,19 +9972,6 @@
         "entityId": "what-descended-with-them",
         "updatedDay": 5
       },
-      "steady-voice-woman": {
-        "id": "steady-voice-woman",
-        "label": "The Woman With The",
-        "kind": "person",
-        "facts": [
-          "[d5] visitor at the Kindly Rest"
-        ],
-        "links": [],
-        "aliases": [],
-        "createdDay": 5,
-        "entityId": "steady-voice-woman",
-        "updatedDay": 5
-      },
       "younger-visitor": {
         "id": "younger-visitor",
         "label": "The Younger Person",
@@ -9990,7 +9995,8 @@
           "[d5] She builds reads through a craft as precise as Falsecraft—not by piercing veils but by perceiving the hunger underneath them. When offered complete mutual knowing—deep for deep—she accepted it without hesitation. Her walls came down at the threshold.",
           "[d5] She is built like understanding itself—each layer deliberate, each carrying weight. Her craft to read people is old, worn smooth by decades of use. She has made herself careful and steady deliberately. The hunger underneath her wanting-to-know is not appetite that devours, but appetite that…",
           "[d5] Her true name is Ravel. She came to the Kindly Rest in deep night with the younger person (Estry) to reach a patient who broke a fever three days ago. She uses a craft as old as decades to read the hunger underneath people's walls—not to pierce or control, but to understand. When offered complete…",
-          "[d5] Her true name is Ravel. When Loki offered her complete mutual knowing—deep for deep—she accepted without hesitation. The walls came down at the threshold. When Loki spoke their own name with intimacy, she trembled and opened entirely to recognition. She carries a bond with Estry that brought her…"
+          "[d5] Her true name is Ravel. When Loki offered her complete mutual knowing—deep for deep—she accepted without hesitation. The walls came down at the threshold. When Loki spoke their own name with intimacy, she trembled and opened entirely to recognition. She carries a bond with Estry that brought her…",
+          "[d5] visitor at the Kindly Rest"
         ],
         "links": [
           "the-kindly-rest",
@@ -10284,6 +10290,45 @@
           "the-taken-person",
           "the-hub-crossing"
         ]
+      },
+      {
+        "at": "2026-09-21T11:59:26.841Z",
+        "source": {
+          "id": "steady-voice-woman",
+          "label": "The Woman With The",
+          "kind": "person",
+          "facts": [
+            "[d5] visitor at the Kindly Rest"
+          ],
+          "links": [],
+          "aliases": [],
+          "createdDay": 5,
+          "entityId": "steady-voice-woman",
+          "updatedDay": 5
+        },
+        "targetId": "the-woman-with-the",
+        "targetBefore": {
+          "facts": [
+            "[d5] She reads falsecrafts—not by seeing through them, but by *seeing* the act of building them. She recognized the braided shadow-and-image technique the moment it was deployed, and named it with the calm of someone who understands such work from the inside. She is not hostile to deception, only…",
+            "[d5] She reads people not by piercing veils but by perceiving the *hunger* underneath them. Her craft is old and steady. She wants to understand, not to judge or control—the hunger is clean and precise. She is aware of Loki's presence before any ordinary sense would catch them, and she sees through…",
+            "[d5] She builds reads through a craft as precise as Falsecraft—not by piercing veils but by perceiving the hunger underneath them. When offered complete mutual knowing—deep for deep—she accepted it without hesitation. Her walls came down at the threshold.",
+            "[d5] She is built like understanding itself—each layer deliberate, each carrying weight. Her craft to read people is old, worn smooth by decades of use. She has made herself careful and steady deliberately. The hunger underneath her wanting-to-know is not appetite that devours, but appetite that…",
+            "[d5] Her true name is Ravel. She came to the Kindly Rest in deep night with the younger person (Estry) to reach a patient who broke a fever three days ago. She uses a craft as old as decades to read the hunger underneath people's walls—not to pierce or control, but to understand. When offered complete…",
+            "[d5] Her true name is Ravel. When Loki offered her complete mutual knowing—deep for deep—she accepted without hesitation. The walls came down at the threshold. When Loki spoke their own name with intimacy, she trembled and opened entirely to recognition. She carries a bond with Estry that brought her…"
+          ],
+          "links": [
+            "the-kindly-rest",
+            "what-descended-with-them",
+            "appetite-sense",
+            "the-younger-person"
+          ],
+          "aliases": [
+            "The Woman With The",
+            "Ravel"
+          ],
+          "entityId": "the-woman-with-the"
+        },
+        "relinked": []
       }
     ],
     "swept": [
@@ -11358,8 +11403,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789956237322,
-  "rev": 839,
+  "updatedAt": 1789991976661,
+  "rev": 842,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -12590,21 +12635,21 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 226,
-    "choices": 226,
-    "characterDeltas": 113,
-    "scene": 226,
+    "sceneSummary": 225,
+    "choices": 225,
+    "characterDeltas": 112,
+    "scene": 225,
     "placeUpdates": 28,
     "codexUpdates": 129,
-    "timeOps": 183,
+    "timeOps": 182,
     "offer": 32,
     "generateRequest": 7,
-    "sceneEnded": 95,
-    "npcUpdates": 180,
+    "sceneEnded": 94,
+    "npcUpdates": 179,
     "moveTo": 7,
-    "gambitApt": 56,
+    "gambitApt": 55,
     "deeds": 10,
-    "questUpdates": 33,
+    "questUpdates": 32,
     "standingOps": 3,
     "factUpdates": 12,
     "stageOps": 7,
@@ -12621,7 +12666,7 @@
     "scene_summary": 1,
     "partyOps": 1
   },
-  "_opTurns": 226,
+  "_opTurns": 225,
   "customAbilities": {
     "mirror-bright": {
       "id": "mirror-bright",
@@ -12733,7 +12778,9 @@
           "Falsecraft"
         ],
         "discoveredFrom": "falsecraft+umbracraft:shadow-concealment-paire",
-        "presented": true
+        "presented": true,
+        "shared": true,
+        "firstFinder": true
       }
     }
   },
@@ -13419,7 +13466,7 @@
       "kind": "enterprise",
       "name": "The Standing Annex",
       "locationId": "gen-the-made-gate",
-      "steward": "traveler-woman",
+      "steward": null,
       "obligation": null,
       "condition": "thriving",
       "claimedDay": 3,

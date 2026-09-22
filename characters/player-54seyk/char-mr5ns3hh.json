@@ -1143,28 +1143,6 @@
       {
         "day": 3,
         "worldDay": 83,
-        "text": "There was an attempt on The Still Lattice's life at The Grand Lattice, a made thing that was not a weapon until now. It did not land.",
-        "tier": "event",
-        "section": "world",
-        "kind": "clash",
-        "loserId": "the_still_lattice",
-        "outcome": "stopped",
-        "abilityId": "light_well",
-        "locationId": "the_grand_lattice",
-        "arcId": "arc_block_bleed",
-        "strike": "quiet"
-      },
-      {
-        "day": 3,
-        "worldDay": 83,
-        "text": "Word from Harmonic Heights — Lower Terrace — Sister Alder, the Ward That Does Not Break: learning faster roads she will not get to use.",
-        "tier": "murmur",
-        "section": "world",
-        "locationId": "harmonic_heights_terrace"
-      },
-      {
-        "day": 3,
-        "worldDay": 83,
         "text": "Word from The Service Ways — Halvex Coil, the Rewriter: tuning instruments he does not play.",
         "tier": "murmur",
         "section": "world",
@@ -1333,10 +1311,36 @@
         "tier": "ambient",
         "section": "world",
         "figureId": "edvar-crane"
+      },
+      {
+        "day": 3,
+        "worldDay": 84,
+        "text": "The Still Lattice broke Saehara the Undefeated — a stranger, and now an enemy. Saehara the Undefeated is out of the reckoning while the wound holds.",
+        "tier": "event",
+        "section": "world",
+        "kind": "clash",
+        "winnerId": "the_still_lattice",
+        "loserId": "the_undefeated",
+        "outcome": "wounded",
+        "locationId": "the_grand_lattice",
+        "placedBy": "winnerId"
+      },
+      {
+        "day": 3,
+        "worldDay": 84,
+        "text": "The Still Lattice broke The One Who Ended the Long War — a stranger, and now an enemy. The One is out of the reckoning while the wound holds.",
+        "tier": "event",
+        "section": "world",
+        "kind": "clash",
+        "winnerId": "the_still_lattice",
+        "loserId": "the_war_ender",
+        "outcome": "wounded",
+        "locationId": "the_grand_lattice",
+        "placedBy": "winnerId"
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-09-22T03:01:22.416Z",
+    "lastSharedReadAt": "2026-09-22T03:03:58.522Z",
     "lastGenCount": 2019,
     "newsSpread": {
       "char-mrum8y4d::2026-09-21T01:05:32.238Z": [
@@ -5165,16 +5169,16 @@
         }
       },
       "the_undefeated": {
-        "status": "stopped",
+        "status": "wounded",
         "diedWorldDay": 41,
         "killedBy": "thornmother_sealed",
         "returnedFromDeath": {
           "day": 42,
           "changed": "came back changed"
         },
-        "woundedUntilDay": 89,
-        "woundedBy": "the_starless",
-        "sinceWorldDay": 83,
+        "woundedUntilDay": 92,
+        "woundedBy": "the_still_lattice",
+        "sinceWorldDay": 84,
         "stoppedUntilDay": 86,
         "stoppedBy": "the_starless",
         "fateBy": {
@@ -5193,10 +5197,12 @@
         }
       },
       "the_war_ender": {
-        "status": "stopped",
+        "status": "wounded",
         "stoppedUntilDay": 86,
         "stoppedBy": "the_starless",
-        "sinceWorldDay": 83,
+        "sinceWorldDay": 84,
+        "woundedUntilDay": 92,
+        "woundedBy": "the_still_lattice",
         "fateBy": {
           "characterId": "char-mrum8y4d",
           "name": "Loki"
@@ -6850,6 +6856,34 @@
         "section": "world",
         "figureId": "edvar-crane",
         "loggedAt": "2026-09-22T03:01:42.120Z"
+      },
+      {
+        "day": 3,
+        "worldDay": 84,
+        "text": "The Still Lattice broke Saehara the Undefeated — a stranger, and now an enemy. Saehara the Undefeated is out of the reckoning while the wound holds.",
+        "tier": "event",
+        "section": "world",
+        "kind": "clash",
+        "winnerId": "the_still_lattice",
+        "loserId": "the_undefeated",
+        "outcome": "wounded",
+        "locationId": "the_grand_lattice",
+        "placedBy": "winnerId",
+        "loggedAt": "2026-09-22T03:04:03.308Z"
+      },
+      {
+        "day": 3,
+        "worldDay": 84,
+        "text": "The Still Lattice broke The One Who Ended the Long War — a stranger, and now an enemy. The One is out of the reckoning while the wound holds.",
+        "tier": "event",
+        "section": "world",
+        "kind": "clash",
+        "winnerId": "the_still_lattice",
+        "loserId": "the_war_ender",
+        "outcome": "wounded",
+        "locationId": "the_grand_lattice",
+        "placedBy": "winnerId",
+        "loggedAt": "2026-09-22T03:04:03.308Z"
       }
     ],
     "figureCares": {
@@ -7650,8 +7684,8 @@
   "bands": [],
   "_silasGrantsRevoked": true,
   "reconcileVersion": 77,
-  "updatedAt": 1790046102120,
-  "rev": 107,
+  "updatedAt": 1790046243308,
+  "rev": 109,
   "generated": {
     "schemaVersion": 1,
     "npc": {},

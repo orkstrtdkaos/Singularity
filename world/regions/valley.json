@@ -31,14 +31,25 @@
   },
   "questOutcomes": {
     "what-the-water-remembers": {
-      "outcome": "redirected",
-      "outcomeName": "The Instruction Rewritten",
+      "outcome": "awakened",
+      "outcomeName": "Awakened — Wake It, and Walk It Into the World",
       "by": {
-        "id": "char-mrhs8286",
-        "name": "Silas Weir"
+        "id": "char-mr4ejo8c",
+        "name": "Cellaceron"
       },
-      "worldDay": 26,
-      "rev": 1
+      "worldDay": 84,
+      "rev": 2,
+      "history": [
+        {
+          "outcome": "redirected",
+          "outcomeName": "The Instruction Rewritten",
+          "by": {
+            "id": "char-mrhs8286",
+            "name": "Silas Weir"
+          },
+          "worldDay": 26
+        }
+      ]
     }
   },
   "spectrumDrift": {
@@ -47,5 +58,5 @@
     "falsehood_truth": -0.05
   },
   "worldFlags": {},
-  "lastTick": "2026-09-22T00:25:04.436Z"
+  "lastTick": "2026-09-22T01:23:33.820Z"
 }

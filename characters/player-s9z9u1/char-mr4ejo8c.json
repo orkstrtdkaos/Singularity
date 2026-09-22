@@ -6,7 +6,7 @@
   "origin": "valley",
   "background": "craftsman",
   "level": 12,
-  "xp": 1119,
+  "xp": 1149,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -1046,6 +1046,19 @@
       "spread": [],
       "day": 9,
       "worldDay": 39
+    },
+    {
+      "at": "2026-09-22T00:28:45.011Z",
+      "locationId": "disputed_zone_fringe",
+      "communityId": null,
+      "description": "What the Water Remembers — Awakened — Wake It, and Walk It Into the World",
+      "tags": [
+        "quest",
+        "resolution",
+        "awakened"
+      ],
+      "weight": 2,
+      "spread": []
     }
   ],
   "relationships": {
@@ -1109,7 +1122,16 @@
     "Cellaceron walks away from the Lower Terrace and sleeps at the Harrow cottage — nothing solved tonight, everything preserved for morning.",
     "Day 8, night: the party rests in the alcove camp — the Waystaff cycling in the earth, the chamber waiting below, everything earned this night held in careful stillness until morning.",
     "At the convergence point of the lower chamber, Aevi spoke plainly for the first time: maker named as Verath-Sem, cargo named as the authentication key to a pre-Transition preparation order lodged in the watershed — the same order poisoning the valley's water. Aevi is the key. The break in the record — who interrupted the sending and why — remains unfound. The scene closes with the chamber's purpose fulfilled and the valley's crisis newly named.",
-    "Camp broken and the lower chamber left behind — the party moves northeast-by-east at first light toward the pre-Transition upstream structure."
+    "Camp broken and the lower chamber left behind — the party moves northeast-by-east at first light toward the pre-Transition upstream structure.",
+    {
+      "kind": "quest_resolved",
+      "questId": "what-the-water-remembers",
+      "title": "What the Water Remembers",
+      "outcome": "Awakened — Wake It, and Walk It Into the World",
+      "narration": [],
+      "worldDay": 84,
+      "at": "2026-09-22T00:28:45.005Z"
+    }
   ],
   "currentLocationId": "disputed_zone_fringe",
   "activeScene": {
@@ -1377,7 +1399,7 @@
       "id": "what-the-water-remembers",
       "title": "What the Water Remembers",
       "structured": true,
-      "status": "active",
+      "status": "resolved",
       "premise": "Mara Wells has traced the Echo River's poisoning to a single point upstream in the Disputed Zone — a structure the old maps don't show, drawing power nothing alive built. It is not malfunctioning. It is following an order, and it is nearly finished.",
       "stakes": "If you walk away: the standoff at the filtration arrays goes live — Millbrook's guards and the Radiant leadership are one bad morning from open conflict over water neither side controls. Whatever the structure was ordered to do finishes without a single living person having chosen it, and finishing is not the same as stopping.",
       "axis": "death_life",
@@ -1621,7 +1643,11 @@
       "aliases": [],
       "startedAt": "2026-07-23T03:44:10.237Z",
       "startedWorldDay": 23,
-      "awaitingResolution": true
+      "awaitingResolution": true,
+      "outcomeId": "awakened",
+      "outcomeName": "Awakened — Wake It, and Walk It Into the World",
+      "resolvedAt": "2026-09-22T00:28:45.005Z",
+      "resolvedWorldDay": 84
     }
   ],
   "npcRegistry": {
@@ -2153,6 +2179,12 @@
         "day": null,
         "ruledBy": "erik-2026-09-18"
       }
+    },
+    "the_awakened_precursor": {
+      "id": "the_awakened_precursor",
+      "name": "the_awakened_precursor",
+      "questState": "awakened",
+      "questNote": "a precursor presence now walking the world, bonded to Silas as the one who woke it — a new power loose in the Valley, its intentions its own"
     }
   },
   "placeMemory": {
@@ -2459,6 +2491,13 @@
         "name": "The Secondary System's Binding Chamber",
         "day": 9
       }
+    },
+    "the_reclamation_site": {
+      "visits": 1,
+      "notes": [
+        "[d9] emptied — the presence has woken and departed the facility; the shell stands quiet"
+      ],
+      "flags": {}
     }
   },
   "worldState": {
@@ -2847,7 +2886,10 @@
     },
     "arcStages": {
       "arc_what_wakes_beneath": {
-        "othersPush": 0
+        "othersPush": 0,
+        "push": 3,
+        "sinceDay": 84,
+        "byQuest": "what-the-water-remembers"
       },
       "the_second_manifestation": {
         "othersPush": 1
@@ -8347,14 +8389,25 @@
     "quarteredAtCount": 2015,
     "questOutcomes": {
       "what-the-water-remembers": {
-        "outcome": "redirected",
-        "outcomeName": "The Instruction Rewritten",
+        "outcome": "awakened",
+        "outcomeName": "Awakened — Wake It, and Walk It Into the World",
         "by": {
-          "id": "char-mrhs8286",
-          "name": "Silas Weir"
+          "id": "char-mr4ejo8c",
+          "name": "Cellaceron"
         },
-        "worldDay": 26,
-        "rev": 1
+        "worldDay": 84,
+        "rev": 2,
+        "history": [
+          {
+            "outcome": "redirected",
+            "outcomeName": "The Instruction Rewritten",
+            "by": {
+              "id": "char-mrhs8286",
+              "name": "Silas Weir"
+            },
+            "worldDay": 26
+          }
+        ]
       }
     },
     "mintedFigures": [
@@ -8914,6 +8967,77 @@
         "maren_ossitide",
         "sunwrack_valen"
       ]
+    },
+    "wakes": [
+      {
+        "id": "wake_what-the-water-remembers_awakened",
+        "source": {
+          "questId": "what-the-water-remembers",
+          "outcomeId": "awakened",
+          "arcId": "arc_what_wakes_beneath",
+          "worldDay": 84
+        },
+        "change": [
+          {
+            "type": "location_state",
+            "location": "the_reclamation_site",
+            "change": "emptied — the presence has woken and departed the facility; the shell stands quiet"
+          },
+          {
+            "type": "world_fact",
+            "text": "A precursor presence dormant beneath the Echo River since before the Transition was WOKEN and walked into the world. It cleansed the river as its first living act and now moves through the Valley, ancient and whole — and it remembers who woke it. What Wakes Beneath has been answered by waking.",
+            "kind": "deed",
+            "permanent": true
+          },
+          {
+            "type": "codex_fact",
+            "topic": "the_awakened_precursor",
+            "kind": "lore"
+          },
+          {
+            "type": "npc_state",
+            "npc": "the_awakened_precursor",
+            "state": "awakened"
+          },
+          {
+            "type": "arc_stage",
+            "arcId": "arc_what_wakes_beneath",
+            "push": 3,
+            "delta": 3
+          },
+          {
+            "type": "standing",
+            "people": "numinous",
+            "delta": 2
+          },
+          {
+            "type": "standing",
+            "people": "horizon",
+            "delta": 2
+          }
+        ],
+        "pressure": "The world's engine turned over pushes toward: everything downstream of the substrate remade — the aftermath IS the new world, and the threads are how each region meets what it became.",
+        "scale": "world",
+        "connectsTo": [
+          "arc_the_poles_pull",
+          "arc_manifestation_storm"
+        ],
+        "dir": 1,
+        "open": true,
+        "depth": 0,
+        "worldDay": 84,
+        "strength": 4
+      }
+    ],
+    "wakeArcPushes": {
+      "arc_the_poles_pull": {
+        "arcId": "arc_the_poles_pull",
+        "push": 1
+      },
+      "arc_manifestation_storm": {
+        "arcId": "arc_manifestation_storm",
+        "push": 1
+      }
     }
   },
   "subAttributes": {
@@ -10536,6 +10660,18 @@
       "text": "The secondary system is a deliberate bottleneck—designed to force collaboration between Harmonic and Radiant civilizations, with a choice-point in the water-paths that grants control to whoever completes it last.",
       "day": 9,
       "subjectId": null
+    },
+    {
+      "id": "f42",
+      "text": "A precursor presence dormant beneath the Echo River since before the Transition was WOKEN and walked into the world. It cleansed the river as its first living act and now moves through the Valley, ancient and whole — and it remembers who woke it. What Wakes Beneath has been answered by waking.",
+      "day": 9,
+      "subjectId": null
+    },
+    {
+      "id": "f43",
+      "text": "the arc is ANSWERED by waking — a precursor walks, and every other stirring is accelerated by it",
+      "day": 9,
+      "subjectId": null
     }
   ],
   "sharedSceneId": null,
@@ -10565,8 +10701,8 @@
     "stalwart"
   ],
   "actionCount": 256,
-  "updatedAt": 1790036818581,
-  "rev": 285,
+  "updatedAt": 1790036925021,
+  "rev": 286,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -11455,7 +11591,9 @@
     "ashwarden": -1,
     "radiant_folk": 3.99,
     "valley_craft": 1,
-    "harmonic": 1
+    "harmonic": 1,
+    "numinous": 2,
+    "horizon": 2
   },
   "standingLedger": [
     {
@@ -11495,6 +11633,20 @@
       "people": "radiant_folk",
       "delta": 0.99,
       "text": "Sorel chose transparency with you over loyalty to the Council's hidden timeline—shifted her witness into public alliance"
+    },
+    {
+      "at": 9,
+      "kind": "act",
+      "people": "numinous",
+      "delta": 2,
+      "text": "woke a thing from before the Transition and stood with it while it opened its eyes — the Numinous are unsettled, and they are not looking away"
+    },
+    {
+      "at": 9,
+      "kind": "act",
+      "people": "horizon",
+      "delta": 2,
+      "text": "did the thing nobody sane would counsel, and went first — which is what the Horizon-Walkers are for"
     }
   ],
   "_standingHistoryCredit": {
@@ -12410,5 +12562,19 @@
     "quest-what-the-water-remembers-out-let_it_finish": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/An%20ancient%20facility%20completing%20its%20final%20cycle%2C%20a%20half-woken%20presence%20guttering%20out%2C%20a%20stretch%20of%20river%20left%20grey%20and%20sterile%2C%20a%20figure%20watching%20an%20ending%20they%20chose.%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=59251&nologo=true",
     "quest-what-the-water-remembers-out-redirected": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/A%20figure%20reworking%20the%20glowing%20core-instruction%20of%20an%20ancient%20facility%2C%20the%20machine's%20output%20shifting%20from%20poison%20to%20clean%20water%2C%20a%20river%20healing%20downstream%2C%20a%20presence%20sleeping%20undisturbed%20below.%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=77743&nologo=true",
     "quest-what-the-water-remembers-out-awakened": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/An%20ancient%20precursor%20presence%20fully%20awake%20and%20rising%20from%20a%20facility%20for%20the%20first%20time%20in%20centuries%2C%20the%20river%20running%20clean%20in%20its%20wake%2C%20a%20figure%20standing%20with%20it%20as%20midwife%20and%20companion%2C%20a%20new%20power%20walking%20into%20the%20dawn%20world.%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=6466&nologo=true"
-  }
+  },
+  "worldEvents": [
+    {
+      "kind": "arc_stage",
+      "arcId": "arc_what_wakes_beneath",
+      "questId": "what-the-water-remembers",
+      "questTitle": "What the Water Remembers",
+      "dir": 1,
+      "weight": 3,
+      "text": "the arc is ANSWERED by waking — a precursor walks, and every other stirring is accelerated by it",
+      "worldDay": 84,
+      "propagates": true
+    }
+  ],
+  "locationState": {}
 }

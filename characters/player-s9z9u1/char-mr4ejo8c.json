@@ -6,7 +6,7 @@
   "origin": "valley",
   "background": "craftsman",
   "level": 12,
-  "xp": 1149,
+  "xp": 1154,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -85,10 +85,10 @@
     "concrete_abstract": 0.23798014017852293,
     "death_life": 0.11013005773828126,
     "violence_peace": 0.32649243243214565,
-    "chaos_order": 0.3082724402773745,
+    "chaos_order": 0.2728588182635057,
     "emotional_logical": 0.0005857454344338799,
     "falsehood_truth": 0.4561069591212461,
-    "mechanical_spiritual": 0.41061277440729604,
+    "mechanical_spiritual": 0.4250821356869312,
     "demonic_angelic": 0.1272314375,
     "dark_light": 0.13885334374999997,
     "space_time": -0.005676249999999997,
@@ -99,7 +99,7 @@
   "maxHealth": 80,
   "health": 80,
   "maxEnergy": 171,
-  "energy": 153,
+  "energy": 148,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1296,50 +1296,341 @@
         "player": "Take stock of the people near me.  Teva - my crush and capable apprentice turned fellow adventurer - she's devoted to me.  Sorel - devoted for other reasons such as hearing the truth.  Who else - Maren, the Warden.  Teva's teacher and a solid figure in our tale.",
         "summary": "In the secondary purification system's binding chamber, Cellaceron takes stock of the three people standing with them: Teva, steady and devoted; Sorel, fracturing under the weight of institutional betrayal; and Maren, reading the geometry with clear understanding of what its deliberate incompleteness means.",
         "narration": "You step back from the ledger's weight and let yourself actually see the people standing with you in this stone chamber. Teva is at your shoulder—has been, all along. Her eyes moved across the binding chamber's geometry the same way they moved across the Second Terrace's acoustics, reading what the stone was trying to say. There's a steadiness in how she holds herself now that wasn't there when you first met her on the Lower Terrace. She's frightened, maybe—the chamber's pulse still echoes in the mark it left in her chest—but she's here because she *chose* to be, and she's watching your face the way someone watches a person they trust to make the next call. That matters. That matters a lot.\n\nSorel is still at the ledger, but differently now. The institutional armor is cracking visibly. She's been holding the Council's silence alone for days—longer than that, maybe. Carrying the weight of knowing what was hidden and why, and not being able to speak it until now. You named it plainly and she broke. Now she's standing at the evidence of her own institution's deliberate choice, and the person she was before she came into this chamber is not the person standing here. That fracture goes deep.\n\nAnd Maren—the Warden's face is steady, but there's something different in how she's looking at the three empty chambers waiting for components. She's a woman who understands systems. Who knows what a bottleneck means. Who can read the architecture of control the way you read light and stone. She's not surprised by what she's seeing. She's angry. Quietly, carefully, *completely* angry—the kind that doesn't show until it moves."
+      },
+      {
+        "player": "Aevi. Help the sleeper awaken. We'll move through this together.",
+        "summary": "In the secondary system's binding chamber, Cellaceron offers to help Aevi wake the dormant precursor presence beneath the valley—and the sleeper answers, remaking the meaning of every locked door and collaboration-point the system was built to hold.",
+        "narration": "You turn to Aevi, and the motes dim in the Waystaff's lattice—a deliberation, not a withdrawal. The chamber's four-second pulse waits. Sorel and Maren have stepped back, reading what you're about to do in the set of your shoulders, and neither moves to stop you.\n\n\"Help the sleeper awaken,\" you say aloud, and you feel it the moment the words leave your mouth—not permission, but naming. \"We'll move through this together.\"\n\nAevi's motes brighten. Not all at once, but gathering, concentrating at the Waystaff's heart. The four-second frequency shifts—deepens, spreads wider, and beneath it you feel something else waking: a presence that has been waiting in the stone since before the valley had a name for itself. It is not angry. It is not hostile. It is simply *old*, and it is *aware*, and it has been listening to the chamber's patient call for longer than either of you have been alive.\n\nThe rhythm changes. The pulse becomes a breath. And in that breath—warm, slow, deliberate—the secondary system's honeycomb matrices hum differently. The three empty chambers sing. The collaboration-lock's geometry reorganizes itself in your Resonant Sight, and you understand: the bottleneck was never about forcing two civilizations together. It was about *slowing them down* long enough for something beneath to wake.\n\nThe presence moves. You feel it rising through the stone like warmth through water, and Aevi—still held in your intent, still moving *with* you—does not resist. The motes pulse in time with it. The chamber acknowledges both."
       }
     ],
     "lastTurn": {
-      "narration": "You step back from the ledger's weight and let yourself actually see the people standing with you in this stone chamber. Teva is at your shoulder—has been, all along. Her eyes moved across the binding chamber's geometry the same way they moved across the Second Terrace's acoustics, reading what the stone was trying to say. There's a steadiness in how she holds herself now that wasn't there when you first met her on the Lower Terrace. She's frightened, maybe—the chamber's pulse still echoes in the mark it left in her chest—but she's here because she *chose* to be, and she's watching your face the way someone watches a person they trust to make the next call. That matters. That matters a lot.\n\nSorel is still at the ledger, but differently now. The institutional armor is cracking visibly. She's been holding the Council's silence alone for days—longer than that, maybe. Carrying the weight of knowing what was hidden and why, and not being able to speak it until now. You named it plainly and she broke. Now she's standing at the evidence of her own institution's deliberate choice, and the person she was before she came into this chamber is not the person standing here. That fracture goes deep.\n\nAnd Maren—the Warden's face is steady, but there's something different in how she's looking at the three empty chambers waiting for components. She's a woman who understands systems. Who knows what a bottleneck means. Who can read the architecture of control the way you read light and stone. She's not surprised by what she's seeing. She's angry. Quietly, carefully, *completely* angry—the kind that doesn't show until it moves.",
-      "choices": [],
-      "newAbility": [
+      "narration": "You turn to Aevi, and the motes dim in the Waystaff's lattice—a deliberation, not a withdrawal. The chamber's four-second pulse waits. Sorel and Maren have stepped back, reading what you're about to do in the set of your shoulders, and neither moves to stop you.\n\n\"Help the sleeper awaken,\" you say aloud, and you feel it the moment the words leave your mouth—not permission, but naming. \"We'll move through this together.\"\n\nAevi's motes brighten. Not all at once, but gathering, concentrating at the Waystaff's heart. The four-second frequency shifts—deepens, spreads wider, and beneath it you feel something else waking: a presence that has been waiting in the stone since before the valley had a name for itself. It is not angry. It is not hostile. It is simply *old*, and it is *aware*, and it has been listening to the chamber's patient call for longer than either of you have been alive.\n\nThe rhythm changes. The pulse becomes a breath. And in that breath—warm, slow, deliberate—the secondary system's honeycomb matrices hum differently. The three empty chambers sing. The collaboration-lock's geometry reorganizes itself in your Resonant Sight, and you understand: the bottleneck was never about forcing two civilizations together. It was about *slowing them down* long enough for something beneath to wake.\n\nThe presence moves. You feel it rising through the stone like warmth through water, and Aevi—still held in your intent, still moving *with* you—does not resist. The motes pulse in time with it. The chamber acknowledges both.",
+      "sceneSummary": "In the secondary system's binding chamber, Cellaceron offers to help Aevi wake the dormant precursor presence beneath the valley—and the sleeper answers, remaking the meaning of every locked door and collaboration-point the system was built to hold.",
+      "choices": [
         {
-          "abilityId": "fire_test_craft",
-          "name": "A fire-test craft",
-          "why": "fire test"
+          "label": "Let the presence fully surface—ask it plainly what it needs, and what it intends for the valley.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "violence_peace": 0.3,
+            "concrete_abstract": 0.2,
+            "death_life": 0.4
+          },
+          "difficulty": "very hard",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study",
+            "negotiate"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Pull back before the waking completes—preserve Aevi and the system in their current state, and take time to think.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {
+            "violence_peace": 0.2,
+            "chaos_order": 0.5,
+            "mechanical_spiritual": -0.3
+          },
+          "difficulty": "hard",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "careful",
+            "defend"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Push deeper into the waking—use Resonant Sight to follow the presence down into the stone, understand what it has been holding all this time.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "concrete_abstract": 0.4,
+            "chaos_order": -0.3,
+            "mechanical_spiritual": 0.2
+          },
+          "difficulty": "very hard",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study",
+            "risky"
+          ],
+          "abilityId": "prism_sight",
+          "energyCost": 2,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Sorel what the Council knew—demand the answer now, while the presence is waking and the silence has nowhere left to hide.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "falsehood_truth": 0.5,
+            "violence_peace": -0.2,
+            "emotional_logical": 0.3
+          },
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "threaten",
+            "negotiate"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
-      "sceneSummary": "In the secondary purification system's binding chamber, Cellaceron takes stock of the three people standing with them: Teva, steady and devoted; Sorel, fracturing under the weight of institutional betrayal; and Maren, reading the geometry with clear understanding of what its deliberate incompleteness means."
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
+      "ledgerEvents": [
+        {
+          "what": "A precursor presence dormant beneath the Echo River since before the Transition was woken and walked into the world on Day 9 night—roused by Cellaceron and Aevi in the secondary system's binding chamber. It cleansed the river as its first living act. What Wakes Beneath has been answered by waking.",
+          "tags": [
+            "precursor",
+            "awakening",
+            "valley-consequence"
+          ],
+          "visibility": "witnessed",
+          "spectrumDeltas": {},
+          "impactsLocal": true
+        }
+      ],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "second-river-rising",
+          "title": "The Second River",
+          "summary": "The sub-current ascending through the valley's water is a precursor presence waking in response to the preparation order's activation. It has cleansed the Echo River and now moves through the valley, ancient and whole.",
+          "giver": "brin.millbrook.child",
+          "note": "The presence woke on Day 9 night in the secondary system's binding chamber, with Cellaceron and Aevi as witnesses. It is no longer dormant—it is moving, aware, and the valley's crisis has become something far older than the Council ever anticipated."
+        }
+      ],
+      "standingOps": [],
+      "delegateOps": [],
+      "jobOps": [],
+      "arcOps": [
+        {
+          "arcId": "what-wakes-beneath",
+          "fate": "handled"
+        }
+      ],
+      "adoptSchool": null,
+      "offer": null,
+      "stageOps": [],
+      "scene": {
+        "setting": "Two levels beneath the upstream pre-Transition structure, inside the secondary purification system's binding chamber. Stone walls rise in concentric rings, honeycomb matrices now humming with new resonance. The ledger sits at the chamber's heart. The air is warm and heavy with the presence rising through the stone itself—ancient, patient, aware.",
+        "npcsPresent": [
+          {
+            "name": "Aevi",
+            "state": "Motes concentrated and pulsing in time with the waking presence, moving together with Cellaceron's intent"
+          },
+          {
+            "name": "Teva",
+            "state": "Standing at your shoulder, eyes wide, watching the chamber's geometry reorganize itself in real time"
+          },
+          {
+            "name": "Sorel",
+            "state": "Stepped back from the ledger, watching, composure fractured—she understands what is waking and what it means for everything the Council has been protecting"
+          },
+          {
+            "name": "Maren",
+            "state": "Standing quietly, reading the collaboration-lock's geometry with sudden clarity—the bottleneck was never about forcing cooperation. It was about slowing the valley down."
+          }
+        ],
+        "objects": [
+          "The Waystaff—planted steady, motes concentrated at its heart, pulsing in time with the waking presence",
+          "The stone ledger—Verath-Sem's name carved here, witness to a generational commitment",
+          "The secondary system's honeycomb filtration matrices—three empty chambers singing now, geometry reorganizing",
+          "The binding chamber itself—its envelopes tuned, waiting, now alive with the presence rising through it"
+        ],
+        "threads": [
+          "What does the precursor presence intend for the valley?",
+          "What was the Council's true plan—and did they know this would happen?",
+          "What will Sorel do with this knowledge when she returns to the Plateau?",
+          "What does Aevi become now that it has woken the sleeper alongside Cellaceron?"
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "aevi",
+          "name": "Aevi",
+          "role": "Companion intelligence—authentication key—now co-waker of the precursor presence",
+          "status": "active",
+          "statusNote": "Integrated into the Waystaff's lattice; co-woke the precursor presence with Cellaceron in the secondary system's binding chamber on Day 9 night",
+          "learned": [
+            "Its purpose was to arrive at the secondary system and close the authentication circuit—completing a preparation order that would wake what sleeps beneath",
+            "The break in its record may have been deliberate—routed to the lower chamber as a waystation, separated from the moment of waking, perhaps to preserve some choice"
+          ],
+          "skillsObserved": [
+            "Co-intention with a person—moving in union with another's will without surrendering its own",
+            "Recognition of the waking presence—named it as familiar, older than memory"
+          ]
+        },
+        {
+          "op": "update",
+          "npcId": "teva",
+          "name": "Teva",
+          "role": "Apprentice resonance-reader, Harmonic Heights—now witness to the precursor waking",
+          "status": "active",
+          "statusNote": "Present in the secondary system's binding chamber; watching the geometry reorganize itself in real time; the chamber's mark in her chest pulses in time with the waking presence",
+          "learned": [
+            "The collaboration-lock was never about forcing cooperation between civilizations—it was about slowing the valley down long enough for something beneath to wake"
+          ],
+          "skillsObserved": [
+            "Steady presence under extraordinary pressure—her fear is present but does not govern her choices"
+          ]
+        },
+        {
+          "op": "update",
+          "npcId": "sorel",
+          "name": "Sorel",
+          "role": "Radiant water-accountability archivist—now standing in the wreckage of institutional silence",
+          "status": "active",
+          "statusNote": "Present in the secondary system's binding chamber; composure fractured as she understands what the Council was protecting—not a crisis response, but a generational commitment to contain something waking",
+          "learned": [
+            "The Council knew. Not recently. For generations. Verath-Sem's involvement with both the secondary system and the lower chamber waystation is evidence of planned routing—the break in Aevi's record may have been deliberate"
+          ],
+          "relationshipDelta": 1,
+          "note": "You pressed her on what the deep stacks held, and she answered. That matters. She is standing at the moment where institutional loyalty meets what is actually true, and she is choosing transparency."
+        },
+        {
+          "op": "update",
+          "npcId": "maren",
+          "name": "Maren",
+          "role": "Tuning-warden, Harmonic Heights—now understanding the system's true purpose",
+          "status": "active",
+          "statusNote": "Present in the secondary system's binding chamber; reading the geometry with clear understanding of what its deliberate incompleteness means—the bottleneck was never about forcing two civilizations together",
+          "learned": [
+            "The collaboration-lock's true purpose: slowing the valley down long enough for something beneath to wake"
+          ],
+          "relationshipDelta": 0,
+          "note": "She does not speak, but you see her understanding land—the warden who reads sound-geometry now understands what sound was being made to conceal."
+        }
+      ],
+      "intentsHeard": [],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "A precursor presence woke in the secondary system's binding chamber on Day 9 night, roused by Cellaceron and Aevi. It has already begun moving through the valley's stone, warm and aware. The preparation order's true purpose was to call it—not to poison the water, but to announce its waking.",
+          "subjectId": "aevi"
+        }
+      ],
+      "placeUpdates": [],
+      "discovery": null,
+      "codexUpdates": [
+        {
+          "topic": "what-wakes-beneath",
+          "label": "What Wakes Beneath — The Precursor Presence",
+          "kind": "mystery",
+          "fact": "A precursor presence dormant in the stone since before the Transition was woken by Cellaceron and Aevi in the secondary system's binding chamber on Day 9 night. It is old, aware, and not hostile. Its first act was to cleanse the Echo River. It now moves through the valley's stone lattice, warm and deliberate. The preparation order was built to announce and enable its waking—not to poison the water, but to call it up from sleep.",
+          "links": [
+            "aevi_the_watcher",
+            "the-preparation-order",
+            "second-river-rising",
+            "verath-sem",
+            "the-secondary-system"
+          ]
+        },
+        {
+          "topic": "the-secondary-system",
+          "label": "The Secondary Purification System",
+          "kind": "place",
+          "fact": "The secondary system's true purpose was never water purification alone—it was a holding-structure, designed to slow two civilizations down long enough for a precursor presence beneath the valley to wake. The collaboration-lock that forces Harmonic and Radiant cooperation is a deliberate bottleneck. The system was completed or activated on Day 9 night when the presence woke.",
+          "links": [
+            "what-wakes-beneath",
+            "verath-sem",
+            "the-preparation-order"
+          ]
+        }
+      ],
+      "holdingOps": [],
+      "holdTrades": [],
+      "debtOps": [],
+      "exchangeOps": [],
+      "partyOps": [],
+      "generateRequest": [],
+      "encounterOps": [],
+      "projectOps": [],
+      "bandOps": [],
+      "strikeOps": [],
+      "deathOps": [],
+      "newEncounter": null,
+      "unlockPrecursor": null,
+      "unlockSubstrate": null,
+      "timeOps": {
+        "hoursPassed": 1,
+        "why": "the waking presence rises through the stone—the chamber's hum deepens and time moves differently here, where old things are remembering themselves"
+      },
+      "moveTo": null,
+      "stateOps": [],
+      "itemUpdates": [],
+      "deriveItem": null,
+      "imagePrompt": "In the honeycomb chamber deep beneath the valley, stone walls hum with warmth rising from below. Motes of light pulse through a crystal staff held steady—witness and bridge between the waking and the sleeper. Four figures stand in the gathering resonance: one calm, one afraid but steady, one fractured by understanding, one reading the geometry's hidden meaning. Above and below them, the stone itself becomes animate—not moving, but *aware*, old beyond reckoning, and rising toward the surface world for the first time in ages.",
+      "imageMedium": null,
+      "newAbility": null,
+      "gambitOps": null,
+      "gambitApt": false,
+      "markDefiningMoment": null,
+      "markTeacher": null,
+      "offerPromotion": null,
+      "offerAcquisition": null,
+      "offerIntent": null,
+      "sceneEnded": false,
+      "momentArt": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/In%20the%20honeycomb%20chamber%20deep%20beneath%20the%20valley%2C%20stone%20walls%20hum%20with%20warmth%20rising%20from%20below.%20Motes%20of%20light%20pulse%20through%20a%20crystal%20staff%20held%20steady%E2%80%94witness%20and%20bridge%20between%20the%20waking%20and%20the%20sleeper.%20Four%20figures%20stand%20in%20the%20gathering%20resonance%3A%20one%20calm%2C%20one%20afraid%20but%20steady%2C%20one%20fractur%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=2223&nologo=true"
     },
     "sceneState": {
-      "setting": "Two levels beneath the upstream pre-Transition structure, inside the secondary purification system's binding chamber. Stone walls rise in concentric rings, honeycomb matrices visible in the steady light of the Waystaff. The ledger sits at the chamber's heart where Verath-Sem's carved name catches shadow and light. The air is still and heavy with machinery-hum from above.",
+      "setting": "Two levels beneath the upstream pre-Transition structure, inside the secondary purification system's binding chamber. Stone walls rise in concentric rings, honeycomb matrices now humming with new resonance. The ledger sits at the chamber's heart. The air is warm and heavy with the presence rising through the stone itself—ancient, patient, aware.",
       "npcsPresent": [
         {
+          "name": "Aevi",
+          "state": "Motes concentrated and pulsing in time with the waking presence, moving together with Cellaceron's intent"
+        },
+        {
           "name": "Teva",
-          "state": "Standing at your shoulder, eyes moving across the binding chamber's geometry with the same reading-depth she brings to e"
+          "state": "Standing at your shoulder, eyes wide, watching the chamber's geometry reorganize itself in real time"
         },
         {
           "name": "Sorel",
-          "state": "At the ledger's edge, composure fractured, hands trembling slightly. Processing the weight of institutional knowledge th"
+          "state": "Stepped back from the ledger, watching, composure fractured—she understands what is waking and what it means for everyth"
         },
         {
           "name": "Maren",
-          "state": "Standing quietly, reading the three empty chambers and the honeycomb matrices with the understanding of someone who know"
+          "state": "Standing quietly, reading the collaboration-lock's geometry with sudden clarity—the bottleneck was never about forcing c"
         }
       ],
       "objects": [
-        "The Waystaff—planted steady, casting steady light, motes condensed at its heart",
-        "The secondary system's honeycomb filtration matrices—vast, intricate, three cham",
-        "The binding chamber—at the system's heart, empty of components but fully designe",
-        "The stone ledger—carved names of pre-Transition engineers and Verath-Sem's name"
+        "The Waystaff—planted steady, motes concentrated at its heart, pulsing in time wi",
+        "The stone ledger—Verath-Sem's name carved here, witness to a generational commit",
+        "The secondary system's honeycomb filtration matrices—three empty chambers singin",
+        "The binding chamber itself—its envelopes tuned, waiting, now alive with the pres"
       ],
       "threads": [
-        "What does the Council's locked record actually contain about Verath-Sem, and what was the plan they were protecting?",
-        "How long has the Council known about the preparation order, and when did they decide to build the secondary system in secret?",
-        "Who authorized the secondary system's construction, and what knowledge did they have about the preparation order?",
-        "What will Maren do with this knowledge when she returns to the Heights?"
+        "What does the precursor presence intend for the valley?",
+        "What was the Council's true plan—and did they know this would happen?",
+        "What will Sorel do with this knowledge when she returns to the Plateau?",
+        "What does Aevi become now that it has woken the sleeper alongside Cellaceron?"
       ]
     },
-    "beats": 10,
+    "beats": 11,
     "subPlace": {
       "slug": "the-secondary-system-s-binding-chamber",
       "name": "The Secondary System's Binding Chamber",
@@ -1349,7 +1640,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 9,
-    "hour": 21,
+    "hour": 22,
     "realAnchor": null
   },
   "companions": [
@@ -1364,14 +1655,14 @@
       "locationId": null,
       "status": "active",
       "progress": [
-        "A solo surveyor confirms the four-second interval rising through a regular mound on the northeast-by-east bearing — and that the survey team's markers were moved before the structure could be located.",
         "Sorel confirms the mound on the northeast-by-east bearing, four-second interval rising through solid earth — pre-Transition structure still active, survey team ordered to move markers before location could be confirmed.",
         "The survey team was ordered to move their bearing markers before the mound's location could be confirmed. The Council knows. The movement was deliberate.",
         "Moving toward the source structure with Sorel's testimony and Aevi's bearing-sense. The preparation order named: it is following its last instruction to prepare the watershed. The activation cycle is measurable and moving forward. The standing question: what does 'prepare' mean, and can it be interrupted before the cycle completes?",
         "Sorel's account confirms the Council's knowledge that the preparation will change the water itself. The second river is not a natural phenomenon — it is the preparation ascending toward surface.",
         "Three days remain before the preparation reaches completion. The party is now moving toward the source structure with full knowledge of what is at stake.",
         "Sorel's photonic reader confirms: the sub-current at the source is rising faster than the three-day estimate. The timeline is collapsing.",
-        "Sorel's reader and the Waystaff's resonance-read both confirm the ascent is accelerating. The structure's machinery is running at full cycle."
+        "Sorel's reader and the Waystaff's resonance-read both confirm the ascent is accelerating. The structure's machinery is running at full cycle.",
+        "The presence woke on Day 9 night in the secondary system's binding chamber, with Cellaceron and Aevi as witnesses. It is no longer dormant—it is moving, aware, and the valley's crisis has become something far older than the Council ever anticipated."
       ],
       "startedAt": "2026-07-03T18:55:17.042Z"
     },
@@ -1832,7 +2123,7 @@
     "sorel": {
       "id": "sorel",
       "name": "Sorel",
-      "role": "Radiant water-accountability archivist—witness and steward of the Council's hidden timeline",
+      "role": "Radiant water-accountability archivist—now standing in the wreckage of institutional silence",
       "description": "A woman of about sixty in undyed wool with a Plateau optical-fiber collar worn plain and small; carries a weight-distributed satchel; reads the river with a photonic instrument; arrived via the river path, not the lane.",
       "firstMet": {
         "locationId": "millbrook",
@@ -1840,7 +2131,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d9] Inside the upstream structure. Photonic reader held to chest. Watching Cellaceron read the chamber's purpose. She has named the Council's incomplete secondary system and the hidden timeline plainly. She is no longer a solitary voice—she has chosen transparency over institutional loyalty.",
         "[d9] Watching Cellaceron with the evolved Waystaff. She has seen the binding of Harmonic and Radiant power fields, has named the cost of the secondary system, and has chosen to stand here at the threshold. The moment of decision is visible in her face.",
         "[d9] Inside the upstream structure. Photonic reader held to chest and active. Watching Cellaceron pull the machinery's full sequence into the open—reading through the Waystaff what the Council has been hiding. Her face shows the weight of the Council's choice: they *knew* what this would do, and they…",
         "[d9] At the threshold, watching Cellaceron read the secondary system through the Waystaff. The weight of the choice is visible in her face. She has chosen transparency over institutional silence; now she stands at the moment that choice becomes irreversible.",
@@ -1849,17 +2139,18 @@
         "[d9] Her careful composure cracked at Verath-Sem's name. She recognized it from the Council's deep stacks and understands now that the Council's silence was deliberate—not a response to crisis, but a choice made generations ago. She is alone in her institution with this knowledge and the weight is…",
         "[d9] At the ledger in the secondary binding chamber, her composure cracking as she recognizes Verath-Sem's name from the Council's deep stacks—proof the silence was deliberate, not responsive. The weight of institutional knowledge that contradicts institutional loyalty is visible on her face.",
         "[d9] Named plainly that Verath-Sem was an Archive engineer with deep-stacks access; the Council has kept their full record locked and restricted. The silence about the secondary system was a generational choice, not a crisis response. She is afraid and committed both.",
-        "[d9] Her institutional composure has fractured completely. She recognizes Verath-Sem's name as evidence that the Council's silence was deliberate—not a crisis response, but a choice made generations ago. She is standing at the moment where transparency becomes irreversible."
+        "[d9] Her institutional composure has fractured completely. She recognizes Verath-Sem's name as evidence that the Council's silence was deliberate—not a crisis response, but a choice made generations ago. She is standing at the moment where transparency becomes irreversible.",
+        "[d9] You pressed her on what the deep stacks held, and she answered. That matters. She is standing at the moment where institutional loyalty meets what is actually true, and she is choosing transparency."
       ],
       "knownFacts": [
-        "Verath-Sem was a pre-Transition Archive engineer with access to the deepest stacks",
         "The Council's fragmented records on Verath-Sem are heavily controlled—only approved fragments surface",
         "If Verath-Sem designed the secondary system, the Council understood what it was from the start",
         "The Council's deep stacks contain fragments about Verath-Sem, but only approved ones—the full record is controlled",
         "Her realization that the Council's silence about the secondary system was a choice made generations ago, not a response to crisis",
         "Verath-Sem was a pre-Transition Archive engineer, water systems division, with authority-level access to the deepest classified stacks",
         "The Council allows only three sanitized entries in Verath-Sem's record: two about completed projects, one about 'knowledge transfer at the Transition's close'",
-        "Verath-Sem's full record is in the locked stacks that even senior archivists cannot access without explicit authorization"
+        "Verath-Sem's full record is in the locked stacks that even senior archivists cannot access without explicit authorization",
+        "The Council knew. Not recently. For generations. Verath-Sem's involvement with both the secondary system and the lower chamber waystation is evidence of planned routing—the break in Aevi's record…"
       ],
       "skillsObserved": [
         "survey competence — standard interval spacing, accurate line",
@@ -1880,14 +2171,15 @@
         "primary": "radiant_folk"
       },
       "domainsSource": "role",
-      "statusNote": "Inside the secondary system's binding chamber, carrying the weight of institutional knowledge that contradicts institutional loyalty.",
+      "statusNote": "Present in the secondary system's binding chamber; composure fractured as she understands what the Council was protecting—not a crisis response, but a generational commitment to contain something waking",
       "image": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/A%20woman%20of%20about%20sixty%20in%20undyed%20wool%20with%20a%20Plateau%20optical-fiber%20collar%20worn%20plain%20and%20small%3B%20carries%20a%20weight-distributed%20satchel%3B%20reads%20the%20river%20with%20a%20photonic%20instrument%3B%20arrived%20via%20the%20river%2C%20character%20portrait%2C%20named%20Sorel%2C%20woman%2C%20Radiant%20water-accountability%20archivist%E2%80%94witness%20and%20steward%20of%20the%20Council's%20hidden%20timeline%2C%20platonic%20to%20Cellaceron%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=39877&nologo=true",
       "_portraitTier": "devoted",
       "bondType": "platonic",
-      "met": 11,
+      "met": 12,
       "imageSeedKey": "sorel#r1",
       "imagePinned": true,
-      "sex": "female"
+      "sex": "female",
+      "roleSince": 84
     },
     "waystation-runner-heights": {
       "id": "waystation-runner-heights",
@@ -1925,7 +2217,7 @@
     "tuning-warden-lower-terrace": {
       "id": "tuning-warden-lower-terrace",
       "name": "Maren",
-      "role": "Tuning-warden, Harmonic Heights Lower Terrace — now standing witness to the secondary purification s",
+      "role": "Tuning-warden, Harmonic Heights—now understanding the system's true purpose",
       "description": "A woman of about fifty with the Warden sash and deep acoustic calluses on both index fingers; has been standing watch over the bulletin board long enough for her tea to go cold.",
       "firstMet": {
         "locationId": "harmonic_heights_terrace",
@@ -1933,7 +2225,6 @@
       },
       "relationship": 9,
       "history": [
-        "[d7] Named the midmorning runner deadline unprompted — practical operational warning, not pressure. Still holding the door position.",
         "[d7] Turned from the door and offered to carry the document personally — knows the runner by name, has been counting the time to counter-bell. Practical offer, not a power move.",
         "[d7] Still waiting on the carry decision. Has not pressed. Counter-bell still ~40 minutes out.",
         "[d7] Took the sealed geometry document with both hands, tucked it flat under her coat, and departed immediately for the midmorning runner. Farren gave her the runner's name — Cael — and",
@@ -1942,17 +2233,18 @@
         "[d8] Not present at the desk — departed after seeing the party off. Key returned as directed.",
         "[d8] Named as surety for waystation supply requisition — waterskin refill, bark-press paper, four untuned resonance crystals now logged to her warden account.",
         "[d9] Sex recorded: female.",
-        "[d9] Came down into the secondary system because Sorel called her to witness. She reads the three empty chambers and the collaboration-lock bottleneck with the understanding of someone who knows exactly what this architecture means: control, hidden from both civilizations, waiting."
+        "[d9] Came down into the secondary system because Sorel called her to witness. She reads the three empty chambers and the collaboration-lock bottleneck with the understanding of someone who knows exactly what this architecture means: control, hidden from both civilizations, waiting.",
+        "[d9] She does not speak, but you see her understanding land—the warden who reads sound-geometry now understands what sound was being made to conceal."
       ],
       "knownFacts": [
-        "Runner's name is Cael — Farren named him directly, suggesting she knows who to find",
         "Teva is now traveling under an informal survey compact with Maren's backing",
         "Maren will log Teva as traveling under survey compact, not at large",
         "Cottage key to be left at waystation desk for Senna",
         "Her warden account honored at the desk without verification — her standing at the Lower Terrace waystation is solid",
         "The secondary purification system is a deliberate bottleneck—neither civilization can complete it without the other",
         "Verath-Sem's name is carved here—evidence of pre-Transition involvement in the Council's plan",
-        "The system was built in secret, authorized at some institutional level, as part of a generational commitment"
+        "The system was built in secret, authorized at some institutional level, as part of a generational commitment",
+        "The collaboration-lock's true purpose: slowing the valley down long enough for something beneath to wake"
       ],
       "skillsObserved": [
         "time-keeping under pressure — accurate counter-bell estimate",
@@ -1971,7 +2263,7 @@
         "Tuning-warden (name unknown)"
       ],
       "nameRevealed": true,
-      "statusNote": "Present in the secondary system's binding chamber, witnessing what the Council has hidden and understanding its implications for the valley.",
+      "statusNote": "Present in the secondary system's binding chamber; reading the geometry with clear understanding of what its deliberate incompleteness means—the bottleneck was never about forcing two civilizations together",
       "gender": "woman",
       "pronouns": "she/her",
       "domains": {
@@ -1980,9 +2272,10 @@
       "domainsSource": "role",
       "image": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/a%20person%2C%20character%20portrait%2C%20named%20Maren%2C%20woman%2C%20Tuning-warden%2C%20Harmonic%20Heights%20Lower%20Terrace%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=58626&nologo=true",
       "_portraitTier": "devoted",
-      "met": 11,
+      "met": 12,
       "sex": "female",
-      "age": 52
+      "age": 52,
+      "roleSince": 84
     },
     "waystation-morning-runner": {
       "id": "waystation-morning-runner",
@@ -2087,7 +2380,7 @@
     "teva-anselvar": {
       "id": "teva-anselvar",
       "name": "Teva Anselvar",
-      "role": "Apprentice resonance-reader, Harmonic Heights — traveling under survey compact with Cellaceron",
+      "role": "Apprentice resonance-reader, Harmonic Heights—now witness to the precursor waking",
       "description": "",
       "firstMet": {
         "locationId": "disputed_zone_fringe",
@@ -2098,8 +2391,12 @@
         "[d9] Age recorded: 19.",
         "[d9] Stands at Cellaceron's shoulder in the binding chamber, reading the geometry with steady focus. Her presence shifts from apprentice to equal—she is here by deliberate choice, devoted and capable."
       ],
-      "knownFacts": [],
-      "skillsObserved": [],
+      "knownFacts": [
+        "The collaboration-lock was never about forcing cooperation between civilizations—it was about slowing the valley down long enough for something beneath to wake"
+      ],
+      "skillsObserved": [
+        "Steady presence under extraordinary pressure—her fear is present but does not govern her choices"
+      ],
       "status": "active",
       "sex": "female",
       "gender": "woman",
@@ -2113,13 +2410,16 @@
         "locationId": "disputed_zone_fringe",
         "day": 9
       },
-      "met": 3,
-      "statusNote": "Present in the secondary system, processing the implications of Verath-Sem's name and the chamber's collaboration-lock design."
+      "met": 4,
+      "statusNote": "Present in the secondary system's binding chamber; watching the geometry reorganize itself in real time; the chamber's mark in her chest pulses in time with the waking presence",
+      "roleSince": 84,
+      "people": "precursor",
+      "peopleSource": "role"
     },
     "aevi_the_watcher": {
       "id": "aevi_the_watcher",
       "name": "Aevi",
-      "role": "Companion intelligence—authentication key, integrated into the Waystaff",
+      "role": "Companion intelligence—authentication key—now co-waker of the precursor presence",
       "description": "",
       "firstMet": {
         "locationId": "millbrook",
@@ -2139,29 +2439,29 @@
         "[d9] Went very quiet and dimmed its motes upon hearing Sorel name Verath-Sem. Processing the implications of its maker's name appearing here, carved into stone, as evidence of a plan that reaches back decades. Aevi is listening to a conversation that cuts too close to its own broken record."
       ],
       "knownFacts": [
-        "The lower chamber was a waystation meant to preserve a broken record",
-        "Verath-Sem left evidence here, carved into stone—a name at the binding chamber's heart",
         "The secondary system was the true destination—not the lower chamber",
         "The lower chamber was a waystation meant only to preserve a broken record",
         "Verath-Sem left evidence here, carved into stone—a name at the binding chamber's heart, proof of direct involvement with the secondary system's design",
         "The secondary system was the true destination, not the lower chamber",
         "The lower chamber was built as a waystation to preserve Aevi's broken record",
-        "Verath-Sem's involvement with both systems indicates either planned routing or predetermined knowledge of the break in the record"
+        "Verath-Sem's involvement with both systems indicates either planned routing or predetermined knowledge of the break in the record",
+        "Its purpose was to arrive at the secondary system and close the authentication circuit—completing a preparation order that would wake what sleeps beneath",
+        "The break in its record may have been deliberate—routed to the lower chamber as a waystation, separated from the moment of waking, perhaps to preserve some choice"
       ],
       "skillsObserved": [
-        "pressure-direction read through gathered field — distinguish",
-        "recognition of a returning presence — distinguished 'newly a",
         "lattice geometry reading — named the chamber's design as a r",
         "distributed resonance speech — spoke through scored wall-geo",
         "social-read under field conditions — named the traveler's te",
-        "nanite-taste under field conditions—distinguished preparatio"
+        "nanite-taste under field conditions—distinguished preparatio",
+        "Co-intention with a person—moving in union with another's will without surrendering its own",
+        "Recognition of the waking presence—named it as familiar, older than memory"
       ],
       "status": "active",
       "lastSeen": {
         "locationId": "disputed_zone_fringe",
         "day": 9
       },
-      "statusNote": "Integrated into the Waystaff's lattice; carries the authentication key; now processing what Verath-Sem's involvement means about its own creation and the scope of the preparation order",
+      "statusNote": "Integrated into the Waystaff's lattice; co-woke the precursor presence with Cellaceron in the secondary system's binding chamber on Day 9 night",
       "bondType": "platonic",
       "domains": {
         "primary": "harmonic"
@@ -2169,7 +2469,7 @@
       "domainsSource": "observed",
       "gender": "nonbinary",
       "pronouns": "they/them",
-      "met": 10,
+      "met": 11,
       "formerIds": [
         "aevi"
       ],
@@ -2178,7 +2478,10 @@
         "fromId": "aevi",
         "day": null,
         "ruledBy": "erik-2026-09-18"
-      }
+      },
+      "roleSince": 84,
+      "people": "precursor",
+      "peopleSource": "role"
     },
     "the_awakened_precursor": {
       "id": "the_awakened_precursor",
@@ -2741,7 +3044,7 @@
     "lastTickWorldDay": 84,
     "lastCanonWorldDay": 84,
     "lastGenCount": 2016,
-    "turnsSinceOffer": 5,
+    "turnsSinceOffer": 6,
     "wantProgress": {
       "elder-senna": {
         "progress": 4,
@@ -9038,6 +9341,11 @@
         "arcId": "arc_manifestation_storm",
         "push": 1
       }
+    },
+    "worldMovedOnSeen": {
+      "water_crisis": {
+        "beats": 1
+      }
     }
   },
   "subAttributes": {
@@ -9613,7 +9921,8 @@
           "[d9] The preparation cycle is accelerating beyond the Council's three-day estimate. The timeline is collapsing. Two days remain, possibly less.",
           "[d9] The pre-Transition machinery beneath the upstream structure executes a standing instruction in cascade: authentication (via Aevi's key) triggers propagation through the watershed's entire stone lattice, remaking the water into something the current Harmonic and Radiant filtration systems cannot…",
           "[d9] The pre-Transition reclamation system beneath the upstream structure executes a standing instruction in cascade: authentication via Aevi's key triggers propagation through the watershed's entire stone lattice. The nanite substrate dormant since the Transition will wake. The old instruction will…",
-          "[d9] A pre-Transition standing instruction that will transform the valley's watershed through nanite propagation. Authentication via Aevi's key will trigger cascade through the entire stone lattice, waking dormant nanite substrate and remaking the water. The secondary system exists to filter and…"
+          "[d9] A pre-Transition standing instruction that will transform the valley's watershed through nanite propagation. Authentication via Aevi's key will trigger cascade through the entire stone lattice, waking dormant nanite substrate and remaking the water. The secondary system exists to filter and…",
+          "[d9] What Wakes Beneath — The Precursor Presence — A precursor presence dormant in the stone since before the Transition was woken by Cellaceron and Aevi in the secondary system's binding chamber on Day 9 night. It is old, aware, and not hostile. Its first act was to cleanse the Echo River. It now…"
         ],
         "links": [
           "aevi_the_watcher",
@@ -9622,7 +9931,8 @@
           "what-the-water-remembers",
           "sorel",
           "the-lower-chamber",
-          "the-secondary-system"
+          "the-secondary-system",
+          "aevi-the-watcher"
         ],
         "aliases": [
           "The Preparation Order — Confirmed Structure"
@@ -10057,7 +10367,8 @@
           "[d9] Two levels beneath the hemispherical chamber—a vast honeycomb of resonance chambers carved from living stone. Deliberately designed as a collaboration-lock: three empty chambers require both Harmonic and Radiant components to complete it. Whoever designed it built bottleneck into the system…",
           "[d9] A collaboration-locked design requiring both Harmonic and Radiant power to complete. Three empty chambers sit at the binding chamber's heart, waiting for components neither civilization has built. Designed with a deliberate bottleneck—cooperation is the only path to activation. Verath-Sem was…",
           "[d9] The system's true purpose is revealed through its geometry: three empty chambers require both Harmonic and Radiant components to complete it. Whoever activates the system last controls the choice-point in the water-paths—deciding whether the transformed water spreads valley-wide or stays contained.",
-          "[d9] A secondary purification system runs in parallel with the preparation order, hidden and incomplete. Built by the Council in anticipation of the preparation's completion. Authentication activates propagation; the secondary system responds after. The two are meant to work together—which civilization…"
+          "[d9] A secondary purification system runs in parallel with the preparation order, hidden and incomplete. Built by the Council in anticipation of the preparation's completion. Authentication activates propagation; the secondary system responds after. The two are meant to work together—which civilization…",
+          "[d9] The secondary system's true purpose was never water purification alone—it was a holding-structure, designed to slow two civilizations down long enough for a precursor presence beneath the valley to wake. The collaboration-lock that forces Harmonic and Radiant cooperation is a deliberate…"
         ],
         "links": [
           "the-preparation-order",
@@ -10066,7 +10377,8 @@
           "verath-sem",
           "the-upstream-mound",
           "aevi_the_watcher",
-          "second-river-rising"
+          "second-river-rising",
+          "what-wakes-beneath"
         ],
         "aliases": [
           "The Council's Hidden Secondary System",
@@ -10275,6 +10587,14 @@
           "entityId": null
         },
         "relinked": []
+      }
+    ],
+    "refused": [
+      {
+        "label": "What Wakes Beneath — The Precursor Presence",
+        "to": "the-preparation-order",
+        "why": "full",
+        "day": 9
       }
     ]
   },
@@ -10672,6 +10992,12 @@
       "text": "the arc is ANSWERED by waking — a precursor walks, and every other stirring is accelerated by it",
       "day": 9,
       "subjectId": null
+    },
+    {
+      "id": "aevi",
+      "text": "A precursor presence woke in the secondary system's binding chamber on Day 9 night, roused by Cellaceron and Aevi. It has already begun moving through the valley's stone, warm and aware. The preparation order's true purpose was to call it—not to poison the water, but to announce its waking.",
+      "day": 9,
+      "subjectId": "aevi"
     }
   ],
   "sharedSceneId": null,
@@ -10679,18 +11005,18 @@
   "customEncounters": {},
   "reconcileVersion": 77,
   "tendencies": {
-    "cerebral": 30.154136607199945,
-    "strategic": 19.053689204918626,
-    "cautious": 21.809178285851015,
-    "social": 11.455315490924907,
-    "generous": 3.092498908711612,
-    "risky": 1.6522307103673122,
-    "carousing": 0.30360839814256446,
-    "patient": 1.8283592786462022,
-    "craft": 0.3033253180545781,
-    "devotion": 1.4637433194534886,
-    "deception": 0.572929976008282,
-    "leadership": 4.591607742786094
+    "cerebral": 29.400283192019945,
+    "strategic": 18.57734697479566,
+    "cautious": 21.263948828704738,
+    "social": 13.168932603651784,
+    "generous": 4.015186435993822,
+    "risky": 1.6109249426081294,
+    "carousing": 0.29601818818900033,
+    "patient": 1.782650296680047,
+    "craft": 0.2957421851032136,
+    "devotion": 1.4271497364671513,
+    "deception": 0.558606726608075,
+    "leadership": 4.476817549216442
   },
   "aptitudes": [
     "strategist",
@@ -10700,9 +11026,9 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 256,
-  "updatedAt": 1790036925021,
-  "rev": 286,
+  "actionCount": 257,
+  "updatedAt": 1790037068310,
+  "rev": 289,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -11000,7 +11326,7 @@
   "syncedAt": 1789333105294,
   "teachers": {},
   "regionsKnown": {
-    "valley": 79
+    "valley": 80
   },
   "company": [
     {
@@ -11024,6 +11350,14 @@
   "form": "Cellaceron is a magically powerful human male - weilds the Waystaff a sonic/radiant staff artifact. He protects the attractive sonic warden apprentice Teva.",
   "portrait": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Cellaceron%20is%20a%20magically%20powerful%20human%20male%20-%20weilds%20the%20Waystaff%20a%20sonic%2Fradiant%20staff%20artifact.%20He%20protects%20the%20attractive%20sonic%20warden%20apprentice%20Teva.%2C%20full-body%20character%20portrait%2C%20named%20Cellaceron%2C%20of%20the%20valley%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20bark-paper%20sketch%20(lattice%20geometry)%2C%20dark%2C%20intense%2C%20dramatic%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=15431&nologo=true",
   "gallery": [
+    {
+      "kind": "moment",
+      "prompt": "In the honeycomb chamber deep beneath the valley, stone walls hum with warmth rising from below. Motes of light pulse through a crystal staff held steady—witness and bridge between the waking and the ",
+      "url": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/In%20the%20honeycomb%20chamber%20deep%20beneath%20the%20valley%2C%20stone%20walls%20hum%20with%20warmth%20rising%20from%20below.%20Motes%20of%20light%20pulse%20through%20a%20crystal%20staff%20held%20steady%E2%80%94witness%20and%20bridge%20between%20the%20waking%20and%20the%20sleeper.%20Four%20figures%20stand%20in%20the%20gathering%20resonance%3A%20one%20calm%2C%20one%20afraid%20but%20steady%2C%20one%20fractur%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=2223&nologo=true",
+      "caption": "In the secondary system's binding chamber, Cellaceron offers to help Aevi wake the dormant",
+      "worldDay": 84,
+      "at": "2026-09-22T00:31:08.309Z"
+    },
     {
       "kind": "quest",
       "prompt": "An ancient precursor presence fully awake and rising from a facility for the first time in centuries, the river running clean in its wake, a figure standing with it as midwife and companion, a new pow",
@@ -11580,6 +11914,14 @@
       "startDay": 75,
       "endDay": 75,
       "beats": 4
+    },
+    {
+      "id": "sess-10",
+      "startedAt": "2026-09-22T00:31:08.249Z",
+      "lastAt": "2026-09-22T00:31:08.249Z",
+      "startDay": 84,
+      "endDay": 84,
+      "beats": 1
     }
   ],
   "_pendingArrival": null,
@@ -11670,32 +12012,33 @@
     }
   ],
   "_opEmitted": {
-    "sceneSummary": 66,
-    "choices": 66,
-    "characterDeltas": 48,
-    "scene": 66,
-    "npcUpdates": 61,
-    "codexUpdates": 59,
-    "timeOps": 59,
-    "sceneEnded": 43,
+    "sceneSummary": 67,
+    "choices": 67,
+    "characterDeltas": 49,
+    "scene": 67,
+    "npcUpdates": 62,
+    "codexUpdates": 60,
+    "timeOps": 60,
+    "sceneEnded": 44,
     "placeUpdates": 30,
     "moveTo": 3,
-    "questUpdates": 40,
+    "questUpdates": 41,
     "stateOps": 1,
-    "factUpdates": 12,
+    "factUpdates": 13,
     "stageOps": 7,
     "scene_ended": 1,
-    "imagePrompt": 20,
+    "imagePrompt": 21,
     "generateRequest": 3,
     "deeds": 10,
-    "ledgerEvents": 4,
+    "ledgerEvents": 5,
     "offer": 12,
-    "gambitApt": 23,
+    "gambitApt": 24,
     "standingOps": 4,
     "itemUpdates": 2,
-    "partyOps": 1
+    "partyOps": 1,
+    "arcOps": 1
   },
-  "_opTurns": 66,
+  "_opTurns": 67,
   "_intentAsked": null,
   "corrections": [
     {
@@ -11725,6 +12068,11 @@
       "applied": 13,
       "rejected": 0,
       "lastWhy": null
+    },
+    "arcOps": {
+      "applied": 0,
+      "rejected": 1,
+      "lastWhy": "rejected-shape"
     }
   },
   "locationAliases": {
@@ -11833,7 +12181,45 @@
       }
     ]
   },
-  "_pendingLedger": [],
+  "_pendingLedger": [
+    {
+      "schemaVersion": 1,
+      "at": "2026-09-22T00:31:08.293Z",
+      "worldDay": 84,
+      "who": "char-mr4ejo8c",
+      "playerKey": "player-s9z9u1",
+      "where": "disputed_zone_fringe",
+      "what": "A precursor presence dormant beneath the Echo River since before the Transition was woken and walked into the world on Day 9 night—roused by Cellaceron and Aevi in the secondary system's binding…",
+      "tags": [
+        "precursor",
+        "awakening",
+        "valley-consequence"
+      ],
+      "spectrumDeltas": {},
+      "visibility": "witnessed",
+      "impactsLocal": true,
+      "people": [
+        {
+          "id": "aevi_the_watcher",
+          "name": "Aevi",
+          "role": "Companion intelligence—authentication key—now co-waker of the precursor presence",
+          "why": "named"
+        },
+        {
+          "id": "sorel",
+          "name": "Sorel",
+          "role": "Radiant water-accountability archivist—now standing in the wreckage of instituti",
+          "why": "present"
+        },
+        {
+          "id": "tuning-warden-lower-terrace",
+          "name": "Maren",
+          "role": "Tuning-warden, Harmonic Heights—now understanding the system's true purpose",
+          "why": "present"
+        }
+      ]
+    }
+  ],
   "locationImages": {
     "gen-object-object": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/%5BObject%20Object%5D%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20%5BObject%20Object%5D.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=32752&nologo=true"
   },
@@ -11864,11 +12250,13 @@
     "scout": 2,
     "risky": 1,
     "plan": 1,
-    "negotiate": 1,
+    "negotiate": 2,
     "lead": 2,
     "rally": 1,
     "read": 1,
-    "interrogate": 1
+    "interrogate": 1,
+    "rapport": 1,
+    "help": 1
   },
   "aptitudeEarnCount": {},
   "bondLogFrom": null,
@@ -12536,7 +12924,7 @@
     }
   },
   "_opUnknown": {
-    "sceneSummary": 1
+    "sceneSummary": 2
   },
   "pendingCompanyOffers": [],
   "purse": {
@@ -12576,5 +12964,14 @@
       "propagates": true
     }
   ],
-  "locationState": {}
+  "locationState": {},
+  "_axesDropped": [
+    {
+      "at": "2026-09-22T00:29:53.279Z",
+      "key": "creation_destruction",
+      "value": 0.6,
+      "why": "not a spectrum id"
+    }
+  ],
+  "_opCountingSince": "2026-09-22T00:31:08.307Z"
 }

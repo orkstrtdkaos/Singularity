@@ -23,49 +23,61 @@
     "char-devtest",
     "char-mrhs8286",
     "char-mrum8y4d",
-    "char-msgpisca"
+    "char-msgpisca",
+    "char-mt67f8py"
   ],
   "history": [],
   "rating": {
     "preset": "R+",
     "setBy": "erik",
     "isMinor": false,
-    "updatedAt": 1785981411810,
+    "updatedAt": 1789180885625,
     "adultVerified": true
   },
   "uiSidebar": {
     "open": [
       "quests",
-      "whoshere",
-      "items",
       "maprest",
-      "abilities",
       "company",
-      "codex",
-      "skills:braids",
+      "skills:discoveries",
+      "attributes",
       "skills:fam:HARM",
+      "items",
+      "abilities",
+      "moves:KNOW",
+      "moves:INFLUENCE",
+      "moves:RESTORE",
       "skills:fam:RESTORE",
-      "skills:fam:PROTECT",
+      "skills:fam:INFLUENCE",
+      "whoshere",
+      "codex",
       "skills:fam:KNOW",
       "skills:fam:SHAPE",
-      "skills:fam:INFLUENCE",
-      "skills:fam:MOVE",
+      "skills:fam:PROTECT",
       "skills:fam:SUSTAIN",
-      "skills:fam:OTHER",
-      "skills:discoveries",
-      "learn:hourkeeper"
+      "skills:fam:MOVE",
+      "skills:braids"
     ],
     "closed": [
-      "attributes",
-      "playstyle"
+      "learn:wright",
+      "learn:marcher",
+      "skills:fam:OTHER",
+      "playstyle",
+      "learn:numinous",
+      "learn:abyssal",
+      "learn:horizon",
+      "learn:hourkeeper",
+      "learn:baseline",
+      "learn:cross_pole_braid"
     ]
   },
   "pacing": "eventful",
   "sharedChronicle": true,
-  "plainness": "balanced",
+  "plainness": "lyrical",
   "bluntness": "blunt",
   "contentGenerator": true,
   "ttsVoice": null,
-  "readAloud": false,
-  "narrationTier": "fast"
+  "readAloud": true,
+  "narrationTier": "fast",
+  "presence": "peopled"
 }

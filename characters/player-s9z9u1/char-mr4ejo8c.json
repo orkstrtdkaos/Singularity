@@ -2485,7 +2485,7 @@
     },
     "the_awakened_precursor": {
       "id": "the_awakened_precursor",
-      "name": "the_awakened_precursor",
+      "name": "The Awakened Precursor",
       "questState": "awakened",
       "questNote": "a precursor presence now walking the world, bonded to Silas as the one who woke it — a new power loose in the Valley, its intentions its own"
     }
@@ -3040,10 +3040,10 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-09-22T00:25:03.479Z",
+    "lastSharedReadAt": "2026-09-22T01:23:33.030Z",
     "lastTickWorldDay": 84,
     "lastCanonWorldDay": 84,
-    "lastGenCount": 2016,
+    "lastGenCount": 2017,
     "turnsSinceOffer": 6,
     "wantProgress": {
       "elder-senna": {
@@ -9326,10 +9326,13 @@
           "arc_manifestation_storm"
         ],
         "dir": 1,
-        "open": true,
+        "open": false,
         "depth": 0,
         "worldDay": 84,
-        "strength": 4
+        "strength": 4,
+        "spawned": true,
+        "spawnedId": "the-valley-of-the-new-floor",
+        "spawnedWorldDay": 84
       }
     ],
     "wakeArcPushes": {
@@ -11027,8 +11030,8 @@
     "stalwart"
   ],
   "actionCount": 257,
-  "updatedAt": 1790037068310,
-  "rev": 289,
+  "updatedAt": 1790040219494,
+  "rev": 291,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -11319,7 +11322,56 @@
         }
       }
     },
-    "arc": {},
+    "arc": {
+      "the-valley-of-the-new-floor": {
+        "id": "the-valley-of-the-new-floor",
+        "name": "The Valley of the New Floor",
+        "scale": "regional",
+        "pressure": "The substrate remade itself and the valley floor is the first place that change became visible to anyone standing on ground. The rock here is not quite rock anymore — it resonates at a pitch that sets teeth aching, it holds heat that has no sun to explain it, and in three places the soil has turned to something that looks like soil but will not take a seed or a bootprint. The people who lived and fought and grazed animals in this valley before the turning are now living on land that is no longer entirely theirs in the old sense. They have not died. They have not been driven out. But the valley has renegotiated its terms with them, and nobody explained what the new terms are.",
+        "tendency": "The valley moves toward violent clarification. Every group present — the border-clans who were already fighting over grazing rights before the substrate shifted, the two Fringe-affiliated surveyors who walked in after and have not walked out, and a former adjudicator of the Disputed Zone who came to arbitrate a land dispute and found herself arbitrating something much larger — is being pressed by the changed land to make a choice about what authority means now that the ground itself does not behave predictably. The tendency is not toward resolution. It is toward whoever decides first, decides loudest, and is willing to hold the new terms by force or by revelation, whichever comes to hand.",
+        "crossesRegions": [
+          "The Poles Pull",
+          "The Second Manifestation"
+        ],
+        "hingeNpcs": [],
+        "ifIgnored": "Dov Threnck finishes building his spiritual claim into something that functions like a covenant. The border-clans either join it or fracture away from the valley entirely. Adjudicator Mault eventually writes a record that describes the altered ground in purely jurisdictional terms — anomalous terrain, disputed status, subject to future assessment — and files it with the nearest Disputed Zone authority, where it sits in a pile of similar reports from other regions meeting what they became. The valley stabilizes around Threnck dominance and a low ongoing violence against clans who refuse the covenant's terms. Inch finishes her measurements and leaves with data that reaches the faction pressing on the Second Manifestation six months later, by which point the valley has already organized itself around the wrong interpretation of what the substrate is.",
+        "ifEngaged": "The three hinges are pulling in directions that will not naturally align. Mault needs a name for what happened. Threnck needs the changed ground to mean his authority. Inch needs the changed ground to mean only itself, unowned, legible on its own terms. Any player who engages is immediately inside a three-way tension where helping one hinge damages another's ability to do what they need. The altered soil patches are the crux: they can be studied, claimed, consecrated, fenced, or opened — but whatever is done to them first becomes the frame everyone else fights inside. If the players reach the deepest of the three resonant patches before Threnck's people consecrate it, they will find that the substrate did not only change the mineral composition of the ground. It left something like a record of what it was before, pressed into the new material the way a leaf presses into stone — and reading that record requires a willingness to be altered in small, permanent ways by the contact. What the players do with that record, and who they tell, determines whether the valley becomes a site of genuine new understanding about what the world became or a shrine to the first person strong enough to say they understood it.",
+        "schemaVersion": 1,
+        "_gen": {
+          "entityId": "the-valley-of-the-new-floor",
+          "type": "arc",
+          "birthWeight": 12,
+          "engagementScore": 0,
+          "tier": "fresh",
+          "rating": "R+",
+          "provenance": {
+            "playerKey": null,
+            "characterId": "char-mr4ejo8c",
+            "locationId": "disputed_zone_fringe",
+            "day": null,
+            "worldDay": null,
+            "hint": "a new thread that FOLLOWS FROM what just happened to What Wakes Beneath — the aftermath of it, not a fresh unrelated sit",
+            "why": "A significant outcome left a wake: The world's engine turned over pushes toward: everything downstream of the substrate "
+          },
+          "attentionHistory": [],
+          "createdDay": null,
+          "repaired": true,
+          "stubbed": false,
+          "romanceEligible": true,
+          "contract": {
+            "verdict": "thin",
+            "worst": "DEGRADED",
+            "missing": [
+              "hingeNpcs"
+            ],
+            "vague": [
+              "hinges-present"
+            ],
+            "why": "arc: THIN — missing hingeNpcs; not concrete: hinges-present"
+          }
+        }
+      }
+    },
     "creature": {},
     "item": {}
   },

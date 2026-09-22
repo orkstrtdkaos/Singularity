@@ -2837,30 +2837,6 @@
       {
         "day": 9,
         "worldDay": 83,
-        "text": "Halvex Coil, the Rewriter is spoken of: patching a district into silence.",
-        "tier": "murmur",
-        "section": "world",
-        "locationId": "the_service_ways"
-      },
-      {
-        "day": 9,
-        "worldDay": 83,
-        "text": "Word from Radiant Plateau — Edge District — Overseer Grael of the Edge District: noticing a name that should not be there.",
-        "tier": "murmur",
-        "section": "world",
-        "locationId": "radiant_plateau_edge"
-      },
-      {
-        "day": 9,
-        "worldDay": 83,
-        "text": "The Hollow King of the Wild Half has not been seen at home in a long while — whatever is happening has all of them.",
-        "tier": "murmur",
-        "section": "world",
-        "locationId": "the_maw"
-      },
-      {
-        "day": 9,
-        "worldDay": 83,
         "text": "Morvane of the Harvest Hand has not been seen at home in a long while — whatever is happening has all of them.",
         "tier": "murmur",
         "section": "world",
@@ -3037,13 +3013,52 @@
         "figureId": "person-83693e0ee6487310",
         "locationId": "the_ceaseless",
         "placedBy": "figureId"
+      },
+      {
+        "day": 9,
+        "worldDay": 84,
+        "text": "The Still Lattice broke Saehara the Undefeated — a stranger, and now an enemy. Saehara the Undefeated is out of the reckoning while the wound holds.",
+        "tier": "event",
+        "section": "world",
+        "kind": "clash",
+        "winnerId": "the_still_lattice",
+        "loserId": "the_undefeated",
+        "outcome": "wounded",
+        "locationId": "the_grand_lattice",
+        "placedBy": "winnerId"
+      },
+      {
+        "day": 9,
+        "worldDay": 84,
+        "text": "The Still Lattice broke The One Who Ended the Long War — a stranger, and now an enemy. The One is out of the reckoning while the wound holds.",
+        "tier": "event",
+        "section": "world",
+        "kind": "clash",
+        "winnerId": "the_still_lattice",
+        "loserId": "the_war_ender",
+        "outcome": "wounded",
+        "locationId": "the_grand_lattice",
+        "placedBy": "winnerId"
+      },
+      {
+        "day": 9,
+        "worldDay": 84,
+        "text": "The Starless One turned Kesh Ardent, the Edge That Holds back. Kesh Ardent learned something, which is worse for everyone else.",
+        "tier": "event",
+        "section": "world",
+        "kind": "clash",
+        "winnerId": "the_starless",
+        "loserId": "the_edge_that_holds",
+        "outcome": "stopped",
+        "locationId": "the_slow_stair",
+        "placedBy": "winnerId"
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-09-22T01:23:33.030Z",
+    "lastSharedReadAt": "2026-09-22T03:08:57.447Z",
     "lastTickWorldDay": 84,
     "lastCanonWorldDay": 84,
-    "lastGenCount": 2017,
+    "lastGenCount": 2019,
     "turnsSinceOffer": 6,
     "wantProgress": {
       "elder-senna": {
@@ -3240,6 +3255,21 @@
           "type": "encounter",
           "encounterId": "beast_pale_reader",
           "name": "a pale reader"
+        },
+        "addedDay": 9,
+        "locationId": "disputed_zone_fringe"
+      },
+      {
+        "source": "threat-attack",
+        "kind": "threat-attack",
+        "subjectId": "beast_hollow_pace",
+        "aimedAtPlayer": true,
+        "urgency": 3,
+        "oneLineHook": "A a hollow-pace has come down onto the character here — not stumbled into, but ARRIVED, hunting. Defend, or drive it off.",
+        "becomes": {
+          "type": "encounter",
+          "encounterId": "beast_hollow_pace",
+          "name": "a hollow-pace"
         },
         "addedDay": 9,
         "locationId": "disputed_zone_fringe"
@@ -7331,16 +7361,16 @@
         "woundedBy": "the_deep_lantern"
       },
       "the_undefeated": {
-        "status": "stopped",
+        "status": "wounded",
         "diedWorldDay": 41,
         "killedBy": "thornmother_sealed",
         "returnedFromDeath": {
           "day": 42,
           "changed": "came back changed"
         },
-        "woundedUntilDay": 89,
-        "woundedBy": "the_starless",
-        "sinceWorldDay": 83,
+        "woundedUntilDay": 92,
+        "woundedBy": "the_still_lattice",
+        "sinceWorldDay": 84,
         "stoppedUntilDay": 86,
         "stoppedBy": "the_starless",
         "fateBy": {
@@ -7359,10 +7389,12 @@
         }
       },
       "the_war_ender": {
-        "status": "stopped",
+        "status": "wounded",
         "stoppedUntilDay": 86,
         "stoppedBy": "the_starless",
-        "sinceWorldDay": 83,
+        "sinceWorldDay": 84,
+        "woundedUntilDay": 92,
+        "woundedBy": "the_still_lattice",
         "fateBy": {
           "characterId": "char-mrum8y4d",
           "name": "Loki"
@@ -7482,6 +7514,16 @@
         "sinceWorldDay": 84,
         "stoppedUntilDay": 87,
         "stoppedBy": "the_deep_lantern"
+      },
+      "the_edge_that_holds": {
+        "status": "stopped",
+        "sinceWorldDay": 84,
+        "stoppedUntilDay": 87,
+        "stoppedBy": "the_starless",
+        "fateBy": {
+          "characterId": "char-mr5ns3hh",
+          "name": "Adelheid"
+        }
       }
     },
     "arcContests": {
@@ -9195,6 +9237,48 @@
         "locationId": "the_ceaseless",
         "placedBy": "figureId",
         "loggedAt": "2026-09-22T00:25:14.748Z"
+      },
+      {
+        "day": 9,
+        "worldDay": 84,
+        "text": "The Still Lattice broke Saehara the Undefeated — a stranger, and now an enemy. Saehara the Undefeated is out of the reckoning while the wound holds.",
+        "tier": "event",
+        "section": "world",
+        "kind": "clash",
+        "winnerId": "the_still_lattice",
+        "loserId": "the_undefeated",
+        "outcome": "wounded",
+        "locationId": "the_grand_lattice",
+        "placedBy": "winnerId",
+        "loggedAt": "2026-09-22T03:09:03.917Z"
+      },
+      {
+        "day": 9,
+        "worldDay": 84,
+        "text": "The Still Lattice broke The One Who Ended the Long War — a stranger, and now an enemy. The One is out of the reckoning while the wound holds.",
+        "tier": "event",
+        "section": "world",
+        "kind": "clash",
+        "winnerId": "the_still_lattice",
+        "loserId": "the_war_ender",
+        "outcome": "wounded",
+        "locationId": "the_grand_lattice",
+        "placedBy": "winnerId",
+        "loggedAt": "2026-09-22T03:09:03.917Z"
+      },
+      {
+        "day": 9,
+        "worldDay": 84,
+        "text": "The Starless One turned Kesh Ardent, the Edge That Holds back. Kesh Ardent learned something, which is worse for everyone else.",
+        "tier": "event",
+        "section": "world",
+        "kind": "clash",
+        "winnerId": "the_starless",
+        "loserId": "the_edge_that_holds",
+        "outcome": "stopped",
+        "locationId": "the_slow_stair",
+        "placedBy": "winnerId",
+        "loggedAt": "2026-09-22T03:09:03.917Z"
       }
     ],
     "figureDormant": {
@@ -11030,8 +11114,8 @@
     "stalwart"
   ],
   "actionCount": 257,
-  "updatedAt": 1790040219494,
-  "rev": 291,
+  "updatedAt": 1790046543933,
+  "rev": 295,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -12233,45 +12317,7 @@
       }
     ]
   },
-  "_pendingLedger": [
-    {
-      "schemaVersion": 1,
-      "at": "2026-09-22T00:31:08.293Z",
-      "worldDay": 84,
-      "who": "char-mr4ejo8c",
-      "playerKey": "player-s9z9u1",
-      "where": "disputed_zone_fringe",
-      "what": "A precursor presence dormant beneath the Echo River since before the Transition was woken and walked into the world on Day 9 night—roused by Cellaceron and Aevi in the secondary system's binding…",
-      "tags": [
-        "precursor",
-        "awakening",
-        "valley-consequence"
-      ],
-      "spectrumDeltas": {},
-      "visibility": "witnessed",
-      "impactsLocal": true,
-      "people": [
-        {
-          "id": "aevi_the_watcher",
-          "name": "Aevi",
-          "role": "Companion intelligence—authentication key—now co-waker of the precursor presence",
-          "why": "named"
-        },
-        {
-          "id": "sorel",
-          "name": "Sorel",
-          "role": "Radiant water-accountability archivist—now standing in the wreckage of instituti",
-          "why": "present"
-        },
-        {
-          "id": "tuning-warden-lower-terrace",
-          "name": "Maren",
-          "role": "Tuning-warden, Harmonic Heights—now understanding the system's true purpose",
-          "why": "present"
-        }
-      ]
-    }
-  ],
+  "_pendingLedger": [],
   "locationImages": {
     "gen-object-object": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/%5BObject%20Object%5D%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20%5BObject%20Object%5D.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=32752&nologo=true"
   },

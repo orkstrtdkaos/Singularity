@@ -25083,6 +25083,95 @@ console.log("\n── §347 · a worldState missing a field, and the character t
     st347 ? `stage ${st347.stage} since day ${st347.sinceDay}` : "the crisis never moved");
 }
 
+// ══════════ §348 · CCODE-474 — THE ENT AT THE CROSSING, AND A PLACE GUESSED AT TWICE ══════════
+// ⛔ ERIK: "Their is an Ent that stopped at the crossing before the Crossing became a big city. He's in Silas' story in the
+// save. you can put where he is (the Crossing's Ent Grove) near the Market and Coliseum."
+// ⚠️ I HAD TOLD HIM THE PLACE DID NOT EXIST. It did — as a `transit` stub minted the moment the fiction walked into it, whose
+// own `descriptionSeed` said so outright: "The fiction brought you here before the map knew its name." The map then answered
+// the question itself, twice, and got it wrong both times: the CONTENT copy landed at colatitude 74 / longitude 262 / depth −2
+// as a site of `ent_deepwood` in `manifest_domain` (the guess being "the Ents are in manifest_domain"), while SILAS'S SAVE put
+// it at colatitude 20.202 / longitude 252.095 in `valley`, beside the Pale March Waygate — the one road the stub happened to
+// carry. ⛔ A SINGLE WRONG EDGE MOVED A PLACE A QUARTER OF THE WAY AROUND THE WORLD, TWICE, IN OPPOSITE DIRECTIONS.
+// ⛑ And the answer was in the chronicle the whole time: "followed Siol north through the Hub's quieter lanes and arrived at the
+// edge of the Ent grove circle", "The Hub's buildings are visible through the trees", and Siol's tour running "plaza first, Ent
+// circle last" out of the Coliseum. Neither automatic pass read a word of it.
+console.log("\n── §348 · the Ent Grove, where the story put it ──");
+{
+  const WM348 = await import("../engine/worldmap.js");
+  const { loadContentHeadless: lch348 } = await import("./headless_content.mjs");
+  const C348 = await lch348();
+  const L348 = C348.locations || {};
+  const grove = L348["gen-the-ent-grove"], cross348 = L348["the_crossing"],
+        mark348 = L348["the_hundred_markets"], coli348 = L348["the_great_coliseum"];
+
+  // ⛔ "NEAR THE MARKET AND COLISEUM" AS A RELATION, NEVER AS PINNED COORDINATES. Aevi may re-place all four; what must hold
+  // is that the grove is nearer to each of those two than to the hub's own heart, which is what "near" meant in his sentence.
+  const dCross = WM348.walkingDays(grove, cross348), dMark = WM348.walkingDays(grove, mark348), dColi = WM348.walkingDays(grove, coli348);
+  check("§348: ⛔ THE ENT GROVE IS A `site` OF THE CROSSING, NEAR THE MARKETS AND THE COLISEUM — Erik placed it and the relation is what is asserted, not the numbers: nearer to each of those two than to the hub's heart, and inside the day that makes it a site at all. ⚠️ It was `manifest_domain` at 74° in content and `valley` at 20° in the save, and content wins that clash at load, so the game drew the Deepwood one",
+    grove?.tier === "site" && grove?.parentId === "the_crossing" && grove?.regionId === "the_center"
+    && Number(grove?.worldPos?.depth || 0) === 0
+    && dColi < dCross && dMark < dCross && dCross <= 1,
+    `${dCross?.toFixed(2)}d from the hub · ${dMark?.toFixed(2)}d markets · ${dColi?.toFixed(2)}d coliseum`);
+
+  // ⚠️ EVERY DETAIL IN THE RECORD CAME FROM THE SAVE, and the gate says so by requiring the record to carry what play
+  // established. A place authored out of a half-remembered sentence is the thing that contradicts the fiction later.
+  const prov348 = String(grove?.provenance || "") + String(grove?.appearance || "");
+  check("§348: ⛑ …AND ITS DETAIL IS THE CHRONICLE'S, NOT INVENTED — the ring of old trees, the low stone, the healed bark-carvings, the two figures in the branches, the ground dry whatever the season, and the standing fact that the Ent receives INTENTION rather than craft. ⚠️ A record written to fit a remembered sentence is what contradicts the fiction a month later; this one quotes it",
+    /low stone/i.test(prov348) && /carving/i.test(prov348) && /branches/i.test(prov348)
+    && /intention/i.test(prov348) && /rough ring/i.test(prov348)
+    && (grove?.aliases || []).some(a => /Ent's Circle/i.test(a)));
+
+  // ⛔ AND THE ROAD THAT CAUSED IT IS GONE FROM BOTH SIDES. §99 asserts every road goes both ways; a one-way edge would make
+  // every gate route quietly wrong, so releasing the grove from a gate 250° away had to happen on both records at once.
+  const gate348 = L348["gen-waygate"];
+  check("§348: ⛔ THE PALE MARCH WAYGATE NO LONGER CLAIMS A ROAD TO THE GROVE, and the grove's new neighbours name it back — the Crossing, the Hundred Markets and the Great Coliseum. That single edge is the whole mechanism of the misplacement: a stub with one road gets positioned beside its one neighbour, by whatever pass looks at it next",
+    !(gate348?.connections || []).includes("gen-the-ent-grove")
+    && ["the_crossing", "the_hundred_markets", "the_great_coliseum"].every(id => (grove?.connections || []).includes(id))
+    && ["the_crossing", "the_hundred_markets", "the_great_coliseum"].every(id => (L348[id]?.connections || []).includes("gen-the-ent-grove")));
+
+  // ⛔ RECONCILE 78, DRIVEN. A save's grown copy is SHADOWED by content (`CONTENT.locations[id] || generated.location[id]`),
+  // which is why this changes nothing today — and why it must still be cleared: it is the copy that resurfaces if the record
+  // moves packs or an older build reads the save.
+  {
+    const RC348 = await import("../engine/reconcile.js");
+    const stale = { name: "S", reconcileVersion: 77, npcRegistry: {},
+      generated: { location: { "gen-the-ent-grove": { id: "gen-the-ent-grove", name: "The Ent Grove", regionId: "valley",
+        worldPos: { colatitude: 20.202, longitude: 252.095, depth: 0 }, connections: ["gen-waygate"] } } },
+      placeMemory: { "gen-waygate": { subPlaces: { "the-ent-s-circle": { name: "The Ent's Circle", visited: false } } } } };
+    const out348 = RC348.reconcile(stale, "character", { content: null });
+    const g348 = stale.generated.location["gen-the-ent-grove"];
+    const told = /The Ent Grove stands/.test(JSON.stringify(out348));
+    check("§348: ⛑ …AND A SAVE'S OWN COPY IS CORRECTED AND THE PLAYER IS TOLD. ⚠️ The note is returned as `notes: [...]`, plural — my first draft returned `note:` and the step ran silently on Silas's real save, which is the writer-with-no-reader shape yet again, in the one field whose whole job is to be read",
+      g348.regionId === "the_center" && g348.parentId === "the_crossing" && g348.tier === "site"
+      && Number(g348.worldPos.colatitude) === 0.46 && stale.reconcileVersion >= 78 && told,
+      `${g348.regionId} colat ${g348.worldPos.colatitude} · player told: ${told}`);
+
+    // ⛔ AND IT LEAVES THE PLAYER'S MEMORY ALONE, which is the part the first draft got wrong. Driving it on Silas's REAL save
+    // showed the grove already has its own memory host with the notes in it, so "moving" the gate's stub DUPLICATED it — and
+    // that `placeMemory["gen-waygate"]` hosts FIFTEEN sub-places from TWO worlds: Hub Waygate Plaza, the Council of Mavens,
+    // the Hub Coliseum and Market Row beside Edvar Crane's mill floor and the Ashwarden March road. A generic minted id
+    // conflated the Crossing's own gate with the one by Millbrook. Re-filing one of fifteen makes that LESS consistent, and
+    // which nine move is Erik's ruling, not mine.
+    check("§348: ⛑ …WITHOUT TOUCHING THE PLAYER'S OWN MEMORY — a repair that edits what somebody remembers has to be the whole repair or none of it",
+      !!stale.placeMemory["gen-waygate"].subPlaces["the-ent-s-circle"]);
+  }
+
+  // ⚠️ THE CENSUS, REPORTED. Nine grown copies across the saves on disk disagree with their authored record — three by REGION,
+  // which cannot be rounding. Re-coordinating other players' grown places is a ruling, so this counts and names rather than fails.
+  {
+    const { readFileSync: rf348, readdirSync: rd348 } = await import("node:fs");
+    const bad348 = [];
+    for (const pk of rd348("characters")) for (const f of rd348(`characters/${pk}`)) {
+      let c348; try { c348 = JSON.parse(rf348(`characters/${pk}/${f}`, "utf8")); } catch { continue; }
+      for (const [id, g] of Object.entries(c348.generated?.location || {})) {
+        const a = L348[id]; if (!a) continue;
+        if (g.regionId && a.regionId && g.regionId !== a.regionId) bad348.push(`${c348.name}: ${id} in ${g.regionId}, authored ${a.regionId}`);
+      }
+    }
+    console.log(`      ⚠️ §348: ${bad348.length} grown cop${bad348.length === 1 ? "y" : "ies"} in the saves still name a different REGION than the authored record${bad348.length ? " — " + bad348.join(" · ") : ""}. Content shadows them at load so nothing is broken today; each is a place whose position was guessed rather than read. Reported: re-coordinating another player's grown ground is a ruling.`);
+  }
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

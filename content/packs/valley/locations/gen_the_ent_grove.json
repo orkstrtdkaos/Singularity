@@ -1,13 +1,23 @@
 {
  "id": "gen-the-ent-grove",
  "name": "The Ent Grove",
- "regionId": "manifest_domain",
- "descriptionSeed": "A place the road led to — The Ent Grove. The fiction brought you here before the map knew its name.",
+ "aliases": [
+  "The Ent's Circle",
+  "the Ent grove circle"
+ ],
+ "regionId": "the_center",
+ "descriptionSeed": "Older ground inside a young city — a ring of trees the Crossing grew around rather than through, and the Ent who stopped here before there was anything to stop at.",
  "tags": [
-  "transitional"
+  "center",
+  "sacred",
+  "ancient",
+  "quiet",
+  "neutral"
  ],
  "connections": [
-  "gen-waygate"
+  "the_crossing",
+  "the_hundred_markets",
+  "the_great_coliseum"
  ],
  "_gen": {
   "entityId": "gen-the-ent-grove",
@@ -19,7 +29,8 @@
   "attentionHistory": [],
   "createdDay": null,
   "provenance": {
-   "healed": "sng-216-backfill"
+   "healed": "sng-216-backfill",
+   "placed": "ccode-474"
   }
  },
  "_mintedAs": "transit",
@@ -29,7 +40,7 @@
  },
  "dangerLevel": 2,
  "schemaVersion": 1,
- "communityId": "domain.deepwood",
+ "communityId": "center.crossing",
  "loreRefs": [],
  "encounterFlavor": "",
  "questSeeds": [],
@@ -59,16 +70,15 @@
   0,
   0
  ],
- "axisVectorNote": "Derived from the authored spectrum against world_node_atlas.axisOrder (SNG-180). Disposition — what this place IS. Distinct from world position.",
+ "axisVectorNote": "Derived from the authored spectrum against world_node_atlas.axisOrder (SNG-180). Disposition — what this place IS. Distinct from world position, and UNCHANGED by CCODE-474: the Ent's disposition was never the thing that was wrong.",
  "tier": "site",
- "parentId": "ent_deepwood",
+ "parentId": "the_crossing",
  "worldPos": {
-  "colatitude": 74,
-  "longitude": 262,
-  "depth": -2
+  "colatitude": 0.46,
+  "longitude": 34,
+  "depth": 0
  },
- "worldPosNote": "inherited from ent_deepwood — SNG-396: a room is at its building's coordinates",
- "worldPosInherited": true,
- "provenance": "SNG-396 — authored in play, promoted from the saves. ⛔ The Ents are in manifest_domain. 'Seven or eight old trees forming a rough ring, mossy dry ground inside regardless of season.'",
- "appearance": "A stand of enormous moss-hung trees in a rough circle, trunks buttressed and deeply fissured, set far apart. Leaf-litter floor, green half-light from far overhead."
+ "worldPosNote": "⛑ CCODE-474 — PLACED ON ERIK'S WORD (2026-09-23): \"Their is an Ent that stopped at the crossing before the Crossing became a big city. He's in Silas' story in the save. you can put where he is (the Crossing's Ent Grove) near the Market and Coliseum.\" ⛔ AND IT HAD BEEN GUESSED TWICE, DIFFERENTLY, BY TWO PASSES THAT BOTH IGNORED THE FICTION. This record's own `descriptionSeed` used to read \"The fiction brought you here before the map knew its name\" — and the map then answered the question itself, wrongly, in both copies: the CONTENT copy sat at colatitude 74 / longitude 262 / depth −2 as a site of `ent_deepwood` in `manifest_domain` (the guess being \"the Ents are in manifest_domain\"), while SILAS'S SAVE carried it at colatitude 20.202 / longitude 252.095 in `valley` — beside the Pale March Waygate, the one place it happened to list a road to. CONTENT wins that clash at load (`CONTENT.locations[id] || character.generated.location[id]`), so what the game actually drew was the Deepwood one, 74° from where the fiction put it. ⚠️ THE CHRONICLE HAD THE ANSWER ALL ALONG AND NEITHER PASS READ IT: \"The party followed Siol north through the Hub's quieter lanes and arrived at the edge of the Ent grove circle\", \"The Hub's buildings are visible through the trees\", and Siol's tour of the Hub ran \"plaza first, Ent circle last\" — straight from the Coliseum. ⛑ At 0.46° it stands 0.77 days from the hub's heart, 0.10 from the Coliseum and 0.29 from the Markets: near both, as Erik placed it, and just past the built city where the path gives way to older ground. ⚠️ The chronicle's \"east of the plaza\" is the LOCAL frame (metres, `local_layouts.json`), not a world bearing — the two do not have to agree and are not in conflict.",
+ "provenance": "⛔ CCODE-474 — ERIK'S RULING, on a place that existed in play for weeks while two automatic guesses argued about where it was. ⚑ THE ENT STOPPED HERE BEFORE THE CROSSING WAS A CITY: the city grew around the ring rather than through it, which is why older ground stands a short walk from the Hundred Markets and the Great Coliseum. ⚠️ EVERY CONCRETE DETAIL IS FROM SILAS'S OWN SAVE, not invented for the record: the ring of seven or eight old trees; the low stone; the healed bark-carvings; two figures in the branches; the mossy dry ground inside regardless of season; Siol stopping at the edge and not entering. ⛑ WHAT PLAY ESTABLISHED, kept here so it cannot be contradicted later: the Ent receives INTENTION, not craft — a ward seated in the circle by Silas with Pell, Veth, Siol and Huginn landed as the gesture of protection and not as the mechanism; the Attended End cast at the circle's edge on world-day 19 returned no ending, because the Ent carries nothing that craft reads as a far shore; the Ashwarden March's warden never made contact, not from hostility but from believing the Ent was already in conversation with something else; Huginn's read on the circle was \"not yet\" — not never; and Silas named himself plainly at the edge — Ashwarden, wright, Silas Fell Weir — after which the grove's attention settled on him. He has been noted. ⬜ THE ENT ITSELF IS NOT A RECORD: nothing in `npcRegistry` or in content answers to it, so it has no name, no domains and no sheet. That is content and it is Aevi's — see po/REPLY_ccode_the_ent_at_the_crossing.md.",
+ "appearance": "Seven or eight enormous old trees in a rough ring, trunks buttressed and deeply fissured, set far apart on cleared ground edged with low stone. The floor inside is leaf-litter and moss, dry whatever the season, in green half-light from far overhead. One trunk is an ancient Ent rooted here on purpose, its lower bark carrying healed carvings; two figures rest in its branches. The Hub's buildings show between the trees on every side."
 }

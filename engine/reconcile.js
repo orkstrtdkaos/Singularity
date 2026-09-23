@@ -2560,6 +2560,41 @@ export const CHARACTER_STEPS = [
       return {};
     }
   },
+  {
+    version: 78, id: "the-ent-grove-is-at-the-crossing", playerFacing: true,
+    // ⛔ CCODE-474 — Erik: "Their is an Ent that stopped at the crossing before the Crossing became a big
+    // city. He's in Silas' story in the save. you can put where he is (the Crossing's Ent Grove) near the
+    // Market and Coliseum." The authored record is placed. This clears the copy of the old guess that a
+    // save carries, so the fiction, the content and the save agree.
+    // ⚠️ SHADOWED IS NOT HARMLESS. Content wins the clash at load — `CONTENT.locations[id] ||
+    // character.generated.location[id]` — so this row changes nothing today. It is the copy that resurfaces
+    // if the record moves packs or an older build reads the save, and it carries colatitude 20.202 /
+    // longitude 252.095 in `valley`: beside the Pale March Waygate, which was the one road the stub had.
+    // ⛑ THE FIRST DRAFT OF THIS STEP ALSO MOVED `placeMemory`, AND DRIVING IT ON SILAS'S REAL SAVE IS WHY
+    // IT NO LONGER DOES. Two things showed up that reading could not:
+    //   · the grove ALREADY has its own memory host, `placeMemory["gen-the-ent-grove"]`, with `visits: 1`
+    //     and the real notes — so "moving" the gate's `the-ent-s-circle` stub created a DUPLICATE rather
+    //     than filing anything, and the stub is `visited: false` with a note now carried by the authored
+    //     appearance in full.
+    //   · `placeMemory["gen-waygate"]` hosts FIFTEEN sub-places belonging to TWO different worlds — Hub
+    //     Waygate Plaza, the Council of Mavens, the Hub Coliseum and Market Row alongside Edvar Crane's
+    //     mill floor and the Ashwarden March road. A generic minted id conflated the Crossing's own gate
+    //     with the one beside Millbrook. Re-filing ONE of fifteen makes that data less consistent, not
+    //     more, and which nine move is a ruling. Reported in po/, untouched here.
+    apply: (c) => {
+      const gen = c?.generated?.location?.["gen-the-ent-grove"];
+      if (!gen) return {};
+      if (gen.regionId === "the_center" && Number(gen.worldPos?.colatitude) <= 1) return {};
+      gen.regionId = "the_center";
+      gen.parentId = "the_crossing";
+      gen.tier = "site";
+      gen.worldPos = { colatitude: 0.46, longitude: 34, depth: 0 };
+      gen.connections = ["the_crossing", "the_hundred_markets", "the_great_coliseum"];
+      gen._placedBy = "ccode-474";
+      console.log("[reconcile] ccode-474: the Ent Grove's own copy moved from the valley to the Crossing");
+      return { notes: ["The Ent Grove stands where your own story put it — inside the Crossing, a short walk from the Hundred Markets and the Great Coliseum. Your record of it had it out in the valley beside the Pale March Waygate, which was never where you found it."] };
+    }
+  },
   // Future steps register here — e.g. innate-talent GRANT (offers[], when talent content
   // lands with SNG-017), Reach-tradition eligibility surfacing, universal-role tagging.
 ];

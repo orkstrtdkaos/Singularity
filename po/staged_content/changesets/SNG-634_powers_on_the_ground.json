@@ -294,9 +294,9 @@
       "descriptionSeed": "The Undercount is the count under the count: every market keeps a ledger, and the guild keeps the one underneath it. It fences through Dusklow, where nobody repeats anything, and through the Low Market, where the price is on everything. It protects the Hundred Markets because it feeds on them. It will come for any new wealth that settles within reach of the Crossing, quietly, at night.",
       "appearance": "A crowded market lane at dusk, a spice stall with a back room behind a hanging rug, a ledger open on a crate, a hooded figure counting coins by a shuttered lamp",
       "clientOf": {
-        "power": null,
+        "power": "power_radiant_plateau",
         "bond": "client",
-        "_open": "The Patient Buyer (world_superstructure arc_pass_takeover) buys the Roost's debts through the Undercount's counting-house. Who the buyer is is Erik's ruling (SNG-636 §8)."
+        "secretGM": "The Patient Buyer. The Radiant Council buys the Roost's debts through the Undercount's counting-house so its name is on nothing (Erik, 2026-09-23)."
       },
       "approach": {
         "when": "neighbour",

@@ -109,3 +109,47 @@ civilization line and marked so. The ones that matter now:
    author them as records — **say go.**
 
 — Aevi, PO
+
+---
+
+# §9 — ✅ ERIK RULED, 2026-09-23
+
+| # | question | ruling | what changed |
+|---|---|---|---|
+| 1 | the Patient Buyer | **the Radiant Council** | the Undercount's `clientOf` is `power_radiant_plateau`; the Council's `secretsGM` carries it. It buys through Mother Hesk so its name is on nothing. |
+| 2 | the Mavens | *"The Council of Mavens is the primary organization that promotes the middle way through what they do. Given their credibility, I could see where someone with a seat would want to be recognized by them."* | ⚑ **Recognition is credibility, not command.** I had written it as a gate: an unrecognized holder's call could be refused. ⛔ That was me giving the Mavens teeth canon never gave them. Now: a seat is held either way; a holder the Mavens recognize is seen as legitimate by the peoples who lean to the middle and by the Accord's signatories, and their own ground regards them one step better. **That is why anyone with a seat wants it — and why a Council that never rules loses the credibility that makes it matter.** |
+| 3 | the Free Compact | **exists, weakly; players strengthen it** | ⛑ **Its weak form was already in your play.** Dresh's first condition for a sanctioned Zone survey is *two written settlement requests*: the unaligned settlements already ask things of each other in writing, and Millbrook counts those requests as mandate. That custom is the Compact today — no oath, no host, no seat. Members now: Millbrook's panel, the Kestrel, Reed-Mother Ossa. Would join: Brannoch, Ines Harrowgate. |
+| 4 | the Kept Court | *"I'd ask Aevi this from the authored content."* | **Answered from the records: it is the Unbought Court, and there are two Churn courts, not three.** On 2026-09-08 you said *"you used KEPT again — that's a known naming default for you,"* and the court became the Unbought Court: *"they will not trade, what they give they give freely."* The `communityId`s moved; three `role` lines and one gear line did not. ⛔ **I listed three courts in §4 off that stale text.** Fixed in content and in the hierarchy: **the Hollow Court trades; the Unbought Court will not** — Aelith, Stonefast Urd, the Slow Green, Ysenkar, Tolvess. |
+| 5 | the councils from play | **yes** | **SNG-637** — `po/staged_content/changesets/SNG-637_councils_from_play.json` |
+
+## §10 — SNG-637: THE COUNCILS YOUR PLAY MADE
+
+⚠️ **Read from the saves, not remembered.** An extractor pulled each person's registry entry and every sentence naming a
+council from the three saves that hold them; every body, person and standard below is from those lines. The only numbers
+I supplied are the strengths every power record needs.
+
+**The Radiant Council** (`power_radiant_plateau`, a `sovereignty`, form `council`, under the High Luminary). Its bodies,
+as play revealed them: the **water-accountability office** (Sorel's), the **Edge District accountability board** (Ilma's),
+and the **deep stacks** — a locked archive where archivists see only approved fragments. GM-eyes-only: it is the Patient
+Buyer; it built a secondary purification system in secret rather than stop what is waking, and the system will not serve
+everyone; it keeps Verath-Sem's full record locked.
+
+**The Harmonic Council** (`power_harmonic_heights`, under Elder Resonance). ⚑ **Your play gave it two tiers and I kept
+both:** an **upper chamber** that moves by sealed *Priority Harmonic Council* packets and explains itself later, and the
+**Warden Council of the Lower Terrace** that the public actually meets — the bulletin board, notices, formal inquiries,
+and the **sanction chain** (*gate-senior clearance* is what sanctions a Heights observer into the Zone). GM-eyes-only: the
+upper chamber heard about the river before its own wardens did; the sealed Resonance Halls need a reagent from the valley
+floor and the couriers come back empty.
+
+**Millbrook's Elder Panel** (`power_millbrook_council`, led by **Councilor Dresh**). It meets in the common house;
+Holloway and Renn sit on it by name, and Elder Senna. **Its standard is Dresh's: mandate, not size** — two written
+settlement requests, a Heights-sanctioned observer with gate-senior clearance, and a named return date and return point.
+
+**Five people, authored from their registry entries:** Councilor Dresh, Elder Senna, Maren (the tuning-warden), Farren,
+Sorel. ⚠️ **Two notes on them.** *Maren* shares a first name with `maren_ossitide`, a legendary Ashwarden — distinct ids,
+but name matching is the SNG-615 two-Pells shape, so it is flagged on her record. *Farren* is recorded as a man in the
+registry and was called "she" once in a scene; the registry wins.
+
+⚠️ **What I deliberately did not write down:** anything one playthrough decided. Sorel's break with the Council, the
+panel's acceptance of the river evidence, a key delivered late — those happened in one save and may not in another. The
+records hold the institutions and the people as they stood before your choices; your saves keep what you did to them.

@@ -1,6 +1,6 @@
 {
   "id": "SNG-636_the_shape_above_the_ground",
-  "status": "staged — not loaded; a proposal for Erik",
+  "status": "staged — Erik ruled 2026-09-23 on §8.1-§8.5 (recorded in rulings)",
   "bonds": {
     "fealty": "a lord to a liege: pays a share of its taxes up, sends levies when called, is protected in return",
     "tribute": "an outlaw power to a stronger one: pays a share of its take to be left alone and backed",
@@ -56,7 +56,7 @@
       "source": "canon: the_accords.json housedAt; broker_sain"
     },
     "council_of_mavens": {
-      "what": "the world's one standing body that sits between peoples. It evaluates; it does not rule, tax or levy.",
+      "what": "the primary body that promotes the middle way through what it does. It evaluates; it does not rule, tax or levy. Its power is credibility.",
       "seat": "the_crossing",
       "members": {
         "known": [
@@ -66,7 +66,7 @@
       },
       "source": "canon: warden_coll ('evaluates rather than decides'); nexuses.json (the ninth, unbuilt nexus at the Council of Mavens, made of friction; its corruption, evaluation-as-avoidance, is Erik's to rule)",
       "proposedFunctions": {
-        "recognition": "A seat taken is held; a seat recognized is owed. A recognized holder's call on the seat's vassals is answered; an unrecognized holder's call can be refused. Accord signatories' standing follows recognition.",
+        "recognition": "Credibility, not command. A seat taken by force is held either way; a holder the Mavens recognize is seen as legitimate by the peoples who lean to the middle and by the Accord's signatories (their standing toward the holder rises a step), and the seat's own ground regards the holder one step better. That is why anyone with a seat wants it.",
         "arbitration": "Two powers in dispute can bring it to the Mavens instead of the field. A ruling moves both powers' standing with every signatory.",
         "record": "The Mavens record Accord suspensions and breaches, which makes them dated world events."
       },
@@ -108,16 +108,9 @@
     {
       "id": "bloc_the_churn_courts",
       "name": "The Churn Courts",
-      "what": "three courts of the Fae in the Churn, rivals to each other and courteous to everyone",
+      "what": "two courts in the Churn, opposed by design: the Hollow Court trades, and the Unbought Court will not",
       "source": "canon: the court npcs (communityId churn.hollow_court / churn.unbought_court)",
       "courts": {
-        "the_kept_court": {
-          "monarch": "aelith_first_shape",
-          "members": [
-            "stonefast_urd",
-            "the_slow_green"
-          ]
-        },
         "the_hollow_court": {
           "sovereign": "the_hollow_king",
           "members": [
@@ -125,17 +118,21 @@
             "the_keeper_of_small_debts",
             "the_undecided"
           ],
-          "note": "the Hollow King is a Satiated Sovereign; per the lore a GM confirms his AGENTS, never him"
+          "law": "it trades: the price is named aloud and you get precisely what you asked for",
+          "note": "a GM confirms the Hollow King's agents, never him"
         },
         "the_unbought_court": {
+          "monarch": "aelith_first_shape",
           "members": [
+            "stonefast_urd",
+            "the_slow_green",
             "ysenkar",
             "tolvess"
           ],
-          "note": "dragons"
+          "law": "it will not trade: what it gives it gives freely, and what it withholds cannot be bought",
+          "note": "a coalition of peoples who live in the Churn and refuse to dissolve into it: elven, dwarven, ent, dragon"
         }
-      },
-      "dataNote": "The Kept Court's members carry communityId churn.unbought_court; either the Kept Court sits inside the Unbought Court, or the ids are wrong. Erik's ruling."
+      }
     },
     {
       "id": "bloc_the_marches",
@@ -163,15 +160,17 @@
     {
       "id": "bloc_the_free_compact",
       "name": "The Free Compact",
-      "exists": false,
-      "what": "the places that belong to no city — the Roost, the Stilts, the Echo Bridge, Millbrook, Keelmouth — which together could refuse the Long Reach. Nothing binds them yet. A player can build it.",
-      "source": "proposed",
+      "exists": "weak",
+      "what": "The unaligned settlements already ask things of each other in writing, and Millbrook's panel counts written settlement requests as mandate (Dresh's first condition). That custom is the whole Compact today: no oath, no host, no seat. A player who gets the free places to promise each other more makes it real.",
+      "source": "Erik 2026-09-23: exists in a weak form; players can strengthen it",
       "wouldJoin": [
-        "the_kestrel",
-        "reed_mother_ossa",
         "castellan_brannoch",
-        "millbrook council",
         "ines_harrowgate"
+      ],
+      "members": [
+        "power_millbrook_council",
+        "the_kestrel",
+        "reed_mother_ossa"
       ]
     }
   ],
@@ -194,7 +193,7 @@
       "form": "none",
       "source": "canon: the unaligned middle (arc_city_reach)",
       "local": [
-        "Millbrook's common house under Councilor Dresh (play)",
+        "Millbrook's Elder Panel under Councilor Dresh (SNG-637, from play)",
         "the Kestrel's ledger at the Roost",
         "Reed-Mother Ossa at the Stilts",
         "the Echo Bridge castellany"
@@ -215,7 +214,7 @@
       "region": "unspooling",
       "power": "bloc_the_churn_courts",
       "form": "court",
-      "source": "canon: the courts",
+      "source": "canon: the Hollow Court and the Unbought Court",
       "local": [
         "the Gralloch Crown",
         "the Edge Riders",
@@ -428,5 +427,12 @@
       "bond": "independent",
       "note": "the Marchers disown him"
     }
-  ]
+  ],
+  "rulings_20260923": {
+    "patientBuyer": "the Radiant Council",
+    "councilOfMavens": "Erik: 'the primary organization that promotes the middle way through what they do. Given their credibility, I could see where someone with a seat would want to be recognized by them.' Recognition is sought for its credibility, not required to rule.",
+    "freeCompact": "exists in a weak form; players can strengthen it",
+    "churnCourts": "Aevi, from the records: two courts, not three. The Kept Court was renamed the Unbought Court on 2026-09-08 (Erik: 'you used KEPT again'); its members' communityIds moved and three role lines did not. Fixed in content.",
+    "councilsFromPlay": "authored as SNG-637"
+  }
 }

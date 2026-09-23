@@ -1,0 +1,586 @@
+{
+  "schemaVersion": 1,
+  "id": "SNG-637_councils_from_play",
+  "kind": "changeset",
+  "_title": "The councils Erik's play made, written down: the Radiant Council, the Harmonic Council, and Millbrook's elder panel",
+  "_why": "Erik 2026-09-23: 'Can I write up the councils from your saves as content? — yes please.' Every body, person and standard here is read from the saves named in _fromPlay; nothing is invented except the strength numbers every power record needs, which follow the SNG-634 rules for their scale.",
+  "ids": [
+    "power_radiant_plateau",
+    "power_harmonic_heights",
+    "power_millbrook_council",
+    "councilor_dresh",
+    "elder_senna",
+    "warden_maren",
+    "farren",
+    "sorel"
+  ],
+  "removed": {},
+  "renamed": {},
+  "added": [
+    {
+      "_kind": "power",
+      "_file": "content/packs/valley/powers.json",
+      "kind": "sovereignty",
+      "encounters": [],
+      "dangerLift": 0,
+      "rivals": [
+        "power_harmonic_heights"
+      ],
+      "opposedBy": [],
+      "id": "power_radiant_plateau",
+      "name": "The Radiant Council",
+      "form": "council",
+      "temper": "hard",
+      "seat": "radiant_plateau_edge",
+      "reach": [
+        "radiant_plateau_edge",
+        "the-low-lamp-inn",
+        "kestrels_roost",
+        "echo_river_crossing",
+        "millbrook"
+      ],
+      "leader": "the_high_luminary",
+      "answersTo": null,
+      "bloc": "bloc_the_long_reach",
+      "bodies": [
+        {
+          "name": "the Radiant Council",
+          "does": "governs the Plateau under the High Luminary"
+        },
+        {
+          "name": "the water-accountability office",
+          "does": "surveys and records the valley's water",
+          "people": [
+            "sorel"
+          ]
+        },
+        {
+          "name": "the Edge District accountability board",
+          "does": "posts who is accountable for what",
+          "people": [
+            "keeper_ilma"
+          ]
+        },
+        {
+          "name": "the deep stacks",
+          "does": "the Council's locked archive; archivists see only approved fragments"
+        }
+      ],
+      "strength": {
+        "scale": "legion",
+        "contingents": [
+          {
+            "n": 160,
+            "quality": 2,
+            "what": "Plateau wardens and light-guards"
+          }
+        ]
+      },
+      "holds": [
+        {
+          "at": "radiant_plateau_edge",
+          "kind": "post",
+          "name": "the Council's offices on the Edge District",
+          "garrison": 40
+        }
+      ],
+      "verbs": [
+        "tax",
+        "patrol",
+        "expand",
+        "inform"
+      ],
+      "noticesYouWhen": [
+        "crossed",
+        "rival_ally"
+      ],
+      "wantsFromYou": "Your discretion about anything you have seen at the river, and your help keeping the valley calm.",
+      "offersYou": "Protection, passage anywhere on the Plateau, and a place on the right side of what is coming.",
+      "leverage": "Its own archivists know the record they are shown has been cut. One of them, asked the right question at the right time, will say so.",
+      "whenBroken": "The Plateau's hold on the valley slips, and the Harmonic Heights moves into every place the Council was buying.",
+      "secretsGM": [
+        "It is the Patient Buyer: it buys the Roost's debts through the Undercount's counting-house, so its name is on nothing (Erik, 2026-09-23).",
+        "It has known longer than it admits what is waking under the Echo River, and built a secondary purification system in secret instead of stopping it. The system is incomplete and will not serve every household.",
+        "It keeps the full record of Verath-Sem, an Archive engineer of the Transition's close, in the locked stacks."
+      ],
+      "plainly": "The governing council of the Radiant Plateau. It prizes clarity in public and keeps its own counsel in private.",
+      "descriptionSeed": "The Radiant Council governs the Plateau under the High Luminary and speaks of clarity in everything. In private it plans a generation ahead and cuts its own archive to fit the plan. It is extending its reach over the unaligned valley one debt, one survey and one quiet favour at a time.",
+      "appearance": "A council hall of photonic-crystal towers braiding sunlight into beams, light-guide streets below, an accountability board of lit panels in a public square",
+      "_fromPlay": "characters/player-s9z9u1/char-mr4ejo8c.json and characters/player-54seyk/char-mr4ejo8c.json (Cellaceron)"
+    },
+    {
+      "_kind": "power",
+      "_file": "content/packs/valley/powers.json",
+      "kind": "sovereignty",
+      "encounters": [],
+      "dangerLift": 0,
+      "rivals": [
+        "power_radiant_plateau"
+      ],
+      "opposedBy": [],
+      "id": "power_harmonic_heights",
+      "name": "The Harmonic Council",
+      "form": "council",
+      "temper": "fair",
+      "seat": "harmonic_heights_terrace",
+      "reach": [
+        "harmonic_heights_terrace",
+        "greywater_stilts",
+        "echo_river_crossing"
+      ],
+      "leader": "elder_resonance",
+      "answersTo": null,
+      "bloc": "bloc_the_long_reach",
+      "bodies": [
+        {
+          "name": "the upper chamber",
+          "does": "governs the Heights; moves by Priority Council packet and tells the terraces afterward"
+        },
+        {
+          "name": "the Warden Council of the Lower Terrace",
+          "does": "keeps the bulletin board, files notices, opens formal inquiries, and holds the sanction chain",
+          "people": [
+            "warden_maren"
+          ]
+        },
+        {
+          "name": "the sanction chain",
+          "does": "gate-senior clearance is what sanctions a Heights observer into the Disputed Zone"
+        }
+      ],
+      "strength": {
+        "scale": "legion",
+        "contingents": [
+          {
+            "n": 140,
+            "quality": 2,
+            "what": "terrace wardens"
+          }
+        ]
+      },
+      "holds": [
+        {
+          "at": "harmonic_heights_terrace",
+          "kind": "post",
+          "name": "the Warden Council's hall on the Lower Terrace",
+          "garrison": 30
+        }
+      ],
+      "verbs": [
+        "tax",
+        "patrol",
+        "protect",
+        "expand"
+      ],
+      "noticesYouWhen": [
+        "crossed",
+        "rival_ally"
+      ],
+      "wantsFromYou": "Word of anything you learn in the Disputed Zone, filed with the Warden Council, before the Plateau hears it.",
+      "offersYou": "Sanction: a Heights observer with gate-senior clearance, which opens doors the Plateau's coin cannot.",
+      "leverage": "The upper chamber keeps the Warden Council in the dark, and the wardens have noticed.",
+      "whenBroken": "The terraces fall silent, and the Radiant Council inherits a valley with nobody left to balance it.",
+      "secretsGM": [
+        "The upper chamber learned of the river's contamination before the Warden Council did, and has been sending internal packets about it overnight.",
+        "The sealed Resonance Halls need a reagent from the valley floor, and the couriers sent for it come back empty and will not say why."
+      ],
+      "plainly": "The Harmonic Heights governs itself through a council: an upper chamber that decides and a Warden Council on the Lower Terrace that the public actually meets.",
+      "descriptionSeed": "The Heights is governed from an upper chamber that moves by sealed Priority packet and explains itself later. Below it the Warden Council of the Lower Terrace posts notices, opens inquiries and holds the sanction chain, and knows less than it should about what the chamber above it has decided.",
+      "appearance": "Terraced buildings of phononic crystal humming in the wind, tree-sized chimes, and on the lowest terrace a warden hall with a crowded public bulletin board",
+      "_fromPlay": "characters/player-s9z9u1/char-mr4ejo8c.json and characters/player-54seyk/char-mr4ejo8c.json (Cellaceron)"
+    },
+    {
+      "_kind": "power",
+      "_file": "content/packs/valley/powers.json",
+      "kind": "sovereignty",
+      "encounters": [],
+      "dangerLift": 0,
+      "rivals": [],
+      "opposedBy": [],
+      "id": "power_millbrook_council",
+      "name": "Millbrook's Elder Panel",
+      "form": "council",
+      "temper": "fair",
+      "seat": "millbrook",
+      "reach": [
+        "millbrook"
+      ],
+      "leader": "councilor_dresh",
+      "answersTo": null,
+      "bloc": "bloc_the_free_compact",
+      "bodies": [
+        {
+          "name": "the elder panel",
+          "does": "meets in the common house and decides on the record",
+          "people": [
+            "councilor_dresh",
+            "elder_senna"
+          ],
+          "alsoSeated": [
+            "Holloway",
+            "Renn"
+          ]
+        }
+      ],
+      "sanctionStandard": "Mandate, not size. Millbrook sanctions a survey into the Disputed Zone only with two written settlement requests, a Heights-sanctioned observer with gate-senior clearance, and a named return date and return point.",
+      "strength": {
+        "scale": "unit",
+        "contingents": [
+          {
+            "n": 20,
+            "quality": 1,
+            "what": "Millbrook neighbours with what they own"
+          }
+        ]
+      },
+      "holds": [
+        {
+          "at": "millbrook",
+          "kind": "post",
+          "name": "the common house",
+          "garrison": 4
+        }
+      ],
+      "verbs": [
+        "protect"
+      ],
+      "noticesYouWhen": [
+        "crossed"
+      ],
+      "wantsFromYou": "Evidence laid on the common house table, and a request made in writing.",
+      "offersYou": "Sanction the whole valley respects, because Millbrook gives it rarely and on the record.",
+      "leverage": "Dresh moves on mandate, not size: bring the right written requests and the panel has to answer.",
+      "whenBroken": "Millbrook stops being the place the valley brings things to be decided, and the cities decide instead.",
+      "secretsGM": [],
+      "plainly": "Millbrook governs itself through an elder panel in its common house, led by Councilor Dresh. It decides slowly, in public, and on the record.",
+      "descriptionSeed": "The panel meets in Millbrook's common house around a long table where evidence is laid out and read aloud. Councilor Dresh leads by preference rather than command and asks for plain speech. Once the panel formally accepts a thing it cannot pretend otherwise, which is why it accepts things slowly.",
+      "appearance": "A long timber common house with a packed-earth floor, a long table covered in laid-out evidence, elders seated along one side, apple trees in the yard",
+      "_fromPlay": "characters/player-s9z9u1/char-mr6eq1a5.json (Usnea Beard)"
+    },
+    {
+      "_kind": "npc",
+      "schemaVersion": 1,
+      "romanceEligible": false,
+      "people": "human",
+      "closed": [],
+      "id": "councilor_dresh",
+      "name": "Councilor Dresh",
+      "tier": "leader",
+      "level": 12,
+      "role": "Councilor of Millbrook and head of its elder panel — leads the common house by preference rather than command, and asks what mandate a thing has before she asks how big it is",
+      "gender": "woman",
+      "pronouns": "she/her",
+      "sex": "female",
+      "homeLocation": "millbrook",
+      "communityId": "valley.millbrook",
+      "spectrum": {
+        "violence_peace": 0.5,
+        "chaos_order": 0.6,
+        "death_life": 0.3,
+        "mechanical_spiritual": 0,
+        "concrete_abstract": -0.5
+      },
+      "assistTags": [
+        "lead",
+        "talk",
+        "read-people",
+        "hold",
+        "investigate"
+      ],
+      "appearance": "A broad-shouldered woman seated at the centre of the common house table, composed since dawn and there before anyone else.",
+      "personality": {
+        "warmth": 0.5,
+        "trust": 0.4,
+        "candor": 0.9,
+        "patience": 0.8
+      },
+      "voiceHints": "Plain speech, and she asks the room for the same. Separates a smaller ask from a sanctioned one out loud, and only the second moves her.",
+      "wants": "For Millbrook to act on what it can prove, under a mandate it can defend to every settlement it answers to.",
+      "fears": "A panel that goes on pretending a thing is not happening because saying so would oblige it to act.",
+      "knowledge": [
+        "What the valley's settlements have asked of Millbrook in writing, and what they have not",
+        "The terms on which Millbrook's panel will sanction a survey into the Disputed Zone: two written settlement requests, a Heights-sanctioned observer with gate-senior clearance, and a named return date and return point"
+      ],
+      "reactsToReputation": {
+        "any": "hears you out at the table and asks what you want the panel to do",
+        "reliable": "lets you speak before the other elders",
+        "reckless": "asks who sanctioned it before anything else"
+      },
+      "questSeeds": [
+        "Millbrook's elder panel sanctions nothing into the Disputed Zone without Dresh's three conditions",
+        "The panel answers to the settlements that write to it, and the cities have started writing"
+      ],
+      "gear": [
+        "a councilor's staff of plain ash",
+        "the common house record book"
+      ],
+      "purse": {
+        "crystal": 90
+      },
+      "_fromPlay": "characters/player-s9z9u1/char-mr6eq1a5.json (Usnea Beard)",
+      "_file": "content/packs/valley/npcs/councilor_dresh.json"
+    },
+    {
+      "_kind": "npc",
+      "schemaVersion": 1,
+      "romanceEligible": false,
+      "people": "human",
+      "closed": [],
+      "id": "elder_senna",
+      "name": "Elder Senna",
+      "tier": "leader",
+      "level": 10,
+      "role": "Village elder of Millbrook and a voice on its common house panel — listens on her feet, cup set aside, watching your face",
+      "gender": "woman",
+      "pronouns": "she/her",
+      "sex": "female",
+      "homeLocation": "millbrook",
+      "communityId": "valley.millbrook",
+      "spectrum": {
+        "violence_peace": 0.6,
+        "chaos_order": 0.4,
+        "death_life": 0.4,
+        "mechanical_spiritual": 0.1,
+        "concrete_abstract": -0.3
+      },
+      "assistTags": [
+        "read-people",
+        "talk",
+        "tend",
+        "watch"
+      ],
+      "appearance": "An older woman who stands to listen rather than sits, cup set down and forgotten, eyes on the speaker's face.",
+      "personality": {
+        "warmth": 0.7,
+        "trust": 0.6,
+        "candor": 0.7,
+        "patience": 0.9
+      },
+      "voiceHints": "Says little until she has heard all of it, then says one thing.",
+      "wants": "For Millbrook's people to be heard by the panel before the panel decides for them.",
+      "fears": "The village deciding in a hurry what it cannot undo.",
+      "knowledge": [
+        "Everyone in Millbrook, and which of them the panel has not yet heard"
+      ],
+      "reactsToReputation": {
+        "any": "listens standing, and remembers exactly what you said"
+      },
+      "questSeeds": [
+        "Senna holds a key someone left in her keeping"
+      ],
+      "gear": [
+        "a walking stick",
+        "a ring of household keys"
+      ],
+      "purse": {
+        "crystal": 40
+      },
+      "_fromPlay": "characters/player-s9z9u1/char-mr4ejo8c.json and characters/player-54seyk/char-mr4ejo8c.json (Cellaceron)",
+      "_file": "content/packs/valley/npcs/elder_senna.json"
+    },
+    {
+      "_kind": "npc",
+      "schemaVersion": 1,
+      "romanceEligible": false,
+      "people": "human",
+      "closed": [],
+      "id": "warden_maren",
+      "name": "Maren",
+      "tier": "notable",
+      "level": 16,
+      "role": "Tuning-warden of the Harmonic Heights Lower Terrace — keeps the Warden Council's bulletin board, and decides what reaches the Council and when",
+      "gender": "woman",
+      "pronouns": "she/her",
+      "sex": "female",
+      "homeLocation": "harmonic_heights_terrace",
+      "communityId": "echo_vale.harmonic_heights",
+      "spectrum": {
+        "violence_peace": 0.3,
+        "chaos_order": 0.6,
+        "death_life": 0.2,
+        "mechanical_spiritual": -0.1,
+        "concrete_abstract": -0.4
+      },
+      "assistTags": [
+        "watch",
+        "investigate",
+        "read-people",
+        "guard",
+        "sense-danger"
+      ],
+      "appearance": "A woman of about fifty with the Warden sash and deep acoustic calluses on both index fingers, standing watch by a bulletin board long enough for her tea to go cold.",
+      "personality": {
+        "warmth": 0.4,
+        "trust": 0.4,
+        "candor": 0.8,
+        "patience": 0.8
+      },
+      "voiceHints": "Level and cataloguing, never alarmed. Pauses for calculation, not reluctance. Asks what goes to the Council before she decides how to log it.",
+      "wants": "To know what the Warden Council should hear, and when, before she writes it down.",
+      "fears": "The upper chamber moving on something before the Warden Council knows why.",
+      "knowledge": [
+        "Every notice on the Lower Terrace bulletin board and who filed it",
+        "How to read relay traffic: three copies on one night with no stagger and a heavier seal is Council-internal",
+        "That Farren on the Second Terrace still consults for the Warden Council when nobody else can solve something"
+      ],
+      "reactsToReputation": {
+        "any": "logs what you tell her, and asks what else she should know",
+        "reliable": "backs you, on the condition that the Council can reach you"
+      },
+      "questSeeds": [
+        "The Warden Council logged a missing apprentice as unsanctioned solo practice and gave it low priority",
+        "Priority Council packets are moving overnight and nobody has told the Lower Terrace why"
+      ],
+      "gear": [
+        "the Warden sash",
+        "a tuning fork of dark crystal",
+        "the bulletin board's log"
+      ],
+      "purse": {
+        "crystal": 110
+      },
+      "_nameCollision": "Shares a first name with maren_ossitide (legendary, ashwarden). The id is distinct; name matching may not be — see SNG-615.",
+      "_fromPlay": "characters/player-s9z9u1/char-mr4ejo8c.json and characters/player-54seyk/char-mr4ejo8c.json (Cellaceron)",
+      "_file": "content/packs/valley/npcs/warden_maren.json"
+    },
+    {
+      "_kind": "npc",
+      "schemaVersion": 1,
+      "romanceEligible": false,
+      "people": "human",
+      "closed": [],
+      "id": "farren",
+      "name": "Farren",
+      "tier": "notable",
+      "level": 20,
+      "role": "Retired acoustic geometry specialist of the Harmonic Heights Second Terrace — still consults for the Warden Council when nobody else can solve something",
+      "gender": "man",
+      "pronouns": "he/him",
+      "sex": "male",
+      "homeLocation": "harmonic_heights_terrace",
+      "communityId": "echo_vale.harmonic_heights",
+      "spectrum": {
+        "violence_peace": 0.2,
+        "chaos_order": 0.7,
+        "death_life": 0.1,
+        "mechanical_spiritual": -0.3,
+        "concrete_abstract": 0.3
+      },
+      "assistTags": [
+        "analyze",
+        "study",
+        "make",
+        "investigate"
+      ],
+      "appearance": "A lean man past sixty in a heavy work-tunic, resonance calluses on both forearms, hair damp from the basin, dressed for work and not for company.",
+      "personality": {
+        "warmth": 0.2,
+        "trust": 0.3,
+        "candor": 1,
+        "patience": 0.4
+      },
+      "voiceHints": "Difficult and thorough. Wants to know why before he will touch a thing, and pushes until he gets a real answer.",
+      "wants": "A problem nobody else on the Heights can solve.",
+      "fears": "Being consulted to confirm an answer someone has already chosen.",
+      "knowledge": [
+        "The acoustic geometry of the Heights' terraces and what their structures are tuned to"
+      ],
+      "reactsToReputation": {
+        "any": "asks why you want to know before he tells you anything"
+      },
+      "questSeeds": [
+        "Farren can read a terminal direction from a resonance instrument, if someone gives him a reason"
+      ],
+      "gear": [
+        "geometry instruments in a worn case",
+        "a work-tunic scored by resonance burns"
+      ],
+      "purse": {
+        "crystal": 150
+      },
+      "_playNote": "The registry records him as a man; one scene line said 'she'. The registry wins.",
+      "_fromPlay": "characters/player-s9z9u1/char-mr4ejo8c.json and characters/player-54seyk/char-mr4ejo8c.json (Cellaceron)",
+      "_file": "content/packs/valley/npcs/farren.json"
+    },
+    {
+      "_kind": "npc",
+      "schemaVersion": 1,
+      "romanceEligible": false,
+      "people": "human",
+      "closed": [],
+      "id": "sorel",
+      "name": "Sorel",
+      "tier": "notable",
+      "level": 15,
+      "role": "Archivist of the Radiant Council's water-accountability office — surveys the valley's water and knows exactly which fragments of the record the Council lets archivists see",
+      "gender": "woman",
+      "pronouns": "she/her",
+      "sex": "female",
+      "homeLocation": "radiant_plateau_edge",
+      "communityId": "echo_vale.radiant_plateau",
+      "spectrum": {
+        "violence_peace": 0.4,
+        "chaos_order": 0.5,
+        "death_life": 0.3,
+        "mechanical_spiritual": -0.4,
+        "concrete_abstract": -0.2
+      },
+      "assistTags": [
+        "study",
+        "investigate",
+        "recall",
+        "navigate-wilds"
+      ],
+      "appearance": "A woman of about sixty in undyed wool, a Plateau optical-fibre collar worn plain and small, a weight-distributed satchel, and a photonic instrument she reads the river with.",
+      "personality": {
+        "warmth": 0.4,
+        "trust": 0.3,
+        "candor": 0.6,
+        "patience": 0.8
+      },
+      "voiceHints": "Steady, precise, and careful about what she says of the Council. When she chooses to say it, she says it plainly.",
+      "wants": "For the water record to say what the water actually does.",
+      "fears": "Being the only one who knows what the Council chose.",
+      "knowledge": [
+        "The Council's water surveys and where their markers were set",
+        "The three approved fragments archivists may read about the Archive engineers of the Transition's close",
+        "What 'instrumental' means when the Council uses it instead of a name"
+      ],
+      "reactsToReputation": {
+        "any": "measures you before she trusts you with anything the Council has not approved",
+        "honest": "tells you what the survey found"
+      },
+      "questSeeds": [
+        "The Council's water office ordered survey markers moved before an archivist could find what they marked"
+      ],
+      "gear": [
+        "a photonic river instrument",
+        "a weight-distributed satchel of survey records",
+        "a Plateau optical-fibre collar"
+      ],
+      "purse": {
+        "crystal": 120
+      },
+      "_fromPlay": "characters/player-s9z9u1/char-mr4ejo8c.json and characters/player-54seyk/char-mr4ejo8c.json (Cellaceron)",
+      "_file": "content/packs/valley/npcs/sorel.json"
+    }
+  ],
+  "modified": [],
+  "referrers": {
+    "_declared": [
+      "content/packs/valley/manifest.json"
+    ],
+    "_checkedAndNotAffected": [
+      "keeper_ilma, elder_resonance, the_high_luminary are referenced and not edited"
+    ]
+  },
+  "expectedGates": {
+    "_existing": "no existing gate moves — new files only",
+    "_gatesToWrite_C12": [
+      "every sovereignty names a form from the closed list",
+      "every body's people[] names an npc that exists"
+    ]
+  },
+  "_manifest": "NEW: content/packs/valley/powers.json (SNG-634) and 5 files in content/packs/valley/npcs/",
+  "_applyNote": "CCode applies with SNG-634. secretsGM is GM-eyes-only and never reaches a player-facing surface."
+}

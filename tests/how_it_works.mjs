@@ -8982,9 +8982,17 @@ console.log("\n── §99 · four days through the Wend, or seven around it ─
   const gateOpt = anyone?.options.find(o => o.kind === "gate");
   check("§99: ⛔ A GATE ROUTE IS OFFERED — the leg an 85x speed-up deleted, caught by reading output not a gate",
     !!gateOpt, JSON.stringify(anyone?.options.map(o => o.kind)));
-  check("§99: ⚑ …and it is the transformation Aevi described — a season becomes days",
-    gateOpt && gateOpt.days < 10 && anyone.options.some(o => o.kind === "road" && o.days > 40),
-    `gate ${gateOpt?.days}d vs road ${anyone?.options.find(o => o.kind === "road")?.days}d`);
+  // ⛔ THIS GATE USED TO READ `o.days > 40` AND IT WENT RED ON A CORRECT CHANGE (CCODE-471). The road from
+  // Millbrook runs millbrook → echo_river_crossing → the_axis_gate → the_crossing, and when Erik ruled the Axis
+  // Gate INTO the Crossing the last leg fell from 13.3 days to 0.33, taking the whole walk from 47.3 to 34.3. The
+  // world got more correct and my gate called it a regression — the fourth time I have pinned a live value and been
+  // taught the same lesson. ⛑ What Aevi's sentence actually claims is a TRANSFORMATION: weeks on foot become days
+  // through the gate. So that is what is asserted — an order of magnitude between them, the gate inside a week, the
+  // walk over a fortnight. Those are calendar words; they do not move when a place moves.
+  const road99 = anyone?.options.find(o => o.kind === "road");
+  check("§99: ⚑ …and it is the transformation Aevi described — a season becomes days: the walk is a fortnight-plus, the gate is a few days, and there is an ORDER OF MAGNITUDE between them",
+    gateOpt && road99 && gateOpt.days < 7 && road99.days > 14 && road99.days >= gateOpt.days * 10,
+    `gate ${gateOpt?.days}d vs road ${road99?.days}d — ${road99 && gateOpt ? (road99.days / gateOpt.days).toFixed(1) : "?"}x`);
   check("§99: …and it carries what it COSTS — a gate is infrastructure, never a free teleport",
     gateOpt?.energy > 0 && gateOpt?.gate?.hours > 0);
   check("§99: ⚠️ …and the label does not stutter — this world names many places \"The something\"",
@@ -24937,6 +24945,93 @@ console.log("\n── §345 · the card, the verb, and the second reader ──"
       (leaked.featureOffers || []).length === 1 && leaked.featureOffers[0].holdingId === "mine" && leaked.reconcileVersion >= 77,
       JSON.stringify(leaked.featureOffers));
   }
+}
+
+// ══════════ §346 · CCODE-471 — IN MEANS IN, AND A STAIR IS NOT A JOURNEY ══════════
+// ⛔ ERIK, ruling on the question CCODE-466 put to him: "Yes, the places that are IN the location are sites. The null stone is
+// litterally in the hub where the Axis gate is I think. it has a stairway that takes you below... but that room is also IN the
+// crossing under the hub/gate area. The Coliseum is IN the Crossing, as it's one of the buildings in the city. the hundred markets
+// are between the hub and the coliseum." And then, on the chamber: "in the story, the chamber below wasn't 4.8 days below... it was
+// after a long circular stone stair decent. we need to be able to have sites go below ground like this without it requiring us to
+// travel to another settlement."
+// ⚠️ TWO RULINGS, AND THE SECOND ONE IS A BUG REPORT. The first re-coordinates four authored places. The second names a defect that
+// `geodesic`'s own comment had warned about in advance — "treating it as such would make a cellar as far away as a county" — sitting
+// directly above the line that did it.
+console.log("\n── §346 · in means in — four places inside the Crossing, and the stair beneath it ──");
+{
+  const WM346 = await import("../engine/worldmap.js");
+  const { loadContentHeadless: lch346 } = await import("./headless_content.mjs");
+  const C346 = await lch346();
+  const L346 = C346.locations || {};
+  const cross = L346["the_crossing"];
+  const kids = Object.values(L346).filter(l => (l.parentId || l.containerId) === "the_crossing");
+
+  // ⛔ THE RULING ITSELF, over the LIVE population rather than the four I happened to move. A fifth place parented to the
+  // Crossing and left out at eleven degrees is the same defect wearing a different id.
+  const strayed = kids.map(l => ({ id: l.id, tier: l.tier, days: WM346.walkingDays(l, cross) }))
+    .filter(k => k.tier !== "site" || !(k.days <= 1));
+  check("§346: ⛔ EVERY PLACE IN THE CROSSING IS A `site` OF IT AND IS WITHIN A DAY OF IT — Erik: \"the places that are IN the location are sites.\" Four said `parentId: the_crossing` while standing 11.7, 15.0, 18.3 and 11.7 walking days away, and `worldmap.js` draws a same-region child NESTED INSIDE its parent, so the picture said \"in the city\" and the number said \"a fortnight's walk.\" ⚠️ Asserted over whoever is parented there TODAY, not over the four names, because the next one authored at eleven degrees is the identical bug",
+    strayed.length === 0,
+    strayed.length ? strayed.map(k => `${k.id} ${k.tier} ${k.days?.toFixed(1)}d`).join(" · ")
+                   : `${kids.length} sites, furthest ${Math.max(...kids.map(k => WM346.walkingDays(k, cross))).toFixed(2)}d`);
+
+  // ⛔ "THE HUNDRED MARKETS ARE BETWEEN THE HUB AND THE COLISEUM" IS GEOMETRY, so it is checked as geometry. Three points are
+  // collinear exactly when the two legs sum to the direct line; anything else is a detour, and a trade ring that is a detour
+  // from the arena it feeds is not what he said. ⚠️ The TOLERANCE is pinned, never the coordinates — Aevi may move all three.
+  const gate346 = L346["the_axis_gate"], coli = L346["the_great_coliseum"], mark = L346["the_hundred_markets"];
+  const leg1 = WM346.geodesic(gate346, mark), leg2 = WM346.geodesic(mark, coli), direct = WM346.geodesic(gate346, coli);
+  const detour = (leg1 + leg2) / direct - 1;
+  check("§346: ⛔ THE HUNDRED MARKETS LIE ON THE LINE FROM THE GATE TO THE COLISEUM — his sentence is a constraint, not a mood. Gate→markets→coliseum must sum to gate→coliseum, and it does to better than one part in a thousand: the position was DERIVED as the midpoint of the two carried back into polar coordinates, rather than guessed at and called between. ⚠️ Its old longitude was 200° — the trade ring was on the far side of the world's axis from the arena it serves",
+    Number.isFinite(detour) && detour < 0.001,
+    `legs ${leg1?.toFixed(5)} + ${leg2?.toFixed(5)} vs direct ${direct?.toFixed(5)} — detour ${(detour * 100).toFixed(3)}%`);
+
+  // ⛔ THE STAIR. Driven on FIXTURES as well as on the chamber, because the rule has two arms and the live world exercises
+  // only one of them: nothing in the corpus is two places at the same spot four layers apart.
+  const at = (colat, lon, depth) => ({ worldPos: { colatitude: colat, longitude: lon, depth } });
+  const sameSpot = WM346.walkingDays(at(0.34, 0.22, 0), at(0.34, 0.22, -1));
+  const sameSpot4 = WM346.walkingDays(at(0.34, 0.22, 0), at(0.34, 0.22, -4));
+  const apart = WM346.walkingDays(at(0, 0, 0), at(20, 40, -1));
+  const apartFlat = WM346.walkingDays(at(0, 0, 0), at(20, 40, 0));
+  check("§346: ⛔ A DESCENT AT THE SAME SPOT COSTS THE DESCENT, AND SCALES WITH HOW FAR DOWN — 0.15 days a level, added as a leg you walk. It was |Δdepth| × 0.05 radii composed under `Math.hypot`, which is 4.8 DAYS PER LEVEL, and measured across all 10,153 placed pairs that composition is backwards at BOTH ends: the Unlit Deep is 151.7 surface days from the Crossing and five levels down, and depth adds 1.9 days — a short leg beside a long one vanishes under hypot — while the Regulator Chamber is 0.00 surface days from the stone above it and depth was its ENTIRE 4.77",
+    Math.abs(sameSpot - 0.15) < 1e-9 && Math.abs(sameSpot4 - 0.60) < 1e-9,
+    `one level ${sameSpot?.toFixed(3)}d · four ${sameSpot4?.toFixed(3)}d`);
+  check("§346: ⛑ …AND A JOURNEY BETWEEN SEPARATE WORLD LAYERS IS UNTOUCHED, which is why this change moved FOUR pairs out of 10,153 and every one of them was this chamber against the hub above it. The Unlit Deep, Archive Hollow, the Leaden Deep and the Service Ways are all still settlements and all still exactly as far as they were — the deep is far because of where it is, and that was always the surface arc's job",
+    apart > apartFlat && Math.abs(apart - Math.hypot(apartFlat / (300 / Math.PI), 0.05) * (300 / Math.PI)) < 1e-9,
+    `separated pair ${apart?.toFixed(2)}d vs ${apartFlat?.toFixed(2)}d flat`);
+
+  const chamber = L346["the_regulator_chamber"], stone = L346["the_null_stone"];
+  check("§346: ⛑ …SO THE REGULATOR CHAMBER IS A `site` OF THE NULL STONE, one stair below it. ⛔ THE NOTE ON THAT RECORD USED TO DEFEND `settlement` WITH THE ARITHMETIC — I read the 4.8 days correctly, concluded the TIER had to bend around it, and never asked whether the number was considered. It was not. Erik read it in the fiction instead and was right",
+    chamber?.tier === "site" && WM346.walkingDays(chamber, stone) <= 1 && (Number(chamber?.worldPos?.depth) || 0) < 0,
+    `${chamber?.tier} · ${WM346.walkingDays(chamber, stone)?.toFixed(3)}d below the stone`);
+
+  // ⛔ THE TIER IS BAKED TWICE AND THE RENDERER READS THE BAKE. `worldglobe.js:markerKind` takes a place's glyph from
+  // `terrain.json.locations[id].t`, so five records moving to `site` in canon would have left the globe drawing five
+  // settlement dots. Gated over ALL 143 rows, not the five, because the next divergence will be somebody else's.
+  const bake346 = rj("content/packs/core/world/terrain.json").locations || {};
+  const tierDrift = Object.entries(bake346)
+    .map(([id, row]) => ({ id, bake: row.t || null, canon: L346[id]?.tier || null }))
+    .filter(r => r.bake !== r.canon);
+  check("§346: ⛔ THE BAKED TIER AND CANON AGREE FOR EVERY PLACE — `markerKind` reads `terrain.json`'s copy, not the record, so a tier that moves in canon and not in the bake is a place drawn as the wrong thing with nothing failing. ⚠️ Carried across BY HAND on purpose: SNG-391's frozen world forbids rebuilding that file, so the one field canon changed was copied and the raster left alone",
+    tierDrift.length === 0, tierDrift.slice(0, 6).map(r => `${r.id} bake=${r.bake} canon=${r.canon}`).join(" · "));
+
+  // ⛔ AND THE FIELD MUST NOT HAVE FLATTENED. The Axis Gate is one of the 44 authored substrate sources and it moved 7.8° —
+  // further than its own 0.09-radii reach — so Aevi's warning applies: "larger radii blanket a whole region and
+  // renormalization cancels the field flat — the failure CCode measured and reverted."
+  const dens = Object.values(L346).map(l => l.substrateDensity).filter(v => typeof v === "number");
+  check("§346: ⛑ …AND THE POWER FIELD SURVIVED THE MOVE. Every one of the 143 places still resolves and the spread is unchanged at 0.96 — measured before and after, only the eight places inside the Crossing moved at all, each RISING 0.03–0.05 because the hub's own gate now sits at the hub's centre. A flat field is the specific failure Aevi flagged on this source's radius, so it is asserted rather than assumed",
+    dens.length === Object.keys(L346).length && (Math.max(...dens) - Math.min(...dens)) > 0.9,
+    `${dens.length}/${Object.keys(L346).length} resolved · spread ${(Math.max(...dens) - Math.min(...dens)).toFixed(3)}`);
+
+  // ⚠️ REPORTED, NOT FAILED — region_maps.json is Aevi's authored file and the SNG-421 script that derived these
+  // waypoints is not in the repo, so reproducing her numbers would mean reverse-engineering someone else's
+  // derivation to overwrite their file. The divergence is stated here and put to her in po/.
+  const rm346 = rj("content/packs/core/world/region_maps.json").the_center || {};
+  const stale = (rm346.ways || []).map(w => {
+    const to = L346[w.to]; const km = (w.waypoints || []).slice(-1)[0]?.km;
+    const realKm = to && cross ? WM346.walkingDays(to, cross) * 15.6 * 1.609 : null;
+    return { id: w.id, to: w.to, km, realKm };
+  }).filter(w => w.km != null && w.realKm != null && w.km > w.realKm * 2);
+  console.log(`      ⚠️ §346: ${stale.length} of ${(rm346.ways || []).length} authored ways in the_center now run past their own destination — ${stale.map(w => `${w.id} ends at ${w.km}km where ${w.to} is ${Math.round(w.realKm)}km out`).join(" · ")}. The region's \`radiusDeg\` reads ${rm346.radiusDeg} while its members now span ${Math.max(...kids.map(k => Number(k.worldPos?.colatitude) || 0)).toFixed(2)}°. Aevi's file, Aevi's derivation, and the SNG-421 script that made these numbers is not in the repo — stated for her, never rewritten by me`);
 }
 
 /* ══════════ REPORT ══════════ */

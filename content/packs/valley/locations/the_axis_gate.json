@@ -85,12 +85,12 @@
   "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
  },
  "worldPos": {
-  "colatitude": 8,
+  "colatitude": 0.2,
   "longitude": 0,
   "depth": 0
  },
- "worldPosNote": "The hub's gate. As near the pole as a built thing gets. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
- "tier": "settlement",
+ "worldPosNote": "\u26d1 CCODE-471 \u2014 THE HEART OF THE CROSSING, AND A `site` OF IT. Erik: \"the places that are IN the location are sites\" and \"the null stone is litterally in the hub where the Axis gate is.\" It was 8\u00b0 out \u2014 13.3 walking days \u2014 while the region map drew it nested inside the Crossing, so the picture and the number disagreed by a fortnight. On the axis at 0.2\u00b0 (0.33 days) it is the gate at the hub's centre, with the Null Stone a few steps off it and the Regulator Chamber down the stair beneath. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
+ "tier": "site",
  "parentId": "the_crossing",
  "role": "gate",
  "appearance": "A wide paved circle at a crossroads where twelve roads leave in twelve directions, each marked by a tall standing pillar. Milestones and waymarkers crowd the verges. Open sky, flat ground, and the roads visible running to the horizon."

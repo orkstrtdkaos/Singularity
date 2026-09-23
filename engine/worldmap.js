@@ -368,19 +368,50 @@ export function worldVector(loc) {
   return { x: Math.sin(theta) * Math.cos(phi), y: Math.sin(theta) * Math.sin(phi), z: Math.cos(theta), depth: Number(w.depth) || 0 };
 }
 
+/** ⛔ DAYS PER RADIUS — canon's "about 300 days pole-to-rim across 180°", which is 300/π per radian.
+ *  ONE DEFINITION: `walkingDays` and `carriage.js` each spelled it inline, and a distance constant with
+ *  two copies is the thing `scripts/map_convergence_check.mjs` assertion 4 exists to forbid. */
+export const DAYS_PER_RADIUS = 300 / Math.PI;
+
+/** ⛔ CCODE-471 — HOW MUCH A DESCENT COSTS, and it is TWO rules because there are two kinds of down.
+ *  ⚠️ Erik, on the Regulator Chamber under the Null Stone: "in the story, the chamber below wasn't 4.8
+ *  days below… it was after a long circular stone stair descent. we need to be able to have sites go
+ *  below ground like this without it requiring us to travel to another settlement."
+ *  ⛔ HE IS DESCRIBING A DEFECT THIS FUNCTION'S OWN COMMENT ALREADY WARNED ABOUT: "treating it as such
+ *  would make a cellar as far away as a county" — and then `Math.hypot(surface, levels × 0.05)` did
+ *  exactly that. Measured across all 10,153 placed pairs, the composition gets it BACKWARDS at both ends:
+ *    · the Unlit Deep is 151.7 surface days from the Crossing and five levels down — depth adds 1.9 days,
+ *      because a small leg beside a large one vanishes under hypot. The deep is not far because it is deep.
+ *    · the Regulator Chamber is 0.00 surface days from the Null Stone it sits under — depth adds 4.77,
+ *      which was its ENTIRE distance, and a stair became a week's journey.
+ *  ⛑ So: WHEN THE TWO PLACES ARE THE SAME SPOT ON THE SURFACE, the thing between them is the descent and
+ *  nothing else, and it is charged as a descent — ADDED as a leg you actually walk, not composed as a
+ *  perpendicular displacement. When they are not, the surface arc is already carrying the journey and the
+ *  old layer charge stands untouched. ⚠️ "The same spot" is deliberately THE DAY — the very threshold that
+ *  makes a place a `site` of its parent (SNG-398) — so there is one idea of "in this place", not two. */
+export const DESCENT_DAYS_PER_LEVEL = 0.15;   // a long circular stone stair: down and back inside a day's work
+export const DESCENT_SAME_SPOT_DAYS = 1;      // SNG-398's day — if it is a site of here, the way down is a stair
+export const DEPTH_RADII_PER_LEVEL = 0.05;    // a journey BETWEEN world layers, unchanged from SNG-398
+
 /** Great-circle (geodesic) distance between two placed locations, in RADII. Null if either is
  *  unplaced — a missing position is reported, never guessed at, because a wrong distance is worse
  *  than a known-missing one and everything downstream already tolerates null.
  *
  *  DEPTH is composed as a separate leg rather than bent into the surface arc: going down is not
- *  travel across the world, and treating it as such would make a cellar as far away as a county. */
-export function geodesic(a, b, { depthScale = 0.05 } = {}) {
+ *  travel across the world, and treating it as such would make a cellar as far away as a county.
+ *  ⛑ CCODE-471 made that sentence true — see DESCENT_DAYS_PER_LEVEL above for what it used to do. */
+export function geodesic(a, b, { depthScale = DEPTH_RADII_PER_LEVEL,
+                                 descentDays = DESCENT_DAYS_PER_LEVEL,
+                                 sameSpotDays = DESCENT_SAME_SPOT_DAYS } = {}) {
   const va = worldVector(a), vb = worldVector(b);
   if (!va || !vb) return null;
   const dot = Math.max(-1, Math.min(1, va.x * vb.x + va.y * vb.y + va.z * vb.z));
   const surface = Math.acos(dot);                                  // radians = radii on a unit sphere
-  const vertical = Math.abs(va.depth - vb.depth) * depthScale;
-  return Math.hypot(surface, vertical);
+  const levels = Math.abs(va.depth - vb.depth);
+  if (levels === 0) return surface;
+  // ⛔ A STAIR, NOT A JOURNEY BETWEEN LAYERS. Standing on top of it, the only thing between you is the way down.
+  if (surface * DAYS_PER_RADIUS <= sameSpotDays) return surface + (levels * descentDays) / DAYS_PER_RADIUS;
+  return Math.hypot(surface, levels * depthScale);
 }
 
 /** ⛔ A PLACE MADE IN PLAY MUST STILL BE SOMEWHERE. Fourteen generated locations on Erik's save carry no
@@ -570,7 +601,7 @@ export function placeLabels(items = [], { pad = 2 } = {}) {
 
 export function walkingDays(a, b, opts = {}) {
   const d = geodesic(a, b, opts);
-  return d == null ? null : d * (300 / Math.PI);
+  return d == null ? null : d * DAYS_PER_RADIUS;
 }
 
 /** ✅ SNG-537 §4 B6a (2026-09-12): `scale.json` — the world's physical size, five constants with no reader since SNG-424 — is READ here:

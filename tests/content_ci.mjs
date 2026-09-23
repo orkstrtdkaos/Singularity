@@ -1022,8 +1022,14 @@ for (const pack of PACKS) {
     // exist and an `npc_state` on a being that did not either. Both are authored now. ⛔ AND THIS GATE CAUGHT THE FIRST
     // SITING AT 1.018 DAYS FROM ITS PARENT, which SNG-398 forbids — a site is somewhere you walk to from the place it
     // belongs to, not a separate journey. It sits 0.58 days below Millbrook now.
-    check("SNG-392/398/396: the hierarchy matches the RATIFIED census — 25 regions, 101 settlements, 17 authored-in-play sites",
-      tiers.region === 25 && tiers.settlement === 101 && tiers.site === 17, JSON.stringify(tiers));
+    // ⚠️ 96 AND 22 SINCE 2026-09-23 (CCODE-471): FIVE PLACES CHANGED TIER ON ERIK'S RULING, and not one of them
+    // was authored or retired — the world did not grow, it was re-read. Erik: "Yes, the places that are IN the
+    // location are sites." The Axis Gate, the Great Coliseum, the Hundred Markets and the Quiet House all said
+    // `parentId: the_crossing` while sitting 11.7–18.3 walking days away, so the region map drew them nested
+    // inside a place a fortnight's walk from them; and the Regulator Chamber, which is one stair below the Null
+    // Stone, was a settlement only because `geodesic` charged 4.8 days for that stair. ⛑ 101 − 5 = 96, 17 + 5 = 22.
+    check("SNG-392/398/396: the hierarchy matches the RATIFIED census — 25 regions, 96 settlements, 22 authored-in-play sites",
+      tiers.region === 25 && tiers.settlement === 96 && tiers.site === 22, JSON.stringify(tiers));
     const ids = new Set(allLocs.map((l) => l.id));
     const badParent = allLocs.filter((l) => l.parentId !== null && !ids.has(l.parentId));
     check("SNG-392: every parentId resolves and every site HAS a parent",

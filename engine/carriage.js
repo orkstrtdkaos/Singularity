@@ -23,7 +23,7 @@
 // field — terrain lives on the REGION, as prose. `tags` is on 135 of 135 places, so a crewed carriage requires one of the water tags
 // the content authors (Keelmouth: harbour · river · shipyard) and a grove wants ground. No new field and no second graph.
 
-import { geodesic } from "./worldmap.js";   // ⛔ Erik 2026-09-12: a hull under way is SOMEWHERE, and the nearest place decides what can reach her
+import { geodesic, DAYS_PER_RADIUS } from "./worldmap.js";   // ⛔ Erik 2026-09-12: a hull under way is SOMEWHERE, and the nearest place decides what can reach her
 const num = (v, d = null) => (Number.isFinite(Number(v)) ? Number(v) : d);
 export const CARRIAGE_KINDS = ["crewed", "powered", "drifting", "living", "willed"];
 
@@ -81,7 +81,7 @@ export function voyagePosition(holding, { worldDay = null, locations = {} } = {}
     const d = geodesic({ worldPos: pos }, loc);
     if (d != null && d < best) { best = d; nearestId = id; }
   }
-  return { from: v.from, to: v.to, fraction: f, daysOut: elapsed, daysLeft: Math.max(0, total - elapsed), days: total, worldPos: pos, nearestId, nearestDays: best === Infinity ? null : best * (300 / Math.PI) };
+  return { from: v.from, to: v.to, fraction: f, daysOut: elapsed, daysLeft: Math.max(0, total - elapsed), days: total, worldPos: pos, nearestId, nearestDays: best === Infinity ? null : best * DAYS_PER_RADIUS };   // CCODE-471b: one constant, imported
 }
 
 /** ⛔ WHERE SHE IS FOR EVERYTHING THAT ASKS — the raid, the danger, the region under her. A holding at anchor answers with its own

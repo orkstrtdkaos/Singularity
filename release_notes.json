@@ -16,6 +16,24 @@
   "next": [],
   "releases": [
     {
+      "version": "2.4.10",
+      "date": "2026-09-23",
+      "entries": [
+        {
+          "kind": "change",
+          "title": "The Crossing's places are in the Crossing",
+          "summary": "The Axis Gate, the Great Coliseum, the Hundred Markets and the Quiet House are now inside the city they belong to — a short walk apart instead of a fortnight.",
+          "detail": "All four said they were part of the Crossing and the map drew them inside it, but each one actually stood eleven to eighteen days' walk away. They sit inside it now: the gate at the hub's heart, the markets on the road out to the Coliseum, and the Quiet House a long walk to the edge of the city, which is what its own description always said. Walking across the Crossing takes under a day. The ground's power reading rose very slightly everywhere in the city, because the hub's gate now sits at the hub's centre. One side-effect worth knowing: the walk from Millbrook to the Crossing is about thirteen days shorter, because the road passes through the Axis Gate on the way in."
+        },
+        {
+          "kind": "fix",
+          "title": "A stairway down is a stairway, not a week's journey",
+          "summary": "Somewhere reached by going below ground can now be part of the place above it. The Regulator Chamber is a short descent under the Null Stone rather than 4.8 days away.",
+          "detail": "Going down one level cost 4.8 walking days no matter what was down there, so a chamber at the bottom of a stair was as far off as another town and the game had to call it a separate settlement. Now, when two places sit at the same spot and one is below the other, the distance between them is the descent itself — about four hours a level. Journeys between genuinely separate underground layers are unchanged: the Unlit Deep, Archive Hollow, the Leaden Deep and the Service Ways are all exactly as far as they were. Four pairs of places in the whole world moved, and every one of them was the chamber beneath the Crossing's hub."
+        }
+      ]
+    },
+    {
       "version": "2.4.9",
       "date": "2026-09-21",
       "entries": [

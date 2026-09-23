@@ -12,6 +12,7 @@
     "power_keelmouth_slip",
     "power_firstsight_barony",
     "power_echo_bridge",
+    "power_ender_host",
     "dessa_wyck",
     "harl_maddock",
     "tamsin_galt",
@@ -36,7 +37,10 @@
         "kestrels_roost"
       ],
       "leader": "dessa_wyck",
-      "answersTo": "power_gralloch_crown",
+      "answersTo": {
+        "power": "power_gralloch_crown",
+        "bond": "tribute"
+      },
       "strength": {
         "scale": "unit",
         "contingents": [
@@ -51,7 +55,7 @@
         {
           "at": "old_switchback",
           "kind": "post",
-          "name": "the halfway waystation",
+          "name": "a chain-post on the upper turns, above the halfway waystation",
           "garrison": 8
         }
       ],
@@ -74,11 +78,13 @@
       "whenBroken": "The high road is only as dangerous as the mountain again, until the Gralloch sends a harder captain to take the waystation back.",
       "rivals": [],
       "opposedBy": [
-        "the_kestrel"
+        "the_kestrel",
+        "greta_waystation"
       ],
       "plainly": "A toll gang holding the old road up to the high pass. They would rather be paid than fight.",
-      "descriptionSeed": "They took the ruined waystation at the halfway turn and made it a tollhouse: a chain across the road, a fire in the old hearth, and a price that depends on how you look. They pay tribute up the line to the Gralloch and resent every crystal of it.",
-      "appearance": "A rusted chain slung across a stone-cut road, a half-roofed waystation with smoke at its hearth, men in patched oilskins with crossbows resting on the wall"
+      "descriptionSeed": "They hold a chain across the upper turns, above the halfway waystation that Greta keeps alone: a fire in a rock shelter, a price that depends on how you look. Greta will not feed them and they have not yet made her. They pay tribute up the line to the Gralloch and resent every crystal of it.",
+      "appearance": "A rusted chain slung across a stone-cut mountain road, a rock shelter with smoke rising, men in patched oilskins with crossbows, and far below them a half-roofed waystation",
+      "_correction_20260923": "Was: the Tollmen took the halfway waystation. greta_waystation is its authored keeper; I missed her. Moved the chain above it; she opposes them."
     },
     {
       "_file": "content/packs/valley/powers.json",
@@ -159,7 +165,10 @@
         "spindrift_hollow"
       ],
       "leader": "tamsin_galt",
-      "answersTo": "power_gralloch_crown",
+      "answersTo": {
+        "power": "power_gralloch_crown",
+        "bond": "tribute"
+      },
       "strength": {
         "scale": "unit",
         "contingents": [
@@ -272,7 +281,7 @@
         "wealth",
         "crossed"
       ],
-      "wantsFromYou": "What is inside your walls, if you have walls near the markets. Failing that, a cut of your trade. Failing that, you, as a member.",
+      "wantsFromYou": "A store room at your post and a blind eye, for a tenth of what passes through it. If you refuse, what is inside your walls.",
       "offersYou": "A fence for anything, a door into any house in the Crossing, and the first word of who is coming for you and why.",
       "leverage": "The guild has one law: never rob a seller at their own stall. The Hundred Markets' prices are true because of it, and every member who has ever broken it has disappeared.",
       "whenBroken": "The fences in Dusklow and the Low Market go quiet, stolen goods stop moving, and every thief in the Crossing is suddenly working for themselves.",
@@ -283,7 +292,63 @@
       ],
       "plainly": "A thieves' guild working out of the Hundred Markets. It never robs a seller at their own stall, and it robs nearly everyone else.",
       "descriptionSeed": "The Undercount is the count under the count: every market keeps a ledger, and the guild keeps the one underneath it. It fences through Dusklow, where nobody repeats anything, and through the Low Market, where the price is on everything. It protects the Hundred Markets because it feeds on them. It will come for any new wealth that settles within reach of the Crossing, quietly, at night.",
-      "appearance": "A crowded market lane at dusk, a spice stall with a back room behind a hanging rug, a ledger open on a crate, a hooded figure counting coins by a shuttered lamp"
+      "appearance": "A crowded market lane at dusk, a spice stall with a back room behind a hanging rug, a ledger open on a crate, a hooded figure counting coins by a shuttered lamp",
+      "clientOf": {
+        "power": null,
+        "bond": "client",
+        "_open": "The Patient Buyer (world_superstructure arc_pass_takeover) buys the Roost's debts through the Undercount's counting-house. Who the buyer is is Erik's ruling (SNG-636 §8)."
+      },
+      "approach": {
+        "when": "neighbour",
+        "by": "mother_hesk",
+        "to": [
+          "holder",
+          "keeper"
+        ],
+        "form": "meeting",
+        "offer": "A fence at your post: guild goods pass through a store room and out again, and you take a tenth of what moves.",
+        "responses": {
+          "embrace": {
+            "becomes": {
+              "cell": "fence"
+            },
+            "yields": "a tenth of fenced value each season",
+            "standing": {
+              "power_undercount": 2
+            },
+            "risk": "the wardens learn of it (warden-coll)"
+          },
+          "tolerate": {
+            "becomes": {
+              "cell": "fence",
+              "acknowledged": false
+            },
+            "yields": "nothing",
+            "standing": {
+              "power_undercount": 0
+            },
+            "risk": "the wardens learn of it, and you took nothing for the danger"
+          },
+          "reject": {
+            "becomes": {
+              "noticed": "crossed"
+            },
+            "yields": "nothing",
+            "standing": {
+              "power_undercount": -2
+            },
+            "risk": "the guild comes for what is inside your walls within the season"
+          },
+          "negotiate": {
+            "becomes": "the GM plays Mother Hesk's leverage against the holder's price",
+            "yields": "terms",
+            "standing": {
+              "power_undercount": 0
+            },
+            "risk": "none until terms are set"
+          }
+        }
+      }
     },
     {
       "_file": "content/packs/valley/powers.json",
@@ -350,7 +415,8 @@
       "opposedBy": [],
       "plainly": "Keelmouth's lord keeps the only slipway on four hundred miles of cliff open to anyone who pays the posted tariff. She is fair, and she is loved for it.",
       "descriptionSeed": "Ines Harrowgate holds the Slip because her grandmother built the first watch-house on it, and she holds it the way her grandmother did: the tariff is carved on a stone at the waterline and has not changed in forty years. She hangs anyone who wrecks a hull on purpose and feeds anyone who wrecks one by accident. The Baron at Firstsight holds the only road down to her, and he wants the water.",
-      "appearance": "A stone slipway running down into brown estuary water, a squat watch-house with a lantern, a tariff carved into a waterline stone, boatyards full of half-built hulls"
+      "appearance": "A stone slipway running down into brown estuary water, a squat watch-house with a lantern, a tariff carved into a waterline stone, boatyards full of half-built hulls",
+      "recognizedBy": "council_of_mavens"
     },
     {
       "_file": "content/packs/valley/powers.json",
@@ -413,7 +479,11 @@
       "opposedBy": [],
       "plainly": "The Baron at Firstsight holds the top of the only road down to the sea, and taxes it until it bleeds. He wants Keelmouth's harbour.",
       "descriptionSeed": "Oswin Tarrant inherited a cairn and a wayhouse at the top of a twenty-six-day road and turned them into a keep. Everyone going to the sea passes him; he charges what the season allows, and more when he is short. He levies farmers off the stone-grass to hold the road and hangs deserters at the cairn where the water first comes into view. He has decided that the Slip should be his, and that Ines Harrowgate's kindness is a weakness he can wait out.",
-      "appearance": "A stone keep built around an old cairn on a high divide, a wayhouse beneath it, a gibbet by the road, and far below, the head of a brown river with the sea beyond"
+      "appearance": "A stone keep built around an old cairn on a high divide, a wayhouse beneath it, a gibbet by the road, and far below, the head of a brown river with the sea beyond",
+      "petitions": {
+        "to": "council_of_mavens",
+        "for": "recognition of a claim to the Slip at Keelmouth"
+      }
     },
     {
       "_file": "content/packs/valley/powers.json",
@@ -466,7 +536,77 @@
       "opposedBy": [],
       "plainly": "The castellan of the Echo Bridge serves neither city. His toll is posted, never changes, and is the same for everyone.",
       "descriptionSeed": "Brannoch holds the only bridge for miles in country two cities both want. He tolls it fairly and defends it against everyone. He is not kind, and he is not cruel; he is exact. The river under his bridge is going bad, worse every week, and he wants to know who is doing it more than he wants anything else.",
-      "appearance": "An old stone-and-cable bridge between granite shoulders, two squat towers at either end, wardens with halberds, grey-green water sheeting over rocks below"
+      "appearance": "An old stone-and-cable bridge between granite shoulders, two squat towers at either end, wardens with halberds, grey-green water sheeting over rocks below",
+      "courtedBy": [
+        "power_radiant_plateau",
+        "power_harmonic_heights"
+      ]
+    },
+    {
+      "_file": "content/packs/valley/powers.json",
+      "_kind": "power",
+      "id": "power_ender_host",
+      "name": "The Ender's Host",
+      "kind": "lordship",
+      "temper": "cruel",
+      "seat": "the_marchward",
+      "reach": [
+        "the_marchward",
+        "the_redline",
+        "the_stillhold",
+        "hardline"
+      ],
+      "leader": "the_ender_who_forgot",
+      "answersTo": null,
+      "strength": {
+        "scale": "legion",
+        "contingents": [
+          {
+            "n": 140,
+            "quality": 3,
+            "what": "companies that followed him out of the Marches and no longer ask where"
+          },
+          {
+            "n": 30,
+            "quality": 4,
+            "what": "the Unremembering, veterans who have stopped saying why they fight"
+          }
+        ]
+      },
+      "holds": [
+        {
+          "at": "the_marchward",
+          "kind": "post",
+          "name": "the old muster-yard below the Marchward's wall, where his host camps and will not leave",
+          "garrison": 60
+        }
+      ],
+      "verbs": [
+        "levy",
+        "expand",
+        "feud",
+        "raid"
+      ],
+      "encounters": [],
+      "dangerLift": 1,
+      "noticesYouWhen": [
+        "crossed",
+        "neighbour",
+        "rival_ally"
+      ],
+      "wantsFromYou": "Nothing he could name. If what you have built stands where he is walking, he ends it.",
+      "offersYou": "A place in the line, and a war that never asks you why.",
+      "leverage": "He cannot remember what he was protecting. Someone who could tell him, truly, might stop the host where it stands, or turn it.",
+      "whenBroken": "His companies scatter back into the Marches as masterless fighters: bands for the Gralloch Crown to absorb, unless someone gives them a banner first.",
+      "rivals": [],
+      "opposedBy": [
+        "mediator_corran",
+        "the_edge_that_holds",
+        "marshal_veyn"
+      ],
+      "plainly": "A warlord who forgot why he fights, camped below the Marchward with a host that follows him anyway. The Marches fear him more than they fear each other.",
+      "descriptionSeed": "The Ender Who Forgot Why was a Marcher once, protecting something. His host camps in the old muster-yard below the Marchward's wall. Mediator Corran keeps the town neutral with the Ender's fires in sight of every window, and the Redline and the Stillhold each suspect the other of wanting him pointed their way.",
+      "appearance": "A walled border town on a ridge, and below its wall a sprawling war-camp of mismatched tents and banners from four dead companies, smoke from a hundred fires"
     },
     {
       "_file": "content/packs/valley/npcs/dessa_wyck.json",
@@ -572,7 +712,7 @@
       "appearance": "A broad, grey-bearded man in scarred plate with four mismatched rings on his left hand. Eats slowly, listens more than he talks, and never sits with his back to a door.",
       "personality": {
         "warmth": 0.1,
-        "trust": 0.0,
+        "trust": 0,
         "candor": 0.7,
         "patience": 0.9
       },
@@ -974,5 +1114,6 @@
     ]
   },
   "_manifest": "NEW: content/packs/valley/powers.json (provides.powers — a new kind, loader branch in the same commit, SNG-064) · 7 files in content/packs/valley/npcs/ · content/packs/core/rules/powers.json from po/staged_content/SNG-634_powers_rules.json (loadRule — beside its receiver IN THE Promise.all ARRAY, not at the line)",
-  "_applyNote": "CCode applies, after Erik rules on spec §8 and readers C1 and C2 exist — content first would be the no-reader shape this project keeps closing. Verified against the live corpus 2026-09-23 with a one-off check: 7 powers, 7 leaders, 0 failures."
+  "_applyNote": "CCode applies, after Erik rules on spec §8 and readers C1 and C2 exist — content first would be the no-reader shape this project keeps closing. Verified against the live corpus 2026-09-23 with a one-off check: 7 powers, 7 leaders, 0 failures.",
+  "_rulings_20260923": "Erik: (1) the Ender is a warlord and needs an army, and eligible NPCs should hold holdings, bands and legions where it fits their character; (2) taking a seat inherits it; (3) lordship tempers even; (4) the player can join the bad guys; (5) Mother Hesk approaches with a meeting at the post, the player answers."
 }

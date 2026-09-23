@@ -266,3 +266,82 @@ accepted as *to be created*. Then this file moves into `changesets/` unchanged. 
 is the procedure's step 3 anyway.
 
 — Aevi, PO
+
+---
+
+# §11 — ✅ ERIK RULED, 2026-09-23
+
+| # | question | ruling |
+|---|---|---|
+| 1 | the Ender Who Forgot Why | **"He's a warlord, he needs an army. In fact pretty much all eligible NPCs should have holdings, bands, and legions if that fits their character."** → `power_ender_host` added (§11a); the whole cast measured (§12) |
+| 2 | taking a seat | **yes — you inherit it.** Its bands, tolls, rivals and its ground's opinion of you pass to you. Recognition is SNG-636 §3. |
+| 3 | lordship tempers | **split evenly**, 25 / 25 / 25 / 25, as staged |
+| 4 | the dark path | **you can join the bad guys** |
+| 5 | the Undercount and Stillwater's Trouble | **a meeting, not a burglary** (§13); and the name is fixed (SNG-635) |
+
+### §11a — The Ender's Host
+
+**Seated at `the_marchward`, his own authored `homeLocation`** — his host camps in the old muster-yard *below* the wall;
+the town stays Mediator Corran's. Legion scale: 140 companies at quality 3, 30 of the Unremembering at 4. ⛑ **His leverage
+is his own authored verb** — *"looking for the reason afterward"*: someone who could tell him what he was protecting
+might stop the host where it stands, or turn it. Broken, his companies scatter as masterless bands **for the Gralloch
+Crown to absorb** — which ties the Marches to the Churn without either knowing.
+
+### §11b — ⛔ A CANON TRACE I FAILED, AND THE FIX
+
+`greta_waystation` is the *"solitary keeper of the switchback's halfway waystation"* — **the building I gave the Tollmen
+as their tollhouse.** I read the location's seed and never asked who lived in it. ⚠️ **`exists.mjs` checks a name; it
+cannot tell me that a place I am about to occupy already has a keeper.** The Tollmen now hold a chain on the upper turns
+*above* her waystation; she will not feed them and they have not yet made her; she is `opposedBy`. Recorded on the record
+as `_correction_20260923`. ⬜ **Gate for the procedure:** before seating a power, list the NPCs whose `homeLocation` is the
+seat.
+
+# §12 — THE CAST, MEASURED: WHO SHOULD HOLD A POWER
+
+`po/staged_content/SNG-634_census.json`, derived by `rules.eligibility` for the 66 figures (by `role`) and by a call with
+a reason for each authored NPC (`SNG-634_census_calls.json` — kept out of the rules file, because a note in a rules bag
+is an unread constant). **Three it found that I had missed in SNG-634:** Orrun Shieldbreaker (a raider-captain with a ship
+and a crew), Cassa Redsail (a pirate), and Dame Iseult of Hardline (forty riders sworn to her). **And the two city
+masters, who are the Long Reach itself.**
+
+⚠️ **Figures whose `homeLocation` names no real place cannot be seated** — the census lists them; they wait on SNG-636's
+sovereign records or on a place being authored. **A new kind, `order`**, exists for sworn followings — an inquisition, a
+temple's fighters, a knight's oath — because neither `lordship` nor `guild` describes a zealot's host.
+
+# §13 — MOTHER HESK'S APPROACH: A MEETING, AND YOU ANSWER
+
+> **Erik:** *"If Mother Hesk is paying attention, she might set a meeting with Silas or the keeper to negotiate a fencing
+> position at the post… that lets the player decide how to respond. Reject, Embrace, tolerate, etc."*
+
+`approach` is a new field any power can carry — **the first move a power makes when it notices you, and it is an offer,
+not an attack.** The Undercount's, when its `neighbour` trigger fires on Stillwater's Trouble:
+
+| answer | what the post becomes | what it yields | standing with the guild | the risk |
+|---|---|---|---|---|
+| **embrace** | a guild `fence` cell | a tenth of fenced value each season | +2 | the wardens learn of it (Warden Coll) |
+| **tolerate** | an unacknowledged cell | nothing | 0 | the wardens learn of it — and you took nothing for the danger |
+| **reject** | the guild marks you `crossed` | nothing | −2 | they come for what is inside your walls within the season |
+| **negotiate** | the GM plays Hesk's leverage against your price | terms | 0 | none until terms are set |
+
+⛑ **To: the holder or the keeper** — Silas, or Cassiel Ord, whoever the guild reaches first. ⚑ **The same field gives the
+Crown its "swear or pay", the Baron his half-toll, Keelmouth her alliance.** It is how a power meets you before it fights
+you — and C7's reader delivers it.
+
+### §12a — The census, as it came out (152 people)
+
+**45 hold a power · 20 hold only holdings · 87 hold nothing.** Of the 45: 18 lordships, 17 orders, 6 guilds, 3 outlaw
+bands, 1 outlaw crown (the Appetite). Tempers: 16 hard, 11 cruel, 10 kind, 8 fair.
+
+⚠️ **Rows the rule produced that I would not ship without your eye**, because a rule on `role` cannot read character:
+the four God-Named Heroes all seated at `the_wayhouse` (Zeus, Loki, Athena, Ares — four powers at one inn); `the_undefeated`
+as a lordship at the Coliseum (a Champion's role, an arena's seat); `keeper_the_unsaid` and `the_kind_liar` as guilds.
+**Four have no resolvable seat** — Aelith and Ysenkar (`the_churn` is a locus, not a place), Cassa Redsail (`unspooling` is a
+region), the Lightless Seraph (`the_ascendant_spire` is not authored). **Dame Iseult and Orrun Shieldbreaker had region ids as
+homes; seated at `hardline` and `longshore`.**
+
+### §11c — The seat-resident gate, run
+
+`check` now warns when a power's seat is already someone's home. After Greta: **Marshal Veyn** at the Marchward — *"A line
+worth holding"* — **is now `opposedBy` on the Ender.** The rest were read and are accounted for: Sable the Runner (missing on
+the high trail; the Tollmen would know), Odd Wren at the Churn Edge, Pell-Sethry in the markets (a seller at her own stall —
+the one person the Undercount's law protects), Veyra Lance at the Marchward (a duelist who wants a clean fight, not a side).

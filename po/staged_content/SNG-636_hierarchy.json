@@ -1,0 +1,432 @@
+{
+  "id": "SNG-636_the_shape_above_the_ground",
+  "status": "staged — not loaded; a proposal for Erik",
+  "bonds": {
+    "fealty": "a lord to a liege: pays a share of its taxes up, sends levies when called, is protected in return",
+    "tribute": "an outlaw power to a stronger one: pays a share of its take to be left alone and backed",
+    "client": "paid work for another power; no obedience; either side can end it",
+    "member": "an order, guild or council seat inside a people's own structure",
+    "recognized": "a seat whose claim the Council of Mavens has evaluated and recorded",
+    "independent": "answers to no one"
+  },
+  "world": {
+    "the_accords": {
+      "what": "a covenant between peoples, not a government: signatories open one craft to anyone; any signatory may suspend its accord against a people that wronged it",
+      "seat": "the_quiet_house",
+      "source": "canon: content/packs/core/rules/the_accords.json",
+      "signatories": [
+        "seraphic",
+        "rootkin",
+        "stillhold",
+        "enginewright",
+        "mason",
+        "hourkeeper",
+        "wright"
+      ],
+      "refusers": [
+        "ashwarden",
+        "umbral",
+        "veilwright",
+        "marcher",
+        "abyssal",
+        "cogitant",
+        "somatic"
+      ],
+      "unaligned": [
+        "blazeborn",
+        "churnfolk",
+        "lattice",
+        "numinous",
+        "threnodist",
+        "syllogist",
+        "verist",
+        "figurist",
+        "horizon",
+        "unmaker",
+        "god_named",
+        "bargainers"
+      ],
+      "administeredBy": "lattice",
+      "waygatesBuiltBy": "numinous"
+    },
+    "the_quiet_house": {
+      "what": "the one roof under which no people may raise a hand; where powers at war can meet",
+      "seat": "the_quiet_house",
+      "keeper": "broker_sain",
+      "source": "canon: the_accords.json housedAt; broker_sain"
+    },
+    "council_of_mavens": {
+      "what": "the world's one standing body that sits between peoples. It evaluates; it does not rule, tax or levy.",
+      "seat": "the_crossing",
+      "members": {
+        "known": [
+          "warden-coll"
+        ],
+        "rule": "each people or sovereign power may send a maven; Warden Coll sits for the Radiant Plateau's Edge District"
+      },
+      "source": "canon: warden_coll ('evaluates rather than decides'); nexuses.json (the ninth, unbuilt nexus at the Council of Mavens, made of friction; its corruption, evaluation-as-avoidance, is Erik's to rule)",
+      "proposedFunctions": {
+        "recognition": "A seat taken is held; a seat recognized is owed. A recognized holder's call on the seat's vassals is answered; an unrecognized holder's call can be refused. Accord signatories' standing follows recognition.",
+        "arbitration": "Two powers in dispute can bring it to the Mavens instead of the field. A ruling moves both powers' standing with every signatory.",
+        "record": "The Mavens record Accord suspensions and breaches, which makes them dated world events."
+      },
+      "theNexusHook": "The ninth nexus is built when the Council meets a real edge and does not withdraw — when it rules on something hard. A player who forces a ruling (the Slip, a taken crown) is building it."
+    }
+  },
+  "blocs": [
+    {
+      "id": "bloc_the_long_reach",
+      "name": "The Long Reach",
+      "what": "Harmonic Heights and the Radiant Plateau, each absorbing the unaligned valley before the reckoning between them",
+      "source": "canon: world_superstructure arc_city_reach",
+      "sides": {
+        "power_harmonic_heights": {
+          "leader": "elder_resonance",
+          "civic": "the Warden Council of the Lower Terrace (from play: posts appeals, holds bulletins, Maren and Elder Senna)",
+          "presses": [
+            "greywater_stilts",
+            "echo_river_crossing"
+          ]
+        },
+        "power_radiant_plateau": {
+          "leader": "the_high_luminary",
+          "civic": "the Radiant Council (from play: built a hidden secondary purification system; confiscated its own surveyors' charts)",
+          "presses": [
+            "kestrels_roost",
+            "echo_river_crossing",
+            "millbrook"
+          ]
+        }
+      },
+      "contested": [
+        "power_echo_bridge",
+        "kestrels_roost",
+        "greywater_stilts",
+        "millbrook"
+      ]
+    },
+    {
+      "id": "bloc_the_churn_courts",
+      "name": "The Churn Courts",
+      "what": "three courts of the Fae in the Churn, rivals to each other and courteous to everyone",
+      "source": "canon: the court npcs (communityId churn.hollow_court / churn.unbought_court)",
+      "courts": {
+        "the_kept_court": {
+          "monarch": "aelith_first_shape",
+          "members": [
+            "stonefast_urd",
+            "the_slow_green"
+          ]
+        },
+        "the_hollow_court": {
+          "sovereign": "the_hollow_king",
+          "members": [
+            "the_bright_bargain",
+            "the_keeper_of_small_debts",
+            "the_undecided"
+          ],
+          "note": "the Hollow King is a Satiated Sovereign; per the lore a GM confirms his AGENTS, never him"
+        },
+        "the_unbought_court": {
+          "members": [
+            "ysenkar",
+            "tolvess"
+          ],
+          "note": "dragons"
+        }
+      },
+      "dataNote": "The Kept Court's members carry communityId churn.unbought_court; either the Kept Court sits inside the Unbought Court, or the ids are wrong. Erik's ruling."
+    },
+    {
+      "id": "bloc_the_marches",
+      "name": "The Marches",
+      "what": "an uneasy three: the Redline's honed violence, the Stillhold's walled peace, and the Marchward between them, with the Ender's host camped below its wall",
+      "source": "canon: riven_marches locations; the_accords 'living' (if the Marchers march, the Stillhold may close its Calm Word)",
+      "members": [
+        "the_redline",
+        "the_stillhold",
+        "the_marchward"
+      ],
+      "threat": "power_ender_host"
+    },
+    {
+      "id": "bloc_the_gralloch_crown",
+      "name": "The Gralloch Crown and its bands",
+      "what": "an outlaw confederation held by fear",
+      "source": "SNG-634",
+      "members": [
+        "power_switchback_tollmen",
+        "power_edge_riders"
+      ],
+      "bond": "tribute"
+    },
+    {
+      "id": "bloc_the_free_compact",
+      "name": "The Free Compact",
+      "exists": false,
+      "what": "the places that belong to no city — the Roost, the Stilts, the Echo Bridge, Millbrook, Keelmouth — which together could refuse the Long Reach. Nothing binds them yet. A player can build it.",
+      "source": "proposed",
+      "wouldJoin": [
+        "the_kestrel",
+        "reed_mother_ossa",
+        "castellan_brannoch",
+        "millbrook council",
+        "ines_harrowgate"
+      ]
+    }
+  ],
+  "sovereignties": [
+    {
+      "region": "the_echo_vale",
+      "power": "power_harmonic_heights",
+      "form": "council",
+      "source": "play: the Warden Council"
+    },
+    {
+      "region": "the_echo_vale",
+      "power": "power_radiant_plateau",
+      "form": "council",
+      "source": "play: the Radiant Council; canon: the_high_luminary 'absolute authority'"
+    },
+    {
+      "region": "valley",
+      "power": null,
+      "form": "none",
+      "source": "canon: the unaligned middle (arc_city_reach)",
+      "local": [
+        "Millbrook's common house under Councilor Dresh (play)",
+        "the Kestrel's ledger at the Roost",
+        "Reed-Mother Ossa at the Stilts",
+        "the Echo Bridge castellany"
+      ]
+    },
+    {
+      "region": "the_center",
+      "power": null,
+      "form": "none",
+      "source": "canon: the Crossing leans toward no pole",
+      "local": [
+        "the Quiet House",
+        "the Council of Mavens",
+        "the Undercount beneath the Hundred Markets"
+      ]
+    },
+    {
+      "region": "unspooling",
+      "power": "bloc_the_churn_courts",
+      "form": "court",
+      "source": "canon: the courts",
+      "local": [
+        "the Gralloch Crown",
+        "the Edge Riders",
+        "Cassa Redsail"
+      ]
+    },
+    {
+      "region": "riven_marches",
+      "power": "bloc_the_marches",
+      "form": "contest",
+      "source": "canon: 'duels settle law, standing is won on the training-ground' (the_redline)"
+    },
+    {
+      "region": "the_quickwood",
+      "power": "rootkin",
+      "form": "moot",
+      "source": "canon: the Deepwood Standing Moot (the_moot_that_will_not_end); the Rootbound faction winning"
+    },
+    {
+      "region": "the_ascent",
+      "power": "seraphic",
+      "form": "order",
+      "source": "canon: the Seraphic Orders, citadels that refine wild nanite"
+    },
+    {
+      "region": "the_lattice_cities",
+      "power": "lattice",
+      "form": "specification",
+      "source": "canon: 'an ordered system does not negotiate, it specifies'; the Lattice courts"
+    },
+    {
+      "region": "the_foothills",
+      "power": "god_named",
+      "form": "court",
+      "source": "canon: 'the god-named hold court' at Stair Hollow"
+    },
+    {
+      "region": "the_foothills",
+      "power": "bargainers",
+      "form": "court",
+      "source": "proposed: the Low Halls; 'the god-named who went down instead of up'"
+    },
+    {
+      "region": "the_open_reach",
+      "power": "horizon",
+      "form": "none",
+      "source": "canon: 'no fixed anything'"
+    },
+    {
+      "region": "umbral_depths",
+      "power": "umbral",
+      "form": "council",
+      "source": "proposed from ceriad: the Harborward 'does not decide'"
+    },
+    {
+      "region": "radiant_wastes",
+      "power": "blazeborn",
+      "form": "order",
+      "source": "proposed"
+    },
+    {
+      "region": "the_palelands",
+      "power": "ashwarden",
+      "form": "council",
+      "source": "proposed: the cairn-line houses"
+    },
+    {
+      "region": "somatic_reaches",
+      "power": "somatic",
+      "form": "order",
+      "source": "proposed: the Flesh-Temples"
+    },
+    {
+      "region": "the_cogitarium",
+      "power": "cogitant",
+      "form": "council",
+      "source": "proposed"
+    },
+    {
+      "region": "the_gearlands",
+      "power": "enginewright",
+      "form": "specification",
+      "source": "proposed: 'a city that is also a machine'"
+    },
+    {
+      "region": "the_numinous_reach",
+      "power": "numinous",
+      "form": "none",
+      "source": "proposed: 'permanent arrangements' are distrusted"
+    },
+    {
+      "region": "the_feeling_coast",
+      "power": "threnodist",
+      "form": "moot",
+      "source": "proposed: everything conducted in public halls"
+    },
+    {
+      "region": "the_reasoned_hold",
+      "power": "syllogist",
+      "form": "council",
+      "source": "proposed"
+    },
+    {
+      "region": "the_veiled_reach",
+      "power": "veilwright",
+      "form": "court",
+      "source": "proposed: lavish hospitality that cannot be trusted"
+    },
+    {
+      "region": "the_stark_reach",
+      "power": "verist",
+      "form": "council",
+      "source": "proposed"
+    },
+    {
+      "region": "the_descent",
+      "power": "abyssal",
+      "form": "order",
+      "source": "proposed: the Choir; the Hollow King is under the floor, not on the throne"
+    },
+    {
+      "region": "the_given_land",
+      "power": "mason",
+      "form": "council",
+      "source": "proposed: ledgers and guild-masters"
+    },
+    {
+      "region": "the_pattern_reach",
+      "power": "figurist",
+      "form": "council",
+      "source": "proposed"
+    },
+    {
+      "region": "the_kept_reach",
+      "power": "hourkeeper",
+      "form": "council",
+      "source": "proposed"
+    },
+    {
+      "region": "the_unmade",
+      "power": "unmaker",
+      "form": "order",
+      "source": "proposed"
+    },
+    {
+      "region": "the_making",
+      "power": "wright",
+      "form": "moot",
+      "source": "proposed"
+    },
+    {
+      "region": "foothill_*",
+      "power": null,
+      "form": "none",
+      "source": "proposed: foothill towns are free towns on the roads out of the Crossing; the generator seeds lordships among them (Keelmouth, Firstsight)"
+    }
+  ],
+  "forms": [
+    "council",
+    "court",
+    "order",
+    "moot",
+    "contest",
+    "specification",
+    "none"
+  ],
+  "allegiances": [
+    {
+      "power": "power_switchback_tollmen",
+      "to": "power_gralloch_crown",
+      "bond": "tribute"
+    },
+    {
+      "power": "power_edge_riders",
+      "to": "power_gralloch_crown",
+      "bond": "tribute"
+    },
+    {
+      "power": "power_gralloch_crown",
+      "to": null,
+      "bond": "independent"
+    },
+    {
+      "power": "power_undercount",
+      "to": null,
+      "bond": "independent",
+      "client": "the Patient Buyer — Erik's ruling"
+    },
+    {
+      "power": "power_keelmouth_slip",
+      "to": null,
+      "bond": "recognized",
+      "note": "her grandmother's tariff stone was recorded by the Mavens"
+    },
+    {
+      "power": "power_firstsight_barony",
+      "to": null,
+      "bond": "independent",
+      "note": "petitioning the Mavens for the Slip"
+    },
+    {
+      "power": "power_echo_bridge",
+      "to": null,
+      "bond": "independent",
+      "note": "courted by both sides of the Long Reach"
+    },
+    {
+      "power": "power_ender_host",
+      "to": null,
+      "bond": "independent",
+      "note": "the Marchers disown him"
+    }
+  ]
+}

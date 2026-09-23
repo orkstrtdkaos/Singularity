@@ -1,0 +1,128 @@
+{
+  "id": "SNG-634_census_calls",
+  "note": "Authored NPCs have free-text roles, so each gets a call with its reason. Figures go by rules.eligibility.byRole. Default for anyone not listed: none.",
+  "calls": {
+    "the_kestrel": {
+      "gets": "power:lordship",
+      "temper": "fair",
+      "why": "keeps the Roost free by her own ledger; a pass the Crown wants needs a watch, or it is taken"
+    },
+    "warden_isolde": {
+      "gets": "power:lordship",
+      "temper": "kind",
+      "why": "keeper of the Green Accord at Thornwake; the Accord needs wardens to be more than a promise"
+    },
+    "reed_mother_ossa": {
+      "gets": "power:lordship",
+      "temper": "kind",
+      "why": "moral centre of a self-governing town on stilts; skiffs and rope-walks are a militia waiting to be called"
+    },
+    "warden-coll": {
+      "gets": "power:order",
+      "temper": "fair",
+      "why": "an Edge District Warden with an office at the Crossing and a council seat: a watch, and the Undercount's natural enemy"
+    },
+    "adept_sona": {
+      "gets": "power:order",
+      "temper": "kind",
+      "why": "argues for the Middle Way against both poles, from a school-town of athlete-scholars"
+    },
+    "master_taro": {
+      "gets": "power:order",
+      "temper": "hard",
+      "why": "Flesh-Temple master; the temple already sends fighters where a fight must be stopped"
+    },
+    "dame_iseult_hardline": {
+      "gets": "power:order",
+      "temper": "fair",
+      "why": "knight-champion of Hardline; forty riders swore to her oath-charge",
+      "seat": "hardline"
+    },
+    "orrun_shieldbreaker": {
+      "gets": "power:outlaw_band",
+      "temper": "hard",
+      "why": "raider-captain of the Longshore reach with a ship and a crew that voted him in",
+      "seat": "longshore"
+    },
+    "cassa_redsail": {
+      "gets": "power:outlaw_band",
+      "temper": "hard",
+      "why": "a pirate out of the Unspooling who takes ships nobody insures"
+    },
+    "the_high_luminary": {
+      "gets": "power:lordship",
+      "temper": "hard",
+      "scale": "legion",
+      "why": "absolute authority of the Radiant Plateau; one of the two cities that want the Echo Bridge"
+    },
+    "elder_resonance": {
+      "gets": "power:lordship",
+      "temper": "fair",
+      "scale": "legion",
+      "why": "master of the Harmonic Heights; the other city that wants the Echo Bridge"
+    },
+    "aelith_first_shape": {
+      "gets": "power:lordship",
+      "temper": "hard",
+      "scale": "legion",
+      "why": "Monarch of the Kept Court; a court with a mason, an ent and courtiers is a seat of power"
+    },
+    "ysenkar": {
+      "gets": "power:lordship",
+      "temper": "hard",
+      "scale": "legion",
+      "why": "a true dragon of the Unbought Court"
+    },
+    "rootbound_vaskar": {
+      "gets": "power:order",
+      "temper": "hard",
+      "why": "Ent hardliner who would seal the wood; the Rootbound are a following, not a lone voice"
+    },
+    "the_lightless_seraph": {
+      "gets": "power:order",
+      "temper": "cruel",
+      "scale": "legion",
+      "why": "a fallen Seraph reaching across the world with a nanite intelligence; a host, not a hermit"
+    },
+    "mediator_corran": {
+      "gets": "holdings",
+      "why": "holds the Marchward neutral by talk; an army would end what he is for"
+    },
+    "broker_sain": {
+      "gets": "holdings",
+      "why": "sells neutrality from the Quiet House; a house, not a host"
+    },
+    "sister_vreni": {
+      "gets": "holdings",
+      "why": "runs the Kindly Rest, its terraces and drying lofts"
+    },
+    "ceriad": {
+      "gets": "holdings",
+      "why": "harbor-keeper of the Underlight"
+    },
+    "archive_guardian": {
+      "gets": "holdings",
+      "why": "self-appointed keeper of the Lost Archive"
+    },
+    "mara-wells": {
+      "gets": "holdings",
+      "why": "Millbrook's supply store"
+    },
+    "deni-cors": {
+      "gets": "holdings",
+      "why": "builder of the south-circuit waystation he runs to"
+    },
+    "lenten": {
+      "gets": "holdings",
+      "why": "runs the Cogitarium's supply line from Waymarker"
+    },
+    "brann_tollhand": {
+      "gets": "none",
+      "why": "a small crook at the Roost's lower gate: the Undercount's informant there, not a power of his own"
+    },
+    "greta_waystation": {
+      "gets": "none",
+      "why": "keeps the halfway waystation alone; the Tollmen's chain sits above her, and she opposes them"
+    }
+  }
+}

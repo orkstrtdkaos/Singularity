@@ -38,17 +38,58 @@ const check = (name, ok, detail = "") => {
 
 // ---------- the tree, as it stands BEFORE the change set is applied ----------
 
-/** Every JSON file under content/, relative to the pack root, with its raw text. */
+/** ⛔ EVERY JSON FILE IN EVERY PACK, relative to `content/packs/` so the pack is part of the path
+ *  (`core/abilities/x.json`, `valley/npcs/y.json`).
+ *  ⚠️ IT WALKED ONLY `core`, AND THAT WAS NOT A SCOPE LIMIT — IT WAS UNDER-COVERAGE IN THE TOOL'S PRIMARY
+ *  JOB. 319 of the 445 content files live in `valley`: 72% of the corpus, never opened. `referrersOf`
+ *  exists to answer "does anything still name this id", and it was answering it over a quarter of the
+ *  world — so a change set removing a craft the valley pack referred to would have passed clean and
+ *  applied to a dangling reference. Found via Aevi's SPEC_SNG-634 §10a, which reported the symptom (her
+ *  valley paths reading as unregistered) rather than this. */
 function contentFiles() {
   const out = [];
+  const packRoot = join(root, "content", "packs");
   const walk = (dir) => {
     for (const f of readdirSync(dir)) {
       const p = join(dir, f);
       if (statSync(p).isDirectory()) walk(p);
-      else if (f.endsWith(".json")) out.push({ rel: relative(CORE, p).split(sep).join("/"), text: readFileSync(p, "utf8") });
+      else if (f.endsWith(".json")) out.push({ rel: relative(packRoot, p).split(sep).join("/"), text: readFileSync(p, "utf8") });
     }
   };
-  walk(CORE);
+  if (existsSync(packRoot)) walk(packRoot);
+  return out;
+}
+
+/** ⛔ WHAT KIND OF THING A CONTENT PATH HOLDS — Aevi's ask, and the tool's own blind spot: `modified` was
+ *  assumed to be abilities, so `re_toll_bandits` (an encounter) read as a craft that does not exist.
+ *  ⚠️ Derived from the PATH rather than authored twice, so a new directory needs no second declaration. */
+function kindOfPath(rel) {
+  if (/(^|\/)abilities\//.test(rel)) return "craft";
+  if (/(^|\/)encounters\//.test(rel) || /random_encounters\.json$/.test(rel)) return "encounter";
+  if (/(^|\/)npcs\//.test(rel)) return "npc";
+  if (/(^|\/)powers\.json$/.test(rel)) return "power";
+  if (/(^|\/)locations\//.test(rel)) return "location";
+  if (/(^|\/)items?\//.test(rel) || /items\.json$/.test(rel)) return "item";
+  return "other";
+}
+
+/** ⛔ EVERY ID THE CORPUS DECLARES, WITH ITS KIND AND ITS RECORD. One index, built once, so `modified`
+ *  can be checked against the thing it actually names instead of against the ability catalogue.
+ *  ⚠️ Both shapes: a file that IS a record (`{ id, … }`) and a file that holds a collection of them. */
+function idIndex(files) {
+  const out = new Map();
+  const put = (id, rel, rec) => { if (typeof id === "string" && id && !out.has(id)) out.set(id, { rel, kind: kindOfPath(rel), rec }); };
+  for (const { rel, text } of files) {
+    let j; try { j = JSON.parse(text); } catch { continue; }
+    if (Array.isArray(j)) { for (const r of j) put(r?.id, rel, r); continue; }
+    if (j && typeof j === "object") {
+      put(j.id, rel, j);
+      for (const v of Object.values(j)) {
+        if (Array.isArray(v)) for (const r of v) { if (r && typeof r === "object") put(r.id, rel, r); }
+        else if (v && typeof v === "object" && typeof v.id === "string") put(v.id, rel, v);
+      }
+    }
+  }
   return out;
 }
 
@@ -155,18 +196,28 @@ export function checkChangeSet(cs, label = cs.id || "(unnamed)") {
   if (modified.length) {
     const catalogue = new Map();
     for (const { rel, text } of files) {
-      if (!rel.startsWith("abilities/")) continue;
+      if (kindOfPath(rel) !== "craft") continue;   // CCODE-475: `rel` now carries its pack
       let pk; try { pk = JSON.parse(text); } catch { continue; }
       for (const ab of (pk.abilities || [])) catalogue.set(ab.id, ab);
     }
-    const unknown = [...new Set(modified.map(m => m?.id).filter(Boolean))].filter(id => !catalogue.has(id));
-    check(`${label}: every modified id names a craft that exists (${modified.length} edits)`,
-      unknown.length === 0, unknown.slice(0, 8).join(", "));
+    // ⛔ CCODE-475 — A MODIFICATION IS NOT ALWAYS A CRAFT. Aevi's ask: `modified[].kind` — `encounter`,
+    // `npc`, `power`, craft by default. ⛑ And the kind is INFERRED when it is not declared, because the
+    // point of the check is "is the thing you say you are editing there at all" and the corpus can answer
+    // that without being told where to look. Her change set then files unchanged, which is what she asked
+    // for; declaring `kind` narrows the search and catches an id that exists as the WRONG sort of thing.
+    const index = idIndex(files);
+    const wrongKind = modified.filter(m => m?.id && m?.kind && index.has(m.id) && index.get(m.id).kind !== m.kind);
+    const unknown = [...new Set(modified.map(m => m?.id).filter(Boolean))].filter(id => !catalogue.has(id) && !index.has(id));
+    check(`${label}: every modified id names something that exists (${modified.length} edit(s), kind declared or inferred)`,
+      unknown.length === 0 && wrongKind.length === 0,
+      [...unknown.slice(0, 8), ...wrongKind.map(m => `${m.id} declared ${m.kind}, corpus says ${index.get(m.id).kind}`)].join(", "));
 
     // the field path, for the shapes a change set actually uses
     const badField = modified.filter(m => {
       const ab = catalogue.get(m?.id);
       if (!ab || !m?.field) return false;                 // unknown id is reported above, not twice
+      // ⚠️ CCODE-475: `tree[]`/`rank` is an ABILITY shape. A non-craft edit is field-checked against its
+      // own record below, never against a rank it does not have.
       if (/^tree\[\]\./.test(m.field)) {
         const key = m.field.replace(/^tree\[\]\./, "");
         const rank = (ab.tree || []).find(r => r.rank === m.rank);
@@ -176,6 +227,18 @@ export function checkChangeSet(cs, label = cs.id || "(unnamed)") {
     });
     check(`${label}: every modified field exists on the craft at the rank named`,
       badField.length === 0, badField.slice(0, 6).map(m => `${m.id} r${m.rank} ${m.field}`).join(" · "));
+
+    // ⛑ CCODE-475 — and a NON-craft edit is checked against its own record. `add:` in the change text is a
+    // field that is not there YET and must not be required to be; anything else must already exist.
+    const badOther = modified.filter(m => {
+      if (!m?.id || !m?.field || catalogue.has(m.id)) return false;
+      const hit = index.get(m.id);
+      if (!hit || !hit.rec || typeof hit.rec !== "object") return false;
+      if (/^\s*add\b/i.test(String(m.change || ""))) return false;
+      return !(m.field.split(".")[0] in hit.rec);
+    });
+    check(`${label}: every modified field on a non-craft record exists, unless the edit says \`add:\``,
+      badOther.length === 0, badOther.slice(0, 6).map(m => `${m.id} (${index.get(m.id)?.kind}) ${m.field}`).join(" · "));
   }
 
   // 3 · ⛔ THE NAMESPACE INTERSECTION — SYSTEM_SPEC §43.2.
@@ -204,23 +267,58 @@ export function checkChangeSet(cs, label = cs.id || "(unnamed)") {
   // a change set whose keystone is invisible applies to nothing. The tool that exists to catch a missed
   // referrer had no business missing an unloadable one.
   {
-    const manifestText = readFileSync(join(CORE, "manifest.json"), "utf8");
-    const named = [...new Set([...declaredList,
-                               ...(cs.added || []).map(a => a?._file).filter(Boolean),
-                               cs._designDecisions?.template?.file].filter(Boolean))]
-      .map(f => f.replace(/^content\/packs\/core\//, ""))
-      .filter(f => f.endsWith(".json"));
-    // ⚠️ A RETIRED FILE IS NOT AN UNREGISTERED ONE. A change set that removes a craft deregisters its
+    // \u26d4 CCODE-475 \u2014 EVERY PACK'S MANIFEST, NOT CORE'S. This read `core/manifest.json` alone and stripped
+    // only the `content/packs/core/` prefix, so every valley path \u2014 319 of the 445 content files \u2014 read as
+    // unregistered and a correct change set touching the valley could not be filed at all. Aevi's
+    // SPEC_SNG-634 \u00a710a, and she did the right thing: she left it outside `changesets/` rather than edit the
+    // gate to pass, on the SNG-505 \u00a74.4 rule that a gate a correct change turns red trains you to ignore it.
+    const manifests = new Map();
+    for (const pack of (existsSync(join(root, "content", "packs")) ? readdirSync(join(root, "content", "packs")) : [])) {
+      try { manifests.set(pack, readFileSync(join(root, "content", "packs", pack, "manifest.json"), "utf8")); } catch { /* a pack may have none */ }
+    }
+    const asPackPath = (f) => {
+      const s = String(f).replace(/^content\/packs\//, "");
+      const i = s.indexOf("/");
+      return i < 0 ? { pack: "core", rest: s } : { pack: s.slice(0, i), rest: s.slice(i + 1) };
+    };
+    const registered = (f) => {
+      const { pack, rest } = asPackPath(f);
+      const m = manifests.get(pack);
+      if (m && m.includes('"' + rest + '"')) return true;
+      // a bare path with no pack segment is core's, the shape every earlier change set used
+      return (manifests.get("core") || "").includes('"' + String(f).replace(/^content\/packs\/core\//, "") + '"');
+    };
+    const created = new Set((cs.added || []).map(a => a?._file).filter(Boolean));
+    const named = [...new Set([...declaredList, ...created, cs._designDecisions?.template?.file].filter(Boolean))]
+      .filter(f => String(f).endsWith(".json"));
+    // \u26a0\ufe0f A RETIRED FILE IS NOT AN UNREGISTERED ONE. A change set that removes a craft deregisters its
     // file on purpose; requiring it to stay in the manifest would forbid the very thing being applied.
     // The evidence that a removal was deliberate is a record of it in po/staged_content/.
     const retired = existsSync(join(root, "po/staged_content"))
       ? readdirSync(join(root, "po/staged_content")).filter(f => f.startsWith("retired_"))
       : [];
-    const isRetired = (f) => retired.some(r => r.endsWith(f.split("/").pop()));
-    const unloadable = named.filter(f => !manifestText.includes('"' + f + '"') && !isRetired(f));
-    check(`${label}: every content file this change set names is manifest-registered (${named.length} named)`,
+    const isRetired = (f) => retired.some(r => r.endsWith(String(f).split("/").pop()));
+    // \u26d1 AND A FILE THE CHANGE SET CREATES CANNOT ALREADY BE REGISTERED \u2014 that is what `added` MEANS. But
+    // SNG-506's lesson stands and is the reason this check exists: it shipped `rules/first_gift_template.json`,
+    // the keystone the whole restore inherits from, in NO manifest, and this tool passed it. \u26a0\ufe0f So a
+    // to-be-created file is accepted only when the change set SAYS HOW IT GETS LOADED \u2014 `_manifest` must name
+    // it, or its directory. A new file with no manifest story still fails, which is the case that bit us.
+    const manifestPlan = String(cs._manifest || "");
+    const plannedFor = (f) => {
+      if (!manifestPlan) return false;
+      const { rest } = asPackPath(f);
+      const dir = rest.includes("/") ? rest.slice(0, rest.lastIndexOf("/")) : "";
+      return manifestPlan.includes(rest) || manifestPlan.includes(String(f))
+        || (!!dir && manifestPlan.includes(dir));
+    };
+    // ⚠️ AND A MANIFEST IS NOT A CONTENT FILE — it is the register, so it can never appear in itself. A
+    // change set that adds files names its pack's manifest as a referrer BECAUSE it edits it, and requiring
+    // that to be registered is the tool asking a list to contain its own name.
+    const isManifest = (f) => /(^|\/)manifest\.json$/.test(String(f));
+    const unloadable = named.filter(f => !isManifest(f) && !registered(f) && !isRetired(f) && !(created.has(f) && plannedFor(f)));
+    check(`${label}: every content file this change set names is manifest-registered, or is one it creates with a declared \`_manifest\` plan (${named.length} named, ${created.size} created)`,
       unloadable.length === 0,
-      `${unloadable.join(", ")} — on disk is not loaded (SYSTEM_SPEC §42)`);
+      `${unloadable.join(", ")} \u2014 on disk is not loaded (SYSTEM_SPEC \u00a742); a file in \`added[]._file\` needs \`_manifest\` to say where it registers`);
   }
 
   // 5 · expectedGates must name gates that actually exist, or the prediction cannot be scored.

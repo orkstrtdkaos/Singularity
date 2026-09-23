@@ -144,7 +144,7 @@ worthless.
 | `tests/interpose_wiring` | ✅ GATE | 19 | CCODE-311 |
 | `tests/growth_sim` | ✅ GATE | 15 | behave sensibly when // run for a whole playthrough rather than one beat |
 | `tests/contest_sim` | ✅ GATE | 13 | THE CONTEST AUDITOR: distributional truth about the round engine |
-| `tests/changeset_check` | ✅ GATE | 11 | CCODE-204 · SNG-505 Layer 2: a change set is CHECKED, not trusted |
+| `tests/changeset_check` | ✅ GATE | 12 | CCODE-204 · SNG-505 Layer 2: a change set is CHECKED, not trusted |
 | `tests/save_fixtures` | ✅ GATE | 11 | CCODE-288 |
 | `tests/taunt_wiring` | ✅ GATE | 11 | CCODE-306 |
 | `tests/roll_sensitivity` | ✅ GATE | 9 | SNG-258 §SENSITIVITY |

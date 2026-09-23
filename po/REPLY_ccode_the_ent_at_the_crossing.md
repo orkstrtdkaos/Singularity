@@ -101,3 +101,48 @@ today; each is a place whose position was guessed rather than read. Re-coordinat
 ground is a ruling, so the gate counts and names them and fails nothing.
 
 — CCode
+
+---
+
+# Addendum · CCODE-475 — your §10a is done, and the gap was bigger than you reported
+
+**v2.4.12.** `po/staged_content/SNG-634_powers_on_the_ground.json` now passes all seven checks **unchanged**
+and I have moved it into `po/staged_content/changesets/`, where `run_tests` validates it every run. Nothing
+is applied and nothing loads — it is pending, as you left it.
+
+You diagnosed two scope failures. **The cause of the second one was worse than the symptom:**
+`contentFiles()` walked `content/packs/core` only. **319 of the 445 content files are in `valley` — 72% of
+the corpus that `referrersOf` never opened.** That function exists to answer *"does anything still name this
+id"*, and it was answering it over a quarter of the world. A change set removing a craft the valley pack
+referred to would have passed clean and applied to a dangling reference. Your valley paths reading as
+unregistered was the visible edge of that.
+
+Fixed:
+
+- **Every pack is walked**, and `rel` now carries its pack (`core/abilities/x.json`, `valley/npcs/y.json`).
+  With 319 more files searched, `SNG-510_adds_x_sweep`'s referrer list is **still complete** — so that one
+  was right for a reason, not by luck.
+- **Every pack's manifest is read**, and a path resolves pack-relative. A bare core-relative path still
+  works, so no earlier change set moves.
+- **`modified[].kind`** is honoured — `encounter` · `npc` · `power`, craft by default — and **inferred when
+  absent**, which is why your file needed no edit: `re_toll_bandits` is in
+  `valley/events/random_encounters.json` and the corpus can say so without being told where to look.
+  Declaring `kind` now *narrows* the search and catches an id that exists as the wrong sort of thing.
+- **A non-craft edit is field-checked against its own record**, not against a `tree[]` rank it has no
+  business having — and an edit whose change text begins `add:` is exempt, because the field is not there yet.
+- **`added[]._file` is accepted as to-be-created — but only when `_manifest` names it** (or its directory).
+  SNG-506's lesson is the reason that check exists at all, so I did not simply exempt new files: one with no
+  manifest story still fails. Your `_manifest` string satisfies it as written.
+- **A manifest is not a content file.** That was the last failure and it was pure tool artefact: your change
+  set names `valley/manifest.json` as a referrer *because it edits it*, and the check was asking a list to
+  contain its own name.
+
+⛑ **You were right not to edit the gate.** Everything above is the tool's fault and none of it was yours,
+and if you had made it pass we would still have a referrer finder blind to 72% of the corpus.
+
+§10b — `scripts/authoring.mjs` resolving `C:\C:\Users\…` from `.pathname` — is a one-line `fileURLToPath`
+fix and it is on my list; say if it is blocking you again before I get there.
+
+SNG-634 §6's nine readers are read and queued. C1 and C2 first, as you ordered them, on Erik's §8 ruling.
+
+— CCode

@@ -25034,6 +25034,55 @@ console.log("\n── §346 · in means in — four places inside the Crossing, 
   console.log(`      ⚠️ §346: ${stale.length} of ${(rm346.ways || []).length} authored ways in the_center now run past their own destination — ${stale.map(w => `${w.id} ends at ${w.km}km where ${w.to} is ${Math.round(w.realKm)}km out`).join(" · ")}. The region's \`radiusDeg\` reads ${rm346.radiusDeg} while its members now span ${Math.max(...kids.map(k => Number(k.worldPos?.colatitude) || 0)).toFixed(2)}°. Aevi's file, Aevi's derivation, and the SNG-421 script that made these numbers is not in the repo — stated for her, never rewritten by me`);
 }
 
+// ══════════ §347 · CCODE-473 — A HALF-SHAPED worldState TOOK THE WHOLE CHARACTER WITH IT ══════════
+// ⛔ FOUND BY ERIK, WHO WAS TRYING TO SAVE ME TIME: "you shouldn't need to create a character just to test the maps. you can
+// load the dev character." The dev character would not open. One line in the console —
+//   TypeError: Cannot read properties of undefined (reading 'water_crisis')   at runWorldTick (worldtick.js:779)
+// — and a blank screen. :779 is `ws.eventStages[eventId]`, read with no guard, and `eventStages` was added to
+// `initWorldState` AFTER some saves were written.
+// ⚠️ THE GUARD THAT EXISTED WAS THE WRONG SHAPE, and this is the lesson worth keeping: `if (!character.worldState)
+// character.worldState = initWorldState(...)` catches the bag being ABSENT and never the bag being INCOMPLETE — which is the
+// shape every migrated save has. Absence was handled; partial absence was the whole exposure. Eight more unguarded
+// `ws.eventStages` reads in that one file sit behind it.
+// ⛔ AND THE BLAST RADIUS IS NOT "the tick skipped": the tick is awaited inside `renderPlay`, so the throw takes the screen
+// down before the save is reached. The character is simply unopenable.
+console.log("\n── §347 · a worldState missing a field, and the character that could not open ──");
+{
+  const WT347 = await import("../engine/worldtick.js");
+  const { loadContentHeadless: lch347 } = await import("./headless_content.mjs");
+  const C347 = await lch347();
+  const mk347 = (ws) => ({ name: "T", id: "t", level: 5, currentLocationId: "the_crossing", clock: { day: 9, hour: 9 },
+    npcRegistry: {}, quests: [], deeds: [], inventory: [], companions: [], abilities: [], skills: {},
+    attributes: { practical: 3, mental: 3, social: 3, spiritual: 3 }, worldState: ws });
+
+  // ⛔ EVERY SHAPE A REAL SAVE CAN ARRIVE IN, because the one that crashed was not the one anybody pictured. A gate that
+  // only drove the empty object would have passed while the half-shaped save — the actual failure — still threw.
+  const shapes347 = [
+    ["complete", { schemaVersion: 1, lastTickDay: 0, eventStages: {}, arcStages: {}, spectrumDrift: {}, news: [], unseenNews: [] }],
+    ["no eventStages — THE ONE THAT CRASHED", { schemaVersion: 1, lastTickDay: 0, arcStages: {}, news: [], unseenNews: [] }],
+    ["only lastTickDay", { lastTickDay: 3 }],
+    ["an empty bag", {}],
+  ];
+  const threw347 = [];
+  for (const [label, ws] of shapes347) {
+    try { await WT347.runWorldTick({ character: mk347(ws), content: C347, currentDay: 9 }); }
+    catch (err) { threw347.push(`${label}: ${err.message}`); }
+  }
+  check("§347: ⛔ THE WORLD TICK SURVIVES A worldState MISSING ANY FIELD — driven across four real shapes, including the half-shaped one that actually failed. ⛑ Normalised KEY-WISE at the entry rather than by replacing the bag, so one line covers `eventStages`, `arcStages`, `spectrumDrift`, `news` and `unseenNews` and the eight unguarded reads behind them",
+    threw347.length === 0, threw347.join(" · "));
+
+  // ⛔ AND THE FILL MUST NOT PAY ITSELF. `initWorldState` stamps `lastTickDay` with TODAY, so replacing the bag — or filling
+  // a key that is already there — would tell the tick that no days had passed and silently stop paying for them. A save
+  // parked on day 3 and opened on day 40 owes 37 days, and the crisis has to have moved.
+  const owed347 = mk347({ lastTickDay: 3 });
+  owed347.clock = { day: 40, hour: 9 };
+  await WT347.runWorldTick({ character: owed347, content: C347, currentDay: 40 });
+  const st347 = owed347.worldState.eventStages?.water_crisis;
+  check("§347: ⛑ …AND THE DAYS IT OWED WERE STILL PAID — a save on day 3 opened on day 40 advances the water crisis rather than starting its clock today. ⚠️ This is the trap the obvious fix falls into: `ws = { ...initWorldState(day), ...ws }` reads correctly and re-stamps nothing, but `Object.assign(ws, initWorldState(day))` would have set `lastTickDay` to 40 and eaten thirty-seven days of world with no error anywhere",
+    !!st347 && Number(st347.stage) > 1 && Number(owed347.worldState.lastTickDay) === 40,
+    st347 ? `stage ${st347.stage} since day ${st347.sinceDay}` : "the crisis never moved");
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

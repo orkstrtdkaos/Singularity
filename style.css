@@ -380,6 +380,26 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 .net-hop-cost { font-size: 11px; color: var(--ink-dim); white-space: nowrap; }
 .net-tag { font-size: 9px; text-transform: uppercase; letter-spacing: 1px; color: var(--ink-dim); border: 1px solid var(--border); border-radius: 6px; padding: 0 4px; margin-left: 4px; }
 .net-tag-default { color: #e0b25a; border-color: #7a5f2a; }
+
+/* CCODE-472 — the field controls and the local source list. A well reads blue and a sink reads red
+   everywhere they appear (the canvas markers, the local list), so the colour means one thing. */
+.field-ctl .opt.field-kind { font-size: 11px; padding: 3px 7px; }
+.field-ctl .opt.field-mark { font-size: 11px; padding: 3px 7px; }
+.field-split { display: flex; gap: 12px; align-items: flex-start; flex-wrap: wrap; }
+.field-split > .graph-wrap { flex: 1 1 460px; min-width: 300px; }
+.field-sources { flex: 0 1 290px; min-width: 240px; display: flex; flex-direction: column; gap: 10px; }
+.fsrc-group { border: 1px solid var(--border); border-radius: 10px; background: var(--panel2); padding: 9px 11px; }
+.fsrc-head { font-family: var(--font); font-size: 13px; letter-spacing: 1px; color: var(--ink); margin-bottom: 4px; }
+.fsrc-row { display: flex; align-items: center; gap: 7px; padding: 3px 0; font-size: 12px; }
+.fsrc-name { flex: 1 1 auto; color: var(--ink-dim); overflow-wrap: anywhere; }
+.fsrc-row.fsrc-in .fsrc-name { color: var(--ink); }
+.fsrc-bar { flex: 0 0 52px; height: 5px; border-radius: 3px; background: rgba(255,255,255,0.08); overflow: hidden; }
+.fsrc-bar i { display: block; height: 100%; background: #6fb0d8; }
+.fsrc-row.fsrc-in .fsrc-bar i { background: #9fd4ff; }
+.fsrc-val { flex: 0 0 auto; font-variant-numeric: tabular-nums; font-size: 11px; color: var(--ink-dim); white-space: nowrap; }
+.fsrc-row.fsrc-well .fsrc-name { color: #9fd4ff; }
+.fsrc-row.fsrc-sink .fsrc-name { color: #ff8a8a; }
+@media (max-width: 720px) { .field-sources { flex: 1 1 100%; } }
 /* SNG-236 UX: the ⚙ Moves gear — grouped encounter moves (ward/sense/strike by family + the ways out) above the input */
 .moves-panel { border: 1px solid var(--danger); border-radius: 10px; background: linear-gradient(180deg, rgba(192,91,77,0.08), var(--panel)); padding: 10px 12px; margin: 8px 0; }
 .moves-hint { font-size: 11px; color: var(--ink-dim); margin-bottom: 8px; }

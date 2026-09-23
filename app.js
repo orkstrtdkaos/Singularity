@@ -71,7 +71,7 @@ import { carriageOf, voyageOf, isMoored, canSail, sailHolding, voyageLine, featu
 import { roomOf, roomRefusal, promotionOffer, promoteHolding, trainingAt, mountsAt, healingAt, quarteringOf, vaultOf, chargeOf, chargeWord, depositToVault, withdrawFromVault, holdingFieldSources } from "./engine/holdings.js";   // ⛔ CCODE-429: a hold has room · CCODE-430: a yard trains   // B6b: the holding that moves
 import { featureCost, allFeatures, refreshImprovement, canBeAskedToWork, holdingFactsLine, answerFeatureOffer, holdingLedger, addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, yieldsFor, upkeepFor, appointKeeper, reclaimHolding, improveHolding, setCrew, setGarrison, holdingGround, addFeature, removeFeature, renameHolding, featureKinds, residentsOf, holdingMeaningAura, holdingFieldDelta } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
 import { buildDevReport, unknownOpsIn } from "./engine/devreport.js";   // SNG-559: the Play/Dev instrument
-import { makeField, fieldDataFrom } from "./engine/field.js";   // CCODE-457: why the ground here reads the way it does
+import { makeField, fieldDataFrom, FIELD_KINDS, KIND_LABEL, MEMBERSHIP } from "./engine/field.js";   // CCODE-457: why the ground here reads the way it does · CCODE-472: and the layer the map draws
 import { FIRE_TESTS, diffKeys } from "./engine/firetests.js";   // SNG-560: the parts that have never been used
 import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, roleBadges, teacherOfferReady, applyPartyOps, activeCompany, formerCompany } from "./engine/company.js";
 import { unitsOf, unitLine, poolRows, atSideRows, wherePerson, canBringForward, rosterLine, levelOfPerson } from "./engine/fellowship.js";
@@ -178,7 +178,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.4.10";
+const APP_VERSION = "2.4.11";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2843,6 +2843,127 @@ function normalisedCatalogId(id, catalog = null) {
  *  that makes a session slower is telemetry nobody leaves on. A coarse grid, because a reading is a number and
  *  not a picture. */
 let _field = null;
+
+/** ⛔ CCODE-472 — ONE FIELD, EVERY SURFACE. This memo used to live INSIDE `fieldReadingHere`, so the probe
+ *  could build it and the map could not reach it. Three surfaces read it now — the dev report's probe, the
+ *  region tier's wash and the location tier's list — and a field built twice is a field that disagrees with
+ *  itself, which is the whole failure `scripts/map_convergence_check.mjs` exists to end.
+ *  ⚠️ Returns null until the map has been opened once: the voters live in the terrain asset. Say nothing
+ *  rather than guess — the same rule as the probe. */
+function worldField() {
+  if (_field) return _field;
+  const fields = _terrain?.fields;
+  if (!fields?.voters?.length || !CONTENT?.locations) return null;
+  try {
+    const data = fieldDataFrom(fields, WORLD_FIELD_MODEL, { content: CONTENT, substrate: CONTENT?.rules?.the_substrate || null });
+    _field = makeField(data);
+  } catch (err) { console.warn("[field] could not build the field:", err); _field = null; }
+  return _field;
+}
+
+/** ⛔ WHAT THE MAP IS SHOWING OF THE FIELD — Erik: "i want to be able to see the power sources and turn the
+ *  wells and sinks on and off, as well as teh gates, just like in the prototype."
+ *  ⚠️ THE PROTOTYPE'S OWN SHAPE, because it is the thing he is pointing at: `exesa_field.html` keeps six
+ *  source KINDS each with an `on` flag, filters them in `build()` and re-renders the texture — so a kind
+ *  turned off genuinely changes the picture rather than hiding a pin. The marker toggles are separate and
+ *  only hide markers, which is what its `wells` and `gates` buttons do. Both behaviours are kept, and which
+ *  is which is the difference between "what is here" and "what am I looking at".
+ *  ⛔ `body` IS OFF BY DEFAULT, matching the prototype's own `on:false` — it is the register every living
+ *  thing carries, so it reads as a wash over everything and tells you nothing about the ground. */
+let fieldCtl = {
+  on: true,
+  kinds: new Set(FIELD_KINDS.filter(k => k !== "body")),
+  mode: "mix",
+  wells: true, sinks: true, gates: true,
+};
+
+/** ⛔ MEASURED IN THE BROWSER BEFORE SHIPPING, and it is the reason these two caches exist. One region's
+ *  wash is 128×128 texels × 5 kinds = 82,000 `strengthAt` calls, and each is the 118-voter region pass —
+ *  **740ms**, which is what a toggle would have cost on every click. The coverage strip is another 14,000
+ *  calls on top, rebuilt by `fieldPanel` every render.
+ *  ⛑ THE FIELD IS IMMUTABLE FOR A SESSION (`withArcStages` returns a NEW field rather than mutating), so
+ *  both are safely memoisable: a kind-set costs its 740ms once and every later paint of it is free.
+ *  ⚠️ Keyed on the kinds AND the mode, because those are exactly what changes the picture — a marker
+ *  toggle re-renders the panel and must not pay for the field again. */
+let _fieldTex = new Map();
+let _fieldCov = new Map();
+
+/** The window for a region's extent, TOP-DOWN so its rows match screen rows. `makeRegionBase.toScreen`
+ *  flips latitude (north up); `sampleWindow` walks lat0 → lat1. Handing it la1 → la0 makes the two agree
+ *  with no flipping code, which is one fewer place to get a sign wrong. */
+function fieldWindowFor(ext, w = 128, h = 128) {
+  const f = worldField();
+  return f ? f.sampleWindow({ lat0: ext.la1, lat1: ext.la0, lon0: ext.lo0, lon1: ext.lo1, w, h }) : null;
+}
+
+/** ⛔ EVERY AUTHORED WELL AND SINK INSIDE A WINDOW. Measured: the 44 authored sources are drawn on NO map —
+ *  not the globe, not the region tier — so "see the power sources" was unmet in the plainest sense.
+ *  ⚠️ Well or sink comes from the SIGN of the draw (`loadSources`), never from a second authored field.
+ *  ⛔ AND THERE ARE TWO LONGITUDE CONVENTIONS IN THIS CODEBASE, which only LOOKING at the canvas revealed.
+ *  `loadSources` normalises to [−180, 180] (the Sunken Choir's authored 196.25° becomes −163.75), while
+ *  `regionExtent` and `makeRegionBase.toScreen` work in an UNWRAPPED frame — the Echo Vale runs lo0 1.2 →
+ *  lo1 221.5. The membership test below is wrap-aware and correctly said "inside"; `toScreen` is not, and
+ *  put the Choir at x = −599 on an 800px canvas. A source silently drawn off the left edge, with the filter
+ *  insisting it was in view: no gate could have caught that, and the suite was green.
+ *  ⛑ So each row carries `lonInFrame` — its longitude lifted into the extent's own frame — and the painter
+ *  uses THAT for `toScreen`. Returned rather than fixed at the draw site, because the next reader of this
+ *  list (the globe tier) will need the same lift and must not have to rediscover why. */
+function fieldSourcesIn(ext) {
+  const f = worldField();
+  if (!f) return [];
+  const span = ((ext.lo1 - ext.lo0) % 360 + 360) % 360;
+  const out = [];
+  for (const s of (f.sources || [])) {
+    if (!(s.lat >= ext.la0 && s.lat <= ext.la1)) continue;
+    const d = ((s.lon - ext.lo0) % 360 + 360) % 360;   // degrees east of the frame's left edge
+    if (d > span) continue;
+    out.push({ ...s, lonInFrame: ext.lo0 + d });
+  }
+  return out;
+}
+
+/** The control strip. ⚠️ THE COVERAGE FIGURE IS THE WINDOW'S, NOT THE WORLD'S — the prototype prints a
+ *  global percentage, and at the region tier a global number would answer a question nobody asked. A kind
+ *  that holds 3% of the world and 80% of the Echo Vale is the whole point of looking at one region. */
+function fieldPanel(ext) {
+  const f = worldField();
+  if (!f) return `<div class="hint" style="margin-bottom:8px">The power field loads with the map — open the world tier once and it will draw here.</div>`;
+  const win = ext ? fieldWindowFor(ext, 72, 72) : null;
+  const covKey = ext ? `${ext.la0},${ext.lo0},${ext.la1},${ext.lo1}` : "world";
+  const pct = (k) => {
+    const key = covKey + "|" + k;
+    if (!_fieldCov.has(key)) _fieldCov.set(key, Math.round(100 * f.coverage(k, win ? { window: win } : {})));
+    return _fieldCov.get(key);
+  };
+  const kindBtn = (k) => `<button class="opt field-kind${fieldCtl.kinds.has(k) ? " selected" : ""}" data-fieldkind="${esc(k)}"
+      title="${esc(KIND_LABEL[k] || k)} — ${pct(k)}% of ${ext ? "this region" : "the world"} reads above the membership line">${fieldCtl.kinds.has(k) ? "✓ " : ""}${esc(KIND_LABEL[k] || k)} <span class="hint">${pct(k)}%</span></button>`;
+  const mark = (key, label, title) => `<button class="opt field-mark${fieldCtl[key] ? " selected" : ""}" data-fieldmark="${key}" title="${esc(title)}">${fieldCtl[key] ? "✓ " : ""}${label}</button>`;
+  return `<div class="field-ctl" style="margin-bottom:8px;display:flex;gap:6px;flex-wrap:wrap;align-items:center">
+    ${mark("on", "◈ Field", "The evaluated power field, washed over the ground. Turning a SOURCE KIND off re-renders it; these marker buttons only hide markers.")}
+    ${[...FIELD_KINDS].map(kindBtn).join("")}
+    <span class="hint" style="margin:0 4px">│</span>
+    ${mark("wells", "◆ wells", "The authored crystal wells — places the lattice pools")}
+    ${mark("sinks", "◇ sinks", "The authored veil nexuses — places the lattice drains")}
+    ${mark("gates", "◈ gates", "The waygates")}
+    <span class="hint" style="margin-left:auto">${ext ? "percentages are THIS REGION's share above the membership line" : "share of the world above the membership line"}</span>
+  </div>`;
+}
+
+/** ⛑ ONE WIRING FOR ALL THREE TIERS, because three copies of a toggle is three chances for one of them to
+ *  stop re-rendering. `repaint` is the tier's own redraw. */
+function wireFieldPanel(repaint) {
+  for (const b of app.querySelectorAll("[data-fieldkind]")) b.onclick = () => {
+    const k = b.dataset.fieldkind;
+    if (fieldCtl.kinds.has(k)) fieldCtl.kinds.delete(k); else fieldCtl.kinds.add(k);
+    repaint();
+  };
+  for (const b of app.querySelectorAll("[data-fieldmark]")) b.onclick = () => {
+    const k = b.dataset.fieldmark;
+    fieldCtl[k] = !fieldCtl[k];
+    repaint();
+  };
+}
+
 function fieldReadingHere() {
   try {
     const fields = _terrain?.fields;
@@ -2853,14 +2974,10 @@ function fieldReadingHere() {
     // ⛔ THE FIELD READS CONTENT, NOT THE BAKE (Aevi's A3). The bake holds 43 ANONYMOUS rows — two of the 44 missing,
     // no name, no state — so a probe built on it answers "source 12, +0.16" where it should answer "The Axis Gate, a
     // crystal well". ⚠️ Built only once CONTENT is in hand, or the cached field would be the nameless one forever.
-    if (!_field && CONTENT?.locations) {
-      const data = fieldDataFrom(fields, WORLD_FIELD_MODEL, { content: CONTENT, substrate: CONTENT?.rules?.the_substrate || null });
-      _field = makeField(data);
-    }
-    if (!_field) return null;
+    if (!worldField()) return null;
     const lat = Number(wp.colatitude) - 90;
     const lon = Number(wp.longitude) > 180 ? Number(wp.longitude) - 360 : Number(wp.longitude);
-    const p = _field.probe(lat, lon);
+    const p = worldField().probe(lat, lon);
     const a = p.nearest.anchor;
     return { where: character?.currentLocationId || null, lat: Math.round(lat * 10) / 10, lon: Math.round(lon * 10) / 10,
       density: Math.round(p.density * 100) / 100, ordered: Math.round(p.ordered * 100) / 100, wild: Math.round(p.wild * 100) / 100,
@@ -11781,6 +11898,99 @@ function paintRegionMap(regionId) {
   }
   ctx.putImageData(img, 0, 0);
 
+  // ⛔ CCODE-472 — THE POWER FIELD, EVALUATED, WASHED OVER THE GROUND. Erik: "the regional would be similar,
+  // except you'd probably want to visully see the amient fields as well, as they would have a gradient."
+  // ⚠️ THIS REPLACES A DISCLAIMER. The region tier's old field toggle coloured each PLACE by its strength and
+  // washed between the dots, and its own hint said so out loud — "the wash between them is interpolation, not
+  // a claim about reach". That is exactly the sentence `engine/field.js` was extracted to delete: the field is
+  // evaluated at every point, so the gradient here is the field and not a guess between pins.
+  // ⛑ RENDERED AT THE FIELD'S OWN RESOLUTION AND SCALED, NOT SAMPLED PER PIXEL. `strengthAt` runs the region
+  // vote — ~8µs a point — so an 800×420 canvas × 5 kinds would be nine seconds a repaint. A 128×128 window
+  // over a ~12° region is 0.09° a texel, which is finer than `TERRAIN_FEATURE_FLOOR_DEG` (0.25°, the
+  // resolution below which the generator has nothing left to say), so the browser's own smoothing is showing
+  // the field at better than its information content rather than inventing any.
+  if (fieldCtl.on && fieldCtl.kinds.size && worldField()) {
+    try {
+      const kindKey = [...fieldCtl.kinds].sort().join(",");
+      const texKey = `${ext.la0},${ext.lo0},${ext.la1},${ext.lo1}|${kindKey}|${fieldCtl.mode}`;
+      let hit = _fieldTex.get(texKey);
+      if (!hit) {
+        const fw96 = fieldWindowFor(ext, 96, 96);
+        hit = { fw: fw96, rgb: worldField().texture({ window: fw96, kinds: [...fieldCtl.kinds], mode: fieldCtl.mode }) };
+        _fieldTex.set(texKey, hit);
+      }
+      const fw = hit.fw, rgb = hit.rgb;
+      const off = document.createElement("canvas");
+      off.width = fw.w; off.height = fw.h;
+      const oi = off.getContext("2d").createImageData(fw.w, fw.h);
+      for (let i = 0; i < fw.w * fw.h; i++) {
+        oi.data[i * 4] = rgb[i * 3]; oi.data[i * 4 + 1] = rgb[i * 3 + 1]; oi.data[i * 4 + 2] = rgb[i * 3 + 2];
+        // ⚠️ ALPHA CARRIES THE STRENGTH, so clear ground stays GROUND. A flat alpha would tint the whole
+        // region evenly and read as a filter over the map rather than as a thing in the world.
+        oi.data[i * 4 + 3] = Math.min(210, (rgb[i * 3] + rgb[i * 3 + 1] + rgb[i * 3 + 2]) / 3 * 2.0);
+      }
+      off.getContext("2d").putImageData(oi, 0, 0);
+      ctx.save();
+      // ⛔ `overlay`, AND THE GROUND KEEPS EVERY BIT OF ITS BRIGHTNESS. Erik, on the first version: "I liked
+      // the brighter map… isn't there a way to make the text of the sites darker instead of making the map
+      // dimmer?" He is right, and the honest answer is that dimming was me solving the wrong problem.
+      // ⚠️ MY FIRST TRY SCREENED the field over the topographic ramp, which was invisible — the field's mean
+      // texel is 69/255 and adding that to bright greens and tans moves almost nothing — so I dimmed the
+      // ground by 58% to make room. That trades away the thing the region map is FOR.
+      // ⛑ Measured three blends side by side on the real Echo Vale ground: `color` keeps the brightness but
+      // eats the terrain's own hue (the mountains lose their tan); `soft-light` is faithful but faint;
+      // `overlay` keeps the relief, the contours and the full brightness AND shows the strongest field
+      // variation of the three. An overlay is exactly the right operator here: it preserves the ground's
+      // LUMINANCE — which is the relief — and pushes the field's hue through it. No dimming needed at all.
+      ctx.globalCompositeOperation = "overlay";
+      ctx.imageSmoothingEnabled = true;
+      ctx.drawImage(off, 0, 0, fw.w, fw.h, 0, 0, W, H);
+      ctx.restore();
+    } catch (err) { console.warn("[region-map] the field layer did not draw — the ground still did:", err); }
+  }
+
+  // ⛔ AND THE AUTHORED WELLS AND SINKS THEMSELVES, WHICH NO MAP HAS EVER DRAWN. Measured before building
+  // this: all 44 appear on neither the globe nor the region tier, so "see the power sources" was unmet in
+  // the plainest possible sense — the field was visible as colour and its causes were invisible.
+  // ⚠️ Well or sink is the SIGN of the draw, not a second authored field, so the two can never disagree.
+  for (const s of fieldSourcesIn(ext)) {
+    const well = s.strength >= 0;
+    if (well ? !fieldCtl.wells : !fieldCtl.sinks) continue;
+    const lonF = Number.isFinite(s.lonInFrame) ? s.lonInFrame : s.lon;   // ⛔ the frame's convention, not the source's
+    const p = base.toScreen(lonF, s.lat, W, H);
+    if (!Number.isFinite(p.x) || !Number.isFinite(p.y)) continue;
+    // reach drawn to scale: `radiusWorld` is RADII on the sphere, and a degree is π/180 of one
+    const rDeg = (Number(s.radius) || 0.05) * 180 / Math.PI;
+    const edge = base.toScreen(lonF, s.lat + rDeg, W, H);
+    const rpx = Math.max(6, Math.abs(edge.y - p.y));
+    // ⚠️ DARK AND SATURATED, NOT PALE. A pale blue glow and pale blue text were chosen against a dimmed
+    // ground; on a bright topographic map they vanish. Dark ink with a light halo reads on the bright
+    // uplands AND on the near-black water, which is the only pair of grounds this map actually has.
+    const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, rpx);
+    grad.addColorStop(0, well ? "rgba(16,68,132,0.44)" : "rgba(140,18,30,0.42)");
+    grad.addColorStop(1, "rgba(0,0,0,0)");
+    ctx.fillStyle = grad;
+    ctx.beginPath(); ctx.arc(p.x, p.y, rpx, 0, Math.PI * 2); ctx.fill();
+    const ink = well ? "#0b3f78" : "#8a1020";
+    ctx.lineWidth = 2.6; ctx.strokeStyle = "rgba(248,250,255,0.88)"; ctx.lineJoin = "round";
+    ctx.fillStyle = ink;
+    ctx.font = "700 12px system-ui, sans-serif";
+    ctx.textAlign = "center";
+    ctx.strokeText(well ? "\u25c6" : "\u25c7", p.x, p.y + 4);
+    ctx.fillText(well ? "\u25c6" : "\u25c7", p.x, p.y + 4);
+    // ⚠️ THE LABEL IS KEPT INSIDE THE CANVAS. The Sunken Choir sits at x=708 of 800 and its name ran
+    // off the right edge — a marker correctly placed and a name half gone. Anchored to the near edge
+    // instead of centred once it is within its own width of one, so it always reads.
+    ctx.font = "700 10px system-ui, sans-serif";
+    const label = `${s.name} ${s.strength >= 0 ? "+" : ""}${s.strength.toFixed(2)}`;
+    const halfW = ctx.measureText(label).width / 2;
+    ctx.textAlign = p.x - halfW < 2 ? "left" : p.x + halfW > W - 2 ? "right" : "center";
+    const lx = ctx.textAlign === "left" ? 2 : ctx.textAlign === "right" ? W - 2 : p.x;
+    const ly = Math.max(11, p.y - 9);
+    ctx.strokeText(label, lx, ly);   // the halo first, so the ink sits inside it
+    ctx.fillText(label, lx, ly);
+  }
+
   // ⛔ HER LAYER, OVER THE GROUND. bearing + km from the region centre — the same frame localMap uses
   // one tier down, which is why it needed no new machinery.
   if (authoredMap) {
@@ -12447,6 +12657,69 @@ function wireWorldGlobe() {
 /** LOCATION tier — the interior. THE TIER THAT DID NOT EXIST. Sub-places and any place promoted
  *  out of this one (SNG-154's parentId), drawn around their container so containment is finally
  *  something you can SEE rather than something the engine merely asserts. */
+/** ⛔ CCODE-472 — WHAT MOVES THE GROUND WHERE YOU ARE STANDING. Erik: "We can list the ambient power sources in
+ *  the local area on the side somewhere, then show just the local hold and building or even your own carried
+ *  wells and sinks."
+ *  ⚠️ THREE REGISTERS AND THEY ARE DIFFERENT CLAIMS, so they are not run together into one number: the AMBIENT
+ *  field is the world's, evaluated where you stand; a HOLD's forge or kept artifact is yours and stays when you
+ *  leave; what you CARRY moves with you. A craft rolls against the sum, and a defender whose ground moved has to
+ *  be able to see which of the three did it — this file's own rule, "the difference between a mechanic and the
+ *  cruellest possible bug."
+ *  ⬜ THE BUILDING'S OWN wells and sinks are the one register with nothing in it: `localSources` is read by
+ *  `localFieldAt` (SNG-392) and authored on ZERO of the 143 places, measured. So it says so, rather than
+ *  rendering an empty box that reads as "there is nothing here." */
+function localSourcesPanel(locationId) {
+  const loc = CONTENT.locations[locationId] || null;
+  const f = worldField();
+  const wp = loc?.worldPos;
+  let ambient = "";
+  if (f && wp && Number.isFinite(Number(wp.colatitude))) {
+    const lat = Number(wp.colatitude) - 90;
+    const lonRaw = Number(wp.longitude);
+    const p = f.probe(lat, lonRaw > 180 ? lonRaw - 360 : lonRaw);
+    const a = p.nearest.anchor;
+    const rows = p.contributions
+      .filter(c => fieldCtl.kinds.has(c.kind))
+      .sort((x, y) => y.value - x.value)
+      .map(c => `<div class="fsrc-row${c.in ? " fsrc-in" : ""}">
+        <span class="fsrc-name">${esc(c.label)}</span>
+        <span class="fsrc-bar"><i style="width:${Math.round(Math.max(0, Math.min(1, c.value)) * 100)}%"></i></span>
+        <span class="fsrc-val">${c.value.toFixed(2)}${c.in ? " ✓" : ""}</span></div>`).join("");
+    ambient = `<div class="fsrc-group">
+      <div class="fsrc-head">◈ The ambient field here</div>
+      <p class="hint" style="margin:0 0 6px">Evaluated at this place's own position — lattice ${p.density.toFixed(2)} · ordered nanite ${p.ordered.toFixed(2)} · wild ${p.wild.toFixed(2)}. A ✓ is above the membership line (${MEMBERSHIP}), which is where a craft of that register finds ground.</p>
+      ${rows || `<p class="hint" style="margin:0">Every register is switched off above — turn one on to read it.</p>`}
+      ${a ? `<p class="hint" style="margin:6px 0 0">Nearest anchor: <strong>${esc(a.name)}</strong>, a ${esc(a.kind)} ${a.degrees}° off${a.state ? "" : ""} — draw ${a.strength >= 0 ? "+" : ""}${Number(a.strength).toFixed(2)}.</p>`
+             : `<p class="hint" style="margin:6px 0 0">No authored well or sink within reach — this ground is whatever the region makes it.</p>`}
+    </div>`;
+  } else {
+    ambient = `<div class="fsrc-group"><div class="fsrc-head">◈ The ambient field here</div>
+      <p class="hint" style="margin:0">${loc?.worldPos ? "The field loads with the map — open the world tier once." : "This place has no world position yet, so there is no ambient reading to give."}</p></div>`;
+  }
+
+  const comps = (character.companions || []).map(c => (CONTENT.companions || {})[c?.id || c] || c).filter(Boolean);
+  const mine = [
+    ...holdingFieldSources(character, locationId, holdCfgNow(), { items: CONTENT.items }),
+    ...carriedSubstrateSources(character, CONTENT.items, comps),
+  ];
+  const KINDWORD = { hold: "built here", vault: "kept here", item: "carried", companion: "with you" };
+  const yours = `<div class="fsrc-group">
+    <div class="fsrc-head">◆ Yours — holds, vaults and what you carry</div>
+    ${mine.length ? mine.map(s => `<div class="fsrc-row ${s.delta >= 0 ? "fsrc-well" : "fsrc-sink"}">
+        <span class="fsrc-name">${s.delta >= 0 ? "◆" : "◇"} ${esc(s.name)}</span>
+        <span class="fsrc-val">${s.delta >= 0 ? "+" : ""}${Number(s.delta).toFixed(2)} <span class="hint">${esc(KINDWORD[s.kind] || s.kind)}</span></span></div>`).join("")
+      : `<p class="hint" style="margin:0">Nothing you own or carry is moving the ground here. A well or sink kept in a hold works at that hold; an artifact or a companion's aura travels with you.</p>`}
+    ${mine.length ? `<p class="hint" style="margin:6px 0 0">Net from yours: <strong>${mine.reduce((n, s) => n + Number(s.delta || 0), 0) >= 0 ? "+" : ""}${mine.reduce((n, s) => n + Number(s.delta || 0), 0).toFixed(2)}</strong> on top of the ambient reading.</p>` : ""}
+  </div>`;
+
+  const authored = `<div class="fsrc-group">
+    <div class="fsrc-head">⌂ This building's own</div>
+    <p class="hint" style="margin:0">Nothing authored. A place can carry its own wells and sinks inside its walls (a ward, a shrine, a suppressor) and none of the 143 places does yet — the reader is built and waiting on content.</p>
+  </div>`;
+
+  return `<aside class="field-sources">${ambient}${yours}${authored}</aside>`;
+}
+
 function renderMapLocation(locationId) {
   const { host, children } = locationTierNodes(character, CONTENT, locationId);
   const laid = interiorLayout(children);
@@ -12464,6 +12737,8 @@ function renderMapLocation(locationId) {
     <h2>${esc(name)} — inside</h2>
     <p class="hint" style="margin-bottom:8px">${children.length ? `${children.length} place${children.length === 1 ? "" : "s"} within.` : "Nothing recorded inside here yet — the places you visit and the GM names will appear here."} A ringed node is somewhere that grew into a place of its own.</p>
     ${mapTierBar()}
+    ${fieldPanel(null)}
+    <div class="field-split">
     <div class="graph-wrap"><svg id="skill-svg" viewBox="0 0 800 460" class="world-map" preserveAspectRatio="xMidYMid meet"><g class="graph-vp">
       <circle cx="400" cy="230" r="34" class="map-node here"/>
       <text x="400" y="235" text-anchor="middle" class="map-icon">${iconForTags(host?.tags || [])}</text>
@@ -12471,12 +12746,15 @@ function renderMapLocation(locationId) {
       ${laid.map(c => `<line x1="400" y1="230" x2="${c.x.toFixed(1)}" y2="${c.y.toFixed(1)}" class="map-edge"/>`).join("")}
       ${nodes}
     </g></svg></div>
+    ${localSourcesPanel(locationId)}
+    </div>
     <button class="btn secondary" id="map-back" style="margin-top:12px">Back</button>
   </div>`);
   // a promoted interior is a real location — you can step into ITS interior too (nesting)
   for (const g of app.querySelectorAll("[data-mapinner]")) g.onclick = () => {
     if (g.dataset.innerkind === "location" && CONTENT.locations[g.dataset.mapinner]) { mapFocus = g.dataset.mapinner; renderMap(); }
   };
+  wireFieldPanel(() => renderMap());   // CCODE-472
   setGraphSurface("location"); wireSkillGraphViewport();   // SNG-168: the location tier too
   wireMapTierBar();
   document.getElementById("map-back").onclick = () => renderPlay(character.activeScene?.lastTurn || null, {});
@@ -12679,7 +12957,8 @@ function renderMap(selectedId = null) {
     <p class="hint" style="margin-bottom:8px">${locs.length} place${locs.length === 1 ? "" : "s"} in this region, on real ground. Gold ring: you are here.</p>
     ${mapTierBar()}
     <canvas id="region-map" width="800" height="420" style="width:100%;max-width:800px;border-radius:8px;display:block;margin-bottom:6px;background:#0a0c10"></canvas>
-    <p class="hint" style="margin-bottom:10px">⛰ The ground as it is — generated once at the scale where the world still has features, and kept. The diagram below shows how the places CONNECT, which the ground does not say.</p>
+    ${fieldPanel(regionExtent(focusRegion, CONTENT.locations, { authored: (_regionMaps && _regionMaps[focusRegion]) || null }))}
+    <p class="hint" style="margin-bottom:10px">⛰ The ground as it is — generated once at the scale where the world still has features, and kept. ◈ The field over it is EVALUATED at every point, not washed between the places — a source turned off re-renders it. The diagram below shows how the places CONNECT, which the ground does not say.</p>
     <div style="margin-bottom:8px"><button class="opt ${mapShowKG ? "selected" : ""}" id="map-kg-toggle" title="People you've met (solid) and threads you've only heard of (dimmed diamonds) — where they live">${mapShowKG ? "✓ " : ""}Show what you know</button>
       <button class="opt ${mapShowSub ? "selected" : ""}" id="map-sub-toggle" title="The places WITHIN each location (satellites around each node)" style="margin-left:6px">${mapShowSub ? "✓ " : ""}Show sub-places</button>
       <button class="opt ${mapField === "substrate" ? "selected" : ""}" id="map-field-lat" title="The lattice field — where the Precursors built, pooled and drained by 43 authored sources" style="margin-left:6px">${mapField === "substrate" ? "✓ " : ""}⛰ Lattice field</button>
@@ -12704,6 +12983,7 @@ function renderMap(selectedId = null) {
   const meBtn = document.getElementById("gz-me");
   if (meBtn) meBtn.onclick = () => { const p = pos[here]; if (!p) return; const k = 2.2; graphViews[graphSurface] = { k, tx: 400 - p.x * k, ty: 220 - p.y * k };
     const vp = document.querySelector("#skill-svg .graph-vp"); if (vp) vp.setAttribute("transform", `translate(${graphViews[graphSurface].tx} ${graphViews[graphSurface].ty}) scale(${k})`); };
+  wireFieldPanel(() => renderMap());   // CCODE-472: one wiring, three tiers
   document.getElementById("map-kg-toggle").onclick = () => { mapShowKG = !mapShowKG; renderMap(selectedId); };
   // ⚠️ EACH TOGGLE TURNS THE OTHER OFF. The two fields are different geographies and stacking them
   // would blend two colours into a third that means nothing — the merge Erik explicitly ruled out.

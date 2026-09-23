@@ -711,6 +711,20 @@ export function advanceHoldings({ character, now = Date.now(), ladder = null, co
 export async function runWorldTick({ character, content, currentDay, advanceAssignments = rollAssignmentAdvancement, rng = Math.random }) {
   if (!character.worldState) character.worldState = initWorldState(currentDay);
   const ws = character.worldState;
+  // ⛔ CCODE-473 — AND A `worldState` THAT EXISTS BUT IS MISSING A FIELD, which the line above does not
+  // catch and which is the shape every migrated save has. Found by Erik: "you shouldn't need to create a
+  // character just to test the maps. you can load the dev character" — and the dev character would not
+  // open. `TypeError: Cannot read properties of undefined (reading 'water_crisis')` at :779, which is
+  // `ws.eventStages[eventId]` read with no guard, because `eventStages` was added to `initWorldState`
+  // after some saves were written. ⚠️ THE BLAST RADIUS IS THE WHOLE CHARACTER: the tick runs inside
+  // `renderPlay`, so the throw takes the screen with it and the save is never reached — the character is
+  // simply unopenable, with one line in the console and nothing on the page.
+  // ⛑ FILLED KEY-WISE AT THE DOOR, not by replacing the bag: `initWorldState` stamps `lastTickDay` with
+  // TODAY, so overwriting a real one would re-pay every day since. Only absent keys are added, which
+  // covers `arcStages`, `spectrumDrift`, `news` and `unseenNews` too — eight more unguarded reads in this
+  // file alone sit behind the same hole, and one normalisation at the entry is the fix for all of them.
+  { const shape473 = initWorldState(currentDay);
+    for (const k of Object.keys(shape473)) if (ws[k] === undefined) ws[k] = shape473[k]; }
   const elapsed = currentDay - (ws.lastTickDay ?? currentDay);
   // SNG-366: the delegated-work pass runs on WORLD time and must not sit behind the character-day gate —
   // that early return is what Silas has been parked on for 915 actions. Only THIS block is lifted.

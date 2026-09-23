@@ -1,13 +1,14 @@
 {
  "schemaVersion": 1,
  "id": "the_old_warden_post",
- "name": "Raven's Home (the Old Warden Post)",
+ "name": "Stillwater's Trouble",
  "regionId": "the_palelands",
  "communityId": "ashwarden",
  "aliases": [
   "Stillwater's Trouble",
   "Raven's Home",
-  "stillwaters_trouble_site"
+  "stillwaters_trouble_site",
+  "the Old Warden Post"
  ],
  "supersedes": [
   "gen-stillwater-s-trouble"
@@ -90,5 +91,7 @@
  "parentId": "cairnhold",
  "_substrateSourceWas": "thin-unreached",
  "_shapeFix_20260908": "⛔ CCODE FOUND IT: `substrateSource` HAD TWO SHAPES IN THE CORPUS. Every other source is an object; THIS ONE WAS THE STRING \"thin-unreached\" — so `resolveSubstrateField` read `src.delta`, found nothing, and SKIPPED IT. ⚠️ THE PLACE'S STATED INTENT DID NOTHING AT ALL. ⚑ AND IT IS THE WEEK'S FAILURE IN ITS SMALLEST COSTUME: authored, correct in meaning, loaded, and unreadable — not because nothing read the field, but because ONE RECORD SPOKE A DIFFERENT DIALECT. ⬜ CCode: a shape check on `substrateSource` would have caught this the day it was written, and would catch the next one.",
- "appearance": "A small stone watch-post on a shoulder of open ground — three rooms and a stair, a square corner tower, slate roof half sound. Heath around it, the road below, and a fold of ground sheltering it from the north."
+ "appearance": "A small stone watch-post on a shoulder of open ground — three rooms and a stair, a square corner tower, slate roof half sound. Heath around it, the road below, and a fold of ground sheltering it from the north.",
+ "_nameWas": "Raven's Home (the Old Warden Post)",
+ "_renamed_20260923": "SNG-635 (Erik 2026-09-23): the place is Stillwater's Trouble; 'Raven's Home' kept reverting because this record still said it. Alias kept so old text still resolves here (smoke 221)."
 }

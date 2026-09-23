@@ -25,7 +25,8 @@ import { contributionsOf } from "./combatants.js";   // SNG-541c / Erik: a defen
 import { regionDemand } from "./economy.js";       // Q8: a unit is worth what THIS Reach wants it for
 import { sheetFor as personSheetFor, tierOf as tierOfLevel, personRecordFor } from "./npcsheet.js";   // Q18 → v2 §1: the keeper's tier sets the FLOOR
 import { locationDensity } from "./substrate.js";   // Q18: the ground scales an enterprise's yield
-import { legionClash, contingentsFromPeople, contingentsOf } from "./melee.js";
+import { legionClash, contingentsFromPeople, contingentsOf, bloodBand } from "./melee.js";
+import { raidersFrom, notePowerLoss, contingentsOf as powerContingents } from "./powers.js";   // SNG-634 C1: the raiders have an owner
 import { isMoored, carriageOf } from "./carriage.js";   // ⛔ SPEC_mobile_holdings §4: moored is raidable, moving is not   // R46a: a detected raid is a FIGHT, resolved unattended
 import { smartClamp } from "./namematch.js";   // an evidence quote is prose — cut at a word, never mid-word
 import { isNetworkGate } from "./waygate.js";   // runner fees: a NETWORK gate near a relay post brings traffic
@@ -669,7 +670,7 @@ export function yieldFor(holding, cfg, { density = null } = {}) {
  *
  *  ⚠️ A WATCH IS WHAT DETECTS: people on the garrison, or a feature that keeps one (sentries, a tower). Stone alone does not
  *  see. Returns the receipt the news reads, or null when nothing came of it. */
-export function resolveRaid(character, holding, { cfg = null, dangerLevel = 0, rng = Math.random, day = null, people = {}, keeperFloor = null } = {}) {
+export function resolveRaid(character, holding, { cfg = null, dangerLevel = 0, rng = Math.random, day = null, people = {}, keeperFloor = null, power = null, meleeCfg = null } = {}) {
   // ⛔ ERIK 2026-09-12, OVER AEVI'S §4: a hull under way is RAIDABLE WHERE SHE IS — "it doesn't make sense to only update their
   // location at the very end." Her whereabouts come from the day (`carriage.voyagePosition`), the danger is the nearest place's,
   // and the crew aboard defends as a garrison does in port. The receipt says she was taken at sea so the news can read right.
@@ -714,22 +715,51 @@ export function resolveRaid(character, holding, { cfg = null, dangerLevel = 0, r
     }
   const stone = defenceOf(holding, cfg);
   if (stone > 0) defenders.push({ n: 1, quality: stone, what: "the walls" });
-  const raiders = [{ n: Math.max(1, Math.round(dangerLevel)), quality: Math.max(1, Math.round(dangerLevel / 2)), what: "raiders" }];
+  // ⛔ SNG-634 C1 — THE RAIDERS HAVE AN OWNER. Aevi's finding, and it is the oldest hole in this file: this
+  // line read `{ n: dangerLevel, quality: dangerLevel/2, what: "raiders" }`, so the band and legion
+  // machinery built in CCODE-404–407 has had NOBODY WITH A NAME on the other side of the field since it
+  // shipped. A power whose `reach` covers this place now sends a party drawn from its OWN strength.
+  // ⚠️ NO POWER → THE ANONYMOUS RAID, UNCHANGED, and that is the common case: most of the 143 places have
+  // nobody standing on them and must play exactly as they did before this existed.
+  const party = power ? raidersFrom(power, character) : null;
+  const raiders = party || [{ n: Math.max(1, Math.round(dangerLevel)), quality: Math.max(1, Math.round(dangerLevel / 2)), what: "raiders" }];
+  const whose = party ? (power.name || power.id) : null;
   const clash = legionClash(defenders, raiders, { rng, cfg: cfg?.raid?.clash || {} });
   const held = clash.tide > 0.05;
+  // ⛔ AND THEIR LOSSES PERSIST, which is what makes clearing a band worth doing. ⛑ THE RATE IS `bloodBand`'s,
+  // NOT A SECOND ONE: the same `lossPerTide` with the same win/lose asymmetry that every band clash in the
+  // game already pays, read from the RAIDERS' side of the tide (hence `-clash.tide`). A second casualty rule
+  // living here is exactly how the sell-share drifted from its own projection an hour after I wrote it.
+  let powerHit = null;
+  if (party && power) {
+    const after = bloodBand({ contingents: raiders.map(c => ({ ...c })) }, -clash.tide, { cfg: meleeCfg || {} });
+    const killed = {};
+    const left = Array.isArray(after?.band?.contingents) ? after.band.contingents : [];
+    for (let i = 0; i < raiders.length; i++) {
+      const gone = Math.max(0, (Number(raiders[i].n) || 0) - (Number(left[i]?.n) || 0));
+      if (gone > 0) killed[raiders[i]._at ?? i] = gone;
+    }
+    powerHit = notePowerLoss(character, power, killed, { day });
+  }
   if (held) {
     // ⛔ NOT MERELY THE ABSENCE OF LOSS — what they carried is yours now.
     const spoilKind = String(cfg?.raid?.spoils?.goods || "raw_material");
     const spoils = Math.max(1, Math.round((Number(cfg?.raid?.spoils?.perDanger) || 1) * dangerLevel));
     holding.store = holding.store && typeof holding.store === "object" ? holding.store : {};
     holding.store[spoilKind] = (Number(holding.store[spoilKind]) || 0) + spoils;
-    note(`raid beaten off — ${spoils} ${spoilKind} taken from them`);
-    return { detected: true, held: true, taken: {}, spoils: { [spoilKind]: spoils }, outcome: clash.outcome, day, atSea };
+    // ⚠️ THE LINE NAMES THEM when there is somebody to name, and says what it cost them — "raid beaten
+    // off" about an anonymous mob teaches a player nothing they can act on.
+    note(whose
+      ? `${whose} came for it and were beaten off — ${spoils} ${spoilKind} taken from them${powerHit?.took ? `, ${powerHit.took} of theirs down` : ""}${powerHit?.broken ? ` — that is the last of them` : ""}`
+      : `raid beaten off — ${spoils} ${spoilKind} taken from them`);
+    return { detected: true, held: true, taken: {}, spoils: { [spoilKind]: spoils }, outcome: clash.outcome, day, atSea, power: powerHit || (whose ? { name: whose } : null) };
   }
   const taken = take(Math.max(0, Math.min(1, baseShare - step * stone)));
   if (Object.keys(taken).length) advanceHolding(holding, "problem", null, "raided", keeperFloor ? { keeperFloor } : null);   // ⚑ AN EVENT SLIPS AT ONCE — time slips slowly, a raid does not
-  note(`raid fought and lost — ${Object.entries(taken).map(([g, n]) => `${n} ${g}`).join(", ") || "nothing"} taken`);
-  return { detected: true, held: false, taken, outcome: clash.outcome, day, atSea, ...paid() };   // the path where the raiders WIN carried the fact too
+  note(whose
+    ? `${whose} took it — ${Object.entries(taken).map(([g, n]) => `${n} ${g}`).join(", ") || "nothing"} gone${powerHit?.took ? `, ${powerHit.took} of theirs down in the doing` : ""}`
+    : `raid fought and lost — ${Object.entries(taken).map(([g, n]) => `${n} ${g}`).join(", ") || "nothing"} taken`);
+  return { detected: true, held: false, taken, outcome: clash.outcome, day, atSea, power: powerHit || (whose ? { name: whose } : null), ...paid() };   // the path where the raiders WIN carried the fact too
 }
 
 /** Who is WATCHING: people posted on the garrison, plus a feature that keeps a watch (sentries, a tower). Stone does not see. */

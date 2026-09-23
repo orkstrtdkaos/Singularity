@@ -20,11 +20,22 @@ const DANGER_FLOOR = 1; // SNG-225 §4b: a place in the world is never "safest p
 /** A location's danger, clamped 0..4. SNG-225 §4b: a MISSING dangerLevel is NOT 0 (the safest possible, which
  *  silently disqualifies every minDanger>0 encounter and STARVES the eligible pool at generated locations) —
  *  a null/undefined danger floors to DANGER_FLOOR so a road can still hold a threat. An explicit 0 is honoured
- *  (a deliberate haven); only the absence of the field is floored. */
-export function dangerOf(location) {
+ *  (a deliberate haven); only the absence of the field is floored.
+ *
+ *  ⛔ SNG-634 C2 — AND WHO IS STANDING HERE MOVES IT. `lift` is the signed sum of the `dangerLift` of every
+ *  power whose `reach` covers this place (`powers.js:dangerLiftAt`), which mechanises Erik's 2026-07-19
+ *  ruling: clearing them lowers it. ⛑ THE LIFT COMES IN RATHER THAN BEING LOOKED UP, so this stays pure and
+ *  the five existing callers in this file are byte-for-byte unchanged — a world with no powers reads exactly
+ *  as it did before them, which for most of the 143 places is the truth.
+ *  ⚠️ THE CLAMP IS THE SCALE'S, AND IT IS APPLIED AFTER THE LIFT ON PURPOSE. Measured across the eight
+ *  authored powers: 18 of 20 reach-entries move (2→3, 3→4), and two sit at the ceiling already — the
+ *  Gralloch's own seat and the Redline, both authored at 4. A place at maximum danger cannot get worse, and
+ *  that is the scale saying so rather than the lift failing. The floor matters the other way: the Keelmouth
+ *  Slip lifts by −1 and must be able to make a coast quieter without ever making it negative. */
+export function dangerOf(location, { lift = 0 } = {}) {
   const raw = location?.dangerLevel;
-  if (raw == null) return DANGER_FLOOR;
-  return Math.max(0, Math.min(4, raw | 0));
+  const base = raw == null ? DANGER_FLOOR : (raw | 0);
+  return Math.max(0, Math.min(4, base + (Number(lift) || 0)));
 }
 
 /** SNG-225 §4a: a real dangerLevel for a MINTED location, so it is never null (null guts encounter eligibility,

@@ -321,6 +321,37 @@ export function checkChangeSet(cs, label = cs.id || "(unnamed)") {
       `${unloadable.join(", ")} \u2014 on disk is not loaded (SYSTEM_SPEC \u00a742); a file in \`added[]._file\` needs \`_manifest\` to say where it registers`);
   }
 
+  // 4c · ⛔ CCODE-476 — A NEW PERSON MUST MEET THE RULES THE CORPUS ALREADY ENFORCES. Found the hard way:
+  // SNG-634 and SNG-637 passed every check this tool had, applied cleanly, and turned FOUR gates red the
+  // moment the suite ran — §59 and §146 (every authored non-legend person carries `domains`) and §148 (a
+  // record whose authored level sits below its tier's floor, a ratchet that may only FALL). Thirteen people
+  // carried no domains and four sat under their floor.
+  // ⚠️ THE POINT IS WHERE THE FINDING LANDS, not that it was found. Those gates caught it after the content
+  // was on disk and the manifests were edited — the validator exists so an author hears it while the change
+  // set is still a file they own. A rule enforced only downstream is a rule the author meets as a surprise.
+  // ⛑ THE FLOORS ARE READ FROM `resolution.json`, never retyped: a second copy of the tier ladder is the
+  // drift this project has closed four times.
+  {
+    const people = (cs.added || []).filter(a => a?._kind === "npc" || /\/npcs\//.test(String(a?._file || "")));
+    if (people.length) {
+      let floors = {};
+      try { floors = JSON.parse(readFileSync(join(CORE, "rules/resolution.json"), "utf8"))?.npcStanding?.tierFloor || {}; } catch { /* no ladder, no check */ }
+      // ⚠️ THE SAME EXEMPTION §59 AND §146 CARRY: domains feed the kit draw, so a legend or a record declared
+      // out of the fight path is allowed none. Anything else with a role in the world needs them.
+      const exempt = (n) => n?.isLegend || n?.legend || n?.notAnOpponent || n?.declaredNotAnOpponent;
+      const noDomains = people.filter(n => !exempt(n) && !(Array.isArray(n.domains) && n.domains.length));
+      check(`${label}: every person this change set adds carries \`domains\` (${people.length} person(s))`,
+        noDomains.length === 0,
+        `${noDomains.map(n => n.id).join(", ")} — domains feed the kit draw; §59 and §146 assert every authored non-legend person has them`);
+
+      const underFloor = people.filter(n => n.tier && n.level != null && floors[n.tier] != null
+        && Number(n.level) < Number(floors[n.tier]));
+      check(`${label}: no person this change set adds sits below their own tier's floor`,
+        underFloor.length === 0,
+        `${underFloor.map(n => `${n.id} is ${n.tier} at level ${n.level}, floor ${floors[n.tier]}`).join(" · ")} — §148 is a ratchet that may only FALL, and it is the author's call which way to settle it: the level climbs to the tier's floor, or the tier drops to the level's rung`);
+    }
+  }
+
   // 5 · expectedGates must name gates that actually exist, or the prediction cannot be scored.
   if (cs.expectedGates?.length) {
     const suite = readFileSync(join(root, "tests/smoke.mjs"), "utf8");

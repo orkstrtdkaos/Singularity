@@ -42,6 +42,8 @@ import { generatedRecords } from "./generate.js";
 import { syncEnabled, fetchRepoJSON, fetchLedgerMonths, fetchLedgerAll, pushMergedFile } from "./sync.js";   // CCODE-354: no owned-file writes left here — the region file is shared
 import { travelerCard, cardChanged, mergeTravelerCard, ledgerMonthsSince, whereOf, meetKey } from "./travelers.js";   // SNG-595: a fellow traveler is a person the world has a record of
 import { stampEventChange, mergeEventStages, mergeQuestOutcomes, actorOf, questKey } from "./worldevents.js";   // CCODE-354: a crisis another traveler answered reads as answered
+import { bandDialsOf } from "./melee.js";                                    // SNG-634 C1: a raiding power bleeds on the dials a band does
+import { raiderPowerAt, dangerLiftAt } from "./powers.js";                    // SNG-634 C1/C2: whose raid, and whose ground
 import { INVITES_PATH, mergeInvitation, answerInto, applyAnswers } from "./invitations.js";   // CCODE-360: an invitation carried by someone you both know
 import { boundFigures } from "./companionlives.js";   // SNG-597 §3: a companion who is also a figure of the world
 import { decayWakes, wakeArcPush } from "./wake.js"; // SNG-204: wakes decay on the tick + lean on connected arcs
@@ -650,7 +652,19 @@ export function advanceHoldings({ character, now = Date.now(), ladder = null, co
     const grew = growHolding(character, h, { cfg: holdCfg, npcs: content?.npcs || {}, npcCfg: content?.rules?.npcStanding || {},
       worldCount: count, day: (() => { try { return absoluteWorldDay(); } catch { return null; } })(), nameOf: (id) => character?.npcRegistry?.[id]?.name || content?.npcs?.[id]?.name || id });
     const st = tickStore(character, h, { cfg: holdCfg, economy: content?.rules?.economy || null, npcCfg: content?.rules?.npcStanding || {}, locations: content?.locations || {},   // v2 §1: the keeper's tier joins the raid product and sets the floor; runner fees read the gate nearby
-      regionId: loc?.regionId || null, dangerLevel: Math.max(0, (Number(loc?.dangerLevel) || 0) - workMods(h).dangerEase),   // ⛔ CCODE-450: a hunted place is safer
+      // ⛔ SNG-634 C2 — AND WHO IS STANDING HERE MOVES IT. The signed sum of the `dangerLift` of every power
+      // whose `reach` covers this place, which mechanises Erik's 2026-07-19 ruling: clearing them lowers it.
+      // ⚠️ ADDED TO THE ARITHMETIC THAT WAS ALREADY HERE, deliberately NOT routed through `dangerOf`: that
+      // helper floors a MISSING `dangerLevel` to 1 (SNG-225 §4b, so an encounter pool is not starved), and
+      // this line's `|| 0` is what keeps a hold at a place with no authored danger from being raided at all.
+      // Swapping it in would have quietly started raiding those holds — a behaviour change with nothing
+      // asking for it, hidden inside a feature that reads as unrelated.
+      regionId: loc?.regionId || null,
+      dangerLevel: Math.max(0, (Number(loc?.dangerLevel) || 0) + dangerLiftAt(loc?.id, { content, character }) - workMods(h).dangerEase),   // ⛔ CCODE-450: a hunted place is safer
+      // ⛔ SNG-634 C1 — WHOSE RAID. Null at every place with nobody standing on it, which is the common case
+      // and the one that must go on playing exactly as it did.
+      power: raiderPowerAt(loc?.id, { content, character }),
+      meleeCfg: bandDialsOf(content),   // ⛑ the ONE builder — a raiding power bleeds on the same dials a band does
       rng, day: (() => { try { return absoluteWorldDay(); } catch { return null; } })(),
       density: holdingGround(h, { locations: content?.locations || {}, substrate: content?.substrateModel || null }),
       people: { ...(content?.npcs || {}), ...(character?.npcRegistry || {}) },

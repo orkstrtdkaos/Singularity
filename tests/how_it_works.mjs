@@ -23647,7 +23647,7 @@ console.log("\n── §330 · standing work — only the kinds whose effect is 
   const away330 = (() => { const x = mk(); HW.assignWork(x, "h1", "forage", "unit:b1:0"); return [0, 1].map(i => JBm330.bandMemberAway(x, x.bands[0], x.bands[0].contingents[i], i)); })();
   check("§330: ⛔ PAID, ROLLED, AND NOBODY ELSE'S — the tick pays a hand's wage a head in the place's money before any day is rolled (unpaid, nobody works, and it is said); the days are the Jobs tab's dice; a hunted place's raid danger eases; the jobs pool and a band's turn leave the workers out; the Holdings tab puts people to work",
     /const paid = wage > 0 \? payAt\(character, wage, loc\?\.regionId \|\| null, content\?\.rules\?\.economy \|\| null,/.test(W330) && /was paid this pass, so nobody worked/.test(W330)
-    && /goodDayOf: \(id, kind\) => workDayChance\(craftsOf\(id\), kind, wT\)/.test(W330) && /dangerLevel: Math\.max\(0, \(Number\(loc\?\.dangerLevel\) \|\| 0\) - workMods\(h\)\.dangerEase\)/.test(W330)
+    && /goodDayOf: \(id, kind\) => workDayChance\(craftsOf\(id\), kind, wT\)/.test(W330) && /dangerLevel:[^\n]*workMods\(h\)\.dangerEase/   /* ⛔ CCODE-476: this pinned the WHOLE EXPRESSION and went red the moment SNG-634 C2 added `+ dangerLiftAt(...)` to it — a correct change reddening a gate that means something else. The CLAIM is that the danger handed to `tickStore` is EASED by the work put in; what else joins that arithmetic is not this check's business. Fourth time I have pinned an instance and been taught the same lesson. */.test(W330)
     && /if \(key !== "player" && workAt\(character, key\)\) \{ seen\.add\(key\); return; \}/.test(J330)
     && away330[0] === "at work at Fell Pell" && away330[1] === null && /\[data-work-add\]"\)\) s\.onchange/.test(A330) && /\[data-work-drop\]"\)\) b\.onclick/.test(A330));
   const gm = HW.workSaid({ work: { forage: ["dara"], train: ["unit:b1:0"] } }, { nameOf: (id) => (id === "dara" ? "Dara Holt" : "the hands of Ridge") });
@@ -25169,6 +25169,145 @@ console.log("\n── §348 · the Ent Grove, where the story put it ──");
       }
     }
     console.log(`      ⚠️ §348: ${bad348.length} grown cop${bad348.length === 1 ? "y" : "ies"} in the saves still name a different REGION than the authored record${bad348.length ? " — " + bad348.join(" · ") : ""}. Content shadows them at load so nothing is broken today; each is a place whose position was guessed rather than read. Reported: re-coordinating another player's grown ground is a ruling.`);
+  }
+}
+
+// ══════════ §349 · SNG-634 C1 & C2 — THE RAIDERS HAVE AN OWNER, AND WHO STANDS HERE MOVES THE DANGER ══════════
+// ⛔ ERIK: forces that hold ground and can be allied with, opposed, broken and taken over.
+// ⚑ AEVI'S FINDING, AND IT IS THE OLDEST HOLE IN holdings.js: the hold raid drew its attackers as
+//   `{ n: dangerLevel, quality: dangerLevel/2, what: "raiders" }`. The band and legion machinery built in
+//   CCODE-404–407 has had NOBODY WITH A NAME on the other side of the field since the day it shipped.
+// ⛑ AND THE ORDER IS HERS: "CCode applies, after Erik rules on spec §8 and readers C1 and C2 exist — content
+//   first would be the no-reader shape this project keeps closing." So these two readers are gated on FIXTURES
+//   here, before a power record is on disk, and the live corpus joins them in §350.
+console.log("\n── §349 · whose raid, and whose ground ──");
+{
+  const PW = await import("../engine/powers.js");
+  const HZ349 = await import("../engine/holdings.js");
+  const { dangerOf: dangerOf349 } = await import("../engine/random_encounters.js");
+  const { loadContentHeadless: lch349 } = await import("./headless_content.mjs");
+  const C349 = await lch349();
+
+  // a fixture world: two powers on overlapping ground, one of them making its coast SAFER
+  const tollmen = { id: "p_toll", name: "The Tollmen", kind: "outlaw_band", reach: ["road", "town"], dangerLift: 1,
+    verbs: ["toll", "raid"], holds: [{ at: "road", kind: "post" }], whenBroken: "the road is only the mountain again",
+    strength: { scale: "unit", contingents: [{ n: 18, quality: 1, what: "toll-men with crossbows" }, { n: 4, quality: 2, what: "a hard captain's men" }] } };
+  const baron  = { id: "p_baron", name: "The Barony", kind: "lordship", reach: ["town"], dangerLift: 1, verbs: ["levy"],
+    strength: { scale: "unit", contingents: [{ n: 40, quality: 2, what: "household men" }] } };
+  const slip   = { id: "p_slip", name: "The Slip", kind: "smugglers", reach: ["town"], dangerLift: -1, verbs: ["smuggle"],
+    strength: { scale: "unit", contingents: [{ n: 9, quality: 1, what: "quiet men" }] } };
+  const content349 = { powers: [tollmen, baron, slip] };
+  const road = { id: "road", dangerLevel: 2 }, town = { id: "town", dangerLevel: 2 };
+
+  // ── C2 ────────────────────────────────────────────────────────────────────────────────────────────
+  const fresh = {};
+  check("§349: ⛔ C2 — THE DANGER OF A PLACE IS THE AUTHORED FIGURE PLUS WHO IS STANDING ON IT, and the lifts SUM because two powers can hold the same ground and it should be worse rather than the same. ⚑ AND THE LIFT IS SIGNED, measured off the authored eight: the Keelmouth Slip carries −1 — a smugglers' arrangement makes its coast quieter — while the Firstsight Barony next door carries +1 and reaches the same two towns, so on that coast they cancel exactly. A lift that could only rise would have made that authoring impossible to say",
+    PW.dangerLiftAt("road", { content: content349, character: fresh }) === 1
+    && PW.dangerLiftAt("town", { content: content349, character: fresh }) === 1
+    && dangerOf349(road, { lift: PW.dangerLiftAt("road", { content: content349, character: fresh }) }) === 3
+    && dangerOf349(town, { lift: PW.dangerLiftAt("town", { content: content349, character: fresh }) }) === 3,
+    `road lift ${PW.dangerLiftAt("road", { content: content349, character: fresh })} · town lift ${PW.dangerLiftAt("town", { content: content349, character: fresh })} (+1 baron, +1 tollmen, −1 slip)`);
+
+  check("§349: ⛑ …AND A WORLD WITH NO POWERS READS EXACTLY AS IT DID BEFORE THEM, which is the truth for most of the 143 places. `dangerOf` with no lift is byte-for-byte the old function: a MISSING field still floors to 1 (SNG-225 §4b, or every `minDanger > 0` encounter is silently disqualified) and an explicit 0 is still honoured as a deliberate haven",
+    PW.dangerLiftAt("nowhere", { content: content349, character: fresh }) === 0
+    && PW.dangerLiftAt("road", { content: {}, character: fresh }) === 0
+    && dangerOf349({}) === 1 && dangerOf349({ dangerLevel: 0 }) === 0 && dangerOf349({ dangerLevel: 9 }) === 4);
+
+  // ⛔ ERIK'S 2026-07-19 RULING IS THE WHOLE POINT: clearing them lowers it.
+  const cleared = { powerState: { p_toll: { broken: true } } };
+  check("§349: ⛔ …AND CLEARING THEM LOWERS IT — Erik's 2026-07-19 ruling, mechanised. A broken power reaches nowhere, so the road it held falls back to what the mountain makes it. ⚠️ `powerState` lives on the SAVE, never on the record: two players meet the same authored Tollmen and only one of them has broken the chain-post",
+    PW.dangerLiftAt("road", { content: content349, character: cleared }) === 0
+    && dangerOf349(road, { lift: PW.dangerLiftAt("road", { content: content349, character: cleared }) }) === 2
+    && PW.dangerLiftAt("town", { content: content349, character: cleared }) === 0,
+    `road ${dangerOf349(road, { lift: PW.dangerLiftAt("road", { content: content349, character: cleared }) })} · town lift ${PW.dangerLiftAt("town", { content: content349, character: cleared })}`);
+
+  // ── C1 ────────────────────────────────────────────────────────────────────────────────────────────
+  check("§349: ⛔ C1 — THE RAID IS DRAWN FROM THE POWER'S OWN STRENGTH, in the same contingent shape `legionClash` already takes — which is why this is a reader and not a system: the fight machinery was built in CCODE-404–407 and has been waiting for somebody to name. ⚠️ A SLICE, never the whole: a toll gang does not empty its post to rob a farm. And the FLOOR IS ONE HEAD, so the last two men of a broken band still send one — a fight you can finish rather than a rounding error that vanishes",
+    (() => {
+      const party = PW.raidersFrom(tollmen, fresh);
+      const last = PW.raidersFrom({ ...tollmen, strength: { contingents: [{ n: 2, quality: 1, what: "the last two" }] } }, fresh);
+      return party && party.length === 2 && party[0].n === 7 && party[0]._at === 0 && party[1]._at === 1
+        && last && last[0].n === 1;
+    })(),
+    JSON.stringify(PW.raidersFrom(tollmen, fresh)));
+
+  check("§349: ⛔ …WHO IS RAIDING IS THE NEAREST CLAIM — a power that HOLDS something here before one that merely reaches it, then the stronger. ⚠️ And a power with no `raid` or `toll` verb never raids: the Barony levies and the Slip smuggles, so neither of them is who comes over the wall",
+    PW.raiderPowerAt("road", { content: content349, character: fresh })?.id === "p_toll"
+    && PW.raiderPowerAt("town", { content: content349, character: fresh })?.id === "p_toll"
+    && PW.raiderPowerAt("nowhere", { content: content349, character: fresh }) === null,
+    `road ${PW.raiderPowerAt("road", { content: content349, character: fresh })?.id} · town ${PW.raiderPowerAt("town", { content: content349, character: fresh })?.id}`);
+
+  // ⛔ LOSSES PERSIST, AND THE LAST HEAD BREAKS THEM — driven through the real `resolveRaid`, not by calling
+  // `notePowerLoss` by hand: a reader proved only through its own helper is the `apply`-on-a-copy shape.
+  {
+    const cfg349 = C349.rules?.economy?.holdStore || {};
+    const ch = { name: "T", npcRegistry: {}, holdings: [], powerState: {} };
+    // ⚠️ THE HOLD NEEDS A WATCH, which my first fixture did not give it: `garrison: []` sends `resolveRaid`
+    // down the UNDETECTED path — "that is what a watch is FOR, and having none is the loss" — so it never
+    // reached the clash at all, and the gate read as the reader being broken when the reader had not been
+    // called. Both checks assert `detected` now.
+    const watchOf349 = (n) => {
+      const people = {}, garrison = [];
+      for (let i = 0; i < n; i++) { people["g" + i] = { id: "g" + i, name: "G" + i, level: 4 }; garrison.push("g" + i); }
+      return { people, garrison };
+    };
+    const raidOnce = (n, stone, ch, day) => {
+      const { people, garrison } = watchOf349(n);
+      return HZ349.resolveRaid(ch, { id: "h", kind: "enterprise", name: "A Hold", condition: "thriving",
+        store: { raw_material: 30 }, crew: [], garrison, defence: stone, history: [] },
+        { cfg: cfg349, dangerLevel: 3, rng: () => 0.5, day, people, power: tollmen, meleeCfg: {} });
+    };
+
+    // ⛔ WHAT IT COSTS THEM IS WHAT THEY MET. Measured across five watches against the same 22-head band:
+    //   2 guards → rout, 0 of theirs down · 6 → rout, 1 · 12 → grinding, 2 · 20+walls → held, 2 · 40+walls → held, 3
+    // ⚑ MY FIRST VERSION OF THIS CHECK ASSERTED THAT FORTY RAIDS MUST COST THEM HEADS, and it failed — because a
+    // hold that folds instantly costs the raiders NOTHING. That is not a gap, it is the mechanic: `bloodBand`'s
+    // rate falls away as the tide runs your way, so overwhelming a watch is free and grinding through one is not.
+    // The rule is the ASYMMETRY, so the asymmetry is what is gated rather than any one number.
+    const soft = { name: "A", npcRegistry: {}, powerState: {} };
+    const hard = { name: "B", npcRegistry: {}, powerState: {} };
+    const rSoft = raidOnce(2, 0, soft, 10);
+    const rHard = raidOnce(40, 4, hard, 10);
+    check("§349: ⛔ WHAT THE RAID COSTS THEM IS WHAT THEY MET — a watch of two is routed and the band walks away whole; forty behind walls beat them off and take three of them down. ⛑ THE RATE IS `bloodBand`'s, NOT A SECOND ONE: the same `lossPerTide` with the same win/lose asymmetry every band clash in the game already pays, read from the RAIDERS' side of the tide. A second casualty rule living in holdings.js is exactly how the sell share drifted from its own projection an hour after I wrote it (CCODE-470c). ⚠️ The ASYMMETRY is gated, never a magnitude — the dials are Aevi's to tune",
+      rSoft?.detected === true && rHard?.detected === true
+      && rSoft.held === false && rHard.held === true
+      && (rSoft.power?.took || 0) === 0 && (rHard.power?.took || 0) > (rSoft.power?.took || 0)
+      && /The Tollmen/.test(JSON.stringify(rHard)) && /The Tollmen/.test(JSON.stringify(rSoft)),
+      `routed watch: ${rSoft.power?.took ?? 0} of theirs down · walled watch: ${rHard.power?.took ?? 0}`);
+
+    // ⛔ AND THE LOSSES PERSIST ACROSS RAIDS UNTIL THERE IS NOBODY LEFT — the whole reason clearing a band is
+    // worth doing rather than a coin-flip you re-roll next week. 22 heads, ~2 a raid against a watch of twelve.
+    let broke = 0, said = null;
+    for (let i = 0; i < 30 && !ch.powerState?.p_toll?.broken; i++) {
+      const r = raidOnce(12, 0, ch, 20 + i);
+      broke = i + 1;
+      if (r?.power?.broken) said = r.power.whenBroken;
+    }
+    const st = ch.powerState.p_toll;
+    const left = PW.headsOf(PW.contingentsOf(tollmen, ch));
+    check("§349: ⛑ …AND THEY DO NOT COME BACK. Twenty-two heads, ground down a few at a time by a watch of twelve, and the band is finished — the authored `whenBroken` line is what the world says at that moment. ⚠️ The AUTHORED RECORD IS NEVER TOUCHED: the subtraction lives on the save under `powerState`, indexed per contingent, so a crossbow line and a cudgel line are not one pool and two players meet the same Tollmen at different strengths",
+      !!st?.broken && left === 0 && said === tollmen.whenBroken
+      && PW.dangerLiftAt("road", { content: content349, character: ch }) === 0
+      && !Array.isArray(tollmen.strength.contingents.find(c => c.n !== 18 && c.n !== 4)),
+      `broken after ${broke} raids · ${left} left · said "${said}" · road lift now ${PW.dangerLiftAt("road", { content: content349, character: ch })}`);
+
+    check("§349: ⛔ …AND A POWER WITH NOTHING LEFT IS BROKEN AT THE PLACE THAT KNOWS THE LAST HEAD FELL, not by a separate pass somebody has to remember to run. ⛑ Which closes C2's loop: once broken it lifts nothing, so the road it held is only the mountain again — `whenBroken` is the authored line for exactly that moment",
+      (() => {
+        const ch2 = { name: "U", npcRegistry: {}, powerState: {} };
+        const hit = PW.notePowerLoss(ch2, tollmen, { 0: 18, 1: 4 }, { day: 5 });
+        return hit?.broken === true && hit.after === 0 && hit.whenBroken === tollmen.whenBroken
+          && PW.isStanding(ch2, tollmen) === false
+          && PW.dangerLiftAt("road", { content: content349, character: ch2 }) === 0;
+      })());
+
+    check("§349: ⛑ …AND WITH NO POWER THE RAID IS THE ANONYMOUS ONE IT ALWAYS WAS. ⚠️ Asserted because it is the path almost every hold in the world takes, and a feature that silently changes the common case while adding the rare one is the worst kind of regression: nothing to see and everything moved",
+      (() => {
+        const ch3 = { name: "V", npcRegistry: {}, powerState: {} };
+        const r = HZ349.resolveRaid(ch3, { id: "h", kind: "enterprise", name: "A Hold", condition: "thriving",
+          store: { raw_material: 30 }, crew: [], garrison: watchOf349(12).garrison, history: [] },
+          { cfg: cfg349, dangerLevel: 3, rng: () => 0.5, day: 9, people: watchOf349(12).people });
+        return r && r.detected === true && r.power == null && !Object.keys(ch3.powerState).length;
+      })());
   }
 }
 

@@ -1,7 +1,7 @@
 # THE APPARATUS — every harness, what it is for, and whether it runs
 
 ⛔ **ERIK, 2026-08-29: *"I want this to be a well oiled factory."*** ⚠️ **A factory you cannot see is not
-well oiled.** 111 harnesses across `tests/` and `scripts/`, and before this document nobody could say which
+well oiled.** 112 harnesses across `tests/` and `scripts/`, and before this document nobody could say which
 were gates, which were reports, and which had quietly stopped being wired into anything.
 
 ```bash
@@ -10,7 +10,7 @@ node scripts/apparatus.mjs --md     # …as markdown for §5
 node scripts/run_tests.mjs --ratchet    # the gates, blocking only on regression
 ```
 
-**Last measured: 2026-09-23 · v2.4.12 · 111 files.**
+**Last measured: 2026-09-23 · v2.4.13 · 112 files.**
 
 ---
 
@@ -134,7 +134,7 @@ worthless.
 | harness | kind | assertions | purpose |
 |---|---|---|---|
 | `tests/smoke` | ✅ GATE | 3570 | — |
-| `tests/how_it_works` | ✅ GATE | 3424 | CCODE-285 |
+| `tests/how_it_works` | ✅ GATE | 3433 | CCODE-285 |
 | `tests/skill_battle_sim` | ✅ GATE | 217 | SNG-098: the two-sided contest + fog-of-war invariant |
 | `tests/content_ci` | ✅ GATE | 197 | SNG-BATCH-10 Phase 4 / SNG-040/064: the content integrity gate |
 | `tests/craft_crit` | ✅ GATE | 43 | miss // it and YOU HAVE ONLY MADE CHAOS |
@@ -143,8 +143,8 @@ worthless.
 | `tests/damage_sensitivity` | ✅ GATE | 22 | — |
 | `tests/interpose_wiring` | ✅ GATE | 19 | CCODE-311 |
 | `tests/growth_sim` | ✅ GATE | 15 | behave sensibly when // run for a whole playthrough rather than one beat |
+| `tests/changeset_check` | ✅ GATE | 14 | CCODE-204 · SNG-505 Layer 2: a change set is CHECKED, not trusted |
 | `tests/contest_sim` | ✅ GATE | 13 | THE CONTEST AUDITOR: distributional truth about the round engine |
-| `tests/changeset_check` | ✅ GATE | 12 | CCODE-204 · SNG-505 Layer 2: a change set is CHECKED, not trusted |
 | `tests/save_fixtures` | ✅ GATE | 11 | CCODE-288 |
 | `tests/taunt_wiring` | ✅ GATE | 11 | CCODE-306 |
 | `tests/roll_sensitivity` | ✅ GATE | 9 | SNG-258 §SENSITIVITY |
@@ -188,6 +188,7 @@ worthless.
 | `scripts/run_tests` | 🔧 TOOL+SELFTEST | 3 | EVERY SUITE RUNS, EVEN AFTER ONE GOES RED |
 | `scripts/sizes_inject` | 🔧 TOOL+SELFTEST | 3 | ⛔ THE THIRD INSTANCE OF A DEFECT THIS REPO HAS ALREADY NAMED TWICE |
 | `scripts/skills_inject` | 🔧 TOOL+SELFTEST | 3 | regenerate the derived half of docs/SKILLS |
+| `scripts/apply_changeset` | 🔧 TOOL+SELFTEST | 2 | APPLY A CHANGE SET'S `added` RECORDS TO CONTENT, AND REGISTER THEM |
 | `scripts/module_map` | 🔧 TOOL+SELFTEST | 2 | STAMP AN IMPORT MAP INTO index |
 | `scripts/npc_pipeline` | 🔧 TOOL+SELFTEST | 2 | THE DOORS A PERSON PASSES TO BECOME PLAYABLE, DRIVEN RATHER THAN DESCRIBED |
 | `scripts/substrate_atlas` | 🔧 TOOL+SELFTEST | 2 | 39 REGIONS × 6 SOURCES, PRINTED ONCE, BECAUSE NOBODY HAS EVER SEEN IT |

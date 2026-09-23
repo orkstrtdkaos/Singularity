@@ -10195,7 +10195,7 @@ await (async () => {
   const manifest = JSON.parse(readFileSync(join(root, "content/packs/valley/manifest.json"), "utf8"));
   check("229 §2a: the manifest WHITELISTS the bestiary (or it silently does not exist)", (manifest.provides.bestiary || []).includes("bestiary.json"));
   const stateSrc229 = readFileSync(join(root, "engine/state.js"), "utf8");
-  check("229 §2a: loadContent loads it into CONTENT.bestiary + merges the synthesized monsters into the pool", /const bestiaryP = jSettled\(\(valley\.provides\.bestiary/.test(stateSrc229) && /bestiary, traditionMotivations,[^\n]*encounterFrameContent/.test(stateSrc229) && /bestiaryEncounters\(bestiary\)/.test(stateSrc229));
+  check("229 §2a: loadContent loads it into CONTENT.bestiary + merges the synthesized monsters into the pool", /const bestiaryP = jSettled\(\(valley\.provides\.bestiary/.test(stateSrc229) && /\bbestiary,[^\n]*\btraditionMotivations,[^\n]*encounterFrameContent/.test(stateSrc229)   /* CCODE-476: was `bestiary, traditionMotivations,` — pinning the ADJACENCY of two keys in the content object, which went red the moment `powers,` was legitimately added between them. The claim is that all three are IN the returned object, not that nothing may ever sit between two of them. */ && /bestiaryEncounters\(bestiary\)/.test(stateSrc229));
 
   // §2b: every creature becomes a danger-gated DUEL encounter — the fight pool finally has monsters.
   const monsters = bestiaryEncounters(bestiary);

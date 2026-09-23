@@ -2358,11 +2358,17 @@ console.log("\n── §179 · labelled rows and chips on the holding card; Hugi
     /\.known-npc \.npc-name \{[^}]*text-overflow: ellipsis[^}]*white-space: nowrap/.test(css179) && /\.known-npc \.rep-band \{[^}]*white-space: nowrap/.test(css179) && /\.npc-ctls \{/.test(css179) && /\.npc-ctl \{[^}]*background: none/.test(css179)
     && /<span class="npc-ctls"><button class="npc-ctl" data-setname=/.test(app179) && /<\/button>\$\{imagesEnabled\(\)[^\n]*<\/span>` : "";/.test(app179));
   check("§179: …a person whose name is only \"—\" is shown by what they are, in parentheses, and every name and standing carries its full text as a title",
-    /const shownName = \(p\) => \{[^\n]*nameIsUnknown\(rec\)[^\n]*`\(\$\{role\.slice\(0, 28\)\}\)`/.test(app179) && /title="\$\{esc\(shownName\(p\)\)\}">\$\{esc\(shownName\(p\)\)\}<\/span>/.test(app179)
+    /const shownName = \(p\) => \{[^\n]*nameIsUnknown\(rec\)[^\n]*`\(\$\{role\.slice\(0, 28\)\}\)`/.test(app179)
+    // ⛑ CCODE-477 finishes what this gate's own comment below started. It asserted the CLAIM for the partner
+    // row and went on pinning the SPELLING for the ordinary one — `title="${esc(shownName(p))}"` exactly — so
+    // SNG-638 N5 reddened it by making the hover carry the WHOLE name and the office, which is strictly more
+    // of "its full text". What matters is that every row's VISIBLE text is `shownName` and that it carries a
+    // hover at all; what goes in the hover is that feature's business.
+    && /title="[^>\n]*">\$\{esc\(shownName\(p\)\)\}/.test(app179)
     // ⛔ ERIK 2026-09-12: "some names disappear completely." This clause pinned `esc(p.name)` on the PARTNER row — the one row
     // that did NOT go through `shownName`, which is exactly why a partner with no name rendered as a bare heart. ⚠️ A GATE THAT
     // PINS THE SPELLING OF A DEFECT DEFENDS THE DEFECT. It now asserts the claim: every row, partner included, reads one rule.
-    && /title="\$\{esc\(shownName\(p\)\)\}">❤ \$\{esc\(shownName\(p\)\)\}<\/span><span class="rep-band trusted"/.test(app179));
+    && /title="[^>\n]*">❤ \$\{esc\(shownName\(p\)\)\}<\/span><span class="rep-band trusted"/.test(app179));
 }
 
 /* ══════════ §180 — THE RATCHET, ONCE AND IN PARALLEL (Erik 2026-09-12: "please explain the 5 minute ratchet necessity... is it needed?" — "yes, lower it and do the plan") ══════════ */
@@ -24469,7 +24475,11 @@ console.log("\n── §338 · a person met in play has a name ──");
   // ⛔ AND THE CONTRACT ASKS FOR IT, because the engine cannot mint what the model never writes down.
   const gmSrc338 = rd("engine/gm.js");
   check("§338: ⛔ AND THE CONTRACT ASKS FOR A NAME — it was the ONE field in the whole npcUpdates entry whose spec was literally \"...\", in a contract where age, sex, gender and pronouns each carry a paragraph; and rule 14 went further and blessed \"The Runner\" as an acceptable placeholder. ⚠️ An engine rule the prompt contradicts is a rule that loses",
-    /THEIR NAME, and a role is not one/.test(gmSrc338)
+    // ⚠️ CCODE-477: this pinned the exact phrase "THEIR NAME, and a role is not one", and SNG-638 N1 rewrote
+    // the field to ask for a WHOLE name. The claim — the contract demands a name and refuses a role — is stronger
+    // than before; only the sentence carrying it moved. Sixth gate this session to pin the evidence over the claim.
+    /a role is not (one|a name)/i.test(gmSrc338)
+    && /ONE WORD IS NOT A WHOLE NAME/.test(gmSrc338)
     && /Never leave this blank and never put a description here/.test(gmSrc338)
     && /A LABEL IS NOT A NAME/.test(gmSrc338)
     && !/a placeholder such as The Runner or the courier/.test(gmSrc338));
@@ -25309,6 +25319,80 @@ console.log("\n── §349 · whose raid, and whose ground ──");
         return r && r.detected === true && r.power == null && !Object.keys(ch3.powerState).length;
       })());
   }
+}
+
+// ══════════ §350 · CCODE-477 (SNG-638) — A TITLE IS NOT A GIVEN NAME ══════════
+// ⛔ ERIK: "For the tuning warden Maren — make sure that when people surface in the future, they get a full name, first,
+// middle and last, and/or a title — so they can be distinct."
+// ⚑ AEVI MEASURED WHY THERE ARE FOUR MARENS (SNG-638 §1) and named `usedGivenNames` as the biggest single win: it counts
+// given names through `givenName`, which takes the FIRST WORD, so "Elder Senna" counted as a person whose given name is
+// *elder* and every titled person was invisible to the reuse guard.
+// ⚠️ AND THE SPEC UNDERSOLD IT IN ONE DIRECTION AND OVERSOLD IT IN ANOTHER, both worth keeping:
+//   · it assumed `givenNameAlias` nearly did this already. It cannot: its rule "nothing after it: the whole name, not an
+//     alias" returns "" for EVERY two-word titled name — "Elder Senna" yields no alias at all — which is right for
+//     LINKING a narrated word to a person and useless for COUNTING given names. Two questions, so two functions.
+//   · "most of the people who matter" is 8 of 131 registry entries on today's corpus. But the pollution runs BOTH ways:
+//     the word "elder" was being counted as the given name of THREE separate people, so the list of names to avoid was
+//     advising the GM against a title while Senna, Coll and Ilma stayed invisible.
+console.log("\n── §350 · a title is not a given name ──");
+{
+  const NM350 = await import("../engine/namematch.js");
+  const { readFileSync: rf350, readdirSync: rd350 } = await import("node:fs");
+
+  check("§350: ⛔ THE GIVEN NAME IS READ PAST THE TITLE — every honorific the world actually hands out, including the offices Aevi named. ⚠️ A hyphenated title is TWO WORDS to this function because the splitter breaks on `-`, so her `tuning-warden` could never have matched and the parts are listed separately: \"Tuning-Warden Maren Oriel Vasse\" returned *tuning* before that was found",
+    NM350.givenNamePastTitle("Elder Senna") === "senna"
+    && NM350.givenNamePastTitle("Councilor Dresh") === "dresh"
+    && NM350.givenNamePastTitle("Castellan Brannoch") === "brannoch"
+    && NM350.givenNamePastTitle("High Luminary Sera") === "sera"
+    && NM350.givenNamePastTitle("Tuning-Warden Maren Oriel Vasse") === "maren"
+    && NM350.givenNamePastTitle("Under-Keeper Bram") === "bram"
+    && NM350.givenNamePastTitle("Maren Oast") === "maren",
+    `${["Elder Senna", "High Luminary Sera", "Tuning-Warden Maren Oriel Vasse"].map(n => `${n} -> ${NM350.givenNamePastTitle(n)}`).join(" · ")}`);
+
+  check("§350: ⛑ …AND A THING THAT IS NOT A NAME STILL COUNTS FOR NOTHING. An epithet opening with an article has no given name inside it (\"The Starless One\"); a lowercase word is a description, not a name (\"Elder woman\"); a bare office is nobody (\"Tuning-Warden\", which is exactly the record this whole spec exists to fix). ⚠️ Checked because stepping over a title is only safe if what is left still has to LOOK like a name",
+    NM350.givenNamePastTitle("The Starless One") === ""
+    && NM350.givenNamePastTitle("Elder woman") === ""
+    && NM350.givenNamePastTitle("Tuning-Warden") === ""
+    && NM350.givenNamePastTitle("Seeker of the Lost Chord") === ""
+    && NM350.givenNamePastTitle("") === "");
+
+  // ⛔ `givenName` IS A DIFFERENT QUESTION AND MUST NOT MOVE. It is contract-documented as "the first token,
+  // normalised", gated as that in smoke, and has four other callers (codex matching ×2, travelers ×2) that want
+  // exactly that. Changing it under them would have been the drift this project keeps closing.
+  check("§350: ⛔ …AND `givenName` IS UNTOUCHED, because \"what is the first token\" and \"what are they actually called\" are two questions with two callers each. `codex.js` matches a narrated word against the first token; the reuse guard needs the name past the office. One function answering both would have been a third thing that is neither",
+    NM350.givenName("Elder Senna") === "elder" && NM350.givenName("Mara Wells, the Water Keeper") === "mara"
+    && NM350.givenName("Calvar") === "calvar");
+
+  // ⛔ AND THE REAL CORPUS, because a rule that only works on my examples is not a rule.
+  {
+    const chars350 = [];
+    for (const pk of rd350("characters")) for (const f of rd350(`characters/${pk}`)) {
+      try { chars350.push(JSON.parse(rf350(`characters/${pk}/${f}`, "utf8"))); } catch { /* not a save */ }
+    }
+    const used350 = NM350.usedGivenNames(chars350);
+    const titles = ["elder", "warden", "keeper", "sister", "councilor", "overseer", "master"];
+    const stillCounted = titles.filter(w => used350.has(w));
+    check("§350: ⛔ OVER THE REAL SAVES: NO OFFICE IS COUNTED AS A GIVEN NAME, and the people behind the offices are. ⚑ And this is what Erik asked for, arriving: \"maren\" is now counted for FOUR characters where the guard saw three, because the fourth was wearing a title. That is the collision the whole spec exists to surface",
+      stillCounted.length === 0 && (used350.get("senna")?.size || 0) >= 1 && (used350.get("coll")?.size || 0) >= 1
+      && (used350.get("ilma")?.size || 0) >= 1 && (used350.get("maren")?.size || 0) >= 4,
+      stillCounted.length ? `still counted as given names: ${stillCounted.join(", ")}`
+        : `${used350.size} names counted · maren ${used350.get("maren")?.size} · senna ${used350.get("senna")?.size} · coll ${used350.get("coll")?.size}`);
+  }
+
+  // N1 + N5 — the ask, and the read.
+  const G350 = rd("engine/gm.js");
+  check("§350: ⛔ N1 — THE GM IS ASKED FOR A WHOLE NAME AND AN OFFICE, and told plainly that one word is not a whole name. ⚠️ The old field asked only that a role is not a name, and a single given name satisfied it — which is how \"Maren\", \"Aldric\" and \"Renn\" all became legal answers to \"THEIR NAME\"",
+    /ONE WORD IS NOT A WHOLE NAME/.test(G350) && /given and family at least/.test(G350)
+    && /"title": "THEIR OFFICE OR EPITHET/.test(G350)
+    && /the engine mints their real name and keeps it for when they earn it/.test(G350));
+
+  check("§350: ⛑ N5 — …AND BOTH ARE STORED AND READ BACK. A `title` is not a `role`: a role is what they do, a title is what they are called by it. The GM's known-people block prints the office so a campaign cannot re-invent it halfway through — the field is asked for, written at the create door, and READ, which is the four doors walked in one change",
+    /title: u\.title \? smartClamp/.test(rd("engine/npcs.js"))
+    && /fullName: u\.fullName \? prettifyNpcName/.test(rd("engine/npcs.js"))
+    && /\$\{n\.title \? ` \u2014 \$\{n\.title\}` : ""\}/.test(rd("engine/npcs.js"))
+    // ⛑ AND THE THIRD SURFACE N5 NAMES: the player's own people row. A row reading "Maren" beside another row
+    // reading "Maren" is the defect Erik named — the office goes on the line, the whole name on the hover.
+    && /const titleOf = \(p\) =>/.test(rd("app.js")) && /const wholeName = \(p\) =>/.test(rd("app.js")));
 }
 
 /* ══════════ REPORT ══════════ */

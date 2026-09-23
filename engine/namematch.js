@@ -72,6 +72,40 @@ export function givenName(full) {
   return normName(first);
 }
 
+/** ⛔ SNG-638 N3 — THEIR GIVEN NAME, READ PAST THE TITLE, and it is a DIFFERENT QUESTION from `givenName`
+ *  above. That one answers "what is the first token" and is contract-documented and gated as exactly that
+ *  ("a given name is the first token, normalised"), with four other callers that want it. This one answers
+ *  "what are they actually called", which is what the reuse guard needs and what it has never had.
+ *
+ *  ⛔ AEVI'S FINDING (SNG-638 §1): `usedGivenNames` called `givenName`, so every titled person was invisible
+ *  to the guard. Measured across the 16 saves before the fix — 131 registry entries, 8 of them titled:
+ *      "Elder Senna" · "Warden Coll" · "Keeper Ilma" · "Sister Vreni" · "Councilor Dresh" · "Elder Woman" …
+ *  and the word **"elder" was being counted as the given name of THREE separate people**, so the list of
+ *  names to avoid was advising the GM against a title while Senna, Coll and Ilma stayed invisible. It is not
+ *  "most of the people who matter" on today's corpus — it is eight of a hundred and thirty-one — but it is
+ *  every person who holds an office, and the pollution runs the other way too.
+ *
+ *  ⚠️ AND `givenNameAlias` COULD NOT HAVE SERVED THIS, which the spec assumed it nearly did. Its rule
+ *  "nothing after it: the whole name, not an alias" returns "" for EVERY two-word titled name — "Elder
+ *  Senna" gives no alias at all — because for LINKING a narrated word to a person that is the right answer
+ *  and for COUNTING given names it is useless. Two questions, two functions, and the gate drives both.
+ *
+ *  ⛑ A NAME IS STILL REQUIRED TO LOOK LIKE ONE. Past the titles: nothing left is "", a lowercase word is
+ *  not a name ("Elder woman" is a description), a connective is not a name, and an epithet that opens with
+ *  an article has no given name inside it at all. Pure. */
+export function givenNamePastTitle(full) {
+  const words = String(full || "").trim().split(/[\s,(—–-]+/).filter(Boolean);
+  if (!words.length) return "";
+  if (ALIAS_EPITHET_OPENER.has(words[0].toLowerCase())) return "";
+  let i = 0;
+  while (i < words.length && ALIAS_HONORIFIC.has(words[i].toLowerCase())) i++;
+  const w = words[i] || "";
+  if (!w) return "";                                    // titles all the way down
+  if (ALIAS_CONNECTIVE.has(w.toLowerCase())) return "";
+  if (w[0] !== w[0].toUpperCase() || w[0] === w[0].toLowerCase()) return "";   // a name is capitalised where a narrator writes it
+  return normName(w);
+}
+
 /** ⛔ CCODE-400 (Erik) — "When the GM narrates first name only, but the context tells you who it is fully, there should still be an
  *  underline." ⚑ MEASURED across the 16 saves: 1,184 people are in the click index and 1,160 of them are known by a multi-word name —
  *  "Halvex Coil, the Rewriter", "Vessin Tallow-bark" — so a narrator writing *Halvex* or *Vessin* wrote a name the index does not hold.
@@ -87,7 +121,20 @@ export function givenName(full) {
 // through — "The Unravelled Mind", "The Starless One" — and has no first name inside it to offer.
 const ALIAS_EPITHET_OPENER = new Set(["the", "a", "an", "unknown", "someone", "somebody"]);
 const ALIAS_HONORIFIC = new Set(["sister", "brother", "elder", "overseer", "warden", "keeper", "master", "mistress",
-                                 "seeker", "lady", "lord", "sir", "captain", "old", "young"]);
+                                 "seeker", "lady", "lord", "sir", "captain", "old", "young",
+                                 // ⛔ SNG-638 N3 (Aevi): the offices the world actually hands out, which the guard
+                                 // could not see. "Councilor Dresh" counted as a person whose given name is *councilor*.
+                                 "councilor", "councillor", "castellan", "baron", "baroness", "mother", "father",
+                                 "king", "queen", "prince", "princess", "steward", "marshal", "reeve", "provost",
+                                 // ⚠️ HYPHENATED TITLES ARE TWO WORDS HERE. The splitter breaks on `-`, so Aevi's
+                                 // "tuning-warden" could never match — "Tuning-Warden Maren" split to ["Tuning","Warden"]
+                                 // and returned *tuning* as the given name. Each part is listed separately instead.
+                                 // ⛑ `luminary` is here on EVIDENCE, not instinct: "High Luminary Sera" is in the corpus
+                                 // and `high` alone left her counting as *luminary*. I measured every first word in 286
+                                 // names before adding any of these — and the measurement REFUSED most of what I was
+                                 // about to add: the repeated first words are given names (mara ×6, deni, edvar, pell,
+                                 // maren, maret ×3 each), which is exactly what the guard exists to catch.
+                                 "tuning", "high", "luminary", "chief", "first", "under"]);
 const ALIAS_CONNECTIVE = new Set(["of", "the", "who", "whom", "she", "he", "they", "that", "and", "in", "at", "from", "which", "with"]);
 export function givenNameAlias(full) {
   const words = String(full || "").trim().split(/[\s,(—–-]+/).filter(Boolean);
@@ -110,7 +157,7 @@ export function usedGivenNames(characters = []) {
     if (!c) continue;
     const who = c.name || c.id || "?";
     for (const n of Object.values(c.npcRegistry || {})) {
-      const g = givenName(n?.name);
+      const g = givenNamePastTitle(n?.name);   // ⛔ SNG-638 N3: past the office, or a title counts as a name
       if (g.length > 2 && g !== "unknown") (seen.get(g) || seen.set(g, new Set()).get(g)).add(who);
     }
   }

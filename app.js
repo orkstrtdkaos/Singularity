@@ -178,7 +178,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.4.13";
+const APP_VERSION = "2.4.14";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -20064,7 +20064,12 @@ function renderPlay(turn, opts = {}) {
       // what the person is, in parentheses, until the story gives one.
       const peopleCtl = (p) => p.id ? `<span class="npc-ctls"><button class="npc-ctl" data-setname="${esc(p.id)}" title="Set or extend this person's name (e.g. Pell → Pell Ran Marsh)">✎</button><button class="npc-ctl" data-mergenpc="${esc(p.id)}" title="This is the same person as someone else you know — merge them">⇊</button>${imagesEnabled() && character.npcRegistry?.[p.id]?.image ? `<button class="npc-ctl" data-repic="${esc(p.id)}" title="Look at ${esc(p.name)}'s picture — and draw it again if it isn't them">↻</button>` : ""}</span>` : "";
       const shownName = (p) => { const rec = p.id ? character.npcRegistry?.[p.id] : null; const bare = !p.name || p.name === "—" || (rec && nameIsUnknown(rec)); const role = String(rec?.role || "").split(/[,;—]/)[0].trim(); return bare && role ? `(${role.slice(0, 28)})` : (p.name || "someone"); };
-      const row = (p, extra = "") => `<div class="known-npc"><span class="npc-name entity-hover" ${p.id ? `data-entity="npc:${esc(p.id)}"` : ""} title="${esc(shownName(p))}">${esc(shownName(p))}</span><span class="rep-band ${p.bondType === "romantic" ? "trusted" : ""}" title="${esc(p.label)}${esc(extra)}">${esc(p.label)}${extra}</span>${peopleCtl(p)}</div>`;
+      // ⛑ SNG-638 N5 — THE OFFICE IS SHOWN, and the WHOLE name is what the hover says. A row reading "Maren"
+      // beside another row reading "Maren" is the defect Erik named; "Maren · Tuning-Warden of the Lower
+      // Terrace" and a hover of "Maren Oriel Vasse" tell them apart without lengthening the line.
+      const titleOf = (p) => { const rec = p.id ? character.npcRegistry?.[p.id] : null; return rec?.title ? String(rec.title) : ""; };
+      const wholeName = (p) => { const rec = p.id ? character.npcRegistry?.[p.id] : null; return rec?.fullName || shownName(p); };
+      const row = (p, extra = "") => `<div class="known-npc"><span class="npc-name entity-hover" ${p.id ? `data-entity="npc:${esc(p.id)}"` : ""} title="${esc(wholeName(p))}${titleOf(p) ? ` — ${esc(titleOf(p))}` : ""}">${esc(shownName(p))}${titleOf(p) ? ` <span class="hint">· ${esc(titleOf(p))}</span>` : ""}</span><span class="rep-band ${p.bondType === "romantic" ? "trusted" : ""}" title="${esc(p.label)}${esc(extra)}">${esc(p.label)}${extra}</span>${peopleCtl(p)}</div>`;
       const body = `${partners.length ? `<div class="partner-adjacent" style="margin-bottom:6px">${partners.map(p => `<div class="known-npc partner"><span class="npc-name entity-hover" ${p.id ? `data-entity="npc:${esc(p.id)}"` : ""} title="${esc(shownName(p))}">❤ ${esc(shownName(p))}</span><span class="rep-band trusted" title="A committed partner — with you in all but the mechanics · ${esc(p.label)}">${esc(p.label)} · with you</span>${peopleCtl(p)}</div>`).join("")}</div>` : ""}${rep ? `<div style="margin-bottom:4px"><span class="rep-band ${rep.band}">${rep.band} (${rep.score})</span></div>` : ""}${hereRest.length ? hereRest.map(p => row(p)).join("") : (partners.length ? "" : `<span class="insight">no one you know is here right now</span>`)}`;
       return `<details class="sidebar-sec" data-sec="whoshere"${sectionOpen("whoshere", true) ? " open" : ""}><summary><span class="sec-title">${esc(location.name)} — who's here</span>${rep ? ` <span class="sec-sum">· ${rep.band}</span>` : ""}</summary><div class="sec-body">${body}</div></details>`;
     })()}

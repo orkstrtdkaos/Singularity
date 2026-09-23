@@ -342,6 +342,14 @@ export function applyNpcUpdates(character, updates = [], ctx = {}) {
         // consistent about who this person is and can reveal it when the player earns it.
         trueName: first.trueName || undefined,
         role: String(u.role || "").slice(0, 100),
+        // ⛔ SNG-638 N5 — THE OFFICE AND THE WHOLE NAME, both stored at the door that creates a person.
+        // ⚠️ A `title` is NOT a `role`. A role is what they do ("hostel-keeper"); a title is what they are
+        // CALLED by it ("Councilor of Millbrook"), and it is what keeps a second Maren a different person.
+        // The GM block below reads it back so an office is never re-invented halfway through a campaign.
+        title: u.title ? smartClamp(String(u.title), 80) : undefined,
+        // ⛑ `fullName` is given-middle-family when the fiction gave one. What the player HEARS stays `name`;
+        // this is the record's own answer to "which Maren", and it is why the reuse guard can be strict.
+        fullName: u.fullName ? prettifyNpcName(String(u.fullName).slice(0, 80)) : undefined,
         description: smartClamp(String(u.description || ""), 600), // SNG-152: model prose — word boundary, generous
         firstMet: { locationId: ctx.locationId || null, day: ctx.day ?? null },
         relationship: 0,
@@ -989,7 +997,7 @@ export function npcRegistryForGM(character, { locationId = null, sceneNpcNames =
           (d.acknowledgeTone ? ` TONE (earned approval; sharp when crossed): ${d.acknowledgeTone}` : "")
         : ` ⟡ DRIVEN: ${d.driveSummary || (d.wants || [])[0] || "has their own wants"}`;
     }
-    return `- ${n.name}${n.trueName && n.nameUnknown ? ` [GM-EYES-ONLY — their name is ${n.trueName}; ${character.name || "this character"} has NOT learned it. Keep them consistent as that person, refer to them as the character would, and let the name be EARNED — never state it plainly unasked. When the fiction gives it, emit revealName: "${n.trueName}"]` : ""}${Array.isArray(n.aliases) && n.aliases.length ? ` (also called ${n.aliases.slice(-3).join(", ")})` : ""}${n.role ? ` (${n.role})` : ""}${n.gender || n.pronouns ? ` [${[n.gender, n.pronouns].filter(Boolean).join(", ")} — use these pronouns]` : ""} — ${relationshipBand(n.relationship)} (${n.relationship}), status: ${n.status}.` +
+    return `- ${n.name}${n.trueName && n.nameUnknown ? ` [GM-EYES-ONLY — their name is ${n.trueName}; ${character.name || "this character"} has NOT learned it. Keep them consistent as that person, refer to them as the character would, and let the name be EARNED — never state it plainly unasked. When the fiction gives it, emit revealName: "${n.trueName}"]` : ""}${Array.isArray(n.aliases) && n.aliases.length ? ` (also called ${n.aliases.slice(-3).join(", ")})` : ""}${n.title ? ` — ${n.title}` : ""}${n.role ? ` (${n.role})` : ""}${n.gender || n.pronouns ? ` [${[n.gender, n.pronouns].filter(Boolean).join(", ")} — use these pronouns]` : ""} — ${relationshipBand(n.relationship)} (${n.relationship}), status: ${n.status}.` +
       // ⛔ CCODE-385: what is TRUE of them now, from another traveler's story, beside what this character knows — for the GM to let surface
       (n.worldLife && ((n.worldLife.role && n.worldLife.role !== n.role) || (n.worldLife.status && n.worldLife.status !== n.status))
         ? ` IN THE WORLD NOW (true, from another traveler's story; this character may not know it yet — let it surface the way news does): ${[

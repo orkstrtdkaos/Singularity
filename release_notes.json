@@ -16,6 +16,18 @@
   "next": [],
   "releases": [
     {
+      "version": "2.4.14",
+      "date": "2026-09-23",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "Two people called Maren are two people",
+          "summary": "The guard that stops the world reusing a name could not see anyone with a title — so Elder Senna counted as a person whose name was \"elder\", and the real Senna, Coll and Ilma were invisible to it.",
+          "detail": "Four characters on this device have met a Maren. The check that keeps the world from handing out the same name twice read only the first word of a name, so every person holding an office was counted under their office instead: \"elder\" was being tallied as the given name of three separate people while Senna, Coll, Ilma, Vreni and Dresh were invisible. It reads past the office now. The GM is also asked for a whole name rather than a single one — given and family at least, a middle name where the fiction allows — and for a title when somebody holds one, which is shown beside their name in your people list with the whole name on hover."
+        }
+      ]
+    },
+    {
       "version": "2.4.13",
       "date": "2026-09-23",
       "entries": [

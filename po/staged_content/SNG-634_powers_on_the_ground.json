@@ -1,0 +1,978 @@
+{
+  "schemaVersion": 1,
+  "id": "SNG-634_powers_on_the_ground",
+  "kind": "changeset",
+  "_title": "Powers on the ground: seven powers and their leaders, seated on canon places",
+  "_why": "Erik 2026-09-23: bandits and a bandit king, a thieves' guild, territorial lords kind and cruel, forces that can aid or be opposed, beaten and taken over. Measured: 4 of 66 figures carry an acquisitive want, 20 of 20 villains want world-states, 17 of 17 leaders are keepers, and the hold raid at holdings.js:717 has no owner. Spec: po/SPEC_SNG-634_powers_on_the_ground.md.",
+  "ids": [
+    "power_switchback_tollmen",
+    "power_gralloch_crown",
+    "power_edge_riders",
+    "power_undercount",
+    "power_keelmouth_slip",
+    "power_firstsight_barony",
+    "power_echo_bridge",
+    "dessa_wyck",
+    "harl_maddock",
+    "tamsin_galt",
+    "mother_hesk",
+    "ines_harrowgate",
+    "oswin_tarrant",
+    "castellan_brannoch"
+  ],
+  "removed": {},
+  "renamed": {},
+  "added": [
+    {
+      "_file": "content/packs/valley/powers.json",
+      "_kind": "power",
+      "id": "power_switchback_tollmen",
+      "name": "The Switchback Tollmen",
+      "kind": "outlaw_band",
+      "temper": "hard",
+      "seat": "old_switchback",
+      "reach": [
+        "old_switchback",
+        "kestrels_roost"
+      ],
+      "leader": "dessa_wyck",
+      "answersTo": "power_gralloch_crown",
+      "strength": {
+        "scale": "unit",
+        "contingents": [
+          {
+            "n": 18,
+            "quality": 1,
+            "what": "toll-men with crossbows and cudgels"
+          }
+        ]
+      },
+      "holds": [
+        {
+          "at": "old_switchback",
+          "kind": "post",
+          "name": "the halfway waystation",
+          "garrison": 8
+        }
+      ],
+      "verbs": [
+        "toll",
+        "raid",
+        "tribute"
+      ],
+      "encounters": [
+        "re_toll_bandits"
+      ],
+      "dangerLift": 1,
+      "noticesYouWhen": [
+        "crossed",
+        "neighbour"
+      ],
+      "wantsFromYou": "The toll, paid without argument, and a second one if you are carrying something worth more than your boots.",
+      "offersYou": "Safe passage on the high road, and word of anything coming down from the pass before it arrives.",
+      "leverage": "Dessa keeps back a fifth of what she sends the Gralloch. Anyone who can prove it owns her.",
+      "whenBroken": "The high road is only as dangerous as the mountain again, until the Gralloch sends a harder captain to take the waystation back.",
+      "rivals": [],
+      "opposedBy": [
+        "the_kestrel"
+      ],
+      "plainly": "A toll gang holding the old road up to the high pass. They would rather be paid than fight.",
+      "descriptionSeed": "They took the ruined waystation at the halfway turn and made it a tollhouse: a chain across the road, a fire in the old hearth, and a price that depends on how you look. They pay tribute up the line to the Gralloch and resent every crystal of it.",
+      "appearance": "A rusted chain slung across a stone-cut road, a half-roofed waystation with smoke at its hearth, men in patched oilskins with crossbows resting on the wall"
+    },
+    {
+      "_file": "content/packs/valley/powers.json",
+      "_kind": "power",
+      "id": "power_gralloch_crown",
+      "name": "The Gralloch Crown",
+      "kind": "outlaw_crown",
+      "temper": "cruel",
+      "seat": "the_gralloch",
+      "reach": [
+        "the_gralloch",
+        "the_churn_edge",
+        "tumbledown_market",
+        "spindrift_hollow"
+      ],
+      "leader": "harl_maddock",
+      "answersTo": null,
+      "strength": {
+        "scale": "legion",
+        "contingents": [
+          {
+            "n": 90,
+            "quality": 2,
+            "what": "the King's own host — veterans of the feud"
+          },
+          {
+            "n": 24,
+            "quality": 3,
+            "what": "the Ring-sworn, his household blades"
+          }
+        ]
+      },
+      "holds": [
+        {
+          "at": "the_gralloch",
+          "kind": "post",
+          "name": "the Feast Hall, a stockade raised on the ground where the feud ended",
+          "garrison": 40
+        }
+      ],
+      "verbs": [
+        "raid",
+        "tribute",
+        "recruit",
+        "expand",
+        "feud"
+      ],
+      "encounters": [],
+      "dangerLift": 1,
+      "noticesYouWhen": [
+        "crossed",
+        "wealth",
+        "rival_ally"
+      ],
+      "wantsFromYou": "Your knee, your coin, or your head on the stockade — and he genuinely does not mind which.",
+      "offersYou": "A band of your own under his banner, a share of every road he taxes, and the freedom to do anything to anyone he has not already claimed.",
+      "leverage": "Four chiefs came to his truce feast and one walked out wearing their rings. Their bands remember whose sons they were.",
+      "whenBroken": "The Gralloch goes back to four bands feuding, and for a season it is worse than it was under him. Whoever broke him can hold the Feast Hall — and inherit every band that swore to it.",
+      "rivals": [],
+      "opposedBy": [
+        "the_kestrel"
+      ],
+      "plainly": "The bandit king of the Gralloch. He ended a four-way feud by killing the other chiefs at a truce feast, and every raider band within a week's ride pays him.",
+      "descriptionSeed": "Harl Maddock did not win the Gralloch's feud; he ended it, by inviting the other four chiefs to a feast and not letting them leave. He wears their rings. He is not mad and not cruel by temperament — he is cruel by policy, because fear is cheaper than loyalty and he has done the arithmetic. He wants the pass at Kestrel's Roost, because whoever holds it taxes everything that moves between the plateau and the country beyond.",
+      "appearance": "A timber stockade on broken badland, crows on the sharpened posts, a hall with a smoke-blackened roof and four rusted rings nailed above its door"
+    },
+    {
+      "_file": "content/packs/valley/powers.json",
+      "_kind": "power",
+      "id": "power_edge_riders",
+      "name": "The Edge Riders",
+      "kind": "outlaw_band",
+      "temper": "cruel",
+      "seat": "the_churn_edge",
+      "reach": [
+        "the_churn_edge",
+        "tumbledown_market",
+        "spindrift_hollow"
+      ],
+      "leader": "tamsin_galt",
+      "answersTo": "power_gralloch_crown",
+      "strength": {
+        "scale": "unit",
+        "contingents": [
+          {
+            "n": 30,
+            "quality": 2,
+            "what": "mounted raiders on churn-bred horses"
+          }
+        ]
+      },
+      "holds": [
+        {
+          "at": "the_churn_edge",
+          "kind": "post",
+          "name": "a horse camp that moves every few nights",
+          "garrison": 10
+        }
+      ],
+      "verbs": [
+        "raid",
+        "tribute",
+        "extort"
+      ],
+      "encounters": [],
+      "dangerLift": 1,
+      "noticesYouWhen": [
+        "crossed",
+        "wealth"
+      ],
+      "wantsFromYou": "Whatever you are hauling, and your horses.",
+      "offersYou": "Fast riders who know every trail through the Churn, if you can pay more than the King does.",
+      "leverage": "Tamsin wants the Crown for herself and would bring thirty riders to whoever helps her take it.",
+      "whenBroken": "Tumbledown's caravans run again without outriders, and the King loses his fastest arm.",
+      "rivals": [],
+      "opposedBy": [],
+      "plainly": "Mounted raiders who hit the caravans going in and out of Tumbledown. They ride for the Gralloch Crown, for now.",
+      "descriptionSeed": "They hit Tumbledown's caravans because a market that is never in the same place twice has no walls and no militia. Tamsin Galt leads them for the King, pays him what he asks, and counts the days.",
+      "appearance": "Riders on shaggy dun horses cresting a shifting ridge, faces wrapped against grit, a caravan's canvas burning in the flat behind them"
+    },
+    {
+      "_file": "content/packs/valley/powers.json",
+      "_kind": "power",
+      "id": "power_undercount",
+      "name": "The Undercount",
+      "kind": "guild",
+      "temper": "hard",
+      "seat": "the_hundred_markets",
+      "reach": [
+        "the_hundred_markets",
+        "the_crossing",
+        "dusklow",
+        "the_low_market",
+        "the-low-lamp-inn",
+        "kestrels_roost",
+        "tumbledown_market"
+      ],
+      "cells": [
+        {
+          "at": "dusklow",
+          "does": "fence"
+        },
+        {
+          "at": "the_low_market",
+          "does": "fence"
+        },
+        {
+          "at": "the-low-lamp-inn",
+          "does": "safehouse"
+        },
+        {
+          "at": "kestrels_roost",
+          "does": "inform"
+        },
+        {
+          "at": "tumbledown_market",
+          "does": "fence"
+        }
+      ],
+      "leader": "mother_hesk",
+      "answersTo": null,
+      "strength": {
+        "scale": "unit",
+        "contingents": [
+          {
+            "n": 40,
+            "quality": 2,
+            "what": "burglars, knives and lookouts, never in one place"
+          }
+        ]
+      },
+      "holds": [
+        {
+          "at": "the_hundred_markets",
+          "kind": "enterprise",
+          "name": "a counting-house behind a spice stall",
+          "garrison": 6
+        }
+      ],
+      "verbs": [
+        "steal",
+        "fence",
+        "smuggle",
+        "extort",
+        "inform"
+      ],
+      "encounters": [],
+      "dangerLift": 0,
+      "noticesYouWhen": [
+        "neighbour",
+        "wealth",
+        "crossed"
+      ],
+      "wantsFromYou": "What is inside your walls, if you have walls near the markets. Failing that, a cut of your trade. Failing that, you, as a member.",
+      "offersYou": "A fence for anything, a door into any house in the Crossing, and the first word of who is coming for you and why.",
+      "leverage": "The guild has one law: never rob a seller at their own stall. The Hundred Markets' prices are true because of it, and every member who has ever broken it has disappeared.",
+      "whenBroken": "The fences in Dusklow and the Low Market go quiet, stolen goods stop moving, and every thief in the Crossing is suddenly working for themselves.",
+      "rivals": [],
+      "opposedBy": [
+        "warden-coll",
+        "broker_sain"
+      ],
+      "plainly": "A thieves' guild working out of the Hundred Markets. It never robs a seller at their own stall, and it robs nearly everyone else.",
+      "descriptionSeed": "The Undercount is the count under the count: every market keeps a ledger, and the guild keeps the one underneath it. It fences through Dusklow, where nobody repeats anything, and through the Low Market, where the price is on everything. It protects the Hundred Markets because it feeds on them. It will come for any new wealth that settles within reach of the Crossing, quietly, at night.",
+      "appearance": "A crowded market lane at dusk, a spice stall with a back room behind a hanging rug, a ledger open on a crate, a hooded figure counting coins by a shuttered lamp"
+    },
+    {
+      "_file": "content/packs/valley/powers.json",
+      "_kind": "power",
+      "id": "power_keelmouth_slip",
+      "name": "The Holding of the Slip",
+      "kind": "lordship",
+      "temper": "kind",
+      "seat": "keelmouth",
+      "reach": [
+        "keelmouth",
+        "firstsight"
+      ],
+      "leader": "ines_harrowgate",
+      "answersTo": null,
+      "strength": {
+        "scale": "unit",
+        "contingents": [
+          {
+            "n": 36,
+            "quality": 2,
+            "what": "the harbour watch"
+          },
+          {
+            "n": 10,
+            "quality": 3,
+            "what": "the slip-wardens, who fight from the boats"
+          }
+        ]
+      },
+      "holds": [
+        {
+          "at": "keelmouth",
+          "kind": "post",
+          "name": "the Slip and the harbour watch-house",
+          "garrison": 20
+        },
+        {
+          "at": "keelmouth",
+          "kind": "enterprise",
+          "name": "the Keelmouth boatyards",
+          "garrison": 6
+        }
+      ],
+      "verbs": [
+        "protect",
+        "patrol",
+        "tax",
+        "recruit"
+      ],
+      "encounters": [],
+      "dangerLift": -1,
+      "noticesYouWhen": [
+        "rival_ally",
+        "crossed"
+      ],
+      "wantsFromYou": "An honest tariff paid at the posted rate, and your help when Firstsight moves on the road.",
+      "offersYou": "A berth for any hull, the harbour watch lent to your cause when your cause is hers, and a lord who keeps her word to the letter and past it.",
+      "leverage": "Every family in Keelmouth would fight for her. She knows it, and it frightens her more than Firstsight does.",
+      "whenBroken": "If she falls, the Slip belongs to whoever holds the road above it, and every hull on four hundred miles of cliff pays what he likes.",
+      "rivals": [
+        "power_firstsight_barony"
+      ],
+      "opposedBy": [],
+      "plainly": "Keelmouth's lord keeps the only slipway on four hundred miles of cliff open to anyone who pays the posted tariff. She is fair, and she is loved for it.",
+      "descriptionSeed": "Ines Harrowgate holds the Slip because her grandmother built the first watch-house on it, and she holds it the way her grandmother did: the tariff is carved on a stone at the waterline and has not changed in forty years. She hangs anyone who wrecks a hull on purpose and feeds anyone who wrecks one by accident. The Baron at Firstsight holds the only road down to her, and he wants the water.",
+      "appearance": "A stone slipway running down into brown estuary water, a squat watch-house with a lantern, a tariff carved into a waterline stone, boatyards full of half-built hulls"
+    },
+    {
+      "_file": "content/packs/valley/powers.json",
+      "_kind": "power",
+      "id": "power_firstsight_barony",
+      "name": "The Barony at Firstsight",
+      "kind": "lordship",
+      "temper": "cruel",
+      "seat": "firstsight",
+      "reach": [
+        "firstsight",
+        "keelmouth"
+      ],
+      "leader": "oswin_tarrant",
+      "answersTo": null,
+      "strength": {
+        "scale": "unit",
+        "contingents": [
+          {
+            "n": 60,
+            "quality": 2,
+            "what": "levied road-men"
+          },
+          {
+            "n": 12,
+            "quality": 3,
+            "what": "the Baron's household guard"
+          }
+        ]
+      },
+      "holds": [
+        {
+          "at": "firstsight",
+          "kind": "post",
+          "name": "the cairn keep and the wayhouse at the divide",
+          "garrison": 30
+        }
+      ],
+      "verbs": [
+        "toll",
+        "levy",
+        "tax",
+        "expand",
+        "feud"
+      ],
+      "encounters": [],
+      "dangerLift": 1,
+      "noticesYouWhen": [
+        "crossed",
+        "rival_ally",
+        "wealth"
+      ],
+      "wantsFromYou": "A toll to use his road, a levy of your hands when he calls one, and your help taking the Slip — or your absence from the coast.",
+      "offersYou": "The road opened to your caravans at half the toll, and a share of Keelmouth's tariff once it is his.",
+      "leverage": "His levied road-men are farmers from the stone-grass who were taken, not hired. They will not die for him if someone gives them a reason to go home.",
+      "whenBroken": "The road to the sea is free for the first time in a generation, and Keelmouth's tariff is the only toll left on it.",
+      "rivals": [
+        "power_keelmouth_slip"
+      ],
+      "opposedBy": [],
+      "plainly": "The Baron at Firstsight holds the top of the only road down to the sea, and taxes it until it bleeds. He wants Keelmouth's harbour.",
+      "descriptionSeed": "Oswin Tarrant inherited a cairn and a wayhouse at the top of a twenty-six-day road and turned them into a keep. Everyone going to the sea passes him; he charges what the season allows, and more when he is short. He levies farmers off the stone-grass to hold the road and hangs deserters at the cairn where the water first comes into view. He has decided that the Slip should be his, and that Ines Harrowgate's kindness is a weakness he can wait out.",
+      "appearance": "A stone keep built around an old cairn on a high divide, a wayhouse beneath it, a gibbet by the road, and far below, the head of a brown river with the sea beyond"
+    },
+    {
+      "_file": "content/packs/valley/powers.json",
+      "_kind": "power",
+      "id": "power_echo_bridge",
+      "name": "The Castellany of the Echo Bridge",
+      "kind": "lordship",
+      "temper": "fair",
+      "seat": "echo_river_crossing",
+      "reach": [
+        "echo_river_crossing",
+        "greywater_stilts",
+        "thornwake_glade"
+      ],
+      "leader": "castellan_brannoch",
+      "answersTo": null,
+      "strength": {
+        "scale": "unit",
+        "contingents": [
+          {
+            "n": 24,
+            "quality": 2,
+            "what": "bridge-wardens with halberds"
+          }
+        ]
+      },
+      "holds": [
+        {
+          "at": "echo_river_crossing",
+          "kind": "post",
+          "name": "the bridge towers",
+          "garrison": 16
+        }
+      ],
+      "verbs": [
+        "toll",
+        "protect",
+        "patrol"
+      ],
+      "encounters": [],
+      "dangerLift": 0,
+      "noticesYouWhen": [
+        "crossed"
+      ],
+      "wantsFromYou": "The posted toll, and whatever you know about who is poisoning his river.",
+      "offersYou": "A bridge that is always open, a toll that is always the same, and a castellan who will hold it against either city.",
+      "leverage": "Both Harmonic Heights and the Radiant Plateau have offered to buy the bridge from him. He has refused both and told each what the other offered.",
+      "whenBroken": "The only crossing for miles goes to whichever city moves first, and the Disputed Zone gets a front line.",
+      "rivals": [],
+      "opposedBy": [],
+      "plainly": "The castellan of the Echo Bridge serves neither city. His toll is posted, never changes, and is the same for everyone.",
+      "descriptionSeed": "Brannoch holds the only bridge for miles in country two cities both want. He tolls it fairly and defends it against everyone. He is not kind, and he is not cruel; he is exact. The river under his bridge is going bad, worse every week, and he wants to know who is doing it more than he wants anything else.",
+      "appearance": "An old stone-and-cable bridge between granite shoulders, two squat towers at either end, wardens with halberds, grey-green water sheeting over rocks below"
+    },
+    {
+      "_file": "content/packs/valley/npcs/dessa_wyck.json",
+      "_kind": "npc",
+      "schemaVersion": 1,
+      "id": "dessa_wyck",
+      "name": "Dessa Wyck",
+      "tier": "notable",
+      "level": 14,
+      "role": "Captain of the Switchback Tollmen — runs the toll on the old high road and skims the tribute she sends the Gralloch",
+      "people": "human",
+      "gender": "woman",
+      "pronouns": "she/her",
+      "sex": "female",
+      "romanceEligible": false,
+      "homeLocation": "old_switchback",
+      "communityId": "echo_vale.old_switchback",
+      "domains": {
+        "primary": "marcher"
+      },
+      "spectrum": {
+        "violence_peace": -0.3,
+        "chaos_order": 0.2,
+        "death_life": 0.1,
+        "mechanical_spiritual": 0,
+        "concrete_abstract": -0.6
+      },
+      "assistTags": [
+        "bargain",
+        "guard",
+        "intimidate",
+        "read-people",
+        "watch"
+      ],
+      "appearance": "Lean and weather-dark, a crossbow across her back and a ledger in her coat. Sits on the chain post when she talks, so you have to look up at her.",
+      "personality": {
+        "warmth": 0.2,
+        "trust": 0.2,
+        "candor": 0.5,
+        "patience": 0.6
+      },
+      "voiceHints": "Prices things out loud. Treats every conversation as a negotiation she expects to win, and is cheerful about it.",
+      "wants": "To get off the mountain with enough put by that nobody can take it back — before the King notices the tribute is light.",
+      "fears": "Harl Maddock learning to count.",
+      "knowledge": [
+        "Who has come down from the high pass this season, and what they carried",
+        "Exactly how much the Gralloch is owed, and exactly how much it has been sent",
+        "That something on the upper switchback takes strange objects from packs and leaves the food, and that it is not her people"
+      ],
+      "reactsToReputation": {
+        "any": "sets the toll by what you look like you can pay",
+        "feared": "waves you through and remembers your face",
+        "generous": "doubles the toll and calls it respect"
+      },
+      "questSeeds": [
+        "Dessa has been skimming a fifth of the Gralloch's tribute for three seasons",
+        "The Tollmen would switch sides for a captain who could keep the King off them"
+      ],
+      "gear": [
+        "a heavy crossbow",
+        "a toll ledger in her own cipher",
+        "oiled_leathers"
+      ],
+      "purse": {
+        "crystal": 140
+      },
+      "closed": []
+    },
+    {
+      "_file": "content/packs/valley/npcs/harl_maddock.json",
+      "_kind": "npc",
+      "schemaVersion": 1,
+      "id": "harl_maddock",
+      "name": "Harl Maddock",
+      "tier": "heroic",
+      "level": 31,
+      "role": "King of the Gralloch Crown — ended a four-way bandit feud by killing the other chiefs at a truce feast, and now takes tribute from every raider band within a week's ride",
+      "people": "human",
+      "gender": "man",
+      "pronouns": "he/him",
+      "sex": "male",
+      "romanceEligible": false,
+      "homeLocation": "the_gralloch",
+      "communityId": "unspooling.gralloch",
+      "domains": {
+        "primary": "churnfolk",
+        "secondary": "marcher"
+      },
+      "spectrum": {
+        "violence_peace": -0.8,
+        "chaos_order": 0.3,
+        "death_life": -0.4,
+        "mechanical_spiritual": -0.2,
+        "concrete_abstract": -0.5
+      },
+      "assistTags": [
+        "intimidate",
+        "lead",
+        "read-a-fight",
+        "strike",
+        "bargain"
+      ],
+      "appearance": "A broad, grey-bearded man in scarred plate with four mismatched rings on his left hand. Eats slowly, listens more than he talks, and never sits with his back to a door.",
+      "personality": {
+        "warmth": 0.1,
+        "trust": 0.0,
+        "candor": 0.7,
+        "patience": 0.9
+      },
+      "voiceHints": "Reasonable, almost gentle. Explains exactly what he will do to you and why it is the sensible choice, then does it.",
+      "wants": "The pass at Kestrel's Roost, and a crown that outlives him — which means sons he can trust, which means none.",
+      "fears": "A fifth chief at a feast of his own.",
+      "knowledge": [
+        "The strength, captain and loyalty of every band that pays him",
+        "Which caravans move through the Churn and when",
+        "That the Kestrel's ledger is the only thing standing between him and the pass"
+      ],
+      "reactsToReputation": {
+        "any": "weighs whether you are cheaper to use or to kill",
+        "feared": "offers you a band of your own",
+        "merciful": "assumes you can be bled slowly"
+      },
+      "questSeeds": [
+        "The Crown is massing to take Kestrel's Roost before winter",
+        "The sons of the four dead chiefs are still alive, and still in his bands"
+      ],
+      "gear": [
+        "a heavy war-axe",
+        "scarred plate",
+        "four rings taken at a feast"
+      ],
+      "purse": {
+        "crystal": 900
+      },
+      "closed": []
+    },
+    {
+      "_file": "content/packs/valley/npcs/tamsin_galt.json",
+      "_kind": "npc",
+      "schemaVersion": 1,
+      "id": "tamsin_galt",
+      "name": "Tamsin Galt",
+      "tier": "notable",
+      "level": 19,
+      "role": "Captain of the Edge Riders — raids Tumbledown's caravans for the Gralloch Crown and wants the Crown for herself",
+      "people": "human",
+      "gender": "woman",
+      "pronouns": "she/her",
+      "sex": "female",
+      "romanceEligible": false,
+      "homeLocation": "the_churn_edge",
+      "communityId": "churnfolk.edge",
+      "domains": {
+        "primary": "churnfolk"
+      },
+      "spectrum": {
+        "violence_peace": -0.7,
+        "chaos_order": -0.5,
+        "death_life": -0.2,
+        "mechanical_spiritual": 0,
+        "concrete_abstract": -0.4
+      },
+      "assistTags": [
+        "move",
+        "scout",
+        "strike",
+        "track",
+        "lead"
+      ],
+      "appearance": "Wiry and sun-cracked, head wrapped in grit-cloth, always half-mounted — one foot in the stirrup even when she is talking to you.",
+      "personality": {
+        "warmth": 0.3,
+        "trust": 0.1,
+        "candor": 0.4,
+        "patience": 0.2
+      },
+      "voiceHints": "Short sentences, fast decisions, and a laugh that comes too early. Asks what you want before you have finished saying it.",
+      "wants": "The Feast Hall and the four rings, and to be the one who decides where the bands ride.",
+      "fears": "Dying as somebody else's captain.",
+      "knowledge": [
+        "Every trail through the Churn, including the ones that move",
+        "Which of the King's bands would follow her and which would not",
+        "When Tumbledown will next be somewhere a caravan can reach"
+      ],
+      "reactsToReputation": {
+        "any": "sizes you up as a rider or a mark",
+        "feared": "offers you a place at her fire",
+        "known-enemy-of-the-crown": "wants to talk, alone"
+      },
+      "questSeeds": [
+        "Tamsin would bring thirty riders to anyone who helps her break Harl Maddock",
+        "The Edge Riders are owed a share of a raid the King kept"
+      ],
+      "gear": [
+        "a short horse-bow",
+        "a curved riding sword",
+        "a churn-bred dun mare"
+      ],
+      "purse": {
+        "crystal": 220
+      },
+      "closed": []
+    },
+    {
+      "_file": "content/packs/valley/npcs/mother_hesk.json",
+      "_kind": "npc",
+      "schemaVersion": 1,
+      "id": "mother_hesk",
+      "name": "Mother Hesk",
+      "tier": "heroic",
+      "level": 27,
+      "role": "Head of the Undercount — the thieves' guild that keeps the ledger beneath the Hundred Markets' ledger",
+      "people": "human",
+      "gender": "woman",
+      "pronouns": "she/her",
+      "sex": "female",
+      "romanceEligible": false,
+      "homeLocation": "the_hundred_markets",
+      "communityId": "center.markets",
+      "domains": {
+        "primary": "veilwright",
+        "secondary": "bargainers"
+      },
+      "spectrum": {
+        "violence_peace": 0.1,
+        "chaos_order": 0.4,
+        "death_life": 0,
+        "mechanical_spiritual": -0.1,
+        "concrete_abstract": 0.2
+      },
+      "assistTags": [
+        "conceal",
+        "misdirect",
+        "read-people",
+        "bargain",
+        "lead"
+      ],
+      "appearance": "A small, comfortable-looking old woman who sells spices and remembers every customer's name. Her hands are very clean. Nobody has seen her leave the stall.",
+      "personality": {
+        "warmth": 0.6,
+        "trust": 0.1,
+        "candor": 0.3,
+        "patience": 1
+      },
+      "voiceHints": "Warm, grandmotherly, and exact about money. Asks after your family, and you realise later she already knew their names.",
+      "wants": "The Undercount to outlive her, still keeping its one law — and a way into every new house built near the Crossing.",
+      "fears": "A member robbing a seller at their own stall, because then the markets stop trusting their prices and the guild starves.",
+      "knowledge": [
+        "Who in the Crossing has money, where they keep it, and who guards it",
+        "What moves through the fences in Dusklow and the Low Market",
+        "Which wardens are paid, and by whom"
+      ],
+      "reactsToReputation": {
+        "any": "sells you spices and learns what you carry",
+        "wealthy": "sends someone to look at your walls",
+        "honest-dealer": "offers you a membership, once"
+      },
+      "questSeeds": [
+        "The Undercount has marked a new holding near the markets as its next house",
+        "A member broke the guild's law, and Mother Hesk wants them found before the wardens do"
+      ],
+      "gear": [
+        "a spice-stall's scales and weights",
+        "a ledger nobody else can read",
+        "a thin knife she has not needed in years"
+      ],
+      "purse": {
+        "crystal": 1200
+      },
+      "closed": []
+    },
+    {
+      "_file": "content/packs/valley/npcs/ines_harrowgate.json",
+      "_kind": "npc",
+      "schemaVersion": 1,
+      "id": "ines_harrowgate",
+      "name": "Ines Harrowgate",
+      "tier": "heroic",
+      "level": 24,
+      "role": "Holder of the Slip at Keelmouth — keeps the only slipway on four hundred miles of cliff open to anyone who pays the posted tariff",
+      "people": "human",
+      "gender": "woman",
+      "pronouns": "she/her",
+      "sex": "female",
+      "romanceEligible": false,
+      "homeLocation": "keelmouth",
+      "communityId": "keelmouth",
+      "domains": {
+        "primary": "mason",
+        "secondary": "horizon"
+      },
+      "spectrum": {
+        "violence_peace": 0.5,
+        "chaos_order": 0.6,
+        "death_life": 0.6,
+        "mechanical_spiritual": -0.2,
+        "concrete_abstract": -0.6
+      },
+      "assistTags": [
+        "guard",
+        "lead",
+        "navigate-wilds",
+        "tend",
+        "talk"
+      ],
+      "appearance": "A tall, salt-greyed woman in a harbour-watch coat with the lining patched in three colours. Works the slip rope herself on busy days.",
+      "personality": {
+        "warmth": 0.9,
+        "trust": 0.6,
+        "candor": 0.9,
+        "patience": 0.7
+      },
+      "voiceHints": "Plain and warm, with a harbour-master's habit of giving the cost of a thing before the thing. Keeps promises out loud, in front of witnesses.",
+      "wants": "The Slip open to everyone, at the same price, for as long as there is a Keelmouth.",
+      "fears": "That she will have to spend her people's lives to keep it that way.",
+      "knowledge": [
+        "Every hull that has gone into the water at Keelmouth in twenty years",
+        "How many road-men the Baron at Firstsight can levy, and how many would stay",
+        "The tides, the estuary channels and the sea-roads out of the Outrun"
+      ],
+      "reactsToReputation": {
+        "any": "charges you the carved tariff and asks whether you have eaten",
+        "honest": "lends you the harbour watch without being asked twice",
+        "known-cruel": "charges you the tariff and watches you until you leave"
+      },
+      "questSeeds": [
+        "The Baron at Firstsight has closed the road to Keelmouth's supply wagons",
+        "Keelmouth's families would fight for her, and she is trying not to let them"
+      ],
+      "gear": [
+        "a boathook she fights with",
+        "a harbour-watch coat",
+        "the Slip's master ledger"
+      ],
+      "purse": {
+        "crystal": 600
+      },
+      "closed": []
+    },
+    {
+      "_file": "content/packs/valley/npcs/oswin_tarrant.json",
+      "_kind": "npc",
+      "schemaVersion": 1,
+      "id": "oswin_tarrant",
+      "name": "Oswin Tarrant",
+      "tier": "heroic",
+      "level": 22,
+      "role": "Baron at Firstsight — holds the keep at the top of the only road down to the sea, taxes everything on it, and wants Keelmouth's harbour",
+      "people": "human",
+      "gender": "man",
+      "pronouns": "he/him",
+      "sex": "male",
+      "romanceEligible": false,
+      "homeLocation": "firstsight",
+      "communityId": "firstsight",
+      "domains": {
+        "primary": "marcher",
+        "secondary": "mason"
+      },
+      "spectrum": {
+        "violence_peace": -0.6,
+        "chaos_order": 0.7,
+        "death_life": -0.3,
+        "mechanical_spiritual": -0.3,
+        "concrete_abstract": -0.4
+      },
+      "assistTags": [
+        "hold",
+        "intimidate",
+        "lead",
+        "bargain",
+        "guard"
+      ],
+      "appearance": "A well-dressed man in his fifties, clean-shaven, with a courtier's manners and a road-warden's hands. Wears a heavy chain of office he had made himself.",
+      "personality": {
+        "warmth": 0.2,
+        "trust": 0.1,
+        "candor": 0.3,
+        "patience": 0.8
+      },
+      "voiceHints": "Courteous, formal, and always talking about what things cost. Calls his hangings 'accounts settled'.",
+      "wants": "The Slip at Keelmouth, and a barony that means the coast rather than a cairn on a hill.",
+      "fears": "His levied men going home all at once.",
+      "knowledge": [
+        "Every caravan that has come over the divide this year and what it paid",
+        "The size of Keelmouth's watch, and which of its families have debts",
+        "That his road-men were taken off the stone-grass, not hired"
+      ],
+      "reactsToReputation": {
+        "any": "sets your toll by what you carry",
+        "powerful": "offers you half-toll and a share of the coast",
+        "friend-of-keelmouth": "closes the road to you"
+      },
+      "questSeeds": [
+        "The Baron is levying men from the stone-grass for a march on Keelmouth",
+        "His road-men would go home for someone who could promise they would not be hunted"
+      ],
+      "gear": [
+        "a heavy chain of office",
+        "a well-kept longsword",
+        "the road ledger"
+      ],
+      "purse": {
+        "crystal": 800
+      },
+      "closed": []
+    },
+    {
+      "_file": "content/packs/valley/npcs/castellan_brannoch.json",
+      "_kind": "npc",
+      "schemaVersion": 1,
+      "id": "castellan_brannoch",
+      "name": "Brannoch",
+      "tier": "notable",
+      "level": 18,
+      "role": "Castellan of the Echo Bridge — holds the only crossing for miles for neither city, at a toll that never changes",
+      "people": "human",
+      "gender": "man",
+      "pronouns": "he/him",
+      "sex": "male",
+      "romanceEligible": false,
+      "homeLocation": "echo_river_crossing",
+      "communityId": "valley.millbrook",
+      "domains": {
+        "primary": "verist",
+        "secondary": "marcher"
+      },
+      "spectrum": {
+        "violence_peace": 0.1,
+        "chaos_order": 0.8,
+        "death_life": 0.2,
+        "mechanical_spiritual": -0.2,
+        "concrete_abstract": -0.5
+      },
+      "assistTags": [
+        "guard",
+        "hold",
+        "investigate",
+        "watch",
+        "talk"
+      ],
+      "appearance": "A square, grey man in a bridge-warden's tabard that belongs to no city's colours. Stands in the middle of his bridge rather than at either end.",
+      "personality": {
+        "warmth": 0.4,
+        "trust": 0.4,
+        "candor": 1,
+        "patience": 0.7
+      },
+      "voiceHints": "Exact, unhurried and unbribable. States the toll, states the law, and asks nothing else of you.",
+      "wants": "The bridge held for neither city, and the name of whoever is poisoning his river.",
+      "fears": "The day both cities stop offering to buy the bridge and start sending soldiers for it.",
+      "knowledge": [
+        "Everyone who has crossed his bridge in eleven years, and which way",
+        "What Harmonic Heights and the Radiant Plateau each offered for the bridge",
+        "That the contamination in the river gets worse after certain nights, not certain days"
+      ],
+      "reactsToReputation": {
+        "any": "charges you the posted toll",
+        "honest": "tells you what he has seen upriver",
+        "partisan-of-either-city": "charges you the posted toll and watches your hands"
+      },
+      "questSeeds": [
+        "Brannoch will trade a year's free crossing for the name of whoever is fouling the Echo River",
+        "One of the two cities has stopped offering and started planning"
+      ],
+      "gear": [
+        "a halberd",
+        "a bridge-warden's tabard in no city's colours",
+        "the crossing ledger"
+      ],
+      "purse": {
+        "crystal": 260
+      },
+      "closed": []
+    }
+  ],
+  "modified": [
+    {
+      "id": "re_toll_bandits",
+      "field": "owner",
+      "change": "add: \"power_switchback_tollmen\" — nothing removed; read by reader C3"
+    }
+  ],
+  "referrers": {
+    "_declared": [
+      "content/packs/valley/events/random_encounters.json",
+      "content/packs/valley/manifest.json"
+    ],
+    "_checkedAndNotAffected": [
+      "content/packs/valley/tradition_epics.json — no figure edited; the_ender_who_forgot deliberately left out (spec §8.1)",
+      "content/packs/valley/locations/* — every seat, reach, cell and hold names an existing location; none is edited",
+      "content/packs/valley/npcs/* — opposedBy names the_kestrel, warden-coll, broker_sain; none is edited"
+    ]
+  },
+  "expectedGates": {
+    "_existing": "no existing gate moves — only new files and one added field",
+    "_gatesToWrite_C9": [
+      "every power.seat, reach[], cells[].at and holds[].at names a location that exists",
+      "every power.leader names an npc that exists",
+      "every power.answersTo and rivals[] names a power that exists",
+      "every power.opposedBy[] names an npc that exists",
+      "power ids do not intersect location, region, tradition, npc or ability ids (CCODE-201)",
+      "no player-facing power field (plainly, wantsFromYou, offersYou) carries house notation (A1)",
+      "a power's dangerLift equals its temper's, or 0 where its kind does not lift danger"
+    ]
+  },
+  "_manifest": "NEW: content/packs/valley/powers.json (provides.powers — a new kind, loader branch in the same commit, SNG-064) · 7 files in content/packs/valley/npcs/ · content/packs/core/rules/powers.json from po/staged_content/SNG-634_powers_rules.json (loadRule — beside its receiver IN THE Promise.all ARRAY, not at the line)",
+  "_applyNote": "CCode applies, after Erik rules on spec §8 and readers C1 and C2 exist — content first would be the no-reader shape this project keeps closing. Verified against the live corpus 2026-09-23 with a one-off check: 7 powers, 7 leaders, 0 failures."
+}

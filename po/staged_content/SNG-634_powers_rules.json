@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "id": "powers",
+  "kinds": {
+    "outlaw_band": {
+      "scale": "unit",
+      "heads": [12, 45],
+      "quality": [1, 2],
+      "tempers": { "cruel": 0.35, "hard": 0.5, "fair": 0.15 },
+      "verbs": ["toll", "raid", "extort", "tribute"],
+      "placeAtTags": ["road", "pass", "trail", "waystation", "lawless", "dangerous", "frontier", "border"],
+      "minDanger": 2,
+      "notWithinDaysOfTemper": { "fair": 1, "kind": 2 },
+      "leaderTier": "notable",
+      "holdKind": "post"
+    },
+    "outlaw_crown": {
+      "scale": "legion",
+      "heads": [80, 220],
+      "quality": [2, 3],
+      "tempers": { "cruel": 0.6, "hard": 0.4 },
+      "verbs": ["raid", "tribute", "recruit", "expand", "feud"],
+      "placeAtTags": ["lawless", "dangerous", "raider", "no-law"],
+      "minDanger": 3,
+      "perRegionMax": 1,
+      "formsWhenBandsInRegion": 3,
+      "leaderTier": "heroic",
+      "holdKind": "post"
+    },
+    "guild": {
+      "scale": "unit",
+      "heads": [20, 60],
+      "quality": [1, 2],
+      "tempers": { "hard": 0.6, "cruel": 0.2, "fair": 0.2 },
+      "verbs": ["steal", "fence", "smuggle", "extort", "inform"],
+      "placeAtTags": ["market", "trade", "trade-post", "cosmopolitan", "wealth", "crossroads"],
+      "cellsAtTags": ["market", "trade", "inn", "lodging", "no-questions", "secret", "harbour"],
+      "cellsWithinDays": 12,
+      "cellsMax": 5,
+      "perRegionMax": 1,
+      "liftsDanger": false,
+      "leaderTier": "heroic",
+      "holdKind": "enterprise"
+    },
+    "lordship": {
+      "scale": "unit",
+      "heads": [24, 90],
+      "quality": [2, 3],
+      "tempers": { "cruel": 0.25, "hard": 0.25, "fair": 0.25, "kind": 0.25 },
+      "verbs": ["tax", "toll", "levy", "protect", "patrol", "recruit", "expand", "feud"],
+      "placeAtTags": ["foothill", "bridge", "harbour", "pass", "border", "outpost", "crossroads"],
+      "excludeTiers": ["region"],
+      "rivalWithinDays": 30,
+      "rivalOppositeTemperChance": 0.5,
+      "leaderTier": "heroic",
+      "holdKind": "post"
+    }
+  },
+  "tempers": {
+    "cruel": { "dangerLift": 1, "honoursPaidToll": false, "defeated": "killed", "groundStanding": -2 },
+    "hard": { "dangerLift": 1, "honoursPaidToll": true, "defeated": "ransomed", "groundStanding": -1 },
+    "fair": { "dangerLift": 0, "honoursPaidToll": true, "defeated": "spared", "groundStanding": 1 },
+    "kind": { "dangerLift": -1, "honoursPaidToll": true, "defeated": "spared", "groundStanding": 2 }
+  },
+  "density": { "base": 1, "perDangerStep": 0.5, "maxPerRegion": 4 },
+  "noticeTriggers": ["crossed", "neighbour", "wealth", "rival_ally"],
+  "neighbourWithinDays": 3,
+  "wealthAtCrystal": 1500,
+  "growth": {
+    "winsToGrowOneStep": 3,
+    "lossesToShrinkOneStep": 2,
+    "headsPerStep": 0.2,
+    "bandsAbsorbedByCrown": true,
+    "leaderlessBand": { "joinsCrownChance": 0.5, "splitsChance": 0.3, "dissolvesChance": 0.2 }
+  }
+}

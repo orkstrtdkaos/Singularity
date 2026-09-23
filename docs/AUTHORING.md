@@ -121,4 +121,24 @@ count to zero myself.** ⚠️ **Read your own player-facing text back, out loud
 stale and the tools do not.** If they ever disagree, the tools are right.
 
 
+
+---
+
+## §6 — ⛑ A PERSON: A WHOLE NAME, AND THE ID PLAY ALREADY GAVE THEM *(2026-09-23, SNG-638)*
+
+> **Erik:** *"When people surface in the future, they get a full name, first, middle and last, and/or a title — so they can be distinct."*
+
+**1 · A WHOLE NAME.** Every person record carries `name` (what people say — given and family, or title and name),
+`fullName` (given, middle, family — three parts, always) and `title` when they hold an office or an epithet. ⛔ **No two
+records share a spoken `name`.** Check every new part with `scripts/exists.mjs` *and* against the given names already met
+on the device (`namematch.usedGivenNames`) — four characters on this device have met a Maren.
+
+**2 · A PERSON FROM PLAY KEEPS THE REGISTRY'S ID.** ⛔ A content record links to a save's person **by id**
+(`mara-wells`, `cassiel-ord`). I authored the councils as `councilor_dresh` and `warden_maren` while the saves said
+`councilor-dresh` and `tuning-warden-lower-terrace` — **strangers wearing your people's names.** Read the id out of the
+registry; never type it.
+
+**3 · BEFORE SEATING ANYONE, LIST WHO ALREADY LIVES THERE.** The Tollmen took Greta's waystation because I read the place
+and never asked who kept it. A power's seat, or a person's home, gets its residents listed first.
+
 — Aevi

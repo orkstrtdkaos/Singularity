@@ -153,3 +153,24 @@ registry and was called "she" once in a scene; the registry wins.
 ⚠️ **What I deliberately did not write down:** anything one playthrough decided. Sorel's break with the Council, the
 panel's acceptance of the river evidence, a key delivered late — those happened in one save and may not in another. The
 records hold the institutions and the people as they stood before your choices; your saves keep what you did to them.
+
+## §11 — WHO SITS ON MILLBROOK'S PANEL, FROM THE SAVES (Erik: *"determine if Mara Wells and Aldric are on the council"*)
+
+**Five elders** (Usnea's run: *"Five elders. Councilor Dresh anchors proceedings"*). Seated by the saves' own words:
+
+| elder | evidence |
+|---|---|
+| **Councilor Dresh** | leads the panel (Usnea's run) |
+| **Elder Senna** | *"Village elder, Millbrook"* (Cellaceron's run) |
+| ✅ **Mara Wells** | *"Millbrook water-policy coordinator **and elder**"* (Usnea's run); she set the order the evidence went before the panel. ⚠️ In Silas's run she is the store operator the elders bring things to — the saves disagree, and the one that names her office wins. |
+| ✅ **Dara Holt, the Ditch-Mother** | *"Senior east-channel irrigator · the Ditch-Mother · **Millbrook Council**"* (Silas's run). I had missed her entirely. |
+| ⬜ **one open seat** | no save names the fifth |
+
+⛔ **Aldric is not on it.** He is Millbrook's smokehouse operator; the only "council" he attends is the evening meeting
+Silas called at Pell's forge — Dara, Aldric, Fendt, Mara and Calvar — which was Silas's gathering, not the panel. **The
+fifth seat is open if you want him in it.** ⚠️ **And I had seated Holloway and Renn wrongly:** they are farmers whose
+irrigation dispute came *before* the panel. They are recorded as parties now, not members.
+
+**And one more body from play:** Silas's run has a *"Hub Council water committee"* with Warden Coll's letter naming its
+standing, and Silas named Mara Wells to it as Millbrook's relay contact. You ruled on 2026-09-17 that Coll sits on the
+Council of Mavens, so this is **the Mavens' water committee** under the saves' older name. Added to the hierarchy.

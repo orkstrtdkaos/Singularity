@@ -8,11 +8,12 @@
     "power_radiant_plateau",
     "power_harmonic_heights",
     "power_millbrook_council",
-    "councilor_dresh",
-    "elder_senna",
-    "warden_maren",
+    "councilor-dresh",
+    "elder-senna",
+    "tuning-warden-lower-terrace",
     "farren",
-    "sorel"
+    "sorel",
+    "dara-holt"
   ],
   "removed": {},
   "renamed": {},
@@ -45,7 +46,8 @@
       "bodies": [
         {
           "name": "the Radiant Council",
-          "does": "governs the Plateau under the High Luminary"
+          "does": "governs the Plateau under the High Luminary",
+          "people": []
         },
         {
           "name": "the water-accountability office",
@@ -63,7 +65,8 @@
         },
         {
           "name": "the deep stacks",
-          "does": "the Council's locked archive; archivists see only approved fragments"
+          "does": "the Council's locked archive; archivists see only approved fragments",
+          "people": []
         }
       ],
       "strength": {
@@ -134,18 +137,20 @@
       "bodies": [
         {
           "name": "the upper chamber",
-          "does": "governs the Heights; moves by Priority Council packet and tells the terraces afterward"
+          "does": "governs the Heights; moves by Priority Council packet and tells the terraces afterward",
+          "people": []
         },
         {
           "name": "the Warden Council of the Lower Terrace",
           "does": "keeps the bulletin board, files notices, opens formal inquiries, and holds the sanction chain",
           "people": [
-            "warden_maren"
+            "tuning-warden-lower-terrace"
           ]
         },
         {
           "name": "the sanction chain",
-          "does": "gate-senior clearance is what sanctions a Heights observer into the Disputed Zone"
+          "does": "gate-senior clearance is what sanctions a Heights observer into the Disputed Zone",
+          "people": []
         }
       ],
       "strength": {
@@ -205,21 +210,21 @@
       "reach": [
         "millbrook"
       ],
-      "leader": "councilor_dresh",
+      "leader": "councilor-dresh",
       "answersTo": null,
       "bloc": "bloc_the_free_compact",
       "bodies": [
         {
           "name": "the elder panel",
-          "does": "meets in the common house and decides on the record",
+          "does": "five elders who meet in the common house and decide on the record",
           "people": [
-            "councilor_dresh",
-            "elder_senna"
+            "councilor-dresh",
+            "elder-senna",
+            "mara-wells",
+            "dara-holt"
           ],
-          "alsoSeated": [
-            "Holloway",
-            "Renn"
-          ]
+          "openSeats": 1,
+          "_seatsFrom": "Five elders (Usnea's run). Dresh anchors it; Elder Senna is a village elder (Cellaceron's run); Mara Wells is 'water-policy coordinator and elder' (Usnea's run); Dara Holt is recorded as 'Millbrook Council' (Silas's run). The fifth seat is not named in any save."
         }
       ],
       "sanctionStandard": "Mandate, not size. Millbrook sanctions a survey into the Disputed Zone only with two written settlement requests, a Heights-sanctioned observer with gate-senior clearance, and a named return date and return point.",
@@ -253,9 +258,25 @@
       "whenBroken": "Millbrook stops being the place the valley brings things to be decided, and the cities decide instead.",
       "secretsGM": [],
       "plainly": "Millbrook governs itself through an elder panel in its common house, led by Councilor Dresh. It decides slowly, in public, and on the record.",
-      "descriptionSeed": "The panel meets in Millbrook's common house around a long table where evidence is laid out and read aloud. Councilor Dresh leads by preference rather than command and asks for plain speech. Once the panel formally accepts a thing it cannot pretend otherwise, which is why it accepts things slowly.",
+      "descriptionSeed": "Five elders meet in Millbrook's common house around a long table where evidence is laid out and read aloud. Councilor Dresh leads by preference rather than command and asks for plain speech. Mara Wells coordinates the village's water policy from the panel, and Dara Holt, the Ditch-Mother, keeps the east channel. Once the panel formally accepts a thing it cannot pretend otherwise, which is why it accepts things slowly.",
       "appearance": "A long timber common house with a packed-earth floor, a long table covered in laid-out evidence, elders seated along one side, apple trees in the yard",
-      "_fromPlay": "characters/player-s9z9u1/char-mr6eq1a5.json (Usnea Beard)"
+      "_fromPlay": "characters/player-s9z9u1/char-mr6eq1a5.json (Usnea Beard)",
+      "partiesBefore": [
+        {
+          "name": "Holloway",
+          "what": "upper-terrace farmer"
+        },
+        {
+          "name": "Renn",
+          "what": "lower-channel farmer, who cites precedent and compact"
+        },
+        {
+          "note": "their irrigation dispute came before the panel in Usnea's run; they are parties, not members"
+        }
+      ],
+      "_notOnThePanel": {
+        "aldric": "Aldric, the smokehouse operator, appears only at an evening meeting Silas called at Pell's forge with Dara, Fendt, Mara and Calvar. That gathering was not the panel, and no save seats him. The fifth seat is open if Erik wants him in it."
+      }
     },
     {
       "_kind": "npc",
@@ -263,7 +284,7 @@
       "romanceEligible": false,
       "people": "human",
       "closed": [],
-      "id": "councilor_dresh",
+      "id": "councilor-dresh",
       "name": "Councilor Dresh",
       "tier": "leader",
       "level": 12,
@@ -318,7 +339,13 @@
         "crystal": 90
       },
       "_fromPlay": "characters/player-s9z9u1/char-mr6eq1a5.json (Usnea Beard)",
-      "_file": "content/packs/valley/npcs/councilor_dresh.json"
+      "_file": "content/packs/valley/npcs/councilor_dresh.json",
+      "_idWas": "councilor_dresh",
+      "fullName": "Wenna Maud Dresh",
+      "title": "Councilor of Millbrook",
+      "aliases": [
+        "Wenna Maud Dresh"
+      ]
     },
     {
       "_kind": "npc",
@@ -326,7 +353,7 @@
       "romanceEligible": false,
       "people": "human",
       "closed": [],
-      "id": "elder_senna",
+      "id": "elder-senna",
       "name": "Elder Senna",
       "tier": "leader",
       "level": 10,
@@ -376,7 +403,13 @@
         "crystal": 40
       },
       "_fromPlay": "characters/player-s9z9u1/char-mr4ejo8c.json and characters/player-54seyk/char-mr4ejo8c.json (Cellaceron)",
-      "_file": "content/packs/valley/npcs/elder_senna.json"
+      "_file": "content/packs/valley/npcs/elder_senna.json",
+      "_idWas": "elder_senna",
+      "fullName": "Senna Rhoswen Aske",
+      "title": "Elder of Millbrook",
+      "aliases": [
+        "Senna Rhoswen Aske"
+      ]
     },
     {
       "_kind": "npc",
@@ -384,8 +417,8 @@
       "romanceEligible": false,
       "people": "human",
       "closed": [],
-      "id": "warden_maren",
-      "name": "Maren",
+      "id": "tuning-warden-lower-terrace",
+      "name": "Maren Vasse",
       "tier": "notable",
       "level": 16,
       "role": "Tuning-warden of the Harmonic Heights Lower Terrace — keeps the Warden Council's bulletin board, and decides what reaches the Council and when",
@@ -439,9 +472,15 @@
       "purse": {
         "crystal": 110
       },
-      "_nameCollision": "Shares a first name with maren_ossitide (legendary, ashwarden). The id is distinct; name matching may not be — see SNG-615.",
       "_fromPlay": "characters/player-s9z9u1/char-mr4ejo8c.json and characters/player-54seyk/char-mr4ejo8c.json (Cellaceron)",
-      "_file": "content/packs/valley/npcs/warden_maren.json"
+      "_file": "content/packs/valley/npcs/tuning_warden_lower_terrace.json",
+      "_idWas": "warden_maren",
+      "fullName": "Maren Oriel Vasse",
+      "title": "Tuning-Warden of the Lower Terrace",
+      "aliases": [
+        "Maren Oriel Vasse"
+      ],
+      "_registryName": "Maren — the save's registry calls her by her given name alone; four characters on this device have met a Maren. The record now carries a family name and a title so she is never only 'Maren' again."
     },
     {
       "_kind": "npc",
@@ -450,7 +489,7 @@
       "people": "human",
       "closed": [],
       "id": "farren",
-      "name": "Farren",
+      "name": "Farren Quire",
       "tier": "notable",
       "level": 20,
       "role": "Retired acoustic geometry specialist of the Harmonic Heights Second Terrace — still consults for the Warden Council when nobody else can solve something",
@@ -500,7 +539,12 @@
       },
       "_playNote": "The registry records him as a man; one scene line said 'she'. The registry wins.",
       "_fromPlay": "characters/player-s9z9u1/char-mr4ejo8c.json and characters/player-54seyk/char-mr4ejo8c.json (Cellaceron)",
-      "_file": "content/packs/valley/npcs/farren.json"
+      "_file": "content/packs/valley/npcs/farren.json",
+      "fullName": "Farren Aldous Quire",
+      "title": "Acoustic Geometer of the Second Terrace, retired",
+      "aliases": [
+        "Farren Aldous Quire"
+      ]
     },
     {
       "_kind": "npc",
@@ -509,7 +553,7 @@
       "people": "human",
       "closed": [],
       "id": "sorel",
-      "name": "Sorel",
+      "name": "Sorel Halloran",
       "tier": "notable",
       "level": 15,
       "role": "Archivist of the Radiant Council's water-accountability office — surveys the valley's water and knows exactly which fragments of the record the Council lets archivists see",
@@ -562,7 +606,77 @@
         "crystal": 120
       },
       "_fromPlay": "characters/player-s9z9u1/char-mr4ejo8c.json and characters/player-54seyk/char-mr4ejo8c.json (Cellaceron)",
-      "_file": "content/packs/valley/npcs/sorel.json"
+      "_file": "content/packs/valley/npcs/sorel.json",
+      "fullName": "Sorel Anwen Halloran",
+      "title": "Archivist of the Water-Accountability Office",
+      "aliases": [
+        "Sorel Anwen Halloran"
+      ]
+    },
+    {
+      "_kind": "npc",
+      "_file": "content/packs/valley/npcs/dara_holt.json",
+      "schemaVersion": 1,
+      "id": "dara-holt",
+      "name": "Dara Holt",
+      "fullName": "Dara Linnet Holt",
+      "title": "the Ditch-Mother",
+      "aliases": [
+        "Dara Linnet Holt",
+        "the Ditch-Mother"
+      ],
+      "tier": "leader",
+      "level": 11,
+      "people": "human",
+      "romanceEligible": false,
+      "closed": [],
+      "role": "Senior east-channel irrigator of Millbrook, called the Ditch-Mother, and a member of Millbrook's elder panel",
+      "gender": "woman",
+      "pronouns": "she/her",
+      "sex": "female",
+      "homeLocation": "millbrook",
+      "communityId": "valley.millbrook",
+      "spectrum": {
+        "violence_peace": 0.5,
+        "chaos_order": 0.6,
+        "death_life": 0.5,
+        "mechanical_spiritual": -0.2,
+        "concrete_abstract": -0.7
+      },
+      "assistTags": [
+        "tend",
+        "grow",
+        "watch",
+        "hold"
+      ],
+      "appearance": "A composed woman standing at her own door before the frost has melted, a mug held in both hands.",
+      "personality": {
+        "warmth": 0.4,
+        "trust": 0.3,
+        "candor": 0.5,
+        "patience": 0.9
+      },
+      "voiceHints": "Does her accounting fast and quiet, then waits. Will not say a theory aloud until someone else has confirmed it.",
+      "wants": "The east channel running clean and on time, and the panel acting on the water before the water acts on Millbrook.",
+      "fears": "Being the one who said it first and being wrong in front of the whole panel.",
+      "knowledge": [
+        "Every sluice, sleeve and blank on Millbrook's east channel, and when each last failed"
+      ],
+      "reactsToReputation": {
+        "any": "hears you out at her door and gives nothing away",
+        "reliable": "tells you what she has not told the panel"
+      },
+      "questSeeds": [
+        "The Ditch-Mother has seen the channel fail for weeks and has not yet said why to the panel"
+      ],
+      "gear": [
+        "a sluice key on a cord",
+        "an irrigation ledger"
+      ],
+      "purse": {
+        "crystal": 60
+      },
+      "_fromPlay": "characters/player-s9z9u1/char-mrhs8286.json (Silas Weir)"
     }
   ],
   "modified": [],
@@ -582,5 +696,6 @@
     ]
   },
   "_manifest": "NEW: content/packs/valley/powers.json (SNG-634) and 5 files in content/packs/valley/npcs/",
-  "_applyNote": "CCode applies with SNG-634. secretsGM is GM-eyes-only and never reaches a player-facing surface."
+  "_applyNote": "CCode applies with SNG-634. secretsGM is GM-eyes-only and never reaches a player-facing surface.",
+  "_rulings_20260923b": "Erik: determine whether Mara Wells and Aldric sit on the council (Mara does; Aldric is not seated in any save, and the fifth seat is open); every surfaced person gets a full name and/or a title so they are distinct (SNG-638)."
 }

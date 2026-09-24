@@ -95,7 +95,11 @@ with the other half declined entirely.
 | **Light / Dark** | ⚑ **Lucifer** — see below |
 | **Mind / Body** | ⚑ **the Unbodied** (`the_ninefold_ascendant`) — Mind, refused Body |
 | **Angelic / Demonic** | ⚑ **the Hollow King** (`the_hollow_king`) — Demonic, refused Angelic |
-| Life / Death · Breaking / Building · Chaos / Order · Span / Spirit | ⬜ **four open (six when this table was first written). Filled slowly and separately** — the claimants are in `po/SPEC_SNG-642` §3 |
+| **Span** | ⚑ **the Unmet** (`the_unmet`) — distance entire, refused nearness. ⚠️ **THIN AND RECENT** (SNG-643) |
+| Life / Death · Breaking / Building · Chaos / Order | ⬜ **open, and contested** — claimants in `po/SPEC_SNG-642` §3 |
+
+> ⛔ **Span is DISTANCE** (Erik, 2026-09-24). *Spirit* is being allocated across several axes and is no longer this
+> seat's other half; what Span refused is **nearness**, and the name of that half waits on the Spirit work.
 
 ⚠️ **The seven deadly sins are not the Sovereigns. They are what a mortal looks like PARTWAY THERE** —
 pride is the Angelic axis with its counterweight refused, gluttony the Life axis, wrath the Breaking axis.
@@ -108,6 +112,11 @@ made of.
 ⬜ **DO NOT LET THE SEVEN BE TIDY.** Seven axes and seven seats is a lookup table, and a lookup table is
 inert. ⚠️ **An eighth that got there another way, or one axis with two claimants who cannot both be
 sovereign, is what keeps this from being arithmetic.**
+
+> ⛔ **THE SEATS BY DESIGN — Erik, 2026-09-24:** *some seats solidly filled, one thin, some open, and some filled with
+> the opposite. This provides world balance and tension.* ⚠️ **And a filled seat is not a kept seat.** A Sovereign
+> can be slain, starved past recrossing, or displaced by a claimant who finishes — the seat is a position, not a
+> possession.
 
 ---
 

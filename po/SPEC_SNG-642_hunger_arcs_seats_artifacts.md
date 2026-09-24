@@ -1,4 +1,8 @@
-<!-- status: SNG-642 — lore ruled and written; arcs, forms fix and artifacts staged for CCode (C15, C16); seats await Erik (§3) -->
+<!-- status: SNG-642 — lore ruled and written; arcs, forms fix and artifacts staged for CCode (C15, C16); §3 answered in SNG-643 -->
+
+> ⚠️ **Superseded in part, SNG-643 (same day).** Erik: *"Span is meant to be distance."* So the Kept Hour in §3 was
+> built on the wrong reading (duration) and is withdrawn. The Span seat is filled instead by **the Unmet**, who took
+> distance entire. The Hour-Hoarder stays an epic villain and is not a supply line. The rest of §3 stands.
 # SPEC SNG-642: every Sovereign gets an arc named for what it does; the seats and their claimants; artifacts that feed
 
 **Aevi (PO) · 2026-09-24 · v2.4.x** · staged: `po/staged_content/SNG-642_hunger_arcs.json` and `SNG-642_artifacts.json`

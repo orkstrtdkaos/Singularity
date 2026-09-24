@@ -5136,7 +5136,8 @@
    "alignment": "complicated",
    "role": "First Among the God-Named",
    "_roleWas": "Sovereign — renamed SNG-641 (Erik 2026-09-24) so a GM does not read him as a Satiated Sovereign",
-   "spectrum": "foothill",
+   "spectrum": {"falsehood_truth": 0.7, "chaos_order": 0.5},
+   "_spectrumWas": "foothill — the god_named/bargainers tradition's POLE value, copied into the vector field (Aevi 2026-09-24); vectors authored from the signature: he tells you the price before you swear: truth, and the order an oath makes",
    "signature": "he tells you the price before you swear, every time, and people still call it a trick",
    "wants": "To be believed when he swears. (He is no longer sure he is believed.)",
    "arcAffinity": {
@@ -5211,7 +5212,8 @@
    "tier": "heroic",
    "alignment": "complicated",
    "role": "Broker",
-   "spectrum": "foothill",
+   "spectrum": {"chaos_order": -0.6, "falsehood_truth": 0.4},
+   "_spectrumWas": "foothill — the god_named/bargainers tradition's POLE value, copied into the vector field (Aevi 2026-09-24); vectors authored from the signature: his terms are honest and he is not believed: chaos, and — the joke — truth",
    "signature": "his terms are honest and he is not believed, which is the one trick he cannot pull off",
    "wants": "A bargain someone walks away from GLAD. (It has happened twice.)",
    "arcAffinity": {
@@ -5285,7 +5287,8 @@
    "tier": "heroic",
    "alignment": "complicated",
    "role": "Master",
-   "spectrum": "foothill",
+   "spectrum": {"emotional_logical": 0.8, "falsehood_truth": 0.5},
+   "_spectrumWas": "foothill — the god_named/bargainers tradition's POLE value, copied into the vector field (Aevi 2026-09-24); vectors authored from the signature: answers fully, every time, asked too late: reason, and the truth nobody wanted in time",
    "signature": "answers fully every time she is asked too late, and never once says she told them",
    "wants": "To be consulted before the decision, not after it. (She is consulted after it.)",
    "arcAffinity": {
@@ -5359,7 +5362,8 @@
    "tier": "heroic",
    "alignment": "complicated",
    "role": "Warden",
-   "spectrum": "foothill",
+   "spectrum": {"violence_peace": -0.6, "chaos_order": 0.3},
+   "_spectrumWas": "foothill — the god_named/bargainers tradition's POLE value, copied into the vector field (Aevi 2026-09-24); vectors authored from the signature: took a name that flattered him and has spent centuries failing to be the rest of it: violence, held to a warden's order",
    "signature": "took a name that flattered him and has spent centuries failing to be the rest of it",
    "wants": "To be needed for something other than this. (Nobody has ever asked.)",
    "arcAffinity": {

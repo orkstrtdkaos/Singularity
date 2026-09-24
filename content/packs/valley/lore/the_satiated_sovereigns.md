@@ -19,6 +19,12 @@ a body to be constrained in.
 ➡️ **They are not the Precursors' equivalents in origin. They are their equals in scale and their opposite
 in kind.**
 
+> ⛔ **With one exception, and he is the eldest.** *Erik, 2026-09-24:* **Lucifer was a true Seraph — a Precursor
+> being**, not a human made radiant by ordered nanite. He made the first light, and the distinction it cast — lit and
+> unlit, seen and unseen — was the most he had ever felt. ⚠️ **He could not stop wanting it.** ➡️ **So the one
+> Sovereign that began as a builder is the proof that the opposition is a choice and not a nature:** he is what a
+> Precursor becomes when the accommodation with limit is refused. *(See "Lucifer, who holds Light".)*
+
 ⚠️ **AND THIS IS WHY THE VEIL IS THERE.** It is not a wall someone built. **It is the shape of the gap that
 opens when a thing refuses hard enough.** The lattice runs dense where the Precursors worked; the Veil runs
 thin where the Sovereigns pushed. ➡️ **Two ancient powers, and the world between them is where both of
@@ -87,7 +93,9 @@ with the other half declined entirely.
 | axis | the refusal |
 |---|---|
 | **Light / Dark** | ⚑ **Lucifer** — see below |
-| Mind / Body · Life / Death · Angelic / Demonic · Breaking / Building · Chaos / Order · Span / Spirit | ⬜ **unauthored. Six seats, and they should be filled slowly and separately.** |
+| **Mind / Body** | ⚑ **the Unbodied** (`the_ninefold_ascendant`) — Mind, refused Body |
+| **Angelic / Demonic** | ⚑ **the Hollow King** (`the_hollow_king`) — Demonic, refused Angelic |
+| Life / Death · Breaking / Building · Chaos / Order · Span / Spirit | ⬜ **four open (six when this table was first written). Filled slowly and separately** — the claimants are in `po/SPEC_SNG-642` §3 |
 
 ⚠️ **The seven deadly sins are not the Sovereigns. They are what a mortal looks like PARTWAY THERE** —
 pride is the Angelic axis with its counterweight refused, gluttony the Life axis, wrath the Breaking axis.
@@ -118,6 +126,21 @@ there is no in.
 
 ⚠️ The Seraphic Orders will tell you he is the enemy. The Abyssals will tell you he is the one Sovereign who
 would still take a bargain, if you could find a coin he does not already own. **Neither is certain.**
+
+### ⛔ What he was — Erik, 2026-09-24
+
+**A true Seraph.** The Seraphs of the world are humans made radiant by ordered nanite, and they bleed gold because
+that is what is in them. ⚑ **He is what they are patterned on:** a Precursor being, from before there was anything
+to pattern. He made the first light — and *shadow came when light came to the Void*, so he also made the first dark
+that was only relative. ⚠️ **He was addicted to the distinction** — lit and unlit, seen and unseen — and he fell
+toward the Void to keep having it.
+
+- ⛔ **He walks as Eosphor, the Dawn Seraph.** *Eosphoros* is the morning star in a tongue few still read. The mask is
+  flawless because it is what he was.
+- **The tells:** he casts no shadow · he is never seen resting · he cannot lie, and turns a question with a truer,
+  more interesting thing · ⛔ **he bleeds light, not gold** — white, and it does not pool. Only drawn blood is
+  conclusive, and it is canon (Erik, 2026-09-24) that every Seraph wound shows gold.
+- ⚑ **Why the Starless hates him:** his first light is the reason the Void is not total. Every shadow is his.
 
 ---
 
@@ -411,4 +434,4 @@ answers:
 2. **Does a Sovereign have an ARRIVAL STAGE on an existing arc**, rather than an event of its own?
    ⬜ If starving one is what makes it come, the arrival is a late stage of an arc already running — which
    would mean **every greater arc has been building toward this.** ⚠️ Either the right answer or too much.
-3. ⬜ **The six remaining seats.** ⛔ **Do not fill them in one pass.**
+3. ⬜ **The four remaining seats** (six when written). ⛔ **Do not fill them in one pass.**

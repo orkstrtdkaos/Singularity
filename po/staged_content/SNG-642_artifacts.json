@@ -1,0 +1,221 @@
+{
+ "_spec": "SNG-642 §4 — Sovereign artifacts, staged (reader before field: `feeds`, `whatItDoes`, `whatItCosts` and `markId` need C16). Built on the live item schema (kind/bonusTags/worth/goods). Anyone can use one; every use feeds. The item IS a mark from SNG-641 — a player who has learned the mark recognises it.",
+ "items": [
+  {
+   "id": "lidless_ring",
+   "name": "the Lidless Ring",
+   "kind": "relic",
+   "description": "A heavy gold ring worked as a circle of rays around an empty centre. It is warm, and it is always slightly brighter than the room.",
+   "bonusTags": [
+    "reveal",
+    "witness",
+    "investigate",
+    "standing"
+   ],
+   "consumable": false,
+   "worth": "precious",
+   "goods": "relic",
+   "whatItDoes": "Nothing within arm's reach can be hidden from the wearer — a lie shows, a concealed thing is noticed, a false face slips.",
+   "whatItCosts": "The wearer cannot hide either: no stealth, no disguise, no secret kept while it is on. It does not want to come off.",
+   "feeds": {
+    "sovereignGM": "lucifer",
+    "arcId": "arc_the_glare",
+    "perUse": "one deed toward the arc, entered as the user's push — NPC or PC, R40b.4"
+   },
+   "markId": "mark_lidless_ring",
+   "_foundAt": "the Great Coliseum — the champion's prize (the_great_coliseum)"
+  },
+  {
+   "id": "the_open_lantern",
+   "name": "the Open Lantern",
+   "kind": "tool",
+   "description": "A brass lantern with no shutter and no door. The flame inside was never lit and cannot be put out.",
+   "bonusTags": [
+    "reveal",
+    "scout",
+    "radiant",
+    "investigate"
+   ],
+   "consumable": false,
+   "worth": "precious",
+   "goods": "relic",
+   "whatItDoes": "Its light shows what is concealed: hidden doors, veiled craft, what the Umbral keep.",
+   "whatItCosts": "It cannot be dimmed. Whoever carries it is seen by everything, from very far away.",
+   "feeds": {
+    "sovereignGM": "lucifer",
+    "arcId": "arc_the_glare",
+    "perUse": "one deed toward the arc, entered as the user's push — NPC or PC, R40b.4"
+   },
+   "markId": "mark_nothing_sealed",
+   "_foundAt": "Sunwrack Valen's zealots at the Blaze (the_blaze)"
+  },
+  {
+   "id": "the_heralds_brand",
+   "name": "the Herald's Brand",
+   "kind": "tool",
+   "description": "A branding iron with the lidless ring at its end. It heats without a fire.",
+   "bonusTags": [
+    "standing",
+    "social",
+    "honor",
+    "witness"
+   ],
+   "consumable": false,
+   "worth": "precious",
+   "goods": "relic",
+   "whatItDoes": "Whatever it brands is believed: a filing, a crate, a claim, a person's word.",
+   "whatItCosts": "Anything branded can never again be private. The board clerks who use it confess in their sleep.",
+   "feeds": {
+    "sovereignGM": "lucifer",
+    "arcId": "arc_the_glare",
+    "perUse": "one deed toward the arc, entered as the user's push — NPC or PC, R40b.4"
+   },
+   "markId": "mark_empty_filing",
+   "_foundAt": "the Radiant Council's accountability board (power_radiant_plateau)"
+  },
+  {
+   "id": "the_hollow_coin",
+   "name": "the Hollow Coin",
+   "kind": "relic",
+   "description": "A coin with its face worn smooth on purpose. It passes at full weight anywhere, and it always comes back.",
+   "bonusTags": [
+    "bargain",
+    "favor",
+    "negotiate",
+    "standing"
+   ],
+   "consumable": false,
+   "worth": "precious",
+   "goods": "relic",
+   "whatItDoes": "Spent on any petition, the answer is yes.",
+   "whatItCosts": "A notch is cut in your door frame for every yes, and the coin always finds its way back to your purse, so you can ask again.",
+   "feeds": {
+    "sovereignGM": "the_hollow_king",
+    "arcId": "arc_the_long_petition",
+    "perUse": "one deed toward the arc, entered as the user's push — NPC or PC, R40b.4"
+   },
+   "markId": "mark_hollow_coin",
+   "_foundAt": "Harl Maddock's treasury at the Gralloch crown (power_gralloch_crown)"
+  },
+  {
+   "id": "the_seam_contract",
+   "name": "the Seam Contract",
+   "kind": "tool",
+   "description": "A blank contract on heavy paper, with one ruled line below where the signatures go.",
+   "bonusTags": [
+    "bargain",
+    "bind",
+    "binding",
+    "truce"
+   ],
+   "consumable": false,
+   "worth": "precious",
+   "goods": "relic",
+   "whatItDoes": "Whatever two parties write on it is kept, by both, absolutely.",
+   "whatItCosts": "The blank line below the signatures is filled in later, by someone who was not in the room.",
+   "feeds": {
+    "sovereignGM": "the_hollow_king",
+    "arcId": "arc_the_long_petition",
+    "perUse": "one deed toward the arc, entered as the user's push — NPC or PC, R40b.4"
+   },
+   "markId": "mark_the_seam",
+   "_foundAt": "Oswin Tarrant's strongbox at Firstsight (power_firstsight_barony)"
+  },
+  {
+   "id": "the_seal_of_leave",
+   "name": "the Seal of Leave",
+   "kind": "tool",
+   "description": "A signet with nothing cut into its face. The wax it leaves carries a mark anyway, and nobody can quite describe it.",
+   "bonusTags": [
+    "standing",
+    "honor",
+    "favor",
+    "etiquette"
+   ],
+   "consumable": false,
+   "worth": "precious",
+   "goods": "relic",
+   "whatItDoes": "A claim sealed with it reads as granted — lawful, recognised, beyond argument — to anyone who sees the wax.",
+   "whatItCosts": "It makes the claim legitimate by grant, not by credibility, and the Mavens can tell the difference. An empty chair appears at the holder's table.",
+   "feeds": {
+    "sovereignGM": "the_hollow_king",
+    "arcId": "arc_the_long_petition",
+    "perUse": "one deed toward the arc, entered as the user's push — NPC or PC, R40b.4"
+   },
+   "markId": "mark_empty_chair",
+   "_foundAt": "carried by the Bright Bargain's envoy (power_gralloch_crown)"
+  },
+  {
+   "id": "the_ninefold_chit",
+   "name": "the Ninefold Chit",
+   "kind": "relic",
+   "description": "A nine-sided Cogitarium token of a pale stone that is not quite stone. It is always cool.",
+   "bonusTags": [
+    "learn",
+    "knowledge",
+    "analyze",
+    "meditate"
+   ],
+   "consumable": false,
+   "worth": "precious",
+   "goods": "relic",
+   "whatItDoes": "Held while you sleep, it lets the mind work on while the body rests: you wake with the answer.",
+   "whatItCosts": "Each use you sleep a little longer and wake a little further away. Your eyes move under the lids.",
+   "feeds": {
+    "sovereignGM": "the_ninefold_ascendant",
+    "arcId": "arc_the_long_sleep",
+    "perUse": "one deed toward the arc, entered as the user's push — NPC or PC, R40b.4"
+   },
+   "markId": "mark_ninefold_chit",
+   "_foundAt": "the Cogitarium (the_cogitarium)"
+  },
+  {
+   "id": "the_choirmasters_fork",
+   "name": "the Choirmaster's Fork",
+   "kind": "relic",
+   "description": "A tuning fork of dark metal. Struck, it gives no sound you can hear; sleepers nearby hum four bars.",
+   "bonusTags": [
+    "resonance",
+    "scout",
+    "reveal",
+    "quiet"
+   ],
+   "consumable": false,
+   "worth": "precious",
+   "goods": "relic",
+   "whatItDoes": "Through any sleeper who hums, you can hear what they are near.",
+   "whatItCosts": "Every sleeper you listen through sleeps deeper. Some of them stop waking.",
+   "feeds": {
+    "sovereignGM": "the_ninefold_ascendant",
+    "arcId": "arc_the_long_sleep",
+    "perUse": "one deed toward the arc, entered as the user's push — NPC or PC, R40b.4"
+   },
+   "markId": "mark_sleepers_hymn",
+   "_foundAt": "the Thinning, where the Choirmaster keeps his choir (the_thinning)"
+  },
+  {
+   "id": "the_cold_seal",
+   "name": "the Cold Seal",
+   "kind": "tool",
+   "description": "A Dusklow crate seal stamped cold goods — do not open. It frosts whatever it closes.",
+   "bonusTags": [
+    "protection",
+    "cold",
+    "remedy",
+    "prepare"
+   ],
+   "consumable": false,
+   "worth": "precious",
+   "goods": "relic",
+   "whatItDoes": "Whatever is sealed with it is kept exactly as it was: food, medicine, a wound — a living body, which does not age.",
+   "whatItCosts": "Nobody sealed with it has ever been let out by the person who sealed them.",
+   "feeds": {
+    "sovereignGM": "the_ninefold_ascendant",
+    "arcId": "arc_the_long_sleep",
+    "perUse": "one deed toward the arc, entered as the user's push — NPC or PC, R40b.4"
+   },
+   "markId": "mark_cold_goods",
+   "_foundAt": "the Undercount's Dusklow fence (power_undercount, dusklow)"
+  }
+ ]
+}

@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "SNG-640_sovereigns_in_the_map",
+  "kind": "changeset",
+  "_title": "The Sovereigns' supply lines run through the powers",
+  "_why": "Erik 2026-09-24: tie the Sovereigns and the legendary and mythic figures into the new political powers. The lore already says it: agents are a supply line, a Sovereign escalates as it starves, and only holds, legions and allies survive the answer. The powers are those lines.",
+  "ids": [],
+  "removed": {},
+  "renamed": {},
+  "added": [],
+  "modified": [
+    {
+      "id": "power_radiant_plateau",
+      "kind": "power",
+      "field": "feedsGM",
+      "change": "add: [{\"sovereign\": \"lucifer\", \"through\": \"the Edge District accountability board — public marks, some filed with no record behind them\", \"yield\": \"being seen\"}]"
+    },
+    {
+      "id": "power_gralloch_crown",
+      "kind": "power",
+      "field": "feedsGM",
+      "change": "add: [{\"sovereign\": \"the_hollow_king\", \"through\": \"a crown Harl asked the Hollow Court for, because the Mavens would never recognize him\", \"yield\": \"petition\"}]"
+    },
+    {
+      "id": "power_firstsight_barony",
+      "kind": "power",
+      "field": "temptedGM",
+      "change": "add: [{\"sovereign\": \"the_hollow_king\", \"if\": \"the Mavens refuse his petition for the Slip\", \"then\": \"the Bright Bargain makes him the offer\"}]"
+    },
+    {
+      "id": "power_undercount",
+      "kind": "power",
+      "field": "feedsGM",
+      "change": "add: [{\"sovereign\": \"the_ninefold_ascendant\", \"through\": \"Dusklow's fence moves sleeping bodies out of the Cogitarium for a reasonable buyer; nobody in the guild knows what he is\", \"yield\": \"vessels\"}]"
+    }
+  ],
+  "referrers": {
+    "_declared": [
+      "content/packs/valley/powers.json"
+    ],
+    "_checkedAndNotAffected": [
+      "no figure or person record is edited; placements live in po/staged_content/SNG-640_sovereigns_in_the_map.json"
+    ]
+  },
+  "expectedGates": {
+    "_existing": "no existing gate moves — four added GM-only fields"
+  },
+  "_manifest": "no new files",
+  "_applyNote": "CCode applies after Erik rules on SNG-640 §6, and when the C13 reader exists (a feedsGM nothing reads is the no-reader shape)."
+}

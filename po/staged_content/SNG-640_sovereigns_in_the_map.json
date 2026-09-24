@@ -1,0 +1,230 @@
+{
+ "id": "SNG-640_sovereigns_in_the_map",
+ "status": "staged — a proposal for Erik; GM-eyes-only throughout",
+ "rule": "GM-eyes-only. A GM confirms agents and supply lines, never the Sovereign (the_satiated_sovereigns.md).",
+ "doesNotFill": "No seat is filled. The six open axes stay open (the lore: 'do not fill them in one pass'). Trajectories below are the lore's own ('a villain you fail to stop is a promotion'), recorded as trajectories only.",
+ "ladder": {
+  "fed": "nothing; you are beneath notice",
+  "firstLosses": "a power already in your region is REDIRECTED: its leader becomes interested in you (C7 notice + the power's `approach`) — correct, effective, reasonable",
+  "sustained": "a CAMPAIGN: the Sovereign's remaining supply-line powers turn their strength on your holds (C1 raids, C5 assaults) — organised, better resourced than you, still never present",
+  "furthest": "IT COMES, diminished — the existing `forms` path in engine/sovereign.js",
+  "cutALine": "a supply-line power broken (C1/C5), taken (C8), or its leader turned (leverage) costs the Sovereign that line"
+ },
+ "sovereigns": [
+  {
+   "id": "lucifer",
+   "axis": "Light (refused Dark)",
+   "hunger": "being seen: spectacle, reputation, record, compulsive witnessing",
+   "supplyLines": [
+    {
+     "at": "the_great_coliseum",
+     "what": "the whole world watches: every bout is a yield",
+     "people": [
+      "the_undefeated"
+     ],
+     "note": "the Undefeated is a champion, not an agent — the Coliseum is the line, whoever fights in it"
+    },
+    {
+     "power": "power_radiant_plateau",
+     "what": "the Edge District accountability board: public marks, some filed with no record behind them (Fendt was marked and erased)",
+     "note": "the Council's private secrecy starves him and its public board feeds him — a council divided against itself without knowing it. Keeper Ilma wants the board to mean what it says; she is the restraint inside the line, not its agent"
+    },
+    {
+     "at": "the_blaze",
+     "what": "a light so total there is nothing left in shadow",
+     "people": [
+      "sunwrack_valen"
+     ],
+     "note": "Valen thinks he is burning the dark out of the world for its good; he is a supplier who believes he is a liberator"
+    }
+   ],
+   "interdiction": "privacy kept on purpose — the Harborward, where the Umbrals keep what the light would burn; Ember Who Banks the Fire at Glasshome, who keeps a light that does not have to be seen",
+   "counterweights": [
+    "the_deep_lantern",
+    "ember_who_banks_the_fire"
+   ],
+   "redirectFirst": "power_radiant_plateau — a public mark on the accountability board with the player's name on it",
+   "campaign": [
+    "power_radiant_plateau",
+    "sunwrack_valen's order at the Blaze"
+   ],
+   "arrival": "lucifer.forms (diminished at stage 3, final at 4 — R41b)"
+  },
+  {
+   "id": "the_hollow_king",
+   "axis": "Demonic (refused Angelic)",
+   "hunger": "petition: authority must be conferred, asked for, forever",
+   "court": "the Hollow Court — the_bright_bargain brings the offer, the_keeper_of_small_debts holds what nobody remembers owing, the_undecided",
+   "supplyLines": [
+    {
+     "power": "power_gralloch_crown",
+     "what": "Harl Maddock asked the Hollow Court for what the Mavens will never give a man who killed four chiefs at a feast: a crown that holds. The Bright Bargain's terms are kept to the letter."
+    },
+    {
+     "power": "power_firstsight_barony",
+     "what": "a line waiting to open: Oswin Tarrant petitions the Mavens for the Slip; if they refuse him, the Bright Bargain is already on the road",
+     "state": "tempted, not yet feeding"
+    },
+    {
+     "what": "every seat bought from the Court instead of recognized by the Mavens",
+     "note": "two ways to be made legitimate: the Mavens confer credibility, which is earned and costs him; the Court confers a grant, which is asked and feeds him"
+    }
+   ],
+   "interdiction": "stop asking. A self-sufficient hold does not petition; a legion does not need a favour; allies mean somewhere else to go. The Free Compact is his starvation in political form — a valley that solved its own problems. Nobody strengthening it would say they were fighting anything.",
+   "counterweights": [
+    "maren_ossitide",
+    "the_last_walker"
+   ],
+   "redirectFirst": "the_bright_bargain — she arrives with an offer, and the offer is always good",
+   "campaign": [
+    "the Hollow Court's debtors, called in",
+    "power_gralloch_crown"
+   ],
+   "arrival": "the_hollow_king.forms"
+  },
+  {
+   "id": "the_ninefold_ascendant",
+   "name": "the Unbodied",
+   "axis": "Mind (refused Body)",
+   "hunger": "a body and what a body feels, worn borrowed, forever",
+   "supplyLines": [
+    {
+     "at": "the_cogitarium",
+     "what": "Cogitants reason their way out of the flesh and leave vessels behind (arc_the_poles_pull: 'the Cogitarium abandons more bodies')"
+    },
+    {
+     "people": [
+      "the_unbodied_choir_master"
+     ],
+     "at": "the_thinning",
+     "what": "the named agent: a supplier who believes he is a liberator"
+    },
+    {
+     "power": "power_undercount",
+     "what": "freight. Dusklow's fence moves cargo nobody asks about, and some of it is sleeping bodies out of the Cogitarium, bought by a reasonable man for reasonable coin. Mother Hesk does not know what the buyer is.",
+     "note": "the guild is a supply line without a single member being an agent — the lore's 'run of decisions individually reasonable and cumulatively impossible'"
+    }
+   ],
+   "interdiction": "staying in the flesh — the_one_who_stayed_embodied; and Rethe, still asking to be talked out of it",
+   "counterweights": [
+    "the_one_who_stayed_embodied"
+   ],
+   "redirectFirst": "power_undercount — a fence who suddenly wants to know where the player sleeps",
+   "campaign": [
+    "the_unbodied_choir_master's followers",
+    "power_undercount"
+   ],
+   "arrival": "no forms authored yet — CCode's sovereign.js resolves it as its plain record until one is"
+  }
+ ],
+ "theGreatOnTheMap": [
+  {
+   "id": "the_high_luminary",
+   "place": "rules the Radiant Council",
+   "note": "high_luminary is a second record of the same office — one should supersede the other (Erik's call)"
+  },
+  {
+   "id": "elder_resonance",
+   "place": "rules the Harmonic Council"
+  },
+  {
+   "id": "aelith_first_shape",
+   "place": "monarch of the Unbought Court"
+  },
+  {
+   "id": "ysenkar",
+   "place": "the Unbought Court"
+  },
+  {
+   "id": "the_hollow_king",
+   "place": "the Hollow Court — never confirmed; his court is"
+  },
+  {
+   "id": "lucifer",
+   "place": "no seat on any map; agents and lines only"
+  },
+  {
+   "id": "the_ninefold_ascendant",
+   "place": "no seat; the Cogitarium is where its line runs, not where it rules"
+  },
+  {
+   "id": "thornmother_sealed",
+   "place": "leads the Rootbound inside the Deepwood Standing Moot, with rootbound_vaskar — the faction that is winning the argument to seal the wood (arc_green_schism)",
+   "counterweight": "the_last_walker"
+  },
+  {
+   "id": "sunwrack_valen",
+   "place": "a zealot order at the Blaze, inside the Blazeborn — Lucifer's line",
+   "counterweight": "the_deep_lantern, ember_who_banks_the_fire"
+  },
+  {
+   "id": "the_burning_certainty",
+   "place": "an inquisition inside the Seraphic Orders at Choir-Height",
+   "counterweight": "the_last_seraph"
+  },
+  {
+   "id": "the_lightless_seraph",
+   "place": "cast out of the Seraphic Orders; reaching from the Ascendant Spire — the Orders' enemy, not their member"
+  },
+  {
+   "id": "harrow_the_hollowing",
+   "place": "an order of the 'improved' inside the Enginewrights at Pressureholt",
+   "counterweight": "the_cogitant_ninefold"
+  },
+  {
+   "id": "the_still_lattice",
+   "place": "the Lattice's specification carried to its end, at the Grand Lattice (arc_block_bleed)",
+   "counterweight": "the_glad_dissolution, the_open_figure"
+  },
+  {
+   "id": "the_scouring_hand",
+   "place": "an order inside the Unmakers at the Scour",
+   "counterweight": "the_last_mercy",
+   "trajectory": "the lore: 'if it ever finishes, it does not die — it arrives.' Recorded as a trajectory, not a seat."
+  },
+  {
+   "id": "the_starless",
+   "place": "the Slow Stair, pressing on the Umbrals' Harborward from below",
+   "counterweight": "the_deep_lantern",
+   "trajectory": "wants the dark total — the other half of the axis Lucifer holds. The lore's 'one axis with two claimants' is possible here; recorded as a question, not a seat."
+  },
+  {
+   "id": "the_raw_chord",
+   "place": "roams the Feeling Coast; no seat, a threat to the Wellspring's public halls",
+   "counterweight": "the_weeping_archive"
+  },
+  {
+   "id": "the_unbodied_choir_master",
+   "place": "the Thinning — the Unbodied's agent"
+  },
+  {
+   "id": "the_one_called_zeus",
+   "place": "first among the God-Named, who hold court at Stair Hollow",
+   "note": "his role word is 'Sovereign'; he is not a Satiated Sovereign — the name is a trap for a GM and is flagged"
+  },
+  {
+   "id": "the_deep_warden",
+   "place": "outside the map by nature: a Precursor-delver"
+  },
+  {
+   "id": "the_unfinished_of_the_last_cairn",
+   "place": "outside the map by nature: an Ashwarden who refused her ending"
+  },
+  {
+   "id": "aevi_the_watcher",
+   "place": "outside the map by nature: a mote-intelligence across the whole valley"
+  },
+  {
+   "id": "akinetos",
+   "place": "above the map: Precursor"
+  },
+  {
+   "id": "kenosis",
+   "place": "above the map: Precursor"
+  },
+  {
+   "id": "parakletos",
+   "place": "above the map: Precursor"
+  }
+ ]
+}

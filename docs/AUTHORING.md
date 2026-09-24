@@ -142,3 +142,20 @@ registry; never type it.
 and never asked who kept it. A power's seat, or a person's home, gets its residents listed first.
 
 — Aevi
+
+## §7 — ⛑ RETIRING OR MERGING AN ID *(2026-09-24, SNG-646 → CCODE-488)*
+
+**1 · PUT `"migration"` ON THE CHANGE SET.** The check that asks whether a retirement reaches live saves reads a
+`migration` field, not prose. SNG-646 said it in a `_forCCode` note, and the gate stayed red until CCode filled the
+field in. ⛔ **A tool does not read a note.**
+
+**2 · DON'T GUESS WHERE A PERSON LIVES ON A SAVE.** I pointed at the registry; the three real references were in
+`quests[].giver` and `quests[].outcomes[].effects[].npc`. A person lives in some twenty-five shapes on a save.
+Name the id and let the reconcile step walk; never list the places.
+
+**3 · RENAME BY TOKEN.** `the_high_luminary` contains `high_luminary`. A blind replace writes `the_the_high_luminary`
+everywhere the survivor is named; `core/rules/ability_rename_map.json` still carries six `the_the_*` ids from a sweep
+that did exactly that.
+
+**4 · A DATED RECORD STAYS DATED.** Sweep snapshots in `tests/` record the world on their day. Rewriting one to name a
+person who did not exist then makes it lie. Leave them.

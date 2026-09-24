@@ -1,0 +1,193 @@
+{
+ "id": "the_high_luminary",
+ "name": "Seraphine, the High Luminary",
+ "tier": "legendary",
+ "level": 62,
+ "role": "Absolute authority of the Radiant Plateau; the valley's most powerful aligned figure",
+ "people": "human",
+ "gender": "woman",
+ "pronouns": "she/her",
+ "romanceEligible": false,
+ "homeLocation": "radiant_plateau_edge",
+ "arc": "arc_city_reach",
+ "renown": "world-famous",
+ "domains": {
+  "primary": "blazeborn",
+  "secondary": "lattice",
+  "tertiary": "seraphic"
+ },
+ "spectrum": {
+  "dark_light": 0.85,
+  "chaos_order": 0.7
+ },
+ "subAttributes": {
+  "strength": 9,
+  "agility": 8,
+  "reason": 16,
+  "insight": 15,
+  "presence": 20,
+  "rapport": 12,
+  "craft": 16,
+  "wits": 13
+ },
+ "knowledge": [
+  "The Plateau's photonic infrastructure, entire",
+  "Every faction's position in the valley and what would move it",
+  "Master-level photonic technique and the Plateau's optical sciences",
+  "One of her own filtration engineers has been falsifying purity reports — she discovered it recently and hasn't decided what to do",
+  "The falsified reports hide something stranger than negligence: readings that make no sense for any known contaminant",
+  "Precursor optics records in the Plateau archives that describe 'the light beneath light'"
+ ],
+ "wants": [
+  "The valley unified under order before What Sleeps Under wakes — convinced only a single strong hand can meet it",
+  "The truth about the readings her engineer buried — quietly, before the Harmonic delegation finds the falsification and weaponizes it."
+ ],
+ "fears": "⛔ That she is right about the threat and wrong about the answer. ⚠️ 'Believes her foreclosure is mercy.' ⚠️ And, nearer: That the contamination is neither civilization's doing, and that saying so out loud will sound like exactly the kind of lie she'd tell.",
+ "appearance": "Statuesque, sixties, copper-brown skin and close-cropped white hair, with the faint permanent squint of someone who works in glare and old radial burn-scarring fanning from the corner of each eye. Robes of unbleached white. Radiant, usually seated; the light in the room is hers before she speaks.",
+ "voiceHints": "Gracious and absolutely settled. She does not argue; she explains what will happen. Precise, luminous diction; her questions feel like being gently X-rayed. Light gathers toward her when she is interested.",
+ "assistTags": [
+  "craft",
+  "guard",
+  "light",
+  "reveal",
+  "study",
+  "talk"
+ ],
+ "abilities": [
+  {
+   "abilityId": "light_borne",
+   "level": 3,
+   "why": "⚑ 'radiant mastery beyond any living practitioner'"
+  },
+  {
+   "abilityId": "last_light",
+   "level": 3,
+   "why": "'in a fight, SHE DOES NOT FIGHT — the light does'"
+  },
+  {
+   "abilityId": "unfaltering_light",
+   "level": 3,
+   "why": "same line"
+  },
+  {
+   "abilityId": "revealing_burn",
+   "level": 3,
+   "why": "Radiance at its top"
+  },
+  {
+   "abilityId": "hold_the_aperture",
+   "level": 3,
+   "why": "⛔ 'commands the Plateau's photonic INFRASTRUCTURE'"
+  },
+  {
+   "abilityId": "riding_order",
+   "level": 3,
+   "why": "lattice secondary — the city answers her"
+  },
+  {
+   "abilityId": "foreclose",
+   "level": 3,
+   "why": "⚠️ 'the foreclosure path made political', and she believes it is mercy"
+  },
+  {
+   "abilityId": "lifted_word",
+   "level": 2,
+   "why": "seraphic tertiary"
+  },
+  {
+   "abilityId": "guardian_angel",
+   "level": 2,
+   "why": "she protects, which is the whole problem"
+  },
+  {
+   "abilityId": "maintained_order",
+   "level": 2,
+   "why": "the Plateau holds"
+  },
+  {
+   "abilityId": "read_the_room",
+   "level": 2,
+   "why": "the valley's most powerful ALIGNED figure"
+  },
+  {
+   "abilityId": "mediators_tongue",
+   "level": 2,
+   "why": "'unify'"
+  },
+  {
+   "abilityId": "resonant_shield",
+   "level": 2,
+   "why": "she is not undefended"
+  },
+  {
+   "abilityId": "kindle",
+   "level": 2,
+   "why": "Blazeborn's first"
+  },
+  {
+   "abilityId": "calm_word",
+   "level": 1,
+   "why": "she does not need volume"
+  },
+  {
+   "abilityId": "bound_witness",
+   "level": 1,
+   "why": "⚑ r1 — she witnesses, but not as her method"
+  }
+ ],
+ "closed": [
+  "shroud",
+  "never_there",
+  "false_stance"
+ ],
+ "personality": {
+  "warmth": 0.8,
+  "trust": 0.5,
+  "candor": 0.8,
+  "patience": 0.9
+ },
+ "physicality": "ADULT. Seated, luminous, sixties. WHAT CATCHES THE EYE: the room lights toward her and she has stopped noticing.",
+ "canOppose": true,
+ "canAlly": true,
+ "canRecruit": false,
+ "intimacyNotes": "⛔ NOT AVAILABLE. ⚠️ 'She is NOT A VILLAIN — she is the contraction-choice with a good heart and terrible reach.'",
+ "questSeeds": [
+  "⚑ She will offer you the Plateau's backing, and the price is that you agree the valley needs one hand on it.",
+  "⛔ She is right that something is waking and wrong about what to do. Someone she respects could change that, and she respects very few."
+ ],
+ "schemaVersion": 1,
+ "_authoredWhy": "⛑ PROMOTED FROM `npcs/legends.json` TO A FILE OF ITS OWN, 2026-09-08. ⛔ CCODE'S ROSTER: 'authored on disk, never loaded — 4, all in npcs/legends.json', and `state.js` claimed they 'arrive hydrated from legends.roster' WHICH THEY DO NOT. ⚠️ THE FILE IS REGISTERED IN THE MANIFEST AND ITS PEOPLE NEVER REACH THE GAME — the pooled-container failure a third time, after the coliseum champions and the Saehara challengers. ⛔ AND THREE OF THE FIVE ARE HINGES: `the_deep_warden` on FOUR of six arcs, `aevi_the_watcher` on two, `the_last_choirmistress` on two. ⚑ Erik: 'make them fully authored with their arc wants etc. THEY'RE FULL NPCS.' ⚠️ EVERY FIELD BELOW IS CARRIED FROM THE POOLED RECORD — role, power, wants, hooks, seenBefore, approachRequirement, canOppose/canAlly/canRecruit. ⛑ WHAT IS NEW IS ONLY WHAT A SHEET NEEDS: tier from renown, level from the tier floor, domains, subAttributes and a kit.",
+ "_promotedFrom": "npcs/legends.json",
+ "vocation": "KEEPER",
+ "_vocationWhy": "⛔ `vocation` IS AUTHORED, NOT DERIVED, and the attempt to derive it is the reason. ⚠️ MEASURED 2026-09-08: clustering 40 authored people by their crafts' verb families put SEVENTEEN OF FORTY in KEEPER and ZERO in EDGE — with KESTRIN, THE COLISEUM'S HARM CHAMPION, IN THE KEEPER COLUMN. ⛑ Rank-weighting did not fix it: she reads KEEPER 24 / READER 23 / EDGE 21, essentially flat. ⚑ THE CAUSE IS CLEAN: every capable person carries defensive and perceptive crafts, so verb counts measure COMPETENCE, not PURPOSE. ⛔ A VOCATION IS WHAT A PERSON IS FOR, and that is a judgement — the same shape as `tier`, which a regex also cannot mint. ⬜ `docs/VOCATIONS.md` holds the eight and what each does when a fight starts. ⚑ HERE: ⛔ 'the valley unified under order' — she holds a civilisation.",
+ "gear": [
+  "the Plateau's great seal — it commands the arrays",
+  "a lance of braided light",
+  "plate of woven light-guide",
+  "healing_draught"
+ ],
+ "purse": {
+  "crystal": 3000
+ },
+ "fullName": "Seraphine Aurel Lumenhall",
+ "title": "High Luminary of the Radiant Plateau",
+ "aliases": [
+  "High Luminary Sera",
+  "Sera",
+  "Seraphine Aurel Lumenhall"
+ ],
+ "communityId": "valley.radiant_plateau",
+ "reactsToReputation": {
+  "truth-seeker": "takes real interest, may confide",
+  "deceiver": "mirrors and misleads, tests constantly"
+ },
+ "teaches": "blazeborn",
+ "curriculum": {
+  "method": "Everything at once, in one session, at a brightness that hurts. Then she sends you away for a season to reconstruct it from the after-image.",
+  "opens": "the entire tree, unusably fast"
+ },
+ "curriculumNote": "SNG-175 §3. DEVIATIONS ONLY — the curriculum spine derives from ability levelReq (285/285 carry it), so a teacher authors nothing but where they depart from the standard ladder. The departure IS the characterisation: two teachers of one tradition differ exactly here.",
+ "sex": "female",
+ "_personalityWas": "{\"warmth\": 8, \"trust\": 5, \"candor\": 8, \"patience\": 9} — the 0–10 scale; every other record uses 0–1 (SNG-646)",
+ "_mergedFrom_SNG646": "Erik 2026-09-24: 'yes on Sera.' high_luminary (High Luminary Sera, Master of the Radiant Plateau) and the_high_luminary were one person in two records. This record keeps Seraphine's id, level, abilities, arc and power leadership, and carries Sera's community, teaching, curriculum, reputation reactions and her four knowledge lines — the falsified purity reports that quests.json hangs on her. Sera's 'fifties' and 'younger than expected' yield to Seraphine's sixties; romanceEligible stays false, as Seraphine's own intimacyNotes rule it. 'Sera' is what her own people call her."
+}

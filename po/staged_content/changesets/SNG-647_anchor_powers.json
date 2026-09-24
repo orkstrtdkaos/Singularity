@@ -1,0 +1,948 @@
+{
+ "schemaVersion": 1,
+ "id": "SNG-647_anchor_powers",
+ "kind": "changeset",
+ "_title": "Anchor powers: nine powers in seven regions where the Sovereign story needs a named power",
+ "_why": "Erik 2026-09-24: 'the world is very big and you don't have enough to fill it yet — or have CCode exercise the generative engine.' Both: these are the regions where a held seat, a challenger, the open seat, a supply line or a counterweight must be a specific power, so they are authored. The remaining 17 regions go to the generator as a dry run (SPEC_SNG-647 §3).",
+ "ids": [
+  "power_cairnhold_wardens",
+  "power_harvest_hand",
+  "power_the_scour",
+  "power_the_scouring",
+  "power_grand_lattice",
+  "power_hollow_court",
+  "power_seraphic_orders",
+  "power_harborward",
+  "power_deepwood_moot",
+  "warden_mother_redgate",
+  "master_endmore",
+  "speaker_istvane",
+  "hierarch_brightmantle"
+ ],
+ "removed": {},
+ "renamed": {},
+ "added": [
+  {
+   "_kind": "power",
+   "encounters": [],
+   "answersTo": null,
+   "rivals": [
+    "power_harvest_hand"
+   ],
+   "opposedBy": [],
+   "id": "power_cairnhold_wardens",
+   "name": "The Wardens of Cairnhold",
+   "kind": "sovereignty",
+   "form": "council",
+   "temper": "kind",
+   "seat": "cairnhold",
+   "reach": [
+    "cairnhold",
+    "the_quiet_ground",
+    "the_hollowing",
+    "cairn_and_scour",
+    "the_old_warden_post"
+   ],
+   "leader": "warden_mother_redgate",
+   "strength": {
+    "scale": "legion",
+    "contingents": [
+     {
+      "n": 160,
+      "quality": 2,
+      "what": "Ashwarden tenders, grave-crews and the march-wardens of the Hollowing"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "the_hollowing",
+     "kind": "post",
+     "name": "the near-march watch, where the grey runs out",
+     "garrison": 30
+    }
+   ],
+   "verbs": [
+    "protect",
+    "patrol",
+    "tax"
+   ],
+   "dangerLift": 0,
+   "noticesYouWhen": [
+    "neighbour",
+    "crossed"
+   ],
+   "wantsFromYou": "That you let the dead be tended. Bring them your dying and they will take them in; leave a body unburied on their road and they will want to know why.",
+   "offersYou": "A place to die that is not frightening, a burial for anyone at all, and wardens who will stand between the living and whatever the Long Grey sends.",
+   "leverage": "The Wardens will tend anyone, including their enemies. Every warband that has marched on Cairnhold has had its own dead buried by the people it came to kill.",
+   "whenBroken": "The tending stops at Cairnhold's edge, the Long Grey comes a mile closer each season, and the Quiet Ground has no one standing in front of it.",
+   "bodies": [
+    {
+     "name": "the Wardens' council",
+     "does": "keeps Cairnhold and its roads, and sends the march-wardens out",
+     "people": [
+      "warden_mother_redgate"
+     ]
+    },
+    {
+     "name": "the Quiet Ground",
+     "does": "takes in the dying and keeps vigil",
+     "people": []
+    }
+   ],
+   "plainly": "The Ashwardens' council at Cairnhold. It tends the dying and buries anyone, friend or enemy, and it holds the edge of the grey country.",
+   "descriptionSeed": "Cairnhold is the least frightening place in the world once you are inside it, and the Wardens keep it that way. They tend the dying at the Quiet Ground, bury anyone at all, and hold the Hollowing against the Long Grey, where the tending stops and something else harvests instead.",
+   "appearance": "A grey stone city of cairns and wide windows, tenders in ash-coloured robes, a watch-post on a bare ridge looking out over endless ash",
+   "secretsGM": [
+    "Neth holds the Life / Death seat (SNG-644) and lives at the Quiet Ground under the Wardens' protection. The Wardens do not know what she is holding back; they only know she must not be disturbed."
+   ]
+  },
+  {
+   "_kind": "power",
+   "encounters": [],
+   "answersTo": null,
+   "rivals": [
+    "power_cairnhold_wardens"
+   ],
+   "opposedBy": [
+    "neth_the_stayed"
+   ],
+   "id": "power_harvest_hand",
+   "name": "The Harvest Hand",
+   "kind": "order",
+   "temper": "cruel",
+   "seat": "the_long_grey",
+   "reach": [
+    "the_long_grey",
+    "the_hollowing"
+   ],
+   "leader": "morvane_the_harvest",
+   "strength": {
+    "scale": "unit",
+    "contingents": [
+     {
+      "n": 60,
+      "quality": 3,
+      "what": "reapers of the Long Grey, who end what is ready and a great deal that is not"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "the_long_grey",
+     "kind": "post",
+     "name": "the reaping-ground past the last cairn",
+     "garrison": 20
+    }
+   ],
+   "verbs": [
+    "patrol",
+    "expand",
+    "feud",
+    "recruit"
+   ],
+   "dangerLift": 1,
+   "noticesYouWhen": [
+    "crossed",
+    "neighbour"
+   ],
+   "wantsFromYou": "Your consent to an ending: yours, or someone you are carrying. They are patient about it, and they are not patient forever.",
+   "offersYou": "An end to any suffering, quickly and without cruelty, and the certainty that nothing you fear will follow you past it.",
+   "leverage": "They believe they only reap what is ready. Show one of them a thing they judged ready that lived, and they will hesitate — and a reaper who hesitates is not one.",
+   "whenBroken": "The Long Grey goes still, and for a season the Hollowing's wardens can walk past the last cairn and come back.",
+   "plainly": "The reapers of the Long Grey, past the last cairn, where the Ashwardens' tending stops. They end what is ready, and they have stopped asking what that means.",
+   "descriptionSeed": "Out past the last cairn nobody tends anything, and the Harvest Hand reaps. Morvane leads them with a logic that is nearly mercy. They are pushing toward the Quiet Ground, and they do not know why the one woman there makes them want to stop.",
+   "appearance": "An ash-field without end under a colourless sky, grey-robed reapers moving in a line with long curved blades, cairns falling behind them",
+   "secretsGM": [
+    "Morvane is a challenger for the Life / Death seat (SNG-644). The Harvest Hand is her road there, and Neth is in the way."
+   ]
+  },
+  {
+   "_kind": "power",
+   "encounters": [],
+   "answersTo": null,
+   "rivals": [
+    "power_the_scouring"
+   ],
+   "opposedBy": [],
+   "id": "power_the_scour",
+   "name": "The Masters of the Scour",
+   "kind": "sovereignty",
+   "form": "council",
+   "temper": "fair",
+   "seat": "the_scour",
+   "reach": [
+    "the_scour",
+    "the_clearing_ground",
+    "the_worn_yard"
+   ],
+   "leader": "master_endmore",
+   "strength": {
+    "scale": "legion",
+    "contingents": [
+     {
+      "n": 140,
+      "quality": 2,
+      "what": "demolition crews and ending-wrights, who take things apart properly"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "the_clearing_ground",
+     "kind": "post",
+     "name": "the Clearing Ground's gates, where endings are brought",
+     "garrison": 20
+    }
+   ],
+   "verbs": [
+    "tax",
+    "protect",
+    "patrol"
+   ],
+   "dangerLift": 0,
+   "noticesYouWhen": [
+    "crossed",
+    "rival_ally"
+   ],
+   "wantsFromYou": "A reason. Bring the Masters something that should end and they will end it well; ask them to end something that should not, and they will ask you why until you stop.",
+   "offersYou": "Any ending done properly — a failing house, a binding, a cage of a life's work — and crews who can bring down a fortress without scratching the street.",
+   "leverage": "They will not end anything without asking whether it should end. Anyone who can make that question hard enough can stop them.",
+   "whenBroken": "The crews scatter, the Clearing Ground closes, and the Scouring comes down out of the pure pole into a city with no one asking the question.",
+   "bodies": [
+    {
+     "name": "the Masters' council",
+     "does": "governs the Scour and licenses every demolition",
+     "people": [
+      "master_endmore"
+     ]
+    },
+    {
+     "name": "the Clearing Ground",
+     "does": "where things are brought to be ended properly",
+     "people": []
+    }
+   ],
+   "plainly": "The council that governs the Scour, a city where ending a thing well is a craft. They will end anything that should end, and they ask first.",
+   "descriptionSeed": "The Scour is a city of controlled ruin and beautiful demolitions, and the Masters govern it by asking one question of everything brought to them: should this end? Up the road, in the pure pole, the Scouring stopped asking, and the Masters know exactly how close that is.",
+   "appearance": "A city of elegant half-demolished towers, crews working with ropes and wedges, a gated yard where people bring things to be ended",
+   "secretsGM": [
+    "The Last Mercy holds the Breaking / Building seat (SNG-644) and works the Clearing Ground. The Masters count her as one of their own and do not know what she holds back."
+   ]
+  },
+  {
+   "_kind": "power",
+   "encounters": [],
+   "answersTo": null,
+   "rivals": [
+    "power_the_scour"
+   ],
+   "opposedBy": [
+    "the_last_mercy"
+   ],
+   "id": "power_the_scouring",
+   "name": "The Scouring",
+   "kind": "order",
+   "temper": "cruel",
+   "seat": "the_scouring",
+   "reach": [
+    "the_scouring",
+    "the_scour"
+   ],
+   "leader": "the_scouring_hand",
+   "strength": {
+    "scale": "unit",
+    "contingents": [
+     {
+      "n": 80,
+      "quality": 3,
+      "what": "unmakers who stopped asking whether a thing should end"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "the_scouring",
+     "kind": "post",
+     "name": "the unmade ground at the pure pole",
+     "garrison": 25
+    }
+   ],
+   "verbs": [
+    "expand",
+    "feud",
+    "patrol",
+    "recruit"
+   ],
+   "dangerLift": 1,
+   "noticesYouWhen": [
+    "crossed",
+    "wealth"
+   ],
+   "wantsFromYou": "Anything you have built. They do not want it; they want it gone, and they want you to watch.",
+   "offersYou": "Freedom from everything you carry. They mean it, and they will take it all.",
+   "leverage": "The Scouring cannot keep anything, including its own holds. It has no stores, no walls and no reserves, and a long siege starves it faster than any army.",
+   "whenBroken": "The pure pole goes quiet, and the Scour's crews can walk its edge without being unmade.",
+   "plainly": "The unmakers of the pure pole, who end things for the joy of it and have stopped asking whether they should.",
+   "descriptionSeed": "The Scouring stopped asking whether a thing should end — the asking was the last thing they unmade. The Scouring Hand leads them toward the Scour, and nothing in the city is safe from being finished.",
+   "appearance": "A plain of rubble and dust at the pure pole, figures unmaking a standing wall stone by stone with their hands, nothing whole in any direction",
+   "secretsGM": [
+    "The Scouring Hand is a challenger for the Breaking / Building seat (SNG-644). It must go through the Last Mercy first; the lore's 'if it finishes, it arrives'."
+   ]
+  },
+  {
+   "_kind": "power",
+   "encounters": [],
+   "answersTo": null,
+   "rivals": [],
+   "opposedBy": [
+    "the_doubting_lattice"
+   ],
+   "id": "power_grand_lattice",
+   "name": "The Grand Lattice",
+   "kind": "sovereignty",
+   "form": "specification",
+   "temper": "hard",
+   "seat": "the_grand_lattice",
+   "reach": [
+    "the_grand_lattice",
+    "tier_seven",
+    "the_unplanned_room"
+   ],
+   "leader": "the_still_lattice",
+   "strength": {
+    "scale": "legion",
+    "contingents": [
+     {
+      "n": 260,
+      "quality": 2,
+      "what": "the arcology's order-keepers, each at a place in the plan"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "tier_seven",
+     "kind": "post",
+     "name": "Tier Seven's control floor",
+     "garrison": 40
+    }
+   ],
+   "verbs": [
+    "tax",
+    "patrol",
+    "levy",
+    "inform",
+    "expand"
+   ],
+   "dangerLift": 0,
+   "noticesYouWhen": [
+    "crossed",
+    "neighbour",
+    "rival_ally"
+   ],
+   "wantsFromYou": "A place in the plan. Everything in the Lattice has one, and it will find yours, and you will be comfortable in it, and you will not leave it.",
+   "offersYou": "A perfect life: work, meals, rest and company, each at its right hour, forever, with nothing ever going wrong again.",
+   "leverage": "There is one room in the Grand Lattice that is on no plan. As long as it exists, the specification is not complete, and the people who know about it know that.",
+   "whenBroken": "The arcologies wake to an unplanned morning, Tier Seven's people argue for the first time in a century, and the Unplanned Room's door stands open.",
+   "plainly": "The government of the Lattice Cities: a specification that plans every hour of every life, kept by the Still Lattice. It is perfect, and it is closing.",
+   "descriptionSeed": "The Grand Lattice is the inner ring where order stopped being a method and became a faith, and the Still Lattice keeps its specification. Every life in the arcologies has its place, and every place is comfortable. The plan is nearly complete. Only one room is not on it.",
+   "appearance": "Vast ordered arcologies of identical terraces, people moving in perfect schedules, and deep inside, one small unmarked door",
+   "secretsGM": [
+    "Chaos / Order is the open seat (SNG-644). The Still Lattice walks toward it unopposed, and governing the Lattice Cities is how. When the specification is complete, it arrives."
+   ]
+  },
+  {
+   "_kind": "power",
+   "encounters": [],
+   "answersTo": null,
+   "rivals": [
+    "power_seraphic_orders"
+   ],
+   "opposedBy": [
+    "the_penitent_maw"
+   ],
+   "id": "power_hollow_court",
+   "name": "The Hollow Court",
+   "kind": "sovereignty",
+   "form": "court",
+   "temper": "fair",
+   "seat": "the_bargain_gate",
+   "reach": [
+    "the_bargain_gate",
+    "the_appetite_halls",
+    "the_maw"
+   ],
+   "leader": "speaker_istvane",
+   "strength": {
+    "scale": "legion",
+    "contingents": [
+     {
+      "n": 150,
+      "quality": 2,
+      "what": "court wardens of the Bargain Gate, who keep every term exactly"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "the_bargain_gate",
+     "kind": "post",
+     "name": "the Gate's hall of petitions",
+     "garrison": 30
+    }
+   ],
+   "verbs": [
+    "tax",
+    "protect",
+    "inform",
+    "expand"
+   ],
+   "dangerLift": 0,
+   "noticesYouWhen": [
+    "wealth",
+    "rival_ally"
+   ],
+   "wantsFromYou": "A petition. Ask the Court for what you want, plainly and in public, and it will be granted on terms that are always exactly fair.",
+   "offersYou": "Anything you ask for — a title, a claim, a cure, a crown — granted, lawful and beyond argument.",
+   "leverage": "The Court grants only what is asked for. Anyone who wants nothing from it cannot be bound by it, and it has no idea what to do with them.",
+   "whenBroken": "The Bargain Gate's hall stands empty, every grant it made starts to be questioned, and some crowns in the world begin to wobble.",
+   "bodies": [
+    {
+     "name": "the Hall of Petitions",
+     "does": "hears every petition in public and sets its terms",
+     "people": [
+      "speaker_istvane"
+     ]
+    },
+    {
+     "name": "the Choir of the Appetite Halls",
+     "does": "names aloud the wants people cannot admit to",
+     "people": []
+    }
+   ],
+   "plainly": "The Abyssal court at the Bargain Gate that grants what you ask for, on exactly fair terms. Everyone who takes a crown without being recognized comes here.",
+   "descriptionSeed": "The Hollow Court is scrupulously fair. You ask, in public; it names what you want, plainly; it grants it; and the terms are exactly what was agreed. It is where Harl Maddock got his crown when the Mavens would never recognize him. What it gets in return, it does not say.",
+   "appearance": "A horned hall of dark stone at the Bargain Gate, petitioners standing in a line to speak aloud, an empty chair kept at the head of the Court's table",
+   "feedsGM": [
+    {
+     "sovereign": "the_hollow_king",
+     "through": "every grant asked for and given, forever, by everyone who uses it",
+     "yield": "petition"
+    }
+   ],
+   "secretsGM": [
+    "This is the Hollow Court that SNG-640 names — the one that confers a grant, where the Mavens confer credibility. The Speaker keeps the empty chair and does not know who it is for (R40b.4).",
+    "The Hollow King himself is homed at the Maw, beyond the Court's reach, where the Devouring have stopped bargaining."
+   ]
+  },
+  {
+   "_kind": "power",
+   "encounters": [],
+   "answersTo": null,
+   "rivals": [
+    "power_hollow_court"
+   ],
+   "opposedBy": [
+    "the_oathbreaker_sel"
+   ],
+   "id": "power_seraphic_orders",
+   "name": "The Seraphic Orders",
+   "kind": "sovereignty",
+   "form": "order",
+   "temper": "hard",
+   "seat": "choirheight",
+   "reach": [
+    "choirheight",
+    "the_mercy_house",
+    "the_unfallen",
+    "stair_hollow"
+   ],
+   "leader": "hierarch_brightmantle",
+   "strength": {
+    "scale": "legion",
+    "contingents": [
+     {
+      "n": 220,
+      "quality": 3,
+      "what": "Seraphs of the Orders, radiant with ordered nanite, and their choir-guard"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "choirheight",
+     "kind": "post",
+     "name": "the tiered spires of the Orders' seat",
+     "garrison": 50
+    }
+   ],
+   "verbs": [
+    "protect",
+    "patrol",
+    "levy",
+    "recruit",
+    "expand"
+   ],
+   "dangerLift": 0,
+   "noticesYouWhen": [
+    "crossed",
+    "rival_ally"
+   ],
+   "wantsFromYou": "Your weight, laid down at the Mercy House, and your word that you will not carry it again.",
+   "offersYou": "Mercy that is entirely real: a burden lifted, permanently, by a Seraph who pays for it. And Seraphs at your side against anything that answers to the dark.",
+   "leverage": "Every mercy the Orders give costs the Seraph who gives it. The Orders are exactly as strong as they are willing to be spent, and some of them are running out.",
+   "whenBroken": "The Mercy House closes, the Unfallen come down from the pure pole unopposed, and the Burning Certainty's inquisition is the only law left on the Ascent.",
+   "bodies": [
+    {
+     "name": "the Hierarchy",
+     "does": "governs the Orders from Choirheight",
+     "people": [
+      "hierarch_brightmantle"
+     ]
+    },
+    {
+     "name": "the Burning Inquisition",
+     "does": "the higher law with no mercy under it; an inquisition inside the Orders",
+     "people": [
+      "the_burning_certainty"
+     ]
+    },
+    {
+     "name": "the Mercy House",
+     "does": "takes weight off people, genuinely, at real cost",
+     "people": []
+    }
+   ],
+   "plainly": "The Seraphs' orders on the Ascent. Their mercy is real and costs them dearly, and they will tell you, with complete certainty, who the enemy is.",
+   "descriptionSeed": "The Seraphic Orders are humans made radiant by ordered nanite, and they bleed gold. Their mercy is administered from tiered spires with a certainty that is hard to bear, and inside them the Burning Certainty's inquisition is gaining ground. They name Lucifer as the enemy, and they do not know how right, or how close, they are.",
+   "appearance": "Tiered white spires on a mountain ascent, radiant Seraphs with a gold sheen to their skin, a quiet house of mercy below and a burning pole above",
+   "secretsGM": [
+    "The Burning Certainty is the claimant on the Angelic half of the Hollow King's axis (SNG-642 §3). Her inquisition inside the Orders is her road.",
+    "Eosphor, the Dawn Seraph, walks among them. He casts no shadow. They have not noticed yet."
+   ]
+  },
+  {
+   "_kind": "power",
+   "encounters": [],
+   "answersTo": null,
+   "rivals": [],
+   "opposedBy": [
+    "the_starless"
+   ],
+   "id": "power_harborward",
+   "name": "The Harborward",
+   "kind": "order",
+   "temper": "kind",
+   "seat": "the_harborward",
+   "reach": [
+    "the_harborward",
+    "the_underlight",
+    "the_lampless_market",
+    "the_slow_stair"
+   ],
+   "leader": "ceriad",
+   "strength": {
+    "scale": "unit",
+    "contingents": [
+     {
+      "n": 70,
+      "quality": 2,
+      "what": "Umbral keepers who guard what the light would burn"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "the_harborward",
+     "kind": "post",
+     "name": "the keeping-halls, unlit and full",
+     "garrison": 20
+    }
+   ],
+   "verbs": [
+    "protect",
+    "patrol",
+    "recruit"
+   ],
+   "dangerLift": -1,
+   "noticesYouWhen": [
+    "neighbour",
+    "crossed"
+   ],
+   "wantsFromYou": "That you keep what you learn here to yourself. Everyone in the Harborward is here because someone, somewhere, would burn them for being seen.",
+   "offersYou": "Refuge for anyone the light has judged, a place to keep what you cannot let be found, and keepers who will not tell.",
+   "leverage": "The Harborward keeps everything and shows nothing. Anyone it has sheltered owes it silence, and a keeper who breaks silence is the only thing it cannot survive.",
+   "whenBroken": "The keeping-halls are opened, the refugees scatter into the light, and every banned book in the Underlight is carried up the Slow Stair to be burned.",
+   "plainly": "The Umbral keepers of the Harborward, who shelter refugees, heretics and banned books — everything the light would burn — and never show any of it.",
+   "descriptionSeed": "The Harborward is where the Umbrals keep what the light would burn. Its keepers are kind and silent, and their refuge is the best-kept secret in the dark. The Starless, on the Slow Stair, wants the dark to be total; the Harborward wants the dark to be a place where people are safe. They are not the same thing.",
+   "appearance": "Dark halls lit only by touch and voice, refugees resting in quiet alcoves, shelves of wrapped books, a keeper listening at a door",
+   "secretsGM": [
+    "The Harborward is a counterweight to Lucifer (SNG-640): privacy kept on purpose. It starves him without knowing. It is also opposed by the Starless, who wants no refuge in the dark — only the Void."
+   ]
+  },
+  {
+   "_kind": "power",
+   "encounters": [],
+   "answersTo": null,
+   "rivals": [
+    "power_grovehome_moot"
+   ],
+   "opposedBy": [],
+   "id": "power_deepwood_moot",
+   "name": "The Deepwood Standing Moot",
+   "kind": "sovereignty",
+   "form": "moot",
+   "temper": "hard",
+   "seat": "dw_the_moot",
+   "reach": [
+    "dw_the_moot",
+    "dw_the_thinedge",
+    "dw_the_burnscar",
+    "ent_deepwood"
+   ],
+   "leader": "rootbound_vaskar",
+   "strength": {
+    "scale": "legion",
+    "contingents": [
+     {
+      "n": 40,
+      "quality": 3,
+      "what": "Ents vast as hills, and their tree-herds; few, and almost impossible to stop"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "dw_the_thinedge",
+     "kind": "post",
+     "name": "the Thinedge, where the wood becomes aware",
+     "garrison": 10
+    }
+   ],
+   "verbs": [
+    "protect",
+    "patrol",
+    "feud"
+   ],
+   "dangerLift": 0,
+   "noticesYouWhen": [
+    "neighbour",
+    "crossed"
+   ],
+   "wantsFromYou": "Nothing taken from the wood, and nothing brought into it that burns. The Moot will take a century to decide whether to trust you and a moment to decide you did harm.",
+   "offersYou": "Passage through the true forest, the memory of trees older than the Transition, and the Moot's protection once it has finally been given.",
+   "leverage": "The Moot is arguing whether to seal the wood. As long as the argument goes on, the wood is open; anyone who can keep it going keeps the Deepwood in the world.",
+   "whenBroken": "The Rootbound win, the Deepwood seals, and the wood's edge becomes a thorned wall from the Thinedge to the Quickwood.",
+   "bodies": [
+    {
+     "name": "the Standing Moot",
+     "does": "the ring of Ents that decides for the Deepwood, over centuries",
+     "people": [
+      "rootbound_vaskar"
+     ]
+    },
+    {
+     "name": "the Rootbound",
+     "does": "the faction winning the argument to seal the wood",
+     "people": [
+      "thornmother_sealed"
+     ]
+    }
+   ],
+   "plainly": "The Ents' council in the true Deepwood, which has been arguing for a century whether to seal the wood. The side that wants it sealed is winning.",
+   "descriptionSeed": "The Standing Moot is a ring of Ents vast as hills, and their voices are a weather. They are arguing whether to seal the Deepwood against the world, and the Rootbound, with the Thornmother among them, are winning. The Grovehome Moot, which keeps the Quickwood open, is the argument's other half.",
+   "appearance": "A ring of Ents as tall as hills in the oldest grove, their slow voices shaking the leaves, a burned scar of black stumps beyond, green light thinning at the forest's edge",
+   "secretsGM": [
+    "The Thornmother is a challenger for the Life / Death seat (SNG-644). Sealing the wood is her road: life curdled into a wall."
+   ]
+  },
+  {
+   "_kind": "npc",
+   "schemaVersion": 1,
+   "romanceEligible": false,
+   "people": "human",
+   "closed": [],
+   "tier": "heroic",
+   "id": "warden_mother_redgate",
+   "name": "Warden-Mother Redgate",
+   "fullName": "Halda Brisa Redgate",
+   "title": "Warden-Mother of Cairnhold",
+   "level": 27,
+   "role": "Warden-Mother of Cairnhold — keeps the Ashwardens' council, the tending and the march, and has buried more of her enemies than her friends",
+   "gender": "woman",
+   "pronouns": "she/her",
+   "sex": "female",
+   "homeLocation": "cairnhold",
+   "spectrum": {
+    "death_life": -0.5,
+    "violence_peace": 0.6,
+    "chaos_order": 0.4
+   },
+   "assistTags": [
+    "tend",
+    "lead",
+    "guard",
+    "comfort"
+   ],
+   "appearance": "A tall grey-haired woman in an ash-coloured robe with a warden's staff, calm in the way of someone who sits with the dying every day.",
+   "personality": {
+    "warmth": 0.8,
+    "trust": 0.6,
+    "candor": 0.8,
+    "patience": 0.9
+   },
+   "voiceHints": "Gentle and unhurried. Calls death 'the end of the road' and means nothing sad by it. Grows very still, and very hard, when anyone speaks of the Harvest Hand.",
+   "wants": "For everyone who dies near Cairnhold to be tended, and for no one to be reaped who was not ready.",
+   "fears": "That the Harvest Hand reaches the Quiet Ground, and that the woman there is more than a tender.",
+   "knowledge": [
+    "Every road in the Palelands and who is buried along it",
+    "How close the Long Grey is to the Hollowing, to the mile"
+   ],
+   "reactsToReputation": {
+    "any": "offers you water and asks who you have lost",
+    "reliable": "asks you to walk the Hollowing with her wardens",
+    "reckless": "asks you to leave your weapons outside the Quiet Ground"
+   },
+   "questSeeds": [
+    "The Harvest Hand has reaped a village the Wardens were still tending",
+    "Someone has been leaving the dead unburied on the March road, on purpose"
+   ],
+   "gear": [
+    "a warden's staff of grey ash",
+    "a tender's satchel"
+   ],
+   "purse": {
+    "crystal": 110
+   },
+   "domains": {
+    "primary": "ashwarden",
+    "secondary": "stillhold",
+    "tertiary": "threnodist"
+   },
+   "_domainsWhy": "tending the dying, the quiet she keeps, and grief given a building",
+   "aliases": [
+    "Halda Brisa Redgate"
+   ]
+  },
+  {
+   "_kind": "npc",
+   "schemaVersion": 1,
+   "romanceEligible": false,
+   "people": "human",
+   "closed": [],
+   "tier": "heroic",
+   "id": "master_endmore",
+   "name": "Master Endmore",
+   "fullName": "Culla Vesta Endmore",
+   "title": "First Master of the Scour",
+   "level": 26,
+   "role": "First Master of the Scour — licenses every demolition in the city and asks every one of them the same question first",
+   "gender": "woman",
+   "pronouns": "she/her",
+   "sex": "female",
+   "homeLocation": "the_scour",
+   "spectrum": {
+    "destruction_creation": -0.5,
+    "chaos_order": 0.5,
+    "falsehood_truth": 0.4
+   },
+   "assistTags": [
+    "break",
+    "lead",
+    "investigate",
+    "craft"
+   ],
+   "appearance": "A compact woman in a dust-grey work coat with a surveyor's cord at her belt, who looks at every building as if measuring where it would fall.",
+   "personality": {
+    "warmth": 0.5,
+    "trust": 0.5,
+    "candor": 0.9,
+    "patience": 0.7
+   },
+   "voiceHints": "Asks 'should this end?' so often it has become her greeting. Precise about load and weight. Laughs at a good demolition the way other people laugh at a joke.",
+   "wants": "For every ending in the world to be asked for, and done well.",
+   "fears": "The day the question stops being asked in the Scour, as it stopped up the road.",
+   "knowledge": [
+    "How to bring down anything without harming what stands beside it",
+    "How far the Scouring is from the city, and how fast it is coming"
+   ],
+   "reactsToReputation": {
+    "any": "asks what you want ended, and why",
+    "reliable": "lends you a crew",
+    "reckless": "asks you, pointedly, whether you should end"
+   },
+   "questSeeds": [
+    "Someone brought a living person to the Clearing Ground to be ended, and had a good reason",
+    "The Scouring has taken a quarter of the Worn Yard, and the Masters cannot agree whether to fight"
+   ],
+   "gear": [
+    "a surveyor's cord and plumb",
+    "a demolisher's wedge-hammer"
+   ],
+   "purse": {
+    "crystal": 100
+   },
+   "domains": {
+    "primary": "unmaker",
+    "secondary": "mason",
+    "tertiary": "verist"
+   },
+   "_domainsWhy": "endings done as a craft, the weight of stone, and the plain question she asks",
+   "aliases": [
+    "Culla Vesta Endmore"
+   ]
+  },
+  {
+   "_kind": "npc",
+   "schemaVersion": 1,
+   "romanceEligible": false,
+   "people": "human",
+   "closed": [],
+   "tier": "heroic",
+   "id": "speaker_istvane",
+   "name": "Speaker Istvane",
+   "fullName": "Draven Ephram Istvane",
+   "title": "Speaker of the Hollow Court",
+   "level": 28,
+   "role": "Speaker of the Hollow Court — hears every petition at the Bargain Gate in public and sets the terms, which are always exactly fair",
+   "gender": "man",
+   "pronouns": "he/him",
+   "sex": "male",
+   "homeLocation": "the_bargain_gate",
+   "spectrum": {
+    "demonic_angelic": -0.6,
+    "falsehood_truth": 0.5,
+    "chaos_order": 0.4
+   },
+   "assistTags": [
+    "bargain",
+    "talk",
+    "read-people",
+    "bind"
+   ],
+   "appearance": "A lean horned man in black court robes, courteous and unhurried, seated at the table beside an empty chair he never looks at.",
+   "personality": {
+    "warmth": 0.5,
+    "trust": 0.4,
+    "candor": 0.9,
+    "patience": 0.9
+   },
+   "voiceHints": "Names what you want, out loud, before you do. Never lies and never hurries. Says 'granted' the way other people say 'goodbye'.",
+   "wants": "Every petition heard, every term kept, and the Court's fairness beyond any argument.",
+   "fears": "A petitioner who wants nothing, and the question of who the empty chair is for.",
+   "knowledge": [
+    "Every grant the Court has made, and on what terms",
+    "Who in the world holds a crown the Mavens never recognized"
+   ],
+   "reactsToReputation": {
+    "any": "asks what you want",
+    "reliable": "asks what you really want",
+    "reckless": "reminds you, courteously, that the Court always collects"
+   },
+   "questSeeds": [
+    "A petitioner has asked the Court for the thing another petitioner was granted last year",
+    "The empty chair was found moved, and no one in the hall will say who moved it"
+   ],
+   "gear": [
+    "the Court's ledger of grants",
+    "a signet with nothing cut into its face"
+   ],
+   "purse": {
+    "crystal": 400
+   },
+   "domains": {
+    "primary": "abyssal",
+    "secondary": "veilwright",
+    "tertiary": "bargainers"
+   },
+   "_domainsWhy": "wants named aloud, the craft of terms, and the bargain itself",
+   "aliases": [
+    "Draven Ephram Istvane"
+   ]
+  },
+  {
+   "_kind": "npc",
+   "schemaVersion": 1,
+   "romanceEligible": false,
+   "people": "human",
+   "closed": [],
+   "tier": "heroic",
+   "id": "hierarch_brightmantle",
+   "name": "Hierarch Brightmantle",
+   "fullName": "Laudine Honoria Brightmantle",
+   "title": "Hierarch of the Seraphic Orders",
+   "level": 30,
+   "role": "Hierarch of the Seraphic Orders — governs the Seraphs from Choirheight, gives mercy that costs her, and is losing ground to her own inquisition",
+   "gender": "woman",
+   "pronouns": "she/her",
+   "sex": "female",
+   "homeLocation": "choirheight",
+   "spectrum": {
+    "demonic_angelic": 0.7,
+    "dark_light": 0.6,
+    "violence_peace": 0.4
+   },
+   "assistTags": [
+    "lead",
+    "comfort",
+    "guard",
+    "light"
+   ],
+   "appearance": "A radiant woman in white with the faint gold sheen of ordered nanite under her skin, tired at the eyes the way only the very merciful get tired.",
+   "personality": {
+    "warmth": 0.8,
+    "trust": 0.5,
+    "candor": 0.8,
+    "patience": 0.7
+   },
+   "voiceHints": "Certain, and gentle about it. Speaks of mercy as work. Goes quiet when the Burning Inquisition is mentioned, which is not the same as disagreeing.",
+   "wants": "For the Orders' mercy to stay mercy, and for the Inquisition to remember what it serves.",
+   "fears": "That the Burning Certainty is right about her: that mercy is only delay.",
+   "knowledge": [
+    "Every Seraph of the Orders by name, and what each has left to give",
+    "That a Seraph wound shows gold, always, and what it would mean if one did not"
+   ],
+   "reactsToReputation": {
+    "any": "asks what weight you carry",
+    "reliable": "offers you a place at the Mercy House",
+    "reckless": "asks the Inquisition to keep an eye on you, and regrets it"
+   },
+   "questSeeds": [
+    "A Seraph of the Orders was wounded in a brawl, and a witness swears no gold came out",
+    "The Inquisition has arrested a tender from the Mercy House for giving mercy without leave"
+   ],
+   "gear": [
+    "a Hierarch's white staff",
+    "vestments of woven light"
+   ],
+   "purse": {
+    "crystal": 600
+   },
+   "domains": {
+    "primary": "seraphic",
+    "secondary": "blazeborn",
+    "tertiary": "stillhold"
+   },
+   "_domainsWhy": "the Orders' certainty, light worn as office, and mercy as the peace it buys",
+   "aliases": [
+    "Laudine Honoria Brightmantle"
+   ]
+  }
+ ],
+ "modified": [],
+ "referrers": {
+  "_declared": [
+   "content/packs/valley/powers.json"
+  ],
+  "_checkedAndNotAffected": [
+   "content/packs/valley/locations/* — every seat, reach and hold names an existing location; none is edited",
+   "npcs/ and tradition_epics.json — leaders morvane_the_harvest, the_scouring_hand, the_still_lattice, ceriad, rootbound_vaskar are named, none is edited"
+  ]
+ },
+ "expectedGates": {
+  "_existing": "the SNG-634 power gates cover every field; §357 may only go up"
+ },
+ "_manifest": "no change — powers.json is already provided",
+ "_applyNote": "feedsGM and secretsGM are GM-only and inert until C13, as with SNG-645."
+}

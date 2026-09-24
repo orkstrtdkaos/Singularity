@@ -1,0 +1,144 @@
+{
+ "schemaVersion": 1,
+ "id": "SNG-646_one_high_luminary",
+ "kind": "changeset",
+ "_title": "One High Luminary: Sera and Seraphine are one person",
+ "_why": "Erik 2026-09-24: 'yes on Sera.' Two records of one office, found building the great-figures roster.",
+ "ids": [
+  "high_luminary",
+  "the_high_luminary"
+ ],
+ "removed": {
+  "high_luminary": "→ merged into the_high_luminary; the merged record is po/staged_content/SNG-646_the_high_luminary.merged.json (replaces content/packs/valley/npcs/the_high_luminary.json whole)"
+ },
+ "renamed": {
+  "high_luminary": "the_high_luminary"
+ },
+ "added": [],
+ "modified": [
+  {
+   "id": "the_high_luminary",
+   "kind": "npc",
+   "field": "fullName",
+   "change": "add: the value in po/staged_content/SNG-646_the_high_luminary.merged.json"
+  },
+  {
+   "id": "the_high_luminary",
+   "kind": "npc",
+   "field": "title",
+   "change": "add: the value in po/staged_content/SNG-646_the_high_luminary.merged.json"
+  },
+  {
+   "id": "the_high_luminary",
+   "kind": "npc",
+   "field": "aliases",
+   "change": "add: the value in po/staged_content/SNG-646_the_high_luminary.merged.json"
+  },
+  {
+   "id": "the_high_luminary",
+   "kind": "npc",
+   "field": "communityId",
+   "change": "add: the value in po/staged_content/SNG-646_the_high_luminary.merged.json"
+  },
+  {
+   "id": "the_high_luminary",
+   "kind": "npc",
+   "field": "reactsToReputation",
+   "change": "add: the value in po/staged_content/SNG-646_the_high_luminary.merged.json"
+  },
+  {
+   "id": "the_high_luminary",
+   "kind": "npc",
+   "field": "teaches",
+   "change": "add: the value in po/staged_content/SNG-646_the_high_luminary.merged.json"
+  },
+  {
+   "id": "the_high_luminary",
+   "kind": "npc",
+   "field": "curriculum",
+   "change": "add: the value in po/staged_content/SNG-646_the_high_luminary.merged.json"
+  },
+  {
+   "id": "the_high_luminary",
+   "kind": "npc",
+   "field": "curriculumNote",
+   "change": "add: the value in po/staged_content/SNG-646_the_high_luminary.merged.json"
+  },
+  {
+   "id": "the_high_luminary",
+   "kind": "npc",
+   "field": "sex",
+   "change": "add: the value in po/staged_content/SNG-646_the_high_luminary.merged.json"
+  },
+  {
+   "id": "the_high_luminary",
+   "kind": "npc",
+   "field": "_personalityWas",
+   "change": "add: the value in po/staged_content/SNG-646_the_high_luminary.merged.json"
+  },
+  {
+   "id": "the_high_luminary",
+   "kind": "npc",
+   "field": "_mergedFrom_SNG646",
+   "change": "add: the value in po/staged_content/SNG-646_the_high_luminary.merged.json"
+  },
+  {
+   "id": "the_high_luminary",
+   "kind": "npc",
+   "field": "knowledge",
+   "change": "add or replace (a replace in npcs/the_high_luminary.json; the change-set index resolves this id to its lore/legends.json copy, where it is an add) with the merged value in po/staged_content/SNG-646_the_high_luminary.merged.json"
+  },
+  {
+   "id": "the_high_luminary",
+   "kind": "npc",
+   "field": "wants",
+   "change": "add or replace (a replace in npcs/the_high_luminary.json; the change-set index resolves this id to its lore/legends.json copy, where it is an add) with the merged value in po/staged_content/SNG-646_the_high_luminary.merged.json"
+  },
+  {
+   "id": "the_high_luminary",
+   "kind": "npc",
+   "field": "fears",
+   "change": "add or replace (a replace in npcs/the_high_luminary.json; the change-set index resolves this id to its lore/legends.json copy, where it is an add) with the merged value in po/staged_content/SNG-646_the_high_luminary.merged.json"
+  },
+  {
+   "id": "the_high_luminary",
+   "kind": "npc",
+   "field": "appearance",
+   "change": "add or replace (a replace in npcs/the_high_luminary.json; the change-set index resolves this id to its lore/legends.json copy, where it is an add) with the merged value in po/staged_content/SNG-646_the_high_luminary.merged.json"
+  },
+  {
+   "id": "the_high_luminary",
+   "kind": "npc",
+   "field": "voiceHints",
+   "change": "add or replace (a replace in npcs/the_high_luminary.json; the change-set index resolves this id to its lore/legends.json copy, where it is an add) with the merged value in po/staged_content/SNG-646_the_high_luminary.merged.json"
+  },
+  {
+   "id": "the_high_luminary",
+   "kind": "npc",
+   "field": "assistTags",
+   "change": "add or replace (a replace in npcs/the_high_luminary.json; the change-set index resolves this id to its lore/legends.json copy, where it is an add) with the merged value in po/staged_content/SNG-646_the_high_luminary.merged.json"
+  },
+  {
+   "id": "the_high_luminary",
+   "kind": "npc",
+   "field": "personality",
+   "change": "add or replace (a replace in npcs/the_high_luminary.json; the change-set index resolves this id to its lore/legends.json copy, where it is an add) with the merged value in po/staged_content/SNG-646_the_high_luminary.merged.json"
+  }
+ ],
+ "referrers": [
+  "valley/locations/radiant_plateau_edge.json",
+  "valley/lore/world_superstructure.json",
+  "valley/npcs/high_luminary.json",
+  "valley/quests.json",
+  "valley/manifest.json"
+ ],
+ "expectedGates": {
+  "_existing": "roster --check: '20 ids in two files' should drop by one, and the_high_luminary's count of files stays 2 (npcs + legends)"
+ },
+ "_manifest": "npcs/high_luminary.json leaves the manifest",
+ "_forCCode": [
+  "tests/sweep_final_roster_audit.json, sweep_final_roster_fair_audit.json, sweep_q3_roster_audit.json — snapshots that name high_luminary; regenerate",
+  "characters/player-s9z9u1/char-mrhs8286.json — one save's registry names high_luminary: a reconcile step renames the key, as step 80 did for the peoples",
+  "radiant_plateau_edge npcsPresent — after the rename it may list the_high_luminary twice; dedupe"
+ ]
+}

@@ -1,4 +1,4 @@
-<!-- status: SNG-640 proposal — awaiting Erik (§6) and CCode's C13 -->
+<!-- status: SNG-640 proposal — C13 superseded by SNG-641 §1; §6 answered in part by Erik 2026-09-24 -->
 # SPEC SNG-640 — The Sovereigns in the political map: the powers are the supply lines
 
 **Aevi (PO) · 2026-09-24 · v2.4.x** · staged: `po/staged_content/SNG-640_sovereigns_in_the_map.json` and the change set
@@ -21,6 +21,11 @@ built) is what starves a Sovereign. The political game and the cosmic one are th
 
 ⚠️ **Two rules I held to.** *"A GM should never confirm a Sovereign. Confirm an AGENT."* — every tie is GM-eyes-only.
 *"The six remaining seats… Do not fill them in one pass."* — **no seat is filled.**
+
+> ⚠️ **Correction, SNG-641 §1 (same day).** "Six" was the lore's count from before the Hollow King and the Unbodied
+> were written. Seven axes less three authored leaves **four**, and Erik expects three (open question in SNG-641 §7.1).
+> **§5's C13 is also replaced there:** R40b.2 derives supply from the arc's stage, so breaking a line is an arc deed
+> and not a counter. §6.2 is answered by R40 and R41. The original text is left as written.
 
 ## §2 — THE THREE SOVEREIGNS WITH A WRITTEN HUNGER, AND WHERE THEIR LINES RUN
 

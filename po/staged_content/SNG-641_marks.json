@@ -1,0 +1,214 @@
+{
+ "_spec": "SNG-641 §3 — staged, not merged (reader before field; C14). sovereignGM is GM-only and never player-facing. nearIds are the SNG-640 supply-line powers and places (ids checked against powers.json and locations/) where a mark is placed first; empty = placeable at any of that Sovereign's lines.",
+ "thresholds": {
+  "pattern": 2,
+  "lineConfirmed": 3,
+  "sameHandRegions": 2
+ },
+ "gmLines": {
+  "pattern": "You've seen this before.",
+  "lineConfirmed": "There is someone beyond {power} being fed, and {power} is how.",
+  "sameHand": "The same mark. Nobody here has heard of the other place."
+ },
+ "marks": [
+  {
+   "id": "mark_lidless_ring",
+   "sovereignGM": "lucifer",
+   "kind": "goods",
+   "mark": "a ring of rays burned round an empty centre — on crates, arena tokens, the edges of board filings",
+   "ordinaryReading": "a guild's sun-mark",
+   "nearIds": [
+    "the_great_coliseum",
+    "power_radiant_plateau",
+    "the_blaze"
+   ]
+  },
+  {
+   "id": "mark_nothing_sealed",
+   "sovereignGM": "lucifer",
+   "kind": "goods",
+   "mark": "goods sold unwrapped, maker's name and price burned on the outside, nothing sealed",
+   "ordinaryReading": "honest trade",
+   "nearIds": []
+  },
+  {
+   "id": "mark_lamp_never_out",
+   "sovereignGM": "lucifer",
+   "kind": "people",
+   "mark": "they sleep with the lamp lit, keep no curtains, and confess on the board before anyone accuses them",
+   "ordinaryReading": "piety",
+   "nearIds": []
+  },
+  {
+   "id": "mark_empty_filing",
+   "sovereignGM": "lucifer",
+   "kind": "places",
+   "mark": "a public mark on the board with no record behind it",
+   "ordinaryReading": "a clerk's error",
+   "nearIds": [
+    "power_radiant_plateau"
+   ]
+  },
+  {
+   "id": "mark_shutters_down",
+   "sovereignGM": "lucifer",
+   "kind": "places",
+   "mark": "a street where every shutter is off its hinges and nobody remembers deciding it",
+   "ordinaryReading": "a fashion",
+   "nearIds": []
+  },
+  {
+   "id": "mark_hollow_coin",
+   "sovereignGM": "the_hollow_king",
+   "kind": "goods",
+   "mark": "a coin with its face worn smooth on purpose; it passes at full weight",
+   "ordinaryReading": "old coin",
+   "nearIds": [
+    "power_gralloch_crown"
+   ]
+  },
+  {
+   "id": "mark_the_seam",
+   "sovereignGM": "the_hollow_king",
+   "kind": "goods",
+   "mark": "a contract with one blank ruled line below the signatures",
+   "ordinaryReading": "a scribe's habit",
+   "nearIds": [
+    "power_gralloch_crown",
+    "power_firstsight_barony"
+   ]
+  },
+  {
+   "id": "mark_tally_notches",
+   "sovereignGM": "the_hollow_king",
+   "kind": "people",
+   "mark": "notches cut in a debtor's door frame, one for each thing asked for",
+   "ordinaryReading": "a moneylender's mark",
+   "nearIds": []
+  },
+  {
+   "id": "mark_by_leave",
+   "sovereignGM": "the_hollow_king",
+   "kind": "people",
+   "mark": "they say by leave before they act, even alone",
+   "ordinaryReading": "manners",
+   "nearIds": []
+  },
+  {
+   "id": "mark_empty_chair",
+   "sovereignGM": "the_hollow_king",
+   "kind": "places",
+   "mark": "an empty chair kept at the head of the table, at councils that took a grant",
+   "ordinaryReading": "respect for the dead",
+   "nearIds": [
+    "power_gralloch_crown"
+   ]
+  },
+  {
+   "id": "mark_cold_goods",
+   "sovereignGM": "the_ninefold_ascendant",
+   "kind": "goods",
+   "mark": "Dusklow crates stencilled cold goods, do not open, heavier than the manifest",
+   "ordinaryReading": "smuggled ice",
+   "nearIds": [
+    "power_undercount"
+   ]
+  },
+  {
+   "id": "mark_ninefold_chit",
+   "sovereignGM": "the_ninefold_ascendant",
+   "kind": "goods",
+   "mark": "a nine-sided Cogitarium token on someone who was never a Cogitant",
+   "ordinaryReading": "a keepsake",
+   "nearIds": [
+    "the_cogitarium"
+   ]
+  },
+  {
+   "id": "mark_unaging_sleeper",
+   "sovereignGM": "the_ninefold_ascendant",
+   "kind": "people",
+   "mark": "a sleeper who does not age, eyes moving under the lids",
+   "ordinaryReading": "a sleeping sickness",
+   "nearIds": []
+  },
+  {
+   "id": "mark_sleepers_hymn",
+   "sovereignGM": "the_ninefold_ascendant",
+   "kind": "people",
+   "mark": "sleepers humming the same four bars, in every region",
+   "ordinaryReading": "a lullaby",
+   "nearIds": [
+    "the_unbodied_choir_master"
+   ]
+  },
+  {
+   "id": "mark_warm_bed",
+   "sovereignGM": "the_ninefold_ascendant",
+   "kind": "places",
+   "mark": "a bed made neat and still warm in a house empty a month",
+   "ordinaryReading": "a lodger",
+   "nearIds": []
+  }
+ ],
+ "luciferMask": {
+  "_status": "proposal — Erik §7.2",
+  "name": "Eosphor",
+  "title": "the Dawn Seraph",
+  "tells": [
+   "casts no shadow",
+   "never seen resting",
+   "cannot lie — deflects with a truer, more interesting thing",
+   "bleeds white light that does not pool; a Seraph bleeds gold (ordered nanite) — proposal §7.3"
+  ]
+ },
+ "starlessRivalAdd": {
+  "id": "the_starless",
+  "rivalsAdd": [
+   "lucifer"
+  ],
+  "_why": "the Void is what refusing left; his light is why it is not total"
+ },
+ "generatorRule": {
+  "_status": "proposal — Erik §7.4",
+  "hungers": {
+   "lucifer": {
+    "kinds": [
+     "order",
+     "guild"
+    ],
+    "verbs": [
+     "inform"
+    ],
+    "tags": [
+     "arena",
+     "board",
+     "herald"
+    ]
+   },
+   "the_hollow_king": {
+    "kinds": [
+     "outlaw_crown",
+     "lordship",
+     "guild"
+    ],
+    "verbs": [
+     "tribute",
+     "extort"
+    ]
+   },
+   "the_ninefold_ascendant": {
+    "kinds": [
+     "guild",
+     "order"
+    ],
+    "verbs": [
+     "fence",
+     "smuggle"
+    ]
+   }
+  },
+  "requiresArcStageAtLeast": 1,
+  "capPerSovereignPerRegion": 1
+ }
+}

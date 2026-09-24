@@ -72,7 +72,7 @@ import { roomOf, roomRefusal, promotionOffer, promoteHolding, trainingAt, mounts
 import { featureCost, allFeatures, refreshImprovement, canBeAskedToWork, holdingFactsLine, answerFeatureOffer, holdingLedger, addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, yieldsFor, upkeepFor, appointKeeper, reclaimHolding, improveHolding, setCrew, setGarrison, holdingGround, addFeature, removeFeature, renameHolding, featureKinds, residentsOf, holdingMeaningAura, holdingFieldDelta } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
 import { buildDevReport, unknownOpsIn } from "./engine/devreport.js";   // SNG-559: the Play/Dev instrument
 import { makeField, fieldDataFrom, FIELD_KINDS, KIND_LABEL, MEMBERSHIP } from "./engine/field.js";
-import { assaultableAt, garrisonContingents, noteHoldLoss, takeHold, encounterOwnerFilter } from "./engine/powers.js";   // SNG-634 C5: their holds are places you can take   // CCODE-457: why the ground here reads the way it does · CCODE-472: and the layer the map draws
+import { assaultableAt, garrisonContingents, noteHoldLoss, takeHold, encounterOwnerFilter, seedPowerKnowledge, isKnownPower } from "./engine/powers.js";   // SNG-634 C5: their holds are places you can take   // CCODE-457: why the ground here reads the way it does · CCODE-472: and the layer the map draws
 import { FIRE_TESTS, diffKeys } from "./engine/firetests.js";   // SNG-560: the parts that have never been used
 import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, roleBadges, teacherOfferReady, applyPartyOps, activeCompany, formerCompany } from "./engine/company.js";
 import { unitsOf, unitLine, poolRows, atSideRows, wherePerson, canBringForward, rosterLine, levelOfPerson } from "./engine/fellowship.js";
@@ -123,7 +123,7 @@ import { setArcFate } from "./engine/latentarcs.js"; // SNG-191 §7: the player 
 import { parseGambitSteps, assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "./engine/gambit.js";
 import { spectrumIdsOf, cleanAxes, driftAlignment } from "./engine/spectrum.js";   // CCODE-436: the twelve, and the one door into the fingerprint
 import { trainableTier, SUBS, SUB_OF, SUB_DESC, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, canLearnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, retroLevelGrants, retroNativeGrants, applyNativeGrants, nativeGrantIdsFor, seedInnateSubstrate, effectiveEnergyCost, effectiveLevelReq, sanitizeNewAbility, applyNewAbility, autoAdvancePracticedRanks, markDefiningMoment, promotionEligible, promote, acquirable, acquireDomain, recoveryEnergy, craftRolls, rollForChoice } from "./engine/progression.js";
-import { topicsNeedingSummary, buildSummaryPrompt, applySummaries, topicReading, ensureCodex, applyCodexUpdates, codexForGM, searchCodex, mergeInto, mergeCodexTopics, suggestMerges, markNotSame, buildMergeAdjudicationPrompt, applyMergeVerdicts, mergeDigest, undoLastMerge } from "./engine/codex.js";
+import { topicsNeedingSummary, buildSummaryPrompt, applySummaries, topicReading, ensureCodex, applyCodexUpdates, codexForGM, searchCodex, mergeInto, mergeCodexTopics, suggestMerges, markNotSame, buildMergeAdjudicationPrompt, applyMergeVerdicts, mergeDigest, undoLastMerge, seedReferenceTopic } from "./engine/codex.js";
 import { reconcile, topReconcileVersion } from "./engine/reconcile.js";
 import { ensurePractice, recordUse, declareAspiration, dropAspiration, recordAspirationProgress, aspirationRipe, practiceRankReady, ripeCombos, ripeBranches, emergenceNoticeForGM, acceptCombo, acceptBranch, validEmergenceId } from "./engine/practice.js";
 import { needsBackfill, runBackfill, summaryLines } from "./engine/backfill.js";
@@ -179,7 +179,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.5.1";
+const APP_VERSION = "2.5.2";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -7175,6 +7175,11 @@ function renderCreate() {
       inventory: startingGear(state.background),
       deeds: [], relationships: {}, chronicle: [],
       currentLocationId: state.startingLocation || defaultStart(state.origin) || CONTENT.startingLocation,
+      // ⛔ CCODE-483 — WHERE THEY BEGAN, KEPT. `currentLocationId` moves the first time they walk anywhere, so
+      // it cannot answer "the region you start in" (Erik's words) for anyone who has travelled. Nothing in
+      // this app had ever written this field, and `powers.homeRegionsOf` was reading it — a branch reading a
+      // field no record has. It is the same value as the line above, at the one moment they are equal.
+      startingLocation: state.startingLocation || defaultStart(state.origin) || CONTENT.startingLocation,
       activeScene: null,
       clock: newClock(),
       // SNG-057: the chosen companion (string id — recruitment/backfill shape) + the player's name
@@ -7207,6 +7212,18 @@ function renderCreate() {
     }
     ensureSubAttributes(character);
     ensureCodex(character);
+    // ⛔ CCODE-483 (ERIK) — WHAT THEY HAVE ALREADY HEARD OF. "Your codex will list the powers of the region
+    // you start in or are from, as well as some of the bigger powers in the world." A crown is a name you
+    // know long before it is a man you have stood in front of, and ten of the eleven authored leaders had
+    // been met by nobody — so every reader keyed to the registry served one power out of eleven.
+    // ⚠️ AND NOT THROUGH `applyCodexUpdates`, WHICH IS WHERE I STARTED: that door is a FILTER for the GM’s
+    // output and it stops at sixty topics, so on a save already near the cap six of seven powers folded into
+    // an unrelated lore topic in silence. `seedReferenceTopic` mints the world’s own furniture outside it.
+    {
+      const seeded = seedPowerKnowledge(character, { content: CONTENT, day: 0 });
+      for (const spec of seeded.updates) seedReferenceTopic(character, spec);
+      if (seeded.learned.length) console.log(`[chargen] heard of: ${seeded.learned.map(l => `${l.name} (${l.how})`).join(", ")}`);
+    }
     ensureCharacterStyle(character); // SNG-BATCH-7: this character earns its OWN play-style
     character.grantsVersion = 1; // born after banked growth — no retro grant owed
     applyNativeGrants(character, CONTENT.rules, CONTENT.traditionIndex); // SNG-101b: granted their primary tradition's basics by right of being what they are
@@ -17905,7 +17922,7 @@ function renderCodexScreen(query = "", openTopicId = null, mergeMode = false) {
     <div class="field"><input id="codex-search" value="${esc(query)}" placeholder="Search topics, facts, factions, mysteries…"></div>
     ${open ? `
       <div class="codex-topic-page">
-        <div class="codex-kind">${esc(open.kind)}${open.entityId ? ` <span class="codex-anchor" title="anchored to a known entity">◈ ${esc(open.entityId)}</span>` : ""}</div>
+        <div class="codex-kind">${esc(open.kind)}${open.entityId ? ` <span class="codex-anchor" title="anchored to a known entity">◈ ${esc(open.entityId)}</span>` : ""}${open.reference && open.facts.length <= 1 ? ` <span class="codex-anchor" title="You know of them by reputation — you have not met them, and nothing you have seen yourself is written here yet">❉ known by reputation</span>` : ""}</div>
         <h3 class="codex-title">${esc(open.label)}</h3>
         ${codexTopImage(open)}
         ${(open.aliases || []).length ? `<div class="codex-aliases">also called: ${open.aliases.map(esc).join(" · ")}</div>` : ""}
@@ -18002,7 +18019,11 @@ function renderCodexScreen(query = "", openTopicId = null, mergeMode = false) {
                 <button class="codex-item" data-topic="${esc(t.id)}">
                   <strong>${esc(t.label)}</strong>${t.entityId ? ` <span class="codex-anchor" title="known entity">◈</span>` : ""}
                   ${(t.aliases || []).length ? `<span class="codex-aliases-inline">· also: ${t.aliases.slice(0, 2).map(esc).join(", ")}${t.aliases.length > 2 ? "…" : ""}</span>` : ""}
-                  <span class="hint">${t.facts.length} fact${t.facts.length === 1 ? "" : "s"}</span>
+                  ${/* ⛔ CCODE-483 — "BY REPUTATION" IS A DIFFERENT KIND OF KNOWING, and a row that read
+                       "1 fact" made a crown you have only heard named look like one you had investigated.
+                       ⚠️ It drops away the moment play adds anything of its own, because then you no longer
+                       merely know OF them. */""}
+                  <span class="hint">${t.reference && t.facts.length <= 1 ? "by reputation" : `${t.facts.length} fact${t.facts.length === 1 ? "" : "s"}`}</span>
                 </button>
                 ${t.facts.slice(-3).map(f => `<div class="codex-fact nested">${esc(f)}</div>`).join("")}
                 ${t.links.length ? `<div class="codex-links nested">${t.links.slice(0, 5).map(l => {

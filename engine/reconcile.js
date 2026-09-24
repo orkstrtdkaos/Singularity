@@ -14,6 +14,7 @@
 // reconcile is the umbrella for everything schema/feature-shaped that came after.
 
 import { addHolding, addFeature, setGarrison } from "./holdings.js";
+import { seedPowerKnowledge } from "./powers.js";   // ⛔ CCODE-483: what a character has heard of
 import { carriageOf } from "./carriage.js";   // ⛔ step 61: a carriage the one reader that matters declines is no carriage at all        // R49: the forge the fiction built; step 44: the features and the gate
 import { canRaiseBand, raiseBand } from "./melee.js";   // R49: the fellowship the fiction already named
 import { worldPosForGenerated } from "./worldmap.js";
@@ -23,7 +24,7 @@ import { grantMartialKit, retiredBaselineIds } from "./martial.js";
 import { applyLadderGrants } from "./ladder.js";
 import { servicedURL } from "./art.js";   // ⛔ step 72: the pictures now ask our own service
 import { credit, debit } from "./purse.js";   // R48: the purse has ONE door in, and it records an origin · step 48: and one door out
-import { mergeCodexTopics, ensureCodex, applyCodexUpdates, foldTopicsByIdPrefix } from "./codex.js";   // step 43: the named fold
+import { mergeCodexTopics, ensureCodex, applyCodexUpdates, foldTopicsByIdPrefix, seedReferenceTopic } from "./codex.js";   // step 43: the named fold
 import { mergeRecovery, mergeReceiptLine } from "./recovery.js";   // step 41: the Settings door's merge, run where every copy passes
 import { SNAPSHOTS } from "./recovery_snapshots.js";              // step 41: the overwritten branch, as a diff
 import { dedupeQuests, normalizeProse, creditQuestGiver, slugify } from "./quests.js";   // ⛔ step 55: a quest its giver was never credited for
@@ -2595,7 +2596,28 @@ export const CHARACTER_STEPS = [
       return { notes: ["The Ent Grove stands where your own story put it — inside the Crossing, a short walk from the Hundred Markets and the Great Coliseum. Your record of it had it out in the valley beside the Pale March Waygate, which was never where you found it."] };
     }
   },
-  // Future steps register here — e.g. innate-talent GRANT (offers[], when talent content
+  {
+    version: 79, id: "what-you-have-heard-of", playerFacing: true,
+    // ⛔ CCODE-483 — Erik: "we need a way to know these kind of power figures by reputation… Your codex will
+    // list the powers of the region you start in or are from, as well as some of the bigger powers in the
+    // world." Creation seeds a character being born; this is the other door, for everybody who already
+    // exists — the same sentence app.js's chargen path carries above `ensureCharacterStyle`.
+    // ⚠️ IT KNOWS OF THE POWER, NOT OF ITS LEADER. Nothing is added to `npcRegistry`: knowing of the Gralloch
+    // Crown is not knowing Harl Osric Maddock, and minting a stranger into your known-people would undo the
+    // rule CCODE-462 settled.
+    apply: (c, ctx) => {
+      const content = ctx?.content;
+      if (!content?.powers?.length) return {};            // no powers loaded — nothing to have heard of
+      const seeded = seedPowerKnowledge(c, { content, day: ctx?.day ?? null });
+      if (!seeded.learned.length) return {};
+      for (const spec of seeded.updates) seedReferenceTopic(c, spec);   // ⚠️ minted outside the discovery cap
+      const home = seeded.learned.filter(l => l.how === "home").length;
+      const far = seeded.learned.length - home;
+      console.log(`[reconcile] ccode-483: heard of ${seeded.learned.length} power(s) \u2014 ${seeded.learned.map(l => l.name).join(", ")}`);
+      return { notes: [`Your codex now holds what you have heard of the forces that hold ground${home ? ` \u2014 ${home} in your own country` : ""}${far ? `${home ? " and" : " \u2014"} ${far} whose names travel` : ""}. You have not met any of them; this is reputation, and it is where learning about them starts.`] };
+    }
+  },
+  // Future steps register here \u2014 e.g. innate-talent GRANT (offers[], when talent content
   // lands with SNG-017), Reach-tradition eligibility surfacing, universal-role tagging.
 ];
 

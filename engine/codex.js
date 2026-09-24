@@ -151,7 +151,12 @@ function admitTopic(character, u, raw, ctx = {}) {
     && n.startsWith(normName(t.label) + " "));
   if (parent) return { topic: parent, why: "prefix" };
   // 2 · a label that reads like a beat is a FACT — filed where it happened, or on who it names
-  const full = Object.keys(topics).length >= CAPS.topics;
+  // ⛔ CCODE-483 — THE CAP COUNTS WHAT PLAY DISCOVERED, NOT THE WORLD'S OWN FURNITURE. A `reference` topic is
+  // seeded by the engine from authored content (the powers that hold ground, which Erik asked the codex to
+  // list) and is not competing for the sixty slots this cap protects. ⚠️ FOUND THE HARD WAY: Silas's codex
+  // stood at 59 of 60, so the FIRST seeded power was admitted and the other six fell through to
+  // `why: "full"` and landed as facts on "Silas — The Two Holds". Seven powers heard of, one topic listed.
+  const full = Object.values(topics).filter(x => x && !x.reference).length >= CAPS.topics;
   if (readsLikeBeat(raw) || full) {
     for (const l of (Array.isArray(u.links) ? u.links : [])) {
       const lid = slugify(String(l));
@@ -168,6 +173,47 @@ function admitTopic(character, u, raw, ctx = {}) {
     }
   }
   return null;
+}
+
+/** ⛔ CCODE-483 — A REFERENCE TOPIC, SEEDED BY THE ENGINE FROM AUTHORED CONTENT. This is a SECOND writer of
+ *  `codex.topics` and that is deliberate, narrow, and worth explaining: `applyCodexUpdates` exists to admit
+ *  the GM's output, and its admission policy (DESIGN_codex_admission) is a filter against noise — a prefix
+ *  fold, a beat fold, and a hard stop at sixty topics. Those are exactly right for a model's suggestions and
+ *  exactly wrong for the world's own furniture, which is known-good, authored, and the thing Erik asked the
+ *  codex to LIST: "your codex will list the powers of the region you start in or are from."
+ *  ⚠️ SO IT IS KEPT AS NARROW AS IT CAN BE: it mints with the canonical shape, it REFUSES to touch a topic
+ *  that already exists (so play's own record of a power always wins), it stamps `reference` so the discovery
+ *  cap ignores it, and it takes ONE authored fact rather than a stream. Everything else about a topic — the
+ *  merges, the summaries, the re-keying — goes on working through the doors that own it. */
+export function seedReferenceTopic(character, { id, label, kind = "faction", fact = null, links = [], day = null } = {}) {
+  ensureCodex(character);
+  const topics = character.codex.topics;
+  const tid = slugify(id || "");
+  if (!tid || !label) return null;
+  if (topics[tid]) return null;                      // play already knows it — never overwrite what happened
+  const t = topics[tid] = {
+    id: tid,
+    label: String(label).slice(0, 60),               // ⚠️ 60, like `applyCodexUpdates` — not an 80 I invented
+    kind: KINDS.includes(kind) ? kind : "lore",      // ⚠️ validated, or the UI filters by a kind it does not have
+    facts: [], links: [], aliases: [],
+    createdDay: day ?? null,
+    // ⛔ `updatedDay` IS LEFT UNSET ON PURPOSE. It drives `codexForGM`'s recency lean, and a reference topic
+    // was NOT learned today — seven of them stamped with the day of a reconcile would take seven of the GM's
+    // eight slots away from the story the character is actually in. They reach the prompt the honest way:
+    // because the player is standing on their ground (+3 on a link) or asked about them (+4).
+    reference: true,
+  };
+  // ⛔ A FACT IS A STRING, `[d<day>] text`, CLAMPED AT 300 — the shape every reader already expects.
+  // ⚠️ I FIRST WROTE `{ text, day }`, AN OBJECT, AND MEASURED IT WITH A DRIVER THAT PRINTED `facts[0].text`
+  // BACK. It agreed with itself and nothing threw. `searchCodex` calls `f.toLowerCase()` and would have
+  // thrown on the first search; `codexForGM` joins them, so the GM would have read "[object Object]"; the
+  // merge path slices past a "]" that was not there. Seven topics written, zero readable.
+  if (fact) t.facts.push(`[d${day ?? "?"}] ${smartClamp(String(fact), 300)}`);
+  for (const l of (Array.isArray(links) ? links : []).slice(0, 4)) {   // 4, like the door above
+    const lid = slugify(l);
+    if (lid && !t.links.includes(lid)) t.links.push(lid);
+  }
+  return t;
 }
 
 /** ⛔ THE TOPIC ID FOLLOWS THE ENTITY, ALWAYS (SPEC_codex §3b). A topic born from a label and anchored LATER

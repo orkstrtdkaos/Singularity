@@ -23257,7 +23257,10 @@ console.log("\n── §322 · the starting purse — liquidity by background, m
   const numinous = Object.values(CT322.locations).find(l => l.regionId === "the_numinous_reach");
   const c = mk({ background: "orphan", deeds: deeds(11), currentLocationId: numinous?.id }); rec322(c, "character", { content: CT322 });
   check("§322: ⛔ THE FLOOR IS max(), THE SETTLEMENT IS +, BOTH BY PLACE — two lines; a purse above its floor gets only the deeds; a Reach pays its scrip",
-    a.purse.crystal === 15 + 16 && (ra.notes || []).length === 2 && /starting purse you were owed/.test(ra.notes.join(" ")) && /arrears for 2 deeds/.test(ra.notes.join(" "))
+    // ⚠️ CCODE-483: THIS COUNTED EVERY NOTE THE WHOLE RECONCILE WROTE (`notes.length === 2`) for a sentence
+    // that is about the PURSE'S two lines. It went red the day a later step — what you have heard of the powers
+    // — also had something to say, which is a gate pinning its neighbours rather than its subject.
+    a.purse.crystal === 15 + 16 && (ra.notes || []).filter(n => /purse|arrears/i.test(n)).length === 2 && /starting purse you were owed/.test(ra.notes.join(" ")) && /arrears for 2 deeds/.test(ra.notes.join(" "))
     && b.purse.crystal === 31 + 64 && c.purse.crystal === 0 && c.purse.scrip.the_numinous_reach === M322.incomeHere(88, "the_numinous_reach", CT322.rules.economy).amount,
     JSON.stringify({ a: a.purse, b: b.purse, c: c.purse }));
   const silas = mk({ id: "char-mrhs8286", background: "lineage_taught", deeds: deeds(52), currentLocationId: "millbrook" }); rec322(silas, "character", { content: CT322 });
@@ -25645,9 +25648,12 @@ console.log("\n── §353 · the powers act, and their people belong to them �
 
   check("§353: ⛔ …AND GROWTH HAS A WINDOW, DERIVED FROM THE WORLD'S CLOCK, because `winsToGrowOneStep` says nothing about how fast three wins arrive. ⚠️ MY FIRST VERSION CLAIMED TO READ THE CLOCK AND DID NOT — `yearDays` lives at `content.worldClock.calendar.yearDays`, not on `rules`, so it fell through to a literal 144 and got the right answer by coincidence while the comment above it lied. Halving the year must halve the window, which is the only way to know the read is real",
     (() => {
-      const steps = (content) => { const ch = { powerState: {} }; let n = 0;
-        for (let d = 1; d <= 144; d++) for (const x of PW6.powerPass(ch, { content, rules: content.rules, day: d })) if (x.grew) n++;
-        return n; };
+      // ⚠️ CCODE-483: THIS COUNTED `grew` NEWS ROWS, and news is now only written about a power the character
+      // has HEARD OF — so a fixture who has heard of nobody made the whole measurement read zero. The window is a
+      // rule about GROWTH, so it is counted from the growth itself, which is also the harder thing to fake.
+      const steps = (content) => { const ch = { powerState: {} };
+        for (let d = 1; d <= 144; d++) PW6.powerPass(ch, { content, rules: content.rules, day: d });
+        return Object.values(ch.powerState).reduce((n, st) => n + (Number(st?.grownHeads) || 0), 0); };
       const half = { ...C353, worldClock: { ...C353.worldClock, calendar: { ...C353.worldClock.calendar, yearDays: 72 } } };
       const dial = { ...C353, rules: { ...C353.rules, powers: { ...C353.rules.powers, growth: { ...C353.rules.powers.growth, growEveryDays: 200 } } } };
       return steps(half) > steps(C353) && steps(dial) < steps(C353);
@@ -25665,7 +25671,11 @@ console.log("\n── §353 · the powers act, and their people belong to them �
 
   check("§353: ⛔ …AND THE PASS IS SILENT UNLESS SOMETHING CHANGED. Measured over one world year: 134 of 144 passes write nothing, and every line it does write is a power actually growing or shrinking. ⚑ MY FIRST VERSION NARRATED THE ROUTINE — a line each time a gang tolled or a council taxed — and TWO gates caught it in the same run: §325 (\"a pass with nothing to say writes nothing\") and smoke 366, whose charge digest a wall of world rows reshaped. They were right: a force doing what it always does is not news, and eleven of them saying so every pass is how a player learns to stop reading it",
     (() => {
+      // ⛑ CCODE-483: A CHARACTER WHO HAS HEARD OF THEM, because that is what a real one is now — the codex
+      // lists the powers of your own region and the ones whose names travel, and the world only reports on a
+      // power you have heard of. A fixture who has heard of nobody reads as a silent world for the wrong reason.
       const ch = { powerState: {} };
+      for (const p of PW6.powersFrom(C353)) PW6.knowPower(ch, p, { how: "renown", day: 0 });
       let silent = 0, rows = 0, real = 0;
       for (let d = 1; d <= 144; d++) {
         const news = PW6.powerPass(ch, { content: C353, rules: C353.rules, day: d });
@@ -25830,6 +25840,189 @@ console.log("\n── §354 · a power has an opinion, and takes an interest ─
       const b = PW7.powersHoldingForGM("old_switchback", { content: C354, character: ch });
       return /TAKEN AN INTEREST/.test(b) && /killed/.test(b) && /distrusted/.test(b)
         && /have not met/.test(b) && !/leverage/i.test(b) && !/secretsGM/i.test(b);
+    })());
+}
+
+// ══════════ §355 · CCODE-483 (ERIK) — KNOWN BY REPUTATION, WHICH IS NOT THE SAME AS MET ══════════
+// ⛔ ERIK'S RULING: "we need a way to know these kind of power figures by reputation. That way you can learn
+// about them as you play without ever meeting them. Your codex will list the powers of the region you start in
+// or are from, as well as some of the bigger powers in the world."
+// ⚑ WHY IT WAS NEEDED: ten of the eleven authored leaders have been met by NOBODY on this device, so every
+// reader keyed to `npcRegistry` served one power out of eleven. A crown is a name you know long before it is a
+// man you have stood in front of.
+console.log("\n── §355 · known by reputation ──");
+{
+  const PW5 = await import("../engine/powers.js");
+  const CX5 = await import("../engine/codex.js");
+  const { loadContentHeadless: lch355 } = await import("./headless_content.mjs");
+  const C355 = await lch355();
+  const ALL = PW5.powersFrom(C355);
+  const regionOfPower = p => (Array.isArray(p.reach) ? p.reach : []).map(id => C355.locations[id]?.regionId).filter(Boolean);
+  const where = rid => Object.values(C355.locations).find(l => l.regionId === rid)?.id;
+  const bornAt = locId => ({ startingLocation: locId, currentLocationId: locId, codex: null, powerState: {}, npcRegistry: {} });
+  const anyRegion = ALL.flatMap(regionOfPower)[0];
+
+  check("§355: ⛔ RENOWN IS AUTHORED, NOT A WEIGHT I CHOSE. A power is known in the world when it reaches into MORE THAN ONE REGION, or belongs to a `bloc`, or is `legion` scale — three facts Aevi already writes down and can change. ⚠️ I nearly used a HEAD-COUNT THRESHOLD instead, and a number I pick is a number she cannot argue with. ⛑ Asked of the whole corpus rather than of one power: every wide or declared power is renowned, and no other one is",
+    ALL.every(p => {
+      const wide = new Set(regionOfPower(p)).size > 1;
+      const declared = !!p.bloc || String(p.strength?.scale || "") === "legion";
+      const r = PW5.isRenowned(p, C355);
+      return (wide || declared) ? r === true : r === false;
+    }), `${ALL.filter(p => PW5.isRenowned(p, C355)).length} of ${ALL.length} carry a name that travels`);
+
+  check("§355: ⛔ …AND \"OR ARE FROM\" IS A REAL HALF OF THE SENTENCE, NOT A SPELLING OF THE FIRST. ⚠️ MY FIRST VERSION READ `startingLocation || currentLocationId` AND BOTH HALVES WERE WRONG: NO save on this device records a `startingLocation` — nothing in the app had ever written one, so the branch was dead on arrival — and the fallback served the region they are STANDING in, which for ten of the sixteen saves is a different country from the one their people comes from. Silas is of the Making and stands in the valley. ⛑ So it reads the ORIGIN, which every one of the origins the content declares answers — a branch that is dead for any of them is a feature that silently serves nobody",
+    (() => {
+      const origins = Array.isArray(C355.origins) ? C355.origins : Object.values(C355.origins || {});
+      if (!origins.length) return false;
+      const declared = origins.filter(o => o.homeRegion || o.startingRegion || o.startingLocation);
+      const travelled = origins.map(o => {
+        const c = { origin: o.id, currentLocationId: null };     // from their people, standing nowhere at all
+        return PW5.homeRegionsOf(c, C355);
+      });
+      // and a character who HAS recorded a start keeps it, whatever their people says and wherever they wander
+      const far = Object.values(C355.locations).find(l => l.regionId && l.regionId !== origins[0].homeRegion);
+      const rooted = PW5.homeRegionsOf({ origin: origins[0].id, startingLocation: far.id, currentLocationId: far.id }, C355);
+      return declared.length === origins.length
+        && travelled.every(set => set.length > 0)
+        && rooted.includes(far.regionId) && rooted.includes(origins[0].homeRegion);
+    })(), `all ${(Array.isArray(C355.origins) ? C355.origins : Object.values(C355.origins || {})).length} origins answer where their people is from`);
+
+  check("§355: ⛑ …AND WHERE THEY HAVE BEEN STANDING COUNTS ONLY WHEN NOTHING RECORDED WHERE THEY BEGAN. ⚠️ Reading the ruling strictly made it WORSE before it made it better: no authored power reaches the Making, so \"of the Making\" alone handed Silas nothing of the four powers whose ground he has walked on for the whole game. Where a character has actually been is evidence about what they have heard — so for a save with no recorded start it is ADDED, and for one that has a start it is never consulted at all",
+    (() => {
+      const origins = Array.isArray(C355.origins) ? C355.origins : Object.values(C355.origins || {});
+      const o = origins.find(x => x.homeRegion);
+      const elsewhere = Object.values(C355.locations).find(l => l.regionId && l.regionId !== o.homeRegion);
+      const drifted = PW5.homeRegionsOf({ origin: o.id, currentLocationId: elsewhere.id }, C355);
+      const rooted = PW5.homeRegionsOf({ origin: o.id, startingLocation: elsewhere.id, currentLocationId: "nowhere_at_all" }, C355);
+      const nameless = PW5.homeRegionsOf({ origin: "an-origin-this-content-has-renamed", currentLocationId: elsewhere.id }, C355);
+      return drifted.includes(o.homeRegion) && drifted.includes(elsewhere.regionId)
+        && rooted.includes(elsewhere.regionId) && rooted.length === 2
+        && nameless.length === 1 && nameless[0] === elsewhere.regionId;
+    })());
+
+  check("§355: ⛔ …AND THE TWO KINDS OF KNOWING ARE KEPT APART. The powers of the region you are OF are `home`; the ones whose names travel are `renown`. Both reach the codex and the DIFFERENCE is recorded, because the tollmen on your own road and a crown three regions away are not the same fact about a character. ⛑ Asked for EVERY region the content declares a power in, so a region Aevi adds is covered without touching this gate",
+    (() => {
+      const regions = [...new Set(ALL.flatMap(regionOfPower))];
+      if (regions.length < 2) return false;
+      return regions.every(rid => {
+        const c = bornAt(where(rid));
+        const known = PW5.powersKnownAtStart(c, { content: C355 });
+        const home = known.filter(k => k.how === "home").map(k => k.power);
+        const far = known.filter(k => k.how === "renown").map(k => k.power);
+        return home.length > 0
+          && home.every(p => regionOfPower(p).includes(rid))
+          && far.every(p => PW5.isRenowned(p, C355) && !regionOfPower(p).includes(rid));
+      });
+    })(), "every region a power reaches into");
+
+  check("§355: ⛔ …AND EVERY POWER IT SAYS YOU HAVE HEARD OF BECOMES A LISTED TOPIC — as many topics as powers, which is the whole of Erik's \"your codex will LIST them\". ⚠️ THIS IS THE ONE THAT FAILED FIRST: driven on Silas's real save the log read \"heard of 7 power(s)\" and the codex gained ONE. The seeding went through `applyCodexUpdates`, whose admission policy is a FILTER, and his codex stood one topic below the cap — so six fell through the full-codex fallback onto an unrelated lore topic. Nothing threw",
+    (() => {
+      const regions = [...new Set(ALL.flatMap(regionOfPower))];
+      return regions.every(rid => {
+        const c = bornAt(where(rid));
+        const seeded = PW5.seedPowerKnowledge(c, { content: C355, day: 3 });
+        for (const spec of seeded.updates) CX5.seedReferenceTopic(c, spec);
+        const listed = Object.values(c.codex.topics).filter(x => x.reference);
+        return seeded.learned.length > 0 && listed.length === seeded.learned.length
+          && seeded.learned.every(l => listed.some(x => x.label === l.name));
+      });
+    })(), "one topic per power heard of, in every region");
+
+  check("§355: ⛔ …AND A FULL CODEX STILL LISTS THEM. The topic cap exists to stop the GM's output filling the codex; the world's own furniture is not the GM's output. ⛑ The cap is DERIVED here by filling a codex until it refuses another topic — never pinned as a number, or this gate reddens the day Aevi retunes it — and the powers are then seeded on top of a codex that is already refusing",
+    (() => {
+      const c = bornAt(where(anyRegion));
+      CX5.ensureCodex(c);
+      let n = 0, cap = 0;
+      for (let i = 0; i < 400; i++) {
+        CX5.applyCodexUpdates(c, [{ topic: `filler-${i}`, label: `Filler ${i}`, kind: "lore", fact: `a thing that happened, number ${i}` }], { day: 1 });
+        const now = Object.keys(c.codex.topics).length;
+        if (now === n) { cap = n; break; }
+        n = now;
+      }
+      if (!cap) return false;                                    // never filled — the cap moved, and this gate must say so
+      const seeded = PW5.seedPowerKnowledge(c, { content: C355, day: 4 });
+      for (const spec of seeded.updates) CX5.seedReferenceTopic(c, spec);
+      const listed = Object.values(c.codex.topics).filter(x => x.reference);
+      const discovered = Object.values(c.codex.topics).filter(x => !x.reference).length;
+      return seeded.learned.length > 0 && listed.length === seeded.learned.length
+        && discovered === cap && Object.keys(c.codex.topics).length === cap + listed.length;
+    })(), "seeded past a codex that refuses another discovery");
+
+  check("§355: ⛔ …AND THE TOPIC IS THE SHAPE EVERY READER ALREADY EXPECTS. ⚠️ MY FIRST MINT PUSHED `{ text, day }` OBJECTS, AND I MEASURED IT WITH A DRIVER THAT PRINTED `facts[0].text` BACK — it agreed with itself and nothing threw. A fact in this codex is a STRING: `searchCodex` calls `.toLowerCase()` on it, `codexForGM` joins them into the prompt, and the merge path slices past a bracket. Seven topics written, zero readable. ⛑ So the gate asks the READERS, not the shape",
+    (() => {
+      const c = bornAt(where(anyRegion));
+      const seeded = PW5.seedPowerKnowledge(c, { content: C355, day: 5 });
+      for (const spec of seeded.updates) CX5.seedReferenceTopic(c, spec);
+      const one = Object.values(c.codex.topics).find(x => x.reference);
+      const word = String(one.label).split(/\s+/).filter(w => w.length > 4)[0] || one.label;
+      const found = CX5.searchCodex(c, word.toLowerCase());
+      const sorted = CX5.searchCodex(c, "");
+      const gm = String(CX5.codexForGM(c, { playerInput: one.label }) || "");
+      return one.facts.length > 0 && one.facts.every(f => typeof f === "string" && /^\[d/.test(f))
+        && found.some(x => x.id === one.id) && sorted.length === Object.keys(c.codex.topics).length
+        && gm.includes(one.id) && !gm.includes("[object Object]");
+    })());
+
+  check("§355: ⛑ …AND A BATCH OF THEM DOES NOT CROWD THE GM. `codexForGM` hands over eight topics, scored, with a recency lean — so seven reference topics stamped with the day of a reconcile would take the prompt away from the story the character is actually in. They are minted with no `updatedDay` and reach the GM the honest way: because the player is standing on their ground, or asked about them by name",
+    (() => {
+      const c = bornAt(where(anyRegion));
+      CX5.ensureCodex(c);
+      for (let i = 0; i < 9; i++) CX5.applyCodexUpdates(c, [{ topic: `story-${i}`, label: `Story ${i}`, kind: "event", fact: `what happened at ${i}` }], { day: 90 });
+      const seeded = PW5.seedPowerKnowledge(c, { content: C355, day: 99 });
+      for (const spec of seeded.updates) CX5.seedReferenceTopic(c, spec);
+      const rows = s => String(s || "").split("\n").filter(Boolean);
+      const idle = rows(CX5.codexForGM(c, { locationId: null }));
+      const named = rows(CX5.codexForGM(c, { playerInput: Object.values(c.codex.topics).find(x => x.reference).label }));
+      return idle.length > 0 && idle.every(r => !r.startsWith("- [power-")) && named.some(r => r.startsWith("- [power-"));
+    })());
+
+  check("§355: ⛔ …AND IT KNOWS OF THE POWER, NOT OF ITS LEADER. Nothing is added to `npcRegistry`: knowing of a crown is not knowing the man who wears it, and minting a stranger into your known-people would undo the rule CCODE-462 settled. ⛑ The GM's own block SAYS SO for a power this character has never heard of, so the prompt cannot hand over a name the fiction has not given",
+    (() => {
+      const c = bornAt(where(anyRegion));
+      const seeded = PW5.seedPowerKnowledge(c, { content: C355, day: 6 });
+      for (const spec of seeded.updates) CX5.seedReferenceTopic(c, spec);
+      const leaders = seeded.learned.map(l => ALL.find(p => p.id === l.id)?.leader).filter(Boolean);
+      const unheard = ALL.find(p => !PW5.isKnownPower(c, p.id) && p.seat);
+      const block = unheard ? PW5.powersHoldingForGM(unheard.seat, { content: C355, character: c }) : "";
+      return Object.keys(c.npcRegistry).length === 0 && leaders.length > 0
+        && leaders.every(id => !c.npcRegistry[id])
+        && !!unheard && /never heard of them/.test(block);
+    })());
+
+  check("§355: ⛑ …AND YOU ONLY HEAR OF SOMEBODY ONCE. Seeding twice adds nothing, the reason for knowing is not overwritten, and a topic play has already written is never replaced by a seed — what happened always outranks what you heard",
+    (() => {
+      const c = bornAt(where(anyRegion));
+      const first = PW5.seedPowerKnowledge(c, { content: C355, day: 7 });
+      for (const spec of first.updates) CX5.seedReferenceTopic(c, spec);
+      const one = first.learned[0];
+      const mine = Object.values(c.codex.topics).find(x => x.reference);
+      mine.facts.push("[d8] and I have stood in their hall since");
+      const n = Object.keys(c.codex.topics).length;
+      const again = PW5.seedPowerKnowledge(c, { content: C355, day: 9 });
+      for (const spec of again.updates) CX5.seedReferenceTopic(c, spec);
+      return again.learned.length === 0 && Object.keys(c.codex.topics).length === n
+        && c.powerState[one.id].known.day === 7 && mine.facts.length === 2;
+    })());
+
+  check("§355: ⛔ …AND THE WORLD ONLY TELLS YOU ABOUT POWERS YOU HAVE HEARD OF. \"It is stronger than it was\" is not news to somebody who has never heard the name — it is a line about a stranger, which is the exact noise §325 caught me writing once already. ⛑ Being NOTICED teaches you of them, whatever you knew an hour ago",
+    (() => {
+      // the same world year, walked twice: once by somebody who has heard of them and once by a stranger
+      const year = (ch) => { let rows = 0;
+        for (let d = 1; d <= 144; d++) rows += PW5.powerPass(ch, { content: C355, rules: C355.rules, day: d }).filter(n => n.grew || n.shrank).length;
+        return rows; };
+      const heard = { powerState: {} };
+      for (const p of ALL) PW5.knowPower(heard, p, { how: "renown", day: 0 });
+      const toldOfKnown = year(heard) > 0;
+      const toldOfStrangers = year({ powerState: {} }) === 0;
+      // ⛑ and being NOTICED teaches you of them, whatever you knew an hour ago
+      const stranger = { powerState: {}, npcRegistry: {}, codex: null };
+      const p = ALL.find(x => x.strength?.contingents?.length && (x.noticesYouWhen || []).includes("crossed"));
+      PW5.notePowerLoss(stranger, p, { 0: 4 }, { day: 10 });
+      const before = PW5.isKnownPower(stranger, p.id);
+      PW5.noticePass(stranger, { content: C355, rules: C355.rules, day: 10 });
+      return toldOfKnown && toldOfStrangers
+        && before === false && PW5.isKnownPower(stranger, p.id) === true
+        && stranger.powerState[p.id].known.how === "noticed";
     })());
 }
 

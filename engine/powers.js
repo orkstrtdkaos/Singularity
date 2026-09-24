@@ -295,7 +295,8 @@ export function powersHoldingForGM(locationId, { content = null, character = nul
       : `${h.name || h.kind} (${h.kind}, ${h.garrison} on it${h.garrison < h.garrisonAuthored ? `, down from ${h.garrisonAuthored}` : ""})`);
     const noticed = powerStateOf(character, p.id)?.noticed;
     const mind = standingWithPower(character, p.id, content?.rules || null);
-    lines.push(`- **${p.name || p.id}** — ${p.kind || "a power"}, ${heads} they can field${p.dangerLift ? `, and the ground here reads ${p.dangerLift > 0 ? "worse" : "quieter"} for it` : ""}.`
+    const heard = isKnownPower(character, p.id);
+    lines.push(`- **${p.name || p.id}**${heard ? "" : " ⚠️ (this character has never heard of them — do not use the name until the fiction gives it)"} — ${p.kind || "a power"}, ${heads} they can field${p.dangerLift ? `, and the ground here reads ${p.dangerLift > 0 ? "worse" : "quieter"} for it` : ""}.`
       + (mind.score ? `\n  They think of this character as **${mind.band}** (${mind.score}).` : "")
       + (noticed ? `\n  ⛔ THEY HAVE TAKEN AN INTEREST IN THIS CHARACTER — ${noticed.why}. What they want from them: ${p.wantsFromYou || "to settle it"}${noticed.throughLeader ? ` Their leader is someone this character knows, and is looking for them.` : " They have not met; bring them into the story as the fiction allows."}` : "")
       + (bits.length ? `\n  Holds here: ${bits.join(" · ")}` : "")
@@ -413,7 +414,10 @@ export function powerPass(character, { content = null, rules = null, day = null 
       if (took > 0) {
         s.grownHeads = (Number(s.grownHeads) || 0) + took;
         s.grewDay = Number(day) || 0;
-        news.push({ text: `${p.name || p.id} is stronger than it was — ${took} more under it.`, section: "world", powerId: p.id, grew: took });
+        // ⚠️ CCODE-483: ONLY ABOUT A POWER YOU HAVE HEARD OF. "The Gralloch Crown is stronger than it was"
+        // is not news to somebody who has never heard the name — it is a line about a stranger, which is
+        // exactly the noise §325 caught me writing once already.
+        if (isKnownPower(character, p.id)) news.push({ text: `${p.name || p.id} is stronger than it was — ${took} more under it.`, section: "world", powerId: p.id, grew: took });
       }
     } else if ((Number(s.losses) || 0) >= lossPer) {
       s.losses = 0;
@@ -423,7 +427,7 @@ export function powerPass(character, { content = null, rules = null, day = null 
       if (took > 0) {
         s.lost = (s.lost && typeof s.lost === "object") ? s.lost : {};
         s.lost[0] = (Number(s.lost[0]) || 0) + took;
-        news.push({ text: `${p.name || p.id} has lost people it will not get back.`, section: "world", powerId: p.id, shrank: took });
+        if (isKnownPower(character, p.id)) news.push({ text: `${p.name || p.id} has lost people it will not get back.`, section: "world", powerId: p.id, shrank: took });
       }
     }
   };
@@ -619,6 +623,9 @@ export function noticePass(character, { content = null, rules = null, day = null
     const hit = noticesYou(character, p, { content, rules, worth });
     if (!hit) continue;
     st.noticed = { trigger: hit.trigger, why: hit.why, day: day ?? null };
+    // ⛑ CCODE-483: AND BEING NOTICED IS ONE WAY YOU LEARN OF THEM. A crown that has taken an interest in
+    // you is a crown you have heard of, whatever you knew an hour ago.
+    knowPower(character, p, { how: "noticed", day });
     // ⛑ THE WANT IS THE POWER'S OWN AUTHORED LINE. `seeking.js`'s rule is that the words are the PO's and not
     // the engine's, and `wantsFromYou` is exactly that sentence already written — "Your knee, your coin, or
     // your head on the stockade." Nothing here composes prose.
@@ -633,6 +640,122 @@ export function noticePass(character, { content = null, rules = null, day = null
                 powerId: p.id, noticed: hit.trigger });
   }
   return news;
+}
+
+/** ⛔ CCODE-483 (ERIK) — KNOWN BY REPUTATION, WHICH IS NOT THE SAME AS MET. "We need a way to know these kind
+ *  of power figures by reputation. That way you can learn about them as you play without ever meeting them."
+ *  ⚑ THE MEASUREMENT THAT MADE THIS NECESSARY: ten of the eleven authored leaders have been met by NOBODY on
+ *  this device, so every reader keyed to the registry served one power out of eleven. A crown is a thing you
+ *  have HEARD OF long before it is a man you have stood in front of.
+ *  ⚠️ AND IT IS THE POWER THAT BECOMES KNOWN, NOT ITS LEADER. Knowing of the Gralloch Crown is not knowing
+ *  Harl Osric Maddock: the registry still only holds people you have actually met, which is the rule
+ *  CCODE-462 settled and this must not quietly undo. */
+export function knowPower(character, power, { how = "renown", day = null } = {}) {
+  if (!character || !power?.id) return null;
+  character.powerState = (character.powerState && typeof character.powerState === "object") ? character.powerState : {};
+  const st = (character.powerState[power.id] = character.powerState[power.id] || {});
+  if (st.known) return null;                        // once — you do not keep first hearing of somebody
+  st.known = { how: String(how).slice(0, 24), day: day ?? null };
+  return { id: power.id, name: power.name || power.id, how, day };
+}
+
+export function isKnownPower(character, powerId) {
+  return !!powerStateOf(character, powerId)?.known;
+}
+
+/** ⛔ WHICH POWERS THE WORLD TALKS ABOUT, and every part of it is an AUTHORED fact rather than a weight I
+ *  chose. A power is renowned when any of these is true:
+ *    · it reaches into MORE THAN ONE REGION — the Undercount touches five, which is what being known in the
+ *      world actually looks like;
+ *    · it belongs to a BLOC — `bloc_the_long_reach`, `bloc_the_free_compact`: a bloc is a thing people
+ *      discuss, and a member of one is discussed with it;
+ *    · its strength is LEGION scale — `strength.scale`, authored, which is the difference between a gang on
+ *      a road and a host below a wall.
+ *  ⚠️ NO HEAD-COUNT THRESHOLD. I nearly used one, and a number I pick is a number Aevi cannot argue with;
+ *  every signal here is one she already wrote down and can change. */
+export function isRenowned(power, content) {
+  if (!power) return false;
+  if (power.bloc) return true;
+  if (String(power?.strength?.scale || "") === "legion") return true;
+  const locs = content?.locations || {};
+  const regions = new Set((Array.isArray(power.reach) ? power.reach : [])
+    .map(id => locs[id]?.regionId).filter(Boolean));
+  return regions.size > 1;
+}
+
+/** ⛔ THE REGIONS A CHARACTER IS OF — Erik's sentence is "the region you start in OR ARE FROM", and those
+ *  are two different places for most of the people on this device, so it is a SET rather than a single answer.
+ *  ⚠️ MY FIRST VERSION READ `startingLocation || currentLocationId` AND BOTH HALVES WERE WRONG. No save
+ *  records a `startingLocation` — nothing in the app ever wrote one, so that branch was dead on arrival — and
+ *  the fallback served WHERE THEY ARE STANDING, which for TEN of the sixteen saves here is a different region
+ *  from the one their people comes from. Silas is of the Making and stands in the valley; he was handed the
+ *  valley's powers and told nothing of his own country's.
+ *  ⛑ SO IT READS THREE THINGS, ALL AUTHORED OR RECORDED, NEVER GUESSED:
+ *    · `startingLocation`, now written onto a character at birth — where they actually began;
+ *    · their ORIGIN'S `homeRegion` and `startingRegion`, which all 27 origins declare — where their people is
+ *      from, which is the only honest answer for a character who already existed;
+ *    · and for a save that never recorded a start, the region it has been STANDING in — added, not
+ *      substituted. ⚠️ Dropping it outright made this worse rather than better: Silas is of the Making, no
+ *      authored power reaches the Making, and he has lived in the valley for the whole game — so the strictly
+ *      correct reading handed him NOTHING of the four powers whose ground he has been walking on. Where a
+ *      character has actually been is evidence about what they have heard; where they were born is authored;
+ *      a new character records its own start and never needs this clause. */
+export function homeRegionsOf(character, content) {
+  const locs = content?.locations || {};
+  const out = new Set();
+  const regionAt = (id) => { const l = locs[id]; return l?.regionId || l?.region || null; };
+  const began = regionAt(character?.startingLocation);
+  if (began) out.add(began);
+  const origins = content?.origins;
+  const list = Array.isArray(origins) ? origins : Object.values(origins || {});
+  const mine = list.find(o => o?.id === character?.origin);
+  for (const r of [mine?.homeRegion, mine?.startingRegion, regionAt(mine?.startingLocation)]) if (r) out.add(r);
+  if (!began) { const here = regionAt(character?.currentLocationId); if (here) out.add(here); }
+  return [...out];
+}
+
+/** ⛔ WHAT A NEW CHARACTER HAS ALREADY HEARD OF: the powers of their own region, and the ones the whole world
+ *  talks about. ⛑ `how` is kept because the two are different kinds of knowing — the Tollmen on your own
+ *  road are local knowledge; the Gralloch Crown is a name that travels. Returns [{ power, how }]. PURE. */
+export function powersKnownAtStart(character, { content = null } = {}) {
+  const home = new Set(homeRegionsOf(character, content));
+  const locs = content?.locations || {};
+  const out = [];
+  for (const p of powersFrom(content)) {
+    const regions = new Set((Array.isArray(p.reach) ? p.reach : []).map(id => locs[id]?.regionId).filter(Boolean));
+    if ([...regions].some(r => home.has(r))) out.push({ power: p, how: "home" });
+    else if (isRenowned(p, content)) out.push({ power: p, how: "renown" });
+  }
+  return out;
+}
+
+/** ⛔ SEED IT, AND HAND BACK TOPIC SPECS RATHER THAN WRITING THEM. This module does not know what a codex
+ *  is; the caller mints each spec through `codex.seedReferenceTopic`.
+ *  ⚠️ AND THEY ARE NOT `applyCodexUpdates` UPDATES, WHICH IS WHERE I STARTED AND WHY THIS IS WRITTEN DOWN.
+ *  That door admits the GM’s output, and its policy is a FILTER: an id-prefix fold, a beat fold, and a hard
+ *  stop at sixty topics. Driven on Silas’s real save, which stood at 59 of 60, the first power was admitted
+ *  and the other SIX fell through to `why: "full"` and landed as facts on an unrelated lore topic. Seven
+ *  powers heard of, one listed — and nothing threw. The cap is right for a model’s suggestions and wrong for
+ *  the world’s own furniture, so these are minted as `reference` topics, outside it.
+ *  ⛑ AND THE FACT IS THE POWER’S OWN `plainly` LINE — one sentence, already authored, which is exactly what
+ *  "what you have heard" should read like. Nothing here composes prose. */
+export function seedPowerKnowledge(character, { content = null, day = null } = {}) {
+  const learned = [], updates = [];
+  for (const { power, how } of powersKnownAtStart(character, { content })) {
+    if (isKnownPower(character, power.id)) continue;
+    const noted = knowPower(character, power, { how, day });
+    if (!noted) continue;
+    learned.push({ ...noted, how });
+    updates.push({
+      id: `power-${String(power.id).replace(/^power_/, "").replace(/_/g, "-")}`,
+      label: power.name || power.id,
+      kind: "faction",
+      fact: power.plainly || power.descriptionSeed || `A power that holds ground${power.seat ? ` at ${content?.locations?.[power.seat]?.name || power.seat}` : ""}.`,
+      links: [...(Array.isArray(power.reach) ? power.reach.slice(0, 4) : [])],
+      day,
+    });
+  }
+  return { learned, updates };
 }
 
 /** ⛔ BROKEN BY HAND — the player took the seat, or the story says so. Kept separate from `notePowerLoss`

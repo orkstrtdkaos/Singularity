@@ -16,6 +16,24 @@
   "next": [],
   "releases": [
     {
+      "version": "2.5.4",
+      "date": "2026-09-24",
+      "entries": [
+        {
+          "kind": "feature",
+          "title": "Six more countries have someone holding them",
+          "summary": "Nine forces now hold ground in the Radiant Wastes, the Somatic Reaches, the Quickwood, the Making, the Gearlands and the Numinous Reach — so whoever your people are, you have heard of somebody at home.",
+          "detail": "Among them: the zealots inside the Blaze and the lens-holders who keep the border against them; a temple of the body and the custody that keeps the ones Cogitants leave behind; a moot that has never decided anything in a hurry; builders who cannot stop, and the court where the best plan each season governs; a written specification for everything; and a choir that sings people gently out of their bodies. Three of them are led by people you can meet. Every character on this device now begins knowing forces in their own country rather than only the ones whose names travel."
+        },
+        {
+          "kind": "fix",
+          "title": "Your people is recognised again",
+          "summary": "A few older characters named a people the game had since renamed, so anything that asked where they were from got no answer at all.",
+          "detail": "It never showed as an error — it simply read as \"no such people\", and the game fell back to wherever you happened to be standing. Those characters are corrected on load, and they now hear of the forces that hold their own country."
+        }
+      ]
+    },
+    {
       "version": "2.5.3",
       "date": "2026-09-24",
       "entries": [

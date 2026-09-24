@@ -825,6 +825,552 @@
    "_notOnThePanel": {
     "aldric": "Aldric, the smokehouse operator, appears only at an evening meeting Silas called at Pell's forge with Dara, Fendt, Mara and Calvar. That gathering was not the panel, and no save seats him. The fifth seat is open if Erik wants him in it."
    }
+  },
+  {
+   "encounters": [],
+   "answersTo": null,
+   "rivals": [
+    "power_glass_assembly"
+   ],
+   "opposedBy": [
+    "ember_who_banks_the_fire",
+    "the_deep_lantern"
+   ],
+   "id": "power_blaze_unshadowed",
+   "name": "The Unshadowed",
+   "kind": "order",
+   "temper": "cruel",
+   "seat": "the_blaze",
+   "reach": [
+    "the_blaze",
+    "glasshome",
+    "the_lensward"
+   ],
+   "leader": "sunwrack_valen",
+   "strength": {
+    "scale": "unit",
+    "contingents": [
+     {
+      "n": 70,
+      "quality": 3,
+      "what": "zealots who have burned the dark out of themselves, carrying lanterns at noon"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "the_blaze",
+     "kind": "post",
+     "name": "the burning ring, where the glass is still warm",
+     "garrison": 25
+    }
+   ],
+   "verbs": [
+    "protect",
+    "patrol",
+    "recruit",
+    "expand",
+    "feud"
+   ],
+   "dangerLift": 1,
+   "noticesYouWhen": [
+    "crossed",
+    "neighbour"
+   ],
+   "wantsFromYou": "Nothing hidden. Open your packs, your doors and your face, and say aloud the thing you would rather not.",
+   "offersYou": "Passage across the glass plain, water where there is none, and the certainty that nothing will ever be kept from you again.",
+   "leverage": "They cannot abide a shadow they did not choose. A shuttered lantern enrages them, and an enraged zealot stops watching the road.",
+   "whenBroken": "The Blaze stops advancing for a season, and in Glasshome people begin to hang curtains, quietly, and do not talk about it.",
+   "plainly": "The zealots who live inside the Blaze. They have burned away everything in themselves that could cast a shadow, and they want to do the same for everyone else.",
+   "descriptionSeed": "The Unshadowed are what the Blaze makes of people who stay in it: a devotion, not a civilization. Valen Sunwrack leads them outward a mile a year, and every village they reach loses its curtains, its locks and its secrets, and calls it dawn.",
+   "appearance": "A glass plain under a white sky, figures in bleached robes carrying lit lanterns in full daylight, a ring of warm glass around a light too bright to look at",
+   "feedsGM": [
+    {
+     "sovereign": "lucifer",
+     "through": "a light that leaves nothing unseen, carried outward a mile a year",
+     "yield": "being seen"
+    }
+   ],
+   "secretsGM": [
+    "Valen does not know whose line he is (R40b.4). He believes the dawn was his own idea.",
+    "The Open Lantern (SNG-642) is carried by their captains."
+   ]
+  },
+  {
+   "encounters": [],
+   "answersTo": null,
+   "rivals": [
+    "power_blaze_unshadowed"
+   ],
+   "opposedBy": [],
+   "id": "power_glass_assembly",
+   "name": "The Glass Assembly",
+   "kind": "sovereignty",
+   "form": "council",
+   "temper": "fair",
+   "seat": "glasshome",
+   "reach": [
+    "glasshome",
+    "the_lensward",
+    "the_second_reading"
+   ],
+   "leader": "solvace",
+   "strength": {
+    "scale": "legion",
+    "contingents": [
+     {
+      "n": 140,
+      "quality": 2,
+      "what": "lens-guards and beam-wrights of the Lensward"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "the_lensward",
+     "kind": "post",
+     "name": "the great focusing array on the border",
+     "garrison": 30
+    }
+   ],
+   "verbs": [
+    "tax",
+    "patrol",
+    "protect",
+    "inform"
+   ],
+   "dangerLift": 0,
+   "noticesYouWhen": [
+    "crossed",
+    "rival_ally"
+   ],
+   "wantsFromYou": "To know what you are carrying and to be told the truth about it. They will not search you; they will ask, and they will remember the answer.",
+   "offersYou": "Lenses that show a thing as it is, safe passage on the glass plain, and a hearing in a city with no walls to hide a lie behind.",
+   "leverage": "The Assembly meets in the open because Glasshome has no interior walls. Anything said to it is said to the whole city.",
+   "whenBroken": "The Lensward arrays go dark, the border opens, and the Blaze advances on Glasshome with nothing focused against it.",
+   "bodies": [
+    {
+     "name": "the Glass Assembly",
+     "does": "governs Glasshome in the open, where everyone can see",
+     "people": [
+      "solvace"
+     ]
+    }
+   ],
+   "plainly": "Glasshome's governing assembly. It meets in the open, because the city has no interior walls, and it holds the border against the Blaze with lenses.",
+   "descriptionSeed": "The Glass Assembly governs a city built on the plain the Blaze made, by people the Blaze made, and it spends most of its strength keeping the Blaze from finishing the job. Its arrays at the Lensward focus the light back on itself. It is fair, it is exhausting, and it hears every case in public.",
+   "appearance": "An open hall of clear glass in a city without interior walls, a crowd watching every speaker, the great lens-arrays of the border catching the light beyond"
+  },
+  {
+   "encounters": [],
+   "answersTo": null,
+   "rivals": [
+    "power_vacated_custody"
+   ],
+   "opposedBy": [],
+   "id": "power_flesh_temple",
+   "name": "The High Temple of the Body",
+   "kind": "order",
+   "temper": "fair",
+   "seat": "the_flesh_temple",
+   "reach": [
+    "the_flesh_temple",
+    "the_grindstone",
+    "the_middle_way"
+   ],
+   "leader": "master_taro",
+   "strength": {
+    "scale": "unit",
+    "contingents": [
+     {
+      "n": 90,
+      "quality": 3,
+      "what": "temple adepts whose bodies are their discipline"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "the_grindstone",
+     "kind": "post",
+     "name": "the long yard and its bathhouse",
+     "garrison": 20
+    }
+   ],
+   "verbs": [
+    "protect",
+    "patrol",
+    "recruit"
+   ],
+   "dangerLift": 0,
+   "noticesYouWhen": [
+    "crossed",
+    "neighbour"
+   ],
+   "wantsFromYou": "Respect for the body you are in. Train with them for a season, or keep your contempt for flesh off their mountain.",
+   "offersYou": "Training that makes a body answer, healing the flesh does for itself, and adepts who will stand in a line for anyone who stands in theirs.",
+   "leverage": "They will not strike a body that has not been trained to answer. Anyone who comes to the mountain unarmed and untrained is safe on it.",
+   "whenBroken": "The Grindstone empties, the Middle Way loses the half of its balance that was flesh, and the Cogitarium's cold comes down the mountain unopposed.",
+   "plainly": "The temple-order of the Somatic Reaches, where training the body is devotion. It guards the mountain and anyone on it who respects the flesh.",
+   "descriptionSeed": "The High Temple rises a mountain in tiers of training-grounds, and every soul on it hones breath, poise and endurance as worship. Its adepts keep the Grindstone for soldiers who want to be trained properly, and they look down the mountain at the Cogitarium with a grief they rarely say aloud.",
+   "appearance": "Tiered training grounds climbing a mountain, adepts moving in unison at dawn, a long yard and a steaming bathhouse below"
+  },
+  {
+   "encounters": [],
+   "answersTo": null,
+   "rivals": [
+    "power_flesh_temple"
+   ],
+   "opposedBy": [
+    "the_one_who_stayed_embodied",
+    "adept_sona"
+   ],
+   "id": "power_vacated_custody",
+   "name": "The Custody of the Vacated",
+   "kind": "order",
+   "temper": "hard",
+   "seat": "the_cogitarium",
+   "reach": [
+    "the_cogitarium",
+    "the_held_yard"
+   ],
+   "leader": "custodian_vantrel",
+   "strength": {
+    "scale": "unit",
+    "contingents": [
+     {
+      "n": 30,
+      "quality": 2,
+      "what": "custodians and porters who move bodies nobody is using"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "the_cogitarium",
+     "kind": "post",
+     "name": "the Long Hall of the Vacated, bed after bed",
+     "garrison": 10
+    }
+   ],
+   "verbs": [
+    "protect",
+    "levy",
+    "expand"
+   ],
+   "dangerLift": 1,
+   "noticesYouWhen": [
+    "wealth",
+    "crossed"
+   ],
+   "wantsFromYou": "Discretion, and a fee to walk the Long Hall. If you have a claim on one of the sleepers, a paper that proves it.",
+   "offersYou": "A body kept exactly as it was left, for as long as it is paid for, and the names of those who left them.",
+   "leverage": "Every sleeper in the Long Hall has kin somewhere who would want to know. The Custody's whole trade depends on nobody asking.",
+   "whenBroken": "The Long Hall's beds are opened, sleepers are carried home or buried, and a buyer in Dusklow stops paying for crates.",
+   "plainly": "The custodians who keep the bodies Cogitants leave behind when they go into pure thought. They keep them well, for a fee, and they do not ask where the ones they sell are going.",
+   "descriptionSeed": "When a Cogitant goes so far into thought that the body is only a place they used to be, the Custody takes it in. The Long Hall is quiet, clean and very long. The fees keep the beds warm, and the sleepers nobody pays for are sold, reasonably, to a buyer who never asks for a particular one.",
+   "appearance": "A long cold hall of the Cogitarium, bed after bed of still sleepers under pale sheets, custodians in grey moving quietly between them with ledgers",
+   "feedsGM": [
+    {
+     "sovereign": "the_ninefold_ascendant",
+     "through": "bodies left by minds that will not return, kept and sold on",
+     "yield": "vessels"
+    }
+   ],
+   "secretsGM": [
+    "The Custody's best buyer is the Undercount's Dusklow fence (SNG-640). The Custodian believes she sells property its owners abandoned; she is not an agent (R40b.4).",
+    "The Cold Seal (SNG-642) was first made for the Long Hall."
+   ]
+  },
+  {
+   "encounters": [],
+   "answersTo": null,
+   "rivals": [],
+   "opposedBy": [
+    "thornmother_sealed"
+   ],
+   "id": "power_grovehome_moot",
+   "name": "The Grovehome Moot",
+   "kind": "sovereignty",
+   "form": "moot",
+   "temper": "kind",
+   "seat": "grovehome",
+   "reach": [
+    "grovehome",
+    "the_heartroot",
+    "the_greenward",
+    "the_quickwood_eaves",
+    "the_slow_orchard"
+   ],
+   "leader": "the_first_moot",
+   "strength": {
+    "scale": "legion",
+    "contingents": [
+     {
+      "n": 200,
+      "quality": 2,
+      "what": "Rootkin wardens of the Greenward, slow to muster and very hard to move once they have"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "the_greenward",
+     "kind": "post",
+     "name": "the thorned wall, grown on purpose",
+     "garrison": 40
+    }
+   ],
+   "verbs": [
+    "protect",
+    "patrol",
+    "tax"
+   ],
+   "dangerLift": 0,
+   "noticesYouWhen": [
+    "neighbour",
+    "rival_ally"
+   ],
+   "wantsFromYou": "Patience. Bring a question to the Moot and wait for the answer, however long it takes. Bring an axe to the Eaves and do not come back.",
+   "offersYou": "Grown shelter, fruit from trees older than your grandparents, and the Moot's word, which has never been broken because it has never been given quickly.",
+   "leverage": "The Moot decides nothing in less than a season. Anything that has to be done faster, someone in the Quickwood will do without it, and the Moot will have to live with that.",
+   "whenBroken": "The Heartroot's sealers win the argument, the Greenward closes, and the Quickwood stops keeping human hours.",
+   "plainly": "The Rootkin's slow council at Grovehome. It keeps the Quickwood open to trade, and it has never decided anything in a hurry.",
+   "descriptionSeed": "The Moot sits under the oldest trees in Grovehome and argues in seasons. It keeps the Quickwood's one door open to the world because trade requires it, and it keeps the Greenward thorned because the world requires that too. In the Heartroot, the argument to seal the wood is gaining ground.",
+   "appearance": "A ring of seats grown from living roots under vast trees, Rootkin elders listening for a very long time, a thorned green wall at the edge of the wood"
+  },
+  {
+   "encounters": [],
+   "answersTo": null,
+   "rivals": [
+    "power_scaffold_court"
+   ],
+   "opposedBy": [
+    "halcyon_the_finished"
+   ],
+   "id": "power_the_ceaseless",
+   "name": "The Ceaseless",
+   "kind": "order",
+   "temper": "hard",
+   "seat": "the_ceaseless",
+   "reach": [
+    "the_ceaseless",
+    "the_half_cathedral",
+    "greenforge"
+   ],
+   "leader": "cinder_vael",
+   "strength": {
+    "scale": "unit",
+    "contingents": [
+     {
+      "n": 110,
+      "quality": 2,
+      "what": "joyful builders who will not put their tools down"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "the_ceaseless",
+     "kind": "post",
+     "name": "the scaffold-city, built over itself",
+     "garrison": 30
+    }
+   ],
+   "verbs": [
+    "expand",
+    "recruit",
+    "feud"
+   ],
+   "dangerLift": 1,
+   "noticesYouWhen": [
+    "neighbour",
+    "wealth"
+   ],
+   "wantsFromYou": "Your ground, to build on, and your hands, to build with. If you do not give them, they will build over what you have.",
+   "offersYou": "Anything made, fast and beautifully, and a place on a scaffold that will never be finished.",
+   "leverage": "They cannot stop, so they cannot hold what they build. Burn a scaffold under them and they will build on the ash instead of fighting you for it.",
+   "whenBroken": "The Ceaseless scatter across the Making, each of them still building, and the Half-Cathedral gets finished by accident.",
+   "plainly": "A cult of builders at the Making's pure pole who cannot stop and will not ask whether they should. They are joyful, and they build over anything in their way.",
+   "descriptionSeed": "The Ceaseless build continuously, over each other, over the ground and over anything else that is there. Cinder Vael leads them, if leading is the word for being the one furthest ahead. They are not cruel. They simply do not see what they are building over.",
+   "appearance": "A city of scaffolds built on scaffolds, builders singing as they work at every height, half-finished structures swallowing older half-finished structures"
+  },
+  {
+   "encounters": [],
+   "answersTo": null,
+   "rivals": [
+    "power_the_ceaseless"
+   ],
+   "opposedBy": [],
+   "id": "power_scaffold_court",
+   "name": "The Court of the Unfinished Plan",
+   "kind": "sovereignty",
+   "form": "contest",
+   "temper": "fair",
+   "seat": "the_forge_eternal",
+   "reach": [
+    "the_forge_eternal",
+    "the_half_cathedral",
+    "greenforge"
+   ],
+   "leader": "planmaster_wyncote",
+   "strength": {
+    "scale": "legion",
+    "contingents": [
+     {
+      "n": 150,
+      "quality": 2,
+      "what": "guild-wrights and scaffold crews working to the season's winning plan"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "the_half_cathedral",
+     "kind": "post",
+     "name": "the Half-Cathedral's building office",
+     "garrison": 20
+    }
+   ],
+   "verbs": [
+    "tax",
+    "protect",
+    "expand"
+   ],
+   "dangerLift": 0,
+   "noticesYouWhen": [
+    "crossed",
+    "rival_ally"
+   ],
+   "wantsFromYou": "An improvement. Bring the Court a better design for anything and it will listen. Bring it a finished thing and it will be politely sad for you.",
+   "offersYou": "Wrights for any work, materials from the Forge-Eternal, and a seat at the next season's contest if your plan is good enough.",
+   "leverage": "Whoever wins the season's contest governs until the next one. The Court is exactly as strong as its last plan, and everyone knows who is drafting the next.",
+   "whenBroken": "The contest stops, the scaffolds come down, and the Ceaseless build over the Forge-Eternal before anyone has finished arguing.",
+   "plainly": "The Making's governing contest. Each season the best plan wins, and whoever drew it governs until someone draws a better one.",
+   "descriptionSeed": "The Wrights believe a finished thing has stopped being alive, so they govern the way they build: by improvement. Each season plans are laid before the Court, and the winner holds the Planmaster's office until a better one arrives. It is fair, it is glorious, and it is never done.",
+   "appearance": "A hall of drafting tables under cathedral scaffolding, plans pinned over plans, Wrights arguing over a model with obvious delight"
+  },
+  {
+   "encounters": [],
+   "answersTo": null,
+   "rivals": [],
+   "opposedBy": [
+    "prodigal_gearheart"
+   ],
+   "id": "power_pressureholt_schedule",
+   "name": "The Schedule of Pressureholt",
+   "kind": "sovereignty",
+   "form": "specification",
+   "temper": "hard",
+   "seat": "pressureholt",
+   "reach": [
+    "pressureholt",
+    "the_gearlands_verge",
+    "the_great_engine",
+    "the_service_ways"
+   ],
+   "leader": "chief_kettering",
+   "strength": {
+    "scale": "legion",
+    "contingents": [
+     {
+      "n": 180,
+      "quality": 2,
+      "what": "maintenance crews, and the engine-guard who keep the Verge"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "the_gearlands_verge",
+     "kind": "post",
+     "name": "the Verge works under their precisely labelled tarpaulins",
+     "garrison": 30
+    }
+   ],
+   "verbs": [
+    "tax",
+    "patrol",
+    "levy",
+    "inform"
+   ],
+   "dangerLift": 0,
+   "noticesYouWhen": [
+    "crossed",
+    "neighbour"
+   ],
+   "wantsFromYou": "A slot. Everything in Pressureholt has a place in the Schedule, and so will you: when you arrive, what you want, and when you will leave.",
+   "offersYou": "Repair for anything mechanical, passage through the Service Ways on a written route, and a Schedule that keeps its promises to the minute.",
+   "leverage": "The Schedule is written down, all of it, and posted. Anyone who can read it can find the hour the Verge guard changes.",
+   "whenBroken": "Pressureholt runs late for the first time in four centuries, and the Service Ways stop being mapped.",
+   "plainly": "Pressureholt's government: a written specification for everything the city does, kept by the Chief of Schedule. It is warm, precise, and never late.",
+   "descriptionSeed": "Pressureholt is a city that is also a machine, and the Schedule is its specification: every function, every shift, every failure mode written down and posted. The Enginewrights are warm people, and the Schedule is how they show it. It has no place for anything that was not planned.",
+   "appearance": "A city of pipes and clock-faces, a great posted Schedule on a wall of brass plates, maintenance crews moving to the minute"
+  },
+  {
+   "encounters": [],
+   "answersTo": null,
+   "rivals": [],
+   "opposedBy": [
+    "the_last_choirmistress",
+    "the_apostate_choir"
+   ],
+   "id": "power_long_choir",
+   "name": "The Long Choir",
+   "kind": "order",
+   "temper": "kind",
+   "seat": "the_thinning",
+   "reach": [
+    "the_thinning",
+    "the_numen",
+    "the_lampless_hermitage"
+   ],
+   "leader": "the_unbodied_choir_master",
+   "strength": {
+    "scale": "unit",
+    "contingents": [
+     {
+      "n": 60,
+      "quality": 2,
+      "what": "singers, most of them further away than they look"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "the_thinning",
+     "kind": "post",
+     "name": "the choir-house, as provisional as everything here",
+     "garrison": 8
+    }
+   ],
+   "verbs": [
+    "protect",
+    "recruit",
+    "expand"
+   ],
+   "dangerLift": -1,
+   "noticesYouWhen": [
+    "neighbour",
+    "crossed"
+   ],
+   "wantsFromYou": "An hour of your listening, and then another. They will never force you. They will only keep asking, very gently, whether you would like to put the weight down.",
+   "offersYou": "Peace, the quiet of a veil worn thin, and a song that makes the body's aches seem very far away.",
+   "leverage": "The choir needs voices, and it loses them. Every singer who goes all the way into the song stops singing, so someone always has to be asked next.",
+   "whenBroken": "The Thinning's song stops, some of its sleepers wake, and the Numen's pull weakens for a season.",
+   "plainly": "A gentle choir at the Thinning that sings people toward letting go of their bodies. It has never forced anyone, and it is very good at asking.",
+   "descriptionSeed": "The Long Choir sings where the veil is thin, and its song is kind. It asks, and asks again, whether you would not rather set the body down. Some singers go all the way in and do not come back. Their bodies stay behind, cared for, and in time someone comes to collect them.",
+   "appearance": "A provisional wooden choir-house at the edge of a thin veil, robed singers with far-away eyes, a few still figures lying peacefully at the back",
+   "feedsGM": [
+    {
+     "sovereign": "the_ninefold_ascendant",
+     "through": "singers sung out of their bodies, and the bodies left behind",
+     "yield": "vessels"
+    }
+   ],
+   "secretsGM": [
+    "The Choirmaster is the Unbodied's agent; the choir is not (R40b.4). A kind power feeding a Sovereign is the lore's individually reasonable, cumulatively impossible."
+   ]
   }
  ]
 }

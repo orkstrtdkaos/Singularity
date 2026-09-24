@@ -1,0 +1,67 @@
+{
+ "schemaVersion": 1,
+ "romanceEligible": false,
+ "people": "human",
+ "closed": [],
+ "tier": "heroic",
+ "id": "chief_kettering",
+ "name": "Chief Kettering",
+ "fullName": "Vasser Hester Kettering",
+ "title": "Chief of Schedule of Pressureholt",
+ "level": 27,
+ "role": "Chief of Schedule — keeps Pressureholt's specification, which is to say keeps the city on time, and is warmer about it than anyone expects",
+ "gender": "woman",
+ "pronouns": "she/her",
+ "sex": "female",
+ "homeLocation": "pressureholt",
+ "spectrum": {
+  "chaos_order": 0.8,
+  "mechanical_spiritual": -0.6,
+  "emotional_logical": 0.4
+ },
+ "assistTags": [
+  "lead",
+  "make",
+  "investigate",
+  "guard"
+ ],
+ "appearance": "A sturdy woman in a maintenance coat hung with small tools and a pocket watch on each side, who smiles when the hour strikes exactly.",
+ "personality": {
+  "warmth": 0.7,
+  "trust": 0.5,
+  "candor": 0.9,
+  "patience": 0.7
+ },
+ "voiceHints": "Precise, friendly, and always gives a time. Asks you when you will be leaving before she asks your name, and means it kindly.",
+ "wants": "A Schedule that has a slot for everyone, including the people it has not met yet.",
+ "fears": "The thing in the Service Ways that is not on any Schedule, and the young ones who build outside it.",
+ "knowledge": [
+  "The whole of the posted Schedule, and the parts that are not posted",
+  "Which Service Ways are mapped, and which only look it"
+ ],
+ "reactsToReputation": {
+  "any": "gives you a slot and a time to leave",
+  "reliable": "gives you a longer slot",
+  "reckless": "gives you a shorter one, and an escort"
+ },
+ "questSeeds": [
+  "A shift has gone missing from the Verge guard, and the Schedule says it was never there",
+  "Gearheart has built something that is not in the specification, and it works"
+ ],
+ "gear": [
+  "two pocket watches, set a minute apart",
+  "a brass Schedule-key"
+ ],
+ "purse": {
+  "crystal": 140
+ },
+ "domains": {
+  "primary": "enginewright",
+  "secondary": "lattice",
+  "tertiary": "hourkeeper"
+ },
+ "_domainsWhy": "a city that is a machine, the order of the specification, and time kept to the minute",
+ "aliases": [
+  "Vasser Hester Kettering"
+ ]
+}

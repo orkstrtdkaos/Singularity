@@ -2617,7 +2617,33 @@ export const CHARACTER_STEPS = [
       return { notes: [`Your codex now holds what you have heard of the forces that hold ground${home ? ` \u2014 ${home} in your own country` : ""}${far ? `${home ? " and" : " \u2014"} ${far} whose names travel` : ""}. You have not met any of them; this is reputation, and it is where learning about them starts.`] };
     }
   },
-  // Future steps register here \u2014 e.g. innate-talent GRANT (offers[], when talent content
+  {
+    version: 80, id: "the-people-you-are-of-was-renamed", playerFacing: false,
+    // ⛔ CCODE-486 — FOUR SAVES NAME A PEOPLE THE CONTENT NO LONGER HAS. `origin` is an id, and the origins
+    // were renamed to `valleyfolk` and `radiant_plateau`; the saves still carry `valley` and `radiant`, so every
+    // lookup through `origins.find(o => o.id === character.origin)` came back undefined for them.
+    // ⚠️ FOUND THROUGH WHAT IT BROKE, NOT BY READING THE CONTENT: CCODE-483 asks a character's people where
+    // they are FROM, and for these saves the answer was silently nothing — they fell back to the region they
+    // happened to be standing in. A stale id does not throw; it reads as "no such people".
+    // ⛑ AND THE MAP IS AEVI'S, NOT MINE. I reported the two ids and did not guess the pairs, obvious as they
+    // looked; she ruled it ("the renamed origins: yes"), so what is below is a content decision I am applying.
+    apply: (c, ctx) => {
+      const RENAMED = { valley: "valleyfolk", radiant: "radiant_plateau" };
+      const origins = ctx?.content?.origins;
+      const list = Array.isArray(origins) ? origins : Object.values(origins || {});
+      if (!list.length) return {};                       // no origins loaded — nothing to check against
+      const has = (id) => list.some(o => o?.id === id);
+      const now = RENAMED[String(c?.origin || "")];
+      // ⚠️ ONLY WHEN THE OLD ID IS GENUINELY GONE AND THE NEW ONE IS GENUINELY THERE. If a later pass brings
+      // `valley` back as a real people, this must do nothing rather than overwrite a live choice.
+      if (!now || has(c.origin) || !has(now)) return {};
+      const was = c.origin;
+      c.origin = now;
+      console.log(`[reconcile] ccode-486: origin ${was} → ${now} (the people was renamed)`);
+      return { warnings: [`origin ${was} was renamed to ${now}`] };
+    }
+  },
+  // Future steps register here — e.g. innate-talent GRANT (offers[], when talent content
   // lands with SNG-017), Reach-tradition eligibility surfacing, universal-role tagging.
 ];
 

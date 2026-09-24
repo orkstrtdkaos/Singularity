@@ -1,0 +1,68 @@
+{
+ "schemaVersion": 1,
+ "romanceEligible": false,
+ "people": "human",
+ "closed": [],
+ "tier": "heroic",
+ "id": "custodian_vantrel",
+ "name": "Custodian Vantrel",
+ "fullName": "Anthel Mnes Vantrel",
+ "title": "First Custodian of the Vacated",
+ "level": 27,
+ "role": "First Custodian of the Vacated — keeps the bodies Cogitants leave behind, well and for a fee, and sells the unpaid ones to a buyer who never asks for a particular one",
+ "gender": "woman",
+ "pronouns": "she/her",
+ "sex": "female",
+ "homeLocation": "the_cogitarium",
+ "spectrum": {
+  "body_mind": 0.6,
+  "chaos_order": 0.6,
+  "death_life": -0.3,
+  "emotional_logical": 0.5
+ },
+ "assistTags": [
+  "tend",
+  "guard",
+  "bargain",
+  "study"
+ ],
+ "appearance": "A thin, exact woman in custodian's grey, a ledger always under one arm, who looks at a sleeping body the way a clerk looks at an entry.",
+ "personality": {
+  "warmth": 0.2,
+  "trust": 0.3,
+  "candor": 0.6,
+  "patience": 0.9
+ },
+ "voiceHints": "Quiet and procedural. Calls the sleepers the vacated and their bodies the property. Never raises her voice in the Long Hall.",
+ "wants": "For the Long Hall to be kept well and paid for, and for nobody to confuse care with sentiment.",
+ "fears": "A claimant at the door with a real paper for a body she has already sold.",
+ "knowledge": [
+  "Who lies in every bed of the Long Hall, and who is paying for them",
+  "Which crates went to Dusklow, and on which nights"
+ ],
+ "reactsToReputation": {
+  "any": "quotes you the fee before anything else",
+  "reliable": "lets you walk the Hall without an escort",
+  "reckless": "has the porters stand between you and the beds"
+ },
+ "questSeeds": [
+  "A family arrives with a paper for a sleeper the Custody sold last spring",
+  "The Dusklow buyer has asked, for the first time, for a particular body"
+ ],
+ "gear": [
+  "a custodian's ledger bound in grey",
+  "a ring of bed-keys"
+ ],
+ "purse": {
+  "crystal": 160
+ },
+ "domains": {
+  "primary": "cogitant",
+  "secondary": "stillhold",
+  "tertiary": "lattice"
+ },
+ "_domainsWhy": "thought that has left the body, the quiet of the Hall, and the order of a ledger",
+ "aliases": [
+  "Anthel Mnes Vantrel"
+ ]
+}

@@ -47,10 +47,38 @@ const clean = (rec) => {
   return out;
 };
 
+// ⛔ CCODE-486 — A RECORD SAYS WHERE IT GOES BY `_file` OR BY `_kind`, and this tool has to accept both
+// because `changeset_check` does: its own person rule reads `a._kind === "npc" || /\/npcs\//.test(a._file)`.
+// ⚠️ IT DID NOT, AND THAT IS A REAL DEFECT RATHER THAN A MISSING CONVENIENCE: SNG-645 passed all fourteen
+// checks and then this refused to apply it, so the validator and the applier disagreed about what a valid
+// change set is — the same shape as two derivations of one count, which is the thing certify_counts was fixed
+// for. A PO cannot be expected to satisfy the stricter of two tools that never say which is which.
+// ⛑ `_kind` RESOLVES THROUGH THE CHANGE SET'S OWN DECLARED REFERRERS, never through a path I guess: a
+// collection kind takes the declared file whose basename this tool knows (powers.json), and a single-record
+// kind takes one file per record in the sibling directory of the pack that change set is already touching.
+const KIND_DIR = { npc: "npcs", location: "locations", encounter: "encounters", item: "items" };
+const declared = (cs.referrers?._declared || []).filter(x => typeof x === "string");
+const packOf = (rel) => { const m = String(rel).match(/^(content\/packs\/[^/]+)\//); return m ? m[1] : null; };
+const routeOf = (rec) => {
+  if (rec?._file) return rec._file;
+  const kind = String(rec?._kind || "");
+  if (!kind) return null;
+  const collFile = declared.find(f => COLLECTION[basename(f)] && COLLECTION[basename(f)].kind.replace(/s$/, "") === kind.replace(/s$/, ""));
+  if (collFile) return collFile;                                  // powers → the declared powers.json
+  const dir = KIND_DIR[kind];
+  const pack = declared.map(packOf).find(Boolean);
+  if (dir && pack && rec?.id) return `${pack}/${dir}/${rec.id}.json`;   // one file per record, as the corpus is shaped
+  return null;
+};
+
 const byFile = new Map();
 for (const rec of added) {
-  const f = rec?._file;
-  if (!f) { console.error(`⛔ a record with no \`_file\`: ${rec?.id || "(no id)"}`); process.exit(1); }
+  const f = routeOf(rec);
+  if (!f) {
+    console.error(`⛔ ${rec?.id || "(no id)"} says neither \`_file\` nor a \`_kind\` this tool can route`
+      + `${rec?._kind ? ` (\`_kind: "${rec._kind}"\` with no declared referrer to put it in — add the file to \`referrers._declared\`)` : ""}.`);
+    process.exit(1);
+  }
   if (!byFile.has(f)) byFile.set(f, []);
   byFile.get(f).push(rec);
 }

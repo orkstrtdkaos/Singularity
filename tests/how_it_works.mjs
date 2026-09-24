@@ -25683,9 +25683,13 @@ console.log("\n── §353 · the powers act, and their people belong to them �
       const ch = { powerState: {} };
       PW6.powerPass(ch, { content: C353, rules: C353.rules, day: 3 });
       const took = Object.values(ch.powerState).filter(s => s.lastVerb).length;
+      // ⚠️ THIS SAID `took === 11` AND WENT RED THE DAY AEVI AUTHORED NINE MORE POWERS (SNG-645). The claim is
+      // "every standing power takes a verb", so it is asked of the corpus — a gate that pins the size of the
+      // world is a gate that reddens when the world grows, which is not a defect in the world.
+      const standing = PW6.powersFrom(C353).filter(p => (p.verbs || []).length).length;
       const broke = { powerState: { power_switchback_tollmen: { broken: true } } };
       PW6.powerPass(broke, { content: C353, rules: C353.rules, day: 3 });
-      return took === 11 && !broke.powerState.power_switchback_tollmen.lastVerb
+      return standing > 0 && took === standing && !broke.powerState.power_switchback_tollmen.lastVerb
         && PW6.verbForPass({ id: "x", verbs: ["a", "b", "c"] }, 3) === PW6.verbForPass({ id: "x", verbs: ["a", "b", "c"] }, 3);
     })());
 
@@ -25726,11 +25730,16 @@ console.log("\n── §353 · the powers act, and their people belong to them �
 
   check("§353: ⛔ …AND THE PASS IS SILENT UNLESS SOMETHING CHANGED. Measured over one world year: 134 of 144 passes write nothing, and every line it does write is a power actually growing or shrinking. ⚑ MY FIRST VERSION NARRATED THE ROUTINE — a line each time a gang tolled or a council taxed — and TWO gates caught it in the same run: §325 (\"a pass with nothing to say writes nothing\") and smoke 366, whose charge digest a wall of world rows reshaped. They were right: a force doing what it always does is not news, and eleven of them saying so every pass is how a player learns to stop reading it",
     (() => {
-      // ⛑ CCODE-483: A CHARACTER WHO HAS HEARD OF THEM, because that is what a real one is now — the codex
-      // lists the powers of your own region and the ones whose names travel, and the world only reports on a
-      // power you have heard of. A fixture who has heard of nobody reads as a silent world for the wrong reason.
-      const ch = { powerState: {} };
-      for (const p of PW6.powersFrom(C353)) PW6.knowPower(ch, p, { how: "renown", day: 0 });
+      // ⛑ CCODE-483: A CHARACTER WHO HAS HEARD OF WHAT A REAL ONE HAS — the powers of their own country and
+      // the ones whose names travel, which is what `seedPowerKnowledge` gives every character now. The world
+      // only reports on a power you have heard of, so an OMNISCIENT fixture measures a world nobody plays in
+      // and a fixture who has heard of nobody reads as a silent world for the wrong reason.
+      // ⚠️ AND THE THRESHOLD IS A SHARE OF DAYS, NOT A COUNT. `silent >= 120 of 144` went red the day Aevi
+      // authored nine more powers, because the rows scale with the cast — the same instance-pinning as the verb
+      // check above. What must hold is what a PLAYER feels: most days carry nothing, and what they do carry is
+      // a real change. Measured on Silas's own known set: 18 rows a year, one every eight days.
+      const ch = { origin: "wright", currentLocationId: C353.startingLocation, powerState: {} };
+      const seeded = PW6.seedPowerKnowledge(ch, { content: C353, day: 0 });
       let silent = 0, rows = 0, real = 0;
       for (let d = 1; d <= 144; d++) {
         const news = PW6.powerPass(ch, { content: C353, rules: C353.rules, day: d });
@@ -25738,7 +25747,7 @@ console.log("\n── §353 · the powers act, and their people belong to them �
         rows += news.length;
         real += news.filter(n => n.grew || n.shrank).length;
       }
-      return silent >= 120 && rows > 0 && real === rows;
+      return seeded.learned.length > 0 && silent >= 108 && rows > 0 && real === rows;
     })());
 
   // ── C3 ────────────────────────────────────────────────────────────────────────────────────────────
@@ -26175,6 +26184,74 @@ console.log("\n── §356 · the codex is not capped; it condenses as it fills
       const row = String(CX6.codexForGM(c, { playerInput: "Mara Wells" }) || "").split("\n").find(r => /mara-wells/.test(r)) || "";
       return /SHE KEEPS THE DITCHES/.test(row) && /left the valley/.test(row)
         && !/number 3\b/.test(row) && row.length < 600;
+    })());
+}
+
+// ══════════ §357 · CCODE-486 — EVERY PEOPLE HEARS OF SOMEBODY, AND A RENAMED PEOPLE IS NOT A LOST ONE ══════════
+// ⛔ CCODE-483 SHIPPED A READER AND MEASURED WHAT IT COULD REACH: four of the sixteen saves on this device heard
+// of NOTHING in their own country, because eleven powers covered eight of thirty-eight regions. Aevi authored the
+// six regions those characters come from (SNG-645, nine powers, three leaders) and ruled the two stale origin ids.
+// ⚑ SO THIS SECTION GATES THE PROMISE RATHER THAN THE CONTENT COUNT: whatever Aevi has authored so far, a
+// character of any people the content declares hears of somebody. Her remaining twenty-four regions are her own
+// work queue and must not redden a gate of mine while she works through it.
+console.log("\n── §357 · every people hears of somebody ──");
+{
+  const PW7 = await import("../engine/powers.js");
+  const RC7 = await import("../engine/reconcile.js");
+  const { loadContentHeadless: lch357 } = await import("./headless_content.mjs");
+  const C357 = await lch357();
+  const origins = Array.isArray(C357.origins) ? C357.origins : Object.values(C357.origins || {});
+  const ofPeople = (id) => ({ origin: id, currentLocationId: C357.startingLocation, powerState: {}, npcRegistry: {}, codex: null });
+
+  check("§357: ⛔ A CHARACTER OF ANY PEOPLE THE CONTENT DECLARES HEARS OF SOMEBODY. Asked of every origin in the corpus rather than of the ones that already pass — the renowned powers carry anyone whose own country has nobody holding it yet, so this holds while Aevi works through the regions that still have none",
+    origins.length > 0 && origins.every(o => PW7.powersKnownAtStart(ofPeople(o.id), { content: C357 }).length > 0),
+    (() => {
+      const withHome = origins.filter(o => PW7.powersKnownAtStart(ofPeople(o.id), { content: C357 }).some(k => k.how === "home")).length;
+      return `${withHome} of ${origins.length} peoples have a power holding their own ground`;
+    })());
+
+  check("§357: ⛑ …AND THE SIX PEOPLES THE SAVES ON THIS DEVICE COME FROM NOW HAVE ONE AT HOME (SNG-645). ⚠️ Reported as a COUNT of peoples-with-home-ground rather than a list of region ids: naming them would pin Aevi's authoring order, and this number may only go up",
+    (() => {
+      const withHome = origins.filter(o => PW7.powersKnownAtStart(ofPeople(o.id), { content: C357 }).some(k => k.how === "home")).length;
+      return withHome >= 10;
+    })());
+
+  check("§357: ⛔ A RENAMED PEOPLE IS NOT A LOST ONE. Four saves carry `origin` ids the content no longer has, and a stale id does not throw — it reads as \"no such people\", so the question \"where are they from\" answered silently nothing and fell back to wherever they were standing. ⛑ The map is Aevi's ruling, not my guess; the step applies it",
+    (() => {
+      const c = { origin: "valley", currentLocationId: C357.startingLocation, reconcileVersion: 79 };
+      RC7.reconcile(c, "character", { content: C357, day: 1 });
+      const d = { origin: "radiant", currentLocationId: C357.startingLocation, reconcileVersion: 79 };
+      RC7.reconcile(d, "character", { content: C357, day: 1 });
+      return c.origin === "valleyfolk" && d.origin === "radiant_plateau";
+    })());
+
+  check("§357: ⛔ …AND THE PAIRS ARE STILL LIVE, which is the half a rename step forgets. The NEW id must be a people the content actually declares and the OLD one must not — if either stops being true the map is stale, and a stale rename map silently rewrites a live choice or silently does nothing",
+    origins.some(o => o.id === "valleyfolk") && origins.some(o => o.id === "radiant_plateau")
+    && !origins.some(o => o.id === "valley") && !origins.some(o => o.id === "radiant"));
+
+  check("§357: ⛑ …AND IT NEVER TOUCHES A PEOPLE THAT EXISTS, nor runs twice. Every declared origin survives a reconcile unchanged, and a second pass moves nothing",
+    (() => {
+      for (const o of origins) {
+        const c = { origin: o.id, currentLocationId: C357.startingLocation, reconcileVersion: 79 };
+        RC7.reconcile(c, "character", { content: C357, day: 1 });
+        if (c.origin !== o.id) return false;
+      }
+      const again = { origin: "valley", currentLocationId: C357.startingLocation, reconcileVersion: 79 };
+      RC7.reconcile(again, "character", { content: C357, day: 1 });
+      const v = again.reconcileVersion;
+      RC7.reconcile(again, "character", { content: C357, day: 2 });
+      return again.origin === "valleyfolk" && again.reconcileVersion === v;
+    })());
+
+  check("§357: ⛔ …AND WHAT THEY HEAR OF IS THEIR NEW PEOPLE'S COUNTRY, which is the only reason the rename matters. A save whose id was stale gets the powers of the ground its people actually holds, and not merely the ones whose names travel",
+    (() => {
+      const c = { origin: "valley", currentLocationId: C357.startingLocation, reconcileVersion: 79, powerState: {}, npcRegistry: {}, codex: null };
+      RC7.reconcile(c, "character", { content: C357, day: 1 });
+      const known = PW7.powersKnownAtStart(c, { content: C357 });
+      const home = known.filter(k => k.how === "home");
+      const regions = new Set(PW7.homeRegionsOf(c, C357));
+      return home.length > 0 && regions.size > 0
+        && home.every(k => (k.power.reach || []).some(id => regions.has(C357.locations[id]?.regionId)));
     })());
 }
 

@@ -345,7 +345,13 @@
       "title": "Councilor of Millbrook",
       "aliases": [
         "Wenna Maud Dresh"
-      ]
+      ],
+      "domains": {
+        "primary": "verist",
+        "secondary": "mason",
+        "tertiary": "syllogist"
+      },
+      "_domainsWhy": "plain speech, what can be touched and proved, and mandate reasoned from premises"
     },
     {
       "_kind": "npc",
@@ -356,7 +362,7 @@
       "id": "elder-senna",
       "name": "Elder Senna",
       "tier": "leader",
-      "level": 10,
+      "level": 12,
       "role": "Village elder of Millbrook and a voice on its common house panel — listens on her feet, cup set aside, watching your face",
       "gender": "woman",
       "pronouns": "she/her",
@@ -409,7 +415,15 @@
       "title": "Elder of Millbrook",
       "aliases": [
         "Senna Rhoswen Aske"
-      ]
+      ],
+      "domains": {
+        "primary": "stillhold",
+        "secondary": "threnodist",
+        "tertiary": "rootkin"
+      },
+      "_domainsWhy": "the patience of the walled peace, feeling heard aloud, and a village she tends",
+      "_levelWas": 10,
+      "_levelWhy": "§148: the tier is right (a ruling lord, a seated elder), so the level climbs to the tier's floor rather than the tier dropping."
     },
     {
       "_kind": "npc",
@@ -480,7 +494,13 @@
       "aliases": [
         "Maren Oriel Vasse"
       ],
-      "_registryName": "Maren — the save's registry calls her by her given name alone; four characters on this device have met a Maren. The record now carries a family name and a title so she is never only 'Maren' again."
+      "_registryName": "Maren — the save's registry calls her by her given name alone; four characters on this device have met a Maren. The record now carries a family name and a title so she is never only 'Maren' again.",
+      "domains": {
+        "primary": "verist",
+        "secondary": "lattice",
+        "tertiary": "stillhold"
+      },
+      "_domainsWhy": "what is so, logged in order, kept calm"
     },
     {
       "_kind": "npc",
@@ -544,7 +564,13 @@
       "title": "Acoustic Geometer of the Second Terrace, retired",
       "aliases": [
         "Farren Aldous Quire"
-      ]
+      ],
+      "domains": {
+        "primary": "figurist",
+        "secondary": "enginewright",
+        "tertiary": "syllogist"
+      },
+      "_domainsWhy": "geometry as pattern, instruments, and reasoning that wants the why first"
     },
     {
       "_kind": "npc",
@@ -611,7 +637,13 @@
       "title": "Archivist of the Water-Accountability Office",
       "aliases": [
         "Sorel Anwen Halloran"
-      ]
+      ],
+      "domains": {
+        "primary": "verist",
+        "secondary": "blazeborn",
+        "tertiary": "hourkeeper"
+      },
+      "_domainsWhy": "the record saying what the water does, the Plateau's light, and the archive's memory"
     },
     {
       "_kind": "npc",
@@ -626,7 +658,7 @@
         "the Ditch-Mother"
       ],
       "tier": "leader",
-      "level": 11,
+      "level": 12,
       "people": "human",
       "romanceEligible": false,
       "closed": [],
@@ -676,7 +708,15 @@
       "purse": {
         "crystal": 60
       },
-      "_fromPlay": "characters/player-s9z9u1/char-mrhs8286.json (Silas Weir)"
+      "_fromPlay": "characters/player-s9z9u1/char-mrhs8286.json (Silas Weir)",
+      "domains": {
+        "primary": "rootkin",
+        "secondary": "mason",
+        "tertiary": "enginewright"
+      },
+      "_domainsWhy": "growing things, the channel stones, and the sluices she keeps running",
+      "_levelWas": 11,
+      "_levelWhy": "§148: the tier is right (a ruling lord, a seated elder), so the level climbs to the tier's floor rather than the tier dropping."
     }
   ],
   "modified": [],

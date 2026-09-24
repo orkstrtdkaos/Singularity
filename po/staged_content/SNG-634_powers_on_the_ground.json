@@ -625,7 +625,9 @@
       "homeLocation": "old_switchback",
       "communityId": "echo_vale.old_switchback",
       "domains": {
-        "primary": "marcher"
+        "primary": "marcher",
+        "secondary": "bargainers",
+        "tertiary": "horizon"
       },
       "spectrum": {
         "violence_peace": -0.3,
@@ -678,7 +680,11 @@
       "title": "Captain of the Switchback Tollmen",
       "aliases": [
         "Dessa Maerin Wyck"
-      ]
+      ],
+      "_domainsWas": {
+        "primary": "marcher"
+      },
+      "_domainsWhy": "a toll-captain: the Marchers' edge, the Bargainers' price named aloud, and a road people"
     },
     {
       "_file": "content/packs/valley/npcs/harl_maddock.json",
@@ -698,7 +704,8 @@
       "communityId": "unspooling.gralloch",
       "domains": {
         "primary": "churnfolk",
-        "secondary": "marcher"
+        "secondary": "marcher",
+        "tertiary": "syllogist"
       },
       "spectrum": {
         "violence_peace": -0.8,
@@ -751,7 +758,12 @@
       "title": "King of the Gralloch",
       "aliases": [
         "Harl Osric Maddock"
-      ]
+      ],
+      "_domainsWas": {
+        "primary": "churnfolk",
+        "secondary": "marcher"
+      },
+      "_domainsWhy": "the Churn's disorder, a Marcher's violence, and a Syllogist's arithmetic — he is cruel by calculation"
     },
     {
       "_file": "content/packs/valley/npcs/tamsin_galt.json",
@@ -770,7 +782,9 @@
       "homeLocation": "the_churn_edge",
       "communityId": "churnfolk.edge",
       "domains": {
-        "primary": "churnfolk"
+        "primary": "churnfolk",
+        "secondary": "horizon",
+        "tertiary": "marcher"
       },
       "spectrum": {
         "violence_peace": -0.7,
@@ -823,7 +837,11 @@
       "title": "Captain of the Edge Riders",
       "aliases": [
         "Tamsin Rhee Galt"
-      ]
+      ],
+      "_domainsWas": {
+        "primary": "churnfolk"
+      },
+      "_domainsWhy": "Churn-born, a rider of distances, a fighter"
     },
     {
       "_file": "content/packs/valley/npcs/mother_hesk.json",
@@ -843,7 +861,8 @@
       "communityId": "center.markets",
       "domains": {
         "primary": "veilwright",
-        "secondary": "bargainers"
+        "secondary": "bargainers",
+        "tertiary": "umbral"
       },
       "spectrum": {
         "violence_peace": 0.1,
@@ -896,7 +915,12 @@
       "title": "Mother of the Undercount",
       "aliases": [
         "Agathe Morrow Hesk"
-      ]
+      ],
+      "_domainsWas": {
+        "primary": "veilwright",
+        "secondary": "bargainers"
+      },
+      "_domainsWhy": "made truths, written bargains, and the Umbrals' dark roads her fences run on"
     },
     {
       "_file": "content/packs/valley/npcs/ines_harrowgate.json",
@@ -905,7 +929,7 @@
       "id": "ines_harrowgate",
       "name": "Ines Harrowgate",
       "tier": "heroic",
-      "level": 24,
+      "level": 25,
       "role": "Holder of the Slip at Keelmouth — keeps the only slipway on four hundred miles of cliff open to anyone who pays the posted tariff",
       "people": "human",
       "gender": "woman",
@@ -916,7 +940,8 @@
       "communityId": "keelmouth",
       "domains": {
         "primary": "mason",
-        "secondary": "horizon"
+        "secondary": "horizon",
+        "tertiary": "rootkin"
       },
       "spectrum": {
         "violence_peace": 0.5,
@@ -969,7 +994,14 @@
       "title": "Holder of the Slip",
       "aliases": [
         "Ines Aurelie Harrowgate"
-      ]
+      ],
+      "_domainsWas": {
+        "primary": "mason",
+        "secondary": "horizon"
+      },
+      "_domainsWhy": "a builder's ledger, the sea-roads, and the care that feeds whoever wrecks by accident",
+      "_levelWas": 24,
+      "_levelWhy": "§148: the tier is right (a ruling lord, a seated elder), so the level climbs to the tier's floor rather than the tier dropping."
     },
     {
       "_file": "content/packs/valley/npcs/oswin_tarrant.json",
@@ -978,7 +1010,7 @@
       "id": "oswin_tarrant",
       "name": "Oswin Tarrant",
       "tier": "heroic",
-      "level": 22,
+      "level": 25,
       "role": "Baron at Firstsight — holds the keep at the top of the only road down to the sea, taxes everything on it, and wants Keelmouth's harbour",
       "people": "human",
       "gender": "man",
@@ -989,7 +1021,8 @@
       "communityId": "firstsight",
       "domains": {
         "primary": "marcher",
-        "secondary": "mason"
+        "secondary": "mason",
+        "tertiary": "lattice"
       },
       "spectrum": {
         "violence_peace": -0.6,
@@ -1042,7 +1075,14 @@
       "title": "Baron at Firstsight",
       "aliases": [
         "Oswin Calder Tarrant"
-      ]
+      ],
+      "_domainsWas": {
+        "primary": "marcher",
+        "secondary": "mason"
+      },
+      "_domainsWhy": "a Marcher's hold on a road, a Mason's cairn, and the Lattice's love of a posted rule",
+      "_levelWas": 22,
+      "_levelWhy": "§148: the tier is right (a ruling lord, a seated elder), so the level climbs to the tier's floor rather than the tier dropping."
     },
     {
       "_file": "content/packs/valley/npcs/castellan_brannoch.json",
@@ -1062,7 +1102,8 @@
       "communityId": "valley.millbrook",
       "domains": {
         "primary": "verist",
-        "secondary": "marcher"
+        "secondary": "marcher",
+        "tertiary": "stillhold"
       },
       "spectrum": {
         "violence_peace": 0.1,
@@ -1115,7 +1156,12 @@
       "title": "Castellan of the Echo Bridge",
       "aliases": [
         "Tomas Evander Brannoch"
-      ]
+      ],
+      "_domainsWas": {
+        "primary": "verist",
+        "secondary": "marcher"
+      },
+      "_domainsWhy": "exact truth, a held line, and a peace he keeps between two cities"
     }
   ],
   "modified": [

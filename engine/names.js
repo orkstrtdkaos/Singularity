@@ -185,6 +185,8 @@ export function looksLikeRole(name, role = "") {
 
 /** ⛔ A NAME THAT LONG IS A SENTENCE (Aevi). Applies to what the ENGINE mints — authored names are
  *  authorship, and three of them are longer on purpose. */
+import { givenNamePastTitle } from "./namematch.js";   // ⛑ SNG-638: ONE definition of "their given name", never a second
+
 export const MINTED_NAME_MAX = 40;
 
 /** The engine's `originKind` vocabulary is not quite the pools' — `vacancy_filled` is the worldtick key,
@@ -280,7 +282,24 @@ export function mintedName({ tradition = null, originKind = "_default", pools = 
   if (!givens.length || !bynames.length) return null;
   const surnames = poolFor(pools, "given", "_default");
   const used = new Set((taken || []).map(n => String(n || "").trim().toLowerCase()).filter(Boolean));
+  // ⛔ SNG-638 N4 — A WHOLE-NAME CHECK DOES NOT CATCH A GIVEN-NAME COLLISION, and that is the hole. Measured:
+  // with "Sera Vail" already in the registry, the wright pool cheerfully minted "Sera the Scaffold" — two
+  // Seras, and `used` saw two different strings. Erik: "so they can be distinct."
+  // ⛑ AEVI'S §2 RULE IS THE ONE IMPLEMENTED: "a given name may repeat in the world only behind a distinct
+  // family name." So a FRESH given name is preferred, and a repeat is allowed only when the second part has
+  // not already been paired with that given name.
+  // ⚠️ IT MUST BE ALLOWED TO REPEAT, because the pools are small: 5–8 given names a tradition, 67 in the
+  // whole world, and sixteen of twenty-seven traditions have no given pool at all and fall through to
+  // `_default`'s eight. A hard refusal would run out after eight people and then name nobody.
+  const takenGiven = new Set((taken || []).map(n => givenNamePastTitle(n)).filter(Boolean));
+  const pairKey = (first, second) => `${String(first || "").toLowerCase()}|${String(second || "").toLowerCase()}`;
+  const takenPairs = new Set((taken || []).map(n => {
+    const w = String(n || "").trim().split(/\s+/).filter(Boolean);
+    return w.length > 1 ? pairKey(givenNamePastTitle(n), w[w.length - 1]) : null;
+  }).filter(Boolean));
   const fits = (s) => s.length <= MINTED_NAME_MAX && !used.has(s.toLowerCase());
+  const freshGiven = (first) => !takenGiven.has(String(first || "").toLowerCase());
+  const unpaired = (first, second) => !takenPairs.has(pairKey(first, second));
   const key = ORIGIN_KIND_ALIAS[originKind] || originKind || "";
   const salt = String(key).length;
   const gi = Math.floor(rng() * givens.length) + salt;
@@ -300,25 +319,60 @@ export function mintedName({ tradition = null, originKind = "_default", pools = 
   const pref = wantTone ? bynames.filter(b => b.tone === wantTone) : [];
   const rest = wantTone ? bynames.filter(b => b.tone !== wantTone) : bynames;
   const ordered = [...(pref.length ? rot(pref, bi) : []), ...(rest.length ? rot(rest, bi) : [])];
-  for (const by of ordered) {
-    for (let g = 0; g < givens.length; g++) {
-      const first = givens[(gi + g) % givens.length].text;
-      const cand = `${first} ${by.text}`;
-      if (fits(cand)) return { name: cand, given: first, surname: null, byname: by.text, tone: by.tone };
-    }
-  }
-  for (let s = 0; s < surnames.length; s++) {
-    const fam = surnames[(si + s) % surnames.length].text;
+  // ⛑ TWO PASSES, and the order IS the rule: every fresh given name is tried before any repeat.
+  for (const strict of [true, false]) {
     for (const by of ordered) {
       for (let g = 0; g < givens.length; g++) {
         const first = givens[(gi + g) % givens.length].text;
-        if (first === fam) continue;
-        const cand = `${first} ${fam} ${by.text}`;
-        if (fits(cand)) return { name: cand, given: first, surname: fam, byname: by.text, tone: by.tone };
+        if (strict && !freshGiven(first)) continue;
+        if (!strict && !unpaired(first, by.text)) continue;
+        const cand = `${first} ${by.text}`;
+        if (fits(cand)) return { name: cand, given: first, surname: null, byname: by.text, tone: by.tone, givenReused: !strict };
+      }
+    }
+  }
+  for (const strict of [true, false]) {
+    for (let s = 0; s < surnames.length; s++) {
+      const fam = surnames[(si + s) % surnames.length].text;
+      for (const by of ordered) {
+        for (let g = 0; g < givens.length; g++) {
+          const first = givens[(gi + g) % givens.length].text;
+          if (first === fam) continue;
+          if (strict && !freshGiven(first)) continue;
+          if (!strict && !unpaired(first, fam)) continue;
+          const cand = `${first} ${fam} ${by.text}`;
+          if (fits(cand)) return { name: cand, given: first, surname: fam, byname: by.text, tone: by.tone, givenReused: !strict };
+        }
       }
     }
   }
   return null;   // genuinely exhausted
+}
+
+/** ⛔ SNG-638 N2 — A FAMILY NAME TO TELL TWO PEOPLE OF THE SAME NAME APART. Draws from the same surname
+ *  source `mintedName` uses and refuses a pair that already exists, so a second Maren is never "Maren Vasse"
+ *  when the first one is.
+ *  ⬜ AND IT IS TWO PARTS, NOT THREE, BECAUSE THE CONTENT FOR A MIDDLE NAME DOES NOT EXIST. Measured before
+ *  writing this: `rules.mintedNames` has NO `middle` pool and NO `family` pool — the "surnames" are the eight
+ *  entries of `given._default`, reused. So "given, middle and family, always three parts" cannot be minted
+ *  today; it is asked of the GM (N1) and authored on records by hand, and this completes what it can.
+ *  Returns "" when nothing unpaired is left. PURE. */
+export function familyNameFor({ pools = null, tradition = null, given = "", taken = [], rng = Math.random } = {}) {
+  const surnames = poolFor(pools, "given", "_default");
+  if (!surnames.length) return "";
+  const g = String(given || "").toLowerCase();
+  const pairs = new Set((taken || []).map(n => {
+    const w = String(n || "").trim().split(/\s+/).filter(Boolean);
+    return w.length > 1 ? `${givenNamePastTitle(n)}|${w[w.length - 1].toLowerCase()}` : null;
+  }).filter(Boolean));
+  const start = Math.floor(rng() * surnames.length);
+  for (let i = 0; i < surnames.length; i++) {
+    const fam = surnames[(start + i) % surnames.length].text;
+    if (String(fam).toLowerCase() === g) continue;                  // "Vail Vail" is not a name
+    if (pairs.has(`${g}|${String(fam).toLowerCase()}`)) continue;   // that pair is already somebody
+    return fam;
+  }
+  return "";
 }
 
 /** ⛔ THE ONE NAMER. Every path that creates a person calls this and takes what it returns.
@@ -332,7 +386,26 @@ export function personName({ proposed = "", role = "", pools = null, tradition =
                             originKind = "_default", rng = Math.random, taken = [], max = 60,
                             nameNotYetLearned = false } = {}) {
   const raw = String(proposed || "").trim();
-  if (raw && !isPlaceholderName(raw, role)) return { name: raw.slice(0, max), nameUnknown: false, minted: false };
+  if (raw && !isPlaceholderName(raw, role)) {
+    // ⛔ SNG-638 N2 — A BARE GIVEN NAME THAT IS ALREADY SOMEBODY ELSE'S GETS A FAMILY NAME. Erik: "when
+    // people surface in the future, they get a full name … so they can be distinct." Aevi's §1 named this
+    // line as the reason a one-word name survives: it kept whatever the GM wrote, and "Maren" is legal.
+    // ⚠️ ONLY WHEN IT COLLIDES, AND THE ARITHMETIC IS WHY. Her N2 asks for every bare name to be completed
+    // unconditionally. Measured first: there is NO `family` pool and NO `middle` pool — the surname source
+    // is the EIGHT entries of `given._default`. Completing every one-word name would hand eight surnames to
+    // a whole world and produce "Maren Vail", "Aldric Vail", "Renn Vail" — collisions made prettier instead
+    // of rarer, and a world that reads as one family. So the completion is spent exactly where distinctness
+    // is at stake, and a one-word name nobody else has stays what the fiction called them.
+    const oneWord = !/\s/.test(raw);
+    const g = oneWord ? givenNamePastTitle(raw) : "";
+    const clash = g && (taken || []).some(x => givenNamePastTitle(x) === g);
+    if (!clash) return { name: raw.slice(0, max), nameUnknown: false, minted: false };
+    const fam = familyNameFor({ pools, tradition, given: g, taken, rng });
+    if (fam) return { name: `${raw} ${fam}`.slice(0, max), given: raw, surname: fam, nameUnknown: false, minted: false, completedWith: fam };
+    // ⬜ THE POOL RAN OUT, AND SAYING SO BEATS INVENTING. Eight surnames is eight; the caller is told the
+    // name it got is a known duplicate so a surface can ask, rather than a silent second Maren.
+    return { name: raw.slice(0, max), nameUnknown: false, minted: false, duplicateGiven: g };
+  }
   const m = pools ? mintedName({ tradition, originKind, pools, rng, taken }) : null;
   // ⛔ ERIK'S RULING (CCODE-462): "WHETHER OR NOT THE PC LEARNS THEIR NAME, THEY'LL HAVE ONE." So when the
   // caller says the player has not learned it, the minted name is the person's TRUE name and what the

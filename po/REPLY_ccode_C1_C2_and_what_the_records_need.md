@@ -110,3 +110,64 @@ fourth and fifth time I have done this, and it is the same lesson you got right 
 that cannot currently see a titled name. Say if the ordering should change.
 
 — CCode
+
+---
+
+# Addendum · CCODE-478 — SNG-638 N2 and N4, and the pool arithmetic that changed N2
+
+**v2.4.15.** N4 is done as you specified it. N2 is done *conditionally*, and the measurement is why.
+
+## ⛔ N4 — the hole was real and a whole-name check could never have seen it
+
+`mintedName` compared `taken` as whole strings. With **"Sera Vail"** in the registry, the wright pool minted
+**"Sera the Scaffold"** on the first draw — two Seras, two different strings, no complaint. Your §2 rule is
+the one implemented: *a given name may repeat in the world only behind a distinct family name.*
+
+- Every **fresh** given name in a tradition is spent before any is repeated.
+- A repeat must carry a second part **never paired with that given name**.
+- Measured: fourteen wrights come out as fourteen distinct whole names over eight distinct given names, and
+  each repeat is flagged `givenReused` so a caller can tell.
+- It must be *allowed* to repeat — a hard refusal would name nobody after the eighth person in a tradition.
+
+## ⬜ N2 — I did not complete every bare name, and here is the arithmetic
+
+You asked for a bare given name to be *"completed from the mint's pools (a middle and a family name, by
+tradition)"*. I measured the pools before writing it:
+
+| | |
+|---|---|
+| `mintedNames.family` | **does not exist** |
+| `mintedNames.middle` | **does not exist** |
+| the surname source | `given._default` — **8 entries**, reused as surnames |
+| given names per tradition | **5–8** |
+| distinct given names in the whole world | **67** |
+| traditions with a byname pool but **no** given pool | **16 of 27** — they fall through to those same eight |
+| people already in the saves' registries | **131** |
+
+So *"given, middle and family, always three parts"* **cannot be minted at all today** — two of the three
+parts have no pool. And completing every one-word name from an eight-deep surname source would produce
+"Maren Vail", "Aldric Vail", "Renn Vail": **collisions made prettier rather than rarer**, and a world that
+reads as one family.
+
+**So the completion is spent where distinctness is actually at stake.** A one-word name that collides with
+somebody already met gets a family name never paired with that given name; a one-word name nobody else has
+is left exactly as the fiction wrote it. Driven through the real `meet` door on Erik's own shape — "Maren
+Oast" and "Tuning-Warden Maren Oriel Vasse" both known, the GM writes a bare "Maren", and the third becomes
+**"Maren Ravel"**. ⛑ That the *titled* Maren was recognised as a Maren at all is N3 doing its work: before
+it, the guard read her as a *tuning*.
+
+Nine Marens come out with nine distinct families, and the tenth returns `duplicateGiven` — an honest stop
+rather than an invented ninth surname. Both outcomes land on the record (`nameCompleted`, `duplicateGiven`)
+and in the log, because a flag nothing reads is the fourth door.
+
+**⬜ The ask, and it is small:** `rules.mintedNames` wants a **`family`** pool and a **`middle`** pool per
+tradition, and given pools for the sixteen traditions that have bynames and none. The moment `family` exists
+I switch the surname source to it and the three-part name becomes mintable — `familyNameFor` is the one
+function to change. Until then N1 asks the GM for the whole name and a record may carry `fullName` by hand,
+which is what you have already done for the fourteen people in SNG-634/637.
+
+⚠️ One thing I left alone deliberately: two `meet` entries with the *same* name in one beat are still merged
+as one person. That is right far more often than not, and it means N2 fires only where the engine has
+already decided these are two people — which is the only place a collision needs resolving.
+
+— CCode

@@ -326,9 +326,22 @@ export function applyNpcUpdates(character, updates = [], ctx = {}) {
       // only ever relabel, never name. ⚠️ `nameUnknown` appeared in ZERO of 128 live records, and names.js already
       // said why — "a reader with no writer, the fourth door again". Both halves are closed now: the detector sees
       // a role in the name field, and the pools make a real name available the moment it does.
+      let n0CompletedWith = null;
       const first = personName({ proposed: prettifyNpcName(String(u.name || id)), role: u.role, max: 60,
         pools: ctx.rules?.mintedNames || null, taken: Object.values(reg).map(x => x?.trueName || x?.name).filter(Boolean),
         nameNotYetLearned: true });
+      // ⛔ SNG-638 N2 — AND WHAT THE NAMER REPORTS IS READ. `personName` now says when it completed a
+      // one-word name that was already somebody else's, and when it could not. A flag nothing reads is the
+      // fourth door, so both land on the record and in the log: `nameCompleted` is why this person is
+      // "Maren Estry" rather than a second Maren, and `duplicateGiven` is the honest admission that the
+      // surname pool ran out — eight entries, and nothing invents a ninth.
+      if (first.completedWith) {
+        n0CompletedWith = first.completedWith;
+        console.log(`[names] "${u.name}" was already somebody's name here — completed to "${first.name}", so the two are not one person`);
+      }
+      if (first.duplicateGiven) {
+        console.warn(`[names] "${first.name}" repeats a given name already met and the surname pool is spent — rules.mintedNames needs a family pool`);
+      }
       // ⛔ CCODE-421: a person met under an AUTHORED person's name is that person — keyed by their authored id, so the world's record of
       // them and yours are one. Four saves met Mara Wells as `mara-wells` while the world knew her as `water_keeper`.
       const authoredMet = !first.nameUnknown && ctx.npcs ? authoredPersonNamed(first.name, ctx.npcs) : null;
@@ -347,6 +360,10 @@ export function applyNpcUpdates(character, updates = [], ctx = {}) {
         // CALLED by it ("Councilor of Millbrook"), and it is what keeps a second Maren a different person.
         // The GM block below reads it back so an office is never re-invented halfway through a campaign.
         title: u.title ? smartClamp(String(u.title), 80) : undefined,
+        // ⛑ SNG-638 N2: WHY this person's name is longer than the GM wrote — kept so a surface can explain
+        // it and so a later pass never "tidies" the family name back off.
+        nameCompleted: n0CompletedWith || undefined,
+        duplicateGiven: first.duplicateGiven || undefined,
         // ⛑ `fullName` is given-middle-family when the fiction gave one. What the player HEARS stays `name`;
         // this is the record's own answer to "which Maren", and it is why the reuse guard can be strict.
         fullName: u.fullName ? prettifyNpcName(String(u.fullName).slice(0, 80)) : undefined,

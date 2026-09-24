@@ -25395,6 +25395,96 @@ console.log("\n── §350 · a title is not a given name ──");
     && /const titleOf = \(p\) =>/.test(rd("app.js")) && /const wholeName = \(p\) =>/.test(rd("app.js")));
 }
 
+// ══════════ §351 · CCODE-478 (SNG-638 N2, N4) — A GIVEN NAME REPEATS ONLY BEHIND A FAMILY NAME ══════════
+// ⛔ ERIK: "so they can be distinct." ⚑ AEVI'S §2 RULE, which is the one implemented: "A given name may repeat in the
+// world only behind a distinct family name."
+// ⛔ THE HOLE, MEASURED FIRST: `mintedName` checked `taken` as WHOLE STRINGS, so with "Sera Vail" in the registry the
+// wright pool cheerfully minted "Sera the Scaffold" — two Seras, two different strings, no complaint.
+// ⬜ AND THE ARITHMETIC THAT SHAPED N2, because it says what the spec asked for cannot be built yet:
+//   · `rules.mintedNames` has NO `family` pool and NO `middle` pool. The "surnames" are the EIGHT entries of
+//     `given._default`, reused — so "given, middle and family, always three parts" cannot be minted at all.
+//   · 5–8 given names a tradition · 67 distinct given names in the whole world · 131 people already in the saves.
+//   · 16 of 27 traditions have a byname pool and NO given pool, falling through to those same eight.
+// ⛑ So completing EVERY one-word name — which is what N2 literally asks — would hand eight surnames to a world and
+// produce "Maren Vail", "Aldric Vail", "Renn Vail": collisions made prettier rather than rarer. The completion is
+// spent where distinctness is actually at stake, and the gap is reported to Aevi rather than papered over.
+console.log("\n── §351 · a given name repeats only behind a family name ──");
+{
+  const NX = await import("../engine/names.js");
+  const NPX = await import("../engine/npcs.js");
+  const { loadContentHeadless: lch351 } = await import("./headless_content.mjs");
+  const C351 = await lch351();
+  const pools351 = C351.rules?.mintedNames || {};
+
+  // ── N4 · the mint ─────────────────────────────────────────────────────────────────────────────────
+  check("§351: ⛔ N4 — THE MINT NEVER REUSES A GIVEN NAME WHILE A FRESH ONE EXISTS. With \"Sera Vail\" already known, twelve draws from the wright pool produce no second Sera; before this the very first draw did. ⚠️ A whole-name check cannot see this: \"Sera Vail\" and \"Sera the Scaffold\" are two different strings and one person's name twice",
+    (() => {
+      const got = [];
+      for (let i = 0; i < 12; i++) { const r = NX.mintedName({ tradition: "wright", pools: pools351, taken: ["Sera Vail"], rng: () => (i + 0.5) / 12 }); if (r) got.push(r.name); }
+      return got.length >= 8 && !got.some(n => /^sera\b/i.test(n));
+    })());
+
+  check("§351: ⛑ …AND WHEN THE POOL IS SPENT IT REPEATS RATHER THAN REFUSING, because eight given names is eight: a hard refusal would name nobody after the eighth person in a tradition. ⛔ THE ORDER IS THE RULE — all eight fresh names come out before any repeat, and a repeat must carry a second part never paired with that given name, so fourteen people are fourteen distinct whole names",
+    (() => {
+      const reg = [], givens = [];
+      for (let i = 0; i < 14; i++) {
+        const r = NX.mintedName({ tradition: "wright", pools: pools351, taken: reg, rng: () => ((i * 7) % 12 + 0.5) / 12 });
+        if (!r) break;
+        reg.push(r.name); givens.push(String(r.given).toLowerCase());
+        if (i < 8 && r.givenReused) return false;          // no repeat may come before the pool is spent
+        if (i >= 8 && !r.givenReused) return false;        // and after it, every one is flagged as one
+      }
+      return reg.length === 14 && new Set(reg).size === 14 && new Set(givens).size === 8;
+    })());
+
+  // ── N2 · the GM's own one-word name ───────────────────────────────────────────────────────────────
+  const plain = NX.personName({ proposed: "Maren", pools: pools351, tradition: "wright", taken: [], rng: () => 0.3 });
+  const beside = NX.personName({ proposed: "Aldric", pools: pools351, tradition: "wright", taken: ["Sera Vail", "Coll the Ironhand"], rng: () => 0.3 });
+  check("§351: ⛑ N2 — A ONE-WORD NAME NOBODY ELSE HAS STAYS WHAT THE FICTION CALLED THEM. ⚠️ This is where I did NOT follow the spec: it asks for every bare name to be completed, and the measurement above says the surname pool is eight entries deep. A world where everyone is a Vail is not a world of distinct people, so a lone \"Maren\" is left alone",
+    plain.name === "Maren" && !plain.completedWith && beside.name === "Aldric" && !beside.completedWith);
+
+  const clash = NX.personName({ proposed: "Maren", pools: pools351, tradition: "wright", taken: ["Maren Oast"], rng: () => 0.3 });
+  const titled = NX.personName({ proposed: "Maren", pools: pools351, tradition: "wright", taken: ["Tuning-Warden Maren Oriel Vasse"], rng: () => 0.3 });
+  const kept = NX.personName({ proposed: "Maren Vasse", pools: pools351, tradition: "wright", taken: ["Maren Oast"], rng: () => 0.3 });
+  check("§351: ⛔ …AND ONE THAT IS ALREADY SOMEBODY ELSE'S GETS A FAMILY NAME — including when the person already known is wearing a TITLE, which is N3 doing its work: \"Tuning-Warden Maren Oriel Vasse\" is a Maren, and before that fix the guard read her as a *tuning*. ⚠️ A name the GM already wrote in full is never touched: \"Maren Vasse\" beside \"Maren Oast\" is two people who share a given name behind distinct families, which is exactly what Aevi's rule permits",
+    !!clash.completedWith && /^Maren \w+/.test(clash.name)
+    && !!titled.completedWith && kept.name === "Maren Vasse" && !kept.completedWith,
+    `${clash.name} · ${titled.name} · ${kept.name}`);
+
+  check("§351: ⛑ …NINE MARENS AND THEN AN HONEST STOP. Each takes a family name never paired with Maren; when the eight are spent the tenth is returned as a known duplicate with `duplicateGiven` set, rather than a ninth surname being invented. ⬜ That flag IS the content ask: `rules.mintedNames` wants a family pool",
+    (() => {
+      const taken = ["Maren Oast"]; let dupAt = -1;
+      for (let i = 0; i < 10; i++) {
+        const r = NX.personName({ proposed: "Maren", pools: pools351, tradition: "wright", taken, rng: () => (i + 0.5) / 10 });
+        taken.push(r.name);
+        if (r.duplicateGiven && dupAt < 0) dupAt = i;
+      }
+      const fams = taken.slice(1).map(n => n.split(" ")[1]).filter(Boolean);
+      return dupAt >= 7 && new Set(fams).size === fams.length;
+    })());
+
+  // ── the reader, through the REAL meet door ─────────────────────────────────────────────────────────
+  check("§351: ⛔ …AND IT FIRES THROUGH THE REAL `meet` DOOR, ON ERIK'S OWN SHAPE: two Marens already known — one plain, one titled — and the GM writes a bare \"Maren\" for a third, who becomes \"Maren <family>\". ⛑ AND THE REPORT IS READ: `nameCompleted` lands on the record and the log says why, because a flag nothing reads is the fourth door and this file exists to close it",
+    (() => {
+      const ch = { name: "T", npcRegistry: {
+        "maren-oast": { id: "maren-oast", name: "Maren Oast", role: "a miller", relationship: 2, status: "active", history: [], knownFacts: [], skillsObserved: [] },
+        "tw-lower": { id: "tw-lower", name: "Tuning-Warden Maren Oriel Vasse", role: "tuning warden", relationship: 1, status: "active", history: [], knownFacts: [], skillsObserved: [] } } };
+      NPX.applyNpcUpdates(ch, [{ op: "meet", npcId: "third-maren", name: "Maren", role: "a farmer", age: 40, sex: "female", gender: "woman", pronouns: "she/her", description: "weathered" }],
+        { rules: C351.rules, npcs: C351.npcs, locationId: "millbrook", day: 4 });
+      const made = ch.npcRegistry["third-maren"];
+      return !!made && /^Maren \w+/.test(made.name) && made.name !== "Maren" && !!made.nameCompleted;
+    })());
+
+  // ⬜ THE CONTENT ASK, COUNTED so it cannot be forgotten or overstated.
+  {
+    const g351 = pools351.given || {}, b351 = pools351.byname || {};
+    const noGiven = Object.keys(b351).filter(k => !Object.prototype.hasOwnProperty.call(g351, k));
+    const distinct = new Set();
+    for (const list of Object.values(g351)) for (const e of (list || [])) distinct.add(String(e.text || e).toLowerCase());
+    console.log(`      ⬜ §351: the mint has NO \`family\` pool and NO \`middle\` pool — surnames are the ${(g351._default || []).length} entries of \`given._default\`, reused. ${distinct.size} distinct given names in the whole world across ${Object.keys(g351).length} pools, and ${noGiven.length} of ${Object.keys(b351).length} traditions have a byname pool but no given pool (${noGiven.slice(0, 6).join(", ")}${noGiven.length > 6 ? ", …" : ""}). SNG-638's three-part name cannot be MINTED until those exist; N1 asks the GM for it and a record may carry it by hand.`);
+  }
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

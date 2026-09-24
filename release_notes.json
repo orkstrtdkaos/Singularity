@@ -16,6 +16,18 @@
   "next": [],
   "releases": [
     {
+      "version": "2.4.15",
+      "date": "2026-09-24",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "A second Maren gets a surname",
+          "summary": "The world no longer hands out a name somebody already has. When the GM writes a name that belongs to someone you have met, the new person gets a family name instead — and a name nobody else has is left exactly as written.",
+          "detail": "The check that stops a name being reused compared whole names, so \"Sera Vail\" and \"Sera the Scaffold\" looked like two different names instead of one name twice. Now every unused given name in a tradition is spent before any is repeated, and a repeat has to carry a family name never paired with it — so fourteen people are fourteen distinct names. If the GM writes a bare name that is already somebody else’s, the new person is given a family name, which also works when the person you already know wears a title. A one-word name nobody else has is left alone: the fiction may mean it."
+        }
+      ]
+    },
+    {
       "version": "2.4.14",
       "date": "2026-09-23",
       "entries": [

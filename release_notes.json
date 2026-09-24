@@ -16,6 +16,24 @@
   "next": [],
   "releases": [
     {
+      "version": "2.5.3",
+      "date": "2026-09-24",
+      "entries": [
+        {
+          "kind": "change",
+          "title": "Your codex is no longer capped",
+          "summary": "It used to stop taking new subjects at sixty, and the next thing you learned was filed onto an unrelated entry. Now everything you learn about gets its own entry, however much you already know.",
+          "detail": "What handles a codex that fills up is the reading: once a subject has gathered enough facts, it earns a paragraph that states the whole of what is known, and the older facts move underneath it as evidence rather than crowding the page. The fuller your codex gets, the sooner and the more of it condenses — so it keeps getting easier to read as you learn more, instead of shutting. Nothing is ever deleted; the facts are kept under the reading."
+        },
+        {
+          "kind": "fix",
+          "title": "A heroic is weekly again",
+          "summary": "People of great standing were turning up far too often — a heroic every second day where the world is meant to offer one about weekly.",
+          "detail": "The cadence was stored per person rather than per rung, so when the cast was sorted onto its proper rungs and fifty-nine people became heroes, the world started offering one three times as often as it should. It is now set in the terms it was meant in — how many days between meeting one — and divided across however many such people the world holds, so adding more great figures makes each of them rarer instead of making the whole rung common. A market town still offers more than an empty moor."
+        }
+      ]
+    },
+    {
       "version": "2.5.2",
       "date": "2026-09-24",
       "entries": [

@@ -12,11 +12,21 @@ export { namesMatch }; // back-compat: callers/tests import namesMatch from code
 const KINDS = ["mystery", "faction", "lore", "event", "person", "place"];
 // SNG-019: a PRIMARY node (anchored to a known entity via entityId) holds more facts —
 // a major NPC warrants 20+; ordinary topics keep the original cap.
-const CAPS = { topics: 60, factsPerTopic: 12, factsPerPrimary: 24, linksPerTopic: 8, aliasesPerTopic: 8,
+const CAPS = { factsPerTopic: 12, factsPerPrimary: 24, linksPerTopic: 8, aliasesPerTopic: 8,
   // DESIGN_codex_admission §3 (supersedes SPEC_codex §3a): the FIRST summary at 8 facts, rederived every 4
   // after, so a topic is a paragraph long before it is a wall. `keepFacts` is how many stay in `facts` as live
   // evidence after a summary; the rest retire to `archive` so the topic drops under its ceiling and accepts again.
-  summariseAt: 8, summariseEvery: 4, keepFacts: 8, archivePerTopic: 48, summaryChars: 700 };
+  summariseAt: 8, summariseEvery: 4, keepFacts: 8, archivePerTopic: 48, summaryChars: 700,
+  // ⛔ CCODE-484 (ERIK, 2026-09-24) — `topics: 60` IS GONE. It was a HARD REFUSAL: at sixty subjects the codex
+  // stopped admitting new ones and glued the next fact onto whatever lore topic was most recent. Erik: "i don't
+  // want to arbitrarily cap it at 60. we were working on a way to summarize the learned facts as they pile up."
+  // Both open design notes had left it as a question (SPEC_codex_summaries §4.4, DESIGN_codex_admission §3) and
+  // this is the answer: the number stays, as the point where CONDENSING BEGINS rather than where learning stops.
+  // ⛑ SO A LEARNED SUBJECT IS NEVER REFUSED, AND THE PRESSURE RAMPS: for every `pressureStep` subjects past
+  // `summariseFrom`, the first summary comes one fact sooner and the pass takes four more topics. The bar floors
+  // at `summariseFloor` (below four facts there is nothing to condense) and one pass tops out at `maxPerPass`,
+  // which bounds a single model call rather than the codex.
+  summariseFrom: 60, pressureStep: 20, summariseFloor: 4, basePerPass: 8, maxPerPass: 24 };
 
 /** ⛔ THE FIELDS A TOPIC IS READ FOR WITHOUT A GUARD. `absorb` iterates `facts` and `links` and pushes onto both,
  *  so a topic missing either is a crash waiting for a merge — that is Erik's `s.links is not iterable`. `aliases`
@@ -135,9 +145,12 @@ function harvestTitle(t, raw) {
 /** ⛔ THE ADMISSION TEST (DESIGN_codex_admission §2). Asked of every topic that resolved to NOTHING existing,
  *  BEFORE it is minted. It answers with the topic the fact belongs to instead — or null to let the mint proceed.
  *  Refuses when: the label starts with an existing topic's label (edge-district-* under Edge District), or the
- *  label reads like a sentence about a beat ("The Seam in the Returned Animal" is a fact about the rabbit), or
- *  the codex is FULL and the fact has any home at all. ⚠️ A refusal is never a drop: the caller files the fact
- *  on what this returns, and the refused label becomes an alias there so the next phrasing resolves too. */
+ *  label reads like a sentence about a beat ("The Seam in the Returned Animal" is a fact about the rabbit).
+ *  ⚠️ A refusal is never a drop: the caller files the fact on what this returns, and the refused label becomes
+ *  an alias there so the next phrasing resolves too.
+ *  ⛔ AND IT NO LONGER REFUSES FOR FULLNESS (CCODE-484). Both remaining rules are about WHAT THE LABEL IS — a
+ *  facet, or a sentence — which is the level a codex should be judged at. "The codex already holds sixty
+ *  things" was never a fact about the new subject. */
 const BEAT_JOINERS = /\b(in|with|at|from|after|before|who|that|which|when|where|under|behind)\b/i;
 export function readsLikeBeat(label) {
   const words = String(label || "").trim().split(/\s+/).filter(Boolean);
@@ -151,26 +164,19 @@ function admitTopic(character, u, raw, ctx = {}) {
     && n.startsWith(normName(t.label) + " "));
   if (parent) return { topic: parent, why: "prefix" };
   // 2 · a label that reads like a beat is a FACT — filed where it happened, or on who it names
-  // ⛔ CCODE-483 — THE CAP COUNTS WHAT PLAY DISCOVERED, NOT THE WORLD'S OWN FURNITURE. A `reference` topic is
-  // seeded by the engine from authored content (the powers that hold ground, which Erik asked the codex to
-  // list) and is not competing for the sixty slots this cap protects. ⚠️ FOUND THE HARD WAY: Silas's codex
-  // stood at 59 of 60, so the FIRST seeded power was admitted and the other six fell through to
-  // `why: "full"` and landed as facts on "Silas — The Two Holds". Seven powers heard of, one topic listed.
-  const full = Object.values(topics).filter(x => x && !x.reference).length >= CAPS.topics;
-  if (readsLikeBeat(raw) || full) {
+  // ⛔ CCODE-484 — AND THAT IS THE WHOLE TEST NOW. The third rule used to be "the codex is full", and what it
+  // did was glue the next new subject onto whatever lore topic had been touched most recently. ⚠️ I MET IT AS A
+  // DEFECT BEFORE ERIK RULED ON IT: seeding seven powers onto Silas's save, which stood at 59 of 60, listed ONE
+  // and folded six onto "Silas — The Two Holds". The Whistling Woman is a person whether or not you already
+  // know sixty things, and the fullness of the codex is not a fact about her.
+  if (readsLikeBeat(raw)) {
     for (const l of (Array.isArray(u.links) ? u.links : [])) {
       const lid = slugify(String(l));
-      if (lid && topics[lid]) return { topic: topics[lid], why: full ? "full" : "beat" };
+      if (lid && topics[lid]) return { topic: topics[lid], why: "beat" };
     }
     const placeId = ctx.locationId ? slugify(ctx.locationId) : null;
-    if (placeId && topics[placeId]) return { topic: topics[placeId], why: full ? "full" : "beat" };
-    if (placeId && !full) return { mint: { id: placeId, label: ctx.entities?.places?.[placeId] || placeId, kind: "place", entityId: placeId }, why: "beat" };
-    // 3 · FULL and no home — the fact still lands: on the newest lore topic, never on the floor
-    if (full) {
-      const lore = Object.values(topics).filter(t => t && t.kind === "lore").sort((a, b) => (b.updatedDay ?? 0) - (a.updatedDay ?? 0))[0]
-        || Object.values(topics).sort((a, b) => (b.updatedDay ?? 0) - (a.updatedDay ?? 0))[0];
-      if (lore) return { topic: lore, why: "full" };
-    }
+    if (placeId && topics[placeId]) return { topic: topics[placeId], why: "beat" };
+    if (placeId) return { mint: { id: placeId, label: ctx.entities?.places?.[placeId] || placeId, kind: "place", entityId: placeId }, why: "beat" };
   }
   return null;
 }
@@ -178,9 +184,12 @@ function admitTopic(character, u, raw, ctx = {}) {
 /** ⛔ CCODE-483 — A REFERENCE TOPIC, SEEDED BY THE ENGINE FROM AUTHORED CONTENT. This is a SECOND writer of
  *  `codex.topics` and that is deliberate, narrow, and worth explaining: `applyCodexUpdates` exists to admit
  *  the GM's output, and its admission policy (DESIGN_codex_admission) is a filter against noise — a prefix
- *  fold, a beat fold, and a hard stop at sixty topics. Those are exactly right for a model's suggestions and
- *  exactly wrong for the world's own furniture, which is known-good, authored, and the thing Erik asked the
- *  codex to LIST: "your codex will list the powers of the region you start in or are from."
+ *  fold and a beat fold. Those are exactly right for a model's suggestions and exactly wrong for the world's
+ *  own furniture, which is known-good, authored, and the thing Erik asked the codex to LIST: "your codex will
+ *  list the powers of the region you start in or are from."
+ *  ⛑ THE SIXTY-TOPIC STOP THAT ORIGINALLY MADE THIS NECESSARY IS GONE (CCODE-484) — but this door stays, and
+ *  earns its keep on the other two grounds: it never overwrites what play has already recorded, and it takes
+ *  one authored line rather than a stream.
  *  ⚠️ SO IT IS KEPT AS NARROW AS IT CAN BE: it mints with the canonical shape, it REFUSES to touch a topic
  *  that already exists (so play's own record of a power always wins), it stamps `reference` so the discovery
  *  cap ignores it, and it takes ONE authored fact rather than a stream. Everything else about a topic — the
@@ -335,7 +344,6 @@ export function applyCodexUpdates(character, updates = [], ctx = {}) {
       }
       const id = res.entityId || slugify(u.topic || u.label || "");
       if (!id) continue;
-      if (Object.keys(topics).length >= CAPS.topics) continue;   // only a FACTLESS label reaches this full codex — admitTopic homed every fact
       const canonical = res.entityId
         ? (ctx.entities?.people?.[res.entityId] || ctx.entities?.places?.[res.entityId] || raw)
         : raw;
@@ -743,7 +751,36 @@ function normNameTokens(s) {
 /** ⚑ WHICH TOPICS HAVE EARNED A SUMMARY. A topic qualifies at `summariseAt` facts, then every `summariseEvery` it has not yet
  *  been summarised over — first at 8, then every 4 after — so this fires at a threshold and never every turn.
  *  Biggest first, because the wall of 24 is the one the player is actually suffering. PURE. */
-export function topicsNeedingSummary(character, { at = CAPS.summariseAt, every = CAPS.summariseEvery, max = 8 } = {}) {
+/** ⛔ CCODE-484 — HOW HARD THE CODEX IS CONDENSING RIGHT NOW. Erik: "i don't want to arbitrarily cap it at 60.
+ *  we were working on a way to summarize the learned facts as they pile up." This is the "as they pile up" part,
+ *  and it is what replaced the refusal: nothing stops being learned, and the fuller the codex gets the sooner
+ *  and the more of it condenses.
+ *  ⛑ THE RAMP IS ONE STEP PER `pressureStep` SUBJECTS PAST `summariseFrom`: the first summary comes one fact
+ *  sooner, re-derivation comes one fact sooner, and the pass takes four more topics. ⚠️ `at` floors at
+ *  `summariseFloor` because below four facts there is no paragraph to write, and `max` tops out at `maxPerPass`
+ *  because that bounds ONE MODEL CALL — the number that must never bound the codex is the topic count, and it
+ *  no longer does. PURE. */
+export function summaryPressure(character) {
+  const live = Object.values(character?.codex?.topics || {}).filter(t => t && !t.reference).length;
+  const steps = Math.max(0, Math.floor((live - CAPS.summariseFrom) / CAPS.pressureStep) + 1);
+  return {
+    topics: live,
+    steps,
+    at: Math.max(CAPS.summariseFloor, CAPS.summariseAt - steps),
+    every: Math.max(2, CAPS.summariseEvery - steps),
+    max: Math.min(CAPS.maxPerPass, CAPS.basePerPass + steps * 4),
+    // ⚠️ AND THE KEEP COMES DOWN FASTER THAN THE BAR, which my first ramp forgot. Lowering `at` to 7 while
+    // `keepFacts` stayed 8 meant a pressured pass wrote a reading and retired NOTHING — measured on Cellaceron's
+    // save, the only one actually at the old ceiling: 60 topics, two summaries written, 151 facts before and 151
+    // after. Condensing that condenses nothing is worse than no condensing, because it looks like it worked.
+    // ⛑ The unpressured pair (8 and 8) is left exactly as DESIGN_codex_admission §3 authored it.
+    keep: steps ? Math.max(3, CAPS.keepFacts - steps * 2) : CAPS.keepFacts,
+  };
+}
+
+export function topicsNeedingSummary(character, opts = {}) {
+  const p = summaryPressure(character);
+  const { at = p.at, every = p.every, max = p.max } = opts;
   const topics = Object.values(character?.codex?.topics || {});
   const due = topics.filter(t => t && Array.isArray(t.facts)
     && (Number(t.summarisedAt) > 0
@@ -781,7 +818,9 @@ export function buildSummaryPrompt(character, ids = []) {
  *  is due after `summariseEvery` more, and RETIRES the oldest facts beyond `keepFacts` into `archive`.
  *  ⛔ Retired, not deleted: "a summary the player cannot audit is a claim." The archive is capped so a
  *  subject that lives for a year does not grow without bound. Returns the ids it wrote. PURE. */
-export function applySummaries(character, ids = [], verdicts = [], { keepFacts = CAPS.keepFacts, day = null } = {}) {
+export function applySummaries(character, ids = [], verdicts = [], opts = {}) {
+  // ⛑ CCODE-484: the keep follows the pressure unless a caller states one — see `summaryPressure`.
+  const { keepFacts = summaryPressure(character).keep, day = null } = opts;
   const topics = character?.codex?.topics || {};
   const written = [];
   const list = Array.isArray(verdicts) ? verdicts : (verdicts?.summaries || []);

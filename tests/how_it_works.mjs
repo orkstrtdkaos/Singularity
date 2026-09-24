@@ -9609,15 +9609,53 @@ console.log("\n── §107 · who is around today, offered and never forced ─
   check("§107: ⬜ …and the low rungs are populated at all, which is what the seven-rung cast bought",
     (hub.t.riffraff || 0) + (hub.t.notable || 0) + (hub.t.leader || 0) > 0,
     `riffraff ${hub.t.riffraff || 0} · notable ${hub.t.notable || 0} · leader ${hub.t.leader || 0}`);
-  // ⛔ SNG-590 — KNOWN RED, AND IT IS A TRUE REPORT. `TIER_RATE` is per-person per-day, so the cadence scales
-  // with the POPULATION of a rung: heroic went to 55 real people and now arrives every third day against
-  // Erik's ruled weekly. ⚠️ I am not widening the band to make this green — that would be me choosing balance,
-  // and the number really is out of the rate he ruled. ⬜ The fix is a `TIER_RATE` retune for a seven-rung
-  // world: Erik's cadence to rule, Aevi's to tune, and this stays red until it is done.
-  check("§107: ⚑ …and roughly at Erik's rates — a heroic about weekly, an epic about fortnightly",
+  // ✅ SNG-590 — THE KNOWN RED IS CLOSED, AND NOT BY A RETUNE (CCODE-485). The note that stood here said the fix
+  // was a `TIER_RATE` retune, "Erik's cadence to rule, Aevi's to tune", and that this stays red until it is done.
+  // ⚠️ IT WAS THE WRONG DIAGNOSIS OF MY OWN RED. The rate was in the wrong UNITS: Erik ruled a CADENCE ("a heroic
+  // probably weekly") and the engine stored a PER-PERSON daily rate, so the cadence the player feels was the rate
+  // times the rung's POPULATION. Aevi's seven-rung pass moved 47 untiered people onto real rungs, `heroic` went to
+  // 59, and a ruled weekly became every second day. Nobody touched a number; a content pass moved a ruling.
+  // ⛑ SO THE CADENCE IS AUTHORED IN DAYS PER RUNG (`TIER_CADENCE`) and the per-person chance is DERIVED from the
+  // size of that rung. A retune would have come apart the next time the cast grew; this cannot.
+  // ⛔ AND THE ASSERTIONS BELOW ASK WHETHER THE RATE FOLLOWS THE KNOB, not whether it equals a number I measured
+  // once — a gate that pins the value is a gate that reddens the day the world changes, which is exactly how this
+  // one spent its time red.
+  check("§107: ⚑ …and at Erik's rates — a heroic about weekly, an epic about fortnightly",
     400 / (hub.t.heroic || 1) >= 4 && 400 / (hub.t.heroic || 1) <= 14
     && 400 / (hub.t.epic || 1) >= 9 && 400 / (hub.t.epic || 1) <= 30,
     `heroic 1/${(400 / (hub.t.heroic || 1)).toFixed(0)}d · epic 1/${(400 / (hub.t.epic || 1)).toFixed(0)}d`);
+
+  check("§107: ⛔ …AND THE CADENCE IS THE AUTHORED ONE BY CONSTRUCTION, not by a sweep that has to be redone. Each great rung's derived per-person chance, summed over that rung at the reference place the content declares, IS one over the days Erik ruled — asked as arithmetic, of every rung that has a ruling, so a change of units reddens this instead of drifting quietly",
+    (() => {
+      const scale = PR.presenceScale(C107);
+      const rungs = Object.keys(PR.TIER_CADENCE);
+      if (!rungs.length || !C107.locations[C107.startingLocation]) return false;
+      return rungs.every(tier => {
+        const daily = scale.rate[tier] * scale.sum[tier];        // the rung's own daily total at the reference
+        return scale.sum[tier] > 0 && Math.abs(daily - 1 / PR.TIER_CADENCE[tier]) < 1e-9;
+      });
+    })(), Object.keys(PR.TIER_CADENCE).map(k => `${k} 1/${PR.TIER_CADENCE[k]}d`).join(" · "));
+
+  check("§107: ⛔ …AND GROWING THE CAST DOES NOT MOVE IT, which is the whole of the defect. Double every heroic in the world and the rung still arrives at the ruled cadence — each of them becomes rarer instead. ⚠️ Under the old per-person rate this same test would have DOUBLED the sightings, and that is precisely what Aevi's tiering pass did to a number Erik had ruled",
+    (() => {
+      const twice = { ...C107, npcs: { ...C107.npcs } };
+      let added = 0;
+      for (const [id, n] of Object.entries(C107.npcs)) if (String(n.tier) === "heroic") { twice.npcs[`${id}_twin`] = { ...n, id: `${id}_twin`, name: `${n.name || id} the Second` }; added++; }
+      let a = 0, b = 0;
+      for (let d = 0; d < 400; d++) {
+        a += PR.presentToday(who, C107, { day: d, hereId: "millbrook", want: "heroic" }).length;
+        b += PR.presentToday(who, twice, { day: d, hereId: "millbrook", want: "heroic" }).length;
+      }
+      return added > 20 && a > 20 && Math.abs(b - a) / a < 0.35;
+    })());
+
+  check("§107: ⛑ …AND THE MAP IS NOT FLATTENED BY THE NORMALISING, which was the trap in it. Dividing by each place's OWN nearby cast would make every place equally busy and undo Aevi's \"'you have not met a heroic this week' is not a reason for one to appear in an empty fen\" — so the divisor is the reference place's cast, once, and somewhere better connected genuinely runs busier",
+    (() => {
+      const at = (loc) => { let n = 0; for (let d = 0; d < 400; d++) n += PR.presentToday(who, C107, { day: d, hereId: loc, want: "heroic" }).length; return n; };
+      const hubN = at("the_crossing"), refN = at("millbrook"), farN = at("the_blaze");
+      return hubN > refN && refN > farN;
+    })());
+
   check("§107: ⛔ A MYTHIC IS NEVER OFFERED ON A TIMER — \"a mythic appearing IS the event\"",
     !("mythic" in hub.t) && !("mythic" in PR.TIER_RATE));
 
@@ -10057,19 +10095,36 @@ console.log("\n── §113 · a reference, not a log — and nothing on the flo
   check("§113: …and a short, plain name is ADMITTED — the test refuses beats, not subjects",
     (() => { const c = mk(); CX.applyCodexUpdates(c, [{ label: "The Ditch-Mother", kind: "person", fact: "keeps the ditches" }], ctx);
       return !!c.codex.topics["the-ditch-mother"] && !CX.readsLikeBeat("The Ditch-Mother") && CX.readsLikeBeat("The Seam in the Returned Animal") && CX.readsLikeBeat("Boar at the North Wood"); })());
-  // 3 · FULL — the floor is gone
+  // 3 · SIXTY SUBJECTS IS NOT FULL ANY MORE (CCODE-484)
+  // ⛔ ERIK: "i don't want to arbitrarily cap it at 60. we were working on a way to summarize the learned facts
+  // as they pile up." These three assertions used to prove the ceiling's GOOD MANNERS — that a refused subject
+  // still landed somewhere. ⚠️ They were the best available answer to the wrong question: the Whistling Woman is
+  // a person whether or not you already know sixty things, and gluing her onto the newest lore topic loses her.
+  // I met it as a defect first, seeding seven powers onto a save that stood at 59 of 60 and listing one.
   const c3 = mk();
   for (let i = 0; i < 60; i++) c3.codex.topics[`t${i}`] = { id: `t${i}`, label: `Subject ${i}`, kind: i % 2 ? "lore" : "event", facts: [], links: [], aliases: [], updatedDay: i };
   c3.codex.topics.millbrook = { id: "millbrook", label: "Millbrook", kind: "place", entityId: "millbrook", facts: [], links: [], aliases: [] };
   const before = Object.keys(c3.codex.topics).length;
   CX.applyCodexUpdates(c3, [{ label: "Whistling Woman", kind: "person", fact: "she was seen at the mill at dusk" }], { ...ctx, locationId: "millbrook" });
-  check("§113: ⛔ A FULL CODEX NO LONGER DROPS THE FACT — it lands on the place it happened, and the count does not grow",
-    Object.keys(c3.codex.topics).length === before && c3.codex.topics.millbrook.facts.some(f => /Whistling Woman — she was seen/.test(f)));
-  CX.applyCodexUpdates(c3, [{ label: "Whistling Woman", kind: "person", fact: "a second sighting" }], { ...ctx, locationId: null });
-  check("§113: …and with no place at all it lands on the newest lore rather than the floor — a fact without a home is still a fact",
-    Object.keys(c3.codex.topics).length === before && Object.values(c3.codex.topics).some(t => t.facts.some(f => /a second sighting/.test(f))));
-  check("§113: …every refusal is on the record — label, where it went, why",
-    (c3.codex.refused || []).length === 2 && c3.codex.refused.every(r => r.why === "full" && r.to));
+  check("§113: ⛔ A CODEX WITH SIXTY SUBJECTS ADMITS THE SIXTY-FIRST — as its own subject, of its own kind, and not as a line on the place it happened to be seen at",
+    Object.keys(c3.codex.topics).length === before + 1
+    && c3.codex.topics["whistling-woman"]?.kind === "person"
+    && c3.codex.topics["whistling-woman"].facts.some(f => /she was seen at the mill at dusk/.test(f))
+    && !c3.codex.topics.millbrook.facts.length,
+    `${before} → ${Object.keys(c3.codex.topics).length}`);
+  CX.applyCodexUpdates(c3, [{ label: "Lamp-Lighter", kind: "person", fact: "walks the bank at dusk" }], { ...ctx, locationId: null });
+  check("§113: …and with no place to fall back on either — the old ceiling's last resort was the newest LORE topic, so a person learned about with no location in hand became a line of lore",
+    Object.keys(c3.codex.topics).length === before + 2 && c3.codex.topics["lamp-lighter"]?.kind === "person");
+  check("§113: ⛑ …AND THE ADMISSION TEST ITSELF IS UNCHANGED AT THAT SIZE, which is the point: what a label IS decides, never how much is already known. A beat still folds onto the place it happened, and the fold is still on the record — label, where it went, why — with no `full` among the reasons",
+    (() => {
+      CX.applyCodexUpdates(c3, [{ label: "The Seam in the Returned Animal", kind: "mystery", fact: "a hairline seam" }], { ...ctx, locationId: "millbrook" });
+      const r = c3.codex.refused || [];
+      return !c3.codex.topics["the-seam-in-the-returned-animal"]
+        && c3.codex.topics.millbrook.facts.some(f => /Seam in the Returned Animal/.test(f))
+        && r.length === 1 && r[0].why === "beat" && r[0].to === "millbrook"
+        && r.every(x => x.why !== "full");
+    })());
+
   // 4 · TITLES — "Dara Holt, the Ditch-Mother" answers to both halves
   const c4 = mk();
   CX.applyCodexUpdates(c4, [{ label: "Dara Holt, the Ditch-Mother", kind: "person", fact: "keeps the ditches" }], ctx);
@@ -25928,25 +25983,20 @@ console.log("\n── §355 · known by reputation ──");
       });
     })(), "one topic per power heard of, in every region");
 
-  check("§355: ⛔ …AND A FULL CODEX STILL LISTS THEM. The topic cap exists to stop the GM's output filling the codex; the world's own furniture is not the GM's output. ⛑ The cap is DERIVED here by filling a codex until it refuses another topic — never pinned as a number, or this gate reddens the day Aevi retunes it — and the powers are then seeded on top of a codex that is already refusing",
+  check("§355: ⛔ …AND A LARGE CODEX STILL LISTS THEM. ⚠️ THIS ASSERTION USED TO DERIVE A CEILING by filing topics until the codex refused another, because the seeding had to survive one: Silas stood at 59 of 60 and six of his seven powers folded onto an unrelated lore topic. Erik has since ruled the ceiling out (CCODE-484), so there is nothing to derive — and the assertion that matters now is the stronger one: file a hundred subjects and the codex takes all of them AND the powers, with the discovered and the reference entries still told apart",
     (() => {
       const c = bornAt(where(anyRegion));
       CX5.ensureCodex(c);
-      let n = 0, cap = 0;
-      for (let i = 0; i < 400; i++) {
-        CX5.applyCodexUpdates(c, [{ topic: `filler-${i}`, label: `Filler ${i}`, kind: "lore", fact: `a thing that happened, number ${i}` }], { day: 1 });
-        const now = Object.keys(c.codex.topics).length;
-        if (now === n) { cap = n; break; }
-        n = now;
-      }
-      if (!cap) return false;                                    // never filled — the cap moved, and this gate must say so
+      for (let i = 0; i < 100; i++) CX5.applyCodexUpdates(c, [{ topic: `filler-${i}`, label: `Filler ${i}`, kind: "lore", fact: `a thing that happened, number ${i}` }], { day: 1 });
+      const discoveredBefore = Object.values(c.codex.topics).filter(x => !x.reference).length;
       const seeded = PW5.seedPowerKnowledge(c, { content: C355, day: 4 });
       for (const spec of seeded.updates) CX5.seedReferenceTopic(c, spec);
       const listed = Object.values(c.codex.topics).filter(x => x.reference);
       const discovered = Object.values(c.codex.topics).filter(x => !x.reference).length;
-      return seeded.learned.length > 0 && listed.length === seeded.learned.length
-        && discovered === cap && Object.keys(c.codex.topics).length === cap + listed.length;
-    })(), "seeded past a codex that refuses another discovery");
+      return discoveredBefore === 100 && seeded.learned.length > 0
+        && listed.length === seeded.learned.length && discovered === 100
+        && Object.keys(c.codex.topics).length === 100 + listed.length;
+    })(), "a hundred discovered subjects and every power heard of");
 
   check("§355: ⛔ …AND THE TOPIC IS THE SHAPE EVERY READER ALREADY EXPECTS. ⚠️ MY FIRST MINT PUSHED `{ text, day }` OBJECTS, AND I MEASURED IT WITH A DRIVER THAT PRINTED `facts[0].text` BACK — it agreed with itself and nothing threw. A fact in this codex is a STRING: `searchCodex` calls `.toLowerCase()` on it, `codexForGM` joins them into the prompt, and the merge path slices past a bracket. Seven topics written, zero readable. ⛑ So the gate asks the READERS, not the shape",
     (() => {
@@ -26023,6 +26073,108 @@ console.log("\n── §355 · known by reputation ──");
       return toldOfKnown && toldOfStrangers
         && before === false && PW5.isKnownPower(stranger, p.id) === true
         && stranger.powerState[p.id].known.how === "noticed";
+    })());
+}
+
+// ══════════ §356 · CCODE-484 (ERIK) — THE CODEX IS NOT CAPPED; IT CONDENSES AS IT FILLS ══════════
+// ⛔ ERIK'S RULING: "the codex cap was being worked in the past... i don't want to arbitrarily cap it at 60. we
+// were working on a way to summarize the learned facts as they pile up."
+// ⚑ BOTH DESIGN NOTES HAD LEFT IT AS AN OPEN QUESTION — SPEC_codex_summaries §4.4 and DESIGN_codex_admission §3
+// both ask "is 60 still the right cap once topics summarise?" and both answer "it is full today". It was: one
+// save on this device stood at exactly 60 of 60 and three more within eight.
+// ⚠️ AND THE CEILING WAS NOT A REFUSAL, IT WAS A MISFILING — the sixty-first subject's fact was glued onto
+// whatever lore topic had been touched most recently. I met that as a defect before it was ruled on.
+console.log("\n── §356 · the codex is not capped; it condenses as it fills ──");
+{
+  const CX6 = await import("../engine/codex.js");
+  const born = () => { const c = { codex: null }; CX6.ensureCodex(c); return c; };
+  const ctx6 = { day: 5, locationId: "millbrook", entities: { places: { millbrook: "Millbrook" } } };
+  const fill = (c, n, from = 0) => { for (let i = from; i < from + n; i++)
+    CX6.applyCodexUpdates(c, [{ topic: `s${i}`, label: `Subject ${i}`, kind: "lore", fact: `a thing, ${i}` }], { ...ctx6, day: i }); return c; };
+
+  check("§356: ⛔ NOTHING STOPS BEING LEARNED. A new subject is admitted at any size — asked at the old ceiling and at three times it, and the count grows every time. ⚠️ What it used to do instead was not a refusal but a MISFILING: the fact went onto the newest lore topic, so a person you learned about became a line of lore and her name was kept only as the first clause of it",
+    (() => {
+      let last = 0;
+      for (const size of [10, 60, 61, 120, 200]) {
+        const c = fill(born(), size);
+        const n = Object.keys(c.codex.topics).length;
+        if (n !== size) return false;
+        CX6.applyCodexUpdates(c, [{ label: "Whistling Woman", kind: "person", fact: "she was seen at the mill at dusk" }], ctx6);
+        const w = c.codex.topics["whistling-woman"];
+        if (!w || w.kind !== "person" || Object.keys(c.codex.topics).length !== size + 1) return false;
+        if ((c.codex.refused || []).some(r => r.why === "full")) return false;
+        last = size;
+      }
+      return last === 200;
+    })(), "admitted at 10, 60, 61, 120 and 200 subjects");
+
+  check("§356: ⛔ …AND THE CONDENSING RAMPS WITH WHAT IS KNOWN, which is the mechanism that replaced the ceiling: the fuller the codex, the SOONER a subject earns its first reading, the sooner the reading is redone, the fewer raw facts stay live beneath it, and the more subjects one pass takes. ⛑ Read off the dials at five sizes and asserted as MONOTONE rather than pinned to numbers, so retuning the ramp cannot redden this",
+    (() => {
+      const at = [], keep = [], every = [], max = [];
+      for (const size of [10, 60, 100, 200, 400]) {
+        const p = CX6.summaryPressure(fill(born(), size));
+        if (p.topics !== size) return false;
+        at.push(p.at); keep.push(p.keep); every.push(p.every); max.push(p.max);
+      }
+      const nonUp = a => a.every((x, i) => i === 0 || x <= a[i - 1]);
+      const nonDown = a => a.every((x, i) => i === 0 || x >= a[i - 1]);
+      return nonUp(at) && nonUp(keep) && nonUp(every) && nonDown(max)
+        && at[0] > at.at(-1) && keep[0] > keep.at(-1) && max.at(-1) > max[0];
+    })());
+
+  check("§356: ⛑ …AND BELOW THE PRESSURE POINT NOTHING MOVED. The unpressured dials are the ones DESIGN_codex_admission §3 authored and shipped — first reading at eight facts, redone every four, eight kept beneath it — and a ruling about what happens when a codex is FULL must not quietly retune the ordinary case. An empty codex and a half-full one read identically",
+    (() => {
+      const a = CX6.summaryPressure(born());
+      const b = CX6.summaryPressure(fill(born(), 40));
+      return a.steps === 0 && b.steps === 0
+        && a.at === b.at && a.keep === b.keep && a.every === b.every && a.max === b.max;
+    })());
+
+  check("§356: ⛔ …AND THE BAR HAS A FLOOR, because below a few facts there is no paragraph to write. However large the codex gets, a subject is never asked to be summarised down to nothing, and one pass never grows without limit — that number bounds ONE MODEL CALL, and the number that must never bound the codex is the count of subjects",
+    (() => {
+      const huge = CX6.summaryPressure(fill(born(), 600));
+      const vast = CX6.summaryPressure(fill(born(), 1200));
+      return huge.at >= 3 && huge.at === vast.at && huge.keep === vast.keep
+        && huge.max === vast.max && huge.every === vast.every && vast.topics === 1200;
+    })());
+
+  check("§356: ⛔ …AND CONDENSING ACTUALLY CONDENSES, AND LOSES NOTHING. A subject that piles up gets a reading, the raw facts under it come down, and every one that leaves `facts` is in `archive` — the evidence is moved, never dropped. ⚠️ MY FIRST RAMP FAILED THIS ON THE ONE SAVE ACTUALLY AT THE OLD CEILING: it lowered the BAR to seven facts and left the KEEP at eight, so a pressured pass wrote two readings and retired nothing. 151 facts before, 151 after. Condensing that condenses nothing is worse than none, because it looks like it worked",
+    (() => {
+      const c = born();
+      for (let i = 0; i < 40; i++) CX6.applyCodexUpdates(c, [{ topic: "mara-wells", label: "Mara Wells", kind: "person", fact: `she did a thing, number ${i}` }], { ...ctx6, day: i });
+      const m = c.codex.topics["mara-wells"];
+      const filed = m.facts.length + (m.archive || []).length;
+      const liveBefore = m.facts.length;
+      const ids = CX6.topicsNeedingSummary(c);
+      CX6.applySummaries(c, ids, { summaries: ids.map((id, i) => ({ n: i + 1, summary: "what is known of her, in a paragraph." })) }, { day: 99 });
+      return filed === 40 && ids.includes("mara-wells") && !!m.summary
+        && m.facts.length < liveBefore && m.facts.length + m.archive.length === 40;
+    })());
+
+  check("§356: ⛑ …AND A PRESSURED PASS RETIRES SOMETHING. The case my first ramp got wrong, gated directly: at a size past the pressure point, a subject that only just clears the lowered bar still comes down beneath its reading",
+    (() => {
+      const c = fill(born(), 80);                                     // past the pressure point
+      const p = CX6.summaryPressure(c);
+      if (!p.steps || p.keep >= p.at) return false;                   // the keep MUST sit below the bar
+      for (let i = 0; i < p.at; i++) CX6.applyCodexUpdates(c, [{ topic: "the-lamp-lighter", label: "The Lamp-Lighter", kind: "person", fact: `seen again, ${i}` }], { ...ctx6, day: 90 + i });
+      const lamp = c.codex.topics["the-lamp-lighter"];
+      const liveBefore = lamp.facts.length;
+      const ids = CX6.topicsNeedingSummary(c);
+      CX6.applySummaries(c, ids, { summaries: ids.map((id, i) => ({ n: i + 1, summary: "the reading" })) }, { day: 99 });
+      return ids.includes("the-lamp-lighter") && lamp.facts.length < liveBefore
+        && lamp.facts.length === p.keep && (lamp.archive || []).length === liveBefore - p.keep;
+    })());
+
+  check("§356: ⛔ …AND THE READING IS WHAT THE GM IS HANDED, not the wall of facts under it (SPEC_codex Q3). That is what makes the condensing pay twice: the player gets a paragraph and the prompt stops carrying twenty-four lines of evidence for one subject. Facts newer than the reading still go with it, because those are the ones it does not cover",
+    (() => {
+      const c = born();
+      for (let i = 0; i < 24; i++) CX6.applyCodexUpdates(c, [{ topic: "mara-wells", label: "Mara Wells", kind: "person", fact: `she did a thing, number ${i}` }], { ...ctx6, day: i });
+      const ids = CX6.topicsNeedingSummary(c);
+      CX6.applySummaries(c, ids, { summaries: ids.map((id, i) => ({ n: i + 1, summary: "SHE KEEPS THE DITCHES." })) }, { day: 99 });
+      CX6.applyCodexUpdates(c, [{ topic: "mara-wells", label: "Mara Wells", kind: "person", fact: "and she has left the valley" }], { ...ctx6, day: 100 });
+      const row = String(CX6.codexForGM(c, { playerInput: "Mara Wells" }) || "").split("\n").find(r => /mara-wells/.test(r)) || "";
+      return /SHE KEEPS THE DITCHES/.test(row) && /left the valley/.test(row)
+        && !/number 3\b/.test(row) && row.length < 600;
     })());
 }
 

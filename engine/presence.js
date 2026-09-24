@@ -25,19 +25,36 @@ import { walkingDays } from "./worldmap.js";
 
 const num = (v, d = 0) => (Number.isFinite(Number(v)) ? Number(v) : d);
 
-/** ⚑ ERIK'S CADENCE, AS RATES PER DAY. `mythic` is deliberately absent: Aevi — *"a mythic appearing IS the
- *  event"*, so it is triggered by an occasion and never by elapsed time. */
-export const TIER_RATE = { riffraff: 1, notable: 1, leader: 0.5, heroic: 1 / 7, epic: 1 / 14, legendary: 1 / 30 };
+/** ⚑ THE LOCAL CROWD, AS A PER-PERSON DAILY RATE. These are the rungs whose presence IS local texture: their
+ *  reach is their own doorstep, so how many turn up SHOULD fall out of how many live nearby — that is Aevi's
+ *  "a remote post offers one or none, and that difference is information". `mythic` is deliberately absent:
+ *  *"a mythic appearing IS the event"*, so it is triggered by an occasion and never by elapsed time. */
+export const TIER_RATE = { riffraff: 1, notable: 1, leader: 0.5 };
+
+/** ⛔ CCODE-485 — ERIK'S CADENCE FOR THE GREAT RUNGS, IN THE UNITS HE RULED IT IN: DAYS BETWEEN OFFERS.
+ *  "a heroic probably weekly, epics every couple weeks, legends more rarely."
+ *  ⚠️ THIS USED TO LIVE IN `TIER_RATE` AS 1/7, 1/14, 1/30 — A PER-PERSON RATE — AND THAT IS THE WHOLE OF THE
+ *  §107 RED. A per-person rate times the rung's POPULATION is the cadence the player feels, so when Aevi's
+ *  seven-rung pass moved 47 untiered people onto real rungs, `heroic` went from a handful to 59 and a ruled
+ *  WEEKLY became every second day. Nobody changed a number; a content pass changed a ruling. ⛑ The gate said
+ *  so honestly and stayed red for it, and the note above it called for a retune — but a retune would have been
+ *  me choosing balance, and it would have broken again the next time the cast grew.
+ *  ⛑ SO THE FIX IS THE UNITS, NOT THE VALUES: the cadence is authored per RUNG, and the per-person chance is
+ *  DERIVED from how many of that rung the world holds (see `presenceScale`). Add a hundred heroes and each one
+ *  becomes rarer; the rung still arrives weekly. That is what a ruled cadence has to mean. */
+export const TIER_CADENCE = { heroic: 7, epic: 14, legendary: 30 };
 
 /** ⚑ HOW FAR A PERSON'S LIFE REACHES, in multiples of their own doorstep. ⛔ Erik's "a heroic probably
  *  weekly" is a rate for the PLAYER, not a property of the village — and the way a heroic becomes weekly is
  *  that THEY TRAVEL. A village storekeeper is in their village; a heroic has a circuit; a legend is wherever
  *  the story is. ⚠️ Measured before this: Millbrook saw a heroic once in four hundred days, because none is
  *  homed near it and home was all the model looked at. */
-// ⛑ 11 / 17 / 24 IS MEASURED, NOT PICKED. Swept against Erik's own cadence on the real world; at the
-// Crossing it gives heroic 1/8d, epic 1/15d, legendary 1/42d and a notable most days, against his
-// "heroic probably weekly, epics every couple weeks, legends more rarely". ⚠️ The FIRST values I tried
-// (8/20/60) made a legendary MORE common than an epic, which is the one ordering that must never happen.
+// ⛑ 11 / 17 / 24 IS MEASURED, NOT PICKED — swept on the real world against the cadence Erik ruled.
+// ⚠️ AND IT WAS DOING TWO JOBS, WHICH IS WHY A CONTENT PASS COULD MOVE A RULING (CCODE-485). Reach means how
+// far a person's life carries them; it was ALSO the knob that had been turned until the cadence came out right,
+// so the cadence had no dial of its own and no way to hold when the cast changed. `TIER_CADENCE` is that dial
+// now, and these numbers are only about reach again. ⚑ The FIRST values I tried (8/20/60) made a legendary MORE
+// common than an epic, which is the one ordering that must never happen.
 /** ⚑ THE PLAYER'S DIAL — SPEC_npc_presence §6, "How crowded the world is", beside World pacing. A pure
  *  resolver with a hardcoded fallback, exactly as `resolvePacing` is. ⛔ It scales HOW OFTEN and never WHO:
  *  the multiplier lands on each person's daily chance, so a thronged moor is still a moor. Default `peopled`
@@ -49,6 +66,47 @@ export function resolvePresence(key) {
 }
 
 export const TIER_REACH = { riffraff: 1, notable: 1, leader: 3, heroic: 11, epic: 17, legendary: 24 };
+
+/** ⛔ CCODE-485 — THE PER-PERSON CHANCE THAT MAKES A RULED CADENCE COME OUT, derived from the cast the world
+ *  actually holds. For each great rung: sum every member's `nearness` at a REFERENCE PLACE, then give each
+ *  person `1 / (cadenceDays × thatSum)` a day. The rung's daily total at the reference place is exactly
+ *  `1 / cadenceDays`, which is Erik's sentence, and it stays there however many people the rung gains.
+ *  ⛑ THE REFERENCE IS `content.startingLocation` — a value the content declares (Millbrook), not an id I chose,
+ *  and where play begins is the honest place to calibrate "how often does the player meet one".
+ *  ⚠️ AND IT DOES NOT FLATTEN THE MAP, which was the trap: normalising against each place's OWN sum would
+ *  have made every place equally busy and undone Aevi's "'you have not met a heroic this week' is not a reason
+ *  for one to appear in an empty fen". Somewhere better connected than the reference runs busier and somewhere
+ *  emptier runs quieter, in proportion. Measured, the great rungs vary little by place (their reach is 11 to 24
+ *  days, so distance is mostly absorbed) while the LOCAL rungs vary twelvefold — which is why those keep a
+ *  per-person rate and are not normalised at all. §107 gates both halves.
+ *  ⛑ MEMOISED PER CONTENT OBJECT: content is loaded once, and this is a walk of the whole cast.
+ *  ⛑ AND IT HANDS BACK ITS OWN WORKING — `{ rate, sum }` — rather than only the answer. `sum` is the rung's
+ *  reach-weighted size at the reference place, which is the number the rate was divided by, so anything asking
+ *  whether the cadence is really the authored one can multiply the two instead of re-deriving the falloff.
+ *  ⚠️ THE WIRING AUDIT ASKED FOR THIS: my first version exported the falloff function so a gate could redo
+ *  the sum, and that is an export reachable only from a test — it passes CI and never fires in play, and a gate
+ *  that re-implements the rule is gating its own copy of it. */
+const _scaleCache = new WeakMap();
+export function presenceScale(content = {}) {
+  if (_scaleCache.has(content)) return _scaleCache.get(content);
+  const locs = content.locations || {};
+  const ref = locs[content.startingLocation] || null;
+  const out = { rate: {}, sum: {} };
+  for (const tier of Object.keys(TIER_CADENCE)) {
+    let sum = 0;
+    for (const n of Object.values(content.npcs || {})) {
+      if (String(n?.tier || "notable") !== tier) continue;
+      const theirs = locs[n.homeLocation] || null;
+      const days = (ref && theirs) ? walkingDays(ref, theirs) : null;
+      sum += nearness(days == null ? null : days / (TIER_REACH[tier] || 1));
+    }
+    out.sum[tier] = sum;
+    // ⚠️ A RUNG WITH NOBODY IN IT: no division, and no offers — never a rate of Infinity.
+    out.rate[tier] = sum > 0 ? 1 / (TIER_CADENCE[tier] * sum) : 0;
+  }
+  if (content && typeof content === "object") _scaleCache.set(content, out);
+  return out;
+}
 
 /** ⚠️ HOW MUCH BEING FAR AWAY COSTS. A day or two is nothing — people travel. Eighty days is another world,
  *  and the falloff has to say so or the roster becomes a lottery over the whole map.
@@ -119,6 +177,7 @@ export function presentToday(character, content = {}, { day = 0, hereId = null, 
   // the settlement and the world-day, everyone standing there meets the same people; what differs is only what is theirs (who they
   // have met, who travels with them, how crowded they like the world — a thronged setting sees MORE of the same people, never others).
   const where = placeKey || here?.id || hereId || "x";
+  const scale = presenceScale(content);        // ⛔ CCODE-485: the great rungs' per-person chance, derived once
 
   const pool = [];
   for (const [id, n] of Object.entries(content.npcs || {})) {
@@ -137,11 +196,14 @@ export function presentToday(character, content = {}, { day = 0, hereId = null, 
     // `heroic` rose to 55 real people and started arriving every third day against a ruled weekly.
     //
     // ⛑ THE DEFAULT STAYS, because one untiered record is still one, and a person with no rung is still local
-    // texture. But it is no longer load-bearing, and `TIER_RATE` below was tuned when it was — §107 reports the
-    // cadence honestly and it is out of Erik's band. That is a tuning ruling, not a code fix.
+    // texture. ✅ AND THE CADENCE IT MOVED IS FIXED AT THE ROOT (CCODE-485): a ruled cadence is now authored in
+    // days per RUNG and divided by that rung's population, so a content pass can grow the cast all it likes
+    // without moving a number Erik ruled. It was never a tuning ruling; it was the dial being in the wrong units.
     const tier = String(n.tier || "notable");
-    const rate = TIER_RATE[tier];
-    if (!rate) continue;                       // mythic and anything unknown: an event's business, not a day's
+    // ⛑ CCODE-485: a local rung carries its own per-person rate; a great rung's is DERIVED from the cadence
+    // Erik ruled and the size of that rung in this world. Two dials, each in its own units, one read here.
+    const rate = (tier in TIER_CADENCE) ? (scale.rate[tier] || 0) : TIER_RATE[tier];
+    if (!rate) continue;                       // mythic, an empty rung, anything unknown: not a day's business
     const theirs = locs[n.homeLocation] || null;
     const days = (here && theirs) ? walkingDays(here, theirs) : null;
     // ⛑ THE DISTANCE THAT MATTERS IS DISTANCE DIVIDED BY REACH. A heroic twenty days out is "five days out"

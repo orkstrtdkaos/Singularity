@@ -366,7 +366,12 @@ export function applyNpcUpdates(character, updates = [], ctx = {}) {
         duplicateGiven: first.duplicateGiven || undefined,
         // ⛑ `fullName` is given-middle-family when the fiction gave one. What the player HEARS stays `name`;
         // this is the record's own answer to "which Maren", and it is why the reuse guard can be strict.
-        fullName: u.fullName ? prettifyNpcName(String(u.fullName).slice(0, 80)) : undefined,
+        // ✅ CCODE-487 — AND THE ENGINE CAN FILL IT NOW (SNG-639). This took the fiction's `fullName` or nothing,
+        // because there were no `family` or `middle` pools to mint one from; a person the ENGINE named had a
+        // spoken name and no whole name behind it. The fiction's wins where it gave one — an author's name for
+        // somebody beats a drawn one — and otherwise the namer's whole name is kept.
+        fullName: u.fullName ? prettifyNpcName(String(u.fullName).slice(0, 80))
+          : (first.fullName && first.fullName !== first.name ? prettifyNpcName(String(first.fullName).slice(0, 80)) : undefined),
         description: smartClamp(String(u.description || ""), 600), // SNG-152: model prose — word boundary, generous
         firstMet: { locationId: ctx.locationId || null, day: ctx.day ?? null },
         relationship: 0,

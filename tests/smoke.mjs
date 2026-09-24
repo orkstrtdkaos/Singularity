@@ -11772,8 +11772,13 @@ await (async () => {
       // so the day Aevi marked all 146 bynames every pool read as EMPTY and NOBODY could be named — 36 of 36
       // figures provisional. Caught by the §1 gates, which is the entire reason they exist.
       check("432: a byname pool authored as {text, tone} still names people",
+        // ⚠️ CCODE-487: THIS TESTED THE NAME'S SPELLING (`/^\w+ the \w/`) AND WENT RED THE DAY NAMES GREW A FAMILY
+        // PART — "Ossa Umberly the Unlit" is not "Ossa the Unlit". The claim is about the BYNAME READER accepting
+        // both pool shapes, so it asks whether a byname was drawn from the pool and reached the name, and lets the
+        // name be as many parts as the pools allow.
         (() => { const m = N431.mintedName({ tradition: "ashwarden", originKind: "casualty_survivor", pools: P432, rng: () => 0.1 });
-          return !!m && /^\w+ the \w/.test(m.name); })(),
+          const pool = (P432.byname?.ashwarden || []).map(b => (typeof b === "string" ? b : b?.text));
+          return !!m && !!m.byname && pool.includes(m.byname) && m.name.endsWith(m.byname) && m.name.length > m.byname.length; })(),
         "the pools changed shape and the reader must accept both");
       // Aevi: survivor → dark, successor → formal, vacancy → plain.
       const drew = (trad, ok) => { const t = []; for (let i = 0; i < 6; i++) { const m = N431.mintedName({ tradition: trad, originKind: ok, pools: P432, rng: () => (i * 0.17) % 1, taken: t.map(x => x.name) }); if (m) t.push(m); } return t; };

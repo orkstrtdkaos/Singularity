@@ -25458,14 +25458,19 @@ console.log("\n── §350 · a title is not a given name ──");
 // world only behind a distinct family name."
 // ⛔ THE HOLE, MEASURED FIRST: `mintedName` checked `taken` as WHOLE STRINGS, so with "Sera Vail" in the registry the
 // wright pool cheerfully minted "Sera the Scaffold" — two Seras, two different strings, no complaint.
-// ⬜ AND THE ARITHMETIC THAT SHAPED N2, because it says what the spec asked for cannot be built yet:
-//   · `rules.mintedNames` has NO `family` pool and NO `middle` pool. The "surnames" are the EIGHT entries of
-//     `given._default`, reused — so "given, middle and family, always three parts" cannot be minted at all.
-//   · 5–8 given names a tradition · 67 distinct given names in the whole world · 131 people already in the saves.
-//   · 16 of 27 traditions have a byname pool and NO given pool, falling through to those same eight.
-// ⛑ So completing EVERY one-word name — which is what N2 literally asks — would hand eight surnames to a world and
-// produce "Maren Vail", "Aldric Vail", "Renn Vail": collisions made prettier rather than rarer. The completion is
-// spent where distinctness is actually at stake, and the gap is reported to Aevi rather than papered over.
+// ✅ AND THE ARITHMETIC THAT SHAPED N2 IS CLOSED (SNG-639, CCODE-487). What stood here reported the gap that made
+// the spec unbuildable, and Aevi filled it: 1,011 names, `family` and `middle` for all 27 peoples and `given` for
+// the 16 that had none. The numbers it was written against, and what they are now:
+//   · NO `family` pool, NO `middle` pool → 436 family names and 326 middles, keyed by people.
+//   · the "surnames" were the EIGHT entries of `given._default`, reused for the whole world → a surname is drawn
+//     from the bearer's OWN people, and the borrowed-given-name source is gone rather than kept as a fallback.
+//   · 5–8 given names a tradition, 67 in the world → 317, and 16 of 27 peoples no longer fall through to a default.
+//   · "given, middle and family, always three parts" could not be minted at all → 936 minted across 26 peoples,
+//     every one with a family name and a middle, the longest exactly at the 40-character cap.
+// ⚠️ AND MERGING THE POOLS ALONE FIXED NONE OF IT: the two-part form was tried first and always fits, so the family
+// branch was unreachable and every minted person still came back with `surname: null`. Content arriving is not a
+// feature arriving — the branch that reads it has to be reachable too.
+// ⛑ N2's own judgement stands: a one-word name is completed where distinctness is at stake, not everywhere.
 console.log("\n── §351 · a given name repeats only behind a family name ──");
 {
   const NX = await import("../engine/names.js");
@@ -25482,17 +25487,52 @@ console.log("\n── §351 · a given name repeats only behind a family name �
       return got.length >= 8 && !got.some(n => /^sera\b/i.test(n));
     })());
 
-  check("§351: ⛑ …AND WHEN THE POOL IS SPENT IT REPEATS RATHER THAN REFUSING, because eight given names is eight: a hard refusal would name nobody after the eighth person in a tradition. ⛔ THE ORDER IS THE RULE — all eight fresh names come out before any repeat, and a repeat must carry a second part never paired with that given name, so fourteen people are fourteen distinct whole names",
+  check("§351: ⛑ …AND WHEN THE POOL IS SPENT IT REPEATS RATHER THAN REFUSING, because a pool is however deep it is: a hard refusal would name nobody once it ran out, and a world that stops naming people is worse than two people sharing a given name behind different families. ✅ THE DEPTH IS NO LONGER EIGHT (SNG-639, CCODE-487) — this said \"eight given names is eight\" and Aevi authored 317 across 27 peoples, so the assertion asks the POOL how deep it is rather than carrying a number that was true in September",
     (() => {
+      const deep = (pools351.given.wright || []).length;
+      if (!(deep > 1)) return false;
       const reg = [], givens = [];
-      for (let i = 0; i < 14; i++) {
+      const want = deep + 6;                                  // past the end, so the repeat branch is exercised
+      for (let i = 0; i < want; i++) {
         const r = NX.mintedName({ tradition: "wright", pools: pools351, taken: reg, rng: () => ((i * 7) % 12 + 0.5) / 12 });
         if (!r) break;
         reg.push(r.name); givens.push(String(r.given).toLowerCase());
-        if (i < 8 && r.givenReused) return false;          // no repeat may come before the pool is spent
-        if (i >= 8 && !r.givenReused) return false;        // and after it, every one is flagged as one
+        if (i < deep && r.givenReused) return false;          // no repeat may come before the pool is spent
+        if (i >= deep && !r.givenReused) return false;        // and after it, every one is flagged as one
       }
-      return reg.length === 14 && new Set(reg).size === 14 && new Set(givens).size === 8;
+      return reg.length === want && new Set(reg).size === want && new Set(givens).size === deep;
+    })(), `${(pools351.given.wright || []).length} given names deep for one people`);
+
+  check("§351: ✅ …AND A MINTED PERSON HAS A WHOLE NAME NOW (SNG-639). ⚠️ MERGING THE POOLS ALONE CHANGED NOTHING, which is the defect worth keeping: the two-part form was tried first and always fits, so the family branch was UNREACHABLE and all 936 names I minted across 26 peoples came back with `surname: null`. The pool was authored, registered, loaded and read by a branch nothing could reach. ⛑ The order is the rule: fullest form that fits the cap first",
+    (() => {
+      const peoples = Object.keys(pools351.given).filter(p => p !== "_default");
+      let n = 0, withFam = 0, withMid = 0, tooLong = 0;
+      for (const people of peoples) {
+        let i = 5; const rng = () => ((i = (i * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff);
+        const taken = [];
+        for (let k = 0; k < 6; k++) {
+          const r = NX.mintedName({ tradition: people, originKind: "faction_leaderless", pools: pools351, rng, taken });
+          if (!r) break;
+          taken.push(r.name); n++;
+          if (r.surname) withFam++;
+          if (r.middle) withMid++;
+          if (r.name.length > NX.MINTED_NAME_MAX) tooLong++;
+          // the whole name is given · middle · family, and never repeats a part
+          if (r.middle && (r.middle === r.given || r.middle === r.surname)) return false;
+          if (r.surname && r.fullName !== [r.given, r.middle, r.surname].filter(Boolean).join(" ")) return false;
+        }
+      }
+      return n > 100 && withFam === n && withMid === n && tooLong === 0;
+    })());
+
+  check("§351: ⛑ …AND THE TWO-PART FALLBACK IS STILL ALIVE, which it must be: a people Aevi has not written family names for still gets named, and so does one whose byname is too long for three parts to fit the cap. The fallback fires for nobody in today's corpus — that is the pools being complete, not the branch being dead",
+    (() => {
+      const bare = { ...pools351, family: { _default: [] } };
+      const r = NX.mintedName({ tradition: "wright", pools: bare, taken: [], rng: () => 0.4 });
+      const long = { ...pools351, byname: { _default: [{ text: "the One Who Was Never Once Spoken Of At All", tone: "plain" }] } };
+      const r2 = NX.mintedName({ tradition: "wright", pools: long, taken: [], rng: () => 0.4 });
+      return !!r && !r.surname && r.name.split(" ").length >= 2
+        && (!r2 || r2.name.length <= NX.MINTED_NAME_MAX);
     })());
 
   // ── N2 · the GM's own one-word name ───────────────────────────────────────────────────────────────
@@ -25509,17 +25549,21 @@ console.log("\n── §351 · a given name repeats only behind a family name �
     && !!titled.completedWith && kept.name === "Maren Vasse" && !kept.completedWith,
     `${clash.name} · ${titled.name} · ${kept.name}`);
 
-  check("§351: ⛑ …NINE MARENS AND THEN AN HONEST STOP. Each takes a family name never paired with Maren; when the eight are spent the tenth is returned as a known duplicate with `duplicateGiven` set, rather than a ninth surname being invented. ⬜ That flag IS the content ask: `rules.mintedNames` wants a family pool",
+  check("§351: ✅ …AND THE MARENS GO AS DEEP AS THE FAMILY POOL (SNG-639, CCODE-487). This said \"nine Marens and then an honest stop\" — eight surnames shared by the whole world — and its own ⬜ was the content ask: \"`rules.mintedNames` wants a family pool\". It has one: every Maren takes a family name of HER OWN PEOPLE never paired with Maren before, and the honest stop is still there, just as far out as the pool is deep",
     (() => {
+      const deep = (pools351.family?.wright || pools351.family?._default || []).length;
+      if (!(deep >= 8)) return false;
       const taken = ["Maren Oast"]; let dupAt = -1;
-      for (let i = 0; i < 10; i++) {
-        const r = NX.personName({ proposed: "Maren", pools: pools351, tradition: "wright", taken, rng: () => (i + 0.5) / 10 });
+      for (let i = 0; i < deep + 2; i++) {
+        const r = NX.personName({ proposed: "Maren", pools: pools351, tradition: "wright", taken, rng: () => (i + 0.5) / (deep + 2) });
         taken.push(r.name);
         if (r.duplicateGiven && dupAt < 0) dupAt = i;
       }
       const fams = taken.slice(1).map(n => n.split(" ")[1]).filter(Boolean);
-      return dupAt >= 7 && new Set(fams).size === fams.length;
-    })());
+      const own = new Set(pools351.family.wright || []);
+      return dupAt >= deep - 1 && new Set(fams).size === fams.length
+        && fams.every(f => own.has(f));                       // ⛑ her own people's surname, not the world's default
+    })(), `${(pools351.family?.wright || []).length} family names deep for one people`);
 
   // ── the reader, through the REAL meet door ─────────────────────────────────────────────────────────
   check("§351: ⛔ …AND IT FIRES THROUGH THE REAL `meet` DOOR, ON ERIK'S OWN SHAPE: two Marens already known — one plain, one titled — and the GM writes a bare \"Maren\" for a third, who becomes \"Maren <family>\". ⛑ AND THE REPORT IS READ: `nameCompleted` lands on the record and the log says why, because a flag nothing reads is the fourth door and this file exists to close it",

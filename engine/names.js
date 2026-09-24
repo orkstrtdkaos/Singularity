@@ -275,12 +275,40 @@ export function mintedWants(originKind, pools) {
  *  Returns null when the pools cannot supply a name — the caller keeps whatever fallback it had. A namer
  *  that invents out of nothing is the same authorship gap one layer down.
  */
+/** ⛑ CCODE-487 — A MIDDLE NAME, WHICH IS NOT ALLOWED TO ECHO EITHER OF THE OTHER TWO. "Anthel Anthel
+ *  Vantrel" is not a name, and neither is "Verity Verity". Deterministic in `seed` so the same person minted
+ *  twice from the same draw gets the same whole name. Returns "" when the people has no middle pool, and the
+ *  name is then two parts — an absent pool is not a defect, it is a people Aevi has not written middles for. */
+function middleFor(middles, given, family, seed) {
+  if (!middles.length) return "";
+  const g = String(given || "").toLowerCase(), f = String(family || "").toLowerCase();
+  const start = Math.abs(Math.floor(seed)) % middles.length;
+  for (let i = 0; i < middles.length; i++) {
+    const m = middles[(start + i) % middles.length].text;
+    const lower = String(m).toLowerCase();
+    if (lower !== g && lower !== f) return m;
+  }
+  return "";
+}
+
 export function mintedName({ tradition = null, originKind = "_default", pools = null,
                              rng = Math.random, taken = [] } = {}) {
   const givens = poolFor(pools, "given", tradition);
   const bynames = poolFor(pools, "byname", tradition);
   if (!givens.length || !bynames.length) return null;
-  const surnames = poolFor(pools, "given", "_default");
+  // ⛔ CCODE-487 — THE SURNAMES ARE A `family` POOL NOW (SNG-639). They were `given._default` — eight given
+  // names doing duty as surnames for the whole world, which is why "Sera Vail" and a second Sera could not be
+  // told apart for long. Aevi authored 436 family names across all 27 peoples, so a surname is now
+  // TRADITION-CORRECT as well as plentiful: a Marcher is Brandt or Voss, not whatever the default held.
+  // ⚠️ AND THE OLD SOURCE IS NOT KEPT AS A FALLBACK. I wrote it that way first — fall back to `given._default`
+  // when a people has no family pool — and that is the hack this change exists to remove: borrowing given names
+  // as surnames is what put "Sera Vail" and eight shared surnames on the whole world. A people with no family
+  // pool now gets an honest two-part name instead of a borrowed one.
+  const surnames = poolFor(pools, "family", tradition);
+  // ⛑ A MIDDLE NAME IS PART OF A WHOLE NAME AND NOT PART OF WHAT ANYONE SAYS. Erik: "they get a full name,
+  // first, middle and last, and/or a title." So it is drawn here and carried on `fullName`; `name` stays what
+  // the player HEARS, which is the contract `npcs.js` already documents on the record.
+  const middles = poolFor(pools, "middle", tradition);
   const used = new Set((taken || []).map(n => String(n || "").trim().toLowerCase()).filter(Boolean));
   // ⛔ SNG-638 N4 — A WHOLE-NAME CHECK DOES NOT CATCH A GIVEN-NAME COLLISION, and that is the hole. Measured:
   // with "Sera Vail" already in the registry, the wright pool cheerfully minted "Sera the Scaffold" — two
@@ -319,18 +347,16 @@ export function mintedName({ tradition = null, originKind = "_default", pools = 
   const pref = wantTone ? bynames.filter(b => b.tone === wantTone) : [];
   const rest = wantTone ? bynames.filter(b => b.tone !== wantTone) : bynames;
   const ordered = [...(pref.length ? rot(pref, bi) : []), ...(rest.length ? rot(rest, bi) : [])];
-  // ⛑ TWO PASSES, and the order IS the rule: every fresh given name is tried before any repeat.
-  for (const strict of [true, false]) {
-    for (const by of ordered) {
-      for (let g = 0; g < givens.length; g++) {
-        const first = givens[(gi + g) % givens.length].text;
-        if (strict && !freshGiven(first)) continue;
-        if (!strict && !unpaired(first, by.text)) continue;
-        const cand = `${first} ${by.text}`;
-        if (fits(cand)) return { name: cand, given: first, surname: null, byname: by.text, tone: by.tone, givenReused: !strict };
-      }
-    }
-  }
+  // ⛔ CCODE-487 — A FAMILY NAME FIRST, AND THE ORDER IS THE WHOLE OF THIS CHANGE. These two blocks used to
+  // run the other way round: the two-part form ("Coll the Makefast") was tried first and it ALWAYS fits, so the
+  // three-part block below was UNREACHABLE. ⚠️ That meant merging Aevi's 436 family names changed NOTHING for a
+  // minted person — the pool was authored, registered, loaded and read by a branch nothing could reach. Measured
+  // before this swap: every one of five peoples minted four figures and not one carried a surname.
+  // ⛑ AND IT IS WHY ORDINARY PEOPLE HAD NO SURNAME EITHER. `personName` composes the plain name a player hears
+  // as given + surname, so with the surname always null the hostel-keeper was "Ravel" and never "Ravel Holt".
+  // ⚑ Erik: "When people surface in the future, they get a full name, first, middle and last, and/or a title."
+  // The fullest form that fits the cap is the name; the two-part form is the fallback for a people with no family
+  // pool, or a byname so long that three parts will not fit — and both passes still try a fresh given name first.
   for (const strict of [true, false]) {
     for (let s = 0; s < surnames.length; s++) {
       const fam = surnames[(si + s) % surnames.length].text;
@@ -341,8 +367,25 @@ export function mintedName({ tradition = null, originKind = "_default", pools = 
           if (strict && !freshGiven(first)) continue;
           if (!strict && !unpaired(first, fam)) continue;
           const cand = `${first} ${fam} ${by.text}`;
-          if (fits(cand)) return { name: cand, given: first, surname: fam, byname: by.text, tone: by.tone, givenReused: !strict };
+          if (fits(cand)) {
+            const mid = middleFor(middles, first, fam, si + s);
+            return { name: cand, given: first, surname: fam, byname: by.text, tone: by.tone, givenReused: !strict,
+              middle: mid, fullName: [first, mid, fam].filter(Boolean).join(" ") };
+          }
         }
+      }
+    }
+  }
+  // ⛑ AND THE TWO-PART FALLBACK: no family pool for this people, or the whole thing would not fit the cap.
+  for (const strict of [true, false]) {
+    for (const by of ordered) {
+      for (let g = 0; g < givens.length; g++) {
+        const first = givens[(gi + g) % givens.length].text;
+        if (strict && !freshGiven(first)) continue;
+        if (!strict && !unpaired(first, by.text)) continue;
+        const cand = `${first} ${by.text}`;
+        if (fits(cand)) return { name: cand, given: first, surname: null, byname: by.text, tone: by.tone, givenReused: !strict,
+          middle: null, fullName: first };
       }
     }
   }
@@ -352,13 +395,16 @@ export function mintedName({ tradition = null, originKind = "_default", pools = 
 /** ⛔ SNG-638 N2 — A FAMILY NAME TO TELL TWO PEOPLE OF THE SAME NAME APART. Draws from the same surname
  *  source `mintedName` uses and refuses a pair that already exists, so a second Maren is never "Maren Vasse"
  *  when the first one is.
- *  ⬜ AND IT IS TWO PARTS, NOT THREE, BECAUSE THE CONTENT FOR A MIDDLE NAME DOES NOT EXIST. Measured before
- *  writing this: `rules.mintedNames` has NO `middle` pool and NO `family` pool — the "surnames" are the eight
- *  entries of `given._default`, reused. So "given, middle and family, always three parts" cannot be minted
- *  today; it is asked of the GM (N1) and authored on records by hand, and this completes what it can.
+ *  ✅ AND THE CONTENT ARRIVED (SNG-639, CCODE-487). The note that stood here said this could only be two parts
+ *  because `rules.mintedNames` had no `family` pool and no `middle` pool, so the "surnames" were the eight
+ *  entries of `given._default`, reused for the whole world. There are now 436 family names across 27 peoples,
+ *  so a surname is drawn from the RIGHT PEOPLE's pool and a completed name is a name that people bears.
+ *  ⚠️ AND NOT FROM `given._default` ANY MORE, EVEN AS A FALLBACK: borrowing given names as surnames is the
+ *  hack the family pool replaces. With no family pool there is no family name, and the caller is told the name
+ *  is a known duplicate — which is honest, where a borrowed surname only looked like an answer.
  *  Returns "" when nothing unpaired is left. PURE. */
 export function familyNameFor({ pools = null, tradition = null, given = "", taken = [], rng = Math.random } = {}) {
-  const surnames = poolFor(pools, "given", "_default");
+  const surnames = poolFor(pools, "family", tradition);
   if (!surnames.length) return "";
   const g = String(given || "").toLowerCase();
   const pairs = new Set((taken || []).map(n => {
@@ -401,7 +447,14 @@ export function personName({ proposed = "", role = "", pools = null, tradition =
     const clash = g && (taken || []).some(x => givenNamePastTitle(x) === g);
     if (!clash) return { name: raw.slice(0, max), nameUnknown: false, minted: false };
     const fam = familyNameFor({ pools, tradition, given: g, taken, rng });
-    if (fam) return { name: `${raw} ${fam}`.slice(0, max), given: raw, surname: fam, nameUnknown: false, minted: false, completedWith: fam };
+    if (fam) {
+      // ⛑ CCODE-487: the completed name gets a middle as well, on `fullName` only — what the fiction said
+      // aloud stays what the player hears, and the middle is the part of a whole name nobody says.
+      const mids = poolFor(pools, "middle", tradition);
+      const mid = middleFor(mids, raw, fam, String(raw).length + String(fam).length);
+      return { name: `${raw} ${fam}`.slice(0, max), given: raw, surname: fam, middle: mid || undefined,
+        fullName: [raw, mid, fam].filter(Boolean).join(" ") || undefined, nameUnknown: false, minted: false, completedWith: fam };
+    }
     // ⬜ THE POOL RAN OUT, AND SAYING SO BEATS INVENTING. Eight surnames is eight; the caller is told the
     // name it got is a known duplicate so a surface can ask, rather than a silent second Maren.
     return { name: raw.slice(0, max), nameUnknown: false, minted: false, duplicateGiven: g };
@@ -421,8 +474,11 @@ export function personName({ proposed = "", role = "", pools = null, tradition =
     // form would collide with somebody already in this registry — uniqueness is what `taken` bought.
     const plain = [m.given, m.surname].filter(Boolean).join(" ").trim();
     const clash = plain && (taken || []).some(x => String(x).toLowerCase() === plain.toLowerCase());
-    return { name: descriptorLabel(raw, role, max), trueName: (plain && !clash ? plain : m.name), byname: m.byname, nameUnknown: true, minted: true };
+    // ⛑ CCODE-487: and the WHOLE name travels with them even while the player knows none of it — that is
+    // Erik's "whether or not the PC learns their name, they'll have one", now with a middle in it.
+    return { name: descriptorLabel(raw, role, max), trueName: (plain && !clash ? plain : m.name), byname: m.byname,
+      middle: m.middle || undefined, fullName: m.fullName || undefined, nameUnknown: true, minted: true };
   }
-  if (m) return { name: m.name, byname: m.byname, nameUnknown: false, minted: true };
+  if (m) return { name: m.name, byname: m.byname, middle: m.middle || undefined, fullName: m.fullName || undefined, nameUnknown: false, minted: true };
   return { name: descriptorLabel(raw, role, max), nameUnknown: true, minted: false };
 }

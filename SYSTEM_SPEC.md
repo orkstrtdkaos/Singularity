@@ -1507,7 +1507,11 @@ Three paths minted people and none called a namer: GM narration wrote `npcRegist
 name at all. **Each fallback was defensible alone; the gap was that nothing came back to author.**
 
 **Pools: `content/packs/core/rules/minted_names.json`** — given names by tradition (named in grain),
-bynames by tradition drawn from each tradition's own authored craft-word, tagged `dark | formal | plain`.
+bynames by tradition drawn from each tradition's own authored craft-word, tagged `dark | formal | plain`,
+and — SNG-639 / CCODE-487 — **`family` and `middle` pools for all 27 peoples** (436 and 326 names). A minted
+person is *given · family · byname* in what people say and *given · middle · family* on `fullName`. ⛔ A surname
+comes from the bearer's OWN people and never from `given._default`: borrowing given names as surnames gave the
+whole world eight shared ones, and that source is gone rather than kept as a fallback.
 
 ⛔ **BYNAME SHAPE: NAME + THE + SHORT NOUN PHRASE. No verb, no clause. The test is whether it can be
 shouted across a battlefield.** *Sera Voight the Ashvow* — not *"who walked back"* (a stage direction) and

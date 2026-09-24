@@ -132,6 +132,7 @@
   "valley/quests.json",
   "valley/manifest.json"
  ],
+ "migration": "CCODE-488: engine/reconcile.js CHARACTER_STEPS v81 `two-high-luminaries-were-one-person` — walks the save and renames the retired id wherever it sits (exact token only, strings and object keys), guarded on the old id being gone from content and the new one present. Measured across the 16 saves: 3 references, all in `quests[].giver` and `quests[].outcomes[].effects[].npc`, not the registry. 3 → 0, idempotent.",
  "expectedGates": {
   "_existing": "roster --check: '20 ids in two files' should drop by one, and the_high_luminary's count of files stays 2 (npcs + legends)"
  },

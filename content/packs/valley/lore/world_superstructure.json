@@ -15,7 +15,7 @@
       "stages": ["gray mornings dismissed", "livestock and crops failing", "a death that can't be denied", "panic and blame between communities", "the source found — or the valley emptying"],
       "ifIgnored": "Millbrook empties first; refugees pressure the Stilts and the Roost; the cities close their gates; the Disputed Zone grows. The player feels this as worsening rumor, displaced NPCs appearing in other locations, prices rising.",
       "ifEngaged": "Can be traced to the archive, the deep Precursor layer, and a choice about whether to shut the second river down (safe, but loses what it was keeping alive) or stabilize it (dangerous, but opening).",
-      "hingeNpcs": ["water_keeper", "archive_guardian", "high_luminary"],
+      "hingeNpcs": ["water_keeper", "archive_guardian", "the_high_luminary"],
       "connectsTo": ["arc_the_archive", "arc_precursor_waking"]
     },
     {
@@ -37,7 +37,7 @@
       "stages": ["generous offers", "the free places choosing sides", "an incident between the cities", "open rivalry", "a valley divided in two — or a third way found"],
       "ifIgnored": "The unaligned world is absorbed piecemeal; the Valley polarizes toward a Heights-vs-Plateau confrontation the small communities get ground between.",
       "ifEngaged": "A player can broker the free places into a bloc, tip the balance, expose what each city is really after, or find the third way the framework points at — expansion over the zero-sum contraction of two powers foreclosing on each other.",
-      "hingeNpcs": ["high_luminary", "elder_resonance", "reed_mother_ossa"],
+      "hingeNpcs": ["the_high_luminary", "elder_resonance", "reed_mother_ossa"],
       "connectsTo": ["arc_pass_takeover", "arc_the_water"]
     },
     {
@@ -70,7 +70,7 @@
       "stages": ["quiet pilgrimage and quiet theft", "a faction moves openly", "the Guardian besieged", "the deep stacks respond", "the archive opened, sealed, or lost"],
       "ifIgnored": "The archive is taken or burned by whoever moves first, and the valley loses its one chance to understand what's happening to it before it happens.",
       "ifEngaged": "The player becomes the swing vote on the framework's own question: what knowledge gets preserved, studied, or sealed. Quill's expulsion connects here; so does Aevi's own origin.",
-      "hingeNpcs": ["archive_guardian", "high_luminary"],
+      "hingeNpcs": ["archive_guardian", "the_high_luminary"],
       "connectsTo": ["arc_precursor_waking", "arc_the_water"]
     }
   ],

@@ -1,0 +1,67 @@
+{
+ "schemaVersion": 1,
+ "romanceEligible": false,
+ "people": "human",
+ "closed": [],
+ "tier": "heroic",
+ "id": "warden_mother_redgate",
+ "name": "Warden-Mother Redgate",
+ "fullName": "Halda Brisa Redgate",
+ "title": "Warden-Mother of Cairnhold",
+ "level": 27,
+ "role": "Warden-Mother of Cairnhold — keeps the Ashwardens' council, the tending and the march, and has buried more of her enemies than her friends",
+ "gender": "woman",
+ "pronouns": "she/her",
+ "sex": "female",
+ "homeLocation": "cairnhold",
+ "spectrum": {
+  "death_life": -0.5,
+  "violence_peace": 0.6,
+  "chaos_order": 0.4
+ },
+ "assistTags": [
+  "tend",
+  "lead",
+  "guard",
+  "comfort"
+ ],
+ "appearance": "A tall grey-haired woman in an ash-coloured robe with a warden's staff, calm in the way of someone who sits with the dying every day.",
+ "personality": {
+  "warmth": 0.8,
+  "trust": 0.6,
+  "candor": 0.8,
+  "patience": 0.9
+ },
+ "voiceHints": "Gentle and unhurried. Calls death 'the end of the road' and means nothing sad by it. Grows very still, and very hard, when anyone speaks of the Harvest Hand.",
+ "wants": "For everyone who dies near Cairnhold to be tended, and for no one to be reaped who was not ready.",
+ "fears": "That the Harvest Hand reaches the Quiet Ground, and that the woman there is more than a tender.",
+ "knowledge": [
+  "Every road in the Palelands and who is buried along it",
+  "How close the Long Grey is to the Hollowing, to the mile"
+ ],
+ "reactsToReputation": {
+  "any": "offers you water and asks who you have lost",
+  "reliable": "asks you to walk the Hollowing with her wardens",
+  "reckless": "asks you to leave your weapons outside the Quiet Ground"
+ },
+ "questSeeds": [
+  "The Harvest Hand has reaped a village the Wardens were still tending",
+  "Someone has been leaving the dead unburied on the March road, on purpose"
+ ],
+ "gear": [
+  "a warden's staff of grey ash",
+  "a tender's satchel"
+ ],
+ "purse": {
+  "crystal": 110
+ },
+ "domains": {
+  "primary": "ashwarden",
+  "secondary": "stillhold",
+  "tertiary": "threnodist"
+ },
+ "_domainsWhy": "tending the dying, the quiet she keeps, and grief given a building",
+ "aliases": [
+  "Halda Brisa Redgate"
+ ]
+}

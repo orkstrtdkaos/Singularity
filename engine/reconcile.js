@@ -2643,6 +2643,55 @@ export const CHARACTER_STEPS = [
       return { warnings: [`origin ${was} was renamed to ${now}`] };
     }
   },
+  {
+    version: 81, id: "two-high-luminaries-were-one-person", playerFacing: false,
+    // ⛔ CCODE-488 (SNG-646, ERIK: "yes on Sera") — TWO RECORDS OF ONE OFFICE. `high_luminary` and
+    // `the_high_luminary` were both the Master of the Radiant Plateau; Aevi merged them into the second and
+    // retired the first. A save that named the retired one would look up nobody.
+    // ⚠️ AND IT IS NOT IN THE REGISTRY, WHICH IS WHERE THE CHANGE SET EXPECTED IT. Measured across all sixteen
+    // saves: three entries, all in QUESTS — `quests[].giver` and `quests[].outcomes[].effects[].npc`. A quest
+    // whose giver resolves to nobody is a quest that cannot be handed in.
+    // ⛑ SO IT WALKS THE SAVE INSTEAD OF NAMING THE PLACES. Measured the other way round — tracking an id that
+    // IS on the saves — a person lives in twenty-five distinct shapes: `npcRegistry`, `codex.topics`,
+    // `worldState.wantProgress`, `offscreenBacklog`, `establishedFacts`, `bondLog`, `gallery`, `generated.npc`,
+    // `company`, `personalArc.stages[].anchors`, `newsLog[].figureId` and on. Any hand-written list is a list of
+    // the ones I thought of, which is how a migration leaves a save half-renamed.
+    // ⚠️ EXACT MATCHES ONLY, on strings and on object KEYS: `the_high_luminary` contains `high_luminary`, so a
+    // substring rename would produce `the_the_high_luminary` everywhere the survivor is already named.
+    apply: (c, ctx) => {
+      const RENAMED = { high_luminary: "the_high_luminary" };
+      const npcs = ctx?.content?.npcs;
+      if (!npcs) return {};                                  // no content — nothing to check against
+      let moved = 0;
+      const rename = (node) => {
+        if (Array.isArray(node)) { for (let i = 0; i < node.length; i++) {
+          const v = node[i];
+          if (typeof v === "string" && RENAMED[v]) { node[i] = RENAMED[v]; moved++; }
+          else rename(v);
+        } return; }
+        if (!node || typeof node !== "object") return;
+        for (const k of Object.keys(node)) {
+          const v = node[k];
+          if (typeof v === "string" && RENAMED[v]) { node[k] = RENAMED[v]; moved++; }
+          else rename(v);
+          // ⛑ a KEY that is the id — a registry, a codex topic, a progress map are all keyed by person
+          if (RENAMED[k]) {
+            const to = RENAMED[k];
+            if (node[to] === undefined) node[to] = node[k];   // ⚠️ never clobber a record already under the new id
+            delete node[k];
+            moved++;
+          }
+        }
+      };
+      // ⚠️ ONLY WHEN THE OLD ID IS GENUINELY GONE AND THE NEW ONE IS GENUINELY THERE, so a content pass that
+      // brings the old record back makes this do nothing rather than rewrite a live reference.
+      for (const from of Object.keys(RENAMED)) if (npcs[from] || !npcs[RENAMED[from]]) return {};
+      rename(c);
+      if (!moved) return {};
+      console.log(`[reconcile] ccode-488: ${moved} reference(s) moved to the surviving High Luminary`);
+      return { warnings: [`${moved} reference(s) renamed: high_luminary → the_high_luminary (one office, one person)`] };
+    }
+  },
   // Future steps register here — e.g. innate-talent GRANT (offers[], when talent content
   // lands with SNG-017), Reach-tradition eligibility surfacing, universal-role tagging.
 ];

@@ -26299,6 +26299,124 @@ console.log("\n── §357 · every people hears of somebody ──");
     })());
 }
 
+// ══════════ §358 · CCODE-488 (SNG-646, SNG-647) — ONE OFFICE IS ONE PERSON, AND A POWER'S LEADER IS SOMEBODY ══════════
+// ⛔ ERIK: "yes on Sera." Two records — `high_luminary` and `the_high_luminary` — were both Master of the Radiant
+// Plateau, found while Aevi built the great-figures roster. Merged into the second; the first is retired.
+// ⚑ AND THE SAVE SIDE IS THE HALF A MERGE FORGETS. Three references on the sixteen saves, all in QUESTS rather
+// than the registry — a quest whose giver resolves to nobody is a quest that cannot be handed in.
+console.log("\n── §358 · one office is one person, and a power's leader is somebody ──");
+{
+  const PW8 = await import("../engine/powers.js");
+  const RC8 = await import("../engine/reconcile.js");
+  const { loadContentHeadless: lch358 } = await import("./headless_content.mjs");
+  const C358 = await lch358();
+  const npcs = C358.npcs || {};
+
+  check("§358: ⛔ THE RETIRED ID IS GONE FROM EVERYTHING THE ENGINE LOADS, and the survivor is there. A merge that leaves the loser loadable has made a third record rather than removed one",
+    !npcs.high_luminary && !!npcs.the_high_luminary,
+    `${Object.keys(npcs).length} people loaded`);
+
+  check("§358: ⛑ …AND WHAT SERA CONTRIBUTED CAME ACROSS — her four knowledge lines about the falsified purity reports, which `quests.json` hangs three quests on, plus her community and her teaching. ⚠️ Asked of the CONTENT rather than of the merged file: a field that survived the merge and is not loaded has not survived",
+    (() => {
+      const s = npcs.the_high_luminary;
+      if (!s) return false;
+      const know = Array.isArray(s.knowledge) ? s.knowledge : [];
+      return know.length >= 4 && know.some(k => /purity/i.test(JSON.stringify(k)))
+        && !!s.communityId && !!s.teaches && !!s.fullName && /Seraphine/.test(s.fullName);
+    })());
+
+  check("§358: ⛔ …AND NO QUEST IS GIVEN BY A RETIRED ID. That is the class of defect a merge creates: an id-shaped giver that resolves to nobody is a quest that cannot be handed in. ⚠️ MY FIRST VERSION DEMANDED EVERY GIVER BE A LOADED ID AND WAS WRONG ABOUT THE CONTRACT: `quests.js` stores `giver` as PROSE (`String(u.giver).slice(0, 60)`) beside `giverEntityId` for the resolved one, and `worldtick` maps either through `giverRegistryId`. So \"Edvar Crane\" as a giver is authored, not broken — and a gate that fails on it would be demanding a shape the engine never asked for",
+    (() => {
+      const quests = Object.values(C358.quests || {});
+      if (!quests.length) return false;
+      const givers = quests.map(q => q?.giver).filter(Boolean);
+      const retired = givers.filter(g => g === "high_luminary");
+      // an id-SHAPED giver (no spaces, lower snake) must load; a written name is the other authored form
+      const idish = givers.filter(g => /^[a-z0-9_]+$/.test(String(g)));
+      const dead = idish.filter(g => !npcs[g] && !(C358.companions || {})[g]);
+      return givers.length > 0 && retired.length === 0 && idish.length > 0 && dead.length === 0;
+    })(), (() => {
+      const givers = Object.values(C358.quests || {}).map(q => q?.giver).filter(Boolean);
+      const idish = givers.filter(g => /^[a-z0-9_]+$/.test(String(g)));
+      return `${givers.length} giver(s): ${idish.length} by id, all loaded; ${givers.length - idish.length} written as a name`;
+    })());
+
+  check("§358: ⛔ THE MIGRATION RENAMES IT WHEREVER IT SITS, because a person id lives in twenty-five shapes on a save — registry, codex topics, want progress, established facts, bond log, gallery, quests, company, arc anchors. ⚠️ The change set expected the REGISTRY and the three real references were in `quests[].giver` and `quests[].outcomes[].effects[].npc`; a hand-written list of places is a list of the ones somebody thought of",
+    (() => {
+      const c = {
+        reconcileVersion: 80,
+        npcRegistry: { high_luminary: { id: "high_luminary", name: "High Luminary Sera" } },
+        quests: [{ id: "q", giver: "high_luminary", outcomes: [{ effects: [{ npc: "high_luminary" }] }] }],
+        codex: { topics: { high_luminary: { id: "high_luminary", label: "Sera", facts: [], links: ["high_luminary"], aliases: [] } } },
+        company: [{ npcId: "high_luminary" }],
+        worldState: { wantProgress: { high_luminary: 3 } },
+      };
+      RC8.reconcile(c, "character", { content: C358, day: 1 });
+      const json = JSON.stringify(c);
+      return !/"high_luminary"/.test(json) && !/the_the_/.test(json)
+        && !!c.npcRegistry.the_high_luminary && c.quests[0].giver === "the_high_luminary"
+        && c.quests[0].outcomes[0].effects[0].npc === "the_high_luminary"
+        && !!c.codex.topics.the_high_luminary && c.codex.topics.the_high_luminary.id === "the_high_luminary"
+        && c.company[0].npcId === "the_high_luminary" && c.worldState.wantProgress.the_high_luminary === 3;
+    })());
+
+  check("§358: ⛑ …AND IT NEVER CLOBBERS A RECORD ALREADY UNDER THE SURVIVING ID, nor produces `the_the_`: the retired id is a SUBSTRING of the surviving one, so a blind rename would rewrite every mention of the person who stayed",
+    (() => {
+      const kept = { id: "the_high_luminary", name: "Seraphine Aurel Lumenhall", relationship: 4 };
+      const c = { reconcileVersion: 80,
+        npcRegistry: { the_high_luminary: kept, high_luminary: { id: "high_luminary", name: "Sera", relationship: 0 } },
+        quests: [{ giver: "the_high_luminary" }] };
+      RC8.reconcile(c, "character", { content: C358, day: 1 });
+      return c.npcRegistry.the_high_luminary === kept && c.npcRegistry.the_high_luminary.relationship === 4
+        && !c.npcRegistry.high_luminary && c.quests[0].giver === "the_high_luminary";
+    })());
+
+  check("§358: ⛑ …AND IT DOES NOTHING WHEN THE CONTENT STILL HAS THE OLD RECORD, so a later pass that brings it back does not have its references quietly rewritten, and nothing happens twice",
+    (() => {
+      const withOld = { ...C358, npcs: { ...npcs, high_luminary: { id: "high_luminary", name: "Sera" } } };
+      const a = { reconcileVersion: 80, quests: [{ giver: "high_luminary" }] };
+      RC8.reconcile(a, "character", { content: withOld, day: 1 });
+      const b = { reconcileVersion: 80, quests: [{ giver: "high_luminary" }] };
+      RC8.reconcile(b, "character", { content: C358, day: 1 });
+      const v = b.reconcileVersion;
+      RC8.reconcile(b, "character", { content: C358, day: 2 });
+      return a.quests[0].giver === "high_luminary"          // the old record exists: leave it alone
+        && b.quests[0].giver === "the_high_luminary" && b.reconcileVersion === v;
+    })());
+
+  check("§358: ⛔ SNG-647 — EVERY POWER'S LEADER IS A PERSON THE GAME LOADS, or the power names nobody. ⛑ Asked of all of them, so an anchor authored with a leader the corpus does not have reddens here rather than handing the GM a name that resolves to nothing",
+    (() => {
+      const all = PW8.powersFrom(C358);
+      const named = all.filter(p => p.leader);
+      const missing = named.filter(p => !npcs[p.leader] && !(C358.companions || {})[p.leader]);
+      return all.length >= 29 && named.length > 0 && missing.length === 0;
+    })(), `${PW8.powersFrom(C358).length} powers, ${PW8.powersFrom(C358).filter(p => p.leader).length} with a named leader`);
+
+  check("§358: ⛑ …AND EVERY SEAT, REACH AND HOLD IS A PLACE THE GAME LOADS. A power whose seat does not exist holds ground nowhere, and `powersReaching` would never offer it",
+    (() => {
+      const locs = C358.locations || {};
+      const bad = [];
+      for (const p of PW8.powersFrom(C358)) {
+        if (p.seat && !locs[p.seat]) bad.push(`${p.id}.seat=${p.seat}`);
+        for (const r of (p.reach || [])) if (!locs[r]) bad.push(`${p.id}.reach=${r}`);
+        for (const h of (p.holds || [])) if (h?.at && !locs[h.at]) bad.push(`${p.id}.holds=${h.at}`);
+      }
+      return bad.length === 0;
+    })());
+
+  check("§358: ⛔ …AND MORE OF THE WORLD IS HELD THAN BEFORE, which is the whole point of an anchor. ⛑ Reported as a count that may only go UP — naming the regions would pin Aevi's authoring order, and she has fifteen still to do",
+    (() => {
+      const locs = C358.locations || {};
+      const held = new Set(PW8.powersFrom(C358).flatMap(p => [p.seat, ...(p.reach || [])].filter(Boolean).map(id => locs[id]?.regionId)).filter(Boolean));
+      return held.size >= 23;
+    })(), (() => {
+      const locs = C358.locations || {};
+      const held = new Set(PW8.powersFrom(C358).flatMap(p => [p.seat, ...(p.reach || [])].filter(Boolean).map(id => locs[id]?.regionId)).filter(Boolean));
+      const all = new Set(Object.values(locs).map(l => l.regionId).filter(Boolean));
+      return `${held.size} of ${all.size} regions held`;
+    })());
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

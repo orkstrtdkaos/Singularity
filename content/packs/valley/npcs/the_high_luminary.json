@@ -32,19 +32,26 @@
  },
  "knowledge": [
   "The Plateau's photonic infrastructure, entire",
-  "Every faction's position in the valley and what would move it"
+  "Every faction's position in the valley and what would move it",
+  "Master-level photonic technique and the Plateau's optical sciences",
+  "One of her own filtration engineers has been falsifying purity reports — she discovered it recently and hasn't decided what to do",
+  "The falsified reports hide something stranger than negligence: readings that make no sense for any known contaminant",
+  "Precursor optics records in the Plateau archives that describe 'the light beneath light'"
  ],
  "wants": [
-  "The valley unified under order before What Sleeps Under wakes — convinced only a single strong hand can meet it"
+  "The valley unified under order before What Sleeps Under wakes — convinced only a single strong hand can meet it",
+  "The truth about the readings her engineer buried — quietly, before the Harmonic delegation finds the falsification and weaponizes it."
  ],
- "fears": "⛔ That she is right about the threat and wrong about the answer. ⚠️ 'Believes her foreclosure is mercy.'",
- "appearance": "Radiant, seated, and rarely standing. The light in the room is hers before she speaks.",
- "voiceHints": "Gracious and absolutely settled. She does not argue; she explains what will happen.",
+ "fears": "⛔ That she is right about the threat and wrong about the answer. ⚠️ 'Believes her foreclosure is mercy.' ⚠️ And, nearer: That the contamination is neither civilization's doing, and that saying so out loud will sound like exactly the kind of lie she'd tell.",
+ "appearance": "Statuesque, sixties, copper-brown skin and close-cropped white hair, with the faint permanent squint of someone who works in glare and old radial burn-scarring fanning from the corner of each eye. Robes of unbleached white. Radiant, usually seated; the light in the room is hers before she speaks.",
+ "voiceHints": "Gracious and absolutely settled. She does not argue; she explains what will happen. Precise, luminous diction; her questions feel like being gently X-rayed. Light gathers toward her when she is interested.",
  "assistTags": [
-  "talk",
+  "craft",
   "guard",
+  "light",
   "reveal",
-  "craft"
+  "study",
+  "talk"
  ],
  "abilities": [
   {
@@ -134,10 +141,10 @@
   "false_stance"
  ],
  "personality": {
-  "warmth": 8,
-  "trust": 5,
-  "candor": 8,
-  "patience": 9
+  "warmth": 0.8,
+  "trust": 0.5,
+  "candor": 0.8,
+  "patience": 0.9
  },
  "physicality": "ADULT. Seated, luminous, sixties. WHAT CATCHES THE EYE: the room lights toward her and she has stopped noticing.",
  "canOppose": true,
@@ -161,5 +168,26 @@
  ],
  "purse": {
   "crystal": 3000
- }
+ },
+ "fullName": "Seraphine Aurel Lumenhall",
+ "title": "High Luminary of the Radiant Plateau",
+ "aliases": [
+  "High Luminary Sera",
+  "Sera",
+  "Seraphine Aurel Lumenhall"
+ ],
+ "communityId": "valley.radiant_plateau",
+ "reactsToReputation": {
+  "truth-seeker": "takes real interest, may confide",
+  "deceiver": "mirrors and misleads, tests constantly"
+ },
+ "teaches": "blazeborn",
+ "curriculum": {
+  "method": "Everything at once, in one session, at a brightness that hurts. Then she sends you away for a season to reconstruct it from the after-image.",
+  "opens": "the entire tree, unusably fast"
+ },
+ "curriculumNote": "SNG-175 §3. DEVIATIONS ONLY — the curriculum spine derives from ability levelReq (285/285 carry it), so a teacher authors nothing but where they depart from the standard ladder. The departure IS the characterisation: two teachers of one tradition differ exactly here.",
+ "sex": "female",
+ "_personalityWas": "{\"warmth\": 8, \"trust\": 5, \"candor\": 8, \"patience\": 9} — the 0–10 scale; every other record uses 0–1 (SNG-646)",
+ "_mergedFrom_SNG646": "Erik 2026-09-24: 'yes on Sera.' high_luminary (High Luminary Sera, Master of the Radiant Plateau) and the_high_luminary were one person in two records. This record keeps Seraphine's id, level, abilities, arc and power leadership, and carries Sera's community, teaching, curriculum, reputation reactions and her four knowledge lines — the falsified purity reports that quests.json hangs on her. Sera's 'fifties' and 'younger than expected' yield to Seraphine's sixties; romanceEligible stays false, as Seraphine's own intimacyNotes rule it. 'Sera' is what her own people call her."
 }

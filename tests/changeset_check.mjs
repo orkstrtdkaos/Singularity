@@ -96,9 +96,45 @@ function idIndex(files) {
 /** Where an id is NAMED as a quoted string. The change set must move every one of these. */
 function referrersOf(ids, files) {
   const hits = new Map();
+  // ⛔ CCODE-488 — AN ID NAMED IN PROSE IS STILL A REFERENCE. This matched `"id"` in double quotes only, so
+  // when SNG-646 retired `high_luminary` the tool reported every referrer declared while
+  // `core/rules/tier_signals.json` carried "`high_luminary` is 'Master of the Radiant Plateau'" in an authoring
+  // note — backticks, not quotes, invisible. ⚠️ A check that says "all clear" wrongly is the worst kind: the
+  // author declared exactly what the tool derived, and the tool derived four files out of five.
+  // ⛑ THE BOUNDARY IS A NON-WORD CHARACTER ON BOTH SIDES, WHICH IS THE WHOLE TRICK. JavaScript's `\w`
+  // includes the underscore, so `the_high_luminary` does NOT count as naming `high_luminary` — without that, a
+  // rename would report every file naming the SURVIVING id as a referrer of the departing one, which is the kind
+  // of noise that teaches an author to stop reading this line.
+  // ⛑ Scanned by index rather than by a built regex: an id goes into the pattern as data, and a tool that
+  // interpolates content into a regex is one odd id away from a syntax error or a silent mismatch.
+  const namesIt = (text, id) => {
+    for (let at = text.indexOf(id); at >= 0; at = text.indexOf(id, at + 1)) {
+      const before = at > 0 ? text[at - 1] : " ";
+      const after = at + id.length < text.length ? text[at + id.length] : " ";
+      if (!/\w/.test(before) && !/\w/.test(after)) return true;
+    }
+    return false;
+  };
+  // ⛑ AND A PROVENANCE NOTE IS NOT A REFERENCE. This project's convention is that an `_`-prefixed key is a
+  // note between authors (`_why`, `_authoredWhy`, `_mergedFrom_SNG646`), and a note that SAYS which id was
+  // retired is the opposite of a dangling reference — it is the record of the retirement. Widening the match to
+  // prose without this would have made every merge report its own provenance as unfinished work.
+  // ⚠️ Parsed, not stripped by pattern: a regex that tried to cut `_`-keyed values out of raw JSON would cut
+  // the wrong thing on the first nested object.
+  const stripNotes = (node) => {
+    if (Array.isArray(node)) return node.map(stripNotes);
+    if (node && typeof node === "object") {
+      const out = {};
+      for (const [k, v] of Object.entries(node)) if (!k.startsWith("_")) out[k] = stripNotes(v);
+      return out;
+    }
+    return node;
+  };
   for (const { rel, text } of files) {
+    let body = text;
+    try { body = JSON.stringify(stripNotes(JSON.parse(text))); } catch { /* not parseable — scan it whole */ }
     for (const id of ids) {
-      if (text.includes(`"${id}"`)) hits.set(rel, [...(hits.get(rel) || []), id]);
+      if (namesIt(body, id)) hits.set(rel, [...(hits.get(rel) || []), id]);
     }
   }
   return hits;
@@ -117,9 +153,32 @@ function placeIds() {
 }
 
 /** The save side, which SNG-505's referrer list omitted entirely. Seven shapes, 325 entries today. */
+/** ⛔ CCODE-488 — WHERE A DEPARTING ID ACTUALLY SITS ON A SAVE, FOUND BY WALKING IT. The named shapes below
+ *  are all ABILITY shapes, and they are the nine an ability retirement touches. ⚠️ SNG-646 retires a PERSON and
+ *  this reported "0 entries across 16 saves" while one save named them three times — under `quests[].giver` and
+ *  `quests[].outcomes[].effects[].npc`, neither of which is on any list. Aevi wrote that fact into `_forCCode`
+ *  by hand, which is the tool's job.
+ *  ⛑ AND THE FIX IS NOT A LONGER LIST. Measured on the real saves, a person id lives in TWENTY-FIVE distinct
+ *  shapes — `npcRegistry`, `codex.topics`, `worldState.wantProgress`, `offscreenBacklog`, `establishedFacts`,
+ *  `bondLog`, `gallery`, `generated.npc`, `company`, `personalArc.stages[].anchors`, `newsLog[].figureId` and on —
+ *  so any hand-written list is a list of the shapes I happened to think of. The walk reports the paths it finds,
+ *  whatever kind of id is leaving, and an id that appears nowhere still reports nothing.
+ *  ⚠️ EXACT MATCHES ONLY on a string, and on an object KEY: `the_high_luminary` does not name `high_luminary`. */
+function walkForIds(node, ids, path, out) {
+  if (node == null) return;
+  if (typeof node === "string") { if (ids.includes(node)) out.set(path, (out.get(path) || 0) + 1); return; }
+  if (Array.isArray(node)) { for (const v of node) walkForIds(v, ids, `${path}[]`, out); return; }
+  if (typeof node !== "object") return;
+  for (const [k, v] of Object.entries(node)) {
+    if (ids.includes(k)) out.set(`${path}.{id}`, (out.get(`${path}.{id}`) || 0) + 1);
+    walkForIds(v, ids, `${path}.${k}`, out);
+  }
+}
+
 function saveImpact(ids) {
   const charsDir = join(root, "characters");
   if (!existsSync(charsDir)) return null;
+  const found = new Map();
   const shapes = { "abilities[].abilityId": 0, "practice.uses{}": 0, "practice.coActivations{} (PAIRED)": 0,
                    "aspirations": 0, "customAbilities{} (braids EMBED ids)": 0, "discoveries[].recipeId": 0,
                    "precursorAccess[]": 0, "wildCurrentAccess[]": 0, "forkChoices{}": 0 };
@@ -140,9 +199,10 @@ function saveImpact(ids) {
       shapes["precursorAccess[]"] += (c.precursorAccess || []).filter(x => ids.includes(x)).length;
       shapes["wildCurrentAccess[]"] += (c.wildCurrentAccess || []).filter(x => ids.includes(x)).length;
       shapes["forkChoices{}"] += Object.keys(c.forkChoices || {}).filter(k => ids.includes(k)).length;
+      walkForIds(c, ids, "", found);   // ⛔ CCODE-488: and every OTHER shape, whatever it is
     }
   }
-  return { saves, shapes, total: Object.values(shapes).reduce((a, b) => a + b, 0) };
+  return { saves, shapes, found, total: Object.values(shapes).reduce((a, b) => a + b, 0) + [...found.values()].reduce((a, b) => a + b, 0) };
 }
 
 // ---------- the check ----------
@@ -253,7 +313,9 @@ export function checkChangeSet(cs, label = cs.id || "(unnamed)") {
   // dangling references are FLAGGED, never removed).
   const impact = leaving.length ? saveImpact(leaving) : null;
   if (impact) {
-    const hit = Object.entries(impact.shapes).filter(([, n]) => n > 0);
+    const hit = [...Object.entries(impact.shapes).filter(([, n]) => n > 0),
+      // ⛔ CCODE-488: the walked paths, which is where a PERSON id actually turns out to live
+      ...[...(impact.found || new Map())].sort((a, b) => b[1] - a[1]).map(([p, n]) => [p || "(root)", n])];
     console.log(`      SAVES: ${impact.total} entr(ies) across ${impact.saves} save(s) carry a departing id`);
     for (const [shape, n] of hit) console.log(`        ${String(n).padStart(4)}  ${shape}`);
     check(`${label}: a change set touching live saves declares its migration`,
@@ -315,7 +377,13 @@ export function checkChangeSet(cs, label = cs.id || "(unnamed)") {
     // change set that adds files names its pack's manifest as a referrer BECAUSE it edits it, and requiring
     // that to be registered is the tool asking a list to contain its own name.
     const isManifest = (f) => /(^|\/)manifest\.json$/.test(String(f));
-    const unloadable = named.filter(f => !isManifest(f) && !registered(f) && !isRetired(f) && !(created.has(f) && plannedFor(f)));
+    // ⛔ CCODE-488 — AND A FILE THAT IS GONE IS NOT AN UNREGISTERED ONE. SNG-646 merges two records of one
+    // office and deletes the loser's file; this then reported it as "on disk is not loaded", which is true and
+    // backwards — it is not on disk at all. The `retired_*` convention above is one kind of evidence that a
+    // removal was meant; a change set declaring the id in `removed` and the file being absent is another, and a
+    // stronger one, because it is the change set's own words rather than a filename.
+    const isGone = (f) => leaving.length > 0 && !existsSync(join(root, String(f)));
+    const unloadable = named.filter(f => !isManifest(f) && !registered(f) && !isRetired(f) && !isGone(f) && !(created.has(f) && plannedFor(f)));
     check(`${label}: every content file this change set names is manifest-registered, or is one it creates with a declared \`_manifest\` plan (${named.length} named, ${created.size} created)`,
       unloadable.length === 0,
       `${unloadable.join(", ")} \u2014 on disk is not loaded (SYSTEM_SPEC \u00a742); a file in \`added[]._file\` needs \`_manifest\` to say where it registers`);

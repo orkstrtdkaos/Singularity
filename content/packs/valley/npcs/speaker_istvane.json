@@ -1,0 +1,67 @@
+{
+ "schemaVersion": 1,
+ "romanceEligible": false,
+ "people": "human",
+ "closed": [],
+ "tier": "heroic",
+ "id": "speaker_istvane",
+ "name": "Speaker Istvane",
+ "fullName": "Draven Ephram Istvane",
+ "title": "Speaker of the Hollow Court",
+ "level": 28,
+ "role": "Speaker of the Hollow Court — hears every petition at the Bargain Gate in public and sets the terms, which are always exactly fair",
+ "gender": "man",
+ "pronouns": "he/him",
+ "sex": "male",
+ "homeLocation": "the_bargain_gate",
+ "spectrum": {
+  "demonic_angelic": -0.6,
+  "falsehood_truth": 0.5,
+  "chaos_order": 0.4
+ },
+ "assistTags": [
+  "bargain",
+  "talk",
+  "read-people",
+  "bind"
+ ],
+ "appearance": "A lean horned man in black court robes, courteous and unhurried, seated at the table beside an empty chair he never looks at.",
+ "personality": {
+  "warmth": 0.5,
+  "trust": 0.4,
+  "candor": 0.9,
+  "patience": 0.9
+ },
+ "voiceHints": "Names what you want, out loud, before you do. Never lies and never hurries. Says 'granted' the way other people say 'goodbye'.",
+ "wants": "Every petition heard, every term kept, and the Court's fairness beyond any argument.",
+ "fears": "A petitioner who wants nothing, and the question of who the empty chair is for.",
+ "knowledge": [
+  "Every grant the Court has made, and on what terms",
+  "Who in the world holds a crown the Mavens never recognized"
+ ],
+ "reactsToReputation": {
+  "any": "asks what you want",
+  "reliable": "asks what you really want",
+  "reckless": "reminds you, courteously, that the Court always collects"
+ },
+ "questSeeds": [
+  "A petitioner has asked the Court for the thing another petitioner was granted last year",
+  "The empty chair was found moved, and no one in the hall will say who moved it"
+ ],
+ "gear": [
+  "the Court's ledger of grants",
+  "a signet with nothing cut into its face"
+ ],
+ "purse": {
+  "crystal": 400
+ },
+ "domains": {
+  "primary": "abyssal",
+  "secondary": "veilwright",
+  "tertiary": "bargainers"
+ },
+ "_domainsWhy": "wants named aloud, the craft of terms, and the bargain itself",
+ "aliases": [
+  "Draven Ephram Istvane"
+ ]
+}

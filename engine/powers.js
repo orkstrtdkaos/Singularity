@@ -65,11 +65,19 @@ export function headsOf(contingents) {
  *  subtraction, indexed by contingent so a crossbow line and a cudgel line are not one pool. */
 export function contingentsOf(power, character) {
   const base = Array.isArray(power?.strength?.contingents) ? power.strength.contingents : [];
-  const lost = powerStateOf(character, power?.id)?.lost;
-  if (!lost || typeof lost !== "object") return base.map(c => ({ ...c }));
+  const st = powerStateOf(character, power?.id);
+  const lost = st?.lost;
+  // ⛔ SNG-634 C4 — AND A POWER CAN GROW. `grownHeads` is what its verbs have earned it (see `powerPass`),
+  // spread across its own contingents in proportion so a crossbow line and a household blade grow together
+  // rather than one of them becoming the whole band.
+  const grown = Math.max(0, Number(st?.grownHeads) || 0);
+  const total = base.reduce((n, c) => n + Math.max(0, Number(c?.n) || 0), 0) || 1;
+  if ((!lost || typeof lost !== "object") && !grown) return base.map(c => ({ ...c }));
   return base.map((c, i) => {
-    const gone = Math.max(0, Number(lost[i]) || 0);
-    return { ...c, n: Math.max(0, (Number(c.n) || 0) - gone) };
+    const authored = Math.max(0, Number(c.n) || 0);
+    const gone = Math.max(0, Number(lost?.[i]) || 0);
+    const gain = grown ? Math.round(grown * (authored / total)) : 0;
+    return { ...c, n: Math.max(0, authored - gone + gain) };
   }).filter(c => (Number(c.n) || 0) > 0);
 }
 
@@ -280,6 +288,185 @@ export function powersHoldingForGM(locationId, { content = null, character = nul
       + (p.plainly ? `\n  ${p.plainly}` : ""));
   }
   return lines.join("\n");
+}
+
+/** ⛔ SNG-634 C4 — WHAT EACH VERB ACTUALLY DOES, and this table is the whole of the honesty in this pass.
+ *  ⚠️ THE SPEC SAYS "`tribute` MOVES CRYSTAL UP `answersTo`", AND IT CANNOT: measured before writing this, a
+ *  power record has no wealth, purse or crystal field — none of the 11, and no such field in the schema. So
+ *  the relationship is expressed in the only currency a power HAS, which is strength, using Aevi's own
+ *  authored `growth` dials: a vassal's tribute counts a WIN for its liege, and at `winsToGrowOneStep` the
+ *  liege grows `headsPerStep` of its authored size. That IS the Gralloch growing on the Tollmen and the Edge
+ *  Riders, which is what the fiction already says out loud.
+ *  ⛑ AND A VERB WITH NO MECHANICAL EFFECT SAYS SO HERE (`null`), because the alternative is a news line that
+ *  describes a mechanism that does not exist — the defect this project has caught four times. `toll`, `tax`,
+ *  `patrol` and `protect` are ALREADY felt, through `dangerLift` and through C1's raid; the pass does not
+ *  need to invent a second consequence for them and must not pretend to. */
+export const VERB_EFFECT = {
+  tribute: "liegeWin",     // ⛑ up the `answersTo` chain: their take strengthens whoever they answer to
+  expand:  "selfWin",      // pushing outward: their own success compounds
+  recruit: "selfWin",      // more hands is literally what it is
+  feud:    "bothLose",     // two powers grinding each other down, on `rivals[]`
+  raid:    null, toll: null, tax: null, levy: null, extort: null, steal: null,
+  fence:   null, smuggle: null, protect: null, patrol: null, inform: null,
+};
+
+/** Which verb a power takes this pass. ⚠️ ROTATED BY THE DAY rather than rolled, so a world tick is
+ *  reproducible and a power works through what it does instead of doing one thing five times by luck. */
+export function verbForPass(power, day = 0) {
+  const vs = Array.isArray(power?.verbs) ? power.verbs.filter(Boolean) : [];
+  if (!vs.length) return null;
+  const salt = String(power.id || "").length;
+  return vs[(((Math.round(Number(day) || 0) + salt) % vs.length) + vs.length) % vs.length];
+}
+
+/** The tally → steps conversion, on Aevi's dials. A step is `headsPerStep` of the power's AUTHORED size and
+ *  is capped by its kind's own head range, so a band cannot grow into a legion by winning. */
+function stepHeads(power, rules) {
+  const g = rules?.powers?.growth || {};
+  const authored = (Array.isArray(power?.strength?.contingents) ? power.strength.contingents : [])
+    .reduce((n, c) => n + Math.max(0, Number(c?.n) || 0), 0);
+  return Math.max(1, Math.round(authored * (Number(g.headsPerStep) || 0.2)));
+}
+/** ⛔ HOW OFTEN A POWER MAY GROW AT ALL, and this is the dial the spec did not have. `winsToGrowOneStep: 3`
+ *  says nothing about how fast three wins arrive — and with a verb a pass, they arrive in days. MEASURED
+ *  before adding this: the Gralloch Crown went from its authored 114 to its kind's ceiling of 220 in
+ *  FOURTEEN DAYS. The ceiling was doing its job; the growth had no sense of time in it, which is mine.
+ *  ⛑ DERIVED FROM THE WORLD'S OWN CLOCK, never picked: `yearDays` (144) over four seasons is 36 days, so a
+ *  force may visibly grow about four times a year and reaching its ceiling takes years rather than a
+ *  fortnight. A `growth.growEveryDays` in content overrides it the moment Aevi wants a different pace \u2014 the
+ *  rate is a design question and it is hers, this is only a defensible default instead of a guess. */
+function growWindow({ rules = null, content = null } = {}) {
+  const g = rules?.powers?.growth || {};
+  const said = Number(g.growEveryDays);
+  if (Number.isFinite(said) && said > 0) return said;
+  // ⚠️ AND THE CLOCK IS AT `content.worldClock.calendar.yearDays`, NOT ON `rules`. My first version read
+  // `rules.worldClock.yearDays`, found nothing, and fell through to a literal 144 — which is the right
+  // number by coincidence, so nothing looked wrong and the comment above claimed a read that was not
+  // happening. Exactly the defect I keep finding in other people's code, committed inside the fix for it.
+  const year = Number(content?.worldClock?.calendar?.yearDays)
+    || Number(content?.rules?.worldClock?.calendar?.yearDays) || 144;
+  // ⛑ FOUR SEASONS is the FAR band's count (world_clock: "far 4 · middle 3 · ring 2"). A growth window is a
+  // world-scale pace, not a local one, so the widest division is the honest one to divide by.
+  return Math.max(1, Math.round(year / 4));
+}
+
+function headCeiling(power, rules) {
+  const range = rules?.powers?.kinds?.[power?.kind]?.heads;
+  const authored = (Array.isArray(power?.strength?.contingents) ? power.strength.contingents : [])
+    .reduce((n, c) => n + Math.max(0, Number(c?.n) || 0), 0);
+  // ⚠️ THE AUTHORED SIZE WINS WHEN IT ALREADY EXCEEDS THE KIND'S RANGE. The Gralloch Crown fields 114 and its
+  // kind's range is a band's; an authored record is a ruling and a generator range is a default.
+  return Math.max(authored, Array.isArray(range) ? Math.max(...range.map(Number).filter(Number.isFinite)) : authored);
+}
+
+/** ⛔ SNG-634 C4 — ONE PASS, ONE VERB EACH, AND THE RESULTS REACH THE NEWS.
+ *  ⚠️ EVERY CHANGE LANDS ON `character.powerState`, never on the record: the Gralloch grows in YOUR world
+ *  because YOUR Tollmen went on paying it, and it does not grow in somebody else's who broke them.
+ *  ⛑ A BROKEN POWER TAKES NO VERB. It is finished until something puts it back, which is the point of
+ *  breaking one. Returns news rows; writes nothing else. */
+export function powerPass(character, { content = null, rules = null, day = null } = {}) {
+  const all = powersFrom(content);
+  if (!all.length) return [];
+  const R = rules || content?.rules || null;
+  const g = R?.powers?.growth || {};
+  const winsPer = Math.max(1, Number(g.winsToGrowOneStep) || 3);
+  const lossPer = Math.max(1, Number(g.lossesToShrinkOneStep) || 2);
+  const window = growWindow({ rules: R, content });   // ⛔ a season, from the world clock — see growWindow for the measurement that forced it
+  character.powerState = (character.powerState && typeof character.powerState === "object") ? character.powerState : {};
+  const st = (id) => (character.powerState[id] = character.powerState[id] || {});
+  const byId = new Map(all.map(p => [p.id, p]));
+  const news = [];
+  const credit = (id, kind) => {
+    const p = byId.get(id);
+    if (!p || !isStanding(character, p)) return;
+    const s = st(id);
+    if (kind === "win") s.wins = (Number(s.wins) || 0) + 1;
+    else s.losses = (Number(s.losses) || 0) + 1;
+    // ⛑ A WIN CANCELS A LOSS BEFORE IT BUILDS. Otherwise a power that alternates would grow AND shrink.
+    const w = Number(s.wins) || 0, l = Number(s.losses) || 0;
+    const net = Math.min(w, l);
+    if (net) { s.wins = w - net; s.losses = l - net; return; }
+    if ((Number(s.wins) || 0) >= winsPer) {
+      s.wins = 0;
+      // ⛑ AND NOT MORE OFTEN THAN THE WINDOW. The wins are spent either way — a power that earned them
+      // inside the window got its growth already; it does not bank them and leap two steps later.
+      const last = Number(s.grewDay);
+      if (Number.isFinite(last) && Number.isFinite(Number(day)) && (Number(day) - last) < window) return;
+      const step = stepHeads(p, R), ceil = headCeiling(p, R);
+      const now = headsOf(contingentsOf(p, character));
+      const room = Math.max(0, ceil - now);
+      const took = Math.min(step, room);
+      if (took > 0) {
+        s.grownHeads = (Number(s.grownHeads) || 0) + took;
+        s.grewDay = Number(day) || 0;
+        news.push({ text: `${p.name || p.id} is stronger than it was — ${took} more under it.`, section: "world", powerId: p.id, grew: took });
+      }
+    } else if ((Number(s.losses) || 0) >= lossPer) {
+      s.losses = 0;
+      const step = stepHeads(p, R);
+      const now = headsOf(contingentsOf(p, character));
+      const took = Math.min(step, Math.max(0, now - 1));
+      if (took > 0) {
+        s.lost = (s.lost && typeof s.lost === "object") ? s.lost : {};
+        s.lost[0] = (Number(s.lost[0]) || 0) + took;
+        news.push({ text: `${p.name || p.id} has lost people it will not get back.`, section: "world", powerId: p.id, shrank: took });
+      }
+    }
+  };
+
+  for (const p of all) {
+    if (!isStanding(character, p)) continue;
+    const verb = verbForPass(p, day);
+    if (!verb) continue;
+    const s = st(p.id);
+    s.lastVerb = verb; s.lastVerbDay = day ?? null;
+    const effect = VERB_EFFECT[verb] ?? null;
+    if (effect === "liegeWin" && p.answersTo?.power) credit(p.answersTo.power, "win");
+    else if (effect === "selfWin") credit(p.id, "win");
+    else if (effect === "bothLose") {
+      for (const r of (Array.isArray(p.rivals) ? p.rivals : []).filter(id => byId.has(id))) { credit(p.id, "loss"); credit(r, "loss"); }
+    }
+    // ⛔ AND NOTHING IS NARRATED FOR TAKING A VERB. My first version wrote a line every time a power tolled,
+    // tributed or pushed outward — and TWO gates caught it in the same run: §325 ("a pass with nothing to say
+    // writes nothing") and smoke 366, whose charge digest a wall of world rows reshaped.
+    // ⛑ THEY ARE RIGHT AND I WAS WRONG. A force doing what it always does is not news; eleven of them saying
+    // so every pass is how a player learns to stop reading the news. The only rows this pass emits are the
+    // ones in `credit`, where a power actually GREW or SHRANK — a real change in what you face — and the
+    // routine is already felt through `dangerLift` and through C1's raid having a name.
+    // ⚠️ `lastVerb` is still recorded on the save, so a surface that wants to say what they are doing can,
+    // and the news does not have to.
+  }
+  return news;
+}
+
+/** ⛔ SNG-634 C3 — WHO OWNS AN ENCOUNTER, AND WHETHER IT MAY FIRE HERE. A power lists `encounters[]`: those
+ *  are ITS people, and they belong to it.
+ *  ⛑ TWO RULES, AND THE SECOND IS THE ONE THAT PAYS. An owned encounter fires only inside its owner's reach,
+ *  and NOT AT ALL once that owner is broken — so clearing the Tollmen genuinely empties the switchback of
+ *  toll-men, instead of the road going on producing them from a table.
+ *  ⚠️ AN ENCOUNTER NOBODY CLAIMS IS UNTOUCHED. Measured: of the 98 entries in the pool, exactly ONE is
+ *  claimed today (`re_toll_bandits`, by the Switchback Tollmen), and 10 of the 11 powers claim none. The
+ *  filter is built for the content to grow into; it changes one encounter at two places right now, and
+ *  saying so beats implying it reshaped the pool.
+ *  ⛔ RETURNS A PREDICATE, not a filtered list, because `random_encounters.js` is a leaf module that must not
+ *  learn what a power is. It already takes `power` meaning the CHARACTER'S level — a second meaning of that
+ *  word in one signature is how a reader picks the wrong one. */
+export function encounterOwnerFilter(locationId, { content = null, character = null } = {}) {
+  const claimed = new Map();   // encounter id -> [power, …] that claim it anywhere in the world
+  for (const p of powersFrom(content)) {
+    for (const id of (Array.isArray(p.encounters) ? p.encounters : [])) {
+      if (!claimed.has(id)) claimed.set(id, []);
+      claimed.get(id).push(p);
+    }
+  }
+  if (!claimed.size) return null;   // nobody claims anything: no filter, no cost
+  const reaching = new Set(powersReaching(locationId, { content, character }).map(p => p.id));
+  return (entryId) => {
+    const owners = claimed.get(entryId);
+    if (!owners) return { ok: true, owner: null };            // unclaimed — as it always was
+    const live = owners.find(p => reaching.has(p.id));
+    return live ? { ok: true, owner: live.name || live.id } : { ok: false, owner: null };
+  };
 }
 
 /** ⛔ BROKEN BY HAND — the player took the seat, or the story says so. Kept separate from `notePowerLoss`

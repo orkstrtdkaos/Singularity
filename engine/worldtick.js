@@ -43,7 +43,7 @@ import { syncEnabled, fetchRepoJSON, fetchLedgerMonths, fetchLedgerAll, pushMerg
 import { travelerCard, cardChanged, mergeTravelerCard, ledgerMonthsSince, whereOf, meetKey } from "./travelers.js";   // SNG-595: a fellow traveler is a person the world has a record of
 import { stampEventChange, mergeEventStages, mergeQuestOutcomes, actorOf, questKey } from "./worldevents.js";   // CCODE-354: a crisis another traveler answered reads as answered
 import { bandDialsOf } from "./melee.js";                                    // SNG-634 C1: a raiding power bleeds on the dials a band does
-import { raiderPowerAt, dangerLiftAt } from "./powers.js";                    // SNG-634 C1/C2: whose raid, and whose ground
+import { raiderPowerAt, dangerLiftAt, powerPass } from "./powers.js";                    // SNG-634 C1/C2: whose raid, and whose ground
 import { INVITES_PATH, mergeInvitation, answerInto, applyAnswers } from "./invitations.js";   // CCODE-360: an invitation carried by someone you both know
 import { boundFigures } from "./companionlives.js";   // SNG-597 §3: a companion who is also a figure of the world
 import { decayWakes, wakeArcPush } from "./wake.js"; // SNG-204: wakes decay on the tick + lean on connected arcs
@@ -749,6 +749,10 @@ export async function runWorldTick({ character, content, currentDay, advanceAssi
   // `unavenged`, one pass, its own news. ✅ R37: and growth WRITES — what the story showed a person doing becomes a craft
   // on their record at r1, and the world says so.
   const debtsPass = advanceDebts(character, { npcs: content?.npcs || {}, cfg: content?.rules?.economy?.debts || null, day: currentDay });
+  // ⛔ SNG-634 C4 — THE POWERS TAKE A VERB. One each, rotated by the day so the pass is reproducible, and
+  // every consequence lands on `character.powerState` rather than on the shared record: the Gralloch grows
+  // in YOUR world because YOUR Tollmen went on paying it. ⚠️ A broken power takes no verb at all.
+  const powersPass = powerPass(character, { content, rules: content?.rules || null, day: currentDay });
   // ✅ R45c (Erik: "you'll need to wire that into the engine so it evolves itself when the time comes") — UNATTENDED, on
   // the tick, the way a hold does. The bond is the PLAYER's; the item is in someone else's hands.
   const woke = [];
@@ -762,7 +766,10 @@ export async function runWorldTick({ character, content, currentDay, advanceAssi
     if (!n || typeof n !== "object" || String(id).startsWith("companion-")) continue;
     for (const c of commitGrowth(n, content?.abilities || {}, { day: currentDay, cfg: content?.rules?.npcStanding || {} })) grown.push({ text: `${n.name || id} has taken up ${c.name || c.id} — the story showed it, and now it is theirs.` });
   }
-  const extraNews = [...debtsPass.news.map(t => ({ text: t, section: "yours" })), ...grown.slice(0, 3), ...woke.slice(0, 3)];
+  // ⚠️ THE POWERS’ NEWS IS CAPPED AT TWO A PASS. Eleven forces each doing something every day would bury
+  // everything else a player needs to read — and only the rows that CHANGED something are emitted at all
+  // (a toll gang tolling is already felt through the danger and the raid; saying it every pass is noise).
+  const extraNews = [...debtsPass.news.map(t => ({ text: t, section: "yours" })), ...grown.slice(0, 3), ...woke.slice(0, 3), ...powersPass.slice(0, 2)];
 
   // ⚠️ SNG-368: the RETURN is stamped too, on BOTH paths. The early return handed back raw entries
   // while the normal path handed back stamped ones, so a caller reading `.news[0].section` got a section on

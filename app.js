@@ -72,7 +72,7 @@ import { roomOf, roomRefusal, promotionOffer, promoteHolding, trainingAt, mounts
 import { featureCost, allFeatures, refreshImprovement, canBeAskedToWork, holdingFactsLine, answerFeatureOffer, holdingLedger, addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, yieldsFor, upkeepFor, appointKeeper, reclaimHolding, improveHolding, setCrew, setGarrison, holdingGround, addFeature, removeFeature, renameHolding, featureKinds, residentsOf, holdingMeaningAura, holdingFieldDelta } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
 import { buildDevReport, unknownOpsIn } from "./engine/devreport.js";   // SNG-559: the Play/Dev instrument
 import { makeField, fieldDataFrom, FIELD_KINDS, KIND_LABEL, MEMBERSHIP } from "./engine/field.js";
-import { assaultableAt, garrisonContingents, noteHoldLoss, takeHold } from "./engine/powers.js";   // SNG-634 C5: their holds are places you can take   // CCODE-457: why the ground here reads the way it does · CCODE-472: and the layer the map draws
+import { assaultableAt, garrisonContingents, noteHoldLoss, takeHold, encounterOwnerFilter } from "./engine/powers.js";   // SNG-634 C5: their holds are places you can take   // CCODE-457: why the ground here reads the way it does · CCODE-472: and the layer the map draws
 import { FIRE_TESTS, diffKeys } from "./engine/firetests.js";   // SNG-560: the parts that have never been used
 import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, roleBadges, teacherOfferReady, applyPartyOps, activeCompany, formerCompany } from "./engine/company.js";
 import { unitsOf, unitLine, poolRows, atSideRows, wherePerson, canBringForward, rosterLine, levelOfPerson } from "./engine/fellowship.js";
@@ -179,7 +179,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.4.17";
+const APP_VERSION = "2.5.0";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -5482,7 +5482,7 @@ function listAvailableEncounters() {
   const seeded = new Set((loc.encounterSeeds || []).map(s => s.encounterId));
   // CCODE-52: the pool the GM is offered revolves around THIS character's power — the region supplies the cast,
   // the player's power supplies the mean, and a foe they have outgrown drops out unless it is special.
-  const poolLines = eligibleEncountersFor(encounterTable(), loc, { power: characterPower(character, CONTENT.rules?.threat || {}) })
+  const poolLines = eligibleEncountersFor(encounterTable(), loc, { power: characterPower(character, CONTENT.rules?.threat || {}), ownerOf: ownerFilterHere(loc?.id) })
     .filter(e => !seeded.has(e.id))                              // don't duplicate a hand-seeded encounter
     .map(e => `- id "${e.id}" (${e.routing}${e.flavor ? "/" + e.flavor : ""}): ${smartClamp(String(e.seed || e.look || e.id), 150)}`);
   const lines = [...seedLines, ...poolLines];
@@ -10836,7 +10836,7 @@ function maybeNarrativeEncounter(turn, resolution) {
     if (!social) return;
     const rate = Number(table.triggerRules?.onSocialBeat?.chance ?? 0.12); // [DIAL] SNG-237 C1 — tune in content
     if (rate <= 0 || Math.random() >= Math.min(0.9, rate * (pace.mult || 1))) return;
-    const trial = eligibleEncountersFor(table, loc, { cap: 8 }).find(e => e.routing === "challenge" && e.id);
+    const trial = eligibleEncountersFor(table, loc, { cap: 8, ownerOf: ownerFilterHere(loc?.id) }).find(e => e.routing === "challenge" && e.id);
     if (!trial) return; // nothing NON-COMBAT eligible here yet (C2 content owed)
     pendingEncounterOffer = { id: trial.id, name: smartClamp(String(trial.name || "a hard passage"), 80), kind: "trial" };
     sceneEncounterFired = true; turnsSinceEncounter = 0;
@@ -10864,7 +10864,7 @@ function maybeNarrativeEncounter(turn, resolution) {
     // Erik + Aevi; only 4 challenge entries and 0 offerable standoffs exist today, so this bias is modest.)
     let chosen = entry;
     if (entry.routing === "duel" && (loc.dangerLevel || 0) <= 1) {
-      const trial = eligibleEncountersFor(table, loc, { cap: 8 }).find(e => e.routing === "challenge" && e.id);
+      const trial = eligibleEncountersFor(table, loc, { cap: 8, ownerOf: ownerFilterHere(loc?.id) }).find(e => e.routing === "challenge" && e.id);
       if (trial) chosen = trial;
     }
     const kind = chosen.routing === "duel" ? "fight" : "trial";
@@ -10911,7 +10911,7 @@ function runPressureProducers() {
   // a framed defend-encounter when the queue fires. Rolls on danger × the aggression pref, so a safe place is
   // rarely troubled and a dangerous one often is.
   const loc = hereNow();
-  const pool = (() => { try { return eligibleEncountersFor(encounterTable(), loc, { cap: 8 }); } catch { return []; } })();
+  const pool = (() => { try { return eligibleEncountersFor(encounterTable(), loc, { cap: 8, ownerOf: ownerFilterHere(loc?.id) }); } catch { return []; } })();
   // ⛔ CCODE-410 (Erik: "remove the swarm attack for now") — A PAUSE, NOT A DELETION. This producer re-rolls on every refresh, so
   // removing one swarm would have lasted until the next roll. `threatsPaused` is set for one character by a reconcile step (v65).
   const threat = character.worldState?.threatsPaused ? null
@@ -15725,6 +15725,14 @@ function runQuestDeadlines(turn = null) {
  *  player chooses an ending; a DEADLINE can also end one, and an ending reached by the clock has to pay
  *  exactly what an ending reached by a decision pays — the effects, the deed, the chronicle, the wake.
  *  ⚠️ A second ending path with a thinner context is how a patient dies and the world does not notice. */
+/** ⛔ SNG-634 C3 — THE OWNER FILTER FOR THE ENCOUNTER POOL, in ONE place because there are four call sites
+ *  and four copies of a lookup is four chances for one of them to stop filtering. Null when nobody claims an
+ *  encounter anywhere, which costs the common case nothing. */
+function ownerFilterHere(locationId) {
+  try { return encounterOwnerFilter(locationId || character?.currentLocationId, { content: CONTENT, character }); }
+  catch { return null; }
+}
+
 function questResolveCtx() {
   const day = readClock(character.clock).day;
   return {

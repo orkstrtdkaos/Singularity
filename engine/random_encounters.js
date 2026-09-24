@@ -118,11 +118,27 @@ export function flavorMultiplier(flavor, danger) {
  *  encounter's fitness is its DANGER threshold (severity by the place's danger) + its TAG context, not its
  *  geography. A dangerous encounter can find any place whose danger admits it — Millbrook defends itself when
  *  the threat is near. (The entry's `regions` field is kept as data, no longer a hard gate.) */
-export function isEligible(entry, location, { ignoreDanger = false } = {}) {
+export function isEligible(entry, location, { ignoreDanger = false, ownerOf = null } = {}) {
+  // ⛔ SNG-634 C3 — AN ENCOUNTER SOMEBODY OWNS FIRES ONLY WHERE ITS OWNER STANDS. `ownerOf` is a predicate
+  // supplied by the caller from `powers.js:encounterOwnerFilter`; absent, nothing changes and this module
+  // goes on knowing nothing about powers, which is what keeps it a leaf.
+  // ⛑ THE PAYOFF IS THE NEGATIVE CASE: break the Tollmen and the switchback stops producing toll-men,
+  // instead of the road going on drawing them from a table forever.
+  const owned = typeof ownerOf === "function" ? ownerOf(entry?.id) : null;
+  if (owned && owned.ok === false) return false;
   if (!ignoreDanger && (entry.minDanger || 0) > dangerOf(location)) return false;
   // entry.tags, when present, are a *preference* not a hard gate — a cutpurse wants a crowd. Soft-match: if
   // tags listed and NONE overlap the location's tags, it's ineligible ONLY for tag-anchored flavors.
-  if (entry.tags && entry.tags.length) {
+  // ⛔ SNG-634 C3 — AND AN OWNER STANDING HERE IS STRONGER CONTEXT THAN A TAG. Found by driving it: the one
+  // owned encounter in the corpus, `re_toll_bandits`, is tagged road/wild while `old_switchback` is tagged
+  // trail/mountain/waystation — so the Tollmen's own toll-bandits could not fire at the Tollmen's own
+  // chain-post. The power is sited correctly (the rules' own `placeAtTags` for an outlaw_band lists trail
+  // and waystation); it is the ENCOUNTER's tags that do not describe the place.
+  // ⛑ The tag gate exists to supply context, and a force that HOLDS this road is context. So an owned
+  // encounter whose owner stands here satisfies the preference: toll-bandits belong on the Tollmen's road
+  // whether the place is called a road or a trail. Nothing else moves — an unowned encounter still needs
+  // its tags, which is 97 of the 98 entries.
+  if (entry.tags && entry.tags.length && !(owned && owned.owner)) {
     const locTags = (location?.tags || []).map(t => String(t).toLowerCase());
     const overlap = entry.tags.some(t => locTags.some(lt => lt.includes(t) || t.includes(lt)));
     if (!overlap && !ignoreDanger) return false;
@@ -201,7 +217,9 @@ export function classifyNarrativeKind({ intentTags = [], why = "", hoursPassed =
  *  synthesize a real def, incl. the SNG-229 beast_ duels) are offerable by id; loose narrative/opposed rows have
  *  no def to start, so they stay ambient narration (not offered). Weight-ordered + capped so the prompt isn't
  *  flooded. Pure. */
-export function eligibleEncountersFor(table, location, { cap = 8, power = null, rng = Math.random, threatCfg = {} } = {}) {
+export function eligibleEncountersFor(table, location, { cap = 8, power = null, rng = Math.random, threatCfg = {}, ownerOf = null } = {}) {
+  // ⚠️ `power` HERE IS THE CHARACTER'S LEVEL, not a power record — the word means two things in this
+  // codebase and this signature is where they meet. SNG-634's owner check comes in as `ownerOf`.
   const danger = dangerOf(location);
   // CCODE-52 (Erik): "your level sets the mean about which the encounters revolve." When the caller knows the
   // player's power, the pool is drawn AROUND it: a target threat is sampled (a body plus a real upper tail), foes
@@ -218,7 +236,7 @@ export function eligibleEncountersFor(table, location, { cap = 8, power = null, 
   const numeric = v => (typeof v === "number" && Number.isFinite(v) ? v : null);
   const threatOf = e => numeric(e.opponent?.threat) ?? numeric(e.threat) ?? 0;
     const near = (table?.encounters || [])
-      .filter(e => (e.routing === "duel" || e.routing === "challenge" || e.routing === "opposed") && isEligible(e, location))
+      .filter(e => (e.routing === "duel" || e.routing === "challenge" || e.routing === "opposed") && isEligible(e, location, { ownerOf }))
       // "a boar at lvl 20 isn't really an encounter anymore, unless it's a special encounter"
       .filter(e => !threatOf(e) || isRelevantThreat(power, threatOf(e), { special: !!e.special, cfg: threatCfg }))
       .map(e => ({ e, d: Math.abs(threatOf(e) - draw.threat) }))
@@ -232,7 +250,7 @@ export function eligibleEncountersFor(table, location, { cap = 8, power = null, 
   return (table?.encounters || [])
     // SNG-247: "opposed" is a real routing (the toll-keeper) and mints a standoff — without it here the one
     // exemplar Aevi routed that way could never be offered, which is how it stayed invisible.
-    .filter(e => (e.routing === "duel" || e.routing === "challenge" || e.routing === "opposed") && isEligible(e, location))
+    .filter(e => (e.routing === "duel" || e.routing === "challenge" || e.routing === "opposed") && isEligible(e, location, { ownerOf }))
     .map(e => ({ e, w: Math.max(0.01, (e.weight || 1) * flavorMultiplier(e.flavor, danger)) }))
     .sort((a, b) => b.w - a.w)
     .slice(0, Math.max(0, cap))

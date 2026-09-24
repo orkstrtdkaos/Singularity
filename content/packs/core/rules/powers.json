@@ -1,0 +1,337 @@
+{
+ "schemaVersion": 1,
+ "id": "powers",
+ "kinds": {
+  "outlaw_band": {
+   "scale": "unit",
+   "heads": [
+    12,
+    45
+   ],
+   "quality": [
+    1,
+    2
+   ],
+   "tempers": {
+    "cruel": 0.35,
+    "hard": 0.5,
+    "fair": 0.15
+   },
+   "verbs": [
+    "toll",
+    "raid",
+    "extort",
+    "tribute"
+   ],
+   "placeAtTags": [
+    "road",
+    "pass",
+    "trail",
+    "waystation",
+    "lawless",
+    "dangerous",
+    "frontier",
+    "border"
+   ],
+   "minDanger": 2,
+   "notWithinDaysOfTemper": {
+    "fair": 1,
+    "kind": 2
+   },
+   "leaderTier": "notable",
+   "holdKind": "post"
+  },
+  "outlaw_crown": {
+   "scale": "legion",
+   "heads": [
+    80,
+    220
+   ],
+   "quality": [
+    2,
+    3
+   ],
+   "tempers": {
+    "cruel": 0.6,
+    "hard": 0.4
+   },
+   "verbs": [
+    "raid",
+    "tribute",
+    "recruit",
+    "expand",
+    "feud"
+   ],
+   "placeAtTags": [
+    "lawless",
+    "dangerous",
+    "raider",
+    "no-law"
+   ],
+   "minDanger": 3,
+   "perRegionMax": 1,
+   "formsWhenBandsInRegion": 3,
+   "leaderTier": "heroic",
+   "holdKind": "post"
+  },
+  "guild": {
+   "scale": "unit",
+   "heads": [
+    20,
+    60
+   ],
+   "quality": [
+    1,
+    2
+   ],
+   "tempers": {
+    "hard": 0.6,
+    "cruel": 0.2,
+    "fair": 0.2
+   },
+   "verbs": [
+    "steal",
+    "fence",
+    "smuggle",
+    "extort",
+    "inform"
+   ],
+   "placeAtTags": [
+    "market",
+    "trade",
+    "trade-post",
+    "cosmopolitan",
+    "wealth",
+    "crossroads"
+   ],
+   "cellsAtTags": [
+    "market",
+    "trade",
+    "inn",
+    "lodging",
+    "no-questions",
+    "secret",
+    "harbour"
+   ],
+   "cellsWithinDays": 12,
+   "cellsMax": 5,
+   "perRegionMax": 1,
+   "liftsDanger": false,
+   "leaderTier": "heroic",
+   "holdKind": "enterprise"
+  },
+  "lordship": {
+   "scale": "unit",
+   "heads": [
+    24,
+    90
+   ],
+   "quality": [
+    2,
+    3
+   ],
+   "tempers": {
+    "cruel": 0.25,
+    "hard": 0.25,
+    "fair": 0.25,
+    "kind": 0.25
+   },
+   "verbs": [
+    "tax",
+    "toll",
+    "levy",
+    "protect",
+    "patrol",
+    "recruit",
+    "expand",
+    "feud"
+   ],
+   "placeAtTags": [
+    "foothill",
+    "bridge",
+    "harbour",
+    "pass",
+    "border",
+    "outpost",
+    "crossroads"
+   ],
+   "excludeTiers": [
+    "region"
+   ],
+   "rivalWithinDays": 30,
+   "rivalOppositeTemperChance": 0.5,
+   "leaderTier": "heroic",
+   "holdKind": "post"
+  },
+  "order": {
+   "scale": "unit",
+   "heads": [
+    20,
+    120
+   ],
+   "quality": [
+    2,
+    3
+   ],
+   "tempers": {
+    "cruel": 0.25,
+    "hard": 0.25,
+    "fair": 0.25,
+    "kind": 0.25
+   },
+   "verbs": [
+    "protect",
+    "patrol",
+    "levy",
+    "recruit",
+    "expand",
+    "feud"
+   ],
+   "placeAtTags": [
+    "sacred",
+    "temple",
+    "cult",
+    "school",
+    "training",
+    "disciplined",
+    "ward"
+   ],
+   "leaderTier": "heroic",
+   "holdKind": "post"
+  },
+  "sovereignty": {
+   "scale": "legion",
+   "heads": [
+    20,
+    400
+   ],
+   "quality": [
+    1,
+    3
+   ],
+   "tempers": {
+    "cruel": 0.25,
+    "hard": 0.25,
+    "fair": 0.25,
+    "kind": 0.25
+   },
+   "verbs": [
+    "tax",
+    "patrol",
+    "protect",
+    "expand",
+    "inform",
+    "levy"
+   ],
+   "forms": [
+    "council",
+    "court",
+    "order",
+    "moot",
+    "contest",
+    "specification",
+    "none"
+   ],
+   "liftsDanger": false,
+   "leaderTier": "heroic",
+   "holdKind": "post"
+  }
+ },
+ "tempers": {
+  "cruel": {
+   "dangerLift": 1,
+   "honoursPaidToll": false,
+   "defeated": "killed",
+   "groundStanding": -2
+  },
+  "hard": {
+   "dangerLift": 1,
+   "honoursPaidToll": true,
+   "defeated": "ransomed",
+   "groundStanding": -1
+  },
+  "fair": {
+   "dangerLift": 0,
+   "honoursPaidToll": true,
+   "defeated": "spared",
+   "groundStanding": 1
+  },
+  "kind": {
+   "dangerLift": -1,
+   "honoursPaidToll": true,
+   "defeated": "spared",
+   "groundStanding": 2
+  }
+ },
+ "density": {
+  "base": 1,
+  "perDangerStep": 0.5,
+  "maxPerRegion": 4
+ },
+ "noticeTriggers": [
+  "crossed",
+  "neighbour",
+  "wealth",
+  "rival_ally"
+ ],
+ "neighbourWithinDays": 3,
+ "wealthAtCrystal": 1500,
+ "growth": {
+  "winsToGrowOneStep": 3,
+  "lossesToShrinkOneStep": 2,
+  "headsPerStep": 0.2,
+  "bandsAbsorbedByCrown": true,
+  "leaderlessBand": {
+   "joinsCrownChance": 0.5,
+   "splitsChance": 0.3,
+   "dissolvesChance": 0.2
+  }
+ },
+ "eligibility": {
+  "byRole": {
+   "Sovereign": "power:lordship",
+   "Warlord": "power:lordship",
+   "Matriarch": "power:lordship",
+   "Founder": "power:lordship",
+   "Champion": "power:lordship",
+   "Warden": "power:lordship",
+   "Orderer": "power:lordship",
+   "Suppressor": "power:lordship",
+   "Zealot": "power:order",
+   "Inquisitor": "power:order",
+   "Prophet": "power:order",
+   "Master": "power:order",
+   "Annihilator": "power:order",
+   "Hollower": "power:order",
+   "Heretic": "power:order",
+   "Broker": "power:guild",
+   "Trickster": "power:guild",
+   "Maskmaker": "power:guild",
+   "Collector": "power:guild",
+   "Glutton": "power:outlaw_crown",
+   "Avenger": "power:outlaw_band",
+   "Maker": "holdings",
+   "Builder": "holdings",
+   "Keeper": "holdings",
+   "Miser": "holdings",
+   "Analyst": "holdings",
+   "Saint": "holdings",
+   "Peacemaker": "holdings",
+   "Guide": "holdings"
+  },
+  "scaleByTier": {
+   "notable": "unit",
+   "leader": "unit",
+   "heroic": "unit",
+   "epic": "legion",
+   "legendary": "legion"
+  },
+  "temperByAlignment": {
+   "villain": "cruel",
+   "hero": "kind",
+   "neither": "hard",
+   "complicated": "fair"
+  }
+ },
+ "_applied": "CCODE-481 — applied from po/staged_content/SNG-634_powers_rules.json on 2026-09-23, unaltered. The dials are Aevi's; the readers that use them are `engine/powers.js` (C4's verb pass, `growth`) and `dangerLiftAt` (which reads the RECORD's own `dangerLift`, with `tempers` as the generator's default)."
+}

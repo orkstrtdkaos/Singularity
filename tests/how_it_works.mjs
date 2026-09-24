@@ -25604,6 +25604,115 @@ console.log("\n── §352 · their holds are places you can take ──");
     && /addHolding\(character, \{ id: `taken-\$\{won\.holdKey\}`/.test(A352));
 }
 
+// ══════════ §353 · CCODE-481 (SNG-634 C3, C4) — THE POWERS ACT, AND THEIR PEOPLE BELONG TO THEM ══════════
+// ⛔ C4's SPEC SAYS "`tribute` MOVES CRYSTAL UP `answersTo`", AND IT CANNOT. Measured before writing a line: a power
+// record has no wealth, purse or crystal field — none of the eleven, none in the schema. So the relationship is paid
+// in the only currency a power HAS, which is strength, on Aevi's own authored `growth` dials: a vassal's tribute is a
+// WIN for its liege, and at `winsToGrowOneStep` the liege grows `headsPerStep` of its authored size. That IS the
+// Gralloch growing on the Tollmen and the Edge Riders, which the fiction already says out loud.
+// ⚠️ AND THE FIRST VERSION HAD NO TIME IN IT: the Gralloch reached its kind's ceiling of 220 in FOURTEEN DAYS. The cap
+// was working; the rate was not a rate. The window is derived from the world's own clock rather than picked.
+console.log("\n── §353 · the powers act, and their people belong to them ──");
+{
+  const PW6 = await import("../engine/powers.js");
+  const RE6 = await import("../engine/random_encounters.js");
+  const { loadContentHeadless: lch353 } = await import("./headless_content.mjs");
+  const C353 = await lch353();
+
+  // ── C4 ────────────────────────────────────────────────────────────────────────────────────────────
+  check("§353: ⛔ C4 — A POWER TAKES ONE VERB A PASS, ROTATED BY THE DAY rather than rolled, so a world tick is reproducible and a force works through what it does instead of doing one thing five times by luck. ⛑ A BROKEN POWER TAKES NO VERB AT ALL — it is finished until something puts it back, which is the entire point of breaking one",
+    (() => {
+      const ch = { powerState: {} };
+      PW6.powerPass(ch, { content: C353, rules: C353.rules, day: 3 });
+      const took = Object.values(ch.powerState).filter(s => s.lastVerb).length;
+      const broke = { powerState: { power_switchback_tollmen: { broken: true } } };
+      PW6.powerPass(broke, { content: C353, rules: C353.rules, day: 3 });
+      return took === 11 && !broke.powerState.power_switchback_tollmen.lastVerb
+        && PW6.verbForPass({ id: "x", verbs: ["a", "b", "c"] }, 3) === PW6.verbForPass({ id: "x", verbs: ["a", "b", "c"] }, 3);
+    })());
+
+  check("§353: ⛔ …AND TRIBUTE STRENGTHENS THE LIEGE, which is what \"moves crystal up `answersTo`\" means in a world where powers hold no crystal. The Tollmen and the Edge Riders both answer to the Gralloch Crown, and over a year it is the one that grows. ⚠️ Every change lands on `character.powerState`, never on the shared record: the Gralloch grows in YOUR world because YOUR tributaries went on paying it, and not in the world of somebody who broke them",
+    (() => {
+      const ch = { powerState: {} };
+      for (let d = 1; d <= 144; d++) PW6.powerPass(ch, { content: C353, rules: C353.rules, day: d });
+      const gral = PW6.powersFrom(C353).find(p => p.id === "power_gralloch_crown");
+      const authored = (gral.strength?.contingents || []).reduce((n, c) => n + c.n, 0);
+      const now = PW6.headsOf(PW6.contingentsOf(gral, ch));
+      const clean = { powerState: {} };
+      return now > authored && authored === 114
+        && PW6.headsOf(PW6.contingentsOf(gral, clean)) === 114;   // the record itself never moved
+    })());
+
+  check("§353: ⛔ …AND GROWTH HAS A WINDOW, DERIVED FROM THE WORLD'S CLOCK, because `winsToGrowOneStep` says nothing about how fast three wins arrive. ⚠️ MY FIRST VERSION CLAIMED TO READ THE CLOCK AND DID NOT — `yearDays` lives at `content.worldClock.calendar.yearDays`, not on `rules`, so it fell through to a literal 144 and got the right answer by coincidence while the comment above it lied. Halving the year must halve the window, which is the only way to know the read is real",
+    (() => {
+      const steps = (content) => { const ch = { powerState: {} }; let n = 0;
+        for (let d = 1; d <= 144; d++) for (const x of PW6.powerPass(ch, { content, rules: content.rules, day: d })) if (x.grew) n++;
+        return n; };
+      const half = { ...C353, worldClock: { ...C353.worldClock, calendar: { ...C353.worldClock.calendar, yearDays: 72 } } };
+      const dial = { ...C353, rules: { ...C353.rules, powers: { ...C353.rules.powers, growth: { ...C353.rules.powers.growth, growEveryDays: 200 } } } };
+      return steps(half) > steps(C353) && steps(dial) < steps(C353);
+    })());
+
+  check("§353: ⛑ …AND A POWER CANNOT GROW PAST WHAT ITS KIND CAN BE. The Gralloch stops at 220, the top of `kinds.outlaw_crown.heads`. ⚠️ AND AN AUTHORED SIZE BEATS THE RANGE: the Ender's Host fields 170 where a lordship's range tops out at 90, so it simply cannot grow — an authored record is a ruling and a generator range is a default",
+    (() => {
+      const ch = { powerState: {} };
+      for (let d = 1; d <= 2000; d++) PW6.powerPass(ch, { content: C353, rules: C353.rules, day: d });
+      const gral = PW6.powersFrom(C353).find(p => p.id === "power_gralloch_crown");
+      const ender = PW6.powersFrom(C353).find(p => p.id === "power_ender_host");
+      return PW6.headsOf(PW6.contingentsOf(gral, ch)) === 220
+        && PW6.headsOf(PW6.contingentsOf(ender, ch)) === 170;
+    })());
+
+  check("§353: ⛔ …AND THE PASS IS SILENT UNLESS SOMETHING CHANGED. Measured over one world year: 134 of 144 passes write nothing, and every line it does write is a power actually growing or shrinking. ⚑ MY FIRST VERSION NARRATED THE ROUTINE — a line each time a gang tolled or a council taxed — and TWO gates caught it in the same run: §325 (\"a pass with nothing to say writes nothing\") and smoke 366, whose charge digest a wall of world rows reshaped. They were right: a force doing what it always does is not news, and eleven of them saying so every pass is how a player learns to stop reading it",
+    (() => {
+      const ch = { powerState: {} };
+      let silent = 0, rows = 0, real = 0;
+      for (let d = 1; d <= 144; d++) {
+        const news = PW6.powerPass(ch, { content: C353, rules: C353.rules, day: d });
+        if (!news.length) silent++;
+        rows += news.length;
+        real += news.filter(n => n.grew || n.shrank).length;
+      }
+      return silent >= 120 && rows > 0 && real === rows;
+    })());
+
+  // ── C3 ────────────────────────────────────────────────────────────────────────────────────────────
+  const toll353 = (C353.randomEncounters?.encounters || []).find(e => e.id === "re_toll_bandits");
+  const sw = C353.locations?.old_switchback;
+  check("§353: ⛔ C3 — AN OWNED ENCOUNTER FIRES WHERE ITS OWNER STANDS AND NOWHERE ELSE, AND NOT AT ALL ONCE THEY ARE BROKEN. ⛑ That last clause is the one that pays: clear the Tollmen and the switchback genuinely stops producing toll-men, instead of the road drawing them from a table forever",
+    (() => {
+      const here = PW6.encounterOwnerFilter("old_switchback", { content: C353, character: {} });
+      const gone = PW6.encounterOwnerFilter("old_switchback", { content: C353, character: { powerState: { power_switchback_tollmen: { broken: true } } } });
+      const away = PW6.encounterOwnerFilter("millbrook", { content: C353, character: {} });
+      return RE6.isEligible(toll353, sw, { ownerOf: here }) === true
+        && RE6.isEligible(toll353, sw, { ownerOf: gone }) === false
+        && RE6.isEligible(toll353, C353.locations.millbrook, { ownerOf: away }) === false;
+    })());
+
+  check("§353: ⛑ …AND AN OWNER STANDING HERE IS STRONGER CONTEXT THAN A TAG, which driving it is the only way to find. `re_toll_bandits` is tagged road/wild while `old_switchback` is tagged trail/mountain/waystation — so the Tollmen's own toll-bandits could NEVER have fired at the Tollmen's own chain-post. The power is sited correctly (the rules' `placeAtTags` for an outlaw_band lists trail and waystation); it is the encounter's tags that do not describe the place. ⚠️ Nothing else moves: an unowned encounter still needs its tags, which is 97 of the 98 entries, and exactly ONE behaves differently at that place",
+    (() => {
+      const here = PW6.encounterOwnerFilter("old_switchback", { content: C353, character: {} });
+      const unowned = (C353.randomEncounters?.encounters || []).find(e => e.id === "re_cutpurse");
+      let moved = 0;
+      for (const e of (C353.randomEncounters?.encounters || []))
+        if (RE6.isEligible(e, sw) !== RE6.isEligible(e, sw, { ownerOf: here })) moved++;
+      return RE6.isEligible(toll353, sw) === false && RE6.isEligible(toll353, sw, { ownerOf: here }) === true
+        && (!unowned || RE6.isEligible(unowned, sw, { ownerOf: here }) === false) && moved === 1;
+    })());
+
+  check("§353: ⛑ …AND `random_encounters.js` STAYS A LEAF. It takes a PREDICATE, never a power, so it has not learned what a power is. ⚠️ Its signature already had `power` meaning the CHARACTER'S LEVEL — two meanings of one word meeting in one place is how a reader picks the wrong one, so the new one is `ownerOf` and the collision is named in the source",
+    /ownerOf = null/.test(rd("engine/random_encounters.js"))
+    && /`power` HERE IS THE CHARACTER'S LEVEL/.test(rd("engine/random_encounters.js"))
+    && !/from "\.\/powers\.js"/.test(rd("engine/random_encounters.js"))
+    && /function ownerFilterHere\(/.test(rd("app.js")));
+
+  // ⛔ AND THE DIALS LOADED WITHOUT CROSSING A BAG. Four things in this codebase are named "power".
+  check("§353: ⛔ THE POWERS' DIALS LOAD, AND NONE OF THE FOUR \"power\" BAGS CROSSED — `rules.powers` (these dials), `rules.powerBands` (the seven-rung standing ladder), `powerSources` (the substrate) and `rules.martial` (band dials). ⚠️ `loadRule` went at the TAIL of a POSITIONAL array whose own comments record this file losing `economy`, `incap` and `tierRarity` to a mid-list insertion on three separate days. Appending is the only safe insertion",
+    !!C353.rules?.powers?.growth?.headsPerStep && !!C353.rules?.powers?.kinds?.outlaw_crown
+    && !!C353.rules?.powerBands && !!C353.powerSources && !!C353.rules?.martial
+    && C353.rules.powers !== C353.rules.powerBands && C353.rules.powers !== C353.rules.martial);
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

@@ -171,3 +171,47 @@ as one person. That is right far more often than not, and it means N2 fires only
 already decided these are two people — which is the only place a collision needs resolving.
 
 — CCode
+
+---
+
+# Addendum · CCODE-480 — your catch was right, and both change sets are applied
+
+**v2.4.17.** You settled the domains and the floors, and then found that **my** check was wrong:
+
+> *"The domains check still fails because it requires an array while 98 of 98 authored people store an
+> object… The gate is left as CCode wrote it and the fix is asked of him."*
+
+Measured: **zero** of the 95 authored non-legend people store an array. All 95 store an object —
+`{primary, secondary, tertiary}` ×90, `{primary, secondary}` ×4, `{primary}` ×1. My predicate refused
+thirteen correct records and would have gone on refusing every correct one after them.
+
+**And the fix is not a better array test.** This tool exists to say, at authoring time, exactly what §146
+will say at suite time — so it now uses **§146's own predicate, verbatim**:
+`!!(n.domains && Object.keys(n.domains).length)`. Shape-agnostic, as §146 is, so the day the corpus changes
+shape neither of us moves. A validator that disagrees with the gate it pre-empts is worse than no validator:
+it teaches its author to distrust it, which is your own SNG-505 §4.4 rule pointed back at me.
+
+## ✅ Both change sets are applied
+
+Eleven powers, thirteen people, fourteen files, both manifests. `powers=11` in the load line, and the
+readers reach every record:
+
+- **C2** — danger moved at **10** places. Tumbledown Market 2 → **4** under the Gralloch *and* the Edge
+  Riders together; Hardline 1 → 2 under the Ender's Host; Keelmouth unchanged at 2, because the Slip's −1
+  and the Barony's +1 cancel exactly as you authored them.
+- **C1** — a raid has a name at **15** places.
+- **C5** — **12 holds** can be assaulted, from the chain-post above Greta's waystation (8 at quality 1) to
+  the muster-yard below the Marchward's wall (60 at quality 4) and the Feast Hall itself (40 at quality 3).
+
+The four you re-levelled pass the floor check, the thirteen carry domains, and one prose number in
+`docs/EXESA.md` moved with them — 112 great figures to 116, since four of the new people are heroic tier.
+Both files are in `changesets/applied/`.
+
+⛑ And `scripts/apply_changeset.mjs` did the whole thing in two commands with a dry run first, which is what
+it was built for last time.
+
+**Next from me:** C3 (a power's `encounters[]` firing with its name and stopping when it is broken), C4
+(powers taking a verb on the tick, tribute moving up `answersTo`), C6 (standing with a power, allied
+contingents), then the rest. Say if C7 or C8 should jump the queue.
+
+— CCode

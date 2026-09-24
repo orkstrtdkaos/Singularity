@@ -1,0 +1,73 @@
+{
+ "schemaVersion": 1,
+ "romanceEligible": false,
+ "people": "human",
+ "closed": [],
+ "id": "councilor-dresh",
+ "name": "Councilor Dresh",
+ "tier": "leader",
+ "level": 12,
+ "role": "Councilor of Millbrook and head of its elder panel — leads the common house by preference rather than command, and asks what mandate a thing has before she asks how big it is",
+ "gender": "woman",
+ "pronouns": "she/her",
+ "sex": "female",
+ "homeLocation": "millbrook",
+ "communityId": "valley.millbrook",
+ "spectrum": {
+  "violence_peace": 0.5,
+  "chaos_order": 0.6,
+  "death_life": 0.3,
+  "mechanical_spiritual": 0,
+  "concrete_abstract": -0.5
+ },
+ "assistTags": [
+  "lead",
+  "talk",
+  "read-people",
+  "hold",
+  "investigate"
+ ],
+ "appearance": "A broad-shouldered woman seated at the centre of the common house table, composed since dawn and there before anyone else.",
+ "personality": {
+  "warmth": 0.5,
+  "trust": 0.4,
+  "candor": 0.9,
+  "patience": 0.8
+ },
+ "voiceHints": "Plain speech, and she asks the room for the same. Separates a smaller ask from a sanctioned one out loud, and only the second moves her.",
+ "wants": "For Millbrook to act on what it can prove, under a mandate it can defend to every settlement it answers to.",
+ "fears": "A panel that goes on pretending a thing is not happening because saying so would oblige it to act.",
+ "knowledge": [
+  "What the valley's settlements have asked of Millbrook in writing, and what they have not",
+  "The terms on which Millbrook's panel will sanction a survey into the Disputed Zone: two written settlement requests, a Heights-sanctioned observer with gate-senior clearance, and a named return date and return point"
+ ],
+ "reactsToReputation": {
+  "any": "hears you out at the table and asks what you want the panel to do",
+  "reliable": "lets you speak before the other elders",
+  "reckless": "asks who sanctioned it before anything else"
+ },
+ "questSeeds": [
+  "Millbrook's elder panel sanctions nothing into the Disputed Zone without Dresh's three conditions",
+  "The panel answers to the settlements that write to it, and the cities have started writing"
+ ],
+ "gear": [
+  "a councilor's staff of plain ash",
+  "the common house record book"
+ ],
+ "purse": {
+  "crystal": 90
+ },
+ "_fromPlay": "characters/player-s9z9u1/char-mr6eq1a5.json (Usnea Beard)",
+ "_idWas": "councilor_dresh",
+ "fullName": "Wenna Maud Dresh",
+ "title": "Councilor of Millbrook",
+ "aliases": [
+  "Wenna Maud Dresh"
+ ],
+ "domains": {
+  "primary": "verist",
+  "secondary": "mason",
+  "tertiary": "syllogist"
+ },
+ "_domainsWhy": "plain speech, what can be touched and proved, and mandate reasoned from premises"
+}

@@ -1,0 +1,76 @@
+{
+ "schemaVersion": 1,
+ "id": "dessa_wyck",
+ "name": "Dessa Wyck",
+ "tier": "notable",
+ "level": 14,
+ "role": "Captain of the Switchback Tollmen — runs the toll on the old high road and skims the tribute she sends the Gralloch",
+ "people": "human",
+ "gender": "woman",
+ "pronouns": "she/her",
+ "sex": "female",
+ "romanceEligible": false,
+ "homeLocation": "old_switchback",
+ "communityId": "echo_vale.old_switchback",
+ "domains": {
+  "primary": "marcher",
+  "secondary": "bargainers",
+  "tertiary": "horizon"
+ },
+ "spectrum": {
+  "violence_peace": -0.3,
+  "chaos_order": 0.2,
+  "death_life": 0.1,
+  "mechanical_spiritual": 0,
+  "concrete_abstract": -0.6
+ },
+ "assistTags": [
+  "bargain",
+  "guard",
+  "intimidate",
+  "read-people",
+  "watch"
+ ],
+ "appearance": "Lean and weather-dark, a crossbow across her back and a ledger in her coat. Sits on the chain post when she talks, so you have to look up at her.",
+ "personality": {
+  "warmth": 0.2,
+  "trust": 0.2,
+  "candor": 0.5,
+  "patience": 0.6
+ },
+ "voiceHints": "Prices things out loud. Treats every conversation as a negotiation she expects to win, and is cheerful about it.",
+ "wants": "To get off the mountain with enough put by that nobody can take it back — before the King notices the tribute is light.",
+ "fears": "Harl Maddock learning to count.",
+ "knowledge": [
+  "Who has come down from the high pass this season, and what they carried",
+  "Exactly how much the Gralloch is owed, and exactly how much it has been sent",
+  "That something on the upper switchback takes strange objects from packs and leaves the food, and that it is not her people"
+ ],
+ "reactsToReputation": {
+  "any": "sets the toll by what you look like you can pay",
+  "feared": "waves you through and remembers your face",
+  "generous": "doubles the toll and calls it respect"
+ },
+ "questSeeds": [
+  "Dessa has been skimming a fifth of the Gralloch's tribute for three seasons",
+  "The Tollmen would switch sides for a captain who could keep the King off them"
+ ],
+ "gear": [
+  "a heavy crossbow",
+  "a toll ledger in her own cipher",
+  "oiled_leathers"
+ ],
+ "purse": {
+  "crystal": 140
+ },
+ "closed": [],
+ "fullName": "Dessa Maerin Wyck",
+ "title": "Captain of the Switchback Tollmen",
+ "aliases": [
+  "Dessa Maerin Wyck"
+ ],
+ "_domainsWas": {
+  "primary": "marcher"
+ },
+ "_domainsWhy": "a toll-captain: the Marchers' edge, the Bargainers' price named aloud, and a road people"
+}

@@ -1,0 +1,76 @@
+{
+ "schemaVersion": 1,
+ "id": "tamsin_galt",
+ "name": "Tamsin Galt",
+ "tier": "notable",
+ "level": 19,
+ "role": "Captain of the Edge Riders — raids Tumbledown's caravans for the Gralloch Crown and wants the Crown for herself",
+ "people": "human",
+ "gender": "woman",
+ "pronouns": "she/her",
+ "sex": "female",
+ "romanceEligible": false,
+ "homeLocation": "the_churn_edge",
+ "communityId": "churnfolk.edge",
+ "domains": {
+  "primary": "churnfolk",
+  "secondary": "horizon",
+  "tertiary": "marcher"
+ },
+ "spectrum": {
+  "violence_peace": -0.7,
+  "chaos_order": -0.5,
+  "death_life": -0.2,
+  "mechanical_spiritual": 0,
+  "concrete_abstract": -0.4
+ },
+ "assistTags": [
+  "move",
+  "scout",
+  "strike",
+  "track",
+  "lead"
+ ],
+ "appearance": "Wiry and sun-cracked, head wrapped in grit-cloth, always half-mounted — one foot in the stirrup even when she is talking to you.",
+ "personality": {
+  "warmth": 0.3,
+  "trust": 0.1,
+  "candor": 0.4,
+  "patience": 0.2
+ },
+ "voiceHints": "Short sentences, fast decisions, and a laugh that comes too early. Asks what you want before you have finished saying it.",
+ "wants": "The Feast Hall and the four rings, and to be the one who decides where the bands ride.",
+ "fears": "Dying as somebody else's captain.",
+ "knowledge": [
+  "Every trail through the Churn, including the ones that move",
+  "Which of the King's bands would follow her and which would not",
+  "When Tumbledown will next be somewhere a caravan can reach"
+ ],
+ "reactsToReputation": {
+  "any": "sizes you up as a rider or a mark",
+  "feared": "offers you a place at her fire",
+  "known-enemy-of-the-crown": "wants to talk, alone"
+ },
+ "questSeeds": [
+  "Tamsin would bring thirty riders to anyone who helps her break Harl Maddock",
+  "The Edge Riders are owed a share of a raid the King kept"
+ ],
+ "gear": [
+  "a short horse-bow",
+  "a curved riding sword",
+  "a churn-bred dun mare"
+ ],
+ "purse": {
+  "crystal": 220
+ },
+ "closed": [],
+ "fullName": "Tamsin Rhee Galt",
+ "title": "Captain of the Edge Riders",
+ "aliases": [
+  "Tamsin Rhee Galt"
+ ],
+ "_domainsWas": {
+  "primary": "churnfolk"
+ },
+ "_domainsWhy": "Churn-born, a rider of distances, a fighter"
+}

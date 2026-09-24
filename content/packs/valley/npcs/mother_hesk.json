@@ -1,0 +1,77 @@
+{
+ "schemaVersion": 1,
+ "id": "mother_hesk",
+ "name": "Mother Hesk",
+ "tier": "heroic",
+ "level": 27,
+ "role": "Head of the Undercount — the thieves' guild that keeps the ledger beneath the Hundred Markets' ledger",
+ "people": "human",
+ "gender": "woman",
+ "pronouns": "she/her",
+ "sex": "female",
+ "romanceEligible": false,
+ "homeLocation": "the_hundred_markets",
+ "communityId": "center.markets",
+ "domains": {
+  "primary": "veilwright",
+  "secondary": "bargainers",
+  "tertiary": "umbral"
+ },
+ "spectrum": {
+  "violence_peace": 0.1,
+  "chaos_order": 0.4,
+  "death_life": 0,
+  "mechanical_spiritual": -0.1,
+  "concrete_abstract": 0.2
+ },
+ "assistTags": [
+  "conceal",
+  "misdirect",
+  "read-people",
+  "bargain",
+  "lead"
+ ],
+ "appearance": "A small, comfortable-looking old woman who sells spices and remembers every customer's name. Her hands are very clean. Nobody has seen her leave the stall.",
+ "personality": {
+  "warmth": 0.6,
+  "trust": 0.1,
+  "candor": 0.3,
+  "patience": 1
+ },
+ "voiceHints": "Warm, grandmotherly, and exact about money. Asks after your family, and you realise later she already knew their names.",
+ "wants": "The Undercount to outlive her, still keeping its one law — and a way into every new house built near the Crossing.",
+ "fears": "A member robbing a seller at their own stall, because then the markets stop trusting their prices and the guild starves.",
+ "knowledge": [
+  "Who in the Crossing has money, where they keep it, and who guards it",
+  "What moves through the fences in Dusklow and the Low Market",
+  "Which wardens are paid, and by whom"
+ ],
+ "reactsToReputation": {
+  "any": "sells you spices and learns what you carry",
+  "wealthy": "sends someone to look at your walls",
+  "honest-dealer": "offers you a membership, once"
+ },
+ "questSeeds": [
+  "The Undercount has marked a new holding near the markets as its next house",
+  "A member broke the guild's law, and Mother Hesk wants them found before the wardens do"
+ ],
+ "gear": [
+  "a spice-stall's scales and weights",
+  "a ledger nobody else can read",
+  "a thin knife she has not needed in years"
+ ],
+ "purse": {
+  "crystal": 1200
+ },
+ "closed": [],
+ "fullName": "Agathe Morrow Hesk",
+ "title": "Mother of the Undercount",
+ "aliases": [
+  "Agathe Morrow Hesk"
+ ],
+ "_domainsWas": {
+  "primary": "veilwright",
+  "secondary": "bargainers"
+ },
+ "_domainsWhy": "made truths, written bargains, and the Umbrals' dark roads her fences run on"
+}

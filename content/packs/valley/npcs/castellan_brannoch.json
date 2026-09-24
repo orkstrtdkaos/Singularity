@@ -1,0 +1,77 @@
+{
+ "schemaVersion": 1,
+ "id": "castellan_brannoch",
+ "name": "Castellan Brannoch",
+ "tier": "notable",
+ "level": 18,
+ "role": "Castellan of the Echo Bridge — holds the only crossing for miles for neither city, at a toll that never changes",
+ "people": "human",
+ "gender": "man",
+ "pronouns": "he/him",
+ "sex": "male",
+ "romanceEligible": false,
+ "homeLocation": "echo_river_crossing",
+ "communityId": "valley.millbrook",
+ "domains": {
+  "primary": "verist",
+  "secondary": "marcher",
+  "tertiary": "stillhold"
+ },
+ "spectrum": {
+  "violence_peace": 0.1,
+  "chaos_order": 0.8,
+  "death_life": 0.2,
+  "mechanical_spiritual": -0.2,
+  "concrete_abstract": -0.5
+ },
+ "assistTags": [
+  "guard",
+  "hold",
+  "investigate",
+  "watch",
+  "talk"
+ ],
+ "appearance": "A square, grey man in a bridge-warden's tabard that belongs to no city's colours. Stands in the middle of his bridge rather than at either end.",
+ "personality": {
+  "warmth": 0.4,
+  "trust": 0.4,
+  "candor": 1,
+  "patience": 0.7
+ },
+ "voiceHints": "Exact, unhurried and unbribable. States the toll, states the law, and asks nothing else of you.",
+ "wants": "The bridge held for neither city, and the name of whoever is poisoning his river.",
+ "fears": "The day both cities stop offering to buy the bridge and start sending soldiers for it.",
+ "knowledge": [
+  "Everyone who has crossed his bridge in eleven years, and which way",
+  "What Harmonic Heights and the Radiant Plateau each offered for the bridge",
+  "That the contamination in the river gets worse after certain nights, not certain days"
+ ],
+ "reactsToReputation": {
+  "any": "charges you the posted toll",
+  "honest": "tells you what he has seen upriver",
+  "partisan-of-either-city": "charges you the posted toll and watches your hands"
+ },
+ "questSeeds": [
+  "Brannoch will trade a year's free crossing for the name of whoever is fouling the Echo River",
+  "One of the two cities has stopped offering and started planning"
+ ],
+ "gear": [
+  "a halberd",
+  "a bridge-warden's tabard in no city's colours",
+  "the crossing ledger"
+ ],
+ "purse": {
+  "crystal": 260
+ },
+ "closed": [],
+ "fullName": "Tomas Evander Brannoch",
+ "title": "Castellan of the Echo Bridge",
+ "aliases": [
+  "Tomas Evander Brannoch"
+ ],
+ "_domainsWas": {
+  "primary": "verist",
+  "secondary": "marcher"
+ },
+ "_domainsWhy": "exact truth, a held line, and a peace he keeps between two cities"
+}

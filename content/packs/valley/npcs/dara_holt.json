@@ -1,0 +1,71 @@
+{
+ "schemaVersion": 1,
+ "id": "dara-holt",
+ "name": "Dara Holt",
+ "fullName": "Dara Linnet Holt",
+ "title": "the Ditch-Mother",
+ "aliases": [
+  "Dara Linnet Holt",
+  "the Ditch-Mother"
+ ],
+ "tier": "leader",
+ "level": 12,
+ "people": "human",
+ "romanceEligible": false,
+ "closed": [],
+ "role": "Senior east-channel irrigator of Millbrook, called the Ditch-Mother, and a member of Millbrook's elder panel",
+ "gender": "woman",
+ "pronouns": "she/her",
+ "sex": "female",
+ "homeLocation": "millbrook",
+ "communityId": "valley.millbrook",
+ "spectrum": {
+  "violence_peace": 0.5,
+  "chaos_order": 0.6,
+  "death_life": 0.5,
+  "mechanical_spiritual": -0.2,
+  "concrete_abstract": -0.7
+ },
+ "assistTags": [
+  "tend",
+  "grow",
+  "watch",
+  "hold"
+ ],
+ "appearance": "A composed woman standing at her own door before the frost has melted, a mug held in both hands.",
+ "personality": {
+  "warmth": 0.4,
+  "trust": 0.3,
+  "candor": 0.5,
+  "patience": 0.9
+ },
+ "voiceHints": "Does her accounting fast and quiet, then waits. Will not say a theory aloud until someone else has confirmed it.",
+ "wants": "The east channel running clean and on time, and the panel acting on the water before the water acts on Millbrook.",
+ "fears": "Being the one who said it first and being wrong in front of the whole panel.",
+ "knowledge": [
+  "Every sluice, sleeve and blank on Millbrook's east channel, and when each last failed"
+ ],
+ "reactsToReputation": {
+  "any": "hears you out at her door and gives nothing away",
+  "reliable": "tells you what she has not told the panel"
+ },
+ "questSeeds": [
+  "The Ditch-Mother has seen the channel fail for weeks and has not yet said why to the panel"
+ ],
+ "gear": [
+  "a sluice key on a cord",
+  "an irrigation ledger"
+ ],
+ "purse": {
+  "crystal": 60
+ },
+ "_fromPlay": "characters/player-s9z9u1/char-mrhs8286.json (Silas Weir)",
+ "domains": {
+  "primary": "rootkin",
+  "secondary": "mason",
+  "tertiary": "enginewright"
+ },
+ "_domainsWhy": "growing things, the channel stones, and the sluices she keeps running",
+ "_levelWas": 11,
+ "_levelWhy": "§148: the tier is right (a ruling lord, a seated elder), so the level climbs to the tier's floor rather than the tier dropping."
+}

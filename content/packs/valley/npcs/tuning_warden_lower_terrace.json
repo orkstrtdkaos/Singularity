@@ -1,0 +1,75 @@
+{
+ "schemaVersion": 1,
+ "romanceEligible": false,
+ "people": "human",
+ "closed": [],
+ "id": "tuning-warden-lower-terrace",
+ "name": "Maren Vasse",
+ "tier": "notable",
+ "level": 16,
+ "role": "Tuning-warden of the Harmonic Heights Lower Terrace — keeps the Warden Council's bulletin board, and decides what reaches the Council and when",
+ "gender": "woman",
+ "pronouns": "she/her",
+ "sex": "female",
+ "homeLocation": "harmonic_heights_terrace",
+ "communityId": "echo_vale.harmonic_heights",
+ "spectrum": {
+  "violence_peace": 0.3,
+  "chaos_order": 0.6,
+  "death_life": 0.2,
+  "mechanical_spiritual": -0.1,
+  "concrete_abstract": -0.4
+ },
+ "assistTags": [
+  "watch",
+  "investigate",
+  "read-people",
+  "guard",
+  "sense-danger"
+ ],
+ "appearance": "A woman of about fifty with the Warden sash and deep acoustic calluses on both index fingers, standing watch by a bulletin board long enough for her tea to go cold.",
+ "personality": {
+  "warmth": 0.4,
+  "trust": 0.4,
+  "candor": 0.8,
+  "patience": 0.8
+ },
+ "voiceHints": "Level and cataloguing, never alarmed. Pauses for calculation, not reluctance. Asks what goes to the Council before she decides how to log it.",
+ "wants": "To know what the Warden Council should hear, and when, before she writes it down.",
+ "fears": "The upper chamber moving on something before the Warden Council knows why.",
+ "knowledge": [
+  "Every notice on the Lower Terrace bulletin board and who filed it",
+  "How to read relay traffic: three copies on one night with no stagger and a heavier seal is Council-internal",
+  "That Farren on the Second Terrace still consults for the Warden Council when nobody else can solve something"
+ ],
+ "reactsToReputation": {
+  "any": "logs what you tell her, and asks what else she should know",
+  "reliable": "backs you, on the condition that the Council can reach you"
+ },
+ "questSeeds": [
+  "The Warden Council logged a missing apprentice as unsanctioned solo practice and gave it low priority",
+  "Priority Council packets are moving overnight and nobody has told the Lower Terrace why"
+ ],
+ "gear": [
+  "the Warden sash",
+  "a tuning fork of dark crystal",
+  "the bulletin board's log"
+ ],
+ "purse": {
+  "crystal": 110
+ },
+ "_fromPlay": "characters/player-s9z9u1/char-mr4ejo8c.json and characters/player-54seyk/char-mr4ejo8c.json (Cellaceron)",
+ "_idWas": "warden_maren",
+ "fullName": "Maren Oriel Vasse",
+ "title": "Tuning-Warden of the Lower Terrace",
+ "aliases": [
+  "Maren Oriel Vasse"
+ ],
+ "_registryName": "Maren — the save's registry calls her by her given name alone; four characters on this device have met a Maren. The record now carries a family name and a title so she is never only 'Maren' again.",
+ "domains": {
+  "primary": "verist",
+  "secondary": "lattice",
+  "tertiary": "stillhold"
+ },
+ "_domainsWhy": "what is so, logged in order, kept calm"
+}

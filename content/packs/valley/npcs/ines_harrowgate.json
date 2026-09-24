@@ -1,0 +1,79 @@
+{
+ "schemaVersion": 1,
+ "id": "ines_harrowgate",
+ "name": "Ines Harrowgate",
+ "tier": "heroic",
+ "level": 25,
+ "role": "Holder of the Slip at Keelmouth — keeps the only slipway on four hundred miles of cliff open to anyone who pays the posted tariff",
+ "people": "human",
+ "gender": "woman",
+ "pronouns": "she/her",
+ "sex": "female",
+ "romanceEligible": false,
+ "homeLocation": "keelmouth",
+ "communityId": "keelmouth",
+ "domains": {
+  "primary": "mason",
+  "secondary": "horizon",
+  "tertiary": "rootkin"
+ },
+ "spectrum": {
+  "violence_peace": 0.5,
+  "chaos_order": 0.6,
+  "death_life": 0.6,
+  "mechanical_spiritual": -0.2,
+  "concrete_abstract": -0.6
+ },
+ "assistTags": [
+  "guard",
+  "lead",
+  "navigate-wilds",
+  "tend",
+  "talk"
+ ],
+ "appearance": "A tall, salt-greyed woman in a harbour-watch coat with the lining patched in three colours. Works the slip rope herself on busy days.",
+ "personality": {
+  "warmth": 0.9,
+  "trust": 0.6,
+  "candor": 0.9,
+  "patience": 0.7
+ },
+ "voiceHints": "Plain and warm, with a harbour-master's habit of giving the cost of a thing before the thing. Keeps promises out loud, in front of witnesses.",
+ "wants": "The Slip open to everyone, at the same price, for as long as there is a Keelmouth.",
+ "fears": "That she will have to spend her people's lives to keep it that way.",
+ "knowledge": [
+  "Every hull that has gone into the water at Keelmouth in twenty years",
+  "How many road-men the Baron at Firstsight can levy, and how many would stay",
+  "The tides, the estuary channels and the sea-roads out of the Outrun"
+ ],
+ "reactsToReputation": {
+  "any": "charges you the carved tariff and asks whether you have eaten",
+  "honest": "lends you the harbour watch without being asked twice",
+  "known-cruel": "charges you the tariff and watches you until you leave"
+ },
+ "questSeeds": [
+  "The Baron at Firstsight has closed the road to Keelmouth's supply wagons",
+  "Keelmouth's families would fight for her, and she is trying not to let them"
+ ],
+ "gear": [
+  "a boathook she fights with",
+  "a harbour-watch coat",
+  "the Slip's master ledger"
+ ],
+ "purse": {
+  "crystal": 600
+ },
+ "closed": [],
+ "fullName": "Ines Aurelie Harrowgate",
+ "title": "Holder of the Slip",
+ "aliases": [
+  "Ines Aurelie Harrowgate"
+ ],
+ "_domainsWas": {
+  "primary": "mason",
+  "secondary": "horizon"
+ },
+ "_domainsWhy": "a builder's ledger, the sea-roads, and the care that feeds whoever wrecks by accident",
+ "_levelWas": 24,
+ "_levelWhy": "§148: the tier is right (a ruling lord, a seated elder), so the level climbs to the tier's floor rather than the tier dropping."
+}

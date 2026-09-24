@@ -339,10 +339,22 @@ export function checkChangeSet(cs, label = cs.id || "(unnamed)") {
       // ⚠️ THE SAME EXEMPTION §59 AND §146 CARRY: domains feed the kit draw, so a legend or a record declared
       // out of the fight path is allowed none. Anything else with a role in the world needs them.
       const exempt = (n) => n?.isLegend || n?.legend || n?.notAnOpponent || n?.declaredNotAnOpponent;
-      const noDomains = people.filter(n => !exempt(n) && !(Array.isArray(n.domains) && n.domains.length));
+      // ⛔ CCODE-480 — AND THIS PREDICATE WAS WRONG, WHICH AEVI CAUGHT BY RUNNING IT. I wrote
+      // `Array.isArray(n.domains) && n.domains.length`. Measured: ZERO of the 95 authored non-legend people
+      // store an array; all 95 store an OBJECT — `{primary, secondary, tertiary}` ×90, `{primary, secondary}`
+      // ×4, `{primary}` ×1. So the check refused thirteen records that were correct and would have gone on
+      // refusing every correct one after them.
+      // ⛑ AND THE FIX IS NOT A BETTER ARRAY TEST. This tool exists to say, at authoring time, exactly what
+      // §146 will say at suite time — so it must use §146's OWN predicate, not a second reading of the same
+      // question. A validator that disagrees with the gate it pre-empts is worse than no validator: it
+      // teaches an author to distrust it, which is the SNG-505 §4.4 rule pointed at me.
+      // ⚠️ SHAPE-AGNOSTIC ON PURPOSE, exactly as §146 is: an object or an array both answer "do they have
+      // any", and the day the corpus changes shape neither of us moves.
+      const hasDomains = (n) => !!(n.domains && Object.keys(n.domains).length);   // §146's predicate, verbatim
+      const noDomains = people.filter(n => !exempt(n) && !hasDomains(n));
       check(`${label}: every person this change set adds carries \`domains\` (${people.length} person(s))`,
         noDomains.length === 0,
-        `${noDomains.map(n => n.id).join(", ")} — domains feed the kit draw; §59 and §146 assert every authored non-legend person has them`);
+        `${noDomains.map(n => n.id).join(", ")} — domains feed the kit draw; §59 and §146 assert every authored non-legend person has them, and this uses §146's own predicate so the two can never disagree`);
 
       const underFloor = people.filter(n => n.tier && n.level != null && floors[n.tier] != null
         && Number(n.level) < Number(floors[n.tier]));

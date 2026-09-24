@@ -1,0 +1,71 @@
+{
+ "schemaVersion": 1,
+ "romanceEligible": false,
+ "people": "human",
+ "closed": [],
+ "id": "sorel",
+ "name": "Sorel Halloran",
+ "tier": "notable",
+ "level": 15,
+ "role": "Archivist of the Radiant Council's water-accountability office — surveys the valley's water and knows exactly which fragments of the record the Council lets archivists see",
+ "gender": "woman",
+ "pronouns": "she/her",
+ "sex": "female",
+ "homeLocation": "radiant_plateau_edge",
+ "communityId": "echo_vale.radiant_plateau",
+ "spectrum": {
+  "violence_peace": 0.4,
+  "chaos_order": 0.5,
+  "death_life": 0.3,
+  "mechanical_spiritual": -0.4,
+  "concrete_abstract": -0.2
+ },
+ "assistTags": [
+  "study",
+  "investigate",
+  "recall",
+  "navigate-wilds"
+ ],
+ "appearance": "A woman of about sixty in undyed wool, a Plateau optical-fibre collar worn plain and small, a weight-distributed satchel, and a photonic instrument she reads the river with.",
+ "personality": {
+  "warmth": 0.4,
+  "trust": 0.3,
+  "candor": 0.6,
+  "patience": 0.8
+ },
+ "voiceHints": "Steady, precise, and careful about what she says of the Council. When she chooses to say it, she says it plainly.",
+ "wants": "For the water record to say what the water actually does.",
+ "fears": "Being the only one who knows what the Council chose.",
+ "knowledge": [
+  "The Council's water surveys and where their markers were set",
+  "The three approved fragments archivists may read about the Archive engineers of the Transition's close",
+  "What 'instrumental' means when the Council uses it instead of a name"
+ ],
+ "reactsToReputation": {
+  "any": "measures you before she trusts you with anything the Council has not approved",
+  "honest": "tells you what the survey found"
+ },
+ "questSeeds": [
+  "The Council's water office ordered survey markers moved before an archivist could find what they marked"
+ ],
+ "gear": [
+  "a photonic river instrument",
+  "a weight-distributed satchel of survey records",
+  "a Plateau optical-fibre collar"
+ ],
+ "purse": {
+  "crystal": 120
+ },
+ "_fromPlay": "characters/player-s9z9u1/char-mr4ejo8c.json and characters/player-54seyk/char-mr4ejo8c.json (Cellaceron)",
+ "fullName": "Sorel Anwen Halloran",
+ "title": "Archivist of the Water-Accountability Office",
+ "aliases": [
+  "Sorel Anwen Halloran"
+ ],
+ "domains": {
+  "primary": "verist",
+  "secondary": "blazeborn",
+  "tertiary": "hourkeeper"
+ },
+ "_domainsWhy": "the record saying what the water does, the Plateau's light, and the archive's memory"
+}

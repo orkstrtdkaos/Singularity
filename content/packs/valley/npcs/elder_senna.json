@@ -1,0 +1,70 @@
+{
+ "schemaVersion": 1,
+ "romanceEligible": false,
+ "people": "human",
+ "closed": [],
+ "id": "elder-senna",
+ "name": "Elder Senna",
+ "tier": "leader",
+ "level": 12,
+ "role": "Village elder of Millbrook and a voice on its common house panel — listens on her feet, cup set aside, watching your face",
+ "gender": "woman",
+ "pronouns": "she/her",
+ "sex": "female",
+ "homeLocation": "millbrook",
+ "communityId": "valley.millbrook",
+ "spectrum": {
+  "violence_peace": 0.6,
+  "chaos_order": 0.4,
+  "death_life": 0.4,
+  "mechanical_spiritual": 0.1,
+  "concrete_abstract": -0.3
+ },
+ "assistTags": [
+  "read-people",
+  "talk",
+  "tend",
+  "watch"
+ ],
+ "appearance": "An older woman who stands to listen rather than sits, cup set down and forgotten, eyes on the speaker's face.",
+ "personality": {
+  "warmth": 0.7,
+  "trust": 0.6,
+  "candor": 0.7,
+  "patience": 0.9
+ },
+ "voiceHints": "Says little until she has heard all of it, then says one thing.",
+ "wants": "For Millbrook's people to be heard by the panel before the panel decides for them.",
+ "fears": "The village deciding in a hurry what it cannot undo.",
+ "knowledge": [
+  "Everyone in Millbrook, and which of them the panel has not yet heard"
+ ],
+ "reactsToReputation": {
+  "any": "listens standing, and remembers exactly what you said"
+ },
+ "questSeeds": [
+  "Senna holds a key someone left in her keeping"
+ ],
+ "gear": [
+  "a walking stick",
+  "a ring of household keys"
+ ],
+ "purse": {
+  "crystal": 40
+ },
+ "_fromPlay": "characters/player-s9z9u1/char-mr4ejo8c.json and characters/player-54seyk/char-mr4ejo8c.json (Cellaceron)",
+ "_idWas": "elder_senna",
+ "fullName": "Senna Rhoswen Aske",
+ "title": "Elder of Millbrook",
+ "aliases": [
+  "Senna Rhoswen Aske"
+ ],
+ "domains": {
+  "primary": "stillhold",
+  "secondary": "threnodist",
+  "tertiary": "rootkin"
+ },
+ "_domainsWhy": "the patience of the walled peace, feeling heard aloud, and a village she tends",
+ "_levelWas": 10,
+ "_levelWhy": "§148: the tier is right (a ruling lord, a seated elder), so the level climbs to the tier's floor rather than the tier dropping."
+}

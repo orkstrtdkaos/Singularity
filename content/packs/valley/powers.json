@@ -1,0 +1,830 @@
+{
+ "schemaVersion": 1,
+ "id": "powers",
+ "kind": "powers",
+ "note": "SNG-634_powers_on_the_ground — Powers on the ground: seven powers and their leaders, seated on canon places. Written by scripts/apply_changeset.mjs; the change set is the authority.",
+ "powers": [
+  {
+   "id": "power_switchback_tollmen",
+   "name": "The Switchback Tollmen",
+   "kind": "outlaw_band",
+   "temper": "hard",
+   "seat": "old_switchback",
+   "reach": [
+    "old_switchback",
+    "kestrels_roost"
+   ],
+   "leader": "dessa_wyck",
+   "answersTo": {
+    "power": "power_gralloch_crown",
+    "bond": "tribute"
+   },
+   "strength": {
+    "scale": "unit",
+    "contingents": [
+     {
+      "n": 18,
+      "quality": 1,
+      "what": "toll-men with crossbows and cudgels"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "old_switchback",
+     "kind": "post",
+     "name": "a chain-post on the upper turns, above the halfway waystation",
+     "garrison": 8
+    }
+   ],
+   "verbs": [
+    "toll",
+    "raid",
+    "tribute"
+   ],
+   "encounters": [
+    "re_toll_bandits"
+   ],
+   "dangerLift": 1,
+   "noticesYouWhen": [
+    "crossed",
+    "neighbour"
+   ],
+   "wantsFromYou": "The toll, paid without argument, and a second one if you are carrying something worth more than your boots.",
+   "offersYou": "Safe passage on the high road, and word of anything coming down from the pass before it arrives.",
+   "leverage": "Dessa keeps back a fifth of what she sends the Gralloch. Anyone who can prove it owns her.",
+   "whenBroken": "The high road is only as dangerous as the mountain again, until the Gralloch sends a harder captain to take the waystation back.",
+   "rivals": [],
+   "opposedBy": [
+    "the_kestrel",
+    "greta_waystation"
+   ],
+   "plainly": "A toll gang holding the old road up to the high pass. They would rather be paid than fight.",
+   "descriptionSeed": "They hold a chain across the upper turns, above the halfway waystation that Greta keeps alone: a fire in a rock shelter, a price that depends on how you look. Greta will not feed them and they have not yet made her. They pay tribute up the line to the Gralloch and resent every crystal of it.",
+   "appearance": "A rusted chain slung across a stone-cut mountain road, a rock shelter with smoke rising, men in patched oilskins with crossbows, and far below them a half-roofed waystation",
+   "_correction_20260923": "Was: the Tollmen took the halfway waystation. greta_waystation is its authored keeper; I missed her. Moved the chain above it; she opposes them."
+  },
+  {
+   "id": "power_gralloch_crown",
+   "name": "The Gralloch Crown",
+   "kind": "outlaw_crown",
+   "temper": "cruel",
+   "seat": "the_gralloch",
+   "reach": [
+    "the_gralloch",
+    "the_churn_edge",
+    "tumbledown_market",
+    "spindrift_hollow"
+   ],
+   "leader": "harl_maddock",
+   "answersTo": null,
+   "strength": {
+    "scale": "legion",
+    "contingents": [
+     {
+      "n": 90,
+      "quality": 2,
+      "what": "the King's own host — veterans of the feud"
+     },
+     {
+      "n": 24,
+      "quality": 3,
+      "what": "the Ring-sworn, his household blades"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "the_gralloch",
+     "kind": "post",
+     "name": "the Feast Hall, a stockade raised on the ground where the feud ended",
+     "garrison": 40
+    }
+   ],
+   "verbs": [
+    "raid",
+    "tribute",
+    "recruit",
+    "expand",
+    "feud"
+   ],
+   "encounters": [],
+   "dangerLift": 1,
+   "noticesYouWhen": [
+    "crossed",
+    "wealth",
+    "rival_ally"
+   ],
+   "wantsFromYou": "Your knee, your coin, or your head on the stockade — and he genuinely does not mind which.",
+   "offersYou": "A band of your own under his banner, a share of every road he taxes, and the freedom to do anything to anyone he has not already claimed.",
+   "leverage": "Four chiefs came to his truce feast and one walked out wearing their rings. Their bands remember whose sons they were.",
+   "whenBroken": "The Gralloch goes back to four bands feuding, and for a season it is worse than it was under him. Whoever broke him can hold the Feast Hall — and inherit every band that swore to it.",
+   "rivals": [],
+   "opposedBy": [
+    "the_kestrel"
+   ],
+   "plainly": "The bandit king of the Gralloch. He ended a four-way feud by killing the other chiefs at a truce feast, and every raider band within a week's ride pays him.",
+   "descriptionSeed": "Harl Maddock did not win the Gralloch's feud; he ended it, by inviting the other four chiefs to a feast and not letting them leave. He wears their rings. He is not mad and not cruel by temperament — he is cruel by policy, because fear is cheaper than loyalty and he has done the arithmetic. He wants the pass at Kestrel's Roost, because whoever holds it taxes everything that moves between the plateau and the country beyond.",
+   "appearance": "A timber stockade on broken badland, crows on the sharpened posts, a hall with a smoke-blackened roof and four rusted rings nailed above its door"
+  },
+  {
+   "id": "power_edge_riders",
+   "name": "The Edge Riders",
+   "kind": "outlaw_band",
+   "temper": "cruel",
+   "seat": "the_churn_edge",
+   "reach": [
+    "the_churn_edge",
+    "tumbledown_market",
+    "spindrift_hollow"
+   ],
+   "leader": "tamsin_galt",
+   "answersTo": {
+    "power": "power_gralloch_crown",
+    "bond": "tribute"
+   },
+   "strength": {
+    "scale": "unit",
+    "contingents": [
+     {
+      "n": 30,
+      "quality": 2,
+      "what": "mounted raiders on churn-bred horses"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "the_churn_edge",
+     "kind": "post",
+     "name": "a horse camp that moves every few nights",
+     "garrison": 10
+    }
+   ],
+   "verbs": [
+    "raid",
+    "tribute",
+    "extort"
+   ],
+   "encounters": [],
+   "dangerLift": 1,
+   "noticesYouWhen": [
+    "crossed",
+    "wealth"
+   ],
+   "wantsFromYou": "Whatever you are hauling, and your horses.",
+   "offersYou": "Fast riders who know every trail through the Churn, if you can pay more than the King does.",
+   "leverage": "Tamsin wants the Crown for herself and would bring thirty riders to whoever helps her take it.",
+   "whenBroken": "Tumbledown's caravans run again without outriders, and the King loses his fastest arm.",
+   "rivals": [],
+   "opposedBy": [],
+   "plainly": "Mounted raiders who hit the caravans going in and out of Tumbledown. They ride for the Gralloch Crown, for now.",
+   "descriptionSeed": "They hit Tumbledown's caravans because a market that is never in the same place twice has no walls and no militia. Tamsin Galt leads them for the King, pays him what he asks, and counts the days.",
+   "appearance": "Riders on shaggy dun horses cresting a shifting ridge, faces wrapped against grit, a caravan's canvas burning in the flat behind them"
+  },
+  {
+   "id": "power_undercount",
+   "name": "The Undercount",
+   "kind": "guild",
+   "temper": "hard",
+   "seat": "the_hundred_markets",
+   "reach": [
+    "the_hundred_markets",
+    "the_crossing",
+    "dusklow",
+    "the_low_market",
+    "the-low-lamp-inn",
+    "kestrels_roost",
+    "tumbledown_market"
+   ],
+   "cells": [
+    {
+     "at": "dusklow",
+     "does": "fence"
+    },
+    {
+     "at": "the_low_market",
+     "does": "fence"
+    },
+    {
+     "at": "the-low-lamp-inn",
+     "does": "safehouse"
+    },
+    {
+     "at": "kestrels_roost",
+     "does": "inform"
+    },
+    {
+     "at": "tumbledown_market",
+     "does": "fence"
+    }
+   ],
+   "leader": "mother_hesk",
+   "answersTo": null,
+   "strength": {
+    "scale": "unit",
+    "contingents": [
+     {
+      "n": 40,
+      "quality": 2,
+      "what": "burglars, knives and lookouts, never in one place"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "the_hundred_markets",
+     "kind": "enterprise",
+     "name": "a counting-house behind a spice stall",
+     "garrison": 6
+    }
+   ],
+   "verbs": [
+    "steal",
+    "fence",
+    "smuggle",
+    "extort",
+    "inform"
+   ],
+   "encounters": [],
+   "dangerLift": 0,
+   "noticesYouWhen": [
+    "neighbour",
+    "wealth",
+    "crossed"
+   ],
+   "wantsFromYou": "A store room at your post and a blind eye, for a tenth of what passes through it. If you refuse, what is inside your walls.",
+   "offersYou": "A fence for anything, a door into any house in the Crossing, and the first word of who is coming for you and why.",
+   "leverage": "The guild has one law: never rob a seller at their own stall. The Hundred Markets' prices are true because of it, and every member who has ever broken it has disappeared.",
+   "whenBroken": "The fences in Dusklow and the Low Market go quiet, stolen goods stop moving, and every thief in the Crossing is suddenly working for themselves.",
+   "rivals": [],
+   "opposedBy": [
+    "warden-coll",
+    "broker_sain"
+   ],
+   "plainly": "A thieves' guild working out of the Hundred Markets. It never robs a seller at their own stall, and it robs nearly everyone else.",
+   "descriptionSeed": "The Undercount is the count under the count: every market keeps a ledger, and the guild keeps the one underneath it. It fences through Dusklow, where nobody repeats anything, and through the Low Market, where the price is on everything. It protects the Hundred Markets because it feeds on them. It will come for any new wealth that settles within reach of the Crossing, quietly, at night.",
+   "appearance": "A crowded market lane at dusk, a spice stall with a back room behind a hanging rug, a ledger open on a crate, a hooded figure counting coins by a shuttered lamp",
+   "clientOf": {
+    "power": "power_radiant_plateau",
+    "bond": "client",
+    "secretGM": "The Patient Buyer. The Radiant Council buys the Roost's debts through the Undercount's counting-house so its name is on nothing (Erik, 2026-09-23)."
+   },
+   "approach": {
+    "when": "neighbour",
+    "by": "mother_hesk",
+    "to": [
+     "holder",
+     "keeper"
+    ],
+    "form": "meeting",
+    "offer": "A fence at your post: guild goods pass through a store room and out again, and you take a tenth of what moves.",
+    "responses": {
+     "embrace": {
+      "becomes": {
+       "cell": "fence"
+      },
+      "yields": "a tenth of fenced value each season",
+      "standing": {
+       "power_undercount": 2
+      },
+      "risk": "the wardens learn of it (warden-coll)"
+     },
+     "tolerate": {
+      "becomes": {
+       "cell": "fence",
+       "acknowledged": false
+      },
+      "yields": "nothing",
+      "standing": {
+       "power_undercount": 0
+      },
+      "risk": "the wardens learn of it, and you took nothing for the danger"
+     },
+     "reject": {
+      "becomes": {
+       "noticed": "crossed"
+      },
+      "yields": "nothing",
+      "standing": {
+       "power_undercount": -2
+      },
+      "risk": "the guild comes for what is inside your walls within the season"
+     },
+     "negotiate": {
+      "becomes": "the GM plays Mother Hesk's leverage against the holder's price",
+      "yields": "terms",
+      "standing": {
+       "power_undercount": 0
+      },
+      "risk": "none until terms are set"
+     }
+    }
+   }
+  },
+  {
+   "id": "power_keelmouth_slip",
+   "name": "The Holding of the Slip",
+   "kind": "lordship",
+   "temper": "kind",
+   "seat": "keelmouth",
+   "reach": [
+    "keelmouth",
+    "firstsight"
+   ],
+   "leader": "ines_harrowgate",
+   "answersTo": null,
+   "strength": {
+    "scale": "unit",
+    "contingents": [
+     {
+      "n": 36,
+      "quality": 2,
+      "what": "the harbour watch"
+     },
+     {
+      "n": 10,
+      "quality": 3,
+      "what": "the slip-wardens, who fight from the boats"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "keelmouth",
+     "kind": "post",
+     "name": "the Slip and the harbour watch-house",
+     "garrison": 20
+    },
+    {
+     "at": "keelmouth",
+     "kind": "enterprise",
+     "name": "the Keelmouth boatyards",
+     "garrison": 6
+    }
+   ],
+   "verbs": [
+    "protect",
+    "patrol",
+    "tax",
+    "recruit"
+   ],
+   "encounters": [],
+   "dangerLift": -1,
+   "noticesYouWhen": [
+    "rival_ally",
+    "crossed"
+   ],
+   "wantsFromYou": "An honest tariff paid at the posted rate, and your help when Firstsight moves on the road.",
+   "offersYou": "A berth for any hull, the harbour watch lent to your cause when your cause is hers, and a lord who keeps her word to the letter and past it.",
+   "leverage": "Every family in Keelmouth would fight for her. She knows it, and it frightens her more than Firstsight does.",
+   "whenBroken": "If she falls, the Slip belongs to whoever holds the road above it, and every hull on four hundred miles of cliff pays what he likes.",
+   "rivals": [
+    "power_firstsight_barony"
+   ],
+   "opposedBy": [],
+   "plainly": "Keelmouth's lord keeps the only slipway on four hundred miles of cliff open to anyone who pays the posted tariff. She is fair, and she is loved for it.",
+   "descriptionSeed": "Ines Harrowgate holds the Slip because her grandmother built the first watch-house on it, and she holds it the way her grandmother did: the tariff is carved on a stone at the waterline and has not changed in forty years. She hangs anyone who wrecks a hull on purpose and feeds anyone who wrecks one by accident. The Baron at Firstsight holds the only road down to her, and he wants the water.",
+   "appearance": "A stone slipway running down into brown estuary water, a squat watch-house with a lantern, a tariff carved into a waterline stone, boatyards full of half-built hulls",
+   "recognizedBy": "council_of_mavens"
+  },
+  {
+   "id": "power_firstsight_barony",
+   "name": "The Barony at Firstsight",
+   "kind": "lordship",
+   "temper": "cruel",
+   "seat": "firstsight",
+   "reach": [
+    "firstsight",
+    "keelmouth"
+   ],
+   "leader": "oswin_tarrant",
+   "answersTo": null,
+   "strength": {
+    "scale": "unit",
+    "contingents": [
+     {
+      "n": 60,
+      "quality": 2,
+      "what": "levied road-men"
+     },
+     {
+      "n": 12,
+      "quality": 3,
+      "what": "the Baron's household guard"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "firstsight",
+     "kind": "post",
+     "name": "the cairn keep and the wayhouse at the divide",
+     "garrison": 30
+    }
+   ],
+   "verbs": [
+    "toll",
+    "levy",
+    "tax",
+    "expand",
+    "feud"
+   ],
+   "encounters": [],
+   "dangerLift": 1,
+   "noticesYouWhen": [
+    "crossed",
+    "rival_ally",
+    "wealth"
+   ],
+   "wantsFromYou": "A toll to use his road, a levy of your hands when he calls one, and your help taking the Slip — or your absence from the coast.",
+   "offersYou": "The road opened to your caravans at half the toll, and a share of Keelmouth's tariff once it is his.",
+   "leverage": "His levied road-men are farmers from the stone-grass who were taken, not hired. They will not die for him if someone gives them a reason to go home.",
+   "whenBroken": "The road to the sea is free for the first time in a generation, and Keelmouth's tariff is the only toll left on it.",
+   "rivals": [
+    "power_keelmouth_slip"
+   ],
+   "opposedBy": [],
+   "plainly": "The Baron at Firstsight holds the top of the only road down to the sea, and taxes it until it bleeds. He wants Keelmouth's harbour.",
+   "descriptionSeed": "Oswin Tarrant inherited a cairn and a wayhouse at the top of a twenty-six-day road and turned them into a keep. Everyone going to the sea passes him; he charges what the season allows, and more when he is short. He levies farmers off the stone-grass to hold the road and hangs deserters at the cairn where the water first comes into view. He has decided that the Slip should be his, and that Ines Harrowgate's kindness is a weakness he can wait out.",
+   "appearance": "A stone keep built around an old cairn on a high divide, a wayhouse beneath it, a gibbet by the road, and far below, the head of a brown river with the sea beyond",
+   "petitions": {
+    "to": "council_of_mavens",
+    "for": "recognition of a claim to the Slip at Keelmouth"
+   }
+  },
+  {
+   "id": "power_echo_bridge",
+   "name": "The Castellany of the Echo Bridge",
+   "kind": "lordship",
+   "temper": "fair",
+   "seat": "echo_river_crossing",
+   "reach": [
+    "echo_river_crossing",
+    "greywater_stilts",
+    "thornwake_glade"
+   ],
+   "leader": "castellan_brannoch",
+   "answersTo": null,
+   "strength": {
+    "scale": "unit",
+    "contingents": [
+     {
+      "n": 24,
+      "quality": 2,
+      "what": "bridge-wardens with halberds"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "echo_river_crossing",
+     "kind": "post",
+     "name": "the bridge towers",
+     "garrison": 16
+    }
+   ],
+   "verbs": [
+    "toll",
+    "protect",
+    "patrol"
+   ],
+   "encounters": [],
+   "dangerLift": 0,
+   "noticesYouWhen": [
+    "crossed"
+   ],
+   "wantsFromYou": "The posted toll, and whatever you know about who is poisoning his river.",
+   "offersYou": "A bridge that is always open, a toll that is always the same, and a castellan who will hold it against either city.",
+   "leverage": "Both Harmonic Heights and the Radiant Plateau have offered to buy the bridge from him. He has refused both and told each what the other offered.",
+   "whenBroken": "The only crossing for miles goes to whichever city moves first, and the Disputed Zone gets a front line.",
+   "rivals": [],
+   "opposedBy": [],
+   "plainly": "The castellan of the Echo Bridge serves neither city. His toll is posted, never changes, and is the same for everyone.",
+   "descriptionSeed": "Brannoch holds the only bridge for miles in country two cities both want. He tolls it fairly and defends it against everyone. He is not kind, and he is not cruel; he is exact. The river under his bridge is going bad, worse every week, and he wants to know who is doing it more than he wants anything else.",
+   "appearance": "An old stone-and-cable bridge between granite shoulders, two squat towers at either end, wardens with halberds, grey-green water sheeting over rocks below",
+   "courtedBy": [
+    "power_radiant_plateau",
+    "power_harmonic_heights"
+   ]
+  },
+  {
+   "id": "power_ender_host",
+   "name": "The Ender's Host",
+   "kind": "lordship",
+   "temper": "cruel",
+   "seat": "the_marchward",
+   "reach": [
+    "the_marchward",
+    "the_redline",
+    "the_stillhold",
+    "hardline"
+   ],
+   "leader": "the_ender_who_forgot",
+   "answersTo": null,
+   "strength": {
+    "scale": "legion",
+    "contingents": [
+     {
+      "n": 140,
+      "quality": 3,
+      "what": "companies that followed him out of the Marches and no longer ask where"
+     },
+     {
+      "n": 30,
+      "quality": 4,
+      "what": "the Unremembering, veterans who have stopped saying why they fight"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "the_marchward",
+     "kind": "post",
+     "name": "the old muster-yard below the Marchward's wall, where his host camps and will not leave",
+     "garrison": 60
+    }
+   ],
+   "verbs": [
+    "levy",
+    "expand",
+    "feud",
+    "raid"
+   ],
+   "encounters": [],
+   "dangerLift": 1,
+   "noticesYouWhen": [
+    "crossed",
+    "neighbour",
+    "rival_ally"
+   ],
+   "wantsFromYou": "Nothing he could name. If what you have built stands where he is walking, he ends it.",
+   "offersYou": "A place in the line, and a war that never asks you why.",
+   "leverage": "He cannot remember what he was protecting. Someone who could tell him, truly, might stop the host where it stands, or turn it.",
+   "whenBroken": "His companies scatter back into the Marches as masterless fighters: bands for the Gralloch Crown to absorb, unless someone gives them a banner first.",
+   "rivals": [],
+   "opposedBy": [
+    "mediator_corran",
+    "the_edge_that_holds",
+    "marshal_veyn"
+   ],
+   "plainly": "A warlord who forgot why he fights, camped below the Marchward with a host that follows him anyway. The Marches fear him more than they fear each other.",
+   "descriptionSeed": "The Ender Who Forgot Why was a Marcher once, protecting something. His host camps in the old muster-yard below the Marchward's wall. Mediator Corran keeps the town neutral with the Ender's fires in sight of every window, and the Redline and the Stillhold each suspect the other of wanting him pointed their way.",
+   "appearance": "A walled border town on a ridge, and below its wall a sprawling war-camp of mismatched tents and banners from four dead companies, smoke from a hundred fires"
+  },
+  {
+   "kind": "sovereignty",
+   "encounters": [],
+   "dangerLift": 0,
+   "rivals": [
+    "power_harmonic_heights"
+   ],
+   "opposedBy": [],
+   "id": "power_radiant_plateau",
+   "name": "The Radiant Council",
+   "form": "council",
+   "temper": "hard",
+   "seat": "radiant_plateau_edge",
+   "reach": [
+    "radiant_plateau_edge",
+    "the-low-lamp-inn",
+    "kestrels_roost",
+    "echo_river_crossing",
+    "millbrook"
+   ],
+   "leader": "the_high_luminary",
+   "answersTo": null,
+   "bloc": "bloc_the_long_reach",
+   "bodies": [
+    {
+     "name": "the Radiant Council",
+     "does": "governs the Plateau under the High Luminary",
+     "people": []
+    },
+    {
+     "name": "the water-accountability office",
+     "does": "surveys and records the valley's water",
+     "people": [
+      "sorel"
+     ]
+    },
+    {
+     "name": "the Edge District accountability board",
+     "does": "posts who is accountable for what",
+     "people": [
+      "keeper_ilma"
+     ]
+    },
+    {
+     "name": "the deep stacks",
+     "does": "the Council's locked archive; archivists see only approved fragments",
+     "people": []
+    }
+   ],
+   "strength": {
+    "scale": "legion",
+    "contingents": [
+     {
+      "n": 160,
+      "quality": 2,
+      "what": "Plateau wardens and light-guards"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "radiant_plateau_edge",
+     "kind": "post",
+     "name": "the Council's offices on the Edge District",
+     "garrison": 40
+    }
+   ],
+   "verbs": [
+    "tax",
+    "patrol",
+    "expand",
+    "inform"
+   ],
+   "noticesYouWhen": [
+    "crossed",
+    "rival_ally"
+   ],
+   "wantsFromYou": "Your discretion about anything you have seen at the river, and your help keeping the valley calm.",
+   "offersYou": "Protection, passage anywhere on the Plateau, and a place on the right side of what is coming.",
+   "leverage": "Its own archivists know the record they are shown has been cut. One of them, asked the right question at the right time, will say so.",
+   "whenBroken": "The Plateau's hold on the valley slips, and the Harmonic Heights moves into every place the Council was buying.",
+   "secretsGM": [
+    "It is the Patient Buyer: it buys the Roost's debts through the Undercount's counting-house, so its name is on nothing (Erik, 2026-09-23).",
+    "It has known longer than it admits what is waking under the Echo River, and built a secondary purification system in secret instead of stopping it. The system is incomplete and will not serve every household.",
+    "It keeps the full record of Verath-Sem, an Archive engineer of the Transition's close, in the locked stacks."
+   ],
+   "plainly": "The governing council of the Radiant Plateau. It prizes clarity in public and keeps its own counsel in private.",
+   "descriptionSeed": "The Radiant Council governs the Plateau under the High Luminary and speaks of clarity in everything. In private it plans a generation ahead and cuts its own archive to fit the plan. It is extending its reach over the unaligned valley one debt, one survey and one quiet favour at a time.",
+   "appearance": "A council hall of photonic-crystal towers braiding sunlight into beams, light-guide streets below, an accountability board of lit panels in a public square",
+   "_fromPlay": "characters/player-s9z9u1/char-mr4ejo8c.json and characters/player-54seyk/char-mr4ejo8c.json (Cellaceron)"
+  },
+  {
+   "kind": "sovereignty",
+   "encounters": [],
+   "dangerLift": 0,
+   "rivals": [
+    "power_radiant_plateau"
+   ],
+   "opposedBy": [],
+   "id": "power_harmonic_heights",
+   "name": "The Harmonic Council",
+   "form": "council",
+   "temper": "fair",
+   "seat": "harmonic_heights_terrace",
+   "reach": [
+    "harmonic_heights_terrace",
+    "greywater_stilts",
+    "echo_river_crossing"
+   ],
+   "leader": "elder_resonance",
+   "answersTo": null,
+   "bloc": "bloc_the_long_reach",
+   "bodies": [
+    {
+     "name": "the upper chamber",
+     "does": "governs the Heights; moves by Priority Council packet and tells the terraces afterward",
+     "people": []
+    },
+    {
+     "name": "the Warden Council of the Lower Terrace",
+     "does": "keeps the bulletin board, files notices, opens formal inquiries, and holds the sanction chain",
+     "people": [
+      "tuning-warden-lower-terrace"
+     ]
+    },
+    {
+     "name": "the sanction chain",
+     "does": "gate-senior clearance is what sanctions a Heights observer into the Disputed Zone",
+     "people": []
+    }
+   ],
+   "strength": {
+    "scale": "legion",
+    "contingents": [
+     {
+      "n": 140,
+      "quality": 2,
+      "what": "terrace wardens"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "harmonic_heights_terrace",
+     "kind": "post",
+     "name": "the Warden Council's hall on the Lower Terrace",
+     "garrison": 30
+    }
+   ],
+   "verbs": [
+    "tax",
+    "patrol",
+    "protect",
+    "expand"
+   ],
+   "noticesYouWhen": [
+    "crossed",
+    "rival_ally"
+   ],
+   "wantsFromYou": "Word of anything you learn in the Disputed Zone, filed with the Warden Council, before the Plateau hears it.",
+   "offersYou": "Sanction: a Heights observer with gate-senior clearance, which opens doors the Plateau's coin cannot.",
+   "leverage": "The upper chamber keeps the Warden Council in the dark, and the wardens have noticed.",
+   "whenBroken": "The terraces fall silent, and the Radiant Council inherits a valley with nobody left to balance it.",
+   "secretsGM": [
+    "The upper chamber learned of the river's contamination before the Warden Council did, and has been sending internal packets about it overnight.",
+    "The sealed Resonance Halls need a reagent from the valley floor, and the couriers sent for it come back empty and will not say why."
+   ],
+   "plainly": "The Harmonic Heights governs itself through a council: an upper chamber that decides and a Warden Council on the Lower Terrace that the public actually meets.",
+   "descriptionSeed": "The Heights is governed from an upper chamber that moves by sealed Priority packet and explains itself later. Below it the Warden Council of the Lower Terrace posts notices, opens inquiries and holds the sanction chain, and knows less than it should about what the chamber above it has decided.",
+   "appearance": "Terraced buildings of phononic crystal humming in the wind, tree-sized chimes, and on the lowest terrace a warden hall with a crowded public bulletin board",
+   "_fromPlay": "characters/player-s9z9u1/char-mr4ejo8c.json and characters/player-54seyk/char-mr4ejo8c.json (Cellaceron)"
+  },
+  {
+   "kind": "sovereignty",
+   "encounters": [],
+   "dangerLift": 0,
+   "rivals": [],
+   "opposedBy": [],
+   "id": "power_millbrook_council",
+   "name": "Millbrook's Elder Panel",
+   "form": "council",
+   "temper": "fair",
+   "seat": "millbrook",
+   "reach": [
+    "millbrook"
+   ],
+   "leader": "councilor-dresh",
+   "answersTo": null,
+   "bloc": "bloc_the_free_compact",
+   "bodies": [
+    {
+     "name": "the elder panel",
+     "does": "five elders who meet in the common house and decide on the record",
+     "people": [
+      "councilor-dresh",
+      "elder-senna",
+      "mara-wells",
+      "dara-holt"
+     ],
+     "openSeats": 1,
+     "_seatsFrom": "Five elders (Usnea's run). Dresh anchors it; Elder Senna is a village elder (Cellaceron's run); Mara Wells is 'water-policy coordinator and elder' (Usnea's run); Dara Holt is recorded as 'Millbrook Council' (Silas's run). The fifth seat is not named in any save."
+    }
+   ],
+   "sanctionStandard": "Mandate, not size. Millbrook sanctions a survey into the Disputed Zone only with two written settlement requests, a Heights-sanctioned observer with gate-senior clearance, and a named return date and return point.",
+   "strength": {
+    "scale": "unit",
+    "contingents": [
+     {
+      "n": 20,
+      "quality": 1,
+      "what": "Millbrook neighbours with what they own"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "millbrook",
+     "kind": "post",
+     "name": "the common house",
+     "garrison": 4
+    }
+   ],
+   "verbs": [
+    "protect"
+   ],
+   "noticesYouWhen": [
+    "crossed"
+   ],
+   "wantsFromYou": "Evidence laid on the common house table, and a request made in writing.",
+   "offersYou": "Sanction the whole valley respects, because Millbrook gives it rarely and on the record.",
+   "leverage": "Dresh moves on mandate, not size: bring the right written requests and the panel has to answer.",
+   "whenBroken": "Millbrook stops being the place the valley brings things to be decided, and the cities decide instead.",
+   "secretsGM": [],
+   "plainly": "Millbrook governs itself through an elder panel in its common house, led by Councilor Dresh. It decides slowly, in public, and on the record.",
+   "descriptionSeed": "Five elders meet in Millbrook's common house around a long table where evidence is laid out and read aloud. Councilor Dresh leads by preference rather than command and asks for plain speech. Mara Wells coordinates the village's water policy from the panel, and Dara Holt, the Ditch-Mother, keeps the east channel. Once the panel formally accepts a thing it cannot pretend otherwise, which is why it accepts things slowly.",
+   "appearance": "A long timber common house with a packed-earth floor, a long table covered in laid-out evidence, elders seated along one side, apple trees in the yard",
+   "_fromPlay": "characters/player-s9z9u1/char-mr6eq1a5.json (Usnea Beard)",
+   "partiesBefore": [
+    {
+     "name": "Holloway",
+     "what": "upper-terrace farmer"
+    },
+    {
+     "name": "Renn",
+     "what": "lower-channel farmer, who cites precedent and compact"
+    },
+    {
+     "note": "their irrigation dispute came before the panel in Usnea's run; they are parties, not members"
+    }
+   ],
+   "_notOnThePanel": {
+    "aldric": "Aldric, the smokehouse operator, appears only at an evening meeting Silas called at Pell's forge with Dara, Fendt, Mara and Calvar. That gathering was not the panel, and no save seats him. The fifth seat is open if Erik wants him in it."
+   }
+  }
+ ]
+}

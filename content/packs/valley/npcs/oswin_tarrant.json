@@ -1,0 +1,79 @@
+{
+ "schemaVersion": 1,
+ "id": "oswin_tarrant",
+ "name": "Oswin Tarrant",
+ "tier": "heroic",
+ "level": 25,
+ "role": "Baron at Firstsight — holds the keep at the top of the only road down to the sea, taxes everything on it, and wants Keelmouth's harbour",
+ "people": "human",
+ "gender": "man",
+ "pronouns": "he/him",
+ "sex": "male",
+ "romanceEligible": false,
+ "homeLocation": "firstsight",
+ "communityId": "firstsight",
+ "domains": {
+  "primary": "marcher",
+  "secondary": "mason",
+  "tertiary": "lattice"
+ },
+ "spectrum": {
+  "violence_peace": -0.6,
+  "chaos_order": 0.7,
+  "death_life": -0.3,
+  "mechanical_spiritual": -0.3,
+  "concrete_abstract": -0.4
+ },
+ "assistTags": [
+  "hold",
+  "intimidate",
+  "lead",
+  "bargain",
+  "guard"
+ ],
+ "appearance": "A well-dressed man in his fifties, clean-shaven, with a courtier's manners and a road-warden's hands. Wears a heavy chain of office he had made himself.",
+ "personality": {
+  "warmth": 0.2,
+  "trust": 0.1,
+  "candor": 0.3,
+  "patience": 0.8
+ },
+ "voiceHints": "Courteous, formal, and always talking about what things cost. Calls his hangings 'accounts settled'.",
+ "wants": "The Slip at Keelmouth, and a barony that means the coast rather than a cairn on a hill.",
+ "fears": "His levied men going home all at once.",
+ "knowledge": [
+  "Every caravan that has come over the divide this year and what it paid",
+  "The size of Keelmouth's watch, and which of its families have debts",
+  "That his road-men were taken off the stone-grass, not hired"
+ ],
+ "reactsToReputation": {
+  "any": "sets your toll by what you carry",
+  "powerful": "offers you half-toll and a share of the coast",
+  "friend-of-keelmouth": "closes the road to you"
+ },
+ "questSeeds": [
+  "The Baron is levying men from the stone-grass for a march on Keelmouth",
+  "His road-men would go home for someone who could promise they would not be hunted"
+ ],
+ "gear": [
+  "a heavy chain of office",
+  "a well-kept longsword",
+  "the road ledger"
+ ],
+ "purse": {
+  "crystal": 800
+ },
+ "closed": [],
+ "fullName": "Oswin Calder Tarrant",
+ "title": "Baron at Firstsight",
+ "aliases": [
+  "Oswin Calder Tarrant"
+ ],
+ "_domainsWas": {
+  "primary": "marcher",
+  "secondary": "mason"
+ },
+ "_domainsWhy": "a Marcher's hold on a road, a Mason's cairn, and the Lattice's love of a posted rule",
+ "_levelWas": 22,
+ "_levelWhy": "§148: the tier is right (a ruling lord, a seated elder), so the level climbs to the tier's floor rather than the tier dropping."
+}

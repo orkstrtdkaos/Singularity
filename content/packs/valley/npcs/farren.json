@@ -1,0 +1,68 @@
+{
+ "schemaVersion": 1,
+ "romanceEligible": false,
+ "people": "human",
+ "closed": [],
+ "id": "farren",
+ "name": "Farren Quire",
+ "tier": "notable",
+ "level": 20,
+ "role": "Retired acoustic geometry specialist of the Harmonic Heights Second Terrace — still consults for the Warden Council when nobody else can solve something",
+ "gender": "man",
+ "pronouns": "he/him",
+ "sex": "male",
+ "homeLocation": "harmonic_heights_terrace",
+ "communityId": "echo_vale.harmonic_heights",
+ "spectrum": {
+  "violence_peace": 0.2,
+  "chaos_order": 0.7,
+  "death_life": 0.1,
+  "mechanical_spiritual": -0.3,
+  "concrete_abstract": 0.3
+ },
+ "assistTags": [
+  "analyze",
+  "study",
+  "make",
+  "investigate"
+ ],
+ "appearance": "A lean man past sixty in a heavy work-tunic, resonance calluses on both forearms, hair damp from the basin, dressed for work and not for company.",
+ "personality": {
+  "warmth": 0.2,
+  "trust": 0.3,
+  "candor": 1,
+  "patience": 0.4
+ },
+ "voiceHints": "Difficult and thorough. Wants to know why before he will touch a thing, and pushes until he gets a real answer.",
+ "wants": "A problem nobody else on the Heights can solve.",
+ "fears": "Being consulted to confirm an answer someone has already chosen.",
+ "knowledge": [
+  "The acoustic geometry of the Heights' terraces and what their structures are tuned to"
+ ],
+ "reactsToReputation": {
+  "any": "asks why you want to know before he tells you anything"
+ },
+ "questSeeds": [
+  "Farren can read a terminal direction from a resonance instrument, if someone gives him a reason"
+ ],
+ "gear": [
+  "geometry instruments in a worn case",
+  "a work-tunic scored by resonance burns"
+ ],
+ "purse": {
+  "crystal": 150
+ },
+ "_playNote": "The registry records him as a man; one scene line said 'she'. The registry wins.",
+ "_fromPlay": "characters/player-s9z9u1/char-mr4ejo8c.json and characters/player-54seyk/char-mr4ejo8c.json (Cellaceron)",
+ "fullName": "Farren Aldous Quire",
+ "title": "Acoustic Geometer of the Second Terrace, retired",
+ "aliases": [
+  "Farren Aldous Quire"
+ ],
+ "domains": {
+  "primary": "figurist",
+  "secondary": "enginewright",
+  "tertiary": "syllogist"
+ },
+ "_domainsWhy": "geometry as pattern, instruments, and reasoning that wants the why first"
+}

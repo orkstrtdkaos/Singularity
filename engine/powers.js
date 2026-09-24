@@ -162,6 +162,126 @@ export function notePowerLoss(character, power, killed = {}, { day = null } = {}
            whenBroken: st.broken ? (power.whenBroken || null) : null };
 }
 
+/** ⛔ SNG-634 C5 — A POWER'S HOLD IS A PLACE YOU CAN TAKE, and this is the half that turns every other
+ *  reader from something that happens TO you into something you do. The twelve authored holds are the Feast
+ *  Hall, the chain-post above the waystation, a counting-house behind a spice stall, the bridge towers, the
+ *  old muster-yard below the Marchward's wall.
+ *  ⚠️ THE KEY IS DERIVED, NEVER AUTHORED. A hold has no id of its own — the records carry `{at, kind, name,
+ *  garrison}` — and asking Aevi to invent one would be asking for a field only this reader wants. Two holds
+ *  at the same place (the Keelmouth Slip has the watch-house AND the boatyards) are told apart by index. */
+export function holdKeyOf(power, hold, i = 0) {
+  if (!power?.id || !hold?.at) return "";
+  return `${power.id}--${hold.at}${i > 0 ? `--${i}` : ""}`;
+}
+
+/** Every hold a power holds, with what this character has done to it folded in. */
+export function holdsOf(power, character) {
+  const list = Array.isArray(power?.holds) ? power.holds : [];
+  const st = powerStateOf(character, power?.id);
+  const seen = new Map();
+  return list.map((h) => {
+    const n = seen.get(h?.at) || 0;
+    seen.set(h?.at, n + 1);
+    const key = holdKeyOf(power, h, n);
+    const lost = Math.max(0, Number(st?.holdLost?.[key]) || 0);
+    return {
+      key, at: h?.at || null, kind: h?.kind || "post", name: h?.name || null,
+      garrison: Math.max(0, (Number(h?.garrison) || 0) - lost),
+      garrisonAuthored: Math.max(0, Number(h?.garrison) || 0),
+      taken: Array.isArray(st?.holdsTaken) ? st.holdsTaken.includes(key) : false,
+    };
+  });
+}
+
+/** ⛔ WHAT CAN BE ASSAULTED WHERE YOU ARE STANDING. ⚠️ Not a hold this character has already taken, and not
+ *  a broken power's: both are places the fight is over. Returns the power alongside the hold, because every
+ *  consequence of the fight lands on the power rather than on the hold. */
+export function assaultableAt(locationId, { content = null, character = null } = {}) {
+  const out = [];
+  for (const p of powersReaching(locationId, { content, character })) {
+    for (const h of holdsOf(p, character)) {
+      if (h.at !== locationId || h.taken) continue;
+      out.push({ power: p, hold: h });
+    }
+  }
+  return out;
+}
+
+/** ⛔ WHO IS BEHIND THE WALL — the garrison, in the contingent shape `legionClash` takes, so an assault is
+ *  the same fight the raid already is and no second combat model appears.
+ *  ⚑ AND THE QUALITY COMES FROM THE POWER'S OWN PEOPLE, not from a number the GM picked. The band op has
+ *  been fighting `op.against | 0 || 20` since it shipped — an abstract count with nobody behind it, which is
+ *  the raid's anonymity pointing the other way. A hold's defenders are as good as that power's best line. */
+export function garrisonContingents(power, hold, character) {
+  const n = Math.max(0, Number(hold?.garrison) || 0);
+  if (!n) return null;
+  const own = contingentsOf(power, character);
+  const quality = own.length ? Math.max(...own.map(c => Math.max(1, Number(c.quality) || 1))) : 1;
+  const what = `${power?.name || power?.id || "a garrison"} at ${hold?.name || hold?.at || "their post"}`;
+  return [{ n, quality, what, _hold: hold.key }];
+}
+
+/** ⛔ WHAT THE ASSAULT COST THE GARRISON, persisted on the save the same way a band's losses are — a post
+ *  ground down over three attempts is three attempts' worth weaker on the fourth. */
+export function noteHoldLoss(character, power, holdKey, killed = 0, { day = null } = {}) {
+  const k = Math.max(0, Math.round(Number(killed) || 0));
+  if (!character || !power?.id || !holdKey || !k) return null;
+  character.powerState = (character.powerState && typeof character.powerState === "object") ? character.powerState : {};
+  const st = (character.powerState[power.id] = character.powerState[power.id] || {});
+  st.holdLost = (st.holdLost && typeof st.holdLost === "object") ? st.holdLost : {};
+  st.holdLost[holdKey] = (Number(st.holdLost[holdKey]) || 0) + k;
+  st.lastLossDay = day ?? st.lastLossDay ?? null;
+  return { id: power.id, name: power.name || power.id, holdKey, took: k };
+}
+
+/** ⛔ THE HOLD CHANGES HANDS. ⛑ Marked on the SAVE, never on the record: the Feast Hall is still the
+ *  Gralloch's in the authored world and in every other player's, and it is yours in yours.
+ *  ⚠️ THIS DOES NOT CREATE THE HOLDING — `addHolding` does, in the caller, because that door owns the
+ *  vocabulary rules (a household is not a holding) and having two writers of `character.holdings` is how
+ *  they drift. This says the power no longer has it and hands back what the caller needs to file it. */
+export function takeHold(character, power, hold, { day = null } = {}) {
+  if (!character || !power?.id || !hold?.key) return null;
+  character.powerState = (character.powerState && typeof character.powerState === "object") ? character.powerState : {};
+  const st = (character.powerState[power.id] = character.powerState[power.id] || {});
+  st.holdsTaken = Array.isArray(st.holdsTaken) ? st.holdsTaken : [];
+  if (st.holdsTaken.includes(hold.key)) return null;
+  st.holdsTaken.push(hold.key);
+  st.holdLost = (st.holdLost && typeof st.holdLost === "object") ? st.holdLost : {};
+  st.holdLost[hold.key] = hold.garrisonAuthored;   // the garrison that held it is gone from their strength
+  // ⛑ A POWER THAT HAS LOST EVERY HOLD IS NOT AUTOMATICALLY BROKEN. A band with people left can take a post
+  // back, and `whenBroken` is about the people rather than the ground — the Tollmen's own line says the road
+  // is only the mountain again "until the Gralloch sends a harder captain to take the waystation back".
+  const left = holdsOf(power, character).filter(h => !h.taken).length;
+  return { id: power.id, name: power.name || power.id, holdKey: hold.key,
+           holdName: hold.name || hold.at, at: hold.at, kind: hold.kind || "post",
+           theirHoldsLeft: left, whenBroken: left === 0 ? (power.whenBroken || null) : null, day };
+}
+
+/** ⛔ SNG-634 C5 — WHO HOLDS THIS GROUND, FOR THE GM. Without this the `hold` field the contract now offers
+ *  names a block that does not exist, which is the readerless shape pointing the other way: a producer with
+ *  nothing to produce from.
+ *  ⚠️ WHAT IT SAYS AND WHAT IT WITHHOLDS. The garrison and the reach are what anybody standing here can see
+ *  and what a fight needs; `leverage` and `secretsGM` are NOT here — a power's weak point is something the
+ *  fiction has to hand over, not a line in the prompt. ⛑ A hold this character has already taken says so, so
+ *  the GM never offers a siege that is over.
+ *  Returns "" when nobody holds anything here, which is 120 of the 143 places. PURE. */
+export function powersHoldingForGM(locationId, { content = null, character = null } = {}) {
+  const here = powersReaching(locationId, { content, character });
+  if (!here.length) return "";
+  const lines = [];
+  for (const p of here) {
+    const own = holdsOf(p, character).filter(h => h.at === locationId);
+    const heads = headsOf(contingentsOf(p, character));
+    const bits = own.map(h => h.taken
+      ? `${h.name || h.kind} — TAKEN, it is this character's now`
+      : `${h.name || h.kind} (${h.kind}, ${h.garrison} on it${h.garrison < h.garrisonAuthored ? `, down from ${h.garrisonAuthored}` : ""})`);
+    lines.push(`- **${p.name || p.id}** — ${p.kind || "a power"}, ${heads} they can field${p.dangerLift ? `, and the ground here reads ${p.dangerLift > 0 ? "worse" : "quieter"} for it` : ""}.`
+      + (bits.length ? `\n  Holds here: ${bits.join(" · ")}` : "")
+      + (p.plainly ? `\n  ${p.plainly}` : ""));
+  }
+  return lines.join("\n");
+}
+
 /** ⛔ BROKEN BY HAND — the player took the seat, or the story says so. Kept separate from `notePowerLoss`
  *  because "you killed the last of them" and "this is over" are different claims and the second one is
  *  sometimes a ruling. */

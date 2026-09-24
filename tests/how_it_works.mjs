@@ -25485,6 +25485,125 @@ console.log("\n── §351 · a given name repeats only behind a family name �
   }
 }
 
+// ══════════ §352 · CCODE-479 (SNG-634 C5) — THEIR HOLDS ARE PLACES YOU CAN TAKE ══════════
+// ⛔ THE POINT OF C5, and why I put it next: C1–C4 are all things that happen TO a player. C5 is the one that turns a
+// power into something you can go and do something about. The twelve authored holds are the Feast Hall, a chain-post
+// above a waystation, a counting-house behind a spice stall, the bridge towers, the muster-yard below the Marchward.
+// ⚑ AND IT FOUND THE RAID'S DEFECT POINTING THE OTHER WAY. `bandOps` op "clash" has fought
+// `op.against | 0 || 20` since it shipped — an abstract count with nobody behind it. The raid had anonymous
+// ATTACKERS; the clash had anonymous DEFENDERS, and neither cost anybody anything that lasted.
+console.log("\n── §352 · their holds are places you can take ──");
+{
+  const PW5 = await import("../engine/powers.js");
+  const { loadContentHeadless: lch352 } = await import("./headless_content.mjs");
+  const C352 = await lch352();
+
+  // the authored Tollmen, verbatim from the staged change set, so the gate runs on the real record shape
+  const toll = { id: "power_switchback_tollmen", name: "The Switchback Tollmen", kind: "outlaw_band",
+    reach: ["old_switchback", "kestrels_roost"], dangerLift: 1, verbs: ["toll", "raid", "tribute"],
+    plainly: "A toll gang holding the old road up to the high pass.",
+    whenBroken: "The high road is only as dangerous as the mountain again.",
+    holds: [{ at: "old_switchback", kind: "post", name: "a chain-post on the upper turns", garrison: 8 }],
+    strength: { contingents: [{ n: 18, quality: 1, what: "toll-men with crossbows" }] } };
+  // the Slip holds TWO at one place, which is why a hold key needs an index
+  const slip = { id: "power_keelmouth_slip", name: "The Keelmouth Slip", kind: "lordship", reach: ["keelmouth"],
+    dangerLift: -1, verbs: ["smuggle"],
+    holds: [{ at: "keelmouth", kind: "post", name: "the Slip and the harbour watch-house", garrison: 20 },
+            { at: "keelmouth", kind: "enterprise", name: "the Keelmouth boatyards", garrison: 6 }],
+    strength: { contingents: [{ n: 46, quality: 2, what: "the harbour watch" }] } };
+  const content352 = { powers: [toll, slip], locations: C352.locations };
+
+  check("§352: ⛔ A HOLD HAS A DERIVED KEY, AND TWO AT ONE PLACE ARE TOLD APART. A hold carries `{at, kind, name, garrison}` and no id of its own; asking for one would be asking Aevi to author a field only this reader wants. ⚠️ The Keelmouth Slip really does hold two things at Keelmouth — the watch-house AND the boatyards — so an index is not hypothetical",
+    (() => {
+      const hs = PW5.holdsOf(slip, {});
+      return hs.length === 2 && hs[0].key === "power_keelmouth_slip--keelmouth"
+        && hs[1].key === "power_keelmouth_slip--keelmouth--1" && hs[0].key !== hs[1].key;
+    })(),
+    PW5.holdsOf(slip, {}).map(h => h.key).join(" · "));
+
+  check("§352: ⛔ WHAT CAN BE ASSAULTED IS WHAT STANDS HERE — a standing power's hold AT this place, never one already taken and never a broken power's, because both are fights that are over",
+    (() => {
+      const fresh = {};
+      const here = PW5.assaultableAt("old_switchback", { content: content352, character: fresh });
+      const none = PW5.assaultableAt("kestrels_roost", { content: content352, character: fresh });   // reached, not held
+      const broken = PW5.assaultableAt("old_switchback", { content: content352, character: { powerState: { power_switchback_tollmen: { broken: true } } } });
+      return here.length === 1 && here[0].hold.garrison === 8 && none.length === 0 && broken.length === 0;
+    })());
+
+  check("§352: ⛑ THE DEFENDERS ARE THAT GARRISON AT THAT POWER'S OWN QUALITY, in the same contingent shape `legionClash` takes — so an assault is the fight the raid already is and no second combat model appears. ⚠️ The quality comes from the power's best line rather than from a number the GM picked: a hold is defended as well as its owner can defend anything",
+    (() => {
+      const g = PW5.garrisonContingents(toll, PW5.holdsOf(toll, {})[0], {});
+      const s = PW5.garrisonContingents(slip, PW5.holdsOf(slip, {})[0], {});
+      return g && g.length === 1 && g[0].n === 8 && g[0].quality === 1
+        && s && s[0].n === 20 && s[0].quality === 2 && /Keelmouth Slip/.test(s[0].what);
+    })());
+
+  check("§352: ⛔ AN ASSAULT THAT IS REPULSED STILL COSTS THEM, and the cost persists — a post ground down over three attempts is three attempts' worth weaker on the fourth. ⛑ That is what makes a failed assault a real outcome instead of a beat to smooth over",
+    (() => {
+      const ch = { powerState: {} };
+      const h = PW5.holdsOf(toll, ch)[0];
+      PW5.noteHoldLoss(ch, toll, h.key, 3, { day: 10 });
+      const after = PW5.holdsOf(toll, ch)[0];
+      PW5.noteHoldLoss(ch, toll, h.key, 2, { day: 12 });
+      const later = PW5.holdsOf(toll, ch)[0];
+      return after.garrison === 5 && after.garrisonAuthored === 8 && later.garrison === 3
+        && PW5.garrisonContingents(toll, later, ch)[0].n === 3;
+    })());
+
+  check("§352: ⛔ AND THE PLACE CHANGES HANDS ON THE SAVE, NEVER ON THE RECORD. The Feast Hall is still the Gralloch's in the authored world and in every other player's; it is yours in yours. ⚠️ `takeHold` does NOT write `character.holdings` — `addHolding` does, in the caller, because that door owns the vocabulary rules and two writers of one array is how they drift",
+    (() => {
+      const ch = { powerState: {} };
+      const h = PW5.holdsOf(toll, ch)[0];
+      const won = PW5.takeHold(ch, toll, h, { day: 20 });
+      const again = PW5.takeHold(ch, toll, h, { day: 21 });
+      const now = PW5.holdsOf(toll, ch)[0];
+      return won && won.at === "old_switchback" && won.kind === "post" && won.theirHoldsLeft === 0
+        && again === null && now.taken === true
+        && PW5.assaultableAt("old_switchback", { content: content352, character: ch }).length === 0
+        && !Array.isArray(ch.holdings)                    // it filed nothing itself
+        && Array.isArray(toll.holds) && toll.holds[0].garrison === 8;   // the record is untouched
+    })());
+
+  check("§352: ⛑ …AND LOSING EVERY HOLD IS NOT AUTOMATICALLY BEING BROKEN. A band with people left can take a post back, and the Tollmen's own authored line says so: the road is only the mountain again \"until the Gralloch sends a harder captain to take the waystation back\". ⛔ `whenBroken` is about the people, and `isStanding` still reads their heads",
+    (() => {
+      const ch = { powerState: {} };
+      PW5.takeHold(ch, toll, PW5.holdsOf(toll, ch)[0], { day: 20 });
+      return PW5.isStanding(ch, toll) === true && PW5.headsOf(PW5.contingentsOf(toll, ch)) === 18;
+    })());
+
+  // ⛔ AND THE GM MUST BE ABLE TO SEE IT, or the `hold` field the contract now offers names a block that does not
+  // exist. That was true for an hour: I gave the contract the field and told it to read POWERS THAT HOLD THIS GROUND,
+  // and the phrase appeared ZERO times in app.js. A producer with nothing to produce from is the readerless shape
+  // pointing the other way, and `import_integrity`'s scope scan caught the loose name at the third door.
+  const block = PW5.powersHoldingForGM("old_switchback", { content: content352, character: {} });
+  const G352 = rd("engine/gm.js");
+  check("§352: ⛔ THE GM SEES WHO HOLDS THIS GROUND — the power, what it can field, what it holds here and how many stand on it. ⚠️ AND WHAT IT WITHHOLDS IS THE POINT: `leverage` and `secretsGM` are NOT in the block. A power's weak point is something the fiction hands over through somebody who knows, never a line in the prompt",
+    /Switchback Tollmen/.test(block) && /chain-post/.test(block) && /8 on it/.test(block)
+    && !/leverage/i.test(block) && !/secretsGM/i.test(block)
+    && PW5.powersHoldingForGM("millbrook", { content: content352, character: {} }) === ""
+    && /## POWERS THAT HOLD THIS GROUND/.test(G352)
+    && /"hold": "clash only/.test(G352),
+    block.split("\n")[0] || "(empty)");
+
+  check("§352: ⛑ …AND A HOLD ALREADY TAKEN SAYS SO, so the GM never offers a siege that is over",
+    (() => {
+      const ch = { powerState: {} };
+      PW5.takeHold(ch, toll, PW5.holdsOf(toll, ch)[0], { day: 20 });
+      const b = PW5.powersHoldingForGM("old_switchback", { content: content352, character: ch });
+      return /TAKEN/.test(b) && /this character's now/.test(b);
+    })());
+
+  // ⛔ THE CONSEQUENCE IS WIRED AT THE CLASH, and a breakthrough is what takes it — read off the EXISTING outcome
+  // ladder rather than a new threshold. A post you can take on a marginal edge is not a post.
+  const A352 = rd("app.js");
+  check("§352: ⛔ THE CLASH OP READS IT, AND ONLY A BREAKTHROUGH TAKES THE PLACE — `gaining` bloodies a garrison and leaves it holding the ground, which is what a repulsed assault IS. ⛑ The defenders bleed through `bloodBand` at the negated tide: the same rate the raid pays, so the game has ONE casualty rule and not three. And the transfer files through `addHolding`, the one writer of that array",
+    /assaultableAt\(character\.currentLocationId/.test(A352)
+    && /garrisonContingents\(target\.power, target\.hold, character\)/.test(A352)
+    && /c\.outcome === "breakthrough"/.test(A352)
+    && /noteHoldLoss\(character, target\.power, target\.hold\.key/.test(A352)
+    && /addHolding\(character, \{ id: `taken-\$\{won\.holdKey\}`/.test(A352));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

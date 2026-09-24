@@ -71,7 +71,8 @@ import { carriageOf, voyageOf, isMoored, canSail, sailHolding, voyageLine, featu
 import { roomOf, roomRefusal, promotionOffer, promoteHolding, trainingAt, mountsAt, healingAt, quarteringOf, vaultOf, chargeOf, chargeWord, depositToVault, withdrawFromVault, holdingFieldSources } from "./engine/holdings.js";   // ⛔ CCODE-429: a hold has room · CCODE-430: a yard trains   // B6b: the holding that moves
 import { featureCost, allFeatures, refreshImprovement, canBeAskedToWork, holdingFactsLine, answerFeatureOffer, holdingLedger, addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, yieldsFor, upkeepFor, appointKeeper, reclaimHolding, improveHolding, setCrew, setGarrison, holdingGround, addFeature, removeFeature, renameHolding, featureKinds, residentsOf, holdingMeaningAura, holdingFieldDelta } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
 import { buildDevReport, unknownOpsIn } from "./engine/devreport.js";   // SNG-559: the Play/Dev instrument
-import { makeField, fieldDataFrom, FIELD_KINDS, KIND_LABEL, MEMBERSHIP } from "./engine/field.js";   // CCODE-457: why the ground here reads the way it does · CCODE-472: and the layer the map draws
+import { makeField, fieldDataFrom, FIELD_KINDS, KIND_LABEL, MEMBERSHIP } from "./engine/field.js";
+import { assaultableAt, garrisonContingents, noteHoldLoss, takeHold } from "./engine/powers.js";   // SNG-634 C5: their holds are places you can take   // CCODE-457: why the ground here reads the way it does · CCODE-472: and the layer the map draws
 import { FIRE_TESTS, diffKeys } from "./engine/firetests.js";   // SNG-560: the parts that have never been used
 import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, roleBadges, teacherOfferReady, applyPartyOps, activeCompany, formerCompany } from "./engine/company.js";
 import { unitsOf, unitLine, poolRows, atSideRows, wherePerson, canBringForward, rosterLine, levelOfPerson } from "./engine/fellowship.js";
@@ -178,7 +179,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.4.15";
+const APP_VERSION = "2.4.16";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -9138,7 +9139,22 @@ function applyTurn(turn, resolution, playerWords = null) {
       } else if (kind === "clash") {
         const band = (character.bands || []).find(b => b.id === String(op.id || ""));
         if (!band || band.condition === "broken") continue;
-        const theirs = [{ count: Math.max(1, Math.min(2000, op.against | 0 || 20)), quality: Math.max(1, Math.min(3, op.quality | 0 || 1)) }];
+        // ⛔ SNG-634 C5 — AND THE THING ON THE OTHER SIDE CAN BE SOMEBODY'S. This op has fought
+        // `op.against | 0 || 20` since it shipped: an abstract count with nobody behind it, which is the
+        // raid's anonymity pointing the other way. When the GM names a power's hold where the character is
+        // standing, the defenders are THAT GARRISON at that power's own quality, the losses stick to the
+        // power, and a breakthrough takes the post.
+        // ⚠️ THE ABSTRACT FORM STAYS, because most fights are not a siege: no hold named, no power here, or a
+        // hold already taken, and the op behaves exactly as it always has.
+        const assaults = assaultableAt(character.currentLocationId, { content: CONTENT, character });
+        const wanted = String(op.hold || "").trim().toLowerCase();
+        const target = wanted
+          ? assaults.find(a => a.hold.key.toLowerCase() === wanted
+              || String(a.hold.name || "").toLowerCase().includes(wanted)
+              || String(a.power.name || "").toLowerCase().includes(wanted)) || null
+          : null;
+        const garrison = target ? garrisonContingents(target.power, target.hold, character) : null;
+        const theirs = garrison || [{ count: Math.max(1, Math.min(2000, op.against | 0 || 20)), quality: Math.max(1, Math.min(3, op.quality | 0 || 1)) }];
         // ⛔ CCODE-405/406 — THE RESOLVED UNIT, or a legion clashes at zero strength (it owns no contingents) and its commander's
         // bonus never reaches the field. Same defect as the `bloodBand` call below it, and the same fix.
         const c = legionClash([bandStrength(resolvedUnit(character.bands || [], band, { levelOf: bandLevelOf, cfg: meleeCfg() }), { cfg: meleeCfg() })], theirs,
@@ -9151,6 +9167,34 @@ function applyTurn(turn, resolution, playerWords = null) {
         const b = bloodUnit(character.bands || [], band.id, c.tide, { cfg: meleeCfg() });
         if (b.ok) character.bands = b.bands;
         character._bandNotes = [...(character._bandNotes || []).slice(-2), `${c.outcome} — ${b.why}`];
+        // ⛔ SNG-634 C5 — AND WHAT IT DID TO THEM. ⛑ TAKING THE POST NEEDS A BREAKTHROUGH, read off the
+        // existing outcome ladder rather than a new threshold: `gaining` bloodies a garrison and leaves it
+        // holding the ground, which is what a repulsed assault IS. A post you can take on a marginal edge is
+        // not a post. ⚠️ The defenders' losses come from `bloodBand` on the garrison at the negated tide —
+        // the same rate the raid pays, so there is one casualty rule in the game and not three.
+        if (target && garrison) {
+          let day5 = null; try { day5 = absoluteWorldDay(); } catch { day5 = character.clock?.day ?? null; }
+          const bled = bloodBand({ contingents: garrison.map(x => ({ ...x })) }, -c.tide, { cfg: meleeCfg() });
+          const gone = Math.max(0, (Number(garrison[0].n) || 0) - (Number(bled?.band?.contingents?.[0]?.n) || 0));
+          const hit = noteHoldLoss(character, target.power, target.hold.key, gone, { day: day5 });
+          if (c.outcome === "breakthrough") {
+            const won = takeHold(character, target.power, target.hold, { day: day5 });
+            if (won) {
+              // ⛑ ONE WRITER OF `character.holdings` — `addHolding` owns the vocabulary rules (a household is
+              // not a holding, an unknown word is kept as `describedAs`), so the transfer files through it.
+              const made = addHolding(character, { id: `taken-${won.holdKey}`.replace(/[^a-z0-9-]+/gi, "-").toLowerCase(),
+                kind: won.kind, name: won.holdName, locationId: won.at, day: day5,
+                obligation: `taken from ${won.name}` });
+              character._bandNotes = [...(character._bandNotes || []).slice(-2),
+                made ? `${won.holdName} is yours — taken from ${won.name}${won.theirHoldsLeft === 0 ? `, and it was the last ground they held` : `, ${won.theirHoldsLeft} of theirs left`}`
+                     : `${won.holdName} fell, but it could not be filed as a holding — the name reads as something that is not a place`];
+              if (!made) console.warn(`[powers] C5: ${won.holdName} was taken and addHolding refused it — the authored hold name is not a place word`);
+            }
+          } else if (hit) {
+            character._bandNotes = [...(character._bandNotes || []).slice(-2),
+              `${target.hold.name || "their post"} held — ${hit.took} of ${target.power.name || "theirs"} down, and they still have it`];
+          }
+        }
       }
     }
   });

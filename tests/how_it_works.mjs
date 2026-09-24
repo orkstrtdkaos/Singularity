@@ -25713,6 +25713,126 @@ console.log("\n── §353 · the powers act, and their people belong to them �
     && C353.rules.powers !== C353.rules.powerBands && C353.rules.powers !== C353.rules.martial);
 }
 
+// ══════════ §354 · CCODE-482 (SNG-634 C6, C7) — A POWER HAS AN OPINION, AND TAKES AN INTEREST ══════════
+// ⛔ C1–C5 MAKE THE WORLD REACT TO WHAT YOU DO. C7 is the first one where a force forms an intention ABOUT YOU.
+// ⚠️ AND C6 SHIPPED IN THE SAME CHANGE BECAUSE OF A MEASUREMENT: `rival_ally` is the second-most-authored trigger
+// (six of eleven powers) and it reads standing with a rival, which did not exist. Six of the eleven would have
+// carried a trigger that could never fire.
+// ⛔ THE OTHER MEASUREMENT THAT SHAPED C7: TEN of the eleven leaders have been met by NOBODY on this device. A
+// registry-only path — `seeking.js` brings someone who wants something — would have fired for ONE power.
+console.log("\n── §354 · a power has an opinion, and takes an interest ──");
+{
+  const PW7 = await import("../engine/powers.js");
+  const ST7 = await import("../engine/standing.js");
+  const SK7 = await import("../engine/seeking.js");
+  const { loadContentHeadless: lch354 } = await import("./headless_content.mjs");
+  const C354 = await lch354();
+  const opts = { content: C354, rules: C354.rules };
+  const toll = PW7.powersFrom(C354).find(p => p.id === "power_switchback_tollmen");
+  const gral = PW7.powersFrom(C354).find(p => p.id === "power_gralloch_crown");
+  const slip = PW7.powersFrom(C354).find(p => p.id === "power_keelmouth_slip");
+
+  // ── C6 ────────────────────────────────────────────────────────────────────────────────────────────
+  check("§354: ⛔ C6 — A POWER'S OPINION OF YOU IS ITS OWN, not a sum of deeds spread by `communityId`. A settlement's standing works that way and a crown is not a community: what moved it is what you did to IT. ⛑ The BAND comes from `rules.reputationBands`, the same table a people's and a settlement's read from, so \"distrusted\" means one thing in this game and not three",
+    (() => {
+      const ch = { powerState: {} };
+      const fresh = PW7.standingWithPower(ch, toll.id, C354.rules);
+      PW7.notePowerLoss(ch, toll, { 0: 4 }, { day: 10 });
+      const bled = PW7.standingWithPower(ch, toll.id, C354.rules);
+      PW7.takeHold(ch, toll, PW7.holdsOf(toll, ch)[0], { day: 11 });
+      const taken = PW7.standingWithPower(ch, toll.id, C354.rules);
+      return fresh.score === 0 && fresh.band === "neutral" && bled.score < 0 && taken.score < bled.score
+        && taken.band === "distrusted" && (C354.rules.reputationBands || []).some(b => b.band === "distrusted");
+    })());
+
+  check("§354: ⛑ …AND TAKING THEIR GROUND IS WORSE THAN BLEEDING THEM, with the reason kept. A crown that has decided about you should be as explainable as a defender whose ground moved — the rule `carriedSubstrateSources` set",
+    (() => {
+      const ch = { powerState: {} };
+      PW7.notePowerLoss(ch, toll, { 0: 2 }, { day: 5 });
+      const a = PW7.standingWithPower(ch, toll.id, C354.rules).score;
+      PW7.takeHold(ch, toll, PW7.holdsOf(toll, ch)[0], { day: 6 });
+      const b = PW7.standingWithPower(ch, toll.id, C354.rules).score;
+      const why = ch.powerState[toll.id].standingWhy || [];
+      return (a - b) > Math.abs(a) && why.length === 2 && /killed/.test(why[0].why) && /taken from them/.test(why[1].why);
+    })());
+
+  check("§354: ⛔ …AND IT ANSWERS THROUGH `standing.js`'s ONE DISPATCH, in the same `{holderId, kind, score, band}` shape a people's and a settlement's do, so a caller still does not need to know which system owns which holder (§3e's own convergence). `power` is a STANDING_KIND now",
+    (() => {
+      const ch = { powerState: { [toll.id]: { standing: -30 } } };
+      const via = ST7.standingFor(ch, toll.id, "power", C354.rules);
+      const roster = ST7.standingRoster(ch, C354.rules, { powers: [toll.id] });
+      return via.kind === "power" && via.score === -30 && ST7.STANDING_KINDS.includes("power")
+        && roster.some(r => r.holderId === toll.id && r.kind === "power");
+    })());
+
+  check("§354: ⛑ …AND WHO WOULD FIGHT BESIDE YOU reads the band, never a number, so it moves when Aevi retunes the ladder and not when I guess. ⛔ AND A BAND NAME I INVENTED IS LOUD NOW: my default was `atLeast: \"friendly\"`, which is NOT in this game's ladder (revered/trusted/known/neutral/wary/distrusted/hated), so `indexOf` returned −1, the filter matched nothing and the function returned an EMPTY LIST IN SILENCE for a power standing at 40. A guessed enum that happens to parse is the worst kind of wrong — nothing throws and the feature simply never happens",
+    (() => {
+      const good = { powerState: { power_millbrook_council: { standing: 40 } } };
+      const meh = { powerState: { power_millbrook_council: { standing: 10 } } };
+      const allies = PW7.alliedPowersFor(good, { content: C354, rules: C354.rules });
+      const none = PW7.alliedPowersFor(meh, { content: C354, rules: C354.rules });
+      const bad = PW7.alliedPowersFor(good, { content: C354, rules: C354.rules, atLeast: "friendly" });
+      return allies.length === 1 && allies[0].band === "trusted" && allies[0].heads > 0
+        && none.length === 0 && bad.length === 1;   // an unknown band falls back rather than returning nothing
+    })());
+
+  // ── C7 ────────────────────────────────────────────────────────────────────────────────────────────
+  check("§354: ⛔ C7 — ALL FOUR AUTHORED TRIGGERS FIRE, each from something that already happens and none needing new tracking. `crossed` reads the state C1 and C5 write · `neighbour` your holdings against their reach, on the authored `neighbourWithinDays` · `wealth` the purse's worth against `wealthAtCrystal` · `rival_ally` C6's standing with a rival",
+    (() => {
+      const crossed = PW7.noticesYou({ powerState: { [toll.id]: { lost: { 0: 4 } } } }, toll, opts);
+      const took = PW7.noticesYou({ powerState: { [toll.id]: { holdsTaken: ["x"] } } }, toll, opts);
+      const near = PW7.noticesYou({ holdings: [{ id: "h", name: "My Post", locationId: "kestrels_roost" }], powerState: {} }, toll, opts);
+      const rich = PW7.noticesYou({ powerState: {} }, gral, { ...opts, worth: 2000 });
+      const ally = PW7.noticesYou({ powerState: { power_firstsight_barony: { standing: 30 } } }, slip, opts);
+      return crossed?.trigger === "crossed" && took?.trigger === "crossed" && near?.trigger === "neighbour"
+        && rich?.trigger === "wealth" && ally?.trigger === "rival_ally";
+    })());
+
+  check("§354: ⛑ …AND A TRIGGER THAT CANNOT BE JUDGED DOES NOT FIRE. `wealth` needs the purse PRICED, which needs the economy and a region — so `powers.js` stays pure and takes the number IN. A caller that cannot price it passes null and the trigger is silent, which is honest; a guessed zero would have made every character look poor to every crown forever",
+    PW7.noticesYou({ powerState: {} }, gral, opts) === null
+    && PW7.noticesYou({ powerState: {} }, gral, { ...opts, worth: 400 }) === null
+    && PW7.noticesYou({ powerState: {} }, toll, opts) === null);
+
+  check("§354: ⛔ …AND A POWER NOTICES ONCE. It does not keep discovering you every pass, which is the difference between a world with intentions and a world with a notification loop",
+    (() => {
+      const ch = { powerState: { [toll.id]: { lost: { 0: 4 } } }, npcRegistry: {} };
+      const first = PW7.noticePass(ch, { ...opts, day: 10 });
+      const again = PW7.noticePass(ch, { ...opts, day: 11 });
+      return first.length === 1 && again.length === 0 && ch.powerState[toll.id].noticed?.trigger === "crossed";
+    })());
+
+  check("§354: ⛔ …AND IT DOES NOT PUT A STRANGER IN YOUR REGISTRY. Ten of the eleven leaders have been met by nobody, and minting one into your known-people so `seeking.js` could bring them would hand you a name you never earned — the rule CCODE-462 settled. ⛑ So the notice is a FACT on the save and the GM is told; where the leader IS someone you know, they gain a want and `seeking.js` brings them on its existing pressure",
+    (() => {
+      const unmet = { powerState: { [gral.id]: { holdsTaken: ["x"] } }, npcRegistry: {} };
+      PW7.noticePass(unmet, { ...opts, day: 12 });
+      const known = { powerState: { [gral.id]: { holdsTaken: ["x"] } },
+        npcRegistry: { harl_maddock: { id: "harl_maddock", name: "Harl Osric Maddock", relationship: -2, status: "active" } } };
+      PW7.noticePass(known, { ...opts, day: 12 });
+      const seekers = SK7.seekersAmong(known, { currentDay: 60, cfg: C354.rules?.ties || {} });
+      return Object.keys(unmet.npcRegistry).length === 0 && !!unmet.powerState[gral.id].noticed
+        && known.powerState[gral.id].noticed?.throughLeader === "harl_maddock"
+        && seekers.some(s => s.id === "harl_maddock");
+    })());
+
+  check("§354: ⛑ …AND THE WANT IS THE POWER'S OWN AUTHORED LINE, verbatim. `seeking.js`'s own rule is that the words are the PO's and not the engine's, and `wantsFromYou` is that sentence already written — \"Your knee, your coin, or your head on the stockade.\" Nothing here composes prose",
+    (() => {
+      const ch = { powerState: { [gral.id]: { holdsTaken: ["x"] } },
+        npcRegistry: { harl_maddock: { id: "harl_maddock", name: "Harl", relationship: 0, status: "active" } } };
+      PW7.noticePass(ch, { ...opts, day: 12 });
+      const wants = ch.npcRegistry.harl_maddock.interiority?.wants || [];
+      return wants.length === 1 && wants[0] === gral.wantsFromYou && !!gral.wantsFromYou;
+    })());
+
+  check("§354: ⛔ …AND THE GM IS TOLD — what they think of this character, that they have taken an interest, why, what they want, and whether they have even met. ⚠️ Still no `leverage` and no `secretsGM`: a power's weak point is handed over by somebody who knows, never by the prompt",
+    (() => {
+      const ch = { powerState: { [toll.id]: { lost: { 0: 4 }, standing: -30 } }, npcRegistry: {} };
+      PW7.noticePass(ch, { ...opts, day: 10 });
+      const b = PW7.powersHoldingForGM("old_switchback", { content: C354, character: ch });
+      return /TAKEN AN INTEREST/.test(b) && /killed/.test(b) && /distrusted/.test(b)
+        && /have not met/.test(b) && !/leverage/i.test(b) && !/secretsGM/i.test(b);
+    })());
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

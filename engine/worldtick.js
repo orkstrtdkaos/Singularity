@@ -43,7 +43,8 @@ import { syncEnabled, fetchRepoJSON, fetchLedgerMonths, fetchLedgerAll, pushMerg
 import { travelerCard, cardChanged, mergeTravelerCard, ledgerMonthsSince, whereOf, meetKey } from "./travelers.js";   // SNG-595: a fellow traveler is a person the world has a record of
 import { stampEventChange, mergeEventStages, mergeQuestOutcomes, actorOf, questKey } from "./worldevents.js";   // CCODE-354: a crisis another traveler answered reads as answered
 import { bandDialsOf } from "./melee.js";                                    // SNG-634 C1: a raiding power bleeds on the dials a band does
-import { raiderPowerAt, dangerLiftAt, powerPass } from "./powers.js";                    // SNG-634 C1/C2: whose raid, and whose ground
+import { raiderPowerAt, dangerLiftAt, powerPass, noticePass } from "./powers.js";  // SNG-634 C1/C2/C4/C7: whose raid, whose ground, what they do, who has noticed you
+import { worthOf } from "./purse.js";                                              // ⛔ SNG-634 C7 `wealth`: a crown notices a rich stranger
 import { INVITES_PATH, mergeInvitation, answerInto, applyAnswers } from "./invitations.js";   // CCODE-360: an invitation carried by someone you both know
 import { boundFigures } from "./companionlives.js";   // SNG-597 §3: a companion who is also a figure of the world
 import { decayWakes, wakeArcPush } from "./wake.js"; // SNG-204: wakes decay on the tick + lean on connected arcs
@@ -753,6 +754,15 @@ export async function runWorldTick({ character, content, currentDay, advanceAssi
   // every consequence lands on `character.powerState` rather than on the shared record: the Gralloch grows
   // in YOUR world because YOUR Tollmen went on paying it. ⚠️ A broken power takes no verb at all.
   const powersPass = powerPass(character, { content, rules: content?.rules || null, day: currentDay });
+  // ⛔ SNG-634 C7 — AND WHO HAS TAKEN AN INTEREST IN YOU. ⚠️ THE PURSE IS PRICED HERE, not in powers.js:
+  // `worthOf` needs the economy and a region and that module is pure. A caller that cannot price it passes
+  // null and the `wealth` trigger simply does not fire, which is honest rather than a guessed zero.
+  const worth634 = (() => { try { return worthOf(character?.purse, content?.rules?.economy,
+    // ⚠️ THE CHARACTER'S OWN PLACE, not `loc` — that name belongs to the holdings loop further down and is
+    // not in scope here. `import_integrity`'s scope scan caught it, which is exactly the class it exists for.
+    { regionId: content?.locations?.[character?.currentLocationId]?.regionId || null,
+      worldState: character?.worldState || null })?.crystal ?? null; } catch { return null; } })();
+  const noticedPass = noticePass(character, { content, rules: content?.rules || null, day: currentDay, worth: worth634 });
   // ✅ R45c (Erik: "you'll need to wire that into the engine so it evolves itself when the time comes") — UNATTENDED, on
   // the tick, the way a hold does. The bond is the PLAYER's; the item is in someone else's hands.
   const woke = [];
@@ -769,7 +779,7 @@ export async function runWorldTick({ character, content, currentDay, advanceAssi
   // ⚠️ THE POWERS’ NEWS IS CAPPED AT TWO A PASS. Eleven forces each doing something every day would bury
   // everything else a player needs to read — and only the rows that CHANGED something are emitted at all
   // (a toll gang tolling is already felt through the danger and the raid; saying it every pass is noise).
-  const extraNews = [...debtsPass.news.map(t => ({ text: t, section: "yours" })), ...grown.slice(0, 3), ...woke.slice(0, 3), ...powersPass.slice(0, 2)];
+  const extraNews = [...debtsPass.news.map(t => ({ text: t, section: "yours" })), ...grown.slice(0, 3), ...woke.slice(0, 3), ...powersPass.slice(0, 2), ...noticedPass.slice(0, 2)];   // ⛑ a power NOTICING you is always worth a line — it is about you
 
   // ⚠️ SNG-368: the RETURN is stamped too, on BOTH paths. The early return handed back raw entries
   // while the normal path handed back stamped ones, so a caller reading `.news[0].section` got a section on

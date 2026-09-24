@@ -21,9 +21,10 @@
 
 import { activeCompany } from "./company.js";
 import { standingWith, standingWithPeople } from "./reputation.js";
+import { standingWithPower } from "./powers.js";   // ⛔ SNG-634 C6: a force that holds ground is a holder of standing
 import { antipodeOf } from "./traditions.js";
 
-export const STANDING_KINDS = ["people", "settlement"];
+export const STANDING_KINDS = ["people", "settlement", "power"];   // ⛔ SNG-634 C6: a force that holds ground has an opinion too
 
 // §3b seeds. Decreasing by how close the people is to who you are. `known` (4) is the largest,
 // deliberately: birth makes you RECOGNISED, not trusted — trust is still play's to earn.
@@ -189,6 +190,10 @@ export function applyStandingOps(character, ops = [], { rules = {}, knownPeople 
  *  the spec asks for — settlements and peoples answered through a single call so callers stop
  *  needing to know which system owns which holder. */
 export function standingFor(character, holderId, kind, rules) {
+  // ⛔ SNG-634 C6 — A POWER'S OPINION IS ITS OWN, not a sum of deeds spread by `communityId`: a crown is not
+  // a community, and what moved it is what you did to IT. Same `{holderId, kind, score, band}` shape and the
+  // same `reputationBands`, so a caller still does not need to know which system owns which holder.
+  if (kind === "power") return standingWithPower(character, holderId, rules);
   if (kind === "settlement") {
     const r = standingWith(character, holderId, rules);
     return { holderId, kind, score: r.score, band: r.band };
@@ -200,7 +205,7 @@ export function standingFor(character, holderId, kind, rules) {
 /** Everyone who has an opinion of you, strongest first — the standing screen's feed and the GM's.
  *  `neutral`-at-zero holders are omitted: a list of people who have never heard of you is not a
  *  list worth reading. */
-export function standingRoster(character, rules, { settlements = [] } = {}) {
+export function standingRoster(character, rules, { settlements = [], powers = [] } = {}) {
   const out = [];
   for (const tid of Object.keys(character?.peopleDisposition || {})) {
     const s = standingFor(character, tid, "people", rules);
@@ -208,6 +213,12 @@ export function standingRoster(character, rules, { settlements = [] } = {}) {
   }
   for (const cid of settlements) {
     const s = standingFor(character, cid, "settlement", rules);
+    if (s.score !== 0) out.push(s);
+  }
+  // ⚠️ THE CALLER PASSES THE IDS, exactly as it does for settlements — this module does not learn how to
+  // enumerate powers, which keeps the one shape and one dispatch that §3e asked for.
+  for (const pid of powers) {
+    const s = standingFor(character, pid, "power", rules);
     if (s.score !== 0) out.push(s);
   }
   return out.sort((a, b) => Math.abs(b.score) - Math.abs(a.score));

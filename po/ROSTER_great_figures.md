@@ -29,10 +29,10 @@
 | **The Burning Certainty** `the_burning_certainty` | Gloriana Perpetua Excelsin | the Burning Certainty | GM only | seraphic | Claimant on the refused half — Angelic | strongly Angelic +0.9 |
 | **The Choirmaster Who Would Not Return** `the_unbodied_choir_master` | Sael Wynn Otherwell | the Choirmaster Who Would Not Return | a few | numinous | Agent — the Unbodied's (the vessel trade) | strongly Spiritual +0.9 |
 | **The Raw Chord** `the_raw_chord` | Miren Melisma Tremaine | the Raw Chord | GM only | threnodist | Villain | strongly Emotional −0.9 |
-| **The Scouring Hand** `the_scouring_hand` | Fallon Tace Demolin | the Scouring Hand | GM only | unmaker | Claimant — Breaking | strongly Destruction −0.9 |
+| **The Scouring Hand** `the_scouring_hand` | Fallon Tace Demolin | the Scouring Hand | GM only | unmaker | Challenger — Breaking (held by the Last Mercy) | strongly Destruction −0.9 |
 | **The Starless One** `the_starless` | Liath Seren Oubliere | the Starless One | GM only | umbral | Claimant on the refused half — Dark · wants the Void, hates Lucifer | strongly Dark −0.9 |
-| **The Still Lattice** `the_still_lattice` | Nonus Brevis Cordon | the Still Lattice | GM only | lattice | Claimant — Order | strongly Order +0.9 |
-| **The Thornmother of the Closing Wood** `thornmother_sealed` | Hazel Tansy Thornbury | the Thornmother of the Closing Wood | a few | rootkin | Claimant — Life | strongly Life +0.9, Peace +0.3 |
+| **The Still Lattice** `the_still_lattice` | Nonus Brevis Cordon | the Still Lattice | GM only | lattice | Claimant — Order (the open seat, unopposed) | strongly Order +0.9 |
+| **The Thornmother of the Closing Wood** `thornmother_sealed` | Hazel Tansy Thornbury | the Thornmother of the Closing Wood | a few | rootkin | Challenger — Life (held by Neth) | strongly Life +0.9, Peace +0.3 |
 | **The Unbodied** `the_ninefold_ascendant` | Syntha Lethe Noethe | the Unbodied | GM only | cogitant | Sovereign — Mind (refused Body) · the Unbodied | strongly Mind +0.9 |
 | **Valen Sunwrack, Who Left No Shadow Standing** `sunwrack_valen` | Valen Blaise Sunwrack | Who Left No Shadow Standing | everyone | blazeborn | Supply line — Lucifer's | strongly Light +0.9 |
 | **Ysenkar, Who Wears the Smaller Door** `ysenkar` | *Ysenkaravel* (true name) | Who Wears the Smaller Door | GM only | dragon |  | strongly Truth +0.7, Abstract +0.4 |
@@ -42,14 +42,14 @@
 | called | whole name | title | known by | people | Sovereign / Savior | vectors |
 |---|---|---|---|---|---|---|
 | **Ateph of the First Flame** `first_flame_ateph` | Ateph Sunniva Candelor | of the First Flame | everyone | blazeborn |  | strongly Light +0.7, Spiritual +0.4 |
-| **Cinder Vael, the Wright Who Would Not Stop** `cinder_vael` | Cinder Odile Vael | the Wright Who Would Not Stop | everyone | wright | Claimant — Building | strongly Creation +0.9, Mechanical −0.5 |
+| **Cinder Vael, the Wright Who Would Not Stop** `cinder_vael` | Cinder Odile Vael | the Wright Who Would Not Stop | everyone | wright | Challenger — Building (held by the Last Mercy) | strongly Creation +0.9, Mechanical −0.5 |
 | **Ember, Who Banks the Fire** `ember_who_banks_the_fire` | Ember Iria Glassford | Who Banks the Fire | everyone | blazeborn | Savior — counterweight to Valen Sunwrack, Who Left No Shadow Standing | strongly Light +0.7, Peace +0.4, Logical +0.3 |
 | **Halcyon, Who Built One Perfect Thing** `halcyon_the_finished` | Halcyon Linnea Castell | Who Built One Perfect Thing | everyone | wright |  | strongly Creation +0.7, Order +0.6, Logical +0.3 |
 | **Iseult of the Kept Word** `dame_iseult_hardline` | Iseult Constant Oathley | Dame, of the Kept Word | everyone | human |  | strongly Truth +0.7, Order +0.5, Violence −0.4 |
 | **Kesh Ardent, the Edge That Holds** `the_edge_that_holds` | Kesh Runa Ardent | the Edge That Holds | everyone | marcher | Savior — counterweight to The Ender Who Forgot Why | Violence −0.6, Truth +0.5 |
 | **Ledda, the Last Choirmistress** `the_last_choirmistress` | Ledda Halia Sheerwater | the Last Choirmistress | everyone | numinous | Savior — anti-Sovereign: knows, and hunts (R41c) · counterweight to The Choirmaster Who Would Not Return | Emotional −0.5, Spiritual +0.4 |
-| **Morvane of the Harvest Hand** `morvane_the_harvest` | Morvane Sorcha Graveny | of the Harvest Hand | everyone | ashwarden | Claimant — Death | strongly Death −0.9, strongly Logical +0.7, Violence −0.4 |
-| **Neth, Who Has Buried More Than She Has Known** `neth_the_stayed` | Neth Eluned Welland | Who Has Buried More Than She Has Known | everyone | ashwarden | Savior — counterweight to Morvane of the Harvest Hand | strongly Death −0.9, Truth +0.6 |
+| **Morvane of the Harvest Hand** `morvane_the_harvest` | Morvane Sorcha Graveny | of the Harvest Hand | everyone | ashwarden | Challenger — Death (held by Neth) | strongly Death −0.9, strongly Logical +0.7, Violence −0.4 |
+| **Neth, Who Has Buried More Than She Has Known** `neth_the_stayed` | Neth Eluned Welland | Who Has Buried More Than She Has Known | everyone | ashwarden | Savior — HOLDS Life / Death; challengers must beat her · counterweight to Morvane of the Harvest Hand | strongly Death −0.9, Truth +0.6 |
 | **Seraphine the Unbending Witness** `the_unbending_witness` | Seraphine Verity Barestone | the Unbending Witness | everyone | verist |  | strongly Truth +0.9, Logical +0.5 |
 | **Sister Alder, the Ward That Does Not Break** `sister_alder` | Alder Psalm Wistan | Sister, the Ward That Does Not Break | everyone | threnodist | Savior — anti-Sovereign: knows, and hunts (R41c) | strongly Spiritual +0.7, Emotional −0.3 |
 | **The Appetite** `the_appetite` | Kord Gio Faragon | the Appetite | GM only | somatic | Claimant on the refused half — Body | strongly Body −1.0 |
@@ -64,7 +64,7 @@
 | **The Gate That Gapes** `the_gate_that_gapes` | Nomi Drift Gyre | the Gate That Gapes | GM only | horizon | Claimant on the refused half — nearness (Span's other side) | strongly Space −0.9, Chaos −0.4 |
 | **The Hour-Hoarder** `the_hour_hoarder` | Kairo Tarry Sandglass | the Hour-Hoarder | GM only | hourkeeper | Villain | strongly Time +0.9 |
 | **The Hundred Hands** `the_hundred_hands` | Tarn Kai Moravec | the Hundred Hands | a few | somatic | Savior — counterweight to The Appetite | strongly Body −0.8, Life +0.3 |
-| **The Last Mercy** `the_last_mercy` | Kenna Ruth Lastwood | the Last Mercy | a few | unmaker | Savior — counterweight to The Scouring Hand | strongly Destruction −0.8, Death −0.3, Peace +0.3 |
+| **The Last Mercy** `the_last_mercy` | Kenna Ruth Lastwood | the Last Mercy | a few | unmaker | Savior — HOLDS Breaking / Building; challengers must beat her · counterweight to The Scouring Hand | strongly Destruction −0.8, Death −0.3, Peace +0.3 |
 | **The Last Seraph of the Pre-Transition Choir** `the_last_seraph` | Hosanna Celestine Choirholm | the Last Seraph of the Pre-Transition Choir | a few | seraphic | Savior — counterweight to The Burning Certainty, Sel Who Broke the Warding | strongly Angelic +0.9, Spiritual +0.5, Life +0.3 |
 | **The Lidded Calm** `the_lidded_calm` | Placida Hope Softmere | the Lidded Calm | GM only | stillhold | Villain | strongly Peace +0.9, Falsehood −0.6 |
 | **The Slow Green** `the_slow_green` | *Mossenvale* (true name) | the Slow Green | GM only | ent |  | strongly Life +0.7, Space −0.4, Order +0.3 |

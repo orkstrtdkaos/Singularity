@@ -96,7 +96,9 @@ with the other half declined entirely.
 | **Mind / Body** | ⚑ **the Unbodied** (`the_ninefold_ascendant`) — Mind, refused Body |
 | **Angelic / Demonic** | ⚑ **the Hollow King** (`the_hollow_king`) — Demonic, refused Angelic |
 | **Span** | ⚑ **the Unmet** (`the_unmet`) — distance entire, refused nearness. ⚠️ **THIN AND RECENT** (SNG-643) |
-| Life / Death · Breaking / Building · Chaos / Order | ⬜ **open, and contested** — claimants in `po/SPEC_SNG-642` §3 |
+| **Life / Death** | ⛑ **HELD BY THE SAVIOR SIDE — Neth, Who Has Buried More Than She Has Known** (`neth_the_stayed`). Challenged by the Thornmother (Life) and Morvane (Death) — either must beat her first (SNG-644) |
+| **Breaking / Building** | ⛑ **HELD BY THE SAVIOR SIDE — the Last Mercy** (`the_last_mercy`). Challenged by the Scouring Hand (Breaking) and Cinder Vael (Building) |
+| **Chaos / Order** | ⬜ **open** — the Still Lattice walks toward it with nobody in the way |
 
 > ⛔ **Span is DISTANCE** (Erik, 2026-09-24). *Spirit* is being allocated across several axes and is no longer this
 > seat's other half; what Span refused is **nearness**, and the name of that half waits on the Spirit work.
@@ -117,6 +119,12 @@ sovereign, is what keeps this from being arithmetic.**
 > the opposite. This provides world balance and tension.* ⚠️ **And a filled seat is not a kept seat.** A Sovereign
 > can be slain, starved past recrossing, or displaced by a claimant who finishes — the seat is a position, not a
 > possession.
+>
+> ⛑ **"FILLED WITH THE OPPOSITE" — Erik, 2026-09-24:** *"the axis is dominated by the savior side. Someone holds the
+> axis and would need to be beaten by the sovereign challenger."* ➡️ **A held seat is held by RESTRAINT** — someone
+> standing on the axis who refuses neither half. They are not stronger than the challengers; they are in the way.
+> ⚠️ **A challenger cannot take a held seat by finishing; it has to go THROUGH the holder** — and that is where a
+> player's help matters most.
 
 ---
 

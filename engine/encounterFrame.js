@@ -26,7 +26,11 @@
 // default set makes the frame legible before she authors per-kind framing. `win` is the stated win-condition —
 // "what resolving it MEANS" (§2.2), never a mystery.
 export const FRAME_KINDS = {
-  fight:    { icon: "⚔", title: "A Hostile Meeting", win: "Defeat the thing — or drive it off.",           meterLabel: "Momentum" },
+  // ⚠️ "THE THING" AND "IT", OF A NAMED PERSON. Erik hit this on the CONTENT copy (2026-09-25) and Aevi
+  // corrected hers the same day; this is the fallback that shows when content is absent, and it had the same
+  // fault one layer down. ⛑ It also names both real exits now, which the old line did not: the break counter
+  // (R34b — driven back N times) and putting them down. Content still overrides it.
+  fight:    { icon: "⚔", title: "A Hostile Meeting", win: "Drive them back until they break — or bring them down.", meterLabel: "Momentum" },
   chase:    { icon: "🏃", title: "The Chase",   win: "Catch them — or shake free and get away.",       meterLabel: "Ground gained" },
   hazard:   { icon: "⚠", title: "Hard Ground",       win: "Cross it — reach the far side.",                  meterLabel: "Progress across" },
   puzzle:   { icon: "🧩", title: "The Sealed Thing", win: "Solve it — find the way through.",           meterLabel: "Insight" },

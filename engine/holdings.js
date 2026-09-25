@@ -774,6 +774,45 @@ export function watchOf(holding, cfg = null) {
   return ids;
 }
 
+/** ⛔ CCODE-502 (SNG-652 §7) — WHO STANDS WATCH, WHAT THEY BRING, AND WHAT IT ACTUALLY DECIDES.
+ *
+ *  ⚠️ AND WHAT IT DECIDES IS NOT A PERCENTAGE. Aevi's §7 asks for "Raid seen: 84%" and asked me whether the
+ *  watch roll could be expressed as a probability. MEASURED: there is no watch roll. `resolveRaid` opens with
+ *  `if (!watchOf(holding, cfg).length)` — one body on watch and the raid is SEEN and met; none and it comes
+ *  unseen and simply takes a share. ⛑ Showing a number here would be inventing a rule, which is Erik's to
+ *  make; this reports the rule that exists, and says so where a number would have gone.
+ *
+ *  ⚠️ WHICH ALSO MAKES THE MARGINAL LINE HONEST, and it is not the one the spec expected: the FIRST watcher
+ *  is worth everything and the second is worth nothing TO BEING SEEN — they are worth what they bring to the
+ *  fight that follows, which is a different question and one the engine does answer.
+ *
+ *  Returns `{ seen, watchers, named, hands, fromFeatures, stone, defenders, marginal }`. Pure. */
+export function watchReadout(character, holding, { cfg = null, people = {} } = {}) {
+  const ids = watchOf(holding, cfg) || [];
+  const isUnit = (id) => /^unit:/.test(String(id));
+  const isFeature = (id) => !isUnit(id) && /^[a-z_]+:\d+$/.test(String(id));
+  const named = ids.filter(id => !isUnit(id) && !isFeature(id))
+    .map(id => ({ id, name: people?.[id]?.name || character?.npcRegistry?.[id]?.name || id }));
+  const fromFeatures = [...new Set(ids.filter(isFeature).map(id => String(id).split(":")[0]))]
+    .map(kind => ({ kind, label: featureDef(kind, cfg)?.label || kind }));
+  const hands = ids.filter(isUnit).length;
+  // ⛑ WHAT THEY WOULD ACTUALLY MEET THEM WITH — the SAME read `resolveRaid` makes, not a second one. Erik,
+  // 2026-09-14: "these aren't just bodies that can hit something — they have skills and abilities they can
+  // bring to bear", and `contributionsOf` is how a filtration engineer stops counting as one more sword.
+  let defenders = [];
+  try {
+    defenders = contingentsFromPeople(named.map(n => people?.[n.id] || character?.npcRegistry?.[n.id] || { id: n.id, name: n.name }),
+      { levelOf: (p) => Number(p?.level) || 1, contributionsOf: (p) => contributionsOf(p, { evidence: true }) });
+  } catch { defenders = []; }
+  const seen = ids.length > 0;
+  return { seen, watchers: ids.length, named, hands, fromFeatures,
+    stone: defenceOf(holding, cfg), defenders,
+    // ⚠️ THE HONEST MARGINAL, which is the opposite shape to the one the spec asked for.
+    marginal: seen
+      ? "one more on the watch adds nothing to being SEEN — they add to the fight that follows"
+      : "the first body on the watch is the whole difference: with nobody, a raid simply takes its share" };
+}
+
 export function isGuarded(holding, cfg = null) {
   return !!(holding?.defence || (Array.isArray(holding?.garrison) ? holding.garrison.length > 0 : holding?.garrison) || defenceOf(holding, cfg) > 0);
 }
@@ -1393,7 +1432,12 @@ export function featureDoes(kind, cfg, { level = 1, count = 1, holding = null, d
         : `${String(good).replace(/_/g, " ")} — how much depends on the hold's condition`);
   }
   if (Number(def.defence)) say("defence", `+${Number(def.defence) * n * lv} to what it can hold off`);
-  if (Number(def.watch)) say("watch", `+${Number(def.watch) * n * lv} to seeing trouble coming`);
+  // ⛔ A FLAG, NOT A SCALE — and printing it as a number was inventing a mechanic. `watch` is authored `true`
+  // on every kind that carries it, `watchOf` reads it as a gate (`if (def?.watch)`), and every consumer then
+  // asks only whether the list is EMPTY. There is no detection roll anywhere: a raid is SEEN when anyone
+  // stands watch and unseen when nobody does. ⚠️ `Number(true) === 1` made my first cut say "+1 to seeing
+  // trouble coming", which is a scale the engine does not have — the same coercion defect I have a note about.
+  if (def.watch) say("watch", "it watches — a raid here is SEEN coming, and met");
   if (Number(def.hands)) say("hands", `${Number(def.hands) * n * lv} more ${Number(def.hands) * n * lv === 1 ? "hand" : "hands"} can work here`);
   if (Number(def.residents)) say("residents", `homes for ${Number(def.residents) * n}`);
   if (Number(def.pilgrims)) say("pilgrims", `draws ${Number(def.pilgrims) * n} pilgrim${Number(def.pilgrims) * n === 1 ? "" : "s"} a pass`);

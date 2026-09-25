@@ -69,7 +69,7 @@ import { enterDeathState } from "./engine/death.js";
 wireDeathModel(DeathModel);
 import { carriageOf, voyageOf, isMoored, canSail, sailHolding, voyageLine, featureRuling, canBuildOn } from "./engine/carriage.js";
 import { roomOf, roomRefusal, promotionOffer, promoteHolding, trainingAt, mountsAt, healingAt, quarteringOf, vaultOf, chargeOf, chargeWord, depositToVault, withdrawFromVault, holdingFieldSources } from "./engine/holdings.js";   // ⛔ CCODE-429: a hold has room · CCODE-430: a yard trains   // B6b: the holding that moves
-import { raidRisk, craftPlacementCost, featureCost, featureDef, featureDoes, featureCategory, allFeatures, refreshImprovement, canBeAskedToWork, holdingFactsLine, answerFeatureOffer, holdingLedger, addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, yieldsFor, upkeepFor, appointKeeper, reclaimHolding, improveHolding, setCrew, setGarrison, holdingGround, addFeature, removeFeature, renameHolding, featureKinds, residentsOf, holdingMeaningAura, holdingFieldDelta } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
+import { raidRisk, watchReadout, craftPlacementCost, featureCost, featureDef, featureDoes, featureCategory, allFeatures, refreshImprovement, canBeAskedToWork, holdingFactsLine, answerFeatureOffer, holdingLedger, addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, yieldsFor, upkeepFor, appointKeeper, reclaimHolding, improveHolding, setCrew, setGarrison, holdingGround, addFeature, removeFeature, renameHolding, featureKinds, residentsOf, holdingMeaningAura, holdingFieldDelta } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
 import { buildDevReport, unknownOpsIn } from "./engine/devreport.js";   // SNG-559: the Play/Dev instrument
 import { makeField, fieldDataFrom, FIELD_KINDS, KIND_LABEL, MEMBERSHIP } from "./engine/field.js";
 import { assaultableAt, garrisonContingents, noteHoldLoss, takeHold, encounterOwnerFilter, seedPowerKnowledge, isKnownPower } from "./engine/powers.js";
@@ -180,7 +180,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.7.4";
+const APP_VERSION = "2.7.6";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -14911,7 +14911,11 @@ function renderHoldingsTab(manageId = null) {
               ("run it lean when you're exposed, and stock up when you're walled"). Both READ — `storeExits`
               and `raidRisk` — so neither can drift from what the pass actually pays. */""}
         ${storeTotal(h) > 0 ? (() => {
-          const econ = CONTENT.rules?.economy, sCfg = econ?.holdStore;
+          // ⛔ `holdCfgNow()`, NOT the bare `economy.holdStore`. The features live in a DIFFERENT bag
+          // (`economy.holdFeatures`) and `holdCfgNow` is the one place that joins them; without it
+          // `featureKinds` answers `{}` and every feature stops existing to these readouts — which read, on
+          // Silas's own holds, as "nobody stands watch" at a post whose watch feature is standing.
+          const econ = CONTENT.rules?.economy, sCfg = holdCfgNow();
           const reg = CONTENT.locations?.[h.locationId]?.regionId || null;
           let ex = null, rk = null;
           try { ex = storeExits(character, h, { cfg: sCfg, economy: econ, locations: CONTENT.locations || {}, regionId: reg }); } catch { ex = null; }
@@ -14924,11 +14928,28 @@ function renderHoldingsTab(manageId = null) {
               <td>${r.net}</td><td>${r.passes <= 1 ? "now" : `${r.passes} passes`}${r.risk ? ` <span class="hint">· danger ${r.risk}</span>` : ""}</td><td><strong>${r.perPass}</strong></td></tr>`).join("")}</table>
             ${ex.best ? `<div class="hint">Best per pass: <strong>${esc(ex.best.who)}</strong> — ${esc(ex.best.said)}</div>` : ""}
             ${ex.why ? `<div class="hint">${esc(ex.why)}</div>` : ""}</div>` : "";
+          // ⛔ SNG-652 §7 — THE WATCH, AND WHAT IT ACTUALLY DECIDES. Aevi asked for "Raid seen: 84%".
+          // Measured: there is no watch roll — `resolveRaid` opens `if (!watchOf(...).length)`, so one body on
+          // watch means SEEN AND MET and none means it comes unseen. A percentage here would be a rule I
+          // invented, and rules are Erik's. This says the rule that exists, in the place the number would go.
+          const wr = (() => { try { return watchReadout(character, h, { cfg: sCfg, people: character.npcRegistry || {} }); } catch { return null; } })();
+          const watch = wr ? `<div class="hs-watch"><span class="hs-lbl">The watch</span>
+            <div class="${wr.seen ? "hs-seen" : "hs-unseen"}">${wr.seen
+              ? `◉ A raid here is <strong>seen coming, and met</strong>.`
+              : `○ Nobody stands watch — a raid here comes <strong>unseen</strong> and simply takes its share.`}</div>
+            ${wr.named.length || wr.fromFeatures.length || wr.hands ? `<div class="hint">${[
+                wr.named.length ? `on watch: ${wr.named.map(n => esc(n.name)).join(", ")}` : "",
+                wr.hands ? `${wr.hands} band hand${wr.hands === 1 ? "" : "s"} posted` : "",
+                wr.fromFeatures.length ? `${wr.fromFeatures.map(f => esc(f.label)).join(", ")}` : "",
+              ].filter(Boolean).join(" · ")}</div>` : ""}
+            ${wr.defenders.length ? `<div class="hint">what they meet them with: ${wr.defenders.map(d => `${esc(d.what)}${(d.does || []).includes("MARTIAL") ? " <strong>(fights)</strong>" : ""}`).join(", ")}${wr.stone ? ` · and ${wr.stone} of stone` : ""}</div>` : wr.stone ? `<div class="hint">${wr.stone} of stone, and nobody behind it</div>` : ""}
+            <div class="hint">${esc(wr.marginal)}</div>
+            <div class="hint">⬜ No percentage here: nothing rolls a detection yet — it is seen or it is not.</div></div>` : "";
           const risk = rk && rk.chance > 0 ? `<div class="hs-risk" title="${esc(rk.terms.map(x => `${x.label} ×${Math.round(x.mult * 100) / 100}`).join(" · "))}">
             ⚠ At this stock a raid would take about <strong>${rk.wouldTake}</strong> crystal of goods — about <strong>1 raid in ${rk.everyN} passes</strong> gets through, so it costs you ~${rk.expectedLoss} a pass to stand here holding it.
             <span class="hint">${esc(rk.terms.map(x => x.label).join(" · "))}</span></div>`
             : rk && rk.why ? `<div class="hs-risk hint">⚠ No raid risk here — ${esc(rk.why)}.</div>` : "";
-          return cmp + risk;
+          return cmp + watch + risk;
         })() : ""}
         ${(() => { const v = vaultOf(h); if (!v.length) return ""; const atHold = hereNow()?.id === h.locationId;   // ⛔ CCODE-444: what its vault keeps
           return `<div class="hint hold-has hold-vault"><span class="hold-ctl-label">vault</span>${v.map((it, i) => { const c = chargeOf(it, CONTENT.items || {}); const on = it.active !== false;

@@ -7499,6 +7499,64 @@ console.log("\n── §76b · a crafted feature carries its craft, its season, 
   }
 }
 
+/* ═════ §76f — THE WATCH: SEEN OR UNSEEN, BECAUSE THAT IS THE RULE THERE IS (SNG-652 §7, CCODE-502) ═════ */
+// ⛔ THE SECTION ASKED FOR A NUMBER THAT DOES NOT EXIST. Aevi's §7 wants "Theft seen: 71% · Raid seen: 84%"
+// and asked whether the watch roll could be expressed as a probability. MEASURED: `resolveRaid` opens with
+// `if (!watchOf(holding, cfg).length)` — one body on watch and the raid is SEEN AND MET, none and it comes
+// unseen and takes its share. ⚠️ There is no roll to express. Printing a percentage would be inventing a
+// rule, which is Erik's to make — the same place the retrieval roll went in SNG-653, where refusing it and
+// reporting it got it ruled and backlogged instead of guessed.
+console.log("\n── §76f · the watch, and the number that does not exist ──");
+{
+  const H7 = await import("../engine/holdings.js");
+  const { loadContentHeadless: lch7 } = await import("./headless_content.mjs");
+  const C7 = await lch7();
+  const econ7 = C7.rules.economy, cfg7 = { ...econ7.holdStore, features: econ7.holdFeatures };
+  const people7 = { cael: { id: "cael", name: "Cael", level: 6, role: "Village warden" },
+                    fen: { id: "fen", name: "Fen", level: 4, role: "Filtration engineer" } };
+  const bare = { id: "h7", kind: "post", condition: "holding", features: [], garrison: [], improvements: [], store: {} };
+  const kept = { ...bare, garrison: ["cael", "fen"], features: [{ kind: "watch", name: "a Watch", count: 1 }, { kind: "wall", name: "a wall", count: 1 }] };
+  const ch7 = { holdings: [bare], npcRegistry: people7 };
+  const no7 = H7.watchReadout(ch7, bare, { cfg: cfg7, people: people7 });
+  const yes7 = H7.watchReadout(ch7, kept, { cfg: cfg7, people: people7 });
+
+  // ⛔ THE RULE, DRIVEN: the readout must agree with what `resolveRaid` actually branches on.
+  check("§76f: ⛔ a raid is SEEN when anybody stands watch and UNSEEN when nobody does — the branch the raid itself takes",
+    no7.seen === false && no7.watchers === 0 && yes7.seen === true && yes7.watchers > 0
+    && /if \(!watchOf\(holding, cfg\)\.length\)/.test(rd("engine/holdings.js")),
+    JSON.stringify({ bare: no7.seen, kept: yes7.seen, watchers: yes7.watchers }));
+  // ⚠️ AND ONE WATCHER IS ENOUGH — which is what makes the marginal line the opposite shape to the spec's.
+  const one7 = H7.watchReadout(ch7, { ...bare, garrison: ["cael"] }, { cfg: cfg7, people: people7 });
+  check("§76f: ⚠️ …so the FIRST watcher is the whole difference and the second adds nothing to being seen",
+    one7.seen === true && yes7.seen === one7.seen && /adds nothing to being SEEN/.test(yes7.marginal) && /the first body/.test(no7.marginal),
+    JSON.stringify({ one: one7.marginal, none: no7.marginal }));
+  // ⛑ AND NO PERCENTAGE IS PRINTED, in the engine or on the screen, because none is rolled.
+  const A7 = rd("app.js");
+  check("§76f: ⛔ NO detection percentage is shown — a number nobody rolls is a rule the screen invented",
+    /No percentage here: nothing rolls a detection yet/.test(A7)
+    && !/seen: \$\{[^}]*\}%/.test(A7)
+    && !/detect(ion)?Chance|detectPct/.test(rd("engine/holdings.js")),
+    "§7's own numbers wait on a ruling, exactly as the retrieval roll did");
+  // ⛑ WHAT THEY MEET THEM WITH IS THE RAID'S OWN READ, not a second one — Erik: "these aren't just bodies".
+  check("§76f: …and who stands watch is read for what they ACTUALLY bring — a warden fights, an engineer does not",
+    yes7.defenders.length === 2
+    && yes7.defenders.find(d => d.what === "Cael")?.does?.includes("MARTIAL")
+    && !yes7.defenders.find(d => d.what === "Fen")?.does?.includes("MARTIAL"),
+    JSON.stringify(yes7.defenders.map(d => ({ who: d.what, does: d.does }))));
+  check("§76f: …and the features that watch are named beside the people, with the stone counted separately",
+    yes7.fromFeatures.some(f => /Watch/i.test(f.label)) && yes7.stone === H7.defenceOf(kept, cfg7) && yes7.stone > 0,
+    JSON.stringify({ features: yes7.fromFeatures, stone: yes7.stone }));
+  // ⚠️ AND `watch` IS A FLAG, NOT A SCALE — authored `true` on every kind that carries it, so a line
+  // printing "+N to seeing trouble coming" was `Number(true)` inventing a mechanic. My own, fixed the same hour.
+  const kinds7 = H7.featureKinds(cfg7);
+  const watchKinds = Object.entries(kinds7).filter(([, d]) => d && d.watch);
+  check(`§76f: ⚠️ …and \`watch\` is a FLAG on all ${watchKinds.length} kinds that carry it — so nothing prints it as a number`,
+    watchKinds.length > 0 && watchKinds.every(([, d]) => d.watch === true)
+    && H7.featureDoes("watch", cfg7, {}).every(x => !/\+\d+ to seeing/.test(x.said))
+    && H7.featureDoes("watch", cfg7, {}).some(x => /it watches/.test(x.said)),
+    JSON.stringify(watchKinds.map(([k, d]) => `${k}:${d.watch}`)));
+}
+
 /* ═════ §76e — MOVING THE STORE, AND WHAT STANDING ON IT RISKS (SNG-652 §6, CCODE-500) ═════ */
 // ⛔ THE TWO THINGS ERIK ASKED FOR BY NAME: "cost vs benefits so you can compare against selling here", and
 // the trade-off behind it — "run it lean when you're exposed, and stock up when you're walled". A trade-off

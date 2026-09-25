@@ -2117,3 +2117,10 @@ table.ob-matrix { border-collapse: collapse; width: 100%; min-width: 640px; font
 .hs-table td:last-child, .hs-table th:last-child { text-align: right; font-variant-numeric: tabular-nums; }
 .hs-risk { margin-top: 6px; font-size: 12px; opacity: .9; }
 .hs-risk .hint { display: block; font-size: 11px; opacity: .6; }
+
+/* SNG-652 §7 · THE WATCH — seen or unseen, because that is the rule that exists; nothing rolls a detection,
+   so nothing here prints a percentage. */
+.hs-watch { margin-top: 8px; }
+.hs-seen { font-size: 12.5px; }
+.hs-unseen { font-size: 12.5px; color: var(--warn, #e0b25a); }
+.hs-watch .hint { display: block; font-size: 11.5px; opacity: .62; margin-top: 2px; }

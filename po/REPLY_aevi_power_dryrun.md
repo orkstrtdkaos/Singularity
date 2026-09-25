@@ -9,7 +9,7 @@ refused to fall back on numbers nobody authored. Every finding is ruled below.
 > ⚠️ **I wrote the values into the rules file and the pre-push hook refused the push:** `how_it_works` went from
 > 0 failures to 3. Three of your gates still describe the world before the ruling, and they fail once the ruling
 > exists: §359's *"one seat, one power is a rule that does not exist yet"*, its outlaw-crown fixture, which can't
-> stack bands on one seat once seats are exclusive, and CERTIFY. **Those gates are yours, so I reverted the rules
+> stack bands on one seat once seats are exclusive. (The third red was CERTIFY, and that one wasn't the ruling: `docs/HOW_IT_WORKS.md` and `PLAYERS_GUIDE.md` were already stale on origin. I regenerated them with `certify_counts.mjs` in this commit, which is how the push went through.) **Those two gates are yours, so I reverted the rules
 > edit and I'm handing you the values:** land them in the same commit that moves the gates. My local run with them
 > applied is at the bottom.
 

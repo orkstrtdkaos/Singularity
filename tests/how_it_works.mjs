@@ -7499,14 +7499,107 @@ console.log("\n── §76b · a crafted feature carries its craft, its season, 
   }
 }
 
-/* ═════ §76f — THE WATCH: SEEN OR UNSEEN, BECAUSE THAT IS THE RULE THERE IS (SNG-652 §7, CCODE-502) ═════ */
-// ⛔ THE SECTION ASKED FOR A NUMBER THAT DOES NOT EXIST. Aevi's §7 wants "Theft seen: 71% · Raid seen: 84%"
-// and asked whether the watch roll could be expressed as a probability. MEASURED: `resolveRaid` opens with
-// `if (!watchOf(holding, cfg).length)` — one body on watch and the raid is SEEN AND MET, none and it comes
-// unseen and takes its share. ⚠️ There is no roll to express. Printing a percentage would be inventing a
-// rule, which is Erik's to make — the same place the retrieval roll went in SNG-653, where refusing it and
-// reporting it got it ruled and backlogged instead of guessed.
-console.log("\n── §76f · the watch, and the number that does not exist ──");
+/* ═════ §76g — THE TWO ROLLS ERIK RULED: COMING BACK, AND SEEING THEM COMING (CCODE-504) ═════ */
+// ✅ ERIK, 2026-09-25: "Yes on the rolls for return from death and for watch success. Set something smart and
+// let Aevi know how to tweak it." Both are additive stacks of NAMED terms, every one a dial in
+// `rules.death`, clamped between a floor and the project's own 95 ceiling.
+// ⛑ AND EACH KEEPS ONE THING FROM THE RULE IT REPLACES, which is the part worth gating: a reach that is PAST
+// your reach is still refused for free and never rolls, and an empty wall is still a flat zero.
+console.log("\n── §76g · the two rolls, and what each kept ──");
+{
+  const D6 = await import("../engine/death.js");
+  const H6g = await import("../engine/holdings.js");
+  const { loadContentHeadless: lch6g } = await import("./headless_content.mjs");
+  const C6g = await lch6g();
+  const rules6 = C6g.rules;
+  const eco6 = rules6.economy, cfg6g = { ...eco6.holdStore, features: eco6.holdFeatures };
+
+  /* ---- 1 · COMING BACK ---- */
+  const dead6 = (days, extra = {}) => ({ status: "dead", deathState: { diedDay: 400 - days, bodyStatus: "intact", ...extra } });
+  const odds6 = (e, rank, bond) => D6.retrievalOdds(e, { rank, bond, currentDay: 400, rules: rules6 });
+  check("§76g: ⛔ the odds exist, and they are the DIALS' — a fresh death reads its own `byDepth` entry",
+    odds6(dead6(0), 1, 0).pct === rules6.death.retrieval.byDepth[0],
+    JSON.stringify(odds6(dead6(0), 1, 0)));
+  // ⚠️ THE FREE REFUSAL SURVIVES. `canReach`'s whole point is that being told "past your reach" costs
+  // nothing; a roll that quietly happened anyway would undo an older rule while adding a newer one.
+  const past = odds6(dead6(200), 1, 0);
+  check("§76g: ⛔ …and a depth PAST your reach has no odds at all — the free refusal is not replaced by a bad roll",
+    past.pct === 0 && typeof past.why === "string" && past.terms.length === 0, JSON.stringify(past));
+  // the stack moves with each term, and every one is named
+  const close = odds6(dead6(0), 3, 20), stranger = odds6(dead6(0), 1, 0);
+  check("§76g: …craft, bond and a held-open way each RAISE it, and each says so by name",
+    close.pct > stranger.pct
+    && close.terms.some(x => /rank/.test(x.label)) && close.terms.some(x => /what you were to them/.test(x.label))
+    && odds6(dead6(0, { heldOpenBy: "someone" }), 1, 0).terms.some(x => /holding the way open/.test(x.label)),
+    JSON.stringify(close.terms));
+  check("§76g: …and nothing is ever certain — the 95 ceiling every other roll in this game pays",
+    close.pct <= rules6.death.retrieval.ceiling && rules6.death.retrieval.ceiling === 95);
+  // ⛑ AND THE ROLL IS THE ODDS. A shown number that a different function rolls is the defect this whole
+  // week has been about.
+  const madeIt = D6.rollRetrieval(dead6(0), { rank: 1, bond: 0, rules: rules6, currentDay: 400, rng: () => 0 });
+  const missed = D6.rollRetrieval(dead6(0), { rank: 1, bond: 0, rules: rules6, currentDay: 400, rng: () => 0.999 });
+  check("§76g: ⛔ the % SHOWN is the % ROLLED — one function, and the outcome goes straight to `resolveRetrieval`",
+    madeIt.pct === stranger.pct && madeIt.made === true && madeIt.outcome === "return"
+    && missed.made === false && missed.outcome === "fail",
+    JSON.stringify({ made: madeIt.rolled, missed: missed.rolled, pct: madeIt.pct }));
+
+  /* ---- 2 · SEEING THEM COMING ---- */
+  const hold6 = (over = {}) => ({ id: "h6g", kind: "post", condition: "holding", features: [], garrison: [], improvements: [], store: { raw_material: 10 }, ...over });
+  const wo = (h, danger) => H6g.watchOdds({ holdings: [h], npcRegistry: {} }, h, { cfg: cfg6g, rules: rules6, dangerLevel: danger });
+  // ⚠️ THE BOTTOM OF THE OLD RULE SURVIVES: an empty wall is a flat zero, never a base chance.
+  check("§76g: ⛔ nobody on watch is a flat ZERO — an empty wall does not get lucky",
+    wo(hold6(), 3).pct === 0 && /nobody stands watch/.test(String(wo(hold6(), 3).why)));
+  const one6 = wo(hold6({ garrison: ["a"] }), 3), two6 = wo(hold6({ garrison: ["a", "b"] }), 3);
+  check("§76g: …and every body counts, up to the cap — which is what makes \"add one more: +N%\" honest",
+    two6.pct > one6.pct && two6.pct - one6.pct === rules6.death.watch.perWatcher
+    && one6.nextBody === rules6.death.watch.perWatcher, JSON.stringify({ one: one6.pct, two: two6.pct }));
+  const capN = rules6.death.watch.watcherCap;
+  const full = wo(hold6({ garrison: Array.from({ length: capN }, (_, i) => `g${i}`) }), 3);
+  const over = wo(hold6({ garrison: Array.from({ length: capN + 3 }, (_, i) => `g${i}`) }), 3);
+  check("§76g: ⚠️ …and PAST the cap another body is honestly worth NOTHING to seeing them",
+    full.pct === over.pct && over.nextBody === 0 && /add nothing to seeing them/.test(over.terms.map(x => x.label).join(" ")),
+    JSON.stringify({ full: full.pct, over: over.pct, nextBody: over.nextBody }));
+  check("§76g: …a thing that watches counts too, and rougher ground counts against",
+    wo(hold6({ features: [{ kind: "watch", name: "a Watch", count: 1 }] }), 3).pct > wo(hold6({ garrison: [] }), 3).pct
+    && wo(hold6({ garrison: ["a"] }), 1).pct > wo(hold6({ garrison: ["a"] }), 8).pct);
+  // ⛑ AND THE RAID ROLLS IT — the same odds, not a second reading.
+  const seenRun = H6g.resolveRaid({ holdings: [], npcRegistry: {} }, hold6({ garrison: ["a", "b", "c"] }),
+    { cfg: cfg6g, rules: rules6, dangerLevel: 1, rng: (() => { let i = 0; return () => (i++ === 0 ? 0 : 0.5); })(), day: 5, people: {} });
+  const missRun = H6g.resolveRaid({ holdings: [], npcRegistry: {} }, hold6({ garrison: ["a", "b", "c"] }),
+    { cfg: cfg6g, rules: rules6, dangerLevel: 1, rng: () => 0.999, day: 5, people: {} });
+  check("§76g: ⛔ the RAID rolls that number — a low draw is seen and fights, a high one is missed",
+    seenRun.detected === true && missRun.detected === false && !!missRun.watch && missRun.watch.pct > 0,
+    JSON.stringify({ seen: seenRun.detected, missed: missRun.detected, pct: missRun.watch?.pct }));
+  // ⚠️ AND THE RECORD SAYS WHICH KIND OF UNSEEN IT WAS — "raided unseen" over a full watch reads as a bug
+  // to the person who posted them.
+  // ⚠️ THE NOTE GOES ON THE HOLDING'S HISTORY, not on the returned object — which is where a player reads
+  // it, and where my first cut of this check forgot to look.
+  const missHold = hold6({ garrison: ["a", "b", "c"], history: [] });
+  H6g.resolveRaid({ holdings: [], npcRegistry: {} }, missHold,
+    { cfg: cfg6g, rules: rules6, dangerLevel: 1, rng: () => 0.999, day: 5, people: {} });
+  const emptyHold = hold6({ history: [] });
+  H6g.resolveRaid({ holdings: [], npcRegistry: {} }, emptyHold,
+    { cfg: cfg6g, rules: rules6, dangerLevel: 1, rng: () => 0.999, day: 5, people: {} });
+  check("§76g: …and the record says the watch MISSED them rather than that nobody was there — two different failures",
+    /the watch missed them/.test(JSON.stringify(missHold.history))
+    && /nobody was watching/.test(JSON.stringify(emptyHold.history)),
+    JSON.stringify({ missed: missHold.history.slice(-1), empty: emptyHold.history.slice(-1) }));
+  /* ---- 3 · AND EVERY DIAL IS AUTHORED, so Aevi can turn them without touching code ---- */
+  check("§76g: ✅ every term of both stacks is a dial in `rules.death`, with a note beside it",
+    ["byDepth", "perReachOver", "perRank", "perBondRung", "heldOpen", "floor", "ceiling"].every(k => rules6.death.retrieval[k] != null)
+    && ["base", "perWatcher", "watcherCap", "perFeature", "perDanger", "floor", "ceiling"].every(k => rules6.death.watch[k] != null)
+    && typeof rules6.death.note === "string",
+    "a roll whose numbers live in code is a roll only I can balance");
+}
+
+/* ═════ §76f — WHO STANDS WATCH, AND WHAT THEY BRING (SNG-652 §7, CCODE-502) ═════ */
+// ⛔ THE SECTION ASKED FOR A NUMBER THAT DID NOT EXIST. Aevi's §7 wants "Raid seen: 84%" and asked whether
+// the watch roll could be expressed as a probability. MEASURED at the time: there was no roll — `resolveRaid`
+// branched on `watchOf(...).length`. Refusing to invent one and reporting it is what got it RULED: Erik,
+// 2026-09-25, "yes on the rolls for … watch success", and §76g owns that roll now.
+// ⛑ WHAT STAYS HERE is everything the roll did not change: who is standing, what they would meet them with,
+// the stone counted apart from the bodies, and that `watch` is a FLAG on a feature rather than a scale.
+console.log("\n── §76f · who stands watch, and what they bring ──");
 {
   const H7 = await import("../engine/holdings.js");
   const { loadContentHeadless: lch7 } = await import("./headless_content.mjs");
@@ -7521,22 +7614,26 @@ console.log("\n── §76f · the watch, and the number that does not exist ─
   const yes7 = H7.watchReadout(ch7, kept, { cfg: cfg7, people: people7 });
 
   // ⛔ THE RULE, DRIVEN: the readout must agree with what `resolveRaid` actually branches on.
-  check("§76f: ⛔ a raid is SEEN when anybody stands watch and UNSEEN when nobody does — the branch the raid itself takes",
+  // ⚠️ `seen` ON THE READOUT MEANS "THEY CAN BE SEEN AT ALL", not "they will be" — the roll decides that,
+  // and the two must not be confused in a field name or in a sentence.
+  check("§76f: ⛔ a raid CAN be seen when somebody stands watch, and cannot at all when nobody does",
     no7.seen === false && no7.watchers === 0 && yes7.seen === true && yes7.watchers > 0
-    && /if \(!watchOf\(holding, cfg\)\.length\)/.test(rd("engine/holdings.js")),
+    && /const sawThem = wOdds\.pct > 0 &&/.test(rd("engine/holdings.js")),
     JSON.stringify({ bare: no7.seen, kept: yes7.seen, watchers: yes7.watchers }));
-  // ⚠️ AND ONE WATCHER IS ENOUGH — which is what makes the marginal line the opposite shape to the spec's.
+  // ✅ ERIK RULED THE ROLL (CCODE-504) AND THIS SECTION'S TWO CHECKS ABOUT ITS ABSENCE ARE REWRITTEN, NOT
+  // JOINED. They said "no percentage is shown" and "the first watcher is the whole difference" — both true
+  // of the boolean and both retired. ⚠️ Leaving them green would be a gate arguing for the old rule, which
+  // is the thing I have repaired three times this week. §76g owns the roll; what survives here is the part
+  // the roll did NOT change.
   const one7 = H7.watchReadout(ch7, { ...bare, garrison: ["cael"] }, { cfg: cfg7, people: people7 });
-  check("§76f: ⚠️ …so the FIRST watcher is the whole difference and the second adds nothing to being seen",
-    one7.seen === true && yes7.seen === one7.seen && /adds nothing to being SEEN/.test(yes7.marginal) && /the first body/.test(no7.marginal),
-    JSON.stringify({ one: one7.marginal, none: no7.marginal }));
-  // ⛑ AND NO PERCENTAGE IS PRINTED, in the engine or on the screen, because none is rolled.
+  check("§76f: ⛔ …and the bottom of the old rule SURVIVES the roll — nobody watching is never seen, whatever the wall is worth",
+    one7.seen === true && no7.seen === false && /nobody is watching/.test(no7.marginal),
+    JSON.stringify({ one: one7.seen, none: no7.marginal }));
   const A7 = rd("app.js");
-  check("§76f: ⛔ NO detection percentage is shown — a number nobody rolls is a rule the screen invented",
-    /No percentage here: nothing rolls a detection yet/.test(A7)
-    && !/seen: \$\{[^}]*\}%/.test(A7)
-    && !/detect(ion)?Chance|detectPct/.test(rd("engine/holdings.js")),
-    "§7's own numbers wait on a ruling, exactly as the retrieval roll did");
+  check("§76f: …and the screen shows the number the RAID rolls, from the one function, with its terms",
+    /watchOdds\(character, h, \{ cfg: sCfg, rules: CONTENT\.rules, dangerLevel: wDanger \}\)/.test(A7)
+    && /to see them coming/.test(A7) && /one more body: <strong>\+\$\{wo\.nextBody\}%/.test(A7),
+    "a number on a card must be the number the engine pays — and it must say what built it");
   // ⛑ WHAT THEY MEET THEM WITH IS THE RAID'S OWN READ, not a second one — Erik: "these aren't just bodies".
   check("§76f: …and who stands watch is read for what they ACTUALLY bring — a warden fights, an engineer does not",
     yes7.defenders.length === 2
@@ -7895,7 +7992,14 @@ console.log("\n── §78 · unseen they take · seen it is a fight · won they
   const mk78 = (extra = {}) => { const c = { id: "pc", purse: { crystal: 100 }, holdings: [], npcRegistry: { gil: { id: "gil", name: "Gil", level: 12 } }, holdingEvents: [] };
     H78.addHolding(c, { id: "mine", kind: "enterprise", name: "the mine", locationId: "ridge", steward: "gil", day: 1 });
     Object.assign(c.holdings[0], { condition: "thriving", store: { raw_material: 40 }, ...extra }); return c; };
-  const raidOn = (c, { rng = () => 0.5, danger = 4 } = {}) => H78.resolveRaid(c, c.holdings[0], { cfg: cfg78, dangerLevel: danger, rng, day: 5, people: c.npcRegistry });
+  // ⛔ CCODE-504 — THE WATCH DRAWS FIRST NOW (Erik ruled a roll where there was a boolean), and these
+  // fixtures pick their rng for what the FIGHT should do. `seen` makes the first draw the watch's and lets
+  // every later one be the fight's, so a check about the fight still tests the fight. ⚠️ Both halves hold:
+  // `detected === true` is still asserted, so a watch that stopped seeing would still redden this.
+  const raidOn = (c, { rng = () => 0.5, danger = 4, seen = null } = {}) => {
+    const draw = seen == null ? rng : (() => { let first = true; return () => { if (first) { first = false; return seen; } return rng(); }; })();
+    return H78.resolveRaid(c, c.holdings[0], { cfg: cfg78, dangerLevel: danger, rng: draw, day: 5, people: c.npcRegistry, rules: C78.rules });
+  };
   // ── a watch is what SEES
   const bare = mk78();
   const walled = mk78(); H78.addFeature(walled, "mine", { kind: "wall", cfg: cfg78 }); H78.addFeature(walled, "mine", { kind: "wall", cfg: cfg78 });
@@ -7918,13 +8022,13 @@ console.log("\n── §78 · unseen they take · seen it is a fight · won they
     Object.keys(rf.taken).length === 0 && fortress.holdings[0].store.raw_material === 40, JSON.stringify(rf));
   // ── detected: a fight, resolved unattended
   const win = mk78(); H78.setGarrison(win, "mine", ["gil"], {}); H78.addFeature(win, "mine", { kind: "tower", cfg: cfg78 });
-  const rWin = raidOn(win, { rng: () => 0.99, danger: 1 });
+  const rWin = raidOn(win, { rng: () => 0.99, danger: 1, seen: 0 });   // the watch sees them; the fight then goes the defenders' way
   check("§78: ⛔ …DETECTED it is a FIGHT — won, they take NOTHING and leave spoils behind them (not merely the absence of loss)",
     rWin.detected === true && rWin.held === true && Object.keys(rWin.taken).length === 0
     && win.holdings[0].store.raw_material > 40 && !!rWin.outcome && !!rWin.spoils,
     JSON.stringify({ held: rWin.held, spoils: rWin.spoils, store: win.holdings[0].store }));
   const lose = mk78(); H78.setGarrison(lose, "mine", ["gil"], {});
-  const rLose = raidOn(lose, { rng: () => 0.01, danger: 12 });
+  const rLose = raidOn(lose, { rng: () => 0.01, danger: 12, seen: 0 });   // seen, and then beaten
   check("§78: …lost, they take — and the history says the watch met them and lost",
     rLose.detected === true && rLose.held === false && rLose.taken.raw_material > 0
     && /raid fought and lost/.test(lose.holdings[0].history.slice(-1)[0]?.note || ""), JSON.stringify(rLose));
@@ -25998,7 +26102,11 @@ console.log("\n── §349 · whose raid, and whose ground ──");
       const { people, garrison } = watchOf349(n);
       return HZ349.resolveRaid(ch, { id: "h", kind: "enterprise", name: "A Hold", condition: "thriving",
         store: { raw_material: 30 }, crew: [], garrison, defence: stone, history: [] },
-        { cfg: cfg349, dangerLevel: 3, rng: () => 0.5, day, people, power: tollmen, meleeCfg: {} });
+        // ⛔ CCODE-504 — the WATCH draws first now, and this check is about the FIGHT. The first draw is made
+        // to see them (a thin watch at danger 3 would otherwise miss on a flat 0.5 and there would be no fight
+        // to price); every draw after it is the clash's, exactly as before.
+        { cfg: cfg349, dangerLevel: 3, rng: (() => { let first = true; return () => { if (first) { first = false; return 0; } return 0.5; }; })(),
+          day, people, power: tollmen, meleeCfg: {}, rules: C349.rules });
     };
 
     // ⛔ WHAT IT COSTS THEM IS WHAT THEY MET. Measured across five watches against the same 22-head band:

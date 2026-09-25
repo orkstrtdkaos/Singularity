@@ -1473,5 +1473,42 @@
     "per": 0
    }
   }
+ },
+ "death": {
+  "retrieval": {
+   "byDepth": [
+    70,
+    45,
+    20
+   ],
+   "_byDepth": "the threshold · the near dark · the deep dark. The sealed is not reachable at all and never rolls.",
+   "perReachOver": 12,
+   "_perReachOver": "for each rung of reach BEYOND the depth you are reaching into — slack in the hand steadies it. Reach is craft rank plus the bond's rungs (canReach).",
+   "perRank": 6,
+   "_perRank": "per rank of the retrieval craft above 1.",
+   "perBondRung": 8,
+   "_perBondRung": "per rung the bond itself buys (bondPerRung, bondRungs). Erik: \"mostly it would be the ones you've grown closest to\" — closeness reaches deeper AND holds steadier.",
+   "heldOpen": 15,
+   "_heldOpen": "somebody is holding the way open (`deathState.heldOpenBy`). A door somebody stands in is easier to come through.",
+   "floor": 5,
+   "ceiling": 95,
+   "_ceiling": "the project's own 95 — nothing is ever certain, the same rule every other roll pays.",
+   "note": "⛔ THE ROLL TO BRING SOMEONE BACK. It is asked ONLY after `canReach` says the reacher can get that deep — being told \"that is past your reach\" stays FREE, and this is the costly path: a failure sinks them a depth, and a failure at the deep dark SEALS them. So the odds have to be worth the risk, which is why the deep dark starts near a coin-flip's worse half."
+  },
+  "watch": {
+   "base": 25,
+   "_base": "somebody is up and about.",
+   "perWatcher": 12,
+   "watcherCap": 4,
+   "_perWatcher": "per body on the watch, up to `watcherCap` — past it another body adds nothing to SEEING them (they add to the fight that follows). This is what makes \"add Cael to the watch: +12%\" honest, and honest about +0 when the wall is full.",
+   "perFeature": 15,
+   "_perFeature": "per standing feature that watches (a Watch, sentries, a ward-line). Stone and wards see what tired people miss.",
+   "perDanger": 5,
+   "_perDanger": "subtracted per point of the place's danger — raiders off rougher ground are better at coming quietly.",
+   "floor": 5,
+   "ceiling": 95,
+   "note": "⛔ THE ROLL TO SEE THEM COMING. Until now a raid was seen if ANYBODY stood watch and unseen if nobody did — a boolean where Erik wanted a number. Nobody on watch is still a flat 0: this rolls only when somebody is standing."
+  },
+  "note": "✅ ERIK 2026-09-25: \"Yes on the rolls for return from death and for watch success. Set something smart and let Aevi know how to tweak it.\" CCode set these; Aevi and Erik turn them. Every number is a percentage point added to a d100 stack, clamped between `floor` and `ceiling`."
  }
 }

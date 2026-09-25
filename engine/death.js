@@ -179,6 +179,60 @@ export function reachableDeadForGM(character, content = {}, currentDay = null) {
  *  attempt is a risk — it sinks them deeper, maybe sealing them), or SEAL (confirmed one-way). The engine
  *  primitive a retrieval quest's outcome or a GM op calls; the COST/CHANGE lives in that layer, this moves
  *  the STATE. A sealed death refuses every road. */
+/** ⛔ CCODE-504 (ERIK, 2026-09-25: "Yes on the rolls for return from death … set something smart") — THE
+ *  ODDS OF BRINGING SOMEBODY BACK, and they are the odds the resolver rolls.
+ *
+ *  ⚠️ ASKED ONLY AFTER `canReach` SAYS YES. Being told "that is past your reach" stays FREE — that rule is
+ *  older than this one and this must not quietly undo it. THIS is the costly path: a failure sinks them a
+ *  depth and a failure at the deep dark SEALS them, so the odds have to be worth the risk, which is why the
+ *  deep dark starts on the worse half of a coin.
+ *
+ *  ⛑ AN ADDITIVE STACK OF NAMED TERMS, like every other number this game shows a player. The reasons come
+ *  back with the percentage because a bare number is one to take on faith — the lesson from the fight panel
+ *  this week. Every term is a dial in `rules.death.retrieval`; Aevi and Erik turn them.
+ *
+ *  Returns `{ pct, terms, at, reach, sealed }`. Pure. */
+export function retrievalOdds(entity, { rank = 1, intensity = "standard", currentDay = null, rules = {}, bond = 0 } = {}) {
+  const cfg = { ...DEFAULTS, ...(rules.death || {}) };
+  const r = cfg.retrieval || {};
+  const gate = canReach(entity, { rank, intensity, currentDay, rules, bond });
+  const at = deathDepth(entity, currentDay, rules);
+  if (!gate.ok) return { pct: 0, terms: [], at, reach: gate.reach ?? null, sealed: !!gate.sealed, why: gate.why };
+  // ⚠️ EVERY DIAL NAMED LITERALLY, not fetched by a computed key. `unreadRuleConstants` looks for a
+  // constant read BY NAME, and a clever accessor hides the whole block from it — which would make these
+  // knobs indistinguishable from dead ones. The audit caught exactly that on the first cut.
+  const num = (v, d) => (Number.isFinite(Number(v)) ? Number(v) : d);
+  const byDepth = Array.isArray(r.byDepth) ? r.byDepth : [70, 45, 20];
+  const perReachOver = num(r.perReachOver, 12);
+  const perRank = num(r.perRank, 6);
+  const perBondRung = num(r.perBondRung, 8);
+  const heldOpen = num(r.heldOpen, 15);
+  const floor = num(r.floor, 5), ceil = num(r.ceiling, 95);
+  const terms = [];
+  let pct = Number(byDepth[Math.max(0, Math.min(byDepth.length - 1, at))]) || 0;
+  terms.push({ label: `reaching into ${DEATH_DEPTH_NAMES[at]}`, value: pct });
+  const over = Math.max(0, (gate.reach ?? 0) - at);
+  if (over > 0) { const v = over * perReachOver; pct += v; terms.push({ label: `your reach goes ${over} rung${over === 1 ? "" : "s"} deeper than you need`, value: v }); }
+  const overRank = Math.max(0, (Number(rank) || 1) - 1);
+  if (overRank > 0) { const v = overRank * perRank; pct += v; terms.push({ label: `the craft at rank ${rank}`, value: v }); }
+  const rungs = bondRungs(bond, rules);
+  if (rungs > 0) { const v = rungs * perBondRung; pct += v; terms.push({ label: `what you were to them`, value: v }); }
+  if (entity?.deathState?.heldOpenBy) { pct += heldOpen; terms.push({ label: `somebody is holding the way open`, value: heldOpen }); }
+  const clamped = Math.max(floor, Math.min(ceil, Math.round(pct)));
+  return { pct: clamped, terms, at, reach: gate.reach ?? null, sealed: false,
+    clampedFrom: clamped !== Math.round(pct) ? Math.round(pct) : null };
+}
+
+/** ⛔ CCODE-504 — AND THE ROLL ITSELF, so the % shown is the % rolled. `rng` is injected; the caller decides
+ *  what a failure costs by handing the outcome straight to `resolveRetrieval`, which is unchanged. Pure. */
+export function rollRetrieval(entity, { rank = 1, intensity = "standard", currentDay = null, rules = {}, bond = 0, rng = Math.random } = {}) {
+  const odds = retrievalOdds(entity, { rank, intensity, currentDay, rules, bond });
+  if (!odds.pct) return { ...odds, rolled: null, outcome: null, ok: false };
+  const rolled = Math.floor(rng() * 100) + 1;      // 1..100, the same d100 every other roll pays
+  const made = rolled <= odds.pct;
+  return { ...odds, rolled, made, outcome: made ? "return" : "fail" };
+}
+
 export function resolveRetrieval(entity, outcome, { currentDay = null, changed = null } = {}) {
   if (!entity || entity.status !== "dead") return { ok: false, why: "not in the death state" };
   const ds = entity.deathState || (entity.deathState = { diedDay: null, bodyStatus: "intact", sealed: false, depthOverride: null, cause: null });

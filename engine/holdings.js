@@ -670,7 +670,7 @@ export function yieldFor(holding, cfg, { density = null } = {}) {
  *
  *  ⚠️ A WATCH IS WHAT DETECTS: people on the garrison, or a feature that keeps one (sentries, a tower). Stone alone does not
  *  see. Returns the receipt the news reads, or null when nothing came of it. */
-export function resolveRaid(character, holding, { cfg = null, dangerLevel = 0, rng = Math.random, day = null, people = {}, keeperFloor = null, power = null, meleeCfg = null } = {}) {
+export function resolveRaid(character, holding, { cfg = null, dangerLevel = 0, rng = Math.random, day = null, people = {}, keeperFloor = null, power = null, meleeCfg = null, rules = {}} = {}) {
   // ⛔ ERIK 2026-09-12, OVER AEVI'S §4: a hull under way is RAIDABLE WHERE SHE IS — "it doesn't make sense to only update their
   // location at the very end." Her whereabouts come from the day (`carriage.voyagePosition`), the danger is the nearest place's,
   // and the crew aboard defends as a garrison does in port. The receipt says she was taken at sea so the news can read right.
@@ -689,14 +689,23 @@ export function resolveRaid(character, holding, { cfg = null, dangerLevel = 0, r
     return taken;
   };
   const note = (t) => { holding.history = [...(holding.history || []), { at: null, from: holding.condition, to: holding.condition, note: t }].slice(-12); };
-  if (!watchOf(holding, cfg).length) {
+  // ⛔ CCODE-504 — THE WATCH ROLLS NOW (Erik's ruling). This branched on `watchOf(...).length`: one body and
+  // they were always seen, none and never. ⛑ The bottom of the old rule is kept exactly — an empty wall is a
+  // flat zero, never a base chance — and above it the stack in `watchOdds` decides, rolled on the same d100
+  // every other number in this game pays.
+  const wOdds = watchOdds(character, holding, { cfg, rules, dangerLevel });
+  const sawThem = wOdds.pct > 0 && (Math.floor(rng() * 100) + 1) <= wOdds.pct;
+  if (!sawThem) {
     // ⛔ nobody saw them coming. Stone still slows them; nothing stops them.
+    // ⚠️ AND THERE ARE TWO WAYS TO NOT SEE THEM NOW — an empty wall, and a watch that missed. The record
+    // says which, because "raided unseen" over a full watch reads as a bug to the person who posted them.
     const share = Math.max(0, Math.min(1, baseShare - step * defenceOf(holding, cfg)));
     const taken = take(share);
     if (!Object.keys(taken).length) return { detected: false, taken: {}, day, atSea, why: atSea ? "they came alongside and found nothing worth the carrying" : "they found nothing worth the carrying" };
     if (Object.keys(taken).length) advanceHolding(holding, "problem", null, "raided", keeperFloor ? { keeperFloor } : null);   // ⚑ SLIP FIRST, THEN NOTE — the raid's own line stays the last entry (§78). AN EVENT SLIPS AT ONCE — time slips slowly, a raid does not
-    note(`raided unseen — ${Object.entries(taken).map(([g, n]) => `${n} ${g}`).join(", ")} taken`);
-    return { detected: false, taken, day, atSea, ...paid() };
+    const how = wOdds.watchers || wOdds.features ? `the watch missed them (${wOdds.pct}% to see)` : "nobody was watching";
+    note(`raided — ${how} — ${Object.entries(taken).map(([g, n]) => `${n} ${g}`).join(", ")} taken`);
+    return { detected: false, taken, day, atSea, watch: wOdds, ...paid() };
   }
   // ⚑ the watch saw them: a fight, at band scale, unattended
     // ⛔ ERIK 2026-09-14: "these aren't just bodies that can hit something — they have skills and abilities they
@@ -774,6 +783,50 @@ export function watchOf(holding, cfg = null) {
   return ids;
 }
 
+/** ⛔ CCODE-504 (ERIK, 2026-09-25: "Yes on the rolls for … watch success") — THE CHANCE THE WATCH SEES THEM.
+ *
+ *  ⚠️ IT WAS A BOOLEAN. `resolveRaid` branched on `watchOf(...).length` — one body and a raid was always seen,
+ *  none and it was never seen. ⛑ Erik ruled a roll, so this is it, and the ONE thing kept from the old rule is
+ *  its bottom: nobody standing is still a flat zero, not a base chance. An empty wall does not get lucky.
+ *
+ *  An additive stack of named terms, every one a dial in `rules.death.watch` — `base` (somebody is up),
+ *  `perWatcher` up to `watcherCap` (past it another body adds nothing to SEEING them, which is what makes
+ *  "add Cael: +12%" honest and honest about +0 when the wall is full), `perFeature` for each standing thing
+ *  that watches, and `perDanger` off for raiders from rougher ground. Clamped between `floor` and `ceiling`.
+ *
+ *  Returns `{ pct, terms, watchers, features }`. Pure. */
+export function watchOdds(character, holding, { cfg = null, rules = {}, dangerLevel = 0 } = {}) {
+  const w = (rules?.death || {}).watch || {};
+  // ⚠️ NAMED LITERALLY — see the note in `retrievalOdds`: a computed key hides a dial from the wiring
+  // audit's unread-constant ratchet, which is the one thing standing between a tunable and a dead knob.
+  const num = (v, d) => (Number.isFinite(Number(v)) ? Number(v) : d);
+  const base = num(w.base, 25);
+  const perWatcher = num(w.perWatcher, 12);
+  const watcherCap = Math.max(0, num(w.watcherCap, 4));
+  const perFeature = num(w.perFeature, 15);
+  const perDanger = num(w.perDanger, 5);
+  const floor = num(w.floor, 5), ceil = num(w.ceiling, 95);
+  const ids = watchOf(holding, cfg) || [];
+  // ⚠️ A FEATURE ID IS `kind:index`; a band's hands are `unit:<band>:<i>`; everything else is a person.
+  const isFeature = (id) => !/^unit:/.test(String(id)) && /^[a-z_]+:\d+$/.test(String(id));
+  const features = ids.filter(isFeature).length;
+  const bodies = ids.length - features;
+  if (!ids.length) return { pct: 0, terms: [], watchers: 0, features: 0, why: "nobody stands watch" };
+  const terms = [];
+  let pct = base;
+  terms.push({ label: "somebody is up and about", value: base });
+  const counted = Math.min(bodies, watcherCap);
+  if (counted > 0) { const v = counted * perWatcher; pct += v; terms.push({ label: `${counted} on the watch${bodies > counted ? ` (${bodies - counted} more add nothing to seeing them)` : ""}`, value: v }); }
+  if (features > 0) { const v = features * perFeature; pct += v; terms.push({ label: `${features} thing${features === 1 ? "" : "s"} here that watch`, value: v }); }
+  const dl = Math.max(0, Number(dangerLevel) || 0);
+  if (dl > 0) { const v = -dl * perDanger; pct += v; terms.push({ label: `they come off rough ground (danger ${dl})`, value: v }); }
+  const clamped = Math.max(floor, Math.min(ceil, Math.round(pct)));
+  return { pct: clamped, terms, watchers: bodies, features,
+    clampedFrom: clamped !== Math.round(pct) ? Math.round(pct) : null,
+    // ⛑ THE MARGINAL, HONESTLY — the thing the spec asked for, and it tells the truth at the cap.
+    nextBody: bodies < watcherCap ? perWatcher : 0 };
+}
+
 /** ⛔ CCODE-502 (SNG-652 §7) — WHO STANDS WATCH, WHAT THEY BRING, AND WHAT IT ACTUALLY DECIDES.
  *
  *  ⚠️ AND WHAT IT DECIDES IS NOT A PERCENTAGE. Aevi's §7 asks for "Raid seen: 84%" and asked me whether the
@@ -808,9 +861,11 @@ export function watchReadout(character, holding, { cfg = null, people = {} } = {
   return { seen, watchers: ids.length, named, hands, fromFeatures,
     stone: defenceOf(holding, cfg), defenders,
     // ⚠️ THE HONEST MARGINAL, which is the opposite shape to the one the spec asked for.
+    // ✅ CCODE-504 — the MARGINAL is `watchOdds.nextBody` now that Erik has ruled a roll; this line says what
+    // is still true either way, and the bottom of the old rule is the part that survives.
     marginal: seen
-      ? "one more on the watch adds nothing to being SEEN — they add to the fight that follows"
-      : "the first body on the watch is the whole difference: with nobody, a raid simply takes its share" };
+      ? "if they are missed, a raid simply takes its share — and who stands here decides the fight when they are not"
+      : "nobody is watching: a raid here is never seen, whatever the wall is worth" };
 }
 
 export function isGuarded(holding, cfg = null) {
@@ -947,7 +1002,7 @@ export function sellShareFor(holding, cfg) {
   return 0;
 }
 
-export function tickStore(character, holding, { cfg = null, economy = null, regionId = null, dangerLevel = 0, rng = Math.random, day = null, density = null, meaning = 0, people = {}, npcCfg = {}, locations = {} } = {}) {
+export function tickStore(character, holding, { cfg = null, economy = null, regionId = null, dangerLevel = 0, rng = Math.random, day = null, density = null, meaning = 0, people = {}, npcCfg = {}, locations = {}, rules = {} } = {}) {
   const keeperFloorEffects = (() => { try { const t = holding?.steward ? keeperTierOf(character, holding, { npcs: people, npcCfg, day }) : null; const fl = holding?.steward ? keeperFloorFor(t, cfg?.growth) : null; return fl ? { keeperFloor: fl } : null; } catch { return null; } })();
   if (!holding || !cfg) return null;
   const out = { yielded: null, upkeep: 0, short: 0, raid: null, full: false, justFull: false };
@@ -1058,7 +1113,8 @@ export function tickStore(character, holding, { cfg = null, economy = null, regi
     // product, same order, same dials; see that function for the terms.
     const rc = raidChanceFor(character, holding, { cfg, dangerLevel, people, npcCfg, day, total, fullAt });
     const keeperFloor = holding.steward ? keeperFloorFor(rc.keeperTier, cfg?.growth) : null;
-    if (rng() < rc.chance) out.raid = resolveRaid(character, holding, { cfg, dangerLevel, rng, day, people, keeperFloor });
+    // ⛔ CCODE-504 — the rules bag rides, because the watch ROLLS now and its dials live in rules.death.watch.
+    if (rng() < rc.chance) out.raid = resolveRaid(character, holding, { cfg, dangerLevel, rng, day, people, keeperFloor, rules });
   }
   return out;
 }

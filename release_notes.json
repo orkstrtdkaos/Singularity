@@ -16,6 +16,30 @@
   "next": [],
   "releases": [
     {
+      "version": "2.7.7",
+      "date": "2026-09-25",
+      "entries": [
+        {
+          "kind": "feature",
+          "title": "Bringing someone back is a roll now, and you can see the odds",
+          "summary": "Reaching for the dead was pass-or-fail by the GM's word. It has a number: how deep they have gone, how far your craft reaches past it, what you were to them, and whether somebody is holding the way open.",
+          "detail": "Being told “that is past your reach” is still free and still costs them nothing — the roll happens only when you CAN get that deep, and that is the costly path: a failure sinks them a depth, and a failure at the deep dark seals them. So the threshold is a near-certainty for someone who loved you and the deep dark is a real gamble. The odds show on the who-comes-for-you block per depth, and they are the odds the engine rolls."
+        },
+        {
+          "kind": "feature",
+          "title": "A watch can miss them",
+          "summary": "A raid used to be seen if anybody at all stood watch. Now the watch rolls: bodies on the wall, things that watch, against how rough the ground the raiders came off.",
+          "detail": "Nobody watching is still never seen — an empty wall does not get lucky. Past a handful of bodies, another one honestly adds nothing to SEEING them, and the card says so rather than pretending: they add to the fight that follows. The holding card shows the chance, what built it, and what one more body would be worth. And the record now says whether the watch missed them or nobody was there, which are two different failures."
+        },
+        {
+          "kind": "fix",
+          "title": "The version in the address bar is gone rather than wrong",
+          "summary": "A cache-busting stamp from an old forced reload sat in the URL looking like a version that had stopped incrementing.",
+          "detail": "It was never a version — it is written once when a new build reloads a tab, and it had done its job by the time you saw it. It is cleared on boot now; every other part of the address is left alone."
+        }
+      ]
+    },
+    {
       "version": "2.7.6",
       "date": "2026-09-25",
       "entries": [

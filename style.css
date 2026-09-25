@@ -2124,3 +2124,8 @@ table.ob-matrix { border-collapse: collapse; width: 100%; min-width: 640px; font
 .hs-seen { font-size: 12.5px; }
 .hs-unseen { font-size: 12.5px; color: var(--warn, #e0b25a); }
 .hs-watch .hint { display: block; font-size: 11.5px; opacity: .62; margin-top: 2px; }
+
+/* CCODE-504 · the two rolls Erik ruled — the % shown is the % rolled, with its terms beside it. */
+.hs-odds { margin-top: 4px; font-size: 12.5px; }
+.hs-odds .hint { display: block; font-size: 11px; opacity: .6; }
+.wc-odds { font-size: 12px; opacity: .85; margin-top: 2px; }

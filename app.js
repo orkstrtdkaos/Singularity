@@ -69,7 +69,7 @@ import { enterDeathState } from "./engine/death.js";
 wireDeathModel(DeathModel);
 import { carriageOf, voyageOf, isMoored, canSail, sailHolding, voyageLine, featureRuling, canBuildOn } from "./engine/carriage.js";
 import { roomOf, roomRefusal, promotionOffer, promoteHolding, trainingAt, mountsAt, healingAt, quarteringOf, vaultOf, chargeOf, chargeWord, depositToVault, withdrawFromVault, holdingFieldSources } from "./engine/holdings.js";   // ⛔ CCODE-429: a hold has room · CCODE-430: a yard trains   // B6b: the holding that moves
-import { raidRisk, watchReadout, craftPlacementCost, featureCost, featureDef, featureDoes, featureCategory, allFeatures, refreshImprovement, canBeAskedToWork, holdingFactsLine, answerFeatureOffer, holdingLedger, addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, yieldsFor, upkeepFor, appointKeeper, reclaimHolding, improveHolding, setCrew, setGarrison, holdingGround, addFeature, removeFeature, renameHolding, featureKinds, residentsOf, holdingMeaningAura, holdingFieldDelta } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
+import { raidRisk, watchReadout, watchOdds, craftPlacementCost, featureCost, featureDef, featureDoes, featureCategory, allFeatures, refreshImprovement, canBeAskedToWork, holdingFactsLine, answerFeatureOffer, holdingLedger, addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, yieldsFor, upkeepFor, appointKeeper, reclaimHolding, improveHolding, setCrew, setGarrison, holdingGround, addFeature, removeFeature, renameHolding, featureKinds, residentsOf, holdingMeaningAura, holdingFieldDelta } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
 import { buildDevReport, unknownOpsIn } from "./engine/devreport.js";   // SNG-559: the Play/Dev instrument
 import { makeField, fieldDataFrom, FIELD_KINDS, KIND_LABEL, MEMBERSHIP } from "./engine/field.js";
 import { assaultableAt, garrisonContingents, noteHoldLoss, takeHold, encounterOwnerFilter, seedPowerKnowledge, isKnownPower } from "./engine/powers.js";
@@ -180,7 +180,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.7.6";
+const APP_VERSION = "2.7.7";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -846,6 +846,22 @@ let WORLD_SCALE = null;
 // made. keep it tidy and options to click on for more detail." The notes are `release_notes.json`, written for players and moved under
 // each version by the bump; a banner says how much arrived since this device last looked, and the version stamp opens them any time.
 let RELEASE_NOTES = null;
+// ⛔ CCODE-505 (ERIK, in the browser) — "the version in the link stopped incrementing." IT IS NOT A VERSION.
+// `reloadForNewBuild` busts the cache with `?v=<deployed>` and that stamp has done its entire job by the time
+// this file is running. Leaving it behind puts the build that last FORCED a reload into the address bar of a
+// tab running something else — his read 2.4.8 while the app said 2.7.6 — where it reads as a version that
+// has stopped moving. ⚠️ A URL is a claim a player can see, and a stale one is the same class of defect as a
+// line describing a mechanism that does not exist.
+// ⛑ STRIPPED, NOT RENAMED: nothing reads it, `?dev=1` and every other param are left exactly alone, and the
+// history entry is REPLACED so the back button still goes where the player came from.
+try {
+  const _u = new URL(location.href);
+  if (_u.searchParams.has("v")) {
+    _u.searchParams.delete("v");
+    history.replaceState(null, "", _u.pathname + (_u.searchParams.toString() ? `?${_u.searchParams}` : "") + _u.hash);
+  }
+} catch { /* an older view engine: a stale stamp in the bar is cosmetic, and not worth a boot failure */ }
+
 fetch("release_notes.json?v=" + APP_VERSION).then((r) => (r.ok ? r.json() : null)).then((n) => { RELEASE_NOTES = n && typeof n === "object" ? n : null; whatsNewArrived(); }).catch(() => { RELEASE_NOTES = null; });
 document.addEventListener("click", (ev) => {
   const open = ev.target?.closest?.("[data-whats-new]");
@@ -14932,7 +14948,11 @@ function renderHoldingsTab(manageId = null) {
           // Measured: there is no watch roll — `resolveRaid` opens `if (!watchOf(...).length)`, so one body on
           // watch means SEEN AND MET and none means it comes unseen. A percentage here would be a rule I
           // invented, and rules are Erik's. This says the rule that exists, in the place the number would go.
+          const wDanger = Number(CONTENT.locations?.[h.locationId]?.dangerLevel) || 0;
           const wr = (() => { try { return watchReadout(character, h, { cfg: sCfg, people: character.npcRegistry || {} }); } catch { return null; } })();
+          // ✅ CCODE-504 (ERIK RULED THE ROLL) — and the % shown is the % `resolveRaid` rolls, from the one
+          // function. The terms come with it because a bare percentage is a number to take on faith.
+          const wo = (() => { try { return watchOdds(character, h, { cfg: sCfg, rules: CONTENT.rules, dangerLevel: wDanger }); } catch { return null; } })();
           const watch = wr ? `<div class="hs-watch"><span class="hs-lbl">The watch</span>
             <div class="${wr.seen ? "hs-seen" : "hs-unseen"}">${wr.seen
               ? `◉ A raid here is <strong>seen coming, and met</strong>.`
@@ -14943,8 +14963,10 @@ function renderHoldingsTab(manageId = null) {
                 wr.fromFeatures.length ? `${wr.fromFeatures.map(f => esc(f.label)).join(", ")}` : "",
               ].filter(Boolean).join(" · ")}</div>` : ""}
             ${wr.defenders.length ? `<div class="hint">what they meet them with: ${wr.defenders.map(d => `${esc(d.what)}${(d.does || []).includes("MARTIAL") ? " <strong>(fights)</strong>" : ""}`).join(", ")}${wr.stone ? ` · and ${wr.stone} of stone` : ""}</div>` : wr.stone ? `<div class="hint">${wr.stone} of stone, and nobody behind it</div>` : ""}
-            <div class="hint">${esc(wr.marginal)}</div>
-            <div class="hint">⬜ No percentage here: nothing rolls a detection yet — it is seen or it is not.</div></div>` : "";
+            ${wo && wo.pct > 0 ? `<div class="hs-odds"><strong>${wo.pct}%</strong> to see them coming${wo.clampedFrom != null ? ` <span class="hint">(from ${wo.clampedFrom}, capped)</span>` : ""}
+              <span class="hint">${wo.terms.map(x => `${esc(x.label)} ${x.value >= 0 ? "+" : ""}${x.value}`).join(" · ")}</span>
+              <span class="hint">${wo.nextBody ? `one more body: <strong>+${wo.nextBody}%</strong>` : "another body adds nothing to seeing them — the wall is full; they would add to the fight"}</span></div>` : ""}
+            <div class="hint">${esc(wr.marginal)}</div></div>` : "";
           const risk = rk && rk.chance > 0 ? `<div class="hs-risk" title="${esc(rk.terms.map(x => `${x.label} ×${Math.round(x.mult * 100) / 100}`).join(" · "))}">
             ⚠ At this stock a raid would take about <strong>${rk.wouldTake}</strong> crystal of goods — about <strong>1 raid in ${rk.everyN} passes</strong> gets through, so it costs you ~${rk.expectedLoss} a pass to stand here holding it.
             <span class="hint">${esc(rk.terms.map(x => x.label).join(" · "))}</span></div>`
@@ -15356,11 +15378,23 @@ function renderCharacterScreen() {
             ? `<span class="hint" title="you have watched them work">you have seen this</span>`
             : `<span class="hint" title="derived from who they are, not from anything you have watched them do">as far as you have seen them</span>`;
           const line = (r, extra = "") => `<div class="wc-row"><div class="wc-who"><strong>${esc(r.name)}</strong>${r.mutual ? ` <span class="wc-mutual" title="you promised it back">⇄ both ways</span>` : ""}${r.pledge?.day != null ? ` <span class="hint">said on day ${r.pledge.day}</span>` : ""}</div>
-            <div class="wc-reach">${depths(r)} · ${seenTag(r)}</div>${r.pledge?.words ? `<div class="wc-words">“${esc(smartClamp(String(r.pledge.words), 160))}”</div>` : ""}${extra}</div>`;
+            <div class="wc-reach">${depths(r)} · ${seenTag(r)}</div>${(() => {
+              // ✅ CCODE-504 (ERIK: "Yes on the rolls for return from death") — AND NOW THERE IS A NUMBER, so
+              // the screen shows it. SNG-653 §7 said Can/Can't "until the roll exists"; it exists, and the %
+              // here is the one `rollRetrieval` pays. Only where they CAN reach — a depth past their reach has
+              // no odds, it has a refusal, and the two must not read alike.
+              const odds = r.reach.filter(d => d.can).map(d => {
+                try { const o = DeathModel.retrievalOdds({ status: "dead", deathState: { diedDay: absoluteWorldDay() - 1, depthOverride: d.depth } },
+                  { rank: r.rank, bond: r.bond, rules: CONTENT.rules, currentDay: absoluteWorldDay() });
+                  return o.pct ? `${esc(d.name)} <strong>${o.pct}%</strong>` : null; } catch { return null; }
+              }).filter(Boolean);
+              return odds.length ? `<div class="wc-odds">${odds.join(" · ")}</div>` : "";
+            })()}${r.pledge?.words ? `<div class="wc-words">“${esc(smartClamp(String(r.pledge.words), 160))}”</div>` : ""}${extra}</div>`;
           return `<div class="wc-block">
             <div class="craft-tier-label">Who comes for you</div>
             ${coming.length ? `<div class="wc-group"><span class="wc-head">Coming for you</span>${coming.map(r => line(r)).join("")}</div>` : ""}
             ${shortR.length ? `<div class="wc-group"><span class="wc-head">Would come, cannot reach</span>${shortR.map(r => line(r)).join("")}</div>` : ""}
+            <p class="hint" style="margin:2px 0">A reach that can be made is still a <strong>roll</strong> — and a failed one sinks them deeper, or seals them at the deep dark.</p>
             ${!pledged.length ? `<p class="hint" style="margin:4px 0"><strong>Nobody has said they will come for you.</strong> That is a conversation, and these are the people who could have it.</p>` : ""}
             ${couldAsk.length ? `<div class="wc-group"><span class="wc-head">Could come, hasn\u2019t said</span>${couldAsk.slice(0, 5).map(r => line(r, `<button class="opt wc-ask" data-wc-ask="${esc(r.id)}" title="Start a scene with them about this">Ask them</button>`)).join("")}</div>` : ""}
             ${ableOnly ? `<p class="hint" style="margin:4px 0">${ableOnly} more could reach you, but have no reason to.</p>` : ""}

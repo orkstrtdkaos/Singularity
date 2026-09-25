@@ -5,7 +5,7 @@
   "name": "Test Hero (dev)",
   "origin": "harmonic",
   "background": "craftsman",
-  "level": 5,
+  "level": 20,
   "xp": 85,
   "attributes": {
     "physical": 6,
@@ -50,6 +50,22 @@
       "abilityId": "drumline_stride",
       "level": 1,
       "native": true
+    },
+    {
+      "abilityId": "motes_vigil",
+      "level": 1
+    },
+    {
+      "abilityId": "the_taking_root",
+      "level": 1
+    },
+    {
+      "abilityId": "quick_hands",
+      "level": 1
+    },
+    {
+      "abilityId": "false_stance",
+      "level": 1
     }
   ],
   "alignment": {
@@ -58,9 +74,9 @@
   },
   "attunement": 3,
   "maxHealth": 62,
-  "health": 42,
+  "health": 62,
   "maxEnergy": 152,
-  "energy": 5,
+  "energy": 152,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -155,8 +171,7 @@
         }
       ],
       "narration": "",
-      "sceneSummary": null,
-      "choices": []
+      "sceneSummary": null
     },
     "sceneState": {
       "setting": "A secluded glade deep in the wood behind Millbrook's orchard, early spring night. Moss-soft ground, birch and hawthorn bare-branched above, starlight falling through. A narrow melt-water stream catches the light. Dark but luminous. The air is cool and carries the smell of spring earth.",
@@ -184,7 +199,14 @@
     "hour": 4,
     "realAnchor": null
   },
-  "companions": [],
+  "companions": [
+    "aevi",
+    "bristle",
+    "coil",
+    "ember",
+    "hush",
+    "marrow"
+  ],
   "quests": [],
   "npcRegistry": {
     "stranger-at-the-gate": {
@@ -4067,12 +4089,12 @@
     "agility": 6,
     "reason": 10,
     "insight": 6,
-    "presence": 6,
+    "presence": 7,
     "rapport": 6,
     "craft": 6,
     "wits": 10
   },
-  "pendingSubPoints": 0,
+  "pendingSubPoints": 2,
   "skillPoints": 3,
   "discoveries": [],
   "codex": {
@@ -4222,9 +4244,97 @@
   "actionCount": 16,
   "grantsVersion": 1,
   "reconcileVersion": 62,
-  "updatedAt": 1789409059770,
-  "rev": 206,
-  "activeEncounter": null,
+  "updatedAt": 1790362944961,
+  "rev": 210,
+  "activeEncounter": {
+    "defId": "coliseum_champion_harm",
+    "state": {
+      "schemaVersion": 1,
+      "encounterId": "coliseum_champion_harm",
+      "type": "duel",
+      "status": "active",
+      "round": 1,
+      "log": [],
+      "opponentHealth": 130,
+      "opponentYieldAt": 26,
+      "opponentMaxHealth": 130,
+      "tactic": null,
+      "mode": "skill_battle",
+      "opponentSheet": {
+        "name": "Kestrin of the Riven Marches",
+        "attributes": {
+          "practical": 3,
+          "physical": 3,
+          "mental": 3,
+          "social": 3
+        },
+        "energy": 88,
+        "maxEnergy": 88,
+        "tacticTags": [
+          "reads-your-stance",
+          "punishes-hesitation",
+          "formal-salute",
+          "strikes-the-old-injury"
+        ],
+        "skills": [
+          {
+            "function": "provoke",
+            "name": "the goad",
+            "tier": 2,
+            "attribute": "social"
+          },
+          {
+            "function": "bargain",
+            "name": "the offer, priced",
+            "tier": 2,
+            "attribute": "social"
+          },
+          {
+            "function": "deceive",
+            "name": "the wrong tell",
+            "tier": 2,
+            "attribute": "social"
+          },
+          {
+            "function": "strike",
+            "name": "a hard strike",
+            "tier": 2,
+            "attribute": "practical"
+          }
+        ],
+        "health": 130,
+        "soak": 1,
+        "soakLayers": [
+          {
+            "rank": 1,
+            "value": 1
+          }
+        ],
+        "level": 20,
+        "synthesized": true
+      },
+      "momentum": 0,
+      "opponentEnergy": 88,
+      "turn": {
+        "phase": "sense",
+        "sel": {
+          "sense": [],
+          "action": [],
+          "bonus": []
+        },
+        "text": {
+          "sense": "",
+          "action": "",
+          "bonus": ""
+        },
+        "setupBonus": 0,
+        "bonusEarned": false,
+        "foeBonusEarned": false,
+        "senseDone": false,
+        "senseLine": ""
+      }
+    }
+  },
   "customEncounters": {
     "re-enc_the_sealed_door": {
       "schemaVersion": 1,
@@ -4467,7 +4577,26 @@
   "customAbilities": {},
   "companionBonds": {},
   "precursorAccess": [],
-  "teachers": {},
+  "teachers": {
+    "lattice": {
+      "met": true,
+      "willing": true,
+      "npcId": null,
+      "_dev": "recorded by a preview-leg scenario, not earned in play"
+    },
+    "rootkin": {
+      "met": true,
+      "willing": true,
+      "npcId": null,
+      "_dev": "recorded by a preview-leg scenario, not earned in play"
+    },
+    "somatic": {
+      "met": true,
+      "willing": true,
+      "npcId": null,
+      "_dev": "recorded by a preview-leg scenario, not earned in play"
+    }
+  },
   "forkChoices": {},
   "nativeGrantsVersion": 2,
   "livingCurrentAccess": [],

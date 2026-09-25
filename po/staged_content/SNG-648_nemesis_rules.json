@@ -1,0 +1,56 @@
+{
+ "schemaVersion": 1,
+ "id": "nemesis",
+ "kind": "rules",
+ "_status": "STAGED — SNG-648. Merge into content/packs/core/rules/ only in the same commit as engine/nemesis.js reads it (an unread key is an unread rule constant).",
+ "eligibleTiers": [
+  "epic",
+  "legendary",
+  "mythic"
+ ],
+ "excludeAlignments": [
+  "hero"
+ ],
+ "signals": {
+  "mirror": {
+   "weight": 4,
+   "means": "the figure is the character's own people carried to its pole: figure.tradition equals the character's origin people, or the character's primary domain, and the figure is a villain"
+  },
+  "arcResonance": {
+   "weight": 3,
+   "means": "the figure's role/wants/signature and the personal arc's premise/stakes answer each other (judged by the choosing call from the shortlist, never by keyword alone)"
+  },
+  "wantsTheirGround": {
+   "weight": 3,
+   "means": "the figure leads a power whose seat or reach is within groundWithinDays of any of the character's holdings, and whose verbs include expand, raid, extort or tribute"
+  },
+  "seatStakes": {
+   "weight": 2,
+   "means": "the figure is a seat challenger, the open seat's claimant, a claimant on a refused half, or a Sovereign's agent (SNG-642/644)"
+  },
+  "throughTheirPeople": {
+   "weight": 2,
+   "means": "someone in the character's company, band or holdings' stewards is the figure's rival, opposer or anti-Sovereign hunter — the figure comes for the character through them"
+  },
+  "kinThreatened": {
+   "weight": 2,
+   "means": "a registry person tagged kin (e.g. silas-mother) lives within reach of the figure's power"
+  }
+ },
+ "groundWithinDays": 12,
+ "shortlist": 3,
+ "notDead": true,
+ "dormantOk": true,
+ "offscreenProtection": "a bound nemesis is not killed by the world tick offscreen: it may be wounded or stopped, never slain, except by the character, by the character's company, or in a scene the character is present for",
+ "onNemesisDeath": "the next candidate on the shortlist inherits, and the GM is told who and why; a slain nemesis's power or kin may take up the grudge (unavenged)",
+ "surfaceEveryDays": 10,
+ "legendTie": {
+  "relations": [
+   "the legend IS the nemesis",
+   "the legend surfaces into the nemesis's hands",
+   "the nemesis hunts the legend",
+   "the legend is the only thing that can stop the nemesis"
+  ],
+  "rule": "the personal arc's final stage is where the tie surfaces; the routes stay the player's (never foreclosed)"
+ }
+}

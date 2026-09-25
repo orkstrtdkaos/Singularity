@@ -811,6 +811,68 @@ export function storeWorth(holding, { economy = null, regionId = null, cfg = nul
   }
   return any ? Math.round(total) : null;
 }
+/** ⛔ CCODE-500 (SNG-652 §6) — THE CHANCE A RAID COMES THIS PASS, AND WHY.
+ *
+ *  ⚠️ IT WAS INLINE IN `tickStore`, so nothing could show it. Erik's whole ask for this section is a
+ *  trade-off he can SEE — "run it lean when you're exposed, and stock up when you're walled" — and a
+ *  trade-off you cannot read is not a decision. ⛑ The terms come back NAMED, the way a roll's breakdown does,
+ *  so the readout says which of them is costing you rather than printing a bare percentage.
+ *
+ *  Same product and same order as the tick pays; this IS what the tick asks. Pure but for `keeperTierOf`,
+ *  which reads the registry it is handed. */
+export function raidChanceFor(character, holding, { cfg = null, dangerLevel = 0, people = {}, npcCfg = {}, day = null, total = null, fullAt = null } = {}) {
+  const raid = cfg?.raid || null;
+  const worth = total != null ? Number(total) : Object.values(holding?.store || {}).reduce((n, v) => n + (Number(v) || 0), 0);
+  const cap = Math.max(1, Number(fullAt != null ? fullAt : cfg?.fullAt) || 40);
+  const terms = [];
+  if (!raid || !(worth > 0) || !(Number(dangerLevel) > 0)) {
+    return { chance: 0, terms, keeperTier: null,
+      why: !(worth > 0) ? "nothing in the store to take" : !(Number(dangerLevel) > 0) ? "nowhere near trouble" : "no raid dials authored" };
+  }
+  const fill = Math.min(1, worth / cap);
+  let p = (Number(raid.base) || 0) * Number(dangerLevel) * fill;
+  terms.push({ label: `the ground here (danger ${dangerLevel})`, mult: Number(dangerLevel) });
+  terms.push({ label: `how full the store is (${Math.round(fill * 100)}%)`, mult: fill });
+  const guarded = isGuarded(holding, cfg);
+  if (guarded) { const m = Number.isFinite(Number(raid.defendedMult)) ? Number(raid.defendedMult) : 0.5; p *= m; terms.push({ label: "it is guarded", mult: m }); }
+  // ⛔ v2 §1 — "successful places that don't have a strong leader are targets": the KEEPER joins the product. An
+  // unkept hold reads `_none`; a keeper of unknown tier reads `_default`, never as absent.
+  const tier = holding.steward ? keeperTierOf(character, holding, { npcs: people, npcCfg, day }) : null;
+  const km = raid.keeperMult || null;
+  if (km) {
+    const m = Number(holding.steward ? (tier && km[tier]) ?? km._default : km._none);
+    if (Number.isFinite(m)) { p *= m; terms.push({ label: holding.steward ? `${tier || "a"} keeper holds it` : "nobody keeps it", mult: m }); }
+  }
+  // ⛔ ERIK_holds_features §5 — A HOLD THAT WATCHES ANOTHER. "He built the Whistling Woman to watch over it": while the
+  // watcher stands (not failing, and keeps a watch of its own — stone does not see) the watched hold raids less; a
+  // watcher that is lost leaves it MORE exposed. A reason to defend a post that produces nothing.
+  const watcher = (character?.holdings || []).find(o => o && o !== holding && o.watches === holding.id);
+  if (watcher) {
+    const standing = watcher.condition !== "failing" && watchOf(watcher, cfg).length > 0;
+    const m = Number(standing ? raid.watchedMult : raid.watcherLostMult);
+    if (Number.isFinite(m)) { p *= m; terms.push({ label: standing ? `${watcher.name || "another hold"} watches over it` : `${watcher.name || "the hold that watched it"} has fallen quiet`, mult: m }); }
+  }
+  return { chance: Math.max(0, Math.min(1, p)), terms, keeperTier: tier, guarded, fill, why: null };
+}
+
+/** ⛔ CCODE-500 — WHAT A RAID WOULD COST, AND HOW OFTEN. The spec's own formula: chance × takeShare × what the
+ *  store is worth. ⬜ The detection term it names belongs to §7's watch, which is not built — so it is absent
+ *  here rather than guessed at, and this says so instead of quietly pricing it in.
+ *
+ *  `everyN` is the reciprocal, because "1 raid in 25 passes" is the sentence a player can act on and "4%" is
+ *  not. Pure. */
+export function raidRisk(character, holding, { cfg = null, economy = null, regionId = null, dangerLevel = 0, people = {}, npcCfg = {}, day = null } = {}) {
+  const units = Object.values(holding?.store || {}).reduce((n, v) => n + (Number(v) || 0), 0);
+  const rc = raidChanceFor(character, holding, { cfg, dangerLevel, people, npcCfg, day, total: units });
+  const worth = storeWorth(holding, { economy, regionId, cfg });
+  const share = Number.isFinite(Number(cfg?.raid?.takeShare)) ? Number(cfg.raid.takeShare) : 0.5;
+  const expected = worth != null ? Math.round(rc.chance * share * worth) : null;
+  return { chance: rc.chance, terms: rc.terms, why: rc.why,
+    everyN: rc.chance > 0 ? Math.round(1 / rc.chance) : null,
+    takeShare: share, worth, expectedLoss: expected,
+    wouldTake: worth != null ? Math.round(share * worth) : null };
+}
+
 /** ⛔ ERIK 2026-09-06 — RUNNER FEES. "Enough to maintain the post minimally; the more traffic, the more revenue; the
  *  waygate here will bring a lot more runner traffic as word gets out." A hold with a `service: true` feature (a relay
  *  station) earns max(feePerPass, its own upkeep) — a post's upkeep is authored at 0, so 'minimally' means the garrison's
@@ -953,24 +1015,11 @@ export function tickStore(character, holding, { cfg = null, economy = null, regi
   if (out.full) holding.storeFullAnnounced = true; else if (holding.storeFullAnnounced) delete holding.storeFullAnnounced;
   const raid = cfg.raid || null;
   if (raid && total > 0 && dangerLevel > 0) {
-    let p = (Number(raid.base) || 0) * dangerLevel * Math.min(1, total / fullAt);
-    if (isGuarded(holding, cfg)) p *= Number.isFinite(Number(raid.defendedMult)) ? Number(raid.defendedMult) : 0.5;
-    // ⛔ v2 §1 — "successful places that don't have a strong leader are targets": the KEEPER joins the product. An
-    // unkept hold reads `_none`; a keeper of unknown tier reads `_default`, never as absent.
-    const tier = holding.steward ? keeperTierOf(character, holding, { npcs: people, npcCfg, day }) : null;
-    const km = raid.keeperMult || null;
-    if (km) { const m = Number(holding.steward ? (tier && km[tier]) ?? km._default : km._none); if (Number.isFinite(m)) p *= m; }
-    // ⛔ ERIK_holds_features §5 — A HOLD THAT WATCHES ANOTHER. "He built the Whistling Woman to watch over it": while the
-    // watcher stands (not failing, and keeps a watch of its own — stone does not see) the watched hold raids less; a
-    // watcher that is lost leaves it MORE exposed. A reason to defend a post that produces nothing.
-    const watcher = (character?.holdings || []).find(o => o && o !== holding && o.watches === holding.id);
-    if (watcher) {
-      const standing = watcher.condition !== "failing" && watchOf(watcher, cfg).length > 0;
-      const m = Number(standing ? raid.watchedMult : raid.watcherLostMult);
-      if (Number.isFinite(m)) p *= m;
-    }
-    const keeperFloor = holding.steward ? keeperFloorFor(tier, cfg?.growth) : null;
-    if (rng() < p) out.raid = resolveRaid(character, holding, { cfg, dangerLevel, rng, day, people, keeperFloor });
+    // ⛑ CCODE-500 — THE CHANCE IS `raidChanceFor` NOW, because the player has to be able to READ it. Same
+    // product, same order, same dials; see that function for the terms.
+    const rc = raidChanceFor(character, holding, { cfg, dangerLevel, people, npcCfg, day, total, fullAt });
+    const keeperFloor = holding.steward ? keeperFloorFor(rc.keeperTier, cfg?.growth) : null;
+    if (rng() < rc.chance) out.raid = resolveRaid(character, holding, { cfg, dangerLevel, rng, day, people, keeperFloor });
   }
   return out;
 }

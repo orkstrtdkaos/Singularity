@@ -69,7 +69,7 @@ import { enterDeathState } from "./engine/death.js";
 wireDeathModel(DeathModel);
 import { carriageOf, voyageOf, isMoored, canSail, sailHolding, voyageLine, featureRuling, canBuildOn } from "./engine/carriage.js";
 import { roomOf, roomRefusal, promotionOffer, promoteHolding, trainingAt, mountsAt, healingAt, quarteringOf, vaultOf, chargeOf, chargeWord, depositToVault, withdrawFromVault, holdingFieldSources } from "./engine/holdings.js";   // ⛔ CCODE-429: a hold has room · CCODE-430: a yard trains   // B6b: the holding that moves
-import { featureCost, featureDef, featureDoes, featureCategory, allFeatures, refreshImprovement, canBeAskedToWork, holdingFactsLine, answerFeatureOffer, holdingLedger, addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, yieldsFor, upkeepFor, appointKeeper, reclaimHolding, improveHolding, setCrew, setGarrison, holdingGround, addFeature, removeFeature, renameHolding, featureKinds, residentsOf, holdingMeaningAura, holdingFieldDelta } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
+import { raidRisk, featureCost, featureDef, featureDoes, featureCategory, allFeatures, refreshImprovement, canBeAskedToWork, holdingFactsLine, answerFeatureOffer, holdingLedger, addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, yieldsFor, upkeepFor, appointKeeper, reclaimHolding, improveHolding, setCrew, setGarrison, holdingGround, addFeature, removeFeature, renameHolding, featureKinds, residentsOf, holdingMeaningAura, holdingFieldDelta } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
 import { buildDevReport, unknownOpsIn } from "./engine/devreport.js";   // SNG-559: the Play/Dev instrument
 import { makeField, fieldDataFrom, FIELD_KINDS, KIND_LABEL, MEMBERSHIP } from "./engine/field.js";
 import { assaultableAt, garrisonContingents, noteHoldLoss, takeHold, encounterOwnerFilter, seedPowerKnowledge, isKnownPower } from "./engine/powers.js";
@@ -91,7 +91,7 @@ import { resolveWaygateTransit, routeGmMoveTo, isNetworkGate, networkGatesFrom, 
 import { routeBetween, routeLine, twoWayRoads } from "./engine/journey.js";
 import { planJob, suggestTeam, jobPoolOf, jobRouteOf, jobCost, jobWages, jobEffects, sayEffects, settleDueJobs, degreeWord, jobOpposition, mainNeedOf, jobCraftsOf, bestCraftFor, OUTCOMES as JOB_OUTCOMES, errandOdds, detachForJob, jobPersonFor, workCraftsOf, workDayChance, workHeads, bandTeamOf, sendBandOnMission, bandMissionParty } from "./engine/jobs.js";   // CCODE-420 · CCODE-428 · CCODE-431
 import { ensureJobs, postJob, sendOnJob, awayOnJob, untoldJobs, markJobsTold, dropJob, detachedFrom } from "./engine/jobstate.js";   // CCODE-420 · CCODE-431
-import { sendCaravan, caravansOf } from "./engine/caravan.js";   // R49: a caravan is a delegate + a route + a load   // SNG-331 §1 / SNG-386 §4.4: two named options over roads + gates // SNG-148: waygates — map control routes named/hub; GM offer via the registry row. SNG-243 §4: the gate network
+import { sendCaravan, caravansOf, storeExits } from "./engine/caravan.js";   // R49: a caravan is a delegate + a route + a load   // SNG-331 §1 / SNG-386 §4.4: two named options over roads + gates // SNG-148: waygates — map control routes named/hub; GM offer via the registry row. SNG-243 §4: the gate network
 import { skillDetail, npcDetail, itemDetail, relationshipsParagraph, craftRollsLine, craftRollsShort } from "./engine/entityDetail.js";
 import { collapseScenePresence, canonicalPersonId, personArtSeed, applyNpcUpdates, findExistingNpc, genderUnsaid, sexUnsaid, SEX_VALUES, sexFromGender, sexGenderAgree, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier, backfillNpcGender, reconcileGeneratedNpcWithMeet, npcFearsForGM, npcReactionsForGM, repairUnnamedPeople } from "./engine/npcs.js";   // SNG-431 §1: the pre-namer saves get their names
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM, findSubPlaceParent, lastEnteredSubPlace } from "./engine/places.js";
@@ -180,7 +180,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.7.2";
+const APP_VERSION = "2.7.3";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -14906,6 +14906,30 @@ function renderHoldingsTab(manageId = null) {
           return `<div class="hint hold-has"><span class="hold-ctl-label">has</span>${list || "<em>nothing built yet</em>"}</div>
         `; })()}
         ${storeTotal(h) > 0 ? `<div class="hint">store: ${esc(Object.entries(h.store).filter(([, n]) => n > 0).map(([g, n]) => `${n} ${String(g).replace(/_/g, " ")}`).join(", "))}${(() => { const w = storeWorth(h, { economy: CONTENT.rules?.economy, regionId: CONTENT.locations?.[h.locationId]?.regionId || null, cfg: CONTENT.rules?.economy?.holdStore }); return w ? ` · worth ~${w} crystal here` : ""; })()}${h.arrears ? ` · in arrears ${h.arrears}` : ""}</div>` : ""}
+        ${/* ⛔ SNG-652 §6/§6b — THE TWO THINGS ERIK ASKED FOR BY NAME: what it costs to move the store each way
+              ("cost vs benefits so you can compare against selling here"), and what standing on it risks
+              ("run it lean when you're exposed, and stock up when you're walled"). Both READ — `storeExits`
+              and `raidRisk` — so neither can drift from what the pass actually pays. */""}
+        ${storeTotal(h) > 0 ? (() => {
+          const econ = CONTENT.rules?.economy, sCfg = econ?.holdStore;
+          const reg = CONTENT.locations?.[h.locationId]?.regionId || null;
+          let ex = null, rk = null;
+          try { ex = storeExits(character, h, { cfg: sCfg, economy: econ, locations: CONTENT.locations || {}, regionId: reg }); } catch { ex = null; }
+          try { rk = raidRisk(character, h, { cfg: sCfg, economy: econ, regionId: reg,
+            dangerLevel: Number(CONTENT.locations?.[h.locationId]?.dangerLevel) || 0,
+            people: character.npcRegistry || {}, npcCfg: CONTENT.rules?.npcStanding || {}, day: absoluteWorldDay() }); } catch { rk = null; }
+          const cmp = ex && ex.rows.length > 1 ? `<div class="hs-cmp"><span class="hs-lbl">Moving the store</span>
+            <table class="hs-table"><tr><th>how</th><th>gets</th><th>when</th><th>a pass</th></tr>
+            ${ex.rows.map(r => `<tr${ex.best && r.id === ex.best.id ? ` class="hs-best"` : ""}><td>${esc(r.who)}${r.where && r.id.startsWith("caravan") || r.id.startsWith("company") ? ` <span class="hint">→ ${esc(r.where)}</span>` : ""}${r.quote ? ` <span class="hint">(a quote — no company is hired yet)</span>` : ""}</td>
+              <td>${r.net}</td><td>${r.passes <= 1 ? "now" : `${r.passes} passes`}${r.risk ? ` <span class="hint">· danger ${r.risk}</span>` : ""}</td><td><strong>${r.perPass}</strong></td></tr>`).join("")}</table>
+            ${ex.best ? `<div class="hint">Best per pass: <strong>${esc(ex.best.who)}</strong> — ${esc(ex.best.said)}</div>` : ""}
+            ${ex.why ? `<div class="hint">${esc(ex.why)}</div>` : ""}</div>` : "";
+          const risk = rk && rk.chance > 0 ? `<div class="hs-risk" title="${esc(rk.terms.map(x => `${x.label} ×${Math.round(x.mult * 100) / 100}`).join(" · "))}">
+            ⚠ At this stock a raid would take about <strong>${rk.wouldTake}</strong> crystal of goods — about <strong>1 raid in ${rk.everyN} passes</strong> gets through, so it costs you ~${rk.expectedLoss} a pass to stand here holding it.
+            <span class="hint">${esc(rk.terms.map(x => x.label).join(" · "))}</span></div>`
+            : rk && rk.why ? `<div class="hs-risk hint">⚠ No raid risk here — ${esc(rk.why)}.</div>` : "";
+          return cmp + risk;
+        })() : ""}
         ${(() => { const v = vaultOf(h); if (!v.length) return ""; const atHold = hereNow()?.id === h.locationId;   // ⛔ CCODE-444: what its vault keeps
           return `<div class="hint hold-has hold-vault"><span class="hold-ctl-label">vault</span>${v.map((it, i) => { const c = chargeOf(it, CONTENT.items || {}); const on = it.active !== false;
             return `<span class="hold-chip vault-chip">${esc(it.customName || it.name)}${it.qty > 1 ? ` ×${it.qty}` : ""}${c ? `<button class="vault-charge ${on ? "on" : ""}" data-vault-charge="${esc(h.id)}" data-index="${i}" aria-pressed="${on}" title="${c > 0 ? "A well: it thickens the ground" : "A sink: it thins the ground"} at this place by ${Math.abs(c)} while it is on. Tap to switch it ${on ? "off" : "on"}.">${c > 0 ? "well" : "sink"} ${on ? "on" : "off"}</button>` : ""}${atHold ? `<button class="hold-chip-x" data-vault-take="${esc(h.id)}" data-index="${i}" title="Take it back into your pack">↩</button>` : ""}</span>`; }).join("")}</div>`; })()}

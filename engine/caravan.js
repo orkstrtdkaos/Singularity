@@ -32,6 +32,7 @@ import { unitWorth } from "./holdings.js";
 import { earnAt, saidEarned } from "./money.js";   // ⛔ CCODE-437: sold for the market's own money — `earnAt` goes through `credit`   // ⛔ CCODE-437: a load is sold for the money of the market it reaches
 import { enterDeathState } from "./death.js";
 import { routeBetween } from "./journey.js";
+import { storeWorth } from "./holdings.js";   // §6b: the comparison prices the store through the one reader that prices it
 
 const num = (v, d = 0) => (Number.isFinite(Number(v)) ? Number(v) : d);
 const clamp01 = (n) => Math.max(0, Math.min(1, n));
@@ -114,6 +115,104 @@ export function sendCaravan(character, {
 }
 
 /** ⚑ WHO IS STILL ON THEIR FEET. A carrier who died on an earlier leg does not defend the next one. */
+/** ⛔ CCODE-500 (SNG-652 §6b) — EVERY WAY THE STORE CAN LEAVE, PRICED SIDE BY SIDE.
+ *
+ *  Erik asked for this by name: *"cost vs benefits so you can compare against selling here."* ⚠️ And the
+ *  reason it is one function rather than four numbers on a screen is that a comparison assembled at the
+ *  surface is four derivations of one question — which is how a card and an engine come to disagree, the
+ *  defect I have spent this week repairing in three other places.
+ *
+ *  Each row carries `gross`, `costs[]`, `net`, `days` and `risk`, all READ:
+ *    · gross — `storeWorth` at the region whose prices apply (here, or the destination's);
+ *    · the keeper's share — `keeperSells` / `handsSell`, which are SHARES OF THE STORE per pass and not
+ *      prices (Erik corrected Aevi on exactly this: "if you want the keeper to sell the stock it gets the
+ *      local prices");
+ *    · the road — `routeBetween`'s own days, and `roadDanger` over its own path;
+ *    · a company's cut — the only number a caller supplies, because no company exists in content yet.
+ *
+ *  ⬜ WHAT IS NOT HERE IS NOT PRICED: visiting traders and hired companies are unbuilt, so a hired-company row
+ *  appears only when a caller passes a cut, and says plainly that it is a quote rather than an offer. Pure. */
+export function storeExits(character, holding, { cfg = null, economy = null, locations = {}, regionId = null, companyCut = null, maxMarkets = 4 } = {}) {
+  const rows = [];
+  const here = holding?.locationId ? locations[holding.locationId] : null;
+  const homeRegion = regionId ?? here?.regionId ?? null;
+  const worthAt = (reg) => storeWorth(holding, { economy, regionId: reg, cfg });
+  const local = worthAt(homeRegion);
+  const units = Object.values(holding?.store || {}).reduce((n, v) => n + (Number(v) || 0), 0);
+  if (!units || local == null) return { rows, local, units, best: null, why: units ? "these goods have no price anywhere" : "the store is empty" };
+
+  // 1 · YOU, IN PERSON — the baseline every other row is compared against.
+  rows.push({ id: "sell-here", who: "you, in person", where: here?.name || "here", price: "local",
+    gross: local, costs: [], net: local, days: 0, risk: 0,
+    said: "all of it, at once, at the price it fetches here" });
+
+  // 2 · THE KEEPER (or the hands, unkept) — a SHARE per pass, at the SAME price.
+  const share = holding?.steward
+    ? (Number.isFinite(Number(cfg?.keeperSells)) ? Number(cfg.keeperSells) : 0.5)
+    : (Number.isFinite(Number(cfg?.handsSell)) ? Number(cfg.handsSell) : 0.25);
+  const perPass = Math.round(local * share);
+  rows.push({ id: "keeper-sells", who: holding?.steward ? "the keeper" : "the hands, with nobody keeping it",
+    where: here?.name || "here", price: "local", gross: local, costs: [], net: local, days: share > 0 ? Math.ceil(1 / share) : null,
+    perPass, risk: 0,
+    said: `${Math.round(share * 100)}% of the store a pass, at the same price — about ${perPass} a pass, and it sits here while it waits` });
+
+  // 3 · A CARAVAN, to the market that pays best after the road.
+  // ⚠️ THE ROADS ARE ASKED, NOT GUESSED. Every place with a region is priced, and only the ones a route
+  // actually reaches make the list — a market with no road to it is not an option.
+  const seen = new Set([holding?.locationId]);
+  const cand = [];
+  for (const [id, loc] of Object.entries(locations || {})) {
+    if (!loc || seen.has(id) || !loc.regionId || loc.regionId === homeRegion) continue;
+    const w = worthAt(loc.regionId);
+    if (w == null || w <= local) continue;                       // no better than home: not a reason to travel
+    cand.push({ id, loc, worth: w });
+  }
+  cand.sort((a, b) => b.worth - a.worth);
+  const markets = [];
+  for (const c of cand) {
+    if (markets.length >= maxMarkets) break;
+    const route = routeBetween(holding.locationId, c.id, locations, { traveller: character });
+    const opt = (route?.options || []).slice().sort((a, b) => (a.days ?? 99) - (b.days ?? 99))[0];
+    if (!opt) continue;                                          // no road: not an option, not a bad one
+    markets.push({ ...c, days: opt.days, path: opt.path || [], label: opt.label });
+  }
+  for (const m of markets.slice(0, 2)) {
+    const risk = roadDanger(m.path, locations);
+    rows.push({ id: `caravan:${m.id}`, who: "carriers from this hold", where: m.loc.name || m.id, price: "there",
+      gross: m.worth, costs: [{ label: "your people are away", value: null }], net: m.worth, days: m.days, risk,
+      said: `${m.worth} at ${m.loc.name || m.id} — ${m.days} day${m.days === 1 ? "" : "s"} on the road, ${risk ? `danger ${risk} on the way` : "a quiet road"}, and the carriers are off their jobs until they are back` });
+    if (companyCut != null) {
+      const cut = Math.max(0, Math.min(1, Number(companyCut)));
+      const fee = Math.round(m.worth * cut);
+      rows.push({ id: `company:${m.id}`, who: "a hired company", where: m.loc.name || m.id, price: "there",
+        gross: m.worth, costs: [{ label: `their cut (${Math.round(cut * 100)}%)`, value: fee }], net: m.worth - fee, days: m.days, risk: 0,
+        quote: true,
+        said: `${m.worth - fee} after their ${Math.round(cut * 100)}% — they carry the road and your people stay home` });
+    }
+  }
+  // ⛔ AND THE CLOCK IS A COST. Measured on real content the first time this ran: the best NET from Archive
+  // Hollow was a caravan to Choir-Height — 368 against 120 at home, and **151.7 days on the road**. Ranking on
+  // net alone would have named half a year with your people gone as the thing to do.
+  // ⚠️ So every row carries what it returns PER PASS — 72 hours, the unit every other number on the card is
+  // in — and the best row is chosen on that. A sale that happens now is compared against itself: `days: 0`
+  // means it is done this pass, not that it is infinitely good.
+  const passDays = 3;                                     // 72 hours, the pass the whole card is priced in
+  for (const r of rows) {
+    const passes = Math.max(1, Math.ceil((Number(r.days) || 0) / passDays));
+    r.passes = passes;
+    r.perPass = r.perPass != null ? r.perPass : Math.round((Number(r.net) || 0) / passes);
+  }
+  const best = rows.slice().sort((a, b) => (b.perPass ?? 0) - (a.perPass ?? 0) || (a.passes ?? 0) - (b.passes ?? 0))[0] || null;
+  // ⛑ AND WHAT IT COSTS, NAMED — the second half of the sentence Erik asked for. The comparison is always
+  // against selling here, because that is the thing he said to compare against.
+  const baseline = rows.find(r => r.id === "sell-here") || null;
+  const costs = best && baseline && best.id !== baseline.id
+    ? `${best.perPass} a pass against ${baseline.perPass} for selling it here yourself`
+    : null;
+  return { rows, local, units, best, bestCosts: costs,
+    why: markets.length ? null : "no road from here reaches a market that pays better" };
+}
+
 export function standingCarriers(car, people = {}, character = null) {
   return (car?.carriers || [])
     .map(id => people?.[id] || character?.npcRegistry?.[id] || null)

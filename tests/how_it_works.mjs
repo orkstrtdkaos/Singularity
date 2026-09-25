@@ -7454,6 +7454,77 @@ console.log("\n── §76b · a crafted feature carries its craft, its season, 
   }
 }
 
+/* ═════ §76e — MOVING THE STORE, AND WHAT STANDING ON IT RISKS (SNG-652 §6, CCODE-500) ═════ */
+// ⛔ THE TWO THINGS ERIK ASKED FOR BY NAME: "cost vs benefits so you can compare against selling here", and
+// the trade-off behind it — "run it lean when you're exposed, and stock up when you're walled". A trade-off
+// you cannot read is not a decision, and the raid chance was INLINE in `tickStore` where nothing could show it.
+console.log("\n── §76e · the ways out, priced; and the risk of standing still ──");
+{
+  const H6 = await import("../engine/holdings.js");
+  const CV6 = await import("../engine/caravan.js");
+  const { loadContentHeadless: lch6 } = await import("./headless_content.mjs");
+  const C6 = await lch6();
+  const econ6 = C6.rules.economy, cfg6 = { ...econ6.holdStore, features: econ6.holdFeatures };
+  const where6 = Object.entries(C6.locations).find(([, l]) => l && l.regionId);
+  const mk6 = (over = {}) => ({ id: "h6", kind: "post", condition: "holding", locationId: where6[0],
+    store: { raw_material: 20, cut_stone: 10 }, features: [], improvements: [], steward: null, ...over });
+
+  /* ---- 1 · THE COMPARISON ---- */
+  const hold6 = mk6();
+  const ch6 = { holdings: [hold6], npcRegistry: {} };
+  const ex6 = CV6.storeExits(ch6, hold6, { cfg: cfg6, economy: econ6, locations: C6.locations, companyCut: 0.2 });
+  check("§76e: ⛔ every way out is priced side by side, starting with selling it where you stand",
+    ex6.rows.length >= 2 && ex6.rows[0].id === "sell-here" && ex6.rows.some(r => r.id === "keeper-sells")
+    && ex6.rows.every(r => Number.isFinite(r.net) && Number.isFinite(r.perPass)),
+    JSON.stringify(ex6.rows.map(r => ({ id: r.id, net: r.net, perPass: r.perPass }))));
+  // ⚠️ A SHARE IS NOT A PRICE — Erik corrected Aevi on exactly this: "if you want the keeper to sell the
+  // stock it gets the local prices." So the keeper's row is the SAME gross and a slower clock, never a
+  // discount.
+  const kept6 = mk6({ steward: "someone" });
+  const exK = CV6.storeExits({ holdings: [kept6], npcRegistry: {} }, kept6, { cfg: cfg6, economy: econ6, locations: C6.locations });
+  const kRow = exK.rows.find(r => r.id === "keeper-sells"), uRow = ex6.rows.find(r => r.id === "keeper-sells");
+  check("§76e: ⛔ the keeper sells at the LOCAL PRICE — a share of the store per pass, never a worse rate",
+    kRow.net === exK.local && uRow.net === ex6.local && kRow.perPass > uRow.perPass,
+    JSON.stringify({ kept: { net: kRow.net, perPass: kRow.perPass }, unkept: { net: uRow.net, perPass: uRow.perPass }, local: exK.local }));
+  // ⛔ AND THE CLOCK IS A COST. Measured on real content: the best NET from Archive Hollow was a caravan
+  // returning 368 against 120 — over 151.7 DAYS. Ranking on net alone names half a year with your people
+  // gone as the thing to do.
+  const hauls = ex6.rows.filter(r => String(r.id).startsWith("caravan"));
+  check(`§76e: ⛔ the CLOCK is priced — a long haul's bigger gross does not beat selling here (${hauls.length} haul row(s))`,
+    ex6.rows.every(r => r.passes >= 1) && (!hauls.length || hauls.every(r => r.net > ex6.local ? r.perPass < ex6.rows[0].perPass : true))
+    && ex6.best?.perPass === Math.max(...ex6.rows.map(r => r.perPass)),
+    JSON.stringify(ex6.rows.map(r => ({ id: r.id, net: r.net, passes: r.passes, perPass: r.perPass }))));
+  check("§76e: …and a hired company is marked a QUOTE, because no company exists in content to hire",
+    ex6.rows.filter(r => String(r.id).startsWith("company")).every(r => r.quote === true)
+    && CV6.storeExits(ch6, hold6, { cfg: cfg6, economy: econ6, locations: C6.locations }).rows.every(r => !String(r.id).startsWith("company")),
+    "a row for a thing that cannot be bought must say so, or it is a capability the screen invented");
+  check("§76e: …and an empty store says so rather than pricing nothing",
+    CV6.storeExits(ch6, mk6({ store: {} }), { cfg: cfg6, economy: econ6, locations: C6.locations }).why === "the store is empty");
+
+  /* ---- 2 · THE RISK ---- */
+  const danger = (d) => H6.raidRisk(ch6, hold6, { cfg: cfg6, economy: econ6, regionId: null, dangerLevel: d, people: {}, npcCfg: {} });
+  const r0 = danger(0), r2 = danger(2), r5 = danger(5);
+  check("§76e: ⛔ the raid chance is READ, not a second guess at the tick's product — and it rises with the ground",
+    r0.chance === 0 && r2.chance > 0 && r5.chance > r2.chance && r5.everyN < r2.everyN,
+    JSON.stringify({ d0: r0.chance, d2: r2.chance, d5: r5.chance, everyN: [r2.everyN, r5.everyN] }));
+  // ⚠️ AND IT NAMES ITS TERMS, the way a roll's breakdown does — a bare percentage is a number to take on faith.
+  check("§76e: …and it names WHICH terms cost you, so the readout can say why rather than print a percentage",
+    r2.terms.length >= 3 && r2.terms.every(x => typeof x.said === "undefined" ? (typeof x.label === "string" && Number.isFinite(x.mult)) : true)
+    && r2.terms.some(x => /danger/.test(x.label)) && r2.terms.some(x => /store/.test(x.label)),
+    JSON.stringify(r2.terms));
+  // ⛑ A KEEPER CHANGES IT, which is Erik's v2 §1 ("places that don't have a strong leader are targets")
+  const kept = H6.raidRisk({ holdings: [kept6], npcRegistry: {} }, kept6, { cfg: cfg6, economy: econ6, regionId: null, dangerLevel: 2, people: {}, npcCfg: {} });
+  check("§76e: …and a kept hold is raided LESS than an unkept one — Erik's rule, read rather than retyped",
+    kept.chance < r2.chance, JSON.stringify({ kept: kept.chance, unkept: r2.chance }));
+  check("§76e: …and an empty store has no risk, with the reason in words rather than a 0%",
+    (() => { const e = H6.raidRisk(ch6, mk6({ store: {} }), { cfg: cfg6, economy: econ6, dangerLevel: 5, people: {}, npcCfg: {} });
+      return e.chance === 0 && /nothing in the store/.test(String(e.why)); })());
+  // ⬜ THE DETECTION TERM THE SPEC NAMES IS §7'S WATCH, WHICH IS NOT BUILT. It is absent rather than guessed.
+  check("§76e: ⬜ the spec's detection term is NOT priced in, because §7's watch does not exist yet",
+    !/detection/i.test(rd("engine/holdings.js").slice(rd("engine/holdings.js").indexOf("export function raidRisk"), rd("engine/holdings.js").indexOf("export function raidRisk") + 1200).replace(/^[^\n]*\/\*[\s\S]*?\*\//, "")),
+    "a term nobody computes must not be quietly folded into a number a player will act on");
+}
+
 /* ═════ §76d — A FEATURE READS AS A CATALOGUE ENTRY, AND ITS NUMBERS ARE READ (SNG-652 §9) ═════ */
 // ⛔ AEVI'S OWN LINE ON THE CATALOGUE IS THE RULE: "the mechanical numbers on screen are composed by the
 // engine from the kind's own fields … so they cannot drift from the rules; `what` is the words around them."

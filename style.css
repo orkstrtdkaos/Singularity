@@ -2104,3 +2104,16 @@ table.ob-matrix { border-collapse: collapse; width: 100%; min-width: 640px; font
 .hf-does { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 3px; }
 .hf-bit { font-size: 11.5px; padding: 1px 6px; border-radius: 3px; background: var(--chip, rgba(255,255,255,.06)); }
 .hf-flavor { font-size: 11.5px; opacity: .55; font-style: italic; margin-top: 3px; }
+
+/* SNG-652 §6 · MOVING THE STORE — every way out, priced per pass, because the clock is the cost that
+   dominates: measured, a caravan returning 3× the gross takes 62 passes and nets 6 a pass against 120 for
+   selling it where you stand. And the raid risk beside it, since the two are one decision. */
+.hs-cmp { margin-top: 6px; }
+.hs-lbl { display: block; font-size: 10px; letter-spacing: .07em; text-transform: uppercase; opacity: .6; margin-bottom: 2px; }
+.hs-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.hs-table th { text-align: left; font-weight: 400; font-size: 10px; letter-spacing: .05em; text-transform: uppercase; opacity: .5; padding: 1px 6px 1px 0; }
+.hs-table td { padding: 2px 6px 2px 0; border-top: 1px dashed var(--line-soft, #2e2e2e); vertical-align: top; }
+.hs-table tr.hs-best td { background: rgba(255,255,255,.04); }
+.hs-table td:last-child, .hs-table th:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+.hs-risk { margin-top: 6px; font-size: 12px; opacity: .9; }
+.hs-risk .hint { display: block; font-size: 11px; opacity: .6; }

@@ -5229,12 +5229,27 @@ console.log("\n── §49 · the authored sheet actually arrives ──");
     check("§49: …and they are HER crafts, resolved by id",
       bs.skills.some(x => x.id === "stone_read") && bs.skills.some(x => x.id === "thingcraft"),
       bs.skills.slice(0, 5).map(x => x.id).join(" · "));
-    // ✅ R47 (2026-09-05): the bare strike is for a kit with NO free floor — Pell's crafts derive one, so she is not handed
-    // it. What §49 exists to protect is PARITY: an NPC is not a different kind of thing, so both menus ask the same rule.
-    // The behaviour of both branches is asserted with fixtures in §76.
-    check("§49: ✅ …and the bare strike follows the SAME rule as the player's menu (R47) — an NPC is not a different kind of thing",
-      /offersFreeFloor\(crafts, \{ cfg: opts\?\.rules\?\.energy \}\)/.test(rd("engine/npcsheet.js"))
-      && /offersFreeFloor\(\(character\?\.abilities/.test(rd("engine/battle_turn.js")));
+    // ✅ R47 (2026-09-05), narrowed by R50 (2026-09-25): the bare strike is for a kit whose free floors cannot
+    // HARM. What §49 exists to protect is PARITY — an NPC is not a different kind of thing, so both menus must
+    // answer alike. ⛔ THIS CHECK USED TO PIN THE SOURCE EXPRESSION in both files, and so went red the moment
+    // R50 moved the rule — a defect I recorded against myself the day before and then committed again. ⚠️
+    // It asks the question BEHAVIOURALLY now: the same two fixtures through both menus, which cannot go stale
+    // on a rename or a lift-into-a-helper, and which would catch the two drifting apart — the thing it is for.
+    check("§49: ✅ …and the bare strike follows the SAME rule as the player's menu (R47/R50) — an NPC is not a different kind of thing",
+      await (async () => {
+        const BT49 = await import("../engine/battle_turn.js");
+        const { loadContentHeadless: lch49 } = await import("./headless_content.mjs");
+        const C49 = await lch49();
+        const harmer = { id: "p49h", name: "Harming", tier: 1, functions: ["strike"], touchTier: true, attribute: "physical" };
+        const reader = { id: "p49r", name: "Reading", tier: 1, functions: ["reveal"], touchTier: true, attribute: "mental" };
+        const cat = { ...cat49, p49h: harmer, p49r: reader };
+        const pcHas = (abId) => BT49.battleSkillsForCharacter({ abilities: [{ abilityId: abId, level: 1 }] },
+          { catalog: cat, rules: C49.rules, sb: C49.skillBattle.engine }).some(s => s.id === "_strike");
+        const npcHas = (abId) => NS49.battleSkillsFor({ id: "n49", abilities: [{ abilityId: abId, level: 1 }] },
+          { catalog: cat, rules: C49.rules, sb: C49.skillBattle.engine }).skills.some(s => s.id === "_strike");
+        // agree on BOTH answers, and the answers are not the same answer twice
+        return pcHas("p49h") === npcHas("p49h") && pcHas("p49r") === npcHas("p49r") && pcHas("p49r") && !pcHas("p49h");
+      })());
     // ⚠️ THE OLD FIELD STILL WORKS. Nothing authored it, but a reader that drops a shape it used to
     // accept is a migration disguised as a fix.
     const obs = NS49.battleSkillsFor({ id: "o49", skillsObserved: ["stone_read"] }, { catalog: cat49 });
@@ -7166,19 +7181,46 @@ console.log("\n── §76 · the fallbacks defer to the free touch (unauthored 
   const catT = { ...C76.abilities, t1: touched };
   const mNo = BT76.battleSkillsForCharacter(pcNo, { catalog: C76.abilities, rules: rules76, sb: sb76 });
   const mYes = BT76.battleSkillsForCharacter(pcYes, { catalog: catT, rules: rules76, sb: sb76 });
-  check("§76: ⛔ …a sheet with NO free floor still carries the bare strike and guard (the basic sheet Erik kept them for); a sheet WITH one carries neither",
+  // ⛔ R50 (Erik, 2026-09-25) REWROTE THIS CHECK'S RULE, so the check is rewritten rather than joined by a
+  // second one — Aevi's instruction, and the right one: two gates on one subject is how a retired rule keeps
+  // a green gate arguing for it. ⚠️ The old form asserted that a kit with ANY free floor carries NEITHER
+  // fallback. That is exactly what took a Reader's fists away.
+  // `t1` is a strike-floor craft, so it covers HARM and not PROTECT: its bearer loses the plain strike and
+  // KEEPS the guard. A kit with no floor at all still carries both.
+  check("§76: ⛔ R47 as narrowed by R50 — each fallback answers its OWN question: a strike-floor kit loses the bare strike and KEEPS the guard",
     mNo.some(s => s.id === "_strike") && mNo.some(s => s.id === "_guard")
-    && !mYes.some(s => s.id === "_strike") && !mYes.some(s => s.id === "_guard") && mYes.some(s => s.id === "t1"),
+    && !mYes.some(s => s.id === "_strike") && mYes.some(s => s.id === "_guard") && mYes.some(s => s.id === "t1"),
     JSON.stringify({ no: mNo.map(s => s.id), yes: mYes.map(s => s.id) }));
+  // ⛑ AND THE OTHER HALF, which is the one Erik actually met: a READER — every floor a read — keeps BOTH.
+  const reader76 = { id: "t2", name: "Reading", tier: 1, functions: ["reveal"], touchTier: true, attribute: "mental" };
+  const catR = { ...C76.abilities, t2: reader76 };
+  const mRead = BT76.battleSkillsForCharacter({ abilities: [{ abilityId: "t2", level: 1 }] }, { catalog: catR, rules: rules76, sb: sb76 });
+  check("§76: ⛔ R50 — A READER KEEPS HIS FISTS. Erik, in play at level 20: \"I have no ability to use to attack, so this trial is stuck.\"",
+    mRead.some(s => s.id === "_strike") && mRead.some(s => s.id === "_guard") && mRead.some(s => s.id === "t2"),
+    JSON.stringify(mRead.map(s => s.id)));
+  const guardOnly = { id: "t3", name: "Guarding", tier: 1, functions: ["shield"], touchTier: true, attribute: "physical" };
+  const mGuard = BT76.battleSkillsForCharacter({ abilities: [{ abilityId: "t3", level: 1 }] }, { catalog: { ...C76.abilities, t3: guardOnly }, rules: rules76, sb: sb76 });
+  check("§76: …and the mirror — a shield-floor kit loses the guard and keeps the strike",
+    !mGuard.some(s => s.id === "_guard") && mGuard.some(s => s.id === "_strike"),
+    JSON.stringify(mGuard.map(s => s.id)));
+  // ⚠️ AND WITHOUT `sb` NOBODY LOSES ANYTHING. A caller that cannot say what counts as a blow in this fight
+  // must not be allowed to take a move away on a guess.
+  check("§76: …a caller that hands over no fight config keeps BOTH fallbacks — \"I cannot tell\" never costs a move",
+    (() => { const m = BT76.battleSkillsForCharacter({ abilities: [{ abilityId: "t1", level: 1 }] }, { catalog: catT, rules: rules76 });
+      return m.some(s => s.id === "_strike") && m.some(s => s.id === "_guard"); })());
   // ── the NPC's kit follows the same rule
   const npcPlain = { id: "n1", name: "N", abilities: [{ abilityId: plain.id, level: 1 }] };
   const npcTouch = { id: "n2", name: "N2", abilities: [{ abilityId: "t1", level: 1 }] };
   const kNo = NS76.battleSkillsFor(npcPlain, { catalog: C76.abilities, cfg: rules76.npcStanding }).skills;
   const kYes = NS76.battleSkillsFor(npcTouch, { catalog: catT, cfg: rules76.npcStanding }).skills;
-  check("§76: …\"the same for any NPC\" — the bare strike goes when the kit carries a touch, stays when it does not, and `canStrike: false` still refuses it",
-    kNo.some(s => s.id === "_strike") && !kYes.some(s => s.id === "_strike")
+  // ✅ R50 reaches this line too, for the reason the engine comment above it already gives: an NPC is not a
+  // different kind of thing. `t1` harms, so its bearer loses the strike; a READER keeps it.
+  const npcRead = { id: "n3", name: "N3", abilities: [{ abilityId: "t2", level: 1 }] };
+  const kRead = NS76.battleSkillsFor(npcRead, { catalog: catR, cfg: rules76.npcStanding, rules: rules76 }).skills;
+  check("§76: …\"the same for any NPC\" — the bare strike goes when a floor HARMS, stays for a reader, and `canStrike: false` still refuses it",
+    kNo.some(s => s.id === "_strike") && !kYes.some(s => s.id === "_strike") && kRead.some(s => s.id === "_strike")
     && !NS76.battleSkillsFor({ ...npcPlain, canStrike: false }, { catalog: C76.abilities, cfg: rules76.npcStanding }).skills.some(s => s.id === "_strike"),
-    JSON.stringify({ no: kNo.length, yes: kYes.map(s => s.id) }));
+    JSON.stringify({ no: kNo.length, yes: kYes.map(s => s.id), reader: kRead.map(s => s.id) }));
   // ── R46c · no cap
   const big = { abilities: Object.values(C76.abilities).filter(a => (a.functions || []).length).slice(0, 30).map(a => ({ abilityId: a.id, level: 1 })) };
   const menu = BT76.battleSkillsForCharacter(big, { catalog: C76.abilities, rules: rules76, sb: sb76 });
@@ -7191,7 +7233,77 @@ console.log("\n── §76 · the fallbacks defer to the free touch (unauthored 
   check("§76: ⛔ …and the PANEL renders one row per CRAFT with a button per verb — the row count falls, not the content",
     /const byCraft = \[\];/.test(app76) && /byCraft\.findIndex\(g => g\[0\]\.s\.id === e\.s\.id\)/.test(app76) && /const chips = byCraft\.map\(\(entries\) => \{/.test(app76)
     && /verbs\.slice\(1\)\.map\(\(\{ s: v, i: vi \}\) =>/.test(app76) && /data-sbskill="\$\{vi\}"/.test(app76));
-  check("§76: …the body carries both rulings", /R47 · THE UNIVERSAL FALLBACKS ARE RETIRED/.test(rd("docs/HOW_IT_WORKS.md")) && /NO CAP ON THE BATTLE MENU/.test(rd("docs/HOW_IT_WORKS.md")));
+  /* ⛔ R50, ERIK'S CONDITION — "But make sure those crafts don't show up as something a PC can learn."
+     Aevi listed six places a fallback must never reach and asked for a gate that asks the question in the
+     terms of the RULE rather than in the terms of the code. ⚠️ She also measured the risk honestly: nothing
+     anywhere filters `_`-prefixed ids, and `jobs.js` feeds this very list into job skills. So each of the six
+     is DRIVEN here, on a character built to trip it — a Reader who holds one craft and therefore carries
+     BOTH fallbacks in his fight menu. */
+  {
+    const PR76 = await import("../engine/progression.js");
+    const JB76 = await import("../engine/jobs.js");
+    const CMB76 = await import("../engine/combatants.js");
+    const FN76 = await import("../engine/functions.js");
+    const fnIdx76 = FN76.buildFunctionIndex(C76.functionVocabulary);
+    const reader = { id: "char-r50", name: "A Reader", level: 6, abilities: [{ abilityId: "t2", level: 1 }],
+      attributes: { physical: 3, mental: 6, social: 3, practical: 3 }, subAttributes: {}, practice: { uses: {}, lastUsed: {} },
+      aspirations: [], currentLocationId: null, npcRegistry: {} };
+    const menu = BT76.battleSkillsForCharacter(reader, { catalog: catR, rules: rules76, sb: sb76 });
+    const fbIds = menu.filter(s => s.fallback).map(s => s.id);
+    check("§76: ⛔ R50 — the fallbacks are MARKED as what they are, so a reader can ask a fact rather than strip a prefix",
+      fbIds.length === 2 && fbIds.includes("_strike") && fbIds.includes("_guard")
+      && menu.filter(s => s.fallback).every(s => typeof s.why === "string" && s.why.length > 10),
+      JSON.stringify(menu.map(s => ({ id: s.id, fallback: !!s.fallback }))));
+    // 1 · never learnable — the catalog does not contain them, so the learn door cannot find them
+    const learn = PR76.canLearnAbility(reader, "_strike", catR, rules76, { traditionIndex: C76.traditionIndex });
+    check("§76: R50 ·1 — the learn door REFUSES a fallback (it is not a craft, and not in the catalog)",
+      learn?.ok === false && !catR._strike && !catR._guard, JSON.stringify(learn));
+    // 2 · never written to character.abilities — driven through a real fight turn
+    const encDef = { id: "d-r50", type: "duel", name: "A bout", opponent: { name: "them", threat: 3, health: 6 } };
+    const SBX = await import("../engine/skill_battle.js");
+    const oppSheet = SBX.synthesizeOpponentSheet({ name: "them", threat: 3 }, sb76);
+    const decl = { ...menu.find(s => s.id === "_strike"), intensity: "standard" };
+    const rr = SBX.battleRound({ state: { round: 1, momentum: 0, playerEnergy: 60, opponentEnergy: 60, effects: [], pressure: { player: 0, opponent: 0 }, opponentHealth: 6 },
+      playerSheet: { name: reader.name, level: 6, health: 20, maxHealth: 20, energy: 60, attributes: reader.attributes, skills: menu },
+      oppSheet, playerDecl: decl, oppDecl: SBX.opponentPolicy(oppSheet, {}, null, sb76),
+      sb: sb76, steps: C76.intensity.steps, rules: rules76, rng: () => 0.5, phase: "action", tickEffects: true });
+    BT76.applyRoundToCharacter(reader, rr, decl, { catalog: catR, rules: rules76, day: 5, defId: encDef.id });
+    check("§76: R50 ·2+3 — a fight fought WITH a fallback writes it to no ability list, no practice, no aspiration",
+      !(reader.abilities || []).some(a => String(a.abilityId).startsWith("_"))
+      && !Object.keys(reader.practice?.uses || {}).some(k => k.startsWith("_"))
+      && !Object.keys(reader.practice?.lastUsed || {}).some(k => k.startsWith("_"))
+      && !(reader.aspirations || []).some(a => String(a?.abilityId || a).startsWith("_")),
+      JSON.stringify({ abilities: reader.abilities.map(a => a.abilityId), uses: Object.keys(reader.practice?.uses || {}) }));
+    // 4 · the sheet and the wheel read `character.abilities`, which the line above proves stays clean — so the
+    //     question worth asking is whether a fallback can reach a CRAFT list at all
+    check("§76: R50 ·4 — no fallback reaches the owned-craft list the sheet and the wheel render from",
+      PR76.abilitiesForGM ? !JSON.stringify(PR76.abilitiesForGM(reader, catR, rules76) || []).includes("_strike") : true);
+    // 5 · a Reader with fists is not HARM
+    check("§76: R50 ·5 — a Reader with fists is NOT counted as harming: coverage and families read the kit, never the menu",
+      !FN76.familiesOfAbility({ functions: ["reveal"] }, fnIdx76).includes("HARM")
+      && !(CMB76.familiesOfKit(reader, catR, fnIdx76) || []).includes("HARM"),
+      JSON.stringify({ kit: CMB76.familiesOfKit(reader, catR, fnIdx76) }));
+    // 6 · a job is not a fight
+    const jp = JB76.jobPersonFor(reader, "player", { content: C76, abilityCatalog: catR });
+    check("§76: R50 ·6 — a JOB is offered no fallback, though it borrows the same menu (jobs.js fed this list straight through)",
+      !!jp && !(jp.skills || []).some(s => String(s.id).startsWith("_")),
+      JSON.stringify((jp?.skills || []).map(s => s.id)));
+  }
+  // ⚠️ ASKED BY THE RULING NAMES, NOT BY THE HEADING'S WORDING. This pinned "R47 · THE UNIVERSAL FALLBACKS
+  // ARE RETIRED" and went red the moment I rewrote that heading — on Aevi's own instruction that R50 amends
+  // R47's sentence rather than joining it. A doc gate should survive the doc being correctly edited.
+  check("§76: …the body carries all three rulings, and R50 is named where R47 lives",
+    (() => { const d = rd("docs/HOW_IT_WORKS.md");
+      // ⚠️ THE SECTION, NOT THE FIRST MENTION. My first cut took `indexOf("R47")` and landed in the §0
+      // CHANGE-LOG TABLE, 160k characters above the section it meant to read — which is its own finding:
+      // the row was genuinely missing, and the gate could not have told me which of the two was wrong.
+      const h = d.match(/^### .*\bR47\b.*$/m);
+      const i = h ? d.indexOf(h[0]) : -1;
+      const sec = i >= 0 ? d.slice(i, i + 4000) : "";
+      // and the change log is asked separately, because §0 is the log Erik requires
+      const logged = /^\| 09-\d\d \|.*\bR50\b/m.test(d);
+      return !!h && /\bR50\b/.test(sec) && logged && /NO CAP ON THE BATTLE MENU/.test(d); })(),
+    "R50 amends R47 in place — if the amendment is not in R47's own section, a reader meets the retired form first");
 }
 /* ═════ §77 — A PERSON CAN HOLD A THING, AND IT WAKES IN THEIR HANDS (R45c, 2026-09-05) ═════ */
 // ⛔ Erik: "as it's hers I can't use the evolve feature for an item on it… wire that into the engine so it evolves itself when

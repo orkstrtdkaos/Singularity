@@ -207,8 +207,26 @@ export function freeTierOf(ability, { cfg = {} } = {}) {
  *  a bare sheet still is, which is what Erik kept them for. ⚑ Derived, so it is true for most kits the moment R47 lands —
  *  which is the point of the correction: the opt-in version would have been true for nobody. */
 export function offersFreeFloor(abilities = [], { cfg = {} } = {}) {
-  for (const ab of abilities) if (ab && freeTierOf(ab, { cfg })) return true;
-  return false;
+  return freeFloorVerbs(abilities, { cfg }).size > 0;
+}
+
+/** ✅ R50 (Erik, 2026-09-25, amending R47): WHICH VERBS this kit can do for nothing — not merely whether it
+ *  can do anything.
+ *
+ *  ⛔ R47 asked ONE question of the WHOLE kit and withdrew BOTH fallbacks on one yes. ⚠️ So a Reader whose
+ *  only free floors are reads lost "A plain strike" as well, and had no way to act against anything. Erik hit
+ *  it in play on 2026-09-25 with a level-20 character — "I have no ability to use to attack, so this trial is
+ *  stuck" — and Aevi confirmed a real Reader or Attendant reaches the same corner.
+ *
+ *  ⛑ The verbs are the answer, so the verbs are what this returns, and `offersFreeFloor` is now derived FROM
+ *  it rather than beside it — one reading of the floor, not two that can drift. */
+export function freeFloorVerbs(abilities = [], { cfg = {} } = {}) {
+  const out = new Set();
+  for (const ab of abilities) {
+    if (!ab || !freeTierOf(ab, { cfg })) continue;
+    for (const v of (Array.isArray(ab.functions) ? ab.functions : [])) if (v) out.add(String(v));
+  }
+  return out;
 }
 
 /** ✅ R47 (Erik 2026-09-05: "eliminating the universal fallbacks… he should just rely on the zero-cost fallbacks of his T1

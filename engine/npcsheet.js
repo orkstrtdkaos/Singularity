@@ -23,7 +23,7 @@
 
 import { abilityTier } from "./skilltree.js";
 import { normName } from "./namematch.js";              // SNG-572: the registry-to-authored join matches on normalised names
-import { offersFreeFloor } from "./capabilities.js";   // R47: a kit with a free floor needs no bare strike
+import { freeFloorVerbs } from "./capabilities.js";   // R47/R50: a kit whose free floor HARMS needs no bare strike
 import { pcBodyAt, SUB_OF, craftSubAttribute } from "./progression.js";   // ✅ Erik 2026-09-11: a person carries a player's body
 const num = (v, d = 0) => (v == null || v === "" || !Number.isFinite(Number(v)) ? d : Number(v));
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
@@ -810,9 +810,16 @@ export function battleSkillsFor(entry, opts = {}) {
   // ⛔ AND THE PLAIN STRIKE, because the PC gets one and an NPC is not a different kind of thing. This is
   // the line that makes "Pell fights too" true without any authoring at all.
   // ✅ R47 (Erik 2026-09-05): "the same for any NPC" — the bare strike is for the most basic sheet, and a kit whose crafts
-  // carry a free touch already has a zero-cost move. Today `touchTier` is authored nowhere, so this holds for everyone.
-  if (entry?.canStrike !== false && entry?.incorporeal !== true && !offersFreeFloor(crafts, { cfg: opts?.rules?.energy })) {
-    out.push({ id: "_strike", function: "strike", name: "a plain strike", tier: 1, attribute: "physical" });
+  // carry a free touch already has a zero-cost move.
+  // ✅ R50 (Erik 2026-09-25) NARROWS IT PER FUNCTION, and this line follows for the reason the comment above it
+  // already gives: an NPC is not a different kind of thing. ⛔ The whole-kit form took the strike away from anyone
+  // whose floors were reads or mends — a Reader, an Attendant, a healer — which is the corner Erik hit as a
+  // player. ⚠️ ONLY THE HARM HALF APPLIES HERE: this menu has never minted a guard, so there is no second
+  // question to ask. ⬜ Extending R50 to this line is mine, not Aevi's words; flagged to her in the po note.
+  const npcFloors = freeFloorVerbs(crafts, { cfg: opts?.rules?.energy });
+  const npcHarms = new Set(opts?.sb?.persistentEffects?.attackFunctions || ["strike", "break"]);
+  if (entry?.canStrike !== false && entry?.incorporeal !== true && ![...npcFloors].some(v => npcHarms.has(v))) {
+    out.push({ id: "_strike", function: "strike", name: "a plain strike", tier: 1, attribute: "physical", fallback: true });
   }
   return { skills: out, level };
 }

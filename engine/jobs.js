@@ -382,7 +382,11 @@ export function jobPersonFor(character, id, ctx = {}) {
   const rules = content.rules || {};
   if (!character || !id) return null;
   if (String(id) === "player") {
-    const skills = battleSkillsForCharacter(character, { catalog: abilityCatalog, rules }).map(s => ({ ...s, rank: s.rank ?? 1, tier: s.tier || abilityTier(abilityCatalog[s.id] || {}) }));
+    // ⛔ R50 point 6 (Erik: "make sure those crafts don't show up as something a PC can learn") — A JOB IS NOT
+    // A FIGHT. This borrows the fight menu to price what a person can bring to work, and the fight menu mints
+    // "A plain strike" and "Raise a guard" for anyone whose crafts do not cover those functions. They are
+    // fallbacks for a brawl, not crafts, and a job that offered them would be offering a skill nobody owns.
+    const skills = battleSkillsForCharacter(character, { catalog: abilityCatalog, rules, fallbacks: false }).map(s => ({ ...s, rank: s.rank ?? 1, tier: s.tier || abilityTier(abilityCatalog[s.id] || {}) }));
     return { id: "player", name: character.name || "you", short: "you", isYou: true, level: num(character.level, 1),
       sheet: { attributes: character.attributes || {}, subAttributes: character.subAttributes || {} }, skills,
       wits: num(character.subAttributes?.wits, 2), regionsKnown: character.regionsKnown || {},

@@ -28,7 +28,7 @@ import { synthesizeDuelDef } from "./random_encounters.js";
 import { encounterKind, frameCollapsible, collapseMode, collapseResult, collapseFloor, wardAgainst, wardBroken, swingDegree } from "./encounterFrame.js";
 import { abilityTier } from "./skilltree.js";
 import { effectiveEnergyCost, autoAdvancePracticedRanks, SUB_OF, craftSubAttribute } from "./progression.js";
-import { capabilityMenu, resolveTier, offersFreeFloor } from "./capabilities.js";
+import { capabilityMenu, resolveTier, freeFloorVerbs } from "./capabilities.js";
 import { usableCombatItems, wieldBonusFor, consumeItem, removeItem, wornSoak, wornSoakLayers } from "./inventory.js";
 import { recordUse } from "./practice.js";
 import { applyCondition, clearOnHeal, activeConditions } from "./conditions.js";
@@ -44,7 +44,7 @@ import { activeCompanions, growBond } from "./companions.js";
 
 /** The player's battle menu — one entry per craft FUNCTION, then the two bare moves, the usable items, the generic senses.
  *  `catalog` is the merged catalog (content + the character's own crafts). Was `playerBattleSkills()` in app.js. */
-export function battleSkillsForCharacter(character, { catalog = {}, rules = {}, sb = null, limit = null } = {}) {
+export function battleSkillsForCharacter(character, { catalog = {}, rules = {}, sb = null, limit = null, fallbacks = true } = {}) {
   const out = [];
   for (const a of character?.abilities || []) {
     const def = catalog[a.abilityId];
@@ -66,11 +66,36 @@ export function battleSkillsForCharacter(character, { catalog = {}, rules = {}, 
             : {}; })() });
     }
   }
-  // ✅ R47: the universal fallbacks are RETIRED for anyone whose own crafts carry a free touch — "he should just rely on
-  // the zero-cost fallbacks of his T1 skills as we designed". They remain for the bare sheet, which is what they were for.
-  if (!offersFreeFloor((character?.abilities || []).map(a => catalog[a?.abilityId]).filter(Boolean), { cfg: rules?.energy })) {
-    out.push({ id: "_strike", function: "strike", tier: 1, attribute: "physical", name: "A plain strike" });
-    out.push({ id: "_guard", function: "shield", tier: 1, attribute: "physical", name: "Raise a guard" });
+  // ✅ R47, AS NARROWED BY R50 (Erik, 2026-09-25): the universal fallbacks are retired PER FUNCTION, not for the
+  // whole kit — "he should just rely on the zero-cost fallbacks of his T1 skills as we designed" still holds
+  // wherever those floors actually cover the function.
+  //
+  // ⛔ THE OLD FORM ASKED ONE QUESTION AND WITHDREW BOTH ANSWERS. A Reader whose floors are all reads lost the
+  // plain strike too, and had nothing to act with. Erik met it in play with a level-20 character: "I have no
+  // ability to use to attack, so this trial is stuck." ⛑ A Reader with fists is the intended state; a Reader
+  // with nothing is not.
+  //
+  // ⚠️ WHAT COUNTS AS HARMING AND AS PROTECTING IS THE FIGHT'S OWN LISTS, not the vocabulary's wider families.
+  // `sb.persistentEffects.attackFunctions` (strike, break) and `sb.functionMatchup.defensiveFunctions` (shield,
+  // ward, resist) are what this menu's OWN matchup maths already treats as attack and defence, so asking them
+  // keeps one derivation. The vocabulary's HARM family also holds `hinder` — which weakens without wounding —
+  // and reading it here would take a player's fists away for owning a free-floor debuff. That is the reading
+  // that errs toward keeping the fallback, which is the direction R50 exists to move in.
+  //
+  // ⛑ AND WITHOUT `sb` THE FALLBACKS STAND. A caller that does not hand over the fight's config cannot be
+  // told which floors cover which function, and the safe answer to "I cannot tell" is the move that costs
+  // nothing and takes nothing away.
+  if (fallbacks) {
+    const floors = freeFloorVerbs((character?.abilities || []).map(a => catalog[a?.abilityId]).filter(Boolean), { cfg: rules?.energy });
+    const harms = new Set(sb?.persistentEffects?.attackFunctions || []);
+    const guards = new Set(sb?.functionMatchup?.defensiveFunctions || []);
+    const covers = (set) => set.size > 0 && [...floors].some(v => set.has(v));
+    // ⚠️ `fallback: true` IS THE FACT; the `_` id is a naming convention. Six places must never treat these as
+    // crafts (R50's list), and a flag they can ask about is better than a prefix they must remember to strip.
+    if (!covers(harms)) out.push({ id: "_strike", function: "strike", tier: 1, attribute: "physical", name: "A plain strike", fallback: true,
+      why: "no craft of yours strikes — you can still hit with what you have" });
+    if (!covers(guards)) out.push({ id: "_guard", function: "shield", tier: 1, attribute: "physical", name: "Raise a guard", fallback: true,
+      why: "no craft of yours blocks — you can still put an arm up" });
   }
   const icfg = sb?.items || {};
   for (const u of usableCombatItems(character, icfg)) {

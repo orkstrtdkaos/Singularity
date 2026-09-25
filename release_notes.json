@@ -16,6 +16,18 @@
   "next": [],
   "releases": [
     {
+      "version": "2.6.5",
+      "date": "2026-09-25",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "A character who cannot harm keeps a plain strike",
+          "summary": "If none of your crafts can hit for free, you get fists again — and if none of them can block for free, you get a guard. The two are decided separately now.",
+          "detail": "The rule that retires the universal fallbacks used to ask one question of your whole kit and withdraw both answers on one yes. A Reader whose free moves are all reads lost the bare strike as well and had no way to act at all. Measured on the saved characters: two of fourteen had no harming move whatsoever, and four more gain a free way to hit or block when their energy runs dry. They are still not crafts — they cannot be learned, practised, aspired to, or offered as a job skill, and they do not make a Reader count as a fighter."
+        }
+      ]
+    },
+    {
       "version": "2.6.4",
       "date": "2026-09-25",
       "entries": [

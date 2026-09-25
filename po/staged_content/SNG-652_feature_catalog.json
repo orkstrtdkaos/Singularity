@@ -1,5 +1,5 @@
 {
- "_spec": "SNG-652 §5 — a category, a plain line of what it does, and a line of flavour for every feature kind in economy.holdFeatures.kinds. The mechanical numbers on screen are composed by the engine from the kind's own fields (yields, defence, watch, hands, residents, aura, pilgrims, upkeep), so they cannot drift from the rules; `what` is the words around them. Staged: `category` needs its reader (C20).",
+ "_spec": "SNG-652 §5 — a category, a plain line of what it does, and a line of flavour for every feature kind in economy.holdFeatures.kinds. The mechanical numbers on screen are composed by the engine from the kind's own fields (yields, defence, watch, hands, residents, aura, pilgrims, upkeep), so they cannot drift from the rules; `what` is the words around them. Staged: `category` needs its reader (C20). | 2026-09-25 APPLIED to core/rules/economy.json holdFeatures; what lines rewritten as words only (the numbers are the engine’s, via featureDoes). The live file is now the authority; this is the record.",
  "categories": {
   "defence": "Defence — walls, gates and wards",
   "watch": "Watch & sense — seeing trouble coming",
@@ -14,57 +14,57 @@
  "kinds": {
   "wall": {
    "category": "defence",
-   "what": "Stone between you and whoever comes. Adds 1 to the hold's defence.",
+   "what": "Stone between you and whoever comes; it makes the hold harder to take.",
    "flavor": "Nobody writes songs about a wall. Everybody who lived behind one remembers it."
   },
   "barrier": {
    "category": "defence",
-   "what": "A worked barrier or ward-line across the approach. Adds 1 to defence.",
+   "what": "A worked barrier across the approach; raiders have to get through it before they reach anything else.",
    "flavor": "It does not stop anyone. It decides where they have to go."
   },
   "gate": {
    "category": "defence",
-   "what": "A gate that closes. Adds 1 to defence, and the hold can be shut.",
+   "what": "A gate that closes, so the hold can be shut against the road.",
    "flavor": "A gate is a question the hold gets to ask."
   },
   "keep": {
    "category": "defence",
-   "what": "The last room that holds. Adds 3 to defence; while it stands, a raid cannot take everything.",
+   "what": "The last room that holds. While it stands, a raid cannot take everything.",
    "flavor": "When everything else has fallen, this is where the keeper stands."
   },
   "ward_line": {
    "category": "defence",
-   "what": "A standing ward-line, kept up by craft. Adds 2 to defence and counts as a watch.",
+   "what": "A standing ward-line, kept up by craft. It defends, and it feels things coming.",
    "flavor": "You feel it before you see it: the air goes attentive at the edge."
   },
   "moat": {
    "category": "defence",
-   "what": "A moat or a ditch-and-bank (a kind of wall). Adds 1 to defence.",
+   "what": "A moat or a ditch-and-bank (a kind of wall); anyone crossing it does so slowly.",
    "flavor": "Dig it once and it keeps digging for you, every time someone has to cross it."
   },
   "thorn_line": {
    "category": "defence",
-   "what": "A grown thorn-line (a Rootkin wall). Adds 1 to defence and grows back.",
+   "what": "A grown thorn-line (a Rootkin wall). It defends, and it grows back.",
    "flavor": "The Rootkin do not build walls. They ask the hedge to disagree with strangers."
   },
   "tower": {
    "category": "watch",
-   "what": "A watchtower. Adds 2 to defence and lets the watch see farther.",
+   "what": "A watchtower. The watch sees farther, and trouble is seen sooner.",
    "flavor": "From the top you can see trouble a day before it arrives, which is the whole point."
   },
   "sentries": {
    "category": "watch",
-   "what": "Sentries — raised, bound or posted. Adds 1 to defence and counts as a watch. Costs a lot to keep.",
+   "what": "Sentries — raised, bound or posted. Something here is always awake, and it costs to keep it so.",
    "flavor": "Something always awake. Whether it is alive is a local matter."
   },
   "watch": {
    "category": "watch",
-   "what": "People posted, and they see. Adds 2 to defence and counts as a watch.",
+   "what": "People posted to look, so the hold sees what is coming.",
    "flavor": "A watch is only as good as the person who never sleeps on it."
   },
   "muster_yard": {
    "category": "muster",
-   "what": "A muster yard where a band forms. Adds 1 to defence and lets a band be raised and drilled here.",
+   "what": "A muster yard, where a band can be raised and drilled.",
    "flavor": "Stamped earth and a post for the banner. Every army starts in a yard like this."
   },
   "drill_ground": {
@@ -79,47 +79,47 @@
   },
   "mine": {
    "category": "production",
-   "what": "A mine. Yields raw material every pass while the hold thrives.",
+   "what": "A mine. It brings raw material up out of the hill every pass the hold is doing well.",
    "flavor": "The hill gives up what it has to whoever keeps asking."
   },
   "quarry": {
    "category": "production",
-   "what": "A quarry. Yields cut stone every pass.",
+   "what": "A quarry. It cuts stone every pass, for walls and for sale.",
    "flavor": "Every wall in the district started here."
   },
   "mill": {
    "category": "production",
-   "what": "A mill. Yields raw material every pass.",
+   "what": "A mill. It turns out raw material every pass.",
    "flavor": "Water or wind or oxen; the stone goes round and the grain comes out."
   },
   "workshop": {
    "category": "production",
-   "what": "A workshop. Yields mechanical parts every pass, even while the hold moves.",
+   "what": "A workshop. It makes mechanical parts every pass, and keeps working even while the hold moves.",
    "flavor": "Benches, vices, and a smell of oil that never quite leaves."
   },
   "herd": {
    "category": "production",
-   "what": "A herd or a planting. Yields living stock every pass.",
+   "what": "A herd or a planting. It raises living stock every pass.",
    "flavor": "Something grows here that did not grow here before."
   },
   "kiln": {
    "category": "production",
-   "what": "A kiln or a lime-burn. Yields cut stone every pass.",
+   "what": "A kiln or a lime-burn. It makes cut stone every pass.",
    "flavor": "It burns day and night, and the whole hold smells of it."
   },
   "fishery": {
    "category": "production",
-   "what": "A fishery or a weir. Yields living stock every pass.",
+   "what": "A fishery or a weir. It takes living stock from the water every pass.",
    "flavor": "The river pays a toll too, if you know how to ask it."
   },
   "still": {
    "category": "production",
-   "what": "A still or a physic-garden. Yields medicines every pass.",
+   "what": "A still or a physic-garden. It makes medicines every pass.",
    "flavor": "Half the jars are remedies. The other half are why people visit."
   },
   "lens_works": {
    "category": "production",
-   "what": "A lens-works. Yields worked light every pass. Expensive to keep.",
+   "what": "A lens-works. It grinds worked light every pass, and it is costly to keep.",
    "flavor": "Glass ground until it bends the day the way you want it."
   },
   "forge": {
@@ -149,47 +149,47 @@
   },
   "quarters": {
    "category": "community",
-   "what": "Quarters. Homes for 4 people who work the hold, and 2 more hands at work.",
+   "what": "Quarters: homes for the people who work the hold, and room for more of them to work.",
    "flavor": "Somewhere to sleep that is not the floor of the workshop."
   },
   "longhouse": {
    "category": "community",
-   "what": "A longhouse. Homes for the hold's people and 3 more hands at work.",
+   "what": "A longhouse: homes for the hold's people, and more of them at work.",
    "flavor": "Everyone eats at one long table, and every argument happens there too."
   },
   "keepers_hut": {
    "category": "community",
-   "what": "A keeper's hut. A home for the keeper and 1 more hand at work.",
+   "what": "A keeper's hut: a home for the keeper, and one more at work.",
    "flavor": "One room, one bed, one lamp, and a view of the whole hold."
   },
   "infirmary": {
    "category": "community",
-   "what": "An infirmary. Heals the people who live and work here, and 1 more hand at work.",
+   "what": "An infirmary. It heals the people who live and work here.",
    "flavor": "Clean linen, quiet voices, and a door that is never locked."
   },
   "longship_deck": {
    "category": "community",
-   "what": "Deck space on a longship. Homes for the crew, and works while she sails.",
+   "what": "Deck space on a longship: homes for the crew, and it works while she sails.",
    "flavor": "Cleared, and worth more than it looks."
   },
   "hearth": {
    "category": "sacred",
-   "what": "A hearth nobody lets go out. A little meaning, and it draws a pilgrim now and then.",
+   "what": "A hearth nobody lets go out. A little meaning, and now and then a pilgrim.",
    "flavor": "It has been burning longer than anyone here has been alive."
   },
   "market": {
    "category": "economy",
-   "what": "A market day. Lets goods be traded here, adds 1 hand at work, and brings coin through.",
+   "what": "A market day. Goods can be traded here, it brings coin through, and traders come to it.",
    "flavor": "Once a week the whole district remembers this place exists."
   },
   "relay_station": {
    "category": "travel",
-   "what": "A relay station, the network's node. Messages pass through; it earns for the service.",
+   "what": "A relay station, the network's node. Messages pass through, and the service pays.",
    "flavor": "Word arrives here from somewhere else, and leaves for somewhere farther."
   },
   "waygate": {
    "category": "travel",
-   "what": "A waygate, made rather than found. A passage to another place. Very expensive to keep.",
+   "what": "A waygate, made rather than found: a passage to another place. Very costly to keep.",
    "flavor": "A door that is somewhere else on the other side."
   },
   "stable": {
@@ -204,7 +204,7 @@
   },
   "temple": {
    "category": "sacred",
-   "what": "A temple. Meaning and a steady draw of pilgrims; it thickens the ground.",
+   "what": "A temple. It gives meaning, draws pilgrims steadily, and thickens the ground.",
    "flavor": "People walk a long way to stand in a quiet room."
   },
   "shrine": {
@@ -219,12 +219,12 @@
   },
   "memorial": {
    "category": "sacred",
-   "what": "A memorial where names are kept. Meaning and a pilgrim or two.",
+   "what": "A memorial where names are kept. Meaning, and a pilgrim or two.",
    "flavor": "Every name read aloud once a year, whether anyone remembers why."
   },
   "grave_ground": {
    "category": "sacred",
-   "what": "Tended grave-ground. Meaning, endings attended, and a pilgrim now and then.",
+   "what": "Tended grave-ground. Meaning, endings attended, and a visitor now and then.",
    "flavor": "Swept paths, and a bench for the people who visit."
   },
   "reclamation_bowl": {

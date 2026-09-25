@@ -1291,7 +1291,7 @@
  },
  "regions": [
   {
-   "regionId": "the_crossing",
+   "regionId": "the_center",
    "tradition": "(none — the clearing house)",
    "goods": {
     "mech_parts": [
@@ -1344,7 +1344,9 @@
     ]
    },
    "deadList": [],
-   "note": "⚠️ THE CROSSING HAS NO DEAD LIST — that IS its identity, expressed mechanically. It is the only place in the world that wants everything, which is why it is the clearing house and why every trade route ends here. It should also never be the BEST price for anything (a 15% spread), so a player who only ever sells at the Crossing is leaving money on the table but never stranded."
+   "note": "⚠️ THE CROSSING HAS NO DEAD LIST — that IS its identity, expressed mechanically. It is the only place in the world that wants everything, which is why it is the clearing house and why every trade route ends here. It should also never be the BEST price for anything (a 15% spread), so a player who only ever sells at the Crossing is leaving money on the table but never stranded.",
+   "_wasRegionId": "the_crossing",
+   "_idFix": "SNG-654 §2 (Aevi, measured): the profile was keyed to an id no place uses — the Crossing sits in the_center, the Unspooling's six places use `unspooling`. The clearing house priced nothing until this line."
   },
   {
    "regionId": "the_gearlands",
@@ -2031,7 +2033,7 @@
    "note": "Buys almost everything at need because they make nothing physical — the purest 'sells services, imports goods' economy in the world."
   },
   {
-   "regionId": "the_unspooling",
+   "regionId": "unspooling",
    "tradition": "churnfolk",
    "goods": {
     "raw_material": [
@@ -2086,7 +2088,9 @@
    "deadList": [
     "documents"
    ],
-   "note": "⚠️ DOCUMENTS ARE WORTHLESS IN THE UNSPOOLING, which is the funniest and most correct entry in the table. A charter means nothing to a chaos-steeped people; you cannot sell a lattice ledger to the Churn. The exact inverse of the Lattice Cities."
+   "note": "⚠️ DOCUMENTS ARE WORTHLESS IN THE UNSPOOLING, which is the funniest and most correct entry in the table. A charter means nothing to a chaos-steeped people; you cannot sell a lattice ledger to the Churn. The exact inverse of the Lattice Cities.",
+   "_wasRegionId": "the_unspooling",
+   "_idFix": "SNG-654 §2 (Aevi, measured): the profile was keyed to an id no place uses — the Crossing sits in the_center, the Unspooling's six places use `unspooling`. The clearing house priced nothing until this line."
   },
   {
    "regionId": "the_ascent",

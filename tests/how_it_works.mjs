@@ -9689,6 +9689,7 @@ console.log("\n── §100 · the numbers are read, and a load on the road can 
   const CV100 = await import("../engine/caravan.js");
   const { loadContentHeadless: lch100 } = await import("./headless_content.mjs");
   const C100 = await lch100();
+  const H100mod = await import("../engine/holdings.js");   // CCODE-503: the price reader, for the measured baseline
   const locs100 = C100.locations, econ100 = C100.rules?.economy, cfg100 = econ100?.holdStore;
   const flat = () => 0.5;
   const band = (k, lvl = 5) => ML100.contingentsFromPeople(
@@ -9721,10 +9722,32 @@ console.log("\n── §100 · the numbers are read, and a load on the road can 
   CV100.arriveCaravan(far, sF.caravan, { locations: locs100, economy: econ100, cfg: cfg100, day: 5 });
   const P100 = await import("../engine/purse.js");
   const W100 = (c) => Math.round(P100.worthOf(c.purse, econ100).totalInCrystal * 100) / 100;   // CCODE-437: what a purse is WORTH
-  check("§100: ⛔ THE DIFFERENTIAL IS REACHED — the same 8 units fetch far more where they are wanted",
-    // CCODE-437: the Gearlands is a Reach and pays its own scrip, so the differential is read by WORTH, never by one money's count
-    W100(far) > W100(near) * 2 && W100(near) > 0,
+  // ⛔ CCODE-503 — RE-ASKED, BECAUSE THIS PINNED A CONTENT DEFECT AND WOULD HAVE GONE RED FOR ITS REPAIR.
+  // The Crossing was the "near, ordinary" baseline, and Aevi measured WHY it read ordinary: `economy.regions`
+  // keys its clearing-house profile `the_crossing` while the place sits in region `the_center`, so the one
+  // market authored to buy everything priced nothing. ⚠️ With her one-line id fix the Crossing pays 64
+  // instead of 40 and the Gearlands' 115 stops being 2× it — a gate failing because the world got better.
+  //
+  // ⛑ THE CLAIM THE DESIGN MAKES IS "THE FAR MARKET PAYS MORE", not "more than double a specific place". So
+  // the differential is asserted in those terms, and the baseline is chosen by MEASURING which region truly has
+  // no profile rather than by naming one — which is what let a live profile masquerade as ordinary here.
+  const profiled100 = new Set((econ100.regions || []).map(r => r && r.regionId).filter(Boolean));
+  const ordinaryRegion = [...new Set(Object.values(locs100).map(l => l && l.regionId).filter(Boolean))]
+    .find(r => !profiled100.has(r));
+  check("§100: ⛔ THE DIFFERENTIAL IS REACHED — the same 8 units fetch more where they are wanted than where they are not",
+    W100(far) > W100(near) && W100(near) > 0,
     `${W100(near)} at the Crossing vs ${W100(far)} in the Gearlands, in worth`);
+  // ⚠️ AND IT IS A REAL GAP, not a rounding one — asserted as a RATIO against a region the corpus itself
+  // says is unpriced, so it cannot be quietly satisfied by two profiled markets that happen to differ.
+  check("§100: …and a WANTED market pays a real premium over one with no profile at all — measured, never named",
+    (() => {
+      if (!ordinaryRegion) return true;                    // every region priced: the premise is gone, not failed
+      const { unitWorth } = H100mod;
+      const plain = unitWorth("raw_material", { economy: econ100, regionId: ordinaryRegion, cfg: cfg100 });
+      const wanted = unitWorth("raw_material", { economy: econ100, regionId: "the_gearlands", cfg: cfg100 });
+      return plain && wanted && wanted.each > plain.each * 1.5;
+    })(),
+    `baseline region: ${ordinaryRegion || "(all regions are priced)"}`);
   check("§100: …and the coin comes through `credit`, the purse's one door in — trade MOVES coin, never mints it (through `earnAt`, CCODE-437)",
     /earnAt\(character, total, regionId, economy, \{ origin: "traded" \}\)/.test(rd("engine/caravan.js"))
     && /credit\(character, here\.pays\.currency, amount, \{ origin, regionId: here\.pays\.regionId \}\)/.test(rd("engine/money.js")));

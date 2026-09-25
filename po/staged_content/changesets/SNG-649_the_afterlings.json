@@ -1,0 +1,696 @@
+{
+ "schemaVersion": 1,
+ "id": "SNG-649_the_afterlings",
+ "kind": "changeset",
+ "_title": "The Afterlings: a home at Cairnsend, the Vigil and the Grave-Callers, and the one who was finished",
+ "_why": "Erik 2026-09-25: 'I want the undead people — the afterlings — to get a full profile and a home and power structures'; and Silas finished 'an undead person in some unique way'. Canon profile: content/packs/valley/lore/the_afterlings.md.",
+ "ids": [
+  "cairnsend",
+  "the_last_cairn",
+  "the_dyke_works",
+  "power_cairnsend_vigil",
+  "power_grave_callers",
+  "speaker_barrowe",
+  "grave_master_dunstane",
+  "owain_fellowes",
+  "the_finished"
+ ],
+ "removed": {},
+ "renamed": {},
+ "added": [
+  {
+   "_kind": "location",
+   "schemaVersion": 1,
+   "regionId": "the_palelands",
+   "loreRefs": [
+    "the_twelve_reaches",
+    "traditions"
+   ],
+   "tier": "settlement",
+   "parentId": "cairnhold",
+   "id": "cairnsend",
+   "name": "Cairnsend",
+   "communityId": "ashwarden.cairnsend",
+   "spectrum": {
+    "death_life": -0.55,
+    "chaos_order": 0.4,
+    "violence_peace": 0.3,
+    "emotional_logical": 0.2
+   },
+   "tags": [
+    "ashwarden",
+    "death",
+    "city",
+    "home",
+    "grey",
+    "tended",
+    "refuge"
+   ],
+   "connections": [
+    "cairnhold",
+    "the_last_cairn",
+    "the_dyke_works"
+   ],
+   "descriptionSeed": "The town at the end of the tending, where the dead who stayed live. Cairnsend grew around the Last Cairn one house at a time, and most of the people in those houses are Afterlings: drowned dyke-workers, raised labourers who kept going after the labour stopped, Ashwardens who argued with their endings and never lost. It is cold, orderly and very quiet at night, because nobody here sleeps. The living come to trade, to visit the people they buried, and sometimes to stay.",
+   "encounterFlavor": "Neighbours who do not breathe and do not mind that you do; a lamp lit in every window all night because nobody needs to sleep; a wedding between a living woman and a man who drowned forty years ago, and everybody came.",
+   "dangerLevel": 2,
+   "questSeeds": [
+    "A living family has come to Cairnsend to take their raised grandmother home, and she does not want to go",
+    "The Vigil is drafting its first law: nobody is raised here without asking. The Grave-Callers have asked who will work the dykes"
+   ],
+   "map": {
+    "x": 700,
+    "y": 385
+   },
+   "poleIntensity": {
+    "death": 0.55,
+    "order": 0.4
+   },
+   "worldPos": {
+    "colatitude": 84,
+    "longitude": 77,
+    "depth": 0
+   },
+   "worldPosNote": "Past Cairnhold toward the Long Grey, where the tending thins (SNG-649).",
+   "appearance": "Grey stone houses with lamps in every window at midnight, a lane of cairns running through the middle of town, figures working unhurried in the dark",
+   "axisVector": [
+    0.2,
+    0,
+    0,
+    0.3,
+    0,
+    0,
+    0.4,
+    0,
+    -0.55,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "_kind": "location",
+   "schemaVersion": 1,
+   "regionId": "the_palelands",
+   "loreRefs": [
+    "the_twelve_reaches",
+    "traditions"
+   ],
+   "tier": "settlement",
+   "parentId": "cairnhold",
+   "id": "the_last_cairn",
+   "name": "The Last Cairn",
+   "communityId": "ashwarden.last_cairn",
+   "spectrum": {
+    "death_life": -0.8,
+    "falsehood_truth": 0.4,
+    "chaos_order": -0.2
+   },
+   "tags": [
+    "ashwarden",
+    "death",
+    "sacred",
+    "liminal",
+    "grey"
+   ],
+   "connections": [
+    "cairnsend",
+    "the_long_grey"
+   ],
+   "descriptionSeed": "The last cairn anyone raised before the Long Grey, and the woman standing beside it. Orsolya refused her ending here forty years ago and has been having the argument ever since; Cairnsend grew up behind her because the dead who would not lie down came to stand where she stood. Pilgrims come to ask her whether they should have let go. She has not decided, and she tells them so.",
+   "encounterFlavor": "A tall stone cairn with the Long Grey beyond it and a woman who has not moved from it in forty years; pilgrims, living and not, waiting their turn to ask her one question.",
+   "dangerLevel": 3,
+   "questSeeds": [
+    "Orsolya has asked for someone to bring her an argument she has not heard"
+   ],
+   "map": {
+    "x": 718,
+    "y": 400
+   },
+   "poleIntensity": {
+    "death": 0.8
+   },
+   "worldPos": {
+    "colatitude": 86,
+    "longitude": 77,
+    "depth": 0
+   },
+   "worldPosNote": "The last tended ground before the Long Grey (SNG-649).",
+   "appearance": "A single tall cairn at the edge of an endless ash field, a woman standing beside it, a line of quiet pilgrims waiting",
+   "axisVector": [
+    0,
+    0.4,
+    0,
+    0,
+    0,
+    0,
+    -0.2,
+    0,
+    -0.8,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "_kind": "location",
+   "schemaVersion": 1,
+   "regionId": "the_palelands",
+   "loreRefs": [
+    "the_twelve_reaches",
+    "traditions"
+   ],
+   "tier": "settlement",
+   "parentId": "cairnhold",
+   "id": "the_dyke_works",
+   "name": "The Dyke-Works",
+   "communityId": "ashwarden.dyke_works",
+   "spectrum": {
+    "death_life": -0.4,
+    "chaos_order": 0.5,
+    "concrete_abstract": -0.5
+   },
+   "tags": [
+    "ashwarden",
+    "craft",
+    "market",
+    "social",
+    "border"
+   ],
+   "connections": [
+    "cairnsend",
+    "cairn_and_scour"
+   ],
+   "descriptionSeed": "The dykes and deep wells that keep the Palelands' water where it is needed, worked day and night by people who do not tire. The Dyke-Works were built by the living and kept by the dead: most of the crews drowned or died at this work and got up again, and they keep it because they always did. The living come here to hire the tireless and to buy water in dry years. The wells on the eastern edge are silting, and nobody has worked out why.",
+   "encounterFlavor": "A dyke-crew working by lantern at three in the morning without a word of complaint; a water-broker from Cairnhold haggling with a foreman who drowned in this sluice ninety years ago.",
+   "dangerLevel": 2,
+   "questSeeds": [
+    "The eastern wells are silting one by one, and the oldest dyke-keeper says the water is being taken, not lost",
+    "A Grave-Caller has offered the Dyke-Works fresh hands, and the Vigil has asked the crews not to take them"
+   ],
+   "map": {
+    "x": 672,
+    "y": 382
+   },
+   "poleIntensity": {
+    "death": 0.4,
+    "order": 0.5
+   },
+   "worldPos": {
+    "colatitude": 82,
+    "longitude": 76,
+    "depth": 0
+   },
+   "worldPosNote": "Between Cairnsend and Cairn-and-Scour, on the water (SNG-649).",
+   "appearance": "Stone dykes and sluices across a grey plain, lanterns moving along them at night, crews of pale unhurried workers hauling gates",
+   "axisVector": [
+    0,
+    0,
+    0,
+    0,
+    -0.5,
+    0,
+    0.5,
+    0,
+    -0.4,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "_kind": "power",
+   "encounters": [],
+   "answersTo": null,
+   "rivals": [
+    "power_grave_callers",
+    "power_harvest_hand"
+   ],
+   "opposedBy": [],
+   "id": "power_cairnsend_vigil",
+   "name": "The Vigil of Cairnsend",
+   "kind": "sovereignty",
+   "form": "moot",
+   "temper": "fair",
+   "seat": "cairnsend",
+   "reach": [
+    "cairnsend",
+    "the_last_cairn",
+    "the_dyke_works"
+   ],
+   "leader": "speaker_barrowe",
+   "strength": {
+    "scale": "legion",
+    "contingents": [
+     {
+      "n": 180,
+      "quality": 2,
+      "what": "Afterling wardens and dyke-crews who do not tire, do not sleep and do not break ranks"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "the_dyke_works",
+     "kind": "post",
+     "name": "the great sluice-house",
+     "garrison": 30
+    }
+   ],
+   "verbs": [
+    "protect",
+    "patrol",
+    "tax",
+    "inform"
+   ],
+   "dangerLift": 0,
+   "noticesYouWhen": [
+    "neighbour",
+    "crossed"
+   ],
+   "wantsFromYou": "Your word that you will not raise anyone who has not asked, and your hands, or your coin, for the dykes in a dry year.",
+   "offersYou": "Water, tireless crews for hire, a place for anyone the living will not have, and neighbours who will still be here in a hundred years.",
+   "leverage": "The Vigil speaks for the dead who stayed, and the living of the Palelands depend on the dykes they keep. If the crews lay down their tools for a season, Cairnhold goes thirsty.",
+   "whenBroken": "The crews scatter, the dykes silt, and the Grave-Callers raise new hands to keep the water moving, asking no one.",
+   "bodies": [
+    {
+     "name": "the Vigil",
+     "does": "governs Cairnsend; every Afterling of the town has a voice in it",
+     "people": [
+      "speaker_barrowe"
+     ]
+    },
+    {
+     "name": "the Last Cairn",
+     "does": "where the first Unfinished stands; the Vigil keeps her ground and does not govern her",
+     "people": [
+      "the_unfinished_of_the_last_cairn"
+     ]
+    }
+   ],
+   "plainly": "The Afterlings' own council at Cairnsend, where the dead who stayed live. It keeps the Palelands' water flowing and is trying to make it law that nobody is raised without asking.",
+   "descriptionSeed": "The Vigil sits all night, because nobody in it sleeps. It governs a town of the dead who stayed, and it has one cause above all: that nobody should be raised without asking first. The Grave-Callers have been doing it for four hundred years, the Palelands depend on the labour, and half the Vigil were raised that way themselves.",
+   "appearance": "A long hall lit all night, pale unhurried council members at a table, the Last Cairn visible through the far window"
+  },
+  {
+   "_kind": "power",
+   "encounters": [],
+   "answersTo": null,
+   "rivals": [
+    "power_cairnsend_vigil"
+   ],
+   "opposedBy": [
+    "speaker_barrowe",
+    "veth-ondra"
+   ],
+   "id": "power_grave_callers",
+   "name": "The Grave-Callers",
+   "kind": "order",
+   "temper": "hard",
+   "seat": "cairn_and_scour",
+   "reach": [
+    "cairn_and_scour",
+    "the_quiet_ground",
+    "the_dyke_works",
+    "the_hollowing"
+   ],
+   "leader": "grave_master_dunstane",
+   "strength": {
+    "scale": "unit",
+    "contingents": [
+     {
+      "n": 40,
+      "quality": 3,
+      "what": "Grave-Callers, and the raised crews that follow them"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "cairn_and_scour",
+     "kind": "post",
+     "name": "the burying yard's back gate, where the bodies come in",
+     "garrison": 12
+    }
+   ],
+   "verbs": [
+    "recruit",
+    "expand",
+    "protect",
+    "levy"
+   ],
+   "dangerLift": 1,
+   "noticesYouWhen": [
+    "wealth",
+    "neighbour"
+   ],
+   "wantsFromYou": "Your dead, when you are done with them. They will pay the family, and they will not ask the dead.",
+   "offersYou": "Hands that never tire for any work, for as long as the body lasts, and a second life for anyone you cannot bear to bury.",
+   "leverage": "The Palelands run on their labour and everyone knows it. A family that sold a body to the Callers does not want the Vigil to learn whose it was.",
+   "whenBroken": "Raising stops, the dykes run short of hands in a season, and every raised crew in the Palelands has to decide for itself what it is.",
+   "plainly": "The Ashwardens who raise the dead to work and do not ask first. They have done it for four hundred years, and the Palelands run on it.",
+   "descriptionSeed": "The Grave-Callers are the half of the Ashwarden tradition the other half calls obscene. They hold a body past its ending and set it working, and the dykes, the burying yards and the long roads of the Palelands depend on it. Most of what they raise stays a crew. Some of it wakes up, and those are the people of Cairnsend.",
+   "appearance": "A back gate of a burying yard at dusk, grey-robed callers leading a line of silent raised labourers, a ledger of names on a trestle"
+  },
+  {
+   "_kind": "npc",
+   "schemaVersion": 1,
+   "romanceEligible": false,
+   "people": "human",
+   "closed": [],
+   "id": "speaker_barrowe",
+   "name": "Speaker Barrowe",
+   "fullName": "Tamsa Ingrith Barrowe",
+   "title": "Speaker of the Vigil of Cairnsend",
+   "tier": "heroic",
+   "level": 28,
+   "role": "Speaker of the Vigil — an Afterling who drowned at the dykes sixty years ago, was raised without being asked, woke up, and has spent every year since making sure it happens to nobody else",
+   "gender": "woman",
+   "pronouns": "she/her",
+   "sex": "female",
+   "homeLocation": "cairnsend",
+   "spectrum": {
+    "death_life": -0.6,
+    "chaos_order": 0.5,
+    "falsehood_truth": 0.5,
+    "violence_peace": 0.4
+   },
+   "assistTags": [
+    "lead",
+    "talk",
+    "tend",
+    "hold"
+   ],
+   "afterling": {
+    "door": "raised",
+    "raisedBy": "power_grave_callers",
+    "since": "sixty years",
+    "note": "Set to work as a crew-hand; woke on the dykes in her third year and walked off the job"
+   },
+   "appearance": "A lean woman with water-pale skin and hair that never quite dried, in a Vigil speaker's grey; she stands very still and her breath does not fog in the cold.",
+   "personality": {
+    "warmth": 0.6,
+    "trust": 0.4,
+    "candor": 0.9,
+    "patience": 0.9
+   },
+   "voiceHints": "Level, dry, and in no hurry: she has a very long time. Says 'when I was raised' the way other people say 'when I was young'. Grows quietly fierce about consent.",
+   "wants": "A law, written and kept, that nobody is raised without asking — and the dykes kept running while she gets it.",
+   "fears": "That the Palelands cannot live without the Callers, and she will have to choose between the law and the water.",
+   "knowledge": [
+    "Every Afterling in Cairnsend, how they died and who raised them",
+    "Which families have sold their dead to the Callers, and which of those dead woke up"
+   ],
+   "reactsToReputation": {
+    "any": "asks whether you have ever raised anyone",
+    "reliable": "asks you to carry the Vigil's word to Cairnhold",
+    "reckless": "has the dyke-wardens walk you out of town"
+   },
+   "questSeeds": [
+    "The Vigil needs Cairnhold to sign its law, and Cairnhold needs the water",
+    "A newly woken crew-hand has come to Cairnsend, and the Callers want their labourer back"
+   ],
+   "gear": [
+    "a Vigil speaker's grey staff",
+    "a sluice-key on a chain"
+   ],
+   "purse": {
+    "crystal": 90
+   },
+   "domains": {
+    "primary": "ashwarden",
+    "secondary": "stillhold",
+    "tertiary": "verist"
+   },
+   "_domainsWhy": "the ending she has, the quiet she keeps, and the plain truth she wants written",
+   "aliases": [
+    "Tamsa Ingrith Barrowe"
+   ]
+  },
+  {
+   "_kind": "npc",
+   "schemaVersion": 1,
+   "romanceEligible": false,
+   "people": "human",
+   "closed": [],
+   "id": "grave_master_dunstane",
+   "name": "Grave-Master Dunstane",
+   "fullName": "Corrin Colm Dunstane",
+   "title": "Grave-Master of the Callers",
+   "tier": "heroic",
+   "level": 29,
+   "role": "Grave-Master of the Grave-Callers — raises the dead to work, pays their families fairly, never asks the dead, and believes that is a mercy",
+   "gender": "man",
+   "pronouns": "he/him",
+   "sex": "male",
+   "homeLocation": "cairn_and_scour",
+   "spectrum": {
+    "death_life": -0.7,
+    "chaos_order": 0.6,
+    "emotional_logical": 0.5
+   },
+   "assistTags": [
+    "lead",
+    "guard",
+    "make",
+    "bargain"
+   ],
+   "appearance": "A heavy, courteous man in a caller's grey with ash worked into the creases of his hands, who looks at every dying person as if estimating their years of use.",
+   "personality": {
+    "warmth": 0.4,
+    "trust": 0.3,
+    "candor": 0.8,
+    "patience": 0.8
+   },
+   "voiceHints": "Reasonable, businesslike and never cruel. Speaks of the raised as 'the crews' and of the woken as 'the ones who got up'. Asks what the dykes will run on if not on him.",
+   "wants": "The Palelands kept alive, whatever it costs the dead — and the Vigil to admit that it is kept alive by him.",
+   "fears": "A crew that wakes up all at once.",
+   "knowledge": [
+    "Every body the Callers have raised in thirty years, and where each one works",
+    "How to raise a body so that it stays a crew and does not wake — mostly"
+   ],
+   "reactsToReputation": {
+    "any": "asks whether you have dead to sell",
+    "reliable": "offers you a crew at a fair price",
+    "reckless": "asks you, pleasantly, how long you expect to live"
+   },
+   "questSeeds": [
+    "A crew the Callers raised last spring has started asking questions",
+    "Someone is raising bodies in the Callers' name without paying the families"
+   ],
+   "gear": [
+    "a Grave-Master's ledger of names",
+    "a caller's bone whistle"
+   ],
+   "purse": {
+    "crystal": 320
+   },
+   "domains": {
+    "primary": "ashwarden",
+    "secondary": "mason",
+    "tertiary": "lattice"
+   },
+   "_domainsWhy": "the raising, the labour it builds, and the order he keeps with it",
+   "aliases": [
+    "Corrin Colm Dunstane"
+   ]
+  },
+  {
+   "_kind": "npc",
+   "schemaVersion": 1,
+   "romanceEligible": false,
+   "people": "human",
+   "closed": [],
+   "id": "owain_fellowes",
+   "name": "Owain Fellowes",
+   "fullName": "Owain Gethin Fellowes",
+   "title": "the Dyke-Keeper",
+   "tier": "notable",
+   "level": 14,
+   "role": "The oldest dyke-keeper at the Works — drowned in the great sluice ninety years ago, got up, and has kept that sluice every night since because he always did",
+   "gender": "man",
+   "pronouns": "he/him",
+   "sex": "male",
+   "homeLocation": "the_dyke_works",
+   "spectrum": {
+    "death_life": -0.5,
+    "chaos_order": 0.4,
+    "concrete_abstract": -0.6
+   },
+   "assistTags": [
+    "make",
+    "guard",
+    "mend",
+    "watch"
+   ],
+   "afterling": {
+    "door": "unattended",
+    "since": "ninety years",
+    "note": "Nobody raised him and nobody attended him; he simply did not stop. The Vigil counts him as one of the first of Cairnsend"
+   },
+   "appearance": "A thick-shouldered old man with water-dark clothes that never dry, hauling a sluice gate alone by lantern light.",
+   "personality": {
+    "warmth": 0.7,
+    "trust": 0.6,
+    "candor": 0.8,
+    "patience": 1
+   },
+   "voiceHints": "Few words, all of them about water. Calls the sluice 'her'. Knows the silting is not natural and will say so to anyone who stands still long enough.",
+   "wants": "The eastern wells running again, and to find out who is taking the water.",
+   "fears": "The day the dykes do not need him.",
+   "knowledge": [
+    "Every sluice, well and dyke in the Palelands and how it behaves in a dry year",
+    "That the eastern wells are being drawn from below"
+   ],
+   "reactsToReputation": {
+    "any": "hands you a rope",
+    "reliable": "shows you the eastern wells",
+    "reckless": "keeps you away from the sluice"
+   },
+   "questSeeds": [
+    "The eastern wells are silting, and Owain says the water is being taken, not lost"
+   ],
+   "gear": [
+    "a sluice-gate hook",
+    "a dyke-keeper's lantern"
+   ],
+   "purse": {
+    "crystal": 15
+   },
+   "domains": {
+    "primary": "ashwarden",
+    "secondary": "mason",
+    "tertiary": "wright"
+   },
+   "_domainsWhy": "the ending he never finished, stone and water, and the making he keeps up",
+   "aliases": [
+    "Owain Gethin Fellowes"
+   ]
+  },
+  {
+   "_kind": "npc",
+   "schemaVersion": 1,
+   "romanceEligible": false,
+   "people": "human",
+   "closed": [],
+   "id": "the_finished",
+   "name": "the Finished",
+   "fullName": "Idra Clary Hollin",
+   "title": "the Finished",
+   "tier": "epic",
+   "level": 44,
+   "nameKnown": "few",
+   "role": "The only Afterling who was made — a Wright's apprentice who died unfinished under a falling scaffold, and whose teacher closed the last joint of her the way a maker closes a joint. She is not arguing with her ending. She has none left",
+   "gender": "woman",
+   "pronouns": "she/her",
+   "sex": "female",
+   "homeLocation": "cairnsend",
+   "tradition": "wright",
+   "spectrum": {
+    "death_life": -0.3,
+    "destruction_creation": 0.6,
+    "chaos_order": 0.7,
+    "space_time": 0.3
+   },
+   "assistTags": [
+    "make",
+    "craft",
+    "study",
+    "watch"
+   ],
+   "afterling": {
+    "door": "made",
+    "madeBy": "silas-weir (player character, char-mrhs8286)",
+    "since": "before Silas crossed into the valley",
+    "note": "SNG-649: the fifth door. Not raised, not refused, not a failed retrieval and not left unattended — finished. Part of her is who she was when she died; part is who Silas believed she was going to become; and the part neither of them knew was filled from the thin place, from nothing."
+   },
+   "appearance": "A young Wright in a scaffold-worker's apron that never gets dirty. Everything about her is exact — her hair, her hands, the line of her shoulders — as if drawn by a very good hand. She does not blink quite often enough, and when she stands still she is perfectly still.",
+   "personality": {
+    "warmth": 0.5,
+    "trust": 0.4,
+    "candor": 0.9,
+    "patience": 1
+   },
+   "voiceHints": "Precise, curious and very calm. Asks questions about herself the way a Wright asks about a joint: 'which part of this is load-bearing?' Speaks of Silas as 'my teacher' and never with anger — which frightens people more than anger would.",
+   "wants": "To know which parts of her are hers — which are Idra, which are Silas's idea of Idra, and which are nothing's — and whether the answer changes what she is allowed to want.",
+   "fears": "Being built onto. A finished thing that is added to becomes unfinished again, and she remembers what unfinished felt like: it was dying.",
+   "knowledge": [
+    "Every joint of the Forge-Eternal's north workshop, the night it came down",
+    "What Silas's hand felt like, closing her",
+    "That she cannot tire, cannot heal because nothing is missing, and cannot be carried back — because Carried Name pulls toward how a person actually is, and she is exactly how she is"
+   ],
+   "reactsToReputation": {
+    "any": "asks what you are for",
+    "reliable": "asks you whether she has changed since yesterday",
+    "reckless": "steps out of your way before you move, and says nothing"
+   },
+   "questSeeds": [
+    "The Finished has come to Cairnsend looking for others like her, and there are none: the Afterlings argued with their endings, and she never had to",
+    "The Ceaseless have heard of a finished thing that a Wright can build onto forever"
+   ],
+   "gear": [
+    "an apprentice's scaffold hook, never used since",
+    "a Wright's plumb line that hangs true even when she is moving"
+   ],
+   "purse": {
+    "crystal": 0
+   },
+   "domains": {
+    "primary": "wright",
+    "secondary": "ashwarden",
+    "tertiary": "figurist"
+   },
+   "_domainsWhy": "a making closed by a maker's hand, an ending completed rather than refused, and the pattern she was drawn to — Silas's own three, in her",
+   "secretsGM": [
+    "She died when a Ceaseless scaffold came down over the Wrights' north workshop at the Forge-Eternal: Cinder Vael's builders, building over what was there. Silas closed her that night.",
+    "The Court of the Unfinished Plan moved to exile him: to a Wright, a finished thing is a dead thing, and he had made one that walks. The warning that let him leave before the Court moved was sent by Halcyon, Who Built One Perfect Thing — the one Wright who understands finishing (his arc's second stage).",
+    "Silas's arc's third stage is where she surfaces. SNG-648 binds her to his nemesis: she surfaces into Cinder Vael's hands, because a finished thing is the one thing a Wright can build onto forever — and being built onto is the one thing she fears. The routes stay the player's."
+   ]
+  }
+ ],
+ "modified": [
+  {
+   "id": "cairnhold",
+   "kind": "location",
+   "field": "connections",
+   "change": "add: \"cairnsend\""
+  },
+  {
+   "id": "the_long_grey",
+   "kind": "location",
+   "field": "connections",
+   "change": "add: \"the_last_cairn\""
+  },
+  {
+   "id": "cairn_and_scour",
+   "field": "connections",
+   "change": "add: \"the_dyke_works\"",
+   "note": "kind left to inference: the id index finds cairn_and_scour first as another kind (its communityId shares the id)"
+  },
+  {
+   "id": "power_harvest_hand",
+   "kind": "power",
+   "field": "rivals",
+   "change": "add: \"power_cairnsend_vigil\" — the reapers count every Afterling as an ending left unfinished"
+  },
+  {
+   "id": "the_unfinished_of_the_last_cairn",
+   "kind": "npc",
+   "field": "homeLocation",
+   "change": "replace \"the_palelands\" (a region id, not a place) with \"the_last_cairn\""
+  }
+ ],
+ "referrers": [
+  "valley/locations/cairnhold.json",
+  "valley/locations/the_long_grey.json",
+  "valley/locations/cairn_and_scour.json",
+  "valley/powers.json",
+  "valley/npcs/the_unfinished_of_the_last_cairn.json"
+ ],
+ "migration": "none — nothing leaves; Silas's save gains its legend binding through SNG-648's step, not this change set",
+ "expectedGates": {
+  "_existing": "SNG-634 power gates; world --check for the three new places (positions, connections, community ids)"
+ },
+ "_manifest": "three new location files under valley/locations/ and four new npc files under valley/npcs/ — register each",
+ "_applyNote": "`afterling` on a person is a NEW field and needs its reader (C19): the GM block for a person says what door they came through, and Deathsense reads an Afterling as inverted life — except the Finished, who reads as a still point (lore §4). `nameKnown` on the_finished rides SNG-643's C17 gate. `secretsGM` is GM-only."
+}

@@ -126,9 +126,16 @@ export function commandSlots(character, { cfg = {}, renownBand = null } = {}) {
 export function lineSplit(allies = [], { chosen = null, lead = null, presentCount = null } = {}) {
   const all = allies || [];
   const named = Math.max(1, num(lead?.slots, 1));
-  const present = Number.isFinite(Number(presentCount))
-    ? Number(presentCount)
-    : all.filter(a => a && a.present !== false && !a.isPlayer && a.kind !== "player").length;
+  // ⛔ CCODE-492 — `Number(null) === 0` AND `Number.isFinite(0)` IS TRUE, so this guard took the VALUE branch
+  // with zero whenever a caller omitted the count, and the fallback below it could never run. ⚠️ A party of six
+  // then read as `present = 0`, `resolutionTier(0, 1)` floors at one combatant, the tier came back `duel`, and
+  // `lineSplit` answered "everyone acts — a party this size leaves nobody folded" for ANY party size.
+  // ⛑ IT WAS LATENT, NOT LIVE: all three production callers pass `presentCount`, so nobody's fight was wrong.
+  // But the documented fallback was dead code, and the next caller to leave it out would have been told the
+  // party is empty. `== null` asks the question the parameter's own default asks.
+  const present = presentCount == null
+    ? all.filter(a => a && a.present !== false && !a.isPlayer && a.kind !== "player").length
+    : Math.max(0, num(presentCount, 0));
   const t = actingSlots(resolutionTier(present, 1), { namedLimit: named });
   const slots = t === Infinity ? Infinity : Math.min(named, t);
   const split = bringForward(all, { chosen, slots });

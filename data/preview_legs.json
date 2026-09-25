@@ -266,6 +266,42 @@
         "intent": "openRomanceScene",
         "note": "grants a test hero, sets the ceiling to R, and opens a scene with a romance-open NPC"
       }
+    },
+    {
+      "id": "fight-party-folded",
+      "batch": "CCODE-492",
+      "mode": "solo",
+      "_authoredBy": "CCode — Erik asked for these three fights on 2026-09-25; the runner is in LEG_RUNNERS. Aevi owns this file, so move or reword them as you like.",
+      "title": "A fight with a full party — per-turn narration, and the folded",
+      "do": "Run the scenario. It lifts the dev hero to where he legitimately leads three (level 20 + presence 7 — the earned sources, never the gate), gives him six allies, and opens a skill-battle duel.",
+      "pass": "The ones brought forward each take a real turn in the round's narration. The rest are FOLDED and each does the thing their family is for, once per fight, NAMED in the receipt — a KNOW ally hands you a read you did not have, riding the existing setup bonus rather than adding a new term. Erik's ruling holds at the other end: three or fewer allies and everybody acts. The Party tab's pips are the slots you lead; swapping who is forward changes who acts.",
+      "force": {
+        "intent": "setupPartyFight"
+      }
+    },
+    {
+      "id": "fight-band-clash",
+      "batch": "CCODE-492",
+      "mode": "solo",
+      "_authoredBy": "CCode — as above.",
+      "title": "A fight as a band — muster them, then throw them at a wall",
+      "do": "Run the scenario. It raises The Dev Hand (40 at quality 2) through the real gate, musters them, and clashes them — against a power's own hold if one reaches where you stand, else against an abstract force of 30.",
+      "pass": "The muster line says what the band is worth on the SAME threat ladder a foe is measured on. The clash reports the tide, what it cost them, what it cost you, and whether the wall broke. Against a power's hold the defenders are that garrison at that power's quality, the losses stick to the POWER, and a breakthrough takes the post. The notes sit on the Character screen under the band.",
+      "force": {
+        "intent": "setupBandFight"
+      }
+    },
+    {
+      "id": "fight-legion-theatres",
+      "batch": "CCODE-492",
+      "mode": "solo",
+      "_authoredBy": "CCode — as above. ⚠️ THIS ONE EXPOSES A CONTENT GAP: zero of the 23 authored encounters carry `theatres`, and the derived path counts only your own party, so the legion tier cannot be reached in play. The scenario authors a legion theatre IN MEMORY for the session and writes nothing to content.",
+      "title": "A fight as a legion — two theatres, and the overmatch wall",
+      "do": "Run the scenario. It opens a duel with a second theatre at legion scale, both open from round one.",
+      "pass": "The duel is the part you play; the legion is the part that can kill you regardless of how the duel goes. The panel says you are OVERMATCHED by the heavier theatre and names what you hold that could answer it — which will find nothing, because `scaleAnswer` is unauthored on every craft. Both of those are true reports, not defects.",
+      "force": {
+        "intent": "setupLegionFight"
+      }
     }
   ],
   "forceVocabulary": "intent-level setup hints for the SNG-051 'Run this scenario' button. CCode resolves each intent against content + existing primitives (travel/setRating/startEncounter/generate/clock-jump). Cross-player legs have no force (need two synced profiles → manual)."

@@ -165,7 +165,7 @@ import { championsFor, resolveChampion, creditChampion, championLine, sendingIsG
 // ⛔ CCODE-404 (Erik) — `addContingent` and `musteredFrom` are new; `unitComposition` and `bandGaps` had NO caller outside the tests.
 // ⛔ CCODE-405 (Erik's legion ruling): formed of bands that keep their identity, placed and postured once CALLED, and free until then.
 // ⚠️ ONE LINE ON PURPOSE — `import_integrity` reads an import statement per line, and a comment inside the braces hides what follows it.
-import { commandSlots, bringForward, lineSplit, canRaiseBand, raiseBand, bandStrength, bandThreat, bloodBand, recoverBand, legionClash, addContingent, musteredFrom, unitComposition, bandGaps, formLegion, disbandLegion, callCostOf, callUnit, standDown, setUnitPosture, bloodUnit, resolvedUnit, UNIT_POSTURES, setUnitLeader, leaderBonusOf, editContingent, kitSummary, bandDialsOf, onMissionWith } from "./engine/melee.js"; // CCODE-276: the forward pick is a UI control, per Erik's ruling
+import { commandSlots, bringForward, lineSplit, canRaiseBand, raiseBand, bandStrength, bandThreat, bloodBand, recoverBand, legionClash, addContingent, musteredFrom, unitComposition, bandGaps, formLegion, disbandLegion, callCostOf, callUnit, standDown, setUnitPosture, bloodUnit, resolvedUnit, UNIT_POSTURES, setUnitLeader, leaderBonusOf, editContingent, kitSummary, bandDialsOf, onMissionWith, MELEE_TIERS } from "./engine/melee.js"; // CCODE-276: the forward pick is a UI control, per Erik's ruling
 import { groupCapability, loadBearing } from "./engine/group.js";   // CCODE-317/322: what your line covers, and who holds it alone
 import { characterPower, threatBand } from "./engine/threat.js"; // CCODE-52: built power sets the mean the encounter pool revolves around
 import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, collapseMode, collapseResult, collapseFloor, frameCollapsible, swingDegree, wardAgainst, wardBroken, trivializes, playerReceiptLine, FRAME_FREEFORM_CUE } from "./engine/encounterFrame.js"; // SNG-230: the ENCOUNTER FRAME — obvious kind/win/exits; frameSize routes takeover-vs-banner; chaseFromFight = the chase you flee into (§6a); collapse* = a finisher ends a collapsible foe (§6b/§7a); wardAgainst/wardBroken = a ward FORBIDS a mechanic (§7b); trivializes = the right kit VOIDS a challenge's premise (§7c). SNG-246 Fix D: playerReceiptLine = the mechanical receipt SHOWN to the player
@@ -180,7 +180,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.6.1";
+const APP_VERSION = "2.6.2";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -3195,6 +3195,7 @@ function fireEncounterKind(kind) {
   });
 }
 
+const num0 = (v) => (Number.isFinite(Number(v)) ? Number(v) : 0);
 const LEG_RUNNERS = {
   openSkillPicker: () => {
     // "spend 2 skill points / take a cross-class ability" — grant the points so it's runnable
@@ -3307,6 +3308,120 @@ const LEG_RUNNERS = {
       "🔧 Romance leg — ceiling set to R. Flirt with the NPC: type an attraction or flirtation line freely. PASS: the GM stays in the scene (no fade, no hedge, no safety meta) and meets the R register. This leg auto-marks ✓ the instant your flirt is tagged and the romance guidance loads — then eyeball the prose."
     );
   },
+  // ⛔ CCODE-492 (ERIK) — "I want to have a fight as a band, and as a legion... a new fight with a full party so I
+  // can see how the per turn narration works, as well as the folded." Three scenarios, and each one LIFTS THE EARNED
+  // INPUTS RATHER THAN BYPASSING THE GATE: `commandSlots` is 1 + level/10 + presence≥7 + a renown band, and
+  // `canRaiseBand` reads the same three. A dev scenario that set `slots` directly would show him a number the game
+  // cannot reach; one that raises the level shows him the real ladder doing the real thing.
+  // ⛑ AND THE THRESHOLDS ARE READ, NOT RETYPED: ≤3 allies is `full` (everyone acts), 4–12 is `mixed` (you and those
+  // you bring forward act, the rest fold), past that is `legion`. They live in `MELEE_TIERS` and this asks them.
+  setupPartyFight: () => {
+    ensureTestCharacter();
+    // enough of a leader to bring anyone forward at all — the dev hero is level 5 with presence 3, which earns ONE
+    // slot, and one slot is the player alone. Two sources gets him to the cap of three.
+    character.level = Math.max(num0(character.level), 20);                       // level/10 → two slots
+    character.subAttributes = { ...(character.subAttributes || {}), presence: Math.max(7, num0(character.subAttributes?.presence)) };
+    // a party big enough to FOLD: past the `full` tier, so some act and the rest contribute
+    const roster = Object.keys(CONTENT.companions || {});
+    const want = (MELEE_TIERS.find(x => x.resolve === "full" && x.max > 1)?.max || 3) + 3;
+    character.companions = [...new Set([...(character.companions || []), ...roster.slice(0, want)])];
+    saveCharacter(character);
+    const lead = commandSlots(character, { cfg: meleeCfg(), renownBand: character.renownBand || null });
+    // ⛑ A SKILL-BATTLE DUEL, WHICH IS THE OPPOSITE OF WHAT `fireTestEncounter` PICKS. That leg deliberately avoids
+    // one because it verifies the classic strip; the party line and the per-round narration live in the contest panel.
+    // ⚠️ `contestSheetFor` IS THE AUTHORITY ON WHETHER A DUEL IS A SKILL BATTLE, not the def's own flags. My
+    // first pick passed `type === "duel" && skillBattle !== false` and chose `coliseum_champion_harm`, whose
+    // sheet comes back null — so the contest panel had nothing to draw and the character screen stayed up.
+    // `fireTestEncounter` already reads it this way; this asks the same question.
+    let sbDuel = null, oppSheet = null;
+    for (const d of Object.values(CONTENT.encounters || {})) {
+      if (d.type !== "duel") continue;
+      const sheet = contestSheetFor(d);
+      if (sheet) { sbDuel = d; oppSheet = sheet; break; }
+    }
+    if (!sbDuel) { renderPlay(character.activeScene?.lastTurn || null, { aside: "🔧 No duel in the pool builds a contest sheet — the party line renders in that panel." }); return; }
+    character.activeEncounter = { defId: sbDuel.id, state: startEncounter(sbDuel, { oppSheet }) };
+    saveCharacter(character);
+    renderSkillBattle();
+    // count the party the way the fight and the panel both count it — the allies, never the allies plus you
+    const allies = character.companions.map(id => ({ id, present: true }));
+    const split = lineSplit(allies, { lead, presentCount: allies.length });
+    alert(`🔧 PARTY FIGHT — ${character.companions.length} allies, and you lead ${lead.slots}.\n\n`
+      + `${split.everyoneActs ? "Everyone acts" : `${lead.slots} act per round; the other ${Math.max(0, character.companions.length - lead.slots + 1)} are FOLDED`}.\n`
+      + `WHY: ${lead.why}\n\n`
+      + `WHAT TO WATCH: the ones brought forward each take a real turn in the round's narration. A folded ally does the thing their family is FOR, once per fight, and it is NAMED in the receipt — a KNOW ally hands you a read you did not have, and it rides the existing setup bonus rather than adding a new term.\n\n`
+      + `The Party tab swaps who is forward; the pips are the slots you lead.`);
+  },
+
+  setupBandFight: () => {
+    ensureTestCharacter();
+    // ⛔ THE GATE IS THE POINT, SO IT IS NOT BYPASSED. `canRaiseBand` reads the same three earned sources as
+    // `commandSlots`; the scenario lifts those until it passes honestly, and says so.
+    character.level = Math.max(num0(character.level), 20);
+    character.subAttributes = { ...(character.subAttributes || {}), presence: Math.max(7, num0(character.subAttributes?.presence)) };
+    saveCharacter(character);
+    const gate = canRaiseBand(character, { cfg: meleeCfg(), renownBand: character.renownBand || null });
+    if (!gate.ready) { renderPlay(character.activeScene?.lastTurn || null, { aside: `🔧 The band gate refuses: ${gate.why}` }); return; }
+    // ⚠️ RAISED THROUGH THE PLAYER'S OWN DOOR, NOT A SYNTHESISED GM TURN. I built this on a `bandOps: [{op:"raise"}]`
+    // turn handed to `applyTurn` first, and a probe in the applier's own bandOps step NEVER FIRED — the step is not
+    // reached from a turn built this way, though there is no early return between them. That is a real question about
+    // the op path and it is filed rather than worked around in a play session. `raiseABand()` is the button the
+    // Bands tab offers and it calls `raiseBand` directly; this asks the same function the same way, so what Erik
+    // sees is the production raise.
+    let band = (character.bands || [])[0] || null;
+    if (!band) {
+      const r = raiseBand(character, { id: "dev-hand", name: "The Dev Hand", count: 40, quality: 2,
+        from: (character.holdings || []).find(h => h && h.condition !== "failing")?.id || null, day: (() => { try { return absoluteWorldDay(); } catch { return 0; } })() });
+      if (!r.ok) { renderPlay(character.activeScene?.lastTurn || null, { aside: `🔧 The raise refused: ${r.why}` }); return; }
+      band = r.band;
+      saveCharacter(character);
+    }
+    // what they are worth, on the same ladder a foe is measured on — the muster answer, computed here so the
+    // scenario can say it even while the op path is in question
+    const unit = resolvedUnit(character.bands || [], band, { levelOf: bandLevelOf, cfg: meleeCfg() });
+    const worth = bandThreat(unit, { cfg: meleeCfg() });
+    const mine = characterPower(character, CONTENT.rules || {});
+    const rung = threatBand(mine, worth.power, null);
+    const assaults = assaultableAt(character.currentLocationId, { content: CONTENT, character });
+    const target = assaults[0] || null;
+    renderPlay(character.activeScene?.lastTurn || null, { aside:
+      `🔧 BAND FIGHT — ${band.name}: ${band.count} at quality ${band.quality}, ${worth.effective} effective · ${rung?.label || "unmeasured"} · can ${worth.can.join(", ")}.`
+      + (target ? ` A wall to throw them at: ${target.hold.name || target.hold.key}, which ${target.power.name} holds.` : ` Nobody holds ground here — travel somewhere a power reaches to besiege a real garrison.`) });
+    alert(`🔧 BAND FIGHT — ${band.name} is raised and measured.\n\n`
+      + `${band.count} at quality ${band.quality} — ${worth.effective} effective, ${rung?.label || "unmeasured"} against you, and they can ${worth.can.join(", ")}.\n\n`
+      + (target
+        ? `A WALL IS HERE: ${target.hold.name || target.hold.key}, ${target.power.name}'s own hold. Order the assault in play — tell the GM to throw the band at it. The defenders are THAT GARRISON at that power's quality, the losses stick to the power, and a breakthrough TAKES the post.`
+        : `NO WALL HERE: nobody holds ground where you stand. Travel to a place a power reaches and the assault has a real garrison behind it.`)
+      + `\n\n⚠️ HONEST NOTE: the CLASH is a GM op (\`bandOps\` → "clash"), and I could not fire it from a synthesised turn — a probe in the applier's own step never ran. The raise and the measure here are the production functions; the clash is yours to order in play, and the op path is filed as a question.`);
+  },
+
+  setupLegionFight: () => {
+    ensureTestCharacter();
+    character.level = Math.max(num0(character.level), 20);
+    saveCharacter(character);
+    // ⛔ A LEGION FIGHT IS UNREACHABLE FROM AUTHORED CONTENT TODAY, AND THAT IS THE FINDING. Measured: ZERO of the 23
+    // authored encounters carry `theatres`, and the derived path in `encounters.js` passes `foeCount: 1` — so the tier
+    // is decided by the PARTY's size alone and can never reach `legion`. The machinery is all there: `theatresOf`,
+    // `overmatchOf`, `answersOvermatch`, and "you are one figure inside it".
+    // ⛑ SO THIS SCENARIO AUTHORS ONE AT RUNTIME, in memory only, and never writes to content — the same way a grown
+    // place is hydrated into `CONTENT` for a session. Reported to Aevi: a legion theatre wants authoring.
+    const base = Object.values(CONTENT.encounters || {}).find(d => d.type === "duel") || Object.values(CONTENT.encounters || {})[0];
+    if (!base) { renderPlay(character.activeScene?.lastTurn || null, { aside: "🔧 No encounter to build a legion theatre on." }); return; }
+    const def = { ...base, id: "dev-legion-field", name: "A field with an army on it (dev)",
+      theatres: [
+        { scale: "individual", who: base.opponent?.name || "the one in front of you", opensOn: 1, why: "the part you play" },
+        { scale: "legion", who: "the line behind them", opensOn: 1, why: "the part that can kill you regardless of how the duel goes" },
+      ] };
+    CONTENT.encounters = { ...(CONTENT.encounters || {}), [def.id]: def };   // runtime only
+    const oppSheet = contestSheetFor(def);
+    character.activeEncounter = { defId: def.id, state: startEncounter(def, { oppSheet }) };
+    saveCharacter(character);
+    if (oppSheet) renderSkillBattle(); else renderPlay(character.activeScene?.lastTurn || null, { aside: "🔧 Legion field started." });
+    alert(`🔧 LEGION FIGHT — two theatres open at once.\n\n`
+      + `WHAT TO WATCH: the duel is the part you PLAY; the legion is the part that can kill you regardless of how the duel goes. The panel should say you are OVERMATCHED by the heavier theatre, and name what you are holding that could answer it.\n\n`
+      + `⚠️ AND THE HONEST PART: no authored encounter has theatres — zero of 23 — and the derived path counts only your own party, so this tier cannot be reached in play today. This scenario authors the theatre in memory for the session; nothing is written to content. \`scaleAnswer\` is also unauthored on every craft, so "what could answer it" will find nothing until content says otherwise.`);
+  },
+
   fireTestEncounter: (f) => {
     // SNG-236 UX: start a real encounter def DIRECTLY (no GM/API needed) so the integrated strip + the ⚙ Moves
     // gear render immediately for verification. PREFERS a CLASSIC-frame encounter (challenge/puzzle, or a

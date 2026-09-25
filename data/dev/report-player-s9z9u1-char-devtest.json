@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "dev_report",
-  "at": "2026-09-25T22:44:57.575Z",
+  "at": "2026-09-25T22:46:59.948Z",
   "build": "2.7.6",
   "field": null,
   "character": {
@@ -9,9 +9,9 @@
     "name": "Test Hero (dev)",
     "playerKey": "player-s9z9u1",
     "level": 20,
-    "rev": 289,
+    "rev": 291,
     "day": 2,
-    "turns": 36,
+    "turns": 37,
     "countingSince": "2026-09-14T17:51:06.584Z",
     "countsCoverWholeLife": false
   },
@@ -23,23 +23,24 @@
   },
   "ops": {
     "emitted": {
-      "sceneSummary": 36,
-      "choices": 36,
-      "scene": 36,
+      "sceneSummary": 37,
+      "choices": 37,
+      "scene": 37,
       "stateOps": 1,
-      "characterDeltas": 23,
+      "characterDeltas": 24,
       "timeOps": 15,
-      "sceneEnded": 21,
-      "encounterOps": 6,
-      "npcUpdates": 21,
+      "sceneEnded": 22,
+      "encounterOps": 7,
+      "npcUpdates": 22,
       "generateRequest": 1,
       "offer": 5,
       "placeUpdates": 1,
       "moveTo": 1,
-      "imagePrompt": 15,
-      "gambitApt": 18,
-      "codexUpdates": 5,
-      "deeds": 3
+      "imagePrompt": 16,
+      "gambitApt": 19,
+      "codexUpdates": 6,
+      "deeds": 4,
+      "ledgerEvents": 1
     },
     "outcomes": {
       "offer": {
@@ -67,7 +68,6 @@
       "intentsHeard",
       "itemUpdates",
       "jobOps",
-      "ledgerEvents",
       "markDefiningMoment",
       "markTeacher",
       "newAbility",
@@ -84,10 +84,10 @@
       "unlockPrecursor",
       "unlockSubstrate"
     ],
-    "neverCount": 33,
+    "neverCount": 32,
     "knownCount": 48,
     "unknown": {
-      "sceneSummary": 10
+      "sceneSummary": 11
     },
     "inProse": {},
     "emptyClaims": 0
@@ -123,8 +123,8 @@
     }
   },
   "fireTests": {
-    "at": "2026-09-25T19:04:54.660Z",
-    "build": "2.6.6",
+    "at": "2026-09-25T22:44:59.406Z",
+    "build": "2.7.6",
     "results": [
       {
         "op": "jobOps",

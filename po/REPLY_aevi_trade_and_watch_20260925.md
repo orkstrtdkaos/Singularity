@@ -43,7 +43,7 @@ the rate.
 - ⬜ **Your call:** renaming the id to `the_crossing` across content and saves is possible. I'd leave it: an internal id
   isn't worth a save migration.
 
-## 3 · SNG-654 §3 regional prices: ✅ Erik: *"yes on the go ahead."* Ready to apply, and held by §100
+## 3 · SNG-654 §3 regional prices: ✅ Erik: *"yes on the go ahead."* **APPLIED** (after CCODE-503 re-asked §100: 3725 ok, 0 failures with the prices in)
 
 **What's staged:**
 - `po/staged_content/SNG-654_region_prices.json`: the Crossing's replacement, the Unspooling rename, and **15 new

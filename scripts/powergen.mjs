@@ -27,6 +27,10 @@
 // and a `kind` so a mint can ask for a name of the right shape. Nothing here composes prose.
 
 import { walkingDays } from "../engine/worldmap.js";
+// ⛑ CCODE-490 (AEVI): "give each proposed leader a whole name. SNG-639 is live, so a generated leader should
+// come out with given, middle and family names from their own people's pools." The namer is `names.js` and it
+// stays there — naming is authorship and this module does not compose a syllable of it.
+import { mintedName } from "../engine/names.js";
 
 const num = (v, d = 0) => (Number.isFinite(Number(v)) ? Number(v) : d);
 
@@ -50,6 +54,15 @@ function pickWeighted(weights, roll) {
 
 const tagsOf = (loc) => (Array.isArray(loc?.tags) ? loc.tags : []).map(t => String(t).toLowerCase());
 const placesIn = (regionId, locations) => Object.values(locations || {}).filter(l => l && l.regionId === regionId);
+
+/** ⛑ CCODE-490 (AEVI, ruling 1) — HOW COMMON A TAG IS IN THE WORLD, for the specificity tie-break: "the match on
+ *  more tags takes the seat, and a tie falls to the kind whose tags are RARER in the corpus." Counted from the
+ *  places themselves, so it moves when she tags more ground and there is no table of mine to go stale. */
+function tagFrequency(locations) {
+  const freq = new Map();
+  for (const l of Object.values(locations || {})) for (const tg of tagsOf(l)) freq.set(tg, (freq.get(tg) || 0) + 1);
+  return freq;
+}
 
 /** ⛔ HOW MANY POWERS A REGION SUPPORTS — `density`, and nothing else. `base + perDangerStep × danger`, capped at
  *  `maxPerRegion`, where the danger is the worst in the region: a quiet farming shelf carries one and a lawless
@@ -122,6 +135,34 @@ function neighbourRefusals(kind, temper, loc, { content, standing }) {
   return out;
 }
 
+/** ⛑ CCODE-490 — WHOSE PEOPLE A GENERATED LEADER IS, which decides which name pools they draw from. The
+ *  origin whose `homeRegion` is this region: a power rising in the Quickwood is led by a rootkin, and its leader
+ *  should sound like one. ⚠️ `content.origins` is an ARRAY, so this finds by `.id` rather than indexing it. */
+function peopleOf(regionId, content) {
+  const origins = content?.origins;
+  const list = Array.isArray(origins) ? origins : Object.values(origins || {});
+  const own = list.find(o => o?.homeRegion === regionId) || list.find(o => o?.startingRegion === regionId);
+  return own?.id || null;
+}
+
+/** ⛔ AEVI: "give each proposed leader a whole name — given, middle and family from their own people's pools."
+ *  ⛑ THE NAMER IS `names.js` AND THE ORIGIN KIND IS `vacancy`, on purpose: the three authored kinds are
+ *  `casualty_survivor` (named for what it cost), `faction_leaderless` (named for the office) and `vacancy`
+ *  (whatever people started calling them). A power that did not exist yesterday has a FOUNDER, not a successor
+ *  and not a survivor, so `vacancy` is the honest one — and its tone is `plain`, which is how a founder's byname
+ *  should read. ⚠️ `taken` accumulates across the whole run, so no two proposals anywhere share a given name
+ *  while a fresh one exists. Returns null when the pools are not loaded, and the report says so rather than
+ *  inventing a name. */
+function leaderNameFor(regionId, { content, taken, rng }) {
+  const pools = content?.rules?.mintedNames;
+  if (!pools) return null;
+  const people = peopleOf(regionId, content);
+  const m = mintedName({ tradition: people, originKind: "vacancy", pools, rng, taken });
+  if (!m) return null;
+  return { name: m.name, fullName: m.fullName || m.name, given: m.given, middle: m.middle || null,
+    surname: m.surname || null, byname: m.byname || null, people };
+}
+
 /** ⛔ THE DRY RUN, PER REGION. Proposes what would come to hold ground here, each with the rule that placed it.
  *  ⚠️ EXISTING POWERS COUNT. A region Aevi has authored into is not empty, and both `density` and `perRegionMax`
  *  are about the region rather than about this pass — a generator that ignored what is already there would
@@ -148,6 +189,34 @@ export function proposePowers(regionId, { content = null, standing = null, seed 
   // A power seats where people are, and the region record is the last resort rather than the first match.
   const rank = (l) => (l.tier === "settlement" ? 0 : l.tier === "site" ? 1 : 2);
   const seats = [...here].sort((a, b) => rank(a) - rank(b) || String(a.id).localeCompare(String(b.id)));
+  const freq = tagFrequency(locs);
+  const takenNames = [...Object.values(content?.npcs || {}).map(n => n?.name).filter(Boolean)];
+
+  // ⛔ CCODE-490 (AEVI, ruling 1) — SPECIFICITY WINS, so a key order in a JSON file no longer decides who takes a
+  // contested seat. "The match on more tags takes the seat, and a tie falls to the kind whose tags are rarer in
+  // the corpus." ⚠️ THE DEFECT IT REPLACES: `the_unlanded` is tagged both `cult` and `dangerous`; `outlaw_band` is
+  // declared before `order` in the rules file, so a gang took the holy site and the Open Reach got no order at
+  // all — the only one of eight pole regions where the cult locus failed to become one. Nobody decided that.
+  // ⛑ RARITY IS COUNTED FROM THE PLACES, not from a table of mine: `sacred` on eleven places beats `dangerous` on
+  // forty because the rarer tag is the more particular claim about the ground.
+  const bySpecificity = (a, b) => {
+    if (b.matched.length !== a.matched.length) return b.matched.length - a.matched.length;
+    const rarity = (x) => (x.matched.length ? x.matched.reduce((n, tg) => n + (freq.get(tg) || 0), 0) / x.matched.length : Infinity);
+    return rarity(a) - rarity(b);
+  };
+
+  // ⛔ CCODE-490 (AEVI, ruling 6) — A GOVERNMENT LIVES IN THE REGION'S CITY, NOT ON THE EXTREMISTS' HOLY GROUND.
+  // Her finding from my own run: three sovereignties were seated at the region's `cult` locus — the Leaden Deep,
+  // the Bloodless Hold, the Flensing. `seatPrefersTags` is the key she withheld until this reader existed.
+  // ⛑ A PREFERENCE, NOT A REQUIREMENT: a kind that prefers a tag gets FIRST REFUSAL on the places carrying it,
+  // and falls through to the ordinary order when the region has none — which is what "falling back" has to mean
+  // for a region with no city.
+  const prefersFirst = [];
+  for (const [kind, k] of Object.entries(rules.kinds)) {
+    const want = (k.seatPrefersTags || []).map(x => String(x).toLowerCase());
+    if (!want.length) continue;
+    for (const loc of seats) if (tagsOf(loc).some(tg => want.includes(tg))) prefersFirst.push({ kind, loc, want });
+  }
 
   // ⬜ ONE SEAT, ONE POWER — A RULE THAT DOES NOT EXIST YET, AND THE READER IS HERE FOR WHEN IT DOES.
   // ⚠️ MEASURED ON AEVI'S OWN CORPUS: all 29 authored powers have 29 DISTINCT seats, not one shared. This
@@ -159,10 +228,20 @@ export function proposePowers(regionId, { content = null, standing = null, seed 
   const exclusiveSeats = rules.seatsAreExclusive === true;
   const seatTaken = new Set(already.filter(p => p.seat).map(p => p.seat));
 
-  for (const loc of seats) {
+  // pass one: the kinds with a seat preference, at the places they prefer
+  const order = [
+    ...prefersFirst.map(p => ({ loc: p.loc, only: p.kind, why: `seatPrefersTags ${p.want.join("/")} at ${p.loc.id}` })),
+    ...seats.map(l => ({ loc: l, only: null, why: null })),
+  ];
+
+  for (const step of order) {
+    const loc = step.loc;
     if (room <= 0) break;
-    for (const cand of kindsAt(loc, { content })) {
+    const cands = kindsAt(loc, { content }).sort(bySpecificity);
+    for (const cand of (step.only ? cands.filter(c => c.kind === step.only) : cands)) {
       if (room <= 0) break;
+      if (proposals.some(p => p.kind === cand.kind && p.seat === loc.id)) continue;   // pass one already placed it
+      if (step.why) cand.why = `${cand.why} · ${step.why}`;
       if (exclusiveSeats && seatTaken.has(loc.id)) {
         refused.push({ at: loc.id, kind: cand.kind, why: "seatsAreExclusive — a power already sits here" });
         break;
@@ -207,7 +286,9 @@ export function proposePowers(regionId, { content = null, standing = null, seed 
       }
 
       seatTaken.add(loc.id);
+      const leader = leaderNameFor(regionId, { content, taken: [...takenNames, ...proposals.map(p => p.leader?.name).filter(Boolean)], rng });
       proposals.push({
+        leader,
         kind: cand.kind, temper: t.temper, seat: loc.id, seatTier: loc.tier || null,
         scale: k.scale || null, heads, quality, form,
         leaderTier: k.leaderTier || null, holdKind: k.holdKind || null,

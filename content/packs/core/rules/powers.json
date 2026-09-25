@@ -14,8 +14,9 @@
    ],
    "tempers": {
     "cruel": 0.35,
-    "hard": 0.5,
-    "fair": 0.15
+    "hard": 0.4,
+    "fair": 0.15,
+    "kind": 0.1
    },
    "verbs": [
     "toll",
@@ -85,9 +86,10 @@
     2
    ],
    "tempers": {
-    "hard": 0.6,
+    "hard": 0.45,
     "cruel": 0.2,
-    "fair": 0.2
+    "fair": 0.2,
+    "kind": 0.15
    },
    "verbs": [
     "steal",
@@ -202,7 +204,7 @@
   "sovereignty": {
    "scale": "legion",
    "heads": [
-    20,
+    80,
     400
    ],
    "quality": [
@@ -229,12 +231,16 @@
     "order",
     "moot",
     "contest",
-    "specification",
-    "none"
+    "specification"
    ],
    "liftsDanger": false,
    "leaderTier": "heroic",
-   "holdKind": "post"
+   "holdKind": "post",
+   "perRegionMax": 1,
+   "seatPrefersTags": [
+    "city",
+    "home"
+   ]
   }
  },
  "tempers": {
@@ -333,5 +339,6 @@
    "complicated": "fair"
   }
  },
- "_applied": "CCODE-481 — applied from po/staged_content/SNG-634_powers_rules.json on 2026-09-23, unaltered. The dials are Aevi's; the readers that use them are `engine/powers.js` (C4's verb pass, `growth`) and `dangerLiftAt` (which reads the RECORD's own `dangerLift`, with `tempers` as the generator's default)."
+ "_applied": "CCODE-481 — applied from po/staged_content/SNG-634_powers_rules.json on 2026-09-23, unaltered. The dials are Aevi's; the readers that use them are `engine/powers.js` (C4's verb pass, `growth`) and `dangerLiftAt` (which reads the RECORD's own `dangerLift`, with `tempers` as the generator's default).",
+ "seatsAreExclusive": true
 }

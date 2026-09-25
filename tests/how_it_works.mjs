@@ -26435,7 +26435,7 @@ console.log("\n── §359 · the power generator names the rule behind every c
   const empty = REGIONS.filter(r => !held.has(r));
   const runAll = (content = C359) => empty.map(r => PG.proposePowers(r, { content }));
 
-  check("§359: ⛔ IT WRITES NOTHING, AND THAT IS STRUCTURAL RATHER THAN PROMISED — the module imports no writer at all, and the content it was handed is byte-identical after a run over every empty region. ⛑ Aevi's ask was \"write nothing to content\"; a dry run that mutated the loaded world would corrupt the very corpus she is reviewing against",
+  check("§359: ⛔ IT WRITES NOTHING, AND THAT IS STRUCTURAL RATHER THAN PROMISED — the module imports no writer at all, and the content it was handed is byte-identical after a run over every empty region. ⛑ Aevi's ask was \“write nothing to content\”; a dry run that mutated the loaded world would corrupt the very corpus she is reviewing against",
     (() => {
       const src = rd("scripts/powergen.mjs");
       const before = JSON.stringify({ powers: C359.powers, rules: C359.rules?.powers });
@@ -26489,35 +26489,85 @@ console.log("\n── §359 · the power generator names the rule behind every c
       }));
     })(), `capped kinds: ${Object.entries(rules.kinds).filter(([, k]) => k.perRegionMax != null).map(([k2, k]) => `${k2}\u2264${k.perRegionMax}`).join(" ")}`);
 
-  check("§359: ⛔ …AND AN OUTLAW CROWN IS NOT FOUNDED, IT ACCRETES. `formsWhenBandsInRegion` refuses one where the bands are not, and the refusal SAYS SO. ⛑ Proved both ways: no crown is proposed anywhere in the empty regions today, and a region stacked with enough bands produces one",
+  check("§359: ⛔ …AND AN OUTLAW CROWN IS NOT FOUNDED, IT ACCRETES — `formsWhenBandsInRegion` refuses one where the bands are not, and produces one where they are. ⚠️ THIS ASKED THE WRONG THING AFTER AEVI’S RULINGS: with specificity and exclusive seats the crown is never REACHED as a candidate — a more particular kind takes each seat first — so the rule was passing for the wrong reason and its refusal never got recorded. ⛑ The density dial is raised in the fixture so SEATS are not the variable, and then the rule is the only thing deciding",
     (() => {
       const crownKind = Object.entries(rules.kinds).find(([, k]) => k.formsWhenBandsInRegion != null);
       if (!crownKind) return false;
       const [kind, k] = crownKind;
-      const out = runAll();
-      const none = out.every(r => !r.proposals.some(p => p.kind === kind));
-      const saidSo = out.some(r => r.refused.some(x => /formsWhenBandsInRegion/.test(x.why)));
-      // now stand enough bands in one region and ask again
-      const target = out.find(r => r.proposals.length)?.regionId;
-      const seat = Object.values(locs).find(l => l.regionId === target && (l.tags || []).some(tg => (k.placeAtTags || []).includes(String(tg).toLowerCase())));
-      const bands = Array.from({ length: Number(k.formsWhenBandsInRegion) }, (_, i) => ({ id: `band_${i}`, kind: "outlaw_band", temper: "hard", seat: seat?.id }));
-      const withBands = PG.proposePowers(target, { content: C359, standing: [...(C359.powers || []), ...bands] });
-      return none && saidSo && (!seat || !withBands.refused.some(x => /formsWhenBandsInRegion/.test(x.why)));
+      // room enough that seat competition cannot be the reason, so only the band count can be
+      const roomy = { ...C359, rules: { ...C359.rules, powers: { ...rules, seatsAreExclusive: undefined,
+        density: { ...rules.density, base: 8, maxPerRegion: 12 } } } };
+      const target = empty.find(r => Object.values(locs).some(l => l.regionId === r
+        && (l.tags || []).map(x => String(x).toLowerCase()).some(tg => (k.placeAtTags || []).includes(tg))));
+      if (!target) return false;
+      const withoutBands = PG.proposePowers(target, { content: roomy });
+      const seats = Object.values(locs).filter(l => l.regionId === target).slice(0, Number(k.formsWhenBandsInRegion));
+      const bands = seats.map((l, n) => ({ id: `band_${n}`, kind: "outlaw_band", temper: "hard", seat: l.id }));
+      const withBands = PG.proposePowers(target, { content: roomy, standing: [...(C359.powers || []), ...bands] });
+      return !withoutBands.proposals.some(p => p.kind === kind)
+        && withoutBands.refused.some(x => /formsWhenBandsInRegion/.test(x.why))
+        && withBands.proposals.some(p => p.kind === kind)
+        && !runAll().some(r => r.proposals.some(p => p.kind === kind));   // and none in the real run
     })());
 
-  check("§359: ⬜ …AND ONE SEAT, ONE POWER IS A RULE THAT DOES NOT EXIST YET — the reader is here and the dial is Aevi's. ⚠️ MEASURED ON HER OWN CORPUS: all 29 authored powers have 29 DISTINCT seats, and this generator, following only the rules that exist, seated a band, an order and a sovereignty in the same building. That is a rule she has been applying without writing down, so `seatsAreExclusive` is proposed rather than assumed: absent, the behaviour is today's and the dry run reports the stacking honestly; authored `true`, the second one is refused and the refusal names the rule",
+  check("§359: ✅ …AND ONE SEAT, ONE POWER IS A RULE NOW (AEVI, CCODE-490). I reported that all 29 authored powers had 29 distinct seats while the generator seated a band, an order and a sovereignty in the same building, and proposed `seatsAreExclusive` rather than assuming it — she authored it `true`. ⚠️ The assertion that stood here said the rule DID NOT EXIST, and it went red the moment she wrote the value, which is a gate describing the world before a ruling. ⛑ It now asks the ruling's own question, of the corpus and of the run",
     (() => {
       const authoredSeats = (C359.powers || []).filter(p => p.seat).map(p => p.seat);
-      const allDistinct = new Set(authoredSeats).size === authoredSeats.length;
-      const off = runAll().flatMap(r => r.proposals);
-      const on = runAll({ ...C359, rules: { ...C359.rules, powers: { ...rules, seatsAreExclusive: true } } });
-      const onProposals = on.flatMap(r => r.proposals);
+      if (rules.seatsAreExclusive !== true) return false;          // the ruling is authored, or this is stale
       const perSeat = (rows) => { const m = {}; for (const p of rows) m[p.seat] = (m[p.seat] || 0) + 1; return Object.values(m); };
-      return allDistinct && authoredSeats.length >= 29
-        && perSeat(off).some(n => n > 1)                                  // the dial is absent today, and it shows
-        && perSeat(onProposals).every(n => n === 1)                       // authored, it holds
-        && on.some(r => r.refused.some(x => /seatsAreExclusive/.test(x.why)));
+      const out = runAll();
+      const relaxed = runAll({ ...C359, rules: { ...C359.rules, powers: { ...rules, seatsAreExclusive: undefined } } });
+      return new Set(authoredSeats).size === authoredSeats.length && authoredSeats.length >= 29
+        && perSeat(out.flatMap(r => r.proposals)).every(n => n === 1)
+        && out.some(r => r.refused.some(x => /seatsAreExclusive/.test(x.why)))
+        && perSeat(relaxed.flatMap(r => r.proposals)).some(n => n > 1);   // and the dial is what does it
     })(), `${new Set((C359.powers || []).map(p => p.seat).filter(Boolean)).size} distinct seats across ${(C359.powers || []).length} authored powers`);
+
+  check("§359: ✅ …AND SPECIFICITY DECIDES A CONTESTED SEAT, NOT THE ORDER OF THE KEYS IN THE RULES FILE (AEVI, ruling 1). ⚠️ THE DEFECT: `the_unlanded` is tagged both `cult` and `dangerous`, `outlaw_band` is declared before `order`, and a gang took the holy site — the only one of eight pole regions where the cult locus did not become an order. A JSON key order is not a design decision and it outranked one. ⛑ “The match on more tags takes the seat, and a tie falls to the kind whose tags are rarer in the corpus” — proved by REORDERING the rules and getting the same answer",
+    (() => {
+      const shuffled = { ...C359, rules: { ...C359.rules, powers: { ...rules,
+        kinds: Object.fromEntries(Object.entries(rules.kinds).reverse()) } } };
+      const key = (rows) => rows.flatMap(r => r.proposals.map(p => `${p.seat}:${p.kind}`)).sort().join("|");
+      // ⚠️ THE WITNESS MUST BE IN A REGION THE DRY RUN ACTUALLY VISITS. My first version took the first
+      // cult+dangerous place in the corpus, which is the Blaze — in the Radiant Wastes, a region Aevi already
+      // holds, so it is not in the empty list and the run had nothing to say about it.
+      const cult = Object.values(locs).find(l => empty.includes(l.regionId)
+        && (l.tags || []).map(x => String(x).toLowerCase()).includes("cult")
+        && (l.tags || []).map(x => String(x).toLowerCase()).includes("dangerous"));
+      const region = cult && runAll().find(r => r.regionId === cult.regionId);
+      const atCult = region?.proposals.find(p => p.seat === cult.id);
+      return key(runAll()) === key(runAll(shuffled))              // the key order no longer decides anything
+        && !!atCult && atCult.kind === "order";                   // and the holy site goes to the order
+    })());
+
+  check("§359: ✅ …AND A GOVERNMENT LIVES IN THE REGION'S CITY (AEVI, ruling 6 — her own finding from my run). Three sovereignties had been seated at the region's `cult` locus: the extremists' holy ground. `seatPrefersTags` is the key she withheld until this reader existed, and it is a PREFERENCE — a region with no city still gets its government seated somewhere",
+    (() => {
+      const want = (rules.kinds.sovereignty?.seatPrefersTags || []).map(x => String(x).toLowerCase());
+      if (!want.length) return false;
+      const sovs = runAll().flatMap(r => r.proposals.filter(p => p.kind === "sovereignty"));
+      if (!sovs.length) return false;
+      const preferred = sovs.filter(p => (locs[p.seat]?.tags || []).map(x => String(x).toLowerCase()).some(tg => want.includes(tg)));
+      // and the fallback: strip the preferred tags from a region's places and the government is still seated
+      const bare = { ...C359, locations: Object.fromEntries(Object.entries(locs).map(([id, l]) =>
+        [id, { ...l, tags: (l.tags || []).filter(tg => !want.includes(String(tg).toLowerCase())) }])) };
+      const still = empty.map(r => PG.proposePowers(r, { content: bare })).flatMap(r => r.proposals.filter(p => p.kind === "sovereignty"));
+      return preferred.length === sovs.length && still.length > 0;
+    })(), `${runAll().flatMap(r => r.proposals.filter(p => p.kind === "sovereignty")).length} sovereignt(ies), all in a city`);
+
+  check("§359: ✅ …AND EVERY PROPOSED LEADER HAS A WHOLE NAME, from their OWN people's pools (AEVI: “that’s how I’ll see whether the names read like the corpus”). ⛑ The namer is `names.js` — naming is authorship and the generator composes not a syllable. The people is the origin whose `homeRegion` is this region, so a power rising in the Quickwood is led by a rootkin",
+    (() => {
+      const all = runAll().flatMap(r => r.proposals);
+      if (!all.length) return false;
+      const pools = C359.rules?.mintedNames;
+      return all.every(p => {
+        const L = p.leader;
+        if (!L) return false;
+        const parts = String(L.fullName || "").trim().split(/\s+/);
+        const own = pools?.family?.[L.people] || pools?.family?._default || [];
+        return parts.length >= 3 && !!L.given && !!L.middle && !!L.surname
+          && own.includes(L.surname) && String(L.name).includes(L.byname);
+      });
+    })(), (() => { const one = runAll().flatMap(r => r.proposals)[0]; return one?.leader ? `e.g. ${one.leader.name} — whole name ${one.leader.fullName} (${one.leader.people})` : "none"; })());
 
   check("§359: ⛑ …AND IT IS DETERMINISTIC, so a dry run is reviewable and a diff of the REPORT is a diff of the rules. Two runs of the same region agree exactly; a different seed does not",
     (() => {
@@ -26528,7 +26578,7 @@ console.log("\n── §359 · the power generator names the rule behind every c
       return a === b && a !== c;
     })());
 
-  check("§359: ⬜ …AND THE SUPPLY-LINE RULE CANNOT BE ASKED YET, WHICH IS REPORTED RATHER THAN GUESSED. Aevi asks whether it \"fires only where a hunger fits\"; a supply line feeds a Sovereign's HUNGER ARC and the arcs land with work order item 2. ⛑ So the readiness answer names what is missing instead of the rule quietly passing on an empty set",
+  check("§359: ⬜ …AND THE SUPPLY-LINE RULE CANNOT BE ASKED YET, WHICH IS REPORTED RATHER THAN GUESSED. Aevi asks whether it \“fires only where a hunger fits\”; a supply line feeds a Sovereign's HUNGER ARC and the arcs land with work order item 2. ⛑ So the readiness answer names what is missing instead of the rule quietly passing on an empty set",
     (() => {
       const s = PG.supplyLineReadiness(empty[0], { content: C359 });
       return !!s && typeof s.hungerArcsLoaded === "number" && /hunger arc/.test(s.why);

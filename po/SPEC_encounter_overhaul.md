@@ -291,7 +291,7 @@ hierarchy**, and every block was added by someone correctly fixing something inv
 
 | zone | holds | ⛔ rule |
 |---|---|---|
-| ⚑ **1 · THE STATE** — always visible, never moves | ⚠️ **their name · their condition · the pressure counter · your hp/energy** | ⛔ **The pressure counter is the EXIT and belongs at the top.** Erik once read *"neither gains — it's even"* and the fight ended, because the meter he was watching was not the one that ends it |
+| ⚑ **1 · THE STATE** — always visible, never moves | ⚠️ **their name · their condition · the pressure counter** — ⛔ *your hp/energy struck by Erik in play, 2026-09-25: "I don't need my own HP and Energy in the fight window" (CCODE-493)* | ⛔ **The pressure counter is the EXIT and belongs at the top.** Erik once read *"neither gains — it's even"* and the fight ended, because the meter he was watching was not the one that ends it |
 | ⚑ **2 · WHAT JUST HAPPENED** — the receipt | one line of prose, ⚠️ **and the rolls FOLDED behind it** | ⛔ **The maths is on request. A player who wants it presses once; a player who does not never sees it** |
 | ⚑ **3 · WHAT YOU CAN SEE** — the fog | their move · their aim · their crafts | ⚠️ **This is the READ, and it should look like a read** — quieter than the state, louder than the log |
 | ⚑ **4 · WHAT YOU DO** — the controls | ⛔ **the menu, the intensity, the button** | ⚠️ **and NOTHING ELSE may live below it.** The thing you act with is the last thing on screen |

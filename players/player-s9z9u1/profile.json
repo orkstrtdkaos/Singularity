@@ -44,9 +44,6 @@
       "skills:fam:HARM",
       "items",
       "abilities",
-      "moves:KNOW",
-      "moves:INFLUENCE",
-      "moves:RESTORE",
       "skills:fam:RESTORE",
       "skills:fam:INFLUENCE",
       "whoshere",
@@ -57,8 +54,10 @@
       "skills:fam:SUSTAIN",
       "skills:fam:MOVE",
       "skills:braids",
-      "moves:PROTECT",
-      "moves:HARM"
+      "moves:HARM",
+      "moves:INFLUENCE",
+      "moves:KNOW",
+      "moves:RESTORE"
     ],
     "closed": [
       "learn:wright",
@@ -70,7 +69,8 @@
       "learn:horizon",
       "learn:hourkeeper",
       "learn:baseline",
-      "learn:cross_pole_braid"
+      "learn:cross_pole_braid",
+      "moves:PROTECT"
     ]
   },
   "pacing": "eventful",

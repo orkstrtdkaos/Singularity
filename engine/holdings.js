@@ -1472,15 +1472,33 @@ export function answerFeatureOffer(character, index, accept, { day = null, world
   return addFeature(character, h.id, { kind: o.kind, by: "the fiction", day, worldCount, cfg });
 }
 
+/** ⛔ CCODE-496 (ERIK, on the preview: "the tear it down button doesn't work on the wall") — ONE LIST.
+ *
+ *  This read `featuresOf(h)` — the STANDING features, `!f.building` — while both call sites number their
+ *  buttons off `h.features`, the raw array. ⚠️ The two agree only while nothing is under construction, and a
+ *  feature built through the Build verb STARTS under construction by design: `via: "built"` pays goods from
+ *  the store first and stalls as work-in-progress when it cannot. So a wall on a hold with an empty store was
+ *  invisible to the lookup, `list[index]` was undefined, and this returned a bare `null` that the handler
+ *  ignored — a button that does nothing and says nothing.
+ *
+ *  ⛑ AND THE WRITE-BACK WAS THE WORSE HALF: `h.features = list.filter(...)` put the STANDING-only list back,
+ *  so tearing down a standing feature on a hold with anything in progress would have SILENTLY DELETED every
+ *  build under way. Nobody met it because the refusal above fired first — one defect hiding a bigger one.
+ *
+ *  Returns the removed feature, or `{ ok: false, why }` so a caller can SAY why nothing happened. */
 export function removeFeature(character, id, index, { worldCount = null } = {}) {
   ensureHoldings(character);
   const h = character.holdings.find(x => x && x.id === id);
-  if (!h) return null;
-  const list = featuresOf(h);
-  const f = list[index];
-  if (!f) return null;
-  h.features = list.filter((_, i) => i !== index);
-  h.history = [...(h.history || []), { at: worldCount, from: h.condition, to: h.condition, note: `${f.name} torn down` }].slice(-12);
+  if (!h) return { ok: false, why: "no such holding" };
+  // ⚠️ THE SAME LIST THE BUTTONS ARE NUMBERED FROM. `allFeatures` is `h.features` minus nothing but blanks.
+  const list = allFeatures(h);
+  const i = Number(index);
+  const f = Number.isInteger(i) ? list[i] : null;
+  if (!f) return { ok: false, why: "that feature is not there any more — the screen is a beat behind" };
+  h.features = list.filter((_, k) => k !== i);
+  const what = f.name || f.kind;
+  h.history = [...(h.history || []), { at: worldCount, from: h.condition, to: h.condition,
+    note: f.building ? `${what} — the work on it stopped` : `${what} torn down` }].slice(-12);
   return f;
 }
 

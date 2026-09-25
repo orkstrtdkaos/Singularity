@@ -7399,6 +7399,152 @@ console.log("\n── §76b · a crafted feature carries its craft, its season, 
     dupKeys.length === 0, `duplicated: ${dupKeys.join(", ") || "none"}`);
   check("§76b: …and the applier still accepts the old name, so a beat already in flight is not refused",
     /op\.featureKind \|\| op\.kind/.test(app495));
+
+  /* ⛔ CCODE-496 (ERIK, on the preview): "the tear it down button doesn't work on the wall."
+     TWO LISTS, ONE INDEX. `featuresOf` is the STANDING features (`!f.building`); `allFeatures` is every one.
+     Both markup sites number their buttons off `h.features` — the raw array — and `removeFeature` looked that
+     number up in `featuresOf`. ⚠️ A feature built through the Build verb STARTS under construction by design
+     (`via: "built"` pays goods from the store first and stalls when it cannot), so on a hold with an empty
+     store every feature was invisible to the lookup and the button did nothing and said nothing.
+     ⛑ AND THE WRITE-BACK WAS THE WORSE HALF — it put the STANDING-only list back, so tearing down a standing
+     feature would have SILENTLY DELETED every build in progress. One defect was hiding a bigger one, which is
+     why this gate drives BOTH and not only the button Erik pressed. */
+  {
+    const mkH = () => ({ id: "c496", name: "Owner", energy: 100,
+      holdings: [{ id: "h496", name: "The Post", kind: "post", condition: "sound", features: [], improvements: [], store: {} }] });
+    // one STANDING feature and one still BEING BUILT, in that order
+    const withMix = () => { const c = mkH();
+      c.holdings[0].features = [
+        { kind: "mill", name: "a mill", family: "material", craftIds: [], count: 1, day: 1 },
+        { kind: "wall", name: "a wall", family: "martial", craftIds: [], count: 1, day: 2, building: { owed: { cut_stone: 10 }, passesLeft: 4 } },
+      ]; return c; };
+
+    // 1 · THE SYMPTOM: index 1 is the building one, and it must come out
+    const c1 = withMix();
+    const r1 = H495.removeFeature(c1, "h496", 1, { worldCount: 3 });
+    check("§76b: ⛔ CCODE-496 — a feature STILL BEING BUILT can be torn down; the buttons and the lookup number the same list",
+      r1 && r1.ok !== false && r1.kind === "wall" && c1.holdings[0].features.length === 1 && c1.holdings[0].features[0].kind === "mill",
+      JSON.stringify({ returned: r1?.kind ?? r1, left: c1.holdings[0].features.map(f => f.kind) }));
+
+    // 2 · THE HAZARD: removing the STANDING one must leave the build in progress alone
+    const c2 = withMix();
+    H495.removeFeature(c2, "h496", 0, { worldCount: 3 });
+    check("§76b: ⛔ …and tearing down a STANDING feature does not silently delete the work in progress beside it",
+      c2.holdings[0].features.length === 1 && c2.holdings[0].features[0].kind === "wall" && !!c2.holdings[0].features[0].building,
+      JSON.stringify(c2.holdings[0].features.map(f => ({ kind: f.kind, building: !!f.building }))));
+
+    // 3 · A REFUSAL IS AN ANSWER. A bare null is what let a dead button look like a working one.
+    const c3 = withMix();
+    const bad = H495.removeFeature(c3, "h496", 9, { worldCount: 3 });
+    check("§76b: …and an index that is not there REFUSES IN WORDS, so the screen can say why nothing happened",
+      bad && bad.ok === false && typeof bad.why === "string" && bad.why.length > 5
+      && H495.removeFeature(c3, "nope", 0, {})?.ok === false,
+      JSON.stringify(bad));
+
+    // 4 · and the history says which of the two things happened — they cost the player differently
+    check("§76b: …and the record says whether it was TORN DOWN or the WORK STOPPED",
+      /the work on it stopped/.test(JSON.stringify(c1.holdings[0].history || []))
+      && /torn down/.test(JSON.stringify(c2.holdings[0].history || [])),
+      JSON.stringify({ built: c1.holdings[0].history?.slice(-1), standing: c2.holdings[0].history?.slice(-1) }));
+
+    // 5 · the caller stopped swallowing the answer
+    check("§76b: …and the handler READS the result — a refusal that is dropped is a button that does nothing",
+      /const r = removeFeature\(character, btn\.dataset\.holdUnfeature/.test(app495)
+      && /if \(r && r\.ok === false\) \{ alert\(r\.why\); return; \}/.test(app495));
+  }
+}
+
+/* ═════ §76c — WHO COMES FOR YOU: CAN, WOULD, AND HAVE THEY SAID SO (SNG-653) ═════ */
+// ⛔ ERIK, FROM LOKI'S PLAY. Vess accepted his confession and made a mutual vow — "if death claims one, the
+// other will reach for them" — and the screen went on telling him *"that is a conversation to have with them,
+// not a setting"*. Nothing changed because nothing could: `wouldReachFor` reads the BOND, and a bond is not a
+// promise. Measured across all 14 saves: no pledge-shaped field existed anywhere.
+//
+// ⛑ THE MODULE ALREADY INSISTED ON TWO OF THE THREE — "canReach answers CAN; wouldReachFor answers WOULD, and
+// the two must never be the same function". This is the third, and it is the one a player acts on.
+console.log("\n── §76c · a promise is its own record, and the screen can tell three questions apart ──");
+{
+  const D653 = await import("../engine/death.js");
+  const RC653 = await import("../engine/reconcile.js");
+  const NP653 = await import("../engine/npcs.js");
+
+  // 1 · A PLEDGE IS NOT A BOND STAGE. Vess was ALREADY committed when she made the vow.
+  const c1 = { id: "c653", npcRegistry: { vess: { id: "vess", name: "Vess", relationship: 10, bondType: "romantic", bondStage: "committed" } } };
+  D653.recordPledge(c1, { npcId: "vess", day: 4, mutual: true, words: "if death claims one, the other will reach for them" });
+  const p1 = D653.pledgeFrom(c1, "vess");
+  check("§76c: ⛔ a pledge is its OWN record — it does not move the bond, which was already committed",
+    !!p1 && p1.mutual === true && p1.day === 4 && c1.npcRegistry.vess.bondStage === "committed",
+    JSON.stringify({ pledge: p1, stage: c1.npcRegistry.vess.bondStage }));
+  check("§76c: …and a person with no pledge answers null, so \"have they said so\" is never inferred from closeness",
+    D653.pledgeFrom(c1, "somebody-else") === null);
+
+  // 2 · TAKING IT BACK IS SPOKEN. The record stays, marked withdrawn (the CCODE-469 lesson).
+  D653.releasePledge(c1, "vess", { day: 9 });
+  check("§76c: ⛔ a promise taken back is MARKED, never deleted — a screen must be able to say it was withdrawn",
+    D653.pledgesOf(c1).length === 1 && D653.pledgesOf(c1)[0].released === true && D653.pledgeFrom(c1, "vess") === null);
+  // and saying it again clears the release without losing the day it was first made
+  D653.recordPledge(c1, { npcId: "vess", day: 30, mutual: false, words: "again" });
+  check("§76c: …and saying it again renews it without rewriting WHEN it was first made",
+    D653.pledgeFrom(c1, "vess")?.day === 4 && D653.pledgeFrom(c1, "vess")?.mutual === true);
+
+  // 3 · THE WRITER IS A BOND OP, and it rides on the update for the scene it happened in
+  const c2 = { id: "c653b", npcRegistry: {}, clock: { day: 12 } };
+  NP653.applyNpcUpdates(c2, [{ op: "meet", npcId: "siol", name: "Siol Var Hale", role: "a traveler",
+    pledge: { mutual: false, words: "she said she would come" } }], { rules: {}, day: 12, character: c2 });
+  check("§76c: ⛔ the GM writes it through npcUpdates — the same op that carries the bond, and it is still not the bond",
+    D653.pledgeFrom(c2, "siol")?.words === "she said she would come" && !c2.npcRegistry.siol?.bondStage,
+    JSON.stringify(D653.pledgesOf(c2)));
+  const gm653 = rd("engine/gm.js");
+  check("§76c: …and the GM is TOLD it exists, with the warning that closeness is not a promise",
+    /"pledge": "\{mutual, words\}/.test(gm653) && /A BOND IS NOT A PROMISE/.test(gm653));
+
+  // 4 · THE ONE SAVE IT CAME FROM — evidence, not a pattern sweep
+  const step653 = RC653.CHARACTER_STEPS.find(s => s.id === "the-vow-nobody-wrote-down");
+  check("§76c: the step exists and is player-facing", !!step653 && step653.playerFacing === true);
+  const loki = { id: "loki", npcRegistry: { "traveler-woman": { name: "Vessin Tallow-bark", relationship: 10, history: [
+    "[d4] In the vast chamber beneath the Null Stone, she accepted Loki's confession and made a mutual vow: if death claims one, the other will reach for them. She held Loki's wrist when she said yes. The pact is made.",
+    "[d4] Hand steadied against the wall, feeling the stone's response through stone." ] } } };
+  const out653 = step653.apply(loki, { day: 400 });
+  const lp = D653.pledgeFrom(loki, "traveler-woman");
+  check("§76c: ⛔ Loki's vow with Vess is written from the scene's OWN line, mutual, and dated by the line",
+    !!lp && lp.mutual === true && lp.day === 4 && /the other will reach for them/.test(lp.words) && (out653.notes || []).length === 1,
+    JSON.stringify({ pledge: lp, notes: out653.notes }));
+  // ⚠️ DATED BY THE LINE, NOT BY TODAY. The first cut stamped `ctx.day` — day 400 on a day-4 vow — which is
+  // an absence turned into an answer, the pattern this project has shipped most.
+  check("§76c: …and NOT dated today, which is the shape of every stamped-now defect in this repo",
+    lp.day !== 400);
+  // ⛑ EVIDENCE, NOT A GUESS: both halves in one line, or nothing. Aevi refused a general backfill for
+  // exactly this reason, and the refusal is the part worth gating.
+  const noPact = { id: "np", npcRegistry: {
+    a: { name: "A", history: ["[d9] They exchanged a vow before the whole hall."] },
+    b: { name: "B", history: ["[d9] He died in the pass that winter."] },
+    d: { name: "D", history: ["[d2] She is close enough that it would be her."] } } };
+  step653.apply(noPact, { day: 400 });
+  check("§76c: ⚠️ a wedding vow, a death, and a close friend write NOTHING — the pact is the line carrying both",
+    D653.pledgesOf(noPact).length === 0);
+  step653.apply(loki, { day: 401 });
+  check("§76c: …and a second run adds nothing", D653.pledgesOf(loki).length === 1);
+
+  // 5 · THE READER KEEPS THE THREE APART, and CAN is derived rather than unknown
+  const NS653 = await import("../engine/npcsheet.js");
+  const people = { vess: { name: "Vess", relationship: 10, role: "Traveler and warden" },
+                   brin: { name: "Brin", relationship: 7, role: "Millbrook child", skillsObserved: ["a quick hand"] },
+                   far:  { name: "A stranger", relationship: 1, role: "Tollhand" } };
+  const c3 = { id: "c653c", pledges: [{ npcId: "vess", day: 4, mutual: true, words: "the pact" }] };
+  const rows = D653.whoComesFor(c3, people, { rules: {}, currentDay: 400,
+    rankFor: (n) => Math.max(1, Math.round((NS653.derivedLevel(n, { day: 400, cfg: {} }) || 1) / 5)) });
+  check("§76c: ⛔ the reader answers all three per person, and the PLEDGED one sorts first",
+    rows.length === 3 && rows[0].id === "vess" && !!rows[0].pledge && rows[0].mutual === true
+    && rows.every(r => Array.isArray(r.reach) && r.reach.length === 3 && typeof r.would === "boolean"),
+    JSON.stringify(rows.map(r => ({ id: r.id, pledged: !!r.pledge, would: r.would, can: r.reach.map(x => x.can) }))));
+  // ⚠️ CAN IS DERIVED AND LABELLED. Measured 2026-09-25: 0 of 114 registry people store a level; `npcsheet`
+  // derives one for 114 of 114. Aevi's first draft said "unknown", which would have been the answer for
+  // EVERY person in the game — a column nobody opens twice. `seen` is what `skillsObserved` backs.
+  check("§76c: …and CAN is DERIVED for everyone, with `seen` marking the ones you have actually watched work",
+    rows.every(r => r.rank >= 1) && rows.find(r => r.id === "brin").seen === true && rows.find(r => r.id === "vess").seen === false);
+  check("§76c: …and the answers DIFFER by person — a reader that says the same thing about everyone is not a reader",
+    new Set(rows.map(r => r.reach.map(x => x.can).join(""))).size > 1,
+    JSON.stringify(rows.map(r => ({ id: r.id, bond: r.bond, can: r.reach.map(x => x.can) }))));
 }
 
 /* ═════ §77 — A PERSON CAN HOLD A THING, AND IT WAKES IN THEIR HANDS (R45c, 2026-09-05) ═════ */
@@ -14740,9 +14886,18 @@ console.log("\n── §211 · death is a state, and the player can finally read
     /DeathModel\.deathStandingFor\(character,/.test(A211));
   check("§211: …and the panel names the person holding the way open, not just the fact",
     /is holding the way open/.test(A211) && /is holding your name/.test(A211));
-  // ⛑ SNG-569's second half, and the sentence that keeps a stat from replacing a relationship.
+  // ⛑ SNG-569's second half, and the claim that keeps a stat from replacing a relationship.
+  // ⛔ SNG-653 REWROTE THE SENTENCE THIS PINNED, and the rewrite is the whole point: Erik HAD the
+  // conversation and the screen kept asking for it, because `wouldReachFor` reads the bond and a bond is not a
+  // promise. ⚠️ The claim survives and is stronger — the door is now a DOOR (an Ask button that seeds the
+  // ask and hands it to the player) rather than a sentence telling them to go and find one. Still no setting:
+  // nothing here makes the promise, because whether they say yes is the GM's and the person's.
   check("§211: ⛑ …and opens the door to the conversation rather than offering a setting",
-    /That is a conversation to have with them, not a setting/.test(A211));
+    /data-wc-ask="\$\{esc\(r\.id\)\}"/.test(A211)
+    && /Nobody has said they will come for you.*That is a conversation/.test(A211)
+    && /for \(const b of document\.querySelectorAll\("\[data-wc-ask\]"\)\)/.test(A211)
+    && !/set the pledge|markPledge\(/.test(A211),
+    "the screen must open the conversation and never settle it — a button that made the promise would be the setting this check forbids");
   // ⛔ A REFUSAL IS HONOURED AND SAID. `willing: false` is the player's own word about their own ending.
   check("§211: ⛔ a refusal to be brought back is shown as honoured, not as a flag",
     /You have refused to be brought back\. That is yours to say and it is honoured/.test(A211));
@@ -15562,8 +15717,16 @@ console.log("\n── §220 · what you were to them reaches too ──");
   check("§220: ⛔ …and a refusal to be brought back outranks the deepest bond, and says it was honoured",
     honoured.would === false && honoured.honoured === true);
   // ⛑ AND THE SURFACE THAT NAMES WHO WOULD COME ASKS THIS FUNCTION rather than a hard-coded number.
+  // ⚠️ ASKED OF THE ENGINE, NOT OF THE CALL SITE'S SPELLING. This pinned the exact expression in app.js and
+  // went red when SNG-653 moved the read INTO the engine — `whoComesFor` asks `wouldReachFor` once per person
+  // and the screen renders its answer. The claim was never about where the call is written; it is that the
+  // threshold is not retyped in the UI. ⛑ So: the engine reader consults it, and app.js holds no bare
+  // relationship threshold of its own.
   check("§220: ⛑ …and the death screen's \"it would be them\" reads the engine, not an inline threshold",
-    /DeathModel\.wouldReachFor\(character, n, \{ rules: CONTENT\.rules \}\)\.would/.test(rd("app.js")));
+    /wouldReachFor\(character, n, \{ rules \}\)/.test(rd("engine/death.js"))
+    && /DeathModel\.whoComesFor\(character, people/.test(rd("app.js"))
+    && !/relationship\s*(>=|>)\s*\d/.test(rd("app.js").split("Who comes for you")[1]?.slice(0, 3000) || ""),
+    "a threshold retyped in the UI is how this screen and the engine came to disagree in the first place");
 
   /* ---- 2 · ⚠️ AND A REFUSAL IS STILL FREE, WHICH IS THE WHOLE SAFETY OF THE MECHANIC ---- */
   // ⛔ `canReach`'s own comment: "a FAILURE sinks them, so being told 'that is past your reach' must not cost
@@ -17155,9 +17318,14 @@ console.log("\n── §238 · the frame the receipt is printed inside ──");
     && /prefers-reduced-motion: reduce\) \{ \.think-dot \{ animation: none/.test(CSS238));
   // ⛔ AND IT GOES TO THE PLAYER. Erik was scrolled to where the moves had been; the line rendered far below.
   // ⚠️ ONLY the waiting state scrolls — moving the page at any other time takes the scroll from a reader.
+  // ⚠️ COUNTED IN CODE, NOT IN COMMENTS. This counted every occurrence in the SOURCE, so a comment saying
+  // "no `scrollIntoView` here, §238 holds the page to one" counted as a second call and reddened the gate for
+  // OBEYING it. Fourth time in this repo; the rule is in my notes and I committed it again.
+  const code238 = A238.split("\n").filter(l => !/^\s*(\/\/|\*|\/\*)/.test(l)).join("\n");
   check("§238: ⛔ …and only the waiting state scrolls itself into view, never anything else",
-    /getElementById\("thinking-now"\)\?\.scrollIntoView/.test(A238)
-    && (A238.match(/scrollIntoView/g) || []).length === 1);
+    /getElementById\("thinking-now"\)\?\.scrollIntoView/.test(code238)
+    && (code238.match(/scrollIntoView/g) || []).length === 1,
+    `${(code238.match(/scrollIntoView/g) || []).length} self-scroll(s) in code`);
   check("§238: …and the hardest wait in the game — the fight ending — says what it is doing",
     /The fight is over — telling/.test(A238));
 }

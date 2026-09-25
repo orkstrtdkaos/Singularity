@@ -16,6 +16,24 @@
   "next": [],
   "releases": [
     {
+      "version": "2.7.0",
+      "date": "2026-09-25",
+      "entries": [
+        {
+          "kind": "feature",
+          "title": "Who comes for you — and whether they have actually said so",
+          "summary": "The death block is now three answers per person, kept apart: can they reach you, would they bother, and have they said they will. Someone who made that promise in a scene is recorded, named, and shown with the words they used.",
+          "detail": "It used to end with “that is a conversation to have with them, not a setting” — and kept saying it after the conversation had happened, because it was reading the bond and a bond is not a promise. A pledge is its own record now, written by the GM from the scene it was made in, never inferred from closeness and never quietly removed: taking one back is spoken out loud. If nobody has promised, the block says so and puts an Ask button beside the people who could. Reach is shown as can/can’t at each depth — no percentage, because nothing rolls one yet."
+        },
+        {
+          "kind": "fix",
+          "title": "The tear-down button works on something still being built",
+          "summary": "Pressing × on a feature under construction did nothing at all and said nothing.",
+          "detail": "The buttons were numbered from one list of a hold’s features and the removal looked that number up in another — the two agree only while nothing is under construction, and a feature you pay for starts under construction. The same mismatch would have silently deleted every build in progress when you tore down a finished one. Stopping work on an unfinished build now says that is what it is, rather than calling it a tear-down."
+        }
+      ]
+    },
+    {
       "version": "2.6.6",
       "date": "2026-09-25",
       "entries": [

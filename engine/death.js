@@ -1,4 +1,6 @@
 // engine/death.js — SNG-209: death is a STATE, not a terminus.
+
+import { smartClamp } from "./namematch.js";   // SNG-653: the GM's own words about a pledge, clamped at a word boundary
 //
 // A dead entity is not removed from the world — it is IN THE DEATH STATE at a DEPTH, still on the board,
 // potentially retrievable. Depth grades the wall (0 the threshold · 1 the near dark · 2 the deep dark ·
@@ -306,6 +308,98 @@ export function bondRungs(bond = 0, rules = {}) {
 /** ⛔ A WAY HELD OPEN, AND ITS OWNER MAY WALK AWAY. Aevi's point 4 — `open_threshold` r3 leaves one standing
  *  WITHOUT its caster, and `kept_breath` holds someone at the threshold so they never enter it.
  *  ⚠️ IT STOPS THE CLOCK, which is why it is a different verb from slowing. `deepenDeaths` honours it. */
+/* ═════ SNG-653 · THE PLEDGE — "HAVE THEY SAID SO?" ═════
+ *
+ * ⛔ THE THIRD QUESTION, WHICH HAD NO ANSWER. This module already insists that CAN and WOULD are different
+ * questions — "`canReach` answers CAN; `wouldReachFor` answers WOULD, and the two must never be the same
+ * function". There is a third, and it is the one a player actually acts on: HAVE THEY SAID SO.
+ *
+ * ⚠️ ERIK MET THE GAP IN PLAY. Loki's history carries the scene word for word — *"she accepted Loki's
+ * confession and made a mutual vow: if death claims one, the other will reach for them. She held Loki's wrist
+ * when she said yes. The pact is made."* — and the screen kept saying *"that is a conversation to have with
+ * them, not a setting"*, because `wouldReachFor` reads the BOND and a bond is not a promise. Nothing changed
+ * after the conversation because nothing could: measured across all 14 saves, no pledge-shaped field exists
+ * anywhere.
+ *
+ * ⛑ A PLEDGE IS NOT A BOND STAGE (Aevi, settled 2026-09-25). Vess is already `committed`; two people can be
+ * committed without this promise and can make this promise without being committed. It is its own record.
+ */
+
+/** The pledges a character holds, always an array. */
+export function pledgesOf(character) { return Array.isArray(character?.pledges) ? character.pledges.filter(Boolean) : []; }
+
+/** Has this person said they will come? Returns the pledge record or null. */
+export function pledgeFrom(character, npcId) {
+  const id = String(npcId || "");
+  return pledgesOf(character).find(p => p && String(p.npcId) === id && !p.released) || null;
+}
+
+/** ⛔ RECORDING ONE. `mutual` means the player promised back, which is a SECOND fact about the same scene and
+ *  the reason the screen can say "you have promised to go for: Vess" — it matters when she is the one who falls.
+ *  `words` is the GM's own account of what was said, kept verbatim so the record reads as the scene did. */
+export function recordPledge(character, { npcId, day = null, mutual = false, words = null, source = "play" } = {}) {
+  if (!character || !npcId) return { ok: false, why: "a pledge needs a person" };
+  character.pledges = pledgesOf(character);
+  const id = String(npcId);
+  const had = character.pledges.find(p => String(p.npcId) === id);
+  // ⚠️ `smartClamp`, not a slice — these are the GM's own words about what was said, and cutting a promise
+  // mid-word is the thing the ratchet exists to stop. It was a `slice(0, 400)` and the audit caught it.
+  const rec = { npcId: id, day: day ?? null, mutual: !!mutual, words: words ? smartClamp(String(words), 400) : null, source };
+  if (had) {
+    // ⚠️ A SECOND SAYING DOES NOT ERASE THE FIRST DAY. What changes is what was said and whether it went both
+    // ways; when it was made is history, and a promise renewed is not a promise newly made.
+    Object.assign(had, { mutual: !!mutual || !!had.mutual, words: rec.words || had.words, source });
+    delete had.released; delete had.releasedDay;
+    return { ok: true, pledge: had, renewed: true };
+  }
+  character.pledges.push(rec);
+  return { ok: true, pledge: rec, renewed: false };
+}
+
+/** ⛔ TAKING IT BACK IS SPOKEN OUT LOUD — never a silent removal (the CCODE-469 lesson). The record stays and
+ *  is marked released, so the screen can say a promise was withdrawn rather than quietly showing one fewer name. */
+export function releasePledge(character, npcId, { day = null } = {}) {
+  const p = pledgesOf(character).find(x => String(x.npcId) === String(npcId) && !x.released);
+  if (!p) return { ok: false, why: "no standing pledge from them" };
+  p.released = true; p.releasedDay = day ?? null;
+  return { ok: true, pledge: p };
+}
+
+/** ⛔ THE THREE QUESTIONS, ANSWERED TOGETHER AND KEPT APART — what the "who comes for you" screen renders.
+ *
+ *  ⚠️ CAN IS DERIVED, AND SAYS SO. Measured 2026-09-25: of 114 registry people across 14 saves, ZERO store a
+ *  level and ZERO store crafts — but `npcsheet` derives both for 114 of 114, and `canReach` then answers
+ *  DIFFERENTLY for them (a child reaches the threshold; a smith and an engineer reach the near dark). So the
+ *  honest answer is the derived one, LABELLED: `seen` is true where `skillsObserved` backs it, and the screen
+ *  says "as far as you have seen her work" otherwise. ⛑ Aevi's first draft said "unknown", and unknown would
+ *  have been the answer for every person in the game — a column nobody opens twice.
+ *
+ *  `rankFor` is injected (the app hands it `npcsheet`'s derived rank) so this file stays pure and does not
+ *  learn about sheets. Pure. */
+export function whoComesFor(character, people = {}, { rules = {}, rankFor = null, currentDay = null, depths = [0, 1, 2] } = {}) {
+  const out = [];
+  for (const [id, n] of Object.entries(people || {})) {
+    if (!n || typeof n !== "object") continue;
+    if (n.status === "dead" || n.status === "departed") continue;
+    const bond = Number(n.relationship) || 0;
+    const pledge = pledgeFrom(character, id);
+    const would = wouldReachFor(character, n, { rules });
+    const rank = rankFor ? Math.max(1, Number(rankFor(n)) || 1) : 1;
+    // ⚠️ ONE PROBE PER DEPTH, through the engine's own gate — never a recomputation of it.
+    const reach = depths.map(d => {
+      const probe = { status: "dead", deathState: { diedDay: (Number(currentDay) || 0) - 1, depthOverride: d } };
+      const r = canReach(probe, { rank, bond, rules, currentDay });
+      return { depth: d, name: DEATH_DEPTH_NAMES[d], can: !!r.ok, why: r.why || null, short: r.short || null };
+    });
+    out.push({ id, name: n.name || id, bond, pledge, mutual: !!pledge?.mutual,
+      would: !!would.would, whyWould: would.why || null,
+      seen: Array.isArray(n.skillsObserved) && n.skillsObserved.length > 0,
+      rank, reach, canAtAll: reach.some(r => r.can) });
+  }
+  // ⛑ SORTED BY BOND, as the spec asks — the people who would come first, then the rest.
+  return out.sort((a, b) => (b.pledge ? 1 : 0) - (a.pledge ? 1 : 0) || b.bond - a.bond);
+}
+
 export function holdOpen(entity, byId = null, { willing = null } = {}) {
   if (!entity?.deathState) return { ok: false, why: "there is nothing to hold open" };
   if (entity.deathState.sealed) return { ok: false, why: "sealed — there is no way left to hold" };

@@ -2073,3 +2073,19 @@ table.ob-matrix { border-collapse: collapse; width: 100%; min-width: 640px; font
 /* CCODE-493 — the win condition is authored content; the LABEL says what the phrase is, so it stops
    reading as a title wedged between the round header and the opponent's name (Erik, 2026-09-25). */
 .enc-frame-winlbl { font-size: .72em; letter-spacing: .08em; text-transform: uppercase; opacity: .6; margin-right: .4em; font-style: normal; font-weight: 400; }
+
+/* SNG-653 · WHO COMES FOR YOU — three groups, and per depth a can/can't rather than a number the engine
+   does not roll. The depth chips read as EARNED when they are lit and as absent when they are not, which is
+   the same grammar the fog ladder uses elsewhere. */
+.wc-block { margin-top: 8px; border-top: 1px solid var(--line, #3a3a3a); padding-top: 8px; }
+.wc-group { margin: 6px 0; }
+.wc-head { display: block; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; opacity: .65; margin-bottom: 2px; }
+.wc-row { padding: 4px 0 5px; border-bottom: 1px dashed var(--line-soft, #2e2e2e); }
+.wc-row:last-child { border-bottom: 0; }
+.wc-who { display: flex; gap: 6px; align-items: baseline; flex-wrap: wrap; }
+.wc-mutual { font-size: 11px; opacity: .8; }
+.wc-reach { display: flex; gap: 8px; flex-wrap: wrap; font-size: 12px; margin-top: 2px; }
+.wc-depth { opacity: .45; }
+.wc-depth.wc-can { opacity: 1; font-weight: 600; }
+.wc-words { font-size: 12px; opacity: .7; font-style: italic; margin-top: 2px; }
+.wc-ask { margin-top: 4px; }

@@ -14,6 +14,7 @@
 // reconcile is the umbrella for everything schema/feature-shaped that came after.
 
 import { addHolding, addFeature, setGarrison } from "./holdings.js";
+import { recordPledge, pledgeFrom } from "./death.js";   // SNG-653 §1: the vow nobody wrote down
 import { seedPowerKnowledge } from "./powers.js";
 import { nemesisCandidates } from "./nemesis.js";   // ⛔ SNG-648 §3.5: the shortlist, which is the pure half   // ⛔ CCODE-483: what a character has heard of
 import { carriageOf } from "./carriage.js";   // ⛔ step 61: a carriage the one reader that matters declines is no carriage at all        // R49: the forge the fiction built; step 44: the features and the gate
@@ -2616,6 +2617,45 @@ export const CHARACTER_STEPS = [
       const far = seeded.learned.length - home;
       console.log(`[reconcile] ccode-483: heard of ${seeded.learned.length} power(s) \u2014 ${seeded.learned.map(l => l.name).join(", ")}`);
       return { notes: [`Your codex now holds what you have heard of the forces that hold ground${home ? ` \u2014 ${home} in your own country` : ""}${far ? `${home ? " and" : " \u2014"} ${far} whose names travel` : ""}. You have not met any of them; this is reputation, and it is where learning about them starts.`] };
+    }
+  },
+  {
+    version: 83, id: "the-vow-nobody-wrote-down", playerFacing: true,
+    // ⛔ SNG-653 §1 (ERIK, from Loki's play) — A PROMISE THE GAME WATCHED BEING MADE AND DID NOT RECORD.
+    // Loki's history carries the scene word for word: "she accepted Loki's confession and made a mutual vow:
+    // if death claims one, the other will reach for them. She held Loki's wrist when she said yes. The pact is
+    // made." The screen kept telling him to go and have that conversation, because `wouldReachFor` reads the
+    // BOND and a bond is not a promise — and no field, op or tag existed for one.
+    //
+    // ⚠️ NOT A GENERAL BACKFILL, BY AEVI'S RULING (2026-09-25): "hand-fix Loki's pledge with Vess, mutual,
+    // citing the d4 line. Play fills the rest." A history-pattern migration over prose would find phrasings
+    // that are not pacts and miss pacts that are not phrased that way, and there is exactly ONE known case in
+    // 14 saves. ⛑ So this reads the EVIDENCE and refuses without it: the person's own history must name both
+    // the reaching and the death, and the words it stores are that line, not a summary of it.
+    apply: (c, ctx) => {
+      const reg = c?.npcRegistry || {};
+      const added = [];
+      for (const [id, n] of Object.entries(reg)) {
+        if (!n || typeof n !== "object") continue;
+        if (pledgeFrom(c, id)) continue;                                  // already said, nothing to add
+        const lines = (Array.isArray(n.history) ? n.history : [])
+          .map(h => (typeof h === "string" ? h : h?.text || "")).filter(Boolean);
+        // ⛔ BOTH HALVES, IN ONE LINE. "vow" alone is a wedding; "death" alone is a battle. The pact is the
+        // sentence that carries the reaching AND the dying, which is what makes this evidence and not a guess.
+        const line = lines.find(s => /\b(reach for|come for|will reach|vow|pact)\b/i.test(s) && /\b(death|dies|dying|killed|claims one)\b/i.test(s));
+        if (!line) continue;
+        const mutual = /\bmutual\b|\beach other\b|\bthe other will\b|\bboth\b/i.test(line);
+        // ⚠️ THE DAY IS IN THE LINE, AND STAMPING TODAY WOULD BE A LIE THE SCREEN THEN REPEATS. History rows
+        // are written "[d4] …"; Loki's vow was day 4 and this runs on day 400. Dating it now is the same shape
+        // as an undated save stamped with the hour it was read — an absence turned into an answer. When the
+        // line carries no day, `null` says so rather than guessing.
+        const dayIn = /^\s*\[d(\d+)\]/.exec(line);
+        recordPledge(c, { npcId: id, day: dayIn ? Number(dayIn[1]) : null, mutual, words: line, source: "history" });
+        added.push({ name: n.name || id, mutual });
+      }
+      if (!added.length) return {};
+      console.log(`[reconcile] sng-653: ${added.length} pledge(s) written from their own history — ${added.map(a => a.name).join(", ")}`);
+      return { notes: added.map(a => `${a.name} said they would come for you, and it is written down now${a.mutual ? " — and you said it back, so you owe them the same road" : ""}.`) };
     }
   },
   {

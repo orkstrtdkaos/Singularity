@@ -6,6 +6,7 @@
 // (Offscreen NPC evolution — them growing while you're away — is world-tick work, v0.4.)
 
 import { slugify } from "./quests.js";
+import { recordPledge, releasePledge } from "./death.js";   // SNG-653: "have they said so" — a promise, kept beside the bond it is not
 import { smartClamp, normName } from "./namematch.js"; // SNG-152: model prose clamps on a word boundary, never mid-word
 import { isMinorSubject, ageGateGap } from "./art.js";
 const ADULT_YEARS = 18;   // SNG-556 (Erik 2026-09-13): "adult is 18" — the one line the age gate turns on.
@@ -595,6 +596,16 @@ export function applyNpcUpdates(character, updates = [], ctx = {}) {
       }
     }
     // SNG-108: bond KIND + romantic STAGE — applied AFTER the score so the stage floor sees the fresh value.
+    // ⛔ SNG-653 — THE PLEDGE RIDES HERE, WITH THE BOND, AND IS NOT ONE. Aevi settled it as a bond op rather
+    // than a holding op, and the reason it must not TOUCH `bondStage`: Vess was already `committed` when she
+    // made the vow. Two people can be committed without this promise and can make this promise without being
+    // committed — "can they / would they / have they said so" are three questions and this is the third.
+    // ⚠️ TAKING IT BACK IS SPOKEN, never silent (the CCODE-469 lesson): `release: true` marks the record
+    // withdrawn instead of deleting it, so a screen can say a promise was taken back.
+    if (u.pledge && typeof u.pledge === "object") {
+      if (u.pledge.release) releasePledge(ctx.character || character, n.id, { day: ctx.day ?? null });
+      else recordPledge(ctx.character || character, { npcId: n.id, day: ctx.day ?? null, mutual: !!u.pledge.mutual, words: u.pledge.words || null });
+    }
     if (u.bondType || u.bondStage) {
       advanceBond(n, { bondType: u.bondType, bondStage: u.bondStage }, ctx.rules, ctx.day);
       // SNG-334 — ⛔ AND A TIE TO A PERSON BECOMES A PINNED FACT, HERE, at the one place a bond changes.

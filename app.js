@@ -180,7 +180,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.6.6";
+const APP_VERSION = "2.7.0";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -14533,8 +14533,18 @@ function wireHoldingOffers() {
   for (const btn of app.querySelectorAll("[data-hold-unfeature]")) btn.onclick = () => {
     const h = (character.holdings || []).find(x => x.id === btn.dataset.holdUnfeature);
     const f = h?.features?.[Number(btn.dataset.index)];
-    if (!f || !confirm(`Tear down ${f.name || f.kind}?`)) return;
-    removeFeature(character, btn.dataset.holdUnfeature, Number(btn.dataset.index), { worldCount: worldCount() });
+    // ⛔ CCODE-496 — AND SAY WHICH IT IS. A feature still being built is not "torn down", it is a job
+    // abandoned, and the two cost the player different things: the work stops and whatever the store already
+    // paid toward it is spent. Erik met the version of this that did nothing at all and said nothing at all.
+    if (!f) return;
+    const what = f.name || f.kind;
+    if (!confirm(f.building
+      ? `${what} is still being built. Stop the work?\n\nWhat the store has already put in is spent.`
+      : `Tear down ${what}?`)) return;
+    const r = removeFeature(character, btn.dataset.holdUnfeature, Number(btn.dataset.index), { worldCount: worldCount() });
+    // ⚠️ A REFUSAL IS AN ANSWER. This call used to be made and dropped, so a refusal re-rendered the same
+    // screen and read as a dead button — which is exactly what it was.
+    if (r && r.ok === false) { alert(r.why); return; }
     saveCharacter(character); again();
   };
   for (const btn of app.querySelectorAll("[data-hold-rename]")) btn.onclick = () => {
@@ -15052,6 +15062,21 @@ function renderHoldingsTab(manageId = null) {
   };
   wireHoldingOffers();
   // \u26d1 THE POPUP OPENS AND CLOSES THE WAY EVERY OTHER ONE HERE DOES \u2014 the button, the \u2715, and the backdrop.
+  // ⛔ SNG-653 §5 — "ASK THEM" IS THE DOOR BACK TO THE TABLE. Erik's whole report is that the screen kept
+  // telling him to have a conversation it could not help him start. ⚠️ IT DOES NOT MAKE THE PROMISE — it seeds
+  // the ask and hands it to the player, because whether they say yes is the GM's and the person's, never a
+  // button's. `wouldReachFor` is advice, not a gate: an ask at low bond is allowed, and it is a story.
+  for (const b of document.querySelectorAll("[data-wc-ask]")) b.onclick = () => {
+    const id = b.dataset.wcAsk;
+    const who = character.npcRegistry?.[id]?.name || "them";
+    const ask = `I want to talk to ${who} about what happens if I die — whether they would come for me.`;
+    renderPlay(character.activeScene?.lastTurn || null, { aside: `You go to find ${who}.` });
+    const ff = document.getElementById("freeform-input");
+    // ⚠️ `focus()` ALONE, AND NO `scrollIntoView`. §238 holds the page to exactly one self-scroll — the
+    // waiting line — because Erik once read a silence as a crash when the panel moved out from under him.
+    // A focus brings the field into view in every browser anyway, so obeying the rule costs nothing here.
+    if (ff) { ff.value = ask; ff.focus(); }
+  };
   for (const b of document.querySelectorAll("[data-hold-manage]")) b.onclick = () => renderHoldingsTab(b.dataset.holdManage);
   const hmClose = document.getElementById("hold-modal-close"); if (hmClose) hmClose.onclick = () => renderHoldingsTab(null);
   const hmBack = document.getElementById("hold-modal"); if (hmBack) hmBack.onclick = (e) => { if (e.target === hmBack) renderHoldingsTab(null); };
@@ -15220,15 +15245,49 @@ function renderCharacterScreen() {
         ${(() => {
           // ⛑ SNG-569's second half: OPEN THE DOOR TO THE CONVERSATION. The mechanic named, and the person named
           // beside it — because the stat was never the problem; the stat INSTEAD OF the relationship would have been.
-          // ⛔ ERIK 2026-09-14: the bond "gates whether they would BOTHER to". That question now has one home in
-          // the engine — this read was a hard-coded `>= 5` sitting where a dial belongs, and it is the SAME
-          // question the GM asks when it decides whether anyone comes.
-          const closest = Object.values(character.npcRegistry || {})
-            .filter(n => n && n.status === "active"
-              && DeathModel.wouldReachFor(character, n, { rules: CONTENT.rules }).would)
-            .sort((a, b) => (b.relationship ?? 0) - (a.relationship ?? 0)).slice(0, 3);
-          if (st.dead || !closest.length) return "";
-          return `<p class="hint" style="margin:6px 0 0">${esc(closest.map(n => n.name).join(", "))} — close enough that it would be them. <strong>That is a conversation to have with them, not a setting.</strong></p>`;
+          // ⛔ ERIK 2026-09-14: the bond "gates whether they would BOTHER to".
+          //
+          // ⛔ SNG-653 — AND THEN HE HAD THE CONVERSATION AND THIS LINE KEPT ASKING FOR IT. Loki's history carries
+          // the scene: Vess accepted his confession and made a mutual vow that if death claims one, the other will
+          // reach for them. This block still said *"that is a conversation to have with them, not a setting"*,
+          // because `wouldReachFor` reads the BOND — and a bond is not a promise. Nothing changed after the vow
+          // because nothing could: no field, no op and no tag existed for one.
+          //
+          // ⚠️ THREE QUESTIONS, KEPT APART, which is the rule `death.js` already states about the first two:
+          // "canReach answers CAN; wouldReachFor answers WOULD, and the two must never be the same function."
+          // HAVE THEY SAID SO is the third and it is the one a player acts on.
+          //
+          // ⛑ CAN IS DERIVED, AND SAYS SO. Measured 2026-09-25: of 114 registry people across 14 saves, ZERO
+          // store a level — and `npcsheet` derives one for 114 of 114, which makes `canReach` answer differently
+          // per person instead of "unknown" for everybody.
+          const people = Object.fromEntries(Object.entries(character.npcRegistry || {}).filter(([, n]) => n && n.status !== "dead" && n.status !== "departed"));
+          const rows = DeathModel.whoComesFor(character, people, { rules: CONTENT.rules, currentDay: absoluteWorldDay(),
+            rankFor: (n) => { try { return Math.max(1, Math.round((derivedLevel(n, { day: absoluteWorldDay(), cfg: CONTENT.rules?.npcStanding }) || 1) / 5)); } catch { return 1; } } });
+          const pledged = rows.filter(r => r.pledge);
+          const coming = pledged.filter(r => r.canAtAll);
+          const shortR = pledged.filter(r => !r.canAtAll);
+          const couldAsk = rows.filter(r => !r.pledge && r.would && r.canAtAll);
+          const ableOnly = rows.filter(r => !r.pledge && !r.would && r.canAtAll).length;
+          const mine = pledged.filter(r => r.mutual);
+          if (!rows.length) return "";
+          // ⚠️ CAN / CAN'T PER DEPTH, NO NUMBER. `resolveRetrieval` takes an outcome from its caller and is NOT
+          // rolled, so a percentage here would be one I invented. Erik has backlogged the retrieval roll; when it
+          // lands the odds come from the same function the resolver uses, and not before.
+          const depths = (r) => r.reach.map(d => `<span class="wc-depth${d.can ? " wc-can" : ""}" title="${esc(d.can ? `they can reach ${d.name}` : (d.why || `${d.name} is past their reach`))}">${esc(d.name)} ${d.can ? "✓" : "—"}</span>`).join("");
+          const seenTag = (r) => r.seen
+            ? `<span class="hint" title="you have watched them work">you have seen this</span>`
+            : `<span class="hint" title="derived from who they are, not from anything you have watched them do">as far as you have seen them</span>`;
+          const line = (r, extra = "") => `<div class="wc-row"><div class="wc-who"><strong>${esc(r.name)}</strong>${r.mutual ? ` <span class="wc-mutual" title="you promised it back">⇄ both ways</span>` : ""}${r.pledge?.day != null ? ` <span class="hint">said on day ${r.pledge.day}</span>` : ""}</div>
+            <div class="wc-reach">${depths(r)} · ${seenTag(r)}</div>${r.pledge?.words ? `<div class="wc-words">“${esc(smartClamp(String(r.pledge.words), 160))}”</div>` : ""}${extra}</div>`;
+          return `<div class="wc-block">
+            <div class="craft-tier-label">Who comes for you</div>
+            ${coming.length ? `<div class="wc-group"><span class="wc-head">Coming for you</span>${coming.map(r => line(r)).join("")}</div>` : ""}
+            ${shortR.length ? `<div class="wc-group"><span class="wc-head">Would come, cannot reach</span>${shortR.map(r => line(r)).join("")}</div>` : ""}
+            ${!pledged.length ? `<p class="hint" style="margin:4px 0"><strong>Nobody has said they will come for you.</strong> That is a conversation, and these are the people who could have it.</p>` : ""}
+            ${couldAsk.length ? `<div class="wc-group"><span class="wc-head">Could come, hasn\u2019t said</span>${couldAsk.slice(0, 5).map(r => line(r, `<button class="opt wc-ask" data-wc-ask="${esc(r.id)}" title="Start a scene with them about this">Ask them</button>`)).join("")}</div>` : ""}
+            ${ableOnly ? `<p class="hint" style="margin:4px 0">${ableOnly} more could reach you, but have no reason to.</p>` : ""}
+            ${mine.length ? `<p class="hint" style="margin:6px 0 0">⇄ <strong>You have promised to go for:</strong> ${esc(mine.map(r => r.name).join(", "))}. That is your road when they are the one who falls.</p>` : ""}
+          </div>`;
         })()}
         ${st.willing === false ? `<p class="hint" style="margin:6px 0 0;color:var(--warn,#e0b25a)">You have refused to be brought back. That is yours to say and it is honoured.</p>` : ""}
       </div>`;

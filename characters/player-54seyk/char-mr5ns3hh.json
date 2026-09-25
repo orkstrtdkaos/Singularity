@@ -6,7 +6,7 @@
   "origin": "harmonic",
   "background": "medic",
   "level": 2,
-  "xp": 149,
+  "xp": 151,
   "attributes": {
     "physical": 2,
     "mental": 5,
@@ -57,15 +57,15 @@
     "concrete_abstract": -0.08504765625,
     "chaos_order": 0.0114813125,
     "destruction_creation": 0.02425,
-    "violence_peace": 0.056135625,
+    "violence_peace": 0.06332884375,
     "death_life": 0.05564812499999999,
-    "falsehood_truth": 0.04705000000000001
+    "falsehood_truth": 0.05969750000000001
   },
   "attunement": 2,
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 129,
-  "energy": 58,
+  "energy": 53,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -257,25 +257,30 @@
         "player": "Sit on the edge of the trestle where he can see you clearly and say nothing — let the silence do what words cannot",
         "summary": "In the quiet of the wayhouse at dawn, Adelheid's silence opened what words could not — Silas Weir spoke his own name.",
         "narration": "You pull the stool from beneath the trestle and settle on it, close enough that he can see your face in the gray-gold light from the window. You say nothing. Your hands rest open in your lap. Aevi dims almost to nothing — a few quiet motes near your shoulder, barely there.\n\nThe silence holds. Outside, a wood pigeon calls once and stops. The hearth ticks softly. Behind the curtain, Vreni has gone very still; you can hear her breathing, slow and even, the way a person breathes when they have decided to give a room its space.\n\nHe watches you for a long time. The assessment in his eyes does not quite leave — it is too much a part of him — but something underneath it shifts. His shoulders drop a fraction. A man used to measuring distance, and you have not closed it, and you have not retreated, and that, it seems, is enough.\n\n\"Silas,\" he says. Quietly. Not an apology. Not a confession. Just the name, offered across the space between you, the way you'd set something breakable on a table rather than put it in someone's hands. He waits a moment to see if you will catch it wrong. You don't move. He exhales — a careful thing, controlled — and his eyes go briefly to the window and the pale dawn beyond it. \"My name is Silas Weir.\""
+      },
+      {
+        "player": "Receive it simply — nod once, say his name back to him, and ask what brought him to the wayhouse",
+        "summary": "Silas Weir spoke his name but closed again when Adelheid asked what brought him here — willing to be known, not yet willing to explain.",
+        "narration": "You nod once. \"Silas,\" you say — just that, his name returned to him like something you are handing back, not keeping.\n\nThen you ask what brought him here.\n\nHe looks at you for a moment longer, and the thing that had shifted in his face — that small unlocking — closes again. Not hostile. Careful. He is not a man who frightens easily, and he is not frightened now, but you have moved too fast for him, or asked the wrong question in the wrong order, or both. The gratitude in his eyes is still there, but it has stepped back behind something older and more practiced.\n\n\"I needed somewhere to stop,\" he says. It is not a lie. It is also not an answer.\n\nHe adjusts his wrapped forearm against his chest, a small settling motion, and looks past you toward the window and the gray-gold light strengthening there. He is deciding again — you can see the calculation, the weighing — but this time he does not tip toward you. The silence that follows is not the open kind. It is the kind a person holds when they have decided they are not ready yet, and they would like you to understand that without having to say it.\n\nBehind the curtain, Vreni does not move. Aevi drifts a little closer to your shoulder, dimly teal, and says nothing."
       }
     ],
     "lastTurn": {
-      "narration": "You pull the stool from beneath the trestle and settle on it, close enough that he can see your face in the gray-gold light from the window. You say nothing. Your hands rest open in your lap. Aevi dims almost to nothing — a few quiet motes near your shoulder, barely there.\n\nThe silence holds. Outside, a wood pigeon calls once and stops. The hearth ticks softly. Behind the curtain, Vreni has gone very still; you can hear her breathing, slow and even, the way a person breathes when they have decided to give a room its space.\n\nHe watches you for a long time. The assessment in his eyes does not quite leave — it is too much a part of him — but something underneath it shifts. His shoulders drop a fraction. A man used to measuring distance, and you have not closed it, and you have not retreated, and that, it seems, is enough.\n\n\"Silas,\" he says. Quietly. Not an apology. Not a confession. Just the name, offered across the space between you, the way you'd set something breakable on a table rather than put it in someone's hands. He waits a moment to see if you will catch it wrong. You don't move. He exhales — a careful thing, controlled — and his eyes go briefly to the window and the pale dawn beyond it. \"My name is Silas Weir.\"",
-      "sceneSummary": "In the quiet of the wayhouse at dawn, Adelheid's silence opened what words could not — Silas Weir spoke his own name.",
+      "narration": "You nod once. \"Silas,\" you say — just that, his name returned to him like something you are handing back, not keeping.\n\nThen you ask what brought him here.\n\nHe looks at you for a moment longer, and the thing that had shifted in his face — that small unlocking — closes again. Not hostile. Careful. He is not a man who frightens easily, and he is not frightened now, but you have moved too fast for him, or asked the wrong question in the wrong order, or both. The gratitude in his eyes is still there, but it has stepped back behind something older and more practiced.\n\n\"I needed somewhere to stop,\" he says. It is not a lie. It is also not an answer.\n\nHe adjusts his wrapped forearm against his chest, a small settling motion, and looks past you toward the window and the gray-gold light strengthening there. He is deciding again — you can see the calculation, the weighing — but this time he does not tip toward you. The silence that follows is not the open kind. It is the kind a person holds when they have decided they are not ready yet, and they would like you to understand that without having to say it.\n\nBehind the curtain, Vreni does not move. Aevi drifts a little closer to your shoulder, dimly teal, and says nothing.",
+      "sceneSummary": "Silas Weir spoke his name but closed again when Adelheid asked what brought him here — willing to be known, not yet willing to explain.",
       "choices": [
         {
-          "label": "Receive it simply — nod once, say his name back to him, and ask what brought him to the wayhouse",
+          "label": "Let it rest — turn to the compress and check the wound instead, giving him time without pressure",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {
-            "falsehood_truth": 0.3,
-            "violence_peace": 0.2
+            "violence_peace": 0.4,
+            "falsehood_truth": 0.2
           },
           "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
             "calm",
-            "negotiate"
+            "help"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -284,7 +289,27 @@
           "emergenceId": null
         },
         {
-          "label": "Tell him why you are here — Mara sent you, and he may as well know that she did",
+          "label": "Ask something smaller — not why he is here, but how long he thought he could keep the wound hidden",
+          "attribute": "social",
+          "subAttribute": "insight",
+          "axes": {
+            "falsehood_truth": 0.3,
+            "violence_peace": 0.2
+          },
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "negotiate",
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Say plainly that Mara sent you — let him know the shape of what you already carry, and give him room to meet it",
           "attribute": "social",
           "subAttribute": "presence",
           "axes": {
@@ -295,29 +320,9 @@
           "opposedDifficulty": null,
           "intentTags": [
             "negotiate",
-            "plan"
+            "persuade"
           ],
           "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask him about the sluice-turn — what did he hear in the water three weeks ago",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "concrete_abstract": -0.2,
-            "falsehood_truth": 0.3
-          },
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study",
-            "investigate"
-          ],
-          "abilityId": "echo_sense",
           "energyCost": null,
           "trivial": false,
           "encounterId": null,
@@ -330,79 +335,18 @@
         "energy": 0,
         "xp": 0
       },
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "the-patient-who-is-not-sick-enough",
-          "note": "The patient has spoken his own name — Silas Weir — in the quiet of the wayhouse at dawn. The distance has closed enough for that."
-        },
-        {
-          "op": "progress",
-          "questId": "maras-errand",
-          "note": "Silas Weir has named himself — the center of Mara's unspoken errand is now in the room, awake and speaking."
-        }
-      ],
-      "stageOps": [
-        {
-          "questId": "the-patient-who-is-not-sick-enough",
-          "stageId": "s1",
-          "evidence": "Adelheid's silence created the space for Silas Weir to speak his own name — the first honest exchange between them."
-        }
-      ],
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "silas-weir",
-          "name": "Silas Weir",
-          "note": "Spoke his own name in the quiet of dawn — offered it plainly, not as a confession, across the distance Adelheid did not close and did not retreat from.",
-          "learned": [
-            "His true name is Silas Weir — confirmed by his own admission at dawn on day 3",
-            "He offered the name as something careful and breakable, not as surrender — he is still assessing"
-          ],
-          "status": "active",
-          "statusNote": "Lying on the wayhouse pallet, forearm wrapped, fever-root course begun; has now identified himself to Adelheid"
-        },
-        {
-          "op": "update",
-          "npcId": "sister-vreni",
-          "name": "Sister Vreni",
-          "note": "Held still behind the curtain — gave the room its space without being asked.",
-          "status": "active",
-          "statusNote": "Standing at the trestle behind the curtain, listening; the treatment is running and the patient has begun to speak"
-        }
-      ],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "Silas Weir has identified himself by name to Adelheid at the wayhouse — spoken voluntarily, in the quiet of dawn, after three days of false names.",
-          "subjectId": "silas-weir"
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "silas-weir",
-          "label": "Silas Weir",
-          "kind": "person",
-          "entityId": "silas-weir",
-          "fact": "Confirmed in person at the wayhouse: Silas Weir gave his own name at dawn on day 3, offered quietly across a silence Adelheid held without pressure. He is younger than expected; the name came as something placed carefully, not surrendered.",
-          "links": [
-            "the-patient-who-is-not-sick-enough",
-            "maras-errand",
-            "echo-river-contamination",
-            "precursor-layer"
-          ]
-        }
-      ],
+      "ledgerEvents": [],
+      "questUpdates": [],
       "scene": {
-        "setting": "The wayhouse interior, early dawn, gray-gold light through the single window. Hearth warm. The curtain is drawn back; Adelheid sits on the stool at the trestle edge, within clear sight of the patient. Vreni is still behind the curtain.",
+        "setting": "The wayhouse interior, early dawn, gray-gold light through the single window strengthening. Hearth warm. The curtain is drawn back; Adelheid sits on the stool at the trestle edge, within clear sight of the patient. Vreni is still behind the curtain, unmoving.",
         "npcsPresent": [
           {
             "name": "Silas Weir",
-            "state": "Lying on the pallet, forearm wrapped, eyes on Adelheid — has just spoken his name, waiting to see what she does with it"
+            "state": "Lying on the pallet, forearm wrapped against his chest, looking past Adelheid toward the window — closed again after a brief opening, deciding"
           },
           {
             "name": "Sister Vreni",
-            "state": "Standing still at the trestle behind the curtain, breathing slow, giving the room its space"
+            "state": "Still behind the curtain, breathing slow, holding the room its space"
           }
         ],
         "objects": [
@@ -413,26 +357,39 @@
           "Two candles burnt low"
         ],
         "threads": [
-          "Silas Weir has named himself — the next move is Adelheid's",
-          "Vreni is listening, present but not intervening",
+          "Silas named himself but closed when asked his reason for coming — he is weighing something",
+          "Vreni is present and listening, not intervening",
           "What Silas heard at the sluice-turn three weeks ago is still unsaid"
         ]
       },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "silas-weir",
+          "note": "Received his own name returned to him without comment — opened briefly, then closed again when asked what brought him here. Said only 'I needed somewhere to stop.' Not a lie; not an answer.",
+          "learned": [
+            "Silas will give a name but not a reason — he is still deciding how much to trust"
+          ],
+          "statusNote": "Lying on the pallet at the wayhouse, wound wrapped, stable but not yet speaking freely",
+          "relationshipDelta": 0
+        }
+      ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a quiet exchange at dawn — a silence held and a name offered"
-      }
+        "why": "a brief exchange at the pallet — the dawn has barely moved"
+      },
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The wayhouse interior, early dawn, gray-gold light through the single window. Hearth warm. The curtain is drawn back; Adelheid sits on the stool at the trestle edge, within clear sight of the patient. Vreni is still behind the curtain.",
+      "setting": "The wayhouse interior, early dawn, gray-gold light through the single window strengthening. Hearth warm. The curtain is drawn back; Adelheid sits on the stool at the trestle edge, within clear sight of the patient. Vreni is still behind the curtain, unmoving.",
       "npcsPresent": [
         {
           "name": "Silas Weir",
-          "state": "Lying on the pallet, forearm wrapped, eyes on Adelheid — has just spoken his name, waiting to see what she does with it"
+          "state": "Lying on the pallet, forearm wrapped against his chest, looking past Adelheid toward the window — closed again after a b"
         },
         {
           "name": "Sister Vreni",
-          "state": "Standing still at the trestle behind the curtain, breathing slow, giving the room its space"
+          "state": "Still behind the curtain, breathing slow, holding the room its space"
         }
       ],
       "objects": [
@@ -443,12 +400,12 @@
         "Two candles burnt low"
       ],
       "threads": [
-        "Silas Weir has named himself — the next move is Adelheid's",
-        "Vreni is listening, present but not intervening",
+        "Silas named himself but closed when asked his reason for coming — he is weighing something",
+        "Vreni is present and listening, not intervening",
         "What Silas heard at the sluice-turn three weeks ago is still unsaid"
       ]
     },
-    "beats": 3,
+    "beats": 4,
     "subPlace": {
       "slug": "third-terrace-fever-root-beds",
       "name": "Third Terrace — Fever-Root Beds",
@@ -1442,7 +1399,7 @@
         "locationId": "gen-mara-wells-store"
       }
     ],
-    "turnsSinceOffer": 2,
+    "turnsSinceOffer": 3,
     "recentOffers": [
       {
         "thing": "Mara has named the choice that binds everything: find Silas Weir before the Harmonics do, or send word and let them decide his fate",
@@ -8454,17 +8411,17 @@
   "itemReclaimVersion": 1,
   "nameRepairVersion": 1,
   "tendencies": {
-    "generous": 5.795205438072138,
-    "social": 6.357447390990938,
-    "cerebral": 19.1998459434979,
-    "cautious": 15.083137785838883,
-    "strategic": 12.634304726524688,
-    "carousing": 0.5598962435302033,
-    "risky": 0.2806497461304277,
-    "ruthless": 0.6400850769472586,
-    "patient": 2.156346923469063,
-    "craft": 2.1386332365278484,
-    "stealth": 0.9036878906249999
+    "generous": 5.650325302120335,
+    "social": 7.198511206216164,
+    "cerebral": 18.719849794910452,
+    "cautious": 14.70605934119291,
+    "strategic": 12.31844710836157,
+    "carousing": 0.5458988374419482,
+    "risky": 0.273633502477167,
+    "ruthless": 0.624082950023577,
+    "patient": 2.1024382503823364,
+    "craft": 2.0851674056146523,
+    "stealth": 0.8810956933593749
   },
   "aptitudes": [
     "strategist",
@@ -8472,11 +8429,11 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 88,
+  "actionCount": 89,
   "bondLogFrom": null,
   "teachers": {},
   "regionsKnown": {
-    "valley": 49
+    "valley": 50
   },
   "company": [],
   "forkChoices": {},
@@ -8660,8 +8617,8 @@
   "bands": [],
   "_silasGrantsRevoked": true,
   "reconcileVersion": 83,
-  "updatedAt": 1790369117298,
-  "rev": 113,
+  "updatedAt": 1790369321055,
+  "rev": 114,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -8674,7 +8631,7 @@
   "featureOffers": [],
   "_pinsInitialized": true,
   "_opUnknown": {
-    "sceneSummary": 49
+    "sceneSummary": 50
   },
   "_applyFailures": null,
   "sessions": [
@@ -8737,10 +8694,10 @@
     {
       "id": "sess-8",
       "startedAt": "2026-09-25T20:45:17.264Z",
-      "lastAt": "2026-09-25T20:45:17.264Z",
+      "lastAt": "2026-09-25T20:48:41.040Z",
       "startDay": 87,
       "endDay": 87,
-      "beats": 1
+      "beats": 2
     }
   ],
   "_debtReceipts": [],
@@ -8763,11 +8720,11 @@
     "trust": 1,
     "endure": 1,
     "practical": 1,
-    "negotiate": 6,
+    "negotiate": 7,
     "help": 6,
     "plan": 3,
     "rapport": 2,
-    "calm": 3,
+    "calm": 4,
     "craft": 3,
     "sustain": 2,
     "sneak": 1
@@ -8779,18 +8736,18 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 44,
-    "choices": 44,
+    "sceneSummary": 45,
+    "choices": 45,
     "questUpdates": 27,
-    "scene": 44,
-    "npcUpdates": 40,
+    "scene": 45,
+    "npcUpdates": 41,
     "placeUpdates": 15,
     "codexUpdates": 32,
-    "timeOps": 37,
+    "timeOps": 38,
     "imagePrompt": 8,
     "gambitApt": 21,
-    "sceneEnded": 30,
-    "characterDeltas": 28,
+    "sceneEnded": 31,
+    "characterDeltas": 29,
     "offer": 15,
     "stateOps": 3,
     "deeds": 6,
@@ -8800,7 +8757,7 @@
     "_engineClosedScene": 2,
     "stageOps": 4
   },
-  "_opTurns": 44,
+  "_opTurns": 45,
   "_opCountingSince": "2026-09-15T23:58:48.348Z",
   "gallery": [
     {

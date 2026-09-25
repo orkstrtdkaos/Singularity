@@ -7499,6 +7499,53 @@ console.log("\n── §76b · a crafted feature carries its craft, its season, 
   }
 }
 
+/* ═════ §76h — ATTACK & DEFENSE: FOUR CARDS, EVERY NUMBER READ (SNG-652 §8, CCODE-506) ═════ */
+// Aevi's §8: defensive features with their next rung · the watch (§76f/g) · muster, with a link into the band
+// flow · powers & influence. ⛑ Her §1 renames land HERE, with their sections — I reported that none of those
+// labels existed in app.js because they were the mockup's, and this is where they become real.
+console.log("\n── §76h · what holds them off, what can be sent out, and who else holds this ground ──");
+{
+  const H8 = await import("../engine/holdings.js");
+  const { loadContentHeadless: lch8 } = await import("./headless_content.mjs");
+  const C8 = await lch8();
+  const eco8 = C8.rules.economy, cfg8 = { ...eco8.holdStore, features: eco8.holdFeatures };
+  const A8 = rd("app.js");
+
+  // ⚠️ THE CATEGORY, NOT THE FAMILY — and the screen is what caught it. Filtering "what trains people" by
+  // `family === "martial"` listed a Warded Wall and a Shadow and Death Barrier as training grounds on Silas's
+  // own hold. Aevi's catalogue has a `muster` category; reading it is right today AND grows with her content.
+  const musterKinds = Object.keys(H8.featureKinds(cfg8)).filter(k => H8.featureCategory(k, cfg8)?.id === "muster");
+  check(`§76h: ⛔ "what trains people" reads AEVI'S CATEGORY, never a guess at family (${musterKinds.length} muster kinds)`,
+    musterKinds.length >= 2
+    && musterKinds.every(k => !Number(H8.featureDef(k, cfg8)?.defence) || H8.featureCategory(k, cfg8)?.id === "muster")
+    && !musterKinds.includes("wall") && !musterKinds.includes("ward_line")
+    && /featureCategory\(f\.kind, sCfg\)\?\.id === "muster"/.test(A8),
+    JSON.stringify(musterKinds));
+  // ⛑ AND A DEFENSIVE FEATURE'S NEXT RUNG IS PRICED. A rung you cannot price is not a decision, and
+  // `raiseQuote` already returns the goods, the keep either side, and why it is refused.
+  const hold8 = { id: "h8", kind: "post", condition: "holding", locationId: null, improvements: [], store: {},
+    features: [{ kind: "wall", name: "a wall", count: 1, day: 1 }] };
+  const q8 = H8.raiseQuote(hold8, 0, cfg8);
+  check("§76h: ⛔ …and a defensive feature's NEXT RUNG names its effect, its price, its keep, and why it is refused",
+    q8 && q8.level === 2 && typeof q8.effect === "string" && Object.keys(q8.goods || {}).length
+    && q8.upkeepThen !== q8.upkeepNow && q8.ok === false && /store needs/.test(String(q8.why))
+    && /keep \$\{q\.upkeepNow\} → \$\{q\.upkeepThen\}/.test(A8) && /q\.ok === false && q\.why/.test(A8),
+    JSON.stringify({ level: q8.level, effect: q8.effect, goods: q8.goods, why: q8.why }));
+  // ⚠️ MUSTER IS `musterCapacityOf`, AND THE LINK IS A LINK — SNG-650 §7.4: "no second band screen."
+  check("§76h: …muster reads `musterCapacityOf`, and \"Raise from here\" goes to the Bands tab rather than raising a second way",
+    /musterCapacityOf\(h, sCfg, \{ mustered: 0 \}\)/.test(A8)
+    && /data-ad-raise/.test(A8)
+    && /querySelectorAll\("\[data-ad-raise\]"\)\) b\.onclick = \(\) => renderBandsTab\(\)/.test(A8),
+    "a second raise door is how two rules for one act come to disagree");
+  // ⛑ POWERS: who holds this ground, and which WAY they move it — the sum is signed on purpose.
+  check("§76h: …and the powers card reads `powersReaching` and `dangerLiftAt`, naming which way each moves the danger",
+    /powersReaching\(h\.locationId, \{ content: CONTENT, character \}\)/.test(A8)
+    && /dangerLiftAt\(h\.locationId/.test(A8)
+    && /makes this ground harder/.test(A8) && /makes this ground quieter/.test(A8));
+  check("§76h: …and a hold nobody reaches says so rather than showing an empty card",
+    /nobody standing reaches this place/.test(A8));
+}
+
 /* ═════ §76g — THE TWO ROLLS ERIK RULED: COMING BACK, AND SEEING THEM COMING (CCODE-504) ═════ */
 // ✅ ERIK, 2026-09-25: "Yes on the rolls for return from death and for watch success. Set something smart and
 // let Aevi know how to tweak it." Both are additive stacks of NAMED terms, every one a dial in

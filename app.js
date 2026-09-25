@@ -69,10 +69,10 @@ import { enterDeathState } from "./engine/death.js";
 wireDeathModel(DeathModel);
 import { carriageOf, voyageOf, isMoored, canSail, sailHolding, voyageLine, featureRuling, canBuildOn } from "./engine/carriage.js";
 import { roomOf, roomRefusal, promotionOffer, promoteHolding, trainingAt, mountsAt, healingAt, quarteringOf, vaultOf, chargeOf, chargeWord, depositToVault, withdrawFromVault, holdingFieldSources } from "./engine/holdings.js";   // ⛔ CCODE-429: a hold has room · CCODE-430: a yard trains   // B6b: the holding that moves
-import { raidRisk, watchReadout, watchOdds, craftPlacementCost, featureCost, featureDef, featureDoes, featureCategory, allFeatures, refreshImprovement, canBeAskedToWork, holdingFactsLine, answerFeatureOffer, holdingLedger, addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, yieldsFor, upkeepFor, appointKeeper, reclaimHolding, improveHolding, setCrew, setGarrison, holdingGround, addFeature, removeFeature, renameHolding, featureKinds, residentsOf, holdingMeaningAura, holdingFieldDelta } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
+import { raidRisk, watchReadout, watchOdds, craftPlacementCost, defenceOf, featureCost, featureDef, featureDoes, featureCategory, allFeatures, refreshImprovement, canBeAskedToWork, holdingFactsLine, answerFeatureOffer, holdingLedger, addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, yieldsFor, upkeepFor, appointKeeper, reclaimHolding, improveHolding, setCrew, setGarrison, holdingGround, addFeature, removeFeature, renameHolding, featureKinds, residentsOf, holdingMeaningAura, holdingFieldDelta } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
 import { buildDevReport, unknownOpsIn } from "./engine/devreport.js";   // SNG-559: the Play/Dev instrument
 import { makeField, fieldDataFrom, FIELD_KINDS, KIND_LABEL, MEMBERSHIP } from "./engine/field.js";
-import { assaultableAt, garrisonContingents, noteHoldLoss, takeHold, encounterOwnerFilter, seedPowerKnowledge, isKnownPower } from "./engine/powers.js";
+import { assaultableAt, garrisonContingents, noteHoldLoss, takeHold, encounterOwnerFilter, seedPowerKnowledge, isKnownPower, powersReaching, dangerLiftAt } from "./engine/powers.js";
 import { buildNemesisPrompt, applyNemesisChoice } from "./engine/nemesis.js";   // ⛔ SNG-648: the choosing call   // SNG-634 C5: their holds are places you can take   // CCODE-457: why the ground here reads the way it does · CCODE-472: and the layer the map draws
 import { FIRE_TESTS, diffKeys } from "./engine/firetests.js";   // SNG-560: the parts that have never been used
 import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, roleBadges, teacherOfferReady, applyPartyOps, activeCompany, formerCompany } from "./engine/company.js";
@@ -180,7 +180,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.7.7";
+const APP_VERSION = "2.8.0";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -14967,11 +14967,51 @@ function renderHoldingsTab(manageId = null) {
               <span class="hint">${wo.terms.map(x => `${esc(x.label)} ${x.value >= 0 ? "+" : ""}${x.value}`).join(" · ")}</span>
               <span class="hint">${wo.nextBody ? `one more body: <strong>+${wo.nextBody}%</strong>` : "another body adds nothing to seeing them — the wall is full; they would add to the fight"}</span></div>` : ""}
             <div class="hint">${esc(wr.marginal)}</div></div>` : "";
+          // ⛔ SNG-652 §8 — ATTACK & DEFENSE, the other three cards. The watch above is card 2.
+          // ⛑ EVERY NUMBER READ: `featureDoes` for what a defensive feature gives, `levelEffectOf`/`raiseQuote`
+          // for what the next level would give and what it costs, `musterCapacityOf` for what can be sent out,
+          // `powersReaching` for who holds this ground. Nothing here computes a rule a second time.
+          const ad = (() => {
+            const kindsAD = featureKinds(sCfg);
+            // 1 · DEFENSIVE FEATURES — everything that adds to what the place can hold off, with its next rung.
+            const defs = (h.features || []).map((f, i) => ({ f, i, def: featureDef(f.kind, sCfg) }))
+              .filter(x => x.def && (Number(x.def.defence) || x.def.watch));
+            const defRows = defs.map(({ f, i, def }) => {
+              const q = (() => { try { return raiseQuote(h, i, sCfg); } catch { return null; } })();
+              const does = featureDoes(f.kind, sCfg, { holding: h, feature: f, count: f.count, level: featureLevel(f) });
+              return `<div class="ad-row"><span><strong>${esc(f.name || def.label || f.kind)}</strong>${featureLevel(f) > 1 ? ` <span class="hold-lv">L${featureLevel(f)}</span>` : ""}${f.building ? ` <span class="hint">— still being built</span>` : ""}</span>
+                <span class="hint">${does.filter(x => x.key === "defence" || x.key === "watch").map(x => x.said).join(" · ") || "—"}</span>
+                ${q && q.level ? `<span class="hint">next: ${esc(String(q.effect || `level ${q.level}`))}${q.goods && Object.keys(q.goods).length ? ` · ${Object.entries(q.goods).map(([g, n]) => `${n} ${String(g).replace(/_/g, " ")}`).join(" + ")}` : ""}${q.upkeepThen != null && q.upkeepThen !== q.upkeepNow ? ` · keep ${q.upkeepNow} → ${q.upkeepThen}` : ""}${q.ok === false && q.why ? ` — <strong>${esc(q.why)}</strong>` : ""}</span>` : ""}</div>`;
+            }).join("");
+            const stone = defenceOf(h, sCfg);
+            // 3 · MUSTER — what this hold can SEND OUT, and the door into the band flow.
+            const spare = (() => { try { return musterCapacityOf(h, sCfg, { mustered: 0 }); } catch { return 0; } })();
+            // ⚠️ AEVI'S `muster` CATEGORY, not my guess at `family`. Measured on screen: filtering by
+            // family === "martial" listed a Warded Wall and a Shadow and Death Barrier as places that TRAIN
+            // people. Her catalogue says muster_yard, barracks and drill_ground, and reading it means a fourth
+            // one counts the day she authors it.
+            const trains = (h.features || []).filter(f => featureCategory(f.kind, sCfg)?.id === "muster")
+              .map(f => esc(f.name || featureDef(f.kind, sCfg)?.label || f.kind));
+            // 4 · POWERS & INFLUENCE — who holds this ground, and which way they move its danger.
+            const pw = (() => { try { return powersReaching(h.locationId, { content: CONTENT, character }); } catch { return []; } })();
+            const lift = (() => { try { return dangerLiftAt(h.locationId, { content: CONTENT, character }); } catch { return 0; } })();
+            if (!defRows && !stone && !spare && !pw.length) return "";
+            return `<div class="ad-block"><span class="hs-lbl">Attack &amp; defense</span>
+              ${defRows || stone ? `<div class="ad-card"><span class="ad-head">Defensive features</span>${defRows || `<div class="hint">nothing built that holds anyone off</div>`}
+                ${stone ? `<div class="hint">— ${stone} of stone all told, which cuts what a raid takes even when nobody sees them</div>` : ""}</div>` : ""}
+              <div class="ad-card"><span class="ad-head">Muster</span>
+                <div class="hint">${spare > 0 ? `room to raise <strong>${spare}</strong> more hand${spare === 1 ? "" : "s"} here` : "no room to raise anyone — the hands it can hold are already working"}${trains.length ? ` · trains at: ${trains.join(", ")}` : ""}</div>
+                ${spare > 0 ? `<button class="opt" data-ad-raise="${esc(h.id)}" title="Take this into the Bands tab, where a band is formed">Raise from here →</button>` : ""}</div>
+              ${pw.length || lift ? `<div class="ad-card"><span class="ad-head">Powers &amp; influence</span>
+                ${pw.length ? pw.map(p => `<div class="ad-row"><span>${esc(p.name || p.id)}</span><span class="hint">${Number(p.dangerLift) > 0 ? `makes this ground harder (+${p.dangerLift})` : Number(p.dangerLift) < 0 ? `makes this ground quieter (${p.dangerLift})` : "holds ground here"}</span></div>`).join("")
+                  : `<div class="hint">nobody standing reaches this place</div>`}
+                ${lift ? `<div class="hint">— between them they move the danger here by ${lift > 0 ? "+" : ""}${lift}</div>` : ""}</div>` : ""}</div>`;
+          })();
           const risk = rk && rk.chance > 0 ? `<div class="hs-risk" title="${esc(rk.terms.map(x => `${x.label} ×${Math.round(x.mult * 100) / 100}`).join(" · "))}">
             ⚠ At this stock a raid would take about <strong>${rk.wouldTake}</strong> crystal of goods — about <strong>1 raid in ${rk.everyN} passes</strong> gets through, so it costs you ~${rk.expectedLoss} a pass to stand here holding it.
             <span class="hint">${esc(rk.terms.map(x => x.label).join(" · "))}</span></div>`
             : rk && rk.why ? `<div class="hs-risk hint">⚠ No raid risk here — ${esc(rk.why)}.</div>` : "";
-          return cmp + watch + risk;
+          return cmp + watch + risk + ad;
         })() : ""}
         ${(() => { const v = vaultOf(h); if (!v.length) return ""; const atHold = hereNow()?.id === h.locationId;   // ⛔ CCODE-444: what its vault keeps
           return `<div class="hint hold-has hold-vault"><span class="hold-ctl-label">vault</span>${v.map((it, i) => { const c = chargeOf(it, CONTENT.items || {}); const on = it.active !== false;
@@ -15166,6 +15206,10 @@ function renderHoldingsTab(manageId = null) {
   // telling him to have a conversation it could not help him start. ⚠️ IT DOES NOT MAKE THE PROMISE — it seeds
   // the ask and hands it to the player, because whether they say yes is the GM's and the person's, never a
   // button's. `wouldReachFor` is advice, not a gate: an ask at low bond is allowed, and it is a story.
+  // ⛔ SNG-652 §8 card 3 — "Raise from here" is a LINK INTO THE EXISTING FLOW, never a second raise. Aevi:
+  // "it carries a Raise from here link into the band/legion flow", and the Bands tab is where a band is formed
+  // (SNG-650 §7.4: "no second band screen").
+  for (const b of document.querySelectorAll("[data-ad-raise]")) b.onclick = () => renderBandsTab();
   for (const b of document.querySelectorAll("[data-wc-ask]")) b.onclick = () => {
     const id = b.dataset.wcAsk;
     const who = character.npcRegistry?.[id]?.name || "them";

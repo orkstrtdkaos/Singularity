@@ -118,4 +118,12 @@ The Holdings screen links a person's name here (SNG-651).
    - It has bands and people assigned, a commander, and its own *before it can take the field* list, from
      `legionplan.js`.
    - It has **Gather them**, and **Form the legion** once the list is clear.
+5a. **"Raise the band" becomes "Form the band"** (and "Form the legion"). Erik: *"Raise the band sounds like you're
+    destroying it."* ⚠️ The engine verb `raiseBand` keeps its name; only the player's word changes.
+    **How it differs from Gather them:**
+    - **Gather them** sends word, and people start walking to you. Nothing is paid, and the band still doesn't exist.
+    - **Form the band** makes it real: pay starts, it can be called to a fight, and it appears in the Bands tab as
+      raised. Anyone still on the road joins when they arrive.
+    - You can form before everyone has arrived, or gather without ever forming.
+    - The screen says this in one line under the two buttons.
 6. **Beds don't block.** The *"beds for 5"* line becomes a warning, *"2 will camp"* (SNG-652 §5a).

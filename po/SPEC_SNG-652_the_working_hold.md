@@ -241,6 +241,58 @@ one more body is worth it.
    It carries a **"Raise from here"** link into the band/legion flow (`raiseBand` / `addContingent`).
 4. **Powers & influence:** SNG-651's card, renamed.
 
+### §8a — Crafted defences: how long they last, layers, ward types, and they can be broken
+
+> ⛔ **Erik, 2026-09-25:** *"the Shadow and Death Barrier is from Silas' crafts. Since crafts sometimes are permanent
+> and sometimes need to be refreshed, we need to indicate that. The barriers can be layers and add defense and could
+> add specific ward types. They need to be able to be targeted and able to be disrupted or destroyed as well."*
+
+**What the save says today.** Silas's barrier is on his hold as:
+
+`{kind:"barrier", name:"Shadow and Death Barrier", by:"you", craftIds:[], day:68}`
+
+The feature knows it was crafted (`by`), but **`craftIds` is empty**. So which craft made it, and whether that craft
+lasts, is lost when the feature is written. The same is true of Stillwater's Lab and the Warded Wall.
+⚠️ **Reader before field:** the fix starts where the feature is written.
+
+**New fields on a feature** (all optional; a built feature with none of them behaves as today):
+
+| field | meaning |
+|---|---|
+| `craftIds` | the craft(s) that made or warded it; **actually written** at the moment of casting |
+| `lasts` | one of the three below |
+| &nbsp;&nbsp;`permanent` | stays until destroyed |
+| &nbsp;&nbsp;`{renewEvery: n}` | passes between renewals, from the craft's own duration text |
+| &nbsp;&nbsp;`{whileCasterLives: id}` | a ward that ends with the person who holds it |
+| `dueAt` | the world-count at which an unrenewed ward lapses |
+| `wards` | the domains it wards against, from the craft's domains: *death, shadow, warding, fire…* |
+| `integrity` | 0–100; wear from being tested, disrupted or struck |
+| `layer` | its position in the barrier stack, from outermost to innermost |
+
+**The screen, per defensive feature,** shows:
+- **Source:** *built*, or *crafted by Silas*, with the craft named.
+- **How long it lasts:** *permanent*, *must be renewed · due in 2 passes*, or *lasts while Silas lives*.
+- **Ward chips.**
+- **An integrity bar** with what wore it: *"worn 60% · tested by the Harvest Hand last pass"*.
+- **Actions:** *Renew* (whoever holds the craft, not only the one who cast it) and *Raise* (upgrade).
+
+**Layers.** Barrier-type features (barrier, ward_line, wall, moat, thorn_line, gate) stack from outermost to innermost:
+- Each layer adds its defence.
+- A raid resolves against the layers in turn. A layer that holds stops the raid there.
+- **A ward type counts double against an attacker of that domain.** A death ward turns the Harvest Hand's reapers
+  harder than stone does, and a shadow ward adds to the chance of seeing a theft (§7).
+
+**Targeted, disrupted, destroyed.** Raids and powers' actions can aim at a layer rather than at the store:
+- **Tested:** the layer loses some integrity and the raid is repelled. This is today's "defended" outcome, now leaving
+  a mark.
+- **Disrupted:** the layer is suppressed for *n* passes. It gives no defence and no ward until renewed or until
+  the time runs out.
+- **Destroyed:** the layer is gone. A crafted one can be recast; a built one must be rebuilt.
+- A **renewable ward that lapses** simply switches off. It's shown as *"lapsed — renew to restore"*, never
+  silently removed.
+
+**Needs you:** a ward due within one pass, a disrupted layer, or a destroyed one each shows up in the Holdings inbox.
+
 ## §9 — WHAT STANDS HERE, BY CATEGORY; AND RECORDS
 
 **Features are grouped into the catalog's nine categories:** Defence · Watch & sense · Muster & training ·
@@ -286,6 +338,17 @@ invented history.
      on `arriveCaravan`?
    - Visiting traders: is this a world-tick event per hold (like raids), with the offer held on the holding for the
      player or keeper to take?
+6b. **§6 trade comparison.** The Store tab compares every way of moving the whole store in one table: gross, costs
+    (fees, cuts, whose people are away), risk, time, and **what you net**, with one line naming the best return and
+    what it costs you. Erik asked for this for the trade company specifically ("cost vs benefits so you can compare
+    against selling here"). Can every row be computed from existing readers (`storeWorth`, route prices,
+    `roadDanger`) plus the company's cut?
+6c. **§8a crafted defences.**
+    - Why is `craftIds` empty on Silas's crafted features? Where is a holding feature written from a craft?
+    - Is the duration text on crafts structured anywhere (for example `lasts` / `renew`), or does it have to be
+      authored per craft?
+    - Can the raid in `raidHolding` resolve against layers in order, with a layer as a target, without changing the
+      unattended-fight machinery?
 6a. **§5a camping.** Where is `residents` used as a hard cap today (recruiting, keepers, `bandGaps`)? Each one needs
     to become a comfort penalty instead.
 7. **§7 detection.** Is there a clean way to express the current watch roll as a probability against a same-level

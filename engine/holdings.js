@@ -1257,7 +1257,14 @@ export function holdingGround(holding, { locations = {}, substrate = null } = {}
  * cut a raid's take, quarters raise the hands a hold can work and count as residents, a forge is recorded as a facility.
  * A feature is added through play (`holdingOps feature`) or on the tab; it records who built it and the crafts used. The
  * catalogue is the content Aevi extends; the numbers are Erik's to turn. */
-export function featureKinds(cfg) { return (cfg?.features?.kinds) || {}; }
+/** ⚠️ `_`-PREFIXED KEYS ARE AUTHORING NOTES, NOT KINDS. Seen live on the Build dropdown, between "deck space"
+ *  and the crafts: `_yieldOverride_20260906`. Every reader of this map is a player-facing list, so the filter
+ *  belongs here rather than at each of them — the same convention the rest of the content uses for a note
+ *  parked beside the data it explains. */
+export function featureKinds(cfg) {
+  const all = (cfg?.features?.kinds) || {};
+  return Object.fromEntries(Object.entries(all).filter(([k]) => !String(k).startsWith("_")));
+}
 export function featureDef(kind, cfg) { const k = featureKinds(cfg)[String(kind || "")]; return k ? { kind: String(kind), ...k } : null; }
 /** ⛔ A BUILD IN PROGRESS IS NOT A FEATURE YET — every reader (defence, watch, yields, hands, aura, service) sees only what
  *  stands. `allFeatures` is for the record and the tab. (SPEC_hold_costs §3 / Q2: a build IS a project.) */

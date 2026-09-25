@@ -69,7 +69,7 @@ import { enterDeathState } from "./engine/death.js";
 wireDeathModel(DeathModel);
 import { carriageOf, voyageOf, isMoored, canSail, sailHolding, voyageLine, featureRuling, canBuildOn } from "./engine/carriage.js";
 import { roomOf, roomRefusal, promotionOffer, promoteHolding, trainingAt, mountsAt, healingAt, quarteringOf, vaultOf, chargeOf, chargeWord, depositToVault, withdrawFromVault, holdingFieldSources } from "./engine/holdings.js";   // ⛔ CCODE-429: a hold has room · CCODE-430: a yard trains   // B6b: the holding that moves
-import { featureCost, allFeatures, refreshImprovement, canBeAskedToWork, holdingFactsLine, answerFeatureOffer, holdingLedger, addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, yieldsFor, upkeepFor, appointKeeper, reclaimHolding, improveHolding, setCrew, setGarrison, holdingGround, addFeature, removeFeature, renameHolding, featureKinds, residentsOf, holdingMeaningAura, holdingFieldDelta } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
+import { featureCost, featureDef, allFeatures, refreshImprovement, canBeAskedToWork, holdingFactsLine, answerFeatureOffer, holdingLedger, addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, yieldsFor, upkeepFor, appointKeeper, reclaimHolding, improveHolding, setCrew, setGarrison, holdingGround, addFeature, removeFeature, renameHolding, featureKinds, residentsOf, holdingMeaningAura, holdingFieldDelta } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
 import { buildDevReport, unknownOpsIn } from "./engine/devreport.js";   // SNG-559: the Play/Dev instrument
 import { makeField, fieldDataFrom, FIELD_KINDS, KIND_LABEL, MEMBERSHIP } from "./engine/field.js";
 import { assaultableAt, garrisonContingents, noteHoldLoss, takeHold, encounterOwnerFilter, seedPowerKnowledge, isKnownPower } from "./engine/powers.js";
@@ -180,7 +180,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.7.0";
+const APP_VERSION = "2.7.1";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -14838,7 +14838,9 @@ function renderHoldingsTab(manageId = null) {
           return `<div class="hold-grid">
             ${cell("keeper", (L.keeper ? esc(L.keeper.name) : "<em>nobody — it will not climb</em>") + (h.owner ? ` <span class="hint">· ${esc(nameOf(h.owner))}'s own, paying your purse</span>` : ""))}
             ${cell("people", pop)}
-            ${cell("per pass", `${benefit}${P.banks > 0 ? ` <span class="hint">· ${P.banks} banked</span>` : ""}`)}
+            ${/* ⛔ SNG-652 §1 — THE WORD "PASS" WAS NEVER DEFINED ANYWHERE A PLAYER LOOKS. It is the unit every
+                  number on this card is in, and the card used it as if it were common knowledge. */""}
+            ${cell(`per pass ${infoDot("hold.pass")}`, `${benefit}${P.banks > 0 ? ` <span class="hint">· ${P.banks} banked</span>` : ""}`)}
             ${cell("income vs keep", (() => {
               // ⛔ CCODE-437: in the money the hold's place pays, as its keep line is — a Reach hold's ledger is its scrip, rounded as paid;
               // and "in" counts the runner fees the net already counted
@@ -14951,7 +14953,9 @@ function renderHoldingsTab(manageId = null) {
   // could only ever confuse. Step 77 clears the ones already written down.
   const ownHold = new Set((character.holdings || []).map(h => h && h.id).filter(Boolean));
   const featRows = (character.featureOffers || []).map((o, i) => ({ o, i })).filter(({ o }) => ownHold.has(o?.holdingId)).map(({ o, i }) => `<div class="codex-f" style="border-left:2px solid var(--accent,#b08d57);padding-left:8px;margin-top:6px">
-    <div>${esc(o.holdingName)} reads as if it has <strong>${esc(o.kind)}</strong>.</div>
+    ${/* ⚠️ THE LABEL, NOT THE ID. This printed the raw kind — "reads as if it has wall" — where the catalogue
+          has "a wall". Seen live. */""}
+    <div>${esc(o.holdingName)} reads as if it has <strong>${esc(featureDef(o.kind, holdCfgNow())?.label || o.kind)}</strong>.</div>
     <div class="hint" style="margin-top:2px">${esc(o.why)} — from ${esc(o.from)}</div>
     <div class="opt-row" style="margin-top:4px">
       <button class="opt" data-feat-accept="${i}" title="Record it — the fiction already built it">Yes, record it</button>
@@ -15025,7 +15029,10 @@ function renderHoldingsTab(manageId = null) {
           const offer = promotionOffer(h, cfgF, { worldCount: worldCount(), seasonHours: holdSeasonHours() });
           const dots = `${"<i class='on'></i>".repeat(Math.min(room.used, room.slots))}${"<i></i>".repeat(room.free)}`;
           return `<div class="hold-room"><span class="hold-room-dots" aria-hidden="true">${dots}</span>
-            <span class="hint">${room.used} of ${room.slots} rooms — ${/^[aeiou]/i.test(room.rung) ? "an" : "a"} ${esc(room.rung)}${room.frame ? ` on ${esc(room.frame)}` : ""}${room.full ? " · full" : ""}</span></div>
+            ${/* ⚠️ SNG-652 §1 — "Rooms" → "feature spots". Aevi: a well, a wall or a mine is not a room. The
+                  engine field is still `room`/`roomOf`, which is right: it is the room a PLACE has, and what
+                  goes in it is a feature. Only the player's word changes. */""}
+            <span class="hint">${room.used} of ${room.slots} feature spots — ${/^[aeiou]/i.test(room.rung) ? "an" : "a"} ${esc(room.rung)}${room.frame ? ` on ${esc(room.frame)}` : ""}${room.full ? " · full" : ""}</span></div>
             ${offer ? `<div class="hold-promo"><span>${esc(h.name || "It")} has filled its room and thrived — it could be ${/^[aeiou]/i.test(offer.to) ? "an" : "a"} ${esc(offer.to)}, with ${offer.more} more ${offer.more === 1 ? "room" : "rooms"}.</span>
               <button class="opt" data-hold-promote="${esc(h.id)}">Name it ${/^[aeiou]/i.test(offer.to) ? "an" : "a"} ${esc(offer.to)}</button></div>`
               : room.full ? `<div class="hint hold-full">${esc(roomRefusal(h, room))}</div>` : ""}`; })()}
@@ -16770,7 +16777,9 @@ function showBandMusterPicker(unitId) {
       <label class="hint">how many <input type="number" id="muster-n-${esc(r.h.id)}" value="${Math.min(r.spare, 5)}" min="1" max="${r.spare}" style="width:62px"></label>
       <span class="hint">of ${r.spare} it can still feed</span>
       ${r.mounts ? `<label class="hint"><input type="checkbox" id="muster-ride-${esc(r.h.id)}" checked> mounted — ${esc(String(r.mounts.feature.name || r.mounts.feature.kind).split(" — ")[0])}</label>` : ""}
-      <button class="opt" data-band-raise="${esc(r.h.id)}">Raise them</button>
+      ${/* ⛔ SNG-650 §5a (ERIK): "Raise the band sounds like you're destroying it." The engine verb `raiseBand`
+            keeps its name; only the player's word changes — a band is FORMED. */""}
+      <button class="opt" data-band-raise="${esc(r.h.id)}" title="Make it real — pay starts, and it can be called to a fight">Form them</button>
     </div>`).join("")}
     <div class="help-foot">
       <span class="hint">Hands, not names: they fight as a body and are counted, never invented into people. They draw on the same capacity your workers do.</span>
@@ -17639,7 +17648,7 @@ function renderBandsTab() {
       </div>`).join("") : `<p class="hint">Nobody has thrown in with you yet. Someone who has sworn to you stands in a unit whether or not they walk at your side.</p>`}
       <div class="opt-row" style="margin-top:10px;gap:6px;flex-wrap:wrap">
         <button class="opt" id="legion-plan"${units.filter(u => !u.inLegion).length ? "" : " disabled"} title="Somebody who reads the ground draws up the whole arrangement — who, how many, from where. It costs nothing.">Ask someone to draw up a plan…</button>
-        <button class="opt" id="band-raise-new"${raise404.ready ? "" : " disabled"} title="${esc(raise404.why)}">Raise a new band…</button>
+        <button class="opt" id="band-raise-new"${raise404.ready ? "" : " disabled"} title="${esc(raise404.why)}">Form a new band…</button>
         ${(() => {
           // ⛔ CCODE-405: two or more bands standing outside a legion is the whole requirement — forming one costs nothing.
           const free = units.filter(u => !u.inLegion && !u.isLegion);

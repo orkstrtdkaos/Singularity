@@ -16,6 +16,18 @@
   "next": [],
   "releases": [
     {
+      "version": "2.6.6",
+      "date": "2026-09-25",
+      "entries": [
+        {
+          "kind": "feature",
+          "title": "Say which craft raised a hold's feature — and it lasts accordingly",
+          "summary": "When you build something at a holding, you can now name the craft you used. A craft that makes or mends stands permanently; one that wards or defends lasts a season, warns you a pass before it goes, and can be renewed.",
+          "detail": "A feature record has carried a `craftIds` field since the day features arrived, and it was empty on every feature of every character — because the only door that could fill it was the GM's, and the door a player uses, standing there having just cast the thing, had no way to say so. The duration rule was already written and only the 'apply a craft to the place' path could reach it; both paths read the one rule now, the seasonal pass warns and lapses a crafted feature exactly as it does a crafted improvement, and the ↻ Refresh button takes it by the feature's name or by the craft's."
+        }
+      ]
+    },
+    {
       "version": "2.6.5",
       "date": "2026-09-25",
       "entries": [

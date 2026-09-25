@@ -180,7 +180,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.6.5";
+const APP_VERSION = "2.6.6";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -9215,7 +9215,11 @@ function applyTurn(turn, resolution, playerWords = null) {
       // ✅ features and names — what a hold HAS, and what it is called
       else if (kind === "feature") { const hb = (character.holdings || []).find(x => x.id === id); const bld = hb ? canBuildOn(hb, op.kind, CONTENT.rules?.economy?.holdFeatures?.kinds) : { ok: true };
         if (!bld.ok) { said(`${hb.name}: ${bld.why}.`); continue; }   // ✅ B6b: a mine cannot be built aboard a ship, and the refusal is said
-        const r = addFeature(character, id, { kind: op.kind, name: op.name || null, by: op.by || null, craftIds: op.craftIds || (op.abilityId ? [op.abilityId] : []), count: op.count || 1, day: absoluteWorldDay(), worldCount: worldCount(), cfg: holdCfgNow(), bindRoom: true });
+        // ⚠️ CCODE-495 — `featureKind` is the schema's name for this now: the `holdingOps` object declared
+        // "kind" TWICE, once as a feature kind and once as post|enterprise, so one key meant two things in the
+        // one object the model fills. The old name is still accepted — a schema rename must not refuse a beat
+        // that was in flight, or already written into a save's pending ops.
+        const r = addFeature(character, id, { kind: op.featureKind || op.kind, name: op.name || null, by: op.by || null, craftIds: op.craftIds || (op.abilityId ? [op.abilityId] : []), catalog: fullCatalog(), count: op.count || 1, day: absoluteWorldDay(), worldCount: worldCount(), cfg: holdCfgNow(), bindRoom: true });
         // ⛔ CCODE-429: a build into a full hold is refused, and — like a mine aboard a ship — the refusal is SAID, both ways out with it
         if (!r.ok) { if (r.noRoom) said(r.why); else console.warn("[holdingOps] feature refused:", r.why); } }
       else if (kind === "rename") renameHolding(character, id, op.name, { worldCount: worldCount() });
@@ -14493,8 +14497,18 @@ function wireHoldingOffers() {
     // ⛔ CCODE-429: the Build verb asks what the GM's build asks — a mine cannot go aboard something that moves (only the GM path asked)
     const hull = h ? canBuildOn(h, sel.value, CONTENT.rules?.economy?.holdFeatures?.kinds) : { ok: true };
     if (!hull.ok) { alert(`${h.name}: ${hull.why}.`); return; }
+    // ⛔ CCODE-495 — the craft rides, and `catalog` rides with it because the DURATION is read from the craft's
+    // FUNCTIONS (`craftDuration`, the same rule an improvement pays). ⚠️ THE BUILD IS NOT CHARGED ENERGY: its
+    // authored price is goods and labour, and adding an energy cost here would be a new rule, not a repair.
+    // `craftEnergy` is passed only so a seasonal feature's RENEWAL costs what renewing that craft costs — the
+    // same number `improveHolding` would charge. ⬜ Flagged to Aevi: build free, refresh paid, is an asymmetry
+    // she may want evened up, and it is a dial, not a defect.
+    const bc = app.querySelector(`[data-hold-bcraft="${id}"]`)?.value || "";
+    const bcDef = bc ? fullCatalog()[bc] : null;
+    const gDials = CONTENT.rules?.economy?.holdStore?.growth || {};
     const r = addFeature(character, id, { kind: sel.value, name: (nameEl?.value || "").trim() || null, by: "you", day: absoluteWorldDay(), worldCount: worldCount(), cfg: holdCfgNow(), via: "built",
-      economy: CONTENT.rules?.economy || null, regionId: CONTENT.locations?.[h?.locationId]?.regionId || null });
+      economy: CONTENT.rules?.economy || null, regionId: CONTENT.locations?.[h?.locationId]?.regionId || null,
+      ...(bcDef ? { craftIds: [bc], catalog: fullCatalog(), craftEnergy: Math.max(1, Math.round((Number(bcDef.energyCost) || 0) * (Number(gDials.improveEnergyMult) || 1))) } : {}) });
     if (!r.ok) { alert(r.why); return; }
     saveCharacter(character); again();
   };
@@ -15007,9 +15021,17 @@ function renderHoldingsTab(manageId = null) {
               : room.full ? `<div class="hint hold-full">${esc(roomRefusal(h, room))}</div>` : ""}`; })()}
         <div class="hint" style="margin-top:2px">${built || "nothing built yet"}</div>
         <div class="opt-row" style="gap:6px;flex-wrap:wrap;margin-top:4px">
-          ${opts ? `<select data-hold-kind="${esc(h.id)}">${opts}</select><input data-hold-fname="${esc(h.id)}" placeholder="what it is called (optional)" style="max-width:200px"><button class="opt" data-hold-build="${esc(h.id)}" title="Pay the price — goods from the store, then the purse — and the work begins; it stands when its days have run">Build</button><button class="opt" data-hold-feature="${esc(h.id)}" title="The story built it, or the place came with it — free to record, and it still costs its keep">Record what the story built</button>` : ""}
+          ${/* ⛔ CCODE-495 (SNG-652 §8a) — WHICH CRAFT MADE IT. `craftIds` has been on a feature record since the
+                feature system shipped and measured EMPTY on all 44 features in all 14 saves — because five of
+                `addFeature`'s six callers cannot name a craft and the sixth is the GM's op, which has never sent
+                one. ⚠️ So the field was authored, registered, loaded and read, and the door a PLAYER walks —
+                standing there having just cast the thing — could not express it. This is that door. */""}
+          ${opts ? `<select data-hold-kind="${esc(h.id)}">${opts}</select><input data-hold-fname="${esc(h.id)}" placeholder="what it is called (optional)" style="max-width:200px"><select data-hold-bcraft="${esc(h.id)}" title="Which of your crafts raised it — what it DOES decides how long it stands: a craft that makes or mends is permanent, one that holds ground or defends lasts a season and then wants renewing"><option value="">— no craft, just work —</option>${(character.abilities || []).map(a => fullCatalog()[a.abilityId]).filter(d => d && (d.functions || []).length).map(d => `<option value="${esc(d.id)}">${esc(d.name || d.id)}</option>`).join("")}</select><button class="opt" data-hold-build="${esc(h.id)}" title="Pay the price — goods from the store, then the purse — and the work begins; it stands when its days have run">Build</button><button class="opt" data-hold-feature="${esc(h.id)}" title="The story built it, or the place came with it — free to record, and it still costs its keep">Record what the story built</button>` : ""}
           <div class="hint" style="width:100%;margin-top:2px">${(() => { const kinds = Object.keys(holdCfgNow()?.features?.kinds || {}).filter(k => !k.startsWith("_")); return kinds.map(k => { const c = featureCost(k, holdCfgNow()); if (!c) return ""; const goods = c.build ? Object.entries(c.build.goods).map(([g, n]) => `${n} ${g.replace(/_/g, " ")}`).join(", ") : null; return `<span style="white-space:nowrap">${esc(holdCfgNow().features.kinds[k].label || k)}: ${goods ? esc(goods) + " · " + c.build.days + " days" : "cannot be built"} · ${c.upkeep}/pass</span>`; }).filter(Boolean).slice(0, 40).join(" &nbsp;·&nbsp; "); })()}</div>
-          ${(h.improvements || []).some(i => i && i.expiresDay != null) ? `<div class="opt-row" style="gap:6px;flex-wrap:wrap;margin-top:6px">${(h.improvements || []).filter(i => i && i.expiresDay != null).map(i => `<button class="opt" data-hold-refresh="${esc(h.id)}" data-craft="${esc(i.abilityId)}" title="${esc(i.name || i.abilityId)} ${i.lapsed ? "has gone quiet" : "lasts until day " + i.expiresDay} — refreshing costs ${i.refreshCost || i.energy || 1} energy">${i.lapsed ? "↻ Wake" : "↻ Refresh"} ${esc(i.name || i.abilityId)} (${i.refreshCost || i.energy || 1} energy)</button>`).join("")}</div>` : ""}
+          ${/* ⛔ CCODE-495 — A CRAFTED FEATURE APPEARS HERE TOO, or its expiry is a field nothing renders and the
+                player meets a lapse with no way to answer it. A feature is keyed by its KIND, an improvement by
+                its craft — `refreshImprovement` accepts either. */""}
+          ${[...(h.improvements || []).map(i => ({ ...i, _key: i.abilityId })), ...(h.features || []).map(f => ({ ...f, _key: f.kind }))].some(i => i && i.expiresDay != null) ? `<div class="opt-row" style="gap:6px;flex-wrap:wrap;margin-top:6px">${[...(h.improvements || []).map(i => ({ ...i, _key: i.abilityId })), ...(h.features || []).map(f => ({ ...f, _key: f.kind }))].filter(i => i && i.expiresDay != null).map(i => `<button class="opt" data-hold-refresh="${esc(h.id)}" data-craft="${esc(i._key)}" title="${esc(i.name || i._key)} ${i.lapsed ? "has gone quiet" : "lasts until day " + i.expiresDay} — refreshing costs ${i.refreshCost || i.energy || 1} energy">${i.lapsed ? "↻ Wake" : "↻ Refresh"} ${esc(i.name || i._key)} (${i.refreshCost || i.energy || 1} energy)</button>`).join("")}</div>` : ""}
         </div>
         ${crafts ? `<div class="opt-row" style="gap:6px;flex-wrap:wrap;margin-top:4px"><select data-hold-craft="${esc(h.id)}">${crafts}</select><button class="opt" data-hold-improve="${esc(h.id)}" title="Put a craft to the place">Apply a craft</button></div>` : ""}
         ${head("The place itself")}

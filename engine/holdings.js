@@ -918,10 +918,16 @@ export function tickStore(character, holding, { cfg = null, economy = null, regi
   // ⛔ SPEC_hold_costs §4 — A CRAFT THAT HOLDS GROUND OR DEFENDS LASTS A SEASON: it warns one pass before (Q3), then goes quiet —
   // the rung it gave comes off, the feature stays, and the record says so. A craft that MADE a thing has no expiry.
   out.lapsing = []; out.lapsed = [];
-  if (day != null) for (const imp of (holding.improvements || [])) {
+  // ⛔ CCODE-495 — BOTH LISTS. A craft raised on a place has always been able to lapse; a FEATURE raised by a
+  // craft could not, because until now no feature carried a duration at all (`craftIds` measured empty on all
+  // 44 in all 14 saves). ⚠️ Stamping the field without teaching this pass to read it would be the four-doors
+  // failure exactly — written, never read — so the walk is over both, keyed by whichever id the record has.
+  const timed = [...(holding.improvements || []).map(x => ({ rec: x, key: x?.abilityId, kind: "improvement" })),
+                 ...allFeatures(holding).map(x => ({ rec: x, key: x?.kind, kind: "feature" }))];
+  if (day != null) for (const { rec: imp, key } of timed) {
     if (!imp || imp.expiresDay == null || imp.lapsed) continue;
-    if (day >= imp.expiresDay) { imp.lapsed = true; imp.lapsedDay = day; const before = holding.condition; advanceHolding(holding, "problem", null, `${imp.name || imp.abilityId} has gone quiet`, keeperFloorEffects); if (holding.condition !== before) imp.tookRung = true; out.lapsed.push(imp.name || imp.abilityId); }
-    else if (day >= imp.expiresDay - 3 && !imp.warned) { imp.warned = true; out.lapsing.push(imp.name || imp.abilityId); }
+    if (day >= imp.expiresDay) { imp.lapsed = true; imp.lapsedDay = day; const before = holding.condition; advanceHolding(holding, "problem", null, `${imp.name || key} has gone quiet`, keeperFloorEffects); if (holding.condition !== before) imp.tookRung = true; out.lapsed.push(imp.name || key); }
+    else if (day >= imp.expiresDay - 3 && !imp.warned) { imp.warned = true; out.lapsing.push(imp.name || key); }
   }
   const svc = serviceIncome(character, holding, { cfg, locations, passes: Number(holding.relayPasses) || 0 });
   if (svc) {
@@ -1147,7 +1153,11 @@ export function growHolding(character, holding, { cfg = null, npcs = {}, npcCfg 
 export function refreshImprovement(character, id, abilityId, { cfg = null, day = null, worldCount = null } = {}) {
   ensureHoldings(character);
   const h = character.holdings.find(x => x && x.id === id);
-  const imp = (h?.improvements || []).find(i => i && i.abilityId === abilityId);
+  // ⛔ CCODE-495 — a CRAFTED FEATURE renews through this same door. It is found by the feature's own kind,
+  // because a feature is identified by what it IS and an improvement by which craft made it; one lookup that
+  // accepts either keeps a single refresh rule rather than growing a second one beside it.
+  const imp = (h?.improvements || []).find(i => i && i.abilityId === abilityId)
+    || allFeatures(h).find(f => f && (f.kind === abilityId || (f.craftIds || []).includes(abilityId)));
   if (!h || !imp) return { ok: false, why: "no such craft on this place" };
   if (imp.expiresDay == null) return { ok: false, why: `${imp.name || abilityId} made a thing — it does not need refreshing, it needs keeping` };
   const cost = Math.max(1, Number(imp.refreshCost) || Number(imp.energy) || 1);
@@ -1197,13 +1207,13 @@ export function improveHolding(character, id, abilityId, { catalog = {}, cfg = n
   if ((Number(character?.energy) || 0) <= 0) return { ok: false, why: `you have no energy left to raise ${def.name || abilityId} — spend yourself elsewhere and this is the cost` };
   if ((Number(character?.energy) || 0) < energyCost) return { ok: false, why: `${def.name || abilityId} on a place takes ${energyCost} energy; you have ${character.energy}` };
   character.energy -= energyCost;
-  const lasting = new Set((g.lastingFunctions || ["make", "mend", "restore"]).map(String));
-  const seasonal = !verbs.some(v => lasting.has(String(v)));
-  const season = Math.max(1, Number(g.improveSeasonDays) || 12);
+  // ⛑ CCODE-495 — the rule is `craftDuration` now, because the FEATURE path needs the same answer and was
+  // getting none. Same numbers, same defaults, one reader.
+  const dur = craftDuration(verbs, { growth: g, day, energy: energyCost });
   const before = h.condition;
   const at = CONDITIONS.indexOf(h.condition);
   h.improvements = [...(h.improvements || []).filter(i => i.abilityId !== abilityId), { abilityId, name: def.name || abilityId, day, energy: energyCost,
-    ...(seasonal && day != null ? { expiresDay: day + season, refreshCost: energyCost } : {}) }];
+    ...dur.stamp }];
   if (at >= 0 && at < CONDITIONS.length - 1) h.condition = CONDITIONS[at + 1];
   h.history = [...(h.history || []), { at: worldCount, from: before, to: h.condition, note: `improved with ${def.name || abilityId}` }].slice(-12);
   queueHoldingEvent(character, `You put ${def.name || abilityId} to ${h.name || h.id}${h.condition !== before ? ` — it comes up to ${h.condition}` : " — it is as good as it gets"}.`);
@@ -1253,6 +1263,33 @@ export function featureDef(kind, cfg) { const k = featureKinds(cfg)[String(kind 
  *  stands. `allFeatures` is for the record and the tab. (SPEC_hold_costs §3 / Q2: a build IS a project.) */
 export function featuresOf(holding) { return (Array.isArray(holding?.features) ? holding.features : []).filter(f => f && !f.building); }
 export function allFeatures(holding) { return Array.isArray(holding?.features) ? holding.features.filter(Boolean) : []; }
+/** ⛔ CCODE-495 (SNG-652 §8a) — HOW LONG A CRAFT PUT TO A PLACE LASTS, and it is the FUNCTION that decides.
+ *
+ *  SPEC_hold_costs §4, Aevi, 09-07: a craft that MAKES (`lastingFunctions` — make, mend, restore) is permanent
+ *  — *"it is a thing now; things need upkeep, not renewal"* — and one that holds ground or defends lasts
+ *  `improveSeasonDays`, then warns a pass ahead and goes quiet.
+ *
+ *  ⚠️ THE RULE EXISTED AND ONLY ONE PATH COULD REACH IT. It was written inline in `improveHolding`, so an
+ *  IMPROVEMENT got a duration and a FEATURE never did — which is why Silas's Warded Wall and Shadow and Death
+ *  Barrier carry no expiry: they came through `addFeature`, which had no idea a craft was involved at all.
+ *  ⛑ Aevi found this when I told her duration was unstructured prose. It was not; it was unreachable.
+ *
+ *  Returns `{ seasonal, expiresDay, refreshCost, stamp }` — `stamp` is the object to spread onto the record,
+ *  empty when the thing is permanent, so a caller cannot half-apply the rule. Pure. */
+export function craftDuration(verbs = [], { growth = null, day = null, energy = 0 } = {}) {
+  const g = growth || {};
+  const lasting = new Set((g.lastingFunctions || ["make", "mend", "restore"]).map(String));
+  const list = (Array.isArray(verbs) ? verbs : [verbs]).filter(Boolean).map(String);
+  // ⚠️ NO VERBS IS NOT "PERMANENT". A feature built with no craft named has no craft rule to apply, and the
+  // honest answer is that nothing here expires — which is what `seasonal: false` with no stamp says.
+  const seasonal = list.length > 0 && !list.some(v => lasting.has(v));
+  const season = Math.max(1, Number(g.improveSeasonDays) || 12);
+  const expiresDay = seasonal && day != null ? Number(day) + season : null;
+  const refreshCost = seasonal ? Math.max(1, Number(energy) || 1) : null;
+  return { seasonal, expiresDay, refreshCost,
+    stamp: expiresDay != null ? { expiresDay, refreshCost } : {} };
+}
+
 /** What a kind costs to build (goods + labour days; null when it cannot be built) and to keep, per pass. */
 export function featureCost(kind, cfg) {
   const def = featureDef(kind, cfg);
@@ -1267,7 +1304,7 @@ export function featureCost(kind, cfg) {
  *  days are passes (Q2). `via: "inherited"` (a place that already had it) and `via: "granted"` (the story built it) are
  *  free and stand at once; all three pay upkeep. Default `granted`, so no existing caller starts charging by accident —
  *  only the tab's Build verb says `built`. A kind with `build: null` (the waygate) cannot be built at all. */
-export function addFeature(character, id, { kind, name = null, by = null, craftIds = [], count = 1, day = null, worldCount = null, cfg = null, yields = null, via = "granted", bindRoom = via === "built", economy = null, regionId = null } = {}) {
+export function addFeature(character, id, { kind, name = null, by = null, craftIds = [], count = 1, day = null, worldCount = null, cfg = null, yields = null, via = "granted", bindRoom = via === "built", economy = null, regionId = null, catalog = null, craftEnergy = 0 } = {}) {
   ensureHoldings(character);
   const h = character.holdings.find(x => x && x.id === id);
   if (!h) return { ok: false, why: "no such holding" };
@@ -1282,7 +1319,18 @@ export function addFeature(character, id, { kind, name = null, by = null, craftI
   }
   // ⚑ ERIK 2026-09-06: "a workshop can be for lots of finished goods" — a feature may OVERRIDE its kind's good (Aevi's
   // catalogue said so; nothing stored or read it). A laboratory post's workshop makes instruments; Pell's makes arms.
-  const f = { kind: def.kind, family: def.family, name: name || def.label || def.kind, by: by || null, craftIds: (craftIds || []).filter(Boolean), count: Math.max(1, Number(count) || 1), day, via,
+  // ⛔ CCODE-495 — A CRAFTED FEATURE CARRIES ITS CRAFTS' DURATION, from the same rule an improvement pays.
+  // ⚠️ `craftIds` has been on this record since the feature system shipped and measured EMPTY on all 44
+  // features in all 14 saves — because five of `addFeature`'s six callers cannot name a craft, and the sixth
+  // is the GM's op, which has never sent one. The picker on the Build verb is the writer; this is the rule it
+  // feeds. `catalog` is optional: without it the crafts are still recorded, just not priced for time.
+  const craftList = (craftIds || []).filter(Boolean);
+  const craftVerbs = catalog
+    ? [...new Set(craftList.flatMap(id => { const d = catalog[id]; return Array.isArray(d?.functions) ? d.functions : (d?.function ? [d.function] : []); }))]
+    : [];
+  const fdur = craftDuration(craftVerbs, { growth: cfg?.growth || economy?.holdStore?.growth || null, day, energy: craftEnergy });
+  const f = { kind: def.kind, family: def.family, name: name || def.label || def.kind, by: by || null, craftIds: craftList, count: Math.max(1, Number(count) || 1), day, via,
+    ...fdur.stamp,
     ...(yields && def.family === "material" ? { yields: String(yields) } : {}) };
   let paid = null;
   if (via === "built") {

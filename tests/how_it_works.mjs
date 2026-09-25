@@ -7305,6 +7305,102 @@ console.log("\n── §76 · the fallbacks defer to the free touch (unauthored 
       return !!h && /\bR50\b/.test(sec) && logged && /NO CAP ON THE BATTLE MENU/.test(d); })(),
     "R50 amends R47 in place — if the amendment is not in R47's own section, a reader meets the retired form first");
 }
+/* ═════ §76b — A CRAFTED FEATURE REMEMBERS WHICH CRAFT MADE IT, AND HOW LONG IT STANDS (CCODE-495, SNG-652 §8a) ═════ */
+// ⛔ AEVI, 2026-09-25: "Silas's crafted hold features (Shadow and Death Barrier, Stillwater's Lab, Warded Wall)
+// are saved with `craftIds: []`, so which craft made them, and whether it lasts, is lost."
+//
+// ⚠️ MEASURED: it is empty on ALL 44 features in ALL 14 saves. And the cause was not the GM. `addFeature` has
+// six callers and exactly ONE could pass a craft — the GM's op. The Build verb on the Holdings tab, the door a
+// PLAYER walks standing there having just cast the thing, could not express it; nor could the granted verb, the
+// fiction's writer, or the two reconcile backfills. The field was authored, registered, loaded and READ, and the
+// writing branch a player walks never set it. ⛑ So the repair is a WRITER, and this gate drives it.
+//
+// ⛑ AND THE DURATION RULE ALREADY EXISTED — I told Aevi it was unstructured prose and she corrected me.
+// `lastingFunctions` / `improveSeasonDays` have decided this since SPEC_hold_costs (09-07), keyed by FUNCTION,
+// written INLINE in `improveHolding` where only the IMPROVEMENT path could reach it. It is `craftDuration` now,
+// and both paths read the one rule.
+console.log("\n── §76b · a crafted feature carries its craft, its season, and its renewal ──");
+{
+  const H495 = await import("../engine/holdings.js");
+  const { loadContentHeadless: lch495 } = await import("./headless_content.mjs");
+  const C495 = await lch495();
+  const econ495 = C495.rules.economy;
+  const cfg495 = { ...econ495.holdStore, features: econ495.holdFeatures };
+  const g495 = econ495.holdStore.growth || {};
+  const season495 = Math.max(1, Number(g495.improveSeasonDays) || 12);
+  // ⚠️ THE CRAFTS ARE FOUND BY THEIR VERB, never named — Aevi grows this catalogue and a named craft would
+  // make this gate fail the day she retires one.
+  const maker495 = Object.values(C495.abilities).find(a => (a.functions || []).includes("make") && !(a.functions || []).some(v => ["ward", "shield", "resist"].includes(v)));
+  const warder495 = Object.values(C495.abilities).find(a => (a.functions || []).includes("ward") && !(a.functions || []).some(v => (g495.lastingFunctions || []).includes(v)));
+  const mk495 = () => ({ id: "c495", name: "Builder", energy: 100, level: 8,
+    abilities: [{ abilityId: maker495.id, level: 1 }, { abilityId: warder495.id, level: 1 }],
+    holdings: [{ id: "h495", name: "The Post", kind: "post", condition: "sound", locationId: null, features: [], improvements: [], store: {} }] });
+  check("§76b: the fixtures are real crafts found by VERB — one that MAKES and one that only DEFENDS",
+    !!maker495 && !!warder495, JSON.stringify({ maker: maker495?.id, warder: warder495?.id }));
+
+  // 1 · the writer records the craft, and the FUNCTION decides the season
+  const cW = mk495();
+  const rW = H495.addFeature(cW, "h495", { kind: "wall", by: "you", craftIds: [warder495.id], catalog: C495.abilities, craftEnergy: 7, day: 100, worldCount: 1, cfg: cfg495, via: "built" });
+  const fW = cW.holdings[0].features.find(x => x.kind === "wall");
+  check("§76b: ⛔ a feature built WITH a craft records it, and a craft that DEFENDS gives it a season",
+    rW.ok && (fW?.craftIds || []).includes(warder495.id) && fW?.expiresDay === 100 + season495 && Number(fW?.refreshCost) > 0,
+    JSON.stringify({ craftIds: fW?.craftIds, expiresDay: fW?.expiresDay, refreshCost: fW?.refreshCost }));
+  const cM = mk495();
+  H495.addFeature(cM, "h495", { kind: "forge", by: "you", craftIds: [maker495.id], catalog: C495.abilities, craftEnergy: 7, day: 100, worldCount: 1, cfg: cfg495, via: "built" });
+  const fM = cM.holdings[0].features.find(x => x.kind === "forge");
+  check("§76b: …and one that MAKES is permanent — \"it is a thing now; things need upkeep, not renewal\"",
+    (fM?.craftIds || []).includes(maker495.id) && fM?.expiresDay == null,
+    JSON.stringify({ craftIds: fM?.craftIds, expiresDay: fM?.expiresDay ?? null }));
+  // ⚠️ NO CRAFT IS NOT "PERMANENT BY DEFAULT" — it is a feature with no craft rule to apply.
+  const cN = mk495();
+  H495.addFeature(cN, "h495", { kind: "mill", by: "you", day: 100, worldCount: 1, cfg: cfg495, via: "built" });
+  const fN = cN.holdings[0].features.find(x => x.kind === "mill");
+  check("§76b: …and a feature built with NO craft named still records an empty list and expires never",
+    Array.isArray(fN?.craftIds) && fN.craftIds.length === 0 && fN?.expiresDay == null);
+
+  // 2 · THE READING BRANCH IS REACHABLE — the pass warns, then lapses it
+  const warn495 = H495.tickStore(cW, cW.holdings[0], { cfg: cfg495, economy: econ495, day: 100 + season495 - 2, rng: () => 0.9 });
+  const gone495 = H495.tickStore(cW, cW.holdings[0], { cfg: cfg495, economy: econ495, day: 100 + season495, rng: () => 0.9 });
+  const fL = cW.holdings[0].features.find(x => x.kind === "wall");
+  check("§76b: ⛔ THE PASS READS IT — a crafted feature warns a pass ahead and then goes quiet, exactly as an improvement does",
+    (warn495?.lapsing || []).length > 0 && (warn495?.lapsed || []).length === 0
+    && (gone495?.lapsed || []).length > 0 && fL?.lapsed === true,
+    JSON.stringify({ lapsing: warn495?.lapsing, lapsed: gone495?.lapsed }));
+
+  // 3 · and the player can answer it — by the feature's kind OR by the craft that made it
+  cW.energy = 100;
+  const before495 = cW.energy;
+  const woke = H495.refreshImprovement(cW, "h495", "wall", { cfg: cfg495, day: 100 + season495 + 1, worldCount: 5 });
+  const fR = cW.holdings[0].features.find(x => x.kind === "wall");
+  check("§76b: …and the RENEWAL door takes it — by kind, waking it, moving the expiry and charging the energy",
+    woke.ok && !fR?.lapsed && Number(fR?.expiresDay) > 100 + season495 && cW.energy < before495,
+    JSON.stringify({ ok: woke.ok, why: woke.why, expiresDay: fR?.expiresDay, spent: before495 - cW.energy }));
+  check("§76b: …or by the CRAFT that raised it, since that is the other name a player knows it by",
+    H495.refreshImprovement(cW, "h495", warder495.id, { cfg: cfg495, day: 100 + season495 + 1, worldCount: 5 }).ok);
+  const perm = H495.refreshImprovement(cM, "h495", "forge", { cfg: cfg495, day: 200, worldCount: 5 });
+  check("§76b: …and a PERMANENT one is refused with the right reason, not with \"no such craft\"",
+    perm.ok === false && /does not need refreshing/.test(String(perm.why)), JSON.stringify(perm));
+
+  // 4 · the writer exists where a player stands, and the schema no longer says one key twice
+  const app495 = rd("app.js");
+  check("§76b: ⛔ the WRITER is on the Build verb — the door a player walks, which is the one that could not say it",
+    /data-hold-bcraft="\$\{esc\(h\.id\)\}"/.test(app495) && /data-hold-bcraft="\$\{id\}"/.test(app495)
+    && /craftIds: \[bc\], catalog: fullCatalog\(\)/.test(app495),
+    "a reader for a field only the GM can fill is the shape this defect already had");
+  const gm495 = rd("engine/gm.js");
+  // ⚠️ THE ONE LINE, not a byte window — my first cut took 3000 characters and spilled into `debtOps` and
+  // `exchangeOps`, which have their own `kind`, so it reported a duplicate that was never there. Each op is
+  // declared on its own line; that is the boundary.
+  const hStart = gm495.indexOf('"holdingOps"');
+  const hops = gm495.slice(hStart, gm495.indexOf(String.fromCharCode(10), hStart));
+  const dupKeys = (() => { const ks = [...hops.matchAll(/"([A-Za-z_][A-Za-z0-9_]*)"\s*:/g)].map(m => m[1]);
+    return ks.filter((k, i) => ks.indexOf(k) !== i); })();
+  check("§76b: ⚠️ …and no key in the holdingOps schema means two things — `kind` was declared twice, as a feature kind AND as post|enterprise",
+    dupKeys.length === 0, `duplicated: ${dupKeys.join(", ") || "none"}`);
+  check("§76b: …and the applier still accepts the old name, so a beat already in flight is not refused",
+    /op\.featureKind \|\| op\.kind/.test(app495));
+}
+
 /* ═════ §77 — A PERSON CAN HOLD A THING, AND IT WAKES IN THEIR HANDS (R45c, 2026-09-05) ═════ */
 // ⛔ Erik: "as it's hers I can't use the evolve feature for an item on it… wire that into the engine so it evolves itself when
 // the time comes." The gap was deeper than evolution.js being player-seat: 0 of 35 registry entries carried an inventory,

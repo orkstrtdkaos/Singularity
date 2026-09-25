@@ -79,9 +79,9 @@
   "alignment": {},
   "attunement": 3,
   "maxHealth": 62,
-  "health": 52,
+  "health": 49,
   "maxEnergy": 152,
-  "energy": 56,
+  "energy": 44,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -180,6 +180,20 @@
       "spread": [],
       "day": 2,
       "worldDay": 87
+    },
+    {
+      "at": "2026-09-25T22:44:59.232Z",
+      "locationId": "millbrook",
+      "communityId": "valley.millbrook",
+      "description": "Read a legendary Marcher's true strategy in single combat, breaking their formal discipline through presence rather than technique",
+      "tags": [
+        "valor",
+        "insight"
+      ],
+      "weight": 2,
+      "spread": [],
+      "day": 2,
+      "worldDay": 87
     }
   ],
   "relationships": {},
@@ -260,25 +274,30 @@
         "player": null,
         "summary": "In the lamp-lit cellar, Loki reads Kestrin's weariness and intention through heat and light—Kestrin sees them truly for the first time.",
         "narration": "Through the Stillness Field's held breath, Prism Sight catches the heat-trace of Kestrin's weight shifting—their breathing pattern visible in the micro-warmth along their ribs, the way their core temperature flickers as fatigue pulls at their discipline. Their eyes track you with genuine focus now, no longer reading the room but reading *you*—and in that singular attention, you see the exact moment they decide whether to press or yield."
+      },
+      {
+        "player": null,
+        "summary": "In the cellar of the Kindly Rest, Loki reads Kestrin's fatigue and true intent through heat and presence, pressing the fight deeper. Kestrin's shadow is stolen, their balance broken, their famous discipline beginning to crack under genuine opposition — but they do not yield, and their gaze settles on Loki with something that might be respect.",
+        "narration": "Through the Stillness Field's held breath, Prism Sight catches the heat-trace shifting across Kestrin's frame—the micro-warmth along their ribs betraying the rhythm of their breathing, the way their core temperature flickers as fatigue pulls at their formal discipline. Their eyes track you with genuine focus now, no longer reading the room but reading *you* — and in that singular attention, you see the moment they decide to press harder instead of yield.\n\nYou move into it. Small Kingdom rises through you — that low command to the living things that dwell in wounds, in blood, in the small spaces where infection gathers. The craft reaches for the reopened wound on their shoulder, seeking to drive what lives there toward greater damage. It fails. The command does not land — Kestrin's discipline is too absolute, their body too practiced at holding itself together — and the small things in their blood simply refuse to hear you.\n\nBut you have already committed. Bristle lunges from the side as Kestrin presses forward, the marsh-hound's scarred flank slamming into their knee. Coil's lens flares bright enough to strip shadows, forcing Kestrin's eyes to reset their focus. Aevi's motes tighten into a burning constellation around their head — not striking, but *revealing*, making every micro-movement visible, every hesitation readable. Hush *withdraws*, and Kestrin's own shadow peels away from them like a thing with its own will — the loss of it throws their balance, just for a breath, just enough.\n\nKestrin recovers. They do not cry out; they do not even acknowledge the shadow's absence. Instead they strike — not at you, but *down*, driving the heel of their boot toward Bristle's spine with the precision of someone who has trained that counter a thousand times. The hound scrambles, yelps once, sharp and surprised, and rolls clear. Their strike lands on stone instead, and the impact sends a small spray of chips across the cellar floor.\n\nYou are both breathing hard now. Kestrin stands lower than before, their left leg favoring, their right shoulder dark with blood that has seeped past whatever binding they made. Their eyes are still locked on yours — but now there is something new in that gaze. Not defeat. Recognition. The look someone gives when they have finally found a person who reads them instead of reads *at* them."
       }
     ],
     "lastTurn": {
-      "narration": "Through the Stillness Field's held breath, Prism Sight catches the heat-trace of Kestrin's weight shifting—their breathing pattern visible in the micro-warmth along their ribs, the way their core temperature flickers as fatigue pulls at their discipline. Their eyes track you with genuine focus now, no longer reading the room but reading *you*—and in that singular attention, you see the exact moment they decide whether to press or yield.",
-      "sceneSummary": "In the lamp-lit cellar, Loki reads Kestrin's weariness and intention through heat and light—Kestrin sees them truly for the first time.",
+      "narration": "Through the Stillness Field's held breath, Prism Sight catches the heat-trace shifting across Kestrin's frame—the micro-warmth along their ribs betraying the rhythm of their breathing, the way their core temperature flickers as fatigue pulls at their formal discipline. Their eyes track you with genuine focus now, no longer reading the room but reading *you* — and in that singular attention, you see the moment they decide to press harder instead of yield.\n\nYou move into it. Small Kingdom rises through you — that low command to the living things that dwell in wounds, in blood, in the small spaces where infection gathers. The craft reaches for the reopened wound on their shoulder, seeking to drive what lives there toward greater damage. It fails. The command does not land — Kestrin's discipline is too absolute, their body too practiced at holding itself together — and the small things in their blood simply refuse to hear you.\n\nBut you have already committed. Bristle lunges from the side as Kestrin presses forward, the marsh-hound's scarred flank slamming into their knee. Coil's lens flares bright enough to strip shadows, forcing Kestrin's eyes to reset their focus. Aevi's motes tighten into a burning constellation around their head — not striking, but *revealing*, making every micro-movement visible, every hesitation readable. Hush *withdraws*, and Kestrin's own shadow peels away from them like a thing with its own will — the loss of it throws their balance, just for a breath, just enough.\n\nKestrin recovers. They do not cry out; they do not even acknowledge the shadow's absence. Instead they strike — not at you, but *down*, driving the heel of their boot toward Bristle's spine with the precision of someone who has trained that counter a thousand times. The hound scrambles, yelps once, sharp and surprised, and rolls clear. Their strike lands on stone instead, and the impact sends a small spray of chips across the cellar floor.\n\nYou are both breathing hard now. Kestrin stands lower than before, their left leg favoring, their right shoulder dark with blood that has seeped past whatever binding they made. Their eyes are still locked on yours — but now there is something new in that gaze. Not defeat. Recognition. The look someone gives when they have finally found a person who reads them instead of reads *at* them.",
+      "sceneSummary": "In the cellar of the Kindly Rest, Loki reads Kestrin's fatigue and true intent through heat and presence, pressing the fight deeper. Kestrin's shadow is stolen, their balance broken, their famous discipline beginning to crack under genuine opposition — but they do not yield, and their gaze settles on Loki with something that might be respect.",
       "choices": [
         {
-          "label": "Press the advantage—strike while their focus narrows and their fatigue shows",
+          "label": "Press the advantage — strike while they are still recovering from the shadow's theft",
           "attribute": "physical",
           "subAttribute": "agility",
           "axes": {
-            "violence_peace": -0.6,
-            "chaos_order": -0.3
+            "violence_peace": 0.6,
+            "body_mind": 0.3
           },
-          "difficulty": "normal",
-          "opposedDifficulty": 32,
+          "difficulty": "hard",
+          "opposedDifficulty": null,
           "intentTags": [
             "attack",
-            "risky"
+            "strike"
           ],
           "abilityId": "hunters_strike",
           "energyCost": 3,
@@ -287,18 +306,39 @@
           "emergenceId": null
         },
         {
-          "label": "Read deeper—use Tremor Sense to feel whether Kestrin's fatigue is real or feint",
+          "label": "Call a halt — meet their gaze and ask what they actually want from this",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "violence_peace": -0.7,
+            "body_mind": 0.2
+          },
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "negotiate",
+            "calm"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Read deeper — use Tremor Sense to feel what their body is truly asking for beneath the discipline",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "violence_peace": 0.5,
-            "concrete_abstract": 0.2
+            "violence_peace": -0.2,
+            "body_mind": -0.3,
+            "concrete_abstract": 0.4
           },
           "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
             "study",
-            "careful"
+            "read"
           ],
           "abilityId": "tremor_sense",
           "energyCost": 3,
@@ -307,37 +347,71 @@
           "emergenceId": null
         },
         {
-          "label": "Hold steady—keep the Stillness Field and see what Kestrin chooses to do next",
+          "label": "Draw back and let them choose the next move — test whether they will press or speak",
           "attribute": "practical",
-          "subAttribute": "craft",
+          "subAttribute": "wits",
           "axes": {
-            "violence_peace": 0.7,
-            "chaos_order": 0.4
+            "violence_peace": -0.3,
+            "chaos_order": 0.2
           },
           "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "defend",
-            "careful"
+            "careful",
+            "wait"
           ],
-          "abilityId": "stillness_field",
-          "energyCost": 0,
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true,
           "encounterId": null,
           "emergenceId": null
         }
       ],
-      "deeds": [],
-      "characterDeltas": {},
-      "ledgerEvents": [],
+      "deeds": [
+        {
+          "description": "Read a legendary Marcher's true strategy in single combat, breaking their formal discipline through presence rather than technique",
+          "tags": [
+            "valor",
+            "insight"
+          ],
+          "weight": 2,
+          "communityId": "valley.millbrook"
+        }
+      ],
+      "characterDeltas": {
+        "health": -3,
+        "energy": -5,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
+      "ledgerEvents": [
+        {
+          "what": "Loki pressed Kestrin of the Riven Marches in single combat in the cellar of the Kindly Rest, driving them back with Small Kingdom and the coordinated action of five companions, opening their guard and stealing their shadow",
+          "tags": [
+            "combat",
+            "valor",
+            "legendary"
+          ],
+          "visibility": "witnessed",
+          "spectrumDeltas": {},
+          "impactsLocal": false
+        }
+      ],
       "questUpdates": [],
       "standingOps": [],
+      "delegateOps": [],
+      "jobOps": [],
+      "arcOps": [],
+      "adoptSchool": null,
+      "offer": null,
+      "stageOps": [],
       "scene": {
-        "setting": "The lamp-lit cellar of the Kindly Rest, stone walls close and damp, sharp cold light casting from Coil's precise lens. The Stillness Field holds like held breath. Two paces of open stone between you and Kestrin, who stands lower now, weight grounded, bleeding from the reopened wound on their shoulder—their formal discipline cracking under visible fatigue.",
+        "setting": "The lamp-lit cellar of the Kindly Rest, stone walls close and damp, sharp cold light casting from Coil's precise lens. The Stillness Field holds like held breath. Two paces of open stone between you and Kestrin, who stands lower now, weight shifted to their right leg, bleeding from the reopened wound on their shoulder—their formal discipline cracking under visible fatigue. Chip-scatter across the floor where their heel struck stone instead of flesh.",
         "npcsPresent": [
           {
             "name": "Kestrin of the Riven Marches",
-            "state": "Standing, breathing hard, eyes locked on you with genuine recognition—reading you, not the room. Bleeding. Tired. Still ready."
+            "state": "Standing, breathing hard, eyes locked on you with genuine recognition—reading you, not the room. Bleeding. Tired. Still present. Favoring their right leg."
           }
         ],
         "objects": [
@@ -348,26 +422,102 @@
           "Marrow perched high on the shelf—watching, steady",
           "Aevi's constellation teal and bright, tighter than before, focused on Kestrin",
           "Hush a shadow-shape at the very edge of the light, still watching both of you",
-          "Bristle planted between you and Kestrin, low snarl still rumbling—one flank wet with blood",
+          "Bristle planted between you and Kestrin, low snarl still rumbling—one flank wet with sweat",
           "Ember glowing warm at Kestrin's flank, coals-red light filling the space",
-          "scattered stone on the floor where you pulled the weight"
+          "scattered stone chips on the floor where Kestrin's heel struck"
         ],
         "threads": [
           "Kestrin's true purpose still unspoken—what do they actually want from you, beneath the fight?",
-          "The respect in Kestrin's eyes—what does it mean that they are looking at you the way someone looks at an equal?",
+          "The respect in Kestrin's eyes—what does it mean that they are reading you the way someone reads an equal?",
           "Sable waiting in the rooms above with Ravel and Estry—what will they make of this?",
-          "What happens next—does this end in blood, or in something else entirely?"
+          "What happens next—does this end in blood, or in something else entirely?",
+          "Bristle is hurt—not badly, but the hound took that strike meant for you"
         ]
       },
-      "npcUpdates": [],
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "kestrin-of-the-riven-marches",
+          "name": "Kestrin of the Riven Marches",
+          "status": "injured",
+          "statusNote": "Bleeding from reopened shoulder wound, favoring right leg after pressing forward, fatigue cracking their formal discipline, yet still reading Loki with genuine focus and respect",
+          "note": "Pressed Loki in single combat and saw them truly for the first time—recognized a person who reads presence instead of technique. Did not yield. Recovered from shadow-theft with precision counter-strike. Eyes now hold something beyond formal recognition.",
+          "learned": [
+            "Loki reads heat-traces through Prism Sight",
+            "Loki commands small things in wounds through Small Kingdom — and it does not always work against absolute discipline",
+            "Loki moves with four companions who act as one unified force: a swarm that reveals, a hound that defends, a machine that blinds, and a shadow-thing that steals",
+            "Loki reads through presence and respect, not through technique or provocation"
+          ],
+          "skillsObserved": [
+            "Reads an opponent's true intention beneath their provocation",
+            "Coordinates multiple companions into unified combat action",
+            "Does not break stride when a strike fails to land"
+          ]
+        },
+        {
+          "op": "update",
+          "npcId": "bristle-companion",
+          "status": "injured",
+          "statusNote": "Took a hard heel-strike meant for the player, yelped sharp, recovered and rolled clear—minor wound but the blow landed true",
+          "note": "Lunged to block Kestrin's counter-strike aimed at the player. The hound is protective and fast enough to read the threat before it comes."
+        }
+      ],
       "intentsHeard": [],
       "factUpdates": [],
       "placeUpdates": [],
-      "codexUpdates": [],
-      "encounterOps": []
+      "discovery": null,
+      "codexUpdates": [
+        {
+          "topic": "kestrin-of-the-riven-marches",
+          "label": "Kestrin of the Riven Marches",
+          "kind": "person",
+          "entityId": "kestrin-of-the-riven-marches",
+          "fact": "In single combat with Loki in the cellar of the Kindly Rest, Kestrin pressed the fight despite reopened wounds and fatigue, reading Loki's presence rather than their technique. Their famous formal discipline began to crack, and they looked at Loki with genuine recognition—the gaze of someone who has finally found an equal.",
+          "links": [
+            "the-kindly-rest",
+            "the-marchers"
+          ]
+        }
+      ],
+      "holdingOps": [],
+      "holdTrades": [],
+      "debtOps": [],
+      "exchangeOps": [],
+      "partyOps": [],
+      "generateRequest": [],
+      "encounterOps": [
+        {
+          "op": "tactic",
+          "tag": "reads-your-stance"
+        }
+      ],
+      "projectOps": [],
+      "bandOps": [],
+      "strikeOps": [],
+      "deathOps": [],
+      "newEncounter": null,
+      "unlockPrecursor": null,
+      "unlockSubstrate": null,
+      "timeOps": null,
+      "moveTo": null,
+      "stateOps": [],
+      "itemUpdates": [],
+      "deriveItem": null,
+      "imagePrompt": "Kestrin of the Riven Marches stands bleeding in lamp-light, their formal discipline cracking, their eyes locked on Loki with genuine recognition—the moment when they see a person who reads presence instead of technique, and realize they have finally met their equal.",
+      "imageMedium": null,
+      "newAbility": null,
+      "gambitOps": null,
+      "gambitApt": false,
+      "markDefiningMoment": null,
+      "markTeacher": null,
+      "offerPromotion": null,
+      "offerAcquisition": null,
+      "offerIntent": null,
+      "sceneEnded": false,
+      "momentArt": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Kestrin%20of%20the%20Riven%20Marches%20stands%20bleeding%20in%20lamp-light%2C%20their%20formal%20discipline%20cracking%2C%20their%20eyes%20locked%20on%20Loki%20with%20genuine%20recognition%E2%80%94the%20moment%20when%20they%20see%20a%20person%20who%20reads%20presence%20instead%20of%20technique%2C%20and%20realize%20they%20have%20finally%20met%20their%20equal.%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=88149&nologo=true"
     },
     "sceneState": {
-      "setting": "The lamp-lit cellar of the Kindly Rest, stone walls close and damp, sharp cold light casting from Coil's precise lens. The Stillness Field holds like held breath. Two paces of open stone between you and Kestrin, who stands lower now, weight grounded, bleeding from the reopened wound on their shoulder—their formal discipline cracking under visible fatigue.",
+      "setting": "The lamp-lit cellar of the Kindly Rest, stone walls close and damp, sharp cold light casting from Coil's precise lens. The Stillness Field holds like held breath. Two paces of open stone between you and Kestrin, who stands lower now, weight shifted to their right leg, bleeding from the reopened wound on their shoulder—their formal discipline cracking under visible fatigue. Chip-scatter across…",
       "npcsPresent": [
         {
           "name": "Kestrin of the Riven Marches",
@@ -384,22 +534,23 @@
         "Hush a shadow-shape at the very edge of the light, still watching both of you",
         "Bristle planted between you and Kestrin, low snarl still rumbling—one flank wet ",
         "Ember glowing warm at Kestrin's flank, coals-red light filling the space",
-        "scattered stone on the floor where you pulled the weight"
+        "scattered stone chips on the floor where Kestrin's heel struck"
       ],
       "threads": [
         "Kestrin's true purpose still unspoken—what do they actually want from you, beneath the fight?",
-        "The respect in Kestrin's eyes—what does it mean that they are looking at you the way someone looks at an equal?",
+        "The respect in Kestrin's eyes—what does it mean that they are reading you the way someone reads an equal?",
         "Sable waiting in the rooms above with Ravel and Estry—what will they make of this?",
-        "What happens next—does this end in blood, or in something else entirely?"
+        "What happens next—does this end in blood, or in something else entirely?",
+        "Bristle is hurt—not badly, but the hound took that strike meant for you"
       ]
     },
-    "beats": 12,
+    "beats": 13,
     "subPlace": null
   },
   "clock": {
     "schemaVersion": 1,
     "day": 2,
-    "hour": 12,
+    "hour": 13,
     "realAnchor": null
   },
   "companions": [
@@ -735,7 +886,7 @@
       }
     ],
     "unseenNews": [],
-    "turnsSinceOffer": 13,
+    "turnsSinceOffer": 14,
     "lastGenCount": 2110,
     "lastSharedReadAt": "2026-09-25T22:43:05.425Z",
     "lastTickWorldDay": 87,
@@ -5939,7 +6090,12 @@
         "text": "The game was updated to v2.7.6 — 33 new, 30 fixed, 9 changed.",
         "loggedAt": "2026-09-25T22:43:17.907Z"
       }
-    ]
+    ],
+    "worldMovedOnSeen": {
+      "water_crisis": {
+        "beats": 1
+      }
+    }
   },
   "bio": null,
   "subAttributes": {
@@ -6405,6 +6561,22 @@
         "createdDay": 2,
         "entityId": "person-5e7fbd40733ed12e",
         "updatedDay": 2
+      },
+      "kestrin-of-the-riven-marches": {
+        "id": "kestrin-of-the-riven-marches",
+        "label": "Kestrin of the Riven Marches",
+        "kind": "person",
+        "facts": [
+          "[d2] In single combat with Loki in the cellar of the Kindly Rest, Kestrin pressed the fight despite reopened wounds and fatigue, reading Loki's presence rather than their technique. Their famous formal discipline began to crack, and they looked at Loki with genuine recognition—the gaze of someone who…"
+        ],
+        "links": [
+          "the-kindly-rest",
+          "the-marchers"
+        ],
+        "aliases": [],
+        "createdDay": 2,
+        "entityId": "kestrin-of-the-riven-marches",
+        "updatedDay": 2
       }
     }
   },
@@ -6423,8 +6595,8 @@
   "actionCount": 16,
   "grantsVersion": 1,
   "reconcileVersion": 83,
-  "updatedAt": 1790376237097,
-  "rev": 285,
+  "updatedAt": 1790376299242,
+  "rev": 291,
   "activeEncounter": {
     "defId": "coliseum_champion_harm",
     "state": {
@@ -6432,9 +6604,8 @@
       "encounterId": "coliseum_champion_harm",
       "type": "duel",
       "status": "active",
-      "round": 5,
+      "round": 6,
       "log": [
-        "r1: ward vs reveal → momentum 0",
         "r1: bind vs deceive → momentum -4",
         "r2: reveal vs reveal → momentum -4",
         "r2: break vs strike → momentum 4",
@@ -6445,9 +6616,10 @@
         "r4: reveal vs reveal → momentum 4",
         "r4: strike vs strike → momentum 4",
         "r4: break vs deceive → momentum 4",
-        "r5: reveal vs reveal → momentum 4"
+        "r5: reveal vs reveal → momentum 4",
+        "r5: strike vs strike → momentum 4"
       ],
-      "opponentHealth": 75,
+      "opponentHealth": 60,
       "opponentYieldAt": 26,
       "opponentMaxHealth": 130,
       "tactic": "reads-your-stance",
@@ -6508,11 +6680,9 @@
       "momentum": 3.5,
       "opponentEnergy": 0,
       "turn": {
-        "phase": "action",
+        "phase": "sense",
         "sel": {
-          "sense": [
-            3
-          ],
+          "sense": [],
           "action": [],
           "bonus": []
         },
@@ -6524,9 +6694,8 @@
         "setupBonus": 0,
         "bonusEarned": false,
         "foeBonusEarned": false,
-        "senseDone": true,
-        "senseLine": "You read with Prism Sight — success. Neither of you learns much. You read Kestrin of the Riven Marches: they favour provoke, and they are tiring. Pick a craft that answers it.",
-        "readPayoff": "You read Kestrin of the Riven Marches: they favour provoke, and they are tiring. Pick a craft that answers it."
+        "senseDone": false,
+        "senseLine": ""
       },
       "broughtForward": [
         "ember",
@@ -6536,21 +6705,10 @@
       "playerReads": 5,
       "effects": [
         {
-          "kind": "in_terms",
-          "label": "terms on the table",
-          "value": -1,
-          "roundsLeft": 1,
-          "applies": "always",
-          "side": "player",
-          "rank": 2,
-          "source": "the offer, priced",
-          "from": "opponent"
-        },
-        {
           "kind": "opened",
           "label": "opened up",
           "value": -1,
-          "roundsLeft": 2,
+          "roundsLeft": 1,
           "applies": "whenAttacked",
           "side": "opponent",
           "rank": 1,
@@ -6561,34 +6719,23 @@
           "kind": "insight",
           "label": "you have their measure",
           "value": 3,
-          "roundsLeft": 2,
+          "roundsLeft": 1,
           "applies": "always",
           "side": "player",
           "rank": 1,
           "source": "Prism Sight",
           "from": "player"
-        },
-        {
-          "kind": "reeling",
-          "label": "reeling",
-          "value": -1,
-          "roundsLeft": 1,
-          "applies": "whenAttacked",
-          "side": "player",
-          "rank": 1,
-          "source": "a bare-handed effort",
-          "from": "opponent"
         }
       ],
       "pressure": {
         "player": 0,
-        "opponent": 4
+        "opponent": 5
       },
       "spent": {
         "player": false,
         "opponent": true
       },
-      "lastOppFn": "reveal",
+      "lastOppFn": "strike",
       "breakAt": {
         "opponent": 8,
         "player": 8
@@ -6605,11 +6752,11 @@
       "overmatch": null,
       "outweighed": null,
       "lastOppReceipt": {
-        "roll": 28,
-        "chance": 27,
-        "degree": "partial",
+        "roll": 92,
+        "chance": 20,
+        "degree": "failure",
         "action": {
-          "attribute": "mental",
+          "attribute": "practical",
           "abilityLevel": 1,
           "label": "a bare-handed effort",
           "axes": {}
@@ -6617,7 +6764,7 @@
         "breakdown": {
           "components": [
             {
-              "label": "mental 3",
+              "label": "practical 3",
               "value": 30
             },
             {
@@ -6635,24 +6782,28 @@
               "zero": true
             },
             {
-              "label": "matchup (strike vs reveal)",
-              "value": 2
-            },
-            {
               "label": "conserve",
               "value": -8
             },
             {
               "label": "momentum (you're on the back foot)",
               "value": -2
+            },
+            {
+              "label": "they read you first",
+              "value": -4
+            },
+            {
+              "label": "opened up (2 rounds)",
+              "value": -1
             }
           ],
-          "total": 27,
+          "total": 20,
           "clampedFrom": null,
-          "base": "mental",
+          "base": "practical",
           "opposed": null
         },
-        "critRoll": null,
+        "critRoll": 24,
         "crit": {
           "successChance": 8,
           "failChance": 11,
@@ -6679,14 +6830,19 @@
           "successClampedFrom": null,
           "failClampedFrom": null
         },
-        "rawChance": 27,
-        "margin": -1,
-        "matchup": 2,
+        "rawChance": 20,
+        "margin": -72,
+        "matchup": 0,
         "intensity": "conserve",
         "tier": 1,
         "function": "strike",
         "name": "a bare-handed effort",
-        "effectMods": [],
+        "effectMods": [
+          {
+            "label": "opened up (2 rounds)",
+            "value": -1
+          }
+        ],
         "woven": null,
         "targetChoice": {
           "policy": "threat",
@@ -6702,8 +6858,8 @@
           }
         }
       },
-      "lastReadWasSense": true,
-      "senseTierEarned": 2,
+      "lastReadWasSense": false,
+      "senseTierEarned": null,
       "senseResist": {
         "value": 12,
         "label": "they are hiding it (the wrong tell)",
@@ -6712,6 +6868,9 @@
       "foldSpent": {
         "aevi": {
           "read": 2
+        },
+        "bristle": {
+          "read": 6
         }
       }
     }
@@ -6840,7 +6999,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "valley": 46
+    "valley": 47
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -6888,10 +7047,10 @@
     {
       "id": "sess-6",
       "startedAt": "2026-09-25T19:04:54.532Z",
-      "lastAt": "2026-09-25T22:08:01.405Z",
+      "lastAt": "2026-09-25T22:44:59.232Z",
       "startDay": 87,
       "endDay": 87,
-      "beats": 9
+      "beats": 10
     }
   ],
   "establishedFacts": [
@@ -6903,9 +7062,9 @@
     }
   ],
   "peopleDisposition": {
-    "lattice": 0.17144160459368266,
-    "rootkin": 0.17144160459368266,
-    "somatic": 0.17144160459368266
+    "lattice": 0.19215588125715927,
+    "rootkin": 0.19215588125715927,
+    "somatic": 0.19215588125715927
   },
   "_pendingArrival": null,
   "corrections": [
@@ -6920,25 +7079,26 @@
     }
   ],
   "_opEmitted": {
-    "sceneSummary": 36,
-    "choices": 36,
-    "scene": 36,
+    "sceneSummary": 37,
+    "choices": 37,
+    "scene": 37,
     "stateOps": 1,
-    "characterDeltas": 23,
+    "characterDeltas": 24,
     "timeOps": 15,
-    "sceneEnded": 21,
-    "encounterOps": 6,
-    "npcUpdates": 21,
+    "sceneEnded": 22,
+    "encounterOps": 7,
+    "npcUpdates": 22,
     "generateRequest": 1,
     "offer": 5,
     "placeUpdates": 1,
     "moveTo": 1,
-    "imagePrompt": 15,
-    "gambitApt": 18,
-    "codexUpdates": 5,
-    "deeds": 3
+    "imagePrompt": 16,
+    "gambitApt": 19,
+    "codexUpdates": 6,
+    "deeds": 4,
+    "ledgerEvents": 1
   },
-  "_opTurns": 36,
+  "_opTurns": 37,
   "practice": {
     "schemaVersion": 1,
     "uses": {
@@ -6949,7 +7109,7 @@
       "stillness_field": 5,
       "tremor_sense": 3,
       "drumline_stride": 5,
-      "the_small_kingdom": 1,
+      "the_small_kingdom": 2,
       "hurled_weight": 1
     },
     "coActivations": {
@@ -6975,12 +7135,12 @@
   },
   "customAbilities": {},
   "companionBonds": {
-    "aevi": 1.5,
-    "bristle": 1.5,
-    "coil": 1.5,
-    "ember": 1.5,
-    "hush": 1.5,
-    "marrow": 1.5
+    "aevi": 2,
+    "bristle": 2,
+    "coil": 2,
+    "ember": 2,
+    "hush": 2,
+    "marrow": 2
   },
   "precursorAccess": [],
   "teachers": {
@@ -7097,6 +7257,14 @@
     "item": {}
   },
   "gallery": [
+    {
+      "kind": "moment",
+      "prompt": "Kestrin of the Riven Marches stands bleeding in lamp-light, their formal discipline cracking, their eyes locked on Loki with genuine recognition—the moment when they see a person who reads presence in",
+      "url": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Kestrin%20of%20the%20Riven%20Marches%20stands%20bleeding%20in%20lamp-light%2C%20their%20formal%20discipline%20cracking%2C%20their%20eyes%20locked%20on%20Loki%20with%20genuine%20recognition%E2%80%94the%20moment%20when%20they%20see%20a%20person%20who%20reads%20presence%20instead%20of%20technique%2C%20and%20realize%20they%20have%20finally%20met%20their%20equal.%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=88149&nologo=true",
+      "caption": "In the cellar of the Kindly Rest, Loki reads Kestrin's fatigue and true intent through hea",
+      "worldDay": 87,
+      "at": "2026-09-25T22:44:59.242Z"
+    },
     {
       "kind": "ability",
       "prompt": "Hurled Weight",
@@ -7563,418 +7731,418 @@
   "featureOffers": [],
   "_promptRows": {
     "character": {
-      "reached": 10,
-      "produced": 10
+      "reached": 11,
+      "produced": 11
     },
     "location": {
-      "reached": 10,
-      "produced": 10
+      "reached": 11,
+      "produced": 11
     },
     "region": {
-      "reached": 10,
-      "produced": 10
+      "reached": 11,
+      "produced": 11
     },
     "groundDetail": {
-      "reached": 10,
-      "produced": 10
+      "reached": 11,
+      "produced": 11
     },
     "lore": {
-      "reached": 10,
-      "produced": 10
+      "reached": 11,
+      "produced": 11
     },
     "traditionMotiveDetail": {
-      "reached": 10,
-      "produced": 9
+      "reached": 11,
+      "produced": 10
     },
     "sheetsDetail": {
-      "reached": 10,
-      "produced": 9
+      "reached": 11,
+      "produced": 10
     },
     "rules": {
-      "reached": 10,
-      "produced": 10
+      "reached": 11,
+      "produced": 11
     },
     "recentTurns": {
-      "reached": 10,
-      "produced": 10
+      "reached": 11,
+      "produced": 11
     },
     "timeLabel": {
-      "reached": 10,
-      "produced": 10
+      "reached": 11,
+      "produced": 11
     },
     "npcRegistryDetail": {
-      "reached": 10,
-      "produced": 10
+      "reached": 11,
+      "produced": 11
     },
     "mintedUnmetDetail": {
-      "reached": 10,
-      "produced": 10
+      "reached": 11,
+      "produced": 11
     },
     "npcSeedDetail": {
-      "reached": 10,
+      "reached": 11,
       "produced": 0
     },
     "traditionVocab": {
-      "reached": 10,
-      "produced": 10
+      "reached": 11,
+      "produced": 11
     },
     "standingDetail": {
-      "reached": 10,
-      "produced": 8
+      "reached": 11,
+      "produced": 9
     },
     "recalledDetail": {
-      "reached": 10,
+      "reached": 11,
       "produced": 0
     },
     "bearingsDetail": {
-      "reached": 10,
-      "produced": 10
+      "reached": 11,
+      "produced": 11
     },
     "caravansDetail": {
-      "reached": 10,
+      "reached": 11,
       "produced": 0
     },
     "commandDetail": {
-      "reached": 10,
-      "produced": 10
+      "reached": 11,
+      "produced": 11
     },
     "presenceDetail": {
-      "reached": 10,
-      "produced": 10
+      "reached": 11,
+      "produced": 11
     },
     "worthHereDetail": {
-      "reached": 10,
+      "reached": 11,
       "produced": 0
     },
     "inventoryDetail": {
-      "reached": 10,
-      "produced": 10
+      "reached": 11,
+      "produced": 11
     },
     "sceneState": {
-      "reached": 10,
-      "produced": 10
+      "reached": 11,
+      "produced": 11
     },
     "holdingsDetail": {
-      "reached": 10,
+      "reached": 11,
       "produced": 0
     },
     "debtsDetail": {
-      "reached": 10,
+      "reached": 11,
       "produced": 0
     },
     "carriedDetail": {
-      "reached": 10,
+      "reached": 11,
       "produced": 0
     },
     "abilityLawDetail": {
-      "reached": 10,
-      "produced": 10
+      "reached": 11,
+      "produced": 11
     },
     "questsDetail": {
-      "reached": 10,
+      "reached": 11,
       "produced": 0
     },
     "structuredQuestsDetail": {
-      "reached": 10,
+      "reached": 11,
       "produced": 0
     },
     "traditionArcDetail": {
-      "reached": 10,
+      "reached": 11,
       "produced": 0
     },
     "npcErrandsDetail": {
-      "reached": 10,
+      "reached": 11,
       "produced": 0
     },
     "codexDetail": {
-      "reached": 10,
-      "produced": 10
+      "reached": 11,
+      "produced": 11
     },
     "companionsDetail": {
-      "reached": 10,
-      "produced": 9
+      "reached": 11,
+      "produced": 10
     },
     "placeMemoryDetail": {
-      "reached": 10,
-      "produced": 10
+      "reached": 11,
+      "produced": 11
     },
     "agesMissingDetail": {
-      "reached": 10,
-      "produced": 10
+      "reached": 11,
+      "produced": 11
     },
     "newsDetail": {
-      "reached": 10,
-      "produced": 10
+      "reached": 11,
+      "produced": 11
     },
     "worldArcsDetail": {
-      "reached": 10,
-      "produced": 10
+      "reached": 11,
+      "produced": 11
     },
     "legendsPursuableDetail": {
-      "reached": 10,
-      "produced": 10
+      "reached": 11,
+      "produced": 11
     },
     "wakesDetail": {
-      "reached": 10,
+      "reached": 11,
       "produced": 0
     },
     "arcMoodDetail": {
-      "reached": 10,
-      "produced": 10
+      "reached": 11,
+      "produced": 11
     },
     "reachableDeadDetail": {
-      "reached": 10,
+      "reached": 11,
       "produced": 0
     },
     "threatToPlayer": {
-      "reached": 10,
+      "reached": 11,
       "produced": 0
     },
     "guardiansDetail": {
-      "reached": 10,
+      "reached": 11,
       "produced": 0
     },
     "resolution": {
-      "reached": 10,
+      "reached": 11,
       "produced": 1
     },
     "playerInput": {
-      "reached": 10,
-      "produced": 9
+      "reached": 11,
+      "produced": 10
     },
     "exactWords": {
-      "reached": 10,
+      "reached": 11,
       "produced": 1
     },
     "travelDirective": {
-      "reached": 10,
+      "reached": 11,
       "produced": 0
     },
     "itemAdvance": {
-      "reached": 10,
+      "reached": 11,
       "produced": 0
     },
     "encounterWeaveDetail": {
-      "reached": 10,
+      "reached": 11,
       "produced": 0
     },
     "encounterOfferDetail": {
-      "reached": 10,
+      "reached": 11,
       "produced": 0
     },
     "fightFramingDetail": {
-      "reached": 10,
+      "reached": 11,
       "produced": 0
     },
     "abilityGrantDetail": {
-      "reached": 10,
+      "reached": 11,
       "produced": 0
     },
     "stageRevealDetail": {
-      "reached": 10,
+      "reached": 11,
       "produced": 0
     },
     "itemEvolveDetail": {
-      "reached": 10,
+      "reached": 11,
       "produced": 0
     },
     "worldPressureDetail": {
-      "reached": 10,
+      "reached": 11,
       "produced": 0
     },
     "offerDetail": {
-      "reached": 10,
+      "reached": 11,
       "produced": 0
     },
     "teacherOfferDetail": {
-      "reached": 10,
+      "reached": 11,
       "produced": 0
     },
     "substrateDetail": {
-      "reached": 10,
+      "reached": 11,
       "produced": 0
     },
     "romanceGuidanceDetail": {
-      "reached": 10,
+      "reached": 11,
       "produced": 0
     },
     "factsDetail": {
-      "reached": 10,
-      "produced": 10
+      "reached": 11,
+      "produced": 11
     },
     "evolvedItemsDetail": {
-      "reached": 10,
+      "reached": 11,
       "produced": 0
     },
     "opLossNote": {
-      "reached": 10,
+      "reached": 11,
       "produced": 0
     },
     "emergenceDetail": {
-      "reached": 10,
+      "reached": 11,
       "produced": 0
     },
     "perilNote": {
-      "reached": 10,
+      "reached": 11,
       "produced": 0
     },
     "encounterDetail": {
-      "reached": 10,
-      "produced": 9
+      "reached": 11,
+      "produced": 10
     },
     "masteryDetail": {
-      "reached": 10,
+      "reached": 11,
       "produced": 0
     },
     "bookkeepingRestate": {
-      "reached": 10,
+      "reached": 11,
       "produced": 0
     },
     "anomalyDetail": {
-      "reached": 10,
+      "reached": 11,
       "produced": 0
     },
     "repairPanelDetail": {
-      "reached": 10,
-      "produced": 10
+      "reached": 11,
+      "produced": 11
     },
     "teacherDetail": {
-      "reached": 10,
-      "produced": 9
-    },
-    "toolkitDetail": {
-      "reached": 10,
+      "reached": 11,
       "produced": 10
     },
+    "toolkitDetail": {
+      "reached": 11,
+      "produced": 11
+    },
     "availableEncounters": {
-      "reached": 10,
+      "reached": 11,
       "produced": 1
     },
     "partyDetail": {
-      "reached": 10,
+      "reached": 11,
       "produced": 0
     },
     "ratingDetail": {
-      "reached": 10,
-      "produced": 10
+      "reached": 11,
+      "produced": 11
     },
     "registerDetail": {
-      "reached": 10,
-      "produced": 10
+      "reached": 11,
+      "produced": 11
     },
     "legendDetail": {
-      "reached": 10,
+      "reached": 11,
       "produced": 1
     },
     "livingWorldDetail": {
-      "reached": 10,
-      "produced": 10
+      "reached": 11,
+      "produced": 11
     },
     "assignmentsDetail": {
-      "reached": 10,
+      "reached": 11,
       "produced": 0
     },
     "latentArcsDetail": {
-      "reached": 10,
+      "reached": 11,
       "produced": 0
     },
     "seasonalDetail": {
-      "reached": 10,
-      "produced": 10
+      "reached": 11,
+      "produced": 11
     },
     "schoolsDetail": {
-      "reached": 10,
+      "reached": 11,
       "produced": 0
     },
     "sharedCanonDetail": {
-      "reached": 10,
-      "produced": 9
-    },
-    "worldCountLabel": {
-      "reached": 10,
+      "reached": 11,
       "produced": 10
     },
+    "worldCountLabel": {
+      "reached": 11,
+      "produced": 11
+    },
     "waygateDetail": {
-      "reached": 10,
+      "reached": 11,
       "produced": 0
     },
     "readAloudDetail": {
+      "reached": 11,
+      "produced": 11
+    },
+    "scenePacingDetail": {
+      "reached": 11,
+      "produced": 5
+    },
+    "moneyDetail": {
       "reached": 10,
       "produced": 10
     },
-    "scenePacingDetail": {
-      "reached": 10,
-      "produced": 4
-    },
-    "moneyDetail": {
-      "reached": 9,
-      "produced": 9
-    },
     "wishesDetail": {
-      "reached": 9,
+      "reached": 10,
       "produced": 0
     },
     "worldMovedOnDetail": {
-      "reached": 9,
-      "produced": 0
+      "reached": 10,
+      "produced": 1
     },
     "companionLivesDetail": {
-      "reached": 9,
+      "reached": 10,
       "produced": 0
     },
     "homeDetail": {
-      "reached": 9,
+      "reached": 10,
       "produced": 0
     },
     "invitationsDetail": {
-      "reached": 9,
+      "reached": 10,
       "produced": 0
     },
     "bandsJoinedDetail": {
-      "reached": 9,
+      "reached": 10,
       "produced": 0
     },
     "travelersHereDetail": {
-      "reached": 9,
-      "produced": 0
+      "reached": 10,
+      "produced": 1
     },
     "journeyDetail": {
-      "reached": 9,
+      "reached": 10,
       "produced": 0
     },
     "journeyUnderwayDetail": {
-      "reached": 9,
+      "reached": 10,
       "produced": 0
     },
     "powersHereDetail": {
-      "reached": 9,
-      "produced": 9
+      "reached": 10,
+      "produced": 10
     },
     "nemesisDetail": {
-      "reached": 9,
+      "reached": 10,
       "produced": 0
     },
     "holdsNearDetail": {
-      "reached": 9,
-      "produced": 9
+      "reached": 10,
+      "produced": 10
     },
     "travelersDetail": {
-      "reached": 9,
-      "produced": 9
+      "reached": 10,
+      "produced": 10
     },
     "jobsDetail": {
-      "reached": 9,
+      "reached": 10,
       "produced": 0
     }
   },
   "_opUnknown": {
-    "sceneSummary": 10
+    "sceneSummary": 11
   },
   "_bandNotes": null,
   "_opCountingSince": "2026-09-14T17:51:06.584Z",
   "_fireTests": {
-    "at": "2026-09-25T19:04:54.660Z",
-    "build": "2.6.6",
+    "at": "2026-09-25T22:44:59.406Z",
+    "build": "2.7.6",
     "results": [
       {
         "op": "jobOps",
@@ -8223,6 +8391,54 @@
       "day": 2,
       "worldDay": 87,
       "actionCount": 16
+    },
+    {
+      "companionId": "aevi",
+      "kind": "deed",
+      "delta": 0.5,
+      "day": 2,
+      "worldDay": 87,
+      "actionCount": 16
+    },
+    {
+      "companionId": "bristle",
+      "kind": "deed",
+      "delta": 0.5,
+      "day": 2,
+      "worldDay": 87,
+      "actionCount": 16
+    },
+    {
+      "companionId": "coil",
+      "kind": "deed",
+      "delta": 0.5,
+      "day": 2,
+      "worldDay": 87,
+      "actionCount": 16
+    },
+    {
+      "companionId": "ember",
+      "kind": "deed",
+      "delta": 0.5,
+      "day": 2,
+      "worldDay": 87,
+      "actionCount": 16
+    },
+    {
+      "companionId": "hush",
+      "kind": "deed",
+      "delta": 0.5,
+      "day": 2,
+      "worldDay": 87,
+      "actionCount": 16
+    },
+    {
+      "companionId": "marrow",
+      "kind": "deed",
+      "delta": 0.5,
+      "day": 2,
+      "worldDay": 87,
+      "actionCount": 16
     }
   ],
   "companionMemory": {
@@ -8239,6 +8455,11 @@
       },
       {
         "text": "Read and countered a legendary Marcher's provocation-gambit in single combat, breaking their discipline with song and striking true when it mattered most",
+        "weight": 2,
+        "day": 2
+      },
+      {
+        "text": "Read a legendary Marcher's true strategy in single combat, breaking their formal discipline through presence rather than technique",
         "weight": 2,
         "day": 2
       }
@@ -8258,6 +8479,11 @@
         "text": "Read and countered a legendary Marcher's provocation-gambit in single combat, breaking their discipline with song and striking true when it mattered most",
         "weight": 2,
         "day": 2
+      },
+      {
+        "text": "Read a legendary Marcher's true strategy in single combat, breaking their formal discipline through presence rather than technique",
+        "weight": 2,
+        "day": 2
       }
     ],
     "coil": [
@@ -8273,6 +8499,11 @@
       },
       {
         "text": "Read and countered a legendary Marcher's provocation-gambit in single combat, breaking their discipline with song and striking true when it mattered most",
+        "weight": 2,
+        "day": 2
+      },
+      {
+        "text": "Read a legendary Marcher's true strategy in single combat, breaking their formal discipline through presence rather than technique",
         "weight": 2,
         "day": 2
       }
@@ -8292,6 +8523,11 @@
         "text": "Read and countered a legendary Marcher's provocation-gambit in single combat, breaking their discipline with song and striking true when it mattered most",
         "weight": 2,
         "day": 2
+      },
+      {
+        "text": "Read a legendary Marcher's true strategy in single combat, breaking their formal discipline through presence rather than technique",
+        "weight": 2,
+        "day": 2
       }
     ],
     "hush": [
@@ -8309,6 +8545,11 @@
         "text": "Read and countered a legendary Marcher's provocation-gambit in single combat, breaking their discipline with song and striking true when it mattered most",
         "weight": 2,
         "day": 2
+      },
+      {
+        "text": "Read a legendary Marcher's true strategy in single combat, breaking their formal discipline through presence rather than technique",
+        "weight": 2,
+        "day": 2
       }
     ],
     "marrow": [
@@ -8324,6 +8565,11 @@
       },
       {
         "text": "Read and countered a legendary Marcher's provocation-gambit in single combat, breaking their discipline with song and striking true when it mattered most",
+        "weight": 2,
+        "day": 2
+      },
+      {
+        "text": "Read a legendary Marcher's true strategy in single combat, breaking their formal discipline through presence rather than technique",
         "weight": 2,
         "day": 2
       }

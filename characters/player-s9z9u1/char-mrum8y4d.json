@@ -13293,8 +13293,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790340834785,
-  "rev": 878,
+  "updatedAt": 1790340921709,
+  "rev": 880,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -15427,18 +15427,6 @@
       "lastMovedWorldCount": 2100,
       "history": [
         {
-          "at": null,
-          "from": "thriving",
-          "to": "thriving",
-          "note": "sold the store — 16 crystal"
-        },
-        {
-          "at": 1893,
-          "from": "thriving",
-          "to": "thriving",
-          "note": "guarded by Kael"
-        },
-        {
           "at": 1893,
           "from": "thriving",
           "to": "thriving",
@@ -15492,6 +15480,18 @@
           "from": "holding",
           "to": "thriving",
           "note": "improved with Better Story"
+        },
+        {
+          "at": 2100,
+          "from": "thriving",
+          "to": "thriving",
+          "note": "guarded by Kael, Ravel"
+        },
+        {
+          "at": 2100,
+          "from": "thriving",
+          "to": "thriving",
+          "note": "guarded by Kael, Ravel, Estry"
         }
       ],
       "carriage": {
@@ -15548,7 +15548,9 @@
         }
       ],
       "garrison": [
-        "kael-road-warden"
+        "kael-road-warden",
+        "steady-voice-woman",
+        "younger-visitor"
       ],
       "crew": [
         "tessvel-cairn",

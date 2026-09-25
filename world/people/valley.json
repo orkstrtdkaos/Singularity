@@ -111,6 +111,85 @@
       },
       "tradition": "wright",
       "homeland": "the_ceaseless"
+    },
+    "person-daf1562a9d614dae": {
+      "id": "person-daf1562a9d614dae",
+      "name": "Cinder the Unshadowed",
+      "epithet": "the one who outlived Valen Sunwrack, Who Left No Shadow Standing",
+      "provisional": false,
+      "tier": "riffraff",
+      "weight": 3,
+      "wants": "to be worth the one who did not come back",
+      "originKind": "casualty_survivor",
+      "region": "the_blaze",
+      "arcAffinity": {
+        "arcId": "arc_the_poles_pull",
+        "dir": 1
+      },
+      "arcAffinities": [
+        {
+          "arcId": "arc_the_poles_pull",
+          "dir": 1,
+          "weight": 2
+        },
+        {
+          "arcId": "arc_manifestation_storm",
+          "dir": -1,
+          "weight": 1
+        }
+      ],
+      "wantArcId": "arc_the_poles_pull",
+      "personalVerbs": [
+        "avoiding where it happened",
+        "asking after the ones who did not"
+      ],
+      "mintedWorldDay": 44,
+      "origin": "of the Blaze; was standing beside Valen Sunwrack, Who Left No Shadow Standing when they were cut down",
+      "legend": {
+        "tier": "riffraff",
+        "weight": 3
+      },
+      "tradition": "blazeborn",
+      "homeland": "the_blaze"
+    },
+    "person-d9f15497a71b44d7": {
+      "id": "person-d9f15497a71b44d7",
+      "name": "Cinder the Burning Truth",
+      "epithet": "the one who took Valen Sunwrack, Who Left No Shadow Standing's place",
+      "provisional": false,
+      "tier": "notable",
+      "weight": 10,
+      "wants": "to be more than the one they settled for",
+      "originKind": "faction_leaderless",
+      "region": "the_blaze",
+      "arcAffinity": {
+        "arcId": "arc_the_poles_pull",
+        "dir": 1
+      },
+      "arcAffinities": [
+        {
+          "arcId": "arc_the_poles_pull",
+          "dir": 1,
+          "weight": 2
+        },
+        {
+          "arcId": "arc_manifestation_storm",
+          "dir": -1,
+          "weight": 1
+        }
+      ],
+      "wantArcId": "arc_the_poles_pull",
+      "personalVerbs": [
+        "waiting for someone who is not coming"
+      ],
+      "mintedWorldDay": 44,
+      "origin": "sent by the Blaze to take up what Valen Sunwrack, Who Left No Shadow Standing left unfinished",
+      "legend": {
+        "tier": "notable",
+        "weight": 10
+      },
+      "tradition": "blazeborn",
+      "homeland": "the_blaze"
     }
   },
   "lives": {
@@ -482,6 +561,36 @@
         "characterId": "char-mr4ejo8c",
         "name": "Cellaceron"
       }
+    },
+    "stranger-at-the-gate": {
+      "id": "stranger-at-the-gate",
+      "name": "Orla Merritt",
+      "canonId": "stranger_at_the_gate",
+      "intro": {
+        "role": "Hired enforcer or territorial man from the lower lane",
+        "description": "Broad-shouldered, deliberate in his movement — carries a short club as though it is simply part of him. Comes with the air of someone who expects the other person to flinch first.",
+        "firstSeenDay": 1,
+        "where": "millbrook",
+        "metBy": {
+          "characterId": "char-devtest",
+          "name": "Test Hero (dev)"
+        }
+      }
+    },
+    "lira": {
+      "id": "lira",
+      "name": "Lira",
+      "canonId": "lira",
+      "intro": {
+        "role": "Healer and teacher of the valley — consent-centered, deliberate in presence and touch; ties to harmo",
+        "description": null,
+        "firstSeenDay": 2,
+        "where": "millbrook",
+        "metBy": {
+          "characterId": "char-devtest",
+          "name": "Test Hero (dev)"
+        }
+      }
     }
   },
   "fates": {
@@ -684,13 +793,15 @@
       }
     },
     "the_ender_who_forgot": {
-      "status": "wounded",
-      "woundedUntilDay": 54,
-      "woundedBy": "the_glad_dissolution",
-      "atWorldDay": 46,
+      "status": "stopped",
+      "woundedUntilDay": 52,
+      "woundedBy": "the_unbound_churn",
+      "stoppedUntilDay": 71,
+      "stoppedBy": "the_edge_that_holds",
+      "atWorldDay": 68,
       "fateBy": {
-        "characterId": "char-mrhs8286",
-        "name": "Silas Weir"
+        "characterId": "char-devtest",
+        "name": "Test Hero (dev)"
       }
     },
     "the_last_seraph": {
@@ -932,12 +1043,12 @@
     },
     "the_one_called_athena": {
       "status": "stopped",
-      "stoppedUntilDay": 47,
-      "stoppedBy": "the_unbending_witness",
-      "atWorldDay": 44,
+      "stoppedUntilDay": 79,
+      "stoppedBy": "the_unbodied_choir_master",
+      "atWorldDay": 76,
       "fateBy": {
-        "characterId": "char-mr4ejo8c",
-        "name": "Cellaceron"
+        "characterId": "char-devtest",
+        "name": "Test Hero (dev)"
       }
     },
     "the_penitent_maw": {
@@ -1013,6 +1124,17 @@
       "fateBy": {
         "characterId": "char-mrum8y4d",
         "name": "Loki"
+      }
+    },
+    "the_archive_that_walks": {
+      "status": "stopped",
+      "sinceWorldDay": 87,
+      "stoppedUntilDay": 90,
+      "stoppedBy": "the_raw_chord",
+      "atWorldDay": 87,
+      "fateBy": {
+        "characterId": "char-devtest",
+        "name": "Test Hero (dev)"
       }
     }
   }

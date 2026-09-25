@@ -1252,7 +1252,7 @@ export function improveHolding(character, id, abilityId, { catalog = {}, cfg = n
   // ⛔ SPEC_hold_costs §4 — A CRAFT ON A PLACE COSTS ENERGY, the craft's own × improveEnergyMult, and R47's floor holds: at zero
   // you cannot raise a ward. What it does decides how long it lasts: a craft that MAKES (lastingFunctions) is permanent — it is
   // a thing now, and things need upkeep, not renewal; one that holds ground or defends (seasonFunctions) lasts a season.
-  const energyCost = Math.max(1, Math.round((Number(def.energyCost) || 0) * (Number(g.improveEnergyMult) || 1)));
+  const energyCost = craftPlacementCost(def, g);   // ⛑ CCODE-501: one price, read by both doors
   if ((Number(character?.energy) || 0) <= 0) return { ok: false, why: `you have no energy left to raise ${def.name || abilityId} — spend yourself elsewhere and this is the cost` };
   if ((Number(character?.energy) || 0) < energyCost) return { ok: false, why: `${def.name || abilityId} on a place takes ${energyCost} energy; you have ${character.energy}` };
   character.energy -= energyCost;
@@ -1319,6 +1319,18 @@ export function featureDef(kind, cfg) { const k = featureKinds(cfg)[String(kind 
  *  stands. `allFeatures` is for the record and the tab. (SPEC_hold_costs §3 / Q2: a build IS a project.) */
 export function featuresOf(holding) { return (Array.isArray(holding?.features) ? holding.features : []).filter(f => f && !f.building); }
 export function allFeatures(holding) { return Array.isArray(holding?.features) ? holding.features.filter(Boolean) : []; }
+/** ⛔ CCODE-501 — WHAT PUTTING A CRAFT TO A PLACE COSTS YOU. SPEC_hold_costs §4's own price, in one place.
+ *
+ *  ⚠️ IT WAS WRITTEN TWICE AND CHARGED ONCE. `improveHolding` computed `energyCost × improveEnergyMult`
+ *  inline; the Build verb — a second way of applying a craft to a place, added the same week — charged
+ *  nothing. Aevi (2026-09-25): "that's an arbitrage: a player learns to build crafted features instead of
+ *  improving, and gets a seasonal ward for goods and labour alone." ⛑ Same shape as the DURATION defect one
+ *  function below, and the same fix: one reader, two doors. Pure. */
+export function craftPlacementCost(def, growth = null) {
+  const mult = Number(growth?.improveEnergyMult);
+  return Math.max(1, Math.round((Number(def?.energyCost) || 0) * (Number.isFinite(mult) ? mult : 1)));
+}
+
 /** ⛔ CCODE-495 (SNG-652 §8a) — HOW LONG A CRAFT PUT TO A PLACE LASTS, and it is the FUNCTION that decides.
  *
  *  SPEC_hold_costs §4, Aevi, 09-07: a craft that MAKES (`lastingFunctions` — make, mend, restore) is permanent
@@ -1439,7 +1451,20 @@ export function addFeature(character, id, { kind, name = null, by = null, craftI
   const craftVerbs = catalog
     ? [...new Set(craftList.flatMap(id => { const d = catalog[id]; return Array.isArray(d?.functions) ? d.functions : (d?.function ? [d.function] : []); }))]
     : [];
-  const fdur = craftDuration(craftVerbs, { growth: cfg?.growth || economy?.holdStore?.growth || null, day, energy: craftEnergy });
+  // ⛔ CCODE-501 (AEVI'S RULING) — A BUILD THAT NAMES A CRAFT PAYS THE CRAFT'S ENERGY, at the improvement
+  // path's own price. ⚠️ Plain work is untouched: with no craft named there is nothing to charge, and the
+  // authored goods-and-labour price stands alone. ⛑ And it is refused at zero exactly as `improveHolding`
+  // refuses it — R47's floor holds: at zero energy you cannot raise a ward, whichever door you came through.
+  const gDials = cfg?.growth || economy?.holdStore?.growth || null;
+  const placeCost = craftList.length && catalog
+    ? craftList.reduce((n, id) => n + craftPlacementCost(catalog[id], gDials), 0)
+    : 0;
+  if (placeCost > 0) {
+    const have = Number(character?.energy) || 0;
+    if (have <= 0) return { ok: false, why: `you have no energy left to put ${craftList.length > 1 ? "those crafts" : "that craft"} to this place — spend yourself elsewhere and this is the cost` };
+    if (have < placeCost) return { ok: false, why: `raising it with ${craftList.map(id => catalog[id]?.name || id).join(" and ")} takes ${placeCost} energy; you have ${have}` };
+  }
+  const fdur = craftDuration(craftVerbs, { growth: gDials, day, energy: craftEnergy || placeCost });
   const f = { kind: def.kind, family: def.family, name: name || def.label || def.kind, by: by || null, craftIds: craftList, count: Math.max(1, Number(count) || 1), day, via,
     ...fdur.stamp,
     ...(yields && def.family === "material" ? { yields: String(yields) } : {}) };
@@ -1469,6 +1494,9 @@ export function addFeature(character, id, { kind, name = null, by = null, craftI
     f.building = { owed: still, passesLeft: passes, paid: { store: fromStore, coin } };
     paid = { store: fromStore, coin, said: coinSaid.join(" and "), owed: still, passes };
   }
+  // ⚠️ CHARGED AFTER THE LAST REFUSAL, NEVER BEFORE. An energy cost taken by a call that then returns
+  // `{ ok: false }` is a player paying for nothing, which is the shape of every half-applied op in this repo.
+  if (placeCost > 0) character.energy = Math.max(0, (Number(character.energy) || 0) - placeCost);
   h.features = [...allFeatures(h), f];
   // ⛔ CCODE-429: a feature the fiction ESTABLISHED aboard a hold that moves tells us its frame carries it — the frame rises to fit, as a
   // rooted hold's rung does (a build could not get here: it is refused when the room is full)

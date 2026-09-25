@@ -69,7 +69,7 @@ import { enterDeathState } from "./engine/death.js";
 wireDeathModel(DeathModel);
 import { carriageOf, voyageOf, isMoored, canSail, sailHolding, voyageLine, featureRuling, canBuildOn } from "./engine/carriage.js";
 import { roomOf, roomRefusal, promotionOffer, promoteHolding, trainingAt, mountsAt, healingAt, quarteringOf, vaultOf, chargeOf, chargeWord, depositToVault, withdrawFromVault, holdingFieldSources } from "./engine/holdings.js";   // ⛔ CCODE-429: a hold has room · CCODE-430: a yard trains   // B6b: the holding that moves
-import { raidRisk, featureCost, featureDef, featureDoes, featureCategory, allFeatures, refreshImprovement, canBeAskedToWork, holdingFactsLine, answerFeatureOffer, holdingLedger, addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, yieldsFor, upkeepFor, appointKeeper, reclaimHolding, improveHolding, setCrew, setGarrison, holdingGround, addFeature, removeFeature, renameHolding, featureKinds, residentsOf, holdingMeaningAura, holdingFieldDelta } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
+import { raidRisk, craftPlacementCost, featureCost, featureDef, featureDoes, featureCategory, allFeatures, refreshImprovement, canBeAskedToWork, holdingFactsLine, answerFeatureOffer, holdingLedger, addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, yieldsFor, upkeepFor, appointKeeper, reclaimHolding, improveHolding, setCrew, setGarrison, holdingGround, addFeature, removeFeature, renameHolding, featureKinds, residentsOf, holdingMeaningAura, holdingFieldDelta } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
 import { buildDevReport, unknownOpsIn } from "./engine/devreport.js";   // SNG-559: the Play/Dev instrument
 import { makeField, fieldDataFrom, FIELD_KINDS, KIND_LABEL, MEMBERSHIP } from "./engine/field.js";
 import { assaultableAt, garrisonContingents, noteHoldLoss, takeHold, encounterOwnerFilter, seedPowerKnowledge, isKnownPower } from "./engine/powers.js";
@@ -180,7 +180,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.7.3";
+const APP_VERSION = "2.7.4";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -14498,17 +14498,17 @@ function wireHoldingOffers() {
     const hull = h ? canBuildOn(h, sel.value, CONTENT.rules?.economy?.holdFeatures?.kinds) : { ok: true };
     if (!hull.ok) { alert(`${h.name}: ${hull.why}.`); return; }
     // ⛔ CCODE-495 — the craft rides, and `catalog` rides with it because the DURATION is read from the craft's
-    // FUNCTIONS (`craftDuration`, the same rule an improvement pays). ⚠️ THE BUILD IS NOT CHARGED ENERGY: its
-    // authored price is goods and labour, and adding an energy cost here would be a new rule, not a repair.
-    // `craftEnergy` is passed only so a seasonal feature's RENEWAL costs what renewing that craft costs — the
-    // same number `improveHolding` would charge. ⬜ Flagged to Aevi: build free, refresh paid, is an asymmetry
-    // she may want evened up, and it is a dial, not a defect.
+    // FUNCTIONS (`craftDuration`, the same rule an improvement pays).
+    // ✅ CCODE-501 (AEVI'S RULING) — AND SO IS THE PRICE. A Build that names a craft costs the craft's energy,
+    // at the improvement path's own rate, because it IS putting a craft to a place: "casting a ward through
+    // Improve already costs that energy; casting it through Build was free — that's an arbitrage."
+    // ⚠️ THE PRICE IS NOT COMPUTED HERE. `addFeature` charges it from `craftPlacementCost`, which
+    // `improveHolding` also reads; this used to multiply it out again, which is two derivations of one number
+    // and the defect I have repaired four times this week.
     const bc = app.querySelector(`[data-hold-bcraft="${id}"]`)?.value || "";
-    const bcDef = bc ? fullCatalog()[bc] : null;
-    const gDials = CONTENT.rules?.economy?.holdStore?.growth || {};
     const r = addFeature(character, id, { kind: sel.value, name: (nameEl?.value || "").trim() || null, by: "you", day: absoluteWorldDay(), worldCount: worldCount(), cfg: holdCfgNow(), via: "built",
       economy: CONTENT.rules?.economy || null, regionId: CONTENT.locations?.[h?.locationId]?.regionId || null,
-      ...(bcDef ? { craftIds: [bc], catalog: fullCatalog(), craftEnergy: Math.max(1, Math.round((Number(bcDef.energyCost) || 0) * (Number(gDials.improveEnergyMult) || 1))) } : {}) });
+      ...(bc && fullCatalog()[bc] ? { craftIds: [bc], catalog: fullCatalog() } : {}) });
     if (!r.ok) { alert(r.why); return; }
     saveCharacter(character); again();
   };
@@ -15093,7 +15093,7 @@ function renderHoldingsTab(manageId = null) {
                 `addFeature`'s six callers cannot name a craft and the sixth is the GM's op, which has never sent
                 one. ⚠️ So the field was authored, registered, loaded and read, and the door a PLAYER walks —
                 standing there having just cast the thing — could not express it. This is that door. */""}
-          ${opts ? `<select data-hold-kind="${esc(h.id)}">${opts}</select><input data-hold-fname="${esc(h.id)}" placeholder="what it is called (optional)" style="max-width:200px"><select data-hold-bcraft="${esc(h.id)}" title="Which of your crafts raised it — what it DOES decides how long it stands: a craft that makes or mends is permanent, one that holds ground or defends lasts a season and then wants renewing"><option value="">— no craft, just work —</option>${(character.abilities || []).map(a => fullCatalog()[a.abilityId]).filter(d => d && (d.functions || []).length).map(d => `<option value="${esc(d.id)}">${esc(d.name || d.id)}</option>`).join("")}</select><button class="opt" data-hold-build="${esc(h.id)}" title="Pay the price — goods from the store, then the purse — and the work begins; it stands when its days have run">Build</button><button class="opt" data-hold-feature="${esc(h.id)}" title="The story built it, or the place came with it — free to record, and it still costs its keep">Record what the story built</button>` : ""}
+          ${opts ? `<select data-hold-kind="${esc(h.id)}">${opts}</select><input data-hold-fname="${esc(h.id)}" placeholder="what it is called (optional)" style="max-width:200px"><select data-hold-bcraft="${esc(h.id)}" title="Which of your crafts raised it — what it DOES decides how long it stands: a craft that makes or mends is permanent, one that holds ground or defends lasts a season and then wants renewing. It costs the craft's own energy, the same as putting it to the place through Apply a craft."><option value="">— no craft, just work —</option>${(character.abilities || []).map(a => fullCatalog()[a.abilityId]).filter(d => d && (d.functions || []).length).map(d => { const e = craftPlacementCost(d, CONTENT.rules?.economy?.holdStore?.growth); return `<option value="${esc(d.id)}"${e > (Number(character.energy) || 0) ? " disabled" : ""}>${esc(d.name || d.id)} — ${e} energy${e > (Number(character.energy) || 0) ? ` (you have ${Number(character.energy) || 0})` : ""}</option>`; }).join("")}</select><button class="opt" data-hold-build="${esc(h.id)}" title="Pay the price — goods from the store, then the purse — and the work begins; it stands when its days have run">Build</button><button class="opt" data-hold-feature="${esc(h.id)}" title="The story built it, or the place came with it — free to record, and it still costs its keep">Record what the story built</button>` : ""}
           <div class="hint" style="width:100%;margin-top:2px">${(() => { const kinds = Object.keys(holdCfgNow()?.features?.kinds || {}).filter(k => !k.startsWith("_")); return kinds.map(k => { const c = featureCost(k, holdCfgNow()); if (!c) return ""; const goods = c.build ? Object.entries(c.build.goods).map(([g, n]) => `${n} ${g.replace(/_/g, " ")}`).join(", ") : null; return `<span style="white-space:nowrap">${esc(holdCfgNow().features.kinds[k].label || k)}: ${goods ? esc(goods) + " · " + c.build.days + " days" : "cannot be built"} · ${c.upkeep}/pass</span>`; }).filter(Boolean).slice(0, 40).join(" &nbsp;·&nbsp; "); })()}</div>
           ${/* ⛔ CCODE-495 — A CRAFTED FEATURE APPEARS HERE TOO, or its expiry is a field nothing renders and the
                 player meets a lapse with no way to answer it. A feature is keyed by its KIND, an improvement by

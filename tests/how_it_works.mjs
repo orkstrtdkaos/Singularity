@@ -7400,6 +7400,51 @@ console.log("\n── §76b · a crafted feature carries its craft, its season, 
   check("§76b: …and the applier still accepts the old name, so a beat already in flight is not refused",
     /op\.featureKind \|\| op\.kind/.test(app495));
 
+  /* ✅ CCODE-501 (AEVI'S RULING on CCODE-495) — A BUILD THAT NAMES A CRAFT PAYS THE CRAFT'S ENERGY.
+     "Casting a ward onto a hold through Improve already costs that energy. Casting it through Build was free.
+     That's an arbitrage." ⚠️ Same shape as the DURATION defect above — two doors onto one act, one of them
+     reading the rule — and the same fix: `craftPlacementCost`, read by both. */
+  {
+    const gd = econ495.holdStore.growth || {};
+    const warder = { id: "w501", name: "Ki Thorns", functions: ["ward"], energyCost: 5, tier: 1 };
+    const maker501 = { id: "m501", name: "Raise It", functions: ["make"], energyCost: 5, tier: 1 };
+    const cat501 = { w501: warder, m501: maker501 };
+    const price = H495.craftPlacementCost(warder, gd);
+    const mk501 = (energy) => ({ id: "c501", energy, abilities: [{ abilityId: "w501", level: 1 }],
+      holdings: [{ id: "h501", name: "P", kind: "post", condition: "holding", features: [], improvements: [], store: {} }] });
+    check("§76b: ⛔ the price of putting a craft to a place is ONE function, and it is the improvement path's own",
+      price === Math.max(1, Math.round(5 * (Number(gd.improveEnergyMult) || 1)))
+      && /const energyCost = craftPlacementCost\(def, g\)/.test(rd("engine/holdings.js"))
+      && !/Math\.round\(\(Number\(bcDef\.energyCost\)/.test(rd("app.js")),
+      `price ${price} · improveEnergyMult ${gd.improveEnergyMult}`);
+    const rich = mk501(100);
+    const okB = H495.addFeature(rich, "h501", { kind: "wall", by: "you", craftIds: ["w501"], catalog: cat501, day: 1, cfg: cfg495, via: "built" });
+    check("§76b: ✅ …and the BUILD door charges it once, and the feature stands",
+      okB.ok !== false && rich.energy === 100 - price && rich.holdings[0].features.length === 1,
+      JSON.stringify({ energy: rich.energy, price }));
+    // ⚠️ REFUSED AT SHORT, AND NOTHING PAID. A cost taken by a call that then refuses is a player paying
+    // for nothing — the half-applied-op shape.
+    const poor = mk501(Math.max(1, price - 1));
+    const short = H495.addFeature(poor, "h501", { kind: "wall", by: "you", craftIds: ["w501"], catalog: cat501, day: 1, cfg: cfg495, via: "built" });
+    check("§76b: ⛔ …refused when the energy is short — with the number, nothing built, and NOTHING CHARGED",
+      short.ok === false && new RegExp(`takes ${price} energy`).test(String(short.why))
+      && poor.energy === Math.max(1, price - 1) && poor.holdings[0].features.length === 0,
+      JSON.stringify({ why: short.why, energy: poor.energy }));
+    const spent = mk501(0);
+    check("§76b: …and at ZERO it is R47's floor, in R47's words — whichever door you came through",
+      H495.addFeature(spent, "h501", { kind: "wall", by: "you", craftIds: ["w501"], catalog: cat501, day: 1, cfg: cfg495, via: "built" }).ok === false);
+    // ⛑ PLAIN WORK IS UNTOUCHED — Aevi: "the default 'no craft, just work' keeps its goods-and-labour price."
+    const plain = mk501(2);
+    const free = H495.addFeature(plain, "h501", { kind: "wall", by: "you", day: 1, cfg: cfg495, via: "built" });
+    check("§76b: ⛑ …while plain work with NO craft named costs no energy at all",
+      free.ok !== false && plain.energy === 2 && plain.holdings[0].features.length === 1);
+    // and the row says the price BEFORE the click, greyed when it cannot be paid
+    check("§76b: …and the picker names the price per craft before the click, disabled when you cannot pay it",
+      /craftPlacementCost\(d, CONTENT\.rules\?\.economy\?\.holdStore\?\.growth\)/.test(rd("app.js"))
+      && /e > \(Number\(character\.energy\) \|\| 0\) \? " disabled" : ""/.test(rd("app.js")),
+      "a price discovered by clicking is a price the player was not offered");
+  }
+
   /* ⛔ CCODE-496 (ERIK, on the preview): "the tear it down button doesn't work on the wall."
      TWO LISTS, ONE INDEX. `featuresOf` is the STANDING features (`!f.building`); `allFeatures` is every one.
      Both markup sites number their buttons off `h.features` — the raw array — and `removeFeature` looked that
@@ -7578,13 +7623,21 @@ console.log("\n── §76d · what a feature does, composed ──");
 
   // the grouping degrades to today's flat list until Aevi applies her catalogue
   const anyCat = Object.keys(kinds9).some(k => H9.featureCategory(k, cfg9));
-  check(`§76d: ⬜ the category reader answers null while the catalogue is STAGED (applied: ${anyCat}) — and the screen groups only when it does not`,
+  // ⚠️ REPORTS THE STATE, NEVER ASSERTS IT. Whether the catalogue is applied is Aevi's to decide and may
+  // change any day; what this gate owns is that the SCREEN reads it both ways.
+  check(`§76d: ⬜ the screen groups only where the content says how (catalogue applied: ${anyCat})`,
     /featRows\.some\(r => r\.cat\)/.test(rd("app.js")) && /hf-cat-label/.test(rd("app.js")),
     "a reader that REQUIRED `category` would render nothing on today's content");
-  // ⚠️ AND IT MUST ACTUALLY GROUP WHEN THE FIELD ARRIVES — proved on a cfg carrying one, so this cannot
-  // pass by the field being absent forever.
+  // ⚠️ AND IT MUST ACTUALLY GROUP WHEN THE FIELD ARRIVES — proved on a fixture, so this cannot pass by the
+  // field being absent forever.
+  // ⛔ BUILT FROM A STRIPPED CFG, NOT FROM THE LIVE ONE (Aevi, 2026-09-25). My first cut spread `cfg9` and
+  // ended `featureCategory("mine", withCat) === null` — true only while the catalogue was UNAPPLIED. She
+  // applied it, ran the suite, and this one check went red: a gate asking its question in the terms of the
+  // state it was defending against, which is the lesson I wrote down two days ago. The fixture now owns both
+  // halves, so it holds whether the live content carries categories or not.
+  const strip9 = Object.fromEntries(Object.entries(cfg9.features.kinds).map(([k, v]) => [k, (() => { const { category, ...rest } = v || {}; return rest; })()]));
   const withCat = { ...cfg9, features: { ...cfg9.features, categories: { defence: "Defence — walls, gates and wards" },
-    kinds: { ...cfg9.features.kinds, wall: { ...cfg9.features.kinds.wall, category: "defence" } } } };
+    kinds: { ...strip9, wall: { ...strip9.wall, category: "defence" } } } };
   const cat = H9.featureCategory("wall", withCat);
   check("§76d: …and it DOES group the moment the content carries a category — the other half of both ways",
     cat?.id === "defence" && /walls, gates and wards/.test(cat.label) && H9.featureCategory("mine", withCat) === null,

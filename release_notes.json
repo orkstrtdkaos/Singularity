@@ -16,6 +16,30 @@
   "next": [],
   "releases": [
     {
+      "version": "2.7.4",
+      "date": "2026-09-25",
+      "entries": [
+        {
+          "kind": "feature",
+          "title": "Every feature says what it is, what it does, and what it is for",
+          "summary": "A hold's features are grouped by what they're for — defence, watch, production, craft, community, market, travel, meaning — and each one carries a plain line about what it is and a line of flavour, with its real numbers beside them.",
+          "detail": "The numbers are composed from the feature's own fields rather than written into the words, so a wall that starts adding 2 to your defence says 2 the same day the rule changes."
+        },
+        {
+          "kind": "feature",
+          "title": "See every way the store can leave, priced side by side",
+          "summary": "Selling it yourself, letting the keeper work through it, or sending a caravan — each with what it gets, how long it takes, and what it returns per pass. Beside it: what a raid would take at this stock, and how often one gets through.",
+          "detail": "The comparison is ranked on what each way returns PER PASS, because the clock is the cost that dominates: a haul that fetches three times the price can take fifty passes and net a twentieth as much as selling where you stand. The raid line names which things are costing you — the ground, how full the store is, whether it is guarded, who keeps it — so a walled hold under a good keeper visibly earns the right to stock up."
+        },
+        {
+          "kind": "change",
+          "title": "Building something with a craft costs that craft's energy",
+          "summary": "Raising a wall with a ward now costs what putting that ward to the place would cost any other way, shown on the option before you pick it. Plain work — goods and labour, no craft named — is unchanged.",
+          "detail": "Applying a craft to a hold through 'Apply a craft' already cost its energy; through 'Build' it was free, which made building the cheaper way to get the same thing."
+        }
+      ]
+    },
+    {
       "version": "2.7.3",
       "date": "2026-09-25",
       "entries": [

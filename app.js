@@ -69,7 +69,7 @@ import { enterDeathState } from "./engine/death.js";
 wireDeathModel(DeathModel);
 import { carriageOf, voyageOf, isMoored, canSail, sailHolding, voyageLine, featureRuling, canBuildOn } from "./engine/carriage.js";
 import { roomOf, roomRefusal, promotionOffer, promoteHolding, trainingAt, mountsAt, healingAt, quarteringOf, vaultOf, chargeOf, chargeWord, depositToVault, withdrawFromVault, holdingFieldSources } from "./engine/holdings.js";   // ⛔ CCODE-429: a hold has room · CCODE-430: a yard trains   // B6b: the holding that moves
-import { featureCost, featureDef, allFeatures, refreshImprovement, canBeAskedToWork, holdingFactsLine, answerFeatureOffer, holdingLedger, addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, yieldsFor, upkeepFor, appointKeeper, reclaimHolding, improveHolding, setCrew, setGarrison, holdingGround, addFeature, removeFeature, renameHolding, featureKinds, residentsOf, holdingMeaningAura, holdingFieldDelta } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
+import { featureCost, featureDef, featureDoes, featureCategory, allFeatures, refreshImprovement, canBeAskedToWork, holdingFactsLine, answerFeatureOffer, holdingLedger, addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, yieldsFor, upkeepFor, appointKeeper, reclaimHolding, improveHolding, setCrew, setGarrison, holdingGround, addFeature, removeFeature, renameHolding, featureKinds, residentsOf, holdingMeaningAura, holdingFieldDelta } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
 import { buildDevReport, unknownOpsIn } from "./engine/devreport.js";   // SNG-559: the Play/Dev instrument
 import { makeField, fieldDataFrom, FIELD_KINDS, KIND_LABEL, MEMBERSHIP } from "./engine/field.js";
 import { assaultableAt, garrisonContingents, noteHoldLoss, takeHold, encounterOwnerFilter, seedPowerKnowledge, isKnownPower } from "./engine/powers.js";
@@ -180,7 +180,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.7.1";
+const APP_VERSION = "2.7.2";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -14994,7 +14994,33 @@ function renderHoldingsTab(manageId = null) {
       const h = manageId ? hs.find(x => x && x.id === manageId) : null;
       if (!h) return "";
       const cfgF = holdCfgNow(); const kinds = featureKinds(cfgF);
-      const built = (h.features || []).map((f, i) => `<span>${esc(f.name || f.kind)}${f.count > 1 ? ` \u00d7${f.count}` : ""} <button class="opt" data-hold-unfeature="${esc(h.id)}" data-index="${i}" title="Tear it down" style="padding:0 4px">\u00d7</button></span>`).join(" \u00b7 ");
+      // ⛔ SNG-652 §9 — WHAT STANDS HERE, BY CATEGORY, with the catalogue's own words and the engine's own
+      // numbers. Aevi's note on the catalogue draws the line: "the mechanical numbers on screen are composed
+      // by the engine from the kind's own fields … so they cannot drift from the rules; `what` is the words
+      // around them." So every figure below is READ (`featureDoes`) and every sentence is hers.
+      //
+      // ⬜ GATED BOTH WAYS. `category`, `what` and `flavor` are STAGED
+      // (`po/staged_content/SNG-652_feature_catalog.json`) and carried by 0 of 44 live kinds today, so this
+      // groups when the content says how and shows one plain list when it does not. A reader that REQUIRED
+      // the field would render nothing — the mirror of the defect that put this section in the work order.
+      const featRow = (f, i) => {
+        const does = featureDoes(f.kind, cfgF, { holding: h, feature: f, count: f.count, level: featureLevel(f) });
+        const d = featureDef(f.kind, cfgF) || {};
+        return `<div class="hf-row">
+          <div class="hf-top"><strong>${esc(f.name || d.label || f.kind)}</strong>${f.count > 1 ? ` <span class="hint">&times;${f.count}</span>` : ""}${featureLevel(f) > 1 ? ` <span class="hold-lv">L${featureLevel(f)}</span>` : ""}${f.building ? ` <span class="hint">&mdash; still being built</span>` : ""}${f.lapsed ? ` <span class="hint">&mdash; gone quiet</span>` : ""}
+            <button class="opt hf-x" data-hold-unfeature="${esc(h.id)}" data-index="${i}" title="${f.building ? "Stop the work" : "Tear it down"}" style="padding:0 5px">&times;</button></div>
+          ${d.what ? `<div class="hf-what">${esc(d.what)}</div>` : ""}
+          ${does.length ? `<div class="hf-does">${does.map(x => `<span class="hf-bit">${x.said}</span>`).join("")}</div>` : ""}
+          ${d.flavor ? `<div class="hf-flavor">${esc(d.flavor)}</div>` : ""}
+          ${(f.craftIds || []).length ? `<div class="hint">raised with ${esc((f.craftIds || []).map(id => fullCatalog()[id]?.name || id).join(", "))}${f.expiresDay != null ? ` · ${f.lapsed ? "wants waking" : `stands until day ${f.expiresDay}`}` : ""}</div>` : ""}
+        </div>`;
+      };
+      const featRows = (h.features || []).map((f, i) => ({ f, i, cat: featureCategory(f.kind, cfgF) }));
+      const built = !featRows.length ? "" : featRows.some(r => r.cat)
+        ? (() => { const by = new Map();
+            for (const r of featRows) { const key = r.cat?.id || "_other"; if (!by.has(key)) by.set(key, { label: r.cat?.label || "Everything else", rows: [] }); by.get(key).rows.push(r); }
+            return [...by.values()].map(g => `<div class="hf-cat"><span class="hf-cat-label">${esc(g.label)}</span>${g.rows.map(r => featRow(r.f, r.i)).join("")}</div>`).join(""); })()
+        : featRows.map(r => featRow(r.f, r.i)).join("");
       const opts = Object.entries(kinds).map(([k, d]) => `<option value="${esc(k)}">${esc(d.label || k)}</option>`).join("");
       const crafts = (character.abilities || []).filter(a => a && a.id).slice(0, 40).map(a => `<option value="${esc(a.id)}">${esc(a.name || a.id)}</option>`).join("");
       // ⛔ SPEC_hold_costs §5 — COME AND WORK: known, here, and not hostile (canBeAskedToWork) — a far lower bar than the company's.

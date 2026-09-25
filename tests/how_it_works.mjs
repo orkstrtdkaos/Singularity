@@ -7454,6 +7454,72 @@ console.log("\n── §76b · a crafted feature carries its craft, its season, 
   }
 }
 
+/* ═════ §76d — A FEATURE READS AS A CATALOGUE ENTRY, AND ITS NUMBERS ARE READ (SNG-652 §9) ═════ */
+// ⛔ AEVI'S OWN LINE ON THE CATALOGUE IS THE RULE: "the mechanical numbers on screen are composed by the
+// engine from the kind's own fields … so they cannot drift from the rules; `what` is the words around them."
+// ⚠️ That is the failure this project keeps committing the other way — a sentence in content stating a number
+// the code also computes, and the two parting. So every figure is read and every sentence is hers.
+//
+// ⬜ AND IT IS GATED BOTH WAYS, because `category`/`what`/`flavor` are STAGED and carried by 0 of 44 live
+// kinds. A reader that required them would render nothing, which is the mirror of the defect that put §9 in
+// the work order in the first place.
+console.log("\n── §76d · what a feature does, composed ──");
+{
+  const H9 = await import("../engine/holdings.js");
+  const { loadContentHeadless: lch9 } = await import("./headless_content.mjs");
+  const C9 = await lch9();
+  const econ9 = C9.rules.economy;
+  const cfg9 = { ...econ9.holdStore, features: econ9.holdFeatures };
+  const kinds9 = H9.featureKinds(cfg9);
+
+  // ⚠️ AN AUTHORING NOTE IS NOT A THING YOU CAN BUILD. `_yieldOverride_20260906` was live on the Build
+  // dropdown between "deck space" and the crafts.
+  check("§76d: ⚠️ no `_`-prefixed authoring note reaches the kinds a player can pick from",
+    Object.keys(kinds9).every(k => !k.startsWith("_")) && Object.keys(econ9.holdFeatures.kinds).some(k => k.startsWith("_")),
+    "the filter must be REAL — the raw content still has to carry a note for this check to mean anything");
+
+  // the numbers come from the kind's own fields, and they move when the fields do
+  const hold9 = (cond) => ({ id: "h9", kind: "post", condition: cond, features: [{ kind: "mine", name: "a mine", count: 1 }], improvements: [], store: {} });
+  const said = (k, opts) => H9.featureDoes(k, cfg9, opts).map(x => x.said).join(" · ");
+  const wallDef = H9.featureDef("wall", cfg9);
+  check("§76d: ⛔ a feature's numbers are READ from its own fields, never retyped — defence, upkeep, hands, homes",
+    new RegExp(`\\+${wallDef.defence} to what it can hold off`).test(said("wall", {}))
+    && /costs \d+ a pass to keep/.test(said("wall", {}))
+    && /more hands can work here/.test(said("quarters", {})) && /homes for \d+/.test(said("quarters", {})),
+    said("wall", {}) + " | " + said("quarters", {}));
+  // ⚠️ AND A COUNT AND A LEVEL SCALE IT, so two walls do not read as one
+  check("§76d: …and a count scales what it says, so two of a thing do not read as one",
+    /\+2 to what it can hold off/.test(said("wall", { count: 2 })) && /\+1 to what it can hold off/.test(said("wall", { count: 1 })));
+
+  // ⛔ THREE ANSWERS ABOUT A YIELD, NOT TWO. `yields` is a goods ID (a string), and the AMOUNT belongs to
+  // the HOLD — `yieldByCondition` — so it is read from `yieldsFor`, the same function the pass pays out of.
+  const top = Math.max(...Object.values(cfg9.yieldByCondition || {}).map(Number).filter(Number.isFinite));
+  const best = Object.entries(cfg9.yieldByCondition || {}).find(([, v]) => Number(v) === top)?.[0];
+  const zero = Object.entries(cfg9.yieldByCondition || {}).find(([, v]) => Number(v) === 0)?.[0];
+  check("§76d: ⛔ a yield is READ from the pass's own function — the same number the hold will actually bank",
+    new RegExp(`^${top} `).test(said("mine", { holding: hold9(best), feature: hold9(best).features[0] })),
+    said("mine", { holding: hold9(best), feature: hold9(best).features[0] }));
+  check("§76d: …and a hold that yields NOTHING says nothing, which is a fact, not an absence",
+    /nothing while it is/.test(said("mine", { holding: hold9(zero), feature: hold9(zero).features[0] })),
+    said("mine", { holding: hold9(zero), feature: hold9(zero).features[0] }));
+  check("§76d: …while with no hold to ask it names the goods and says the amount depends — three answers, never two",
+    /how much depends on the hold's condition/.test(said("mine", {})), said("mine", {}));
+
+  // the grouping degrades to today's flat list until Aevi applies her catalogue
+  const anyCat = Object.keys(kinds9).some(k => H9.featureCategory(k, cfg9));
+  check(`§76d: ⬜ the category reader answers null while the catalogue is STAGED (applied: ${anyCat}) — and the screen groups only when it does not`,
+    /featRows\.some\(r => r\.cat\)/.test(rd("app.js")) && /hf-cat-label/.test(rd("app.js")),
+    "a reader that REQUIRED `category` would render nothing on today's content");
+  // ⚠️ AND IT MUST ACTUALLY GROUP WHEN THE FIELD ARRIVES — proved on a cfg carrying one, so this cannot
+  // pass by the field being absent forever.
+  const withCat = { ...cfg9, features: { ...cfg9.features, categories: { defence: "Defence — walls, gates and wards" },
+    kinds: { ...cfg9.features.kinds, wall: { ...cfg9.features.kinds.wall, category: "defence" } } } };
+  const cat = H9.featureCategory("wall", withCat);
+  check("§76d: …and it DOES group the moment the content carries a category — the other half of both ways",
+    cat?.id === "defence" && /walls, gates and wards/.test(cat.label) && H9.featureCategory("mine", withCat) === null,
+    JSON.stringify(cat));
+}
+
 /* ═════ §76c — WHO COMES FOR YOU: CAN, WOULD, AND HAVE THEY SAID SO (SNG-653) ═════ */
 // ⛔ ERIK, FROM LOKI'S PLAY. Vess accepted his confession and made a mutual vow — "if death claims one, the
 // other will reach for them" — and the screen went on telling him *"that is a conversation to have with them,

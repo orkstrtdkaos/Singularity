@@ -1297,6 +1297,61 @@ export function craftDuration(verbs = [], { growth = null, day = null, energy = 
     stamp: expiresDay != null ? { expiresDay, refreshCost } : {} };
 }
 
+/** ⛔ CCODE-499 (SNG-652 §9) — WHAT A FEATURE DOES, COMPOSED FROM ITS OWN FIELDS AND NEVER RETYPED.
+ *
+ *  Aevi's note on the catalogue says it exactly: "the mechanical numbers on screen are composed by the engine
+ *  from the kind's own fields … so they cannot drift from the rules; `what` is the words around them."
+ *  ⚠️ That is the rule this project keeps breaking the other way — a sentence in content stating a number the
+ *  code also computes, and the two parting. So the words are hers and every NUMBER here is read.
+ *
+ *  Returns `[{ key, said }]`, in a fixed order so two features read alike. `level` scales what scales. Pure. */
+export function featureDoes(kind, cfg, { level = 1, count = 1, holding = null, density = null, feature = null } = {}) {
+  const def = featureDef(kind, cfg);
+  if (!def) return [];
+  const n = Math.max(1, Number(count) || 1), lv = Math.max(1, Number(level) || 1);
+  const out = [];
+  const say = (key, said) => { if (said) out.push({ key, said }); };
+  // ⚠️ `yields` IS A GOODS ID, NOT A MAP — measured on the live catalogue, where a mine reads
+  // `"yields": "raw_material"`. My first cut treated it as { goods: units } and so said NOTHING about the one
+  // feature whose whole point is that it yields.
+  // ⛑ AND THE AMOUNT IS NOT THE KIND'S TO STATE. It comes from the HOLD — its condition through
+  // `yieldByCondition`, and the ground's density — so with a holding in hand it is READ from `yieldsFor`,
+  // the same function the pass itself pays out of, and without one it is named without a number rather than
+  // guessed at. A figure composed twice is a figure that drifts.
+  const good = (feature?.yields || def.yields);
+  if (good && typeof good === "string") {
+    const live = holding ? (yieldsFor(holding, cfg, { density }) || []).find(y => y && y.feature && (feature ? (y.feature === (feature.name || feature.kind)) : String(y.goods) === String(good))) : null;
+    // ⚠️ THREE ANSWERS, NOT TWO. A number when the hold gives one; NOTHING when the hold is in hand and the
+    // rule says none (a failing hold yields 0 — that is a fact the player needs, not an absence); and the
+    // goods without a number when there is no hold to ask. Printing the last of these over the second would
+    // be an absence dressed as an unknown, which is this repo's most-repeated defect.
+    say("yields", live
+      ? `${live.units} ${String(live.goods).replace(/_/g, " ")} a pass`
+      : holding
+        ? `${String(good).replace(/_/g, " ")} — <strong>nothing while it is ${String(holding.condition || "like this")}</strong>`
+        : `${String(good).replace(/_/g, " ")} — how much depends on the hold's condition`);
+  }
+  if (Number(def.defence)) say("defence", `+${Number(def.defence) * n * lv} to what it can hold off`);
+  if (Number(def.watch)) say("watch", `+${Number(def.watch) * n * lv} to seeing trouble coming`);
+  if (Number(def.hands)) say("hands", `${Number(def.hands) * n * lv} more ${Number(def.hands) * n * lv === 1 ? "hand" : "hands"} can work here`);
+  if (Number(def.residents)) say("residents", `homes for ${Number(def.residents) * n}`);
+  if (Number(def.pilgrims)) say("pilgrims", `draws ${Number(def.pilgrims) * n} pilgrim${Number(def.pilgrims) * n === 1 ? "" : "s"} a pass`);
+  if (def.aura) say("aura", typeof def.aura === "string" ? def.aura : `an aura on the ground`);
+  if (def.facility) say("facility", `a ${String(def.facility).replace(/_/g, " ")} on the record — work that needs one can be done here`);
+  if (Number(def.upkeep)) say("upkeep", `costs ${Number(def.upkeep) * n} a pass to keep`);
+  return out;
+}
+
+/** The catalogue's category for a kind, and the label for that category. ⬜ `category` is STAGED, not applied
+ *  (`po/staged_content/SNG-652_feature_catalog.json`); until it lands this answers null and the screen shows
+ *  one ungrouped list, which is today's behaviour. Gated both ways on purpose. */
+export function featureCategory(kind, cfg) {
+  const def = featureDef(kind, cfg);
+  const id = def?.category ? String(def.category) : null;
+  if (!id) return null;
+  return { id, label: (cfg?.features?.categories || {})[id] || id };
+}
+
 /** What a kind costs to build (goods + labour days; null when it cannot be built) and to keep, per pass. */
 export function featureCost(kind, cfg) {
   const def = featureDef(kind, cfg);

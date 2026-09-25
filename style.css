@@ -2089,3 +2089,18 @@ table.ob-matrix { border-collapse: collapse; width: 100%; min-width: 640px; font
 .wc-depth.wc-can { opacity: 1; font-weight: 600; }
 .wc-words { font-size: 12px; opacity: .7; font-style: italic; margin-top: 2px; }
 .wc-ask { margin-top: 4px; }
+
+/* SNG-652 §9 · WHAT STANDS HERE — a feature reads as a catalogue entry: what it is, what it DOES (composed
+   from its own fields, never retyped), and the line of flavour. Grouped by category when the content carries
+   one. */
+.hf-cat { margin: 8px 0 2px; }
+.hf-cat-label { display: block; font-size: 10px; letter-spacing: .07em; text-transform: uppercase; opacity: .6; margin-bottom: 3px; }
+.hf-row { padding: 5px 0 6px; border-bottom: 1px dashed var(--line-soft, #2e2e2e); }
+.hf-row:last-child { border-bottom: 0; }
+.hf-top { display: flex; gap: 6px; align-items: baseline; flex-wrap: wrap; }
+.hf-x { margin-left: auto; opacity: .55; }
+.hf-x:hover { opacity: 1; }
+.hf-what { font-size: 12px; opacity: .85; margin-top: 1px; }
+.hf-does { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 3px; }
+.hf-bit { font-size: 11.5px; padding: 1px 6px; border-radius: 3px; background: var(--chip, rgba(255,255,255,.06)); }
+.hf-flavor { font-size: 11.5px; opacity: .55; font-style: italic; margin-top: 3px; }

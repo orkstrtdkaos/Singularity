@@ -10406,8 +10406,18 @@ await (async () => {
     /collapseMode\(familiesOfAbility\(fullCatalog\(\)\[choice\.abilityId\], FN_INDEX\), encounterKind\(enc\.def\)\)/.test(appSrc230) && /collapseResult\(resolution\.degree, \{ floor: collapseFloor\(enc\.def, frameContent\.collapseEligibility\) \}\)/.test(appSrc230) && /if \(res === "collapse"\)/.test(appSrc230) && /resolution\.collapse = \{ mode, result: "collapse"/.test(appSrc230));
   check("230 §6b WIRING: a decisive HARM finisher can END the SKILL-BATTLE early (Erik) — momentum swing → degree → floor, meter otherwise untouched",
     /collapseMode\(\[family\], "fight"\) === "finish" && swing > 0\s*&& collapseResult\(swingDegree\(swing, meterMax\), \{ floor: collapseFloor\(def, frameContent\.collapseEligibility\) \}\) === "collapse"/.test(appSrc230) && /outcome: "opponent_fell", state: \{ \.\.\.rr\.state, status: "ended" \}, _collapse: true/.test(appSrc230));
+  // ⛔ CCODE-493 — RE-ASKED. This pinned the SENTENCE, so it went green on a line Erik struck out: "The
+  // decisive finisher note seems to not really be useful. if it doesn't actually point to something the pc
+  // can do, remove it." ⚠️ The note announced a CATEGORY and named no craft, while every craft that can
+  // finish already wears its own "⚡ finisher · N% to end it" tag. The question the gate meant to ask is
+  // whether the frame distinguishes collapsible from too-great AND points the player at something real.
   check("230 §6b: the finisher gamble is surfaced in the frame (collapsible vs too-great)",
-    /enc-frame-collapse/.test(appSrc230) && /A decisive finisher could end this in one beat/.test(appSrc230));
+    /enc-frame-collapse/.test(appSrc230) && /Too great to end in one stroke/.test(appSrc230));
+  check("230 §6b + CCODE-493: …and the collapsible branch NAMES the craft that could do it, or says nothing",
+    /finisherPotential\(s, fullCatalog\(\)\[s\.id\], sbE\)/.test(appSrc230)
+      && /could end this in one beat — declare it as your ACTION/.test(appSrc230)
+      && /if \(!fin\.length\) return "";/.test(appSrc230),
+    "a note that announces a category and names no craft is a note pointing at nothing — Erik's rule");
 
   // §7a MORPH: a botched finisher HARDENS the encounter — the GM narrates it (§89-safe: the mechanical failure
   // already bit via failureCost; no meter re-tune, no spawned fight).
@@ -10990,13 +11000,35 @@ await (async () => {
 // followed by the fight ending, with the cause never stated.
 {
   const appE = readFileSync(join(root, "app.js"), "utf8");   // sbEnd stays in app.js; R34b: the threshold is state.breakAt
+  const SBX493 = await import("../engine/skill_battle.js");
+  const sbx493 = JSON.parse(readFileSync(join(root, "content/packs/core/rules/skill_battle_system.json"), "utf8")).engine;
   const mom = JSON.parse(readFileSync(join(root, "content/packs/core/rules/skill_battle_system.json"), "utf8")).engine.momentum;
+  // ⛔ CCODE-493 — RE-ASKED, AND THE PIPS ARE GONE. Erik, 2026-09-25: "shows 2 pips AND 0/2 for driven
+  // back... is this a fight or a pushing contest?" Two encodings of one number, and with the REAL threshold
+  // (up to 10) a pip row is a wall of diamonds. The gate's question is that the exit counter is VISIBLE.
   check("ERIK-BUG: the PRESSURE counter — the thing that actually ends a fight — is rendered to the player",
-    /class="sb-pressure"/.test(appE) && /driven back \$\{pip\(theirs, brk\)\}/.test(appE),
+    /class="sb-pressure"/.test(appE) && /driven back \$\{theirs\} of \$\{brk\}/.test(appE),
     "the exit condition is still invisible; the player can only watch momentum, which CCODE-38 made unable to end anything");
-  check("ERIK-BUG: the pressure readout reads breakAtPressure from CONTENT, never a hardcoded 2",
-    /momentum\?\.pressure\?\.breakAtPressure \?\? 2/.test(appE) && mom?.pressure?.breakAtPressure != null,
-    "a hardcoded threshold would silently disagree with the dial Erik and Aevi tune");
+  // ⛔ AND THIS ONE WAS WORSE THAN STALE — IT PINNED THE WRONG EXPRESSION AND HELD IT IN PLACE. It asserted
+  // the readout uses `momentum?.pressure?.breakAtPressure ?? 2`, which R34b (Erik, 2026-09-04) demoted to
+  // "the flat fallback for a sheet with no level" in the content's own comment. The engine has computed
+  // ceil(level × fraction), capped and eased, ever since; the header kept reading the fallback, so a
+  // level-20 foe showed 2/2 on a fight that would not end until 10. ⚠️ A GATE PINNING A LINE THE RULES HAVE
+  // MOVED PAST IS A GATE ARGUING FOR THE BUG. Now: the readout must ASK THE ENGINE.
+  check("ERIK-BUG + CCODE-493: the pressure readout asks the engine for the threshold, never retypes a dial",
+    /breakThresholdFor/.test(appE) && /function sbBreakAt\(/.test(appE)
+      && /const brk = sbBreakAt\("opponent"\)/.test(appE)
+      && /const need = sbBreakAt\("opponent", d, st\)/.test(appE),
+    "the UI computing a rule the engine also computes is how the pips and the exit came to disagree by a factor of five");
+  check("CCODE-493: R34b is the rule the threshold follows — level-scaled, capped, and eased by length",
+    (() => {
+      const lo = SBX493.breakThresholdFor({ sb: sbx493, kind: "fight", side: "opponent", level: 2, round: 0 });
+      const hi = SBX493.breakThresholdFor({ sb: sbx493, kind: "fight", side: "opponent", level: 20, round: 0 });
+      const cap = SBX493.breakThresholdFor({ sb: sbx493, kind: "fight", side: "opponent", level: 99, round: 0 });
+      const eased = SBX493.breakThresholdFor({ sb: sbx493, kind: "fight", side: "opponent", level: 20, round: 6 });
+      return hi > lo && cap === hi && eased < hi && eased >= 1;
+    })(),
+    "a flat threshold ended 1,595 of 2,000 duels by break — R34b is why it is not flat");
   check("ERIK-BUG: an ending says WHY — a pressure-break is named, not left as a non-sequitur after 'it's even'",
     /brokeOnPressure/.test(appE) && /driven back \$\{brkNeeded\} times and will not come again/.test(appE));
   check("ERIK-BUG: the cause is read from the ROUND RESULT, not the pre-round state (which misses the tick that ended it)",

@@ -16,6 +16,72 @@
   "next": [],
   "releases": [
     {
+      "version": "2.6.3",
+      "date": "2026-09-25",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "A round you won outright is no longer reported as a draw",
+          "summary": "Driving an opponent back is the most decisive thing that can happen in a round — and the line under the fight was calling those rounds \"neither gains — it's even\", or sometimes crediting them to the other side.",
+          "detail": "Filling the momentum meter drives the losing side back and then RESETS the meter, so they are still in the fight. The receipt worked out who won by comparing the meter before and after — and the reset had already put it back. Across a simulated 2,410 rounds, 903 of them were rounds like this. The receipt now reads the drive-back itself, names it, and counts it toward the break; the meter line shows where the meter actually reached before it reset."
+        },
+        {
+          "kind": "fix",
+          "title": "The “driven back” counter showed a number the fight was not using",
+          "summary": "The header said 2, and a level-20 opponent takes up to 10. You could fill the pips and watch the fight carry on.",
+          "detail": "How many times a side must be driven back has scaled with their level since September — half their level, capped at 10, and easing by one for every two rounds you have fought. Three places in the interface were still reading the old flat number. They all ask the engine now. The pips are gone with it: one count, in words, because ten diamonds is not a thing anyone reads."
+        },
+        {
+          "kind": "fix",
+          "title": "A read is no longer described as a blow",
+          "summary": "Read someone with a sensing craft and the line said “your blow is turned aside” — in the same sentence that had just said you read them.",
+          "detail": "The sentence describing how two moves met knew only whether each was defensive. A read is neither defensive nor an attack, so it was filed as an attack and got an attack's words. Sensing verbs have their own now, in every kind: a fight, a standoff and a chase each describe being read in their own terms."
+        },
+        {
+          "kind": "feature",
+          "title": "You can see what they are about to do, and what in your kit answers it",
+          "summary": "Once you have read an opponent, the fight names the move they are set to make, why they are making it, and which of your crafts makes it hardest for them.",
+          "detail": "The old line welded a fact about the round that had just happened onto the words “gathering to”, which is the future — so it read as nonsense. The two are separated: what they last did is labelled as the past, and what they are set to do is computed from the same deterministic policy the fight itself will use. It only shows once your choice can no longer change it, so it is never a guess."
+        },
+        {
+          "kind": "fix",
+          "title": "The roll breakdown knows whose roll it is",
+          "summary": "Opening an opponent's roll used to show their numbers under “your base” and “your own d100”.",
+          "detail": "One panel drew both rolls and had no idea which it was showing. It names the side now, and uses their name. It also says plainly whether the roll succeeded or failed instead of whether it “landed”, and both percentages on screen say which question they answer — the roll's own chance, and the move card's chance of beating the other side."
+        },
+        {
+          "kind": "feature",
+          "title": "Enter sends a move you have typed into a fight",
+          "summary": "The box where you shape a step in your own words had no Enter key — you had to find the button.",
+          "detail": ""
+        },
+        {
+          "kind": "change",
+          "title": "The momentum bar says what it is worth",
+          "summary": "It now shows the bonus it is giving your rolls right now, and names its one real landmark: fill it and they are driven back.",
+          "detail": "Momentum is a roll modifier, not the way a fight ends — that is the drive-back counter. The bar was a bare percentage with no way to learn either fact."
+        },
+        {
+          "kind": "change",
+          "title": "The finisher note names the craft, or says nothing",
+          "summary": "It used to announce that a decisive finisher “could end this in one beat” without saying which of your crafts could do it.",
+          "detail": ""
+        },
+        {
+          "kind": "change",
+          "title": "The ✦ Rich button has left the input row",
+          "summary": "✦ Tell it again, richer does the same job after a beat, where you can see whether it is worth it. The default still lives in Settings.",
+          "detail": ""
+        },
+        {
+          "kind": "internal",
+          "title": "The dev hero has a kit to match his level",
+          "summary": "",
+          "detail": "The dev test scenarios lifted the hero to level 20 for the command slots and left him with two crafts, neither of which could harm — and R47 retires the universal fallback strike for anyone whose own crafts carry a free floor, so there was no way to attack at all. The scenarios now learn a spread through `learnAbility`, gates and all, and report what refused."
+        }
+      ]
+    },
+    {
       "version": "2.6.2",
       "date": "2026-09-25",
       "entries": [

@@ -11442,8 +11442,16 @@ console.log("\n── §142 · four zones, in the order a round moves through th
   // ⛔ THE EXIT IS IN ZONE 1. Erik read "neither gains — it's even" and the fight ended, because the meter he was
   // watching was not the one that ends it. The pressure counter belongs with the state, at the top.
   const z = (n) => { const a = panel.indexOf(`data-zone="${n} · `); const b = panel.indexOf("data-zone=", a + 10); return panel.slice(a, b < 0 ? panel.length : b); };
-  check("§142: ⛔ the PRESSURE counter — the real exit — is in zone 1, with their name and your hp",
-    /sb-pressure/.test(z(1)) && /character\.health/.test(z(1)) && /sb-opponent/.test(z(1)));
+  // ⛔ CCODE-493 — AND YOUR OWN HP HAS LEFT ZONE 1, ON ERIK'S WORD. SPEC §142 lists "their name · their
+  // condition · the pressure counter · your hp/energy" and this gate held all four. ⚠️ In play on
+  // 2026-09-25 he struck the last one: "I don't need to see my own HP and Energy in the fight window because
+  // I have that on the sidebar." It was showing in THREE places at once — the sidebar, the encounter header
+  // and this line. ⛑ The spec row wants correcting rather than quietly diverging; it is in the po note.
+  check("§142: ⛔ the PRESSURE counter — the real exit — is in zone 1, with their name",
+    /sb-pressure/.test(z(1)) && /sb-opponent/.test(z(1)));
+  check("§142 + CCODE-493: …and your OWN vitals are not, because the sidebar already carries them",
+    !/character\.health/.test(z(1)),
+    "Erik: \"I don't need to see my own HP and Energy in the fight window because I have that on the sidebar.\"");
   check("§142: ⛔ …and so are the CONDITIONS standing on either side — \"a player cannot see what is ON them\"",
     /sb-fx-row/.test(z(1)) && /sb-fx-lbl/.test(z(1)));
   check("§142: ⚑ zone 2 carries the receipt and the rolls FOLDED behind it — the maths is on request",
@@ -17027,8 +17035,24 @@ console.log("\n── §239 · what a number is a number OF ──");
     !/%/.test(ex239(1).label), ex239(1).label);
   // ⛔ AND THE OTHER NUMBER NAMES ITS OWN QUESTION, so the two can be told apart without hovering either.
   const A239 = rd("app.js");
-  check("§239: ⛔ …and the roll popover says it is about the ROLL, and points at the other number",
-    /This roll lands \$\{bd\.total\}%/.test(A239) && /WINNING the exchange against theirs/.test(A239));
+  // ⛔ CCODE-493 — RE-ASKED. Erik, 2026-09-25: "What does it mean for the roll to 'Land'? that's trash
+  // verbiage. use the common consistent words — Succeeds or Fails" and "It says this card's % is a different
+  // question... different from WHAT." ⚠️ SNG-589 named the CONTRAST and neither side of it; this gate then
+  // pinned that half-answer in place. Both numbers are named by the question they answer now, and the popover
+  // knows whose roll it is at all — it used to narrate the opponent's stack in the second person.
+  check("§239: ⛔ …and the roll popover names BOTH numbers by the question each answers, in succeed/fail words",
+    /const verb = theirs \? "succeeds" : "succeed";/.test(A239)
+      && /\$\{subj\} \$\{verb\} on \$\{bd\.total\} or under, on a d100/.test(A239)
+      && /\$\{bd\.roll\} — \$\{bd\.roll <= bd\.total \? "SUCCESS" : "FAILURE"\}/.test(A239)
+      && /whether \$\{theirs \? "their" : "your"\} own roll succeeds at all/.test(A239)
+      && /whether that move BEATS the other side's move this round/.test(A239)
+      && !/This roll lands/.test(A239),
+    "a percentage that says it is 'a different question' without naming the question is the same omission one level up");
+  check("§239 + CCODE-493: …and it knows WHOSE roll it is — one renderer served both and spoke to the player either way",
+    /const who = bd\.who \|\| null;/.test(A239) && /const theirs = who\?\.side === "opponent";/.test(A239)
+      && /← \$\{possess\} base/.test(A239)
+      && /who: side === "you" \? \{ side: "player", name: character\.name \}/.test(A239),
+    "Erik: \"It's THEIR roll and it's saying ← 'your base'??? that makes no sense.\"");
 }
 
 

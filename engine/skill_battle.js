@@ -970,6 +970,49 @@ function antisoakFromConditions(sheet) {
  *
  *  ⚠️ RETURNS null FOR EVERY STATE THAT PREDATES IT, so a save written before this shipped simply has no
  *  taunt — the same opt-in shape as `knowledge` and `foeReadTier` on the same call. */
+/** ⛔ CCODE-493 — HOW MANY TIMES THIS SIDE MUST BE DRIVEN BACK BEFORE THEY BREAK. Pure, and EXPORTED because
+ *  it has to be, not because it is tidy: `battleRound` computed this inline while the encounter header, the
+ *  momentum hint and the ending copy each read the FLAT `momentum.pressure.breakAtPressure` instead — a dial
+ *  whose own content comment says it is "the flat fallback for a sheet with no level".
+ *
+ *  ⚠️ SO THE PIPS LIED BY A FACTOR OF FIVE. Erik (2026-09-25, in play) drove a level-20 foe back twice,
+ *  read "driven back: ◆◆ 2/2" in the header, and the fight carried on — because R34b (his own ruling,
+ *  2026-09-04) had asked for ceil(level × 0.5) since then, capped at `breakAtMax` and eased by
+ *  `breakEasesEvery`. The rule moved; three readers did not. A number on a card must hold on every path
+ *  that pays it.
+ *
+ *  Precedence, unchanged from the inline version: a KIND that authors its own flat `breakAtPressure` (a chase,
+ *  a standoff) keeps it outright; else R34b off the side's own level, capped; else the flat fallback. Then the
+ *  ease: one tick off for every `breakEasesEvery` rounds fought, never below `breakEaseFloor`. */
+export function breakThresholdFor({ sb, kind = "fight", side = "opponent", level = null, round = 0 } = {}) {
+  const mom = sb?.momentum || {};
+  const kcfg = (sb?.kinds || {})[kind] || {};
+  const pcfg = { ...(mom.pressure || {}), ...(kcfg.pressure || {}) };
+  const base = (() => {
+    const kindFlat = Number((kcfg.pressure || {}).breakAtPressure);
+    if (Number.isFinite(kindFlat)) return kindFlat;
+    const frac = Number(pcfg.breakAtLevelFraction);
+    const lvl = Number(level);
+    // ⬜ FINDING_matrix_rerun_87pct §4 shape B — a CEILING on what a fight can be asked to produce. Erik's R34b
+    // (`ceil(level/2)`) is right that a level-33 figure is hard to drive off a field, and the round cap is 14, so
+    // above ~level 28 the break exit cannot be reached at all. `breakAtMax` caps it; absent, R34b stands alone.
+    const cap = Number(pcfg.breakAtMax);
+    if (Number.isFinite(frac) && frac > 0 && Number.isFinite(lvl) && lvl > 0) {
+      const raw = Math.max(1, Math.ceil(lvl * frac));
+      return Number.isFinite(cap) && cap > 0 ? Math.min(raw, cap) : raw;
+    }
+    return pcfg.breakAtPressure ?? 3;
+  })();
+  // ⛔ ERIK 2026-09-11: "I want breaking to be the outcome that increases likelihood after a long fight." A flat threshold
+  // only rises with length because ticks pile up; `breakEasesEvery` N makes the threshold ITSELF fall — one tick less for
+  // every N rounds this fight has run, never below `breakEaseFloor` (default 1). A long fight wears a side down; a short
+  // one has to be won. ABSENT MEANS TODAY (no ease).
+  const every = Number(pcfg.breakEasesEvery);
+  if (!(Number.isFinite(every) && every > 0)) return base;
+  const floor = Math.max(1, Number(pcfg.breakEaseFloor) || 1);
+  return Math.max(Math.min(floor, base), base - Math.floor((Number(round) || 0) / every));
+}
+
 export function standingTaunt(state) {
   const t = state?.taunted;
   if (!t || !t.targetId) return null;
@@ -1186,7 +1229,14 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
     const loss = lossFor(dominated);
     // `label` is what a tick is CALLED in this kind ("driven back" / "ground lost" / "your point gives") — the
     // receipt's word for it, so a chase never reads as a mis-labelled fight.
-    pressureEvent = { side: dominated, healthLoss: loss.health, energyLoss: loss.energy, pressure: pressure[dominated], label: kcfg.pressureLabel || null };
+    // ⛔ CCODE-493 — `meterWas` IS THE WHOLE POINT OF THIS LINE. The reset below is what makes a break
+    // survivable, and it is ALSO what erases the round from the receipt: `roundVerdict` reads the meter on
+    // either side of the round, the reset puts the meter back near where it started, and the single most
+    // decisive round a fight can have printed "neither gains — it's even". Erik, in play: "my roll was a crit
+    // success while theirs was a crit failure... I should have destroyed them." He HAD — the pips moved and
+    // the sentence denied it. The receipt needs the meter this round actually reached, so it is reported.
+    pressureEvent = { side: dominated, healthLoss: loss.health, energyLoss: loss.energy, pressure: pressure[dominated], label: kcfg.pressureLabel || null,
+      meterWas: momentum, breakAt: breakThresholdFor({ sb, kind, side: dominated, level: dominated === "opponent" ? oppSheet?.level : playerSheet?.level, round: state.round }) };
     if (dominated === "opponent") opponentEnergy = Math.max(0, opponentEnergy - loss.energy);
     else playerEnergy = Math.max(0, playerEnergy - loss.energy);
     momentum = (dominated === "opponent" ? 1 : -1) * meterMax * (pcfg.resetTo ?? 0.35); // driven back, still in it
@@ -1809,32 +1859,12 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
   // person to drive off the field. A flat 2 ended 1,595 of 2,000 duels by break; a level-33 figure now takes
   // 17 ticks and a novice 1–3. `breakAtLevelFraction` is the content dial; a kind that authors its own flat
   // `breakAtPressure` (a chase, a standoff) keeps it, and a sheet with no level falls back to the flat number.
-  const breakAtBase = (side) => {
-    const kindFlat = Number((kcfg.pressure || {}).breakAtPressure);
-    if (Number.isFinite(kindFlat)) return kindFlat;
-    const frac = Number(pcfg.breakAtLevelFraction);
-    const lvl = Number(side === "opponent" ? oppSheet?.level : playerSheet?.level);
-    // ⬜ FINDING_matrix_rerun_87pct §4 shape B — a CEILING on what a fight can be asked to produce. Erik's R34b
-    // (`ceil(level/2)`) is right that a level-33 figure is hard to drive off a field, and the round cap is 14, so
-    // above ~level 28 the break exit cannot be reached at all. `breakAtMax` caps it; absent, R34b stands alone.
-    const cap = Number(pcfg.breakAtMax);
-    if (Number.isFinite(frac) && frac > 0 && Number.isFinite(lvl) && lvl > 0) {
-      const raw = Math.max(1, Math.ceil(lvl * frac));
-      return Number.isFinite(cap) && cap > 0 ? Math.min(raw, cap) : raw;
-    }
-    return pcfg.breakAtPressure ?? 3;
-  };
-  // ⛔ ERIK 2026-09-11: "I want breaking to be the outcome that increases likelihood after a long fight." A flat threshold
-  // only rises with length because ticks pile up; `breakEasesEvery` N makes the threshold ITSELF fall — one tick less for
-  // every N rounds this fight has run, never below `breakEaseFloor` (default 1). A long fight wears a side down; a short
-  // one has to be won. ABSENT MEANS TODAY (no ease).
-  const breakAtFor = (side) => {
-    const base = breakAtBase(side);
-    const every = Number(pcfg.breakEasesEvery);
-    if (!(Number.isFinite(every) && every > 0)) return base;
-    const floor = Math.max(1, Number(pcfg.breakEaseFloor) || 1);
-    return Math.max(Math.min(floor, base), base - Math.floor((Number(state.round) || 0) / every));
-  };
+  // ⛔ CCODE-493 — THE THRESHOLD IS ONE FUNCTION NOW, because it was two. See `breakThresholdFor` above:
+  // this block used to compute it inline and the encounter header retyped a FLAT `breakAtPressure`, which the
+  // content's own comment calls "the flat fallback for a sheet with no level". Erik read 2/2 on a fight the
+  // engine would not end until 10.
+  const breakAtFor = (side) => breakThresholdFor({ sb, kind, side,
+    level: side === "opponent" ? oppSheet?.level : playerSheet?.level, round: state.round });
   const breakAt = { opponent: breakAtFor("opponent"), player: breakAtFor("player") };
   if (opponentHealth != null && opponentHealth <= 0) resolved = "player";
   else if (pressure.opponent >= breakAt.opponent) resolved = "player";                              // or they finally break

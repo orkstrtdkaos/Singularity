@@ -2069,3 +2069,7 @@ table.ob-matrix { border-collapse: collapse; width: 100%; min-width: 640px; font
 .hold-lv { font-size: 10px; color: var(--accent); border: 1px solid rgba(212, 162, 74, 0.5); border-radius: 4px; padding: 0 4px; margin-left: 3px; }
 .hold-chip-up { background: none; border: 0; color: var(--accent2); cursor: pointer; font-size: 12px; line-height: 1; padding: 0 3px; }
 .hold-chip-up:hover { color: var(--accent); }
+
+/* CCODE-493 — the win condition is authored content; the LABEL says what the phrase is, so it stops
+   reading as a title wedged between the round header and the opponent's name (Erik, 2026-09-25). */
+.enc-frame-winlbl { font-size: .72em; letter-spacing: .08em; text-transform: uppercase; opacity: .6; margin-right: .4em; font-style: normal; font-weight: 400; }

@@ -57,8 +57,14 @@ export function oneFight({ threat, moves, sheet, sb, steps, rules, rng, maxRound
     const said = /neither gains/.test(line) ? "even" : /you take the exchange/.test(line) ? "player"
       : /they take the exchange/.test(line) ? "opponent" : "?";
     const downed = playerHealth <= 0;
-    rounds.push({ before, after, verdict: said, engineVerdict: roundVerdict(before, after).verdict,
-      roundWinner: rr.roundWinner, line, resolved: downed ? "opponent" : rr.resolved,
+    // ⛔ CCODE-493 — THE COMPARATOR HAD THE SAME BLIND SPOT AS THE THING IT WAS COMPARING. `roundVerdict`
+    // was called here WITHOUT the round's pressure event, so on a break it read the post-reset meter and
+    // answered from a number the reset had just moved — the same reading the receipt was making, which is
+    // precisely why the two agreed all the way through a bug. ⚠️ A gate that reproduces the defect in order
+    // to check for it cannot see it. The event rides now, and `pressureEvent` is on the row so a sim can
+    // assert about the rounds that break rather than only about the rounds that do not.
+    rounds.push({ before, after, verdict: said, engineVerdict: roundVerdict(before, after, { pressureEvent: rr.pressureEvent || null }).verdict,
+      roundWinner: rr.roundWinner, line, resolved: downed ? "opponent" : rr.resolved, pressureEvent: rr.pressureEvent || null,
       pressure: { ...rr.pressure }, opponentHealth: rr.opponentHealth, playerHealth });
     state = rr.state;
     if (rr.resolved || downed) break;

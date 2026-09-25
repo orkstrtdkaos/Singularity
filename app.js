@@ -6,7 +6,7 @@ import { loadRecovery, recoveryKeys, loadContent, loreForLocation, eventsForGM, 
 import { mergeRecovery, mergeReceiptLine } from "./engine/recovery.js";   // the door to the snapshots the sync kept and nobody could reach
 import { resolveAction, successChance, applyEnergyCost, critProfile, outcomeOdds } from "./engine/resolve.js";   // CCODE-414: the five ways a roll lands
 import { senseAction, senseTier, senseOpponent, appraiseOpponent, sensedOdds } from "./engine/sense.js"; // CCODE-44: size a fight up BEFORE taking it · CCODE-415: the bar, as the character can read it
-import { synthesizeOpponentSheet, synthesizeStaticSheet, estimateExchange, finisherPotential, finishOdds, hasCounterCraft, matchupBonus, phaseDenied } from "./engine/skill_battle.js"; // CCODE-46/42: priced moves + situational finisher odds
+import { synthesizeOpponentSheet, synthesizeStaticSheet, estimateExchange, finisherPotential, finishOdds, hasCounterCraft, matchupBonus, phaseDenied, breakThresholdFor, opponentPolicy, momentumModifier } from "./engine/skill_battle.js"; // CCODE-46/42: priced moves + situational finisher odds
 import { recordDeed, standingWith, reputationSummary, knownTags } from "./engine/reputation.js";
 import { seedStandingAtCreation, accrueStandingForDays, applyStandingOps, standingRoster } from "./engine/standing.js"; // BATCH-12 §3
 import { majorDeeds, majorStateHash, chronicleIsStale, buildChroniclePrompt, touchSession, endSession, sessionLog, buildSessionPrompt, authorshipStats, crossCharacterAuthorship } from "./engine/chronicle.js";
@@ -26,7 +26,7 @@ import { drawAxis, resolvePick, readOfPick, championPick, drawBackgroundAxis } f
 import { critFor } from "./engine/craftmechanics.js"; // CCODE-76: a craft's own critical, in its own words
 import { authoredBlock } from "./engine/craftmechanics.js";                 // CCODE-311: the rank-walking reader a guard block needs
 import { protectionFromCraft, tickProtections } from "./engine/intercept.js"; // CCODE-311: the writer state.protections never had
-import { receiptLine, roundVerdict } from "./engine/roundreceipt.js"; // the round receipt, extracted so it can be simulated (it shipped a permanent "it's even" because nothing could test it)   // SNG-250 §4: the born-whole gate + which types it covers
+import { receiptLine, roundVerdict, SB_VERB } from "./engine/roundreceipt.js"; // the round receipt, extracted so it can be simulated (it shipped a permanent "it's even" because nothing could test it)   // SNG-250 §4: the born-whole gate + which types it covers
 import { mintableBraidsFor, buildBraidDef, mintBraid, braidKey, registerDiscoveryAbility, braidsAwaitingMoment } from "./engine/braids.js"; // SNG-197 p2: in-play braid mint + the moment; SNG-226: a discovery becomes a usable craft; SNG-592: whose moment a ledger row is
 import { ensureRecipeStore, buildRecipeRecord, recipeFor, recipeToAuthored, mergeRecipes, firstFinderName } from "./engine/recipes.js"; // SNG-201: shared braid recipes
 import { braidPlacement, compositionAngle, leanOffset, wheelRejects, inTraditions, matchesFunction, creationPool } from "./engine/wheelgeom.js"; // SNG-202: place a craft on the wheel by its composition
@@ -180,7 +180,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.6.2";
+const APP_VERSION = "2.6.3";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -687,20 +687,31 @@ function showPopoverText(text, { odds = null } = {}) {
 function showBreakdownPopover(bd) {
   const sign = v => (v >= 0 ? "+" : "−") + Math.abs(Math.round(v));
   const comps = bd.components || [];
+  // ⛔ CCODE-493 (ERIK, 2026-09-25) — "It's THEIR roll and it's saying ← 'your base'??? that makes no sense."
+  //
+  // ⚠️ ONE RENDERER SERVED BOTH SIDES AND HAD NO IDEA WHICH IT WAS SHOWING. Every sentence in here was
+  // written in the second person — "your base", "your own d100" — and the opponent's roll goes through the
+  // same function, so reading THEM printed their stack under a narration of YOU. The blob carries `who` now:
+  // a side and a name, filled in at the four call sites that know. ⛑ Absent, it reads as the player's, which
+  // is what the three non-contest call sites are.
+  const who = bd.who || null;
+  const theirs = who?.side === "opponent";
+  const nm = who?.name || (theirs ? "They" : "You");
+  const possess = theirs ? `${nm}’s` : "your";
   const lines = comps.map(c => {
     // CCODE-30: mark the BASE line so the player learns which attribute/sub-attribute the action drew on
     // (Erik: "what skill did I use as a base?" — it's the sub-attribute, e.g. insight, not the ability).
     const isBase = bd.base && String(c.label).startsWith(bd.base);
-    return `${c.label}   ${sign(c.value)}${isBase ? "   ← your base (the attribute this draws on)" : ""}`;
+    return `   ${c.label}   ${sign(c.value)}${isBase ? `   ← ${possess} base (the attribute this draws on)` : ""}`;
   });
-  if (bd.clampedFrom != null) lines.push(`clamped (from ${bd.clampedFrom})`);
+  if (bd.clampedFrom != null) lines.push(`   clamped (from ${bd.clampedFrom})`);
   // CCODE-30: was there an OPPOSED roll, or is the difficulty the task's own hardness? Say it plainly.
   const oppLine = bd.opposed
-    ? `\n⚔ Opposed by ${bd.opposed} — that resistance above is their strength, not a fixed number.`
+    ? `\n⚔ Opposed by ${bd.opposed} — that resistance above is the other side's strength, not a fixed number.`
     : comps.some(c => String(c.label) === "difficulty")
       ? `\nNo opposed roll here — "difficulty" is the task's own hardness, set by the GM from the fiction.`
       : "";
-  const foot = `total   ${bd.total}%${bd.roll != null ? `   — rolled ${bd.roll} → ${String(bd.degree || "").replace("_", " ")}` : ""}`;
+  const foot = `   ────────────\n   total   ${bd.total}`;
   // SNG-258 §4/§4b + §9 — THE SECOND ROLL, SHOWN. Crits stopped being a position on the first roll (1-5 /
   // 96+) and became their own roll with their own dials, which made them INVISIBLE: the player could see the
   // chance they had to beat and had no way to learn that a master crits harder and fumbles softer. §9 asks for
@@ -716,7 +727,7 @@ function showBreakdownPopover(bd) {
       return `${label}   ${chance}%${rows.length ? "\n" + rows.join("\n") : ""}`;
     };
     const rolled = bd.critRoll != null
-      ? `\n\nThis time the second roll was ${bd.critRoll} — ${String(bd.degree || "").startsWith("crit") ? "it landed." : "no crit."}`
+      ? `\n\nThis time the second roll was ${bd.critRoll} — ${String(bd.degree || "").startsWith("crit") ? "it succeeded, so this was a crit." : "it failed, so no crit."}`
       : "";
     // A PARTIAL takes no second roll at all, and saying so is the difference between "you were unlucky" and
     // "this outcome was never eligible" — the player should not hunt for a crit that could not have happened.
@@ -727,11 +738,27 @@ function showBreakdownPopover(bd) {
       + `${side("crit success", c.successChance, c.successComponents, c.successClampedFrom)}\n\n`
       + `${side("crit failure", c.failChance, c.failComponents, c.failClampedFrom)}${rolled}${partial}${authored}`;
   })();
-  // ⛔ SNG-589 (Erik) — AND THIS ONE HAS TO NAME ITS QUESTION TOO. The move card prices WINNING THE EXCHANGE
-  // against their stack; this prices THE ROLL LANDING against your own, where momentum, having their measure
-  // and being swayed all appear and their stack does not. ⚠️ Erik read 74 there and 55 here and reasonably
-  // called it misleading: two bare percentages about one move, twenty points apart, neither saying of what.
-  showPopoverText(`This roll lands ${bd.total}% of the time — your own d100 at or under it.\n(The card’s % is a different question: your odds of WINNING the exchange against theirs.)\n\n${lines.join("\n")}${oppLine}\n────────────\n${foot}${critBlock}`);
+  // ⛔ SNG-589 + CCODE-493 (ERIK) — "What does it mean for the roll to 'Land'? that's trash verbiage. use the
+  // common consistent words — Succeeds or Fails" and "It says this card's % is a different question...
+  // different from WHAT. Just make it exactly what the card and roll IS."
+  //
+  // ⛑ SO BOTH NUMBERS ARE NAMED BY THE QUESTION THEY ANSWER, not by contrast with an unnamed other. SNG-589
+  // was the first pass at this and it only said the two were different; saying a number is "a different
+  // question" without naming the question is the same omission one level up.
+  const verb = theirs ? "succeeds" : "succeed";
+  const subj = theirs ? nm : "You";
+  const rolled = bd.roll != null
+    ? `${subj} rolled ${bd.roll} — ${bd.roll <= bd.total ? "SUCCESS" : "FAILURE"}${bd.degree ? ` (${String(bd.degree).replace("_", " ")})` : ""}.`
+    : "";
+  const title = theirs ? `${nm.toUpperCase()}’S ROLL` : "YOUR ROLL";
+  showPopoverText(
+    `${title}\n\n`
+    + `${subj} ${verb} on ${bd.total} or under, on a d100. ${rolled}\n\n`
+    + `WHAT BUILT THE ${bd.total}\n${lines.join("\n")}\n${foot}${oppLine}\n\n`
+    + `────────────\nTWO NUMBERS, TWO QUESTIONS — this is the first one.\n`
+    + `· ${bd.total}% (here) — whether ${theirs ? "their" : "your"} own roll succeeds at all.\n`
+    + `· the % on a move card — whether that move BEATS the other side's move this round. It weighs both stacks against each other, so it is almost never the same number.`
+    + `${critBlock}`);
 }
 
 // SNG-104: what a Health/Energy number's tap/hover shows — how rest restores it, read from CONTENT.rules.recovery.
@@ -3065,6 +3092,69 @@ let _previewLegsData = null; // cached fetch of the Aevi-owned data file
 /** DEV: ensure a fully-equipped test character is active so any leg has its prerequisites — a
  *  mid-level hero with a home ability, a CROSS-CLASS forkable ability (prism_sight), open skill
  *  points, and maxed sub-attributes so ability gates pass. Reused if it already exists. Idempotent. */
+/** ⛔ CCODE-493 (ERIK, 2026-09-25) — "at level 20 I should have a whole suite of skills... I have no ability
+ *  to use to attack, so this trial is stuck."
+ *
+ *  ⚠️ HE WAS STUCK BECAUSE OF MY SCENARIO, AND THE WAY HE GOT STUCK IS WORTH WRITING DOWN. `ensureTestCharacter`
+ *  builds a hero with exactly TWO crafts — one harmonic T1 and Prism Sight — and my party scenario lifted his
+ *  LEVEL to 20 to earn command slots without touching his kit. That is already unrealistic. What made it
+ *  unplayable is R47: `battleSkillsForCharacter` RETIRES the universal "A plain strike" / "Raise a guard"
+ *  fallbacks for anyone whose own crafts carry a free floor ("he should just rely on the zero-cost fallbacks
+ *  of his T1 skills as we designed" — Erik). His two crafts do carry one, and neither of them harms. So the
+ *  floor was withdrawn and nothing replaced it: a level-20 character who could read and could not hit.
+ *  ⛑ The ruling is right. The dev hero was simply never a character it was written for.
+ *
+ *  ⛑ GRANTED THROUGH `learnAbility`, NOT BY PUSHING RECORDS INTO `character.abilities`. The gates — attribute,
+ *  capacity, tradition, level — are the thing a dev scenario most needs to be honest about; a kit assembled
+ *  around them would test a character the game cannot make. `free: true` only means no point is spent.
+ *  Returns what landed and what refused, so the scenario can SAY so instead of quietly having fewer crafts. */
+function grantDevKit(c, { families = ["strike", "shield", "restore", "hinder", "deceive", "empower", "break"], perFamily = 1 } = {}) {
+  const cat = fullCatalog();
+  const owned = () => new Set((c.abilities || []).map(a => a.abilityId));
+  const have = (fn) => (c.abilities || []).some(a => (cat[a.abilityId]?.functions || []).includes(fn));
+  const got = [], refused = [], taught = new Set();
+  for (const fn of families) {
+    let n = 0;
+    if (have(fn)) continue;
+    // prefer their own power system, then anything they can actually reach; cheapest tier first so a level-20
+    // sheet ends up with a SPREAD rather than seven capstones.
+    const cands = Object.values(cat)
+      .filter(d => d && (d.functions || []).includes(fn) && !owned().has(d.id) && (d.levelReq || 1) <= (c.level || 1))
+      .sort((a, b) => (a.powerSystem === c.origin ? 0 : 1) - (b.powerSystem === c.origin ? 0 : 1)
+                   || (a.levelReq || 1) - (b.levelReq || 1));
+    for (const d of cands) {
+      if (n >= perFamily) break;
+      const learn = () => learnAbility(c, d.id, cat, CONTENT.rules, { free: true, attributeGates: CONTENT.attributeGates, skillCapacity: CONTENT.skillCapacity, traditionIndex: CONTENT.traditionIndex });
+      let r = learn();
+      // ⛔ MEASURED IN THE BROWSER, 2026-09-25: the first version of this asked for a strike and got
+      // "wrong tradition" from EVERY candidate — so a level-20 dev hero still had no harming verb and Erik
+      // would still have been stuck. ⚠️ The gate is correct: `progression.js` refuses a craft outside your
+      // domains unless somebody of that people is willing to teach you.
+      //
+      // ⛑ SO THE SCENARIO RECORDS THE TEACHER, WHICH IS THE GAME'S OWN ANSWER TO EXACTLY THIS (Erik,
+      // 2026-09-13: "If Orrin is a teacher who is willing, that qualifies a player to learn the craft").
+      // `character.teachers[tid].willing` is the same durable record the GM's markTeacher op writes, and it
+      // only OPENS the door — the level bar, the attribute gates and the domain caps all still run below it,
+      // so a craft that lands here is a craft the rules allow. It is reported, so nobody mistakes this sheet
+      // for one that earned its teachers in play.
+      if (!r.ok && (r.gate === "domain" || /tradition|domains/.test(String(r.why || "")))) {
+        const tid = traditionOf(d, CONTENT.traditionIndex);
+        if (tid && !c.teachers?.[tid]?.willing) {
+          c.teachers = c.teachers || {};
+          c.teachers[tid] = { met: true, willing: true, npcId: null, _dev: "recorded by a preview-leg scenario, not earned in play" };
+          taught.add(tid);
+          r = learn();
+        }
+      }
+      if (r.ok) { got.push(`${d.name} (${fn})`); n++; }
+      else if (refused.length < 6) refused.push(`${d.name}: ${r.why}`);
+    }
+    if (!n) refused.push(`nothing authored answers "${fn}" at level ${c.level} that he can learn`);
+  }
+  saveCharacter(c);
+  return { got, refused, taught: [...taught], total: (c.abilities || []).length };
+}
+
 function ensureTestCharacter() {
   const rules = CONTENT.rules;
   let c = loadCharacter("char-devtest");
@@ -3326,6 +3416,9 @@ const LEG_RUNNERS = {
     const want = (MELEE_TIERS.find(x => x.resolve === "full" && x.max > 1)?.max || 3) + 3;
     character.companions = [...new Set([...(character.companions || []), ...roster.slice(0, want)])];
     saveCharacter(character);
+    // ⛔ CCODE-493 — A KIT TO MATCH THE LEVEL. See `grantDevKit`: lifting the level without the crafts left
+    // Erik at level 20 holding one read and no way to hit anything.
+    const kit = grantDevKit(character);
     const lead = commandSlots(character, { cfg: meleeCfg(), renownBand: character.renownBand || null });
     // ⛑ A SKILL-BATTLE DUEL, WHICH IS THE OPPOSITE OF WHAT `fireTestEncounter` PICKS. That leg deliberately avoids
     // one because it verifies the classic strip; the party line and the per-round narration live in the contest panel.
@@ -3347,6 +3440,9 @@ const LEG_RUNNERS = {
     const allies = character.companions.map(id => ({ id, present: true }));
     const split = lineSplit(allies, { lead, presentCount: allies.length });
     alert(`🔧 PARTY FIGHT — ${character.companions.length} allies, and you lead ${lead.slots}.\n\n`
+      + `KIT: ${kit.got.length ? `learned ${kit.got.join(", ")} — ${kit.total} crafts in hand.` : `already carrying ${kit.total} crafts.`}`
+      + `${kit.taught.length ? `\n⛑ A willing teacher was recorded among ${kit.taught.join(", ")} so those crafts would open — the same record the GM writes when someone agrees to teach you. Every other gate still ran.` : ""}`
+      + `${kit.refused.length ? `\n⚠\ufe0f refused: ${kit.refused.join(" · ")}` : ""}\n\n`
       + `${split.everyoneActs ? "Everyone acts" : `${lead.slots} act per round; the other ${Math.max(0, character.companions.length - lead.slots + 1)} are FOLDED`}.\n`
       + `WHY: ${lead.why}\n\n`
       + `WHAT TO WATCH: the ones brought forward each take a real turn in the round's narration. A folded ally does the thing their family is FOR, once per fight, and it is NAMED in the receipt — a KNOW ally hands you a read you did not have, and it rides the existing setup bonus rather than adding a new term.\n\n`
@@ -3399,6 +3495,7 @@ const LEG_RUNNERS = {
     ensureTestCharacter();
     character.level = Math.max(num0(character.level), 20);
     saveCharacter(character);
+    const kitL = grantDevKit(character);   // CCODE-493 — see the party runner
     // ⛔ A LEGION FIGHT IS UNREACHABLE FROM AUTHORED CONTENT TODAY, AND THAT IS THE FINDING. Measured: ZERO of the 23
     // authored encounters carry `theatres`, and the derived path in `encounters.js` passes `foeCount: 1` — so the tier
     // is decided by the PARTY's size alone and can never reach `legion`. The machinery is all there: `theatresOf`,
@@ -3407,7 +3504,11 @@ const LEG_RUNNERS = {
     // place is hydrated into `CONTENT` for a session. Reported to Aevi: a legion theatre wants authoring.
     const base = Object.values(CONTENT.encounters || {}).find(d => d.type === "duel") || Object.values(CONTENT.encounters || {})[0];
     if (!base) { renderPlay(character.activeScene?.lastTurn || null, { aside: "🔧 No encounter to build a legion theatre on." }); return; }
-    const def = { ...base, id: "dev-legion-field", name: "A field with an army on it (dev)",
+    // ⚠\ufe0f ERIK: "the description title says a field with an army on it — then it names one person." Both were
+    // true and the pair was nonsense: the NAME described the whole field and the header beside it names the one
+    // figure you are actually fighting. The name now says what the two theatres are.
+    const oppN = base.opponent?.name || "the one in front of you";
+    const def = { ...base, id: "dev-legion-field", name: `${oppN}, and the line behind them (dev)`,
       theatres: [
         { scale: "individual", who: base.opponent?.name || "the one in front of you", opensOn: 1, why: "the part you play" },
         { scale: "legion", who: "the line behind them", opensOn: 1, why: "the part that can kill you regardless of how the duel goes" },
@@ -3418,6 +3519,7 @@ const LEG_RUNNERS = {
     saveCharacter(character);
     if (oppSheet) renderSkillBattle(); else renderPlay(character.activeScene?.lastTurn || null, { aside: "🔧 Legion field started." });
     alert(`🔧 LEGION FIGHT — two theatres open at once.\n\n`
+      + `KIT: ${kitL.got.length ? `learned ${kitL.got.join(", ")} — ${kitL.total} crafts in hand.` : `already carrying ${kitL.total} crafts.`}${kitL.taught.length ? `\n⛑ A willing teacher was recorded among ${kitL.taught.join(", ")}.` : ""}${kitL.refused.length ? `\n⚠\ufe0f refused: ${kitL.refused.join(" · ")}` : ""}\n\n`
       + `WHAT TO WATCH: the duel is the part you PLAY; the legion is the part that can kill you regardless of how the duel goes. The panel should say you are OVERMATCHED by the heavier theatre, and name what you are holding that could answer it.\n\n`
       + `⚠️ AND THE HONEST PART: no authored encounter has theatres — zero of 23 — and the derived path counts only your own party, so this tier cannot be reached in play today. This scenario authors the theatre in memory for the session; nothing is written to content. \`scaleAnswer\` is also unauthored on every craft, so "what could answer it" will find nothing until content says otherwise.`);
   },
@@ -18761,6 +18863,25 @@ function fogLadderLine(fog) {
              : `A read buys +${buys} tier — not enough here. Their math needs tier 3, so it takes a sharper sense (a reveal/foresee craft, or a higher Insight) as well as reading them.`);
 }
 
+/** ⛔ CCODE-493 — HOW MANY TIMES THIS SIDE MUST BE DRIVEN BACK, asked of the engine.
+ *
+ *  ⚠️ THREE UI SITES USED TO RETYPE `momentum.pressure.breakAtPressure` — a flat 2 whose own content comment
+ *  calls it "the flat fallback for a sheet with no level". R34b (Erik, 2026-09-04) replaced it with
+ *  ceil(level × 0.5), capped at `breakAtMax` and eased by `breakEasesEvery`, and the readers never moved.
+ *  Against a level-20 foe the engine wants 10 and the pips said 2, so Erik (2026-09-25) drove Kestrin back
+ *  twice, read "◆◆ 2/2", and the fight carried on. `breakThresholdFor` is now the only place that knows.
+ *
+ *  ⛑ READ LIVE, NOT FROM STATE. `state.breakAt` is written by `battleRound`, so it does not exist before the
+ *  first round resolves and is one round stale after — and the threshold EASES with the round count, so a
+ *  stale copy is a wrong copy. This asks the function with today's round. */
+function sbBreakAt(side, def = null, st = null) {
+  const e = def && st ? { def, state: st } : activeEnc();
+  if (!e) return null;
+  const sheet = e.state?.opponentSheet || null;
+  return breakThresholdFor({ sb: CONTENT.skillBattle?.engine, kind: encounterKind(e.def) || "fight", side,
+    level: side === "opponent" ? sheet?.level : character.level, round: e.state?.round });
+}
+
 /** SNG-246 receipt — a thin adapter now. The whole builder moved to engine/roundreceipt.js so it could be
  *  TESTED: it was untestable in here, which is exactly how it shipped a line that reported every round of
  *  every fight as "neither gains — it's even". tests/contest_sim.mjs Monte-Carlos it now. */
@@ -18783,12 +18904,19 @@ function sbFightBeat(rr, decl, beforeMom, scouting) {
   // Shares roundVerdict with the receipt instead of re-deriving the same comparison. This WAS a second copy
   // of that logic — which is how the two could drift into telling the player and the GM different stories
   // about one round, and the GM narrates from this beat.
-  const { verdict } = roundVerdict(beforeMom, rr.state?.momentum);
+  // ⛔ CCODE-493 — AND THE GM NARRATES FROM THIS. The beat shared `roundVerdict` with the receipt precisely
+  // so the two could not tell different stories — which means it inherited the same blindness: a pressure
+  // break RESETS the meter, so the round that drove them back read as "neither gained ground" here too, and
+  // that sentence is the raw material the telling is built from. The event rides now.
+  const { verdict } = roundVerdict(beforeMom, rr.state?.momentum, { pressureEvent: rr.pressureEvent || null });
   const who = verdict === "player" ? "you gained" : verdict === "opponent" ? "they gained" : "neither gained";
+  const drove = rr.pressureEvent
+    ? ` ${rr.pressureEvent.side === "opponent" ? "You drove them back" : "They drove you back"} — ${rr.pressureEvent.pressure} of ${rr.pressureEvent.breakAt}.`
+    : "";
   const hurt = (rr.deltas?.health || 0) < 0 ? `, you took ${Math.abs(rr.deltas.health)} damage` : "";
   const stuck = (rr.landed || []).map(f => `${f.from === "player" ? "you" : "they"} gained ${f.label}`).join("; ");
   const mine = scouting ? `you read them (${deg})` : `you used ${decl.name} — a ${decl.function} at ${decl.intensity} (${deg})`;
-  return `Round ${rr.state?.round ? rr.state.round - 1 : "?"}: ${mine}; they used ${rr.oppDecl?.name || rr.oppDecl?.function || "a strike"} (${(rr.opponent?.degree || "").replace("_", " ")}). ${who} ground${hurt}.${stuck ? ` ${stuck}.` : ""}`;
+  return `Round ${rr.state?.round ? rr.state.round - 1 : "?"}: ${mine}; they used ${rr.oppDecl?.name || rr.oppDecl?.function || "a strike"} (${(rr.opponent?.degree || "").replace("_", " ")}). ${who} ground${hurt}.${drove}${stuck ? ` ${stuck}.` : ""}`;
 }
 
 // SNG-246 (Erik: "some output specifically going to the machine tab… I could gather it"): mirror each skill-battle
@@ -18971,6 +19099,13 @@ function skillBattlePanel() {
   const fog = oppReceipt ? senseOpponent(character, oppReceipt, CONTENT.rules, sb, { scouting: readScout, buyTier: readScout ? (sb.revealActionBuysTier ?? 1) : 0, aptitudeMods: mods, earnedTier: st.senseTierEarned }) : null;
   const skills = playerBattleSkills();
   window._sbSkills = skills; // handler lookup (data-sbskill = index into this flat list)
+  // ⛔ CCODE-493 (ERIK) — "We should have the PC and the NPC names in here too — not just authored text but
+  // name variables that fill depending on who is doing what." The fight panel said "they" and "you" everywhere
+  // while the encounter header, two feet above it, had the foe's name the whole time. FIRST NAME ONLY in a
+  // line that repeats every round: "Kestrin is set to feint" reads; "Kestrin of the Riven Marches is set to
+  // feint", six rounds running, does not.
+  const oppFull = def.opponent?.name || sbLex().other;
+  const oppShort = String(oppFull).split(/\s+(?:of|the|de|van|ap)\s+/i)[0].split(/\s+/)[0] || oppFull;
   // CCODE-45: which STEP of the turn we are selecting for, and what is picked so far (2 = a braid).
   const turn = sbTurn();
   // CCODE-41/48: a craft can BLIND you to your own senses (deniesPhase). If the sense step is denied this turn,
@@ -19226,15 +19361,16 @@ function skillBattlePanel() {
     ${sbScale}
     ${sbParty}
     <div class="sb-opponent">${esc(def.opponent?.name || sbLex().other)}${fog?.label ? ` — <span class="hint">${esc(fog.label)}</span>` : ""}${oppTired ? ` <span class="cost">(${oppTired})</span>` : ""}${(() => {
-      const brk = CONTENT.skillBattle?.engine?.momentum?.pressure?.breakAtPressure ?? 2;
+      // ⛔ CCODE-493 — the second of the three sites that retyped the flat dial; see `sbBreakAt`.
+      const brk = sbBreakAt("opponent") ?? (CONTENT.skillBattle?.engine?.momentum?.pressure?.breakAtPressure ?? 2);
+      const brkMine = sbBreakAt("player") ?? brk;
       const mine = st.pressure?.player || 0, theirs = st.pressure?.opponent || 0;
       if (!mine && !theirs) return "";
-      const pip = (n, max) => "◆".repeat(Math.min(n, max)) + "◇".repeat(Math.max(0, max - n));
-      return ` <span class="sb-pressure" title="A fight ends when one side is OVERWHELMED ${brk} times — not when the momentum meter fills (momentum is a roll modifier). This is the real exit.">`
-        + (theirs ? `driven back ${pip(theirs, brk)} ${theirs}/${brk}` : "")
+      return ` <span class="sb-pressure" title="THIS is how the fight ends. Drive them back ${brk} times and they break — the momentum bar does not end anything, it only moves your rolls. The number falls as the fight runs long: a drawn-out fight wears a side down, so a threshold you could not reach in round two can be reachable by round eight.">`
+        + (theirs ? `driven back ${theirs} of ${brk}` : "")
         + (theirs && mine ? " · " : "")
-        + (mine ? `you ${pip(mine, brk)} ${mine}/${brk}` : "") + `</span>`;
-    })()} <span class="hint">· you ${character.health}/${character.maxHealth} hp · ${character.energy}e</span></div>
+        + (mine ? `you ${mine} of ${brkMine}` : "") + `</span>`;
+    })()}</div>
     ${(() => { // CCODE-35: what's STANDING right now — a raised guard, an insight, a bind laid on them. Each
       // chip carries the exact signed value + rounds left, because that number is really in the next roll.
       const fx = st.effects || []; if (!fx.length) return "";
@@ -19251,8 +19387,11 @@ function skillBattlePanel() {
       // CCODE-36 (Erik): the ROLLS behind this round, in the same breakdown popover normal play uses. Your own math
       // is always yours to see; THEIR math stays behind the same fog gate the fog-line uses — reading them buys it.
       const r = sbLastRoundRolls; if (!r) return "";
+      // ⛔ CCODE-493 — `who` RIDES INTO THE BLOB. The popover is one renderer for both rolls and had no way to
+      // tell them apart, so THEIR stack was narrated in the second person. It is told here, where it is known.
+      const oppName = def.opponent?.name || sbLex().other;
       const mk = (side, bd, roll, chance, deg) => bd
-        ? `<button class="data-link" data-breakdown='${attrJson(bd)}' title="The full math for ${side === "you" ? "your" : "their"} roll this round">⚄ ${side === "you" ? "your" : "their"} roll ${roll}/${chance}${deg ? ` · ${String(deg).replace("_", " ")}` : ""}</button>`
+        ? `<button class="data-link" data-breakdown='${attrJson({ ...bd, roll, chance, degree: deg, who: side === "you" ? { side: "player", name: character.name } : { side: "opponent", name: oppName } })}' title="The full math for ${side === "you" ? "your" : `${oppName}'s`} roll this round">⚄ ${side === "you" ? "your" : "their"} roll ${roll}/${chance}${deg ? ` · ${String(deg).replace("_", " ")}` : ""}</button>`
         : "";
       // CCODE-40: when the ceiling bit, say so plainly — the number that DECIDED the exchange is the raw stack,
       // not the 95 you rolled against. Otherwise "95 vs 95" reads as a tie when one side was really far ahead.
@@ -19293,8 +19432,62 @@ function skillBattlePanel() {
       return `<div class="sb-oppcrafts"><span class="sb-fx-lbl">${esc(sbLex().craftsLabel)}</span>${chips}<span class="hint">${esc(note)}</span></div>`;
     })()}
     <div class="sb-fog">${fog ? `
-      <div class="sb-fog-line">${esc(fog.revealed.outcome || "They move.")}${fog.revealed.intent ? ` — gathering to <strong>${esc(fog.revealed.intent)}</strong>` : ""}${fog.revealed.band ? ` <span class="hint">(${esc(fog.revealed.band)})</span>` : ""}</div>
-      ${fog.revealed.skill ? `<div class="sb-fog-line">${esc(fog.revealed.skill)}${fog.revealed.intensity ? ` · ${esc(fog.revealed.intensity)}` : ""}${fog.revealed.breakdown ? ` <button class="data-link" data-breakdown='${attrJson(fog.revealed.breakdown)}'>see their math</button>` : ""}</div>` : ""}
+      ${/* ⛔ CCODE-493 (ERIK, 2026-09-25) — "it says 'gathering to reveal (a crushing move)'... that makes
+            absolutely no sense." It did not, and the reason is a TENSE SPLICE. Everything in `fog.revealed`
+            comes from `st.lastOppReceipt` — `senseOpponent`'s own docstring says so, "the `opponent` receipt
+            from battleRound" — so `outcome`, `band` and `intent` are all facts about the round that ALREADY
+            HAPPENED. This markup wrapped them in "gathering to", which is the future. A past verb, a past
+            margin band and a future frame, in one sentence.
+            ⛑ SO IT IS TWO BLOCKS NOW, each labelled with the tense it actually holds. */""}
+      <div class="sb-fog-line"><span class="sb-fog-when">last round</span> ${esc(oppShort)} ${fog.revealed.intent ? `<strong>${esc(SB_VERB[fog.revealed.intent] || fog.revealed.intent)}</strong>` : "moved"}${fog.revealed.skill && fog.revealed.skill !== fog.revealed.intent ? ` with ${esc(fog.revealed.skill)}` : ""}${fog.revealed.intensity ? ` <span class="hint">(${esc(fog.revealed.intensity)})</span>` : ""}${fog.revealed.band ? ` — ${esc(fog.revealed.band)}` : ""}${fog.revealed.outcome ? `, and ${esc(fog.revealed.outcome)}` : ""}${fog.revealed.breakdown ? ` <button class="data-link" data-breakdown='${attrJson({ ...fog.revealed.breakdown, who: { side: "opponent", name: oppShort } })}'>see that roll's math</button>` : ""}</div>
+      ${(() => {
+        // ⛔ ERIK: "I like their 'see their math' button idea, but it is generic right now... It should show
+        // you what their NEXT move is and what things are effecting it — perhaps even suggesting a counter
+        // skill to use to make it harder for them."
+        //
+        // ⛑ THE ENGINE ALREADY DECIDED. `opponentPolicy` is documented DETERMINISTIC — "no rng — duels stay
+        // reproducible and PvP stays symmetric" — and it reads only momentum, the round, their last verb and
+        // their energy. So the move they are set to make is KNOWABLE without fabricating anything, which is
+        // the bar a fog line has to clear: gate DISPLAY, never invent.
+        //
+        // ⚠️ AND IT IS ONLY SHOWN WHEN IT IS TRUE. During the SENSE step the state is about to change under
+        // it (the sense round spends energy and can set their last verb), so a preview taken there is a guess,
+        // and a guess rendered as a fact is the defect one block up wearing different clothes. From the ACTION
+        // step on, the state this reads IS the state `skillBattleRound` will hand the same function.
+        if (turn.phase === "sense") return "";
+        const tier = fog?.tier ?? 0;
+        if (tier < 1) return "";
+        let nx = null;
+        try { nx = opponentPolicy(st.opponentSheet, st, sbLastPlayerFn, sb); } catch { nx = null; }
+        if (!nx?.function) return "";
+        const verb = SB_VERB[nx.function] || nx.function;
+        const named = tier >= 2 && nx.name && nx.name !== nx.function ? ` with <strong>${esc(nx.name)}</strong>` : "";
+        const inten = tier >= 2 && nx.intensity ? ` <span class="hint">(${esc(nx.intensity)})</span>` : "";
+        // WHAT MOVES IT — the terms `opponentPolicy` actually weighed, in its own words, not a paraphrase.
+        const why = [];
+        const oppMom = -(st.momentum || 0);
+        const pol = sb?.opponentPolicy || {};
+        if (oppMom <= (pol.behindSurgeAt ?? -3)) why.push("they are behind, so they press");
+        else if (oppMom >= (pol.aheadConserveAt ?? 3)) why.push("they are ahead, so they conserve");
+        // ⚠️ `SB_VERB` gives a bare VERB and these two lines need a noun phrase — "they will not repeat read"
+        // was the first draft, live. The verb still comes from the one shared map; the grammar is this line's.
+        if (st.lastOppFn && nx.function !== st.lastOppFn) why.push(`they will not repeat last round's ${esc(SB_VERB[st.lastOppFn] || st.lastOppFn)}`);
+        if (sbLastPlayerFn) why.push(`they have seen you ${esc(SB_VERB[sbLastPlayerFn] || sbLastPlayerFn)}`);
+        if ((st.opponentEnergy ?? 99) < 12) why.push("they are low on energy, so no surge");
+        // WHAT ANSWERS IT — from the player's OWN kit, scored on the same matchup table the roll will pay.
+        // `matchupBonus(theirFn, mine)` is the bonus THEY get against that answer, so the best answer is the
+        // one that gives them the least. Only offered when it actually helps.
+        const answers = (skills || []).map(s => ({ s, cost: matchupBonus(nx.function, s.function, sb) }))
+          .filter(x => Number.isFinite(x.cost)).sort((a, b) => a.cost - b.cost);
+        const best = answers[0];
+        const worst = answers[answers.length - 1];
+        const counter = best && worst && best.cost < worst.cost
+          ? `<div class="sb-fog-counter">⛑ <strong>${esc(best.s.name)}</strong> answers it best — ${best.cost <= 0 ? `it costs them ${Math.abs(Math.round(best.cost))}` : `it gives them only +${Math.round(best.cost)}`}, against +${Math.round(worst.cost)} for ${esc(worst.s.name)}.</div>`
+          : "";
+        return `<div class="sb-fog-next"><span class="sb-fog-when">next</span> ${esc(oppShort)} is set to <strong>${esc(verb)}</strong>${named}${inten}
+          ${why.length ? `<div class="hint sb-fog-why">why: ${why.join(" · ")}</div>` : ""}
+          ${tier >= 2 ? counter : `<div class="hint sb-fog-why">read them again to see which of your crafts answers it</div>`}</div>`;
+      })()}
       ${/* ⛔ CCODE-276 — WHO IT IS GOING FOR. Erik's whole reason for the sense round: "you need to sense
             who's getting attacked so you can intervene if you want.... if you obscure yourself you aren't
             going to know that information." The engine has revealed this since CCODE-250 and the UI showed
@@ -19387,6 +19580,18 @@ function wireSkillBattlePanel() {
   const ti = document.getElementById("sb-step-text");
   // clamp at a word boundary — it is the player's own prose, so never cut them mid-word
   if (ti) ti.oninput = () => { turn.text[turn.phase] = smartClamp(ti.value, 300); };
+  // ⛔ CCODE-493 (ERIK, 2026-09-25): "There's no way to hit enter on a custom action." There was not — this
+  // box had `oninput` and nothing else, so the only way out of it was to find the button with the mouse. The
+  // play-surface freeform input has had an Enter handler the whole time, which is why the gap was invisible
+  // from the code: the FIGHT grew its own text box and did not inherit the one behaviour every text box has.
+  // ⛑ Enter presses the step's own advance button rather than re-implementing it, so the clamp, the phase
+  // change and the save all stay in the one place that owns them.
+  if (ti) ti.onkeydown = (e) => {
+    if (e.key !== "Enter" || e.shiftKey) return;
+    e.preventDefault();
+    const go = document.getElementById("sb-proceed") || document.getElementById("sb-execute");
+    if (go && !go.disabled) go.click();
+  };
   // ✅ ERIK 2026-09-11 (§168): every foldable group persists through the one store — the fight menu included.
   for (const d of app.querySelectorAll("details[data-fold]")) d.ontoggle = () => {
     const k = d.dataset.fold;
@@ -20412,13 +20617,17 @@ function renderPlay(turn, opts = {}) {
         if (st.mode === "skill_battle") {
           const cfg = { ...(CONTENT.skillBattle?.engine?.momentum?.pressure || {}),
             ...((CONTENT.skillBattle?.engine?.kinds?.[encounterKind(d) || "fight"] || {}).pressure || {}) };
-          const need = cfg.breakAtPressure ?? 2;
-          const pipRow = (n, of) => "◆".repeat(Math.max(0, Math.min(n, of))) + "◇".repeat(Math.max(0, of - n));
+          // ⛔ CCODE-493 — ASKED OF THE ENGINE. This line read the flat fallback dial; see `sbBreakAt`.
+          const need = sbBreakAt("opponent", d, st) ?? (cfg.breakAtPressure ?? 2);
           const theirs = st.pressure?.opponent || 0, mine = st.pressure?.player || 0;
           const yourBreak = cfg.playerBreaksAtPressure;
-          status = `${esc(d.opponent.name)} driven back: ${pipRow(theirs, need)} ${theirs}/${need}`
-            + (Number.isFinite(yourBreak) ? ` · you: ${pipRow(mine, yourBreak)} ${mine}/${yourBreak}` : ` · you: ${character.health}/${character.maxHealth} hp`)
-            + ` · ${character.energy}e`;
+          // ⚠️ ERIK 2026-09-25: "shows 2 pips AND 0/2 for driven back... is this a fight or a pushing contest?"
+          // Two encodings of one number, and the pips were the worse of them twice over — they duplicated the
+          // fraction, and with the REAL threshold (up to 10) a pip row is a wall of diamonds nobody counts.
+          // One number, named in words. ⛑ AND HIS OWN HP/ENERGY ARE GONE: "I don't need to see my own HP and
+          // Energy in the fight window because I have that on the sidebar."
+          status = `${esc(d.opponent.name)} — driven back <strong>${theirs} of ${need}</strong>`
+            + (Number.isFinite(yourBreak) ? ` · you ${mine} of ${yourBreak}` : "");
         } else {
           status = `${esc(d.opponent.name)}: ${"▮".repeat(Math.max(0, st.opponentHealth))}${"▯".repeat(Math.max(0, d.opponent.health - st.opponentHealth))} · you: ${character.health}/${character.maxHealth}${st.tactic ? ` · tactic: ${esc(st.tactic)}` : ""}`;
         }
@@ -20442,13 +20651,53 @@ function renderPlay(turn, opts = {}) {
       // kind running on the contest engine (which has a pct but no stages) rendered no meter at all: a chase with
       // no Distance bar, a standoff with no Resolve bar. Caught by clicking the new dev buttons. The done/total
       // text still only appears when there are stages to count.
+      // ⛔ CCODE-493 (ERIK, 2026-09-25): "It should be crystal clear that momentum gained benefits you, and how.
+      // The bar could show milestones on it where you get the bonuses or penalties to your roll... Then, if
+      // your momentum bar is full is when it would make sense to drive them back — not sure how this currently
+      // works."
+      //
+      // ⚠️ IT HAS NO MILESTONES, AND SAYING SO IS THE FIX. `asModifier` is LINEAR — `perPoint` on the meter,
+      // capped — so drawing rungs on the bar would be drawing a rule that does not exist. What it HAS is one
+      // real landmark, and it is the one he guessed at: a FULL meter is exactly when a side is driven back.
+      // So the bar shows the live number it is worth and names its own end. ⛑ And a dial nobody could reach
+      // fell out of this: `asModifier.max` is 8 while `meterMax × perPoint` is 10 × 0.5 = 5, so the cap has
+      // never once bound. Reported rather than silently retuned — the numbers are Erik's.
+      const momBit = (() => {
+        if (st.mode !== "skill_battle") return "";
+        const mcfg = CONTENT.skillBattle?.engine?.momentum || {};
+        const m = st.momentum || 0;
+        const mod = momentumModifier(m, "player", CONTENT.skillBattle?.engine);
+        const r = Math.round(mod * 10) / 10;
+        const near = Math.abs(m) >= (mcfg.meterMax ?? 10) * 0.7;
+        return ` · <span class="enc-meter-worth" title="Momentum is a ROLL MODIFIER, not the way the fight ends. Every point of it is worth ${mcfg.asModifier?.perPoint ?? 0.5} on your rolls. Fill the bar and the side that lost it is DRIVEN BACK — that is the only landmark on it, and being driven back is what eventually breaks someone.">`
+          + `${r > 0 ? `<strong>+${r} to your rolls</strong>` : r < 0 ? `<strong>${r} to your rolls</strong>` : "worth nothing yet"}`
+          + `${near ? ` · ${m > 0 ? "nearly full — fill it and they are driven back" : "nearly empty — empty it and you are"}` : ""}</span>`;
+      })();
       const meterHtml = Number.isFinite(fm.meter?.pct) ? `<div class="enc-frame-meter" title="${esc(fm.meter.label)}"><div class="enc-frame-meter-fill" style="width:${fm.meter.pct}%"></div></div>
-        <div class="enc-frame-stage">${esc(fm.meter.label)} — ${fm.meter.total ? `${fm.meter.done}/${fm.meter.total}` : `${fm.meter.pct}%`}${fm.stage?.name ? ` · <em>${esc(fm.stage.name)}</em>` : ""}</div>` : "";
+        <div class="enc-frame-stage">${esc(fm.meter.label)} — ${fm.meter.total ? `${fm.meter.done}/${fm.meter.total}` : `${fm.meter.pct}%`}${momBit}${fm.stage?.name ? ` · <em>${esc(fm.stage.name)}</em>` : ""}</div>` : "";
       const exitsHtml = `<div class="enc-frame-exits">${fm.exits.map(x => `<span class="enc-exit enc-exit-${x.role}"><b>${x.role}</b> ${esc(x.means)}</span>`).join("")}</div>`;
       const collapseHtml = fm.warded
         ? `<div class="enc-frame-collapse dim">⚑ Warded — a finisher cannot end this unless the ward is shattered outright; work it through.</div>`
         : fm.collapsible
-        ? `<div class="enc-frame-collapse">⚡ A decisive finisher could end this in one beat — an all-or-nothing stroke (a clean crit collapses it; a botch turns it worse).</div>`
+        ? (() => {
+            // ⛔ CCODE-493 (ERIK, 2026-09-25): "The decisive finisher note seems to not really be useful. if it
+            // doesn't actually point to something the pc can do, remove it." ⚠️ IT DID POINT AT SOMETHING — at
+            // nothing the player could see from here. Finishing potential is a property of a SPECIFIC craft
+            // (`finisherPotential`), each of which already wears an "⚡ finisher · N% to end it" tag on its own
+            // card; this line announced the category and named none of them. So it names them, and when the
+            // player holds none it is silent, which is his rule applied rather than argued with.
+            let fin = [];
+            try {
+              const sbE = CONTENT.skillBattle?.engine;
+              fin = (playerBattleSkills() || [])
+                .map(s => ({ s, f: finisherPotential(s, fullCatalog()[s.id], sbE) }))
+                .filter(x => x.f?.can);
+            } catch { fin = []; }
+            if (!fin.length) return "";
+            const named = fin.slice(0, 2).map(x => esc(x.s.name)).join(" or ");
+            const more = fin.length > 2 ? ` (+${fin.length - 2} more)` : "";
+            return `<div class="enc-frame-collapse">⚡ <strong>${named}</strong>${more} could end this in one beat — declare it as your ACTION. All or nothing: a clean crit collapses it, a botch turns it worse.</div>`;
+          })()
         : `<div class="enc-frame-collapse dim">⚑ Too great to end in one stroke — you'll have to work it through.</div>`;
       // SNG-252 §2b: THE RIBBON IS ONE CONTAINER. The moves panel used to be appended as a SIBLING far down the
       // play surface beside the input row, so an engaged encounter read as three disconnected fragments — a
@@ -20523,7 +20772,7 @@ function renderPlay(turn, opts = {}) {
         ${subtitleHtml}
         ${(() => { if (!beatHtml) return ""; beatPlacedInRibbon = true; return `<div class="enc-frame-scene">${beatHtml}</div>`; })()}
         <div class="enc-frame-stand">
-          <span class="enc-frame-win">${esc(fm.winCondition)}</span>
+          <span class="enc-frame-win"><span class="enc-frame-winlbl">to win</span> ${esc(fm.winCondition)}</span>
           ${status ? `<span class="enc-status">${status}</span>` : ""}
         </div>
         ${meterHtml}${receiptHtml}${cueHtml}${exitsHtml}</div>`;
@@ -20831,7 +21080,11 @@ function renderPlay(turn, opts = {}) {
       <input id="freeform-input" placeholder="${activeEnc() && !askMode ? "Describe your move — the encounter's rules bind it…" : askMode ? "Ask the GM anything — context, rules, what you'd know…" : "Or do something else — describe it…"}" ${busy ? "disabled" : ""}>
       <button id="freeform-go" ${busy ? "disabled" : ""}>${askMode ? "Ask" : "Act"}</button>
       ${activeEnc() && activeEnc().state?.mode !== "skill_battle" ? `<button id="moves-open" class="mode-toggle ${movesOpen ? "apt" : ""}" title="Encounter moves — grouped by family (ward / sense / strike …) + the ways out. Rules enforced." ${busy ? "disabled" : ""}>⚙ Moves</button>` : ""}
-      ${profile?.narrationTier !== "rich" ? `<button id="rich-toggle" class="mode-toggle ${_richNextTurn ? "apt" : ""}" title="Tell THIS next beat richly — a fuller, more vivid telling. One beat; set your default in Settings." ${busy ? "disabled" : ""}>✦ Rich</button>` : ""}
+      ${/* ⛔ CCODE-493 (ERIK, 2026-09-25): "you can remove the 'Rich' button from this bar. the Retell with more
+            detail button is a better implementation of the feature." ⛑ THE FEATURE IS NOT REMOVED — only this
+            door to it. `✦ Tell it again, richer` does the same job AFTER the beat, where you can see whether the
+            telling was worth spending more on; this one asked you to bet BEFORE you had read anything. The
+            default still lives in Settings, and `_richNextTurn` stays wired for it. */""}
       <button id="gambit-open" class="mode-toggle ${apt ? "apt" : ""}" title="Plan a multi-step gambit" ${busy ? "disabled" : ""}>⚙ Plan</button></div>`;
   }
   if (isDev()) {

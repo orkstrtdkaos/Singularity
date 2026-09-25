@@ -85,6 +85,29 @@ console.log("CONTEST SIM — distributional truth about the round engine\n");
   check(`a LARGE swing never prints identical endpoints (${bigSwing.length} rounds swung >1.5)`,
     bigSwing.every(r => !/momentum (-?\d+)→\1(?!\d)/.test(r.line)),
     "printed X→X while the meter moved more than a rounding step — the receipt contradicts the engine");
+  // ⛔ CCODE-493 — THE ROUND THIS FILE COULD NOT SEE. Erik, in play 2026-09-25: "my roll was a crit success
+  // while theirs was a crit failure... I should have destroyed them." He had — he had driven them back — and
+  // the receipt said "neither gains — it's even".
+  //
+  // ⚠️ THE CAUSE IS THE ONE THIS FILE EXISTS FOR, WEARING THE OTHER MASK. 2026-08-01 pinned the swing to zero
+  // by feeding `after` in as `before`; a pressure break pins it to zero by RESETTING the meter to ±35% after
+  // the round is decided. ⛑ AND THE GUARD ABOVE CANNOT CATCH IT, BY CONSTRUCTION: it only calls a round
+  // decisive when `|after - before| > 0.5`, and a break is exactly the round where that is false. A gate that
+  // asks its question in the terms of the bug is a gate the bug walks through.
+  //
+  // So this asks it in the OTHER terms: the engine banked a tick against a named side, therefore somebody won.
+  const broke = all.filter(r => r.pressureEvent);
+  check(`a round that DROVE A SIDE BACK is never reported as even (${broke.length} break rounds)`,
+    broke.length > 0 && broke.every(r => r.verdict !== "even"),
+    broke.length ? `e.g. ${broke.find(r => r.verdict === "even")?.line || ""}` : "no break rounds sampled — the check proved nothing");
+  check(`…and the side it names is the side that did NOT get driven back`,
+    broke.every(r => r.verdict === (r.pressureEvent.side === "opponent" ? "player" : "opponent")),
+    "the receipt credited the exchange to the side that was overwhelmed");
+  // ⬜ AND THE LINE SAYS SO IN WORDS. A verdict the player cannot see is the same failure one level down.
+  check(`…and the line NAMES the tick and counts it toward the break`,
+    broke.every(r => /\u26a1/.test(r.line) && /\d+ of \d+|that is \d+ of \d+/.test(r.line)),
+    broke.find(r => !/\u26a1/.test(r.line))?.line || "");
+
   // Both directions must occur, or the verdict is stuck on one answer.
   const wins = all.filter(r => r.verdict === "player").length, losses = all.filter(r => r.verdict === "opponent").length;
   check(`both sides win rounds (player ${pct(wins, all.length)}% / opponent ${pct(losses, all.length)}%) — the verdict is not stuck`,

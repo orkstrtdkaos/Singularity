@@ -259,12 +259,15 @@ lasts, is lost when the feature is written. The same is true of Stillwater's Lab
 
 | field | meaning |
 |---|---|
-| `craftIds` | the craft(s) that made or warded it; **actually written** at the moment of casting |
-| `lasts` | one of the three below |
-| &nbsp;&nbsp;`permanent` | stays until destroyed |
-| &nbsp;&nbsp;`{renewEvery: n}` | passes between renewals, from the craft's own duration text |
-| &nbsp;&nbsp;`{whileCasterLives: id}` | a ward that ends with the person who holds it |
-| `dueAt` | the world-count at which an unrenewed ward lapses |
+| `craftIds` | the craft(s) that made or warded it; **actually written** at the moment of casting. The writer is the Build verb's craft picker (CCode's finding: 1 of the 6 `addFeature` callers can pass it today) |
+| `expiresDay` · `refreshCost` · `lapsed` | **the fields improvements already use** (`holdings.js:1194–1206`, SPEC_hold_costs). Stamped from the craft's **function** through the existing rule: `growth.lastingFunctions` (make / mend / restore) → **permanent**; `growth.seasonFunctions` (holds ground / defends) → **`improveSeasonDays`**, warned one pass before, then it goes quiet and the rung comes off. **No new duration authoring.** |
+| `whileCasterLives` | ⬜ only for the rare craft whose own text binds it to its caster; authored per craft as an exception |
+
+> ✅ **Settled 2026-09-25, overriding my first draft:** I had proposed `lasts` / `renewEvery` / `dueAt`, read from
+> each craft's prose. CCode found nothing structured on the crafts. **The rule already exists, keyed by function, on
+> the improvement path**, and `app.js:15012` already renders ↻ Refresh / ↻ Wake for it. Silas's barrier bypassed it
+> only because it came in through the **feature** path. So crafted features adopt the improvement's fields and rule.
+> The same craft can differ by what it does: a wall *makes* and is permanent; a ward-line *defends* and lasts a season.
 | `wards` | the domains it wards against, from the craft's domains: *death, shadow, warding, fire…* |
 | `integrity` | 0–100; wear from being tested, disrupted or struck |
 | `layer` | its position in the barrier stack, from outermost to innermost |
@@ -343,6 +346,18 @@ invented history.
     what it costs you. Erik asked for this for the trade company specifically ("cost vs benefits so you can compare
     against selling here"). Can every row be computed from existing readers (`storeWorth`, route prices,
     `roadDanger`) plus the company's cut?
+> ✅ **§10 answered by CCode 2026-09-25** (`po/CCODE_20260925_reply_workorder_holdings_people.md`), accepted in
+> `po/REPLY_aevi_workorder_holdings_people.md`:
+> - fit excludes HARM;
+> - capacity reuses `delegateScope`;
+> - the budget map goes beside the total;
+> - plain hands are contingents;
+> - explicit ordering at the pass boundary;
+> - §7's % always names what it is a probability of;
+> - §8a's layer resolution is held until real features carry crafts.
+>
+> The questions below are kept for the record.
+
 6c. **§8a crafted defences.**
     - Why is `craftIds` empty on Silas's crafted features? Where is a holding feature written from a craft?
     - Is the duration text on crafts structured anywhere (for example `lasts` / `renew`), or does it have to be

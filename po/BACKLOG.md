@@ -1933,3 +1933,25 @@ confirmed is `po/REPLY_ccode_20260911e` §6; the measurement is `po/REPLY_ccode_
 
 ⛑ **Related dial, also empty:** `the_substrate.crowdBySource` — per-source `crowdSlope`/`crowdFloor` (option E was "only
 metaphysical and veil crowd"). Aevi's ruling stands: keep today's crowding (option A). Gate `§161`.
+
+---
+
+## ⬜ 2026-09-25 — THE RETRIEVAL ROLL (Erik ruled the intent; backlogged)
+
+> ⛔ **Erik:** *"backlog the retrieval roll — but yes, there are skills meant to be used for resurrection, so they have a
+> pass/fail chance."*
+
+**Today:**
+- `death.js` `resolveRetrieval(entity, outcome)` takes `return` / `seal` / `fail` **from its caller**. Nothing rolls.
+- `canReach` answers only whether an attempt may be made at a depth (rank + bond rungs vs `deathDepth`).
+
+**What's owed:**
+- A pure `retrievalOdds(reacher, dead, depth, {craft, intensity, bond, clock})`. The resurrection crafts roll through
+  it, with pass/fail like any other craft use.
+- The resolver and the SNG-653 "Who comes for you" screen read **the same function**. The screen shows **Can / Can't**
+  until then and a % after, never a number the engine doesn't roll.
+- ⚠️ A failure still sinks them a rung (`how_it_works §6`), and a refusal (`canReach` refused) still costs nothing.
+  The roll sits between those two and must not blur them.
+
+**Who:** Aevi specs the odds inputs, CCode builds, Erik turns the numbers.
+**Links:** SNG-653 §7.2 · `REPLY_aevi_workorder_holdings_people.md`.

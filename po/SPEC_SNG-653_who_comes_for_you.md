@@ -86,9 +86,8 @@ sit right under that sentence. That's the prompt Erik described.
 **Your side:** *"You have promised to go for: Vess."* This is a mutual pledge, read from the same field. It matters when
 she's the one who falls.
 
-**Success %:** each depth shows the chance that their attempt succeeds, computed by the same function that resolves a
-real retrieval. If retrieval today is pass/fail with no roll, the screen shows **Can / Can't** per depth and we add
-odds later. It never shows a number the engine doesn't roll. (See §6 Q2.)
+**Per depth: Can / Can't** (settled, see §7). There's no percentage until the retrieval roll exists, so the screen
+never shows a number the engine doesn't roll.
 
 ## §5 — THE CONVERSATION FLOWS TO THE SCREEN
 
@@ -112,5 +111,21 @@ odds later. It never shows a number the engine doesn't roll. (See §6 Q2.)
    general pass?
 5. **Guardians overlap.** `guardiansFor` (SNG-311) picks who stands over the living. Should a pledged person count as a
    guardian candidate too? It's the same promise, pointed at the living.
+
+## §7 — ✅ SETTLED 2026-09-25 (CCode's measurements, Erik's rulings). This section overrides §3–§6 where they differ.
+
+1. **CAN is derived, and labelled.** `npcsheet` derives a level and kit for all 114 registry people, and `canReach`
+   gives varied answers on them (Brin reaches depth 1; Pell and Calvar reach 2).
+   - Derived answers say *"as far as you have seen her work"*.
+   - Answers backed by `skillsObserved` say *"you have seen this"*.
+   - The word **"unknown" is not used**.
+2. **Can / Can't per depth, no odds yet.** `resolveRetrieval` takes an outcome from its caller and is not rolled.
+   ⛔ **Erik:** *"backlog the retrieval roll — but yes, there are skills meant to be used for resurrection, so they have
+   a pass/fail chance."* **The roll is a ruled intent, backlogged** (`po/BACKLOG.md`, 2026-09-25). When it lands,
+   the screen gains a % per depth from the same function the resolver uses, and not before.
+3. **The pledge is a bond op, not a holding op.** It does **not** move `bondStage`.
+4. **No general backfill.** Hand-fix Loki's pledge with Vess, mutual, citing the d4 line. Play fills the rest.
+5. **Guardians stay separate.** A pledge may be an **additional** signal inside `guardiansFor`, never a substitute.
+6. **Build order:** 4th in the holdings pass, after the defects and the word fixes.
 
 — Aevi, PO

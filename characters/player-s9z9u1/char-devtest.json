@@ -76,7 +76,7 @@
   "maxHealth": 62,
   "health": 62,
   "maxEnergy": 152,
-  "energy": 148,
+  "energy": 136,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -170,134 +170,211 @@
         "player": null,
         "summary": "In the lamp-lit cellar, you sense Kestrin's strategy—they bait, they do not rush.",
         "narration": "Aevi flares bright—a sudden constellation of teal that cuts through the lamp-light—and in that instant of clarity you read Kestrin's opening. They are waiting for hesitation. Their weight settles forward on their rear foot, shoulders loose, inviting you to commit first so they can punish the moment you do. It is a provocation dressed as an opening, and you feel it in the air between you like a held breath."
+      },
+      {
+        "player": null,
+        "summary": "In the lamp-lit cellar of the Kindly Rest, Loki reads Kestrin's gambit, answers with Stillness Field, and the companions intervene—Aevi sharpening the read, Coil casting warning-light, Hush stealing shadow from the ground. The formal duel stands unresolved, both fighters poised.",
+        "narration": "You reach for Motes' Vigil and feel Aevi brighten — her teal constellation pulls tight, focuses, reads. Kestrin's rhythm is bare and honest: they bait because that is how they hunt. They invite the mistake, then punish it with the precision of someone who has seen ten thousand hesitations and knows exactly where they live. You see it clearly — the weight forward, the loose shoulders, the eyes waiting for you to move first.\n\nYou speak a single harmonic note — low, grounding, humming it into the air between you — and the cellar fills with the *absence* of sound. The Stillness Field wraps the stone room like held breath. Kestrin's weight settles differently as the quiet lands, and for one moment they stumble on their own rhythm. The silence breaks their read.\n\nBut the silence does not hold them. They move *through* it instead of with it — no music to ride, no beat to follow, just the old formal stance and the oldest discipline. The move is wrong-footed and costs them grace, but Kestrin does not need grace. They advance anyway.\n\nCoil's lens irises bright — the small brass thing skitters sideways across the stone floor, placing itself between you and Kestrin's approach, and for a breath the articulated segments glow with something that reads like warning-light, an old service-mark from a time when this cellar was something else. It buys you a handsbreadth of space and no more. Hush flows from the shadow at your back and becomes a darker thing — steps forward into the lamplit floor and *takes* the shadow from directly beneath Kestrin's feet. The Umbral companion's presence is a cold touch that steals the certainty of the ground for just one heartbeat. Kestrin's next step lands wrong, reflexive, reading-for-solid-ground-that-isn't-there.\n\nMarrow sits on the high shelf where the lamp burns and does not move. The grey-black bird turns its head to track the fight with perfect, patient attention. It does not intervene. Its silence is timed, and the timing says: *I am here when this ends.*\n\nYou are both standing now — Kestrin perhaps two paces from you, weight resettled, reading you still. The silence is broken but the field still holds. Neither of you has landed a blow. The cellar waits."
       }
     ],
     "lastTurn": {
-      "narration": "Aevi flares bright—a sudden constellation of teal that cuts through the lamp-light—and in that instant of clarity you read Kestrin's opening. They are waiting for hesitation. Their weight settles forward on their rear foot, shoulders loose, inviting you to commit first so they can punish the moment you do. It is a provocation dressed as an opening, and you feel it in the air between you like a held breath.",
-      "sceneSummary": "In the lamp-lit cellar, you sense Kestrin's strategy—they bait, they do not rush.",
+      "narration": "You reach for Motes' Vigil and feel Aevi brighten — her teal constellation pulls tight, focuses, reads. Kestrin's rhythm is bare and honest: they bait because that is how they hunt. They invite the mistake, then punish it with the precision of someone who has seen ten thousand hesitations and knows exactly where they live. You see it clearly — the weight forward, the loose shoulders, the eyes waiting for you to move first.\n\nYou speak a single harmonic note — low, grounding, humming it into the air between you — and the cellar fills with the *absence* of sound. The Stillness Field wraps the stone room like held breath. Kestrin's weight settles differently as the quiet lands, and for one moment they stumble on their own rhythm. The silence breaks their read.\n\nBut the silence does not hold them. They move *through* it instead of with it — no music to ride, no beat to follow, just the old formal stance and the oldest discipline. The move is wrong-footed and costs them grace, but Kestrin does not need grace. They advance anyway.\n\nCoil's lens irises bright — the small brass thing skitters sideways across the stone floor, placing itself between you and Kestrin's approach, and for a breath the articulated segments glow with something that reads like warning-light, an old service-mark from a time when this cellar was something else. It buys you a handsbreadth of space and no more. Hush flows from the shadow at your back and becomes a darker thing — steps forward into the lamplit floor and *takes* the shadow from directly beneath Kestrin's feet. The Umbral companion's presence is a cold touch that steals the certainty of the ground for just one heartbeat. Kestrin's next step lands wrong, reflexive, reading-for-solid-ground-that-isn't-there.\n\nMarrow sits on the high shelf where the lamp burns and does not move. The grey-black bird turns its head to track the fight with perfect, patient attention. It does not intervene. Its silence is timed, and the timing says: *I am here when this ends.*\n\nYou are both standing now — Kestrin perhaps two paces from you, weight resettled, reading you still. The silence is broken but the field still holds. Neither of you has landed a blow. The cellar waits.",
+      "sceneSummary": "In the lamp-lit cellar of the Kindly Rest, Loki reads Kestrin's gambit, answers with Stillness Field, and the companions intervene—Aevi sharpening the read, Coil casting warning-light, Hush stealing shadow from the ground. The formal duel stands unresolved, both fighters poised.",
       "choices": [
         {
-          "label": "Answer the provocation. Strike first, hard, and read their counter.",
+          "label": "Press the advantage—strike while they are still finding their footing",
           "attribute": "physical",
           "subAttribute": "agility",
           "axes": {
-            "violence_peace": 0.6,
+            "violence_peace": -0.6,
             "chaos_order": -0.3
           },
           "difficulty": "normal",
-          "opposedDifficulty": 35,
+          "opposedDifficulty": null,
           "intentTags": [
             "attack",
-            "risky"
+            "press"
           ],
           "abilityId": "hunters_strike",
           "energyCost": 3,
           "trivial": false,
-          "encounterId": null
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Do not move. Hold your ground and wait for them to commit instead.",
+          "label": "Defend and read their next move—let them commit first",
           "attribute": "mental",
-          "subAttribute": "wits",
+          "subAttribute": "insight",
           "axes": {
-            "violence_peace": -0.2,
-            "chaos_order": 0.4
+            "violence_peace": 0.4,
+            "chaos_order": 0.5
           },
           "difficulty": "normal",
-          "opposedDifficulty": 35,
-          "intentTags": [
-            "defend",
-            "careful"
-          ],
-          "abilityId": "false_stance",
-          "energyCost": 2,
-          "trivial": false,
-          "encounterId": null
-        },
-        {
-          "label": "Use Sonic Resonance to rattle their balance before they can press—knock them off the foot they're favoring.",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "axes": {
-            "violence_peace": 0.5,
-            "chaos_order": 0.2
-          },
-          "difficulty": "hard",
-          "opposedDifficulty": 35,
-          "intentTags": [
-            "attack",
-            "craft"
-          ],
-          "abilityId": "sonic_resonance",
-          "energyCost": 7,
-          "trivial": false,
-          "encounterId": null
-        },
-        {
-          "label": "Flee—break from the bout and move toward the cellar stairs.",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {
-            "violence_peace": -0.7
-          },
-          "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "travel"
+            "defend",
+            "careful",
+            "study"
+          ],
+          "abilityId": "echo_sense",
+          "energyCost": 3,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Speak—ask Kestrin plainly why they came to this cellar, why now, what they want",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "violence_peace": 0.8,
+            "falsehood_truth": 0.6
+          },
+          "difficulty": "hard",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "negotiate"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": false,
-          "encounterId": null
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Yield—lower your hands and step back from the bout",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "violence_peace": 1,
+            "body_mind": 0.3
+          },
+          "difficulty": "very easy",
+          "opposedDifficulty": null,
+          "intentTags": [],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
       "deeds": [],
-      "characterDeltas": {},
+      "characterDeltas": {
+        "health": 0,
+        "energy": -7,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
       "ledgerEvents": [],
       "questUpdates": [],
       "standingOps": [],
+      "delegateOps": [],
+      "jobOps": [],
+      "arcOps": [],
+      "adoptSchool": null,
+      "offer": null,
+      "stageOps": [],
       "scene": {
-        "setting": "The lamp-lit cellar of the Kindly Rest, deep night. Stone walls close in. Kestrin of the Riven Marches stands a few paces from you, weight settling forward, shoulders loose and ready. Aevi's motes hang bright in the dimness, having just flared their warning.",
+        "setting": "The lamp-lit cellar of the Kindly Rest, deep night now turning toward the false grey before dawn. Stone walls close in, damp and close. The lamp burns steady on its shelf, casting long shadows.",
         "npcsPresent": [
           {
             "name": "Kestrin of the Riven Marches",
-            "state": "Waiting. Weight forward. Eyes reading your next move. Favoring a formal stance, inviting provocation."
+            "state": "Two paces distant, weight settled, formal stance held, still reading you for the next commitment. Favoring their opened side now, having recovered from the miscalculation of the silent field."
           }
         ],
         "objects": [
           "the lamp burning on the stone shelf",
           "cold stone walls",
-          "damp stone floor"
+          "damp stone floor",
+          "Coil on the floor between you, lens still bright",
+          "Hush at the edge of shadow, watchful",
+          "Marrow on the high shelf, head turned to track"
         ],
         "threads": [
-          "Kestrin's strategy is now clear—but they are patient, and they read well. What will you do?"
+          "Kestrin's purpose here remains unstated — what do they want?",
+          "Sable waiting in the rooms above, the Standing Annex day's walk away",
+          "Vestin Kray's name hanging in the air, unanswered",
+          "The formal bout in its second round, unresolved"
         ]
-      }
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "kestrin-of-the-riven-marches",
+          "name": "Kestrin of the Riven Marches",
+          "role": "Edge — formal duelist, student of the old martial forms",
+          "state": "actively fighting",
+          "statusNote": "Engaged in a formal bout in the Kindly Rest cellars, having recovered footing after Stillness Field and companion intervention",
+          "learned": [
+            "Reads a fighter's hesitation like a map; uses provocation as bait",
+            "Fights with the old formal structures — no wasted motion, every strike placed",
+            "Does not use deception in a fight; commits to the read they take"
+          ]
+        }
+      ],
+      "intentsHeard": [],
+      "factUpdates": [],
+      "placeUpdates": [],
+      "discovery": null,
+      "codexUpdates": [],
+      "holdingOps": [],
+      "holdTrades": [],
+      "debtOps": [],
+      "exchangeOps": [],
+      "partyOps": [],
+      "generateRequest": [],
+      "encounterOps": [],
+      "projectOps": [],
+      "bandOps": [],
+      "strikeOps": [],
+      "deathOps": [],
+      "newEncounter": null,
+      "unlockPrecursor": null,
+      "unlockSubstrate": null,
+      "timeOps": null,
+      "moveTo": null,
+      "stateOps": [],
+      "itemUpdates": [],
+      "deriveItem": null,
+      "imagePrompt": null,
+      "imageMedium": null,
+      "newAbility": null,
+      "gambitOps": null,
+      "gambitApt": false,
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The lamp-lit cellar of the Kindly Rest, deep night. Stone walls close in. Kestrin of the Riven Marches stands a few paces from you, weight settling forward, shoulders loose and ready. Aevi's motes hang bright in the dimness, having just flared their warning.",
+      "setting": "The lamp-lit cellar of the Kindly Rest, deep night now turning toward the false grey before dawn. Stone walls close in, damp and close. The lamp burns steady on its shelf, casting long shadows.",
       "npcsPresent": [
         {
           "name": "Kestrin of the Riven Marches",
-          "state": "Waiting. Weight forward. Eyes reading your next move. Favoring a formal stance, inviting provocation."
+          "state": "Two paces distant, weight settled, formal stance held, still reading you for the next commitment. Favoring their opened "
         }
       ],
       "objects": [
         "the lamp burning on the stone shelf",
         "cold stone walls",
-        "damp stone floor"
+        "damp stone floor",
+        "Coil on the floor between you, lens still bright",
+        "Hush at the edge of shadow, watchful",
+        "Marrow on the high shelf, head turned to track"
       ],
       "threads": [
-        "Kestrin's strategy is now clear—but they are patient, and they read well. What will you do?"
+        "Kestrin's purpose here remains unstated — what do they want?",
+        "Sable waiting in the rooms above, the Standing Annex day's walk away",
+        "Vestin Kray's name hanging in the air, unanswered",
+        "The formal bout in its second round, unresolved"
       ]
     },
-    "beats": 4,
+    "beats": 5,
     "subPlace": null
   },
   "clock": {
     "schemaVersion": 1,
     "day": 2,
-    "hour": 5,
+    "hour": 6,
     "realAnchor": null
   },
   "companions": [
@@ -584,7 +661,7 @@
       }
     ],
     "unseenNews": [],
-    "turnsSinceOffer": 5,
+    "turnsSinceOffer": 6,
     "lastGenCount": 1841,
     "lastSharedReadAt": "2026-09-06T00:06:33.931Z",
     "lastTickWorldDay": 76,
@@ -4345,8 +4422,8 @@
   "actionCount": 16,
   "grantsVersion": 1,
   "reconcileVersion": 62,
-  "updatedAt": 1790363094536,
-  "rev": 215,
+  "updatedAt": 1790363221245,
+  "rev": 220,
   "activeEncounter": {
     "defId": "coliseum_champion_harm",
     "state": {
@@ -4354,9 +4431,10 @@
       "encounterId": "coliseum_champion_harm",
       "type": "duel",
       "status": "active",
-      "round": 1,
+      "round": 2,
       "log": [
-        "r1: ward vs reveal → momentum 0"
+        "r1: ward vs reveal → momentum 0",
+        "r1: bind vs deceive → momentum -4"
       ],
       "opponentHealth": 130,
       "opponentYieldAt": 26,
@@ -4416,14 +4494,12 @@
         "level": 20,
         "synthesized": true
       },
-      "momentum": 0,
-      "opponentEnergy": 83,
+      "momentum": -3.6,
+      "opponentEnergy": 78,
       "turn": {
-        "phase": "action",
+        "phase": "sense",
         "sel": {
-          "sense": [
-            13
-          ],
+          "sense": [],
           "action": [],
           "bonus": []
         },
@@ -4435,9 +4511,8 @@
         "setupBonus": 0,
         "bonusEarned": false,
         "foeBonusEarned": false,
-        "senseDone": true,
-        "senseLine": "You read with Motes' Vigil — success. Neither of you learns much. You read Kestrin of the Riven Marches: they favour provoke. Pick a craft that answers it.",
-        "readPayoff": "You read Kestrin of the Riven Marches: they favour provoke. Pick a craft that answers it."
+        "senseDone": false,
+        "senseLine": ""
       },
       "broughtForward": [
         "bristle",
@@ -4449,7 +4524,7 @@
           "kind": "ward",
           "label": "warded",
           "value": 4,
-          "roundsLeft": 2,
+          "roundsLeft": 1,
           "applies": "whenAttacked",
           "side": "player",
           "rank": 1,
@@ -4460,11 +4535,34 @@
           "kind": "insight",
           "label": "you have their measure",
           "value": 3,
-          "roundsLeft": 2,
+          "roundsLeft": 1,
           "applies": "always",
           "side": "opponent",
           "rank": 1,
           "source": "sizes you up",
+          "from": "opponent"
+        },
+        {
+          "kind": "bound",
+          "label": "bound",
+          "value": -2,
+          "roundsLeft": 1,
+          "applies": "always",
+          "side": "opponent",
+          "rank": 1,
+          "source": "Stillness Field",
+          "from": "player"
+        },
+        {
+          "kind": "misled",
+          "label": "misled — cannot read you",
+          "value": -3,
+          "roundsLeft": 1,
+          "applies": "always",
+          "side": "player",
+          "deniesPhase": "setup",
+          "rank": 2,
+          "source": "the wrong tell",
           "from": "opponent"
         }
       ],
@@ -4476,7 +4574,7 @@
         "player": false,
         "opponent": false
       },
-      "lastOppFn": "reveal",
+      "lastOppFn": "deceive",
       "breakAt": {
         "opponent": 10,
         "player": 10
@@ -4493,19 +4591,19 @@
       "overmatch": null,
       "outweighed": null,
       "lastOppReceipt": {
-        "roll": 29,
-        "chance": 35,
+        "roll": 24,
+        "chance": 39,
         "degree": "success",
         "action": {
-          "attribute": "mental",
-          "abilityLevel": 1,
-          "label": "sizes you up",
+          "attribute": "social",
+          "abilityLevel": 2,
+          "label": "the wrong tell",
           "axes": {}
         },
         "breakdown": {
           "components": [
             {
-              "label": "mental 3",
+              "label": "social 3",
               "value": 30
             },
             {
@@ -4514,32 +4612,40 @@
               "zero": true
             },
             {
-              "label": "ability rank 1",
-              "value": 5
+              "label": "ability rank 2",
+              "value": 10
             },
             {
               "label": "equipment",
               "value": 0,
               "zero": true
+            },
+            {
+              "label": "they read you first",
+              "value": -4
+            },
+            {
+              "label": "you have their measure (2 rounds)",
+              "value": 3
             }
           ],
-          "total": 35,
+          "total": 39,
           "clampedFrom": null,
-          "base": "mental",
+          "base": "social",
           "opposed": null
         },
-        "critRoll": 33,
+        "critRoll": 59,
         "crit": {
-          "successChance": 8,
-          "failChance": 11,
+          "successChance": 11,
+          "failChance": 10,
           "successComponents": [
             {
               "label": "base",
               "value": 5
             },
             {
-              "label": "ability rank 1",
-              "value": 3
+              "label": "ability rank 2",
+              "value": 6
             }
           ],
           "failComponents": [
@@ -4548,21 +4654,26 @@
               "value": 12
             },
             {
-              "label": "ability rank 1",
-              "value": -1
+              "label": "ability rank 2",
+              "value": -2
             }
           ],
           "successClampedFrom": null,
           "failClampedFrom": null
         },
-        "rawChance": 35,
-        "margin": 6,
+        "rawChance": 39,
+        "margin": 15,
         "matchup": 0,
         "intensity": "standard",
-        "tier": 1,
-        "function": "reveal",
-        "name": "sizes you up",
-        "effectMods": [],
+        "tier": 2,
+        "function": "deceive",
+        "name": "the wrong tell",
+        "effectMods": [
+          {
+            "label": "you have their measure (2 rounds)",
+            "value": 3
+          }
+        ],
         "woven": null,
         "targetChoice": {
           "policy": "threat",
@@ -4578,12 +4689,17 @@
           }
         }
       },
-      "lastReadWasSense": true,
-      "senseTierEarned": 0,
+      "lastReadWasSense": false,
+      "senseTierEarned": null,
       "senseResist": {
         "value": 12,
         "label": "they are hiding it (the wrong tell)",
         "from": "craft"
+      },
+      "foldSpent": {
+        "aevi": {
+          "read": 2
+        }
       }
     }
   },
@@ -4711,7 +4827,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "valley": 38
+    "valley": 39
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -4759,10 +4875,10 @@
     {
       "id": "sess-6",
       "startedAt": "2026-09-25T19:04:54.532Z",
-      "lastAt": "2026-09-25T19:04:54.532Z",
+      "lastAt": "2026-09-25T19:07:01.243Z",
       "startDay": 87,
       "endDay": 87,
-      "beats": 1
+      "beats": 2
     }
   ],
   "establishedFacts": [
@@ -4774,9 +4890,9 @@
     }
   ],
   "peopleDisposition": {
-    "lattice": 0.020833333333333332,
-    "rootkin": 0.020833333333333332,
-    "somatic": 0.020833333333333332
+    "lattice": 0.04165219907407407,
+    "rootkin": 0.04165219907407407,
+    "somatic": 0.04165219907407407
   },
   "_pendingArrival": null,
   "corrections": [
@@ -4791,24 +4907,24 @@
     }
   ],
   "_opEmitted": {
-    "sceneSummary": 29,
-    "choices": 29,
-    "scene": 29,
+    "sceneSummary": 30,
+    "choices": 30,
+    "scene": 30,
     "stateOps": 1,
-    "characterDeltas": 19,
+    "characterDeltas": 20,
     "timeOps": 14,
-    "sceneEnded": 15,
+    "sceneEnded": 16,
     "encounterOps": 4,
-    "npcUpdates": 17,
+    "npcUpdates": 18,
     "generateRequest": 1,
     "offer": 5,
     "placeUpdates": 1,
     "moveTo": 1,
     "imagePrompt": 12,
-    "gambitApt": 12,
+    "gambitApt": 13,
     "codexUpdates": 5
   },
-  "_opTurns": 29,
+  "_opTurns": 30,
   "practice": {
     "schemaVersion": 1,
     "uses": {
@@ -4816,7 +4932,7 @@
       "hunters_strike": 5,
       "prism_sight": 4,
       "echo_sense": 3,
-      "stillness_field": 4,
+      "stillness_field": 5,
       "tremor_sense": 3,
       "drumline_stride": 4
     },
@@ -4827,7 +4943,7 @@
     "lastUsed": {
       "sonic_resonance": 32,
       "hunters_strike": 35,
-      "stillness_field": 35,
+      "stillness_field": 87,
       "drumline_stride": 35,
       "prism_sight": 39
     }
@@ -5379,412 +5495,412 @@
   "featureOffers": [],
   "_promptRows": {
     "character": {
-      "reached": 2,
-      "produced": 2
+      "reached": 3,
+      "produced": 3
     },
     "location": {
-      "reached": 2,
-      "produced": 2
+      "reached": 3,
+      "produced": 3
     },
     "region": {
-      "reached": 2,
-      "produced": 2
+      "reached": 3,
+      "produced": 3
     },
     "groundDetail": {
-      "reached": 2,
-      "produced": 2
+      "reached": 3,
+      "produced": 3
     },
     "lore": {
-      "reached": 2,
-      "produced": 2
+      "reached": 3,
+      "produced": 3
     },
     "traditionMotiveDetail": {
-      "reached": 2,
-      "produced": 1
+      "reached": 3,
+      "produced": 2
     },
     "sheetsDetail": {
-      "reached": 2,
-      "produced": 1
+      "reached": 3,
+      "produced": 2
     },
     "rules": {
-      "reached": 2,
-      "produced": 2
+      "reached": 3,
+      "produced": 3
     },
     "recentTurns": {
-      "reached": 2,
-      "produced": 2
+      "reached": 3,
+      "produced": 3
     },
     "timeLabel": {
-      "reached": 2,
-      "produced": 2
+      "reached": 3,
+      "produced": 3
     },
     "npcRegistryDetail": {
-      "reached": 2,
-      "produced": 2
+      "reached": 3,
+      "produced": 3
     },
     "mintedUnmetDetail": {
-      "reached": 2,
-      "produced": 2
+      "reached": 3,
+      "produced": 3
     },
     "npcSeedDetail": {
-      "reached": 2,
+      "reached": 3,
       "produced": 0
     },
     "traditionVocab": {
-      "reached": 2,
-      "produced": 2
+      "reached": 3,
+      "produced": 3
     },
     "standingDetail": {
-      "reached": 2,
-      "produced": 2
+      "reached": 3,
+      "produced": 3
     },
     "recalledDetail": {
-      "reached": 2,
+      "reached": 3,
       "produced": 0
     },
     "bearingsDetail": {
-      "reached": 2,
-      "produced": 2
+      "reached": 3,
+      "produced": 3
     },
     "caravansDetail": {
-      "reached": 2,
+      "reached": 3,
       "produced": 0
     },
     "commandDetail": {
-      "reached": 2,
-      "produced": 2
+      "reached": 3,
+      "produced": 3
     },
     "presenceDetail": {
-      "reached": 2,
-      "produced": 2
+      "reached": 3,
+      "produced": 3
     },
     "worthHereDetail": {
-      "reached": 2,
+      "reached": 3,
       "produced": 0
     },
     "inventoryDetail": {
-      "reached": 2,
-      "produced": 2
+      "reached": 3,
+      "produced": 3
     },
     "sceneState": {
-      "reached": 2,
-      "produced": 2
+      "reached": 3,
+      "produced": 3
     },
     "holdingsDetail": {
-      "reached": 2,
+      "reached": 3,
       "produced": 0
     },
     "debtsDetail": {
-      "reached": 2,
+      "reached": 3,
       "produced": 0
     },
     "carriedDetail": {
-      "reached": 2,
+      "reached": 3,
       "produced": 0
     },
     "abilityLawDetail": {
-      "reached": 2,
-      "produced": 2
+      "reached": 3,
+      "produced": 3
     },
     "questsDetail": {
-      "reached": 2,
+      "reached": 3,
       "produced": 0
     },
     "structuredQuestsDetail": {
-      "reached": 2,
+      "reached": 3,
       "produced": 0
     },
     "traditionArcDetail": {
-      "reached": 2,
+      "reached": 3,
       "produced": 0
     },
     "npcErrandsDetail": {
-      "reached": 2,
+      "reached": 3,
       "produced": 0
     },
     "codexDetail": {
-      "reached": 2,
-      "produced": 2
+      "reached": 3,
+      "produced": 3
     },
     "companionsDetail": {
-      "reached": 2,
-      "produced": 1
+      "reached": 3,
+      "produced": 2
     },
     "placeMemoryDetail": {
-      "reached": 2,
-      "produced": 2
+      "reached": 3,
+      "produced": 3
     },
     "agesMissingDetail": {
-      "reached": 2,
-      "produced": 2
+      "reached": 3,
+      "produced": 3
     },
     "newsDetail": {
-      "reached": 2,
-      "produced": 2
+      "reached": 3,
+      "produced": 3
     },
     "worldArcsDetail": {
-      "reached": 2,
-      "produced": 2
+      "reached": 3,
+      "produced": 3
     },
     "legendsPursuableDetail": {
-      "reached": 2,
-      "produced": 2
+      "reached": 3,
+      "produced": 3
     },
     "wakesDetail": {
-      "reached": 2,
+      "reached": 3,
       "produced": 0
     },
     "arcMoodDetail": {
-      "reached": 2,
-      "produced": 2
+      "reached": 3,
+      "produced": 3
     },
     "reachableDeadDetail": {
-      "reached": 2,
+      "reached": 3,
       "produced": 0
     },
     "threatToPlayer": {
-      "reached": 2,
+      "reached": 3,
       "produced": 0
     },
     "guardiansDetail": {
-      "reached": 2,
+      "reached": 3,
       "produced": 0
     },
     "resolution": {
-      "reached": 2,
+      "reached": 3,
       "produced": 1
     },
     "playerInput": {
-      "reached": 2,
-      "produced": 1
+      "reached": 3,
+      "produced": 2
     },
     "exactWords": {
-      "reached": 2,
+      "reached": 3,
       "produced": 1
     },
     "travelDirective": {
-      "reached": 2,
+      "reached": 3,
       "produced": 0
     },
     "itemAdvance": {
-      "reached": 2,
+      "reached": 3,
       "produced": 0
     },
     "encounterWeaveDetail": {
-      "reached": 2,
+      "reached": 3,
       "produced": 0
     },
     "encounterOfferDetail": {
-      "reached": 2,
+      "reached": 3,
       "produced": 0
     },
     "fightFramingDetail": {
-      "reached": 2,
+      "reached": 3,
       "produced": 0
     },
     "abilityGrantDetail": {
-      "reached": 2,
+      "reached": 3,
       "produced": 0
     },
     "stageRevealDetail": {
-      "reached": 2,
+      "reached": 3,
       "produced": 0
     },
     "itemEvolveDetail": {
-      "reached": 2,
+      "reached": 3,
       "produced": 0
     },
     "worldPressureDetail": {
-      "reached": 2,
+      "reached": 3,
       "produced": 0
     },
     "offerDetail": {
-      "reached": 2,
+      "reached": 3,
       "produced": 0
     },
     "teacherOfferDetail": {
-      "reached": 2,
+      "reached": 3,
       "produced": 0
     },
     "substrateDetail": {
-      "reached": 2,
+      "reached": 3,
       "produced": 0
     },
     "romanceGuidanceDetail": {
-      "reached": 2,
+      "reached": 3,
       "produced": 0
     },
     "factsDetail": {
-      "reached": 2,
-      "produced": 2
+      "reached": 3,
+      "produced": 3
     },
     "evolvedItemsDetail": {
-      "reached": 2,
+      "reached": 3,
       "produced": 0
     },
     "opLossNote": {
-      "reached": 2,
+      "reached": 3,
       "produced": 0
     },
     "emergenceDetail": {
-      "reached": 2,
+      "reached": 3,
       "produced": 0
     },
     "perilNote": {
-      "reached": 2,
+      "reached": 3,
       "produced": 0
     },
     "encounterDetail": {
-      "reached": 2,
-      "produced": 1
+      "reached": 3,
+      "produced": 2
     },
     "masteryDetail": {
-      "reached": 2,
+      "reached": 3,
       "produced": 0
     },
     "bookkeepingRestate": {
-      "reached": 2,
+      "reached": 3,
       "produced": 0
     },
     "anomalyDetail": {
-      "reached": 2,
+      "reached": 3,
       "produced": 0
     },
     "repairPanelDetail": {
-      "reached": 2,
-      "produced": 2
+      "reached": 3,
+      "produced": 3
     },
     "teacherDetail": {
-      "reached": 2,
-      "produced": 1
-    },
-    "toolkitDetail": {
-      "reached": 2,
+      "reached": 3,
       "produced": 2
     },
+    "toolkitDetail": {
+      "reached": 3,
+      "produced": 3
+    },
     "availableEncounters": {
-      "reached": 2,
+      "reached": 3,
       "produced": 1
     },
     "partyDetail": {
-      "reached": 2,
+      "reached": 3,
       "produced": 0
     },
     "ratingDetail": {
-      "reached": 2,
-      "produced": 2
+      "reached": 3,
+      "produced": 3
     },
     "registerDetail": {
-      "reached": 2,
-      "produced": 2
+      "reached": 3,
+      "produced": 3
     },
     "legendDetail": {
-      "reached": 2,
+      "reached": 3,
       "produced": 1
     },
     "livingWorldDetail": {
-      "reached": 2,
-      "produced": 2
+      "reached": 3,
+      "produced": 3
     },
     "assignmentsDetail": {
-      "reached": 2,
+      "reached": 3,
       "produced": 0
     },
     "latentArcsDetail": {
-      "reached": 2,
+      "reached": 3,
       "produced": 0
     },
     "seasonalDetail": {
-      "reached": 2,
-      "produced": 2
+      "reached": 3,
+      "produced": 3
     },
     "schoolsDetail": {
-      "reached": 2,
+      "reached": 3,
       "produced": 0
     },
     "sharedCanonDetail": {
-      "reached": 2,
-      "produced": 1
-    },
-    "worldCountLabel": {
-      "reached": 2,
+      "reached": 3,
       "produced": 2
     },
+    "worldCountLabel": {
+      "reached": 3,
+      "produced": 3
+    },
     "waygateDetail": {
-      "reached": 2,
+      "reached": 3,
       "produced": 0
     },
     "readAloudDetail": {
-      "reached": 2,
-      "produced": 2
+      "reached": 3,
+      "produced": 3
     },
     "scenePacingDetail": {
-      "reached": 2,
+      "reached": 3,
       "produced": 0
     },
     "moneyDetail": {
-      "reached": 1,
-      "produced": 1
+      "reached": 2,
+      "produced": 2
     },
     "wishesDetail": {
-      "reached": 1,
+      "reached": 2,
       "produced": 0
     },
     "worldMovedOnDetail": {
-      "reached": 1,
+      "reached": 2,
       "produced": 0
     },
     "companionLivesDetail": {
-      "reached": 1,
+      "reached": 2,
       "produced": 0
     },
     "homeDetail": {
-      "reached": 1,
+      "reached": 2,
       "produced": 0
     },
     "invitationsDetail": {
-      "reached": 1,
+      "reached": 2,
       "produced": 0
     },
     "bandsJoinedDetail": {
-      "reached": 1,
+      "reached": 2,
       "produced": 0
     },
     "travelersHereDetail": {
-      "reached": 1,
+      "reached": 2,
       "produced": 0
     },
     "journeyDetail": {
-      "reached": 1,
+      "reached": 2,
       "produced": 0
     },
     "journeyUnderwayDetail": {
-      "reached": 1,
+      "reached": 2,
       "produced": 0
     },
     "powersHereDetail": {
-      "reached": 1,
-      "produced": 1
+      "reached": 2,
+      "produced": 2
     },
     "nemesisDetail": {
-      "reached": 1,
+      "reached": 2,
       "produced": 0
     },
     "holdsNearDetail": {
-      "reached": 1,
-      "produced": 1
+      "reached": 2,
+      "produced": 2
     },
     "travelersDetail": {
-      "reached": 1,
-      "produced": 1
+      "reached": 2,
+      "produced": 2
     },
     "jobsDetail": {
-      "reached": 1,
+      "reached": 2,
       "produced": 0
     }
   },
   "_opUnknown": {
-    "sceneSummary": 2
+    "sceneSummary": 3
   },
   "_bandNotes": null,
   "_opCountingSince": "2026-09-14T17:51:06.584Z",
@@ -5893,5 +6009,6 @@
         "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, peopleDisposition, sessions, worldState)"
       }
     ]
-  }
+  },
+  "_exchangeReceipts": []
 }

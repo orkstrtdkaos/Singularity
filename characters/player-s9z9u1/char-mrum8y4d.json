@@ -1768,55 +1768,6 @@
     "news": [
       {
         "day": 5,
-        "worldDay": 85,
-        "text": "The Hollow King of the Wild Half has not been seen at home in a long while — whatever is happening has all of them.",
-        "tier": "murmur",
-        "section": "world",
-        "locationId": "the_maw"
-      },
-      {
-        "day": 5,
-        "worldDay": 85,
-        "text": "Cinder Vael, the Wright Who Would Not Stop has stopped spending themselves on The Bleeding Grammar.",
-        "tier": "murmur",
-        "section": "world",
-        "figureId": "cinder_vael",
-        "arcId": "arc_block_bleed",
-        "locationId": "the_ceaseless",
-        "placedBy": "figureId"
-      },
-      {
-        "day": 5,
-        "worldDay": 85,
-        "text": "The Last Choirmistress has stopped spending themselves on The Second Manifestation.",
-        "tier": "murmur",
-        "section": "world",
-        "figureId": "the_last_choirmistress",
-        "arcId": "arc_manifestation_storm",
-        "locationId": "the_numen",
-        "placedBy": "figureId"
-      },
-      {
-        "day": 5,
-        "worldDay": 85,
-        "text": "Kesh Ardent, the Edge That Holds has stopped spending themselves on The Green Schism.",
-        "tier": "murmur",
-        "section": "world",
-        "figureId": "the_edge_that_holds",
-        "arcId": "arc_green_schism",
-        "locationId": "the_redline",
-        "placedBy": "figureId"
-      },
-      {
-        "day": 5,
-        "worldDay": 85,
-        "text": "Maren Oast: Maren updated the wayhouse ledger with two new traveler entries and noted a road-condition report from a passing carter, quietly deepening her feel for the network's rhythms.",
-        "tier": "ambient",
-        "section": "world",
-        "figureId": "wayhouse-keeper"
-      },
-      {
-        "day": 5,
         "worldDay": 87,
         "text": "The Standing Annex has slipped to holding — it has no keeper.",
         "tier": "event",
@@ -1949,11 +1900,46 @@
         "figureId": "person-83693e0ee6487310",
         "locationId": "the_ceaseless",
         "placedBy": "figureId"
+      },
+      {
+        "day": 5,
+        "worldDay": 87,
+        "text": "Halvex Coil keeps The Standing Annex now.",
+        "tier": "event",
+        "section": "yours"
+      },
+      {
+        "day": 5,
+        "worldDay": 87,
+        "text": "You put Better Story to The Standing Annex — it comes up to thriving.",
+        "tier": "event",
+        "section": "yours"
+      },
+      {
+        "day": 5,
+        "worldDay": 87,
+        "text": "The Standing Annex has lost its keeper.",
+        "tier": "event",
+        "section": "yours"
+      },
+      {
+        "day": 5,
+        "worldDay": 87,
+        "text": "The Gralloch Crown is stronger than it was — 23 more under it.",
+        "tier": "event",
+        "section": "world"
+      },
+      {
+        "day": 5,
+        "worldDay": 87,
+        "text": "Something has been building in the unmade: Someone has begun quietly counting what no longer exists — cataloguing absences — and has not yet decided whether to share what the count implies.",
+        "tier": "event",
+        "section": "world"
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 2100,
-    "lastSharedReadAt": "2026-09-25T12:51:11.132Z",
+    "lastGenCount": 2106,
+    "lastSharedReadAt": "2026-09-25T18:54:53.885Z",
     "lastTickWorldDay": 87,
     "lastCanonWorldDay": 87,
     "turnsSinceOffer": 0,
@@ -2240,7 +2226,7 @@
         "kind": "decision",
         "premise": "Someone who keeps the count of what has been unmade has begun rounding down, telling themselves the difference is noise — but the rounding has a direction, and it has been consistent for long enough…",
         "cause": "The act of counting the unmade requires a decision about what constitutes a thing distinct enough to be counted, and that threshold has always been left to…",
-        "stage": 10,
+        "stage": 11,
         "seededAtCount": 1917,
         "surfaced": true,
         "fate": "growing",
@@ -2253,7 +2239,7 @@
         "kind": "decision",
         "premise": "The person who holds authority to formally designate what has been unmade as 'resolved' has not done so for anything in years, and the backlog of unresolved unmakings is beginning to press against…",
         "cause": "In the_unmade, the act of resolution is itself an act of power, and the authority-holder has quietly discovered that unresolved things remain partially…",
-        "stage": 6,
+        "stage": 7,
         "seededAtCount": 1968,
         "surfaced": true,
         "fate": "growing",
@@ -2278,11 +2264,12 @@
         "kind": "decision",
         "premise": "Someone has begun quietly counting what no longer exists — cataloguing absences — and has not yet decided whether to share what the count implies.",
         "cause": "The Unmade is defined by what has been lost or undone; its people have long customs around not naming absence directly, because naming draws attention to the…",
-        "stage": 1,
+        "stage": 2,
         "seededAtCount": 2053,
-        "surfaced": false,
+        "surfaced": true,
         "fate": "growing",
-        "lastMovedCount": 2053
+        "lastMovedCount": 2053,
+        "surfacedAtCount": 2106
       },
       "unmade-elder-silence": {
         "id": "unmade-elder-silence",
@@ -2290,7 +2277,7 @@
         "kind": "decision",
         "premise": "An elder who alone remembers the last time something like the current unraveling occurred has not yet spoken, weighing whether the knowing will help or hasten what is coming.",
         "cause": "In the_unmade, what is lost or dissolved carries weight equal to what remains — silence is understood as a form of preservation, and the elder has lived long…",
-        "stage": 0,
+        "stage": 1,
         "seededAtCount": 2100,
         "surfaced": false,
         "fate": "growing",
@@ -9297,7 +9284,7 @@
       "the_doubting_lattice": 84,
       "the_war_ender": 84
     },
-    "updatesToldTo": "2.6.1",
+    "updatesToldTo": "2.6.6",
     "newsLog": [
       {
         "day": 4,
@@ -10301,6 +10288,54 @@
         "worldDay": 87,
         "text": "The game was updated to v2.6.1 — 9 new, 6 fixed, 2 changed.",
         "loggedAt": "2026-09-25T12:51:30.157Z"
+      },
+      {
+        "day": 5,
+        "worldDay": 87,
+        "text": "Halvex Coil keeps The Standing Annex now.",
+        "tier": "event",
+        "section": "yours",
+        "loggedAt": "2026-09-25T18:55:01.641Z"
+      },
+      {
+        "day": 5,
+        "worldDay": 87,
+        "text": "You put Better Story to The Standing Annex — it comes up to thriving.",
+        "tier": "event",
+        "section": "yours",
+        "loggedAt": "2026-09-25T18:55:01.641Z"
+      },
+      {
+        "day": 5,
+        "worldDay": 87,
+        "text": "The Standing Annex has lost its keeper.",
+        "tier": "event",
+        "section": "yours",
+        "loggedAt": "2026-09-25T18:55:01.641Z"
+      },
+      {
+        "day": 5,
+        "worldDay": 87,
+        "text": "The Gralloch Crown is stronger than it was — 23 more under it.",
+        "tier": "event",
+        "section": "world",
+        "loggedAt": "2026-09-25T18:55:01.641Z"
+      },
+      {
+        "day": 5,
+        "worldDay": 87,
+        "text": "Something has been building in the unmade: Someone has begun quietly counting what no longer exists — cataloguing absences — and has not yet decided whether to share what the count implies.",
+        "tier": "event",
+        "section": "world",
+        "loggedAt": "2026-09-25T18:55:01.641Z"
+      },
+      {
+        "kind": "update",
+        "section": "world",
+        "version": "2.6.6",
+        "worldDay": 87,
+        "text": "The game was updated to v2.6.6 — 3 new, 5 fixed, 3 changed.",
+        "loggedAt": "2026-09-25T18:55:01.641Z"
       }
     ]
   },
@@ -10892,13 +10927,21 @@
         "label": "Grovehome",
         "kind": "place",
         "facts": [
-          "[d1] you have walked here"
+          "[d1] you have walked here",
+          "[d?] The Rootkin's slow council at Grovehome. It keeps the Quickwood open to trade, and it has never decided anything in a hurry."
         ],
-        "links": [],
-        "aliases": [],
+        "links": [
+          "the-heartroot",
+          "the-greenward",
+          "the-quickwood-eaves"
+        ],
+        "aliases": [
+          "The Grovehome Moot"
+        ],
         "createdDay": 1,
         "entityId": "grovehome",
-        "updatedDay": 1
+        "updatedDay": 1,
+        "summarisedAt": 0
       },
       "the-half-cathedral": {
         "id": "the-half-cathedral",
@@ -11682,23 +11725,6 @@
         "createdDay": null,
         "reference": true
       },
-      "power-grovehome-moot": {
-        "id": "power-grovehome-moot",
-        "label": "The Grovehome Moot",
-        "kind": "faction",
-        "facts": [
-          "[d?] The Rootkin's slow council at Grovehome. It keeps the Quickwood open to trade, and it has never decided anything in a hurry."
-        ],
-        "links": [
-          "grovehome",
-          "the-heartroot",
-          "the-greenward",
-          "the-quickwood-eaves"
-        ],
-        "aliases": [],
-        "createdDay": null,
-        "reference": true
-      },
       "power-scaffold-court": {
         "id": "power-scaffold-court",
         "label": "The Court of the Unfinished Plan",
@@ -12207,6 +12233,12 @@
         "from": "halvex-corridor",
         "label": "Halvex's Corridor",
         "to": "halvex",
+        "moved": 1
+      },
+      {
+        "from": "power-grovehome-moot",
+        "label": "The Grovehome Moot",
+        "to": "grovehome",
         "moved": 1
       }
     ],
@@ -13293,8 +13325,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790340921709,
-  "rev": 880,
+  "updatedAt": 1790362501646,
+  "rev": 883,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -15231,7 +15263,7 @@
     "lastDeployDay": 76,
     "lastBeat": "witness_power"
   },
-  "syncedAt": 1790171691625,
+  "syncedAt": 1790340921709,
   "_applyFailures": null,
   "companionMemory": {
     "coil": [
@@ -15420,7 +15452,7 @@
       "kind": "enterprise",
       "name": "The Standing Annex",
       "locationId": "gen-the-made-gate",
-      "steward": "halvex_coil",
+      "steward": null,
       "obligation": null,
       "condition": "thriving",
       "claimedDay": 3,
@@ -15994,11 +16026,11 @@
     },
     {
       "text": "Halvex Coil keeps The Standing Annex now.",
-      "announced": false
+      "announced": true
     },
     {
       "text": "You put Better Story to The Standing Annex — it comes up to thriving.",
-      "announced": false
+      "announced": true
     }
   ],
   "figureImages": {
@@ -16824,9 +16856,11 @@
         "how": "renown",
         "day": null
       },
-      "wins": 2,
+      "wins": 1,
       "lastVerb": "raid",
-      "lastVerbDay": 5
+      "lastVerbDay": 5,
+      "grownHeads": 23,
+      "grewDay": 5
     },
     "power_undercount": {
       "known": {
@@ -16851,7 +16885,7 @@
       },
       "lastVerb": "expand",
       "lastVerbDay": 5,
-      "wins": 1
+      "wins": 2
     },
     "power_radiant_plateau": {
       "known": {
@@ -16860,7 +16894,7 @@
       },
       "lastVerb": "expand",
       "lastVerbDay": 5,
-      "wins": 1
+      "wins": 2
     },
     "power_harmonic_heights": {
       "known": {
@@ -16869,7 +16903,7 @@
       },
       "lastVerb": "expand",
       "lastVerbDay": 5,
-      "wins": 1
+      "wins": 2
     },
     "power_millbrook_council": {
       "known": {
@@ -16934,7 +16968,7 @@
       },
       "lastVerb": "expand",
       "lastVerbDay": 5,
-      "wins": 1
+      "wins": 2
     },
     "power_hollow_court": {
       "known": {
@@ -16943,7 +16977,7 @@
       },
       "lastVerb": "expand",
       "lastVerbDay": 5,
-      "wins": 1
+      "wins": 2
     },
     "power_seraphic_orders": {
       "known": {
@@ -16976,27 +17010,27 @@
     "power_firstsight_barony": {
       "lastVerb": "expand",
       "lastVerbDay": 5,
-      "wins": 1
+      "wins": 2
     },
     "power_blaze_unshadowed": {
       "lastVerb": "recruit",
       "lastVerbDay": 5,
-      "wins": 1
+      "wins": 2
     },
     "power_flesh_temple": {
       "lastVerb": "recruit",
       "lastVerbDay": 5,
-      "wins": 1
+      "wins": 2
     },
     "power_vacated_custody": {
       "lastVerb": "expand",
       "lastVerbDay": 5,
-      "wins": 1
+      "wins": 2
     },
     "power_the_ceaseless": {
       "lastVerb": "expand",
       "lastVerbDay": 5,
-      "wins": 1
+      "wins": 2
     },
     "power_long_choir": {
       "lastVerb": "protect",
@@ -17005,12 +17039,12 @@
     "power_harvest_hand": {
       "lastVerb": "recruit",
       "lastVerbDay": 5,
-      "wins": 1
+      "wins": 2
     },
     "power_the_scouring": {
       "lastVerb": "recruit",
       "lastVerbDay": 5,
-      "wins": 1
+      "wins": 2
     },
     "power_harborward": {
       "lastVerb": "protect",

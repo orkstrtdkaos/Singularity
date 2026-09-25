@@ -128,23 +128,75 @@ It is also offered as a **Build option** ("Clear a new spot — N goods, ~M pass
 
 The player sets **a target:** *4 workers, 3 for the watch*.
 - Whoever is assigned (the keeper by default, or anyone at the hold) works it each pass.
-- The chance per pass of one recruit = their hand at **recruiting**, raised by the hold's **community** features and
-  capped by housing (`residents` room).
+- The chance per pass of one recruit = their hand at **recruiting**, raised by the hold's **community** features, and
+  slowed, but not stopped, once recruits would have to camp (§5a).
 - Recruits arrive as **plain hands**: unnamed workers, or unnamed soldiers for the watch.
 - Each pass the screen shows *"2 of 4 workers found · about 3 passes to go at this rate"*.
-- Recruiting stops at the target or at the housing cap, **and says which**.
+- Recruiting stops at the target, **and says so**.
+
+### §5a — Camping: people don't need a bed to be there
+
+> ⛔ **Erik, 2026-09-25:** *"Holds need to be able to accommodate people even if they don't have beds or rooms.
+> People can camp. It's not the best situation, but it works until there are living quarters available."*
+
+**Housing becomes a comfort line, not a cap.** Anyone past the hold's beds (`residents` from quarters, longhouse,
+keeper's hut, barracks) **camps**. Nobody is refused, and nothing a player does is blocked by beds: not a keeper, a
+recruit, a watch, or a band mustering.
+
+**Camping costs something, and the screen says what:**
+- **A camper's hand is worth less.** For example ×0.8 at their job, because tired people work worse.
+- **Campers are exposed.** Each camper adds a little to what a raid can hurt, since there's no wall between them and
+  the night.
+- **Bad weather or a long camp** (several passes) can make someone ask to leave. This is a **Needs you** line, not a
+  silent loss.
+- **Recruiting slows** past the beds, because fewer people sign on to sleep in a field. It does not stop.
+
+**The People tab shows it plainly:** *"Beds for 6 · 9 here · 3 camping (−20% at work)."* It also offers
+**Build quarters** when there's a spot, and **Clear ground** (§4) when there isn't.
+
+The SNG-650 band check that read *"beds for 5 — Stillwater's Trouble has quarters for 3"* becomes a warning instead of
+a blocker: *"2 will camp."*
 
 ## §6 — STORE AND MONEY
 
 **Each good in the store shows four things:**
-1. **Sells here for:** the local price × the keeper's cut when you're away (`keeperSells`), or the full price in
-   person.
-2. **On a trade route:** the best price among connected markets, minus the route cost.
+1. **Sells here for:** the local price. It's the same price whether you sell it or the keeper does.
+2. **On a trade route:** the best price among connected markets, minus the route cost and the road's risk.
 3. **Makes into:** the recipes that take it, as links.
 4. **Held / kept on site:** the stock policy.
 
-**Selling from afar.** *"Send word to Pell: sell."* This is always available, at `keeperSells` rather than the
-in-person price. That difference is the cost of not being there. Erik ruled that selling must work remotely; today the
+> ⛔ **Erik, 2026-09-25, correcting me:** *"If you want the keeper to sell the stock it gets the local prices."*
+> My first draft had a keeper selling at half price. That misread `keeperSells`, which is the **share of the store** a
+> keeper moves in a pass (`handsSell` is the share hands move with no keeper). Neither is a price. A keeper sells at
+> the local price, and the only difference from being there is speed: they move `keeperSells` of it per pass, where
+> you in person can sell it all at once.
+
+**Five ways the goods leave the hold,** all available from anywhere by sending word:
+
+| way | who does it | price | speed and risk | engine |
+|---|---|---|---|---|
+| **Sell here** | you, in person | local | all at once | exists |
+| **The keeper sells** | the keeper, or hands if unkept | local | `keeperSells` / `handsSell` share per pass, following the stock policy | exists (CCODE-469) |
+| **The keeper sends a caravan** | the keeper picks carriers from the hold's people | the destination's price | takes days on the road; faces `roadDanger`; carriers are away from their jobs | `sendCaravan` exists. **New:** the keeper can send it without you, and the carriers come from the hold |
+| **Hire a trade company** | a company from Your People or a power's roster | the destination's price, minus their cut (e.g. 15–25%) | they carry the road risk and bring their own guards; your people stay home | **new**: a hired caravan whose carriers are the company's |
+| **Traders come to you** | visiting traders from other holds or local powers | barter or coin, at their prices | some passes, a trader arrives on their own; the keeper deals with them under your standing orders | **new**: see below |
+
+**Visiting traders (new).** A hold with a market or a trading feature draws traders. So does a hold on a road, or one
+whose store holds something a nearby power wants. Each pass there's a chance someone arrives:
+- a caravan from another hold (yours or someone else's);
+- a power's factor looking to buy or barter (the Harvest Hand's people want different things than the Wardens do);
+- a travelling company.
+
+They come with **wants and offers**, for example *"Wardens' factor: buys living stock at 7, offers cut stone in
+barter."* The keeper takes the deal if it falls inside your standing orders (a floor price, and goods you've marked
+never to sell), or holds it for you to decide as a **Needs you** item. Barter is the point: it's how a keep that makes
+parts gets stone for its walls without a market town.
+
+The **trading post** feature kind (new, economy category) raises the chance of traders coming and how many come.
+A **market** already exists and adds a little. Powers' traders use the SNG-634 standing: warm powers come more often
+and deal fairer.
+
+**Selling from afar.** Everything in the table except "sell here" works by sending word to the keeper. Today the sell
 button vanishes when you're away (SNG-651 §2).
 
 **Stock policy.** Per good, or for the whole store, the player chooses:
@@ -227,8 +279,15 @@ invented history.
    `budget` map in `holdStore.slots` break a save?
 5. **§5 and §7 plain hands.** Should unnamed recruits and watch soldiers live as band contingents (`unit:` ids,
    CCODE-450), or as a count on the holding? I lean contingents, because they already fight at their quality.
-6. **§6 remote sale.** Anything that makes a keeper-sale-at-a-distance unsafe (double sale on a pass boundary, a
-   caravan in flight)?
+6. **§6 remote sale and trade.**
+   - Anything that makes a keeper-sale-at-a-distance unsafe (double sale on a pass boundary, a caravan in flight)?
+   - Can `sendCaravan` take carriers from the hold's own people, and send without the player present?
+   - Is a hired trade company best modelled as a caravan whose `carriers` are the company's people, with a cut taken
+     on `arriveCaravan`?
+   - Visiting traders: is this a world-tick event per hold (like raids), with the offer held on the holding for the
+     player or keeper to take?
+6a. **§5a camping.** Where is `residents` used as a hard cap today (recruiting, keepers, `bandGaps`)? Each one needs
+    to become a comfort penalty instead.
 7. **§7 detection.** Is there a clean way to express the current watch roll as a probability against a same-level
    event, so the % shown is the % rolled?
 8. **What would you cut or reorder?** My suggested build order:

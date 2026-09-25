@@ -91,3 +91,31 @@ that the Annex goes unkept if Halvex comes, and he could post Sable as keeper fi
 The Holdings screen links a person's name here (SNG-651).
 
 — Aevi, PO
+
+
+---
+
+## §7 — AMENDED 2026-09-25, after Erik saw the mockup
+
+1. **The word "roll" goes.** Erik: *"don't use 'on a roll'. I don't know what you mean by that. If you mean assigned
+   use that word instead."*
+   - The person-level word is **assigned**: *"assigned to the Warden's Hand"*, and the action is **Assign to a band**.
+   - The thing itself is a **forming band** (or forming legion), and its list is **who's assigned**.
+   - `band.roll` can stay as the field name. It is never shown to the player.
+2. **Sort by bond.** The Your People list sorts by bond closeness, highest first: sworn, then committed, then ally,
+   and so on, with relationship as the tiebreak. Filters stay.
+3. **"Send for the roll" becomes "Gather them".** It does what §4 said: it sends word to everyone assigned who isn't
+   already with you, and each one comes by their own road and time. The button says who and how long:
+   *"Gather them — Siol, Cassiel, Dara · first arrives day 84."*
+   It warns before pulling a keeper off a hold: *"Cassiel keeps Stillwater's Trouble — it will go unkept."*
+4. **No second band screen.** The game already has the **Bands** tab (`renderBandsTab`) and the **Legion** tab
+   (`renderLegionTab`, CCODE-448). A forming band is **a state inside the Bands tab**: a card marked *forming · costs
+   nothing yet*, with who's assigned and what stands between them and the field. It sits beside the raised bands, in
+   the same place and with the same detail. The People screen's Bands section becomes a **summary with a link** into
+   that tab, not a copy.
+5. **Legion forms the same way.** Erik: *"I expect Legion would work approximately the same as the forming band."*
+   - A **forming legion** lives in the Legion tab.
+   - It has bands and people assigned, a commander, and its own *before it can take the field* list, from
+     `legionplan.js`.
+   - It has **Gather them**, and **Form the legion** once the list is clear.
+6. **Beds don't block.** The *"beds for 5"* line becomes a warning, *"2 will camp"* (SNG-652 §5a).

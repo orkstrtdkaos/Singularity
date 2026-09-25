@@ -17068,7 +17068,10 @@ await (async () => {
   {
     const wt433 = readFileSync(join(root, "engine/worldtick.js"), "utf8");
     const applies = (wt433.match(/(?<!export function )applyEpicClashOutcome\(ws,/g) || []).length;
-    const fed = (wt433.match(/abilitiesByTradition[^}]*, content \}/g) || []).length;
+    // ⚠️ CCODE-491: THIS REQUIRED `content }` TO BE THE LAST KEY IN THE OPTIONS OBJECT, and went red the day a
+    // second option was added after it. Where a key sits in an object is not a design decision; the claim is that
+    // the tick's content is HANDED OVER, so that is what is asked.
+    const fed = (wt433.match(/abilitiesByTradition[^}]*\bcontent\b\s*[,}]/g) || []).length;
     check("433: every clash site hands the tick's content to the reporter", applies === 4 && fed === applies,
       `${applies} clash sites, ${fed} carrying content`);
   }

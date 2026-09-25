@@ -269,7 +269,7 @@ export async function loadContent() {
   // its own misses; only the base `rules` is fatal, as before). Load them as ONE wave instead of ~12
   // serial round-trips. rankProgression comments retained on the consumers below.
   const [rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks,
-         romanceGuidance, functionVocabulary, nativeGrants, skillBattle, traditionsRaw, worldClock, schools, classArchetypes, repairPanelManifest, craftMechanics, titlesRule, arcResponseRule, encountersRule, coliseumGrid, economyRule, chargesRule, threatRule, incapRule, tiesRule, questStructureRule, martialRule, ladderRule, mintedNamesRule, newsTemplatesRule, firstGiftTemplate, damageFamilies, abilityRenameMap, combinationRecipes, powerBandsRule, martialDialsRule, powersRule] = await Promise.all([
+         romanceGuidance, functionVocabulary, nativeGrants, skillBattle, traditionsRaw, worldClock, schools, classArchetypes, repairPanelManifest, craftMechanics, titlesRule, arcResponseRule, encountersRule, coliseumGrid, economyRule, chargesRule, threatRule, incapRule, tiesRule, questStructureRule, martialRule, ladderRule, mintedNamesRule, newsTemplatesRule, firstGiftTemplate, damageFamilies, abilityRenameMap, combinationRecipes, powerBandsRule, martialDialsRule, powersRule, nemesisRule] = await Promise.all([
     fetchJSON(resPath),
     loadRule("emergence", { recipes: [], branchTemplates: [] }),
     loadRule("attribute_gates", { gates: {} }),
@@ -354,6 +354,9 @@ export async function loadContent() {
     // wrong bag SILENTLY — which this file has already lost `economy`, `incap` and `tierRarity` to, on three
     // separate days, each recorded in the comments just above.
     loadRule("powers", null),
+    // ⛔ SNG-648 — AND THIS ONE IS NOW LAST, FOR THE SAME REASON THE THREE NOTES ABOVE GIVE. `nemesisRule` is the
+    // last name in the destructuring, so this is the last call in the array. Appending is the only safe insertion.
+    loadRule("nemesis", null),
   ]);
   // SNG-101b: the native-grant table merges INTO the rules bag so nativeGrantIdsFor reads it directly.
   // SNG-271/1a — THE XP TABLE. `resolution.json` already carried an inline `encounters` block, so duels,
@@ -434,6 +437,10 @@ export async function loadContent() {
   // which is the substrate. Three unrelated things whose names all begin with "power" — named here so the next
   // reader does not reach for the wrong one, which is this file's most repeated defect.
   if (powersRule) rules.powers = powersRule;
+  // ⛔ SNG-648 — the nemesis dials: the six signals' weights, who is eligible, how close counts as your ground,
+  // and the authored legend ties. ⚠️ Landed in the same commit as `engine/nemesis.js`, which is Aevi's own rule
+  // written on the staged file: "an unread key is an unread rule constant."
+  if (nemesisRule) rules.nemesis = nemesisRule;
   // SNG-356 — THE AUTHORED SUB-ATTRIBUTE LADDER, and it RETIRES `attributeSoftCap` into content.
   // Erik: "specify what each point up to 20 gets you so we can better control the impact and the player
   // can see it exactly." ⚠️ SNG-342'"'"'s lesson applies exactly here — this file was REGISTERED in the

@@ -121,7 +121,7 @@ export function foldFates(store, fates = {}, { regionId = "valley" } = {}) {
 /** Adopt the world's fates into a save's world, for the authored legends. A record that loses to the world's is replaced by it (keeping
  *  who recorded it, so it is never re-published as this world's); one that wins is left for the publish. Mutates `ws.epicStatus`.
  *  Returns [{ id, before, after, atWorldDay }] for the records that changed. */
-export function adoptFates(ws, fates = {}, ids = [], { by = null } = {}) {
+export function adoptFates(ws, fates = {}, ids = [], { by = null, nemesisId = null } = {}) {
   if (!ws) return [];
   ws.epicStatus = ws.epicStatus || {};
   const known = new Set(ids);
@@ -129,7 +129,14 @@ export function adoptFates(ws, fates = {}, ids = [], { by = null } = {}) {
   for (const [id, remote] of Object.entries(fates || {})) {
     if (!known.has(id) || !remote) continue;
     const local = fateOf(ws.epicStatus[id], { by });
-    const winner = mergeFate(local, remote);
+    let winner = mergeFate(local, remote);
+    // ⛔ SNG-648 §3.2 — THE SECOND DOOR A FIGURE CAN DIE THROUGH, and the one Aevi actually caught: the Scouring
+    // Hand died on world day 76 at the Deep Lantern's hands, in ANOTHER world, and Silas read it in the news. A
+    // bound nemesis is wounded by what other worlds do to them, never killed by it — theirs is the character's to
+    // take. ⛑ The same predicate the tick's own clash door calls; a second copy of the rule would guard one door.
+    if (nemesisId && id === nemesisId && winner?.status === "dead") {
+      winner = { ...winner, status: "wounded", _nemesisSpared: "another world killed them; here they are wounded" };
+    }
     if (sameFate(winner, local)) continue;
     const before = ws.epicStatus[id] ? { ...ws.epicStatus[id] } : null;
     const { atWorldDay, ...record } = winner;

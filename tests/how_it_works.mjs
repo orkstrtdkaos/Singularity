@@ -2139,7 +2139,11 @@ console.log("\n── §174 · people minted for the story reach the prompt befo
   // ⛔ the reader, not the registration (the lesson of §172): gm.js takes the key out of the context and pushes the block after KNOWN PEOPLE
   const gm174 = rd("engine/gm.js").replace(/^\s*\/\/.*$/gm, "");
   check("§174: ⛔ gm.js READS the row — destructured, and pushed as the block after KNOWN PEOPLE with the meet-by-this-id instruction",
-    /const \{ bookkeepingRestate, mintedUnmetDetail, character,/.test(gm174) && /## PEOPLE MINTED FOR THIS STORY, NOT YET IN KNOWN PEOPLE[^\n]*op:"meet"[^\n]*\\n\$\{mintedUnmetDetail\}/.test(gm174));
+    // ⚠️ CCODE-491: THIS PINNED THE ADJACENCY — `{ bookkeepingRestate, mintedUnmetDetail, character,` — and went red
+    // the day another block was destructured beside it. A destructuring ORDER is not a design decision, and a gate
+    // that pins one breaks for every block added after it. The claim is that gm.js READS the row, so that is what
+    // is asked: the name is in the destructured list, whatever else is.
+    /const \{[^}]*\bmintedUnmetDetail\b[^}]*\}\s*=/.test(gm174) && /## PEOPLE MINTED FOR THIS STORY, NOT YET IN KNOWN PEOPLE[^\n]*op:"meet"[^\n]*\\n\$\{mintedUnmetDetail\}/.test(gm174));
   // and the meet, when it comes, LIFTS the minted record — a blank registry entry for a person the world already wrote is the other half of "doesn't recall him"
   const c174b = mk174();
   NP174.applyNpcUpdates(c174b, [{ op: "meet", npcId: "bryn-callowell", name: "Bryn Callowell" }], { day: 17, locationId: "gen-whistling-woman-post" });
@@ -26583,6 +26587,182 @@ console.log("\n── §359 · the power generator names the rule behind every c
       const s = PG.supplyLineReadiness(empty[0], { content: C359 });
       return !!s && typeof s.hungerArcsLoaded === "number" && /hunger arc/.test(s.why);
     })(), PG.supplyLineReadiness(empty[0] || "x", { content: C359 })?.why);
+}
+
+// ══════════ §360 · SNG-648 — EVERY CHARACTER GETS A NEMESIS, AND THE ENGINE AND THE GM BOTH KNOW WHO ══════════
+// ⛔ ERIK: "Who's Silas's most likely nemesis?" … "I want you to make sure the game engine and GM know to do this."
+// ⚑ AEVI'S §1, measured before she wrote it: the personal arc's `legend` is bound to nobody, no record or GM block
+// names an opponent, and `pacing.js` has said "the antagonist acts on their own clock" since it was written with
+// nobody to point at. ⚠️ And her §3.5 sets the terms for the test case: "if the engine picks someone else for him,
+// THE SCORING GETS REVIEWED, NOT THE SAVE."
+console.log("\n── §360 · the nemesis, and both halves of Erik's ask ──");
+{
+  const NM = await import("../engine/nemesis.js");
+  const WT360 = await import("../engine/worldtick.js");
+  const FT360 = await import("../engine/fates.js");
+  const RC360 = await import("../engine/reconcile.js");
+  const GR360 = await import("../engine/gm_registry.js");
+  const { loadContentHeadless: lch360 } = await import("./headless_content.mjs");
+  const C360 = await lch360();
+  const dials = C360.rules?.nemesis;
+  const silas = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+  const staged = JSON.parse(rd("po/staged_content/SNG-648_silas_nemesis.json"));
+  const herPick = staged.nemesis?.figureId || staged.figureId || null;
+
+  check("§360: ⛔ THE DIALS LOAD, AND THEY LANDED WITH THEIR READER — Aevi's own rule on the staged file: \u201can unread key is an unread rule constant.\u201d Six signals with authored weights, who is eligible, how close counts as your ground, and the legend ties. ⚠️ `loadRule` went at the TAIL of a POSITIONAL array whose own comments record this file losing `economy`, `incap` and `tierRarity` to a mid-list insertion on three separate days",
+    !!dials && Object.keys(dials.signals || {}).length === 6 && (dials.legendTie?.relations || []).length >= 4
+    && Array.isArray(dials.eligibleTiers) && dials.eligibleTiers.length > 0,
+    `${Object.keys(dials?.signals || {}).length} signals, ${(dials?.legendTie?.relations || []).length} legend ties`);
+
+  check("§360: ⛔ EVERY SIGNAL GIVES ONE OF THREE ANSWERS — it fired, it looked and found nothing, or ITS DATA IS NOT THERE AND IT SAYS SO. ⚑ That third answer is the whole design: a signal scoring zero because the corpus cannot answer it looks exactly like one scoring zero because it looked. ⚠️ MY FIRST VERSION DEMANDED EVERY SIGNAL APPEAR SOMEWHERE, which the middle answer cannot satisfy — “looked and found nothing” leaves no trace by design. So all three are shown to EXIST, each with a fixture that forces it",
+    (() => {
+      const fired = NM.nemesisCandidates(silas, { content: C360 });
+      const anyHit = fired.candidates.some(c => c.hits.length > 0);
+      const anyUnreadable = fired.unreadable.length > 0;
+      // and the middle answer: a figure eligible in every way who matches nothing about this character
+      const quiet = NM.eligibleNemeses(silas, { content: C360 })
+        .map(f => NM.scoreNemesis(silas, f, { content: C360 }))
+        .some(s => s && s.score === 0 && s.hits.length === 0);
+      const wellFormed = [...fired.candidates.flatMap(c => [...c.hits, ...c.unreadable]), ...fired.unreadable]
+        .every(x => typeof x.signal === "string" && typeof x.why === "string" && x.why.length > 10 && Number.isFinite(x.weight));
+      return anyHit && anyUnreadable && quiet && wellFormed;
+    })(), (() => { const o = NM.nemesisCandidates(silas, { content: C360 }); return o.unreadable.map(u => `${u.signal} (−${u.weight})`).join(" · "); })());
+
+  check("§360: ⛔ …AND THE UNREADABLE LIST COVERS EVERY ELIGIBLE FIGURE, not only the shortlisted ones. ⚠️ MY FIRST VERSION COLLECTED IT FROM THE SHORTLIST, which is the same under-reporting the design exists to prevent: a signal unreadable for the thirty-seven figures that scored nothing is exactly the signal keeping them at nothing",
+    (() => {
+      const out = NM.nemesisCandidates(silas, { content: C360 });
+      const fromShortlistOnly = new Set(out.candidates.flatMap(c => c.unreadable.map(u => u.signal)));
+      const all = new Set(out.unreadable.map(u => u.signal));
+      return all.size >= fromShortlistOnly.size && all.size >= 2 && out.eligible > out.candidates.length;
+    })());
+
+  check("§360: ⛔ …AND A SIGNAL NEVER READS PROSE TO FIND A KINSHIP. Aevi asked me to check the kin signal against the registry and the answer was worse than \u201cno tag\u201d: there IS a `kin` field, on one of Silas's 39 known people, holding `sworn` \u2014 a bond, not a kinship \u2014 on somebody with no recorded place. `silas-mother` has no kin field at all; her kinship is in her `role` prose. ⛑ So it reports the population and scores nothing, rather than finding a mother in a sentence and one day finding somebody else's",
+    (() => {
+      const out = NM.nemesisCandidates(silas, { content: C360 });
+      const kin = out.unreadable.find(u => u.signal === "kinThreatened");
+      const src = rd("engine/nemesis.js");
+      const kinFn = src.slice(src.indexOf("function signalKinThreatened"), src.indexOf("export function scoreNemesis"));
+      return !!kin && /kin field/.test(kin.why)
+        && !/\brole\b\s*\)/.test(kinFn) && !/description/.test(kinFn);   // it does not reach for prose fields
+    })());
+
+  check("§360: ⛑ …AND THE SAME FOR A SIGNAL WHOSE CONTENT HAS NOT LANDED. `seatStakes` is about seat challengers and claimants, and SNG-642/644 are still staged: no loaded arc carries one. It reports that with the count rather than scoring zero \u2014 and when she lands them, it starts firing with no change here",
+    (() => {
+      const out = NM.nemesisCandidates(silas, { content: C360 });
+      const seat = out.unreadable.find(u => u.signal === "seatStakes");
+      // and with an arc that DOES carry a claimant, the signal stops being unreadable
+      const withSeats = { ...C360, greaterArcs: [{ id: "a_seat_arc", claimants: ["cinder_vael"], seat: "building" }] };
+      const after = NM.nemesisCandidates(silas, { content: withSeats });
+      return !!seat && !after.unreadable.some(u => u.signal === "seatStakes");
+    })());
+
+  check("§360: ⛔ AEVI'S HAND-CHOSEN ANSWER IS ON THE SHORTLIST, and where the engine ranks it differently THE SCORING IS REVIEWED, NOT THE SAVE — her rule. ⚠️ Measured: Cinder Vael scores 4 of 16 against Morvane's 7, because two of the four signals Aevi counted for her cannot be earned — `seatStakes` has no content, and `wantsTheirGround` is a PROXIMITY test at 12 days while the Ceaseless sit 108 to 262 walking days from his holdings. Relax that one dial and Cinder ties Morvane and wins the tiebreak",
+    (() => {
+      const out = NM.nemesisCandidates(silas, { content: C360 });
+      const onList = out.candidates.some(c => c.id === herPick);
+      const far = { ...C360, rules: { ...C360.rules, nemesis: { ...dials, groundWithinDays: 400 } } };
+      const relaxed = NM.nemesisCandidates(silas, { content: far });
+      const her = relaxed.candidates.find(c => c.id === herPick);
+      const rival = relaxed.candidates.find(c => c.id !== herPick);
+      return !!herPick && onList && !!her && her.score > (out.candidates.find(c => c.id === herPick)?.score ?? 0)
+        && her.score >= (rival?.score ?? 0);
+    })(), (() => { const o = NM.nemesisCandidates(silas, { content: C360 }); return o.candidates.map(c => `${c.id}=${c.score}`).join(" "); })());
+
+  check("§360: ⬜ …AND A CHARACTER WITH NO GROUND AND NO COMPANY GETS NOBODY, which is the finding rather than the feature. Four of the six signals are about property or people — holdings, stewards, company, kin — so an unlanded character can only be matched by `mirror`, and that needs a villain of their own people. Erik asked that EVERY character gets a nemesis; nine of the sixteen saves here have no holdings and get no shortlist at all",
+    (() => {
+      const bare = { id: "x", name: "Nobody", origin: "valleyfolk", holdings: [], company: [], npcRegistry: {}, worldState: {} };
+      const out = NM.nemesisCandidates(bare, { content: C360 });
+      return out.eligible > 20 && out.candidates.length === 0;
+    })(), "the scoring presumes a landed character \u2014 reported to Aevi");
+
+  check("§360: ⛔ THE CHOOSING CALL IS HANDED THE SHORTLIST AND THE AUTHORED TIES, and it refuses what it did not offer. A model that names a figure who was not shortlisted, or a legend tie nobody authored, has invented an opponent \u2014 and this is the one piece of state the feature has",
+    (() => {
+      const shortlist = NM.nemesisCandidates(silas, { content: C360 }).candidates;
+      const prompt = NM.buildNemesisPrompt(silas, shortlist, { content: C360 });
+      const ties = dials.legendTie.relations;
+      const offList = NM.applyNemesisChoice({ name: "t" }, { figureId: "nobody_at_all", legendTie: ties[0] }, { content: C360, shortlist });
+      const badTie = NM.applyNemesisChoice({ name: "t" }, { figureId: shortlist[0].id, legendTie: "the legend befriends them" }, { content: C360, shortlist });
+      return shortlist.every(c => prompt.includes(c.id)) && ties.every(r => prompt.includes(r))
+        && /premise/.test(prompt) && /JSON only/.test(prompt)
+        && /not on the shortlist/.test(offList.refused) && /authored legend ties/.test(badTie.refused);
+    })());
+
+  check("§360: ⛑ …AND THE LEGEND IT BINDS IS NOT WHAT IT LOOKS LIKE. `personalArc.legend` is a SLUG (`the-finished-thing`) that resolves to nothing — not a legend record, not an npc — while `personalArc.legendNpc` beside it holds the real `{name, role}`. Aevi's §1 called it \u201cfree text bound to nothing\u201d; it is worse, because it looks like a reference. The prompt is given the legendNpc's own words",
+    (() => {
+      const arc = silas.personalArc || {};
+      const resolvesNowhere = !C360.npcs?.[arc.legend] && !(C360.legends?.roster || []).some?.(x => x?.id === arc.legend);
+      const prompt = NM.buildNemesisPrompt(silas, NM.nemesisCandidates(silas, { content: C360 }).candidates, { content: C360 });
+      return !!arc.legend && resolvesNowhere && !!arc.legendNpc?.name && prompt.includes(arc.legendNpc.name);
+    })());
+
+  check("§360: ⛔ A BOUND NEMESIS IS NOT KILLED OFFSCREEN, AT BOTH DOORS — and there are two. Aevi's measurement is why: on Silas's save the Scouring Hand died on world day 76 at the Deep Lantern's hands and he read it in the news. ⛑ `applyEpicClashOutcome` for this world's own tick and `adoptFates` for another world's, through ONE predicate — a second copy of the rule would guard one door",
+    (() => {
+      const ws = { epicStatus: {} };
+      const mine = WT360.applyEpicClashOutcome(ws, { id: "w" }, { id: "cinder_vael" }, "killed", 90, { content: C360, nemesisId: "cinder_vael" });
+      const ws2 = { epicStatus: {} };
+      const other = WT360.applyEpicClashOutcome(ws2, { id: "w" }, { id: "morvane_the_harvest" }, "killed", 90, { content: C360, nemesisId: "cinder_vael" });
+      const ws3 = { epicStatus: {} };
+      FT360.adoptFates(ws3, { cinder_vael: { status: "dead", atWorldDay: 76 } }, ["cinder_vael"], { nemesisId: "cinder_vael" });
+      const ws4 = { epicStatus: {} };
+      FT360.adoptFates(ws4, { morvane_the_harvest: { status: "dead", atWorldDay: 76 } }, ["morvane_the_harvest"], { nemesisId: "cinder_vael" });
+      return mine.finalKind === "wounded" && other.finalKind === "killed"
+        && ws3.epicStatus.cinder_vael?.status === "wounded" && ws4.epicStatus.morvane_the_harvest?.status === "dead";
+    })());
+
+  check("§360: ⛑ …AND IT IS THE CHARACTER'S TO TAKE. The protection is against the world doing it while they were elsewhere, never against the character doing it themselves or being there when it happens",
+    (() => {
+      const stop = NM.protectsOffscreen("cinder_vael", "cinder_vael", { content: C360 });
+      const byThem = NM.protectsOffscreen("cinder_vael", "cinder_vael", { content: C360, byCharacter: true });
+      const present = NM.protectsOffscreen("cinder_vael", "cinder_vael", { content: C360, presentForIt: true });
+      const someoneElse = NM.protectsOffscreen("cinder_vael", "morvane_the_harvest", { content: C360 });
+      return !!stop && byThem === null && present === null && someoneElse === null;
+    })());
+
+  check("§360: ⛔ THE GM IS TOLD, THROUGH THE DECLARED TABLE — who, why in plain words, where and in what state, the legend tie, and the pacing line `pacing.js` never had somebody for. ⚠️ AND WHETHER THE CHARACTER HAS MET THEM: the nemesis is never named to the player before the fiction names them, the same rule the powers learned by reputation follow",
+    (() => {
+      const row = GR360.GM_CONTEXT.find(r => r.key === "nemesisDetail");
+      if (!row) return false;
+      const shortlist = NM.nemesisCandidates(silas, { content: C360 }).candidates;
+      const c = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+      NM.applyNemesisChoice(c, { figureId: shortlist[0].id, legendTie: dials.legendTie.relations[0], legendTieWhy: "because" }, { content: C360, shortlist, day: 300 });
+      const block = NM.nemesisForGM(c, { content: C360 });
+      const consumed = rd("engine/gm.js").includes("${nemesisDetail}");
+      return /THE NEMESIS/.test(block) && /own clock/i.test(block) && /has NOT met them/.test(block)
+        && /legend tie/i.test(block) && consumed && row.views.includes("turn");
+    })());
+
+  check("§360: ⛑ …AND RECONCILE STAKES THE SHORTLIST FOR EVERY EXISTING CHARACTER, which is the half a reconcile step can honestly do: the choice itself is a model call, and a step runs on load with no key and no network. ⛔ A step that pretended to choose would be binding a nemesis by score alone and calling it a judgement. It is idempotent, and it never overwrites a choice already made",
+    (() => {
+      const c = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+      RC360.reconcile(c, "character", { content: C360, day: 300 });
+      const staked = c.nemesis;
+      if (!staked?.pending || !staked.shortlist?.length || staked.figureId) return false;
+      const v = c.reconcileVersion;
+      RC360.reconcile(c, "character", { content: C360, day: 301 });
+      if (c.reconcileVersion !== v || JSON.stringify(c.nemesis) !== JSON.stringify(staked)) return false;
+      // and a character already bound is left alone
+      const bound = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+      bound.nemesis = { figureId: "cinder_vael", why: ["chosen"], shortlist: [] };
+      bound.reconcileVersion = 81;
+      RC360.reconcile(bound, "character", { content: C360, day: 302 });
+      return bound.nemesis.figureId === "cinder_vael" && !bound.nemesis.pending;
+    })());
+
+  check("§360: ⛑ …AND THE NEXT NAME INHERITS THE GRUDGE, re-scored rather than trusted: the shortlist was written when the world was in another state, and a candidate may since have died or lost the ground the score was about",
+    (() => {
+      const c = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+      const shortlist = NM.nemesisCandidates(c, { content: C360 }).candidates;
+      NM.applyNemesisChoice(c, { figureId: shortlist[0].id, legendTie: dials.legendTie.relations[0] }, { content: C360, shortlist, day: 10 });
+      const first = c.nemesis.figureId;
+      const next = NM.inheritNemesis(c, { content: C360, day: 20 });
+      if (!next || next.figureId === first || next.inheritedFrom !== first) return false;
+      // and a dead heir is skipped
+      const d = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+      d.worldState = { ...(d.worldState || {}), epicStatus: { ...(d.worldState?.epicStatus || {}), [next.figureId]: { status: "dead" } } };
+      NM.applyNemesisChoice(d, { figureId: shortlist[0].id, legendTie: dials.legendTie.relations[0] }, { content: C360, shortlist, day: 10 });
+      const after = NM.inheritNemesis(d, { content: C360, day: 20 });
+      return !after || after.figureId !== next.figureId;
+    })());
 }
 
 /* ══════════ REPORT ══════════ */

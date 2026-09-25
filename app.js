@@ -72,7 +72,8 @@ import { roomOf, roomRefusal, promotionOffer, promoteHolding, trainingAt, mounts
 import { featureCost, allFeatures, refreshImprovement, canBeAskedToWork, holdingFactsLine, answerFeatureOffer, holdingLedger, addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, yieldsFor, upkeepFor, appointKeeper, reclaimHolding, improveHolding, setCrew, setGarrison, holdingGround, addFeature, removeFeature, renameHolding, featureKinds, residentsOf, holdingMeaningAura, holdingFieldDelta } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
 import { buildDevReport, unknownOpsIn } from "./engine/devreport.js";   // SNG-559: the Play/Dev instrument
 import { makeField, fieldDataFrom, FIELD_KINDS, KIND_LABEL, MEMBERSHIP } from "./engine/field.js";
-import { assaultableAt, garrisonContingents, noteHoldLoss, takeHold, encounterOwnerFilter, seedPowerKnowledge, isKnownPower } from "./engine/powers.js";   // SNG-634 C5: their holds are places you can take   // CCODE-457: why the ground here reads the way it does · CCODE-472: and the layer the map draws
+import { assaultableAt, garrisonContingents, noteHoldLoss, takeHold, encounterOwnerFilter, seedPowerKnowledge, isKnownPower } from "./engine/powers.js";
+import { buildNemesisPrompt, applyNemesisChoice } from "./engine/nemesis.js";   // ⛔ SNG-648: the choosing call   // SNG-634 C5: their holds are places you can take   // CCODE-457: why the ground here reads the way it does · CCODE-472: and the layer the map draws
 import { FIRE_TESTS, diffKeys } from "./engine/firetests.js";   // SNG-560: the parts that have never been used
 import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, roleBadges, teacherOfferReady, applyPartyOps, activeCompany, formerCompany } from "./engine/company.js";
 import { unitsOf, unitLine, poolRows, atSideRows, wherePerson, canBringForward, rosterLine, levelOfPerson } from "./engine/fellowship.js";
@@ -179,7 +180,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.6.0";
+const APP_VERSION = "2.6.1";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -7605,6 +7606,9 @@ async function enterPlay() {
   // fired on CODEX OPEN only, and a player who never opens the codex never gets a reading. Once play starts, off the
   // load path, same guard, same once-per-shape key; the codex-open call stays.
   setTimeout(() => maybeSummariseTopics(), 1500);
+  // ⛔ SNG-648 — AND THE NEMESIS IS CHOSEN HERE, off the load path, for the same reason the summariser is: it is a
+  // model call and the play loop must not wait on it. Reconcile staked the shortlist; this judges it once.
+  setTimeout(() => maybeChooseNemesis(), 2500);
   pruneEmptyGalleryTiles(character); // SNG-136: drop any failed-gen blank tiles
   ensureBondPortraits(character);    // SNG-136: retro backfill — an already-devoted bond (Pell) gets its portrait once
   if (character.sharedSceneId && syncEnabled()) {
@@ -17795,6 +17799,34 @@ async function renderLibrary(catIdx = 0, entryId = null) {
 // log again with better margins." ⚠️ Measured before this: four subjects sat at the 24-fact ceiling and
 // accepted nothing; summarising retires their oldest facts into the archive and they accept again.
 let _summarisedKey = null, _summarising = false;
+/** ⛔ SNG-648 §2 — THE CHOOSING CALL. The engine scored and shortlisted; this asks the one thing a score cannot,
+ *  and binds the personal arc's legend to the answer. ⛑ ONCE PER CHARACTER, and never over an existing choice:
+ *  `applyNemesisChoice` refuses a figure that was not on the shortlist and a legend tie that is not authored, so a
+ *  model that invents either has invented an opponent and is told no. */
+let _nemesisBusy = false;
+async function maybeChooseNemesis() {
+  if (_nemesisBusy || !getApiKey()) return;
+  const n = character?.nemesis;
+  if (!n?.pending || n.figureId || !(n.shortlist || []).length) return;
+  const shortlist = n.shortlist.map(s => ({ ...s, hits: (s.why || []).map(w => ({ signal: "recorded", weight: 0, why: w })),
+    name: CONTENT.npcs?.[s.id]?.name || s.id, ceiling: 0 }));
+  _nemesisBusy = true;
+  try {
+    const raw = await callClaude([{ role: "user", content: buildNemesisPrompt(character, shortlist, { content: CONTENT }) }],
+      { task: "nemesis-choose", maxTokens: 700 });
+    const verdict = parseLooseJSON(raw);
+    const day = readClock(character.clock).day;
+    const bound = applyNemesisChoice(character, verdict, { content: CONTENT, shortlist, day });
+    if (bound?.refused) { console.warn(`[nemesis] refused: ${bound.refused}`); return; }   // prose-cap-ok: a console diagnostic
+    if (bound?.figureId) {
+      console.log(`[nemesis] ${character.name}: ${bound.figureId} — ${bound.legendTie || "no legend tie"}`);
+      saveCharacter(character);
+    }
+  } catch (err) {
+    console.warn("[nemesis] choosing skipped:", err?.message || err);   // prose-cap-ok: a console diagnostic
+  } finally { _nemesisBusy = false; }
+}
+
 async function maybeSummariseTopics() {
   if (_summarising || !getApiKey()) return;
   const ids = topicsNeedingSummary(character, { max: 8 });

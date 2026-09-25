@@ -14,7 +14,8 @@
 // reconcile is the umbrella for everything schema/feature-shaped that came after.
 
 import { addHolding, addFeature, setGarrison } from "./holdings.js";
-import { seedPowerKnowledge } from "./powers.js";   // ⛔ CCODE-483: what a character has heard of
+import { seedPowerKnowledge } from "./powers.js";
+import { nemesisCandidates } from "./nemesis.js";   // ⛔ SNG-648 §3.5: the shortlist, which is the pure half   // ⛔ CCODE-483: what a character has heard of
 import { carriageOf } from "./carriage.js";   // ⛔ step 61: a carriage the one reader that matters declines is no carriage at all        // R49: the forge the fiction built; step 44: the features and the gate
 import { canRaiseBand, raiseBand } from "./melee.js";   // R49: the fellowship the fiction already named
 import { worldPosForGenerated } from "./worldmap.js";
@@ -2690,6 +2691,28 @@ export const CHARACTER_STEPS = [
       if (!moved) return {};
       console.log(`[reconcile] ccode-488: ${moved} reference(s) moved to the surviving High Luminary`);
       return { warnings: [`${moved} reference(s) renamed: high_luminary → the_high_luminary (one office, one person)`] };
+    }
+  },
+  {
+    version: 82, id: "who-your-nemesis-is", playerFacing: false,
+    // ⛔ SNG-648 §3.5 (ERIK: "I want you to make sure the game engine and GM know to do this") — EVERY EXISTING
+    // CHARACTER GETS THE SHORTLIST. Aevi: "a reconcile step runs the choice for every existing character."
+    // ⚠️ AND IT STOPS AT THE SHORTLIST, WHICH IS THE HALF A RECONCILE STEP CAN HONESTLY DO. The choice itself is a
+    // model call — it judges the one signal a score cannot, whether the figure and the arc answer each other — and
+    // a reconcile step runs on load, synchronously, with no key and no network. A step that pretended to choose
+    // would be binding a nemesis by score alone and calling it the judgement.
+    // ⛑ So the pure half lands here and `maybeChooseNemesis` in app.js does the rest off the play loop, the same
+    // seam `maybeSummariseTopics` uses. A character whose shortlist is staked has a nemesis the moment they play.
+    apply: (c, ctx) => {
+      const content = ctx?.content;
+      if (!content?.rules?.nemesis) return {};                 // dials not loaded — nothing to run
+      if (c?.nemesis?.figureId) return {};                     // already bound, by this or by the choosing call
+      const out = nemesisCandidates(c, { content });
+      if (!out.candidates.length) return {};
+      c.nemesis = { figureId: null, pending: true, shortlist: out.candidates.map(x => ({ id: x.id, score: x.score, why: x.hits.map(h => h.why) })),
+        unreadable: out.unreadable, considered: out.considered, since: ctx?.day ?? null, lastSurfacedDay: null };
+      console.log(`[reconcile] ccode-491: nemesis shortlist for ${c.name || c.id}: ${out.candidates.map(x => `${x.id} (${x.score})`).join(", ")}`);
+      return {};
     }
   },
   // Future steps register here — e.g. innate-talent GRANT (offers[], when talent content

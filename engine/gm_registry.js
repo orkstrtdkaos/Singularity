@@ -85,7 +85,8 @@ import { livingWorldForGM } from "./generate.js";
 import { standingForGM } from "./standing.js"; // BATCH-12 §3
 import { renderNamesDeep } from "./names.js"; // SNG-182
 import { worldCount, worldCountLabel, positionedPlace } from "./worldtime.js";
-import { holdsNearForGM } from "./sharedholds.js";   // CCODE-383: a hold nearby is known
+import { holdsNearForGM } from "./sharedholds.js";
+import { nemesisForGM } from "./nemesis.js";   // ⛔ SNG-648: who the antagonist IS — `pacing.js` never had one to point at   // CCODE-383: a hold nearby is known
 import { powersHoldingForGM } from "./powers.js";   // SNG-634 C5: who holds the ground you are standing on
 import { journeyForGM } from "./journeyplan.js";   // CCODE-387: a journey agreed and not yet walked
 import { journeyUnderwayForGM } from "./journeyroad.js";   // CCODE-390: a journey on the road, stopped part-way
@@ -650,6 +651,10 @@ export const GM_CONTEXT = [
     reachedBy: "always (empty at the 120 of 143 places nobody holds)", spec: "SNG-634", views: ["turn", "ask"],
     build: (env) => powersHoldingForGM(env.location?.id || env.character?.currentLocationId,
       { content: env.CONTENT, character: env.character }) },
+  // ⛔ SNG-648 — Erik: "I want you to make sure the game engine and GM know to do this." This is the GM half.
+  { key: "nemesisDetail", builder: "nemesis.nemesisForGM (SNG-648 §3.1)", carries: ["who this character's nemesis is and why in plain words", "where they are and in what state", "what they want", "the personal arc's legend tie", "the pacing line — the nemesis acts on its own clock", "whether the character has even MET them"],
+    reachedBy: "a character with a bound nemesis (reconcile binds every existing one)", spec: "SNG-648", views: ["turn", "ask"],
+    build: (env) => nemesisForGM(env.character, { content: env.CONTENT }) },
   { key: "holdsNearDetail", builder: "sharedholds.holdsNearForGM (CCODE-383)", carries: ["another traveler's holding within two walking days", "what it is and who runs it", "its condition, what it has and who guards it"],
     reachedBy: "always (empty unless another traveler's hold stands within two walking days)", spec: "CCODE-383", views: ["turn", "ask"],
     build: (env) => holdsNearForGM(env.app?.holdsStore?.() || null, { selfId: env.character?.id || null,

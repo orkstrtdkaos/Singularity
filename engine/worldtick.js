@@ -39,7 +39,8 @@ import { walkingDays } from "./worldmap.js";   // CCODE-398: which hinge of a wo
 const KNOWN_TIERS = new Set(["mythic", "legendary", "epic", "heroic", "leader", "notable", "riffraff"]);   // SNG-269: ONE ladder — worldtick had its own copy and it drifted
 import { smartClamp } from "./namematch.js"; // SNG-076: word-boundary clamp for the away-digest/news
 import { generatedRecords } from "./generate.js";
-import { syncEnabled, fetchRepoJSON, fetchLedgerMonths, fetchLedgerAll, pushMergedFile } from "./sync.js";   // CCODE-354: no owned-file writes left here — the region file is shared
+import { syncEnabled, fetchRepoJSON, fetchLedgerMonths, fetchLedgerAll, pushMergedFile } from "./sync.js";
+import { protectsOffscreen, nemesisIdOf } from "./nemesis.js";   // ⛔ SNG-648 §3.2: a bound nemesis is not killed offscreen   // CCODE-354: no owned-file writes left here — the region file is shared
 import { travelerCard, cardChanged, mergeTravelerCard, ledgerMonthsSince, whereOf, meetKey } from "./travelers.js";   // SNG-595: a fellow traveler is a person the world has a record of
 import { stampEventChange, mergeEventStages, mergeQuestOutcomes, actorOf, questKey } from "./worldevents.js";   // CCODE-354: a crisis another traveler answered reads as answered
 import { bandDialsOf } from "./melee.js";                                    // SNG-634 C1: a raiding power bleeds on the dials a band does
@@ -1515,7 +1516,7 @@ export async function syncSharedFates({ character, content, publish = true, now 
   const joined = adoptPeople(ws, store?.people || {}, { cap });
   const ids = [...authoredIds, ...sharedPeopleOf(ws).map(f => f.id)];
   const roster = worldRoster(ws, content);
-  const adopted = adoptFates(ws, store?.fates || {}, ids, { by });
+  const adopted = adoptFates(ws, store?.fates || {}, ids, { by, nemesisId: nemesisIdOf(character) });   // ⛔ SNG-648 §3.2
   // ⛔ CCODE-385: and what is true of the people this character knows — a death written on, a new role held beside what they know
   const lived = adoptLives(character, store?.lives || {}, { ids: sharedPersonIds(content, character), by });
   // a death the world recorded is this world's landmark too — the gate that keeps deaths rare reads it
@@ -2394,11 +2395,16 @@ export function resolveEpicClash(a, b, rng = Math.random, { abilitiesByTradition
  *  player can seek the killer — §3d). ⛔ Death is a LANDMARK: gated behind a long cooldown (a `killed`
  *  candidate too soon after the last epic death is DOWNGRADED to `stopped`), so a legend never quietly
  *  vanishes. Mutates ws.epicStatus. Returns { finalKind, news:[], event|null, codex|null }. */
-export function applyEpicClashOutcome(ws, winner, loser, kind, worldDay, { deathCooldownDays = 20, locationId = null, abilityId = null, abilitiesByTradition = null, content = null } = {}) {
+export function applyEpicClashOutcome(ws, winner, loser, kind, worldDay, { deathCooldownDays = 20, locationId = null, abilityId = null, abilitiesByTradition = null, content = null, nemesisId = null } = {}) {
   ws.epicStatus = ws.epicStatus || {};
   const st = ws.epicStatus[loser.id] || { status: "active" };
   if (st.status === "dead") return { finalKind: "already_dead", news: [], event: null, codex: null };
+  // ⛔ SNG-648 §3.2 — A BOUND NEMESIS IS NOT KILLED OFFSCREEN. Aevi's measurement is why: on Silas's save the
+  // Scouring Hand died on world day 76 at the Deep Lantern's hands, and he learned it from the news. A nemesis who
+  // dies in the news is a nemesis wasted. ⛑ Wounded, never slain — the same DOWNGRADE this function already does
+  // for the death cooldown, so it is a shape this file keeps rather than a new kind of refusal.
   let finalKind = kind, event = null, codex = null;
+  if (kind === "killed" && protectsOffscreen(nemesisId, loser?.id, { content })) finalKind = "wounded";
   const news = [];
   // ⛔ SNG-431 §3 — ALL FOUR PATHS, NOT ONE. Aevi: *"The death path is correct and quotes SNG-400 §1 in its
   // comment. The `wounded`, `checked` and `stalemate` paths push BARE STRINGS — and every fight on Erik's
@@ -3149,6 +3155,12 @@ export function offscreenPopulation(character, content = {}, { worldDay = 0, rng
 }
 
 export async function advanceGeneratedOffscreen({ character, content = {}, evolveFn = aiGeneratedEvolution, now = Date.now(), rng = Math.random, model = null } = {}) {
+  // ⛔ SNG-648 §3.2 — THE BOUND NEMESIS, READ ONCE AND PASSED AT EVERY CLASH SITE BELOW.
+  // ⚠️ I WRAPPED `applyEpicClashOutcome` FIRST, TO AVOID TOUCHING FOUR ARGUMENT LISTS, AND TWO GATES CAUGHT IT:
+  // smoke 400 §1 and 433 count the CLASH SITES by that function's name, and a wrapper made them read zero. A
+  // convenience that hides call sites from the audit whose whole job is call sites is a bad trade, so the option
+  // is passed at each one and the sites stay visible to the tools that count them.
+  const _nemesisId = nemesisIdOf(character);
   if (!character) return [];
   if (!character.worldState) character.worldState = initWorldState(1);
   const ws = character.worldState;
@@ -3581,7 +3593,7 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
             if (rng() > severity) continue;
             const clash = resolveEpicClash(wf, e.f, rng, { abilitiesByTradition });
             const outcome = applyEpicClashOutcome(ws, wf, e.f, clash.kind, currentWorldDay,
-              { locationId: clash.locationId, abilitiesByTradition, content });
+              { locationId: clash.locationId, abilitiesByTradition, content, nemesisId: _nemesisId });
             if (outcome?.finalKind && outcome.finalKind !== "already_dead") {
               // SNG-431 §3: the casualty record carries them too — §2's unavenged debt and the battle prompt
               // both read this list, and a field that stops at the news item is unavailable to either.
@@ -3717,7 +3729,7 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
         const clash = resolveEpicClash(sender.f, mark.f, rng, { abilitiesByTradition });
         // SNG-310 — the player is never resolved here: a strike on them was planted above as a scene (SNG-598).
         const outcome = applyEpicClashOutcome(ws, sender.f, mark.f, clash.kind, currentWorldDay,
-          { locationId: clash.locationId, abilitiesByTradition, content });
+          { locationId: clash.locationId, abilitiesByTradition, content, nemesisId: _nemesisId });
         if (outcome?.finalKind && outcome.finalKind !== "already_dead") {
           const trace = strikeTraceOf(sender.f, kind);   // CCODE-366: known, or gone without a trace
           strikes.push({ arcId, kind, target: mark.f.id, sender: sender.f.id, outcome: outcome.finalKind,
@@ -3767,7 +3779,7 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
         const outcome = applyEpicClashOutcome(ws, clash.kind === "killed" || clash.kind === "wounded" ? challenger : f,
                                               clash.kind === "killed" || clash.kind === "wounded" ? f : challenger,
                                               clash.kind, currentWorldDay,
-                                              { locationId: clash.locationId, abilitiesByTradition, content });
+                                              { locationId: clash.locationId, abilitiesByTradition, content, nemesisId: _nemesisId });
         if (!outcome?.finalKind || outcome.finalKind === "already_dead") continue;
         challenges.push({ defender: f.id, defenderName: f.name, challenger: challenger.id,
           challengerName: challenger.name, outcome: outcome.finalKind, tier: tierOf(ws, f) });
@@ -4332,7 +4344,7 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
               const clash = resolveEpicClash(def, rivalDef, rng, { abilitiesByTradition: abilityIndexOf(content) });
               const winner = clash.winnerId === def.id ? def : rivalDef, loser = clash.loserId === def.id ? def : rivalDef;
               const res = applyEpicClashOutcome(ws, winner, loser, clash.kind, currentWorldDay,
-                { locationId: clash.locationId, abilitiesByTradition: abilityIndexOf(content), content });
+                { locationId: clash.locationId, abilitiesByTradition: abilityIndexOf(content), content, nemesisId: _nemesisId });
               // ⛔ SNG-431 §3 — `clashNewsItem`, NOT `{ text: line }`. Its own header warns about exactly
               // this site: wrapping an object in `{ text: … }` turns it into the string "[object Object]"
               // the instant it is stamped. It was already latent here for a DEATH (the one path that

@@ -127,7 +127,7 @@
   "maxHealth": 78,
   "health": 78,
   "maxEnergy": 156,
-  "energy": 84,
+  "energy": 76,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -13293,8 +13293,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790340690170,
-  "rev": 876,
+  "updatedAt": 1790340834785,
+  "rev": 878,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -15420,24 +15420,12 @@
       "kind": "enterprise",
       "name": "The Standing Annex",
       "locationId": "gen-the-made-gate",
-      "steward": null,
+      "steward": "halvex_coil",
       "obligation": null,
-      "condition": "holding",
+      "condition": "thriving",
       "claimedDay": 3,
       "lastMovedWorldCount": 2100,
       "history": [
-        {
-          "at": 1846,
-          "from": "thriving",
-          "to": "thriving",
-          "note": "built a watchtower (the fiction)"
-        },
-        {
-          "at": 1846,
-          "from": "thriving",
-          "to": "thriving",
-          "note": "built a shrine (the fiction)"
-        },
         {
           "at": null,
           "from": "thriving",
@@ -15492,6 +15480,18 @@
           "from": "thriving",
           "to": "holding",
           "note": null
+        },
+        {
+          "at": 2100,
+          "from": "holding",
+          "to": "holding",
+          "note": "Halvex Coil appointed keeper"
+        },
+        {
+          "at": 2100,
+          "from": "holding",
+          "to": "thriving",
+          "note": "improved with Better Story"
         }
       ],
       "carriage": {
@@ -15515,6 +15515,12 @@
           "expiresDay": 88,
           "refreshCost": 8,
           "warned": true
+        },
+        {
+          "abilityId": "better_story",
+          "name": "Better Story",
+          "day": 87,
+          "energy": 8
         }
       ],
       "imageSeedKey": "the_standing_annex#r1",
@@ -15983,6 +15989,14 @@
     {
       "text": "Halvex Coil keeps The Standing Annex now; Vessin Tallow-bark is released from it.",
       "announced": true
+    },
+    {
+      "text": "Halvex Coil keeps The Standing Annex now.",
+      "announced": false
+    },
+    {
+      "text": "You put Better Story to The Standing Annex — it comes up to thriving.",
+      "announced": false
     }
   ],
   "figureImages": {

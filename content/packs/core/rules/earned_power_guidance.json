@@ -24,10 +24,28 @@
    "example": "Memory's four threads: Anchored Read + The Ending Through the Blade + The Shadow-Harm Strike + The Held Read."
   },
   "master": {
-   "levelRange": "30+",
+   "levelRange": "30-39",
    "craftRank": "3",
-   "reads_like": "Up to five grants, or a derived PEER item (the split - each item a full instrument). The set can be broad AND deep, but every grant still states its clamp; mastery is REACH and COHERENCE, not a blank check. maxGrants 5 (cap), effectCap near the ceiling (~13-15).",
+   "reads_like": "Up to six grants, or a derived PEER item (the split - each item a full instrument). The set can be broad AND deep, but every grant still states its clamp; mastery is REACH and COHERENCE, not a blank check. maxGrants 4-6, effectCap 12-15. At craft rank 3 both numbers reach the engine's cap in this band (6 grants, effect 15), and they stay there to level 100.",
    "example": "Memory + the Called Spear as a matched pair - two full instruments, each strong where the other is weak."
+  },
+  "grandmaster": {
+   "levelRange": "40-59",
+   "craftRank": "2-3",
+   "reads_like": "The engine's numbers are at their cap from here to 100 (maxGrants 5-6, effectCap 15). What grows past 40 is not how strong a grant is but what it may be ABOUT. A grant may name a kind of thing rather than one thing (every oath sworn in the item's hearing, not this oath), may be lasting rather than charged, and an item may carry a derived peer. Every grant still states its clamp, and the clamp gets more specific as the reach widens, never looser.",
+   "example": "'hears any oath sworn within arm's reach, and knows whether the swearer means it; cannot tell what the oath is FOR.'"
+  },
+  "paragon": {
+   "levelRange": "60-84",
+   "craftRank": "3",
+   "reads_like": "Still 6 grants and effect 15; the width is the payoff. A grant may act at the scale of a place or a company: a ward that holds a hold's gate, a read that covers a road, a strike that answers for a whole band's line. The clamp names who and what stands outside it. An item at this band is known by name in its region, and its grants are things other people plan around.",
+   "example": "'the gate of the hold it is hung on reads every crossing, day and night; it names intent, not identity, and it holds only that one gate.'"
+  },
+  "mythic": {
+   "levelRange": "85-100",
+   "craftRank": "3",
+   "reads_like": "The mythic rungs. The numbers stay capped. Within its own craft, a grant here may touch the world's structure (a sealed way, the Veil's edge, the arc a figure leans on), and it almost always carries a cost the fiction states out loud. 100 is a door, not a ceiling: the item does not grow past 100; its bearer goes through (ascends or falls). Each grant's clamp names what it will not do even now, and that line is the most important one on the sheet.",
+   "example": "'may hold a way open between the living and the near dark for as long as the bearer stands in it; costs the bearer a year of their own clock each time, and cannot be used for anyone who has asked not to be brought back.'"
   }
  },
  "howToAuthorAGrant": {

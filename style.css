@@ -2142,3 +2142,53 @@ table.ob-matrix { border-collapse: collapse; width: 100%; min-width: 640px; font
    wielded yet, it doesn't function until the requirements are met." */
 .band-waiting { opacity: .85; border-left: 2px solid var(--line-soft, #3a3a3a); padding-left: 8px; }
 .band-waiting strong { opacity: 1; }
+
+/* ═════ SNG-651 · the Holdings screen by job: a ground strip, cards that only read, a place page with tabs ═════ */
+.gs-strip { border: 1px solid var(--line-soft, #2e2e2e); border-radius: 6px; padding: 8px 10px; margin-bottom: 10px; }
+.gs-line { display: flex; gap: 14px; align-items: baseline; flex-wrap: wrap; }
+.gs-n strong, .gs-net strong { font-variant-numeric: tabular-nums; }
+.gs-net { font-variant-numeric: tabular-nums; font-weight: 600; }
+.gs-net.good { color: var(--good, #79c08a); }
+.gs-net.bad  { color: var(--bad, #d98b8b); }
+.gs-alerts { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
+.gs-alert { font-size: 11.5px; padding: 2px 7px; }
+.gs-alert.warn { border-color: var(--warn, #e0b25a); }
+.gs-alert.bad  { border-color: var(--bad, #d98b8b); }
+
+/* the card: one row high on a phone, and nothing on it changes the place */
+.hold-card { display: flex; gap: 10px; align-items: center; padding: 8px; margin: 6px 0;
+  border: 1px solid var(--line-soft, #2e2e2e); border-radius: 6px; cursor: pointer; }
+.hold-card:hover, .hold-card:focus-visible { border-color: var(--line, rgba(255,255,255,0.28)); }
+.hold-card-art { width: 56px; height: 56px; object-fit: cover; border-radius: 4px; flex: 0 0 auto; }
+.hold-card-noart { background: var(--line-soft, #2e2e2e); }
+.hold-card-body { flex: 1 1 auto; min-width: 0; }
+.hold-card-top { display: flex; gap: 4px; align-items: baseline; flex-wrap: wrap; }
+.hold-card-facts { font-size: 11.5px; opacity: .62; }
+.hold-card-nums { display: flex; gap: 12px; flex-wrap: wrap; font-size: 12.5px; margin-top: 2px;
+  font-variant-numeric: tabular-nums; }
+.hold-card-nums .good { color: var(--good, #79c08a); }
+.hold-card-nums .bad  { color: var(--bad, #d98b8b); }
+.hold-card-alert { font-size: 11.5px; margin-top: 3px; }
+.hold-card-alert.warn { color: var(--warn, #e0b25a); }
+.hold-card-alert.bad  { color: var(--bad, #d98b8b); }
+.hold-card-open { flex: 0 0 auto; align-self: center; }
+
+/* the place page */
+.pp-tabs { display: flex; gap: 2px; flex-wrap: wrap; margin: 8px 0 6px;
+  border-bottom: 1px solid var(--line-soft, #2e2e2e); }
+.pp-tab { background: none; border: 0; border-bottom: 2px solid transparent; color: inherit;
+  padding: 5px 9px; font-size: 12.5px; cursor: pointer; opacity: .62; }
+.pp-tab:hover { opacity: .85; }
+.pp-tab.on { opacity: 1; border-bottom-color: var(--accent, #c8a24a); }
+.pp-pane { padding-top: 4px; }
+.pp-net { font-variant-numeric: tabular-nums; font-weight: 600; }
+.pp-net.good { color: var(--good, #79c08a); }
+.pp-net.bad  { color: var(--bad, #d98b8b); }
+/* an action that needs you standing there is greyed AND SAID, never hidden (SNG-651 §2.3) */
+.pp-elsewhere { opacity: .5; }
+.pp-elsewhere button, .pp-elsewhere select, .pp-elsewhere input { pointer-events: none; }
+.pp-must { display: block; margin-top: 2px; }
+.pp-hist { display: flex; flex-direction: column; gap: 3px; }
+.pp-hist-row { display: flex; gap: 8px; align-items: baseline; font-size: 12.5px; }
+.pp-when { min-width: 54px; flex: 0 0 auto; font-variant-numeric: tabular-nums; }
+@media (max-width: 480px) { .hold-card-art { width: 44px; height: 44px; } .pp-tab { padding: 5px 7px; font-size: 12px; } }

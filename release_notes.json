@@ -16,6 +16,42 @@
   "next": [],
   "releases": [
     {
+      "version": "2.9.5",
+      "date": "2026-09-26",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "The estate line shows up",
+          "summary": "The one-line summary of all your holdings was being worked out and then not drawn.",
+          "detail": "A number computed and never shown is the same as no number."
+        }
+      ]
+    },
+    {
+      "version": "2.9.4",
+      "date": "2026-09-26",
+      "entries": [
+        {
+          "kind": "feature",
+          "title": "Your holdings, arranged by what you came to do",
+          "summary": "A strip at the top reads your whole estate in one line — how many places, what they do to your purse each pass, and what wants your attention, with every alert a link to the place it means. Each place then opens as its own page with tabs: Overview, People, Build, Store & money, Defence, Records.",
+          "detail": "The screen had grown to carry thirty-three different actions interleaved with everything you read, so neither worked. Reading and doing are now separated the way they already were inside the manage panel, and the doing is grouped by the job you opened the place to do."
+        },
+        {
+          "kind": "feature",
+          "title": "A place remembers, and now it will tell you",
+          "summary": "The Records tab shows what has happened at a holding — every change of condition, every raid, every keeper appointed — newest first.",
+          "detail": "The engine has written that history since holdings existed and no screen had ever shown it."
+        },
+        {
+          "kind": "fix",
+          "title": "The watch and the walls show even when the store is empty",
+          "summary": "What a place can hold off, who stands watch, and what a raid would risk were all hidden unless the place had goods in store.",
+          "detail": "They were drawn inside a block that only ran when the store had something in it — so a bare place, which is exactly when you most want to know what defends it, showed nothing at all."
+        }
+      ]
+    },
+    {
       "version": "2.9.3",
       "date": "2026-09-26",
       "entries": [

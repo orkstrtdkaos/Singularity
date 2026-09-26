@@ -180,7 +180,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.9.3";
+const APP_VERSION = "2.9.5";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -14814,7 +14814,11 @@ function workerName(id) {
   return character.npcRegistry?.[id]?.name || CONTENT.npcs?.[id]?.name || CONTENT.companions?.[id]?.name || String(id);
 }
 
-function renderHoldingsTab(manageId = null) {
+// ⛑ SNG-651 §2.3 — WHICH TAB YOU WERE ON survives a re-render, because every action here re-renders the
+// screen and a page that snapped back to Overview after every click would be unusable.
+let holdTab = "overview";
+function renderHoldingsTab(manageId = null, tab = null) {
+  if (tab) holdTab = tab;
   _workMemo = null; _workCands = null;   // CCODE-450: one sheet per worker per render
   bannerFrom("holds");   // CCODE-355
   const rules = CONTENT.rules;
@@ -14849,6 +14853,154 @@ function renderHoldingsTab(manageId = null) {
   // arrears, what it watches), composed in the engine so the two surfaces cannot disagree. §5.4 — whose it is, when not yours.
   const ownerOf = (h) => (h.owner && h.owner !== character.id && h.owner !== "you") ? esc(nameOf(h.owner)) + "'s · " : "";
   const factsOf = (h) => { const line = holdingFactsLine(h, { nameOf, holdings: character.holdings || [] }); return line ? `<div class="hint">${esc(line)}</div>` : ""; };
+  // ═════ SNG-651 §2.1 · THE GROUND STRIP — your whole estate in one line ═════
+  // ⛔ Aevi: "how many holdings, the NET PER PASS across all of them (coloured, since a quiet drain is what a
+  // player most needs to notice), and the alerts: unkept · full · raided · offers waiting. Each alert is a LINK
+  // to the hold it means."
+  // ⛑ §3 — NO ENGINE CHANGE: every figure is read with the same functions the cards use, so the strip and a
+  // card can never disagree about the same place.
+  const groundStrip = (() => {
+    if (!hs.length && !offers.length) return "";
+    const cfgG = holdCfgNow(), ecoG = CONTENT.rules?.economy || null;
+    let net = 0, netKnown = false;
+    const unkept = [], full = [], raided = [];
+    for (const h of hs) {
+      try {
+        const L = holdingLedger(h, { economy: ecoG, cfg: cfgG, regionId: CONTENT.locations?.[h.locationId]?.regionId || null,
+          locations: CONTENT.locations || {}, nameOf });
+        if (L?.perPass && Number.isFinite(Number(L.perPass.net))) { net += Number(L.perPass.net); netKnown = true; }
+      } catch { /* a hold whose ledger will not read is not a reason to hide the estate */ }
+      if (!h.steward) unkept.push(h);
+      // ⚠️ FULL IS THE ROOM'S OWN ANSWER, not a guess at a number: `roomOf` knows what this kind holds.
+      try { const r = roomOf(h, cfgG); if (r && r.used >= r.total && r.total > 0) full.push(h); } catch { /* no room reader, no alert */ }
+      // ⛑ RAIDED IS WHAT THE PLACE REMEMBERS — its own history line, not a flag somebody has to remember to set.
+      if ((h.history || []).slice(-4).some(e => /raid/i.test(String(e?.note || "")))) raided.push(h);
+    }
+    const jump = (h, label, cls) => `<button class="opt gs-alert${cls ? " " + cls : ""}" data-hold-open="${esc(h.id)}" title="${esc(h.name || h.id)}">${label}</button>`;
+    const alerts = [
+      ...unkept.map(h => jump(h, `${esc(h.name || h.id)} — unkept`, "warn")),
+      ...full.map(h => jump(h, `${esc(h.name || h.id)} — full`, "warn")),
+      ...raided.map(h => jump(h, `${esc(h.name || h.id)} — raided`, "bad")),
+    ];
+    const netCls = net > 0 ? "good" : net < 0 ? "bad" : "";
+    const money = (v) => { const p = priceHere(Math.abs(v), hereRegionId(), ecoG); return `${v < 0 ? "−" : v > 0 ? "+" : ""}${esc(p.label)}`; };
+    return `<div class="gs-strip">
+      <div class="gs-line">
+        <span class="gs-n"><strong>${hs.length}</strong> ${hs.length === 1 ? "holding" : "holdings"}</span>
+        ${netKnown ? `<span class="gs-net ${netCls}" title="What your whole estate does to your purse each pass — everything it sells and charges, less what it costs to keep">${money(Math.round(net * 100) / 100)} a pass</span>` : ""}
+      </div>
+      ${alerts.length ? `<div class="gs-alerts">${alerts.join("")}</div>` : `<div class="hint">nothing wants your attention</div>`}
+    </div>`;
+  })();
+
+  // ═════ SNG-651 §2 · WHAT A PLACE READS AS — composed ONCE, for the place page ═════
+  // ⛔ Aevi, §1: "Each holding card shows a facts line, a grid, where it is, who lives there, standing work,
+  // its features with levels, store, vault and armory. THEN THE POPUP SHOWS MOST OF IT AGAIN." So the reading
+  // moves here, the card keeps three numbers and one alert, and the place page is where a place is read.
+  // ⚠️ AND THE WHOLE BLOCK USED TO SIT BEHIND `storeTotal(h) > 0`. A hold with an empty store showed no watch,
+  // no raid risk and no Attack & Defense — the three things you most want to know about a bare place. Each
+  // block decides for itself now; an empty store is not a reason to hide the wall.
+  const placeBlocks = (h) => {
+          // ⛔ `holdCfgNow()`, NOT the bare `economy.holdStore`. The features live in a DIFFERENT bag
+          // (`economy.holdFeatures`) and `holdCfgNow` is the one place that joins them; without it
+          // `featureKinds` answers `{}` and every feature stops existing to these readouts — which read, on
+          // Silas's own holds, as "nobody stands watch" at a post whose watch feature is standing.
+          const econ = CONTENT.rules?.economy, sCfg = holdCfgNow();
+          const reg = CONTENT.locations?.[h.locationId]?.regionId || null;
+          // ⛔ CCODE-508 — THE SAME PEOPLE BAG THE WORLD TICK USES. `worldtick.js` passes
+          // `{...content.npcs, ...character.npcRegistry}`; this screen passed the registry ALONE, and a person's
+          // level is DERIVED from their whole record. Measured: 32 of 132 people (24%) sheet to a different
+          // level without the authored half — Aevi 6 → 61 — so the risk shown here was not the risk the tick
+          // pays. ⚠️ Assemble the bag; never hand a reader the slice it is built from.
+          const holdPeople = { ...(CONTENT.npcs || {}), ...(character.npcRegistry || {}) };
+          const npcSheetCfg = CONTENT.rules?.npcStanding || {};
+          let ex = null, rk = null;
+          try { ex = storeExits(character, h, { cfg: sCfg, economy: econ, locations: CONTENT.locations || {}, regionId: reg }); } catch { ex = null; }
+          try { rk = raidRisk(character, h, { cfg: sCfg, economy: econ, regionId: reg,
+            dangerLevel: Number(CONTENT.locations?.[h.locationId]?.dangerLevel) || 0,
+            people: holdPeople, npcCfg: npcSheetCfg, day: absoluteWorldDay() }); } catch { rk = null; }
+          const cmp = ex && ex.rows.length > 1 ? `<div class="hs-cmp"><span class="hs-lbl">Moving the store</span>
+            <table class="hs-table"><tr><th>how</th><th>gets</th><th>when</th><th>a pass</th></tr>
+            ${ex.rows.map(r => `<tr${ex.best && r.id === ex.best.id ? ` class="hs-best"` : ""}><td>${esc(r.who)}${r.where && r.id.startsWith("caravan") || r.id.startsWith("company") ? ` <span class="hint">→ ${esc(r.where)}</span>` : ""}${r.quote ? ` <span class="hint">(a quote — no company is hired yet)</span>` : ""}</td>
+              <td>${r.net}</td><td>${r.passes <= 1 ? "now" : `${r.passes} passes`}${r.risk ? ` <span class="hint">· danger ${r.risk}</span>` : ""}</td><td><strong>${r.perPass}</strong></td></tr>`).join("")}</table>
+            ${ex.best ? `<div class="hint">Best per pass: <strong>${esc(ex.best.who)}</strong> — ${esc(ex.best.said)}</div>` : ""}
+            ${ex.why ? `<div class="hint">${esc(ex.why)}</div>` : ""}</div>` : "";
+          // ⛔ SNG-652 §7 — THE WATCH, AND WHAT IT ACTUALLY DECIDES. Aevi asked for "Raid seen: 84%".
+          // Measured: there is no watch roll — `resolveRaid` opens `if (!watchOf(...).length)`, so one body on
+          // watch means SEEN AND MET and none means it comes unseen. A percentage here would be a rule I
+          // invented, and rules are Erik's. This says the rule that exists, in the place the number would go.
+          const wDanger = Number(CONTENT.locations?.[h.locationId]?.dangerLevel) || 0;
+          const wr = (() => { try { return watchReadout(character, h, { cfg: sCfg, people: holdPeople, npcs: holdPeople, npcCfg: npcSheetCfg, day: absoluteWorldDay(), rules: CONTENT.rules }); } catch { return null; } })();
+          // ✅ SNG-655 (ERIK: "i agree with a watch vs stealth contest") — the % shown is the % `resolveRaid`
+          // rolls, from the one function, and BOTH SIDES come with it. A bare percentage is a number to take on
+          // faith; a contest the player can read is one they can change.
+          const wPeople = holdPeople;
+          const wo = (() => { try { return watchOdds(character, h, { cfg: sCfg, rules: CONTENT.rules, dangerLevel: wDanger, people: wPeople, npcs: wPeople, npcCfg: npcSheetCfg, day: absoluteWorldDay() }); } catch { return null; } })();
+          // ⛑ AND THE THEFT NUMBER BESIDE IT, which is what Aevi's §3 asked the readout to label. The same
+          // people coming quietly for one thing are harder to see than the same people coming for everything.
+          const woT = (() => { try { return watchOdds(character, h, { cfg: sCfg, rules: CONTENT.rules, dangerLevel: wDanger, people: wPeople, npcs: wPeople, npcCfg: npcSheetCfg, day: absoluteWorldDay(), theft: true }); } catch { return null; } })();
+          const watch = wr ? `<div class="hs-watch"><span class="hs-lbl">The watch</span>
+            <div class="${wr.seen ? "hs-seen" : "hs-unseen"}">${wr.seen
+              ? `◉ A raid here is <strong>seen ${wo && wo.pct ? `${wo.pct}%` : "some"} of the time</strong> — and met when it is.`
+              : `○ Nobody stands watch — a raid here comes <strong>unseen</strong> and simply takes its share.`}</div>
+            ${wr.named.length || wr.fromFeatures.length || wr.hands ? `<div class="hint">${[
+                wr.named.length ? `on watch: ${wr.named.map(n => esc(n.name)).join(", ")}` : "",
+                wr.hands ? `${wr.hands} band hand${wr.hands === 1 ? "" : "s"} posted` : "",
+                wr.fromFeatures.length ? `${wr.fromFeatures.map(f => esc(f.label)).join(", ")}` : "",
+              ].filter(Boolean).join(" · ")}</div>` : ""}
+            ${wr.defenders.length ? `<div class="hint">what they meet them with: ${wr.defenders.map(d => `${esc(d.what)}${(d.does || []).includes("MARTIAL") ? " <strong>(fights)</strong>" : ""}`).join(", ")}${wr.stone ? ` · and ${wr.stone} of stone` : ""}</div>` : wr.stone ? `<div class="hint">${wr.stone} of stone, and nobody behind it</div>` : ""}
+            ${wo && wo.pct > 0 ? `<div class="hs-odds"><strong>${wo.pct}%</strong> to see a raid coming${woT && woT.pct !== wo.pct ? ` · <strong>${woT.pct}%</strong> to see a theft` : ""}<span class="hint"> — against a same-strength party</span>${wo.clampedFrom != null ? ` <span class="hint">(from ${wo.clampedFrom}, held at the edge)</span>` : ""}
+              <span class="hint">looking, ${wo.watch}: ${wo.terms.map(x => `${esc(x.label)} ${x.value >= 0 ? "+" : ""}${x.value}`).join(" · ")}</span>
+              <span class="hint">coming, ${wo.stealth}: ${(wo.stealthTerms || []).map(x => `${esc(x.label)} +${x.value}`).join(" · ") || "—"}</span>
+              <span class="hint">${wo.nextBody ? `one more hand here: <strong>+${wo.nextBody}%</strong>` : "another hand would barely move this — they would add to the fight instead"}</span></div>` : ""}
+            <div class="hint">${esc(wr.marginal)}</div></div>` : "";
+          // ⛔ SNG-652 §8 — ATTACK & DEFENSE, the other three cards. The watch above is card 2.
+          // ⛑ EVERY NUMBER READ: `featureDoes` for what a defensive feature gives, `levelEffectOf`/`raiseQuote`
+          // for what the next level would give and what it costs, `musterCapacityOf` for what can be sent out,
+          // `powersReaching` for who holds this ground. Nothing here computes a rule a second time.
+          const ad = (() => {
+            const kindsAD = featureKinds(sCfg);
+            // 1 · DEFENSIVE FEATURES — everything that adds to what the place can hold off, with its next rung.
+            const defs = (h.features || []).map((f, i) => ({ f, i, def: featureDef(f.kind, sCfg) }))
+              .filter(x => x.def && (Number(x.def.defence) || x.def.watch));
+            const defRows = defs.map(({ f, i, def }) => {
+              const q = (() => { try { return raiseQuote(h, i, sCfg); } catch { return null; } })();
+              const does = featureDoes(f.kind, sCfg, { holding: h, feature: f, count: f.count, level: featureLevel(f) });
+              return `<div class="ad-row"><span><strong>${esc(f.name || def.label || f.kind)}</strong>${featureLevel(f) > 1 ? ` <span class="hold-lv">L${featureLevel(f)}</span>` : ""}${f.building ? ` <span class="hint">— still being built</span>` : ""}</span>
+                <span class="hint">${does.filter(x => x.key === "defence" || x.key === "watch").map(x => x.said).join(" · ") || "—"}</span>
+                ${q && q.level ? `<span class="hint">next: ${esc(String(q.effect || `level ${q.level}`))}${q.goods && Object.keys(q.goods).length ? ` · ${Object.entries(q.goods).map(([g, n]) => `${n} ${String(g).replace(/_/g, " ")}`).join(" + ")}` : ""}${q.upkeepThen != null && q.upkeepThen !== q.upkeepNow ? ` · keep ${q.upkeepNow} → ${q.upkeepThen}` : ""}${q.ok === false && q.why ? ` — <strong>${esc(q.why)}</strong>` : ""}</span>` : ""}</div>`;
+            }).join("");
+            const stone = defenceOf(h, sCfg);
+            // 3 · MUSTER — what this hold can SEND OUT, and the door into the band flow.
+            const spare = (() => { try { return musterCapacityOf(h, sCfg, { mustered: 0 }); } catch { return 0; } })();
+            // ⚠️ AEVI'S `muster` CATEGORY, not my guess at `family`. Measured on screen: filtering by
+            // family === "martial" listed a Warded Wall and a Shadow and Death Barrier as places that TRAIN
+            // people. Her catalogue says muster_yard, barracks and drill_ground, and reading it means a fourth
+            // one counts the day she authors it.
+            const trains = (h.features || []).filter(f => featureCategory(f.kind, sCfg)?.id === "muster")
+              .map(f => esc(f.name || featureDef(f.kind, sCfg)?.label || f.kind));
+            // 4 · POWERS & INFLUENCE — who holds this ground, and which way they move its danger.
+            const pw = (() => { try { return powersReaching(h.locationId, { content: CONTENT, character }); } catch { return []; } })();
+            const lift = (() => { try { return dangerLiftAt(h.locationId, { content: CONTENT, character }); } catch { return 0; } })();
+            if (!defRows && !stone && !spare && !pw.length) return "";
+            return `<div class="ad-block"><span class="hs-lbl">Attack &amp; defense</span>
+              ${defRows || stone ? `<div class="ad-card"><span class="ad-head">Defensive features</span>${defRows || `<div class="hint">nothing built that holds anyone off</div>`}
+                ${stone ? `<div class="hint">— ${stone} of stone all told, which cuts what a raid takes even when nobody sees them</div>` : ""}</div>` : ""}
+              <div class="ad-card"><span class="ad-head">Muster</span>
+                <div class="hint">${spare > 0 ? `room to raise <strong>${spare}</strong> more hand${spare === 1 ? "" : "s"} here` : "no room to raise anyone — the hands it can hold are already working"}${trains.length ? ` · trains at: ${trains.join(", ")}` : ""}</div>
+                ${spare > 0 ? `<button class="opt" data-ad-raise="${esc(h.id)}" title="Take this into the Bands tab, where a band is formed">Raise from here →</button>` : ""}</div>
+              ${pw.length || lift ? `<div class="ad-card"><span class="ad-head">Powers &amp; influence</span>
+                ${pw.length ? pw.map(p => `<div class="ad-row"><span>${esc(p.name || p.id)}</span><span class="hint">${Number(p.dangerLift) > 0 ? `makes this ground harder (+${p.dangerLift})` : Number(p.dangerLift) < 0 ? `makes this ground quieter (${p.dangerLift})` : "holds ground here"}</span></div>`).join("")
+                  : `<div class="hint">nobody standing reaches this place</div>`}
+                ${lift ? `<div class="hint">— between them they move the danger here by ${lift > 0 ? "+" : ""}${lift}</div>` : ""}</div>` : ""}</div>`;
+          })();
+          const risk = rk && rk.chance > 0 ? `<div class="hs-risk" title="${esc(rk.terms.map(x => `${x.label} ×${Math.round(x.mult * 100) / 100}`).join(" · "))}">
+            ⚠ At this stock a raid would take about <strong>${rk.wouldTake}</strong> crystal of goods — about <strong>1 raid in ${rk.everyN} passes</strong> gets through, so it costs you ~${rk.expectedLoss} a pass to stand here holding it.
+            <span class="hint">${esc(rk.terms.map(x => x.label).join(" · "))}</span></div>`
+            : rk && rk.why ? `<div class="hs-risk hint">⚠ No raid risk here — ${esc(rk.why)}.</div>` : "";
+    return { store: cmp, watch, risk, defence: ad };
+  };
+
   const holdingRows = hs.map(h => {
     const loc = h.locationId ? (CONTENT.locations?.[h.locationId]?.name || h.locationId) : null;
     const art = ensureHoldingImage(h) || h.image || null;   // §1: MINT ON READ — a hold claimed by any path gets its picture here, not only at the celebration
@@ -14952,106 +15104,6 @@ function renderHoldingsTab(manageId = null) {
               ("cost vs benefits so you can compare against selling here"), and what standing on it risks
               ("run it lean when you're exposed, and stock up when you're walled"). Both READ — `storeExits`
               and `raidRisk` — so neither can drift from what the pass actually pays. */""}
-        ${storeTotal(h) > 0 ? (() => {
-          // ⛔ `holdCfgNow()`, NOT the bare `economy.holdStore`. The features live in a DIFFERENT bag
-          // (`economy.holdFeatures`) and `holdCfgNow` is the one place that joins them; without it
-          // `featureKinds` answers `{}` and every feature stops existing to these readouts — which read, on
-          // Silas's own holds, as "nobody stands watch" at a post whose watch feature is standing.
-          const econ = CONTENT.rules?.economy, sCfg = holdCfgNow();
-          const reg = CONTENT.locations?.[h.locationId]?.regionId || null;
-          // ⛔ CCODE-508 — THE SAME PEOPLE BAG THE WORLD TICK USES. `worldtick.js` passes
-          // `{...content.npcs, ...character.npcRegistry}`; this screen passed the registry ALONE, and a person's
-          // level is DERIVED from their whole record. Measured: 32 of 132 people (24%) sheet to a different
-          // level without the authored half — Aevi 6 → 61 — so the risk shown here was not the risk the tick
-          // pays. ⚠️ Assemble the bag; never hand a reader the slice it is built from.
-          const holdPeople = { ...(CONTENT.npcs || {}), ...(character.npcRegistry || {}) };
-          const npcSheetCfg = CONTENT.rules?.npcStanding || {};
-          let ex = null, rk = null;
-          try { ex = storeExits(character, h, { cfg: sCfg, economy: econ, locations: CONTENT.locations || {}, regionId: reg }); } catch { ex = null; }
-          try { rk = raidRisk(character, h, { cfg: sCfg, economy: econ, regionId: reg,
-            dangerLevel: Number(CONTENT.locations?.[h.locationId]?.dangerLevel) || 0,
-            people: holdPeople, npcCfg: npcSheetCfg, day: absoluteWorldDay() }); } catch { rk = null; }
-          const cmp = ex && ex.rows.length > 1 ? `<div class="hs-cmp"><span class="hs-lbl">Moving the store</span>
-            <table class="hs-table"><tr><th>how</th><th>gets</th><th>when</th><th>a pass</th></tr>
-            ${ex.rows.map(r => `<tr${ex.best && r.id === ex.best.id ? ` class="hs-best"` : ""}><td>${esc(r.who)}${r.where && r.id.startsWith("caravan") || r.id.startsWith("company") ? ` <span class="hint">→ ${esc(r.where)}</span>` : ""}${r.quote ? ` <span class="hint">(a quote — no company is hired yet)</span>` : ""}</td>
-              <td>${r.net}</td><td>${r.passes <= 1 ? "now" : `${r.passes} passes`}${r.risk ? ` <span class="hint">· danger ${r.risk}</span>` : ""}</td><td><strong>${r.perPass}</strong></td></tr>`).join("")}</table>
-            ${ex.best ? `<div class="hint">Best per pass: <strong>${esc(ex.best.who)}</strong> — ${esc(ex.best.said)}</div>` : ""}
-            ${ex.why ? `<div class="hint">${esc(ex.why)}</div>` : ""}</div>` : "";
-          // ⛔ SNG-652 §7 — THE WATCH, AND WHAT IT ACTUALLY DECIDES. Aevi asked for "Raid seen: 84%".
-          // Measured: there is no watch roll — `resolveRaid` opens `if (!watchOf(...).length)`, so one body on
-          // watch means SEEN AND MET and none means it comes unseen. A percentage here would be a rule I
-          // invented, and rules are Erik's. This says the rule that exists, in the place the number would go.
-          const wDanger = Number(CONTENT.locations?.[h.locationId]?.dangerLevel) || 0;
-          const wr = (() => { try { return watchReadout(character, h, { cfg: sCfg, people: holdPeople, npcs: holdPeople, npcCfg: npcSheetCfg, day: absoluteWorldDay(), rules: CONTENT.rules }); } catch { return null; } })();
-          // ✅ SNG-655 (ERIK: "i agree with a watch vs stealth contest") — the % shown is the % `resolveRaid`
-          // rolls, from the one function, and BOTH SIDES come with it. A bare percentage is a number to take on
-          // faith; a contest the player can read is one they can change.
-          const wPeople = holdPeople;
-          const wo = (() => { try { return watchOdds(character, h, { cfg: sCfg, rules: CONTENT.rules, dangerLevel: wDanger, people: wPeople, npcs: wPeople, npcCfg: npcSheetCfg, day: absoluteWorldDay() }); } catch { return null; } })();
-          // ⛑ AND THE THEFT NUMBER BESIDE IT, which is what Aevi's §3 asked the readout to label. The same
-          // people coming quietly for one thing are harder to see than the same people coming for everything.
-          const woT = (() => { try { return watchOdds(character, h, { cfg: sCfg, rules: CONTENT.rules, dangerLevel: wDanger, people: wPeople, npcs: wPeople, npcCfg: npcSheetCfg, day: absoluteWorldDay(), theft: true }); } catch { return null; } })();
-          const watch = wr ? `<div class="hs-watch"><span class="hs-lbl">The watch</span>
-            <div class="${wr.seen ? "hs-seen" : "hs-unseen"}">${wr.seen
-              ? `◉ A raid here is <strong>seen ${wo && wo.pct ? `${wo.pct}%` : "some"} of the time</strong> — and met when it is.`
-              : `○ Nobody stands watch — a raid here comes <strong>unseen</strong> and simply takes its share.`}</div>
-            ${wr.named.length || wr.fromFeatures.length || wr.hands ? `<div class="hint">${[
-                wr.named.length ? `on watch: ${wr.named.map(n => esc(n.name)).join(", ")}` : "",
-                wr.hands ? `${wr.hands} band hand${wr.hands === 1 ? "" : "s"} posted` : "",
-                wr.fromFeatures.length ? `${wr.fromFeatures.map(f => esc(f.label)).join(", ")}` : "",
-              ].filter(Boolean).join(" · ")}</div>` : ""}
-            ${wr.defenders.length ? `<div class="hint">what they meet them with: ${wr.defenders.map(d => `${esc(d.what)}${(d.does || []).includes("MARTIAL") ? " <strong>(fights)</strong>" : ""}`).join(", ")}${wr.stone ? ` · and ${wr.stone} of stone` : ""}</div>` : wr.stone ? `<div class="hint">${wr.stone} of stone, and nobody behind it</div>` : ""}
-            ${wo && wo.pct > 0 ? `<div class="hs-odds"><strong>${wo.pct}%</strong> to see a raid coming${woT && woT.pct !== wo.pct ? ` · <strong>${woT.pct}%</strong> to see a theft` : ""}<span class="hint"> — against a same-strength party</span>${wo.clampedFrom != null ? ` <span class="hint">(from ${wo.clampedFrom}, held at the edge)</span>` : ""}
-              <span class="hint">looking, ${wo.watch}: ${wo.terms.map(x => `${esc(x.label)} ${x.value >= 0 ? "+" : ""}${x.value}`).join(" · ")}</span>
-              <span class="hint">coming, ${wo.stealth}: ${(wo.stealthTerms || []).map(x => `${esc(x.label)} +${x.value}`).join(" · ") || "—"}</span>
-              <span class="hint">${wo.nextBody ? `one more hand here: <strong>+${wo.nextBody}%</strong>` : "another hand would barely move this — they would add to the fight instead"}</span></div>` : ""}
-            <div class="hint">${esc(wr.marginal)}</div></div>` : "";
-          // ⛔ SNG-652 §8 — ATTACK & DEFENSE, the other three cards. The watch above is card 2.
-          // ⛑ EVERY NUMBER READ: `featureDoes` for what a defensive feature gives, `levelEffectOf`/`raiseQuote`
-          // for what the next level would give and what it costs, `musterCapacityOf` for what can be sent out,
-          // `powersReaching` for who holds this ground. Nothing here computes a rule a second time.
-          const ad = (() => {
-            const kindsAD = featureKinds(sCfg);
-            // 1 · DEFENSIVE FEATURES — everything that adds to what the place can hold off, with its next rung.
-            const defs = (h.features || []).map((f, i) => ({ f, i, def: featureDef(f.kind, sCfg) }))
-              .filter(x => x.def && (Number(x.def.defence) || x.def.watch));
-            const defRows = defs.map(({ f, i, def }) => {
-              const q = (() => { try { return raiseQuote(h, i, sCfg); } catch { return null; } })();
-              const does = featureDoes(f.kind, sCfg, { holding: h, feature: f, count: f.count, level: featureLevel(f) });
-              return `<div class="ad-row"><span><strong>${esc(f.name || def.label || f.kind)}</strong>${featureLevel(f) > 1 ? ` <span class="hold-lv">L${featureLevel(f)}</span>` : ""}${f.building ? ` <span class="hint">— still being built</span>` : ""}</span>
-                <span class="hint">${does.filter(x => x.key === "defence" || x.key === "watch").map(x => x.said).join(" · ") || "—"}</span>
-                ${q && q.level ? `<span class="hint">next: ${esc(String(q.effect || `level ${q.level}`))}${q.goods && Object.keys(q.goods).length ? ` · ${Object.entries(q.goods).map(([g, n]) => `${n} ${String(g).replace(/_/g, " ")}`).join(" + ")}` : ""}${q.upkeepThen != null && q.upkeepThen !== q.upkeepNow ? ` · keep ${q.upkeepNow} → ${q.upkeepThen}` : ""}${q.ok === false && q.why ? ` — <strong>${esc(q.why)}</strong>` : ""}</span>` : ""}</div>`;
-            }).join("");
-            const stone = defenceOf(h, sCfg);
-            // 3 · MUSTER — what this hold can SEND OUT, and the door into the band flow.
-            const spare = (() => { try { return musterCapacityOf(h, sCfg, { mustered: 0 }); } catch { return 0; } })();
-            // ⚠️ AEVI'S `muster` CATEGORY, not my guess at `family`. Measured on screen: filtering by
-            // family === "martial" listed a Warded Wall and a Shadow and Death Barrier as places that TRAIN
-            // people. Her catalogue says muster_yard, barracks and drill_ground, and reading it means a fourth
-            // one counts the day she authors it.
-            const trains = (h.features || []).filter(f => featureCategory(f.kind, sCfg)?.id === "muster")
-              .map(f => esc(f.name || featureDef(f.kind, sCfg)?.label || f.kind));
-            // 4 · POWERS & INFLUENCE — who holds this ground, and which way they move its danger.
-            const pw = (() => { try { return powersReaching(h.locationId, { content: CONTENT, character }); } catch { return []; } })();
-            const lift = (() => { try { return dangerLiftAt(h.locationId, { content: CONTENT, character }); } catch { return 0; } })();
-            if (!defRows && !stone && !spare && !pw.length) return "";
-            return `<div class="ad-block"><span class="hs-lbl">Attack &amp; defense</span>
-              ${defRows || stone ? `<div class="ad-card"><span class="ad-head">Defensive features</span>${defRows || `<div class="hint">nothing built that holds anyone off</div>`}
-                ${stone ? `<div class="hint">— ${stone} of stone all told, which cuts what a raid takes even when nobody sees them</div>` : ""}</div>` : ""}
-              <div class="ad-card"><span class="ad-head">Muster</span>
-                <div class="hint">${spare > 0 ? `room to raise <strong>${spare}</strong> more hand${spare === 1 ? "" : "s"} here` : "no room to raise anyone — the hands it can hold are already working"}${trains.length ? ` · trains at: ${trains.join(", ")}` : ""}</div>
-                ${spare > 0 ? `<button class="opt" data-ad-raise="${esc(h.id)}" title="Take this into the Bands tab, where a band is formed">Raise from here →</button>` : ""}</div>
-              ${pw.length || lift ? `<div class="ad-card"><span class="ad-head">Powers &amp; influence</span>
-                ${pw.length ? pw.map(p => `<div class="ad-row"><span>${esc(p.name || p.id)}</span><span class="hint">${Number(p.dangerLift) > 0 ? `makes this ground harder (+${p.dangerLift})` : Number(p.dangerLift) < 0 ? `makes this ground quieter (${p.dangerLift})` : "holds ground here"}</span></div>`).join("")
-                  : `<div class="hint">nobody standing reaches this place</div>`}
-                ${lift ? `<div class="hint">— between them they move the danger here by ${lift > 0 ? "+" : ""}${lift}</div>` : ""}</div>` : ""}</div>`;
-          })();
-          const risk = rk && rk.chance > 0 ? `<div class="hs-risk" title="${esc(rk.terms.map(x => `${x.label} ×${Math.round(x.mult * 100) / 100}`).join(" · "))}">
-            ⚠ At this stock a raid would take about <strong>${rk.wouldTake}</strong> crystal of goods — about <strong>1 raid in ${rk.everyN} passes</strong> gets through, so it costs you ~${rk.expectedLoss} a pass to stand here holding it.
-            <span class="hint">${esc(rk.terms.map(x => x.label).join(" · "))}</span></div>`
-            : rk && rk.why ? `<div class="hs-risk hint">⚠ No raid risk here — ${esc(rk.why)}.</div>` : "";
-          return cmp + watch + risk + ad;
-        })() : ""}
         ${(() => { const v = vaultOf(h); if (!v.length) return ""; const atHold = hereNow()?.id === h.locationId;   // ⛔ CCODE-444: what its vault keeps
           return `<div class="hint hold-has hold-vault"><span class="hold-ctl-label">vault</span>${v.map((it, i) => { const c = chargeOf(it, CONTENT.items || {}); const on = it.active !== false;
             return `<span class="hold-chip vault-chip">${esc(it.customName || it.name)}${it.qty > 1 ? ` ×${it.qty}` : ""}${c ? `<button class="vault-charge ${on ? "on" : ""}" data-vault-charge="${esc(h.id)}" data-index="${i}" aria-pressed="${on}" title="${c > 0 ? "A well: it thickens the ground" : "A sink: it thins the ground"} at this place by ${Math.abs(c)} while it is on. Tap to switch it ${on ? "off" : "on"}.">${c > 0 ? "well" : "sink"} ${on ? "on" : "off"}</button>` : ""}${atHold ? `<button class="hold-chip-x" data-vault-take="${esc(h.id)}" data-index="${i}" title="Take it back into your pack">↩</button>` : ""}</span>`; }).join("")}</div>`; })()}
@@ -15117,6 +15169,7 @@ function renderHoldingsTab(manageId = null) {
 
   chrome(`<div class="screen" style="max-width:760px">
     ${characterTabBar("holdings")}
+    ${groundStrip}
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">What stands in your name</h3>
       ${holdingRows || `<p class="hint">Nothing yet. A post or an enterprise becomes yours through play — or through work you have already delegated, below.</p>`}</div>
     ${(offers.length || (character.featureOffers || []).length) ? `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">To review</h3>${featRows}
@@ -15176,12 +15229,42 @@ function renderHoldingsTab(manageId = null) {
       const folkOpts = folk.map(id => { const k = keeps(id); const tags = (character.npcRegistry?.[id]?.assistTags || []).slice(0, 2).join(", "); return `<option value="${esc(id)}">${esc(nameOf(id))}${tags ? ` — ${esc(tags)}` : ""}${k ? ` (keeps ${esc(k)})` : ""}</option>`; }).join("");
       const head = (t) => `<div class="hint" style="font-size:10px;text-transform:uppercase;letter-spacing:.6px;margin-top:12px">${t}</div>`;
       const art = ensureHoldingImage(h) || h.image || null;   // §1: the manage screen mints too — Erik: "and for the new manage screen that pops up"
-      return `<div class="item-detail-modal" id="hold-modal"><div class="item-detail-sheet" style="max-width:520px;text-align:left">
+      // ═════ SNG-651 §2.3 · THE PLACE PAGE — tabs by job ═════
+      // ⛔ Aevi recommended tabs over one long page (§4.1): "Tabs are cleaner on a phone." Each tab holds
+      // the ACTIONS THAT BELONG TO THAT JOB, which is the whole organising idea — you came here to do
+      // something, and the screen is arranged by what that something is.
+      const B = placeBlocks(h);
+      const atHere = hereNow()?.id === h.locationId;
+      // ⚠️ §2.3's own rule: an action that needs you standing there is GREYED AND SAID, never hidden.
+      // "Today they simply vanish when you're elsewhere, and the player can't tell what's possible."
+      const hereOnly = (html) => atHere ? html : `<div class="pp-elsewhere" title="You must be at ${esc(h.name || h.id)} to do this">${html}<span class="hint pp-must">— you must be here</span></div>`;
+      const TABS = [["overview", "Overview"], ["people", "People"], ["build", "Build"], ["store", "Store &amp; money"], ["defence", "Defence"], ["records", "Records"]];
+      const tabNow = TABS.some(([k]) => k === holdTab) ? holdTab : "overview";
+      const pane = (key, html) => `<div class="pp-pane" data-pp-pane="${key}"${key === tabNow ? "" : " hidden"}>${html}</div>`;
+      return `<div class="item-detail-modal" id="hold-modal"><div class="item-detail-sheet pp-sheet" style="max-width:560px;text-align:left">
         <button class="item-modal-close" id="hold-modal-close" title="Close">\u2715</button>
         <h3 class="codex-title" style="font-size:15px;margin-bottom:2px">${esc(h.name || h.id)}</h3>
         ${art ? `<img src="${esc(art)}" loading="lazy" alt="${esc(h.name || h.id)}" style="width:100%;max-height:180px;object-fit:cover;border-radius:6px;margin:6px 0;cursor:zoom-in" data-lightbox="${esc(art)}" data-regen-kind="holding" data-regen-subject="${esc(h.id)}">` : ""}
         <div class="hint">${ownerOf(h)}${esc(h.kind || "post")} \u00b7 ${esc(h.condition || "holding")}${h.steward ? " \u00b7 kept by " + esc(nameOf(h.steward)) : " \u00b7 unkept"}</div>
         ${factsOf(h)}
+        <div class="pp-tabs" role="tablist">${TABS.map(([k, label]) => `<button class="pp-tab${k === tabNow ? " on" : ""}" data-pp-tab="${k}" role="tab" aria-selected="${k === tabNow}">${label}</button>`).join("")}</div>
+
+        ${pane("overview", `
+          ${(() => { const loc = h.locationId ? (CONTENT.locations?.[h.locationId]?.name || h.locationId) : null;
+            return loc ? `<div class="codex-f"><strong style="min-width:110px">Where</strong> <span>${esc(loc)}</span></div>` : ""; })()}
+          ${(() => { const ys = yieldsFor(h, cfgF, { density: holdingGround(h, { locations: CONTENT.locations || {}, substrate: CONTENT.substrateModel || null }) });
+            return `<div class="codex-f"><strong style="min-width:110px">What it makes</strong> <span>${ys.length ? esc(ys.map(y => `${y.units} ${String(y.goods).replace(/_/g, " ")}`).join(" + ")) + " a pass" : "nothing yet"}</span></div>`; })()}
+          ${(() => { const L = (() => { try { return holdingLedger(h, { economy: CONTENT.rules?.economy, cfg: holdCfgNow(), regionId: CONTENT.locations?.[h.locationId]?.regionId || null, locations: CONTENT.locations || {}, nameOf }); } catch { return null; } })();
+            if (!L?.perPass) return "";
+            const P2 = L.perPass, cls = P2.net > 0 ? "good" : P2.net < 0 ? "bad" : "";
+            return `<div class="codex-f"><strong style="min-width:110px">Per pass</strong> <span class="pp-net ${cls}">${P2.net > 0 ? "+" : ""}${Math.round(P2.net * 100) / 100}</span> <span class="hint">what the purse feels once its keep is paid</span></div>`; })()}
+          ${h.describedAs ? `<div class="hint" style="margin-top:6px">${esc(h.describedAs)}</div>` : ""}
+          <div class="opt-row" style="gap:6px;flex-wrap:wrap;margin-top:8px">
+            <button class="opt" data-hold-rename="${esc(h.id)}">Rename</button>
+            ${art ? `<button class="opt" data-regen-kind="holding" data-regen-subject="${esc(h.id)}" title="Draw this place again">Draw it again</button>` : ""}
+          </div>`)}
+
+        ${pane("people", `
         ${head("Who is here")}
         ${(() => { // ⛔ CCODE-431: a guard out on a job is not on this watch until they are back
           const outs = (character.jobs?.out || []).flatMap(e => (e?.detached && !e.detached.returned ? e.detached.guards || [] : [])
@@ -15194,6 +15277,9 @@ function renderHoldingsTab(manageId = null) {
         <div class="opt-row" style="gap:6px;flex-wrap:wrap;margin-top:4px">
           ${handTo.length ? `<select data-hold-to="${esc(h.id)}">${handTo.map(id => `<option value="${esc(id)}"${id === h.steward ? " selected" : ""}>${esc(nameOf(id))}</option>`).join("")}</select><button class="opt" data-hold-keeper="${esc(h.id)}" title="Appoint them keeper \u2014 the place stays yours; they run it">Make them keeper</button><button class="opt" data-hold-transfer="${esc(h.id)}" title="Hand OWNERSHIP to them">Hand it over</button>` : ""}
         </div>
+        `)}
+
+        ${pane("build", `
         ${head("What stands here")}
         ${(() => { // ⛔ CCODE-429 (SNG-628/630): the room — its rung or frame, what is taken, and when it is full both ways out, or the next rung
           const room = roomOf(h, cfgF);
@@ -15223,11 +15309,34 @@ function renderHoldingsTab(manageId = null) {
           ${[...(h.improvements || []).map(i => ({ ...i, _key: i.abilityId })), ...(h.features || []).map(f => ({ ...f, _key: f.kind }))].some(i => i && i.expiresDay != null) ? `<div class="opt-row" style="gap:6px;flex-wrap:wrap;margin-top:6px">${[...(h.improvements || []).map(i => ({ ...i, _key: i.abilityId })), ...(h.features || []).map(f => ({ ...f, _key: f.kind }))].filter(i => i && i.expiresDay != null).map(i => `<button class="opt" data-hold-refresh="${esc(h.id)}" data-craft="${esc(i._key)}" title="${esc(i.name || i._key)} ${i.lapsed ? "has gone quiet" : "lasts until day " + i.expiresDay} — refreshing costs ${i.refreshCost || i.energy || 1} energy">${i.lapsed ? "↻ Wake" : "↻ Refresh"} ${esc(i.name || i._key)} (${i.refreshCost || i.energy || 1} energy)</button>`).join("")}</div>` : ""}
         </div>
         ${crafts ? `<div class="opt-row" style="gap:6px;flex-wrap:wrap;margin-top:4px"><select data-hold-craft="${esc(h.id)}">${crafts}</select><button class="opt" data-hold-improve="${esc(h.id)}" title="Put a craft to the place">Apply a craft</button></div>` : ""}
-        ${head("The place itself")}
-        <div class="opt-row" style="gap:6px;flex-wrap:wrap;margin-top:4px">
-          <button class="opt" data-hold-rename="${esc(h.id)}">Rename</button>
-          <button class="opt" data-hold-release="${esc(h.id)}" title="Walk away \u2014 what it owes stays with you, unpaid">Give it up</button>
-        </div>
+        `)}
+
+        ${pane("store", `
+          ${B.store || `<div class="hint">There is nothing in the store to move.</div>`}
+          ${hereOnly(`<div class="opt-row" style="gap:6px;flex-wrap:wrap;margin-top:6px">
+            <button class="opt" data-hold-sell="${esc(h.id)}" title="Sell what is stored here, at this place's own prices">Sell the store</button>
+            <button class="opt" data-hold-sellpack="${esc(h.id)}" title="Sell from what you are carrying">Sell from your pack</button>
+            <button class="opt" data-hold-exchange="${esc(h.id)}" title="Change money at this place's rate">Change money</button>
+          </div>`)}`)}
+
+        ${pane("defence", `
+          ${B.watch || ""}
+          ${B.risk || ""}
+          ${B.defence || ""}
+          ${!B.watch && !B.risk && !B.defence ? `<div class="hint">Nothing here holds anyone off, and nobody stands watch.</div>` : ""}`)}
+
+        ${pane("records", `
+          ${(() => {
+            // ⛑ WHAT THE PLACE REMEMBERS — its own history, newest first. Every condition change and every
+            // event is already written here by the engine; nothing on any screen has ever shown it.
+            const hist = (h.history || []).slice(-14).reverse();
+            return hist.length
+              ? `<div class="pp-hist">${hist.map(e => `<div class="pp-hist-row"><span class="hint pp-when">${e.at != null ? `day ${Math.floor(Number(e.at) / 24)}` : ""}</span><span>${esc(String(e.note || (e.from && e.to ? `${e.from} to ${e.to}` : "")) || "-")}</span></div>`).join("")}</div>`
+              : `<div class="hint">Nothing has happened here yet that the place remembers.</div>`;
+          })()}
+          <div class="opt-row" style="gap:6px;flex-wrap:wrap;margin-top:8px">
+            <button class="opt" data-hold-release="${esc(h.id)}" title="Walk away from it. What it owes stays with you, unpaid">Give it up</button>
+          </div>`)}
       </div></div>`; })()}
     <button class="btn secondary" id="cs-back" style="margin-top:10px">Back</button>
   </div>`);
@@ -15280,6 +15389,22 @@ function renderHoldingsTab(manageId = null) {
     if (ff) { ff.value = ask; ff.focus(); }
   };
   for (const b of document.querySelectorAll("[data-hold-manage]")) b.onclick = () => renderHoldingsTab(b.dataset.holdManage);
+  // ═════ SNG-651 · THE DOORS ═════
+  // ⛔ OPEN A PLACE. The whole card is the target and so is its button — on a phone the card is one row high
+  // and a player should not have to find a 60px button on it.
+  for (const el of document.querySelectorAll("[data-hold-open]")) {
+    const go = (e) => { e.stopPropagation(); renderHoldingsTab(el.dataset.holdOpen, "overview"); };
+    el.onclick = go;
+    if (el.tagName !== "BUTTON") el.onkeydown = (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go(e); } };
+  }
+  // ⛑ AND THE TABS SWITCH WITHOUT A RE-RENDER, so the place page does not flicker and the scroll stays put.
+  // ⚠️ `holdTab` is still set, because every ACTION on a tab re-renders the screen — and a page that snapped
+  // back to Overview after each click would be unusable.
+  for (const b of document.querySelectorAll("[data-pp-tab]")) b.onclick = () => {
+    holdTab = b.dataset.ppTab;
+    for (const x of document.querySelectorAll("[data-pp-tab]")) { const on = x === b; x.classList.toggle("on", on); x.setAttribute("aria-selected", String(on)); }
+    for (const p of document.querySelectorAll("[data-pp-pane]")) p.hidden = p.dataset.ppPane !== holdTab;
+  };
   const hmClose = document.getElementById("hold-modal-close"); if (hmClose) hmClose.onclick = () => renderHoldingsTab(null);
   const hmBack = document.getElementById("hold-modal"); if (hmBack) hmBack.onclick = (e) => { if (e.target === hmBack) renderHoldingsTab(null); };
   const back = document.getElementById("cs-back"); if (back) back.onclick = () => renderPlay(character.activeScene?.lastTurn || null);

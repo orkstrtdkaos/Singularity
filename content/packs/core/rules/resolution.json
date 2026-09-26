@@ -1541,10 +1541,37 @@
    "_quietWords": "⛔ which raiders are the QUIET kind, matched against a contingent's own authored prose (`what`). Quiet ones bring their `quality` to the stealth side; everyone else brings `stealthFloor`. ⚠️ MEASURED: this fires on 2 of 29 powers today — the spec asked for a level-weighted read of people who move, deceive or hide, and `raidersFrom` returns contingents, never people, so there is nobody to read. Add a word and a power's raids get quieter; give `raidersFrom` ids and I will read their crafts instead.",
    "perHeadSeen": 0.35,
    "_perHeadSeen": "⚠️ THE ONE NUMBER HERE THAT IS CCODE'S AND NOT RULED, and it exists because the ruled shape inverts on the common case. The stealth side SUMS over heads, so a bigger party is harder to see: the median raid a power sends is 36 heads (min 7, max 104), which is stealth 18 against a watch of 1–18 — an army walking up to the gate is missed nine times in ten. This is the other half of that term: 36 people coming is also 36 chances to be spotted. ⛑ AT `stealthFloor` (0.5) THE SIZE CANCELS EXACTLY and the contest is quality against quality; AT 0 you get the ruled shape's own answer, army and all. 0.35 leaves numbers helping the raiders without making them invisible. Zero it in one edit if the ruled shape is what you meant.",
-   "watcherBase": 2,
-   "_watcherBase": "what a body standing there is worth before anything else about them. ⚠️ MEASURED on the live save: 0 of 39 people carry a `level`, so weighing watchers by level made every one of them worth 1 and Erik’s ruling unreachable. This is the floor that replaced it, and `level` still multiplies on the day people have one.",
-   "watcherSees": 4,
-   "_watcherSees": "added when a person’s OWN RECORD says they notice things — `role`, `description` or `skillsObserved` reading as PROTECT or KNOW through `contributionsOf`. It reaches 19 of 39 people on the live save and tells a warden from a filtration engineer, which is the difference Erik asked for. Raise it and who you post matters more than how many; lower it and a warm body is a warm body."
+   "tierWeight": {
+    "riffraff": 1,
+    "notable": 2,
+    "leader": 3,
+    "heroic": 4,
+    "epic": 5,
+    "legendary": 6,
+    "mythic": 7
+   },
+   "_tierWeight": "⛔ SNG-652 §2 · `hand = tierWeight(level) × fit`. What one person's hand is worth at a duty, by the rung their DERIVED level puts them on (`sheetFor` → `tierOf`, the same read the keeper's floor uses). ⚠️ A person's level is COMPUTED, not stored: 0 of 132 people across all 16 saves carry a `level` field and 132 of 132 have one, 1 to 63. Measured against the features: a heroic warden is worth about a standing Watch, a child is worth a thirtieth of one.",
+   "tierWeightDefault": 1,
+   "_tierWeightDefault": "an unplaceable rung counts as the bottom one rather than as nothing.",
+   "fitEvidenced": 1,
+   "_fitEvidenced": "§2's fit, top rung: their own record shows the duty's families — `role`, `description` or `skillsObserved` read through `contributionsOf`. It reaches 68 of 132 people for the watch duty.",
+   "fitLeaning": 0.6,
+   "_fitLeaning": "§2's middle rung: their VOCATION leans this way but nothing is evidenced. 28 of 132 people carry one of §2's eight vocations (BROKER, READER, ATTENDANT, MAKER, WALKER, EDGE, KEEPER, ENDER).",
+   "fitPlain": 0.3,
+   "_fitPlain": "§2's bottom rung, in Aevi's own words: anyone can sweep a floor.",
+   "dutyFamilies": {
+    "watch": [
+     "KNOW",
+     "PROTECT"
+    ]
+   },
+   "_dutyFamilies": "which craft families each duty reads, from §2's table. ⚠️ ONLY `watch` IS WIRED — the other nine duties in your table (production, craft, trade, defence, muster, care, meaning, transit, recruiting) have no reader yet, and authoring a row here before one exists would be a dial that does nothing. `dutyHand` takes a `duty`, so each one is a line at its own call site when we build it.",
+   "dutyVocations": {
+    "watch": [
+     "READER"
+    ]
+   },
+   "_dutyVocations": "the vocations that LEAN toward each duty, from §2's leanings list. Reader: watch, craft."
   },
   "note": "✅ ERIK 2026-09-25: \"Yes on the rolls for return from death and for watch success. Set something smart and let Aevi know how to tweak it.\" CCode set these; Aevi and Erik turn them. Every number is a percentage point added to a d100 stack, clamped between `floor` and `ceiling`."
  }

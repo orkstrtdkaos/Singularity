@@ -670,7 +670,7 @@ export function yieldFor(holding, cfg, { density = null } = {}) {
  *
  *  ⚠️ A WATCH IS WHAT DETECTS: people on the garrison, or a feature that keeps one (sentries, a tower). Stone alone does not
  *  see. Returns the receipt the news reads, or null when nothing came of it. */
-export function resolveRaid(character, holding, { cfg = null, dangerLevel = 0, rng = Math.random, day = null, people = {}, keeperFloor = null, power = null, meleeCfg = null, rules = {}} = {}) {
+export function resolveRaid(character, holding, { cfg = null, dangerLevel = 0, rng = Math.random, day = null, people = {}, npcCfg = {}, keeperFloor = null, power = null, meleeCfg = null, rules = {}} = {}) {
   // ⛔ ERIK 2026-09-12, OVER AEVI'S §4: a hull under way is RAIDABLE WHERE SHE IS — "it doesn't make sense to only update their
   // location at the very end." Her whereabouts come from the day (`carriage.voyagePosition`), the danger is the nearest place's,
   // and the crew aboard defends as a garrison does in port. The receipt says she was taken at sea so the news can read right.
@@ -699,7 +699,7 @@ export function resolveRaid(character, holding, { cfg = null, dangerLevel = 0, r
   const whose = party ? (power.name || power.id) : null;
   // ⛑ The bottom of the old rule is kept exactly — an empty wall is a flat zero, never a base chance — and
   // above it the contest decides, rolled on the same d100 every other number in this game pays.
-  const wOdds = watchOdds(character, holding, { cfg, rules, dangerLevel, people, raiders });
+  const wOdds = watchOdds(character, holding, { cfg, rules, dangerLevel, people, npcs: people, npcCfg, day, raiders });
   const sawThem = wOdds.pct > 0 && (Math.floor(rng() * 100) + 1) <= wOdds.pct;
   if (!sawThem) {
     // ⛔ nobody saw them coming. Stone still slows them; nothing stops them.
@@ -800,6 +800,49 @@ export function watchOf(holding, cfg = null) {
  * asking the contest again with one more hand rather than read off a dial — the honest marginal, computed.
  */
 
+/** ⛔ SNG-652 §2 · WHAT ONE PERSON IS WORTH AT A DUTY: `hand = tierWeight(level) × fit`.
+ *
+ *  ⚠️ A PERSON'S LEVEL IS DERIVED, NOT STORED, AND I MISSED THAT FOR AN HOUR. Measured across all 16 saves:
+ *  **0 of 132 people carry a `level` field and 132 of 132 have a level** — `sheetFor` computes it (23 distinct
+ *  values, 1 to 63) and `tierOf` places every one of them on a rung. My first cut read `Number(p.level) || 1`,
+ *  got 1 for everybody, and I "fixed" it by reading prose for a flat bonus — a second answer to a question this
+ *  engine already answers. ⛑ The prose read was not wrong, it was the WRONG HALF: it is the `fit`.
+ *
+ *  ⚠️ AND THE AUTHORED RECORD IS PART OF THE PERSON (CCODE-411, `keeperTierOf`'s own lesson): 32 of 132
+ *  people sheet to a different level once the pool is available — Aevi 6 → 61, Farren 5 → 20, four rungs of
+ *  difference — so `npcs` is threaded rather than defaulted, and a caller that forgets it gets the registry
+ *  copy's answer, which is the bug this comment exists to stop.
+ *
+ *  `fit` is §2's three rungs: **evidenced** (their own record shows the duty's families), **leaning** (their
+ *  vocation points that way — 28 of 132 carry one of §2's eight), or **plain**, because anyone can sweep a floor.
+ *
+ *  Returns `{ hand, level, tier, fit, why, does }`. Pure. */
+export function dutyHand(person, { duty = "watch", npcs = {}, npcCfg = {}, day = null, rules = {} } = {}) {
+  const w = (rules?.death || {}).watch || {};
+  const num = (v, d) => (Number.isFinite(Number(v)) ? Number(v) : d);
+  const weights = (w.tierWeight && typeof w.tierWeight === "object") ? w.tierWeight : {};
+  const fitEvidenced = num(w.fitEvidenced, 1);
+  const fitLeaning = num(w.fitLeaning, 0.6);
+  const fitPlain = num(w.fitPlain, 0.3);
+  const families = (w.dutyFamilies && typeof w.dutyFamilies === "object" ? w.dutyFamilies : {})[duty]
+    || (duty === "watch" ? ["KNOW", "PROTECT"] : []);
+  const leanings = (w.dutyVocations && typeof w.dutyVocations === "object" ? w.dutyVocations : {})[duty]
+    || (duty === "watch" ? ["READER"] : []);
+  let rec = person || null, level = 1, tier = null;
+  try { rec = personRecordFor(person, { npcs }) || person; } catch { rec = person; }
+  try { level = num(personSheetFor(rec, { day, cfg: npcCfg })?.level, 1); } catch { level = num(rec?.level, 1); }
+  try { tier = tierOfLevel(level, { cfg: npcCfg }) || rec?.tier || null; } catch { tier = rec?.tier || null; }
+  let does = [];
+  try { does = contributionsOf(rec || {}, { evidence: true }); } catch { does = []; }
+  const evidenced = families.some(f => does.includes(f));
+  const voc = String(rec?.vocation || "").toUpperCase();
+  const leaning = !evidenced && !!voc && leanings.map(String).includes(voc);
+  const fit = evidenced ? fitEvidenced : leaning ? fitLeaning : fitPlain;
+  const weight = num(weights[tier], num(w.tierWeightDefault, 1));
+  return { hand: weight * fit, level, tier, fit, does, evidenced, leaning,
+    why: evidenced ? "their own record says they do this" : leaning ? `a ${voc.toLowerCase()} leans this way` : "not their trade" };
+}
+
 /** ⛔ THE WATCH SIDE. Aevi's weights: the captain's hand at full, other named watchers at half, a band's plain
  *  hands at 0.3 × quality, and features by kind × level.
  *
@@ -812,13 +855,15 @@ export function watchOf(holding, cfg = null) {
  *  is nothing else to filter and I have not invented a flag to filter it with.
  *
  *  Returns `{ total, terms, captain, watchers, features }`. Pure. */
-export function watchStrength(character, holding, { cfg = null, rules = {}, people = {} } = {}) {
+export function watchStrength(character, holding, { cfg = null, rules = {}, people = {}, npcs = null, npcCfg = {}, day = null } = {}) {
   const w = (rules?.death || {}).watch || {};
   const num = (v, d) => (Number.isFinite(Number(v)) ? Number(v) : d);
   const captainW = num(w.captain, 1);
   const watcherW = num(w.watcher, 0.5);
-  const watcherBase = num(w.watcherBase, 2);
-  const watcherSees = num(w.watcherSees, 4);
+  // ⚠️ `npcs` FALLS BACK TO `people`, NOT TO `{}` — the world tick's `people` IS the merged bag
+  // (`{...content.npcs, ...registry}`), which is the same convention `keeperTierOf`'s callers use. Defaulting
+  // to empty would silently sheet 24% of people off their registry copy alone.
+  const pool = npcs || people || {};
   const plainHandW = num(w.plainHand, 0.3);
   const featureW = (w.features && typeof w.features === "object") ? w.features : {};
   const featureDefault = num(w.featureDefault, 4);
@@ -836,23 +881,23 @@ export function watchStrength(character, holding, { cfg = null, rules = {}, peop
   // ABSENCE no longer silently flattens the whole watch to one body each.
   const named = ids.filter(id => !isUnit(id) && !isFeature(id)).map(id => {
     const p = people?.[id] || character?.npcRegistry?.[id] || null;
-    let does = [];
-    try { does = contributionsOf(p || { id }, { evidence: true }); } catch { does = []; }
-    const sees = does.includes("PROTECT") || does.includes("KNOW");
-    const lv = Number(p?.level) > 0 ? Number(p.level) : 1;
-    return { id, name: p?.name || id, sees, does, weight: (watcherBase + (sees ? watcherSees : 0)) * lv };
+    const h = dutyHand(p || { id }, { duty: "watch", npcs: pool, npcCfg, day, rules });
+    return { id, name: p?.name || id, sees: h.evidenced, does: h.does, level: h.level, tier: h.tier,
+      fit: h.fit, why: h.why, weight: h.hand };
   }).sort((a, b) => b.weight - a.weight || String(a.id).localeCompare(String(b.id)));
   if (named.length) {
     // ⛑ "THE CAPTAIN" IS THE BEST OF THEM AT THIS, which is how a watch actually sorts itself out.
     const cap = named[0];
     const v = cap.weight * captainW;
     total += v;
-    terms.push({ label: `${cap.name} leads the watch${cap.sees ? " — and notices things" : ""}`, value: Math.round(v * 10) / 10 });
+    // ⛑ THE LABEL SAYS THE LEVEL AND THE FIT, because "why is this number what it is" is the whole point of
+    // showing terms at all — and because a rung the player can see is a rung they can change.
+    terms.push({ label: `${cap.name} leads the watch — ${cap.tier || `level ${cap.level}`}, ${cap.why}`, value: Math.round(v * 10) / 10 });
     const rest = named.slice(1);
     if (rest.length) {
       const rv = rest.reduce((a, p) => a + p.weight * watcherW, 0);
       total += rv;
-      terms.push({ label: `${rest.map(p => `${p.name}${p.sees ? "" : " (not their trade)"}`).join(", ")} watching too`, value: Math.round(rv * 10) / 10 });
+      terms.push({ label: `${rest.map(p => `${p.name} (${p.tier || `level ${p.level}`}${p.sees ? "" : ", not their trade"})`).join(", ")} watching too`, value: Math.round(rv * 10) / 10 });
     }
   }
   // ⛔ CCODE-450's hands, at their quality — a band put to guarding stands the watch as what it is.
@@ -931,7 +976,7 @@ export function stealthStrength(raiders, { rules = {}, theft = false } = {}) {
  *  it is in the note, in the po, and Aevi and Erik can zero it in one edit.
  *
  *  Returns `{ pct, terms, watch, stealth, watchers, features, nextBody }`. Pure. */
-export function watchOdds(character, holding, { cfg = null, rules = {}, dangerLevel = 0, people = {}, raiders = null, theft = false } = {}) {
+export function watchOdds(character, holding, { cfg = null, rules = {}, dangerLevel = 0, people = {}, npcs = null, npcCfg = {}, day = null, raiders = null, theft = false } = {}) {
   const w = (rules?.death || {}).watch || {};
   const num = (v, d) => (Number.isFinite(Number(v)) ? Number(v) : d);
   const floor = num(w.floor, 5), ceil = num(w.ceiling, 95);
@@ -942,7 +987,7 @@ export function watchOdds(character, holding, { cfg = null, rules = {}, dangerLe
   const dl = Math.max(0, Number(dangerLevel) || 0);
   const party = Array.isArray(raiders) && raiders.length ? raiders
     : [{ n: Math.max(1, Math.round(dl)), quality: Math.max(1, Math.round(dl / 2)), what: "raiders" }];
-  const W = watchStrength(character, holding, { cfg, rules, people });
+  const W = watchStrength(character, holding, { cfg, rules, people, npcs, npcCfg, day });
   const S = stealthStrength(party, { rules, theft });
   const many = S.heads * perHeadSeen;
   const watch = W.total + many;
@@ -957,7 +1002,12 @@ export function watchOdds(character, holding, { cfg = null, rules = {}, dangerLe
   const plainHandW = num(w.plainHand, 0.3);
   const withOne = 100 * ((watch + plainHandW) / (watch + plainHandW + stealth));
   const nextBody = Math.max(0, Math.round(Math.max(floor, Math.min(ceil, Math.round(withOne))) - clamped));
+  // ⚠️ THE ROUNDED PAIR IS FOR THE CARD; `raw` IS THE RULE. Two gates in ten minutes went red on a correct
+  // engine because I asserted a falling curve against DISPLAY values — first the whole-number `pct`, then this
+  // one-decimal `watch`, where each added hand contributes 0.15 and the rounding makes the steps alternate.
+  // ⛑ A claim about a rule has to be asked of the rule's own number, so the unrounded pair comes back too.
   return { pct: clamped, terms, watch: Math.round(watch * 10) / 10, stealth: Math.round(stealth * 10) / 10,
+    raw: { watch, stealth, seen: watch / (watch + stealth) },
     watchers: W.watchers, features: W.features, captain: W.captain, heads: S.heads, stealthTerms: S.terms,
     clampedFrom: clamped !== Math.round(raw) ? Math.round(raw) : null, nextBody };
 }
@@ -1249,7 +1299,7 @@ export function tickStore(character, holding, { cfg = null, economy = null, regi
     const rc = raidChanceFor(character, holding, { cfg, dangerLevel, people, npcCfg, day, total, fullAt });
     const keeperFloor = holding.steward ? keeperFloorFor(rc.keeperTier, cfg?.growth) : null;
     // ⛔ CCODE-504 — the rules bag rides, because the watch ROLLS now and its dials live in rules.death.watch.
-    if (rng() < rc.chance) out.raid = resolveRaid(character, holding, { cfg, dangerLevel, rng, day, people, keeperFloor, rules });
+    if (rng() < rc.chance) out.raid = resolveRaid(character, holding, { cfg, dangerLevel, rng, day, people, npcCfg, keeperFloor, rules });
   }
   return out;
 }

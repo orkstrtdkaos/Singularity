@@ -7560,6 +7560,10 @@ console.log("\n── §76g · the two rolls, and what each kept ──");
   const C6g = await lch6g();
   const rules6 = C6g.rules;
   const eco6 = rules6.economy, cfg6g = { ...eco6.holdStore, features: eco6.holdFeatures };
+  // ⚠️ THE SHEET'S OWN BAG, BY NAME. `tierOf` reads `cfg.tierFloor`, which lives in `rules.npcStanding` — and
+  // my first measurement of this passed `rules.npcSheet`, which does not exist, so every tier came back null and
+  // I nearly reported a live defect that was my own instrument. Two config bags, fifth time this month.
+  const npcCfg6g = rules6.npcStanding || {};
 
   /* ---- 1 · COMING BACK ---- */
   const dead6 = (days, extra = {}) => ({ status: "dead", deathState: { diedDay: 400 - days, bodyStatus: "intact", ...extra } });
@@ -7602,29 +7606,39 @@ console.log("\n── §76g · the two rolls, and what each kept ──");
   // existed to make ("another body is honestly worth nothing") is now made by the shape itself, and that is
   // what these assert instead. ⚠️ A retired claim left green is a gate arguing for the old rule.
   // ⛔ WHO STANDS HERE HAS TO MATTER — AND ASKED THE WAY A REAL RECORD CAN ANSWER IT.
-  // ⚠️ MY FIRST CUT OF THIS CHECK HANDED ITSELF `{ level: 30 }` and passed green while 0 of 39 records on the
-  // live save carry `level` at all — so the mechanic it was gating reached NOBODY and the gate could not say so.
-  // ⛑ A FIXTURE THAT INVENTS THE FIELD IT TESTS FOR PROVES THE ARITHMETIC AND NOTHING ELSE. So this drives the
-  // shapes the saves actually hold: a warden, and someone whose trade is not watching, with no level anywhere.
-  check("§76g: ⛔ SNG-655 — A WARDEN IS NOT THE SAME BODY AS A FILTRATION ENGINEER, read off the record they HAVE",
+  // ⚠️ TWICE WRONG BEFORE THIS. First I weighed watchers by `Number(p.level) || 1` and every person in the game
+  // came out at 1, because **0 of 132 people across all 16 saves carry a `level` field.** Then I "fixed" it by
+  // reading prose for a flat bonus — a second answer to a question this engine already answers: `sheetFor`
+  // DERIVES a level for all 132 of them (23 distinct values, 1 to 63) and `tierOf` puts every one on a rung.
+  // ⛑ SNG-652 §2's formula is `hand = tierWeight(level) × fit`. The prose read was the FIT, not the level.
+  // ⚠️ AND THE GATE COULD NOT SEE EITHER MISTAKE, because its fixture carried `level: 30` — it proved the
+  // arithmetic over a field no save has. So this drives the record shapes the saves actually hold, asserts the
+  // fixture does not invent a level, and checks the DERIVED rung is what moves the number.
+  check("§76g: ⛔ SNG-652 §2 — A WATCHER'S HAND IS `tierWeight(DERIVED level) × fit`, off the record they HAVE",
     (() => {
-      // these two are the shape of a real registry record — role + skillsObserved, and no `level` field at all
+      // the shape of a real registry record: role + skillsObserved, and no `level` anywhere
       const warden = { id: "w", name: "Siol", role: "Traveler and warden of the Pale March",
         skillsObserved: ["Moving unseen across the moorland", "Reading the weight and purpose of a structure at a glance"] };
       const engineer = { id: "e", name: "Calvar", role: "Pre-Transition filtration engineer, traveling south with the party",
         skillsObserved: ["precise verbal sequencing of valve repair under first-meeting pressure"] };
+      const hand = (p, over = {}) => H6g.dutyHand({ ...p, ...over }, { duty: "watch", npcs: {}, npcCfg: npcCfg6g, day: 100, rules: rules6 });
+      const W = hand(warden), E = hand(engineer);
+      // ① the FIT separates them, off their own prose, with no level on either record
+      const fitSplits = W.fit > E.fit && W.evidenced === true && E.evidenced === false && W.hand > E.hand;
+      // ② the RUNG multiplies it — the same warden, a rung higher, is worth more
+      const rungs = hand(warden, { level: 30 }).hand > hand(warden, { level: 3 }).hand
+        && hand(warden, { level: 30 }).tier !== hand(warden, { level: 3 }).tier;
+      // ③ a VOCATION leans without evidence (§2's middle rung) — 28 of 132 people carry one of her eight
+      const reader = hand({ id: "r", name: "R", vocation: "READER" });
+      const nobody = hand({ id: "n", name: "N" });
+      const leans = reader.fit > nobody.fit && reader.leaning === true && nobody.fit === rules6.death.watch.fitPlain;
+      // ④ and the number on the card moves with it
       const odds = (p) => H6g.watchOdds({ npcRegistry: { [p.id]: p }, bands: [] }, hold6({ garrison: [p.id] }),
-        { cfg: cfg6g, rules: rules6, dangerLevel: 3, people: { [p.id]: p } });
-      const W = odds(warden), E = odds(engineer);
-      // and a level, WHERE ONE EXISTS, still multiplies — so the dial is ready for the day people carry one
-      const levelled = { ...engineer, level: 10 };
-      const L = H6g.watchOdds({ npcRegistry: { e: levelled }, bands: [] }, hold6({ garrison: ["e"] }),
-        { cfg: cfg6g, rules: rules6, dangerLevel: 3, people: { e: levelled } });
-      return W.watch > E.watch && W.pct > E.pct
-        && W.captain && W.captain.sees === true && E.captain && E.captain.sees === false
-        && L.watch > E.watch
+        { cfg: cfg6g, rules: rules6, dangerLevel: 3, people: { [p.id]: p }, npcs: { [p.id]: p }, npcCfg: npcCfg6g, day: 100 });
+      return fitSplits && rungs && leans
+        && odds(warden).pct > odds(engineer).pct
         && !("level" in warden) && !("level" in engineer);   // ⛔ the fixture may not invent the field
-    })(), "the whole reason Erik ruled a contest: who stands here has to matter, and it has to matter to the people who EXIST");
+    })(), "the whole reason Erik ruled a contest: who stands there has to matter, and to the people who EXIST");
   check("§76g: ⛔ …and WHO IS COMING is read, not the ground's danger standing in for them",
     (() => {
       const ch = { npcRegistry: { a: { name: "A", level: 12 } }, bands: [] }, pe = { a: { name: "A", level: 12 } };
@@ -7664,8 +7678,12 @@ console.log("\n── §76g · the two rolls, and what each kept ──");
   // from the file rather than left sitting there unread.
   check("§76g: ✅ every term of both rolls is a dial in `rules.death`, with a note beside it",
     ["byDepth", "perReachOver", "perRank", "perBondRung", "heldOpen", "surge", "pledged", "perTier", "floor", "ceiling"].every(k => rules6.death.retrieval[k] != null)
-    && ["captain", "watcher", "watcherBase", "watcherSees", "plainHand", "features", "featureDefault", "stealthFloor", "theftMult", "quietWords", "perHeadSeen", "floor", "ceiling"].every(k => rules6.death.watch[k] != null)
-    && !["base", "perWatcher", "watcherCap", "perFeature", "perDanger"].some(k => rules6.death.watch[k] != null)
+    && ["captain", "watcher", "plainHand", "tierWeight", "tierWeightDefault", "fitEvidenced", "fitLeaning", "fitPlain",
+        "dutyFamilies", "dutyVocations", "features", "featureDefault", "stealthFloor", "theftMult", "quietWords",
+        "perHeadSeen", "floor", "ceiling"].every(k => rules6.death.watch[k] != null)
+    // ✅ the additive stack's dials, AND the two stand-ins I invented for a level the engine derives, are all gone
+    && !["base", "perWatcher", "watcherCap", "perFeature", "perDanger", "watcherBase", "watcherSees"].some(k => rules6.death.watch[k] != null)
+    && Object.keys(rules6.death.watch.tierWeight || {}).length === 7
     && typeof rules6.death.note === "string",
     "a roll whose numbers live in code is a roll only I can balance");
 
@@ -7736,19 +7754,27 @@ console.log("\n── §76g · the two rolls, and what each kept ──");
     })(), "straining past your craft was paying `perReachOver` for the rung the strain had just bought");
 
   // ⛔ 4 · A WATCHER NEVER LOWERS `seen`, AND EACH ADDS LESS THAN THE LAST — which is what replaces the cap.
+  // ⚠️ AND ASKED OF THE RULE, NOT OF A DISPLAY VALUE — WHICH I GOT WRONG TWICE IN TEN MINUTES. First I
+  // compared successive whole-number `pct` values (+3 +2 +3 +2 +1 +2 +2 — rounding a falling curve to integers
+  // makes the steps bounce); then I compared `watch`/`stealth`, which are rounded to ONE DECIMAL for the card
+  // while each added hand contributes 0.15. Both times the engine was right and the gate was measuring the
+  // rounding. ⛑ `raw` exists for exactly this: a claim about a rule is asked of the rule's own number, and
+  // `pct` is only asked the question rounding cannot distort — that it never goes DOWN.
   check("§76g: ⛔ SNG-655 §3.4 — adding a watcher never lowers `seen`, and each one adds less than the last",
     (() => {
-      const pcts = [], margins = [];
+      const pcts = [], seen = [];
       for (let k = 1; k <= 8; k++) {
         const ids = Array.from({ length: k }, (_, i) => `w${i}`);
-        const pe = {}; ids.forEach(id => { pe[id] = { name: id, level: 4 }; });
-        pcts.push(H6g.watchOdds({ npcRegistry: pe, bands: [] }, hold6({ garrison: ids }),
-          { cfg: cfg6g, rules: rules6, dangerLevel: 3, people: pe }).pct);
+        const pe = {}; ids.forEach(id => { pe[id] = { id, name: id }; });
+        const o = H6g.watchOdds({ npcRegistry: pe, bands: [] }, hold6({ garrison: ids }),
+          { cfg: cfg6g, rules: rules6, dangerLevel: 3, people: pe, npcs: pe, npcCfg: npcCfg6g, day: 100 });
+        pcts.push(o.pct);
+        seen.push(o.raw.seen);   // ⛔ the contest's OWN number — `watch`/`stealth` are rounded for the card
       }
-      for (let i = 1; i < pcts.length; i++) margins.push(pcts[i] - pcts[i - 1]);
-      return pcts.every((p, i) => i === 0 || p >= pcts[i - 1])            // never lower
-        && margins.every((m, i) => i === 0 || m <= margins[i - 1])        // each adds less
-        && margins[0] > 0;                                               // and the first one counts
+      const margins = seen.slice(1).map((s, i) => s - seen[i]);
+      return pcts.every((p, i) => i === 0 || p >= pcts[i - 1])              // never lower
+        && margins.every((m, i) => i === 0 || m <= margins[i - 1] + 1e-12)  // each adds less
+        && margins[0] > 0;                                                 // and the first one counts
     })(), "no cap is needed in a ratio: it falls off by itself, and `nextBody` measures it rather than reading a dial");
 }
 
@@ -7794,7 +7820,12 @@ console.log("\n── §76f · who stands watch, and what they bring ──");
   // body") and the additive call shape. The contest needs BOTH SIDES on the card and the people to weigh the
   // watchers by, so the claim is the same and the terms of it moved: the number is still the engine's own.
   check("§76f: …and the screen shows the number the RAID rolls, from the one function, with BOTH sides of it",
-    /watchOdds\(character, h, \{ cfg: sCfg, rules: CONTENT\.rules, dangerLevel: wDanger, people: wPeople \}\)/.test(A7)
+    // ⛔ CCODE-508: and the SAME PEOPLE BAG THE TICK USES — `{...CONTENT.npcs, ...registry}`, because a
+    // person's level is derived from their whole record and 32 of 132 sheet differently without the authored
+    // half. The card was showing a risk the tick would not have paid.
+    /const holdPeople = \{ \.\.\.\(CONTENT\.npcs \|\| \{\}\), \.\.\.\(character\.npcRegistry \|\| \{\}\) \};/.test(A7)
+    && /watchOdds\(character, h, \{ cfg: sCfg, rules: CONTENT\.rules, dangerLevel: wDanger, people: wPeople, npcs: wPeople, npcCfg: npcSheetCfg, day: absoluteWorldDay\(\) \}\)/.test(A7)
+    && /people: holdPeople, npcCfg: npcSheetCfg, day: absoluteWorldDay\(\)/.test(A7)
     && /to see a raid coming/.test(A7)
     && /against a same-strength party/.test(A7)
     && /looking, \$\{wo\.watch\}/.test(A7) && /coming, \$\{wo\.stealth\}/.test(A7)

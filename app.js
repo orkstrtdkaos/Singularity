@@ -180,7 +180,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.8.1";
+const APP_VERSION = "2.8.2";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -14948,11 +14948,18 @@ function renderHoldingsTab(manageId = null) {
           // Silas's own holds, as "nobody stands watch" at a post whose watch feature is standing.
           const econ = CONTENT.rules?.economy, sCfg = holdCfgNow();
           const reg = CONTENT.locations?.[h.locationId]?.regionId || null;
+          // ⛔ CCODE-508 — THE SAME PEOPLE BAG THE WORLD TICK USES. `worldtick.js` passes
+          // `{...content.npcs, ...character.npcRegistry}`; this screen passed the registry ALONE, and a person's
+          // level is DERIVED from their whole record. Measured: 32 of 132 people (24%) sheet to a different
+          // level without the authored half — Aevi 6 → 61 — so the risk shown here was not the risk the tick
+          // pays. ⚠️ Assemble the bag; never hand a reader the slice it is built from.
+          const holdPeople = { ...(CONTENT.npcs || {}), ...(character.npcRegistry || {}) };
+          const npcSheetCfg = CONTENT.rules?.npcStanding || {};
           let ex = null, rk = null;
           try { ex = storeExits(character, h, { cfg: sCfg, economy: econ, locations: CONTENT.locations || {}, regionId: reg }); } catch { ex = null; }
           try { rk = raidRisk(character, h, { cfg: sCfg, economy: econ, regionId: reg,
             dangerLevel: Number(CONTENT.locations?.[h.locationId]?.dangerLevel) || 0,
-            people: character.npcRegistry || {}, npcCfg: CONTENT.rules?.npcStanding || {}, day: absoluteWorldDay() }); } catch { rk = null; }
+            people: holdPeople, npcCfg: npcSheetCfg, day: absoluteWorldDay() }); } catch { rk = null; }
           const cmp = ex && ex.rows.length > 1 ? `<div class="hs-cmp"><span class="hs-lbl">Moving the store</span>
             <table class="hs-table"><tr><th>how</th><th>gets</th><th>when</th><th>a pass</th></tr>
             ${ex.rows.map(r => `<tr${ex.best && r.id === ex.best.id ? ` class="hs-best"` : ""}><td>${esc(r.who)}${r.where && r.id.startsWith("caravan") || r.id.startsWith("company") ? ` <span class="hint">→ ${esc(r.where)}</span>` : ""}${r.quote ? ` <span class="hint">(a quote — no company is hired yet)</span>` : ""}</td>
@@ -14964,15 +14971,15 @@ function renderHoldingsTab(manageId = null) {
           // watch means SEEN AND MET and none means it comes unseen. A percentage here would be a rule I
           // invented, and rules are Erik's. This says the rule that exists, in the place the number would go.
           const wDanger = Number(CONTENT.locations?.[h.locationId]?.dangerLevel) || 0;
-          const wr = (() => { try { return watchReadout(character, h, { cfg: sCfg, people: character.npcRegistry || {} }); } catch { return null; } })();
+          const wr = (() => { try { return watchReadout(character, h, { cfg: sCfg, people: holdPeople }); } catch { return null; } })();
           // ✅ SNG-655 (ERIK: "i agree with a watch vs stealth contest") — the % shown is the % `resolveRaid`
           // rolls, from the one function, and BOTH SIDES come with it. A bare percentage is a number to take on
           // faith; a contest the player can read is one they can change.
-          const wPeople = character.npcRegistry || {};
-          const wo = (() => { try { return watchOdds(character, h, { cfg: sCfg, rules: CONTENT.rules, dangerLevel: wDanger, people: wPeople }); } catch { return null; } })();
+          const wPeople = holdPeople;
+          const wo = (() => { try { return watchOdds(character, h, { cfg: sCfg, rules: CONTENT.rules, dangerLevel: wDanger, people: wPeople, npcs: wPeople, npcCfg: npcSheetCfg, day: absoluteWorldDay() }); } catch { return null; } })();
           // ⛑ AND THE THEFT NUMBER BESIDE IT, which is what Aevi's §3 asked the readout to label. The same
           // people coming quietly for one thing are harder to see than the same people coming for everything.
-          const woT = (() => { try { return watchOdds(character, h, { cfg: sCfg, rules: CONTENT.rules, dangerLevel: wDanger, people: wPeople, theft: true }); } catch { return null; } })();
+          const woT = (() => { try { return watchOdds(character, h, { cfg: sCfg, rules: CONTENT.rules, dangerLevel: wDanger, people: wPeople, npcs: wPeople, npcCfg: npcSheetCfg, day: absoluteWorldDay(), theft: true }); } catch { return null; } })();
           const watch = wr ? `<div class="hs-watch"><span class="hs-lbl">The watch</span>
             <div class="${wr.seen ? "hs-seen" : "hs-unseen"}">${wr.seen
               ? `◉ A raid here is <strong>seen ${wo && wo.pct ? `${wo.pct}%` : "some"} of the time</strong> — and met when it is.`

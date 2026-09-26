@@ -755,6 +755,19 @@
       "startedAt": "2026-09-26T02:04:07.737Z",
       "startedAtDay": 5,
       "journeyDestId": "gen-the-standing-annex"
+    },
+    {
+      "id": "journey-gen-whistling-woman-post-88",
+      "kind": "journey",
+      "structured": false,
+      "status": "active",
+      "title": "Journey to Whistling Woman Post",
+      "summary": "about 36.1 days through the Crossing gate (10 energy at the gate) · 19 rations for the road — you carry 0 (19 short) · 28 nights in the open, 8 under a roof · the worst of the road: The Axis Gate (dangerous) · with Orla Yardley. Ready yourself — rations, your people, what you leave behind — and set out when you are ready.",
+      "progress": [],
+      "giver": null,
+      "startedAt": "2026-09-26T04:34:16.415Z",
+      "startedAtDay": 8,
+      "journeyDestId": "gen-whistling-woman-post"
     }
   ],
   "npcRegistry": {
@@ -14241,8 +14254,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790397144729,
-  "rev": 955,
+  "updatedAt": 1790397256416,
+  "rev": 956,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -15638,11 +15651,7 @@
       "lastWhy": "journey-planned"
     }
   },
-  "_pendingArrival": {
-    "ref": "the Whistling Woman Post",
-    "name": "Whistling Woman Post",
-    "destId": "gen-whistling-woman-post"
-  },
+  "_pendingArrival": null,
   "_opEmitted": {
     "sceneSummary": 245,
     "choices": 245,
@@ -17960,7 +17969,163 @@
     "out": [],
     "back": []
   },
-  "journey": null,
+  "journey": {
+    "id": "journey-gen-whistling-woman-post-88",
+    "destId": "gen-whistling-woman-post",
+    "destName": "Whistling Woman Post",
+    "fromId": "gen-mara-wells-store",
+    "fromName": "Mara Wells' Store",
+    "createdWorldDay": 88,
+    "options": [
+      {
+        "key": "gate-0",
+        "kind": "gate",
+        "label": "through the Crossing gate",
+        "days": 36.1,
+        "energy": 10,
+        "path": [
+          "gen-mara-wells-store",
+          "millbrook",
+          "echo_river_crossing",
+          "the_axis_gate",
+          "the_crossing",
+          "gen-waygate",
+          "gen-ashwarden-march-road",
+          "gen-stillwater-s-trouble",
+          "gen-the-made-gate",
+          "gen-whistling-woman-post"
+        ],
+        "gate": {
+          "from": "the_crossing",
+          "to": "gen-waygate",
+          "hours": 32,
+          "energy": 10
+        },
+        "worst": {
+          "id": "the_axis_gate",
+          "name": "The Axis Gate",
+          "level": 2
+        },
+        "nights": 36,
+        "roofs": 8,
+        "camps": 28,
+        "legs": [
+          {
+            "i": 0,
+            "fromId": "gen-mara-wells-store",
+            "toId": "millbrook",
+            "fromName": "Mara Wells' Store",
+            "toName": "Millbrook",
+            "days": 0,
+            "danger": 0,
+            "roof": true,
+            "gate": null
+          },
+          {
+            "i": 1,
+            "fromId": "millbrook",
+            "toId": "echo_river_crossing",
+            "fromName": "Millbrook",
+            "toName": "Echo River Crossing",
+            "days": 0.9161758422297136,
+            "danger": 0,
+            "roof": true,
+            "gate": null
+          },
+          {
+            "i": 2,
+            "fromId": "echo_river_crossing",
+            "toId": "the_axis_gate",
+            "fromName": "Echo River Crossing",
+            "toName": "The Axis Gate",
+            "days": 33.042501075096745,
+            "danger": 2,
+            "roof": true,
+            "gate": null
+          },
+          {
+            "i": 3,
+            "fromId": "the_axis_gate",
+            "toId": "the_crossing",
+            "fromName": "The Axis Gate",
+            "toName": "The Crossing",
+            "days": 0.33333333333302034,
+            "danger": 2,
+            "roof": true,
+            "gate": null
+          },
+          {
+            "i": 4,
+            "fromId": "the_crossing",
+            "toId": "gen-waygate",
+            "fromName": "The Crossing",
+            "toName": "The Pale March Waygate",
+            "days": 1.3333333333333333,
+            "danger": 2,
+            "roof": true,
+            "gate": {
+              "hours": 32,
+              "energy": 10
+            }
+          },
+          {
+            "i": 5,
+            "fromId": "gen-waygate",
+            "toId": "gen-ashwarden-march-road",
+            "fromName": "The Pale March Waygate",
+            "toName": "The Ashwarden March Road",
+            "days": 0.0844525185135906,
+            "danger": 2,
+            "roof": true,
+            "gate": null
+          },
+          {
+            "i": 6,
+            "fromId": "gen-ashwarden-march-road",
+            "toId": "gen-stillwater-s-trouble",
+            "fromName": "The Ashwarden March Road",
+            "toName": "Stillwater's Trouble",
+            "days": 0.08025436206565408,
+            "danger": 2,
+            "roof": true,
+            "gate": null
+          },
+          {
+            "i": 7,
+            "fromId": "gen-stillwater-s-trouble",
+            "toId": "gen-the-made-gate",
+            "fromName": "Stillwater's Trouble",
+            "toName": "The Made Gate",
+            "days": 0.22067221793154637,
+            "danger": 2,
+            "roof": true,
+            "gate": null
+          },
+          {
+            "i": 8,
+            "fromId": "gen-the-made-gate",
+            "toId": "gen-whistling-woman-post",
+            "fromName": "The Made Gate",
+            "toName": "Whistling Woman Post",
+            "days": 0.10965440479072047,
+            "danger": 1,
+            "roof": false,
+            "gate": null
+          }
+        ]
+      }
+    ],
+    "chosenKey": "gate-0",
+    "soleWay": true,
+    "rations": {
+      "needed": 19,
+      "carried": 0
+    },
+    "company": [
+      "Orla Yardley"
+    ],
+    "crafts": {}
+  },
   "allyOrders": {
     "traveler-woman": {
       "stance": "cautious"

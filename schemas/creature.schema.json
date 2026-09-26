@@ -10,8 +10,8 @@
     "name": { "type": "string", "description": "what it is called in play — the encounter label and the image caption. Lowercase common-noun style like the authored roster ('glimmerlings', 'warpling hare'), not a proper name: it is a kind of thing, not a person." },
     "tier": {
       "type": "string",
-      "enum": ["riffraff", "notable", "leader", "heroic", "epic"],
-      "description": "THE load-bearing field: it IS the fight's difficulty. BEAST_TIER maps it to the opponent's threat, the entry's weight, and its minDanger gate. An unknown value silently resolves to `notable`, so it must be one of these five: BEAST_TIER's own keys (random_encounters.js). SNG-658: the enum said `regional`, the rung renamed in SNG-599, which BEAST_TIER no longer knows, so a generated beast could be tiered into a silent `notable` — a creature tiered 'legendary' would fight as mid-tier without any error."
+      "enum": ["riffraff", "notable", "leader", "heroic", "epic", "legendary", "mythic"],
+      "description": "THE load-bearing field: it IS the fight's difficulty. BEAST_TIER maps it to the opponent's threat, the entry's weight, and its minDanger gate. An unknown value silently resolves to `notable`, so it must be one of these seven (one per rung, SNG-660/CCODE-528): BEAST_TIER's own keys (random_encounters.js). SNG-658: the enum said `regional`, the rung renamed in SNG-599, which BEAST_TIER no longer knows, so a generated beast could be tiered into a silent `notable` — a creature tiered 'legendary' would fight as mid-tier without any error."
     },
     "class": { "type": "string", "description": "the bestiary grouping (e.g. manifested_creature, beast, precursor_construct) — rides on the encounter entry as creatureClass." },
     "look": { "type": "string", "description": "what it looks like — read by the beast-image prompt (art.js) and folded into the encounter seed the GM narrates from. Concrete and visual; this is the only description the art has to work with." },
@@ -28,7 +28,7 @@
     "storiedBy": { "type": "string", "description": "SNG-661: whose folklore made it real when the Storm came through. \u26d1 Also decides who knows its `storyRule` from the first look \u2014 a character of that people grew up on the tale. `(every people)` / `(many peoples)` means common ground, known to all." },
     "storyRule": { "type": "string", "description": "SNG-661 \u00a73.2: the folk remedy from the tale, AND IT IS TRUE \u2014 a lit passage stops the grue, a mirror stops the basilisk, running water stops hellhounds. The GM is given it only once the character knows it (their own people's tale, or a KNOW success against the thing) and is told that it really works." },
     "unique": { "type": "boolean", "description": "one in the world (the phoenix, the kraken, the Wakeful Beast). Never offered by a random table." },
-    "affinity": { "type": "string", "description": "the pole or element the thing belongs to \u2014 display and lore." },
+    "affinity": { "type": "object", "additionalProperties": { "type": "string", "enum": ["resist", "immune", "vulnerable", "absorb"] }, "description": "damage type -> resist / immune / vulnerable / absorb (skill_battle.js reads all four); read by the clash for the creature's defences (SNG-661: every live creature carries it as an object; the string type was a mis-declaration)." },
     "hasSelf": { "type": "boolean", "description": "whether there is somebody in there \u2014 read by the class table so a craft that requires a SELF has something to be answered by (CCODE-315). \u26a0\ufe0f Undeclared until SNG-661 although 41 of the staged creatures set it: found by reading the schema against the staged file rather than against the list of what was thought to be new." }
   }
 }

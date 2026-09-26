@@ -437,12 +437,339 @@
     "At Mara Wells' Store in deep night, the band gathers road rations and learns that Millbrook's earth resists shortcuts—the land will not permit close-work passage through the town. Mara directs them northward toward Whistling Woman Post on the long road, naming Halvex Coil as keeper of the Standing Annex and offering the wisdom of trust in the slower way.",
     "The band departs Mara Wells' Store at dawn for Whistling Woman Post, planning a two-hour walk on the spinward road to the relay station, then on to the Standing Annex where Halvex Coil awaits them."
   ],
-  "currentLocationId": "gen-mara-wells-store",
-  "activeScene": null,
+  "currentLocationId": "gen-whistling-woman-post",
+  "activeScene": {
+    "locationId": "gen-whistling-woman-post",
+    "turns": [
+      {
+        "player": null,
+        "summary": "At Whistling Woman Post, a Radiant agent from the High Luminary waits—the sealed chamber beneath Millbrook did not go unnoticed, and someone in power already knows what lies at the Hub crossing.",
+        "narration": "The two hours on the long road dissolve into the rhythm of walking—Cy's lamp bobbing ahead, the spinward path winding through moorland gold with autumn's last fire. The band trails behind you in loose company: Ravel moving with the economy of someone who has walked hard roads before, Estry watching the brush for movement, Sable steady but careful, Orla pacing themselves as though time is a thing to read rather than to consume. Halvex is not here yet—he remains at the Annex, waiting.\n\nWhistling Woman Post rises from the moor like a held breath. A waystation, solid and kept: low stone walls weathered to grey, a relay station's clean lines, a shrine with no name on it. Smoke rises from the kitchen chimney. The doors are open.\n\nBut someone is waiting at the threshold. A woman in the grey coat of the Radiant Plateau, standing very still. Her eyes find you the moment you clear the final rise. She does not move toward you or away. She simply stands, and watches, and her stillness has the weight of someone who has waited for a specific person and found them.\n\nCy clicks softly and the lamp stills. Ravel's hand does not move to a weapon—it settles at her side instead, reading the moment.\n\nThe woman speaks, and her voice carries the clarity of someone trained in the Harmonic. \"You are Loki. The engineering records in the lower Annex name you. The Wardens of Cairnhold name you. And now I am to gather what you carry before it reaches the Standing Annex.\" She pauses. Her eyes move to Cy. \"By order of the High Luminary, Seraphine, Radiant of the Plateau. There is a sealed thing you pulled from beneath Millbrook. We know what it is. We know what it remembers. And we are going to ask you to give it up before someone dies trying to take it.\""
+      }
+    ],
+    "lastTurn": {
+      "narration": "The two hours on the long road dissolve into the rhythm of walking—Cy's lamp bobbing ahead, the spinward path winding through moorland gold with autumn's last fire. The band trails behind you in loose company: Ravel moving with the economy of someone who has walked hard roads before, Estry watching the brush for movement, Sable steady but careful, Orla pacing themselves as though time is a thing to read rather than to consume. Halvex is not here yet—he remains at the Annex, waiting.\n\nWhistling Woman Post rises from the moor like a held breath. A waystation, solid and kept: low stone walls weathered to grey, a relay station's clean lines, a shrine with no name on it. Smoke rises from the kitchen chimney. The doors are open.\n\nBut someone is waiting at the threshold. A woman in the grey coat of the Radiant Plateau, standing very still. Her eyes find you the moment you clear the final rise. She does not move toward you or away. She simply stands, and watches, and her stillness has the weight of someone who has waited for a specific person and found them.\n\nCy clicks softly and the lamp stills. Ravel's hand does not move to a weapon—it settles at her side instead, reading the moment.\n\nThe woman speaks, and her voice carries the clarity of someone trained in the Harmonic. \"You are Loki. The engineering records in the lower Annex name you. The Wardens of Cairnhold name you. And now I am to gather what you carry before it reaches the Standing Annex.\" She pauses. Her eyes move to Cy. \"By order of the High Luminary, Seraphine, Radiant of the Plateau. There is a sealed thing you pulled from beneath Millbrook. We know what it is. We know what it remembers. And we are going to ask you to give it up before someone dies trying to take it.\"",
+      "sceneSummary": "At Whistling Woman Post, a Radiant agent from the High Luminary waits—the sealed chamber beneath Millbrook did not go unnoticed, and someone in power already knows what lies at the Hub crossing.",
+      "choices": [
+        {
+          "label": "Ask plainly who she is and who sent her—demand the truth before you decide anything.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "falsehood_truth": 0.5,
+            "emotional_logical": 0.3
+          },
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "confront",
+            "demand"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use Appetite-Sense to read what she is refusing to admit—what hunger is driving her.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "falsehood_truth": 0.4,
+            "concrete_abstract": 0.2
+          },
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "appetite_sense",
+          "energyCost": 2,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Turn and walk into the waystation without answering—let the band move with you and let her follow or not.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {
+            "falsehood_truth": -0.2,
+            "chaos_order": -0.3
+          },
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "refuse",
+            "move"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Name what she is really asking—not for a sealed thing, but for proof that you are not what Cairnhold fears.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {
+            "falsehood_truth": 0.4,
+            "emotional_logical": 0.5
+          },
+          "difficulty": "hard",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "read",
+            "name"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        }
+      ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
+      "ledgerEvents": [
+        {
+          "what": "A Radiant agent from the High Luminary appears at Whistling Woman Post bearing knowledge of the sealed chamber and demanding its surrender—the machinery beneath the valley is no longer hidden.",
+          "tags": [
+            "revelation",
+            "power-move",
+            "nemesis-adjacent"
+          ],
+          "visibility": "witnessed",
+          "spectrumDeltas": {},
+          "impactsLocal": true
+        }
+      ],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "the-taken-from-the-city",
+          "title": "The Taken",
+          "summary": "Someone was brought from the city to the Unlit Deep, and the city is pretending it did not happen.",
+          "giver": "the elder of the Unlit Deep",
+          "note": "The band reaches Whistling Woman Post—but the High Luminary's reach extends further than expected. The sealed chamber is known in Radiant halls.",
+          "xpReward": null
+        }
+      ],
+      "standingOps": [],
+      "delegateOps": [],
+      "jobOps": [],
+      "arcOps": [],
+      "adoptSchool": null,
+      "offer": {
+        "thing": "A Radiant agent waiting with foreknowledge and a demand",
+        "from": "The High Luminary's need to control what surfaces from beneath the valley before the Wardens of Cairnhold—now blood-deep—move on it themselves"
+      },
+      "stageOps": [],
+      "scene": {
+        "setting": "Whistling Woman Post on the spinward moorland, late afternoon in mid-autumn. Stone waystation with open doors, relay station architecture, shrine visible. The moorland stretches gold and fading around it. A Radiant woman in grey stands at the threshold, utterly still.",
+        "npcsPresent": [
+          {
+            "name": "The Radiant woman",
+            "state": "Standing at the waystation threshold, watching Loki with the certainty of someone who has been waiting for this moment"
+          },
+          {
+            "name": "Ravel Ash-bearer",
+            "state": "Moving with the band, her hand steady at her side, reading the moment"
+          },
+          {
+            "name": "Estry Krell",
+            "state": "At the band's flank, watching the brush"
+          },
+          {
+            "name": "Sable",
+            "state": "Walking with the band, steady but careful"
+          },
+          {
+            "name": "Orla Yardley",
+            "state": "Pacing with the band, moving as though reading time"
+          },
+          {
+            "name": "Cy",
+            "state": "Lamp held ahead, stilled by the presence of the Radiant agent"
+          }
+        ],
+        "objects": [
+          "The waystation's open doors",
+          "Smoke rising from the kitchen chimney",
+          "The shrine with no name on it",
+          "The moorland stretching in all directions"
+        ],
+        "threads": [
+          "Who is this woman and who sent her?",
+          "What does the High Luminary know about the sealed chamber?",
+          "How far does Seraphine's reach extend into the valley?",
+          "Will the band be allowed to reach the Standing Annex?"
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "meet",
+          "npcId": "radiant-agent-whistling-woman",
+          "name": "unknown",
+          "title": "Agent of the High Luminary, Seraphine",
+          "role": "Radiant authority sent to intercept",
+          "age": 35,
+          "sex": "female",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "description": "A woman in the grey coat of the Radiant Plateau, standing with absolute stillness at the waystation threshold. Dark eyes that find their mark. Voice trained in the Harmonic—clear and carrying.",
+          "note": "Waits with foreknowledge at the threshold. Names Loki by the lower Annex records and by the Wardens of Cairnhold's own naming. Knows the sealed chamber exists. Speaks for Seraphine, the High Luminary.",
+          "learned": [
+            "The engineering records in the lower Annex name Loki",
+            "The Wardens of Cairnhold have named Loki",
+            "Someone in the Radiant hierarchy knows about the sealed chamber beneath Millbrook",
+            "The High Luminary, Seraphine, has issued a command to retrieve what Loki carries"
+          ],
+          "skillsObserved": [
+            "Trained in Harmonic voice—clear, carrying speech",
+            "Absolute stillness and patience—has waited for this moment with certainty",
+            "Knowledge of sealed things and what they contain"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "Standing at the waystation threshold, authorized agent of the High Luminary"
+        }
+      ],
+      "intentsHeard": [],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "The High Luminary, Seraphine, knows about the sealed chamber beneath Millbrook. She has sent an agent to intercept Loki at Whistling Woman Post and demand its surrender before it reaches the Standing Annex.",
+          "subjectId": null
+        },
+        {
+          "op": "add",
+          "text": "The engineering records in the lower Annex of Millbrook name Loki. These records are known to the Radiant Plateau's authority.",
+          "subjectId": null
+        }
+      ],
+      "placeUpdates": [
+        {
+          "note": "A Radiant agent waits at the threshold with foreknowledge and a demand from the High Luminary—the sealed chamber is no longer hidden.",
+          "flag": null,
+          "subPlace": null
+        }
+      ],
+      "discovery": null,
+      "codexUpdates": [
+        {
+          "topic": "seraphine-the-high-luminary",
+          "label": "Seraphine, the High Luminary",
+          "kind": "person",
+          "entityId": null,
+          "fact": "The High Luminary knows about the sealed chamber beneath Millbrook and has sent an agent to intercept Loki at Whistling Woman Post. She moves to control what surfaces from beneath the valley before the Wardens of Cairnhold take action.",
+          "links": [
+            "the-hub-crossing",
+            "millbrook",
+            "radiant-agent-whistling-woman"
+          ]
+        },
+        {
+          "topic": "the-hub-crossing",
+          "label": "The Passage Below",
+          "kind": "mystery",
+          "entityId": null,
+          "fact": "The sealed chamber is known to the Radiant Plateau's authority. Seraphine, the High Luminary, has issued orders to retrieve it before it reaches the Standing Annex.",
+          "links": [
+            "seraphine-the-high-luminary",
+            "millbrook"
+          ]
+        }
+      ],
+      "holdingOps": [],
+      "holdTrades": [],
+      "debtOps": [],
+      "exchangeOps": [],
+      "partyOps": [],
+      "generateRequest": [],
+      "encounterOps": [],
+      "projectOps": [],
+      "bandOps": [],
+      "strikeOps": [],
+      "deathOps": [],
+      "newEncounter": null,
+      "unlockPrecursor": null,
+      "unlockSubstrate": null,
+      "timeOps": {
+        "hoursPassed": 2,
+        "why": "Two hours on the long road from Millbrook to Whistling Woman Post"
+      },
+      "moveTo": {
+        "location": "whistling-woman-post",
+        "why": "The band walks the spinward road from Millbrook to the waystation"
+      },
+      "stateOps": [],
+      "itemUpdates": [],
+      "deriveItem": null,
+      "imagePrompt": "A Radiant agent in grey stands motionless at the threshold of Whistling Woman Post as the band emerges from the moorland path. Behind her, smoke rises from the waystation. The late afternoon light catches the stone walls. Cy's lamp hovers near Loki's shoulder. The woman's stillness is absolute, certain, waiting.",
+      "imageMedium": null,
+      "newAbility": null,
+      "gambitOps": null,
+      "gambitApt": false,
+      "sceneEnded": false,
+      "momentArt": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/A%20Radiant%20agent%20in%20grey%20stands%20motionless%20at%20the%20threshold%20of%20Whistling%20Woman%20Post%20as%20the%20band%20emerges%20from%20the%20moorland%20path.%20Behind%20her%2C%20smoke%20rises%20from%20the%20waystation.%20The%20late%20afternoon%20light%20catches%20the%20stone%20walls.%20Cy's%20lamp%20hovers%20near%20Loki's%20shoulder.%20The%20woman's%20stillness%20is%20absolute%2C%20cert%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=89924&nologo=true"
+    },
+    "sceneState": {
+      "setting": "Whistling Woman Post on the spinward moorland, late afternoon in mid-autumn. Stone waystation with open doors, relay station architecture, shrine visible. The moorland stretches gold and fading around it. A Radiant woman in grey stands at the threshold, utterly still.",
+      "npcsPresent": [
+        {
+          "name": "The Radiant woman",
+          "state": "Standing at the waystation threshold, watching Loki with the certainty of someone who has been waiting for this moment"
+        },
+        {
+          "name": "Ravel Ash-bearer",
+          "state": "Moving with the band, her hand steady at her side, reading the moment"
+        },
+        {
+          "name": "Estry Krell",
+          "state": "At the band's flank, watching the brush"
+        },
+        {
+          "name": "Sable",
+          "state": "Walking with the band, steady but careful"
+        },
+        {
+          "name": "Orla Yardley",
+          "state": "Pacing with the band, moving as though reading time"
+        },
+        {
+          "name": "Cy",
+          "state": "Lamp held ahead, stilled by the presence of the Radiant agent"
+        }
+      ],
+      "objects": [
+        "The waystation's open doors",
+        "Smoke rising from the kitchen chimney",
+        "The shrine with no name on it",
+        "The moorland stretching in all directions"
+      ],
+      "threads": [
+        "Who is this woman and who sent her?",
+        "What does the High Luminary know about the sealed chamber?",
+        "How far does Seraphine's reach extend into the valley?",
+        "Will the band be allowed to reach the Standing Annex?"
+      ]
+    },
+    "beats": 1,
+    "subPlace": null
+  },
   "clock": {
     "schemaVersion": 1,
     "day": 8,
-    "hour": 11,
+    "hour": 16,
     "realAnchor": null
   },
   "companions": [
@@ -462,14 +789,14 @@
       "locationEntityId": "the-unlit-deep",
       "status": "active",
       "progress": [
-        "Loki has secured shelter and sanctuary for Sable at the Standing Annex; Sister Vreni has given her word that the Transition board will find nothing at the Kindly Rest. The band is ready to travel.",
         "Ravel and Estry have confirmed their purpose and their commitment. The band is gathering. All four will travel to the Standing Annex.",
         "Orla Yardley arrives on the road with intent to join the band and test Loki's beliefs in return. The gathering grows.",
         "Orla Yardley arrives on the road toward the Standing Annex with intent to join the band and test Loki's belief in understanding over breaking. The gathering grows—four now walk the road together, moving toward the Annex and toward answers.",
         "The band gathers supplies and sets out toward the Standing Annex by the long road. Mara Wells confirms Halvex Coil keeps the Annex and that the earth beneath Millbrook resists shortcuts—honoring the land's resistance rather than fighting it.",
         "The band has gathered supplies and is moving toward the Standing Annex by the long road, as directed by Mara Wells. Halvex Coil keeps the Annex and may have answers. The earth beneath Millbrook resists shortcuts—the band honors that resistance.",
         "The band departs Millbrook at dawn with supplies, honoring the earth's resistance to shortcuts. The long road northward to Whistling Woman Post and the Standing Annex is underway.",
-        "The band departs Millbrook at dawn with supplies, honoring the earth's resistance to shortcuts. The long road northward to Whistling Woman Post and the Standing Annex is underway."
+        "The band departs Millbrook at dawn with supplies, honoring the earth's resistance to shortcuts. The long road northward to Whistling Woman Post and the Standing Annex is underway.",
+        "The band reaches Whistling Woman Post—but the High Luminary's reach extends further than expected. The sealed chamber is known in Radiant halls."
       ],
       "aliases": [],
       "startedAt": "2026-07-24T21:30:43.637Z"
@@ -1360,6 +1687,49 @@
         "day": 8
       },
       "met": 8
+    },
+    "radiant-agent-whistling-woman": {
+      "id": "radiant-agent-whistling-woman",
+      "name": "Radiant authority sent to intercept",
+      "nameUnknown": true,
+      "trueName": "Corm Whitlock",
+      "role": "Radiant authority sent to intercept",
+      "title": "Agent of the High Luminary, Seraphine",
+      "fullName": "Corm Edwin Whitlock",
+      "description": "A woman in the grey coat of the Radiant Plateau, standing with absolute stillness at the waystation threshold. Dark eyes that find their mark. Voice trained in the Harmonic—clear and carrying.",
+      "firstMet": {
+        "locationId": "gen-whistling-woman-post",
+        "day": 8
+      },
+      "relationship": 0,
+      "history": [
+        "[d8] Waits with foreknowledge at the threshold. Names Loki by the lower Annex records and by the Wardens of Cairnhold's own naming. Knows the sealed chamber exists. Speaks for Seraphine, the High Luminary."
+      ],
+      "knownFacts": [
+        "The engineering records in the lower Annex name Loki",
+        "The Wardens of Cairnhold have named Loki",
+        "Someone in the Radiant hierarchy knows about the sealed chamber beneath Millbrook"
+      ],
+      "skillsObserved": [
+        "Trained in Harmonic voice—clear, carrying speech",
+        "Absolute stillness and patience—has waited for this moment with certainty",
+        "Knowledge of sealed things and what they contain"
+      ],
+      "status": "active",
+      "sex": "female",
+      "gender": "woman",
+      "pronouns": "she/her",
+      "age": 35,
+      "statusNote": "Standing at the waystation threshold, authorized agent of the High Luminary",
+      "domains": {
+        "primary": "radiant_folk"
+      },
+      "domainsSource": "role",
+      "lastSeen": {
+        "locationId": "gen-whistling-woman-post",
+        "day": 8
+      },
+      "met": 1
     }
   },
   "placeMemory": {
@@ -1677,6 +2047,15 @@
         "death_life",
         "concrete_abstract"
       ]
+    },
+    "gen-whistling-woman-post": {
+      "visits": 1,
+      "notes": [
+        "[d8] A Radiant agent waits at the threshold with foreknowledge and a demand from the High Luminary—the sealed chamber is no longer hidden."
+      ],
+      "flags": {},
+      "lastVisit": 8,
+      "vectorsKnown": []
     }
   },
   "worldState": {
@@ -1710,17 +2089,6 @@
       "falsehood_truth": -0.05
     },
     "news": [
-      {
-        "day": 5,
-        "worldDay": 88,
-        "text": "Ganna the Edgeholder has stopped spending themselves on The Second Manifestation.",
-        "tier": "murmur",
-        "section": "world",
-        "figureId": "person-5e7fbd40733ed12e",
-        "arcId": "arc_manifestation_storm",
-        "locationId": "the_great_coliseum",
-        "placedBy": "figureId"
-      },
       {
         "day": 5,
         "worldDay": 88,
@@ -1865,19 +2233,22 @@
         "text": "The Harvest Hand has lost people it will not get back.",
         "tier": "event",
         "section": "world"
+      },
+      {
+        "day": 8,
+        "worldDay": 88,
+        "text": "The Wardens of Cairnhold has lost people it will not get back.",
+        "tier": "event",
+        "section": "world"
       }
     ],
     "unseenNews": [],
     "lastGenCount": 2125,
-    "lastSharedReadAt": "2026-09-26T13:28:55.382Z",
+    "lastSharedReadAt": "2026-09-26T13:34:54.969Z",
     "lastTickWorldDay": 88,
     "lastCanonWorldDay": 88,
-    "turnsSinceOffer": 3,
+    "turnsSinceOffer": 0,
     "recentOffers": [
-      {
-        "thing": "Mara Wells, the store's keeper—a woman who reads strangers clearly and knows the road well enough to guess at true need",
-        "from": "the road itself, which brings travelers to her door in all hours, and the decision to arrive at her threshold honestly"
-      },
       {
         "thing": "Mara Wells speaks plainly about the land's resistance, revealing that something beneath Millbrook has awareness and agency.",
         "from": "The fold met interference—the land itself testing or refusing the band's passage through the settlement."
@@ -1893,6 +2264,10 @@
       {
         "thing": "Mara's plain wisdom about the long road — not a promise, but a teacher's reading of how the road itself works",
         "from": "Her own experience with travelers, and her respect for the ones who made it through by letting the journey teach them"
+      },
+      {
+        "thing": "A Radiant agent waiting with foreknowledge and a demand",
+        "from": "The High Luminary's need to control what surfaces from beneath the valley before the Wardens of Cairnhold—now blood-deep—move on it…"
       }
     ],
     "wantProgress": {
@@ -11809,17 +12184,18 @@
           "[d4] The vast sealed chamber beneath the Null Stone is not a mechanism to be forced or operated—it is a listener that teaches the language of harmonic resonance. The notation bands compose in sequence, each delay between one lighting and the next proportional to acoustic geometry. The alcove serves as…",
           "[d4] Cy's old calibration procedure reveals the chamber's true nature: it is a mutual measuring—the alcove measures whether the supplicant is ready to receive truthful answers, not merely whether they can pose questions. The apparatus tests intention and integrity before proceeding. The notation bands…",
           "[d5] The Null Stone's seam opened in response to honest promise—it was sealed deliberately to wait for understanding rather than breaking. The vast sealed chamber beneath it is a pre-Transition water-works designed to pose and answer mutual questions. Halvex reads it as measuring supplicant-intention…",
-          "[d5] The old work that dwells in the passage beneath the Unlit Deep's seam is not a machine — it was made but has become something else. It reads what comes to it. It measures supplicants for readiness and integrity, like a threshold that tests both direction and intent."
+          "[d5] The old work that dwells in the passage beneath the Unlit Deep's seam is not a machine — it was made but has become something else. It reads what comes to it. It measures supplicants for readiness and integrity, like a threshold that tests both direction and intent.",
+          "[d8] The sealed chamber is known to the Radiant Plateau's authority. Seraphine, the High Luminary, has issued orders to retrieve it before it reaches the Standing Annex."
         ],
         "links": [
-          "cy-s-construction",
-          "the-taken-person",
           "the-regulator-question",
           "the-unlit-deep",
           "halvex",
           "the-water-crisis",
           "vessin-tallow-bark",
-          "the-passage-below"
+          "the-passage-below",
+          "seraphine-the-high-luminary",
+          "millbrook"
         ],
         "aliases": [
           "The Seam Beside the Bracket",
@@ -11828,7 +12204,7 @@
           "The Old Work Below"
         ],
         "createdDay": 1,
-        "updatedDay": 5,
+        "updatedDay": 8,
         "archive": [
           "[d1] The regulator logged the first condition when Loki held contact — whether the water is prepared. The second condition, the authority to answer, remains unmet. The mechanism is not refusing; it is waiting. The two conditions are structurally distinct, and the second may require a different kind of…"
         ],
@@ -12597,7 +12973,8 @@
         "kind": "place",
         "facts": [
           "[d8] A waystation kept by Deni Cors, lying two hours north on the spinward path from Millbrook. Offers dry quarters, relay station facilities, and shrine space. Known as safe ground for travelers.",
-          "[d8] A waystation on the spinward relay network, kept by Deni Cors. Safe ground for travelers. Located two hours north of Millbrook on the long road."
+          "[d8] A waystation on the spinward relay network, kept by Deni Cors. Safe ground for travelers. Located two hours north of Millbrook on the long road.",
+          "[d8] you have walked here"
         ],
         "links": [
           "millbrook"
@@ -12605,6 +12982,39 @@
         "aliases": [],
         "createdDay": 8,
         "entityId": "gen-whistling-woman-post",
+        "updatedDay": 8
+      },
+      "radiant-agent-whistling-woman": {
+        "id": "radiant-agent-whistling-woman",
+        "label": "Radiant authority sent to intercept",
+        "kind": "person",
+        "facts": [
+          "[d8] Radiant authority sent to intercept"
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": 8,
+        "entityId": "radiant-agent-whistling-woman",
+        "updatedDay": 8
+      },
+      "the-high-luminary": {
+        "id": "the-high-luminary",
+        "label": "Seraphine, the High Luminary",
+        "kind": "person",
+        "facts": [
+          "[d8] The High Luminary knows about the sealed chamber beneath Millbrook and has sent an agent to intercept Loki at Whistling Woman Post. She moves to control what surfaces from beneath the valley before the Wardens of Cairnhold take action."
+        ],
+        "links": [
+          "the-hub-crossing",
+          "millbrook",
+          "radiant-agent-whistling-woman"
+        ],
+        "aliases": [
+          "Seraphine",
+          "the High Luminary"
+        ],
+        "createdDay": 8,
+        "entityId": "the-high-luminary",
         "updatedDay": 8
       }
     },
@@ -13056,6 +13466,22 @@
   "nativeGrantsVersion": 2,
   "reconcileVersion": 83,
   "gallery": [
+    {
+      "kind": "moment",
+      "prompt": "A Radiant agent in grey stands motionless at the threshold of Whistling Woman Post as the band emerges from the moorland path. Behind her, smoke rises from the waystation. The late afternoon light cat",
+      "url": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/A%20Radiant%20agent%20in%20grey%20stands%20motionless%20at%20the%20threshold%20of%20Whistling%20Woman%20Post%20as%20the%20band%20emerges%20from%20the%20moorland%20path.%20Behind%20her%2C%20smoke%20rises%20from%20the%20waystation.%20The%20late%20afternoon%20light%20catches%20the%20stone%20walls.%20Cy's%20lamp%20hovers%20near%20Loki's%20shoulder.%20The%20woman's%20stillness%20is%20absolute%2C%20cert%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=89924&nologo=true",
+      "caption": "At Whistling Woman Post, a Radiant agent from the High Luminary waits—the sealed chamber b",
+      "worldDay": 88,
+      "at": "2026-09-26T13:35:57.214Z"
+    },
+    {
+      "kind": "location",
+      "prompt": "Whistling Woman Post",
+      "url": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Whistling%20Woman%20Post%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Whistling%20Woman%20Post.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=32614&nologo=true",
+      "caption": "Whistling Woman Post",
+      "worldDay": 88,
+      "at": "2026-09-26T13:34:54.639Z"
+    },
     {
       "kind": "location",
       "prompt": "Mara Wells' Store",
@@ -14082,8 +14508,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790429548979,
-  "rev": 973,
+  "updatedAt": 1790429757214,
+  "rev": 979,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -15182,7 +15608,7 @@
     "umbral_depths": 54,
     "the_quickwood": 101,
     "the_center": 50,
-    "valley": 36,
+    "valley": 37,
     "the_open_reach": 3
   },
   "opLossPending": false,
@@ -15342,10 +15768,10 @@
     {
       "id": "sess-20",
       "startedAt": "2026-09-26T13:32:28.973Z",
-      "lastAt": "2026-09-26T13:32:28.973Z",
+      "lastAt": "2026-09-26T13:35:57.190Z",
       "startDay": 88,
       "endDay": 88,
-      "beats": 1
+      "beats": 2
     }
   ],
   "establishedFacts": [
@@ -15492,11 +15918,23 @@
       "text": "Something beneath Millbrook has awareness and will—it resisted the band's shortfold and pushed back against their passage through the settlement. The land does not welcome shortcuts through the town's bones.",
       "day": 8,
       "subjectId": "millbrook"
+    },
+    {
+      "id": "f25",
+      "text": "The High Luminary, Seraphine, knows about the sealed chamber beneath Millbrook. She has sent an agent to intercept Loki at Whistling Woman Post and demand its surrender before it reaches the Standing Annex.",
+      "day": 8,
+      "subjectId": null
+    },
+    {
+      "id": "f26",
+      "text": "The engineering records in the lower Annex of Millbrook name Loki. These records are known to the Radiant Plateau's authority.",
+      "day": 8,
+      "subjectId": null
     }
   ],
   "_opLedger": {
     "offer": {
-      "applied": 53,
+      "applied": 54,
       "rejected": 2,
       "lastWhy": "rejected-shape"
     },
@@ -15511,34 +15949,30 @@
       "lastWhy": "refused-unearned"
     }
   },
-  "_pendingArrival": {
-    "ref": "Whistling Woman Post",
-    "name": "Whistling Woman Post",
-    "destId": "gen-whistling-woman-post"
-  },
+  "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 246,
-    "choices": 246,
-    "characterDeltas": 130,
-    "scene": 246,
-    "placeUpdates": 32,
-    "codexUpdates": 142,
-    "timeOps": 197,
-    "offer": 47,
+    "sceneSummary": 247,
+    "choices": 247,
+    "characterDeltas": 131,
+    "scene": 247,
+    "placeUpdates": 33,
+    "codexUpdates": 143,
+    "timeOps": 198,
+    "offer": 48,
     "generateRequest": 7,
-    "sceneEnded": 115,
-    "npcUpdates": 197,
-    "moveTo": 11,
-    "gambitApt": 73,
+    "sceneEnded": 116,
+    "npcUpdates": 198,
+    "moveTo": 12,
+    "gambitApt": 74,
     "deeds": 14,
-    "questUpdates": 50,
+    "questUpdates": 51,
     "standingOps": 4,
-    "factUpdates": 20,
+    "factUpdates": 21,
     "stageOps": 7,
     "encounterOps": 9,
-    "ledgerEvents": 12,
+    "ledgerEvents": 13,
     "newEncounter": 3,
-    "imagePrompt": 39,
+    "imagePrompt": 40,
     "scene_ended": 1,
     "stateOps": 3,
     "_engineClosedScene": 4,
@@ -15550,7 +15984,7 @@
     "bandOps": 1,
     "exchangeOps": 2
   },
-  "_opTurns": 246,
+  "_opTurns": 247,
   "customAbilities": {
     "mirror-bright": {
       "id": "mirror-bright",
@@ -15831,7 +16265,8 @@
     "gen-the-standing-annex",
     "the_kindly_rest",
     "millbrook",
-    "gen-the-road-from-kindly-rest-to-standing-an"
+    "gen-the-road-from-kindly-rest-to-standing-an",
+    "gen-whistling-woman-post"
   ],
   "_devActions": [
     {
@@ -15861,7 +16296,8 @@
     "the_quickwood_eaves": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/The%20Quickwood%20Eaves%3A%20Where%20the%20grown%20city%20thins%20into%20ordinary%20forest%20and%20ordinary%20forest%20thins%20into%20the%20Deepwood.%20The%20Eaves%20are%20the%20Rootkin's%20front%20door%20and%20they%20have%20deliberately%20not%20marked%20it%20%E2%80%94%20you%20know%20you%20have%20arrived%20when%20the%20trees%20start%20being%20interested%20in%20you.%20A%20waygate%20stands%20among%20the%20eaves-trees%2C%20grown%20around%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=86347&nologo=true",
     "the_wayhouse": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/The%20Wayhouse%3A%20One%20long%20stone%20building%20alone%20at%20a%20crossroads%2C%20with%20a%20lamp%20on%20a%20pole%20outside%20and%20a%20board%20of%20pinned%20notes%20by%20the%20door.%20Stabling%20at%20one%20end%2C%20a%20wide%20common%20room%20at%20the%20other.%20Roads%20leaving%20in%20every%20direction.%2C%20adventurous%2C%20mild%2C%20no%20gore%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20a%20child%2C%20fully%20clothed%2C%20non-sexual%2C%20wholesome%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=91201&nologo=true",
     "the_kindly_rest": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/The%20Kindly%20Rest%3A%20Low%20buildings%20of%20pale%20stone%20around%20three%20sides%20of%20a%20planted%20court%2C%20roofed%20in%20weathered%20shingle%20with%20deep%20eaves.%20Drying%20lofts%20stand%20open%20under%20the%20roofline%2C%20hung%20with%20cut%20herbs%20in%20bunches.%20Terraced%20beds%20step%20down%20the%20slope%20in%20stone-edged%20rows%2C%20a%20covered%20walk%20runs%20the%20inner%20faces%2C%20and%20water%20is%20led%20thr%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=91172&nologo=true",
-    "gen-mara-wells-store": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Mara%20Wells'%20Store%3A%20A%20timber-fronted%20supply%20store%20with%20wide%20shutters%20folded%20back%2C%20goods%20stacked%20in%20the%20opening%20%E2%80%94%20rope%2C%20sacking%2C%20crates%2C%20lamp%20oil.%20A%20counter%20across%20the%20front%2C%20shelves%20deep%20inside%2C%20and%20a%20loading%20yard%20to%20one%20side.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=13548&nologo=true"
+    "gen-mara-wells-store": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Mara%20Wells'%20Store%3A%20A%20timber-fronted%20supply%20store%20with%20wide%20shutters%20folded%20back%2C%20goods%20stacked%20in%20the%20opening%20%E2%80%94%20rope%2C%20sacking%2C%20crates%2C%20lamp%20oil.%20A%20counter%20across%20the%20front%2C%20shelves%20deep%20inside%2C%20and%20a%20loading%20yard%20to%20one%20side.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=13548&nologo=true",
+    "gen-whistling-woman-post": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Whistling%20Woman%20Post%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Whistling%20Woman%20Post.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=32614&nologo=true"
   },
   "customEncounters": {
     "re-re_raider_duel": {
@@ -16935,6 +17371,17 @@
           "at": 88
         }
       ]
+    },
+    "moment:solo:cap:whistling woman post": {
+      "keeps": [
+        {
+          "url": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Whistling%20Woman%20Post%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Whistling%20Woman%20Post.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=32614&nologo=true",
+          "prompt": "Sturdy stone compound on the road to the magic portal",
+          "note": "Sturdy stone compound on the road to the magic portal",
+          "seedKey": null,
+          "at": 88
+        }
+      ]
     }
   },
   "sceneImages": {
@@ -16996,412 +17443,412 @@
   },
   "_promptRows": {
     "character": {
-      "reached": 62,
-      "produced": 62
+      "reached": 63,
+      "produced": 63
     },
     "location": {
-      "reached": 62,
-      "produced": 62
+      "reached": 63,
+      "produced": 63
     },
     "region": {
-      "reached": 62,
-      "produced": 62
+      "reached": 63,
+      "produced": 63
     },
     "groundDetail": {
-      "reached": 62,
+      "reached": 63,
       "produced": 27
     },
     "lore": {
-      "reached": 62,
+      "reached": 63,
       "produced": 51
     },
     "traditionMotiveDetail": {
-      "reached": 62,
-      "produced": 62
+      "reached": 63,
+      "produced": 63
     },
     "sheetsDetail": {
-      "reached": 62,
+      "reached": 63,
       "produced": 41
     },
     "rules": {
-      "reached": 62,
-      "produced": 62
+      "reached": 63,
+      "produced": 63
     },
     "recentTurns": {
-      "reached": 62,
+      "reached": 63,
       "produced": 55
     },
     "timeLabel": {
-      "reached": 62,
-      "produced": 62
+      "reached": 63,
+      "produced": 63
     },
     "npcRegistryDetail": {
-      "reached": 62,
-      "produced": 62
+      "reached": 63,
+      "produced": 63
     },
     "mintedUnmetDetail": {
-      "reached": 62,
-      "produced": 62
+      "reached": 63,
+      "produced": 63
     },
     "npcSeedDetail": {
-      "reached": 62,
+      "reached": 63,
       "produced": 24
     },
     "traditionVocab": {
-      "reached": 62,
-      "produced": 62
+      "reached": 63,
+      "produced": 63
     },
     "standingDetail": {
-      "reached": 62,
-      "produced": 62
+      "reached": 63,
+      "produced": 63
     },
     "recalledDetail": {
-      "reached": 62,
-      "produced": 8
+      "reached": 63,
+      "produced": 9
     },
     "bearingsDetail": {
-      "reached": 62,
-      "produced": 62
+      "reached": 63,
+      "produced": 63
     },
     "caravansDetail": {
-      "reached": 62,
+      "reached": 63,
       "produced": 0
     },
     "commandDetail": {
-      "reached": 62,
-      "produced": 62
+      "reached": 63,
+      "produced": 63
     },
     "presenceDetail": {
-      "reached": 62,
-      "produced": 52
+      "reached": 63,
+      "produced": 53
     },
     "worthHereDetail": {
-      "reached": 62,
+      "reached": 63,
       "produced": 0
     },
     "inventoryDetail": {
-      "reached": 62,
-      "produced": 62
+      "reached": 63,
+      "produced": 63
     },
     "sceneState": {
-      "reached": 62,
+      "reached": 63,
       "produced": 55
     },
     "holdingsDetail": {
-      "reached": 62,
-      "produced": 62
+      "reached": 63,
+      "produced": 63
     },
     "debtsDetail": {
-      "reached": 62,
+      "reached": 63,
       "produced": 0
     },
     "carriedDetail": {
-      "reached": 62,
+      "reached": 63,
       "produced": 0
     },
     "abilityLawDetail": {
-      "reached": 62,
-      "produced": 62
+      "reached": 63,
+      "produced": 63
     },
     "questsDetail": {
-      "reached": 62,
-      "produced": 62
+      "reached": 63,
+      "produced": 63
     },
     "structuredQuestsDetail": {
-      "reached": 62,
+      "reached": 63,
       "produced": 0
     },
     "traditionArcDetail": {
-      "reached": 62,
+      "reached": 63,
       "produced": 0
     },
     "npcErrandsDetail": {
-      "reached": 62,
+      "reached": 63,
       "produced": 0
     },
     "codexDetail": {
-      "reached": 62,
-      "produced": 62
+      "reached": 63,
+      "produced": 63
     },
     "companionsDetail": {
-      "reached": 62,
-      "produced": 62
+      "reached": 63,
+      "produced": 63
     },
     "placeMemoryDetail": {
-      "reached": 62,
+      "reached": 63,
       "produced": 46
     },
     "agesMissingDetail": {
-      "reached": 62,
-      "produced": 62
+      "reached": 63,
+      "produced": 63
     },
     "newsDetail": {
-      "reached": 62,
-      "produced": 62
+      "reached": 63,
+      "produced": 63
     },
     "worldArcsDetail": {
-      "reached": 62,
-      "produced": 62
+      "reached": 63,
+      "produced": 63
     },
     "legendsPursuableDetail": {
-      "reached": 62,
+      "reached": 63,
       "produced": 12
     },
     "wakesDetail": {
-      "reached": 62,
+      "reached": 63,
       "produced": 0
     },
     "arcMoodDetail": {
-      "reached": 62,
-      "produced": 62
+      "reached": 63,
+      "produced": 63
     },
     "reachableDeadDetail": {
-      "reached": 62,
+      "reached": 63,
       "produced": 46
     },
     "threatToPlayer": {
-      "reached": 62,
+      "reached": 63,
       "produced": 0
     },
     "guardiansDetail": {
-      "reached": 62,
+      "reached": 63,
       "produced": 0
     },
     "resolution": {
-      "reached": 62,
+      "reached": 63,
       "produced": 51
     },
     "playerInput": {
-      "reached": 62,
-      "produced": 11
+      "reached": 63,
+      "produced": 12
     },
     "exactWords": {
-      "reached": 62,
+      "reached": 63,
       "produced": 33
     },
     "travelDirective": {
-      "reached": 62,
+      "reached": 63,
       "produced": 5
     },
     "itemAdvance": {
-      "reached": 62,
+      "reached": 63,
       "produced": 0
     },
     "encounterWeaveDetail": {
-      "reached": 62,
+      "reached": 63,
       "produced": 7
     },
     "encounterOfferDetail": {
-      "reached": 62,
+      "reached": 63,
       "produced": 4
     },
     "fightFramingDetail": {
-      "reached": 62,
+      "reached": 63,
       "produced": 0
     },
     "abilityGrantDetail": {
-      "reached": 62,
+      "reached": 63,
       "produced": 0
     },
     "stageRevealDetail": {
-      "reached": 62,
+      "reached": 63,
       "produced": 0
     },
     "itemEvolveDetail": {
-      "reached": 62,
+      "reached": 63,
       "produced": 0
     },
     "worldPressureDetail": {
-      "reached": 62,
+      "reached": 63,
       "produced": 2
     },
     "offerDetail": {
-      "reached": 62,
+      "reached": 63,
       "produced": 2
     },
     "teacherOfferDetail": {
-      "reached": 62,
+      "reached": 63,
       "produced": 0
     },
     "substrateDetail": {
-      "reached": 62,
+      "reached": 63,
       "produced": 17
     },
     "romanceGuidanceDetail": {
-      "reached": 62,
+      "reached": 63,
       "produced": 4
     },
     "factsDetail": {
-      "reached": 62,
-      "produced": 62
+      "reached": 63,
+      "produced": 63
     },
     "evolvedItemsDetail": {
-      "reached": 62,
+      "reached": 63,
       "produced": 0
     },
     "opLossNote": {
-      "reached": 62,
+      "reached": 63,
       "produced": 0
     },
     "emergenceDetail": {
-      "reached": 62,
+      "reached": 63,
       "produced": 0
     },
     "perilNote": {
-      "reached": 62,
+      "reached": 63,
       "produced": 0
     },
     "encounterDetail": {
-      "reached": 62,
+      "reached": 63,
       "produced": 4
     },
     "masteryDetail": {
-      "reached": 62,
-      "produced": 62
+      "reached": 63,
+      "produced": 63
     },
     "bookkeepingRestate": {
-      "reached": 62,
+      "reached": 63,
       "produced": 0
     },
     "anomalyDetail": {
-      "reached": 62,
-      "produced": 60
+      "reached": 63,
+      "produced": 61
     },
     "repairPanelDetail": {
-      "reached": 62,
-      "produced": 62
+      "reached": 63,
+      "produced": 63
     },
     "teacherDetail": {
-      "reached": 62,
+      "reached": 63,
       "produced": 0
     },
     "toolkitDetail": {
-      "reached": 62,
-      "produced": 62
+      "reached": 63,
+      "produced": 63
     },
     "availableEncounters": {
-      "reached": 62,
-      "produced": 58
+      "reached": 63,
+      "produced": 59
     },
     "partyDetail": {
-      "reached": 62,
+      "reached": 63,
       "produced": 0
     },
     "ratingDetail": {
-      "reached": 62,
-      "produced": 62
+      "reached": 63,
+      "produced": 63
     },
     "registerDetail": {
-      "reached": 62,
-      "produced": 62
+      "reached": 63,
+      "produced": 63
     },
     "legendDetail": {
-      "reached": 62,
+      "reached": 63,
       "produced": 1
     },
     "livingWorldDetail": {
-      "reached": 62,
-      "produced": 33
+      "reached": 63,
+      "produced": 34
     },
     "assignmentsDetail": {
-      "reached": 62,
+      "reached": 63,
       "produced": 0
     },
     "latentArcsDetail": {
-      "reached": 62,
-      "produced": 62
+      "reached": 63,
+      "produced": 63
     },
     "seasonalDetail": {
-      "reached": 62,
-      "produced": 62
+      "reached": 63,
+      "produced": 63
     },
     "schoolsDetail": {
-      "reached": 62,
-      "produced": 62
+      "reached": 63,
+      "produced": 63
     },
     "sharedCanonDetail": {
-      "reached": 62,
-      "produced": 39
+      "reached": 63,
+      "produced": 40
     },
     "worldCountLabel": {
-      "reached": 62,
-      "produced": 62
+      "reached": 63,
+      "produced": 63
     },
     "waygateDetail": {
-      "reached": 62,
+      "reached": 63,
       "produced": 27
     },
     "readAloudDetail": {
-      "reached": 62,
-      "produced": 62
+      "reached": 63,
+      "produced": 63
     },
     "scenePacingDetail": {
-      "reached": 62,
+      "reached": 63,
       "produced": 22
     },
     "wishesDetail": {
-      "reached": 42,
+      "reached": 43,
       "produced": 0
     },
     "worldMovedOnDetail": {
-      "reached": 42,
+      "reached": 43,
       "produced": 2
     },
     "companionLivesDetail": {
-      "reached": 42,
+      "reached": 43,
       "produced": 18
     },
     "homeDetail": {
-      "reached": 42,
+      "reached": 43,
       "produced": 0
     },
     "invitationsDetail": {
-      "reached": 42,
+      "reached": 43,
       "produced": 0
     },
     "bandsJoinedDetail": {
-      "reached": 42,
+      "reached": 43,
       "produced": 0
     },
     "travelersHereDetail": {
-      "reached": 42,
+      "reached": 43,
       "produced": 15
     },
     "travelersDetail": {
-      "reached": 42,
+      "reached": 43,
       "produced": 2
     },
     "journeyDetail": {
-      "reached": 40,
+      "reached": 41,
       "produced": 7
     },
     "journeyUnderwayDetail": {
-      "reached": 40,
+      "reached": 41,
       "produced": 4
     },
     "holdsNearDetail": {
-      "reached": 40,
-      "produced": 36
+      "reached": 41,
+      "produced": 37
     },
     "moneyDetail": {
-      "reached": 39,
-      "produced": 39
+      "reached": 40,
+      "produced": 40
     },
     "jobsDetail": {
-      "reached": 39,
+      "reached": 40,
       "produced": 0
     },
     "powersHereDetail": {
-      "reached": 16,
+      "reached": 17,
       "produced": 6
     },
     "nemesisDetail": {
-      "reached": 16,
-      "produced": 16
+      "reached": 17,
+      "produced": 17
     }
   },
   "_opUnknown": {
-    "sceneSummary": 74,
+    "sceneSummary": 75,
     "scene_summary": 1
   },
   "_bandNotes": null,
@@ -17768,7 +18215,39 @@
       "discovered": true
     }
   ],
-  "_pendingLedger": [],
+  "_pendingLedger": [
+    {
+      "schemaVersion": 1,
+      "at": "2026-09-26T13:35:57.206Z",
+      "worldDay": 88,
+      "who": "char-mrum8y4d",
+      "playerKey": "player-s9z9u1",
+      "where": "gen-whistling-woman-post",
+      "what": "A Radiant agent from the High Luminary appears at Whistling Woman Post bearing knowledge of the sealed chamber and demanding its surrender—the machinery beneath the valley is no longer hidden.",
+      "tags": [
+        "revelation",
+        "power-move",
+        "nemesis-adjacent"
+      ],
+      "spectrumDeltas": {},
+      "visibility": "witnessed",
+      "impactsLocal": true,
+      "people": [
+        {
+          "id": "taken-person",
+          "name": "Sable",
+          "role": "The person who came willingly from the city to the Unlit Deep",
+          "why": "present"
+        },
+        {
+          "id": "orla-yardley",
+          "name": "Orla Yardley",
+          "role": "A Syllogist from the reaches, traveler between communities",
+          "why": "present"
+        }
+      ]
+    }
+  ],
   "_gmRefusals": [
     {
       "at": "2026-09-15T00:29:28.269Z",
@@ -17972,9 +18451,9 @@
       },
       "lastVerb": "patrol",
       "lastVerbDay": 8,
-      "losses": 1,
+      "losses": 0,
       "lost": {
-        "0": 96
+        "0": 128
       },
       "noticed": {
         "trigger": "crossed",
@@ -18028,7 +18507,7 @@
       },
       "lastVerb": "expand",
       "lastVerbDay": 8,
-      "wins": 0,
+      "wins": 1,
       "grownHeads": 44,
       "grewDay": 8
     },
@@ -18080,21 +18559,21 @@
     "power_flesh_temple": {
       "lastVerb": "recruit",
       "lastVerbDay": 8,
-      "wins": 0,
+      "wins": 1,
       "grownHeads": 18,
       "grewDay": 5
     },
     "power_vacated_custody": {
       "lastVerb": "expand",
       "lastVerbDay": 8,
-      "wins": 0,
+      "wins": 1,
       "grownHeads": 6,
       "grewDay": 5
     },
     "power_the_ceaseless": {
       "lastVerb": "expand",
       "lastVerbDay": 8,
-      "wins": 1,
+      "wins": 2,
       "grownHeads": 10,
       "grewDay": 5,
       "losses": 0
@@ -18110,7 +18589,7 @@
       "wins": 0,
       "grownHeads": 12,
       "grewDay": 5,
-      "losses": 0,
+      "losses": 1,
       "lost": {
         "0": 36
       },

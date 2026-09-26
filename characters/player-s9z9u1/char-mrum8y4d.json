@@ -7,8 +7,8 @@
   "nativeTradition": "enginewright",
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
-  "level": 9,
-  "xp": 891,
+  "level": 10,
+  "xp": 900,
   "attributes": {
     "physical": 4,
     "mental": 5,
@@ -115,19 +115,19 @@
   ],
   "alignment": {
     "mechanical_spiritual": 0.0077000000000000055,
-    "falsehood_truth": 0.36605780950995376,
+    "falsehood_truth": 0.382754919034456,
     "demonic_angelic": -0.020000000000000004,
     "dark_light": 0.085,
     "concrete_abstract": 0.16438167187499997,
     "chaos_order": -0.1077875,
     "body_mind": 0.0658375,
-    "emotional_logical": 0.06083749999999999
+    "emotional_logical": 0.077795625
   },
-  "attunement": 9,
-  "maxHealth": 78,
-  "health": 78,
-  "maxEnergy": 156,
-  "energy": 144,
+  "attunement": 10,
+  "maxHealth": 83,
+  "health": 83,
+  "maxEnergy": 161,
+  "energy": 161,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -345,6 +345,21 @@
       "_bonusApplied": 0.15,
       "day": 5,
       "worldDay": 88
+    },
+    {
+      "at": "2026-09-26T02:11:18.478Z",
+      "locationId": "millbrook",
+      "communityId": "valley.millbrook",
+      "description": "Named the truth of two travelers' purpose on the open road without forcing or shaming—drew honest answers through asking plainly.",
+      "tags": [
+        "clarity",
+        "valor"
+      ],
+      "weight": 1,
+      "spread": [],
+      "_bonusApplied": 0.15,
+      "day": 7,
+      "worldDay": 88
     }
   ],
   "relationships": {},
@@ -381,25 +396,29 @@
         "player": null,
         "summary": "On the road from the Kindly Rest toward Millbrook, a Syllogist waits to challenge something Loki believes, and to offer the reverse: a belief they themselves have held that breaks when questioned.",
         "narration": "You step out from the Kindly Rest into the mid-autumn night, and the air carries the weight of the year turning—everything asking itself whether it will hold through winter. The sky above Millbrook is clear enough to read by, and the road ahead splits toward the Standing Annex curves gently outward through scrubland and low brush.\n\nA figure emerges from the shadowed reach where the road bends—not a threat, but someone who has been waiting at the margins. They are tall and narrow, dressed in the quiet grey of someone who moves between communities, and their face carries the particular calm of a person who has just finished an argument with themselves. They do not draw a weapon. They simply wait, watching you with the kind of attention that makes it plain they were expecting you specifically.\n\n\"You carry something from the Deep,\" they say plainly. Not as an accusation—as a statement being offered for your consideration. \"The orchestrator who was sent to break the stone. Halvex Coil. He told us what happened at the Hub crossing, and what you told him about understanding instead of breaking.\" They pause. A breath. \"I came to ask you something I have believed was true for fifteen years. And I came to tell you that you were right about it, and I was wrong.\""
+      },
+      {
+        "player": "Use harmonic voice to ask them to introduce themselves fully and tell you why they're really here.",
+        "summary": "On the road from the Kindly Rest toward Millbrook, Loki speaks plainly to Ravel and Estry—asking true names and true purpose. Both answer directly. The Syllogist stands witness, still waiting.",
+        "narration": "You pitch your voice to carry across the road's curve—not a shout, but something that settles in the air with the weight of genuine asking. The sound finds them where they stand, and something in the way you shape it—patient, clear, undemanding—makes refusal harder.\n\nRavel's shoulders ease. She steps forward into the starlight, and her voice, when it comes, is steadier than before. \"I am Ravel Ash-bearer,\" she says. \"I walk the old roads and read what the machines left behind. I came to the Kindly Rest because Sable sent word through channels that move in darkness—she was sinking, and the city was done with her. I came to retrieve her if she would come, and to offer her ground to stand on if she would not.\" Her eyes find yours. \"That is the true shape of it.\"\n\nEstry steps up beside her, younger and quieter, but no less clear. \"I am Estry Krell. I travel with Ravel because she is worth traveling with. I came to the Kindly Rest because I was asked to, and because I read people the way she reads stones—and I read *you* as someone who does not deflect.\" A pause. \"That is all the reason I have.\"\n\nThe Syllogist watches this exchange from the road's shoulder, their expression unreadable. They have not moved to interrupt or object. They are simply... witnessing.\n\n*You feel it settle into you — a new steadiness. (Level 10: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*"
       }
     ],
     "lastTurn": {
-      "narration": "You step out from the Kindly Rest into the mid-autumn night, and the air carries the weight of the year turning—everything asking itself whether it will hold through winter. The sky above Millbrook is clear enough to read by, and the road ahead splits toward the Standing Annex curves gently outward through scrubland and low brush.\n\nA figure emerges from the shadowed reach where the road bends—not a threat, but someone who has been waiting at the margins. They are tall and narrow, dressed in the quiet grey of someone who moves between communities, and their face carries the particular calm of a person who has just finished an argument with themselves. They do not draw a weapon. They simply wait, watching you with the kind of attention that makes it plain they were expecting you specifically.\n\n\"You carry something from the Deep,\" they say plainly. Not as an accusation—as a statement being offered for your consideration. \"The orchestrator who was sent to break the stone. Halvex Coil. He told us what happened at the Hub crossing, and what you told him about understanding instead of breaking.\" They pause. A breath. \"I came to ask you something I have believed was true for fifteen years. And I came to tell you that you were right about it, and I was wrong.\"",
-      "sceneSummary": "On the road from the Kindly Rest toward Millbrook, a Syllogist waits to challenge something Loki believes, and to offer the reverse: a belief they themselves have held that breaks when questioned.",
+      "narration": "You pitch your voice to carry across the road's curve—not a shout, but something that settles in the air with the weight of genuine asking. The sound finds them where they stand, and something in the way you shape it—patient, clear, undemanding—makes refusal harder.\n\nRavel's shoulders ease. She steps forward into the starlight, and her voice, when it comes, is steadier than before. \"I am Ravel Ash-bearer,\" she says. \"I walk the old roads and read what the machines left behind. I came to the Kindly Rest because Sable sent word through channels that move in darkness—she was sinking, and the city was done with her. I came to retrieve her if she would come, and to offer her ground to stand on if she would not.\" Her eyes find yours. \"That is the true shape of it.\"\n\nEstry steps up beside her, younger and quieter, but no less clear. \"I am Estry Krell. I travel with Ravel because she is worth traveling with. I came to the Kindly Rest because I was asked to, and because I read people the way she reads stones—and I read *you* as someone who does not deflect.\" A pause. \"That is all the reason I have.\"\n\nThe Syllogist watches this exchange from the road's shoulder, their expression unreadable. They have not moved to interrupt or object. They are simply... witnessing.\n\n*You feel it settle into you — a new steadiness. (Level 10: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*",
+      "sceneSummary": "On the road from the Kindly Rest toward Millbrook, Loki speaks plainly to Ravel and Estry—asking true names and true purpose. Both answer directly. The Syllogist stands witness, still waiting.",
       "choices": [
         {
-          "label": "Ask them to speak plainly—what belief, and what changed their mind?",
+          "label": "Ask the Syllogist directly—who are you, and what belief of mine is broken?",
           "attribute": "social",
-          "subAttribute": "rapport",
+          "subAttribute": "presence",
           "axes": {
-            "falsehood_truth": 0.3,
-            "emotional_logical": -0.2
+            "falsehood_truth": 0.4,
+            "emotional_logical": -0.3
           },
-          "difficulty": "easy",
+          "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
-            "study",
-            "negotiate"
+            "gamble"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -408,123 +427,250 @@
           "emergenceId": null
         },
         {
-          "label": "Use Appetite-Sense to read what they are refusing to admit—what hunger drives this opening?",
+          "label": "Invite all three to travel together to the Standing Annex—you have a band forming, and they are clearly part of it.",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {
-            "falsehood_truth": -0.2,
-            "concrete_abstract": 0.3
+            "emotional_logical": 0.2,
+            "falsehood_truth": 0.1
+          },
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "help"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use See the Made Thing to read what belief the Syllogist holds that breaks under scrutiny—see the falsework beneath their calm.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "falsehood_truth": 0.6,
+            "concrete_abstract": 0.2
           },
           "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
             "study"
           ],
-          "abilityId": "appetite_sense",
+          "abilityId": "see_the_made_thing",
           "energyCost": 2,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Turn the question back on them—if they came to break a belief, let them. What is it?",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "falsehood_truth": 0.4,
-            "emotional_logical": 0.1
-          },
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "negotiate",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
       ],
-      "deeds": [],
-      "characterDeltas": {},
-      "ledgerEvents": [],
-      "questUpdates": [],
+      "deeds": [
+        {
+          "description": "Named the truth of two travelers' purpose on the open road without forcing or shaming—drew honest answers through asking plainly.",
+          "tags": [
+            "clarity",
+            "valor"
+          ],
+          "weight": 1,
+          "communityId": null
+        }
+      ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": -5,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 4
+      },
+      "ledgerEvents": [
+        {
+          "what": "Two travelers named themselves and their purpose on the road: Ravel Ash-bearer reads the old machines; Estry Krell travels with her. Both answered plainly when asked.",
+          "tags": [
+            "truth-spoken",
+            "band-forming"
+          ],
+          "visibility": "witnessed",
+          "spectrumDeltas": {
+            "falsehood_truth": 0.08
+          },
+          "impactsLocal": false
+        }
+      ],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "the-taken-from-the-city",
+          "title": "The Taken",
+          "summary": "Someone was brought from the city to the Unlit Deep, and the city is pretending it did not happen.",
+          "giver": "the elder of the Unlit Deep",
+          "note": "Ravel and Estry have confirmed their purpose and their commitment. The band is gathering. All four will travel to the Standing Annex.",
+          "xpReward": null
+        }
+      ],
       "standingOps": [],
       "delegateOps": [],
       "jobOps": [],
       "arcOps": [],
       "adoptSchool": null,
       "offer": {
-        "thing": "a Syllogist who has come to the margins of Millbrook, waiting on the road from the Kindly Rest",
-        "from": "the echoes of what Halvex Coil has carried back to those who sent him—the story of understanding instead of breaking has reached the people who live by logic and precision"
+        "thing": "A Syllogist who has waited on the road with a question and a breaking belief",
+        "from": "The architecture beneath the valley—someone in the lower Annex is asking about the Hub crossing and the Null Stone. Halvex Coil's mandate reached other ears. This person walks between reaches and carries knowledge. They are here because the answer matters."
       },
       "stageOps": [],
       "scene": {
-        "setting": "The road curves outward from Millbrook toward the Standing Annex, scrubland and low brush on either side. Clear mid-autumn night, stars visible overhead. The figure stands at a bend where shadow pools briefly before the road climbs again.",
+        "setting": "The road from the Kindly Rest curves outward toward the Standing Annex through scrubland in mid-autumn night. Clear sky above, stars visible. The road bends gently, shadow pooling briefly before climbing again.",
         "npcsPresent": [
           {
+            "name": "Ravel Ash-bearer",
+            "state": "Standing in the starlight, having just named herself and her purpose. Alert, watching Loki's reaction."
+          },
+          {
+            "name": "Estry Krell",
+            "state": "Beside Ravel, younger, steady. Eyes reading the moment."
+          },
+          {
             "name": "The Syllogist",
-            "state": "Standing in the road, waiting with an expression of careful calm, hands visible and open at their sides"
+            "state": "Standing at the road's shoulder, witness to the exchange. Calm. Waiting."
           }
         ],
         "objects": [
-          "The road ahead, curving gently outward",
-          "Scrubland brush on either side, dry and autumn-thick"
+          "The road ahead, curving outward into shadow",
+          "Scrubland brush, dry and autumn-thick on both sides",
+          "The stars overhead, bright and readable in the clear night"
         ],
         "threads": [
-          "Who sent this person, and how do they know Halvex's account?",
-          "What belief do they carry that breaks under scrutiny?",
-          "What do they want to break in what Loki believes?",
-          "How much of the lower Annex's attention has the Null Stone incident drawn?"
+          "Who is the Syllogist, and what belief do they carry that breaks?",
+          "What does the lower Annex want with news of the Hub crossing and the Null Stone?",
+          "Will the Syllogist join the band, or do they bring different purpose?"
         ]
       },
       "npcUpdates": [
         {
-          "op": "meet",
-          "npcId": "syllogist-of-the-margins",
-          "name": "Unmet yet",
-          "role": "a Syllogist traveling between the reaches",
-          "age": 47,
+          "op": "update",
+          "npcId": "unmet-yet",
+          "name": "the Syllogist",
+          "title": null,
+          "role": "Traveler between the reaches, carrier of news and questions",
+          "age": null,
           "sex": "male",
           "gender": "man",
           "pronouns": "he/him",
           "description": "Tall and narrow, dressed in quiet grey. Face bearing the particular calm of someone who has just finished an argument with themselves. Eyes that carry precision and a recent breaking.",
-          "note": "Emerged from the shadows of the road with foreknowledge of Loki's presence and Halvex's account. Came to question a belief and to offer that their own held belief has shattered.",
+          "note": "Emerged from the road's shadow with foreknowledge of Loki's presence. Waits on the road toward the Standing Annex with a question and a breaking belief. Has not drawn a weapon. Has not yet spoken.",
           "learned": [
-            "Connected to Halvex Coil's circle—knows of the Null Stone, the breaking mandate, and what Loki taught instead",
-            "Practices the Syllogist's discipline: precision, logic, willingness to follow an argument to its end",
-            "Has held a belief for fifteen years that they now know to be false"
+            "Connected to the lower Annex's questions about the Hub crossing and the Null Stone",
+            "Carries knowledge about Halvex Coil's mandate or its aftermath",
+            "Holds a belief they know is breaking—came to offer that breaking in exchange for something Loki believes"
           ],
+          "skillsObserved": [
+            "Waits with precision—the presence of someone trained in patient observation",
+            "Reads people before speaking—chose this moment, this place, this approach"
+          ],
+          "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "Standing on the road in mid-autumn night, waiting for Loki to emerge from the Kindly Rest"
+          "statusNote": "Standing on the road toward the Standing Annex, waiting for Loki's next move"
+        },
+        {
+          "op": "update",
+          "npcId": "unmet-yet",
+          "carries": [],
+          "returns": [],
+          "name": "Ravel Ash-bearer",
+          "title": null,
+          "role": "Reader of old machines; traveler of the old roads",
+          "age": null,
+          "sex": "female",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "description": "Steady voice, precise in her movements. Eyes that read depth and time.",
+          "note": "Named herself and her purpose on the road: she came to the Kindly Rest to retrieve Sable, who sent word through dark channels that she was sinking. Ravel offered ground to stand on. Now travels with Loki toward the Standing Annex.",
+          "learned": [
+            "Walks the old roads and reads what the machines left behind",
+            "Carries knowledge of dark channels—ways information moves in silence",
+            "Her purpose is to offer sanctuary to those the city abandons"
+          ],
+          "skillsObserved": [
+            "Speaks plainly when asked plainly",
+            "Does not flinch from the full truth of her intent",
+            "Reads people and situations with precision"
+          ],
+          "relationshipDelta": 1,
+          "vouchedBy": null,
+          "status": "active",
+          "statusNote": "On the road with Loki, heading toward the Standing Annex with Estry and the Syllogist"
+        },
+        {
+          "op": "update",
+          "npcId": "unmet-yet",
+          "carries": [],
+          "returns": [],
+          "name": "Estry Krell",
+          "title": null,
+          "role": "Traveler; reader of people",
+          "age": null,
+          "sex": "female",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "description": "Younger, quiet but clear. Eyes that read people the way Ravel reads stones.",
+          "note": "Named herself and her purpose on the road: she travels with Ravel because Ravel is worth traveling with. She came to the Kindly Rest because asked, and because she reads people—and read Loki as someone who does not deflect. Now travels with Loki toward the Standing Annex.",
+          "learned": [
+            "Reads people with precision—knows how to assess who is worthy of directness",
+            "Travels with intention, not accident",
+            "Does not need elaborate justification—clarity is enough"
+          ],
+          "skillsObserved": [
+            "Steady assessment under unusual circumstances",
+            "Speaks plainly and without hedge",
+            "Comfortable with silence and presence"
+          ],
+          "relationshipDelta": 1,
+          "vouchedBy": null,
+          "status": "active",
+          "statusNote": "On the road with Loki, heading toward the Standing Annex with Ravel and the Syllogist"
         }
       ],
       "intentsHeard": [],
-      "factUpdates": [],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "Ravel Ash-bearer came to the Kindly Rest to retrieve Sable, who sent word through dark channels. She is a reader of old machines and the old roads. She offers sanctuary to those the city abandons.",
+          "subjectId": "unmet-yet"
+        },
+        {
+          "op": "add",
+          "text": "Estry Krell travels with Ravel and reads people with precision. She was asked to come to the Kindly Rest and came because Ravel is worth traveling with. She does not flinch from directness.",
+          "subjectId": "unmet-yet"
+        },
+        {
+          "op": "add",
+          "text": "A Syllogist from the reaches has waited on the road toward the Standing Annex. They carry questions about the Hub crossing and the Null Stone. They hold a belief they know is breaking and have come to offer that breaking.",
+          "subjectId": null
+        }
+      ],
       "placeUpdates": [],
       "discovery": null,
       "codexUpdates": [
         {
-          "topic": "the-architect-in-the-lower-annex",
-          "label": "The Architect",
-          "kind": "person",
-          "fact": "Has drawn the attention of more than the hired striker—at minimum one Syllogist of the reaches knows of his work and his questions about the Hub crossing and the Null Stone's breaking.",
+          "topic": "what-descended-with-them",
+          "label": "What Descended With Them",
+          "kind": "lore",
+          "entityId": null,
+          "fact": "Two travelers named themselves on the road toward the Standing Annex. Ravel Ash-bearer reads old machines and the old roads; Estry Krell reads people. Both came to the Kindly Rest deliberately, with purpose, and both answered plainly when asked their truth.",
           "links": [
-            "the-hub-crossing",
-            "the-revel-sent-to-break-the-stone",
-            "halvex-coil"
+            "the-kindly-rest",
+            "the-taken-from-the-city"
           ]
         },
         {
-          "topic": "syllogist-tradition",
-          "label": "The Syllogists",
-          "kind": "faction",
-          "fact": "A tradition that prizes precision and the willingness to follow an argument to its breaking point. At least one of their number travels the road between the reaches, carrying both certainties and willingness to abandon them when a hole is found.",
+          "topic": "the-architect-in-the-lower-annex",
+          "label": "The Architect",
+          "kind": "person",
+          "entityId": null,
+          "fact": "A Syllogist from the reaches carries questions about the Hub crossing and the Null Stone. They waited on the road toward the Standing Annex with foreknowledge of Loki's presence. The lower Annex's questions about the sealed seam have reached beyond the valley's borders.",
           "links": [
             "the-hub-crossing",
-            "halvex-coil"
+            "the-null-stone"
           ]
         }
       ],
@@ -544,38 +690,52 @@
       "unlockSubstrate": null,
       "timeOps": {
         "hoursPassed": 0.5,
-        "why": "Evening at the Kindly Rest, then the walk from the door to the road bend"
+        "why": "Standing on the road, speaking plainly with travelers—time for honest exchange and naming"
       },
       "moveTo": null,
       "stateOps": [],
-      "imagePrompt": "A tall figure in grey standing in the curve of a dark road, stars sharp above, scrubland brush black on either side. Their face carries both the calm of precision and the fracture of certainty breaking. Loki emerging from the lit door of the Kindly Rest behind them—the two figures separated by a stretch of road and a question neither has yet spoken aloud.",
+      "itemUpdates": [],
+      "deriveItem": null,
+      "imagePrompt": null,
       "imageMedium": null,
       "newAbility": null,
       "gambitOps": null,
       "gambitApt": false,
-      "sceneEnded": false,
-      "momentArt": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/A%20tall%20figure%20in%20grey%20standing%20in%20the%20curve%20of%20a%20dark%20road%2C%20stars%20sharp%20above%2C%20scrubland%20brush%20black%20on%20either%20side.%20Their%20face%20carries%20both%20the%20calm%20of%20precision%20and%20the%20fracture%20of%20certainty%20breaking.%20Loki%20emerging%20from%20the%20lit%20door%20of%20the%20Kindly%20Rest%20behind%20them%E2%80%94the%20two%20figures%20separated%20by%20a%20str%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=51729&nologo=true"
+      "markDefiningMoment": null,
+      "markTeacher": null,
+      "offerPromotion": null,
+      "offerAcquisition": null,
+      "offerIntent": null,
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The road curves outward from Millbrook toward the Standing Annex, scrubland and low brush on either side. Clear mid-autumn night, stars visible overhead. The figure stands at a bend where shadow pools briefly before the road climbs again.",
+      "setting": "The road from the Kindly Rest curves outward toward the Standing Annex through scrubland in mid-autumn night. Clear sky above, stars visible. The road bends gently, shadow pooling briefly before climbing again.",
       "npcsPresent": [
         {
+          "name": "Ravel Ash-bearer",
+          "state": "Standing in the starlight, having just named herself and her purpose. Alert, watching Loki's reaction."
+        },
+        {
+          "name": "Estry Krell",
+          "state": "Beside Ravel, younger, steady. Eyes reading the moment."
+        },
+        {
           "name": "The Syllogist",
-          "state": "Standing in the road, waiting with an expression of careful calm, hands visible and open at their sides"
+          "state": "Standing at the road's shoulder, witness to the exchange. Calm. Waiting."
         }
       ],
       "objects": [
-        "The road ahead, curving gently outward",
-        "Scrubland brush on either side, dry and autumn-thick"
+        "The road ahead, curving outward into shadow",
+        "Scrubland brush, dry and autumn-thick on both sides",
+        "The stars overhead, bright and readable in the clear night"
       ],
       "threads": [
-        "Who sent this person, and how do they know Halvex's account?",
-        "What belief do they carry that breaks under scrutiny?",
-        "What do they want to break in what Loki believes?",
-        "How much of the lower Annex's attention has the Null Stone incident drawn?"
+        "Who is the Syllogist, and what belief do they carry that breaks?",
+        "What does the lower Annex want with news of the Hub crossing and the Null Stone?",
+        "Will the Syllogist join the band, or do they bring different purpose?"
       ]
     },
-    "beats": 1,
+    "beats": 2,
     "subPlace": null
   },
   "clock": {
@@ -601,14 +761,14 @@
       "locationEntityId": "the-unlit-deep",
       "status": "active",
       "progress": [
-        "The patient in the cellars is awake and aware. The threshold to meeting them is directly ahead. Ravel and Estry are moving to them now.",
         "Loki has descended to the cellars of the Kindly Rest and stands face to face with Sable. The patient is awake, aware, and waiting. Ravel and Estry are present. The next moment will determine what Sable chooses to do or say.",
         "Sable has returned from the Unlit Deep by choice and is recovering at the Kindly Rest. She turned back from the passage of her own will. The next move—why she returned, what she found, what she will choose now—is unresolved.",
         "Sable's full testimony: the city was ending for her. She sought the Unlit Deep and its keepers of the old works. She descended the passage but turned back at the threshold, unwilling to be read completely. She now knows the question but not yet the answer.",
         "Sable names the beneficiaries: the keepers of the old works, and the Transition board itself. The question has an answer—the old work is not a machine, it *reads*. But Sable has not yet chosen her next path.",
         "Sable has named her enemy: Vestin Kray on the Transition board, who feared what she was learning about the old works. She has accepted shelter at the Standing Annex and will travel with Loki, Ravel, and Estry to continue uncovering why the city wanted her gone.",
         "Sable has named her enemy: Vestin Kray on the Transition board, who feared what she was learning about the old works. She has accepted shelter and companionship with the band. The Churn-Revellers now travel together to the Standing Annex to continue uncovering why the city wanted her gone.",
-        "Loki has secured shelter and sanctuary for Sable at the Standing Annex; Sister Vreni has given her word that the Transition board will find nothing at the Kindly Rest. The band is ready to travel."
+        "Loki has secured shelter and sanctuary for Sable at the Standing Annex; Sister Vreni has given her word that the Transition board will find nothing at the Kindly Rest. The band is ready to travel.",
+        "Ravel and Estry have confirmed their purpose and their commitment. The band is gathering. All four will travel to the Standing Annex."
       ],
       "aliases": [],
       "startedAt": "2026-07-24T21:30:43.637Z"
@@ -1914,10 +2074,6 @@
     "turnsSinceOffer": 0,
     "recentOffers": [
       {
-        "thing": "A traveler passes on the road outside — you catch the sound of boots and a weathered voice calling a greeting to someone at the Rest's…",
-        "from": "the ambient grace of the place and road — a stranger sharing passage freely, no price asked"
-      },
-      {
         "thing": "A moment where Sable names the true shape of the resistance—it's not just keepers guarding machines, it's an entire power structure built…",
         "from": "Sable's own honesty, and the space Loki made for it by asking hard questions cleanly"
       },
@@ -1932,6 +2088,10 @@
       {
         "thing": "a Syllogist who has come to the margins of Millbrook, waiting on the road from the Kindly Rest",
         "from": "the echoes of what Halvex Coil has carried back to those who sent him—the story of understanding instead of breaking has reached the…"
+      },
+      {
+        "thing": "A Syllogist who has waited on the road with a question and a breaking belief",
+        "from": "The architecture beneath the valley—someone in the lower Annex is asking about the Hub crossing and the Null Stone. Halvex Coil's mandate…"
       }
     ],
     "wantProgress": {
@@ -10790,8 +10950,8 @@
     "craft": 4,
     "wits": 5
   },
-  "pendingSubPoints": 0,
-  "skillPoints": 4,
+  "pendingSubPoints": 1,
+  "skillPoints": 6,
   "discoveries": [
     {
       "key": "maintained_veil:illusion-as-emotional-mi",
@@ -11805,13 +11965,15 @@
         "kind": "person",
         "facts": [
           "[d5] Someone in the lower Annex called by this title is quietly asking after travelers carrying knowledge about sealed gates and the Hub crossing. He paid coin for the asking, which suggests serious concern—not mere curiosity.",
-          "[d7] Has drawn the attention of more than the hired striker—at minimum one Syllogist of the reaches knows of his work and his questions about the Hub crossing and the Null Stone's breaking."
+          "[d7] Has drawn the attention of more than the hired striker—at minimum one Syllogist of the reaches knows of his work and his questions about the Hub crossing and the Null Stone's breaking.",
+          "[d7] A Syllogist from the reaches carries questions about the Hub crossing and the Null Stone. They waited on the road toward the Standing Annex with foreknowledge of Loki's presence. The lower Annex's questions about the sealed seam have reached beyond the valley's borders."
         ],
         "links": [
           "the-hub-crossing",
           "the-revel-sent-to-break-the-stone",
           "the-taken-from-the-city",
-          "halvex-coil"
+          "halvex-coil",
+          "the-null-stone"
         ],
         "aliases": [],
         "createdDay": 5,
@@ -11885,7 +12047,8 @@
         "facts": [
           "[d5] Two visitors came to the Kindly Rest in the deep of an early-autumn night and went below with a purpose they did not name to the staff. The patient they discuss",
           "[d5] The woman with the steady voice was aware of Loki's presence before they reached the landing—she turned and faced them with assessment, not alarm. Her hunger is real but locked behind her own understanding of herself.",
-          "[d5] The woman named Ravel came to the Kindly Rest with Estry in deep night to reach a patient who broke a fever three days ago. Loki accepted their invitation to travel together."
+          "[d5] The woman named Ravel came to the Kindly Rest with Estry in deep night to reach a patient who broke a fever three days ago. Loki accepted their invitation to travel together.",
+          "[d7] Two travelers named themselves on the road toward the Standing Annex. Ravel Ash-bearer reads old machines and the old roads; Estry Krell reads people. Both came to the Kindly Rest deliberately, with purpose, and both answered plainly when asked their truth."
         ],
         "links": [
           "the-kindly-rest",
@@ -11896,7 +12059,7 @@
         "aliases": [],
         "createdDay": 5,
         "entityId": "what-descended-with-them",
-        "updatedDay": 5
+        "updatedDay": 7
       },
       "younger-visitor": {
         "id": "younger-visitor",
@@ -12750,17 +12913,17 @@
     "deferredMysteries": []
   },
   "tendencies": {
-    "devotion": 0.755385810663863,
-    "cerebral": 16.052141427164027,
-    "social": 18.250688344596384,
-    "strategic": 12.136117809600197,
-    "cautious": 5.3079040213676505,
-    "amorous": 7.127983905568188,
-    "generous": 5.837264152878694,
-    "ruthless": 0.18920452980768887,
-    "risky": 0.15462647706130953,
-    "patient": 0.04222571015666397,
-    "deception": 0.0491529138093712
+    "devotion": 0.7365011653972664,
+    "cerebral": 16.650837891484926,
+    "social": 18.794421135981473,
+    "strategic": 11.832714864360192,
+    "cautious": 5.175206420833459,
+    "amorous": 6.949784307928983,
+    "generous": 5.691332549056726,
+    "ruthless": 0.18447441656249663,
+    "risky": 0.1507608151347768,
+    "patient": 0.041170067402747375,
+    "deception": 0.04792409096413692
   },
   "aptitudes": [
     "strategist",
@@ -12770,7 +12933,7 @@
     "faithful",
     "charmer"
   ],
-  "actionCount": 203,
+  "actionCount": 204,
   "grantsVersion": 1,
   "precursorAccess": [
     "address_sense"
@@ -13840,8 +14003,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790388311331,
-  "rev": 910,
+  "updatedAt": 1790388678483,
+  "rev": 911,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -14867,7 +15030,7 @@
     "umbral_depths": 54,
     "the_quickwood": 101,
     "the_center": 50,
-    "valley": 23,
+    "valley": 24,
     "the_open_reach": 3
   },
   "opLossPending": false,
@@ -15019,10 +15182,10 @@
     {
       "id": "sess-19",
       "startedAt": "2026-09-26T00:51:07.826Z",
-      "lastAt": "2026-09-26T02:05:11.276Z",
+      "lastAt": "2026-09-26T02:11:18.478Z",
       "startDay": 88,
       "endDay": 88,
-      "beats": 3
+      "beats": 4
     }
   ],
   "establishedFacts": [
@@ -15133,11 +15296,29 @@
       "text": "The Churn-Revellers band was formed in the cellars of the Kindly Rest at midday on day 5. The four members are Loki, Sable, Ravel, and Estry. Their purpose is to seek answers about the old works and those who would silence the asking. They will gather at the Standing Annex.",
       "day": 5,
       "subjectId": null
+    },
+    {
+      "id": "unmet-yet",
+      "text": "Ravel Ash-bearer came to the Kindly Rest to retrieve Sable, who sent word through dark channels. She is a reader of old machines and the old roads. She offers sanctuary to those the city abandons.",
+      "day": 7,
+      "subjectId": "unmet-yet"
+    },
+    {
+      "id": "unmet-yet",
+      "text": "Estry Krell travels with Ravel and reads people with precision. She was asked to come to the Kindly Rest and came because Ravel is worth traveling with. She does not flinch from directness.",
+      "day": 7,
+      "subjectId": "unmet-yet"
+    },
+    {
+      "id": "f21",
+      "text": "A Syllogist from the reaches has waited on the road toward the Standing Annex. They carry questions about the Hub crossing and the Null Stone. They hold a belief they know is breaking and have come to offer that breaking.",
+      "day": 7,
+      "subjectId": null
     }
   ],
   "_opLedger": {
     "offer": {
-      "applied": 44,
+      "applied": 45,
       "rejected": 2,
       "lastWhy": "rejected-shape"
     },
@@ -15154,26 +15335,26 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 234,
-    "choices": 234,
-    "characterDeltas": 118,
-    "scene": 234,
+    "sceneSummary": 235,
+    "choices": 235,
+    "characterDeltas": 119,
+    "scene": 235,
     "placeUpdates": 28,
-    "codexUpdates": 135,
-    "timeOps": 187,
-    "offer": 39,
+    "codexUpdates": 136,
+    "timeOps": 188,
+    "offer": 40,
     "generateRequest": 7,
-    "sceneEnded": 103,
-    "npcUpdates": 186,
+    "sceneEnded": 104,
+    "npcUpdates": 187,
     "moveTo": 8,
-    "gambitApt": 62,
-    "deeds": 13,
-    "questUpdates": 40,
+    "gambitApt": 63,
+    "deeds": 14,
+    "questUpdates": 41,
     "standingOps": 4,
-    "factUpdates": 16,
+    "factUpdates": 17,
     "stageOps": 7,
     "encounterOps": 9,
-    "ledgerEvents": 10,
+    "ledgerEvents": 11,
     "newEncounter": 3,
     "imagePrompt": 36,
     "scene_ended": 1,
@@ -15186,7 +15367,7 @@
     "partyOps": 3,
     "bandOps": 1
   },
-  "_opTurns": 234,
+  "_opTurns": 235,
   "customAbilities": {
     "mirror-bright": {
       "id": "mirror-bright",
@@ -15305,7 +15486,7 @@
     }
   },
   "companionBonds": {
-    "coil": 9
+    "coil": 9.5
   },
   "practice": {
     "schemaVersion": 1,
@@ -15316,7 +15497,7 @@
       "the_misdirect": 2,
       "the_better_story": 11,
       "prism_sight": 14,
-      "harmonic_voice": 12,
+      "harmonic_voice": 13,
       "hunters_strike": 3,
       "descent": 11,
       "wayfinding": 1,
@@ -15359,7 +15540,7 @@
       "the_misdirect": 31,
       "the_better_story": 32,
       "prism_sight": 80,
-      "harmonic_voice": 83,
+      "harmonic_voice": 88,
       "hunters_strike": 32,
       "descent": 83,
       "wayfinding": 69,
@@ -15813,11 +15994,6 @@
   "companionMemory": {
     "coil": [
       {
-        "text": "Carried a genuine thanks to a road-warden who holds the water-crisis and the suffering it brings as their own burden to warn against.",
-        "weight": 1,
-        "day": 3
-      },
-      {
         "text": "Read a Churn-Revel's command-orchestration and bound them with a true bargain at the Null Stone's heart, holding ground against deliberate chaos.",
         "weight": 1,
         "day": 3
@@ -15871,6 +16047,11 @@
         "text": "Named a band and spoke the oath that binds it—the Churn-Revellers took their name in a cellar lamp-light and chose understanding over breaking.",
         "weight": 1,
         "day": 5
+      },
+      {
+        "text": "Named the truth of two travelers' purpose on the open road without forcing or shaming—drew honest answers through asking plainly.",
+        "weight": 1,
+        "day": 7
       }
     ]
   },
@@ -16151,12 +16332,12 @@
     "prepare": 5,
     "careful": 10,
     "woo": 1,
-    "rapport": 15,
+    "rapport": 16,
     "retreat": 1,
     "ask": 8,
     "help": 10,
     "study": 10,
-    "investigate": 14,
+    "investigate": 15,
     "charm": 2,
     "comfort": 2,
     "finesse": 3,
@@ -16168,7 +16349,8 @@
     "consult": 1,
     "misdirect": 2,
     "analyze": 1,
-    "insight": 1
+    "insight": 1,
+    "discipline": 1
   },
   "aptitudeEarnCount": {
     "faithful": 1,
@@ -16288,6 +16470,14 @@
       "day": 5,
       "worldDay": 88,
       "actionCount": 201
+    },
+    {
+      "companionId": "coil",
+      "kind": "deed",
+      "delta": 0.5,
+      "day": 7,
+      "worldDay": 88,
+      "actionCount": 203
     }
   ],
   "_exchangeReceipts": [],
@@ -16598,412 +16788,412 @@
   },
   "_promptRows": {
     "character": {
-      "reached": 49,
-      "produced": 49
+      "reached": 50,
+      "produced": 50
     },
     "location": {
-      "reached": 49,
-      "produced": 49
+      "reached": 50,
+      "produced": 50
     },
     "region": {
-      "reached": 49,
-      "produced": 49
+      "reached": 50,
+      "produced": 50
     },
     "groundDetail": {
-      "reached": 49,
-      "produced": 22
+      "reached": 50,
+      "produced": 23
     },
     "lore": {
-      "reached": 49,
-      "produced": 46
+      "reached": 50,
+      "produced": 47
     },
     "traditionMotiveDetail": {
-      "reached": 49,
-      "produced": 49
+      "reached": 50,
+      "produced": 50
     },
     "sheetsDetail": {
-      "reached": 49,
+      "reached": 50,
       "produced": 31
     },
     "rules": {
-      "reached": 49,
-      "produced": 49
+      "reached": 50,
+      "produced": 50
     },
     "recentTurns": {
-      "reached": 49,
-      "produced": 43
+      "reached": 50,
+      "produced": 44
     },
     "timeLabel": {
-      "reached": 49,
-      "produced": 49
+      "reached": 50,
+      "produced": 50
     },
     "npcRegistryDetail": {
-      "reached": 49,
-      "produced": 49
+      "reached": 50,
+      "produced": 50
     },
     "mintedUnmetDetail": {
-      "reached": 49,
-      "produced": 49
+      "reached": 50,
+      "produced": 50
     },
     "npcSeedDetail": {
-      "reached": 49,
+      "reached": 50,
       "produced": 24
     },
     "traditionVocab": {
-      "reached": 49,
-      "produced": 49
+      "reached": 50,
+      "produced": 50
     },
     "standingDetail": {
-      "reached": 49,
-      "produced": 49
+      "reached": 50,
+      "produced": 50
     },
     "recalledDetail": {
-      "reached": 49,
+      "reached": 50,
       "produced": 4
     },
     "bearingsDetail": {
-      "reached": 49,
-      "produced": 49
+      "reached": 50,
+      "produced": 50
     },
     "caravansDetail": {
-      "reached": 49,
+      "reached": 50,
       "produced": 0
     },
     "commandDetail": {
-      "reached": 49,
-      "produced": 49
+      "reached": 50,
+      "produced": 50
     },
     "presenceDetail": {
-      "reached": 49,
-      "produced": 39
+      "reached": 50,
+      "produced": 40
     },
     "worthHereDetail": {
-      "reached": 49,
+      "reached": 50,
       "produced": 0
     },
     "inventoryDetail": {
-      "reached": 49,
-      "produced": 49
+      "reached": 50,
+      "produced": 50
     },
     "sceneState": {
-      "reached": 49,
-      "produced": 43
+      "reached": 50,
+      "produced": 44
     },
     "holdingsDetail": {
-      "reached": 49,
-      "produced": 49
+      "reached": 50,
+      "produced": 50
     },
     "debtsDetail": {
-      "reached": 49,
+      "reached": 50,
       "produced": 0
     },
     "carriedDetail": {
-      "reached": 49,
+      "reached": 50,
       "produced": 0
     },
     "abilityLawDetail": {
-      "reached": 49,
-      "produced": 49
+      "reached": 50,
+      "produced": 50
     },
     "questsDetail": {
-      "reached": 49,
-      "produced": 49
+      "reached": 50,
+      "produced": 50
     },
     "structuredQuestsDetail": {
-      "reached": 49,
+      "reached": 50,
       "produced": 0
     },
     "traditionArcDetail": {
-      "reached": 49,
+      "reached": 50,
       "produced": 0
     },
     "npcErrandsDetail": {
-      "reached": 49,
+      "reached": 50,
       "produced": 0
     },
     "codexDetail": {
-      "reached": 49,
-      "produced": 49
+      "reached": 50,
+      "produced": 50
     },
     "companionsDetail": {
-      "reached": 49,
-      "produced": 49
+      "reached": 50,
+      "produced": 50
     },
     "placeMemoryDetail": {
-      "reached": 49,
+      "reached": 50,
       "produced": 39
     },
     "agesMissingDetail": {
-      "reached": 49,
-      "produced": 49
+      "reached": 50,
+      "produced": 50
     },
     "newsDetail": {
-      "reached": 49,
-      "produced": 49
+      "reached": 50,
+      "produced": 50
     },
     "worldArcsDetail": {
-      "reached": 49,
-      "produced": 49
+      "reached": 50,
+      "produced": 50
     },
     "legendsPursuableDetail": {
-      "reached": 49,
+      "reached": 50,
       "produced": 12
     },
     "wakesDetail": {
-      "reached": 49,
+      "reached": 50,
       "produced": 0
     },
     "arcMoodDetail": {
-      "reached": 49,
-      "produced": 49
+      "reached": 50,
+      "produced": 50
     },
     "reachableDeadDetail": {
-      "reached": 49,
+      "reached": 50,
       "produced": 46
     },
     "threatToPlayer": {
-      "reached": 49,
+      "reached": 50,
       "produced": 0
     },
     "guardiansDetail": {
-      "reached": 49,
+      "reached": 50,
       "produced": 0
     },
     "resolution": {
-      "reached": 49,
-      "produced": 39
+      "reached": 50,
+      "produced": 40
     },
     "playerInput": {
-      "reached": 49,
+      "reached": 50,
       "produced": 10
     },
     "exactWords": {
-      "reached": 49,
-      "produced": 28
+      "reached": 50,
+      "produced": 29
     },
     "travelDirective": {
-      "reached": 49,
+      "reached": 50,
       "produced": 1
     },
     "itemAdvance": {
-      "reached": 49,
+      "reached": 50,
       "produced": 0
     },
     "encounterWeaveDetail": {
-      "reached": 49,
+      "reached": 50,
       "produced": 6
     },
     "encounterOfferDetail": {
-      "reached": 49,
+      "reached": 50,
       "produced": 3
     },
     "fightFramingDetail": {
-      "reached": 49,
+      "reached": 50,
       "produced": 0
     },
     "abilityGrantDetail": {
-      "reached": 49,
+      "reached": 50,
       "produced": 0
     },
     "stageRevealDetail": {
-      "reached": 49,
+      "reached": 50,
       "produced": 0
     },
     "itemEvolveDetail": {
-      "reached": 49,
+      "reached": 50,
       "produced": 0
     },
     "worldPressureDetail": {
-      "reached": 49,
+      "reached": 50,
       "produced": 2
     },
     "offerDetail": {
-      "reached": 49,
+      "reached": 50,
       "produced": 2
     },
     "teacherOfferDetail": {
-      "reached": 49,
+      "reached": 50,
       "produced": 0
     },
     "substrateDetail": {
-      "reached": 49,
-      "produced": 15
+      "reached": 50,
+      "produced": 16
     },
     "romanceGuidanceDetail": {
-      "reached": 49,
+      "reached": 50,
       "produced": 4
     },
     "factsDetail": {
-      "reached": 49,
-      "produced": 49
+      "reached": 50,
+      "produced": 50
     },
     "evolvedItemsDetail": {
-      "reached": 49,
+      "reached": 50,
       "produced": 0
     },
     "opLossNote": {
-      "reached": 49,
+      "reached": 50,
       "produced": 0
     },
     "emergenceDetail": {
-      "reached": 49,
+      "reached": 50,
       "produced": 0
     },
     "perilNote": {
-      "reached": 49,
+      "reached": 50,
       "produced": 0
     },
     "encounterDetail": {
-      "reached": 49,
+      "reached": 50,
       "produced": 4
     },
     "masteryDetail": {
-      "reached": 49,
-      "produced": 49
+      "reached": 50,
+      "produced": 50
     },
     "bookkeepingRestate": {
-      "reached": 49,
+      "reached": 50,
       "produced": 0
     },
     "anomalyDetail": {
-      "reached": 49,
-      "produced": 47
+      "reached": 50,
+      "produced": 48
     },
     "repairPanelDetail": {
-      "reached": 49,
-      "produced": 49
+      "reached": 50,
+      "produced": 50
     },
     "teacherDetail": {
-      "reached": 49,
+      "reached": 50,
       "produced": 0
     },
     "toolkitDetail": {
-      "reached": 49,
-      "produced": 49
+      "reached": 50,
+      "produced": 50
     },
     "availableEncounters": {
-      "reached": 49,
-      "produced": 45
+      "reached": 50,
+      "produced": 46
     },
     "partyDetail": {
-      "reached": 49,
+      "reached": 50,
       "produced": 0
     },
     "ratingDetail": {
-      "reached": 49,
-      "produced": 49
+      "reached": 50,
+      "produced": 50
     },
     "registerDetail": {
-      "reached": 49,
-      "produced": 49
+      "reached": 50,
+      "produced": 50
     },
     "legendDetail": {
-      "reached": 49,
+      "reached": 50,
       "produced": 1
     },
     "livingWorldDetail": {
-      "reached": 49,
-      "produced": 20
+      "reached": 50,
+      "produced": 21
     },
     "assignmentsDetail": {
-      "reached": 49,
+      "reached": 50,
       "produced": 0
     },
     "latentArcsDetail": {
-      "reached": 49,
-      "produced": 49
+      "reached": 50,
+      "produced": 50
     },
     "seasonalDetail": {
-      "reached": 49,
-      "produced": 49
+      "reached": 50,
+      "produced": 50
     },
     "schoolsDetail": {
-      "reached": 49,
-      "produced": 49
+      "reached": 50,
+      "produced": 50
     },
     "sharedCanonDetail": {
-      "reached": 49,
-      "produced": 26
+      "reached": 50,
+      "produced": 27
     },
     "worldCountLabel": {
-      "reached": 49,
-      "produced": 49
+      "reached": 50,
+      "produced": 50
     },
     "waygateDetail": {
-      "reached": 49,
+      "reached": 50,
       "produced": 27
     },
     "readAloudDetail": {
-      "reached": 49,
-      "produced": 49
+      "reached": 50,
+      "produced": 50
     },
     "scenePacingDetail": {
-      "reached": 49,
+      "reached": 50,
       "produced": 20
     },
     "wishesDetail": {
-      "reached": 29,
+      "reached": 30,
       "produced": 0
     },
     "worldMovedOnDetail": {
-      "reached": 29,
+      "reached": 30,
       "produced": 2
     },
     "companionLivesDetail": {
-      "reached": 29,
+      "reached": 30,
       "produced": 18
     },
     "homeDetail": {
-      "reached": 29,
+      "reached": 30,
       "produced": 0
     },
     "invitationsDetail": {
-      "reached": 29,
+      "reached": 30,
       "produced": 0
     },
     "bandsJoinedDetail": {
-      "reached": 29,
+      "reached": 30,
       "produced": 0
     },
     "travelersHereDetail": {
-      "reached": 29,
-      "produced": 2
+      "reached": 30,
+      "produced": 3
     },
     "travelersDetail": {
-      "reached": 29,
+      "reached": 30,
       "produced": 0
     },
     "journeyDetail": {
-      "reached": 27,
+      "reached": 28,
       "produced": 0
     },
     "journeyUnderwayDetail": {
-      "reached": 27,
-      "produced": 1
+      "reached": 28,
+      "produced": 2
     },
     "holdsNearDetail": {
-      "reached": 27,
-      "produced": 23
+      "reached": 28,
+      "produced": 24
     },
     "moneyDetail": {
-      "reached": 26,
-      "produced": 26
+      "reached": 27,
+      "produced": 27
     },
     "jobsDetail": {
-      "reached": 26,
+      "reached": 27,
       "produced": 0
     },
     "powersHereDetail": {
-      "reached": 3,
-      "produced": 1
+      "reached": 4,
+      "produced": 2
     },
     "nemesisDetail": {
-      "reached": 3,
-      "produced": 3
+      "reached": 4,
+      "produced": 4
     }
   },
   "_opUnknown": {
-    "sceneSummary": 61,
+    "sceneSummary": 62,
     "scene_summary": 1
   },
   "_bandNotes": null,

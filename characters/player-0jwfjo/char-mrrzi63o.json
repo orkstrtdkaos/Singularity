@@ -162,108 +162,17 @@
         "player": "I’ll look around for Ragnar Solmyr",
         "summary": "Brynjar scanned the Hub Hall at dawn — no sign of Ragnar, who is still two days' walk south.",
         "narration": "The wardroom is grey with early light, the clay lamp on the shelf burned to its last thread of oil. The two other travelers are still breathing slow and flat on their pallets. Freki is already on her feet, watching the narrow door with the patience of something that slept with one ear open all night.\n\nYou pull on your boots and take the stairs down into the Hub Hall. The octagonal space is quiet at this hour — only one traveler at the chalk column, marking his road, and the warden at his desk with his tally-stick and a mug going cold. The eight threshold arches stand open to the morning air, and the light coming through the hubward arch is the flat grey of a dawn that hasn't fully committed yet.\n\nYou do a complete pass of the hall and both sides of the waygate arch — the outside approach, the stone benches along the gatehouse wall, the shadow of the lean-to where the lime-traders left their cart yesterday. No Ragnar. He walked south with Maret when you parted ways at the fire-pit, and south is the Stillhold road. The waygate is a day-and-a-half hubward from where that fire burned, which means he is not here, and would not be here yet even if he'd started walking the moment you did.\n\nFreki leans against your calf once, reads the absence the same way you do, and turns back toward the wardroom stairs. The morning is yours for now — and the heavy-wool man from last night is still the only thread worth pulling."
+      },
+      {
+        "player": "Eat something from the pack, water Freki, and settle in to watch the morning traffic — see who the first hubward travelers of the day are",
+        "summary": "...",
+        "narration": "..."
       }
     ],
     "lastTurn": {
-      "narration": "The wardroom is grey with early light, the clay lamp on the shelf burned to its last thread of oil. The two other travelers are still breathing slow and flat on their pallets. Freki is already on her feet, watching the narrow door with the patience of something that slept with one ear open all night.\n\nYou pull on your boots and take the stairs down into the Hub Hall. The octagonal space is quiet at this hour — only one traveler at the chalk column, marking his road, and the warden at his desk with his tally-stick and a mug going cold. The eight threshold arches stand open to the morning air, and the light coming through the hubward arch is the flat grey of a dawn that hasn't fully committed yet.\n\nYou do a complete pass of the hall and both sides of the waygate arch — the outside approach, the stone benches along the gatehouse wall, the shadow of the lean-to where the lime-traders left their cart yesterday. No Ragnar. He walked south with Maret when you parted ways at the fire-pit, and south is the Stillhold road. The waygate is a day-and-a-half hubward from where that fire burned, which means he is not here, and would not be here yet even if he'd started walking the moment you did.\n\nFreki leans against your calf once, reads the absence the same way you do, and turns back toward the wardroom stairs. The morning is yours for now — and the heavy-wool man from last night is still the only thread worth pulling.",
-      "sceneSummary": "Brynjar scanned the Hub Hall at dawn — no sign of Ragnar, who is still two days' walk south.",
-      "choices": [
-        {
-          "label": "Ask the warden if anyone matching the heavy-wool man has been through before — the tally-stick goes back further than last night",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "falsehood_truth": 0.3
-          },
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "ask",
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Use Order-Sense on the waygate arch itself — the heavy-wool man read the ironwork for a reason; see what the structure actually says",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "concrete_abstract": 0.2,
-            "chaos_order": 0.3
-          },
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": "order_sense",
-          "energyCost": 3,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Eat something from the pack, water Freki, and settle in to watch the morning traffic — see who the first hubward travelers of the day are",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {},
-          "difficulty": "very easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "scout",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        }
-      ],
-      "scene": {
-        "setting": "Hub Hall of the Crossing waygate — octagonal stone chamber, four iron lanterns dimming as morning light comes through the hubward arch, the chalk-board column at the center, eight threshold arches open to early grey dawn.",
-        "npcsPresent": [
-          {
-            "name": "Waygate Warden",
-            "state": "at his desk below the wardroom stairs, tally-stick in hand, mug going cold beside him"
-          },
-          {
-            "name": "Freki",
-            "state": "at Brynjar's calf, watching the hubward arch"
-          }
-        ],
-        "objects": [
-          "chalk-board column",
-          "tally-stick ledger at the warden's desk",
-          "iron lanterns burning low",
-          "Traveler's Pack",
-          "Waterskin"
-        ],
-        "threads": [
-          "The heavy-wool man — spinward road, gone into dark; Freki has his scent and will know him again",
-          "Maret Threnwick is traveling to the Stillhold alone with the cloth bundle",
-          "The restricted creditor on Maret's debt remains unnamed",
-          "The dead sheep at the northern waygate — sickness moving hubward",
-          "Ragnar is still south on the Stillhold road — not here yet"
-        ]
-      },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "waygate-warden",
-          "note": "On duty at dawn, tally-stick and cold mug. Did not speak to Brynjar this beat.",
-          "statusNote": "On duty at the wardroom desk, Hub Hall of the Crossing."
-        }
-      ],
-      "timeOps": {
-        "hoursPassed": 0.5,
-        "why": "Brief scan of the Hub Hall at dawn — a few minutes' work"
-      }
+      "narration": "...",
+      "choices": [],
+      "sceneSummary": "..."
     },
     "sceneState": {
       "setting": "Hub Hall of the Crossing waygate — octagonal stone chamber, four iron lanterns dimming as morning light comes through the hubward arch, the chalk-board column at the center, eight threshold arches open to early grey dawn.",
@@ -292,7 +201,7 @@
         "Ragnar is still south on the Stillhold road — not here yet"
       ]
     },
-    "beats": 6,
+    "beats": 7,
     "subPlace": {
       "slug": "waygate-wardroom",
       "name": "Waygate Wardroom",
@@ -302,7 +211,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 3,
-    "hour": 5,
+    "hour": 6,
     "realAnchor": null
   },
   "companions": [
@@ -1037,7 +946,7 @@
         "lastOutcome": "problem"
       }
     },
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 2,
     "recentOffers": [
       {
         "thing": "Maret's eyes go briefly to Ragnar when she arrives — not suspicion, assessment — and then back to Brynjar, and she says, quietly: 'The…",
@@ -5860,7 +5769,7 @@
     ],
     "worldMovedOnSeen": {
       "water_crisis": {
-        "beats": 1
+        "beats": 2
       }
     }
   },
@@ -6767,20 +6676,20 @@
     ]
   },
   "tendencies": {
-    "leadership": 4.386900142138526,
-    "cerebral": 7.808128317272187,
-    "strategic": 6.98995585002771,
-    "ruthless": 0.2819881023409168,
-    "social": 10.007291913909498,
-    "cautious": 9.633266010814193,
-    "generous": 1.307355140338239,
-    "patient": 0.572929976008282
+    "leadership": 4.277227638585062,
+    "cerebral": 7.612925109340383,
+    "strategic": 7.815206953777017,
+    "ruthless": 0.27493839978239387,
+    "social": 9.75710961606176,
+    "cautious": 10.392434360543838,
+    "generous": 1.274671261829783,
+    "patient": 0.558606726608075
   },
   "aptitudes": [
     "silver_tongue",
     "banner"
   ],
-  "actionCount": 52,
+  "actionCount": 53,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -7868,8 +7777,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790384018459,
-  "rev": 257,
+  "updatedAt": 1790384081853,
+  "rev": 258,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -8334,7 +8243,7 @@
   "_pinsInitialized": true,
   "regionsKnown": {
     "riven_marches": 39,
-    "the_center": 17
+    "the_center": 18
   },
   "practice": {
     "schemaVersion": 1,
@@ -8432,10 +8341,10 @@
     {
       "id": "sess-6",
       "startedAt": "2026-09-26T00:51:36.792Z",
-      "lastAt": "2026-09-26T00:51:36.792Z",
+      "lastAt": "2026-09-26T00:54:41.846Z",
       "startDay": 88,
       "endDay": 88,
-      "beats": 1
+      "beats": 2
     }
   ],
   "_pendingArrival": null,
@@ -8451,7 +8360,7 @@
     "at": "2026-07-23T01:18:04.353Z"
   },
   "_opEmitted": {
-    "sceneSummary": 49,
+    "sceneSummary": 50,
     "choices": 49,
     "scene": 49,
     "npcUpdates": 45,
@@ -8469,7 +8378,7 @@
     "stageOps": 2,
     "factUpdates": 2
   },
-  "_opTurns": 49,
+  "_opTurns": 50,
   "_opLedger": {
     "offer": {
       "applied": 8,
@@ -8570,7 +8479,7 @@
   "_debtReceipts": [],
   "skillUses": {
     "negotiate": 10,
-    "careful": 8,
+    "careful": 9,
     "help": 2,
     "plan": 1,
     "guard": 1,
@@ -8579,7 +8488,7 @@
     "travel": 6,
     "ask": 1,
     "lead": 1,
-    "scout": 4,
+    "scout": 5,
     "prepare": 1
   },
   "aptitudeEarnCount": {

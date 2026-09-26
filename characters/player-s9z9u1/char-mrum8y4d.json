@@ -418,11 +418,190 @@
     "At Mara Wells' Store in deep night, the band gathers road rations and learns that Millbrook's earth resists shortcuts—the land will not permit close-work passage through the town. Mara directs them northward toward Whistling Woman Post on the long road, naming Halvex Coil as keeper of the Standing Annex and offering the wisdom of trust in the slower way."
   ],
   "currentLocationId": "gen-mara-wells-store",
-  "activeScene": null,
+  "activeScene": {
+    "locationId": "gen-mara-wells-store",
+    "turns": [
+      {
+        "player": null,
+        "summary": "At Mara Wells' Store in deep night: the band readies to depart for Whistling Woman Post and the Standing Annex by the long road, honoring Millbrook's resistance to shortcuts.",
+        "narration": "The deep night settles around Mara Wells' Store like a thing with weight. The band has eaten, their packs are heavier with rations now, and Mara stands behind the counter with her hands folded, watching you all with the steady regard of someone who has seen travelers in far worse shape walk out of here alive.\n\nOutside, the road stretches northward into darkness. Whistling Woman Post lies two hours' walk on the spinward path — Mara's words, not guesswork. The earth beneath Millbrook has made itself clear: the shortfold will not work here. The land prefers the long way, and you are honoring that preference.\n\nCy clicks softly beside your knee, lamp raised. The brass segments shift in the lamplight, and you feel the weight of the choice settling: the Standing Annex awaits, and Halvex Coil holds it. Ravel stands near the door, reading the dark beyond. Estry and Sable are checking their packs one final time. Orla has stepped outside to breathe the autumn air.\n\nMara speaks quietly. 'You could leave now. The road will take you. Or you could rest here until the stars turn — I keep beds for travelers who need them.' Her eyes read you without judgment. 'The choice is yours. But I'll say this plainly: the ones who rushed the long road did not fare well. The ones who let it teach them made it through.'"
+      }
+    ],
+    "lastTurn": {
+      "narration": "The deep night settles around Mara Wells' Store like a thing with weight. The band has eaten, their packs are heavier with rations now, and Mara stands behind the counter with her hands folded, watching you all with the steady regard of someone who has seen travelers in far worse shape walk out of here alive.\n\nOutside, the road stretches northward into darkness. Whistling Woman Post lies two hours' walk on the spinward path — Mara's words, not guesswork. The earth beneath Millbrook has made itself clear: the shortfold will not work here. The land prefers the long way, and you are honoring that preference.\n\nCy clicks softly beside your knee, lamp raised. The brass segments shift in the lamplight, and you feel the weight of the choice settling: the Standing Annex awaits, and Halvex Coil holds it. Ravel stands near the door, reading the dark beyond. Estry and Sable are checking their packs one final time. Orla has stepped outside to breathe the autumn air.\n\nMara speaks quietly. 'You could leave now. The road will take you. Or you could rest here until the stars turn — I keep beds for travelers who need them.' Her eyes read you without judgment. 'The choice is yours. But I'll say this plainly: the ones who rushed the long road did not fare well. The ones who let it teach them made it through.'",
+      "sceneSummary": "At Mara Wells' Store in deep night: the band readies to depart for Whistling Woman Post and the Standing Annex by the long road, honoring Millbrook's resistance to shortcuts.",
+      "scene": {
+        "setting": "Mara Wells' Store — a small, warm room lit by oil lamps and a dying hearth fire. The counter runs along one wall; shelves hold supplies and goods. Outside is deep autumn night, the road dark and quiet, stretching northward.",
+        "npcsPresent": [
+          {
+            "name": "Mara Wells",
+            "state": "Standing behind the counter with folded hands, watching the band with steady assessment. She has made her offer and is waiting to see what they choose."
+          }
+        ],
+        "objects": [
+          "The counter with its ledger and scales",
+          "Shelves of goods — the ones Mara keeps stocked for travelers in deep night",
+          "Four new packs of road rations, distributed among the band",
+          "Oil lamps casting warm light"
+        ],
+        "threads": [
+          "The choice between departing now or resting here until the stars turn",
+          "The long road to Whistling Woman Post and then the Standing Annex",
+          "What waits at the Annex and whether Halvex Coil will have answers"
+        ]
+      },
+      "choices": [
+        {
+          "label": "Set out onto the long road now — the night is young, and the Standing Annex awaits.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "travel"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Accept Mara's offer and rest here until dawn — honor the road's pace and let the band recover.",
+          "attribute": "practical",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": "very easy",
+          "opposedDifficulty": null,
+          "intentTags": [],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Mara plainly if she knows anything more — about the Annex, about Halvex, about who might have paid to have you followed.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Step outside and read the night — check on your companions, feel out what the darkness holds, or simply breathe the autumn air.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": "very easy",
+          "opposedDifficulty": null,
+          "intentTags": [],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        }
+      ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "journey-gen-whistling-woman-post-88",
+          "note": "The band gathers at Mara Wells' Store with full road rations. The long road northward to Whistling Woman Post lies open. Millbrook's earth resists shortcuts — the standard path is the only way through."
+        }
+      ],
+      "standingOps": [],
+      "delegateOps": [],
+      "jobOps": [],
+      "arcOps": [],
+      "adoptSchool": null,
+      "offer": {
+        "thing": "Mara's plain wisdom about the long road — not a promise, but a teacher's reading of how the road itself works",
+        "from": "Her own experience with travelers, and her respect for the ones who made it through by letting the journey teach them"
+      },
+      "stageOps": [],
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "mara-wells",
+          "note": "Offered the band shelter until dawn if they choose it. Named the road's pace as the price of survival on the long way. Made clear she reads character through bearing and choice."
+        }
+      ],
+      "intentsHeard": [],
+      "factUpdates": [],
+      "placeUpdates": [],
+      "discovery": null,
+      "codexUpdates": [],
+      "holdingOps": [],
+      "holdTrades": [],
+      "debtOps": [],
+      "exchangeOps": [],
+      "partyOps": [],
+      "generateRequest": [],
+      "encounterOps": [],
+      "projectOps": [],
+      "bandOps": [],
+      "strikeOps": [],
+      "deathOps": [],
+      "newEncounter": null,
+      "unlockPrecursor": null,
+      "unlockSubstrate": null,
+      "timeOps": null,
+      "moveTo": null,
+      "stateOps": [],
+      "itemUpdates": [],
+      "deriveItem": null,
+      "imagePrompt": null,
+      "imageMedium": null,
+      "newAbility": null,
+      "gambitOps": null,
+      "gambitApt": false,
+      "sceneEnded": false
+    },
+    "sceneState": {
+      "setting": "Mara Wells' Store — a small, warm room lit by oil lamps and a dying hearth fire. The counter runs along one wall; shelves hold supplies and goods. Outside is deep autumn night, the road dark and quiet, stretching northward.",
+      "npcsPresent": [
+        {
+          "name": "Mara Wells",
+          "state": "Standing behind the counter with folded hands, watching the band with steady assessment. She has made her offer and is w"
+        }
+      ],
+      "objects": [
+        "The counter with its ledger and scales",
+        "Shelves of goods — the ones Mara keeps stocked for travelers in deep night",
+        "Four new packs of road rations, distributed among the band",
+        "Oil lamps casting warm light"
+      ],
+      "threads": [
+        "The choice between departing now or resting here until the stars turn",
+        "The long road to Whistling Woman Post and then the Standing Annex",
+        "What waits at the Annex and whether Halvex Coil will have answers"
+      ]
+    },
+    "beats": 1,
+    "subPlace": null
+  },
   "clock": {
     "schemaVersion": 1,
     "day": 8,
-    "hour": 2,
+    "hour": 3,
     "realAnchor": null
   },
   "companions": [
@@ -544,6 +723,21 @@
       "startedAt": "2026-09-26T02:04:07.737Z",
       "startedAtDay": 5,
       "journeyDestId": "gen-the-standing-annex"
+    },
+    {
+      "id": "journey-gen-whistling-woman-post-88",
+      "kind": "journey",
+      "structured": false,
+      "status": "active",
+      "title": "Journey to Whistling Woman Post",
+      "summary": "about 36.1 days through the Crossing gate (10 energy at the gate) · 19 rations for the road — you carry 0 (19 short) · 28 nights in the open, 8 under a roof · the worst of the road: The Axis Gate (dangerous) · with Orla Yardley. Ready yourself — rations, your people, what you leave behind — and set out when you are ready.",
+      "progress": [
+        "The band gathers at Mara Wells' Store with full road rations. The long road northward to Whistling Woman Post lies open. Millbrook's earth resists shortcuts — the standard path is the only way through."
+      ],
+      "giver": null,
+      "startedAt": "2026-09-26T04:24:57.287Z",
+      "startedAtDay": 8,
+      "journeyDestId": "gen-whistling-woman-post"
     }
   ],
   "npcRegistry": {
@@ -1302,7 +1496,8 @@
         "[d8] Opened her store to the band in deep night without hesitation—read them as honest rather than threatening. Waiting for an answer about what they need.",
         "[d8] Offered rations at fair price and named her doubt plainly—the earth spoke when the band folded into town.",
         "[d8] Opened her store in deep night to the band without hesitation. Named the resistance beneath Millbrook plainly—the earth has awareness and will, and resists close-work. Directed them toward Whistling Woman Post and named Halvex Coil as the keeper of the Standing Annex. Her plainness reads as tested…",
-        "[d8] Offered fair supplies to the band in deep night without hesitation, named the resistance beneath Millbrook plainly—the earth has awareness and will, and resists close-work. Directed them toward Whistling Woman Post and named Halvex Coil as keeper of the Standing Annex."
+        "[d8] Offered fair supplies to the band in deep night without hesitation, named the resistance beneath Millbrook plainly—the earth has awareness and will, and resists close-work. Directed them toward Whistling Woman Post and named Halvex Coil as keeper of the Standing Annex.",
+        "[d8] Offered the band shelter until dawn if they choose it. Named the road's pace as the price of survival on the long way. Made clear she reads character through bearing and choice."
       ],
       "knownFacts": [
         "Keeps the store open through deep night hours—either by choice or by the traffic of road-travelers who cannot wait for daylight",
@@ -1335,7 +1530,7 @@
         "locationId": "gen-mara-wells-store",
         "day": 8
       },
-      "met": 4
+      "met": 5
     }
   },
   "placeMemory": {
@@ -1689,14 +1884,6 @@
       {
         "day": 5,
         "worldDay": 88,
-        "text": "Cinder Vael, the Wright Who Would Not Stop is spoken of: starting a thing she will not finish.",
-        "tier": "murmur",
-        "section": "world",
-        "locationId": "the_ceaseless"
-      },
-      {
-        "day": 5,
-        "worldDay": 88,
         "text": "The Last Walker of the Sealed Wood is spoken of: talking to a Thornwake child about the world outside.",
         "tier": "murmur",
         "section": "world",
@@ -1849,19 +2036,22 @@
         "text": "The Wardens of Cairnhold has taken an interest in you — you have killed 32 of theirs.",
         "tier": "event",
         "section": "world"
+      },
+      {
+        "day": 8,
+        "worldDay": 88,
+        "text": "The Harvest Hand has taken an interest in you — you have killed 12 of theirs.",
+        "tier": "event",
+        "section": "world"
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 2115,
-    "lastSharedReadAt": "2026-09-26T03:30:32.230Z",
+    "lastGenCount": 2116,
+    "lastSharedReadAt": "2026-09-26T04:25:40.189Z",
     "lastTickWorldDay": 88,
     "lastCanonWorldDay": 88,
     "turnsSinceOffer": 0,
     "recentOffers": [
-      {
-        "thing": "The resistance the fold met—distance refusing to crease cleanly, the working landing you outside the town rather than at its heart.",
-        "from": "The valley itself: something beneath the place is pushing back against shortcuts and close-work. The resistance is new and precise."
-      },
       {
         "thing": "Mara Wells, the store's keeper—a woman who reads strangers clearly and knows the road well enough to guess at true need",
         "from": "the road itself, which brings travelers to her door in all hours, and the decision to arrive at her threshold honestly"
@@ -1877,6 +2067,10 @@
       {
         "thing": "Mara Wells' clear naming of the valley's own will—the land has awareness and agency; to move through it is to ask permission, not to take…",
         "from": "Mara's read of travelers and the land alike; her knowledge of what lies beneath Millbrook; her willingness to speak plainly about…"
+      },
+      {
+        "thing": "Mara's plain wisdom about the long road — not a promise, but a teacher's reading of how the road itself works",
+        "from": "Her own experience with travelers, and her respect for the ones who made it through by letting the journey teach them"
       }
     ],
     "wantProgress": {
@@ -2146,7 +2340,7 @@
         "kind": "decision",
         "premise": "Someone who keeps the count of what has been unmade has begun rounding down, telling themselves the difference is noise — but the rounding has a direction, and it has been consistent for long enough…",
         "cause": "The act of counting the unmade requires a decision about what constitutes a thing distinct enough to be counted, and that threshold has always been left to…",
-        "stage": 15,
+        "stage": 16,
         "seededAtCount": 1917,
         "surfaced": true,
         "fate": "growing",
@@ -2159,7 +2353,7 @@
         "kind": "decision",
         "premise": "The person who holds authority to formally designate what has been unmade as 'resolved' has not done so for anything in years, and the backlog of unresolved unmakings is beginning to press against…",
         "cause": "In the_unmade, the act of resolution is itself an act of power, and the authority-holder has quietly discovered that unresolved things remain partially…",
-        "stage": 11,
+        "stage": 12,
         "seededAtCount": 1968,
         "surfaced": true,
         "fate": "growing",
@@ -2184,7 +2378,7 @@
         "kind": "decision",
         "premise": "Someone has begun quietly counting what no longer exists — cataloguing absences — and has not yet decided whether to share what the count implies.",
         "cause": "The Unmade is defined by what has been lost or undone; its people have long customs around not naming absence directly, because naming draws attention to the…",
-        "stage": 6,
+        "stage": 7,
         "seededAtCount": 2053,
         "surfaced": true,
         "fate": "growing",
@@ -2197,7 +2391,7 @@
         "kind": "decision",
         "premise": "An elder who alone remembers the last time something like the current unraveling occurred has not yet spoken, weighing whether the knowing will help or hasten what is coming.",
         "cause": "In the_unmade, what is lost or dissolved carries weight equal to what remains — silence is understood as a form of preservation, and the elder has lived long…",
-        "stage": 5,
+        "stage": 6,
         "seededAtCount": 2100,
         "surfaced": true,
         "fate": "growing",
@@ -9486,7 +9680,7 @@
       "the_doubting_lattice": 84,
       "the_war_ender": 84
     },
-    "updatesToldTo": "2.9.1",
+    "updatesToldTo": "2.9.3",
     "newsLog": [
       {
         "day": 4,
@@ -10823,6 +11017,22 @@
         "worldDay": 88,
         "text": "The game was updated to v2.9.1 — 3 fixed.",
         "loggedAt": "2026-09-26T03:30:38.681Z"
+      },
+      {
+        "day": 8,
+        "worldDay": 88,
+        "text": "The Harvest Hand has taken an interest in you — you have killed 12 of theirs.",
+        "tier": "event",
+        "section": "world",
+        "loggedAt": "2026-09-26T04:25:45.771Z"
+      },
+      {
+        "kind": "update",
+        "section": "world",
+        "version": "2.9.3",
+        "worldDay": 88,
+        "text": "The game was updated to v2.9.3 — 2 fixed.",
+        "loggedAt": "2026-09-26T04:25:45.771Z"
       }
     ]
   },
@@ -14012,8 +14222,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790394086687,
-  "rev": 947,
+  "updatedAt": 1790396765235,
+  "rev": 952,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -15088,7 +15298,7 @@
     "umbral_depths": 54,
     "the_quickwood": 101,
     "the_center": 50,
-    "valley": 32,
+    "valley": 33,
     "the_open_reach": 3
   },
   "opLossPending": false,
@@ -15240,10 +15450,10 @@
     {
       "id": "sess-19",
       "startedAt": "2026-09-26T00:51:07.826Z",
-      "lastAt": "2026-09-26T03:41:26.681Z",
+      "lastAt": "2026-09-26T04:26:05.229Z",
       "startDay": 88,
       "endDay": 88,
-      "beats": 13
+      "beats": 14
     }
   ],
   "establishedFacts": [
@@ -15394,7 +15604,7 @@
   ],
   "_opLedger": {
     "offer": {
-      "applied": 52,
+      "applied": 53,
       "rejected": 2,
       "lastWhy": "rejected-shape"
     },
@@ -15409,27 +15619,23 @@
       "lastWhy": "journey-planned"
     }
   },
-  "_pendingArrival": {
-    "ref": "Whistling Woman Post immediately",
-    "name": "Whistling Woman Post",
-    "destId": "gen-whistling-woman-post"
-  },
+  "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 242,
-    "choices": 242,
-    "characterDeltas": 126,
-    "scene": 242,
+    "sceneSummary": 243,
+    "choices": 243,
+    "characterDeltas": 127,
+    "scene": 243,
     "placeUpdates": 32,
     "codexUpdates": 142,
     "timeOps": 194,
-    "offer": 46,
+    "offer": 47,
     "generateRequest": 7,
-    "sceneEnded": 111,
-    "npcUpdates": 193,
+    "sceneEnded": 112,
+    "npcUpdates": 194,
     "moveTo": 10,
-    "gambitApt": 70,
+    "gambitApt": 71,
     "deeds": 14,
-    "questUpdates": 46,
+    "questUpdates": 47,
     "standingOps": 4,
     "factUpdates": 20,
     "stageOps": 7,
@@ -15448,7 +15654,7 @@
     "bandOps": 1,
     "exchangeOps": 2
   },
-  "_opTurns": 242,
+  "_opTurns": 243,
   "customAbilities": {
     "mirror-bright": {
       "id": "mirror-bright",
@@ -16894,412 +17100,412 @@
   },
   "_promptRows": {
     "character": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "location": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "region": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "groundDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 27
     },
     "lore": {
-      "reached": 58,
+      "reached": 59,
       "produced": 51
     },
     "traditionMotiveDetail": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "sheetsDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 38
     },
     "rules": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "recentTurns": {
-      "reached": 58,
+      "reached": 59,
       "produced": 52
     },
     "timeLabel": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "npcRegistryDetail": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "mintedUnmetDetail": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "npcSeedDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 24
     },
     "traditionVocab": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "standingDetail": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "recalledDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 6
     },
     "bearingsDetail": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "caravansDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 0
     },
     "commandDetail": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "presenceDetail": {
-      "reached": 58,
-      "produced": 48
+      "reached": 59,
+      "produced": 49
     },
     "worthHereDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 0
     },
     "inventoryDetail": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "sceneState": {
-      "reached": 58,
+      "reached": 59,
       "produced": 52
     },
     "holdingsDetail": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "debtsDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 0
     },
     "carriedDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 0
     },
     "abilityLawDetail": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "questsDetail": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "structuredQuestsDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 0
     },
     "traditionArcDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 0
     },
     "npcErrandsDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 0
     },
     "codexDetail": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "companionsDetail": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "placeMemoryDetail": {
-      "reached": 58,
-      "produced": 42
+      "reached": 59,
+      "produced": 43
     },
     "agesMissingDetail": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "newsDetail": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "worldArcsDetail": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "legendsPursuableDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 12
     },
     "wakesDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 0
     },
     "arcMoodDetail": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "reachableDeadDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 46
     },
     "threatToPlayer": {
-      "reached": 58,
+      "reached": 59,
       "produced": 0
     },
     "guardiansDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 0
     },
     "resolution": {
-      "reached": 58,
+      "reached": 59,
       "produced": 48
     },
     "playerInput": {
-      "reached": 58,
-      "produced": 10
+      "reached": 59,
+      "produced": 11
     },
     "exactWords": {
-      "reached": 58,
+      "reached": 59,
       "produced": 31
     },
     "travelDirective": {
-      "reached": 58,
+      "reached": 59,
       "produced": 4
     },
     "itemAdvance": {
-      "reached": 58,
+      "reached": 59,
       "produced": 0
     },
     "encounterWeaveDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 7
     },
     "encounterOfferDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 4
     },
     "fightFramingDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 0
     },
     "abilityGrantDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 0
     },
     "stageRevealDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 0
     },
     "itemEvolveDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 0
     },
     "worldPressureDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 2
     },
     "offerDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 2
     },
     "teacherOfferDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 0
     },
     "substrateDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 17
     },
     "romanceGuidanceDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 4
     },
     "factsDetail": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "evolvedItemsDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 0
     },
     "opLossNote": {
-      "reached": 58,
+      "reached": 59,
       "produced": 0
     },
     "emergenceDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 0
     },
     "perilNote": {
-      "reached": 58,
+      "reached": 59,
       "produced": 0
     },
     "encounterDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 4
     },
     "masteryDetail": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "bookkeepingRestate": {
-      "reached": 58,
+      "reached": 59,
       "produced": 0
     },
     "anomalyDetail": {
-      "reached": 58,
-      "produced": 56
+      "reached": 59,
+      "produced": 57
     },
     "repairPanelDetail": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "teacherDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 0
     },
     "toolkitDetail": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "availableEncounters": {
-      "reached": 58,
-      "produced": 54
+      "reached": 59,
+      "produced": 55
     },
     "partyDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 0
     },
     "ratingDetail": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "registerDetail": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "legendDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 1
     },
     "livingWorldDetail": {
-      "reached": 58,
-      "produced": 29
+      "reached": 59,
+      "produced": 30
     },
     "assignmentsDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 0
     },
     "latentArcsDetail": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "seasonalDetail": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "schoolsDetail": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "sharedCanonDetail": {
-      "reached": 58,
-      "produced": 35
+      "reached": 59,
+      "produced": 36
     },
     "worldCountLabel": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "waygateDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 27
     },
     "readAloudDetail": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "scenePacingDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 22
     },
     "wishesDetail": {
-      "reached": 38,
+      "reached": 39,
       "produced": 0
     },
     "worldMovedOnDetail": {
-      "reached": 38,
+      "reached": 39,
       "produced": 2
     },
     "companionLivesDetail": {
-      "reached": 38,
+      "reached": 39,
       "produced": 18
     },
     "homeDetail": {
-      "reached": 38,
+      "reached": 39,
       "produced": 0
     },
     "invitationsDetail": {
-      "reached": 38,
+      "reached": 39,
       "produced": 0
     },
     "bandsJoinedDetail": {
-      "reached": 38,
+      "reached": 39,
       "produced": 0
     },
     "travelersHereDetail": {
-      "reached": 38,
-      "produced": 11
+      "reached": 39,
+      "produced": 12
     },
     "travelersDetail": {
-      "reached": 38,
+      "reached": 39,
       "produced": 2
     },
     "journeyDetail": {
-      "reached": 36,
-      "produced": 5
+      "reached": 37,
+      "produced": 6
     },
     "journeyUnderwayDetail": {
-      "reached": 36,
+      "reached": 37,
       "produced": 4
     },
     "holdsNearDetail": {
-      "reached": 36,
-      "produced": 32
+      "reached": 37,
+      "produced": 33
     },
     "moneyDetail": {
-      "reached": 35,
-      "produced": 35
+      "reached": 36,
+      "produced": 36
     },
     "jobsDetail": {
-      "reached": 35,
+      "reached": 36,
       "produced": 0
     },
     "powersHereDetail": {
-      "reached": 12,
+      "reached": 13,
       "produced": 6
     },
     "nemesisDetail": {
-      "reached": 12,
-      "produced": 12
+      "reached": 13,
+      "produced": 13
     }
   },
   "_opUnknown": {
-    "sceneSummary": 70,
+    "sceneSummary": 71,
     "scene_summary": 1
   },
   "_bandNotes": null,
@@ -17731,7 +17937,163 @@
     "out": [],
     "back": []
   },
-  "journey": null,
+  "journey": {
+    "id": "journey-gen-whistling-woman-post-88",
+    "destId": "gen-whistling-woman-post",
+    "destName": "Whistling Woman Post",
+    "fromId": "gen-mara-wells-store",
+    "fromName": "Mara Wells' Store",
+    "createdWorldDay": 88,
+    "options": [
+      {
+        "key": "gate-0",
+        "kind": "gate",
+        "label": "through the Crossing gate",
+        "days": 36.1,
+        "energy": 10,
+        "path": [
+          "gen-mara-wells-store",
+          "millbrook",
+          "echo_river_crossing",
+          "the_axis_gate",
+          "the_crossing",
+          "gen-waygate",
+          "gen-ashwarden-march-road",
+          "gen-stillwater-s-trouble",
+          "gen-the-made-gate",
+          "gen-whistling-woman-post"
+        ],
+        "gate": {
+          "from": "the_crossing",
+          "to": "gen-waygate",
+          "hours": 32,
+          "energy": 10
+        },
+        "worst": {
+          "id": "the_axis_gate",
+          "name": "The Axis Gate",
+          "level": 2
+        },
+        "nights": 36,
+        "roofs": 8,
+        "camps": 28,
+        "legs": [
+          {
+            "i": 0,
+            "fromId": "gen-mara-wells-store",
+            "toId": "millbrook",
+            "fromName": "Mara Wells' Store",
+            "toName": "Millbrook",
+            "days": 0,
+            "danger": 0,
+            "roof": true,
+            "gate": null
+          },
+          {
+            "i": 1,
+            "fromId": "millbrook",
+            "toId": "echo_river_crossing",
+            "fromName": "Millbrook",
+            "toName": "Echo River Crossing",
+            "days": 0.9161758422297136,
+            "danger": 0,
+            "roof": true,
+            "gate": null
+          },
+          {
+            "i": 2,
+            "fromId": "echo_river_crossing",
+            "toId": "the_axis_gate",
+            "fromName": "Echo River Crossing",
+            "toName": "The Axis Gate",
+            "days": 33.042501075096745,
+            "danger": 2,
+            "roof": true,
+            "gate": null
+          },
+          {
+            "i": 3,
+            "fromId": "the_axis_gate",
+            "toId": "the_crossing",
+            "fromName": "The Axis Gate",
+            "toName": "The Crossing",
+            "days": 0.33333333333302034,
+            "danger": 2,
+            "roof": true,
+            "gate": null
+          },
+          {
+            "i": 4,
+            "fromId": "the_crossing",
+            "toId": "gen-waygate",
+            "fromName": "The Crossing",
+            "toName": "The Pale March Waygate",
+            "days": 1.3333333333333333,
+            "danger": 2,
+            "roof": true,
+            "gate": {
+              "hours": 32,
+              "energy": 10
+            }
+          },
+          {
+            "i": 5,
+            "fromId": "gen-waygate",
+            "toId": "gen-ashwarden-march-road",
+            "fromName": "The Pale March Waygate",
+            "toName": "The Ashwarden March Road",
+            "days": 0.0844525185135906,
+            "danger": 2,
+            "roof": true,
+            "gate": null
+          },
+          {
+            "i": 6,
+            "fromId": "gen-ashwarden-march-road",
+            "toId": "gen-stillwater-s-trouble",
+            "fromName": "The Ashwarden March Road",
+            "toName": "Stillwater's Trouble",
+            "days": 0.08025436206565408,
+            "danger": 2,
+            "roof": true,
+            "gate": null
+          },
+          {
+            "i": 7,
+            "fromId": "gen-stillwater-s-trouble",
+            "toId": "gen-the-made-gate",
+            "fromName": "Stillwater's Trouble",
+            "toName": "The Made Gate",
+            "days": 0.22067221793154637,
+            "danger": 2,
+            "roof": true,
+            "gate": null
+          },
+          {
+            "i": 8,
+            "fromId": "gen-the-made-gate",
+            "toId": "gen-whistling-woman-post",
+            "fromName": "The Made Gate",
+            "toName": "Whistling Woman Post",
+            "days": 0.10965440479072047,
+            "danger": 1,
+            "roof": false,
+            "gate": null
+          }
+        ]
+      }
+    ],
+    "chosenKey": "gate-0",
+    "soleWay": true,
+    "rations": {
+      "needed": 19,
+      "carried": 0
+    },
+    "company": [
+      "Orla Yardley"
+    ],
+    "crafts": {}
+  },
   "allyOrders": {
     "traveler-woman": {
       "stance": "cautious"
@@ -17870,7 +18232,7 @@
       },
       "lastVerb": "patrol",
       "lastVerbDay": 8,
-      "losses": 0,
+      "losses": 1,
       "lost": {
         "0": 32
       },
@@ -17926,7 +18288,7 @@
       },
       "lastVerb": "expand",
       "lastVerbDay": 8,
-      "wins": 1,
+      "wins": 2,
       "grownHeads": 44,
       "grewDay": 8
     },
@@ -17978,21 +18340,21 @@
     "power_flesh_temple": {
       "lastVerb": "recruit",
       "lastVerbDay": 8,
-      "wins": 1,
+      "wins": 2,
       "grownHeads": 18,
       "grewDay": 5
     },
     "power_vacated_custody": {
       "lastVerb": "expand",
       "lastVerbDay": 8,
-      "wins": 1,
+      "wins": 2,
       "grownHeads": 6,
       "grewDay": 5
     },
     "power_the_ceaseless": {
       "lastVerb": "expand",
       "lastVerbDay": 8,
-      "wins": 2,
+      "wins": 0,
       "grownHeads": 10,
       "grewDay": 5,
       "losses": 0
@@ -18008,7 +18370,19 @@
       "wins": 0,
       "grownHeads": 12,
       "grewDay": 5,
-      "losses": 1
+      "losses": 0,
+      "lost": {
+        "0": 12
+      },
+      "noticed": {
+        "trigger": "crossed",
+        "why": "you have killed 12 of theirs",
+        "day": 8
+      },
+      "known": {
+        "how": "noticed",
+        "day": 8
+      }
     },
     "power_the_scouring": {
       "lastVerb": "patrol",

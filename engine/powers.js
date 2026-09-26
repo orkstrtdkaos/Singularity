@@ -348,9 +348,31 @@ export const VERB_EFFECT = {
   expand:  "selfWin",      // pushing outward: their own success compounds
   recruit: "selfWin",      // more hands is literally what it is
   feud:    "bothLose",     // two powers grinding each other down, on `rivals[]`
+  // ⛔ SNG-662 §2 — THE FEUD WAS ONE-SIDED BY CONSTRUCTION, and this is the half that was missing. A feuder
+  // rotates `feud` with `expand`/`recruit`, so its wins cancel its own losses; its target rotates
+  // `protect`/`patrol`/`tax`, none of which could do anything at all, so every loss stuck. ⚠️ MEASURED over a
+  // 144-day year through this very function: five powers shrank five steps each and grew none, and not one of
+  // the fifty growth steps in the world landed on any of them. Erik: "orders that primarily protect... they not
+  // only fight back, but quest and crusade as well."
+  protect: "hold",         // ⛑ the line HELD: cancel a banked loss. Not a win — it never grows anything
+  quest:   "selfWin",      // a champion goes out and comes back with renown, a relic, or hands
+  crusade: "carryWar",     // carry it to the foes: each of them takes a loss, and the weak pay for choosing it
   raid:    null, toll: null, tax: null, levy: null, extort: null, steal: null,
-  fence:   null, smuggle: null, protect: null, patrol: null, inform: null,
+  fence:   null, smuggle: null, patrol: null, inform: null,
 };
+
+/** ⛔ SNG-662 §2.3 — WHO A CRUSADER IS CRUSADING AGAINST. Its own `rivals[]`, AND any power that names IT as a
+ *  rival: whoever feuds you is who you crusade against, which needs no content to say twice. PURE. */
+export function foesOf(power, all = []) {
+  if (!power?.id) return [];
+  const mine = new Set((Array.isArray(power.rivals) ? power.rivals : []).filter(Boolean));
+  const out = [];
+  for (const q of all) {
+    if (!q?.id || q.id === power.id) continue;
+    if (mine.has(q.id) || (Array.isArray(q.rivals) ? q.rivals : []).includes(power.id)) out.push(q);
+  }
+  return out;
+}
 
 /** Which verb a power takes this pass. ⚠️ ROTATED BY THE DAY rather than rolled, so a world tick is
  *  reproducible and a power works through what it does instead of doing one thing five times by luck. */
@@ -414,23 +436,37 @@ export function powerPass(character, { content = null, rules = null, day = null 
   const winsPer = Math.max(1, Number(g.winsToGrowOneStep) || 3);
   const lossPer = Math.max(1, Number(g.lossesToShrinkOneStep) || 2);
   const window = growWindow({ rules: R, content });   // ⛔ a season, from the world clock — see growWindow for the measurement that forced it
+  // ⛔ SNG-662 — AND THE SAME WINDOW ON THE WAY DOWN, which is the half that was missing. Measured over five
+  // simulated years on the production path: with growth capped at four steps a year and shrinking capped at
+  // nothing, whoever is in a sustained war is annihilated. At HEAD that was the five powers who could not
+  // fight back (Cairnhold 160 heads → 1); with §2's answering verbs and no shrink window it becomes the four
+  // aggressors instead (Harvest Hand 60 → 1). ⛑ Not a balance dial — `growWindow`'s own reason ("years rather
+  // than a fortnight") is symmetric, and its absence here was an omission. `growth.shrinkEveryDays` overrides
+  // it, and 0 restores the old uncapped behaviour for anyone who wants to measure against it.
+  const shrinkEvery = (() => {
+    const said = Number(R?.powers?.growth?.shrinkEveryDays);
+    return Number.isFinite(said) ? Math.max(0, said) : window;
+  })();
   character.powerState = (character.powerState && typeof character.powerState === "object") ? character.powerState : {};
   const st = (id) => (character.powerState[id] = character.powerState[id] || {});
   const byId = new Map(all.map(p => [p.id, p]));
   const news = [];
-  const credit = (id, kind, cause = null) => {
+  const credit = (id, kind, cause = null, how = null) => {
     const p = byId.get(id);
     if (!p || !isStanding(character, p)) return;
     const s = st(id);
     // ⛑ CCODE-525 — the cause rides with the tally so the row can name it when the step lands. A report of
     // people dying with no cause in it, arriving in your own news, reads as a thing you did.
-    if (kind !== "win" && cause) s.lossFrom = String(cause);
-    if (kind === "win") s.wins = (Number(s.wins) || 0) + 1;
+    // ⛔ SNG-662 §2.4 — AND HOW, because "to its feud with the Scouring" and "to the Cairnhold Wardens'
+    // crusade" are different sentences about different events, and a loss that cannot say which is a report
+    // the player has to guess at.
+    if (kind !== "win" && cause) { s.lossFrom = String(cause); s.lossHow = how ? String(how) : null; }
+    if (kind === "win") { s.wins = (Number(s.wins) || 0) + 1; s.winHow = how ? String(how) : null; }
     else s.losses = (Number(s.losses) || 0) + 1;
     // ⛑ A WIN CANCELS A LOSS BEFORE IT BUILDS. Otherwise a power that alternates would grow AND shrink.
     const w = Number(s.wins) || 0, l = Number(s.losses) || 0;
     const net = Math.min(w, l);
-    if (net) { s.wins = w - net; s.losses = l - net; return; }
+    if (net) { s.wins = w - net; s.losses = l - net; if (!s.wins) s.winHow = null; if (!s.losses) { s.lossFrom = null; s.lossHow = null; } return; }
     if ((Number(s.wins) || 0) >= winsPer) {
       s.wins = 0;
       // ⛑ AND NOT MORE OFTEN THAN THE WINDOW. The wins are spent either way — a power that earned them
@@ -447,21 +483,36 @@ export function powerPass(character, { content = null, rules = null, day = null 
         // ⚠️ CCODE-483: ONLY ABOUT A POWER YOU HAVE HEARD OF. "The Gralloch Crown is stronger than it was"
         // is not news to somebody who has never heard the name — it is a line about a stranger, which is
         // exactly the noise §325 caught me writing once already.
-        if (isKnownPower(character, p.id)) news.push({ text: `${p.name || p.id} is stronger than it was — ${took} more under it.`, section: "world", powerId: p.id, grew: took });
+        // ⛑ SNG-662 §2.2 — AND THE LAST THING THAT HAPPENED IS SAID, WITHOUT CLAIMING IT DID ALL THE WORK. A
+        // step is three wins; the quest is the one that tipped it, so the line reports the quest as the beat
+        // that just landed rather than as the cause of the whole growth, which would be a third true.
+        const how = s.winHow; s.winHow = null;
+        if (isKnownPower(character, p.id)) news.push({
+          text: how === "quest"
+            ? `${p.name || p.id} is stronger than it was — ${took} more under it, their champion home from the grey road.`
+            : `${p.name || p.id} is stronger than it was — ${took} more under it.`,
+          section: "world", powerId: p.id, grew: took });
       }
     } else if ((Number(s.losses) || 0) >= lossPer) {
       s.losses = 0;
+      // ⛑ AND NOT MORE OFTEN THAN THE WINDOW, exactly as a growth step. The losses are spent either way: a
+      // power already ground down inside the window does not bank them and collapse two steps later.
+      const lastLost = Number(s.shrankDay);
+      if (shrinkEvery > 0 && Number.isFinite(lastLost) && Number.isFinite(Number(day)) && (Number(day) - lastLost) < shrinkEvery) { s.lossFrom = null; s.lossHow = null; return; }
       const step = stepHeads(p, R);
       const now = headsOf(contingentsOf(p, character));
       const took = Math.min(step, Math.max(0, now - 1));
       if (took > 0) {
         s.lost = (s.lost && typeof s.lost === "object") ? s.lost : {};
         s.lost[0] = (Number(s.lost[0]) || 0) + took;
+        s.shrankDay = Number(day) || 0;
         const by = s.lossFrom ? (byId.get(s.lossFrom)?.name || s.lossFrom) : null;
-        s.lossFrom = null;
+        const how = s.lossHow;
+        s.lossFrom = null; s.lossHow = null;
         if (isKnownPower(character, p.id)) news.push({
-          text: by ? `${p.name || p.id} has lost people it will not get back — ${took} of them, to its feud with ${by}.`
-            : `${p.name || p.id} has lost people it will not get back — ${took} of them, to a quarrel of its own.`,
+          text: !by ? `${p.name || p.id} has lost people it will not get back — ${took} of them, to a quarrel of its own.`
+            : how === "crusade" ? `${p.name || p.id} has lost people it will not get back — ${took} of them, to ${by}'s crusade.`
+            : `${p.name || p.id} has lost people it will not get back — ${took} of them, to its feud with ${by}.`,
           section: "world", powerId: p.id, shrank: took });
       }
     }
@@ -473,12 +524,47 @@ export function powerPass(character, { content = null, rules = null, day = null 
     if (!verb) continue;
     const s = st(p.id);
     s.lastVerb = verb; s.lastVerbDay = day ?? null;
+    // ⛔ SNG-662 §4 — A VERB WITH NO ENTRY FAILS LOUDLY. `VERB_EFFECT[verb] ?? null` cannot tell "declared as
+    // doing nothing" (raid, toll, tax — felt through `dangerLift` and the raid instead) from "nobody has
+    // decided yet", and a new verb authored into a rotation would silently do nothing for months.
+    if (!Object.prototype.hasOwnProperty.call(VERB_EFFECT, verb)) console.warn(`[powers] verb "${verb}" (${p.id}) has no VERB_EFFECT entry — it does nothing this pass. Declare it, as null if that is the intent.`);
     const effect = VERB_EFFECT[verb] ?? null;
     if (effect === "liegeWin" && p.answersTo?.power) credit(p.answersTo.power, "win");
-    else if (effect === "selfWin") credit(p.id, "win");
+    else if (effect === "selfWin") credit(p.id, "win", null, verb);
     else if (effect === "bothLose") {
       // ⚠️ EACH SIDE IS TOLD WHO IT IS LOSING TO — the feuder's rival, and the rival's feuder.
-      for (const r of (Array.isArray(p.rivals) ? p.rivals : []).filter(id => byId.has(id))) { credit(p.id, "loss", r); credit(r, "loss", p.id); }
+      for (const r of (Array.isArray(p.rivals) ? p.rivals : []).filter(id => byId.has(id))) { credit(p.id, "loss", r, "feud"); credit(r, "loss", p.id, "feud"); }
+    }
+    // ⛑ SNG-662 §2.1 — THE LINE HELD. A banked loss is cancelled before it becomes a step; it is not a win and
+    // it grows nothing, which is the difference between answering a feud and winning one. ⚠️ It applies to
+    // anyone who protects, including a cruel order guarding what it took — the verb is the claim, not the
+    // morals. Still felt through `dangerLift` and the raid exactly as before.
+    else if (effect === "hold") {
+      const l = Number(s.losses) || 0;
+      if (l > 0) { s.losses = l - 1; if (!s.losses) { s.lossFrom = null; s.lossHow = null; } s.heldDay = day ?? null; }
+    }
+    // ⛔ SNG-662 §2.3 — CARRY IT TO THEM. Each foe takes a loss, caused by the crusader; and if the foes field
+    // more heads than the crusader does, the crusader takes one too — a crusade by the strong costs them
+    // nothing, a crusade by the weak is a feud they chose. ⛑ With no foes at all it falls back to a quest,
+    // because a body that means to carry a war and has nobody to carry it to still sent someone out.
+    else if (effect === "carryWar") {
+      const foes = foesOf(p, all).filter(q => isStanding(character, q));
+      if (!foes.length) credit(p.id, "win", null, "quest");
+      else {
+        for (const q of foes) credit(q.id, "loss", p.id, "crusade");
+        const mine = headsOf(contingentsOf(p, character));
+        const theirs = foes.reduce((n, q) => n + headsOf(contingentsOf(q, character)), 0);
+        // ⚠️ THE BIGGEST FOE IS NAMED as the cause, because the news needs one name and that is the most
+        // honest single answer to "who did this to us" when the answer is "the war you started".
+        // ⛑ A DIAL, IN THE UNITS OF THE RULING, because Aevi asked for this clause to be measured against
+        // "the crusader never pays" and the answer is hers to keep or change. Default true: her words, "about
+        // honesty, not balance". Measured both ways — see the report in po/.
+        const paysWhenOutnumbered = R?.powers?.crusaderPaysWhenOutnumbered !== false;
+        if (paysWhenOutnumbered && theirs > mine) {
+          const biggest = foes.reduce((a, q) => (headsOf(contingentsOf(q, character)) > headsOf(contingentsOf(a, character)) ? q : a), foes[0]);
+          credit(p.id, "loss", biggest.id, "crusade");
+        }
+      }
     }
     // ⛔ AND NOTHING IS NARRATED FOR TAKING A VERB. My first version wrote a line every time a power tolled,
     // tributed or pushed outward — and TWO gates caught it in the same run: §325 ("a pass with nothing to say

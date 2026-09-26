@@ -28775,10 +28775,23 @@ console.log("\n── §363 · who walks with you, and who you have killed ─�
 
   // ⛑ AND THE FEUD'S OWN LINE NAMES ITSELF. A report of people dying with no cause in it, arriving in your
   // own news, reads as a thing you did — the growth line beside it has always carried its number.
-  check("§363: ⛔ the feud's news names the feud — a loss line with no cause is read as the player's doing",
-    /to its feud with \$\{by\}/.test(rd("engine/powers.js"))
-    && /credit\(p\.id, "loss", r\); credit\(r, "loss", p\.id\);/.test(rd("engine/powers.js"))
-    && !/has lost people it will not get back\.`/.test(rd("engine/powers.js")));
+  // ⚠️ DRIVEN, NOT READ OFF THE LINE. This pinned the literal `credit(p.id, "loss", r); credit(r, "loss",
+  // p.id);` and went red when SNG-662 added a fourth argument saying HOW the loss happened — a change that
+  // makes the claim MORE true. A gate on a spelling cannot tell those apart; a gate on the behaviour can.
+  check("§363: ⛔ the feud's news names the feud, AND BOTH SIDES ARE TOLD WHO — a loss line with no cause is read as the player's doing",
+    (() => {
+      const a = { id: "fa", name: "The Alpha", kind: "order", verbs: ["feud"], rivals: ["fb"], strength: { contingents: [{ n: 80 }] } };
+      const b = { id: "fb", name: "The Beta", kind: "order", verbs: ["patrol"], rivals: [], strength: { contingents: [{ n: 80 }] } };
+      const ch = { id: "c363", powerState: { fa: { known: true }, fb: { known: true } } };
+      const rows = [];
+      for (let day = 1; day <= 200; day++) rows.push(...PW.powerPass(ch, { content: { powers: [a, b] }, rules: {}, day }));
+      const shrank = rows.filter(r => r.shrank);
+      const onA = shrank.filter(r => r.powerId === "fa"), onB = shrank.filter(r => r.powerId === "fb");
+      return onA.length > 0 && onB.length > 0
+        && onA.every(r => /to its feud with The Beta\.$/.test(r.text))
+        && onB.every(r => /to its feud with The Alpha\.$/.test(r.text))
+        && !shrank.some(r => /get back\.$/.test(r.text));
+    })(), "The Beta never feuds and is still told it is losing to The Alpha — `bothLose` credits both sides with the other's name");
 
   // ═════ THE REPAIRS, NARROW ═════
   check("§363: ⛔ A NOTICE RESTING ON KILLS YOU NEVER MADE IS WITHDRAWN, and nothing else is",
@@ -29075,6 +29088,149 @@ console.log("\n── §366 · a crown he did not take ──");
       return capped.madeAtLevel === 8 && free.madeAtLevel === 95
         && /maxMadeAt: foundCap/.test(rd("app.js")) && /foundLevelCapFor\(dangerOf\(/.test(rd("app.js"));
     })(), "a caller that states no cap gets today's behaviour, and a relic from a PERSON is not capped here at all");
+}
+
+/* ══════════ §367 · SNG-662 — THE ONES WHO PROTECT FIGHT BACK ══════════ */
+// ✅ ERIK: "orders that primarily protect... they not only fight back, but quest and crusade as well."
+//
+// ⛔ THE FEUD WAS ONE-SIDED BY CONSTRUCTION. A feuder rotates `feud` with `expand`/`recruit`, so its wins cancel
+// its own losses; its target rotated `protect`/`patrol`/`tax`, none of which did anything at all, so every loss
+// stuck. ⚠️ MEASURED THROUGH THE REAL `powerPass` over a simulated year, which is the whole of Aevi's table
+// confirmed on the production path: five powers shrank five steps each and grew none, and not one of the fifty
+// growth steps in the world landed on any of them.
+//
+// ⚠️ AND THE FIVE-YEAR RUN FOUND WHAT ONE YEAR HID. Growth is capped at one step per season and shrinking was
+// capped at nothing, so whoever is in a sustained war is ANNIHILATED: at HEAD the five who could not answer
+// (Cairnhold 160 heads → 1, Grovehome 200 → 1), and with §2's verbs but no shrink window, the four aggressors
+// instead (Harvest Hand 60 → 1). The bleeding would have changed sides rather than stopped. The window is
+// symmetric now, and over five years nobody is destroyed.
+console.log("\n── §367 · a war both sides are fighting ──");
+{
+  const PW367 = await import("../engine/powers.js");
+  const { loadContentHeadless: lch367 } = await import("./headless_content.mjs");
+  const C367 = await lch367();
+  const powers367 = PW367.powersFrom(C367);
+
+  // ⛔ §4.2 — EVERY VERB HAS AN ENTRY, AND A MISSING ONE IS LOUD. `VERB_EFFECT[verb] ?? null` cannot tell
+  // "declared as doing nothing" (raid, toll, tax — felt through `dangerLift` and the raid instead) from "nobody
+  // decided yet", so a verb Aevi authors into a rotation would silently do nothing for months.
+  const declared = new Set(Object.keys(PW367.VERB_EFFECT));
+  const inUse = new Set(powers367.flatMap(p => (p.verbs || [])));
+  for (const def of Object.values(C367.rules?.powers?.kinds || {})) for (const v of (def?.verbs || [])) inUse.add(v);
+  check("§367: ⛔ EVERY VERB A POWER OR A KIND PALETTE SAYS HAS AN ENTRY IN `VERB_EFFECT` — a new one is loud, not a silent null",
+    [...inUse].every(v => declared.has(v)) && inUse.size >= 15
+    && /hasOwnProperty\.call\(VERB_EFFECT, verb\)/.test(rd("engine/powers.js")),
+    `${inUse.size} verbs in use · undeclared: ${[...inUse].filter(v => !declared.has(v)).join(", ") || "none"}`);
+
+  check("§367: ⛑ …and the three new effects are the ones Erik asked for — protect HOLDS, quest WINS, crusade CARRIES the war",
+    PW367.VERB_EFFECT.protect === "hold" && PW367.VERB_EFFECT.quest === "selfWin"
+    && PW367.VERB_EFFECT.crusade === "carryWar",
+    `protect=${PW367.VERB_EFFECT.protect} quest=${PW367.VERB_EFFECT.quest} crusade=${PW367.VERB_EFFECT.crusade}`);
+
+  // ⛔ §2.3 — WHOEVER FEUDS YOU IS WHO YOU CRUSADE AGAINST, which needs no content to say twice.
+  check("§367: ⛔ A CRUSADER'S FOES ARE ITS OWN RIVALS **AND** WHOEVER NAMES IT AS ONE — symmetric, and drawn from what is already authored",
+    (() => {
+      const a = { id: "a", rivals: ["b"] }, b = { id: "b", rivals: [] }, c = { id: "c", rivals: ["a"] };
+      const all = [a, b, c];
+      const fa = PW367.foesOf(a, all).map(x => x.id).sort();
+      const fc = PW367.foesOf(c, all).map(x => x.id).sort();
+      return fa.join(",") === "b,c" && fc.join(",") === "a" && !PW367.foesOf(a, all).some(x => x.id === "a");
+    })(), "a names b; c names a; so a's foes are b and c, and a is never its own foe");
+
+  // ⛑ §2.1 — THE LINE HELD. Driven, not read off the table.
+  const sim367 = (verbs, opts = {}) => {
+    const p = { id: "p", name: "The Watch", kind: "sovereignty", verbs, rivals: opts.rivals || [],
+      strength: { contingents: [{ n: 100, quality: 2 }] } };
+    // ⚠️ THE FOE ROTATES LIKE A REAL ONE. Given a single verb it feuds 144 times a year against 48 protect
+    // passes, and no hold could ever keep up — which measures my harness, not the engine. The Harvest Hand's
+    // own rotation is four verbs, so this one's is too. `opts.foeVerbs` makes it a foe that never feuds, which
+    // is how the crusade's own losses can be told apart from a feud's.
+    const foe = { id: "foe", name: "The Reapers", kind: "order",
+      verbs: opts.foeVerbs || ["feud", "expand", "recruit", "patrol"], rivals: ["p"],
+      strength: { contingents: [{ n: opts.foeHeads ?? 40, quality: 2 }] } };
+    const content = { ...C367, powers: [p, foe], rules: C367.rules };
+    const character = { id: "sim367", powerState: { p: { known: true }, foe: { known: true } } };
+    const news = [];
+    for (let day = 1; day <= (opts.days || 144); day++) {
+      for (const row of PW367.powerPass(character, { content, rules: opts.rules || C367.rules, day })) news.push(row);
+    }
+    return { news, state: character.powerState, p, foe };
+  };
+
+  check("§367: ⛔ A BODY THAT ONLY PROTECTS AND PATROLS NO LONGER BLEEDS — `hold` cancels a banked loss, so it cannot lose steps faster than its feuder spends feud passes on it",
+    (() => {
+      const bare = sim367(["patrol", "tax"]);                 // no protect: the old behaviour, still there
+      const held = sim367(["protect", "patrol", "tax"]);
+      const bareShrinks = bare.news.filter(r => r.shrank && r.powerId === "p").length;
+      const heldShrinks = held.news.filter(r => r.shrank && r.powerId === "p").length;
+      return bareShrinks > 0 && heldShrinks === 0;
+    })(), "a power with no answering verb still takes its losses — the hold is the verb's doing, not a blanket immunity");
+
+  check("§367: ⚠️ …and a hold only cancels what is BANKED — it is not immunity, and a feuder that spends more passes than the protector holds still gets through",
+    (() => {
+      // ⛑ THE RATIO IS THE RULE. A foe that does nothing but feud spends three passes for every hold, and it
+      // should still grind the protector down: `hold` answers a feud, it does not outlaw one.
+      const relentless = sim367(["protect", "patrol", "tax"], { foeVerbs: ["feud"] });
+      return relentless.news.filter(r => r.shrank && r.powerId === "p").length > 0;
+    })(), "measured because my own first harness asserted the opposite and was wrong about it");
+
+  // ⛔ §2.4 — AND THE NEWS SAYS WHICH IT WAS. "to its feud with X" and "to X's crusade" are different events.
+  check("§367: ⛔ A CRUSADE'S LOSSES ARE NAMED AS A CRUSADE, and a quest's growth says a champion came home — the row reports the beat that landed",
+    (() => {
+      // ⚠️ A FOE THAT NEVER FEUDS, so every loss it takes IS the crusade. Against one that feuds too, its own
+      // feud pass and the crusade both credit a loss and the one `lossHow` can only name the last — true of the
+      // world, and not a claim a gate should pretend is cleaner than it is.
+      const r = sim367(["crusade", "quest"], { rivals: ["foe"], foeVerbs: ["patrol", "tax"] });
+      const onFoe = r.news.filter(x => x.shrank && x.powerId === "foe").map(x => x.text);
+      const grew = r.news.filter(x => x.grew && x.powerId === "p").map(x => x.text);
+      return onFoe.length > 0 && onFoe.every(x => /The Watch's crusade\.$/.test(x))
+        && grew.length > 0 && grew.some(x => /champion home from the grey road/.test(x));
+    })(), "the crusader is 100 heads against 40, so it pays nothing and the foe is named its loser");
+
+  // ⛑ §2.3 — THE CRUSADER PAYS WHEN OUTNUMBERED, and Aevi asked for it measured against "never pays".
+  // ⚠️ MEASURED ON TODAY'S WORLD: the clause never fires, because every crusader in the shipped content is the
+  // BIGGER body — Cairnhold 160 vs the Harvest Hand 60, the Scour 140 vs the Scouring 80, the Glass Assembly 140
+  // vs the Unshadowed 70. Both rules give byte-identical years. So it is free to ship and it is about honesty:
+  // it will matter the first time a small order decides to carry a war to something larger than itself.
+  check("§367: ⛑ A CRUSADE BY THE WEAK COSTS THEM — outnumbered, the crusader takes a loss too, and the dial can turn it off",
+    (() => {
+      const strong = sim367(["crusade"], { rivals: ["foe"], foeHeads: 40, foeVerbs: ["patrol"] });
+      const weak = sim367(["crusade"], { rivals: ["foe"], foeHeads: 400, foeVerbs: ["patrol"] });
+      const off = sim367(["crusade"], { rivals: ["foe"], foeHeads: 400, foeVerbs: ["patrol"],
+        rules: { ...C367.rules, powers: { ...(C367.rules?.powers || {}), crusaderPaysWhenOutnumbered: false } } });
+      const paid = (r) => r.news.filter(x => x.shrank && x.powerId === "p").length;
+      return paid(strong) === 0 && paid(weak) > 0 && paid(off) === 0;
+    })(), "and on the shipped content the clause never fires at all — every crusader today is the bigger body");
+
+  // ⛔ §4.3 — THE WHOLE WORLD, A SIMULATED YEAR, THROUGH THE REAL PASS.
+  const year367 = (() => {
+    const character = { id: "y367", powerState: {} };
+    for (const p of powers367) character.powerState[p.id] = { known: true };
+    const days = Number(C367.worldClock?.calendar?.yearDays) || 144;
+    const grew = new Map(), shrank = new Map();
+    for (let day = 1; day <= days; day++) {
+      for (const row of PW367.powerPass(character, { content: C367, rules: C367.rules, day })) {
+        if (row.grew) grew.set(row.powerId, (grew.get(row.powerId) || 0) + 1);
+        if (row.shrank) shrank.set(row.powerId, (shrank.get(row.powerId) || 0) + 1);
+      }
+    }
+    const bleeding = powers367.filter(p => (shrank.get(p.id) || 0) > 0 && !(grew.get(p.id) || 0));
+    return { grew, shrank, bleeding, days };
+  })();
+  check("§367: ⛔ NO POWER SHRINKS ALL YEAR AND NEVER GROWS — driven over the whole shipped world through the real pass, which is where the five bleeding ones were found",
+    year367.bleeding.length === 0 && powers367.length >= 20,
+    `${powers367.length} powers over ${year367.days} days · bleeding: ${year367.bleeding.map(p => p.name || p.id).join(", ") || "none"}`);
+
+  // ⛔ AND THE FIVE-YEAR RUN, because a rate claim measured over one year hid annihilation.
+  check("§367: ⛔ …AND NOBODY IS WIPED OFF THE MAP OVER FIVE YEARS — the season window works BOTH ways now; capped growth against uncapped shrinking destroyed five powers at HEAD and would have destroyed four different ones after §2 alone",
+    (() => {
+      const character = { id: "y5", powerState: {} };
+      for (const p of powers367) character.powerState[p.id] = { known: true };
+      const days = (Number(C367.worldClock?.calendar?.yearDays) || 144) * 5;
+      for (let day = 1; day <= days; day++) PW367.powerPass(character, { content: C367, rules: C367.rules, day });
+      const gone = powers367.filter(p => PW367.headsOf(PW367.contingentsOf(p, character)) <= 1);
+      return gone.length === 0 && /shrinkEveryDays/.test(rd("engine/powers.js"));
+    })(), "measured at HEAD: Cairnhold 160 heads → 1, Grovehome 200 → 1, the Scour 140 → 1, Glass Assembly 140 → 1, Deepwood 40 → 1");
 }
 
 /* ══════════ REPORT ══════════ */

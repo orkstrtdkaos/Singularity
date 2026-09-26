@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 9,
-  "xp": 886,
+  "xp": 891,
   "attributes": {
     "physical": 4,
     "mental": 5,
@@ -115,7 +115,7 @@
   ],
   "alignment": {
     "mechanical_spiritual": 0.0077000000000000055,
-    "falsehood_truth": 0.3695345363262671,
+    "falsehood_truth": 0.36605780950995376,
     "demonic_angelic": -0.020000000000000004,
     "dark_light": 0.085,
     "concrete_abstract": 0.16438167187499997,
@@ -127,7 +127,7 @@
   "maxHealth": 78,
   "health": 78,
   "maxEnergy": 156,
-  "energy": 76,
+  "energy": 72,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -370,341 +370,15 @@
     "At the Hub crossing in early spring dawn, Loki speaks an honest promise to the Null Stone, and the sealed seam opens—revealing a passage descending into cold darkness and the sound of deep water.",
     "Halvex reads the sealed chamber's true purpose: a mutual test between supplicant and stone, where the alcove serves as threshold for an exchange of readiness.",
     "Loki instructs Halvex and Vessin to continue reading the sealed chamber while Cy learns its language, then departs the Hub crossing to find someone—leaving Veln to gather the others and bring them to the Standing Annex when their work below is done.",
-    "At the Kindly Rest in early morning, Loki learns the patient lies in the cellars below and is awake, asking after Ravel. The path forward is clear."
+    "At the Kindly Rest in early morning, Loki learns the patient lies in the cellars below and is awake, asking after Ravel. The path forward is clear.",
+    "At the Kindly Rest, Loki speaks plainly with Sister Vreni about the Churn-Revellers and their purpose. Vreni confirms the house's shelter and silence, and promises to listen when answers return."
   ],
   "currentLocationId": "the_kindly_rest",
-  "activeScene": {
-    "locationId": "the_kindly_rest",
-    "turns": [
-      {
-        "player": "Descend to the cellars with Ravel and Estry to meet the patient",
-        "summary": "Loki descends into the cellars of the Kindly Rest and meets Sable in the small lamp-lit room where they have recovered. Ravel and Estry are present. The threshold between waiting and action is crossed.",
-        "narration": "You follow Ravel and Estry down the stone stairs into the Kindly Rest's cellars. The air cools as you descend — cool air, then cold air, then the particular chill of deep places. Lantern light swings across damp stone. The herb smell grows stronger: dried things, growing things, root-smell, the green-dark scent of fermentation and careful keeping.\n\nAt the bottom, the cellars open into a long chamber lined with shelves. Bundles of herbs hang from the ceiling. Clay jars stand in rows, each one marked with careful notation — dates, ingredients, purposes. Ravel moves through this place like she has been here before, or like she reads the language of medicine in the arrangement itself. Estry follows at her shoulder, steady and present.\n\nOne door at the far end stands open. Light spills from it — lamp-glow, warmer than the lantern-light. You step through and find yourself in a smaller room, almost a cell, where a person sits upright on a narrow bed. They turn their head at the sound of footsteps.\n\nThis is Sable. Awake. Eyes clear. The fever is gone, and in its place is a quiet watchfulness — the look of someone who has been waiting for a particular moment and knows it has arrived. Ravel stops at the threshold, her breath steadying. Estry places one hand gently on her back — a touch that says *I am here, you are not alone in this*.\n\nSable's gaze finds you last. Recognition flickers there, and something else — a question waiting to be asked."
-      },
-      {
-        "player": "Sable!  What are you doing here?  The last time I saw you was in the Unlit Deep and you were descending further of your own will.",
-        "summary": "Loki finds Sable in the cellars of the Kindly Rest, recovered from her fever and waiting. She has returned from the Unlit Deep by her own choice, and Ravel and Estry brought her here.",
-        "narration": "Sable's eyes find you on the stairs and hold steady. She doesn't move from the bed—sits upright with her back against the cold stone, hands folded in her lap. The fever is gone. There's colour in her face now, and a clarity you didn't see in the inner chamber, where she was waiting and still.\n\n\"I descended,\" Sable says quietly. Her voice is stronger than it was. \"And then I stopped descending.\"\n\nRavel steps into the room fully, her presence settling like a hand laid on still water. Estry follows, one step behind, her hand steady at Ravel's back. Sable watches both of them enter—no surprise, no fear. Recognition. She knows why they're here.\n\n\"The passage goes deeper,\" Sable continues, speaking to you directly now. \"But not all the way down is meant for someone like me. I walked far enough to understand that. And then—\" She pauses. A small breath. \"Then I found my way back up, and these two found me on the road.\""
-      },
-      {
-        "player": "Use harmonic voice and ask Sable to tell the whole story from the beginning, including why she went down there from the city in the first place.",
-        "summary": "In the lamp-lit cellars of the Kindly Rest, Sable tells the truth of her descent: the city was ending for her, the Deep called, but at the threshold of the old work's full presence, she chose to turn back rather than be read entirely. Ravel and Estry listen. The questions remain open: what does she choose now, and what will she do with the knowing?",
-        "narration": "You settle your weight, letting your breath find the stillness beneath the lamp's steady glow. When you speak, your voice carries a patience that fills the small room without demanding — the particular steadiness of someone who has learned to ask questions that matter. \"Sable,\" you say, \"tell me from the beginning. Why did you leave the city? What called you down to the Unlit Deep?\"\n\nThe room holds. Ravel and Estry do not move. They have already heard parts of this — enough to bring her here, to know she turned back — but they wait as you ask, as though the question needs to be asked again, truly, with full attention.\n\nSable's hands unfold in her lap. Her eyes stay on yours. When she answers, her voice is steady and costs nothing. \"The city was ending,\" she says. \"Not collapsing. Ending. The shape of it was becoming something that did not have room for people like me. People who ask why the old works still hum underneath, why the Transition did not touch them.\" She pauses. The pause is not hesitation. \"I heard there was a Deep that still listened to those old works. I heard the ones who live there keep them — not to restart them, but to *understand* them. So I went.\"\n\nRavel's breath steadies. Estry's hand does not move from her back.\n\n\"I descended the passage,\" Sable continues. \"The cold was honest. The dark was honest. And then—\" She stops. Truly stops, not for breath but for weight. \"And then I felt it. The thing that lives in the old work. Not a machine. Something that *was* made, but it is not mechanical anymore. It has become something else. It reads what comes to it. It reads *you*.\" Her eyes narrow slightly, as though she is seeing the passage again. \"I turned back because I understood, at the threshold, that if I went further, it would read what I truly wanted — and I wasn't ready to know what that was. I still am not. But at least I know the question now.\"\n\nThe lamp flickers. The herb-smell rises in the small room like breath."
-      },
-      {
-        "player": "Ask Sable who might benefit from her leaving the city... name them.  Then ask what she wants to do next?  Let her know you are willing to help her.",
-        "summary": "In the lamp-lit cellars of the Kindly Rest, Sable names those who benefited from her departure—the keepers of the old works and the architects of the Transition itself—and admits she has returned with the question answered but not yet ready to say what comes next.",
-        "narration": "You lean forward slightly, your voice steady in the lamp-light. \"Sable,\" you say, \"when you left the city—who benefited from that? Who wanted you gone, or stopped asking questions about you?\" \n\nSable's breath catches. Just once. Her hands stay folded, but her eyes flick toward the window—that bright rectangle of midday that feels very far from this cellar. \"The ones who keep the old works running,\" she says carefully. \"They don't want anyone asking *what* is running them. What they're *for*. I asked too much.\" She pauses. Her voice steadies. \"But also—the Transition board. The ones who decided we were stepping back. They needed it to stick. Someone asking questions about what we left humming underneath... that threatens the whole shape of the answer they gave.\" \n\nRavel nods slowly. Estry's hand tightens at her back—not alarm, but recognition of the shape of the thing.\n\nYou meet Sable's eyes. \"What do you want to do now?\" you ask. \"And if you want help—I can give it.\" \n\nSable's jaw tightens. \"I don't know yet,\" she says, and there's a rawness in it—not uncertainty, but the honest weight of a choice she hasn't finished making. \"I came to understand. I turned back because—\" She stops. Looks at Ravel. Looks back at you. \"Because I was being read, and I'm not ready to be that known. Not yet. But the question is answered now. The old work *is* something. It's not just a machine humming in the dark.\" She breathes. \"I need to think about what that means. Whether I go back down, or whether I go somewhere else entirely.\""
-      },
-      {
-        "player": "Is there anyone in particular on the Transition board that would have benefited from or liked to see you gone?  And, how about staying with me in the Standing Annex?  You could be around as I follow up on this matter and help out... then act when you would like how you would like.  Ravel and Estry are welcome as well, as all our paths seem aligned at teh moment.",
-        "summary": "At the Kindly Rest, Sable names her enemy on the Transition board—Vestin Kray—and accepts Loki's offer to stay at the Standing Annex. Ravel and Estry agree to travel together. The four depart midday for a day's walk to the Annex.",
-        "narration": "You meet Sable's eyes and ask the harder question. \"Is there anyone on the board itself—someone with a name, someone who wanted you gone specifically?\" The cellar grows quieter. Sable's jaw tightens, then releases. She names them: \"Vestin Kray. He sits on the infrastructure committee. He visited the old works twice before the Transition, back when there were still tours. He saw what I was beginning to understand—that the machines weren't just running, they were *choosing* what to run. He wanted that sealed. When I started asking the keepers about it, Kray was the one who suggested to the others that I was becoming a security risk.\" Her voice doesn't waver, but her hands press together. \"He benefited most from my silence.\"\n\nYou let that settle, then offer plainly: \"Stay at the Standing Annex with me. Help me follow this thread where it goes. Ravel and Estry are welcome too—your paths seem woven together now, and the work will need all of us.\" Sable looks at you for a long moment. Then she looks at Ravel, who nods once, and at Estry, who steps slightly forward in a gesture of agreement. When Sable speaks, her voice carries something new—not certainty, but direction. \"Yes,\" she says. \"I'll come.\"\n\nRavel moves to the window and lets the midday light fall across her face. \"We travel together, then,\" she says quietly. \"The Standing Annex is a day's walk from here. We leave when the light begins to turn.\" Estry's hand finds Sable's shoulder—not a comfort, but a confirmation. In the lamp-lit cellar, the four of you stand at a threshold that has shifted. The questions aren't answered yet. But the people who will answer them are now moving in the same direction."
-      },
-      {
-        "player": "It's settled then. We all meet up at the Standing Annex.  From this point onward our band will be known as the Churn-Revellers",
-        "summary": "At the Kindly Rest, the four—Loki, Sable, Ravel, and Estry—bind as a band. The Churn-Revellers choose their name and their meeting place: the Standing Annex, a day's journey spinward. Their path forward is set.",
-        "narration": "Sable nods, once, decisive. Ravel turns from the window and extends her hand—not in greeting but in affirmation, palm up. Estry's grip tightens on Sable's shoulder, then releases, and they step forward to meet the center of the small room where you stand. The four of you form a circle in the lamp-light, the cellar stones bearing witness.\n\nYou speak the name aloud: the Churn-Revellers. Not a name taken from history or borrowed from elsewhere—a name that holds what you are: people who move through chaos and make sense of it together, who turn the revel toward understanding instead of breaking. Sable repeats it quietly, testing the weight. Ravel's mouth curves. Estry nods, and there is no hesitation in any of them.\n\nThe Standing Annex waits a day's walk spinward from here. You name the road, the gates, the place you will gather. Veln Ashpause will bring Halvex and Vessin when the work below the Hub crossing settles. Cy clicks softly from the lamp shelf, a sound almost like approval. By evening tomorrow, the Churn-Revellers will be whole, and what you do next will be done as one."
-      }
-    ],
-    "lastTurn": {
-      "narration": "Sable nods, once, decisive. Ravel turns from the window and extends her hand—not in greeting but in affirmation, palm up. Estry's grip tightens on Sable's shoulder, then releases, and they step forward to meet the center of the small room where you stand. The four of you form a circle in the lamp-light, the cellar stones bearing witness.\n\nYou speak the name aloud: the Churn-Revellers. Not a name taken from history or borrowed from elsewhere—a name that holds what you are: people who move through chaos and make sense of it together, who turn the revel toward understanding instead of breaking. Sable repeats it quietly, testing the weight. Ravel's mouth curves. Estry nods, and there is no hesitation in any of them.\n\nThe Standing Annex waits a day's walk spinward from here. You name the road, the gates, the place you will gather. Veln Ashpause will bring Halvex and Vessin when the work below the Hub crossing settles. Cy clicks softly from the lamp shelf, a sound almost like approval. By evening tomorrow, the Churn-Revellers will be whole, and what you do next will be done as one.",
-      "sceneSummary": "At the Kindly Rest, the four—Loki, Sable, Ravel, and Estry—bind as a band. The Churn-Revellers choose their name and their meeting place: the Standing Annex, a day's journey spinward. Their path forward is set.",
-      "choices": [
-        {
-          "label": "Depart for the Standing Annex now, taking the afternoon road.",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {},
-          "difficulty": "very easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "travel"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Spend the night here and depart at first light—let Sable rest one more night in safety before the road.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": "very easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "care"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Speak privately with Sister Vreni before you leave—tell her who you are, what you carry, and what the Standing Annex will hold.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "falsehood_truth": 0.3
-          },
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "negotiate"
-          ],
-          "abilityId": "better_story",
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "You have a choice that isn't here—tell me what you do.",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {},
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        }
-      ],
-      "deeds": [
-        {
-          "description": "Named a band and spoke the oath that binds it—the Churn-Revellers took their name in a cellar lamp-light and chose understanding over breaking.",
-          "tags": [
-            "valor",
-            "clarity"
-          ],
-          "weight": 1,
-          "communityId": "valley.the_kindly_rest"
-        }
-      ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
-      },
-      "ledgerEvents": [
-        {
-          "what": "The Churn-Revellers band was formed at the Kindly Rest—Loki, Sable, Ravel, and Estry bound together to seek answers about the old works and those who would silence the asking.",
-          "tags": [
-            "formation",
-            "alliance",
-            "clarity"
-          ],
-          "visibility": "witnessed",
-          "spectrumDeltas": {},
-          "impactsLocal": true
-        }
-      ],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "the-taken-from-the-city",
-          "title": "The Taken",
-          "summary": "Someone was brought from the city to the Unlit Deep, and the city is pretending it did not happen.",
-          "giver": "the elder of the Unlit Deep",
-          "note": "Sable has named her enemy: Vestin Kray on the Transition board, who feared what she was learning about the old works. She has accepted shelter and companionship with the band. The Churn-Revellers now travel together to the Standing Annex to continue uncovering why the city wanted her gone.",
-          "xpReward": null
-        }
-      ],
-      "standingOps": [],
-      "delegateOps": [],
-      "jobOps": [],
-      "arcOps": [],
-      "adoptSchool": null,
-      "offer": null,
-      "stageOps": [],
-      "scene": {
-        "setting": "A small lamp-lit room deep in the cellars of the Kindly Rest. The stone walls are damp and cool, and the herb-scent from the larger chamber beyond reaches here faintly. A high narrow window shows bright midday light, though it feels very distant.",
-        "npcsPresent": [
-          {
-            "name": "Sable",
-            "state": "Standing in the circle of four, having spoken her enemy's name and accepted the band. Clear-eyed, ready."
-          },
-          {
-            "name": "Ravel",
-            "state": "Hand extended, palm up—affirming the oath. Steady and present."
-          },
-          {
-            "name": "Estry",
-            "state": "Hand on Sable's shoulder, then stepping forward to meet the circle. Silent but fully committed."
-          },
-          {
-            "name": "Cy",
-            "state": "On the lamp shelf, clicking softly—a sound like approval."
-          }
-        ],
-        "objects": [
-          "narrow bed",
-          "one lamp burning on a stone shelf",
-          "cold stone walls",
-          "herbs hanging from the ceiling",
-          "high narrow window with bright midday light"
-        ],
-        "threads": [
-          "The Standing Annex waits—will Veln, Halvex, and Vessin arrive on schedule?",
-          "Vestin Kray on the Transition board: what will he do when he realizes Sable has survived and is hunting for answers?",
-          "What lies beneath the Hub crossing, in the passage beyond the Null Stone, still calls unanswered."
-        ]
-      },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "sable",
-          "name": "Sable",
-          "status": "active",
-          "statusNote": "Named her enemy and accepted companionship with the band. Ready to leave the Kindly Rest and move toward the Standing Annex.",
-          "note": "In the cellars of the Kindly Rest, Sable spoke her truth fully—the city was ending for her, the Transition board wanted her silence, and Vestin Kray was the architect of her exile. She has accepted shelter and alliance with Loki and the others. The four now form the band known as the Churn-Revellers."
-        },
-        {
-          "op": "update",
-          "npcId": "ravel",
-          "name": "Ravel",
-          "status": "active",
-          "statusNote": "Present and committed to the band. Will travel with Loki, Sable, and Estry toward the Standing Annex.",
-          "note": "Extended her hand in affirmation of the oath—her walls remain open, and she moves with the band toward understanding."
-        },
-        {
-          "op": "update",
-          "npcId": "estry",
-          "name": "Estry",
-          "status": "active",
-          "statusNote": "Silent but fully committed. Stepped forward into the circle of four.",
-          "note": "Their grip on Sable's shoulder released and they moved to the center—the oath was accepted without words, and their presence affirms the band."
-        }
-      ],
-      "intentsHeard": [
-        "Loki"
-      ],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "The Churn-Revellers band was formed in the cellars of the Kindly Rest at midday on day 5. The four members are Loki, Sable, Ravel, and Estry. Their purpose is to seek answers about the old works and those who would silence the asking. They will gather at the Standing Annex.",
-          "subjectId": null
-        }
-      ],
-      "placeUpdates": [],
-      "discovery": null,
-      "codexUpdates": [
-        {
-          "topic": "the-churn-revellers",
-          "label": "The Churn-Revellers",
-          "kind": "lore",
-          "entityId": null,
-          "fact": "A band formed at the Kindly Rest on day 5, consisting of Loki, Sable, Ravel, and Estry. They are bound together to seek answers about the old works and the Transition, and to protect Sable from those who would silence her questions. The name was chosen to honor the realization that chaos can be orchestrated toward understanding rather than breaking.",
-          "links": [
-            "the-taken-from-the-city",
-            "the-kindly-rest",
-            "the-standing-annex",
-            "sable"
-          ]
-        }
-      ],
-      "holdingOps": [],
-      "holdTrades": [],
-      "debtOps": [],
-      "exchangeOps": [],
-      "partyOps": [
-        {
-          "op": "join",
-          "npcId": "sable",
-          "why": "Sable accepted Loki's offer and the oath of the band. She travels now as part of the Churn-Revellers."
-        },
-        {
-          "op": "join",
-          "npcId": "ravel",
-          "why": "Ravel extended her hand in affirmation and stepped into the circle. She is bound to the band and travels with them."
-        },
-        {
-          "op": "join",
-          "npcId": "estry",
-          "why": "Estry moved forward into the circle and accepted the oath silently but completely. They travel with the band."
-        }
-      ],
-      "generateRequest": [],
-      "encounterOps": [],
-      "projectOps": [],
-      "bandOps": [
-        {
-          "op": "raise",
-          "id": "churn-revellers",
-          "name": "The Churn-Revellers",
-          "count": 4,
-          "quality": 9
-        }
-      ],
-      "strikeOps": [],
-      "deathOps": [],
-      "newEncounter": null,
-      "unlockPrecursor": null,
-      "unlockSubstrate": null,
-      "timeOps": {
-        "hoursPassed": 0.5,
-        "why": "A short span for the oath and the naming—the cellars hold the moment without time pressing."
-      },
-      "moveTo": null,
-      "stateOps": [],
-      "itemUpdates": [],
-      "deriveItem": null,
-      "imagePrompt": "Four figures stand in a circle in a lamp-lit stone cellar—Loki at the center, speaking a name aloud; Sable with her eyes clear and forward; Ravel with her hand extended, palm open; Estry stepping into the circle. The lamp-light catches on damp stone walls, and herbs hang like witnesses from the ceiling above. The moment is still, sharp, and bound.",
-      "imageMedium": null,
-      "newAbility": null,
-      "gambitOps": null,
-      "gambitApt": false,
-      "sceneEnded": false,
-      "momentArt": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Four%20figures%20stand%20in%20a%20circle%20in%20a%20lamp-lit%20stone%20cellar%E2%80%94Loki%20at%20the%20center%2C%20speaking%20a%20name%20aloud%3B%20Sable%20with%20her%20eyes%20clear%20and%20forward%3B%20Ravel%20with%20her%20hand%20extended%2C%20palm%20open%3B%20Estry%20stepping%20into%20the%20circle.%20The%20lamp-light%20catches%20on%20damp%20stone%20walls%2C%20and%20herbs%20hang%20like%20witnesses%20from%20the%20ceil%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=49901&nologo=true"
-    },
-    "sceneState": {
-      "setting": "A small lamp-lit room deep in the cellars of the Kindly Rest. The stone walls are damp and cool, and the herb-scent from the larger chamber beyond reaches here faintly. A high narrow window shows bright midday light, though it feels very distant.",
-      "npcsPresent": [
-        {
-          "name": "Sable",
-          "state": "Standing in the circle of four, having spoken her enemy's name and accepted the band. Clear-eyed, ready."
-        },
-        {
-          "name": "Ravel",
-          "state": "Hand extended, palm up—affirming the oath. Steady and present."
-        },
-        {
-          "name": "Estry",
-          "state": "Hand on Sable's shoulder, then stepping forward to meet the circle. Silent but fully committed."
-        },
-        {
-          "name": "Cy",
-          "state": "On the lamp shelf, clicking softly—a sound like approval."
-        }
-      ],
-      "objects": [
-        "narrow bed",
-        "one lamp burning on a stone shelf",
-        "cold stone walls",
-        "herbs hanging from the ceiling",
-        "high narrow window with bright midday light"
-      ],
-      "threads": [
-        "The Standing Annex waits—will Veln, Halvex, and Vessin arrive on schedule?",
-        "Vestin Kray on the Transition board: what will she do when she realizes Sable has survived and is hunting for answers?",
-        "What lies beneath the Hub crossing, in the passage beyond the Null Stone, still calls unanswered."
-      ]
-    },
-    "beats": 6,
-    "subPlace": null
-  },
+  "activeScene": null,
   "clock": {
     "schemaVersion": 1,
     "day": 5,
-    "hour": 14,
+    "hour": 20,
     "realAnchor": null
   },
   "companions": [
@@ -724,14 +398,14 @@
       "locationEntityId": "the-unlit-deep",
       "status": "active",
       "progress": [
-        "Loki has accepted companionship with Ravel and Estry and is traveling with them to the Kindly Rest patient—the reason they came in deep night. The next step is to reach and meet the person who broke fever three days ago.",
         "The patient in the cellars is awake and aware. The threshold to meeting them is directly ahead. Ravel and Estry are moving to them now.",
         "Loki has descended to the cellars of the Kindly Rest and stands face to face with Sable. The patient is awake, aware, and waiting. Ravel and Estry are present. The next moment will determine what Sable chooses to do or say.",
         "Sable has returned from the Unlit Deep by choice and is recovering at the Kindly Rest. She turned back from the passage of her own will. The next move—why she returned, what she found, what she will choose now—is unresolved.",
         "Sable's full testimony: the city was ending for her. She sought the Unlit Deep and its keepers of the old works. She descended the passage but turned back at the threshold, unwilling to be read completely. She now knows the question but not yet the answer.",
         "Sable names the beneficiaries: the keepers of the old works, and the Transition board itself. The question has an answer—the old work is not a machine, it *reads*. But Sable has not yet chosen her next path.",
         "Sable has named her enemy: Vestin Kray on the Transition board, who feared what she was learning about the old works. She has accepted shelter at the Standing Annex and will travel with Loki, Ravel, and Estry to continue uncovering why the city wanted her gone.",
-        "Sable has named her enemy: Vestin Kray on the Transition board, who feared what she was learning about the old works. She has accepted shelter and companionship with the band. The Churn-Revellers now travel together to the Standing Annex to continue uncovering why the city wanted her gone."
+        "Sable has named her enemy: Vestin Kray on the Transition board, who feared what she was learning about the old works. She has accepted shelter and companionship with the band. The Churn-Revellers now travel together to the Standing Annex to continue uncovering why the city wanted her gone.",
+        "Loki has secured shelter and sanctuary for Sable at the Standing Annex; Sister Vreni has given her word that the Transition board will find nothing at the Kindly Rest. The band is ready to travel."
       ],
       "aliases": [],
       "startedAt": "2026-07-24T21:30:43.637Z"
@@ -1968,12 +1642,8 @@
     "lastSharedReadAt": "2026-09-26T01:52:31.771Z",
     "lastTickWorldDay": 88,
     "lastCanonWorldDay": 88,
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 0,
     "recentOffers": [
-      {
-        "thing": "The cellar threshold itself—a literal and metaphorical passage downward",
-        "from": "The quest you accepted: someone was taken from the city, and the elder granted you passage to their answer"
-      },
       {
         "thing": "Ravel and Estry arriving at the Kindly Rest with Sable in the early morning—a rescue that was not a rescue, a return that was chosen",
         "from": "Ravel's hunger to understand what Sable became, and the need to bring her somewhere safe to ask it"
@@ -1989,6 +1659,10 @@
       {
         "thing": "Vestin Kray emerges as a named antagonist with clear motive and position",
         "from": "Sable's honest naming of who benefited from her silence"
+      },
+      {
+        "thing": "Sister Vreni's promise to listen and her acknowledgment that the Standing Annex holds what the band is becoming",
+        "from": "Loki speaking plainly instead of seeking to persuade—the house responds to honesty the way it responds to need"
       }
     ],
     "wantProgress": {
@@ -12764,17 +12438,17 @@
     "deferredMysteries": []
   },
   "tendencies": {
-    "devotion": 0.7747546776039621,
-    "cerebral": 16.46373479709131,
-    "social": 17.69301368676552,
-    "strategic": 12.447300317538664,
-    "cautious": 5.444004124479641,
-    "amorous": 7.3107527236596805,
-    "generous": 5.986937592696097,
-    "ruthless": 0.194055928007886,
-    "risky": 0.15859125852442002,
-    "patient": 0.04330842067350151,
-    "deception": 0.050413244932688416
+    "devotion": 0.755385810663863,
+    "cerebral": 16.052141427164027,
+    "social": 18.250688344596384,
+    "strategic": 12.136117809600197,
+    "cautious": 5.3079040213676505,
+    "amorous": 7.127983905568188,
+    "generous": 5.837264152878694,
+    "ruthless": 0.18920452980768887,
+    "risky": 0.15462647706130953,
+    "patient": 0.04222571015666397,
+    "deception": 0.0491529138093712
   },
   "aptitudes": [
     "strategist",
@@ -12784,7 +12458,7 @@
     "faithful",
     "charmer"
   ],
-  "actionCount": 202,
+  "actionCount": 203,
   "grantsVersion": 1,
   "precursorAccess": [
     "address_sense"
@@ -13846,8 +13520,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790387568021,
-  "rev": 903,
+  "updatedAt": 1790388162825,
+  "rev": 904,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -14873,7 +14547,7 @@
     "umbral_depths": 54,
     "the_quickwood": 101,
     "the_center": 50,
-    "valley": 21,
+    "valley": 22,
     "the_open_reach": 3
   },
   "opLossPending": false,
@@ -15025,10 +14699,10 @@
     {
       "id": "sess-19",
       "startedAt": "2026-09-26T00:51:07.826Z",
-      "lastAt": "2026-09-26T00:51:07.826Z",
+      "lastAt": "2026-09-26T02:02:42.817Z",
       "startDay": 88,
       "endDay": 88,
-      "beats": 1
+      "beats": 2
     }
   ],
   "establishedFacts": [
@@ -15143,7 +14817,7 @@
   ],
   "_opLedger": {
     "offer": {
-      "applied": 42,
+      "applied": 43,
       "rejected": 2,
       "lastWhy": "rejected-shape"
     },
@@ -15154,28 +14828,32 @@
     },
     "moveTo": {
       "applied": 0,
-      "rejected": 1,
-      "lastWhy": "journey-planned"
+      "rejected": 2,
+      "lastWhy": "refused-unearned"
     }
   },
-  "_pendingArrival": null,
+  "_pendingArrival": {
+    "ref": "the-standing-annex",
+    "name": "The Standing Annex",
+    "destId": "gen-the-standing-annex"
+  },
   "_opEmitted": {
-    "sceneSummary": 232,
-    "choices": 232,
-    "characterDeltas": 117,
-    "scene": 232,
+    "sceneSummary": 233,
+    "choices": 233,
+    "characterDeltas": 118,
+    "scene": 233,
     "placeUpdates": 28,
     "codexUpdates": 134,
-    "timeOps": 185,
-    "offer": 37,
+    "timeOps": 186,
+    "offer": 38,
     "generateRequest": 7,
-    "sceneEnded": 101,
-    "npcUpdates": 184,
-    "moveTo": 7,
+    "sceneEnded": 102,
+    "npcUpdates": 185,
+    "moveTo": 8,
     "gambitApt": 61,
     "deeds": 13,
-    "questUpdates": 39,
-    "standingOps": 3,
+    "questUpdates": 40,
+    "standingOps": 4,
     "factUpdates": 16,
     "stageOps": 7,
     "encounterOps": 9,
@@ -15192,7 +14870,7 @@
     "partyOps": 3,
     "bandOps": 1
   },
-  "_opTurns": 232,
+  "_opTurns": 233,
   "customAbilities": {
     "mirror-bright": {
       "id": "mirror-bright",
@@ -15328,7 +15006,7 @@
       "wayfinding": 1,
       "misdirect": 2,
       "wrong_reality": 1,
-      "better_story": 1,
+      "better_story": 2,
       "maintained_veil": 2,
       "appetite_sense": 17,
       "umbracraft": 2,
@@ -15355,7 +15033,7 @@
       {
         "abilityId": "unbearable_word",
         "since": "2026-09-16T21:20:54.754Z",
-        "progress": 8
+        "progress": 9
       }
     ],
     "lastUsed": {
@@ -15371,7 +15049,7 @@
       "wayfinding": 69,
       "misdirect": 69,
       "wrong_reality": 76,
-      "better_story": 76,
+      "better_story": 88,
       "maintained_veil": 79,
       "umbracraft": 83,
       "appetite_sense": 83,
@@ -16166,7 +15844,7 @@
     "comfort": 2,
     "finesse": 3,
     "persuade": 1,
-    "negotiate": 6,
+    "negotiate": 7,
     "truth": 1,
     "devote": 1,
     "romantic": 4,
@@ -16603,419 +16281,419 @@
   },
   "_promptRows": {
     "character": {
-      "reached": 47,
-      "produced": 47
+      "reached": 48,
+      "produced": 48
     },
     "location": {
-      "reached": 47,
-      "produced": 47
+      "reached": 48,
+      "produced": 48
     },
     "region": {
-      "reached": 47,
-      "produced": 47
+      "reached": 48,
+      "produced": 48
     },
     "groundDetail": {
-      "reached": 47,
+      "reached": 48,
       "produced": 21
     },
     "lore": {
-      "reached": 47,
-      "produced": 44
+      "reached": 48,
+      "produced": 45
     },
     "traditionMotiveDetail": {
-      "reached": 47,
-      "produced": 47
+      "reached": 48,
+      "produced": 48
     },
     "sheetsDetail": {
-      "reached": 47,
-      "produced": 30
+      "reached": 48,
+      "produced": 31
     },
     "rules": {
-      "reached": 47,
-      "produced": 47
+      "reached": 48,
+      "produced": 48
     },
     "recentTurns": {
-      "reached": 47,
-      "produced": 42
+      "reached": 48,
+      "produced": 43
     },
     "timeLabel": {
-      "reached": 47,
-      "produced": 47
+      "reached": 48,
+      "produced": 48
     },
     "npcRegistryDetail": {
-      "reached": 47,
-      "produced": 47
+      "reached": 48,
+      "produced": 48
     },
     "mintedUnmetDetail": {
-      "reached": 47,
-      "produced": 47
+      "reached": 48,
+      "produced": 48
     },
     "npcSeedDetail": {
-      "reached": 47,
+      "reached": 48,
       "produced": 24
     },
     "traditionVocab": {
-      "reached": 47,
-      "produced": 47
+      "reached": 48,
+      "produced": 48
     },
     "standingDetail": {
-      "reached": 47,
-      "produced": 47
+      "reached": 48,
+      "produced": 48
     },
     "recalledDetail": {
-      "reached": 47,
+      "reached": 48,
       "produced": 4
     },
     "bearingsDetail": {
-      "reached": 47,
-      "produced": 47
+      "reached": 48,
+      "produced": 48
     },
     "caravansDetail": {
-      "reached": 47,
+      "reached": 48,
       "produced": 0
     },
     "commandDetail": {
-      "reached": 47,
-      "produced": 47
+      "reached": 48,
+      "produced": 48
     },
     "presenceDetail": {
-      "reached": 47,
-      "produced": 37
+      "reached": 48,
+      "produced": 38
     },
     "worthHereDetail": {
-      "reached": 47,
+      "reached": 48,
       "produced": 0
     },
     "inventoryDetail": {
-      "reached": 47,
-      "produced": 47
+      "reached": 48,
+      "produced": 48
     },
     "sceneState": {
-      "reached": 47,
-      "produced": 42
+      "reached": 48,
+      "produced": 43
     },
     "holdingsDetail": {
-      "reached": 47,
-      "produced": 47
+      "reached": 48,
+      "produced": 48
     },
     "debtsDetail": {
-      "reached": 47,
+      "reached": 48,
       "produced": 0
     },
     "carriedDetail": {
-      "reached": 47,
+      "reached": 48,
       "produced": 0
     },
     "abilityLawDetail": {
-      "reached": 47,
-      "produced": 47
+      "reached": 48,
+      "produced": 48
     },
     "questsDetail": {
-      "reached": 47,
-      "produced": 47
+      "reached": 48,
+      "produced": 48
     },
     "structuredQuestsDetail": {
-      "reached": 47,
+      "reached": 48,
       "produced": 0
     },
     "traditionArcDetail": {
-      "reached": 47,
+      "reached": 48,
       "produced": 0
     },
     "npcErrandsDetail": {
-      "reached": 47,
+      "reached": 48,
       "produced": 0
     },
     "codexDetail": {
-      "reached": 47,
-      "produced": 47
+      "reached": 48,
+      "produced": 48
     },
     "companionsDetail": {
-      "reached": 47,
-      "produced": 47
+      "reached": 48,
+      "produced": 48
     },
     "placeMemoryDetail": {
-      "reached": 47,
-      "produced": 38
+      "reached": 48,
+      "produced": 39
     },
     "agesMissingDetail": {
-      "reached": 47,
-      "produced": 47
+      "reached": 48,
+      "produced": 48
     },
     "newsDetail": {
-      "reached": 47,
-      "produced": 47
+      "reached": 48,
+      "produced": 48
     },
     "worldArcsDetail": {
-      "reached": 47,
-      "produced": 47
+      "reached": 48,
+      "produced": 48
     },
     "legendsPursuableDetail": {
-      "reached": 47,
+      "reached": 48,
       "produced": 12
     },
     "wakesDetail": {
-      "reached": 47,
+      "reached": 48,
       "produced": 0
     },
     "arcMoodDetail": {
-      "reached": 47,
-      "produced": 47
+      "reached": 48,
+      "produced": 48
     },
     "reachableDeadDetail": {
-      "reached": 47,
+      "reached": 48,
       "produced": 46
     },
     "threatToPlayer": {
-      "reached": 47,
+      "reached": 48,
       "produced": 0
     },
     "guardiansDetail": {
-      "reached": 47,
+      "reached": 48,
       "produced": 0
     },
     "resolution": {
-      "reached": 47,
-      "produced": 38
+      "reached": 48,
+      "produced": 39
     },
     "playerInput": {
-      "reached": 47,
+      "reached": 48,
       "produced": 9
     },
     "exactWords": {
-      "reached": 47,
+      "reached": 48,
       "produced": 28
     },
     "travelDirective": {
-      "reached": 47,
+      "reached": 48,
       "produced": 1
     },
     "itemAdvance": {
-      "reached": 47,
+      "reached": 48,
       "produced": 0
     },
     "encounterWeaveDetail": {
-      "reached": 47,
+      "reached": 48,
       "produced": 6
     },
     "encounterOfferDetail": {
-      "reached": 47,
+      "reached": 48,
       "produced": 3
     },
     "fightFramingDetail": {
-      "reached": 47,
+      "reached": 48,
       "produced": 0
     },
     "abilityGrantDetail": {
-      "reached": 47,
+      "reached": 48,
       "produced": 0
     },
     "stageRevealDetail": {
-      "reached": 47,
+      "reached": 48,
       "produced": 0
     },
     "itemEvolveDetail": {
-      "reached": 47,
+      "reached": 48,
       "produced": 0
     },
     "worldPressureDetail": {
-      "reached": 47,
+      "reached": 48,
       "produced": 2
     },
     "offerDetail": {
-      "reached": 47,
+      "reached": 48,
       "produced": 2
     },
     "teacherOfferDetail": {
-      "reached": 47,
+      "reached": 48,
       "produced": 0
     },
     "substrateDetail": {
-      "reached": 47,
-      "produced": 14
+      "reached": 48,
+      "produced": 15
     },
     "romanceGuidanceDetail": {
-      "reached": 47,
+      "reached": 48,
       "produced": 4
     },
     "factsDetail": {
-      "reached": 47,
-      "produced": 47
+      "reached": 48,
+      "produced": 48
     },
     "evolvedItemsDetail": {
-      "reached": 47,
+      "reached": 48,
       "produced": 0
     },
     "opLossNote": {
-      "reached": 47,
+      "reached": 48,
       "produced": 0
     },
     "emergenceDetail": {
-      "reached": 47,
+      "reached": 48,
       "produced": 0
     },
     "perilNote": {
-      "reached": 47,
+      "reached": 48,
       "produced": 0
     },
     "encounterDetail": {
-      "reached": 47,
+      "reached": 48,
       "produced": 4
     },
     "masteryDetail": {
-      "reached": 47,
-      "produced": 47
+      "reached": 48,
+      "produced": 48
     },
     "bookkeepingRestate": {
-      "reached": 47,
+      "reached": 48,
       "produced": 0
     },
     "anomalyDetail": {
-      "reached": 47,
-      "produced": 45
+      "reached": 48,
+      "produced": 46
     },
     "repairPanelDetail": {
-      "reached": 47,
-      "produced": 47
+      "reached": 48,
+      "produced": 48
     },
     "teacherDetail": {
-      "reached": 47,
+      "reached": 48,
       "produced": 0
     },
     "toolkitDetail": {
-      "reached": 47,
-      "produced": 47
+      "reached": 48,
+      "produced": 48
     },
     "availableEncounters": {
-      "reached": 47,
-      "produced": 43
+      "reached": 48,
+      "produced": 44
     },
     "partyDetail": {
-      "reached": 47,
+      "reached": 48,
       "produced": 0
     },
     "ratingDetail": {
-      "reached": 47,
-      "produced": 47
+      "reached": 48,
+      "produced": 48
     },
     "registerDetail": {
-      "reached": 47,
-      "produced": 47
+      "reached": 48,
+      "produced": 48
     },
     "legendDetail": {
-      "reached": 47,
+      "reached": 48,
       "produced": 1
     },
     "livingWorldDetail": {
-      "reached": 47,
-      "produced": 18
+      "reached": 48,
+      "produced": 19
     },
     "assignmentsDetail": {
-      "reached": 47,
+      "reached": 48,
       "produced": 0
     },
     "latentArcsDetail": {
-      "reached": 47,
-      "produced": 47
+      "reached": 48,
+      "produced": 48
     },
     "seasonalDetail": {
-      "reached": 47,
-      "produced": 47
+      "reached": 48,
+      "produced": 48
     },
     "schoolsDetail": {
-      "reached": 47,
-      "produced": 47
+      "reached": 48,
+      "produced": 48
     },
     "sharedCanonDetail": {
-      "reached": 47,
-      "produced": 24
+      "reached": 48,
+      "produced": 25
     },
     "worldCountLabel": {
-      "reached": 47,
-      "produced": 47
+      "reached": 48,
+      "produced": 48
     },
     "waygateDetail": {
-      "reached": 47,
+      "reached": 48,
       "produced": 27
     },
     "readAloudDetail": {
-      "reached": 47,
-      "produced": 47
+      "reached": 48,
+      "produced": 48
     },
     "scenePacingDetail": {
-      "reached": 47,
+      "reached": 48,
       "produced": 20
     },
     "wishesDetail": {
-      "reached": 27,
+      "reached": 28,
       "produced": 0
     },
     "worldMovedOnDetail": {
-      "reached": 27,
+      "reached": 28,
       "produced": 2
     },
     "companionLivesDetail": {
-      "reached": 27,
+      "reached": 28,
       "produced": 18
     },
     "homeDetail": {
-      "reached": 27,
+      "reached": 28,
       "produced": 0
     },
     "invitationsDetail": {
-      "reached": 27,
+      "reached": 28,
       "produced": 0
     },
     "bandsJoinedDetail": {
-      "reached": 27,
+      "reached": 28,
       "produced": 0
     },
     "travelersHereDetail": {
-      "reached": 27,
+      "reached": 28,
       "produced": 1
     },
     "travelersDetail": {
-      "reached": 27,
+      "reached": 28,
       "produced": 0
     },
     "journeyDetail": {
-      "reached": 25,
+      "reached": 26,
       "produced": 0
     },
     "journeyUnderwayDetail": {
-      "reached": 25,
+      "reached": 26,
       "produced": 0
     },
     "holdsNearDetail": {
-      "reached": 25,
-      "produced": 21
+      "reached": 26,
+      "produced": 22
     },
     "moneyDetail": {
-      "reached": 24,
-      "produced": 24
+      "reached": 25,
+      "produced": 25
     },
     "jobsDetail": {
-      "reached": 24,
+      "reached": 25,
       "produced": 0
     },
     "powersHereDetail": {
-      "reached": 1,
+      "reached": 2,
       "produced": 0
     },
     "nemesisDetail": {
-      "reached": 1,
-      "produced": 1
+      "reached": 2,
+      "produced": 2
     }
   },
   "_opUnknown": {
-    "sceneSummary": 59,
+    "sceneSummary": 60,
     "scene_summary": 1
   },
   "_bandNotes": null,
   "_opCountingSince": "2026-09-14T22:51:56.913Z",
   "_fireTests": {
-    "at": "2026-09-26T00:51:08.223Z",
-    "build": "2.8.1",
+    "at": "2026-09-26T02:02:43.068Z",
+    "build": "2.8.3",
     "results": [
       {
         "op": "jobOps",
@@ -17691,5 +17369,8 @@
       "words": "[d4] In the vast chamber beneath the Null Stone, she accepted Loki's confession and made a mutual vow: if death claims one, the other will reach for them. She held Loki's wrist when she said yes. The pact is made.",
       "source": "history"
     }
+  ],
+  "_standingOpRefusals": [
+    "valley.the_kindly_rest: unknown-people"
   ]
 }

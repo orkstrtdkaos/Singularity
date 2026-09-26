@@ -127,7 +127,7 @@
   "maxHealth": 78,
   "health": 78,
   "maxEnergy": 156,
-  "energy": 72,
+  "energy": 144,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -373,12 +373,12 @@
     "At the Kindly Rest in early morning, Loki learns the patient lies in the cellars below and is awake, asking after Ravel. The path forward is clear.",
     "At the Kindly Rest, Loki speaks plainly with Sister Vreni about the Churn-Revellers and their purpose. Vreni confirms the house's shelter and silence, and promises to listen when answers return."
   ],
-  "currentLocationId": "the_kindly_rest",
+  "currentLocationId": "millbrook",
   "activeScene": null,
   "clock": {
     "schemaVersion": 1,
-    "day": 5,
-    "hour": 20,
+    "day": 7,
+    "hour": 21,
     "realAnchor": null
   },
   "companions": [
@@ -482,6 +482,21 @@
       "outcomeName": "Veilwright",
       "resolvedAt": "2026-07-27T17:35:33.860Z",
       "resolvedWorldDay": 27
+    },
+    {
+      "id": "journey-gen-the-standing-annex-88",
+      "kind": "journey",
+      "structured": false,
+      "status": "active",
+      "title": "Journey to The Standing Annex",
+      "summary": "On the road: 1 of 6 legs walked, 2 days out · you are at Millbrook · about 1.6 days ahead, 1 ration for it — you carry 0 (1 short) · 1 day walked hungry so far.",
+      "progress": [
+        "Reached Millbrook — day 2 of the road."
+      ],
+      "giver": null,
+      "startedAt": "2026-09-26T02:04:07.737Z",
+      "startedAtDay": 5,
+      "journeyDestId": "gen-the-standing-annex"
     }
   ],
   "npcRegistry": {
@@ -1428,11 +1443,23 @@
         "death_life",
         "mechanical_spiritual"
       ]
+    },
+    "millbrook": {
+      "visits": 1,
+      "notes": [],
+      "flags": {},
+      "lastVisit": 7,
+      "vectorsKnown": [
+        "violence_peace",
+        "chaos_order",
+        "death_life",
+        "concrete_abstract"
+      ]
     }
   },
   "worldState": {
     "schemaVersion": 1,
-    "lastTickDay": 5,
+    "lastTickDay": 7,
     "eventStages": {
       "water_crisis": {
         "stage": 2,
@@ -1638,8 +1665,8 @@
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 2113,
-    "lastSharedReadAt": "2026-09-26T01:52:31.771Z",
+    "lastGenCount": 2114,
+    "lastSharedReadAt": "2026-09-26T02:04:40.436Z",
     "lastTickWorldDay": 88,
     "lastCanonWorldDay": 88,
     "turnsSinceOffer": 0,
@@ -1932,7 +1959,7 @@
         "kind": "decision",
         "premise": "Someone who keeps the count of what has been unmade has begun rounding down, telling themselves the difference is noise — but the rounding has a direction, and it has been consistent for long enough…",
         "cause": "The act of counting the unmade requires a decision about what constitutes a thing distinct enough to be counted, and that threshold has always been left to…",
-        "stage": 13,
+        "stage": 14,
         "seededAtCount": 1917,
         "surfaced": true,
         "fate": "growing",
@@ -1945,7 +1972,7 @@
         "kind": "decision",
         "premise": "The person who holds authority to formally designate what has been unmade as 'resolved' has not done so for anything in years, and the backlog of unresolved unmakings is beginning to press against…",
         "cause": "In the_unmade, the act of resolution is itself an act of power, and the authority-holder has quietly discovered that unresolved things remain partially…",
-        "stage": 9,
+        "stage": 10,
         "seededAtCount": 1968,
         "surfaced": true,
         "fate": "growing",
@@ -1970,7 +1997,7 @@
         "kind": "decision",
         "premise": "Someone has begun quietly counting what no longer exists — cataloguing absences — and has not yet decided whether to share what the count implies.",
         "cause": "The Unmade is defined by what has been lost or undone; its people have long customs around not naming absence directly, because naming draws attention to the…",
-        "stage": 4,
+        "stage": 5,
         "seededAtCount": 2053,
         "surfaced": true,
         "fate": "growing",
@@ -1983,7 +2010,7 @@
         "kind": "decision",
         "premise": "An elder who alone remembers the last time something like the current unraveling occurred has not yet spoken, weighing whether the knowing will help or hasten what is coming.",
         "cause": "In the_unmade, what is lost or dissolved carries weight equal to what remains — silence is understood as a form of preservation, and the elder has lived long…",
-        "stage": 3,
+        "stage": 4,
         "seededAtCount": 2100,
         "surfaced": true,
         "fate": "growing",
@@ -12093,6 +12120,19 @@
         "aliases": [],
         "createdDay": 5,
         "updatedDay": 5
+      },
+      "millbrook": {
+        "id": "millbrook",
+        "label": "Millbrook",
+        "kind": "place",
+        "facts": [
+          "[d7] you have walked here"
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": 7,
+        "entityId": "millbrook",
+        "updatedDay": 7
       }
     },
     "mergeUndo": [
@@ -13520,8 +13560,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790388162825,
-  "rev": 904,
+  "updatedAt": 1790388285559,
+  "rev": 907,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -14547,7 +14587,7 @@
     "umbral_depths": 54,
     "the_quickwood": 101,
     "the_center": 50,
-    "valley": 22,
+    "valley": 23,
     "the_open_reach": 3
   },
   "opLossPending": false,
@@ -14832,11 +14872,7 @@
       "lastWhy": "refused-unearned"
     }
   },
-  "_pendingArrival": {
-    "ref": "the-standing-annex",
-    "name": "The Standing Annex",
-    "destId": "gen-the-standing-annex"
-  },
+  "_pendingArrival": null,
   "_opEmitted": {
     "sceneSummary": 233,
     "choices": 233,
@@ -15147,7 +15183,8 @@
     "grovehome",
     "gen-the-waygate-path",
     "gen-the-standing-annex",
-    "the_kindly_rest"
+    "the_kindly_rest",
+    "millbrook"
   ],
   "_devActions": [
     {
@@ -15823,7 +15860,7 @@
       "conditionSince": 2100
     }
   ],
-  "_lastProjectDay": 5,
+  "_lastProjectDay": 7,
   "featureOffers": [],
   "_debtReceipts": [],
   "skillUses": {
@@ -16281,408 +16318,408 @@
   },
   "_promptRows": {
     "character": {
-      "reached": 48,
-      "produced": 48
+      "reached": 49,
+      "produced": 49
     },
     "location": {
-      "reached": 48,
-      "produced": 48
+      "reached": 49,
+      "produced": 49
     },
     "region": {
-      "reached": 48,
-      "produced": 48
+      "reached": 49,
+      "produced": 49
     },
     "groundDetail": {
-      "reached": 48,
-      "produced": 21
+      "reached": 49,
+      "produced": 22
     },
     "lore": {
-      "reached": 48,
-      "produced": 45
+      "reached": 49,
+      "produced": 46
     },
     "traditionMotiveDetail": {
-      "reached": 48,
-      "produced": 48
+      "reached": 49,
+      "produced": 49
     },
     "sheetsDetail": {
-      "reached": 48,
+      "reached": 49,
       "produced": 31
     },
     "rules": {
-      "reached": 48,
-      "produced": 48
+      "reached": 49,
+      "produced": 49
     },
     "recentTurns": {
-      "reached": 48,
+      "reached": 49,
       "produced": 43
     },
     "timeLabel": {
-      "reached": 48,
-      "produced": 48
+      "reached": 49,
+      "produced": 49
     },
     "npcRegistryDetail": {
-      "reached": 48,
-      "produced": 48
+      "reached": 49,
+      "produced": 49
     },
     "mintedUnmetDetail": {
-      "reached": 48,
-      "produced": 48
+      "reached": 49,
+      "produced": 49
     },
     "npcSeedDetail": {
-      "reached": 48,
+      "reached": 49,
       "produced": 24
     },
     "traditionVocab": {
-      "reached": 48,
-      "produced": 48
+      "reached": 49,
+      "produced": 49
     },
     "standingDetail": {
-      "reached": 48,
-      "produced": 48
+      "reached": 49,
+      "produced": 49
     },
     "recalledDetail": {
-      "reached": 48,
+      "reached": 49,
       "produced": 4
     },
     "bearingsDetail": {
-      "reached": 48,
-      "produced": 48
+      "reached": 49,
+      "produced": 49
     },
     "caravansDetail": {
-      "reached": 48,
+      "reached": 49,
       "produced": 0
     },
     "commandDetail": {
-      "reached": 48,
-      "produced": 48
+      "reached": 49,
+      "produced": 49
     },
     "presenceDetail": {
-      "reached": 48,
-      "produced": 38
+      "reached": 49,
+      "produced": 39
     },
     "worthHereDetail": {
-      "reached": 48,
+      "reached": 49,
       "produced": 0
     },
     "inventoryDetail": {
-      "reached": 48,
-      "produced": 48
+      "reached": 49,
+      "produced": 49
     },
     "sceneState": {
-      "reached": 48,
+      "reached": 49,
       "produced": 43
     },
     "holdingsDetail": {
-      "reached": 48,
-      "produced": 48
+      "reached": 49,
+      "produced": 49
     },
     "debtsDetail": {
-      "reached": 48,
+      "reached": 49,
       "produced": 0
     },
     "carriedDetail": {
-      "reached": 48,
+      "reached": 49,
       "produced": 0
     },
     "abilityLawDetail": {
-      "reached": 48,
-      "produced": 48
+      "reached": 49,
+      "produced": 49
     },
     "questsDetail": {
-      "reached": 48,
-      "produced": 48
+      "reached": 49,
+      "produced": 49
     },
     "structuredQuestsDetail": {
-      "reached": 48,
+      "reached": 49,
       "produced": 0
     },
     "traditionArcDetail": {
-      "reached": 48,
+      "reached": 49,
       "produced": 0
     },
     "npcErrandsDetail": {
-      "reached": 48,
+      "reached": 49,
       "produced": 0
     },
     "codexDetail": {
-      "reached": 48,
-      "produced": 48
+      "reached": 49,
+      "produced": 49
     },
     "companionsDetail": {
-      "reached": 48,
-      "produced": 48
+      "reached": 49,
+      "produced": 49
     },
     "placeMemoryDetail": {
-      "reached": 48,
+      "reached": 49,
       "produced": 39
     },
     "agesMissingDetail": {
-      "reached": 48,
-      "produced": 48
+      "reached": 49,
+      "produced": 49
     },
     "newsDetail": {
-      "reached": 48,
-      "produced": 48
+      "reached": 49,
+      "produced": 49
     },
     "worldArcsDetail": {
-      "reached": 48,
-      "produced": 48
+      "reached": 49,
+      "produced": 49
     },
     "legendsPursuableDetail": {
-      "reached": 48,
+      "reached": 49,
       "produced": 12
     },
     "wakesDetail": {
-      "reached": 48,
+      "reached": 49,
       "produced": 0
     },
     "arcMoodDetail": {
-      "reached": 48,
-      "produced": 48
+      "reached": 49,
+      "produced": 49
     },
     "reachableDeadDetail": {
-      "reached": 48,
+      "reached": 49,
       "produced": 46
     },
     "threatToPlayer": {
-      "reached": 48,
+      "reached": 49,
       "produced": 0
     },
     "guardiansDetail": {
-      "reached": 48,
+      "reached": 49,
       "produced": 0
     },
     "resolution": {
-      "reached": 48,
+      "reached": 49,
       "produced": 39
     },
     "playerInput": {
-      "reached": 48,
-      "produced": 9
+      "reached": 49,
+      "produced": 10
     },
     "exactWords": {
-      "reached": 48,
+      "reached": 49,
       "produced": 28
     },
     "travelDirective": {
-      "reached": 48,
+      "reached": 49,
       "produced": 1
     },
     "itemAdvance": {
-      "reached": 48,
+      "reached": 49,
       "produced": 0
     },
     "encounterWeaveDetail": {
-      "reached": 48,
+      "reached": 49,
       "produced": 6
     },
     "encounterOfferDetail": {
-      "reached": 48,
+      "reached": 49,
       "produced": 3
     },
     "fightFramingDetail": {
-      "reached": 48,
+      "reached": 49,
       "produced": 0
     },
     "abilityGrantDetail": {
-      "reached": 48,
+      "reached": 49,
       "produced": 0
     },
     "stageRevealDetail": {
-      "reached": 48,
+      "reached": 49,
       "produced": 0
     },
     "itemEvolveDetail": {
-      "reached": 48,
+      "reached": 49,
       "produced": 0
     },
     "worldPressureDetail": {
-      "reached": 48,
+      "reached": 49,
       "produced": 2
     },
     "offerDetail": {
-      "reached": 48,
+      "reached": 49,
       "produced": 2
     },
     "teacherOfferDetail": {
-      "reached": 48,
+      "reached": 49,
       "produced": 0
     },
     "substrateDetail": {
-      "reached": 48,
+      "reached": 49,
       "produced": 15
     },
     "romanceGuidanceDetail": {
-      "reached": 48,
+      "reached": 49,
       "produced": 4
     },
     "factsDetail": {
-      "reached": 48,
-      "produced": 48
+      "reached": 49,
+      "produced": 49
     },
     "evolvedItemsDetail": {
-      "reached": 48,
+      "reached": 49,
       "produced": 0
     },
     "opLossNote": {
-      "reached": 48,
+      "reached": 49,
       "produced": 0
     },
     "emergenceDetail": {
-      "reached": 48,
+      "reached": 49,
       "produced": 0
     },
     "perilNote": {
-      "reached": 48,
+      "reached": 49,
       "produced": 0
     },
     "encounterDetail": {
-      "reached": 48,
+      "reached": 49,
       "produced": 4
     },
     "masteryDetail": {
-      "reached": 48,
-      "produced": 48
+      "reached": 49,
+      "produced": 49
     },
     "bookkeepingRestate": {
-      "reached": 48,
+      "reached": 49,
       "produced": 0
     },
     "anomalyDetail": {
-      "reached": 48,
-      "produced": 46
+      "reached": 49,
+      "produced": 47
     },
     "repairPanelDetail": {
-      "reached": 48,
-      "produced": 48
+      "reached": 49,
+      "produced": 49
     },
     "teacherDetail": {
-      "reached": 48,
+      "reached": 49,
       "produced": 0
     },
     "toolkitDetail": {
-      "reached": 48,
-      "produced": 48
+      "reached": 49,
+      "produced": 49
     },
     "availableEncounters": {
-      "reached": 48,
-      "produced": 44
+      "reached": 49,
+      "produced": 45
     },
     "partyDetail": {
-      "reached": 48,
+      "reached": 49,
       "produced": 0
     },
     "ratingDetail": {
-      "reached": 48,
-      "produced": 48
+      "reached": 49,
+      "produced": 49
     },
     "registerDetail": {
-      "reached": 48,
-      "produced": 48
+      "reached": 49,
+      "produced": 49
     },
     "legendDetail": {
-      "reached": 48,
+      "reached": 49,
       "produced": 1
     },
     "livingWorldDetail": {
-      "reached": 48,
-      "produced": 19
+      "reached": 49,
+      "produced": 20
     },
     "assignmentsDetail": {
-      "reached": 48,
+      "reached": 49,
       "produced": 0
     },
     "latentArcsDetail": {
-      "reached": 48,
-      "produced": 48
+      "reached": 49,
+      "produced": 49
     },
     "seasonalDetail": {
-      "reached": 48,
-      "produced": 48
+      "reached": 49,
+      "produced": 49
     },
     "schoolsDetail": {
-      "reached": 48,
-      "produced": 48
+      "reached": 49,
+      "produced": 49
     },
     "sharedCanonDetail": {
-      "reached": 48,
-      "produced": 25
+      "reached": 49,
+      "produced": 26
     },
     "worldCountLabel": {
-      "reached": 48,
-      "produced": 48
+      "reached": 49,
+      "produced": 49
     },
     "waygateDetail": {
-      "reached": 48,
+      "reached": 49,
       "produced": 27
     },
     "readAloudDetail": {
-      "reached": 48,
-      "produced": 48
+      "reached": 49,
+      "produced": 49
     },
     "scenePacingDetail": {
-      "reached": 48,
+      "reached": 49,
       "produced": 20
     },
     "wishesDetail": {
-      "reached": 28,
+      "reached": 29,
       "produced": 0
     },
     "worldMovedOnDetail": {
-      "reached": 28,
+      "reached": 29,
       "produced": 2
     },
     "companionLivesDetail": {
-      "reached": 28,
+      "reached": 29,
       "produced": 18
     },
     "homeDetail": {
-      "reached": 28,
+      "reached": 29,
       "produced": 0
     },
     "invitationsDetail": {
-      "reached": 28,
+      "reached": 29,
       "produced": 0
     },
     "bandsJoinedDetail": {
-      "reached": 28,
+      "reached": 29,
       "produced": 0
     },
     "travelersHereDetail": {
-      "reached": 28,
-      "produced": 1
+      "reached": 29,
+      "produced": 2
     },
     "travelersDetail": {
-      "reached": 28,
+      "reached": 29,
       "produced": 0
     },
     "journeyDetail": {
-      "reached": 26,
+      "reached": 27,
       "produced": 0
     },
     "journeyUnderwayDetail": {
-      "reached": 26,
-      "produced": 0
+      "reached": 27,
+      "produced": 1
     },
     "holdsNearDetail": {
-      "reached": 26,
-      "produced": 22
+      "reached": 27,
+      "produced": 23
     },
     "moneyDetail": {
-      "reached": 25,
-      "produced": 25
+      "reached": 26,
+      "produced": 26
     },
     "jobsDetail": {
-      "reached": 25,
+      "reached": 26,
       "produced": 0
     },
     "powersHereDetail": {
-      "reached": 2,
-      "produced": 0
+      "reached": 3,
+      "produced": 1
     },
     "nemesisDetail": {
-      "reached": 2,
-      "produced": 2
+      "reached": 3,
+      "produced": 3
     }
   },
   "_opUnknown": {
@@ -17097,7 +17134,145 @@
     "out": [],
     "back": []
   },
-  "journey": null,
+  "journey": {
+    "id": "journey-gen-the-standing-annex-88",
+    "destId": "gen-the-standing-annex",
+    "destName": "The Standing Annex",
+    "fromId": "the_kindly_rest",
+    "fromName": "The Kindly Rest",
+    "createdWorldDay": 88,
+    "options": [
+      {
+        "key": "road-0",
+        "kind": "road",
+        "label": "on foot, by way of Millbrook",
+        "days": 3.2,
+        "energy": 0,
+        "path": [
+          "the_kindly_rest",
+          "millbrook",
+          "gen-waygate",
+          "gen-ashwarden-march-road",
+          "gen-stillwater-s-trouble",
+          "gen-the-made-gate",
+          "gen-the-standing-annex"
+        ],
+        "gate": null,
+        "worst": {
+          "id": "gen-waygate",
+          "name": "The Pale March Waygate",
+          "level": 2
+        },
+        "nights": 3,
+        "roofs": 3,
+        "camps": 0,
+        "legs": [
+          {
+            "i": 0,
+            "fromId": "the_kindly_rest",
+            "toId": "millbrook",
+            "fromName": "The Kindly Rest",
+            "toName": "Millbrook",
+            "days": 1.6248307809025717,
+            "danger": 0,
+            "roof": true,
+            "gate": null
+          },
+          {
+            "i": 1,
+            "fromId": "millbrook",
+            "toId": "gen-waygate",
+            "fromName": "Millbrook",
+            "toName": "The Pale March Waygate",
+            "days": 0.23872725719745275,
+            "danger": 2,
+            "roof": true,
+            "gate": null
+          },
+          {
+            "i": 2,
+            "fromId": "gen-waygate",
+            "toId": "gen-ashwarden-march-road",
+            "fromName": "The Pale March Waygate",
+            "toName": "The Ashwarden March Road",
+            "days": 0.0844525185135906,
+            "danger": 2,
+            "roof": true,
+            "gate": null
+          },
+          {
+            "i": 3,
+            "fromId": "gen-ashwarden-march-road",
+            "toId": "gen-stillwater-s-trouble",
+            "fromName": "The Ashwarden March Road",
+            "toName": "Stillwater's Trouble",
+            "days": 0.08025436206565408,
+            "danger": 2,
+            "roof": true,
+            "gate": null
+          },
+          {
+            "i": 4,
+            "fromId": "gen-stillwater-s-trouble",
+            "toId": "gen-the-made-gate",
+            "fromName": "Stillwater's Trouble",
+            "toName": "The Made Gate",
+            "days": 0.22067221793154637,
+            "danger": 2,
+            "roof": true,
+            "gate": null
+          },
+          {
+            "i": 5,
+            "fromId": "gen-the-made-gate",
+            "toId": "gen-the-standing-annex",
+            "fromName": "The Made Gate",
+            "toName": "The Standing Annex",
+            "days": 0.9998460789114456,
+            "danger": 2,
+            "roof": false,
+            "gate": null
+          }
+        ]
+      }
+    ],
+    "chosenKey": "road-0",
+    "soleWay": true,
+    "rations": {
+      "needed": 2,
+      "carried": 0
+    },
+    "company": [],
+    "crafts": {},
+    "underway": {
+      "startedWorldDay": 88,
+      "fromId": "the_kindly_rest",
+      "fromName": "The Kindly Rest",
+      "wayKey": "road-0",
+      "legIndex": 1,
+      "daysWalked": 1.6248307809025717,
+      "countedDays": 2,
+      "foodDaysLeft": 0,
+      "rationsEaten": 0,
+      "foraged": 1,
+      "hungryDays": 1,
+      "healthTaken": 0,
+      "legs": [
+        {
+          "i": 0,
+          "fromName": "The Kindly Rest",
+          "toId": "millbrook",
+          "toName": "Millbrook",
+          "days": 1.6248307809025717,
+          "danger": 0,
+          "roof": true
+        }
+      ],
+      "stops": [],
+      "pending": null,
+      "inGambit": null
+    }
+  },
   "allyOrders": {
     "traveler-woman": {
       "stance": "cautious"
@@ -17116,9 +17291,9 @@
         "how": "renown",
         "day": null
       },
-      "wins": 1,
-      "lastVerb": "raid",
-      "lastVerbDay": 5,
+      "wins": 2,
+      "lastVerb": "recruit",
+      "lastVerbDay": 7,
       "grownHeads": 23,
       "grewDay": 5
     },
@@ -17127,24 +17302,24 @@
         "how": "renown",
         "day": null
       },
-      "lastVerb": "fence",
-      "lastVerbDay": 5
+      "lastVerb": "extort",
+      "lastVerbDay": 7
     },
     "power_echo_bridge": {
       "known": {
         "how": "home",
         "day": null
       },
-      "lastVerb": "protect",
-      "lastVerbDay": 5
+      "lastVerb": "toll",
+      "lastVerbDay": 7
     },
     "power_ender_host": {
       "known": {
         "how": "renown",
         "day": null
       },
-      "lastVerb": "expand",
-      "lastVerbDay": 5,
+      "lastVerb": "raid",
+      "lastVerbDay": 7,
       "wins": 2
     },
     "power_radiant_plateau": {
@@ -17152,8 +17327,8 @@
         "how": "home",
         "day": null
       },
-      "lastVerb": "expand",
-      "lastVerbDay": 5,
+      "lastVerb": "tax",
+      "lastVerbDay": 7,
       "wins": 2,
       "grownHeads": 32,
       "grewDay": 5
@@ -17163,8 +17338,8 @@
         "how": "home",
         "day": null
       },
-      "lastVerb": "expand",
-      "lastVerbDay": 5,
+      "lastVerb": "patrol",
+      "lastVerbDay": 7,
       "wins": 2,
       "grownHeads": 28,
       "grewDay": 5
@@ -17175,63 +17350,67 @@
         "day": null
       },
       "lastVerb": "protect",
-      "lastVerbDay": 5
+      "lastVerbDay": 7
     },
     "power_glass_assembly": {
       "known": {
         "how": "renown",
         "day": null
       },
-      "lastVerb": "patrol",
-      "lastVerbDay": 5
+      "lastVerb": "inform",
+      "lastVerbDay": 7,
+      "losses": 1
     },
     "power_grovehome_moot": {
       "known": {
         "how": "renown",
         "day": null
       },
-      "lastVerb": "patrol",
-      "lastVerbDay": 5
+      "lastVerb": "protect",
+      "lastVerbDay": 7,
+      "losses": 1
     },
     "power_scaffold_court": {
       "known": {
         "how": "renown",
         "day": null
       },
-      "lastVerb": "protect",
-      "lastVerbDay": 5
+      "lastVerb": "tax",
+      "lastVerbDay": 7,
+      "losses": 1
     },
     "power_pressureholt_schedule": {
       "known": {
         "how": "home",
         "day": null
       },
-      "lastVerb": "tax",
-      "lastVerbDay": 5
+      "lastVerb": "levy",
+      "lastVerbDay": 7
     },
     "power_cairnhold_wardens": {
       "known": {
         "how": "renown",
         "day": null
       },
-      "lastVerb": "patrol",
-      "lastVerbDay": 5
+      "lastVerb": "protect",
+      "lastVerbDay": 7
     },
     "power_the_scour": {
       "known": {
         "how": "renown",
         "day": null
       },
-      "lastVerb": "patrol",
-      "lastVerbDay": 5
+      "lastVerb": "protect",
+      "lastVerbDay": 7,
+      "losses": 1
     },
     "power_grand_lattice": {
       "known": {
         "how": "renown",
         "day": null
       },
-      "lastVerb": "expand",
-      "lastVerbDay": 5,
+      "lastVerb": "patrol",
+      "lastVerbDay": 7,
       "wins": 2,
       "grownHeads": 52,
       "grewDay": 5
@@ -17241,8 +17420,8 @@
         "how": "renown",
         "day": null
       },
-      "lastVerb": "expand",
-      "lastVerbDay": 5,
+      "lastVerb": "protect",
+      "lastVerbDay": 7,
       "wins": 2,
       "grownHeads": 30,
       "grewDay": 5
@@ -17252,85 +17431,93 @@
         "how": "renown",
         "day": null
       },
-      "lastVerb": "patrol",
-      "lastVerbDay": 5
+      "lastVerb": "recruit",
+      "lastVerbDay": 7,
+      "wins": 1
     },
     "power_deepwood_moot": {
       "known": {
         "how": "renown",
         "day": null
       },
-      "lastVerb": "protect",
-      "lastVerbDay": 5
+      "lastVerb": "feud",
+      "lastVerbDay": 7,
+      "losses": 1
     },
     "power_switchback_tollmen": {
-      "lastVerb": "tribute",
-      "lastVerbDay": 5
+      "lastVerb": "raid",
+      "lastVerbDay": 7
     },
     "power_edge_riders": {
-      "lastVerb": "tribute",
-      "lastVerbDay": 5
+      "lastVerb": "raid",
+      "lastVerbDay": 7
     },
     "power_keelmouth_slip": {
-      "lastVerb": "patrol",
-      "lastVerbDay": 5
+      "lastVerb": "recruit",
+      "lastVerbDay": 7,
+      "wins": 1
     },
     "power_firstsight_barony": {
-      "lastVerb": "expand",
-      "lastVerbDay": 5,
+      "lastVerb": "toll",
+      "lastVerbDay": 7,
       "wins": 2,
       "grownHeads": 14,
       "grewDay": 5
     },
     "power_blaze_unshadowed": {
-      "lastVerb": "recruit",
-      "lastVerbDay": 5,
-      "wins": 2,
+      "lastVerb": "feud",
+      "lastVerbDay": 7,
+      "wins": 1,
       "grownHeads": 14,
-      "grewDay": 5
+      "grewDay": 5,
+      "losses": 0
     },
     "power_flesh_temple": {
-      "lastVerb": "recruit",
-      "lastVerbDay": 5,
+      "lastVerb": "patrol",
+      "lastVerbDay": 7,
       "wins": 2,
       "grownHeads": 18,
       "grewDay": 5
     },
     "power_vacated_custody": {
-      "lastVerb": "expand",
-      "lastVerbDay": 5,
+      "lastVerb": "levy",
+      "lastVerbDay": 7,
       "wins": 2,
       "grownHeads": 6,
       "grewDay": 5
     },
     "power_the_ceaseless": {
-      "lastVerb": "expand",
-      "lastVerbDay": 5,
-      "wins": 2,
+      "lastVerb": "feud",
+      "lastVerbDay": 7,
+      "wins": 1,
       "grownHeads": 10,
-      "grewDay": 5
+      "grewDay": 5,
+      "losses": 0
     },
     "power_long_choir": {
-      "lastVerb": "protect",
-      "lastVerbDay": 5
+      "lastVerb": "expand",
+      "lastVerbDay": 7,
+      "wins": 1
     },
     "power_harvest_hand": {
-      "lastVerb": "recruit",
-      "lastVerbDay": 5,
-      "wins": 2,
+      "lastVerb": "expand",
+      "lastVerbDay": 7,
+      "wins": 0,
       "grownHeads": 12,
       "grewDay": 5
     },
     "power_the_scouring": {
-      "lastVerb": "recruit",
-      "lastVerbDay": 5,
-      "wins": 2,
+      "lastVerb": "feud",
+      "lastVerbDay": 7,
+      "wins": 1,
       "grownHeads": 16,
-      "grewDay": 5
+      "grewDay": 5,
+      "losses": 0
     },
     "power_harborward": {
-      "lastVerb": "protect",
-      "lastVerbDay": 5
+      "lastVerb": "recruit",
+      "lastVerbDay": 7,
+      "wins": 1
     }
   },
   "nemesis": {

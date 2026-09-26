@@ -504,3 +504,87 @@ export function linesInRegion(powers, regionId, { locations = {} } = {}) {
   }
   return out;
 }
+
+/* ═════ SNG-642 §4–5 · C16 — THE ARTIFACTS THAT WORK, AND FEED ═════
+ *
+ * ✅ ERIK: *"If a PC finds one (or NPC) they can use it… but it would likely be helping feed the sovereign."*
+ *
+ * ⛑ EVERY USE IS A DEED TOWARD THE ARC, whoever uses it — and R40b.4 is why that is not an agent flag: agents push
+ * as ordinary figures, and nothing here marks the user as one. Using an artifact makes you part of the supply line
+ * WITHOUT KNOWING IT, which is the lore's "individually reasonable, cumulatively impossible" with the player's own
+ * hand on it. ⛔ And it is the SAME push `deedAgainstSupply` uses, in the opposite direction: one field, one sign
+ * convention, and starving and feeding are the same ledger read from two ends.
+ */
+
+/** Which artifacts a character is carrying — the ones whose `feeds` names an arc. PURE. */
+export function artifactsHeld(character, { items = {} } = {}) {
+  const inv = Array.isArray(character?.inventory) ? character.inventory : [];
+  const out = [];
+  for (const line of inv) {
+    const def = (line?.id && items?.[line.id]) || null;
+    if (def?.feeds?.arcId) out.push({ line, def });
+  }
+  return out;
+}
+
+/** ⛔ USING ONE IS A DEED FOR THE ARC. `+weight` where a broken line is `-weight`, because feeding and starving are
+ *  one ledger. ⚠️ CREDITED TO THE USER and to nobody else: `by` rides on the record so the world tab can say whose
+ *  hand it was, and an NPC's use counts exactly as a player's does (R40b.4).
+ *  Returns `{ arcId, delta, push }` or null. MUTATES `character.worldState`. */
+export function artifactUsed(character, def, { day = null, by = null, cfg = null, arcs = null } = {}) {
+  const arcId = def?.feeds?.arcId || null;
+  if (!character || !arcId) return null;
+  // \u26d4 AND THE ARC HAS TO EXIST, the same rule `deedAgainstSupply` already keeps. The Unmet's two artifacts fed
+  // `arc_the_widening` before it was authored, so the push landed on a phantom id \u2014 the write succeeded and meant
+  // nothing, which is how a field with no target hides. \u26d1 `arcs` absent means the caller cannot check; then it
+  // behaves as before rather than refusing work it has no grounds to refuse.
+  if (Array.isArray(arcs) && arcs.length && !arcs.some(a => a && a.id === arcId)) return null;
+  const said = Number((cfg && typeof cfg === "object") ? cfg.artifactUse : NaN);
+  const weight = Number.isFinite(said) ? said : 0.25;   // ⛑ a quarter stage: a use is a small thing done often
+  if (!(weight > 0)) return null;
+  character.worldState = character.worldState || {};
+  character.worldState.arcStages = character.worldState.arcStages || {};
+  const prev = character.worldState.arcStages[arcId] || {};
+  const push = (Number.isFinite(prev.push) ? prev.push : 0) + weight;
+  character.worldState.arcStages[arcId] = { ...prev, push, sinceDay: Number(day) || prev.sinceDay || null,
+    byArtifact: { id: def.id || null, by: by || null, day: Number(day) || null } };
+  return { arcId, delta: weight, push };
+}
+
+/** ⛔ §5 — THE COST IS ENFORCED, NOT DESCRIBED. "The Ring blocks stealth and the Lantern cannot be dimmed."
+ *
+ *  ⚠️ A SENTENCE CANNOT BE ENFORCED, so an artifact whose cost bites carries `forbidTags`, and only the two Aevi
+ *  named do. The refusal is SAID — the item's own `whatItCosts` is the reason the player reads — because a refusal
+ *  nobody explains reads as a broken button, which is the note this project has written down three times.
+ *
+ *  ⛑ It is the same shape as `wardAgainst`: a thing you are carrying makes a mechanic UNAVAILABLE rather than
+ *  harder, and the difference between "it failed" and "it could not apply" is the whole of what the player learns.
+ *  Returns `{ forbidden, item, why }`. PURE. */
+export function forbiddenByHeld(character, tags, { items = {} } = {}) {
+  const want = new Set((Array.isArray(tags) ? tags : [tags]).filter(Boolean).map(x => String(x).toLowerCase()));
+  if (!want.size) return { forbidden: false, item: null, why: null };
+  const inv = Array.isArray(character?.inventory) ? character.inventory : [];
+  for (const line of inv) {
+    const def = (line?.id && items?.[line.id]) || null;
+    const forbids = Array.isArray(def?.forbidTags) ? def.forbidTags : null;
+    if (!forbids?.length) continue;
+    if (!forbids.some(x => want.has(String(x).toLowerCase()))) continue;
+    return { forbidden: true, item: { id: def.id, name: line.customName || def.name || def.id },
+      why: def.whatItCosts || "what you are carrying will not allow it" };
+  }
+  return { forbidden: false, item: null, why: null };
+}
+
+/** ⛑ §5 — AND HOLDING ONE COUNTS AS HAVING SEEN ITS MARK. A player who learned the lidless ring recognises the
+ *  Lidless Ring, and the reverse: the ring in your hand is the mark, whether or not you were told so.
+ *  ⚠️ Recorded at the place the artifact was FOUND when that is known, because a mark is a sighting somewhere.
+ *  Returns the ids newly learned. MUTATES. */
+export function marksFromHeld(character, { items = {}, at = null, day = null } = {}) {
+  const out = [];
+  for (const { line, def } of artifactsHeld(character, { items })) {
+    if (!def.markId) continue;
+    const where = at || line.foundAt || def._foundAtId || "in your own hands";
+    if (seeMark(character, def.markId, { at: where, day })) out.push(def.markId);
+  }
+  return out;
+}

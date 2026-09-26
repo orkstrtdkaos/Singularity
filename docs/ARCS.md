@@ -87,7 +87,7 @@ a four-rung ladder — local · regional · continental · world — and a name 
 
 ---
 
-## THE NINE GREATER ARCS — regional and world scale
+## THE TEN GREATER ARCS — regional and world scale
 
 ⛔ **THESE ARE THE ANSWERS THE VALLEY ARCS ARE ASKING.** `arc_precursor_waking` is the local face of
 `arc_what_wakes_beneath`; the water is *"merely the nearest tremor."*
@@ -206,6 +206,25 @@ a four-rung ladder — local · regional · continental · world — and a name 
 | **The Long Sleep** | Sleepers who do not wake are being cared for, moved and bought. There is a trade in bodies nobody is using. | {power} moves sleeping bodies for a buyer who pays well. | The buyer is the Unbodied, and the bodies are its wardrobe. |
 | **Wearing** | Some of the sleepers have got up — and they walk like people who have never had legs. | {power} is fetching back the ones who ran for someone else. | It has come, in a body it took, and it is after whoever taught people to stay in theirs. |
 | **Empty Houses** | Whole households are asleep, and some of the waking ones are not who they were. | Every power you know trades in the sleeping. | The Unbodied holds the Mind entire, and the body is a garment it changes daily. |
+
+### The Widening · `arc_the_widening` · **regional** scale · pressure slow and far
+
+**What it is doing:** The world is getting further apart. Roads close or cost more, letters go astray, people who part do not meet again. It has its own causes — tolls, closed borders, the poles pulling — and something new and thin is fed by it.
+**⛔ IF IGNORED:** Nobody is near anyone. Every place is the far end of a road.
+**✅ IF ENGAGED:** Crossings kept open to anyone: a bridge with a fair toll, a slipway that turns no one away, a letter carried all the way. Arriving is the whole of the fight.
+**Hinge NPCs:** `iselde_the_wanderer`, `the_bridgewright`
+**Crosses:** `the high pass`, `the Reaches' borders`
+**Connects to:** `arc_the_poles_pull`
+**Stages (4, currently at 1):** **Partings** → **Far Roads** → **The Unreached** → **Nowhere Near**
+
+**What each stage says, and to whom** — `publicFace` everyone · `onceLineKnown` once marks confirm a supply line (it names the POWER, never the Sovereign) · `onceNamed` only once the save knows the name:
+
+| stage | everyone sees | once a line is known | once it is named |
+|---|---|---|---|
+| **Partings** | People who part are not meeting again. Nobody decided it; the roads just got longer. | {power} is where the road gets longer. | The Unmet is being fed by every goodbye. |
+| **Far Roads** | Letters come back marked no such place, for places that are still there. Travellers set out and are not heard of. | {power} is where the letters stop. | The distance is hers, and it is growing. |
+| **The Unreached** | Someone is always just ahead on the road, and nobody who follows her comes back. | {power} guides travellers to someone who is never there. | She has come — thin, diminished, forced to be somewhere — and she is after whoever keeps the crossings open. |
+| **Nowhere Near** | Every place is the far end of a road. Nobody is near anyone. | Every toll you know is hers. | The Unmet holds Span, and nothing arrives. |
 
 ## ⛔ WHAT GOOD ARC AUTHORING LOOKS LIKE — read from these eleven
 

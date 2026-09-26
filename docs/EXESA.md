@@ -117,7 +117,7 @@ foothill worth travelling to, and why the world has roads.
 
 ## V · What is moving right now
 
-**Nine arcs, all early, all turning without you.**
+**Ten arcs, all early, all turning without you.**
 
 ### THE POLES PULL — *world scale, slow, vast*
 Every Reach is drifting harder toward its own extreme. The Lattice orders more. The Blaze burns brighter.
@@ -180,11 +180,18 @@ when it started.
 Untended the houses empty and nothing in them was taken. **The counter is a reason to get up** — which
 turns out to be harder to supply than a wall.
 
+### The Widening — *regional scale, slow and far*
+The world is getting bigger in the wrong direction. A road that took four days takes five. A milestone's
+count does not come down however far you walk toward it, and nobody can say when that started.
+
+Untended, places stop being reachable at all — not walled off, just further every time you try. **The counter
+is a road somebody keeps**, and people who will still make the crossing.
+
 ---
 
 ## VI · Who is out there
 
-A hundred and thirty great figures walk Exesa, spread across a hundred and forty-three authored places — and
+A hundred and thirty-one great figures walk Exesa, spread across a hundred and forty-three authored places — and
 **most of them have never heard of you. They are doing their own work — and the world counts what they do
 whether or not you are in the room. The trickster you brushed past in a market may be a gang leader when you
 meet again, and nobody arranged that.
@@ -448,7 +455,7 @@ Exesa has roads.
 
 Nothing. That is the honest answer.
 
-There is no spine and no chosen one. Nine arcs are turning and proximity decides which one you meet —
+There is no spine and no chosen one. Ten arcs are turning and proximity decides which one you meet —
 start in the Deepwood and the water crisis is not yours. The great figures are already at work and will
 carry on without you.
 

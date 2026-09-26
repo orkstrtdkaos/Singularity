@@ -341,7 +341,9 @@ export const GM_CONTEXT = [
     } },
   { key: "inventoryDetail", builder: "inventory.inventoryForGM", carries: ["carried items", "uses"],
     reachedBy: "always", spec: "§12", views: ["turn", "ask", "gambit"],
-    build: (env) => inventoryForGM(env.character) },
+    // ⛔ SNG-642 §5 (C16): the catalogue rides so an ARTIFACT's `whatItDoes`/`whatItCosts` reach the narrator — a
+    // relic whose shape the GM does not know gets narrated as a nice ring.
+    build: (env) => inventoryForGM(env.character, { items: env.CONTENT.items }) },
   { key: "sceneState", builder: "app scene state", carries: ["who/what is present now"],
     reachedBy: "always", spec: "§11", views: ["turn", "ask", "gambit"],
     build: (env) => env.sceneState },

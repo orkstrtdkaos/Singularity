@@ -700,13 +700,26 @@ export function equipmentBonus(character, actionTags = [], rules) {
 }
 
 /** One-line inventory summary for the GM prompt. */
-export function inventoryForGM(character) {
+export function inventoryForGM(character, { items = null } = {}) {
   if (!character.inventory?.length) return "empty-handed";
+  // \u26d4 SNG-642 \u00a75 (C16) \u2014 AN ARTIFACT'S SHAPE REACHES THE NARRATOR, or it gets described as a nice ring. Its
+  // `whatItDoes` and `whatItCosts` come off the CATALOGUE rather than the inventory line, because a line is a
+  // reference and the prose lives on the definition. \u26d1 `items` absent \u2192 byte-identical to what this always did.
+  // \u26d4 AND `feeds` NEVER GOES IN. The whole of \u00a74 is that using it makes you part of the supply line WITHOUT
+  // KNOWING IT \u2014 a narrator told which hunger the ring serves will tell the player, one way or another.
+  const shapeOf = (i) => {
+    const def = (items && i?.id) ? items[i.id] : null;
+    if (!def?.whatItDoes && !def?.whatItCosts) return "";
+    const bits = [];
+    if (def.whatItDoes) bits.push(`WHAT IT DOES: ${def.whatItDoes}`);
+    if (def.whatItCosts) bits.push(`WHAT IT COSTS, and this is NOT optional \u2014 narrate it every time: ${def.whatItCosts}`);
+    return `; ${bits.join(" ")}`;
+  };
   // SNG-251 §2c: an evolved item's GRANTS ride into the GM's context. Without this the GM narrates a spear
   // it does not know has a shadow-harm focus and an ending-sense — the mechanics would exist on the sheet
   // and be invisible to the one party that has to describe them in play.
   return character.inventory.map(i =>
-    `${i.customName ? `${i.customName} (their name for: ${i.name})` : i.name}${i.qty > 1 ? ` x${i.qty}` : ""} (${i.kind}${i.consumable ? ", consumable" : ""}${i.description ? ` — ${i.description}` : ""}${grantSummary(i) ? `; ${grantSummary(i)}` : ""}${i.active === false ? "; SWITCHED OFF at the character's word — its well or sink moves no ground until they switch it on" : ""})`
+    `${i.customName ? `${i.customName} (their name for: ${i.name})` : i.name}${i.qty > 1 ? ` x${i.qty}` : ""} (${i.kind}${i.consumable ? ", consumable" : ""}${i.description ? ` — ${i.description}` : ""}${grantSummary(i) ? `; ${grantSummary(i)}` : ""}${i.active === false ? "; SWITCHED OFF at the character's word — its well or sink moves no ground until they switch it on" : ""}${shapeOf(i)})`
   ).join("; ");
 }
 

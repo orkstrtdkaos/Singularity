@@ -30018,6 +30018,116 @@ console.log("\n── §373 · not a thing to be beaten down ──");
     })(), "measured against Aevi's held 87-roster in a worktree: social non-combat p10 3 → 11, craft 3 → 10, floor 8, and the whole suite green");
 }
 
+/* ══════════ §374 · SNG-642 §4–5 (C16) — ARTIFACTS THAT WORK, AND FEED ══════════ */
+// ✅ ERIK: "If a PC finds one (or NPC) they can use it… but it would likely be helping feed the sovereign."
+//
+// ⛑ EVERY USE IS A DEED TOWARD THE ARC, and R40b.4 is why that is not an agent flag: agents push as ordinary
+// figures. Using one makes you part of the supply line WITHOUT KNOWING IT — the lore's "individually reasonable,
+// cumulatively impossible", with the player's own hand on it.
+console.log("\n── §374 · it does not want to come off ──");
+{
+  const SV374 = await import("../engine/sovereign.js");
+  const IV374 = await import("../engine/inventory.js");
+  const { loadContentHeadless: lch374 } = await import("./headless_content.mjs");
+  const C374 = await lch374();
+  const arts = Object.values(C374.items || {}).filter(i => i?.feeds?.arcId);
+  const ring = C374.items?.lidless_ring || null;
+  const held = (id) => ({ inventory: [{ id, name: C374.items[id]?.name, kind: "relic", qty: 1 }] });
+
+  check("§374: ⛑ THE ARTIFACTS ARE LOADED, AND EACH ONE CARRIES ITS THREE HALVES — what it does, what it costs, and whose hunger it feeds",
+    // \u26a0\ufe0f FOUR ARCS, NOT THREE. I asserted three and this caught the Unmet \u2014 a FOURTH Sovereign whose two
+    // artifacts I pulled in with the nine, while the arc they feed did not exist yet. The push would have landed on
+    // a phantom id: the write succeeds and means nothing. Her arc and record land in this commit, and every
+    // artifact's arc is now checked against the arcs the world actually has.
+    arts.length >= 11 && arts.every(a => a.whatItDoes && a.whatItCosts && a.feeds?.arcId && a.markId)
+    && new Set(arts.map(a => a.feeds.arcId)).size === 4
+    && arts.every(a => (C374.greaterArcs || []).some(x => x.id === a.feeds.arcId)),
+    `${arts.length} artifacts across ${new Set(arts.map(a => a.feeds.arcId)).size} arcs`);
+
+  // ⛔ EVERY USE IS A DEED FOR THE ARC — the same field and sign convention as a deed AGAINST one.
+  check("§374: ⛔ USING ONE PUSHES ITS ARC FORWARD, through the same `arcStages[id].push` a broken supply line pushes BACK — feeding and starving are one ledger read from two ends",
+    (() => {
+      const ch = held("lidless_ring");
+      const a = SV374.artifactUsed(ch, ring, { day: 10, by: "the player" });
+      const st = ch.worldState?.arcStages?.[ring.feeds.arcId];
+      return a?.delta > 0 && st?.push === a.delta && st.byArtifact?.by === "the player"
+        // and a deed AGAINST a line moves the same field the other way
+        && (() => {
+          const ch2 = {};
+          const d = SV374.deedAgainstSupply(ch2, { id: "p", feedsGM: ["lucifer"] }, { kind: "broken", npcs: C374.npcs });
+          return d.length === 1 && d[0].delta < 0 && d[0].arcId === ring.feeds.arcId;
+        })();
+    })(), "nothing marks the user as an agent — R40b.4, and the point is that they do not know");
+
+  check("§374: ⚠️ A USE CANNOT PUSH AN ARC THAT DOES NOT EXIST — the Unmet's artifacts fed `arc_the_widening` before it was authored, and the push landed on a phantom id",
+    (() => {
+      const ghost = { id: "g", feeds: { arcId: "arc_nobody_authored" } };
+      const ch = {};
+      const refused = SV374.artifactUsed(ch, ghost, { day: 1, arcs: C374.greaterArcs });
+      const allowed = SV374.artifactUsed({}, ghost, { day: 1 });   // no arcs handed over → the caller cannot check
+      return refused === null && !ch.worldState && allowed !== null
+        && /arcs: CONTENT\.greaterArcs/.test(rd("app.js"));
+    })(), "⛑ a caller that hands no arc list behaves as it did, rather than refusing work it has no grounds to refuse");
+
+  // ⛔ §5 — THE COST IS ENFORCED, NOT DESCRIBED.
+  check("§374: ⛔ THE RING BLOCKS STEALTH — “the cost is enforced, not just described”, and it is the ward shape: not harder, UNAVAILABLE",
+    (() => {
+      const ch = held("lidless_ring");
+      const sneak = SV374.forbiddenByHeld(ch, ["sneak", "risky"], { items: C374.items });
+      const fight = SV374.forbiddenByHeld(ch, ["attack", "commit"], { items: C374.items });
+      return sneak.forbidden && /cannot hide/.test(sneak.why) && sneak.item.name === ring.name
+        && fight.forbidden === false;
+    })(), "and it blocks only what its own cost sentence says — a fight is still a fight");
+
+  check("§374: ⛔ …AND THE LANTERN CANNOT BE DIMMED, which is the other one Aevi named",
+    (() => {
+      const ch = held("the_open_lantern");
+      return SV374.forbiddenByHeld(ch, ["hide"], { items: C374.items }).forbidden === true
+        && SV374.forbiddenByHeld(ch, ["negotiate"], { items: C374.items }).forbidden === false;
+    })());
+
+  // ⚠️ AND ONLY THE TWO SHE NAMED CARRY ONE, because `forbidTags` is mine and not hers.
+  check("§374: ⚠️ ONLY THE TWO SHE NAMED HAVE AN ENFORCED COST — `forbidTags` is CCode's field, derived from her own cost sentences, and the other nine costs are narrative and reach the GM as prose",
+    (() => {
+      const enforced = arts.filter(a => (a.forbidTags || []).length);
+      return enforced.length === 2 && enforced.every(a => /derived from `whatItCosts`/.test(a._forbidTagsWhy || ""))
+        && enforced.map(a => a.id).sort().join(",") === "lidless_ring,the_open_lantern";
+    })(), "a cost about somebody ELSE — a branded crate, a sleeper who sleeps deeper — cannot be a rule on the holder's actions");
+
+  // ⛔ §5 — HOLDING ONE IS HAVING SEEN ITS MARK.
+  check("§374: ⛔ HOLDING ONE COUNTS AS HAVING SEEN ITS MARK — a player who learned the lidless ring recognises the Lidless Ring, and the ring in your hand IS the mark",
+    (() => {
+      const ch = held("lidless_ring");
+      const learned = SV374.marksFromHeld(ch, { items: C374.items, at: "the_great_coliseum", day: 5 });
+      const again = SV374.marksFromHeld(ch, { items: C374.items, at: "the_great_coliseum", day: 6 });
+      return learned.join(",") === ring.markId && again.length === 0
+        && (SV374.marksSeenOf(ch)[ring.markId] || []).length === 1;
+    })(), "and twice in the same place is once — the same rule the marks themselves follow");
+
+  // ⛔ THE GM KNOWS THE SHAPE, AND NOT THE HUNGER.
+  check("§374: ⛔ THE NARRATOR IS TOLD WHAT IT DOES AND WHAT IT COSTS — and NEVER whose hunger it feeds, because §4's whole point is that using it makes you part of the line without knowing",
+    (() => {
+      const line = IV374.inventoryForGM(held("lidless_ring"), { items: C374.items });
+      const bare = IV374.inventoryForGM(held("lidless_ring"));
+      return /WHAT IT DOES/.test(line) && /WHAT IT COSTS/.test(line) && /narrate it every time/.test(line)
+        && !/lucifer|arc_the_glare|sovereign/i.test(line)
+        // and a caller that hands no catalogue gets exactly what it always got
+        && !/WHAT IT DOES/.test(bare)
+        && /items: env\.CONTENT\.items/.test(rd("engine/gm_registry.js"));
+    })());
+
+  // ⛑ THE DOORS, because a reader nothing calls is the failure this project keeps finding.
+  check("§374: ⛑ ALL FOUR DOORS ARE WIRED — the enforced cost before the roll, the use that feeds, the mark on load, and the shape in the prompt",
+    (() => {
+      const app = rd("app.js");
+      return /const blocked = forbiddenByHeld\(character, action\.intentTags \|\| \[\]/.test(app)
+        && /artifactUsed\(character, def, \{ day: absoluteWorldDay\(\)/.test(app)
+        && /noteArtifactMarks\(character\);/.test(app)
+        && /function noteArtifactMarks/.test(app)
+        && /inventoryForGM\(env\.character, \{ items/.test(rd("engine/gm_registry.js"));
+    })(), "⚠️ and the refusal is SAID, in the item's own words — a refusal nobody explains reads as a broken button");
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

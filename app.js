@@ -72,7 +72,7 @@ import { roomOf, roomRefusal, promotionOffer, promoteHolding, trainingAt, mounts
 import { raidRisk, watchReadout, watchOdds, craftPlacementCost, defenceOf, featureCost, featureDef, featureDoes, featureCategory, allFeatures, refreshImprovement, canBeAskedToWork, holdingFactsLine, answerFeatureOffer, holdingLedger, addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, yieldsFor, upkeepFor, appointKeeper, reclaimHolding, improveHolding, setCrew, setGarrison, holdingGround, addFeature, removeFeature, renameHolding, featureKinds, residentsOf, holdingMeaningAura, holdingFieldDelta } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
 import { buildDevReport, unknownOpsIn } from "./engine/devreport.js";   // SNG-559: the Play/Dev instrument
 import { makeField, fieldDataFrom, FIELD_KINDS, KIND_LABEL, MEMBERSHIP } from "./engine/field.js";
-import { deedAgainstSupply, supplyDeedLine } from "./engine/sovereign.js";   // ⛔ SNG-641 §1 (C13): breaking or taking a supply-line power is a deed against the arc its Sovereign arrives on
+import { deedAgainstSupply, supplyDeedLine, artifactsHeld, artifactUsed, forbiddenByHeld, marksFromHeld } from "./engine/sovereign.js";   // ⛔ SNG-641 §1 (C13): breaking or taking a supply-line power is a deed against the arc its Sovereign arrives on
 import { assaultableAt, garrisonContingents, noteHoldLoss, takeHold, encounterOwnerFilter, seedPowerKnowledge, isKnownPower, powersReaching, dangerLiftAt, movePowerStanding } from "./engine/powers.js";
 import { buildNemesisPrompt, applyNemesisChoice } from "./engine/nemesis.js";   // ⛔ SNG-648: the choosing call   // SNG-634 C5: their holds are places you can take   // CCODE-457: why the ground here reads the way it does · CCODE-472: and the layer the map draws
 import { FIRE_TESTS, diffKeys } from "./engine/firetests.js";   // SNG-560: the parts that have never been used
@@ -181,7 +181,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.12.1";
+const APP_VERSION = "2.12.2";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -5198,6 +5198,19 @@ function noteBeastImage(def) {
 
 /** SNG-136: drop any gallery entries that never resolved to a real image URL (the blank Vash-style tile
  *  from a failed generation) — pruned once on load so the gallery never shows an empty card. */
+/** \u26d4 SNG-642 \u00a75 (C16) \u2014 HOLDING AN ARTIFACT COUNTS AS HAVING SEEN ITS MARK. A player who learned the lidless
+ *  ring recognises the Lidless Ring, and the reverse is just as true: the ring in your hand IS the mark, whether or
+ *  not anybody told you so. \u26d1 Run on load, so a save that already carries one is caught up rather than waiting for
+ *  the next time it changes hands. */
+function noteArtifactMarks(c) {
+  if (!c?.inventory?.length) return;
+  try {
+    const learned = marksFromHeld(c, { items: CONTENT.items,
+      at: c.currentLocationId || null, day: absoluteWorldDay() });
+    if (learned.length) saveCharacter(c);
+  } catch { /* a mark is a grace, never a blocker */ }
+}
+
 function pruneEmptyGalleryTiles(c) {
   if (!c?.gallery?.length) return;
   const before = c.gallery.length;
@@ -7878,6 +7891,7 @@ async function enterPlay() {
   // model call and the play loop must not wait on it. Reconcile staked the shortlist; this judges it once.
   setTimeout(() => maybeChooseNemesis(), 2500);
   pruneEmptyGalleryTiles(character); // SNG-136: drop any failed-gen blank tiles
+  noteArtifactMarks(character);       // ⛔ SNG-642 §5 (C16): an artifact in your hands IS its mark, caught up on load
   ensureBondPortraits(character);    // SNG-136: retro backfill — an already-devoted bond (Pell) gets its portrait once
   if (character.sharedSceneId && syncEnabled()) {
     fetchScene(character.sharedSceneId).then(sc => {
@@ -10785,6 +10799,19 @@ async function onChoice(choice) {
     action.difficulty = (action.difficulty || 0) + encDiff;
     // SNG-106: name the opposed term so the roll breakdown reads "the raider (threat N) −11", not anonymous.
     if (encDiff) action.difficultySource = `${encD.def.name || "the opposition"}${encD.def.opponent?.threat ? ` (threat ${encD.def.opponent.threat})` : ""}`;
+  }
+  // \u26d4 SNG-642 \u00a75 (C16) \u2014 THE COST OF WHAT YOU ARE CARRYING IS ENFORCED, NOT DESCRIBED. Aevi: "the Ring blocks
+  // stealth and the Lantern cannot be dimmed." \u26d1 It is the same shape as a WARD denying a finisher: the action is
+  // not harder, it is UNAVAILABLE \u2014 and the difference between "it failed" and "it could not apply" is the whole of
+  // what the player learns. \u26a0\ufe0f THE REFUSAL IS SAID, in the item's own words, because a refusal nobody explains
+  // reads as a broken button. This project has written that note three times.
+  {
+    const blocked = forbiddenByHeld(character, action.intentTags || [], { items: CONTENT.items });
+    if (blocked.forbidden) {
+      renderPlay(character.activeScene?.lastTurn || null,
+        { aside: `Not while you carry ${blocked.item.name}. ${blocked.why}` });
+      return;
+    }
   }
   const equip = equipmentBonus(character, action.intentTags, CONTENT.rules);
   // SNG-339 — TRAINING, ON THE SAME TAGS THE GEAR MATCHES. The old skill term keyed on `action.skillId`,
@@ -19428,6 +19455,20 @@ function useItem(name) {
     renderPlay(character.activeScene?.lastTurn || null, { aside: `You use the ${name}${parts.length ? ` (${parts.join(", ")})` : ""}.` });
   } else {
     openUseIntent(item); // SNG-114: a non-consumable's use is a scene action WITH intent, not a canned sentence
+  }
+  // \u26d4 SNG-642 \u00a74 (C16) \u2014 AND IF WHAT YOU JUST USED FEEDS SOMETHING, USING IT WAS A DEED FOR THAT ARC. \u2705 Erik:
+  // "they can use it\u2026 but it would likely be helping feed the sovereign." \u26d1 NOTHING IS SAID TO THE PLAYER: R40b.4
+  // has agents pushing as ordinary figures, and the whole point is that using it makes you part of the supply line
+  // WITHOUT KNOWING IT. A line here would be the engine telling them what it costs.
+  {
+    const def = item.id ? CONTENT.items?.[item.id] : null;
+    if (def?.feeds?.arcId) {
+      try {
+        artifactUsed(character, def, { day: absoluteWorldDay(), by: character.name || null,
+          cfg: CONTENT.rules?.arcResponse?.supplyDeedPush || null, arcs: CONTENT.greaterArcs || null });
+        saveCharacter(character);
+      } catch { /* a use is not worth losing the beat over */ }
+    }
   }
 }
 

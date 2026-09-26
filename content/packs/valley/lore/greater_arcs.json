@@ -1103,6 +1103,107 @@
      ]
     }
    ]
+  },
+  {
+   "id": "arc_the_widening",
+   "name": "The Widening",
+   "scale": "regional",
+   "pressure": "slow and far",
+   "sovereignGM": "the_unmet",
+   "tendency": "The world is getting further apart. Roads close or cost more, letters go astray, people who part do not meet again. It has its own causes — tolls, closed borders, the poles pulling — and something new and thin is fed by it.",
+   "crossesRegions": [
+    "the high pass",
+    "the Reaches' borders"
+   ],
+   "hingeNpcs": [
+    "iselde_the_wanderer",
+    "the_bridgewright"
+   ],
+   "ifIgnored": "Nobody is near anyone. Every place is the far end of a road.",
+   "ifEngaged": "Crossings kept open to anyone: a bridge with a fair toll, a slipway that turns no one away, a letter carried all the way. Arriving is the whole of the fight.",
+   "connectsTo": [
+    "arc_the_poles_pull"
+   ],
+   "currentStage": 1,
+   "stages": [
+    {
+     "stage": 1,
+     "name": "Partings",
+     "publicFace": "People who part are not meeting again. Nobody decided it; the roads just got longer.",
+     "onceLineKnown": "{power} is where the road gets longer.",
+     "onceNamed": "The Unmet is being fed by every goodbye.",
+     "pressureOnAdvance": "toward: tolls raised, passes closed, a family split by a road nobody can afford",
+     "effects": [
+      {
+       "kind": "npcMood",
+       "traditions": [
+        "*"
+       ],
+       "shift": "watchful",
+       "why": "everyone is counting the miles to the people they love"
+      }
+     ]
+    },
+    {
+     "stage": 2,
+     "name": "Far Roads",
+     "publicFace": "Letters come back marked no such place, for places that are still there. Travellers set out and are not heard of.",
+     "onceLineKnown": "{power} is where the letters stop.",
+     "onceNamed": "The distance is hers, and it is growing.",
+     "pressureOnAdvance": "toward: messengers lost; the near made far",
+     "effects": [
+      {
+       "kind": "npcMood",
+       "traditions": [
+        "*"
+       ],
+       "shift": "strained",
+       "why": "nobody knows who is still out there"
+      },
+      {
+       "kind": "travelCost",
+       "mult": 1.3,
+       "why": "every road is longer than it was"
+      }
+     ]
+    },
+    {
+     "stage": 3,
+     "name": "The Unreached",
+     "publicFace": "Someone is always just ahead on the road, and nobody who follows her comes back.",
+     "onceLineKnown": "{power} guides travellers to someone who is never there.",
+     "onceNamed": "She has come — thin, diminished, forced to be somewhere — and she is after whoever keeps the crossings open.",
+     "pressureOnAdvance": "toward: the bridge-keepers, the slip, the Bridgewright",
+     "effects": [
+      {
+       "kind": "npcMood",
+       "traditions": [
+        "*"
+       ],
+       "shift": "unsettled",
+       "why": "the road ahead is never empty and never reached"
+      }
+     ]
+    },
+    {
+     "stage": 4,
+     "name": "Nowhere Near",
+     "publicFace": "Every place is the far end of a road. Nobody is near anyone.",
+     "onceLineKnown": "Every toll you know is hers.",
+     "onceNamed": "The Unmet holds Span, and nothing arrives.",
+     "pressureOnAdvance": "",
+     "effects": [
+      {
+       "kind": "npcMood",
+       "traditions": [
+        "*"
+       ],
+       "shift": "closed",
+       "why": "nobody is near enough to trust"
+      }
+     ]
+    }
+   ]
   }
  ],
  "convergence": "These five greater arcs all feed the single world-question: as the substrate wakes (What Wakes Beneath), the poles pull harder (The Poles Pull) and reality manifests anew (The Second Manifestation), and the whole world tends toward foreclosure — pole by pole, domain by domain — unless someone holds the aperture open. The Valley's six arcs are the near, local, playable faces of these. A character's whole journey, across Reaches and domains, is which way they tip the world: toward the pure dead poles, or toward the open, mixed, living middle. The map is the argument, and the player is a vote in it.",

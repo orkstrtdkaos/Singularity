@@ -23,6 +23,12 @@
     },
     "clean": { "type": "string", "description": "how it dies / what it leaves. Authored on all 26 roster entries but read by NO consumer today — optional, and not part of the born-whole contract." },
     "readsAlsoFrom": { "type": "array", "items": { "type": "string" } },
-    "epicNote": { "type": "string" }
+    "epicNote": { "type": "string" },
+    "habitat": { "type": "array", "items": { "type": "string" }, "description": "SNG-661 \u00a73.1: the place tags this creature belongs to \u2014 terrain (marsh, river, mountain, ruin, underplace, cold\u2026) and its people's own lands (ashwarden, rootkin, mason\u2026). \u26d4 READ AS THE ENCOUNTER'S `tags`, so a grue only rises where a place is dark and a siren only sings where there is water. Absent means eligible everywhere, which is what all 28 of the first roster do." },
+    "storiedBy": { "type": "string", "description": "SNG-661: whose folklore made it real when the Storm came through. \u26d1 Also decides who knows its `storyRule` from the first look \u2014 a character of that people grew up on the tale. `(every people)` / `(many peoples)` means common ground, known to all." },
+    "storyRule": { "type": "string", "description": "SNG-661 \u00a73.2: the folk remedy from the tale, AND IT IS TRUE \u2014 a lit passage stops the grue, a mirror stops the basilisk, running water stops hellhounds. The GM is given it only once the character knows it (their own people's tale, or a KNOW success against the thing) and is told that it really works." },
+    "unique": { "type": "boolean", "description": "one in the world (the phoenix, the kraken, the Wakeful Beast). Never offered by a random table." },
+    "affinity": { "type": "string", "description": "the pole or element the thing belongs to \u2014 display and lore." },
+    "hasSelf": { "type": "boolean", "description": "whether there is somebody in there \u2014 read by the class table so a craft that requires a SELF has something to be answered by (CCODE-315). \u26a0\ufe0f Undeclared until SNG-661 although 41 of the staged creatures set it: found by reading the schema against the staged file rather than against the list of what was thought to be new." }
   }
 }

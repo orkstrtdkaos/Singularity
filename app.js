@@ -137,7 +137,7 @@ import { noteHeard, unheardOf, unheardBeat, partyBondOf } from "./engine/partybo
 import { INTENSITIES, scaledEnergy, effectMod, autoIntensity, shouldBacklash, intensityOptions } from "./engine/intensity.js";
 import { noteCoUseAndRefresh, refreshEvolvingItems, evolvedItemsForGM, currentStage } from "./engine/evolution.js";
 import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
-import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarrativeKind, canIncapacitate, resolvePacing, beatHours, deriveDangerLevel, eligibleEncountersFor, generatedCreatureEncounters, synthesizeDuelDef, synthesizeChallengeDef, synthesizeStandoffDef, synthesizePuzzleDef, foundLevelCapFor, dangerOf } from "./engine/random_encounters.js"; // SNG-225: mint/backfill a real dangerLevel so the encounter pool isn't starved; SNG-231: eligibleEncountersFor = the offerable pool the GM can invite
+import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarrativeKind, canIncapacitate, resolvePacing, beatHours, deriveDangerLevel, eligibleEncountersFor, generatedCreatureEncounters, synthesizeDuelDef, synthesizeChallengeDef, synthesizeStandoffDef, synthesizePuzzleDef, foundLevelCapFor, dangerOf, knowsStoryRule, learnStoryRule } from "./engine/random_encounters.js"; // SNG-225: mint/backfill a real dangerLevel so the encounter pool isn't starved; SNG-231: eligibleEncountersFor = the offerable pool the GM can invite
 import { renownScore, bandForRenown, challengersForBand, findPrestigeArc, challengerPoolFor, pickChallenger, challengerToDuelEntry, challengeDeedWeight, challengeLossWeight, shouldFireChallenger, challengeCooldown } from "./engine/recurrence.js";
 import { isEventfulTurn, pressureTier, pressureDirective, drivenPressureDirective, roomForAnOffer, roomForATeacherOffer, tenderIntent, roomForAnInvitation, invitationDirective } from "./engine/pacing.js";
 import { ensurePressureQueue, enqueuePressure, pullTopPressure, npcWantPressures, threatAttackPressure, invitationPressures, pressureApplies, nextInvitation, invitationSaid } from "./engine/pressure.js"; // SNG-245: the pressure queue — the world DRIVES
@@ -180,7 +180,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.10.4";
+const APP_VERSION = "2.11.0";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -3291,7 +3291,7 @@ function fireEncounterKind(kind) {
   if (kind === "chase") { beginChaseFromFight(def); return; }
 
   const oppSheet = contestSheetFor(def);
-  character.activeEncounter = { defId: def.id, state: startEncounter(def, { oppSheet }) };
+  character.activeEncounter = { defId: def.id, state: startEncounter(def, { oppSheet, storyRuleKnown: storyRuleKnownFor(def) }) };
   character.customEncounters = character.customEncounters || {};
   character.customEncounters[def.id] = def;   // the round path resolves the def by id
   saveCharacter(character);
@@ -3449,7 +3449,7 @@ const LEG_RUNNERS = {
       if (sheet) { sbDuel = d; oppSheet = sheet; break; }
     }
     if (!sbDuel) { renderPlay(character.activeScene?.lastTurn || null, { aside: "🔧 No duel in the pool builds a contest sheet — the party line renders in that panel." }); return; }
-    character.activeEncounter = { defId: sbDuel.id, state: startEncounter(sbDuel, { oppSheet }) };
+    character.activeEncounter = { defId: sbDuel.id, state: startEncounter(sbDuel, { oppSheet, storyRuleKnown: storyRuleKnownFor(sbDuel) }) };
     saveCharacter(character);
     renderSkillBattle();
     // count the party the way the fight and the panel both count it — the allies, never the allies plus you
@@ -3531,7 +3531,7 @@ const LEG_RUNNERS = {
       ] };
     CONTENT.encounters = { ...(CONTENT.encounters || {}), [def.id]: def };   // runtime only
     const oppSheet = contestSheetFor(def);
-    character.activeEncounter = { defId: def.id, state: startEncounter(def, { oppSheet }) };
+    character.activeEncounter = { defId: def.id, state: startEncounter(def, { oppSheet, storyRuleKnown: storyRuleKnownFor(def) }) };
     saveCharacter(character);
     if (oppSheet) renderSkillBattle(); else renderPlay(character.activeScene?.lastTurn || null, { aside: "🔧 Legion field started." });
     alert(`🔧 LEGION FIGHT — two theatres open at once.\n\n`
@@ -3554,7 +3554,7 @@ const LEG_RUNNERS = {
     if (!def) { renderPlay(character.activeScene?.lastTurn || null, { aside: "🔧 No authored encounter def found to start." }); return; }
     const oppSheet = contestSheetFor(def);   // SNG-247: one place decides the other side (duel -> foe, puzzle -> static)
     const isSB = !!oppSheet;
-    character.activeEncounter = { defId: def.id, state: startEncounter(def, { oppSheet }) };
+    character.activeEncounter = { defId: def.id, state: startEncounter(def, { oppSheet, storyRuleKnown: storyRuleKnownFor(def) }) };
     saveCharacter(character);
     if (isSB) { renderSkillBattle(); return; }
     renderPlay(character.activeScene?.lastTurn || null, { aside: `🔧 Test encounter "${def.name}" (${def.type}) started. The integrated STRIP is at the top of the play surface; tap ⚙ Moves for the grouped ward/sense/strike gear, or type a move — the encounter rules bind either way.` });
@@ -5162,6 +5162,16 @@ function ensureBondPortraits(c) {
 // it's recovered from the def id (synthesizeDuelDef mints "re-beast_<id>", dropping the creatureId) or by matching
 // the opponent name to the roster, and rendered from the creature's authored `look`. No bestiary match → it's a
 // person duel, not a beast, and nothing is minted. Stable seed per creature → one tile even on repeat encounters.
+/** ⛔ SNG-661 §3.2 — DOES THIS CHARACTER ALREADY KNOW THE TALE ABOUT THIS THING? One helper, because there are
+ *  SIX `startEncounter` call sites and a rule wired at one of them is a rule that works on one path. It resolves
+ *  the creature from the def (`creatureId` is carried through now) and asks the engine. */
+function storyRuleKnownFor(def) {
+  if (!def?.storyRule || !def.creatureId) return false;
+  const roster = CONTENT.bestiary?.roster || [];
+  const creature = roster.find(c => c && c.id === def.creatureId) || { id: def.creatureId, storyRule: def.storyRule, storiedBy: def.storiedBy };
+  try { return !!knowsStoryRule(character, creature).known; } catch { return false; }
+}
+
 function noteBeastImage(def) {
   if (!def || !imagesEnabled()) return;
   const roster = CONTENT.bestiary?.roster || (Array.isArray(CONTENT.bestiary) ? CONTENT.bestiary : []);
@@ -10659,7 +10669,7 @@ async function onChoice(choice) {
     // the def doesn't opt out; the classic single-margins duel stays the fallback (skillBattle:false).
     const oppSheet = contestSheetFor(def);   // SNG-247: one place decides the other side (duel -> foe, puzzle -> static)
     const isSB = !!oppSheet;
-    character.activeEncounter = { defId: def.id, state: startEncounter(def, { oppSheet }) };
+    character.activeEncounter = { defId: def.id, state: startEncounter(def, { oppSheet, storyRuleKnown: storyRuleKnownFor(def) }) };
     if (scene598 && character.activeEncounter.state) Object.assign(character.activeEncounter.state, {
       summons: [...(character.activeEncounter.state.summons || []), ...scene598.summons], strikeScene: scene598.scene });
     // SNG-149 / CCODE-89 — A COLISEUM BOUT IS FOUGHT ON THE BLIND GRID. Aevi authored the whole design and it
@@ -10929,6 +10939,19 @@ async function onChoice(choice) {
           }
         } else if (res === "morph" || res === "morph_bad") {
           resolution.collapse = { mode, result: res, craft }; // the GM narrates the botched finisher hardening it (§89-safe)
+        }
+      }
+      // ⛔ SNG-661 §3.2 — A KNOW SUCCESS TEACHES THE TALE. The character worked out what the stories already
+      // said: a lit passage stops the grue, a mirror stops the basilisk. ⛑ The KNOW has to be the acting craft's
+      // own family and the roll has to LAND — a failed read teaches nothing, and no other family teaches this
+      // however well it goes. ⚠️ Written on the character, so it is theirs for every later meeting, and set on
+      // the encounter state too so THIS fight's receipt carries it from the next beat.
+      if (enc.def?.storyRule && enc.def.creatureId && !rr.state.storyRuleKnown && choice.abilityId
+          && ["success", "crit_success"].includes(resolution.degree)
+          && familiesOfAbility(fullCatalog()[choice.abilityId], FN_INDEX).includes("KNOW")) {
+        rr.state.storyRuleKnown = true;
+        if (learnStoryRule(character, enc.def.creatureId, absoluteWorldDay())) {
+          resolution.storyRuleLearned = enc.def.storyRule;
         }
       }
       resolution.encounterReceipt = encounterReceiptForGM(rr.state, enc.def, resolution, { ...rr, outcome });
@@ -20904,7 +20927,7 @@ async function beginChaseFromFight(fightDef) {
   const chaseSheet = CONTENT.skillBattle?.engine ? synthesizeOpponentSheet(withKind(chase.opponent, chase), CONTENT.skillBattle.engine) : null;
   // SNG-247 Tier 4: stamp WHERE THIS CAME FROM so the frame can say the fight became a chase, rather than the
   // player noticing only that the border went red -> amber and the rules quietly changed under them.
-  character.activeEncounter = { defId: chase.id, state: { ...startEncounter(chase, { oppSheet: chaseSheet }),
+  character.activeEncounter = { defId: chase.id, state: { ...startEncounter(chase, { oppSheet: chaseSheet, storyRuleKnown: storyRuleKnownFor(chase) }),
     _morphedFrom: { kind: "fight", note: `you broke from ${nm} — now it is ground, not blades` } } };
   sbLastPlayerFn = null; sbIntensity = "standard";
   saveCharacter(character);
@@ -21435,6 +21458,10 @@ function renderPlay(turn, opts = {}) {
       // The receipt is the last round's mechanical readout, kept on the encounter state so it PERSISTS in the
       // ribbon ("where you stand") instead of scrolling away with the narration it was printed beside.
       const receiptHtml = st._lastReceipt ? `<div class="enc-receipt enc-frame-receipt">${esc(st._lastReceipt)}</div>` : "";
+      // ⛔ SNG-661 §3.2 — THE TALE, ONCE IT IS THEIRS. It stays on the ribbon rather than scrolling away with
+      // the beat that taught it, for the same reason the receipt does: it is where you stand, not what happened.
+      const tale = (d?.storyRule && st.storyRuleKnown) ? String(d.storyRule) : "";
+      const taleHtml = tale ? `<div class="enc-receipt enc-frame-tale">✦ ${esc(tale)}</div>` : "";
       // Moves ride INSIDE the ribbon and are SHOWN BY DEFAULT when engaged (Erik's intent); the ⚙ collapses
       // them for space rather than hiding them behind a control the player must find first.
       const movesShown = movesOpen;
@@ -21494,7 +21521,7 @@ function renderPlay(turn, opts = {}) {
           <span class="enc-frame-win"><span class="enc-frame-winlbl">to win</span> ${esc(fm.winCondition)}</span>
           ${status ? `<span class="enc-status">${status}</span>` : ""}
         </div>
-        ${meterHtml}${receiptHtml}${cueHtml}${exitsHtml}</div>`;
+        ${meterHtml}${receiptHtml}${taleHtml}${cueHtml}${exitsHtml}</div>`;
     })()}
     ${(() => {
       // SNG-244: a quest that has reached its DECISION shows an integrated strip here — above the narration,

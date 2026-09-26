@@ -29233,6 +29233,123 @@ console.log("\n── §367 · a war both sides are fighting ──");
     })(), "measured at HEAD: Cairnhold 160 heads → 1, Grovehome 200 → 1, the Scour 140 → 1, Glass Assembly 140 → 1, Deepwood 40 → 1");
 }
 
+/* ══════════ §368 · SNG-661 — THE STORIED BESTIARY: WHERE A THING BELONGS, AND THE WAY THROUGH ══════════ */
+// ✅ ERIK: "those would likely exist here in all kinds of different areas because the people manifested them. you
+// have an opportunity to populate the world with color and danger and adventure, use it."
+//
+// ⛑ AEVI'S IDEA, AND IT IS THE GOOD ONE: the Storm made each people's stories true in their own lands. So every
+// creature belongs to somebody, and every one has a way through that is not "hit it harder" — the sphinx's
+// riddle, the bridge-troll's toll, a mirror for the basilisk, running water for hellhounds.
+console.log("\n── §368 · a light that will not let you catch up is not going home ──");
+{
+  const RE368 = await import("../engine/random_encounters.js");
+  const EN368 = await import("../engine/encounters.js");
+  const { loadContentHeadless: lch368 } = await import("./headless_content.mjs");
+  const C368 = await lch368();
+
+  // ⛔ §3.1 — HABITAT IS THE TAGS, and a creature with none is eligible everywhere exactly as before.
+  const grue = { id: "g368", name: "a grue", tier: "notable", habitat: ["dark", "underplace", "umbral"],
+    storyRule: "Carry a light and it cannot come at you.", storiedBy: "Umbrals" };
+  const anywhere = { id: "a368", name: "rust gnats", tier: "riffraff" };
+  const pool368 = RE368.bestiaryEncounters({ roster: [grue, anywhere] });
+  const dark = { id: "l1", dangerLevel: 3, tags: ["underplace", "dark"] };
+  const lit = { id: "l2", dangerLevel: 3, tags: ["town", "hearth", "settled"] };
+  check("§368: ⛔ A GRUE ONLY RISES WHERE IT IS DARK — `habitat` is the encounter's tags, so the place decides what belongs in it",
+    (() => {
+      const g = pool368.find(e => e.creatureId === "g368"), a = pool368.find(e => e.creatureId === "a368");
+      return g.tags.join(",") === "dark,underplace,umbral" && a.tags.length === 0
+        && RE368.isEligible(g, dark) && !RE368.isEligible(g, lit)
+        && RE368.isEligible(a, dark) && RE368.isEligible(a, lit);
+    })(), "and an untagged creature is eligible everywhere, which is all 28 shipped ones — the default costs nothing");
+
+  // ⛔ §3.2 — THE TALE RIDES THE ENTRY **AND** THE DEF. Four doors: authored, in the pool, on the def, READ.
+  check("§368: ⛔ THE TALE REACHES THE TABLE — on the pool entry, and through `synthesizeDuelDef` onto the def the fight actually runs on",
+    (() => {
+      const e = pool368.find(x => x.creatureId === "g368");
+      const def = RE368.synthesizeDuelDef(e);
+      const bare = RE368.synthesizeDuelDef(pool368.find(x => x.creatureId === "a368"));
+      return /Carry a light/.test(e.storyRule) && e.storiedBy === "Umbrals"
+        && /Carry a light/.test(def.storyRule) && def.creatureId === "g368" && bare.storyRule === undefined;
+    })(), "a creature with no tale carries no field — not an empty string, which a reader would have to guard for");
+
+  // ⛔ THREE WAYS TO KNOW IT, AND ONLY THREE.
+  check("§368: ⛔ YOUR OWN PEOPLE TELL IT, SO YOU HAVE IT FROM THE FIRST LOOK — and nobody else's people's tale is yours for free",
+    (() => {
+      const umbral = RE368.knowsStoryRule({ origin: "umbral" }, grue);
+      const mason = RE368.knowsStoryRule({ origin: "mason" }, grue);
+      // ⛑ and a tale they do not know is still REPORTED as a tale — `rule` is there, `known` is false. A
+      // reader that got null for both could not tell "no tale" from "not yours yet".
+      return umbral.known && /your own people/.test(umbral.why) && !mason.known && !!mason.rule;
+    })());
+
+  // ⚠️ THE MATCH IS ONE-DIRECTIONAL, and this is the control. `storiedBy` is prose and an origin is an id, so
+  // the normalised storiedBy must START WITH the id — the other direction lets "Wrights of the New" answer for an
+  // enginewright, who is not one of them.
+  check("§368: ⚠️ …and an ENGINEWRIGHT is not one of the Wrights of the New — the people match is one-directional, so a short name cannot swallow a longer id",
+    (() => {
+      const w = { id: "w", storyRule: "r", storiedBy: "Wrights of the New" };
+      const e = { id: "e", storyRule: "r", storiedBy: "Enginewrights" };
+      return RE368.knowsStoryRule({ origin: "wright" }, w).known
+        && !RE368.knowsStoryRule({ origin: "enginewright" }, w).known
+        && RE368.knowsStoryRule({ origin: "enginewright" }, e).known
+        && !RE368.knowsStoryRule({ origin: "wright" }, e).known;
+    })());
+
+  check("§368: ⛑ SOME TALES EVERYBODY GREW UP ON — Aevi's `(every people)` is a note that the story is common ground, not a people",
+    RE368.knowsStoryRule({ origin: "mason" }, { id: "x", storyRule: "r", storiedBy: "(every people)" }).known
+    && RE368.knowsStoryRule({ origin: "mason" }, { id: "y", storyRule: "r", storiedBy: "(many peoples)" }).known
+    && !RE368.knowsStoryRule({ origin: "mason" }, { id: "z", storyRule: "r", storiedBy: "Umbrals" }).known);
+
+  check("§368: ⛔ AND IT IS LEARNED ONCE — the one writer records the day, and a second learning changes nothing",
+    (() => {
+      const c = {};
+      const a = RE368.learnStoryRule(c, "g368", 42), b = RE368.learnStoryRule(c, "g368", 99);
+      return a === true && b === false && c.storyRulesKnown.g368 === 42
+        && RE368.knowsStoryRule(c, grue).known && /worked it out/.test(RE368.knowsStoryRule(c, grue).why);
+    })());
+
+  // ⛔ THE READER. A tale on a def nobody reads is a field with no consumer.
+  check("§368: ⛔ THE GM IS TOLD THE TALE ONLY ONCE THE CHARACTER HAS IT — and is told it is TRUE, or a narrator treats folklore as colour and narrates it failing",
+    (() => {
+      const def = RE368.synthesizeDuelDef(pool368.find(x => x.creatureId === "g368"));
+      const unknown = EN368.startEncounter(def, { standing: null });
+      const known = EN368.startEncounter(def, { standing: null, storyRuleKnown: true });
+      const a = EN368.encounterReceiptForGM(unknown, def, null, null);
+      const b = EN368.encounterReceiptForGM(known, def, null, null);
+      return !/Carry a light/.test(a) && /Carry a light/.test(b) && /WHICH IS TRUE/.test(b) && /IT WORKS/.test(b);
+    })());
+
+  // ⛑ AND THE FIFTH DOOR: the player sees it. A `taleHtml` built and never interpolated is the shape this
+  // project keeps finding — it was exactly that for one commit here.
+  check("§368: ⛑ …and the player sees it on the ribbon, where it persists instead of scrolling away with the beat that taught it",
+    (() => {
+      const app = rd("app.js");
+      return /const taleHtml = tale \?/.test(app) && /\$\{receiptHtml\}\$\{taleHtml\}/.test(app)
+        && /enc-frame-tale/.test(rd("style.css"));
+    })(), "built and never interpolated is the default failure here, so the gate asks for the interpolation");
+
+  // ⛔ THE LEARNING DOOR IS A **KNOW** SUCCESS, and nothing else.
+  check("§368: ⛔ A KNOW SUCCESS TEACHES THE TALE — the acting craft's own family, and a roll that LANDS: a failed read teaches nothing and no other family teaches this",
+    (() => {
+      const app = rd("app.js");
+      const block = app.slice(app.indexOf("SNG-661 §3.2 — A KNOW SUCCESS TEACHES THE TALE"), app.indexOf("SNG-661 §3.2 — A KNOW SUCCESS TEACHES THE TALE") + 1200);
+      return /\["success", "crit_success"\]\.includes\(resolution\.degree\)/.test(block)
+        && /familiesOfAbility\([\s\S]*?\)\.includes\("KNOW"\)/.test(block)   // ⚠ `[^)]*` cannot cross `fullCatalog()`
+        && /learnStoryRule\(character, enc\.def\.creatureId, absoluteWorldDay\(\)\)/.test(block)
+        && /rr\.state\.storyRuleKnown = true/.test(block);
+    })());
+
+  // ⚠️ §3.1's REQUIRED MEASUREMENT, kept as a claim. Her target: no location at danger >= 2 with zero eligible
+  // beasts. Measured over all 143 places through the real `isEligible`, with today's roster.
+  check("§368: ⚠️ NO DANGEROUS PLACE IS EMPTY OF BEASTS — measured over every location, which is the condition she set before applying the roster",
+    (() => {
+      const beasts = RE368.bestiaryEncounters(C368.bestiary || { roster: [] });
+      const locs = Object.values(C368.locations || {});
+      const empty = locs.filter(loc => RE368.dangerOf(loc) >= 2 && !beasts.some(e => RE368.isEligible(e, loc)));
+      return locs.length >= 100 && beasts.length >= 20 && empty.length === 0;
+    })(), "measured 2026-09-26: one place in the world has no eligible beast at all, The Low Lamp Inn, and it is danger 0");
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

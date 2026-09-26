@@ -311,6 +311,16 @@
           "type": "string"
         }
       }
+    },
+    "storyRulesKnown": {
+      "type": "object",
+      "description": "the folk tales this character has worked out — creature id → the world day they learned it (SNG-661 §3.2). ⛑ Written by one door only, a KNOW success against the thing; a tale their own people tell needs no entry here, because they never had to learn it.",
+      "additionalProperties": {
+        "type": [
+          "number",
+          "boolean"
+        ]
+      }
     }
   }
 }

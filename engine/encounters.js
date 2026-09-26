@@ -94,8 +94,11 @@ export function yieldThreshold(def, state = null) {
   return Number(o.yieldAt) || 0;
 }
 
-export function startEncounter(def, { oppSheet = null, standing = null } = {}) {
-  const base = { schemaVersion: 1, encounterId: def.id, type: def.type, status: "active", round: 1, log: [] };
+export function startEncounter(def, { oppSheet = null, standing = null, storyRuleKnown = false } = {}) {
+  // ⛑ SNG-661 §3.2 — whether the tale is already theirs, decided by the caller (who holds the character) and
+  // carried on the STATE, because it can also be learned mid-encounter by a KNOW success.
+  const base = { schemaVersion: 1, encounterId: def.id, type: def.type, status: "active", round: 1, log: [],
+    ...(def.storyRule && storyRuleKnown ? { storyRuleKnown: true } : {}) };
   if (def.type === "duel") {
     // SNG-098: when the app hands us a synthesized/authored opponent SHEET, this duel runs as a two-sided
     // SKILL BATTLE (momentum + attrition + fog); without a sheet it stays the classic single-margins duel.
@@ -866,7 +869,13 @@ IT IS NOT A PERSON. It has no stance, no footing, no face, no intent, and it doe
   // §7c: the player's KIT VOIDED the challenge's premise — it was never their obstacle. A narrated walk-around.
   const tv = resolution?.trivialize;
   const tvLine = !tv ? "" : `\nPREMISE VOIDED: ${tv.craft || "the character's kit"} makes ${tv.premise ? `"${tv.premise}"` : "this obstacle"} a non-issue — narrate a ${tv.mode === "opposed" ? "decisive bypass earned against real resistance" : "frictionless walk-around (their kit makes nothing of it)"}, then it is done. Do NOT grind the stages.`;
-  return `${head}\n${sides}\n${events}${finLine}${tvLine}\nNarrate this receipt exactly — do not move health, stages, or hints yourself. Offer choices that fit the encounter (attack/press/defend, flee/yield/abandon where sensible, ability and item uses).`;
+  // ⛔ SNG-661 §3.2 — THE FOLK REMEDY, AND ONLY ONCE THE CHARACTER HAS IT. The tale is TRUE: acting on it
+  // ends, avoids or turns the thing as the rule says. ⚠️ The GM is told the rule is REAL, because a narrator
+  // handed a piece of folklore with no standing will treat it as colour and narrate it failing.
+  const sr = (def?.storyRule && state?.storyRuleKnown)
+    ? `\nTHE TALE ABOUT THIS THING, WHICH THE CHARACTER KNOWS AND WHICH IS TRUE: ${def.storyRule}\nIf they act on it, IT WORKS — the thing is ended, avoided or turned as the tale says, and you narrate that rather than a fight they have to win. If they do not think of it, do not do it for them.`
+    : "";
+  return `${head}\n${sides}\n${events}${finLine}${tvLine}${sr}\nNarrate this receipt exactly — do not move health, stages, or hints yourself. Offer choices that fit the encounter (attack/press/defend, flee/yield/abandon where sensible, ability and item uses).`;
 }
 
 /** GM encounter ops: narrative-flavor only, clamped. */

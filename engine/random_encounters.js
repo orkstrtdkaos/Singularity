@@ -150,7 +150,15 @@ export function bestiaryEncounters(bestiary = {}) {
     if (t.random === false) return null;
     return {
       id: `beast_${c.id}`, flavor: "dangerous", weight: t.weight, minDanger: t.minDanger,
-      regions: ["*"], tags: [], routing: "duel", avoidable: true,
+      // ⛔ SNG-661 §3.1 — HABITAT IS THE TAGS, so a grue only rises where it is dark and a siren only sings
+      // where there is water. `isEligible`'s tag match then places them, and a creature with NO habitat is
+      // eligible everywhere exactly as all 28 shipped ones are today.
+      // ⚠️ MEASURED over all 143 places before wiring it: ONE place has no eligible beast (The Low Lamp Inn,
+      // danger 0) and NONE at danger >= 2, which is Aevi's target. The beast share of the dangerous pool goes
+      // 68.1% → 72.8% by count and 75.6% → 79.5% WEIGHTED — what a roll actually lands on, since a riffraff
+      // weighs 3 and a legendary 0.1. A four-point climb, so no `beastShareMax` dial is needed yet.
+      // ⛑ And reach per creature: mean 16 places of 143, median 11, nobody everywhere and nobody nowhere.
+      regions: ["*"], tags: Array.isArray(c.habitat) ? c.habitat : [], routing: "duel", avoidable: true,
       // ERIK'S BUG (2026-08-01, live): "wth is going on here? I thought i was supposed to be fighting rust
       // nanites." He was — and the engine had the creature the whole way: loaded, weighted, danger-gated,
       // seeded with its own prose. It was ANONYMISED at the last hop. This entry carried `creatureId` and a
@@ -165,9 +173,50 @@ export function bestiaryEncounters(bestiary = {}) {
       name: titleCase(c.name || c.id.replace(/_/g, " ")),
       opponent: { name: c.name || c.id.replace(/_/g, " "), threat: t.threat, yieldAt: 0.25 },
       creatureId: c.id, creatureClass: c.class || null, tier: c.tier || null, pressures: c.pressures || [],
+      // ⛑ SNG-661 §3.2 — THE FOLK REMEDY RIDES ALONG, and it is TRUE: a lit passage stops the grue, a mirror
+      // stops the basilisk, running water stops hellhounds. The player does not get it for nothing — see
+      // `knowsStoryRule`. Undefined for the 28 creatures that have none, exactly as before.
+      ...(c.storyRule ? { storyRule: String(c.storyRule), storiedBy: c.storiedBy || null } : {}),
       seed: smartClamp(`${c.name || c.id} — ${c.look || ""}${c.danger ? " " + c.danger : ""}`.trim(), 400)
     };
   }).filter(Boolean);
+}
+
+/** ⛔ SNG-661 §3.2 — WHETHER THIS CHARACTER KNOWS THE TALE. Three ways, and only three:
+ *
+ *    · EVERYBODY tells this one — Aevi's `storiedBy` of "(every people)" / "(many peoples)", which is not a
+ *      people at all but the note that the story is common ground. ⚠️ MEASURED: those two are the ONLY values
+ *      of her 24 that do not resolve to a real origin; the other 22 all do.
+ *    · THEIR OWN PEOPLE told it — they grew up on it, so they have it from the first look.
+ *    · THEY LEARNED IT — a KNOW success against the thing, written on the save.
+ *
+ *  ⚠️ THE PEOPLE MATCH IS ONE-DIRECTIONAL ON PURPOSE. `storiedBy` is prose ("Wrights of the New",
+ *  "Enginewrights") and an origin is an id ("wright", "enginewright"), so the normalised storiedBy must START
+ *  WITH the origin id. The other direction would let a short storiedBy swallow a longer id — "Wrights of the
+ *  New" would answer for an enginewright, who is not one of them. All 22 peoples resolve by this rule alone.
+ *  PURE. */
+export function knowsStoryRule(character, creature) {
+  const rule = creature?.storyRule ? String(creature.storyRule) : null;
+  if (!rule) return { rule: null, known: false, why: null };
+  const by = String(creature.storiedBy || "");
+  if (/^\(/.test(by.trim())) return { rule, known: true, why: "everyone tells this one" };
+  const learned = character?.storyRulesKnown && typeof character.storyRulesKnown === "object"
+    ? character.storyRulesKnown[creature.id] : null;
+  if (learned) return { rule, known: true, why: "you worked it out" };
+  const norm = (s) => String(s || "").toLowerCase().replace(/[^a-z]/g, "");
+  const mine = norm(character?.origin);
+  if (mine && norm(by).startsWith(mine)) return { rule, known: true, why: "your own people tell it" };
+  return { rule, known: false, why: null };
+}
+
+/** ⛑ SNG-661 §3.2 — THE ONE WRITER. A KNOW success against the thing teaches the tale, once, with the day it
+ *  happened. Returns true only when something was actually learned, so a caller can say so. MUTATES. */
+export function learnStoryRule(character, creatureId, day = null) {
+  if (!character || !creatureId) return false;
+  if (!character.storyRulesKnown || typeof character.storyRulesKnown !== "object") character.storyRulesKnown = {};
+  if (character.storyRulesKnown[creatureId]) return false;
+  character.storyRulesKnown[creatureId] = Number(day) || true;
+  return true;
 }
 
 /** Settled/hearth rests are safe — wilderness rests are where the night has teeth. */
@@ -392,6 +441,8 @@ export function synthesizeDuelDef(entry) {
     // through now, so the thing the player is fighting keeps its identity instead of being re-derived from a
     // string. Undefined for non-creature entries, exactly as before.
     ...(entry.creatureId ? { creatureId: entry.creatureId, creatureClass: entry.creatureClass || null } : {}),
+    // ⛑ SNG-661 §3.2 — and the tale with it, so the receipt does not have to reach back into the roster.
+    ...(entry.storyRule ? { storyRule: entry.storyRule, storiedBy: entry.storiedBy || null } : {}),
     // SNG-138: a prestige-challenge entry carries these so the resolved duel can feed renown (harmless when absent)
     _challengeBand: entry._challengeBand || undefined, _challenger: entry._challenger || undefined,
     opponent: {

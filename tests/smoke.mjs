@@ -10383,7 +10383,9 @@ await (async () => {
     // clicking away from it, so the drop-back fires from sbEnd as well.
     /beginChaseFromFight\(activeEnc\(\)\?\.def\)/.test(appSrc230) && /kindT === "fight" && choice\.encounterAction === "flee"/.test(appSrc230) && /kindT === "chase" && encT\.def\._chainedFrom\?\.kind === "fight"/.test(appSrc230) && /encounterKind\(def\) === "chase" && def\?\._chainedFrom\?\.kind === "fight"/.test(appSrc230) && /async function beginChaseFromFight/.test(appSrc230) && /async function beginFightFromChase/.test(appSrc230));
   check("230 §6a GUARD: the frame stays a legibility layer through the chain — the chase renders with the GM + freefield (no bespoke mini-loop)",
-    /character\.activeEncounter = \{ defId: chase\.id, state: \{ \.\.\.startEncounter\(chase, \{ oppSheet: chaseSheet \}\)/.test(appSrc230) && /_morphedFrom: \{ kind: "fight"/.test(appSrc230) && /Do NOT resolve the chase — it plays out in its own frame/.test(appSrc230));
+    // ⚠️ THE CLAIM IS THAT THE CHASE REUSES `startEncounter` AND CARRIES `_morphedFrom` — not the shape of the
+    // argument list, which SNG-661 §3.2 added an option to.
+    /character\.activeEncounter = \{ defId: chase\.id, state: \{ \.\.\.startEncounter\(chase, \{ oppSheet: chaseSheet/.test(appSrc230) && /_morphedFrom: \{ kind: "fight"/.test(appSrc230) && /Do NOT resolve the chase — it plays out in its own frame/.test(appSrc230));
 
   // §6b/§7a: a SKILL can COLLAPSE (or morph) the frame — resolved along the degree bands, gated by collapsibility.
   check("230 §6b: frameCollapsible — riffraff/notable/leader + low danger can be one-beat-ended (leader only on a demolishing crit); an EPIC/danger-4 cannot",
@@ -10779,8 +10781,15 @@ await (async () => {
   // SNG-252b §2c superseded 252's flat order: the SCENE now leads and the exits go last and quietest.
   // header → subtitle → SCENE → where-you-stand → meter/receipt → moves+freeform → ways out.
   check("SNG-252b §2c: the ribbon orders by IMPORTANCE — the scene leads, the exits go last",
-    /\$\{subtitleHtml\}/.test(appSrc252) && /enc-frame-scene/.test(appSrc252) && /enc-frame-stand/.test(appSrc252) &&
-    /\$\{meterHtml\}\$\{receiptHtml\}\$\{cueHtml\}\$\{exitsHtml\}<\/div>/.test(appSrc252),
+    // ⚠️ AN ORDER, NOT AN ADJACENCY. Written as one string this forbade ever inserting anything between the
+    // receipt and the cue — and SNG-661 §3.2 adds the folk tale exactly there, which changes no part of the
+    // claim. A gate on a spelling cannot tell a reordering from an insertion; a gate on the order can.
+    (() => {
+      const at = (s) => appSrc252.indexOf(s);
+      const seq = ["${subtitleHtml}", "enc-frame-scene", "enc-frame-stand", "${meterHtml}", "${receiptHtml}", "${exitsHtml}</div>"];
+      const idx = seq.map(at);
+      return idx.every(i => i > 0) && idx.every((v, i) => i === 0 || v > idx[i - 1]);
+    })(),
     "the ribbon is back to one flat weight — which is what left Erik lost in it");
   check("SNG-252b §2b: the SCENE renders inside the ribbon, and exactly once (never in both places)",
     /beatPlacedInRibbon = true; return `<div class="enc-frame-scene">/.test(appSrc252) &&

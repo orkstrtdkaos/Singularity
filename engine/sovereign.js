@@ -588,3 +588,84 @@ export function marksFromHeld(character, { items = {}, at = null, day = null } =
   }
   return out;
 }
+
+/* ═════ SNG-644 · C18 — A SEAT HELD BY THE SAVIOR SIDE ═════
+ *
+ * ✅ ERIK: *"Just because a seat is filled doesn't mean they keep it."*
+ *
+ * ⛑ AEVI'S RULE: a claimant finishing — the lore's *"a villain you fail to stop is a promotion"* — cannot promote
+ * them into a held seat WHILE THE HOLDER STANDS. Slay, turn or break the holder and the seat opens, to whichever
+ * challenger did it. The open seat (Chaos / Order) is promoted by a finish alone.
+ *
+ * ⚠️ AND THERE IS NO PROMOTION PATH IN THE ENGINE YET. "A villain you fail to stop is a promotion" has its
+ * arithmetic — a `spectrum` value at ±0.95, with four figures standing at the end of one — and nothing that acts on
+ * it. So a free-standing `mayFinishInto` predicate would be a reader with no caller, which the wiring audit refuses
+ * and rightly. ⛔ INSTEAD THE ANSWER CARRIES THE GUARD: `openTo` is EMPTY while the holder stands, so a promotion
+ * path cannot be written that forgets to ask. The GM block consumes it today.
+ *
+ * ⛑ AND WHETHER THE HOLDER STANDS IS DERIVED, never stored: `worldState.epicStatus` already records a figure's
+ * status, and a second copy on a seat is a second answer to one question — which is how the sell-share drifted from
+ * its own projection an hour after I wrote it.
+ */
+
+/** ⛔ WHERE THE SEVEN SEATS STAND, for this save. Per axis: who holds it, whether they still stand, who is reaching
+ *  for it, and WHO IT IS OPEN TO — which is the guard, expressed as the answer rather than as a separate question a
+ *  caller could forget to ask.
+ *
+ *  A holder is REMOVED when the save's `epicStatus` says dead, turned or broken. ⚠️ "Turned" is on the list because
+ *  Aevi's rule names it: a holder who has been turned is no longer in the way, and she is not dead.
+ *
+ *  Returns `[{ axis, holder, holderStands, why, challengers, openTo, kind }]`. PURE. */
+export function seatState(character, { seats = null, npcs = {} } = {}) {
+  const doc = seats && typeof seats === "object" ? seats : {};
+  const ws = character?.worldState || {};
+  const statusOf = (id) => {
+    const st = ws.epicStatus?.[String(id)] || null;
+    const s = String(st?.status || "").toLowerCase();
+    if (s === "dead") return "slain";
+    if (s === "turned") return "turned";
+    if (st?.broken === true || s === "broken") return "broken";
+    return null;
+  };
+  const out = [];
+  for (const seat of (Array.isArray(doc.heldSeats) ? doc.heldSeats : [])) {
+    const gone = seat.holder ? statusOf(seat.holder) : null;
+    const stands = !gone;
+    // ⛑ AND ONLY THE CHALLENGER WHO DID IT. Aevi: "the seat opens to whichever challenger did it" — so the ledger's
+    // own record of who removed the holder decides, and a seat that opened by other means opens to nobody.
+    const by = ws.epicStatus?.[String(seat.holder)]?.killedBy || ws.epicStatus?.[String(seat.holder)]?.turnedBy || null;
+    const challengers = (Array.isArray(seat.challengers) ? seat.challengers : []).map(String);
+    const openTo = stands ? [] : challengers.filter(c => !by || c === String(by));
+    out.push({ axis: seat.axis || null, kind: "held", holder: seat.holder || null,
+      holderName: npcs?.[seat.holder]?.name || seat.holder || null,
+      holderStands: stands, why: stands ? (seat.holdsBy || "she is in the way") : `she was ${gone}`,
+      knows: seat.knows || null, challengers, openTo,
+      openedBy: stands ? null : (by ? String(by) : null) });
+  }
+  for (const seat of (Array.isArray(doc.openSeats) ? doc.openSeats : [])) {
+    const claimants = (Array.isArray(seat.claimants) ? seat.claimants : []).map(String);
+    // ⛔ NOBODY IS IN THE WAY, so a finish alone takes it — which is why the lore calls this the most dangerous seat.
+    out.push({ axis: seat.axis || null, kind: "open", holder: null, holderName: null, holderStands: false,
+      why: seat.note || "nobody holds it", knows: null, challengers: claimants, openTo: claimants, openedBy: null });
+  }
+  return out;
+}
+
+/** ⛑ WHAT THE GM IS TOLD ABOUT THE SEATS, and it is GM-only — nothing here reaches a player. ⛔ A HOLDER DOES NOT
+ *  KNOW SHE HOLDS A SEAT: Aevi's line is exact, "what she is holding back — not that it is a seat", so the block says
+ *  so rather than leaving a narrator to have her explain her own cosmic function. PURE. */
+export function seatsForGM(character, { seats = null, npcs = {} } = {}) {
+  const rows = seatState(character, { seats, npcs });
+  if (!rows.length) return "";
+  const name = (id) => npcs?.[id]?.name || String(id || "").replace(/_/g, " ");
+  const lines = rows.map(r => {
+    if (r.kind === "open") {
+      return `${r.axis}: NOBODY HOLDS IT. ${r.why} Reaching for it: ${r.challengers.map(name).join(", ") || "nobody"}. A finish alone takes this one.`;
+    }
+    return r.holderStands
+      ? `${r.axis}: ${name(r.holder)} IS IN THE WAY — ${r.why} ⛔ She does NOT know it is a seat; she knows ${r.knows || "what she is holding back"}. `
+        + `Reaching past her: ${r.challengers.map(name).join(", ")}. While she stands, none of them can finish into it, however far along they are.`
+      : `${r.axis}: ${name(r.holder)} IS GONE — ${r.why}. The seat is open to ${r.openTo.map(name).join(", ") || "nobody, because it was not a challenger who removed her"}.`;
+  });
+  return lines.join("\n");
+}

@@ -91,7 +91,7 @@ import { powersHoldingForGM } from "./powers.js";   // SNG-634 C5: who holds the
 import { journeyForGM } from "./journeyplan.js";   // CCODE-387: a journey agreed and not yet walked
 import { journeyUnderwayForGM } from "./journeyroad.js";   // CCODE-390: a journey on the road, stopped part-way
 import { encounterReceiptForGM } from "./encounters.js";
-import { markForHere, markLinesFor } from "./sovereign.js";   // ⛔ SNG-641 §2: one mark, its ordinary reading, and what the collecting supports
+import { markForHere, markLinesFor, seatsForGM } from "./sovereign.js";   // ⛔ SNG-641 §2: one mark, its ordinary reading, and what the collecting supports
 import { powersReaching } from "./powers.js";                 // whose ground this is, so a mark can belong to a line that reaches here
 import { waygateBlockForGM, waygateTruthForGM } from "./waygate.js";
 import { readAloudDirective } from "./narration_voice.js";
@@ -144,6 +144,13 @@ export const GM_CONTEXT = [
       for (const l of said) if (l.text && !/\bpower_/.test(l.text)) out.push(`WHAT THE CHARACTER'S OWN COLLECTING NOW SUPPORTS: ${l.text}`);
       return out.join("\n");
     } },
+  // ⛔ SNG-644 (C18) — WHERE THE SEVEN SEATS STAND, AND WHO IS IN THE WAY OF ONE. ✅ Erik: "Just because a seat is
+  // filled doesn't mean they keep it." ⛑ GM-ONLY, and the block says out loud that a HOLDER DOES NOT KNOW she holds
+  // a seat — Aevi's line is exact ("what she is holding back — not that it is a seat"), and without saying so a
+  // narrator would have her explain her own cosmic function the first time she is asked why she stays.
+  { key: "seats", builder: "sovereign.seatsForGM", carries: ["who holds each seat", "who is reaching past them", "which seats are open, and to whom"],
+    reachedBy: "always, once sovereign_seats is loaded", spec: "SNG-644", views: ALL,
+    build: (env) => seatsForGM(env.character, { seats: env.CONTENT.sovereignSeats, npcs: env.CONTENT.npcs || {} }) },
   { key: "lore", builder: "state.loreForLocation", carries: ["local lore"],
     reachedBy: "always", spec: "§9", views: ALL,
     build: (env) => loreForLocation(env.location, env.CONTENT.lore) },

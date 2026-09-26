@@ -30225,6 +30225,113 @@ console.log("\n── §375 · underneath it they have a name ──");
     "Aevi's own trap: “there are two High Luminary records (`high_luminary`, `the_high_luminary`) — which is canon?”");
 }
 
+/* ══════════ §376 · SNG-644 (C18) — A SEAT HELD BY THE SAVIOR SIDE ══════════ */
+// ✅ ERIK: "Just because a seat is filled doesn't mean they keep it."
+//
+// ⛑ A claimant finishing — the lore's "a villain you fail to stop is a promotion" — cannot promote them into a HELD
+// seat while the holder stands. Slay, turn or break her and it opens, to whichever challenger did it.
+//
+// ⚡ Both holders are EPIC and all four challengers LEGENDARY, deliberately: "restraint is thinner, and it holds
+// anyway." A holder is in the way; she is not stronger than the thing trying to get past her — which is why a held
+// seat is where the player matters most.
+console.log("\n── §376 · she is in the way ──");
+{
+  const SV376 = await import("../engine/sovereign.js");
+  const { loadContentHeadless: lch376 } = await import("./headless_content.mjs");
+  const C376 = await lch376();
+  const seats = C376.sovereignSeats;
+  const state = (ch) => SV376.seatState(ch, { seats, npcs: C376.npcs || {} });
+
+  check("§376: ⛑ THE SEATS ARE LOADED, AND EVERY HOLDER AND CHALLENGER IS A REAL RECORD — a seat held by an id nobody has is a seat nobody can defend",
+    (() => {
+      const held = seats?.heldSeats || [], open = seats?.openSeats || [];
+      const ids = [...held.flatMap(s => [s.holder, ...(s.challengers || [])]), ...open.flatMap(s => s.claimants || [])];
+      return held.length === 2 && open.length === 1 && ids.length >= 7
+        && ids.every(id => !!C376.npcs?.[id]);
+    })(), `${(seats?.heldSeats || []).length} held · ${(seats?.openSeats || []).length} open`);
+
+  // ⚡ THE RUNGS ARE THE POINT, so they are asserted: restraint is thinner and it holds anyway.
+  // ⚠️ AEVI'S SPEC SAYS "all four challengers are legendary" AND THE CONTENT DISAGREES: measured, `thornmother_sealed`
+  // and `the_scouring_hand` are legendary, while `morvane_the_harvest` and `cinder_vael` are EPIC. ⛑ So the gate
+  // asserts the claim the design actually RESTS on — her own sentence, "a holder is IN THE WAY; she is not stronger
+  // than the thing trying to get past her" — which holds either way, and the two epics are reported rather than
+  // corrected. Whether they should be legendary is a content decision and it is hers.
+  check("§376: ⚡ A HOLDER IS NEVER STRONGER THAN WHAT IS TRYING TO GET PAST HER — “restraint is thinner, and it holds anyway”, which is why defending her is the whole war for that axis",
+    (() => {
+      const held = seats?.heldSeats || [];
+      const RUNG = ["riffraff", "notable", "leader", "heroic", "epic", "legendary", "mythic"];
+      const rung = (id) => RUNG.indexOf(String(C376.npcs?.[id]?.tier || ""));
+      return held.length === 2
+        && held.every(s => rung(s.holder) >= RUNG.indexOf("epic"))
+        && held.every(s => (s.challengers || []).every(c => rung(c) >= rung(s.holder)));
+    })(), (() => {
+      const held = seats?.heldSeats || [];
+      return held.map(s => `${s.axis}: holder ${C376.npcs?.[s.holder]?.tier} vs ` +
+        (s.challengers || []).map(c => `${c} ${C376.npcs?.[c]?.tier}`).join(", ")).join(" · ");
+    })());
+
+  // ⛔ THE RULE: while she stands, NOBODY finishes into it.
+  check("§376: ⛔ WHILE THE HOLDER STANDS, THE SEAT IS OPEN TO NOBODY — and the guard is the ANSWER, not a separate question a promotion path could forget to ask",
+    (() => {
+      const rows = state({}).filter(r => r.kind === "held");
+      return rows.length === 2 && rows.every(r => r.holderStands && r.openTo.length === 0 && r.challengers.length === 2);
+    })(), "there is no promotion path in the engine yet, so a free-standing predicate would be a reader with no caller");
+
+  check("§376: ⛔ SLAY HER AND IT OPENS — TO THE ONE WHO DID IT, and to nobody else",
+    (() => {
+      const ch = { worldState: { epicStatus: { neth_the_stayed: { status: "dead", killedBy: "morvane_the_harvest" } } } };
+      const rows = state(ch);
+      const life = rows.find(r => r.axis === "Life / Death");
+      const other = rows.find(r => r.axis === "Breaking / Building");
+      return life.holderStands === false && life.openTo.join(",") === "morvane_the_harvest"
+        && life.openedBy === "morvane_the_harvest" && /slain/.test(life.why)
+        // and the OTHER held seat is untouched — one axis at a time
+        && other.holderStands === true && other.openTo.length === 0;
+    })());
+
+  check("§376: ⛑ …and TURNED counts, because Aevi's rule names it — a holder who has been turned is no longer in the way and is not dead",
+    (() => {
+      const ch = { worldState: { epicStatus: { the_last_mercy: { status: "turned", turnedBy: "cinder_vael" } } } };
+      const r = state(ch).find(x => x.axis === "Breaking / Building");
+      return r.holderStands === false && /turned/.test(r.why) && r.openTo.join(",") === "cinder_vael";
+    })());
+
+  check("§376: ⚠️ …and a holder removed by SOMETHING THAT IS NOT A CHALLENGER opens the seat to NOBODY — “whichever challenger did it”, and if none did, none may",
+    (() => {
+      const ch = { worldState: { epicStatus: { neth_the_stayed: { status: "dead", killedBy: "a_rockfall" } } } };
+      const r = state(ch).find(x => x.axis === "Life / Death");
+      return r.holderStands === false && r.openTo.length === 0;
+    })(), "a seat is not a vacancy anybody may walk into");
+
+  // ⛔ THE OPEN SEAT IS THE DANGEROUS ONE, because nobody is in the way.
+  check("§376: ⛔ THE OPEN SEAT NEEDS ONLY A FINISH — the Still Lattice reaches for Chaos / Order with nobody standing in its way, which the lore calls the most dangerous seat in the world",
+    (() => {
+      const r = state({}).find(x => x.kind === "open");
+      return r.axis === "Chaos / Order" && r.holder === null
+        && r.openTo.join(",") === "the_still_lattice" && r.holderStands === false;
+    })());
+
+  // ⛑ DERIVED, NEVER STORED.
+  check("§376: ⛑ WHETHER SHE STANDS IS DERIVED FROM `epicStatus`, never stored on the seat — a second copy is a second answer to one question",
+    (() => {
+      const src = rd("engine/sovereign.js");
+      return /ws\.epicStatus\?\.\[String\(id\)\]/.test(src)
+        && !/seat\.holderStands\s*=/.test(src)
+        && !/heldSeats[\s\S]{0,200}holderStands":/.test(rd("content/packs/valley/lore/sovereign_seats.json"));
+    })());
+
+  // ⛔ AND THE GM IS TOLD, sealed, including the one thing a narrator would otherwise get wrong.
+  check("§376: ⛔ THE GM IS TOLD AND THE PLAYER IS NOT — and the block says a HOLDER DOES NOT KNOW SHE HOLDS A SEAT, or a narrator has her explain her own cosmic function the first time she is asked why she stays",
+    (() => {
+      const said = SV376.seatsForGM({}, { seats, npcs: C376.npcs || {} });
+      const gm = rd("engine/gm.js"), reg = rd("engine/gm_registry.js");
+      return /IS IN THE WAY/.test(said) && /does NOT know it is a seat/.test(said)
+        && /key: "seats"/.test(reg) && /seatsForGM\(env\.character/.test(reg)
+        && /if \(seats\) world\.push/.test(gm) && /GM-EYES\. Never state any of this to the player/.test(gm)
+        && /A HOLDER DOES NOT KNOW SHE HOLDS A SEAT/.test(gm);
+    })());
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

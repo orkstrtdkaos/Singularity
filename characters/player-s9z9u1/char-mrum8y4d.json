@@ -2294,13 +2294,6 @@
       {
         "day": 7,
         "worldDay": 88,
-        "text": "The Glass Assembly has lost people it will not get back.",
-        "tier": "event",
-        "section": "world"
-      },
-      {
-        "day": 7,
-        "worldDay": 88,
         "text": "The Court of the Unfinished Plan has lost people it will not get back.",
         "tier": "event",
         "section": "world"
@@ -2438,11 +2431,18 @@
         "outcome": "stopped",
         "locationId": "the_service_ways",
         "placedBy": "winnerId"
+      },
+      {
+        "day": 8,
+        "worldDay": 88,
+        "text": "The Harvest Hand has lost people it will not get back — 12 of them, to The Wardens of Cairnhold's crusade.",
+        "tier": "event",
+        "section": "world"
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 2127,
-    "lastSharedReadAt": "2026-09-26T15:18:31.285Z",
+    "lastGenCount": 2133,
+    "lastSharedReadAt": "2026-09-26T21:42:26.304Z",
     "lastTickWorldDay": 88,
     "lastCanonWorldDay": 88,
     "turnsSinceOffer": 2,
@@ -2735,7 +2735,7 @@
         "kind": "decision",
         "premise": "Someone who keeps the count of what has been unmade has begun rounding down, telling themselves the difference is noise — but the rounding has a direction, and it has been consistent for long enough…",
         "cause": "The act of counting the unmade requires a decision about what constitutes a thing distinct enough to be counted, and that threshold has always been left to…",
-        "stage": 19,
+        "stage": 20,
         "seededAtCount": 1917,
         "surfaced": true,
         "fate": "growing",
@@ -2748,7 +2748,7 @@
         "kind": "decision",
         "premise": "The person who holds authority to formally designate what has been unmade as 'resolved' has not done so for anything in years, and the backlog of unresolved unmakings is beginning to press against…",
         "cause": "In the_unmade, the act of resolution is itself an act of power, and the authority-holder has quietly discovered that unresolved things remain partially…",
-        "stage": 15,
+        "stage": 16,
         "seededAtCount": 1968,
         "surfaced": true,
         "fate": "growing",
@@ -2773,7 +2773,7 @@
         "kind": "decision",
         "premise": "Someone has begun quietly counting what no longer exists — cataloguing absences — and has not yet decided whether to share what the count implies.",
         "cause": "The Unmade is defined by what has been lost or undone; its people have long customs around not naming absence directly, because naming draws attention to the…",
-        "stage": 10,
+        "stage": 11,
         "seededAtCount": 2053,
         "surfaced": true,
         "fate": "growing",
@@ -2786,7 +2786,7 @@
         "kind": "decision",
         "premise": "An elder who alone remembers the last time something like the current unraveling occurred has not yet spoken, weighing whether the knowing will help or hasten what is coming.",
         "cause": "In the_unmade, what is lost or dissolved carries weight equal to what remains — silence is understood as a form of preservation, and the elder has lived long…",
-        "stage": 9,
+        "stage": 10,
         "seededAtCount": 2100,
         "surfaced": true,
         "fate": "growing",
@@ -2815,6 +2815,21 @@
           "who": "tessvel-cairn"
         },
         "addedDay": 8
+      },
+      {
+        "source": "threat-attack",
+        "kind": "threat-attack",
+        "subjectId": "beast_hollow_pace",
+        "aimedAtPlayer": true,
+        "urgency": 3,
+        "oneLineHook": "A a hollow-pace has come down onto the character here — not stumbled into, but ARRIVED, hunting. Defend, or drive it off.",
+        "becomes": {
+          "type": "encounter",
+          "encounterId": "beast_hollow_pace",
+          "name": "a hollow-pace"
+        },
+        "addedDay": 8,
+        "locationId": "gen-the-made-gate"
       }
     ],
     "offscreenCursor": 21,
@@ -10085,7 +10100,7 @@
       "the_doubting_lattice": 84,
       "the_war_ender": 84
     },
-    "updatesToldTo": "2.10.1",
+    "updatesToldTo": "2.12.1",
     "newsLog": [
       {
         "day": 4,
@@ -11522,6 +11537,22 @@
         "worldDay": 88,
         "text": "The game was updated to v2.10.1 — 1 new, 2 fixed.",
         "loggedAt": "2026-09-26T15:18:39.280Z"
+      },
+      {
+        "day": 8,
+        "worldDay": 88,
+        "text": "The Harvest Hand has lost people it will not get back — 12 of them, to The Wardens of Cairnhold's crusade.",
+        "tier": "event",
+        "section": "world",
+        "loggedAt": "2026-09-26T21:42:32.501Z"
+      },
+      {
+        "kind": "update",
+        "section": "world",
+        "version": "2.12.1",
+        "worldDay": 88,
+        "text": "The game was updated to v2.12.1 — 11 new, 6 fixed, 6 changed.",
+        "loggedAt": "2026-09-26T21:42:32.501Z"
       }
     ]
   },
@@ -14894,8 +14925,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790437834913,
-  "rev": 1019,
+  "updatedAt": 1790458952507,
+  "rev": 1022,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -17009,7 +17040,7 @@
     "lastDeployDay": 76,
     "lastBeat": "witness_power"
   },
-  "syncedAt": 1790431795238,
+  "syncedAt": 1790437834913,
   "_applyFailures": null,
   "companionMemory": {
     "coil": [
@@ -18753,7 +18784,8 @@
       "lastVerb": "expand",
       "lastVerbDay": 8,
       "grownHeads": 23,
-      "grewDay": 5
+      "grewDay": 5,
+      "winHow": null
     },
     "power_undercount": {
       "known": {
@@ -18807,15 +18839,17 @@
         "how": "home",
         "day": null
       },
-      "lastVerb": "protect",
-      "lastVerbDay": 8
+      "lastVerb": "quest",
+      "lastVerbDay": 8,
+      "wins": 1,
+      "winHow": "quest"
     },
     "power_glass_assembly": {
       "known": {
         "how": "renown",
         "day": null
       },
-      "lastVerb": "tax",
+      "lastVerb": "protect",
       "lastVerbDay": 8,
       "losses": 0,
       "lost": {
@@ -18827,7 +18861,7 @@
         "how": "renown",
         "day": null
       },
-      "lastVerb": "patrol",
+      "lastVerb": "protect",
       "lastVerbDay": 8,
       "losses": 0,
       "lost": {
@@ -18839,7 +18873,7 @@
         "how": "renown",
         "day": null
       },
-      "lastVerb": "protect",
+      "lastVerb": "tax",
       "lastVerbDay": 8,
       "losses": 0,
       "lost": {
@@ -18859,25 +18893,28 @@
         "how": "renown",
         "day": null
       },
-      "lastVerb": "patrol",
+      "lastVerb": "crusade",
       "lastVerbDay": 8,
       "losses": 0,
       "lost": {
         "0": 159
       },
-      "lossFrom": null
+      "lossFrom": "power_harvest_hand",
+      "lossHow": "feud"
     },
     "power_the_scour": {
       "known": {
         "how": "renown",
         "day": null
       },
-      "lastVerb": "patrol",
+      "lastVerb": "quest",
       "lastVerbDay": 8,
       "losses": 0,
       "lost": {
         "0": 28
-      }
+      },
+      "wins": 1,
+      "winHow": "quest"
     },
     "power_grand_lattice": {
       "known": {
@@ -18908,9 +18945,10 @@
       },
       "lastVerb": "expand",
       "lastVerbDay": 8,
-      "wins": 0,
+      "wins": 1,
       "grownHeads": 44,
-      "grewDay": 8
+      "grewDay": 8,
+      "winHow": "expand"
     },
     "power_deepwood_moot": {
       "known": {
@@ -18933,7 +18971,7 @@
       "lastVerbDay": 8
     },
     "power_keelmouth_slip": {
-      "lastVerb": "protect",
+      "lastVerb": "tax",
       "lastVerbDay": 8,
       "wins": 2
     },
@@ -18953,7 +18991,7 @@
       "losses": 0
     },
     "power_flesh_temple": {
-      "lastVerb": "recruit",
+      "lastVerb": "patrol",
       "lastVerbDay": 8,
       "wins": 0,
       "grownHeads": 18,
@@ -18962,17 +19000,19 @@
     "power_vacated_custody": {
       "lastVerb": "expand",
       "lastVerbDay": 8,
-      "wins": 0,
+      "wins": 1,
       "grownHeads": 6,
-      "grewDay": 5
+      "grewDay": 5,
+      "winHow": "expand"
     },
     "power_the_ceaseless": {
       "lastVerb": "expand",
       "lastVerbDay": 8,
-      "wins": 1,
+      "wins": 2,
       "grownHeads": 10,
       "grewDay": 5,
-      "losses": 0
+      "losses": 0,
+      "winHow": "expand"
     },
     "power_long_choir": {
       "lastVerb": "protect",
@@ -18987,13 +19027,15 @@
       "grewDay": 5,
       "losses": 1,
       "lost": {
-        "0": 48
+        "0": 60
       },
       "known": {
         "how": "noticed",
         "day": 8
       },
-      "lossFrom": "power_cairnhold_wardens"
+      "lossFrom": "power_cairnhold_wardens",
+      "lossHow": "feud",
+      "shrankDay": 8
     },
     "power_the_scouring": {
       "lastVerb": "patrol",

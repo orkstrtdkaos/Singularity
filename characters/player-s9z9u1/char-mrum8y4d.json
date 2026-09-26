@@ -119,9 +119,9 @@
     "demonic_angelic": -0.020000000000000004,
     "dark_light": 0.085,
     "concrete_abstract": 0.16438167187499997,
-    "chaos_order": -0.1077875,
+    "chaos_order": -0.087398125,
     "body_mind": 0.0658375,
-    "emotional_logical": 0.05890584374999999
+    "emotional_logical": 0.045960551562499986
   },
   "attunement": 10,
   "maxHealth": 83,
@@ -406,26 +406,29 @@
         "player": "Ask the Syllogist directly—who are you, and what belief of mine is broken?",
         "summary": "On the road toward the Standing Annex, the Syllogist names themselves as Orla Yardley and admits a breaking belief—that sealed things are mercy to destroy. They offer to test Loki's convictions in return.",
         "narration": "The Syllogist does not flinch at your directness. They step fully into the starlight, and their grey coat catches the light like old water. Their face settles into something that might be sadness or relief—it is difficult to tell which.\n\n\"My name is Orla Yardley,\" they say. Their voice is precise, each word weighted. \"I have carried a belief for fifteen years without testing it. I believed that breaking was the answer—that old works unmade are old works ended. That if you pull something sealed loose from the deep and do not understand it, destruction is mercy.\"\n\nRavel's posture shifts. Estry's eyes narrow slightly, reading the moment. Orla continues, unmoved by their reactions.\n\n\"Halvex Coil sent a Revel to break the Null Stone. The mandate came through channels I trust, with reasoning I accepted. But Halvex also came to you, and instead of breaking, you asked. Instead of destroying, you listened. And I watched that choice move through the valley's quiet places until it reached me.\" They pause. \"I held a belief that was wrong. I have come to offer you that breaking, and to ask: what belief do you hold that I should test for cracks?\"\n\nThe road settles around you. Cy's lens irises, reading the shift in air-currents."
+      },
+      {
+        "player": "Ask Orla to walk with you toward the Standing Annex—the road will let you both speak more fully, and the gathered band should hear this from the start.",
+        "summary": "On the road toward the Standing Annex, Orla Yardley joins the gathered band—a Syllogist carrying a breaking belief, moving toward the Annex and toward answers neither of you fully understands yet.",
+        "narration": "You nod to Orla, and the gesture carries weight—an acceptance before the full words come. \"Walk with us,\" you say. \"The Standing Annex waits, and the band should hear this from the start. There is ground to share that matters more than standing still on the road.\"\n\nOrla's face steadies. They shift their weight, and the motion reads like a release—the waiting is over. \"Yes,\" they say simply. \"Yes, I will.\"\n\nThe four of you turn together and move outward along the curve. The road here is clear and wide enough for walking side by side, and the scrubland brush on both sides rustles softly in the night wind. Cy ahead of you, lamp raised, choosing the footing. The stars overhead are bright enough to cast thin shadows, and the sound of your footfalls settles into rhythm—four people moving the same direction, with weight and purpose.\n\nRavel walks closest to you, her shoulder nearly level with yours, her eyes ahead on the turning road. Estry moves beside Orla, reading them with that precise attention she brings to every person. And Orla walks with the stillness of someone who has finally set down something very heavy."
       }
     ],
     "lastTurn": {
-      "narration": "The Syllogist does not flinch at your directness. They step fully into the starlight, and their grey coat catches the light like old water. Their face settles into something that might be sadness or relief—it is difficult to tell which.\n\n\"My name is Orla Yardley,\" they say. Their voice is precise, each word weighted. \"I have carried a belief for fifteen years without testing it. I believed that breaking was the answer—that old works unmade are old works ended. That if you pull something sealed loose from the deep and do not understand it, destruction is mercy.\"\n\nRavel's posture shifts. Estry's eyes narrow slightly, reading the moment. Orla continues, unmoved by their reactions.\n\n\"Halvex Coil sent a Revel to break the Null Stone. The mandate came through channels I trust, with reasoning I accepted. But Halvex also came to you, and instead of breaking, you asked. Instead of destroying, you listened. And I watched that choice move through the valley's quiet places until it reached me.\" They pause. \"I held a belief that was wrong. I have come to offer you that breaking, and to ask: what belief do you hold that I should test for cracks?\"\n\nThe road settles around you. Cy's lens irises, reading the shift in air-currents.",
-      "sceneSummary": "On the road toward the Standing Annex, the Syllogist names themselves as Orla Yardley and admits a breaking belief—that sealed things are mercy to destroy. They offer to test Loki's convictions in return.",
+      "narration": "You nod to Orla, and the gesture carries weight—an acceptance before the full words come. \"Walk with us,\" you say. \"The Standing Annex waits, and the band should hear this from the start. There is ground to share that matters more than standing still on the road.\"\n\nOrla's face steadies. They shift their weight, and the motion reads like a release—the waiting is over. \"Yes,\" they say simply. \"Yes, I will.\"\n\nThe four of you turn together and move outward along the curve. The road here is clear and wide enough for walking side by side, and the scrubland brush on both sides rustles softly in the night wind. Cy ahead of you, lamp raised, choosing the footing. The stars overhead are bright enough to cast thin shadows, and the sound of your footfalls settles into rhythm—four people moving the same direction, with weight and purpose.\n\nRavel walks closest to you, her shoulder nearly level with yours, her eyes ahead on the turning road. Estry moves beside Orla, reading them with that precise attention she brings to every person. And Orla walks with the stillness of someone who has finally set down something very heavy.",
+      "sceneSummary": "On the road toward the Standing Annex, Orla Yardley joins the gathered band—a Syllogist carrying a breaking belief, moving toward the Annex and toward answers neither of you fully understands yet.",
       "choices": [
         {
-          "label": "Tell Orla plainly: I don't know where I came from, and everyone else seems certain I should stay away from the answer. That's the belief I need tested.",
+          "label": "Ask Orla to speak more fully about what brought them to the valley in the first place",
           "attribute": "social",
-          "subAttribute": "presence",
+          "subAttribute": "rapport",
           "axes": {
-            "falsehood_truth": 0.6,
-            "emotional_logical": 0.3,
-            "chaos_order": -0.2
+            "falsehood_truth": 0.3,
+            "emotional_logical": 0.2
           },
           "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
-            "honest",
-            "risky"
+            "study"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -434,18 +437,17 @@
           "emergenceId": null
         },
         {
-          "label": "Ask Orla to walk with you toward the Standing Annex—the road will let you both speak more fully, and the gathered band should hear this from the start.",
+          "label": "Ask Ravel and Estry what they make of Orla's arrival and purpose",
           "attribute": "social",
-          "subAttribute": "rapport",
+          "subAttribute": "presence",
           "axes": {
-            "chaos_order": 0.3,
-            "emotional_logical": -0.2
+            "chaos_order": 0.2,
+            "concrete_abstract": -0.1
           },
           "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "lead",
-            "rally"
+            "study"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -454,42 +456,41 @@
           "emergenceId": null
         },
         {
-          "label": "Use Appetite-Sense to read what Orla refuses to admit about the breaking mandate—what hunger drove them to accept it in the first place.",
+          "label": "Turn the conversation toward what waits at the Standing Annex—Halvex, Cy's findings, the questions still open",
           "attribute": "social",
-          "subAttribute": "rapport",
+          "subAttribute": "presence",
           "axes": {
-            "falsehood_truth": 0.5,
-            "emotional_logical": -0.4
+            "chaos_order": 0.3,
+            "falsehood_truth": 0.2
           },
           "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
             "study",
-            "careful"
+            "plan"
           ],
-          "abilityId": "appetite_sense",
-          "energyCost": 2,
+          "abilityId": null,
+          "energyCost": null,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Accept their offer and invite them into the band—but make clear: you need people who test your beliefs, not people who follow them.",
-          "attribute": "social",
-          "subAttribute": "presence",
+          "label": "Walk in silence for now and listen to what the band offers without prompting",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "axes": {
-            "chaos_order": -0.3,
-            "emotional_logical": 0.2
+            "chaos_order": -0.2,
+            "concrete_abstract": 0.1
           },
-          "difficulty": "normal",
+          "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "lead",
-            "command"
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false,
+          "trivial": true,
           "encounterId": null,
           "emergenceId": null
         }
@@ -500,30 +501,19 @@
         "energy": 0,
         "inventoryAdd": [],
         "inventoryRemove": [],
-        "xp": 12
+        "xp": 0
       },
-      "ledgerEvents": [
-        {
-          "what": "A Syllogist breaks a held belief and offers themselves as a test of conviction",
-          "tags": [
-            "breaking",
-            "alliance",
-            "honesty"
-          ],
-          "visibility": "witnessed",
-          "spectrumDeltas": {},
-          "impactsLocal": true
-        }
-      ],
+      "ledgerEvents": [],
       "questUpdates": [
         {
           "op": "progress",
           "questId": "the-taken-from-the-city",
-          "title": "The Taken",
-          "summary": "Someone was brought from the city to the Unlit Deep, and the city is pretending it did not happen.",
-          "giver": "the elder of the Unlit Deep",
-          "note": "Orla Yardley arrives on the road with intent to join the band and test Loki's beliefs in return. The gathering grows.",
-          "xpReward": null
+          "note": "Orla Yardley arrives on the road toward the Standing Annex with intent to join the band and test Loki's belief in understanding over breaking. The gathering grows—four now walk the road together, moving toward the Annex and toward answers."
+        },
+        {
+          "op": "progress",
+          "questId": "journey-gen-the-standing-annex-88",
+          "note": "The band moves outward from the Kindly Rest onto the open road. Distance from the Kindly Rest has increased; the road curves toward Millbrook before turning outward toward the Annex's further distance. About 1.5 days remain if the pace holds."
         }
       ],
       "standingOps": [],
@@ -532,76 +522,57 @@
       "arcOps": [],
       "adoptSchool": null,
       "offer": {
-        "thing": "Orla Yardley, a Syllogist who has broken their own conviction and come to test Loki's in exchange",
-        "from": "the breaking mandate that Halvex sent, and the choice Loki made to listen rather than destroy—the valley carries word of this, and Orla came because they needed to know why"
+        "thing": "Orla Yardley accepts the invitation to walk and speak—the breaking mandate is now openly questioned in the band's presence",
+        "from": "Loki's plainness and Orla's own breaking, tested on the road"
       },
       "stageOps": [],
       "scene": {
-        "setting": "The road from the Kindly Rest curves outward through scrubland toward the Standing Annex, mid-autumn night, stars visible overhead. Clear sky, shadow pooling briefly at the road's curve.",
+        "setting": "The open road curving outward from the Kindly Rest toward the Standing Annex, mid-autumn night. Clear sky overhead with bright stars. The road is wide and unobstructed, lined on both sides by low scrubland brush. Shadows cast thin and sharp by starlight. The air carries the weight of the year turning.",
         "npcsPresent": [
           {
             "name": "Ravel Ash-bearer",
-            "state": "Standing in the starlight, posture eased but alert; watching the Syllogist with recognition of something tested"
+            "state": "Walking beside Loki, shoulders eased, eyes ahead on the road. Her green coat catches the starlight. Moving with steady purpose."
           },
           {
             "name": "Estry Krell",
-            "state": "Beside Ravel, reading the moment with quiet precision; eyes tracking Orla Yardley"
+            "state": "Walking beside Orla Yardley, reading them with precision. Eyes tracking Orla's movements and bearing. Silent but fully present."
           },
           {
             "name": "Orla Yardley",
-            "state": "Fully emerged into starlight, grey coat catching the light, face settled into something between sadness and relief; waiting for Loki's answer"
+            "state": "Walking with stillness of someone who has set down something very heavy. Grey coat, precise movements. Face settled between sadness and relief. Moving outward with the band."
           }
         ],
         "objects": [
-          "The road ahead, curving outward into shadow",
-          "Scrubland brush, dry and autumn-thick on both sides",
-          "The stars overhead, bright and readable in clear night"
+          "The open road ahead, curving gently",
+          "Scrubland brush on both sides, dry and autumn-thick",
+          "The stars overhead, bright and readable",
+          "Cy ahead of the group, lamp raised, choosing the footing"
         ],
         "threads": [
-          "Will Orla Yardley join the band bound at the Kindly Rest, or do they bring different purpose?",
-          "What belief does Loki hold that needs testing—and how will Orla's precision read it?",
-          "What hunger drove Orla to accept the breaking mandate in the first place?"
+          "What fully drives Orla's belief about breaking and sealing?",
+          "How will the band—and Halvex—receive Orla's presence at the Annex?",
+          "What answers wait at the Standing Annex, and what new questions will arriving together raise?"
         ]
       },
       "npcUpdates": [
         {
-          "op": "meet",
+          "op": "update",
           "npcId": "orla-yardley",
           "name": "Orla Yardley",
-          "title": null,
-          "role": "A Syllogist from the reaches, traveler between communities",
-          "age": 42,
-          "sex": "male",
-          "gender": "man",
-          "pronouns": "they/them",
-          "description": "Tall and narrow, dressed in quiet grey. Face bearing the calm of someone who has just finished an argument with themselves. Eyes that carry precision and a recent breaking.",
-          "note": "Arrived on the road from the reaches with foreknowledge of Loki's presence and Halvex Coil's account. Came to question a belief held for fifteen years—that breaking sealed things is mercy. Watched Loki choose understanding over destruction, and that choice moved through the valley until it reached them.",
           "learned": [
-            "Held a belief for fifteen years without testing it: that old works unmade are old works ended",
-            "Accepted a breaking mandate from Halvex Coil through trusted channels",
-            "Watched the choice to listen rather than destroy move through the valley's quiet places",
-            "Came seeking to offer that breaking and to ask their own beliefs be tested in return"
+            "Came to the valley carrying a breaking mandate—a belief that sealed things should be destroyed as mercy",
+            "Watched Loki choose understanding over breaking at the Hub crossing and felt that belief crack under the weight of what that choice meant",
+            "Came to the road toward the Standing Annex to test both their own conviction and Loki's in return",
+            "Accepts the invitation to walk with the band and speak the full shape of their breaking"
           ],
-          "skillsObserved": [
-            "Carries conviction with precision",
-            "Willing to name when a belief breaks",
-            "Reads people and situations with logical exactitude",
-            "Speaks plainly without performance"
-          ],
-          "relationshipDelta": 1,
-          "vouchedBy": null,
-          "status": "active",
-          "statusNote": "On the road toward the Standing Annex, offering themselves as a test of conviction in mutual exchange",
-          "bondType": null,
-          "bondStage": null,
-          "deed": null
+          "note": "Orla walks with the band now, moving toward the Standing Annex. The breaking is spoken, witnessed, and carried forward together."
         }
       ],
       "intentsHeard": [],
       "factUpdates": [
         {
           "op": "add",
-          "text": "A Syllogist named Orla Yardley has come to the road toward the Standing Annex with a breaking belief: they held for fifteen years that sealed things are mercy to destroy, but watched Loki choose understanding instead, and came to test both their own conviction and Loki's in return.",
+          "text": "Orla Yardley has accepted companionship with the band—they walk toward the Standing Annex together. The breaking belief is now openly questioned in shared space.",
           "subjectId": "orla-yardley"
         }
       ],
@@ -613,12 +584,11 @@
           "label": "The Architect",
           "kind": "person",
           "entityId": null,
-          "fact": "The architect's questions about the Hub crossing and the Null Stone have reached beyond the valley's borders—a Syllogist from the reaches came with that knowledge and with a breaking mandate born from it.",
+          "fact": "Orla Yardley came to the valley carrying a breaking mandate—a belief that sealed things unmade are mercy. They watched Loki choose understanding over breaking and came to test both their own conviction and Loki's in return.",
           "links": [
             "the-hub-crossing",
-            "the-revel-sent-to-break-the-stone",
             "the-null-stone",
-            "orla-yardley"
+            "halvex-coil"
           ]
         }
       ],
@@ -626,7 +596,13 @@
       "holdTrades": [],
       "debtOps": [],
       "exchangeOps": [],
-      "partyOps": [],
+      "partyOps": [
+        {
+          "op": "join",
+          "npcId": "orla-yardley",
+          "why": "Accepts the invitation to walk with the band toward the Standing Annex and to test convictions in shared space"
+        }
+      ],
       "generateRequest": [],
       "encounterOps": [],
       "projectOps": [],
@@ -637,14 +613,17 @@
       "unlockPrecursor": null,
       "unlockSubstrate": null,
       "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "a brief exchange on the road before continuing toward the Standing Annex"
+        "hoursPassed": 2,
+        "why": "walking steadily on the open road, about two hours of travel toward the Standing Annex"
       },
-      "moveTo": null,
+      "moveTo": {
+        "location": "The road from Kindly Rest to Standing Annex",
+        "why": "Set out from the Kindly Rest into the night, walking toward the Standing Annex with Ravel, Estry, and Orla"
+      },
       "stateOps": [],
       "itemUpdates": [],
       "deriveItem": null,
-      "imagePrompt": "The Syllogist in grey stands fully in starlight on the curved road, their face settled between sadness and relief. Behind them, Ravel and Estry watch the moment. The stars burn overhead, readable in the clear night.",
+      "imagePrompt": "Four figures on an open road under stars—a woman in green stepping into starlight with steady purpose, a younger person reading a grey-coated stranger with precision, the stranger walking with the stillness of someone who has finally set down a weight, and ahead of them all, a small brass mechanism with a raised lamp, choosing the footing into darkness.",
       "imageMedium": null,
       "newAbility": null,
       "gambitOps": null,
@@ -654,42 +633,44 @@
       "offerPromotion": null,
       "offerAcquisition": null,
       "offerIntent": null,
-      "sceneEnded": false
+      "sceneEnded": false,
+      "momentArt": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Four%20figures%20on%20an%20open%20road%20under%20stars%E2%80%94a%20woman%20in%20green%20stepping%20into%20starlight%20with%20steady%20purpose%2C%20a%20younger%20person%20reading%20a%20grey-coated%20stranger%20with%20precision%2C%20the%20stranger%20walking%20with%20the%20stillness%20of%20someone%20who%20has%20finally%20set%20down%20a%20weight%2C%20and%20ahead%20of%20them%20all%2C%20a%20small%20brass%20mechanism%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=39061&nologo=true"
     },
     "sceneState": {
-      "setting": "The road from the Kindly Rest curves outward through scrubland toward the Standing Annex, mid-autumn night, stars visible overhead. Clear sky, shadow pooling briefly at the road's curve.",
+      "setting": "The open road curving outward from the Kindly Rest toward the Standing Annex, mid-autumn night. Clear sky overhead with bright stars. The road is wide and unobstructed, lined on both sides by low scrubland brush. Shadows cast thin and sharp by starlight. The air carries the weight of the year turning.",
       "npcsPresent": [
         {
           "name": "Ravel Ash-bearer",
-          "state": "Standing in the starlight, posture eased but alert; watching the Syllogist with recognition of something tested"
+          "state": "Walking beside Loki, shoulders eased, eyes ahead on the road. Her green coat catches the starlight. Moving with steady p"
         },
         {
           "name": "Estry Krell",
-          "state": "Beside Ravel, reading the moment with quiet precision; eyes tracking Orla Yardley"
+          "state": "Walking beside Orla Yardley, reading them with precision. Eyes tracking Orla's movements and bearing. Silent but fully p"
         },
         {
           "name": "Orla Yardley",
-          "state": "Fully emerged into starlight, grey coat catching the light, face settled into something between sadness and relief; wait"
+          "state": "Walking with stillness of someone who has set down something very heavy. Grey coat, precise movements. Face settled betw"
         }
       ],
       "objects": [
-        "The road ahead, curving outward into shadow",
-        "Scrubland brush, dry and autumn-thick on both sides",
-        "The stars overhead, bright and readable in clear night"
+        "The open road ahead, curving gently",
+        "Scrubland brush on both sides, dry and autumn-thick",
+        "The stars overhead, bright and readable",
+        "Cy ahead of the group, lamp raised, choosing the footing"
       ],
       "threads": [
-        "Will Orla Yardley join the band bound at the Kindly Rest, or do they bring different purpose?",
-        "What belief does Loki hold that needs testing—and how will Orla's precision read it?",
-        "What hunger drove Orla to accept the breaking mandate in the first place?"
+        "What fully drives Orla's belief about breaking and sealing?",
+        "How will the band—and Halvex—receive Orla's presence at the Annex?",
+        "What answers wait at the Standing Annex, and what new questions will arriving together raise?"
       ]
     },
-    "beats": 3,
+    "beats": 4,
     "subPlace": null
   },
   "clock": {
     "schemaVersion": 1,
     "day": 7,
-    "hour": 21,
+    "hour": 23,
     "realAnchor": null
   },
   "companions": [
@@ -709,14 +690,14 @@
       "locationEntityId": "the-unlit-deep",
       "status": "active",
       "progress": [
-        "Sable has returned from the Unlit Deep by choice and is recovering at the Kindly Rest. She turned back from the passage of her own will. The next move—why she returned, what she found, what she will choose now—is unresolved.",
         "Sable's full testimony: the city was ending for her. She sought the Unlit Deep and its keepers of the old works. She descended the passage but turned back at the threshold, unwilling to be read completely. She now knows the question but not yet the answer.",
         "Sable names the beneficiaries: the keepers of the old works, and the Transition board itself. The question has an answer—the old work is not a machine, it *reads*. But Sable has not yet chosen her next path.",
         "Sable has named her enemy: Vestin Kray on the Transition board, who feared what she was learning about the old works. She has accepted shelter at the Standing Annex and will travel with Loki, Ravel, and Estry to continue uncovering why the city wanted her gone.",
         "Sable has named her enemy: Vestin Kray on the Transition board, who feared what she was learning about the old works. She has accepted shelter and companionship with the band. The Churn-Revellers now travel together to the Standing Annex to continue uncovering why the city wanted her gone.",
         "Loki has secured shelter and sanctuary for Sable at the Standing Annex; Sister Vreni has given her word that the Transition board will find nothing at the Kindly Rest. The band is ready to travel.",
         "Ravel and Estry have confirmed their purpose and their commitment. The band is gathering. All four will travel to the Standing Annex.",
-        "Orla Yardley arrives on the road with intent to join the band and test Loki's beliefs in return. The gathering grows."
+        "Orla Yardley arrives on the road with intent to join the band and test Loki's beliefs in return. The gathering grows.",
+        "Orla Yardley arrives on the road toward the Standing Annex with intent to join the band and test Loki's belief in understanding over breaking. The gathering grows—four now walk the road together, moving toward the Annex and toward answers."
       ],
       "aliases": [],
       "startedAt": "2026-07-24T21:30:43.637Z"
@@ -798,17 +779,32 @@
       "id": "journey-gen-the-standing-annex-88",
       "kind": "journey",
       "structured": false,
-      "status": "active",
+      "status": "resolved",
       "title": "Journey to The Standing Annex",
       "summary": "about 1.6 days on foot, by way of The Made Gate · 1 ration for the road — you carry 0 (1 short) · 0 nights in the open, 1 under a roof · the worst of the road: The Pale March Waygate (dangerous) · alone. Ready yourself — rations, your people, what you leave behind — and set out when you are ready.",
       "progress": [
         "Reached Millbrook — day 2 of the road.",
-        "Stopped at Millbrook — the road held something."
+        "Stopped at Millbrook — the road held something.",
+        "The band moves outward from the Kindly Rest onto the open road. Distance from the Kindly Rest has increased; the road curves toward Millbrook before turning outward toward the Annex's further distance. About 1.5 days remain if the pace holds.",
+        "Set down at Millbrook for a journey to The Road From Kindly Rest To Standing Annex — 1 leg walked, 2 days on the road."
       ],
       "giver": null,
       "startedAt": "2026-09-26T02:04:07.737Z",
       "startedAtDay": 5,
       "journeyDestId": "gen-the-standing-annex"
+    },
+    {
+      "id": "journey-gen-the-road-from-kindly-rest-to-standing-an-88",
+      "kind": "journey",
+      "structured": false,
+      "status": "active",
+      "title": "Journey to The Road From Kindly Rest To Standing Annex",
+      "summary": "about 1 day on foot · 1 ration for the road — you carry 0 (1 short) · 1 night in the open · the worst of the road: The Road From Kindly Rest To Standing Annex (uneasy) · alone. Ready yourself — rations, your people, what you leave behind — and set out when you are ready.",
+      "progress": [],
+      "giver": null,
+      "startedAt": "2026-09-26T02:55:02.572Z",
+      "startedAtDay": 7,
+      "journeyDestId": "gen-the-road-from-kindly-rest-to-standing-an"
     }
   ],
   "npcRegistry": {
@@ -1520,12 +1516,16 @@
       },
       "relationship": 1,
       "history": [
-        "[d7] Arrived on the road from the reaches with foreknowledge of Loki's presence and Halvex Coil's account. Came to question a belief held for fifteen years—that breaking sealed things is mercy. Watched Loki choose understanding over destruction, and that choice moved through the valley until it reached…"
+        "[d7] Arrived on the road from the reaches with foreknowledge of Loki's presence and Halvex Coil's account. Came to question a belief held for fifteen years—that breaking sealed things is mercy. Watched Loki choose understanding over destruction, and that choice moved through the valley until it reached…",
+        "[d7] Orla walks with the band now, moving toward the Standing Annex. The breaking is spoken, witnessed, and carried forward together."
       ],
       "knownFacts": [
         "Held a belief for fifteen years without testing it: that old works unmade are old works ended",
         "Accepted a breaking mandate from Halvex Coil through trusted channels",
-        "Watched the choice to listen rather than destroy move through the valley's quiet places"
+        "Watched the choice to listen rather than destroy move through the valley's quiet places",
+        "Came to the valley carrying a breaking mandate—a belief that sealed things should be destroyed as mercy",
+        "Watched Loki choose understanding over breaking at the Hub crossing and felt that belief crack under the weight of what that choice meant",
+        "Came to the road toward the Standing Annex to test both their own conviction and Loki's in return"
       ],
       "skillsObserved": [
         "Carries conviction with precision",
@@ -1546,7 +1546,7 @@
         "locationId": "millbrook",
         "day": 7
       },
-      "met": 1
+      "met": 2
     }
   },
   "placeMemory": {
@@ -2061,10 +2061,6 @@
     "turnsSinceOffer": 0,
     "recentOffers": [
       {
-        "thing": "Vestin Kray emerges as a named antagonist with clear motive and position",
-        "from": "Sable's honest naming of who benefited from her silence"
-      },
-      {
         "thing": "Sister Vreni's promise to listen and her acknowledgment that the Standing Annex holds what the band is becoming",
         "from": "Loki speaking plainly instead of seeking to persuade—the house responds to honesty the way it responds to need"
       },
@@ -2079,6 +2075,10 @@
       {
         "thing": "Orla Yardley, a Syllogist who has broken their own conviction and come to test Loki's in exchange",
         "from": "the breaking mandate that Halvex sent, and the choice Loki made to listen rather than destroy—the valley carries word of this, and Orla…"
+      },
+      {
+        "thing": "Orla Yardley accepts the invitation to walk and speak—the breaking mandate is now openly questioned in the band's presence",
+        "from": "Loki's plainness and Orla's own breaking, tested on the road"
       }
     ],
     "wantProgress": {
@@ -11994,7 +11994,8 @@
           "[d5] Someone in the lower Annex called by this title is quietly asking after travelers carrying knowledge about sealed gates and the Hub crossing. He paid coin for the asking, which suggests serious concern—not mere curiosity.",
           "[d7] Has drawn the attention of more than the hired striker—at minimum one Syllogist of the reaches knows of his work and his questions about the Hub crossing and the Null Stone's breaking.",
           "[d7] A Syllogist from the reaches carries questions about the Hub crossing and the Null Stone. They waited on the road toward the Standing Annex with foreknowledge of Loki's presence. The lower Annex's questions about the sealed seam have reached beyond the valley's borders.",
-          "[d7] The architect's questions about the Hub crossing and the Null Stone have reached beyond the valley's borders—a Syllogist from the reaches came with that knowledge and with a breaking mandate born from it."
+          "[d7] The architect's questions about the Hub crossing and the Null Stone have reached beyond the valley's borders—a Syllogist from the reaches came with that knowledge and with a breaking mandate born from it.",
+          "[d7] Orla Yardley came to the valley carrying a breaking mandate—a belief that sealed things unmade are mercy. They watched Loki choose understanding over breaking and came to test both their own conviction and Loki's in return."
         ],
         "links": [
           "the-hub-crossing",
@@ -12951,18 +12952,19 @@
     "deferredMysteries": []
   },
   "tendencies": {
-    "devotion": 0.7180886362623348,
-    "cerebral": 16.2345669441978,
-    "social": 18.324560607581937,
-    "strategic": 11.536896992751187,
-    "cautious": 5.045826260312622,
-    "amorous": 6.776039700230759,
-    "generous": 5.549049235330308,
-    "ruthless": 0.17986255614843422,
-    "risky": 0.14699179475640736,
-    "patient": 0.04014081571767869,
-    "deception": 0.04672598869003349,
-    "carousing": 1
+    "devotion": 0.7001364203557764,
+    "cerebral": 15.828702770592857,
+    "social": 17.86644659239239,
+    "strategic": 11.248474567932407,
+    "cautious": 4.919680603804807,
+    "amorous": 6.60663870772499,
+    "generous": 5.410323004447051,
+    "ruthless": 0.17536599224472335,
+    "risky": 0.1433169998874972,
+    "patient": 0.03913729532473672,
+    "deception": 0.045557838972782656,
+    "carousing": 0.975,
+    "leadership": 2
   },
   "aptitudes": [
     "strategist",
@@ -12972,7 +12974,7 @@
     "faithful",
     "charmer"
   ],
-  "actionCount": 205,
+  "actionCount": 206,
   "grantsVersion": 1,
   "precursorAccess": [
     "address_sense"
@@ -13050,6 +13052,14 @@
   "nativeGrantsVersion": 2,
   "reconcileVersion": 83,
   "gallery": [
+    {
+      "kind": "moment",
+      "prompt": "Four figures on an open road under stars—a woman in green stepping into starlight with steady purpose, a younger person reading a grey-coated stranger with precision, the stranger walking with the sti",
+      "url": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Four%20figures%20on%20an%20open%20road%20under%20stars%E2%80%94a%20woman%20in%20green%20stepping%20into%20starlight%20with%20steady%20purpose%2C%20a%20younger%20person%20reading%20a%20grey-coated%20stranger%20with%20precision%2C%20the%20stranger%20walking%20with%20the%20stillness%20of%20someone%20who%20has%20finally%20set%20down%20a%20weight%2C%20and%20ahead%20of%20them%20all%2C%20a%20small%20brass%20mechanism%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=39061&nologo=true",
+      "caption": "On the road toward the Standing Annex, Orla Yardley joins the gathered band—a Syllogist ca",
+      "worldDay": 88,
+      "at": "2026-09-26T02:55:02.586Z"
+    },
     {
       "kind": "moment",
       "prompt": "A tall figure in grey standing in the curve of a dark road, stars sharp above, scrubland brush black on either side. Their face carries both the calm of precision and the fracture of certainty breakin",
@@ -14042,8 +14052,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790391059014,
-  "rev": 921,
+  "updatedAt": 1790391302586,
+  "rev": 923,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -14973,6 +14983,46 @@
           "longitude": 251.31899999999996,
           "depth": 0
         }
+      },
+      "gen-the-road-from-kindly-rest-to-standing-an": {
+        "id": "gen-the-road-from-kindly-rest-to-standing-an",
+        "name": "The Road From Kindly Rest To Standing Annex",
+        "regionId": "valley",
+        "descriptionSeed": "",
+        "appearance": "",
+        "tags": [
+          "transitional"
+        ],
+        "connections": [
+          "millbrook"
+        ],
+        "_mintedAs": "transit",
+        "dangerLevel": 1,
+        "_gen": {
+          "type": "location",
+          "tier": "fresh",
+          "engagementScore": 0,
+          "birthWeight": 1,
+          "rating": null,
+          "attentionHistory": [],
+          "createdDay": 7,
+          "provenance": {
+            "playerKey": "player-s9z9u1",
+            "characterId": "char-mrum8y4d",
+            "locationId": "millbrook",
+            "day": null,
+            "hint": "transit"
+          }
+        },
+        "map": {
+          "x": 384.51298796101713,
+          "y": 222.21885428108138
+        },
+        "worldPos": {
+          "colatitude": 20.017,
+          "longitude": 250.375,
+          "depth": 0
+        }
       }
     },
     "arc": {
@@ -15221,10 +15271,10 @@
     {
       "id": "sess-19",
       "startedAt": "2026-09-26T00:51:07.826Z",
-      "lastAt": "2026-09-26T02:39:13.461Z",
+      "lastAt": "2026-09-26T02:55:02.562Z",
       "startDay": 88,
       "endDay": 88,
-      "beats": 5
+      "beats": 6
     }
   ],
   "establishedFacts": [
@@ -15359,11 +15409,17 @@
       "text": "A Syllogist named Orla Yardley has come to the road toward the Standing Annex with a breaking belief: they held for fifteen years that sealed things are mercy to destroy, but watched Loki choose understanding instead, and came to test both their own conviction and Loki's in return.",
       "day": 7,
       "subjectId": "orla-yardley"
+    },
+    {
+      "id": "orla-yardley",
+      "text": "Orla Yardley has accepted companionship with the band—they walk toward the Standing Annex together. The breaking belief is now openly questioned in shared space.",
+      "day": 7,
+      "subjectId": "orla-yardley"
     }
   ],
   "_opLedger": {
     "offer": {
-      "applied": 46,
+      "applied": 47,
       "rejected": 2,
       "lastWhy": "rejected-shape"
     },
@@ -15374,34 +15430,34 @@
     },
     "moveTo": {
       "applied": 0,
-      "rejected": 2,
-      "lastWhy": "refused-unearned"
+      "rejected": 3,
+      "lastWhy": "journey-planned"
     }
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 236,
-    "choices": 236,
-    "characterDeltas": 120,
-    "scene": 236,
+    "sceneSummary": 237,
+    "choices": 237,
+    "characterDeltas": 121,
+    "scene": 237,
     "placeUpdates": 28,
-    "codexUpdates": 137,
-    "timeOps": 189,
-    "offer": 41,
+    "codexUpdates": 138,
+    "timeOps": 190,
+    "offer": 42,
     "generateRequest": 7,
-    "sceneEnded": 105,
-    "npcUpdates": 188,
-    "moveTo": 8,
-    "gambitApt": 64,
+    "sceneEnded": 106,
+    "npcUpdates": 189,
+    "moveTo": 9,
+    "gambitApt": 65,
     "deeds": 14,
-    "questUpdates": 42,
+    "questUpdates": 43,
     "standingOps": 4,
-    "factUpdates": 18,
+    "factUpdates": 19,
     "stageOps": 7,
     "encounterOps": 9,
     "ledgerEvents": 12,
     "newEncounter": 3,
-    "imagePrompt": 37,
+    "imagePrompt": 38,
     "scene_ended": 1,
     "stateOps": 3,
     "_engineClosedScene": 4,
@@ -15409,10 +15465,10 @@
     "intentsHeard": 8,
     "delegateOps": 1,
     "scene_summary": 1,
-    "partyOps": 3,
+    "partyOps": 4,
     "bandOps": 1
   },
-  "_opTurns": 236,
+  "_opTurns": 237,
   "customAbilities": {
     "mirror-bright": {
       "id": "mirror-bright",
@@ -15690,7 +15746,8 @@
     "gen-the-waygate-path",
     "gen-the-standing-annex",
     "the_kindly_rest",
-    "millbrook"
+    "millbrook",
+    "gen-the-road-from-kindly-rest-to-standing-an"
   ],
   "_devActions": [
     {
@@ -16197,6 +16254,9 @@
     ],
     "gen-the-made-gate": [
       "gen-the-standing-annex"
+    ],
+    "millbrook": [
+      "gen-the-road-from-kindly-rest-to-standing-an"
     ]
   },
   "ladderPaid": {
@@ -16396,7 +16456,9 @@
     "analyze": 1,
     "insight": 1,
     "discipline": 1,
-    "gamble": 1
+    "gamble": 1,
+    "lead": 1,
+    "rally": 1
   },
   "aptitudeEarnCount": {
     "faithful": 1,
@@ -17243,7 +17305,7 @@
     }
   },
   "_opUnknown": {
-    "sceneSummary": 63,
+    "sceneSummary": 64,
     "scene_summary": 1
   },
   "_bandNotes": null,
@@ -17655,9 +17717,9 @@
     "back": []
   },
   "journey": {
-    "id": "journey-gen-the-standing-annex-88",
-    "destId": "gen-the-standing-annex",
-    "destName": "The Standing Annex",
+    "id": "journey-gen-the-road-from-kindly-rest-to-standing-an-88",
+    "destId": "gen-the-road-from-kindly-rest-to-standing-an",
+    "destName": "The Road From Kindly Rest To Standing Annex",
     "fromId": "millbrook",
     "fromName": "Millbrook",
     "createdWorldDay": 88,
@@ -17665,79 +17727,31 @@
       {
         "key": "road-0",
         "kind": "road",
-        "label": "on foot, by way of The Made Gate",
-        "days": 1.6,
+        "label": "on foot",
+        "days": 1,
         "energy": 0,
         "path": [
           "millbrook",
-          "gen-waygate",
-          "gen-ashwarden-march-road",
-          "gen-stillwater-s-trouble",
-          "gen-the-made-gate",
-          "gen-the-standing-annex"
+          "gen-the-road-from-kindly-rest-to-standing-an"
         ],
         "gate": null,
         "worst": {
-          "id": "gen-waygate",
-          "name": "The Pale March Waygate",
-          "level": 2
+          "id": "gen-the-road-from-kindly-rest-to-standing-an",
+          "name": "The Road From Kindly Rest To Standing Annex",
+          "level": 1
         },
         "nights": 1,
-        "roofs": 1,
-        "camps": 0,
+        "roofs": 0,
+        "camps": 1,
         "legs": [
           {
             "i": 0,
             "fromId": "millbrook",
-            "toId": "gen-waygate",
+            "toId": "gen-the-road-from-kindly-rest-to-standing-an",
             "fromName": "Millbrook",
-            "toName": "The Pale March Waygate",
-            "days": 0.23872725719745275,
-            "danger": 2,
-            "roof": true,
-            "gate": null
-          },
-          {
-            "i": 1,
-            "fromId": "gen-waygate",
-            "toId": "gen-ashwarden-march-road",
-            "fromName": "The Pale March Waygate",
-            "toName": "The Ashwarden March Road",
-            "days": 0.0844525185135906,
-            "danger": 2,
-            "roof": true,
-            "gate": null
-          },
-          {
-            "i": 2,
-            "fromId": "gen-ashwarden-march-road",
-            "toId": "gen-stillwater-s-trouble",
-            "fromName": "The Ashwarden March Road",
-            "toName": "Stillwater's Trouble",
-            "days": 0.08025436206565408,
-            "danger": 2,
-            "roof": true,
-            "gate": null
-          },
-          {
-            "i": 3,
-            "fromId": "gen-stillwater-s-trouble",
-            "toId": "gen-the-made-gate",
-            "fromName": "Stillwater's Trouble",
-            "toName": "The Made Gate",
-            "days": 0.22067221793154637,
-            "danger": 2,
-            "roof": true,
-            "gate": null
-          },
-          {
-            "i": 4,
-            "fromId": "gen-the-made-gate",
-            "toId": "gen-the-standing-annex",
-            "fromName": "The Made Gate",
-            "toName": "The Standing Annex",
-            "days": 0.9998460789114456,
-            "danger": 2,
+            "toName": "The Road From Kindly Rest To Standing Annex",
+            "days": 1.0004702294901273,
+            "danger": 1,
             "roof": false,
             "gate": null
           }
@@ -17751,46 +17765,7 @@
       "carried": 0
     },
     "company": [],
-    "crafts": {},
-    "underway": {
-      "startedWorldDay": 88,
-      "fromId": "the_kindly_rest",
-      "fromName": "The Kindly Rest",
-      "wayKey": "road-0",
-      "legIndex": 0,
-      "daysWalked": 1.6248307809025717,
-      "countedDays": 2,
-      "foodDaysLeft": 0,
-      "rationsEaten": 0,
-      "foraged": 1,
-      "hungryDays": 1,
-      "healthTaken": 0,
-      "legs": [
-        {
-          "i": 0,
-          "fromName": "The Kindly Rest",
-          "toId": "millbrook",
-          "toName": "Millbrook",
-          "days": 1.6248307809025717,
-          "danger": 0,
-          "roof": true
-        }
-      ],
-      "stops": [
-        {
-          "atId": "millbrook",
-          "atName": "Millbrook",
-          "why": "encounter",
-          "note": null,
-          "worldDay": 88,
-          "daysWalked": 1.6,
-          "legsWalked": 1
-        }
-      ],
-      "pending": null,
-      "inGambit": null,
-      "replanned": 1
-    }
+    "crafts": {}
   },
   "allyOrders": {
     "traveler-woman": {
@@ -17803,7 +17778,16 @@
   "aurasOff": {
     "coil": true
   },
-  "pendingCompanyOffers": [],
+  "pendingCompanyOffers": [
+    {
+      "npcId": "orla-yardley",
+      "name": "Orla Yardley",
+      "roles": [
+        "ally"
+      ],
+      "why": "Accepts the invitation to walk with the band toward the Standing Annex and to test convictions in shared space"
+    }
+  ],
   "powerState": {
     "power_gralloch_crown": {
       "known": {

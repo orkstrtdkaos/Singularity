@@ -426,7 +426,8 @@
         "[d1] Jaw settled — confirmed shape, no comment. Still watching the middle distance.",
         "[d1] Read the debt cord's shape plainly — named the restricted creditor as inside standing, the seven-year hold as a leash, and the real question as what they wanted Maret doing on that road at that moment.",
         "[d1] Heard Maret's hard stop and said nothing — processing it the same way he processes a fight's tell.",
-        "[d1] Acknowledged Brynjar's departure with a lifted chin — no words needed."
+        "[d1] Acknowledged Brynjar's departure with a lifted chin — no words needed.",
+        "[d3] Caught up with Brynjar on the road north and is travelling with him again."
       ],
       "knownFacts": [
         "Route-knowledge before a delivery means someone already knew the debt existed, the cord was moving, and the road it would take — planning, not surveillance; inside information, not hired eyes.",
@@ -449,14 +450,14 @@
       "status": "active",
       "gender": "man",
       "pronouns": "he/him",
-      "statusNote": "At the Marchward fire-pit with Maret, watching the dark after Brynjar's departure.",
+      "statusNote": "Travelling with Brynjar.",
       "domains": {
         "primary": "marcher"
       },
       "domainsSource": "derived",
       "lastSeen": {
-        "locationId": "gen-the-colosseum",
-        "day": 1
+        "locationId": "gen-the-waygate",
+        "day": 3
       },
       "aliases": [
         "Redline Warrior"
@@ -482,7 +483,8 @@
         "[d1] Returned from the Stillhold with empty hands and a direct walk toward Brynjar's position — she had noted it. Confirmed the cord is with the record-hall and the case is formally closed. Will not say what the record-hall told her on the road.",
         "[d1] Watching the debt encounter with characteristic stillness — no move to intervene.",
         "[d1] Told Brynjar what the record-hall revealed: a restricted creditor on a seven-year-old debt marker, and a clerk who knew the name before reading it. Has said what she came to say.",
-        "[d1] Named herself as the cord's debtor — a seven-year-old debt with a restricted creditor, a clerk who knew her name before reading it, and no answer offered on the way out."
+        "[d1] Named herself as the cord's debtor — a seven-year-old debt with a restricted creditor, a clerk who knew her name before reading it, and no answer offered on the way out.",
+        "[d3] Caught up with Brynjar on the road north and is travelling with him again."
       ],
       "knownFacts": [
         "The cord has been delivered to the record-hall and the debt case is formally closed on her end",
@@ -504,14 +506,14 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "At the fire-pit, Marchward's edge — has spoken everything she came to say; waiting on what Brynjar does with it.",
+      "statusNote": "Travelling with Brynjar.",
       "domains": {
         "primary": "stillhold"
       },
       "domainsSource": "role",
       "lastSeen": {
-        "locationId": "gen-the-colosseum",
-        "day": 1
+        "locationId": "gen-the-waygate",
+        "day": 3
       },
       "_filledFromGenerate": true,
       "_mergedFrom": "maret-threnwick",
@@ -8239,7 +8241,28 @@
     "creature": {},
     "item": {}
   },
-  "company": [],
+  "company": [
+    {
+      "npcId": "ragnar-solmyr",
+      "roles": [
+        "ally"
+      ],
+      "teaches": null,
+      "liaisonFor": null,
+      "joinedDay": 1,
+      "_repair": "repaired 2026-09-25 (Aevi, at Erik's request): walked with Brynjar from the Stillhold to the Marchward on day 1, but the party was never recorded, so the story left them at the fire-pit"
+    },
+    {
+      "npcId": "sera",
+      "roles": [
+        "ally"
+      ],
+      "teaches": null,
+      "liaisonFor": null,
+      "joinedDay": 1,
+      "_repair": "repaired 2026-09-25 (Aevi, at Erik's request): walked with Brynjar from the Stillhold to the Marchward on day 1, but the party was never recorded, so the story left them at the fire-pit"
+    }
+  ],
   "_pinsInitialized": true,
   "regionsKnown": {
     "riven_marches": 39,

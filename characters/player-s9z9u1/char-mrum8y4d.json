@@ -374,7 +374,210 @@
     "At the Kindly Rest, Loki speaks plainly with Sister Vreni about the Churn-Revellers and their purpose. Vreni confirms the house's shelter and silence, and promises to listen when answers return."
   ],
   "currentLocationId": "millbrook",
-  "activeScene": null,
+  "activeScene": {
+    "locationId": "millbrook",
+    "turns": [
+      {
+        "player": null,
+        "summary": "On the road from the Kindly Rest toward Millbrook, a Syllogist waits to challenge something Loki believes, and to offer the reverse: a belief they themselves have held that breaks when questioned.",
+        "narration": "You step out from the Kindly Rest into the mid-autumn night, and the air carries the weight of the year turning—everything asking itself whether it will hold through winter. The sky above Millbrook is clear enough to read by, and the road ahead splits toward the Standing Annex curves gently outward through scrubland and low brush.\n\nA figure emerges from the shadowed reach where the road bends—not a threat, but someone who has been waiting at the margins. They are tall and narrow, dressed in the quiet grey of someone who moves between communities, and their face carries the particular calm of a person who has just finished an argument with themselves. They do not draw a weapon. They simply wait, watching you with the kind of attention that makes it plain they were expecting you specifically.\n\n\"You carry something from the Deep,\" they say plainly. Not as an accusation—as a statement being offered for your consideration. \"The orchestrator who was sent to break the stone. Halvex Coil. He told us what happened at the Hub crossing, and what you told him about understanding instead of breaking.\" They pause. A breath. \"I came to ask you something I have believed was true for fifteen years. And I came to tell you that you were right about it, and I was wrong.\""
+      }
+    ],
+    "lastTurn": {
+      "narration": "You step out from the Kindly Rest into the mid-autumn night, and the air carries the weight of the year turning—everything asking itself whether it will hold through winter. The sky above Millbrook is clear enough to read by, and the road ahead splits toward the Standing Annex curves gently outward through scrubland and low brush.\n\nA figure emerges from the shadowed reach where the road bends—not a threat, but someone who has been waiting at the margins. They are tall and narrow, dressed in the quiet grey of someone who moves between communities, and their face carries the particular calm of a person who has just finished an argument with themselves. They do not draw a weapon. They simply wait, watching you with the kind of attention that makes it plain they were expecting you specifically.\n\n\"You carry something from the Deep,\" they say plainly. Not as an accusation—as a statement being offered for your consideration. \"The orchestrator who was sent to break the stone. Halvex Coil. He told us what happened at the Hub crossing, and what you told him about understanding instead of breaking.\" They pause. A breath. \"I came to ask you something I have believed was true for fifteen years. And I came to tell you that you were right about it, and I was wrong.\"",
+      "sceneSummary": "On the road from the Kindly Rest toward Millbrook, a Syllogist waits to challenge something Loki believes, and to offer the reverse: a belief they themselves have held that breaks when questioned.",
+      "choices": [
+        {
+          "label": "Ask them to speak plainly—what belief, and what changed their mind?",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "falsehood_truth": 0.3,
+            "emotional_logical": -0.2
+          },
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study",
+            "negotiate"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use Appetite-Sense to read what they are refusing to admit—what hunger drives this opening?",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "falsehood_truth": -0.2,
+            "concrete_abstract": 0.3
+          },
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "appetite_sense",
+          "energyCost": 2,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Turn the question back on them—if they came to break a belief, let them. What is it?",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "falsehood_truth": 0.4,
+            "emotional_logical": 0.1
+          },
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "negotiate",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        }
+      ],
+      "deeds": [],
+      "characterDeltas": {},
+      "ledgerEvents": [],
+      "questUpdates": [],
+      "standingOps": [],
+      "delegateOps": [],
+      "jobOps": [],
+      "arcOps": [],
+      "adoptSchool": null,
+      "offer": {
+        "thing": "a Syllogist who has come to the margins of Millbrook, waiting on the road from the Kindly Rest",
+        "from": "the echoes of what Halvex Coil has carried back to those who sent him—the story of understanding instead of breaking has reached the people who live by logic and precision"
+      },
+      "stageOps": [],
+      "scene": {
+        "setting": "The road curves outward from Millbrook toward the Standing Annex, scrubland and low brush on either side. Clear mid-autumn night, stars visible overhead. The figure stands at a bend where shadow pools briefly before the road climbs again.",
+        "npcsPresent": [
+          {
+            "name": "The Syllogist",
+            "state": "Standing in the road, waiting with an expression of careful calm, hands visible and open at their sides"
+          }
+        ],
+        "objects": [
+          "The road ahead, curving gently outward",
+          "Scrubland brush on either side, dry and autumn-thick"
+        ],
+        "threads": [
+          "Who sent this person, and how do they know Halvex's account?",
+          "What belief do they carry that breaks under scrutiny?",
+          "What do they want to break in what Loki believes?",
+          "How much of the lower Annex's attention has the Null Stone incident drawn?"
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "meet",
+          "npcId": "syllogist-of-the-margins",
+          "name": "Unmet yet",
+          "role": "a Syllogist traveling between the reaches",
+          "age": 47,
+          "sex": "male",
+          "gender": "man",
+          "pronouns": "he/him",
+          "description": "Tall and narrow, dressed in quiet grey. Face bearing the particular calm of someone who has just finished an argument with themselves. Eyes that carry precision and a recent breaking.",
+          "note": "Emerged from the shadows of the road with foreknowledge of Loki's presence and Halvex's account. Came to question a belief and to offer that their own held belief has shattered.",
+          "learned": [
+            "Connected to Halvex Coil's circle—knows of the Null Stone, the breaking mandate, and what Loki taught instead",
+            "Practices the Syllogist's discipline: precision, logic, willingness to follow an argument to its end",
+            "Has held a belief for fifteen years that they now know to be false"
+          ],
+          "status": "active",
+          "statusNote": "Standing on the road in mid-autumn night, waiting for Loki to emerge from the Kindly Rest"
+        }
+      ],
+      "intentsHeard": [],
+      "factUpdates": [],
+      "placeUpdates": [],
+      "discovery": null,
+      "codexUpdates": [
+        {
+          "topic": "the-architect-in-the-lower-annex",
+          "label": "The Architect",
+          "kind": "person",
+          "fact": "Has drawn the attention of more than the hired striker—at minimum one Syllogist of the reaches knows of his work and his questions about the Hub crossing and the Null Stone's breaking.",
+          "links": [
+            "the-hub-crossing",
+            "the-revel-sent-to-break-the-stone",
+            "halvex-coil"
+          ]
+        },
+        {
+          "topic": "syllogist-tradition",
+          "label": "The Syllogists",
+          "kind": "faction",
+          "fact": "A tradition that prizes precision and the willingness to follow an argument to its breaking point. At least one of their number travels the road between the reaches, carrying both certainties and willingness to abandon them when a hole is found.",
+          "links": [
+            "the-hub-crossing",
+            "halvex-coil"
+          ]
+        }
+      ],
+      "holdingOps": [],
+      "holdTrades": [],
+      "debtOps": [],
+      "exchangeOps": [],
+      "partyOps": [],
+      "generateRequest": [],
+      "encounterOps": [],
+      "projectOps": [],
+      "bandOps": [],
+      "strikeOps": [],
+      "deathOps": [],
+      "newEncounter": null,
+      "unlockPrecursor": null,
+      "unlockSubstrate": null,
+      "timeOps": {
+        "hoursPassed": 0.5,
+        "why": "Evening at the Kindly Rest, then the walk from the door to the road bend"
+      },
+      "moveTo": null,
+      "stateOps": [],
+      "imagePrompt": "A tall figure in grey standing in the curve of a dark road, stars sharp above, scrubland brush black on either side. Their face carries both the calm of precision and the fracture of certainty breaking. Loki emerging from the lit door of the Kindly Rest behind them—the two figures separated by a stretch of road and a question neither has yet spoken aloud.",
+      "imageMedium": null,
+      "newAbility": null,
+      "gambitOps": null,
+      "gambitApt": false,
+      "sceneEnded": false,
+      "momentArt": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/A%20tall%20figure%20in%20grey%20standing%20in%20the%20curve%20of%20a%20dark%20road%2C%20stars%20sharp%20above%2C%20scrubland%20brush%20black%20on%20either%20side.%20Their%20face%20carries%20both%20the%20calm%20of%20precision%20and%20the%20fracture%20of%20certainty%20breaking.%20Loki%20emerging%20from%20the%20lit%20door%20of%20the%20Kindly%20Rest%20behind%20them%E2%80%94the%20two%20figures%20separated%20by%20a%20str%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=51729&nologo=true"
+    },
+    "sceneState": {
+      "setting": "The road curves outward from Millbrook toward the Standing Annex, scrubland and low brush on either side. Clear mid-autumn night, stars visible overhead. The figure stands at a bend where shadow pools briefly before the road climbs again.",
+      "npcsPresent": [
+        {
+          "name": "The Syllogist",
+          "state": "Standing in the road, waiting with an expression of careful calm, hands visible and open at their sides"
+        }
+      ],
+      "objects": [
+        "The road ahead, curving gently outward",
+        "Scrubland brush on either side, dry and autumn-thick"
+      ],
+      "threads": [
+        "Who sent this person, and how do they know Halvex's account?",
+        "What belief do they carry that breaks under scrutiny?",
+        "What do they want to break in what Loki believes?",
+        "How much of the lower Annex's attention has the Null Stone incident drawn?"
+      ]
+    },
+    "beats": 1,
+    "subPlace": null
+  },
   "clock": {
     "schemaVersion": 1,
     "day": 7,
@@ -491,7 +694,8 @@
       "title": "Journey to The Standing Annex",
       "summary": "On the road: 1 of 6 legs walked, 2 days out · you are at Millbrook · about 1.6 days ahead, 1 ration for it — you carry 0 (1 short) · 1 day walked hungry so far.",
       "progress": [
-        "Reached Millbrook — day 2 of the road."
+        "Reached Millbrook — day 2 of the road.",
+        "Stopped at Millbrook — the road held something."
       ],
       "giver": null,
       "startedAt": "2026-09-26T02:04:07.737Z",
@@ -1158,6 +1362,44 @@
         "The Younger Person"
       ],
       "nameRevealed": true
+    },
+    "syllogist-of-the-margins": {
+      "id": "syllogist-of-the-margins",
+      "name": "Unmet yet",
+      "nameUnknown": true,
+      "trueName": "Orla Yardley",
+      "role": "a Syllogist traveling between the reaches",
+      "fullName": "Orla Florence Yardley",
+      "description": "Tall and narrow, dressed in quiet grey. Face bearing the particular calm of someone who has just finished an argument with themselves. Eyes that carry precision and a recent breaking.",
+      "firstMet": {
+        "locationId": "millbrook",
+        "day": 7
+      },
+      "relationship": 0,
+      "history": [
+        "[d7] Emerged from the shadows of the road with foreknowledge of Loki's presence and Halvex's account. Came to question a belief and to offer that their own held belief has shattered."
+      ],
+      "knownFacts": [
+        "Connected to Halvex Coil's circle—knows of the Null Stone, the breaking mandate, and what Loki taught instead",
+        "Practices the Syllogist's discipline: precision, logic, willingness to follow an argument to its end",
+        "Has held a belief for fifteen years that they now know to be false"
+      ],
+      "skillsObserved": [],
+      "status": "active",
+      "sex": "male",
+      "gender": "man",
+      "pronouns": "he/him",
+      "age": 47,
+      "statusNote": "Standing on the road in mid-autumn night, waiting for Loki to emerge from the Kindly Rest",
+      "domains": {
+        "primary": "syllogist"
+      },
+      "domainsSource": "role",
+      "lastSeen": {
+        "locationId": "millbrook",
+        "day": 7
+      },
+      "met": 1
     }
   },
   "placeMemory": {
@@ -1672,10 +1914,6 @@
     "turnsSinceOffer": 0,
     "recentOffers": [
       {
-        "thing": "Ravel and Estry arriving at the Kindly Rest with Sable in the early morning—a rescue that was not a rescue, a return that was chosen",
-        "from": "Ravel's hunger to understand what Sable became, and the need to bring her somewhere safe to ask it"
-      },
-      {
         "thing": "A traveler passes on the road outside — you catch the sound of boots and a weathered voice calling a greeting to someone at the Rest's…",
         "from": "the ambient grace of the place and road — a stranger sharing passage freely, no price asked"
       },
@@ -1690,6 +1928,10 @@
       {
         "thing": "Sister Vreni's promise to listen and her acknowledgment that the Standing Annex holds what the band is becoming",
         "from": "Loki speaking plainly instead of seeking to persuade—the house responds to honesty the way it responds to need"
+      },
+      {
+        "thing": "a Syllogist who has come to the margins of Millbrook, waiting on the road from the Kindly Rest",
+        "from": "the echoes of what Halvex Coil has carried back to those who sent him—the story of understanding instead of breaking has reached the…"
       }
     ],
     "wantProgress": {
@@ -11562,16 +11804,18 @@
         "label": "The Architect",
         "kind": "person",
         "facts": [
-          "[d5] Someone in the lower Annex called by this title is quietly asking after travelers carrying knowledge about sealed gates and the Hub crossing. He paid coin for the asking, which suggests serious concern—not mere curiosity."
+          "[d5] Someone in the lower Annex called by this title is quietly asking after travelers carrying knowledge about sealed gates and the Hub crossing. He paid coin for the asking, which suggests serious concern—not mere curiosity.",
+          "[d7] Has drawn the attention of more than the hired striker—at minimum one Syllogist of the reaches knows of his work and his questions about the Hub crossing and the Null Stone's breaking."
         ],
         "links": [
           "the-hub-crossing",
           "the-revel-sent-to-break-the-stone",
-          "the-taken-from-the-city"
+          "the-taken-from-the-city",
+          "halvex-coil"
         ],
         "aliases": [],
         "createdDay": 5,
-        "updatedDay": 5
+        "updatedDay": 7
       },
       "the-pressureholt-enginewright": {
         "id": "the-pressureholt-enginewright",
@@ -12133,6 +12377,34 @@
         "createdDay": 7,
         "entityId": "millbrook",
         "updatedDay": 7
+      },
+      "syllogist-of-the-margins": {
+        "id": "syllogist-of-the-margins",
+        "label": "Unmet yet",
+        "kind": "person",
+        "facts": [
+          "[d7] a Syllogist traveling between the reaches"
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": 7,
+        "entityId": "syllogist-of-the-margins",
+        "updatedDay": 7
+      },
+      "syllogist-tradition": {
+        "id": "syllogist-tradition",
+        "label": "The Syllogists",
+        "kind": "faction",
+        "facts": [
+          "[d7] A tradition that prizes precision and the willingness to follow an argument to its breaking point. At least one of their number travels the road between the reaches, carrying both certainties and willingness to abandon them when a hole is found."
+        ],
+        "links": [
+          "the-hub-crossing",
+          "halvex-coil"
+        ],
+        "aliases": [],
+        "createdDay": 7,
+        "updatedDay": 7
       }
     },
     "mergeUndo": [
@@ -12576,6 +12848,14 @@
   "nativeGrantsVersion": 2,
   "reconcileVersion": 83,
   "gallery": [
+    {
+      "kind": "moment",
+      "prompt": "A tall figure in grey standing in the curve of a dark road, stars sharp above, scrubland brush black on either side. Their face carries both the calm of precision and the fracture of certainty breakin",
+      "url": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/A%20tall%20figure%20in%20grey%20standing%20in%20the%20curve%20of%20a%20dark%20road%2C%20stars%20sharp%20above%2C%20scrubland%20brush%20black%20on%20either%20side.%20Their%20face%20carries%20both%20the%20calm%20of%20precision%20and%20the%20fracture%20of%20certainty%20breaking.%20Loki%20emerging%20from%20the%20lit%20door%20of%20the%20Kindly%20Rest%20behind%20them%E2%80%94the%20two%20figures%20separated%20by%20a%20str%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=51729&nologo=true",
+      "caption": "On the road from the Kindly Rest toward Millbrook, a Syllogist waits to challenge somethin",
+      "worldDay": 88,
+      "at": "2026-09-26T02:05:11.288Z"
+    },
     {
       "kind": "battle",
       "prompt": "Two figures—a collector in open stance and a verist in bare light—face each other at The Told Ground, the collector's hands empty and firm, the verist advancing with an uncovered truth; neither yields",
@@ -13560,8 +13840,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790388285559,
-  "rev": 907,
+  "updatedAt": 1790388311331,
+  "rev": 910,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -14739,10 +15019,10 @@
     {
       "id": "sess-19",
       "startedAt": "2026-09-26T00:51:07.826Z",
-      "lastAt": "2026-09-26T02:02:42.817Z",
+      "lastAt": "2026-09-26T02:05:11.276Z",
       "startDay": 88,
       "endDay": 88,
-      "beats": 2
+      "beats": 3
     }
   ],
   "establishedFacts": [
@@ -14857,7 +15137,7 @@
   ],
   "_opLedger": {
     "offer": {
-      "applied": 43,
+      "applied": 44,
       "rejected": 2,
       "lastWhy": "rejected-shape"
     },
@@ -14874,19 +15154,19 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 233,
-    "choices": 233,
+    "sceneSummary": 234,
+    "choices": 234,
     "characterDeltas": 118,
-    "scene": 233,
+    "scene": 234,
     "placeUpdates": 28,
-    "codexUpdates": 134,
-    "timeOps": 186,
-    "offer": 38,
+    "codexUpdates": 135,
+    "timeOps": 187,
+    "offer": 39,
     "generateRequest": 7,
-    "sceneEnded": 102,
-    "npcUpdates": 185,
+    "sceneEnded": 103,
+    "npcUpdates": 186,
     "moveTo": 8,
-    "gambitApt": 61,
+    "gambitApt": 62,
     "deeds": 13,
     "questUpdates": 40,
     "standingOps": 4,
@@ -14895,7 +15175,7 @@
     "encounterOps": 9,
     "ledgerEvents": 10,
     "newEncounter": 3,
-    "imagePrompt": 35,
+    "imagePrompt": 36,
     "scene_ended": 1,
     "stateOps": 3,
     "_engineClosedScene": 4,
@@ -14906,7 +15186,7 @@
     "partyOps": 3,
     "bandOps": 1
   },
-  "_opTurns": 233,
+  "_opTurns": 234,
   "customAbilities": {
     "mirror-bright": {
       "id": "mirror-bright",
@@ -16723,7 +17003,7 @@
     }
   },
   "_opUnknown": {
-    "sceneSummary": 60,
+    "sceneSummary": 61,
     "scene_summary": 1
   },
   "_bandNotes": null,
@@ -17268,7 +17548,17 @@
           "roof": true
         }
       ],
-      "stops": [],
+      "stops": [
+        {
+          "atId": "millbrook",
+          "atName": "Millbrook",
+          "why": "encounter",
+          "note": null,
+          "worldDay": 88,
+          "daysWalked": 1.6,
+          "legsWalked": 1
+        }
+      ],
       "pending": null,
       "inGambit": null
     }

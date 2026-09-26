@@ -1413,15 +1413,38 @@ export function raidChanceFor(character, holding, { cfg = null, dangerLevel = 0,
  *
  *  `everyN` is the reciprocal, because "1 raid in 25 passes" is the sentence a player can act on and "4%" is
  *  not. Pure. */
-export function raidRisk(character, holding, { cfg = null, economy = null, regionId = null, dangerLevel = 0, people = {}, npcCfg = {}, day = null } = {}) {
+export function raidRisk(character, holding, { cfg = null, economy = null, regionId = null, dangerLevel = 0, people = {}, npcCfg = {}, day = null, rules = null, npcs = null } = {}) {
   const units = Object.values(holding?.store || {}).reduce((n, v) => n + (Number(v) || 0), 0);
   const rc = raidChanceFor(character, holding, { cfg, dangerLevel, people, npcCfg, day, total: units });
   const worth = storeWorth(holding, { economy, regionId, cfg });
   const share = Number.isFinite(Number(cfg?.raid?.takeShare)) ? Number(cfg.raid.takeShare) : 0.5;
-  const expected = worth != null ? Math.round(rc.chance * share * worth) : null;
+  // ⚠️ ONE DECIMAL, NOT A WHOLE NUMBER: on the live saves this cost is 0.5 a pass and rounding it to an integer put
+  // “~0 a pass” on the card — which reads as “no risk” for a hold that is losing half a crystal every pass.
+  const expected = worth != null ? Math.round(rc.chance * share * worth * 10) / 10 : null;
+  // ✅ SNG-652 §6 — THE DETECTION TERM, which this function was written without and said so: *"the detection term it
+  // names belongs to §7's watch, which is not built — so it is absent here rather than guessed at."* §7's watch is
+  // built (CCODE-507; Erik's ruled contest `seen = watch ÷ (watch + stealth)`), so the term can be READ.
+  //
+  // ⚠️ AND THE SPEC'S FORM IS OPTIMISTIC. "raid chance × (1 − detection %)" treats a seen raid as a raid that took
+  // nothing; `resolveRaid` treats it as a raid that was MET — a fight, and a fight you lose still loses the share. So
+  // both ends come back: `expectedLoss` is unchanged (every raid takes its share) and `expectedLossWatched` is the
+  // spec's (every raid your watch sees is beaten off). The truth is between them, and the card says so in words
+  // rather than picking one and calling it the number.
+  // ⛑ Only when a caller hands over `rules`, because the contest's dials live in `rules.death.watch` — a caller
+  // without them sees exactly the readout it saw before.
+  let seen = null, watched = null;
+  if (rules && rc.chance > 0) {
+    try {
+      const wo = watchOdds(character, holding, { cfg, rules, dangerLevel, people, npcs: npcs || people, npcCfg, day });
+      if (wo && wo.pct > 0) {
+        seen = { pct: wo.pct, raw: wo.raw?.seen ?? wo.pct / 100, watchers: wo.watchers, features: wo.features };
+        watched = worth != null ? Math.round(rc.chance * (1 - (wo.raw?.seen ?? wo.pct / 100)) * share * worth * 10) / 10 : null;
+      }
+    } catch { seen = null; watched = null; }
+  }
   return { chance: rc.chance, terms: rc.terms, why: rc.why,
     everyN: rc.chance > 0 ? Math.round(1 / rc.chance) : null,
-    takeShare: share, worth, expectedLoss: expected,
+    takeShare: share, worth, expectedLoss: expected, seen, expectedLossWatched: watched,
     wouldTake: worth != null ? Math.round(share * worth) : null };
 }
 

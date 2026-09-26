@@ -182,7 +182,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.14.0";
+const APP_VERSION = "2.14.1";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -15115,9 +15115,11 @@ function renderHoldingsTab(manageId = null, tab = null) {
           try { ex = storeExits(character, h, { cfg: sCfg, economy: econ, locations: CONTENT.locations || {}, regionId: reg,
             dangerLevel: Number(CONTENT.locations?.[h.locationId]?.dangerLevel) || 0,
             people: holdPeople, npcCfg: npcSheetCfg, day: absoluteWorldDay() }); } catch { ex = null; }
+          // ✅ SNG-652 §6 — WITH `rules`, so the readout can carry the detection term §7's watch now provides.
           try { rk = raidRisk(character, h, { cfg: sCfg, economy: econ, regionId: reg,
             dangerLevel: Number(CONTENT.locations?.[h.locationId]?.dangerLevel) || 0,
-            people: holdPeople, npcCfg: npcSheetCfg, day: absoluteWorldDay() }); } catch { rk = null; }
+            people: holdPeople, npcs: holdPeople, rules: CONTENT.rules,
+            npcCfg: npcSheetCfg, day: absoluteWorldDay() }); } catch { rk = null; }
           // ✅ SNG-654 §4 (Erik: "yes on a-d") — THE COLUMN THAT CHANGED IS "when": a route's clock is not how long the
           // pile takes to sell, it is WHEN THE FIRST COIN COMES BACK, and after that it pays every pass.
           const isHaul = (r) => String(r.id).startsWith("caravan") || String(r.id).startsWith("company");
@@ -15200,7 +15202,7 @@ function renderHoldingsTab(manageId = null, tab = null) {
                 ${lift ? `<div class="hint">— between them they move the danger here by ${lift > 0 ? "+" : ""}${lift}</div>` : ""}</div>` : ""}</div>`;
           })();
           const risk = rk && rk.chance > 0 ? `<div class="hs-risk" title="${esc(rk.terms.map(x => `${x.label} ×${Math.round(x.mult * 100) / 100}`).join(" · "))}">
-            ⚠ At this stock a raid would take about <strong>${rk.wouldTake}</strong> crystal of goods — about <strong>1 raid in ${rk.everyN} passes</strong> gets through, so it costs you ~${rk.expectedLoss} a pass to stand here holding it.
+            ⚠ At this stock a raid would take about <strong>${rk.wouldTake}</strong> crystal of goods — about <strong>1 raid in ${rk.everyN} passes</strong> comes, so it costs you ~${rk.expectedLoss} a pass to stand here holding it${rk.seen ? `, or <strong>~${rk.expectedLossWatched}</strong> if your watch beats the ${rk.seen.pct}% it sees coming` : ""}.
             <span class="hint">${esc(rk.terms.map(x => x.label).join(" · "))}</span></div>`
             : rk && rk.why ? `<div class="hs-risk hint">⚠ No raid risk here — ${esc(rk.why)}.</div>` : "";
     return { store: cmp, watch, risk, defence: ad };

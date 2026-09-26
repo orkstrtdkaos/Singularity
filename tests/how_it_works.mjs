@@ -8442,9 +8442,35 @@ console.log("\n── §76e · the ways out, priced; and the risk of standing st
     (() => { const e = H6.raidRisk(ch6, mk6({ store: {} }), { cfg: cfg6, economy: econ6, dangerLevel: 5, people: {}, npcCfg: {} });
       return e.chance === 0 && /nothing in the store/.test(String(e.why)); })());
   // ⬜ THE DETECTION TERM THE SPEC NAMES IS §7'S WATCH, WHICH IS NOT BUILT. It is absent rather than guessed.
-  check("§76e: ⬜ the spec's detection term is NOT priced in, because §7's watch does not exist yet",
-    !/detection/i.test(rd("engine/holdings.js").slice(rd("engine/holdings.js").indexOf("export function raidRisk"), rd("engine/holdings.js").indexOf("export function raidRisk") + 1200).replace(/^[^\n]*\/\*[\s\S]*?\*\//, "")),
-    "a term nobody computes must not be quietly folded into a number a player will act on");
+  // ✅ SNG-652 §6 — AND THE DETECTION TERM IS IN, because §7's watch is built. ⚠️ The check that stood here asserted its
+  // ABSENCE ("because §7's watch does not exist yet") and went on passing green for three weeks after the watch
+  // shipped — a gate arguing against the very gap it was written to mark. ⛑ What is asserted now is the thing that
+  // stays true either way: a term is READ from the function that computes it, or it is absent and said to be.
+  check("§76e: ✅ the spec's detection term is READ from §7's watch, not guessed — and a caller who hands over no `rules` sees exactly the readout it saw before",
+    (() => {
+      const H = H6;   // the same module the rest of this section reads
+      const full = mk6({ store: { raw_material: 40 }, garrison: ["w1", "w2"] });
+      const folk = { w1: { id: "w1", name: "A watcher", level: 5, skills: {} }, w2: { id: "w2", name: "Another", level: 5, skills: {} } };
+      const ask = (opts) => H.raidRisk({ holdings: [full], npcRegistry: folk }, full, { cfg: cfg6, economy: econ6, regionId: where6[1].regionId, dangerLevel: 4, people: folk, npcs: folk, npcCfg: {}, day: 1, ...opts });
+      const bare = ask({}), watched = ask({ rules: C6.rules });
+      // ⛔ the old number is untouched, the new one is strictly smaller, and the watch's own percentage is what moved it
+      return bare.seen === null && bare.expectedLossWatched === null
+        && watched.seen && watched.seen.pct > 0 && watched.expectedLoss === bare.expectedLoss
+        && watched.expectedLossWatched < watched.expectedLoss
+        && Math.abs(watched.expectedLossWatched - watched.expectedLoss * (1 - watched.seen.raw)) < 0.2;
+    })(), "a term nobody computes must not be folded into a number a player will act on — and one that IS computed must not be left out of it");
+  // ⚠️ AND THE SENTENCE ON THE CARD SAID "GETS THROUGH" while nothing asked whether anybody saw them. A message is a
+  // claim about a mechanism; that one claimed a watch the arithmetic had never heard of.
+  check("§76e: ⚠️ …and the card no longer says a raid “gets through” unless the number it prints has asked the watch",
+    (() => {
+      const app = rd("app.js");
+      const i = app.indexOf("At this stock a raid would take about");
+      const line = app.slice(i, i + 700);
+      return i > 0 && !/gets through/.test(line) && /if your watch beats the \$\{rk\.seen\.pct\}%/.test(line)
+        // ⚠️ ANCHORED ON THE CALL, NOT ON A BYTE WINDOW: my first form looked 1,500 characters back from the sentence
+        // and the call is further than that, so a correct app failed a gate about where its own text sits.
+        && /raidRisk\(character, h, \{[\s\S]{0,400}?rules: CONTENT\.rules/.test(app);
+    })());
 }
 
 /* ═════ §76d — A FEATURE READS AS A CATALOGUE ENTRY, AND ITS NUMBERS ARE READ (SNG-652 §9) ═════ */

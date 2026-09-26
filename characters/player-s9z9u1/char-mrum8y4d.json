@@ -13648,6 +13648,16 @@
   "reconcileVersion": 86,
   "gallery": [
     {
+      "kind": "figure",
+      "prompt": "",
+      "url": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/A%20hand-span%20of%20articulated%20brass-dark%20segments%2C%20walking%20on%20too%20many%20precise%20legs%2C%20with%20a%20single%20lens%20that%20irises%20when%20it%20is%20thinking.%20It%20carries%20a%20lamp%20it%20did%20not%20make%20and%20will%20not%20explain.%20Old.%20Repai%2C%20character%20portrait%2C%20named%20Cy%2C%20Companion%20%E2%80%94%20a%20Precursor%20maintenance-thing%20that%20has%20adopted%20you%20as%20its%20assignment%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=93328&nologo=true",
+      "caption": "Cy",
+      "worldDay": 88,
+      "at": "2026-09-26T15:27:23.280Z",
+      "subjectKind": "figure",
+      "subjectId": "companion-coil"
+    },
+    {
       "kind": "moment",
       "prompt": "A woman in grey standing at the threshold of a stone waystation on a wind-worn moorland, her certainty absolute. Behind her, the band—five figures and a lamp—halt at the edge of the open doors. The sk",
       "url": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/A%20woman%20in%20grey%20standing%20at%20the%20threshold%20of%20a%20stone%20waystation%20on%20a%20wind-worn%20moorland%2C%20her%20certainty%20absolute.%20Behind%20her%2C%20the%20band%E2%80%94five%20figures%20and%20a%20lamp%E2%80%94halt%20at%20the%20edge%20of%20the%20open%20doors.%20The%20sky%20above%20is%20gold%20and%20fading%20with%20autumn's%20last%20fire.%20Her%20hand%20rests%20on%20the%20frame.%20She%20has%20been%20waitin%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=65925&nologo=true",
@@ -14705,8 +14715,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790436328579,
-  "rev": 1004,
+  "updatedAt": 1790436451026,
+  "rev": 1007,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -17603,6 +17613,17 @@
           "at": 88
         }
       ]
+    },
+    "figure:companion-coil": {
+      "keeps": [
+        {
+          "url": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/A%20hand-span%20of%20articulated%20brass-dark%20segments%2C%20walking%20on%20too%20many%20precise%20legs%2C%20with%20a%20single%20lens%20that%20irises%20when%20it%20is%20thinking.%20It%20carries%20a%20lamp%20it%20did%20not%20make%20and%20will%20not%20explain.%20Old.%20Repai%2C%20character%20portrait%2C%20named%20Cy%2C%20Companion%20%E2%80%94%20a%20Precursor%20maintenance-thing%20that%20has%20adopted%20you%20as%20its%20assignment%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=93328&nologo=true",
+          "prompt": "",
+          "note": null,
+          "seedKey": null,
+          "at": 88
+        }
+      ]
     }
   },
   "sceneImages": {
@@ -17660,7 +17681,8 @@
     "whois-traveler-woman": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Grey-green%20practical%20coat%2C%20hair%20pinned%20back%20in%20a%20way%20that%20has%20half%20come%20undone.%20Dry%2C%20careful%20voice.%20Appraising%20eyes%20that%20price%20things%20before%20deciding.%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=22719&nologo=true",
     "whois-the_burning_certainty": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/A%20figure%20of%20the%20seraphic%2C%20inquisitor%20among%20them%3A%20lattice-light%20under%20the%20skin%2C%20vestments%20of%20the%20world%20that%20was%2C%20terrible%20posture%2C%20character%20portrait%2C%20named%20The%20Burning%20Certainty%2C%20he%2C%20Inquisitor%2C%20of%20a%20people%20who%20read%20as%3A%20upright%2C%20ordered%2C%20unornamented.%20Clean%20lines%20and%20clean%20cloth.%20Regards%20people%20as%20though%20weighing%20them%2C%20because%20they%20are.%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20gold%2C%20white%2C%20tier-on-tier%20brightness%2C%20radiant%20from%20above%2C%20unbearable%20choral%20certainty%2C%20administered%20mercy%2C%20height%2C%20certainty?width=512&height=640&seed=5384&nologo=true",
     "whois-halvex_coil": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/crazy%20grin%20on%20his%20face%2C%20small%20man%20sharp%20features%20jangoleur%20acrobat%20spinning%20ribbons%20conducting%20chaos%2C%20The%20Churn-Revel%20orchestrator%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=31600&nologo=true",
-    "whois-the_hollow_king": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/A%20figure%20of%20the%20abyssal%2C%20sovereign%20among%20them%3A%20HORNED%2C%20dressed%20better%20than%20anyone%20expects%2C%20a%20ledger-mark%20inked%20along%20one%20forearm%3B%20too%20pleasant%2C%20character%20portrait%2C%20named%20The%20Hollow%20King%20of%20the%20Wild%20Half%2C%20he%2C%20Sovereign%2C%20of%20a%20people%20who%20read%20as%3A%20hollow-cheeked%2C%20appetite%20showing.%20Dark%20wet-looking%20cloth.%20Too%20still%2C%20then%20too%20fast.%20Something%20behind%20the%20eyes%20is%20listening.%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20deep%20red%2C%20char-black%2C%20ember-orange%2C%20low%20red%20glow%20from%20below%2C%20honest%20about%20hunger%2C%20frank%20appetite%2C%20bargains%2C%20an%20honesty%20the%20pious%20lack?width=512&height=640&seed=79756&nologo=true"
+    "whois-the_hollow_king": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/A%20figure%20of%20the%20abyssal%2C%20sovereign%20among%20them%3A%20HORNED%2C%20dressed%20better%20than%20anyone%20expects%2C%20a%20ledger-mark%20inked%20along%20one%20forearm%3B%20too%20pleasant%2C%20character%20portrait%2C%20named%20The%20Hollow%20King%20of%20the%20Wild%20Half%2C%20he%2C%20Sovereign%2C%20of%20a%20people%20who%20read%20as%3A%20hollow-cheeked%2C%20appetite%20showing.%20Dark%20wet-looking%20cloth.%20Too%20still%2C%20then%20too%20fast.%20Something%20behind%20the%20eyes%20is%20listening.%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20deep%20red%2C%20char-black%2C%20ember-orange%2C%20low%20red%20glow%20from%20below%2C%20honest%20about%20hunger%2C%20frank%20appetite%2C%20bargains%2C%20an%20honesty%20the%20pious%20lack?width=512&height=640&seed=79756&nologo=true",
+    "companion-coil": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/A%20hand-span%20of%20articulated%20brass-dark%20segments%2C%20walking%20on%20too%20many%20precise%20legs%2C%20with%20a%20single%20lens%20that%20irises%20when%20it%20is%20thinking.%20It%20carries%20a%20lamp%20it%20did%20not%20make%20and%20will%20not%20explain.%20Old.%20Repai%2C%20character%20portrait%2C%20named%20Cy%2C%20Companion%20%E2%80%94%20a%20Precursor%20maintenance-thing%20that%20has%20adopted%20you%20as%20its%20assignment%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=93328&nologo=true"
   },
   "_promptRows": {
     "character": {

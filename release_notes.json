@@ -16,6 +16,24 @@
   "next": [],
   "releases": [
     {
+      "version": "2.9.6",
+      "date": "2026-09-26",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "A short walk stops being offered as a five-week journey",
+          "summary": "A place three hours away was being planned as a 36-day trek through a distant gate. Where the ground between two places is under a day's walk, it is a step — you simply go.",
+          "detail": "A holding another traveller founded brings its own roads with it when it arrives in your world, and those roads lead back to THEIR neighbours. The planner was following them. The ground itself is now the arbiter: a road may honestly be longer than the crow flies — a chasm, a river, a mountain — but it cannot turn a three-hour walk into a five-week one."
+        },
+        {
+          "kind": "fix",
+          "title": "The rations you bought are rations",
+          "summary": "Food for the road only counted if it was the one item the rules named. Anything you actually bought — road rations, trail provisions, a waystation bundle — read as nothing, and a journey told you that you carried none.",
+          "detail": "Five of the six road provisions in the game were invisible. Food is recognised for what it is now, and a bundle that names its own days is worth them: two four-day bundles is eight days of eating, not two."
+        }
+      ]
+    },
+    {
       "version": "2.9.5",
       "date": "2026-09-26",
       "entries": [

@@ -7532,6 +7532,68 @@ console.log("\n── §76b · a crafted feature carries its craft, its season, 
   }
 }
 
+/* ═════ §JRN — THE LAND IS THE ARBITER, AND A RATION IS FOOD (CCODE-518) ═════ */
+// ⛔ TWO THINGS ERIK HIT ON ONE CARD, in one beat at Mara Wells' Store.
+console.log("\n── §JRN · a three-hour walk is not a five-week trek, and bought rations are rations ──");
+{
+  const Jj = await import("../engine/journeyplan.js");
+  const Wj = await import("../engine/worldmap.js");
+  const { loadContentHeadless: lchJ } = await import("./headless_content.mjs");
+  const CJ = await lchJ();
+
+  // ⛔ 1 · "why is the journey to Whistling woman Post popping up as 36.1 days when everyone literally just
+  // agreed it was 2 hours walk???" ⚠️ The destination is a SHARED place carrying the connections of the world
+  // it was minted in, so `routeBetween` walked another character's map — while `holdsNear`, reading `worldPos`,
+  // called the same place "(here)" on the same screen. Two readers, two answers, one pair of places.
+  const from = { id: "from", name: "Mara Wells' Store", regionId: "valley", worldPos: { colatitude: 20.31, longitude: 251.895, depth: 0 }, connections: ["millbrook"] };
+  const to = { id: "to", name: "Whistling Woman Post", regionId: "valley", worldPos: { colatitude: 20.36, longitude: 252.1, depth: 0 },
+    // ⚠️ ANOTHER WORLD'S EDGES — this is the literal shape of the imported record
+    connections: ["gen-left-branch-gate-clearing", "gen-the-made-gate"] };
+  const locJ = { ...CJ.locations, from, to };
+  const chJ = { currentLocationId: "from", inventory: [], abilities: [] };
+
+  check("§JRN: ⛔ a walk of three hours is a STEP, whatever a borrowed connection graph says",
+    (() => {
+      const ground = Wj.walkingDays(from, to);
+      const plan = Jj.planJourney({ character: chJ, destId: "to", locations: locJ, rules: CJ.rules, catalog: CJ.items || {}, abilities: {} });
+      return ground < 0.2 && plan === null;   // three and a half hours of ground, and no journey card at all
+    })(), "the card said 36.1 days for 3.5 hours of ground — 249 times the land itself");
+
+  check("§JRN: …but a REAL journey still plans — this refuses the absurd, never an honest detour",
+    (() => {
+      const far = Object.values(CJ.locations).find(l => l.worldPos && l.id && Wj.walkingDays(from, l) > 6);
+      if (!far) return true;   // no far place in this corpus is not a failure of the rule
+      const plan = Jj.planJourney({ character: { currentLocationId: far.id, inventory: [], abilities: [] },
+        destId: "millbrook", locations: { ...CJ.locations, from, to }, rules: CJ.rules, catalog: CJ.items || {}, abilities: {} });
+      return plan !== null;
+    })(), "a road may be longer than the crow flies — a chasm, a river, a mountain. Only the absurd is refused");
+
+  // ⛔ 2 · "I also bought 4 road rations and it doesn't think i have any."
+  // ⚠️ `isProvision` read `if (it.id) return ids.has(it.id)` — an item WITH an id never reached the name test,
+  // and one without had to match a single authored name exactly. Measured across every save: 5 of the 6 road
+  // provisions in the game were invisible.
+  check("§JRN: ⛔ a ration is recognised by WHAT IT IS, not by being the one authored id",
+    (() => {
+      const R = CJ.rules;
+      const seen = (name, id = null, qty = 1) => Jj.isProvision({ id, name, qty }, R, CJ.items || {});
+      return seen("Road Rations (4 days)") && seen("Trail Provisions") && seen("Waystation Provision Bundle")
+        && seen("Dried Rations", "dried_rations")                 // the authored id still counts
+        // … and the words are matched WHOLE, so an operation report is not lunch
+        && !seen("an operation report") && !seen("Iron Spanner") && !seen("Rope (30ft)");
+    })(), "the food a player buys is named by the GM and the shops, not drawn from one authored id");
+
+  check("§JRN: …and an item that NAMES ITS OWN DAYS is worth them — two of a four-day bundle is eight days",
+    (() => {
+      const R = CJ.rules;
+      const per = 2;   // daysPerProvision
+      const four = Jj.provisionDays({ name: "Road Rations (4 days)" }, R);
+      const plain = Jj.provisionDays({ name: "Trail Provisions" }, R);
+      const carried = Jj.provisionsCarried({ inventory: [{ id: null, name: "Road Rations (4 days)", qty: 2 }] }, R, CJ.items || {});
+      // ⚠️ DAYS IN, RATIONS OUT — the card compares this against `rationsFor(days)`, so both must be in one unit.
+      return four === 4 && plain === per && carried === 4;
+    })(), "a count of ITEMS would have said 2 for eight days of food");
+}
+
 /* ═════ §RPT — THE GM IS SHOWN ITS OWN PROSE, AND TOLD NOT TO SAY IT AGAIN (CCODE-516) ═════ */
 // ⛔ ERIK, IN PLAY: "The GM seems to repeat large chunks of itself recently."
 // ⚠️ WHAT I MEASURED AND DID NOT FIND: the prompt does not duplicate itself. No context key reaches two tiers

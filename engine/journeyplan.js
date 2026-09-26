@@ -31,8 +31,14 @@ import { mountsAt } from "./holdings.js";   // ⛔ CCODE-432: set out from where
 
 export const JOURNEY_DEFAULTS = Object.freeze({
   minDays: 1,                          // under a day's walk is a step, not a journey
+  // ⛔ CCODE-518 — how much longer than the GROUND a routed road may be before the graph is not to be believed.
+  // A real detour is often two or three times the crow's flight; 249 times is a map from somebody else's world.
+  routeSanityFactor: 4,
   daysPerProvision: 2,                 // dried_rations: "Two days if you're honest with yourself"
   provisionItems: ["dried_rations"],
+  // ⛔ CCODE-518 — what a ration is CALLED, since the food a player buys is named by the GM and the shops
+  // rather than drawn from one authored id. Whole-word matched, so "operation" is not lunch.
+  provisionWords: ["ration", "rations", "provision", "provisions", "hardtack", "trail food", "travel food", "foodstuffs"],
   hungryEnergyPerDay: 0.08,            // each day with nothing to eat takes this share off the energy you arrive with…
   hungryEnergyMax: 0.6,                // …never more than this
   hungryHealthGraceDays: 2,            // and after this many hungry days, a point of health a day…
@@ -82,17 +88,46 @@ export function rationsFor(days, rules = {}) {
 /** Is this inventory stack a ration for the road: its id is a provision, or — for an item with no id — its name is one. Pure. */
 export function isProvision(it, rules = {}, catalog = {}) {
   if (!it) return false;
-  const ids = new Set(journeyRules(rules).provisionItems || []);
-  if (it.id) return ids.has(it.id);
+  const R = journeyRules(rules);
+  const ids = new Set(R.provisionItems || []);
+  // ⛔ THE AUTHORED ID ALWAYS COUNTS — that part was never wrong.
+  if (it.id && ids.has(it.id)) return true;
   const names = new Set([...ids].map(id => norm(catalog?.[id]?.name || id.replace(/_/g, " "))));
-  return names.has(norm(it.name));
+  const nm = norm(it.name);
+  if (nm && names.has(nm)) return true;
+  // ⛔ CCODE-518 (ERIK, IN PLAY): "I also bought 4 road rations and it doesn't think i have any."
+  // ⚠️ THIS USED TO READ `if (it.id) return ids.has(it.id)` — so an item WITH an id never reached the name
+  // test at all, and an item without one had to match a single authored name EXACTLY. Measured across every
+  // save: 5 of the 6 road provisions in the game were invisible — "Trail Provisions", "Road Rations (4 days)",
+  // "Dried Fish (wrapped)", "Waystation Provision Bundle". Food the GM and the shops actually sell.
+  // ⛑ A RATION IS RECOGNISED BY WHAT IT IS. The words are a dial (`provisionWords`) so the vocabulary is
+  // content's to widen, and they are matched as whole words so "operation" is not lunch.
+  const words = R.provisionWords || JOURNEY_DEFAULTS.provisionWords;
+  return !!nm && words.some(w => new RegExp(`(^| )${norm(w).replace(/ /g, " ")}( |$)`).test(nm));
 }
 
-/** The rations a character carries. Pure. */
+/** ⛔ HOW MANY DAYS ONE OF THESE FEEDS YOU. An item that NAMES its own days is worth them: "Road Rations
+ *  (4 days)" is four, and two of them is eight days of food rather than two rations. Anything that does not say
+ *  falls to the rule's own `daysPerProvision`. Pure. */
+export function provisionDays(it, rules = {}) {
+  const R = journeyRules(rules);
+  const per = Math.max(0.1, Number(R.daysPerProvision) || 2);
+  const m = /(\d+(?:\.\d+)?)\s*(?:day|days)\b/i.exec(String(it?.name || ""));
+  const said = m ? Number(m[1]) : NaN;
+  return Number.isFinite(said) && said > 0 ? said : per;
+}
+
+/** The rations a character carries — in RATIONS, which is the unit `rationsFor` answers in. Pure. */
 export function provisionsCarried(character, rules = {}, catalog = {}) {
-  let n = 0;
-  for (const it of character?.inventory || []) if (isProvision(it, rules, catalog)) n += Math.max(0, Number(it.qty) || 1);
-  return n;
+  const per = Math.max(0.1, Number(journeyRules(rules).daysPerProvision) || 2);
+  let days = 0;
+  for (const it of character?.inventory || []) {
+    if (!isProvision(it, rules, catalog)) continue;
+    days += Math.max(0, Number(it.qty) || 1) * provisionDays(it, rules);
+  }
+  // ⚠️ DAYS IN, RATIONS OUT. The card compares this against `rationsFor(days)`, so the two must be in one
+  // unit — a count of items would have said "2" for eight days of food.
+  return Math.floor(days / per);
 }
 
 /** ⛔ THE CRAFTS THAT CARRY A ROAD — the character's own, by what they do on it: `{ forage, march, endureHealth, endureEnergy, shelter }`,
@@ -160,6 +195,22 @@ export function planJourney({ character, destId, locations = {}, rules = {}, cat
   if (!fromId || !destId || fromId === destId || !locations[fromId] || !locations[destId]) return null;
   const r = route || routeBetween(fromId, destId, locations, { traveller: character, rules });
   if (!isJourneyRoute(r, rules)) return null;
+  // ⛔ CCODE-518 — THE LAND IS THE ARBITER, AND A GRAPH CAN BE WRONG ABOUT IT.
+  // Erik, in play: "why is the journey to Whistling woman Post popping up as 36.1 days when everyone literally
+  // just agreed it was 2 hours walk???" ⚠️ Measured on that pair: `walkingDays` between their `worldPos` is
+  // 0.145 days — three and a half hours — and the route said 36.1 days, 249 times the ground. The destination
+  // is a SHARED place carrying the connections of the world it was minted in, so `routeBetween` walked another
+  // character's map. Meanwhile `holdsNear`, which reads `worldPos`, called the same place "(here)" on the very
+  // same screen.
+  // ⛑ A ROAD MAY BE LONGER THAN THE CROW FLIES — a chasm, a river, a mountain — so this does not second-guess
+  // an honest detour. It only refuses the absurd: when the ground between two places is under a day's walk,
+  // no graph makes that a journey, and `planJourney` already has the right answer for a trip that short.
+  const overland = (() => { try { return walkingDays(locations[fromId], locations[destId]); } catch { return null; } })();
+  const R518 = journeyRules(rules);
+  if (Number.isFinite(overland) && overland > 0 && overland < (Number(R518.minDays) || 1)) {
+    const routed = Number((r.options || [])[0]?.days) || 0;
+    if (routed > overland * (Number(R518.routeSanityFactor) || 4)) return null;   // a step, whatever the graph says
+  }
   // a marcher's road is shorter: the WALKED days shrink, a gate's hours do not
   const crafts = journeyCraftsOf(character, rules, abilities);
   // ⛔ CCODE-432: and a rider's is — set out from where you keep mounts, and the better of the two carries the pace

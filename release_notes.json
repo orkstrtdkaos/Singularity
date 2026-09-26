@@ -16,6 +16,36 @@
   "next": [],
   "releases": [
     {
+      "version": "2.9.7",
+      "date": "2026-09-26",
+      "entries": [
+        {
+          "kind": "feature",
+          "title": "Your places, arranged by what you came to do",
+          "summary": "The Holdings screen is a line for your whole estate, a card per place that only reads, and a page per place with six tabs.",
+          "detail": "The top line says how many places you hold, what they do to your purse each pass, and what wants your attention — and each warning is a link straight to the place it means, on the tab that answers it. A card below shows the picture, the name, three numbers (people, per pass, how it fares) and one thing worth knowing; it no longer carries a dozen selects and buttons, so on a phone it is one row high. Opening a place gives it its own page, with Overview, People, Build, Store & money, Attack & Defense and Records — and every action lives on the tab whose job it is. An action that needs you standing there is now greyed and says so, instead of silently vanishing when you are elsewhere. Nothing about how a place works has changed; what changed is that you can find it."
+        },
+        {
+          "kind": "feature",
+          "title": "A place remembers, and now it will tell you",
+          "summary": "Every condition change and every event a place has lived through is written down, and the Records tab shows it.",
+          "detail": "A holding's history has been recorded since holdings existed — raids, a keeper appointed, a feature built, a season that went badly — and no screen had ever shown it. The Records tab lists it newest first, with the day."
+        },
+        {
+          "kind": "fix",
+          "title": "The estate panel valued every place as if the ground were the same",
+          "summary": "A holding on rich or poor ground is now worth what its ground makes it worth, on every screen that says a number.",
+          "detail": "Four different screens asked the engine what a place earns, and each asked slightly differently: some told it what ground the place stands on and some did not, and one did not say whose place it was, which is what pays a relay station's runner fees. So the world screen's estate panel could show a figure the place would never pay. Every screen now asks the same question through one call, so two screens cannot quietly answer differently."
+        },
+        {
+          "kind": "fix",
+          "title": "The Holdings screen on a phone",
+          "summary": "A place's card is now about half the height it was at phone width, and the build costs no longer run off the edge of the screen.",
+          "detail": "Measured at 375 pixels wide: a card's summary line could run to ten lines on its own, making the card 319 pixels tall where the design asks for one row — it now shows two lines, with the whole sentence on hover. And on the Build tab, eight of the eleven build costs sat off the right edge of the sheet with no way to scroll to them; the list wraps now, and a quantity never splits from what it is a quantity of."
+        }
+      ]
+    },
+    {
       "version": "2.9.6",
       "date": "2026-09-26",
       "entries": [

@@ -180,7 +180,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.9.6";
+const APP_VERSION = "2.9.7";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -1639,26 +1639,26 @@ async function drainCompositions() {
   if (_composeDraining) return;
   _composeDraining = true;
   try {
-    // \u26a0\ufe0f ONE AT A TIME, AND SPACED. A page can mint a dozen pictures in one render; a dozen at once is a
-    // rate limit, a bill, and \u2014 since SNG-435 \u2014 a dozen URLs burned for a year. Nobody is waiting on any of
+    // ⚠️ ONE AT A TIME, AND SPACED. A page can mint a dozen pictures in one render; a dozen at once is a
+    // rate limit, a bill, and — since SNG-435 — a dozen URLs burned for a year. Nobody is waiting on any of
     // this, so it costs nothing to be polite.
     while (_composeQueue.length) {
       let job = _composeQueue.shift();            // reassigned when a poisoned URL heals onto a busted one
       try {
-        // \u26d4 VERIFY BEFORE COMPOSE, ALWAYS. The picture the player is looking at RIGHT NOW is the raw mint,
-        // and if its bytes are empty that is the emergency \u2014 composing a second address first would leave the
+        // ⛔ VERIFY BEFORE COMPOSE, ALWAYS. The picture the player is looking at RIGHT NOW is the raw mint,
+        // and if its bytes are empty that is the emergency — composing a second address first would leave the
         // burned one persisted for however long the model takes to answer.
-        // \u26d4 CCODE-198 (Erik): "I don't want the first generated image to disappear. sometimes it's quite
+        // ⛔ CCODE-198 (Erik): "I don't want the first generated image to disappear. sometimes it's quite
         // good... I'm leaning to not even generating a second image immediately. Let the user click regen if
         // they want (that will use the prompt gen feature)."
         //
         // He is right, and CCODE-193 was two decisions bolted together: COMPOSE THE LINE (good) and REPLACE
         // THE PICTURE UNASKED (his to refuse). The second threw away a draw he might have liked, spent a
-        // generation nobody requested, and \u2014 as SNG-435 measured \u2014 doubled the requests per new subject on
+        // generation nobody requested, and — as SNG-435 measured — doubled the requests per new subject on
         // the one endpoint that burns URLs when it is hurried.
         //
-        // \u26a0\ufe0f SO THE QUEUE ONLY VERIFIES NOW. The composer is not gone; it moved behind the button where he
-        // can ask for it. And "keep the first one and stack them" needs no new machinery \u2014 SNG-401's re-roll
+        // ⚠️ SO THE QUEUE ONLY VERIFIES NOW. The composer is not gone; it moved behind the button where he
+        // can ask for it. And "keep the first one and stack them" needs no new machinery — SNG-401's re-roll
         // already adds a version rather than replacing one.
         settleMintedUrl(job, await verifiedImageUrl(job.url));
       } catch (e) { console.warn("[mint] skipped:", e?.message); }
@@ -1677,8 +1677,8 @@ onComposedLookup((url) => shownUrl(url) === url ? null : shownUrl(url));
 function shownUrl(u) { return (u && character?.composedImages?.[u]) || u; }
 
 onImageMinted((job) => {
-  // \u26d4 SNG-435 MOVED THE KEY CHECK INWARDS, and that is the whole point of this line. It used to sit here,
-  // so a player without an API key queued nothing \u2014 and therefore VERIFIED nothing, and would collect burned
+  // ⛔ SNG-435 MOVED THE KEY CHECK INWARDS, and that is the whole point of this line. It used to sit here,
+  // so a player without an API key queued nothing — and therefore VERIFIED nothing, and would collect burned
   // URLs invisibly forever. Composition costs money and is optional; proving the picture exists is neither.
   if (!job?.url || !imagesEnabled()) return;
   if (_composeSeen.has(job.url)) return;                      // the same mint reached from two renders
@@ -3520,7 +3520,7 @@ const LEG_RUNNERS = {
     // place is hydrated into `CONTENT` for a session. Reported to Aevi: a legion theatre wants authoring.
     const base = Object.values(CONTENT.encounters || {}).find(d => d.type === "duel") || Object.values(CONTENT.encounters || {})[0];
     if (!base) { renderPlay(character.activeScene?.lastTurn || null, { aside: "🔧 No encounter to build a legion theatre on." }); return; }
-    // ⚠\ufe0f ERIK: "the description title says a field with an army on it — then it names one person." Both were
+    // ⚠️ ERIK: "the description title says a field with an army on it — then it names one person." Both were
     // true and the pair was nonsense: the NAME described the whole field and the header beside it names the one
     // figure you are actually fighting. The name now says what the two theatres are.
     const oppN = base.opponent?.name || "the one in front of you";
@@ -14780,6 +14780,28 @@ function holdCfgNow() {
   const hs = CONTENT.rules?.economy?.holdStore;
   return hs ? { ...hs, features: CONTENT.rules?.economy?.holdFeatures || null } : null;
 }
+/** ⛔ ONE LEDGER CALL FOR THE WHOLE APP — THE BAG IS THE READING.
+ *
+ *  `holdingLedger` takes six things and answers whatever it is given: no `character` and it skips a relay
+ *  hold's runner fees; no `density` and rich ground and poor ground yield the same. Neither omission throws,
+ *  and neither is visible in the answer.
+ *
+ *  ⚠️ FOUR SITES CARRIED FOUR DIFFERENT BAGS, and the ground strip's own comment claimed the opposite —
+ *  "every figure is read with the same functions the cards use, so the strip and a card can never disagree."
+ *  On Silas's five holds the cards added to +372 a pass while the strip above them said +347. The functions
+ *  were the same; the calls were not.
+ *
+ *  ⛑ So the CALL is the shared thing, not the function. Every reader on every screen comes through here. */
+function holdLedgerOf(h) {
+  if (!h) return null;
+  try {
+    return holdingLedger(h, {
+      economy: CONTENT.rules?.economy, cfg: holdCfgNow(),
+      regionId: CONTENT.locations?.[h.locationId]?.regionId || null,
+      density: holdingGround(h, { locations: CONTENT.locations || {}, substrate: CONTENT.substrateModel || null }),
+      character, locations: CONTENT.locations || {} });
+  } catch { return null; }   // ⛑ a hold whose ledger will not read is not a reason to hide the estate
+}
 // ⛔ `manageId` OPENS THE POPUP Erik asked for. The card is for READING — the four things he named — and
 // every control that CHANGES the place lives behind one button, because the two were interleaved and
 // neither could be used.
@@ -14852,13 +14874,15 @@ function renderHoldingsTab(manageId = null, tab = null) {
   // ⛔ SPEC_holdings_screen §3/§4 — ONE line of facts, the SAME on the list and in the popup (hands, guard, features, store,
   // arrears, what it watches), composed in the engine so the two surfaces cannot disagree. §5.4 — whose it is, when not yours.
   const ownerOf = (h) => (h.owner && h.owner !== character.id && h.owner !== "you") ? esc(nameOf(h.owner)) + "'s · " : "";
-  const factsOf = (h) => { const line = holdingFactsLine(h, { nameOf, holdings: character.holdings || [] }); return line ? `<div class="hint">${esc(line)}</div>` : ""; };
+  const factsOf = (h) => { const line = holdingFactsLine(h, { nameOf, holdings: character.holdings || [] }); return line ? `<div class="hint hold-card-facts" title="${esc(line)}">${esc(line)}</div>` : ""; };
   // ═════ SNG-651 §2.1 · THE GROUND STRIP — your whole estate in one line ═════
   // ⛔ Aevi: "how many holdings, the NET PER PASS across all of them (coloured, since a quiet drain is what a
   // player most needs to notice), and the alerts: unkept · full · raided · offers waiting. Each alert is a LINK
   // to the hold it means."
-  // ⛑ §3 — NO ENGINE CHANGE: every figure is read with the same functions the cards use, so the strip and a
-  // card can never disagree about the same place.
+  // ⛑ §3 — NO ENGINE CHANGE: every figure comes through `holdLedgerOf`, the SAME CALL the cards make, so the
+  // strip and a card cannot disagree about the same place.
+  // ⚠️ THIS LINE USED TO SAY "the same functions" AND WAS FALSE. It was the same function with a shorter bag,
+  // and the live screen showed the cards adding to +372 a pass under a strip that said +347.
   const groundStrip = (() => {
     if (!hs.length && !offers.length) return "";
     const cfgG = holdCfgNow(), ecoG = CONTENT.rules?.economy || null;
@@ -14866,8 +14890,7 @@ function renderHoldingsTab(manageId = null, tab = null) {
     const unkept = [], full = [], raided = [];
     for (const h of hs) {
       try {
-        const L = holdingLedger(h, { economy: ecoG, cfg: cfgG, regionId: CONTENT.locations?.[h.locationId]?.regionId || null,
-          locations: CONTENT.locations || {}, nameOf });
+        const L = holdLedgerOf(h);
         if (L?.perPass && Number.isFinite(Number(L.perPass.net))) { net += Number(L.perPass.net); netKnown = true; }
       } catch { /* a hold whose ledger will not read is not a reason to hide the estate */ }
       if (!h.steward) unkept.push(h);
@@ -15001,143 +15024,64 @@ function renderHoldingsTab(manageId = null, tab = null) {
     return { store: cmp, watch, risk, defence: ad };
   };
 
+  // ═════ SNG-651 §2.2 · THE CARD ONLY READS ═════
+  // ⛔ Aevi: "the image and name; the one facts line; three numbers: people · per pass · condition; ONE
+  // primary alert, the most urgent thing about this place; ONE button: Open. The inline selects and buttons
+  // move off the card. On a phone the card is one row high."
+  // ⚠️ 33 ACTIONS USED TO LIVE ON THIS SCREEN and most of them on the cards, interleaved with the reading.
+  // The popup's own comment named the problem two passes ago — "READING … this is for DOING. They were
+  // interleaved, so neither worked" — and fixed it inside the popup only. The list never got the same
+  // treatment. This is the list getting it.
   const holdingRows = hs.map(h => {
-    const loc = h.locationId ? (CONTENT.locations?.[h.locationId]?.name || h.locationId) : null;
-    const art = ensureHoldingImage(h) || h.image || null;   // §1: MINT ON READ — a hold claimed by any path gets its picture here, not only at the celebration
-    return `<div class="cs-ability" style="display:flex;gap:10px;align-items:flex-start">
-      ${art ? `<img src="${esc(art)}" loading="lazy" alt="${esc(h.name || h.id)}" style="width:64px;height:64px;object-fit:cover;border-radius:4px;flex:0 0 auto;cursor:zoom-in" data-lightbox="${esc(art)}" data-regen-kind="holding" data-regen-subject="${esc(h.id)}">` : ""}
-      <div style="flex:1 1 auto;min-width:0">
-        <strong>${esc(h.name || h.id)}</strong>
-        <div class="hint">${ownerOf(h)}${esc(h.kind || "post")} · ${esc(h.condition || "holding")}${loc ? " · " + esc(loc) : ""}${h.steward ? " · kept by " + esc(nameOf(h.steward)) : " · <em>unkept</em>"}</div>
+    // ⛑ …AND NOT WHEN IT IS THE HOLD'S OWN NAME. A hold grown at a place of its own name carries that name,
+    // so the card read "Threshold Post · Threshold Post" — on 3 of Silas's 5 — and wrapped onto a second row
+    // to say nothing. Seen on the screen, which is the only place it was ever visible.
+    const locName = h.locationId ? (CONTENT.locations?.[h.locationId]?.name || h.locationId) : null;
+    const loc = locName && String(locName).trim().toLowerCase() !== String(h.name || h.id).trim().toLowerCase() ? locName : null;
+    const art = ensureHoldingImage(h) || h.image || null;
+    const cfgC = holdCfgNow();
+    // ⛑ THE THREE NUMBERS, each from the reader that owns it — so a card and the place page cannot disagree.
+    // ⛔ AND EACH FROM THE READER'S OWN BAG, COPIED, NOT RECONSTRUCTED. My first cut passed `{ nameOf }` to
+    // `residentsOf` (which takes the hold config) and read `.length` off its `{homes, people}` — undefined, with
+    // no throw, so the card said "undefined people"; and it handed the ledger no `character` (dropping a relay
+    // hold's runner fees) and no `density` (flattening rich and poor ground to one yield). Three wrong inputs,
+    // a green suite, and one glance at a real save.
+    const people = residentsOf(h, holdCfgNow()).people.length;
+    const per = (() => { const L = holdLedgerOf(h);
+      return L?.perPass && Number.isFinite(Number(L.perPass.net)) ? Math.round(Number(L.perPass.net) * 100) / 100 : null; })();
+    const perCls = per == null ? "" : per > 0 ? "good" : per < 0 ? "bad" : "";
+    // ⛔ ONE ALERT, THE MOST URGENT — not a list. A card that shows four warnings shows none.
+    const alert = (() => {
+      // ⛑ §345 — each alert names the TAB that answers it, so naming the problem and carrying the verb for it
+      // are the same act. An alert with nowhere to go is the thing Erik objected to.
+      if (!h.steward) return { cls: "warn", said: "nobody is keeping it", tab: "people", verb: "Open the People tab — an unkept hold cannot climb" };
+      if ((h.history || []).slice(-4).some(e => /raid/i.test(String(e?.note || "")))) return { cls: "bad", said: "raided recently", tab: "defence", verb: "Open Attack & Defense — what comes at it, and what stands against them" };
+      if (String(h.condition) === "failing") return { cls: "bad", said: "failing", tab: "people", verb: "Open the People tab — a keeper sets the floor it will not drop below" };
+      try { const r = roomOf(h, cfgC); if (r && r.total > 0 && r.used >= r.total) return { cls: "warn", said: "no feature spots left", tab: "build", verb: "Open the Build tab — it may be ready to be named something greater" }; } catch { /* no reader, no alert */ }
+      if (Number(h.arrears) > 0) return { cls: "warn", said: `${h.arrears} of keep owed`, tab: "store", verb: "Open Store & money" };
+      if (per != null && per < 0) return { cls: "warn", said: "costs more than it makes", tab: "store", verb: "Open Store & money — what it sells, and what it costs to keep" };
+      return null;
+    })();
+    return `<div class="hold-card" data-hold-open="${esc(h.id)}" role="button" tabindex="0" title="Open ${esc(h.name || h.id)}">
+      ${/* ⛑ CCODE-169 · SNG-546's precedent — THE WHOLE CARD IS THE CONTROL, so its picture defers its lightbox
+            and NAMES the surface that opens one: a second lightbox here would make one click mean two things.
+            The place page's own image carries both the lightbox and the re-mint hook. */""}
+      ${art ? `<img class="hold-card-art" src="${esc(art)}" loading="lazy" alt="${esc(h.name || h.id)}" data-lightbox-via="hold-modal">` : `<div class="hold-card-art hold-card-noart" aria-hidden="true"></div>`}
+      <div class="hold-card-body">
+        <div class="hold-card-top"><strong>${ownerOf(h)}${esc(h.name || h.id)}</strong>${loc ? `<span class="hint"> \u00b7 ${esc(loc)}</span>` : ""}</div>
         ${factsOf(h)}
-        ${h.obligation ? `<div class="hint">owes: ${esc(h.obligation)}</div>` : ""}
-        ${(() => { // ⚑ THE FOUR ERIK NAMED, as a grid he can scan rather than six sentences he must parse.
-          const L = holdingLedger(h, { economy: CONTENT.rules?.economy, cfg: holdCfgNow(),
-            regionId: CONTENT.locations?.[h.locationId]?.regionId || null,
-            density: holdingGround(h, { locations: CONTENT.locations || {}, substrate: CONTENT.substrateModel || null }),
-            character, locations: CONTENT.locations || {} });
-          if (!L) return "";
-          const P = L.perPass;
-          // ⛑ THE ONE NUMBER HE ASKED FOR AND NEVER HAD: what the purse actually feels each pass. Coloured,
-          // because a hold that quietly drains is the thing a player most needs to notice.
-          const netCls = P.net > 0 ? "good" : P.net < 0 ? "bad" : "";
-          const cell = (label, value) => `<div><span class="hint" style="display:block;font-size:10px;text-transform:uppercase;letter-spacing:.6px">${label}</span>${value}</div>`;
-          const pop = [L.people.keeper ? `${L.people.keeper} keeper` : null,
-            L.people.crew ? `${L.people.crew} crew` : null,
-            L.people.garrison ? `${L.people.garrison} on watch` : null,
-            L.people.homes ? `homes for ${L.people.homes}` : null].filter(Boolean).join(" · ") || "<em>nobody</em>";
-          const benefit = P.yields.length
-            ? P.yields.map(y => `${y.units} ${String(y.goods).replace(/_/g, " ")}`).join(" + ")
-            : (h.kind === "post" ? "<em>holds ground</em>" : "<em>nothing yet</em>");
-          return `<div class="hold-grid">
-            ${cell("keeper", (L.keeper ? esc(L.keeper.name) : "<em>nobody — it will not climb</em>") + (h.owner ? ` <span class="hint">· ${esc(nameOf(h.owner))}'s own, paying your purse</span>` : ""))}
-            ${cell("people", pop)}
-            ${/* ⛔ SNG-652 §1 — THE WORD "PASS" WAS NEVER DEFINED ANYWHERE A PLAYER LOOKS. It is the unit every
-                  number on this card is in, and the card used it as if it were common knowledge. */""}
-            ${cell(`per pass ${infoDot("hold.pass")}`, `${benefit}${P.banks > 0 ? ` <span class="hint">· ${P.banks} banked</span>` : ""}`)}
-            ${cell("income vs keep", (() => {
-              // ⛔ CCODE-437: in the money the hold's place pays, as its keep line is — a Reach hold's ledger is its scrip, rounded as paid;
-              // and "in" counts the runner fees the net already counted
-              const rid437 = CONTENT.locations?.[h.locationId]?.regionId || null, eco437 = CONTENT.rules?.economy || null;
-              const inn = incomeHere((Number(P.sells) || 0) + (Number(P.fees) || 0), rid437, eco437), out = priceHere(Number(P.upkeep) || 0, rid437, eco437);
-              const net = Math.round((inn.amount - out.amount) * 100) / 100;
-              const unit = inn.currency === "crystal" ? "" : ` <span class="hint">${esc(inn.label.replace(/^[\d.]+ /, ""))}</span>`;
-              return `<span class="${netCls}">${net >= 0 ? "+" : ""}${net}</span> <span class="hint">(${inn.amount} in, ${out.amount} out)</span>${unit}`;
-            })())}
-          </div>`; })()}
-        ${(() => { // ✅ 2026-09-05 (Erik: "I can't open them to see what they produce and who is assigned, who lives there"): what is REAL, per hold
-          const cfgS = holdCfgNow();
-          const ys = yieldsFor(h, cfgS, { density: holdingGround(h, { locations: CONTENT.locations || {}, substrate: CONTENT.substrateModel || null }) }), up = upkeepFor(h, cfgS);
-          const y = ys[0] || null;
-          const produces = ys.length ? ys.map(yy => `${yy.units} ${String(yy.goods).replace(/_/g, " ")}${yy.feature ? ` (${yy.feature})` : ""}`).join(" + ") + ` per pass while ${h.condition}${y.hands ? ` (${y.hands} extra hand${y.hands === 1 ? "" : "s"})` : ""}${y.groundMult && y.groundMult !== 1 ? ` (ground ×${y.groundMult})` : ""}` : (h.kind === "post" ? "nothing yet — a post holds ground; a mine, a mill or a herd built here would" : "nothing yet");
-          const here = hereNow();
-          // ✅ B6b: a mobile holding says what she is and where she is — at anchor somewhere, or at sea and how far out.
-          const car = carriageOf(h); const voy = voyageOf(h);
-          const whereName = (id) => esc(CONTENT.locations?.[id]?.name || id);
-          const carLine = !car ? "" : voy
-            ? `<div class="hint">under way — ${esc(voyageLine(h, { worldDay: absoluteWorldDay(), locations: CONTENT.locations }) || "")} · <em>raidable where she is</em></div>`
-            : `<div class="hint">she moves — ${esc(car.moves)}${car.moves === "crewed" ? ` · needs ${car.needsCrew} aboard, has ${(h.garrison || []).length}` : car.bearerId ? ` · carried by ${esc(nameOf(car.bearerId))}` : ""}${car.speed !== 1 ? ` · ${car.speed}× speed` : ""}</div>`;
-          const where = h.locationId ? esc(CONTENT.locations?.[h.locationId]?.name || h.locationId)
-            : `<em>not recorded</em>${here?.id ? ` <button class="opt" data-hold-here="${esc(h.id)}" title="Record that this hold is the place you are standing in">It's here — ${esc(here.name || here.id)}</button>` : ""}`;
-          const crew = Object.values(character.worldState?.assignments || {}).filter(a => a && a.status !== "done" && (a.npcId === h.steward || a.id === h.fromAssignment)).map(a => `${esc(a.npcName || a.npcId)} — ${esc(String(a.charge || "").slice(0, 70))} (${esc(a.status || "working")})`);
-          return `<div class="hint">where: ${where}</div>
-        ${carLine}
-        <div class="hint">keeper: ${h.steward ? esc(nameOf(h.steward)) : "<em>nobody</em>"} · produces: ${esc(produces)}${up > 0 ? ` · keep: ${esc(priceHere(up, CONTENT.locations?.[h.locationId]?.regionId || null, CONTENT.rules?.economy || null).label)} per pass` : ""}</div>
-        ${crew.length ? `<div class="hint">at work here: ${crew.join("; ")}</div>` : ""}
-        <div class="hint">who lives here: ${(() => { const r = residentsOf(h, holdCfgNow()); return r.homes || r.people.length ? `${r.people.map(id => esc(nameOf(id))).join(", ") || "nobody named"}${r.homes ? ` · homes for ${r.homes}` : ""}` : "<em>nobody yet — quarters would house the people who work it</em>"; })()}</div>
-        ${(() => { // ✅ Q18: the boosts — a craft put to the place, hands, a watch; and how it grows on its own
-          const g = CONTENT.rules?.economy?.holdStore?.growth || null;
-          if (!g) return "";
-          const fns = new Set((g.improveFunctions || []).map(String));
-          const crafts = (character.abilities || []).map(a => fullCatalog()[a.abilityId]).filter(d => d && (d.functions || []).some(v => fns.has(String(v))) && !(h.improvements || []).some(i => i.abilityId === d.id));
-          const people = askable().filter(id => id !== h.steward).slice(0, 80);
-          const hands = (h.crew || []).map(id => esc(nameOf(id))).join(", "), guards = (h.garrison || []).map(id => esc(nameOf(id))).join(", ");
-          const done = (h.improvements || []).map(i => esc(i.name || i.abilityId)).join(", ");
-          return `<div class="hint">grows: ${h.steward ? `one rung every ${g.passesPerClimb || 4} passes under a keeper, as far as their standing allows` : "<em>not while nobody keeps it</em>"}${done ? ` · improved with ${done}` : ""}${hands ? ` · hands: ${hands}` : ""}${guards ? ` · watch: ${guards}` : ""}</div>
-        <div class="hold-controls">
-          ${crafts.length ? `<div class="hold-ctl"><span class="hold-ctl-label">Put a craft to it</span><select data-hold-craft="${esc(h.id)}">${crafts.map(d => `<option value="${esc(d.id)}">${esc(d.name || d.id)}</option>`).join("")}</select><button class="opt" data-hold-improve="${esc(h.id)}" title="Put a craft you carry to the place — it comes up a rung, once per craft">Apply</button></div>` : ""}
-          ${people.length ? `<div class="hold-ctl"><span class="hold-ctl-label">People</span><select data-hold-hand="${esc(h.id)}">${people.map(id => `<option value="${esc(id)}">${esc(nameOf(id))}</option>`).join("")}</select><button class="opt" data-hold-crew="${esc(h.id)}" title="Put them to work here — more hands, more yield (up to ${g.maxHands || 0})">Add hands</button><button class="opt" data-hold-guard="${esc(h.id)}" title="Post them on watch — halves a raid, costs ${g.garrisonUpkeepPerHand || 0} crystal a pass">Post a guard</button><button class="opt" data-hold-keeper-here="${esc(h.id)}" title="${h.steward ? "Make them keeper instead — the place stays yours; they run it" : "Make them keeper — the place stays yours, they run it, and an unkept hold cannot climb"}">${h.steward ? "Make keeper instead" : "Make keeper"}</button>${(h.crew || []).length || (h.garrison || []).length ? `<button class="opt" data-hold-clear="${esc(h.id)}" title="Stand the hands and the watch down">Stand them down</button>` : ""}</div>` : ((h.crew || []).length || (h.garrison || []).length ? `<div class="hold-ctl"><span class="hold-ctl-label">People</span><button class="opt" data-hold-clear="${esc(h.id)}" title="Stand the hands and the watch down">Stand them down</button></div>` : "")}
-          ${(() => { // ✅ B6b: sail her. The places her own graph reaches from where she lies, with the days at her speed — and when she cannot go, the reason in the row.
-            if (!car || voy) return "";
-            const here = CONTENT.locations?.[h.locationId] || null;
-            const near = [...new Set([...(here?.connections || []), ...Object.keys(character.generated?.location || {})])].filter(id => id !== h.locationId && CONTENT.locations?.[id]).slice(0, 40);
-            const opts = near.map(id => { const g = canSail(character, h, id, { locations: CONTENT.locations, npcs: character.npcRegistry, cfg: CONTENT.rules?.economy?.carriage, routeDays: walkingDays(here, CONTENT.locations[id]) });
-              const d = g.ok && g.days != null ? ` — ${g.days < 1 ? "under a day" : Math.round(g.days) + " days"}` : "";
-              return `<option value="${esc(id)}"${g.ok ? "" : " disabled"}>${whereName(id)}${d}${g.ok ? "" : " — " + esc(g.why.replace(/\.$/, ""))}</option>`; }).join("");
-            const first = near.find(id => canSail(character, h, id, { locations: CONTENT.locations, npcs: character.npcRegistry, cfg: CONTENT.rules?.economy?.carriage, routeDays: walkingDays(here, CONTENT.locations[id]) }).ok);
-            return `<div class="hold-ctl"><span class="hold-ctl-label">Sail her</span><select data-hold-dest="${esc(h.id)}">${opts}</select><button class="opt" data-hold-sail="${esc(h.id)}"${first ? "" : " disabled"} title="${first ? "Put out for the place chosen — you come along if you are aboard" : "Nowhere she can reach from here"}">Put out</button></div>`;
-          })()}
-        </div>`; })()}
-        `; })()}
-        ${(() => { // ✅ FEATURES — what the hold HAS (SPEC_holding_attributes pass two): built through play or here, read every pass
-          const cfgF = holdCfgNow(); const kinds = featureKinds(cfgF);
-          const list = (h.features || []).map((f, i) => {
-            // ⛔ CCODE-452: its level, and ⇧ to raise it — offered only where a level would change something
-            const eff = !f.building && featureLevel(f) < 3 ? levelEffectOf(featureDefOf(f.kind, holdCfgNow())) : null;
-            return `<span class="hold-chip">${esc(f.name || f.kind)}${f.count > 1 ? ` ×${f.count}` : ""}${featureLevel(f) > 1 ? `<span class="hold-lv">L${featureLevel(f)}</span>` : ""}${f.by && f.by !== "you" ? ` (${esc(nameOf(f.by))})` : ""}${eff ? `<button class="hold-chip-up" data-hold-raise="${esc(h.id)}" data-index="${i}" title="${esc(`Raise it to level ${featureLevel(f) + 1}: ${eff(featureLevel(f) + 1)} — as a job`)}">⇧</button>` : ""}<button class="hold-chip-x" data-hold-unfeature="${esc(h.id)}" data-index="${i}" title="Tear it down">×</button></span>`;
-          }).join("");
-          const opts = Object.entries(kinds).map(([k, d]) => `<option value="${esc(k)}">${esc(d.label || k)}</option>`).join("");
-          return `<div class="hint hold-has"><span class="hold-ctl-label">has</span>${list || "<em>nothing built yet</em>"}</div>
-        `; })()}
-        ${storeTotal(h) > 0 ? `<div class="hint">store: ${esc(Object.entries(h.store).filter(([, n]) => n > 0).map(([g, n]) => `${n} ${String(g).replace(/_/g, " ")}`).join(", "))}${(() => { const w = storeWorth(h, { economy: CONTENT.rules?.economy, regionId: CONTENT.locations?.[h.locationId]?.regionId || null, cfg: CONTENT.rules?.economy?.holdStore }); return w ? ` · worth ~${w} crystal here` : ""; })()}${h.arrears ? ` · in arrears ${h.arrears}` : ""}</div>` : ""}
-        ${/* ⛔ SNG-652 §6/§6b — THE TWO THINGS ERIK ASKED FOR BY NAME: what it costs to move the store each way
-              ("cost vs benefits so you can compare against selling here"), and what standing on it risks
-              ("run it lean when you're exposed, and stock up when you're walled"). Both READ — `storeExits`
-              and `raidRisk` — so neither can drift from what the pass actually pays. */""}
-        ${(() => { const v = vaultOf(h); if (!v.length) return ""; const atHold = hereNow()?.id === h.locationId;   // ⛔ CCODE-444: what its vault keeps
-          return `<div class="hint hold-has hold-vault"><span class="hold-ctl-label">vault</span>${v.map((it, i) => { const c = chargeOf(it, CONTENT.items || {}); const on = it.active !== false;
-            return `<span class="hold-chip vault-chip">${esc(it.customName || it.name)}${it.qty > 1 ? ` ×${it.qty}` : ""}${c ? `<button class="vault-charge ${on ? "on" : ""}" data-vault-charge="${esc(h.id)}" data-index="${i}" aria-pressed="${on}" title="${c > 0 ? "A well: it thickens the ground" : "A sink: it thins the ground"} at this place by ${Math.abs(c)} while it is on. Tap to switch it ${on ? "off" : "on"}.">${c > 0 ? "well" : "sink"} ${on ? "on" : "off"}</button>` : ""}${atHold ? `<button class="hold-chip-x" data-vault-take="${esc(h.id)}" data-index="${i}" title="Take it back into your pack">↩</button>` : ""}</span>`; }).join("")}</div>`; })()}
-        ${(() => { const A = armoryTable(CONTENT.rules?.economy?.armory || null); const m = makersAt(h, holdCfgNow(), A); const line = armoryLine(h, A);   // ⛔ CCODE-445: the armory
-          if (!line && !m.cap) return "";
-          const atHold = hereNow()?.id === h.locationId;
-          return `<div class="hint hold-has hold-armory"><span class="hold-ctl-label">armory</span><span>${esc(line || "empty")}</span>${m.cap ? `<span class="armory-make"><select data-make-gear aria-label="What to make">${Object.entries(A.gear).map(([k, g]) => `<option value="${esc(k)}"${h.forgeOrder?.gear === k ? " selected" : ""}>${esc(g.many)}</option>`).join("")}</select><input type="number" class="armory-count" min="1" max="999" step="1" value="${h.forgeOrder?.left || 10}" data-make-count aria-label="How many"><button class="opt" data-make-order="${esc(h.id)}" title="${esc(`Makes ${m.cap} a pass (${m.by.join(", ")}), from the store's raw material`)}">${h.forgeOrder ? "Change the order" : "Make"}</button>${h.forgeOrder ? `<button class="opt" data-make-stop="${esc(h.id)}">Stop</button>` : ""}</span>` : ""}${atHold && Object.values(armoryOf(h)).some(n => n > 0) ? `<button class="opt" data-sell-gear="${esc(h.id)}" title="Sell gear from the armory, at this place's price for arms, in its own money">Sell gear</button>` : ""}</div>`; })()}
-        ${(() => {   // ⛔ CCODE-450: standing work — who is put to what the hold needs, and what comes of it
-          const T = workTable(CONTENT.rules?.holdWork || null);
-          const at = workersAt(h);
-          const cands = workCandidates();
-          const wage = (Number(CONTENT.rules?.economy?.holdStore?.growth?.wagePerHand) || 0) * at.reduce((a, [, id]) => a + Math.max(1, workHeads(character, id)), 0);
-          const rows = Object.entries(T.kinds).map(([k, K]) => {
-            const ids = (workOf(h)[k] || []).map(String);
-            const perPass = ids.reduce((a, id) => a + workDayChance(workCraftsCached(id), k, T) * 3 * Math.max(1, workHeads(character, id)), 0);
-            const banked = Number(h.workBank?.[k]) || 0;
-            return `<div class="hw-row"><span class="hw-kind">${esc(K.label)}<small>${esc(K.what)}</small></span>
-              <span class="hw-who">${ids.map(id => `<button class="hw-chip" data-work-drop="${esc(h.id)}" data-kind="${esc(k)}" data-id="${esc(id)}" title="Take them off this work">${esc(workerName(id))} ✕</button>`).join("")}${cands.length ? `<select data-work-add="${esc(h.id)}" data-kind="${esc(k)}" aria-label="${esc(`Put someone to ${K.label.toLowerCase()}`)}"><option value="">+ put someone to it</option>${cands.map(p => `<option value="${esc(p.id)}">${esc(p.short || p.name)} — ${Math.round(100 * workDayChance(workCraftsCached(p.id), k, T))}% a good day</option>`).join("")}</select>` : ""}</span>
-              <span class="hw-gain">${ids.length ? `${perPass.toFixed(1)} good days a pass${K.per ? ` · ${banked} of ${K.per} banked` : " · while it lasts"}` : ""}</span></div>`;
-          }).join("");
-          return `<details class="hw"${at.length ? " open" : ""}><summary>Standing work${at.length ? ` — ${at.length} at it, ${esc(String(wage))} ${esc(CONTENT.rules?.economy?.holdStore?.upkeepCurrency || "crystal")} a pass in wages` : ""}</summary>
-            <p class="hint">People with no job, put to what the hold needs. They stay here and are nobody else's while they work it, and each is paid a hand's wage a pass, in the money of this place. Scouting, crafting and teaching come with the hold's levels.</p>
-            <div class="hw-rows">${rows}</div></details>`;
-        })()}
-        ${h.fromAssignment ? `<div class="hint">from work you delegated</div>` : ""}
-        <div class="opt-row" style="margin-top:6px">
-          <button class="opt" data-hold-manage="${esc(h.id)}" title="Add what was built, change who keeps it, sell the store, give it up">⚙ Manage this place</button>
-          <label class="opt hold-trade-toggle" title="Other travelers who come here can buy from the store, through its keeper, at this Reach's prices. The goods leave the store and the money — this place's own — comes to you on your next turn in the world."><input type="checkbox" data-hold-trade="${esc(h.id)}" ${h.trade === true ? "checked" : ""}> Open to other travelers' trade</label>
-          ${storeTotal(h) > 0 && hereNow()?.id === h.locationId ? `<button class="opt" data-hold-sell="${esc(h.id)}" title="Sell what is stored, at this Reach's prices — you sell where it stands">Sell the store</button>` : ""}
-          ${hereNow()?.id === h.locationId ? `<button class="opt" data-hold-sellpack="${esc(h.id)}" title="Sell what you carry, at this place's prices, in its own money">Sell from your pack</button>
-          <button class="opt" data-hold-exchange="${esc(h.id)}" title="Change money here, at this place's rates">Change money</button>
-          <button class="opt" data-hold-vault="${esc(h.id)}" title="Keep valuables here — a statue, an artifact, a well or sink that works on this place's ground while it is on">Put in the vault</button>` : ""}
+        <div class="hold-card-nums">
+          <span title="Everybody at this place \u2014 the keeper, the crew and the watch"><strong>${people}</strong> ${people === 1 ? "person" : "people"}</span>
+          ${per == null ? "" : `<span class="${perCls}" title="What your purse feels each pass, once its keep is paid"><strong>${per > 0 ? "+" : ""}${per}</strong> a pass</span>`}
+          <span title="How the place is faring">${esc(h.condition || "holding")}</span>
         </div>
-      </div></div>`;
+        ${/* ⛔ §345 · SNG-651 §2.2 — THE ALERT IS THE DOOR. Aevi's card carries one alert and one button;
+              Erik's ruling is that the card naming a problem carries the verb for it. Both hold when the alert
+              OPENS THE TAB THE VERB LIVES ON — unkept goes to People, a full place to Build, a raid to Defence. */""}
+        ${alert ? `<button class="hold-card-alert ${alert.cls}" data-hold-open="${esc(h.id)}" data-pp-goto="${alert.tab}" title="${esc(alert.verb)}">${esc(alert.said)}</button>` : ""}
+      </div>
+      <button class="opt hold-card-open" data-hold-open="${esc(h.id)}">Open</button>
+    </div>`;
   }).join("");
 
   // ⚑ SPEC_world_guesses — the world noticed a feature the record lacks, and asks. It never writes.
@@ -15205,8 +15149,12 @@ function renderHoldingsTab(manageId = null, tab = null) {
       const featRow = (f, i) => {
         const does = featureDoes(f.kind, cfgF, { holding: h, feature: f, count: f.count, level: featureLevel(f) });
         const d = featureDef(f.kind, cfgF) || {};
+        // ⛔ CCODE-452 — THE ⇧ THAT RAISES IT A LEVEL, offered only where a level would change something. It lived
+        // on the card's chip and went with the card; its handler stayed bound, which is how a door disappears
+        // without a single gate reddening. Aevi's §2.3 names "raise a feature" as this tab's own action.
+        const eff = !f.building && featureLevel(f) < 3 ? levelEffectOf(featureDefOf(f.kind, holdCfgNow())) : null;
         return `<div class="hf-row">
-          <div class="hf-top"><strong>${esc(f.name || d.label || f.kind)}</strong>${f.count > 1 ? ` <span class="hint">&times;${f.count}</span>` : ""}${featureLevel(f) > 1 ? ` <span class="hold-lv">L${featureLevel(f)}</span>` : ""}${f.building ? ` <span class="hint">&mdash; still being built</span>` : ""}${f.lapsed ? ` <span class="hint">&mdash; gone quiet</span>` : ""}
+          <div class="hf-top"><strong>${esc(f.name || d.label || f.kind)}</strong>${f.count > 1 ? ` <span class="hint">&times;${f.count}</span>` : ""}${featureLevel(f) > 1 ? ` <span class="hold-lv">L${featureLevel(f)}</span>` : ""}${f.building ? ` <span class="hint">&mdash; still being built</span>` : ""}${f.lapsed ? ` <span class="hint">&mdash; gone quiet</span>` : ""}${eff ? `<button class="hold-chip-up" data-hold-raise="${esc(h.id)}" data-index="${i}" title="${esc(`Raise it to level ${featureLevel(f) + 1}: ${eff(featureLevel(f) + 1)} — as a job`)}">⇧</button>` : ""}
             <button class="opt hf-x" data-hold-unfeature="${esc(h.id)}" data-index="${i}" title="${f.building ? "Stop the work" : "Tear it down"}" style="padding:0 5px">&times;</button></div>
           ${d.what ? `<div class="hf-what">${esc(d.what)}</div>` : ""}
           ${does.length ? `<div class="hf-does">${does.map(x => `<span class="hf-bit">${x.said}</span>`).join("")}</div>` : ""}
@@ -15238,7 +15186,11 @@ function renderHoldingsTab(manageId = null, tab = null) {
       // ⚠️ §2.3's own rule: an action that needs you standing there is GREYED AND SAID, never hidden.
       // "Today they simply vanish when you're elsewhere, and the player can't tell what's possible."
       const hereOnly = (html) => atHere ? html : `<div class="pp-elsewhere" title="You must be at ${esc(h.name || h.id)} to do this">${html}<span class="hint pp-must">— you must be here</span></div>`;
-      const TABS = [["overview", "Overview"], ["people", "People"], ["build", "Build"], ["store", "Store &amp; money"], ["defence", "Defence"], ["records", "Records"]];
+      // ⬜ AEVI 2026-09-26 (reply to CCODE-517): "Erik asked for **Attack & Defense** … Please rename the label
+      // and keep the `defence` key, so no state moves." The KEY is state — `holdTab` persists and every card
+      // alert routes by it — and the LABEL is not; moving the key would strand the alerts that name it.
+      // ⚠️ And the note sits ABOVE the line: a `//` after an entry swallows the rest of a one-line array.
+      const TABS = [["overview", "Overview"], ["people", "People"], ["build", "Build"], ["store", "Store &amp; money"], ["defence", "Attack &amp; Defense"], ["records", "Records"]];
       const tabNow = TABS.some(([k]) => k === holdTab) ? holdTab : "overview";
       const pane = (key, html) => `<div class="pp-pane" data-pp-pane="${key}"${key === tabNow ? "" : " hidden"}>${html}</div>`;
       return `<div class="item-detail-modal" id="hold-modal"><div class="item-detail-sheet pp-sheet" style="max-width:560px;text-align:left">
@@ -15252,12 +15204,58 @@ function renderHoldingsTab(manageId = null, tab = null) {
         ${pane("overview", `
           ${(() => { const loc = h.locationId ? (CONTENT.locations?.[h.locationId]?.name || h.locationId) : null;
             return loc ? `<div class="codex-f"><strong style="min-width:110px">Where</strong> <span>${esc(loc)}</span></div>` : ""; })()}
-          ${(() => { const ys = yieldsFor(h, cfgF, { density: holdingGround(h, { locations: CONTENT.locations || {}, substrate: CONTENT.substrateModel || null }) });
-            return `<div class="codex-f"><strong style="min-width:110px">What it makes</strong> <span>${ys.length ? esc(ys.map(y => `${y.units} ${String(y.goods).replace(/_/g, " ")}`).join(" + ")) + " a pass" : "nothing yet"}</span></div>`; })()}
-          ${(() => { const L = (() => { try { return holdingLedger(h, { economy: CONTENT.rules?.economy, cfg: holdCfgNow(), regionId: CONTENT.locations?.[h.locationId]?.regionId || null, locations: CONTENT.locations || {}, nameOf }); } catch { return null; } })();
+          ${(() => {
+            // ⛑ §72 — the place's own sentence: who keeps it, what it produces, what it costs to keep. Moved off
+            // the card whole, phrasing and all, because the phrasing is what the gate reads and the claim is unchanged.
+            const cfgS = holdCfgNow();
+            const ys = yieldsFor(h, cfgS, { density: holdingGround(h, { locations: CONTENT.locations || {}, substrate: CONTENT.substrateModel || null }) });
+            const up = upkeepFor(h, cfgS);
+            const y = ys[0] || null;
+            const produces = ys.length ? ys.map(yy => `${yy.units} ${String(yy.goods).replace(/_/g, " ")}${yy.feature ? ` (${yy.feature})` : ""}`).join(" + ") + ` per pass while ${h.condition}${y.hands ? ` (${y.hands} extra hand${y.hands === 1 ? "" : "s"})` : ""}${y.groundMult && y.groundMult !== 1 ? ` (ground ×${y.groundMult})` : ""}` : (h.kind === "post" ? "nothing yet — a post holds ground; a mine, a mill or a herd built here would" : "nothing yet");
+            return `<div class="hint">keeper: ${h.steward ? esc(nameOf(h.steward)) : "<em>nobody</em>"} · produces: ${esc(produces)}${up > 0 ? ` · keep: ${esc(priceHere(up, CONTENT.locations?.[h.locationId]?.regionId || null, CONTENT.rules?.economy || null).label)} per pass` : ""}</div>`;
+          })()}
+          ${(() => { const L = holdLedgerOf(h);
             if (!L?.perPass) return "";
             const P2 = L.perPass, cls = P2.net > 0 ? "good" : P2.net < 0 ? "bad" : "";
-            return `<div class="codex-f"><strong style="min-width:110px">Per pass</strong> <span class="pp-net ${cls}">${P2.net > 0 ? "+" : ""}${Math.round(P2.net * 100) / 100}</span> <span class="hint">what the purse feels once its keep is paid</span></div>`; })()}
+            // ⛔ SNG-652 §1 — THE WORD "PASS" IS DEFINED WHERE IT IS USED. Its one site was the card's grid
+            // label, and the card no longer has labels; this row is where the word lives now.
+            return `<div class="codex-f"><strong style="min-width:110px">Per pass ${infoDot("hold.pass")}</strong> <span class="pp-net ${cls}">${P2.net > 0 ? "+" : ""}${Math.round(P2.net * 100) / 100}</span> <span class="hint">what the purse feels once its keep is paid</span></div>`; })()}
+          ${(() => {
+            // ⛑ A HULL SAYS WHAT SHE IS AND WHERE SHE IS — at anchor, or under way and how far out (B6b).
+            const car = carriageOf(h); const voy = voyageOf(h);
+            if (!car) return "";
+            return voy
+              ? `<div class="codex-f"><strong style="min-width:110px">Under way</strong> <span>${esc(voyageLine(h, { worldDay: absoluteWorldDay(), locations: CONTENT.locations || {} }))}</span></div>`
+              : `<div class="codex-f"><strong style="min-width:110px">She moves</strong> <span>${esc(car.moves)}${car.moves === "crewed" ? ` · needs ${car.needsCrew}` : ""}</span></div>`;
+          })()}
+          ${(() => {
+            // ⛔ "IT'S HERE" — a hold whose place was never written down can be pinned to the ground you stand
+            // on. Without it such a hold has no region, no prices and no danger: it falls out of every reader
+            // that asks where it is.
+            if (h.locationId) return "";
+            const here = hereNow();
+            return here?.id
+              ? `<div class="opt-row" style="margin-top:6px"><button class="opt" data-hold-here="${esc(h.id)}" title="Record that this hold is the place you are standing in">It's here — ${esc(here.name || here.id)}</button></div>`
+              : `<div class="hint" style="margin-top:6px">Where it stands is not recorded, and you are nowhere it could be.</div>`;
+          })()}
+          ${(() => {
+            // ⛔ SAIL HER (B6b) — the places her own graph reaches from where she lies, each with its days and
+            // its refusal SAID rather than swallowed (§209).
+            const car = carriageOf(h); const voy = voyageOf(h);
+            if (!car || voy) return "";
+            const at = CONTENT.locations?.[h.locationId] || null;
+            const near = [...new Set([...(at?.connections || []), ...Object.keys(character.generated?.location || {})])].filter(id => id && id !== h.locationId).slice(0, 40);
+            if (!near.length) return "";
+            const nm = (id) => esc(CONTENT.locations?.[id]?.name || id);
+            const gate = (id) => canSail(character, h, id, { locations: CONTENT.locations, npcs: character.npcRegistry, cfg: CONTENT.rules?.economy?.carriage, routeDays: walkingDays(at, CONTENT.locations[id]) });
+            const opts = near.map(id => { const g = gate(id);
+              const d = g.ok && g.days != null ? ` — ${g.days < 1 ? "under a day" : Math.round(g.days) + " days"}` : "";
+              return `<option value="${esc(id)}"${g.ok ? "" : " disabled"}>${nm(id)}${d}${g.ok ? "" : " — " + esc(String(g.why || "cannot go"))}</option>`; }).join("");
+            const any = near.some(id => gate(id).ok);
+            return `<div class="opt-row" style="gap:6px;flex-wrap:wrap;margin-top:6px">
+              <select data-hold-dest="${esc(h.id)}">${opts}</select>
+              <button class="opt" data-hold-sail="${esc(h.id)}"${any ? "" : " disabled"} title="${any ? "Put out for the chosen place" : "Nowhere she can reach from here"}">Sail her</button></div>`;
+          })()}
           ${h.describedAs ? `<div class="hint" style="margin-top:6px">${esc(h.describedAs)}</div>` : ""}
           <div class="opt-row" style="gap:6px;flex-wrap:wrap;margin-top:8px">
             <button class="opt" data-hold-rename="${esc(h.id)}">Rename</button>
@@ -15266,14 +15264,50 @@ function renderHoldingsTab(manageId = null, tab = null) {
 
         ${pane("people", `
         ${head("Who is here")}
+        ${(() => {
+          // ⛔ §345 (ERIK) — THE VERB FOR THE PROBLEM. "A card reading 'unkept · nobody' carries the verb for
+          // it": Make keeper, from the people standing here, with the reason said ("an unkept hold cannot
+          // climb"). It lived on the card; it lives with its JOB now, and the card's alert is the door to it.
+          const g = CONTENT.rules?.economy?.holdStore?.growth || null;
+          if (!g) return "";
+          const people = askable().filter(id => id !== h.steward).slice(0, 80);
+          // ⛑ §72 — STANDING WORK AND WHO LIVES HERE. Aevi's table puts both on this tab ("keeper, crew, guard,
+          // residents, band beds, standing work"); they were on the card, and they are here, word for word.
+          const atWork = Object.values(character.worldState?.assignments || {}).filter(a => a && a.status !== "done" && (a.npcId === h.steward || a.id === h.fromAssignment)).map(a => `${esc(a.npcName || a.npcId)} — ${esc(String(a.charge || "").slice(0, 70))} (${esc(a.status || "working")})`);
+          const lives = `<div class="hint">who lives here: ${(() => { const r = residentsOf(h, holdCfgNow()); return r.homes || r.people.length ? `${r.people.map(id => esc(nameOf(id))).join(", ") || "nobody named"}${r.homes ? ` · homes for ${r.homes}` : ""}` : "<em>nobody yet — quarters would house the people who work it</em>"; })()}</div>`;
+          const hands = (h.crew || []).map(id => esc(nameOf(id))).join(", "), guards = (h.garrison || []).map(id => esc(nameOf(id))).join(", ");
+          const done = (h.improvements || []).map(i => esc(i.name || i.abilityId)).join(", ");
+          // ⛑ §74 — HOW IT CLIMBS, and it climbs under a KEEPER: a fact about who stands here, so it belongs on
+          // this tab. The card's own sentence, unchanged.
+          return `${atWork.length ? `<div class="hint">at work here: ${atWork.join("; ")}</div>` : ""}
+          ${lives}
+          <div class="hint">grows: ${h.steward ? `one rung every ${g.passesPerClimb || 4} passes under a keeper, as far as their standing allows` : "<em>not while nobody keeps it</em>"}${done ? ` · improved with ${done}` : ""}${hands ? ` · hands: ${hands}` : ""}${guards ? ` · watch: ${guards}` : ""}</div>
+          <div class="hold-controls">
+          ${people.length ? `<div class="hold-ctl"><span class="hold-ctl-label">People</span><select data-hold-hand="${esc(h.id)}">${people.map(id => `<option value="${esc(id)}">${esc(nameOf(id))}</option>`).join("")}</select><button class="opt" data-hold-crew="${esc(h.id)}" title="Put them to work here — more hands, more yield (up to ${g.maxHands || 0})">Add hands</button><button class="opt" data-hold-guard="${esc(h.id)}" title="Post them on watch — halves a raid, costs ${g.garrisonUpkeepPerHand || 0} crystal a pass">Post a guard</button><button class="opt" data-hold-keeper-here="${esc(h.id)}" title="${h.steward ? "Make them keeper instead — the place stays yours; they run it" : "Make them keeper — the place stays yours, they run it, and an unkept hold cannot climb"}">${h.steward ? "Make keeper instead" : "Make keeper"}</button>${(h.crew || []).length || (h.garrison || []).length ? `<button class="opt" data-hold-clear="${esc(h.id)}" title="Stand the hands and the watch down">Stand them down</button>` : ""}</div>` : ((h.crew || []).length || (h.garrison || []).length ? `<div class="hold-ctl"><span class="hold-ctl-label">People</span><button class="opt" data-hold-clear="${esc(h.id)}" title="Stand the hands and the watch down">Stand them down</button></div>` : "")}
+          </div>`;
+        })()}
+        ${(() => {   // ⛔ CCODE-450: standing work — who is put to what the hold needs, and what comes of it
+          const T = workTable(CONTENT.rules?.holdWork || null);
+          const at = workersAt(h);
+          const cands = workCandidates();
+          const wage = (Number(CONTENT.rules?.economy?.holdStore?.growth?.wagePerHand) || 0) * at.reduce((a, [, id]) => a + Math.max(1, workHeads(character, id)), 0);
+          const rows = Object.entries(T.kinds).map(([k, K]) => {
+            const ids = (workOf(h)[k] || []).map(String);
+            const perPass = ids.reduce((a, id) => a + workDayChance(workCraftsCached(id), k, T) * 3 * Math.max(1, workHeads(character, id)), 0);
+            const banked = Number(h.workBank?.[k]) || 0;
+            return `<div class="hw-row"><span class="hw-kind">${esc(K.label)}<small>${esc(K.what)}</small></span>
+              <span class="hw-who">${ids.map(id => `<button class="hw-chip" data-work-drop="${esc(h.id)}" data-kind="${esc(k)}" data-id="${esc(id)}" title="Take them off this work">${esc(workerName(id))} ✕</button>`).join("")}${cands.length ? `<select data-work-add="${esc(h.id)}" data-kind="${esc(k)}" aria-label="${esc(`Put someone to ${K.label.toLowerCase()}`)}"><option value="">+ put someone to it</option>${cands.map(p => `<option value="${esc(p.id)}">${esc(p.short || p.name)} — ${Math.round(100 * workDayChance(workCraftsCached(p.id), k, T))}% a good day</option>`).join("")}</select>` : ""}</span>
+              <span class="hw-gain">${ids.length ? `${perPass.toFixed(1)} good days a pass${K.per ? ` · ${banked} of ${K.per} banked` : " · while it lasts"}` : ""}</span></div>`;
+          }).join("");
+          return `<details class="hw"${at.length ? " open" : ""}><summary>Standing work${at.length ? ` — ${at.length} at it, ${esc(String(wage))} ${esc(CONTENT.rules?.economy?.holdStore?.upkeepCurrency || "crystal")} a pass in wages` : ""}</summary>
+            <p class="hint">People with no job, put to what the hold needs. They stay here and are nobody else's while they work it, and each is paid a hand's wage a pass, in the money of this place. Scouting, crafting and teaching come with the hold's levels.</p>
+            <div class="hw-rows">${rows}</div></details>`;
+        })()}
         ${(() => { // ⛔ CCODE-431: a guard out on a job is not on this watch until they are back
           const outs = (character.jobs?.out || []).flatMap(e => (e?.detached && !e.detached.returned ? e.detached.guards || [] : [])
             .filter(g => String(g.holdId) === String(h.id)).map(g => ({ g, e })));
           return outs.length ? `<div class="hint" style="margin-top:2px">off the watch: ${outs.map(({ g, e }) => `${esc(e.names?.[g.npcId] || nameOf(g.npcId))} — out on "${esc(e.job?.label || "a job")}", back day ${Math.floor((Number(e.backAtHours) || 0) / 24)}`).join(" · ")}</div>` : "";
         })()}
-        <div class="opt-row" style="gap:6px;flex-wrap:wrap;margin-top:4px">
-          ${folkOpts ? `<select data-hold-hand="${esc(h.id)}">${folkOpts}</select><button class="opt" data-hold-crew="${esc(h.id)}" title="Put them to work here \u2014 crew add to what it makes">Add hands</button><button class="opt" data-hold-guard="${esc(h.id)}" title="Post them on watch \u2014 a watch is what SEES a raid coming">Post a guard</button>` : ""}
-        </div>
         <div class="opt-row" style="gap:6px;flex-wrap:wrap;margin-top:4px">
           ${handTo.length ? `<select data-hold-to="${esc(h.id)}">${handTo.map(id => `<option value="${esc(id)}"${id === h.steward ? " selected" : ""}>${esc(nameOf(id))}</option>`).join("")}</select><button class="opt" data-hold-keeper="${esc(h.id)}" title="Appoint them keeper \u2014 the place stays yours; they run it">Make them keeper</button><button class="opt" data-hold-transfer="${esc(h.id)}" title="Hand OWNERSHIP to them">Hand it over</button>` : ""}
         </div>
@@ -15281,6 +15315,17 @@ function renderHoldingsTab(manageId = null, tab = null) {
 
         ${pane("build", `
         ${head("What stands here")}
+        ${(() => {
+          // ⛔ §179 — THE CONTROLS ARE LABELLED ROWS, not a drift of loose buttons. "Put a craft to it" is the
+          // Build tab's own job, and it keeps the shape the gate asserts because the shape is the point.
+          const g = CONTENT.rules?.economy?.holdStore?.growth || null;
+          if (!g) return "";
+          const fns = new Set((g.improveFunctions || []).map(String));
+          const crafts = (character.abilities || []).map(a => fullCatalog()[a.abilityId]).filter(d => d && (d.functions || []).some(v => fns.has(String(v))) && !(h.improvements || []).some(i => i.abilityId === d.id));
+          return `<div class="hold-controls">
+          ${crafts.length ? `<div class="hold-ctl"><span class="hold-ctl-label">Put a craft to it</span><select data-hold-craft="${esc(h.id)}">${crafts.map(d => `<option value="${esc(d.id)}">${esc(d.name || d.id)}</option>`).join("")}</select><button class="opt" data-hold-improve="${esc(h.id)}" title="Put a craft you carry to the place — it comes up a rung, once per craft">Apply</button></div>` : ""}
+          </div>`;
+        })()}
         ${(() => { // ⛔ CCODE-429 (SNG-628/630): the room — its rung or frame, what is taken, and when it is full both ways out, or the next rung
           const room = roomOf(h, cfgF);
           if (!room) return "";
@@ -15302,22 +15347,52 @@ function renderHoldingsTab(manageId = null, tab = null) {
                 one. ⚠️ So the field was authored, registered, loaded and read, and the door a PLAYER walks —
                 standing there having just cast the thing — could not express it. This is that door. */""}
           ${opts ? `<select data-hold-kind="${esc(h.id)}">${opts}</select><input data-hold-fname="${esc(h.id)}" placeholder="what it is called (optional)" style="max-width:200px"><select data-hold-bcraft="${esc(h.id)}" title="Which of your crafts raised it — what it DOES decides how long it stands: a craft that makes or mends is permanent, one that holds ground or defends lasts a season and then wants renewing. It costs the craft's own energy, the same as putting it to the place through Apply a craft."><option value="">— no craft, just work —</option>${(character.abilities || []).map(a => fullCatalog()[a.abilityId]).filter(d => d && (d.functions || []).length).map(d => { const e = craftPlacementCost(d, CONTENT.rules?.economy?.holdStore?.growth); return `<option value="${esc(d.id)}"${e > (Number(character.energy) || 0) ? " disabled" : ""}>${esc(d.name || d.id)} — ${e} energy${e > (Number(character.energy) || 0) ? ` (you have ${Number(character.energy) || 0})` : ""}</option>`; }).join("")}</select><button class="opt" data-hold-build="${esc(h.id)}" title="Pay the price — goods from the store, then the purse — and the work begins; it stands when its days have run">Build</button><button class="opt" data-hold-feature="${esc(h.id)}" title="The story built it, or the place came with it — free to record, and it still costs its keep">Record what the story built</button>` : ""}
-          <div class="hint" style="width:100%;margin-top:2px">${(() => { const kinds = Object.keys(holdCfgNow()?.features?.kinds || {}).filter(k => !k.startsWith("_")); return kinds.map(k => { const c = featureCost(k, holdCfgNow()); if (!c) return ""; const goods = c.build ? Object.entries(c.build.goods).map(([g, n]) => `${n} ${g.replace(/_/g, " ")}`).join(", ") : null; return `<span style="white-space:nowrap">${esc(holdCfgNow().features.kinds[k].label || k)}: ${goods ? esc(goods) + " · " + c.build.days + " days" : "cannot be built"} · ${c.upkeep}/pass</span>`; }).filter(Boolean).slice(0, 40).join(" &nbsp;·&nbsp; "); })()}</div>
+          ${/* ⛔ MEASURED AT 375px: eight of these eleven costs sat off the right edge of a 309px sheet —
+                unreadable, and with overflow visible unscrollable too.
+                ⚠️ MY FIRST READING WAS THE SEPARATOR — `&nbsp;·&nbsp;` leaves no break opportunity between the
+                items — and re-measuring after the change said no: ONE cost renders 422px wide, so nothing about
+                where the line may break can help. I had already written that reading down as settled.
+                ⛑ The fix is nowrap WHERE IT MATTERS and wrapping where it does not: a quantity is glued to its
+                unit in the markup, so "3 raw material" never splits, and the items lay out as a wrapping list
+                — several to a line on a desktop, one per line on a phone, each free to wrap inside itself. */""}
+          <div class="hint hold-costs" style="width:100%;margin-top:2px">${(() => { const kinds = Object.keys(holdCfgNow()?.features?.kinds || {}).filter(k => !k.startsWith("_")); return kinds.map(k => { const c = featureCost(k, holdCfgNow()); if (!c) return ""; const goods = c.build ? Object.entries(c.build.goods).map(([g, n]) => `${n}\u00a0${g.replace(/_/g, " ")}`).join(", ") : null; return `<span class="hold-cost">${esc(holdCfgNow().features.kinds[k].label || k)}: ${goods ? esc(goods) + " · " + c.build.days + "\u00a0days" : "cannot be built"} · ${c.upkeep}/pass</span>`; }).filter(Boolean).slice(0, 40).join(""); })()}</div>
           ${/* ⛔ CCODE-495 — A CRAFTED FEATURE APPEARS HERE TOO, or its expiry is a field nothing renders and the
                 player meets a lapse with no way to answer it. A feature is keyed by its KIND, an improvement by
                 its craft — `refreshImprovement` accepts either. */""}
           ${[...(h.improvements || []).map(i => ({ ...i, _key: i.abilityId })), ...(h.features || []).map(f => ({ ...f, _key: f.kind }))].some(i => i && i.expiresDay != null) ? `<div class="opt-row" style="gap:6px;flex-wrap:wrap;margin-top:6px">${[...(h.improvements || []).map(i => ({ ...i, _key: i.abilityId })), ...(h.features || []).map(f => ({ ...f, _key: f.kind }))].filter(i => i && i.expiresDay != null).map(i => `<button class="opt" data-hold-refresh="${esc(h.id)}" data-craft="${esc(i._key)}" title="${esc(i.name || i._key)} ${i.lapsed ? "has gone quiet" : "lasts until day " + i.expiresDay} — refreshing costs ${i.refreshCost || i.energy || 1} energy">${i.lapsed ? "↻ Wake" : "↻ Refresh"} ${esc(i.name || i._key)} (${i.refreshCost || i.energy || 1} energy)</button>`).join("")}</div>` : ""}
         </div>
-        ${crafts ? `<div class="opt-row" style="gap:6px;flex-wrap:wrap;margin-top:4px"><select data-hold-craft="${esc(h.id)}">${crafts}</select><button class="opt" data-hold-improve="${esc(h.id)}" title="Put a craft to the place">Apply a craft</button></div>` : ""}
         `)}
 
         ${pane("store", `
-          ${B.store || `<div class="hint">There is nothing in the store to move.</div>`}
-          ${hereOnly(`<div class="opt-row" style="gap:6px;flex-wrap:wrap;margin-top:6px">
-            <button class="opt" data-hold-sell="${esc(h.id)}" title="Sell what is stored here, at this place's own prices">Sell the store</button>
-            <button class="opt" data-hold-sellpack="${esc(h.id)}" title="Sell from what you are carrying">Sell from your pack</button>
-            <button class="opt" data-hold-exchange="${esc(h.id)}" title="Change money at this place's rate">Change money</button>
-          </div>`)}`)}
+          ${(() => {
+            // ⛑ WHAT IS ACTUALLY STORED HERE, in the goods' own words.
+            const tot = storeTotal(h);
+            if (!tot) return `<div class="hint">Nothing is stored here.</div>`;
+            const line = Object.entries(h.store || {}).filter(([, n]) => n > 0).map(([g, n]) => `${n} ${String(g).replace(/_/g, " ")}`).join(" · ");
+            // ⛑ §69 — AND WHAT IT IS WORTH HERE, which is the number that decides whether to sell or to carry. The
+            // card's own sentence; a heap of goods with no price on it is not an answer to "should I sell".
+            const w = storeWorth(h, { economy: CONTENT.rules?.economy, regionId: CONTENT.locations?.[h.locationId]?.regionId || null, cfg: CONTENT.rules?.economy?.holdStore });
+            return `<div class="codex-f"><strong style="min-width:110px">Stored</strong> <span>${esc(line)}${w ? ` · worth ~${w} crystal here` : ""}${h.arrears ? ` · in arrears ${h.arrears}` : ""}</span></div>`;
+          })()}
+        ${(() => { const v = vaultOf(h); if (!v.length) return ""; const atHold = hereNow()?.id === h.locationId;   // ⛔ CCODE-444: what its vault keeps
+          return `<div class="hint hold-has hold-vault"><span class="hold-ctl-label">vault</span>${v.map((it, i) => { const c = chargeOf(it, CONTENT.items || {}); const on = it.active !== false;
+            return `<span class="hold-chip vault-chip">${esc(it.customName || it.name)}${it.qty > 1 ? ` ×${it.qty}` : ""}${c ? `<button class="vault-charge ${on ? "on" : ""}" data-vault-charge="${esc(h.id)}" data-index="${i}" aria-pressed="${on}" title="${c > 0 ? "A well: it thickens the ground" : "A sink: it thins the ground"} at this place by ${Math.abs(c)} while it is on. Tap to switch it ${on ? "off" : "on"}.">${c > 0 ? "well" : "sink"} ${on ? "on" : "off"}</button>` : ""}${atHold ? `<button class="hold-chip-x" data-vault-take="${esc(h.id)}" data-index="${i}" title="Take it back into your pack">↩</button>` : ""}</span>`; }).join("")}</div>`; })()}
+        ${(() => { const A = armoryTable(CONTENT.rules?.economy?.armory || null); const m = makersAt(h, holdCfgNow(), A); const line = armoryLine(h, A);   // ⛔ CCODE-445: the armory
+          if (!line && !m.cap) return "";
+          const atHold = hereNow()?.id === h.locationId;
+          return `<div class="hint hold-has hold-armory"><span class="hold-ctl-label">armory</span><span>${esc(line || "empty")}</span>${m.cap ? `<span class="armory-make"><select data-make-gear aria-label="What to make">${Object.entries(A.gear).map(([k, g]) => `<option value="${esc(k)}"${h.forgeOrder?.gear === k ? " selected" : ""}>${esc(g.many)}</option>`).join("")}</select><input type="number" class="armory-count" min="1" max="999" step="1" value="${h.forgeOrder?.left || 10}" data-make-count aria-label="How many"><button class="opt" data-make-order="${esc(h.id)}" title="${esc(`Makes ${m.cap} a pass (${m.by.join(", ")}), from the store's raw material`)}">${h.forgeOrder ? "Change the order" : "Make"}</button>${h.forgeOrder ? `<button class="opt" data-make-stop="${esc(h.id)}">Stop</button>` : ""}</span>` : ""}${atHold && Object.values(armoryOf(h)).some(n => n > 0) ? `<button class="opt" data-sell-gear="${esc(h.id)}" title="Sell gear from the armory, at this place's price for arms, in its own money">Sell gear</button>` : ""}</div>`; })()}
+          ${B.store || ""}
+          <div class="opt-row" style="gap:6px;flex-wrap:wrap;margin-top:8px">
+            ${/* ⚠️ §2.3 — an action that needs you STANDING THERE is greyed and SAID, never hidden: "Today they
+                  simply vanish when you're elsewhere, and the player can't tell what's possible." */""}
+            ${storeTotal(h) > 0 ? (hereNow()?.id === h.locationId
+              ? `<button class="opt" data-hold-sell="${esc(h.id)}" title="Sell what is stored here, at this place's own prices">Sell the store</button>`
+              : `<span class="pp-elsewhere"><button class="opt" disabled>Sell the store</button><span class="hint pp-must">— you must be here</span></span>`) : ""}
+            ${hereNow()?.id === h.locationId ? `<button class="opt" data-hold-sellpack="${esc(h.id)}" title="Sell from what you are carrying">Sell from your pack</button>` : `<span class="pp-elsewhere"><button class="opt" disabled>Sell from your pack</button><span class="hint pp-must">— you must be here</span></span>`}
+            <label class="opt hold-trade-toggle" title="Other travelers who come here can buy from the store, through its keeper, at this Reach's prices. The goods leave the store and the money — this place's own — comes to you on your next turn in the world."><input type="checkbox" data-hold-trade="${esc(h.id)}" ${h.trade === true ? "checked" : ""}> Open to other travelers' trade</label>
+            <button class="opt" data-hold-exchange="${esc(h.id)}" title="Change money here, at this place's own rate">Change money</button>
+            <button class="opt" data-hold-vault="${esc(h.id)}" title="Keep valuables here — a hold is a safer pocket than a road">Put something in the vault</button>
+          </div>`)}
 
         ${pane("defence", `
           ${B.watch || ""}
@@ -15349,7 +15424,7 @@ function renderHoldingsTab(manageId = null, tab = null) {
     saveSidebarState();
   };
   wireHoldingOffers();
-  // \u26d1 THE POPUP OPENS AND CLOSES THE WAY EVERY OTHER ONE HERE DOES \u2014 the button, the \u2715, and the backdrop.
+  // ⛑ THE POPUP OPENS AND CLOSES THE WAY EVERY OTHER ONE HERE DOES — the button, the ✕, and the backdrop.
   // ⛔ SNG-653 §5 — "ASK THEM" IS THE DOOR BACK TO THE TABLE. Erik's whole report is that the screen kept
   // telling him to have a conversation it could not help him start. ⚠️ IT DOES NOT MAKE THE PROMISE — it seeds
   // the ask and hands it to the player, because whether they say yes is the GM's and the person's, never a
@@ -15388,12 +15463,11 @@ function renderHoldingsTab(manageId = null, tab = null) {
     // A focus brings the field into view in every browser anyway, so obeying the rule costs nothing here.
     if (ff) { ff.value = ask; ff.focus(); }
   };
-  for (const b of document.querySelectorAll("[data-hold-manage]")) b.onclick = () => renderHoldingsTab(b.dataset.holdManage);
   // ═════ SNG-651 · THE DOORS ═════
   // ⛔ OPEN A PLACE. The whole card is the target and so is its button — on a phone the card is one row high
   // and a player should not have to find a 60px button on it.
   for (const el of document.querySelectorAll("[data-hold-open]")) {
-    const go = (e) => { e.stopPropagation(); renderHoldingsTab(el.dataset.holdOpen, "overview"); };
+    const go = (e) => { e.stopPropagation(); renderHoldingsTab(el.dataset.holdOpen, el.dataset.ppGoto || "overview"); };
     el.onclick = go;
     if (el.tagName !== "BUTTON") el.onkeydown = (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go(e); } };
   }
@@ -15468,9 +15542,7 @@ function renderCharacterScreen() {
       // ⛔ WHAT THE ESTATE IS DOING, which the sheet has never shown: the sum of every holding's pass — what it makes, what the
       // keeper sells, the fees, the upkeep — plus the caravans actually on the road right now. ⚠️ `net` is the authored field the
       // purse really receives, so the headline number is the one that lands rather than one I add up myself.
-      const estate = (character.holdings || []).map(h => ({ h, L: holdingLedger(h, {
-        economy: CONTENT.rules?.economy, cfg: holdCfgNow(), regionId: CONTENT.locations?.[h.locationId]?.regionId || null,
-        character, locations: CONTENT.locations || {} }) })).filter(x => x.L);
+      const estate = (character.holdings || []).map(h => ({ h, L: holdLedgerOf(h) })).filter(x => x.L);
       // ⚠️ THE FIELD IS `worth`, NOT `made`. The first draft read `perPass.made` and the panel said "makes 0 · sold 189", which
       // is impossible on its face — a keeper sells a SHARE of what a pass makes — and is exactly the sort of number that gets
       // believed. The authored names are `worth` (the pass, valued here), `sells`, `fees`, `upkeep`, `net` and `banks`.

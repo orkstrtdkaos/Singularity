@@ -2067,6 +2067,11 @@ table.ob-matrix { border-collapse: collapse; width: 100%; min-width: 640px; font
 
 /* ⛔ CCODE-452 — a feature's level on its chip, and ⇧ to raise it */
 .hold-lv { font-size: 10px; color: var(--accent); border: 1px solid rgba(212, 162, 74, 0.5); border-radius: 4px; padding: 0 4px; margin-left: 3px; }
+/* SNG-651 §2.3 · measured at 375px: the build-cost catalogue's items were `white-space:nowrap` and one of them
+   was 422px inside a 309px sheet, so eight of eleven sat off the edge with nothing to scroll. A wrapping list,
+   with each quantity glued to its unit in the markup, fits any width without splitting a price. */
+.hold-costs { display: flex; flex-wrap: wrap; gap: 1px 12px; }
+.hold-cost { white-space: normal; }
 .hold-chip-up { background: none; border: 0; color: var(--accent2); cursor: pointer; font-size: 12px; line-height: 1; padding: 0 3px; }
 .hold-chip-up:hover { color: var(--accent); }
 
@@ -2164,6 +2169,11 @@ table.ob-matrix { border-collapse: collapse; width: 100%; min-width: 640px; font
 .hold-card-body { flex: 1 1 auto; min-width: 0; }
 .hold-card-top { display: flex; gap: 4px; align-items: baseline; flex-wrap: wrap; }
 .hold-card-facts { font-size: 11.5px; opacity: .62; }
+/* SNG-651 §2.2: measured at 375px, holdingFactsLine ran to 194px of a 319px card — ten lines of one
+   sentence. Clamped ON THE CARD only (the whole line is in its title, and the place page shows it
+   whole), so the card stays the height Aevi asked for on a phone. */
+.hold-card .hold-card-facts { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  overflow: hidden; }
 .hold-card-nums { display: flex; gap: 12px; flex-wrap: wrap; font-size: 12.5px; margin-top: 2px;
   font-variant-numeric: tabular-nums; }
 .hold-card-nums .good { color: var(--good, #79c08a); }

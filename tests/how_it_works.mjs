@@ -2359,9 +2359,25 @@ console.log("\n── §179 · labelled rows and chips on the holding card; Hugi
     /<div class="hold-controls">/.test(app179) && /<div class="hold-ctl"><span class="hold-ctl-label">Put a craft to it<\/span><select data-hold-craft=/.test(app179)
     && /<div class="hold-ctl"><span class="hold-ctl-label">People<\/span><select data-hold-hand="\$\{esc\(h\.id\)\}">[^\n]*<button class="opt" data-hold-crew=/.test(app179)
     && !/<div class="opt-row" style="margin-top:4px;gap:6px;flex-wrap:wrap">/.test(app179));
-  check("§179: ⛔ what the hold HAS reads as chips, each with its own tear-down, not a sentence with × buttons in it — and the CSS exists for every class the markup uses",
-    /<span class="hold-chip">[^\n]*<button class="hold-chip-x" data-hold-unfeature=/.test(app179) && /<div class="hint hold-has"><span class="hold-ctl-label">has<\/span>/.test(app179)
-    && /\.hold-controls \{/.test(css179) && /\.hold-ctl \{/.test(css179) && /\.hold-ctl-label \{/.test(css179) && /\.hold-has \{/.test(css179) && /\.hold-chip \{/.test(css179) && /\.hold-chip-x \{/.test(css179));
+  // ⛑ SNG-651 §2.2 MOVED THE HOME, NOT THE CLAIM. The compact "has: chip chip chip" sentence lived on the list
+  // card, and the card now only reads; what the hold has is rendered ONCE, on the Build tab, as one row per
+  // thing — its own tear-down, its own ⇧, the catalogue's words and the engine's numbers. The defect §179 was
+  // written about is "a sentence with × buttons in it", and a row per thing is the strong form of the fix.
+  // ⚠️ AND THE CSS HALF IS NOW MECHANICAL rather than a hand-list I have to remember to extend: every class the
+  // feature rows actually name must have a rule. A hand-list goes stale the first time the markup gains a class.
+  const featRowSrc = (app179.match(/const featRow = \(f, i\) => \{[\s\S]*?\n      \};/) || [""])[0];
+  const rowClasses = [...new Set([...featRowSrc.matchAll(/class="([^"$]*)"/g)].flatMap(m => m[1].split(/\s+/)).filter(Boolean))];
+  const noCss = rowClasses.filter(c => !new RegExp(`\\.${c}[\\s,:{]`).test(css179));
+  check("§179: ⛔ what the hold HAS reads as one row per thing, each with its own tear-down and its own ⇧, not a sentence with × buttons in it — and the CSS exists for every class the markup uses",
+    /<div class="hf-row">/.test(featRowSrc) && /<button class="opt hf-x" data-hold-unfeature="\$\{esc\(h\.id\)\}" data-index="\$\{i\}"/.test(featRowSrc)
+    && /<button class="hold-chip-up" data-hold-raise="\$\{esc\(h\.id\)\}" data-index="\$\{i\}"/.test(featRowSrc)
+    && rowClasses.length >= 6 && noCss.length === 0
+    && /\.hold-controls \{/.test(css179) && /\.hold-ctl \{/.test(css179) && /\.hold-ctl-label \{/.test(css179),
+    noCss.length ? `no CSS rule for: ${noCss.join(", ")}` : `${rowClasses.length} classes, all styled`);
+  // ⛔ …and the chip form itself is not retired — the vault still reads as chips with their own tear-down.
+  check("§179: ⛑ …and where chips DO still render — the vault's — they keep their own tear-down and their CSS",
+    /<span class="hold-chip vault-chip">[^\n]*<button class="hold-chip-x" data-vault-take=/.test(app179)
+    && /\.hold-has \{/.test(css179) && /\.hold-chip \{/.test(css179) && /\.hold-chip-x \{/.test(css179));
   check("§179: ⛔ a companion whose person is in the registry is named by the registry everywhere the companion is named — a rename still wins, the authored name is last",
     /const compName = \(c\) => character\.companionNames\?\.\[c\.id\] \|\| character\.npcRegistry\?\.\[c\.id\]\?\.name \|\| c\.name;/.test(app179)
     && (app179.match(/compName\(c\)/g) || []).length >= 6 && !/character\.companionNames\?\.\[c\.id\] \|\| c\.name/.test(app179) && !/character\.companionNames\?\.\[id\] \|\| c\.name/.test(app179));
@@ -7175,7 +7191,7 @@ console.log("\n── §75 · features — a mine yields, a temple carries meani
   const app75 = rd("app.js"), gm75 = rd("engine/gm.js");
   check("§75: …the GM has `feature` and `rename`, a claim carries `rename`, and the tab has *Add what was built* / *Rename* and lists what the hold has",
     /sell\|improve\|crew\|garrison\|feature\|rename/.test(gm75) && /kind === "feature"/.test(app75) && /kind === "rename"/.test(app75) && /rename: op\.rename === true/.test(app75)
-    && /data-hold-feature=/.test(app75) && /data-hold-rename=/.test(app75) && /data-hold-unfeature=/.test(app75) && /hold-has"><span class="hold-ctl-label">has<\/span>\$\{list/.test(app75) && /residentsOf\(h, holdCfgNow\(\)\)/.test(app75));   // §179: the "has:" sentence became chips
+    && /data-hold-feature=/.test(app75) && /data-hold-rename=/.test(app75) && /data-hold-unfeature=/.test(app75) && /\$\{built \|\| "nothing built yet"\}/.test(app75) && /residentsOf\(h, holdCfgNow\(\)\)/.test(app75));   // §179: the "has:" sentence became chips, then SNG-651 §2.2 made it one row per thing on the Build tab
   check("§75: …the body and the spec say so", /holdFeatures/.test(rd("docs/HOW_IT_WORKS.md")) && /PASS TWO, FIRST CUT/.test(rd("po/SPEC_holding_attributes.md")));
 }
 /* ═════ §76 — R47 THE UNIVERSAL FALLBACKS RETIRE BEHIND THE FREE TOUCH · R46c NO CAP, AND A ROW IS A CRAFT ═════ */
@@ -10988,11 +11004,69 @@ console.log("\n── §106 · a hold says what it costs, and every control does
   check("§106: ⚠️ …and the scan is not vacuous — it finds the real buttons on the real screen",
     buttons.size >= 8, `${buttons.size} data-hold buttons`);
 
-  check("§106: ⚑ the card shows the four Erik named, as a grid rather than six sentences",
-    /hold-grid/.test(app106) && /income vs keep/.test(app106) && /holdingLedger\(h, \{/.test(app106)
-    && /\.hold-grid/.test(rd("style.css")));
+  // ⛔ AND THE SAME QUESTION THE OTHER WAY ROUND, which is the one that cost me four doors. Cutting a card body
+  // leaves its HANDLERS bound to selectors nothing renders any more: `data-hold-raise` (CCODE-452's ⇧),
+  // `data-hold-trade` (the toggle §273's whole mechanism hangs off), `data-work-add`/`data-work-drop` (CCODE-450's
+  // standing work) all vanished from the screen in SNG-651 §2.2 with every gate green, because every gate asked
+  // "does this button work?" and none asked "is this control still on the screen?"
+  // ⚠️ ANY element carries these, not only buttons — a select, a checkbox in a label — so the markup side reads
+  // the attribute wherever it is written.
+  const rendered = new Set([...app106.matchAll(/data-(hold-[a-z-]+|work-[a-z-]+|vault-[a-z-]+|make-[a-z-]+)=/g)]
+    .map(m => m[1].replace(/-([a-z])/g, (_, ch) => ch.toUpperCase())));
+  const handlers = [...new Set([...app106.matchAll(/querySelectorAll\("\[data-((?:hold|work|vault|make)-[a-z-]+)\]"\)/g)].map(m => m[1]))];
+  const orphans = handlers.filter(h => !rendered.has(h.replace(/-([a-z])/g, (_, ch) => ch.toUpperCase())));
+  check("§106: ⛔ NO HOLDING HANDLER IS ORPHANED — a handler bound to a control nothing renders is a feature that left the screen",
+    orphans.length === 0, orphans.map(o => `data-${o}`).join(" · "));
+  check("§106: ⚠️ …and that scan is not vacuous either — it finds the real handlers",
+    handlers.length >= 20, `${handlers.length} bound handlers`);
+
+  // ⛔ SNG-651 §2.2 CUT THE GRID TO AEVI'S THREE — "three numbers: people · per pass · condition" — and moved
+  // the keeper and what-it-makes onto the place page's Overview, where their sentences already are. The four
+  // Erik named are all still READ; two of them are no longer on the list card.
+  // ⚠️ AND THE STRONGER HALF, which this change taught: THE CARD'S NUMBERS COME FROM THE READERS' OWN BAGS. My
+  // first cut reconstructed them from memory — `residentsOf(h, { nameOf })` (which takes the hold CONFIG, and
+  // whose `{homes, people}` has no `.length`, so the card said "undefined people"), and a ledger with no
+  // `character` (no runner fees) and no `density` (rich and poor ground flattened to one yield). Nothing threw
+  // and nothing reddened, because every gate that touches these readers builds its own bag.
+  check("§106: ⚑ the card shows Aevi's three — people · per pass · condition — and each from the reader that owns it",
+    /hold-card-nums/.test(app106) && /residentsOf\(h, holdCfgNow\(\)\)\.people\.length/.test(app106)
+    && /const per = \(\(\) => \{ const L = holdLedgerOf\(h\);/.test(app106)
+    && /\.hold-card-nums/.test(rd("style.css")));
+  // ⛔ AND THE BAG IS THE READING, SO THERE IS ONE OF IT. `holdingLedger` answers whatever it is handed: no
+  // `character` and a relay hold's runner fees vanish, no `density` and rich ground yields what poor ground
+  // does — neither throws, neither shows in the answer. Four sites carried four different bags, and the ground
+  // strip's own comment claimed they could not disagree while the cards under it added to +372 a pass and the
+  // strip said +347. ⚠️ "The same function" is not the claim that keeps two screens honest; "the same call" is.
+  const ledgerBags = (app106.match(/holdingLedger\(h, \{/g) || []).length;
+  check("§106: ⛔ ONE LEDGER CALL FOR THE WHOLE APP — every reader comes through `holdLedgerOf`, bag and all, or two screens quietly answer different questions",
+    ledgerBags === 1 && /function holdLedgerOf\(h\) \{[\s\S]{0,600}?density: holdingGround\(h, \{[\s\S]{0,200}?character, locations: CONTENT\.locations \|\| \{\} \}\);/.test(app106)
+    && (app106.match(/holdLedgerOf\(h\)/g) || []).length >= 5,
+    `${ledgerBags} holdingLedger bag(s) in app.js`);
+  // ⛔ …AND THE CARD IS THE HEIGHT AEVI ASKED FOR ON A PHONE. Measured at 375px: `holdingFactsLine` runs to 225
+  // characters on Silas's Threshold Post — ten lines, 194px of a 319px card, against §2.2's "on a phone the card
+  // is one row high". ⛑ Clamped ON THE CARD ONLY (scoped by ancestor) with the whole line in its title, so the
+  // place page still shows it whole and ONE helper still renders both, which is what §123 is about.
+  check("§106: ⛔ …and the card's facts line clamps on the card, with its whole text in the title — a 225-character sentence was 194px of a 319px card at 375px",
+    /\.hold-card \.hold-card-facts \{[^}]*-webkit-line-clamp: 2/.test(rd("style.css")) && /\.hold-card \.hold-card-facts \{[^}]*overflow: hidden/.test(rd("style.css"))
+    && /const factsOf = \(h\) => \{[^\n]*title="\$\{esc\(line\)\}">\$\{esc\(line\)\}/.test(app106));
+  // ⛔ …AND THE BUILD COSTS FIT A PHONE. Measured at 375px: the catalogue's items were `white-space:nowrap` and
+  // ONE of them was 422px inside a 309px sheet, so eight of eleven sat off the right edge with nothing to
+  // scroll. ⚠️ My first reading blamed the separator (`&nbsp;·&nbsp;` leaves no break opportunity between the
+  // items) and re-measuring said no — breaking BETWEEN costs cannot help a cost that is itself too wide.
+  // ⛑ Nowrap where it matters: the quantity is glued to its unit in the MARKUP, so "3 raw material" never
+  // splits, and everything else wraps.
+  check("§106: ⛔ …and the build-cost catalogue wraps rather than running off a phone — a 422px item in a 309px sheet",
+    // ⚠️ `.` STANDS FOR THE BACKSLASH ON PURPOSE. Writing `\\u00a0` here is a count a shell heredoc will
+    // change out from under the file, and in a regex the one-backslash form silently becomes the NBSP
+    // CHARACTER — which the source does not contain — so the gate reddens against correct code.
+    /class="hold-cost"/.test(app106) && /`\$\{n\}.u00a0\$\{g\.replace/.test(app106) && !/`\$\{n\} \$\{g\.replace/.test(app106)
+    && /\.hold-costs \{[^}]*flex-wrap: wrap/.test(rd("style.css")) && /\.hold-cost \{[^}]*white-space: normal/.test(rd("style.css"))
+    && !/<span style="white-space:nowrap">/.test(app106));
+  // ⛑ …and the two that left the card are read on the place page, so nothing Erik named is unreachable.
+  check("§106: ⛑ …and the keeper and what it makes are read on the Overview tab, where their sentences live",
+    /keeper: \$\{h\.steward \? esc\(nameOf\(h\.steward\)\) : "<em>nobody<\/em>"\} \u00b7 produces:/.test(app106) && /Per pass \$\{infoDot\("hold\.pass"\)\}/.test(app106));
   check("§106: …and the popup opens, closes on the ✕, and closes on the backdrop — the house pattern",
-    /data-hold-manage/.test(app106) && /hold-modal-close/.test(app106)
+    /<button class="opt hold-card-open" data-hold-open=/.test(app106) && /hold-modal-close/.test(app106)
     && /hmBack\.onclick = \(e\) => \{ if \(e\.target === hmBack\)/.test(app106));
 }
 

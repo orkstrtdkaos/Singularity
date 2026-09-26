@@ -1,0 +1,38 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "title": "region_prices",
+ "_draft": "SNG-658: DERIVED FROM THE CORPUS (40 records) on 2026-09-25 — required = present on every record. Aevi reviews and tightens; do not treat as ratified until _draft is removed.",
+ "type": "object",
+ "required": [
+  "regionId",
+  "tradition",
+  "goods",
+  "deadList"
+ ],
+ "properties": {
+  "regionId": {
+   "type": "string",
+   "description": "present on 40 of 40"
+  },
+  "tradition": {
+   "type": "string",
+   "description": "present on 40 of 40"
+  },
+  "goods": {
+   "type": "object",
+   "description": "present on 40 of 40"
+  },
+  "deadList": {
+   "type": "array",
+   "description": "present on 40 of 40"
+  },
+  "note": {
+   "type": "string",
+   "description": "present on 38 of 40"
+  }
+ },
+ "patternProperties": {
+  "^_": {}
+ },
+ "additionalProperties": false
+}

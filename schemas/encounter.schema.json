@@ -1,0 +1,121 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "title": "encounter",
+ "_draft": "SNG-658: DERIVED FROM THE CORPUS (23 records) on 2026-09-25 — required = present on every record. Aevi reviews and tightens; do not treat as ratified until _draft is removed.",
+ "type": "object",
+ "required": [
+  "schemaVersion",
+  "id"
+ ],
+ "properties": {
+  "schemaVersion": {
+   "type": "number",
+   "description": "present on 23 of 23"
+  },
+  "id": {
+   "type": "string",
+   "description": "present on 23 of 23"
+  },
+  "kind": {
+   "type": "string",
+   "description": "present on 4 of 23"
+  },
+  "note": {
+   "type": "string",
+   "description": "present on 4 of 23"
+  },
+  "opponents": {
+   "type": "array",
+   "description": "present on 2 of 23"
+  },
+  "setup": {
+   "type": "string",
+   "description": "present on 20 of 23"
+  },
+  "stakes": {
+   "type": "string",
+   "description": "present on 4 of 23"
+  },
+  "project": {
+   "type": "object",
+   "description": "present on 1 of 23"
+  },
+  "outcomes": {
+   "type": "array",
+   "description": "present on 1 of 23"
+  },
+  "opponent": {
+   "type": "object",
+   "description": "present on 16 of 23"
+  },
+  "theDuel": {
+   "type": "object",
+   "description": "present on 1 of 23"
+  },
+  "type": {
+   "type": "string",
+   "enum": [
+    "duel",
+    "puzzle",
+    "challenge"
+   ],
+   "description": "present on 19 of 23"
+  },
+  "name": {
+   "type": "string",
+   "description": "present on 19 of 23"
+  },
+  "locationId": {
+   "type": "string",
+   "description": "present on 19 of 23"
+  },
+  "lethal": {
+   "type": "boolean",
+   "description": "present on 14 of 23"
+  },
+  "party": {
+   "type": "object",
+   "description": "present on 19 of 23"
+  },
+  "difficulty": {
+   "type": "number",
+   "description": "present on 2 of 23"
+  },
+  "attribute": {
+   "type": "string",
+   "description": "present on 2 of 23"
+  },
+  "subAttribute": {
+   "type": "string",
+   "description": "present on 2 of 23"
+  },
+  "axes": {
+   "type": "object",
+   "description": "present on 2 of 23"
+  },
+  "hintTiers": {
+   "type": "array",
+   "description": "present on 2 of 23"
+  },
+  "codexUnlocks": {
+   "type": "array",
+   "description": "present on 1 of 23"
+  },
+  "truth": {
+   "type": "string",
+   "description": "present on 1 of 23"
+  },
+  "stages": {
+   "type": "array",
+   "description": "present on 2 of 23"
+  },
+  "lethalNote": {
+   "type": "string",
+   "description": "present on 2 of 23"
+  }
+ },
+ "patternProperties": {
+  "^_": {}
+ },
+ "additionalProperties": false
+}

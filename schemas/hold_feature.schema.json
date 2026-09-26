@@ -1,0 +1,139 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "title": "hold_feature",
+ "_draft": "SNG-658: DERIVED FROM THE CORPUS (44 records) on 2026-09-25 — required = present on every record. Aevi reviews and tightens; do not treat as ratified until _draft is removed.",
+ "type": "object",
+ "required": [
+  "build",
+  "upkeep",
+  "family",
+  "label",
+  "property",
+  "category",
+  "what",
+  "flavor"
+ ],
+ "properties": {
+  "build": {
+   "type": [
+    "object",
+    "null"
+   ],
+   "description": "present on 44 of 44"
+  },
+  "upkeep": {
+   "type": "number",
+   "description": "present on 44 of 44"
+  },
+  "family": {
+   "type": "string",
+   "enum": [
+    "material",
+    "martial",
+    "meaning",
+    "people",
+    "craft"
+   ],
+   "description": "present on 44 of 44"
+  },
+  "yields": {
+   "type": "string",
+   "description": "present on 9 of 44"
+  },
+  "label": {
+   "type": "string",
+   "description": "present on 44 of 44"
+  },
+  "hullable": {
+   "type": "boolean",
+   "description": "present on 9 of 44"
+  },
+  "property": {
+   "type": "string",
+   "description": "present on 44 of 44"
+  },
+  "category": {
+   "type": "string",
+   "description": "present on 44 of 44"
+  },
+  "what": {
+   "type": "string",
+   "description": "present on 44 of 44"
+  },
+  "flavor": {
+   "type": "string",
+   "description": "present on 44 of 44"
+  },
+  "producesWhileMoving": {
+   "type": "boolean",
+   "description": "present on 14 of 44"
+  },
+  "defence": {
+   "type": "number",
+   "description": "present on 11 of 44"
+  },
+  "watch": {
+   "type": "boolean",
+   "description": "present on 3 of 44"
+  },
+  "aura": {
+   "type": "number",
+   "description": "present on 7 of 44"
+  },
+  "pilgrims": {
+   "type": "number",
+   "description": "present on 6 of 44"
+  },
+  "substrateSource": {
+   "type": "object",
+   "description": "present on 2 of 44"
+  },
+  "hands": {
+   "type": "number",
+   "description": "present on 6 of 44"
+  },
+  "residents": {
+   "type": [
+    "number",
+    "boolean"
+   ],
+   "description": "present on 6 of 44"
+  },
+  "facility": {
+   "type": "string",
+   "description": "present on 8 of 44"
+  },
+  "transit": {
+   "type": "boolean",
+   "description": "present on 1 of 44"
+  },
+  "attends": {
+   "type": "boolean",
+   "description": "present on 3 of 44"
+  },
+  "trade": {
+   "type": "boolean",
+   "description": "present on 1 of 44"
+  },
+  "service": {
+   "type": "boolean",
+   "description": "present on 1 of 44"
+  },
+  "variantOf": {
+   "type": "string",
+   "description": "present on 5 of 44"
+  },
+  "region": {
+   "type": "string",
+   "description": "present on 1 of 44"
+  },
+  "people": {
+   "type": "string",
+   "description": "present on 1 of 44"
+  }
+ },
+ "patternProperties": {
+  "^_": {}
+ },
+ "additionalProperties": false
+}

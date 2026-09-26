@@ -1,0 +1,173 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "title": "quest",
+ "_draft": "SNG-658: DERIVED FROM THE CORPUS (25 records) on 2026-09-25 — required = present on every record. Aevi reviews and tightens; do not treat as ratified until _draft is removed.",
+ "type": "object",
+ "required": [
+  "id",
+  "name",
+  "region",
+  "tier",
+  "giver",
+  "axis",
+  "traditions",
+  "premise",
+  "stakes",
+  "stages",
+  "outcomes"
+ ],
+ "properties": {
+  "id": {
+   "type": "string",
+   "description": "present on 25 of 25"
+  },
+  "name": {
+   "type": "string",
+   "description": "present on 25 of 25"
+  },
+  "region": {
+   "type": "string",
+   "enum": [
+    "valley",
+    "the_quickwood",
+    "the_palelands",
+    "foothill_longshore",
+    "the_crossing"
+   ],
+   "description": "present on 25 of 25"
+  },
+  "tier": {
+   "type": [
+    "string",
+    "number"
+   ],
+   "description": "present on 25 of 25"
+  },
+  "giver": {
+   "type": [
+    "string",
+    "null"
+   ],
+   "description": "present on 25 of 25"
+  },
+  "legend": {
+   "type": [
+    "string",
+    "null"
+   ],
+   "description": "present on 13 of 25"
+  },
+  "axis": {
+   "type": "string",
+   "description": "present on 25 of 25"
+  },
+  "traditions": {
+   "type": "array",
+   "description": "present on 25 of 25"
+  },
+  "premise": {
+   "type": "string",
+   "description": "present on 25 of 25"
+  },
+  "stakes": {
+   "type": "string",
+   "description": "present on 25 of 25"
+  },
+  "stages": {
+   "type": "array",
+   "description": "present on 25 of 25"
+  },
+  "routes": {
+   "type": [
+    "object",
+    "array"
+   ],
+   "description": "present on 22 of 25"
+  },
+  "outcomes": {
+   "type": "array",
+   "description": "present on 25 of 25"
+  },
+  "image": {
+   "type": [
+    "string",
+    "null"
+   ],
+   "description": "present on 21 of 25"
+  },
+  "arcId": {
+   "type": "string",
+   "description": "present on 10 of 25"
+  },
+  "arcStageFrom": {
+   "type": "number",
+   "description": "present on 6 of 25"
+  },
+  "arcStageTo": {
+   "type": "number",
+   "description": "present on 6 of 25"
+  },
+  "publicFace": {
+   "type": "string",
+   "description": "present on 6 of 25"
+  },
+  "note_author": {
+   "type": "string",
+   "description": "present on 1 of 25"
+  },
+  "priorOutcomeBoards": {
+   "type": "object",
+   "description": "present on 1 of 25"
+  },
+  "legendBound": {
+   "type": "string",
+   "description": "present on 1 of 25"
+  },
+  "creatureId": {
+   "type": "string",
+   "description": "present on 7 of 25"
+  },
+  "greaterArc": {
+   "type": "string",
+   "description": "present on 3 of 25"
+  },
+  "boundToCharacter": {
+   "type": "string",
+   "description": "present on 5 of 25"
+  },
+  "schemaVersion": {
+   "type": "number",
+   "description": "present on 7 of 25"
+  },
+  "notes_for_gm": {
+   "type": "string",
+   "description": "present on 7 of 25"
+  },
+  "boundToPlayer": {
+   "type": [
+    "string",
+    "null"
+   ],
+   "description": "present on 4 of 25"
+  },
+  "kind": {
+   "type": "string",
+   "description": "present on 3 of 25"
+  },
+  "recurrence": {
+   "type": [
+    "object",
+    "string"
+   ],
+   "description": "present on 3 of 25"
+  },
+  "shape": {
+   "type": "string",
+   "description": "present on 2 of 25"
+  }
+ },
+ "patternProperties": {
+  "^_": {}
+ },
+ "additionalProperties": false
+}

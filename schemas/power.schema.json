@@ -1,0 +1,208 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "title": "power",
+ "_draft": "SNG-658: DERIVED FROM THE CORPUS (29 records) on 2026-09-25 — required = present on every record. Aevi reviews and tightens; do not treat as ratified until _draft is removed.",
+ "type": "object",
+ "required": [
+  "id",
+  "name",
+  "kind",
+  "temper",
+  "seat",
+  "reach",
+  "leader",
+  "answersTo",
+  "strength",
+  "holds",
+  "verbs",
+  "encounters",
+  "dangerLift",
+  "noticesYouWhen",
+  "wantsFromYou",
+  "offersYou",
+  "leverage",
+  "whenBroken",
+  "rivals",
+  "opposedBy",
+  "plainly",
+  "descriptionSeed",
+  "appearance",
+  "comes"
+ ],
+ "properties": {
+  "id": {
+   "type": "string",
+   "description": "present on 29 of 29"
+  },
+  "name": {
+   "type": "string",
+   "description": "present on 29 of 29"
+  },
+  "kind": {
+   "type": "string",
+   "enum": [
+    "outlaw_band",
+    "outlaw_crown",
+    "guild",
+    "lordship",
+    "sovereignty",
+    "order"
+   ],
+   "description": "present on 29 of 29"
+  },
+  "temper": {
+   "type": "string",
+   "enum": [
+    "hard",
+    "cruel",
+    "kind",
+    "fair"
+   ],
+   "description": "present on 29 of 29"
+  },
+  "seat": {
+   "type": "string",
+   "description": "present on 29 of 29"
+  },
+  "reach": {
+   "type": "array",
+   "description": "present on 29 of 29"
+  },
+  "leader": {
+   "type": "string",
+   "description": "present on 29 of 29"
+  },
+  "answersTo": {
+   "type": [
+    "object",
+    "null"
+   ],
+   "description": "present on 29 of 29"
+  },
+  "strength": {
+   "type": "object",
+   "description": "present on 29 of 29"
+  },
+  "holds": {
+   "type": "array",
+   "description": "present on 29 of 29"
+  },
+  "verbs": {
+   "type": "array",
+   "description": "present on 29 of 29"
+  },
+  "encounters": {
+   "type": "array",
+   "description": "present on 29 of 29"
+  },
+  "dangerLift": {
+   "type": "number",
+   "description": "present on 29 of 29"
+  },
+  "noticesYouWhen": {
+   "type": "array",
+   "description": "present on 29 of 29"
+  },
+  "wantsFromYou": {
+   "type": "string",
+   "description": "present on 29 of 29"
+  },
+  "offersYou": {
+   "type": "string",
+   "description": "present on 29 of 29"
+  },
+  "leverage": {
+   "type": "string",
+   "description": "present on 29 of 29"
+  },
+  "whenBroken": {
+   "type": "string",
+   "description": "present on 29 of 29"
+  },
+  "rivals": {
+   "type": "array",
+   "description": "present on 29 of 29"
+  },
+  "opposedBy": {
+   "type": "array",
+   "description": "present on 29 of 29"
+  },
+  "plainly": {
+   "type": "string",
+   "description": "present on 29 of 29"
+  },
+  "descriptionSeed": {
+   "type": "string",
+   "description": "present on 29 of 29"
+  },
+  "appearance": {
+   "type": "string",
+   "description": "present on 29 of 29"
+  },
+  "comes": {
+   "type": "string",
+   "enum": [
+    "mixed",
+    "loud",
+    "quiet"
+   ],
+   "description": "present on 29 of 29"
+  },
+  "cells": {
+   "type": "array",
+   "description": "present on 1 of 29"
+  },
+  "clientOf": {
+   "type": "object",
+   "description": "present on 1 of 29"
+  },
+  "approach": {
+   "type": "object",
+   "description": "present on 1 of 29"
+  },
+  "recognizedBy": {
+   "type": "string",
+   "description": "present on 1 of 29"
+  },
+  "petitions": {
+   "type": "object",
+   "description": "present on 1 of 29"
+  },
+  "courtedBy": {
+   "type": "array",
+   "description": "present on 1 of 29"
+  },
+  "form": {
+   "type": "string",
+   "description": "present on 13 of 29"
+  },
+  "bloc": {
+   "type": "string",
+   "description": "present on 3 of 29"
+  },
+  "bodies": {
+   "type": "array",
+   "description": "present on 9 of 29"
+  },
+  "secretsGM": {
+   "type": "array",
+   "description": "present on 15 of 29"
+  },
+  "sanctionStandard": {
+   "type": "string",
+   "description": "present on 1 of 29"
+  },
+  "partiesBefore": {
+   "type": "array",
+   "description": "present on 1 of 29"
+  },
+  "feedsGM": {
+   "type": "array",
+   "description": "present on 4 of 29"
+  }
+ },
+ "patternProperties": {
+  "^_": {}
+ },
+ "additionalProperties": false
+}

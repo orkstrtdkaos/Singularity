@@ -1,0 +1,221 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "title": "legend",
+ "_draft": "SNG-658: DERIVED FROM THE CORPUS (70 records) on 2026-09-25 — required = present on every record. Aevi reviews and tightens; do not treat as ratified until _draft is removed.",
+ "type": "object",
+ "required": [
+  "id",
+  "name",
+  "tier",
+  "alignment",
+  "role",
+  "homeLocation",
+  "tradition",
+  "spectrum",
+  "wants",
+  "arcAffinities",
+  "wantArcId",
+  "arcAffinity",
+  "personalVerbs",
+  "offscreenVerbs",
+  "placing",
+  "imagePrompt",
+  "deathImagePrompt",
+  "appearance",
+  "legend"
+ ],
+ "properties": {
+  "id": {
+   "type": "string",
+   "description": "present on 70 of 70"
+  },
+  "name": {
+   "type": "string",
+   "description": "present on 70 of 70"
+  },
+  "tier": {
+   "type": "string",
+   "enum": [
+    "epic",
+    "legendary",
+    "heroic"
+   ],
+   "description": "present on 70 of 70"
+  },
+  "alignment": {
+   "type": "string",
+   "enum": [
+    "hero",
+    "villain",
+    "neither",
+    "complicated"
+   ],
+   "description": "present on 70 of 70"
+  },
+  "role": {
+   "type": "string",
+   "description": "present on 70 of 70"
+  },
+  "homeLocation": {
+   "type": "string",
+   "description": "present on 70 of 70"
+  },
+  "tradition": {
+   "type": "string",
+   "description": "present on 70 of 70"
+  },
+  "spectrum": {
+   "type": "object",
+   "description": "present on 70 of 70"
+  },
+  "personality": {
+   "type": "object",
+   "description": "present on 4 of 70"
+  },
+  "voiceHints": {
+   "type": "string",
+   "description": "present on 4 of 70"
+  },
+  "knowledge": {
+   "type": "array",
+   "description": "present on 4 of 70"
+  },
+  "wants": {
+   "type": "string",
+   "description": "present on 70 of 70"
+  },
+  "fears": {
+   "type": "string",
+   "description": "present on 4 of 70"
+  },
+  "reactsToReputation": {
+   "type": [
+    "object",
+    "boolean"
+   ],
+   "description": "present on 10 of 70"
+  },
+  "arcAffinities": {
+   "type": "array",
+   "description": "present on 70 of 70"
+  },
+  "wantArcId": {
+   "type": "string",
+   "enum": [
+    "arc_manifestation_storm",
+    "arc_what_wakes_beneath",
+    "arc_block_bleed",
+    "arc_the_poles_pull",
+    "arc_green_schism"
+   ],
+   "description": "present on 70 of 70"
+  },
+  "arcAffinity": {
+   "type": "object",
+   "description": "present on 70 of 70"
+  },
+  "personalVerbs": {
+   "type": "array",
+   "description": "present on 70 of 70"
+  },
+  "offscreenVerbs": {
+   "type": "array",
+   "description": "present on 70 of 70"
+  },
+  "placing": {
+   "type": "string",
+   "description": "present on 70 of 70"
+  },
+  "interests": {
+   "type": "array",
+   "description": "present on 35 of 70"
+  },
+  "kin": {
+   "type": "array",
+   "description": "present on 30 of 70"
+  },
+  "imagePrompt": {
+   "type": "string",
+   "description": "present on 70 of 70"
+  },
+  "deathImagePrompt": {
+   "type": "string",
+   "description": "present on 70 of 70"
+  },
+  "gear": {
+   "type": "array",
+   "description": "present on 58 of 70"
+  },
+  "purse": {
+   "type": "object",
+   "description": "present on 66 of 70"
+  },
+  "appearance": {
+   "type": "string",
+   "description": "present on 70 of 70"
+  },
+  "assistTags": {
+   "type": "array",
+   "description": "present on 59 of 70"
+  },
+  "vocation": {
+   "type": "string",
+   "description": "present on 62 of 70"
+  },
+  "domains": {
+   "type": "object",
+   "description": "present on 65 of 70"
+  },
+  "legend": {
+   "type": "object",
+   "description": "present on 70 of 70"
+  },
+  "rivals": {
+   "type": "array",
+   "description": "present on 69 of 70"
+  },
+  "deathRoad": {
+   "type": [
+    "object",
+    "null",
+    "string"
+   ],
+   "description": "present on 66 of 70"
+  },
+  "archetype": {
+   "type": "string",
+   "description": "present on 66 of 70"
+  },
+  "gender": {
+   "type": "string",
+   "enum": [
+    "he",
+    "she",
+    "male",
+    "they"
+   ],
+   "description": "present on 66 of 70"
+  },
+  "pronouns": {
+   "type": "string",
+   "enum": [
+    "he/him",
+    "she/her",
+    "they/them"
+   ],
+   "description": "present on 66 of 70"
+  },
+  "fightingStyle": {
+   "type": "string",
+   "description": "present on 66 of 70"
+  },
+  "aliases": {
+   "type": "array",
+   "description": "present on 7 of 70"
+  }
+ },
+ "patternProperties": {
+  "^_": {}
+ },
+ "additionalProperties": false
+}

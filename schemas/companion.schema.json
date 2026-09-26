@@ -1,0 +1,142 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "title": "companion",
+ "_draft": "SNG-658: DERIVED FROM THE CORPUS (9 records) on 2026-09-25 — required = present on every record. Aevi reviews and tightens; do not treat as ratified until _draft is removed.",
+ "type": "object",
+ "required": [
+  "schemaVersion",
+  "id",
+  "startingOption",
+  "name",
+  "role",
+  "appearance",
+  "persona",
+  "voiceHints",
+  "assistTags",
+  "knowledge",
+  "boundaries",
+  "hooks",
+  "bondGrants",
+  "stages",
+  "combatant",
+  "downedEffect",
+  "gender",
+  "sex"
+ ],
+ "properties": {
+  "schemaVersion": {
+   "type": "number",
+   "description": "present on 9 of 9"
+  },
+  "id": {
+   "type": "string",
+   "description": "present on 9 of 9"
+  },
+  "startingOption": {
+   "type": "boolean",
+   "description": "present on 9 of 9"
+  },
+  "name": {
+   "type": "string",
+   "description": "present on 9 of 9"
+  },
+  "role": {
+   "type": "string",
+   "description": "present on 9 of 9"
+  },
+  "appearance": {
+   "type": "string",
+   "description": "present on 9 of 9"
+  },
+  "persona": {
+   "type": "string",
+   "description": "present on 9 of 9"
+  },
+  "voiceHints": {
+   "type": "string",
+   "description": "present on 9 of 9"
+  },
+  "assistTags": {
+   "type": "array",
+   "description": "present on 9 of 9"
+  },
+  "knowledge": {
+   "type": "array",
+   "description": "present on 9 of 9"
+  },
+  "boundaries": {
+   "type": "string",
+   "description": "present on 9 of 9"
+  },
+  "hooks": {
+   "type": "string",
+   "description": "present on 9 of 9"
+  },
+  "bondGrants": {
+   "type": "object",
+   "description": "present on 9 of 9"
+  },
+  "stages": {
+   "type": "array",
+   "description": "present on 9 of 9"
+  },
+  "substrateAura": {
+   "type": "number",
+   "description": "present on 6 of 9"
+  },
+  "substrateNote": {
+   "type": "string",
+   "description": "present on 6 of 9"
+  },
+  "combatant": {
+   "type": "boolean",
+   "description": "present on 9 of 9"
+  },
+  "downedEffect": {
+   "type": "string",
+   "description": "present on 9 of 9"
+  },
+  "canStrike": {
+   "type": "boolean",
+   "description": "present on 1 of 9"
+  },
+  "canStrikeOverrides": {
+   "type": "array",
+   "description": "present on 1 of 9"
+  },
+  "gender": {
+   "type": [
+    "string",
+    "null"
+   ],
+   "description": "present on 9 of 9"
+  },
+  "sex": {
+   "type": [
+    "null",
+    "string"
+   ],
+   "description": "present on 9 of 9"
+  },
+  "romanceEligible": {
+   "type": "boolean",
+   "description": "present on 3 of 9"
+  },
+  "physicality": {
+   "type": "string",
+   "description": "present on 3 of 9"
+  },
+  "intimacyNotes": {
+   "type": "string",
+   "description": "present on 3 of 9"
+  },
+  "becomesNpc": {
+   "type": "object",
+   "description": "present on 1 of 9"
+  }
+ },
+ "patternProperties": {
+  "^_": {}
+ },
+ "additionalProperties": false
+}

@@ -165,7 +165,7 @@ import { championsFor, resolveChampion, creditChampion, championLine, sendingIsG
 // ⛔ CCODE-404 (Erik) — `addContingent` and `musteredFrom` are new; `unitComposition` and `bandGaps` had NO caller outside the tests.
 // ⛔ CCODE-405 (Erik's legion ruling): formed of bands that keep their identity, placed and postured once CALLED, and free until then.
 // ⚠️ ONE LINE ON PURPOSE — `import_integrity` reads an import statement per line, and a comment inside the braces hides what follows it.
-import { commandSlots, bringForward, lineSplit, canRaiseBand, raiseBand, bandStrength, bandThreat, bloodBand, recoverBand, legionClash, addContingent, musteredFrom, unitComposition, bandGaps, formLegion, disbandLegion, callCostOf, callUnit, standDown, setUnitPosture, bloodUnit, resolvedUnit, UNIT_POSTURES, setUnitLeader, leaderBonusOf, editContingent, kitSummary, bandDialsOf, onMissionWith, MELEE_TIERS } from "./engine/melee.js"; // CCODE-276: the forward pick is a UI control, per Erik's ruling
+import { commandSlots, bringForward, lineSplit, canRaiseBand, bandReady, raiseBand, bandStrength, bandThreat, bloodBand, recoverBand, legionClash, addContingent, musteredFrom, unitComposition, bandGaps, formLegion, disbandLegion, callCostOf, callUnit, standDown, setUnitPosture, bloodUnit, resolvedUnit, UNIT_POSTURES, setUnitLeader, leaderBonusOf, editContingent, kitSummary, bandDialsOf, onMissionWith, MELEE_TIERS } from "./engine/melee.js"; // CCODE-276: the forward pick is a UI control, per Erik's ruling
 import { groupCapability, loadBearing } from "./engine/group.js";   // CCODE-317/322: what your line covers, and who holds it alone
 import { characterPower, threatBand } from "./engine/threat.js"; // CCODE-52: built power sets the mean the encounter pool revolves around
 import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, collapseMode, collapseResult, collapseFloor, frameCollapsible, swingDegree, wardAgainst, wardBroken, trivializes, playerReceiptLine, FRAME_FREEFORM_CUE } from "./engine/encounterFrame.js"; // SNG-230: the ENCOUNTER FRAME — obvious kind/win/exits; frameSize routes takeover-vs-banner; chaseFromFight = the chase you flee into (§6a); collapse* = a finisher ends a collapsible foe (§6b/§7a); wardAgainst/wardBroken = a ward FORBIDS a mechanic (§7b); trivializes = the right kit VOIDS a challenge's premise (§7c). SNG-246 Fix D: playerReceiptLine = the mechanical receipt SHOWN to the player
@@ -9364,14 +9364,22 @@ function applyTurn(turn, resolution, playerWords = null) {
     for (const op of (Array.isArray(turn.bandOps) ? turn.bandOps : []).slice(0, 2)) {
       const kind = String(op?.op || "");
       if (kind === "raise") {
-        // ⛔ EARNED, AND THE ENGINE DECIDES. A narrator that could hand out a warband would make the whole
-        // command ladder decorative.
-        const gate = canRaiseBand(character, { cfg: meleeCfg(), renownBand: character.renownBand || null });
-        if (!gate.ready) { character._bandNotes = [...(character._bandNotes || []).slice(-2), gate.why]; continue; }
+        // ✅ CCODE-510 · ERIK, IN PLAY 2026-09-25: "I want players to be able to form and name a band... but just
+        // like a legion that can't be wielded yet, it doesn't function until the requirements are met."
+        // ⚠️ THIS USED TO REFUSE THE RAISE, and Loki's own play is why it no longer does: he named the
+        // Churn-Revellers in a scene, the name landed in his deeds, quests, codex and established facts, and his
+        // `bands` stayed empty with nothing on the tab to say why. A name recorded in five places and dropped in
+        // the one that matters reads as the game losing it.
+        // ⛑ THE GATE MOVED TO THE WIELDING (`bandReady`), which is where Erik put it — so the naming always
+        // lands, and what they can DO is what waits.
+        const gate = bandReady(character, { cfg: meleeCfg(), renownBand: character.renownBand || null });
         const r = raiseBand(character, { id: String(op.id || "").slice(0, 40), name: op.name ? String(op.name).slice(0, 60) : null,
-          count: Math.max(1, Math.min(500, op.count | 0 || 20)), quality: Math.max(1, Math.min(3, op.quality | 0 || 1)),
-          from: op.from || null, day });
-        character._bandNotes = [...(character._bandNotes || []).slice(-2), r.ok ? `${r.band.name} answers to you now` : r.why];
+          count: Math.max(0, Math.min(500, Number(op.count) || 0)), quality: Math.max(1, Math.min(5, Number(op.quality) || 1)),
+          from: (character.holdings || []).find(h => h && h.condition !== "failing")?.id || null, day });
+        character._bandNotes = [...(character._bandNotes || []).slice(-2),
+          !r.ok ? r.why
+            : gate.ready ? `${r.band.name} answers to you now`
+            : `${r.band.name} is named — ${gate.why}`];
       } else if (kind === "muster") {
         // ⚠️ WHAT A BAND IS WORTH, ASKED AND ANSWERED IN THE GAME'S OWN UNITS. Erik: "what threat level do
         // they add up to". `bandThreat` reads against the same ladder `threatBand` uses for a foe, so the
@@ -14818,7 +14826,10 @@ function renderHoldingsTab(manageId = null) {
   const delegates = activeDelegates(character.worldState || {});
   const places = companyPlaces(ladder, character);
   const delegCap = delegationCapacity(ladder, character);
-  const band = canRaiseBand(character, { cfg: rules.martial || {} });
+  // ⚠️ CCODE-510 — `meleeCfg()` IS THE MERGE, and this read `rules.martial` alone: half the dials, so
+  // `commandSlots` ran on its defaults here and on the authored numbers everywhere else. Latent today only
+  // because the two agree.
+  const band = canRaiseBand(character, { cfg: meleeCfg() });
   // SPEC_holding_release_transfer §R2.5 — a named person is the fully supported holder today; the company and the
   // delegates are the people who could take a place up. A community transfer is a narrative record (news +
   // history), and it is not offered as a button until something in the world model can hold property.
@@ -15237,6 +15248,16 @@ function renderHoldingsTab(manageId = null) {
   // ⛔ SNG-652 §8 card 3 — "Raise from here" is a LINK INTO THE EXISTING FLOW, never a second raise. Aevi:
   // "it carries a Raise from here link into the band/legion flow", and the Bands tab is where a band is formed
   // (SNG-650 §7.4: "no second band screen").
+  // ⛔ CCODE-510 — AND THE BUTTONS INSIDE A WAITING BAND SAY SO RATHER THAN ACTING. The engine refuses at
+  // every door (`callUnit`, `setUnitPosture`, `sendBandOnMission` all ask `bandReady`); this is the same
+  // sentence one step earlier, so the player is told before they spend a click rather than after.
+  for (const row of document.querySelectorAll('[data-band-waiting="1"]')) {
+    for (const b of row.querySelectorAll("button")) {
+      if (b.id === "band-raise-new" || b.hasAttribute("data-unit-lead")) continue;   // naming and appointing stay open
+      b.disabled = true;
+      if (!b.title) b.title = row.getAttribute("title") || "";
+    }
+  }
   for (const b of document.querySelectorAll("[data-ad-raise]")) b.onclick = () => renderBandsTab();
   for (const b of document.querySelectorAll("[data-wc-ask]")) b.onclick = () => {
     const id = b.dataset.wcAsk;
@@ -16652,7 +16673,8 @@ function showBandMissionPicker(bandId) {
     const destination = document.getElementById("bandmission-where")?.value || null;
     const stake = String(document.getElementById("bandmission-stake")?.value || "").trim() || null;
     // ⛔ the engine sends them, and parts those of them at your side — the one function the tests drive too
-    const r = sendBandOnMission(character, bandId, { kind: el.dataset.bandmission, charge: document.getElementById("bandmission-charge")?.value || "",
+    const r = sendBandOnMission(character, bandId, { ready: bandReady(character, { cfg: meleeCfg(), renownBand: character.renownBand || null }),
+      kind: el.dataset.bandmission, charge: document.getElementById("bandmission-charge")?.value || "",
       destination, stake, worldCount: worldCount(), placeName: destination ? nameOfPlace(destination) : null, nameOf });
     if (!r.ok) { const w = String(r.why || "that could not be sent"); document.getElementById("bandmission-hint").textContent = w.charAt(0).toUpperCase() + w.slice(1) + (/[.!?]$/.test(w) ? "" : "."); return; }
     close();
@@ -16989,15 +17011,18 @@ function showBandMusterPicker(unitId) {
  *  caller: a GM op. So a player who qualified — Silas has for five holdings — had no way to ask, and the tab's own empty state said
  *  "a band is raised in play", which is a sentence describing a mechanism the player cannot reach. */
 function raiseABand() {
-  const gate = canRaiseBand(character, { cfg: meleeCfg(), renownBand: character.renownBand || null });
-  if (!gate.ready) { alert(gate.why); return; }
+  // ✅ CCODE-510 · ERIK: naming is always open. What waits is whether they ANSWER (`bandReady`), which the
+  // card says in his own terms — "just like a legion that can't be wielded yet".
+  const gate = bandReady(character, { cfg: meleeCfg(), renownBand: character.renownBand || null });
   const name = (prompt("What are they called?", "") || "").trim();
   if (!name) return;
   const id = `band-${name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 32) || Date.now().toString(36)}`;
   const seat = (character.holdings || []).find(h => h && h.condition !== "failing") || null;
   const r = raiseBand(character, { id, name: name.slice(0, 60), count: 0, quality: 1, from: seat?.id || null, day: absoluteWorldDay() });
   if (!r.ok) { alert(r.why); return; }
-  queueHoldingEvent(character, `${name} is raised${seat ? ` at ${seat.name || seat.id}` : ""} — and stands empty until somebody joins it.`);
+  queueHoldingEvent(character, gate.ready
+    ? `${name} is raised${seat ? ` at ${seat.name || seat.id}` : ""} — and stands empty until somebody joins it.`
+    : `${name} is named${seat ? ` at ${seat.name || seat.id}` : ""} — ${gate.why}.`);
   saveCharacter(character); renderBandsTab();
 }
 
@@ -17076,7 +17101,8 @@ async function callUnitTogether(unitId) {
     if (paid && paid.ok === false) { alert(paid.why || "It could not be paid."); return; }
     paidSaid = saidPaid(paid);
   }
-  const r = callUnit(character.bands || [], unitId, { day: absoluteWorldDay(), locationId: where, posture, paid: cost.total });
+  const r = callUnit(character.bands || [], unitId, { day: absoluteWorldDay(), locationId: where, posture, paid: cost.total,
+    ready: bandReady(character, { cfg: meleeCfg(), renownBand: character.renownBand || null }) });
   if (!r.ok) { alert(r.why); return; }
   character.bands = r.bands;
   { const cu = (character.bands || []).find(b => b && b.id === unitId); if (cu?.called && paidSaid) cu.called.paidSaid = paidSaid; }
@@ -17772,6 +17798,7 @@ function renderBandsTab() {
         ${units.filter(x => !x.inLegion).length === 1 && !u.isLegion
           ? `<div class="hint">${esc(unitLine(u))}</div>`
           : `<div><strong>${esc(u.name)}</strong>${u.isLegion ? ` <span class="news-near-chip">legion</span>` : ""} <span class="hint">— ${esc(unitLine(u))}</span></div>`}
+        ${!u.isLegion && !raise404.ready ? `<div class="codex-f hint band-waiting">○ <strong>Named, and not yet answering.</strong> ${esc(raise404.why)}. They stand in your record and keep their name; they cannot be called, sent or set to a posture until they answer.</div>` : ""}
         ${standing405(u)}
         ${(() => { // ⛔ CCODE-431: who of this band is OUT ON A JOB — they are not in it until they are back, and the band reads smaller for it
           const outs = (character.jobs?.out || []).flatMap(e => (e?.detached && !e.detached.returned ? e.detached.units || [] : [])
@@ -17806,7 +17833,7 @@ function renderBandsTab() {
             ${rowsFor(p.id) || `<div class="hint">nobody stands in it</div>`}</div>`).join("")
             || `<div class="hint">no bands stand in it</div>`;
         })()}
-        <div class="opt-row" style="gap:6px;flex-wrap:wrap;margin-top:4px">
+        <div class="opt-row" style="gap:6px;flex-wrap:wrap;margin-top:4px"${!u.isLegion && !raise404.ready ? ` data-band-waiting="1" title="${esc(raise404.why)}"` : ""}>
           ${u.isLegion ? `<span class="hint">People join its BANDS, not the legion — that is what keeping their identity means.</span>` : `
           <button class="opt" data-band-recruit="${esc(u.id)}" title="Ask someone you know to stand in it — a far lower bar than travelling with you">Ask someone to join…</button>
           ${(() => { const b453 = (character.bands || []).find(x => x && x.id === u.id); return b453?.mission   // ⛔ CCODE-453: a band on a mission
@@ -17825,7 +17852,7 @@ function renderBandsTab() {
       </div>`).join("") : `<p class="hint">Nobody has thrown in with you yet. Someone who has sworn to you stands in a unit whether or not they walk at your side.</p>`}
       <div class="opt-row" style="margin-top:10px;gap:6px;flex-wrap:wrap">
         <button class="opt" id="legion-plan"${units.filter(u => !u.inLegion).length ? "" : " disabled"} title="Somebody who reads the ground draws up the whole arrangement — who, how many, from where. It costs nothing.">Ask someone to draw up a plan…</button>
-        <button class="opt" id="band-raise-new"${raise404.ready ? "" : " disabled"} title="${esc(raise404.why)}">Form a new band…</button>
+        <button class="opt" id="band-raise-new" title="${esc(raise404.ready ? "Name your people" : raise404.why)}">${raise404.ready ? "Form a new band…" : "Name a band…"}</button>
         ${(() => {
           // ⛔ CCODE-405: two or more bands standing outside a legion is the whole requirement — forming one costs nothing.
           const free = units.filter(u => !u.inLegion && !u.isLegion);
@@ -17883,7 +17910,8 @@ function renderBandsTab() {
   wireObFoe(() => renderBandsTab());
   for (const b of app.querySelectorAll("[data-unit-call]")) b.onclick = () => callUnitTogether(b.dataset.unitCall);
   for (const b of app.querySelectorAll("[data-unit-posture]")) b.onclick = () => {
-    const r = setUnitPosture(character.bands || [], b.dataset.unitPosture, b.dataset.posture);
+    const r = setUnitPosture(character.bands || [], b.dataset.unitPosture, b.dataset.posture,
+      { ready: bandReady(character, { cfg: meleeCfg(), renownBand: character.renownBand || null }) });
     if (!r.ok) { alert(r.why); return; }
     character.bands = r.bands; saveCharacter(character); renderBandsTab();
   };

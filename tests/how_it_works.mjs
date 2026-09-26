@@ -10219,6 +10219,7 @@ console.log("\n── §100 · the numbers are read, and a load on the road can 
 console.log("\n── §101 · party, band, legion — and the fellowship the story raised before the sheet did ──");
 {
   const ML101 = await import("../engine/melee.js");
+  const J101 = await import("../engine/jobs.js");   // CCODE-510: the mission door asks the same gate
   const R101 = await import("../engine/reconcile.js");
   const { loadContentHeadless: lch101 } = await import("./headless_content.mjs");
   const C101 = await lch101();
@@ -10239,6 +10240,67 @@ console.log("\n── §101 · party, band, legion — and the fellowship the st
     && /not yet a following/.test(ML101.canRaiseBand(nobody, { cfg: cfg101 }).why));
   check("§101: …and HOLDINGS are a second road to it — a post is where a following comes from",
     ML101.canRaiseBand(leader, { cfg: cfg101 }).ready === true);
+
+  /* ═══ CCODE-510 · ERIK, IN PLAY 2026-09-25 — NAMING IS FREE, WIELDING IS EARNED ═══
+   * *"I want players to be able to form and name a band... but just like a legion that can't be wielded yet, it
+   * doesn't function until the requirements are met."*
+   * ⚠️ MEASURED IN HIS OWN PLAY: Loki named the Churn-Revellers in a scene. The name landed in his deeds,
+   * quests, codex, establishedFacts and activeScene — twenty mentions — and `bands` stayed EMPTY, because the
+   * raise was refused before the record was written. A name kept in five places and dropped in the one that
+   * counts reads as the game losing it. */
+  check("§101: ⛔ CCODE-510 — A BAND CAN ALWAYS BE NAMED, even by someone who cannot yet command one",
+    (() => {
+      const who = JSON.parse(JSON.stringify(nobody));
+      const r = ML101.raiseBand(who, { id: "band-churn-revellers", name: "the Churn-Revellers", count: 0, quality: 1, day: 5 });
+      return ML101.canRaiseBand(who, { cfg: cfg101 }).ready === false    // they have NOT earned a following …
+        && r.ok === true                                                  // … and the naming still lands
+        && (who.bands || []).some(b => b.name === "the Churn-Revellers");
+    })(), "a name the player said aloud must reach the record, whatever the command ladder says");
+
+  check("§101: ⛔ …and it DOES NOT ANSWER — called, posted and sent all refuse with the one sentence",
+    (() => {
+      const who = JSON.parse(JSON.stringify(nobody));
+      ML101.raiseBand(who, { id: "b510", name: "the Named", count: 0, quality: 1, day: 5 });
+      const gate = ML101.bandReady(who, { cfg: cfg101 });
+      if (gate.ready !== false || !/do not answer yet/.test(String(gate.why))) return false;
+      const called = ML101.callUnit(who.bands, "b510", { ready: gate });
+      const posted = ML101.setUnitPosture(who.bands, "b510", "camped", { ready: gate });
+      // ⛑ ONE DERIVATION, SO THE TAB AND EVERY DOOR SAY THE SAME THING
+      return called.ok === false && posted.ok === false
+        && called.why === gate.why && posted.why === gate.why;
+    })(), "a refusal that differs by door is three rules wearing one name");
+
+  check("§101: ⛔ …and the MISSION door refuses too — every door, not the ones I happened to remember",
+    (() => {
+      const who = JSON.parse(JSON.stringify(nobody));
+      ML101.raiseBand(who, { id: "b510b", name: "the Named", count: 0, quality: 1, day: 5 });
+      const gate = ML101.bandReady(who, { cfg: cfg101 });
+      const sent = J101.sendBandOnMission(who, "b510b", { kind: "patrol", charge: "walk the road", ready: gate });
+      return sent.ok === false && sent.why === gate.why;
+    })(), "a band that cannot be called cannot be sent either");
+
+  check("§101: ⛔ …and it ANSWERS once the requirement is met — the gate is a goal, not a wall",
+    (() => {
+      const who = JSON.parse(JSON.stringify(leader));
+      ML101.raiseBand(who, { id: "b510c", name: "the Answered", count: 0, quality: 1, day: 5 });
+      const gate = ML101.bandReady(who, { cfg: cfg101 });
+      return gate.ready === true && ML101.callUnit(who.bands, "b510c", { ready: gate }).ok !== false;
+    })());
+
+  // ⛑ AND THE SCREEN AND THE GM BOTH CARRY IT — a ruling that lives only in the engine is one the player
+  // never meets and the narrator argues with.
+  {
+    const app510 = rd("app.js"), reg510 = rd("engine/gm_registry.js");
+    check("§101: …the tab shows a named band that does not answer, and disables its actions rather than hiding it",
+      /Named, and not yet answering/.test(app510)
+      && /data-band-waiting="1"/.test(app510)
+      && /Name a band…/.test(app510)
+      && !/id="band-raise-new"\$\{raise404\.ready \? "" : " disabled"\}/.test(app510),
+      "a button that vanishes teaches nothing; one that says why is a goal");
+    check("§101: …and the GM is told the NEW rule, having been told the old one until today",
+      /THEY MAY BE NAMED AT ANY TIME/.test(reg510) && /the naming always lands/.test(rd("engine/gm.js"))
+      && !/BAND — not yet: \$\{band\.why\}\. It opens/.test(reg510));
+  }
 
   // ⛔ AND THE GM IS TOLD, which is the half that never existed.
   const reg101 = rd("engine/gm_registry.js"), gm101 = rd("engine/gm.js");

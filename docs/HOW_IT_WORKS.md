@@ -2360,7 +2360,7 @@ reaches it** — and that gap has produced a specific, repeated defect described
 ### 12.1 · THE SHAPE — one document, one shell, 47 screens
 
 **Singularity is a single-page app with no build step and no framework.** `index.html` is 75 lines; the
-whole interface is **`app.js`, 21,814 lines**, and there are **55 `render*` functions** that paint into one
+whole interface is **`app.js`, 21,842 lines**, and there are **55 `render*` functions** that paint into one
 shell function, `chrome()`, called from **57 sites**. ⚠️ **THERE IS NO ROUTER AND NO SCREEN VARIABLE.**
 A screen does not "navigate" — it **calls the next render function directly**. `renderCompanionStep`'s
 done-button *is* the edge into `renderBioStep`.

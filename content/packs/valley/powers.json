@@ -62,7 +62,9 @@
    "plainly": "A toll gang holding the old road up to the high pass. They would rather be paid than fight.",
    "descriptionSeed": "They hold a chain across the upper turns, above the halfway waystation that Greta keeps alone: a fire in a rock shelter, a price that depends on how you look. Greta will not feed them and they have not yet made her. They pay tribute up the line to the Gralloch and resent every crystal of it.",
    "appearance": "A rusted chain slung across a stone-cut mountain road, a rock shelter with smoke rising, men in patched oilskins with crossbows, and far below them a half-roofed waystation",
-   "_correction_20260923": "Was: the Tollmen took the halfway waystation. greta_waystation is its authored keeper; I missed her. Moved the chain above it; she opposes them."
+   "_correction_20260923": "Was: the Tollmen took the halfway waystation. greta_waystation is its authored keeper; I missed her. Moved the chain above it; she opposes them.",
+   "comes": "mixed",
+   "_comesWhy": "crossbows from the rocks — they wait, then they are loud"
   },
   {
    "id": "power_gralloch_crown",
@@ -125,7 +127,8 @@
    ],
    "plainly": "The bandit king of the Gralloch. He ended a four-way feud by killing the other chiefs at a truce feast, and every raider band within a week's ride pays him.",
    "descriptionSeed": "Harl Maddock did not win the Gralloch's feud; he ended it, by inviting the other four chiefs to a feast and not letting them leave. He wears their rings. He is not mad and not cruel by temperament — he is cruel by policy, because fear is cheaper than loyalty and he has done the arithmetic. He wants the pass at Kestrel's Roost, because whoever holds it taxes everything that moves between the plateau and the country beyond.",
-   "appearance": "A timber stockade on broken badland, crows on the sharpened posts, a hall with a smoke-blackened roof and four rusted rings nailed above its door"
+   "appearance": "A timber stockade on broken badland, crows on the sharpened posts, a hall with a smoke-blackened roof and four rusted rings nailed above its door",
+   "comes": "loud"
   },
   {
    "id": "power_edge_riders",
@@ -180,7 +183,9 @@
    "opposedBy": [],
    "plainly": "Mounted raiders who hit the caravans going in and out of Tumbledown. They ride for the Gralloch Crown, for now.",
    "descriptionSeed": "They hit Tumbledown's caravans because a market that is never in the same place twice has no walls and no militia. Tamsin Galt leads them for the King, pays him what he asks, and counts the days.",
-   "appearance": "Riders on shaggy dun horses cresting a shifting ridge, faces wrapped against grit, a caravan's canvas burning in the flat behind them"
+   "appearance": "Riders on shaggy dun horses cresting a shifting ridge, faces wrapped against grit, a caravan's canvas burning in the flat behind them",
+   "comes": "mixed",
+   "_comesWhy": "churn-bred horses come fast out of nowhere; you hear them late, then very much"
   },
   {
    "id": "power_undercount",
@@ -320,7 +325,9 @@
       "risk": "none until terms are set"
      }
     }
-   }
+   },
+   "comes": "quiet",
+   "_comesWhy": "burglars, knives and lookouts, never in one place — the definition of quiet"
   },
   {
    "id": "power_keelmouth_slip",
@@ -345,7 +352,9 @@
      {
       "n": 10,
       "quality": 3,
-      "what": "the slip-wardens, who fight from the boats"
+      "what": "the slip-wardens, who fight from the boats",
+      "comes": "mixed",
+      "_comesWhy": "the slip-wardens fight from the boats and come in under the harbour noise"
      }
     ]
    },
@@ -386,7 +395,8 @@
    "plainly": "Keelmouth's lord keeps the only slipway on four hundred miles of cliff open to anyone who pays the posted tariff. She is fair, and she is loved for it.",
    "descriptionSeed": "Ines Harrowgate holds the Slip because her grandmother built the first watch-house on it, and she holds it the way her grandmother did: the tariff is carved on a stone at the waterline and has not changed in forty years. She hangs anyone who wrecks a hull on purpose and feeds anyone who wrecks one by accident. The Baron at Firstsight holds the only road down to her, and he wants the water.",
    "appearance": "A stone slipway running down into brown estuary water, a squat watch-house with a lantern, a tariff carved into a waterline stone, boatyards full of half-built hulls",
-   "recognizedBy": "council_of_mavens"
+   "recognizedBy": "council_of_mavens",
+   "comes": "loud"
   },
   {
    "id": "power_firstsight_barony",
@@ -451,7 +461,8 @@
    "petitions": {
     "to": "council_of_mavens",
     "for": "recognition of a claim to the Slip at Keelmouth"
-   }
+   },
+   "comes": "loud"
   },
   {
    "id": "power_echo_bridge",
@@ -506,7 +517,8 @@
    "courtedBy": [
     "power_radiant_plateau",
     "power_harmonic_heights"
-   ]
+   ],
+   "comes": "loud"
   },
   {
    "id": "power_ender_host",
@@ -570,7 +582,8 @@
    ],
    "plainly": "A warlord who forgot why he fights, camped below the Marchward with a host that follows him anyway. The Marches fear him more than they fear each other.",
    "descriptionSeed": "The Ender Who Forgot Why was a Marcher once, protecting something. His host camps in the old muster-yard below the Marchward's wall. Mediator Corran keeps the town neutral with the Ender's fires in sight of every window, and the Redline and the Stillhold each suspect the other of wanting him pointed their way.",
-   "appearance": "A walled border town on a ridge, and below its wall a sprawling war-camp of mismatched tents and banners from four dead companies, smoke from a hundred fires"
+   "appearance": "A walled border town on a ridge, and below its wall a sprawling war-camp of mismatched tents and banners from four dead companies, smoke from a hundred fires",
+   "comes": "loud"
   },
   {
    "kind": "sovereignty",
@@ -661,7 +674,8 @@
    "plainly": "The governing council of the Radiant Plateau. It prizes clarity in public and keeps its own counsel in private.",
    "descriptionSeed": "The Radiant Council governs the Plateau under the High Luminary and speaks of clarity in everything. In private it plans a generation ahead and cuts its own archive to fit the plan. It is extending its reach over the unaligned valley one debt, one survey and one quiet favour at a time.",
    "appearance": "A council hall of photonic-crystal towers braiding sunlight into beams, light-guide streets below, an accountability board of lit panels in a public square",
-   "_fromPlay": "characters/player-s9z9u1/char-mr4ejo8c.json and characters/player-54seyk/char-mr4ejo8c.json (Cellaceron)"
+   "_fromPlay": "characters/player-s9z9u1/char-mr4ejo8c.json and characters/player-54seyk/char-mr4ejo8c.json (Cellaceron)",
+   "comes": "loud"
   },
   {
    "kind": "sovereignty",
@@ -742,7 +756,8 @@
    "plainly": "The Harmonic Heights governs itself through a council: an upper chamber that decides and a Warden Council on the Lower Terrace that the public actually meets.",
    "descriptionSeed": "The Heights is governed from an upper chamber that moves by sealed Priority packet and explains itself later. Below it the Warden Council of the Lower Terrace posts notices, opens inquiries and holds the sanction chain, and knows less than it should about what the chamber above it has decided.",
    "appearance": "Terraced buildings of phononic crystal humming in the wind, tree-sized chimes, and on the lowest terrace a warden hall with a crowded public bulletin board",
-   "_fromPlay": "characters/player-s9z9u1/char-mr4ejo8c.json and characters/player-54seyk/char-mr4ejo8c.json (Cellaceron)"
+   "_fromPlay": "characters/player-s9z9u1/char-mr4ejo8c.json and characters/player-54seyk/char-mr4ejo8c.json (Cellaceron)",
+   "comes": "loud"
   },
   {
    "kind": "sovereignty",
@@ -824,7 +839,8 @@
    ],
    "_notOnThePanel": {
     "aldric": "Aldric, the smokehouse operator, appears only at an evening meeting Silas called at Pell's forge with Dara, Fendt, Mara and Calvar. That gathering was not the panel, and no save seats him. The fifth seat is open if Erik wants him in it."
-   }
+   },
+   "comes": "loud"
   },
   {
    "encounters": [],
@@ -894,7 +910,8 @@
    "secretsGM": [
     "Valen does not know whose line he is (R40b.4). He believes the dawn was his own idea.",
     "The Open Lantern (SNG-642) is carried by their captains."
-   ]
+   ],
+   "comes": "loud"
   },
   {
    "encounters": [],
@@ -959,7 +976,8 @@
    ],
    "plainly": "Glasshome's governing assembly. It meets in the open, because the city has no interior walls, and it holds the border against the Blaze with lenses.",
    "descriptionSeed": "The Glass Assembly governs a city built on the plain the Blaze made, by people the Blaze made, and it spends most of its strength keeping the Blaze from finishing the job. Its arrays at the Lensward focus the light back on itself. It is fair, it is exhausting, and it hears every case in public.",
-   "appearance": "An open hall of clear glass in a city without interior walls, a crowd watching every speaker, the great lens-arrays of the border catching the light beyond"
+   "appearance": "An open hall of clear glass in a city without interior walls, a crowd watching every speaker, the great lens-arrays of the border catching the light beyond",
+   "comes": "loud"
   },
   {
    "encounters": [],
@@ -1013,7 +1031,9 @@
    "whenBroken": "The Grindstone empties, the Middle Way loses the half of its balance that was flesh, and the Cogitarium's cold comes down the mountain unopposed.",
    "plainly": "The temple-order of the Somatic Reaches, where training the body is devotion. It guards the mountain and anyone on it who respects the flesh.",
    "descriptionSeed": "The High Temple rises a mountain in tiers of training-grounds, and every soul on it hones breath, poise and endurance as worship. Its adepts keep the Grindstone for soldiers who want to be trained properly, and they look down the mountain at the Cogitarium with a grief they rarely say aloud.",
-   "appearance": "Tiered training grounds climbing a mountain, adepts moving in unison at dawn, a long yard and a steaming bathhouse below"
+   "appearance": "Tiered training grounds climbing a mountain, adepts moving in unison at dawn, a long yard and a steaming bathhouse below",
+   "comes": "mixed",
+   "_comesWhy": "adepts whose bodies are disciplined enough to be quiet when they choose"
   },
   {
    "encounters": [],
@@ -1080,7 +1100,9 @@
    "secretsGM": [
     "The Custody's best buyer is the Undercount's Dusklow fence (SNG-640). The Custodian believes she sells property its owners abandoned; she is not an agent (R40b.4).",
     "The Cold Seal (SNG-642) was first made for the Long Hall."
-   ]
+   ],
+   "comes": "quiet",
+   "_comesWhy": "porters who move bodies nobody is using; nobody notices a porter"
   },
   {
    "encounters": [],
@@ -1137,7 +1159,9 @@
    "whenBroken": "The Heartroot's sealers win the argument, the Greenward closes, and the Quickwood stops keeping human hours.",
    "plainly": "The Rootkin's slow council at Grovehome. It keeps the Quickwood open to trade, and it has never decided anything in a hurry.",
    "descriptionSeed": "The Moot sits under the oldest trees in Grovehome and argues in seasons. It keeps the Quickwood's one door open to the world because trade requires it, and it keeps the Greenward thorned because the world requires that too. In the Heartroot, the argument to seal the wood is gaining ground.",
-   "appearance": "A ring of seats grown from living roots under vast trees, Rootkin elders listening for a very long time, a thorned green wall at the edge of the wood"
+   "appearance": "A ring of seats grown from living roots under vast trees, Rootkin elders listening for a very long time, a thorned green wall at the edge of the wood",
+   "comes": "mixed",
+   "_comesWhy": "slow to muster and easy to see coming — but in the Greenward they are the wood"
   },
   {
    "encounters": [],
@@ -1193,7 +1217,8 @@
    "whenBroken": "The Ceaseless scatter across the Making, each of them still building, and the Half-Cathedral gets finished by accident.",
    "plainly": "A cult of builders at the Making's pure pole who cannot stop and will not ask whether they should. They are joyful, and they build over anything in their way.",
    "descriptionSeed": "The Ceaseless build continuously, over each other, over the ground and over anything else that is there. Cinder Vael leads them, if leading is the word for being the one furthest ahead. They are not cruel. They simply do not see what they are building over.",
-   "appearance": "A city of scaffolds built on scaffolds, builders singing as they work at every height, half-finished structures swallowing older half-finished structures"
+   "appearance": "A city of scaffolds built on scaffolds, builders singing as they work at every height, half-finished structures swallowing older half-finished structures",
+   "comes": "loud"
   },
   {
    "encounters": [],
@@ -1248,7 +1273,8 @@
    "whenBroken": "The contest stops, the scaffolds come down, and the Ceaseless build over the Forge-Eternal before anyone has finished arguing.",
    "plainly": "The Making's governing contest. Each season the best plan wins, and whoever drew it governs until someone draws a better one.",
    "descriptionSeed": "The Wrights believe a finished thing has stopped being alive, so they govern the way they build: by improvement. Each season plans are laid before the Court, and the winner holds the Planmaster's office until a better one arrives. It is fair, it is glorious, and it is never done.",
-   "appearance": "A hall of drafting tables under cathedral scaffolding, plans pinned over plans, Wrights arguing over a model with obvious delight"
+   "appearance": "A hall of drafting tables under cathedral scaffolding, plans pinned over plans, Wrights arguing over a model with obvious delight",
+   "comes": "loud"
   },
   {
    "encounters": [],
@@ -1305,7 +1331,8 @@
    "whenBroken": "Pressureholt runs late for the first time in four centuries, and the Service Ways stop being mapped.",
    "plainly": "Pressureholt's government: a written specification for everything the city does, kept by the Chief of Schedule. It is warm, precise, and never late.",
    "descriptionSeed": "Pressureholt is a city that is also a machine, and the Schedule is its specification: every function, every shift, every failure mode written down and posted. The Enginewrights are warm people, and the Schedule is how they show it. It has no place for anything that was not planned.",
-   "appearance": "A city of pipes and clock-faces, a great posted Schedule on a wall of brass plates, maintenance crews moving to the minute"
+   "appearance": "A city of pipes and clock-faces, a great posted Schedule on a wall of brass plates, maintenance crews moving to the minute",
+   "comes": "loud"
   },
   {
    "encounters": [],
@@ -1370,7 +1397,9 @@
    ],
    "secretsGM": [
     "The Choirmaster is the Unbodied's agent; the choir is not (R40b.4). A kind power feeding a Sovereign is the lore's individually reasonable, cumulatively impossible."
-   ]
+   ],
+   "comes": "mixed",
+   "_comesWhy": "singers further away than they look: you hear them, and you are wrong about where"
   },
   {
    "encounters": [],
@@ -1444,7 +1473,9 @@
    "appearance": "A grey stone city of cairns and wide windows, tenders in ash-coloured robes, a watch-post on a bare ridge looking out over endless ash",
    "secretsGM": [
     "Neth holds the Life / Death seat (SNG-644) and lives at the Quiet Ground under the Wardens' protection. The Wardens do not know what she is holding back; they only know she must not be disturbed."
-   ]
+   ],
+   "comes": "mixed",
+   "_comesWhy": "march-wardens move unseen on the moor; the grave-crews do not"
   },
   {
    "encounters": [],
@@ -1503,7 +1534,9 @@
    "appearance": "An ash-field without end under a colourless sky, grey-robed reapers moving in a line with long curved blades, cairns falling behind them",
    "secretsGM": [
     "Morvane is a challenger for the Life / Death seat (SNG-644). The Harvest Hand is her road there, and Neth is in the way."
-   ]
+   ],
+   "comes": "quiet",
+   "_comesWhy": "the reapers come for what is ready, and the ready do not hear them"
   },
   {
    "encounters": [],
@@ -1575,7 +1608,8 @@
    "appearance": "A city of elegant half-demolished towers, crews working with ropes and wedges, a gated yard where people bring things to be ended",
    "secretsGM": [
     "The Last Mercy holds the Breaking / Building seat (SNG-644) and works the Clearing Ground. The Masters count her as one of their own and do not know what she holds back."
-   ]
+   ],
+   "comes": "loud"
   },
   {
    "encounters": [],
@@ -1634,7 +1668,9 @@
    "appearance": "A plain of rubble and dust at the pure pole, figures unmaking a standing wall stone by stone with their hands, nothing whole in any direction",
    "secretsGM": [
     "The Scouring Hand is a challenger for the Breaking / Building seat (SNG-644). It must go through the Last Mercy first; the lore's 'if it finishes, it arrives'."
-   ]
+   ],
+   "comes": "mixed",
+   "_comesWhy": "unmakers; some come as a crew, some come as an absence"
   },
   {
    "encounters": [],
@@ -1695,7 +1731,8 @@
    "appearance": "Vast ordered arcologies of identical terraces, people moving in perfect schedules, and deep inside, one small unmarked door",
    "secretsGM": [
     "Chaos / Order is the open seat (SNG-644). The Still Lattice walks toward it unopposed, and governing the Lattice Cities is how. When the specification is complete, it arrives."
-   ]
+   ],
+   "comes": "loud"
   },
   {
    "encounters": [],
@@ -1778,7 +1815,9 @@
    "secretsGM": [
     "This is the Hollow Court that SNG-640 names — the one that confers a grant, where the Mavens confer credibility. The Speaker keeps the empty chair and does not know who it is for (R40b.4).",
     "The Hollow King himself is homed at the Maw, beyond the Court's reach, where the Devouring have stopped bargaining."
-   ]
+   ],
+   "comes": "mixed",
+   "_comesWhy": "court wardens keep every term — including the ones about when to be seen"
   },
   {
    "encounters": [],
@@ -1863,7 +1902,8 @@
    "secretsGM": [
     "The Burning Certainty is the claimant on the Angelic half of the Hollow King's axis (SNG-642 §3). Her inquisition inside the Orders is her road.",
     "Eosphor, the Dawn Seraph, walks among them. He casts no shadow. They have not noticed yet."
-   ]
+   ],
+   "comes": "loud"
   },
   {
    "encounters": [],
@@ -1921,7 +1961,9 @@
    "appearance": "Dark halls lit only by touch and voice, refugees resting in quiet alcoves, shelves of wrapped books, a keeper listening at a door",
    "secretsGM": [
     "The Harborward is a counterweight to Lucifer (SNG-640): privacy kept on purpose. It starves him without knowing. It is also opposed by the Starless, who wants no refuge in the dark — only the Void."
-   ]
+   ],
+   "comes": "quiet",
+   "_comesWhy": "Umbral keepers; the dark is where they live"
   },
   {
    "encounters": [],
@@ -1996,7 +2038,9 @@
    "appearance": "A ring of Ents as tall as hills in the oldest grove, their slow voices shaking the leaves, a burned scar of black stumps beyond, green light thinning at the forest's edge",
    "secretsGM": [
     "The Thornmother is a challenger for the Life / Death seat (SNG-644). Sealing the wood is her road: life curdled into a wall."
-   ]
+   ],
+   "comes": "mixed",
+   "_comesWhy": "an Ent standing still is a hill; an Ent moving is not quiet at all"
   }
  ]
 }

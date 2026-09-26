@@ -529,8 +529,31 @@ export function canRaiseBand(character, { cfg = {}, renownBand = null } = {}) {
       : `you lead ${lead.slots} and hold ${holds} — not yet a following` };
 }
 
+/** ⛔ CCODE-510 · ERIK, IN PLAY 2026-09-25 — CAN THIS BAND BE WIELDED YET?
+ *
+ *  *"I want players to be able to form and name a band... but just like a legion that can't be wielded yet, it
+ *  doesn't function until the requirements are met."*
+ *
+ *  ⚠️ THE GATE MOVED FROM THE NAMING TO THE WIELDING. `canRaiseBand` used to refuse the RAISE, so a player who
+ *  named their people in a scene got nothing at all — measured in Loki's own play: he named the Churn-Revellers,
+ *  the name landed in his deeds, quests, codex and established facts, and `bands` stayed empty. A name recorded
+ *  in five places and refused in the one that matters is worse than a refusal, because nothing says why.
+ *
+ *  ⛑ THIS IS `formLegion`'S SHAPE, which Erik named: forming costs nothing, and a formation on paper "is a plan
+ *  and is nowhere" until it is called. A band that is not yet answered stands in the record, on the tab, with what
+ *  it would take written beside it.
+ *
+ *  ⚠️ ONE DERIVATION FOR EVERY DOOR. Calling, sending, mustering and clashing all ask THIS, so the tab's
+ *  explanation and the refusal at each door are the same sentence. Returns `{ ready, why }`. Pure. */
+export function bandReady(character, { cfg = {}, renownBand = null } = {}) {
+  const gate = canRaiseBand(character, { cfg, renownBand });
+  return { ready: !!gate.ready, slots: gate.slots, holdings: gate.holdings,
+    why: gate.ready ? gate.why : `${gate.why} — they are yours by name, and they do not answer yet` };
+}
+
 /** Raise one. ⚠️ A BAND IS `{count, quality}` PLUS PROVENANCE, because that is exactly what `legionClash`
- *  consumes — the record and the resolver were designed against each other rather than bolted together. */
+ *  consumes — the record and the resolver were designed against each other rather than bolted together.
+ *  ⛑ CCODE-510: NAMING IS ALWAYS ALLOWED (Erik's ruling). What a band can DO is gated by `bandReady`. */
 export function raiseBand(character, { id, name = null, count = 20, quality = 1, from = null, day = 0 } = {}) {
   if (!id) return { ok: false, why: "a band needs a name to be called by" };
   const list = character.bands || (character.bands = []);
@@ -1022,7 +1045,10 @@ export function onMissionWith(bands, memberId) {
   return null;
 }
 
-export function callUnit(bands, id, { day = 0, locationId = null, posture = "camped", paid = 0 } = {}) {
+export function callUnit(bands, id, { day = 0, locationId = null, posture = "camped", paid = 0, ready = null } = {}) {
+  // ⛔ CCODE-510 — A BAND YOU HAVE NAMED BUT NOT YET EARNED DOES NOT COME WHEN CALLED. The caller passes
+  // `bandReady`'s answer rather than the character, so this stays pure and there is one derivation, not two.
+  if (ready && ready.ready === false) return { ok: false, why: ready.why };
   const list = Array.isArray(bands) ? bands : [];
   const i = list.findIndex(b => b && String(b.id) === String(id));
   if (i < 0) return { ok: false, why: "no such unit" };
@@ -1048,7 +1074,8 @@ export function standDown(bands, id) {
 
 /** ⚑ AND THE POSTURE, once it is in the field. Refuses one the rules do not name, and refuses a unit still on paper — a plan cannot
  *  be camped anywhere. Pure over `bands`. */
-export function setUnitPosture(bands, id, posture) {
+export function setUnitPosture(bands, id, posture, { ready = null } = {}) {
+  if (ready && ready.ready === false) return { ok: false, why: ready.why };   // CCODE-510
   const list = Array.isArray(bands) ? bands : [];
   const i = list.findIndex(b => b && String(b.id) === String(id));
   if (i < 0) return { ok: false, why: "no such unit" };

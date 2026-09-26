@@ -21556,11 +21556,18 @@ await (async () => {
       // different times — one is a season's work, the other is a moment.
       check("CCODE-278: raise and clash are separate ops",
         /"raise"/.test(appSrc278) && /"clash"/.test(appSrc278));
-      // ⛔ THE ENGINE DECIDES WHETHER THEY HAVE EARNED IT. A narrator that could hand out a warband would
-      // make the whole command ladder decorative.
-      check("CCODE-278: the GM is told the engine refuses an unearned band, and not to narrate losses",
-        /never assert that people follow them/i.test(gmSrc278)
-        && /NEVER narrate a band's losses yourself/i.test(gmSrc278));
+      // ✅ CCODE-510 · ERIK, IN PLAY 2026-09-25 — THE GATE MOVED FROM THE NAMING TO THE WIELDING.
+      // This asserted "never assert that people follow them", which was right while the engine REFUSED an
+      // unearned raise. Erik: "I want players to be able to form and name a band... but just like a legion that
+      // can't be wielded yet, it doesn't function until the requirements are met." ⚠️ So the claim is now the
+      // opposite one and it is rewritten rather than joined: the GM must EMIT the raise (a naming that reaches
+      // no op is a name the game loses — measured in Loki's play, where the Churn-Revellers landed in his deeds,
+      // quests, codex and facts and never in `bands`), and must still not narrate obedience or losses.
+      check("CCODE-510: the GM is told to EMIT the naming, and not to narrate a band it cannot yet command",
+        /the naming always lands/i.test(gmSrc278)
+        && /may NOT narrate them marching, mustering or obeying/i.test(gmSrc278)
+        && /NEVER narrate a band's losses yourself/i.test(gmSrc278)
+        && !/never assert that people follow them/i.test(gmSrc278));
       check("CCODE-278: bandOps survives a truncated reply",
         /"bandOps"/.test(gmSrc278.slice(gmSrc278.indexOf("SALVAGEABLE_OPS"))));
     }

@@ -2137,3 +2137,8 @@ table.ob-matrix { border-collapse: collapse; width: 100%; min-width: 640px; font
 .ad-head { display: block; font-size: 10px; letter-spacing: .07em; text-transform: uppercase; opacity: .55; margin-bottom: 3px; }
 .ad-row { display: flex; gap: 8px; justify-content: space-between; align-items: baseline; flex-wrap: wrap; font-size: 12.5px; padding: 1px 0; }
 .ad-row .hint { font-size: 11.5px; opacity: .62; }
+
+/* CCODE-510 · a band you have named that does not answer yet — Erik: "just like a legion that can't be
+   wielded yet, it doesn't function until the requirements are met." */
+.band-waiting { opacity: .85; border-left: 2px solid var(--line-soft, #3a3a3a); padding-left: 8px; }
+.band-waiting strong { opacity: 1; }

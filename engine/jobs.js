@@ -839,10 +839,13 @@ export function bandMissionOdds(character, assignment, ctx = {}) {
  *  says who stays and why), the charge is unwritten, or what it can do does not fit the kind — `canSendOn`, the errand's own rule, on the
  *  families of those who GO (`bandMissionParty`'s `does`). Nobody is parted from your side: who walks with you stays with you. `placeName` is the
  *  destination as the player reads it. Mutates `character`. → { ok, assignment, said, party } | { ok: false, why } */
-export function sendBandOnMission(character, bandId, { kind, charge, destination = null, stake = null, worldCount = null, placeName = null, nameOf = undefined } = {}) {
+export function sendBandOnMission(character, bandId, { kind, charge, destination = null, stake = null, worldCount = null, placeName = null, nameOf = undefined, ready = null } = {}) {
   const band = (character?.bands || []).find(b => b && String(b.id) === String(bandId));
   if (!band) return { ok: false, why: "there is no such band" };
   const name = band.name || String(bandId);
+  // ⛔ CCODE-510 · ERIK: "it doesn't function until the requirements are met." A band you have named but not
+  // yet earned cannot be SENT anywhere — the same sentence the tab shows, from the same derivation.
+  if (ready && ready.ready === false) return { ok: false, why: ready.why };
   if (band.mission) return { ok: false, why: `${name} is already away on a mission` };
   if (band.called) return { ok: false, why: `${name} is called into the field — stand them down first` };
   const kindId = String(kind || "").toLowerCase();

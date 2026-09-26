@@ -243,7 +243,12 @@ export const GM_CONTEXT = [
   { key: "commandDetail", builder: "melee.commandSlots + canRaiseBand (R25/CCODE-272/CCODE-279)", carries: ["the three scales", "where the player stands", "what the next rung costs"],
     reachedBy: "always — it is a fact about the character, and the rung they cannot yet reach is the point", spec: "§23", views: ALL,
     build: (env) => {
-      const cfg = env.CONTENT?.rules?.martial || {};
+      // ⚠️ BOTH HALVES OF THE RULE. `rules.martial` carries `bandAtSlots`/`bandAtHoldings` and `rules.melee`
+      // carries `maxNamed`/`levelsPerSlot`/`presenceForSlot`/`renownBandsForSlot` — neither has all six, so
+      // reading one bag silently ran `commandSlots` on its DEFAULTS. They happen to match the authored numbers
+      // today, which is exactly how this stays invisible until the day somebody tunes one. Same crossing sat in
+      // app.js's holdings tab; both now merge. (`meleeCfg()` in app.js is the same merge, by name.)
+      const cfg = { ...(env.CONTENT?.rules?.melee || {}), ...(env.CONTENT?.rules?.martial || {}) };
       const lead = commandSlots(env.character, { cfg, renownBand: env.character?.renownBand || null });
       const band = canRaiseBand(env.character, { cfg, renownBand: env.character?.renownBand || null });
       // ⛔ SNG-541: THE GM READS THE ROSTER, NOT A STORED COUNT. This printed `${b.name} (${b.condition}, ${b.count})` — the copy of
@@ -253,9 +258,13 @@ export const GM_CONTEXT = [
       const lines = [
         `PARTY — you lead ${lead.slots} named ${lead.slots === 1 ? "person" : "people"} into a fight${lead.capped ? " (the most anyone leads for now)" : ""}. ${lead.why}.`,
         `  earned by: ${lead.earned.map(e => e.why).join(" · ") || "nothing yet — level, presence 7+, and renown each add one"}`,
+        // ✅ CCODE-510 · ERIK, IN PLAY: "I want players to be able to form and name a band... but just like a
+        // legion that can't be wielded yet, it doesn't function until the requirements are met." ⚠️ THIS LINE
+        // SAID "NOT YET" AND THE GM BELIEVED IT — correctly, until the ruling moved the gate from the naming to
+        // the wielding. Telling the GM the old rule is how a player names their band and nothing happens.
         band.ready
-          ? `BAND — you can raise one: ${band.why}. A band is a following that fights as a unit, not as names.`
-          : `BAND — not yet: ${band.why}. It opens at 3 command slots OR 2 holdings that are not failing.`,
+          ? `BAND — they answer: ${band.why}. A band is a following that fights as a unit, not as names.`
+          : `BAND — THEY MAY BE NAMED AT ANY TIME and they do not answer yet: ${band.why}. Emit bandOps "raise" the moment the player names their people — the naming always lands and the band stands in their record. They cannot be called, sent or posted until they answer, which opens at 3 command slots OR 2 holdings that are not failing. Narrate the naming in full; do NOT narrate them marching or obeying.`,
       ];
       for (const r of roster) lines.push(`  raised: ${r}`);
       lines.push("LEGION — bands meet bands. What decides it is NUMBERS AND QUALITY, not one hero's roll; a hero bends a battle, and never by more than their rung allows.");

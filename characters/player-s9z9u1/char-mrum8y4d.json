@@ -11308,12 +11308,12 @@
     "agility": 4,
     "reason": 4,
     "insight": 5,
-    "presence": 4,
+    "presence": 5,
     "rapport": 5,
     "craft": 4,
     "wits": 5
   },
-  "pendingSubPoints": 1,
+  "pendingSubPoints": 0,
   "skillPoints": 0,
   "discoveries": [
     {
@@ -14551,8 +14551,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790431601944,
-  "rev": 985,
+  "updatedAt": 1790431795238,
+  "rev": 996,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -15603,8 +15603,7 @@
       "teaches": null,
       "liaisonFor": null,
       "joinedDay": 33,
-      "leftDay": 83,
-      "departedWhy": "you parted ways"
+      "rejoinedDay": 88
     },
     {
       "npcId": "halvex_coil",
@@ -18337,7 +18336,11 @@
   "journey": null,
   "allyOrders": {
     "traveler-woman": {
-      "stance": "cautious"
+      "stance": "aggressive",
+      "prefer": [
+        "glasswork",
+        "bark_and_briar"
+      ]
     }
   },
   "pinnedLooks": {
@@ -18654,5 +18657,8 @@
   "_questMatchNotes": [
     "(couldn't match a quest for \"journey-gen-the-road-from-kindly-rest-to-standing-an-88\" — not applied)"
   ],
-  "imagePinned": true
+  "imagePinned": true,
+  "partyForward": [
+    "traveler-woman"
+  ]
 }

@@ -85,8 +85,9 @@
    "description": "present on 70 of 70"
   },
   "fears": {
-   "type": "string",
-   "description": "present on 4 of 70"
+   "type": ["string", "array"],
+   "items": { "type": "string" },
+   "description": "what they fear; a string, or layered fears as an array. Same shape as npc.schema, because legends reach the npc registry. SNG-658 authored two per tradition epic (57 of 70 carry it)."
   },
   "reactsToReputation": {
    "type": [

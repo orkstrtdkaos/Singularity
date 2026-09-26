@@ -9,8 +9,8 @@
     "name": { "type": "string", "minLength": 1 },
     "kind": {
       "type": "string",
-      "enum": ["weapon", "shield", "armor", "focus", "tool", "consumable", "misc"],
-      "description": "⚠️ `shield` is new here. The catalog has ZERO shields at HEAD while guard-shaped crafts are 19 of the defensive logics — Aevi's finding, and the reason the enum names it explicitly rather than letting shields hide under `armor`."
+      "enum": ["weapon", "shield", "armor", "focus", "tool", "consumable", "relic", "misc"],
+      "description": "⚠️ `shield` is new here. The catalog has ZERO shields at HEAD while guard-shaped crafts are 19 of the defensive logics — Aevi's finding, and the reason the enum names it explicitly rather than letting shields hide under `armor`. `relic` (SNG-658): a substrate-charged find (keystone shard, snarl bead, the far token), carried for its charge; its bonusTags still hook rolls."
     },
     "description": { "type": "string", "minLength": 1 },
     "bonusTags": {
@@ -24,10 +24,12 @@
     "worth": { "type": "string", "description": "a band, not a price — there is no pricing engine" },
     "provenance": { "type": "string", "description": "where it came from, so a found thing has a history" },
     "effects": {
-      "type": "array",
-      "description": "CONSUMABLES ONLY. Gear does not use this — see the description above.",
-      "items": { "type": "object" }
+      "type": "object",
+      "description": "CONSUMABLES ONLY. Gear does not use this — see the description above. ⛑ SNG-658: an OBJECT of numeric pools, e.g. { energy: 10 } or { health: 8 }, because that is what every reader takes (encounters.js restores from fx.energy / fx.health, inventory.js reads item.effects || {}, app.js lists Object.entries). The earlier 'array' type described a shape nothing reads.",
+      "additionalProperties": { "type": "number" }
     },
+    "substrateCharge": { "type": "number", "minimum": 0, "description": "relics only: the substrate charge the thing carries (0.06-0.09 on the three authored). A relic is gathered for its charge, not worn as gear." },
+    "consumable": { "type": "boolean" },
     "image": { "type": "string" }
   },
   "additionalProperties": true

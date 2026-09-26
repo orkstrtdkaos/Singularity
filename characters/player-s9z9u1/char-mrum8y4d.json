@@ -119,7 +119,7 @@
   ],
   "alignment": {
     "mechanical_spiritual": 0.0077000000000000055,
-    "falsehood_truth": 0.41051489055759893,
+    "falsehood_truth": 0.409989146029719,
     "demonic_angelic": -0.020000000000000004,
     "dark_light": 0.085,
     "concrete_abstract": 0.18349246667125482,
@@ -127,7 +127,7 @@
     "body_mind": 0.0658375,
     "emotional_logical": 0.063662523984375,
     "space_time": 0.028000000000000004,
-    "violence_peace": 0.010249999999999999
+    "violence_peace": 0.0347375
   },
   "attunement": 10,
   "maxHealth": 83,
@@ -491,46 +491,68 @@
         "player": "Step back and let her work through what this reshuffling means—offer silence as space for her to find her own answer.",
         "summary": "Vail Langley's absolute mandate reshuffles when Loki corrects the sealed chamber's location—Seraphine's order was built on a false site. The Enforcer's certainty begins to reorganize in the moorland wind.",
         "narration": "You step back from Vail Langley and let the silence settle between you. The moorland wind carries no answers, only the sound of long grass bending and the faint echo of the shrine's emptiness. Her hand remains on the doorframe, but her entire frame has shifted—not relaxed, but *redistributed*. Her eyes track across something you cannot see, following a calculation that is now being remade.\n\nShe has been sent to seize control of a thing beneath Millbrook. She has been given absolute certainty that Seraphine's order requires this. But the chamber is not there. The sealed thing is not under the town's feet but under the Crossing itself—under the Null Stone that opened, not by force, but by honest asking. That is not a detail. That is the difference between a mandate and a miscalculation.\n\nVail's jaw tightens. Her breathing does not change. But something in her has *begun* to move, the way a lock begins to turn when the right key finds the hole. She is a person made of certainty, and certainty, when shaken, must reorganize—it cannot simply break. The moorland's patient openness seems to give her room for that work. No one speaks. The relay station behind her holds its walls around the moment like a cupped hand."
+      },
+      {
+        "player": "Let Orla speak—they have lived this breaking of certainty and may reach her through that shared ground.",
+        "summary": "At Whistling Woman Post, Orla speaks to Vail's breaking certainty—offering the hard-won knowledge of someone who has lived through exactly this reshuffling of conviction. The Enforcer listens.",
+        "narration": "Orla steps forward into the silence—not between you and Vail, but into the space where her certainty is rebuilding itself. They move with the deliberation of someone who has walked this exact threshold themselves, and when they speak, their voice carries the weight of fifteen years unraveling.\n\n\"I came to this valley believing that sealed things are mercy to destroy,\" Orla says, and there is no apology in it—only precision. \"I held that certainty for longer than I can count. I was sent here to break what sleeps, to call it kindness.\" They pause, and their gaze finds Vail's with the steadiness of someone who knows what it costs to watch your own certainty collapse. \"Then I watched someone choose understanding instead of breaking. I watched them open the sealed thing by asking it plainly, not by forcing their will through its seams.\"\n\nOrla's hands hang open at their sides. \"Your mandate came from a false ground. That does not make you wrong for holding it—it makes you exactly as certain as I was, built on exactly as good a reason, and now exactly as shaken as I was when the ground shifted. The question now is not whether Seraphine's order was right. It is whether you follow an order that no longer fits the thing it was meant to control.\""
       }
     ],
     "lastTurn": {
-      "narration": "You step back from Vail Langley and let the silence settle between you. The moorland wind carries no answers, only the sound of long grass bending and the faint echo of the shrine's emptiness. Her hand remains on the doorframe, but her entire frame has shifted—not relaxed, but *redistributed*. Her eyes track across something you cannot see, following a calculation that is now being remade.\n\nShe has been sent to seize control of a thing beneath Millbrook. She has been given absolute certainty that Seraphine's order requires this. But the chamber is not there. The sealed thing is not under the town's feet but under the Crossing itself—under the Null Stone that opened, not by force, but by honest asking. That is not a detail. That is the difference between a mandate and a miscalculation.\n\nVail's jaw tightens. Her breathing does not change. But something in her has *begun* to move, the way a lock begins to turn when the right key finds the hole. She is a person made of certainty, and certainty, when shaken, must reorganize—it cannot simply break. The moorland's patient openness seems to give her room for that work. No one speaks. The relay station behind her holds its walls around the moment like a cupped hand.",
-      "sceneSummary": "Vail Langley's absolute mandate reshuffles when Loki corrects the sealed chamber's location—Seraphine's order was built on a false site. The Enforcer's certainty begins to reorganize in the moorland wind.",
+      "narration": "Orla steps forward into the silence—not between you and Vail, but into the space where her certainty is rebuilding itself. They move with the deliberation of someone who has walked this exact threshold themselves, and when they speak, their voice carries the weight of fifteen years unraveling.\n\n\"I came to this valley believing that sealed things are mercy to destroy,\" Orla says, and there is no apology in it—only precision. \"I held that certainty for longer than I can count. I was sent here to break what sleeps, to call it kindness.\" They pause, and their gaze finds Vail's with the steadiness of someone who knows what it costs to watch your own certainty collapse. \"Then I watched someone choose understanding instead of breaking. I watched them open the sealed thing by asking it plainly, not by forcing their will through its seams.\"\n\nOrla's hands hang open at their sides. \"Your mandate came from a false ground. That does not make you wrong for holding it—it makes you exactly as certain as I was, built on exactly as good a reason, and now exactly as shaken as I was when the ground shifted. The question now is not whether Seraphine's order was right. It is whether you follow an order that no longer fits the thing it was meant to control.\"",
+      "sceneSummary": "At Whistling Woman Post, Orla speaks to Vail's breaking certainty—offering the hard-won knowledge of someone who has lived through exactly this reshuffling of conviction. The Enforcer listens.",
       "choices": [
         {
-          "label": "Name what this means plainly: 'Seraphine sent you to seize something that isn't where she believes it is. That changes what her order can claim.'",
+          "label": "Ask Vail what she intends to do now—whether she will report to Seraphine that the sealed chamber is not where the High Luminary believes it to be.",
           "attribute": "social",
           "subAttribute": "presence",
           "axes": {
-            "falsehood_truth": 0.6,
-            "violence_peace": 0.3
+            "falsehood_truth": 0.3,
+            "violence_peace": 0.4
           },
           "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
-            "negotiate",
-            "threaten",
-            "speak plainly"
+            "ask"
           ],
-          "abilityId": "better_story",
-          "energyCost": 4,
+          "abilityId": null,
+          "energyCost": null,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Ask her what she will do now—whether loyalty to Seraphine still holds when the ground it stands on has shifted.",
+          "label": "Offer Vail a choice: ride ahead to the Standing Annex with the band and see what the sealed chamber actually *is* before any mandate reaches it—or return to Seraphine with the truth and let her decide how order stands when the ground shifts.",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {
-            "falsehood_truth": 0.5,
-            "violence_peace": 0.4
+            "violence_peace": 0.5,
+            "falsehood_truth": 0.2
           },
           "difficulty": "hard",
           "opposedDifficulty": null,
           "intentTags": [
             "negotiate",
-            "challenge"
+            "persuade"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use Appetite-Sense to read what Vail is refusing to admit beneath her reorganizing certainty—what she actually *wants* now that her mandate has become impossible.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "falsehood_truth": 0.4,
+            "body_mind": 0.3
+          },
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study"
           ],
           "abilityId": "appetite_sense",
           "energyCost": 2,
@@ -539,55 +561,43 @@
           "emergenceId": null
         },
         {
-          "label": "Let Orla speak—they have lived this breaking of certainty and may reach her through that shared ground.",
+          "label": "Stand in the silence and let Vail reach her own answer—do not push, do not offer escape routes, do not soften the weight of what has just happened.",
           "attribute": "social",
           "subAttribute": "presence",
           "axes": {
-            "violence_peace": 0.5,
-            "falsehood_truth": 0.4
+            "violence_peace": 0.3,
+            "falsehood_truth": 0.2
           },
           "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "help",
-            "speak plainly"
+            "wait"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": true,
           "encounterId": null,
           "emergenceId": null
-        },
-        {
-          "label": "Turn and walk toward the Standing Annex—let her follow or move against you, but do not wait for certainty to finish reorganizing.",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {
-            "violence_peace": 0.2
-          },
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "travel",
-            "gamble"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
         }
       ],
       "deeds": [],
       "characterDeltas": {
-        "energy": 0
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
       },
       "ledgerEvents": [],
       "questUpdates": [
         {
           "op": "progress",
           "questId": "the-taken-from-the-city",
-          "note": "Loki has corrected the High Luminary's fundamental misreading of the sealed chamber's location. Vail Langley's mandate to seize control at Millbrook is now built on false ground. The enforcer's certainty is reorganizing."
+          "title": "The Taken",
+          "summary": "Someone was brought from the city to the Unlit Deep, and the city is pretending it did not happen.",
+          "giver": "the elder of the Unlit Deep",
+          "note": "Orla speaks directly to Vail's breaking mandate—offering the language of someone who has lived through exactly this reshuffling of conviction. The Enforcer's absolute certainty is being offered a doorway out.",
+          "xpReward": null
         }
       ],
       "standingOps": [],
@@ -596,44 +606,44 @@
       "arcOps": [],
       "adoptSchool": null,
       "offer": {
-        "thing": "Vail Langley's moment of hesitation—the first crack in absolute certainty that runs on false ground",
-        "from": "Loki's honest correction of Seraphine's misbelief"
+        "thing": "Orla's own breaking certainty—offered as a mirror to what Vail is living through",
+        "from": "Orla's presence in the band and their willingness to speak plainly about the mandate they came carrying"
       },
       "stageOps": [],
       "scene": {
-        "setting": "Whistling Woman Post on the spinward moorland, late afternoon in mid-autumn. Stone waystation with open doors, the relay station's clean lines, the shrine with no name. Gold moorland stretching outward in all directions, fading toward dusk. Smoke rising faintly from the kitchen chimney. Vail Langley standing at the threshold, hand holding the doorframe—her absolute certainty in the process of reorganizing around a fact that unmakes her mandate.",
+        "setting": "Whistling Woman Post on the spinward moorland, late afternoon in mid-autumn. Stone waystation with open doors, the relay station's clean lines, the shrine with no name. Gold moorland stretching outward in all directions, fading toward dusk. Smoke rising faintly from the kitchen chimney. Vail Langley at the threshold—her hand at the doorframe, her entire frame redistributed, her absolute certainty in the process of reorganizing around a false ground now made visible.",
         "npcsPresent": [
           {
             "name": "Vail Langley",
-            "state": "Standing at the threshold, hand gripping the doorframe. Her entire stillness has become *active*—reorganizing. Her eyes track something unseen, calculating, refocusing."
+            "state": "At the threshold, hand on doorframe, listening to Orla with the intensity of someone watching their own broken certainty reflected back at them"
           },
           {
             "name": "Orla Yardley",
-            "state": "Standing with the band. Motionless but present. Watching the shift in Vail's certainty with the precision of someone who has lived this exact breaking."
-          },
-          {
-            "name": "Estry Krell",
-            "state": "Hand steady at her side. Alert. Reading both the moorland and the threshold's unfolding reorganization."
+            "state": "Standing forward, speaking plainly about the breaking of their own fifteen-year mandate—offering the hard-won knowledge of someone who has lived this exact threshold"
           },
           {
             "name": "Sable",
-            "state": "Standing with the band. Reading Vail with the precision of someone who has already made her own choice about what to do with broken certainty."
+            "state": "Standing with the band, reading Vail with the precision of someone who has already made her own choice about what belonging means"
+          },
+          {
+            "name": "Estry Krell",
+            "state": "Hand steady at her side, alert, reading both the moorland and the threshold's unfolding reorganization"
           },
           {
             "name": "Cy",
-            "state": "Lamp raised ahead, its lens irised in response to the confrontation—attuned to the shift in the room's weight and marking something in the threshold's balance."
+            "state": "Lamp raised ahead, its lens irised in response to the confrontation—attuned to the shift in the room's weight and marking Orla's careful intervention with precision"
           }
         ],
         "objects": [
           "The waystation's open doors",
           "The shrine with no name",
           "Smoke rising faintly from the kitchen chimney",
-          "The moorland stretching in all directions, gold and fading",
+          "The moorland stretching in all directions, gold and fading toward dusk",
           "The relay station architecture, weathered and kept"
         ],
         "threads": [
-          "Will Vail commit to re-assessing her mandate now that the sealed chamber's location is revealed?",
-          "Can the band reach the Standing Annex before Seraphine makes her next move—a move built on corrected information?",
+          "Will Vail commit to breaking her mandate now that the sealed chamber's location is revealed as false ground?",
+          "Can the band reach the Standing Annex before Seraphine makes her next move—a move now built on corrected information?",
           "What will Vail do if her loyalty to Seraphine and her commitment to truth are now in direct opposition?"
         ]
       },
@@ -642,45 +652,40 @@
           "op": "update",
           "npcId": "vail-langley",
           "name": "Vail Langley",
-          "note": "Her absolute certainty has begun to reorganize. The mandate to seize control at Millbrook is now built on false ground—Seraphine believed the sealed chamber was beneath the town, but it lies beneath the Hub crossing instead. Vail's stillness has become active, calculating, refocusing. She is a person made of certainty, and certainty, when shaken, must reorganize rather than break.",
+          "status": "active",
+          "statusNote": "At Whistling Woman Post, listening to Orla speak about the breaking of certainty. Her absolute mandate has become impossible ground. She has not yet chosen her next move.",
+          "note": "Orla spoke directly to her breaking mandate—naming what Vail is living through with the precision of someone who has lived it themselves. The Enforcer is being offered a doorway out of an order that no longer fits.",
           "learned": [
-            "The sealed chamber is beneath the Hub crossing, not Millbrook",
-            "Seraphine's mandate was built on a misreading of the site itself"
+            "The sealed chamber is beneath the Hub crossing, not Millbrook—the ground Seraphine's mandate was built on is false"
           ],
-          "statusNote": "At Whistling Woman Post, reorganizing her understanding of what loyalty requires"
-        }
-      ],
-      "intentsHeard": [],
-      "factUpdates": [],
-      "placeUpdates": [],
-      "discovery": null,
-      "codexUpdates": [
-        {
-          "topic": "the-regulator-question",
-          "label": "The Regulator's Question",
-          "kind": "mystery",
-          "fact": "Seraphine's reach for control was built on the belief that the sealed chamber lies beneath Millbrook. The correction—that it is beneath the Hub crossing instead—unmakes her mandate to seize control at the wrong site. The High Luminary is working from false ground.",
-          "links": [
-            "seraphine-high-luminary",
-            "vail-langley",
-            "the-crossing",
-            "the-null-stone",
-            "the-sealed-chamber"
+          "relationshipDelta": 0,
+          "skillsObserved": [
+            "Listens without flinching when her certainty is unmade",
+            "Reorganizes conviction in real time when false ground is revealed"
           ]
         },
         {
-          "topic": "seraphine-s-reach",
-          "label": "Seraphine's Reach",
-          "kind": "lore",
-          "fact": "The High Luminary's mandate to seize the sealed chamber was built on the false belief that it lies beneath Millbrook. Vail Langley was sent to intercept and control access before the band reached the Standing Annex. This mandate is now in question—the ground it stands on has shifted.",
-          "links": [
-            "seraphine-high-luminary",
-            "vail-langley",
-            "millbrook",
-            "the-null-stone"
+          "op": "update",
+          "npcId": "orla-yardley",
+          "name": "Orla Yardley",
+          "status": "active",
+          "statusNote": "Standing at Whistling Woman Post with the band. Speaking plainly about the breaking of their own fifteen-year mandate. Offering the hard-won language of someone who has lived through exactly this threshold.",
+          "note": "Spoke directly to Vail's breaking certainty—using their own unraveling conviction as a mirror and a doorway. The broken mandate became a bridge.",
+          "relationshipDelta": 0,
+          "skillsObserved": [
+            "Speaks plainly about the breaking of long-held certainty without apology",
+            "Reaches others through the shared ground of shattered conviction",
+            "Offers precision where shame or deflection could easily hide"
           ]
         }
       ],
+      "intentsHeard": [
+        "Orla Yardley"
+      ],
+      "factUpdates": [],
+      "placeUpdates": [],
+      "discovery": null,
+      "codexUpdates": [],
       "holdingOps": [],
       "holdTrades": [],
       "debtOps": [],
@@ -695,36 +700,44 @@
       "newEncounter": null,
       "unlockPrecursor": null,
       "unlockSubstrate": null,
-      "timeOps": null,
+      "timeOps": {
+        "hoursPassed": 0.5,
+        "why": "a conversation held in the moorland wind at dusk"
+      },
       "moveTo": null,
       "stateOps": [],
       "itemUpdates": [],
       "deriveItem": null,
-      "imagePrompt": "A woman in grey standing at a stone threshold in the moorland wind, her certainty visibly reorganizing behind her eyes—the moment a mandate built on false ground begins to crumble, not breaking but reshaping itself around a truth that does not fit.",
+      "imagePrompt": "Orla standing forward in the moorland light, their tall frame steady, speaking plainly to Vail Langley—who stands at the threshold with her hand still on the doorframe, listening with the intensity of someone watching their own broken certainty reflected back. The shrine stands silent behind them. The moorland wind bends the long grass. The moment holds the weight of two people finding each other in the wreckage of certainty.",
       "imageMedium": null,
       "newAbility": null,
       "gambitOps": null,
       "gambitApt": false,
+      "markDefiningMoment": null,
+      "markTeacher": null,
+      "offerPromotion": null,
+      "offerAcquisition": null,
+      "offerIntent": null,
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Whistling Woman Post on the spinward moorland, late afternoon in mid-autumn. Stone waystation with open doors, the relay station's clean lines, the shrine with no name. Gold moorland stretching outward in all directions, fading toward dusk. Smoke rising faintly from the kitchen chimney. Vail Langley standing at the threshold, hand holding the doorframe—her absolute certainty in the process of…",
+      "setting": "Whistling Woman Post on the spinward moorland, late afternoon in mid-autumn. Stone waystation with open doors, the relay station's clean lines, the shrine with no name. Gold moorland stretching outward in all directions, fading toward dusk. Smoke rising faintly from the kitchen chimney. Vail Langley at the threshold—her hand at the doorframe, her entire frame redistributed, her absolute…",
       "npcsPresent": [
         {
           "name": "Vail Langley",
-          "state": "Standing at the threshold, hand gripping the doorframe. Her entire stillness has become *active*—reorganizing. Her eyes "
+          "state": "At the threshold, hand on doorframe, listening to Orla with the intensity of someone watching their own broken certainty"
         },
         {
           "name": "Orla Yardley",
-          "state": "Standing with the band. Motionless but present. Watching the shift in Vail's certainty with the precision of someone who"
-        },
-        {
-          "name": "Estry Krell",
-          "state": "Hand steady at her side. Alert. Reading both the moorland and the threshold's unfolding reorganization."
+          "state": "Standing forward, speaking plainly about the breaking of their own fifteen-year mandate—offering the hard-won knowledge "
         },
         {
           "name": "Sable",
-          "state": "Standing with the band. Reading Vail with the precision of someone who has already made her own choice about what to do "
+          "state": "Standing with the band, reading Vail with the precision of someone who has already made her own choice about what belong"
+        },
+        {
+          "name": "Estry Krell",
+          "state": "Hand steady at her side, alert, reading both the moorland and the threshold's unfolding reorganization"
         },
         {
           "name": "Cy",
@@ -735,16 +748,16 @@
         "The waystation's open doors",
         "The shrine with no name",
         "Smoke rising faintly from the kitchen chimney",
-        "The moorland stretching in all directions, gold and fading",
+        "The moorland stretching in all directions, gold and fading toward dusk",
         "The relay station architecture, weathered and kept"
       ],
       "threads": [
-        "Will Vail commit to re-assessing her mandate now that the sealed chamber's location is revealed?",
-        "Can the band reach the Standing Annex before Seraphine makes her next move—a move built on corrected information?",
+        "Will Vail commit to breaking her mandate now that the sealed chamber's location is revealed as false ground?",
+        "Can the band reach the Standing Annex before Seraphine makes her next move—a move now built on corrected information?",
         "What will Vail do if her loyalty to Seraphine and her commitment to truth are now in direct opposition?"
       ]
     },
-    "beats": 7,
+    "beats": 8,
     "subPlace": null
   },
   "clock": {
@@ -770,14 +783,14 @@
       "locationEntityId": "the-unlit-deep",
       "status": "active",
       "progress": [
-        "The band has gathered supplies and is moving toward the Standing Annex by the long road, as directed by Mara Wells. Halvex Coil keeps the Annex and may have answers. The earth beneath Millbrook resists shortcuts—the band honors that resistance.",
         "The band departs Millbrook at dawn with supplies, honoring the earth's resistance to shortcuts. The long road northward to Whistling Woman Post and the Standing Annex is underway.",
         "The band departs Millbrook at dawn with supplies, honoring the earth's resistance to shortcuts. The long road northward to Whistling Woman Post and the Standing Annex is underway.",
         "The band reaches Whistling Woman Post—but the High Luminary's reach extends further than expected. The sealed chamber is known in Radiant halls.",
         "The High Luminary's reach extends into the valley—she knows of the sealed chamber and has sent an agent to intercept the band. The question of what Seraphine will do with that knowledge is now immediate.",
         "Vail Langley, agent of the High Luminary, has named herself and made Seraphine's position explicit: the sealed chamber is known in Radiant halls, and she will negotiate or seize. The choice of how to answer will determine whether the band reaches the Standing Annex unimpeded or faces direct opposition.",
         "Loki has corrected Seraphine's fundamental assumption about the sealed chamber's location—it lies beneath the Crossing, not Millbrook. Vail Langley's absolute certainty is now reorganizing around a fact that unmakes her mandate to seize control at the wrong site. The balance of power has shifted.",
-        "Loki has corrected the High Luminary's fundamental misreading of the sealed chamber's location. Vail Langley's mandate to seize control at Millbrook is now built on false ground. The enforcer's certainty is reorganizing."
+        "Loki has corrected the High Luminary's fundamental misreading of the sealed chamber's location. Vail Langley's mandate to seize control at Millbrook is now built on false ground. The enforcer's certainty is reorganizing.",
+        "Orla speaks directly to Vail's breaking mandate—offering the language of someone who has lived through exactly this reshuffling of conviction. The Enforcer's absolute certainty is being offered a doorway out."
       ],
       "aliases": [],
       "startedAt": "2026-07-24T21:30:43.637Z"
@@ -1585,7 +1598,8 @@
       "history": [
         "[d7] Arrived on the road from the reaches with foreknowledge of Loki's presence and Halvex Coil's account. Came to question a belief held for fifteen years—that breaking sealed things is mercy. Watched Loki choose understanding over destruction, and that choice moved through the valley until it reached…",
         "[d7] Orla walks with the band now, moving toward the Standing Annex. The breaking is spoken, witnessed, and carried forward together.",
-        "[d8] Named themselves directly when asked. Honest about the mandates they carry and the questions that broke them. Present without defensiveness or fear."
+        "[d8] Named themselves directly when asked. Honest about the mandates they carry and the questions that broke them. Present without defensiveness or fear.",
+        "[d8] Spoke directly to Vail's breaking certainty—using their own unraveling conviction as a mirror and a doorway. The broken mandate became a bridge."
       ],
       "knownFacts": [
         "Accepted a breaking mandate from Halvex Coil through trusted channels",
@@ -1600,14 +1614,17 @@
       "skillsObserved": [
         "Carries conviction with precision",
         "Willing to name when a belief breaks",
-        "Reads people and situations with logical exactitude"
+        "Reads people and situations with logical exactitude",
+        "Speaks plainly about the breaking of long-held certainty without apology",
+        "Reaches others through the shared ground of shattered conviction",
+        "Offers precision where shame or deflection could easily hide"
       ],
       "status": "active",
       "sex": "male",
       "gender": "man",
       "pronouns": "they/them",
       "age": 42,
-      "statusNote": "Walking with the band toward the Standing Annex. Present at Whistling Woman Post in confrontation with Seraphine's agent.",
+      "statusNote": "Standing at Whistling Woman Post with the band. Speaking plainly about the breaking of their own fifteen-year mandate. Offering the hard-won language of someone who has lived through exactly this threshold.",
       "domains": {
         "primary": "syllogist"
       },
@@ -1616,7 +1633,7 @@
         "locationId": "gen-the-made-gate",
         "day": 8
       },
-      "met": 3,
+      "met": 4,
       "roleSince": 88
     },
     "mara-wells-keeper": {
@@ -1733,30 +1750,33 @@
       "history": [
         "[d8] She knows about the sealed chamber beneath Millbrook and has been sent to intercept Loki before the band reaches the Standing Annex. She knows Loki's name. She knows what lies under the Null Stone.",
         "[d8] Named herself directly when asked—spoke without hedging the way someone speaks who has spent years learning to speak truth rather than deflect. Offered negotiation before force on Seraphine's direct instruction. She believes the band will yield.",
-        "[d8] Her absolute certainty has begun to reorganize. The mandate to seize control at Millbrook is now built on false ground—Seraphine believed the sealed chamber was beneath the town, but it lies beneath the Hub crossing instead. Vail's stillness has become active, calculating, refocusing. She is a…"
+        "[d8] Her absolute certainty has begun to reorganize. The mandate to seize control at Millbrook is now built on false ground—Seraphine believed the sealed chamber was beneath the town, but it lies beneath the Hub crossing instead. Vail's stillness has become active, calculating, refocusing. She is a…",
+        "[d8] Orla spoke directly to her breaking mandate—naming what Vail is living through with the precision of someone who has lived it themselves. The Enforcer is being offered a doorway out of an order that no longer fits."
       ],
       "knownFacts": [
-        "Serves the High Luminary directly",
         "Knows about the sealed chamber beneath Millbrook",
         "Has been waiting at Whistling Woman Post specifically for Loki's arrival",
         "She holds the title Enforcer of the High Luminary's will — not a rank written anywhere, but what Seraphine calls those who must make certain things happen without committee or debate",
         "She knows who Loki is and what lies beneath Millbrook",
         "She knows what the engineer buried and what Seraphine needs to know",
         "The sealed chamber is beneath the Hub crossing, not Millbrook",
-        "Seraphine's mandate was built on a misreading of the site itself"
+        "Seraphine's mandate was built on a misreading of the site itself",
+        "The sealed chamber is beneath the Hub crossing, not Millbrook—the ground Seraphine's mandate was built on is false"
       ],
       "skillsObserved": [
         "Absolute certainty in her presence",
         "Moves with economy and control",
         "Does not flinch or hesitate",
-        "Speaks truth without deflection or performance"
+        "Speaks truth without deflection or performance",
+        "Listens without flinching when her certainty is unmade",
+        "Reorganizes conviction in real time when false ground is revealed"
       ],
       "status": "active",
       "sex": "female",
       "gender": "woman",
       "pronouns": "she/her",
       "age": 41,
-      "statusNote": "At Whistling Woman Post, reorganizing her understanding of what loyalty requires",
+      "statusNote": "At Whistling Woman Post, listening to Orla speak about the breaking of certainty. Her absolute mandate has become impossible ground. She has not yet chosen her next move.",
       "domains": {
         "primary": "mason"
       },
@@ -1765,7 +1785,7 @@
         "locationId": "gen-the-made-gate",
         "day": 8
       },
-      "met": 3,
+      "met": 4,
       "roleSince": 88
     }
   },
@@ -2288,10 +2308,6 @@
     "turnsSinceOffer": 0,
     "recentOffers": [
       {
-        "thing": "A Radiant agent waiting with foreknowledge and a demand",
-        "from": "The High Luminary's need to control what surfaces from beneath the valley before the Wardens of Cairnhold—now blood-deep—move on it…"
-      },
-      {
         "thing": "A Radiant woman in grey, standing at the waystation threshold with absolute certainty",
         "from": "Seraphine's reach—the High Luminary knows what lies beneath Millbrook and has sent an agent to intercept the band"
       },
@@ -2306,6 +2322,10 @@
       {
         "thing": "Vail Langley's moment of hesitation—the first crack in absolute certainty that runs on false ground",
         "from": "Loki's honest correction of Seraphine's misbelief"
+      },
+      {
+        "thing": "Orla's own breaking certainty—offered as a mirror to what Vail is living through",
+        "from": "Orla's presence in the band and their willingness to speak plainly about the mandate they came carrying"
       }
     ],
     "wantProgress": {
@@ -13545,19 +13565,19 @@
     "deferredMysteries": []
   },
   "tendencies": {
-    "devotion": 0.5037820320736669,
-    "cerebral": 15.076160508731647,
-    "social": 15.60263333878185,
-    "strategic": 11.387548274979274,
-    "cautious": 5.112513373340464,
-    "amorous": 4.753796226830981,
-    "generous": 3.8929891919780553,
-    "ruthless": 1.1011843168860838,
-    "risky": 0.10312351612466597,
-    "patient": 0.028161177729540195,
-    "deception": 0.032781069556316766,
-    "carousing": 0.70155967750146,
-    "leadership": 1.4390967743619691
+    "devotion": 0.4911874812718252,
+    "cerebral": 14.699256496013355,
+    "social": 15.212567505312304,
+    "strategic": 11.102859568104792,
+    "cautious": 4.984700539006952,
+    "amorous": 4.634951321160206,
+    "generous": 4.795664462178603,
+    "ruthless": 1.0736547089639317,
+    "risky": 0.10054542822154931,
+    "patient": 0.027457148286301688,
+    "deception": 0.031961542817408845,
+    "carousing": 0.6840206855639235,
+    "leadership": 1.40311935500292
   },
   "aptitudes": [
     "strategist",
@@ -13566,7 +13586,7 @@
     "orator",
     "faithful"
   ],
-  "actionCount": 219,
+  "actionCount": 220,
   "grantsVersion": 1,
   "precursorAccess": [
     "address_sense"
@@ -14712,8 +14732,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790437290812,
-  "rev": 1011,
+  "updatedAt": 1790437396860,
+  "rev": 1012,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -15811,7 +15831,7 @@
     "umbral_depths": 54,
     "the_quickwood": 101,
     "the_center": 50,
-    "valley": 43,
+    "valley": 44,
     "the_open_reach": 3
   },
   "opLossPending": false,
@@ -15971,10 +15991,10 @@
     {
       "id": "sess-20",
       "startedAt": "2026-09-26T13:32:28.973Z",
-      "lastAt": "2026-09-26T15:41:30.786Z",
+      "lastAt": "2026-09-26T15:43:16.850Z",
       "startDay": 88,
       "endDay": 88,
-      "beats": 8
+      "beats": 9
     }
   ],
   "establishedFacts": [
@@ -16143,7 +16163,7 @@
   ],
   "_opLedger": {
     "offer": {
-      "applied": 58,
+      "applied": 59,
       "rejected": 3,
       "lastWhy": "rejected-shape"
     },
@@ -16160,40 +16180,40 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 253,
-    "choices": 253,
-    "characterDeltas": 137,
-    "scene": 253,
+    "sceneSummary": 254,
+    "choices": 254,
+    "characterDeltas": 138,
+    "scene": 254,
     "placeUpdates": 33,
     "codexUpdates": 149,
-    "timeOps": 202,
-    "offer": 52,
+    "timeOps": 203,
+    "offer": 53,
     "generateRequest": 7,
-    "sceneEnded": 122,
-    "npcUpdates": 203,
+    "sceneEnded": 123,
+    "npcUpdates": 204,
     "moveTo": 12,
-    "gambitApt": 80,
+    "gambitApt": 81,
     "deeds": 15,
-    "questUpdates": 55,
+    "questUpdates": 56,
     "standingOps": 4,
     "factUpdates": 22,
     "stageOps": 7,
     "encounterOps": 9,
     "ledgerEvents": 14,
     "newEncounter": 3,
-    "imagePrompt": 45,
+    "imagePrompt": 46,
     "scene_ended": 1,
     "stateOps": 3,
     "_engineClosedScene": 4,
     "discovery": 5,
-    "intentsHeard": 8,
+    "intentsHeard": 9,
     "delegateOps": 1,
     "scene_summary": 1,
     "partyOps": 4,
     "bandOps": 1,
     "exchangeOps": 2
   },
-  "_opTurns": 253,
+  "_opTurns": 254,
   "customAbilities": {
     "mirror-bright": {
       "id": "mirror-bright",
@@ -17176,7 +17196,7 @@
     "rapport": 16,
     "retreat": 1,
     "ask": 8,
-    "help": 10,
+    "help": 11,
     "study": 12,
     "investigate": 17,
     "charm": 2,
@@ -17198,7 +17218,8 @@
     "honest": 1,
     "confront": 1,
     "threaten": 1,
-    "calm": 1
+    "calm": 1,
+    "speak plainly": 1
   },
   "aptitudeEarnCount": {
     "faithful": 1,
@@ -18091,7 +18112,7 @@
     }
   },
   "_opUnknown": {
-    "sceneSummary": 81,
+    "sceneSummary": 82,
     "scene_summary": 1
   },
   "_bandNotes": null,

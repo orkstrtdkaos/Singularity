@@ -1326,9 +1326,125 @@
         "promotedWorldDay": 74,
         "birthWeight": 36
       }
+    },
+    "traveler-woman": {
+      "schemaVersion": 1,
+      "id": "traveler-woman",
+      "name": "Vessin Tallow-bark",
+      "role": "Itinerant assessor of salvage, ruins, and risk — she prices things so others don't have to learn the hard way",
+      "homeLocation": "the_quickwood",
+      "communityId": "independent.quickwood",
+      "personality": {
+        "warmth": 0.4,
+        "trust": 0.2,
+        "candor": 0.8,
+        "patience": 0.5
+      },
+      "spectrum": {
+        "body_mind": -0.2,
+        "emotional_logical": -0.3,
+        "life_death": 0.7,
+        "falsehood_truth": 0.6
+      },
+      "voiceHints": "Dry and flat as bark-peel in a dry year. Offers assessments, not comfort. When she says something is fine, it is fine; when she says it is not fine, she has already calculated the exits. Does not volunteer information but does not lie — lying costs more than it saves and she ran those numbers long ago. A small dry humour surfaces sideways, like a root under paving.",
+      "knowledge": [
+        "How to read a structure that looks sound but isn't — and the Half-Cathedral at night has several such qualities she has already noted",
+        "What the Quickwood's sap-pressure means in early spring: which trees are waking angry, which paths are newly unsafe",
+        "The going rate for silence, for passage, for a honest accounting of damage — and how badly most people underestimate all three",
+        "At least two previous mistakes large enough to have cost her everything she had at the time, and exactly what each one taught her about risk"
+      ],
+      "wants": "A clean transaction: information or passage or whatever this night turns out to require, at a fair price, with no loose ends left to rot and stink later.",
+      "fears": "Making the same mistake a third time. She has already made each of her worst ones twice.",
+      "reactsToReputation": {
+        "honest": "relaxes, fractionally; becomes almost conversational",
+        "clever": "watches her pockets and her words both — clever people are expensive",
+        "dangerous": "does not run; adjusts her price upward and states the adjustment plainly",
+        "desperate": "genuine, careful sympathy — she has been there — but she does not let sympathy override the arithmetic"
+      },
+      "appearance": "A woman in her mid-forties, neither tall nor short, built for endurance rather than strength. Quickwood-dark skin with the faint silver tracery of old briar-scarring along her left forearm and jaw. Hair the colour of heartwood, twisted back with a strip of cured bark, practical and unsentimental. Her coat is waxed canvas, mended in four places with different thread — the repairs are good, the thread simply ran out. She carries a short-handled billhook and a satchel of surveying tools, and she is standing where the moonlight falls through the Half-Cathedral's canopy gap because she chose that spot deliberately.",
+      "people": "human",
+      "affiliation": "independent",
+      "domains": {
+        "primary": "rootkin",
+        "secondary": "syllogist",
+        "tertiary": "umbral"
+      },
+      "domainsNote": "Derived from this NPC's authored spectrum against the great circle (SNG-174). Vessin reads the Quickwood's living grammar — sap-flow, root-tension, canopy pressure — as professional data, not reverence (rootkin primary). She applies clean logical pricing and risk-accounting to everything she learns from it (syllogist secondary). Night-work has taught her to know what is hidden and to move without advertising herself (umbral tertiary). Kind and domain are independent: a people tends toward positions, an individual holds their own.",
+      "functions": [
+        "reveal",
+        "ward",
+        "bind"
+      ],
+      "functionsNote": "Reveal: she surfaces what is actually true about a place or a deal. Ward: she identifies danger before it lands and says so plainly. Bind: her assessments, once given, tend to hold — agreements made through her stick.",
+      "presentAtHalfCathedral": "She came to assess recent storm-damage to the Half-Cathedral's eastern root-buttresses on behalf of a Grovehome timber-council that has not yet decided whether to stabilise or harvest. She did not expect company at this hour, but she is not unpleasantly surprised — she has learned that unexpected company at odd hours is either trouble or information, and either has value if handled correctly.",
+      "peopleSource": "generated",
+      "domainsSource": "generated",
+      "image": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/A%20woman%20in%20her%20mid-forties%2C%20neither%20tall%20nor%20short%2C%20built%20for%20endurance%20rather%20than%20strength.%20Quickwood-dark%20skin%20with%20the%20faint%20silver%20tracery%20of%20old%20briar-scarring%20along%20her%20left%20forearm%20and%20jaw.%20Ha%2C%20character%20portrait%2C%20named%20Vessin%20Tallow-bark%2C%20Itinerant%20assessor%20of%20salvage%2C%20ruins%2C%20and%20risk%20%E2%80%94%20she%20prices%20things%20so%20others%20don't%20have%20to%20learn%20the%2C%20Dry%20and%20flat%20as%20bark-peel%20in%20a%20dry%20year.%20Offers%20assessments%2C%20not%20comfort.%20When%20she%20says%20something%20is%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=64361&nologo=true",
+      "_canon": {
+        "entityId": "traveler-woman",
+        "type": "npc",
+        "weight": 12,
+        "rating": "R+",
+        "tier": "canonical",
+        "provenance": {
+          "playerKey": "player-s9z9u1",
+          "characterId": "char-mrum8y4d",
+          "locationId": "grovehome",
+          "day": 1,
+          "worldDay": null,
+          "hint": "a lone traveler woman at the Half-Cathedral at night — practical, dry-voiced, appraising; not scaffold crew, not Rootkin",
+          "why": "She is now in active conversation with Loki and needs a stable identity, name, and background that fits this place and h"
+        },
+        "contributedBy": {
+          "playerKey": "player-s9z9u1",
+          "characterId": "char-mrum8y4d"
+        },
+        "promotedWorldDay": 88,
+        "birthWeight": 8
+      }
     }
   },
-  "variants": [],
+  "variants": [
+    {
+      "id": "gen-the-passage-below-the-unlit-deep",
+      "name": "The Passage Below The Unlit Deep",
+      "regionId": "umbral_depths",
+      "descriptionSeed": "A place the road led to — The Passage Below The Unlit Deep. The fiction brought you here before the map knew its name.",
+      "tags": [
+        "transitional"
+      ],
+      "connections": [
+        "the_unlit_deep"
+      ],
+      "_mintedAs": "transit",
+      "dangerLevel": 4,
+      "map": {
+        "x": 96.11510228365859,
+        "y": 400
+      },
+      "worldPos": {
+        "colatitude": 91.505,
+        "longitude": 359.677,
+        "depth": -5
+      },
+      "_canon": {
+        "entityId": "gen-the-passage-below-the-unlit-deep",
+        "type": "location",
+        "weight": 6,
+        "rating": null,
+        "tier": "variant",
+        "provenance": {
+          "locationId": "the_unlit_deep",
+          "day": null,
+          "hint": "transit"
+        },
+        "contributedBy": null,
+        "promotedWorldDay": 88,
+        "birthWeight": 1,
+        "rivalId": "the_unlit_deep"
+      }
+    }
+  ],
   "_rolesRepaired_20260916": "⛔ SNG-595, Erik 2026-09-16: 'make sure this is a living world where things that PCs are doing and the NPCs they interact with are known — ONE GM for the world.' ⚠️ A SHARED ROLE IS THE ONE GM'S STANDING MEMORY OF A PERSON, AND EIGHT OF FIFTEEN WERE A TUESDAY. Edvar read 'has been waiting for someone to finally ask' — he was asked on Silas's day 13, commissioned, and met twelve times; Deni Cors was 'stopped at the Left Branch entrance', which was one afternoon; Ossivyn was planting a tree 'today'. Two roles were EMPTY and one was 'someone of Waygate'. ⛑ REWRITTEN AS STANDING FACTS. What a person DID belongs to the ledger, which CCode's traveler reader now composes with this; what they ARE belongs here, and it has to survive fifty days.",
   "looks": {
     "person:the_one_called_zeus": {

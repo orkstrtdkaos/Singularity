@@ -7532,6 +7532,29 @@ console.log("\n── §76b · a crafted feature carries its craft, its season, 
   }
 }
 
+/* ═════ §RPT — THE GM IS SHOWN ITS OWN PROSE, AND TOLD NOT TO SAY IT AGAIN (CCODE-516) ═════ */
+// ⛔ ERIK, IN PLAY: "The GM seems to repeat large chunks of itself recently."
+// ⚠️ WHAT I MEASURED AND DID NOT FIND: the prompt does not duplicate itself. No context key reaches two tiers
+// with the same content, no block heading is emitted twice, and the repeated 14-word runs inside one assembled
+// prompt total ~2,400 characters — all per-tradition boilerplate.
+// ⛑ WHAT IS TRUE: `renderSceneHistory` hands the model ~700 characters of ITS OWN prose for each of the last
+// three beats, and nothing anywhere told it not to say those things again. A model shown its own recent text
+// and asked to continue will continue BY RESTATING unless the scene is declared already told.
+console.log("\n── §RPT · the recent beats are for knowing where the scene stands, not for saying again ──");
+{
+  const gmRpt = rd("engine/gm.js");
+  check("§RPT: ⛔ the narration discipline forbids RE-TELLING the last beat, and gives a test for it",
+    /NEVER RE-TELL WHAT THE LAST BEAT ALREADY TOLD/.test(gmRpt)
+    && /Do not re-describe the room, re-introduce people who are already here/.test(gmRpt)
+    && /if a sentence would still be true and unremarkable if the previous beat had just been read aloud, cut it/i.test(gmRpt),
+    "the recent beats are shown so the GM knows where the scene stands, not so it can say it again");
+  // ⚠️ AND THE HISTORY IT IS REACTING TO IS STILL THERE — the instruction is meaningless without it, and a
+  // future trim of the history would quietly retire this rule's whole reason for existing.
+  check("§RPT: …and the last three beats are still shown IN FULL, which is what the rule is about",
+    /const full = i >= recentTurns\.length - 3 && t\.narration;/.test(gmRpt)
+    && /FULL TEXT: \$\{smartClamp\(t\.narration, 700\)\}/.test(gmRpt));
+}
+
 /* ═════ §IMG — A PLACE THAT ALREADY HAS A PICTURE KEEPS IT (CCODE-515) ═════ */
 // ⛔ ERIK, IN PLAY 2026-09-25: "i'm at mara wells' store right now. It should already have an image — and yet
 // it gets a new one minted every single beat there... I want it to take the default image or canon image. a

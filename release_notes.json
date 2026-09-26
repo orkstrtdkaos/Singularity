@@ -16,6 +16,18 @@
   "next": [],
   "releases": [
     {
+      "version": "2.9.3",
+      "date": "2026-09-26",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "The GM stops re-telling the beat you just read",
+          "summary": "It is shown the last few beats in full so it knows where the scene stands — and it is now told plainly that this is not permission to say them again.",
+          "detail": "Nothing had ever told it otherwise. It now starts from what has CHANGED since the last beat: no re-describing the room, no re-introducing people already standing there, no opening paragraph that sums up what you just read."
+        }
+      ]
+    },
+    {
       "version": "2.9.2",
       "date": "2026-09-26",
       "entries": [

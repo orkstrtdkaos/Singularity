@@ -72,6 +72,7 @@ import { roomOf, roomRefusal, promotionOffer, promoteHolding, trainingAt, mounts
 import { raidRisk, watchReadout, watchOdds, craftPlacementCost, defenceOf, featureCost, featureDef, featureDoes, featureCategory, allFeatures, refreshImprovement, canBeAskedToWork, holdingFactsLine, answerFeatureOffer, holdingLedger, addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, yieldsFor, upkeepFor, appointKeeper, reclaimHolding, improveHolding, setCrew, setGarrison, holdingGround, addFeature, removeFeature, renameHolding, featureKinds, residentsOf, holdingMeaningAura, holdingFieldDelta } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
 import { buildDevReport, unknownOpsIn } from "./engine/devreport.js";   // SNG-559: the Play/Dev instrument
 import { makeField, fieldDataFrom, FIELD_KINDS, KIND_LABEL, MEMBERSHIP } from "./engine/field.js";
+import { deedAgainstSupply, supplyDeedLine } from "./engine/sovereign.js";   // ⛔ SNG-641 §1 (C13): breaking or taking a supply-line power is a deed against the arc its Sovereign arrives on
 import { assaultableAt, garrisonContingents, noteHoldLoss, takeHold, encounterOwnerFilter, seedPowerKnowledge, isKnownPower, powersReaching, dangerLiftAt, movePowerStanding } from "./engine/powers.js";
 import { buildNemesisPrompt, applyNemesisChoice } from "./engine/nemesis.js";   // ⛔ SNG-648: the choosing call   // SNG-634 C5: their holds are places you can take   // CCODE-457: why the ground here reads the way it does · CCODE-472: and the layer the map draws
 import { FIRE_TESTS, diffKeys } from "./engine/firetests.js";   // SNG-560: the parts that have never been used
@@ -180,7 +181,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.11.3";
+const APP_VERSION = "2.12.0";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -9519,6 +9520,15 @@ function applyTurn(turn, resolution, playerWords = null) {
                 made ? `${won.holdName} is yours — taken from ${won.name}${won.theirHoldsLeft === 0 ? `, and it was the last ground they held` : `, ${won.theirHoldsLeft} of theirs left`}`
                      : `${won.holdName} fell, but it could not be filed as a holding — the name reads as something that is not a place`];
               if (!made) console.warn(`[powers] C5: ${won.holdName} was taken and addHolding refused it — the authored hold name is not a place word`);
+              // ⛔ SNG-641 §1 (C13, CORRECTED) — AND IF THEY WERE CARRYING SOMEBODY'S FREIGHT, TAKING THEIR GROUND
+              // IS A DEED AGAINST THAT ARC. No counter is lowered: Erik's R40b.2 has the supply state DERIVED from
+              // the stage, so the deed pushes the stage back and the supply follows. ⛑ A power that feeds nobody
+              // returns nothing here — but FOUR already do, authored and live, so this is not a reader waiting for
+              // content. ⚠️ A starved arc cannot go below stage 1, so the deed only READS on an arc that has moved.
+              const fedBy = deedAgainstSupply(character, target.power, { kind: "taken",
+                npcs: CONTENT.npcs || {}, day: day5, cfg: CONTENT.rules?.arcResponse?.supplyDeedPush || null });
+              const fedLine = supplyDeedLine(fedBy, target.power, { kind: "taken" });
+              if (fedLine) character._bandNotes = [...(character._bandNotes || []).slice(-2), fedLine];
             }
           } else if (hit) {
             character._bandNotes = [...(character._bandNotes || []).slice(-2),

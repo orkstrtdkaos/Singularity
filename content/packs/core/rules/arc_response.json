@@ -177,6 +177,64 @@
    },
    "_reasoning": "The rate is HOW READILY A TRADITION REACHES FOR REMOVAL AS AN ANSWER, not how violent they are and not how much I approve of them. Per DIRECTIVE_SNG-280 it derives from method: umbral and veilwright top the list because removal is what their crafts DO — the_stopped_breath and the_perfect_erasure are both removals — while numinous is lowest because attention has no removal in it at all. ⚠️ STILLHOLD SITS AT 0.8, MID-LOW RATHER THAN BOTTOM: the_quieting is a removal and they teach it, they just require a refused truce first, which lowers the RATE without denying the ACT. That is Erik's correction held: not absent from the field, just slower to reach.",
    "_replacesResolutionModeRemoval": true
+  },
+  "supplyDeedPush": {
+   "_what": "⛔ SNG-641 §1 (C13) — HOW FAR A DEED AGAINST A SUPPLY LINE PUSHES THE ARC ITS SOVEREIGN ARRIVES ON, in stages. Erik's R40b.2 has the supply state DERIVED from the arc's stage, so there is no counter to lower: breaking a line pushes the stage BACK and the supply follows. ⛑ The numbers are Aevi's to move — a roll whose numbers live in code is a roll only CCode can balance. ⚠️ A starved arc cannot go below stage 1, so a deed only READS on an arc that has already moved.",
+   "broken": 1,
+   "_broken": "the power is finished. Worth a whole stage, because a broken power stays broken until something puts it back.",
+   "taken": 0.5,
+   "_taken": "one of its holds is yours. Half a stage — ground can be retaken.",
+   "turned": 0.5,
+   "_turned": "it answers to you now. Half a stage, and the same reasoning: it could turn again.",
+   "leaderSlain": 1,
+   "_leaderSlain": "the one who led it is dead. ⚠️ NO READER YET — no site in the game knows both a person's death and the power they led, so this number is authored for the deed and not yet spent by one."
+  },
+  "supplyLineRule": {
+   "_what": "⛔ SNG-641 §6 — WHETHER A NEWLY MINTED POWER MAY BECOME A SUPPLY LINE. ⚠️ OFF, AND NOT BY OVERSIGHT: Aevi's work order calls this row RULED, and her own spec §7.4 lists it under \"RULINGS I NEED\" with the staged data's `_status` reading \"proposal — Erik §7.4\". Two of her documents disagree and the more specific two agree with each other, so the rule is BUILT and switched off. Broadening how much of the world feeds a Sovereign is Erik's call, not CCode's default.",
+   "on": false,
+   "_on": "set true once Erik answers SNG-641 §7.4. Nothing else has to change.",
+   "requiresArcStageAtLeast": 1,
+   "_requiresArcStageAtLeast": "⛑ R40b.2, mechanised: the lines grow FROM the arc, never the arc from the lines. A new line may only appear where that Sovereign's arc has already moved off its floor.",
+   "capPerSovereignPerRegion": 1,
+   "_capPerSovereignPerRegion": "⚡ The lore says to thin these out: a world where every guild is a line becomes a lookup table, and the lore calls a lookup table inert.",
+   "hungers": {
+    "lucifer": {
+     "kinds": [
+      "order",
+      "guild"
+     ],
+     "verbs": [
+      "inform"
+     ],
+     "tags": [
+      "arena",
+      "board",
+      "herald"
+     ]
+    },
+    "the_hollow_king": {
+     "kinds": [
+      "outlaw_crown",
+      "lordship",
+      "guild"
+     ],
+     "verbs": [
+      "tribute",
+      "extort"
+     ]
+    },
+    "the_ninefold_ascendant": {
+     "kinds": [
+      "guild",
+      "order"
+     ],
+     "verbs": [
+      "fence",
+      "smuggle"
+     ]
+    }
+   },
+   "_hungers": "what each Sovereign's hunger looks like in a power's own fields — its kind, its verbs, its tags. Being seen: arenas, boards, heralds, orders that inform. Petition: outlaw crowns wanting a grant, lordships with a contested claim, guilds that take tribute. Bodies: guilds that fence or smuggle, orders leaning to Mind."
   }
  },
  "mintedFigures": {

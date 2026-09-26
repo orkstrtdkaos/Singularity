@@ -45,7 +45,7 @@ import { protectsOffscreen, nemesisIdOf } from "./nemesis.js";   // ⛔ SNG-648 
 import { travelerCard, cardChanged, mergeTravelerCard, ledgerMonthsSince, whereOf, meetKey } from "./travelers.js";   // SNG-595: a fellow traveler is a person the world has a record of
 import { stampEventChange, mergeEventStages, mergeQuestOutcomes, actorOf, questKey } from "./worldevents.js";   // CCODE-354: a crisis another traveler answered reads as answered
 import { bandDialsOf } from "./melee.js";                                    // SNG-634 C1: a raiding power bleeds on the dials a band does
-import { arcReading, knowsSovereign, masksFrom, sovereignOfArc, confirmedLines } from "./sovereign.js";   // ⛔ SNG-642 §2.3: which of an arc's three readings this character has unlocked, and the mask over the name
+import { arcReading, knowsSovereign, masksFrom, sovereignOfArc, confirmedLines, deedAgainstSupply, supplyDeedLine } from "./sovereign.js";   // ⛔ SNG-642 §2.3: which of an arc's three readings this character has unlocked, and the mask over the name
 import { raiderPowerAt, dangerLiftAt, powerPass, noticePass } from "./powers.js";  // SNG-634 C1/C2/C4/C7: whose raid, whose ground, what they do, who has noticed you
 import { worthOf } from "./purse.js";                                              // ⛔ SNG-634 C7 `wealth`: a crown notices a rich stranger
 import { INVITES_PATH, mergeInvitation, answerInto, applyAnswers } from "./invitations.js";   // CCODE-360: an invitation carried by someone you both know
@@ -721,6 +721,23 @@ export function advanceHoldings({ character, now = Date.now(), ladder = null, co
         aura: holdingMeaningAura(character, loc.id, holdCfg) }) || 0) : 0 });
     if (st && grew) st.grew = grew;
     for (const t of storeNews(h, st)) news.push(t);
+    // ⛔ SNG-641 §1 (C13, CORRECTED) — A RAID THAT FINISHED A POWER IS A DEED AGAINST WHATEVER IT WAS CARRYING.
+    // Erik's R40b.2 has a Sovereign's supply DERIVED from its arc's stage, so there is no counter to lower: the
+    // deed pushes the stage BACK and the supply follows. ⛑ This is the only reachable "broken" the game has —
+    // `breakPower` itself has no caller at all — and the world tick is where it belongs, because the raid resolver
+    // has no arcs and `content` does.
+    // ⚠️ AND IT IS LIVE, NOT WAITING. FOUR powers already carry `feedsGM`, authored: the Blaze Unshadowed (Lucifer),
+    // the Custody of the Vacated and the Long Choir (the Unbodied), and the Hollow Court (the Hollow King). Aevi's
+    // staged change set names a DIFFERENT four — I checked the change set, called it the world, and nearly shipped a
+    // comment saying no power feeds anybody.
+    if (st?.raid?.power?.broken && st.raid.power.id) {
+      const brokenPower = Object.values(content?.powers || {}).find(p => p?.id === st.raid.power.id) || null;
+      const pushes = brokenPower ? deedAgainstSupply(character, brokenPower, { kind: "broken",
+        npcs: content?.npcs || {}, day: (() => { try { return absoluteWorldDay(); } catch { return null; } })(),
+        cfg: content?.rules?.arcResponse?.supplyDeedPush || null }) : [];
+      const line = supplyDeedLine(pushes, brokenPower, { kind: "broken" });
+      if (line) news.push({ text: line, section: "world", powerId: brokenPower.id });
+    }
     // ⛔ CCODE-445 — THE FORGE WORKS THE ORDER, from what the store has left after the pass; a stall is said once
     const made = tickArmory(h, { cfg: holdCfg, armory: content?.rules?.economy?.armory || null });
     if (made?.said) news.push(made.said);

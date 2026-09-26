@@ -29792,6 +29792,145 @@ console.log("\n── §371 · a run of reasonable decisions ──");
     })(), "the temptation this has to survive is a narrator who joins the dots for the player");
 }
 
+/* ══════════ §372 · SNG-641 §1 (C13) + §6 (3b) — STARVING A HUNGER, AND WHERE A LINE MAY GROW ══════════ */
+// ⛔ SNG-640 §5's FIRST C13 LOWERED A COUNTER, and Aevi replaced it because it contradicts Erik's R40b.2: "A
+// Sovereign's supply state is DERIVED from its arc's stage, not the other way round." So there is NO NEW COUNTER —
+// breaking, taking or turning a supply-line power pushes that Sovereign's arc BACK and the supply follows, which is
+// also what makes R41's arrival work, since `sovereignFormFor` reads the stage and nothing else.
+console.log("\n── §372 · something that was being carried is not being carried any more ──");
+{
+  const SV372 = await import("../engine/sovereign.js");
+  const WT372 = await import("../engine/worldtick.js");
+  const { loadContentHeadless: lch372 } = await import("./headless_content.mjs");
+  const C372 = await lch372();
+
+  // ⚠️ AND IT IS NOT A READER WAITING FOR CONTENT. FOUR powers already carry `feedsGM`, authored — I checked the
+  // staged CHANGE SET, called it the world, and nearly shipped a comment saying no power feeds anybody.
+  check("§372: ⚠️ THE DEED HAS SOMETHING TO READ TODAY — four powers already carry `feedsGM`, and they are a different four from the staged change set",
+    (() => {
+      const feeding = Object.values(C372.powers || {}).filter(p => SV372.feedsOf(p).length);
+      const sovs = new Set(feeding.flatMap(p => SV372.feedsOf(p).map(f => f.sovereignId)));
+      return feeding.length >= 4 && sovs.size === 3;
+    })(), (() => {
+      const feeding = Object.values(C372.powers || {}).filter(p => SV372.feedsOf(p).length);
+      return feeding.map(p => `${p.name}→${SV372.feedsOf(p)[0].sovereignId}`).join(" · ");
+    })());
+
+  check("§372: ⛑ …and `temptedGM` IS NOT READ — being tempted by a hunger is not carrying its freight",
+    (() => {
+      const tempted = { id: "t", temptedGM: [{ sovereign: "the_hollow_king", if: "x", then: "y" }] };
+      return SV372.feedsOf(tempted).length === 0 && SV372.feedsOf({ id: "f", feedsGM: "lucifer" }).length === 1;
+    })(), "and a bare string is accepted as well as the authored object form");
+
+  // ⛔ NO NEW COUNTER. The deed goes through the same field a quest's `arc_stage` op writes.
+  check("§372: ⛔ A DEED PUSHES THE ARC BACK, AND THERE IS NO SECOND MECHANISM — it writes `worldState.arcStages[id].push`, the same field and sign convention a quest's own arc op uses",
+    (() => {
+      const power = { id: "p_line", name: "The Undercount", feedsGM: [{ sovereign: "the_hollow_king", through: "a fence" }] };
+      const ch = {};
+      const pushes = SV372.deedAgainstSupply(ch, power, { kind: "broken", npcs: C372.npcs, day: 100 });
+      const st = ch.worldState?.arcStages?.arc_the_long_petition;
+      return pushes.length === 1 && pushes[0].arcId === "arc_the_long_petition" && pushes[0].delta === -1
+        && st?.push === -1 && st.byDeed?.kind === "broken"
+        // and no counter anywhere: the only thing that moved is the arc's push
+        && Object.keys(ch.worldState).join(",") === "arcStages";
+    })(), "R40b.2: the supply state is derived FROM the stage, so lowering a fed counter would have inverted the ruling");
+
+  check("§372: ⛑ …and BREAKING them is worth more than TAKING one of their holds — a hold can be retaken and a broken power stays broken",
+    (() => {
+      const power = { id: "p", feedsGM: ["the_hollow_king"] };
+      const a = SV372.deedAgainstSupply({}, power, { kind: "broken", npcs: C372.npcs, cfg: C372.rules.arcResponse.supplyDeedPush });
+      const b = SV372.deedAgainstSupply({}, power, { kind: "taken", npcs: C372.npcs, cfg: C372.rules.arcResponse.supplyDeedPush });
+      return Math.abs(a[0].delta) > Math.abs(b[0].delta)
+        && Number(C372.rules.arcResponse.supplyDeedPush?.broken) === 1;
+    })(), "and the weights are AUTHORED — a roll whose numbers live in code is a roll only I can balance");
+
+  // ⛔ NO ARC, NO DEED — the hole SNG-642 found in Lucifer before an arc existed for the Light seat.
+  check("§372: ⛔ A SOVEREIGN WITH NO ARC GETS NO DEED — rather than pushing whichever arc happens to be nearby",
+    (() => {
+      const power = { id: "p", feedsGM: ["a_sovereign_with_no_arc"] };
+      const ch = {};
+      return SV372.deedAgainstSupply(ch, power, { kind: "broken", npcs: {} }).length === 0
+        && !ch.worldState?.arcStages;
+    })());
+
+  // ⛔ AND THE LINE NAMES THE POWER, NEVER WHAT IT WAS FEEDING.
+  check("§372: ⛔ WHAT THE PLAYER IS TOLD NAMES THE POWER AND STOPS — “you have starved the Hollow King” would hand over the one thing the marks spend a whole feature withholding",
+    (() => {
+      const power = { id: "p", name: "The Undercount", feedsGM: ["the_hollow_king"] };
+      const pushes = SV372.deedAgainstSupply({}, power, { kind: "broken", npcs: C372.npcs });
+      const line = SV372.supplyDeedLine(pushes, power, { kind: "broken" });
+      return /The Undercount are finished/.test(line) && /not being carried any more/.test(line)
+        && !/hollow|king|sovereign/i.test(line)
+        && SV372.supplyDeedLine([], power, { kind: "broken" }) === null;
+    })(), "and nothing moved means no sentence at all, rather than an empty one");
+
+  // ⛑ THE TWO REACHABLE DEEDS, wired where the game knows both the power and the world.
+  check("§372: ⛑ BOTH REACHABLE DEEDS ARE WIRED — a raid that finished them (worldtick) and a hold taken from them (app.js)",
+    (() => {
+      const wt = rd("engine/worldtick.js"), app = rd("app.js");
+      return /st\?\.raid\?\.power\?\.broken && st\.raid\.power\.id/.test(wt)
+        && /deedAgainstSupply\(character, brokenPower, \{ kind: "broken"/.test(wt)
+        && /deedAgainstSupply\(character, target\.power, \{ kind: "taken"/.test(app)
+        // ⚠️ and `breakPower` still has no caller, so the explicit break is not a path the game has
+        && !/breakPower\(/.test(app);
+    })(), "⚠️ `breakPower` has NO caller at all — the only reachable break is a raid reducing a power to nothing, and `turned` / `leaderSlain` have no site that knows both the person and the power they led");
+
+  /* ── §6 / item 3b — the generator rule, BUILT AND OFF ── */
+  // ⛔ AEVI'S OWN DOCUMENTS DISAGREE, and the specific ones win. Her work order row 3b says "(RULED)"; her spec
+  // §7.4 lists "The generator rule in §6, at one line per Sovereign per region?" under "RULINGS I NEED", and the
+  // staged `generatorRule._status` reads "proposal — Erik §7.4". So it is built and switched OFF.
+  check("§372: ⛔ THE SUPPLY-LINE RULE IS OFF, AND NOT BY OVERSIGHT — her spec §7.4 still lists it as a ruling she needs, whatever the work order's table says",
+    C372.rules.arcResponse?.supplyLineRule?.on === false
+    // \u26a0\ufe0f BOTH NOTES, not `_on || _what`: `_on` is truthy, so the `||` never reached `_what`, which is where the
+    // word lives. A `||` chain that stops at the first truthy value is the same shape as reading a default as a value.
+    && /proposal/.test(String(C372.rules.arcResponse?.supplyLineRule?._on || "") + String(C372.rules.arcResponse?.supplyLineRule?._what || ""))
+    && SV372.mayBecomeALine({ id: "x", kind: "guild", verbs: ["fence"] },
+        { regionId: "valley", rule: C372.rules.arcResponse.supplyLineRule, stageOf: () => 4, npcs: C372.npcs }).ok === false,
+    "broadening how much of the world feeds a Sovereign is Erik's call, not a default I get to pick");
+
+  // ⛔ THE KEY ORDER DEFECT, gated. Second time in this project a JSON declaration order became a priority rule.
+  check("§372: ⛔ THE BEST MATCH WINS, NOT THE FIRST DECLARED — a fence-and-smuggle guild belongs to the Unbodied, and it went to LUCIFER because `lucifer.kinds` lists “guild” and lucifer is declared first",
+    (() => {
+      const on = { ...C372.rules.arcResponse.supplyLineRule, on: true };
+      const ask = (p) => SV372.mayBecomeALine(p, { regionId: "valley", rule: on, stageOf: () => 3, npcs: C372.npcs });
+      const fence = ask({ id: "a", kind: "guild", verbs: ["fence", "smuggle"] });
+      const arena = ask({ id: "b", kind: "order", verbs: ["inform"], tags: ["arena"] });
+      const crown = ask({ id: "c", kind: "outlaw_crown", verbs: ["tribute"] });
+      return fence.sovereignId === "the_ninefold_ascendant" && arena.sovereignId === "lucifer"
+        && crown.sovereignId === "the_hollow_king";
+    })(), "a VERB is strong evidence — fencing is a specific thing to do; a KIND is weak, because a guild can be anything");
+
+  check("§372: ⚠️ …and a TIE IS REFUSED rather than tossed for — a plain guild matches all three hungers by KIND alone, and that is a content question",
+    (() => {
+      const on = { ...C372.rules.arcResponse.supplyLineRule, on: true };
+      const r = SV372.mayBecomeALine({ id: "d", kind: "guild", verbs: ["trade"] },
+        { regionId: "valley", rule: on, stageOf: () => 3, npcs: C372.npcs });
+      return r.ok === false && /matches 3 hungers equally/.test(r.why);
+    })(), "⚡ `kind: \"guild\"` is in all three hungers, so a bare guild can never be assigned — Aevi's to make one of them more specific");
+
+  // ⛔ R40b.2 MECHANISED: the lines grow FROM the arc, never the arc from the lines.
+  check("§372: ⛔ A LINE MAY ONLY GROW WHERE THE ARC HAS ALREADY MOVED — R40b.2, mechanised: a rule that let a new line raise the stage would be the forbidden counter wearing a different coat",
+    (() => {
+      const on = { ...C372.rules.arcResponse.supplyLineRule, on: true };
+      const p = { id: "e", kind: "guild", verbs: ["fence"] };
+      const at0 = SV372.mayBecomeALine(p, { regionId: "valley", rule: on, stageOf: () => 0, npcs: C372.npcs });
+      const at3 = SV372.mayBecomeALine(p, { regionId: "valley", rule: on, stageOf: () => 3, npcs: C372.npcs });
+      return at0.ok === false && /needs 1/.test(at0.why) && at3.ok === true;
+    })());
+
+  check("§372: ⚡ AND ONE LINE PER SOVEREIGN PER REGION — the lore says to thin these out, because a world where every guild is a line is a lookup table, and the lore calls a lookup table inert",
+    (() => {
+      const on = { ...C372.rules.arcResponse.supplyLineRule, on: true };
+      const p = { id: "f", kind: "guild", verbs: ["fence"] };
+      const full = SV372.mayBecomeALine(p, { regionId: "valley", rule: on, stageOf: () => 3, npcs: C372.npcs,
+        linesInRegion: { the_ninefold_ascendant: 1 } });
+      // and the count is DERIVED from the powers themselves, never stored
+      const live = SV372.linesInRegion(C372.powers, "the_descent", { locations: C372.locations });
+      return full.ok === false && /cap 1/.test(full.why)
+        && live.the_hollow_king === 1 && Number(on.capPerSovereignPerRegion) === 1;
+    })(), "measured: the four authored lines sit one to a region — radiant_wastes, somatic_reaches, the_numinous_reach, the_descent");
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

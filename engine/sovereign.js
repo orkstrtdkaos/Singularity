@@ -326,3 +326,181 @@ export function markForHere(character, { at = null, regionId = null, powers = []
   return { id: pick.id, kind: pick.kind || null, mark: pick.mark || null, ordinaryReading: pick.ordinaryReading || null,
     at, regionId: regionId || null, sealed: { sovereignGM: pick.sovereignGM || null } };
 }
+
+/* ═════ SNG-641 §1 · C13 (CORRECTED) — A BROKEN LINE IS A DEED AGAINST THE ARC ═════
+ *
+ * ⛔ SNG-640 §5's first version lowered a fed-state counter each time a supply-line power broke, and Aevi replaced
+ * it because it contradicts Erik's R40b.2: *"A Sovereign's supply state is DERIVED from its arc's stage, not the
+ * other way round."* So THERE IS NO NEW COUNTER. Breaking, taking or turning a supply-line power pushes that
+ * Sovereign's arc BACK, and the supply state follows the stage — which is also what makes R41's arrival work,
+ * since `sovereignFormFor` reads the stage and nothing else.
+ *
+ * ⛑ AND IT IS THE SAME DOOR A QUEST USES: `quests.js`'s `arc_stage` op writes `worldState.arcStages[id].push` with
+ * this sign convention. A deed against an arc is the same kind of thing, so it moves the world the same way rather
+ * than through a second mechanism nobody else reads.
+ *
+ * ⚠️ `feedsGM` ON A POWER IS NOT AN AGENT FLAG and does not break R40b.4 — a thieves' guild can carry a Sovereign's
+ * freight without one member knowing. It is GM-only and never shown to the player; nothing here surfaces it.
+ */
+
+/** Which Sovereigns a power feeds, from its own `feedsGM`. Tolerant of the two shapes content uses — a list of
+ *  `{ sovereign, through }`, or a bare id. ⛑ `temptedGM` is deliberately NOT read: being tempted is not feeding.
+ *  PURE. */
+export function feedsOf(power) {
+  const raw = power?.feedsGM;
+  if (!raw) return [];
+  const list = Array.isArray(raw) ? raw : [raw];
+  const out = [];
+  for (const f of list) {
+    const id = typeof f === "string" ? f : (f?.sovereign || f?.id || null);
+    if (id) out.push({ sovereignId: String(id), through: (typeof f === "object" && f?.through) ? String(f.through) : null });
+  }
+  return out;
+}
+
+/** ⛔ THE DEED. `kind` is what was done to them — "broken" | "taken" | "turned" | "leaderSlain" — and each is worth
+ *  a step of push against the arc that Sovereign's arrival rides on.
+ *
+ *  ⚠️ NEGATIVE, because `arcStageNow` adds the push to the authored base and a starved hunger is a hunger whose arc
+ *  RECEDES. A positive number here would have fed the thing by hurting it.
+ *
+ *  ⛑ THE WEIGHTS ARE A DIAL, not a table in code (`rules.sovereigns.deedPush`), and the defaults are the smallest
+ *  thing that can be felt: breaking a line outright is worth more than taking one of its holds, because a hold can
+ *  be retaken and a broken power is finished until something puts it back.
+ *
+ *  Returns the pushes it recorded, `[{ sovereignId, arcId, delta, push }]`, or []. MUTATES `character.worldState`. */
+export function deedAgainstSupply(character, power, { kind = "broken", npcs = {}, day = null, cfg = null } = {}) {
+  const feeds = feedsOf(power);
+  if (!character || !feeds.length) return [];
+  const w = (cfg && typeof cfg === "object" ? cfg : {});
+  const weight = (() => {
+    const said = Number(w[kind]);
+    if (Number.isFinite(said)) return said;
+    return kind === "broken" ? 1 : kind === "leaderSlain" ? 1 : 0.5;   // taken / turned: half a step
+  })();
+  if (!(weight > 0)) return [];
+  // \u26d1 THE BAG IS MADE ONLY WHEN SOMETHING IS WRITTEN. Creating it up front dirtied the save on every deed
+  // against a power whose Sovereign has no arc \u2014 nothing happened and the save looked changed anyway.
+  const bag = () => {
+    character.worldState = character.worldState || {};
+    character.worldState.arcStages = character.worldState.arcStages || {};
+    return character.worldState.arcStages;
+  };
+  const out = [];
+  for (const f of feeds) {
+    const arcId = npcs?.[f.sovereignId]?.forms?.arcId || null;
+    // ⛔ NO ARC, NO DEED. A Sovereign with no arc has nothing for the deed to act on — which is exactly the hole
+    // SNG-642 §1 found in Lucifer before an arc was authored for the Light seat, and saying nothing is the honest
+    // answer rather than pushing some other arc that happens to be nearby.
+    if (!arcId) continue;
+    const stages = bag();
+    const prev = stages[arcId] || {};
+    const push = (Number.isFinite(prev.push) ? prev.push : 0) - weight;
+    stages[arcId] = { ...prev, push, sinceDay: Number(day) || prev.sinceDay || null,
+      byDeed: { kind, powerId: power?.id || null, day: Number(day) || null } };
+    out.push({ sovereignId: f.sovereignId, arcId, delta: -weight, push });
+  }
+  return out;
+}
+
+/** ⛑ WHAT THE PLAYER IS TOLD, and it names the POWER and what was done to it — never what it was feeding. A line
+ *  that said "you have starved the Hollow King" would hand over the one thing §2 spends the whole feature
+ *  withholding. ⚠️ Returns null when nothing moved, so a caller cannot print an empty sentence. PURE. */
+export function supplyDeedLine(pushes, power, { kind = "broken" } = {}) {
+  if (!Array.isArray(pushes) || !pushes.length) return null;
+  const name = power?.name || power?.id || "them";
+  const what = kind === "broken" ? `${name} are finished`
+    : kind === "leaderSlain" ? `the one who led ${name} is dead`
+    : kind === "turned" ? `${name} answer to you now`
+    : `${name} have lost ground`;
+  return `${what} — and something that was being carried through them is not being carried any more.`;
+}
+
+/* ═════ SNG-641 §6 · ITEM 3b — A MINTED POWER MAY BECOME A LINE, AND ONLY ONE PER SOVEREIGN PER REGION ═════
+ *
+ * ⛔ NOT RULED, AND SHIPPED OFF. Aevi's work order calls this row RULED; her own spec §7.4 lists it under "RULINGS
+ * I NEED", and the staged `generatorRule._status` reads "proposal — Erik §7.4". The spec and the data agree, so the
+ * rule exists and `arcResponse.supplyLineRule.on` is false until Erik says otherwise. A broadening of how much of
+ * the world feeds a Sovereign is not a default I get to pick.
+ *
+ * ⛑ WHAT IT IS: when the generator mints a power in a region, the power is matched against the three hungers —
+ * being seen (arenas, boards, heralds, orders that inform), petition (outlaw crowns wanting a grant, lordships with
+ * a contested claim, guilds that take tribute), bodies (guilds that fence or smuggle, orders leaning to Mind).
+ *
+ * ⚠️ AND THE ORDER OF THE TWO GUARDS IS THE WHOLE OF R40b.2. The arc's stage must ALREADY be at least 1 before a
+ * line may grow from it — "the lines grow from the arc, not the arc from the lines". A rule that let a new line
+ * raise the stage would be the counter Erik's ruling forbids, wearing a different coat.
+ */
+
+/** ⛔ WHETHER A MINTED POWER MAY BECOME A SUPPLY LINE, and whose. Returns `{ ok, sovereignId, why }` — and `ok:
+ *  false` with a reason is the common answer, which a caller should be able to log without guessing.
+ *
+ *  `stageOf` is injected (worldtick owns the live stage) so this module stays free of the world-tick, exactly as
+ *  `sovereignFormFor` does. `linesInRegion` is the caller's count of lines already in this region, per Sovereign.
+ *  PURE. */
+export function mayBecomeALine(power, { regionId = null, rule = null, stageOf = null, npcs = {}, linesInRegion = null } = {}) {
+  const r = (rule && typeof rule === "object") ? rule : null;
+  // ⚠️ NO TICKET REFERENCE IN THE STRING. §262 ratchets those down because nine of them had reached a player, and a
+  // `why` a caller may log is a string like any other. The spec is named in the comment, where it belongs.
+  if (!r || r.on !== true) return { ok: false, why: "the supply-line rule is off until it is ruled on" };
+  if (!power || !regionId) return { ok: false, why: "no power, or no region to place it in" };
+  // ⛑ A power that already feeds somebody is not a candidate — it IS one.
+  if (feedsOf(power).length) return { ok: false, why: "it already carries somebody's freight" };
+  const hungers = (r.hungers && typeof r.hungers === "object") ? r.hungers : {};
+  const kind = String(power.kind || "").toLowerCase();
+  const verbs = new Set((Array.isArray(power.verbs) ? power.verbs : []).map(v => String(v).toLowerCase()));
+  const tags = new Set([...(Array.isArray(power.tags) ? power.tags : []), ...(Array.isArray(power.form) ? power.form : [])]
+    .map(x => String(x).toLowerCase()));
+  const cap = Math.max(1, Number(r.capPerSovereignPerRegion) || 1);
+  const need = Number.isFinite(Number(r.requiresArcStageAtLeast)) ? Number(r.requiresArcStageAtLeast) : 1;
+  // \u26d4 SCORED, NOT FIRST-WINS. Looping in declaration order handed a fence-and-smuggle guild to LUCIFER, because
+  // `lucifer.kinds` lists "guild" and lucifer is declared first \u2014 the second time in this project a JSON key order
+  // silently became a priority rule. \u26d1 A VERB is strong evidence (fencing is a specific thing to do), a TAG is
+  // strong (an arena is an arena), a KIND is weak (a guild can be anything).
+  const scored = [];
+  for (const [sovereignId, want] of Object.entries(hungers)) {
+    const kindHit = (want.kinds || []).map(String).map(s => s.toLowerCase()).includes(kind);
+    const verbHit = (want.verbs || []).some(v => verbs.has(String(v).toLowerCase()));
+    const tagHit = (want.tags || []).some(x => tags.has(String(x).toLowerCase()));
+    if (!kindHit && !verbHit && !tagHit) continue;
+    scored.push({ sovereignId, want, score: (verbHit ? 2 : 0) + (tagHit ? 2 : 0) + (kindHit ? 1 : 0) });
+  }
+  scored.sort((a, b) => b.score - a.score);
+  // \u26a0\ufe0f A GENUINE TIE IS REFUSED, not tossed for. Two hungers with equal claim on one power is a content question
+  // \u2014 Aevi's to answer by making one of the two more specific \u2014 and a coin toss would make the same world mint
+  // different lines on different runs, which is exactly what `verbForPass` rotates rather than rolls to avoid.
+  if (scored.length > 1 && scored[0].score === scored[1].score) {
+    return { ok: false, why: `it matches ${scored.length} hungers equally (${scored.map(s => s.sovereignId).join(", ")}) \u2014 one of them needs to be more specific` };
+  }
+  for (const { sovereignId, want } of scored) {
+    // ⛔ THE CAP, BEFORE THE STAGE, because a region that is already full is a cheaper no.
+    const already = Number(linesInRegion?.[sovereignId]) || 0;
+    if (already >= cap) return { ok: false, sovereignId, why: `this region already has ${already} line for them (cap ${cap})` };
+    // ⛔ AND THE STAGE MUST ALREADY HAVE MOVED. R40b.2: the lines grow from the arc, never the arc from the lines.
+    const arcId = npcs?.[sovereignId]?.forms?.arcId || null;
+    if (!arcId) return { ok: false, sovereignId, why: "that Sovereign has no arc for a line to grow from" };
+    const stage = (() => { try { return Number(stageOf ? stageOf(arcId) : null); } catch { return null; } })();
+    if (!Number.isFinite(stage)) return { ok: false, sovereignId, why: "the arc's stage could not be read" };
+    if (stage < need) return { ok: false, sovereignId, why: `${arcId} is at stage ${stage}, and a line needs ${need}` };
+    return { ok: true, sovereignId, arcId, why: `it matches their hunger and ${arcId} has reached stage ${stage}` };
+  }
+  return { ok: false, why: "it matches no hunger" };
+}
+
+/** ⛑ HOW MANY LINES A REGION ALREADY HAS, per Sovereign — the count `mayBecomeALine` needs for its cap, derived
+ *  from the powers themselves rather than stored anywhere. PURE. */
+export function linesInRegion(powers, regionId, { locations = {} } = {}) {
+  const want = String(regionId || "");
+  const out = {};
+  if (!want) return out;
+  for (const p of (Array.isArray(powers) ? powers : Object.values(powers || {}))) {
+    const feeds = feedsOf(p);
+    if (!feeds.length) continue;
+    // ⚠️ A POWER'S REGION IS ITS REACH'S, not a field it carries: `reach` is place ids, and the places know
+    // their region. A power reaching two regions counts in both, which is correct — the cap is per region.
+    const regions = new Set((Array.isArray(p.reach) ? p.reach : []).map(id => locations?.[id]?.regionId).filter(Boolean));
+    if (!regions.has(want)) continue;
+    for (const f of feeds) out[f.sovereignId] = (out[f.sovereignId] || 0) + 1;
+  }
+  return out;
+}

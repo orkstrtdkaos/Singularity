@@ -1,25 +1,17 @@
 {
   "schemaVersion": 1,
   "id": "dev_report",
-  "at": "2026-09-20T11:56:19.384Z",
-  "build": "2.3.6",
-  "field": {
-    "where": "gen-whistling-woman-post",
-    "lat": -69.6,
-    "lon": -107.9,
-    "density": 0.41,
-    "ordered": 0.03,
-    "wild": 0.2,
-    "inside": []
-  },
+  "at": "2026-09-26T14:23:22.736Z",
+  "build": "2.10.0",
+  "field": null,
   "character": {
     "id": "char-mrhs8286",
     "name": "Silas Weir",
     "playerKey": "player-s9z9u1",
     "level": 33,
-    "rev": 2218,
+    "rev": 2242,
     "day": 18,
-    "turns": 374,
+    "turns": 376,
     "countingSince": "2026-09-16T22:18:48.671Z",
     "countsCoverWholeLife": false
   },
@@ -74,21 +66,21 @@
   },
   "ops": {
     "emitted": {
-      "sceneSummary": 374,
-      "choices": 373,
-      "characterDeltas": 200,
-      "scene": 374,
-      "npcUpdates": 324,
+      "sceneSummary": 376,
+      "choices": 375,
+      "characterDeltas": 202,
+      "scene": 376,
+      "npcUpdates": 325,
       "factUpdates": 43,
       "placeUpdates": 80,
       "codexUpdates": 223,
-      "timeOps": 329,
-      "imagePrompt": 45,
-      "sceneEnded": 147,
+      "timeOps": 330,
+      "imagePrompt": 46,
+      "sceneEnded": 149,
       "itemUpdates": 9,
-      "questUpdates": 52,
-      "offer": 59,
-      "moveTo": 20,
+      "questUpdates": 53,
+      "offer": 60,
+      "moveTo": 21,
       "delegateOps": 6,
       "deeds": 27,
       "standingOps": 6,
@@ -101,7 +93,7 @@
       "_applyFailedOp": 8,
       "newEncounter": 3,
       "encounterOps": 1,
-      "gambitApt": 74,
+      "gambitApt": 75,
       "markDefiningMoment": 1,
       "_engineClosedScene": 6,
       "gambitOps": 1,
@@ -111,7 +103,7 @@
     },
     "outcomes": {
       "offer": {
-        "applied": 64,
+        "applied": 65,
         "rejected": 2,
         "lastWhy": "rejected-shape",
         "exceedsEmissions": true
@@ -120,6 +112,12 @@
         "applied": 4,
         "rejected": 2,
         "lastWhy": "refused-capacity",
+        "exceedsEmissions": false
+      },
+      "moveTo": {
+        "applied": 1,
+        "rejected": 0,
+        "lastWhy": null,
         "exceedsEmissions": false
       }
     },
@@ -148,7 +146,7 @@
     "neverCount": 20,
     "knownCount": 48,
     "unknown": {
-      "sceneSummary": 7
+      "sceneSummary": 9
     },
     "inProse": {},
     "emptyClaims": 0
@@ -158,7 +156,7 @@
       "n": 39,
       "fields": {
         "age": 0,
-        "sex": 4,
+        "sex": 35,
         "gender": 36,
         "pronouns": 36,
         "role": 36,
@@ -688,8 +686,8 @@
     }
   },
   "world": {
-    "locations": 147,
+    "locations": 150,
     "abilities": 441,
-    "npcs": 174
+    "npcs": 207
   }
 }

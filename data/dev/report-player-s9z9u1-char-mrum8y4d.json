@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "dev_report",
-  "at": "2026-09-26T00:51:07.368Z",
+  "at": "2026-09-26T00:52:34.110Z",
   "build": "2.8.1",
   "field": {
     "where": "the_kindly_rest",
@@ -21,9 +21,9 @@
     "name": "Loki",
     "playerKey": "player-s9z9u1",
     "level": 9,
-    "rev": 895,
+    "rev": 898,
     "day": 5,
-    "turns": 231,
+    "turns": 232,
     "countingSince": "2026-09-14T22:51:56.913Z",
     "countsCoverWholeLife": false
   },
@@ -132,36 +132,37 @@
   },
   "ops": {
     "emitted": {
-      "sceneSummary": 231,
-      "choices": 231,
-      "characterDeltas": 116,
-      "scene": 231,
+      "sceneSummary": 232,
+      "choices": 232,
+      "characterDeltas": 117,
+      "scene": 232,
       "placeUpdates": 28,
-      "codexUpdates": 133,
-      "timeOps": 184,
+      "codexUpdates": 134,
+      "timeOps": 185,
       "offer": 37,
       "generateRequest": 7,
-      "sceneEnded": 100,
-      "npcUpdates": 183,
+      "sceneEnded": 101,
+      "npcUpdates": 184,
       "moveTo": 7,
-      "gambitApt": 60,
-      "deeds": 12,
-      "questUpdates": 38,
+      "gambitApt": 61,
+      "deeds": 13,
+      "questUpdates": 39,
       "standingOps": 3,
-      "factUpdates": 15,
+      "factUpdates": 16,
       "stageOps": 7,
       "encounterOps": 9,
-      "ledgerEvents": 9,
+      "ledgerEvents": 10,
       "newEncounter": 3,
-      "imagePrompt": 34,
+      "imagePrompt": 35,
       "scene_ended": 1,
       "stateOps": 3,
       "_engineClosedScene": 4,
       "discovery": 5,
-      "intentsHeard": 7,
+      "intentsHeard": 8,
       "delegateOps": 1,
       "scene_summary": 1,
-      "partyOps": 2
+      "partyOps": 3,
+      "bandOps": 1
     },
     "outcomes": {
       "offer": {
@@ -186,7 +187,6 @@
     "never": [
       "adoptSchool",
       "arcOps",
-      "bandOps",
       "deathOps",
       "debtOps",
       "deriveItem",
@@ -208,10 +208,10 @@
       "unlockPrecursor",
       "unlockSubstrate"
     ],
-    "neverCount": 23,
+    "neverCount": 22,
     "knownCount": 48,
     "unknown": {
-      "sceneSummary": 58,
+      "sceneSummary": 59,
       "scene_summary": 1
     },
     "inProse": {},
@@ -248,8 +248,8 @@
     }
   },
   "fireTests": {
-    "at": "2026-09-21T13:48:36.746Z",
-    "build": "2.4.9",
+    "at": "2026-09-26T00:51:08.223Z",
+    "build": "2.8.1",
     "results": [
       {
         "op": "jobOps",

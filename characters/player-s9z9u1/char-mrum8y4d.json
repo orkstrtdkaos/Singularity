@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 10,
-  "xp": 917,
+  "xp": 920,
   "attributes": {
     "physical": 4,
     "mental": 5,
@@ -122,16 +122,17 @@
     "falsehood_truth": 0.38361717308273324,
     "demonic_angelic": -0.020000000000000004,
     "dark_light": 0.085,
-    "concrete_abstract": 0.16438167187499997,
+    "concrete_abstract": 0.18616258828124996,
     "chaos_order": -0.087398125,
     "body_mind": 0.0658375,
-    "emotional_logical": 0.045960551562499986
+    "emotional_logical": 0.045960551562499986,
+    "space_time": 0.04000000000000001
   },
   "attunement": 10,
   "maxHealth": 83,
   "health": 83,
   "maxEnergy": 161,
-  "energy": 156,
+  "energy": 144,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -417,50 +418,210 @@
         "player": "Ask Orla to walk with you toward the Standing Annex—the road will let you both speak more fully, and the gathered band should hear this from the start.",
         "summary": "On the road toward the Standing Annex, Orla Yardley joins the gathered band—a Syllogist carrying a breaking belief, moving toward the Annex and toward answers neither of you fully understands yet.",
         "narration": "You nod to Orla, and the gesture carries weight—an acceptance before the full words come. \"Walk with us,\" you say. \"The Standing Annex waits, and the band should hear this from the start. There is ground to share that matters more than standing still on the road.\"\n\nOrla's face steadies. They shift their weight, and the motion reads like a release—the waiting is over. \"Yes,\" they say simply. \"Yes, I will.\"\n\nThe four of you turn together and move outward along the curve. The road here is clear and wide enough for walking side by side, and the scrubland brush on both sides rustles softly in the night wind. Cy ahead of you, lamp raised, choosing the footing. The stars overhead are bright enough to cast thin shadows, and the sound of your footfalls settles into rhythm—four people moving the same direction, with weight and purpose.\n\nRavel walks closest to you, her shoulder nearly level with yours, her eyes ahead on the turning road. Estry moves beside Orla, reading them with that precise attention she brings to every person. And Orla walks with the stillness of someone who has finally set down something very heavy."
+      },
+      {
+        "player": "Use shortfold to bring your party directly to Millbrook.",
+        "summary": "Loki folds distance and brings the band to Millbrook's edge in deep night—a partial working that lands them outside the town rather than at its heart, leaving them at the threshold.",
+        "narration": "You gather your band close on the starlit road. Ravel's hand finds your shoulder—understanding without words what you're about to attempt. Estry steps in tighter, and Orla takes position at the circle's edge, still learning the shape of trust. Cy's lens irises once, bright, then dims.\n\nYou reach for the Shortfold—the sense of distance folding, the two places you know becoming neighbors. Millbrook sits in your mind clear enough: the river's curve, the common house, the well-stone at the center. You speak the fold aloud, and the fabric of the road begins to thin.\n\nThe world creases. The scrubland brush shimmers and doubles, and for a breath you are between—neither here nor there. But the fold catches halfway. Distance resists. The concrete weight of the Millbrook you carry in memory does not match perfectly with the Millbrook that exists, and the lattice here is thin, starved. The fold completes, but ragged.\n\nYou arrive at Millbrook's edge, not its center. The common house stands visible two hundred paces east, its warm light spilling across the Green. The river's sound carries on the wind. But the landing is rough—Estry staggers, catches herself. Ravel's grip tightens on your arm, steadying. Orla stands motionless, grey coat settling around them like the dust of the working itself. Cy's lamp wavers, then steadies, choosing the footing as it always does."
       }
     ],
     "lastTurn": {
-      "bandOps": [
+      "narration": "You gather your band close on the starlit road. Ravel's hand finds your shoulder—understanding without words what you're about to attempt. Estry steps in tighter, and Orla takes position at the circle's edge, still learning the shape of trust. Cy's lens irises once, bright, then dims.\n\nYou reach for the Shortfold—the sense of distance folding, the two places you know becoming neighbors. Millbrook sits in your mind clear enough: the river's curve, the common house, the well-stone at the center. You speak the fold aloud, and the fabric of the road begins to thin.\n\nThe world creases. The scrubland brush shimmers and doubles, and for a breath you are between—neither here nor there. But the fold catches halfway. Distance resists. The concrete weight of the Millbrook you carry in memory does not match perfectly with the Millbrook that exists, and the lattice here is thin, starved. The fold completes, but ragged.\n\nYou arrive at Millbrook's edge, not its center. The common house stands visible two hundred paces east, its warm light spilling across the Green. The river's sound carries on the wind. But the landing is rough—Estry staggers, catches herself. Ravel's grip tightens on your arm, steadying. Orla stands motionless, grey coat settling around them like the dust of the working itself. Cy's lamp wavers, then steadies, choosing the footing as it always does.",
+      "sceneSummary": "Loki folds distance and brings the band to Millbrook's edge in deep night—a partial working that lands them outside the town rather than at its heart, leaving them at the threshold.",
+      "choices": [
         {
-          "op": "raise",
-          "npcId": "estry-krell",
-          "name": "Estry Krell",
-          "role": "Band member — reads people with precision; committed traveler"
+          "label": "Walk the rest into Millbrook's center, where the common house keeps its doors open to travelers.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {
+            "concrete_abstract": -0.3
+          },
+          "difficulty": "very easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "travel",
+            "lead"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Stop here at the edge and read the town first—Prism Sight to see what light has passed through here in the last hours, or find what the place wants to tell you before entering.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "concrete_abstract": 0.2
+          },
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "scout",
+            "study"
+          ],
+          "abilityId": "prism_sight",
+          "energyCost": 3,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Ravel what she reads from this arrival—the fold was not clean, and she reads old roads. What does she make of the resistance, and of Millbrook's threshold?",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "emotional_logical": -0.1
+          },
+          "difficulty": "very easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "help"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Send Cy ahead into the town alone to scout—it moves unseen and reads mechanism better than any of you. You'll follow when it signals.",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "axes": {},
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "scout",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
-      "narration": "",
-      "sceneSummary": null,
-      "choices": []
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": -6,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [],
+      "standingOps": [],
+      "delegateOps": [],
+      "jobOps": [],
+      "arcOps": [],
+      "adoptSchool": null,
+      "offer": null,
+      "stageOps": [],
+      "scene": {
+        "setting": "Millbrook's outer edge, deep night under bright stars. Two hundred paces east, the common house glows with warm lamplight. The river's sound carries on the wind—close and steady. The road beneath your feet has just ceased folding.",
+        "npcsPresent": [
+          {
+            "name": "Ravel Ash-bearer",
+            "state": "Hand still on Loki's arm, reading the rough landing with steady assessment. Eyes taking in the town's shape and the light ahead."
+          },
+          {
+            "name": "Estry Krell",
+            "state": "Recovered from the stagger, breath even. Eyes already scanning the common house and the dark between here and there."
+          },
+          {
+            "name": "Orla Yardley",
+            "state": "Still motionless, grey coat settled, face unreadable in starlight. Processing the working and what the fold's resistance might mean."
+          },
+          {
+            "name": "Cy",
+            "state": "Lamp steady now, legs choosing the footing with precision. Clicking softly—cataloging the arrival and the resistance it met."
+          }
+        ],
+        "objects": [
+          "The common house ahead, its doors warm and open",
+          "The river sound, carrying on night wind",
+          "The Green, pale under starlight",
+          "Scrubland brush at the road's edge, still and dry"
+        ],
+        "threads": [
+          "The fold was not clean—why did the distance resist? What does that mean for what lies ahead?",
+          "The band is gathered and moving as one now. What will Millbrook make of four strangers arriving in deep night?",
+          "Cy has been silent since the fold completed. What is it calculating?"
+        ]
+      },
+      "npcUpdates": [],
+      "intentsHeard": [],
+      "factUpdates": [],
+      "placeUpdates": [],
+      "discovery": null,
+      "codexUpdates": [],
+      "holdingOps": [],
+      "holdTrades": [],
+      "debtOps": [],
+      "exchangeOps": [],
+      "partyOps": [],
+      "generateRequest": [],
+      "encounterOps": [],
+      "projectOps": [],
+      "bandOps": [],
+      "strikeOps": [],
+      "deathOps": [],
+      "newEncounter": null,
+      "unlockPrecursor": null,
+      "unlockSubstrate": null,
+      "timeOps": {
+        "hoursPassed": 0.5,
+        "why": "the fold and arrival"
+      },
+      "moveTo": {
+        "location": "millbrook",
+        "why": "Folded distance from the road toward the Standing Annex; arrived at Millbrook's edge"
+      },
+      "stateOps": [],
+      "imagePrompt": "Four figures standing at Millbrook's threshold in deep night—the common house's warm light spilling across the dark Green ahead. A band drawn close, still settling from the fold. Starlight catches on grey coat, green coat, and the brass segments of Cy's lamp as it steadies. The river sound carries, patient and constant.",
+      "imageMedium": null,
+      "newAbility": null,
+      "gambitOps": null,
+      "gambitApt": false,
+      "sceneEnded": false,
+      "momentArt": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Four%20figures%20standing%20at%20Millbrook's%20threshold%20in%20deep%20night%E2%80%94the%20common%20house's%20warm%20light%20spilling%20across%20the%20dark%20Green%20ahead.%20A%20band%20drawn%20close%2C%20still%20settling%20from%20the%20fold.%20Starlight%20catches%20on%20grey%20coat%2C%20green%20coat%2C%20and%20the%20brass%20segments%20of%20Cy's%20lamp%20as%20it%20steadies.%20The%20river%20sound%20carries%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=53875&nologo=true"
     },
     "sceneState": {
-      "setting": "The open road curving outward from the Kindly Rest toward the Standing Annex, mid-autumn night. Clear sky overhead with bright stars. The road is wide and unobstructed, lined on both sides by low scrubland brush. Shadows cast thin and sharp by starlight. The air carries the weight of the year turning.",
+      "setting": "Millbrook's outer edge, deep night under bright stars. Two hundred paces east, the common house glows with warm lamplight. The river's sound carries on the wind—close and steady. The road beneath your feet has just ceased folding.",
       "npcsPresent": [
         {
           "name": "Ravel Ash-bearer",
-          "state": "Walking beside Loki, shoulders eased, eyes ahead on the road. Her green coat catches the starlight. Moving with steady p"
+          "state": "Hand still on Loki's arm, reading the rough landing with steady assessment. Eyes taking in the town's shape and the ligh"
         },
         {
           "name": "Estry Krell",
-          "state": "Walking beside Orla Yardley, reading them with precision. Eyes tracking Orla's movements and bearing. Silent but fully p"
+          "state": "Recovered from the stagger, breath even. Eyes already scanning the common house and the dark between here and there."
         },
         {
           "name": "Orla Yardley",
-          "state": "Walking with stillness of someone who has set down something very heavy. Grey coat, precise movements. Face settled betw"
+          "state": "Still motionless, grey coat settled, face unreadable in starlight. Processing the working and what the fold's resistance"
+        },
+        {
+          "name": "Cy",
+          "state": "Lamp steady now, legs choosing the footing with precision. Clicking softly—cataloging the arrival and the resistance it "
         }
       ],
       "objects": [
-        "The open road ahead, curving gently",
-        "Scrubland brush on both sides, dry and autumn-thick",
-        "The stars overhead, bright and readable",
-        "Cy ahead of the group, lamp raised, choosing the footing"
+        "The common house ahead, its doors warm and open",
+        "The river sound, carrying on night wind",
+        "The Green, pale under starlight",
+        "Scrubland brush at the road's edge, still and dry"
       ],
       "threads": [
-        "What fully drives Orla's belief about breaking and sealing?",
-        "How will the band—and Halvex—receive Orla's presence at the Annex?",
-        "What answers wait at the Standing Annex, and what new questions will arriving together raise?"
+        "The fold was not clean—why did the distance resist? What does that mean for what lies ahead?",
+        "The band is gathered and moving as one now. What will Millbrook make of four strangers arriving in deep night?",
+        "Cy has been silent since the fold completed. What is it calculating?"
       ]
     },
-    "beats": 4,
+    "beats": 5,
     "subPlace": null
   },
   "clock": {
@@ -1856,7 +2017,7 @@
     "lastSharedReadAt": "2026-09-26T03:01:25.054Z",
     "lastTickWorldDay": 88,
     "lastCanonWorldDay": 88,
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 2,
     "recentOffers": [
       {
         "thing": "Sister Vreni's promise to listen and her acknowledgment that the Standing Annex holds what the band is becoming",
@@ -12806,19 +12967,19 @@
     "deferredMysteries": []
   },
   "tendencies": {
-    "devotion": 0.7001364203557764,
-    "cerebral": 15.828702770592857,
-    "social": 17.86644659239239,
-    "strategic": 11.248474567932407,
-    "cautious": 4.919680603804807,
-    "amorous": 6.60663870772499,
-    "generous": 5.410323004447051,
-    "ruthless": 0.17536599224472335,
-    "risky": 0.1433169998874972,
-    "patient": 0.03913729532473672,
-    "deception": 0.045557838972782656,
-    "carousing": 0.975,
-    "leadership": 2
+    "devotion": 0.6826330098468819,
+    "cerebral": 15.432985201328036,
+    "social": 17.41978542758258,
+    "strategic": 11.967262703734097,
+    "cautious": 4.796688588709686,
+    "amorous": 6.441472740031865,
+    "generous": 5.2750649293358745,
+    "ruthless": 0.17098184243860526,
+    "risky": 0.13973407489030976,
+    "patient": 0.0381588629416183,
+    "deception": 0.04441889299846309,
+    "carousing": 0.9506249999999999,
+    "leadership": 1.95
   },
   "aptitudes": [
     "strategist",
@@ -12828,7 +12989,7 @@
     "faithful",
     "charmer"
   ],
-  "actionCount": 206,
+  "actionCount": 207,
   "grantsVersion": 1,
   "precursorAccess": [
     "address_sense"
@@ -12906,6 +13067,14 @@
   "nativeGrantsVersion": 2,
   "reconcileVersion": 83,
   "gallery": [
+    {
+      "kind": "moment",
+      "prompt": "Four figures standing at Millbrook's threshold in deep night—the common house's warm light spilling across the dark Green ahead. A band drawn close, still settling from the fold. Starlight catches on ",
+      "url": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Four%20figures%20standing%20at%20Millbrook's%20threshold%20in%20deep%20night%E2%80%94the%20common%20house's%20warm%20light%20spilling%20across%20the%20dark%20Green%20ahead.%20A%20band%20drawn%20close%2C%20still%20settling%20from%20the%20fold.%20Starlight%20catches%20on%20grey%20coat%2C%20green%20coat%2C%20and%20the%20brass%20segments%20of%20Cy's%20lamp%20as%20it%20steadies.%20The%20river%20sound%20carries%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=53875&nologo=true",
+      "caption": "Loki folds distance and brings the band to Millbrook's edge in deep night—a partial workin",
+      "worldDay": 88,
+      "at": "2026-09-26T03:21:00.498Z"
+    },
     {
       "kind": "ability",
       "prompt": "Shortfold",
@@ -13916,8 +14085,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790392754716,
-  "rev": 936,
+  "updatedAt": 1790392860498,
+  "rev": 939,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -14992,7 +15161,7 @@
     "umbral_depths": 54,
     "the_quickwood": 101,
     "the_center": 50,
-    "valley": 26,
+    "valley": 27,
     "the_open_reach": 3
   },
   "opLossPending": false,
@@ -15144,10 +15313,10 @@
     {
       "id": "sess-19",
       "startedAt": "2026-09-26T00:51:07.826Z",
-      "lastAt": "2026-09-26T03:00:38.182Z",
+      "lastAt": "2026-09-26T03:21:00.484Z",
       "startDay": 88,
       "endDay": 88,
-      "beats": 7
+      "beats": 8
     }
   ],
   "establishedFacts": [
@@ -15309,19 +15478,19 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 237,
-    "choices": 237,
-    "characterDeltas": 121,
-    "scene": 237,
+    "sceneSummary": 238,
+    "choices": 238,
+    "characterDeltas": 122,
+    "scene": 238,
     "placeUpdates": 28,
     "codexUpdates": 138,
-    "timeOps": 190,
+    "timeOps": 191,
     "offer": 42,
     "generateRequest": 7,
-    "sceneEnded": 106,
+    "sceneEnded": 107,
     "npcUpdates": 189,
-    "moveTo": 9,
-    "gambitApt": 65,
+    "moveTo": 10,
+    "gambitApt": 66,
     "deeds": 14,
     "questUpdates": 43,
     "standingOps": 4,
@@ -15330,7 +15499,7 @@
     "encounterOps": 9,
     "ledgerEvents": 12,
     "newEncounter": 3,
-    "imagePrompt": 38,
+    "imagePrompt": 39,
     "scene_ended": 1,
     "stateOps": 3,
     "_engineClosedScene": 4,
@@ -15341,7 +15510,7 @@
     "partyOps": 4,
     "bandOps": 1
   },
-  "_opTurns": 237,
+  "_opTurns": 238,
   "customAbilities": {
     "mirror-bright": {
       "id": "mirror-bright",
@@ -15481,7 +15650,8 @@
       "maintained_veil": 2,
       "appetite_sense": 17,
       "umbracraft": 2,
-      "mirror-bright": 1
+      "mirror-bright": 1,
+      "shortfold": 1
     },
     "coActivations": {
       "falsecraft+the_wrong_reality": 1,
@@ -15524,7 +15694,8 @@
       "maintained_veil": 79,
       "umbracraft": 83,
       "appetite_sense": 83,
-      "mirror-bright": 83
+      "mirror-bright": 83,
+      "shortfold": 88
     }
   },
   "teachers": {},
@@ -16311,9 +16482,9 @@
   "skillUses": {
     "plan": 12,
     "discuss": 1,
-    "travel": 8,
+    "travel": 9,
     "scout": 7,
-    "prepare": 5,
+    "prepare": 6,
     "careful": 10,
     "woo": 1,
     "rapport": 16,
@@ -16783,419 +16954,419 @@
   },
   "_promptRows": {
     "character": {
-      "reached": 52,
-      "produced": 52
+      "reached": 53,
+      "produced": 53
     },
     "location": {
-      "reached": 52,
-      "produced": 52
+      "reached": 53,
+      "produced": 53
     },
     "region": {
-      "reached": 52,
-      "produced": 52
+      "reached": 53,
+      "produced": 53
     },
     "groundDetail": {
-      "reached": 52,
-      "produced": 25
+      "reached": 53,
+      "produced": 26
     },
     "lore": {
-      "reached": 52,
-      "produced": 49
+      "reached": 53,
+      "produced": 50
     },
     "traditionMotiveDetail": {
-      "reached": 52,
-      "produced": 52
+      "reached": 53,
+      "produced": 53
     },
     "sheetsDetail": {
-      "reached": 52,
-      "produced": 32
+      "reached": 53,
+      "produced": 33
     },
     "rules": {
-      "reached": 52,
-      "produced": 52
+      "reached": 53,
+      "produced": 53
     },
     "recentTurns": {
-      "reached": 52,
-      "produced": 46
+      "reached": 53,
+      "produced": 47
     },
     "timeLabel": {
-      "reached": 52,
-      "produced": 52
+      "reached": 53,
+      "produced": 53
     },
     "npcRegistryDetail": {
-      "reached": 52,
-      "produced": 52
+      "reached": 53,
+      "produced": 53
     },
     "mintedUnmetDetail": {
-      "reached": 52,
-      "produced": 52
+      "reached": 53,
+      "produced": 53
     },
     "npcSeedDetail": {
-      "reached": 52,
+      "reached": 53,
       "produced": 24
     },
     "traditionVocab": {
-      "reached": 52,
-      "produced": 52
+      "reached": 53,
+      "produced": 53
     },
     "standingDetail": {
-      "reached": 52,
-      "produced": 52
+      "reached": 53,
+      "produced": 53
     },
     "recalledDetail": {
-      "reached": 52,
-      "produced": 4
+      "reached": 53,
+      "produced": 5
     },
     "bearingsDetail": {
-      "reached": 52,
-      "produced": 52
+      "reached": 53,
+      "produced": 53
     },
     "caravansDetail": {
-      "reached": 52,
+      "reached": 53,
       "produced": 0
     },
     "commandDetail": {
-      "reached": 52,
-      "produced": 52
+      "reached": 53,
+      "produced": 53
     },
     "presenceDetail": {
-      "reached": 52,
-      "produced": 42
+      "reached": 53,
+      "produced": 43
     },
     "worthHereDetail": {
-      "reached": 52,
+      "reached": 53,
       "produced": 0
     },
     "inventoryDetail": {
-      "reached": 52,
-      "produced": 52
+      "reached": 53,
+      "produced": 53
     },
     "sceneState": {
-      "reached": 52,
-      "produced": 46
+      "reached": 53,
+      "produced": 47
     },
     "holdingsDetail": {
-      "reached": 52,
-      "produced": 52
+      "reached": 53,
+      "produced": 53
     },
     "debtsDetail": {
-      "reached": 52,
+      "reached": 53,
       "produced": 0
     },
     "carriedDetail": {
-      "reached": 52,
+      "reached": 53,
       "produced": 0
     },
     "abilityLawDetail": {
-      "reached": 52,
-      "produced": 52
+      "reached": 53,
+      "produced": 53
     },
     "questsDetail": {
-      "reached": 52,
-      "produced": 52
+      "reached": 53,
+      "produced": 53
     },
     "structuredQuestsDetail": {
-      "reached": 52,
+      "reached": 53,
       "produced": 0
     },
     "traditionArcDetail": {
-      "reached": 52,
+      "reached": 53,
       "produced": 0
     },
     "npcErrandsDetail": {
-      "reached": 52,
+      "reached": 53,
       "produced": 0
     },
     "codexDetail": {
-      "reached": 52,
-      "produced": 52
+      "reached": 53,
+      "produced": 53
     },
     "companionsDetail": {
-      "reached": 52,
-      "produced": 52
+      "reached": 53,
+      "produced": 53
     },
     "placeMemoryDetail": {
-      "reached": 52,
+      "reached": 53,
       "produced": 39
     },
     "agesMissingDetail": {
-      "reached": 52,
-      "produced": 52
+      "reached": 53,
+      "produced": 53
     },
     "newsDetail": {
-      "reached": 52,
-      "produced": 52
+      "reached": 53,
+      "produced": 53
     },
     "worldArcsDetail": {
-      "reached": 52,
-      "produced": 52
+      "reached": 53,
+      "produced": 53
     },
     "legendsPursuableDetail": {
-      "reached": 52,
+      "reached": 53,
       "produced": 12
     },
     "wakesDetail": {
-      "reached": 52,
+      "reached": 53,
       "produced": 0
     },
     "arcMoodDetail": {
-      "reached": 52,
-      "produced": 52
+      "reached": 53,
+      "produced": 53
     },
     "reachableDeadDetail": {
-      "reached": 52,
+      "reached": 53,
       "produced": 46
     },
     "threatToPlayer": {
-      "reached": 52,
+      "reached": 53,
       "produced": 0
     },
     "guardiansDetail": {
-      "reached": 52,
+      "reached": 53,
       "produced": 0
     },
     "resolution": {
-      "reached": 52,
-      "produced": 42
+      "reached": 53,
+      "produced": 43
     },
     "playerInput": {
-      "reached": 52,
+      "reached": 53,
       "produced": 10
     },
     "exactWords": {
-      "reached": 52,
-      "produced": 29
+      "reached": 53,
+      "produced": 30
     },
     "travelDirective": {
-      "reached": 52,
-      "produced": 1
+      "reached": 53,
+      "produced": 2
     },
     "itemAdvance": {
-      "reached": 52,
+      "reached": 53,
       "produced": 0
     },
     "encounterWeaveDetail": {
-      "reached": 52,
+      "reached": 53,
       "produced": 6
     },
     "encounterOfferDetail": {
-      "reached": 52,
+      "reached": 53,
       "produced": 3
     },
     "fightFramingDetail": {
-      "reached": 52,
+      "reached": 53,
       "produced": 0
     },
     "abilityGrantDetail": {
-      "reached": 52,
+      "reached": 53,
       "produced": 0
     },
     "stageRevealDetail": {
-      "reached": 52,
+      "reached": 53,
       "produced": 0
     },
     "itemEvolveDetail": {
-      "reached": 52,
+      "reached": 53,
       "produced": 0
     },
     "worldPressureDetail": {
-      "reached": 52,
+      "reached": 53,
       "produced": 2
     },
     "offerDetail": {
-      "reached": 52,
+      "reached": 53,
       "produced": 2
     },
     "teacherOfferDetail": {
-      "reached": 52,
+      "reached": 53,
       "produced": 0
     },
     "substrateDetail": {
-      "reached": 52,
-      "produced": 16
+      "reached": 53,
+      "produced": 17
     },
     "romanceGuidanceDetail": {
-      "reached": 52,
+      "reached": 53,
       "produced": 4
     },
     "factsDetail": {
-      "reached": 52,
-      "produced": 52
+      "reached": 53,
+      "produced": 53
     },
     "evolvedItemsDetail": {
-      "reached": 52,
+      "reached": 53,
       "produced": 0
     },
     "opLossNote": {
-      "reached": 52,
+      "reached": 53,
       "produced": 0
     },
     "emergenceDetail": {
-      "reached": 52,
+      "reached": 53,
       "produced": 0
     },
     "perilNote": {
-      "reached": 52,
+      "reached": 53,
       "produced": 0
     },
     "encounterDetail": {
-      "reached": 52,
+      "reached": 53,
       "produced": 4
     },
     "masteryDetail": {
-      "reached": 52,
-      "produced": 52
+      "reached": 53,
+      "produced": 53
     },
     "bookkeepingRestate": {
-      "reached": 52,
+      "reached": 53,
       "produced": 0
     },
     "anomalyDetail": {
-      "reached": 52,
-      "produced": 50
+      "reached": 53,
+      "produced": 51
     },
     "repairPanelDetail": {
-      "reached": 52,
-      "produced": 52
+      "reached": 53,
+      "produced": 53
     },
     "teacherDetail": {
-      "reached": 52,
+      "reached": 53,
       "produced": 0
     },
     "toolkitDetail": {
-      "reached": 52,
-      "produced": 52
+      "reached": 53,
+      "produced": 53
     },
     "availableEncounters": {
-      "reached": 52,
-      "produced": 48
+      "reached": 53,
+      "produced": 49
     },
     "partyDetail": {
-      "reached": 52,
+      "reached": 53,
       "produced": 0
     },
     "ratingDetail": {
-      "reached": 52,
-      "produced": 52
+      "reached": 53,
+      "produced": 53
     },
     "registerDetail": {
-      "reached": 52,
-      "produced": 52
+      "reached": 53,
+      "produced": 53
     },
     "legendDetail": {
-      "reached": 52,
+      "reached": 53,
       "produced": 1
     },
     "livingWorldDetail": {
-      "reached": 52,
-      "produced": 23
+      "reached": 53,
+      "produced": 24
     },
     "assignmentsDetail": {
-      "reached": 52,
+      "reached": 53,
       "produced": 0
     },
     "latentArcsDetail": {
-      "reached": 52,
-      "produced": 52
+      "reached": 53,
+      "produced": 53
     },
     "seasonalDetail": {
-      "reached": 52,
-      "produced": 52
+      "reached": 53,
+      "produced": 53
     },
     "schoolsDetail": {
-      "reached": 52,
-      "produced": 52
+      "reached": 53,
+      "produced": 53
     },
     "sharedCanonDetail": {
-      "reached": 52,
-      "produced": 29
+      "reached": 53,
+      "produced": 30
     },
     "worldCountLabel": {
-      "reached": 52,
-      "produced": 52
+      "reached": 53,
+      "produced": 53
     },
     "waygateDetail": {
-      "reached": 52,
+      "reached": 53,
       "produced": 27
     },
     "readAloudDetail": {
-      "reached": 52,
-      "produced": 52
+      "reached": 53,
+      "produced": 53
     },
     "scenePacingDetail": {
-      "reached": 52,
+      "reached": 53,
       "produced": 20
     },
     "wishesDetail": {
-      "reached": 32,
+      "reached": 33,
       "produced": 0
     },
     "worldMovedOnDetail": {
-      "reached": 32,
+      "reached": 33,
       "produced": 2
     },
     "companionLivesDetail": {
-      "reached": 32,
+      "reached": 33,
       "produced": 18
     },
     "homeDetail": {
-      "reached": 32,
+      "reached": 33,
       "produced": 0
     },
     "invitationsDetail": {
-      "reached": 32,
+      "reached": 33,
       "produced": 0
     },
     "bandsJoinedDetail": {
-      "reached": 32,
+      "reached": 33,
       "produced": 0
     },
     "travelersHereDetail": {
-      "reached": 32,
-      "produced": 5
+      "reached": 33,
+      "produced": 6
     },
     "travelersDetail": {
-      "reached": 32,
-      "produced": 1
+      "reached": 33,
+      "produced": 2
     },
     "journeyDetail": {
-      "reached": 30,
-      "produced": 0
+      "reached": 31,
+      "produced": 1
     },
     "journeyUnderwayDetail": {
-      "reached": 30,
+      "reached": 31,
       "produced": 4
     },
     "holdsNearDetail": {
-      "reached": 30,
-      "produced": 26
+      "reached": 31,
+      "produced": 27
     },
     "moneyDetail": {
-      "reached": 29,
-      "produced": 29
+      "reached": 30,
+      "produced": 30
     },
     "jobsDetail": {
-      "reached": 29,
+      "reached": 30,
       "produced": 0
     },
     "powersHereDetail": {
-      "reached": 6,
-      "produced": 4
+      "reached": 7,
+      "produced": 5
     },
     "nemesisDetail": {
-      "reached": 6,
-      "produced": 6
+      "reached": 7,
+      "produced": 7
     }
   },
   "_opUnknown": {
-    "sceneSummary": 64,
+    "sceneSummary": 65,
     "scene_summary": 1
   },
   "_bandNotes": null,
   "_opCountingSince": "2026-09-14T22:51:56.913Z",
   "_fireTests": {
-    "at": "2026-09-26T02:55:11.539Z",
-    "build": "2.8.5",
+    "at": "2026-09-26T03:21:00.728Z",
+    "build": "2.9.0",
     "results": [
       {
         "op": "jobOps",
@@ -17509,6 +17680,27 @@
       "key": "order_chaos",
       "value": 0.4,
       "why": "not a spectrum id"
+    },
+    {
+      "at": "2026-09-26T03:21:00.480Z",
+      "key": "peace_violence",
+      "value": 0.1,
+      "why": "not a spectrum id",
+      "from": "choice"
+    },
+    {
+      "at": "2026-09-26T03:21:00.480Z",
+      "key": "peace_violence",
+      "value": -0.1,
+      "why": "not a spectrum id",
+      "from": "choice"
+    },
+    {
+      "at": "2026-09-26T03:21:00.480Z",
+      "key": "peace_violence",
+      "value": -0.2,
+      "why": "not a spectrum id",
+      "from": "choice"
     }
   ],
   "braids": [
@@ -17658,9 +17850,7 @@
   "pinnedLooks": {
     "place:the_kindly_rest": true
   },
-  "aurasOff": {
-    "coil": true
-  },
+  "aurasOff": {},
   "pendingCompanyOffers": [],
   "powerState": {
     "power_gralloch_crown": {

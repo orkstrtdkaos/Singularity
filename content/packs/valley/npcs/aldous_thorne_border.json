@@ -1,0 +1,123 @@
+{
+ "schemaVersion": 1,
+ "communityId": null,
+ "closed": [],
+ "id": "aldous_thorne_border",
+ "name": "Aldous Thorne, Who Changes at the Border",
+ "tier": "leader",
+ "level": 19,
+ "role": "A Marcher scout who becomes a wolf when he crosses the border line at night, and cannot choose when to come back",
+ "people": "human",
+ "storiedBy": "Marchers",
+ "gender": "man",
+ "pronouns": "he/him",
+ "sex": "male",
+ "romanceEligible": true,
+ "homeLocation": "the_redline",
+ "domains": {
+  "primary": "somatic",
+  "secondary": "marcher",
+  "tertiary": "rootkin"
+ },
+ "spectrum": {
+  "body_mind": -0.7,
+  "violence_peace": -0.4,
+  "chaos_order": -0.3
+ },
+ "subAttributes": {
+  "strength": 17,
+  "agility": 17,
+  "reason": 12,
+  "insight": 14,
+  "presence": 12,
+  "rapport": 12,
+  "craft": 12,
+  "wits": 15
+ },
+ "knowledge": [
+  "Every trail across the Redline, human and animal",
+  "What the wolf remembers, in flashes, and what it doesn't",
+  "Who in the Marches knows, and who only suspects"
+ ],
+ "wants": [
+  "To find out whether the wolf would ever choose to come home, if he stopped forcing it"
+ ],
+ "fears": [
+  "Waking on the wrong side of the line, with something in his mouth.",
+  "That the Marchers keep him for what the wolf does, not for him."
+ ],
+ "appearance": "A rangy, weather-browned man with a scout's squint and grey eyes gone faintly yellow at the rim. He sleeps badly, eats a great deal, and never sits with his back to a door.",
+ "voiceHints": "Laconic, dry, honest to a fault. Talks about the wolf in the third person and gets angry if anyone else does.",
+ "reactsToReputation": {
+  "honest": "trusts you with the truth, eventually",
+  "fearful": "leaves before dark",
+  "beast-friend": "relieved",
+  "any": "watches your hands"
+ },
+ "assistTags": [
+  "track",
+  "scout",
+  "strike",
+  "navigate-wilds",
+  "sense-danger"
+ ],
+ "abilities": [
+  {
+   "abilityId": "loose_limbed",
+   "level": 2,
+   "why": "the change is in him even as a man"
+  },
+  {
+   "abilityId": "hurled_weight",
+   "level": 2,
+   "why": "strong past his size"
+  },
+  {
+   "abilityId": "second_wind",
+   "level": 2,
+   "why": "he heals too fast"
+  },
+  {
+   "abilityId": "hunters_strike",
+   "level": 2,
+   "why": "marcher secondary: the scout's trade"
+  },
+  {
+   "abilityId": "stand",
+   "level": 1,
+   "why": "he holds a line"
+  },
+  {
+   "abilityId": "pack_sense",
+   "level": 2,
+   "why": "rootkin tertiary: the wolf's nose, awake in the man"
+  },
+  {
+   "abilityId": "beastfriend",
+   "level": 1,
+   "why": "animals know him as one of theirs"
+  }
+ ],
+ "personality": {
+  "warmth": 0.3,
+  "trust": -0.1,
+  "candor": 0.8,
+  "patience": 0.4
+ },
+ "physicality": "Lean, quick, and restless. What catches the eye: on the nights near the line, his shadow is the wrong shape.",
+ "questSeeds": [
+  "Something has been killing sheep along the Redline. The Marchers want Aldous to track it. He thinks he already knows what it is.",
+  "He asks the player to follow him across the line one night and see what the wolf does when no one is chasing it."
+ ],
+ "storyRule": "The Marcher tale is exact: he changes when he crosses the line after dark, and comes back when someone who knows his name calls it from the right side.",
+ "vocation": "EDGE",
+ "gear": [
+  "a scout's cloak with the Redline badge",
+  "a leather collar he keeps in his pack and will not discuss",
+  "a whistle only dogs, and he, can hear"
+ ],
+ "purse": {
+  "crystal": 240
+ },
+ "_authoredWhy": "SNG-661 §5. The werewolf as a Marcher story: the border between two selves. A person (people: human, with the curse), so an NPC."
+}

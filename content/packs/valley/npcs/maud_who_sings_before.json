@@ -1,0 +1,118 @@
+{
+ "schemaVersion": 1,
+ "communityId": null,
+ "closed": [],
+ "id": "maud_who_sings_before",
+ "name": "Maud of the Grief House, Who Sings Before",
+ "tier": "leader",
+ "level": 22,
+ "role": "A keener who sings the death of anyone who will die within the week, and cannot stop herself",
+ "people": "keener",
+ "storiedBy": "Threnodists",
+ "gender": "woman",
+ "pronouns": "she/her",
+ "sex": "female",
+ "romanceEligible": false,
+ "homeLocation": "the_grief_house",
+ "domains": {
+  "primary": "threnodist",
+  "secondary": "ashwarden",
+  "tertiary": "numinous"
+ },
+ "spectrum": {
+  "emotional_logical": -0.9,
+  "death_life": -0.3,
+  "mechanical_spiritual": 0.6
+ },
+ "subAttributes": {
+  "strength": 10,
+  "agility": 10,
+  "reason": 10,
+  "insight": 18,
+  "presence": 16,
+  "rapport": 15,
+  "craft": 10,
+  "wits": 12
+ },
+ "knowledge": [
+  "Every song she has sung, and whether it came true (it always has)",
+  "The names of the dead of the Feeling Coast for three generations",
+  "Something about the player that she has not sung yet, and is trying not to"
+ ],
+ "wants": [
+  "To sing once for someone who lives through it"
+ ],
+ "fears": [
+  "Her own name in her own song.",
+  "That her singing is the cause, not the warning."
+ ],
+ "appearance": "A grey-haired woman in mourning black, grey-faced, with a voice that makes people stop in the street. She keeps her hand over her mouth when she is not singing.",
+ "voiceHints": "Hushed, halting, apologetic, until she sings, and then she does not stop until it is done.",
+ "reactsToReputation": {
+  "kind": "tries to warn you",
+  "brave": "hopeful",
+  "fearful": "avoids you",
+  "any": "looks at you for a long time"
+ },
+ "assistTags": [
+  "deathsense",
+  "comfort",
+  "sense-danger",
+  "recall",
+  "warm"
+ ],
+ "abilities": [
+  {
+   "abilityId": "keening",
+   "level": 2,
+   "why": "the song"
+  },
+  {
+   "abilityId": "shared_grief",
+   "level": 2,
+   "why": "she feels the death before it comes"
+  },
+  {
+   "abilityId": "carried_name",
+   "level": 2,
+   "why": "she carries the names of the lost"
+  },
+  {
+   "abilityId": "made_elegy",
+   "level": 2,
+   "why": "she makes the song"
+  },
+  {
+   "abilityId": "deathsense",
+   "level": 1,
+   "why": "ashwarden secondary"
+  },
+  {
+   "abilityId": "the_attended_end",
+   "level": 2,
+   "why": "she sits with the ones she sang for"
+  }
+ ],
+ "personality": {
+  "warmth": 0.8,
+  "trust": 0.2,
+  "candor": 0.9,
+  "patience": 0.7
+ },
+ "physicality": "Slight, hunched, and very quiet. What catches the eye: people she walks past stop and look at their hands.",
+ "questSeeds": [
+  "She has begun to sing for someone the player knows. She comes to find them, begging them to prove her wrong.",
+  "The Threnodists say a keener's song can be answered: sing back loud enough and the death changes its mind. No one has done it in living memory."
+ ],
+ "storyRule": "The Threnodist tale: a keener's song is a warning, not a sentence. Answered with a true song of defiance, sung by the one it names, it can be turned. It has not happened in her lifetime.",
+ "vocation": "ATTENDANT",
+ "gear": [
+  "mourning black, mended many times",
+  "a lock of hair for every song that came true",
+  "a silver whistle she was given as a girl, before the singing started"
+ ],
+ "purse": {
+  "crystal": 90
+ },
+ "_authoredWhy": "SNG-661 §5. The banshee as a Threnodist story: the keener who sings deaths before they come. A person, grieving, so an NPC."
+}

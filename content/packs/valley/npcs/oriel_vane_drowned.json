@@ -1,0 +1,118 @@
+{
+ "schemaVersion": 1,
+ "communityId": null,
+ "closed": [],
+ "id": "oriel_vane_drowned",
+ "name": "Captain Oriel Vane, Who Came Back to Finish the Voyage",
+ "tier": "heroic",
+ "level": 36,
+ "role": "A drowned sea-captain returned with her crew to finish a voyage whose harbour no longer exists",
+ "people": "revenant",
+ "storiedBy": "(many peoples)",
+ "gender": "woman",
+ "pronouns": "she/her",
+ "sex": "female",
+ "romanceEligible": false,
+ "homeLocation": "keelmouth",
+ "domains": {
+  "primary": "horizon",
+  "secondary": "threnodist",
+  "tertiary": "ashwarden"
+ },
+ "spectrum": {
+  "death_life": -0.5,
+  "space_time": 0.4,
+  "chaos_order": 0.4
+ },
+ "subAttributes": {
+  "strength": 15,
+  "agility": 12,
+  "reason": 12,
+  "insight": 15,
+  "presence": 18,
+  "rapport": 12,
+  "craft": 12,
+  "wits": 17
+ },
+ "knowledge": [
+  "Every current and reef between Keelmouth and the harbour that is gone",
+  "The night the deep kraken took the Salt Promise, in detail",
+  "The names of all nineteen of her crew, living and dead, which are the same list"
+ ],
+ "wants": [
+  "To make port. Any port that will have a dead crew"
+ ],
+ "fears": [
+  "The kraken, which is still under the harbour.",
+  "Finishing the voyage and having nowhere to go."
+ ],
+ "appearance": "A tall woman in a salt-stiff captain's coat, grey-lipped, hair full of seaweed that never dries, eyes the colour of deep water. Her ship lies at the end of Keelmouth's longest pier, and it is always wet.",
+ "voiceHints": "Clipped, commanding, sea-dry. Keeps the ship's log aloud. Laughs rarely, and it sounds like surf.",
+ "reactsToReputation": {
+  "brave": "offers you a berth",
+  "sailor": "respects you at once",
+  "fearful": "lets you go ashore",
+  "any": "asks where you're bound"
+ },
+ "assistTags": [
+  "lead",
+  "navigate-wilds",
+  "travel",
+  "guard",
+  "warm"
+ ],
+ "abilities": [
+  {
+   "abilityId": "rivercraft",
+   "level": 2,
+   "why": "she reads water"
+  },
+  {
+   "abilityId": "made_crossing",
+   "level": 2,
+   "why": "she makes passages"
+  },
+  {
+   "abilityId": "known_way",
+   "level": 2,
+   "why": "every sea-road she ever sailed"
+  },
+  {
+   "abilityId": "kept_distance",
+   "level": 2,
+   "why": "no one boards her ship unwelcome"
+  },
+  {
+   "abilityId": "harmonic_voice",
+   "level": 2,
+   "why": "threnodist secondary: the crew sings together, and it holds them"
+  },
+  {
+   "abilityId": "kept_breath",
+   "level": 2,
+   "why": "ashwarden tertiary: she does not need air"
+  }
+ ],
+ "personality": {
+  "warmth": 0.4,
+  "trust": 0.1,
+  "candor": 0.8,
+  "patience": 0.5
+ },
+ "physicality": "Tall, soaked, upright. What catches the eye: water runs from her coat onto dry boards, and never stops.",
+ "questSeeds": [
+  "She needs a living navigator: the dead cannot read the new stars. The voyage runs past the deep kraken's harbour.",
+  "Her crew is beginning to forget their own names. She asks the player to help her find a port before the last of them forgets."
+ ],
+ "storyRule": "Every harbour's story: the drowned come back to finish what the sea interrupted, and rest when it is done. Give her a port that will take a dead crew, and she and they lie down.",
+ "vocation": "COMMANDER",
+ "gear": [
+  "the log of the Salt Promise, water-stained and still being written",
+  "a captain's sword gone green with the sea",
+  "a compass that points to the harbour that is gone"
+ ],
+ "purse": {
+  "crystal": 3500
+ },
+ "_authoredWhy": "SNG-661 §5. The revenant as a harbour story, tied to the deep kraken (SNG-660/661) and the_water arc. A person with a want, so an NPC."
+}

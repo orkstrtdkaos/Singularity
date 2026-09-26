@@ -1,0 +1,123 @@
+{
+ "schemaVersion": 1,
+ "communityId": null,
+ "closed": [],
+ "id": "azhar_unfinished_wish",
+ "name": "Azhar of the Unfinished Wish",
+ "tier": "epic",
+ "level": 45,
+ "role": "A spirit of the forge-flame, bound to grant three wishes to whoever frees him, and one wish short of his own freedom",
+ "people": "djinn",
+ "storiedBy": "Blazeborn",
+ "gender": "man",
+ "pronouns": "he/him",
+ "sex": "male",
+ "romanceEligible": true,
+ "homeLocation": "the_blaze",
+ "domains": {
+  "primary": "blazeborn",
+  "secondary": "abyssal",
+  "tertiary": "horizon"
+ },
+ "spectrum": {
+  "dark_light": 0.7,
+  "destruction_creation": 0.5,
+  "chaos_order": -0.5
+ },
+ "subAttributes": {
+  "strength": 13,
+  "agility": 13,
+  "reason": 13,
+  "insight": 13,
+  "presence": 19,
+  "rapport": 17,
+  "craft": 16,
+  "wits": 18
+ },
+ "knowledge": [
+  "Every wish he has granted, and exactly how each one went wrong",
+  "The Blazeborn smith's binding-song, which he cannot sing himself",
+  "The wording that would free him, which no one has ever used"
+ ],
+ "wants": [
+  "That someone spend their last wish on him"
+ ],
+ "fears": [
+  "Being wished into something again.",
+  "That when he is free, there will be nothing he wants."
+ ],
+ "appearance": "A tall man of smokeless flame from the waist up and nothing much below it, with a courtier's beard and a merchant's smile. His bracelets are iron, and they are not jewellery.",
+ "voiceHints": "Expansive, witty, a salesman of wonders, and underneath it a very tired prisoner. Always repeats a wish back, exactly, before he grants it.",
+ "reactsToReputation": {
+  "generous": "curious, almost hopeful",
+  "greedy": "smiles wider",
+  "clever": "careful",
+  "any": "asks what you wish"
+ },
+ "assistTags": [
+  "bargain",
+  "light",
+  "make",
+  "travel",
+  "talk"
+ ],
+ "abilities": [
+  {
+   "abilityId": "kindle",
+   "level": 2,
+   "why": "he is the flame"
+  },
+  {
+   "abilityId": "radiant_lance",
+   "level": 2,
+   "why": "the forge's anger"
+  },
+  {
+   "abilityId": "blaze_wall",
+   "level": 2,
+   "why": "he can make a door of fire, or close one"
+  },
+  {
+   "abilityId": "glass_work",
+   "level": 2,
+   "why": "he makes what is wished for"
+  },
+  {
+   "abilityId": "offered_price",
+   "level": 2,
+   "why": "abyssal secondary: every wish has a cost"
+  },
+  {
+   "abilityId": "honest_bargain",
+   "level": 1,
+   "why": "he keeps the letter of it, always"
+  },
+  {
+   "abilityId": "far_step",
+   "level": 2,
+   "why": "horizon tertiary: he can be anywhere a wish sends him"
+  }
+ ],
+ "personality": {
+  "warmth": 0.5,
+  "trust": -0.4,
+  "candor": -0.2,
+  "patience": 0.6
+ },
+ "physicality": "Huge, bright, and hot to stand near. What catches the eye: the iron bracelets, and the scars under them.",
+ "questSeeds": [
+  "A lamp has been found in a collapsed Blazeborn forge. Everyone who has held it has had three wishes and a very bad year.",
+  "Azhar asks, very casually, whether the player has thought about what they would do with a third wish. He has asked a hundred people. He is still asking."
+ ],
+ "storyRule": "The Blazeborn story binds him: three wishes, granted to the letter, to whoever frees him. A wish spent on his freedom breaks the iron. No one, in three hundred years, has spent one.",
+ "vocation": "BROKER",
+ "gear": [
+  "two iron bracelets, riveted shut",
+  "a brass lamp with a crack in the spout",
+  "a list of every wish he has granted, which he knows by heart"
+ ],
+ "purse": {
+  "crystal": 15000
+ },
+ "_authoredWhy": "SNG-661 §5. The djinn as a Blazeborn story: the binding of fire, and the wish no one makes. A person with a want, so an NPC."
+}

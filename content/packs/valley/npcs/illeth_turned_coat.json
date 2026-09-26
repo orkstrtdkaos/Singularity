@@ -1,0 +1,128 @@
+{
+ "schemaVersion": 1,
+ "communityId": null,
+ "closed": [],
+ "id": "illeth_turned_coat",
+ "name": "Illeth, Queen of the Turned Coat",
+ "tier": "epic",
+ "level": 52,
+ "role": "Queen of a court where every guest is welcome and no guest may leave until they have told a true story",
+ "people": "fae",
+ "storiedBy": "Veilwrights",
+ "gender": "woman",
+ "pronouns": "she/her",
+ "sex": "female",
+ "romanceEligible": true,
+ "homeLocation": "the_kindly_court",
+ "domains": {
+  "primary": "veilwright",
+  "secondary": "figurist",
+  "tertiary": "horizon"
+ },
+ "spectrum": {
+  "falsehood_truth": -0.7,
+  "chaos_order": -0.3,
+  "concrete_abstract": 0.6
+ },
+ "subAttributes": {
+  "strength": 12,
+  "agility": 15,
+  "reason": 12,
+  "insight": 16,
+  "presence": 21,
+  "rapport": 19,
+  "craft": 12,
+  "wits": 18
+ },
+ "knowledge": [
+  "Every true story ever told at her table, and who told it",
+  "Which of her courtiers are guests who never managed to leave",
+  "The way out, which is the way in, turned around"
+ ],
+ "wants": [
+  "A guest who will stay because they wish to, not because the door forgot them"
+ ],
+ "fears": [
+  "Iron, and plain speech.",
+  "That her court is kind only because it is a trap, and she built both."
+ ],
+ "appearance": "Tall and silver-pale in a gown that is a different colour every time you look away, crowned with a wreath of white hawthorn. Her court glitters behind her, and some of the dancers look very tired.",
+ "voiceHints": "Delighted, gracious, and never once literal. Answers questions with better questions. Never says thank you, because thanks is a debt.",
+ "reactsToReputation": {
+  "honest": "fascinated, and a little afraid",
+  "deceptive": "charmed, and more careful",
+  "reliable": "offers you a seat near her",
+  "any": "welcomes you, warmly, and closes the door"
+ },
+ "assistTags": [
+  "misdirect",
+  "conceal",
+  "talk",
+  "read-people",
+  "travel"
+ ],
+ "abilities": [
+  {
+   "abilityId": "perfect_veil",
+   "level": 2,
+   "why": "the court is a glamour"
+  },
+  {
+   "abilityId": "made_truth",
+   "level": 3,
+   "why": "what she says becomes so, for a while"
+  },
+  {
+   "abilityId": "useful_lie",
+   "level": 2,
+   "why": "every courtesy at her table is one"
+  },
+  {
+   "abilityId": "walking_figure",
+   "level": 2,
+   "why": "figurist secondary: she wears many shapes"
+  },
+  {
+   "abilityId": "my_reality",
+   "level": 2,
+   "why": "inside her hall, her rules"
+  },
+  {
+   "abilityId": "false_door",
+   "level": 2,
+   "why": "every door in the court leads back to the court"
+  },
+  {
+   "abilityId": "far_step",
+   "level": 2,
+   "why": "horizon tertiary: the court is not quite anywhere"
+  },
+  {
+   "abilityId": "blend_in",
+   "level": 1,
+   "why": "she can be the least-noticed dancer in her own hall"
+  }
+ ],
+ "personality": {
+  "warmth": 0.6,
+  "trust": -0.3,
+  "candor": -0.6,
+  "patience": 0.7
+ },
+ "physicality": "Graceful beyond anything human, and never still. What catches the eye: she casts no shadow in her own hall and a long one outside it.",
+ "questSeeds": [
+  "A missing Keelmouth sailor has been seen dancing at the Kindly Court for three weeks. He looks very happy and very thin.",
+  "The Queen wants a story she has never heard. Every guest who has tried has stayed. She is, genuinely, running out of stories."
+ ],
+ "storyRule": "The Veilwright tales are true: turn your coat inside out and her glamours slide off; iron in the hand cannot be charmed; and a true story, one she has never heard, buys the door out.",
+ "vocation": "COMMANDER",
+ "gear": [
+  "a hawthorn crown that has never lost a flower",
+  "a cup that is always full of whatever you most want to drink",
+  "the Turned Coat itself, which she will not explain"
+ ],
+ "purse": {
+  "crystal": 25000
+ },
+ "_authoredWhy": "SNG-661 §5. The fey court as a Veilwright story: hospitality as a snare, a true story as the key. Placed at the Kindly Court because its tags (falsehood, sanctuary, social, refuge) already describe her."
+}

@@ -1,0 +1,118 @@
+{
+ "schemaVersion": 1,
+ "communityId": null,
+ "closed": [],
+ "id": "seren_unlooked_at",
+ "name": "Seren, Who Is Not Looked At",
+ "tier": "heroic",
+ "level": 29,
+ "role": "A woman whose gaze turns the living to stone, living veiled among the statues of the people she loved",
+ "people": "gorgon",
+ "storiedBy": "Figurists",
+ "gender": "woman",
+ "pronouns": "she/her",
+ "sex": "female",
+ "romanceEligible": true,
+ "homeLocation": "the_untethered",
+ "domains": {
+  "primary": "figurist",
+  "secondary": "verist",
+  "tertiary": "lattice"
+ },
+ "spectrum": {
+  "concrete_abstract": 0.5,
+  "falsehood_truth": 0.6,
+  "violence_peace": 0.3
+ },
+ "subAttributes": {
+  "strength": 11,
+  "agility": 11,
+  "reason": 15,
+  "insight": 18,
+  "presence": 16,
+  "rapport": 11,
+  "craft": 17,
+  "wits": 11
+ },
+ "knowledge": [
+  "The name of every statue in her garden, and the day each one looked",
+  "The Figurist pattern that made her what she is",
+  "That the statues are not dead, only stopped, and what would wake them"
+ ],
+ "wants": [
+  "To look someone in the eye and have them still be there afterward"
+ ],
+ "fears": [
+  "Her own reflection, which would end her.",
+  "That she has started to prefer the statues."
+ ],
+ "appearance": "A slight woman in a heavy veil of dark lace, hair that moves when there is no wind, and very careful hands. She walks in a garden of lifelike statues, and talks to them.",
+ "voiceHints": "Soft, precise, lonely. She always speaks to you with her face turned away and apologises for it every time.",
+ "reactsToReputation": {
+  "kind": "lets you sit in the garden",
+  "brave": "afraid for you",
+  "hunter": "weary, then terrible",
+  "any": "asks you not to lift the veil"
+ },
+ "assistTags": [
+  "reveal",
+  "study",
+  "guard",
+  "craft",
+  "comfort"
+ ],
+ "abilities": [
+  {
+   "abilityId": "the_true_figure",
+   "level": 3,
+   "why": "the veil lifted, and what it does"
+  },
+  {
+   "abilityId": "cutting_figure",
+   "level": 2,
+   "why": "the pattern that stops things"
+  },
+  {
+   "abilityId": "named_exclusion",
+   "level": 2,
+   "why": "she can choose who the gaze spares, with great effort"
+  },
+  {
+   "abilityId": "pattern_sense",
+   "level": 2,
+   "why": "she reads shapes before they move"
+  },
+  {
+   "abilityId": "the_plain_seeing",
+   "level": 2,
+   "why": "verist secondary: she sees what is true in a face"
+  },
+  {
+   "abilityId": "true_ground",
+   "level": 1,
+   "why": "she stands on what is real"
+  }
+ ],
+ "personality": {
+  "warmth": 0.7,
+  "trust": 0.1,
+  "candor": 0.8,
+  "patience": 0.9
+ },
+ "physicality": "Small, veiled, still. What catches the eye: the hair under the lace, which moves on its own, and the statues, which all face her.",
+ "questSeeds": [
+  "A Figurist scholar believes the statues can be woken, and wants her help. She wants it too much to be careful.",
+  "A hunter has come to the Untethered with a polished shield, the way the old story says. She has decided not to run."
+ ],
+ "storyRule": "The Figurist story holds both ways: her own eyes in a mirror would stop her, and the statues she made can be woken by the same pattern, drawn backward.",
+ "vocation": "KEEPER",
+ "gear": [
+  "a veil of black lace, many times mended",
+  "a chisel she uses to clean the statues' faces",
+  "a small hand mirror, wrapped in cloth, which she has never unwrapped"
+ ],
+ "purse": {
+  "crystal": 1400
+ },
+ "_authoredWhy": "SNG-661 §5. The gorgon as a Figurist story, told from inside: the one who cannot be looked at. Tragic to kill by design, so an NPC."
+}

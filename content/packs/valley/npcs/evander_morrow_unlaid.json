@@ -1,0 +1,123 @@
+{
+ "schemaVersion": 1,
+ "communityId": null,
+ "closed": [],
+ "id": "evander_morrow_unlaid",
+ "name": "Evander Morrow, Who Would Not Be Laid Down",
+ "tier": "epic",
+ "level": 48,
+ "role": "An Ashwarden who refused his own mercy, and has lived since on what others have left of theirs",
+ "people": "vampire",
+ "storiedBy": "Ashwardens",
+ "gender": "man",
+ "pronouns": "he/him",
+ "sex": "male",
+ "romanceEligible": true,
+ "homeLocation": "the_hollowing",
+ "domains": {
+  "primary": "ashwarden",
+  "secondary": "umbral",
+  "tertiary": "abyssal"
+ },
+ "spectrum": {
+  "death_life": -0.8,
+  "dark_light": -0.7,
+  "demonic_angelic": -0.3
+ },
+ "subAttributes": {
+  "strength": 14,
+  "agility": 16,
+  "reason": 14,
+  "insight": 17,
+  "presence": 19,
+  "rapport": 15,
+  "craft": 14,
+  "wits": 14
+ },
+ "knowledge": [
+  "The Ashwarden rite of laying-down, which he walked out of halfway through",
+  "Which of the Hollowing's families leave the door on the latch for him, and why",
+  "The name of the one he stayed for, or he did once"
+ ],
+ "wants": [
+  "To be forgiven by the order that tried to lay him down, without having to lie down"
+ ],
+ "fears": [
+  "The mercy, still waiting for him at the end of every night.",
+  "That he has forgotten the name of the one he stayed for, and is staying for nothing."
+ ],
+ "appearance": "A courteous man in old Ashwarden grey gone black at the hems, pale as candle-wax, with a physician's clean hands. He never stands in a doorway uninvited and never looks at a mirror.",
+ "voiceHints": "Formal, gentle, very old manners. Asks permission for everything, including things he could simply take. Never says the word hungry.",
+ "reactsToReputation": {
+  "merciful": "attentive, almost hopeful",
+  "ashwarden": "courteous and afraid",
+  "cruel": "disappointed, then dangerous",
+  "any": "asks to be invited in"
+ },
+ "assistTags": [
+  "deathsense",
+  "read-people",
+  "conceal",
+  "intimidate",
+  "study"
+ ],
+ "abilities": [
+  {
+   "abilityId": "soul_stare",
+   "level": 3,
+   "why": "he reads what someone has left"
+  },
+  {
+   "abilityId": "dread",
+   "level": 2,
+   "why": "the old fear of the thing at the window"
+  },
+  {
+   "abilityId": "kept_breath",
+   "level": 2,
+   "why": "he does not breathe unless he remembers to"
+  },
+  {
+   "abilityId": "the_kept_dark",
+   "level": 2,
+   "why": "umbral secondary: the night is his house"
+  },
+  {
+   "abilityId": "shadowstep",
+   "level": 2,
+   "why": "he is at the door, and then he is in the room"
+  },
+  {
+   "abilityId": "appetite_strike",
+   "level": 2,
+   "why": "abyssal tertiary: the hunger, when it wins"
+  },
+  {
+   "abilityId": "the_attended_end",
+   "level": 1,
+   "why": "he was an Ashwarden once, and still sits with the dying"
+  }
+ ],
+ "personality": {
+  "warmth": 0.4,
+  "trust": -0.2,
+  "candor": 0.3,
+  "patience": 0.9
+ },
+ "physicality": "Tall, cold-handed, unhurried. He moves like someone who has never once been late. What catches the eye: nothing about him casts quite the shadow it should.",
+ "questSeeds": [
+  "He asks you to carry a petition to the prior at the Long Grey: to be laid down properly, by the rite he walked out of. He will not say why now.",
+  "Three villages near the Hollowing leave the door on the latch for him one night a year and are never harmed. A fourth has stopped, and something else is answering the door."
+ ],
+ "storyRule": "The Ashwarden stories are true of him: he cannot cross a threshold unasked or a line of prayer-laid ash, and no blade ends him. Only the rite of laying-down does, and he has to consent to it.",
+ "vocation": "ENDER",
+ "gear": [
+  "a physician's case of silver lancets he no longer uses on the living",
+  "the grey mantle of an order that tried to bury him",
+  "a locket with the portrait scratched out"
+ ],
+ "purse": {
+  "crystal": 9000
+ },
+ "_authoredWhy": "SNG-661 §5 (Erik: yes to storied people). The vampire as an Ashwarden story: the one who refused the mercy of stopping. A person, so an NPC, not a beast."
+}

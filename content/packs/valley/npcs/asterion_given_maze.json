@@ -1,0 +1,123 @@
+{
+ "schemaVersion": 1,
+ "communityId": null,
+ "closed": [],
+ "id": "asterion_given_maze",
+ "name": "Asterion of the Given Maze",
+ "tier": "heroic",
+ "level": 34,
+ "role": "The bull-headed keeper the Masons made for their maze. Kind to the lost, terrible to thieves, and he has never seen the sky",
+ "people": "minotaur",
+ "storiedBy": "Masons of the Given",
+ "gender": "man",
+ "pronouns": "he/him",
+ "sex": "male",
+ "romanceEligible": false,
+ "homeLocation": "the_leaden_deep",
+ "domains": {
+  "primary": "mason",
+  "secondary": "somatic",
+  "tertiary": "syllogist"
+ },
+ "spectrum": {
+  "concrete_abstract": -0.8,
+  "chaos_order": 0.7,
+  "violence_peace": 0.1
+ },
+ "subAttributes": {
+  "strength": 21,
+  "agility": 12,
+  "reason": 12,
+  "insight": 15,
+  "presence": 12,
+  "rapport": 12,
+  "craft": 16,
+  "wits": 14
+ },
+ "knowledge": [
+  "Every turn of the Given Maze, including the ones the Masons forgot they built",
+  "What the Masons keep at the centre, and why",
+  "What the sky is supposed to look like, from a hundred descriptions"
+ ],
+ "wants": [
+  "To see the sky he has heard described, and come back to the maze by choice"
+ ],
+ "fears": [
+  "The maze being finished.",
+  "That he was made to be the thing at the centre and nothing else."
+ ],
+ "appearance": "Eight feet of scarred muscle in a mason's leather apron, with the head of a great black bull and very gentle brown eyes. He carries a lamp for travellers and a maul for everyone else.",
+ "voiceHints": "Deep, slow, careful with words the way he is careful with stone. Asks visitors to describe the sky, every time.",
+ "reactsToReputation": {
+  "lost": "guides you out, patiently",
+  "thief": "hunts you, patiently",
+  "honest": "asks you about the sky",
+  "any": "lifts his lamp to see your face"
+ },
+ "assistTags": [
+  "guard",
+  "navigate-wilds",
+  "break",
+  "hold",
+  "make"
+ ],
+ "abilities": [
+  {
+   "abilityId": "plain_weight",
+   "level": 3,
+   "why": "he is very heavy"
+  },
+  {
+   "abilityId": "keystone_blow",
+   "level": 2,
+   "why": "he knows where stone breaks"
+  },
+  {
+   "abilityId": "boundary_stone",
+   "level": 2,
+   "why": "the maze answers to him"
+  },
+  {
+   "abilityId": "stone_read",
+   "level": 1,
+   "why": "he reads the walls"
+  },
+  {
+   "abilityId": "tremor_sense",
+   "level": 1,
+   "why": "he feels every footstep in the maze"
+  },
+  {
+   "abilityId": "perfect_motion",
+   "level": 2,
+   "why": "somatic secondary: huge, and never clumsy"
+  },
+  {
+   "abilityId": "hurled_weight",
+   "level": 2,
+   "why": "what he throws, stays thrown"
+  }
+ ],
+ "personality": {
+  "warmth": 0.6,
+  "trust": 0.2,
+  "candor": 0.9,
+  "patience": 0.9
+ },
+ "physicality": "Enormous, deliberate, and quiet on his feet. What catches the eye: the horns are chipped from a lifetime of low ceilings.",
+ "questSeeds": [
+  "The Masons want the maze finished at last, which means walling up the centre, and him with it. He has asked, very politely, to see the sky first.",
+  "A thief has hidden in the maze and he has not found her in a week. He is starting to suspect she wants to be found by someone else."
+ ],
+ "storyRule": "The Mason story: he cannot leave the maze by any door the Masons built, but a thread laid from the centre to the outside, by someone he trusts, makes a new way that is not theirs.",
+ "vocation": "KEEPER",
+ "gear": [
+  "a mason's maul, worn to the grain",
+  "a lamp that has never gone out",
+  "a slate on which visitors have drawn the sky for him"
+ ],
+ "purse": {
+  "crystal": 300
+ },
+ "_authoredWhy": "SNG-661 §5. The minotaur as a Mason story: the thing made for the centre of the maze. Told from inside, so he is someone, and an NPC."
+}

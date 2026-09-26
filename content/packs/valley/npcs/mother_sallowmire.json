@@ -1,0 +1,123 @@
+{
+ "schemaVersion": 1,
+ "communityId": null,
+ "closed": [],
+ "id": "mother_sallowmire",
+ "name": "Mother Sallowmire",
+ "tier": "heroic",
+ "level": 31,
+ "role": "The marsh-hag of the stilts: she helps the desperate, and she is always, always paid",
+ "people": "hag",
+ "storiedBy": "Rootkin",
+ "gender": "woman",
+ "pronouns": "she/her",
+ "sex": "female",
+ "romanceEligible": false,
+ "homeLocation": "greywater_stilts",
+ "domains": {
+  "primary": "rootkin",
+  "secondary": "veilwright",
+  "tertiary": "threnodist"
+ },
+ "spectrum": {
+  "death_life": 0.4,
+  "falsehood_truth": -0.3,
+  "chaos_order": -0.4
+ },
+ "subAttributes": {
+  "strength": 11,
+  "agility": 11,
+  "reason": 11,
+  "insight": 18,
+  "presence": 11,
+  "rapport": 14,
+  "craft": 16,
+  "wits": 17
+ },
+ "knowledge": [
+  "What every family on the stilts owes her, and in what coin",
+  "Which herbs in the marsh heal and which only look like it",
+  "The true names of three people who sold them to her and were never missed"
+ ],
+ "wants": [
+  "To be paid in something she hasn't already got; she has been paid in years for so long she has more of them than she wants"
+ ],
+ "fears": [
+  "That someone will pay her in kindness, and she will not know what to do with it.",
+  "The day the stilts have no one desperate left."
+ ],
+ "appearance": "A bent old woman in a coat of patched reed-cloth, with a face like a walnut and startlingly young green eyes. There is always something bubbling behind her, and she is always, somehow, already expecting you.",
+ "voiceHints": "Sweet as honey, then suddenly sharp. Calls everyone 'duck'. Names the price before you ask and never haggles.",
+ "reactsToReputation": {
+  "desperate": "kind, and very expensive",
+  "honest": "respectful, pays attention",
+  "thief": "delighted to meet you",
+  "any": "already knows why you've come"
+ },
+ "assistTags": [
+  "tend",
+  "mend",
+  "bargain",
+  "grow",
+  "read-people"
+ ],
+ "abilities": [
+  {
+   "abilityId": "planted_years",
+   "level": 3,
+   "why": "she deals in years"
+  },
+  {
+   "abilityId": "graftlife",
+   "level": 2,
+   "why": "she can give, and she can take"
+  },
+  {
+   "abilityId": "snaring_green",
+   "level": 2,
+   "why": "the marsh holds for her"
+  },
+  {
+   "abilityId": "better_story",
+   "level": 2,
+   "why": "veilwright secondary: she tells you a kinder version of what she took"
+  },
+  {
+   "abilityId": "falsecraft",
+   "level": 2,
+   "why": "the young eyes are not hers"
+  },
+  {
+   "abilityId": "made_elegy",
+   "level": 1,
+   "why": "threnodist tertiary: she sings for the ones who paid too much"
+  },
+  {
+   "abilityId": "the_taking_root",
+   "level": 2,
+   "why": "what she plants, grows"
+  }
+ ],
+ "personality": {
+  "warmth": 0.3,
+  "trust": -0.5,
+  "candor": 0.6,
+  "patience": 0.8
+ },
+ "physicality": "Small, bent, quick-handed. What catches the eye: the green eyes, which are younger than she is by a lifetime or two.",
+ "questSeeds": [
+  "A child on the stilts is dying and the family has already paid her once this year. She will save the child for a price the player has to carry instead.",
+  "Someone has been paying her in stolen years: other people's. She wants the thief found, not because it is wrong, but because it is her trade."
+ ],
+ "storyRule": "The Rootkin tale holds: she cannot refuse a fair bargain once it's spoken aloud, and she cannot take what is freely given. A gift, freely given, is the one coin that binds her.",
+ "vocation": "BROKER",
+ "gear": [
+  "a bone ladle and a pot that is never empty",
+  "a string of little knotted cords, each one a year",
+  "a green glass eye she keeps in her pocket"
+ ],
+ "purse": {
+  "crystal": 2200
+ },
+ "_authoredWhy": "SNG-661 §5. The hag as a Rootkin story: the bargain for life, paid in life. Among refugees, because that is where desperate people are."
+}

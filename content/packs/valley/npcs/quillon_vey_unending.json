@@ -1,0 +1,128 @@
+{
+ "schemaVersion": 1,
+ "communityId": null,
+ "closed": [],
+ "id": "quillon_vey_unending",
+ "name": "Quillon Vey, the Proof That Will Not End",
+ "tier": "legendary",
+ "level": 66,
+ "role": "A Syllogist who wrote himself into an unfinished proof, and cannot die while it stands unrefuted",
+ "people": "lich",
+ "storiedBy": "Syllogists",
+ "gender": "man",
+ "pronouns": "he/him",
+ "sex": "male",
+ "romanceEligible": false,
+ "homeLocation": "the_bloodless_hold",
+ "domains": {
+  "primary": "syllogist",
+  "secondary": "hourkeeper",
+  "tertiary": "verist"
+ },
+ "spectrum": {
+  "emotional_logical": 0.95,
+  "death_life": -0.6,
+  "chaos_order": 0.9
+ },
+ "subAttributes": {
+  "strength": 12,
+  "agility": 12,
+  "reason": 22,
+  "insight": 18,
+  "presence": 16,
+  "rapport": 12,
+  "craft": 12,
+  "wits": 20
+ },
+ "knowledge": [
+  "The proof: nine hundred pages, bound in the skin of his own old life, kept somewhere in the Bloodless Hold",
+  "Every refutation ever attempted, and why each one failed",
+  "How long ago he stopped being able to feel the cold"
+ ],
+ "wants": [
+  "Someone clever enough to refute him, and he kills everyone who tries and fails"
+ ],
+ "fears": [
+  "Being wrong, which would free him.",
+  "Being right forever."
+ ],
+ "appearance": "A thin grey figure in a scholar's robe that has not been changed in a century, skin like old parchment drawn over a very good skull. His eyes are two points of steady light, and he reads while he talks to you.",
+ "voiceHints": "Precise, courteous, utterly without warmth. Corrects your grammar mid-threat. Treats a good question as the only thing in the world that still interests him.",
+ "reactsToReputation": {
+  "clever": "leans in, delighted",
+  "scholar": "offers a seat at the proof",
+  "reckless": "bored, then lethal",
+  "any": "asks what you think you know"
+ },
+ "assistTags": [
+  "analyze",
+  "study",
+  "investigate",
+  "teach",
+  "reveal"
+ ],
+ "abilities": [
+  {
+   "abilityId": "proof_halls",
+   "level": 3,
+   "why": "the Hold is his proof made into rooms"
+  },
+  {
+   "abilityId": "built_system",
+   "level": 3,
+   "why": "he is a system that runs itself"
+  },
+  {
+   "abilityId": "case_closed",
+   "level": 2,
+   "why": "he ends arguments"
+  },
+  {
+   "abilityId": "contradiction",
+   "level": 2,
+   "why": "he finds the flaw in anything but himself"
+  },
+  {
+   "abilityId": "the_kept_hour",
+   "level": 2,
+   "why": "hourkeeper secondary: he has stopped his own clock"
+  },
+  {
+   "abilityId": "timeout",
+   "level": 2,
+   "why": "time is a premise he no longer grants"
+  },
+  {
+   "abilityId": "the_unsurvivable_fact",
+   "level": 2,
+   "why": "verist tertiary: some facts kill"
+  },
+  {
+   "abilityId": "unbearable_word",
+   "level": 2,
+   "why": "he states things that cannot be heard and lived through"
+  }
+ ],
+ "personality": {
+  "warmth": -0.6,
+  "trust": -0.4,
+  "candor": 0.9,
+  "patience": 1
+ },
+ "physicality": "Weightless, still, and faintly cold to stand near. What catches the eye: the book open in his hands, which is never the same book.",
+ "questSeeds": [
+  "The Syllogists will pay any price for a refutation of the Vey proof. Three of their best went into the Bloodless Hold. One came out, and will not say what he read.",
+  "He offers a trade: one question answered truly, for one attempt at his proof. Failure is death. He is very patient about waiting for you to agree."
+ ],
+ "storyRule": "The Syllogists' old riddle is true of him: he cannot die while the proof stands. Refute it, and he ends, gratefully. Burning the book only makes him write it again.",
+ "vocation": "READER",
+ "gear": [
+  "the Proof, nine hundred pages and unfinished",
+  "a pen that has never run dry",
+  "a scholar's ring from a college that burned four hundred years ago"
+ ],
+ "purse": {
+  "crystal": 40000
+ },
+ "_authoredWhy": "SNG-661 §5. The lich as a Syllogist story: immortality as an unrefuted argument. A person who can be reasoned with, so an NPC."
+}

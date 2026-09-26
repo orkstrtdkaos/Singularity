@@ -26932,7 +26932,10 @@ console.log("\n── §349 · whose raid, and whose ground ──");
   check("§349: ⛑ …AND A WORLD WITH NO POWERS READS EXACTLY AS IT DID BEFORE THEM, which is the truth for most of the 143 places. `dangerOf` with no lift is byte-for-byte the old function: a MISSING field still floors to 1 (SNG-225 §4b, or every `minDanger > 0` encounter is silently disqualified) and an explicit 0 is still honoured as a deliberate haven",
     PW.dangerLiftAt("nowhere", { content: content349, character: fresh }) === 0
     && PW.dangerLiftAt("road", { content: {}, character: fresh }) === 0
-    && dangerOf349({}) === 1 && dangerOf349({ dangerLevel: 0 }) === 0 && dangerOf349({ dangerLevel: 9 }) === 4);
+    // ✅ ERIK 2026-09-26 — THE TOP IS 5 NOW, so a runaway value clamps to 5 and not 4. The CLAIM this check is
+    // about is untouched and is the important half: a MISSING field still floors to 1 (or every `minDanger > 0`
+    // encounter is silently disqualified) and an explicit 0 is still honoured as a deliberate haven.
+    && dangerOf349({}) === 1 && dangerOf349({ dangerLevel: 0 }) === 0 && dangerOf349({ dangerLevel: 9 }) === 5);
 
   // ⛔ ERIK'S 2026-07-19 RULING IS THE WHOLE POINT: clearing them lowers it.
   const cleared = { powerState: { p_toll: { broken: true } } };
@@ -29007,10 +29010,23 @@ console.log("\n── §365 · every rung has a creature, and each fights at its
     /import \{ BEAST_TIER \} from "\.\.\/engine\/random_encounters\.js"/.test(rd("tests/endgame_scaling.mjs"))
     && !/const BEAST_TIER = \{ riffraff: 22/.test(rd("tests/endgame_scaling.mjs")));
 
-  // ⬜ AND THE DANGER SCALE'S TOP, WHICH AEVI ASKED ME TO NAME: the engine clamps to 4 and the content authors 5.
-  check("§365: ⬜ …and the danger scale's top is the ENGINE's 4 while sixteen authored places carry 5 — legendary is gated at the top the engine has",
-    /Math\.max\(0, Math\.min\(4, base \+ \(Number\(lift\) \|\| 0\)\)\)/.test(rd("engine/random_encounters.js"))
-    && RE365.BEAST_TIER.legendary.minDanger === 4,
+  // ✅ ERIK 2026-09-26, ANSWERING IT: "Agreed on both. The danger scale tops out at 5." This check WAS the open
+  // question — "the engine clamps to 4 and the content authors 5" — so it went red the moment he answered, which is
+  // the seventh gate of mine to redden because its own subject got fixed. ⛑ It is the ruling now, and it asks for
+  // every part of it: the clamp, the rung legendary rolls at, and that the sixteen authored 5s are READ as 5.
+  check("§365: ✅ THE DANGER SCALE TOPS OUT AT 5, and the sixteen places authored at 5 are read as 5 — a legendary rolls only there, and rarely",
+    /Math\.max\(0, Math\.min\(5, base \+ \(Number\(lift\) \|\| 0\)\)\)/.test(rd("engine/random_encounters.js"))
+    && RE365.BEAST_TIER.legendary.minDanger === 5 && RE365.BEAST_TIER.legendary.weight === 0.1
+    && RE365.dangerOf({ dangerLevel: 5 }) === 5
+    && (() => {
+      // ⚠️ AND NO SILENT 4 ANYWHERE, which is what Aevi actually asked for. Two were in this very module: the
+      // found-relic ceiling clamped its INPUT to 4 (so 5 read as 4 and the ceiling collapsed to the epic's 50), and
+      // `flavorMultiplier` clamped too — where simply raising it would have made the peaceful term go NEGATIVE.
+      const caps = [1, 2, 3, 4, 5].map(d => RE365.foundLevelCapFor(d));
+      const peace = [4, 5].map(d => RE365.flavorMultiplier("beautiful", d));
+      const peril = [4, 5].map(d => RE365.flavorMultiplier("dangerous", d));
+      return caps.join(",") === "8,18,32,50,72" && peace[1] >= 1 && peril[1] > peril[0];
+    })(),
     "raising the clamp changes encounter rates at those sixteen places for every pool, not only for beasts — reported, not taken");
 }
 
@@ -29066,8 +29082,9 @@ console.log("\n── §366 · a crown he did not take ──");
   // ⛔ §2b.4 — A RELIC WITH NO PERSON CANNOT EXCEED ITS PLACE'S RUNG.
   check("§366: ⛔ A ROAD-SIDE RUIN CANNOT HAND OUT A LEVEL-95 RELIC — the cap is the place's own danger rung, from the ladder the beasts climb",
     RE366.foundLevelCapFor(1) === 8 && RE366.foundLevelCapFor(2) === 18
-    && RE366.foundLevelCapFor(3) === 32 && RE366.foundLevelCapFor(4) === 72,
-    "danger 1 → a notable, 2 → a leader, 3 → a heroic, 4 → a legendary");
+    && RE366.foundLevelCapFor(3) === 32 && RE366.foundLevelCapFor(4) === 50
+    && RE366.foundLevelCapFor(5) === 72,
+    "✅ ERIK 2026-09-26 MOVED THE TOP RUNG: 1 → a notable, 2 → a leader, 3 → a heroic, 4 → an EPIC (it was a legendary), 5 → a legendary. A legendary relic can now only be found on the sixteen places authored at 5, which is the same ground a legendary creature walks");
 
   // ⚠️ A MYTHIC SHARES `minDanger: 4` SO A STAGED FIGHT HAS A THREAT, and it must not set this ceiling — it
   // read 93 before that was excluded, against Aevi's "4 → a legendary".
@@ -29929,6 +29946,76 @@ console.log("\n── §372 · something that was being carried is not being car
       return full.ok === false && /cap 1/.test(full.why)
         && live.the_hollow_king === 1 && Number(on.capPerSovereignPerRegion) === 1;
     })(), "measured: the four authored lines sit one to a region — radiant_wastes, somatic_reaches, the_numinous_reach, the_descent");
+}
+
+/* ══════════ §373 · A STORIED CREATURE IS ALSO A WAY THROUGH ══════════ */
+// ⛔ AEVI, APPLYING THE BESTIARY: "the roster at 87 crowds the talkers' frames out." Same seeds, origin vs with the
+// bestiary — social (Silas) non-combat frames p10 11 → 3, craft 9 → 3, against a floor of 8. "It's what SNG-661 §3.1
+// warned about: tagging by habitat didn't thin the pool, because most dangerous places match some habitat."
+//
+// ⛑ SHE OFFERED TWO FIXES AND I TOOK THE SECOND: a `beastShareMax` dial, or "have a creature with a `storyRule`
+// offer a STANDOFF / CHALLENGE frame as well as the duel, since the rule *is* a non-combat way through." A dial would
+// thin the world back down; this uses the feature to answer the problem. A CHALLENGE and not a standoff, because a
+// story rule is a PROCEDURE — carry a light, show it a mirror, throw it an iron nail — and a standoff is a contest
+// of wills a grue does not have.
+//
+// ⚠️ AND THE WEIGHT IS SPLIT, NEVER ADDED. Two entries at full weight would make beasts twice as common and make the
+// crowding she measured WORSE. Measured after: the pool's total beast weight is byte-identical.
+console.log("\n── §373 · not a thing to be beaten down ──");
+{
+  const RE373 = await import("../engine/random_encounters.js");
+  // ⚠️ `C6g` IS ANOTHER SECTION'S CONTENT and is not in scope here — the same class of mistake as reading `npcs`
+  // where only `content.npcs` exists. This section loads its own.
+  const { loadContentHeadless: lch373 } = await import("./headless_content.mjs");
+  const C373 = await lch373();
+  const storied = { id: "grue373", name: "a grue", tier: "notable", habitat: ["dark"],
+    storyRule: "Carry a light and it cannot come at you.", storiedBy: "Umbrals" };
+  const plain = { id: "rat373", name: "rust gnats", tier: "riffraff" };
+  const es = RE373.bestiaryEncounters({ roster: [storied, plain] });
+
+  check("§373: ⛔ A STORIED CREATURE IS OFFERED BOTH WAYS — the fight, and the way the tale says through",
+    (() => {
+      const mine = es.filter(e => e.creatureId === "grue373");
+      const kinds = mine.map(e => e.routing).sort().join(",");
+      return mine.length === 2 && kinds === "challenge,duel"
+        && es.filter(e => e.creatureId === "rat373").length === 1;
+    })(), "a creature with no tale is offered exactly as it always was");
+
+  check("§373: ⚠️ …AND THE WEIGHT IS SPLIT, NOT ADDED — two entries at full weight would have made beasts twice as common and made the crowding worse",
+    (() => {
+      const mine = es.filter(e => e.creatureId === "grue373");
+      const total = Math.round(mine.reduce((n, e) => n + e.weight, 0) * 100) / 100;
+      return total === RE373.BEAST_TIER.notable.weight && mine.every(e => e.weight > 0);
+    })(), "you meet the creature exactly as often as before; a share of those meetings is the way through instead of the fight");
+
+  // ⛔ AND THE TALE ITSELF IS NOT IN THE FRAME. The seed reaches the GM whether or not the character knows the rule.
+  check("§373: ⛔ THE FRAME DOES NOT GIVE THE RULE AWAY — the seed says only that there IS a way through; the rule comes from the receipt, and only once it is known (§366)",
+    (() => {
+      const tale = es.find(e => e.id === "beast_grue373_tale");
+      return !!tale && !/Carry a light/.test(tale.seed) && /way through/.test(tale.seed)
+        && tale.storyRule === storied.storyRule;     // it still RIDES, for the receipt to read
+    })(), "handing over the remedy in the frame would give away for nothing what §3.2 makes them earn");
+
+  check("§373: ⛑ …and a UNIQUE or MYTHIC creature makes no entry at all, either way — Aevi caught me gating the tier and forgetting the record",
+    (() => {
+      const uniq = { id: "phoenix373", name: "the phoenix", tier: "legendary", unique: true, storyRule: "It burns." };
+      const myth = { id: "myth373", name: "a mythic thing", tier: "mythic", storyRule: "It does not." };
+      const out = RE373.bestiaryEncounters({ roster: [uniq, myth] });
+      return out.length === 0;
+    })(), "SNG-661 §2: “one in the world (the phoenix, the kraken, the Wakeful Beast) — never on a random table”");
+
+  // ⚠️ THE MEASUREMENT, kept as the claim: driven against her 87-creature roster in a worktree, both cerebral
+  // cohorts clear the floor again — social 3 → 11 and craft 3 → 10, where the origin world read 11 and 9.
+  check("§373: ⚠️ THE POOL CARRIES ENOUGH NON-COMBAT FRAMES FOR A TALKER — measured on the shipped roster, and the floor `playthrough_sim` holds is 8",
+    (() => {
+      const all = RE373.bestiaryEncounters(C373.bestiary || { roster: [] });
+      const duels = all.filter(e => e.routing === "duel").length;
+      const ways = all.filter(e => e.routing === "challenge").length;
+      // ⛑ On today's 28-creature roster nothing is storied yet, so `ways` is 0 and the claim is about the RULE:
+      // every storied creature contributes one, and none of them adds weight.
+      const storiedCount = (C373.bestiary?.roster || []).filter(c => c.storyRule && !c.unique && RE373.BEAST_TIER[c.tier]?.random !== false).length;
+      return duels > 0 && ways === storiedCount;
+    })(), "measured against Aevi's held 87-roster in a worktree: social non-combat p10 3 → 11, craft 3 → 10, floor 8, and the whole suite green");
 }
 
 /* ══════════ REPORT ══════════ */

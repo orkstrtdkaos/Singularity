@@ -181,7 +181,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.12.0";
+const APP_VERSION = "2.12.1";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -12181,7 +12181,11 @@ async function onAsk(text) {
 // ---------- world map ----------
 
 // SNG-080: danger, made legible on the map — so the player can SEE where fighting lives.
-function dangerLabel(dl) { return ["safe", "quiet", "uneasy", "dangerous", "deadly"][Math.max(0, Math.min(4, dl | 0))]; }
+// ✅ ERIK 2026-09-26 — A SIXTH RUNG NEEDED A SIXTH WORD. This array had five and clamped to 4, so a place authored
+// at danger 5 read "deadly" — the same word as a 4, which is the silent-4 Aevi asked me to hunt for.
+// ⚠️ "unsurvivable" IS MY PLACEHOLDER AND THE WORD IS AEVI'S. It is the only rung label I have ever added and the
+// prose in this game is hers; say a better one and I will change it.
+function dangerLabel(dl) { return ["safe", "quiet", "uneasy", "dangerous", "deadly", "unsurvivable"][Math.max(0, Math.min(5, dl | 0))]; }
 
 // SNG-154 stage 6: ZOOM IS NAVIGATION BETWEEN TIERS, not a scale slider. 95 places on one
 // 800×440 canvas is unreadable — every label collides and the thing you're looking for is a dot
@@ -13259,7 +13263,7 @@ function renderMap(selectedId = null) {
       const visited = isVisited(l.id);
       const reachable = canTravelBetween(here, l.id, CONTENT.locations, character.placeEdges);
       const pm = character.placeMemory?.[l.id];
-      const dl = Math.max(0, Math.min(4, l.dangerLevel | 0)); // SNG-080: graduated danger, findable on the map
+      const dl = Math.max(0, Math.min(5, l.dangerLevel | 0)); // SNG-080: graduated danger, findable on the map · ✅ Erik: the scale tops out at 5
       const cls = `map-node ${terrainClass(l)} dl${dl} ${l.id === here ? "here" : ""} ${reachable ? "reachable" : ""} ${visited ? "" : "unvisited"} ${dl >= 3 ? "danger" : ""} ${selectedId === l.id ? "selected" : ""}`;
       const known = isKnown(l.id); // SNG-117
       const tip = visited
@@ -13317,7 +13321,7 @@ function renderMap(selectedId = null) {
     details = `<div class="map-details">
       <div class="map-details-head">
         <h3>${esc(known ? l.name : "An unknown place")}${!visited && known ? ` <span class="hint">— known of, not yet been</span>` : ""}</h3>
-        ${(l.dangerLevel | 0) >= 1 ? `<span class="rep-band danger-chip dl${Math.min(4, l.dangerLevel | 0)}">${esc(dangerLabel(Math.min(4, l.dangerLevel | 0)))}</span>${infoDot("world.danger")}` : `<span class="rep-band trusted">safe</span>`}
+        ${(l.dangerLevel | 0) >= 1 ? `<span class="rep-band danger-chip dl${Math.min(5, l.dangerLevel | 0)}">${esc(dangerLabel(Math.min(5, l.dangerLevel | 0)))}</span>${infoDot("world.danger")}` : `<span class="rep-band trusted">safe</span>`}
         ${visited ? (() => { const d = locationDensity(l, CONTENT.substrateModel); if (d == null) return ""; const lab = d < 0.34 ? "thin lattice" : d > 0.66 ? "dense lattice" : "even lattice"; return `<span class="rep-band" title="Substrate density here: ${Math.round(d * 100)}%. Continuous craft thrives dense, starves thin; Returned craft the reverse.">${lab}</span>`; })() : ""}
         ${l.id === here ? `<span class="rep-band trusted">you are here</span>` : ""}
         ${(() => { const s = l.communityId ? standingWith(character, l.communityId, CONTENT.rules) : null; return s?.score ? `<span class="rep-band ${s.band}" title="Your standing here — ${s.band} (${s.score})">${esc(s.band)}</span>` : ""; })()}

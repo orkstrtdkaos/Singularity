@@ -36,7 +36,10 @@ const DANGER_FLOOR = 1; // SNG-225 §4b: a place in the world is never "safest p
 export function dangerOf(location, { lift = 0 } = {}) {
   const raw = location?.dangerLevel;
   const base = raw == null ? DANGER_FLOOR : (raw | 0);
-  return Math.max(0, Math.min(4, base + (Number(lift) || 0)));
+  // ✅ ERIK 2026-09-26 — THE SCALE TOPS OUT AT 5, not 4. Sixteen places are authored at 5 (The Maw, The Unlit
+  // Deep, The Wellspring Deep, the Sovereign seats) and every one of them was read as a 4: an authored claim about
+  // the worst ground in the world with no reader. ⛑ A legendary rolls only at 5, and rarely; mythic never.
+  return Math.max(0, Math.min(5, base + (Number(lift) || 0)));
 }
 
 /** SNG-225 §4a: a real dangerLevel for a MINTED location, so it is never null (null guts encounter eligibility,
@@ -45,10 +48,10 @@ export function dangerOf(location, { lift = 0 } = {}) {
  *  Low-but-nonzero floor of 1 (a transit waypost is not danger 0). Pure, clamped 1..4. */
 export function deriveDangerLevel(location, { baseDanger = null } = {}) {
   const tags = (location?.tags || []).map(t => String(t).toLowerCase());
-  let d = baseDanger != null ? Math.max(0, Math.min(4, baseDanger | 0)) : DANGER_FLOOR;
+  let d = baseDanger != null ? Math.max(0, Math.min(5, baseDanger | 0)) : DANGER_FLOOR;
   if (tags.some(t => RISKY_TAGS.some(r => t.includes(r)))) d += 1;
   if (tags.some(t => SAFE_TAGS.some(s => t.includes(s)))) d -= 1;
-  return Math.max(1, Math.min(4, d));
+  return Math.max(1, Math.min(5, d));
 }
 
 // SNG-229 §2b: tier → the danger gate + the opponent's threat + how often it turns up. A riffraff is a common
@@ -94,7 +97,8 @@ export const BEAST_TIER = {
   leader:    { minDanger: 2, threat: threatFor("leader"),    weight: 1 },
   heroic:    { minDanger: 3, threat: threatFor("heroic"),    weight: 1 },
   epic:      { minDanger: 4, threat: threatFor("epic"),      weight: 1 },
-  legendary: { minDanger: 4, threat: threatFor("legendary"), weight: 0.1 },
+  // ✅ ERIK 2026-09-26: "Legendary creatures roll only at danger 5, and rarely." The 0.1 weight stands.
+  legendary: { minDanger: 5, threat: threatFor("legendary"), weight: 0.1 },
   // ⛔ MYTHIC NEVER ROLLS ON A ROAD (§1b.3). "Each is unique in the world and is met through its arc or a
   // quest, not a random table. A mythic is a campaign." `random: false` is what keeps it off the table, and
   // the row exists so that a mythic creature still has a threat wherever a fight is staged deliberately.
@@ -111,7 +115,10 @@ export const BEAST_TIER = {
  *  3 → a heroic, 4 → a legendary. A relic from a PERSON is not capped by this — their own level is the
  *  honest number, and it came with a name attached. PURE. */
 export function foundLevelCapFor(danger) {
-  const d = Math.max(0, Math.min(4, Number(danger) || 0));
+  // ⛔ THE FIRST SILENT 4 AEVI'S ASK TURNED UP, and it was in this function: the input clamped to 4, so a
+  // danger-5 place read as a 4 — and once legendary moved to minDanger 5 the ceiling COLLAPSED from 72 to 50
+  // everywhere, including the sixteen places the whole change was for.
+  const d = Math.max(0, Math.min(5, Number(danger) || 0));
   let best = 1;
   for (const row of Object.values(BEAST_TIER)) {
     if (row.minDanger > d) continue;
@@ -148,6 +155,10 @@ export function bestiaryEncounters(bestiary = {}) {
     // ⛑ §1b.3 — A MYTHIC IS A CAMPAIGN, not a thing you meet on a road. It keeps its threat for a fight that
     // is staged deliberately; it is simply never offered by the random pool.
     if (t.random === false) return null;
+    // ⛔ AND `unique` NEVER ROLLS EITHER, whatever its tier. SNG-661 §2: "one in the world (the phoenix, the kraken,
+    // the Wakeful Beast) — never on a random table." ⚠️ I gated the TIER and forgot the RECORD, and the phoenix and
+    // the kraken are unique LEGENDARIES, so they would have rolled. Aevi caught it reading the code, not the output.
+    if (c.unique === true) return null;
     return {
       id: `beast_${c.id}`, flavor: "dangerous", weight: t.weight, minDanger: t.minDanger,
       // ⛔ SNG-661 §3.1 — HABITAT IS THE TAGS, so a grue only rises where it is dark and a siren only sings
@@ -179,7 +190,35 @@ export function bestiaryEncounters(bestiary = {}) {
       ...(c.storyRule ? { storyRule: String(c.storyRule), storiedBy: c.storiedBy || null } : {}),
       seed: smartClamp(`${c.name || c.id} — ${c.look || ""}${c.danger ? " " + c.danger : ""}`.trim(), 400)
     };
-  }).filter(Boolean);
+  }).filter(Boolean).flatMap(e => {
+    // ⛔ SNG-661 §3.2 + AEVI'S FRAME FINDING — A STORIED CREATURE IS ALSO A WAY THROUGH, and the pool should be able
+    // to offer it that way. Her measurement: the roster at 87 took the cerebral cohorts' non-combat frames from 11
+    // and 9 down to THREE against a floor of eight, because 59 more duels crowd everything else out. Habitat tagging
+    // did not thin the pool — most dangerous places match some habitat.
+    //
+    // ⛑ The fix is the feature, not a cap: a `storyRule` IS a non-combat answer, so a creature that has one emits a
+    // CHALLENGE beside its duel. A challenge and not a standoff, because a story rule is a PROCEDURE — carry a light,
+    // show it a mirror, throw it an iron nail — and a standoff is a contest of wills a grue does not have.
+    //
+    // ⛔ AND THE WEIGHT IS SPLIT, NEVER ADDED. The live pool rolls on weight: a second entry at full weight would
+    // make beasts twice as common and make the crowding she measured WORSE. Split, the creature turns up exactly as
+    // often as before, and a share of those meetings is the way through instead of the fight.
+    if (!e.storyRule) return [e];
+    // ⚠️ `Number`, not `num`: this module has no `num` helper. My `"num(" in t` guard matched a substring of some
+    // other identifier — the same false-positive shape as the `BEAST_TIER` check that matched a comment.
+    const share = Math.max(0.01, Number(e.weight) || 1);
+    const half = Math.round((share / 2) * 100) / 100;
+    return [
+      { ...e, weight: half },
+      { ...e, id: `${e.id}_tale`, weight: share - half, routing: "challenge", stages: 2, flavor: "dangerous",
+        // ⚠️ THE TALE IS NOT IN THE SEED. The seed reaches the GM whether or not the character knows the rule, and
+        // handing over the remedy here would give away for nothing what §3.2 makes them earn. The frame says only
+        // that there is a way through this that is not a fight; `encounterReceiptForGM` supplies the rule itself,
+        // and only once `storyRuleKnown` is set.
+        seed: smartClamp(`${e.opponent?.name || e.name} is here, and this is not a thing to be beaten down — there is a way through it. Narrate the situation and what it would take; if the character knows the old rule about it, they will act on it.`, 400),
+      },
+    ];
+  });
 }
 
 /** ⛔ SNG-661 §3.2 — WHETHER THIS CHARACTER KNOWS THE TALE. Three ways, and only three:
@@ -228,9 +267,16 @@ function isSafeRest(location) {
 /** Flavor bias by danger: peaceful flavors always present (grace floor); perilous
  *  ones scale up with danger. Keeps "every place keeps a chance of beauty." */
 export function flavorMultiplier(flavor, danger) {
-  const d = Math.max(0, Math.min(4, danger | 0));
-  if (PEACEFUL.includes(flavor)) return 1 + (4 - d) * 0.35; // 2.4 (safe) … 1.0 (deadly)
-  return 0.15 + d * 0.6;                                    // 0.15 (safe) … 2.55 (deadly)
+  // ⛔ THE SECOND SILENT 4, and the one that shows why a clamp is never just a number: the arithmetic below was
+  // written for a 0..4 world. Raising the clamp alone would have made the peaceful term `(4 - d)` NEGATIVE at
+  // danger 5 — a place so bad that beauty has a negative chance of happening, which is not a thing.
+  // ⛑ The SPAN is what the terms are about, so it is named once and both lines read it. At 5 the grace floor
+  // reaches its minimum and the perilous weighting reaches its maximum, which is what "the worst ground in the
+  // world" should mean — and every value from 0 to 4 is byte-identical to what shipped before.
+  const TOP = 5;
+  const d = Math.max(0, Math.min(TOP, danger | 0));
+  if (PEACEFUL.includes(flavor)) return 1 + Math.max(0, 4 - d) * 0.35;   // 2.4 (safe) … 1.0 (deadly) … 1.0 (unsurvivable)
+  return 0.15 + d * 0.6;                                                 // 0.15 (safe) … 2.55 (deadly) … 3.15 (unsurvivable)
 }
 
 /** Does this encounter entry fit the location? DANGER gate + tag match. SNG-225 §4c (Erik's call): the

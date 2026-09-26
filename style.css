@@ -894,6 +894,11 @@ img[data-lightbox] { cursor: zoom-in; }
 .danger-chip.dl2 { border-color: #c9a24a; color: #c9a24a; }
 .danger-chip.dl3 { border-color: #d47a3a; color: #d47a3a; }
 .danger-chip.dl4 { border-color: var(--danger); color: var(--danger); }
+/* ✅ ERIK 2026-09-26 — the sixth rung. Sixteen places are authored at danger 5 and every one of them drew as a 4,
+   so the worst ground in the world looked exactly like ordinary deadly ground. Filled rather than outlined: at this
+   rung the chip is the warning, not a label with a border. */
+.danger-ring.dl5 { stroke: var(--danger); stroke-width: 2; stroke-dasharray: 2 2; }
+.danger-chip.dl5 { border-color: var(--danger); background: color-mix(in srgb, var(--danger) 22%, transparent); color: var(--ink); }
 /* SNG-066 feedback */
 .fb-types { display: flex; gap: 8px; flex-wrap: wrap; }
 .fb-type { font-family: var(--font-ui); font-size: 14px; padding: 8px 14px; border-radius: 8px; border: 1px solid var(--border); background: var(--panel2); color: var(--ink); cursor: pointer; }

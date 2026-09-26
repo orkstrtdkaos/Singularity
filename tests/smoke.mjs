@@ -26,7 +26,7 @@ import { reconcile, reconcileContent, CHARACTER_STEPS, CONTENT_STEPS, topReconci
 import { sceneImage, lookFor as lookFor163} from "../engine/art.js";
 import { resolveSaveConflict, raceTimeout } from "../engine/sync.js";
 import { namesMatch as nm2, smartClamp } from "../engine/namematch.js";
-import { rollTrigger, pickEncounter, buildOffer, isEligible, flavorMultiplier, synthesizeDuelDef, synthesizeChallengeDef, canIncapacitate, dangerOf, deriveDangerLevel, bestiaryEncounters, eligibleEncountersFor, narrativeTimeChance, rollNarrativeTime, classifyNarrativeKind, resolvePacing, beatHours } from "../engine/random_encounters.js";
+import { rollTrigger, pickEncounter, buildOffer, isEligible, flavorMultiplier, synthesizeDuelDef, synthesizeChallengeDef, canIncapacitate, dangerOf, deriveDangerLevel, bestiaryEncounters, BEAST_TIER, foundLevelCapFor, eligibleEncountersFor, narrativeTimeChance, rollNarrativeTime, classifyNarrativeKind, resolvePacing, beatHours } from "../engine/random_encounters.js";
 import { frameModel, encounterKind, frameExits, frameSize, frameTransition, chaseFromFight, frameCollapsible, collapseMode, collapseResult, collapseFloor, swingDegree, wardAgainst, wardBroken, trivializes, playerReceiptLine, FRAME_KINDS, FRAME_FREEFORM_CUE } from "../engine/encounterFrame.js";
 import { renownScore, bandForRenown, challengersForBand, findPrestigeArc, challengerPoolFor, pickChallenger, challengerToDuelEntry, challengeDeedWeight, challengeLossWeight, shouldFireChallenger, challengeCooldown } from "../engine/recurrence.js";
 import { typeAffinity, vectorAffinity, locationAffinity, affinityReceipt } from "../engine/affinities.js";
@@ -1532,7 +1532,10 @@ check("fresh character: no phantom xp or levels", fsum.xpGained === 0 && fresh.l
   const medFight = buildOffer(fightEntry, charWith(["mediators_tongue"]), { mediators_tongue: { name: "Mediator's Tongue" } }, rules);
   check("mediator defuse offered on a fight", medFight.choices.some(c => c.abilityId === "mediators_tongue"));
 
-  check("dangerOf floors a missing dangerLevel to 1 (SNG-225 §4b — not 0, which starved the pool) + clamps 9→4", dangerOf({}) === 1 && dangerOf({ dangerLevel: 9 }) === 4);
+  // ✅ ERIK 2026-09-26: the scale tops out at 5, so a runaway value clamps to 5. The claim this check is about is the
+  // FLOOR, and it is untouched: a MISSING field still reads 1, because 0 would silently disqualify every
+  // `minDanger > 0` entry and starve the pool.
+  check("dangerOf floors a missing dangerLevel to 1 (SNG-225 §4b — not 0, which starved the pool) + clamps 9→5", dangerOf({}) === 1 && dangerOf({ dangerLevel: 9 }) === 5);
 }
 
 // --- SNG-BATCH-3 Phase 2: location affinities (SNG-013) ---
@@ -10120,7 +10123,9 @@ await (async () => {
   // §4a: deriveDangerLevel — inherit the neighbourhood, nudge by tags, floor 1, clamp 4.
   check("225 §4a: derive inherits the neighbourhood's danger (a road near a danger-2 town ≈ 2)", deriveDangerLevel({ tags: ["transitional"] }, { baseDanger: 2 }) === 2);
   check("225 §4a: a transit stub with no neighbourhood still floors to 1 (never null/0)", deriveDangerLevel({ tags: ["transitional"] }) === 1);
-  check("225 §4a: a RISKY tag lifts, a SAFE tag lowers, clamped 1..4", deriveDangerLevel({ tags: ["disputed"] }, { baseDanger: 2 }) === 3 && deriveDangerLevel({ tags: ["hearth"] }, { baseDanger: 2 }) === 1 && deriveDangerLevel({ tags: ["ruin", "wild"] }, { baseDanger: 4 }) === 4);
+  // ✅ ERIK 2026-09-26: 1..5 now, so a risky tag on already-deadly ground can reach the top rung instead of stopping
+  // one short of it. ⛑ The two halves that matter are unchanged: a risky tag lifts, a safe tag lowers.
+  check("225 §4a: a RISKY tag lifts, a SAFE tag lowers, clamped 1..5", deriveDangerLevel({ tags: ["disputed"] }, { baseDanger: 2 }) === 3 && deriveDangerLevel({ tags: ["hearth"] }, { baseDanger: 2 }) === 1 && deriveDangerLevel({ tags: ["ruin", "wild"] }, { baseDanger: 4 }) === 5 && deriveDangerLevel({ tags: ["ruin", "wild"] }, { baseDanger: 5 }) === 5);
 
   // wiring: minted with a real danger + a load backfill heals existing null-danger gen-locations.
   const appSrc225b = readFileSync(join(root, "app.js"), "utf8");
@@ -10203,7 +10208,27 @@ await (async () => {
 
   // §2b: every creature becomes a danger-gated DUEL encounter — the fight pool finally has monsters.
   const monsters = bestiaryEncounters(bestiary);
-  check("229 §2b: every roster creature becomes an encounter entry (a source of monsters for the pool)", monsters.length === bestiary.roster.length && monsters.every(m => /^beast_/.test(m.id) && m.opponent && m.routing === "duel"));
+  // ⛔ CCODE-528 AND SNG-661 EACH TOOK CREATURES OUT OF THE RANDOM POOL ON PURPOSE, and this asserted a raw
+  // `monsters.length === roster.length`. A mythic has `random: false` — it is met through an arc, not on a road —
+  // and a `unique` creature is one in the world, so neither makes an entry. Aevi hit it applying the bestiary: 84
+  // of 87. ⛑ BOTH HALVES ARE ASSERTED, because a raw count would also be satisfied by a version that let a mythic
+  // roll: every creature that SHOULD make an entry does, and every one that must not, does not.
+  const NEVER_ROLLS = (c) => BEAST_TIER[c.tier]?.random === false || c.unique === true;
+  const shouldRoll = bestiary.roster.filter(c => c && c.id && BEAST_TIER[c.tier] && !NEVER_ROLLS(c));
+  const mustNot = bestiary.roster.filter(c => c && c.id && NEVER_ROLLS(c));
+  // ⚠️ AND A CREATURE MAY MAKE MORE THAN ONE ENTRY NOW. A storied one emits its duel AND a CHALLENGE — the way
+  // the tale says through — at half the weight each, which is how Aevi's non-combat frame floor was answered without
+  // thinning the roster. So the claim is per CREATURE, not a row count: everyone who should roll has at least one
+  // entry, nobody who must not has any, and the total WEIGHT is unchanged.
+  const covered = new Set(monsters.map(m => m.creatureId));
+  const weightOf = (list) => Math.round(list.reduce((n, m) => n + (Number(m.weight) || 0), 0) * 100) / 100;
+  const tierWeight = Math.round(shouldRoll.reduce((n, c) => n + (Number(BEAST_TIER[c.tier]?.weight) || 0), 0) * 100) / 100;
+  check("229 §2b: every creature that SHOULD become an encounter entry does — a mythic or a unique one never does, and splitting a storied one into two frames does not change how often you meet it",
+    shouldRoll.every(c => covered.has(c.id))
+    && !mustNot.some(c => covered.has(c.id))
+    && monsters.every(m => /^beast_/.test(m.id) && m.creatureId && (m.routing === "duel" ? !!m.opponent : m.routing === "challenge"))
+    && weightOf(monsters) === tierWeight,
+    `${monsters.length} entries from ${bestiary.roster.length} creatures · ${shouldRoll.length} roll · ${mustNot.length} never (${mustNot.map(c => c.id).slice(0, 4).join(", ") || "none"}) · weight ${weightOf(monsters)} vs ${tierWeight}`);
   check("229 §2b: tier gates danger — a riffraff is low-danger, an epic is danger-4 (rare, deadly)", monsters.some(m => m.minDanger === 1) && monsters.some(m => m.minDanger === 4) && monsters.every(m => m.opponent.threat > 0));
   check("229 §2b: region-free (SNG-225 §4c) + offered as a DUEL with a decline/flee path (SNG-002b)", monsters.every(m => (m.regions || []).includes("*") && m.avoidable === true && m.opponent.yieldAt > 0));
   check("229 §2b: the creature's look + which crafts answer it ride on the entry (GM narrates; player knows the pressures)", monsters.every(m => m.creatureId && Array.isArray(m.pressures) && typeof m.seed === "string" && m.seed.length > 0));

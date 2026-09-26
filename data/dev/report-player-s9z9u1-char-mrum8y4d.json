@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "dev_report",
-  "at": "2026-09-26T03:38:36.365Z",
+  "at": "2026-09-26T03:40:49.166Z",
   "build": "2.9.1",
   "field": null,
   "character": {
@@ -9,9 +9,9 @@
     "name": "Loki",
     "playerKey": "player-s9z9u1",
     "level": 10,
-    "rev": 944,
+    "rev": 946,
     "day": 8,
-    "turns": 240,
+    "turns": 241,
     "countingSince": "2026-09-14T22:51:56.913Z",
     "countsCoverWholeLife": false
   },
@@ -141,19 +141,19 @@
   },
   "ops": {
     "emitted": {
-      "sceneSummary": 240,
-      "choices": 240,
-      "characterDeltas": 124,
-      "scene": 240,
-      "placeUpdates": 30,
-      "codexUpdates": 140,
-      "timeOps": 193,
-      "offer": 44,
+      "sceneSummary": 241,
+      "choices": 241,
+      "characterDeltas": 125,
+      "scene": 241,
+      "placeUpdates": 31,
+      "codexUpdates": 141,
+      "timeOps": 194,
+      "offer": 45,
       "generateRequest": 7,
-      "sceneEnded": 109,
-      "npcUpdates": 191,
+      "sceneEnded": 110,
+      "npcUpdates": 192,
       "moveTo": 10,
-      "gambitApt": 68,
+      "gambitApt": 69,
       "deeds": 14,
       "questUpdates": 45,
       "standingOps": 4,
@@ -171,11 +171,12 @@
       "delegateOps": 1,
       "scene_summary": 1,
       "partyOps": 4,
-      "bandOps": 1
+      "bandOps": 1,
+      "exchangeOps": 1
     },
     "outcomes": {
       "offer": {
-        "applied": 50,
+        "applied": 51,
         "rejected": 2,
         "lastWhy": "rejected-shape",
         "exceedsEmissions": true
@@ -199,7 +200,6 @@
       "deathOps",
       "debtOps",
       "deriveItem",
-      "exchangeOps",
       "gambitOps",
       "holdTrades",
       "holdingOps",
@@ -217,10 +217,10 @@
       "unlockPrecursor",
       "unlockSubstrate"
     ],
-    "neverCount": 22,
+    "neverCount": 21,
     "knownCount": 48,
     "unknown": {
-      "sceneSummary": 68,
+      "sceneSummary": 69,
       "scene_summary": 1
     },
     "inProse": {},
@@ -247,12 +247,12 @@
       }
     },
     "inventory": {
-      "n": 2,
+      "n": 3,
       "fields": {
         "customName": 0,
         "aliases": 0,
-        "kind": 2,
-        "description": 2
+        "kind": 3,
+        "description": 3
       }
     }
   },

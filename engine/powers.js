@@ -184,6 +184,12 @@ export function notePowerLoss(character, power, killed = {}, { day = null } = {}
     st.lost[at] = (Number(st.lost[at]) || 0) + k;
     took += k;
   }
+  // ⛔ CCODE-525 — AND A SEPARATE TALLY OF WHAT **YOU** TOOK. `st.lost` means "heads this power no longer
+  // has" and has TWO writers: this one, and `powerPass`'s feud attrition. `contingentsOf` is right to subtract
+  // both — they really are gone — but `noticesYou` read the same field and told the player "you have killed 32
+  // of theirs" about a feud they had no part in. Erik, level 10 with one hold and no band, was credited with
+  // 102 kills across four powers. ⛑ This field has ONE writer, and it is the one the player is standing in.
+  if (took) st.lostToYou = (Number(st.lostToYou) || 0) + took;
   if (!took) return null;
   const after = headsOf(contingentsOf(power, character));
   st.lastLossDay = day ?? st.lastLossDay ?? null;
@@ -412,10 +418,13 @@ export function powerPass(character, { content = null, rules = null, day = null 
   const st = (id) => (character.powerState[id] = character.powerState[id] || {});
   const byId = new Map(all.map(p => [p.id, p]));
   const news = [];
-  const credit = (id, kind) => {
+  const credit = (id, kind, cause = null) => {
     const p = byId.get(id);
     if (!p || !isStanding(character, p)) return;
     const s = st(id);
+    // ⛑ CCODE-525 — the cause rides with the tally so the row can name it when the step lands. A report of
+    // people dying with no cause in it, arriving in your own news, reads as a thing you did.
+    if (kind !== "win" && cause) s.lossFrom = String(cause);
     if (kind === "win") s.wins = (Number(s.wins) || 0) + 1;
     else s.losses = (Number(s.losses) || 0) + 1;
     // ⛑ A WIN CANCELS A LOSS BEFORE IT BUILDS. Otherwise a power that alternates would grow AND shrink.
@@ -448,7 +457,12 @@ export function powerPass(character, { content = null, rules = null, day = null 
       if (took > 0) {
         s.lost = (s.lost && typeof s.lost === "object") ? s.lost : {};
         s.lost[0] = (Number(s.lost[0]) || 0) + took;
-        if (isKnownPower(character, p.id)) news.push({ text: `${p.name || p.id} has lost people it will not get back.`, section: "world", powerId: p.id, shrank: took });
+        const by = s.lossFrom ? (byId.get(s.lossFrom)?.name || s.lossFrom) : null;
+        s.lossFrom = null;
+        if (isKnownPower(character, p.id)) news.push({
+          text: by ? `${p.name || p.id} has lost people it will not get back — ${took} of them, to its feud with ${by}.`
+            : `${p.name || p.id} has lost people it will not get back — ${took} of them, to a quarrel of its own.`,
+          section: "world", powerId: p.id, shrank: took });
       }
     }
   };
@@ -463,7 +477,8 @@ export function powerPass(character, { content = null, rules = null, day = null 
     if (effect === "liegeWin" && p.answersTo?.power) credit(p.answersTo.power, "win");
     else if (effect === "selfWin") credit(p.id, "win");
     else if (effect === "bothLose") {
-      for (const r of (Array.isArray(p.rivals) ? p.rivals : []).filter(id => byId.has(id))) { credit(p.id, "loss"); credit(r, "loss"); }
+      // ⚠️ EACH SIDE IS TOLD WHO IT IS LOSING TO — the feuder's rival, and the rival's feuder.
+      for (const r of (Array.isArray(p.rivals) ? p.rivals : []).filter(id => byId.has(id))) { credit(p.id, "loss", r); credit(r, "loss", p.id); }
     }
     // ⛔ AND NOTHING IS NARRATED FOR TAKING A VERB. My first version wrote a line every time a power tolled,
     // tributed or pushed outward — and TWO gates caught it in the same run: §325 ("a pass with nothing to say
@@ -581,7 +596,10 @@ export function noticesYou(character, power, { content = null, rules = null, wor
   if (want.has("crossed")) {
     if (st?.broken) return { trigger: "crossed", why: "you finished them" };
     if (Array.isArray(st?.holdsTaken) && st.holdsTaken.length) return { trigger: "crossed", why: "you took ground of theirs" };
-    const killed = Object.values(st?.lost || {}).reduce((n, x) => n + (Number(x) || 0), 0);
+    // ⛔ CCODE-525 — `lostToYou`, NOT `lost`. `lost` is every head the power no longer has, feud attrition
+    // included; this is the half the player did. A power grinding down its rival does not make an enemy of a
+    // bystander, and telling them it does is the game accusing them of a war they never fought.
+    const killed = Math.max(0, Number(st?.lostToYou) || 0);
     if (killed > 0) return { trigger: "crossed", why: `you have killed ${killed} of theirs` };
   }
 

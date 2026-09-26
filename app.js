@@ -180,7 +180,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.9.10";
+const APP_VERSION = "2.10.0";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -17096,6 +17096,68 @@ function showOutfit(unitId, index) {
  *  ⚠️ AND WHAT THEY BRING IS NOT INVENTED EITHER: their families are `contributionsOf` with the evidence read (CCODE-402, the same
  *  answer the party screen gives), and their quality is their derived level. A row says both, because "who do I recruit" is a
  *  question about what the unit LACKS, and the gaps are on the screen behind this one. */
+/** ⛔ CCODE-524 · ERIK: "I need an easy way to add people I know to my party, band, and legion."
+ *
+ *  The band had this picker and the party had NO DOOR AT ALL — its empty state said "bring someone forward from
+ *  a band on the Bands tab", so a player who knows sixteen people and holds one place could reach none of them:
+ *  a band needs three command slots or two holdings, and the party needed a band.
+ *
+ *  ⚠️ GATED ON `isRecruitable`, NOT ON THE FORWARD BOND. Erik's CCODE-511 ruling splits the two: closeness
+ *  buys a named place, a stance and a starred craft; anyone who will come at all can travel with you. A picker
+ *  gated on the forward bond would refuse the very people this door exists to add.
+ *
+ *  ⛑ And it writes through `recruit`, the one writer of a company row, so a player's ask and the GM's
+ *  `partyOps` join land identically — including the `companyPlaces` cap, which decides who comes FORWARD and
+ *  no longer refuses the join. */
+function showPartyAddPicker() {
+  document.getElementById("help-pop")?.remove();
+  const reg = character.npcRegistry || {};
+  const already = new Set(activeCompany(character).map(m => String(m.npcId)));
+  for (const cid of (character.companions || [])) already.add(String(cid));
+  const ctx = obCtx();
+  const rows = Object.entries(reg)
+    .filter(([id, n]) => !already.has(String(id)) && isRecruitable({ ...n, id }))
+    .map(([id, n]) => {
+      const does = contributionsOf({ ...n, id }, { evidence: true });
+      // ⛑ THE BOND IS SHOWN, NEVER USED AS A BAR — it is what the player is deciding about, and the card says
+      // plainly which tier this person would join at.
+      return { id, n, does, level: levelOfPerson(character, id, { content: CONTENT, worldDay: ctx.worldDay }) || derivedLevel(n) || 1,
+        band: relationshipBand(Number(n.relationship) || 0), forward: bondAllowsForward({ ...n, id }) };
+    })
+    .sort((a, b) => (b.forward ? 1 : 0) - (a.forward ? 1 : 0) || b.level - a.level || String(a.n.name || "").localeCompare(String(b.n.name || "")));
+  if (!rows.length) { alert("Everyone you know who would come is already walking with you."); return; }
+  const pop = document.createElement("div");
+  pop.id = "help-pop"; pop.className = "help-overlay";
+  const line = (r) => `<button class="opt" data-party-take="${esc(r.id)}" data-hay="${esc(String(r.n.name || "").toLowerCase() + " " + String(r.n.role || "").toLowerCase())}" style="display:block;width:100%;text-align:left;margin:2px 0">
+    ${esc(r.n.name || r.id)} <span class="cost">${esc(r.n.role || "")}${r.n.role ? " · " : ""}level ${r.level} · ${esc(r.band)}${r.forward ? " · can be brought forward" : " · stands in the line"}</span></button>`;
+  pop.innerHTML = `<div class="help-card" role="dialog" aria-label="Ask someone to walk with you" style="max-height:min(86vh,760px); display:flex; flex-direction:column; overflow:hidden">
+    <div class="whois-head" style="flex:0 0 auto">Who walks with you?</div>
+    <div style="flex:0 0 auto; padding:6px 0">
+      <input id="party-filter" type="text" placeholder="Type to narrow — ${rows.length} you could ask" style="width:100%" autocomplete="off">
+    </div>
+    <div style="flex:1 1 auto; overflow-y:auto; -webkit-overflow-scrolling:touch">${rows.map(line).join("")}</div>
+    <div class="help-foot" style="flex:0 0 auto">
+      <span class="hint">Closeness decides who can be brought FORWARD — a named place, a stance, a starred craft. Anyone who will come can travel with you and stand in the line.</span>
+      <button class="btn" id="help-close">Cancel</button>
+    </div></div>`;
+  document.body.appendChild(pop);
+  const close = () => pop.remove();
+  document.getElementById("help-close").onclick = close;
+  pop.onclick = (e) => { if (e.target === pop) close(); };
+  const filt = document.getElementById("party-filter");
+  filt.oninput = () => { const q = filt.value.trim().toLowerCase();
+    for (const b of pop.querySelectorAll("[data-party-take]")) b.style.display = (!q || (b.dataset.hay || "").includes(q)) ? "block" : "none"; };
+  filt.focus();
+  for (const b of pop.querySelectorAll("[data-party-take]")) b.onclick = () => {
+    const id = b.dataset.partyTake;
+    const r = recruit(character, id, { roles: ["ally"], day: absoluteWorldDay(), ladder: CONTENT.rules?.subAttributeLadder || null });
+    if (!r?.ok) { alert(r?.why || "They will not come."); return; }
+    const nm = character.npcRegistry?.[id]?.name || CONTENT.npcs?.[id]?.name || id;   // ⚠️ every `nameOf` in this file is a LOCAL closure; there is no global one to call
+    queueHoldingEvent(character, `${nm} walks with you now.`);
+    saveCharacter(character); close(); renderPartyTab();
+  };
+}
+
 function showBandRecruitPicker(unitId) {
   document.getElementById("help-pop")?.remove();
   const unit = unitsOf(character).find(u => u.id === unitId);
@@ -17720,7 +17782,16 @@ function partyNow() {
   const present = all.filter(a => a.present !== false && !a.isPlayer && a.kind !== "player");
   const split = lineSplit(all, { chosen: character.partyForward || null, lead, presentCount: present.length });
   const ctx = obCtx();
-  const allies = present.map(a => ({ a, p: jobPersonFor(character, a.id, ctx) })).filter(x => x.p);
+  // ⛔ CCODE-524 · NOBODY TRAVELLING WITH YOU IS INVISIBLE ON THE SCREEN THAT LISTS WHO TRAVELS WITH YOU.
+  // This was `.filter(x => x.p)`, and `jobPersonFor` ends `if (!skills.length) return null` — right for its own
+  // question (*"the ones with nothing to act with are left out rather than faked"* is about sending somebody on
+  // a JOB) and wrong for this one. ⚠️ Measured on Loki's save: of four people travelling with him the tab showed
+  // ONE. Two were company rows written under ids no registry held (repaired by reconcile step 84) and the
+  // fourth was Cy — an AUTHORED companion the game finds perfectly — dropped for having no craft to name.
+  // ⛑ Erik's own ruling is the rule: "anyone who joins you for whatever reason in the story can and should be
+  // reflected in your party list and CAN help in fights — or can hide behind you." So they are all here, and
+  // the ones the engine can say nothing more about carry the reason instead of vanishing.
+  const allies = present.map(a => ({ a, p: jobPersonFor(character, a.id, ctx) || null }));
   return { split, allies };
 }
 
@@ -17745,6 +17816,19 @@ function renderPartyTab() {
     return bondAllowsForward(rec);
   };
   const card = ({ a, p }) => {
+    // ⛔ CCODE-524 — AND ONE WITH NO SHEET AT ALL still has a row. `jobPersonFor` answers null for anybody with
+    // no craft that clears its filter, which on a real save is a named companion; the name comes from `alliesOf`,
+    // which knows it, and the row says what it cannot say rather than being absent.
+    if (!p) {
+      const rec = character.npcRegistry?.[a.id] || CONTENT.npcs?.[a.id] || CONTENT.companions?.[a.id] || null;
+      const nm = a.name || rec?.name || a.id;
+      return `<article class="ob-card ob-alongside">
+        <div class="ob-top"><span class="ob-nm">${esc(nm)}</span><span class="hint">no craft the engine can name yet</span></div>
+        <div class="hint">Travels with you and stands in the line — they help as they are able, or keep out of it.
+          Nothing is recorded of what they can do, so there is no craft to choose for them.</div>
+        <div class="ob-row"><button class="opt" data-ally-hold="${esc(a.id)}" title="${a.present === false ? "Bring them back into the line" : "Let them keep out of the fighting"}">${a.present === false ? "Back into the line" : "Keep out of it"}</button></div>
+      </article>`;
+    }
     const o = orders[a.id] || {};
     const st = stanceOf(o.stance);
     const c = allyChoice(p, { stance: st, prefer: o.prefer || [], table: T, rules: CONTENT.rules, fnIndex: FN_INDEX, opposed });
@@ -17776,6 +17860,12 @@ function renderPartyTab() {
   chrome(`<div class="screen" style="max-width:980px">
     ${characterTabBar("party")}
     <h2 class="codex-title">At your side</h2>
+    ${/* ⛔ CCODE-524 · ERIK: "I need an easy way to add people I know to my party, band, and legion." The band
+          had a picker; the party had no door at all. */""}
+    <div class="opt-row" style="gap:6px;flex-wrap:wrap;margin:2px 0 8px">
+      <button class="opt" id="party-add" title="Ask someone you know to walk with you">➕ Ask someone to walk with you</button>
+      <button class="opt" id="party-goto-bands" title="Your bands — and who stands in them">⚔ Bands</button>
+    </div>
     <div class="ob-summary"><span><b>${esc(character.name)}</b> and <b>${allies.length}</b> more</span>${hereNow()?.name ? `<span>at <b>${esc(hereNow().name)}</b></span>` : ""}<span>${esc(split.why)}</span></div>
     ${allies.length ? `<div class="ob-controls">${obFoeSlider()}<span class="hint">${split.everyoneActs ? "everyone acts" : `${fwdAllies.length} of ${Math.max(0, split.slots - 1)} brought forward`}</span></div>
       ${(() => {
@@ -17789,11 +17879,13 @@ function renderPartyTab() {
       <div class="ob-roster">${allies.map(card).join("")}</div>
       <div class="ob-panel"><div class="ob-head"><h3 class="codex-title" style="margin:0">The next round, as the GM receives it</h3><button class="btn" id="party-roll">Roll a round</button></div>
         ${roundHtml}<p class="hint">In a fight the GM is handed this every turn: each ally's craft, chosen by their stance and what you prefer, rolled by the engine, to be told as it fell. The fight's own numbers are unchanged.</p></div>`
-      : `<p class="hint">Nobody walks at your side. Bring someone forward from a band on the Bands tab, or travel with a companion.</p>`}
+      : `<p class="hint">Nobody walks at your side. ⚠️ <b>Ask someone to walk with you</b>, above — anyone you know who would come. (This line used to say "bring someone forward from a band", and a band needs three command slots or two holdings, so it sent a player who has neither somewhere they cannot get to.)</p>`}
   </div>`);
   wireCharacterTabs();
   const again = () => renderPartyTab();
   wireObFoe(again);
+  { const b = document.getElementById("party-add"); if (b) b.onclick = () => showPartyAddPicker(); }
+  { const b = document.getElementById("party-goto-bands"); if (b) b.onclick = () => renderBandsTab(); }
   const order = (id) => { character.allyOrders = { ...(character.allyOrders || {}) }; return (character.allyOrders[id] = { ...(character.allyOrders[id] || {}) }); };
   for (const b of app.querySelectorAll("[data-ally-stance]")) b.onclick = () => { order(b.dataset.allyStance).stance = b.dataset.stance; _partyRoll = null; saveCharacter(character); again(); };
   for (const b of app.querySelectorAll("[data-ally-prefer]")) b.onclick = () => {

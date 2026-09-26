@@ -2755,6 +2755,99 @@ export const CHARACTER_STEPS = [
       return {};
     }
   },
+  {
+    // ⚠️ 84, NOT 83. I wrote 83 because the step above it is 82 — and `the-vow-nobody-wrote-down` already
+    // holds 83 from 136 lines further up, where the list stops being in order. A save already stamped 83
+    // would have skipped this step forever, silently, which is how a repair goes missing. §363 gates it.
+    version: 84, id: "a-party-member-points-at-a-person", playerFacing: true,
+    // ⛔ CCODE-524 · ERIK, IN PLAY: "Right now Loki ONLY has Orly."
+    //
+    // His company carries THREE people. Two of the ids are in no registry — the people are there under
+    // `taken-person` (Sable) and `steady-voice-woman` (Ravel) — so `jobPersonFor` answers null and the party
+    // screen's `.filter(x => x.p)` drops them without a word. Orla's id happens to match, so she is the one
+    // he sees.
+    //
+    // ⚠️ CCODE-514 FIXED THE WRITE DOOR AN HOUR EARLIER AND STOPPED THERE. Its own comment in
+    // `applyPartyOps` names sable and ravel as "three orphans in the live saves" — the sentence was written
+    // and the orphans were left. Fixing the producer is not fixing what the producer already wrote.
+    //
+    // ⛑ The same resolver the write door uses, so a repair and a join can never disagree about who somebody
+    // is. A row that still resolves to nobody is LEFT ALONE and reported — renaming it to a guess would be
+    // inventing a person.
+    apply: (c, ctx) => {
+      const reg = c?.npcRegistry || {};
+      const content = ctx?.content || {};
+      // ⛔ THE SAME QUESTION THE READER ASKS. `jobPersonFor` resolves an id through the registry, then the
+      // authored npcs, then the authored companions — so an id any of those three answer is NOT an orphan.
+      // ⚠️ My first cut checked the registry alone, and Loki's `companions: ["coil"]` would have been hunted
+      // for a replacement: `coil` is one of the nine AUTHORED companions and the game finds him perfectly.
+      // A repair must ask the same question as the reader whose failure it is repairing.
+      const resolves = (id) => !!(reg[id] || content?.npcs?.[id] || content?.companions?.[id]);
+      const fixed = [];
+      const seen = new Set();
+      for (const key of ["company", "companions"]) {
+        const list = c?.[key];
+        if (!Array.isArray(list)) continue;
+        for (const row of list) {
+          const isRow = row && typeof row === "object";
+          const id = String(isRow ? (row.npcId || "") : (row || ""));
+          if (!id || resolves(id)) continue;                         // already points at somebody
+          // ⛑ AND THE ID IS OFFERED AS THE NAME. A company row carries no `name`, so the resolver would have
+          // an id matching no key and nothing else to go on — `findExistingNpc(reg, "sable", "")` finds
+          // nobody while `(reg, "sable", "Sable")` lands on `taken-person`. An orphan id IS the name the GM
+          // used, lowercased; that is what "add Sable to my party" writes.
+          const named = (isRow ? String(row.name || "") : String(c?.companionNames?.[id] || "")) || id;
+          const hit = findExistingNpc(reg, id, named) || findExistingNpc(reg, id, id.replace(/[-_]+/g, " "));
+          if (!hit?.id || String(hit.id) === id) continue;
+          // ⚠️ AND NEVER ONTO SOMEBODY WHO IS ALREADY IN THE LIST — two orphans resolving to one person
+          // would merge two party members into one and lose the other for good.
+          if (seen.has(String(hit.id)) || list.some(r => String((r && typeof r === "object") ? r.npcId : r) === String(hit.id))) continue;
+          seen.add(String(hit.id));
+          if (isRow) row.npcId = String(hit.id); else list[list.indexOf(row)] = String(hit.id);
+          if (key === "companions" && c?.companionNames?.[id]) { c.companionNames[String(hit.id)] = c.companionNames[id]; delete c.companionNames[id]; }
+          fixed.push(`${id} → ${hit.id} (${hit.name || hit.id})`);
+        }
+      }
+      if (!fixed.length) return {};
+      console.log(`[reconcile] ccode-524: ${fixed.length} party member(s) now point at a person — ${fixed.join(", ")}`);
+      return { said: `Your record of who walks with you was repaired — ${fixed.length === 1 ? "one person was" : `${fixed.length} people were`} filed under a name the rest of the game did not know.` };
+    }
+  },
+  {
+    version: 85, id: "a-war-you-never-fought", playerFacing: true,
+    // ⛔ CCODE-525 · ERIK, WITH THE SCREEN: "why is the news now saying I'm killing the Cairnhold's and the
+    // Slaying Hands people? … I'm not doing anything different." The news read *"The Wardens of Cairnhold has
+    // taken an interest in you — you have killed 32 of theirs"* to a level-10 character with one hold, no
+    // band, and no battles: 102 kills across four powers, none of them his.
+    //
+    // ⚠️ TWO WRITERS, ONE FIELD. `notePowerLoss` writes `st.lost[at]` when the player's side kills raiders;
+    // `powerPass`'s feud shrink writes `s.lost[0]` when two powers grind each other down on the world tick.
+    // `contingentsOf` subtracts both — correctly, those heads are gone — and `noticesYou` summed the same
+    // field and called all of it the player's doing. The field was right as "heads this power no longer has"
+    // and wrong as "heads you took off them", which is why the collision survived.
+    //
+    // ⛑ The reader now counts `lostToYou`, written only where the player actually kills. This step withdraws
+    // the notices already standing on the collision so the next `noticePass` can decide again from scratch.
+    apply: (c, ctx) => {
+      const ps = c?.powerState;
+      if (!ps || typeof ps !== "object") return {};
+      const dropped = [];
+      for (const [id, st] of Object.entries(ps)) {
+        if (!st || typeof st !== "object" || !st.noticed) continue;
+        if (st.noticed.trigger !== "crossed") continue;                       // only a kill-count notice
+        if (!/you have killed \d+ of theirs/.test(String(st.noticed.why || ""))) continue;
+        if (Math.max(0, Number(st.lostToYou) || 0) > 0) continue;             // they really did kill some
+        // ⚠️ AND NEVER OVER A NOTICE THAT HAS SOMETHING ELSE UNDER IT: taking their ground or finishing them
+        // are `crossed` too, and both leave their own evidence on the save.
+        if (st.broken || (Array.isArray(st.holdsTaken) && st.holdsTaken.length)) continue;
+        dropped.push(`${id} (${st.noticed.why})`);
+        delete st.noticed;
+      }
+      if (!dropped.length) return {};
+      console.log(`[reconcile] ccode-525: ${dropped.length} notice(s) withdrawn — ${dropped.join(", ")}`);
+      return { said: `${dropped.length === 1 ? "A power" : `${dropped.length} powers`} had taken an interest in you over people you never killed — their own feuds, counted against you. That is withdrawn; whatever they have a real reason to notice, they will notice again.` };
+    }
+  },
   // Future steps register here — e.g. innate-talent GRANT (offers[], when talent content
   // lands with SNG-017), Reach-tradition eligibility surfacing, universal-role tagging.
 ];

@@ -27473,7 +27473,9 @@ console.log("\n── §354 · a power has an opinion, and takes an interest ─
   // ── C7 ────────────────────────────────────────────────────────────────────────────────────────────
   check("§354: ⛔ C7 — ALL FOUR AUTHORED TRIGGERS FIRE, each from something that already happens and none needing new tracking. `crossed` reads the state C1 and C5 write · `neighbour` your holdings against their reach, on the authored `neighbourWithinDays` · `wealth` the purse's worth against `wealthAtCrystal` · `rival_ally` C6's standing with a rival",
     (() => {
-      const crossed = PW7.noticesYou({ powerState: { [toll.id]: { lost: { 0: 4 } } } }, toll, opts);
+      // ⚠️ `lostToYou`, NOT `lost` (CCODE-525): `lost` is every head the power no longer has, feud
+      // attrition included, and reading it here told the player they had killed 32 people they never met.
+      const crossed = PW7.noticesYou({ powerState: { [toll.id]: { lostToYou: 4 } } }, toll, opts);
       const took = PW7.noticesYou({ powerState: { [toll.id]: { holdsTaken: ["x"] } } }, toll, opts);
       const near = PW7.noticesYou({ holdings: [{ id: "h", name: "My Post", locationId: "kestrels_roost" }], powerState: {} }, toll, opts);
       const rich = PW7.noticesYou({ powerState: {} }, gral, { ...opts, worth: 2000 });
@@ -27489,7 +27491,7 @@ console.log("\n── §354 · a power has an opinion, and takes an interest ─
 
   check("§354: ⛔ …AND A POWER NOTICES ONCE. It does not keep discovering you every pass, which is the difference between a world with intentions and a world with a notification loop",
     (() => {
-      const ch = { powerState: { [toll.id]: { lost: { 0: 4 } } }, npcRegistry: {} };
+      const ch = { powerState: { [toll.id]: { lostToYou: 4 } }, npcRegistry: {} };
       const first = PW7.noticePass(ch, { ...opts, day: 10 });
       const again = PW7.noticePass(ch, { ...opts, day: 11 });
       return first.length === 1 && again.length === 0 && ch.powerState[toll.id].noticed?.trigger === "crossed";
@@ -27519,7 +27521,7 @@ console.log("\n── §354 · a power has an opinion, and takes an interest ─
 
   check("§354: ⛔ …AND THE GM IS TOLD — what they think of this character, that they have taken an interest, why, what they want, and whether they have even met. ⚠️ Still no `leverage` and no `secretsGM`: a power's weak point is handed over by somebody who knows, never by the prompt",
     (() => {
-      const ch = { powerState: { [toll.id]: { lost: { 0: 4 }, standing: -30 } }, npcRegistry: {} };
+      const ch = { powerState: { [toll.id]: { lostToYou: 4, standing: -30 } }, npcRegistry: {} };
       PW7.noticePass(ch, { ...opts, day: 10 });
       const b = PW7.powersHoldingForGM("old_switchback", { content: C354, character: ch });
       return /TAKEN AN INTEREST/.test(b) && /killed/.test(b) && /distrusted/.test(b)
@@ -28655,6 +28657,111 @@ console.log("\n── §362 · what one figure can reach ──");
       // every triple must draw SOMETHING (the structural finding), and a real share must draw a reach
       return triples.size >= 50 && withKit === sample.length && withReach >= Math.round(sample.length * 0.4);
     })(), "measured at level 20: 73 of 127 triples (57%) draw a many-target craft \u2014 23% at level 10, 50% at 15");
+}
+
+/* ══════════ §363 · CCODE-524/525 — WHO WALKS WITH YOU, AND WHO YOU HAVE ACTUALLY KILLED ══════════ */
+// ✅ ERIK, IN PLAY, TWICE IN ONE HOUR:
+//   "I need an easy way to add people I know to my party, band, and legion. Right now Loki ONLY has Orly."
+//   "why is the news now saying I'm killing the Cairnhold's and the Slaying Hands people? … I'm not doing
+//    anything different."
+console.log("\n── §363 · who walks with you, and who you have killed ──");
+{
+  const PW = await import("../engine/powers.js");
+  const RC = await import("../engine/reconcile.js");
+  const CO = await import("../engine/company.js");
+
+  // ═════ CCODE-525 — TWO WRITERS, ONE FIELD ═════
+  // ⛔ `notePowerLoss` wrote `st.lost[at]` for the player's kills and `powerPass`'s feud shrink wrote
+  // `s.lost[0]` for attrition between two powers. `contingentsOf` subtracts BOTH, correctly — those heads are
+  // gone — and `noticesYou` summed the same field and called all of it the player's doing. The field was right
+  // as "heads this power no longer has" and wrong as "heads you took off them".
+  // ⚠️ MEASURED ON LOKI'S OWN SAVE: six powers, 138 heads, every one of them under the feud key, and not one
+  // `lostToYou`. A level-10 character with one hold and no band was credited with all of it.
+  check("§363: ⛔ `lostToYou` HAS EXACTLY ONE WRITER — the place the player actually kills",
+    (rd("engine/powers.js").match(/st\.lostToYou = /g) || []).length === 1
+    && /if \(took\) st\.lostToYou = \(Number\(st\.lostToYou\) \|\| 0\) \+ took;/.test(rd("engine/powers.js")));
+
+  check("§363: ⛔ …and the reader that says \"you have killed N of theirs\" reads THAT and not `lost`",
+    /const killed = Math\.max\(0, Number\(st\?\.lostToYou\) \|\| 0\);/.test(rd("engine/powers.js"))
+    && !/const killed = Object\.values\(st\?\.lost \|\| \{\}\)/.test(rd("engine/powers.js")));
+
+  check("§363: ⛔ DRIVEN — a power ground down by a feud does not read as yours, and one you really bled does",
+    (() => {
+      const power = { id: "p_x", name: "The X", strength: { contingents: [{ n: 40 }] }, noticesYouWhen: ["crossed"] };
+      // a feud's attrition, written the way `powerPass` writes it
+      const feud = { powerState: { p_x: { lost: { 0: 30 } } } };
+      const mine = { powerState: { p_x: { lost: { 0: 30 }, lostToYou: 30 } } };
+      const a = PW.noticesYou(feud, power, { content: { powers: [power] }, rules: {} });
+      const b = PW.noticesYou(mine, power, { content: { powers: [power] }, rules: {} });
+      return !a && b?.trigger === "crossed" && /you have killed 30 of theirs/.test(b.why);
+    })(), "the same 30 heads gone: nobody's doing, then the player's");
+
+  check("§363: ⛑ …and the heads are still GONE either way — `contingentsOf` subtracts both, which is why the collision survived",
+    (() => {
+      const power = { id: "p_y", name: "The Y", strength: { contingents: [{ n: 40 }] } };
+      const c = { powerState: { p_y: { lost: { 0: 30 } } } };
+      return PW.headsOf(PW.contingentsOf(power, c)) === 10;
+    })());
+
+  // ⛑ AND THE FEUD'S OWN LINE NAMES ITSELF. A report of people dying with no cause in it, arriving in your
+  // own news, reads as a thing you did — the growth line beside it has always carried its number.
+  check("§363: ⛔ the feud's news names the feud — a loss line with no cause is read as the player's doing",
+    /to its feud with \$\{by\}/.test(rd("engine/powers.js"))
+    && /credit\(p\.id, "loss", r\); credit\(r, "loss", p\.id\);/.test(rd("engine/powers.js"))
+    && !/has lost people it will not get back\.`/.test(rd("engine/powers.js")));
+
+  // ═════ THE REPAIRS, NARROW ═════
+  check("§363: ⛔ A NOTICE RESTING ON KILLS YOU NEVER MADE IS WITHDRAWN, and nothing else is",
+    (() => {
+      const c = { powerState: {
+        false1: { lost: { 0: 32 }, noticed: { trigger: "crossed", why: "you have killed 32 of theirs" } },
+        real1:  { lost: { 0: 9 }, lostToYou: 9, noticed: { trigger: "crossed", why: "you have killed 9 of theirs" } },
+        ground: { lost: { 0: 5 }, holdsTaken: ["x"], noticed: { trigger: "crossed", why: "you took ground of theirs" } },
+        near:   { noticed: { trigger: "neighbour", why: "your post stands 2 days from theirs" } },
+        broke:  { broken: true, noticed: { trigger: "crossed", why: "you finished them" } },
+      } };
+      const step = RC.CHARACTER_STEPS.find(s => s.id === "a-war-you-never-fought");
+      if (!step) return false;
+      step.apply(c, { content: {}, day: 1 });
+      return !c.powerState.false1.noticed && !!c.powerState.real1.noticed && !!c.powerState.ground.noticed
+        && !!c.powerState.near.noticed && !!c.powerState.broke.noticed;
+    })(), "a kill-count notice with a zero tally goes; a real one, a taken hold, a neighbour and a broken power all stay");
+
+  // ═════ CCODE-524 — WHO WALKS WITH YOU ═════
+  // ⛔ Loki's company carried THREE people and the party screen showed ONE. Two rows pointed at ids no
+  // registry held (`sable`, `ravel`, beside records under `taken-person` and `steady-voice-woman`) and the
+  // fourth was an authored companion dropped for having no craft to name.
+  check("§363: ⛔ A PARTY MEMBER POINTS AT A PERSON — an id the registry does not hold is resolved, not dropped",
+    (() => {
+      const c = { npcRegistry: { "taken-person": { id: "taken-person", name: "Sable" } },
+        company: [{ npcId: "sable", roles: ["ally"] }], companions: ["coil"] };
+      const step = RC.CHARACTER_STEPS.find(s => s.id === "a-party-member-points-at-a-person");
+      if (!step) return false;
+      step.apply(c, { content: { companions: { coil: { id: "coil", name: "Coil" } } }, day: 1 });
+      // ⚠️ AND THE AUTHORED COMPANION IS LEFT ALONE — my first cut checked the registry only and would have
+      // hunted for a replacement for somebody the game finds perfectly.
+      return c.company[0].npcId === "taken-person" && c.companions[0] === "coil";
+    })());
+
+  check("§363: ⛑ …and the party screen keeps everyone who travels with you, sheet or no sheet",
+    /const allies = present\.map\(a => \(\{ a, p: jobPersonFor\(character, a\.id, ctx\) \|\| null \}\)\);/.test(rd("app.js"))
+    && !/\.filter\(x => x\.p\);/.test(rd("app.js")),
+    "`jobPersonFor` ends `if (!skills.length) return null` — right for sending somebody on a JOB, and it was deleting party members");
+
+  check("§363: ⛔ …and the party has a DOOR at last — the band had a picker and the party had none",
+    /function showPartyAddPicker\(\)/.test(rd("app.js")) && /id="party-add"/.test(rd("app.js"))
+    && /b\.onclick = \(\) => showPartyAddPicker\(\);/.test(rd("app.js"))
+    && /isRecruitable\(\{ \.\.\.n, id \}\)/.test(rd("app.js")),
+    "gated on `isRecruitable`, not the forward bond — Erik's CCODE-511 ruling splits them, and the forward bond would refuse the people this door exists to add");
+
+  // ⛔ AND THE RECONCILE VERSIONS ARE UNIQUE. I wrote 83 for a new step because the one above it was 82 —
+  // and `the-vow-nobody-wrote-down` already held 83 from 136 lines up, where the list stops being in order.
+  // A save already stamped 83 would have skipped the new step forever, silently.
+  check("§363: ⛔ every reconcile step has its OWN version — a duplicate strands a repair on any save already past it",
+    (() => {
+      const vs = RC.CHARACTER_STEPS.map(s => Number(s.version));
+      return vs.length === new Set(vs).size && vs.every(Number.isFinite);
+    })(), (() => { const vs = RC.CHARACTER_STEPS.map(s => Number(s.version)); const dup = vs.filter((v, i) => vs.indexOf(v) !== i); return dup.length ? `duplicated: ${[...new Set(dup)].join(", ")}` : `${vs.length} steps, all distinct`; })());
 }
 
 /* ══════════ REPORT ══════════ */

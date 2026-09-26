@@ -16,6 +16,30 @@
   "next": [],
   "releases": [
     {
+      "version": "2.10.0",
+      "date": "2026-09-26",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "Everyone who walks with you is on the list",
+          "summary": "People who joined you in the story were being dropped from your party screen — one save showed one of the four travelling with him.",
+          "detail": "When the story added someone to your side, it sometimes filed them under a name the rest of the game did not recognise, and the party screen quietly left them out. Those records are repaired when you next load, and the screen now shows everyone travelling with you — including a companion with no crafts written down, who could never be shown before. They stand in the line whether or not the engine has anything to say about what they can do."
+        },
+        {
+          "kind": "feature",
+          "title": "Ask someone to walk with you",
+          "summary": "The Party screen can now ask anyone you know to travel with you — it had no way to add anybody at all.",
+          "detail": "Until now the only routes into your party were the story adding somebody, or raising a band — and a band needs three people under your command or two holdings, so a player with neither had no way in. There is a button on the Party screen now: everyone you know who would come, searchable, with what they are and how close you stand. Closeness still decides who can be brought FORWARD — a named place, a stance, a preferred craft — and anyone who will come can travel with you and stand in the line."
+        },
+        {
+          "kind": "fix",
+          "title": "You are not blamed for other people's wars",
+          "summary": "The news was telling you that you had killed people who died in a feud between two powers you had never fought.",
+          "detail": "Powers grind each other down in the background — that is what a feud is. The game recorded those deaths in the same place it records the people YOU kill, so it went on to tell you that a power had taken an interest in you because you had killed dozens of theirs, when you had killed none. Those two are counted apart now, the grudges raised on the mistake are withdrawn when you next load, and a power with a real reason to notice you will still notice. The news about a feud also says whose feud it is."
+        }
+      ]
+    },
+    {
       "version": "2.9.10",
       "date": "2026-09-26",
       "entries": [

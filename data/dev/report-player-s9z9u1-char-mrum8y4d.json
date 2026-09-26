@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "dev_report",
-  "at": "2026-09-26T03:33:53.583Z",
+  "at": "2026-09-26T03:35:58.174Z",
   "build": "2.9.1",
   "field": null,
   "character": {
@@ -9,9 +9,9 @@
     "name": "Loki",
     "playerKey": "player-s9z9u1",
     "level": 10,
-    "rev": 942,
+    "rev": 943,
     "day": 8,
-    "turns": 238,
+    "turns": 239,
     "countingSince": "2026-09-14T22:51:56.913Z",
     "countsCoverWholeLife": false
   },
@@ -141,21 +141,21 @@
   },
   "ops": {
     "emitted": {
-      "sceneSummary": 238,
-      "choices": 238,
-      "characterDeltas": 122,
-      "scene": 238,
-      "placeUpdates": 28,
-      "codexUpdates": 138,
-      "timeOps": 191,
-      "offer": 42,
+      "sceneSummary": 239,
+      "choices": 239,
+      "characterDeltas": 123,
+      "scene": 239,
+      "placeUpdates": 29,
+      "codexUpdates": 139,
+      "timeOps": 192,
+      "offer": 43,
       "generateRequest": 7,
-      "sceneEnded": 107,
-      "npcUpdates": 189,
+      "sceneEnded": 108,
+      "npcUpdates": 190,
       "moveTo": 10,
-      "gambitApt": 66,
+      "gambitApt": 67,
       "deeds": 14,
-      "questUpdates": 43,
+      "questUpdates": 44,
       "standingOps": 4,
       "factUpdates": 19,
       "stageOps": 7,
@@ -175,7 +175,7 @@
     },
     "outcomes": {
       "offer": {
-        "applied": 48,
+        "applied": 49,
         "rejected": 2,
         "lastWhy": "rejected-shape",
         "exceedsEmissions": true
@@ -220,7 +220,7 @@
     "neverCount": 22,
     "knownCount": 48,
     "unknown": {
-      "sceneSummary": 66,
+      "sceneSummary": 67,
       "scene_summary": 1
     },
     "inProse": {},
@@ -228,21 +228,21 @@
   },
   "coverage": {
     "npcRegistry": {
-      "n": 15,
+      "n": 16,
       "fields": {
-        "age": 7,
-        "sex": 15,
-        "gender": 15,
-        "pronouns": 15,
-        "role": 15,
-        "description": 15,
+        "age": 8,
+        "sex": 16,
+        "gender": 16,
+        "pronouns": 16,
+        "role": 16,
+        "description": 16,
         "bondType": 3,
-        "relationship": 15,
-        "status": 15,
-        "knownFacts": 14,
-        "skillsObserved": 9,
+        "relationship": 16,
+        "status": 16,
+        "knownFacts": 15,
+        "skillsObserved": 10,
         "deeds": 0,
-        "domains": 15,
+        "domains": 16,
         "inventory": 0
       }
     },
@@ -257,8 +257,8 @@
     }
   },
   "fireTests": {
-    "at": "2026-09-26T03:21:00.728Z",
-    "build": "2.9.0",
+    "at": "2026-09-26T03:33:58.515Z",
+    "build": "2.9.1",
     "results": [
       {
         "op": "jobOps",

@@ -174,6 +174,24 @@
       "aliases": [
         "Road Rations (4 days) — additional bundle"
       ]
+    },
+    {
+      "id": null,
+      "name": "Dried Fish (wrapped)",
+      "kind": "consumable",
+      "qty": 1,
+      "description": "Two bundles of dried fish wrapped in greased paper—Mara's parting gift for lean days on the road.",
+      "consumable": true,
+      "_contract": {
+        "verdict": "reject",
+        "missing": [
+          "id"
+        ],
+        "vague": [
+          "effect-resolvable",
+          "consumable-spends-to-something"
+        ]
+      }
     }
   ],
   "deeds": [
@@ -430,18 +448,24 @@
         "player": "Accept Mara's offer and rest here until dawn — honor the road's pace and let the band recover.",
         "summary": "The band rests at Mara Wells' Store until dawn, honoring the earth's resistance and the road's pace. They gather strength for the long walk to Whistling Woman Post.",
         "narration": "You nod to Mara, and she nods back—the kind of exchange that needs no words. The road will still be there at dawn, and it will not move faster because you arrive at it tired.\n\nThe store has a back room with clean blankets and a hearth that holds warmth through the night. Mara shows you the way without ceremony, names the morning water-pump in the yard, and leaves you to settle. Cy climbs onto a shelf near the hearth—not sleeping, never sleeping, but something close to it, lamp dimming to a pilot glow. Ravel spreads her coat over the blankets and sits watching the fire, one hand steady on Sable's shoulder. Estry curls into the corner with her head on a pack, already halfway gone. Orla stands at the window, looking out into the dark, working something through in the careful way Syllogists have.\n\nYou sleep the sleep of someone who has made a real choice instead of just enduring one. No dreams that you remember. No alarms. The hearth-fire settles and holds.\n\nWhen the grey comes, Mara is already in the front room with hot water and bread on the counter. The road northward is waiting, patient as stone."
+      },
+      {
+        "player": "Thank Mara and prepare to set out for the Whistling Woman Post - a journey of less than 2 days.",
+        "summary": "The band departs Mara Wells' Store at dawn, supplies gathered, heading northward for Whistling Woman Post by the long road that Millbrook's earth prefers.",
+        "narration": "You find Mara at the counter as the first pale light seeps through the shop's eastern window. The hearth has burned down to embers, and the band is stirring—packs rolled tight, bedrolls lashed, the road-readiness settling into shoulders and faces.\n\n'Thank you,' you say simply. Mara meets your eyes and nods, the kind of acknowledgment that carries weight. 'The road prefers honesty,' she says. 'You're honoring that.' She reaches beneath the counter and produces two cloth bundles—dried fish wrapped in greased paper, enough for lean days. 'The Annex is a good place. Halvex keeps it steady.' She does not say what she does not need to say: that you will need the food, that the road north is longer than the shortfold would have been, that trusting the earth's preference is a choice that costs.\n\nCy descends from the shelf with careful precision, lamp brightening as it moves. The creature's brass legs click softly on the wooden floor—it has already assessed the packs, the band's posture, the readiness in the air. Ravel and Estry shoulder their loads without ceremony. Orla stands by the window, watching the northern road lighten into definition. Sable is quiet, but the quiet reads as presence rather than absence now.\n\nYou and Mara exchange a final glance as you reach the door. The woman nods once more. Outside, Whistling Woman Post lies two hours' walk on the spinward path, and the earth beneath your feet feels solid—approving, perhaps, or at least not resisting. The long road waits.\n\n*✦ Dried Fish (wrapped) — added to your pack.*\n*  Dried Fish (wrapped) carries no mechanical effect yet — it is a story item until one is set.*"
       }
     ],
     "lastTurn": {
-      "narration": "You nod to Mara, and she nods back—the kind of exchange that needs no words. The road will still be there at dawn, and it will not move faster because you arrive at it tired.\n\nThe store has a back room with clean blankets and a hearth that holds warmth through the night. Mara shows you the way without ceremony, names the morning water-pump in the yard, and leaves you to settle. Cy climbs onto a shelf near the hearth—not sleeping, never sleeping, but something close to it, lamp dimming to a pilot glow. Ravel spreads her coat over the blankets and sits watching the fire, one hand steady on Sable's shoulder. Estry curls into the corner with her head on a pack, already halfway gone. Orla stands at the window, looking out into the dark, working something through in the careful way Syllogists have.\n\nYou sleep the sleep of someone who has made a real choice instead of just enduring one. No dreams that you remember. No alarms. The hearth-fire settles and holds.\n\nWhen the grey comes, Mara is already in the front room with hot water and bread on the counter. The road northward is waiting, patient as stone.",
-      "sceneSummary": "The band rests at Mara Wells' Store until dawn, honoring the earth's resistance and the road's pace. They gather strength for the long walk to Whistling Woman Post.",
+      "narration": "You find Mara at the counter as the first pale light seeps through the shop's eastern window. The hearth has burned down to embers, and the band is stirring—packs rolled tight, bedrolls lashed, the road-readiness settling into shoulders and faces.\n\n'Thank you,' you say simply. Mara meets your eyes and nods, the kind of acknowledgment that carries weight. 'The road prefers honesty,' she says. 'You're honoring that.' She reaches beneath the counter and produces two cloth bundles—dried fish wrapped in greased paper, enough for lean days. 'The Annex is a good place. Halvex keeps it steady.' She does not say what she does not need to say: that you will need the food, that the road north is longer than the shortfold would have been, that trusting the earth's preference is a choice that costs.\n\nCy descends from the shelf with careful precision, lamp brightening as it moves. The creature's brass legs click softly on the wooden floor—it has already assessed the packs, the band's posture, the readiness in the air. Ravel and Estry shoulder their loads without ceremony. Orla stands by the window, watching the northern road lighten into definition. Sable is quiet, but the quiet reads as presence rather than absence now.\n\nYou and Mara exchange a final glance as you reach the door. The woman nods once more. Outside, Whistling Woman Post lies two hours' walk on the spinward path, and the earth beneath your feet feels solid—approving, perhaps, or at least not resisting. The long road waits.\n\n*✦ Dried Fish (wrapped) — added to your pack.*\n*  Dried Fish (wrapped) carries no mechanical effect yet — it is a story item until one is set.*",
+      "sceneSummary": "The band departs Mara Wells' Store at dawn, supplies gathered, heading northward for Whistling Woman Post by the long road that Millbrook's earth prefers.",
       "choices": [
         {
-          "label": "Set out northward on the spinward road toward Whistling Woman Post",
+          "label": "Set out immediately for Whistling Woman Post on the spinward path.",
           "attribute": "practical",
           "subAttribute": "wits",
           "axes": {
-            "space_time": 0.3
+            "space_time": 0.3,
+            "concrete_abstract": -0.4
           },
           "difficulty": "very easy",
           "opposedDifficulty": null,
@@ -455,16 +479,16 @@
           "emergenceId": null
         },
         {
-          "label": "Ask Mara if there is news from the road—rumors, warnings, anything that matters between here and the Annex",
+          "label": "Ask Mara one more question before departing—something about Halvex Coil, or the Standing Annex, or what lies ahead.",
           "attribute": "social",
-          "subAttribute": "insight",
+          "subAttribute": "rapport",
           "axes": {
             "falsehood_truth": 0.2
           },
           "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "scout"
+            "study"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -473,21 +497,20 @@
           "emergenceId": null
         },
         {
-          "label": "Step outside and read the land—use Wayfinding to feel what the earth beneath Millbrook is telling you about the road ahead",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Before leaving, use Prism Sight to read the store's light-history—what Mara has witnessed here, what patterns the deep night holds.",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "axes": {
-            "concrete_abstract": -0.3,
-            "space_time": 0.3
+            "concrete_abstract": 0.3,
+            "dark_light": -0.2
           },
           "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "scout",
-            "careful"
+            "study"
           ],
-          "abilityId": "wayfinding",
-          "energyCost": 4,
+          "abilityId": "prism_sight",
+          "energyCost": 3,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
@@ -495,9 +518,17 @@
       ],
       "deeds": [],
       "characterDeltas": {
-        "health": 3,
-        "energy": 52,
-        "inventoryAdd": [],
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [
+          {
+            "name": "Dried Fish (wrapped)",
+            "kind": "consumable",
+            "description": "Two bundles of dried fish wrapped in greased paper—Mara's parting gift for lean days on the road.",
+            "consumable": true,
+            "effects": {}
+          }
+        ],
         "inventoryRemove": [],
         "xp": 0
       },
@@ -505,21 +536,8 @@
       "questUpdates": [
         {
           "op": "progress",
-          "questId": "journey-gen-whistling-woman-post-88",
-          "title": "Journey to Whistling Woman Post",
-          "summary": "about 36.1 days through the Crossing gate (10 energy at the gate) · 19 rations for the road — you carry 0 (19 short) · 28 nights in the open, 8 under a roof · the worst of the road: The Axis Gate (dangerous) · with Orla Yardley.",
-          "giver": null,
-          "note": "The band has gathered full road rations at Mara Wells' Store and rested until dawn. They are ready to depart for the long walk to Whistling Woman Post on the spinward road. Millbrook's earth has made clear its resistance to shortcuts—the long way is the only way through.",
-          "xpReward": null
-        },
-        {
-          "op": "progress",
           "questId": "the-taken-from-the-city",
-          "title": "The Taken",
-          "summary": "Someone was brought from the city to the Unlit Deep, and the city is pretending it did not happen. The elder has granted an audience.",
-          "giver": null,
-          "note": "The band has gathered supplies and is moving toward the Standing Annex by the long road, as directed by Mara Wells. Halvex Coil keeps the Annex and may have answers. The earth beneath Millbrook resists shortcuts—the band honors that resistance.",
-          "xpReward": null
+          "note": "The band departs Millbrook at dawn with supplies, honoring the earth's resistance to shortcuts. The long road northward to Whistling Woman Post and the Standing Annex is underway."
         }
       ],
       "standingOps": [],
@@ -530,53 +548,33 @@
       "offer": null,
       "stageOps": [],
       "scene": {
-        "setting": "Mara Wells' Store at grey dawn—the front room lit by early light and oil lamps not yet dimmed. The counter holds bread and hot water. Outside the window, the spinward road stretches northward into the pale autumn morning.",
+        "setting": "Mara Wells' Store at grey dawn—the front room lit by early light, the hearth burned down to embers. The door stands open to the spinward road stretching northward into pale autumn morning.",
         "npcsPresent": [
           {
             "name": "Mara Wells",
-            "state": "Standing behind the counter with hot water and bread ready, watching the band prepare to depart with steady assessment"
+            "state": "Watching from behind the counter as the band departs, steady and composed"
           }
         ],
         "objects": [
-          "The counter with bread and hot water",
-          "Four packs heavy with road rations",
-          "Bedrolls and travel-worn coats",
-          "The hearth, still holding warmth from the night",
-          "Cy on a nearby shelf, lamp dimmed to pilot glow"
+          "The counter",
+          "Two cloth bundles of dried fish (wrapped in greased paper)",
+          "Bedrolls and packs, rolled tight and ready",
+          "The hearth, burned down to embers",
+          "The door, open to the northern road"
         ],
         "threads": [
           "The band is ready to depart for Whistling Woman Post",
-          "The long road northward awaits",
-          "Halvex Coil and the Standing Annex lie ahead"
+          "Halvex Coil and the Standing Annex lie ahead, two hours' walk on the spinward path",
+          "The journey north awaits"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "mara-wells",
-          "carries": [],
-          "returns": [],
-          "name": null,
-          "title": null,
-          "role": null,
-          "age": null,
-          "sex": null,
-          "gender": null,
-          "pronouns": null,
-          "description": null,
-          "note": "Offered the band shelter and rest at her store, directed them toward Whistling Woman Post by the long road, and confirmed that the earth beneath Millbrook resists shortcuts. She now has hot water and bread ready for their departure at dawn.",
-          "learned": [],
-          "skillsObserved": [],
-          "relationshipDelta": 0,
-          "vouchedBy": null,
-          "status": "active",
-          "statusNote": "At Mara Wells' Store, serving the band at dawn before their departure",
-          "revealName": null,
-          "nameExtend": null,
-          "pledge": null,
-          "bondType": null,
-          "bondStage": null,
-          "deed": null
+          "name": "Mara Wells",
+          "note": "Gave the band two bundles of dried fish wrapped in greased paper as parting supplies. Spoke plainly about honoring the road's preference and affirmed that the Standing Annex is a good place. Sent them north with steady regard.",
+          "statusNote": "At Mara Wells' Store, watching the band depart at dawn"
         }
       ],
       "intentsHeard": [],
@@ -599,47 +597,37 @@
       "unlockPrecursor": null,
       "unlockSubstrate": null,
       "timeOps": {
-        "hoursPassed": 8,
-        "why": "slept until dawn — a full night's rest at Mara Wells' Store"
+        "hoursPassed": 0.5,
+        "why": "dawn broke during rest and preparation"
       },
       "moveTo": null,
       "stateOps": [],
-      "itemUpdates": [],
-      "deriveItem": null,
       "imagePrompt": null,
       "imageMedium": null,
-      "newAbility": null,
-      "gambitOps": null,
-      "gambitApt": false,
-      "markDefiningMoment": null,
-      "markTeacher": null,
-      "offerPromotion": null,
-      "offerAcquisition": null,
-      "offerIntent": null,
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Mara Wells' Store at grey dawn—the front room lit by early light and oil lamps not yet dimmed. The counter holds bread and hot water. Outside the window, the spinward road stretches northward into the pale autumn morning.",
+      "setting": "Mara Wells' Store at grey dawn—the front room lit by early light, the hearth burned down to embers. The door stands open to the spinward road stretching northward into pale autumn morning.",
       "npcsPresent": [
         {
           "name": "Mara Wells",
-          "state": "Standing behind the counter with hot water and bread ready, watching the band prepare to depart with steady assessment"
+          "state": "Watching from behind the counter as the band departs, steady and composed"
         }
       ],
       "objects": [
-        "The counter with bread and hot water",
-        "Four packs heavy with road rations",
-        "Bedrolls and travel-worn coats",
-        "The hearth, still holding warmth from the night",
-        "Cy on a nearby shelf, lamp dimmed to pilot glow"
+        "The counter",
+        "Two cloth bundles of dried fish (wrapped in greased paper)",
+        "Bedrolls and packs, rolled tight and ready",
+        "The hearth, burned down to embers",
+        "The door, open to the northern road"
       ],
       "threads": [
         "The band is ready to depart for Whistling Woman Post",
-        "The long road northward awaits",
-        "Halvex Coil and the Standing Annex lie ahead"
+        "Halvex Coil and the Standing Annex lie ahead, two hours' walk on the spinward path",
+        "The journey north awaits"
       ]
     },
-    "beats": 2,
+    "beats": 3,
     "subPlace": null
   },
   "clock": {
@@ -665,14 +653,14 @@
       "locationEntityId": "the-unlit-deep",
       "status": "active",
       "progress": [
-        "Sable has named her enemy: Vestin Kray on the Transition board, who feared what she was learning about the old works. She has accepted shelter at the Standing Annex and will travel with Loki, Ravel, and Estry to continue uncovering why the city wanted her gone.",
         "Sable has named her enemy: Vestin Kray on the Transition board, who feared what she was learning about the old works. She has accepted shelter and companionship with the band. The Churn-Revellers now travel together to the Standing Annex to continue uncovering why the city wanted her gone.",
         "Loki has secured shelter and sanctuary for Sable at the Standing Annex; Sister Vreni has given her word that the Transition board will find nothing at the Kindly Rest. The band is ready to travel.",
         "Ravel and Estry have confirmed their purpose and their commitment. The band is gathering. All four will travel to the Standing Annex.",
         "Orla Yardley arrives on the road with intent to join the band and test Loki's beliefs in return. The gathering grows.",
         "Orla Yardley arrives on the road toward the Standing Annex with intent to join the band and test Loki's belief in understanding over breaking. The gathering grows—four now walk the road together, moving toward the Annex and toward answers.",
         "The band gathers supplies and sets out toward the Standing Annex by the long road. Mara Wells confirms Halvex Coil keeps the Annex and that the earth beneath Millbrook resists shortcuts—honoring the land's resistance rather than fighting it.",
-        "The band has gathered supplies and is moving toward the Standing Annex by the long road, as directed by Mara Wells. Halvex Coil keeps the Annex and may have answers. The earth beneath Millbrook resists shortcuts—the band honors that resistance."
+        "The band has gathered supplies and is moving toward the Standing Annex by the long road, as directed by Mara Wells. Halvex Coil keeps the Annex and may have answers. The earth beneath Millbrook resists shortcuts—the band honors that resistance.",
+        "The band departs Millbrook at dawn with supplies, honoring the earth's resistance to shortcuts. The long road northward to Whistling Woman Post and the Standing Annex is underway."
       ],
       "aliases": [],
       "startedAt": "2026-07-24T21:30:43.637Z"
@@ -1527,7 +1515,8 @@
         "[d8] Opened her store in deep night to the band without hesitation. Named the resistance beneath Millbrook plainly—the earth has awareness and will, and resists close-work. Directed them toward Whistling Woman Post and named Halvex Coil as the keeper of the Standing Annex. Her plainness reads as tested…",
         "[d8] Offered fair supplies to the band in deep night without hesitation, named the resistance beneath Millbrook plainly—the earth has awareness and will, and resists close-work. Directed them toward Whistling Woman Post and named Halvex Coil as keeper of the Standing Annex.",
         "[d8] Offered the band shelter until dawn if they choose it. Named the road's pace as the price of survival on the long way. Made clear she reads character through bearing and choice.",
-        "[d8] Offered the band shelter and rest at her store, directed them toward Whistling Woman Post by the long road, and confirmed that the earth beneath Millbrook resists shortcuts. She now has hot water and bread ready for their departure at dawn."
+        "[d8] Offered the band shelter and rest at her store, directed them toward Whistling Woman Post by the long road, and confirmed that the earth beneath Millbrook resists shortcuts. She now has hot water and bread ready for their departure at dawn.",
+        "[d8] Gave the band two bundles of dried fish wrapped in greased paper as parting supplies. Spoke plainly about honoring the road's preference and affirmed that the Standing Annex is a good place. Sent them north with steady regard."
       ],
       "knownFacts": [
         "Keeps the store open through deep night hours—either by choice or by the traffic of road-travelers who cannot wait for daylight",
@@ -1551,7 +1540,7 @@
       "gender": "woman",
       "pronouns": "she/her",
       "age": 52,
-      "statusNote": "At Mara Wells' Store, serving the band at dawn before their departure",
+      "statusNote": "At Mara Wells' Store, watching the band depart at dawn",
       "domains": {
         "primary": "mason"
       },
@@ -1560,7 +1549,7 @@
         "locationId": "gen-mara-wells-store",
         "day": 8
       },
-      "met": 6
+      "met": 7
     }
   },
   "placeMemory": {
@@ -2080,7 +2069,7 @@
     "lastSharedReadAt": "2026-09-26T04:25:40.189Z",
     "lastTickWorldDay": 88,
     "lastCanonWorldDay": 88,
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 2,
     "recentOffers": [
       {
         "thing": "Mara Wells, the store's keeper—a woman who reads strangers clearly and knows the road well enough to guess at true need",
@@ -13127,19 +13116,19 @@
     "deferredMysteries": []
   },
   "tendencies": {
-    "devotion": 0.6168871847395236,
-    "cerebral": 13.946601842634971,
-    "social": 16.717049148192213,
-    "strategic": 10.814670389292699,
-    "cautious": 6.2603343927160635,
-    "amorous": 5.821080912957834,
-    "generous": 4.767012298901451,
-    "ruthless": 0.15451422052851926,
-    "risky": 0.1262759913860598,
-    "patient": 0.03448370236035952,
-    "deception": 0.04014081571767869,
-    "carousing": 0.8590683010253904,
-    "leadership": 1.7621913867187498
+    "devotion": 0.6014650051210355,
+    "cerebral": 13.597936796569096,
+    "social": 16.29912291948741,
+    "strategic": 11.544303629560382,
+    "cautious": 6.103826032898162,
+    "amorous": 5.675553890133888,
+    "generous": 4.647836991428915,
+    "ruthless": 0.15065136501530627,
+    "risky": 0.1231190916014083,
+    "patient": 0.03362160980135053,
+    "deception": 0.03913729532473672,
+    "carousing": 0.8375915934997556,
+    "leadership": 1.718136602050781
   },
   "aptitudes": [
     "strategist",
@@ -13148,7 +13137,7 @@
     "orator",
     "faithful"
   ],
-  "actionCount": 211,
+  "actionCount": 212,
   "grantsVersion": 1,
   "precursorAccess": [
     "address_sense"
@@ -14252,8 +14241,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790397087339,
-  "rev": 954,
+  "updatedAt": 1790397144729,
+  "rev": 955,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -15480,10 +15469,10 @@
     {
       "id": "sess-19",
       "startedAt": "2026-09-26T00:51:07.826Z",
-      "lastAt": "2026-09-26T04:30:45.270Z",
+      "lastAt": "2026-09-26T04:32:24.722Z",
       "startDay": 88,
       "endDay": 88,
-      "beats": 15
+      "beats": 16
     }
   ],
   "establishedFacts": [
@@ -15649,23 +15638,27 @@
       "lastWhy": "journey-planned"
     }
   },
-  "_pendingArrival": null,
+  "_pendingArrival": {
+    "ref": "the Whistling Woman Post",
+    "name": "Whistling Woman Post",
+    "destId": "gen-whistling-woman-post"
+  },
   "_opEmitted": {
-    "sceneSummary": 244,
-    "choices": 244,
-    "characterDeltas": 128,
-    "scene": 244,
+    "sceneSummary": 245,
+    "choices": 245,
+    "characterDeltas": 129,
+    "scene": 245,
     "placeUpdates": 32,
     "codexUpdates": 142,
-    "timeOps": 195,
+    "timeOps": 196,
     "offer": 47,
     "generateRequest": 7,
-    "sceneEnded": 113,
-    "npcUpdates": 195,
+    "sceneEnded": 114,
+    "npcUpdates": 196,
     "moveTo": 10,
     "gambitApt": 72,
     "deeds": 14,
-    "questUpdates": 48,
+    "questUpdates": 49,
     "standingOps": 4,
     "factUpdates": 20,
     "stageOps": 7,
@@ -15684,7 +15677,7 @@
     "bandOps": 1,
     "exchangeOps": 2
   },
-  "_opTurns": 244,
+  "_opTurns": 245,
   "customAbilities": {
     "mirror-bright": {
       "id": "mirror-bright",
@@ -16657,9 +16650,9 @@
   "skillUses": {
     "plan": 12,
     "discuss": 1,
-    "travel": 11,
+    "travel": 12,
     "scout": 7,
-    "prepare": 6,
+    "prepare": 7,
     "careful": 12,
     "woo": 1,
     "rapport": 16,
@@ -17535,7 +17528,7 @@
     }
   },
   "_opUnknown": {
-    "sceneSummary": 72,
+    "sceneSummary": 73,
     "scene_summary": 1
   },
   "_bandNotes": null,

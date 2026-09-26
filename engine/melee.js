@@ -308,6 +308,114 @@ export function recoverBand(band, { days = 1, cfg = {}, infirmary = null } = {})
   };
 }
 
+/** ⛔ SNG-659 §1 (ERIK) — WHAT ONE FIGURE CAN REACH. "There are lots of skills that can hit multiple targets or
+ *  zones… so it SHOULD matter who the defenders are."
+ *
+ *  ⚠️ NOTHING IN THE ENGINE HAS EVER READ A CRAFT'S REACH. `mechanic.targets` is carried by 149 crafts and
+ *  `mechanic.area` by 14, and `craftmechanics.js` lists both as EXTENDABLE — a dimension an `extend` may grow —
+ *  and that is the whole of it. A defender whose `burning_ones` hits six was the same figure as one who throws
+ *  a single punch.
+ *
+ *  ⛑ THREE KINDS, because they move a clash three different ways (Aevi's §1b):
+ *    · HARM, many  — takes enemy figures out of the fight; raises this figure's own weight
+ *    · GUARD, many — our figures don't fall; absorbs the first losses (so it is a `bloodBand` rule, not a tide one)
+ *    · BOLSTER, many — our figures fight better; +1 quality to up to N allies
+ *
+ *  ⚠️ AND `area` IS A ZONE, NOT A COUNT. Aevi proposed area N ≈ 2N figures. Exactly one craft in the corpus
+ *  carries BOTH fields and so states the ratio itself — `keening`, area 5 and targets 6 — so the default is
+ *  1.2 and it is a dial. ⬜ Her "prose areas" clause has no population: all 14 authored areas are numeric.
+ *
+ *  Returns `{ reach, kind, craftId }` or null. */
+export function craftReach(craft, { cfg = {} } = {}) {
+  if (!craft) return null;
+  const m = craft.mechanic || {};
+  const areaToFigures = num(cfg.areaToFigures, 1.2);
+  const targets = Math.max(num(m.targets, 0), ...(craft.tree || []).map(n => num(n?.imposes?.targets, 0)));
+  const area = num(m.area, 0) > 0 ? Math.round(num(m.area, 0) * areaToFigures) : 0;
+  const reach = Math.max(targets, area);
+  if (reach <= 1) return null;
+  // ⛑ THE KIND IS THE SHAPE, and the shapes are the catalogue's own vocabulary — not a list I invented.
+  // ⚠️ `shape`, NOT `shapes`. My first cut wrote `craft.shape || craft.shapes` out of caution, and §182 — the
+  // reverse schema gate — red on the next run: `shapes` is a field no craft authors and the schema forbids, so
+  // the fallback was a branch that could never be taken. Caution that invents a field is not caution.
+  const shapes = new Set([].concat(craft.shape || []).map(s => String(s)));
+  const kind = shapes.has("guard") ? "guard"
+    : (shapes.has("bolster") || shapes.has("setup")) ? "bolster"
+    : (shapes.has("damage") || shapes.has("strike") || shapes.has("hobble")) ? "harm"
+    : null;
+  return kind ? { reach, kind, craftId: craft.id || null } : null;
+}
+
+/** ⛔ WHAT ONE NAMED FIGURE IS WORTH IN A CLASH — quality, and what their best many-target craft reaches.
+ *
+ *  ⚠️ THE TWO LITERAL READINGS OF "counts as up to N figures' worth" BOTH FAIL, measured against §1d:
+ *    · herself + (N−1) SOLDIERS → the lone epic holds 0% against a target of two-in-three. Each extra target is
+ *      worth a riffraff whoever is swinging, which is not what Erik asked for.
+ *    · N of HER → every row 100%. That is the "one wizard beats an army every time" §1c.4 exists to prevent.
+ *  ⛑ So each extra target is worth a FRACTION of her own quality: `q × (1 + (reach−1) × reachWeight)`, and the
+ *  fraction is a dial. Measured over the four numbered targets, 0.4 fits best (error 0.69 against 1.59 at 0.2).
+ *
+ *  ⛔ AND SUSTAIN IS THE LIMIT, NOT A DECORATION (§1c.4): "a clash lasts exchanges, not one swing, so a caster
+ *  who empties early fades." Energy pays for `floor(energy / energyCost)` wide exchanges out of `exchanges`;
+ *  the rest are fought at single reach, and the figure's weight is the average. An epic with energy for ONE use
+ *  holds 0% where the same epic with energy for three holds 61% — the dial that stops this being a superpower.
+ *
+ *  Returns `{ quality, weight, reach, kind, craftId, uses, said }`. */
+export function figureWeight(quality, { crafts = [], energy = 0, catalogue = {}, enemies = 0, cfg = {} } = {}) {
+  const q = Math.max(1, num(quality, 1));
+  const out = { quality: q, weight: q, reach: 1, kind: null, craftId: null, uses: 0, said: null };
+  const exchanges = Math.max(1, Math.round(num(cfg.exchanges, 3)));
+  const k = num(cfg.reachWeight, 0.4);
+  let best = null;
+  for (const id of crafts) {
+    const craft = catalogue[id];
+    const r = craftReach(craft, { cfg });
+    if (!r) continue;
+    // ⚠️ THE BEST ONE OF EACH KIND, and harm decides the weight; guard and bolster are applied to the SIDE.
+    const cost = Math.max(1, num(craft.energyCost, num(craft.mechanic?.energyCost, 1)));
+    const cand = { ...r, energyCost: cost, name: craft.name || id };
+    if (!best || cand.reach > best.reach) best = cand;
+    if (r.kind !== "harm") continue;
+    if (!out.craftId || r.reach > out.reach) { out.reach = r.reach; out.kind = "harm"; out.craftId = r.craftId; out._cost = cost; out._name = cand.name; }
+  }
+  if (best && !out.craftId) { out.reach = best.reach; out.kind = best.kind; out.craftId = best.craftId; out._cost = best.energyCost; out._name = best.name; }
+  if (out.kind !== "harm") return out;   // a guard or a bolster does not raise its OWN weight
+  // capped by how many enemies are actually there: six targets against three raiders is three
+  // ⚠️ AND THE RESULT REPORTS WHAT WAS USED, NOT WHAT WAS CARRIED. My first cut left `reach` at the craft's
+  // own number while the weight and the receipt used the capped one — two different reaches in one answer, and
+  // a gate that asked "was it capped?" read the uncapped field and passed. `craftReach` keeps the craft's.
+  const reach = enemies > 0 ? Math.max(1, Math.min(out.reach, Math.round(enemies))) : out.reach;
+  out.craftReach = out.reach;
+  out.reach = reach;
+  const wide = q * (1 + (reach - 1) * k);
+  const uses = Math.max(0, Math.min(exchanges, Math.floor(num(energy, 0) / out._cost)));
+  out.uses = uses;
+  out.weight = Math.round(((uses * wide + (exchanges - uses) * q) / exchanges) * 100) / 100;
+  out.said = uses > 0
+    ? `${out._name} reaches ${reach}${uses < exchanges ? `, until the energy for it runs out` : ""}`
+    : `${out._name} reaches ${reach}, and there is no energy left for it`;
+  return out;
+}
+
+/** ⛑ WHAT A GUARD ABSORBS (§1c.2): "up to N allies take the guarding figure's quality as a floor on their
+ *  losses — the first losses on the guarded side are absorbed."
+ *
+ *  ⚠️ CAPPED AT A SHARE OF WHAT WOULD HAVE BEEN LOST, because uncapped it is not a floor, it is immunity:
+ *  measured, a heroic guard took a six-strong line from 1.80 average losses to 0.00 — a guard winning a fight
+ *  it is meant to SURVIVE. At half, the line loses 1.00 of 1.80 at six strong and 2.00 of 3.26 at forty: fewer
+ *  at every scale, never none. Aevi's own target for the row is "holds noticeably LONGER", not "wins more". */
+export function guardAbsorb(contingents = [], { cfg = {} } = {}) {
+  let cover = 0, quality = 0;
+  for (const c of contingents) {
+    if (!c || c.guardReach == null) continue;
+    cover += Math.max(0, num(c.guardReach, 0));
+    quality = Math.max(quality, num(c.quality, 1));
+  }
+  if (!cover || !quality) return 0;
+  const heads = contingents.reduce((a, c) => a + num(c.count ?? c.n, 0), 0);
+  return Math.min(quality, Math.max(0, Math.min(cover, heads - 1)));
+}
+
 /** ⛔ A LEGION IS NOT A BIGGER MELEE, and treating it as one is the trap. At this scale the individual roll
  *  stops meaning anything: the tide is decided by weight of numbers and the PC is ONE FIGURE inside it.
  *
@@ -327,7 +435,10 @@ export function legionClash(ours, theirs, { rng = Math.random, heroSwing = 0, he
   // ⚑ The tests never caught it because every one of them writes the contingents by hand and spells the
   // field `count`; every caller in the game spells it `n`. The model was validated on a path nothing takes.
   // ⛑ Accepting both repairs all three production callers at once and cannot break a caller that says `count`.
-  const strength = (units) => units.reduce((s, u) => s + num(u.count ?? u.n, 1) * num(u.quality, 1), 0);
+  // ⛔ SNG-659 §1 — AND A CONTINGENT MAY STATE ITS OWN WEIGHT. A named figure whose craft reaches six is
+  // not one body's worth of the tide, and `n × quality` cannot say so. `weight` is the whole contingent's
+  // contribution; absent, it is exactly `n × quality`, which is every caller that has not been taught.
+  const strength = (units) => units.reduce((s, u) => s + (u.weight != null ? num(u.weight, 0) : num(u.count ?? u.n, 1) * num(u.quality, 1)), 0);
   const us = strength(ours), them = strength(theirs);
   // ⛔ CCODE-321 / ERIK 2026-08-30 — A MYTHICAL IS BOTH, AND THE RULING IS THAT BOTH IS THE ANSWER:
   // "a Mythical, like the other tiers, is both a DIFFERENT KIND OF THING (status that reflects how much
@@ -627,7 +738,8 @@ export function contingentsOf(band) {
  *  ⛔ QUALITY IS `1 + floor(level/10)`, DELIBERATELY FLAT. A level-27 smith is worth three soldiers, not
  *  twenty-seven: `bandStrength` multiplies quality by count, so anything steeper would let one named
  *  person out-weigh a company and make the unit layer a way to smuggle a hero into a headcount. */
-export function contingentsFromPeople(people = [], { contributionsOf = null, levelOf = null, qualityOf = null } = {}) {
+export function contingentsFromPeople(people = [], { contributionsOf = null, levelOf = null, qualityOf = null,
+  craftsOf = null, energyOf = null, catalogue = null, enemies = 0, cfg = {} } = {}) {
   const named = [], plain = [];
   for (const p of people) {
     if (!p) continue;
@@ -645,13 +757,42 @@ export function contingentsFromPeople(people = [], { contributionsOf = null, lev
     // happened: the defender change measured as NO CHANGE across all 29 powers until this door existed.
     const stated = qualityOf ? Number(qualityOf(p)) : null;
     const lvl = Math.max(1, Number(levelOf ? levelOf(p) : p.level) || 1);
-    // ⚠️ AND THE OTHER DIRECTION STAMPS IT, so people → contingents → people is lossless rather than one-way.
-    return { n: 1, quality: Number.isFinite(stated) && stated > 0 ? Math.max(1, Math.round(stated)) : 1 + Math.floor(lvl / 10),
-      does, what: p.name || p.id || "one of yours", npcId: p.id || null };
+    const quality = Number.isFinite(stated) && stated > 0 ? Math.max(1, Math.round(stated)) : 1 + Math.floor(lvl / 10);
+    // ⛔ SNG-659 §1 — AND WHAT THEY CAN REACH. Without `craftsOf` this is exactly the line above it, which is
+    // every caller that has not been taught; with it, a figure whose craft hits six is worth more than a body.
+    const row = { n: 1, quality, does, what: p.name || p.id || "one of yours", npcId: p.id || null };
+    if (craftsOf && catalogue) {
+      const w = figureWeight(quality, { crafts: craftsOf(p) || [], energy: energyOf ? energyOf(p) : 0, catalogue, enemies, cfg });
+      if (w.kind === "harm" && w.weight > quality) { row.weight = w.weight; row.reach = w.reach; row.craftId = w.craftId; row.said = w.said; }
+      // ⛑ GUARD AND BOLSTER DO NOT RAISE THEIR OWN BEARER. A guard absorbs the side's first losses
+      // (`guardAbsorb`, read where losses are actually taken) and a bolster lifts other people, below.
+      else if (w.kind === "guard") { row.guardReach = w.reach; row.craftId = w.craftId; row.said = w.said; }
+      else if (w.kind === "bolster") { row.bolsterReach = w.reach; row.craftId = w.craftId; row.said = w.said; }
+    }
+    return row;
   });
   // ⛔ AND THE SIMPLE SOLDIERS ARE COUNTED, NOT DROPPED. Erik asked for the number explicitly, and a unit
   // that reports only its notables is a unit whose losses land on nobody.
   if (plain.length) out.push({ n: plain.length, quality: 1, does: ["HARM", "MARTIAL"], what: "rank and file" });
+  // ⛔ SNG-659 §1c.3 — A BOLSTER LIFTS THE PEOPLE AROUND IT: up to N allies fight at +1 quality. Applied
+  // LAST, over the finished set, because it is a fact about the side and not about its bearer — and it reaches
+  // the rank and file too, which is most of what a line is.
+  const bolster = out.reduce((a, c) => a + (Number(c.bolsterReach) || 0), 0);
+  if (bolster > 0) {
+    let left = bolster;
+    for (const c of out) {
+      if (left <= 0) break;
+      if (c.bolsterReach) continue;                       // it does not bolster itself
+      const heads = Math.max(1, Number(c.n) || 1);
+      const lift = Math.min(heads, left); left -= lift;
+      const q = Math.max(1, Number(c.quality) || 1);
+      // a contingent that states a weight has it raised in the same proportion, so the two readings agree
+      if (c.weight != null) c.weight = Math.round((c.weight * ((q + 1) / q)) * 100) / 100;
+      c.bolstered = lift;
+      c.quality = lift >= heads ? q + 1 : q;              // a partly-lifted block keeps its own rung and says so
+      if (c.weight == null && lift > 0 && lift < heads) c.weight = (heads - lift) * q + lift * (q + 1);
+    }
+  }
   return out;
 }
 
@@ -1144,7 +1285,8 @@ export function bloodUnit(bands, id, tide, { cfg = {} } = {}) {
 /** ⚠️ WHAT A CLASH COSTS THEM. Erik's tide decides the battle; this decides what it did to the people who
  *  fought it. ⛔ AND A BAND CAN BREAK WITHOUT BEING DESTROYED — that is the difference between a unit and a
  *  health bar, and it is the state a commander actually has to manage. */
-export function bloodBand(band, tide, { cfg = {} } = {}) {
+export function bloodBand(band, tide, opts = {}) {
+  const { cfg = {} } = opts;
   if (!band) return { band, lost: 0 };
   const t = num(tide, 0);
   // ⛔ CCODE-279 — READ THE COUNT FROM THE CONTINGENTS, NOT FROM A TOP-LEVEL FIELD A COMPOSED BAND DOES NOT
@@ -1160,7 +1302,11 @@ export function bloodBand(band, tide, { cfg = {} } = {}) {
   const rate = Math.max(0, num(cfg.lossPerTide, 0.12)) * (unwarded ? num(unwarded.value, 1.4) : 1);
   // losing costs more than winning, and a rout costs most
   const share = t >= 0 ? rate * (1 - Math.min(0.8, t)) : rate * (1 + Math.min(2, -t) * 1.5);
-  const lost = Math.min(head, Math.round(head * share));
+  // ⛔ SNG-659 §1c.2 — A GUARD ABSORBS THE FIRST LOSSES, capped at a share of them (see `guardAbsorb`):
+  // uncapped it is immunity rather than a floor, and the measured line took zero losses at every scale.
+  const raw = Math.min(head, Math.round(head * share));
+  const absorbCap = Math.max(0, Math.min(1, num(cfg.guardAbsorbShare, 0.5)));
+  const lost = Math.max(0, raw - Math.min(num(opts?.absorb, 0), Math.floor(raw * absorbCap)));
   const left = Math.max(0, head - lost);
   // ⚠️ `hurt` IS CUMULATIVE — losses so far against everyone who has ever stood in this band. A band that
   // has bled twice is closer to breaking than one taking its first losses, which is what makes a campaign

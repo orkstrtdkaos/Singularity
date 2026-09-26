@@ -677,7 +677,7 @@ export function yieldFor(holding, cfg, { density = null } = {}) {
  *
  *  ⚠️ A WATCH IS WHAT DETECTS: people on the garrison, or a feature that keeps one (sentries, a tower). Stone alone does not
  *  see. Returns the receipt the news reads, or null when nothing came of it. */
-export function resolveRaid(character, holding, { cfg = null, dangerLevel = 0, rng = Math.random, day = null, people = {}, npcCfg = {}, keeperFloor = null, power = null, meleeCfg = null, rules = {}} = {}) {
+export function resolveRaid(character, holding, { cfg = null, dangerLevel = 0, rng = Math.random, day = null, people = {}, npcCfg = {}, keeperFloor = null, power = null, meleeCfg = null, rules = {}, catalogue = {} } = {}) {
   // ⛔ ERIK 2026-09-12, OVER AEVI'S §4: a hull under way is RAIDABLE WHERE SHE IS — "it doesn't make sense to only update their
   // location at the very end." Her whereabouts come from the day (`carriage.voyagePosition`), the danger is the nearest place's,
   // and the crew aboard defends as a garrison does in port. The receipt says she was taken at sea so the news can read right.
@@ -723,6 +723,10 @@ export function resolveRaid(character, holding, { cfg = null, dangerLevel = 0, r
     note(`raided — ${how} — ${Object.entries(taken).map(([g, n]) => `${n} ${g}`).join(", ")} taken`);
     return { detected: false, taken, day, atSea, watch: wOdds, ...paid() };
   }
+  // ⛔ SNG-659 §1c.1 — HOW MANY OF THEM THERE ARE, read before the defenders are built: a craft reaching six
+  // against three raiders reaches three. A reach uncapped by who is actually coming would make a wide craft
+  // worth the same against a scouting party as against a war band.
+  const raiderHeads = (Array.isArray(raiders) ? raiders : []).reduce((a, c) => a + (Number(c?.n ?? c?.count) || 0), 0);
   // ⚑ the watch saw them: a fight, at band scale, unattended
     // ⛔ ERIK 2026-09-14: "these aren't just bodies that can hit something — they have skills and abilities they
     // can bring to bear." ⛑ So the defenders are read for what they ACTUALLY DO, out of the GM's own prose about
@@ -733,7 +737,14 @@ export function resolveRaid(character, holding, { cfg = null, dangerLevel = 0, r
     // ✅ SNG-657 §2 — they fight as themselves now: the rung their derived level puts them on, scaled by what
     // their own record says they bring to a defence. Not `p.level || 1`, which nobody has.
     const defenders = contingentsFromPeople(watchOf(holding, cfg).filter(id => !/^unit:/.test(String(id))).map(id => people?.[id] || character?.npcRegistry?.[id] || { id, name: id }),
-      { qualityOf: defenderQuality({ npcs: people, npcCfg, day, rules }), contributionsOf: (p) => contributionsOf(p, { evidence: true }) });
+      { qualityOf: defenderQuality({ npcs: people, npcCfg, day, rules }), contributionsOf: (p) => contributionsOf(p, { evidence: true }),
+        // ⛔ SNG-659 §1 — AND WHAT THEY CAN DO WITH IT. ⚠️ `craftsOf` MERGES TWO RECORDS, and it has to:
+        // measured across all 16 saves, the REGISTRY lists a craft for 0 of the 15 people standing on a hold and
+        // the authored pool lists one for 3 (Pell 27, Siol 9, Calvar 8). A reader written `registry[id] ||
+        // npcs[id]` reaches NOBODY, because the registry entry exists and is empty — the same shadow `dutyHand`
+        // threads `npcs` to see past (CCODE-411).
+        craftsOf: (p) => craftIdsOf(p, people), energyOf: (p) => energyFor(p, { npcs: people, npcCfg, day }),
+        catalogue, enemies: raiderHeads, cfg: meleeCfg || {} });
     // ⛔ CCODE-450: a band's hands put to guarding or patrolling meet the raiders as what they are — their heads, at their quality
     for (const id of watchOf(holding, cfg).filter(x => /^unit:/.test(String(x)))) {
       const m = /^unit:(.+):(\d+)$/.exec(String(id));
@@ -755,6 +766,11 @@ export function resolveRaid(character, holding, { cfg = null, dangerLevel = 0, r
   // ⛑ IT ALSO KEEPS THE CASUALTY BOOKS HONEST: `notePowerLoss` maps losses back by the `_at` index that
   // `raidersFrom` stamps on a CONTINGENT, and a person has none — so a leader in the clash would have had their
   // losses charged to contingent 0.
+  // ⛔ SNG-659 §1d — WHO MADE THE DIFFERENCE, said. A contingent that stated a reach carries the sentence
+  // `figureWeight` composed at the moment it knew both the reach and whether the energy paid for it. At most
+  // two are named: a receipt listing everybody is a receipt nobody reads.
+  const told = defenders.filter(d => d && d.said).slice(0, 2)
+    .map(d => `${d.what || "one of yours"}'s ${d.said}`);
   const leaderFights = !!(cfg?.raid?.leaderFights);
   const fighters = leaderFights ? raiders : raiders.filter(c => !c._person);
   const clash = legionClash(defenders, fighters.length ? fighters : raiders, { rng, cfg: cfg?.raid?.clash || {} });
@@ -785,16 +801,16 @@ export function resolveRaid(character, holding, { cfg = null, dangerLevel = 0, r
     holding.store[spoilKind] = (Number(holding.store[spoilKind]) || 0) + spoils;
     // ⚠️ THE LINE NAMES THEM when there is somebody to name, and says what it cost them — "raid beaten
     // off" about an anonymous mob teaches a player nothing they can act on.
-    note(whose
+    note((whose
       ? `${whose} came for it and were beaten off — ${spoils} ${spoilKind} taken from them${powerHit?.took ? `, ${powerHit.took} of theirs down` : ""}${powerHit?.broken ? ` — that is the last of them` : ""}`
-      : `raid beaten off — ${spoils} ${spoilKind} taken from them`);
+      : `raid beaten off — ${spoils} ${spoilKind} taken from them`) + (told.length ? ` · ${told.join("; ")}` : ""));
     return { detected: true, held: true, taken: {}, spoils: { [spoilKind]: spoils }, outcome: clash.outcome, day, atSea, power: powerHit || (whose ? { name: whose } : null) };
   }
   const taken = take(Math.max(0, Math.min(1, baseShare - step * stone)));
   if (Object.keys(taken).length) advanceHolding(holding, "problem", null, "raided", keeperFloor ? { keeperFloor } : null);   // ⚑ AN EVENT SLIPS AT ONCE — time slips slowly, a raid does not
-  note(whose
+  note((whose
     ? `${whose} took it — ${Object.entries(taken).map(([g, n]) => `${n} ${g}`).join(", ") || "nothing"} gone${powerHit?.took ? `, ${powerHit.took} of theirs down in the doing` : ""}`
-    : `raid fought and lost — ${Object.entries(taken).map(([g, n]) => `${n} ${g}`).join(", ") || "nothing"} taken`);
+    : `raid fought and lost — ${Object.entries(taken).map(([g, n]) => `${n} ${g}`).join(", ") || "nothing"} taken`) + (told.length ? ` · ${told.join("; ")}` : ""));
   return { detected: true, held: false, taken, outcome: clash.outcome, day, atSea,
     led: raiders.find(c => c._person) ? { id: raiders.find(c => c._person)._person, name: raiders.find(c => c._person).what } : null,
     power: powerHit || (whose ? { name: whose } : null), ...paid() };   // the path where the raiders WIN carried the fact too
@@ -842,6 +858,36 @@ export function watchOf(holding, cfg = null) {
  *  1.0, a vocation leaning 0.6, plain 0.3. A warden holds a wall; a filtration engineer is on it, not of it.
  *
  *  Returns a `levelOf` for `contingentsFromPeople`. */
+/** ⛔ SNG-659 §1 — WHICH CRAFTS A DEFENDER HAS, from BOTH records.
+ *
+ *  ⚠️ MEASURED BEFORE IT WAS WRITTEN: across all 16 saves, of the 15 people standing on a hold, the save's
+ *  REGISTRY lists a craft for **0** of them and the authored pool lists one for **3** (Pell 27, Siol 9,
+ *  Calvar 8). The obvious reader — `registry[id] || npcs[id]` — reaches NOBODY, because the registry entry
+ *  exists and carries an empty list. `dutyHand` threads `npcs` past the same shadow (CCODE-411: 32 of 132
+ *  people sheet to a different level once the pool is available).
+ *
+ *  ⬜ AND THE HONEST NUMBER IS ONE. Of those 15, exactly **one** (Pell Ran Marsh — `plain_weight` 6) carries a
+ *  craft that reaches past a single figure today. The mechanism is right; the population is content's to grow. */
+function craftIdsOf(p, npcs = {}) {
+  const ids = [];
+  for (const rec of [p, npcs?.[p?.id]]) {
+    for (const a of (Array.isArray(rec?.abilities) ? rec.abilities : [])) {
+      const id = typeof a === "string" ? a : (a?.abilityId || a?.id || null);
+      if (id) ids.push(String(id));
+    }
+  }
+  return [...new Set(ids)];
+}
+
+/** ⛑ WHAT A CRAFT COSTS THEM IS PAID OUT OF A DERIVED ENERGY, not a stored one — the same lesson as the
+ *  level: 0 of 132 people store one and 132 of 132 have one. `sheetFor` computes it. */
+function energyFor(p, { npcs = {}, npcCfg = {}, day = null } = {}) {
+  // ⚠️ `personSheetFor`, WHICH IS WHAT THIS FILE IMPORTS `sheetFor` AS. Written as `sheetFor` it is a
+  // ReferenceError that the catch below swallows into a 0 — and a defender with 0 energy never pays for a
+  // single wide use, so the whole feature would have measured as no change at all. Silently.
+  try { return Number(personSheetFor(personRecordFor(p, { npcs }), { day, cfg: npcCfg })?.energy) || 0; } catch { return 0; }
+}
+
 function defenderQuality({ npcs = {}, npcCfg = {}, day = null, rules = {} } = {}) {
   const w = (rules?.death || {}).watch || {};
   const weights = (w.tierWeight && typeof w.tierWeight === "object") ? w.tierWeight : {};
@@ -1259,7 +1305,7 @@ export function sellShareFor(holding, cfg) {
   return 0;
 }
 
-export function tickStore(character, holding, { cfg = null, economy = null, regionId = null, dangerLevel = 0, rng = Math.random, day = null, density = null, meaning = 0, people = {}, npcCfg = {}, locations = {}, rules = {} } = {}) {
+export function tickStore(character, holding, { cfg = null, economy = null, regionId = null, dangerLevel = 0, rng = Math.random, day = null, density = null, meaning = 0, people = {}, npcCfg = {}, locations = {}, rules = {}, catalogue = {} } = {}) {
   const keeperFloorEffects = (() => { try { const t = holding?.steward ? keeperTierOf(character, holding, { npcs: people, npcCfg, day }) : null; const fl = holding?.steward ? keeperFloorFor(t, cfg?.growth) : null; return fl ? { keeperFloor: fl } : null; } catch { return null; } })();
   if (!holding || !cfg) return null;
   const out = { yielded: null, upkeep: 0, short: 0, raid: null, full: false, justFull: false };
@@ -1371,7 +1417,8 @@ export function tickStore(character, holding, { cfg = null, economy = null, regi
     const rc = raidChanceFor(character, holding, { cfg, dangerLevel, people, npcCfg, day, total, fullAt });
     const keeperFloor = holding.steward ? keeperFloorFor(rc.keeperTier, cfg?.growth) : null;
     // ⛔ CCODE-504 — the rules bag rides, because the watch ROLLS now and its dials live in rules.death.watch.
-    if (rng() < rc.chance) out.raid = resolveRaid(character, holding, { cfg, dangerLevel, rng, day, people, npcCfg, keeperFloor, rules });
+    if (rng() < rc.chance) out.raid = resolveRaid(character, holding, { cfg, dangerLevel, rng, day, people, npcCfg, keeperFloor, rules, catalogue,
+      meleeCfg: { ...(rules?.melee || {}), ...(rules?.martial || {}) } });
   }
   return out;
 }

@@ -229,7 +229,22 @@ export function standingCarriers(car, people = {}, character = null) {
  *  ⚠️ AND `personalRisk` HAS NEVER BEEN READ BY ANYTHING. `legionClash` has computed and returned it since it
  *  was written, with a comment arguing hard for why it must have a floor, and no module in the engine ever
  *  looked at it. This is its first consumer, and it is the thing that makes Erik's ruling mean something. */
-export function resolveRoadHazard(character, car, { rng = Math.random, cfg = null, people = {}, day = null, where = null } = {}) {
+/** ⛑ SNG-659 §1 — THE SAME MERGE THE HOLD RAID MAKES, for the same measured reason: a save's registry entry
+ *  for a person EXISTS and carries an empty craft list, so `registry[id] || npcs[id]` reaches nobody. Written
+ *  here rather than imported because `holdings.js` imports `caravan.js` and not the other way round — a second
+ *  copy of four lines beats a cycle, and the gate asserts they agree. */
+function escortCraftIds(p, npcs = {}) {
+  const ids = [];
+  for (const rec of [p, npcs?.[p?.id]]) {
+    for (const a of (Array.isArray(rec?.abilities) ? rec.abilities : [])) {
+      const id = typeof a === "string" ? a : (a?.abilityId || a?.id || null);
+      if (id) ids.push(String(id));
+    }
+  }
+  return [...new Set(ids)];
+}
+
+export function resolveRoadHazard(character, car, { rng = Math.random, cfg = null, people = {}, day = null, where = null, catalogue = {}, meleeCfg = {}, npcCfg = {} } = {}) {
   // ✅ ERIK 2026-09-12: the hazard happened SOMEWHERE — `where` comes from positionOnRoad and is named in the event, so a player
   // reading the log knows which stretch of road took the load rather than only that the road did.
   const atWhere = where?.name ? ` near ${where.name}` : "";
@@ -262,10 +277,16 @@ export function resolveRoadHazard(character, car, { rng = Math.random, cfg = nul
     // ⚠️ BEFORE THIS, NO CALLER INJECTED `contributionsOf` AT ALL — `does` fell through to `p.contributions`,
     // which a registry record has never carried, so EVERY defender landed in the anonymous block. The named/plain
     // split existed and nothing could ever reach the named half.
-    const defenders = contingentsFromPeople(escort, { levelOf: (p) => num(p?.level, 1),
-      contributionsOf: (p) => contributionsOf(p, { evidence: true }) });
   const d = Math.max(1, Math.round(num(car.danger, 1)));
   const raiders = [{ n: d, quality: Math.max(1, Math.round(d / 2)), what: "raiders" }];
+    // ⛔ SNG-659 §1 — AND WHAT THE ESCORT CAN DO WITH IT. Aevi's §1a names this caller by line number: "the
+    // same function runs caravan escorts, so this fixes both." ⚠️ The raiders are counted FIRST here, because
+    // the reach is capped by who is actually on the road — and a road party is small, so the cap does most of
+    // the work: a craft reaching six against two raiders reaches two.
+    const defenders = contingentsFromPeople(escort, { levelOf: (p) => num(p?.level, 1),
+      contributionsOf: (p) => contributionsOf(p, { evidence: true }),
+      craftsOf: (p) => escortCraftIds(p, people), energyOf: (p) => num(p?.energy, 0),
+      catalogue, enemies: d, cfg: meleeCfg });
   const clash = legionClash(defenders, raiders, { rng, cfg: raidCfg.clash || {} });
   const held = clash.tide > 0.05;
 
@@ -327,6 +348,7 @@ export const ROAD_HAZARD_PER_DANGER_DAY = 0.003;
  *  coin and never mints it. Returns the receipts the news reads. */
 export function tickCaravans(character, {
   day = null, locations = {}, economy = null, cfg = null, rng = Math.random, people = {}, perDangerChance = ROAD_HAZARD_PER_DANGER_DAY,
+  catalogue = {}, meleeCfg = {},   // ⛔ SNG-659 §1: an escort whose crafts nothing can see fights as bodies
 } = {}) {
   const out = [];
   for (const car of caravansOf(character)) {
@@ -340,7 +362,7 @@ export function tickCaravans(character, {
       // ✅ ERIK 2026-09-12: the danger WHERE THEY ARE on this day of the road, not the worst step of the whole route.
       const at = positionOnRoad(car, now - (elapsed - 1 - i), locations);
       if (rng() < clamp01(at.danger * perDangerChance)) {
-        const r = resolveRoadHazard(character, car, { rng, cfg, people, day: now, where: at });
+        const r = resolveRoadHazard(character, car, { rng, cfg, people, day: now, where: at, catalogue, meleeCfg });
         // ⚑ EACH EVENT CARRIES ITS OWN NOTE. The caller used to reach back for the caravan's latest event,
         // which duplicated an arrival and swallowed the robbing that happened on the way to it.
         out.push({ kind: "hazard", caravanId: car.id, note: car.events[car.events.length - 1]?.what || null, ...r });

@@ -678,7 +678,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `note` | 240 | `mechanic`×240 | ✅ READ | `art.js`, `assignments.js`, `authormode.js` |
 | `effectTags` | 190 | `root`×190 | ✅ READ | `battleprompt.js`, `braids.js`, `martial.js` |
 | `scope` | 155 | `mechanic`×155 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `recovery_snapshots.js` |
-| `targets` | 149 | `mechanic`×149 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `reconcile.js` |
+| `targets` | 149 | `mechanic`×149 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `melee.js` |
 | `gated` | 113 | `root`×113 | ✅ READ | `borncontract.js`, `generate.js`, `gm_registry.js` |
 | `damageType` | 110 | `mechanic`×110 | ✅ READ | `craftmechanics.js`, `damagetypes.js`, `gm.js` |
 | `dice` | 105 | `mechanic`×105 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `gm.js` |
@@ -701,7 +701,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `backlash` | 23 | `root`×23 | ✅ READ | `gm.js`, `intensity.js`, `app.js` |
 | `conserveSuppresses` | 23 | `root`×23 | ✅ READ | `app.js` |
 | `traditionV2` | 21 | `root`×21 | ⛔ DARK | — |
-| `imposes` | 21 | `tree`×21 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `skill_battle.js` |
+| `imposes` | 21 | `tree`×21 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `melee.js` |
 | `touchTier` | 18 | `root`×18 | ✅ READ | `capabilities.js` |
 | `upkeep` | 18 | `root`×18 | ✅ READ | `combatants.js`, `holdings.js`, `holdwork.js` |
 | `schoolAffinity` | 18 | `root`×18 | ✅ READ | `app.js` |

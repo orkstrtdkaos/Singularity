@@ -653,7 +653,8 @@ export function advanceHoldings({ character, now = Date.now(), ladder = null, co
     const holdCfg = content?.rules?.economy?.holdStore ? { ...content.rules.economy.holdStore, features: content.rules.economy.holdFeatures || null } : null;
     const grew = growHolding(character, h, { cfg: holdCfg, npcs: content?.npcs || {}, npcCfg: content?.rules?.npcStanding || {},
       worldCount: count, day: (() => { try { return absoluteWorldDay(); } catch { return null; } })(), nameOf: (id) => character?.npcRegistry?.[id]?.name || content?.npcs?.[id]?.name || id });
-    const st = tickStore(character, h, { cfg: holdCfg, economy: content?.rules?.economy || null, npcCfg: content?.rules?.npcStanding || {}, locations: content?.locations || {}, rules: content?.rules || {},   // ⛔ CCODE-504: the watch ROLLS, and its dials are in rules.death.watch   // v2 §1: the keeper's tier joins the raid product and sets the floor; runner fees read the gate nearby
+    const st = tickStore(character, h, { cfg: holdCfg, economy: content?.rules?.economy || null, npcCfg: content?.rules?.npcStanding || {}, locations: content?.locations || {}, rules: content?.rules || {},
+      catalogue: content?.abilities || {},   // ⛔ SNG-659 §1: a raid that cannot see a defender's crafts cannot count them   // ⛔ CCODE-504: the watch ROLLS, and its dials are in rules.death.watch   // v2 §1: the keeper's tier joins the raid product and sets the floor; runner fees read the gate nearby
       // ⛔ SNG-634 C2 — AND WHO IS STANDING HERE MOVES IT. The signed sum of the `dangerLift` of every power
       // whose `reach` covers this place, which mechanises Erik's 2026-07-19 ruling: clearing them lowers it.
       // ⚠️ ADDED TO THE ARITHMETIC THAT WAS ALREADY HERE, deliberately NOT routed through `dangerOf`: that
@@ -718,7 +719,9 @@ export function advanceHoldings({ character, now = Date.now(), ladder = null, co
   for (const ev of tickCaravans(character, { day: (() => { try { return absoluteWorldDay(); } catch { return null; } })(),
     locations: content?.locations || {}, economy: content?.rules?.economy || null,
     cfg: content?.rules?.economy?.holdStore || null, rng,
-    people: { ...(content?.npcs || {}), ...(character?.npcRegistry || {}) } })) {
+    people: { ...(content?.npcs || {}), ...(character?.npcRegistry || {}) },
+    catalogue: content?.abilities || {},   // ⛔ SNG-659 §1: Aevi's §1a names this caller by line number
+    meleeCfg: { ...(content?.rules?.melee || {}), ...(content?.rules?.martial || {}) } })) {
     if (ev?.note) news.push(ev.note);   // ⚑ the event's OWN note — reaching for the caravan's latest duplicated arrivals
   }
   return { news: news.map(t => ({ text: t, section: "yours" })), moved };

@@ -2809,7 +2809,9 @@ console.log("\n── §187 · five kinds of carriage, a crew that is the engine
     && /the danger WHERE THEY ARE on this day/.test(rd("engine/caravan.js")) && /const at = positionOnRoad\(car, now - \(elapsed - 1 - i\), locations\);/.test(rd("engine/caravan.js")),
     JSON.stringify(steps.map(s => s.placeId)));
   check("§187: …and the hazard READS the place it happened at rather than being handed it and dropping it",
-    /where = null \} = \{\}\) \{/.test(rd("engine/caravan.js")) && /const atWhere = where\?\.name \? ` near \$\{where\.name\}` : ""/.test(rd("engine/caravan.js")) && /set upon\$\{atWhere\}/.test(rd("engine/caravan.js")));
+    // ⚠️ THIS PINNED THE SIGNATURE'S TAIL — `where = null } = {}) {` — so adding any parameter after
+    // `where` reddened a claim about whether `where` is READ. A gate may not pin its neighbours.
+    /export function resolveRoadHazard\([\s\S]{0,400}?, where = null/.test(rd("engine/caravan.js")) && /const atWhere = where\?\.name \? ` near \$\{where\.name\}` : ""/.test(rd("engine/caravan.js")) && /set upon\$\{atWhere\}/.test(rd("engine/caravan.js")));
   // the world brings her in, not a moment sooner
   // ⛔ THE ORDER MATTERS AND MY FIRST VERSION GOT IT WRONG: both ticks run before the check does, so where she is had to be read
   // BETWEEN them, or the assertion asks where she is after she has already arrived.
@@ -28449,6 +28451,163 @@ console.log("\n── §361 · the level an item was made at ──");
   check("§361: ⛑ …and the schema declares it, so an author can write it on a relic",
     (() => { const s = JSON.parse(rd("schemas/item.schema.json")); const p = s.properties?.madeAtLevel;
       return p?.type === "integer" && p.minimum === 1 && p.maximum === 100; })());
+}
+
+/* ══════════ §362 · SNG-659 §1 — A MASS FIGHT COUNTS WHAT EACH FIGURE CAN DO ══════════ */
+// ✅ ERIK, 2026-09-25: "on raids with 13 people against a few… if those few have good skills that hit multiple
+// people, we need to account for that. There are lots of skills that can hit multiple targets or zones… so it
+// SHOULD matter who the defenders are."
+//
+// ⛔ THE DEFECT: `legionClash` totalled each side as Σ(heads × quality) and NOTHING IN THE ENGINE HAD EVER READ
+// A CRAFT'S REACH. 149 crafts carry `mechanic.targets` and 14 carry `mechanic.area`; `craftmechanics.js` lists
+// both as a dimension an `extend` may grow, and that was the whole of it. A defender whose `burning_ones` hits
+// six was the same figure as one who throws a single punch.
+//
+// ⚠️ MEASURED BEFORE CHOSEN (po/CCODE_20260926_sng659_measured_before_choosing.md): both literal readings of
+// "counts as up to N figures' worth" fail against §1d — herself-plus-N−1-soldiers leaves the lone epic at 0%
+// against a target of two-in-three, and N-of-her puts every row at 100%. Each extra target is worth a FRACTION
+// of her own quality, and the fraction is a dial because two of Aevi's own targets cannot both be met.
+console.log("\n── §362 · what one figure can reach ──");
+{
+  const ML = await import("../engine/melee.js");
+  const HD = await import("../engine/holdings.js");
+  const CB = await import("../engine/combatants.js");
+  const { loadContentHeadless: lch362 } = await import("./headless_content.mjs");
+  const C362 = await lch362();
+  const cat362 = C362.abilities || {};
+  const martial362 = { ...(C362.rules?.melee || {}), ...(C362.rules?.martial || {}) };
+
+  // ⛑ THE DIALS ARE CONTENT, because the arithmetic is a ruling waiting on its ruler and a dial is how that
+  // gets settled without an engine change.
+  check("§362: ⛔ THE ARITHMETIC IS A DIAL, IN THE FILE THAT ALREADY HOLDS THE CLASH'S NUMBERS — `reachWeight`, `reachExchanges`, `areaToFigures`, `guardAbsorbShare`",
+    Number(martial362.reachWeight) === 0.4 && Number(martial362.reachExchanges) === 3
+    && Number(martial362.areaToFigures) === 1.2 && Number(martial362.guardAbsorbShare) === 0.5,
+    JSON.stringify({ k: martial362.reachWeight, ex: martial362.reachExchanges, area: martial362.areaToFigures, guard: martial362.guardAbsorbShare }));
+
+  // ⛔ THE CRAFTS THE FEATURE IS ABOUT ARE REALLY THERE, and the count is the one I measured rather than the
+  // one the spec estimated: 40 under the strict rule, not 46.
+  const reachable = Object.values(cat362).filter(a => ML.craftReach(a, { cfg: martial362 }));
+  check("§362: ⚑ …and it reads a real population — 40 crafts reach past one figure, in three kinds",
+    reachable.length >= 35 && reachable.length <= 45
+    && ["harm", "guard", "bolster"].every(k => reachable.some(a => ML.craftReach(a, { cfg: martial362 }).kind === k)),
+    `${reachable.length} crafts: ${["harm", "guard", "bolster"].map(k => `${k} ${reachable.filter(a => ML.craftReach(a, { cfg: martial362 }).kind === k).length}`).join(" \u00b7 ")}`);
+
+  // ⚠️ AEVI'S §1c.5 PROSE CLAUSE HAS NO POPULATION, so nothing was built for it. Asserted so that the day a
+  // prose area IS authored, this reddens and the clause gets built rather than silently doing nothing.
+  const proseAreas = Object.values(cat362).filter(a => a?.mechanic?.area != null && !Number.isFinite(Number(a.mechanic.area)));
+  check("§362: ⬜ …and no authored `area` is prose, which is why the spec's prose clause was not built",
+    proseAreas.length === 0, proseAreas.map(a => a.id).join(", "));
+
+  // ═════ §3.3's three, driven ═════
+  const q = 5, burning = cat362.burning_ones;
+  const withCraft = (energy, enemies) => ML.figureWeight(q, { crafts: ["burning_ones"], energy, catalogue: cat362, enemies, cfg: martial362 });
+  const without = ML.figureWeight(q, { crafts: [], energy: 200, catalogue: cat362, enemies: 13, cfg: martial362 });
+
+  check("§362: ⛔ A NAMED FIGURE WITH A MANY-TARGET HARM CRAFT ALWAYS OUTWEIGHS THE SAME FIGURE WITHOUT IT — never less, at any energy",
+    (() => {
+      for (let e = 0; e <= 200; e += 1) if (withCraft(e, 13).weight < without.weight) return false;
+      return withCraft(200, 13).weight > without.weight;
+    })(), `${without.weight} \u2192 ${withCraft(200, 13).weight} at full energy`);
+
+  check("§362: ⛔ …AND EMPTIED ENERGY RETURNS THEM TO SINGLE REACH (§1c.4) — the limit that stops one wizard beating an army",
+    withCraft(0, 13).weight === q && withCraft(200, 13).weight > withCraft(Number(burning?.energyCost) || 9, 13).weight
+    && withCraft(Number(burning?.energyCost) || 9, 13).weight > q,
+    `0 energy \u2192 ${withCraft(0, 13).weight} \u00b7 one use \u2192 ${withCraft(9, 13).weight} \u00b7 three \u2192 ${withCraft(200, 13).weight}`);
+
+  check("§362: ⛑ …and RANK AND FILE ARE UNCHANGED — the fiction cannot read forty unnamed spearmen's crafts and the save does not hold them",
+    (() => {
+      const cs = ML.contingentsFromPeople([{ id: "a", name: "A" }, { id: "b", name: "B" }],
+        { contributionsOf: () => ["HARM"], craftsOf: () => ["burning_ones"], catalogue: cat362, enemies: 13, cfg: martial362 });
+      return cs.length === 1 && cs[0].what === "rank and file" && cs[0].weight == null && cs[0].quality === 1;
+    })());
+
+  // ⛔ THE ENEMY CAP (§1c.1) — six targets against three raiders is three, or a wide craft is worth the same
+  // against a scouting party as against a war band.
+  check("§362: ⛔ …and the reach is CAPPED BY WHO IS ACTUALLY THERE — six targets against three raiders is three",
+    withCraft(200, 3).weight < withCraft(200, 13).weight && withCraft(200, 3).reach === 3 && withCraft(200, 13).reach === 6);
+
+  // ⛑ GUARD AND BOLSTER DO NOT RAISE THEIR OWN BEARER.
+  check("§362: ⛑ …a GUARD craft does not raise its own bearer's weight — it absorbs the side's first losses instead",
+    ML.figureWeight(q, { crafts: ["held_breath"], energy: 200, catalogue: cat362, enemies: 13, cfg: martial362 }).weight === q
+    && ML.figureWeight(q, { crafts: ["held_breath"], energy: 200, catalogue: cat362, enemies: 13, cfg: martial362 }).kind === "guard");
+
+  check("§362: ⛑ …and a BOLSTER lifts the line rather than itself, and reaches the rank and file — which is most of what a line IS",
+    (() => {
+      const people = [{ id: "w", name: "W", contributions: ["KNOW"] }, ...Array.from({ length: 5 }, (_, i) => ({ id: `g${i}`, name: `G${i}` }))];
+      const co = (p) => p.id === "w" ? ["KNOW", "HARM"] : ["HARM"];
+      const plain = ML.contingentsFromPeople(people, { contributionsOf: co, craftsOf: () => [], catalogue: cat362, enemies: 13, cfg: martial362 });
+      const lifted = ML.contingentsFromPeople(people, { contributionsOf: co, craftsOf: (p) => p.id === "w" ? ["harmonic_voice"] : [], catalogue: cat362, enemies: 13, cfg: martial362 });
+      const sum = (cs) => cs.reduce((a, c) => a + (c.weight != null ? c.weight : (c.n || 1) * (c.quality || 1)), 0);
+      return sum(lifted) > sum(plain);
+    })());
+
+  // ⛔ A GUARD IS A FLOOR, NOT IMMUNITY. Uncapped, a heroic guard took a six-strong line from 1.80 average
+  // losses to 0.00 — a guard winning a fight it is meant to survive.
+  check("§362: ⛔ …and a guard's absorption is CAPPED at a share of the losses — uncapped it is immunity, not a floor",
+    (() => {
+      const band = () => ({ id: "b", contingents: [{ n: 6, quality: 1, does: ["HARM"] }] });
+      const none = ML.bloodBand(band(), -0.4, { cfg: martial362 }).lost;
+      const some = ML.bloodBand(band(), -0.4, { cfg: martial362, absorb: 4 }).lost;
+      return none > 0 && some > 0 && some < none;
+    })(), "fewer at every scale, never none");
+
+  // ⛔ AND THE READER MERGES TWO RECORDS, OR IT REACHES NOBODY. Measured: of the 15 people standing on a hold
+  // across all 16 saves, the REGISTRY lists a craft for 0 and the authored pool lists one for 3.
+  check("§362: ⛔ THE CRAFTS COME FROM BOTH RECORDS — a registry entry that exists and is EMPTY shadows the authored one",
+    /craftsOf: \(p\) => craftIdsOf\(p, people\)/.test(rd("engine/holdings.js"))
+    && /for \(const rec of \[p, npcs\?\.\[p\?\.id\]\]\)/.test(rd("engine/holdings.js")));
+
+  // ⛑ AND THE WHOLE PATH IS DRIVEN, because proving `figureWeight` returns a bigger number proves nothing
+  // about whether a raid ever asks it.
+  check("§362: ⛔ DRIVEN THROUGH `resolveRaid` — the same warden holds more often with a many-target craft than without",
+    (() => {
+      const cfgH = C362.rules?.economy?.holdStore;
+      const warden = (crafts) => ({ id: "warden", name: "The Warden", role: "warden of the march", level: 40,
+        subAttributes: { presence: 10 }, abilities: crafts.map(id => ({ abilityId: id, level: 3 })) });
+      const run = (crafts) => {
+        let held = 0, said = 0;
+        for (let i = 0; i < 300; i++) {
+          const h = { id: "h1", kind: "enterprise", name: "Annex", condition: "thriving", locationId: "millbrook",
+            store: { raw_material: 20 }, crew: [], garrison: ["warden"], history: [], steward: null };
+          const c = { id: "c", name: "P", purse: { crystal: 100 }, holdings: [h], npcRegistry: { warden: { id: "warden", name: "The Warden" } } };
+          let n = 0; const rng = () => { n++; return (Math.sin(i * 97 + n * 13) + 1) / 2; };
+          const r = HD.resolveRaid(c, h, { cfg: cfgH, dangerLevel: 4, rng, day: 100, people: { warden: warden(crafts) },
+            npcCfg: C362.rules?.npcStanding || {}, rules: C362.rules || {}, meleeCfg: martial362, catalogue: cat362 });
+          if (r?.held) held++;
+          if ((h.history || []).some(e => /Burning Ones reaches/.test(String(e?.note || "")))) said++;
+        }
+        return { held, said };
+      };
+      const bare = run([]), wide = run(["burning_ones"]);
+      return wide.held > bare.held && wide.said > 0 && bare.said === 0;
+    })(), "and §1d's last line: the receipt NAMES who made the difference");
+
+  // ⛔ BOTH CALLERS OF `legionClash` THAT BUILD PEOPLE INTO CONTINGENTS. Aevi's §1a names the second by line
+  // number: "the same function runs caravan escorts, so this fixes both." A fix that lands on one of two
+  // callers is half a migration.
+  check("§362: ⛔ BOTH CALLERS READ CRAFTS — the hold raid and the caravan escort, and the catalogue reaches each from `worldtick`",
+    /craftsOf: \(p\) => craftIdsOf\(p, people\)/.test(rd("engine/holdings.js"))
+    && /craftsOf: \(p\) => escortCraftIds\(p, people\)/.test(rd("engine/caravan.js"))
+    && /catalogue: content\?\.abilities \|\| \{\}/.test(rd("engine/worldtick.js"))
+    && (rd("engine/worldtick.js").match(/catalogue: content\?\.abilities \|\| \{\}/g) || []).length === 2,
+    "one `catalogue:` for the tick's holdings, one for its caravans");
+
+  // ⚠️ AND THE TWO MERGES MUST AGREE. `holdings.js` imports `caravan.js`, so the helper is written twice
+  // rather than imported — four lines against an import cycle — and this is what stops them drifting.
+  check("§362: ⚠️ …and the two copies of the merge agree — written twice to avoid an import cycle, gated so they cannot drift",
+    (() => {
+      const body = (src, name) => (src.match(new RegExp(`function ${name}\\(p, npcs = \\{\\}\\) \\{[\\s\\S]*?\\n\\}`)) || [""])[0]
+        .replace(new RegExp(name, "g"), "X").replace(/\s+/g, " ");
+      const a = body(rd("engine/holdings.js"), "craftIdsOf"), b = body(rd("engine/caravan.js"), "escortCraftIds");
+      return a.length > 80 && a === b;
+    })());
+
+  // ⬜ AND THE HONEST POPULATION, asserted so it cannot quietly be claimed to be bigger than it is.
+  check("§362: ⬜ …and it changes ONE defender in the game today — the mechanism is the engine's, the population is content's",
+    (() => {
+      const ids = ["plain_weight", "keystone_blow", "edge"];
+      return ids.every(id => cat362[id]) && ML.craftReach(cat362.plain_weight, { cfg: martial362 })?.reach === 6;
+    })(), "Pell Ran Marsh, `plain_weight` 6 \u2014 the only one of 15 people standing on a hold who carries a craft that reaches past one");
 }
 
 /* ══════════ REPORT ══════════ */

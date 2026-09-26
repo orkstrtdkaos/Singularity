@@ -10570,8 +10570,13 @@ await (async () => {
     born({ ...hollowSkill, functions: [] }, "skill").vague.some(v => v.id === "function-in-vocab"));
   check("SNG-250 §3 CONCRETE: a real in-vocab verb passes clean",
     born({ ...hollowSkill, functions: ["strike"] }, "skill").verdict === "clean");
-  check("SNG-250 §3 CONCRETE: an off-vocab creature tier is flagged (BEAST_TIER silently resolves it to `notable`)",
-    born({ id: "c", name: "c", tier: "legendary", class: "b", pressures: ["HARM"], look: "l", danger: "d" }, "creature").vague.some(v => v.id === "tier-in-vocab"));
+  // ⚠️ THE EXAMPLE WAS `legendary`, AND SINCE CCODE-528 THAT IS A REAL RUNG (SNG-660 §1 gave every rung on the
+  // ladder a creature). Aevi asked for one that can never be a rung, because the vocabulary file is about to name
+  // all seven and this check would have gone red for being CORRECT. ⛑ And the old reason — "BEAST_TIER silently
+  // resolves it to `notable`" — described the fallback SNG-660 retired: an unknown tier is loud now and the
+  // creature is left out of the pool rather than fought as a notable. The reason moves with the example.
+  check("SNG-250 §3 CONCRETE: an off-vocab creature tier is flagged — `boss` is not a rung and never will be, and the pool now says so out loud rather than fighting it as a notable",
+    born({ id: "c", name: "c", tier: "boss", class: "b", pressures: ["HARM"], look: "l", danger: "d" }, "creature").vague.some(v => v.id === "tier-in-vocab"));
   check("SNG-250 §3 CONCRETE: an item with NEITHER hook (no bonusTags, no numeric effects) is flagged inert",
     born({ id: "i", name: "Old Trinket", kind: "misc", description: "It hums with old power.", consumable: false }, "item").vague.some(v => v.id === "effect-resolvable"));
   check("SNG-250 §3 CONCRETE: EITHER hook alone satisfies the item bar (gear via bonusTags, consumable via effects)",

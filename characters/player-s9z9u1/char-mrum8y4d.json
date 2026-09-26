@@ -1917,14 +1917,6 @@
       {
         "day": 5,
         "worldDay": 88,
-        "text": "The Hollow King of the Wild Half has not been seen at home in a long while — whatever is happening has all of them.",
-        "tier": "murmur",
-        "section": "world",
-        "locationId": "the_maw"
-      },
-      {
-        "day": 5,
-        "worldDay": 88,
         "text": "Bram the Scarred has stopped spending themselves on The Second Manifestation.",
         "tier": "murmur",
         "section": "world",
@@ -2074,11 +2066,18 @@
         "text": "The Harvest Hand has lost people it will not get back.",
         "tier": "event",
         "section": "world"
+      },
+      {
+        "day": 8,
+        "worldDay": 88,
+        "text": "The Wardens of Cairnhold has lost people it will not get back.",
+        "tier": "event",
+        "section": "world"
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 2116,
-    "lastSharedReadAt": "2026-09-26T04:47:34.110Z",
+    "lastGenCount": 2125,
+    "lastSharedReadAt": "2026-09-26T13:00:34.031Z",
     "lastTickWorldDay": 88,
     "lastCanonWorldDay": 88,
     "turnsSinceOffer": 2,
@@ -2371,7 +2370,7 @@
         "kind": "decision",
         "premise": "Someone who keeps the count of what has been unmade has begun rounding down, telling themselves the difference is noise — but the rounding has a direction, and it has been consistent for long enough…",
         "cause": "The act of counting the unmade requires a decision about what constitutes a thing distinct enough to be counted, and that threshold has always been left to…",
-        "stage": 16,
+        "stage": 17,
         "seededAtCount": 1917,
         "surfaced": true,
         "fate": "growing",
@@ -2384,7 +2383,7 @@
         "kind": "decision",
         "premise": "The person who holds authority to formally designate what has been unmade as 'resolved' has not done so for anything in years, and the backlog of unresolved unmakings is beginning to press against…",
         "cause": "In the_unmade, the act of resolution is itself an act of power, and the authority-holder has quietly discovered that unresolved things remain partially…",
-        "stage": 12,
+        "stage": 13,
         "seededAtCount": 1968,
         "surfaced": true,
         "fate": "growing",
@@ -2409,7 +2408,7 @@
         "kind": "decision",
         "premise": "Someone has begun quietly counting what no longer exists — cataloguing absences — and has not yet decided whether to share what the count implies.",
         "cause": "The Unmade is defined by what has been lost or undone; its people have long customs around not naming absence directly, because naming draws attention to the…",
-        "stage": 7,
+        "stage": 8,
         "seededAtCount": 2053,
         "surfaced": true,
         "fate": "growing",
@@ -2422,7 +2421,7 @@
         "kind": "decision",
         "premise": "An elder who alone remembers the last time something like the current unraveling occurred has not yet spoken, weighing whether the knowing will help or hasten what is coming.",
         "cause": "In the_unmade, what is lost or dissolved carries weight equal to what remains — silence is understood as a form of preservation, and the elder has lived long…",
-        "stage": 6,
+        "stage": 7,
         "seededAtCount": 2100,
         "surfaced": true,
         "fate": "growing",
@@ -9694,7 +9693,7 @@
     "retrievalTried": {
       "the_scouring_hand": 80
     },
-    "quarteredAtCount": 2053,
+    "quarteredAtCount": 2125,
     "crusades": {
       "the_undefeated": {
         "arcId": "arc_the_poles_pull",
@@ -9711,7 +9710,7 @@
       "the_doubting_lattice": 84,
       "the_war_ender": 84
     },
-    "updatesToldTo": "2.9.5",
+    "updatesToldTo": "2.9.9",
     "newsLog": [
       {
         "day": 4,
@@ -11080,6 +11079,14 @@
         "worldDay": 88,
         "text": "The game was updated to v2.9.5 — 2 new, 2 fixed.",
         "loggedAt": "2026-09-26T04:47:37.463Z"
+      },
+      {
+        "kind": "update",
+        "section": "world",
+        "version": "2.9.9",
+        "worldDay": 88,
+        "text": "The game was updated to v2.9.9 — 2 new, 4 fixed, 2 changed.",
+        "loggedAt": "2026-09-26T13:00:39.843Z"
       }
     ]
   },
@@ -14269,8 +14276,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790398077758,
-  "rev": 962,
+  "updatedAt": 1790427639844,
+  "rev": 964,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -18279,9 +18286,9 @@
       },
       "lastVerb": "patrol",
       "lastVerbDay": 8,
-      "losses": 1,
+      "losses": 0,
       "lost": {
-        "0": 64
+        "0": 96
       },
       "noticed": {
         "trigger": "crossed",
@@ -18335,7 +18342,7 @@
       },
       "lastVerb": "expand",
       "lastVerbDay": 8,
-      "wins": 1,
+      "wins": 2,
       "grownHeads": 44,
       "grewDay": 8
     },
@@ -18387,21 +18394,21 @@
     "power_flesh_temple": {
       "lastVerb": "recruit",
       "lastVerbDay": 8,
-      "wins": 1,
+      "wins": 2,
       "grownHeads": 18,
       "grewDay": 5
     },
     "power_vacated_custody": {
       "lastVerb": "expand",
       "lastVerbDay": 8,
-      "wins": 1,
+      "wins": 2,
       "grownHeads": 6,
       "grewDay": 5
     },
     "power_the_ceaseless": {
       "lastVerb": "expand",
       "lastVerbDay": 8,
-      "wins": 2,
+      "wins": 0,
       "grownHeads": 10,
       "grewDay": 5,
       "losses": 0
@@ -18417,7 +18424,7 @@
       "wins": 0,
       "grownHeads": 12,
       "grewDay": 5,
-      "losses": 0,
+      "losses": 1,
       "lost": {
         "0": 24
       },

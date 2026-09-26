@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 10,
-  "xp": 949,
+  "xp": 954,
   "attributes": {
     "physical": 4,
     "mental": 5,
@@ -119,20 +119,21 @@
   ],
   "alignment": {
     "mechanical_spiritual": 0.0077000000000000055,
-    "falsehood_truth": 0.40090671008321793,
+    "falsehood_truth": 0.395861374579057,
     "demonic_angelic": -0.020000000000000004,
     "dark_light": 0.085,
     "concrete_abstract": 0.18349246667125482,
     "chaos_order": -0.06802821875,
     "body_mind": 0.0658375,
     "emotional_logical": 0.045960551562499986,
-    "space_time": 0.028000000000000004
+    "space_time": 0.028000000000000004,
+    "violence_peace": -0.005000000000000001
   },
   "attunement": 10,
   "maxHealth": 83,
   "health": 83,
   "maxEnergy": 161,
-  "energy": 150,
+  "energy": 145,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -475,25 +476,32 @@
         "player": "Ask her what her name and station are.",
         "summary": "At Whistling Woman Post, the band stands before Seraphine's agent while Orla Yardley names themselves plainly—an Architect from the Reaches who came carrying a breaking mandate but chose to question it instead.",
         "narration": "You turn to Orla, who stands motionless in the moorland light—not defensive, not afraid, simply present in a way that reads as honest. \"What's your name and station?\" you ask plainly.\n\nOrla meets your eyes. \"Orla Yardley,\" they say, voice steady as stone. \"I carry the title Architect from the Reaches, though I stopped believing in the shape that title holds some days ago.\" A breath—not hesitation, but the space where a thought settles. \"I came here holding a breaking mandate. I believed that sealed things should be unmade, as mercy. I watched you choose understanding instead, at the Hub crossing, and felt my certainty crack like old ice.\" They pause. \"I'm here now because the breaking itself needs to be examined. And because your band moves toward answers, and answers matter more than mandates.\"\n\nThe woman in grey does not move or react. Her gaze stays on you, measuring something beneath the words. Orla's presence seems to settle the moment slightly—a third voice, not hostile, simply honest. The moorland wind catches the shrine's edges. Smoke still rises from the kitchen chimney."
+      },
+      {
+        "player": "Ask the woman in grey directly what her name is—demand that much of her.",
+        "summary": "At Whistling Woman Post, Vail Langley—Seraphine's direct agent—names herself plainly and offers negotiation before force. The time to choose is now.",
+        "narration": "You meet her eyes directly. \"What's your name?\"\n\nShe doesn't flinch. Doesn't move her hand from the doorframe. For a moment the moorland wind is the only sound—long grass bending, the shrine's stone holding still.\n\n\"Vail Langley,\" she says, and there is weight in the saying. Not a secret given reluctantly, but a name owned. \"I hold the title Enforcer of the High Luminary's will. It is not a rank you'll find written anywhere. It is what Seraphine calls those who must make certain things happen without committee or debate.\"\n\nShe turns her gaze from you to the band behind you, measuring them the way someone measures distance. \"I know who you are. I know what lies beneath Millbrook. I know what the engineer buried and what Seraphine needs to know before the valley breaks wider. And I know you will not yield it to her.\"\n\nA slight shift—not a smile, something more honest than that. \"So we stand here at a threshold. Seraphine can seize what you're carrying, or she can negotiate what happens next. She sent me to offer the negotiation first, because she is not without mercy. But the offer has an end.\" She finally removes her hand from the frame. \"What will you choose?\"\n\nOy shifts beside you, lens irising. The moorland holds its breath."
       }
     ],
     "lastTurn": {
-      "narration": "You turn to Orla, who stands motionless in the moorland light—not defensive, not afraid, simply present in a way that reads as honest. \"What's your name and station?\" you ask plainly.\n\nOrla meets your eyes. \"Orla Yardley,\" they say, voice steady as stone. \"I carry the title Architect from the Reaches, though I stopped believing in the shape that title holds some days ago.\" A breath—not hesitation, but the space where a thought settles. \"I came here holding a breaking mandate. I believed that sealed things should be unmade, as mercy. I watched you choose understanding instead, at the Hub crossing, and felt my certainty crack like old ice.\" They pause. \"I'm here now because the breaking itself needs to be examined. And because your band moves toward answers, and answers matter more than mandates.\"\n\nThe woman in grey does not move or react. Her gaze stays on you, measuring something beneath the words. Orla's presence seems to settle the moment slightly—a third voice, not hostile, simply honest. The moorland wind catches the shrine's edges. Smoke still rises from the kitchen chimney.",
-      "sceneSummary": "At Whistling Woman Post, the band stands before Seraphine's agent while Orla Yardley names themselves plainly—an Architect from the Reaches who came carrying a breaking mandate but chose to question it instead.",
+      "narration": "You meet her eyes directly. \"What's your name?\"\n\nShe doesn't flinch. Doesn't move her hand from the doorframe. For a moment the moorland wind is the only sound—long grass bending, the shrine's stone holding still.\n\n\"Vail Langley,\" she says, and there is weight in the saying. Not a secret given reluctantly, but a name owned. \"I hold the title Enforcer of the High Luminary's will. It is not a rank you'll find written anywhere. It is what Seraphine calls those who must make certain things happen without committee or debate.\"\n\nShe turns her gaze from you to the band behind you, measuring them the way someone measures distance. \"I know who you are. I know what lies beneath Millbrook. I know what the engineer buried and what Seraphine needs to know before the valley breaks wider. And I know you will not yield it to her.\"\n\nA slight shift—not a smile, something more honest than that. \"So we stand here at a threshold. Seraphine can seize what you're carrying, or she can negotiate what happens next. She sent me to offer the negotiation first, because she is not without mercy. But the offer has an end.\" She finally removes her hand from the frame. \"What will you choose?\"\n\nOy shifts beside you, lens irising. The moorland holds its breath.",
+      "sceneSummary": "At Whistling Woman Post, Vail Langley—Seraphine's direct agent—names herself plainly and offers negotiation before force. The time to choose is now.",
       "choices": [
         {
-          "label": "Ask the woman in grey directly what her name is—demand that much of her.",
+          "label": "Tell her the sealed chamber is not hers to seize—that it answers only to those who ask it honestly, and Seraphine's hand is not honest.",
           "attribute": "social",
           "subAttribute": "presence",
           "axes": {
-            "falsehood_truth": 0.3,
-            "violence_peace": -0.1
+            "falsehood_truth": 0.6,
+            "violence_peace": 0.3,
+            "chaos_order": -0.4
           },
-          "difficulty": "normal",
+          "difficulty": "hard",
           "opposedDifficulty": null,
           "intentTags": [
-            "negotiate",
-            "confront"
+            "refuse",
+            "defend",
+            "threaten"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -502,18 +510,19 @@
           "emergenceId": null
         },
         {
-          "label": "Use Wrong Reality—give her a false read of the moment, something that lets you move past her without committing to an answer yet.",
+          "label": "Use Wrong Reality to show her a false picture of what the chamber contains—something that will satisfy Seraphine's hunger for order without revealing what's actually there.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "falsehood_truth": -0.6,
-            "violence_peace": 0.2
+            "falsehood_truth": -0.7,
+            "violence_peace": 0.2,
+            "chaos_order": 0.5
           },
-          "difficulty": "hard",
-          "opposedDifficulty": 32,
+          "difficulty": "very hard",
+          "opposedDifficulty": 35,
           "intentTags": [
             "deceive",
-            "sneak"
+            "gamble"
           ],
           "abilityId": "wrong_reality",
           "energyCost": 4,
@@ -522,19 +531,19 @@
           "emergenceId": null
         },
         {
-          "label": "Tell her plainly: you will go to the Standing Annex. Seraphine can come to you there if she wants answers, but you will not be intercepted on the road.",
+          "label": "Ask Vail directly what she herself wants—not what Seraphine sent her to do, but what Vail needs from this moment.",
           "attribute": "social",
-          "subAttribute": "presence",
+          "subAttribute": "rapport",
           "axes": {
-            "falsehood_truth": 0.4,
-            "violence_peace": 0.1
+            "falsehood_truth": 0.5,
+            "violence_peace": 0.6,
+            "demonic_angelic": 0.3
           },
           "difficulty": "hard",
-          "opposedDifficulty": 30,
+          "opposedDifficulty": null,
           "intentTags": [
-            "threaten",
-            "confront",
-            "negotiate"
+            "negotiate",
+            "study"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -543,20 +552,24 @@
           "emergenceId": null
         },
         {
-          "label": "Ask Ravel or Estry—do they recognize this woman, or read anything in her that might matter?",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Move past her—fold the band directly to the Standing Annex and leave Vail standing at the threshold with her unanswered demand.",
+          "attribute": "practical",
+          "subAttribute": "craft",
           "axes": {
-            "falsehood_truth": 0.2
+            "space_time": 0.6,
+            "violence_peace": 0.4,
+            "chaos_order": -0.3
           },
-          "difficulty": "very easy",
+          "difficulty": "hard",
           "opposedDifficulty": null,
           "intentTags": [
-            "help"
+            "travel",
+            "escape",
+            "gamble"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
+          "abilityId": "shortfold",
+          "energyCost": 6,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
@@ -570,76 +583,91 @@
         "xp": 0
       },
       "ledgerEvents": [],
-      "questUpdates": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "the-taken-from-the-city",
+          "note": "Vail Langley, agent of the High Luminary, has named herself and made Seraphine's position explicit: the sealed chamber is known in Radiant halls, and she will negotiate or seize. The choice of how to answer will determine whether the band reaches the Standing Annex unimpeded or faces direct opposition."
+        }
+      ],
       "standingOps": [],
       "delegateOps": [],
       "jobOps": [],
       "arcOps": [],
       "adoptSchool": null,
-      "offer": null,
+      "offer": {
+        "thing": "Vail Langley names herself directly—a significant breach of operational security that speaks to her own confidence or her belief that the negotiation is already decided.",
+        "from": "Seraphine's strategy: offering negotiation before force, trusting that Loki will see reason. Vail believes the band will yield."
+      },
       "stageOps": [],
       "scene": {
-        "setting": "Whistling Woman Post on the spinward moorland, late afternoon in mid-autumn. Stone waystation with open doors, the relay station's clean lines, a shrine with no name. Gold moorland stretching in all directions. Smoke rising from the kitchen chimney. The woman in grey still at the threshold, hand on the frame. Utterly still.",
+        "setting": "Whistling Woman Post on the spinward moorland, late afternoon in mid-autumn. Stone waystation with open doors, the relay station's clean lines, a shrine with no name. Gold moorland stretching outward in all directions, fading toward dusk. Smoke rising faintly from the kitchen chimney. Vail Langley standing just inside the threshold, hand now at her side, motionless but present. Utterly still.",
         "npcsPresent": [
           {
-            "name": "The woman in grey (Seraphine's agent)",
-            "state": "Standing at the threshold, hand on the frame, measuring the moment. Waiting for Loki's next choice."
+            "name": "Vail Langley",
+            "state": "Standing at the threshold, hand at her side, waiting for Loki's answer. Measured. Certain. Giving the band a single moment to choose."
           },
           {
             "name": "Orla Yardley",
-            "state": "Motionless but present—having just named themselves plainly. At ease in the honesty."
-          },
-          {
-            "name": "Ravel Ash-bearer",
-            "state": "Gone very still, reading the moment with precision. Present at Loki's side."
+            "state": "Standing with the band, motionless but present. Having just named themselves plainly. At ease in the honesty of the moment."
           },
           {
             "name": "Estry Krell",
-            "state": "Hand steady at her side, watching the brush and the threshold both. Alert but not afraid."
+            "state": "Hand steady at her side, watching both the moorland and the threshold. Alert but not afraid."
           },
           {
             "name": "Sable",
-            "state": "Standing with the band, reading the woman with the precision of someone who has already made her choice. Steady."
+            "state": "Standing with the band, reading Vail with the precision of someone who has already made her choice. Steady."
           },
           {
             "name": "Cy",
-            "state": "Lamp raised ahead, its lens irised in the afternoon light. Stilled by the presence of absolute certainty."
+            "state": "Lamp raised ahead, its lens irised in the afternoon light. Lens now irising in response to the confrontation—attuned to the moment's weight."
           }
         ],
         "objects": [
           "The waystation's open doors",
           "The shrine with no name",
-          "Smoke rising from the kitchen chimney",
+          "Smoke rising faintly from the kitchen chimney",
           "The moorland stretching in all directions, gold and fading",
           "The relay station architecture, weathered and kept"
         ],
         "threads": [
           "Will Loki commit to an answer about what they intend with the sealed chamber?",
-          "What will Seraphine do if Loki refuses to yield control of the chamber?",
           "Can the band reach the Standing Annex before Seraphine makes her move?",
-          "What is the woman's own name, and will she give it?",
-          "Will the band have to fight their way past her, or can they negotiate passage?"
+          "What will Vail do if Loki refuses to negotiate?",
+          "Does Seraphine truly believe she can seize the chamber, or is this a test of Loki's resolve?"
         ]
       },
       "npcUpdates": [
         {
-          "op": "update",
-          "npcId": "orla-yardley",
-          "name": "Orla Yardley",
-          "title": "Architect of the Reaches",
-          "role": "A Syllogist who came carrying a breaking mandate and chose to question it instead",
-          "gender": "man",
-          "pronouns": "they/them",
-          "learned": [
-            "Came to the valley carrying a breaking mandate born from belief that sealed things should be destroyed as mercy",
-            "Watched Loki choose understanding at the Hub crossing and felt their fifteen-year certainty crack",
-            "Believes now that breaking itself needs to be examined",
-            "Speaks plainly about the shape their own beliefs have held and their willingness to let that shape break"
+          "op": "meet",
+          "npcId": "vail-langley",
+          "name": "Vail Langley",
+          "title": "Enforcer of the High Luminary's will",
+          "role": "Direct agent of Seraphine; tasked with intercepting the band and demanding control of the sealed chamber",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "sex": "female",
+          "age": 41,
+          "description": "A woman in grey with the bearing of someone who has never needed to raise her voice to be obeyed. Utterly still. Absolute certainty in her presence. Moves with economy and control. Does not flinch or hesitate.",
+          "note": "Named herself directly when asked—spoke without hedging the way someone speaks who has spent years learning to speak truth rather than deflect. Offered negotiation before force on Seraphine's direct instruction. She believes the band will yield.",
+          "skillsObserved": [
+            "Absolute certainty in her presence",
+            "Moves with economy and control",
+            "Speaks truth without deflection or performance",
+            "Reads situations and people with military precision"
           ],
-          "note": "Named themselves directly when asked. Honest about the mandates they carry and the questions that broke them. Present without defensiveness or fear.",
-          "relationshipDelta": 1,
+          "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "Walking with the band toward the Standing Annex. Present at Whistling Woman Post in confrontation with Seraphine's agent."
+          "statusNote": "Standing at Whistling Woman Post, blocking the band's path. Waiting for Loki's answer to Seraphine's ultimatum.",
+          "learned": [
+            "She holds the title Enforcer of the High Luminary's will — not a rank written anywhere, but what Seraphine calls those who must make certain things happen without committee or debate",
+            "She knows who Loki is and what lies beneath Millbrook",
+            "She knows what the engineer buried and what Seraphine needs to know",
+            "Seraphine is not without mercy — she offered negotiation before force",
+            "Seraphine believes only unified order can meet what wakes beneath the valley",
+            "The sealed chamber and its contents are known to the Radiant Plateau's highest authority"
+          ]
         }
       ],
       "intentsHeard": [],
@@ -648,16 +676,38 @@
       "discovery": null,
       "codexUpdates": [
         {
-          "topic": "the-architect-in-the-lower-annex",
-          "label": "Orla Yardley",
+          "topic": "seraphine-high-luminary",
+          "label": "Seraphine, the High Luminary",
           "kind": "person",
-          "entityId": "orla-yardley",
-          "fact": "Orla Yardley is an Architect of the Reaches who carries the title formally but no longer believes in the shape it holds. They came to the valley bearing a breaking mandate—a belief that sealed things should be unmade as mercy—but witnessed Loki choose understanding over destruction at the Hub crossing. That choice fractured their fifteen-year certainty. They now travel with Loki's band to examine what breaking itself means and to pursue answers rather than mandates.",
+          "fact": "The absolute authority of the Radiant Plateau and the valley's most powerful aligned figure. She knows of the sealed chamber beneath Millbrook and has sent her direct agent Vail Langley to demand its surrender or seize it by force. She believes only unified order can meet what wakes beneath the valley. She has also knowledge of what an engineer buried in the lower Annex records—records that name Loki and that Seraphine needs to know before the valley breaks.",
           "links": [
-            "the-hub-crossing",
-            "the-null-stone",
-            "the-taken-from-the-city",
-            "halvex-coil"
+            "millbrook",
+            "the-sealed-chamber",
+            "the-high-luminary-s-reach",
+            "vail-langley"
+          ]
+        },
+        {
+          "topic": "vail-langley",
+          "label": "Vail Langley, Enforcer",
+          "kind": "person",
+          "fact": "Seraphine's direct agent. Titled Enforcer of the High Luminary's will — not a written rank, but the term for those who make certain things happen without committee or debate. Stationed at Whistling Woman Post to intercept Loki before the band reaches the Standing Annex. Offered negotiation first, but the offer has an end.",
+          "links": [
+            "seraphine-high-luminary",
+            "whistling-woman-post",
+            "the-taken-from-the-city"
+          ]
+        },
+        {
+          "topic": "the-high-luminary-s-reach",
+          "label": "The High Luminary's Reach",
+          "kind": "lore",
+          "fact": "Seraphine's authority and knowledge extend beyond the Radiant Plateau into the valley's deepest secrets. She knows of the sealed chamber beneath Millbrook, the engineering records that name Loki, and what the engineer buried. Her reach is absolute and her will to seize control is real.",
+          "links": [
+            "seraphine-high-luminary",
+            "millbrook",
+            "the-sealed-chamber",
+            "the-engineering-records"
           ]
         }
       ],
@@ -676,13 +726,14 @@
       "unlockPrecursor": null,
       "unlockSubstrate": null,
       "timeOps": {
-        "hoursPassed": 0
+        "hoursPassed": 0.5,
+        "why": "The confrontation at Whistling Woman Post—a tense standoff in the moorland afternoon. The sun slides toward evening but the moment feels suspended."
       },
       "moveTo": null,
       "stateOps": [],
       "itemUpdates": [],
       "deriveItem": null,
-      "imagePrompt": null,
+      "imagePrompt": "The moorland waystation at the threshold of evening: Vail Langley in grey, absolutely still, her hand at her side. Behind her, the open doors frame the shrine's nameless stone. The band stands before her on the wind-worn grass—Loki, Orla, Sable, Estry, Cy's lamp held high. The gold light of late afternoon catching everything. A moment of pure tension—the space between negotiation and force, suspended.",
       "imageMedium": null,
       "newAbility": null,
       "gambitOps": null,
@@ -695,45 +746,44 @@
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Whistling Woman Post on the spinward moorland, late afternoon in mid-autumn. Stone waystation with open doors, the relay station's clean lines, a shrine with no name. Gold moorland stretching in all directions. Smoke rising from the kitchen chimney. The woman in grey still at the threshold, hand on the frame. Utterly still.",
+      "setting": "Whistling Woman Post on the spinward moorland, late afternoon in mid-autumn. Stone waystation with open doors, the relay station's clean lines, a shrine with no name. Gold moorland stretching outward in all directions, fading toward dusk. Smoke rising faintly from the kitchen chimney. Vail Langley standing just inside the threshold, hand now at her side, motionless but present. Utterly still.",
       "npcsPresent": [
         {
-          "name": "The woman in grey (Seraphine's agent)",
-          "state": "Standing at the threshold, hand on the frame, measuring the moment. Waiting for Loki's next choice. · Gone very still, reading the moment with precision. Present at Loki's side."
+          "name": "Vail Langley",
+          "state": "Standing at the threshold, hand at her side, waiting for Loki's answer. Measured. Certain. Giving the band a single mome"
         },
         {
           "name": "Orla Yardley",
-          "state": "Motionless but present—having just named themselves plainly. At ease in the honesty."
+          "state": "Standing with the band, motionless but present. Having just named themselves plainly. At ease in the honesty of the mome"
         },
         {
           "name": "Estry Krell",
-          "state": "Hand steady at her side, watching the brush and the threshold both. Alert but not afraid."
+          "state": "Hand steady at her side, watching both the moorland and the threshold. Alert but not afraid."
         },
         {
           "name": "Sable",
-          "state": "Standing with the band, reading the woman with the precision of someone who has already made her choice. Steady."
+          "state": "Standing with the band, reading Vail with the precision of someone who has already made her choice. Steady."
         },
         {
           "name": "Cy",
-          "state": "Lamp raised ahead, its lens irised in the afternoon light. Stilled by the presence of absolute certainty."
+          "state": "Lamp raised ahead, its lens irised in the afternoon light. Lens now irising in response to the confrontation—attuned to "
         }
       ],
       "objects": [
         "The waystation's open doors",
         "The shrine with no name",
-        "Smoke rising from the kitchen chimney",
+        "Smoke rising faintly from the kitchen chimney",
         "The moorland stretching in all directions, gold and fading",
         "The relay station architecture, weathered and kept"
       ],
       "threads": [
         "Will Loki commit to an answer about what they intend with the sealed chamber?",
-        "What will Seraphine do if Loki refuses to yield control of the chamber?",
         "Can the band reach the Standing Annex before Seraphine makes her move?",
-        "What is the woman's own name, and will she give it?",
-        "Will the band have to fight their way past her, or can they negotiate passage?"
+        "What will Vail do if Loki refuses to negotiate?",
+        "Does Seraphine truly believe she can seize the chamber, or is this a test of Loki's resolve?"
       ]
     },
-    "beats": 4,
+    "beats": 5,
     "subPlace": null
   },
   "clock": {
@@ -759,14 +809,14 @@
       "locationEntityId": "the-unlit-deep",
       "status": "active",
       "progress": [
-        "Orla Yardley arrives on the road with intent to join the band and test Loki's beliefs in return. The gathering grows.",
         "Orla Yardley arrives on the road toward the Standing Annex with intent to join the band and test Loki's belief in understanding over breaking. The gathering grows—four now walk the road together, moving toward the Annex and toward answers.",
         "The band gathers supplies and sets out toward the Standing Annex by the long road. Mara Wells confirms Halvex Coil keeps the Annex and that the earth beneath Millbrook resists shortcuts—honoring the land's resistance rather than fighting it.",
         "The band has gathered supplies and is moving toward the Standing Annex by the long road, as directed by Mara Wells. Halvex Coil keeps the Annex and may have answers. The earth beneath Millbrook resists shortcuts—the band honors that resistance.",
         "The band departs Millbrook at dawn with supplies, honoring the earth's resistance to shortcuts. The long road northward to Whistling Woman Post and the Standing Annex is underway.",
         "The band departs Millbrook at dawn with supplies, honoring the earth's resistance to shortcuts. The long road northward to Whistling Woman Post and the Standing Annex is underway.",
         "The band reaches Whistling Woman Post—but the High Luminary's reach extends further than expected. The sealed chamber is known in Radiant halls.",
-        "The High Luminary's reach extends into the valley—she knows of the sealed chamber and has sent an agent to intercept the band. The question of what Seraphine will do with that knowledge is now immediate."
+        "The High Luminary's reach extends into the valley—she knows of the sealed chamber and has sent an agent to intercept the band. The question of what Seraphine will do with that knowledge is now immediate.",
+        "Vail Langley, agent of the High Luminary, has named herself and made Seraphine's position explicit: the sealed chamber is known in Radiant halls, and she will negotiate or seize. The choice of how to answer will determine whether the band reaches the Standing Annex unimpeded or faces direct opposition."
       ],
       "aliases": [],
       "startedAt": "2026-07-24T21:30:43.637Z"
@@ -1710,7 +1760,7 @@
       "name": "Enforcer of Seraphine's will",
       "nameUnknown": true,
       "trueName": "Vail Langley",
-      "role": "Enforcer of Seraphine's will",
+      "role": "Direct agent of Seraphine; tasked with intercepting the band and demanding control of the sealed cha",
       "title": "Agent of the High Luminary",
       "fullName": "Vail Isaac Langley",
       "description": "A woman in grey, utterly still, with the bearing of someone who has never needed to raise her voice to be obeyed. Her certainty is absolute.",
@@ -1720,24 +1770,29 @@
       },
       "relationship": 0,
       "history": [
-        "[d8] She knows about the sealed chamber beneath Millbrook and has been sent to intercept Loki before the band reaches the Standing Annex. She knows Loki's name. She knows what lies under the Null Stone."
+        "[d8] She knows about the sealed chamber beneath Millbrook and has been sent to intercept Loki before the band reaches the Standing Annex. She knows Loki's name. She knows what lies under the Null Stone.",
+        "[d8] Named herself directly when asked—spoke without hedging the way someone speaks who has spent years learning to speak truth rather than deflect. Offered negotiation before force on Seraphine's direct instruction. She believes the band will yield."
       ],
       "knownFacts": [
         "Serves the High Luminary directly",
         "Knows about the sealed chamber beneath Millbrook",
-        "Has been waiting at Whistling Woman Post specifically for Loki's arrival"
+        "Has been waiting at Whistling Woman Post specifically for Loki's arrival",
+        "She holds the title Enforcer of the High Luminary's will — not a rank written anywhere, but what Seraphine calls those who must make certain things happen without committee or debate",
+        "She knows who Loki is and what lies beneath Millbrook",
+        "She knows what the engineer buried and what Seraphine needs to know"
       ],
       "skillsObserved": [
         "Absolute certainty in her presence",
         "Moves with economy and control",
-        "Does not flinch or hesitate"
+        "Does not flinch or hesitate",
+        "Speaks truth without deflection or performance"
       ],
       "status": "active",
       "sex": "female",
       "gender": "woman",
       "pronouns": "she/her",
-      "age": 45,
-      "statusNote": "Standing at Whistling Woman Post, blocking the band's path",
+      "age": 41,
+      "statusNote": "Standing at Whistling Woman Post, blocking the band's path. Waiting for Loki's answer to Seraphine's ultimatum.",
       "domains": {
         "primary": "mason"
       },
@@ -1746,7 +1801,8 @@
         "locationId": "gen-the-made-gate",
         "day": 8
       },
-      "met": 1
+      "met": 2,
+      "roleSince": 88
     }
   },
   "placeMemory": {
@@ -2265,12 +2321,8 @@
     "lastSharedReadAt": "2026-09-26T15:18:31.285Z",
     "lastTickWorldDay": 88,
     "lastCanonWorldDay": 88,
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 0,
     "recentOffers": [
-      {
-        "thing": "Mara Wells' clear naming of the valley's own will—the land has awareness and agency; to move through it is to ask permission, not to take…",
-        "from": "Mara's read of travelers and the land alike; her knowledge of what lies beneath Millbrook; her willingness to speak plainly about…"
-      },
       {
         "thing": "Mara's plain wisdom about the long road — not a promise, but a teacher's reading of how the road itself works",
         "from": "Her own experience with travelers, and her respect for the ones who made it through by letting the journey teach them"
@@ -2286,6 +2338,10 @@
       {
         "thing": "The woman from the Radiant Plateau speaks her mandate clearly and without malice — but the clarity is the threat itself",
         "from": "Seraphine's knowledge of the sealed chamber and her belief that only unified order can meet what wakes"
+      },
+      {
+        "thing": "Vail Langley names herself directly—a significant breach of operational security that speaks to her own confidence or her belief that the…",
+        "from": "Seraphine's strategy: offering negotiation before force, trusting that Loki will see reason. Vail believes the band will yield."
       }
     ],
     "wantProgress": {
@@ -12595,21 +12651,27 @@
           "[d5] [while away] Seraphine holds her silence for now — the true thing she carries is not yet ripe enough to be said to anyone who would hear it.",
           "[d8] The High Luminary knows about the sealed chamber beneath Millbrook and has sent an agent to intercept Loki at Whistling Woman Post. She moves to control what surfaces from beneath the valley before the Wardens of Cairnhold take action.",
           "[d8] Enforcer of Seraphine's will",
-          "[d8] She knows about the sealed chamber. She is moving to control it before the band can understand it. She is not cruel, but she is certain."
+          "[d8] She knows about the sealed chamber. She is moving to control it before the band can understand it. She is not cruel, but she is certain.",
+          "[d8] The absolute authority of the Radiant Plateau and the valley's most powerful aligned figure. She knows of the sealed chamber beneath Millbrook and has sent her direct agent Vail Langley to demand its surrender or seize it by force. She believes only unified order can meet what wakes beneath the…",
+          "[d8] Seraphine's authority and knowledge extend beyond the Radiant Plateau into the valley's deepest secrets. She knows of the sealed chamber beneath Millbrook, the engineering records that name Loki, and what the engineer buried. Her reach is absolute and her will to seize control is real."
         ],
         "links": [
-          "the-hub-crossing",
-          "millbrook",
           "radiant-agent-whistling-woman",
           "seraphine-s-reach",
-          "the-regulator-question"
+          "the-regulator-question",
+          "the-sealed-chamber",
+          "the-high-luminary-s-reach",
+          "vail-langley",
+          "seraphine-high-luminary",
+          "the-engineering-records"
         ],
         "aliases": [
           "Seraphine",
           "the High Luminary",
           "Seraphine, the High Luminary",
           "Enforcer of Seraphine's will",
-          "The High Luminary (Nemesis)"
+          "The High Luminary (Nemesis)",
+          "The High Luminary's Reach"
         ],
         "createdDay": 5,
         "entityId": "the-unbending-witness",
@@ -13114,6 +13176,22 @@
         "aliases": [],
         "createdDay": 8,
         "updatedDay": 8
+      },
+      "vail-langley": {
+        "id": "vail-langley",
+        "label": "Vail Langley, Enforcer",
+        "kind": "person",
+        "facts": [
+          "[d8] Seraphine's direct agent. Titled Enforcer of the High Luminary's will — not a written rank, but the term for those who make certain things happen without committee or debate. Stationed at Whistling Woman Post to intercept Loki before the band reaches the Standing Annex. Offered negotiation first…"
+        ],
+        "links": [
+          "seraphine-high-luminary",
+          "whistling-woman-post",
+          "the-taken-from-the-city"
+        ],
+        "aliases": [],
+        "createdDay": 8,
+        "updatedDay": 8
       }
     },
     "mergeUndo": [
@@ -13498,19 +13576,19 @@
     "deferredMysteries": []
   },
   "tendencies": {
-    "devotion": 0.5435366417625833,
-    "cerebral": 15.213915820543596,
-    "social": 14.729320010149166,
-    "strategic": 12.28616614573195,
-    "cautious": 5.515953672411701,
-    "amorous": 5.128929323103606,
-    "generous": 4.200194006753242,
-    "ruthless": 0.13614181427045904,
-    "risky": 0.11126123218494281,
-    "patient": 0.030383441640799282,
-    "deception": 0.035367899856778996,
-    "carousing": 0.7569213803350267,
-    "leadership": 1.5526592417128753
+    "devotion": 0.5299482257185187,
+    "cerebral": 14.833567925030005,
+    "social": 15.361087009895437,
+    "strategic": 11.979011992088651,
+    "cautious": 5.378054830601409,
+    "amorous": 5.000706090026016,
+    "generous": 4.095189156584411,
+    "ruthless": 0.13273826891369755,
+    "risky": 0.10847970138031925,
+    "patient": 0.0296238555997793,
+    "deception": 0.03448370236035952,
+    "carousing": 0.7379983458266509,
+    "leadership": 1.5138427606700533
   },
   "aptitudes": [
     "strategist",
@@ -13519,7 +13597,7 @@
     "orator",
     "faithful"
   ],
-  "actionCount": 216,
+  "actionCount": 217,
   "grantsVersion": 1,
   "precursorAccess": [
     "address_sense"
@@ -14665,8 +14743,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790436844338,
-  "rev": 1008,
+  "updatedAt": 1790436950199,
+  "rev": 1009,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -15764,7 +15842,7 @@
     "umbral_depths": 54,
     "the_quickwood": 101,
     "the_center": 50,
-    "valley": 40,
+    "valley": 41,
     "the_open_reach": 3
   },
   "opLossPending": false,
@@ -15924,10 +16002,10 @@
     {
       "id": "sess-20",
       "startedAt": "2026-09-26T13:32:28.973Z",
-      "lastAt": "2026-09-26T15:34:04.314Z",
+      "lastAt": "2026-09-26T15:35:50.162Z",
       "startDay": 88,
       "endDay": 88,
-      "beats": 5
+      "beats": 6
     }
   ],
   "establishedFacts": [
@@ -16096,7 +16174,7 @@
   ],
   "_opLedger": {
     "offer": {
-      "applied": 56,
+      "applied": 57,
       "rejected": 2,
       "lastWhy": "rejected-shape"
     },
@@ -16113,28 +16191,28 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 250,
-    "choices": 250,
-    "characterDeltas": 134,
-    "scene": 250,
+    "sceneSummary": 251,
+    "choices": 251,
+    "characterDeltas": 135,
+    "scene": 251,
     "placeUpdates": 33,
-    "codexUpdates": 146,
-    "timeOps": 200,
-    "offer": 50,
+    "codexUpdates": 147,
+    "timeOps": 201,
+    "offer": 51,
     "generateRequest": 7,
-    "sceneEnded": 119,
-    "npcUpdates": 201,
+    "sceneEnded": 120,
+    "npcUpdates": 202,
     "moveTo": 12,
-    "gambitApt": 77,
+    "gambitApt": 78,
     "deeds": 15,
-    "questUpdates": 52,
+    "questUpdates": 53,
     "standingOps": 4,
     "factUpdates": 22,
     "stageOps": 7,
     "encounterOps": 9,
     "ledgerEvents": 14,
     "newEncounter": 3,
-    "imagePrompt": 42,
+    "imagePrompt": 43,
     "scene_ended": 1,
     "stateOps": 3,
     "_engineClosedScene": 4,
@@ -16146,7 +16224,7 @@
     "bandOps": 1,
     "exchangeOps": 2
   },
-  "_opTurns": 250,
+  "_opTurns": 251,
   "customAbilities": {
     "mirror-bright": {
       "id": "mirror-bright",
@@ -17136,7 +17214,7 @@
     "comfort": 2,
     "finesse": 3,
     "persuade": 1,
-    "negotiate": 8,
+    "negotiate": 9,
     "truth": 1,
     "devote": 1,
     "romantic": 4,
@@ -17148,7 +17226,8 @@
     "gamble": 1,
     "lead": 1,
     "rally": 1,
-    "honest": 1
+    "honest": 1,
+    "confront": 1
   },
   "aptitudeEarnCount": {
     "faithful": 1,
@@ -18041,7 +18120,7 @@
     }
   },
   "_opUnknown": {
-    "sceneSummary": 78,
+    "sceneSummary": 79,
     "scene_summary": 1
   },
   "_bandNotes": null,

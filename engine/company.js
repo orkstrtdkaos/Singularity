@@ -8,7 +8,7 @@
 // = companion, beast). THIS module owns the NPC-people half: a `character.company` roster of recruited
 // registry NPCs, each `{ npcId, roles[], teaches, liaisonFor, joinedDay }`.
 
-import { relationshipBand, isPartnerAdjacent } from "./npcs.js";
+import { relationshipBand, isPartnerAdjacent, findExistingNpc } from "./npcs.js";
 import { companyPlaces } from "./ladder.js";
 import { abilityTier } from "./skilltree.js";
 
@@ -397,7 +397,18 @@ export function applyPartyOps(character, ops = [], { day = null, registry = null
         out.notes.push(`${nameOf(npcId)} is no longer travelling with you${raw?.why ? ` — ${raw.why}` : ""}.`);
       }
     } else if (op === "join") {
-      if (activeCompany(character).some(m => m.npcId === npcId)) continue;   // already with you
+      // ⛔ CCODE-514 · SNG-658 §4.3 — A JOIN MUST POINT AT A PERSON. Erik, in play: "i asked the GM to add
+      // Estry to my party and he agreed, but it didn't do anything functionally." Estry is registered as
+      // `younger-visitor` (a stable id minted before she was named), so a join written against "estry" matched
+      // nobody and the op evaporated — the GM had agreed and the sheet disagreed silently.
+      // ⚠️ AND THE SAME HOLE LEFT THREE ORPHANS in the live saves: company entries for `sable` and `ravel`
+      // beside registry records under `taken-person` and `steady-voice-woman`. A member with no person record
+      // has no crafts in a fight, no bond, and no face.
+      // ⛑ `findExistingNpc` is this repo's own resolver — id, then name, then alias, then true name — so the
+      // op lands on the person the rest of the game already knows, whatever the GM called them.
+      const resolved = findExistingNpc(reg, npcId, String(raw?.name || "")) || null;
+      const personId = resolved?.id ? String(resolved.id) : npcId;
+      if (activeCompany(character).some(m => m.npcId === personId)) continue;   // already with you
       // ⚠️ THE CAP COUNTS PROPOSALS TOO. Two joins in one turn against one free place would both pass
       // a check against the CURRENT roster and put the player one over without either op being wrong.
       // ✅ CCODE-511 · ERIK’S RULING — THE CAP NO LONGER REFUSES THE JOIN. It used to: "X would travel with
@@ -407,10 +418,28 @@ export function applyPartyOps(character, ops = [], { day = null, registry = null
       // starred craft. Everyone else travels with you, helps in a fight as they are able, or keeps out of it.
       const places = ladder ? companyPlaces(ladder, character) : Infinity;
       if (activeCompany(character).length + out.proposed.length >= places) {
-        out.notes.push(`${nameOf(npcId)} travels with you — you can bring ${places} forward${places === 1 ? "" : " at a time"}, so they stand with the rest until that widens.`);
-        out.beyondForward = [...(out.beyondForward || []), { npcId, name: nameOf(npcId), places }];
+        out.notes.push(`${nameOf(personId)} travels with you — you can bring ${places} forward${places === 1 ? "" : " at a time"}, so they stand with the rest until that widens.`);
+        out.beyondForward = [...(out.beyondForward || []), { npcId: personId, name: nameOf(personId), places }];
       }
-      out.proposed.push({ npcId, name: nameOf(npcId), roles: Array.isArray(raw?.roles) ? raw.roles : ["ally"], why: raw?.why || null });
+      // ⚠️ AND AN UNKNOWN PERSON IS RECORDED, NOT DROPPED. If nothing resolves, the join still names somebody
+      // the fiction put beside the character — so a minimal record is minted rather than leaving a member with
+      // nobody behind them. `_mintedByJoin` says where it came from, because a record with no provenance is one
+      // nobody can review (SNG-658 §2.4: never a silent default).
+      if (!resolved && !reg[personId]) {
+        character.npcRegistry = character.npcRegistry || {};
+        character.npcRegistry[personId] = {
+          id: personId,
+          name: String(raw?.name || "").trim() || personId.replace(/[-_]+/g, " ").replace(/\b\w/g, c => c.toUpperCase()),
+          role: raw?.why ? String(raw.why).slice(0, 80) : null,
+          relationship: 0, status: "active", met: 1,
+          firstMet: day != null ? { day } : null,
+          history: [], knownFacts: [], skillsObserved: [],
+          _mintedByJoin: { day, why: "a join named somebody the registry did not hold" },
+        };
+        out.notes.push(`${nameOf(personId)} is written down — they were travelling with you before the sheet knew them.`);
+        out.minted = [...(out.minted || []), personId];
+      }
+      out.proposed.push({ npcId: personId, name: nameOf(personId), roles: Array.isArray(raw?.roles) ? raw.roles : ["ally"], why: raw?.why || null });
     }
   }
   return out;

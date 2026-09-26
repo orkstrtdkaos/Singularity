@@ -6917,16 +6917,27 @@ console.log("\n── §72 · a keeper is a delegate, not a companion; the wiped
   const R72 = await import("../engine/reconcile.js");
   const mk = (steward, extra = {}) => ({ id: "pc", holdings: [{ id: "hold-x", kind: "post", name: "the post", locationId: null, steward, condition: "holding", history: [], lastMovedWorldCount: 0 }],
     company: [], npcRegistry: {}, holdingOffers: [], worldState: { assignments: {} }, ...extra });
-  check("§72: ⛔ `keeperGone` — dead or departed in the registry is gone; a companion who LEFT is gone; a delegate who never travelled with you is NOT; no record at all is NOT",
+  // ✅ CCODE-514 (ERIK, IN PLAY): "the Standing Annex KEEPS LOSING ITS KEEPER!" ⚠️ This asserted "a companion
+  // who LEFT is gone", and that is the 2026-09-05 mistake one step smaller — APPOINTING SOMEONE KEEPER IS A
+  // REASON THEY STOP TRAVELLING WITH YOU. Measured on Loki's save: Halvex Coil reads `status: "active"`,
+  // statusNote "At Loki's side", and his company entry says `leftDay: 83`; the tick trusted the company and
+  // fired him every pass, with "Halvex Coil appointed keeper" twice in eight history lines.
+  // ⛑ The surviving halves were right all along and the new rule is their generalisation: GONE IS GONE
+  // (`status` dead or departed, which the GM sets when somebody genuinely walks away — the SNG-355 case), and
+  // everything else keeps the post.
+  check("§72: ⛔ `keeperGone` — dead or departed in the registry is gone; LEAVING YOUR SIDE IS NOT LEAVING YOUR SERVICE; no record at all is NOT",
     H72.keeperGone(mk("a", { npcRegistry: { a: { status: "dead" } } }), "a") === true
     && H72.keeperGone(mk("a", { npcRegistry: { a: { status: "departed" } } }), "a") === true
-    && H72.keeperGone(mk("a", { company: [{ npcId: "a", leftDay: 4 }] }), "a") === true
+    && H72.keeperGone(mk("a", { company: [{ npcId: "a", leftDay: 4 }] }), "a") === false
+    // … and the literal shape that fired Halvex: the registry says active, the company says he parted
+    && H72.keeperGone(mk("a", { npcRegistry: { a: { status: "active" } },
+      company: [{ npcId: "a", leftDay: 83, departedWhy: "you parted ways" }] }), "a") === false
     && H72.keeperGone(mk("a", { npcRegistry: { a: { status: "active" } } }), "a") === false
     && H72.keeperGone(mk("a"), "a") === false);
   check("§72: …`unstewardedHoldings` reports only the gone — a delegate at the hold keeps it even with an empty company",
     H72.unstewardedHoldings(mk("fendt", { npcRegistry: { fendt: { status: "active" } } }), []).length === 0
     && H72.unstewardedHoldings(mk("fendt", { npcRegistry: { fendt: { status: "departed" } } }), []).length === 1
-    && H72.unstewardedHoldings(mk("fendt", { company: [{ npcId: "fendt", leftDay: 2 }] }), []).length === 1);
+    && H72.unstewardedHoldings(mk("fendt", { company: [{ npcId: "fendt", leftDay: 2 }] }), []).length === 0);
   const kept = mk("fendt", { npcRegistry: { fendt: { status: "active" } } });
   const t1 = WT72.advanceHoldings({ character: kept });
   const gone = mk("fendt", { npcRegistry: { fendt: { status: "departed" } } });
@@ -7519,6 +7530,75 @@ console.log("\n── §76b · a crafted feature carries its craft, its season, 
       /const r = removeFeature\(character, btn\.dataset\.holdUnfeature/.test(app495)
       && /if \(r && r\.ok === false\) \{ alert\(r\.why\); return; \}/.test(app495));
   }
+}
+
+/* ═════ §ID — ONE PERSON, ONE RECORD; AND A KEEPER WHO KEEPS (CCODE-514) ═════ */
+// ⛔ THREE THINGS ERIK HIT IN ONE SESSION, and they are two bugs wearing three faces. Every fixture below is
+// the literal shape of a record in his live saves.
+console.log("\n── §ID · a revealed name finds its person, a join lands, and a castellan stays ──");
+{
+  const Nid = await import("../engine/npcs.js");
+  const COid = await import("../engine/company.js");
+  const Hid = await import("../engine/holdings.js");
+  const { loadContentHeadless: lchI } = await import("./headless_content.mjs");
+  const CI = await lchI();
+
+  // ⛔ 1 · "people being minted with temporary names that aren't then merged when introduced" (Erik).
+  // Loki's registry held BOTH `syllogist-of-the-margins` (name "Unmet yet", trueName "Orla Yardley") and
+  // `orla-yardley`. One woman, two records — because `findExistingNpc` matched id, name and aliases and had
+  // NEVER read `trueName`, which this very module writes at mint time in three places.
+  const unmet = { id: "syllogist-of-the-margins", name: "Unmet yet", nameUnknown: true,
+    trueName: "Orla Yardley", role: "a Syllogist traveling between the reaches" };
+  check("§ID: ⛔ a REVEALED TRUE NAME finds the person it belongs to — it does not fork a second record",
+    (() => {
+      const reg = { [unmet.id]: unmet };
+      const hit = Nid.findExistingNpc(reg, "orla-yardley", "Orla Yardley");
+      const stranger = Nid.findExistingNpc(reg, "someone-else", "Wren Haleth");
+      return hit && hit.id === unmet.id && !stranger;   // … and a genuinely different person still mints
+    })(), "a placeholder name is what a person is CALLED before the fiction names them; trueName is who they are");
+
+  // ⛔ 2 · "i asked the GM to add Estry to my party and he agreed, but it didn't do anything functionally."
+  // Estry lives under the stable id `younger-visitor`. A join written against "estry" resolved to nobody and
+  // the op evaporated — the GM agreed and the sheet disagreed, silently.
+  check("§ID: ⛔ A JOIN MUST POINT AT A PERSON — it resolves through the registry before it proposes anybody",
+    (() => {
+      const ch = { name: "T", company: [], npcRegistry: {
+        "younger-visitor": { id: "younger-visitor", name: "Estry", trueName: "Estry", relationship: 1, status: "active" } } };
+      const r = COid.applyPartyOps(ch, [{ op: "join", npcId: "estry", name: "Estry" }],
+        { day: 90, ladder: CI.rules.subAttributeLadder });
+      return r.proposed.length === 1 && r.proposed[0].npcId === "younger-visitor";
+    })(), "a join that names somebody the registry knows under another id is a join that does nothing");
+
+  check("§ID: …and a join for somebody nobody knows MINTS a record rather than leaving an orphan",
+    (() => {
+      const ch = { name: "T", company: [], npcRegistry: {} };
+      const r = COid.applyPartyOps(ch, [{ op: "join", npcId: "wren-haleth", name: "Wren Haleth" }],
+        { day: 90, ladder: CI.rules.subAttributeLadder });
+      const rec = ch.npcRegistry["wren-haleth"];
+      // ⚠️ 3 of 7 company members across the live saves had NO person record — no crafts in a fight, no bond,
+      // no face. And the mint carries its provenance, because a record nobody can review is a silent default.
+      return r.proposed.length === 1 && !!rec && rec.name === "Wren Haleth" && !!rec._mintedByJoin;
+    })(), "SNG-658 §4.3: a join must point at a person record; mint one if absent");
+
+  // ⛔ 3 · "the Standing Annex KEEPS LOSING ITS KEEPER!" — and this is the SECOND time the same rule has done
+  // it (Erik, 2026-09-05: "Fendt and Cassiel Ord were wiped for being exactly what a keeper is").
+  check("§ID: ⛔ A KEEPER WHO LEFT YOUR SIDE HAS NOT LEFT YOUR SERVICE — appointing them is why they stopped walking with you",
+    (() => {
+      // Halvex Coil's literal shape on Loki's save: the registry says active, the company says he parted.
+      const ch = { name: "L", holdings: [{ id: "annex", name: "The Standing Annex", steward: "halvex_coil" }],
+        npcRegistry: { halvex_coil: { id: "halvex_coil", name: "Halvex Coil", status: "active", statusNote: "At Loki's side" } },
+        company: [{ npcId: "halvex_coil", joinedDay: 77, leftDay: 83, departedWhy: "you parted ways" }] };
+      const lost = Hid.unstewardedHoldings(ch, [], { registry: ch.npcRegistry, company: ch.company });
+      return lost.length === 0;
+    })(), "a castellan stays at the castle while you walk away; firing them for that fires them for doing the job");
+
+  check("§ID: …but GONE IS STILL GONE — dead or departed still loses the post, which is the rule this was written for",
+    (() => {
+      const mk = (status) => ({ holdings: [{ id: "h", name: "X", steward: "s" }],
+        npcRegistry: { s: { id: "s", status } }, company: [] });
+      const fired = (status) => Hid.unstewardedHoldings(mk(status), [], { registry: mk(status).npcRegistry, company: [] }).length;
+      return fired("dead") === 1 && fired("departed") === 1 && fired("active") === 0;
+    })(), "SNG-355 made departure a status precisely so a keeper's leaving could be OBSERVED");
 }
 
 /* ═════ §D2 — NAMED DEFENDERS FIGHT AS THEMSELVES (SNG-657 §2, CCODE-512) ═════ */

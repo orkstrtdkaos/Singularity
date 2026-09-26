@@ -380,9 +380,16 @@ export function keeperGone(character, stewardId, { registry = null, company = nu
   const reg = registry || character?.npcRegistry || {};
   const status = String(reg?.[stewardId]?.status || "").toLowerCase();
   if (status === "dead" || status === "departed") return true;
-  const roster = company || character?.company || [];
-  const member = roster.find(m => m && m.npcId === stewardId);
-  if (member && member.leftDay) return true;
+  // ⛔ CCODE-514 (ERIK, IN PLAY): "the Standing Annex KEEPS LOSING ITS KEEPER!" This read
+  // `if (member && member.leftDay) return true`, and that is the 2026-09-05 mistake one step smaller.
+  // ⚠️ MEASURED on Loki's save: Halvex Coil is `status: "active"`, statusNote "At Loki's side", and his
+  // company entry says `leftDay: 83`. The two records disagree, and the tick trusted the one that means
+  // "stopped travelling with me" — firing him every pass, with "Halvex Coil appointed keeper" twice in the
+  // Annex's last eight history lines because Erik kept putting him back.
+  // ⛑ APPOINTING SOMEONE KEEPER IS A REASON THEY STOP TRAVELLING WITH YOU. A castellan stays at the castle
+  // while you walk away; reading that as desertion fires the person for doing the job.
+  // ⚠️ GONE IS STILL GONE: `status` dead or departed above, which the GM sets through npcUpdates when someone
+  // genuinely walks away — that is the SNG-355 case this rule was written for, and it is untouched.
   return false;
 }
 

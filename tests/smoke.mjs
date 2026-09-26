@@ -13105,11 +13105,19 @@ await (async () => {
 
     // A departed steward leaves the post behind — expressible only because SNG-355 made departure a status.
     // ✅ 2026-09-05 (Erik, Silas's save): a keeper is a DELEGATE at the hold, not a companion — "not in the company" wiped
-    // Fendt and Cassiel Ord on the first tick. Gone means gone: dead or departed in the registry, or a companion who LEFT.
-    check("358: a holding whose keeper has LEFT the company is reported as unkept; a delegate who never travelled with you is NOT",
-      unstewardedHoldings({ holdings: [h], company: [{ npcId: "cassiel", leftDay: 3 }] }, []).length === 1
+    // Fendt and Cassiel Ord on the first tick.
+    // ✅ CCODE-514 (Erik, in play 2026-09-25): "the Standing Annex KEEPS LOSING ITS KEEPER!" ⚠️ The clause that
+    // survived that fix — "or a companion who LEFT" — is the same mistake one step smaller, because APPOINTING
+    // SOMEONE KEEPER IS A REASON THEY STOP TRAVELLING WITH YOU. Halvex Coil read `status: "active"`, "At Loki's
+    // side", with `leftDay: 83` on his company entry, and was fired every tick. GONE IS GONE: the registry's
+    // own word, which is what SNG-355 made a status FOR.
+    check("358: a holding keeps its keeper when they merely stopped travelling with you; dead or departed still loses it",
+      unstewardedHoldings({ holdings: [h], company: [{ npcId: "cassiel", leftDay: 3 }] }, []).length === 0
+      && unstewardedHoldings({ holdings: [h], npcRegistry: { cassiel: { status: "active" } },
+           company: [{ npcId: "cassiel", leftDay: 83, departedWhy: "you parted ways" }] }, []).length === 0
       && unstewardedHoldings({ holdings: [h], npcRegistry: { cassiel: { status: "active" } } }, []).length === 0
       && unstewardedHoldings({ holdings: [h], npcRegistry: { cassiel: { status: "departed" } } }, []).length === 1
+      && unstewardedHoldings({ holdings: [h], npcRegistry: { cassiel: { status: "dead" } } }, []).length === 1
       && unstewardedHoldings({ holdings: [h] }, ["cassiel"]).length === 0);
     check("358: the GM is told what you hold, who keeps it, and how it fares",
       /Raven's Home \(post, .*kept by cassiel \((keeping|in charge)/.test(holdingsForGM({ holdings: [h] }) || ""));   // v2 §2: keeping or in charge is said after the keeper

@@ -16,6 +16,30 @@
   "next": [],
   "releases": [
     {
+      "version": "2.9.1",
+      "date": "2026-09-26",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "Learning someone's name finds the person, instead of making a second one",
+          "summary": "Somebody you had met but could not yet name was being recorded twice — once under what you called them, and again the moment the story said their real name.",
+          "detail": "A person carries their true name from the moment they exist, held back until the fiction reveals it. The part of the game that decides whether someone is already known had never read that field, so a revealed name matched nobody and started a fresh record — with the old one keeping the history, the standing and the face."
+        },
+        {
+          "kind": "fix",
+          "title": "Adding someone to your party actually adds them",
+          "summary": "If the GM agrees to bring someone along, it lands — even when the story has been calling them something other than the name they were first written down under. And if nobody in the world matches, they are written down rather than dropped.",
+          "detail": "A join used to take the name it was given at face value, so asking for somebody registered under an earlier label did nothing at all, silently. Three people already travelling with characters had no record of themselves for this reason."
+        },
+        {
+          "kind": "fix",
+          "title": "A keeper who stops travelling with you does not lose their post",
+          "summary": "Appointing somebody to keep a holding is exactly why they stop walking at your side — and the world was reading that as them abandoning it, every single pass.",
+          "detail": "A castellan stays at the castle while you walk away. Someone genuinely gone — dead, or departed — still leaves the post behind, which is what that rule was there for."
+        }
+      ]
+    },
+    {
       "version": "2.9.0",
       "date": "2026-09-26",
       "entries": [

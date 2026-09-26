@@ -585,7 +585,7 @@ const LEDGER = [
             "358: an UNKEPT holding slides one rung per pass, never two",
             "358: …and cannot climb past 'holding' while it has no keeper",
             "358: `household` is not a holding kind, and cannot be added as one",
-            "358: a holding whose keeper has LEFT the company is reported as unkept; a delegate who never travelled with you is NOT",
+            "358: a holding keeps its keeper when they merely stopped travelling with you; dead or departed still loses it",   // CCODE-514: renamed with the rule — a keeper who left your side has not left your service
             "358: the GM is told what you hold, who keeps it, and how it fares",
             "358: a holding advances with NO delegated work due and the character clock unmoved",
             "358: …and only a CHANGE of condition is news — a holding that goes on holding is not an event"],

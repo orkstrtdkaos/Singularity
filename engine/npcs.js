@@ -122,6 +122,15 @@ export function findExistingNpc(reg, id, name = "") {
     // registry already knew as an alias forked a second record. Match the alias ledger that was being
     // written all along. Exact slug-match only (an explicit prior name), never a lexical loosening.
     if (nameNorm && (n.aliases || []).some(a => slugify(a) === nameNorm)) return n;
+    // ⛔ CCODE-514 — AND THE TRUE NAME OF A PERSON WHOSE NAME THE CHARACTER HAS NOT LEARNED. A minted person
+    // carries `trueName` from the moment they exist and shows a placeholder until the fiction reveals it
+    // ("Unmet yet", "the hostel-keeper"). This module WRITES `trueName` in three places and had never READ it,
+    // so the instant a name was revealed the matcher compared it against the PLACEHOLDER, missed, and forked a
+    // second record. ⚠️ Measured in Loki's live save: `syllogist-of-the-margins` ("Unmet yet", trueName Orla
+    // Yardley) and `orla-yardley` are one woman under two ids — and the second one is the one the party offer
+    // was written against, so a join landed on a person the rest of the game had never met.
+    // ⛑ EXACT SLUG ONLY, exactly as the alias line above: revealing a name is a FACT, and a near-match is a guess.
+    if (nameNorm && n.trueName && slugify(n.trueName) === nameNorm) return n;
     // ⛔ CCODE-421: an id this person used to go by (`rekeyPerson` keeps it) is still them — an op written against the old id finds them
     if (id && Array.isArray(n.formerIds) && n.formerIds.some(f => f === id || canonNpcId(f) === canonNpcId(id))) return n;
     // CCODE-24: bridge the `_` ↔ `-` id-convention gap. A quest/hunt-effect giver stub keys the registry by the

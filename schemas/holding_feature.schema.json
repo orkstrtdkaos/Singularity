@@ -1,0 +1,61 @@
+{
+ "$schema": "http://json-schema.org/draft-07/schema#",
+ "title": "holding_feature",
+ "_what": "⛔ SNG-658 §2 — ONE THING BUILT ON A HOLDING: a wall, a watch, a mill, a shrine. ⚠️ `craftIds` is present on 44 of 44 and EMPTY on all 44 — the gap Aevi names in §1 and the reason SNG-658 exists: a field declared, written, and never filled.",
+ "_derivedFrom": "The live saves, 2026-09-26; each field's description says how often it is present.",
+ "type": "object",
+ "required": [
+  "kind",
+  "name",
+  "count",
+  "day"
+ ],
+ "additionalProperties": false,
+ "patternProperties": {
+  "^_": {
+   "_what": "a note or a provenance stamp"
+  }
+ },
+ "properties": {
+  "kind": {
+   "type": "string",
+   "description": "100% — which feature it is; the key into the authored catalogue."
+  },
+  "family": {
+   "type": "string",
+   "description": "100% — martial · industry · meaning … what sort of thing it is."
+  },
+  "name": {
+   "type": "string",
+   "description": "100% — what this one is called at this place."
+  },
+  "by": {
+   "type": "string",
+   "description": "100% — who raised it."
+  },
+  "craftIds": {
+   "type": "array",
+   "description": "100% present, EMPTY on all 44 — ⛔ the crafts that made it. This is the `craftIds: []` gap: the contract was right and nothing ever filled it, which is the lesson SNG-658 §4 ends on."
+  },
+  "count": {
+   "type": "number",
+   "description": "100% — how many of it stand here."
+  },
+  "day": {
+   "type": "number",
+   "description": "100% — the day it was raised."
+  },
+  "level": {
+   "type": "number",
+   "description": "the rung it has been raised to, 1–3. Absent means 1."
+  },
+  "building": {
+   "type": "boolean",
+   "description": "set while it is still going up — a feature under construction does not watch, defend or cost keep."
+  },
+  "via": {
+   "type": "string",
+   "description": "11% — how it came to be here, when it was not simply built."
+  }
+ }
+}

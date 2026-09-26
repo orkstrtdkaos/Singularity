@@ -7532,6 +7532,49 @@ console.log("\n── §76b · a crafted feature carries its craft, its season, 
   }
 }
 
+/* ═════ §IMG — A PLACE THAT ALREADY HAS A PICTURE KEEPS IT (CCODE-515) ═════ */
+// ⛔ ERIK, IN PLAY 2026-09-25: "i'm at mara wells' store right now. It should already have an image — and yet
+// it gets a new one minted every single beat there... I want it to take the default image or canon image. a
+// person can always regen it, as normal, but I don't want it to do that automatically every time."
+// ⚠️ THE SEED WAS THE BEAT. `sceneImage` minted on `seed: sceneState.setting` — the GM's setting line for
+// THIS beat — so standing still in one place drew a new picture of it every beat, each one paid for.
+console.log("\n── §IMG · the banner takes what the place has, and mints only when it has nothing ──");
+{
+  // ⚠️ `getArtMode` READS localStorage, which this harness does not have — the gate threw on its first run.
+  // A shim, not a production change: the art mode is a browser preference and the engine is right to ask for it.
+  globalThis.localStorage = globalThis.localStorage || (() => { const d = {};
+    return { getItem: (k) => (k in d ? d[k] : null), setItem: (k, v) => { d[k] = String(v); }, removeItem: (k) => { delete d[k]; } }; })();
+  const Aimg = await import("../engine/art.js");
+  Aimg.setArtMode("generate");
+  const loc = { id: "millbrook", name: "Mara Wells' store" };
+  const beat1 = { setting: "The counter is scrubbed pale and the lamp is low; Mara counts jars." };
+  const beat2 = { setting: "Rain on the shutters now, and the jars are back on the shelf." };
+  const keep = "https://example.invalid/mara-wells.png";
+
+  check("§IMG: ⛔ a place that ALREADY HAS a picture keeps it — beat after beat, with no mint",
+    Aimg.sceneImage(loc, beat1, { existing: keep }) === keep
+    && Aimg.sceneImage(loc, beat2, { existing: keep }) === keep
+    // … and the defect itself: with nothing to keep, two beats drew two different pictures of one room
+    && Aimg.sceneImage(loc, beat1, {}) !== Aimg.sceneImage(loc, beat2, {}),
+    "ten beats in one room was ten pictures of that room");
+
+  // ⚠️ AND A PLAYER WHO TURNED PICTURES OFF STAYS OFF. My first cut short-circuited on `existing` before the
+  // mode was checked, which would have shown a banner to somebody who had switched them off.
+  check("§IMG: …and art turned OFF shows nothing, existing picture or not",
+    (() => { Aimg.setArtMode("off");
+      const off = Aimg.sceneImage(loc, beat1, { existing: keep });
+      Aimg.setArtMode("generate");
+      return !off; })());
+
+  // ⛑ AND THE CALLER HANDS IT THE ANSWER THE REST OF THE GAME USES — `locationImageFor` is the read-only
+  // resolver in CCODE-422's order: what you CHOSE, the world's canon look, the authored picture, then the one
+  // drawn for you once. A gate on the engine alone would pass while the screen kept minting.
+  check("§IMG: …and the banner is handed `locationImageFor`, so it is the SAME picture every other surface shows",
+    /existing: locationImageFor\(location\?\.id\)/.test(rd("app.js"))
+    && /if \(mode !== "off" && existing\) return existing;/.test(rd("engine/art.js")),
+    "proving the engine is not proving the screen");
+}
+
 /* ═════ §ID — ONE PERSON, ONE RECORD; AND A KEEPER WHO KEEPS (CCODE-514) ═════ */
 // ⛔ THREE THINGS ERIK HIT IN ONE SESSION, and they are two bugs wearing three faces. Every fixture below is
 // the literal shape of a record in his live saves.

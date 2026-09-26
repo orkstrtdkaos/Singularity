@@ -180,7 +180,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.9.1";
+const APP_VERSION = "2.9.2";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -20847,7 +20847,11 @@ function renderPlay(turn, opts = {}) {
     </div></details>
   </div>`;
 
-  const banner = sceneImage(location, sceneState, { ratingLevel: viewerRatingLevel() });
+  // ⛔ CCODE-515 — WHAT THE PLACE ALREADY HAS, BEFORE ANYTHING IS DRAWN. `locationImageFor` is the read-only
+  // resolver (chosen → the world's canon look → authored → drawn once); handing it in is what stops a mint on
+  // every beat at a place the character is standing still in.
+  const banner = sceneImage(location, sceneState, { ratingLevel: viewerRatingLevel(),
+    existing: locationImageFor(location?.id) });
   const time = readClock(character.clock, undefined, positionedPlace(CONTENT.locations || {}, character.currentLocationId));   // CCODE-377: near the ring, fewer seasons
   // SNG-247 Tier 0: the play surface carries the KIND of the bounded thing you are inside, so `--enc-hue` cascades
   // to the frame strip AND the contest panel from one place. Same encounterKind() the engine uses to pick the exit

@@ -1,0 +1,28 @@
+{
+ "$schema": "http://json-schema.org/draft-07/schema#",
+ "title": "codex_topic",
+ "_what": "⛔ SNG-658 §2 — ONE THING THE CHARACTER HAS COME TO KNOW, in `character.codex.topics`. ⚠️ The codex is a CONTAINER (schemaVersion, topics, mergeUndo, swept, refused, deferredMysteries); a topic is what lives under `topics`. My first census iterated the container itself and reported 37 of 37 'invalid' on a shape nobody stores — and because the extractor was wrong, the census could not correct the first draft of this file, which I wrote from imagination (`title`, `body`, `lines`, `pinned` — none of them exist). Measured now.",
+ "_derivedFrom": "All 501 codex topics across the 16 live saves, 2026-09-26; each description says how often the field is actually present.",
+ "type": "object",
+ "required": ["id", "label", "kind", "facts", "links"],
+ "additionalProperties": false,
+ "patternProperties": {
+  "^_": { "_what": "a note or a provenance stamp" }
+ },
+ "properties": {
+  "id": { "type": "string", "description": "100% — the stable key." },
+  "label": { "type": "string", "description": "100% — what the topic is called, as the player reads it." },
+  "kind": { "type": "string", "description": "100% — what sort of knowledge it is: event · person · place · thing · idea." },
+  "facts": { "type": "array", "description": "100% — what is known, one line at a time, each stamped with the day it was learned. This IS the topic; everything else is about it." },
+  "links": { "type": "array", "description": "100% — other topics this one touches. ⚠️ A non-array value is replaced rather than trusted, so `links: null` cannot poison a read." },
+  "createdDay": { "type": ["number", "null"], "description": "100% — the day it was opened." },
+  "aliases": { "type": "array", "description": "97% — other names this topic has gone by, so the same knowledge does not open twice." },
+  "updatedDay": { "type": ["number", "null"], "description": "87% — the day it last grew." },
+  "entityId": { "type": "string", "description": "48% — the person, place or thing it is about, when it is about one." },
+  "reference": { "type": "boolean", "description": "14% — a reference topic rather than something learned in play." },
+  "summarisedAt": { "type": "number", "description": "6% — how many facts had accumulated when it was last summarised." },
+  "archive": { "type": "array", "description": "5% — facts folded into the summary, kept rather than dropped." },
+  "summary": { "type": "string", "description": "5% — the short form, once it has grown long enough to need one." },
+  "summaryDay": { "type": "number", "description": "5% — the day that summary was written." }
+ }
+}

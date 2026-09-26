@@ -16,6 +16,18 @@
   "next": [],
   "releases": [
     {
+      "version": "2.9.2",
+      "date": "2026-09-26",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "A place you are standing in keeps its picture",
+          "summary": "The scene picture was being drawn again every single beat you spent somewhere — ten beats in one shop was ten new pictures of that shop. It now shows the picture the place already has, and draws one only when there is none.",
+          "detail": "The picture was seeded on the GM's description of THIS moment, so every beat was a new seed and a new drawing. It now takes what the place already has, in the usual order: the one you chose, the world's, the authored one, then the one drawn for you. Drawing it again is still a button, whenever you want this particular moment."
+        }
+      ]
+    },
+    {
       "version": "2.9.1",
       "date": "2026-09-26",
       "entries": [

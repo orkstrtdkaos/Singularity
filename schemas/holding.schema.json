@@ -1,0 +1,149 @@
+{
+ "$schema": "http://json-schema.org/draft-07/schema#",
+ "title": "holding",
+ "_what": "⛔ SNG-658 §2 — A PLACE THAT IS YOURS, in `character.holdings`. It has a condition that drifts, a keeper who holds the floor under it, things built on it, and people at it.",
+ "_derivedFrom": "The live saves, 2026-09-26; each field's description says how often it is present.",
+ "type": "object",
+ "required": [
+  "id",
+  "kind",
+  "name"
+ ],
+ "additionalProperties": false,
+ "patternProperties": {
+  "^_": {
+   "_what": "a note or a provenance stamp"
+  }
+ },
+ "properties": {
+  "id": {
+   "type": "string",
+   "description": "100% — the stable key."
+  },
+  "kind": {
+   "type": "string",
+   "description": "100% — post · steading · hamlet · village · town · keep … which sets the spots it has and what it costs to keep."
+  },
+  "name": {
+   "type": "string",
+   "description": "100% — what it is called."
+  },
+  "locationId": {
+   "type": [
+    "string",
+    "null"
+   ],
+   "description": "100% — where it stands. Null for a hull under way."
+  },
+  "steward": {
+   "type": [
+    "string",
+    "null"
+   ],
+   "description": "100% — ⛔ the person KEEPING it: a delegate who stays at the hold, which is why they are not in your travelling company. They set the condition floor it will not drop below."
+  },
+  "obligation": {
+   "type": [
+    "string",
+    "null"
+   ],
+   "description": "100% — what you owe for it, when it was not simply taken."
+  },
+  "condition": {
+   "type": "string",
+   "description": "100% — failing · strained · holding · thriving. ⚠️ `failed` is the QUEST vocabulary and has no meaning here."
+  },
+  "claimedDay": {
+   "type": "number",
+   "description": "100% — the day it became yours."
+  },
+  "lastMovedWorldCount": {
+   "type": "number",
+   "description": "100% — when its condition last drifted, in world hours."
+  },
+  "history": {
+   "type": "array",
+   "description": "100% — every condition change and every event, newest last."
+  },
+  "features": {
+   "type": "array",
+   "description": "100% — what is built on it (see `holding_feature`)."
+  },
+  "crew": {
+   "type": "array",
+   "description": "100% — person ids working here."
+  },
+  "garrison": {
+   "type": "array",
+   "description": "83% — person ids standing watch. ⛑ This is what SEES a raid coming; stone alone does not see."
+  },
+  "store": {
+   "type": "object",
+   "description": "83% — goods held here, by kind."
+  },
+  "improvements": {
+   "type": "array",
+   "description": "67% — crafts put to the place (see `improvement`)."
+  },
+  "trade": {
+   "type": "boolean",
+   "description": "100% — whether it is open to trade."
+  },
+  "growthPasses": {
+   "type": "number",
+   "description": "100% — how many passes it has grown for."
+  },
+  "image": {
+   "type": "string",
+   "description": "100% — its picture."
+  },
+  "imageSeedKey": {
+   "type": "string",
+   "description": "100% — the seed that picture was drawn from."
+  },
+  "imagePinned": {
+   "type": "boolean",
+   "description": "100% — the player has fixed that picture."
+  },
+  "describedAs": {
+   "type": "string",
+   "description": "67% — the GM's own line about it."
+  },
+  "lastFeatureOfferCount": {
+   "type": "number",
+   "description": "67% — when it was last offered something to build."
+  },
+  "fromAssignment": {
+   "type": "string",
+   "description": "33% — the delegated work it came out of."
+  },
+  "relayPasses": {
+   "type": "number",
+   "description": "33% — passes run as a relay."
+  },
+  "relayAnnounced": {
+   "type": "boolean",
+   "description": "33% — whether that was said once."
+  },
+  "watches": {
+   "type": "string",
+   "description": "17% — what it keeps an eye on."
+  },
+  "carriage": {
+   "type": "object",
+   "description": "17% — for a hull: how it moves and where it is on its voyage."
+  },
+  "arrears": {
+   "type": "number",
+   "description": "17% — keep owed and unpaid."
+  },
+  "neglectPasses": {
+   "type": "number",
+   "description": "17% — consecutive passes nobody tended it."
+  },
+  "conditionSince": {
+   "type": "number",
+   "description": "17% — the day it entered its current condition."
+  }
+ }
+}

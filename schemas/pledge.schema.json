@@ -1,0 +1,54 @@
+{
+ "$schema": "http://json-schema.org/draft-07/schema#",
+ "title": "pledge",
+ "_what": "⛔ SNG-653 · SNG-658 §2 — SOMEBODY SAID, ALOUD IN A SCENE, THAT THEY WOULD COME FOR YOU. ⚠️ A PLEDGE IS NOT A BOND STAGE: two people can be committed without this promise and can make this promise without being committed. Required is taken from `recordPledge`.",
+ "_derivedFrom": "The live saves, 2026-09-26; each field's description says how often it is present.",
+ "type": "object",
+ "required": [
+  "npcId",
+  "mutual",
+  "source"
+ ],
+ "additionalProperties": false,
+ "patternProperties": {
+  "^_": {
+   "_what": "a note or a provenance stamp"
+  }
+ },
+ "properties": {
+  "npcId": {
+   "type": "string",
+   "description": "who promised."
+  },
+  "day": {
+   "type": [
+    "number",
+    "null"
+   ],
+   "description": "the day it was said. ⚠️ A second saying does not erase the first day."
+  },
+  "mutual": {
+   "type": "boolean",
+   "description": "whether the character promised back — a second fact about the same scene, and why the screen can say who you have promised to go for."
+  },
+  "words": {
+   "type": [
+    "string",
+    "null"
+   ],
+   "description": "the GM's own account of what was said, kept verbatim so the record reads as the scene did."
+  },
+  "source": {
+   "type": "string",
+   "description": "play · author — where the promise came from."
+  },
+  "released": {
+   "type": "boolean",
+   "description": "set when it is taken back — spoken out loud in a scene, never quietly."
+  },
+  "releasedDay": {
+   "type": "number",
+   "description": "the day it was taken back."
+  }
+ }
+}

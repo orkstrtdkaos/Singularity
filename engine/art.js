@@ -327,8 +327,19 @@ function locationImage(location, { ratingLevel = 2 } = {}) {
  *  interior, a dock at dusk — built from the scene anchor's own setting text
  *  (seeded by it, so the same scene keeps the same image across re-renders).
  *  Falls back to the location banner otherwise. */
-export function sceneImage(location, sceneState, { ratingLevel = 2 } = {}) {
+export function sceneImage(location, sceneState, { ratingLevel = 2, existing = null } = {}) {
   const mode = getArtMode();
+  // ⛔ CCODE-515 (ERIK, IN PLAY): "it gets a new one minted every single beat there... I want it to take the
+  // default image or canon image." ⚠️ THE SEED BELOW IS THE BEAT'S OWN SETTING LINE, so every beat at the same
+  // place is a fresh seed and a fresh mint — ten beats in Mara Wells' store is ten pictures of Mara Wells'
+  // store, each one paid for, over a place that already had one.
+  // ⛑ A PICTURE THE PLACE ALREADY HAS WINS. `existing` is what the caller's `locationImageFor` resolved:
+  // chosen, then the world's canon look, then the authored picture, then the one drawn for this character
+  // (CCODE-422's order). Minting is for a place that has NOTHING — and the regen button is untouched, so a
+  // person can still draw this particular beat whenever they want it.
+  // ⚠️ AND THE MODE IS HONOURED FIRST. My first cut returned `existing` before checking it, so a player who
+  // had turned pictures OFF would still have been shown one — a short-circuit placed one line too early.
+  if (mode !== "off" && existing) return existing;
   if (mode === "generate" && sceneState?.setting) {
     // ⚠️ SNG-435: `smartClamp`, NOT `.slice`. The setting is GM prose and this is an IMAGE prompt — a cut
     // mid-word leaves a fragment the generator draws as detail, which is the whole reason `battleprompt`

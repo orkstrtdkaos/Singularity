@@ -1,0 +1,101 @@
+{
+ "$schema": "http://json-schema.org/draft-07/schema#",
+ "title": "band",
+ "_what": "⛔ SNG-658 §2 — A BODY OF PEOPLE WHO FIGHT AS ONE, in `character.bands`. ⚠️ REQUIRED IS TAKEN FROM `raiseBand`, NOT FROM THE CORPUS: there is exactly ONE band across all 16 saves, so requiring everything that one record carries would red the day a second one differs. ⛑ CCODE-510 (Erik, in play): a band may always be NAMED; whether it ANSWERS is `bandReady`, and an unanswering band stands in the record with its name.",
+ "_derivedFrom": "The live saves, 2026-09-26; each field's description says how often it is present.",
+ "type": "object",
+ "required": [
+  "id",
+  "name",
+  "count",
+  "quality",
+  "condition",
+  "raisedDay",
+  "losses"
+ ],
+ "additionalProperties": false,
+ "patternProperties": {
+  "^_": {
+   "_what": "a note or a provenance stamp"
+  }
+ },
+ "properties": {
+  "id": {
+   "type": "string",
+   "description": "the stable key."
+  },
+  "name": {
+   "type": "string",
+   "description": "what they are called — named by the player the moment the fiction names them."
+  },
+  "count": {
+   "type": "number",
+   "description": "heads. ⚠️ An explicit 0 is honoured: a band raised by the button stands empty until somebody joins it."
+  },
+  "quality": {
+   "type": "number",
+   "description": "what a head is worth, 1 and up."
+  },
+  "from": {
+   "type": [
+    "string",
+    "null"
+   ],
+   "description": "the holding they were raised at."
+  },
+  "condition": {
+   "type": "string",
+   "description": "fresh · blooded · broken — what the last fight left them."
+  },
+  "raisedDay": {
+   "type": "number",
+   "description": "the day they were raised."
+  },
+  "losses": {
+   "type": "number",
+   "description": "heads lost, kept so clearing a band is worth doing."
+  },
+  "contingents": {
+   "type": "array",
+   "description": "groups within the band that each DO something — what they can do and what they add up to."
+  },
+  "captain": {
+   "type": "string",
+   "description": "the person leading it; worth a step to every head under them."
+  },
+  "stance": {
+   "type": "string",
+   "description": "cautious · balanced · aggressive."
+  },
+  "inLegion": {
+   "type": "string",
+   "description": "the legion they stand in, when they stand in one."
+  },
+  "formedFrom": {
+   "type": "array",
+   "description": "for a LEGION: the band ids it was formed from. They keep their own people, losses and condition."
+  },
+  "called": {
+   "type": "object",
+   "description": "where and how they were called into the field; a unit on paper is a plan and is nowhere."
+  },
+  "posture": {
+   "type": [
+    "string",
+    "null"
+   ],
+   "description": "how they stand where they are."
+  },
+  "locationId": {
+   "type": [
+    "string",
+    "null"
+   ],
+   "description": "where they stand, once called."
+  },
+  "mission": {
+   "type": "object",
+   "description": "the charge they are away on, when they are away."
+  }
+ }
+}

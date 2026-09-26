@@ -115,7 +115,13 @@ const TYPES = [
   { key: "death_state",    label: "death states",           schema: "death_state",   layer: "save",
     of: () => saves.flatMap(s => values(s.npcRegistry).map(p => p?.deathState).filter(Boolean)) },
   { key: "codex_topic",    label: "codex topics",           schema: "codex_topic",   layer: "save",
-    of: () => saves.flatMap(s => values(s.codex)) },
+    // ⚠️ `codex.topics`, NOT `codex` — the codex is a CONTAINER (schemaVersion, topics, mergeUndo, swept,
+    // refused, deferredMysteries) and iterating IT validated the container's other members as topics. My
+    // extractor was wrong, not the records: 37 of 37 "invalid" on a shape nobody stores. ⛑ And because the
+    // extractor was wrong, the census could not correct the first draft of `codex_topic.schema.json`, which I
+    // wrote from imagination — `title`, `body`, `lines`, `pinned`, none of which exist. A census that reads
+    // the wrong records is worse than none: it reports confidently about nothing.
+    of: () => saves.flatMap(s => values(s.codex?.topics)) },
 ];
 
 console.log("── the census · every type of thing, both layers ──\n");

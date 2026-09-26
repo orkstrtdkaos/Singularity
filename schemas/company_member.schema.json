@@ -1,0 +1,54 @@
+{
+ "$schema": "http://json-schema.org/draft-07/schema#",
+ "title": "company_member",
+ "_what": "⛔ SNG-658 §2 — ONE ENTRY IN `character.company`: somebody who travels with you, or who did. ⚠️ Departure is a STATUS, NOT A DELETE (SNG-355): a member who left keeps their row with `leftDay` set, because somebody you travelled with for twenty days should be remembered as having left rather than erased.",
+ "_derivedFrom": "The live saves, 2026-09-26; each field's description says how often it is present.",
+ "type": "object",
+ "required": [
+  "npcId",
+  "roles",
+  "joinedDay"
+ ],
+ "additionalProperties": false,
+ "patternProperties": {
+  "^_": {
+   "_what": "a note or a provenance stamp"
+  }
+ },
+ "properties": {
+  "npcId": {
+   "type": "string",
+   "description": "100% — ⛔ the id of a PERSON RECORD. CCODE-514: a join now resolves through `findExistingNpc` and mints a record when nobody answers, because 3 of 7 members across the saves pointed at nobody — no crafts in a fight, no bond, no face."
+  },
+  "roles": {
+   "type": "array",
+   "description": "100% — ally · trainer · liaison, and they STACK. `partner` is never here: it is derived from the bond."
+  },
+  "teaches": {
+   "type": [
+    "string",
+    "null"
+   ],
+   "description": "100% (null on all of them today) — the tradition they teach, when they hold the trainer role."
+  },
+  "liaisonFor": {
+   "type": [
+    "string",
+    "null"
+   ],
+   "description": "100% (null today) — the people they represent, when they hold the liaison role."
+  },
+  "joinedDay": {
+   "type": "number",
+   "description": "100% — the day they threw in with you."
+  },
+  "leftDay": {
+   "type": "number",
+   "description": "33% — the day they stopped travelling with you. ⚠️ NOT grounds to lose a keeper's post (CCODE-514): appointing somebody keeper is a reason they stop walking beside you."
+  },
+  "departedWhy": {
+   "type": "string",
+   "description": "33% — one line on why they went."
+  }
+ }
+}

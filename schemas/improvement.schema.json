@@ -1,0 +1,60 @@
+{
+ "$schema": "http://json-schema.org/draft-07/schema#",
+ "title": "improvement",
+ "_what": "⛔ SNG-658 §2 — A CRAFT PUT TO A PLACE, in `holding.improvements`. Lasting, once, and it can lapse.",
+ "_derivedFrom": "The live saves, 2026-09-26; each field's description says how often it is present.",
+ "type": "object",
+ "required": [
+  "abilityId",
+  "name",
+  "day"
+ ],
+ "additionalProperties": false,
+ "patternProperties": {
+  "^_": {
+   "_what": "a note or a provenance stamp"
+  }
+ },
+ "properties": {
+  "abilityId": {
+   "type": "string",
+   "description": "100% — the craft that was applied."
+  },
+  "name": {
+   "type": "string",
+   "description": "100% — what it is called here."
+  },
+  "day": {
+   "type": "number",
+   "description": "100% — the day it was applied."
+  },
+  "energy": {
+   "type": "number",
+   "description": "40% — what it cost to put here."
+  },
+  "expiresDay": {
+   "type": "number",
+   "description": "20% — the day it goes quiet unless refreshed."
+  },
+  "refreshCost": {
+   "type": "number",
+   "description": "20% — what renewing it costs."
+  },
+  "warned": {
+   "type": "boolean",
+   "description": "20% — whether the player has been told it is about to lapse."
+  },
+  "lapsed": {
+   "type": "boolean",
+   "description": "set when it has gone quiet. A lapsed improvement does not count."
+  },
+  "lapsedDay": {
+   "type": "number",
+   "description": "the day it went quiet."
+  },
+  "tookRung": {
+   "type": "boolean",
+   "description": "whether its lapsing cost the hold a rung of condition."
+  }
+ }
+}

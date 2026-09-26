@@ -1,0 +1,70 @@
+{
+ "$schema": "http://json-schema.org/draft-07/schema#",
+ "title": "job",
+ "_what": "⛔ SNG-658 §2 — A PIECE OF WORK SOMEBODY POSTED, in `character.jobs`. Required is taken from `normalizeJob`, which refuses anything without them.",
+ "_derivedFrom": "The live saves, 2026-09-26; each field's description says how often it is present.",
+ "type": "object",
+ "required": [
+  "id",
+  "label",
+  "where",
+  "level",
+  "needs"
+ ],
+ "additionalProperties": false,
+ "patternProperties": {
+  "^_": {
+   "_what": "a note or a provenance stamp"
+  }
+ },
+ "properties": {
+  "id": {
+   "type": "string",
+   "description": "the stable key."
+  },
+  "label": {
+   "type": "string",
+   "description": "what is to be done, as a task."
+  },
+  "where": {
+   "type": "string",
+   "description": "the place it is done at."
+  },
+  "level": {
+   "type": "number",
+   "description": "⛔ how hard, as a person of that level — 1 to 100 (SNG-657 §1; it was clamped to 60, and a job's crystal, xp and harm all scale from this)."
+  },
+  "effort": {
+   "type": "number",
+   "description": "hand-days of work."
+  },
+  "needs": {
+   "type": "array",
+   "description": "what it takes: families with weights 1–3."
+  },
+  "stakes": {
+   "type": "object",
+   "description": "what it pays — crystal, xp, items, a deed, and the harm it risks."
+  },
+  "from": {
+   "type": "string",
+   "description": "who is asking."
+  },
+  "postedDay": {
+   "type": "number",
+   "description": "the day it went up."
+  },
+  "team": {
+   "type": "array",
+   "description": "who was sent on it."
+  },
+  "backAtHours": {
+   "type": "number",
+   "description": "when they are due back."
+  },
+  "detached": {
+   "type": "object",
+   "description": "hands sent out on it who are not in the band until they return."
+  }
+ }
+}

@@ -16,6 +16,30 @@
   "next": [],
   "releases": [
     {
+      "version": "2.10.1",
+      "date": "2026-09-26",
+      "entries": [
+        {
+          "kind": "feature",
+          "title": "The map will take you anywhere there is a way",
+          "summary": "A place you can reach by a route — not only one road away — now offers to plan the journey, instead of saying it isn't connected.",
+          "detail": "The map would only offer travel to a place directly joined to the one you stand in, which is about three places out of a hundred and forty-three. Everywhere else read \"not directly reachable\", even though the world is all one piece and the game could already lay a route to almost any of it. Pick a far place now and it offers to plan the journey, with the days it will take. Only somewhere nothing can reach is refused — and that refusal still names a neighbour to go by way of."
+        },
+        {
+          "kind": "fix",
+          "title": "You were standing in someone else's world",
+          "summary": "A character could end up recorded at a place that exists only on another character's save — and then nothing on the map was reachable.",
+          "detail": "Places you grow in play were being merged into the world and left there when you switched characters, so a second character could be moved to a place the first one had found. On the next load that place was gone from their world, and with it every road out: the map said nothing was connected because, for them, nothing was. Each character's grown world is now put away when another takes over, and a character already recorded somewhere their own map does not have is moved to a place they do know."
+        },
+        {
+          "kind": "fix",
+          "title": "A ship is not a place to sail to",
+          "summary": "A holding that moves was offering itself as a destination, a day away.",
+          "detail": "The list of places to sail for excluded where she lies, but not what she is — so a hold that is also a place on the map offered itself. It now leaves out where she lies, anywhere that is one of your own holdings, and anywhere carrying her own name; and the list is sorted by how far, nearest first, with what she cannot reach at the bottom."
+        }
+      ]
+    },
+    {
       "version": "2.10.0",
       "date": "2026-09-26",
       "entries": [

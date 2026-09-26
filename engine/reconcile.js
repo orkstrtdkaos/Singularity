@@ -2848,6 +2848,49 @@ export const CHARACTER_STEPS = [
       return { said: `${dropped.length === 1 ? "A power" : `${dropped.length} powers`} had taken an interest in you over people you never killed — their own feuds, counted against you. That is withdrawn; whatever they have a real reason to notice, they will notice again.` };
     }
   },
+  {
+    version: 86, id: "you-are-standing-nowhere", playerFacing: true,
+    // ⛔ CCODE-526 · ERIK: "I can't travel most places via the map because it claims they aren't connected."
+    // Measured on Loki: he stands at `gen-whistling-woman-post`, and that record is on SILAS'S save. His own
+    // `generated.location` holds four places and that is not one of them. A position that names nothing has no
+    // connections and no route — `planJourney` answered for 0 of 40 destinations, and every place on the map
+    // read "not directly reachable". The other fifteen characters sit in a graph of 142–146.
+    //
+    // ⚠️ HOW: `hydrateGeneratedIntoContent` merges a character's grown world into the SHARED `CONTENT` and
+    // never took it out again, so one character's places stayed live for the next one in the same session. That
+    // is sealed at the source; this is for the saves already holding a borrowed address.
+    //
+    // ⛑ A POSITION IS NOT GUESSED. Somewhere THEY have a record of, in a stated order, or nothing at all.
+    apply: (c, ctx) => {
+      const here = c?.currentLocationId;
+      if (!here) return {};
+      const known = (id) => !!(id && ((c?.generated?.location || {})[id] || (ctx?.content?.locations || {})[id]));
+      if (known(here)) return {};                                   // they are somewhere
+      const name = (id) => (c?.generated?.location?.[id]?.name) || (ctx?.content?.locations?.[id]?.name) || id;
+      // ⚠️ THE FIELDS ARE `knownPlaces` (an ARRAY of ids) AND `placeMemory` (a map) — checked on a real save,
+      // because a fallback list of names I merely expected to exist would find nothing and leave the character
+      // exactly where they were, while the step reported success. Loki carries 86 known places, all authored.
+      const mem = (c?.placeMemory && typeof c.placeMemory === "object") ? Object.keys(c.placeMemory) : [];
+      const tries = [
+        ...(Array.isArray(c?.holdings) ? c.holdings.map(h => h?.locationId) : []),
+        ...mem.reverse(),
+        ...(Array.isArray(c?.knownPlaces) ? [...c.knownPlaces].reverse() : []),
+        c?.origin?.homeLocation,
+      ];
+      const to = tries.find(known);
+      if (!to) {
+        console.log(`[reconcile] ccode-526: ${c?.name || c?.id} stands at ${here}, which is on no record — and nowhere of their own to put them`);
+        return {};                                                  // ⛔ never invent a place for them
+      }
+      c.currentLocationId = to;
+      // ⛑ AND A HOLD AT A MISSING ADDRESS IS SAID, NEVER MOVED. Where a place stands is not a thing a repair
+      // gets to decide — Loki's own hold sits at `gen-the-made-gate`, which is on no record of his either.
+      const lostHolds = (Array.isArray(c?.holdings) ? c.holdings : []).filter(h => h?.locationId && !known(h.locationId)).map(h => h.name || h.id);
+      if (lostHolds.length) console.log(`[reconcile] ccode-526: …and ${lostHolds.length} holding(s) sit at an address on no record either: ${lostHolds.join(", ")}`);
+      console.log(`[reconcile] ccode-526: ${c?.name || c?.id} was standing at ${here} (a place on no record of theirs) — moved to ${to}`);
+      return { said: `You were recorded as standing somewhere your own map does not have — a place grown on another character's world. You are at ${name(to)}.` };
+    }
+  },
   // Future steps register here — e.g. innate-talent GRANT (offers[], when talent content
   // lands with SNG-017), Reach-tradition eligibility surfacing, universal-role tagging.
 ];

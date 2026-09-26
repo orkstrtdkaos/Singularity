@@ -180,7 +180,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.10.0";
+const APP_VERSION = "2.10.1";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -5300,18 +5300,38 @@ function refreshPortraitMilestone(c, prevLevel) {
  *  (travel, hereNow, registry, codex resolution) treats generated content as first-class —
  *  authored vs generated indistinguishable downstream. Authored wins any id clash (and
  *  resolve-before-mint makes clashes impossible anyway). Called on enterPlay. */
+// ⛔ CCODE-526 — WHAT WAS HYDRATED, AND FOR WHOM. `CONTENT` is module-level and shared by every character in
+// the session, and this function only ever ADDED: open Silas, his grown world merges in; switch to Loki without
+// reloading and Silas's places are still live, so a `moveTo` resolves to one and Loki's save records a place he
+// does not own. ⚠️ MEASURED: Loki stands at `gen-whistling-woman-post`, a record on SILAS'S save. On reload
+// CONTENT no longer has it and he is nowhere — no connections, no route, `planJourney` answers for 0 of 40
+// destinations, every place on the map "not directly reachable". The other fifteen sit in a graph of 142–146.
+// ⛑ This is the CCODE-427 class: swapping `character` is not sealing.
+let _hydrated = { forId: null, location: [], npc: [], item: [] };
+
 function hydrateGeneratedIntoContent(c) {
   ensureGenerated(c);
-  for (const rec of generatedRecords(c, "location")) if (!CONTENT.locations[rec.id]) CONTENT.locations[rec.id] = rec;
+  // ⛑ TAKE THE LAST CHARACTER'S GROWN WORLD BACK OUT FIRST. Only ids THIS function put in are removed, so
+  // authored content and anything another path added are untouched — and re-hydrating the same character is a
+  // no-op rather than a churn.
+  if (_hydrated.forId && _hydrated.forId !== c?.id) {
+    for (const id of _hydrated.location) delete CONTENT.locations?.[id];
+    for (const id of _hydrated.npc) delete CONTENT.npcs?.[id];
+    for (const id of _hydrated.item) delete CONTENT.items?.[id];
+    _hydrated = { forId: null, location: [], npc: [], item: [] };
+  }
+  const put = { forId: c?.id || null, location: [], npc: [], item: [] };
+  for (const rec of generatedRecords(c, "location")) if (!CONTENT.locations[rec.id]) { CONTENT.locations[rec.id] = rec; put.location.push(rec.id); }
   // ⛔ CCODE-416: and the roads to them run both ways again — the road back is an edit to an authored neighbour, which a reload undoes
   try { twoWayRoads(CONTENT.locations); } catch { /* the map is never the thing that fails a load */ }
-  for (const rec of generatedRecords(c, "npc")) if (!CONTENT.npcs[rec.id]) CONTENT.npcs[rec.id] = rec;
+  for (const rec of generatedRecords(c, "npc")) if (!CONTENT.npcs[rec.id]) { CONTENT.npcs[rec.id] = rec; put.npc.push(rec.id); }
   // SNG-296 — A GENERATED ITEM MUST REACH THE CATALOG, or it is a record nothing can equip. The whole
   // mechanical path for gear runs through the catalog: `fromCatalog`/`resolveInventoryItem` re-link an
   // inventory entry to its `bonusTags`, and without that link `equipmentBonus` and `wieldBonusFor` find
   // nothing to match — the item would look right in the bag and contribute to no roll. Same one-line hook
   // the other two types get, and the reason to write it in the same breath as the gen type.
-  for (const rec of generatedRecords(c, "item")) if (!CONTENT.items[rec.id]) CONTENT.items[rec.id] = rec;
+  for (const rec of generatedRecords(c, "item")) if (!CONTENT.items[rec.id]) { CONTENT.items[rec.id] = rec; put.item.push(rec.id); }
+  _hydrated = put;
 }
 
 /** §2 engagement: record an implicit attention signal on a generated entity by id (across
@@ -13216,6 +13236,21 @@ function renderMap(selectedId = null) {
     // SNG-330: SYMMETRIC. Reading only `connectedToHere` lost the Travel button on any place whose
     // reciprocal edge was written to AUTHORED content and therefore never saved.
     const reachable = canTravelBetween(here, l.id, CONTENT.locations, character.placeEdges);
+    // ⛔ CCODE-526 · ERIK: "I can't travel most places via the map because it claims they aren't connected."
+    // ⚠️ MEASURED: the graph averages 2.76 direct edges per place — 12 of 143 offered from Millbrook, 20 from
+    // the Crossing, 1 from a generated margin — while the world is ONE connected component and `planJourney`
+    // answers for 33–40 of 40 sampled destinations for every character. The planner was gated behind the
+    // one-hop check, so it could only be offered for journeys the player could already walk in a single step.
+    // ⛑ A route the planner can lay is a way there. Only a place nothing can reach is refused.
+    const routePlan = (!reachable && l.id !== here && known) ? journeyPlanFor(l.id) : null;
+    // ⛔ AND A NULL PLAN IS TWO DIFFERENT ANSWERS. `planJourney` returns null when there is no route AND when
+    // the trip is TOO SHORT TO BE A JOURNEY (`isJourneyRoute` — rightly: you do not mount an expedition for a
+    // seven-hour walk). The map read both as "no way there" and refused places three hours down the road:
+    // measured on the live screen, the Made Gate at 0.3 days and the Whistling Woman Post at 0.4 were told
+    // there was no road and no route. ⛑ `routeBetween` answers the other question on its own.
+    const routeShort = (!reachable && !routePlan && l.id !== here && known)
+      ? (() => { try { const r = routeBetween(here, l.id, CONTENT.locations, { traveller: character, rules: CONTENT.rules }); return (r?.options || []).length ? r : null; } catch { return null; } })()
+      : null;
     details = `<div class="map-details">
       <div class="map-details-head">
         <h3>${esc(known ? l.name : "An unknown place")}${!visited && known ? ` <span class="hint">— known of, not yet been</span>` : ""}</h3>
@@ -13233,8 +13268,8 @@ function renderMap(selectedId = null) {
            ${pm?.notes?.length ? `<div class="map-details-notes">${pm.notes.slice(-3).map(n => `<div class="codex-fact">${esc(n)}</div>`).join("")}</div>` : ""}
            ${Object.keys(pm?.subPlaces || {}).length ? `<div class="sub-places"><span class="hint">Places within: </span>${Object.entries(pm.subPlaces).map(([slug, sp]) => `<button class="codex-link ${sp.visited ? "" : "dead"}" data-subgo="${esc(slug)}" data-subloc="${esc(l.id)}" title="${esc(sp.note || (sp.visited ? "you have been here" : "heard of only"))}">${esc(sp.name)}</button>`).join(" ")}</div>` : ""}`
         : `<p class="map-details-desc">You've heard travelers mention it, nothing more. Someone would have to go and see.</p>`}
-      ${l.id !== here ? (reachable
-        ? `<button class="btn" id="map-travel" data-dest="${esc(l.id)}" style="margin-top:8px">${(() => { const jp = journeyPlanFor(l.id); return jp ? `Plan the journey (about ${chosenWay(jp).days} days)` : `Travel here (+${ADVANCE.travel}h)`; })()}</button>${(() => {
+      ${l.id !== here ? ((reachable || routePlan || routeShort)
+        ? `<button class="btn" id="map-travel" data-dest="${esc(l.id)}" style="margin-top:8px">${(() => { const jp = routePlan || journeyPlanFor(l.id);   // ⛑ the plan already laid for the gate above, not a second run of it return jp ? `Plan the journey (about ${chosenWay(jp).days} days)` : `Travel here (+${ADVANCE.travel}h)`; })()}</button>${(() => {
             // SNG-180: how far this actually is, in the world's own geometry. Erik's year-to-walk
             // scale makes the number mean something — a neighbouring Reach is weeks and your
             // antipode is most of a year, which is what turns waygates into infrastructure.
@@ -13243,7 +13278,7 @@ function renderMap(selectedId = null) {
             return days == null ? "" : `<div class="hint" style="margin-top:4px">${days < 1 ? "less than a day" : `about ${Math.round(days)} day${Math.round(days) === 1 ? "" : "s"}`}${mi ? ` (about ${mi} miles)` : ""} on foot — ${days > 40 ? "a waygate is the difference between a journey and a life" : "walkable, if you have the season for it"}.</div>`;
           })()}`
         + `<button class="opt" id="map-lookinside" data-inside="${esc(l.id)}" style="margin:8px 0 0 6px" title="What's within this place">⌂ Look inside</button>`
-        : `<div class="hint" style="margin-top:6px">Not directly reachable from ${esc(CONTENT.locations[here]?.name || "here")}${(() => {
+        : `<div class="hint" style="margin-top:6px">No road and no route reach ${esc(l.name || l.id)} from ${esc(CONTENT.locations[here]?.name || "here")}${(() => {
             // SNG-330 hardening 1 — ⚠️ SAY WHY, AND SAY WHICH. "travel via a connected place" told the player
             // nothing they did not already know; the data to name one is sitting in `connections`. A refusal
             // that does not point anywhere is a dead end wearing an explanation.
@@ -15248,12 +15283,27 @@ function renderHoldingsTab(manageId = null, tab = null) {
             const car = carriageOf(h); const voy = voyageOf(h);
             if (!car || voy) return "";
             const at = CONTENT.locations?.[h.locationId] || null;
-            const near = [...new Set([...(at?.connections || []), ...Object.keys(character.generated?.location || {})])].filter(id => id && id !== h.locationId).slice(0, 40);
+            // ⛔ CCODE-526 — SHE IS NOT A DESTINATION FOR HERSELF. The old filter was `id !== h.locationId`,
+            // which excludes where she LIES and not what she IS: the Standing Annex is a holding at the Made
+            // Gate and ALSO a location of its own, so her list offered her herself, one day out. Struck: the
+            // place she lies, any place that IS one of your holdings, and any place carrying this hold's name.
+            const holdPlaces = new Set((character.holdings || []).map(x => x?.locationId).filter(Boolean));
+            const myName = String(h.name || "").trim().toLowerCase();
+            const isSelf = (id) => id === h.locationId || holdPlaces.has(id)
+              || (!!myName && String(CONTENT.locations?.[id]?.name || "").trim().toLowerCase() === myName);
+            const near = [...new Set([...(at?.connections || []), ...Object.keys(character.generated?.location || {})])]
+              .filter(id => id && !isSelf(id)).slice(0, 40);
             if (!near.length) return "";
             const nm = (id) => esc(CONTENT.locations?.[id]?.name || id);
             const gate = (id) => canSail(character, h, id, { locations: CONTENT.locations, npcs: character.npcRegistry, cfg: CONTENT.rules?.economy?.carriage, routeDays: walkingDays(at, CONTENT.locations[id]) });
-            const opts = near.map(id => { const g = gate(id);
-              const d = g.ok && g.days != null ? ` — ${g.days < 1 ? "under a day" : Math.round(g.days) + " days"}` : "";
+            // ⚠️ NEAREST FIRST, UNREACHABLE LAST. The list was in `connections`-then-`Object.keys` order, so a
+            // 205-day passage sat above a one-day neighbour and the default selection was whatever came first.
+            const rows = near.map(id => ({ id, g: gate(id) }))
+              .sort((a, b) => (a.g.ok === b.g.ok ? 0 : a.g.ok ? -1 : 1)
+                || ((a.g.days ?? Infinity) - (b.g.days ?? Infinity))
+                || String(nm(a.id)).localeCompare(String(nm(b.id))));
+            const opts = rows.map(({ id, g }) => {
+              const d = g.ok && g.days != null ? ` — ${g.days < 1 ? "under a day" : Math.round(g.days) + ` day${Math.round(g.days) === 1 ? "" : "s"}`}` : "";
               return `<option value="${esc(id)}"${g.ok ? "" : " disabled"}>${nm(id)}${d}${g.ok ? "" : " — " + esc(String(g.why || "cannot go"))}</option>`; }).join("");
             const any = near.some(id => gate(id).ok);
             return `<div class="opt-row" style="gap:6px;flex-wrap:wrap;margin-top:6px">

@@ -14899,7 +14899,9 @@ await (async () => {
 
   // The whole point: a generated item must reach the CATALOG, or nothing can re-link it to its bonuses.
   check("272/296: a generated item is hydrated into the item catalog",
-    /generatedRecords\(c, "item"\)\) if \(!CONTENT\.items\[rec\.id\]\) CONTENT\.items\[rec\.id\] = rec/.test(appI));
+    /generatedRecords\(c, "item"\)\) if \(!CONTENT\.items\[rec\.id\]\) \{ CONTENT\.items\[rec\.id\] = rec; put\.item\.push\(rec\.id\); \}/.test(appI)
+    // ⛑ CCODE-526: it records what it put in, because it has to take the last character's world back out.
+    && /for \(const id of _hydrated\.item\) delete CONTENT\.items\?\.\[id\];/.test(appI));
 
   // …and end to end: a generated shield in the bag changes a guard roll.
   check("272/296: a generated shield actually changes a guard roll (the consumer Aevi thought was missing)", (() => {

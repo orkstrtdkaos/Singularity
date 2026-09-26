@@ -20761,9 +20761,22 @@ console.log("\n── §265 · a grown record is never its own rival ──");
   // the precondition the fix answers — if the app stops hydrating grown records into CONTENT, this gate should be re-read, not trusted
   const A265 = rd("app.js").replace(/\r\n/g, "\n");
   check("§265: the app still hydrates grown records and shared canon into CONTENT, and still hands CONTENT to promotion",
-    /for \(const rec of generatedRecords\(c, "npc"\)\) if \(!CONTENT\.npcs\[rec\.id\]\) CONTENT\.npcs\[rec\.id\] = rec;/.test(A265)
+    // ⚠️ THE LINE RECORDS WHAT IT PUT IN NOW (CCODE-526), because it has to take it back out again.
+    /for \(const rec of generatedRecords\(c, "npc"\)\) if \(!CONTENT\.npcs\[rec\.id\]\) \{ CONTENT\.npcs\[rec\.id\] = rec; put\.npc\.push\(rec\.id\); \}/.test(A265)
     && /else if \(type === "npc" && !CONTENT\.npcs\[record\.id\]\) CONTENT\.npcs\[record\.id\] = record;/.test(A265)
     && /syncSharedCanon\(\{ character, profile, content: CONTENT[,\s}]/.test(A265));   // (CCODE-422: it also asks for a read once a session)
+
+  // ⛔ CCODE-526 — AND IT TAKES THE LAST CHARACTER'S GROWN WORLD BACK OUT. `CONTENT` is module-level and this
+  // only ever ADDED: open Silas, his places merge in; switch to Loki in the same session and they are still
+  // there, so a `moveTo` resolves to one and Loki's save records an address he does not own. ⚠️ MEASURED: Loki
+  // stood at `gen-whistling-woman-post`, a record on SILAS'S save — no connections, no route, `planJourney`
+  // answered for 0 of 40 destinations, every place on the map "not directly reachable". The other fifteen
+  // characters sat in a graph of 142–146. This is the CCODE-427 class: swapping `character` is not sealing.
+  check("§265: ⛔ …AND ONE CHARACTER'S GROWN WORLD DOES NOT STAY IN ANOTHER'S — what was hydrated is remembered, and removed before the next one",
+    /let _hydrated = \{ forId: null, location: \[\], npc: \[\], item: \[\] \};/.test(A265)
+    && /if \(_hydrated\.forId && _hydrated\.forId !== c\?\.id\) \{/.test(A265)
+    && /for \(const id of _hydrated\.location\) delete CONTENT\.locations\?\.\[id\];/.test(A265)
+    && /_hydrated = put;/.test(A265));
 }
 
 // ⛔ CCODE-381 — shared lives, second stage: A LEGEND'S FATE IS THE WORLD'S. Erik: "The world changes for everyone." ⚑ MEASURED: 33

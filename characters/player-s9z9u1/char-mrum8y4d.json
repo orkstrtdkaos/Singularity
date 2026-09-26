@@ -1890,40 +1890,6 @@
     "news": [
       {
         "day": 5,
-        "worldDay": 87,
-        "text": "Morvane of the Harvest Hand broke The One Who Stayed Embodied — a stranger, and now an enemy. The One is out of the reckoning while the wound holds.",
-        "tier": "event",
-        "section": "world",
-        "kind": "clash",
-        "winnerId": "morvane_the_harvest",
-        "loserId": "the_one_who_stayed_embodied",
-        "outcome": "wounded",
-        "locationId": "the_long_grey",
-        "placedBy": "winnerId"
-      },
-      {
-        "day": 5,
-        "worldDay": 87,
-        "text": "The Raw Chord turned The Archive That Walks back. The Archive learned something, which is worse for everyone else.",
-        "tier": "event",
-        "section": "world",
-        "kind": "clash",
-        "winnerId": "the_raw_chord",
-        "loserId": "the_archive_that_walks",
-        "outcome": "stopped",
-        "locationId": "the_wellspring_deep",
-        "placedBy": "winnerId"
-      },
-      {
-        "day": 5,
-        "worldDay": 88,
-        "text": "Halvex Coil, the Rewriter is spoken of: patching a district into silence.",
-        "tier": "murmur",
-        "section": "world",
-        "locationId": "the_service_ways"
-      },
-      {
-        "day": 5,
         "worldDay": 88,
         "text": "Cinder Vael, the Wright Who Would Not Stop is spoken of: starting a thing she will not finish.",
         "tier": "murmur",
@@ -2064,11 +2030,32 @@
         "section": "elsewhere",
         "regionId": "valley",
         "communityId": "the_mountain_pass"
+      },
+      {
+        "day": 8,
+        "worldDay": 88,
+        "text": "Halvex Coil keeps The Standing Annex now.",
+        "tier": "event",
+        "section": "yours"
+      },
+      {
+        "day": 8,
+        "worldDay": 88,
+        "text": "The Wardens of Cairnhold has lost people it will not get back.",
+        "tier": "event",
+        "section": "world"
+      },
+      {
+        "day": 8,
+        "worldDay": 88,
+        "text": "The Wardens of Cairnhold has taken an interest in you — you have killed 32 of theirs.",
+        "tier": "event",
+        "section": "world"
       }
     ],
     "unseenNews": [],
     "lastGenCount": 2115,
-    "lastSharedReadAt": "2026-09-26T03:01:25.054Z",
+    "lastSharedReadAt": "2026-09-26T03:30:32.230Z",
     "lastTickWorldDay": 88,
     "lastCanonWorldDay": 88,
     "turnsSinceOffer": 0,
@@ -9701,7 +9688,7 @@
       "the_doubting_lattice": 84,
       "the_war_ender": 84
     },
-    "updatesToldTo": "2.9.0",
+    "updatesToldTo": "2.9.1",
     "newsLog": [
       {
         "day": 4,
@@ -11014,6 +11001,30 @@
         "worldDay": 88,
         "text": "The game was updated to v2.9.0 — 1 new, 1 fixed.",
         "loggedAt": "2026-09-26T03:01:28.651Z"
+      },
+      {
+        "day": 8,
+        "worldDay": 88,
+        "text": "The Wardens of Cairnhold has lost people it will not get back.",
+        "tier": "event",
+        "section": "world",
+        "loggedAt": "2026-09-26T03:30:38.681Z"
+      },
+      {
+        "day": 8,
+        "worldDay": 88,
+        "text": "The Wardens of Cairnhold has taken an interest in you — you have killed 32 of theirs.",
+        "tier": "event",
+        "section": "world",
+        "loggedAt": "2026-09-26T03:30:38.681Z"
+      },
+      {
+        "kind": "update",
+        "section": "world",
+        "version": "2.9.1",
+        "worldDay": 88,
+        "text": "The game was updated to v2.9.1 — 3 fixed.",
+        "loggedAt": "2026-09-26T03:30:38.681Z"
       }
     ]
   },
@@ -14165,8 +14176,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790392982061,
-  "rev": 940,
+  "updatedAt": 1790393438681,
+  "rev": 942,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -15558,21 +15569,21 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 239,
-    "choices": 239,
-    "characterDeltas": 123,
-    "scene": 239,
+    "sceneSummary": 238,
+    "choices": 238,
+    "characterDeltas": 122,
+    "scene": 238,
     "placeUpdates": 28,
-    "codexUpdates": 139,
-    "timeOps": 192,
-    "offer": 43,
+    "codexUpdates": 138,
+    "timeOps": 191,
+    "offer": 42,
     "generateRequest": 7,
-    "sceneEnded": 108,
+    "sceneEnded": 107,
     "npcUpdates": 189,
-    "moveTo": 11,
-    "gambitApt": 67,
+    "moveTo": 10,
+    "gambitApt": 66,
     "deeds": 14,
-    "questUpdates": 44,
+    "questUpdates": 43,
     "standingOps": 4,
     "factUpdates": 19,
     "stageOps": 7,
@@ -15590,7 +15601,7 @@
     "partyOps": 4,
     "bandOps": 1
   },
-  "_opTurns": 239,
+  "_opTurns": 238,
   "customAbilities": {
     "mirror-bright": {
       "id": "mirror-bright",
@@ -17024,7 +17035,7 @@
     },
     {
       "text": "Halvex Coil keeps The Standing Annex now.",
-      "announced": false
+      "announced": true
     }
   ],
   "figureImages": {
@@ -18061,7 +18072,15 @@
       },
       "lastVerb": "patrol",
       "lastVerbDay": 8,
-      "losses": 1
+      "losses": 0,
+      "lost": {
+        "0": 32
+      },
+      "noticed": {
+        "trigger": "crossed",
+        "why": "you have killed 32 of theirs",
+        "day": 8
+      }
     },
     "power_the_scour": {
       "known": {
@@ -18109,7 +18128,7 @@
       },
       "lastVerb": "expand",
       "lastVerbDay": 8,
-      "wins": 0,
+      "wins": 1,
       "grownHeads": 44,
       "grewDay": 8
     },
@@ -18161,21 +18180,21 @@
     "power_flesh_temple": {
       "lastVerb": "recruit",
       "lastVerbDay": 8,
-      "wins": 0,
+      "wins": 1,
       "grownHeads": 18,
       "grewDay": 5
     },
     "power_vacated_custody": {
       "lastVerb": "expand",
       "lastVerbDay": 8,
-      "wins": 0,
+      "wins": 1,
       "grownHeads": 6,
       "grewDay": 5
     },
     "power_the_ceaseless": {
       "lastVerb": "expand",
       "lastVerbDay": 8,
-      "wins": 1,
+      "wins": 2,
       "grownHeads": 10,
       "grewDay": 5,
       "losses": 0
@@ -18191,7 +18210,7 @@
       "wins": 0,
       "grownHeads": 12,
       "grewDay": 5,
-      "losses": 0
+      "losses": 1
     },
     "power_the_scouring": {
       "lastVerb": "patrol",

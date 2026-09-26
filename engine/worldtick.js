@@ -19,6 +19,7 @@ import { activeCompany } from "./company.js";   // SNG-358: a holding's keeper m
 import { queueFeatureOffers, advanceHolding, holdingNews, unstewardedHoldings, takeHoldingEvents, CONDITIONS, tickStore, storeNews, advanceDebts, growHolding, holdingGround, holdingMeaningAura, healingAt, chargeQuartering } from "./holdings.js";
 import { tickArmory } from "./armory.js";   // CCODE-445: the forge works the order, a pass at a time
 import { tickCaravans } from "./caravan.js";   // R49: the road runs itself, and can be robbed
+import { domainAccess } from "./traditions.js";   // SNG-659 §1: the three-domain draw a person's kit is dealt from
 import { meaningDensity, peoplePresentAt } from "./substrate.js";   // R46b: what the pilgrims come for   // SNG-358: holdings ride the same world-gated pass
 import { commitGrowth } from "./npcsheet.js";   // ✅ R37: growth writes, on the tick
 import { bearersOf } from "./npcs.js";           // ✅ R45c: what other people carry
@@ -620,6 +621,16 @@ export function advanceHoldings({ character, now = Date.now(), ladder = null, co
   }
   let moved = 0;
   const count = worldCount(now);
+  // ⛔ SNG-659 §1 (AEVI) — ONE KIT BAG FOR EVERY UNATTENDED FIGHT. `kitFor` draws the three-domain kit Erik
+  // ruled for on 2026-09-11, and it is the SAME draw `battleSkillsFor` fights a duel with. ⚠️ Assembled here,
+  // once, because `battle_turn.js`'s own comment records what a caller that skips it costs: "THE DOMAIN DRAW
+  // HAS NEVER RUN IN PLAY … so a person's kit was whatever `craftsOf` found on their sheet, and the 41 people
+  // carrying no abilities fell straight through to threat synthesis." The raid was that caller's twin.
+  const kitDeps659 = {
+    catalog: content?.abilities || {},
+    domainAccess, traditionIndex: content?.traditionIndex || null,
+    tierBands: content?.rules?.leveling?.tierUnlockBands || null,
+  };
   for (const h of character?.holdings || []) {
     if (count - (h.lastMovedWorldCount ?? 0) < ASSIGN_INTERVAL_HOURS) continue;
     const before = h.condition;
@@ -654,7 +665,7 @@ export function advanceHoldings({ character, now = Date.now(), ladder = null, co
     const grew = growHolding(character, h, { cfg: holdCfg, npcs: content?.npcs || {}, npcCfg: content?.rules?.npcStanding || {},
       worldCount: count, day: (() => { try { return absoluteWorldDay(); } catch { return null; } })(), nameOf: (id) => character?.npcRegistry?.[id]?.name || content?.npcs?.[id]?.name || id });
     const st = tickStore(character, h, { cfg: holdCfg, economy: content?.rules?.economy || null, npcCfg: content?.rules?.npcStanding || {}, locations: content?.locations || {}, rules: content?.rules || {},
-      catalogue: content?.abilities || {},   // ⛔ SNG-659 §1: a raid that cannot see a defender's crafts cannot count them   // ⛔ CCODE-504: the watch ROLLS, and its dials are in rules.death.watch   // v2 §1: the keeper's tier joins the raid product and sets the floor; runner fees read the gate nearby
+      kitDeps: kitDeps659,   // ⛔ SNG-659 §1: a raid that cannot draw a defender's kit fights them as bodies   // ⛔ CCODE-504: the watch ROLLS, and its dials are in rules.death.watch   // v2 §1: the keeper's tier joins the raid product and sets the floor; runner fees read the gate nearby
       // ⛔ SNG-634 C2 — AND WHO IS STANDING HERE MOVES IT. The signed sum of the `dangerLift` of every power
       // whose `reach` covers this place, which mechanises Erik's 2026-07-19 ruling: clearing them lowers it.
       // ⚠️ ADDED TO THE ARITHMETIC THAT WAS ALREADY HERE, deliberately NOT routed through `dangerOf`: that
@@ -720,7 +731,7 @@ export function advanceHoldings({ character, now = Date.now(), ladder = null, co
     locations: content?.locations || {}, economy: content?.rules?.economy || null,
     cfg: content?.rules?.economy?.holdStore || null, rng,
     people: { ...(content?.npcs || {}), ...(character?.npcRegistry || {}) },
-    catalogue: content?.abilities || {},   // ⛔ SNG-659 §1: Aevi's §1a names this caller by line number
+    kitDeps: kitDeps659,   // ⛔ SNG-659 §1: Aevi's §1a names this caller by line number
     meleeCfg: { ...(content?.rules?.melee || {}), ...(content?.rules?.martial || {}) } })) {
     if (ev?.note) news.push(ev.note);   // ⚑ the event's OWN note — reaching for the caravan's latest duplicated arrivals
   }

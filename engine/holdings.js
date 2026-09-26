@@ -23,7 +23,7 @@ import { debit } from "./purse.js";        // Q5-B: settling a debt pays · ⛔ 
 import { payAt, earnAt, saidPaid, saidEarned, priceHere, moneyHere } from "./money.js";   // ⛔ CCODE-437: money by place — local first, else a worse rate
 import { contributionsOf } from "./combatants.js";   // SNG-541c / Erik: a defender is what they can DO, not one more body
 import { regionDemand } from "./economy.js";       // Q8: a unit is worth what THIS Reach wants it for
-import { sheetFor as personSheetFor, tierOf as tierOfLevel, personRecordFor } from "./npcsheet.js";   // Q18 → v2 §1: the keeper's tier sets the FLOOR
+import { sheetFor as personSheetFor, tierOf as tierOfLevel, personRecordFor, kitFor } from "./npcsheet.js";   // Q18 → v2 §1: the keeper's tie · SNG-659 §1: the DERIVED kit, the same one every duel fights withr sets the FLOOR
 import { locationDensity } from "./substrate.js";   // Q18: the ground scales an enterprise's yield
 import { legionClash, contingentsFromPeople, contingentsOf, bloodBand } from "./melee.js";
 import { raidersFrom, notePowerLoss, contingentsOf as powerContingents } from "./powers.js";   // SNG-634 C1: the raiders have an owner
@@ -677,7 +677,7 @@ export function yieldFor(holding, cfg, { density = null } = {}) {
  *
  *  ⚠️ A WATCH IS WHAT DETECTS: people on the garrison, or a feature that keeps one (sentries, a tower). Stone alone does not
  *  see. Returns the receipt the news reads, or null when nothing came of it. */
-export function resolveRaid(character, holding, { cfg = null, dangerLevel = 0, rng = Math.random, day = null, people = {}, npcCfg = {}, keeperFloor = null, power = null, meleeCfg = null, rules = {}, catalogue = {} } = {}) {
+export function resolveRaid(character, holding, { cfg = null, dangerLevel = 0, rng = Math.random, day = null, people = {}, npcCfg = {}, keeperFloor = null, power = null, meleeCfg = null, rules = {}, kitDeps = null } = {}) {
   // ⛔ ERIK 2026-09-12, OVER AEVI'S §4: a hull under way is RAIDABLE WHERE SHE IS — "it doesn't make sense to only update their
   // location at the very end." Her whereabouts come from the day (`carriage.voyagePosition`), the danger is the nearest place's,
   // and the crew aboard defends as a garrison does in port. The receipt says she was taken at sea so the news can read right.
@@ -743,8 +743,8 @@ export function resolveRaid(character, holding, { cfg = null, dangerLevel = 0, r
         // the authored pool lists one for 3 (Pell 27, Siol 9, Calvar 8). A reader written `registry[id] ||
         // npcs[id]` reaches NOBODY, because the registry entry exists and is empty — the same shadow `dutyHand`
         // threads `npcs` to see past (CCODE-411).
-        craftsOf: (p) => craftIdsOf(p, people), energyOf: (p) => energyFor(p, { npcs: people, npcCfg, day }),
-        catalogue, enemies: raiderHeads, cfg: meleeCfg || {} });
+        craftsOf: (p) => craftIdsOf(p, people, kitDeps, { day, npcCfg }), energyOf: (p) => energyFor(p, { npcs: people, npcCfg, day }),
+        catalogue: kitDeps?.catalog || {}, enemies: raiderHeads, cfg: meleeCfg || {} });
     // ⛔ CCODE-450: a band's hands put to guarding or patrolling meet the raiders as what they are — their heads, at their quality
     for (const id of watchOf(holding, cfg).filter(x => /^unit:/.test(String(x)))) {
       const m = /^unit:(.+):(\d+)$/.exec(String(id));
@@ -858,18 +858,30 @@ export function watchOf(holding, cfg = null) {
  *  1.0, a vocation leaning 0.6, plain 0.3. A warden holds a wall; a filtration engineer is on it, not of it.
  *
  *  Returns a `levelOf` for `contingentsFromPeople`. */
-/** ⛔ SNG-659 §1 — WHICH CRAFTS A DEFENDER HAS, from BOTH records.
+/** ⛔ SNG-659 §1 — WHICH CRAFTS A DEFENDER FIGHTS WITH: THE DERIVED KIT, not a stored list.
  *
- *  ⚠️ MEASURED BEFORE IT WAS WRITTEN: across all 16 saves, of the 15 people standing on a hold, the save's
- *  REGISTRY lists a craft for **0** of them and the authored pool lists one for **3** (Pell 27, Siol 9,
- *  Calvar 8). The obvious reader — `registry[id] || npcs[id]` — reaches NOBODY, because the registry entry
- *  exists and carries an empty list. `dutyHand` threads `npcs` past the same shadow (CCODE-411: 32 of 132
- *  people sheet to a different level once the pool is available).
+ *  ⚠️ MY FIRST VERSION READ THE STORED `abilities` LISTS (registry merged with the authored pool), and Aevi
+ *  caught it: "the level (`sheetFor`) and the energy (`energyFor`) on the very same line are DERIVED, because
+ *  0 of 132 people store either. Crafts are the third leg of the same seam." Measured, the stored read gave
+ *  **1 of 15** hold-standing people a craft reaching past one figure. `kitFor` — which `battleSkillsFor`, and
+ *  therefore every duel in the game, already uses — gives all 15 a three-domain draw under Erik's 2026-09-11
+ *  ruling ("NPCs should have 3 domain access just like PCs").
  *
- *  ⬜ AND THE HONEST NUMBER IS ONE. Of those 15, exactly **one** (Pell Ran Marsh — `plain_weight` 6) carries a
- *  craft that reaches past a single figure today. The mechanism is right; the population is content's to grow. */
-function craftIdsOf(p, npcs = {}) {
+ *  ⛑ "AN NPC IS NOT A DIFFERENT KIND OF THING" HAS TO HOLD BETWEEN TWO FIGHT ENGINES as much as between an
+ *  NPC and a PC. The same defender was swinging a full kit in a duel and `[]` in a raid.
+ *
+ *  ⬜ And a person with no `domains` gets only what they have been SEEN to do (`needsDomains`) — that is the
+ *  content door, and Aevi measured it herself: 15 of 15 carry domains, 0 need them. */
+function craftIdsOf(p, npcs = {}, kitDeps = null, { day = null, npcCfg = {} } = {}) {
   const ids = [];
+  if (kitDeps && kitDeps.catalog) {
+    try {
+      const kit = kitFor(personRecordFor(p, { npcs }), { ...kitDeps, day, cfg: { ...npcCfg, ...(kitDeps.tierBands ? { tierUnlockBands: kitDeps.tierBands } : {}) } });
+      for (const ab of (kit?.crafts || [])) if (ab?.id) ids.push(String(ab.id));
+    } catch { /* a kit that will not draw is not a reason to lose the defender */ }
+  }
+  // ⛑ …AND THE STORED LISTS STILL COUNT, because an authored craft is a fact about the person that the draw
+  // may not hand back (`kitFor`'s own `closed` rule says so). Union, never either/or.
   for (const rec of [p, npcs?.[p?.id]]) {
     for (const a of (Array.isArray(rec?.abilities) ? rec.abilities : [])) {
       const id = typeof a === "string" ? a : (a?.abilityId || a?.id || null);
@@ -1305,7 +1317,7 @@ export function sellShareFor(holding, cfg) {
   return 0;
 }
 
-export function tickStore(character, holding, { cfg = null, economy = null, regionId = null, dangerLevel = 0, rng = Math.random, day = null, density = null, meaning = 0, people = {}, npcCfg = {}, locations = {}, rules = {}, catalogue = {} } = {}) {
+export function tickStore(character, holding, { cfg = null, economy = null, regionId = null, dangerLevel = 0, rng = Math.random, day = null, density = null, meaning = 0, people = {}, npcCfg = {}, locations = {}, rules = {}, kitDeps = null } = {}) {
   const keeperFloorEffects = (() => { try { const t = holding?.steward ? keeperTierOf(character, holding, { npcs: people, npcCfg, day }) : null; const fl = holding?.steward ? keeperFloorFor(t, cfg?.growth) : null; return fl ? { keeperFloor: fl } : null; } catch { return null; } })();
   if (!holding || !cfg) return null;
   const out = { yielded: null, upkeep: 0, short: 0, raid: null, full: false, justFull: false };
@@ -1417,7 +1429,7 @@ export function tickStore(character, holding, { cfg = null, economy = null, regi
     const rc = raidChanceFor(character, holding, { cfg, dangerLevel, people, npcCfg, day, total, fullAt });
     const keeperFloor = holding.steward ? keeperFloorFor(rc.keeperTier, cfg?.growth) : null;
     // ⛔ CCODE-504 — the rules bag rides, because the watch ROLLS now and its dials live in rules.death.watch.
-    if (rng() < rc.chance) out.raid = resolveRaid(character, holding, { cfg, dangerLevel, rng, day, people, npcCfg, keeperFloor, rules, catalogue,
+    if (rng() < rc.chance) out.raid = resolveRaid(character, holding, { cfg, dangerLevel, rng, day, people, npcCfg, keeperFloor, rules, kitDeps,
       meleeCfg: { ...(rules?.melee || {}), ...(rules?.martial || {}) } });
   }
   return out;

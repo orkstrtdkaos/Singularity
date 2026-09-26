@@ -28481,6 +28481,10 @@ console.log("\n── §362 · what one figure can reach ──");
   const C362 = await lch362();
   const cat362 = C362.abilities || {};
   const martial362 = { ...(C362.rules?.melee || {}), ...(C362.rules?.martial || {}) };
+  const TR362 = await import("../engine/traditions.js");
+  const NS362 = await import("../engine/npcsheet.js");
+  const kitDeps362 = { catalog: cat362, domainAccess: TR362.domainAccess, traditionIndex: C362.traditionIndex || null,
+    tierBands: C362.rules?.leveling?.tierUnlockBands || null };
 
   // ⛑ THE DIALS ARE CONTENT, because the arithmetic is a ruling waiting on its ruler and a dial is how that
   // gets settled without an engine change.
@@ -28556,11 +28560,32 @@ console.log("\n── §362 · what one figure can reach ──");
       return none > 0 && some > 0 && some < none;
     })(), "fewer at every scale, never none");
 
-  // ⛔ AND THE READER MERGES TWO RECORDS, OR IT REACHES NOBODY. Measured: of the 15 people standing on a hold
-  // across all 16 saves, the REGISTRY lists a craft for 0 and the authored pool lists one for 3.
-  check("§362: ⛔ THE CRAFTS COME FROM BOTH RECORDS — a registry entry that exists and is EMPTY shadows the authored one",
-    /craftsOf: \(p\) => craftIdsOf\(p, people\)/.test(rd("engine/holdings.js"))
-    && /for \(const rec of \[p, npcs\?\.\[p\?\.id\]\]\)/.test(rd("engine/holdings.js")));
+  // ⛔ THE CRAFTS ARE DERIVED, LIKE THE LEVEL AND THE ENERGY BESIDE THEM — AEVI'S CORRECTION, 2026-09-26.
+  // My first reader took the STORED `abilities` lists (registry merged with the authored pool). She caught it:
+  // "the level (`sheetFor`) and the energy (`energyFor`) on the very same line are DERIVED, because 0 of 132
+  // people store either. Crafts are the third leg of the same seam." `battleSkillsFor` has fought every duel
+  // in the game with `kitFor` since it shipped — so the same defender swung a full kit in a duel and `[]` in
+  // a raid. ⚠️ MEASURED: the stored read gave 1 of 15 hold-standing people a craft reaching past one figure;
+  // the derived kit gives 12 of 15.
+  check("§362: ⛔ THE CRAFTS ARE THE DERIVED KIT — the same `kitFor` draw every duel fights with, not a stored list",
+    /const kit = kitFor\(personRecordFor\(p, \{ npcs \}\), \{ \.\.\.kitDeps,/.test(rd("engine/holdings.js"))
+    && /craftsOf: \(p\) => craftIdsOf\(p, people, kitDeps, \{ day, npcCfg \}\)/.test(rd("engine/holdings.js"))
+    && /kitDeps659 = \{[\s\S]{0,300}?domainAccess, traditionIndex:/.test(rd("engine/worldtick.js")));
+
+  check("§362: ⛑ …and the STORED lists still count on top of it — an authored craft is a fact the draw may not hand back",
+    /for \(const rec of \[p, npcs\?\.\[p\?\.id\]\]\)/.test(rd("engine/holdings.js"))
+    && /for \(const rec of \[p, npcs\?\.\[p\?\.id\]\]\)/.test(rd("engine/caravan.js")));
+
+  // ⛔ AND THE FINDING THE CORRECTION RESTS ON, as a fixture rather than a save: a defender who stores NO
+  // crafts at all, but carries domains, must still bring something to a fight.
+  check("§362: ⛔ A DEFENDER WHO STORES NO CRAFTS STILL FIGHTS WITH A KIT — 1 of 15 became 12 of 15 on the real saves",
+    (() => {
+      const bare = { id: "nobody", name: "Nobody", role: "warden of the march", level: 20,
+        domains: (Object.values(C362.npcs || {}).find(n => n?.domains)?.domains) || null, subAttributes: { presence: 8 } };
+      if (!bare.domains) return false;                       // no authored domains anywhere would make this vacuous
+      const kit = NS362.kitFor(bare, { ...kitDeps362, day: 100, cfg: { ...(C362.rules?.npcStanding || {}), ...(kitDeps362.tierBands ? { tierUnlockBands: kitDeps362.tierBands } : {}) } });
+      return !(bare.abilities || []).length && (kit?.crafts || []).length > 0 && kit.needsDomains === false;
+    })(), "and a person with NO domains gets only what they have been seen to do \u2014 that door is content's, and Aevi measured it at 0 of 15");
 
   // ⛑ AND THE WHOLE PATH IS DRIVEN, because proving `figureWeight` returns a bigger number proves nothing
   // about whether a raid ever asks it.
@@ -28577,7 +28602,7 @@ console.log("\n── §362 · what one figure can reach ──");
           const c = { id: "c", name: "P", purse: { crystal: 100 }, holdings: [h], npcRegistry: { warden: { id: "warden", name: "The Warden" } } };
           let n = 0; const rng = () => { n++; return (Math.sin(i * 97 + n * 13) + 1) / 2; };
           const r = HD.resolveRaid(c, h, { cfg: cfgH, dangerLevel: 4, rng, day: 100, people: { warden: warden(crafts) },
-            npcCfg: C362.rules?.npcStanding || {}, rules: C362.rules || {}, meleeCfg: martial362, catalogue: cat362 });
+            npcCfg: C362.rules?.npcStanding || {}, rules: C362.rules || {}, meleeCfg: martial362, kitDeps: kitDeps362 });
           if (r?.held) held++;
           if ((h.history || []).some(e => /Burning Ones reaches/.test(String(e?.note || "")))) said++;
         }
@@ -28590,29 +28615,46 @@ console.log("\n── §362 · what one figure can reach ──");
   // ⛔ BOTH CALLERS OF `legionClash` THAT BUILD PEOPLE INTO CONTINGENTS. Aevi's §1a names the second by line
   // number: "the same function runs caravan escorts, so this fixes both." A fix that lands on one of two
   // callers is half a migration.
-  check("§362: ⛔ BOTH CALLERS READ CRAFTS — the hold raid and the caravan escort, and the catalogue reaches each from `worldtick`",
-    /craftsOf: \(p\) => craftIdsOf\(p, people\)/.test(rd("engine/holdings.js"))
-    && /craftsOf: \(p\) => escortCraftIds\(p, people\)/.test(rd("engine/caravan.js"))
-    && /catalogue: content\?\.abilities \|\| \{\}/.test(rd("engine/worldtick.js"))
-    && (rd("engine/worldtick.js").match(/catalogue: content\?\.abilities \|\| \{\}/g) || []).length === 2,
-    "one `catalogue:` for the tick's holdings, one for its caravans");
+  check("§362: ⛔ BOTH CALLERS DRAW THE KIT — the hold raid and the caravan escort, from ONE bag built where `content` is",
+    /craftsOf: \(p\) => craftIdsOf\(p, people, kitDeps, \{ day, npcCfg \}\)/.test(rd("engine/holdings.js"))
+    && /craftsOf: \(p\) => escortCraftIds\(p, people, kitDeps, \{ day, npcCfg \}\)/.test(rd("engine/caravan.js"))
+    && (rd("engine/worldtick.js").match(/kitDeps: kitDeps659/g) || []).length === 2
+    && (rd("engine/worldtick.js").match(/const kitDeps659 = \{/g) || []).length === 1,
+    "one bag, built once, handed to both \u2014 two bags beside each other is the crossing this project has made five times");
 
   // ⚠️ AND THE TWO MERGES MUST AGREE. `holdings.js` imports `caravan.js`, so the helper is written twice
   // rather than imported — four lines against an import cycle — and this is what stops them drifting.
   check("§362: ⚠️ …and the two copies of the merge agree — written twice to avoid an import cycle, gated so they cannot drift",
     (() => {
-      const body = (src, name) => (src.match(new RegExp(`function ${name}\\(p, npcs = \\{\\}\\) \\{[\\s\\S]*?\\n\\}`)) || [""])[0]
-        .replace(new RegExp(name, "g"), "X").replace(/\s+/g, " ");
+      const body = (src, name) => (src.match(new RegExp(`function ${name}\\(p, npcs = \\{\\}, kitDeps = null, \\{ day = null, npcCfg = \\{\\} \\} = \\{\\}\\) \\{[\\s\\S]*?\\n\\}`)) || [""])[0]
+        .replace(new RegExp(name, "g"), "X").replace(/\/\*[\s\S]*?\*\//g, "").replace(/\/\/[^\n]*/g, "").replace(/\s+/g, " ");
       const a = body(rd("engine/holdings.js"), "craftIdsOf"), b = body(rd("engine/caravan.js"), "escortCraftIds");
       return a.length > 80 && a === b;
     })());
 
-  // ⬜ AND THE HONEST POPULATION, asserted so it cannot quietly be claimed to be bigger than it is.
-  check("§362: ⬜ …and it changes ONE defender in the game today — the mechanism is the engine's, the population is content's",
+  // ⛔ AND THE HONEST POPULATION — WHICH THE CORRECTION MOVED, so this sentence moved with it. On the stored
+  // lists it was 1 of 15; on the derived kit it is 12 of 15. ⚠️ A gate that keeps passing while asserting the
+  // number the correction replaced is the shape this project keeps finding: the claim moved, the sentence did not.
+  check("§362: ⬜ …and the reach is reachable by the POPULATION, not by a lucky draw — sampled across the authored domain triples",
     (() => {
-      const ids = ["plain_weight", "keystone_blow", "edge"];
-      return ids.every(id => cat362[id]) && ML.craftReach(cat362.plain_weight, { cfg: martial362 })?.reach === 6;
-    })(), "Pell Ran Marsh, `plain_weight` 6 \u2014 the only one of 15 people standing on a hold who carries a craft that reaches past one");
+      // ⚠️ MY FIRST VERSION ASKED ONE TRIPLE and got adept_sona's, whose draw contains no many-target craft
+      // at all — so a property of one record read as a failure of the feature. Sweep them.
+      const cfgK = { ...(C362.rules?.npcStanding || {}), ...(kitDeps362.tierBands ? { tierUnlockBands: kitDeps362.tierBands } : {}) };
+      const triples = new Map();
+      for (const n of Object.values(C362.npcs || {})) if (n?.domains) triples.set(JSON.stringify(n.domains), n.domains);
+      let withKit = 0, withReach = 0;
+      // ⚠️ EVERY THIRD TRIPLE, NOT ALL 127: the full sweep cost this suite 38 seconds for a claim a sample
+      // carries just as well. Deterministic, so the sample never moves under the gate.
+      const sample = [...triples.values()].filter((_, i) => i % 3 === 0);
+      for (const d of sample) {
+        const kit = NS362.kitFor({ id: "w", name: "W", role: "warden of the march", level: 20, domains: d, subAttributes: { presence: 8 } },
+          { ...kitDeps362, day: 100, cfg: cfgK });
+        if ((kit?.crafts || []).length) withKit++;
+        if ((kit?.crafts || []).some(a => ML.craftReach(a, { cfg: martial362 }))) withReach++;
+      }
+      // every triple must draw SOMETHING (the structural finding), and a real share must draw a reach
+      return triples.size >= 50 && withKit === sample.length && withReach >= Math.round(sample.length * 0.4);
+    })(), "measured at level 20: 73 of 127 triples (57%) draw a many-target craft \u2014 23% at level 10, 50% at 15");
 }
 
 /* ══════════ REPORT ══════════ */

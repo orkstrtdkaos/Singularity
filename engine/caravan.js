@@ -27,6 +27,7 @@
 // this: beat them off and they take NOTHING. A carrier can die on a won road and the goods still arrive.
 
 import { legionClash, contingentsFromPeople } from "./melee.js";
+import { kitFor, personRecordFor } from "./npcsheet.js";   // SNG-659 §1: the DERIVED kit, the same one every duel fights with
 import { contributionsOf } from "./combatants.js";   // SNG-541c / Erik: a defender is what they can DO, not one more body
 import { unitWorth } from "./holdings.js";
 import { earnAt, saidEarned } from "./money.js";   // ⛔ CCODE-437: sold for the market's own money — `earnAt` goes through `credit`   // ⛔ CCODE-437: a load is sold for the money of the market it reaches
@@ -229,12 +230,19 @@ export function standingCarriers(car, people = {}, character = null) {
  *  ⚠️ AND `personalRisk` HAS NEVER BEEN READ BY ANYTHING. `legionClash` has computed and returned it since it
  *  was written, with a comment arguing hard for why it must have a floor, and no module in the engine ever
  *  looked at it. This is its first consumer, and it is the thing that makes Erik's ruling mean something. */
-/** ⛑ SNG-659 §1 — THE SAME MERGE THE HOLD RAID MAKES, for the same measured reason: a save's registry entry
- *  for a person EXISTS and carries an empty craft list, so `registry[id] || npcs[id]` reaches nobody. Written
- *  here rather than imported because `holdings.js` imports `caravan.js` and not the other way round — a second
- *  copy of four lines beats a cycle, and the gate asserts they agree. */
-function escortCraftIds(p, npcs = {}) {
+/** ⛑ SNG-659 §1 — THE SAME READER THE HOLD RAID USES: the DERIVED kit, plus whatever the stored lists add.
+ *  Aevi's correction — "the level and the energy on the very same line are derived, because 0 of 132 people
+ *  store either; crafts are the third leg of the same seam" — and `battleSkillsFor` has fought with `kitFor`
+ *  in every duel since it shipped. Written here rather than imported because `holdings.js` imports
+ *  `caravan.js` and not the other way round; the gate asserts the two copies are one text. */
+function escortCraftIds(p, npcs = {}, kitDeps = null, { day = null, npcCfg = {} } = {}) {
   const ids = [];
+  if (kitDeps && kitDeps.catalog) {
+    try {
+      const kit = kitFor(personRecordFor(p, { npcs }), { ...kitDeps, day, cfg: { ...npcCfg, ...(kitDeps.tierBands ? { tierUnlockBands: kitDeps.tierBands } : {}) } });
+      for (const ab of (kit?.crafts || [])) if (ab?.id) ids.push(String(ab.id));
+    } catch { /* a kit that will not draw is not a reason to lose the escort */ }
+  }
   for (const rec of [p, npcs?.[p?.id]]) {
     for (const a of (Array.isArray(rec?.abilities) ? rec.abilities : [])) {
       const id = typeof a === "string" ? a : (a?.abilityId || a?.id || null);
@@ -244,7 +252,7 @@ function escortCraftIds(p, npcs = {}) {
   return [...new Set(ids)];
 }
 
-export function resolveRoadHazard(character, car, { rng = Math.random, cfg = null, people = {}, day = null, where = null, catalogue = {}, meleeCfg = {}, npcCfg = {} } = {}) {
+export function resolveRoadHazard(character, car, { rng = Math.random, cfg = null, people = {}, day = null, where = null, kitDeps = null, meleeCfg = {}, npcCfg = {} } = {}) {
   // ✅ ERIK 2026-09-12: the hazard happened SOMEWHERE — `where` comes from positionOnRoad and is named in the event, so a player
   // reading the log knows which stretch of road took the load rather than only that the road did.
   const atWhere = where?.name ? ` near ${where.name}` : "";
@@ -285,8 +293,8 @@ export function resolveRoadHazard(character, car, { rng = Math.random, cfg = nul
     // the work: a craft reaching six against two raiders reaches two.
     const defenders = contingentsFromPeople(escort, { levelOf: (p) => num(p?.level, 1),
       contributionsOf: (p) => contributionsOf(p, { evidence: true }),
-      craftsOf: (p) => escortCraftIds(p, people), energyOf: (p) => num(p?.energy, 0),
-      catalogue, enemies: d, cfg: meleeCfg });
+      craftsOf: (p) => escortCraftIds(p, people, kitDeps, { day, npcCfg }), energyOf: (p) => num(p?.energy, 0),
+      catalogue: kitDeps?.catalog || {}, enemies: d, cfg: meleeCfg });
   const clash = legionClash(defenders, raiders, { rng, cfg: raidCfg.clash || {} });
   const held = clash.tide > 0.05;
 
@@ -348,7 +356,7 @@ export const ROAD_HAZARD_PER_DANGER_DAY = 0.003;
  *  coin and never mints it. Returns the receipts the news reads. */
 export function tickCaravans(character, {
   day = null, locations = {}, economy = null, cfg = null, rng = Math.random, people = {}, perDangerChance = ROAD_HAZARD_PER_DANGER_DAY,
-  catalogue = {}, meleeCfg = {},   // ⛔ SNG-659 §1: an escort whose crafts nothing can see fights as bodies
+  kitDeps = null, meleeCfg = {},   // ⛔ SNG-659 §1: an escort whose kit nothing can draw fights as bodies
 } = {}) {
   const out = [];
   for (const car of caravansOf(character)) {
@@ -362,7 +370,7 @@ export function tickCaravans(character, {
       // ✅ ERIK 2026-09-12: the danger WHERE THEY ARE on this day of the road, not the worst step of the whole route.
       const at = positionOnRoad(car, now - (elapsed - 1 - i), locations);
       if (rng() < clamp01(at.danger * perDangerChance)) {
-        const r = resolveRoadHazard(character, car, { rng, cfg, people, day: now, where: at, catalogue, meleeCfg });
+        const r = resolveRoadHazard(character, car, { rng, cfg, people, day: now, where: at, kitDeps, meleeCfg });
         // ⚑ EACH EVENT CARRIES ITS OWN NOTE. The caller used to reach back for the caravan's latest event,
         // which duplicated an arrival and swallowed the robbing that happened on the way to it.
         out.push({ kind: "hazard", caravanId: car.id, note: car.events[car.events.length - 1]?.what || null, ...r });

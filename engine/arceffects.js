@@ -58,7 +58,8 @@ export function activeArcEffects(content, character, stageOf, { regionId = null 
     if (stage == null) continue;
     const def = (arc.stages || []).find(s => s.stage === stage);
     for (const e of (def?.effects || [])) {
-      out.push({ ...e, arcId: arc.id, arcName: arc.name, stage, stageName: def.name || `Stage ${stage}` });
+      // ⛔ SNG-642 §2.5 — no numeric fallback; see worldtick's stageName for the measurement.
+      out.push({ ...e, arcId: arc.id, arcName: arc.name, stage, stageName: def.name || null });
     }
   }
   return out;

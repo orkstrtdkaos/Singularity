@@ -76,3 +76,115 @@ export function sovereignFormLine(rec, form) {
     : `${name} has ARRIVED DIMINISHED — arriving is diminishment; it can be fought, and it can be lost to`
       + ` survivably. It is here to push the arc back its own way and to end whoever is opposing it.`;
 }
+
+/* ═════ SNG-642 §2 · C15 — WHAT AN ARC'S STAGE SAYS, AND TO WHOM ═════
+ *
+ * ✅ ERIK: *"showing the arcs not as numbered stages only… if the Hollow King is fully Satiated the stage describes
+ * Full Bargains… people might know that bargains are being made… without naming the Hollow King yet."*
+ *
+ * ⛑ THREE LAYERS, EACH UNLOCKING SEPARATELY, and that separation is the whole idea: the world can be visibly
+ * going wrong long before anybody knows whose hunger it is.
+ *   · `publicFace`     — everyone. What is happening, with nobody named.
+ *   · `onceLineKnown`  — after marks confirm a supply line (SNG-641 §2). Names the POWER, never the Sovereign.
+ *   · `onceNamed`      — only once the save knows the Sovereign's name. Names the hunger behind it.
+ *
+ * ⚠️ MEASURED BEFORE BUILDING: `onceLineKnown` and `onceNamed` are now authored on 12 stages and READ BY NOBODY,
+ * and neither `knownSovereigns` nor `marksSeen` appears anywhere in engine/ or app.js. Every one of the 22 older
+ * stages carries a `name` and a `publicFace`, so nothing below changes what an existing arc shows.
+ */
+
+/** ⛔ THE MASK. Erik ruled it: while the save does not know Lucifer, every line that would name him names
+ *  Eosphor, the Dawn Seraph. ⛑ Applied to the TEXT at the last hop, because a mask that rewrote the record
+ *  would have to be undone everywhere the record is read — and the one thing a mask must never do is leak.
+ *  ⚠️ Word boundaries, so a line about "Luciferian" prose is not silently rewritten. PURE. */
+export function maskedFor(text, { character = null, masks = null } = {}) {
+  const t = String(text ?? "");
+  if (!t) return t;
+  const list = masks && typeof masks === "object" ? masks : null;
+  if (!list) return t;
+  let out = t;
+  for (const [id, mask] of Object.entries(list)) {
+    if (!mask?.name) continue;
+    if (knowsSovereign(character, id)) continue;          // they know him; he wears no mask for them
+    const real = String(mask.realName || id).replace(/_/g, " ");
+    out = out.replace(new RegExp(`\\b${real.replace(/[.*+?^${}()|[\\]\\\\]/g, "\\\\$&")}\\b`, "gi"), mask.name);
+  }
+  return out;
+}
+
+/** ⛑ THE MASKS THE WORLD IS WEARING, derived from whoever carries one rather than listed anywhere. A record's
+ *  `mask` is `{ name, title, showsAs, tells }`; the real name is the record's own. PURE. */
+export function masksFrom(npcs = {}) {
+  const out = {};
+  for (const [id, rec] of Object.entries(npcs || {})) {
+    if (!rec?.mask?.name) continue;
+    out[id] = { ...rec.mask, realName: rec.name || String(id).replace(/_/g, " ") };
+  }
+  return out;
+}
+
+/** ⛔ WHOSE ARC THIS IS, derived. The arcs carry `sovereignGM` prose and NO id; the link runs the other way, on
+ *  each record's own `forms.arcId` — which is the field `formsFix` set. ⛑ Derived rather than authored twice: a
+ *  `sovereignId` on the arc would be a second copy of a fact the record already states, and the two would drift.
+ *  PURE. */
+export function sovereignOfArc(arcId, npcs = {}) {
+  const want = String(arcId || "");
+  if (!want) return null;
+  for (const [id, rec] of Object.entries(npcs || {})) {
+    if (rec?.forms?.arcId === want) return id;
+  }
+  return null;
+}
+
+/** Whether this save knows a Sovereign by name. ⛑ ONE READER for a fact two things can write: an anti-Sovereign
+ *  telling you (R41c), and the Sovereign arriving. PURE. */
+export function knowsSovereign(character, sovereignId) {
+  const id = String(sovereignId || "");
+  if (!id) return false;
+  const k = character?.knownSovereigns;
+  if (Array.isArray(k)) return k.includes(id);
+  if (k && typeof k === "object") return !!k[id];
+  return false;
+}
+
+/** ⛑ AND THE WRITER, so the reader is not waiting on a field nobody sets. Returns true when this is the first
+ *  time. MUTATES. */
+export function learnSovereign(character, sovereignId, { day = null, how = null } = {}) {
+  const id = String(sovereignId || "");
+  if (!character || !id) return false;
+  if (!character.knownSovereigns || typeof character.knownSovereigns !== "object" || Array.isArray(character.knownSovereigns)) {
+    const was = Array.isArray(character.knownSovereigns) ? character.knownSovereigns : [];
+    character.knownSovereigns = {};
+    for (const x of was) character.knownSovereigns[String(x)] = true;   // an older save's array form is kept, not dropped
+  }
+  if (character.knownSovereigns[id]) return false;
+  character.knownSovereigns[id] = { day: Number(day) || null, how: how ? String(how) : null };
+  return true;
+}
+
+/** ⛔ WHAT THIS STAGE SAYS TO THIS CHARACTER. The stage's NAME and nothing numeric; then each layer that has
+ *  unlocked, in order, with `{power}` filled in where a confirmed line has one.
+ *
+ *  ⚠️ `stage` IS AN INDEX INTO AUTHORED STAGES, NOT A LABEL. It is used to FIND the stage and never shown —
+ *  C15's fifth point is that no stage number reaches the player, and the two `\`Stage ${n}\`` fallbacks in
+ *  `arceffects.js` and `worldtick.js` are exactly how one would. PURE. */
+export function arcReading(arc, { stage = null, lineKnown = false, named = false, power = null, character = null, masks = null } = {}) {
+  const stages = Array.isArray(arc?.stages) ? arc.stages : [];
+  if (!stages.length) return null;
+  const want = Number.isFinite(Number(stage)) ? Number(stage) : Number(arc?.currentStage) || 1;
+  const def = stages.find(s => Number(s?.stage) === want) || stages[Math.max(0, Math.min(stages.length - 1, want - 1))];
+  if (!def) return null;
+  const mask = (s) => maskedFor(s, { character, masks });
+  const fill = (s) => String(s ?? "").replace(/\{power\}/g, power || "somebody with a claim on it");
+  const lines = [];
+  if (def.publicFace) lines.push({ layer: "publicFace", text: mask(fill(def.publicFace)) });
+  // ⛔ `onceLineKnown` NEEDS A POWER TO NAME. Its authored text is written around `{power}`, and a line reading
+  // "somebody with a claim on it is where the bargains are struck" is worse than no line at all.
+  if (lineKnown && def.onceLineKnown && power) lines.push({ layer: "onceLineKnown", text: mask(fill(def.onceLineKnown)) });
+  if (named && def.onceNamed) lines.push({ layer: "onceNamed", text: mask(fill(def.onceNamed)) });
+  return { arcId: arc.id || null, arcName: arc.name || arc.id || null, stageName: def.name || null, lines,
+    // ⛔ SEALED, AND NAMED AS SEALED so a caller cannot reach for it by accident. `sovereignGM` is the GM's, and
+    // §2.5 says neither it nor `onceNamed` reaches the player before its unlock.
+    gmOnly: { sovereignGM: arc.sovereignGM || null, tendency: arc.tendency || null,
+      pressureOnAdvance: def.pressureOnAdvance || null } };
+}

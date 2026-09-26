@@ -117,7 +117,7 @@ foothill worth travelling to, and why the world has roads.
 
 ## V · What is moving right now
 
-**Six arcs, all early, all turning without you.**
+**Nine arcs, all early, all turning without you.**
 
 ### THE POLES PULL — *world scale, slow, vast*
 Every Reach is drifting harder toward its own extreme. The Lattice orders more. The Blaze burns brighter.
@@ -158,6 +158,27 @@ The Precursors' argument, still paused. The lattice was built to take instructio
 dormant, not gone. The Veil is the shape of a hole where the other one used to be.
 
 Untended, the argument resumes with the world still standing in the middle of it.
+
+### The Long Petition — *world scale, patient*
+People are trading things they cannot get back for things they want now — a name, a harvest, a year. The
+bargains start as favours and end as the only way anything gets done.
+
+Untended, every road runs through somebody's grant, and the grant is the hunger. **The counter is a
+settlement that can still refuse** — and somebody who will say so out loud.
+
+### The Glare — *world scale, brightening*
+Privacy has started to look like guilt. A shut door is a question; a drawn curtain gets you marked. The
+light is offered as safety and it does not switch off.
+
+Untended there is nowhere left to stand out of it. **The counter is shade** — kept deliberately, by people
+who know what it is for.
+
+### The Long Sleep — *world scale, the slow one*
+Houses are quieter than they were. People are sleeping longer and waking less, and nobody can point to
+when it started.
+
+Untended the houses empty and nothing in them was taken. **The counter is a reason to get up** — which
+turns out to be harder to supply than a wall.
 
 ---
 
@@ -427,7 +448,7 @@ Exesa has roads.
 
 Nothing. That is the honest answer.
 
-There is no spine and no chosen one. Six arcs are turning and proximity decides which one you meet —
+There is no spine and no chosen one. Nine arcs are turning and proximity decides which one you meet —
 start in the Deepwood and the water crisis is not yours. The great figures are already at work and will
 carry on without you.
 

@@ -45,6 +45,7 @@ import { protectsOffscreen, nemesisIdOf } from "./nemesis.js";   // ⛔ SNG-648 
 import { travelerCard, cardChanged, mergeTravelerCard, ledgerMonthsSince, whereOf, meetKey } from "./travelers.js";   // SNG-595: a fellow traveler is a person the world has a record of
 import { stampEventChange, mergeEventStages, mergeQuestOutcomes, actorOf, questKey } from "./worldevents.js";   // CCODE-354: a crisis another traveler answered reads as answered
 import { bandDialsOf } from "./melee.js";                                    // SNG-634 C1: a raiding power bleeds on the dials a band does
+import { arcReading, knowsSovereign, masksFrom, sovereignOfArc } from "./sovereign.js";   // ⛔ SNG-642 §2.3: which of an arc's three readings this character has unlocked, and the mask over the name
 import { raiderPowerAt, dangerLiftAt, powerPass, noticePass } from "./powers.js";  // SNG-634 C1/C2/C4/C7: whose raid, whose ground, what they do, who has noticed you
 import { worthOf } from "./purse.js";                                              // ⛔ SNG-634 C7 `wealth`: a crown notices a rich stranger
 import { INVITES_PATH, mergeInvitation, answerInto, applyAnswers } from "./invitations.js";   // CCODE-360: an invitation carried by someone you both know
@@ -142,12 +143,31 @@ export function worldArcsPublic(content, character) {
     // valley can still be pulling it back). The actual backward MOVE surfaces as the stage number dropping +
     // the "pushed back to…" news when the canonical stage falls between syncs.
     const direction = net > 0 ? "advanced" : net < 0 ? "receded" : "held";
+    // ⛑ SNG-642 §2.3 — what THIS character may read of this stage, masks applied.
+    const reading = (() => {
+      try {
+        const npcs = content?.npcs || {};                       // ⚠️ `npcs` is not a name in this function
+        return arcReading(arc, { stage: stageNum, character,
+          // ⛔ WHOSE ARC, DERIVED from the records' own `forms.arcId` — the arcs carry no id for it.
+          named: knowsSovereign(character, sovereignOfArc(arc.id, npcs)),
+          masks: masksFrom(npcs) });
+      } catch { return null; }
+    })();
     // contested: the player and the rest of the world (other players + epics) pulling opposite ways.
     const contested = (mine > 0 && (others + epic) < 0) || (mine < 0 && (others + epic) > 0);
     return {
       arcId: arc.id, name: arc.name, stageNum, total,
-      stageName: def?.name || `Stage ${stageNum}`,
-      publicFace: def?.publicFace || arc.tendency || "", // tendency is the authored fallback surface line (not the sealed truth)
+      // ⛔ SNG-642 §2.5 — AND THE FALLBACK MAY NOT BE A NUMBER. Measured: all 22 older stages and all 12 new
+      // ones carry a `name`, so this branch is unreached today — which is exactly how a number gets back in
+      // later, on the one arc somebody authors in a hurry. A stage with no name says nothing rather than
+      // counting out loud, and the arc's own name still identifies it.
+      stageName: def?.name || null,
+      // ⛔ SNG-642 §2.3 (C15) — AND THE READING IS THE READER'S. `arcReading` decides which of the three layers
+      // this character has unlocked and applies the mask, so a line that would name Lucifer names Eosphor until
+      // the save knows him. ⛑ `lineKnown`/`power` come from SNG-641's mark confirmation, which is the next item:
+      // until it lands they are false and null, and the reading is exactly the `publicFace` it always was.
+      publicFace: (reading?.lines || []).map(l => l.text).join(" ") || def?.publicFace || arc.tendency || "", // tendency is the authored fallback surface line (not the sealed truth)
+      reading: reading ? { stageName: reading.stageName, layers: reading.lines.map(l => l.layer) } : null,
       moved: stageNum !== base, direction, contested,
     };
   });

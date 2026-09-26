@@ -304,6 +304,16 @@
     "COMMANDER"
    ],
    "description": "⛑ WHAT THIS PERSON IS FOR — `docs/VOCATIONS.md`. ⛔ AUTHORED, NEVER DERIVED: clustering 40 people by their crafts' verb families put 17 in KEEPER and ZERO in EDGE, with the coliseum's HARM champion in the KEEPER column. ⚠️ Verb counts measure COMPETENCE; a vocation is PURPOSE. ⚑ COMMANDER is in the enum and NOBODY HOLDS IT — the ninth vocation has no crafts and no coliseum cell, and the enum says so rather than hiding it."
+  },
+  "mask": {
+   "type": "object",
+   "description": "⛔ WHAT THIS PERSON SHOWS WHILE A SAVE DOES NOT KNOW THEM — `{ name, title, showsAs, tells }` (SNG-641/642, RULED Erik 2026-09-24). ⛑ It lives on the RECORD because a mask belongs to the person wearing it, and `masksFrom` derives the reader's map from whoever carries one rather than from a list. Lucifer shows as Eosphor, the Dawn Seraph, until the save knows him — and `knownSovereigns` is what takes it off.",
+   "properties": {
+    "name": { "type": "string", "description": "what they are called while masked" },
+    "title": { "type": "string" },
+    "showsAs": { "type": "string", "description": "what somebody meeting them sees" },
+    "tells": { "type": "array", "items": { "type": "string" }, "description": "what gives it away to somebody paying attention" }
+   }
   }
  },
  "_schemaGap_20260905": "⛔ THE SCHEMA DECLARED 25 PROPERTIES AND KNEW ABOUT NONE OF THE WORK OF THE LAST TWO WEEKS. Added 22: level, subAttributes, abilities, assistTags, domains, sex, romanceEligible, physicality, intimacyNotes, gear, inventory, practice, closed, people, teaches, canStrike, status, statusNote, image, aliases, bondType, bondStage. ⚠️ BOTH AUTHORED SHEETS (Pell, Veth) CARRIED TEN UNDECLARED FIELDS INCLUDING `abilities` — the sheet itself. ⛔ `additionalProperties` is unset, so JSON Schema defaults PERMISSIVE and nothing ever failed: THE VALIDATOR HAS NEVER CHECKED A SINGLE FIELD THAT MATTERS FOR COMBAT. Pell could have carried `abilties: []` and passed. ⬜ DELIBERATELY STILL PERMISSIVE — closing it would red-line 43 existing files at once. ⚠️ The value here is that a typo in `abilityId` or a rank of 5 now FAILS, and that the fields are DOCUMENTED where an author will look. ⚑ ASKED BY ERIK 2026-09-05: 'make sure the sheet schemas are sufficient for all the new updates we just made to holds, etc.' They were not.",

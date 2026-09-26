@@ -37,7 +37,7 @@ import { authoredBlock } from "./craftmechanics.js";
 import { smartClamp } from "./namematch.js";
 import { slugify } from "./quests.js";
 import { sheetFor as personSheetFor, battleSkillsFor, personRecordFor } from "./npcsheet.js";
-import { sovereignFormFor, sovereignFormLine } from "./sovereign.js";   // R41: one record, two forms, chosen by arc stage
+import { sovereignFormFor, sovereignFormLine, learnSovereign } from "./sovereign.js";   // R41: one record, two forms, chosen by arc stage · SNG-642 §2.3: arriving is how a save learns the name
 import { incapacitationOutcome, playerDeathState } from "./incapacitation.js";
 import { enterDeathState } from "./death.js";
 import { activeCompanions, growBond } from "./companions.js";
@@ -349,6 +349,14 @@ export function duelFromTarget(character, target, { catalog = {}, npcs = {}, cfg
   if (person?._form) {
     const line = sovereignFormLine(rec, { form: person._form, note: person._formNote });
     if (line) def.setup = def.setup ? `${line} ${def.setup}` : line;
+    // ⛔ SNG-642 §2.3 — AND ARRIVING IS HOW A SAVE LEARNS THE NAME. §2.5 seals `onceNamed` behind
+    // `knownSovereigns`, and the two things that open it are an anti-Sovereign telling you (R41c) and this:
+    // the thing standing in front of you. ⛑ Written HERE and not in the reader, because a reader that sets the
+    // fact it reads can never be asked the question twice and get the same answer.
+    // ⚠️ It also drops the mask: once he has stood in front of you, no line calls him Eosphor again.
+    // ⚠️ THE DAY COMES FROM THIS FUNCTION'S OWN `day` OPTION. My first cut read `here?.day` — `here` is a
+    // LOCATION and carries no day, so every arrival would have been recorded without one.
+    try { learnSovereign(character, rec?.id, { day, how: "arrived" }); } catch { /* an arrival is not worth losing a fight over */ }
   }
   if (here?.dangerLevel != null) def.danger = here.dangerLevel;
   character.customEncounters = character.customEncounters || {};

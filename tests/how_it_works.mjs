@@ -9107,7 +9107,7 @@ console.log("\n── §82 · A opens a scene · B finds it and JOINS · two wri
 // Aevi's prose for her, so this gates instead of stamping — she keeps the voice, the number stays honest.
 // ⚠️ AND THE SIX ARCS ARE CHECKED AGAINST THE AUTHORED ONES, name and SCALE, because a reader's guide that
 // promises a cosmic arc the engine runs regionally is a promise about pacing.
-console.log("\n── §83 · the setting doc's counts are measured, and its six arcs are the authored six ──");
+console.log("\n── §83 · the setting doc's counts are measured, and every authored arc is in it ──");
 {
   const { loadContentHeadless: lch83 } = await import("./headless_content.mjs");
   const C83 = await lch83();
@@ -9180,6 +9180,15 @@ console.log("\n── §83 · the setting doc's counts are measured, and its six
     const m = ex83.match(new RegExp("###[^\\n]*" + String(a.name).replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "[^\\n]*\\*(.*?)\\*", "i"));
     return m ? !String(m[1]).toLowerCase().includes(String(a.scale || "").toLowerCase()) : false;
   });
+  // ⛔ AND THE ARC COUNT IN THE PROSE, which sat ungated beside two counts that were gated for exactly this
+  // reason. It said "Six arcs" over six of them, and then over NINE when SNG-642's three landed — twice in the
+  // same document, in the section lead and in the closing line.
+  check("§83: ⛔ the doc's ARC COUNT is the measured one too, in both places it is said — the ungated half of a gated sentence is where a stale number survives",
+    (() => {
+      const said = [...ex83.matchAll(/([A-Za-z\-]+) arcs\b/g)].map(m => wordsToNumber(m[1])).filter(x => Number.isFinite(x) && x > 0);
+      return said.length >= 2 && said.every(x => x === arcs83.length);
+    })(), `doc says ${[...ex83.matchAll(/([A-Za-z\-]+) arcs\b/g)].map(m => m[1]).join(", ")} · measured ${arcs83.length}`);
+
   check("§83: …and each one at the SCALE it is authored at",
     wrongScale.length === 0,
     wrongScale.map(a => `${a.name} is ${a.scale}`).join(" · ") || "all scales agree");
@@ -28292,15 +28301,21 @@ console.log("\n── §360 · the nemesis, and both halves of Erik's ask ──
         && !/\brole\b\s*\)/.test(kinFn) && !/description/.test(kinFn);   // it does not reach for prose fields
     })());
 
-  check("§360: ⛑ …AND THE SAME FOR A SIGNAL WHOSE CONTENT HAS NOT LANDED. `seatStakes` is about seat challengers and claimants, and SNG-642/644 are still staged: no loaded arc carries one. It reports that with the count rather than scoring zero \u2014 and when she lands them, it starts firing with no change here",
+  // ⛔ THIS CHECK USED TO ASSERT THAT `seatStakes` HAS NO CONTENT, and its own text promised it would keep
+  // working "when she lands them, with no change here". It did not: CCODE-535 landed SNG-642's arcs, the world
+  // got its first claimant, the signal became READABLE, and the check went red because the thing it was waiting
+  // for HAPPENED. ⚠️ Sixth time I have written a gate that reddens when its own subject is fixed.
+  // ⛑ The CLAIM is the mechanism, in both directions: content absent → reported unreadable, never scored zero;
+  // content present → scored. Driven on two fixtures, so no arc anybody authors can move it either way.
+  check("§360: ⛑ …AND A SIGNAL WHOSE CONTENT HAS NOT LANDED IS REPORTED, NOT SCORED ZERO — driven both ways, because the world gaining its first claimant must not redden a check about the mechanism",
     (() => {
-      const out = NM.nemesisCandidates(silas, { content: C360 });
-      const seat = out.unreadable.find(u => u.signal === "seatStakes");
-      // and with an arc that DOES carry a claimant, the signal stops being unreadable
+      const bare = { ...C360, greaterArcs: [{ id: "a_bare_arc", name: "A Bare Arc", stages: [] }] };
+      const noSeats = NM.nemesisCandidates(silas, { content: bare });
+      const seat = noSeats.unreadable.find(u => u.signal === "seatStakes");
       const withSeats = { ...C360, greaterArcs: [{ id: "a_seat_arc", claimants: ["cinder_vael"], seat: "building" }] };
       const after = NM.nemesisCandidates(silas, { content: withSeats });
       return !!seat && !after.unreadable.some(u => u.signal === "seatStakes");
-    })());
+    })(), "the LIVE world now carries claimants, which is the content landing rather than the mechanism changing");
 
   check("§360: ⛔ AEVI'S HAND-CHOSEN ANSWER IS ON THE SHORTLIST, and where the engine ranks it differently THE SCORING IS REVIEWED, NOT THE SAVE — her rule. ⚠️ Measured: Cinder Vael scores 4 of 16 against Morvane's 7, because two of the four signals Aevi counted for her cannot be earned — `seatStakes` has no content, and `wantsTheirGround` is a PROXIMITY test at 12 days while the Ceaseless sit 108 to 262 walking days from his holdings. Relax that one dial and Cinder ties Morvane and wins the tiebreak",
     (() => {
@@ -29501,6 +29516,131 @@ console.log("\n── §369 · a raid is not a conquest ──");
     && /\$\{captiveRows\}/.test(rd("app.js"))
     && /character\.captives \|\| \[\]\)\.length/.test(rd("app.js")),
     "rendered, and the button is bound — a `data-` attribute with no handler is the dead affordance this file has shipped before");
+}
+
+/* ══════════ §370 · SNG-642 §2 (C15) — A HUNGER HAS AN ARC, AND AN ARC SAYS DIFFERENT THINGS TO DIFFERENT PEOPLE ══════════ */
+// ✅ ERIK: "showing the arcs not as numbered stages only… if the Hollow King is fully Satiated the stage describes
+// Full Bargains… people might know that bargains are being made… without naming the Hollow King yet."
+//
+// ⚠️ ALL THREE OF AEVI'S DATA DEFECTS CONFIRMED BEFORE THEY WERE TOUCHED, against loaded content:
+//   · `the_hollow_king.forms` was an ARRAY while `sovereign.js` reads an object — his forms were never honoured.
+//   · `lucifer.forms.arcId` was absent, which his own `_formsWhy` said was waiting for an arc for the Light seat.
+//   · `the_ninefold_ascendant` had NO forms, so it could never arrive at all.
+// And `onceLineKnown`, `onceNamed`, `knownSovereigns` and `marksSeen` appeared NOWHERE in engine/ or app.js.
+console.log("\n── §370 · bargains are being struck, and nobody has said whose ──");
+{
+  const SV370 = await import("../engine/sovereign.js");
+  const WT370 = await import("../engine/worldtick.js");
+  const { loadContentHeadless: lch370 } = await import("./headless_content.mjs");
+  const C370 = await lch370();
+  const arcs370 = C370.greaterArcs || [];
+  const arcOf = (id) => arcs370.find(a => a && a.id === id) || null;
+  const MASKS = { lucifer: { name: "Eosphor", realName: "Lucifer" } };
+
+  // ⛔ 1 · EVERY SOVEREIGN HAS ITS OWN ARC. They shared one, so two of them arrived at the same stage on the same day.
+  check("§370: ⛔ EACH SOVEREIGN HAS ITS OWN ARC, so their arrivals come at different times — the Hollow King and the Unbodied shared `arc_the_poles_pull` and would have arrived together",
+    (() => {
+      const three = ["the_hollow_king", "lucifer", "the_ninefold_ascendant"].map(id => C370.npcs?.[id]);
+      if (three.some(r => !r)) return false;
+      const ids = three.map(r => r?.forms?.arcId);
+      return ids.every(Boolean) && new Set(ids).size === 3 && ids.every(id => !!arcOf(id));
+    })(), "three records, three arcs, and each arc is one the loader actually has");
+
+  check("§370: ⛔ …AND `forms` IS THE SHAPE ITS READER TAKES — an authored list that `sovereignFormFor` cannot read is a form nobody ever wears",
+    (() => {
+      const hk = C370.npcs?.the_hollow_king, ub = C370.npcs?.the_ninefold_ascendant;
+      const shaped = (r) => r?.forms && !Array.isArray(r.forms) && r.forms.diminished?.atStage && r.forms.final?.atStage;
+      // and the authored list is KEPT, not deleted — same content, the reader's shape
+      return shaped(hk) && shaped(ub) && Array.isArray(hk?._formsWas)
+        && SV370.sovereignFormFor(hk, { stageOf: () => 3 })?.form === "diminished"
+        && SV370.sovereignFormFor(hk, { stageOf: () => 4 })?.form === "final"
+        // ⚠️ IT RETURNS `{ form: null, why: "not yet arrived" }`, NOT null — which is better than null, and my
+        // first cut asserted the wrong one. A reader that says WHY there is no form is a reader a caller can
+        // report from; the gate should want that, not tolerate it.
+        && SV370.sovereignFormFor(ub, { stageOf: () => 1 })?.form === null
+        && /not yet arrived/.test(SV370.sovereignFormFor(ub, { stageOf: () => 1 })?.why || "");
+    })(), "and at an early stage there is no form at all — arriving is the event, not the default");
+
+  // ⛔ 2 · THE THREE LAYERS, EACH UNLOCKING SEPARATELY. This is the whole idea.
+  check("§370: ⛔ THREE LAYERS, UNLOCKED SEPARATELY — the world can be visibly going wrong long before anybody knows whose hunger it is",
+    (() => {
+      const arc = arcOf("arc_the_long_petition");
+      const ch = {};
+      const bare = SV370.arcReading(arc, { stage: 2, character: ch, masks: MASKS });
+      const line = SV370.arcReading(arc, { stage: 2, lineKnown: true, power: "The Hollow Court", character: ch, masks: MASKS });
+      const all = SV370.arcReading(arc, { stage: 2, lineKnown: true, named: true, power: "The Hollow Court", character: ch, masks: MASKS });
+      const layers = (r) => r.lines.map(l => l.layer).join(",");
+      return layers(bare) === "publicFace" && layers(line) === "publicFace,onceLineKnown"
+        && layers(all) === "publicFace,onceLineKnown,onceNamed"
+        && /The Hollow Court/.test(line.lines[1].text);
+    })(), "`{power}` is filled from the confirmed line, so `onceLineKnown` names the POWER and never the Sovereign");
+
+  // ⛑ AND A LAYER WITH NOWHERE TO PUT ITS POWER SAYS NOTHING, rather than a sentence with a hole in it.
+  check("§370: ⛑ …and `onceLineKnown` with no power to name is WITHHELD — its text is written around `{power}`, and a line about “somebody with a claim on it” is worse than no line",
+    (() => {
+      const arc = arcOf("arc_the_long_petition");
+      const r = SV370.arcReading(arc, { stage: 2, lineKnown: true, power: null, masks: MASKS });
+      return !r.lines.some(l => l.layer === "onceLineKnown");
+    })());
+
+  // ⛔ 3 · THE MASK. Erik ruled it: while the save does not know Lucifer, every line naming him names Eosphor.
+  check("§370: ⛔ THE MASK HOLDS — a line that would name Lucifer names Eosphor until the save knows him, and then it does not",
+    (() => {
+      const arc = arcOf("arc_the_glare");
+      const ch = {};
+      const masked = SV370.arcReading(arc, { stage: 4, named: true, character: ch, masks: MASKS });
+      const before = masked.lines.find(l => l.layer === "onceNamed")?.text || "";
+      const learned = SV370.learnSovereign(ch, "lucifer", { day: 100, how: "arrived" });
+      const after = SV370.arcReading(arc, { stage: 4, named: true, character: ch, masks: MASKS })
+        .lines.find(l => l.layer === "onceNamed")?.text || "";
+      return learned === true && /Eosphor/.test(before) && !/Lucifer/.test(before)
+        && /Lucifer/.test(after) && !/Eosphor/.test(after)
+        && SV370.learnSovereign(ch, "lucifer") === false;      // learned once
+    })(), "and the mask is applied to the TEXT at the last hop — a mask that rewrote the record would have to be undone everywhere the record is read");
+
+  check("§370: ⛑ …and ARRIVING is what teaches the name, which is the other half of §2.3's unlock",
+    /learnSovereign\(character, rec\?\.id, \{ day, how: "arrived" \}\)/.test(rd("engine/battle_turn.js"))
+    && /import \{ sovereignFormFor, sovereignFormLine, learnSovereign \}/.test(rd("engine/battle_turn.js")),
+    "an anti-Sovereign telling you (R41c) is the other writer, and it is SNG-641's");
+
+  // ⛔ 4 · SEALED IS NAMED AS SEALED.
+  check("§370: ⛔ `sovereignGM` AND THE ARC'S TENDENCY ARE SEALED, and the reader hands them back under a name a caller cannot reach for by accident",
+    (() => {
+      const r = SV370.arcReading(arcOf("arc_the_long_sleep"), { stage: 3, masks: MASKS });
+      return !!r.gmOnly && typeof r.gmOnly.sovereignGM === "string"
+        && !r.lines.some(l => /sovereignGM/.test(l.layer))
+        && !JSON.stringify(r.lines).includes(String(r.gmOnly.sovereignGM).slice(0, 40));
+    })(), "the sealed line is not hiding inside a player-facing one");
+
+  // ⛔ AND THE FIFTH DOOR — THE WIRING AUDIT CAUGHT `arcReading` AS A TEST-ONLY EXPORT, which is its whole job:
+  // a reader nothing calls passes CI and cannot fire in play. Its production caller is `worldArcsPublic`, the one
+  // place an arc's stage reaches a player. ⚠️ And my first wiring of it imported NOTHING from sovereign.js, so
+  // every reading would have been swallowed by its own try/catch — wired-looking, audit-passing, and dead.
+  check("§370: ⛔ THE READER IS WIRED, AND DRIVEN THROUGH THE PRODUCTION SURFACE — not merely exported and gated",
+    (() => {
+      const wt = rd("engine/worldtick.js");
+      const imported = /import \{ arcReading, knowsSovereign, masksFrom, sovereignOfArc \} from "\.\/sovereign\.js"/.test(wt);
+      const rows = WT370.worldArcsPublic(C370, { id: "c370", name: "T" });
+      const glare = rows.find(r => r.arcId === "arc_the_glare");
+      return imported && rows.length >= 9 && !!glare?.reading
+        && glare.reading.layers.join(",") === "publicFace"       // unknown, unconfirmed: one layer only
+        && !!glare.stageName && !/\d/.test(String(glare.stageName))
+        && SV370.sovereignOfArc("arc_the_glare", C370.npcs) === "lucifer"
+        && Object.keys(SV370.masksFrom(C370.npcs)).includes("lucifer");
+    })(), "and whose arc it is is DERIVED from the records' own `forms.arcId` — the arcs carry no id for it, so nothing had to be authored twice");
+
+  // ⛔ 5 · NO STAGE NUMBER REACHES THE PLAYER.
+  check("§370: ⛔ NO STAGE NUMBER REACHES THE PLAYER — the stage is a READING (“Hard Bargains”, “Scouring Light”), and the world tab printed “stage 2/4” beside it",
+    (() => {
+      const tab = rd("engine/worldtab.js");
+      const noCount = !/stage \$\{a\.stageNum\}/.test(tab) && !/\$\{a\.total\}/.test(tab);
+      // and the two numeric FALLBACKS are gone, which is how one would get back in on the next arc authored in a hurry
+      const noFallback = !/`Stage \$\{stageNum\}`/.test(rd("engine/worldtick.js"))
+        && !/`Stage \$\{stage\}`/.test(rd("engine/arceffects.js"));
+      // measured: every stage in the world has a name, so nothing shows less than it did
+      const named = arcs370.every(a => (a.stages || []).every(s => !!s.name));
+      return noCount && noFallback && named && arcs370.length >= 9;
+    })(), "measured 2026-09-26: all 34 stages across 9 arcs carry a name, so removing the numeric fallback costs no reader anything");
 }
 
 /* ══════════ REPORT ══════════ */

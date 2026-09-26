@@ -26,7 +26,12 @@ export function worldTabHtml({ arcs = [], foot = {}, effects = [], name = "", ta
     : "";
 
   const arcCards = arcs.map(a => `<div class="wt-arc">
-    <div class="wt-arc-head"><strong>${esc(a.name)}</strong> — ${esc(a.stageName)} <span class="hint">stage ${a.stageNum}/${a.total}</span> ${dirMark(a)}</div>
+    ${/* ⛔ SNG-642 §2.5 (C15) — NO STAGE NUMBER REACHES THE PLAYER. This read "stage 2/4", which is the
+          machine counting; Erik's whole point is that the stage is a READING — "Hard Bargains", "Scouring
+          Light" — and a number beside it tells the player how much of somebody's hunger is left to go before
+          they have been told there is a hunger. ⛑ How far along it is still shows, as words: the stage's own
+          name, and `dirMark` for which way it is moving. */""}
+    <div class="wt-arc-head"><strong>${esc(a.name)}</strong> — ${esc(a.stageName)} ${dirMark(a)}</div>
     ${a.publicFace ? `<div class="wt-face">${esc(a.publicFace)}</div>` : ""}
     ${(effects.filter(x => x.arcName === a.name)).map(x => `<div class="wt-effect${x.inert ? " wt-inert" : ""}">▸ ${esc(x.text)}${x.inert ? ` <span class="hint">(authored, not yet felt)</span>` : ""}${x.why ? ` <span class="hint">— ${esc(x.why)}</span>` : ""}</div>`).join("")}
     ${side(a.forIt, "pushing it on")}

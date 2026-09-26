@@ -87,7 +87,7 @@ a four-rung ladder — local · regional · continental · world — and a name 
 
 ---
 
-## THE FIVE GREATER ARCS — regional and world scale
+## THE NINE GREATER ARCS — regional and world scale
 
 ⛔ **THESE ARE THE ANSWERS THE VALLEY ARCS ARE ASKING.** `arc_precursor_waking` is the local face of
 `arc_what_wakes_beneath`; the water is *"merely the nearest tremor."*
@@ -149,6 +149,63 @@ a four-rung ladder — local · regional · continental · world — and a name 
 **Stages (3, currently at 1):** **The Argument** → **The Leaning** → **The Sealing**
 
 ---
+
+### The Long Petition · `arc_the_long_petition` · **world** scale · pressure patient
+
+**What it is doing:** People are asking for what they used to earn, and the asking is being answered. It has its own causes — scarcity, ambition, the Mavens refusing claims — and something is very well fed by it.
+**⛔ IF IGNORED:** Nothing is had any more without being asked for, and nobody can say who it is owed to.
+**✅ IF ENGAGED:** Holds that do not petition, legions that need no favour, allies with somewhere else to go. Refusing to ask is the whole of the fight.
+**Hinge NPCs:** `the_last_walker`
+**Crosses:** `every Reach`
+**Connects to:** `arc_the_poles_pull`
+**Stages (4, currently at 1):** **Favours** → **Bargains** → **Hard Bargains** → **Full Bargains**
+
+**What each stage says, and to whom** — `publicFace` everyone · `onceLineKnown` once marks confirm a supply line (it names the POWER, never the Sovereign) · `onceNamed` only once the save knows the name:
+
+| stage | everyone sees | once a line is known | once it is named |
+|---|---|---|---|
+| **Favours** | People are asking for more than they used to — a word put in, a door held open — and most of the asking is being answered. | Some of the answers come through {power}. | The Hollow King is being asked, and every yes is a meal. |
+| **Bargains** | People are trading things they cannot get back for things they want now — a name, a harvest, a year. | {power} is where the bargains are struck. | Every bargain is a grant from the Hollow Court, and the grant is the hunger. |
+| **Hard Bargains** | Someone is collecting on the old ones. Debts nobody remembers taking on are being called in, and the collector is patient and polite. | {power} has started collecting for someone else. | He has come to collect in person — diminished, courteous, and going after whoever taught people to stop asking. |
+| **Full Bargains** | Nothing is had without being asked for. Every roof, every title, every meal is owed to someone, and nobody can say who. | Every power you know answers to a grant. | The Hollow King holds the Wild Half entire, and the world is his petition. |
+
+### The Glare · `arc_the_glare` · **world** scale · pressure bright and rising
+
+**What it is doing:** More is being said in public, and less is being kept. It has its own causes — boards, arenas, zeal for accountability — and something ancient is very well fed by it.
+**⛔ IF IGNORED:** Nothing is held back anywhere, and nobody remembers what it was to have an inside.
+**✅ IF ENGAGED:** Privacy kept on purpose. The Harborward's keeping, a banked fire, a thing left unsaid because it is nobody's business.
+**Hinge NPCs:** `ember_who_banks_the_fire`, `the_deep_lantern`
+**Crosses:** `every Reach`, `the Radiant Plateau first`
+**Connects to:** `arc_the_poles_pull`
+**Stages (4, currently at 1):** **Exposure** → **Glare** → **Scouring Light** → **No Shade**
+
+**What each stage says, and to whom** — `publicFace` everyone · `onceLineKnown` once marks confirm a supply line (it names the POWER, never the Sovereign) · `onceNamed` only once the save knows the name:
+
+| stage | everyone sees | once a line is known | once it is named |
+|---|---|---|---|
+| **Exposure** | More is being said in public than it used to be. People confess before they are asked, and the boards are full. | {power} is where the looking is done. | Lucifer is being looked at, and every glance is a meal. |
+| **Glare** | Privacy has started to look like guilt. A shut door is a question, and a drawn curtain gets you marked. | {power} marks the ones who keep something back. | The marks are his: he cannot bear an inside, anywhere. |
+| **Scouring Light** | Something is looking. Hidden things are dragged into the open — and the people who kept them are going missing, one by one. | {power} is hunting keepers of secrets for someone else. | He has come — as Eosphor, diminished, casting no shadow — and he is after whoever taught people to keep an inside. |
+| **No Shade** | There are no secrets left to keep, and there is nowhere to stand out of the light. | Every power you know reports to the board. | Lucifer holds the Light entire, and there is no in anywhere. |
+
+### The Long Sleep · `arc_the_long_sleep` · **world** scale · pressure quiet
+
+**What it is doing:** More people are leaving their bodies behind — to thought, to the Cogitarium, to a sleep they do not wake from. It has its own causes, and something with no body is very well fed by it.
+**⛔ IF IGNORED:** The flesh is a coat, and everyone knows someone who lent theirs out.
+**✅ IF ENGAGED:** Staying in the body on purpose. Waking the sleepers, breaking the trade, honouring the flesh as more than a vessel.
+**Hinge NPCs:** `the_last_choirmistress`, `the_one_who_stayed_embodied`
+**Crosses:** `every Reach`, `the Thinning first`
+**Connects to:** `arc_the_poles_pull`, `arc_what_wakes_beneath`
+**Stages (4, currently at 1):** **Drowsing** → **The Long Sleep** → **Wearing** → **Empty Houses**
+
+**What each stage says, and to whom** — `publicFace` everyone · `onceLineKnown` once marks confirm a supply line (it names the POWER, never the Sovereign) · `onceNamed` only once the save knows the name:
+
+| stage | everyone sees | once a line is known | once it is named |
+|---|---|---|---|
+| **Drowsing** | More people are sleeping longer. Nobody is sick — they are resting, and waking a little further away. | The sleepers go through {power}. | The Unbodied is being offered bodies, and every sleeper is a meal. |
+| **The Long Sleep** | Sleepers who do not wake are being cared for, moved and bought. There is a trade in bodies nobody is using. | {power} moves sleeping bodies for a buyer who pays well. | The buyer is the Unbodied, and the bodies are its wardrobe. |
+| **Wearing** | Some of the sleepers have got up — and they walk like people who have never had legs. | {power} is fetching back the ones who ran for someone else. | It has come, in a body it took, and it is after whoever taught people to stay in theirs. |
+| **Empty Houses** | Whole households are asleep, and some of the waking ones are not who they were. | Every power you know trades in the sleeping. | The Unbodied holds the Mind entire, and the body is a garment it changes daily. |
 
 ## ⛔ WHAT GOOD ARC AUTHORING LOOKS LIKE — read from these eleven
 

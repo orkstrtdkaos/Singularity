@@ -182,20 +182,22 @@
  "physicality": "NOT HUMAN. A tall figure on a plain seat in a vast dim hall, surrounded by heaped gifts nobody is collecting. WHAT CATCHES THE EYE: ⛔ he is waiting, and he is delighted to see you.",
  "intimacyNotes": "⛔ NOT AVAILABLE, and the reason is structural rather than moral: ⚠️ HE CANNOT TAKE. 'He never takes; he is given' is not a style — the lore calls it A STRUCTURAL INCAPACITY. ⛑ Anything he has, someone asked him to have.",
  "notAnOpponent": false,
- "forms": [
-  {
-   "stage": 3,
+ "forms": {
+  "arcId": "arc_the_long_petition",
+  "diminished": {
+   "atStage": 3,
    "level": 45,
    "name": "The Hollow King, diminished",
-   "why": "⚑ R41: arriving IS diminishment. He accepts a shape to act here and it is a fraction of what held the court."
+   "note": "⚑ R41: arriving IS diminishment. He accepts a shape to act here and it is a fraction of what held the court."
   },
-  {
-   "stage": 4,
+  "final": {
+   "atStage": 4,
    "level": 85,
    "name": "The Hollow King of the Wild Half",
-   "why": "⛔ final form at the mythic floor."
-  }
- ],
+   "note": "⛔ final form at the mythic floor."
+  },
+  "_why": "DATA DEFECT: npcs/the_hollow_king.json authors forms as an ARRAY [{stage,level,name,why}]; engine/sovereign.js reads an OBJECT {diminished,final}, so his forms are never honoured. Same content, the reader's shape."
+ },
  "arcId": "arc_the_poles_pull",
  "_authoredWhy": "⛑ AUTHORED 2026-09-08. CCode: 'the_hollow_king is named a Sovereign in the same lore file, sits at `epic` with no authored level, and fields ZERO crafts — A NAMED SOVEREIGN WHO FIGHTS WITH A PLAIN STRIKE. His tier and his kit are Aevi's and Erik's call, not mine to change by hand.' ⛔ TIER `epic` → `mythic`: the Sovereign doc names him the DEMONIC AXIS SEAT, and Lucifer holds Light at mythic 85. ⚠️ A seated Sovereign is not an epic. ⚑ AND `forms` PER R41b, ERIK'S OWN RULING: diminished at stage 3 (L45), final at stage 4 (L85), on `arc_the_poles_pull` — which his own `wantArcId` already named. ⛔ THE KIT IS THE PROSE AND NOTHING ELSE: 'grants exactly what you ask' is `struck_term`; 'the bargain with no floor' is `deep_covenant`; 'you leave richer and HOLLOWED' is `hollow_that_holds`, which is his epithet wearing a craft id. ⚑ AND `closed` IS THE WHOLE CHARACTER: HE HOLDS NO HARM CRAFT AT ALL. His own threading says why — 'NEVER FOUGHT HEAD-ON; OUTLASTED OR OUT-WANTED' — and the lore calls his inability to take A STRUCTURAL INCAPACITY. ⚠️ A Sovereign at level 85 who cannot strike you is more frightening than one who can, and it is what the fiction already said. ⬜ 16 crafts against a capacity of 43, deliberately under: the rest belongs to whoever writes the arrival.",
  "_promotedFrom": "lore/legends.json figures[] — authored in prose, no row",
@@ -215,5 +217,19 @@
  },
  "_purseAuthored_20260916": "⛔ ERIK 2026-09-16, CORRECTING ME: 'a Sovereign uses money… an Ent may have a hoard of valuables to treat with people… a Precursor might have a trove of crystal. I'd keep it and author it that way.' ⚠️ HE IS RIGHT AND MY REASONING WAS BACKWARDS. I stripped the purse from these as 'outside the economy' — but THE BARGAINERS ARE AN ENTIRE TRADITION, a Sovereign's whole method is levering what somebody will not risk, and you cannot lever without assets. An Ent that argues to keep the Deepwood woven into the world is treating with people, and treating costs. ⛑ AUTHORED AGAINST `economy.purseBands`: these sit at and past `rich` (5000), which is the rung where 'money is no longer the constraint on anything you are doing' — correct for a being whose constraint has never once been money. ⚠️ KENOSIS IS THE ONE EXCEPTION AND IT IS DELIBERATE: he kept nothing, and that is not poverty, it is the act he is named for. His zero is an answer to the question, which is exactly the distinction the rest of this correction turns on.",
  "appearance": "Antlered, and the antlers are grown through with living wood rather than bone. Tall, unhurried, dressed in layered gifts — a cloak somebody gave him, a ring somebody gave him, a crown he did not take and wears anyway. Nothing he has on was bought or won. His hands are always open and always empty.",
- "_appearanceWhy": "⛑ SNG-610 — the last five NPCs without an `appearance`, all of them legends in `legends.json` where the field was never part of the figure shape. ⚠️ `npcPromptSeed` reads `appearance` for the portrait and falls back to `description`, which on a legend is role and reputation — so the five most-described people in the world were being drawn from their CVs."
+ "_appearanceWhy": "⛑ SNG-610 — the last five NPCs without an `appearance`, all of them legends in `legends.json` where the field was never part of the figure shape. ⚠️ `npcPromptSeed` reads `appearance` for the portrait and falls back to `description`, which on a legend is role and reputation — so the five most-described people in the world were being drawn from their CVs.",
+ "_formsWas": [
+  {
+   "stage": 3,
+   "level": 45,
+   "name": "The Hollow King, diminished",
+   "why": "⚑ R41: arriving IS diminishment. He accepts a shape to act here and it is a fraction of what held the court."
+  },
+  {
+   "stage": 4,
+   "level": 85,
+   "name": "The Hollow King of the Wild Half",
+   "why": "⛔ final form at the mythic floor."
+  }
+ ]
 }

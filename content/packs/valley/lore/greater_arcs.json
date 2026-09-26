@@ -799,6 +799,310 @@
     }
    ],
    "_authored": "⛔ ERIK 2026-08-29: 'we need to add the COSMIC Arc(s). Precursors and Veil Entities — they started all this and things are coming back to conflict again; that's the big picture right now behind all of this.' ⚠️ AUTHORED ENTIRELY FROM EXISTING LORE — `the_three.md` (SNG-442) and `power_systems.md`. Nothing invented: the three entities, the disagreement being WITHIN one people, the lattice as war infrastructure, and the Veil as the shape of an absence are all canon. ⛔ THIS IS THE FIFTH SCALE RUNG: local · regional · continental · world · COSMIC."
+  },
+  {
+   "id": "arc_the_long_petition",
+   "name": "The Long Petition",
+   "scale": "world",
+   "pressure": "patient",
+   "sovereignGM": "the_hollow_king",
+   "tendency": "People are asking for what they used to earn, and the asking is being answered. It has its own causes — scarcity, ambition, the Mavens refusing claims — and something is very well fed by it.",
+   "crossesRegions": [
+    "every Reach"
+   ],
+   "hingeNpcs": [
+    "the_last_walker"
+   ],
+   "ifIgnored": "Nothing is had any more without being asked for, and nobody can say who it is owed to.",
+   "ifEngaged": "Holds that do not petition, legions that need no favour, allies with somewhere else to go. Refusing to ask is the whole of the fight.",
+   "connectsTo": [
+    "arc_the_poles_pull"
+   ],
+   "currentStage": 1,
+   "stages": [
+    {
+     "stage": 1,
+     "name": "Favours",
+     "publicFace": "People are asking for more than they used to — a word put in, a door held open — and most of the asking is being answered.",
+     "onceLineKnown": "Some of the answers come through {power}.",
+     "onceNamed": "The Hollow King is being asked, and every yes is a meal.",
+     "pressureOnAdvance": "toward: claims pressed by petition instead of merit; a lord who would rather be granted than recognised",
+     "effects": [
+      {
+       "kind": "npcMood",
+       "traditions": [
+        "*"
+       ],
+       "shift": "watchful",
+       "why": "everyone is keeping track of who asked whom"
+      }
+     ]
+    },
+    {
+     "stage": 2,
+     "name": "Bargains",
+     "publicFace": "People are trading things they cannot get back for things they want now — a name, a harvest, a year.",
+     "onceLineKnown": "{power} is where the bargains are struck.",
+     "onceNamed": "Every bargain is a grant from the Hollow Court, and the grant is the hunger.",
+     "pressureOnAdvance": "toward: debts that outlive the debtor; a seat taken with a grant the Mavens will not recognise",
+     "effects": [
+      {
+       "kind": "npcMood",
+       "traditions": [
+        "*"
+       ],
+       "shift": "guarded",
+       "why": "nobody lends without a paper any more"
+      },
+      {
+       "kind": "priceShift",
+       "goods": "luxuries",
+       "demandDelta": 1,
+       "why": "people are buying what they were promised"
+      }
+     ]
+    },
+    {
+     "stage": 3,
+     "name": "Hard Bargains",
+     "publicFace": "Someone is collecting on the old ones. Debts nobody remembers taking on are being called in, and the collector is patient and polite.",
+     "onceLineKnown": "{power} has started collecting for someone else.",
+     "onceNamed": "He has come to collect in person — diminished, courteous, and going after whoever taught people to stop asking.",
+     "pressureOnAdvance": "toward: the people who refused to petition, one by one",
+     "effects": [
+      {
+       "kind": "npcMood",
+       "traditions": [
+        "*"
+       ],
+       "shift": "strained",
+       "why": "the notches on the door frames are being counted"
+      }
+     ]
+    },
+    {
+     "stage": 4,
+     "name": "Full Bargains",
+     "publicFace": "Nothing is had without being asked for. Every roof, every title, every meal is owed to someone, and nobody can say who.",
+     "onceLineKnown": "Every power you know answers to a grant.",
+     "onceNamed": "The Hollow King holds the Wild Half entire, and the world is his petition.",
+     "pressureOnAdvance": "",
+     "effects": [
+      {
+       "kind": "npcMood",
+       "traditions": [
+        "*"
+       ],
+       "shift": "closed",
+       "why": "nothing is free, and everyone knows the price of asking"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "arc_the_glare",
+   "name": "The Glare",
+   "scale": "world",
+   "pressure": "bright and rising",
+   "sovereignGM": "lucifer",
+   "tendency": "More is being said in public, and less is being kept. It has its own causes — boards, arenas, zeal for accountability — and something ancient is very well fed by it.",
+   "crossesRegions": [
+    "every Reach",
+    "the Radiant Plateau first"
+   ],
+   "hingeNpcs": [
+    "ember_who_banks_the_fire",
+    "the_deep_lantern"
+   ],
+   "ifIgnored": "Nothing is held back anywhere, and nobody remembers what it was to have an inside.",
+   "ifEngaged": "Privacy kept on purpose. The Harborward's keeping, a banked fire, a thing left unsaid because it is nobody's business.",
+   "connectsTo": [
+    "arc_the_poles_pull"
+   ],
+   "currentStage": 1,
+   "stages": [
+    {
+     "stage": 1,
+     "name": "Exposure",
+     "publicFace": "More is being said in public than it used to be. People confess before they are asked, and the boards are full.",
+     "onceLineKnown": "{power} is where the looking is done.",
+     "onceNamed": "Lucifer is being looked at, and every glance is a meal.",
+     "pressureOnAdvance": "toward: public marks without records; spectacle where there was privacy",
+     "effects": [
+      {
+       "kind": "npcMood",
+       "traditions": [
+        "*"
+       ],
+       "shift": "watchful",
+       "why": "everyone is being watched, and knows it"
+      }
+     ]
+    },
+    {
+     "stage": 2,
+     "name": "Glare",
+     "publicFace": "Privacy has started to look like guilt. A shut door is a question, and a drawn curtain gets you marked.",
+     "onceLineKnown": "{power} marks the ones who keep something back.",
+     "onceNamed": "The marks are his: he cannot bear an inside, anywhere.",
+     "pressureOnAdvance": "toward: the Umbral and the Harborward pressed to open; shutters taken down",
+     "effects": [
+      {
+       "kind": "npcMood",
+       "traditions": [
+        "*"
+       ],
+       "shift": "guarded",
+       "why": "a closed door is an accusation"
+      },
+      {
+       "kind": "travelCost",
+       "mult": 1.2,
+       "why": "every road is watched and every traveller is asked their business"
+      }
+     ]
+    },
+    {
+     "stage": 3,
+     "name": "Scouring Light",
+     "publicFace": "Something is looking. Hidden things are dragged into the open — and the people who kept them are going missing, one by one.",
+     "onceLineKnown": "{power} is hunting keepers of secrets for someone else.",
+     "onceNamed": "He has come — as Eosphor, diminished, casting no shadow — and he is after whoever taught people to keep an inside.",
+     "pressureOnAdvance": "toward: the keepers, the banked fires, the Deep Lantern",
+     "effects": [
+      {
+       "kind": "npcMood",
+       "traditions": [
+        "*"
+       ],
+       "shift": "unsettled",
+       "why": "nobody can say who is watching, only that someone is"
+      }
+     ]
+    },
+    {
+     "stage": 4,
+     "name": "No Shade",
+     "publicFace": "There are no secrets left to keep, and there is nowhere to stand out of the light.",
+     "onceLineKnown": "Every power you know reports to the board.",
+     "onceNamed": "Lucifer holds the Light entire, and there is no in anywhere.",
+     "pressureOnAdvance": "",
+     "effects": [
+      {
+       "kind": "npcMood",
+       "traditions": [
+        "*"
+       ],
+       "shift": "closed",
+       "why": "there is nothing left to hide and no one left who remembers wanting to"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "arc_the_long_sleep",
+   "name": "The Long Sleep",
+   "scale": "world",
+   "pressure": "quiet",
+   "sovereignGM": "the_ninefold_ascendant",
+   "tendency": "More people are leaving their bodies behind — to thought, to the Cogitarium, to a sleep they do not wake from. It has its own causes, and something with no body is very well fed by it.",
+   "crossesRegions": [
+    "every Reach",
+    "the Thinning first"
+   ],
+   "hingeNpcs": [
+    "the_last_choirmistress",
+    "the_one_who_stayed_embodied"
+   ],
+   "ifIgnored": "The flesh is a coat, and everyone knows someone who lent theirs out.",
+   "ifEngaged": "Staying in the body on purpose. Waking the sleepers, breaking the trade, honouring the flesh as more than a vessel.",
+   "connectsTo": [
+    "arc_the_poles_pull",
+    "arc_what_wakes_beneath"
+   ],
+   "currentStage": 1,
+   "stages": [
+    {
+     "stage": 1,
+     "name": "Drowsing",
+     "publicFace": "More people are sleeping longer. Nobody is sick — they are resting, and waking a little further away.",
+     "onceLineKnown": "The sleepers go through {power}.",
+     "onceNamed": "The Unbodied is being offered bodies, and every sleeper is a meal.",
+     "pressureOnAdvance": "toward: Cogitants abandoning the flesh; a trade in the sleeping",
+     "effects": [
+      {
+       "kind": "npcMood",
+       "traditions": [
+        "*"
+       ],
+       "shift": "unsettled",
+       "why": "someone in every street sleeps too long"
+      }
+     ]
+    },
+    {
+     "stage": 2,
+     "name": "The Long Sleep",
+     "publicFace": "Sleepers who do not wake are being cared for, moved and bought. There is a trade in bodies nobody is using.",
+     "onceLineKnown": "{power} moves sleeping bodies for a buyer who pays well.",
+     "onceNamed": "The buyer is the Unbodied, and the bodies are its wardrobe.",
+     "pressureOnAdvance": "toward: sleepers moved in crates; families paid for relatives who will not wake",
+     "effects": [
+      {
+       "kind": "npcMood",
+       "traditions": [
+        "*"
+       ],
+       "shift": "guarded",
+       "why": "nobody sleeps alone any more"
+      },
+      {
+       "kind": "priceShift",
+       "goods": "medicines",
+       "demandDelta": 1,
+       "why": "everyone is buying something to keep them awake"
+      }
+     ]
+    },
+    {
+     "stage": 3,
+     "name": "Wearing",
+     "publicFace": "Some of the sleepers have got up — and they walk like people who have never had legs.",
+     "onceLineKnown": "{power} is fetching back the ones who ran for someone else.",
+     "onceNamed": "It has come, in a body it took, and it is after whoever taught people to stay in theirs.",
+     "pressureOnAdvance": "toward: the embodied, the Choirmistress, anyone waking sleepers",
+     "effects": [
+      {
+       "kind": "npcMood",
+       "traditions": [
+        "*"
+       ],
+       "shift": "disoriented",
+       "why": "you cannot tell who is wearing whom"
+      }
+     ]
+    },
+    {
+     "stage": 4,
+     "name": "Empty Houses",
+     "publicFace": "Whole households are asleep, and some of the waking ones are not who they were.",
+     "onceLineKnown": "Every power you know trades in the sleeping.",
+     "onceNamed": "The Unbodied holds the Mind entire, and the body is a garment it changes daily.",
+     "pressureOnAdvance": "",
+     "effects": [
+      {
+       "kind": "npcMood",
+       "traditions": [
+        "*"
+       ],
+       "shift": "altered",
+       "why": "the people are the same shape and not the same people"
+      }
+     ]
+    }
+   ]
   }
  ],
  "convergence": "These five greater arcs all feed the single world-question: as the substrate wakes (What Wakes Beneath), the poles pull harder (The Poles Pull) and reality manifests anew (The Second Manifestation), and the whole world tends toward foreclosure — pole by pole, domain by domain — unless someone holds the aperture open. The Valley's six arcs are the near, local, playable faces of these. A character's whole journey, across Reaches and domains, is which way they tip the world: toward the pure dead poles, or toward the open, mixed, living middle. The map is the argument, and the player is a vote in it.",

@@ -354,6 +354,16 @@
           }
         }
       }
+    },
+    "knownSovereigns": {
+      "type": "object",
+      "description": "which Sovereigns this save knows by NAME — id → `{ day, how }` (SNG-642 §2.3). ⛔ It gates the `onceNamed` reading of that Sovereign's arc, and it drops the mask: while it is absent, every line that would name Lucifer names Eosphor. Two things write it — an anti-Sovereign telling you (R41c) and the thing arriving in front of you. ⛑ An older save's ARRAY form is read and converted, never dropped.",
+      "additionalProperties": {
+        "type": [
+          "object",
+          "boolean"
+        ]
+      }
     }
   }
 }

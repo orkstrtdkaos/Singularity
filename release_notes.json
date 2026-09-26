@@ -16,6 +16,30 @@
   "next": [],
   "releases": [
     {
+      "version": "2.11.2",
+      "date": "2026-09-26",
+      "entries": [
+        {
+          "kind": "feature",
+          "title": "The world tells you what is going wrong before it tells you whose fault it is",
+          "summary": "Three new world-scale troubles are turning, and each one says a different thing depending on how much you have worked out.",
+          "detail": "Bargains that cannot be taken back. A light that is offered as safety and does not switch off. Houses getting quieter. Each of the three is a thing you can see happening long before anybody can tell you who benefits from it — and each has its own clock, so they do not arrive together. Work out which power is feeding one and the world starts naming that power. Learn whose hunger is behind it and the world starts saying that too. Until then, what you get is what everybody gets: the weather, honestly described."
+        },
+        {
+          "kind": "fix",
+          "title": "An arc shows a reading, not a number",
+          "summary": "The World tab printed “stage 2/4” beside a trouble's name, which told you how much of somebody's story was left before you knew there was a story.",
+          "detail": "Every stage of every world trouble has a name — Hard Bargains, Scouring Light, Empty Houses — and those names are the point: they say what is happening now. The count beside them was the machine keeping score where the reading should be, and it gave away that there was a fixed length to something you had not been told existed. It is gone, in the tab and in the two places a number could have crept back in. Which way a trouble is moving still shows, in words."
+        },
+        {
+          "kind": "fix",
+          "title": "Three of the great powers could never actually arrive",
+          "summary": "The things that arrive at the end of a world-scale story were stored in a shape nothing could read, shared one clock between two of them, or had no arrival at all.",
+          "detail": "One of them kept its two forms as a list where the engine looks for a pair, so it had no forms at all as far as the game was concerned. Two more shared a single story, which meant they would have arrived on the same day. One had no arrival written. All three have their own story now, and the shapes match what reads them — the original text is kept beside the corrected one, not replaced."
+        }
+      ]
+    },
+    {
       "version": "2.11.1",
       "date": "2026-09-26",
       "entries": [

@@ -14042,8 +14042,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790391014382,
-  "rev": 920,
+  "updatedAt": 1790391059014,
+  "rev": 921,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -16223,18 +16223,12 @@
       "kind": "enterprise",
       "name": "The Standing Annex",
       "locationId": "gen-the-made-gate",
-      "steward": null,
+      "steward": "halvex_coil",
       "obligation": null,
       "condition": "thriving",
       "claimedDay": 3,
       "lastMovedWorldCount": 2100,
       "history": [
-        {
-          "at": 1893,
-          "from": "thriving",
-          "to": "thriving",
-          "note": "hands: Tessvel Cairn"
-        },
         "[d78] sailed from the_crossing to gen-the-made-gate, 0.0 days, with you aboard",
         {
           "at": null,
@@ -16295,6 +16289,12 @@
           "from": "thriving",
           "to": "thriving",
           "note": "guarded by Kael, Ravel, Estry"
+        },
+        {
+          "at": 2114,
+          "from": "thriving",
+          "to": "thriving",
+          "note": "Halvex Coil appointed keeper"
         }
       ],
       "carriage": {
@@ -16824,6 +16824,10 @@
     {
       "text": "You put Better Story to The Standing Annex — it comes up to thriving.",
       "announced": true
+    },
+    {
+      "text": "Halvex Coil keeps The Standing Annex now.",
+      "announced": false
     }
   ],
   "figureImages": {

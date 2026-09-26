@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 10,
-  "xp": 920,
+  "xp": 925,
   "attributes": {
     "physical": 4,
     "mental": 5,
@@ -119,10 +119,10 @@
   ],
   "alignment": {
     "mechanical_spiritual": 0.0077000000000000055,
-    "falsehood_truth": 0.38361717308273324,
+    "falsehood_truth": 0.3794363144285966,
     "demonic_angelic": -0.020000000000000004,
     "dark_light": 0.085,
-    "concrete_abstract": 0.18616258828124996,
+    "concrete_abstract": 0.18185445886718746,
     "chaos_order": -0.087398125,
     "body_mind": 0.0658375,
     "emotional_logical": 0.045960551562499986,
@@ -428,25 +428,30 @@
         "player": "proceed to Mara Wells store.",
         "summary": "The band arrives at Mara Wells' Store in deep night, ready to gather supplies for the road ahead.",
         "narration": "The fold lands you at Millbrook's edge in deep night, the common house warm and distant two hundred paces east. Cy's lamp settles, and the four of you stand solid on the road again—the working cost you more than a clean fold usually does, and the resistance it met hangs in the air like a question neither answered.\n\nYou turn from the threshold toward the northern path without speaking. Ravel reads the shape of it and nods. Estry keeps pace at the band's flank. Orla walks with the settled certainty of someone who has made a choice and will not revisit it. The night is clear, the road is clear, and Mara Wells' Store lies a short walk north from here—its shutters dark but the structure solid, known to you, waiting.\n\nThe four of you reach the storefront in the deep quiet of mid-autumn night. The building stands plainly—weathered wood, a narrow door, shelves visible through the front glass holding goods Mara has deemed worth keeping. Smoke rises faintly from a chimney at the back: someone is awake. Cy's lamp casts your shadows long across the threshold.\n\nThe question, now, is how you knock on a stranger's door in the hour before dawn, with three companions at your back and a story that will sound like madness if told plainly."
+      },
+      {
+        "player": "Knock plainly and wait for an answer—let the hour speak for itself.",
+        "summary": "At Mara Wells' Store in deep night, the band arrives ready to gather supplies—and finds the keeper awake and willing to answer their honesty with her own.",
+        "narration": "You raise your knuckles to the store's weathered door and knock. The sound carries clear in the deep night—firm, unhurried, honest. No performance, no apology. Behind you, Ravel stands watchful at your left flank. Estry has positioned herself where she can see both the store's dark front and the street beyond. Orla waits at the circle's edge, learning still. Cy's lamp settles to a steady glow.\n\nFor a long moment, nothing moves. The chimney smoke continues its pale rise toward the stars.\n\nThen a bolt slides back inside the door. Once. Twice. The door opens to a width of a hand, and a woman's voice—older, careful, steady—speaks from the lamplight beyond. \"It is deep night. The store is closed to travelers.\" She does not ask who you are. She waits.\n\nMara Wells—for that is who reads the threshold—studies the four of you through the gap. Her eyes catch the lamplight, sharp and measuring. A woman who has learned to read strangers in their worst hours. She sees Cy's articulated body and her expression does not shift. She sees the band's bearing and the deliberate calm that comes of moving together—and something in her settles, very slightly. \"But you are not random travelers,\" she says. It is not a question. \"What do you need, and why do you need it now?\""
       }
     ],
     "lastTurn": {
-      "narration": "The fold lands you at Millbrook's edge in deep night, the common house warm and distant two hundred paces east. Cy's lamp settles, and the four of you stand solid on the road again—the working cost you more than a clean fold usually does, and the resistance it met hangs in the air like a question neither answered.\n\nYou turn from the threshold toward the northern path without speaking. Ravel reads the shape of it and nods. Estry keeps pace at the band's flank. Orla walks with the settled certainty of someone who has made a choice and will not revisit it. The night is clear, the road is clear, and Mara Wells' Store lies a short walk north from here—its shutters dark but the structure solid, known to you, waiting.\n\nThe four of you reach the storefront in the deep quiet of mid-autumn night. The building stands plainly—weathered wood, a narrow door, shelves visible through the front glass holding goods Mara has deemed worth keeping. Smoke rises faintly from a chimney at the back: someone is awake. Cy's lamp casts your shadows long across the threshold.\n\nThe question, now, is how you knock on a stranger's door in the hour before dawn, with three companions at your back and a story that will sound like madness if told plainly.",
-      "sceneSummary": "The band arrives at Mara Wells' Store in deep night, ready to gather supplies for the road ahead.",
+      "narration": "You raise your knuckles to the store's weathered door and knock. The sound carries clear in the deep night—firm, unhurried, honest. No performance, no apology. Behind you, Ravel stands watchful at your left flank. Estry has positioned herself where she can see both the store's dark front and the street beyond. Orla waits at the circle's edge, learning still. Cy's lamp settles to a steady glow.\n\nFor a long moment, nothing moves. The chimney smoke continues its pale rise toward the stars.\n\nThen a bolt slides back inside the door. Once. Twice. The door opens to a width of a hand, and a woman's voice—older, careful, steady—speaks from the lamplight beyond. \"It is deep night. The store is closed to travelers.\" She does not ask who you are. She waits.\n\nMara Wells—for that is who reads the threshold—studies the four of you through the gap. Her eyes catch the lamplight, sharp and measuring. A woman who has learned to read strangers in their worst hours. She sees Cy's articulated body and her expression does not shift. She sees the band's bearing and the deliberate calm that comes of moving together—and something in her settles, very slightly. \"But you are not random travelers,\" she says. It is not a question. \"What do you need, and why do you need it now?\"",
+      "sceneSummary": "At Mara Wells' Store in deep night, the band arrives ready to gather supplies—and finds the keeper awake and willing to answer their honesty with her own.",
       "choices": [
         {
-          "label": "Knock plainly and wait for an answer—let the hour speak for itself.",
+          "label": "Tell Mara plainly why you're here—the Standing Annex, the road ahead, the band's purpose—and ask what supplies she has that will serve the journey.",
           "attribute": "social",
           "subAttribute": "presence",
           "axes": {
-            "falsehood_truth": 0.3,
-            "concrete_abstract": 0.1
+            "falsehood_truth": 0.8,
+            "concrete_abstract": 0.3
           },
           "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "careful",
-            "honest"
+            "rapport",
+            "negotiate"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -455,58 +460,58 @@
           "emergenceId": null
         },
         {
-          "label": "Use Harmonic Voice to call ahead gently—make the waking less jarring, soften the night.",
-          "attribute": "practical",
-          "subAttribute": "craft",
+          "label": "Ask Mara what she's heard about the Standing Annex and who's been traveling that road lately—read what she knows before committing to why you're asking.",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "axes": {
-            "falsehood_truth": 0.1,
-            "violence_peace": 0.4
+            "falsehood_truth": 0.4,
+            "concrete_abstract": -0.2
           },
-          "difficulty": "easy",
+          "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
-            "care",
-            "craft"
+            "scout",
+            "study"
           ],
-          "abilityId": "harmonic_voice",
-          "energyCost": 5,
+          "abilityId": "prism_sight",
+          "energyCost": 3,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Wait for dawn to break—find shelter nearby and approach when the hour is less strange.",
+          "label": "Offer Mara honest payment in crystal for whatever supplies will travel—rations, shelter, anything the road demands—and let her decide what you need.",
           "attribute": "practical",
           "subAttribute": "wits",
           "axes": {
-            "chaos_order": 0.3,
-            "violence_peace": 0.2
-          },
-          "difficulty": "trivial",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "careful",
-            "patience"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Send Cy to knock—a strange little mechanism at the door might wake Mara differently, less threatening.",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {
-            "falsehood_truth": -0.2,
-            "chaos_order": -0.2
+            "falsehood_truth": 0.7,
+            "concrete_abstract": 0.6
           },
           "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "clever",
+            "negotiate",
             "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Have Ravel speak—she is known on the road, and a keeper like Mara will read her as someone whose word carries weight.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "falsehood_truth": 0.6,
+            "concrete_abstract": 0.2
+          },
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "rapport",
+            "help"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -528,7 +533,7 @@
         {
           "op": "progress",
           "questId": "journey-gen-the-road-from-kindly-rest-to-standing-an-88",
-          "note": "Band folded distance mid-journey and landed at Millbrook's edge. Paused before the final leg to Mara Wells' Store—rations still needed for the open road."
+          "note": "The band has reached Millbrook and Mara Wells' Store—midpoint of the journey toward the Standing Annex. Supplies can be gathered here before continuing on the road."
         }
       ],
       "standingOps": [],
@@ -537,59 +542,73 @@
       "arcOps": [],
       "adoptSchool": null,
       "offer": {
-        "thing": "The resistance the fold met—distance refusing to crease cleanly, the working landing you outside the town rather than at its heart.",
-        "from": "The valley itself: something beneath the place is pushing back against shortcuts and close-work. The resistance is new and precise."
+        "thing": "Mara Wells, the store's keeper—a woman who reads strangers clearly and knows the road well enough to guess at true need",
+        "from": "the road itself, which brings travelers to her door in all hours, and the decision to arrive at her threshold honestly"
       },
       "stageOps": [],
       "scene": {
-        "setting": "Mara Wells' Store on the northern edge of Millbrook, deep night under bright stars. The storefront is shuttered but smoke rises from the rear chimney. Four shadows cast long across the threshold by Cy's lamp.",
+        "setting": "Mara Wells' Store on Millbrook's northern edge, deep night under bright stars. The storefront is weathered wood and shuttered glass, but the rear chimney rises with pale smoke. Mara stands at the threshold, door open a hand's width, lamplight spilling past her shoulder. The road beyond is clear and starlit.",
         "npcsPresent": [
           {
-            "name": "Ravel Ash-bearer",
-            "state": "Standing at the band's left flank, reading the store with steady assessment. Her hand rests easy at her side."
-          },
-          {
-            "name": "Estry Krell",
-            "state": "At the flank's right edge, eyes moving between the store's dark front and the wider street. Breathing even, waiting."
-          },
-          {
-            "name": "Orla Yardley",
-            "state": "At the circle's rim, grey coat caught in the lamplight. Still and watchful, learning how the band moves."
-          },
-          {
-            "name": "Cy",
-            "state": "Lamp raised, articulated legs choosing careful footing. Lens irises slowly, cataloging the storefront's architecture and age."
+            "name": "Mara Wells",
+            "state": "Standing at the store's threshold, door half-open, studying the band with a keeper's clear eye. Waiting for an answer."
           }
         ],
         "objects": [
-          "Mara Wells' Store—weathered wood, narrow door, shelves visible through front glass",
-          "Goods on display: practical items, dry stores, things Mara deems worth keeping",
-          "Chimney at the building's rear, smoke rising pale in the starlight",
-          "Cy's lamp casting long shadows across the threshold",
-          "The road behind you, clear and pale under stars"
+          "Mara Wells' Store—weathered wood, shuttered front",
+          "A lamp burning inside, casting light through the open gap",
+          "The rear chimney, smoking pale into the night",
+          "Cy's lamp, steady and bright",
+          "The road stretching beyond, clear under stars"
         ],
         "threads": [
-          "Why did the fold resist? Something beneath Millbrook is pushing back against shortcuts.",
-          "Who is awake in Mara Wells' Store at this hour, and how will they read four strangers arriving in deep night?",
-          "The Standing Annex waits—how far is the journey still, and do you have what you need for the open road?"
+          "Why did the fold resist Millbrook? Something beneath the settlement is pushing back against shortcuts and close-work.",
+          "What will Mara tell you about the Standing Annex and the road ahead?",
+          "Will she sell supplies, and what will she ask in return?"
         ]
       },
-      "npcUpdates": [],
+      "npcUpdates": [
+        {
+          "op": "meet",
+          "npcId": "mara-wells-keeper",
+          "name": "Mara Wells",
+          "title": "Keeper of Mara Wells' Store",
+          "role": "Shopkeeper and traveler's keeper, awake in deep night when the town sleeps",
+          "age": 52,
+          "sex": "female",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "description": "A woman of measured years, with eyes that read strangers clearly. Sharp-voiced, steady-handed, dressed for the cooler nights in a deep-brown coat. She moves like someone used to assessing people in their worst hours.",
+          "note": "Opened her store to the band in deep night without hesitation—read them as honest rather than threatening. Waiting for an answer about what they need.",
+          "learned": [
+            "Keeps the store open through deep night hours—either by choice or by the traffic of road-travelers who cannot wait for daylight",
+            "Reads character in silence and body before words are spoken"
+          ],
+          "skillsObserved": [
+            "Clear assessment of strangers",
+            "Steady judgment under unusual hours"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "Present at her store, keeper and merchant both"
+        }
+      ],
       "intentsHeard": [],
       "factUpdates": [],
-      "placeUpdates": [],
+      "placeUpdates": [
+        {
+          "note": "Mara Wells' Store is a working merchant point in deep night, suggesting regular traffic from road-travelers and a keeper accustomed to late-hour business."
+        }
+      ],
       "discovery": null,
       "codexUpdates": [
         {
-          "topic": "millbrook",
-          "label": "Millbrook",
+          "topic": "gen-mara-wells-store",
+          "label": "Mara Wells' Store",
           "kind": "place",
-          "entityId": "millbrook",
-          "fact": "The fold's resistance suggests something beneath the settlement is actively pushing back against shortcuts and close-work—the working that should have landed the band at the village heart instead set them at its edge.",
+          "fact": "The store's keeper is Mara Wells, a woman who reads strangers clearly and opens her shop in deep night to serve road-travelers. She judges character through bearing and quiet observation before words are exchanged.",
           "links": [
-            "the-taken-from-the-city",
-            "halvex-coil",
-            "what-descended-with-them"
+            "millbrook"
           ]
         }
       ],
@@ -608,13 +627,10 @@
       "unlockPrecursor": null,
       "unlockSubstrate": null,
       "timeOps": {
-        "hoursPassed": 0.5,
-        "why": "A short walk from the road's edge to Mara Wells' Store"
+        "hoursPassed": 0.25,
+        "why": "a brief walk through Millbrook's quiet streets and time at the store's threshold"
       },
-      "moveTo": {
-        "location": "gen-mara-wells-store",
-        "why": "The band gathered at Millbrook's threshold and proceeded north to the store on foot"
-      },
+      "moveTo": null,
       "stateOps": [],
       "itemUpdates": [],
       "deriveItem": null,
@@ -631,39 +647,27 @@
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Mara Wells' Store on the northern edge of Millbrook, deep night under bright stars. The storefront is shuttered but smoke rises from the rear chimney. Four shadows cast long across the threshold by Cy's lamp.",
+      "setting": "Mara Wells' Store on Millbrook's northern edge, deep night under bright stars. The storefront is weathered wood and shuttered glass, but the rear chimney rises with pale smoke. Mara stands at the threshold, door open a hand's width, lamplight spilling past her shoulder. The road beyond is clear and starlit.",
       "npcsPresent": [
         {
-          "name": "Ravel Ash-bearer",
-          "state": "Standing at the band's left flank, reading the store with steady assessment. Her hand rests easy at her side."
-        },
-        {
-          "name": "Estry Krell",
-          "state": "At the flank's right edge, eyes moving between the store's dark front and the wider street. Breathing even, waiting."
-        },
-        {
-          "name": "Orla Yardley",
-          "state": "At the circle's rim, grey coat caught in the lamplight. Still and watchful, learning how the band moves."
-        },
-        {
-          "name": "Cy",
-          "state": "Lamp raised, articulated legs choosing careful footing. Lens irises slowly, cataloging the storefront's architecture and"
+          "name": "Mara Wells",
+          "state": "Standing at the store's threshold, door half-open, studying the band with a keeper's clear eye. Waiting for an answer."
         }
       ],
       "objects": [
-        "Mara Wells' Store—weathered wood, narrow door, shelves visible through front gla",
-        "Goods on display: practical items, dry stores, things Mara deems worth keeping",
-        "Chimney at the building's rear, smoke rising pale in the starlight",
-        "Cy's lamp casting long shadows across the threshold",
-        "The road behind you, clear and pale under stars"
+        "Mara Wells' Store—weathered wood, shuttered front",
+        "A lamp burning inside, casting light through the open gap",
+        "The rear chimney, smoking pale into the night",
+        "Cy's lamp, steady and bright",
+        "The road stretching beyond, clear under stars"
       ],
       "threads": [
-        "Why did the fold resist? Something beneath Millbrook is pushing back against shortcuts.",
-        "Who is awake in Mara Wells' Store at this hour, and how will they read four strangers arriving in deep night?",
-        "The Standing Annex waits—how far is the journey still, and do you have what you need for the open road?"
+        "Why did the fold resist Millbrook? Something beneath the settlement is pushing back against shortcuts and close-work.",
+        "What will Mara tell you about the Standing Annex and the road ahead?",
+        "Will she sell supplies, and what will she ask in return?"
       ]
     },
-    "beats": 6,
+    "beats": 7,
     "subPlace": null
   },
   "clock": {
@@ -1546,6 +1550,44 @@
         "day": 7
       },
       "met": 2
+    },
+    "mara-wells-keeper": {
+      "id": "mara-wells-keeper",
+      "name": "Mara Wells",
+      "role": "Shopkeeper and traveler's keeper, awake in deep night when the town sleeps",
+      "title": "Keeper of Mara Wells' Store",
+      "description": "A woman of measured years, with eyes that read strangers clearly. Sharp-voiced, steady-handed, dressed for the cooler nights in a deep-brown coat. She moves like someone used to assessing people in their worst hours.",
+      "firstMet": {
+        "locationId": "gen-mara-wells-store",
+        "day": 8
+      },
+      "relationship": 0,
+      "history": [
+        "[d8] Opened her store to the band in deep night without hesitation—read them as honest rather than threatening. Waiting for an answer about what they need."
+      ],
+      "knownFacts": [
+        "Keeps the store open through deep night hours—either by choice or by the traffic of road-travelers who cannot wait for daylight",
+        "Reads character in silence and body before words are spoken"
+      ],
+      "skillsObserved": [
+        "Clear assessment of strangers",
+        "Steady judgment under unusual hours"
+      ],
+      "status": "active",
+      "sex": "female",
+      "gender": "woman",
+      "pronouns": "she/her",
+      "age": 52,
+      "statusNote": "Present at her store, keeper and merchant both",
+      "domains": {
+        "primary": "mason"
+      },
+      "domainsSource": "derived",
+      "lastSeen": {
+        "locationId": "gen-mara-wells-store",
+        "day": 8
+      },
+      "met": 1
     }
   },
   "placeMemory": {
@@ -1846,7 +1888,9 @@
     },
     "gen-mara-wells-store": {
       "visits": 1,
-      "notes": [],
+      "notes": [
+        "[d8] Mara Wells' Store is a working merchant point in deep night, suggesting regular traffic from road-travelers and a keeper accustomed to late-hour business."
+      ],
       "flags": {},
       "lastVisit": 8,
       "vectorsKnown": [
@@ -2061,10 +2105,6 @@
     "turnsSinceOffer": 0,
     "recentOffers": [
       {
-        "thing": "a Syllogist who has come to the margins of Millbrook, waiting on the road from the Kindly Rest",
-        "from": "the echoes of what Halvex Coil has carried back to those who sent him—the story of understanding instead of breaking has reached the…"
-      },
-      {
         "thing": "A Syllogist who has waited on the road with a question and a breaking belief",
         "from": "The architecture beneath the valley—someone in the lower Annex is asking about the Hub crossing and the Null Stone. Halvex Coil's mandate…"
       },
@@ -2079,6 +2119,10 @@
       {
         "thing": "The resistance the fold met—distance refusing to crease cleanly, the working landing you outside the town rather than at its heart.",
         "from": "The valley itself: something beneath the place is pushing back against shortcuts and close-work. The resistance is new and precise."
+      },
+      {
+        "thing": "Mara Wells, the store's keeper—a woman who reads strangers clearly and knows the road well enough to guess at true need",
+        "from": "the road itself, which brings travelers to her door in all hours, and the decision to arrive at her threshold honestly"
       }
     ],
     "wantProgress": {
@@ -12692,12 +12736,28 @@
         "label": "Mara Wells' Store",
         "kind": "place",
         "facts": [
-          "[d8] you have walked here"
+          "[d8] you have walked here",
+          "[d8] The store's keeper is Mara Wells, a woman who reads strangers clearly and opens her shop in deep night to serve road-travelers. She judges character through bearing and quiet observation before words are exchanged."
+        ],
+        "links": [
+          "millbrook"
+        ],
+        "aliases": [],
+        "createdDay": 8,
+        "entityId": "gen-mara-wells-store",
+        "updatedDay": 8
+      },
+      "mara-wells-keeper": {
+        "id": "mara-wells-keeper",
+        "label": "Mara Wells",
+        "kind": "person",
+        "facts": [
+          "[d8] Shopkeeper and traveler's keeper, awake in deep night when the town sleeps"
         ],
         "links": [],
         "aliases": [],
         "createdDay": 8,
-        "entityId": "gen-mara-wells-store",
+        "entityId": "mara-wells-keeper",
         "updatedDay": 8
       }
     },
@@ -13050,19 +13110,19 @@
     "deferredMysteries": []
   },
   "tendencies": {
-    "devotion": 0.6655671846007098,
-    "cerebral": 15.047160571294834,
-    "social": 16.984290791893013,
-    "strategic": 11.668081136140744,
-    "cautious": 4.676771373991944,
-    "amorous": 6.280435921531068,
-    "generous": 5.143188306102478,
-    "ruthless": 0.16670729637764012,
-    "risky": 0.136240723018052,
-    "patient": 0.03720489136807784,
-    "deception": 0.04330842067350151,
-    "carousing": 0.9268593749999999,
-    "leadership": 1.9012499999999999
+    "devotion": 0.6489280049856921,
+    "cerebral": 14.670981557012462,
+    "social": 16.55968352209569,
+    "strategic": 11.376379107737225,
+    "cautious": 5.559852089642145,
+    "amorous": 6.123425023492791,
+    "generous": 5.014608598449916,
+    "ruthless": 0.1625396139681991,
+    "risky": 0.13283470494260072,
+    "patient": 0.0362747690838759,
+    "deception": 0.04222571015666397,
+    "carousing": 0.9036878906249999,
+    "leadership": 1.8537187499999999
   },
   "aptitudes": [
     "strategist",
@@ -13072,7 +13132,7 @@
     "faithful",
     "charmer"
   ],
-  "actionCount": 208,
+  "actionCount": 209,
   "grantsVersion": 1,
   "precursorAccess": [
     "address_sense"
@@ -14176,8 +14236,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790393438681,
-  "rev": 942,
+  "updatedAt": 1790393638155,
+  "rev": 943,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -15404,10 +15464,10 @@
     {
       "id": "sess-19",
       "startedAt": "2026-09-26T00:51:07.826Z",
-      "lastAt": "2026-09-26T03:23:02.047Z",
+      "lastAt": "2026-09-26T03:33:58.138Z",
       "startDay": 88,
       "endDay": 88,
-      "beats": 9
+      "beats": 10
     }
   ],
   "establishedFacts": [
@@ -15552,7 +15612,7 @@
   ],
   "_opLedger": {
     "offer": {
-      "applied": 48,
+      "applied": 49,
       "rejected": 2,
       "lastWhy": "rejected-shape"
     },
@@ -15569,21 +15629,21 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 238,
-    "choices": 238,
-    "characterDeltas": 122,
-    "scene": 238,
-    "placeUpdates": 28,
-    "codexUpdates": 138,
-    "timeOps": 191,
-    "offer": 42,
+    "sceneSummary": 239,
+    "choices": 239,
+    "characterDeltas": 123,
+    "scene": 239,
+    "placeUpdates": 29,
+    "codexUpdates": 139,
+    "timeOps": 192,
+    "offer": 43,
     "generateRequest": 7,
-    "sceneEnded": 107,
-    "npcUpdates": 189,
+    "sceneEnded": 108,
+    "npcUpdates": 190,
     "moveTo": 10,
-    "gambitApt": 66,
+    "gambitApt": 67,
     "deeds": 14,
-    "questUpdates": 43,
+    "questUpdates": 44,
     "standingOps": 4,
     "factUpdates": 19,
     "stageOps": 7,
@@ -15601,7 +15661,7 @@
     "partyOps": 4,
     "bandOps": 1
   },
-  "_opTurns": 238,
+  "_opTurns": 239,
   "customAbilities": {
     "mirror-bright": {
       "id": "mirror-bright",
@@ -16577,7 +16637,7 @@
     "travel": 10,
     "scout": 7,
     "prepare": 6,
-    "careful": 10,
+    "careful": 11,
     "woo": 1,
     "rapport": 16,
     "retreat": 1,
@@ -16600,7 +16660,8 @@
     "discipline": 1,
     "gamble": 1,
     "lead": 1,
-    "rally": 1
+    "rally": 1,
+    "honest": 1
   },
   "aptitudeEarnCount": {
     "faithful": 1,
@@ -17451,14 +17512,14 @@
     }
   },
   "_opUnknown": {
-    "sceneSummary": 66,
+    "sceneSummary": 67,
     "scene_summary": 1
   },
   "_bandNotes": null,
   "_opCountingSince": "2026-09-14T22:51:56.913Z",
   "_fireTests": {
-    "at": "2026-09-26T03:21:00.728Z",
-    "build": "2.9.0",
+    "at": "2026-09-26T03:33:58.515Z",
+    "build": "2.9.1",
     "results": [
       {
         "op": "jobOps",

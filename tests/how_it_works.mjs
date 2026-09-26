@@ -15633,8 +15633,13 @@ console.log("\n── §206 · the ladder under the other punctuation ──");
   // THAT WOULD HAVE PINNED A VALUE LEGITIMATELY ALLOWED TO MOVE — the difference is that this one was caught before
   // it shipped. The CLAIM is that the system does not PERMIT a shadow, and the way to ask that is to run the repair.
   const shadowed = [], healed = [];
-  for (const f of ["char-mrhs8286", "char-mr4ejo8c", "char-mr6eq1a5", "char-msgpisca"]) {
-    let ch; try { ch = JSON.parse(rd(`characters/player-s9z9u1/${f}.json`)); } catch { continue; }
+  // ⛔ FROZEN (CCODE-528). This read the live files through a TEMPLATE LITERAL, which is why §364's first
+  // question — `rd("characters/…")` — could not see it. The claim is that the system does not PERMIT a
+  // shadow, so it runs the repair; frozen inputs are what make that a claim about the repair and not about
+  // which characters Erik has opened lately.
+  for (const f of [savedSave("player-s9z9u1/char-mrhs8286.json"), savedSave("player-s9z9u1/char-mr4ejo8c.json"),
+                   savedSave("player-s9z9u1/char-mr6eq1a5.json"), savedSave("player-s9z9u1/char-msgpisca.json")]) {
+    let ch; try { ch = JSON.parse(f); } catch { continue; }
     const before = Object.keys(ch.customAbilities || {}).filter(id => cat206[id.replace(/-/g, "_")]);
     ch.reconcileVersion = 58;
     RC206.reconcile(ch, "character", { content: C206 });
@@ -18806,8 +18811,11 @@ console.log("\n── §242 · a craft is announced once, by one owner, and a re
   // of them carries the same fingerprint. The NATURAL CONTROL is Cellaceron — his discovery took
   // `registerDiscoveryAbility`'s already-braided early return, so it never got a ledger row, and it is the only one of the
   // seven that was announced once. ⛔ THE ROW IS THE TRIGGER, NOT THE PARENT COUNT.
-  const saves242 = ["char-mrhs8286.json", "char-mrum8y4d.json", "char-mr4ejo8c.json"]
-    .map(f => { try { return JSON.parse(rd(`characters/player-s9z9u1/${f}`)); } catch { return null; } }).filter(Boolean);
+  // ⛔ FROZEN (CCODE-528) — the same template-literal spelling §364 could not see. This one counts rows in
+  // played history, which play moves by definition.
+  const saves242 = [savedSave("player-s9z9u1/char-mrhs8286.json"), savedSave("player-s9z9u1/char-mrum8y4d.json"),
+                    savedSave("player-s9z9u1/char-mr4ejo8c.json")]
+    .map(s => { try { return JSON.parse(s); } catch { return null; } }).filter(Boolean);
   const discRows242 = saves242.flatMap(c => (c.discoveries || []).map(d => ({
     id: d.id, shown: d._momentShown === true,
     inLedger: (c.braids || []).some(b => b.id === d.id),
@@ -26224,27 +26232,46 @@ console.log("\n── §339 · who the shared world gets to know ──");
     && mergedOther.intro.firstSeenDay === 2 && mergedOther.intro.metBy.name === "Tester",
     JSON.stringify({ merged: merged.intro.metBy.name, reversed: mergedOther.intro.metBy.name }));
 
-  // ⛔ AND OVER THE REAL SAVES, WHICH IS THE ONLY PLACE THE BAR CAN BE JUDGED
+  // ⛔ AND OVER A REAL POPULATION, BECAUSE A BAR CAN ONLY BE JUDGED AGAINST THE PEOPLE IT ADMITS — but over
+  // the FROZEN copies, not the live saves. ⚠️ THIS WALK IS WHY §364 EXISTS AND §364 COULD NOT SEE IT: it asks
+  // for `rd("characters/…")`, the one access pattern CCODE-527 fixed, and this reached the same files through
+  // `readdirSync(join(root, "characters"))`. A gate that asks its question in the terms of the bug cannot find
+  // it. ⛑ The claim about the LIVE world — that nobody out there is published under a job title — lives in
+  // `save_fixtures.mjs` now, the one suite whose job is the live saves, because it is an invariant about real
+  // data rather than an incidental fact about a played world.
   let store339 = { schemaVersion: 1, regionId: "valley", lives: {} };
   let saves = 0;
-  for (const d of readdirSync(join(root, "characters"))) {
-    let files = []; try { files = readdirSync(join(root, `characters/${d}`)); } catch { continue; }
-    for (const f of files.filter(x => x.endsWith(".json"))) {
-      let j; try { j = rj(`characters/${d}/${f}`); } catch { continue; }
-      if (!j.npcRegistry) continue;
-      saves++;
-      const p = promoteFor(j);
-      store339 = FT.foldLives(store339, FT.livesOfWorld(j, new Set(), { by: { characterId: j.id, name: j.name }, introduce: p })).store;
-    }
+  for (const f of readdirSync(join(root, "tests/fixtures/saves")).filter(x => x.endsWith(".json"))) {
+    let j; try { j = JSON.parse(savedSave(f)); } catch { continue; }
+    if (!j.npcRegistry) continue;
+    saves++;
+    store339 = FT.foldLives(store339, FT.livesOfWorld(j, new Set(), { by: { characterId: j.id, name: j.name }, introduce: promoteFor(j) })).store;
   }
   const published = Object.values(store339.lives);
   const roleNamed = published.filter(l => NR.looksLikeRole(l.name, l.intro?.role || ""));
   const priv = JSON.stringify(published);
-  check("§339: ⛔ DRIVEN OVER EVERY LIVE SAVE, BECAUSE A BAR CAN ONLY BE JUDGED AGAINST THE PEOPLE IT ADMITS — the shared world's `lives` has been `{}` since it was built; these saves fill it, folding the same person met by several travelers into one row. ⚠️ NOT ONE of them is published under a job title, and not one carries anything the character privately knows",
-    saves >= 8 && published.length >= 40 && roleNamed.length === 0
+  check("§339: ⛔ DRIVEN OVER A REAL POPULATION — the shared world's `lives` had been `{}` since it was built; these saves fill it, folding the same person met by several travelers into one row. ⚠️ NOT ONE of them is published under a job title, and not one carries anything the character privately knows",
+    saves >= 6 && published.length >= 40 && roleNamed.length === 0
     && !/knownFacts|relationship\"|\"history\"/.test(priv)
     && published.every(l => l.name && l.canonId),
-    `${published.length} people across ${saves} saves · ${roleNamed.length} under a job title`);
+    `${published.length} people across ${saves} frozen saves · ${roleNamed.length} under a job title`);
+
+  // ⛔ THE ONE THE LIVE WALK CAUGHT, AND THE REASON THE ROW WAS WRONG. A row is built from both halves as
+  // `{ ...introduction, ...life }`. `introductionOf` carries a whole docstring saying the name it publishes is
+  // THE ONE THE WORLD KNOWS — `trueName`, when this traveler has not been introduced yet (CCODE-462) — and the
+  // spread let the life's `n.name` land on top of it. It re-asserted `canonId` and `intro` and forgot the very
+  // field the ruling is about. ⚠️ Vail Langley was published to the shared world as "Enforcer of Seraphine's
+  // will", which is what Loki calls her because he has not learned her name.
+  check("§339: ⛔ A NAME ONE TRAVELER HAS NOT LEARNED IS NOT THE NAME THE WORLD PUBLISHES — both halves of the row agree on it, and a spread order may not overturn a stated ruling",
+    (() => {
+      const unlearned = { id: "the-agent", name: "Enforcer of her will", trueName: "Vail Langley", nameUnknown: true,
+        role: "Direct agent", met: 9, roleSince: 8, firstMet: { locationId: "gen-the-made-gate", day: 8 } };
+      const life = FT.lifeOf(unlearned, { by: { characterId: "c", name: "Loki" } });
+      const rows = FT.livesOfWorld({ id: "c", name: "Loki", npcRegistry: { "the-agent": unlearned } },
+        new Set(["the-agent"]), { by: { characterId: "c", name: "Loki" }, introduce: new Set(["the-agent"]) });
+      return life.name === "Vail Langley" && rows.length === 1 && rows[0].name === "Vail Langley"
+        && rows[0].intro?.name === undefined && rows[0].role === "Direct agent";
+    })(), "the life half published `n.name`; the introduction half had it right the whole time");
 }
 
 // ══════════ §340 · CCODE-464 — A GATE THAT CANNOT BE ANSWERED IS A SAVE THAT CANNOT BE PLAYED ══════════
@@ -28817,9 +28844,39 @@ console.log("\n── §363 · who walks with you, and who you have killed ─�
 console.log("\n── §364 · the saves a gate reads hold still ──");
 {
   const howSrc = rd("tests/how_it_works.mjs");
-  const liveReads = [...howSrc.matchAll(/rd\("characters\/[^"]+"\)/g)].map((m) => m[0]);
-  check("§364: ⛔ NO GATE READS A LIVE SAVE — a check that reddens because the game was played correctly is a check everybody learns to step over",
+  // ⛔ CODE ONLY, OR THE GATE ACCUSES ITS OWN EXPLANATION. Written without this, the check below found three
+  // "live reads" and all three were PROSE — the places where this file writes ABOUT the pattern it forbids.
+  // ⚠️ Fifth time a source regex in this repo has read its own comments; it is always a green-looking red.
+  const howCode = howSrc.replace(/\/\*[\s\S]*?\*\//g, "").split("\n").map((l) => l.replace(/^\s*\/\/.*$/, "")).join("\n");
+  // ⚠️ AND IT ASKS ABOUT EVERY ROUTE TO A SAVE, NOT THE ONE I HAD JUST FIXED. Written, this matched only
+  // `rd("characters/…")` — and §339 walked the same directory with `readdirSync(join(root, "characters"))`
+  // and a template literal, so it was invisible here and reddened on the next push, after Loki was played.
+  // ⛔ A GATE THAT ASKS ITS QUESTION IN THE TERMS OF THE BUG CANNOT FIND IT. The question is now "does this
+  // file name the live save directory at all", which has one answer and no spelling.
+  // ⛔ ONE NAMED SAVE, WHICH IS THE SPELLING CCODE-527 FIXED, and it stays at zero — including the interpolated
+  // form, which is how §206 and §242 hid from it (a hardcoded LIST of saves read through a template literal).
+  // ⚠️ A read inside a directory walk is the WALK, not a named save: those have their own named ratchet below.
+  const liveReads = [...howCode.matchAll(/\b(?:rd|rj)\((?:"characters\/[^"]+"|`characters\/player-[^`$]*\$\{[^`]*`)\)/g)].map((m) => m[0]);
+  check("§364: ⛔ NO GATE READS A LIVE SAVE BY NAME — a check that reddens because the game was played correctly is a check everybody learns to step over",
     liveReads.length === 0, liveReads.slice(0, 4).join(" · "));
+
+  // ⛔ AND ELEVEN MORE THAT CCODE-527 NEVER SAW, because it searched for the spelling it was fixing. These walk
+  // the live save DIRECTORY — `readdirSync(join(root, "characters"))` — so they were invisible to the check above
+  // and §339 reddened on the next push, after Loki was played. ⚠️ A GATE THAT ASKS ITS QUESTION IN THE TERMS OF
+  // THE BUG CANNOT FIND IT, and I had already reported "eleven gates, 38 reads" as if that were the whole of it.
+  //
+  // ⛑ A WORK QUEUE WITH NAMES, and a SUBSET assertion: a twelfth section walking the live saves goes RED, and
+  // converting one of these to the frozen copies stays GREEN, so the list shrinks without a gate reddening the
+  // moment it is fixed. Each walk needs its thresholds re-measured against the frozen population, which is why
+  // this is a queue and not one edit.
+  const WALKS_LIVE = ["136", "283", "284", "287", "288", "289", "292", "294", "308", "337", "338"];
+  const sectionAt = (i) => { const m = [...howCode.slice(0, i).matchAll(/§(\d+)[^\n]{0,40}·/g)]; return m.length ? m[m.length - 1][1] : "?"; };
+  const walking = [...new Set([...howCode.matchAll(/\breaddirSync\s*\(\s*join\(root, ?[`"]characters/g)]
+    .map((m) => sectionAt(m.index)))];
+  const unlisted = walking.filter((s) => !WALKS_LIVE.includes(s));
+  check("§364: ⛔ …AND NO NEW GATE MAY WALK THE LIVE SAVE DIRECTORY — eleven already do and each is named; the list may shrink, never grow",
+    unlisted.length === 0 && walking.length >= 8,
+    `walking today: §${walking.join(" §")}` + (unlisted.length ? ` — UNLISTED: §${unlisted.join(" §")}` : ""));
 
   const frozen = [...new Set([...howSrc.matchAll(/savedSave\("([^"]+)"\)/g)].map((m) => m[1]))];
   check("§364: ⛑ …and the frozen copies are really there, and really are saves",

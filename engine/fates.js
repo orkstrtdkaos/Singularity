@@ -436,7 +436,11 @@ export function lifeOf(n, { by = null } = {}) {
   const rs = num(n.roleSince), ss = num(n.statusSince);
   if (rs == null && ss == null) return null;
   const who = (x) => (x ? { characterId: x.characterId ?? null, name: x.name ?? null } : null);
-  return { id: n.id, name: n.name || null,
+  // \u26d4 THE NAME THE WORLD KNOWS, WHICH IS THE SAME RULE `introductionOf` STATES AND THIS HALF LOST. A row is
+  // built from both halves as `{ ...introduction, ...life }`, so `n.name` \u2014 the placeholder ONE traveler is
+  // stuck with \u2014 landed on top of the world's name. Measured: Vail Langley was published to the shared world
+  // as "Enforcer of Seraphine's will" because Loki has not been introduced to her yet.
+  return { id: n.id, name: n.trueName || n.name || null,
     ...(rs != null ? { role: n.role || null, roleSince: rs, roleBy: who(n.roleBy || by) } : {}),
     ...(ss != null ? { status: n.status || "active", statusNote: n.statusNote || null, statusSince: ss, statusBy: who(n.statusBy || by),
       ...(n.returnedFromDeath ? { returnedFromDeath: { day: num(n.returnedFromDeath.day) } } : {}) } : {}) };

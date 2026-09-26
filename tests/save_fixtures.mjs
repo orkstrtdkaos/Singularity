@@ -139,6 +139,44 @@ check("⛔ nothing SHRANK — no ability, item, companion or quest was dropped o
     dangling === 0, `${dangling} dangling of ${refs} — ` + bad.join(" · "));
 }
 
+/* ── the shared world: who these saves publish, and under what name ── */
+{
+  // ⛑ THIS CLAIM LIVES HERE AND NOT IN `how_it_works` (CCODE-528). It is an INVARIANT about live data —
+  // nobody may enter the shared world under a job title — and this is the one suite whose job is the live
+  // saves. If play breaks it, the push SHOULD stop: a role-named publication is a defect, not correct play.
+  // ⚠️ That is the line the 09-12 ruling draws. What a gate may not do is assert an INCIDENTAL fact about a
+  // played world (that Silas has not chosen his nemesis yet) — the mechanism's own checks are frozen, in §339.
+  //
+  // ⛔ IT HAS ALREADY CAUGHT ONE: Vail Langley was published as "Enforcer of Seraphine's will", the placeholder
+  // Loki is stuck with, because `livesOfWorld` builds a row as `{ ...introduction, ...life }` and the life half
+  // published `n.name` over the world's name. The gate reddened on a push and the engine was the thing wrong.
+  const FT = await import("../engine/fates.js");
+  const NM = await import("../engine/names.js");
+  const QG = await import("../engine/quests.js");
+  const promotable = (c) => {
+    const givers = new Set();
+    for (const q of c.quests || []) { const id = QG.giverRegistryId(c.npcRegistry, q?.giver); if (id) givers.add(id); }
+    return FT.promotableIds(c, { giverIds: givers, atMet: 3, isRole: NM.looksLikeRole });
+  };
+  let store = { schemaVersion: 1, regionId: "valley", lives: {} }, walked = 0;
+  for (const { obj } of saves) {
+    if (!obj?.npcRegistry) continue;
+    walked++;
+    store = FT.foldLives(store, FT.livesOfWorld(obj, new Set(), { by: { characterId: obj.id, name: obj.name }, introduce: promotable(obj) })).store;
+  }
+  const published = Object.values(store.lives);
+  const roleNamed = published.filter(l => NM.looksLikeRole(l.name, l.intro?.role || ""));
+  check("⛔ NOBODY ENTERS THE SHARED WORLD UNDER A JOB TITLE — driven over every live save, because a bar can only be judged against the people it admits",
+    walked >= 10 && published.length >= 40 && roleNamed.length === 0,
+    `${published.length} people across ${walked} saves · ${roleNamed.length} under a job title`
+    + (roleNamed.length ? `\n      ${roleNamed.slice(0, 4).map(l => `${l.id}: "${l.name}"`).join(" · ")}` : ""));
+
+  check("⛑ …and nothing a character privately knows travels with them — not a fact, not a feeling, not a history",
+    !/knownFacts|relationship"|"history"/.test(JSON.stringify(published))
+    && published.every(l => l.name && l.canonId),
+    "a life is public; what one traveler privately learned about a person is theirs");
+}
+
 /* ── vocabulary: a renamed value from an old save must still resolve ─────────────────────────── */
 {
   // ⛔ THE 2026-08-28 CASE, KEPT AS A STANDING GUARD. `blind` was renamed to `mindless`; a save or an

@@ -18,7 +18,8 @@
 // as they stood when the claims were written.
 //
 //   node scripts/freeze_save_fixtures.mjs --from a282ba430   # the state the current gates were written against
-//   node scripts/freeze_save_fixtures.mjs                    # the working tree, when a gate SHOULD move on
+//   node scripts/freeze_save_fixtures.mjs                    # add what is newly read; leave frozen copies alone
+//   node scripts/freeze_save_fixtures.mjs --refreeze         # deliberately move the frozen copies on
 //
 // ⛑ `save_fixtures.mjs` STILL READS THE LIVE SAVES and it is the only suite that should: proving the real
 // saves still load is its entire job, and it asserts nothing about what is IN them.
@@ -31,6 +32,11 @@ const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const OUT = join(root, "tests", "fixtures", "saves");
 const HOW = join(root, "tests", "how_it_works.mjs");
 const FROM = (() => { const i = process.argv.indexOf("--from"); return i > 0 ? process.argv[i + 1] : null; })();
+// ⛔ A FROZEN COPY IS FROZEN. Without this, running the freezer to ADD a save a new gate reads re-photographs
+// every copy already there from the working tree — which is the exact failure that left all eleven CCODE-527
+// gates red, and on 09-26 it happened again, silently, to four of them while I was adding a fifth. ⚠️ Nothing
+// failed; the history was just gone. ⛑ `--refreeze` is how a copy is deliberately moved on, and it says so.
+const REFREEZE = process.argv.includes("--refreeze");
 
 // ⛑ THE LIST IS DERIVED FROM WHAT THE GATES ACTUALLY READ, never typed: a save a gate starts reading tomorrow
 // is frozen by the next run without anybody remembering to add it.
@@ -40,10 +46,11 @@ const src = readFileSync(HOW, "utf8");
 const wanted = [...new Set([...src.matchAll(/savedSave\("([a-z0-9-]+)\/(char-[a-z0-9]+\.json)"\)/g)].map(m => `${m[1]}/${m[2]}`))].sort();
 
 mkdirSync(OUT, { recursive: true });
-let wrote = 0;
+let wrote = 0, kept = 0;
 const missing = [];
 for (const rel of wanted) {
   const to = join(OUT, rel.replace("/", "__"));
+  if (existsSync(to) && !REFREEZE) { kept++; continue; }
   let raw = null;
   if (FROM) {
     try { raw = execFileSync("git", ["show", `${FROM}:characters/${rel}`], { cwd: root, encoding: "utf8", maxBuffer: 1 << 28 }); }
@@ -58,5 +65,6 @@ for (const rel of wanted) {
   writeFileSync(to, JSON.stringify(JSON.parse(raw), null, 1) + "\n");
   wrote++;
 }
-console.log(`frozen: ${wrote} save fixture(s) under tests/fixtures/saves — from ${FROM || "the working tree"}`);
+console.log(`frozen: ${wrote} save fixture(s) under tests/fixtures/saves — from ${FROM || "the working tree"}`
+  + (kept ? `; ${kept} already frozen and LEFT ALONE (--refreeze to move them on)` : ""));
 for (const m of missing) console.log(`  ⚠️ a gate reads ${m} and it could not be read`);

@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "id": "SNG-660_bestiary_top",
+  "kind": "staged_content",
+  "note": "SNG-660 (Erik 2026-09-26: wild creatures reach legendary and mythic, 'Yes'). STAGED, not live: BEAST_TIER has no legendary or mythic row, and an unknown tier silently fights as `notable`. Apply after CCode adds the rows (po/tools/apply_bestiary_top.cjs will be written then). Every entry follows the file's four design laws: no person, a hazard not a villain, pressures function families, tied to an arc.",
+  "retier": [
+    { "id": "the_ashen_wyrm", "from": "epic", "to": "legendary", "why": "Its own epicNote: 'Domain-scale. Not a fight — a campaign.' That is the legendary rung (60–84), not epic (40–59)." },
+    { "id": "the_bright_devourer", "from": "epic", "to": "legendary", "why": "The same pole-dragon scale as the Ashen Wyrm." },
+    { "id": "the_unspooling_worm", "from": "epic", "to": "legendary", "why": "The same pole-dragon scale as the Ashen Wyrm." },
+    { "id": "the_gearfather", "from": "leader", "to": "heroic", "why": "Building-sized; 'leader' was the alias for heroic when it was authored (SNG-269). On the seven-rung ladder, leader is a person-scale rung below heroic." },
+    { "id": "the_bloom_that_hungers", "from": "leader", "to": "heroic", "why": "Hill-sized; the same alias reason as the Gearfather." }
+  ],
+  "keepAsLeader": ["tessellith", "the_pure_of_ash", "the_severed_choir", "the_narrowed", "the_gathering"],
+  "add": [
+    {
+      "id": "the_standing_legion",
+      "class": "narrowed_dead",
+      "tier": "legendary",
+      "name": "the Standing Legion",
+      "affinity": { "physical": "resist", "truth": "vulnerable" },
+      "look": "A whole army, dead since before the Transition, still holding the line it was ordered to hold. Four thousand of them across a valley floor, shields up, facing an enemy that stopped existing centuries ago. They do not rot. They do not move until something crosses the line.",
+      "danger": "Anything that crosses the line is the enemy. They answer as an army answers — in ranks, in volleys, by the thousand — and they do not tire, break or rout. A road that runs through their valley is closed.",
+      "pressures": [
+        "KNOW (find the order they are still obeying)",
+        "SHAPE (give them a true ending to the war)",
+        "WARD (survive a legion's answer)",
+        "MOVE (go around four thousand)",
+        "UNMAKE (the order, not the soldiers)"
+      ],
+      "readsAlsoFrom": ["arc_what_wakes_beneath"],
+      "clean": "Not four thousand people — one order, still running in four thousand bodies. There is no one in there to grieve. Ending it is telling the war it is over.",
+      "aggressorKind": "driven",
+      "_why": "A legendary that a strong party cannot simply fight: the answer is to read the order and end it. The class's own concept (a body still doing the last thing it was told) scaled to an army."
+    },
+    {
+      "id": "the_ninefold_foundry",
+      "class": "feral_construct",
+      "tier": "legendary",
+      "name": "the Ninefold Foundry",
+      "affinity": { "physical": "resist", "mechanical": "resist", "truth": "vulnerable" },
+      "look": "A pre-Transition foundry the size of a town, woken and walking on legs it built for itself out of its own furnaces. It is still making things. It has been making them for a very long time, and none of them are for anyone.",
+      "danger": "It takes whatever it walks over as stock — stone, iron, a hold's walls, the people inside — and it makes something out of it. What it makes then works for it, until it is taken apart for stock in turn.",
+      "pressures": [
+        "KNOW (read what it thinks it is building)",
+        "UNMAKE (the directive at its core)",
+        "SHAPE (finish the project, so it stops)",
+        "HARM (a town's worth of iron)",
+        "MOVE (stay out of the stock)"
+      ],
+      "readsAlsoFrom": ["arc_what_wakes_beneath"],
+      "clean": "A tool with no hand left to hold it, following an order that no longer means anything. Stopping it is repair by other means.",
+      "aggressorKind": "beast",
+      "_why": "The feral_construct class at legendary scale. The Gearfather (heroic) is its small cousin, so the class climbs the ladder."
+    },
+    {
+      "id": "the_eye_of_the_storm",
+      "class": "manifested_creature",
+      "tier": "mythic",
+      "name": "the Eye of the Storm",
+      "affinity": { "physical": "immune", "truth": "resist", "numinous": "vulnerable" },
+      "look": "Where the Manifestation Storm is thickest, the air thinks. It is not a creature. It is a place that dreams creatures, a sky that keeps almost-becoming something and then does, briefly, before it forgets.",
+      "danger": "Whatever it dreams walks out of it. Its thoughts become weather, and its weather becomes things with teeth. Standing inside it is standing inside a mind that does not know you are there, and it may think you into something else.",
+      "pressures": [
+        "WARD (hold your own shape)",
+        "KNOW (read a thought the size of a sky)",
+        "SHAPE (give it a better dream)",
+        "UNMAKE (quiet the storm's centre)",
+        "MOVE (leave before it notices)"
+      ],
+      "readsAlsoFrom": ["arc_manifestation_storm"],
+      "clean": "No one is there to kill. It is the Storm's own centre — ending it is calming weather, and the grief is for everything it could have made.",
+      "aggressorKind": "hazard",
+      "unique": true,
+      "_why": "Mythic, and unique in the world: the Storm arc's own heart, met as an ending rather than a roll on a road. The world's biggest version of the Unmoored Choir (epic)."
+    },
+    {
+      "id": "the_first_root",
+      "class": "substrate_warped_beast",
+      "tier": "mythic",
+      "name": "the First Root",
+      "affinity": { "decay": "vulnerable", "living": "immune" },
+      "look": "A forest that is one living thing, the size of a region. Every tree in it is the same tree. Its roots run under three traditions' lands, and it has been growing, very slowly, toward something no one has understood.",
+      "danger": "It does not attack. It grows. A hold on its edge wakes one morning inside it, and the road home has become a root. The things that live inside it are its hands, and it has a great many hands.",
+      "pressures": [
+        "KNOW (find what it is growing toward)",
+        "SHAPE (turn its growth)",
+        "WARD (keep a place from being taken in)",
+        "MOVE (find a way through a forest that moves)",
+        "UNMAKE (at a cost to the land itself)"
+      ],
+      "readsAlsoFrom": ["arc_green_schism"],
+      "clean": "A growth, not a grievance. It wants nothing but to grow. Stopping it is the Green Schism's hardest question: what is taken from the living world to keep the human one.",
+      "aggressorKind": "hazard",
+      "unique": true,
+      "_why": "Mythic, unique, and tied to the Green Schism, so ending it is an arc choice rather than a kill. The Bloom That Hungers (heroic) is its seed."
+    }
+  ]
+}

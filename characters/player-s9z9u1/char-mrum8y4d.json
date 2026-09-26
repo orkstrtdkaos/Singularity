@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 10,
-  "xp": 967,
+  "xp": 972,
   "attributes": {
     "physical": 4,
     "mental": 5,
@@ -119,21 +119,21 @@
   ],
   "alignment": {
     "mechanical_spiritual": 0.0077000000000000055,
-    "falsehood_truth": 0.39948968872823304,
+    "falsehood_truth": 0.4045152042918214,
     "demonic_angelic": -0.020000000000000004,
     "dark_light": 0.085,
     "concrete_abstract": 0.18349246667125482,
     "chaos_order": -0.06802821875,
     "body_mind": 0.0658375,
-    "emotional_logical": 0.063662523984375,
+    "emotional_logical": 0.06547939778515624,
     "space_time": 0.028000000000000004,
-    "violence_peace": 0.058000625
+    "violence_peace": 0.06510059374999999
   },
   "attunement": 10,
   "maxHealth": 83,
   "health": 83,
   "maxEnergy": 161,
-  "energy": 132,
+  "energy": 125,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -439,6 +439,37 @@
       "_bonusApplied": 0.15,
       "day": 8,
       "worldDay": 88
+    },
+    {
+      "at": "2026-09-26T15:49:04.727Z",
+      "locationId": "gen-the-made-gate",
+      "communityId": "valley.millbrook",
+      "description": "Stood in direct confrontation with Seraphine's agent and corrected her absolute mandate by naming the sealed chamber's true location—reshaping the foundation of her order without breaking it.",
+      "tags": [
+        "clarity",
+        "courage",
+        "truth"
+      ],
+      "weight": 2,
+      "spread": [],
+      "_bonusApplied": 0.15,
+      "day": 8,
+      "worldDay": 88
+    },
+    {
+      "at": "2026-09-26T15:49:04.727Z",
+      "locationId": "gen-the-made-gate",
+      "communityId": "valley.millbrook",
+      "description": "Used the broken certainty of another to offer a doorway—Orla's shattered belief became a mirror through which Vail could recognize her own rebuilding.",
+      "tags": [
+        "mercy",
+        "understanding"
+      ],
+      "weight": 1,
+      "spread": [],
+      "_bonusApplied": 0.15,
+      "day": 8,
+      "worldDay": 88
     }
   ],
   "relationships": {},
@@ -517,47 +548,70 @@
         "player": "Offer Vail a choice: ride ahead to the Standing Annex with the band and see what the sealed chamber actually *is* before any mandate reaches it—or return to Seraphine with the truth and let her decide how order stands when the ground shifts.",
         "summary": "At Whistling Woman Post on the moorland, Vail Langley's absolute mandate collapses when corrected about the sealed chamber's true location—and Orla's broken certainty offers her a doorway into the uncertainty itself. Faced with two choices—return to Seraphine with correction, or ride ahead to understand—Vail turns toward understanding and asks which choice breaks the order less.",
         "narration": "Orla finishes speaking—the precision of their broken certainty hanging in the moorland air like a question that will not close. Vail's hand drops from the doorframe. She turns from it as though releasing something she has held too long, and when she faces you again, the absolute certainty is still there, but it has *changed shape*. It is no longer an order she carries; it is something she is choosing.\n\n\"Seraphine was built on ground that isn't there,\" Vail says quietly. Not a question. Not a concession. A fact she is speaking aloud for the first time. Her gaze moves across the band—across Orla, Sable, Ravel, Estry, across you—and settles on the road that leads outward toward the Annex. \"The mandate to seize control at Millbrook is a mandate to seize nothing. It crumbles the moment she learns what you've told me.\"\n\nShe is still for a long breath. The shrine's emptiness watches. The moorland fades toward dusk.\n\n\"I could return to the Plateau and tell her the sealed chamber is beneath the Crossing instead,\" Vail says. Her voice carries no hesitation now—only the weight of a choice being made in real time. \"She would receive that correction and begin to build new order on the corrected ground. That is my function. That is what I was sent here to do.\" Another pause. Then: \"Or I could ride ahead with you to the Standing Annex and see what the sealed chamber *is* before any mandate reaches it—before Seraphine has time to reshape her certainty around this new fact. I could bring her *understanding* instead of just correction. That is not my function. That is something else.\"\n\nHer eyes find yours. \"Which one breaks the ground worse?\"\n\n*✦ The Radiant: +1 — offered a path through broken certainty that preserves both truth and order.*"
+      },
+      {
+        "player": "Ask plainly: 'What does *your* certainty tell you, now that Seraphine's is broken?'",
+        "summary": "At Whistling Woman Post, Vail Langley's absolute mandate reorganizes when corrected about the sealed chamber's true location—and she chooses to ride ahead to the Standing Annex with the band to understand what lies beneath the Crossing before any order reaches it. The Enforcer's certainty has become her own.",
+        "narration": "Vail's hand opens fully, releasing the doorframe. She turns to face you directly, and in the moorland's fading light her expression carries the weight of a person rebuilding their order from the ground up. When you ask what *her* certainty tells her now, she does not answer immediately. She looks at the road ahead—the one that leads outward toward the Standing Annex—and then back at Orla, at Sable, at the band you have gathered.\n\n\"My certainty,\" she says, and her voice is different now—not stripped of conviction, but *honest* with it, \"tells me that Seraphine sent me to seize something I did not understand. That I was willing to break people to keep an order I believed in without question.\" She pauses. The shrine at the waystation's heart stands unnamed and patient behind her. \"Now my certainty tells me that understanding might matter more than speed. That riding ahead to see what the sealed chamber *actually is* before I report back might be the only honest choice I have.\"\n\nShe looks at you. \"I will ride to the Standing Annex with you. I will see what Halvex and Vessin and the others have learned. And then—\" she glances back toward the road that leads spinward, toward the Plateau, \"—then I will carry the truth back to Seraphine and let *her* decide how her order stands when the ground shifts beneath it. If it stands at all.\"\n\nThe moorland wind carries the moment without judgment. Behind you, Cy's lens irises slightly—reading the shift in the room's weight, the breaking that has become a choosing.\n\n*✦ The Radiant: -1 — corrected Seraphine's fundamental assumption about the sealed chamber's location, reshaping her mandate.*"
       }
     ],
     "lastTurn": {
-      "narration": "Orla finishes speaking—the precision of their broken certainty hanging in the moorland air like a question that will not close. Vail's hand drops from the doorframe. She turns from it as though releasing something she has held too long, and when she faces you again, the absolute certainty is still there, but it has *changed shape*. It is no longer an order she carries; it is something she is choosing.\n\n\"Seraphine was built on ground that isn't there,\" Vail says quietly. Not a question. Not a concession. A fact she is speaking aloud for the first time. Her gaze moves across the band—across Orla, Sable, Ravel, Estry, across you—and settles on the road that leads outward toward the Annex. \"The mandate to seize control at Millbrook is a mandate to seize nothing. It crumbles the moment she learns what you've told me.\"\n\nShe is still for a long breath. The shrine's emptiness watches. The moorland fades toward dusk.\n\n\"I could return to the Plateau and tell her the sealed chamber is beneath the Crossing instead,\" Vail says. Her voice carries no hesitation now—only the weight of a choice being made in real time. \"She would receive that correction and begin to build new order on the corrected ground. That is my function. That is what I was sent here to do.\" Another pause. Then: \"Or I could ride ahead with you to the Standing Annex and see what the sealed chamber *is* before any mandate reaches it—before Seraphine has time to reshape her certainty around this new fact. I could bring her *understanding* instead of just correction. That is not my function. That is something else.\"\n\nHer eyes find yours. \"Which one breaks the ground worse?\"\n\n*✦ The Radiant: +1 — offered a path through broken certainty that preserves both truth and order.*",
-      "sceneSummary": "At Whistling Woman Post on the moorland, Vail Langley's absolute mandate collapses when corrected about the sealed chamber's true location—and Orla's broken certainty offers her a doorway into the uncertainty itself. Faced with two choices—return to Seraphine with correction, or ride ahead to understand—Vail turns toward understanding and asks which choice breaks the order less.",
+      "narration": "Vail's hand opens fully, releasing the doorframe. She turns to face you directly, and in the moorland's fading light her expression carries the weight of a person rebuilding their order from the ground up. When you ask what *her* certainty tells her now, she does not answer immediately. She looks at the road ahead—the one that leads outward toward the Standing Annex—and then back at Orla, at Sable, at the band you have gathered.\n\n\"My certainty,\" she says, and her voice is different now—not stripped of conviction, but *honest* with it, \"tells me that Seraphine sent me to seize something I did not understand. That I was willing to break people to keep an order I believed in without question.\" She pauses. The shrine at the waystation's heart stands unnamed and patient behind her. \"Now my certainty tells me that understanding might matter more than speed. That riding ahead to see what the sealed chamber *actually is* before I report back might be the only honest choice I have.\"\n\nShe looks at you. \"I will ride to the Standing Annex with you. I will see what Halvex and Vessin and the others have learned. And then—\" she glances back toward the road that leads spinward, toward the Plateau, \"—then I will carry the truth back to Seraphine and let *her* decide how her order stands when the ground shifts beneath it. If it stands at all.\"\n\nThe moorland wind carries the moment without judgment. Behind you, Cy's lens irises slightly—reading the shift in the room's weight, the breaking that has become a choosing.\n\n*✦ The Radiant: -1 — corrected Seraphine's fundamental assumption about the sealed chamber's location, reshaping her mandate.*",
+      "sceneSummary": "At Whistling Woman Post, Vail Langley's absolute mandate reorganizes when corrected about the sealed chamber's true location—and she chooses to ride ahead to the Standing Annex with the band to understand what lies beneath the Crossing before any order reaches it. The Enforcer's certainty has become her own.",
       "choices": [
         {
-          "label": "Tell her: 'The one that sees first breaks less. Come with us to the Annex.'",
-          "attribute": "social",
-          "subAttribute": "presence",
+          "label": "Accept her at her word and prepare the band to ride outward toward the Standing Annex. Vail rides with you now.",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "axes": {
             "violence_peace": 0.3,
-            "falsehood_truth": 0.4,
-            "chaos_order": -0.2
+            "chaos_order": 0.2
           },
-          "difficulty": "easy",
+          "difficulty": "very easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "negotiate",
-            "lead"
+            "lead",
+            "rally"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false,
+          "trivial": true,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Ask plainly: 'What does *your* certainty tell you, now that Seraphine's is broken?'",
+          "label": "Ask Vail directly: what will she tell Seraphine if the truth at the Standing Annex does not fit into order?",
           "attribute": "social",
           "subAttribute": "insight",
           "axes": {
-            "violence_peace": 0.2,
-            "falsehood_truth": 0.5,
-            "emotional_logical": 0.1
+            "falsehood_truth": 0.4,
+            "chaos_order": -0.2
           },
           "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
-            "study",
-            "ask"
+            "question",
+            "negotiate"
+          ],
+          "abilityId": "appetite_sense",
+          "energyCost": 2,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Task Orla with staying at the waystation—they've broken their own mandate here. Ask them to send word back to the Reaches about what happened at the Crossing.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "falsehood_truth": 0.3,
+            "chaos_order": 0.1
+          },
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "command",
+            "delegate"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -566,19 +620,18 @@
           "emergenceId": null
         },
         {
-          "label": "Step aside and let her go—if she chooses to ride ahead, she will; if she returns to Seraphine, that is her answer too.",
+          "label": "Press forward now—the Standing Annex waits and Halvex needs to know Seraphine's mandate is broken. Ride outward with the full band, including Vail.",
           "attribute": "practical",
-          "subAttribute": "wits",
+          "subAttribute": "agility",
           "axes": {
-            "violence_peace": 0.4,
-            "falsehood_truth": 0.3,
+            "space_time": 0.2,
             "chaos_order": -0.1
           },
           "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "careful",
-            "trust"
+            "travel",
+            "move"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -589,33 +642,44 @@
       ],
       "deeds": [
         {
-          "description": "Named the sealed chamber's true location when an enforcer of absolute order was built on false ground—and offered understanding as a path through the breaking that came after",
+          "description": "Stood in direct confrontation with Seraphine's agent and corrected her absolute mandate by naming the sealed chamber's true location—reshaping the foundation of her order without breaking it.",
           "tags": [
             "clarity",
-            "mercy",
-            "courage"
+            "courage",
+            "truth"
           ],
           "weight": 2,
           "communityId": "valley.millbrook"
+        },
+        {
+          "description": "Used the broken certainty of another to offer a doorway—Orla's shattered belief became a mirror through which Vail could recognize her own rebuilding.",
+          "tags": [
+            "mercy",
+            "understanding"
+          ],
+          "weight": 1,
+          "communityId": null
         }
       ],
       "characterDeltas": {
         "health": 0,
-        "energy": 0,
+        "energy": -2,
         "inventoryAdd": [],
         "inventoryRemove": [],
         "xp": 0
       },
       "ledgerEvents": [
         {
-          "what": "The High Luminary's certainty about the sealed chamber's location has been corrected—the chamber lies beneath the Hub crossing, not beneath Millbrook. This fact is now spreading outward from Whistling Woman Post.",
+          "what": "Seraphine's mandate to seize the sealed chamber at Millbrook has been fundamentally undermined—the High Luminary was working from false ground, and her direct agent has chosen understanding over order.",
           "tags": [
-            "order-reshuffled",
-            "mandate-broken",
-            "correction-given"
+            "political shift",
+            "mandate broken",
+            "authority questioned"
           ],
           "visibility": "witnessed",
-          "spectrumDeltas": {},
+          "spectrumDeltas": {
+            "chaos_order": -0.15
+          },
           "impactsLocal": true
         }
       ],
@@ -626,15 +690,15 @@
           "title": "The Taken",
           "summary": "Someone was brought from the city to the Unlit Deep, and the city is pretending it did not happen.",
           "giver": "the elder of the Unlit Deep",
-          "note": "Vail Langley, Seraphine's direct agent, has heard the sealed chamber's true location and watched her mandate collapse. She stands at the threshold between returning to broken certainty and riding ahead to understand what the broken ground actually holds.",
-          "xpReward": 0
+          "note": "Vail Langley, Seraphine's direct agent, has been corrected about the sealed chamber's true location and has chosen to ride ahead to the Standing Annex to understand what it actually contains before reporting back. Her absolute mandate has reorganized into a choice.",
+          "xpReward": null
         }
       ],
       "standingOps": [
         {
           "people": "radiant_folk",
-          "delta": 1,
-          "why": "offered a path through broken certainty that preserves both truth and order"
+          "delta": -1,
+          "why": "corrected Seraphine's fundamental assumption about the sealed chamber's location, reshaping her mandate"
         }
       ],
       "delegateOps": [],
@@ -644,15 +708,15 @@
       "offer": null,
       "stageOps": [],
       "scene": {
-        "setting": "Whistling Woman Post on the spinward moorland, late evening in mid-autumn. The waystation's open doors frame the golden grass fading toward dusk. The shrine stands unnamed at the post's heart. The relay station's clean architecture holds the last light. Vail Langley stands at the threshold, her hand released from the doorframe, her entire stance redistributed around a choice being made.",
+        "setting": "Whistling Woman Post on the spinward moorland, evening in mid-autumn. The waystation's open doors frame the golden grass deepening toward dusk. The shrine stands unnamed at the post's heart. The relay station's clean architecture holds the last light. The road stretches outward toward the Standing Annex.",
         "npcsPresent": [
           {
             "name": "Vail Langley",
-            "state": "Standing at the waystation threshold, facing a choice between returning to Seraphine with correction or riding ahead to the Annex with understanding"
+            "state": "Standing at the waystation threshold, her hand released from the doorframe, her entire stance reorganized around a choice being made—she will ride ahead to the Standing Annex with the band"
           },
           {
             "name": "Orla Yardley",
-            "state": "Standing forward, having named their own broken certainty as a mirror for Vail's breaking mandate"
+            "state": "Standing forward, having named their own broken certainty as a mirror for Vail's breaking mandate, present and waiting for what comes next"
           },
           {
             "name": "Sable",
@@ -675,40 +739,43 @@
           "The waystation's open doors",
           "The shrine with no name",
           "The relay station architecture, weathered and kept",
-          "Gold moorland stretching in all directions, fading toward dusk"
+          "Gold moorland stretching outward, fading toward dusk",
+          "The road to the Standing Annex"
         ],
         "threads": [
-          "Will Vail ride ahead to the Standing Annex with the band, or return to Seraphine with the correction?",
-          "What will Seraphine do when she learns the sealed chamber's true location is beneath the Crossing, not Millbrook?",
-          "Can the band reach the Standing Annex with Vail riding at their side—or has her presence changed what waits for them there?"
+          "What will Halvex, Vessin, and the others have learned at the Standing Annex?",
+          "How will Seraphine respond when Vail returns with the correction—or when she does not return immediately?",
+          "Can the band and Vail reach the Annex safely now that her mandate is broken?"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "vail-langley",
+          "npcId": "enforcer-of-seraphine-s-will",
           "name": "Vail Langley",
-          "title": "Enforcer of the High Luminary's will",
-          "role": "Direct agent of the High Luminary, Seraphine",
-          "age": 34,
-          "status": "active",
-          "statusNote": "Standing at Whistling Woman Post, her mandate broken by correction, facing a choice between returning to Seraphine or riding ahead to understand",
-          "note": "Listened to Orla Yardley name their own broken certainty and felt the precision of it land—the Enforcer is now choosing understanding over absolute order",
+          "revealName": "Vail Langley",
+          "role": "Agent of the High Luminary",
+          "note": "Her absolute mandate collapsed when corrected about the sealed chamber's true location beneath the Crossing, not Millbrook. She has chosen to ride ahead to the Standing Annex to understand what lies there before reporting back to Seraphine. Her certainty has reorganized—no longer an order she carries, but a choice she is making.",
           "learned": [
-            "The sealed chamber is beneath the Hub crossing at the Null Stone, not beneath Millbrook",
-            "A broken mandate built on false ground can be rebuilt, or abandoned entirely",
-            "Understanding can be brought to Seraphine in place of mere correction"
+            "Seraphine's mandate was built on false ground",
+            "Understanding can reshape order without breaking it",
+            "Her own honesty matters more than absolute obedience"
           ],
-          "skillsObserved": [
-            "Absolute certainty in her presence",
-            "The ability to reorganize conviction when false ground is revealed",
-            "Listens without flinching when her certainty is unmade"
-          ],
-          "relationshipDelta": 2
+          "relationshipDelta": 2,
+          "status": "active",
+          "statusNote": "Riding ahead with the band toward the Standing Annex, choosing understanding over absolute order"
         }
       ],
-      "intentsHeard": [],
-      "factUpdates": [],
+      "intentsHeard": [
+        "Loki"
+      ],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "Vail Langley, Seraphine's direct agent, has had her absolute mandate reshuffled by correction—the sealed chamber lies beneath the Crossing, not Millbrook. She has chosen to ride ahead to the Standing Annex with the band to understand what lies there before reporting back to the High Luminary.",
+          "subjectId": "enforcer-of-seraphine-s-will"
+        }
+      ],
       "placeUpdates": [],
       "discovery": null,
       "codexUpdates": [
@@ -716,25 +783,13 @@
           "topic": "vail-langley",
           "label": "Vail Langley, Enforcer",
           "kind": "person",
-          "entityId": "vail-langley",
-          "fact": "Seraphine's direct agent sent to seize control of the sealed chamber at Millbrook. When corrected about the chamber's true location beneath the Hub crossing, Vail's absolute mandate collapsed and reorganized—she is now choosing between returning to Seraphine with correction, or riding ahead to the Standing Annex to bring understanding instead of just order.",
+          "entityId": "enforcer-of-seraphine-s-will",
+          "fact": "Seraphine's direct agent sent to seize control of the sealed chamber. When corrected about the chamber's true location beneath the Crossing rather than Millbrook, Vail's absolute mandate collapsed and reorganized. She has chosen to ride ahead to the Standing Annex with Loki's band to understand what the sealed chamber actually contains before reporting back to the High Luminary. Her certainty has become a choice rather than an order she carries.",
           "links": [
             "seraphine-high-luminary",
             "the-regulator-question",
-            "whistling-woman-post",
+            "the-sealed-chamber",
             "orla-yardley"
-          ]
-        },
-        {
-          "topic": "seraphine-s-reach",
-          "label": "Seraphine's Reach",
-          "kind": "mystery",
-          "fact": "The High Luminary, Seraphine, has sent an agent to intercept Loki before reaching the Standing Annex. She believes she has the right to claim control of the sealed chamber beneath Millbrook. This mandate is now built on false ground—the sealed chamber lies beneath the Hub crossing at the Null Stone, not beneath the town.",
-          "links": [
-            "seraphine-high-luminary",
-            "the-regulator-question",
-            "the-crossing",
-            "the-null-stone"
           ]
         }
       ],
@@ -742,7 +797,13 @@
       "holdTrades": [],
       "debtOps": [],
       "exchangeOps": [],
-      "partyOps": [],
+      "partyOps": [
+        {
+          "op": "join",
+          "npcId": "enforcer-of-seraphine-s-will",
+          "why": "She has chosen to ride ahead to the Standing Annex with the band to understand what the sealed chamber contains before reporting back to Seraphine"
+        }
+      ],
       "generateRequest": [],
       "encounterOps": [],
       "projectOps": [],
@@ -753,14 +814,14 @@
       "unlockPrecursor": null,
       "unlockSubstrate": null,
       "timeOps": {
-        "hoursPassed": 0.5,
-        "why": "the confrontation and Orla's testimony"
+        "hoursPassed": 1,
+        "why": "evening at the waystation, the conversation and choice resolved as dusk settles"
       },
       "moveTo": null,
       "stateOps": [],
       "itemUpdates": [],
       "deriveItem": null,
-      "imagePrompt": "A woman in grey releasing her grip on a doorframe at dusk, her hand falling to her side, her entire frame redistributing around a choice being made—moorland wind carrying the weight of a broken mandate and the open threshold of understanding.",
+      "imagePrompt": "A woman in grey stands at the threshold of a moorland waystation as dusk deepens, her hand open and released from the doorframe. Her certainty is visible in the line of her spine, but it has changed shape—no longer an order she carries, but something she is choosing. Behind her, the band waits in the fading light, and the unnamed shrine stands at the waystation's heart. The road stretches outward toward distant hills.",
       "imageMedium": null,
       "newAbility": null,
       "gambitOps": null,
@@ -773,15 +834,15 @@
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Whistling Woman Post on the spinward moorland, late evening in mid-autumn. The waystation's open doors frame the golden grass fading toward dusk. The shrine stands unnamed at the post's heart. The relay station's clean architecture holds the last light. Vail Langley stands at the threshold, her hand released from the doorframe, her entire stance redistributed around a choice being made.",
+      "setting": "Whistling Woman Post on the spinward moorland, evening in mid-autumn. The waystation's open doors frame the golden grass deepening toward dusk. The shrine stands unnamed at the post's heart. The relay station's clean architecture holds the last light. The road stretches outward toward the Standing Annex.",
       "npcsPresent": [
         {
           "name": "Vail Langley",
-          "state": "Standing at the waystation threshold, facing a choice between returning to Seraphine with correction or riding ahead to "
+          "state": "Standing at the waystation threshold, her hand released from the doorframe, her entire stance reorganized around a choic"
         },
         {
           "name": "Orla Yardley",
-          "state": "Standing forward, having named their own broken certainty as a mirror for Vail's breaking mandate"
+          "state": "Standing forward, having named their own broken certainty as a mirror for Vail's breaking mandate, present and waiting f"
         },
         {
           "name": "Sable",
@@ -804,21 +865,22 @@
         "The waystation's open doors",
         "The shrine with no name",
         "The relay station architecture, weathered and kept",
-        "Gold moorland stretching in all directions, fading toward dusk"
+        "Gold moorland stretching outward, fading toward dusk",
+        "The road to the Standing Annex"
       ],
       "threads": [
-        "Will Vail ride ahead to the Standing Annex with the band, or return to Seraphine with the correction?",
-        "What will Seraphine do when she learns the sealed chamber's true location is beneath the Crossing, not Millbrook?",
-        "Can the band reach the Standing Annex with Vail riding at their side—or has her presence changed what waits for them there?"
+        "What will Halvex, Vessin, and the others have learned at the Standing Annex?",
+        "How will Seraphine respond when Vail returns with the correction—or when she does not return immediately?",
+        "Can the band and Vail reach the Annex safely now that her mandate is broken?"
       ]
     },
-    "beats": 9,
+    "beats": 10,
     "subPlace": null
   },
   "clock": {
     "schemaVersion": 1,
     "day": 8,
-    "hour": 18,
+    "hour": 19,
     "realAnchor": null
   },
   "companions": [
@@ -838,14 +900,14 @@
       "locationEntityId": "the-unlit-deep",
       "status": "active",
       "progress": [
-        "The band departs Millbrook at dawn with supplies, honoring the earth's resistance to shortcuts. The long road northward to Whistling Woman Post and the Standing Annex is underway.",
         "The band reaches Whistling Woman Post—but the High Luminary's reach extends further than expected. The sealed chamber is known in Radiant halls.",
         "The High Luminary's reach extends into the valley—she knows of the sealed chamber and has sent an agent to intercept the band. The question of what Seraphine will do with that knowledge is now immediate.",
         "Vail Langley, agent of the High Luminary, has named herself and made Seraphine's position explicit: the sealed chamber is known in Radiant halls, and she will negotiate or seize. The choice of how to answer will determine whether the band reaches the Standing Annex unimpeded or faces direct opposition.",
         "Loki has corrected Seraphine's fundamental assumption about the sealed chamber's location—it lies beneath the Crossing, not Millbrook. Vail Langley's absolute certainty is now reorganizing around a fact that unmakes her mandate to seize control at the wrong site. The balance of power has shifted.",
         "Loki has corrected the High Luminary's fundamental misreading of the sealed chamber's location. Vail Langley's mandate to seize control at Millbrook is now built on false ground. The enforcer's certainty is reorganizing.",
         "Orla speaks directly to Vail's breaking mandate—offering the language of someone who has lived through exactly this reshuffling of conviction. The Enforcer's absolute certainty is being offered a doorway out.",
-        "Vail Langley, Seraphine's direct agent, has heard the sealed chamber's true location and watched her mandate collapse. She stands at the threshold between returning to broken certainty and riding ahead to understand what the broken ground actually holds."
+        "Vail Langley, Seraphine's direct agent, has heard the sealed chamber's true location and watched her mandate collapse. She stands at the threshold between returning to broken certainty and riding ahead to understand what the broken ground actually holds.",
+        "Vail Langley, Seraphine's direct agent, has been corrected about the sealed chamber's true location and has chosen to ride ahead to the Standing Annex to understand what it actually contains before reporting back. Her absolute mandate has reorganized into a choice."
       ],
       "aliases": [],
       "startedAt": "2026-07-24T21:30:43.637Z"
@@ -1790,10 +1852,8 @@
     },
     "radiant-agent-seraphine-s-hand": {
       "id": "radiant-agent-seraphine-s-hand",
-      "name": "Enforcer of Seraphine's will",
-      "nameUnknown": true,
-      "trueName": "Vail Langley",
-      "role": "Direct agent of the High Luminary, Seraphine",
+      "name": "Vail Langley",
+      "role": "Agent of the High Luminary",
       "title": "Agent of the High Luminary",
       "fullName": "Vail Isaac Langley",
       "description": "A woman in grey, utterly still, with the bearing of someone who has never needed to raise her voice to be obeyed. Her certainty is absolute.",
@@ -1801,23 +1861,25 @@
         "locationId": "gen-the-made-gate",
         "day": 8
       },
-      "relationship": 2,
+      "relationship": 4,
       "history": [
         "[d8] She knows about the sealed chamber beneath Millbrook and has been sent to intercept Loki before the band reaches the Standing Annex. She knows Loki's name. She knows what lies under the Null Stone.",
         "[d8] Named herself directly when asked—spoke without hedging the way someone speaks who has spent years learning to speak truth rather than deflect. Offered negotiation before force on Seraphine's direct instruction. She believes the band will yield.",
         "[d8] Her absolute certainty has begun to reorganize. The mandate to seize control at Millbrook is now built on false ground—Seraphine believed the sealed chamber was beneath the town, but it lies beneath the Hub crossing instead. Vail's stillness has become active, calculating, refocusing. She is a…",
         "[d8] Orla spoke directly to her breaking mandate—naming what Vail is living through with the precision of someone who has lived it themselves. The Enforcer is being offered a doorway out of an order that no longer fits.",
-        "[d8] Listened to Orla Yardley name their own broken certainty and felt the precision of it land—the Enforcer is now choosing understanding over absolute order"
+        "[d8] Listened to Orla Yardley name their own broken certainty and felt the precision of it land—the Enforcer is now choosing understanding over absolute order",
+        "[d8] Their name is revealed: Vail Langley (was known as \"Enforcer of Seraphine's will\")",
+        "[d8] Her absolute mandate collapsed when corrected about the sealed chamber's true location beneath the Crossing, not Millbrook. She has chosen to ride ahead to the Standing Annex to understand what lies there before reporting back to Seraphine. Her certainty has reorganized—no longer an order she…"
       ],
       "knownFacts": [
-        "She knows who Loki is and what lies beneath Millbrook",
-        "She knows what the engineer buried and what Seraphine needs to know",
-        "The sealed chamber is beneath the Hub crossing, not Millbrook",
         "Seraphine's mandate was built on a misreading of the site itself",
         "The sealed chamber is beneath the Hub crossing, not Millbrook—the ground Seraphine's mandate was built on is false",
         "The sealed chamber is beneath the Hub crossing at the Null Stone, not beneath Millbrook",
         "A broken mandate built on false ground can be rebuilt, or abandoned entirely",
-        "Understanding can be brought to Seraphine in place of mere correction"
+        "Understanding can be brought to Seraphine in place of mere correction",
+        "Seraphine's mandate was built on false ground",
+        "Understanding can reshape order without breaking it",
+        "Her own honesty matters more than absolute obedience"
       ],
       "skillsObserved": [
         "Moves with economy and control",
@@ -1832,7 +1894,7 @@
       "gender": "woman",
       "pronouns": "she/her",
       "age": 34,
-      "statusNote": "Standing at Whistling Woman Post, her mandate broken by correction, facing a choice between returning to Seraphine or riding ahead to understand",
+      "statusNote": "Riding ahead with the band toward the Standing Annex, choosing understanding over absolute order",
       "domains": {
         "primary": "mason"
       },
@@ -1841,8 +1903,30 @@
         "locationId": "gen-the-made-gate",
         "day": 8
       },
-      "met": 5,
-      "roleSince": 88
+      "met": 6,
+      "roleSince": 88,
+      "aliases": [
+        "Enforcer of Seraphine's will"
+      ],
+      "nameRevealed": true
+    },
+    "enforcer-of-seraphine-s-will": {
+      "id": "enforcer-of-seraphine-s-will",
+      "name": "Enforcer Of Seraphine S Will",
+      "role": "She has chosen to ride ahead to the Standing Annex with the band to understand w",
+      "relationship": 0,
+      "status": "active",
+      "met": 1,
+      "firstMet": {
+        "day": 88
+      },
+      "history": [],
+      "knownFacts": [],
+      "skillsObserved": [],
+      "_mintedByJoin": {
+        "day": 88,
+        "why": "a join named somebody the registry did not hold"
+      }
     }
   },
   "placeMemory": {
@@ -2361,7 +2445,7 @@
     "lastSharedReadAt": "2026-09-26T15:18:31.285Z",
     "lastTickWorldDay": 88,
     "lastCanonWorldDay": 88,
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 2,
     "recentOffers": [
       {
         "thing": "A Radiant woman in grey, standing at the waystation threshold with absolute certainty",
@@ -13229,14 +13313,16 @@
         "kind": "person",
         "facts": [
           "[d8] Seraphine's direct agent. Titled Enforcer of the High Luminary's will — not a written rank, but the term for those who make certain things happen without committee or debate. Stationed at Whistling Woman Post to intercept Loki before the band reaches the Standing Annex. Offered negotiation first…",
-          "[d8] Seraphine's direct agent sent to seize control of the sealed chamber at Millbrook. When corrected about the chamber's true location beneath the Hub crossing, Vail's absolute mandate collapsed and reorganized—she is now choosing between returning to Seraphine with correction, or riding ahead to the…"
+          "[d8] Seraphine's direct agent sent to seize control of the sealed chamber at Millbrook. When corrected about the chamber's true location beneath the Hub crossing, Vail's absolute mandate collapsed and reorganized—she is now choosing between returning to Seraphine with correction, or riding ahead to the…",
+          "[d8] Seraphine's direct agent sent to seize control of the sealed chamber. When corrected about the chamber's true location beneath the Crossing rather than Millbrook, Vail's absolute mandate collapsed and reorganized. She has chosen to ride ahead to the Standing Annex with Loki's band to understand…"
         ],
         "links": [
           "seraphine-high-luminary",
           "whistling-woman-post",
           "the-taken-from-the-city",
           "the-regulator-question",
-          "orla-yardley"
+          "orla-yardley",
+          "the-sealed-chamber"
         ],
         "aliases": [],
         "createdDay": 8,
@@ -13626,19 +13712,19 @@
     "deferredMysteries": []
   },
   "tendencies": {
-    "devotion": 0.47890779424002955,
-    "cerebral": 14.33177508361302,
-    "social": 16.832253317679495,
-    "strategic": 10.825288078902172,
-    "cautious": 4.860083025531778,
-    "amorous": 4.519077538131201,
-    "generous": 4.6757728506241385,
-    "ruthless": 1.0468133412398333,
-    "risky": 0.09803179251601057,
-    "patient": 0.026770719579144144,
-    "deception": 0.031162504246973623,
-    "carousing": 0.6669201684248254,
-    "leadership": 1.368041371127847
+    "devotion": 0.4669350993840288,
+    "cerebral": 14.973480706522695,
+    "social": 16.411446984737506,
+    "strategic": 10.554655876929617,
+    "cautious": 4.738580949893484,
+    "amorous": 4.406100599677921,
+    "generous": 4.558878529358535,
+    "ruthless": 1.0206430077088373,
+    "risky": 0.09558099770311031,
+    "patient": 0.02610145158966554,
+    "deception": 0.030383441640799282,
+    "carousing": 0.6502471642142047,
+    "leadership": 1.3338403368496508
   },
   "aptitudes": [
     "strategist",
@@ -13647,7 +13733,7 @@
     "orator",
     "faithful"
   ],
-  "actionCount": 221,
+  "actionCount": 222,
   "grantsVersion": 1,
   "precursorAccess": [
     "address_sense"
@@ -13664,7 +13750,7 @@
     "horizon": 1,
     "verist": -1,
     "churnfolk": 1,
-    "radiant_folk": 1
+    "radiant_folk": 0
   },
   "standingLedger": [
     {
@@ -13728,6 +13814,13 @@
       "people": "radiant_folk",
       "delta": 1,
       "text": "offered a path through broken certainty that preserves both truth and order"
+    },
+    {
+      "at": 88,
+      "kind": "act",
+      "people": "radiant_folk",
+      "delta": -1,
+      "text": "corrected Seraphine's fundamental assumption about the sealed chamber's location, reshaping her mandate"
     }
   ],
   "nativeGrantsVersion": 2,
@@ -14801,8 +14894,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790437619605,
-  "rev": 1015,
+  "updatedAt": 1790437744766,
+  "rev": 1017,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -15900,7 +15993,7 @@
     "umbral_depths": 54,
     "the_quickwood": 101,
     "the_center": 50,
-    "valley": 45,
+    "valley": 46,
     "the_open_reach": 3
   },
   "opLossPending": false,
@@ -16060,10 +16153,10 @@
     {
       "id": "sess-20",
       "startedAt": "2026-09-26T13:32:28.973Z",
-      "lastAt": "2026-09-26T15:46:49.219Z",
+      "lastAt": "2026-09-26T15:49:04.726Z",
       "startDay": 88,
       "endDay": 88,
-      "beats": 10
+      "beats": 11
     }
   ],
   "establishedFacts": [
@@ -16228,6 +16321,12 @@
       "text": "The High Luminary, Seraphine, knows about the sealed chamber beneath Millbrook and has sent an agent to intercept the band before they reach the Standing Annex. She demands to know Loki's intention before the band can proceed. She believes only unified order can meet what wakes beneath the valley.",
       "day": 8,
       "subjectId": null
+    },
+    {
+      "id": "enforcer-of-seraphine-s-will",
+      "text": "Vail Langley, Seraphine's direct agent, has had her absolute mandate reshuffled by correction—the sealed chamber lies beneath the Crossing, not Millbrook. She has chosen to ride ahead to the Standing Annex with the band to understand what lies there before reporting back to the High Luminary.",
+      "day": 8,
+      "subjectId": "enforcer-of-seraphine-s-will"
     }
   ],
   "_opLedger": {
@@ -16249,40 +16348,40 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 255,
-    "choices": 255,
-    "characterDeltas": 139,
-    "scene": 255,
+    "sceneSummary": 256,
+    "choices": 256,
+    "characterDeltas": 140,
+    "scene": 256,
     "placeUpdates": 33,
-    "codexUpdates": 150,
-    "timeOps": 204,
+    "codexUpdates": 151,
+    "timeOps": 205,
     "offer": 53,
     "generateRequest": 7,
-    "sceneEnded": 124,
-    "npcUpdates": 205,
+    "sceneEnded": 125,
+    "npcUpdates": 206,
     "moveTo": 12,
-    "gambitApt": 82,
-    "deeds": 16,
-    "questUpdates": 57,
-    "standingOps": 5,
-    "factUpdates": 22,
+    "gambitApt": 83,
+    "deeds": 17,
+    "questUpdates": 58,
+    "standingOps": 6,
+    "factUpdates": 23,
     "stageOps": 7,
     "encounterOps": 9,
-    "ledgerEvents": 15,
+    "ledgerEvents": 16,
     "newEncounter": 3,
-    "imagePrompt": 47,
+    "imagePrompt": 48,
     "scene_ended": 1,
     "stateOps": 3,
     "_engineClosedScene": 4,
     "discovery": 5,
-    "intentsHeard": 9,
+    "intentsHeard": 10,
     "delegateOps": 1,
     "scene_summary": 1,
-    "partyOps": 4,
+    "partyOps": 5,
     "bandOps": 1,
     "exchangeOps": 2
   },
-  "_opTurns": 255,
+  "_opTurns": 256,
   "customAbilities": {
     "mirror-bright": {
       "id": "mirror-bright",
@@ -16955,16 +17054,6 @@
         "day": 5
       },
       {
-        "text": "Named a band and spoke the oath that binds it—the Churn-Revellers took their name in a cellar lamp-light and chose understanding over breaking.",
-        "weight": 1,
-        "day": 5
-      },
-      {
-        "text": "Named the truth of two travelers' purpose on the open road without forcing or shaming—drew honest answers through asking plainly.",
-        "weight": 1,
-        "day": 7
-      },
-      {
         "text": "stood in direct confrontation with an agent of the High Luminary and answered plainly when pressed, refusing to deflect or break",
         "weight": 1,
         "day": 8
@@ -16972,6 +17061,16 @@
       {
         "text": "Named the sealed chamber's true location when an enforcer of absolute order was built on false ground—and offered understanding as a path through the breaking that came after",
         "weight": 2,
+        "day": 8
+      },
+      {
+        "text": "Stood in direct confrontation with Seraphine's agent and corrected her absolute mandate by naming the sealed chamber's true location—reshaping the foundation of her order without breaking it.",
+        "weight": 2,
+        "day": 8
+      },
+      {
+        "text": "Used the broken certainty of another to offer a doorway—Orla's shattered belief became a mirror through which Vail could recognize her own rebuilding.",
+        "weight": 1,
         "day": 8
       }
     ]
@@ -17264,9 +17363,9 @@
     "woo": 1,
     "rapport": 16,
     "retreat": 1,
-    "ask": 8,
+    "ask": 9,
     "help": 11,
-    "study": 12,
+    "study": 13,
     "investigate": 17,
     "charm": 2,
     "comfort": 2,
@@ -17432,6 +17531,14 @@
       "day": 8,
       "worldDay": 88,
       "actionCount": 220
+    },
+    {
+      "companionId": "coil",
+      "kind": "deed",
+      "delta": 0.5,
+      "day": 8,
+      "worldDay": 88,
+      "actionCount": 221
     }
   ],
   "_exchangeReceipts": [],
@@ -18189,7 +18296,7 @@
     }
   },
   "_opUnknown": {
-    "sceneSummary": 83,
+    "sceneSummary": 84,
     "scene_summary": 1
   },
   "_bandNotes": null,
@@ -18556,7 +18663,47 @@
       "discovered": true
     }
   ],
-  "_pendingLedger": [],
+  "_pendingLedger": [
+    {
+      "schemaVersion": 1,
+      "at": "2026-09-26T15:49:04.765Z",
+      "worldDay": 88,
+      "who": "char-mrum8y4d",
+      "playerKey": "player-s9z9u1",
+      "where": "gen-the-made-gate",
+      "what": "Seraphine's mandate to seize the sealed chamber at Millbrook has been fundamentally undermined—the High Luminary was working from false ground, and her direct agent has chosen understanding over…",
+      "tags": [
+        "political shift",
+        "mandate broken",
+        "authority questioned"
+      ],
+      "spectrumDeltas": {
+        "chaos_order": -0.15
+      },
+      "visibility": "witnessed",
+      "impactsLocal": true,
+      "people": [
+        {
+          "id": "taken-person",
+          "name": "Sable",
+          "role": "The person who came willingly from the city to the Unlit Deep",
+          "why": "present"
+        },
+        {
+          "id": "orla-yardley",
+          "name": "Orla Yardley",
+          "role": "A Syllogist who came carrying a breaking mandate and chose to question it instea",
+          "why": "present"
+        },
+        {
+          "id": "radiant-agent-seraphine-s-hand",
+          "name": "Vail Langley",
+          "role": "Agent of the High Luminary",
+          "why": "present"
+        }
+      ]
+    }
+  ],
   "_gmRefusals": [
     {
       "at": "2026-09-15T00:29:28.269Z",
@@ -18635,7 +18782,16 @@
     "place:the_kindly_rest": true
   },
   "aurasOff": {},
-  "pendingCompanyOffers": [],
+  "pendingCompanyOffers": [
+    {
+      "npcId": "enforcer-of-seraphine-s-will",
+      "name": "Enforcer Of Seraphine S Will",
+      "roles": [
+        "ally"
+      ],
+      "why": "She has chosen to ride ahead to the Standing Annex with the band to understand what the sealed chamber contains before reporting back to Seraphine"
+    }
+  ],
   "powerState": {
     "power_gralloch_crown": {
       "known": {

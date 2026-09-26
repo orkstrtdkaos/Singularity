@@ -157,84 +157,90 @@
         "player": "Let him go for tonight — find a place to sleep inside the Crossing and pick this up in the morning with a fresh eye",
         "summary": "Brynjar let the heavy-wool man go into the dark and took a room in the waygate wardroom, sleeping the night with Freki against his legs.",
         "narration": "You let the dark have him. A tail through an unfamiliar waygate in full night, against a man who already knows his route — that is not a tail, that is a gift. You pull Freki back from the spinward threshold with a low word and she comes, though she holds at the arch a beat longer than you, nose lifted, logging the last thread of his scent before she turns.\n\nThe Hub Hall settles around you. The three travelers at the chalk column have found their marks and drifted through their respective arches, and the space is quieter now — just the four lanterns and the sound of wind finding the threshold gaps. The stone underfoot is worn to a smooth basin at the center from decades of the same feet turning the same way. You read the arches and pick the one that looks most like it leads to something with a roof and a fire.\n\nA waygate wardroom opens off the hall's northeast face — a narrow door, hardly marked, but the kind of door that has always been there. The warden inside is a spare man in his fifties with a tally-stick and no interest in your business beyond the usual questions: where from, where bound, any animals. You say the road south, you say hubward come morning, you say yes, one dog. He marks his stick and points at a low-ceilinged dormer up a short stair — straw pallets, two other travelers already asleep, and a clay lamp burning low on a shelf. Freki circles once and drops against your legs the moment you sit, and that is enough warmth.\n\nYou sleep. Whatever the heavy-wool man is carrying hubward, it will still be moving come morning — and you will be rested when you think about what it means that he read the ironwork before he read the faces."
+      },
+      {
+        "player": "I’ll look around for Ragnar Solmyr",
+        "summary": "Brynjar scanned the Hub Hall at dawn — no sign of Ragnar, who is still two days' walk south.",
+        "narration": "The wardroom is grey with early light, the clay lamp on the shelf burned to its last thread of oil. The two other travelers are still breathing slow and flat on their pallets. Freki is already on her feet, watching the narrow door with the patience of something that slept with one ear open all night.\n\nYou pull on your boots and take the stairs down into the Hub Hall. The octagonal space is quiet at this hour — only one traveler at the chalk column, marking his road, and the warden at his desk with his tally-stick and a mug going cold. The eight threshold arches stand open to the morning air, and the light coming through the hubward arch is the flat grey of a dawn that hasn't fully committed yet.\n\nYou do a complete pass of the hall and both sides of the waygate arch — the outside approach, the stone benches along the gatehouse wall, the shadow of the lean-to where the lime-traders left their cart yesterday. No Ragnar. He walked south with Maret when you parted ways at the fire-pit, and south is the Stillhold road. The waygate is a day-and-a-half hubward from where that fire burned, which means he is not here, and would not be here yet even if he'd started walking the moment you did.\n\nFreki leans against your calf once, reads the absence the same way you do, and turns back toward the wardroom stairs. The morning is yours for now — and the heavy-wool man from last night is still the only thread worth pulling."
       }
     ],
     "lastTurn": {
-      "narration": "You let the dark have him. A tail through an unfamiliar waygate in full night, against a man who already knows his route — that is not a tail, that is a gift. You pull Freki back from the spinward threshold with a low word and she comes, though she holds at the arch a beat longer than you, nose lifted, logging the last thread of his scent before she turns.\n\nThe Hub Hall settles around you. The three travelers at the chalk column have found their marks and drifted through their respective arches, and the space is quieter now — just the four lanterns and the sound of wind finding the threshold gaps. The stone underfoot is worn to a smooth basin at the center from decades of the same feet turning the same way. You read the arches and pick the one that looks most like it leads to something with a roof and a fire.\n\nA waygate wardroom opens off the hall's northeast face — a narrow door, hardly marked, but the kind of door that has always been there. The warden inside is a spare man in his fifties with a tally-stick and no interest in your business beyond the usual questions: where from, where bound, any animals. You say the road south, you say hubward come morning, you say yes, one dog. He marks his stick and points at a low-ceilinged dormer up a short stair — straw pallets, two other travelers already asleep, and a clay lamp burning low on a shelf. Freki circles once and drops against your legs the moment you sit, and that is enough warmth.\n\nYou sleep. Whatever the heavy-wool man is carrying hubward, it will still be moving come morning — and you will be rested when you think about what it means that he read the ironwork before he read the faces.",
-      "sceneSummary": "Brynjar let the heavy-wool man go into the dark and took a room in the waygate wardroom, sleeping the night with Freki against his legs.",
+      "narration": "The wardroom is grey with early light, the clay lamp on the shelf burned to its last thread of oil. The two other travelers are still breathing slow and flat on their pallets. Freki is already on her feet, watching the narrow door with the patience of something that slept with one ear open all night.\n\nYou pull on your boots and take the stairs down into the Hub Hall. The octagonal space is quiet at this hour — only one traveler at the chalk column, marking his road, and the warden at his desk with his tally-stick and a mug going cold. The eight threshold arches stand open to the morning air, and the light coming through the hubward arch is the flat grey of a dawn that hasn't fully committed yet.\n\nYou do a complete pass of the hall and both sides of the waygate arch — the outside approach, the stone benches along the gatehouse wall, the shadow of the lean-to where the lime-traders left their cart yesterday. No Ragnar. He walked south with Maret when you parted ways at the fire-pit, and south is the Stillhold road. The waygate is a day-and-a-half hubward from where that fire burned, which means he is not here, and would not be here yet even if he'd started walking the moment you did.\n\nFreki leans against your calf once, reads the absence the same way you do, and turns back toward the wardroom stairs. The morning is yours for now — and the heavy-wool man from last night is still the only thread worth pulling.",
+      "sceneSummary": "Brynjar scanned the Hub Hall at dawn — no sign of Ragnar, who is still two days' walk south.",
       "choices": [
         {
-          "label": "Check the chalk-board column before anyone else is up — see what routes were marked last night and when",
-          "attribute": "mental",
-          "subAttribute": "reason",
+          "label": "Ask the warden if anyone matching the heavy-wool man has been through before — the tally-stick goes back further than last night",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "falsehood_truth": 0.3
+          },
           "difficulty": "easy",
+          "opposedDifficulty": null,
           "intentTags": [
-            "scout",
+            "ask",
             "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use Order-Sense on the waygate arch itself — the heavy-wool man read the ironwork for a reason; see what the structure actually says",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "concrete_abstract": 0.2,
+            "chaos_order": 0.3
+          },
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study",
+            "careful"
           ],
           "abilityId": "order_sense",
           "energyCost": 3,
-          "trivial": false
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Ask the wardroom warden about the heavy-wool man — describe the build, the gait, the way he read the arch",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": "easy",
-          "intentTags": [
-            "negotiate",
-            "scout"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Give Freki her head at the spinward threshold — she has his scent; let her tell you which way he turned when he left the road",
+          "label": "Eat something from the pack, water Freki, and settle in to watch the morning traffic — see who the first hubward travelers of the day are",
           "attribute": "practical",
           "subAttribute": "wits",
-          "difficulty": "normal",
+          "axes": {},
+          "difficulty": "very easy",
+          "opposedDifficulty": null,
           "intentTags": [
             "scout",
             "careful"
           ],
-          "trivial": false
-        },
-        {
-          "label": "Go hubward yourself — the man moved with purpose, and the Crossing's hub is where purpose tends to land",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "difficulty": "easy",
-          "intentTags": [
-            "travel",
-            "scout"
-          ],
-          "trivial": false
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
-      "characterDeltas": {
-        "health": 3,
-        "energy": 40,
-        "xp": 0
-      },
-      "timeOps": {
-        "hoursPassed": 8,
-        "why": "slept the night in the waygate wardroom"
-      },
       "scene": {
-        "setting": "Inside the waygate wardroom, Hub Hall of the Crossing — a low-ceilinged dormer above the warden's desk, straw pallets, clay lamp burned nearly out, early morning grey through a slit window. Two other travelers still asleep.",
+        "setting": "Hub Hall of the Crossing waygate — octagonal stone chamber, four iron lanterns dimming as morning light comes through the hubward arch, the chalk-board column at the center, eight threshold arches open to early grey dawn.",
         "npcsPresent": [
           {
-            "name": "Waygate warden",
-            "state": "downstairs at his desk with his tally-stick, audible but not visible"
+            "name": "Waygate Warden",
+            "state": "at his desk below the wardroom stairs, tally-stick in hand, mug going cold beside him"
           },
           {
             "name": "Freki",
-            "state": "against Brynjar's legs, awake, watching the door"
+            "state": "at Brynjar's calf, watching the hubward arch"
           }
         ],
         "objects": [
-          "straw pallets",
-          "clay lamp on a shelf — nearly out",
-          "tally-stick sounds from below",
+          "chalk-board column",
+          "tally-stick ledger at the warden's desk",
+          "iron lanterns burning low",
           "Traveler's Pack",
           "Waterskin"
         ],
@@ -242,69 +248,39 @@
           "The heavy-wool man — spinward road, gone into dark; Freki has his scent and will know him again",
           "Maret Threnwick is traveling to the Stillhold alone with the cloth bundle",
           "The restricted creditor on Maret's debt remains unnamed",
-          "The dead sheep at the northern waygate — sickness moving hubward"
+          "The dead sheep at the northern waygate — sickness moving hubward",
+          "Ragnar is still south on the Stillhold road — not here yet"
         ]
       },
       "npcUpdates": [
         {
-          "op": "meet",
-          "npcId": "waygate-warden-crossing",
-          "name": "Waygate Warden",
-          "role": "Wardroom keeper at the Crossing waygate",
-          "sex": "male",
-          "gender": "man",
-          "pronouns": "he/him",
-          "description": "Spare man in his fifties, tally-stick always in hand, no interest in your business beyond the intake questions. Has seen everything and remembered only what fills a column.",
-          "note": "Marked Brynjar in for the night — where from, where bound, one dog. Assigned the dormer.",
-          "status": "active",
-          "statusNote": "On duty at the wardroom desk below the dormer."
+          "op": "update",
+          "npcId": "waygate-warden",
+          "note": "On duty at dawn, tally-stick and cold mug. Did not speak to Brynjar this beat.",
+          "statusNote": "On duty at the wardroom desk, Hub Hall of the Crossing."
         }
       ],
-      "placeUpdates": [
-        {
-          "note": "A wardroom with straw-pallet dormer sits off the Hub Hall's northeast face — narrow door, warden on duty, travelers taken in for the night for a mark on the tally-stick.",
-          "subPlace": {
-            "name": "Waygate Wardroom",
-            "parent": "The Waygate",
-            "note": "Low-ceilinged dormer above the warden's desk — straw pallets, clay lamp, slit window. Night-stay for travelers with no permanent standing.",
-            "visited": true
-          }
-        }
-      ],
-      "offer": {
-        "thing": "The dead sheep from the northern track — a second report of the same symptoms surfaces in the wardroom: one of the sleeping travelers mutters in half-sleep about stock lost two days up the spinward road, patchy fleece, no predation",
-        "from": "the stirring arc of the Riven Marches livestock sickness, now moving hubward past this waygate"
-      },
-      "codexUpdates": [
-        {
-          "topic": "the-marchward",
-          "label": "The Marchward",
-          "kind": "place",
-          "fact": "The Crossing waygate wardroom offers overnight stays for travelers — narrow door off the Hub Hall's northeast face, tally-stick intake, straw dormer above.",
-          "links": [
-            "gen-the-waygate",
-            "brynjar-andyrsson-thread"
-          ]
-        }
-      ],
-      "sceneEnded": false
+      "timeOps": {
+        "hoursPassed": 0.5,
+        "why": "Brief scan of the Hub Hall at dawn — a few minutes' work"
+      }
     },
     "sceneState": {
-      "setting": "Inside the waygate wardroom, Hub Hall of the Crossing — a low-ceilinged dormer above the warden's desk, straw pallets, clay lamp burned nearly out, early morning grey through a slit window. Two other travelers still asleep.",
+      "setting": "Hub Hall of the Crossing waygate — octagonal stone chamber, four iron lanterns dimming as morning light comes through the hubward arch, the chalk-board column at the center, eight threshold arches open to early grey dawn.",
       "npcsPresent": [
         {
-          "name": "Waygate warden",
-          "state": "downstairs at his desk with his tally-stick, audible but not visible"
+          "name": "Waygate Warden",
+          "state": "at his desk below the wardroom stairs, tally-stick in hand, mug going cold beside him"
         },
         {
           "name": "Freki",
-          "state": "against Brynjar's legs, awake, watching the door"
+          "state": "at Brynjar's calf, watching the hubward arch"
         }
       ],
       "objects": [
-        "straw pallets",
-        "clay lamp on a shelf — nearly out",
-        "tally-stick sounds from below",
+        "chalk-board column",
+        "tally-stick ledger at the warden's desk",
+        "iron lanterns burning low",
         "Traveler's Pack",
         "Waterskin"
       ],
@@ -312,10 +288,11 @@
         "The heavy-wool man — spinward road, gone into dark; Freki has his scent and will know him again",
         "Maret Threnwick is traveling to the Stillhold alone with the cloth bundle",
         "The restricted creditor on Maret's debt remains unnamed",
-        "The dead sheep at the northern waygate — sickness moving hubward"
+        "The dead sheep at the northern waygate — sickness moving hubward",
+        "Ragnar is still south on the Stillhold road — not here yet"
       ]
     },
-    "beats": 5,
+    "beats": 6,
     "subPlace": {
       "slug": "waygate-wardroom",
       "name": "Waygate Wardroom",
@@ -646,7 +623,8 @@
       },
       "relationship": 0,
       "history": [
-        "[d2] Marked Brynjar in for the night — where from, where bound, one dog. Assigned the dormer."
+        "[d2] Marked Brynjar in for the night — where from, where bound, one dog. Assigned the dormer.",
+        "[d3] On duty at dawn, tally-stick and cold mug. Did not speak to Brynjar this beat."
       ],
       "knownFacts": [],
       "skillsObserved": [],
@@ -654,12 +632,12 @@
       "sex": "male",
       "gender": "man",
       "pronouns": "he/him",
-      "statusNote": "On duty at the wardroom desk below the dormer.",
+      "statusNote": "On duty at the wardroom desk, Hub Hall of the Crossing.",
       "lastSeen": {
         "locationId": "gen-the-waygate",
-        "day": 2
+        "day": 3
       },
-      "met": 1,
+      "met": 2,
       "domains": {
         "primary": "stillhold"
       },
@@ -834,27 +812,6 @@
     },
     "news": [
       {
-        "day": 2,
-        "worldDay": 69,
-        "text": "Something has been building in riven marches: Livestock across the Riven Marches are quietly sickening, and by spring the herds will be too thin to sustain the border steadings through another winter.",
-        "tier": "event",
-        "section": "world"
-      },
-      {
-        "day": 3,
-        "worldDay": 71,
-        "text": "Sister Alder, the Ward That Does Not Break is spoken of: the ones she did not reach in time, whose names she keeps.",
-        "tier": "murmur",
-        "section": "world"
-      },
-      {
-        "day": 3,
-        "worldDay": 71,
-        "text": "Word from The Service Ways — Halvex Coil, the Rewriter: removing an inefficiency that was a person.",
-        "tier": "murmur",
-        "section": "world"
-      },
-      {
         "day": 3,
         "worldDay": 71,
         "text": "Word from Radiant Plateau — Edge District — Overseer Grael of the Edge District: going home on time.",
@@ -984,10 +941,31 @@
         "figureId": "person-d9f15497a71b44d7",
         "locationId": "the_blaze",
         "placedBy": "figureId"
+      },
+      {
+        "day": 3,
+        "worldDay": 88,
+        "text": "The Masters of the Scour has lost people it will not get back.",
+        "tier": "event",
+        "section": "world"
+      },
+      {
+        "day": 3,
+        "worldDay": 88,
+        "text": "The Masters of the Scour has taken an interest in you — you have killed 28 of theirs.",
+        "tier": "event",
+        "section": "world"
+      },
+      {
+        "day": 3,
+        "worldDay": 88,
+        "text": "The Scouring has taken an interest in you — you have killed 16 of theirs.",
+        "tier": "event",
+        "section": "world"
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-09-26T00:37:08.592Z",
+    "lastSharedReadAt": "2026-09-26T00:51:19.979Z",
     "lastTickWorldDay": 88,
     "lastCanonWorldDay": 88,
     "lastGenCount": 2112,
@@ -1059,7 +1037,7 @@
         "lastOutcome": "problem"
       }
     },
-    "turnsSinceOffer": 0,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "Maret's eyes go briefly to Ragnar when she arrives — not suspicion, assessment — and then back to Brynjar, and she says, quietly: 'The…",
@@ -5386,6 +5364,21 @@
         },
         "addedDay": 3,
         "locationId": "gen-the-waygate"
+      },
+      {
+        "source": "threat-attack",
+        "kind": "threat-attack",
+        "subjectId": "beast_mire_gulper",
+        "aimedAtPlayer": true,
+        "urgency": 3,
+        "oneLineHook": "A a mire-gulper has come down onto the character here — not stumbled into, but ARRIVED, hunting. Defend, or drive it off.",
+        "becomes": {
+          "type": "encounter",
+          "encounterId": "beast_mire_gulper",
+          "name": "a mire-gulper"
+        },
+        "addedDay": 3,
+        "locationId": "gen-the-waygate"
       }
     ],
     "figureExposure": {
@@ -5839,8 +5832,37 @@
         "worldDay": 88,
         "text": "The game was updated to v2.8.1 — 38 new, 32 fixed, 9 changed.",
         "loggedAt": "2026-09-26T00:37:19.395Z"
+      },
+      {
+        "day": 3,
+        "worldDay": 88,
+        "text": "The Masters of the Scour has lost people it will not get back.",
+        "tier": "event",
+        "section": "world",
+        "loggedAt": "2026-09-26T00:51:23.080Z"
+      },
+      {
+        "day": 3,
+        "worldDay": 88,
+        "text": "The Masters of the Scour has taken an interest in you — you have killed 28 of theirs.",
+        "tier": "event",
+        "section": "world",
+        "loggedAt": "2026-09-26T00:51:23.080Z"
+      },
+      {
+        "day": 3,
+        "worldDay": 88,
+        "text": "The Scouring has taken an interest in you — you have killed 16 of theirs.",
+        "tier": "event",
+        "section": "world",
+        "loggedAt": "2026-09-26T00:51:23.080Z"
       }
-    ]
+    ],
+    "worldMovedOnSeen": {
+      "water_crisis": {
+        "beats": 1
+      }
+    }
   },
   "domains": {
     "primary": "marcher",
@@ -6745,20 +6767,20 @@
     ]
   },
   "tendencies": {
-    "leadership": 4.499384761167719,
-    "cerebral": 8.008336735663782,
-    "strategic": 6.143544461566882,
-    "ruthless": 0.2892185665035044,
-    "social": 10.26388914247128,
-    "cautious": 9.880272831604302,
-    "generous": 1.3408770670135786,
-    "patient": 0.5876204882136226
+    "leadership": 4.386900142138526,
+    "cerebral": 7.808128317272187,
+    "strategic": 6.98995585002771,
+    "ruthless": 0.2819881023409168,
+    "social": 10.007291913909498,
+    "cautious": 9.633266010814193,
+    "generous": 1.307355140338239,
+    "patient": 0.572929976008282
   },
   "aptitudes": [
     "silver_tongue",
     "banner"
   ],
-  "actionCount": 51,
+  "actionCount": 52,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -7846,8 +7868,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790383813106,
-  "rev": 251,
+  "updatedAt": 1790383896806,
+  "rev": 254,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -8312,7 +8334,7 @@
   "_pinsInitialized": true,
   "regionsKnown": {
     "riven_marches": 39,
-    "the_center": 18
+    "the_center": 17
   },
   "practice": {
     "schemaVersion": 1,
@@ -8406,6 +8428,14 @@
       "startDay": 69,
       "endDay": 69,
       "beats": 8
+    },
+    {
+      "id": "sess-6",
+      "startedAt": "2026-09-26T00:51:36.792Z",
+      "lastAt": "2026-09-26T00:51:36.792Z",
+      "startDay": 88,
+      "endDay": 88,
+      "beats": 1
     }
   ],
   "_pendingArrival": null,
@@ -8421,14 +8451,14 @@
     "at": "2026-07-23T01:18:04.353Z"
   },
   "_opEmitted": {
-    "sceneSummary": 48,
-    "choices": 48,
-    "scene": 48,
-    "npcUpdates": 44,
+    "sceneSummary": 49,
+    "choices": 49,
+    "scene": 49,
+    "npcUpdates": 45,
     "placeUpdates": 8,
     "generateRequest": 4,
     "moveTo": 6,
-    "timeOps": 44,
+    "timeOps": 45,
     "codexUpdates": 40,
     "sceneEnded": 14,
     "characterDeltas": 17,
@@ -8439,7 +8469,7 @@
     "stageOps": 2,
     "factUpdates": 2
   },
-  "_opTurns": 48,
+  "_opTurns": 49,
   "_opLedger": {
     "offer": {
       "applied": 8,
@@ -8549,7 +8579,7 @@
     "travel": 6,
     "ask": 1,
     "lead": 1,
-    "scout": 3,
+    "scout": 4,
     "prepare": 1
   },
   "aptitudeEarnCount": {
@@ -8700,7 +8730,7 @@
       },
       "lastVerb": "expand",
       "lastVerbDay": 3,
-      "wins": 1
+      "wins": 2
     },
     "power_undercount": {
       "known": {
@@ -8773,7 +8803,7 @@
       },
       "lastVerb": "expand",
       "lastVerbDay": 3,
-      "wins": 1
+      "wins": 2
     },
     "power_pressureholt_schedule": {
       "known": {
@@ -8798,7 +8828,15 @@
       },
       "lastVerb": "tax",
       "lastVerbDay": 3,
-      "losses": 1
+      "losses": 0,
+      "lost": {
+        "0": 28
+      },
+      "noticed": {
+        "trigger": "crossed",
+        "why": "you have killed 28 of theirs",
+        "day": 3
+      }
     },
     "power_grand_lattice": {
       "known": {
@@ -8823,7 +8861,7 @@
       },
       "lastVerb": "expand",
       "lastVerbDay": 3,
-      "wins": 1
+      "wins": 2
     },
     "power_deepwood_moot": {
       "known": {
@@ -8844,7 +8882,7 @@
     "power_keelmouth_slip": {
       "lastVerb": "recruit",
       "lastVerbDay": 3,
-      "wins": 1
+      "wins": 2
     },
     "power_firstsight_barony": {
       "lastVerb": "levy",
@@ -8865,22 +8903,34 @@
     "power_the_ceaseless": {
       "lastVerb": "recruit",
       "lastVerbDay": 3,
-      "wins": 1
+      "wins": 2
     },
     "power_long_choir": {
       "lastVerb": "recruit",
       "lastVerbDay": 3,
-      "wins": 1
+      "wins": 2
     },
     "power_harvest_hand": {
       "lastVerb": "expand",
       "lastVerbDay": 3,
-      "wins": 1
+      "wins": 2
     },
     "power_the_scouring": {
       "lastVerb": "feud",
       "lastVerbDay": 3,
-      "losses": 1
+      "losses": 0,
+      "lost": {
+        "0": 16
+      },
+      "noticed": {
+        "trigger": "crossed",
+        "why": "you have killed 16 of theirs",
+        "day": 3
+      },
+      "known": {
+        "how": "noticed",
+        "day": 3
+      }
     },
     "power_harborward": {
       "lastVerb": "patrol",
@@ -8925,5 +8975,10 @@
   },
   "pinnedLooks": {
     "craft:steady_hands": true
-  }
+  },
+  "_opUnknown": {
+    "sceneSummary": 1
+  },
+  "_bandNotes": null,
+  "_opCountingSince": "2026-09-26T00:51:36.811Z"
 }

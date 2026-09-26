@@ -301,6 +301,16 @@
         "type": "string"
       },
       "description": "Who the player has chosen to bring FORWARD in a fight — the named places closeness buys (CCODE-511). Read by `lineSplit`; absent means the engine chooses, and everyone else stands in the line as they are able."
+    },
+    "gearTaken": {
+      "type": "object",
+      "description": "what has already been taken from whose gear — person id → the gear lines that left them (SNG-660 §2b.2). ⛔ IT LIVES ON THE CHARACTER BECAUSE THE PERSON MAY NOT BE SAVED: a registry npc's `gear` persists, an AUTHORED one's roster record reloads fresh, so without this the same crown could be handed over again tomorrow.",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
     }
   }
 }

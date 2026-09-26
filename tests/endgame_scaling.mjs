@@ -20,6 +20,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { battleRound, synthesizeOpponentSheet } from "../engine/skill_battle.js";
+import { BEAST_TIER } from "../engine/random_encounters.js";   // ⛔ SNG-660: the one table, not a copy of it
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const rj = rel => JSON.parse(readFileSync(join(root, rel), "utf8"));
@@ -38,11 +39,17 @@ const pad = (v, n) => String(v).padStart(n);
 // needed too." Right on both counts. These are the REAL 26 creatures a player can meet, converted to a threat
 // by the SAME table the encounter pool uses (random_encounters BEAST_TIER), so this measures the fights that
 // actually happen rather than a synthetic ladder — and it immediately surfaced the finding below.
-const BEAST_TIER = { riffraff: 22, notable: 38, leader: 55, epic: 78 };
+// ⛔ THE REAL TABLE, IMPORTED (SNG-660). This file said its creatures were converted "by the SAME table the
+// encounter pool uses" and then wrote `{ riffraff: 22, notable: 38, leader: 55, epic: 78 }` by hand — true the
+// day it was typed, and false the moment the table moved. ⚠️ A comment asserting agreement that nothing
+// enforces is how a harness goes on measuring the old world and reporting it as the new one.
 const ROSTER = (rj("content/packs/valley/bestiary.json").roster || [])
-  .map(c => ({ id: c.id, name: c.name, tier: c.tier, threat: BEAST_TIER[c.tier] ?? 38,
-               authoredThreat: c.threat ?? null, authoredHealth: c.health ?? null, authoredSoak: c.soak ?? null }));
-const BANDS = ["riffraff", "notable", "leader", "epic"].map(t => [t, BEAST_TIER[t]]);
+  .map(c => ({ id: c.id, name: c.name, tier: c.tier, threat: BEAST_TIER[c.tier]?.threat ?? null,
+               authoredThreat: c.threat ?? null, authoredHealth: c.health ?? null, authoredSoak: c.soak ?? null }))
+  // ⚠️ AND `?? 38` GOES WITH IT: a tier the table does not know is not a notable, it is a creature nobody
+  // can fight, and it is reported rather than quietly measured as something else.
+  .filter(c => { if (c.threat == null) console.warn(`[endgame] "${c.id}" is tiered "${c.tier}", which is not a rung — left out`); return c.threat != null; });
+const BANDS = Object.keys(BEAST_TIER).filter(k => BEAST_TIER[k].random !== false).map(t => [t, BEAST_TIER[t].threat]);
 const ROUND_CAP = 60;   // past this a fight is not a fight; it is a war of attrition nobody would sit through
 
 const rngFor = k => { let s = k * 7919 + 13; return () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; }; };

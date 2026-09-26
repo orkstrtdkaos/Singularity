@@ -28842,6 +28842,180 @@ console.log("\n── §364 · the saves a gate reads hold still ──");
     "freezing the working tree freezes the drift — the first run did exactly that and the gates stayed red");
 }
 
+/* ══════════ §365 · SNG-660 §1 — THE WILD REACHES THE TOP RUNGS ══════════ */
+// ✅ ERIK, answering the open question: "1. Yes." — wild creatures should reach legendary and mythic.
+//
+// ⛔ THE TABLE NAMED A RUNG AND FOUGHT AT ANOTHER ONE (CCODE-522's measurement): `riffraff` fought at level 11,
+// which the ladder calls a NOTABLE; `notable` at 19, a LEADER; `epic` at 39, a HEROIC. Three of four rungs
+// disagreed, `leader` was an alias of `heroic` while the ladder puts it a band below, and `legendary` and
+// `mythic` had no row — so the hardest wild creature in the world was a level-39 heroic.
+console.log("\n── §365 · every rung has a creature, and each fights at its own ──");
+{
+  const RE365 = await import("../engine/random_encounters.js");
+  const LG365 = await import("../engine/legends.js");
+  const rungOf = (lvl) => (LG365.DEFAULT_RUNGS.find(r => lvl >= r.levels[0] && lvl <= r.levels[1]) || {}).tier || null;
+
+  // ⛑ §1b.1 — DERIVED FROM THE LADDER, NOT WRITTEN. Aevi's "better still", and the reason the drift happened
+  // in the first place: both the ladder and the table were written down, so they could disagree.
+  check("§365: ⛔ EVERY TIER'S LEVEL LANDS INSIDE ITS OWN RUNG — the table cannot name one rung and fight at another",
+    (() => {
+      const bad = [];
+      for (const r of LG365.DEFAULT_RUNGS) {
+        const row = RE365.BEAST_TIER[r.tier];
+        if (!row) { bad.push(`${r.tier}: no row`); continue; }
+        const lvl = Math.round(row.threat * 0.5);
+        if (rungOf(lvl) !== r.tier) bad.push(`${r.tier} fights at ${lvl}, which is a ${rungOf(lvl)}`);
+      }
+      if (bad.length) console.log("      " + bad.join(" · "));
+      return bad.length === 0;
+    })(), LG365.DEFAULT_RUNGS.map(r => `${r.tier} ${Math.round((RE365.BEAST_TIER[r.tier]?.threat || 0) * 0.5)}`).join(" · "));
+
+  check("§365: ⛑ …and it is DERIVED from the rung rather than typed, so it cannot drift again",
+    /const TIER_MIDLEVEL = Object\.fromEntries\(DEFAULT_RUNGS\.map/.test(rd("engine/random_encounters.js"))
+    && /threat: threatFor\("legendary"\)/.test(rd("engine/random_encounters.js"))
+    && !/threat: \d+,/.test(rd("engine/random_encounters.js").match(/export const BEAST_TIER = \{[\s\S]*?\n\};/)[0]),
+    "no literal threat survives in the table");
+
+  // ⛔ §1b.3 — A MYTHIC IS A CAMPAIGN, NOT A THING ON A ROAD.
+  check("§365: ⛔ A MYTHIC NEVER ROLLS ON A RANDOM TABLE — it is met through its arc or a quest, and it keeps a threat for a fight that is staged",
+    (() => {
+      const roster = [{ id: "m", name: "the thing", tier: "mythic" }, { id: "e", name: "an epic thing", tier: "epic" }];
+      const out = RE365.bestiaryEncounters({ roster });
+      return out.length === 1 && out[0].creatureId === "e"
+        && RE365.BEAST_TIER.mythic.random === false && RE365.BEAST_TIER.mythic.threat > 0;
+    })());
+
+  // ⛔ §3 — AN UNKNOWN TIER FAILS LOUDLY, NOT AS `notable`. This project's own "a default that behaves like a
+  // value": a creature authored at a rung nobody implemented fought as a notable forever, with no error.
+  check("§365: ⛔ AN UNKNOWN TIER IS LEFT OUT AND SAID — not silently fought as a notable",
+    (() => {
+      const out = RE365.bestiaryEncounters({ roster: [{ id: "x", name: "x", tier: "archfiend" }] });
+      return out.length === 0 && !/BEAST_TIER\[c\.tier\] \|\| BEAST_TIER\.notable/.test(rd("engine/random_encounters.js"));
+    })());
+
+  // ⚠️ §1b.4's CONTINGENCY, IN THE TABLE. Aevi: "If the low end becomes a walkover, the fix is the DANGER GATE
+  // (a danger-1 road meets notables), not the rung's level." Measured, it does become one — Loki at level 10
+  // meets a level-11 creature at danger 1 today and a level-3 one under the ladder — so the gates moved down.
+  check("§365: ⛑ …and a danger-1 road meets NOTABLES, because the ladder alone made the low end a walkover",
+    RE365.BEAST_TIER.notable.minDanger === 1 && RE365.BEAST_TIER.leader.minDanger === 2
+    && RE365.BEAST_TIER.heroic.minDanger === 3 && RE365.BEAST_TIER.epic.minDanger === 4,
+    "danger 1 → level 8 (was 11) · 2 → 18 (19) · 3 → 32 (28) · 4 → 50 (39)");
+
+  // ⛔ AND THE WEIGHTS ARE NOT LOCAL TO THIS TABLE. An authored encounter's default weight is 1; my first cut
+  // scaled the beasts ×10 so rarity could be expressed, and every beast became 10–30 times likelier than every
+  // puzzle, standoff and chase. The playthrough auditor caught it in one run: non-combat frames hit ZERO for
+  // both cerebral cohorts. ⛑ The pool takes fractions, so rarity is said downward instead.
+  check("§365: ⛔ …and rarity is said DOWNWARD — a beast's weight still sits on the same scale as an authored encounter's",
+    RE365.BEAST_TIER.riffraff.weight === 3 && RE365.BEAST_TIER.notable.weight === 2
+    && RE365.BEAST_TIER.epic.weight === 1 && RE365.BEAST_TIER.legendary.weight === 0.1
+    && /Math\.max\(0\.01, \(e\.weight \|\| 1\)/.test(rd("engine/random_encounters.js")),
+    "legendary is a tenth of epic, and epic is still what it always was");
+
+  // ⛑ AND THE HARNESS READS THE ONE TABLE. It claimed to and kept a hand-written copy.
+  check("§365: ⚠️ …and `endgame_scaling` imports the table instead of keeping its own copy of the numbers under a comment saying it does not",
+    /import \{ BEAST_TIER \} from "\.\.\/engine\/random_encounters\.js"/.test(rd("tests/endgame_scaling.mjs"))
+    && !/const BEAST_TIER = \{ riffraff: 22/.test(rd("tests/endgame_scaling.mjs")));
+
+  // ⬜ AND THE DANGER SCALE'S TOP, WHICH AEVI ASKED ME TO NAME: the engine clamps to 4 and the content authors 5.
+  check("§365: ⬜ …and the danger scale's top is the ENGINE's 4 while sixteen authored places carry 5 — legendary is gated at the top the engine has",
+    /Math\.max\(0, Math\.min\(4, base \+ \(Number\(lift\) \|\| 0\)\)\)/.test(rd("engine/random_encounters.js"))
+    && RE365.BEAST_TIER.legendary.minDanger === 4,
+    "raising the clamp changes encounter rates at those sixteen places for every pool, not only for beasts — reported, not taken");
+}
+
+/* ══════════ §366 · SNG-660 §2 — A LEGEND'S GEAR IS THE HIGH-LEVEL FOUND ITEM ══════════ */
+// ✅ ERIK: "2. Yes." — legends' gear becomes the high-level items people find. This closes the gap CCODE-520
+// left open in its own ledger row: "a GM-found relic cannot yet STATE its made-at level."
+//
+// ⛑ AEVI'S ANSWER IS BETTER THAN STATING ONE: the level comes from the PERSON whose gear it was, so nobody has
+// to judge it. ⚠️ MEASURED: 58 of 70 legends carry gear, 210 lines in all — and each line enters the world once.
+console.log("\n── §366 · a crown he did not take ──");
+{
+  const IV366 = await import("../engine/inventory.js");
+  const RE366 = await import("../engine/random_encounters.js");
+  const legend = () => ({ id: "halvex_coil", name: "Halvex Coil, the Rewriter", tradition: "cogitant",
+    gear: ["a rewriting stylus that edits what it touches — a dagger's reach", "a plain coat"] });
+
+  check("§366: ⛔ AN ITEM FROM A LEGEND READS THAT LEGEND'S LEVEL — the ceiling is theirs, not the hand holding it",
+    (() => {
+      const c = { inventory: [] }, L = legend();
+      const r = IV366.gearIntoWorld(c, L, "a plain coat", { levelOf: () => 88 });
+      return r.ok && r.item.madeAtLevel === 88 && /Halvex Coil/.test(r.item.provenance || "")
+        && r.item.tradition === "cogitant" && c.inventory.length === 1;
+    })());
+
+  // ⛔ §2b.3 — "A found crown is a vessel for power, not a finished weapon."
+  check("§366: ⛑ …and it is BORN EMPTY — its grants fill through the evolution beat, up to the ceiling its made-at level allows",
+    (() => {
+      const c = { inventory: [] }, L = legend();
+      const r = IV366.gearIntoWorld(c, L, "a plain coat", { levelOf: () => 88 });
+      return r.ok && (r.item.grants || []).length === 0 && !!r.item.description;
+    })());
+
+  // ⛔ §2b.2 — ONCE, AND ONLY ONCE.
+  check("§366: ⛔ A GEAR LINE BECOMES AN ITEM ONCE, NEVER TWICE — the line leaves their gear as the item enters the world",
+    (() => {
+      const c = { inventory: [] }, L = legend();
+      const a = IV366.gearIntoWorld(c, L, "a plain coat", { levelOf: () => 88 });
+      const b = IV366.gearIntoWorld(c, L, "a plain coat", { levelOf: () => 88 });
+      return a.ok && !b.ok && L.gear.length === 1 && /nothing answering to/.test(b.why);
+    })());
+
+  // ⚠️ AND THE LINE IS ADDRESSED BY ITS TEXT, because taking one shifts every index after it. An op carrying
+  // `gearIndex: 1`, composed before the removal, would take the WRONG line and take it successfully.
+  check("§366: ⚠️ …and the line is named, not numbered — taking one shifts every index after it",
+    (() => {
+      const c = { inventory: [] }, L = legend();
+      IV366.gearIntoWorld(c, L, "a rewriting stylus", { levelOf: () => 88 });   // by prefix
+      const left = L.gear;
+      return left.length === 1 && left[0] === "a plain coat"
+        && /export function gearIntoWorld\(character, person, which,/.test(rd("engine/inventory.js"));
+    })());
+
+  // ⛔ §2b.4 — A RELIC WITH NO PERSON CANNOT EXCEED ITS PLACE'S RUNG.
+  check("§366: ⛔ A ROAD-SIDE RUIN CANNOT HAND OUT A LEVEL-95 RELIC — the cap is the place's own danger rung, from the ladder the beasts climb",
+    RE366.foundLevelCapFor(1) === 8 && RE366.foundLevelCapFor(2) === 18
+    && RE366.foundLevelCapFor(3) === 32 && RE366.foundLevelCapFor(4) === 72,
+    "danger 1 → a notable, 2 → a leader, 3 → a heroic, 4 → a legendary");
+
+  // ⚠️ A MYTHIC SHARES `minDanger: 4` SO A STAGED FIGHT HAS A THREAT, and it must not set this ceiling — it
+  // read 93 before that was excluded, against Aevi's "4 → a legendary".
+  check("§366: ⚠️ …and a MYTHIC does not set that ceiling, though it shares the danger — it is met through an arc, not found in a ruin",
+    RE366.foundLevelCapFor(4) < Math.round(RE366.BEAST_TIER.mythic.threat * 0.5)
+    && RE366.BEAST_TIER.mythic.minDanger === 4);
+
+  // \u26d4 AND THE TAKING SURVIVES A RELOAD. `person.gear = [...]` persists for a REGISTRY npc, whose record is in
+  // the save \u2014 and NOT for an AUTHORED one, whose roster record is content, reloaded fresh every session. The
+  // item was written down and the taking was not, so the same crown could be handed over again tomorrow.
+  check("§366: \u26d4 A LEGEND WHOSE RECORD RELOADS FRESH CANNOT GIVE THE SAME CROWN TWICE \u2014 the taking is written on the CHARACTER, which is the thing that gets saved",
+    (() => {
+      const c = { inventory: [] };
+      const a = IV366.gearIntoWorld(c, legend(), "a plain coat", { levelOf: () => 88 });     // today
+      const b = IV366.gearIntoWorld(c, legend(), "a plain coat", { levelOf: () => 88 });     // tomorrow, content reloaded
+      return a.ok && !b.ok && /already gave that up/.test(b.why)
+        && (c.gearTaken?.halvex_coil || []).length === 1 && c.inventory.length === 1;
+    })(), "the roster record has its gear back; the character remembers what left it");
+
+  // \u26d1 THE FOURTH DOOR \u2014 \u00a72b.2 asked for the GM'S OP, not only the rule. An engine function with no caller is
+  // a test-only export, and this project keeps finding that door shut.
+  check("§366: \u26d1 …and the GM CAN ACTUALLY HAND IT OVER \u2014 `fromGear` is in the op schema the narrator is given, and the applier reads it",
+    (() => {
+      const gm = rd("engine/gm.js"), app = rd("app.js");
+      return /"fromGear"/.test(gm) && /fromGear[\s\S]{0,400}?in their own words/i.test(gm)
+        && /item\.fromGear/.test(app) && /gearIntoWorld\(character, rec,/.test(app)
+        && /gearIntoWorld/.test(app.split("\n").find(l => l.includes('from "./engine/inventory.js"')) || "")
+        && /personRecordFor/.test(app.split("\n").find(l => l.includes('from "./engine/npcsheet.js"')) || "");
+    })(), "\u26a0 and it calls the sheet by the name THIS file imports it as \u2014 `personSheetFor`, not `sheetFor`");
+
+  check("§366: ⛑ …and the cap is applied at the door the GM actually uses, with a stated cap and not a default",
+    (() => {
+      const capped = IV366.addItem({ inventory: [] }, { name: "a keystone", kind: "relic", madeAtLevel: 95 }, {}, { maxMadeAt: RE366.foundLevelCapFor(1) });
+      const free = IV366.addItem({ inventory: [] }, { name: "a keystone", kind: "relic", madeAtLevel: 95 }, {}, {});
+      return capped.madeAtLevel === 8 && free.madeAtLevel === 95
+        && /maxMadeAt: foundCap/.test(rd("app.js")) && /foundLevelCapFor\(dangerOf\(/.test(rd("app.js"));
+    })(), "a caller that states no cap gets today's behaviour, and a relic from a PERSON is not capped here at all");
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

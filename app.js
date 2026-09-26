@@ -36,7 +36,7 @@ import { buildFeedPost, appendFeedPost, feedForViewer, FEED_PATH } from "./engin
 // importedNeverCalled ratchet caught it on the next run, which is the same "built, shipped, unreachable"
 // family this session has been chasing all day, committed by me while fixing it.
 import { composeImagePrompt } from "./engine/imageprompt.js";   // CCODE-190: code selects the parts, a model composes the line
-import { ITEM_KINDS, itemKindsIn, itemKindLabel, wieldBonusFor, usableCombatItems, normalizeInventory, reclaimEstablishedItems, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName, itemUses, ensurePins, togglePin, pinnedItems, applyItemUpdates, deriveItem, findItem, skillBonus, startingSkills } from "./engine/inventory.js"; // CCODE-161: reclaim items the story conferred but the ledger missed
+import { ITEM_KINDS, itemKindsIn, itemKindLabel, wieldBonusFor, usableCombatItems, normalizeInventory, reclaimEstablishedItems, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName, itemUses, ensurePins, togglePin, pinnedItems, applyItemUpdates, deriveItem, findItem, skillBonus, startingSkills, gearIntoWorld } from "./engine/inventory.js"; // CCODE-161: reclaim items the story conferred but the ledger missed
 import { grantCeiling, evolutionBudget, recordEvolution, foldGrants, canDerive, madeAtLevelOf } from "./engine/earnedpower.js"; // SNG-251 §2c · SNG-659 §2b: the level an item was made at/§4: the earned-power economy (ceiling = f(level, craft rank); ~1 evolution/day)
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, absoluteWorldDay, worldCount, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch, positionedPlace, seasonCalendar, seasonOfWorldDay } from "./engine/worldtime.js";
 import { smartClamp, playerText, normName } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
@@ -50,7 +50,7 @@ import { glyphFor, drawGlyph } from "./engine/mapicons.mjs";   // SNG-409 §4: a
 import { walkingDays, milesFor, worldPosForGenerated, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout, fieldBlobs, fieldAlpha, placeLabels } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
 import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities, isKinAdjacent, kinSecondaryOptions, domainsLegal, domainOf, domainOfTradition, sectOf } from "./engine/traditions.js";
-import { sheetFor as personSheetFor, battleSkillsFor, playerSheetFor } from "./engine/npcsheet.js";  // the person-keyed sheet, and SNG-571's player-facing one
+import { sheetFor as personSheetFor, personRecordFor, battleSkillsFor, playerSheetFor } from "./engine/npcsheet.js";  // the person-keyed sheet, and SNG-571's player-facing one
 import { companyPlaces, delegationCapacity, ladderRungLine, ladderRoll } from "./engine/ladder.js";
 import { repairFingerprint, repairNote } from "./engine/repair_note.js";   // ✅ ERIK 2026-09-11: the ask channel's repair note measures the state, not four counts   // SNG-390: how many places rapport has earned · R25b: how many can run things in your name
 import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf, growBond, partnerAdjacentNpcs, companionCodexUpdate, noteCompanionWitnessed, companionStageThresholds, shareAtOrAbove, syncStageTaughtRanks, stageTaughtBy } from "./engine/companions.js";
@@ -137,7 +137,7 @@ import { noteHeard, unheardOf, unheardBeat, partyBondOf } from "./engine/partybo
 import { INTENSITIES, scaledEnergy, effectMod, autoIntensity, shouldBacklash, intensityOptions } from "./engine/intensity.js";
 import { noteCoUseAndRefresh, refreshEvolvingItems, evolvedItemsForGM, currentStage } from "./engine/evolution.js";
 import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
-import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarrativeKind, canIncapacitate, resolvePacing, beatHours, deriveDangerLevel, eligibleEncountersFor, generatedCreatureEncounters, synthesizeDuelDef, synthesizeChallengeDef, synthesizeStandoffDef, synthesizePuzzleDef } from "./engine/random_encounters.js"; // SNG-225: mint/backfill a real dangerLevel so the encounter pool isn't starved; SNG-231: eligibleEncountersFor = the offerable pool the GM can invite
+import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarrativeKind, canIncapacitate, resolvePacing, beatHours, deriveDangerLevel, eligibleEncountersFor, generatedCreatureEncounters, synthesizeDuelDef, synthesizeChallengeDef, synthesizeStandoffDef, synthesizePuzzleDef, foundLevelCapFor, dangerOf } from "./engine/random_encounters.js"; // SNG-225: mint/backfill a real dangerLevel so the encounter pool isn't starved; SNG-231: eligibleEncountersFor = the offerable pool the GM can invite
 import { renownScore, bandForRenown, challengersForBand, findPrestigeArc, challengerPoolFor, pickChallenger, challengerToDuelEntry, challengeDeedWeight, challengeLossWeight, shouldFireChallenger, challengeCooldown } from "./engine/recurrence.js";
 import { isEventfulTurn, pressureTier, pressureDirective, drivenPressureDirective, roomForAnOffer, roomForATeacherOffer, tenderIntent, roomForAnInvitation, invitationDirective } from "./engine/pacing.js";
 import { ensurePressureQueue, enqueuePressure, pullTopPressure, npcWantPressures, threatAttackPressure, invitationPressures, pressureApplies, nextInvitation, invitationSaid } from "./engine/pressure.js"; // SNG-245: the pressure queue — the world DRIVES
@@ -180,7 +180,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.10.1";
+const APP_VERSION = "2.10.2";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -9041,7 +9041,37 @@ function applyTurn(turn, resolution, playerWords = null) {
   // findable, and — the point — SAID OUT LOUD in the same mechanical-note channel as the gain itself,
   // because a draught that restores nothing should not read to the player as a working draught.
   for (const item of d.inventoryAdd || []) {
-    const added = addItem(character, item, CONTENT.items);
+    // ⛔ SNG-660 §2b.4 — A RELIC FOUND IN A ROAD-SIDE RUIN CANNOT HAVE BEEN MADE AT LEVEL 95. The ceiling is
+    // the place's own danger rung, from the same ladder the beasts climb: danger 1 → 8, 2 → 18, 3 → 32,
+    // 4 → 72. ⛑ A relic that came from a PERSON is not capped here — `gearIntoWorld` writes their own level,
+    // which is honest because it arrived with a name attached.
+    const foundCap = (() => { try { return foundLevelCapFor(dangerOf(CONTENT.locations?.[character.currentLocationId] || null)); } catch { return null; } })();
+    // \u26d4 SNG-660 \u00a72b.2 \u2014 A THING THAT WAS SOMEBODY'S COMES THROUGH THEM. `fromGear` names the person and
+    // the line of their gear; the engine reads THEIR level, writes their name into its history, and strikes the
+    // line so the same crown cannot be handed over twice. \u26a0\ufe0f `findExistingNpc` resolves the name first,
+    // because a narrator writes "Halvex Coil" and the registry files him under whatever id he was minted with
+    // \u2014 the same shadow that left three party members pointing at nobody (CCODE-524).
+    const fromGear = (item && typeof item === "object") ? item.fromGear : null;
+    if (fromGear && (fromGear.person || fromGear.personId)) {
+      const ref = String(fromGear.person || fromGear.personId);
+      const rec = findExistingNpc(character.npcRegistry || {}, slugify(ref), ref)
+        || CONTENT.npcs?.[ref]
+        || (CONTENT.legends?.roster || []).find(l => l && (l.id === ref || String(l.name || "").toLowerCase() === ref.toLowerCase()))
+        || null;
+      const r = rec ? gearIntoWorld(character, rec, fromGear.thing ?? fromGear.gearIndex, {
+        catalog: CONTENT.items,
+        day: absoluteWorldDay(),
+        levelOf: (p) => { try { return personSheetFor(personRecordFor(p, { npcs: CONTENT.npcs || {} }), { day: absoluteWorldDay(), cfg: CONTENT.rules?.npcStanding || {} })?.level; } catch { return null; } },
+      }) : { ok: false, why: `nobody here answers to "${ref}"` };
+      if (r.ok) {
+        _invNotes.push(`\u2726 ${r.item.customName || r.item.name} \u2014 ${r.from.name}'s${r.from.madeAtLevel ? `, made at level ${r.from.madeAtLevel}` : ""}.`);
+        continue;
+      }
+      // \u26d1 AND A REFUSAL IS SAID, NEVER SWALLOWED: the fiction handed them something, so it still arrives
+      // through the ordinary door \u2014 just without a name on it, and the player is told which it was.
+      _invNotes.push(`\u26a0 ${r.why}.`);
+    }
+    const added = addItem(character, item, CONTENT.items, foundCap ? { maxMadeAt: foundCap } : {});
     const nm = typeof item === "string" ? item : item?.name;
     if (nm) _invNotes.push(`✦ ${nm} — added to your pack.`);
     if (added && typeof item !== "string") {

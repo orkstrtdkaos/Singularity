@@ -10,6 +10,7 @@
 
 import { sampleThreat, isRelevantThreat } from "./threat.js"; // CCODE-52: the player power the pool revolves around
 import { smartClamp } from "./namematch.js"; // SNG-229: word-boundary clamp for a synthesized creature's seed prose
+import { DEFAULT_RUNGS } from "./legends.js";   // ⛔ SNG-660 §1b.1: a tier's level is DERIVED from its rung, so the table cannot drift from the ladder
 
 const PEACEFUL = ["beneficial", "benign", "beautiful"];
 const PERILOUS = ["dangerous", "theft", "chase", "fight"];
@@ -51,14 +52,77 @@ export function deriveDangerLevel(location, { baseDanger = null } = {}) {
 }
 
 // SNG-229 §2b: tier → the danger gate + the opponent's threat + how often it turns up. A riffraff is a common
-// low-danger nuisance; an epic is a rare, deadly, danger-4 thing. Tunable-shaped (a plain table).
-const BEAST_TIER = {
-  riffraff: { minDanger: 1, threat: 22, weight: 3 },
-  notable:  { minDanger: 2, threat: 38, weight: 2 },
-  heroic:   { minDanger: 3, threat: 55, weight: 1 },   // SNG-269: the live name for this rung
-  leader: { minDanger: 3, threat: 55, weight: 1 },   // …and its alias, kept for authored content
-  epic:     { minDanger: 4, threat: 78, weight: 1 }
+// low-danger nuisance; an epic is a rare, deadly, danger-4 thing.
+//
+// ⛔ SNG-660 §1 (ERIK: "1. Yes.") — THE WILD REACHES THE TOP RUNGS, AND EACH TIER FIGHTS AT ITS OWN.
+//
+// ⚠️ THE TABLE NAMED A RUNG AND FOUGHT AT ANOTHER ONE. Measured (CCODE-522): `riffraff` 22 → level 11, which
+// the ladder calls a NOTABLE; `notable` 38 → 19, a LEADER; `epic` 78 → 39, a HEROIC. Three of four rungs
+// disagreed with `DEFAULT_RUNGS`, and `legendary` and `mythic` had no row at all — so the hardest wild creature
+// in the world was a level-39 heroic and the two top rungs of the ladder had nothing in them.
+//
+// ⛑ SO THE LEVEL IS DERIVED FROM THE LADDER, NOT WRITTEN (Aevi's §1b.1, "better still: derive the level from
+// the rung instead of writing threats, so the table can't drift from the ladder again"). The drift being
+// replaced happened precisely because both were written down. `threat` is twice the MIDDLE of the tier's own
+// band, because `poolFor` reads level as `threat × 0.5`.
+const TIER_MIDLEVEL = Object.fromEntries(DEFAULT_RUNGS.map(r => [r.tier, Math.round((r.levels[0] + r.levels[1]) / 2)]));
+const threatFor = (tier) => Math.max(2, Math.round((TIER_MIDLEVEL[tier] || 1) * 2));
+
+// ⛔ AND THE DANGER GATES MOVED DOWN A STEP, WHICH IS AEVI'S OWN CONTINGENCY. §1b.4: "If the low end becomes a
+// walkover, the fix is the DANGER GATE (a danger-1 road meets notables), not the rung's level." It does —
+// measured, Loki at level 10 meets a level-11 creature at danger 1 today and a level-3 one under the ladder,
+// seven levels beneath him. With the gates a step lower the curve lands near today's:
+//     danger 1: hardest 11 → 8   ·   2: 19 → 18   ·   3: 28 → 32   ·   4: 39 → 50
+//
+// ⚠️ THE DANGER SCALE'S TOP IS 4, AND THE CONTENT AUTHORS 5. `dangerOf` clamps to 4 while sixteen authored
+// locations carry `dangerLevel: 5` — so those sixteen read as danger 4 and offer exactly what a danger-4 place
+// offers. Legendary is gated at the top the ENGINE has; if that clamp is ever raised, legendary moves with it
+// and this is the one number to change. Reported to Aevi rather than raised here: lifting the clamp changes
+// encounter rates at those sixteen places for every pool, not only for beasts.
+//
+// ⛔ WEIGHTS ARE NOT LOCAL TO THIS TABLE, AND SCALING THEM ×10 DROWNED THE WORLD. My first cut multiplied the
+// beast weights by ten so that "well below epic's" could be said at all — and an authored encounter's default
+// weight is 1, so every beast became 10–30 times more likely than every puzzle, standoff and chase. The
+// playthrough auditor caught it in one run: non-combat frames went to ZERO for both cerebral cohorts.
+// ⛑ THE POOL TAKES FRACTIONS (`Math.max(0.01, (e.weight || 1) * …)`), so rarity is said downward instead.
+// The old magnitudes stand exactly as they were, and `legendary` is a TENTH of epic.
+export const BEAST_TIER = {
+  riffraff:  { minDanger: 1, threat: threatFor("riffraff"),  weight: 3 },
+  notable:   { minDanger: 1, threat: threatFor("notable"),   weight: 2 },
+  // ⛔ `leader` IS ITS OWN RUNG NOW (§1b.2). It was an alias of `heroic` from SNG-269 while the seven-rung
+  // ladder puts leader at 12–24 and heroic at 25–39 — two different things wearing one threat.
+  leader:    { minDanger: 2, threat: threatFor("leader"),    weight: 1 },
+  heroic:    { minDanger: 3, threat: threatFor("heroic"),    weight: 1 },
+  epic:      { minDanger: 4, threat: threatFor("epic"),      weight: 1 },
+  legendary: { minDanger: 4, threat: threatFor("legendary"), weight: 0.1 },
+  // ⛔ MYTHIC NEVER ROLLS ON A ROAD (§1b.3). "Each is unique in the world and is met through its arc or a
+  // quest, not a random table. A mythic is a campaign." `random: false` is what keeps it off the table, and
+  // the row exists so that a mythic creature still has a threat wherever a fight is staged deliberately.
+  mythic:    { minDanger: 4, threat: threatFor("mythic"),    weight: 0, random: false },
 };
+
+/** ⛔ SNG-660 §2b.4 — THE HIGHEST LEVEL A THING FOUND HERE CAN HAVE BEEN MADE AT.
+ *
+ *  Aevi: "a GM-found relic with no person behind it may state `madeAtLevel` directly, capped at the place's
+ *  danger rung, so a road-side ruin can't hand out a level-95 relic."
+ *
+ *  ⛑ IT IS THE SAME LADDER THE BEASTS CLIMB, not a second table: the hardest rung a place of that danger can
+ *  put in front of you is the ceiling on what can be found there. Danger 1 → a notable, 2 → a leader,
+ *  3 → a heroic, 4 → a legendary. A relic from a PERSON is not capped by this — their own level is the
+ *  honest number, and it came with a name attached. PURE. */
+export function foundLevelCapFor(danger) {
+  const d = Math.max(0, Math.min(4, Number(danger) || 0));
+  let best = 1;
+  for (const row of Object.values(BEAST_TIER)) {
+    if (row.minDanger > d) continue;
+    // ⚠️ A MYTHIC IS NOT WHAT A PLACE CAN PUT IN FRONT OF YOU. It shares `minDanger: 4` so that a staged
+    // fight has a threat, and it never rolls — so it must not set the ceiling either, or every danger-4 ruin
+    // would hand out level-93 relics. Measured: it read 93 before this line, against Aevi's "4 → a legendary".
+    if (row.random === false) continue;
+    best = Math.max(best, Math.round(row.threat * 0.5));
+  }
+  return best;
+}
 
 /** SNG-229 §2b: turn each bestiary creature into a danger-gated ENCOUNTER entry — the generative hook that
  *  gives the fight/dangerous pool an actual SOURCE of monsters (it had none; ties SNG-225). Tier sets the
@@ -75,7 +139,15 @@ function titleCase(s) {
 export function bestiaryEncounters(bestiary = {}) {
   const roster = Array.isArray(bestiary.roster) ? bestiary.roster : [];
   return roster.filter(c => c && c.id).map(c => {
-    const t = BEAST_TIER[c.tier] || BEAST_TIER.notable;
+    // ⛔ SNG-660 §3 — AN UNKNOWN TIER FAILS LOUDLY, NOT AS `notable`. The old `|| BEAST_TIER.notable` is this
+    // project's own "a default that behaves like a value": a creature authored at a tier nobody implemented
+    // fought as a notable forever, with no error and no zero to notice. `generate.js` and two smoke checks
+    // each record the same silent fallback biting them.
+    const t = BEAST_TIER[c.tier];
+    if (!t) { console.warn(`[bestiary] "${c.id}" is tiered "${c.tier}", which is not a rung — it is left out of the encounter pool rather than fought as a notable`); return null; }
+    // ⛑ §1b.3 — A MYTHIC IS A CAMPAIGN, not a thing you meet on a road. It keeps its threat for a fight that
+    // is staged deliberately; it is simply never offered by the random pool.
+    if (t.random === false) return null;
     return {
       id: `beast_${c.id}`, flavor: "dangerous", weight: t.weight, minDanger: t.minDanger,
       regions: ["*"], tags: [], routing: "duel", avoidable: true,
@@ -95,7 +167,7 @@ export function bestiaryEncounters(bestiary = {}) {
       creatureId: c.id, creatureClass: c.class || null, tier: c.tier || null, pressures: c.pressures || [],
       seed: smartClamp(`${c.name || c.id} — ${c.look || ""}${c.danger ? " " + c.danger : ""}`.trim(), 400)
     };
-  });
+  }).filter(Boolean);
 }
 
 /** Settled/hearth rests are safe — wilderness rests are where the night has teeth. */

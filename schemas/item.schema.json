@@ -83,6 +83,10 @@
       "minimum": 1,
       "maximum": 100,
       "description": "SNG-659 §2b: the level this item was MADE at — the maker's level when it was crafted, or the authored level of a relic or a legend's gear. The earned-power ceiling reads max(this, the bearer's level), so a master's artifact is strong in an apprentice's hand. Omit it and the item reads the bearer's level, which is what every item did before this field existed."
+    },
+    "fromPerson": {
+      "type": "string",
+      "description": "the id of the person whose gear this was (SNG-660 §2). Written by `gearIntoWorld` beside `provenance` and `madeAtLevel`, so a thing knows whose hand it left."
     }
   },
   "additionalProperties": true

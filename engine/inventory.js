@@ -8,7 +8,7 @@
 // GM phrasing variants ("a waterskin" / "the waterskin") collapse onto one stack instead
 // of forking. Catalog re-link happens on any resolvable name, not just at normalize.
 
-import { namesMatch, resolveByName, smartClamp } from "./namematch.js"; // SNG-152
+import { namesMatch, resolveByName, smartClamp, normName } from "./namematch.js"; // SNG-152 · SNG-660 §2: a gear line is addressed by its TEXT, and text needs normalising
 import { grantSummary, madeAtLevelOf } from "./earnedpower.js"; // SNG-251 §2c: the item's mechanical sheet, one line · SNG-659 §2b: ONE reader of `madeAtLevel`
 
 // ⛔ CCODE-168: THE ONE ITEM-KIND VOCABULARY, because there were two copies of a five-entry whitelist and
@@ -229,7 +229,12 @@ export function addItem(character, incoming, catalog = {}, opts = {}) {
       // dropped in silence (the note above says so of grants, and it is true of every field): without this
       // line an authored relic's level would never survive the trip into a pack. An item with none reads the
       // bearer's level, which is today's behaviour for every item in every existing save.
-      madeAtLevel: madeAtLevelOf(incoming) ?? undefined,
+      // ⛔ SNG-660 §2b.4 — AND A CAP, WHERE THE CALLER KNOWS ONE. A relic found in a road-side ruin cannot
+      // have been made at level 95; the place's danger rung is the ceiling. A caller that states no cap gets
+      // today's behaviour, and a relic that came from a PERSON is not capped here at all — their own level is
+      // the honest number and it arrived with a name attached.
+      madeAtLevel: (() => { const m = madeAtLevelOf(incoming); if (m == null) return undefined;
+        const cap = Number(opts?.maxMadeAt); return Number.isFinite(cap) && cap > 0 ? Math.min(m, Math.round(cap)) : m; })(),
       image: incoming.image
     };
   }
@@ -254,6 +259,84 @@ export function addItem(character, incoming, catalog = {}, opts = {}) {
 /** SNG-BATCH-7 Phase 3 reconcile: collapse duplicate stacks a pre-resolver save forked
  *  (fuzzy name/custom/alias match), summing quantities + catalog-relinking. Idempotent.
  *  Returns [{into, absorbed, qty}]. */
+/** ⛔ SNG-660 §2 (ERIK: "2. Yes.") — A LEGEND'S GEAR, BECOMING THE THING SOMEBODY FINDS.
+ *
+ *  Legends carry `gear` as PROSE — "a crown he did not take", "a sword given to him by someone who regretted
+ *  it". There is no item until one enters the world, and CCODE-520 left the matching gap open in its own
+ *  ledger row: *a GM-found relic cannot yet state its made-at level*.
+ *
+ *  ⛑ AEVI'S ANSWER IS BETTER THAN STATING ONE: the level comes from the PERSON whose gear it was, so nobody
+ *  has to judge it. `madeAtLevel` is their derived level; `provenance` names them.
+ *
+ *  ⚠️ MEASURED: 58 of 70 legends carry gear, 210 lines in all — a real population, and rare by construction
+ *  because each line enters the world ONCE. That is why the line is REMOVED from their `gear` as it leaves:
+ *  §2b.2, "so the same crown can't be handed over twice".
+ *
+ *  ⛔ AND IT IS BORN EMPTY (§2b.3). "A found crown is a vessel for power, not a finished weapon." Its grants
+ *  start at nothing and fill through the evolution beat, up to the ceiling its made-at level allows — which is
+ *  exactly what SNG-659 §2 built the ceiling for.
+ *
+ *  ⛔ THE LINE IS ADDRESSED BY ITS TEXT, NOT BY A POSITION. Driving this caught it immediately: taking
+ *  `gear[0]` moves what was at 1 down to 0, so an op carrying `gearIndex: 1` — composed from a prompt built
+ *  before the removal — takes the WRONG LINE, and takes it successfully. ⚠️ A positional reference into a list
+ *  the door itself shortens is a reference to whatever happens to be there. An index is still accepted for a
+ *  caller holding the list, but text wins and text that matches nothing is refused.
+ *
+ *  `levelOf` is handed in so this stays pure: the caller owns the sheet and the catalogue.
+ *  Returns `{ ok: true, item, from }` or `{ ok: false, why }`. */
+export function gearIntoWorld(character, person, which, { levelOf = null, catalog = {}, day = null } = {}) {
+  if (!character || !person) return { ok: false, why: "nobody to take it from" };
+  const pid = String(person.id || person.name || "");
+  // ⛔ AND THE TAKING SURVIVES A RELOAD. `person.gear = [...]` persists for a REGISTRY npc, whose record lives in
+  // the save — and NOT for an authored one, whose roster record is content reloaded fresh every session. So the
+  // item was in the save and the taking was not, and the same crown could be handed over again tomorrow.
+  // ⛑ The ledger is on the CHARACTER, which is the thing that gets written down.
+  const took = (character.gearTaken && typeof character.gearTaken === "object") ? character.gearTaken : null;
+  const already = (pid && took && Array.isArray(took[pid])) ? took[pid].map(x => normName(String(x))) : [];
+  const gear = Array.isArray(person.gear) ? person.gear : [];
+  if (!gear.length) return { ok: false, why: `${person.name || person.id} carries nothing that could pass on` };
+  let i = -1;
+  if (typeof which === "string" && which.trim()) {
+    const want = normName(which);
+    i = gear.findIndex(g => normName(String(g)) === want);
+    if (i < 0) i = gear.findIndex(g => normName(String(g)).startsWith(want) || want.startsWith(normName(String(g))));
+    if (i < 0) return { ok: false, why: `${person.name || person.id} has nothing answering to "${String(which).slice(0, 60)}"` };
+  } else if (Number.isInteger(Number(which))) {
+    i = Number(which);
+    if (i < 0 || i >= gear.length) return { ok: false, why: `${person.name || person.id} has no such thing` };
+  } else {
+    return { ok: false, why: "name which of their things it is" };
+  }
+  const line = String(gear[i] || "").trim();
+  if (!line) return { ok: false, why: "that line of their gear is blank" };
+  if (already.includes(normName(line))) return { ok: false, why: `${person.name || person.id} already gave that up \u2014 look in your own pack for it` };
+  // ⛑ THE PROSE IS THE ITEM (§2b.3): the gear line is its name and its description seed. A line often carries
+  // its own clause — "a rewriting stylus that edits what it touches — a dagger's reach" — so the NAME is the
+  // head of it and the whole line is the description.
+  const head = line.split(/\s+[—-]\s+|,\s+/)[0].trim() || line;
+  const lvl = levelOf ? Math.max(1, Math.round(Number(levelOf(person)) || 1)) : null;
+  const who = person.name || person.id;
+  const item = addItem(character, {
+    name: head.slice(0, 60),
+    kind: ITEM_KINDS.includes(person.gearKind) ? person.gearKind : "misc",
+    description: line,
+    // ⛔ THE WHOLE POINT: the ceiling reads the level of whoever MADE or CARRIED it, not the hand holding it.
+    ...(lvl ? { madeAtLevel: Math.min(100, lvl) } : {}),
+  }, catalog, { distinct: true });
+  if (!item) return { ok: false, why: "it would not fit in your pack" };
+  item.provenance = smartClamp(`${who}'s. ${line}`, 160);
+  if (person.tradition) item.tradition = String(person.tradition);
+  item.fromPerson = String(person.id || "");
+  // ⚠️ ONCE, AND ONLY ONCE. The line leaves their gear as the item enters the world, so the same crown
+  // cannot be handed over twice — and a person who has given everything away has an empty `gear`, honestly.
+  person.gear = [...gear.slice(0, i), ...gear.slice(i + 1)];
+  if (pid) {
+    if (!character.gearTaken || typeof character.gearTaken !== "object") character.gearTaken = {};
+    character.gearTaken[pid] = [...(Array.isArray(character.gearTaken[pid]) ? character.gearTaken[pid] : []), line];
+  }
+  return { ok: true, item, from: { id: person.id || null, name: who, line, madeAtLevel: lvl, day } };
+}
+
 export function dedupeInventory(character, catalog = {}) {
   const inv = character.inventory || [];
   const merged = [];

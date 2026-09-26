@@ -1563,12 +1563,20 @@
     "watch": [
      "KNOW",
      "PROTECT"
+    ],
+    "quiet": [
+     "MOVE",
+     "INFLUENCE"
     ]
    },
-   "_dutyFamilies": "which craft families each duty reads, from §2's table. ⚠️ ONLY `watch` IS WIRED — the other nine duties in your table (production, craft, trade, defence, muster, care, meaning, transit, recruiting) have no reader yet, and authoring a row here before one exists would be a dial that does nothing. `dutyHand` takes a `duty`, so each one is a line at its own call site when we build it.",
+   "_dutyFamilies": "which craft families each duty reads, from §2's table. ⚠️ ONLY `watch` AND `quiet` ARE WIRED (`quiet` is the other side of the same contest — a named raider coming unseen) — the other nine duties in your table (production, craft, trade, defence, muster, care, meaning, transit, recruiting) have no reader yet, and authoring a row here before one exists would be a dial that does nothing. `dutyHand` takes a `duty`, so each one is a line at its own call site when we build it.",
    "dutyVocations": {
     "watch": [
      "READER"
+    ],
+    "quiet": [
+     "WALKER",
+     "EDGE"
     ]
    },
    "_dutyVocations": "the vocations that LEAN toward each duty, from §2's leanings list. Reader: watch, craft."

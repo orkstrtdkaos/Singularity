@@ -21,6 +21,7 @@
 //        Erik's 2026-07-19 ruling, mechanised: clearing them lowers it.
 
 import { smartClamp } from "./namematch.js";   // a reason is prose, and prose is clamped on a word boundary
+import { sheetFor, tierOf, personRecordFor } from "./npcsheet.js";   // SNG-655: a named raider is a person, and a person has a rung
 import { walkingDays } from "./worldmap.js";    // ⛔ SNG-634 C7 `neighbour`: how close your ground is to theirs
 
 /** ⛔ THE LOADED POWERS, or an empty list. ⚠️ ALWAYS AN ARRAY: every reader below runs on a world with no
@@ -133,7 +134,7 @@ export function raiderPowerAt(locationId, { content = null, character = null } =
  *  was built in CCODE-404–407 and has been waiting for somebody to name.
  *  ⚠️ `share` is a dial and the FLOOR IS ONE HEAD: a power with two men left still sends one, so the last
  *  of a broken band is a fight you can finish rather than a rounding error that disappears. */
-export function raidersFrom(power, character, { share = 0.4 } = {}) {
+export function raidersFrom(power, character, { share = 0.4, npcs = null, npcCfg = null, day = null, tierWeight = null } = {}) {
   const avail = contingentsOf(power, character);
   if (!avail.length) return null;
   const s = Math.max(0, Math.min(1, Number(share) || 0));
@@ -143,7 +144,27 @@ export function raidersFrom(power, character, { share = 0.4 } = {}) {
     quality: Math.max(1, Number(c.quality) || 1),
     what: c.what || c.kind || "raiders",
   })).filter(c => c.n > 0);
-  return party.length ? party : null;
+  if (!party.length) return null;
+  // ⛔ SNG-655 · AEVI ASKED FOR THE NAMED PEOPLE AT THE CORE. Until now a raid was contingents only, so the
+  // other side of a fight had NOBODY with a name in it even when the power's own record named its leader — and
+  // the watch could not read who was coming, because prose is all a contingent carries.
+  // ⛑ ALL 29 POWERS NAME A LEADER AND ALL 29 IDS RESOLVE, with derived levels from 12 to 66.
+  //
+  // ⚠️ AND THE QUALITY IS THE RUNG, NOT THE LEVEL. A legendary leader's level is 66 where a power's own
+  // contingents run quality 1 to 4: putting 66 on the field would not be a balance tweak, it would decide every
+  // raid in the game by itself. `tierWeight` maps the rung onto the scale the contingents already use (1–7), so
+  // the best leader in the valley is the strongest single unit on the field and not sixteen times everything
+  // else. ⚠️ A CALLER THAT PASSES NO `tierWeight` GETS NO PEOPLE — silence is safer than a guessed scale, and
+  // every raid that worked before this existed still works.
+  if (!npcs || !tierWeight) return party;
+  const lead = power?.leader ? npcs[String(power.leader)] : null;
+  if (!lead) return party;
+  let tier = lead.tier || null;
+  try { tier = tierOf(sheetFor(personRecordFor(lead, { npcs }), { day, cfg: npcCfg || {} })?.level, { cfg: npcCfg || {} }) || tier; } catch { /* the authored rung, or none */ }
+  const q = Math.max(1, Math.round(Number(tierWeight[tier]) || 1));
+  // ⛑ `_person` IS WHAT LETS THE WATCH READ THEM. A contingent is a number and a line of prose; a person has a
+  // record, so the stealth side can ask what they actually do instead of matching words against a description.
+  return [{ _person: String(power.leader), n: 1, quality: q, what: lead.name || String(power.leader), tier }, ...party];
 }
 
 /** ⛔ LOSSES PERSIST. `killed` is the per-contingent count the clash took off the raiding party, mapped back

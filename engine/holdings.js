@@ -694,7 +694,10 @@ export function resolveRaid(character, holding, { cfg = null, dangerLevel = 0, r
   // right when the watch was a boolean and the party only mattered once a fight started. A contest needs the
   // other side, so it is hoisted here and the fight below reads the SAME party rather than drawing a second
   // one. Two draws of "who came" would be two answers to one question, on the same tick.
-  const party = power ? raidersFrom(power, character) : null;
+  // ⛑ AND THE PARTY IS DRAWN WITH ITS PEOPLE — `tierWeight` is what tells `raidersFrom` the scale to put a
+  // leader on, and without it the call returns contingents only, exactly as it did before SNG-655.
+  const party = power ? raidersFrom(power, character, { npcs: people, npcCfg, day,
+    tierWeight: ((rules?.death || {}).watch || {}).tierWeight || null }) : null;
   const raiders = party || [{ n: Math.max(1, Math.round(dangerLevel)), quality: Math.max(1, Math.round(dangerLevel / 2)), what: "raiders" }];
   const whose = party ? (power.name || power.id) : null;
   // ⛑ The bottom of the old rule is kept exactly — an empty wall is a flat zero, never a base chance — and
@@ -734,7 +737,18 @@ export function resolveRaid(character, holding, { cfg = null, dangerLevel = 0, r
   // `reach` covers this place sends a party out of its own strength, and the same party is the one the watch
   // was trying to see. ⚠️ NO POWER → THE ANONYMOUS RAID, UNCHANGED, and that is the common case: most of the
   // 143 places have nobody standing on them and must play exactly as they did before this existed.
-  const clash = legionClash(defenders, raiders, { rng, cfg: cfg?.raid?.clash || {} });
+  // ⛔ WHO IS SEEN IS NOT WHO SWINGS — AND THE SECOND HALF IS ERIK'S TO RULE.
+  // The watch above read the WHOLE party, leader included, which is what Aevi asked for. Whether the leader
+  // takes the field is `raid.leaderFights`, and it is OFF until Erik says otherwise, because measured across all
+  // 29 powers at the tipping point (480 raids, matched seeds) a leader on the field takes a hold's win rate from
+  // 91.5% to 59.6% and flips a third of outcomes. ⚠️ A dial defaulting to today's behaviour is not a dead knob:
+  // it is a ruling waiting for its ruler, and the alternative is shipping a 32-point swing on my own authority.
+  // ⛑ IT ALSO KEEPS THE CASUALTY BOOKS HONEST: `notePowerLoss` maps losses back by the `_at` index that
+  // `raidersFrom` stamps on a CONTINGENT, and a person has none — so a leader in the clash would have had their
+  // losses charged to contingent 0.
+  const leaderFights = !!(cfg?.raid?.leaderFights);
+  const fighters = leaderFights ? raiders : raiders.filter(c => !c._person);
+  const clash = legionClash(defenders, fighters.length ? fighters : raiders, { rng, cfg: cfg?.raid?.clash || {} });
   const held = clash.tide > 0.05;
   // ⛔ AND THEIR LOSSES PERSIST, which is what makes clearing a band worth doing. ⛑ THE RATE IS `bloodBand`'s,
   // NOT A SECOND ONE: the same `lossPerTide` with the same win/lose asymmetry that every band clash in the
@@ -742,12 +756,15 @@ export function resolveRaid(character, holding, { cfg = null, dangerLevel = 0, r
   // living here is exactly how the sell-share drifted from its own projection an hour after I wrote it.
   let powerHit = null;
   if (party && power) {
-    const after = bloodBand({ contingents: raiders.map(c => ({ ...c })) }, -clash.tide, { cfg: meleeCfg || {} });
+    // ⚠️ OVER THE CONTINGENTS ONLY, AND KEYED BY THEIR OWN `_at`. A named person has no contingent index, so
+    // `_at ?? i` would have charged their losses to whichever contingent happened to sit at that position.
+    const bled = raiders.filter(c => !c._person && Number.isFinite(Number(c._at)));
+    const after = bloodBand({ contingents: bled.map(c => ({ ...c })) }, -clash.tide, { cfg: meleeCfg || {} });
     const killed = {};
     const left = Array.isArray(after?.band?.contingents) ? after.band.contingents : [];
-    for (let i = 0; i < raiders.length; i++) {
-      const gone = Math.max(0, (Number(raiders[i].n) || 0) - (Number(left[i]?.n) || 0));
-      if (gone > 0) killed[raiders[i]._at ?? i] = gone;
+    for (let i = 0; i < bled.length; i++) {
+      const gone = Math.max(0, (Number(bled[i].n) || 0) - (Number(left[i]?.n) || 0));
+      if (gone > 0) killed[bled[i]._at] = gone;
     }
     powerHit = notePowerLoss(character, power, killed, { day });
   }
@@ -769,7 +786,9 @@ export function resolveRaid(character, holding, { cfg = null, dangerLevel = 0, r
   note(whose
     ? `${whose} took it — ${Object.entries(taken).map(([g, n]) => `${n} ${g}`).join(", ") || "nothing"} gone${powerHit?.took ? `, ${powerHit.took} of theirs down in the doing` : ""}`
     : `raid fought and lost — ${Object.entries(taken).map(([g, n]) => `${n} ${g}`).join(", ") || "nothing"} taken`);
-  return { detected: true, held: false, taken, outcome: clash.outcome, day, atSea, power: powerHit || (whose ? { name: whose } : null), ...paid() };   // the path where the raiders WIN carried the fact too
+  return { detected: true, held: false, taken, outcome: clash.outcome, day, atSea,
+    led: raiders.find(c => c._person) ? { id: raiders.find(c => c._person)._person, name: raiders.find(c => c._person).what } : null,
+    power: powerHit || (whose ? { name: whose } : null), ...paid() };   // the path where the raiders WIN carried the fact too
 }
 
 /** Who is WATCHING: people posted on the garrison, plus a feature that keeps a watch (sentries, a tower). Stone does not see. */
@@ -938,7 +957,7 @@ export function watchStrength(character, holding, { cfg = null, rules = {}, peop
  *  otherwise, which is Aevi's floor and the reason a party is never worth zero quiet.
  *
  *  Returns `{ total, terms, heads }`. Pure. */
-export function stealthStrength(raiders, { rules = {}, theft = false } = {}) {
+export function stealthStrength(raiders, { rules = {}, theft = false, npcs = null, npcCfg = {}, day = null } = {}) {
   const w = (rules?.death || {}).watch || {};
   const num = (v, d) => (Number.isFinite(Number(v)) ? Number(v) : d);
   const stealthFloor = num(w.stealthFloor, 0.5);
@@ -951,10 +970,23 @@ export function stealthStrength(raiders, { rules = {}, theft = false } = {}) {
     const n = Math.max(0, Math.round(Number(c.n) || 0));
     const q = Math.max(1, Number(c.quality) || 1);
     const said = String(c.what || c.kind || "").toLowerCase();
-    const quiet = quietWords.some(word => said.includes(String(word).toLowerCase()));
-    const per = quiet ? q : stealthFloor;
+    // ⛔ SNG-655 · A NAMED RAIDER IS READ, NOT MATCHED. Aevi: "give `raidersFrom` the power's own named people
+    // as the core of a raid — then stealth reads their crafts, and the anonymous bulk keeps the quietWords read."
+    // ⛑ `_person` marks them, and the SAME `dutyHand` the watch uses answers for them, asked about coming
+    // quietly rather than about noticing. One function, two sides of one contest — not two derivations of "how
+    // good is this person at this".
+    const rec = c._person && npcs ? npcs[String(c._person)] : null;
+    let per, why = null;
+    if (rec) {
+      const h = dutyHand(rec, { duty: "quiet", npcs, npcCfg, day, rules });
+      per = Math.max(stealthFloor, h.hand);
+      why = h.why;
+    } else {
+      const quiet = quietWords.some(word => said.includes(String(word).toLowerCase()));
+      per = quiet ? q : stealthFloor;
+    }
     heads += n; total += n * per;
-    terms.push({ label: `${n} ${String(c.what || c.kind || "of them").replace(/\s+/g, " ").slice(0, 60)}${quiet ? " — the quiet kind" : ""}`, value: Math.round(n * per * 10) / 10 });
+    terms.push({ label: `${n} ${String(c.what || c.kind || "of them").replace(/\s+/g, " ").slice(0, 60)}${why ? ` — ${why}` : (per > stealthFloor ? " — the quiet kind" : "")}`, value: Math.round(n * per * 10) / 10 });
   }
   if (theft && total > 0) {
     const v = total * (theftMult - 1);
@@ -988,7 +1020,7 @@ export function watchOdds(character, holding, { cfg = null, rules = {}, dangerLe
   const party = Array.isArray(raiders) && raiders.length ? raiders
     : [{ n: Math.max(1, Math.round(dl)), quality: Math.max(1, Math.round(dl / 2)), what: "raiders" }];
   const W = watchStrength(character, holding, { cfg, rules, people, npcs, npcCfg, day });
-  const S = stealthStrength(party, { rules, theft });
+  const S = stealthStrength(party, { rules, theft, npcs: npcs || people, npcCfg, day });
   const many = S.heads * perHeadSeen;
   const watch = W.total + many;
   const stealth = Math.max(0.01, S.total);

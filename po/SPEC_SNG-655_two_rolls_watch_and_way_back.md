@@ -40,7 +40,23 @@ ruling (everyone has it).
 - **The party:** the raiders' level-weighted count of people whose families include **move**, **deceive** or
   **hide**. When the party has an owner (SNG-634 C1, `raidersFrom(power)`), it's the power's own people; otherwise
   it's the anonymous party at the hold's danger level.
+  - ✅ **BUILT · 2026-09-25 (CCODE-509)**, and it needed a change to `powers.js` first, because *"the power's own
+    people"* had no population: `raidersFrom` returned CONTINGENTS — `{n, quality, what}`, where `what` is authored
+    prose and nothing person-shaped. ⚠️ I tried this repo's own prose reader on those 33 contingents and
+    `contributionsOf(…{evidence:true})` returned `["HARM"]` for **all 33** — its default — so a reader over them
+    would have scored identically forever. ⛑ **All 29 powers name a `leader` and all 29 ids resolve**, derived
+    levels 12–66, so the leader now rides at the core of a raid and the stealth side reads their record through the
+    same `dutyHand` the watch uses. The anonymous bulk keeps the authored word. ⚠️ Their combat quality is their
+    **rung** (3–6), never their level (12–66), and whether they take the field at all is `raid.leaderFights` — **off**,
+    because a leader in the clash takes a hold's win rate from 50.4% to 18.1% at the tipping point.
 - **The floor is `partySize × 0.5`,** so a big, loud raid is still *seen more easily* but never reads as zero.
+  - ✅ **AMENDMENT · 2026-09-25 · `perHeadSeen: 0.35`** (Aevi: *"accepted, and the flaw was mine — record it as an
+    amendment, not a deviation"*). ⚠️ **The line above states the rule and the arithmetic did the opposite.** Stealth
+    SUMS over heads, so with size on one side only, a bigger party was *harder* to see: measured, the median raid a
+    power sends is **36 heads** (min 7, max 104) — stealth 18 against a watch of 1–18, so an army walking up to the
+    gate was missed nine times in ten. ⛑ `perHeadSeen` is the other half of the term — *36 people coming is also 36
+    chances to be spotted* — and it is what makes the sentence above true. At `stealthFloor` (0.5) size cancels
+    exactly; at **0** you get the unamended arithmetic, army and all. The median raid now reads **63%**.
 - **Theft vs raid.** A **theft** is a small party (1–3) with doubled stealth weight: few, careful, quiet. A **raid** is
   the existing party. Both are rolled with the same function.
 

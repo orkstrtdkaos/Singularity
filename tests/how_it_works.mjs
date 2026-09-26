@@ -7687,6 +7687,71 @@ console.log("\n── §76g · the two rolls, and what each kept ──");
     && typeof rules6.death.note === "string",
     "a roll whose numbers live in code is a roll only I can balance");
 
+  /* ═════ 3b · CCODE-509 — A NAMED RAIDER, AND THE BALANCE CHANGE THAT IS NOT MINE ═════ */
+  // ⛔ AEVI ASKED FOR IT: "give `raidersFrom` the power's own named people as the core of a raid — then stealth
+  // reads their crafts, and the anonymous bulk keeps the quietWords read." All 29 powers name a `leader` and all
+  // 29 ids resolve, with derived levels 12 to 66.
+  // ⚠️ AND IT AROSE AS TWO CHANGES WEARING ONE COAT. Putting the leader on the field also put them in the
+  // FIGHT: measured at the tipping point across the powers, 540 raids on matched seeds, a hold's win rate falls
+  // from 50.4% to 18.1% and a third of outcomes flip. ⛑ So the READING ships and the FIGHTING is a dial that is
+  // off until Erik turns it — a 32-point swing is a ruling, not a tweak, and it is not mine to make.
+  {
+    const PW = await import("../engine/powers.js");
+    const pool = C6g.npcs || {};
+    const powers = Object.values(C6g.powers || {});
+    const tw = rules6.death.watch.tierWeight;
+    check("§76g: ⛔ CCODE-509 — a power's LEADER rides at the core of its raid, at their RUNG and never their level",
+      (() => {
+        const named = powers.map(p => PW.raidersFrom(p, {}, { npcs: pool, npcCfg: npcCfg6g, day: 100, tierWeight: tw }))
+          .filter(Boolean).map(party => party.find(c => c._person)).filter(Boolean);
+        if (named.length !== powers.length) return false;                      // every power names someone reachable
+        const qs = named.map(c => Number(c.quality));
+        // ⚠️ THE RUNG, NOT THE LEVEL: a legendary leader's level is 66 where contingents run 1–4. Putting 66 on
+        // the field would decide every raid in the game by itself, so the tier weight maps onto the same scale.
+        return qs.every(q => q >= 1 && q <= 7) && Math.max(...qs) <= 7 && named.every(c => c.n === 1 && c._person);
+      })(), "a named raider is what lets the watch read WHO is coming instead of matching words against prose");
+
+    check("§76g: ⛔ …and a caller that states no scale gets NO people — every raid that worked before this still works",
+      (() => {
+        const p = powers[0];
+        const withOut = PW.raidersFrom(p, {});                                  // no npcs, no tierWeight
+        const withIt = PW.raidersFrom(p, {}, { npcs: pool, npcCfg: npcCfg6g, day: 100, tierWeight: tw });
+        return Array.isArray(withOut) && withOut.every(c => !c._person)
+          && Array.isArray(withIt) && withIt.some(c => c._person)
+          && withOut.length === withIt.length - 1;
+      })(), "silence is safer than a guessed scale");
+
+    check("§76g: ⛔ …the STEALTH side READS them, rather than matching their prose",
+      (() => {
+        const p = powers.find(x => x.leader && pool[String(x.leader)]);
+        const party = PW.raidersFrom(p, {}, { npcs: pool, npcCfg: npcCfg6g, day: 100, tierWeight: tw });
+        const S = H6g.stealthStrength(party, { rules: rules6, npcs: pool, npcCfg: npcCfg6g, day: 100 });
+        const lead = S.terms.find(x => /their own record|leans this way|not their trade/.test(String(x.label)));
+        // and the anonymous bulk still reads Aevi's authored word, not a person
+        const bulk = S.terms.filter(x => !/their own record|leans this way|not their trade/.test(String(x.label)));
+        return !!lead && bulk.length >= 1 && S.total > 0;
+      })(), "a contingent carries a number and a line of prose; a person carries a record");
+
+    check("§76g: ⛔ …and `raid.leaderFights` is OFF, so the WATCH sees them and the CLASH does not (Erik's ruling, not mine)",
+      (() => {
+        const src = rd("engine/holdings.js");
+        const cfgOff = { ...cfg6g, raid: { ...(cfg6g.raid || {}) } };
+        // the shipping default must not put a person in the clash …
+        const offByDefault = cfg6g?.raid?.leaderFights !== true
+          && /const leaderFights = !!\(cfg\?\.raid\?\.leaderFights\);/.test(src)
+          && /const fighters = leaderFights \? raiders : raiders\.filter\(c => !c\._person\);/.test(src);
+        // … and the casualty books may only be keyed by a CONTINGENT's own `_at`, never by position: a person has
+        // no index, and `_at ?? i` would have charged a captain's losses to whichever contingent sat there.
+        const booksHonest = /const bled = raiders\.filter\(c => !c\._person && Number\.isFinite\(Number\(c\._at\)\)\);/.test(src)
+          && /killed\[bled\[i\]\._at\] = gone;/.test(src)
+          && !/killed\[raiders\[i\]\._at \?\? i\]/.test(src);
+        // … and the dial carries its measurement, so the person turning it knows what it costs
+        const noted = /leaderFights/.test(JSON.stringify(C6g.rules.economy.holdStore.raid || {}))
+          && /91\.5%|50\.4%/.test(String(C6g.rules.economy.holdStore.raid?._leaderFights || ""));
+        return offByDefault && booksHonest && noted;
+      })(), "a 32-point swing in who wins a raid is a ruling waiting for its ruler, not a default I get to pick");
+  }
+
   /* ═════ 4 · SNG-655 §3 — THE FOUR GATES AEVI ASKED FOR, in her own order ═════ */
 
   // ⛔ 1 · ONE NUMBER THROUGH EVERY DOOR. This is the gate for the defect she measured: `rollRetrieval` existed,

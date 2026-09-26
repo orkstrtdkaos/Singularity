@@ -30128,6 +30128,103 @@ console.log("\n── §374 · it does not want to come off ──");
     })(), "⚠️ and the refusal is SAID, in the item's own words — a refusal nobody explains reads as a broken button");
 }
 
+/* ══════════ §375 · SNG-643 §5 (C17) — A WHOLE NAME, AND WHO MAY LEARN IT ══════════ */
+// ✅ ERIK: "The Unbound might be what everyone refers to them as, but underneath it they have a name — the GM knows
+// it even if it might never be used. There are crafts that use names."
+//
+// ⛔ AEVI'S RULE, AND IT IS THE ONE THAT MATTERS: "`gm` names never reach the player unless learned. A hidden name
+// must NOT go into `aliases`, or the player's own speech would match it."
+console.log("\n── §375 · underneath it they have a name ──");
+{
+  const NM375 = await import("../engine/names.js");
+  const { loadContentHeadless: lch375 } = await import("./headless_content.mjs");
+  const C375 = await lch375();
+  const withNames = Object.values(C375.npcs || {}).filter(r => r && (r.fullName || r.trueName));
+  const byKnown = (k) => withNames.filter(r => String(r.nameKnown || "world") === k);
+
+  check("§375: ⛑ THE WHOLE NAMES ARE MERGED, AND EVERY ONE CAME WITH ITS GATE — a `fullName` with no `nameKnown` leaves the reader guessing, and the guess that cannot be taken back is a hidden name shown",
+    (() => {
+      // ⚠️ THE POPULATION IS THE 113 STAGED FIGURES, not every record that happens to have a whole name. 132 do:
+      // the other 20 are ORDINARY people — a castellan, a chief, a councillor — whose `fullName` came from CCODE-487's
+      // name pools, and for them an absent gate is correct and reads as `world`, which is what `wholeNameFor`
+      // defaults to. Asking the wider question made this red for people the feature is not about.
+      const staged = new Set(JSON.parse(rd("po/staged_content/SNG-643_names_and_the_unmet.json")).names.map(n => n.id));
+      const figures = withNames.filter(r => staged.has(r.id));
+      const ungated = figures.filter(r => !r.nameKnown);
+      return figures.length >= 112 && ungated.length === 0
+        && byKnown("world").length > 0 && byKnown("few").length > 0 && byKnown("gm").length > 0
+        // ⛑ and an ordinary person with a whole name and no gate reads as `world`, deliberately
+        && NM375.wholeNameFor({ id: "x", name: "A Castellan", fullName: "Tomas Evander Brannoch" }, {}).whole === "Tomas Evander Brannoch";
+    })(), `${withNames.length} records carry a whole name · world ${byKnown("world").length} · few ${byKnown("few").length} · gm ${byKnown("gm").length}`);
+
+  // ⛔ THE RULE AEVI NAMED, over the WHOLE corpus rather than a fixture — because the leak she is guarding against
+  // is one record somebody authors carelessly, not the mechanism.
+  check("§375: ⛔ NO HIDDEN NAME IS IN `aliases`, ANYWHERE IN THE CORPUS — `aliases` is matched against the player's own speech, so the game would answer to a name nobody ever told them",
+    (() => {
+      const leaks = [];
+      for (const r of withNames) {
+        if (String(r.nameKnown || "world") === "world") continue;
+        const whole = r.fullName || r.trueName;
+        const al = (Array.isArray(r.aliases) ? r.aliases : []).map(String);
+        if (al.includes(whole)) leaks.push(`${r.id}: ${whole}`);
+      }
+      return leaks.length === 0;
+    })(), "and it is asked of every record, not of a fixture — the leak is one careless authoring, not the mechanism");
+
+  // ⛔ THE READER: `world` shows, `few` and `gm` do not, and LEARNING opens it.
+  check("§375: ⛔ `world` SHOWS, `few` AND `gm` DO NOT — and `few` is not `world`: it means scholars, kin and the old, which is not the player by default",
+    (() => {
+      const w = { id: "w", name: "Someone", fullName: "A B C", nameKnown: "world" };
+      const f = { id: "f", name: "Another", fullName: "D E F", nameKnown: "few" };
+      const g = { id: "g", name: "A Third", fullName: "G H I", nameKnown: "gm" };
+      const ch = {};
+      return NM375.wholeNameFor(w, ch).whole === "A B C"
+        && NM375.wholeNameFor(f, ch).whole === null && /scholars, kin/.test(NM375.wholeNameFor(f, ch).why)
+        && NM375.wholeNameFor(g, ch).whole === null && /have not learned/.test(NM375.wholeNameFor(g, ch).why)
+        // ⛑ and the refusal still says there IS a name, so a caller can render it without guessing
+        && NM375.wholeNameFor(g, ch).kind === "fullName" && NM375.wholeNameFor(g, ch).name === "A Third";
+    })());
+
+  check("§375: ⛔ A NAME-CRAFT OPENS IT, and only for the character who learned it — the Unlit's Veil-received true name, Vessa's trade",
+    (() => {
+      const g = { id: "gg", name: "The Starless One", fullName: "Liath Seren Oubliere", nameKnown: "gm" };
+      const mine = {}, theirs = {};
+      const first = NM375.learnWholeName(mine, "gg", { day: 9, how: "the Veil gave it" });
+      const again = NM375.learnWholeName(mine, "gg", { day: 10 });
+      return first === true && again === false
+        && NM375.wholeNameFor(g, mine).whole === "Liath Seren Oubliere"
+        && /you learned it/.test(NM375.wholeNameFor(g, mine).why)
+        && NM375.wholeNameFor(g, theirs).whole === null
+        && mine.namesKnown.gg.how === "the Veil gave it";
+    })(), "and learning it writes `namesKnown` and NOTHING else — never `aliases`, which is the one field Aevi ruled out");
+
+  check("§375: ⛑ …and an OLDER SAVE's array form of `namesKnown` is read and converted, never dropped",
+    (() => {
+      const ch = { namesKnown: ["already_known"] };
+      NM375.learnWholeName(ch, "new_one", { day: 1 });
+      return ch.namesKnown.already_known === true && !!ch.namesKnown.new_one && !Array.isArray(ch.namesKnown);
+    })());
+
+  // ⛔ AND THE MATCHABLE SET, as a function rather than a rule in a comment.
+
+  // ⛔ THE READER IS WIRED, and it was wired over a leak that already existed.
+  check("§375: ⛔ N5's PEOPLE CARD IS GATED — it read `rec?.fullName` straight into the hover, so the moment 112 whole names merged a `gm` name would have been sitting in a tooltip",
+    (() => {
+      const app = rd("app.js");
+      return /const shown = merged \? wholeNameFor\(merged, character\) : null;/.test(app)
+        && /return shown\?\.whole \|\| shownName\(p\);/.test(app)
+        && !/return rec\?\.fullName \|\| shownName\(p\);/.test(app)
+        // ⚠️ and the GATE comes off the AUTHORED record, or a thin registry copy with no `nameKnown` would default
+        // it to "world" and open every hidden name at once
+        && /if \(merged && authored\?\.nameKnown\) merged\.nameKnown = authored\.nameKnown;/.test(app);
+    })());
+
+  // ⚠️ ONE STAGED ID NAMES NO RECORD, and it is one of Aevi's own noted data traps.
+  check("§375: ⚠️ …and the one staged id that names no record is the RETIRED High Luminary — skipped rather than created, because creating a record for a retired id is how a duplicate comes back",
+    !C375.npcs?.high_luminary && !!C375.npcs?.the_high_luminary?.fullName,
+    "Aevi's own trap: “there are two High Luminary records (`high_luminary`, `the_high_luminary`) — which is canon?”");
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

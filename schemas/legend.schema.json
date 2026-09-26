@@ -85,8 +85,13 @@
    "description": "present on 70 of 70"
   },
   "fears": {
-   "type": ["string", "array"],
-   "items": { "type": "string" },
+   "type": [
+    "string",
+    "array"
+   ],
+   "items": {
+    "type": "string"
+   },
    "description": "what they fear; a string, or layered fears as an array. Same shape as npc.schema, because legends reach the npc registry. SNG-658 authored two per tradition epic (57 of 70 carry it)."
   },
   "reactsToReputation": {
@@ -213,6 +218,30 @@
   "aliases": {
    "type": "array",
    "description": "present on 7 of 70"
+  },
+  "fullName": {
+   "type": "string",
+   "description": "SNG-643 §3: a PERSON's whole name — given, middle, family — including everyone who BECAME something, because the lore says Sovereigns are \"things that BECAME\" and each of them had a name before. ⛑ `name` never changes: it stays whatever people say."
+  },
+  "trueName": {
+   "type": "string",
+   "description": "SNG-643 §3: a BEING that is not a person has this instead — a Precursor, a dragon, an ent, the Old Stag, Aevi the Watcher. A Precursor's name IS its nature, so there is nothing under it."
+  },
+  "nameKnown": {
+   "enum": [
+    "world",
+    "few",
+    "gm"
+   ],
+   "description": "SNG-643 §5: who may learn the whole name. `world` people know it · `few` scholars, kin and the old · `gm` hidden, and only a name-craft or the fiction hands it over. ⛔ A `gm` name may NEVER enter `aliases`: `aliases` is matched against the player's own speech, so the game would answer to a name nobody ever told them."
+  },
+  "title": {
+   "type": "string",
+   "description": "the epithet, moved off `name` — “the Unmoved, the First Hand”. Shown beside the name so two people called Maren tell apart without lengthening the line (SNG-638 N5)."
+  },
+  "_nameNote": {
+   "type": "string",
+   "description": "why this figure's name takes the form it does — Aevi's note, carried from the staged set."
   }
  },
  "patternProperties": {

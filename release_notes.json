@@ -16,6 +16,30 @@
   "next": [],
   "releases": [
     {
+      "version": "2.13.0",
+      "date": "2026-09-26",
+      "entries": [
+        {
+          "kind": "feature",
+          "title": "Everyone has a name underneath what they are called",
+          "summary": "A hundred and twelve of the world's great figures now have a whole name — given, middle, family — and most of them nobody says out loud.",
+          "detail": "The Unbound is what everyone calls them. Underneath it they are somebody, and for a third of the world's figures that name is hidden: the game knows it, and you do not. Another third is known only to scholars, kin and the old. The rest is common knowledge, and those you will see on the card as soon as you meet them.\n\nWhat people call them never changes — that is the name in the world's mouth, and epithets sit beside it rather than inside it. ⛑ And a hidden name is never quietly matchable: the game will not answer to a name nobody told you."
+        },
+        {
+          "kind": "feature",
+          "title": "A name is something you can learn",
+          "summary": "Hidden names are reachable — by a craft that asks beyond the Veil, by somebody who trades in them, or by the fiction handing one over.",
+          "detail": "Learn one and it is yours: the card shows it from then on, for your character and nobody else's. This is why it matters that it was hidden — there are crafts in this world that work on a true name, and a name you had to earn is worth something a name printed on a card is not."
+        },
+        {
+          "kind": "fix",
+          "title": "A hidden name was one commit from being in a tooltip",
+          "summary": "The people card put the whole name in its hover without asking whether you were allowed to see it.",
+          "detail": "It had been written that way long before there were any hidden names to leak, and it read straight off the record. The moment a hundred and twelve whole names landed, a third of them hidden, the hover would have quietly handed them over. It asks first now — and it asks the world's own record rather than your character's copy, because a thin copy with no answer would have been read as “everybody knows this one”."
+        }
+      ]
+    },
+    {
       "version": "2.12.2",
       "date": "2026-09-26",
       "entries": [

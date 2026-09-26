@@ -94,6 +94,7 @@ import { planJob, suggestTeam, jobPoolOf, jobRouteOf, jobCost, jobWages, jobEffe
 import { ensureJobs, postJob, sendOnJob, awayOnJob, untoldJobs, markJobsTold, dropJob, detachedFrom } from "./engine/jobstate.js";   // CCODE-420 · CCODE-431
 import { sendCaravan, caravansOf, storeExits } from "./engine/caravan.js";   // R49: a caravan is a delegate + a route + a load   // SNG-331 §1 / SNG-386 §4.4: two named options over roads + gates // SNG-148: waygates — map control routes named/hub; GM offer via the registry row. SNG-243 §4: the gate network
 import { skillDetail, npcDetail, itemDetail, relationshipsParagraph, craftRollsLine, craftRollsShort } from "./engine/entityDetail.js";
+import { wholeNameFor, learnWholeName } from "./engine/names.js";   // ⛔ SNG-643 §5 (C17): a whole name is shown only when this character may see it
 import { collapseScenePresence, canonicalPersonId, personArtSeed, applyNpcUpdates, findExistingNpc, genderUnsaid, sexUnsaid, SEX_VALUES, sexFromGender, sexGenderAgree, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier, backfillNpcGender, reconcileGeneratedNpcWithMeet, npcFearsForGM, npcReactionsForGM, repairUnnamedPeople } from "./engine/npcs.js";   // SNG-431 §1: the pre-namer saves get their names
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM, findSubPlaceParent, lastEnteredSubPlace } from "./engine/places.js";
 import { activeArcEffects, craftCostNote, encounterBias, effectsInPlainWords, npcMoodLines, travelCostFactor } from "./engine/arceffects.js";   // SNG-273: an advanced arc is something you FEEL
@@ -181,7 +182,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.12.2";
+const APP_VERSION = "2.13.0";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -21311,7 +21312,22 @@ function renderPlay(turn, opts = {}) {
       // beside another row reading "Maren" is the defect Erik named; "Maren · Tuning-Warden of the Lower
       // Terrace" and a hover of "Maren Oriel Vasse" tell them apart without lengthening the line.
       const titleOf = (p) => { const rec = p.id ? character.npcRegistry?.[p.id] : null; return rec?.title ? String(rec.title) : ""; };
-      const wholeName = (p) => { const rec = p.id ? character.npcRegistry?.[p.id] : null; return rec?.fullName || shownName(p); };
+      // ⛔ SNG-643 §5 (C17) — THE WHOLE NAME IS GATED. This read `rec?.fullName` straight into the hover, so the
+      // moment the 112 whole names merged, a `gm` name — the Starless One is Liath Seren Oubliere — would have been
+      // sitting in a tooltip. ⚠️ Aevi's rule: "`gm` names never reach the player unless learned."
+      // ⛑ AND IT READS THE AUTHORED RECORD TOO. A great figure's whole name lives on the authored record and the
+      // registry copy is often thin, so reading only the registry would show nothing for exactly the people this
+      // feature is about.
+      const wholeName = (p) => {
+        const rec = p.id ? (character.npcRegistry?.[p.id] || null) : null;
+        const authored = p.id ? (CONTENT.npcs?.[p.id] || null) : null;
+        const merged = (rec || authored) ? { ...(authored || {}), ...(rec || {}), id: p.id } : null;
+        // ⚠️ THE GATE COMES OFF THE AUTHORED RECORD, never the registry copy: a spread that let a registry entry with
+        // no `nameKnown` win would default the gate to "world" and open every hidden name at once.
+        if (merged && authored?.nameKnown) merged.nameKnown = authored.nameKnown;
+        const shown = merged ? wholeNameFor(merged, character) : null;
+        return shown?.whole || shownName(p);
+      };
       const row = (p, extra = "") => `<div class="known-npc"><span class="npc-name entity-hover" ${p.id ? `data-entity="npc:${esc(p.id)}"` : ""} title="${esc(wholeName(p))}${titleOf(p) ? ` — ${esc(titleOf(p))}` : ""}">${esc(shownName(p))}${titleOf(p) ? ` <span class="hint">· ${esc(titleOf(p))}</span>` : ""}</span><span class="rep-band ${p.bondType === "romantic" ? "trusted" : ""}" title="${esc(p.label)}${esc(extra)}">${esc(p.label)}${extra}</span>${peopleCtl(p)}</div>`;
       const body = `${partners.length ? `<div class="partner-adjacent" style="margin-bottom:6px">${partners.map(p => `<div class="known-npc partner"><span class="npc-name entity-hover" ${p.id ? `data-entity="npc:${esc(p.id)}"` : ""} title="${esc(shownName(p))}">❤ ${esc(shownName(p))}</span><span class="rep-band trusted" title="A committed partner — with you in all but the mechanics · ${esc(p.label)}">${esc(p.label)} · with you</span>${peopleCtl(p)}</div>`).join("")}</div>` : ""}${rep ? `<div style="margin-bottom:4px"><span class="rep-band ${rep.band}">${rep.band} (${rep.score})</span></div>` : ""}${hereRest.length ? hereRest.map(p => row(p)).join("") : (partners.length ? "" : `<span class="insight">no one you know is here right now</span>`)}`;
       return `<details class="sidebar-sec" data-sec="whoshere"${sectionOpen("whoshere", true) ? " open" : ""}><summary><span class="sec-title">${esc(location.name)} — who's here</span>${rep ? ` <span class="sec-sum">· ${rep.band}</span>` : ""}</summary><div class="sec-body">${body}</div></details>`;

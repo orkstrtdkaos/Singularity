@@ -482,3 +482,68 @@ export function personName({ proposed = "", role = "", pools = null, tradition =
   if (m) return { name: m.name, byname: m.byname, middle: m.middle || undefined, fullName: m.fullName || undefined, nameUnknown: false, minted: true };
   return { name: descriptorLabel(raw, role, max), nameUnknown: true, minted: false };
 }
+
+/* ═════ SNG-643 §5 · C17 — A WHOLE NAME, AND WHO MAY LEARN IT ═════
+ *
+ * ✅ ERIK: *"The Unbound might be what everyone refers to them as, but underneath it they have a name — the GM knows
+ * it even if it might never be used. There are crafts that use names."*
+ *
+ * ⛑ THREE RULES DECIDE THE FORM, and they are Aevi's: a PERSON has given/middle/family on `fullName` — including
+ * everyone who *became* something, because the lore says Sovereigns are "things that BECAME" and each of them had a
+ * name before. A BEING that is not a person has a `trueName` instead, and a Precursor's name IS its nature, so there
+ * is nothing under it. And `name` never changes: it stays whatever people say.
+ *
+ * ⛔ `nameKnown` DECIDES WHO MAY LEARN IT: `world` (people know it) · `few` (scholars, kin, the old) · `gm` (hidden;
+ * the GM knows it and name-crafts can reach it). ⚠️ AND A HIDDEN NAME MAY NEVER ENTER `aliases` — Aevi's reason is
+ * exact: the player's own speech would match it, and the game would answer to a name they were never told.
+ */
+
+/** ⛔ WHAT THIS CHARACTER MAY BE SHOWN of a figure's whole name.
+ *
+ *  Returns `{ name, whole, kind, known, why }` — `name` is always what people say, `whole` is the whole name ONLY if
+ *  this character may see it. ⛑ `whole: null` with a `why` is the common answer and the caller must be able to render
+ *  it without guessing: there IS a name, and it is not theirs yet.
+ *
+ *  ⚠️ `few` IS NOT `world`. It means scholars, kin and the old — not the player by default — so it reads as hidden
+ *  until learned, exactly like `gm`. The difference is who can TELL them, which is the fiction's business. PURE. */
+export function wholeNameFor(rec, character = null) {
+  if (!rec) return { name: null, whole: null, kind: null, known: null, why: "nobody" };
+  const spoken = rec.name || rec.id || null;
+  const whole = rec.fullName || rec.trueName || null;
+  const kind = rec.fullName ? "fullName" : rec.trueName ? "trueName" : null;
+  if (!whole) return { name: spoken, whole: null, kind: null, known: null, why: "they have no other name" };
+  const known = String(rec.nameKnown || "world");
+  const learned = !!(character?.namesKnown && typeof character.namesKnown === "object" && character.namesKnown[rec.id]);
+  if (known === "world" || learned) {
+    return { name: spoken, whole, kind, known, why: learned && known !== "world" ? "you learned it" : "people know it" };
+  }
+  return { name: spoken, whole: null, kind, known,
+    why: known === "gm" ? "nobody says it, and you have not learned it" : "only scholars, kin and the old know it" };
+}
+
+/** ⛑ LEARNING ONE. A name-craft (the Unlit's Veil-received true name, Vessa's trade) or the fiction handing it over.
+ *  Returns true only the first time. MUTATES.
+ *  ⛔ IT WRITES `namesKnown` AND NOTHING ELSE — never `aliases`, which is the one thing Aevi ruled out by name. */
+export function learnWholeName(character, id, { day = null, how = null } = {}) {
+  const key = String(id || "");
+  if (!character || !key) return false;
+  if (!character.namesKnown || typeof character.namesKnown !== "object" || Array.isArray(character.namesKnown)) {
+    const was = Array.isArray(character.namesKnown) ? character.namesKnown : [];
+    character.namesKnown = {};
+    for (const x of was) character.namesKnown[String(x)] = true;   // an older save's array form is kept
+  }
+  if (character.namesKnown[key]) return false;
+  character.namesKnown[key] = { day: Number(day) || null, how: how ? String(how) : null };
+  return true;
+}
+
+/* ⛔ THERE WAS A `matchableNames` HERE, AND THE WIRING AUDIT WAS RIGHT TO REFUSE IT.
+ *
+ * It expressed Aevi's rule as a function — "a hidden whole name must not be matchable against the player's own
+ * speech" — and had NO CALLER: `findExistingNpc` matches the REGISTRY, where a great figure's AUTHORED `fullName`
+ * does not live, so there was nothing for it to guard.
+ *
+ * ⛑ The rule is kept where it bites instead: §375 asserts over the WHOLE corpus that no `nameKnown: "few"` or
+ * `"gm"` figure has its whole name in `aliases`. One statement of a rule, in the place that can enforce it.
+ * ⚠️ If a matcher ever reads authored records, it must ask `wholeNameFor` first — that is what this note is for.
+ */

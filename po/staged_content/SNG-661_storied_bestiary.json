@@ -1,0 +1,1671 @@
+{
+ "schemaVersion": 1,
+ "id": "SNG-661_storied_bestiary",
+ "kind": "staged_content",
+ "note": "SNG-661 — the storied bestiary. 55 creatures from every people's folklore, made real by the Storm. STAGED: applied once the engine reads `habitat` as encounter tags (otherwise all 52 live-tier creatures would roll everywhere and flood the dangerous pool). The 3 legendary/mythic entries also wait for SNG-660's BEAST_TIER rows.",
+ "newClass": {
+  "storied_beast": {
+   "concept": "A creature out of a story. When the Storm came through, what the peoples had told each other in the dark for generations came true: the grave-eaters the Ashwardens warned their children about, the Rootkin's briar-bear, the Blazeborn's pyre-hounds, the Masons' gargoyles. Each tradition's folklore became fauna in its own lands, and then it spread along the roads.",
+   "readsFromArc": "arc_manifestation_storm",
+   "morallyClean": "It is the story, not a someone: a shape the Storm poured a people's belief into. It has an animal's hunger or a tale's rule, never a grievance. If it could be reasoned with as a person, it would belong in NPCs.",
+   "hasSelf": true,
+   "kit": [
+    {
+     "function": "strike",
+     "name": "the tale's teeth",
+     "why": "every story creature has the one thing it does to you"
+    },
+    {
+     "function": "resist",
+     "name": "what the story says it is",
+     "why": "it is exactly as hard to hurt as the tale says"
+    },
+    {
+     "function": "foresee",
+     "name": "the story's rule",
+     "why": "⚑ and it is bound by its tale: the rule the people told about it (storyRule) is TRUE, and knowing it is the edge"
+    }
+   ],
+   "_whyThisClass": "SNG-661 (Erik 2026-09-26: 'think of all the types of creatures in the monster compendiums of games like this... those would likely exist here in all kinds of different areas because the people manifested them'). The in-world reason is the Manifestation Storm: belief made real. That is why each creature carries `storiedBy` (whose story), `habitat` (where it lives, matched against place tags) and `storyRule` (the folk-remedy from the tale, which works)."
+  }
+ },
+ "fieldsAdded": {
+  "storiedBy": "whose folklore made it (display and lore; not a gate)",
+  "habitat": "place tags it belongs to, matched like encounter tags against location tags (terrain + the people's own lands)",
+  "storyRule": "the rule from the tale that works on it — revealed to the player on a KNOW success, and true",
+  "unique": "one in the world; never rolled on a random table"
+ },
+ "roster": [
+  {
+   "id": "corpse_lights",
+   "tier": "riffraff",
+   "name": "corpse-lights",
+   "storiedBy": "Ashwardens",
+   "habitat": [
+    "marsh",
+    "death",
+    "ashwarden",
+    "water"
+   ],
+   "affinity": {
+    "physical": "immune",
+    "light": "vulnerable"
+   },
+   "look": "Pale lamps bobbing low over black water, always a little ahead, always the same distance away. They look like someone carrying a lantern home.",
+   "danger": "They lead. Follow them and the ground goes soft, then goes under. They do not bite; the marsh does.",
+   "pressures": [
+    "KNOW (see that no one holds the lamp)",
+    "WARD (keep your feet on firm ground)",
+    "MOVE (turn back the way you came)"
+   ],
+   "storyRule": "The Ashwarden children's rule: a light that will not let you catch up is not going home. Walk away from it and it forgets you.",
+   "clean": "Nothing to kill. Snuff the light and there is only swamp gas and the sound of frogs.",
+   "aggressorKind": "hazard",
+   "class": "storied_beast"
+  },
+  {
+   "id": "grave_eaters",
+   "tier": "notable",
+   "name": "a pack of grave-eaters",
+   "storiedBy": "Ashwardens",
+   "habitat": [
+    "death",
+    "ashwarden",
+    "ruin",
+    "sacred"
+   ],
+   "affinity": {
+    "decay": "resist",
+    "light": "vulnerable"
+   },
+   "look": "Long-armed, grey-skinned things that move on all fours between the stones, faces pressed to the earth. Their nails are black with it.",
+   "danger": "They dig up what the Ashwardens laid down and they are not particular about whether it has finished dying. Their claws numb; a scratched limb goes slow and cold.",
+   "pressures": [
+    "HARM (they are only flesh)",
+    "WARD (keep the numbing off you)",
+    "KNOW (find where they den)",
+    "MOVE (they are quick in the dark)"
+   ],
+   "storyRule": "Every Ashwarden grandmother's story: they cannot cross a line of ash laid with a prayer. The old grave-rings still work.",
+   "clean": "The story that made them was told to keep children out of graveyards. Ending them keeps the dead where they were put.",
+   "aggressorKind": "beast",
+   "class": "storied_beast"
+  },
+  {
+   "id": "barrow_wight",
+   "tier": "leader",
+   "name": "a barrow-wight",
+   "storiedBy": "Ashwardens",
+   "habitat": [
+    "death",
+    "ashwarden",
+    "ruin",
+    "cold",
+    "foothill"
+   ],
+   "affinity": {
+    "physical": "resist",
+    "light": "vulnerable",
+    "psychic": "resist"
+   },
+   "look": "A tall shape in rotted mail at the mouth of an old barrow, crowned with a band of dull gold. Its breath frosts in summer. Its eyes are two cold sparks.",
+   "danger": "Its touch drinks warmth: fingers, then hands, then the will to move. It guards the barrow's gold and anything that takes a coin from it is followed home.",
+   "pressures": [
+    "WARD (hold your warmth)",
+    "HARM (break the crown, not the body)",
+    "KNOW (name the one it was)",
+    "UNMAKE (end the guarding)"
+   ],
+   "storyRule": "Put back what was taken, every coin, and it lies down again. The story says it was only ever a guard who was never relieved.",
+   "clean": "A duty that outlived its keeper. Relieve it and there is only old bone and cold gold.",
+   "aggressorKind": "beast",
+   "class": "narrowed_dead"
+  },
+  {
+   "id": "snare_vine",
+   "tier": "riffraff",
+   "name": "a snare-vine thicket",
+   "storiedBy": "Rootkin",
+   "habitat": [
+    "rootkin",
+    "grove",
+    "deepwood",
+    "wild",
+    "life"
+   ],
+   "affinity": {
+    "decay": "vulnerable",
+    "living": "resist"
+   },
+   "look": "A green wall of creeper that is slightly too thick, slightly too still, and has a boot in it.",
+   "danger": "It closes. Slowly, then not slowly. Whatever it holds long enough becomes part of the thicket.",
+   "pressures": [
+    "MOVE (don't get wrapped)",
+    "HARM (cut, quickly)",
+    "KNOW (see which green is waiting)"
+   ],
+   "storyRule": "The Rootkin say ask it to open. Speak to it as you would to a garden and it loosens; hack at it and it grips.",
+   "clean": "A plant that learned hunting from a story. Burn it back and the wood grows normal green in its place.",
+   "aggressorKind": "hazard",
+   "readsAlsoFrom": [
+    "arc_green_schism"
+   ],
+   "class": "storied_beast"
+  },
+  {
+   "id": "briar_bear",
+   "tier": "notable",
+   "name": "a briar-bear",
+   "storiedBy": "Rootkin",
+   "habitat": [
+    "rootkin",
+    "deepwood",
+    "wild",
+    "grove",
+    "frontier"
+   ],
+   "affinity": {
+    "physical": "resist",
+    "decay": "vulnerable"
+   },
+   "look": "A bear the size of a cart with an owl's great round face and a hide grown through with thorned briar. It hoots before it charges, low, like a question.",
+   "danger": "It mauls. The briar tears whatever the claws miss, and it does not stop for wounds; it stops when you are not moving.",
+   "pressures": [
+    "HARM (through the briar)",
+    "WARD (the charge)",
+    "MOVE (up, out of reach)",
+    "KNOW (read the hoot)"
+   ],
+   "storyRule": "The Rootkin tale: it only hunts what runs. Stand still and answer the hoot with a hoot, and it will circle, puzzled, and go.",
+   "clean": "Half a bear, half a bedtime story told to keep children out of the deep wood. Put down, it is a bear again, and very old.",
+   "aggressorKind": "beast",
+   "readsAlsoFrom": [
+    "arc_green_schism"
+   ],
+   "class": "storied_beast"
+  },
+  {
+   "id": "weaver_spiders",
+   "tier": "notable",
+   "name": "a nest of weaver-spiders",
+   "storiedBy": "Rootkin",
+   "habitat": [
+    "deepwood",
+    "dark",
+    "underplace",
+    "wild"
+   ],
+   "affinity": {
+    "physical": "vulnerable",
+    "living": "resist"
+   },
+   "look": "Webs strung tree to tree like sails, and in them spiders the size of dogs, patient and many-eyed and nearly beautiful.",
+   "danger": "Poison that slows the limbs, webs that hold like rope, and more of them than there seemed to be.",
+   "pressures": [
+    "MOVE (don't get webbed)",
+    "HARM (the nest, not each spider)",
+    "WARD (the venom)",
+    "KNOW (find the brood-mother)"
+   ],
+   "storyRule": "Fire, the old story says, and the story is right. Their silk burns fast and they will not follow through smoke.",
+   "clean": "Spiders a frightened people made too big. The wood is better with smaller ones.",
+   "aggressorKind": "beast",
+   "class": "storied_beast"
+  },
+  {
+   "id": "shambling_mound",
+   "tier": "leader",
+   "name": "a shambling mound",
+   "storiedBy": "Rootkin",
+   "habitat": [
+    "marsh",
+    "deepwood",
+    "rootkin",
+    "wild",
+    "flooded"
+   ],
+   "affinity": {
+    "physical": "resist",
+    "light": "vulnerable",
+    "living": "immune"
+   },
+   "look": "A heap of rotting vegetation the height of a man and a half, which stands up. Things are tangled in it. Some of them were travellers.",
+   "danger": "It enfolds. It smothers and digests slowly, and blades sink into it and come out wet. Lightning, the story says, only feeds it.",
+   "pressures": [
+    "HARM (with fire, not iron)",
+    "MOVE (out of its reach)",
+    "WARD (breath and skin)",
+    "SHAPE (dry the ground under it)"
+   ],
+   "storyRule": "It cannot leave wet ground. Draw it onto dry stone and it slows, then crumbles.",
+   "clean": "The marsh's hunger with a shape put on it. Scatter it and it is only compost.",
+   "aggressorKind": "beast",
+   "readsAlsoFrom": [
+    "arc_green_schism"
+   ],
+   "class": "storied_beast"
+  },
+  {
+   "id": "heartwood_colossus",
+   "tier": "heroic",
+   "name": "a heartwood colossus",
+   "storiedBy": "Rootkin",
+   "habitat": [
+    "ent",
+    "deepwood",
+    "grove",
+    "rootkin",
+    "ancient"
+   ],
+   "affinity": {
+    "physical": "resist",
+    "decay": "vulnerable",
+    "light": "vulnerable"
+   },
+   "look": "An oak that walks, three storeys high, bark split with old axe-scars, moss for a beard. There is no face in it anymore, only the place where one was.",
+   "danger": "It was woken to guard a grove and the grove is long gone. It guards the ground now, from everything, and its roots come up under your feet.",
+   "pressures": [
+    "KNOW (find what it thinks it is guarding)",
+    "SHAPE (give it a grove to keep)",
+    "WARD (the roots)",
+    "HARM (a tree does fall)"
+   ],
+   "storyRule": "Plant something in its sight and it stops to guard the seedling. The Rootkin do this still, on purpose.",
+   "clean": "A guardian with nothing left to guard. Ending it is felling an old tree. Giving it a sapling is kinder, and it works.",
+   "aggressorKind": "beast",
+   "readsAlsoFrom": [
+    "arc_green_schism"
+   ],
+   "class": "substrate_warped_beast"
+  },
+  {
+   "id": "salamander_nest",
+   "tier": "riffraff",
+   "name": "a nest of salamanders",
+   "storiedBy": "Blazeborn",
+   "habitat": [
+    "blazeborn",
+    "light",
+    "mountain",
+    "creation"
+   ],
+   "affinity": {
+    "light": "immune",
+    "cold": "vulnerable"
+   },
+   "look": "Red-gold lizards the length of an arm, basking in a vent where the rock glows. The air shimmers. Their tongues are flame.",
+   "danger": "They set what they touch alight, and they come out in numbers when the nest is disturbed.",
+   "pressures": [
+    "WARD (the burning)",
+    "HARM (with cold, or water)",
+    "MOVE (leave their rock)"
+   ],
+   "storyRule": "Every Blazeborn smith knows: they will not leave the heat. Step off the warm stone and they will not follow.",
+   "clean": "Sparks that got legs in a forge-story. Put out, they are only ash and a smell of pitch.",
+   "aggressorKind": "beast",
+   "class": "storied_beast"
+  },
+  {
+   "id": "pyre_hounds",
+   "tier": "notable",
+   "name": "a brace of pyre-hounds",
+   "storiedBy": "Blazeborn",
+   "habitat": [
+    "blazeborn",
+    "road",
+    "light",
+    "plateau"
+   ],
+   "affinity": {
+    "light": "immune",
+    "cold": "vulnerable",
+    "physical": "resist"
+   },
+   "look": "Two long black dogs with coals for eyes and smoke curling from their jaws, trotting just off the road, keeping pace.",
+   "danger": "They run their quarry down and their bite burns. The grass behind them smoulders for a day.",
+   "pressures": [
+    "MOVE (they are faster)",
+    "HARM (with cold)",
+    "WARD (the burning bite)",
+    "KNOW (who set them running)"
+   ],
+   "storyRule": "The Blazeborn road-tale says they hunt only the oathbreaker. Keep a promise in your mouth, spoken aloud, and they pass you by.",
+   "clean": "The story of the hound that punishes a broken oath, grown teeth. End them and the road is only a road.",
+   "aggressorKind": "beast",
+   "class": "storied_beast"
+  },
+  {
+   "id": "cinder_wyvern",
+   "tier": "leader",
+   "name": "a cinder wyvern",
+   "storiedBy": "Blazeborn",
+   "habitat": [
+    "blazeborn",
+    "mountain",
+    "plateau",
+    "frontier"
+   ],
+   "affinity": {
+    "light": "resist",
+    "cold": "vulnerable"
+   },
+   "look": "A lean two-legged dragon-kin with leather wings the colour of banked coals and a barbed tail that drips something that hisses on stone.",
+   "danger": "It stoops from height, rakes, and climbs again. The tail's sting burns inside the wound for days.",
+   "pressures": [
+    "MOVE (get under cover)",
+    "HARM (the wings, first)",
+    "WARD (the sting)",
+    "KNOW (find where it roosts)"
+   ],
+   "storyRule": "It cannot land on wet ground; the smiths' story says it fears the quench. Water on its roost drives it off for a season.",
+   "clean": "A drake out of a forge-song, not a true dragon and not a person. The mountain is quieter without it.",
+   "aggressorKind": "beast",
+   "class": "storied_beast"
+  },
+  {
+   "id": "darkmantles",
+   "tier": "riffraff",
+   "name": "darkmantles",
+   "storiedBy": "Umbrals",
+   "habitat": [
+    "umbral",
+    "dark",
+    "underplace",
+    "ruin"
+   ],
+   "affinity": {
+    "light": "vulnerable",
+    "physical": "resist"
+   },
+   "look": "Something like a black cloak hanging from the ceiling of the passage. Then several somethings. Then they drop.",
+   "danger": "They fall on the head, wrap it and squeeze, and they snuff every light near them as they come.",
+   "pressures": [
+    "KNOW (look up)",
+    "WARD (keep your light)",
+    "HARM (pull, cut, crush)",
+    "MOVE (back into the open)"
+   ],
+   "storyRule": "The Umbral miners' rule: a lit passage has no mantles. They only hang where the dark has been left alone for a year.",
+   "clean": "Shadows a nervous people gave weight to. Pinned in the light, they curl up like burnt paper.",
+   "aggressorKind": "beast",
+   "class": "storied_beast"
+  },
+  {
+   "id": "shade_panther",
+   "tier": "notable",
+   "name": "a shade-panther",
+   "storiedBy": "Umbrals",
+   "habitat": [
+    "umbral",
+    "dark",
+    "deepwood",
+    "wild"
+   ],
+   "affinity": {
+    "light": "vulnerable",
+    "physical": "resist"
+   },
+   "look": "A great black cat with two long whip-tendrils from its shoulders, and it is never quite where it seems to be. You strike where it is and it is a pace to the left.",
+   "danger": "It hunts by misdirection: the image it throws is where your blow goes, and the tendrils come from somewhere else.",
+   "pressures": [
+    "KNOW (see where it truly is)",
+    "HARM (strike beside the shape)",
+    "WARD (the tendrils)",
+    "MOVE (put your back to something)"
+   ],
+   "storyRule": "Close one eye, the Umbral hunters say. The shadow it throws only fools two eyes at once.",
+   "clean": "A hunting cat from a story about the dark lying to you. Killed, it is exactly where it lies.",
+   "aggressorKind": "beast",
+   "class": "storied_beast"
+  },
+  {
+   "id": "the_grue",
+   "tier": "leader",
+   "name": "the grue",
+   "storiedBy": "Umbrals",
+   "habitat": [
+    "umbral",
+    "dark",
+    "underplace",
+    "ruin",
+    "sealed"
+   ],
+   "affinity": {
+    "light": "vulnerable",
+    "physical": "immune"
+   },
+   "look": "No one has seen it. That is the point. There is a breathing in the unlit passage, and a smell like wet iron, and then there is not you.",
+   "danger": "It eats those who walk without light. That is all the story says, and the story is exact.",
+   "pressures": [
+    "WARD (never let your light go out)",
+    "KNOW (count your torches)",
+    "MOVE (stay in the lit places)",
+    "UNMAKE (bring the dark to an end)"
+   ],
+   "storyRule": "The whole rule is in the story: it cannot abide light. Keep a flame and you are safe. Lose it and you are likely to be eaten.",
+   "clean": "Nothing to see and nothing to kill. Light the passage and it is only a passage.",
+   "aggressorKind": "hazard",
+   "class": "storied_beast"
+  },
+  {
+   "id": "bargain_mites",
+   "tier": "riffraff",
+   "name": "bargain-mites",
+   "storiedBy": "Abyssal Choir",
+   "habitat": [
+    "abyssal",
+    "demonic",
+    "market",
+    "city"
+   ],
+   "affinity": {
+    "truth": "vulnerable",
+    "psychic": "resist"
+   },
+   "look": "Tiny red things like winged beetles that settle on the shoulder and whisper in the ear. They smell of warm coins.",
+   "danger": "They offer. Small things, easy things: sleep, a better price, a friend's secret. Every yes feeds them and every one costs a little more than it said.",
+   "pressures": [
+    "KNOW (hear the price)",
+    "WARD (refuse)",
+    "HARM (swat them)"
+   ],
+   "storyRule": "The Bargainers' first lesson: say no three times, aloud. A mite that hears three refusals falls off dead.",
+   "clean": "Temptations with wings. There is no one in them, only the offer.",
+   "aggressorKind": "hazard",
+   "class": "storied_beast"
+  },
+  {
+   "id": "hellhound_pack",
+   "tier": "notable",
+   "name": "a hellhound pack",
+   "storiedBy": "Abyssal Choir",
+   "habitat": [
+    "abyssal",
+    "demonic",
+    "road",
+    "border",
+    "dark"
+   ],
+   "affinity": {
+    "light": "resist",
+    "cold": "vulnerable",
+    "numinous": "vulnerable"
+   },
+   "look": "Rust-red hounds with brimstone breath and eyes like lamp-glass, baying at a pitch that sets teeth on edge.",
+   "danger": "They breathe fire in short gouts and hunt by the scent of broken bargains. The baying makes the bravest want to run.",
+   "pressures": [
+    "WARD (the fear in the baying)",
+    "HARM (with holy work)",
+    "MOVE (to running water)",
+    "KNOW (what they have been sent after)"
+   ],
+   "storyRule": "They will not cross running water; every abyssal story agrees on that.",
+   "clean": "A debt-collector's dogs from a story about unpaid debts. Ended, they leave a smell of sulphur and a lighter road.",
+   "aggressorKind": "beast",
+   "class": "storied_beast"
+  },
+  {
+   "id": "mimic",
+   "tier": "notable",
+   "name": "a mimic",
+   "storiedBy": "Abyssal Choir",
+   "habitat": [
+    "abyssal",
+    "ruin",
+    "market",
+    "underplace",
+    "archive"
+   ],
+   "affinity": {
+    "physical": "resist",
+    "truth": "vulnerable"
+   },
+   "look": "A strongbox, iron-bound and slightly open, with the glint of coin inside. Or a door. Or a chair. It is whatever you were hoping to find.",
+   "danger": "It bites whoever reaches for it and the bite sticks: an adhesive hide that holds the hand while the lid comes down.",
+   "pressures": [
+    "KNOW (see that it breathes)",
+    "MOVE (don't touch)",
+    "HARM (it is soft inside)",
+    "WARD (the glue)"
+   ],
+   "storyRule": "The Bargainers' saying: never take a thing that is exactly what you wanted. Tap it with a stick first.",
+   "clean": "A lesson about greed with a mouth. Killed, it is only a lumpy grey thing, and there was never any gold.",
+   "aggressorKind": "hazard",
+   "class": "storied_beast"
+  },
+  {
+   "id": "halo_moths",
+   "tier": "riffraff",
+   "name": "halo-moths",
+   "storiedBy": "Seraphic Orders",
+   "habitat": [
+    "seraphic",
+    "angelic",
+    "sacred",
+    "light",
+    "temple"
+   ],
+   "affinity": {
+    "light": "immune",
+    "truth": "resist"
+   },
+   "look": "White moths with wings like hammered gold leaf, circling a lamp that is not there. Their light is very bright and very judging.",
+   "danger": "They blind. The light shows every shameful thing you have done to everyone who can see it, and for a moment you believe it too.",
+   "pressures": [
+    "WARD (your eyes and your nerve)",
+    "KNOW (what they are showing)",
+    "MOVE (into shadow)"
+   ],
+   "storyRule": "A clear conscience, the Orders say, and they pass. Confess something true aloud and the swarm breaks.",
+   "clean": "A sermon about being seen, given wings. There is no judgment in them; they only reflect.",
+   "aggressorKind": "hazard",
+   "class": "storied_beast"
+  },
+  {
+   "id": "griffon_pair",
+   "tier": "leader",
+   "name": "a griffon pair",
+   "storiedBy": "Seraphic Orders",
+   "habitat": [
+    "seraphic",
+    "mountain",
+    "overlook",
+    "plateau",
+    "angelic"
+   ],
+   "affinity": {
+    "physical": "resist",
+    "light": "resist"
+   },
+   "look": "Eagle-headed lions the size of horses, gold-feathered at the neck, nesting on a cliff above the road. They watch everything that passes.",
+   "danger": "They drop on horses and pack animals first, then on whoever defends them. The beak goes through mail.",
+   "pressures": [
+    "MOVE (off the open road)",
+    "HARM (the wings)",
+    "WARD (the dive)",
+    "SHAPE (feed them, and they may let you pass)"
+   ],
+   "storyRule": "The Orders' tale says the griffon guards the honest traveller's gold. Carry nothing stolen and they only watch.",
+   "clean": "The standard of an order become a beast. They are majestic, and they will eat your horse.",
+   "aggressorKind": "beast",
+   "class": "storied_beast"
+  },
+  {
+   "id": "the_sphinx",
+   "tier": "heroic",
+   "name": "a sphinx",
+   "storiedBy": "Seraphic Orders",
+   "habitat": [
+    "seraphic",
+    "sacred",
+    "threshold",
+    "waygate",
+    "sealed"
+   ],
+   "affinity": {
+    "physical": "resist",
+    "truth": "immune",
+    "psychic": "resist"
+   },
+   "look": "A lion's body the size of a house, lying across a gateway, with a face of carved serenity and eyes that follow you. It speaks, but only one thing.",
+   "danger": "It asks the riddle. Answer and pass. Answer wrong and it eats you. It cannot be talked to, bargained with or begged; it only knows the question.",
+   "pressures": [
+    "KNOW (the answer)",
+    "SHAPE (a question it cannot answer)",
+    "HARM (only if you must)",
+    "MOVE (another way round)"
+   ],
+   "storyRule": "The Orders' tale ends with the one who answered correctly and the sphinx that lay down and slept. It keeps the rule it was made with.",
+   "clean": "Not a person: a gate that asks. Answered, it sleeps. Killed, it is a great stone lion with nothing behind its eyes.",
+   "aggressorKind": "hazard",
+   "class": "storied_beast"
+  },
+  {
+   "id": "gargoyle_roost",
+   "tier": "notable",
+   "name": "a gargoyle roost",
+   "storiedBy": "Masons of the Given",
+   "habitat": [
+    "mason",
+    "city",
+    "ruin",
+    "walled",
+    "temple"
+   ],
+   "affinity": {
+    "physical": "resist",
+    "mechanical": "vulnerable"
+   },
+   "look": "Carved grotesques along a cornice, open-mouthed, winged, weathered. One of them has moved since you last looked.",
+   "danger": "They come down at dusk on stone wings and they are stone all through. They do not bleed and they do not tire.",
+   "pressures": [
+    "KNOW (which carvings are awake)",
+    "HARM (with hammers, not blades)",
+    "WARD (the dive)",
+    "MOVE (by day)"
+   ],
+   "storyRule": "The Masons carve them to keep something else away. They sleep in daylight, and a Mason's mark cut on the doorstep turns them.",
+   "clean": "Watchers a building-people imagined into waking. Broken, they are only rubble with faces.",
+   "aggressorKind": "beast",
+   "class": "storied_beast"
+  },
+  {
+   "id": "empty_armor",
+   "tier": "notable",
+   "name": "an empty suit of armor on watch",
+   "storiedBy": "Masons of the Given",
+   "habitat": [
+    "mason",
+    "ruin",
+    "watch",
+    "warden-post",
+    "walled"
+   ],
+   "affinity": {
+    "physical": "resist",
+    "mechanical": "vulnerable",
+    "psychic": "resist"
+   },
+   "look": "Full plate standing at a post, halberd grounded, visor down. The helm is empty. It has been on watch for longer than the post has stood.",
+   "danger": "It challenges anyone who passes without the word, and it fights with the patience of a thing that cannot be hurt in the places people are hurt.",
+   "pressures": [
+    "KNOW (the word)",
+    "UNMAKE (the order animating it)",
+    "HARM (the joints)",
+    "SHAPE (relieve it from its post)"
+   ],
+   "storyRule": "Give it the watchword or relieve it formally, and it stands down.",
+   "clean": "An order to stand guard, still standing guard. Relieved, it falls apart into a heap of old metal.",
+   "aggressorKind": "driven",
+   "class": "feral_construct"
+  },
+  {
+   "id": "stone_golem",
+   "tier": "heroic",
+   "name": "a stone golem",
+   "storiedBy": "Masons of the Given",
+   "habitat": [
+    "mason",
+    "ruin",
+    "temple",
+    "sacred",
+    "precursor"
+   ],
+   "affinity": {
+    "physical": "immune",
+    "mechanical": "vulnerable",
+    "psychic": "resist"
+   },
+   "look": "Twice a man's height, cut from a single grey block, a word chiselled on its brow. It moves like a millstone: slowly, and then it has arrived.",
+   "danger": "It strikes like falling masonry and nothing ordinary hurts it. It keeps its maker's last instruction, whatever that was.",
+   "pressures": [
+    "UNMAKE (the word on its brow)",
+    "KNOW (read the instruction)",
+    "MOVE (outlast it)",
+    "SHAPE (give it a new instruction)"
+   ],
+   "storyRule": "Every Mason story: scratch out one letter of the word and it is only stone.",
+   "clean": "A made servant with no maker left. Stopping it is repair by other means.",
+   "aggressorKind": "driven",
+   "class": "feral_construct"
+  },
+  {
+   "id": "clockwork_spiders",
+   "tier": "riffraff",
+   "name": "clockwork spiders",
+   "storiedBy": "Enginewrights",
+   "habitat": [
+    "enginewright",
+    "mechanical",
+    "precursor",
+    "facility",
+    "ruin"
+   ],
+   "affinity": {
+    "physical": "resist",
+    "mechanical": "vulnerable",
+    "psychic": "resist"
+   },
+   "look": "A skitter of brass spiders the size of a hand, ticking, each with one red lens. They repair what they find and they are not particular about what counts as broken.",
+   "danger": "They swarm and snip and solder. They take apart gear, packs, and ankles with equal interest.",
+   "pressures": [
+    "UNMAKE (the winding)",
+    "HARM (step on them)",
+    "KNOW (find the one that commands)",
+    "MOVE (outpace the ticking)"
+   ],
+   "storyRule": "The Enginewrights' saying: find the key. There is always a master spider with a winding key in its back, and stopping it stops the rest.",
+   "clean": "A tool-story with no hands to answer to. Stopped, they are a pile of beautiful brass.",
+   "aggressorKind": "beast",
+   "class": "feral_construct"
+  },
+  {
+   "id": "rust_eater",
+   "tier": "notable",
+   "name": "a rust-eater",
+   "storiedBy": "Enginewrights",
+   "habitat": [
+    "enginewright",
+    "mechanical",
+    "ruin",
+    "underplace",
+    "facility"
+   ],
+   "affinity": {
+    "physical": "resist",
+    "mechanical": "immune"
+   },
+   "look": "Something like a hairless insect-dog with two feathered antennae, sniffing. It is interested in your belt buckle. It is very interested in your sword.",
+   "danger": "Its antennae rust any metal they touch to flakes in a heartbeat. It is not dangerous to you so much as to everything you own.",
+   "pressures": [
+    "MOVE (keep your iron away)",
+    "HARM (with wood, stone or a bare hand)",
+    "SHAPE (throw it something else to eat)",
+    "KNOW (what metal you can lose)"
+   ],
+   "storyRule": "The smiths' joke: carry an iron nail to throw. It always chases the nearer meal.",
+   "clean": "A metalworker's nightmare that came true. It isn't cruel, only hungry, and entirely unwelcome.",
+   "aggressorKind": "beast",
+   "class": "storied_beast"
+  },
+  {
+   "id": "iron_colossus",
+   "tier": "epic",
+   "name": "an iron colossus",
+   "storiedBy": "Enginewrights",
+   "habitat": [
+    "precursor",
+    "facility",
+    "pre-transition",
+    "mechanical",
+    "ruin"
+   ],
+   "affinity": {
+    "physical": "immune",
+    "mechanical": "vulnerable",
+    "psychic": "resist",
+    "cold": "resist"
+   },
+   "look": "A pre-Transition war machine in the shape of a giant, forty feet of iron plate and pipes, standing in a crater it made. When it wakes, the ground knows first.",
+   "danger": "Its fists level walls. It vents a poison vapour when pressed, and it answers to an army that no longer exists.",
+   "pressures": [
+    "UNMAKE (the directive, deep inside)",
+    "KNOW (find the command it's waiting for)",
+    "WARD (the vapour)",
+    "HARM (the joints, over many days)",
+    "MOVE (a campaign, not a fight)"
+   ],
+   "storyRule": "The oldest Enginewright tale: every colossus was built with a word to stop it. The word is somewhere in the ruin it guards.",
+   "clean": "A weapon from a war nobody remembers, still waiting for orders. Ending it is disarmament.",
+   "aggressorKind": "driven",
+   "readsAlsoFrom": [
+    "arc_precursor_waking"
+   ],
+   "class": "feral_construct"
+  },
+  {
+   "id": "perfect_cube",
+   "tier": "leader",
+   "name": "a perfect cube",
+   "storiedBy": "Syllogists",
+   "habitat": [
+    "syllogist",
+    "logical",
+    "underplace",
+    "ruin",
+    "order"
+   ],
+   "affinity": {
+    "physical": "resist",
+    "psychic": "resist",
+    "order": "immune"
+   },
+   "look": "A cube of perfectly clear jelly exactly the width of the passage, moving along it at a walking pace. There are bones in it, a helmet, a few coins, all neatly spaced.",
+   "danger": "It engulfs and digests. Anything it touches is paralysed first, then taken in, and it cleans the corridor behind it to a shine.",
+   "pressures": [
+    "KNOW (see the clear wall coming)",
+    "MOVE (find a side passage)",
+    "HARM (with fire, from outside)",
+    "WARD (the paralysis)"
+   ],
+   "storyRule": "The Syllogists' puzzle: it is a perfect cube, so it cannot turn a corner. Take a side passage and wait.",
+   "clean": "A logician's idea of tidiness made solid. There is nothing in it but its rule.",
+   "aggressorKind": "hazard",
+   "class": "manifested_creature"
+  },
+  {
+   "id": "face_thief",
+   "tier": "notable",
+   "name": "a face-thief",
+   "storiedBy": "Verists",
+   "habitat": [
+    "verist",
+    "truth",
+    "city",
+    "market",
+    "settlement"
+   ],
+   "affinity": {
+    "truth": "vulnerable",
+    "psychic": "resist"
+   },
+   "look": "Someone you know, standing where they should not be, smiling slightly wrong. Up close their eyes do not blink at the same time.",
+   "danger": "It wears the face of someone you trust and leads you somewhere quiet. What is behind the face is not a person; it is only hunger shaped like a friend.",
+   "pressures": [
+    "KNOW (ask something only they would know)",
+    "WARD (your trust)",
+    "HARM (once you are sure)",
+    "SHAPE (make it hold a lie)"
+   ],
+   "storyRule": "The Verist rule: ask it to say something false. It cannot. It can only repeat what it has heard.",
+   "clean": "The story of the stranger with a friend's face, made real and empty. Ended, it has no face at all.",
+   "aggressorKind": "assassin",
+   "class": "storied_beast"
+  },
+  {
+   "id": "angled_hounds",
+   "tier": "heroic",
+   "name": "the hounds of the angled hour",
+   "storiedBy": "Hourkeepers",
+   "habitat": [
+    "hourkeeper",
+    "time",
+    "temporal",
+    "slow-time",
+    "sealed"
+   ],
+   "affinity": {
+    "physical": "resist",
+    "order": "vulnerable",
+    "psychic": "resist"
+   },
+   "look": "Lean grey things that come out of the corners of a room, where the walls meet at a sharp angle. They look starved. They smell of old dust and burnt clocks.",
+   "danger": "They hunt anyone who has meddled with time, across any distance, through any sharp corner. They do not stop.",
+   "pressures": [
+    "KNOW (what drew them)",
+    "SHAPE (round off the corners)",
+    "WARD (every angle)",
+    "MOVE (to a place with no corners)"
+   ],
+   "storyRule": "The Hourkeepers plaster their rooms round. The hounds can only come through an angle less than a right angle, and a curved room has none.",
+   "clean": "The Hourkeepers' warning to their apprentices, now with teeth. Take away their corners and they are gone.",
+   "aggressorKind": "beast",
+   "class": "manifested_creature"
+  },
+  {
+   "id": "lattice_crawlers",
+   "tier": "riffraff",
+   "name": "lattice-crawlers",
+   "storiedBy": "Lattice-Cities",
+   "habitat": [
+    "lattice",
+    "glass",
+    "photonic",
+    "city",
+    "ruin"
+   ],
+   "affinity": {
+    "physical": "vulnerable",
+    "light": "resist"
+   },
+   "look": "Glass insects in a glittering swarm, each one a perfect little prism, marching in rank across a wall and breaking the light into colours.",
+   "danger": "They cut. A swarm across the skin is a thousand tiny facets, and they grow the more light they catch.",
+   "pressures": [
+    "HARM (they shatter)",
+    "WARD (skin and eyes)",
+    "UNMAKE (dim the light)"
+   ],
+   "storyRule": "Lattice children learn it: cover the lamp. In the dark they stop and wait for day.",
+   "clean": "Geometry with legs, from a city that dreamed in prisms. Crushed, they are sand.",
+   "aggressorKind": "beast",
+   "class": "manifested_creature"
+  },
+  {
+   "id": "siren_shoal",
+   "tier": "notable",
+   "name": "a siren shoal",
+   "storiedBy": "Threnodists",
+   "habitat": [
+    "threnodist",
+    "water",
+    "river",
+    "harbour",
+    "emotional"
+   ],
+   "affinity": {
+    "psychic": "resist",
+    "cold": "vulnerable"
+   },
+   "look": "Singing, from the rocks at the river's bend. When you look there are only seals, or women, or something with too many teeth, depending on who looks.",
+   "danger": "The song pulls. Those who hear it walk toward the water and keep walking, and the shoal takes whoever reaches them.",
+   "pressures": [
+    "WARD (stop your ears, or your heart)",
+    "KNOW (what the song promises you)",
+    "MOVE (tie yourself fast)",
+    "HARM (from the bank)"
+   ],
+   "storyRule": "The Threnodists sing back. A true song of grief sung louder drowns theirs, and they go quiet to listen.",
+   "clean": "Mourning songs that learned to lure. Ended, the rocks are only rocks, and the river sounds like a river.",
+   "aggressorKind": "hazard",
+   "readsAlsoFrom": [
+    "arc_the_water"
+   ],
+   "class": "storied_beast"
+  },
+  {
+   "id": "harpy_flock",
+   "tier": "notable",
+   "name": "a harpy flock",
+   "storiedBy": "Threnodists",
+   "habitat": [
+    "threnodist",
+    "mountain",
+    "overlook",
+    "ruin",
+    "emotional"
+   ],
+   "affinity": {
+    "physical": "vulnerable",
+    "psychic": "resist"
+   },
+   "look": "Vulture-winged, taloned, screaming things with faces a little too human, wheeling above a cliff road and a litter of stripped packs.",
+   "danger": "They dive to snatch food, gear, anything shiny, and they shriek in a voice that makes the listener feel every grief at once.",
+   "pressures": [
+    "WARD (the grief in the scream)",
+    "HARM (the wings)",
+    "MOVE (under cover)",
+    "SHAPE (leave food as a toll)"
+   ],
+   "storyRule": "Leave something for them and they fight each other over it instead of you. Every Threnodist on that road carries a loaf to throw.",
+   "clean": "Grief given wings in a sad people's songs. Driven off, the cliff is only a cliff.",
+   "aggressorKind": "beast",
+   "class": "storied_beast"
+  },
+  {
+   "id": "glamour_fox",
+   "tier": "riffraff",
+   "name": "a glamour-fox",
+   "storiedBy": "Veilwrights",
+   "habitat": [
+    "veilwright",
+    "falsehood",
+    "wild",
+    "grove",
+    "road"
+   ],
+   "affinity": {
+    "truth": "vulnerable",
+    "physical": "vulnerable"
+   },
+   "look": "A fox with a tail that trails a faint shimmer, sitting at a fork in the road that was not there yesterday.",
+   "danger": "It makes paths. Follow one and you walk for an hour and come back to the fox, who is grinning. Some travellers never come back to it.",
+   "pressures": [
+    "KNOW (see which path is real)",
+    "MOVE (walk with eyes closed)",
+    "HARM (catch it, if you can)"
+   ],
+   "storyRule": "Turn your coat inside out, the Veilwrights say. The glamour holds only on what faces it.",
+   "clean": "A trickster story with a fox's body. Caught, it is only a fox, and rather embarrassed.",
+   "aggressorKind": "hazard",
+   "class": "storied_beast"
+  },
+  {
+   "id": "blink_hounds",
+   "tier": "notable",
+   "name": "a blink-hound pack",
+   "storiedBy": "Horizon-Walkers",
+   "habitat": [
+    "horizon",
+    "space",
+    "waygate",
+    "road",
+    "travel"
+   ],
+   "affinity": {
+    "physical": "vulnerable",
+    "order": "resist"
+   },
+   "look": "Yellow-furred hounds that are here, and then there, with a small pop of air, and then behind you.",
+   "danger": "They attack from everywhere at once because they are everywhere at once. Fleeing does not work; they are already where you are running to.",
+   "pressures": [
+    "KNOW (predict the next blink)",
+    "WARD (every side)",
+    "HARM (as they land)",
+    "SHAPE (pin space still)"
+   ],
+   "storyRule": "They cannot blink into a place already full. The Horizon-Walkers stand in a tight ring, backs together.",
+   "clean": "A story about how nothing is far away any more. They are not cruel; they are dogs who can step between places.",
+   "aggressorKind": "beast",
+   "class": "storied_beast"
+  },
+  {
+   "id": "phase_spider",
+   "tier": "heroic",
+   "name": "a phase spider",
+   "storiedBy": "Horizon-Walkers",
+   "habitat": [
+    "horizon",
+    "space",
+    "waygate",
+    "deepwood",
+    "dark"
+   ],
+   "affinity": {
+    "physical": "resist",
+    "order": "vulnerable"
+   },
+   "look": "A spider the size of a pony, pale and faintly transparent, that steps out of nothing beside you, bites, and steps back into nothing.",
+   "danger": "Its bite is a deep poison and it is never there to be struck. It strikes from outside the world and returns to it.",
+   "pressures": [
+    "KNOW (feel where space thins)",
+    "WARD (the venom)",
+    "SHAPE (close the thin place)",
+    "HARM (in the instant it is here)"
+   ],
+   "storyRule": "Iron nailed across a threshold, the old way-lore says, keeps the between shut. It cannot step through iron.",
+   "clean": "A spider that learned the trick of the waygates. Closed out, it is only a spider in a place it cannot leave.",
+   "aggressorKind": "beast",
+   "class": "storied_beast"
+  },
+  {
+   "id": "churn_rats",
+   "tier": "riffraff",
+   "name": "churn-rats",
+   "storiedBy": "Churnfolk",
+   "habitat": [
+    "churn",
+    "city",
+    "settlement",
+    "market",
+    "underplace"
+   ],
+   "affinity": {
+    "physical": "vulnerable",
+    "wild": "resist"
+   },
+   "look": "Rats, but each of them wrong in a different way: this one with a lizard's tail, that one with feathers, one with far too many eyes.",
+   "danger": "They breed fast, eat everything, and carry sickness from whatever they were mixed with.",
+   "pressures": [
+    "HARM (they die easily, one at a time)",
+    "WARD (the sickness)",
+    "KNOW (find the nest)",
+    "UNMAKE (the churn in the nest)"
+   ],
+   "storyRule": "Salt. The Churnfolk say a ring of salt holds a shape still, and a churn-rat inside it becomes only a rat.",
+   "clean": "What the churn does to vermin. Ended, the cellar is only a cellar.",
+   "aggressorKind": "beast",
+   "class": "substrate_warped_beast"
+  },
+  {
+   "id": "chimera",
+   "tier": "heroic",
+   "name": "a chimera",
+   "storiedBy": "Churnfolk",
+   "habitat": [
+    "churnfolk",
+    "chaos",
+    "wild",
+    "mountain",
+    "frontier"
+   ],
+   "affinity": {
+    "physical": "resist",
+    "light": "resist",
+    "wild": "resist"
+   },
+   "look": "A lion's forebody, a goat's head rising from its back, a serpent for a tail. Each head has its own eyes and they do not agree about where to look.",
+   "danger": "Three heads, three minds, three attacks: the lion bites, the goat breathes fire, the serpent strikes from behind.",
+   "pressures": [
+    "HARM (one head at a time)",
+    "KNOW (which head is leading)",
+    "MOVE (make them disagree)",
+    "WARD (the fire)"
+   ],
+   "storyRule": "The Churnfolk riddle-answer: make the heads argue. Offer each a different prize and it turns on itself.",
+   "clean": "The churn's favourite story: a beast made of three beasts. Ended, it falls apart into the animals it was stitched from.",
+   "aggressorKind": "beast",
+   "class": "storied_beast"
+  },
+  {
+   "id": "marsh_hydra",
+   "tier": "epic",
+   "name": "a marsh hydra",
+   "storiedBy": "Churnfolk",
+   "habitat": [
+    "churnfolk",
+    "marsh",
+    "water",
+    "river",
+    "flooded"
+   ],
+   "affinity": {
+    "physical": "resist",
+    "light": "vulnerable",
+    "wild": "resist"
+   },
+   "look": "Seven necks rising out of the reeds, each ending in a snake's head the size of a man's torso. Cut one and two grow.",
+   "danger": "It bites from seven directions and regrows what is cut, and the fens it lives in are its own flooded ground.",
+   "pressures": [
+    "HARM (cut and burn together)",
+    "KNOW (find the one immortal head)",
+    "WARD (seven at once)",
+    "SHAPE (drain the fen)",
+    "MOVE (a campaign of fire)"
+   ],
+   "storyRule": "The oldest story has the answer: sear each neck as it is cut. Fire stops the regrowing.",
+   "clean": "The churn's idea of never ending. Ended, it is only a great drowned snake, and the fen can be drained.",
+   "aggressorKind": "beast",
+   "readsAlsoFrom": [
+    "arc_the_water"
+   ],
+   "class": "storied_beast"
+  },
+  {
+   "id": "bridge_troll",
+   "tier": "leader",
+   "name": "a bridge-troll",
+   "storiedBy": "Somatics",
+   "habitat": [
+    "somatic",
+    "bridge",
+    "road",
+    "river",
+    "mountain"
+   ],
+   "affinity": {
+    "physical": "resist",
+    "light": "vulnerable",
+    "living": "resist"
+   },
+   "look": "Something huge and warty and green-grey living under the bridge, with long arms and a long nose, and bones in the water around its feet.",
+   "danger": "It demands the toll and eats whoever cannot pay. Every wound it takes closes as you watch.",
+   "pressures": [
+    "HARM (with fire, so it cannot heal)",
+    "SHAPE (pay the toll)",
+    "KNOW (what it will take instead)",
+    "WARD (the grip)"
+   ],
+   "storyRule": "The Somatic tale says it regrows anything but a burn. And it is so proud of its body it will stop to wrestle anyone who dares it.",
+   "clean": "The body that will not stop healing, from a people who worship the body. Burned, it stays down.",
+   "aggressorKind": "beast",
+   "class": "storied_beast"
+  },
+  {
+   "id": "cockatrice",
+   "tier": "notable",
+   "name": "a cockatrice",
+   "storiedBy": "Figurists",
+   "habitat": [
+    "figurist",
+    "farming",
+    "village",
+    "settlement",
+    "ruin"
+   ],
+   "affinity": {
+    "physical": "vulnerable",
+    "order": "resist"
+   },
+   "look": "A rooster the size of a dog with a serpent's tail and a mad red eye. Around its roost, a scatter of small stone animals.",
+   "danger": "Its peck turns flesh to stone, slowly, from the wound outward.",
+   "pressures": [
+    "WARD (the peck)",
+    "HARM (it is only a bird)",
+    "KNOW (how far the stone has spread)",
+    "UNMAKE (the petrifying)"
+   ],
+   "storyRule": "The Figurists draw a weasel. The pattern of the one animal it fears, chalked on the barn door, keeps it off.",
+   "clean": "A farmyard nightmare. Killed, it is only a big, ugly bird, and the stone animals do not come back.",
+   "aggressorKind": "beast",
+   "class": "storied_beast"
+  },
+  {
+   "id": "basilisk",
+   "tier": "leader",
+   "name": "a basilisk",
+   "storiedBy": "Figurists",
+   "habitat": [
+    "figurist",
+    "ruin",
+    "mountain",
+    "underplace",
+    "dark"
+   ],
+   "affinity": {
+    "physical": "resist",
+    "truth": "vulnerable"
+   },
+   "look": "A great eight-legged lizard with a heavy crowned head, basking among statues of the people who came to kill it.",
+   "danger": "Meet its gaze and you are stone. It does not even need to try; it only has to look at you.",
+   "pressures": [
+    "KNOW (where it is, without looking)",
+    "WARD (your eyes)",
+    "SHAPE (a mirror)",
+    "HARM (by feel, or by reflection)"
+   ],
+   "storyRule": "Every Figurist knows the pattern completes itself: show it its own eyes in a mirror and it turns itself to stone.",
+   "clean": "A story about the danger of being seen. Ended, it is a lizard, and the statues are still statues.",
+   "aggressorKind": "beast",
+   "class": "storied_beast"
+  },
+  {
+   "id": "burrow_shark",
+   "tier": "heroic",
+   "name": "a burrow-shark",
+   "storiedBy": "Unmakers",
+   "habitat": [
+    "unmaker",
+    "destruction",
+    "plateau",
+    "frontier",
+    "foothill"
+   ],
+   "affinity": {
+    "physical": "resist",
+    "wild": "vulnerable"
+   },
+   "look": "A fin cutting through dry earth like water, and then a great armoured head bursting up out of the ground with a mouth like a well.",
+   "danger": "It hunts by the tremor of feet. It swallows horses. It leaves the ground behind it churned and dangerous.",
+   "pressures": [
+    "MOVE (stand still, on stone)",
+    "KNOW (read the ground)",
+    "HARM (under the crest, when it leaps)",
+    "WARD (the swallowing)"
+   ],
+   "storyRule": "It cannot dig through bedrock. The Unmakers' frontier farms stand on stone shelves for a reason.",
+   "clean": "The earth itself hungry, in an Unmaker story. Killed, it is an armoured beast in a trench.",
+   "aggressorKind": "beast",
+   "class": "storied_beast"
+  },
+  {
+   "id": "delving_worm",
+   "tier": "epic",
+   "name": "a delving worm",
+   "storiedBy": "Unmakers",
+   "habitat": [
+    "unmaker",
+    "underplace",
+    "mountain",
+    "destruction",
+    "ruin"
+   ],
+   "affinity": {
+    "physical": "resist",
+    "wild": "vulnerable"
+   },
+   "look": "A purple-black worm as wide as a road, rising out of a new tunnel with a round mouth full of teeth in rings. Its tail carries a sting the length of a man.",
+   "danger": "It swallows whole, it stings with a poison that kills, and it leaves a tunnel behind it that other things come out of.",
+   "pressures": [
+    "MOVE (out of the tunnels)",
+    "HARM (from inside, if swallowed)",
+    "WARD (the sting)",
+    "KNOW (predict where it rises)",
+    "SHAPE (collapse a tunnel on it)"
+   ],
+   "storyRule": "The Unmakers say it cannot bear a true silence. Everyone stops. Everyone holds still. It loses you.",
+   "clean": "The ground's appetite in a story about unmaking. The tunnels it leaves become roads, eventually.",
+   "aggressorKind": "beast",
+   "class": "storied_beast"
+  },
+  {
+   "id": "tool_imps",
+   "tier": "riffraff",
+   "name": "tool-imps",
+   "storiedBy": "Wrights of the New",
+   "habitat": [
+    "wright",
+    "craft",
+    "creation",
+    "settlement"
+   ],
+   "affinity": {
+    "physical": "vulnerable",
+    "mechanical": "vulnerable",
+    "psychic": "resist"
+   },
+   "look": "A workshop full of little clay-and-wire figures the size of a thumb, busily improving things. They have improved the door hinges. They have improved the lamp oil.",
+   "danger": "They make things better, by their own measure. A cart with better wheels that go their own way; a sword with a better edge that cuts its owner.",
+   "pressures": [
+    "UNMAKE (their spark)",
+    "KNOW (what they changed)",
+    "HARM (squash)",
+    "SHAPE (give them a real job)"
+   ],
+   "storyRule": "The Wrights' fix: give them a job. A tool-imp with work to do does that work and nothing else.",
+   "clean": "A maker's fancy about helpers, given hands. Stopped, they are clay and wire.",
+   "aggressorKind": "beast",
+   "class": "feral_construct"
+  },
+  {
+   "id": "dire_wolves",
+   "tier": "notable",
+   "name": "a dire wolf pack",
+   "storiedBy": "Marchers",
+   "habitat": [
+    "marches",
+    "frontier",
+    "border",
+    "cold",
+    "wild"
+   ],
+   "affinity": {
+    "physical": "resist",
+    "cold": "resist"
+   },
+   "look": "Wolves the size of ponies, grey-white, running silent over snow with their breath smoking. The leader's muzzle is scarred to the bone.",
+   "danger": "They take stragglers and horses and they are patient enough to follow for days.",
+   "pressures": [
+    "HARM (the leader first)",
+    "MOVE (to a defensible place)",
+    "WARD (every flank)",
+    "KNOW (what they are hungry for)"
+   ],
+   "storyRule": "The Marchers light a ring of fires and wait for dawn. The pack will not cross fire, and they go at first light.",
+   "clean": "The frontier's hunger in the Marchers' winter tales. Only wolves, but very large ones.",
+   "aggressorKind": "beast",
+   "class": "storied_beast"
+  },
+  {
+   "id": "frontier_wyvern",
+   "tier": "heroic",
+   "name": "a frontier wyvern",
+   "storiedBy": "Marchers",
+   "habitat": [
+    "marches",
+    "mountain",
+    "frontier",
+    "border",
+    "cold"
+   ],
+   "affinity": {
+    "physical": "resist",
+    "cold": "resist"
+   },
+   "look": "A grey, scale-armoured flier with a wingspan like a sail and a stinging tail, circling over the border posts at dusk.",
+   "danger": "It takes cattle, horses, sentries. The tail's poison stops the heart.",
+   "pressures": [
+    "MOVE (under cover when it circles)",
+    "HARM (the wings, with long weapons)",
+    "WARD (the sting)",
+    "KNOW (track it to its roost)"
+   ],
+   "storyRule": "The border posts have a horn for it. A long low note makes it think another wyvern holds this ground, and it goes elsewhere.",
+   "clean": "The border's fear with wings. Driven off, it is only a beast, hungry, somewhere else.",
+   "aggressorKind": "beast",
+   "class": "storied_beast"
+  },
+  {
+   "id": "snow_apes",
+   "tier": "leader",
+   "name": "a snow-ape troop",
+   "storiedBy": "Stillhold",
+   "habitat": [
+    "cold",
+    "mountain",
+    "quiet",
+    "frontier"
+   ],
+   "affinity": {
+    "cold": "immune",
+    "light": "vulnerable"
+   },
+   "look": "Shaggy white apes, taller than a man, moving on their knuckles across a snowfield so quietly the snow does not creak.",
+   "danger": "They ambush in blizzards, throw boulders from ledges, and carry off the ones who fall behind.",
+   "pressures": [
+    "MOVE (stay together)",
+    "WARD (the ambush)",
+    "HARM (they fear fire)",
+    "KNOW (where the snow is hollow)"
+   ],
+   "storyRule": "The Stillhold's rule for the high passes: never cross in a storm. They only hunt when they cannot be seen.",
+   "clean": "The silence of the snow given shape. Ended, it is only an animal, very large, very cold.",
+   "aggressorKind": "beast",
+   "class": "storied_beast"
+  },
+  {
+   "id": "frost_worm",
+   "tier": "heroic",
+   "name": "a frost worm",
+   "storiedBy": "Stillhold",
+   "habitat": [
+    "cold",
+    "mountain",
+    "ancient",
+    "quiet"
+   ],
+   "affinity": {
+    "cold": "immune",
+    "light": "vulnerable"
+   },
+   "look": "A pale blue worm the length of three wagons, lying coiled in the snow. As it rises, its back glows red-hot where the plates part.",
+   "danger": "Its back burns anything that touches it and its keening freezes the listener where they stand.",
+   "pressures": [
+    "WARD (the freezing song)",
+    "HARM (not the back)",
+    "MOVE (don't touch it)",
+    "KNOW (how long it can sing)"
+   ],
+   "storyRule": "Stop your ears with wax, the Stillhold says. The song freezes only those who hear it.",
+   "clean": "Cold and heat together, a riddle from a still people. Killed, it leaves a patch of melted snow that never refreezes.",
+   "aggressorKind": "beast",
+   "class": "storied_beast"
+  },
+  {
+   "id": "leech_eels",
+   "tier": "riffraff",
+   "name": "a leech-eel run",
+   "storiedBy": "(many peoples)",
+   "habitat": [
+    "river",
+    "marsh",
+    "water",
+    "flooded"
+   ],
+   "affinity": {
+    "physical": "vulnerable",
+    "cold": "vulnerable"
+   },
+   "look": "Black eels as long as an arm running upstream in a writhing mass, and the water turns dark where they pass.",
+   "danger": "They latch and drain. A wader comes out of the river pale and shaking with half a dozen of them on each leg.",
+   "pressures": [
+    "MOVE (out of the water)",
+    "HARM (salt, or fire)",
+    "WARD (your skin)"
+   ],
+   "storyRule": "Salt on the skin, every river-story says. They drop off at once and do not come back.",
+   "clean": "A ford-story that grew teeth. Only eels, and hungry.",
+   "aggressorKind": "beast",
+   "readsAlsoFrom": [
+    "arc_the_water"
+   ],
+   "class": "storied_beast"
+  },
+  {
+   "id": "kelpie",
+   "tier": "notable",
+   "name": "a kelpie",
+   "storiedBy": "(many peoples)",
+   "habitat": [
+    "river",
+    "water",
+    "marsh",
+    "horizon",
+    "travel"
+   ],
+   "affinity": {
+    "physical": "resist",
+    "cold": "resist"
+   },
+   "look": "A beautiful grey horse standing in the shallows, saddled and bridled, looking at you with calm dark eyes. Its mane is wet. Its mane is always wet.",
+   "danger": "Mount it and you cannot get off. It walks into the river and down and does not come up.",
+   "pressures": [
+    "KNOW (see the weed in its mane)",
+    "WARD (the pull to mount it)",
+    "HARM (from the bank)",
+    "SHAPE (the bridle)"
+   ],
+   "storyRule": "Take its bridle and it must serve you, the stories say. Never mount it before you have the bridle.",
+   "clean": "The river's beauty and its danger in one shape. Ended, it is river-weed and water.",
+   "aggressorKind": "hazard",
+   "readsAlsoFrom": [
+    "arc_the_water"
+   ],
+   "class": "storied_beast"
+  },
+  {
+   "id": "stirge_cloud",
+   "tier": "riffraff",
+   "name": "a stirge cloud",
+   "storiedBy": "(many peoples)",
+   "habitat": [
+    "marsh",
+    "wild",
+    "road",
+    "river"
+   ],
+   "affinity": {
+    "physical": "vulnerable",
+    "light": "vulnerable"
+   },
+   "look": "A cloud of rust-brown things like mosquitoes the size of sparrows, with long needle noses, rising from the reeds at dusk.",
+   "danger": "Each one drinks. Dozens at once drink a lot.",
+   "pressures": [
+    "WARD (cover your skin)",
+    "HARM (swat)",
+    "MOVE (to smoke)"
+   ],
+   "storyRule": "Smoke. Every traveller's story says it. A smoky fire keeps them off the camp.",
+   "clean": "The marsh's thirst in a cloud. Only insects, very large ones.",
+   "aggressorKind": "beast",
+   "class": "storied_beast"
+  },
+  {
+   "id": "roc",
+   "tier": "heroic",
+   "name": "a roc",
+   "storiedBy": "(many peoples)",
+   "habitat": [
+    "mountain",
+    "plateau",
+    "overlook",
+    "frontier",
+    "sky"
+   ],
+   "affinity": {
+    "physical": "resist",
+    "wild": "resist"
+   },
+   "look": "A shadow crosses the whole valley and the light goes grey. Overhead, an eagle with a wingspan wider than a village carries off a cow.",
+   "danger": "It takes oxen, horses, people, and drops what it doesn't want from a great height.",
+   "pressures": [
+    "MOVE (into cover)",
+    "KNOW (find the nest)",
+    "HARM (when it lands)",
+    "SHAPE (leave it cattle)"
+   ],
+   "storyRule": "It will not take anything that is under a roof. Every story about the roc is a story about going inside.",
+   "clean": "The great bird of every people's sky-stories. Only a bird, the biggest one there is.",
+   "aggressorKind": "beast",
+   "class": "storied_beast"
+  },
+  {
+   "id": "ash_phoenix",
+   "tier": "legendary",
+   "name": "the ash-and-ember bird",
+   "storiedBy": "Blazeborn",
+   "habitat": [
+    "blazeborn",
+    "light",
+    "mountain",
+    "sacred"
+   ],
+   "affinity": {
+    "light": "immune",
+    "cold": "vulnerable",
+    "decay": "immune"
+   },
+   "look": "A bird of fire the size of a barn, trailing embers, crossing the sky at dusk. Everything it flies over catches.",
+   "danger": "It burns whatever it lands on. It cannot be killed: it burns to ash and rises from the ash, larger. Each time it rises, a season's worth of land burns with it.",
+   "pressures": [
+    "KNOW (the timing of its rising)",
+    "SHAPE (let it rise somewhere safe)",
+    "WARD (the fire)",
+    "UNMAKE (the cycle, not the bird)",
+    "MOVE (a campaign)"
+   ],
+   "storyRule": "The Blazeborn's oldest story: it rises only from its own ash. Scatter the ash on running water and it does not come back.",
+   "clean": "A people's story about renewal, at a scale that burns forests. Ending it is choosing which renewal the land can survive.",
+   "aggressorKind": "beast",
+   "unique": true,
+   "epicNote": "A campaign, not a fight. It can't be killed by harm alone; the answer is its own story.",
+   "class": "great_manifestation"
+  },
+  {
+   "id": "the_deep_kraken",
+   "tier": "legendary",
+   "name": "the deep kraken",
+   "storiedBy": "(many peoples)",
+   "habitat": [
+    "water",
+    "harbour",
+    "flooded",
+    "river"
+   ],
+   "affinity": {
+    "physical": "resist",
+    "cold": "immune",
+    "light": "vulnerable"
+   },
+   "look": "Tentacles rising out of the deep water beside the ship, each thicker than the mast, and between them an eye the size of a door.",
+   "danger": "It takes ships. It wraps and pulls down, and the harbour it lives beneath is a place no one sails any more.",
+   "pressures": [
+    "MOVE (away from the deep)",
+    "HARM (the arms, one by one)",
+    "KNOW (what draws it up)",
+    "SHAPE (give it the harbour back)",
+    "WARD (the pull)"
+   ],
+   "storyRule": "Every harbour story agrees: it rises only to the sound of oars. The old sailors come in under sail, in silence.",
+   "clean": "The deep water's fear with arms. Ending it gives a harbour back to its people.",
+   "aggressorKind": "beast",
+   "readsAlsoFrom": [
+    "arc_the_water"
+   ],
+   "unique": true,
+   "class": "great_manifestation"
+  },
+  {
+   "id": "the_wakeful_beast",
+   "tier": "mythic",
+   "name": "the Wakeful Beast",
+   "storiedBy": "(every people)",
+   "habitat": [
+    "ancient",
+    "frontier",
+    "plateau",
+    "destruction"
+   ],
+   "affinity": {
+    "physical": "immune",
+    "psychic": "resist",
+    "light": "resist",
+    "cold": "resist"
+   },
+   "look": "The story every people tells about the thing at the end of the world, and it is true: a scaled, horned beast the size of a hill, asleep under a plateau, with a slow breath that shakes the valley once a year.",
+   "danger": "When it wakes it walks, and it eats, and there is no army, city or hold that stops it. Nothing wounds it faster than it heals.",
+   "pressures": [
+    "KNOW (what keeps it sleeping)",
+    "SHAPE (sing it back to sleep)",
+    "WARD (the valley it walks toward)",
+    "MOVE (evacuate)",
+    "UNMAKE (at the cost of a tradition's whole craft)"
+   ],
+   "storyRule": "Every story ends the same way: it was never killed, only put back to sleep. The lullaby is split between the peoples; each one knows a verse.",
+   "clean": "The shared nightmare of every tradition. Ending it is the one thing all the peoples would have to do together.",
+   "aggressorKind": "beast",
+   "unique": true,
+   "epicNote": "Mythic, unique. Never rolled. Met through the peoples' shared arc: the verses of the lullaby are a quest across every tradition.",
+   "class": "great_manifestation"
+  }
+ ]
+}

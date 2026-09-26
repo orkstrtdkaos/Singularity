@@ -13,7 +13,8 @@ import { companyPlaces } from "./ladder.js";
 import { abilityTier } from "./skilltree.js";
 
 export const COMPANY_ROLES = ["companion", "trainer", "liaison", "partner", "ally"];
-const RECRUIT_BANDS = ["devoted", "ally"]; // a bond this strong is willing to travel with you (relationshipBand)
+const RECRUIT_BANDS = ["devoted", "ally"]; // CCODE-511: a bond this strong earns a NAMED PLACE at your side (relationshipBand)
+const ADVERSE_BANDS = ["enemy", "hostile"];  // CCODE-511: who will not travel with you whatever a scene says
 const LIAISON_MULT = 1.5;                  // a liaison speeds reputation with their people
 
 export function ensureCompany(character) {
@@ -21,14 +22,55 @@ export function ensureCompany(character) {
   return character;
 }
 
-/** Is this registry NPC bonded strongly enough to recruit? (band ≥ ally.) Consent + earned is the guard;
- *  the recruiter still checks the fiction, but the bond is the mechanical floor. Pure. */
-export function isRecruitable(npcEntry) {
+/** ⛔ CCODE-511 · ERIK, IN PLAY 2026-09-25 — THE BOND GATES BEING BROUGHT FORWARD, NOT BEING HERE.
+ *
+ *  *"The bond level should only gate who you can bring forward (the ones you can select preferred skills for
+ *  etc.) while anyone who joins you for whatever reason in the story can and should be reflected in your party
+ *  list and CAN help in fights — or can hide behind you."*
+ *
+ *  ⚠️ THIS TEST USED TO GATE JOINING, and measured across all 16 saves it admitted 39 of 133 people met — so
+ *  94 people the story could send along were refused, and Brynjar (the character Erik is playing) had 0 of 5.
+ *  The log already carries a hand-written repair for it: "Ragnar and Maret back in his company (Erik’s
+ *  request). They walked with him from the Stillhold to the Marchward on day 1 in the story, but no join was
+ *  ever recorded." When a save has to be repaired by hand to say what the story said, the rule is wrong.
+ *
+ *  ⛑ SO IT IS RENAMED TO WHAT IT NOW GATES. Being brought FORWARD is the privileged tier — a named place in
+ *  a fight, a stance, a starred craft — and that is what closeness buys.
+ *  ⚠️ THE PREDICATE ONLY. `fellowship.canBringForward` is the GATE and has owned that question since
+ *  CCODE-453; it consults this. Two functions called `canBringForward` would be two answers. Pure. */
+export function bondAllowsForward(npcEntry) {
   if (!npcEntry) return false;
   // ✅ ERIK 2026-09-12: "If someone swears to you - they're IN... you don't have to build up rapport with them to do that." A sworn
   // bond IS the consent this gate was built to look for — Maren swore at the shrine and still had to climb a band to be askable.
   if (npcEntry.bondType === "sworn" || npcEntry.kin === "sworn" || npcEntry.bondStage === "sworn") return true;
-  return RECRUIT_BANDS.includes(relationshipBand(Number(npcEntry.relationship) || 0));
+  // ⛔ AN UNRECORDED BOND IS NOT A LOW BOND. Measured on the live saves: Sable and Ravel travel with Loki and
+  // NEITHER record carries a `relationship` at all — `Number(undefined) || 0` would read that as neutral and
+  // refuse them a place they already hold. Across every save, 7 people actually travel with someone and only 4
+  // carry a bond this can read. ⚠️ `companyPlaces` states the principle in its own note: "ejecting someone a
+  // player has travelled with to satisfy a rule introduced after the fact is the cruellest possible reading of
+  // a cap." ⛑ A RECORDED low bond refuses; silence leaves it to the fiction, which is what put them there.
+  const bond = Number(npcEntry.relationship);
+  if (!Number.isFinite(bond)) return true;
+  return RECRUIT_BANDS.includes(relationshipBand(bond));
+}
+
+/** ⛔ AND WHO MAY COME ALONG AT ALL: anybody you have met who is not set against you. Erik’s ruling — the
+ *  story decides who walks with you, and the sheet records it.
+ *  ⚠️ NOT "EVERYONE": a person who is hostile does not travel with you because a scene said so, and
+ *  `relationshipBand` already names that rung. Every rung above it is the fiction’s call, not a threshold’s. */
+export function isRecruitable(npcEntry) {
+  if (!npcEntry) return false;
+  if (npcEntry.status && ["dead", "departed", "missing"].includes(String(npcEntry.status))) return false;
+  // ✅ ERIK 2026-09-12: "If someone swears to you - they're IN." A vow outranks the band on BOTH doors — it
+  // earned the named place before CCODE-511 and it still opens the road now, which keeps every save that had a
+  // sworn enemy travelling with them answering as it did.
+  if (npcEntry.bondType === "sworn" || npcEntry.kin === "sworn" || npcEntry.bondStage === "sworn") return true;
+  // ⚠️ BOTH ADVERSE RUNGS. `relationshipBand` runs enemy · hostile · wary · neutral · friendly · ally ·
+  // devoted, and my first cut excluded only "hostile" — so an ENEMY could travel with you. Measured, not
+  // assumed: -10 and -7 are enemy, -5 and -4 are hostile.
+  // ⛑ THIS IS DELIBERATELY THE WORKING BAR (`canBeAskedToWork`, §130): Erik's ruling makes travelling take
+  // the same bar as being asked to work, and what is earned is the NAMED PLACE, not the road.
+  return !ADVERSE_BANDS.includes(relationshipBand(Number(npcEntry.relationship) || 0));
 }
 
 /** The roles an NPC's authored record offers when recruited: always `ally`; `trainer` if it teaches a
@@ -55,6 +97,35 @@ export function offeredRoles(npcCatalog = {}) {
  *  present-tense answer by omission. */
 export function activeCompany(character) {
   return (character?.company || []).filter(m => m && !m.leftDay);
+}
+
+/** ⛔ CCODE-511 — THE TWO TIERS OF A PARTY, derived in ONE place so the tab, the fight and the GM agree.
+ *
+ *  ⛑ Erik: closeness buys a NAMED PLACE, not entry. `forward` are the ones you can bring forward — bonded
+ *  close enough (`canBringForward`) and within the places your rapport and level have earned
+ *  (`companyPlaces`). `alongside` is everybody else who travels with you: they are in the party list, they are
+ *  in the fight as they are able, and they can keep out of it.
+ *
+ *  ⚠️ A PLAYER’S OWN PICK WINS where they have made one (`character.forwardPicks`), so the order below is a
+ *  DEFAULT and never an override — the forward pick has been a UI control since CCODE-272 and this must not
+ *  quietly take it back. Returns `{ forward, alongside, places, why }`. Pure. */
+export function forwardCompany(character, { ladder = null, registry = null } = {}) {
+  const reg = registry || character?.npcRegistry || {};
+  const members = activeCompany(character);
+  const places = ladder ? companyPlaces(ladder, character) : members.length;
+  // ⚠️ A MEMBER WITH NO RECORD IS UNMEASURED, NOT UNWORTHY. 3 of the 7 people travelling with anyone in
+  // this game exist only as a `company` entry — Sable and Ravel walk with Loki and have no person record in
+  // the registry, the content, or the companions. That is a minting gap worth closing, and until it is, a
+  // silence must not cost them the place the story gave them.
+  const able = members.filter(m => (reg[m.npcId] ? bondAllowsForward(reg[m.npcId]) : true));
+  const picked = Array.isArray(character?.forwardPicks) ? character.forwardPicks.map(String) : [];
+  const chosen = [];
+  for (const id of picked) { const m = able.find(x => String(x.npcId) === id); if (m && !chosen.includes(m)) chosen.push(m); }
+  for (const m of able) { if (chosen.length >= places) break; if (!chosen.includes(m)) chosen.push(m); }
+  const forward = chosen.slice(0, places);
+  const alongside = members.filter(m => !forward.includes(m));
+  return { forward, alongside, places,
+    why: `${forward.length} of ${members.length} come forward — you can bring ${places}${places === 1 ? "" : " at a time"}, and closeness is what earns a named place` };
 }
 
 /** Those who travelled with you and no longer do — history, kept. This is what makes "the road may cross
@@ -329,11 +400,15 @@ export function applyPartyOps(character, ops = [], { day = null, registry = null
       if (activeCompany(character).some(m => m.npcId === npcId)) continue;   // already with you
       // ⚠️ THE CAP COUNTS PROPOSALS TOO. Two joins in one turn against one free place would both pass
       // a check against the CURRENT roster and put the player one over without either op being wrong.
+      // ✅ CCODE-511 · ERIK’S RULING — THE CAP NO LONGER REFUSES THE JOIN. It used to: "X would travel with
+      // you, but you can keep N at your side." ⚠️ That made the sheet argue with the story, and the story is
+      // what decides who walks beside you. The cap now decides who can be brought FORWARD (`companyPlaces`,
+      // read by `forwardCompany`), which is the tier closeness actually buys — a named place, a stance, a
+      // starred craft. Everyone else travels with you, helps in a fight as they are able, or keeps out of it.
       const places = ladder ? companyPlaces(ladder, character) : Infinity;
       if (activeCompany(character).length + out.proposed.length >= places) {
-        out.notes.push(`${nameOf(npcId)} would travel with you, but you can keep ${places} at your side${places === 1 ? "" : " at once"} — rapport is what widens that.`);
-        out.refused = [...(out.refused || []), { npcId, name: nameOf(npcId), why: "company is full", places }];
-        continue;
+        out.notes.push(`${nameOf(npcId)} travels with you — you can bring ${places} forward${places === 1 ? "" : " at a time"}, so they stand with the rest until that widens.`);
+        out.beyondForward = [...(out.beyondForward || []), { npcId, name: nameOf(npcId), places }];
       }
       out.proposed.push({ npcId, name: nameOf(npcId), roles: Array.isArray(raw?.roles) ? raw.roles : ["ally"], why: raw?.why || null });
     }

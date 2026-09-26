@@ -2077,9 +2077,17 @@ console.log("\n── §172 · a beat's bookkeeping is restated, not lost ──
   const full172 = { company: [{ npcId: "a" }, { npcId: "b" }, { npcId: "c" }], subAttributes: { rapport: 7 }, npcRegistry: { marrow: { id: "marrow", name: "Maren Ossitide" } } };
   const p172 = CO172.applyPartyOps(full172, [{ op: "join", npcId: "marrow" }], { day: 17, ladder: C172.rules.subAttributeLadder });
   const app172 = rd("app.js").replace(/^\s*\/\/.*$/gm, "");
-  check("§172: ⛔ a REFUSED join is said to the player — the company-full note reaches the beat's aside instead of a note nobody reads",
-    (p172.notes || []).some(n => /would travel with you/.test(n)) && /character\._stepAsides = \[\.\.\.\(character\._stepAsides \|\| \[\]\), \.\.\.said\]/.test(app172) && /character\._stepAsides\.map\(s => /.test(app172) && /delete character\._stepAsides/.test(app172),
-    JSON.stringify(p172.notes));
+  // ✅ CCODE-511 · ERIK, IN PLAY 2026-09-25 — THE JOIN IS NO LONGER REFUSED, so this no longer asserts a
+  // refusal. "Anyone who joins you for whatever reason in the story can and should be reflected in your party
+  // list." ⚠️ What survives is the half that mattered: the note still REACHES THE PLAYER through the beat's
+  // aside, because a party change nobody is told about is the defect this check was written for.
+  check("§172: ⛔ a join is RECORDED and SAID — the note reaches the beat's aside, and nobody is turned away",
+    p172.proposed.some(x => x.npcId === "marrow")
+    && !(p172.refused || []).length
+    && (p172.notes || []).some(n => /travels with you/.test(n))
+    && (p172.beyondForward || []).some(x => x.npcId === "marrow")
+    && /character\._stepAsides = \[\.\.\.\(character\._stepAsides \|\| \[\]\), \.\.\.said\]/.test(app172) && /character\._stepAsides\.map\(s => /.test(app172) && /delete character\._stepAsides/.test(app172),
+    JSON.stringify({ proposed: p172.proposed, notes: p172.notes, beyond: p172.beyondForward }));
   // ⛔ the check the wiring audit made me write: the row is READ, not merely registered — gm.js destructures it and pushes its instruction
   const gm172 = rd("engine/gm.js").replace(/^\s*\/\/.*$/gm, "");
   check("§172: ⛔ …and the prompt assembler READS the row — gm.js takes bookkeepingRestate out of the context and pushes its instruction into the scene",
@@ -2696,13 +2704,27 @@ console.log("\n── §186 · everyone acts at three or fewer, the cap grows wi
     at(4, { rapport: 7 }) >= 3 && at(60, { rapport: 14, presence: 14 }) === 6);
   check("§186: …with the numbers in content, not in the engine", Number(ladder186.companyPlacesByLevel?.[10]) === 3 && Number(ladder186.companyPlacesByLevel?.[20]) === 6 && /party cap/.test(String(ladder186.companyPlacesByLevel?._why)));
   // ⛔ "If someone swears to you - they're IN... you don't have to build up rapport with them to do that."
-  check("§186: ⛔ a sworn person is recruitable at any standing — the bond IS the consent this gate was built to look for",
-    CO186.isRecruitable({ id: "marrow", relationship: 0, bondType: "sworn" }) === true
-    && CO186.isRecruitable({ id: "x", relationship: 2, kin: "sworn" }) === true
-    && CO186.isRecruitable({ id: "y", relationship: 2 }) === false
-    && CO186.isRecruitable({ id: "z", relationship: 5 }) === true);
-  check("§186: …and a sworn enemy is still not a companion — swearing is consent, not an override of hostility",
-    CO186.isRecruitable({ id: "q", relationship: -8, bondType: "sworn" }) === true, "sworn outranks the band by Erik's ruling; if that is wrong for an enemy it is a ruling, not a bug");
+  // ✅ CCODE-511 · ERIK, IN PLAY 2026-09-25 — THE SAME CLAIM, AT THE DOOR IT NOW GUARDS. The bond used to
+  // decide who could JOIN; Erik moved it to who can be brought FORWARD ("the ones you can select preferred
+  // skills for"). The sworn rule is unchanged and still the point: swearing IS the consent, at any standing.
+  // ⚠️ Rewritten rather than deleted — the claim was right and it was pointed at the wrong door.
+  check("§186: ⛔ a sworn person comes FORWARD at any standing — the bond IS the consent this gate was built to look for",
+    CO186.bondAllowsForward({ id: "marrow", relationship: 0, bondType: "sworn" }) === true
+    && CO186.bondAllowsForward({ id: "x", relationship: 2, kin: "sworn" }) === true
+    && CO186.bondAllowsForward({ id: "y", relationship: 2 }) === false
+    && CO186.bondAllowsForward({ id: "z", relationship: 5 }) === true
+    // … and JOINING is open to all of them now, which is the half Erik changed
+    && CO186.isRecruitable({ id: "y", relationship: 2 }) === true);
+  // ⚠️ THE LABEL SAID THE OPPOSITE OF THE ASSERTION and had since it was written: "a sworn enemy is still
+  // NOT a companion", asserting `=== true`. Nothing caught it because both halves passed — the assertion was
+  // never wrong, the sentence above it was. ⛑ The behaviour is Erik's ("If someone swears to you - they're
+  // IN") and the words now say it, on BOTH doors, which is what CCODE-511 made it possible to state.
+  check("§186: …and a VOW OUTRANKS THE BAND — even a sworn enemy travels with you, and comes forward",
+    CO186.isRecruitable({ id: "q", relationship: -8, bondType: "sworn" }) === true
+    && CO186.bondAllowsForward({ id: "q", relationship: -8, bondType: "sworn" }) === true
+    // … and an enemy who swore nothing is refused the road, which is the rule the vow is an exception TO
+    && CO186.isRecruitable({ id: "r", relationship: -8 }) === false,
+    "sworn outranks the band by Erik's ruling; an enemy without a vow does not travel with you");
 }
 
 /* ══════════ §187 — B6b · THE HOLDING THAT MOVES (SPEC_mobile_holdings, Aevi; Erik 2026-09-12: "I want mobile holdings prioritized fairly high") ══════════ */
@@ -11830,8 +11852,16 @@ console.log("\n── §130 · Bren Thalle does not need to be devoted to take p
   const w = (o) => H.canBeAskedToWork({ id: "x", name: "X", status: "active", relationship: 0, met: 1, ...o });
   check("§130: ⛔ COME AND WORK — known and not hostile is enough; devotion is the company's bar, not the mill's",
     w({}) && w({ relationship: 2 }) && !w({ relationship: -4 }) && !w({ relationship: -7 }) && !w({ status: "dead" }) && !w({ status: "departed" }) && !w({ met: 0, firstMet: null, relationship: 0 }) && w({ met: 0, firstMet: null, relationship: 1 }));
-  check("§130: …and travelling keeps its bar — a stranger who may work may not join the company",
-    typeof NP.isRecruitable === "function" && !NP.isRecruitable({ id: "x", name: "X", status: "active", relationship: 0, met: 1 }) && w({}));
+  // ✅ CCODE-511 — TRAVELLING NO LONGER KEEPS A HIGHER BAR THAN WORKING; Erik: "anyone who joins you for
+  // whatever reason in the story can and should be reflected in your party list." ⚠️ The two bars were the
+  // point of this check, and they are now ONE bar — known and not hostile — with the bond moved onto the
+  // forward pick. So the claim becomes: the same stranger may work AND may travel, and it is a NAMED PLACE
+  // that is still earned.
+  check("§130: …and travelling now takes the same bar as working — what is earned is the named place, not the road",
+    typeof NP.isRecruitable === "function"
+    && NP.isRecruitable({ id: "x", name: "X", status: "active", relationship: 0, met: 1 }) && w({})
+    && !NP.isRecruitable({ id: "h", name: "H", status: "active", relationship: -7, met: 1 })   // hostile still refuses
+    && NP.bondAllowsForward({ id: "x", relationship: 0 }) === false);                          // the forward place is still earned
   const app = rd("app.js");
   check("§130: ⚑ the popup's pool is the working bar, and it says what they bring and whom they already keep for",
     /Object\.keys\(character\.npcRegistry \|\| \{\}\)\.filter\(id => canBeAskedToWork\(character\.npcRegistry\[id\]\)\)/.test(app) && /\(keeps \$\{esc\(k\)\}\)/.test(app) && /assistTags \|\| \[\]\)\.slice\(0, 2\)/.test(app));

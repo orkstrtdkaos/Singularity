@@ -75,7 +75,7 @@ import { makeField, fieldDataFrom, FIELD_KINDS, KIND_LABEL, MEMBERSHIP } from ".
 import { assaultableAt, garrisonContingents, noteHoldLoss, takeHold, encounterOwnerFilter, seedPowerKnowledge, isKnownPower, powersReaching, dangerLiftAt } from "./engine/powers.js";
 import { buildNemesisPrompt, applyNemesisChoice } from "./engine/nemesis.js";   // ⛔ SNG-648: the choosing call   // SNG-634 C5: their holds are places you can take   // CCODE-457: why the ground here reads the way it does · CCODE-472: and the layer the map draws
 import { FIRE_TESTS, diffKeys } from "./engine/firetests.js";   // SNG-560: the parts that have never been used
-import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, roleBadges, teacherOfferReady, applyPartyOps, activeCompany, formerCompany } from "./engine/company.js";
+import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, bondAllowsForward, forwardCompany, offeredRoles, trainerFor, liaisonFactions, roleBadges, teacherOfferReady, applyPartyOps, activeCompany, formerCompany } from "./engine/company.js";
 import { unitsOf, unitLine, poolRows, atSideRows, wherePerson, canBringForward, rosterLine, levelOfPerson } from "./engine/fellowship.js";
 // ⛔ CCODE-407 (Erik): "I want this to be easy on the PC so we can have a delegate (GM through a chosen npc) come up with the legion plan."
 import { draftLegionPlan, planDraftersFor } from "./engine/legionplan.js";
@@ -180,7 +180,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.8.4";
+const APP_VERSION = "2.8.5";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -15258,6 +15258,15 @@ function renderHoldingsTab(manageId = null) {
       if (!b.title) b.title = row.getAttribute("title") || "";
     }
   }
+  // ⛔ CCODE-511 — "or can hide behind you". `bringForward` has separated `withdrawn` (present === false)
+  // from `folded` since it was written; this is the control that sets it, for someone who has no named place.
+  for (const b of document.querySelectorAll("[data-ally-hold]")) b.onclick = () => {
+    const id = b.dataset.allyHold;
+    character.allyOrders = character.allyOrders || {};
+    const o = character.allyOrders[id] = character.allyOrders[id] || {};
+    o.holdBack = !o.holdBack;
+    saveCharacter(character); renderPartyTab();
+  };
   for (const b of document.querySelectorAll("[data-ad-raise]")) b.onclick = () => renderBandsTab();
   for (const b of document.querySelectorAll("[data-wc-ask]")) b.onclick = () => {
     const id = b.dataset.wcAsk;
@@ -17523,6 +17532,17 @@ function renderPartyTab() {
   const pickable = !split.everyoneActs && split.slots > 1;
   const orders = character.allyOrders || {};
   const opposed = obOpposed(), T = obTable();
+  // ⛔ CCODE-511 · ERIK, IN PLAY: "The bond level should only gate who you can bring forward (the ones you
+  // can select preferred skills for etc.) while anyone who joins you for whatever reason in the story can and
+  // should be reflected in your party list and CAN help in fights — or can hide behind you."
+  // ⛑ SO THIS TAB HAS TWO TIERS NOW. Everyone travelling with you is here; the ones closeness has earned a
+  // named place get the stance and the starred crafts, and the rest are in the line as they are able.
+  const canFwd = (a) => {
+    if (a.isPlayer || a.kind === "player") return true;
+    const rec = character.npcRegistry?.[a.id] || CONTENT.npcs?.[a.id] || null;
+    if (!rec) return true;                       // unmeasured — a companion, a catalog ally, or (3 of 7 today) a party member with no record at all
+    return bondAllowsForward(rec);
+  };
   const card = ({ a, p }) => {
     const o = orders[a.id] || {};
     const st = stanceOf(o.stance);
@@ -17530,6 +17550,15 @@ function renderPartyTab() {
     const crafts = [...new Map(jobCraftsOf(p, { rules: CONTENT.rules, fnIndex: FN_INDEX, opposed }).filter(k => FIGHT_FAMILIES.includes(k.family)).map(k => [String(k.id), k.name])).entries()].slice(0, 8);
     const liked = new Set((o.prefer || []).map(String));
     const isFwd = fwd.has(a.id);
+    // ⚠️ NOT HIDDEN — SHOWN, AND SAID. Erik's rule is that they are in the party list and in the fight; what
+    // they do not get is the named place, the stance and the starred craft. A row that simply vanished would be
+    // the old refusal wearing a different coat.
+    if (!canFwd(a)) return `<article class="ob-card ob-alongside">
+      <div class="ob-top"><span class="ob-nm">${esc(p.name)}</span><span class="hint">level ${esc(String(p.level))}</span></div>
+      <div class="hint">Travels with you and stands in the line — they help as they are able, or keep out of it.
+        A named place, a stance and a starred craft are what closeness earns.</div>
+      <div class="ob-row"><button class="opt" data-ally-hold="${esc(a.id)}" title="${a.present === false ? "Bring them back into the line" : "Let them keep out of the fighting"}">${a.present === false ? "Back into the line" : "Let them hang back"}</button></div>
+    </article>`;
     return `<article class="ob-card">
       <div class="ob-top"><span class="ob-nm">${esc(p.name)}</span><span class="hint">level ${esc(String(p.level))}</span></div>
       <div class="ob-row">${stancePickHtml("data-ally-stance", a.id, st)}
@@ -17548,6 +17577,14 @@ function renderPartyTab() {
     <h2 class="codex-title">At your side</h2>
     <div class="ob-summary"><span><b>${esc(character.name)}</b> and <b>${allies.length}</b> more</span>${hereNow()?.name ? `<span>at <b>${esc(hereNow().name)}</b></span>` : ""}<span>${esc(split.why)}</span></div>
     ${allies.length ? `<div class="ob-controls">${obFoeSlider()}<span class="hint">${split.everyoneActs ? "everyone acts" : `${fwdAllies.length} of ${Math.max(0, split.slots - 1)} brought forward`}</span></div>
+      ${(() => {
+        // ⛑ THE ENGINE'S OWN COUNT, not a second one taken here. `forwardCompany` answers who comes forward
+        // and who travels alongside; the tab says what it answers.
+        const fc = (() => { try { return forwardCompany(character, { ladder: CONTENT.rules?.subAttributeLadder || null }); } catch { return null; } })();
+        const along = allies.filter(x => !canFwd(x.a)).length;
+        if (!along && !fc) return "";
+        return `<div class="hint" style="margin:4px 0">${fc ? esc(fc.why) : ""}${along ? `${fc ? " · " : ""}${along} of them travel with you without a named place — they are in the line, and closeness is what earns the rest.` : ""}</div>`;
+      })()}
       <div class="ob-roster">${allies.map(card).join("")}</div>
       <div class="ob-panel"><div class="ob-head"><h3 class="codex-title" style="margin:0">The next round, as the GM receives it</h3><button class="btn" id="party-roll">Roll a round</button></div>
         ${roundHtml}<p class="hint">In a fight the GM is handed this every turn: each ally's craft, chosen by their stance and what you prefer, rolled by the engine, to be told as it fell. The fight's own numbers are unchanged.</p></div>`

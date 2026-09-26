@@ -18,7 +18,7 @@ import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "../engine/p
 import { initWorldState, runWorldTick, advanceGeneratedOffscreen, applyWantOutcome, offscreenPopulation, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM, worldArcsPublic, worldArcsForGM, effectiveEpicStatus, applyEpicArcPush, resolveEpicClash, applyEpicClashOutcome } from "../engine/worldtick.js";
 import { assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "../engine/gambit.js";
 import { SUBS, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, canLearnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, autoAdvancePracticedRanks, markDefiningMoment, meetsStandingBar, promotionEligible, promote, acquirable, acquireDomain, recoveryEnergy, nativeGrantIdsFor, applyNativeGrants, retroNativeGrants, seedInnateSubstrate } from "../engine/progression.js";
-import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, liaisonMultiplierFor, roleBadges, COMPANY_ROLES, activeCompany, formerCompany, applyPartyOps } from "../engine/company.js";
+import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, liaisonMultiplierFor, roleBadges, COMPANY_ROLES, activeCompany, formerCompany, applyPartyOps, bondAllowsForward } from "../engine/company.js";
 import { standingWithPeople } from "../engine/reputation.js";
 import { seedStandingAtCreation, accrueStandingForDays, companyStandingRates, applyStandingOps, standingFor, standingRoster, dripScale, DRIP, CREATION_SEEDS } from "../engine/standing.js";
 import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex, resolveTopic, namesMatch, mergeCodexTopics, mergeInto, suggestMerges, markNotSame } from "../engine/codex.js";
@@ -3027,9 +3027,13 @@ await (async () => {
   check("SNG-126: companyRoster folds in a partner-adjacent NPC with derived partner+ally roles", rPell && rPell.roles.includes("partner") && rPell.roles.includes("ally") && rPell.recruited === false);
   check("SNG-126: a recruited member is flagged recruited (gets a part-ways control); a derived partner is not", rSorel.recruited === true && rPell.recruited === false);
 
-  // isRecruitable — a strong bond (band >= ally) can be asked along; a faint acquaintance cannot
-  check("SNG-126: isRecruitable gates on a strong-enough bond (ally band), not a faint one",
-    isRecruitable(npcReg.sorel) === true && isRecruitable(npcReg.gruff) === false);
+  // ✅ CCODE-511 · ERIK, IN PLAY 2026-09-25: "The bond level should only gate who you can bring forward …
+  // while anyone who joins you for whatever reason in the story can and should be reflected in your party list."
+  // ⚠️ So a faint acquaintance may now travel with you — what the bond buys is a NAMED PLACE. Rewritten in
+  // place, and asserting BOTH halves so neither can drift: the road is open, the place is earned.
+  check("CCODE-511: the road is open to a faint acquaintance; the NAMED PLACE is what a bond earns",
+    isRecruitable(npcReg.sorel) === true && isRecruitable(npcReg.gruff) === true
+    && bondAllowsForward(npcReg.sorel) === true && bondAllowsForward(npcReg.gruff) === false);
 
   // offeredRoles derives roles from an authored NPC record (teaches → trainer, liaisonFor → liaison)
   check("SNG-126: offeredRoles reads the authored record — ally always, +trainer if it teaches, +liaison if it represents a people",

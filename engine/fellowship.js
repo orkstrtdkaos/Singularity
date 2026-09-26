@@ -19,7 +19,7 @@
 // PURE. Every function reads the character and content and returns data; the writers stay `recruit`/`partCompany` in company.js.
 import { contingentsOf, bandCan, bandStrength, resolvedUnit, legionParts, leaderOf, leaderBonusOf, kitSummary, onMissionWith } from "./melee.js";   // CCODE-405/406 · CCODE-445: a legion reads through its parts, and its leader is priced
 import { unitCarriedSubstrate } from "./substrate.js";   // CCODE-408: what it carries that moves the ground
-import { activeCompany } from "./company.js";
+import { activeCompany, bondAllowsForward } from "./company.js";
 import { companyPlaces } from "./ladder.js";
 import { derivedLevel, authoredFor } from "./npcsheet.js";
 import { walkingDays, bearingBetween } from "./worldmap.js";
@@ -266,6 +266,17 @@ export function canBringForward(character, row, { ladder = null } = {}) {
   if (row.atSide) return { ok: false, why: `${row.name} is already at your side` };
   const away = onMissionWith(character?.bands, row.id);   // ⛔ CCODE-453: those who went — not those who stayed
   if (away) return { ok: false, why: `${row.name} is away with ${away.name || "the band"} on a mission` };
+  // ⛔ CCODE-511 · ERIK, IN PLAY 2026-09-25: "The bond level should only gate who you can bring forward (the
+  // ones you can select preferred skills for etc.) while anyone who joins you for whatever reason in the story
+  // can and should be reflected in your party list and CAN help in fights — or can hide behind you."
+  // ⛑ THIS IS WHERE THE BOND BELONGS, and it is the only place it now sits. `isRecruitable` used to refuse
+  // the JOIN on the same test — 39 of 133 people met across all 16 saves, and 0 of 5 for the character Erik was
+  // playing — so the story kept sending people the sheet would not record.
+  const rec = character?.npcRegistry?.[row.id] || null;
+  if (rec && !bondAllowsForward(rec)) {
+    return { ok: false, bond: true,
+      why: `${row.name} travels with you and stands in the line — a named place at your side is what closeness earns` };
+  }
   const places = ladder ? companyPlaces(ladder, character) : null;
   const taken = activeCompany(character).length;
   if (places != null && taken >= places) {

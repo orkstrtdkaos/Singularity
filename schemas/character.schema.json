@@ -321,6 +321,39 @@
           "boolean"
         ]
       }
+    },
+    "captives": {
+      "type": "array",
+      "description": "who your watch is holding — a raid leader taken alive on a rout (SNG-657 §3C). ⛑ A Needs-you line on the Holdings screen, not a casualty: ransom, a bargain or a trial is a story to play, and releasing them is the one outcome the engine resolves. ⛔ A leader is never KILLED in an unattended raid; killing a named power leader should be a scene the player is in.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "powerId": {
+            "type": "string"
+          },
+          "powerName": {
+            "type": "string"
+          },
+          "holdingId": {
+            "type": "string"
+          },
+          "holdingName": {
+            "type": "string"
+          },
+          "day": {
+            "type": [
+              "number",
+              "null"
+            ]
+          }
+        }
+      }
     }
   }
 }

@@ -250,6 +250,10 @@
       "type": "object",
       "additionalProperties": true,
       "description": "What the WORLD knows about this person that the character does not yet — a new role or a lesser status held beside what they know (`fates.js`), for the GM to let surface in the fiction, and cleared once what the character knows has caught up."
+    },
+    "hurt": {
+      "type": "object",
+      "description": "a wound this person took and has not yet put behind them — `{ day, by, why, cruel? }` (SNG-657 §3B). ⛑ Written when they stood against the leader of a raid and lost, and when a cruel power overran the place they kept. ⛔ HURT, NOT KILLED: a named defender lost to a line in a pass report is exactly what §3C forbids in the other direction, and a cruel escalation is the GM's beat to narrate. ⚠️ `additionalProperties` is false here, so a save whose keeper has been wounded would fail validation without this row."
     }
   }
 }

@@ -8146,24 +8146,26 @@ console.log("\n── §76g · the two rolls, and what each kept ──");
         return !!lead && bulk.length >= 1 && S.total > 0;
       })(), "a contingent carries a number and a line of prose; a person carries a record");
 
-    check("§76g: ⛔ …and `raid.leaderFights` is OFF, so the WATCH sees them and the CLASH does not (Erik's ruling, not mine)",
+    // ⛔ THE RULING ARRIVED, AND THIS CHECK'S OTHER HALF RETIRED WITH IT. SNG-657 §3 turned `leaderFights` on and
+    // changed what it MEANS, so "the dial is off" is no longer a claim about anything — see §369. ⛑ What survives
+    // is the part that is still true and still load-bearing: the leader is NEVER one more combatant on any path,
+    // and the casualty books are keyed by a contingent's own `_at`. Both DRIVEN rather than read off a source line,
+    // because reading the line is what made this gate go red for a correction that made its claim more true.
+    check("§76g: ⛔ …and the leader is STILL NOT ONE MORE COMBATANT, on either side of the ruling — their losses could never be charged to a contingent that was not theirs",
       (() => {
         const src = rd("engine/holdings.js");
-        const cfgOff = { ...cfg6g, raid: { ...(cfg6g.raid || {}) } };
-        // the shipping default must not put a person in the clash …
-        const offByDefault = cfg6g?.raid?.leaderFights !== true
-          && /const leaderFights = !!\(cfg\?\.raid\?\.leaderFights\);/.test(src)
-          && /const fighters = leaderFights \? raiders : raiders\.filter\(c => !c\._person\);/.test(src);
-        // … and the casualty books may only be keyed by a CONTINGENT's own `_at`, never by position: a person has
-        // no index, and `_at ?? i` would have charged a captain's losses to whichever contingent sat there.
         const booksHonest = /const bled = raiders\.filter\(c => !c\._person && Number\.isFinite\(Number\(c\._at\)\)\);/.test(src)
           && /killed\[bled\[i\]\._at\] = gone;/.test(src)
           && !/killed\[raiders\[i\]\._at \?\? i\]/.test(src);
-        // … and the dial carries its measurement, so the person turning it knows what it costs
-        const noted = /leaderFights/.test(JSON.stringify(C6g.rules.economy.holdStore.raid || {}))
-          && /91\.5%|50\.4%/.test(String(C6g.rules.economy.holdStore.raid?._leaderFights || ""));
-        return offByDefault && booksHonest && noted;
-      })(), "a 32-point swing in who wins a raid is a ruling waiting for its ruler, not a default I get to pick");
+        // DRIVEN: a raid where the leader's rung would dominate the field must not move the strength by their
+        // quality. Same party, once with the leader present and once with them struck out of it.
+        const p = powers.find(x => x.leader && pool[String(x.leader)]);
+        const party = PW.raidersFrom(p, {}, { npcs: pool, npcCfg: npcCfg6g, day: 100, tierWeight: tw });
+        const person = party.find(c => c._person);
+        const strength = (units) => units.reduce((s, u) => s + (u.weight != null ? Number(u.weight) : (Number(u.n) || 1) * (Number(u.quality) || 1)), 0);
+        const leaderIsNotStrength = !!person && strength(party.filter(c => !c._person)) < strength(party);
+        return booksHonest && leaderIsNotStrength;
+      })(), "what the leader IS shows in the command bonus, the captain's contest and the withdrawal — never in the strength");
   }
 
   /* ═════ 4 · SNG-655 §3 — THE FOUR GATES AEVI ASKED FOR, in her own order ═════ */
@@ -29348,6 +29350,157 @@ console.log("\n── §368 · a light that will not let you catch up is not goi
       const empty = locs.filter(loc => RE368.dangerOf(loc) >= 2 && !beasts.some(e => RE368.isEligible(e, loc)));
       return locs.length >= 100 && beasts.length >= 20 && empty.length === 0;
     })(), "measured 2026-09-26: one place in the world has no eligible beast at all, The Low Lamp Inn, and it is danger 0");
+}
+
+/* ══════════ §369 · SNG-657 §3 — A RAID LEADER FIGHTS TO LEAD, NOT TO SLAUGHTER ══════════ */
+// ✅ ERIK, stated plainly by Aevi: a leader belongs on the field, but a raid is not a conquest.
+//
+// ⛔ AND FIRST, THE DOOR NOBODY WALKED THROUGH. `worldtick` has computed `power: raiderPowerAt(loc.id, …)` and
+// handed it to `tickStore` since SNG-634 C1 — and `tickStore`'s signature had no `power`, so it was destructured
+// away and `resolveRaid` was called without it. EVERY RAID IN THE GAME WAS THE ANONYMOUS ONE: C1's named raid,
+// CCODE-509's leader at the core of the party, SNG-655's stealth read of that leader's crafts and `leaderFights`
+// itself had never once fired in play. ⚠️ Four doors — produced, handed over, and never read.
+console.log("\n── §369 · a raid is not a conquest ──");
+{
+  const H369 = await import("../engine/holdings.js");
+  const PW369 = await import("../engine/powers.js");
+  const { loadContentHeadless: lch369 } = await import("./headless_content.mjs");
+  const C369 = await lch369();
+  const rules369 = C369.rules;
+  const cfg369 = { ...(rules369.economy?.holdStore || {}), features: rules369.economy?.holdFeatures };
+  const npcCfg369 = rules369.npcStanding || {};
+
+  // ⛔ 1 · THE POWER REACHES THE RAID. Driven through `tickStore`, which is the ONE production caller.
+  check("§369: ⛔ THE POWER REACHES `resolveRaid` — driven through `tickStore`, the only caller the game has, because a parameter that is handed over and destructured away is a feature that never fired",
+    (() => {
+      const at = "kestrels_roost";
+      const power = PW369.raiderPowerAt(at, { content: C369, character: {} });
+      if (!power) return false;
+      const hold = { id: "h369", kind: "post", condition: "holding", locationId: at,
+        features: [{ kind: "watch", count: 1 }, { kind: "wall", count: 2 }],
+        garrison: ["pell", "siol"], steward: "pell", improvements: [], store: { raw_material: 60, food: 30 } };
+      const ch = { holdings: [hold], npcRegistry: { pell: { id: "pell", name: "Pell Ran Marsh" }, siol: { id: "siol", name: "Siol" } }, bands: [] };
+      // ⚠️ THE FIRST DRAW IS THE RAID CHANCE and the second is the watch roll, so both are forced: a fixture
+      // whose raid does not fire proves nothing about whether the power reached it. My first cut rolled 0.13
+      // against a chance below that and the check failed for the fixture's reason, not the engine's.
+      let i = 0;
+      const st = H369.tickStore(ch, hold, { cfg: cfg369, economy: rules369.economy, rules: rules369, npcCfg: npcCfg369,
+        locations: C369.locations || {}, dangerLevel: 3, rng: () => { i++; return i <= 2 ? 0 : 0.5; }, day: 100,
+        people: C369.npcs || {}, power, meleeCfg: { ...(rules369.melee || {}), ...(rules369.martial || {}) } });
+      const r = st?.raid;
+      // THREE DOORS, ALL THREE ASSERTED: the world tick HANDS the power over, `tickStore` RECEIVES it in its
+      // signature, and the raid comes out NAMED. The middle one is the word that was missing.
+      const handsOver = /power: raiderPowerAt\(loc\?\.id, \{ content, character \}\)/.test(rd("engine/worldtick.js"));
+      const receives = /kitDeps = null, power = null \} = \{\}\) \{/.test(rd("engine/holdings.js"));
+      const passesOn = /resolveRaid\(character, holding, \{[^}]*, power,/.test(rd("engine/holdings.js"));
+      return !!r && (!!r.power?.name || !!r.led) && handsOver && receives && passesOn;
+    })(), "the world tick has always computed who is raiding; the raid never received it");
+
+  // ⛔ 2 · A NAMED LEADER-RUNG DEFENDER BEATS A RIFFRAFF ONE (Aevi's gate 2): quality reaches the clash.
+  const champOf = (rec) => H369.holdChampion({ npcRegistry: { x: rec } },
+    { id: "h", garrison: ["x"], features: [] }, { cfg: cfg369, npcs: {}, npcCfg: npcCfg369, day: 100, rules: rules369 });
+  check("§369: ⛔ WHO STANDS FOR THE HOLD IS THE STRONGEST HAND ON THE DEFENCE DUTY — a leader-rung captain outweighs a riffraff one, so the rung reaches the contest",
+    (() => {
+      const strong = champOf({ id: "x", name: "A Captain", tier: "leader", level: 20, does: ["PROTECT"], vocation: "KEEPER" });
+      const weak = champOf({ id: "x", name: "A Hand", tier: "riffraff", level: 2 });
+      return !!strong && !!weak && strong.hand > weak.hand && strong.tier === "leader";
+    })());
+  check("§369: ⛑ …and NOBODY STANDING IS A REAL ANSWER — §3B says no contest then, and the leader only commands",
+    champOf(null) === null
+    && H369.holdChampion({ npcRegistry: {} }, { id: "h", garrison: ["unit:b:0", "watch:0"], features: [] },
+      { cfg: cfg369, npcs: {}, npcCfg: npcCfg369, day: 100, rules: rules369 }) === null,
+    "a band's hands and a feature are not a person — they cannot meet a captain");
+
+  // ⛔ 3 · A LEADER NEVER DIES IN AN UNATTENDED RAID, across the whole sweep.
+  // ⛔ 5 · AND THE HOLD'S WIN RATE AT THE TIPPING POINT IS PRINTED, in Aevi's 30–50% band.
+  const sweep369 = (leads) => {
+    const raid = { ...(cfg369.raid || {}), leaderFights: !!leads };
+    const cfg = { ...cfg369, raid };
+    const mul = (a) => () => { a |= 0; a = (a + 0x6D2B79F5) | 0; let t2 = Math.imul(a ^ (a >>> 15), 1 | a); t2 = (t2 + Math.imul(t2 ^ (t2 >>> 7), 61 | t2)) ^ t2; return ((t2 ^ (t2 >>> 14)) >>> 0) / 4294967296; };
+    const powers = Object.values(C369.powers || {});
+    let held = 0, total = 0, dead = 0, took = 0, contests = 0;
+    for (const p of powers) {
+      for (let s = 0; s < 8; s++) {
+        // ⚠️ THE TIPPING POINT IS SIZED, NOT GUESSED. The raiders' strength across the 29 powers runs
+        // 10 / 102 / 268 (min / median / max), so a band of 44 at quality 2 beside three people and some stone
+        // puts the hold at 49.5% with the leader read but not leading — which is where a change is visible.
+        const hold = { id: "h369s", kind: "post", condition: "holding",
+          features: [{ kind: "watch", count: 1 }, { kind: "wall", count: 3 }, { kind: "tower", count: 2 }],
+          garrison: ["pell", "siol", "calvar", "unit:b369:0"], improvements: [], store: { raw_material: 40, food: 20 } };
+        const ch = { holdings: [hold], npcRegistry: {}, bands: [{ id: "b369", contingents: [{ n: 44, quality: 2, kind: "hands" }] }] };
+        const rng = mul(1000 + s * 31 + String(p.id).length * 7);
+        let first = true;
+        const r = H369.resolveRaid(ch, hold, { cfg, rules: rules369, dangerLevel: 3,
+          rng: () => { if (first) { first = false; return 0; } return rng(); },   // force the watch to see them
+          day: 100, people: C369.npcs || {}, npcCfg: npcCfg369, power: p, meleeCfg: rules369.melee || {} });
+        if (!r || r.detected === false) continue;
+        total++;
+        if (r.held) held++;
+        if (r.leaderDied) dead++;
+        if (r.leaderCaptured) took++;
+        if (r.captainsContest) contests++;
+      }
+    }
+    return { rate: total ? held / total : 0, total, dead, took, contests };
+  };
+  const before369 = sweep369(false), after369 = sweep369(true);
+  check("§369: ⛔ A LEADER IS NEVER KILLED IN AN UNATTENDED RAID — killing a named power leader should be a scene the player is in, not a line in a pass report",
+    before369.dead === 0 && after369.dead === 0 && after369.total >= 200,
+    `${after369.total} raids · leaders killed ${after369.dead} · leaders TAKEN ${after369.took}`);
+  check("§369: ⛔ …AND THE HOLD'S WIN RATE AT THE TIPPING POINT IS IN AEVI'S 30–50% BAND, against the 18% the retired reading gave",
+    after369.rate >= 0.30 && after369.rate <= 0.50 && after369.contests > 0,
+    `leader READ only ${(before369.rate * 100).toFixed(1)}% → leader LEADING ${(after369.rate * 100).toFixed(1)}% · ${after369.contests} captain's contests`);
+
+  // ⛑ §3A · COMMAND IS BOUNDED, and that is the point: a legendary leader gives their people the same +1 a
+  // heroic one does. What the leader IS shows in the contest and the withdrawal.
+  check("§369: ⛑ COMMAND IS A FLAT +1, WHATEVER THE LEADER'S RUNG — a bigger multiplier is exactly how a leader came to decide the whole clash",
+    Number(cfg369.raid?.leaderCommand) === 1
+    && /\+ \(Number\(cfg\?\.raid\?\.leaderCommand\) \|\| 0\)/.test(rd("engine/holdings.js"))
+    && !/leaderCommand[^\n]*tier|tier[^\n]*leaderCommand/.test(rd("engine/holdings.js")));
+
+  // ⛑ §3B · THE SWING IS `legionClash`'s OWN, so the rung caps it on the ladder that already exists.
+  check("§369: ⛑ THE CONTEST MOVES THE CLASH THROUGH `heroSwing`, capped by the winner's rung on the capability ladder — not a second table living in the raid",
+    /heroSwing: swing/.test(rd("engine/holdings.js"))
+    && /heroTier: contest \? \(contest\.winner === "raiders" \? contest\.leader\.tier : contest\.champion\.tier\) : null/.test(rd("engine/holdings.js"))
+    && Number(cfg369.raid?.duelTide) > 0);
+
+  // ⛔ 4 · NO HOLD IS TAKEN. ⚠️ Aevi's gate 4 says "no hold is taken by a power whose verbs and wants don't
+  // include ground (`takeHold` exists; this is the gate on it)". IT DOES NOT EXIST FOR THIS: `takeHold` is the
+  // PLAYER taking a hold FROM a power — it writes `powerState[power].holdsTaken` and drops that power's standing.
+  // There is NO path by which a power takes YOUR hold, so the gate has no subject, and I have not built a
+  // conquest nobody asked for to give it one. This asserts the absence honestly and names what would change it.
+  check("§369: ⚠️ NO RAID TAKES YOUR HOLD — an overrun takes the store share and moves the condition, and `takeHold` is the PLAYER taking one from a POWER, not the other way round",
+    (() => {
+      const src = rd("engine/powers.js");
+      const takesFromPower = /export function takeHold\(character, power, hold,/.test(src)
+        && /st\.holdsTaken/.test(src) && /movePowerStanding\(character, power, left === 0 \? -40 : -20/.test(src);
+      const raidSrc = rd("engine/holdings.js");
+      const raidNeverTakes = !/takeHold\(/.test(raidSrc);
+      return takesFromPower && raidNeverTakes;
+    })(), "the gate Aevi asked for has nothing to gate yet — said in po/ rather than answered with a feature");
+
+  // ⛔ §3 · AND THE CRUEL OVERRUN'S EXTRA HARM IS THE HALF THAT HAS STATE.
+  check("§369: ⛔ A CRUEL POWER'S OVERRUN COSTS ONE THING MORE — the keeper is wounded, because the other half of Aevi's `or` has no state to set",
+    (() => {
+      const cruel = Object.values(C369.powers || {}).find(p => String(p.temper || "").toLowerCase() === "cruel");
+      if (!cruel) return false;
+      const hold = { id: "h369c", kind: "post", condition: "holding", features: [], garrison: ["k"], steward: "k",
+        improvements: [], store: { raw_material: 20 } };
+      const ch = { holdings: [hold], npcRegistry: { k: { id: "k", name: "The Keeper" } }, bands: [] };
+      let first = true;
+      H369.resolveRaid(ch, hold, { cfg: cfg369, rules: rules369, dangerLevel: 4,
+        rng: () => { if (first) { first = false; return 0; } return 0.99; },
+        day: 100, people: C369.npcs || {}, npcCfg: npcCfg369, power: cruel, meleeCfg: rules369.melee || {} });
+      return ch.npcRegistry.k.hurt?.cruel === true
+        && /features carry no lapsed\/disrupted flag/.test(rd("engine/holdings.js"));
+    })(), "`watchStrength` already recorded that features carry no disrupted state and that inventing one was refused");
+
+  // ⛑ §3C · AND A TAKEN LEADER IS A NEEDS-YOU LINE WITH A WORKING BUTTON.
+  check("§369: ⛑ A TAKEN LEADER REACHES THE PLAYER — a row on the Holdings screen with a bound release, not a field nobody renders",
+    /data-captive-free=/.test(rd("app.js")) && /\[data-captive-free\]/.test(rd("app.js"))
+    && /\$\{captiveRows\}/.test(rd("app.js"))
+    && /character\.captives \|\| \[\]\)\.length/.test(rd("app.js")),
+    "rendered, and the button is bound — a `data-` attribute with no handler is the dead affordance this file has shipped before");
 }
 
 /* ══════════ REPORT ══════════ */

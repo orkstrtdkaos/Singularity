@@ -771,10 +771,62 @@ export function resolveRaid(character, holding, { cfg = null, dangerLevel = 0, r
   // two are named: a receipt listing everybody is a receipt nobody reads.
   const told = defenders.filter(d => d && d.said).slice(0, 2)
     .map(d => `${d.what || "one of yours"}'s ${d.said}`);
-  const leaderFights = !!(cfg?.raid?.leaderFights);
-  const fighters = leaderFights ? raiders : raiders.filter(c => !c._person);
-  const clash = legionClash(defenders, fighters.length ? fighters : raiders, { rng, cfg: cfg?.raid?.clash || {} });
+  // ⛔ SNG-657 §3 — `leaderFights` IS THIS BEHAVIOUR NOW, and the old reading of it is retired. Erik's
+  // problem, stated plainly: a leader belongs on the field, but a raid is not a conquest. Dropped in as one more
+  // combatant they decided the whole clash; so they do three things, none of which is winning it alone.
+  //   A · THEY COMMAND. While the leader stands, their contingents fight at +`leaderCommand` quality — the same
+  //       shape a legion commander has, and BOUNDED: a legendary leader gives their people the same +1 a heroic
+  //       one does. What the leader IS shows in B and C, never in a bigger multiplier.
+  //   B · THEY MEET THE DEFENDERS' BEST, if anybody stands (see `captainsContest`).
+  //   C · THEY LEAVE RATHER THAN DIE (below the clash).
+  const leaderLeads = !!(cfg?.raid?.leaderFights);
+  const leadCon = raiders.find(c => c && c._person) || null;
+  const leaderRec = leadCon ? (character?.npcRegistry?.[leadCon._person] || people?.[leadCon._person] || null) : null;
+  // ⚠️ THE LEADER IS STILL NOT ONE MORE COMBATANT. They are filtered out of the strength on every path, exactly
+  // as they were before this — what changes is that their PEOPLE fight better and that they meet a champion.
+  const fighters = raiders.filter(c => !c._person).map(c => (leaderLeads && leadCon
+    ? { ...c, quality: Math.max(1, (Number(c.quality) || 1) + (Number(cfg?.raid?.leaderCommand) || 0)) } : c));
+  const champion = (leaderLeads && leadCon)
+    ? holdChampion(character, holding, { cfg, npcs: people, npcCfg, day, rules }) : null;
+  const contest = (leaderLeads && leadCon && champion && leaderRec)
+    ? captainsContest(leaderRec, champion, { npcs: people, npcCfg, day, rules, rng }) : null;
+  // ⛑ THE SWING IS `legionClash`'s OWN, capped by the leader's rung on the capability ladder it already
+  // carries — not a second table here. A win for the raiders pulls the tide DOWN, because `ours` is the hold.
+  const duelTide = Number(cfg?.raid?.duelTide);
+  const swing = (contest && Number.isFinite(duelTide))
+    ? (contest.winner === "raiders" ? -Math.abs(duelTide) : Math.abs(duelTide)) : 0;
+  const clash = legionClash(defenders, fighters.length ? fighters : raiders,
+    { rng, cfg: cfg?.raid?.clash || {}, heroSwing: swing,
+      heroTier: contest ? (contest.winner === "raiders" ? contest.leader.tier : contest.champion.tier) : null });
   const held = clash.tide > 0.05;
+  // ⛔ §3B — AND THE DEFENDER IS HURT, NOT KILLED. A named person lost to a line in a pass report is exactly
+  // what §3C forbids in the other direction; a cruel power is where the GM may escalate, and that is the GM's
+  // beat to narrate rather than this function's to decide.
+  if (contest && contest.winner === "raiders" && champion?.id) {
+    const rec = character?.npcRegistry?.[champion.id];
+    if (rec) {
+      rec.hurt = { day: day ?? null, by: whose || null, why: "stood against the one who led the raid" };
+      if (String(power?.temper || power?.disposition || "").toLowerCase() === "cruel") rec.hurt.cruel = true;
+    }
+  }
+  // ⛔ §3C — THEY LEAVE RATHER THAN DIE, and they are NEVER KILLED IN AN UNATTENDED RAID: killing a named
+  // power leader should be a scene the player is in, not a line in the pass report. ⛑ That half was already
+  // true — `notePowerLoss` only ever counts contingents — and the gate keeps it true.
+  // ⚠️ ON A ROUT they may be TAKEN, which is a story rather than a casualty: ransom, bargain, trial or
+  // release, and leverage over the power either way.
+  let captured = null;
+  if (contest && clash.outcome === "breakthrough" && leadCon) {
+    const chance = Number(cfg?.raid?.leaderCaptureOnRout);
+    if (Number.isFinite(chance) && chance > 0 && rng() < chance) {
+      character.captives = Array.isArray(character.captives) ? character.captives : [];
+      if (!character.captives.some(c => c && c.id === leadCon._person)) {
+        captured = { id: leadCon._person, name: leadCon.what || leaderRec?.name || leadCon._person,
+          powerId: power?.id || null, powerName: whose || null, holdingId: holding.id,
+          holdingName: holding.name || holding.id, day: day ?? null };
+        character.captives.push(captured);
+      }
+    }
+  }
   // ⛔ AND THEIR LOSSES PERSIST, which is what makes clearing a band worth doing. ⛑ THE RATE IS `bloodBand`'s,
   // NOT A SECOND ONE: the same `lossPerTide` with the same win/lose asymmetry that every band clash in the
   // game already pays, read from the RAIDERS' side of the tide (hence `-clash.tide`). A second casualty rule
@@ -804,15 +856,31 @@ export function resolveRaid(character, holding, { cfg = null, dangerLevel = 0, r
     note((whose
       ? `${whose} came for it and were beaten off — ${spoils} ${spoilKind} taken from them${powerHit?.took ? `, ${powerHit.took} of theirs down` : ""}${powerHit?.broken ? ` — that is the last of them` : ""}`
       : `raid beaten off — ${spoils} ${spoilKind} taken from them`) + (told.length ? ` · ${told.join("; ")}` : ""));
-    return { detected: true, held: true, taken: {}, spoils: { [spoilKind]: spoils }, outcome: clash.outcome, day, atSea, power: powerHit || (whose ? { name: whose } : null) };
+    return { detected: true, held: true, taken: {}, spoils: { [spoilKind]: spoils }, outcome: clash.outcome, day, atSea,
+      ...(contest ? { captainsContest: contest } : {}), ...(captured ? { leaderCaptured: captured } : {}),
+      power: powerHit || (whose ? { name: whose } : null) };
   }
   const taken = take(Math.max(0, Math.min(1, baseShare - step * stone)));
   if (Object.keys(taken).length) advanceHolding(holding, "problem", null, "raided", keeperFloor ? { keeperFloor } : null);   // ⚑ AN EVENT SLIPS AT ONCE — time slips slowly, a raid does not
+  // ⛔ SNG-657 §3 — AN OVERRUN BY A CRUEL POWER COSTS ONE THING MORE than the store share. Aevi's own "or": a
+  // disrupted barrier layer, or a wounded keeper. ⚠️ THE FIRST HAS NO STATE TO SET — `watchStrength` recorded that
+  // features carry no lapsed/disrupted flag and that inventing one to filter was refused — so it is the keeper,
+  // who is a person with a record that can hold a wound.
+  let cruelHarm = null;
+  if (clash.outcome === "rout" && String(power?.temper || "").toLowerCase() === "cruel" && holding.steward) {
+    const rec = character?.npcRegistry?.[holding.steward] || null;
+    if (rec && !rec.hurt) {
+      rec.hurt = { day: day ?? null, by: whose || null, why: "kept this place when they came for it", cruel: true };
+      cruelHarm = { kind: "keeper", id: holding.steward, name: rec.name || holding.steward };
+    }
+  }
   note((whose
     ? `${whose} took it — ${Object.entries(taken).map(([g, n]) => `${n} ${g}`).join(", ") || "nothing"} gone${powerHit?.took ? `, ${powerHit.took} of theirs down in the doing` : ""}`
     : `raid fought and lost — ${Object.entries(taken).map(([g, n]) => `${n} ${g}`).join(", ") || "nothing"} taken`) + (told.length ? ` · ${told.join("; ")}` : ""));
   return { detected: true, held: false, taken, outcome: clash.outcome, day, atSea,
-    led: raiders.find(c => c._person) ? { id: raiders.find(c => c._person)._person, name: raiders.find(c => c._person).what } : null,
+    ...(contest ? { captainsContest: contest } : {}), ...(captured ? { leaderCaptured: captured } : {}),
+    ...(cruelHarm ? { cruelHarm } : {}),
+    led: leadCon ? { id: leadCon._person, name: leadCon.what } : null,
     power: powerHit || (whose ? { name: whose } : null), ...paid() };   // the path where the raiders WIN carried the fact too
 }
 
@@ -956,6 +1024,51 @@ export function dutyHand(person, { duty = "watch", npcs = {}, npcCfg = {}, day =
   const weight = num(weights[tier], num(w.tierWeightDefault, 1));
   return { hand: weight * fit, level, tier, fit, does, evidenced, leaning,
     why: evidenced ? "their own record says they do this" : leaning ? `a ${voc.toLowerCase()} leans this way` : "not their trade" };
+}
+
+/** ⛔ SNG-657 §3B — WHO STANDS FOR THE HOLD when a named leader comes for it: the watch captain first, then
+ *  the keeper. ⛑ "Captain" is not a stored title in this game — it is whoever on the watch has the strongest
+ *  defence hand, which is the same question `watchStrength` already asks of them. Returns null when nobody
+ *  stands, and that is a real answer: §3B says no contest then, and the leader only commands. PURE. */
+export function holdChampion(character, holding, { cfg = null, npcs = {}, npcCfg = {}, day = null, rules = {} } = {}) {
+  const people = [];
+  const seen = new Set();
+  const push = (id) => {
+    const key = String(id || "");
+    if (!key || seen.has(key) || /^unit:/.test(key) || /^[a-z_]+:\d+$/.test(key)) return;   // a band's hands and a feature are not a person
+    seen.add(key);
+    const rec = character?.npcRegistry?.[key] || npcs?.[key] || null;
+    if (rec) people.push({ id: key, rec });
+  };
+  for (const id of watchOf(holding, cfg) || []) push(id);
+  if (holding?.steward) push(holding.steward);                       // \u26d1 then the keeper, if the watch has nobody
+  if (!people.length) return null;
+  let best = null;
+  for (const p of people) {
+    const h = dutyHand(p.rec, { duty: "defence", npcs, npcCfg, day, rules });
+    if (!best || h.hand > best.hand.hand) best = { id: p.id, rec: p.rec, hand: h };
+  }
+  return best ? { id: best.id, name: best.rec.name || best.id, tier: best.hand.tier, level: best.hand.level, hand: best.hand.hand, why: best.hand.why } : null;
+}
+
+/** ⛔ SNG-657 §3B — THE CAPTAIN'S CONTEST. The raid's leader and whoever stands for the hold, on the SAME
+ *  contest shape Erik ruled for the watch (SNG-655: "seen = watch ÷ (watch + stealth)") rather than a second
+ *  one — rung and defence-duty hand on each side, then the d100 every number in this game pays.
+ *
+ *  ⛑ THIS IS WHERE A LEVEL-60 LEADER AGAINST A LEVEL-12 KEEPER IS FELT, and §3A's flat +1 command is why it
+ *  is felt HERE and not as a bigger multiplier on the whole clash. Returns null when nobody stands. PURE. */
+export function captainsContest(leader, champion, { npcs = {}, npcCfg = {}, day = null, rules = {}, rng = Math.random } = {}) {
+  if (!leader || !champion) return null;
+  const mine = dutyHand(leader, { duty: "defence", npcs, npcCfg, day, rules });
+  const theirs = Math.max(0, Number(champion.hand) || 0);
+  const total = mine.hand + theirs;
+  if (!(total > 0)) return null;
+  const pct = Math.max(1, Math.min(99, Math.round((mine.hand / total) * 100)));
+  const roll = Math.floor(rng() * 100) + 1;
+  const raidersWon = roll <= pct;
+  return { winner: raidersWon ? "raiders" : "hold", pct, roll,
+    leader: { name: leader.name || leader.id || null, tier: mine.tier, level: mine.level, hand: Math.round(mine.hand * 100) / 100 },
+    champion: { name: champion.name, tier: champion.tier, level: champion.level, hand: Math.round(theirs * 100) / 100 } };
 }
 
 /** ⛔ THE WATCH SIDE. Aevi's weights: the captain's hand at full, other named watchers at half, a band's plain
@@ -1317,7 +1430,13 @@ export function sellShareFor(holding, cfg) {
   return 0;
 }
 
-export function tickStore(character, holding, { cfg = null, economy = null, regionId = null, dangerLevel = 0, rng = Math.random, day = null, density = null, meaning = 0, people = {}, npcCfg = {}, locations = {}, rules = {}, kitDeps = null } = {}) {
+export function tickStore(character, holding, { cfg = null, economy = null, regionId = null, dangerLevel = 0, rng = Math.random, day = null, density = null, meaning = 0, people = {}, npcCfg = {}, locations = {}, rules = {}, kitDeps = null, power = null } = {}) {
+  // ⛔ SNG-657 §3 — `power` WAS PASSED HERE AND DESTRUCTURED AWAY. `worldtick` has computed
+  // `raiderPowerAt(loc.id, …)` and handed it to this function since SNG-634 C1, and the signature had no such
+  // parameter — so it vanished, `resolveRaid` was called without it, and EVERY RAID IN THE GAME WAS THE
+  // ANONYMOUS ONE. SNG-634 C1's named raid, CCODE-509's leader at the core of the party, SNG-655's stealth read
+  // of that leader's crafts and `raid.leaderFights` itself have never once fired in play.
+  // ⚠️ Four doors: produced, handed over, and never read. The one missing word is the whole of it.
   const keeperFloorEffects = (() => { try { const t = holding?.steward ? keeperTierOf(character, holding, { npcs: people, npcCfg, day }) : null; const fl = holding?.steward ? keeperFloorFor(t, cfg?.growth) : null; return fl ? { keeperFloor: fl } : null; } catch { return null; } })();
   if (!holding || !cfg) return null;
   const out = { yielded: null, upkeep: 0, short: 0, raid: null, full: false, justFull: false };
@@ -1429,7 +1548,7 @@ export function tickStore(character, holding, { cfg = null, economy = null, regi
     const rc = raidChanceFor(character, holding, { cfg, dangerLevel, people, npcCfg, day, total, fullAt });
     const keeperFloor = holding.steward ? keeperFloorFor(rc.keeperTier, cfg?.growth) : null;
     // ⛔ CCODE-504 — the rules bag rides, because the watch ROLLS now and its dials live in rules.death.watch.
-    if (rng() < rc.chance) out.raid = resolveRaid(character, holding, { cfg, dangerLevel, rng, day, people, npcCfg, keeperFloor, rules, kitDeps,
+    if (rng() < rc.chance) out.raid = resolveRaid(character, holding, { cfg, dangerLevel, rng, day, people, npcCfg, keeperFloor, rules, kitDeps, power,
       meleeCfg: { ...(rules?.melee || {}), ...(rules?.martial || {}) } });
   }
   return out;

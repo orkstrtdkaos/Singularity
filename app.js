@@ -72,7 +72,7 @@ import { roomOf, roomRefusal, promotionOffer, promoteHolding, trainingAt, mounts
 import { raidRisk, watchReadout, watchOdds, craftPlacementCost, defenceOf, featureCost, featureDef, featureDoes, featureCategory, allFeatures, refreshImprovement, canBeAskedToWork, holdingFactsLine, answerFeatureOffer, holdingLedger, addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, yieldsFor, upkeepFor, appointKeeper, reclaimHolding, improveHolding, setCrew, setGarrison, holdingGround, addFeature, removeFeature, renameHolding, featureKinds, residentsOf, holdingMeaningAura, holdingFieldDelta } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
 import { buildDevReport, unknownOpsIn } from "./engine/devreport.js";   // SNG-559: the Play/Dev instrument
 import { makeField, fieldDataFrom, FIELD_KINDS, KIND_LABEL, MEMBERSHIP } from "./engine/field.js";
-import { assaultableAt, garrisonContingents, noteHoldLoss, takeHold, encounterOwnerFilter, seedPowerKnowledge, isKnownPower, powersReaching, dangerLiftAt } from "./engine/powers.js";
+import { assaultableAt, garrisonContingents, noteHoldLoss, takeHold, encounterOwnerFilter, seedPowerKnowledge, isKnownPower, powersReaching, dangerLiftAt, movePowerStanding } from "./engine/powers.js";
 import { buildNemesisPrompt, applyNemesisChoice } from "./engine/nemesis.js";   // ⛔ SNG-648: the choosing call   // SNG-634 C5: their holds are places you can take   // CCODE-457: why the ground here reads the way it does · CCODE-472: and the layer the map draws
 import { FIRE_TESTS, diffKeys } from "./engine/firetests.js";   // SNG-560: the parts that have never been used
 import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, bondAllowsForward, forwardCompany, offeredRoles, trainerFor, liaisonFactions, roleBadges, teacherOfferReady, applyPartyOps, activeCompany, formerCompany } from "./engine/company.js";
@@ -180,7 +180,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.11.0";
+const APP_VERSION = "2.11.1";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -14589,6 +14589,22 @@ function wireHoldingOffers() {
     if (r && r.ok === false) console.warn("[features] offer refused:", r.why);   // prose-cap-ok: console diagnostic
     saveCharacter(character); again();
   };
+  // ⛔ SNG-657 §3C — LETTING A TAKEN LEADER GO. The one mechanical outcome of the four the spec names (ransom, a
+  // bargain, a trial, release), because it is the one the engine can resolve: they walk, and the power that sent
+  // them thinks better of you for it. ⛑ `movePowerStanding` is the ONE writer of a power's opinion and it keeps
+  // the reason, so the change is readable on their card afterwards rather than an unexplained number.
+  for (const btn of app.querySelectorAll("[data-captive-free]")) btn.onclick = () => {
+    const i = Number(btn.dataset.captiveFree);
+    const c = (character.captives || [])[i];
+    if (!c) return;
+    character.captives = (character.captives || []).filter((_, k) => k !== i);
+    const p = c.powerId ? (CONTENT.powers || []).find?.(x => x && x.id === c.powerId)
+      || Object.values(CONTENT.powers || {}).find(x => x && x.id === c.powerId) : null;
+    if (p) movePowerStanding(character, p, 15, { why: `${c.name || c.id} released`, day: absoluteWorldDay() });
+    // ⛑ NOTHING IS ANNOUNCED, which is this screen's own convention: the row disappears and the power's card
+    // carries the change with its reason. The handler beside this one does exactly the same.
+    saveCharacter(character); again();
+  };
   for (const btn of app.querySelectorAll("[data-hold-accept]")) btn.onclick = () => {
     const o = (character.holdingOffers || [])[Number(btn.dataset.holdAccept)];
     if (!o) return;
@@ -15195,6 +15211,15 @@ function renderHoldingsTab(manageId = null, tab = null) {
       <button class="opt" data-feat-accept="${i}" title="Record it — the fiction already built it">Yes, record it</button>
       <button class="opt" data-feat-dismiss="${i}" title="No — and it will not be guessed again for this place">No</button>
     </div></div>`).join("");
+  // ⛔ SNG-657 §3C — WHO YOUR WATCH IS HOLDING. A routed raid leader taken alive is the leverage the raid earned,
+  // and it is a Needs-you line rather than a casualty: ransom, bargain, trial or release is a story. ⛑ ONE
+  // mechanical action here — letting them go — because that is the only one of the four the engine resolves.
+  const captiveRows = (character.captives || []).map((c, i) => ({ c, i })).filter(({ c }) => c && ownHold.has(c.holdingId)).map(({ c, i }) => `<div class="codex-f" style="border-left:2px solid var(--danger,#8d5757);padding-left:8px;margin-top:6px">
+    <div>Your watch at <strong>${esc(c.holdingName || c.holdingId)}</strong> holds <strong>${esc(c.name || c.id)}</strong>${c.powerName ? `, who led ${esc(c.powerName)} against it` : ""}.</div>
+    <div class="hint" style="margin-top:2px">Taken on day ${c.day ?? "?"}. Ransom, a bargain, a trial \u2014 that is a story to play. Or you can let them go.</div>
+    <div class="opt-row" style="margin-top:4px">
+      <button class="opt" data-captive-free="${i}" title="Let them go \u2014 and they will remember it">Let them go</button>
+    </div></div>`).join("");
   const offerRows = offers.map((o, i) => `<div class="codex-f" style="border-left:2px solid var(--line,#3a3a3a);padding-left:8px;margin-top:6px">
     <div>${esc(o.charge)}</div>
     <div class="hint" style="margin-top:2px">${esc(o.why)}${o.npcName ? " · " + esc(o.npcName) : ""}${o.suggestedLocationName ? " · looks like " + esc(o.suggestedLocationName) : ""}</div>
@@ -15208,7 +15233,7 @@ function renderHoldingsTab(manageId = null, tab = null) {
     ${groundStrip}
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">What stands in your name</h3>
       ${holdingRows || `<p class="hint">Nothing yet. A post or an enterprise becomes yours through play — or through work you have already delegated, below.</p>`}</div>
-    ${(offers.length || (character.featureOffers || []).length) ? `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">To review</h3>${featRows}
+    ${(offers.length || (character.featureOffers || []).length || (character.captives || []).length) ? `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">To review</h3>${captiveRows}${featRows}
       <p class="hint">${offers.length} thing${offers.length === 1 ? "" : "s"} you have people working on may be ${offers.length === 1 ? "a place" : "places"} you hold. Only you can say.</p>
       ${offerRows}</div>` : ""}
     ${(character.formerHoldings || []).length ? `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">No longer yours</h3>

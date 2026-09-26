@@ -666,6 +666,396 @@
           "name": "Loki"
         }
       }
+    },
+    "aldric": {
+      "id": "aldric",
+      "name": "Aldric",
+      "canonId": "aldric",
+      "intro": {
+        "role": "Smokehouse operator, Millbrook",
+        "description": "A blocky man in his late forties — fillet knife, dark apron, the flat practical register of someone who has worked the same fire for twenty years. Runs the village's preserved-fish distribution on fixed accounts; absorbed the catch decline ",
+        "firstSeenDay": 1,
+        "where": "millbrook",
+        "metBy": {
+          "characterId": "char-mrhs8286",
+          "name": "Silas Weir"
+        }
+      }
+    },
+    "pell": {
+      "id": "pell",
+      "name": "Pell Ran Marsh",
+      "canonId": "pell",
+      "intro": {
+        "role": "Blacksmith; partner",
+        "description": "A working blacksmith running a tidy, unsentimental shop — file in hand, back to the door until the work is done. Practical organizer; reacts to competence over charm.",
+        "firstSeenDay": 1,
+        "where": "millbrook",
+        "metBy": {
+          "characterId": "char-mrhs8286",
+          "name": "Silas Weir"
+        }
+      }
+    },
+    "corvin": {
+      "id": "corvin",
+      "name": "Corvin Teth (Runner)",
+      "canonId": "corvin",
+      "intro": {
+        "role": "Farmer, east furlong — hunt companion",
+        "description": "Broad-shouldered, younger than Aldric, compact and weathered — the kind of man who maintains a place without being asked. Currently losing an argument with a fence-section.",
+        "firstSeenDay": 1,
+        "where": "millbrook",
+        "metBy": {
+          "characterId": "char-mrhs8286",
+          "name": "Silas Weir"
+        }
+      }
+    },
+    "dara-holt": {
+      "id": "dara-holt",
+      "name": "Dara Holt",
+      "canonId": "dara_holt",
+      "intro": {
+        "role": "Senior east-channel irrigator, Millbrook · the Ditch-Mother · Millbrook Council",
+        "description": "A composed woman, mug in both hands at her own door before the frost has melted — does her accounting fast and quiet, and waits.",
+        "firstSeenDay": 2,
+        "where": "millbrook",
+        "metBy": {
+          "characterId": "char-mrhs8286",
+          "name": "Silas Weir"
+        }
+      }
+    },
+    "fendt": {
+      "id": "fendt",
+      "name": "Fendt",
+      "canonId": "fendt",
+      "intro": {
+        "role": "Filtration engineer, Edge District",
+        "description": "Mid-forties, hollow-cheeked, coat pressed last week and slept in since — a man who has been calculating odds and waiting to see which column his visitor falls in.",
+        "firstSeenDay": 3,
+        "where": "radiant_plateau_edge",
+        "metBy": {
+          "characterId": "char-mrhs8286",
+          "name": "Silas Weir"
+        }
+      }
+    },
+    "leth": {
+      "id": "leth",
+      "name": "Leth",
+      "canonId": "leth",
+      "intro": {
+        "role": "Archivist, Edge District",
+        "description": "A woman in her mid-fifties with the flat professional attention of someone whose job is to notice what things actually are — keeps relentlessly organized records, filed Sorel's letter this morning, and sets her own sequence before she gives",
+        "firstSeenDay": 3,
+        "where": "millbrook",
+        "metBy": {
+          "characterId": "char-mrhs8286",
+          "name": "Silas Weir"
+        }
+      }
+    },
+    "calvar": {
+      "id": "calvar",
+      "name": "Calvar",
+      "canonId": "calvar",
+      "intro": {
+        "role": "Pre-Transition filtration engineer, traveling south with the party",
+        "description": "Past sixty, broad-chested, with the stained ruling-pen knuckle of someone who spent decades at a drafting surface and never fully stopped. Opens his door with the measured non-reaction of a man who has learned to receive strange things.",
+        "firstSeenDay": 3,
+        "where": "radiant_plateau_edge",
+        "metBy": {
+          "characterId": "char-mrhs8286",
+          "name": "Silas Weir"
+        }
+      }
+    },
+    "maret-doss": {
+      "id": "maret-doss",
+      "name": "Maret Doss",
+      "canonId": "maret_doss",
+      "intro": {
+        "role": "Innkeeper, Low Lamp Inn — Edge District",
+        "description": "A compact woman of sixty-odd years; does not ask your name, your business, or where you're going; reads guests fast and accurately; keeps the ledger and the road-wisdom both, and offers them with equal economy.",
+        "firstSeenDay": 4,
+        "where": "the-low-lamp-inn",
+        "metBy": {
+          "characterId": "char-mrhs8286",
+          "name": "Silas Weir"
+        }
+      }
+    },
+    "bren-thalle": {
+      "id": "bren-thalle",
+      "name": "Bren Thalle",
+      "canonId": "bren_thalle",
+      "intro": {
+        "role": "Sheaf and Bowl stall-holder, Crossing market row",
+        "description": "A broad man, thirties, worn hands from mining work — grief-carrying and cornered into bad choices by two dry seasons.",
+        "firstSeenDay": 5,
+        "where": "millbrook",
+        "metBy": {
+          "characterId": "char-mrhs8286",
+          "name": "Silas Weir"
+        }
+      }
+    },
+    "curis": {
+      "id": "curis",
+      "name": "Curis",
+      "canonId": "curis",
+      "intro": {
+        "role": "Road opportunist turned toward honest work — miner from lower Wick",
+        "description": "A lean young man of about twenty-two — hollow-eyed from poor eating, grew up in the lower Wick settlement. First time on the road this way, and he volunteered that fact.",
+        "firstSeenDay": 5,
+        "where": "millbrook",
+        "metBy": {
+          "characterId": "char-mrhs8286",
+          "name": "Silas Weir"
+        }
+      }
+    },
+    "siol": {
+      "id": "siol",
+      "name": "Siol",
+      "canonId": "siol",
+      "intro": {
+        "role": "Traveler and warden of the Pale March",
+        "description": "A tall Elven woman of perhaps forty apparent years, long pale coat, hair braided with a dark cord — the stillness of attention held very quiet, not indifference.",
+        "firstSeenDay": 6,
+        "where": "gen-waygate",
+        "metBy": {
+          "characterId": "char-mrhs8286",
+          "name": "Silas Weir"
+        }
+      }
+    },
+    "orvil": {
+      "id": "orvil",
+      "name": "Orvil",
+      "canonId": "orvil",
+      "intro": {
+        "role": "Coliseum referee, morning rotation",
+        "description": "A compact man with a short baton and the alertness that outlasts boredom — does the gate work so many times that ceremony has been worn away and left something more useful.",
+        "firstSeenDay": 6,
+        "where": "gen-waygate",
+        "metBy": {
+          "characterId": "char-mrhs8286",
+          "name": "Silas Weir"
+        }
+      }
+    },
+    "tane-solr": {
+      "id": "tane-solr",
+      "name": "Tane Solr",
+      "canonId": "tane_solr",
+      "intro": {
+        "role": "Bout opponent, threshold-walker",
+        "description": "A lean man in a grey coat, unhurried in his movements — handed off his water flask without looking at it, eyes already on the ring. The quality of someone who has been here before and is comfortable waiting.",
+        "firstSeenDay": 6,
+        "where": "gen-waygate",
+        "metBy": {
+          "characterId": "char-mrhs8286",
+          "name": "Silas Weir"
+        }
+      }
+    },
+    "veth-ondra": {
+      "id": "veth-ondra",
+      "name": "Veth (Stillwater) Ondra",
+      "canonId": "veth_ondra",
+      "intro": {
+        "role": "Former Ashwarden warden; teaching companion",
+        "description": "A still, direct woman — held a south-facing warden post on the Ashwarden March for eleven years before the post was dissolved. Chose the Hub over the March's center. The stall is cover; the teaching kit is the door.",
+        "firstSeenDay": 6,
+        "where": "gen-waygate",
+        "metBy": {
+          "characterId": "char-mrhs8286",
+          "name": "Silas Weir"
+        }
+      }
+    },
+    "cassiel-ord": {
+      "id": "cassiel-ord",
+      "name": "Cassiel Ord",
+      "canonId": "cassiel_ord",
+      "intro": {
+        "role": "Keeper of the Raven's Home warden post threshold",
+        "description": "A lean man in a grey coat, heel-worn boots, the stillness of someone who has been waiting in one place long enough to stop watching the path.",
+        "firstSeenDay": 6,
+        "where": "gen-stillwater-s-trouble",
+        "metBy": {
+          "characterId": "char-mrhs8286",
+          "name": "Silas Weir"
+        }
+      }
+    },
+    "silas-mother": {
+      "id": "silas-mother",
+      "name": "Hesta Vorn",
+      "canonId": "silas_mother",
+      "intro": {
+        "role": "Mother — lives at the cairn-line house on Cairnhold's center lane",
+        "description": "A woman who finishes what she is doing before she turns. Flour on both hands. Face that knows the difference between surprise and recognition — this is the second one.",
+        "firstSeenDay": 12,
+        "where": "cairnhold",
+        "metBy": {
+          "characterId": "char-mrhs8286",
+          "name": "Silas Weir"
+        }
+      }
+    },
+    "ossian": {
+      "id": "ossian",
+      "name": "Ossian",
+      "canonId": "ossian",
+      "intro": {
+        "role": "Annex archivist, North Gate Registry",
+        "description": "The person who decides what reaches the committee and what gets filed — corner room, second floor, brick hall behind the north gate registry.",
+        "firstSeenDay": 13,
+        "where": "the_crossing",
+        "metBy": {
+          "characterId": "char-mrhs8286",
+          "name": "Silas Weir"
+        }
+      }
+    },
+    "warden-coll": {
+      "id": "warden-coll",
+      "name": "Warden Coll",
+      "canonId": "warden_coll",
+      "intro": {
+        "role": "Edge District Warden",
+        "description": "A council member who keeps a north-facing office, works by lamp in the afternoon, and stays until the registry flag drops — a man whose schedule is a statement.",
+        "firstSeenDay": 13,
+        "where": "gen-north-gate-registry-ossian-office",
+        "metBy": {
+          "characterId": "char-mrhs8286",
+          "name": "Silas Weir"
+        }
+      }
+    },
+    "renna": {
+      "id": "renna",
+      "name": "Renna",
+      "canonId": "renna",
+      "intro": {
+        "role": "Jewelry smith, waygate marketplace crescent",
+        "description": "A precise-handed smith who finishes her current stroke before she looks at a customer — reads material before she hears the commission, and writes down the answer without repeating it back.",
+        "firstSeenDay": 13,
+        "where": "gen-waygate",
+        "metBy": {
+          "characterId": "char-mrhs8286",
+          "name": "Silas Weir"
+        }
+      }
+    },
+    "old-shepherd-woman": {
+      "id": "old-shepherd-woman",
+      "name": "Gweth Callow",
+      "canonId": "old_shepherd_woman",
+      "intro": {
+        "role": "Shepherd of the South March",
+        "description": "Small, shoulder-bent, even stride — hazel switch in hand and a single copper bell on the lead ewe. Reads travelers in one look and finds most of them satisfactory.",
+        "firstSeenDay": 13,
+        "where": "millbrook",
+        "metBy": {
+          "characterId": "char-mrhs8286",
+          "name": "Silas Weir"
+        }
+      }
+    },
+    "keeper_ilma": {
+      "id": "keeper_ilma",
+      "name": "Keeper Ilma",
+      "canonId": "keeper_ilma",
+      "intro": {
+        "role": null,
+        "description": null,
+        "firstSeenDay": null,
+        "where": null,
+        "metBy": {
+          "characterId": "char-mrhs8286",
+          "name": "Silas Weir"
+        }
+      }
+    },
+    "logana": {
+      "id": "logana",
+      "name": "Logana",
+      "canonId": "logana",
+      "intro": {
+        "role": "Guardian of the left-branch gate",
+        "description": "The skeletal remains of the Zone-changed wolverine, bone-dense and deliberate, risen as a guardian through four braided crafts. A Zone-thread from the relay node's lattice sits in her warding alongside Silas's own purpose — she is partly…",
+        "firstSeenDay": 14,
+        "where": "gen-disputed-zone-left-branch-entrance",
+        "metBy": {
+          "characterId": "char-mrhs8286",
+          "name": "Silas Weir"
+        }
+      }
+    },
+    "deni-cors": {
+      "id": "deni-cors",
+      "name": "Deni Cors",
+      "canonId": "deni_cors",
+      "intro": {
+        "role": "Waystation builder and relay-network architect",
+        "description": "Young, quick, pack riding high — the economy of someone who does this for a living. Responsible with what she carries; not easily spooked, but not unaware of what Logana is.",
+        "firstSeenDay": 14,
+        "where": "gen-disputed-zone-left-branch-entrance",
+        "metBy": {
+          "characterId": "char-mrhs8286",
+          "name": "Silas Weir"
+        }
+      }
+    },
+    "runner-whistling-woman-d16": {
+      "id": "runner-whistling-woman-d16",
+      "name": "Corvin Teth",
+      "canonId": "runner_whistling_woman_d16",
+      "intro": {
+        "role": "Third-circuit relay runner, Hub messenger",
+        "description": "A lean woman in her early thirties, dust-covered and marked by hard riding. Quick-eyed and steady-handed despite the pain.",
+        "firstSeenDay": 16,
+        "where": "gen-whistling-woman-post",
+        "metBy": {
+          "characterId": "char-mrhs8286",
+          "name": "Silas Weir"
+        }
+      }
+    },
+    "marrow": {
+      "id": "marrow",
+      "name": "Maren (Marrow) Ossitide",
+      "canonId": "marrow",
+      "intro": {
+        "role": "Legendary Ashwarden warden; co-keeper of the universal shrine; attending the reclamation system's wa",
+        "description": "Ash-grey hair unbound, weathered face lined at eyes and mouth, steady hands scarred at the knuckles. Tall, built like someone who has walked a great distance and hurried for none of it. Age unresolvable—could be forty or four hundred…",
+        "firstSeenDay": 17,
+        "where": "gen-whistling-woman-post",
+        "metBy": {
+          "characterId": "char-mrhs8286",
+          "name": "Silas Weir"
+        }
+      }
+    },
+    "bryn-calowell": {
+      "id": "bryn-calowell",
+      "name": "Bryn Calowell",
+      "canonId": "bryn_calowell",
+      "intro": {
+        "role": "Ridge warden's messenger; waystation defender",
+        "description": "A lean, alert man in his mid-twenties, marked by hard riding and the focus that comes from carrying urgent word. Quick-eyed and steady-handed.",
+        "firstSeenDay": 18,
+        "where": "gen-whistling-woman-post",
+        "metBy": {
+          "characterId": "char-mrhs8286",
+          "name": "Silas Weir"
+        }
+      }
     }
   },
   "fates": {
@@ -1221,6 +1611,17 @@
       "fateBy": {
         "characterId": "char-mrrzi63o",
         "name": "Brynjar Andyrsson"
+      }
+    },
+    "the_last_choirmistress": {
+      "status": "stopped",
+      "sinceWorldDay": 88,
+      "stoppedUntilDay": 91,
+      "stoppedBy": "halvex_coil",
+      "atWorldDay": 88,
+      "fateBy": {
+        "characterId": "char-mrhs8286",
+        "name": "Silas Weir"
       }
     }
   }

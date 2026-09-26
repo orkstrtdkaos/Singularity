@@ -501,11 +501,178 @@
     "The band departs Mara Wells' Store at dawn for Whistling Woman Post, planning a two-hour walk on the spinward road to the relay station, then on to the Standing Annex where Halvex Coil awaits them."
   ],
   "currentLocationId": "gen-whistling-woman-post",
-  "activeScene": null,
+  "activeScene": {
+    "locationId": "gen-whistling-woman-post",
+    "turns": [
+      {
+        "player": null,
+        "summary": "A Radiant agent waits at Whistling Woman Post with foreknowledge and a demand—the sealed chamber is no longer hidden.",
+        "narration": "The relay station rises out of the moorland like something half-decided about permanence. Whistling Woman Post—a long stone building with a shingled roof, a watchtower at its north corner, and a shrine tucked into the courtyard's eastern edge. The night is clear and cold. Your breath mists. The moorland around stretches flat and open, dotted with the small rocks that give this ground its name, and the sky above holds more stars than you remember seeing in any town.\n\nLight spills warm from the main building's windows. You can hear voices inside—low, carrying the cadence of evening talk. The doors are not locked. As your band crosses the threshold, the warmth hits first, then the smell of woodsmoke and something cooking.\n\nThe common room is wider than you expected. A hearth dominates the far wall, tended by a woman in a grey coat who turns at the sound of your arrival. She is absolutely still. Her eyes find you first, then move across your companions with the precision of someone taking inventory. She knows your name. The recognition on her face is not surprise—it is arrival. She has been waiting for this moment with certainty.\n\n\"Loki,\" she says. The voice is clear, trained in Harmonic speech, and it carries without effort. \"I am sent from the High Luminary to ask a question before you reach the Standing Annex. The sealed chamber beneath Millbrook—I need to know your intention with it before the band proceeds further.\""
+      }
+    ],
+    "lastTurn": {
+      "narration": "The relay station rises out of the moorland like something half-decided about permanence. Whistling Woman Post—a long stone building with a shingled roof, a watchtower at its north corner, and a shrine tucked into the courtyard's eastern edge. The night is clear and cold. Your breath mists. The moorland around stretches flat and open, dotted with the small rocks that give this ground its name, and the sky above holds more stars than you remember seeing in any town.\n\nLight spills warm from the main building's windows. You can hear voices inside—low, carrying the cadence of evening talk. The doors are not locked. As your band crosses the threshold, the warmth hits first, then the smell of woodsmoke and something cooking.\n\nThe common room is wider than you expected. A hearth dominates the far wall, tended by a woman in a grey coat who turns at the sound of your arrival. She is absolutely still. Her eyes find you first, then move across your companions with the precision of someone taking inventory. She knows your name. The recognition on her face is not surprise—it is arrival. She has been waiting for this moment with certainty.\n\n\"Loki,\" she says. The voice is clear, trained in Harmonic speech, and it carries without effort. \"I am sent from the High Luminary to ask a question before you reach the Standing Annex. The sealed chamber beneath Millbrook—I need to know your intention with it before the band proceeds further.\"",
+      "sceneSummary": "A Radiant agent waits at Whistling Woman Post with foreknowledge and a demand—the sealed chamber is no longer hidden.",
+      "scene": {
+        "setting": "The common room of Whistling Woman Post, a relay station on the moorland. Warm, lit by hearth-fire, with windows opening onto cold autumn night. A woman in grey stands near the hearth, still and certain.",
+        "npcsPresent": [
+          {
+            "name": "The Radiant agent",
+            "state": "Standing by the hearth, watching the band with absolute stillness, waiting for an answer"
+          }
+        ],
+        "objects": [
+          "A substantial hearth, tended and warm",
+          "Tables and benches for travelers",
+          "The shrine visible through the courtyard windows, pale in moonlight"
+        ],
+        "threads": [
+          "The agent's demand—what is Loki's intention with the sealed chamber?",
+          "How much does this woman know, and from what sources?",
+          "What does the High Luminary want, and why now?"
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "meet",
+          "npcId": "radiant-agent-seraphine",
+          "name": "the agent (not yet named)",
+          "role": "Agent of the High Luminary, Seraphine",
+          "sex": "female",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "age": 42,
+          "description": "A woman in the grey coat of the Radiant Plateau, standing with absolute stillness. Dark eyes that find their mark. Voice trained in the Harmonic—clear and carrying. The bearing of someone who has never needed to raise her voice to be obeyed. Her certainty is absolute.",
+          "note": "Waited at Whistling Woman Post with foreknowledge. Names Loki by the lower Annex records. Authorized to demand on behalf of the High Luminary.",
+          "status": "active",
+          "learned": [
+            "The engineering records in the lower Annex name Loki",
+            "The Radiant Plateau knows about the sealed chamber",
+            "This agent was sent to intercept before the band reaches the Standing Annex"
+          ],
+          "skillsObserved": [
+            "Trained in Harmonic voice—clear, carrying speech",
+            "Absolute stillness and patience—has waited for this moment with certainty",
+            "Knowledge of sealed things and what they contain"
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "label": "Answer plainly what you intend—no deflection, no performance. Let her read your honest answer.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "falsehood_truth": 0.8,
+            "demonic_angelic": 0.3,
+            "violence_peace": 0.4
+          },
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "honest",
+            "direct",
+            "undefended"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false
+        },
+        {
+          "label": "Use Misdirect—create a false signal about your intentions, buying the band a clean move while she's turned aside.",
+          "attribute": "social",
+          "subAttribute": "wits",
+          "axes": {
+            "falsehood_truth": -0.7,
+            "violence_peace": -0.2,
+            "chaos_order": -0.3
+          },
+          "difficulty": "hard",
+          "opposedDifficulty": 32,
+          "intentTags": [
+            "deceive",
+            "feint",
+            "risky"
+          ],
+          "abilityId": "misdirect",
+          "energyCost": 3,
+          "trivial": false
+        },
+        {
+          "label": "Use Better Story—offer her a true frame of what the sealed chamber represents that she and the High Luminary can understand and act on without breaking.",
+          "attribute": "social",
+          "subAttribute": "insight",
+          "axes": {
+            "falsehood_truth": 0.6,
+            "demonic_angelic": 0.5,
+            "violence_peace": 0.6,
+            "chaos_order": 0.4
+          },
+          "difficulty": "hard",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "honest",
+            "negotiate",
+            "careful"
+          ],
+          "abilityId": "better_story",
+          "energyCost": 4,
+          "trivial": false
+        },
+        {
+          "label": "Ask her name and who she actually is—make her answer a direct question before you answer hers. Shift the ground.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "falsehood_truth": 0.5,
+            "violence_peace": -0.1
+          },
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "direct",
+            "question",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false
+        }
+      ],
+      "imagePrompt": "A woman in grey standing motionless by a hearth fire, her dark eyes fixed on a traveler who has just crossed the threshold. Autumn night visible through the windows behind her. The moment before a conversation that will reshape something.",
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
+      },
+      "sceneEnded": false,
+      "momentArt": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/A%20woman%20in%20grey%20standing%20motionless%20by%20a%20hearth%20fire%2C%20her%20dark%20eyes%20fixed%20on%20a%20traveler%20who%20has%20just%20crossed%20the%20threshold.%20Autumn%20night%20visible%20through%20the%20windows%20behind%20her.%20The%20moment%20before%20a%20conversation%20that%20will%20reshape%20something.%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=90040&nologo=true"
+    },
+    "sceneState": {
+      "setting": "The common room of Whistling Woman Post, a relay station on the moorland. Warm, lit by hearth-fire, with windows opening onto cold autumn night. A woman in grey stands near the hearth, still and certain.",
+      "npcsPresent": [
+        {
+          "name": "The Radiant agent",
+          "state": "Standing by the hearth, watching the band with absolute stillness, waiting for an answer"
+        }
+      ],
+      "objects": [
+        "A substantial hearth, tended and warm",
+        "Tables and benches for travelers",
+        "The shrine visible through the courtyard windows, pale in moonlight"
+      ],
+      "threads": [
+        "The agent's demand—what is Loki's intention with the sealed chamber?",
+        "How much does this woman know, and from what sources?",
+        "What does the High Luminary want, and why now?"
+      ]
+    },
+    "beats": 1,
+    "subPlace": null
+  },
   "clock": {
     "schemaVersion": 1,
     "day": 8,
-    "hour": 22,
+    "hour": 23,
     "realAnchor": null
   },
   "companions": [
@@ -1478,7 +1645,7 @@
     "radiant-agent-seraphine-s-hand": {
       "id": "radiant-agent-seraphine-s-hand",
       "name": "Vail Langley",
-      "role": "Agent of the High Luminary",
+      "role": "Agent of the High Luminary, Seraphine",
       "title": "Agent of the High Luminary",
       "fullName": "Vail Isaac Langley",
       "description": "A woman in grey, utterly still, with the bearing of someone who has never needed to raise her voice to be obeyed. Her certainty is absolute.",
@@ -1494,41 +1661,42 @@
         "[d8] Orla spoke directly to her breaking mandate—naming what Vail is living through with the precision of someone who has lived it themselves. The Enforcer is being offered a doorway out of an order that no longer fits.",
         "[d8] Listened to Orla Yardley name their own broken certainty and felt the precision of it land—the Enforcer is now choosing understanding over absolute order",
         "[d8] Their name is revealed: Vail Langley (was known as \"Enforcer of Seraphine's will\")",
-        "[d8] Her absolute mandate collapsed when corrected about the sealed chamber's true location beneath the Crossing, not Millbrook. She has chosen to ride ahead to the Standing Annex to understand what lies there before reporting back to Seraphine. Her certainty has reorganized—no longer an order she…"
+        "[d8] Her absolute mandate collapsed when corrected about the sealed chamber's true location beneath the Crossing, not Millbrook. She has chosen to ride ahead to the Standing Annex to understand what lies there before reporting back to Seraphine. Her certainty has reorganized—no longer an order she…",
+        "[d8] Waited at Whistling Woman Post with foreknowledge. Names Loki by the lower Annex records. Authorized to demand on behalf of the High Luminary."
       ],
       "knownFacts": [
-        "Seraphine's mandate was built on a misreading of the site itself",
-        "The sealed chamber is beneath the Hub crossing, not Millbrook—the ground Seraphine's mandate was built on is false",
-        "The sealed chamber is beneath the Hub crossing at the Null Stone, not beneath Millbrook",
         "A broken mandate built on false ground can be rebuilt, or abandoned entirely",
         "Understanding can be brought to Seraphine in place of mere correction",
         "Seraphine's mandate was built on false ground",
         "Understanding can reshape order without breaking it",
-        "Her own honesty matters more than absolute obedience"
+        "Her own honesty matters more than absolute obedience",
+        "The engineering records in the lower Annex name Loki",
+        "The Radiant Plateau knows about the sealed chamber",
+        "This agent was sent to intercept before the band reaches the Standing Annex"
       ],
       "skillsObserved": [
-        "Moves with economy and control",
-        "Does not flinch or hesitate",
-        "Speaks truth without deflection or performance",
         "Listens without flinching when her certainty is unmade",
         "Reorganizes conviction in real time when false ground is revealed",
-        "The ability to reorganize conviction when false ground is revealed"
+        "The ability to reorganize conviction when false ground is revealed",
+        "Trained in Harmonic voice—clear, carrying speech",
+        "Absolute stillness and patience—has waited for this moment with certainty",
+        "Knowledge of sealed things and what they contain"
       ],
       "status": "active",
       "sex": "female",
       "gender": "woman",
       "pronouns": "she/her",
-      "age": 34,
+      "age": 42,
       "statusNote": "Riding ahead with the band toward the Standing Annex, choosing understanding over absolute order",
       "domains": {
         "primary": "mason"
       },
       "domainsSource": "derived",
       "lastSeen": {
-        "locationId": "gen-the-made-gate",
+        "locationId": "gen-whistling-woman-post",
         "day": 8
       },
-      "met": 6,
+      "met": 7,
       "roleSince": 88,
       "aliases": [
         "Enforcer of Seraphine's will"
@@ -2101,7 +2269,7 @@
     "lastSharedReadAt": "2026-09-26T21:48:23.602Z",
     "lastTickWorldDay": 88,
     "lastCanonWorldDay": 88,
-    "turnsSinceOffer": 3,
+    "turnsSinceOffer": 4,
     "recentOffers": [
       {
         "thing": "A Radiant woman in grey, standing at the waystation threshold with absolute certainty",
@@ -13527,6 +13695,14 @@
   "reconcileVersion": 86,
   "gallery": [
     {
+      "kind": "moment",
+      "prompt": "A woman in grey standing motionless by a hearth fire, her dark eyes fixed on a traveler who has just crossed the threshold. Autumn night visible through the windows behind her. The moment before a con",
+      "url": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/A%20woman%20in%20grey%20standing%20motionless%20by%20a%20hearth%20fire%2C%20her%20dark%20eyes%20fixed%20on%20a%20traveler%20who%20has%20just%20crossed%20the%20threshold.%20Autumn%20night%20visible%20through%20the%20windows%20behind%20her.%20The%20moment%20before%20a%20conversation%20that%20will%20reshape%20something.%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=90040&nologo=true",
+      "caption": "A Radiant agent waits at Whistling Woman Post with foreknowledge and a demand—the sealed c",
+      "worldDay": 88,
+      "at": "2026-09-26T21:48:47.489Z"
+    },
+    {
       "kind": "figure",
       "prompt": "",
       "url": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/A%20hand-span%20of%20articulated%20brass-dark%20segments%2C%20walking%20on%20too%20many%20precise%20legs%2C%20with%20a%20single%20lens%20that%20irises%20when%20it%20is%20thinking.%20It%20carries%20a%20lamp%20it%20did%20not%20make%20and%20will%20not%20explain.%20Old.%20Repai%2C%20character%20portrait%2C%20named%20Cy%2C%20Companion%20%E2%80%94%20a%20Precursor%20maintenance-thing%20that%20has%20adopted%20you%20as%20its%20assignment%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=93328&nologo=true",
@@ -14594,8 +14770,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790459308083,
-  "rev": 1025,
+  "updatedAt": 1790459327490,
+  "rev": 1027,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -15861,10 +16037,10 @@
     {
       "id": "sess-21",
       "startedAt": "2026-09-26T21:46:55.428Z",
-      "lastAt": "2026-09-26T21:46:55.428Z",
+      "lastAt": "2026-09-26T21:48:47.478Z",
       "startDay": 88,
       "endDay": 88,
-      "beats": 1
+      "beats": 2
     }
   ],
   "establishedFacts": [
@@ -16056,17 +16232,17 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 257,
-    "choices": 257,
-    "characterDeltas": 141,
-    "scene": 257,
+    "sceneSummary": 258,
+    "choices": 258,
+    "characterDeltas": 142,
+    "scene": 258,
     "placeUpdates": 33,
     "codexUpdates": 151,
     "timeOps": 206,
     "offer": 53,
     "generateRequest": 7,
-    "sceneEnded": 126,
-    "npcUpdates": 207,
+    "sceneEnded": 127,
+    "npcUpdates": 208,
     "moveTo": 13,
     "gambitApt": 84,
     "deeds": 17,
@@ -16077,7 +16253,7 @@
     "encounterOps": 9,
     "ledgerEvents": 16,
     "newEncounter": 3,
-    "imagePrompt": 48,
+    "imagePrompt": 49,
     "scene_ended": 1,
     "stateOps": 3,
     "_engineClosedScene": 4,
@@ -16089,7 +16265,7 @@
     "bandOps": 1,
     "exchangeOps": 2
   },
-  "_opTurns": 257,
+  "_opTurns": 258,
   "customAbilities": {
     "mirror-bright": {
       "id": "mirror-bright",
@@ -18008,7 +18184,7 @@
     }
   },
   "_opUnknown": {
-    "sceneSummary": 85,
+    "sceneSummary": 86,
     "scene_summary": 1
   },
   "_bandNotes": null,

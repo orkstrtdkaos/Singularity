@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 10,
-  "xp": 928,
+  "xp": 933,
   "attributes": {
     "physical": 4,
     "mental": 5,
@@ -122,7 +122,7 @@
     "falsehood_truth": 0.3954644987071667,
     "demonic_angelic": -0.020000000000000004,
     "dark_light": 0.085,
-    "concrete_abstract": 0.20276173592382807,
+    "concrete_abstract": 0.18262364912763665,
     "chaos_order": -0.087398125,
     "body_mind": 0.0658375,
     "emotional_logical": 0.045960551562499986,
@@ -153,6 +153,24 @@
       "qty": 1,
       "description": "A sturdy travelling waterskin, returned after the yielding at the confluence.",
       "consumable": false
+    },
+    {
+      "id": null,
+      "name": "Road Rations (4 days)",
+      "kind": "consumable",
+      "qty": 1,
+      "description": "Dried meat and hard bread wrapped in cloth bundles. Enough for lean travel.",
+      "effects": {
+        "energy": 13
+      },
+      "consumable": true,
+      "_contract": {
+        "verdict": "reject",
+        "missing": [
+          "id"
+        ],
+        "vague": []
+      }
     }
   ],
   "deeds": [
@@ -438,143 +456,232 @@
         "player": "Offer Mara honest payment in crystal for whatever supplies will travel—rations, shelter, anything the road demands—and let her decide what you need.",
         "summary": "At Mara Wells' Store in deep night, the band learns that Millbrook's earth itself resists their passage—the fold met interference from something beneath the settlement. Mara offers honest supplies and directs them toward safer roads.",
         "narration": "Mara Wells steps into the lamplight fully, and you read her assessment in a single glance—keeper's eyes that measure strangers by bearing before words are spoken. She studies the four of you in turn: Ravel steady and weathered, Estry poised at the threshold of trust, Orla still learning the shape of movement among people, Cy's lamp casting its steady brass glow across the store's wooden threshold.\n\n\"Rations I have,\" Mara says plainly. Her voice carries the tone of someone used to speaking in the hours when the world sleeps. \"Dried meat, hard bread, salt. Enough for a journey if you travel lean.\" She moves to the counter inside, unhurried, and you catch sight of shelves lined with traveler's stock—the ordinary tools of the road. But there is something else in the way she speaks, a hesitation beneath the clarity. \"The shelter part is harder. The road from here runs uneasy. Something beneath Millbrook itself pushed back against your fold—I felt it move when you landed. The land here does not welcome shortcuts.\"\n\nShe names a price in crystal—fair, neither generous nor cruel—and waits. Ravel's hand steadies at your shoulder, reading the texture of the woman's doubt. \"You're not certain what you felt,\" Ravel says quietly. It is not a question.\n\nMara's eyes flick toward her. \"No. But the stone spoke. Whatever is underneath has weight and will, and it does not want travelers folding past the town's bones.\" She pauses, then: \"For shelter, you'll need the road itself. There's a warden's post two hours north on the spinward path—Whistling Woman Post. They keep dry quarters and do not ask names. But I cannot vouch for what the land will do with you if you try shortcuts again.\" She looks back to you. \"Will you take the rations, or do you need something I cannot provide?\""
+      },
+      {
+        "player": "Pay her for the rations and ask if she will sell anything else—maps, news of the Standing Annex, or word of who travels this road in deep night.",
+        "summary": "At Mara Wells' Store in deep night, the band trades crystal for road supplies and learns that Millbrook's earth resists shortcuts—the land will not allow close-work passage through the town. Mara directs them toward the long road and names Whistling Woman Post as safe ground northward.",
+        "narration": "Mara nods at your offer of crystal and names her prices without haggling—the rations cost fair, and she knows travelers who pay cleanly on first meeting are travelers worth knowing. She begins wrapping dried meat and hard bread into cloth bundles, her hands moving with the practiced economy of someone who has done this in deep night a hundred times before.\n\n\"The Standing Annex,\" Mara says, setting the bundles on the counter. \"It's kept now by a man called Halvex Coil. The place runs smooth—has since the summer turn. You'll find shelter there, and a keeper who reads people the way I do.\" She pauses, meeting your eyes directly. \"Though you'll want to know the roads between here and there aren't straightforward anymore.\"\n\nCy's lamp tilts slightly, as if listening.\n\n\"The earth under Millbrook resists shortcuts,\" Mara continues quietly. \"I felt it when your fold landed. You came down hard at the edge rather than the heart—the land pushed back. Whatever lies beneath this town doesn't welcome close-work or speed-cuts. You'll travel the long road instead.\" She wraps the final bundle and sets it with the others. \"Whistling Woman Post lies two hours north on the spinward path. Deni Cors keeps it—dry quarters, a relay station, shrine space. Safe ground.\"\n\nBehind you, Ravel makes a small sound of recognition at the name Corsand nods once—she knows this keeper. Estry's hand rests steady on her pack strap. Orla stands quietly, taking in Mara's plainness the way a traveler learns a new road.\n\n\"As for who travels at this hour,\" Mara says, \"road-wardens mostly. Couriers between the reaches. People like you—moving at night because the day isn't kind to moving.\" She does not name what she does not know.\n\n*✦ Road Rations (4 days) — added to your pack.*"
       }
     ],
     "lastTurn": {
-      "narration": "Mara Wells steps into the lamplight fully, and you read her assessment in a single glance—keeper's eyes that measure strangers by bearing before words are spoken. She studies the four of you in turn: Ravel steady and weathered, Estry poised at the threshold of trust, Orla still learning the shape of movement among people, Cy's lamp casting its steady brass glow across the store's wooden threshold.\n\n\"Rations I have,\" Mara says plainly. Her voice carries the tone of someone used to speaking in the hours when the world sleeps. \"Dried meat, hard bread, salt. Enough for a journey if you travel lean.\" She moves to the counter inside, unhurried, and you catch sight of shelves lined with traveler's stock—the ordinary tools of the road. But there is something else in the way she speaks, a hesitation beneath the clarity. \"The shelter part is harder. The road from here runs uneasy. Something beneath Millbrook itself pushed back against your fold—I felt it move when you landed. The land here does not welcome shortcuts.\"\n\nShe names a price in crystal—fair, neither generous nor cruel—and waits. Ravel's hand steadies at your shoulder, reading the texture of the woman's doubt. \"You're not certain what you felt,\" Ravel says quietly. It is not a question.\n\nMara's eyes flick toward her. \"No. But the stone spoke. Whatever is underneath has weight and will, and it does not want travelers folding past the town's bones.\" She pauses, then: \"For shelter, you'll need the road itself. There's a warden's post two hours north on the spinward path—Whistling Woman Post. They keep dry quarters and do not ask names. But I cannot vouch for what the land will do with you if you try shortcuts again.\" She looks back to you. \"Will you take the rations, or do you need something I cannot provide?\"",
-      "sceneSummary": "At Mara Wells' Store in deep night, the band learns that Millbrook's earth itself resists their passage—the fold met interference from something beneath the settlement. Mara offers honest supplies and directs them toward safer roads.",
+      "narration": "Mara nods at your offer of crystal and names her prices without haggling—the rations cost fair, and she knows travelers who pay cleanly on first meeting are travelers worth knowing. She begins wrapping dried meat and hard bread into cloth bundles, her hands moving with the practiced economy of someone who has done this in deep night a hundred times before.\n\n\"The Standing Annex,\" Mara says, setting the bundles on the counter. \"It's kept now by a man called Halvex Coil. The place runs smooth—has since the summer turn. You'll find shelter there, and a keeper who reads people the way I do.\" She pauses, meeting your eyes directly. \"Though you'll want to know the roads between here and there aren't straightforward anymore.\"\n\nCy's lamp tilts slightly, as if listening.\n\n\"The earth under Millbrook resists shortcuts,\" Mara continues quietly. \"I felt it when your fold landed. You came down hard at the edge rather than the heart—the land pushed back. Whatever lies beneath this town doesn't welcome close-work or speed-cuts. You'll travel the long road instead.\" She wraps the final bundle and sets it with the others. \"Whistling Woman Post lies two hours north on the spinward path. Deni Cors keeps it—dry quarters, a relay station, shrine space. Safe ground.\"\n\nBehind you, Ravel makes a small sound of recognition at the name Corsand nods once—she knows this keeper. Estry's hand rests steady on her pack strap. Orla stands quietly, taking in Mara's plainness the way a traveler learns a new road.\n\n\"As for who travels at this hour,\" Mara says, \"road-wardens mostly. Couriers between the reaches. People like you—moving at night because the day isn't kind to moving.\" She does not name what she does not know.\n\n*✦ Road Rations (4 days) — added to your pack.*",
+      "sceneSummary": "At Mara Wells' Store in deep night, the band trades crystal for road supplies and learns that Millbrook's earth resists shortcuts—the land will not allow close-work passage through the town. Mara directs them toward the long road and names Whistling Woman Post as safe ground northward.",
       "choices": [
         {
-          "label": "Accept the rations and the warden's post directions—take the long road and trust the land to speak plainly.",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {
-            "chaos_order": 0.3,
-            "concrete_abstract": 0.2
-          },
-          "difficulty": "easy",
-          "trivial": false
-        },
-        {
-          "label": "Ask Mara directly what lies beneath Millbrook and why it resists the shortfolds—use Appetite-Sense to read what hunger she is refusing to name.",
-          "attribute": "social",
-          "subAttribute": "insight",
-          "axes": {
-            "falsehood_truth": 0.4,
-            "emotional_logical": 0.2
-          },
-          "difficulty": "normal",
-          "abilityId": "appetite_sense"
-        },
-        {
-          "label": "Offer Mara more crystal to speak plainly about what moved beneath the town—there is something she knows and is weighing whether to say.",
+          "label": "Thank Mara plainly and ask if she has word of the lower Annex—who sent a Revel, and why",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {
             "falsehood_truth": 0.3
           },
-          "difficulty": "easy",
-          "trivial": false
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "ask",
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Pay her for the rations and ask if she will sell anything else—maps, news of the Standing Annex, or word of who travels this road in deep night.",
+          "label": "Gather your supplies, settle the band, and set out for Whistling Woman Post immediately",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {
+            "space_time": -0.2
+          },
+          "difficulty": "very easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "travel"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use See the Made Thing on Mara's store—read what's been built here, what holds, and what cracks beneath her plainness",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "falsehood_truth": 0.4,
+            "concrete_abstract": -0.3
+          },
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "see_the_made_thing",
+          "energyCost": 2,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Mara directly: what lies beneath Millbrook, and why does it resist what I do?",
           "attribute": "social",
           "subAttribute": "presence",
           "axes": {
+            "falsehood_truth": 0.5,
             "concrete_abstract": -0.2
           },
-          "difficulty": "easy",
-          "trivial": false
+          "difficulty": "hard",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "ask",
+            "honest"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
       "deeds": [],
       "characterDeltas": {
         "health": 0,
         "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": []
+        "inventoryAdd": [
+          {
+            "name": "Road Rations (4 days)",
+            "kind": "consumable",
+            "description": "Dried meat and hard bread wrapped in cloth bundles. Enough for lean travel.",
+            "consumable": true,
+            "effects": {
+              "energy": 13
+            }
+          }
+        ],
+        "inventoryRemove": [],
+        "xp": 0
       },
       "ledgerEvents": [],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "journey-gen-the-road-from-kindly-rest-to-standing-an-88",
-          "note": "The band has reached Millbrook and learned that the settlement itself resists shortcuts—the land beneath has will and weight. The long road is safer. Mara directs them toward Whistling Woman Post, two hours north on the spinward path."
-        }
-      ],
+      "questUpdates": [],
       "standingOps": [],
       "delegateOps": [],
       "jobOps": [],
       "arcOps": [],
       "adoptSchool": null,
       "offer": {
-        "thing": "Mara Wells speaks plainly about the land's resistance, revealing that something beneath Millbrook has awareness and agency.",
-        "from": "The fold met interference—the land itself testing or refusing the band's passage through the settlement."
+        "thing": "Mara's plain warning about the earth beneath Millbrook and her direction toward Whistling Woman Post as a known-safe waystation",
+        "from": "Mara's own reading of what resisted the band's fold—the land beneath the settlement has will and awareness, and she reads Loki as someone who travels into places that push back"
       },
       "stageOps": [],
       "scene": {
-        "setting": "Mara Wells' Store on Millbrook's northern edge, deep night under bright stars. The storefront is weathered wood with shuttered glass; the rear chimney rises with pale smoke. The door stands open a hand's width, lamplight spilling past Mara's shoulder. The road beyond is clear and starlit.",
+        "setting": "Mara Wells' Store on Millbrook's northern edge, deep night under bright stars. The door stands fully open now, warm lamplight spilling onto the road. Mara stands behind the counter inside, wrapping supplies. The pale chimney smoke continues to rise toward the clear sky. The road beyond remains clear and starlit.",
         "npcsPresent": [
           {
             "name": "Mara Wells",
-            "state": "Standing in the store's threshold, having opened the door fully. Calm, measuring, speaking with the plainness of someone accustomed to the late hours. Has just named a price for rations and directed the band toward Whistling Woman Post."
+            "state": "Standing behind the counter, having finished wrapping the road rations into cloth bundles. Watching the band with steady assessment, waiting to see what they ask next."
           }
         ],
         "objects": [
-          "The store's weathered wood door, now open",
-          "Lamplight from inside, steady and warm",
-          "Shelves visible beyond the threshold, lined with traveler's stock—dried meat, hard bread, salt, and other road supplies",
-          "The pale smoke from the rear chimney, rising toward the stars",
-          "Cy's lamp, casting brass glow across the threshold",
-          "The road beyond, clear and starlit"
+          "The wrapped bundles of rations, stacked on the counter",
+          "Shelves lined with traveler's stock—dried meat, hard bread, salt, other supplies",
+          "Cy's lamp, casting steady brass glow across the threshold",
+          "The weathered wood door, now fully open",
+          "The pale smoke from the rear chimney"
         ],
         "threads": [
-          "What lies beneath Millbrook and why it resists shortcuts through the town?",
-          "Will the band accept Mara's price and directions, or ask more questions?",
-          "Is Whistling Woman Post safe, and what will the land do if they attempt shortcuts again?"
+          "What lies beneath Millbrook and why it resists shortcuts?",
+          "Will the band attempt the long road as Mara suggests, or seek another way?",
+          "Who sent the Revel to break the Null Stone, and does Mara know?"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "mara-wells",
+          "npcId": "mara_wells",
           "name": "Mara Wells",
-          "status": "active",
-          "statusNote": "At her store in deep night, having opened to the band and offered supplies. Carries knowledge of something beneath Millbrook that resists shortcuts. Directs travelers toward Whistling Woman Post.",
+          "note": "Opened her store in deep night to the band without hesitation. Named the resistance beneath Millbrook plainly—the earth has awareness and will, and resists close-work. Directed them toward Whistling Woman Post and named Halvex Coil as the keeper of the Standing Annex. Her plainness reads as tested and reliable.",
           "learned": [
-            "The fold that brought the band to Millbrook met resistance from something beneath the settlement—something with weight and will.",
-            "The land does not welcome shortcuts through Millbrook's bones.",
-            "Whistling Woman Post lies two hours north on the spinward path and keeps dry quarters for travelers."
+            "The earth beneath Millbrook is aware and has agency—it resists shortcuts and close-work deliberately",
+            "Whistling Woman Post lies two hours north on the spinward path, kept by Deni Cors, a known-safe waystation",
+            "Halvex Coil keeps the Standing Annex and runs it smoothly",
+            "Deep-night travelers on this road are mostly road-wardens, couriers between reaches, and people moving because daylight is unkind to their movement"
           ],
-          "note": "Offered rations at fair price and named her doubt plainly—the earth spoke when the band folded into town."
+          "skillsObserved": [
+            "Reads strangers by bearing before words are exchanged",
+            "Speaks plainly about dangerous things without softening them",
+            "Knows the roads and the keepers who hold them"
+          ]
         }
       ],
       "intentsHeard": [],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "Something beneath Millbrook has awareness and will—it resisted the band's shortfold and pushed back against their passage through the settlement. The land does not welcome shortcuts through the town's bones.",
-          "subjectId": "millbrook"
-        }
-      ],
+      "factUpdates": [],
       "placeUpdates": [
         {
-          "note": "The earth beneath Millbrook resists shortfolds and close-work—something with weight and agency beneath the settlement pushes back against direct passage. The land prefers the long road."
+          "note": "Mara Wells' Store: the keeper trades fairly in deep night and offers direction and supplies to travelers. The earth beneath Millbrook resists close-work and shortcuts—the land has will and awareness.",
+          "flag": {
+            "resistance_beneath": true,
+            "deep_night_trading": true
+          }
         }
       ],
+      "discovery": null,
       "codexUpdates": [
         {
           "topic": "millbrook",
           "label": "Millbrook",
           "kind": "place",
           "entityId": "millbrook",
-          "fact": "Something beneath Millbrook has awareness and will—it resisted the band's shortfold when they attempted to fold directly into the town. The settlement's earth pushes back against shortcuts and close-work. The land prefers the long road.",
+          "fact": "The earth beneath Millbrook has will and awareness—it actively resists shortcuts and close-work. A fold that should have landed at the town's heart instead touched down at its edge, pushed back by something beneath the settlement that does not welcome speed-cuts or direct passage.",
           "links": [
-            "journey-gen-the-road-from-kindly-rest-to-standing-an-88"
+            "mara_wells",
+            "gen-mara-wells-store",
+            "shortfold"
+          ]
+        },
+        {
+          "topic": "whistling-woman-post",
+          "label": "Whistling Woman Post",
+          "kind": "place",
+          "fact": "A waystation kept by Deni Cors, lying two hours north on the spinward path from Millbrook. Offers dry quarters, relay station facilities, and shrine space. Known as safe ground for travelers.",
+          "links": [
+            "millbrook"
           ]
         }
       ],
-      "discovery": null,
+      "holdingOps": [],
+      "holdTrades": [],
+      "debtOps": [],
+      "exchangeOps": [
+        {
+          "op": "pay",
+          "amount": 12,
+          "to": "mara_wells",
+          "with": "mara_wells",
+          "origin": "trade",
+          "give": [
+            "crystal"
+          ]
+        }
+      ],
+      "partyOps": [],
+      "generateRequest": [],
+      "encounterOps": [],
+      "projectOps": [],
+      "bandOps": [],
+      "strikeOps": [],
+      "deathOps": [],
+      "newEncounter": null,
+      "unlockPrecursor": null,
+      "unlockSubstrate": null,
+      "timeOps": {
+        "hoursPassed": 0.5,
+        "why": "a brief conversation and trade in deep night"
+      },
+      "moveTo": null,
+      "stateOps": [],
+      "itemUpdates": [],
+      "deriveItem": null,
       "imagePrompt": null,
       "imageMedium": null,
       "newAbility": null,
@@ -585,53 +692,30 @@
       "offerPromotion": null,
       "offerAcquisition": null,
       "offerIntent": null,
-      "sceneEnded": false,
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "a short exchange at the store threshold"
-      },
-      "moveTo": null,
-      "partyOps": [],
-      "holdingOps": [],
-      "holdTrades": [],
-      "exchangeOps": [],
-      "debtOps": [],
-      "strikeOps": [],
-      "newEncounter": null,
-      "encounterOps": [],
-      "projectOps": [],
-      "bandOps": [],
-      "deathOps": [],
-      "unlockPrecursor": null,
-      "unlockSubstrate": null,
-      "generateRequest": [],
-      "itemUpdates": [],
-      "deriveItem": null,
-      "stateOps": []
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Mara Wells' Store on Millbrook's northern edge, deep night under bright stars. The storefront is weathered wood with shuttered glass; the rear chimney rises with pale smoke. The door stands open a hand's width, lamplight spilling past Mara's shoulder. The road beyond is clear and starlit.",
+      "setting": "Mara Wells' Store on Millbrook's northern edge, deep night under bright stars. The door stands fully open now, warm lamplight spilling onto the road. Mara stands behind the counter inside, wrapping supplies. The pale chimney smoke continues to rise toward the clear sky. The road beyond remains clear and starlit.",
       "npcsPresent": [
         {
           "name": "Mara Wells",
-          "state": "Standing in the store's threshold, having opened the door fully. Calm, measuring, speaking with the plainness of someone"
+          "state": "Standing behind the counter, having finished wrapping the road rations into cloth bundles. Watching the band with steady"
         }
       ],
       "objects": [
-        "The store's weathered wood door, now open",
-        "Lamplight from inside, steady and warm",
-        "Shelves visible beyond the threshold, lined with traveler's stock—dried meat, ha",
-        "The pale smoke from the rear chimney, rising toward the stars",
-        "Cy's lamp, casting brass glow across the threshold",
-        "The road beyond, clear and starlit"
+        "The wrapped bundles of rations, stacked on the counter",
+        "Shelves lined with traveler's stock—dried meat, hard bread, salt, other supplies",
+        "Cy's lamp, casting steady brass glow across the threshold",
+        "The weathered wood door, now fully open",
+        "The pale smoke from the rear chimney"
       ],
       "threads": [
-        "What lies beneath Millbrook and why it resists shortcuts through the town?",
-        "Will the band accept Mara's price and directions, or ask more questions?",
-        "Is Whistling Woman Post safe, and what will the land do if they attempt shortcuts again?"
+        "What lies beneath Millbrook and why it resists shortcuts?",
+        "Will the band attempt the long road as Mara suggests, or seek another way?",
+        "Who sent the Revel to break the Null Stone, and does Mara know?"
       ]
     },
-    "beats": 8,
+    "beats": 9,
     "subPlace": null
   },
   "clock": {
@@ -1528,18 +1612,25 @@
       "relationship": 0,
       "history": [
         "[d8] Opened her store to the band in deep night without hesitation—read them as honest rather than threatening. Waiting for an answer about what they need.",
-        "[d8] Offered rations at fair price and named her doubt plainly—the earth spoke when the band folded into town."
+        "[d8] Offered rations at fair price and named her doubt plainly—the earth spoke when the band folded into town.",
+        "[d8] Opened her store in deep night to the band without hesitation. Named the resistance beneath Millbrook plainly—the earth has awareness and will, and resists close-work. Directed them toward Whistling Woman Post and named Halvex Coil as the keeper of the Standing Annex. Her plainness reads as tested…"
       ],
       "knownFacts": [
         "Keeps the store open through deep night hours—either by choice or by the traffic of road-travelers who cannot wait for daylight",
         "Reads character in silence and body before words are spoken",
         "The fold that brought the band to Millbrook met resistance from something beneath the settlement—something with weight and will.",
         "The land does not welcome shortcuts through Millbrook's bones.",
-        "Whistling Woman Post lies two hours north on the spinward path and keeps dry quarters for travelers."
+        "Whistling Woman Post lies two hours north on the spinward path and keeps dry quarters for travelers.",
+        "The earth beneath Millbrook is aware and has agency—it resists shortcuts and close-work deliberately",
+        "Whistling Woman Post lies two hours north on the spinward path, kept by Deni Cors, a known-safe waystation",
+        "Halvex Coil keeps the Standing Annex and runs it smoothly"
       ],
       "skillsObserved": [
         "Clear assessment of strangers",
-        "Steady judgment under unusual hours"
+        "Steady judgment under unusual hours",
+        "Reads strangers by bearing before words are exchanged",
+        "Speaks plainly about dangerous things without softening them",
+        "Knows the roads and the keepers who hold them"
       ],
       "status": "active",
       "sex": "female",
@@ -1555,7 +1646,7 @@
         "locationId": "gen-mara-wells-store",
         "day": 8
       },
-      "met": 2
+      "met": 3
     }
   },
   "placeMemory": {
@@ -1858,9 +1949,13 @@
       "visits": 1,
       "notes": [
         "[d8] Mara Wells' Store is a working merchant point in deep night, suggesting regular traffic from road-travelers and a keeper accustomed to late-hour business.",
-        "[d8] The earth beneath Millbrook resists shortfolds and close-work—something with weight and agency beneath the settlement pushes back against direct passage. The land prefers the long road."
+        "[d8] The earth beneath Millbrook resists shortfolds and close-work—something with weight and agency beneath the settlement pushes back against direct passage. The land prefers the long road.",
+        "[d8] Mara Wells' Store: the keeper trades fairly in deep night and offers direction and supplies to travelers. The earth beneath Millbrook resists close-work and shortcuts—the land has will and awareness."
       ],
-      "flags": {},
+      "flags": {
+        "resistance_beneath": true,
+        "deep_night_trading": true
+      },
       "lastVisit": 8,
       "vectorsKnown": [
         "violence_peace",
@@ -2074,10 +2169,6 @@
     "turnsSinceOffer": 0,
     "recentOffers": [
       {
-        "thing": "Orla Yardley, a Syllogist who has broken their own conviction and come to test Loki's in exchange",
-        "from": "the breaking mandate that Halvex sent, and the choice Loki made to listen rather than destroy—the valley carries word of this, and Orla…"
-      },
-      {
         "thing": "Orla Yardley accepts the invitation to walk and speak—the breaking mandate is now openly questioned in the band's presence",
         "from": "Loki's plainness and Orla's own breaking, tested on the road"
       },
@@ -2092,6 +2183,10 @@
       {
         "thing": "Mara Wells speaks plainly about the land's resistance, revealing that something beneath Millbrook has awareness and agency.",
         "from": "The fold met interference—the land itself testing or refusing the band's passage through the settlement."
+      },
+      {
+        "thing": "Mara's plain warning about the earth beneath Millbrook and her direction toward Whistling Woman Post as a known-safe waystation",
+        "from": "Mara's own reading of what resisted the band's fold—the land beneath the settlement has will and awareness, and she reads Loki as someone…"
       }
     ],
     "wantProgress": {
@@ -12645,13 +12740,17 @@
           "[d7] you have walked here",
           "[d?] Millbrook governs itself through an elder panel in its common house, led by Councilor Dresh. It decides slowly, in public, and on the record.",
           "[d8] The fold's resistance suggests something beneath the settlement is actively pushing back against shortcuts and close-work—the working that should have landed the band at the village heart instead set them at its edge.",
-          "[d8] Something beneath Millbrook has awareness and will—it resisted the band's shortfold when they attempted to fold directly into the town. The settlement's earth pushes back against shortcuts and close-work. The land prefers the long road."
+          "[d8] Something beneath Millbrook has awareness and will—it resisted the band's shortfold when they attempted to fold directly into the town. The settlement's earth pushes back against shortcuts and close-work. The land prefers the long road.",
+          "[d8] The earth beneath Millbrook has will and awareness—it actively resists shortcuts and close-work. A fold that should have landed at the town's heart instead touched down at its edge, pushed back by something beneath the settlement that does not welcome speed-cuts or direct passage."
         ],
         "links": [
           "the-taken-from-the-city",
           "halvex-coil",
           "what-descended-with-them",
-          "journey-gen-the-road-from-kindly-rest-to"
+          "journey-gen-the-road-from-kindly-rest-to",
+          "mara-wells",
+          "gen-mara-wells-store",
+          "shortfold"
         ],
         "aliases": [
           "Millbrook's Elder Panel"
@@ -12729,6 +12828,21 @@
         "aliases": [],
         "createdDay": 8,
         "entityId": "mara-wells-keeper",
+        "updatedDay": 8
+      },
+      "gen-whistling-woman-post": {
+        "id": "gen-whistling-woman-post",
+        "label": "Whistling Woman Post",
+        "kind": "place",
+        "facts": [
+          "[d8] A waystation kept by Deni Cors, lying two hours north on the spinward path from Millbrook. Offers dry quarters, relay station facilities, and shrine space. Known as safe ground for travelers."
+        ],
+        "links": [
+          "millbrook"
+        ],
+        "aliases": [],
+        "createdDay": 8,
+        "entityId": "gen-whistling-woman-post",
         "updatedDay": 8
       }
     },
@@ -14206,8 +14320,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790393796115,
-  "rev": 944,
+  "updatedAt": 1790393929152,
+  "rev": 945,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -15434,10 +15548,10 @@
     {
       "id": "sess-19",
       "startedAt": "2026-09-26T00:51:07.826Z",
-      "lastAt": "2026-09-26T03:36:36.114Z",
+      "lastAt": "2026-09-26T03:38:49.144Z",
       "startDay": 88,
       "endDay": 88,
-      "beats": 11
+      "beats": 12
     }
   ],
   "establishedFacts": [
@@ -15588,7 +15702,7 @@
   ],
   "_opLedger": {
     "offer": {
-      "applied": 50,
+      "applied": 51,
       "rejected": 2,
       "lastWhy": "rejected-shape"
     },
@@ -15605,19 +15719,19 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 240,
-    "choices": 240,
-    "characterDeltas": 124,
-    "scene": 240,
-    "placeUpdates": 30,
-    "codexUpdates": 140,
-    "timeOps": 193,
-    "offer": 44,
+    "sceneSummary": 241,
+    "choices": 241,
+    "characterDeltas": 125,
+    "scene": 241,
+    "placeUpdates": 31,
+    "codexUpdates": 141,
+    "timeOps": 194,
+    "offer": 45,
     "generateRequest": 7,
-    "sceneEnded": 109,
-    "npcUpdates": 191,
+    "sceneEnded": 110,
+    "npcUpdates": 192,
     "moveTo": 10,
-    "gambitApt": 68,
+    "gambitApt": 69,
     "deeds": 14,
     "questUpdates": 45,
     "standingOps": 4,
@@ -15635,9 +15749,10 @@
     "delegateOps": 1,
     "scene_summary": 1,
     "partyOps": 4,
-    "bandOps": 1
+    "bandOps": 1,
+    "exchangeOps": 1
   },
-  "_opTurns": 240,
+  "_opTurns": 241,
   "customAbilities": {
     "mirror-bright": {
       "id": "mirror-bright",
@@ -17488,7 +17603,7 @@
     }
   },
   "_opUnknown": {
-    "sceneSummary": 68,
+    "sceneSummary": 69,
     "scene_summary": 1
   },
   "_bandNotes": null,

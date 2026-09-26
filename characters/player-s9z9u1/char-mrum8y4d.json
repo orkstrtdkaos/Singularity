@@ -313,7 +313,9 @@
         "care"
       ],
       "weight": 1,
-      "spread": [],
+      "spread": [
+        "the_mountain_pass"
+      ],
       "day": 5,
       "worldDay": 83
     },
@@ -414,227 +416,17 @@
       }
     ],
     "lastTurn": {
-      "narration": "You nod to Orla, and the gesture carries weight—an acceptance before the full words come. \"Walk with us,\" you say. \"The Standing Annex waits, and the band should hear this from the start. There is ground to share that matters more than standing still on the road.\"\n\nOrla's face steadies. They shift their weight, and the motion reads like a release—the waiting is over. \"Yes,\" they say simply. \"Yes, I will.\"\n\nThe four of you turn together and move outward along the curve. The road here is clear and wide enough for walking side by side, and the scrubland brush on both sides rustles softly in the night wind. Cy ahead of you, lamp raised, choosing the footing. The stars overhead are bright enough to cast thin shadows, and the sound of your footfalls settles into rhythm—four people moving the same direction, with weight and purpose.\n\nRavel walks closest to you, her shoulder nearly level with yours, her eyes ahead on the turning road. Estry moves beside Orla, reading them with that precise attention she brings to every person. And Orla walks with the stillness of someone who has finally set down something very heavy.",
-      "sceneSummary": "On the road toward the Standing Annex, Orla Yardley joins the gathered band—a Syllogist carrying a breaking belief, moving toward the Annex and toward answers neither of you fully understands yet.",
-      "choices": [
+      "bandOps": [
         {
-          "label": "Ask Orla to speak more fully about what brought them to the valley in the first place",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "falsehood_truth": 0.3,
-            "emotional_logical": 0.2
-          },
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Ravel and Estry what they make of Orla's arrival and purpose",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "chaos_order": 0.2,
-            "concrete_abstract": -0.1
-          },
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Turn the conversation toward what waits at the Standing Annex—Halvex, Cy's findings, the questions still open",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "chaos_order": 0.3,
-            "falsehood_truth": 0.2
-          },
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study",
-            "plan"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Walk in silence for now and listen to what the band offers without prompting",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "chaos_order": -0.2,
-            "concrete_abstract": 0.1
-          },
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "op": "raise",
+          "npcId": "estry-krell",
+          "name": "Estry Krell",
+          "role": "Band member — reads people with precision; committed traveler"
         }
       ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
-      },
-      "ledgerEvents": [],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "the-taken-from-the-city",
-          "note": "Orla Yardley arrives on the road toward the Standing Annex with intent to join the band and test Loki's belief in understanding over breaking. The gathering grows—four now walk the road together, moving toward the Annex and toward answers."
-        },
-        {
-          "op": "progress",
-          "questId": "journey-gen-the-standing-annex-88",
-          "note": "The band moves outward from the Kindly Rest onto the open road. Distance from the Kindly Rest has increased; the road curves toward Millbrook before turning outward toward the Annex's further distance. About 1.5 days remain if the pace holds."
-        }
-      ],
-      "standingOps": [],
-      "delegateOps": [],
-      "jobOps": [],
-      "arcOps": [],
-      "adoptSchool": null,
-      "offer": {
-        "thing": "Orla Yardley accepts the invitation to walk and speak—the breaking mandate is now openly questioned in the band's presence",
-        "from": "Loki's plainness and Orla's own breaking, tested on the road"
-      },
-      "stageOps": [],
-      "scene": {
-        "setting": "The open road curving outward from the Kindly Rest toward the Standing Annex, mid-autumn night. Clear sky overhead with bright stars. The road is wide and unobstructed, lined on both sides by low scrubland brush. Shadows cast thin and sharp by starlight. The air carries the weight of the year turning.",
-        "npcsPresent": [
-          {
-            "name": "Ravel Ash-bearer",
-            "state": "Walking beside Loki, shoulders eased, eyes ahead on the road. Her green coat catches the starlight. Moving with steady purpose."
-          },
-          {
-            "name": "Estry Krell",
-            "state": "Walking beside Orla Yardley, reading them with precision. Eyes tracking Orla's movements and bearing. Silent but fully present."
-          },
-          {
-            "name": "Orla Yardley",
-            "state": "Walking with stillness of someone who has set down something very heavy. Grey coat, precise movements. Face settled between sadness and relief. Moving outward with the band."
-          }
-        ],
-        "objects": [
-          "The open road ahead, curving gently",
-          "Scrubland brush on both sides, dry and autumn-thick",
-          "The stars overhead, bright and readable",
-          "Cy ahead of the group, lamp raised, choosing the footing"
-        ],
-        "threads": [
-          "What fully drives Orla's belief about breaking and sealing?",
-          "How will the band—and Halvex—receive Orla's presence at the Annex?",
-          "What answers wait at the Standing Annex, and what new questions will arriving together raise?"
-        ]
-      },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "orla-yardley",
-          "name": "Orla Yardley",
-          "learned": [
-            "Came to the valley carrying a breaking mandate—a belief that sealed things should be destroyed as mercy",
-            "Watched Loki choose understanding over breaking at the Hub crossing and felt that belief crack under the weight of what that choice meant",
-            "Came to the road toward the Standing Annex to test both their own conviction and Loki's in return",
-            "Accepts the invitation to walk with the band and speak the full shape of their breaking"
-          ],
-          "note": "Orla walks with the band now, moving toward the Standing Annex. The breaking is spoken, witnessed, and carried forward together."
-        }
-      ],
-      "intentsHeard": [],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "Orla Yardley has accepted companionship with the band—they walk toward the Standing Annex together. The breaking belief is now openly questioned in shared space.",
-          "subjectId": "orla-yardley"
-        }
-      ],
-      "placeUpdates": [],
-      "discovery": null,
-      "codexUpdates": [
-        {
-          "topic": "the-architect-in-the-lower-annex",
-          "label": "The Architect",
-          "kind": "person",
-          "entityId": null,
-          "fact": "Orla Yardley came to the valley carrying a breaking mandate—a belief that sealed things unmade are mercy. They watched Loki choose understanding over breaking and came to test both their own conviction and Loki's in return.",
-          "links": [
-            "the-hub-crossing",
-            "the-null-stone",
-            "halvex-coil"
-          ]
-        }
-      ],
-      "holdingOps": [],
-      "holdTrades": [],
-      "debtOps": [],
-      "exchangeOps": [],
-      "partyOps": [
-        {
-          "op": "join",
-          "npcId": "orla-yardley",
-          "why": "Accepts the invitation to walk with the band toward the Standing Annex and to test convictions in shared space"
-        }
-      ],
-      "generateRequest": [],
-      "encounterOps": [],
-      "projectOps": [],
-      "bandOps": [],
-      "strikeOps": [],
-      "deathOps": [],
-      "newEncounter": null,
-      "unlockPrecursor": null,
-      "unlockSubstrate": null,
-      "timeOps": {
-        "hoursPassed": 2,
-        "why": "walking steadily on the open road, about two hours of travel toward the Standing Annex"
-      },
-      "moveTo": {
-        "location": "The road from Kindly Rest to Standing Annex",
-        "why": "Set out from the Kindly Rest into the night, walking toward the Standing Annex with Ravel, Estry, and Orla"
-      },
-      "stateOps": [],
-      "itemUpdates": [],
-      "deriveItem": null,
-      "imagePrompt": "Four figures on an open road under stars—a woman in green stepping into starlight with steady purpose, a younger person reading a grey-coated stranger with precision, the stranger walking with the stillness of someone who has finally set down a weight, and ahead of them all, a small brass mechanism with a raised lamp, choosing the footing into darkness.",
-      "imageMedium": null,
-      "newAbility": null,
-      "gambitOps": null,
-      "gambitApt": false,
-      "markDefiningMoment": null,
-      "markTeacher": null,
-      "offerPromotion": null,
-      "offerAcquisition": null,
-      "offerIntent": null,
-      "sceneEnded": false,
-      "momentArt": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Four%20figures%20on%20an%20open%20road%20under%20stars%E2%80%94a%20woman%20in%20green%20stepping%20into%20starlight%20with%20steady%20purpose%2C%20a%20younger%20person%20reading%20a%20grey-coated%20stranger%20with%20precision%2C%20the%20stranger%20walking%20with%20the%20stillness%20of%20someone%20who%20has%20finally%20set%20down%20a%20weight%2C%20and%20ahead%20of%20them%20all%2C%20a%20small%20brass%20mechanism%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=39061&nologo=true"
+      "narration": "",
+      "sceneSummary": null,
+      "choices": []
     },
     "sceneState": {
       "setting": "The open road curving outward from the Kindly Rest toward the Standing Annex, mid-autumn night. Clear sky overhead with bright stars. The road is wide and unobstructed, lined on both sides by low scrubland brush. Shadows cast thin and sharp by starlight. The air carries the weight of the year turning.",
@@ -669,8 +461,8 @@
   },
   "clock": {
     "schemaVersion": 1,
-    "day": 7,
-    "hour": 23,
+    "day": 8,
+    "hour": 0,
     "realAnchor": null
   },
   "companions": [
@@ -1848,7 +1640,7 @@
   },
   "worldState": {
     "schemaVersion": 1,
-    "lastTickDay": 7,
+    "lastTickDay": 8,
     "eventStages": {
       "water_crisis": {
         "stage": 2,
@@ -1877,34 +1669,6 @@
       "falsehood_truth": -0.05
     },
     "news": [
-      {
-        "day": 5,
-        "worldDay": 87,
-        "text": "Something has been building in the unmade: Someone has begun quietly counting what no longer exists — cataloguing absences — and has not yet decided whether to share what the count implies.",
-        "tier": "event",
-        "section": "world"
-      },
-      {
-        "day": 5,
-        "worldDay": 88,
-        "text": "The Radiant Council is stronger than it was — 32 more under it.",
-        "tier": "event",
-        "section": "world"
-      },
-      {
-        "day": 5,
-        "worldDay": 88,
-        "text": "The Harmonic Council is stronger than it was — 28 more under it.",
-        "tier": "event",
-        "section": "world"
-      },
-      {
-        "day": 5,
-        "worldDay": 88,
-        "text": "Something has been building in the unmade: An elder who alone remembers the last time something like the current unraveling occurred has not yet spoken, weighing whether the knowing will help or hasten what is coming.",
-        "tier": "event",
-        "section": "world"
-      },
       {
         "day": 5,
         "worldDay": 87,
@@ -2051,14 +1815,44 @@
         "text": "The Court of the Unfinished Plan has taken an interest in you — you have killed 30 of theirs.",
         "tier": "event",
         "section": "world"
+      },
+      {
+        "day": 8,
+        "worldDay": 88,
+        "text": "Halvex Coil keeps The Standing Annex now.",
+        "tier": "event",
+        "section": "yours"
+      },
+      {
+        "day": 8,
+        "worldDay": 88,
+        "text": "The Standing Annex has lost its keeper.",
+        "tier": "event",
+        "section": "yours"
+      },
+      {
+        "day": 8,
+        "worldDay": 88,
+        "text": "The Seraphic Orders is stronger than it was — 44 more under it.",
+        "tier": "event",
+        "section": "world"
+      },
+      {
+        "day": 8,
+        "worldDay": 88,
+        "text": "As far as the_mountain_pass: Asked the hard question and held the space for an honest answer — did not push, did not deflect, did not settle for less than the full shape of why",
+        "tier": "event",
+        "section": "elsewhere",
+        "regionId": "valley",
+        "communityId": "the_mountain_pass"
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 2114,
-    "lastSharedReadAt": "2026-09-26T02:47:25.636Z",
+    "lastGenCount": 2115,
+    "lastSharedReadAt": "2026-09-26T03:01:25.054Z",
     "lastTickWorldDay": 88,
     "lastCanonWorldDay": 88,
-    "turnsSinceOffer": 0,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "Sister Vreni's promise to listen and her acknowledgment that the Standing Annex holds what the band is becoming",
@@ -2348,7 +2142,7 @@
         "kind": "decision",
         "premise": "Someone who keeps the count of what has been unmade has begun rounding down, telling themselves the difference is noise — but the rounding has a direction, and it has been consistent for long enough…",
         "cause": "The act of counting the unmade requires a decision about what constitutes a thing distinct enough to be counted, and that threshold has always been left to…",
-        "stage": 14,
+        "stage": 15,
         "seededAtCount": 1917,
         "surfaced": true,
         "fate": "growing",
@@ -2361,7 +2155,7 @@
         "kind": "decision",
         "premise": "The person who holds authority to formally designate what has been unmade as 'resolved' has not done so for anything in years, and the backlog of unresolved unmakings is beginning to press against…",
         "cause": "In the_unmade, the act of resolution is itself an act of power, and the authority-holder has quietly discovered that unresolved things remain partially…",
-        "stage": 10,
+        "stage": 11,
         "seededAtCount": 1968,
         "surfaced": true,
         "fate": "growing",
@@ -2386,7 +2180,7 @@
         "kind": "decision",
         "premise": "Someone has begun quietly counting what no longer exists — cataloguing absences — and has not yet decided whether to share what the count implies.",
         "cause": "The Unmade is defined by what has been lost or undone; its people have long customs around not naming absence directly, because naming draws attention to the…",
-        "stage": 5,
+        "stage": 6,
         "seededAtCount": 2053,
         "surfaced": true,
         "fate": "growing",
@@ -2399,7 +2193,7 @@
         "kind": "decision",
         "premise": "An elder who alone remembers the last time something like the current unraveling occurred has not yet spoken, weighing whether the knowing will help or hasten what is coming.",
         "cause": "In the_unmade, what is lost or dissolved carries weight equal to what remains — silence is understood as a form of preservation, and the elder has lived long…",
-        "stage": 4,
+        "stage": 5,
         "seededAtCount": 2100,
         "surfaced": true,
         "fate": "growing",
@@ -2415,7 +2209,21 @@
         "othersPush": 1
       }
     },
-    "pressureQueue": [],
+    "pressureQueue": [
+      {
+        "source": "npc-want",
+        "kind": "npc-want",
+        "subjectId": "tessvel-cairn",
+        "aimedAtPlayer": true,
+        "urgency": 3,
+        "oneLineHook": "Tessvel Cairn, unseen for 7 days, has come looking for you — driven by an unmet want: To complete her apprenticeship without a single incorrectly filed document, and to be assigned to the Intake's pressure-routing team rather than continued…. They arrive now, not content to keep waiting.",
+        "becomes": {
+          "type": "scene",
+          "who": "tessvel-cairn"
+        },
+        "addedDay": 8
+      }
+    ],
     "offscreenCursor": 21,
     "retrievalWanted": [],
     "arcRetrievals": [],
@@ -9674,7 +9482,7 @@
       "the_doubting_lattice": 84,
       "the_war_ender": 84
     },
-    "updatesToldTo": "2.8.5",
+    "updatesToldTo": "2.9.0",
     "newsLog": [
       {
         "day": 4,
@@ -10945,6 +10753,48 @@
         "worldDay": 88,
         "text": "The game was updated to v2.8.5 — 1 new, 1 fixed.",
         "loggedAt": "2026-09-26T02:47:30.892Z"
+      },
+      {
+        "day": 8,
+        "worldDay": 88,
+        "text": "Halvex Coil keeps The Standing Annex now.",
+        "tier": "event",
+        "section": "yours",
+        "loggedAt": "2026-09-26T03:01:28.651Z"
+      },
+      {
+        "day": 8,
+        "worldDay": 88,
+        "text": "The Standing Annex has lost its keeper.",
+        "tier": "event",
+        "section": "yours",
+        "loggedAt": "2026-09-26T03:01:28.651Z"
+      },
+      {
+        "day": 8,
+        "worldDay": 88,
+        "text": "The Seraphic Orders is stronger than it was — 44 more under it.",
+        "tier": "event",
+        "section": "world",
+        "loggedAt": "2026-09-26T03:01:28.651Z"
+      },
+      {
+        "day": 8,
+        "worldDay": 88,
+        "text": "As far as the_mountain_pass: Asked the hard question and held the space for an honest answer — did not push, did not deflect, did not settle for less than the full shape of why",
+        "tier": "event",
+        "section": "elsewhere",
+        "regionId": "valley",
+        "communityId": "the_mountain_pass",
+        "loggedAt": "2026-09-26T03:01:28.651Z"
+      },
+      {
+        "kind": "update",
+        "section": "world",
+        "version": "2.9.0",
+        "worldDay": 88,
+        "text": "The game was updated to v2.9.0 — 1 new, 1 fixed.",
+        "loggedAt": "2026-09-26T03:01:28.651Z"
       }
     ]
   },
@@ -14052,8 +13902,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790391302586,
-  "rev": 923,
+  "updatedAt": 1790391688656,
+  "rev": 929,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -15111,6 +14961,15 @@
       "teaches": null,
       "liaisonFor": null,
       "joinedDay": 88
+    },
+    {
+      "npcId": "orla-yardley",
+      "roles": [
+        "ally"
+      ],
+      "teaches": null,
+      "liaisonFor": null,
+      "joinedDay": 88
     }
   ],
   "_pinsInitialized": true,
@@ -15271,10 +15130,10 @@
     {
       "id": "sess-19",
       "startedAt": "2026-09-26T00:51:07.826Z",
-      "lastAt": "2026-09-26T02:55:02.562Z",
+      "lastAt": "2026-09-26T03:00:38.182Z",
       "startDay": 88,
       "endDay": 88,
-      "beats": 6
+      "beats": 7
     }
   ],
   "establishedFacts": [
@@ -16283,7 +16142,7 @@
       "kind": "enterprise",
       "name": "The Standing Annex",
       "locationId": "gen-the-made-gate",
-      "steward": "halvex_coil",
+      "steward": null,
       "obligation": null,
       "condition": "thriving",
       "claimedDay": 3,
@@ -16426,7 +16285,7 @@
       "conditionSince": 2100
     }
   ],
-  "_lastProjectDay": 7,
+  "_lastProjectDay": 8,
   "featureOffers": [],
   "_debtReceipts": [],
   "skillUses": {
@@ -16889,7 +16748,7 @@
     },
     {
       "text": "Halvex Coil keeps The Standing Annex now.",
-      "announced": false
+      "announced": true
     }
   ],
   "figureImages": {
@@ -17778,16 +17637,7 @@
   "aurasOff": {
     "coil": true
   },
-  "pendingCompanyOffers": [
-    {
-      "npcId": "orla-yardley",
-      "name": "Orla Yardley",
-      "roles": [
-        "ally"
-      ],
-      "why": "Accepts the invitation to walk with the band toward the Standing Annex and to test convictions in shared space"
-    }
-  ],
+  "pendingCompanyOffers": [],
   "powerState": {
     "power_gralloch_crown": {
       "known": {
@@ -17795,8 +17645,8 @@
         "day": null
       },
       "wins": 0,
-      "lastVerb": "recruit",
-      "lastVerbDay": 7,
+      "lastVerb": "expand",
+      "lastVerbDay": 8,
       "grownHeads": 23,
       "grewDay": 5
     },
@@ -17805,24 +17655,24 @@
         "how": "renown",
         "day": null
       },
-      "lastVerb": "extort",
-      "lastVerbDay": 7
+      "lastVerb": "inform",
+      "lastVerbDay": 8
     },
     "power_echo_bridge": {
       "known": {
         "how": "home",
         "day": null
       },
-      "lastVerb": "toll",
-      "lastVerbDay": 7
+      "lastVerb": "protect",
+      "lastVerbDay": 8
     },
     "power_ender_host": {
       "known": {
         "how": "renown",
         "day": null
       },
-      "lastVerb": "raid",
-      "lastVerbDay": 7,
+      "lastVerb": "levy",
+      "lastVerbDay": 8,
       "wins": 2
     },
     "power_radiant_plateau": {
@@ -17830,8 +17680,8 @@
         "how": "home",
         "day": null
       },
-      "lastVerb": "tax",
-      "lastVerbDay": 7,
+      "lastVerb": "patrol",
+      "lastVerbDay": 8,
       "wins": 2,
       "grownHeads": 32,
       "grewDay": 5
@@ -17841,8 +17691,8 @@
         "how": "home",
         "day": null
       },
-      "lastVerb": "patrol",
-      "lastVerbDay": 7,
+      "lastVerb": "protect",
+      "lastVerbDay": 8,
       "wins": 2,
       "grownHeads": 28,
       "grewDay": 5
@@ -17853,15 +17703,15 @@
         "day": null
       },
       "lastVerb": "protect",
-      "lastVerbDay": 7
+      "lastVerbDay": 8
     },
     "power_glass_assembly": {
       "known": {
         "how": "renown",
         "day": null
       },
-      "lastVerb": "inform",
-      "lastVerbDay": 7,
+      "lastVerb": "tax",
+      "lastVerbDay": 8,
       "losses": 0,
       "lost": {
         "0": 28
@@ -17877,8 +17727,8 @@
         "how": "renown",
         "day": null
       },
-      "lastVerb": "protect",
-      "lastVerbDay": 7,
+      "lastVerb": "patrol",
+      "lastVerbDay": 8,
       "losses": 0,
       "lost": {
         "0": 40
@@ -17889,8 +17739,8 @@
         "how": "renown",
         "day": null
       },
-      "lastVerb": "tax",
-      "lastVerbDay": 7,
+      "lastVerb": "protect",
+      "lastVerbDay": 8,
       "losses": 0,
       "lost": {
         "0": 30
@@ -17906,24 +17756,25 @@
         "how": "home",
         "day": null
       },
-      "lastVerb": "levy",
-      "lastVerbDay": 7
+      "lastVerb": "inform",
+      "lastVerbDay": 8
     },
     "power_cairnhold_wardens": {
       "known": {
         "how": "renown",
         "day": null
       },
-      "lastVerb": "protect",
-      "lastVerbDay": 7
+      "lastVerb": "patrol",
+      "lastVerbDay": 8,
+      "losses": 1
     },
     "power_the_scour": {
       "known": {
         "how": "renown",
         "day": null
       },
-      "lastVerb": "protect",
-      "lastVerbDay": 7,
+      "lastVerb": "patrol",
+      "lastVerbDay": 8,
       "losses": 0,
       "lost": {
         "0": 28
@@ -17939,8 +17790,8 @@
         "how": "renown",
         "day": null
       },
-      "lastVerb": "patrol",
-      "lastVerbDay": 7,
+      "lastVerb": "levy",
+      "lastVerbDay": 8,
       "wins": 2,
       "grownHeads": 52,
       "grewDay": 5
@@ -17950,8 +17801,8 @@
         "how": "renown",
         "day": null
       },
-      "lastVerb": "protect",
-      "lastVerbDay": 7,
+      "lastVerb": "inform",
+      "lastVerbDay": 8,
       "wins": 2,
       "grownHeads": 30,
       "grewDay": 5
@@ -17961,17 +17812,19 @@
         "how": "renown",
         "day": null
       },
-      "lastVerb": "recruit",
-      "lastVerbDay": 7,
-      "wins": 2
+      "lastVerb": "expand",
+      "lastVerbDay": 8,
+      "wins": 0,
+      "grownHeads": 44,
+      "grewDay": 8
     },
     "power_deepwood_moot": {
       "known": {
         "how": "renown",
         "day": null
       },
-      "lastVerb": "feud",
-      "lastVerbDay": 7,
+      "lastVerb": "protect",
+      "lastVerbDay": 8,
       "losses": 0,
       "lost": {
         "0": 8
@@ -17983,78 +17836,79 @@
       }
     },
     "power_switchback_tollmen": {
-      "lastVerb": "raid",
-      "lastVerbDay": 7
+      "lastVerb": "tribute",
+      "lastVerbDay": 8
     },
     "power_edge_riders": {
-      "lastVerb": "raid",
-      "lastVerbDay": 7
+      "lastVerb": "tribute",
+      "lastVerbDay": 8
     },
     "power_keelmouth_slip": {
-      "lastVerb": "recruit",
-      "lastVerbDay": 7,
+      "lastVerb": "protect",
+      "lastVerbDay": 8,
       "wins": 2
     },
     "power_firstsight_barony": {
-      "lastVerb": "toll",
-      "lastVerbDay": 7,
+      "lastVerb": "levy",
+      "lastVerbDay": 8,
       "wins": 2,
       "grownHeads": 14,
       "grewDay": 5
     },
     "power_blaze_unshadowed": {
-      "lastVerb": "feud",
-      "lastVerbDay": 7,
+      "lastVerb": "protect",
+      "lastVerbDay": 8,
       "wins": 0,
       "grownHeads": 14,
       "grewDay": 5,
       "losses": 0
     },
     "power_flesh_temple": {
-      "lastVerb": "patrol",
-      "lastVerbDay": 7,
-      "wins": 2,
+      "lastVerb": "recruit",
+      "lastVerbDay": 8,
+      "wins": 0,
       "grownHeads": 18,
       "grewDay": 5
     },
     "power_vacated_custody": {
-      "lastVerb": "levy",
-      "lastVerbDay": 7,
-      "wins": 2,
+      "lastVerb": "expand",
+      "lastVerbDay": 8,
+      "wins": 0,
       "grownHeads": 6,
       "grewDay": 5
     },
     "power_the_ceaseless": {
-      "lastVerb": "feud",
-      "lastVerbDay": 7,
-      "wins": 0,
+      "lastVerb": "expand",
+      "lastVerbDay": 8,
+      "wins": 1,
       "grownHeads": 10,
       "grewDay": 5,
       "losses": 0
     },
     "power_long_choir": {
-      "lastVerb": "expand",
-      "lastVerbDay": 7,
+      "lastVerb": "protect",
+      "lastVerbDay": 8,
       "wins": 2
     },
     "power_harvest_hand": {
-      "lastVerb": "expand",
-      "lastVerbDay": 7,
-      "wins": 1,
+      "lastVerb": "feud",
+      "lastVerbDay": 8,
+      "wins": 0,
       "grownHeads": 12,
-      "grewDay": 5
+      "grewDay": 5,
+      "losses": 0
     },
     "power_the_scouring": {
-      "lastVerb": "feud",
-      "lastVerbDay": 7,
+      "lastVerb": "patrol",
+      "lastVerbDay": 8,
       "wins": 0,
       "grownHeads": 16,
       "grewDay": 5,
       "losses": 0
     },
     "power_harborward": {
-      "lastVerb": "recruit",
-      "lastVerbDay": 7,
+      "lastVerb": "protect",
+      "lastVerbDay": 8,
       "wins": 2
     }
   },

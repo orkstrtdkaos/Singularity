@@ -21,10 +21,16 @@
 # ✅ 2026-09-12 (ERIK: "this seems to be slowing us down quite a bit" — "do the plan"): ONCE, NOT TWICE. The ship
 # script runs the ratchet on the tree it commits and writes that tree's hash to $GIT_DIR/ratchet-verified-tree.
 # Running the same suites on the same tree again verifies nothing, so this hook skips when the tree being pushed
-# IS that tree — or differs from it only under characters/, which is the app's own save pushes rebased under us
-# (no suite reads the live save as a fixture any more: §119 and smoke 5aw, 2026-09-12; and CI runs everything on
-# GitHub after every push regardless). Anything else that differs — engine, content, docs, tests, world — runs the
-# full ratchet, which itself now runs its suites in a pool (scripts/run_tests.mjs).
+# IS that tree — or differs from it only under characters/ or data/dev/, which is the app's own save traffic
+# rebased under us (no suite reads the live save as a fixture any more: §119 and smoke 5aw, 2026-09-12; and CI
+# runs everything on GitHub after every push regardless). Anything else that differs — engine, content, docs,
+# tests, world — runs the full ratchet, which itself now runs its suites in a pool (scripts/run_tests.mjs).
+#
+# ⛑ 2026-09-26 (AEVI): data/dev/ joined the skip. "Save traffic writes `data/dev/report-*.json` as well as
+# `characters/`, so a rebase that brought only saves still reruns the whole ratchet. Today that cost me about ten
+# rejected pushes in a row." ⚠️ CHECKED BEFORE ADDING, because a skip over a path some suite reads is a red the
+# ratchet never sees: `report-*.json` is written by app.js (`DEV_REPORT_PATH`) and read by nothing — no suite, no
+# script, no engine module.
 #
 # ⛔ ENABLE IT ONCE, PER CLONE:  git config core.hooksPath .githooks
 #    Skip deliberately with `git push --no-verify` — and say why in the commit.
@@ -37,12 +43,12 @@ if [ -n "$MARK" ]; then
     exit 0
   fi
   if git diff-tree -r --name-only "$MARK" "$TREE" > "$GITDIR/ratchet-tree-diff" 2>/dev/null; then
-    OTHER=$(grep -v '^characters/' "$GITDIR/ratchet-tree-diff" | head -1)
+    OTHER=$(grep -v -e '^characters/' -e '^data/dev/' "$GITDIR/ratchet-tree-diff" | head -1)
     if [ -z "$OTHER" ]; then
-      echo "pre-push: the verified tree differs only under characters/ (the app's save pushes) — not running the ratchet again"
+      echo "pre-push: the verified tree differs only under characters/ and data/dev/ (the app's save traffic) — not running the ratchet again"
       exit 0
     fi
-    echo "pre-push: the tree differs from the verified one outside characters/ ($OTHER) — running the ratchet"
+    echo "pre-push: the tree differs from the verified one outside the save paths ($OTHER) — running the ratchet"
   fi
 fi
 echo "pre-push: suite ratchet (skip with --no-verify)"

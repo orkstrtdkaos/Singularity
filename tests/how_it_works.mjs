@@ -2413,8 +2413,13 @@ console.log("\n── §180 · the suites run in a pool; the hook skips a tree t
   // to catch in content. The producer is the hook's own successful run, which is the only place that can honestly say
   // "these suites passed on this exact tree".
   const writesMark180 = /git rev-parse 'HEAD\^\{tree\}' > "\$GITDIR\/ratchet-verified-tree"/.test(hook180);
-  check("§180: ⛔ the hook skips the ratchet for a tree already verified, or one that differs only under characters/, runs it for anything else — AND WRITES THE MARK IT READS, which nothing did; both tracked copies are one text",
-    hook180 === hook180b && /ratchet-verified-tree/.test(hook180) && /grep -v '\^characters\/'/.test(hook180)
+  // ⛑ 2026-09-26 — THE SKIP COVERS A SECOND PATH. Aevi: "Save traffic writes `data/dev/report-*.json` as
+  // well as `characters/`, so a rebase that brought only saves still reruns the whole ratchet. Today that cost
+  // me about ten rejected pushes in a row." ⚠️ BOTH are asserted by name, so dropping either reddens — a gate
+  // that only asked whether `characters/` appears somewhere would pass with `data/dev/` quietly removed.
+  check("§180: ⛔ the hook skips the ratchet for a tree already verified, or one that differs only under the app's own save traffic — characters/ AND data/dev/ — runs it for anything else, AND WRITES THE MARK IT READS, which nothing did; both tracked copies are one text",
+    hook180 === hook180b && /ratchet-verified-tree/.test(hook180)
+    && /grep -v -e '\^characters\/' -e '\^data\/dev\/'/.test(hook180)
     && /node scripts\/run_tests\.mjs --ratchet --quiet/.test(hook180) && /exit 1/.test(hook180)
     && writesMark180 && hook180.indexOf("MARK=$(head -1") < hook180.indexOf("git rev-parse 'HEAD^{tree}' >"),
     writesMark180 ? "reads and writes the mark" : "⛔ the mark is READ and never WRITTEN — the skip cannot fire");

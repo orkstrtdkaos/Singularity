@@ -54,7 +54,7 @@
     },
     "worth": {
       "type": "string",
-      "description": "a band, not a price — there is no pricing engine"
+      "description": "a band, not a price — `unitWorth` and `storeWorth` price it (SNG-652): a band decides what a unit fetches, and where it is fetched decides the money"
     },
     "provenance": {
       "type": "string",

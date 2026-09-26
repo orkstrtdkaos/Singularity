@@ -80,7 +80,16 @@ const TYPES = [
   { key: "location",       label: "locations",              schema: "location",      layer: "content", of: () => C.locations },
   { key: "ability",        label: "crafts",                 schema: "ability",       layer: "content", of: () => C.abilities },
   { key: "item",           label: "items",                  schema: "item",          layer: "content", of: () => C.items },
-  { key: "creature",       label: "bestiary",               schema: "creature",      layer: "content", of: () => C.bestiary },
+  // ⛔ `.roster`, NOT THE DOCUMENT (Aevi, 2026-09-26). `of: () => C.bestiary` validated the FILE's top-level
+  // keys — 3 "creatures", 2 of them "expected object, got array" — while the 28 real creatures sat in
+  // `roster` and were never looked at. The `legend` row two lines down had said `.roster` since the day it was
+  // written, which is the tell: two documents of the same shape, one read at its roster and one at its lid.
+  // ⚠️ AND THE BASELINE WENT UP, 3 → 28, WHICH THE RATCHET FORBIDS — so it was moved deliberately and the
+  // reason is here rather than in the baseline file (the rebaseline writer rewrites that file whole).
+  // The 28 are ONE question, and it is Aevi's: every roster row is missing `schemaVersion`, which the
+  // DOCUMENT carries once. Whether a row inside a versioned document repeats it is a schema decision.
+  // Her tier-enum and `readsAlsoFrom` fixes cleared everything else, so 28 of 28 is that single field.
+  { key: "creature",       label: "bestiary",               schema: "creature",      layer: "content", of: () => C.bestiary?.roster },
   { key: "power",          label: "powers",                 schema: "power",         layer: "content", of: () => C.powers },
   { key: "companion",      label: "companions",             schema: "companion",     layer: "content", of: () => C.companions },
   { key: "encounter",      label: "encounters",             schema: "encounter",     layer: "content", of: () => C.encounters },

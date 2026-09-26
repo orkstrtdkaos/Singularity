@@ -395,9 +395,9 @@
     "At the Kindly Rest in early morning, Loki learns the patient lies in the cellars below and is awake, asking after Ravel. The path forward is clear.",
     "At the Kindly Rest, Loki speaks plainly with Sister Vreni about the Churn-Revellers and their purpose. Vreni confirms the house's shelter and silence, and promises to listen when answers return."
   ],
-  "currentLocationId": "millbrook",
+  "currentLocationId": "gen-mara-wells-store",
   "activeScene": {
-    "locationId": "millbrook",
+    "locationId": "gen-mara-wells-store",
     "turns": [
       {
         "player": null,
@@ -423,61 +423,70 @@
         "player": "Use shortfold to bring your party directly to Millbrook.",
         "summary": "Loki folds distance and brings the band to Millbrook's edge in deep night—a partial working that lands them outside the town rather than at its heart, leaving them at the threshold.",
         "narration": "You gather your band close on the starlit road. Ravel's hand finds your shoulder—understanding without words what you're about to attempt. Estry steps in tighter, and Orla takes position at the circle's edge, still learning the shape of trust. Cy's lens irises once, bright, then dims.\n\nYou reach for the Shortfold—the sense of distance folding, the two places you know becoming neighbors. Millbrook sits in your mind clear enough: the river's curve, the common house, the well-stone at the center. You speak the fold aloud, and the fabric of the road begins to thin.\n\nThe world creases. The scrubland brush shimmers and doubles, and for a breath you are between—neither here nor there. But the fold catches halfway. Distance resists. The concrete weight of the Millbrook you carry in memory does not match perfectly with the Millbrook that exists, and the lattice here is thin, starved. The fold completes, but ragged.\n\nYou arrive at Millbrook's edge, not its center. The common house stands visible two hundred paces east, its warm light spilling across the Green. The river's sound carries on the wind. But the landing is rough—Estry staggers, catches herself. Ravel's grip tightens on your arm, steadying. Orla stands motionless, grey coat settling around them like the dust of the working itself. Cy's lamp wavers, then steadies, choosing the footing as it always does."
+      },
+      {
+        "player": "proceed to Mara Wells store.",
+        "summary": "The band arrives at Mara Wells' Store in deep night, ready to gather supplies for the road ahead.",
+        "narration": "The fold lands you at Millbrook's edge in deep night, the common house warm and distant two hundred paces east. Cy's lamp settles, and the four of you stand solid on the road again—the working cost you more than a clean fold usually does, and the resistance it met hangs in the air like a question neither answered.\n\nYou turn from the threshold toward the northern path without speaking. Ravel reads the shape of it and nods. Estry keeps pace at the band's flank. Orla walks with the settled certainty of someone who has made a choice and will not revisit it. The night is clear, the road is clear, and Mara Wells' Store lies a short walk north from here—its shutters dark but the structure solid, known to you, waiting.\n\nThe four of you reach the storefront in the deep quiet of mid-autumn night. The building stands plainly—weathered wood, a narrow door, shelves visible through the front glass holding goods Mara has deemed worth keeping. Smoke rises faintly from a chimney at the back: someone is awake. Cy's lamp casts your shadows long across the threshold.\n\nThe question, now, is how you knock on a stranger's door in the hour before dawn, with three companions at your back and a story that will sound like madness if told plainly."
       }
     ],
     "lastTurn": {
-      "narration": "You gather your band close on the starlit road. Ravel's hand finds your shoulder—understanding without words what you're about to attempt. Estry steps in tighter, and Orla takes position at the circle's edge, still learning the shape of trust. Cy's lens irises once, bright, then dims.\n\nYou reach for the Shortfold—the sense of distance folding, the two places you know becoming neighbors. Millbrook sits in your mind clear enough: the river's curve, the common house, the well-stone at the center. You speak the fold aloud, and the fabric of the road begins to thin.\n\nThe world creases. The scrubland brush shimmers and doubles, and for a breath you are between—neither here nor there. But the fold catches halfway. Distance resists. The concrete weight of the Millbrook you carry in memory does not match perfectly with the Millbrook that exists, and the lattice here is thin, starved. The fold completes, but ragged.\n\nYou arrive at Millbrook's edge, not its center. The common house stands visible two hundred paces east, its warm light spilling across the Green. The river's sound carries on the wind. But the landing is rough—Estry staggers, catches herself. Ravel's grip tightens on your arm, steadying. Orla stands motionless, grey coat settling around them like the dust of the working itself. Cy's lamp wavers, then steadies, choosing the footing as it always does.",
-      "sceneSummary": "Loki folds distance and brings the band to Millbrook's edge in deep night—a partial working that lands them outside the town rather than at its heart, leaving them at the threshold.",
+      "narration": "The fold lands you at Millbrook's edge in deep night, the common house warm and distant two hundred paces east. Cy's lamp settles, and the four of you stand solid on the road again—the working cost you more than a clean fold usually does, and the resistance it met hangs in the air like a question neither answered.\n\nYou turn from the threshold toward the northern path without speaking. Ravel reads the shape of it and nods. Estry keeps pace at the band's flank. Orla walks with the settled certainty of someone who has made a choice and will not revisit it. The night is clear, the road is clear, and Mara Wells' Store lies a short walk north from here—its shutters dark but the structure solid, known to you, waiting.\n\nThe four of you reach the storefront in the deep quiet of mid-autumn night. The building stands plainly—weathered wood, a narrow door, shelves visible through the front glass holding goods Mara has deemed worth keeping. Smoke rises faintly from a chimney at the back: someone is awake. Cy's lamp casts your shadows long across the threshold.\n\nThe question, now, is how you knock on a stranger's door in the hour before dawn, with three companions at your back and a story that will sound like madness if told plainly.",
+      "sceneSummary": "The band arrives at Mara Wells' Store in deep night, ready to gather supplies for the road ahead.",
       "choices": [
         {
-          "label": "Walk the rest into Millbrook's center, where the common house keeps its doors open to travelers.",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Knock plainly and wait for an answer—let the hour speak for itself.",
+          "attribute": "social",
+          "subAttribute": "presence",
           "axes": {
-            "concrete_abstract": -0.3
-          },
-          "difficulty": "very easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "travel",
-            "lead"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Stop here at the edge and read the town first—Prism Sight to see what light has passed through here in the last hours, or find what the place wants to tell you before entering.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "concrete_abstract": 0.2
+            "falsehood_truth": 0.3,
+            "concrete_abstract": 0.1
           },
           "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "scout",
-            "study"
+            "careful",
+            "honest"
           ],
-          "abilityId": "prism_sight",
-          "energyCost": 3,
+          "abilityId": null,
+          "energyCost": null,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Ask Ravel what she reads from this arrival—the fold was not clean, and she reads old roads. What does she make of the resistance, and of Millbrook's threshold?",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Use Harmonic Voice to call ahead gently—make the waking less jarring, soften the night.",
+          "attribute": "practical",
+          "subAttribute": "craft",
           "axes": {
-            "emotional_logical": -0.1
+            "falsehood_truth": 0.1,
+            "violence_peace": 0.4
           },
-          "difficulty": "very easy",
+          "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "help"
+            "care",
+            "craft"
+          ],
+          "abilityId": "harmonic_voice",
+          "energyCost": 5,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Wait for dawn to break—find shelter nearby and approach when the hour is less strange.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {
+            "chaos_order": 0.3,
+            "violence_peace": 0.2
+          },
+          "difficulty": "trivial",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "careful",
+            "patience"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -486,19 +495,22 @@
           "emergenceId": null
         },
         {
-          "label": "Send Cy ahead into the town alone to scout—it moves unseen and reads mechanism better than any of you. You'll follow when it signals.",
+          "label": "Send Cy to knock—a strange little mechanism at the door might wake Mara differently, less threatening.",
           "attribute": "practical",
-          "subAttribute": "craft",
-          "axes": {},
+          "subAttribute": "wits",
+          "axes": {
+            "falsehood_truth": -0.2,
+            "chaos_order": -0.2
+          },
           "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "scout",
+            "clever",
             "careful"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
@@ -506,50 +518,60 @@
       "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": -6,
+        "energy": 0,
         "inventoryAdd": [],
         "inventoryRemove": [],
         "xp": 0
       },
       "ledgerEvents": [],
-      "questUpdates": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "journey-gen-the-road-from-kindly-rest-to-standing-an-88",
+          "note": "Band folded distance mid-journey and landed at Millbrook's edge. Paused before the final leg to Mara Wells' Store—rations still needed for the open road."
+        }
+      ],
       "standingOps": [],
       "delegateOps": [],
       "jobOps": [],
       "arcOps": [],
       "adoptSchool": null,
-      "offer": null,
+      "offer": {
+        "thing": "The resistance the fold met—distance refusing to crease cleanly, the working landing you outside the town rather than at its heart.",
+        "from": "The valley itself: something beneath the place is pushing back against shortcuts and close-work. The resistance is new and precise."
+      },
       "stageOps": [],
       "scene": {
-        "setting": "Millbrook's outer edge, deep night under bright stars. Two hundred paces east, the common house glows with warm lamplight. The river's sound carries on the wind—close and steady. The road beneath your feet has just ceased folding.",
+        "setting": "Mara Wells' Store on the northern edge of Millbrook, deep night under bright stars. The storefront is shuttered but smoke rises from the rear chimney. Four shadows cast long across the threshold by Cy's lamp.",
         "npcsPresent": [
           {
             "name": "Ravel Ash-bearer",
-            "state": "Hand still on Loki's arm, reading the rough landing with steady assessment. Eyes taking in the town's shape and the light ahead."
+            "state": "Standing at the band's left flank, reading the store with steady assessment. Her hand rests easy at her side."
           },
           {
             "name": "Estry Krell",
-            "state": "Recovered from the stagger, breath even. Eyes already scanning the common house and the dark between here and there."
+            "state": "At the flank's right edge, eyes moving between the store's dark front and the wider street. Breathing even, waiting."
           },
           {
             "name": "Orla Yardley",
-            "state": "Still motionless, grey coat settled, face unreadable in starlight. Processing the working and what the fold's resistance might mean."
+            "state": "At the circle's rim, grey coat caught in the lamplight. Still and watchful, learning how the band moves."
           },
           {
             "name": "Cy",
-            "state": "Lamp steady now, legs choosing the footing with precision. Clicking softly—cataloging the arrival and the resistance it met."
+            "state": "Lamp raised, articulated legs choosing careful footing. Lens irises slowly, cataloging the storefront's architecture and age."
           }
         ],
         "objects": [
-          "The common house ahead, its doors warm and open",
-          "The river sound, carrying on night wind",
-          "The Green, pale under starlight",
-          "Scrubland brush at the road's edge, still and dry"
+          "Mara Wells' Store—weathered wood, narrow door, shelves visible through front glass",
+          "Goods on display: practical items, dry stores, things Mara deems worth keeping",
+          "Chimney at the building's rear, smoke rising pale in the starlight",
+          "Cy's lamp casting long shadows across the threshold",
+          "The road behind you, clear and pale under stars"
         ],
         "threads": [
-          "The fold was not clean—why did the distance resist? What does that mean for what lies ahead?",
-          "The band is gathered and moving as one now. What will Millbrook make of four strangers arriving in deep night?",
-          "Cy has been silent since the fold completed. What is it calculating?"
+          "Why did the fold resist? Something beneath Millbrook is pushing back against shortcuts.",
+          "Who is awake in Mara Wells' Store at this hour, and how will they read four strangers arriving in deep night?",
+          "The Standing Annex waits—how far is the journey still, and do you have what you need for the open road?"
         ]
       },
       "npcUpdates": [],
@@ -557,7 +579,20 @@
       "factUpdates": [],
       "placeUpdates": [],
       "discovery": null,
-      "codexUpdates": [],
+      "codexUpdates": [
+        {
+          "topic": "millbrook",
+          "label": "Millbrook",
+          "kind": "place",
+          "entityId": "millbrook",
+          "fact": "The fold's resistance suggests something beneath the settlement is actively pushing back against shortcuts and close-work—the working that should have landed the band at the village heart instead set them at its edge.",
+          "links": [
+            "the-taken-from-the-city",
+            "halvex-coil",
+            "what-descended-with-them"
+          ]
+        }
+      ],
       "holdingOps": [],
       "holdTrades": [],
       "debtOps": [],
@@ -574,54 +609,61 @@
       "unlockSubstrate": null,
       "timeOps": {
         "hoursPassed": 0.5,
-        "why": "the fold and arrival"
+        "why": "A short walk from the road's edge to Mara Wells' Store"
       },
       "moveTo": {
-        "location": "millbrook",
-        "why": "Folded distance from the road toward the Standing Annex; arrived at Millbrook's edge"
+        "location": "gen-mara-wells-store",
+        "why": "The band gathered at Millbrook's threshold and proceeded north to the store on foot"
       },
       "stateOps": [],
-      "imagePrompt": "Four figures standing at Millbrook's threshold in deep night—the common house's warm light spilling across the dark Green ahead. A band drawn close, still settling from the fold. Starlight catches on grey coat, green coat, and the brass segments of Cy's lamp as it steadies. The river sound carries, patient and constant.",
+      "itemUpdates": [],
+      "deriveItem": null,
+      "imagePrompt": null,
       "imageMedium": null,
       "newAbility": null,
       "gambitOps": null,
       "gambitApt": false,
-      "sceneEnded": false,
-      "momentArt": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Four%20figures%20standing%20at%20Millbrook's%20threshold%20in%20deep%20night%E2%80%94the%20common%20house's%20warm%20light%20spilling%20across%20the%20dark%20Green%20ahead.%20A%20band%20drawn%20close%2C%20still%20settling%20from%20the%20fold.%20Starlight%20catches%20on%20grey%20coat%2C%20green%20coat%2C%20and%20the%20brass%20segments%20of%20Cy's%20lamp%20as%20it%20steadies.%20The%20river%20sound%20carries%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=53875&nologo=true"
+      "markDefiningMoment": null,
+      "markTeacher": null,
+      "offerPromotion": null,
+      "offerAcquisition": null,
+      "offerIntent": null,
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Millbrook's outer edge, deep night under bright stars. Two hundred paces east, the common house glows with warm lamplight. The river's sound carries on the wind—close and steady. The road beneath your feet has just ceased folding.",
+      "setting": "Mara Wells' Store on the northern edge of Millbrook, deep night under bright stars. The storefront is shuttered but smoke rises from the rear chimney. Four shadows cast long across the threshold by Cy's lamp.",
       "npcsPresent": [
         {
           "name": "Ravel Ash-bearer",
-          "state": "Hand still on Loki's arm, reading the rough landing with steady assessment. Eyes taking in the town's shape and the ligh"
+          "state": "Standing at the band's left flank, reading the store with steady assessment. Her hand rests easy at her side."
         },
         {
           "name": "Estry Krell",
-          "state": "Recovered from the stagger, breath even. Eyes already scanning the common house and the dark between here and there."
+          "state": "At the flank's right edge, eyes moving between the store's dark front and the wider street. Breathing even, waiting."
         },
         {
           "name": "Orla Yardley",
-          "state": "Still motionless, grey coat settled, face unreadable in starlight. Processing the working and what the fold's resistance"
+          "state": "At the circle's rim, grey coat caught in the lamplight. Still and watchful, learning how the band moves."
         },
         {
           "name": "Cy",
-          "state": "Lamp steady now, legs choosing the footing with precision. Clicking softly—cataloging the arrival and the resistance it "
+          "state": "Lamp raised, articulated legs choosing careful footing. Lens irises slowly, cataloging the storefront's architecture and"
         }
       ],
       "objects": [
-        "The common house ahead, its doors warm and open",
-        "The river sound, carrying on night wind",
-        "The Green, pale under starlight",
-        "Scrubland brush at the road's edge, still and dry"
+        "Mara Wells' Store—weathered wood, narrow door, shelves visible through front gla",
+        "Goods on display: practical items, dry stores, things Mara deems worth keeping",
+        "Chimney at the building's rear, smoke rising pale in the starlight",
+        "Cy's lamp casting long shadows across the threshold",
+        "The road behind you, clear and pale under stars"
       ],
       "threads": [
-        "The fold was not clean—why did the distance resist? What does that mean for what lies ahead?",
-        "The band is gathered and moving as one now. What will Millbrook make of four strangers arriving in deep night?",
-        "Cy has been silent since the fold completed. What is it calculating?"
+        "Why did the fold resist? Something beneath Millbrook is pushing back against shortcuts.",
+        "Who is awake in Mara Wells' Store at this hour, and how will they read four strangers arriving in deep night?",
+        "The Standing Annex waits—how far is the journey still, and do you have what you need for the open road?"
       ]
     },
-    "beats": 5,
+    "beats": 6,
     "subPlace": null
   },
   "clock": {
@@ -1801,6 +1843,18 @@
         "death_life",
         "concrete_abstract"
       ]
+    },
+    "gen-mara-wells-store": {
+      "visits": 1,
+      "notes": [],
+      "flags": {},
+      "lastVisit": 8,
+      "vectorsKnown": [
+        "violence_peace",
+        "chaos_order",
+        "death_life",
+        "concrete_abstract"
+      ]
     }
   },
   "worldState": {
@@ -2017,12 +2071,8 @@
     "lastSharedReadAt": "2026-09-26T03:01:25.054Z",
     "lastTickWorldDay": 88,
     "lastCanonWorldDay": 88,
-    "turnsSinceOffer": 2,
+    "turnsSinceOffer": 0,
     "recentOffers": [
-      {
-        "thing": "Sister Vreni's promise to listen and her acknowledgment that the Standing Annex holds what the band is becoming",
-        "from": "Loki speaking plainly instead of seeking to persuade—the house responds to honesty the way it responds to need"
-      },
       {
         "thing": "a Syllogist who has come to the margins of Millbrook, waiting on the road from the Kindly Rest",
         "from": "the echoes of what Halvex Coil has carried back to those who sent him—the story of understanding instead of breaking has reached the…"
@@ -2038,6 +2088,10 @@
       {
         "thing": "Orla Yardley accepts the invitation to walk and speak—the breaking mandate is now openly questioned in the band's presence",
         "from": "Loki's plainness and Orla's own breaking, tested on the road"
+      },
+      {
+        "thing": "The resistance the fold met—distance refusing to crease cleanly, the working landing you outside the town rather than at its heart.",
+        "from": "The valley itself: something beneath the place is pushing back against shortcuts and close-work. The resistance is new and precise."
       }
     ],
     "wantProgress": {
@@ -12565,15 +12619,20 @@
         "kind": "place",
         "facts": [
           "[d7] you have walked here",
-          "[d?] Millbrook governs itself through an elder panel in its common house, led by Councilor Dresh. It decides slowly, in public, and on the record."
+          "[d?] Millbrook governs itself through an elder panel in its common house, led by Councilor Dresh. It decides slowly, in public, and on the record.",
+          "[d8] The fold's resistance suggests something beneath the settlement is actively pushing back against shortcuts and close-work—the working that should have landed the band at the village heart instead set them at its edge."
         ],
-        "links": [],
+        "links": [
+          "the-taken-from-the-city",
+          "halvex-coil",
+          "what-descended-with-them"
+        ],
         "aliases": [
           "Millbrook's Elder Panel"
         ],
         "createdDay": 7,
         "entityId": "millbrook",
-        "updatedDay": 7,
+        "updatedDay": 8,
         "summarisedAt": 0
       },
       "syllogist-of-the-margins": {
@@ -12616,6 +12675,19 @@
         "createdDay": 7,
         "entityId": "orla-yardley",
         "updatedDay": 7
+      },
+      "gen-mara-wells-store": {
+        "id": "gen-mara-wells-store",
+        "label": "Mara Wells' Store",
+        "kind": "place",
+        "facts": [
+          "[d8] you have walked here"
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": 8,
+        "entityId": "gen-mara-wells-store",
+        "updatedDay": 8
       }
     },
     "mergeUndo": [
@@ -12967,19 +13039,19 @@
     "deferredMysteries": []
   },
   "tendencies": {
-    "devotion": 0.6826330098468819,
-    "cerebral": 15.432985201328036,
-    "social": 17.41978542758258,
-    "strategic": 11.967262703734097,
-    "cautious": 4.796688588709686,
-    "amorous": 6.441472740031865,
-    "generous": 5.2750649293358745,
-    "ruthless": 0.17098184243860526,
-    "risky": 0.13973407489030976,
-    "patient": 0.0381588629416183,
-    "deception": 0.04441889299846309,
-    "carousing": 0.9506249999999999,
-    "leadership": 1.95
+    "devotion": 0.6655671846007098,
+    "cerebral": 15.047160571294834,
+    "social": 16.984290791893013,
+    "strategic": 11.668081136140744,
+    "cautious": 4.676771373991944,
+    "amorous": 6.280435921531068,
+    "generous": 5.143188306102478,
+    "ruthless": 0.16670729637764012,
+    "risky": 0.136240723018052,
+    "patient": 0.03720489136807784,
+    "deception": 0.04330842067350151,
+    "carousing": 0.9268593749999999,
+    "leadership": 1.9012499999999999
   },
   "aptitudes": [
     "strategist",
@@ -12989,7 +13061,7 @@
     "faithful",
     "charmer"
   ],
-  "actionCount": 207,
+  "actionCount": 208,
   "grantsVersion": 1,
   "precursorAccess": [
     "address_sense"
@@ -13067,6 +13139,14 @@
   "nativeGrantsVersion": 2,
   "reconcileVersion": 83,
   "gallery": [
+    {
+      "kind": "location",
+      "prompt": "Mara Wells' Store",
+      "url": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Mara%20Wells'%20Store%3A%20A%20timber-fronted%20supply%20store%20with%20wide%20shutters%20folded%20back%2C%20goods%20stacked%20in%20the%20opening%20%E2%80%94%20rope%2C%20sacking%2C%20crates%2C%20lamp%20oil.%20A%20counter%20across%20the%20front%2C%20shelves%20deep%20inside%2C%20and%20a%20loading%20yard%20to%20one%20side.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=13548&nologo=true",
+      "caption": "Mara Wells' Store",
+      "worldDay": 88,
+      "at": "2026-09-26T03:23:02.056Z"
+    },
     {
       "kind": "moment",
       "prompt": "Four figures standing at Millbrook's threshold in deep night—the common house's warm light spilling across the dark Green ahead. A band drawn close, still settling from the fold. Starlight catches on ",
@@ -14085,8 +14165,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790392860498,
-  "rev": 939,
+  "updatedAt": 1790392982061,
+  "rev": 940,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -15313,10 +15393,10 @@
     {
       "id": "sess-19",
       "startedAt": "2026-09-26T00:51:07.826Z",
-      "lastAt": "2026-09-26T03:21:00.484Z",
+      "lastAt": "2026-09-26T03:23:02.047Z",
       "startDay": 88,
       "endDay": 88,
-      "beats": 8
+      "beats": 9
     }
   ],
   "establishedFacts": [
@@ -15461,7 +15541,7 @@
   ],
   "_opLedger": {
     "offer": {
-      "applied": 47,
+      "applied": 48,
       "rejected": 2,
       "lastWhy": "rejected-shape"
     },
@@ -15471,28 +15551,28 @@
       "lastWhy": "refused-capacity"
     },
     "moveTo": {
-      "applied": 0,
+      "applied": 1,
       "rejected": 3,
       "lastWhy": "journey-planned"
     }
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 238,
-    "choices": 238,
-    "characterDeltas": 122,
-    "scene": 238,
+    "sceneSummary": 239,
+    "choices": 239,
+    "characterDeltas": 123,
+    "scene": 239,
     "placeUpdates": 28,
-    "codexUpdates": 138,
-    "timeOps": 191,
-    "offer": 42,
+    "codexUpdates": 139,
+    "timeOps": 192,
+    "offer": 43,
     "generateRequest": 7,
-    "sceneEnded": 107,
+    "sceneEnded": 108,
     "npcUpdates": 189,
-    "moveTo": 10,
-    "gambitApt": 66,
+    "moveTo": 11,
+    "gambitApt": 67,
     "deeds": 14,
-    "questUpdates": 43,
+    "questUpdates": 44,
     "standingOps": 4,
     "factUpdates": 19,
     "stageOps": 7,
@@ -15510,7 +15590,7 @@
     "partyOps": 4,
     "bandOps": 1
   },
-  "_opTurns": 238,
+  "_opTurns": 239,
   "customAbilities": {
     "mirror-bright": {
       "id": "mirror-bright",
@@ -15820,7 +15900,8 @@
     "the_crossing": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/The%20Crossing%3A%20Every%20axis%20crosses%20here%20at%20nothing%2C%20and%20the%20result%20is%20not%20grey%20%E2%80%94%20it%20is%20CROWDED.%20The%20Crossing%20leans%20toward%20no%20pole%2C%20which%20is%20precisely%20why%20it%20can%20hold%20them%20all%3A%20an%20Umbral%20and%20a%20Blazeborn%20drink%20at%20the%20same%20table%20because%20neither%20has%20the%20standing%20to%20make%20the%20other%20leave.%20The%20poles%20are%20lonely%20places.%20The%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=24144&nologo=true",
     "the_quickwood_eaves": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/The%20Quickwood%20Eaves%3A%20Where%20the%20grown%20city%20thins%20into%20ordinary%20forest%20and%20ordinary%20forest%20thins%20into%20the%20Deepwood.%20The%20Eaves%20are%20the%20Rootkin's%20front%20door%20and%20they%20have%20deliberately%20not%20marked%20it%20%E2%80%94%20you%20know%20you%20have%20arrived%20when%20the%20trees%20start%20being%20interested%20in%20you.%20A%20waygate%20stands%20among%20the%20eaves-trees%2C%20grown%20around%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=86347&nologo=true",
     "the_wayhouse": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/The%20Wayhouse%3A%20One%20long%20stone%20building%20alone%20at%20a%20crossroads%2C%20with%20a%20lamp%20on%20a%20pole%20outside%20and%20a%20board%20of%20pinned%20notes%20by%20the%20door.%20Stabling%20at%20one%20end%2C%20a%20wide%20common%20room%20at%20the%20other.%20Roads%20leaving%20in%20every%20direction.%2C%20adventurous%2C%20mild%2C%20no%20gore%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20a%20child%2C%20fully%20clothed%2C%20non-sexual%2C%20wholesome%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=91201&nologo=true",
-    "the_kindly_rest": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/The%20Kindly%20Rest%3A%20Low%20buildings%20of%20pale%20stone%20around%20three%20sides%20of%20a%20planted%20court%2C%20roofed%20in%20weathered%20shingle%20with%20deep%20eaves.%20Drying%20lofts%20stand%20open%20under%20the%20roofline%2C%20hung%20with%20cut%20herbs%20in%20bunches.%20Terraced%20beds%20step%20down%20the%20slope%20in%20stone-edged%20rows%2C%20a%20covered%20walk%20runs%20the%20inner%20faces%2C%20and%20water%20is%20led%20thr%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=91172&nologo=true"
+    "the_kindly_rest": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/The%20Kindly%20Rest%3A%20Low%20buildings%20of%20pale%20stone%20around%20three%20sides%20of%20a%20planted%20court%2C%20roofed%20in%20weathered%20shingle%20with%20deep%20eaves.%20Drying%20lofts%20stand%20open%20under%20the%20roofline%2C%20hung%20with%20cut%20herbs%20in%20bunches.%20Terraced%20beds%20step%20down%20the%20slope%20in%20stone-edged%20rows%2C%20a%20covered%20walk%20runs%20the%20inner%20faces%2C%20and%20water%20is%20led%20thr%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=91172&nologo=true",
+    "gen-mara-wells-store": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Mara%20Wells'%20Store%3A%20A%20timber-fronted%20supply%20store%20with%20wide%20shutters%20folded%20back%2C%20goods%20stacked%20in%20the%20opening%20%E2%80%94%20rope%2C%20sacking%2C%20crates%2C%20lamp%20oil.%20A%20counter%20across%20the%20front%2C%20shelves%20deep%20inside%2C%20and%20a%20loading%20yard%20to%20one%20side.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=13548&nologo=true"
   },
   "customEncounters": {
     "re-re_raider_duel": {
@@ -16482,7 +16563,7 @@
   "skillUses": {
     "plan": 12,
     "discuss": 1,
-    "travel": 9,
+    "travel": 10,
     "scout": 7,
     "prepare": 6,
     "careful": 10,
@@ -17359,7 +17440,7 @@
     }
   },
   "_opUnknown": {
-    "sceneSummary": 65,
+    "sceneSummary": 66,
     "scene_summary": 1
   },
   "_bandNotes": null,
@@ -18165,5 +18246,8 @@
   ],
   "_standingOpRefusals": [
     "valley.the_kindly_rest: unknown-people"
+  ],
+  "_questMatchNotes": [
+    "(couldn't match a quest for \"journey-gen-the-road-from-kindly-rest-to-standing-an-88\" — not applied)"
   ]
 }

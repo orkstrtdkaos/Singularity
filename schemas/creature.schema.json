@@ -10,8 +10,8 @@
     "name": { "type": "string", "description": "what it is called in play — the encounter label and the image caption. Lowercase common-noun style like the authored roster ('glimmerlings', 'warpling hare'), not a proper name: it is a kind of thing, not a person." },
     "tier": {
       "type": "string",
-      "enum": ["riffraff", "notable", "regional", "epic"],
-      "description": "THE load-bearing field: it IS the fight's difficulty. BEAST_TIER maps it to the opponent's threat, the entry's weight, and its minDanger gate. An unknown value silently resolves to `notable`, so it must be one of these four — a creature tiered 'legendary' would fight as mid-tier without any error."
+      "enum": ["riffraff", "notable", "leader", "heroic", "epic"],
+      "description": "THE load-bearing field: it IS the fight's difficulty. BEAST_TIER maps it to the opponent's threat, the entry's weight, and its minDanger gate. An unknown value silently resolves to `notable`, so it must be one of these five: BEAST_TIER's own keys (random_encounters.js). SNG-658: the enum said `regional`, the rung renamed in SNG-599, which BEAST_TIER no longer knows, so a generated beast could be tiered into a silent `notable` — a creature tiered 'legendary' would fight as mid-tier without any error."
     },
     "class": { "type": "string", "description": "the bestiary grouping (e.g. manifested_creature, beast, precursor_construct) — rides on the encounter entry as creatureClass." },
     "look": { "type": "string", "description": "what it looks like — read by the beast-image prompt (art.js) and folded into the encounter seed the GM narrates from. Concrete and visual; this is the only description the art has to work with." },

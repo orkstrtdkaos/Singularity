@@ -29616,18 +29616,29 @@ console.log("\n── §370 · bargains are being struck, and nobody has said wh
   // a reader nothing calls passes CI and cannot fire in play. Its production caller is `worldArcsPublic`, the one
   // place an arc's stage reaches a player. ⚠️ And my first wiring of it imported NOTHING from sovereign.js, so
   // every reading would have been swallowed by its own try/catch — wired-looking, audit-passing, and dead.
+  let _wired370 = {};
   check("§370: ⛔ THE READER IS WIRED, AND DRIVEN THROUGH THE PRODUCTION SURFACE — not merely exported and gated",
     (() => {
       const wt = rd("engine/worldtick.js");
-      const imported = /import \{ arcReading, knowsSovereign, masksFrom, sovereignOfArc \} from "\.\/sovereign\.js"/.test(wt);
+      // ⚠️ THE IMPORT LIST, NOT ITS SPELLING. Pinned as one string, this went red the moment `confirmedLines`
+      // joined it in CCODE-536 — a change that makes the claim MORE true. The claim is that worldtick imports the
+      // reader from sovereign.js; which other names travel with it is not this gate's business.
+      // ⚠️ WRITTEN WITHOUT `\\b`: the first cut of this line went through a bash heredoc and the two word
+      // boundaries became literal BACKSPACE bytes (0x08). `node --check` passed, `grep` matched, the line
+      // READ correctly, and the regex could never fire. Seventh time this session. The name is bounded by the
+      // characters around it instead, which no shell can eat.
+      const imported = /import \{[\s\S]*?[{,]\s*arcReading\s*[,}][\s\S]*?from "\.\/sovereign\.js"/.test(wt);
       const rows = WT370.worldArcsPublic(C370, { id: "c370", name: "T" });
       const glare = rows.find(r => r.arcId === "arc_the_glare");
-      return imported && rows.length >= 9 && !!glare?.reading
-        && glare.reading.layers.join(",") === "publicFace"       // unknown, unconfirmed: one layer only
-        && !!glare.stageName && !/\d/.test(String(glare.stageName))
-        && SV370.sovereignOfArc("arc_the_glare", C370.npcs) === "lucifer"
-        && Object.keys(SV370.masksFrom(C370.npcs)).includes("lucifer");
-    })(), "and whose arc it is is DERIVED from the records' own `forms.arcId` — the arcs carry no id for it, so nothing had to be authored twice");
+      // ⛑ EVERY CLAUSE NAMED, because a compound check that fails tells you nothing about WHICH half broke — and
+      // this one cost a round of guessing before the detail said so.
+      _wired370 = { imported, rows: rows.length >= 9, reading: !!glare?.reading,
+        layers: glare?.reading?.layers.join(",") === "publicFace",
+        stageName: !!glare?.stageName && !/\d/.test(String(glare.stageName)),
+        sovereignOfArc: SV370.sovereignOfArc("arc_the_glare", C370.npcs) === "lucifer",
+        maskPresent: Object.keys(SV370.masksFrom(C370.npcs)).includes("lucifer") };
+      return Object.values(_wired370).every(Boolean);
+    })(), JSON.stringify(_wired370));
 
   // ⛔ 5 · NO STAGE NUMBER REACHES THE PLAYER.
   check("§370: ⛔ NO STAGE NUMBER REACHES THE PLAYER — the stage is a READING (“Hard Bargains”, “Scouring Light”), and the world tab printed “stage 2/4” beside it",
@@ -29641,6 +29652,144 @@ console.log("\n── §370 · bargains are being struck, and nobody has said wh
       const named = arcs370.every(a => (a.stages || []).every(s => !!s.name));
       return noCount && noFallback && named && arcs370.length >= 9;
     })(), "measured 2026-09-26: all 34 stages across 9 arcs carry a name, so removing the numeric fallback costs no reader anything");
+}
+
+/* ══════════ §371 · SNG-641 §2 (C14) — CONFIRM THE LINE, NEVER THE HAND ══════════ */
+// ⛑ AEVI'S PRINCIPLE, and the lore's own bar: "You detect a run of decisions that are all individually reasonable
+// and cumulatively impossible." Found ALONE, every mark has an ordinary explanation — a guild's sun-mark, old coin,
+// a lodger, a lullaby — and the player's own COLLECTING is what makes them mean something.
+//
+// ⛔ AND THE SOVEREIGN IS NEVER NAMED BY THE ENGINE TO A PLAYER. `sovereignGM` is the seal that lets the engine
+// know two marks are the same hand; it is in no line anybody reads. The name comes from somebody who knows.
+console.log("\n── §371 · a run of reasonable decisions ──");
+{
+  const SV371 = await import("../engine/sovereign.js");
+  const WT371 = await import("../engine/worldtick.js");
+  const { loadContentHeadless: lch371 } = await import("./headless_content.mjs");
+  const C371 = await lch371();
+  const marks371 = C371.sovereignMarks;
+  const bySov = (id) => (marks371?.marks || []).filter(m => m.sovereignGM === id);
+
+  check("§371: ⛑ THE MARKS ARE LOADED, AND EVERY ONE PASSES THE TEST — an id, a mark, and an ORDINARY reading, because a mark with no innocent explanation is a label saying “clue”",
+    (() => {
+      const all = marks371?.marks || [];
+      return all.length >= 18 && all.every(m => m.id && m.mark && m.ordinaryReading && m.sovereignGM)
+        && Number(marks371.thresholds?.lineConfirmed) >= 2 && !!marks371.gmLines?.lineConfirmed;
+    })(), `${(marks371?.marks || []).length} marks`);
+
+  // ⚡ THE CONSISTENCY CLAIM IS THE REWARD FOR PAYING ATTENTION, so it has to be true: no mark may belong to two
+  // Sovereigns, or a player who learned the hollow coin in one game learns something false in the next.
+  check("§371: ⚡ NO MARK BELONGS TO TWO SOVEREIGNS, and no id is used twice — the promise that a mark means the same thing in every save rests entirely on this",
+    (() => {
+      const all = marks371?.marks || [];
+      const ids = all.map(m => m.id);
+      const owners = new Map();
+      for (const m of all) owners.set(m.id, m.sovereignGM);
+      return new Set(ids).size === ids.length && new Set(owners.values()).size >= 3;
+    })());
+
+  // ⛔ COUNTED BY MARK, NOT BY SIGHTING — the defect this would have had.
+  check("§371: ⛔ ONE MARK SEEN FOUR TIMES IS NOT FOUR MARKS — a line is a RUN of different reasonable things, and counting sightings would confirm one off a single discovery repeated",
+    (() => {
+      const one = bySov("the_hollow_king")[0];
+      const ch = {};
+      for (const at of ["a", "b", "c", "d"]) SV371.seeMark(ch, one.id, { at, regionId: "valley", powerId: "p1", day: 1 });
+      const st = SV371.markStanding(ch, { marks: marks371 });
+      return st.byPower.p1?.marks === 1 && st.byPower.p1?.confirmed === false && st.byPower.p1?.pattern === false;
+    })());
+
+  check("§371: ⛔ …and THREE DIFFERENT marks on one power IS a line — two is a pattern, three is confirmation, on the authored thresholds",
+    (() => {
+      const three = bySov("the_hollow_king").slice(0, 3);
+      const ch = {};
+      SV371.seeMark(ch, three[0].id, { at: "a", powerId: "p1", regionId: "valley" });
+      const one = SV371.markStanding(ch, { marks: marks371 }).byPower.p1;
+      SV371.seeMark(ch, three[1].id, { at: "b", powerId: "p1", regionId: "valley" });
+      const two = SV371.markStanding(ch, { marks: marks371 }).byPower.p1;
+      SV371.seeMark(ch, three[2].id, { at: "c", powerId: "p1", regionId: "valley" });
+      const all = SV371.markStanding(ch, { marks: marks371 }).byPower.p1;
+      return one.pattern === false && two.pattern === true && two.confirmed === false && all.confirmed === true;
+    })());
+
+  // ⛑ THE SAME MARK, TWO REGIONS, TWO POWERS — "200 miles apart, and nobody here has heard of the other place."
+  check("§371: ⛑ THE SAME HAND, 200 MILES APART — one mark through two powers in two regions, which needs no per-power threshold at all",
+    (() => {
+      const one = bySov("lucifer")[0];
+      const ch = {};
+      SV371.seeMark(ch, one.id, { at: "here", regionId: "valley", powerId: "p1" });
+      SV371.seeMark(ch, one.id, { at: "far", regionId: "the_plateau", powerId: "p2" });
+      const st = SV371.markStanding(ch, { marks: marks371 });
+      return st.sameHand.length === 1 && st.sameHand[0].markId === one.id
+        && st.sameHand[0].regions.length === 2 && st.sameHand[0].powers.length === 2;
+    })());
+
+  // ⛔ NOTHING A PLAYER READS NAMES A SOVEREIGN. The one rule the whole feature rests on.
+  check("§371: ⛔ NOTHING THE GM MAY SAY NAMES A SOVEREIGN — a confirmed line says something BEYOND this power is being fed, and the hand stays unnamed",
+    (() => {
+      const three = bySov("the_hollow_king").slice(0, 3);
+      const ch = {};
+      for (const [i, m] of three.entries()) SV371.seeMark(ch, m.id, { at: "t" + i, regionId: "valley", powerId: "p1" });
+      const said = SV371.markLinesFor(ch, { marks: marks371, nameOfPower: () => "The Switchback Tollmen" });
+      const blob = JSON.stringify(said);
+      return said.length >= 1 && said.some(l => l.step === "lineConfirmed")
+        && /The Switchback Tollmen/.test(blob)
+        && !/hollow_king|lucifer|ninefold|sovereignGM/i.test(blob);
+    })());
+
+  // ⛔ AND THE CONFIRMATION UNLOCKS THE ARC'S MIDDLE LAYER — the reader CCODE-535 shipped with its input false.
+  check("§371: ⛔ A CONFIRMED LINE UNLOCKS `onceLineKnown` ON THE RIGHT ARC — driven through `worldArcsPublic`, which is the reader that had no writer one commit ago",
+    (() => {
+      const PW = C371.powers || {};
+      const real = Object.values(PW)[0];
+      const three = bySov("the_hollow_king").slice(0, 3);
+      const ch = { id: "c371", name: "T" };
+      for (const [i, m] of three.entries()) SV371.seeMark(ch, m.id, { at: "t" + i, regionId: "valley", powerId: real.id });
+      const pet = WT371.worldArcsPublic(C371, ch).find(r => r.arcId === "arc_the_long_petition");
+      return pet?.reading?.layers.join(",") === "publicFace,onceLineKnown"
+        && pet.publicFace.includes(real.name)
+        && !/the_hollow_king/i.test(pet.publicFace);
+    })(), "the layer names the POWER the marks were found on — never the Sovereign behind it");
+
+  // ⛔ A NAME OR NOTHING. An unresolvable power id may not be shown raw to a player.
+  check("§371: ⛔ AN UNRESOLVABLE POWER WITHHOLDS THE LAYER RATHER THAN SHOWING ITS ID — my first cut printed “the answers come through power_the_gralloch_crown” to a player",
+    (() => {
+      const three = bySov("the_hollow_king").slice(0, 3);
+      const ch = { id: "d371", name: "U" };
+      for (const [i, m] of three.entries()) SV371.seeMark(ch, m.id, { at: "t" + i, regionId: "valley", powerId: "power_not_real" });
+      const pet = WT371.worldArcsPublic(C371, ch).find(r => r.arcId === "arc_the_long_petition");
+      return pet?.reading?.layers.join(",") === "publicFace" && !/power_not_real/.test(JSON.stringify(pet));
+    })(), "`renderNames` has held that rule since SNG-111: a miss is a reason to say less, not to show the machine talking");
+
+  // ⛑ PLACEMENT: at most one, belonging here, never one already seen HERE.
+  check("§371: ⛑ ONE MARK MAY BE HERE, AND NEVER ONE ALREADY SEEN IN THIS PLACE — seeing the same mark SOMEWHERE ELSE is exactly the discovery, so it is per place and not per mark",
+    (() => {
+      const one = (marks371.marks || []).find(m => (m.nearIds || []).length);
+      const at = one.nearIds[0];
+      const ch = {};
+      const first = SV371.markForHere(ch, { at, marks: marks371, rng: () => 0 });
+      if (!first) return false;
+      SV371.seeMark(ch, first.id, { at });
+      const again = SV371.markForHere(ch, { at, marks: marks371, rng: () => 0 });
+      const elsewhere = SV371.markForHere(ch, { at: "somewhere_else_entirely", marks: marks371, rng: () => 0 });
+      return first.id && first.ordinaryReading && (again === null || again.id !== first.id) && elsewhere === null;
+    })(), "and a place no mark belongs to gets none — null is the common answer and has to stay cheap");
+
+  check("§371: ⛔ …and the SEAL is handed over separately from the mark, so a caller cannot put it in front of a player by accident",
+    (() => {
+      const one = (marks371.marks || []).find(m => (m.nearIds || []).length);
+      const pick = SV371.markForHere({}, { at: one.nearIds[0], marks: marks371, rng: () => 0 });
+      return !!pick && !!pick.sealed?.sovereignGM && pick.sovereignGM === undefined;
+    })());
+
+  // ⛔ THE FOURTH AND FIFTH DOORS: registered in the registry AND read by gm.js.
+  check("§371: ⛔ THE MARK REACHES THE GM — a row in the registry is the third door; gm.js READING it is the fourth, and the wiring audit caught exactly that gap",
+    (() => {
+      const reg = rd("engine/gm_registry.js"), gm = rd("engine/gm.js");
+      return /key: "sovereignMark"/.test(reg) && /markForHere\(env\.character/.test(reg)
+        && /sovereignMark,/.test(gm) && /if \(sovereignMark\) world\.push/.test(gm)
+        // and the block tells the narrator the one thing the feature cannot survive without
+        && /NEVER name who is behind it/.test(gm) && /OFFER IT AS THE ORDINARY THING/.test(reg);
+    })(), "the temptation this has to survive is a narrator who joins the dots for the player");
 }
 
 /* ══════════ REPORT ══════════ */

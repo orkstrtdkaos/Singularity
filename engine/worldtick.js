@@ -45,7 +45,7 @@ import { protectsOffscreen, nemesisIdOf } from "./nemesis.js";   // ⛔ SNG-648 
 import { travelerCard, cardChanged, mergeTravelerCard, ledgerMonthsSince, whereOf, meetKey } from "./travelers.js";   // SNG-595: a fellow traveler is a person the world has a record of
 import { stampEventChange, mergeEventStages, mergeQuestOutcomes, actorOf, questKey } from "./worldevents.js";   // CCODE-354: a crisis another traveler answered reads as answered
 import { bandDialsOf } from "./melee.js";                                    // SNG-634 C1: a raiding power bleeds on the dials a band does
-import { arcReading, knowsSovereign, masksFrom, sovereignOfArc } from "./sovereign.js";   // ⛔ SNG-642 §2.3: which of an arc's three readings this character has unlocked, and the mask over the name
+import { arcReading, knowsSovereign, masksFrom, sovereignOfArc, confirmedLines } from "./sovereign.js";   // ⛔ SNG-642 §2.3: which of an arc's three readings this character has unlocked, and the mask over the name
 import { raiderPowerAt, dangerLiftAt, powerPass, noticePass } from "./powers.js";  // SNG-634 C1/C2/C4/C7: whose raid, whose ground, what they do, who has noticed you
 import { worthOf } from "./purse.js";                                              // ⛔ SNG-634 C7 `wealth`: a crown notices a rich stranger
 import { INVITES_PATH, mergeInvitation, answerInto, applyAnswers } from "./invitations.js";   // CCODE-360: an invitation carried by someone you both know
@@ -147,9 +147,22 @@ export function worldArcsPublic(content, character) {
     const reading = (() => {
       try {
         const npcs = content?.npcs || {};                       // ⚠️ `npcs` is not a name in this function
+        // ⛔ SNG-641 §2 (C14) — AND THE CONFIRMED LINE UNLOCKS THE MIDDLE LAYER. CCODE-535 shipped this reader
+        // with `lineKnown` handed in as false because the confirmation did not exist yet; it does now, and the
+        // line names the POWER the marks were found on — never the Sovereign.
+        const line = confirmedLines(character, { marks: content?.sovereignMarks || null, npcs })
+          .find(l => l.arcId === arc.id) || null;
+        // ⛔ A NAME OR NOTHING — NEVER THE ID. My first cut fell back to `line.powerId` and put
+        // "Some of the answers come through power_the_gralloch_crown" in front of a player. `arcReading` already
+        // withholds this layer when it has no power to name, which is the right answer: an unresolvable id is a
+        // reason to say less, not to show the machine talking (`renderNames` has held that rule since SNG-111).
+        const powerName = line
+          ? (Object.values(content?.powers || {}).find(p => p?.id === line.powerId)?.name || null)
+          : null;
         return arcReading(arc, { stage: stageNum, character,
           // ⛔ WHOSE ARC, DERIVED from the records' own `forms.arcId` — the arcs carry no id for it.
           named: knowsSovereign(character, sovereignOfArc(arc.id, npcs)),
+          lineKnown: !!line, power: powerName,
           masks: masksFrom(npcs) });
       } catch { return null; }
     })();

@@ -188,3 +188,141 @@ export function arcReading(arc, { stage = null, lineKnown = false, named = false
     gmOnly: { sovereignGM: arc.sovereignGM || null, tendency: arc.tendency || null,
       pressureOnAdvance: def.pressureOnAdvance || null } };
 }
+
+/* ═════ SNG-641 §2 · C14 — THE MARKS: CONFIRM THE LINE, NEVER THE HAND ═════
+ *
+ * ⛑ AEVI'S PRINCIPLE, and the lore's bar: *"You detect a run of decisions that are all individually reasonable
+ * and cumulatively impossible."* So found ALONE, every mark has an ordinary explanation — a guild's sun-mark, old
+ * coin, a lodger, a lullaby. The player's own COLLECTING is what makes them mean something.
+ *
+ * ⛔ AND THE SOVEREIGN IS NEVER NAMED HERE. `sovereignGM` is the seal: it is what lets the engine know two marks
+ * are the same hand, and it is never in a line a player reads. The name comes only from somebody who knows — an
+ * anti-Sovereign (R41c), a Precursor, or the thing itself when it arrives (`learnSovereign`).
+ *
+ * ⚠️ AND IT CLOSES A READER OPENED ONE COMMIT EARLIER: `arcReading`'s `onceLineKnown` had its input handed in as
+ * `false`, because the confirmation lives here.
+ */
+
+/** What this save has seen, as `{ markId: [{ at, regionId, powerId, day }, …] }`. PURE. */
+export function marksSeenOf(character) {
+  const m = character?.marksSeen;
+  return (m && typeof m === "object" && !Array.isArray(m)) ? m : {};
+}
+
+/** ⛑ RECORDING ONE. Returns the sighting, or null when this save has already seen this mark in this place —
+ *  "never one already seen" is Aevi's rule, and it is per PLACE, because seeing the same mark somewhere else is
+ *  exactly the discovery. MUTATES. */
+export function seeMark(character, markId, { at = null, regionId = null, powerId = null, day = null } = {}) {
+  const id = String(markId || "");
+  if (!character || !id) return null;
+  if (!character.marksSeen || typeof character.marksSeen !== "object" || Array.isArray(character.marksSeen)) character.marksSeen = {};
+  const list = Array.isArray(character.marksSeen[id]) ? character.marksSeen[id] : (character.marksSeen[id] = []);
+  if (list.some(s => s && String(s.at || "") === String(at || ""))) return null;
+  const sighting = { at: at || null, regionId: regionId || null, powerId: powerId || null, day: Number(day) || null };
+  list.push(sighting);
+  return sighting;
+}
+
+/** ⛔ WHAT THE COLLECTING ADDS UP TO, per power, on the authored thresholds.
+ *
+ *  ⚠️ COUNTED BY MARK, NOT BY SIGHTING. Seeing the hollow coin in four towns on one power's road is ONE mark
+ *  four times over — a pattern about that mark, not four marks about that power — and counting sightings would
+ *  confirm a line off a single discovery repeated. The lore's bar is a RUN of different reasonable things.
+ *
+ *  ⛑ `sameHand` is the other axis: ONE mark seen through two different powers in two different regions, which is
+ *  the "200 miles apart, and nobody here has heard of the other place" reading. It needs no threshold per power.
+ *
+ *  Returns `{ byPower: { id: { marks, confirmed, pattern } }, sameHand: [{ markId, regions, powers }] }`. PURE. */
+export function markStanding(character, { marks = null, thresholds = null } = {}) {
+  const seen = marksSeenOf(character);
+  const all = Array.isArray(marks) ? marks : (Array.isArray(marks?.marks) ? marks.marks : []);
+  const byId = new Map(all.filter(m => m && m.id).map(m => [String(m.id), m]));
+  const th = thresholds || marks?.thresholds || {};
+  const patternAt = Math.max(1, Number(th.pattern) || 2);
+  const confirmAt = Math.max(patternAt, Number(th.lineConfirmed) || 3);
+  const regionsAt = Math.max(2, Number(th.sameHandRegions) || 2);
+  const byPower = {};
+  const sameHand = [];
+  for (const [markId, sightings] of Object.entries(seen)) {
+    if (!byId.has(markId) || !Array.isArray(sightings)) continue;
+    const powers = new Set(), regions = new Set();
+    for (const s of sightings) {
+      if (s?.powerId) {
+        powers.add(String(s.powerId));
+        const p = (byPower[String(s.powerId)] = byPower[String(s.powerId)] || { marks: new Set(), regions: new Set() });
+        p.marks.add(markId);
+        if (s.regionId) p.regions.add(String(s.regionId));
+      }
+      if (s?.regionId) regions.add(String(s.regionId));
+    }
+    if (powers.size >= 2 && regions.size >= regionsAt) sameHand.push({ markId, regions: [...regions], powers: [...powers] });
+  }
+  const out = {};
+  for (const [id, p] of Object.entries(byPower)) {
+    const n = p.marks.size;
+    out[id] = { marks: n, regions: [...p.regions], seen: [...p.marks],
+      pattern: n >= patternAt, confirmed: n >= confirmAt };
+  }
+  return { byPower: out, sameHand, thresholds: { pattern: patternAt, lineConfirmed: confirmAt, sameHandRegions: regionsAt } };
+}
+
+/** ⛔ WHICH POWERS THIS SAVE HAS CONFIRMED AS LINES, and to WHAT — the id a caller needs to unlock `onceLineKnown`
+ *  on the right arc. ⛑ The Sovereign is named to the ENGINE and never to the player: this returns an arc id, and
+ *  it is `arcReading` that decides whether the save may read the naming layer at all. PURE. */
+export function confirmedLines(character, { marks = null, thresholds = null, npcs = {} } = {}) {
+  const st = markStanding(character, { marks, thresholds });
+  const all = Array.isArray(marks) ? marks : (Array.isArray(marks?.marks) ? marks.marks : []);
+  const byId = new Map(all.filter(m => m && m.id).map(m => [String(m.id), m]));
+  const out = [];
+  for (const [powerId, row] of Object.entries(st.byPower)) {
+    if (!row.confirmed) continue;
+    // whose line is it? the marks seen on it agree, because no mark belongs to two Sovereigns
+    const who = [...new Set(row.seen.map(id => byId.get(id)?.sovereignGM).filter(Boolean))];
+    for (const sovereignId of who) {
+      const rec = npcs?.[sovereignId] || null;
+      out.push({ powerId, sovereignId, arcId: rec?.forms?.arcId || null, marks: row.marks });
+    }
+  }
+  return out;
+}
+
+/** ⛑ WHAT THE GM MAY SAY, and nothing more. One line per step, from the authored `gmLines`, with `{power}` filled.
+ *  ⛔ NOTHING HERE NAMES A SOVEREIGN. The confirmed line says something beyond this power is being fed — that is
+ *  the lore's *"Confirm an AGENT"*, and the hand stays unnamed. PURE. */
+export function markLinesFor(character, { marks = null, thresholds = null, nameOfPower = null } = {}) {
+  const st = markStanding(character, { marks, thresholds });
+  const lines = (marks?.gmLines && typeof marks.gmLines === "object") ? marks.gmLines : {};
+  const name = (id) => (typeof nameOfPower === "function" ? nameOfPower(id) : null) || String(id).replace(/^power_/, "").replace(/_/g, " ");
+  const out = [];
+  for (const [powerId, row] of Object.entries(st.byPower)) {
+    const key = row.confirmed ? "lineConfirmed" : row.pattern ? "pattern" : null;
+    if (!key || !lines[key]) continue;
+    out.push({ powerId, step: key, text: String(lines[key]).replace(/\{power\}/g, name(powerId)) });
+  }
+  for (const s of st.sameHand) {
+    if (lines.sameHand) out.push({ markId: s.markId, step: "sameHand", text: String(lines.sameHand), regions: s.regions });
+  }
+  return out;
+}
+
+/** ⛔ WHICH MARK MAY BE PLACED HERE, and at most one. A mark belongs where its own `nearIds` put it — a place, a
+ *  power, or a region it names — and never one this save has already seen IN THIS PLACE.
+ *  ⚠️ `rng` is injected so a scene is reproducible; a null return is the common answer and must stay cheap. PURE
+ *  apart from nothing — it chooses, it does not record. `seeMark` records. */
+export function markForHere(character, { at = null, regionId = null, powers = [], marks = null, rng = Math.random } = {}) {
+  const all = Array.isArray(marks) ? marks : (Array.isArray(marks?.marks) ? marks.marks : []);
+  if (!all.length || !at) return null;
+  const here = new Set([String(at), ...(regionId ? [String(regionId)] : []), ...powers.map(p => String(p?.id || p))]);
+  const seen = marksSeenOf(character);
+  const fits = all.filter(m => {
+    if (!m?.id || !Array.isArray(m.nearIds)) return false;
+    if (!m.nearIds.some(x => here.has(String(x)))) return false;
+    return !(Array.isArray(seen[m.id]) && seen[m.id].some(s => String(s?.at || "") === String(at)));
+  });
+  if (!fits.length) return null;
+  const pick = fits[Math.min(fits.length - 1, Math.floor((Number(rng()) || 0) * fits.length))];
+  // ⛑ WHOSE LINE, for the engine's bookkeeping only. A caller that puts `sovereignGM` in front of a player has
+  // broken the one rule this whole feature rests on, so the mark is handed over with the SEAL kept separate.
+  return { id: pick.id, kind: pick.kind || null, mark: pick.mark || null, ordinaryReading: pick.ordinaryReading || null,
+    at, regionId: regionId || null, sealed: { sovereignGM: pick.sovereignGM || null } };
+}

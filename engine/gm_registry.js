@@ -91,6 +91,8 @@ import { powersHoldingForGM } from "./powers.js";   // SNG-634 C5: who holds the
 import { journeyForGM } from "./journeyplan.js";   // CCODE-387: a journey agreed and not yet walked
 import { journeyUnderwayForGM } from "./journeyroad.js";   // CCODE-390: a journey on the road, stopped part-way
 import { encounterReceiptForGM } from "./encounters.js";
+import { markForHere, markLinesFor } from "./sovereign.js";   // ⛔ SNG-641 §2: one mark, its ordinary reading, and what the collecting supports
+import { powersReaching } from "./powers.js";                 // whose ground this is, so a mark can belong to a line that reaches here
 import { waygateBlockForGM, waygateTruthForGM } from "./waygate.js";
 import { readAloudDirective } from "./narration_voice.js";
 import { milestoneEffects } from "./ladder.js";
@@ -116,6 +118,32 @@ export const GM_CONTEXT = [
   { key: "groundDetail", builder: "places.groundForGM (R28)", carries: ["the authored ground of this place — what stands where"],
     reachedBy: "standing in one of the 18 places with an authored local layout", spec: "§9 / R28", views: ALL,
     build: (env) => groundForGM(env.location?.id, env.rules?.localLayouts) },
+  // ⛔ SNG-641 §2 (C14) — A MARK, AND AT MOST ONE. Aevi's principle: CONFIRM THE LINE, NEVER THE HAND. Found
+  // alone, every mark has an ordinary explanation, and the player's own collecting is what makes them mean
+  // anything — so the block hands over the mark AND its ordinary reading, and the GM is told to offer it as the
+  // ordinary thing. ⛑ THE SEAL NEVER ENTERS THE PROMPT: `markForHere` returns `sovereignGM` under a `sealed`
+  // key and this block drops it, because the Sovereign's name may come only from somebody who knows.
+  // ⚠️ Nothing is RECORDED here. The GM being told about a mark is not the character having seen one; `seeMark`
+  // is the writer, and it runs when the beat that shows it comes back.
+  { key: "sovereignMark", builder: "sovereign.markForHere + markLinesFor", carries: ["one mark that may be here, with its ordinary reading", "what the collecting so far lets the GM say"],
+    reachedBy: "standing somewhere a supply line's marks belong, with sovereign_marks loaded", spec: "SNG-641 §2", views: ALL,
+    build: (env) => {
+      const marks = env.CONTENT.sovereignMarks;
+      if (!marks) return "";
+      const here = env.location?.id || null;
+      if (!here) return "";
+      const powers = (() => { try { return powersReaching(here, { content: env.CONTENT, character: env.character }); } catch { return []; } })();
+      const pick = markForHere(env.character, { at: here, regionId: env.location?.regionId || null, powers, marks });
+      const said = markLinesFor(env.character, { marks,
+        nameOfPower: (id) => Object.values(env.CONTENT.powers || {}).find(p => p?.id === id)?.name || null });
+      const out = [];
+      if (pick) out.push(`A MARK IS HERE, IF THE SCENE HAS A PLACE FOR IT: ${pick.mark}. The ordinary reading of it is: ${pick.ordinaryReading}.`
+        + ` ⛔ OFFER IT AS THE ORDINARY THING. Do not hint that it means more, do not connect it to anything, and do NOT say whose it is — you do not know.`
+        + ` If the scene has no natural place for it, leave it out entirely.`);
+      // ⛑ A name or nothing: a line whose power cannot be named is withheld rather than shown as an id.
+      for (const l of said) if (l.text && !/\bpower_/.test(l.text)) out.push(`WHAT THE CHARACTER'S OWN COLLECTING NOW SUPPORTS: ${l.text}`);
+      return out.join("\n");
+    } },
   { key: "lore", builder: "state.loreForLocation", carries: ["local lore"],
     reachedBy: "always", spec: "§9", views: ALL,
     build: (env) => loreForLocation(env.location, env.CONTENT.lore) },

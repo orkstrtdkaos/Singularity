@@ -14287,7 +14287,8 @@ await (async () => {
     const needed = ["perPoint", "attentionByTier", "personalShare", "crisisPull", "directEngagementRate",
                     "indirectPushMult", "casualtyRate", "casualtyReachByGap", "strikeRate",
                     "guardInterceptChance", "mintRate", "mintCap", "vacancyStreakForMint",
-                    "retrievalRate", "retrievalOddsByDepth", "retrievalCooldownDays"];
+                    // ✅ SNG-655: `retrievalOddsByDepth` retired — one table, in resolution.json · death.retrieval.
+                    "retrievalRate", "retrievalCooldownDays"];
     return needed.every(k => a[k] !== undefined) && !!doc.tierLadder?.promotion?.epic;
   })());
   check("272/275: the tier table carries BOTH names for the same rung (one name drops 28 figures)", (() => {

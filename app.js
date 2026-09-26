@@ -62,7 +62,7 @@ import { battleSkillsForCharacter, declFromSelection, resolveDeclRank, guardBloc
 import { bearersOf, giveItemTo, takeItemFrom } from "./engine/npcs.js";   // R45c: a person can hold a thing
 import { incapacitationOutcome, playerDeathState, deathStopsPlay, deathLine, wireDeathModel } from "./engine/incapacitation.js";
 import * as DeathModel from "./engine/death.js";
-import { enterDeathState } from "./engine/death.js";
+import { enterDeathState, rollRetrieval, pledgeFrom } from "./engine/death.js";
 // ⚠️ ONE OWNER OF "HOW DEEP IS THIS DEATH". `incapacitation.js` asks `death.js` rather than keeping a
 // second copy of the clock — the injury model, the tier ladder and the arc-stage lookup have each been
 // duplicated in this codebase, and each time the copies drifted before anyone noticed.
@@ -180,7 +180,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.8.0";
+const APP_VERSION = "2.8.1";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -9489,11 +9489,26 @@ function applyTurn(turn, resolution, playerWords = null) {
         const gate = canReach(ent, { rank: owned?.level || 1, intensity: String(op.intensity || "standard"),
           currentDay: day, rules: CONTENT.rules, bond: Number(ent?.relationship) || 0 });
         if (!gate.ok) { character._deathNotes = [...(character._deathNotes || []).slice(-2), gate.why]; continue; }
-        const won = String(op.outcome || "") === "return";
+        // ⛔ SNG-655 · AEVI'S DEFECT 1 — THE ENGINE ROLLS IT. This read `won = String(op.outcome) === "return"`,
+        // so the GM decided whether someone came back out of the dark while `rollRetrieval` — built the same
+        // day, with Erik's ruling behind it — had no caller anywhere, and `retrievalOdds` was shown on the
+        // screen beside a number nothing ever rolled. ⚠️ THE SAME SHAPE AS THE §8a WRITER: a producer proved
+        // and no reader reached. A percentage a player is shown must be the percentage that is paid.
+        // ⛑ AND THE PLEDGE IS READ HERE because only the caller knows whose promise to look for (SNG-653).
+        const roll = rollRetrieval(ent, { rank: owned?.level || 1, intensity: String(op.intensity || "standard"),
+          currentDay: day, rules: CONTENT.rules, bond: Number(ent?.relationship) || 0,
+          pledged: !!pledgeFrom(character, who), rng: Math.random });
+        // ⚠️ AUTHOR MODE KEEPS ITS EXPLICIT OUTCOME — that is what author mode is for, and Aevi asked for it
+        // by name. Everywhere else `op.outcome` is gone from the schema and the GM narrates what it is handed.
+        const forced = character._authorMode && (op.outcome === "return" || op.outcome === "fail") ? String(op.outcome) : null;
+        if (!forced && roll.pct === 0) { character._deathNotes = [...(character._deathNotes || []).slice(-2), roll.why || "that reach finds nothing"]; continue; }
+        const won = forced ? forced === "return" : roll.outcome === "return";
         const res = resolveRetrieval(ent, won ? "return" : "fail", { currentDay: day, changed: op.changed || null });
+        // ⛑ THE ROLL IS IN THE NOTE, because a death is the one event a player will want to see the maths of.
+        const said = forced ? "" : ` (${roll.rolled} against ${roll.pct}%)`;
         character._deathNotes = [...(character._deathNotes || []).slice(-2),
-          res.sealed ? `${ent.name || who} is sealed — that reach cost them everything`
-            : won ? `${ent.name || who} comes back` : `${ent.name || who} sinks further`];
+          res.sealed ? `${ent.name || who} is sealed — that reach cost them everything${said}`
+            : won ? `${ent.name || who} comes back${said}` : `${ent.name || who} sinks further${said}`];
       }
     }
   });
@@ -14950,12 +14965,17 @@ function renderHoldingsTab(manageId = null) {
           // invented, and rules are Erik's. This says the rule that exists, in the place the number would go.
           const wDanger = Number(CONTENT.locations?.[h.locationId]?.dangerLevel) || 0;
           const wr = (() => { try { return watchReadout(character, h, { cfg: sCfg, people: character.npcRegistry || {} }); } catch { return null; } })();
-          // ✅ CCODE-504 (ERIK RULED THE ROLL) — and the % shown is the % `resolveRaid` rolls, from the one
-          // function. The terms come with it because a bare percentage is a number to take on faith.
-          const wo = (() => { try { return watchOdds(character, h, { cfg: sCfg, rules: CONTENT.rules, dangerLevel: wDanger }); } catch { return null; } })();
+          // ✅ SNG-655 (ERIK: "i agree with a watch vs stealth contest") — the % shown is the % `resolveRaid`
+          // rolls, from the one function, and BOTH SIDES come with it. A bare percentage is a number to take on
+          // faith; a contest the player can read is one they can change.
+          const wPeople = character.npcRegistry || {};
+          const wo = (() => { try { return watchOdds(character, h, { cfg: sCfg, rules: CONTENT.rules, dangerLevel: wDanger, people: wPeople }); } catch { return null; } })();
+          // ⛑ AND THE THEFT NUMBER BESIDE IT, which is what Aevi's §3 asked the readout to label. The same
+          // people coming quietly for one thing are harder to see than the same people coming for everything.
+          const woT = (() => { try { return watchOdds(character, h, { cfg: sCfg, rules: CONTENT.rules, dangerLevel: wDanger, people: wPeople, theft: true }); } catch { return null; } })();
           const watch = wr ? `<div class="hs-watch"><span class="hs-lbl">The watch</span>
             <div class="${wr.seen ? "hs-seen" : "hs-unseen"}">${wr.seen
-              ? `◉ A raid here is <strong>seen coming, and met</strong>.`
+              ? `◉ A raid here is <strong>seen ${wo && wo.pct ? `${wo.pct}%` : "some"} of the time</strong> — and met when it is.`
               : `○ Nobody stands watch — a raid here comes <strong>unseen</strong> and simply takes its share.`}</div>
             ${wr.named.length || wr.fromFeatures.length || wr.hands ? `<div class="hint">${[
                 wr.named.length ? `on watch: ${wr.named.map(n => esc(n.name)).join(", ")}` : "",
@@ -14963,9 +14983,10 @@ function renderHoldingsTab(manageId = null) {
                 wr.fromFeatures.length ? `${wr.fromFeatures.map(f => esc(f.label)).join(", ")}` : "",
               ].filter(Boolean).join(" · ")}</div>` : ""}
             ${wr.defenders.length ? `<div class="hint">what they meet them with: ${wr.defenders.map(d => `${esc(d.what)}${(d.does || []).includes("MARTIAL") ? " <strong>(fights)</strong>" : ""}`).join(", ")}${wr.stone ? ` · and ${wr.stone} of stone` : ""}</div>` : wr.stone ? `<div class="hint">${wr.stone} of stone, and nobody behind it</div>` : ""}
-            ${wo && wo.pct > 0 ? `<div class="hs-odds"><strong>${wo.pct}%</strong> to see them coming${wo.clampedFrom != null ? ` <span class="hint">(from ${wo.clampedFrom}, capped)</span>` : ""}
-              <span class="hint">${wo.terms.map(x => `${esc(x.label)} ${x.value >= 0 ? "+" : ""}${x.value}`).join(" · ")}</span>
-              <span class="hint">${wo.nextBody ? `one more body: <strong>+${wo.nextBody}%</strong>` : "another body adds nothing to seeing them — the wall is full; they would add to the fight"}</span></div>` : ""}
+            ${wo && wo.pct > 0 ? `<div class="hs-odds"><strong>${wo.pct}%</strong> to see a raid coming${woT && woT.pct !== wo.pct ? ` · <strong>${woT.pct}%</strong> to see a theft` : ""}<span class="hint"> — against a same-strength party</span>${wo.clampedFrom != null ? ` <span class="hint">(from ${wo.clampedFrom}, held at the edge)</span>` : ""}
+              <span class="hint">looking, ${wo.watch}: ${wo.terms.map(x => `${esc(x.label)} ${x.value >= 0 ? "+" : ""}${x.value}`).join(" · ")}</span>
+              <span class="hint">coming, ${wo.stealth}: ${(wo.stealthTerms || []).map(x => `${esc(x.label)} +${x.value}`).join(" · ") || "—"}</span>
+              <span class="hint">${wo.nextBody ? `one more hand here: <strong>+${wo.nextBody}%</strong>` : "another hand would barely move this — they would add to the fight instead"}</span></div>` : ""}
             <div class="hint">${esc(wr.marginal)}</div></div>` : "";
           // ⛔ SNG-652 §8 — ATTACK & DEFENSE, the other three cards. The watch above is card 2.
           // ⛑ EVERY NUMBER READ: `featureDoes` for what a defensive feature gives, `levelEffectOf`/`raiseQuote`

@@ -55,7 +55,7 @@ import { FATES_PATH, WOUND_DAYS, STOP_DAYS, fatesOfWorld, foldFates, adoptFates,
 import { giverRegistryId } from "./quests.js";   // ⛔ CCODE-463: a giver resolved by the SAME ladder that decides whether to credit them
 import { HOLDS_PATH, holdCardsOf, holdCardsChanged, mergeHoldCards } from "./sharedholds.js";   // CCODE-383: a hold nearby is known
 import { TRADES_PATH, settleOrders, refundOrders, mergeOrders } from "./holdtrade.js";   // CCODE-388: trading with another player's hold
-import { enterDeathState, deepenDeaths, deathDepth, isRetrievable, resolveRetrieval } from "./death.js"; // SNG-209: a killed figure ENTERS the death state; the clock sinks untended deaths toward sealed
+import { enterDeathState, deepenDeaths, deathDepth, isRetrievable, resolveRetrieval, rollRetrieval } from "./death.js"; // SNG-209: a killed figure ENTERS the death state; the clock sinks untended deaths toward sealed
 import { absoluteWorldDay, worldDayAt, worldCount, readClock, positionedPlace } from "./worldtime.js";
 import { voyageTick, whereaboutsOf } from "./carriage.js";   // ⛔ B6b: a voyage arrives on world time, and where she is now is where she can be raided
 import { advanceAssignment, progressAgainst, problemCost } from "./assignments.js"; // SNG-191 §4: the world advances delegated work
@@ -3068,7 +3068,11 @@ export function attemptRetrievals(ws, roster, living, worldDay, rules = {}, cfg 
   const wanted = [];
   const retrievers = new Set();
   const rate = Number.isFinite(cfg.retrievalRate) ? cfg.retrievalRate : 0.25;
-  const byDepth = cfg.retrievalOddsByDepth || { 0: 0.7, 1: 0.45, 2: 0.2, 3: 0 };   // the threshold → the sealed
+  // ⛔ SNG-655 · AEVI'S DEFECT 2 — `retrievalOddsByDepth` IS RETIRED. This line held a SECOND derivation of the
+  // question CCODE-504 had just answered once: `{0: .7, 1: .45, 2: .2}` + 0.05×tier, in fractions, beside
+  // `rules.death.retrieval.byDepth`'s `[70, 45, 20]` in points. Two tables for one rule drift the week one of
+  // them is tuned, and the tuner has no way to know the other exists. `rollRetrieval` is the one answer now,
+  // and the tier is a named term in it (`perTier`).
   for (const [id, st] of Object.entries(ws.epicStatus || {})) {
     if (st?.status !== "dead" || !isRetrievable(st, worldDay, rules)) continue;
     const onCooldown = ws.retrievalTried?.[id] && worldDay - ws.retrievalTried[id] < (cfg.retrievalCooldownDays ?? 30);
@@ -3094,12 +3098,18 @@ export function attemptRetrievals(ws, roster, living, worldDay, rules = {}, cfg 
     retrievers.add(who.id);
     (ws.retrievalTried ||= {})[id] = worldDay;
     const depth = deathDepth(st, worldDay, rules);
-    const odds = Math.min(0.95, (byDepth[depth] ?? 0) + 0.05 * tierRank(tierOf(ws, who)));
-    const won = rng() < odds;
+    // ⚠️ THE REACH IS STATED, NOT DERIVED FROM A RANK THAT DOES NOT EXIST. A figure has a TIER and no craft
+    // level, so mapping one onto the other would be inventing a rule nobody has ruled — and passing rank 1
+    // would have silently closed the near dark and the deep dark to every NPC retrieval in the game, which is
+    // the kind of change that looks like a bug for a month. It states the reach the world tick has always had:
+    // whoever comes gets as deep as they need, and the ODDS are what the tier moves.
+    const roll = rollRetrieval(st, { reach: depth, tier: tierRank(tierOf(ws, who)), currentDay: worldDay, rules, rng });
+    if (!roll.pct) continue;   // a refusal to be brought back is honoured here too, and costs them nothing
+    const won = roll.outcome === "return";
     const res = resolveRetrieval(st, won ? "return" : "fail", { currentDay: worldDay, changed: won ? "came back changed" : null });
     if (won) career(ws, id).retrieved++;   // SNG-288: THE RETURNED — ties the death ladder to the tier ladder
-    attempts.push({ deadId: id, byId: who.id, byName: who.name, depth, odds: Math.round(odds * 100) / 100,
-      outcome: res.ok ? res.outcome : "refused", sealed: !!st.deathState?.sealed });
+    attempts.push({ deadId: id, byId: who.id, byName: who.name, depth, odds: roll.pct / 100, pct: roll.pct, rolled: roll.rolled,
+      terms: roll.terms, outcome: res.ok ? res.outcome : "refused", sealed: !!st.deathState?.sealed });
   }
   ws.retrievalWanted = wanted;
   return { attempts, retrievers, wanted };

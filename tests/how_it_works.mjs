@@ -7593,20 +7593,47 @@ console.log("\n── §76g · the two rolls, and what each kept ──");
   /* ---- 2 · SEEING THEM COMING ---- */
   const hold6 = (over = {}) => ({ id: "h6g", kind: "post", condition: "holding", features: [], garrison: [], improvements: [], store: { raw_material: 10 }, ...over });
   const wo = (h, danger) => H6g.watchOdds({ holdings: [h], npcRegistry: {} }, h, { cfg: cfg6g, rules: rules6, dangerLevel: danger });
+  const D6g = await import("../engine/death.js");
   // ⚠️ THE BOTTOM OF THE OLD RULE SURVIVES: an empty wall is a flat zero, never a base chance.
   check("§76g: ⛔ nobody on watch is a flat ZERO — an empty wall does not get lucky",
     wo(hold6(), 3).pct === 0 && /nobody stands watch/.test(String(wo(hold6(), 3).why)));
-  const one6 = wo(hold6({ garrison: ["a"] }), 3), two6 = wo(hold6({ garrison: ["a", "b"] }), 3);
-  check("§76g: …and every body counts, up to the cap — which is what makes \"add one more: +N%\" honest",
-    two6.pct > one6.pct && two6.pct - one6.pct === rules6.death.watch.perWatcher
-    && one6.nextBody === rules6.death.watch.perWatcher, JSON.stringify({ one: one6.pct, two: two6.pct }));
-  const capN = rules6.death.watch.watcherCap;
-  const full = wo(hold6({ garrison: Array.from({ length: capN }, (_, i) => `g${i}`) }), 3);
-  const over = wo(hold6({ garrison: Array.from({ length: capN + 3 }, (_, i) => `g${i}`) }), 3);
-  check("§76g: ⚠️ …and PAST the cap another body is honestly worth NOTHING to seeing them",
-    full.pct === over.pct && over.nextBody === 0 && /add nothing to seeing them/.test(over.terms.map(x => x.label).join(" ")),
-    JSON.stringify({ full: full.pct, over: over.pct, nextBody: over.nextBody }));
-  check("§76g: …a thing that watches counts too, and rougher ground counts against",
+  // ✅ SNG-655 · REWRITTEN, NOT JOINED. These two checks asserted `watcherCap` and `perWatcher` — the additive
+  // stack Erik replaced with a contest a week later. A cap is meaningless in a ratio, so the claim the cap
+  // existed to make ("another body is honestly worth nothing") is now made by the shape itself, and that is
+  // what these assert instead. ⚠️ A retired claim left green is a gate arguing for the old rule.
+  // ⛔ WHO STANDS HERE HAS TO MATTER — AND ASKED THE WAY A REAL RECORD CAN ANSWER IT.
+  // ⚠️ MY FIRST CUT OF THIS CHECK HANDED ITSELF `{ level: 30 }` and passed green while 0 of 39 records on the
+  // live save carry `level` at all — so the mechanic it was gating reached NOBODY and the gate could not say so.
+  // ⛑ A FIXTURE THAT INVENTS THE FIELD IT TESTS FOR PROVES THE ARITHMETIC AND NOTHING ELSE. So this drives the
+  // shapes the saves actually hold: a warden, and someone whose trade is not watching, with no level anywhere.
+  check("§76g: ⛔ SNG-655 — A WARDEN IS NOT THE SAME BODY AS A FILTRATION ENGINEER, read off the record they HAVE",
+    (() => {
+      // these two are the shape of a real registry record — role + skillsObserved, and no `level` field at all
+      const warden = { id: "w", name: "Siol", role: "Traveler and warden of the Pale March",
+        skillsObserved: ["Moving unseen across the moorland", "Reading the weight and purpose of a structure at a glance"] };
+      const engineer = { id: "e", name: "Calvar", role: "Pre-Transition filtration engineer, traveling south with the party",
+        skillsObserved: ["precise verbal sequencing of valve repair under first-meeting pressure"] };
+      const odds = (p) => H6g.watchOdds({ npcRegistry: { [p.id]: p }, bands: [] }, hold6({ garrison: [p.id] }),
+        { cfg: cfg6g, rules: rules6, dangerLevel: 3, people: { [p.id]: p } });
+      const W = odds(warden), E = odds(engineer);
+      // and a level, WHERE ONE EXISTS, still multiplies — so the dial is ready for the day people carry one
+      const levelled = { ...engineer, level: 10 };
+      const L = H6g.watchOdds({ npcRegistry: { e: levelled }, bands: [] }, hold6({ garrison: ["e"] }),
+        { cfg: cfg6g, rules: rules6, dangerLevel: 3, people: { e: levelled } });
+      return W.watch > E.watch && W.pct > E.pct
+        && W.captain && W.captain.sees === true && E.captain && E.captain.sees === false
+        && L.watch > E.watch
+        && !("level" in warden) && !("level" in engineer);   // ⛔ the fixture may not invent the field
+    })(), "the whole reason Erik ruled a contest: who stands here has to matter, and it has to matter to the people who EXIST");
+  check("§76g: ⛔ …and WHO IS COMING is read, not the ground's danger standing in for them",
+    (() => {
+      const ch = { npcRegistry: { a: { name: "A", level: 12 } }, bands: [] }, pe = { a: { name: "A", level: 12 } };
+      const vs = (what, q) => H6g.watchOdds(ch, hold6({ garrison: ["a"] }),
+        { cfg: cfg6g, rules: rules6, dangerLevel: 3, people: pe, raiders: [{ n: 12, quality: q, what }] }).pct;
+      // the same twelve people, at the same quality — only what they ARE is different
+      return vs("burglars, knives and lookouts", 3) < vs("the Baron's household guard", 3);
+    })(), "twelve burglars and twelve household guard were the same raid under the old rule");
+  check("§76g: …a thing that watches counts too, and a bigger party is quieter (SNG-655's own shape)",
     wo(hold6({ features: [{ kind: "watch", name: "a Watch", count: 1 }] }), 3).pct > wo(hold6({ garrison: [] }), 3).pct
     && wo(hold6({ garrison: ["a"] }), 1).pct > wo(hold6({ garrison: ["a"] }), 8).pct);
   // ⛑ AND THE RAID ROLLS IT — the same odds, not a second reading.
@@ -7632,11 +7659,97 @@ console.log("\n── §76g · the two rolls, and what each kept ──");
     && /nobody was watching/.test(JSON.stringify(emptyHold.history)),
     JSON.stringify({ missed: missHold.history.slice(-1), empty: emptyHold.history.slice(-1) }));
   /* ---- 3 · AND EVERY DIAL IS AUTHORED, so Aevi can turn them without touching code ---- */
-  check("§76g: ✅ every term of both stacks is a dial in `rules.death`, with a note beside it",
-    ["byDepth", "perReachOver", "perRank", "perBondRung", "heldOpen", "floor", "ceiling"].every(k => rules6.death.retrieval[k] != null)
-    && ["base", "perWatcher", "watcherCap", "perFeature", "perDanger", "floor", "ceiling"].every(k => rules6.death.watch[k] != null)
+  // ✅ SNG-655 renamed the watch's dials onto the two sides of the contest — this asks about the dials that
+  // EXIST NOW, and the retired ones (`base`, `perWatcher`, `watcherCap`, `perFeature`, `perDanger`) are gone
+  // from the file rather than left sitting there unread.
+  check("§76g: ✅ every term of both rolls is a dial in `rules.death`, with a note beside it",
+    ["byDepth", "perReachOver", "perRank", "perBondRung", "heldOpen", "surge", "pledged", "perTier", "floor", "ceiling"].every(k => rules6.death.retrieval[k] != null)
+    && ["captain", "watcher", "watcherBase", "watcherSees", "plainHand", "features", "featureDefault", "stealthFloor", "theftMult", "quietWords", "perHeadSeen", "floor", "ceiling"].every(k => rules6.death.watch[k] != null)
+    && !["base", "perWatcher", "watcherCap", "perFeature", "perDanger"].some(k => rules6.death.watch[k] != null)
     && typeof rules6.death.note === "string",
     "a roll whose numbers live in code is a roll only I can balance");
+
+  /* ═════ 4 · SNG-655 §3 — THE FOUR GATES AEVI ASKED FOR, in her own order ═════ */
+
+  // ⛔ 1 · ONE NUMBER THROUGH EVERY DOOR. This is the gate for the defect she measured: `rollRetrieval` existed,
+  // the screen showed `retrievalOdds`, and the one path a player walks read `op.outcome` off the GM instead.
+  // ⚠️ IT ASKS ABOUT THE CONSUMER, NOT THE PRODUCER. Proving the function is not proving anyone calls it — that
+  // is the failure this gate exists to catch, so two doors are DRIVEN and the third is pinned at its call site.
+  {
+    const deadSt = () => ({ status: "dead", deathState: { diedDay: 100, bodyStatus: "intact" } });
+    // door A — the screen: what the player is shown before they decide
+    const screen = D6g.retrievalOdds(deadSt(), { reach: 0, tier: 2, currentDay: 101, rules: rules6 });
+    // door B — the roll itself, at the same fixture
+    const rolled = D6g.rollRetrieval(deadSt(), { reach: 0, tier: 2, currentDay: 101, rules: rules6, rng: () => 0.01 });
+    // door C — the world tick, DRIVEN: a dead figure with one living kin who cared about the same thing
+    const W6g = await import("../engine/worldtick.js");
+    const st = deadSt();
+    const ws6 = { epicStatus: { dead1: st, kin1: { status: "active" } },
+      figureCares: { dead1: [{ arcId: "a1", dir: "+", weight: 3 }], kin1: [{ arcId: "a1", dir: "+", weight: 5 }] } };
+    const ticked = W6g.attemptRetrievals(ws6, [{ id: "dead1", name: "Ruen" }, { id: "kin1", name: "Sera", tier: "leader" }],
+      [{ id: "kin1", name: "Sera", tier: "leader" }], 101, rules6, { retrievalRate: 1, retrievalCooldownDays: 30 }, () => 0.01);
+    const app6 = rd("app.js");
+    check("§76g: ⛔ SNG-655 §3.1 — THE SCREEN, THE ROLL AND THE WORLD TICK ARE ONE NUMBER, driven through each door",
+      screen.pct === 80 && rolled.pct === screen.pct && ticked.attempts.length === 1
+      && ticked.attempts[0].pct === screen.pct
+      // and the player's door calls the roll rather than believing the GM
+      && /rollRetrieval\(ent, \{ rank: owned\?\.level \|\| 1/.test(app6)
+      && !/const won = String\(op\.outcome/.test(app6)
+      && /_authorMode && \(op\.outcome === "return"/.test(app6)
+      && !/"outcome": "return \| fail"/.test(rd("engine/gm.js")),
+      JSON.stringify({ screen: screen.pct, rolled: rolled.pct, tick: ticked.attempts[0]?.pct }));
+    // ⛔ AND THE WORLD TICK NO LONGER CARRIES ITS OWN TABLE — the second derivation Aevi found.
+    check("§76g: ⛔ §3.1b — `retrievalOddsByDepth` is retired: one table, not two in different units",
+      !/retrievalOddsByDepth\]|byDepth\[depth\]/.test(rd("engine/worldtick.js"))
+      && /rollRetrieval\(st, \{ reach: depth, tier:/.test(rd("engine/worldtick.js")),
+      "a second table drifts the week one of them is tuned, and the tuner cannot know the other exists");
+  }
+
+  // ⛔ 2 · THE DEAD'S OWN WILL, WHATEVER THE BOND. Erik: the will outranks every bond.
+  check("§76g: ⛔ SNG-655 §3.2 — `willing: false` gives 0, at every bond and every rank, and never rolls",
+    (() => {
+      const refuse = () => ({ status: "dead", deathState: { diedDay: 100, bodyStatus: "intact", willing: false } });
+      const every = [[1, 0], [3, 20], [3, 60]].every(([rank, bond]) => {
+        const o = D6g.retrievalOdds(refuse(), { rank, bond, currentDay: 101, rules: rules6 });
+        return o.pct === 0 && o.refusedByThem === true && /refused to come back/.test(String(o.why));
+      });
+      const r = D6g.rollRetrieval(refuse(), { rank: 3, bond: 60, currentDay: 101, rules: rules6, rng: () => 0.01 });
+      return every && r.rolled === null && r.outcome === null;
+    })(), "a refusal that only `wouldReachFor` honours is a rule half the engine keeps");
+
+  // ⛔ 3 · A SURGE NEVER RAISES THE ODDS OF A REACH THAT DID NOT NEED IT.
+  // ⚠️ ASKED AT EVERY DEPTH, because my own first measurement asked it at the deep dark ALONE — the one depth
+  // where `reachOf` clamps the surge rung away — and came back clean while the threshold was 70 → 82.
+  // ⛑ A GATE THAT ASKS ITS QUESTION AT ONE POINT CANNOT FIND A DEFECT AT ANOTHER.
+  check("§76g: ⛔ SNG-655 §3.3 — a surge NEVER raises the odds, at any depth or rank it already reaches",
+    (() => {
+      const rows = [];
+      for (const days of [0, 20, 200]) for (const rank of [1, 2, 3]) for (const bond of [0, 20]) {
+        const ent = () => ({ status: "dead", deathState: { diedDay: 400 - days, bodyStatus: "intact" } });
+        const s = D6g.retrievalOdds(ent(), { rank, bond, intensity: "standard", currentDay: 400, rules: rules6 });
+        const g = D6g.retrievalOdds(ent(), { rank, bond, intensity: "surge", currentDay: 400, rules: rules6 });
+        // a surge may open a depth that was PAST the reach (that is what it is for) — it may never sweeten one
+        // the standard reach already had.
+        if (s.pct > 0 && g.pct > s.pct) rows.push({ days, rank, bond, std: s.pct, surge: g.pct });
+      }
+      return rows.length === 0;
+    })(), "straining past your craft was paying `perReachOver` for the rung the strain had just bought");
+
+  // ⛔ 4 · A WATCHER NEVER LOWERS `seen`, AND EACH ADDS LESS THAN THE LAST — which is what replaces the cap.
+  check("§76g: ⛔ SNG-655 §3.4 — adding a watcher never lowers `seen`, and each one adds less than the last",
+    (() => {
+      const pcts = [], margins = [];
+      for (let k = 1; k <= 8; k++) {
+        const ids = Array.from({ length: k }, (_, i) => `w${i}`);
+        const pe = {}; ids.forEach(id => { pe[id] = { name: id, level: 4 }; });
+        pcts.push(H6g.watchOdds({ npcRegistry: pe, bands: [] }, hold6({ garrison: ids }),
+          { cfg: cfg6g, rules: rules6, dangerLevel: 3, people: pe }).pct);
+      }
+      for (let i = 1; i < pcts.length; i++) margins.push(pcts[i] - pcts[i - 1]);
+      return pcts.every((p, i) => i === 0 || p >= pcts[i - 1])            // never lower
+        && margins.every((m, i) => i === 0 || m <= margins[i - 1])        // each adds less
+        && margins[0] > 0;                                               // and the first one counts
+    })(), "no cap is needed in a ratio: it falls off by itself, and `nextBody` measures it rather than reading a dial");
 }
 
 /* ═════ §76f — WHO STANDS WATCH, AND WHAT THEY BRING (SNG-652 §7, CCODE-502) ═════ */
@@ -7677,10 +7790,16 @@ console.log("\n── §76f · who stands watch, and what they bring ──");
     one7.seen === true && no7.seen === false && /nobody is watching/.test(no7.marginal),
     JSON.stringify({ one: one7.seen, none: no7.marginal }));
   const A7 = rd("app.js");
-  check("§76f: …and the screen shows the number the RAID rolls, from the one function, with its terms",
-    /watchOdds\(character, h, \{ cfg: sCfg, rules: CONTENT\.rules, dangerLevel: wDanger \}\)/.test(A7)
-    && /to see them coming/.test(A7) && /one more body: <strong>\+\$\{wo\.nextBody\}%/.test(A7),
-    "a number on a card must be the number the engine pays — and it must say what built it");
+  // ✅ SNG-655 — REWRITTEN, NOT JOINED. This pinned the old card's copy ("to see them coming", "one more
+  // body") and the additive call shape. The contest needs BOTH SIDES on the card and the people to weigh the
+  // watchers by, so the claim is the same and the terms of it moved: the number is still the engine's own.
+  check("§76f: …and the screen shows the number the RAID rolls, from the one function, with BOTH sides of it",
+    /watchOdds\(character, h, \{ cfg: sCfg, rules: CONTENT\.rules, dangerLevel: wDanger, people: wPeople \}\)/.test(A7)
+    && /to see a raid coming/.test(A7)
+    && /against a same-strength party/.test(A7)
+    && /looking, \$\{wo\.watch\}/.test(A7) && /coming, \$\{wo\.stealth\}/.test(A7)
+    && /one more hand here: <strong>\+\$\{wo\.nextBody\}%/.test(A7),
+    "a number on a card must be the number the engine pays — and a contest must show what it is against");
   // ⛑ WHAT THEY MEET THEM WITH IS THE RAID'S OWN READ, not a second one — Erik: "these aren't just bodies".
   check("§76f: …and who stands watch is read for what they ACTUALLY bring — a warden fights, an engineer does not",
     yes7.defenders.length === 2

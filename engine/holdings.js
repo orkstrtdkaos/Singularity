@@ -689,11 +689,17 @@ export function resolveRaid(character, holding, { cfg = null, dangerLevel = 0, r
     return taken;
   };
   const note = (t) => { holding.history = [...(holding.history || []), { at: null, from: holding.condition, to: holding.condition, note: t }].slice(-12); };
-  // ⛔ CCODE-504 — THE WATCH ROLLS NOW (Erik's ruling). This branched on `watchOf(...).length`: one body and
-  // they were always seen, none and never. ⛑ The bottom of the old rule is kept exactly — an empty wall is a
-  // flat zero, never a base chance — and above it the stack in `watchOdds` decides, rolled on the same d100
-  // every other number in this game pays.
-  const wOdds = watchOdds(character, holding, { cfg, rules, dangerLevel });
+  // ⛔ SNG-655 — THE WATCH IS A CONTEST, so WHO IS COMING has to be known BEFORE the roll to see them.
+  // ⚠️ THE RAIDING PARTY WAS COMPUTED HALFWAY DOWN THIS FUNCTION, on the detected path only — which was
+  // right when the watch was a boolean and the party only mattered once a fight started. A contest needs the
+  // other side, so it is hoisted here and the fight below reads the SAME party rather than drawing a second
+  // one. Two draws of "who came" would be two answers to one question, on the same tick.
+  const party = power ? raidersFrom(power, character) : null;
+  const raiders = party || [{ n: Math.max(1, Math.round(dangerLevel)), quality: Math.max(1, Math.round(dangerLevel / 2)), what: "raiders" }];
+  const whose = party ? (power.name || power.id) : null;
+  // ⛑ The bottom of the old rule is kept exactly — an empty wall is a flat zero, never a base chance — and
+  // above it the contest decides, rolled on the same d100 every other number in this game pays.
+  const wOdds = watchOdds(character, holding, { cfg, rules, dangerLevel, people, raiders });
   const sawThem = wOdds.pct > 0 && (Math.floor(rng() * 100) + 1) <= wOdds.pct;
   if (!sawThem) {
     // ⛔ nobody saw them coming. Stone still slows them; nothing stops them.
@@ -724,15 +730,10 @@ export function resolveRaid(character, holding, { cfg = null, dangerLevel = 0, r
     }
   const stone = defenceOf(holding, cfg);
   if (stone > 0) defenders.push({ n: 1, quality: stone, what: "the walls" });
-  // ⛔ SNG-634 C1 — THE RAIDERS HAVE AN OWNER. Aevi's finding, and it is the oldest hole in this file: this
-  // line read `{ n: dangerLevel, quality: dangerLevel/2, what: "raiders" }`, so the band and legion
-  // machinery built in CCODE-404–407 has had NOBODY WITH A NAME on the other side of the field since it
-  // shipped. A power whose `reach` covers this place now sends a party drawn from its OWN strength.
-  // ⚠️ NO POWER → THE ANONYMOUS RAID, UNCHANGED, and that is the common case: most of the 143 places have
-  // nobody standing on them and must play exactly as they did before this existed.
-  const party = power ? raidersFrom(power, character) : null;
-  const raiders = party || [{ n: Math.max(1, Math.round(dangerLevel)), quality: Math.max(1, Math.round(dangerLevel / 2)), what: "raiders" }];
-  const whose = party ? (power.name || power.id) : null;
+  // ⛔ SNG-634 C1 — THE RAIDERS HAVE AN OWNER, and they are drawn ONCE, above the watch roll: a power whose
+  // `reach` covers this place sends a party out of its own strength, and the same party is the one the watch
+  // was trying to see. ⚠️ NO POWER → THE ANONYMOUS RAID, UNCHANGED, and that is the common case: most of the
+  // 143 places have nobody standing on them and must play exactly as they did before this existed.
   const clash = legionClash(defenders, raiders, { rng, cfg: cfg?.raid?.clash || {} });
   const held = clash.tide > 0.05;
   // ⛔ AND THEIR LOSSES PERSIST, which is what makes clearing a band worth doing. ⛑ THE RATE IS `bloodBand`'s,
@@ -783,48 +784,182 @@ export function watchOf(holding, cfg = null) {
   return ids;
 }
 
-/** ⛔ CCODE-504 (ERIK, 2026-09-25: "Yes on the rolls for … watch success") — THE CHANCE THE WATCH SEES THEM.
+/* ═════ SNG-655 · THE WATCH IS A CONTEST ═════
  *
- *  ⚠️ IT WAS A BOOLEAN. `resolveRaid` branched on `watchOf(...).length` — one body and a raid was always seen,
- *  none and it was never seen. ⛑ Erik ruled a roll, so this is it, and the ONE thing kept from the old rule is
- *  its bottom: nobody standing is still a flat zero, not a base chance. An empty wall does not get lucky.
+ * ✅ ERIK, 2026-09-25: *"i agree with a watch vs stealth contest. all that sounds good."* ⛔ `seen = watch ÷
+ * (watch + stealth)`. CCODE-504's additive stack (base 25, +12 a body to a cap of 4, +15 a feature, −5 a danger
+ * point) answered the same question a week earlier and answered it with two things Aevi then named: it treated a
+ * level-30 captain and a plain hand as the same body, and it used the GROUND'S DANGER as a stand-in for WHO IS
+ * COMING. The ruled shape reads both, so the terms move onto the two sides of the contest.
  *
- *  An additive stack of named terms, every one a dial in `rules.death.watch` — `base` (somebody is up),
- *  `perWatcher` up to `watcherCap` (past it another body adds nothing to SEEING them, which is what makes
- *  "add Cael: +12%" honest and honest about +0 when the wall is full), `perFeature` for each standing thing
- *  that watches, and `perDanger` off for raiders from rougher ground. Clamped between `floor` and `ceiling`.
+ * ⛑ WHAT SURVIVES EVERY VERSION OF THIS RULE: nobody standing is a FLAT ZERO — not `base`, not `floor`, zero.
+ * An empty wall does not get lucky.
  *
- *  Returns `{ pct, terms, watchers, features }`. Pure. */
-export function watchOdds(character, holding, { cfg = null, rules = {}, dangerLevel = 0 } = {}) {
+ * ⚠️ AND THE CAP IS GONE BECAUSE A CONTEST NEEDS NONE. `watcherCap` existed to stop the ninth body reaching
+ * 100%; in a ratio each added body raises `seen` by less than the last on its own. `nextBody` is now MEASURED by
+ * asking the contest again with one more hand rather than read off a dial — the honest marginal, computed.
+ */
+
+/** ⛔ THE WATCH SIDE. Aevi's weights: the captain's hand at full, other named watchers at half, a band's plain
+ *  hands at 0.3 × quality, and features by kind × level.
+ *
+ *  ⚠️ "THE CAPTAIN" IS NOT A FIELD — there is no such role on a holding, measured across all 16 saves. It is
+ *  the strongest named watcher, because somebody leads a watch and it is the one best able to. Naming that here
+ *  rather than inventing a `captainId` keeps it true of every hold that already exists.
+ *
+ *  ⚠️ "NOT WHILE LAPSED OR DISRUPTED" is `featuresOf`, which is the standing set — a feature still being built
+ *  does not watch. Features carry no lapsed/disrupted state of their own today (only `improvements` do), so there
+ *  is nothing else to filter and I have not invented a flag to filter it with.
+ *
+ *  Returns `{ total, terms, captain, watchers, features }`. Pure. */
+export function watchStrength(character, holding, { cfg = null, rules = {}, people = {} } = {}) {
   const w = (rules?.death || {}).watch || {};
-  // ⚠️ NAMED LITERALLY — see the note in `retrievalOdds`: a computed key hides a dial from the wiring
-  // audit's unread-constant ratchet, which is the one thing standing between a tunable and a dead knob.
   const num = (v, d) => (Number.isFinite(Number(v)) ? Number(v) : d);
-  const base = num(w.base, 25);
-  const perWatcher = num(w.perWatcher, 12);
-  const watcherCap = Math.max(0, num(w.watcherCap, 4));
-  const perFeature = num(w.perFeature, 15);
-  const perDanger = num(w.perDanger, 5);
-  const floor = num(w.floor, 5), ceil = num(w.ceiling, 95);
+  const captainW = num(w.captain, 1);
+  const watcherW = num(w.watcher, 0.5);
+  const watcherBase = num(w.watcherBase, 2);
+  const watcherSees = num(w.watcherSees, 4);
+  const plainHandW = num(w.plainHand, 0.3);
+  const featureW = (w.features && typeof w.features === "object") ? w.features : {};
+  const featureDefault = num(w.featureDefault, 4);
   const ids = watchOf(holding, cfg) || [];
-  // ⚠️ A FEATURE ID IS `kind:index`; a band's hands are `unit:<band>:<i>`; everything else is a person.
-  const isFeature = (id) => !/^unit:/.test(String(id)) && /^[a-z_]+:\d+$/.test(String(id));
-  const features = ids.filter(isFeature).length;
-  const bodies = ids.length - features;
-  if (!ids.length) return { pct: 0, terms: [], watchers: 0, features: 0, why: "nobody stands watch" };
+  const isUnit = (id) => /^unit:/.test(String(id));
+  const isFeature = (id) => !isUnit(id) && /^[a-z_]+:\d+$/.test(String(id));
   const terms = [];
-  let pct = base;
-  terms.push({ label: "somebody is up and about", value: base });
-  const counted = Math.min(bodies, watcherCap);
-  if (counted > 0) { const v = counted * perWatcher; pct += v; terms.push({ label: `${counted} on the watch${bodies > counted ? ` (${bodies - counted} more add nothing to seeing them)` : ""}`, value: v }); }
-  if (features > 0) { const v = features * perFeature; pct += v; terms.push({ label: `${features} thing${features === 1 ? "" : "s"} here that watch`, value: v }); }
+  let total = 0;
+  // ⛔ THE PEOPLE, WEIGHED BY WHAT THEIR OWN RECORD SAYS THEY DO — not by a `level` this population does not
+  // have. MEASURED on the live save: 0 of 39 registry records carry `level`, so weighing by it made every
+  // person in the game worth exactly 1 and made Erik's ruling unreachable. `contributionsOf` with `evidence`
+  // reads `role`, `description` and `skillsObserved`, which 36 and 25 of those 39 DO carry, and a record that
+  // says PROTECT or KNOW is a record that says this person notices things.
+  // ⚠️ `level` STILL MULTIPLIES WHEN IT IS THERE, so the day people carry one this reads it — but its
+  // ABSENCE no longer silently flattens the whole watch to one body each.
+  const named = ids.filter(id => !isUnit(id) && !isFeature(id)).map(id => {
+    const p = people?.[id] || character?.npcRegistry?.[id] || null;
+    let does = [];
+    try { does = contributionsOf(p || { id }, { evidence: true }); } catch { does = []; }
+    const sees = does.includes("PROTECT") || does.includes("KNOW");
+    const lv = Number(p?.level) > 0 ? Number(p.level) : 1;
+    return { id, name: p?.name || id, sees, does, weight: (watcherBase + (sees ? watcherSees : 0)) * lv };
+  }).sort((a, b) => b.weight - a.weight || String(a.id).localeCompare(String(b.id)));
+  if (named.length) {
+    // ⛑ "THE CAPTAIN" IS THE BEST OF THEM AT THIS, which is how a watch actually sorts itself out.
+    const cap = named[0];
+    const v = cap.weight * captainW;
+    total += v;
+    terms.push({ label: `${cap.name} leads the watch${cap.sees ? " — and notices things" : ""}`, value: Math.round(v * 10) / 10 });
+    const rest = named.slice(1);
+    if (rest.length) {
+      const rv = rest.reduce((a, p) => a + p.weight * watcherW, 0);
+      total += rv;
+      terms.push({ label: `${rest.map(p => `${p.name}${p.sees ? "" : " (not their trade)"}`).join(", ")} watching too`, value: Math.round(rv * 10) / 10 });
+    }
+  }
+  // ⛔ CCODE-450's hands, at their quality — a band put to guarding stands the watch as what it is.
+  let hands = 0, handW = 0;
+  for (const id of ids.filter(isUnit)) {
+    const m = /^unit:(.+):(\d+)$/.exec(String(id));
+    const c = m ? (character?.bands || []).find(b => b && String(b.id) === m[1])?.contingents?.[Number(m[2])] : null;
+    const q = Math.max(1, Number(c?.quality) || 1);
+    hands += 1; handW += q * plainHandW;
+  }
+  if (hands > 0) { total += handW; terms.push({ label: `${hands} hand${hands === 1 ? "" : "s"} on patrol`, value: Math.round(handW * 10) / 10 }); }
+  // the things that watch, by kind × level
+  const byKind = {};
+  for (const id of ids.filter(isFeature)) { const k = String(id).split(":")[0]; byKind[k] = (byKind[k] || 0) + 1; }
+  for (const [kind, n] of Object.entries(byKind)) {
+    const f = featuresOf(holding).find(x => x.kind === kind);
+    const lv = featureLevel(f);
+    const per = num(featureW[kind], featureDefault);
+    const v = per * lv * n;
+    total += v;
+    terms.push({ label: `${n > 1 ? `${n} ` : ""}${featureDef(kind, cfg)?.label || kind}${lv > 1 ? ` (level ${lv})` : ""}`, value: Math.round(v * 10) / 10 });
+  }
+  return { total, terms, captain: named[0] || null, named, watchers: named.length + hands, features: Object.keys(byKind).length };
+}
+
+/** ⛔ THE STEALTH SIDE — how hard this lot are trying not to be seen.
+ *
+ *  ⚠️ AEVI'S SPEC ASKED FOR "the party's level-weighted count of people who move, deceive or hide, from
+ *  `contributionsOf`", AND THAT READER HAS NO POPULATION HERE. MEASURED: `raidersFrom` returns CONTINGENTS
+ *  (`{n, quality, what}`) and never people — 33 of them across all 29 powers — and `what` is authored prose, so
+ *  I tried the prose reader this codebase already has. `contributionsOf(…, { evidence: true })` returns exactly
+ *  `["HARM"]` for all 33, because HARM is its default and not one family signal fires on a line like
+ *  "burglars, knives and lookouts, never in one place". A reader that reaches none of its population is worse
+ *  than no reader: it looks built and scores zero forever.
+ *
+ *  ⛑ SO THE STEALTH SIDE READS WHAT THE DATA ACTUALLY CARRIES: `n` heads, at `quality` when their own prose
+ *  says they are the quiet kind (`quietWords`, authored — it fires on 2 of 29 powers today), at `stealthFloor`
+ *  otherwise, which is Aevi's floor and the reason a party is never worth zero quiet.
+ *
+ *  Returns `{ total, terms, heads }`. Pure. */
+export function stealthStrength(raiders, { rules = {}, theft = false } = {}) {
+  const w = (rules?.death || {}).watch || {};
+  const num = (v, d) => (Number.isFinite(Number(v)) ? Number(v) : d);
+  const stealthFloor = num(w.stealthFloor, 0.5);
+  const theftMult = num(w.theftMult, 2);
+  const quietWords = Array.isArray(w.quietWords) ? w.quietWords : ["burglar", "lookout", "thief", "thieves", "smuggl", "shadow", "umbral", "unseen", "poach", "infiltrat", "spy", "scout"];
+  const party = Array.isArray(raiders) ? raiders.filter(c => c && Number(c.n) > 0) : [];
+  const terms = [];
+  let total = 0, heads = 0;
+  for (const c of party) {
+    const n = Math.max(0, Math.round(Number(c.n) || 0));
+    const q = Math.max(1, Number(c.quality) || 1);
+    const said = String(c.what || c.kind || "").toLowerCase();
+    const quiet = quietWords.some(word => said.includes(String(word).toLowerCase()));
+    const per = quiet ? q : stealthFloor;
+    heads += n; total += n * per;
+    terms.push({ label: `${n} ${String(c.what || c.kind || "of them").replace(/\s+/g, " ").slice(0, 60)}${quiet ? " — the quiet kind" : ""}`, value: Math.round(n * per * 10) / 10 });
+  }
+  if (theft && total > 0) {
+    const v = total * (theftMult - 1);
+    total += v;
+    terms.push({ label: `a theft — a few people whose whole plan is not being seen`, value: Math.round(v * 10) / 10 });
+  }
+  return { total, terms, heads };
+}
+
+/** ⛔ SNG-655 · THE CHANCE THE WATCH SEES THEM: `watch ÷ (watch + stealth)`.
+ *
+ *  ⚠️ ONE THING IN THE RULED SHAPE INVERTS, AND IT IS THE COMMON CASE, SO IT IS A DIAL AND NOT A SILENCE.
+ *  The stealth side sums over heads, so a BIGGER party is HARDER to see: measured, the median raid a power sends
+ *  is 36 heads (min 7, max 104), which is stealth 18 against a watch of 1–18 — an army walking up to your gate
+ *  would be missed nine times in ten. ⛑ `perHeadSeen` is the other half of that term: 36 people coming is also
+ *  36 chances to be spotted. At `stealthFloor` the size cancels exactly and the contest is quality against
+ *  quality; at 0 you get the ruled shape's own answer. Set to 0.35, measured below, so numbers still help the
+ *  raiders and no longer make them invisible. ⚠️ This is the one number here that is MINE rather than ruled —
+ *  it is in the note, in the po, and Aevi and Erik can zero it in one edit.
+ *
+ *  Returns `{ pct, terms, watch, stealth, watchers, features, nextBody }`. Pure. */
+export function watchOdds(character, holding, { cfg = null, rules = {}, dangerLevel = 0, people = {}, raiders = null, theft = false } = {}) {
+  const w = (rules?.death || {}).watch || {};
+  const num = (v, d) => (Number.isFinite(Number(v)) ? Number(v) : d);
+  const floor = num(w.floor, 5), ceil = num(w.ceiling, 95);
+  const perHeadSeen = num(w.perHeadSeen, 0.35);
+  const ids = watchOf(holding, cfg) || [];
+  // ⛑ THE BOTTOM OF THE OLD RULE, KEPT EXACTLY: nobody standing is a flat zero and never rolls.
+  if (!ids.length) return { pct: 0, terms: [], watch: 0, stealth: 0, watchers: 0, features: 0, nextBody: null, why: "nobody stands watch" };
   const dl = Math.max(0, Number(dangerLevel) || 0);
-  if (dl > 0) { const v = -dl * perDanger; pct += v; terms.push({ label: `they come off rough ground (danger ${dl})`, value: v }); }
-  const clamped = Math.max(floor, Math.min(ceil, Math.round(pct)));
-  return { pct: clamped, terms, watchers: bodies, features,
-    clampedFrom: clamped !== Math.round(pct) ? Math.round(pct) : null,
-    // ⛑ THE MARGINAL, HONESTLY — the thing the spec asked for, and it tells the truth at the cap.
-    nextBody: bodies < watcherCap ? perWatcher : 0 };
+  const party = Array.isArray(raiders) && raiders.length ? raiders
+    : [{ n: Math.max(1, Math.round(dl)), quality: Math.max(1, Math.round(dl / 2)), what: "raiders" }];
+  const W = watchStrength(character, holding, { cfg, rules, people });
+  const S = stealthStrength(party, { rules, theft });
+  const many = S.heads * perHeadSeen;
+  const watch = W.total + many;
+  const stealth = Math.max(0.01, S.total);
+  const terms = [...W.terms];
+  if (many > 0) terms.push({ label: `${S.heads} of them coming is ${S.heads} chances to be seen`, value: Math.round(many * 10) / 10 });
+  const raw = 100 * (watch / (watch + stealth));
+  const clamped = Math.max(floor, Math.min(ceil, Math.round(raw)));
+  // ⛑ THE HONEST MARGINAL, MEASURED RATHER THAN READ OFF A DIAL: ask the contest again with one more plain
+  // hand. In a ratio it falls off by itself, which is why there is no cap any more — and it is never negative,
+  // because a body added to the watch side cannot lower a ratio in its own numerator.
+  const plainHandW = num(w.plainHand, 0.3);
+  const withOne = 100 * ((watch + plainHandW) / (watch + plainHandW + stealth));
+  const nextBody = Math.max(0, Math.round(Math.max(floor, Math.min(ceil, Math.round(withOne))) - clamped));
+  return { pct: clamped, terms, watch: Math.round(watch * 10) / 10, stealth: Math.round(stealth * 10) / 10,
+    watchers: W.watchers, features: W.features, captain: W.captain, heads: S.heads, stealthTerms: S.terms,
+    clampedFrom: clamped !== Math.round(raw) ? Math.round(raw) : null, nextBody };
 }
 
 /** ⛔ CCODE-502 (SNG-652 §7) — WHO STANDS WATCH, WHAT THEY BRING, AND WHAT IT ACTUALLY DECIDES.
@@ -860,9 +995,9 @@ export function watchReadout(character, holding, { cfg = null, people = {} } = {
   const seen = ids.length > 0;
   return { seen, watchers: ids.length, named, hands, fromFeatures,
     stone: defenceOf(holding, cfg), defenders,
-    // ⚠️ THE HONEST MARGINAL, which is the opposite shape to the one the spec asked for.
-    // ✅ CCODE-504 — the MARGINAL is `watchOdds.nextBody` now that Erik has ruled a roll; this line says what
-    // is still true either way, and the bottom of the old rule is the part that survives.
+    // ⚠️ WHAT IS STILL TRUE WHATEVER THE ROLL SAYS — and no longer a promise that they WILL be seen.
+    // ✅ SNG-655: the number beside this is a CONTEST (`watchOdds`), so this line says what the number means and
+    // what the miss costs. The bottom of the old rule is the part that survives: nobody watching is never seen.
     marginal: seen
       ? "if they are missed, a raid simply takes its share — and who stands here decides the fight when they are not"
       : "nobody is watching: a raid here is never seen, whatever the wall is worth" };

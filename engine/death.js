@@ -192,11 +192,22 @@ export function reachableDeadForGM(character, content = {}, currentDay = null) {
  *  this week. Every term is a dial in `rules.death.retrieval`; Aevi and Erik turn them.
  *
  *  Returns `{ pct, terms, at, reach, sealed }`. Pure. */
-export function retrievalOdds(entity, { rank = 1, intensity = "standard", currentDay = null, rules = {}, bond = 0 } = {}) {
+export function retrievalOdds(entity, { rank = 1, intensity = "standard", currentDay = null, rules = {}, bond = 0, reach = null, tier = 0, pledged = false } = {}) {
   const cfg = { ...DEFAULTS, ...(rules.death || {}) };
   const r = cfg.retrieval || {};
-  const gate = canReach(entity, { rank, intensity, currentDay, rules, bond });
   const at = deathDepth(entity, currentDay, rules);
+  // ⛔ SNG-655 · AEVI'S DEFECT 3 — THE DEAD'S OWN WILL, BEFORE ANYTHING ELSE. Measured: a person who had
+  // refused to be brought back came back a real 70%. `wouldReachFor` honoured the refusal and `canReach` never
+  // read it, so the question "would they come?" respected it and the question "does the roll make it?" did not.
+  // ⚠️ WHICH IS THE WORSE HALF TO MISS: `wouldReachFor` gates an NPC volunteering, and the PLAYER's own reach
+  // never asks it. Erik's rule is that the will outranks every bond, and a percentage is where that is decided.
+  // ⛑ AND IT IS FREE, like every other refusal on this ladder — `pct: 0` never rolls, so nobody sinks for
+  // having been asked. `refusedByThem` is named apart from `sealed` because the screen must say which it was.
+  if (entity?.deathState?.willing === false) {
+    return { pct: 0, terms: [], at, reach: null, sealed: false, refusedByThem: true,
+      why: "they have refused to come back, and that is honoured" };
+  }
+  const gate = canReach(entity, { rank, intensity, currentDay, rules, bond, reach });
   if (!gate.ok) return { pct: 0, terms: [], at, reach: gate.reach ?? null, sealed: !!gate.sealed, why: gate.why };
   // ⚠️ EVERY DIAL NAMED LITERALLY, not fetched by a computed key. `unreadRuleConstants` looks for a
   // constant read BY NAME, and a clever accessor hides the whole block from it — which would make these
@@ -207,17 +218,41 @@ export function retrievalOdds(entity, { rank = 1, intensity = "standard", curren
   const perRank = num(r.perRank, 6);
   const perBondRung = num(r.perBondRung, 8);
   const heldOpen = num(r.heldOpen, 15);
+  const surge = num(r.surge, -15);          // SNG-655: reaching past your rank is the GAMBLE, so it costs
+  const pledge = num(r.pledged, 10);        // SNG-653: a promise made is a road already walked once
+  const perTier = num(r.perTier, 5);        // what a greater figure brings, for the world tick's own reaches
   const floor = num(r.floor, 5), ceil = num(r.ceiling, 95);
   const terms = [];
   let pct = Number(byDepth[Math.max(0, Math.min(byDepth.length - 1, at))]) || 0;
   terms.push({ label: `reaching into ${DEATH_DEPTH_NAMES[at]}`, value: pct });
-  const over = Math.max(0, (gate.reach ?? 0) - at);
+  // ⛔ SNG-655 · AEVI'S DEFECT 4 — `over` COMES FROM THE STANDARD REACH, NEVER THE SURGED ONE.
+  // ⚠️ MEASURED, and it inverted the mechanic: a surge raises `reach` by a rung, `over = reach − at` then paid
+  // `perReachOver` FOR THE RUNG THE SURGE HAD JUST BOUGHT ITSELF — the threshold went 70% → 82%, rank 2 went
+  // 88% → 95%. Straining past your craft was a free bonus. The prose above this function has said since
+  // SNG-209 that "a failed reach sinks them, and at the deep dark it seals them": the surge is the gamble, and
+  // a gamble that improves your odds is not one.
+  // ⛑ I MEASURED IT AT THE DEEP DARK FIRST AND SAW NOTHING, because `reachOf` clamps at 2 and rank 3 is
+  // already there — the one case where the surge rung is clamped away is the case I happened to test. Aevi
+  // was right and my check asked the question at the one depth that could not answer it.
+  // ⚠️ SLACK STILL STEADIES THE HAND — what is retired is slack the surge INVENTED. A rank-3 craft reaching
+  // the threshold still has two rungs to spare and is still paid for them.
+  const standardReach = Math.min(2, reachOf(rank, "standard") + bondRungs(bond, rules));
+  const slack = reach == null ? standardReach : Math.max(0, Math.min(2, Number(reach) || 0));
+  const over = Math.max(0, slack - at);
   if (over > 0) { const v = over * perReachOver; pct += v; terms.push({ label: `your reach goes ${over} rung${over === 1 ? "" : "s"} deeper than you need`, value: v }); }
+  if (intensity === "surge") { pct += surge; terms.push({ label: `reaching past your craft — a surge is a strain`, value: surge }); }
   const overRank = Math.max(0, (Number(rank) || 1) - 1);
   if (overRank > 0) { const v = overRank * perRank; pct += v; terms.push({ label: `the craft at rank ${rank}`, value: v }); }
   const rungs = bondRungs(bond, rules);
   if (rungs > 0) { const v = rungs * perBondRung; pct += v; terms.push({ label: `what you were to them`, value: v }); }
   if (entity?.deathState?.heldOpenBy) { pct += heldOpen; terms.push({ label: `somebody is holding the way open`, value: heldOpen }); }
+  // ⛑ SNG-655 · 5 — THE TWO TERMS THE RULED SPEC HAD AND MINE DID NOT.
+  // A PLEDGE is not the bond over again (SNG-653: "a pledge is not a bond stage"): it is a road walked once
+  // already, and the caller reads it with `pledgeFrom` because only the caller knows whose pledge to look for.
+  if (pledged) { pct += pledge; terms.push({ label: `they said they would come, and it was said aloud`, value: pledge }); }
+  // TIER is what a GREATER FIGURE brings — the world tick's own reaches, where there is no craft rank to read.
+  const tr = Math.max(0, Math.floor(Number(tier) || 0));
+  if (tr > 0) { const v = tr * perTier; pct += v; terms.push({ label: `what they are in the world`, value: v }); }
   const clamped = Math.max(floor, Math.min(ceil, Math.round(pct)));
   return { pct: clamped, terms, at, reach: gate.reach ?? null, sealed: false,
     clampedFrom: clamped !== Math.round(pct) ? Math.round(pct) : null };
@@ -225,8 +260,8 @@ export function retrievalOdds(entity, { rank = 1, intensity = "standard", curren
 
 /** ⛔ CCODE-504 — AND THE ROLL ITSELF, so the % shown is the % rolled. `rng` is injected; the caller decides
  *  what a failure costs by handing the outcome straight to `resolveRetrieval`, which is unchanged. Pure. */
-export function rollRetrieval(entity, { rank = 1, intensity = "standard", currentDay = null, rules = {}, bond = 0, rng = Math.random } = {}) {
-  const odds = retrievalOdds(entity, { rank, intensity, currentDay, rules, bond });
+export function rollRetrieval(entity, { rank = 1, intensity = "standard", currentDay = null, rules = {}, bond = 0, reach = null, tier = 0, pledged = false, rng = Math.random } = {}) {
+  const odds = retrievalOdds(entity, { rank, intensity, currentDay, rules, bond, reach, tier, pledged });
   if (!odds.pct) return { ...odds, rolled: null, outcome: null, ok: false };
   const rolled = Math.floor(rng() * 100) + 1;      // 1..100, the same d100 every other roll pays
   const made = rolled <= odds.pct;
@@ -289,7 +324,7 @@ export function reachOf(rank, intensity = "standard") {
 /** Can this reach even be attempted? ⚠️ REFUSED IS NOT FAILED, and the distinction is the whole safety of
  *  the mechanic: a FAILURE sinks them, so being told "that is past your reach" must not cost the person you
  *  were reaching for. `resolveRetrieval(entity, "fail")` is the costly path; this is the free one. */
-export function canReach(entity, { rank = 1, intensity = "standard", currentDay = null, rules = {}, bond = 0 } = {}) {
+export function canReach(entity, { rank = 1, intensity = "standard", currentDay = null, rules = {}, bond = 0, reach: stated = null } = {}) {
   if (!entity || entity.status !== "dead") return { ok: false, why: "there is nobody there to reach for" };
   const at = deathDepth(entity, currentDay, rules);
   if (at >= 3) return { ok: false, sealed: true, why: "they are sealed — no rank reaches this" };
@@ -299,7 +334,12 @@ export function canReach(entity, { rank = 1, intensity = "standard", currentDay 
   // is a stranger holding a craft and reaches the threshold at best. A companion at high bond reaches the deep
   // dark. ⛑ THE FICTION IS THE LIMIT, which is the only kind this design has ever wanted.
   const fromBond = bondRungs(bond, rules);
-  const reach = Math.min(2, reachOf(rank, intensity) + fromBond);
+  // ⚠️ A CALLER WITH NO CRAFT RANK MAY STATE THE REACH IT HAS ALREADY RULED. The world tick reaches for the
+  // dead of the roster, where the reacher is a FIGURE with a tier and no craft level at all: mapping a tier
+  // onto a rank would be inventing a rule nobody has made, and passing rank 1 would silently close the near
+  // and deep dark to every NPC retrieval in the game. It states the reach it has always had instead.
+  const reach = stated == null ? Math.min(2, reachOf(rank, intensity) + fromBond)
+    : Math.max(0, Math.min(2, Number(stated) || 0));
   if (reach < at) {
     // ⚠️ AND THE REFUSAL SAYS WHICH HALF WAS SHORT. "You would need rank 3" is unactionable advice for someone
     // whose rank is already 3 and whose standing is the thing that is missing — and it would read as a bug.

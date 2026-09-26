@@ -85,13 +85,7 @@
   "_section6": "THE ROAD BACK — going after your own dead (SNG-270, on the SNG-209 death ladder).",
   "retrievalRate": 0.25,
   "_retrievalRate": "Chance per pass that someone who shared a care with the dead goes after them. They pay a FRONT to do it — the arc they would have held goes unheld. At 0 the dead simply sink until they seal and nobody ever comes.",
-  "retrievalOddsByDepth": {
-   "0": 0.7,
-   "1": 0.45,
-   "2": 0.2,
-   "3": 0
-  },
-  "_retrievalOddsByDepth": "Odds of success at each rung of the death ladder: the threshold · the near dark · the deep dark · the sealed. Failing sinks them further, and a failed reach at the deep dark seals them for good — which is what makes leaving someone in the dark a real choice too. The sealed refuse every road; that entry should stay 0.",
+  "_retrievalOddsRetired": "⛔ SNG-655 · `retrievalOddsByDepth` LIVED HERE AND IS RETIRED. It was a second derivation of `rules.death.retrieval` — the same ladder in fractions beside the other in points — and the world tick read this one while the player's screen read that one. Aevi measured it. The odds of coming back are now one function (`rollRetrieval`) and one table (`resolution.json` · death.retrieval.byDepth), and what a great figure brings is `death.retrieval.perTier` rather than the 0.05×tier that used to be hardcoded beside this dial. Turn them there.",
   "retrievalCooldownDays": 30,
   "_deedSpreadLinesPerPass": "⛔ BUG_news_rebroadcast (Erik 2026-09-05: 'my news is still popping up old stuff'). A HOP IS NOT A HEADLINE: the spread is world state and runs at deedSpreadRate, but the digest is a REPORT and is bounded — beyond this many spread lines in one pass the rest are counted in a single line, because NEWS_CAP is 20 and three passes of re-broadcast push out everything genuinely new.",
   "deedSpreadLinesPerPass": 2,

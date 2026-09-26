@@ -14276,8 +14276,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790427639844,
-  "rev": 964,
+  "updatedAt": 1790429060054,
+  "rev": 969,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -15032,8 +15032,8 @@
           "entityId": "vessin-tallow-bark",
           "type": "npc",
           "birthWeight": 8,
-          "engagementScore": 0,
-          "tier": "fresh",
+          "engagementScore": 8,
+          "tier": "nominated",
           "rating": "R+",
           "provenance": {
             "playerKey": "player-s9z9u1",
@@ -15044,7 +15044,16 @@
             "hint": "a lone traveler woman at the Half-Cathedral at night — practical, dry-voiced, appraising; not scaffold crew, not Rootkin",
             "why": "She is now in active conversation with Loki and needs a stable identity, name, and background that fits this place and h"
           },
-          "attentionHistory": [],
+          "attentionHistory": [
+            {
+              "kind": "keep",
+              "day": 8
+            },
+            {
+              "kind": "keep",
+              "day": 8
+            }
+          ],
           "createdDay": 1,
           "repaired": false,
           "stubbed": false,
@@ -15069,7 +15078,9 @@
               "note": "Vessin Tallow-bark completed a small exchange of route-knowledge with a passing carter, walking away with coin and no obligation — clean, as she prefers, and one thread closer to her destination.",
               "outcome": "progress"
             }
-          ]
+          ],
+          "lastAttentionDay": 8,
+          "needsDepth": "nominated"
         },
         "peopleSource": "generated",
         "domainsSource": "generated",
@@ -15092,14 +15103,22 @@
         "dangerLevel": 4,
         "_gen": {
           "type": "location",
-          "tier": "fresh",
-          "engagementScore": 2,
+          "tier": "nominated",
+          "engagementScore": 10,
           "birthWeight": 1,
           "rating": null,
           "attentionHistory": [
             {
               "kind": "revisit",
               "day": 1
+            },
+            {
+              "kind": "keep",
+              "day": 8
+            },
+            {
+              "kind": "keep",
+              "day": 8
             }
           ],
           "createdDay": 1,
@@ -15108,7 +15127,8 @@
             "day": null,
             "hint": "transit"
           },
-          "lastAttentionDay": 1
+          "lastAttentionDay": 8,
+          "needsDepth": "nominated"
         },
         "map": {
           "x": 96.11510228365859,
@@ -16401,9 +16421,9 @@
     ]
   },
   "chronicleCache": {
-    "hash": "d0|btessvel-cairn:romantic:courting|c|q|L2|The town, although not small, has become too sma",
-    "text": "You have become someone the town can no longer quite contain — restless in a way that has nothing to do with youth and everything to do with the particular ache of a man who suspects the world is larger than the shape he was handed. The one deed that has begun to matter: you descended into the dark where the Unlit make their slow, lightless congress, and instead of performing certainty you spoke a true thing in the shape they could actually receive — and the elder acknowledged you, which is not nothing, which is in fact quite a lot. Tessvel Cairn is becoming the gravity you orbit when you're home, the courting between you still new enough to carry heat and weight — her presence a specific warmth you find yourself turning toward the way a cold man turns toward a window where the sun is. The question that drives you, beneath all of it, is the one with no clean answer yet: where did you come from, and what are the Veilwrights and the Umbrals and the Horizon-Walkers to that story? You don't know. You're going to find out.",
-    "at": "2026-07-27T13:01:27.277Z"
+    "hash": "d8|btessvel-cairn:romantic:courting,traveler-woman:romantic:committed|c|q|L10|The town, although not small, has become too sma",
+    "text": "You have become the person this town made room for but could not quite contain—the one who learned that the deepest locks open not to force but to honest asking, who stood in a sealed chamber and spoke its own harmonic tongue until the stone listened back, who drove his resonance into the Null Stone at the Hub crossing and felt it yield like a held breath finally released. You named the board member who moved to silence Sable, cost him something real in doing it, and then turned a hired chaos-architect toward reckoning rather than ruin—twice, because the valley's waygate demanded it and you held the center both times. In the dark you offered a stranger your complete interior and kept the bargain when the walls came down, and somewhere in that exchange you understood that Vessin Tallow-bark's devotion and Tessvel Cairn's slow-burning courtship are not anchors but proof that being genuinely known does not diminish you. Halvex Coil stands close. The Unlit Elder calls you ally. And still the question sits beneath everything—where you came from, what the Veilwrights and Umbrals and Horizon-Walkers are to that answer—pulling you outward, because the great machine is larger than this valley, and you have only just learned how to ask it right.",
+    "at": "2026-09-26T13:23:35.544Z"
   },
   "_stageOpRefusals": [
     "the-taken-from-the-city: no-such-quest"
@@ -18494,5 +18514,7 @@
   ],
   "_questMatchNotes": [
     "(couldn't match a quest for \"journey-gen-the-road-from-kindly-rest-to-standing-an-88\" — not applied)"
-  ]
+  ],
+  "_chronicleBusy": false,
+  "_chronicleError": null
 }

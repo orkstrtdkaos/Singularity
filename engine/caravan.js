@@ -29,10 +29,10 @@
 import { legionClash, contingentsFromPeople } from "./melee.js";
 import { kitFor, personRecordFor } from "./npcsheet.js";   // SNG-659 §1: the DERIVED kit, the same one every duel fights with
 import { contributionsOf } from "./combatants.js";   // SNG-541c / Erik: a defender is what they can DO, not one more body
-import { unitWorth } from "./holdings.js";
+import { unitWorth, producesPerPass, worthOfGoods, crewKeepPerPass, featuresOf, featureDef, raidChanceFor, sellShareFor, storeTotal } from "./holdings.js";   // ⛑ SNG-654 A: a route's value is what the hold MAKES, priced where it is going — through the tick's own producer
 import { earnAt, saidEarned } from "./money.js";   // ⛔ CCODE-437: sold for the market's own money — `earnAt` goes through `credit`   // ⛔ CCODE-437: a load is sold for the money of the market it reaches
 import { enterDeathState } from "./death.js";
-import { routeBetween } from "./journey.js";
+import { routeBetween, roadDistances, pathFrom } from "./journey.js";   // ⛑ SNG-654 B: ONE search from the hold answers every market at once — 38 regions for the cost of one route
 import { storeWorth } from "./holdings.js";   // §6b: the comparison prices the store through the one reader that prices it
 
 const num = (v, d = 0) => (Number.isFinite(Number(v)) ? Number(v) : d);
@@ -89,7 +89,13 @@ export function sendCaravan(character, {
   if (toId === h.locationId) return { ok: false, why: "the load is already there" };
 
   const route = routeBetween(h.locationId, toId, locations, { traveller: traveller || character });
-  const leg = route?.options?.[0];
+  // ⛔ SNG-654 — THE FASTEST WAY, NOT THE FIRST ONE IN THE LIST, and this was a live defect: `options[0]` is the ROAD
+  // and the gate leg comes after it, so a load out of the Made Gate walked 34.6 days to the Axis Gate while the
+  // comparison card — which sorts by days — priced the same run at 1.7 through Silas's own waygate. ⚠️ A card and an
+  // engine disagreeing about the same road, which is the defect I have repaired four times in this file's neighbours.
+  // ⛑ Two named options are a decision for a TRAVELLER, who can weigh a gate's energy against a long walk. A cart has
+  // nobody to weigh it, so the rule is the fastest road its carriers can actually use.
+  const leg = (route?.options || []).slice().sort((a, b) => (a.days ?? 1e9) - (b.days ?? 1e9))[0];
   if (!leg) return { ok: false, why: "no way there from the hold" };
 
   // ⛔ TAKE THE LOAD OFF THE STORE NOW, and refuse rather than send an empty cart.
@@ -115,7 +121,251 @@ export function sendCaravan(character, {
   return { ok: true, caravan: car, route };
 }
 
+/* ═════ SNG-654 A — A ROUTE IS A STANDING RUN ═════
+ *
+ * ✅ ERIK: *"yes on a-d."* ⛑ AEVI: *"once a route is set, each departure carries what accumulated since the last one."*
+ *
+ * ⚑ ONE LOAD ON THE ROAD AT A TIME, because there is one crew. They walk out, they sell, they walk back, and the next
+ * departure leaves with everything the hold made while they were gone — which is exactly why distance is a delay and
+ * not a divisor, and why the stock that waits is exposed.
+ */
+
+/** ⛔ SET THE ROUTE. Refuses for the same reasons `sendCaravan` refuses, because a route that cannot be walked is not
+ *  a route — and it refuses BEFORE it writes, so a save never carries a standing run to nowhere. */
+export function setRoute(character, holdingId, { toId = null, carriers = [], locations = {}, day = null } = {}) {
+  const h = (character?.holdings || []).find(x => x && x.id === holdingId);
+  if (!h) return { ok: false, why: "no such holding" };
+  if (!h.locationId) return { ok: false, why: "that holding is not anywhere yet — it has no road out" };
+  if (!locations[h.locationId]) return { ok: false, why: "the hold's place is not on the map" };
+  if (!locations[toId]) return { ok: false, why: "nowhere by that name" };
+  if (toId === h.locationId) return { ok: false, why: "the load is already there" };
+  const route = routeBetween(h.locationId, toId, locations, { traveller: character });
+  if (!(route?.options || []).length) return { ok: false, why: "no way there from the hold" };
+  h.route = { toId, crew: [...new Set((carriers || []).filter(Boolean))], setDay: day, lastDepartureDay: null, runs: 0 };
+  return { ok: true, route: h.route, to: locations[toId]?.name || toId };
+}
+
+/** ⛑ AND STOPPING IT IS ITS OWN ACT, because a keeper starts selling again the moment it stops. */
+export function clearRoute(character, holdingId) {
+  const h = (character?.holdings || []).find(x => x && x.id === holdingId);
+  if (!h || !h.route) return { ok: false, why: "no route stands there" };
+  const was = h.route;
+  delete h.route;
+  return { ok: true, was };
+}
+
+/** ⛔ THE NEXT DEPARTURE, ON THE TICK. One load on the road at a time: while a caravan of this hold is walking out or
+ *  walking home, nothing leaves. ⚑ And an empty store is not a departure — the cart waits rather than going empty,
+ *  which is the same refusal `sendCaravan` already makes.
+ *
+ *  ⚠️ A CREW THAT IS ALL DEAD STOPS THE ROUTE and says so. A route that keeps sending carts nobody walks with would
+ *  quietly turn a standing run into a standing robbery. Returns notes for the news. */
+export function runStandingRoutes(character, { locations = {}, cfg = null, day = null, people = {} } = {}) {
+  const out = [];
+  for (const h of (character?.holdings || [])) {
+    const r = h?.route;
+    if (!r || !r.toId) continue;
+    const busy = caravansOf(character).some(c => c && c.holdingId === h.id && (c.status === "travelling" || c.status === "returning"));
+    if (busy) continue;
+    const crew = (r.crew || []).filter(id => {
+      const p = people?.[id] || character?.npcRegistry?.[id] || null;
+      return !p || p.status !== "dead";
+    });
+    if ((r.crew || []).length && !crew.length) {
+      out.push({ kind: "route-stopped", holdingId: h.id, note: `The run out of ${h.name || "the hold"} has stopped — nobody who walked it is left to walk it again.` });
+      delete h.route;
+      continue;
+    }
+    if (!Object.keys(h.store || {}).length) continue;                  // nothing made yet: the cart waits
+    const sent = sendCaravan(character, { holdingId: h.id, toId: r.toId, carriers: crew, locations, cfg, day, traveller: character });
+    if (!sent.ok) { out.push({ kind: "route-refused", holdingId: h.id, note: null, why: sent.why }); continue; }
+    r.lastDepartureDay = day;
+    sent.caravan.standing = true;                                      // ⛑ so arrival knows to walk them home
+    const units = Object.values(sent.caravan.load || {}).reduce((a, n) => a + num(n), 0);
+    out.push({ kind: "departure", holdingId: h.id, caravanId: sent.caravan.id,
+      note: `${units} unit(s) left ${h.name || "the hold"} for ${locations[r.toId]?.name || r.toId} — ${sent.caravan.days} days on the road${crew.length ? `, ${crew.length} walking with it` : ", and NOBODY walking with it"}.` });
+  }
+  return out;
+}
+
 /** ⚑ WHO IS STILL ON THEIR FEET. A carrier who died on an earlier leg does not defend the next one. */
+/* ═════ SNG-654 §4 — THE FOUR LEVERS THAT MAKE A ROUTE WORTH RUNNING ═════
+ *
+ * ✅ ERIK 2026-09-25: *"yes on a-d."*
+ *
+ * ⛔ THE DEFECT THEY FIX, MEASURED AT HEAD ON SILAS'S OWN HOLDS. `storeExits` ranked markets by GROSS PRICE and then
+ * divided the take by the days on the road. The Fell Pell's two offered routes were the Grand Lattice (146.6 days) and
+ * the Unplanned Room (156.6) at 4 a pass, against 56 for selling at home — while the Crossing, 34 days away at ×1.8,
+ * never appeared at all, because two ×3.6 markets 150 days out took the four candidate slots.
+ *
+ * ⚑ SO DISTANCE IS A DELAY AND A RISK, NOT A DIVISOR. A trade route is not one trip: it runs again and again, and each
+ * departure carries what the hold has made since the last one. In steady state every unit produced makes exactly one
+ * one-way journey — so the value of the route per pass is what the hold MAKES in a pass, sold THERE, less the crew's
+ * keep and less the share the road is expected to take. Distance shows up twice, honestly: as `firstCoin` (the passes
+ * before any coin comes back) and inside the expected loss (hazard is rolled per day).
+ */
+
+const tradeCfg = (cfg) => (cfg && typeof cfg.trade === "object" && cfg.trade ? cfg.trade : {});
+
+/** ⛑ LEVER C — HOW FAST THE LOAD TRAVELS, and it is the FASTEST MEANS THE HOLD HAS, never the product of them: a
+ *  stable and a river do not make a load six times as fast. Erik's table: on foot 1×, a stable 2×, a lizard-den 2.5×,
+ *  by water with BOTH ENDS water-tagged 3×, a hired company 2×.
+ *
+ *  ⚠️ KEYED BY FEATURE ID IN CONTENT (`trade.speedByFeature`), with a fallback by the feature's PROPERTY, so a new
+ *  mounts-bearing feature carries a load faster instead of silently walking. ⛔ And "both ends water-tagged" is read
+ *  from the places' own `tags` — measured, all 364 route edges are bare strings and no location carries a `water`
+ *  field, while `tags` is on 135 of 135 places. PURE. */
+export function carriageFor(character, holding, { toId = null, locations = {}, cfg = null, company = false } = {}) {
+  const t = tradeCfg(cfg);
+  const options = [{ mult: 1, label: "on foot", why: "foot" }];
+  if (company) {
+    options.push({ mult: num(t.companySpeed, 2), label: "a hired company's own animals", why: "company" });
+  } else {
+    for (const f of featuresOf(holding)) {
+      const kind = String(f?.kind || f || "");
+      if (!kind) continue;
+      const def = featureDef(kind, cfg);
+      const byId = Number(t.speedByFeature?.[kind]);
+      const byProp = def?.property ? Number(t.speedByProperty?.[def.property]) : NaN;
+      const m = Number.isFinite(byId) ? byId : (Number.isFinite(byProp) ? byProp : null);
+      if (m != null && m > 1) options.push({ mult: m, label: def?.label || kind.replace(/_/g, " "), why: kind });
+    }
+    // ⛔ BOTH ENDS, because a river is only a road if it goes where you are going.
+    const water = new Set((Array.isArray(t.waterTags) ? t.waterTags : []).map(x => String(x).toLowerCase()));
+    const wet = (id) => (locations?.[id]?.tags || []).some(x => water.has(String(x).toLowerCase()));
+    if (water.size && toId && holding?.locationId && wet(holding.locationId) && wet(toId)) {
+      options.push({ mult: num(t.waterSpeed, 3), label: "by water", why: "water" });
+    }
+  }
+  const best = options.slice().sort((a, b) => b.mult - a.mult)[0];
+  return { mult: best.mult, label: best.label, why: best.why, options };
+}
+
+/** ⚑ A ROAD IS KNOWN IN BOTH DIRECTIONS — a road you have walked is known whichever end you start from, so the
+ *  ledger is keyed on the pair and not on the direction. */
+const roadKey = (a, b) => [String(a || ""), String(b || "")].sort().join("|");
+
+/** ⛑ LEVER D — A KNOWN ROAD GETS SAFER. Each completed run cuts that road's hazard by `perRun`, to a floor of
+ *  `floor`; a relay station OF YOURS on the route doubles the rate. Returns the multiplier the hazard is scaled by.
+ *
+ *  ⚠️ A HOLD WITH NO RUNS READS 1 — every road in every save today, so nothing already standing gets safer by
+ *  accident. PURE over the save's own ledger. */
+export function knownRoad(character, fromId, toId, { cfg = null, path = null } = {}) {
+  const k = tradeCfg(cfg).knownRoad || {};
+  const perRun = num(k.perRun, 0.1), floor = num(k.floor, 0.5), relayMult = num(k.relayMult, 2);
+  const runs = Math.max(0, Math.floor(num(character?.roadsKnown?.[roadKey(fromId, toId)], 0)));
+  const onRoute = new Set([String(fromId), String(toId), ...(Array.isArray(path) ? path.map(String) : [])]);
+  const relay = (character?.holdings || []).some(h => h && onRoute.has(String(h.locationId))
+    && featuresOf(h).some(f => featureDef(String(f?.kind || f || ""), cfg)?.facility === "relay"));
+  const rate = perRun * (relay ? relayMult : 1);
+  return { runs, relay, rate, floor, mult: Math.max(floor, 1 - rate * runs) };
+}
+
+/** ⛔ AND THE LEDGER IS WRITTEN WHERE A RUN COMPLETES, which is arrival — not departure, because a load that was
+ *  taken on the road taught you nothing about walking it. */
+export function markRoadRun(character, fromId, toId) {
+  if (!character || !fromId || !toId) return 0;
+  if (!character.roadsKnown || typeof character.roadsKnown !== "object") character.roadsKnown = {};
+  const k = roadKey(fromId, toId);
+  character.roadsKnown[k] = Math.max(0, Math.floor(num(character.roadsKnown[k], 0))) + 1;
+  return character.roadsKnown[k];
+}
+
+/** ⛔ LEVER A's LAST CLAUSE — "STOCK WAITING FOR THE CARAVAN COUNTS TOWARD RAID EXPOSURE", priced.
+ *
+ *  ⚑ A STANDING RUN DEPARTS ONCE PER ROUND TRIP, so everything the hold makes between departures SITS IN THE SHED.
+ *  A market 135 days out means ninety passes of stock standing there; `fullAt` is 40 units and these holds make 16–20
+ *  a pass, so the store is past its own full line after two passes and stays there — at maximum raid fill, and a raid
+ *  takes `takeShare` of all of it.
+ *
+ *  ⛑ THE CHANCE IS `raidChanceFor`, the same product the tick rolls, asked at the fill the waiting stock implies.
+ *  Nothing here is a second raid model. ⚠️ Priced at the LOCAL price, because that is what the stock is worth while
+ *  it is still standing here. Returns the cost PER PASS. PURE. */
+export function waitingExposure(character, holding, { units = 0, basket = null, cfg = null, economy = null, regionId = null, dangerLevel = 0, people = {}, npcCfg = {}, day = null } = {}) {
+  const take = Number.isFinite(Number(cfg?.raid?.takeShare)) ? Number(cfg.raid.takeShare) : 0.5;
+  const waiting = Math.max(0, num(units));
+  if (!(waiting > 0) || !(num(dangerLevel) > 0)) {
+    return { units: waiting, chance: 0, worth: 0, cost: 0, takeShare: take,
+      why: !(waiting > 0) ? "nothing waiting" : "nowhere near trouble" };
+  }
+  const rc = raidChanceFor(character, holding, { cfg, dangerLevel: num(dangerLevel), people, npcCfg, day, total: waiting });
+  // the produced basket, scaled up to the number of units that would be standing there
+  const basketUnits = Object.values(basket || {}).reduce((a, n) => a + num(n), 0);
+  const scaled = {};
+  if (basketUnits > 0) for (const [g, n] of Object.entries(basket)) scaled[g] = num(n) * (waiting / basketUnits);
+  const worth = num(worthOfGoods(scaled, { economy, regionId, cfg }), 0);
+  return { units: Math.round(waiting), chance: rc.chance, fill: rc.fill ?? null, worth: Math.round(worth),
+    takeShare: take, cost: Math.round(rc.chance * take * worth * 10) / 10 };
+}
+
+/** ⛑ LEVER A — WHAT A STANDING RUN TO ONE MARKET IS WORTH PER PASS.
+ *
+ *  `(what the hold makes in a pass × the price THERE) − the crew's keep − the road's expected loss`, and for a hired
+ *  company their cut in place of the keep. ⚠️ Every term is READ: `producesPerPass` is the number the tick adds to the
+ *  store, `worthOfGoods` is the pricing every other reader uses, `crewKeepPerPass` is the number `upkeepFor` charges,
+ *  and the loss is `ROAD_HAZARD_PER_DANGER_DAY` — the road dial the tick actually rolls — times the share a lost fight
+ *  takes.
+ *
+ *  ⚠️ THE EXPECTED LOSS PRICES EVERY ENCOUNTER AS A LOSS, because a forecast cannot know whether your escort wins a
+ *  fight that has not happened. That is the same convention `raidRisk` uses for a hold (chance × takeShare × worth),
+ *  and using a second one would make two cards disagree about the same road.
+ *
+ *  ⛔ AND A HOLD THAT MAKES NOTHING HAS NO ROUTE VALUE AT ALL — `ok: false`, not 0, because those are different
+ *  answers and the card says the second one out loud. PURE. */
+export function routeValue(character, holding, {
+  toId = null, days = null, danger = 0, path = null, cfg = null, economy = null, locations = {},
+  crew = null, companyCut = null, density = null, perDangerChance = ROAD_HAZARD_PER_DANGER_DAY,
+  dangerLevel = null, people = {}, npcCfg = {}, day = null, baseWaitCost = 0,
+} = {}) {
+  const t = tradeCfg(cfg);
+  const passDays = Math.max(0.1, num(t.passDays, 3));
+  const made = producesPerPass(holding, cfg, { density });
+  const basket = {};
+  for (const y of made) if (num(y?.units) > 0) basket[y.goods] = num(basket[y.goods]) + num(y.units);
+  const dest = locations?.[toId] || null;
+  const homeRegion = locations?.[holding?.locationId]?.regionId ?? null;
+  const there = worthOfGoods(basket, { economy, regionId: dest?.regionId ?? null, cfg });
+  const local = worthOfGoods(basket, { economy, regionId: homeRegion, cfg });
+  if (!Object.keys(basket).length) return { ok: false, why: "this hold makes nothing in a pass, so there is no run to price", made, basket, local: null, there: null };
+  if (there == null) return { ok: false, why: "what this hold makes has no price there", made, basket, local, there: null };
+
+  const carriage = carriageFor(character, holding, { toId, locations, cfg, company: companyCut != null });
+  const roadDays = num(days) > 0 ? Math.round((num(days) / carriage.mult) * 10) / 10 : num(days, 0);
+  const known = knownRoad(character, holding?.locationId, toId, { cfg, path });
+  const takeShare = Number.isFinite(Number(cfg?.raid?.takeShare)) ? Number(cfg.raid.takeShare) : 0.5;
+  // ⚑ HAZARD IS PER DAY AND PER POINT OF THE ROAD'S DANGER, so a faster road is a safer one — which is Erik's own
+  // note on lever C, and it falls out of the arithmetic rather than being added to it.
+  const encounters = Math.max(0, num(danger)) * perDangerChance * Math.max(0, roadDays) * known.mult;
+  const lossShare = Math.min(1, encounters * takeShare);
+  const keep = companyCut != null ? 0 : crewKeepPerPass(holding, cfg, { crew: crew ?? num(t.crew, 2) }).keep;
+  const cut = companyCut != null ? clamp01(Number(companyCut)) : 0;
+  const fee = Math.round(there * cut * 10) / 10;
+  const loss = Math.round(there * lossShare * 10) / 10;
+  // ⛔ AND THE WAIT. A standing run departs once per ROUND TRIP, so the hold's production piles up between
+  // departures — on average half of one load standing in the shed, exposed. ⚑ `baseWaitCost` is what the shed already
+  // risks when you sell at home, so what a route costs is the DIFFERENCE: this is the road's own toll on the pile, not
+  // a second charge for a risk the hold already ran.
+  const madeUnits = Object.values(basket).reduce((a, n) => a + num(n), 0);
+  const perDeparture = Math.max(1, Math.ceil((roadDays * 2) / passDays));
+  const waiting = madeUnits * perDeparture / 2;
+  // ⚠️ NOT `danger` — that parameter is the ROAD's worst danger, and this is the danger where the stock STANDS. Two
+  // numbers about two different places; `node --check` caught the redeclaration, which is the only reason this is not
+  // one name quietly answering both questions.
+  const homeDanger = dangerLevel != null ? num(dangerLevel) : num(locations?.[holding?.locationId]?.dangerLevel, 0);
+  const wait = waitingExposure(character, holding, { units: waiting, basket, cfg, economy, regionId: homeRegion, dangerLevel: homeDanger, people, npcCfg, day });
+  const exposure = Math.max(0, Math.round((wait.cost - num(baseWaitCost)) * 10) / 10);
+  const perPass = Math.round((there - keep - loss - fee - exposure) * 10) / 10;
+  return {
+    ok: true, made, basket, there, local, keep, loss, fee, exposure, perPass,
+    wait: { ...wait, perDeparture, roundTrip: Math.round(roadDays * 2 * 10) / 10, atHomeDanger: homeDanger },
+    firstCoin: Math.max(1, Math.ceil(Math.max(0, roadDays) / passDays)),
+    days: num(days, 0), roadDays, speedMult: carriage.mult, speedLabel: carriage.label, carriage,
+    encounters: Math.round(encounters * 1000) / 1000, lossShare: Math.round(lossShare * 1000) / 1000,
+    runs: known.runs, hazardMult: known.mult, relay: known.relay, danger: num(danger, 0),
+    gain: local == null ? null : Math.round((perPass - local) * 10) / 10,
+  };
+}
+
 /** ⛔ CCODE-500 (SNG-652 §6b) — EVERY WAY THE STORE CAN LEAVE, PRICED SIDE BY SIDE.
  *
  *  Erik asked for this by name: *"cost vs benefits so you can compare against selling here."* ⚠️ And the
@@ -133,7 +383,11 @@ export function sendCaravan(character, {
  *
  *  ⬜ WHAT IS NOT HERE IS NOT PRICED: visiting traders and hired companies are unbuilt, so a hired-company row
  *  appears only when a caller passes a cut, and says plainly that it is a quote rather than an offer. Pure. */
-export function storeExits(character, holding, { cfg = null, economy = null, locations = {}, regionId = null, companyCut = null, maxMarkets = 4 } = {}) {
+export function storeExits(character, holding, { cfg = null, economy = null, locations = {}, regionId = null, companyCut = null, maxMarkets = null, density = null, dangerLevel = null, people = {}, npcCfg = {}, day = null } = {}) {
+  // ⚠️ `maxMarkets` WAS 4 AND THAT WAS THE DEFECT AEVI MEASURED: two 147-day markets at ×3.6 took both slots and the
+  // Crossing, 33 days out at ×1.8, never appeared. It is now an override for a caller that wants one, and content
+  // decides (`trade.showMarkets`, chosen over `trade.candidates` valued). ⛑ `density` is the ground under the hold —
+  // null is UNMEASURED (×1), never 0, the same reading `yieldFor` gives it.
   const rows = [];
   const here = holding?.locationId ? locations[holding.locationId] : null;
   const homeRegion = regionId ?? here?.regionId ?? null;
@@ -145,7 +399,7 @@ export function storeExits(character, holding, { cfg = null, economy = null, loc
   // 1 · YOU, IN PERSON — the baseline every other row is compared against.
   rows.push({ id: "sell-here", who: "you, in person", where: here?.name || "here", price: "local",
     gross: local, costs: [], net: local, days: 0, risk: 0,
-    said: "all of it, at once, at the price it fetches here" });
+    said: `what this place makes, sold here, at the price it fetches here — and the store's ${local} today in one go if you want it` });
 
   // 2 · THE KEEPER (or the hands, unkept) — a SHARE per pass, at the SAME price.
   const share = holding?.steward
@@ -155,63 +409,149 @@ export function storeExits(character, holding, { cfg = null, economy = null, loc
   rows.push({ id: "keeper-sells", who: holding?.steward ? "the keeper" : "the hands, with nobody keeping it",
     where: here?.name || "here", price: "local", gross: local, costs: [], net: local, days: share > 0 ? Math.ceil(1 / share) : null,
     perPass, risk: 0,
-    said: `${Math.round(share * 100)}% of the store a pass, at the same price — about ${perPass} a pass, and it sits here while it waits` });
+    said: `${Math.round(share * 100)}% of the store a pass, at the same price — about ${perPass} next pass, settling at what the place makes, and it sits here while it waits` });
 
-  // 3 · A CARAVAN, to the market that pays best after the road.
-  // ⚠️ THE ROADS ARE ASKED, NOT GUESSED. Every place with a region is priced, and only the ones a route
-  // actually reaches make the list — a market with no road to it is not an option.
-  const seen = new Set([holding?.locationId]);
-  const cand = [];
+  // 3 · THE MARKETS — SNG-654 LEVER B. ⛔ RANKED BY WHAT THEY WOULD EARN, not by their gross price; ONE ROW PER
+  // REGION, so the ten places of the Crossing are one market and not ten candidates; and every priced region is
+  // valued before any is chosen, rather than the first four by price.
+  //
+  // ⚑ ONE SEARCH ANSWERS ALL OF THEM. `roadDistances` is a single Dijkstra from the hold's own place, so 38 regions
+  // cost what one `routeBetween` used to — which is what makes "route more than 4 before choosing" affordable on a
+  // card that renders every time the Holdings tab opens. ⚠️ Measured: all 703 region pairs in this world are
+  // road-connected, so nothing is missed by ranking on roads; the gate leg is asked for the rows actually shown,
+  // where it can only improve them.
+  const t654 = tradeCfg(cfg);
+  // the hold's own rate, at its own prices — the number every other row is compared against
+  const madeBasket = (() => {
+    const b = {};
+    for (const y of producesPerPass(holding, cfg, { density })) if (num(y?.units) > 0) b[y.goods] = num(b[y.goods]) + num(y.units);
+    return b;
+  })();
+  const madeUnits654 = Object.values(madeBasket).reduce((a, n) => a + num(n), 0);
+  const localFlow = madeUnits654 > 0 ? worthOfGoods(madeBasket, { economy, regionId: homeRegion, cfg }) : null;
+  // ⛔ WHAT THE SHED ALREADY RISKS WHEN YOU SELL AT HOME — the baseline a route's exposure is measured AGAINST, so a
+  // route is not charged for a risk the hold was already running. ⚑ A keeper clears `keeperSells` of the store a pass,
+  // so in steady state it holds production ÷ that share; with nobody selling, it holds whatever is actually in there.
+  // ⚠️ AND THE DANGER IS THE HOLD'S OWN PLACE unless a caller overrides it: a default of 0 would have priced every
+  // shed in the world as safe, which is the "a default that behaves like a value" defect exactly.
+  const danger654 = dangerLevel != null ? num(dangerLevel) : num(locations?.[holding?.locationId]?.dangerLevel, 0);
+  // ⚠️ IGNORING THE ROUTE ON PURPOSE: the baseline is what selling at home WOULD earn, and a standing route makes
+  // `sellShareFor` zero. Reading it here would compare a route against itself.
+  const localShare654 = sellShareFor(holding, cfg, { ignoreRoute: true });
+  const base654 = waitingExposure(character, holding, {
+    units: localShare654 > 0 ? madeUnits654 / localShare654 : storeTotal(holding),
+    basket: madeBasket, cfg, economy, regionId: homeRegion, dangerLevel: danger654, people, npcCfg, day });
+  const show = Math.max(1, Math.floor(Number(maxMarkets ?? t654.showMarkets ?? 3)));
+  const consider = Math.max(show, Math.floor(num(t654.candidates, 12)));
+  const dd = (() => { try { return roadDistances(holding.locationId, locations); } catch { return null; } })();
+  const perRegion = new Map();
   for (const [id, loc] of Object.entries(locations || {})) {
-    if (!loc || seen.has(id) || !loc.regionId || loc.regionId === homeRegion) continue;
-    const w = worthAt(loc.regionId);
-    if (w == null || w <= local) continue;                       // no better than home: not a reason to travel
-    cand.push({ id, loc, worth: w });
+    if (!loc || !loc.regionId || loc.regionId === homeRegion || id === holding.locationId) continue;
+    const d = dd?.dist?.[id];
+    if (!Number.isFinite(d)) continue;                       // no road from here: not an option, not a bad one
+    const cur = perRegion.get(loc.regionId);
+    if (!cur || d < cur.days) perRegion.set(loc.regionId, { id, loc, days: Math.round(d * 10) / 10 });
   }
-  cand.sort((a, b) => b.worth - a.worth);
-  const markets = [];
-  for (const c of cand) {
-    if (markets.length >= maxMarkets) break;
-    const route = routeBetween(holding.locationId, c.id, locations, { traveller: character });
-    const opt = (route?.options || []).slice().sort((a, b) => (a.days ?? 99) - (b.days ?? 99))[0];
-    if (!opt) continue;                                          // no road: not an option, not a bad one
-    markets.push({ ...c, days: opt.days, path: opt.path || [], label: opt.label });
+  const scored = [];
+  for (const m of perRegion.values()) {
+    // ⚠️ `pathFrom` RETURNS `{ days, path, legs }`, NOT AN ARRAY — my first draft handed the object to `roadDanger`
+    // and every hold with a market threw "path is not iterable". Read the shape; never assume it.
+    const path = (() => { try { return pathFrom(dd, holding.locationId, m.id)?.path || []; } catch { return []; } })();
+    const danger = roadDanger(path, locations);
+    const v = routeValue(character, holding, { toId: m.id, days: m.days, danger, path, cfg, economy, locations, density, dangerLevel: danger654, people, npcCfg, day, baseWaitCost: base654.cost });
+    if (!v.ok) continue;
+    // ⛑ THE OLD FILTER'S CONTRACT, KEPT, in the new unit: a market that does not beat selling at home is not a
+    // reason to travel. ⚠️ The old one compared the STORE's gross ("w <= local"), which is why a market that pays
+    // better for what the hold MAKES could be excluded by what happened to be in the shed.
+    if (localFlow != null && !(v.perPass > localFlow)) continue;
+    scored.push({ ...m, path, danger, v });
   }
-  for (const m of markets.slice(0, 2)) {
-    const risk = roadDanger(m.path, locations);
+  // ⛑ AND THE REASON A HOLD SEES NO MARKETS IS SAID, not left as an empty table.
+  const noFlow = scored.length === 0 && !perRegion.size;
+  scored.sort((a, b) => (b.v.perPass ?? 0) - (a.v.perPass ?? 0) || a.days - b.days);
+  const markets = scored.slice(0, consider).slice(0, show);
+
+  for (const m of markets) {
+    // ⚑ NOW ask the roads AND THE GATES for the rows that will be shown — a gate turns a 236-day walk into 3.9 days
+    // for a traveller who has found it, and that is a real column on this card.
+    const route = (() => { try { return routeBetween(holding.locationId, m.id, locations, { traveller: character }); } catch { return null; } })();
+    const opt = (route?.options || []).slice().sort((a, b) => (a.days ?? 99) - (b.days ?? 99))[0] || null;
+    const days = opt ? num(opt.days, m.days) : m.days;
+    const path = opt?.path?.length ? opt.path : m.path;
+    const danger = roadDanger(path, locations);
+    const v = routeValue(character, holding, { toId: m.id, days, danger, path, cfg, economy, locations, density, dangerLevel: danger654, people, npcCfg, day, baseWaitCost: base654.cost });
+    if (!v.ok) continue;
+    const sped = v.speedMult > 1 ? `, ${v.speedLabel} rather than on foot (${v.roadDays} days instead of ${v.days})` : "";
+    const road = v.runs > 0 ? `, and you have walked this road ${v.runs} time${v.runs === 1 ? "" : "s"} — ${Math.round((1 - v.hazardMult) * 100)}% less trouble on it${v.relay ? " (a relay station of yours stands on it)" : ""}` : "";
     rows.push({ id: `caravan:${m.id}`, who: "carriers from this hold", where: m.loc.name || m.id, price: "there",
-      gross: m.worth, costs: [{ label: "your people are away", value: null }], net: m.worth, days: m.days, risk,
-      said: `${m.worth} at ${m.loc.name || m.id} — ${m.days} day${m.days === 1 ? "" : "s"} on the road, ${risk ? `danger ${risk} on the way` : "a quiet road"}, and the carriers are off their jobs until they are back` });
+      gross: worthAt(m.loc.regionId), net: worthAt(m.loc.regionId), days: v.roadDays, risk: danger,
+      perPass: v.perPass, firstCoin: v.firstCoin, speedMult: v.speedMult, speedLabel: v.speedLabel,
+      runs: v.runs, hazardMult: v.hazardMult, relay: v.relay, value: v, label: opt?.label || null,
+      costs: [{ label: `the crew's keep (${num(t654.crew, 2)} carriers)`, value: v.keep },
+              { label: `what the road is expected to take`, value: v.loss },
+              { label: `the stock waiting for it, beyond what the shed already risks`, value: v.exposure }],
+      said: `${v.perPass} a pass at ${m.loc.name || m.id} — what this hold makes, sold there${sped}. First coin in ${v.firstCoin} pass${v.firstCoin === 1 ? "" : "es"}${danger ? `, danger ${danger} on the way` : ", a quiet road"}${road}`
+        + `${v.exposure > 0 ? `. It departs every ${v.wait.perDeparture} passes, so about ${v.wait.units} units stand waiting for it — ${v.exposure} a pass in raid risk beyond what the shed already carries` : ""}` });
     if (companyCut != null) {
-      const cut = Math.max(0, Math.min(1, Number(companyCut)));
-      const fee = Math.round(m.worth * cut);
-      rows.push({ id: `company:${m.id}`, who: "a hired company", where: m.loc.name || m.id, price: "there",
-        gross: m.worth, costs: [{ label: `their cut (${Math.round(cut * 100)}%)`, value: fee }], net: m.worth - fee, days: m.days, risk: 0,
-        quote: true,
-        said: `${m.worth - fee} after their ${Math.round(cut * 100)}% — they carry the road and your people stay home` });
+      const cv = routeValue(character, holding, { toId: m.id, days, danger, path, cfg, economy, locations, density, companyCut, dangerLevel: danger654, people, npcCfg, day, baseWaitCost: base654.cost });
+      // ⛔ GATE-AWARE, which is lever C's last row: a company knows the gates whether or not YOU have found them, so
+      // its route is asked with no traveller — which is exactly what `gatesUsableBy(null)` means.
+      const cRoute = (() => { try { return routeBetween(holding.locationId, m.id, locations, { traveller: null }); } catch { return null; } })();
+      const cOpt = (cRoute?.options || []).slice().sort((a, b) => (a.days ?? 99) - (b.days ?? 99))[0] || null;
+      const cDays = cOpt ? num(cOpt.days, days) : days;
+      const cv2 = cDays < days ? routeValue(character, holding, { toId: m.id, days: cDays, danger: roadDanger(cOpt?.path || path, locations), path: cOpt?.path || path, cfg, economy, locations, density, companyCut, dangerLevel: danger654, people, npcCfg, day, baseWaitCost: base654.cost }) : cv;
+      if (cv2.ok) rows.push({ id: `company:${m.id}`, who: "a hired company", where: m.loc.name || m.id, price: "there",
+        gross: worthAt(m.loc.regionId), net: worthAt(m.loc.regionId), days: cv2.roadDays, risk: 0, quote: true,
+        perPass: cv2.perPass, firstCoin: cv2.firstCoin, speedMult: cv2.speedMult, speedLabel: cv2.speedLabel, value: cv2,
+        costs: [{ label: `their cut (${Math.round(clamp01(Number(companyCut)) * 100)}%)`, value: cv2.fee }],
+        said: `${cv2.perPass} a pass after their ${Math.round(clamp01(Number(companyCut)) * 100)}% — they carry the road and your people stay home${cOpt && cDays < days ? `, and they know the gates (${cv2.roadDays} days, not ${days})` : ""}. First coin in ${cv2.firstCoin} pass${cv2.firstCoin === 1 ? "" : "es"}` });
     }
   }
-  // ⛔ AND THE CLOCK IS A COST. Measured on real content the first time this ran: the best NET from Archive
-  // Hollow was a caravan to Choir-Height — 368 against 120 at home, and **151.7 days on the road**. Ranking on
-  // net alone would have named half a year with your people gone as the thing to do.
-  // ⚠️ So every row carries what it returns PER PASS — 72 hours, the unit every other number on the card is
-  // in — and the best row is chosen on that. A sale that happens now is compared against itself: `days: 0`
-  // means it is done this pass, not that it is infinitely good.
-  const passDays = 3;                                     // 72 hours, the pass the whole card is priced in
+
+  // ⛔ AND NOW EVERY ROW IS IN THE SAME UNIT — WHAT IT EARNS IN A PASS, IN STEADY STATE.
+  //
+  // ⚠️ THE OLD ARITHMETIC RANKED A RATE AGAINST A PILE. `perPass` was `net ÷ passes`, so selling the store today
+  // scored the WHOLE STORE (days 0 → 1 pass) while a route scored its takings divided by the road — and no route could
+  // ever win, which is exactly the finding SNG-654 opens with: "long-haul trade is priced so it can never be worth it".
+  // ⛑ A standing arrangement earns a RATE. Selling here, in person or through a keeper, turns what the hold makes into
+  // coin at the local price. A route turns the same production into coin at the far price, less the keep and the road.
+  // The pile is still answered — `net` is what it fetches today — but the comparison is between the arrangements.
+  const passDays = Math.max(0.1, num(t654.passDays, 3));
   for (const r of rows) {
     const passes = Math.max(1, Math.ceil((Number(r.days) || 0) / passDays));
     r.passes = passes;
-    r.perPass = r.perPass != null ? r.perPass : Math.round((Number(r.net) || 0) / passes);
+    if (r.id === "sell-here" || r.id === "keeper-sells") {
+      // ⛔ THE SAME UNIT AS EVERY OTHER ROW: what this arrangement earns per pass, in steady state. Selling at home
+      // — in person or through a keeper — turns what the hold MAKES into coin at the local price.
+      // ⚑ A KEEPER'S FIRST PASS IS DIFFERENT FROM HER TENTH, and both are true: she sells `keeperSells` of the store
+      // each pass, so a shed with one pass in it yields half of that pass, and a shed at rest yields the whole of it.
+      // `thisPass` is what will actually be credited next pass (the number the Purse panel projects); `perPass` is the
+      // rate the arrangement settles at, which is what a comparison between arrangements has to be in.
+      // ⛑ A HOLD THAT MAKES NOTHING HAS NO RATE, so it keeps the old arithmetic — what the pile fetches, over the
+      // passes it takes to sell. Measured: 1 of the 6 live holds is in that case.
+      r.thisPass = r.perPass != null ? r.perPass : Math.round((Number(r.net) || 0) / passes);
+      r.perPass = localFlow != null ? localFlow : r.thisPass;
+      r.steady = localFlow;
+    } else if (r.perPass == null) {
+      r.perPass = Math.round((Number(r.net) || 0) / passes);
+    }
+    if (r.firstCoin == null) r.firstCoin = 1;
   }
-  const best = rows.slice().sort((a, b) => (b.perPass ?? 0) - (a.perPass ?? 0) || (a.passes ?? 0) - (b.passes ?? 0))[0] || null;
-  // ⛑ AND WHAT IT COSTS, NAMED — the second half of the sentence Erik asked for. The comparison is always
-  // against selling here, because that is the thing he said to compare against.
+  // ⚑ THE BEST ROW IS THE BEST RATE, and where two rates tie the one that pays SOONER wins — a keeper clearing the
+  // shelves this pass is not the same offer as a road that pays in six, even at the same rate.
+  const best = rows.slice().sort((a, b) => (b.perPass ?? 0) - (a.perPass ?? 0) || (a.firstCoin ?? 1) - (b.firstCoin ?? 1) || rows.indexOf(a) - rows.indexOf(b))[0] || null;
+  // ⛑ AND WHAT IT COSTS, NAMED — the second half of the sentence Erik asked for. The comparison is always against
+  // selling here, because that is the thing he said to compare against.
   const baseline = rows.find(r => r.id === "sell-here") || null;
   const costs = best && baseline && best.id !== baseline.id
     ? `${best.perPass} a pass against ${baseline.perPass} for selling it here yourself`
     : null;
-  return { rows, local, units, best, bestCosts: costs,
-    why: markets.length ? null : "no road from here reaches a market that pays better" };
+  return { rows, local, units, best, bestCosts: costs, localFlow, makes: producesPerPass(holding, cfg, { density }),
+    waiting: base654, madeUnits: madeUnits654,
+    why: markets.length ? null
+      : localFlow == null ? "this hold makes nothing in a pass, so there is no run to price — what is in the store is all there is"
+      : noFlow ? "no road from here reaches a market in another region"
+      : "no market in reach pays more for what this hold makes than it fetches at home" };
 }
 
 export function standingCarriers(car, people = {}, character = null) {
@@ -360,6 +700,16 @@ export function tickCaravans(character, {
 } = {}) {
   const out = [];
   for (const car of caravansOf(character)) {
+    // ⛑ SNG-654 A — A STANDING CREW WALKING HOME. They carry nothing, so nothing can be taken from them; what the
+    // return costs is TIME, and that time is why a far market departs once in ninety passes.
+    if (car && car.status === "returning") {
+      if (car.homeDay != null && num(day, 0) >= num(car.homeDay)) {
+        car.status = "home";
+        car.events.push({ at: num(day, 0), what: `the carriers are back at ${car.from}` });
+        out.push({ kind: "home", caravanId: car.id, note: null });
+      }
+      continue;
+    }
     if (!car || car.status !== "travelling") continue;
     const now = num(day, 0);
     const elapsed = Math.max(0, Math.min(num(car.days, 0), Math.round(now - num(car.lastTickDay, now))));
@@ -417,21 +767,37 @@ export function arriveCaravan(character, car, { locations = {}, economy = null, 
     car.events.push({ at: day, what: `reached ${dest?.name || car.to} with nothing left to sell` });
     return { ok: false, why: "it arrived empty", sold: {}, crystal: 0, regionId };
   }
+  // ⛑ LEVER D — THE ROAD IS KNOWN NOW. Written at ARRIVAL, not departure: a load that was taken on the way taught you
+  // nothing about walking this road safely.
+  markRoadRun(character, car.from, car.to);
   const cr = earnAt(character, total, regionId, economy, { origin: "traded" });
   if (!cr.ok) { car.events.push({ at: day, what: `reached ${dest?.name || car.to}, but the coin would not settle` }); return { ok: false, why: cr.why, sold, crystal: 0, regionId }; }
   car.events.push({ at: day, what: `reached ${dest?.name || car.to} — ${describe(Object.fromEntries(Object.entries(sold).map(([g, s]) => [g, s.units])))} sold for ${saidEarned(cr)}` });
-  return { ok: true, sold, crystal: total, said: saidEarned(cr), regionId };
+  // ⛔ AND ON A STANDING RUN THEY WALK BACK, because the next departure needs them. ⚑ Nothing to take on the way home,
+  // so no hazard is rolled for it — the road's risk in this game is a risk to the LOAD.
+  if (car.standing) {
+    car.status = "returning"; car.homeDay = day == null ? null : Math.round(num(day) + num(car.days));
+    const h = (character?.holdings || []).find(x => x && x.id === car.holdingId);
+    if (h?.route) h.route.runs = Math.max(0, Math.floor(num(h.route.runs, 0))) + 1;
+  }
+  return { ok: true, sold, crystal: total, said: saidEarned(cr), regionId, standing: !!car.standing };
 }
 
 /** ⚑ WHAT THE GM IS TOLD, so a caravan is something the world MENTIONS rather than a number in a panel. */
 export function caravansForGM(character, locations = {}) {
   const rows = caravansOf(character).filter(c => c && c.status === "travelling");
-  if (!rows.length) return null;
+  // ⛑ SNG-654 A — AND A ROUTE THAT STANDS, even between departures, because "there is a run out of here every few
+  // weeks" is a fact about the place the narrator should have.
+  const standing = (character?.holdings || []).filter(h => h?.route?.toId).map(h =>
+    `- a standing run out of ${h.name || h.id} to ${locations[h.route.toId]?.name || h.route.toId}`
+    + `${h.route.runs ? `, walked ${h.route.runs} time${h.route.runs === 1 ? "" : "s"} so far` : ", not yet walked"}`
+    + ` — its keeper holds the stock back for the cart rather than selling it here`);
+  if (!rows.length) return standing.length ? standing.join("\n") : null;
   return rows.map(c => {
     const units = Object.values(c.load || {}).reduce((a, n) => a + num(n), 0);
     const who = (c.carriers || []).length;
     return `- ${units} unit(s) on the road from ${locations[c.from]?.name || c.from} to ${locations[c.to]?.name || c.to}`
       + ` — ${c.routeLabel}, ${c.days} days, ${who ? `${who} walking with it` : "⛔ NOBODY walking with it"}`
       + (c.danger ? ` · the worst of that road is danger ${c.danger}` : "");
-  }).join("\n");
+  }).concat(standing).join("\n");
 }

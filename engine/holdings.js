@@ -1299,6 +1299,27 @@ export function watchReadout(character, holding, { cfg = null, people = {}, npcs
 export function isGuarded(holding, cfg = null) {
   return !!(holding?.defence || (Array.isArray(holding?.garrison) ? holding.garrison.length > 0 : holding?.garrison) || defenceOf(holding, cfg) > 0);
 }
+/** ⛑ SNG-654 A (Erik 2026-09-25: *"yes on a-d"*) — WHAT A STANDING ROUTE'S CREW IS PAID EACH PASS, and it is one
+ *  function because two readers need the same answer: the comparison card FORECASTS this cost before a route is set,
+ *  and `upkeepFor` CHARGES it every pass once one is. ⚠️ Two derivations of one number is how a card and an engine
+ *  come to disagree — the defect I have repaired in four other places in this project.
+ *
+ *  ⛔ AND A CARRIER WHO IS ALREADY ONE OF THE HOLD'S HANDS IS NOT PAID TWICE: `upkeepFor` pays `wagePerHand` for
+ *  everyone in `crew`, so a route staffed from the hold's own hands adds nothing, and one staffed from outside adds
+ *  their keep. ⚑ `crew` may be a list of ids (a route that is set) or a COUNT (a forecast of one that is not). PURE. */
+export function crewKeepPerPass(holding, cfg = null, { crew = null } = {}) {
+  const wage = Number(cfg?.growth?.wagePerHand) || 0;
+  const hands = new Set((Array.isArray(holding?.crew) ? holding.crew : []).map(String));
+  const listed = Array.isArray(crew) ? crew.map(String)
+    : Array.isArray(holding?.route?.crew) ? holding.route.crew.map(String) : null;
+  const count = listed == null && Number.isFinite(Number(crew)) ? Math.max(0, Math.floor(Number(crew))) : null;
+  // ⚠️ A FORECAST CANNOT KNOW WHO WILL WALK, so it charges for all of them — the pessimistic end, and the honest one
+  // for a player deciding whether to set the route at all.
+  const alreadyPaid = listed ? listed.filter(id => hands.has(id)).length : 0;
+  const paidFor = listed ? listed.length - alreadyPaid : (count || 0);
+  return { wage, paidFor, alreadyPaid, keep: Math.round(paidFor * wage * 100) / 100 };
+}
+
 export function upkeepFor(holding, cfg) {
   if (!holding || !cfg) return 0;
   const u = holding.upkeepCost ?? (cfg.upkeepByKind || {})[holding.kind];
@@ -1310,8 +1331,11 @@ export function upkeepFor(holding, cfg) {
   for (const f of featuresOf(holding)) { const def = featureDef(f.kind, cfg); feats += (Number(def?.upkeep) || 0) * (Number(f.count) || 1) * levelMult(f, def, "upkeep"); }   // CCODE-452
   const hands = Array.isArray(holding.crew) ? holding.crew.length : 0;
   const wage = Number(cfg.growth?.wagePerHand) || 0;
+  // ⛑ SNG-654 A — AND A STANDING ROUTE'S CARRIERS ARE HANDS BEING PAID. ⚠️ Zero on every hold that has no route,
+  // which is every hold in every save today, so nothing already standing pays a crystal more for this.
+  const road = crewKeepPerPass(holding, cfg).keep;
   // ⛔ CCODE-450: a tenth less while someone keeps the accounts
-  return Math.max(0, ((Number(u) || 0) + guards * perGuard + feats + hands * wage) * workMods(holding).upkeepMult);
+  return Math.max(0, ((Number(u) || 0) + guards * perGuard + feats + hands * wage + road) * workMods(holding).upkeepMult);
 }
 export function storeTotal(holding) {
   return Object.values(holding?.store || {}).reduce((a, n) => a + (Number(n) || 0), 0);
@@ -1324,14 +1348,20 @@ export function unitWorth(goods, { economy = null, regionId = null, cfg = null }
   if (!Number.isFinite(nm) || !Number.isFinite(sm)) return null;
   return { each: Math.round(base * nm * sm * 100) / 100, need: d.need, scarcity: d.scarcity };
 }
-export function storeWorth(holding, { economy = null, regionId = null, cfg = null } = {}) {
+/** ⛑ SNG-654 A — WHAT A BASKET OF GOODS FETCHES AT A REGION'S PRICES. `storeWorth` asked this of a store; a
+ *  route asks it of what a hold PRODUCES, and of what a load carries. ⚠️ `null` is "nothing here has a price",
+ *  never 0 — the distinction the whole comparison rests on. PURE. */
+export function worthOfGoods(goods = null, { economy = null, regionId = null, cfg = null } = {}) {
   let total = 0, any = false;
-  for (const [g, n] of Object.entries(holding?.store || {})) {
+  for (const [g, n] of Object.entries(goods || {})) {
     const w = unitWorth(g, { economy, regionId, cfg });
     if (!w) continue;
     any = true; total += (Number(n) || 0) * w.each;
   }
   return any ? Math.round(total) : null;
+}
+export function storeWorth(holding, { economy = null, regionId = null, cfg = null } = {}) {
+  return worthOfGoods(holding?.store || {}, { economy, regionId, cfg });
 }
 /** ⛔ CCODE-500 (SNG-652 §6) — THE CHANCE A RAID COMES THIS PASS, AND WHY.
  *
@@ -1422,8 +1452,13 @@ export function serviceIncome(character, holding, { cfg = null, locations = {}, 
  *  that now earns showed "−12 (0 in, 12 out)" — the old design's exact sentence, on a card describing new
  *  behaviour. ⛑ A keeper sells `keeperSells`; the hands sell `handsSell`; a place with nobody on it sells
  *  nothing, which is the part of the old rule that was always right. PURE. */
-export function sellShareFor(holding, cfg) {
+export function sellShareFor(holding, cfg, { ignoreRoute = false } = {}) {
   if (!holding) return 0;
+  // ⛔ SNG-654 A — AND NOBODY SELLS WHAT THE CARAVAN IS WAITING FOR. Aevi: "stock waiting for the caravan counts
+  // toward raid exposure — that ties into the stock policy: keep for the caravan." ⛑ The policy IS the route: a second
+  // boolean beside it would be a second answer to one question, and the pair would drift within a week.
+  // ⚠️ `ignoreRoute` is for the COMPARISON, which has to price what selling at home WOULD earn while a route stands.
+  if (!ignoreRoute && holding.route && holding.route.toId) return 0;
   if (holding.steward) return Math.max(0, Math.min(1, Number(cfg?.keeperSells ?? 0.5)));
   const hands = (holding.crew || []).length + (holding.garrison || []).length;
   if (hands > 0) return Math.max(0, Math.min(1, Number(cfg?.handsSell ?? 0.25)));
@@ -1442,8 +1477,9 @@ export function tickStore(character, holding, { cfg = null, economy = null, regi
   const out = { yielded: null, upkeep: 0, short: 0, raid: null, full: false, justFull: false };
   // ✅ features: a post with a mine yields — every material feature adds its goods beside the hold's own kind
   // ⛔ CCODE-450: a quarter more while someone tends it — said on the yield, so the store line and the news agree
-  const tendMult = workMods(holding).yieldMult;
-  const ys = yieldsFor(holding, cfg, { density }).map(y => (tendMult !== 1 && y.units > 0 ? { ...y, units: Math.round(y.units * tendMult), tended: true } : y));
+  // ⛑ SNG-654 A — THE ONE PRODUCER. This was inline here, and a route's value is the same number: what the hold
+  // makes in a pass. Two derivations of that would be a card and a tick that disagree.
+  const ys = producesPerPass(holding, cfg, { density });
   for (const y of ys) {
     if (!(y.units > 0)) continue;
     holding.store = holding.store && typeof holding.store === "object" ? holding.store : {};
@@ -2315,6 +2351,19 @@ export function holdingLedger(holding, { economy = null, cfg = null, regionId = 
 }
 
 /** Every yield a hold makes this pass: its own kind's, then each material feature's. */
+/** ⛑ SNG-654 A — WHAT THIS HOLD MAKES IN A PASS, which is the number a standing route's value is built on and the
+ *  number the tick adds to the store. ONE function, two readers.
+ *
+ *  ⚠️ PLURAL, and that matters: a post's own `yields` is usually null, and its MATERIAL FEATURES are where its
+ *  goods come from — measured on the live saves, 4 of 6 holds produce only through a mine or a fishery. ⛑ And a
+ *  tended place makes a quarter more (`workMods().yieldMult`, CCODE-450), which is part of what it makes and so
+ *  belongs here rather than at one caller. PURE. */
+export function producesPerPass(holding, cfg, { density = null } = {}) {
+  const tendMult = workMods(holding).yieldMult;
+  return yieldsFor(holding, cfg, { density })
+    .map(y => (tendMult !== 1 && y.units > 0 ? { ...y, units: Math.round(y.units * tendMult), tended: true } : y));
+}
+
 export function yieldsFor(holding, cfg, { density = null } = {}) {
   const out = [];
   const own = yieldFor(holding, cfg, { density });

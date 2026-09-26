@@ -89,6 +89,30 @@
       "type": "boolean",
       "description": "100% — whether it is open to trade."
     },
+    "route": {
+      "type": "object",
+      "description": "✅ SNG-654 A (Erik: \"yes on a-d\") — the STANDING RUN out of this hold: where it goes, who walks it, and how many times it has been walked. While it stands its keeper holds the stock back for the cart instead of selling it here (`sellShareFor` reads this), and `runStandingRoutes` sends the next load whenever the crew is home.",
+      "properties": {
+        "toId": { "type": "string", "description": "the place the run goes to." },
+        "crew": { "type": "array", "items": { "type": "string" }, "description": "the npcIds who walk it." },
+        "setDay": { "type": ["number", "null"], "description": "the world day the run was set." },
+        "lastDepartureDay": { "type": ["number", "null"], "description": "the world day the last load left." },
+        "runs": { "type": "number", "description": "completed runs, counted at arrival." }
+      },
+      "required": ["toId"]
+    },
+    "route": {
+      "type": "object",
+      "description": "✅ SNG-654 A (Erik: \"yes on a-d\") — the STANDING RUN out of this hold: where it goes, who walks it, and how many times it has been walked. While it stands its keeper holds the stock back for the cart instead of selling it here (`sellShareFor` reads this), and `runStandingRoutes` sends the next load whenever the crew is home.",
+      "properties": {
+        "toId": { "type": "string", "description": "the place the run goes to." },
+        "crew": { "type": "array", "items": { "type": "string" }, "description": "the npcIds who walk it." },
+        "setDay": { "type": ["number", "null"], "description": "the world day the run was set." },
+        "lastDepartureDay": { "type": ["number", "null"], "description": "the world day the last load left." },
+        "runs": { "type": "number", "description": "completed runs, counted at arrival." }
+      },
+      "required": ["toId"]
+    },
     "growthPasses": {
       "type": "number",
       "description": "100% — how many passes it has grown for."

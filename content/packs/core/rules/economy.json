@@ -380,7 +380,48 @@
   "_theLongship_20260918": "⛔ ERIK: 'limited space on a longship for features — but a longship can MOVE and has unique advantages with trading and carrying troops.' ⛑ SHE IS `bounded: hull`, cap 3 — and bounded is the SITE's property, not the kind's, which is the whole correction. ⚠️ TWO THIRDS OF HER IS ALREADY BUILT AND UNUSED: `hullable` is a BLOCKLIST `carriage.js:214` already reads — mine, quarry, waygate, gate, keep, ward-line, muster yard, grave-ground and reclamation bowl declare `hullable: false`, so **the engine already knows you cannot put a mine on a boat** — and `producesWhileMoving` on 13 features says what still works under way. SNG-591's carriage layer is authored and `moves: crewed` is exactly a longship. **What was missing was the count.** ⛔ HER THREE ADVANTAGES, EACH OF WHICH MUST BE REAL OR NOBODY SAILS ONE TWICE. **She arrives.** **She arbitrages** — buy where a good is surplus, sell where it is short, which a fixed `market` can never do: a market sets a price, a longship carries one. **And she lands a band**, which is where SNG-627's `housing` property earns itself: barracks on a hull is a band that arrives together, and 'troops can be put to work' is worth far more when the work is a coast away.",
   "keeperSells": 0.5,
   "handsSell": 0.25,
-  "_sellShares_20260921": "⛔ ERIK 2026-09-21: a hold still earns without a keeper. `keeperSells` is the share of the store a KEEPER moves in a pass (it was only ever a default inside the code — 0.5, chosen by measurement over ten passes of the Fell Pell: it is where the hold is clearly profitable AND the surplus is still worth a caravan). `handsSell` is the share the HANDS move when there is no keeper — half as much, so a keeper is plainly worth having and a place with people in it is not a place that earns nothing. ⚠️ A hold with NOBODY on it sells nothing at all, which is the part of the old rule that was right."
+  "_sellShares_20260921": "⛔ ERIK 2026-09-21: a hold still earns without a keeper. `keeperSells` is the share of the store a KEEPER moves in a pass (it was only ever a default inside the code — 0.5, chosen by measurement over ten passes of the Fell Pell: it is where the hold is clearly profitable AND the surplus is still worth a caravan). `handsSell` is the share the HANDS move when there is no keeper — half as much, so a keeper is plainly worth having and a place with people in it is not a place that earns nothing. ⚠️ A hold with NOBODY on it sells nothing at all, which is the part of the old rule that was right.",
+  "trade": {
+   "note": "✅ SNG-654 §4 — ERIK 2026-09-25: \"yes on a-d.\" THE FOUR LEVERS THAT MAKE A ROUTE WORTH RUNNING. A · a route is a STANDING RUN, so its value is what the hold makes each pass sold at the far price, less the crew's keep and the road's expected loss — distance is a DELAY (`firstCoin`) and a RISK, never a divisor. B · candidates are ranked by that per-pass value, ONE per region (its best-connected place), and more than four are routed before choosing. C · carriage multiplies the road's days: the FASTEST means the hold has, never the product of them. D · a known road gets safer, −perRun each completed run to `floor`, and a relay station on the route doubles the rate. ⚠️ `economy.carriage` is the MOBILE HOLDINGS bag (a hull that sails), not this one. Priced by CCode; Erik turns.",
+   "passDays": 3,
+   "crew": 2,
+   "candidates": 12,
+   "showMarkets": 3,
+   "speedByFeature": {
+    "_why": "⛑ KEYED BY FEATURE ID so a new means of carriage is a content line, not a code change. Erik's table: a stable 2×, a lizard-den 2.5×.",
+    "stable": 2,
+    "giant_lizard_den": 2.5
+   },
+   "speedByProperty": {
+    "_why": "⚠️ AND A FALLBACK BY PROPERTY, so a mounts-bearing feature nobody listed above still carries a load faster instead of silently walking.",
+    "mounts": 2
+   },
+   "waterSpeed": 3,
+   "companySpeed": 2,
+   "waterTags": [
+    "harbour",
+    "harbor",
+    "port",
+    "river",
+    "riverside",
+    "coast",
+    "coastal",
+    "sea",
+    "lake",
+    "shore",
+    "wharf",
+    "quay",
+    "dock",
+    "tidal"
+   ],
+   "_waterTagsWhy": "⚠️ NARROWER THAN `carriage.needsTags.crewed`, deliberately: that list answers \"can a hull sit here\" and includes `bridge`, `ford` and `marsh`. A bridge is where a road CROSSES water and a ford is where you wade — neither is a shipping lane. Erik's rule is \"both ends water-tagged\", so both the hold's place and the market's must carry one of these.",
+   "knownRoad": {
+    "_why": "✅ Lever D. Each completed run cuts that road's hazard by `perRun`, to `floor`; a relay station of yours on the route doubles the rate. The road is remembered BOTH WAYS — a road you have walked is known whichever end you start from.",
+    "perRun": 0.1,
+    "floor": 0.5,
+    "relayMult": 2
+   }
+  }
  },
  "debts": {
   "note": "✅ Q5-B (SPEC_debts_and_reception, Erik: option B — a PAYABLE debt, and 'tie in the local authority NPC… THEM that will remember what you did… depending on who they are'). worldState.debts[holderId] is held by a NAMED NPC; escalation is THEIR choice: only a holder whose reactsToReputation carries one of escalatingTags acts, one step per escalateAfterDays, up to maxEscalation (1: received colder · 2: refused — no trade, hire or shelter). 3 (a bounty) and 4 (a hit squad) are NOT built — they need an encounter and contingentsFromPeople, and are Aevi's and Erik's to shape. A debt clears three ways: paid (debtOps settle — the purse is debited), a deed (debtOps forgive — the GM says what outweighed it), or the holder dies or departs. Never in coin.",

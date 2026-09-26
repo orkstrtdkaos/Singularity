@@ -8344,8 +8344,16 @@ console.log("\n── §76e · the ways out, priced; and the risk of standing st
   const C6 = await lch6();
   const econ6 = C6.rules.economy, cfg6 = { ...econ6.holdStore, features: econ6.holdFeatures };
   const where6 = Object.entries(C6.locations).find(([, l]) => l && l.regionId);
-  const mk6 = (over = {}) => ({ id: "h6", kind: "post", condition: "holding", locationId: where6[0],
-    store: { raw_material: 20, cut_stone: 10 }, features: [], improvements: [], steward: null, ...over });
+  // ⚠️ THIS FIXTURE MADE NOTHING, AND SNG-654 TURNED THAT INTO SILENT COVERAGE LOSS. A `post` with no `yields` and
+  // no material feature produces 0 a pass, and a route's value is what a hold MAKES — so once the comparison became a
+  // rate, every haul row vanished from this section and three checks below went on passing over an empty list.
+  // ⛑ So it PRODUCES now (`yields`), and the no-production case is asserted deliberately instead of by accident.
+  // ⚠️ AND THRIVING, because a hold at `holding` makes FOUR units a pass and two carriers cost 6 — measured, every
+  // market in reach then loses to selling at home, which is Aevi's own sentence ("it will still lose to selling at
+  // home for a hold that makes very little") and NOT the thing these checks are for. All six live holds are thriving.
+  const mk6 = (over = {}) => ({ id: "h6", kind: "enterprise", condition: "thriving", locationId: where6[0],
+    yields: "raw_material", store: { raw_material: 20, cut_stone: 10 }, features: [], improvements: [], steward: null, ...over });
+  const barren6 = (over = {}) => ({ ...mk6(over), kind: "post", yields: null });
 
   /* ---- 1 · THE COMPARISON ---- */
   const hold6 = mk6();
@@ -8361,17 +8369,53 @@ console.log("\n── §76e · the ways out, priced; and the risk of standing st
   const kept6 = mk6({ steward: "someone" });
   const exK = CV6.storeExits({ holdings: [kept6], npcRegistry: {} }, kept6, { cfg: cfg6, economy: econ6, locations: C6.locations });
   const kRow = exK.rows.find(r => r.id === "keeper-sells"), uRow = ex6.rows.find(r => r.id === "keeper-sells");
-  check("§76e: ⛔ the keeper sells at the LOCAL PRICE — a share of the store per pass, never a worse rate",
-    kRow.net === exK.local && uRow.net === ex6.local && kRow.perPass > uRow.perPass,
-    JSON.stringify({ kept: { net: kRow.net, perPass: kRow.perPass }, unkept: { net: uRow.net, perPass: uRow.perPass }, local: exK.local }));
+  // ⚠️ RE-POINTED BY SNG-654, AND THE CLAIM IS ERIK'S OWN ONE: *"if you want the keeper to sell the stock it gets
+  // the local prices."* A share is not a price — so a keeper and the hands sell at the SAME price and settle at the
+  // SAME rate (what the place makes), and what a bigger share buys is a FASTER CLOCK on the pile that is already
+  // there. ⛔ The old form asserted `kept.perPass > unkept.perPass`, which was true only while `perPass` meant
+  // "a share of today's shed" — a number that says a keeper earns twice what the hands do FOREVER, which is not what
+  // the rule says and not what the tick pays.
+  check("§76e: ⛔ the keeper sells at the LOCAL PRICE — the same price and the same settled rate as the hands, and a bigger share only clears the shed FASTER",
+    kRow.net === exK.local && uRow.net === ex6.local
+    && kRow.perPass === uRow.perPass && kRow.thisPass > uRow.thisPass && kRow.passes <= uRow.passes,
+    JSON.stringify({ kept: { net: kRow.net, perPass: kRow.perPass, thisPass: kRow.thisPass, passes: kRow.passes },
+                     unkept: { net: uRow.net, perPass: uRow.perPass, thisPass: uRow.thisPass, passes: uRow.passes }, local: exK.local }));
   // ⛔ AND THE CLOCK IS A COST. Measured on real content: the best NET from Archive Hollow was a caravan
   // returning 368 against 120 — over 151.7 DAYS. Ranking on net alone names half a year with your people
   // gone as the thing to do.
-  const hauls = ex6.rows.filter(r => String(r.id).startsWith("caravan"));
-  check(`§76e: ⛔ the CLOCK is priced — a long haul's bigger gross does not beat selling here (${hauls.length} haul row(s))`,
-    ex6.rows.every(r => r.passes >= 1) && (!hauls.length || hauls.every(r => r.net > ex6.local ? r.perPass < ex6.rows[0].perPass : true))
+  // ⚠️ RE-POINTED BY SNG-654 §4A (Erik: *"yes on a-d"*). The old claim was "a long haul's bigger gross does not beat
+  // selling here", enforced by DIVIDING the take by the days — and that division is the defect the spec opens with:
+  // *"long-haul trade is priced so it can never be worth it — 48–65 passes for 3× the gross."* ⛑ The clock is still a
+  // cost, and now it is the two costs it actually is: a DELAY (`firstCoin`, the passes before any coin comes back) and
+  // a RISK (the road's expected loss, and the stock that stands waiting for a cart that comes once a round trip).
+  // ⚠️ AND THE HAULS ARE ASKED AT A HOLD THAT HAS ONE, WHICH TOOK MEASURING. `where6` is Archive Hollow: danger 2,
+  // unkept, undefended, and its nearest market in another region is 43 days away. Priced honestly, NO route beats
+  // selling there — a 29-pass cycle piles 232 units into a shed that is raided about 2.4 times in that span, each raid
+  // taking half. ⛑ THAT IS ERIK'S OWN SENTENCE coming out of the arithmetic ("run it lean when you're exposed, and
+  // stock up when you're walled"), so it is asserted below rather than tuned away. The clock check moves to Millbrook,
+  // which has the Echo Vale and the Crossing about 34 days out.
+  const near6 = C6.locations.millbrook ? "millbrook" : where6[0];
+  const mkNear6 = (over = {}) => mk6({ locationId: near6, ...over });
+  const exN6 = CV6.storeExits({ holdings: [mkNear6()], npcRegistry: {} }, mkNear6(), { cfg: cfg6, economy: econ6, locations: C6.locations });
+  check("§76e: ⛔ A SHED YOU CANNOT DEFEND IS WHY A LONG RUN LOSES — at Archive Hollow (danger 2, unkept, nearest foreign market 43 days) every route is priced below selling at home, because a run that departs once in 29 passes leaves 232 units standing to be raided",
+    ex6.rows.every(r => !String(r.id).startsWith("caravan")) && /no market in reach pays more/.test(String(ex6.why))
+    && ex6.waiting.cost > 0,
+    `the shed itself already risks ${ex6.waiting.cost} a pass · ${ex6.waiting.units} units standing`);
+  const hauls = exN6.rows.filter(r => String(r.id).startsWith("caravan"));
+  check(`§76e: ⛔ the CLOCK is priced as a DELAY AND A RISK rather than a divisor — every haul carries its first-coin pass, and a longer road costs more in both (${hauls.length} haul row(s))`,
+    hauls.length >= 1 && exN6.rows.every(r => r.passes >= 1 && r.firstCoin >= 1)
+    && hauls.every(r => r.firstCoin >= 1 && r.value && r.value.lossShare >= 0 && r.perPass > exN6.localFlow)
+    && exN6.best?.perPass === Math.max(...exN6.rows.map(r => r.perPass))
     && ex6.best?.perPass === Math.max(...ex6.rows.map(r => r.perPass)),
-    JSON.stringify(ex6.rows.map(r => ({ id: r.id, net: r.net, passes: r.passes, perPass: r.perPass }))));
+    JSON.stringify(exN6.rows.map(r => ({ id: r.id, net: r.net, perPass: r.perPass, firstCoin: r.firstCoin, loss: r.value?.loss ?? null }))));
+  // ⛑ AND THE CASE THE OLD FIXTURE WAS SILENTLY TESTING, now on purpose: a hold that makes nothing has no rate, so
+  // its rows are what the PILE fetches, and no route is priced at all.
+  check("§76e: ⛑ …and a hold that PRODUCES NOTHING has no run to price — the pile is all there is, and the card says so",
+    (() => {
+      const b = CV6.storeExits({ holdings: [barren6()], npcRegistry: {} }, barren6(), { cfg: cfg6, economy: econ6, locations: C6.locations });
+      return b.localFlow == null && b.rows.every(r => !String(r.id).startsWith("caravan"))
+        && /makes nothing in a pass/.test(String(b.why));
+    })());
   check("§76e: …and a hired company is marked a QUOTE, because no company exists in content to hire",
     ex6.rows.filter(r => String(r.id).startsWith("company")).every(r => r.quote === true)
     && CV6.storeExits(ch6, hold6, { cfg: cfg6, economy: econ6, locations: C6.locations }).rows.every(r => !String(r.id).startsWith("company")),
@@ -30329,6 +30373,206 @@ console.log("\n── §376 · she is in the way ──");
         && /key: "seats"/.test(reg) && /seatsForGM\(env\.character/.test(reg)
         && /if \(seats\) world\.push/.test(gm) && /GM-EYES\. Never state any of this to the player/.test(gm)
         && /A HOLDER DOES NOT KNOW SHE HOLDS A SEAT/.test(gm);
+    })());
+}
+
+/* ══════════ §377 · SNG-654 §4 — A ROUTE IS A STANDING RUN ══════════ */
+// ✅ ERIK 2026-09-25: "yes on a-d."
+//
+// ⛔ THE DEFECT, MEASURED AT HEAD ON SILAS'S OWN HOLDS: the Fell Pell's two offered routes were 146 and 156 days out at
+// 4 a pass, against 56 for selling at home — while the Crossing, 34 days away, never appeared, because two ×3.6 markets
+// 150 days out took the four candidate slots. `storeExits` ranked by GROSS PRICE and divided the take by the days.
+//
+// ⚡ A TRADE ROUTE IS NOT ONE TRIP. It runs again and again, each departure carrying what the hold made since the last
+// one, so in steady state every unit produced makes exactly one journey: the value per pass is what the hold MAKES,
+// sold THERE, less the crew's keep, the road's expected loss and the exposure of the pile that waits for the cart.
+console.log("\n── §377 · a route is a standing run ──");
+{
+  const CV7 = await import("../engine/caravan.js");
+  const H7t = await import("../engine/holdings.js");
+  const { loadContentHeadless: lch7 } = await import("./headless_content.mjs");
+  const C7 = await lch7();
+  const econ7 = C7.rules.economy, cfg7t = { ...econ7.holdStore, features: econ7.holdFeatures };
+  const T7 = econ7.holdStore.trade;
+  // a real place with a region, and a hold on it that actually makes something
+  const at7 = "millbrook";
+  const mk7 = (over = {}) => ({ id: "h7", kind: "enterprise", condition: "holding", locationId: at7,
+    yields: "raw_material", store: { raw_material: 8 }, features: [], improvements: [], crew: [], garrison: [], steward: null, ...over });
+  const ch7 = (over = {}) => ({ id: "c7", holdings: [], npcRegistry: {}, purse: { crystal: 100 }, ...over });
+
+  check("§377: ⛑ THE DIALS ARE CONTENT, IN THEIR OWN BAG — and NOT in `economy.carriage`, which is the mobile-holdings bag (a hull that sails). Two features sharing one config bag is the defect I have crossed four times in this project",
+    !!T7 && T7.passDays === 3 && T7.crew >= 1 && T7.candidates > 4
+    && T7.speedByFeature?.stable === 2 && T7.speedByFeature?.giant_lizard_den === 2.5 && T7.waterSpeed === 3 && T7.companySpeed === 2
+    && T7.knownRoad?.perRun === 0.1 && T7.knownRoad?.floor === 0.5 && T7.knownRoad?.relayMult === 2
+    && !("trade" in (econ7.carriage || {})) && !("waterSpeed" in (econ7.carriage || {})),
+    `trade dials in holdStore.trade · carriage still has ${Object.keys(econ7.carriage || {}).length} mobile-holding dials`);
+
+  /* ---- LEVER A · the value is a RATE, and distance is not a divisor ---- */
+  // ⚠️ ASKED AT ONE PRICE AND TWO DISTANCES, so only the road can move the answer.
+  const near7 = CV7.routeValue(ch7(), mk7(), { toId: "the_axis_gate", days: 10, danger: 2, cfg: cfg7t, economy: econ7, locations: C7.locations, dangerLevel: 2 });
+  const far7 = CV7.routeValue(ch7(), mk7(), { toId: "the_axis_gate", days: 100, danger: 2, cfg: cfg7t, economy: econ7, locations: C7.locations, dangerLevel: 2 });
+  // ⚠️ MY FIRST FORM OF THIS CHECK ASSERTED `far > near / 10` — "not a tenth" — AND THE MEASUREMENT BROKE IT: at 100
+  // days the same market is worth −8.2 a pass, because 134 units stand waiting in a danger-2 shed and a raid takes
+  // half. A route CAN be worth less than nothing, and a gate that forbids it would forbid the honest answer.
+  // ⛑ So the claim is the one the design rests on: the road costs a DELAY and a RISK, both of which grow with it, and
+  // the value is not the take divided by the days. `net ÷ passes` is what the old model said; nothing returns it now.
+  check("§377: ⛔ THE ROAD COSTS A DELAY AND A RISK, AND IT IS NOT A DIVISION — ten times the road is a longer wait and a bigger loss, and past some distance a run is worth less than nothing rather than a tenth of something",
+    near7.ok && far7.ok && far7.perPass < near7.perPass
+    && far7.firstCoin > near7.firstCoin * 5 && far7.loss > near7.loss * 5 && far7.exposure > near7.exposure
+    && Math.abs(far7.perPass - near7.perPass / 10) > 0.5,
+    `10 days → ${near7.perPass} a pass (loss ${near7.loss}, wait ${near7.exposure}), first coin in ${near7.firstCoin}; 100 days → ${far7.perPass} a pass (loss ${far7.loss}, wait ${far7.exposure}), first coin in ${far7.firstCoin}`);
+
+  check("§377: ⛑ AND EVERY TERM IS READ, not retyped — what the hold MAKES is the number the tick adds to the store, and the crew's keep is the number `upkeepFor` charges",
+    (() => {
+      const h = mk7({ store: {} }), c = ch7({ holdings: [h] });
+      const before = H7t.storeTotal(h);
+      const st = H7t.tickStore(c, h, { cfg: cfg7t, economy: econ7, regionId: C7.locations[at7]?.regionId || null, dangerLevel: 0, rng: () => 0.99, day: 3, locations: C7.locations, rules: C7.rules });
+      const made = H7t.producesPerPass(h, cfg7t, {}).reduce((a, y) => a + y.units, 0);
+      const grew = H7t.storeTotal(h) - before;
+      // and the keep: a hold with a route pays exactly `crewKeepPerPass` more than the same hold without one
+      const bare = mk7(), routed = mk7({ route: { toId: "the_axis_gate", crew: ["x", "y"] } });
+      const keep = H7t.crewKeepPerPass(routed, cfg7t).keep;
+      return made > 0 && grew === made && st?.yields?.length > 0
+        && Math.abs((H7t.upkeepFor(routed, cfg7t) - H7t.upkeepFor(bare, cfg7t)) - keep) < 0.01 && keep > 0;
+    })(), "the forecast and the tick cannot disagree if they are the same function");
+
+  check("§377: ⛔ AND THE STOCK THAT WAITS IS PRICED — “stock waiting for the caravan counts toward raid exposure”. A run that departs once in ninety passes leaves ninety passes of stock standing in a shed whose raid fill saturates at 40 units",
+    (() => {
+      const safe = CV7.routeValue(ch7(), mk7(), { toId: "the_axis_gate", days: 100, danger: 2, cfg: cfg7t, economy: econ7, locations: C7.locations, dangerLevel: 0 });
+      const rough = CV7.routeValue(ch7(), mk7(), { toId: "the_axis_gate", days: 100, danger: 2, cfg: cfg7t, economy: econ7, locations: C7.locations, dangerLevel: 4 });
+      return safe.exposure === 0 && rough.exposure > 0 && rough.perPass < safe.perPass
+        && rough.wait.units > safe.wait.units / 2 && rough.wait.perDeparture > 1;
+      // ⚠️ a hold at a place with NO authored danger pays nothing for the wait, which is the same reading the hold tick
+      // gives it (`|| 0`, deliberately — a hold at a place with no danger is never raided).
+    })());
+
+  /* ---- LEVER B · one row per region, ranked by the run ---- */
+  const ex7 = CV7.storeExits(ch7({ holdings: [mk7()] }), mk7(), { cfg: cfg7t, economy: econ7, locations: C7.locations });
+  check("§377: ⛔ ONE ROW PER REGION, so the ten places of the Crossing are ONE market and not ten candidates competing for the same slots",
+    (() => {
+      const hauls = ex7.rows.filter(r => String(r.id).startsWith("caravan"));
+      const regions = hauls.map(r => C7.locations[String(r.id).split(":")[1]]?.regionId);
+      return hauls.length >= 1 && new Set(regions).size === regions.length && regions.every(Boolean);
+    })(), JSON.stringify(ex7.rows.filter(r => String(r.id).startsWith("caravan")).map(r => `${r.where} (${C7.locations[String(r.id).split(":")[1]]?.regionId})`)));
+
+  check("§377: ⛔ RANKED BY WHAT THE RUN EARNS, NOT BY GROSS PRICE — and MORE than four are valued before any is chosen, which is the line the Crossing fell through: two ×3.6 markets 150 days out took both slots",
+    (() => {
+      const hauls = ex7.rows.filter(r => String(r.id).startsWith("caravan"));
+      const sorted = hauls.every((r, i) => i === 0 || hauls[i - 1].perPass >= r.perPass);
+      // every haul shown must beat selling at home, which is the contract the old gross filter kept
+      const beatsHome = hauls.every(r => r.perPass > ex7.localFlow);
+      return sorted && beatsHome && T7.candidates > 4 && hauls.length <= T7.showMarkets;
+    })(), `${ex7.rows.filter(r => String(r.id).startsWith("caravan")).length} shown of ${T7.candidates} valued · home ${ex7.localFlow} a pass`);
+
+  /* ---- LEVER C · the fastest means, never the product ---- */
+  check("§377: ⛔ THE FASTEST MEANS, NEVER THE PRODUCT — a stable and a river do not make a load six times as fast",
+    (() => {
+      const stabled = mk7({ features: [{ kind: "stable" }] });
+      const lizard = mk7({ features: [{ kind: "giant_lizard_den" }] });
+      const both = mk7({ features: [{ kind: "stable" }, { kind: "giant_lizard_den" }] });
+      const f = (h, opts = {}) => CV7.carriageFor(ch7(), h, { toId: "the_axis_gate", locations: C7.locations, cfg: cfg7t, ...opts });
+      return f(mk7()).mult === 1 && f(stabled).mult === 2 && f(lizard).mult === 2.5 && f(both).mult === 2.5
+        && f(mk7(), { company: true }).mult === T7.companySpeed;
+    })());
+
+  check("§377: ⛑ …and a faster means is a SAFER one, because hazard is rolled per DAY — Erik's own note on lever C, and it falls out of the arithmetic rather than being added to it",
+    (() => {
+      const walk = CV7.routeValue(ch7(), mk7(), { toId: "the_axis_gate", days: 60, danger: 3, cfg: cfg7t, economy: econ7, locations: C7.locations, dangerLevel: 0 });
+      const ride = CV7.routeValue(ch7(), mk7({ features: [{ kind: "stable" }] }), { toId: "the_axis_gate", days: 60, danger: 3, cfg: cfg7t, economy: econ7, locations: C7.locations, dangerLevel: 0 });
+      return ride.roadDays === walk.roadDays / 2 && ride.loss < walk.loss && ride.firstCoin < walk.firstCoin && ride.perPass > walk.perPass;
+    })());
+
+  // ⚠️ BOTH ENDS, because a river is only a road if it goes where you are going. The water words are the narrow list
+  // in `trade.waterTags` — NOT `carriage.needsTags.crewed`, which answers "can a hull sit here" and includes a bridge
+  // and a ford: a bridge is where a road CROSSES water and a ford is where you wade.
+  check("§377: ⚡ WATER NEEDS BOTH ENDS, and the trade list is narrower than the one that floats a hull — a bridge is not a shipping lane",
+    (() => {
+      const wet = Object.entries(C7.locations).filter(([, l]) => (l?.tags || []).some(x => T7.waterTags.includes(String(x).toLowerCase())));
+      const crewed = (econ7.carriage?.needsTags?.crewed || []);
+      return crewed.includes("bridge") && crewed.includes("ford") && !T7.waterTags.includes("bridge") && !T7.waterTags.includes("ford")
+        && wet.length >= 2;   // ⬜ and if Aevi tags more water places, more routes float; today it is a short list
+    })(), (() => { const wet = Object.entries(C7.locations).filter(([, l]) => (l?.tags || []).some(x => T7.waterTags.includes(String(x).toLowerCase()))); return `${wet.length} place(s) carry a navigable water word`; })());
+
+  /* ---- LEVER D · a known road gets safer ---- */
+  check("§377: ⛔ A KNOWN ROAD GETS SAFER — −10% a run to a FLOOR of half, and a relay station of yours on the route doubles the rate",
+    (() => {
+      const c = ch7();
+      const k0 = CV7.knownRoad(c, at7, "the_axis_gate", { cfg: cfg7t });
+      for (let i = 0; i < 3; i++) CV7.markRoadRun(c, at7, "the_axis_gate");
+      const k3 = CV7.knownRoad(c, at7, "the_axis_gate", { cfg: cfg7t });
+      for (let i = 0; i < 20; i++) CV7.markRoadRun(c, at7, "the_axis_gate");
+      const k23 = CV7.knownRoad(c, at7, "the_axis_gate", { cfg: cfg7t });
+      // ⚡ BOTH WAYS: a road you have walked is known whichever end you start from
+      const back = CV7.knownRoad(c, "the_axis_gate", at7, { cfg: cfg7t });
+      // and a relay station of yours standing on it doubles the rate
+      const withRelay = CV7.knownRoad({ ...c, holdings: [{ id: "r", locationId: at7, features: [{ kind: "relay_station" }] }] }, at7, "the_axis_gate", { cfg: cfg7t });
+      return k0.mult === 1 && Math.abs(k3.mult - 0.7) < 1e-9 && k23.mult === 0.5
+        && back.runs === k23.runs && withRelay.relay === true && withRelay.mult === 0.5;
+    })());
+
+  check("§377: ⛑ …and the ledger is written at ARRIVAL, never at departure — a load that was taken on the road taught you nothing about walking it",
+    (() => {
+      // ⚠️ THE SLICE IS THE WHOLE CHECK. My first form cut `send` at `standingCarriers`, and `markRoadRun` is DEFINED
+      // between the two — so the gate read its own definition as a call inside `sendCaravan` and failed. A function
+      // body ends at a brace in column 1; take exactly that.
+      const src = rd("engine/caravan.js");
+      const body = (name) => { const i = src.indexOf(`export function ${name}(`); const j = src.indexOf("\n}\n", i); return i < 0 ? "" : src.slice(i, j < 0 ? undefined : j); };
+      const arrive = body("arriveCaravan"), send = body("sendCaravan");
+      return !!arrive && !!send && /markRoadRun\(character, car\.from, car\.to\)/.test(arrive) && !/markRoadRun/.test(send);
+    })());
+
+  /* ---- AND THE RUN ACTUALLY RUNS ---- */
+  // ⛔ WITHOUT THIS THE CARD IS A CLAIM ABOUT A MECHANISM THAT DOES NOT EXIST. It says "first coin in N passes" and
+  // "it departs every N passes", and until SNG-654 the only way a load ever left a hold was a GM op, once, by hand.
+  check("§377: ⛔ A ROUTE IS A STANDING RUN — it is set, the keeper stops selling the stock out from under it, the tick sends the next load when the crew is home, arrival counts the run, and they walk back",
+    (() => {
+      // ⚠️ WITH A KEEPER, or the check proves nothing: `sellShareFor` is 0 for a hold with no steward, no crew and no
+      // garrison — nobody is there to sell — so "the route stops the selling" would have been true of a hold that was
+      // never selling. The first form of this check failed on exactly that.
+      const h = mk7({ store: {}, steward: "a keeper" }), c = ch7({ holdings: [h], caravans: [] });
+      const set = CV7.setRoute(c, h.id, { toId: "the_axis_gate", carriers: [], locations: C7.locations, day: 0 });
+      if (!set.ok) return false;
+      const sellsWhileStanding = H7t.sellShareFor(h, cfg7t);
+      const sellsIfItStopped = H7t.sellShareFor(h, cfg7t, { ignoreRoute: true });
+      const log = [];
+      for (let day = 1; day <= 120; day++) {
+        if (day % 3 === 0) H7t.tickStore(c, h, { cfg: cfg7t, economy: econ7, regionId: C7.locations[at7]?.regionId || null, dangerLevel: 0, rng: () => 0.99, day, locations: C7.locations, rules: C7.rules });
+        for (const ev of CV7.runStandingRoutes(c, { locations: C7.locations, cfg: cfg7t, day, people: {} })) log.push(ev.kind);
+        for (const ev of CV7.tickCaravans(c, { day, locations: C7.locations, economy: econ7, cfg: cfg7t, rng: () => 0.99, people: {} })) log.push(ev.kind);
+      }
+      const departures = log.filter(k => k === "departure").length;
+      const arrivals = log.filter(k => k === "arrival").length;
+      const homes = log.filter(k => k === "home").length;
+      return sellsWhileStanding === 0 && sellsIfItStopped > 0
+        && departures >= 2 && arrivals >= 2 && homes >= 1
+        && h.route.runs === arrivals && (c.roadsKnown?.[[h.locationId, "the_axis_gate"].sort().join("|")] || 0) === arrivals
+        && (c.purse.crystal > 100);
+    })(), "set, sent, sold, walked home, and counted — driven over 120 days through the same functions the world tick calls");
+
+  check("§377: ⚠️ AND THE LOAD WALKS THE ROAD THE CARD PRICED — `sendCaravan` took `options[0]`, which is the ROAD, while the comparison sorts by days: a load out of the Made Gate walked 34.6 days to a market the card priced at 1.7 through Silas's own waygate",
+    (() => {
+      const src = rd("engine/caravan.js");
+      const i = src.indexOf("export function sendCaravan("), j = src.indexOf("\n}\n", i);
+      const send = src.slice(i, j);
+      return /options \|\| \[\]\)\.slice\(\)\.sort\(\(a, b\) => \(a\.days \?\? 1e9\) - \(b\.days \?\? 1e9\)\)\[0\]/.test(send)
+        && !/route\?\.options\?\.\[0\]/.test(send);
+    })(), "a card and an engine that disagree about the same road is the defect this whole section exists to remove");
+
+  check("§377: ⛑ AND NOTHING ALREADY STANDING CHANGED — no save carries a route, so every hold pays the upkeep it paid yesterday and every keeper sells the share she sold yesterday",
+    (() => {
+      const bare = mk7();
+      const keep = H7t.crewKeepPerPass(bare, cfg7t);
+      return keep.keep === 0 && keep.paidFor === 0
+        && H7t.sellShareFor(bare, cfg7t) === H7t.sellShareFor(bare, cfg7t, { ignoreRoute: true })
+        && CV7.knownRoad(ch7(), at7, "the_axis_gate", { cfg: cfg7t }).mult === 1;
+    })());
+
+  // ⬜ AND THE GM IS TOLD, because "there is a run out of here every few weeks" is a fact about the place.
+  check("§377: ⬜ the GM is told a run STANDS, even between departures",
+    (() => {
+      const h = mk7({ name: "the Pell", route: { toId: "the_axis_gate", crew: [], runs: 3 } });
+      const said = CV7.caravansForGM(ch7({ holdings: [h] }), C7.locations);
+      return /standing run out of the Pell/.test(String(said)) && /walked 3 times/.test(String(said)) && /holds the stock back/.test(String(said));
     })());
 }
 

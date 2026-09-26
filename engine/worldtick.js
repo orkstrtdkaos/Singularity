@@ -18,7 +18,7 @@ import { applyNpcUpdates } from "./npcs.js";
 import { activeCompany } from "./company.js";   // SNG-358: a holding's keeper must still be with you
 import { queueFeatureOffers, advanceHolding, holdingNews, unstewardedHoldings, takeHoldingEvents, CONDITIONS, tickStore, storeNews, advanceDebts, growHolding, holdingGround, holdingMeaningAura, healingAt, chargeQuartering } from "./holdings.js";
 import { tickArmory } from "./armory.js";   // CCODE-445: the forge works the order, a pass at a time
-import { tickCaravans } from "./caravan.js";   // R49: the road runs itself, and can be robbed
+import { tickCaravans, runStandingRoutes } from "./caravan.js";   // R49: the road runs itself, and can be robbed   // ✅ SNG-654 A (Erik: "yes on a-d"): and a standing route sends the next load itself
 import { domainAccess } from "./traditions.js";   // SNG-659 §1: the three-domain draw a person's kit is dealt from
 import { meaningDensity, peoplePresentAt } from "./substrate.js";   // R46b: what the pilgrims come for   // SNG-358: holdings ride the same world-gated pass
 import { commitGrowth } from "./npcsheet.js";   // ✅ R37: growth writes, on the tick
@@ -777,6 +777,15 @@ export function advanceHoldings({ character, now = Date.now(), ladder = null, co
   // ⚑ R49 — AND THE CARAVANS ON THE ROAD, on the same cadence and for the same reason: a caravan is worth
   // having rather than a trip you take precisely because it runs while you are not looking. ⛔ It can be
   // robbed and its carriers can die (Erik 2026-09-06), so it produces news the way a raid does.
+  // ✅ SNG-654 A — AND THE STANDING RUNS SEND THE NEXT LOAD. ⛑ BEFORE `tickCaravans`, so a departure that happens
+  // today is on the road today rather than sitting at the hold for a pass; and it sends nothing while a cart of that
+  // hold's is out, because there is one crew and they are walking.
+  for (const ev of runStandingRoutes(character, { locations: content?.locations || {},
+    cfg: content?.rules?.economy?.holdStore || null,
+    day: (() => { try { return absoluteWorldDay(); } catch { return null; } })(),
+    people: { ...(content?.npcs || {}), ...(character?.npcRegistry || {}) } })) {
+    if (ev?.note) news.push(ev.note);
+  }
   for (const ev of tickCaravans(character, { day: (() => { try { return absoluteWorldDay(); } catch { return null; } })(),
     locations: content?.locations || {}, economy: content?.rules?.economy || null,
     cfg: content?.rules?.economy?.holdStore || null, rng,

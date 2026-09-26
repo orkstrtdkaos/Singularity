@@ -16,6 +16,42 @@
   "next": [],
   "releases": [
     {
+      "version": "2.14.0",
+      "date": "2026-09-26",
+      "entries": [
+        {
+          "kind": "feature",
+          "title": "A hold can run a standing trade route",
+          "summary": "Set a run from a hold's card and it keeps running — every departure carries what the place has made since the last one.",
+          "detail": "Until now a load only left a hold when the story sent one. Now the comparison on a hold's card has a button beside every market: set the run, and the hold's carriers walk it again and again on their own. While a run stands, whoever keeps the place holds the stock back for the cart instead of selling it locally, so each departure carries everything made since the last one — and the carriers walk home afterwards, which is why a far market gets a cart less often than a near one. Stop the run and the keeper starts selling here again."
+        },
+        {
+          "kind": "change",
+          "title": "Distance is a wait and a risk, not a discount",
+          "summary": "A far market no longer divides what you earn by the days on the road. It delays the first coin, and it puts your stock in danger while it waits.",
+          "detail": "Trade used to be priced as though a caravan were a single trip: the take divided by the days, which meant a market three times richer and fifty days away could never be worth walking to. A route is not a trip — it runs again and again, and in the long run everything the place makes reaches the market. So each way of moving the store now shows what it earns in a pass, with two honest costs beside it: when the first coin comes back, and what the stock waiting for the cart risks while it stands in the shed. A hold you cannot defend is the reason a long run loses — not the distance itself."
+        },
+        {
+          "kind": "feature",
+          "title": "Stables, lizard-dens and rivers move a load faster",
+          "summary": "A hold's own animals carry a load in half the time; a lizard-den better still; and water, if both ends are on it, faster than either.",
+          "detail": "A stable or a boat-house on the hold puts a load on the road at twice the speed, a lizard-den at two and a half, and a river or harbour at both ends at three — you take the fastest way you have, never all of them at once. Because trouble on the road is rolled for each day travelled, a faster road is a safer one as well. This is what a stable is FOR on a trading hold."
+        },
+        {
+          "kind": "feature",
+          "title": "A road you have walked gets safer",
+          "summary": "Each completed run cuts the trouble on that road by a tenth, down to half — and a relay station of yours on the way doubles how fast it learns.",
+          "detail": "The people who walk a road learn it: the fords, the hours, who to avoid. Every load that arrives cuts that road's danger by a tenth, to a floor of half, and a road is known in both directions. A relay station of yours standing on the route doubles the rate. It counts on arrival, not on setting out — a load that was taken on the way taught nobody anything."
+        },
+        {
+          "kind": "fix",
+          "title": "Loads take the fastest way, including your waygates",
+          "summary": "A cart was walking the long road to places your own gate reaches in an afternoon.",
+          "detail": "When a load left a hold it took the first way the map offered, which was always the road — so a run the card priced at under two days could walk thirty-four. It now takes the fastest way its carriers can actually use, gates included."
+        }
+      ]
+    },
+    {
       "version": "2.13.1",
       "date": "2026-09-26",
       "entries": [

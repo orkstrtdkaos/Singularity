@@ -355,6 +355,11 @@
         }
       }
     },
+    "roadsKnown": {
+      "type": "object",
+      "description": "✅ SNG-654 D (Erik: \"yes on a-d\") — THE ROADS THIS CHARACTER HAS WALKED WITH A LOAD, keyed on the PAIR of places rather than the direction, because a road you have walked is known whichever end you start from. Each completed run cuts that road's hazard by `trade.knownRoad.perRun` to a floor of `floor`; a relay station of yours on the route doubles the rate. Written at arrival (`markRoadRun`), never at departure — a load that was taken on the way taught you nothing.",
+      "additionalProperties": { "type": "number" }
+    },
     "knownSovereigns": {
       "type": "object",
       "description": "which Sovereigns this save knows by NAME — id → `{ day, how }` (SNG-642 §2.3). ⛔ It gates the `onceNamed` reading of that Sovereign's arc, and it drops the mask: while it is absent, every line that would name Lucifer names Eosphor. Two things write it — an anti-Sovereign telling you (R41c) and the thing arriving in front of you. ⛑ An older save's ARRAY form is read and converted, never dropped.",

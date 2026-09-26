@@ -92,7 +92,7 @@ import { resolveWaygateTransit, routeGmMoveTo, isNetworkGate, networkGatesFrom, 
 import { routeBetween, routeLine, twoWayRoads } from "./engine/journey.js";
 import { planJob, suggestTeam, jobPoolOf, jobRouteOf, jobCost, jobWages, jobEffects, sayEffects, settleDueJobs, degreeWord, jobOpposition, mainNeedOf, jobCraftsOf, bestCraftFor, OUTCOMES as JOB_OUTCOMES, errandOdds, detachForJob, jobPersonFor, workCraftsOf, workDayChance, workHeads, bandTeamOf, sendBandOnMission, bandMissionParty } from "./engine/jobs.js";   // CCODE-420 · CCODE-428 · CCODE-431
 import { ensureJobs, postJob, sendOnJob, awayOnJob, untoldJobs, markJobsTold, dropJob, detachedFrom } from "./engine/jobstate.js";   // CCODE-420 · CCODE-431
-import { sendCaravan, caravansOf, storeExits } from "./engine/caravan.js";   // R49: a caravan is a delegate + a route + a load   // SNG-331 §1 / SNG-386 §4.4: two named options over roads + gates // SNG-148: waygates — map control routes named/hub; GM offer via the registry row. SNG-243 §4: the gate network
+import { sendCaravan, caravansOf, storeExits, setRoute, clearRoute } from "./engine/caravan.js";   // R49: a caravan is a delegate + a route + a load   // SNG-331 §1 / SNG-386 §4.4: two named options over roads + gates // SNG-148: waygates — map control routes named/hub; GM offer via the registry row. SNG-243 §4: the gate network
 import { skillDetail, npcDetail, itemDetail, relationshipsParagraph, craftRollsLine, craftRollsShort } from "./engine/entityDetail.js";
 import { wholeNameFor, learnWholeName } from "./engine/names.js";   // ⛔ SNG-643 §5 (C17): a whole name is shown only when this character may see it
 import { collapseScenePresence, canonicalPersonId, personArtSeed, applyNpcUpdates, findExistingNpc, genderUnsaid, sexUnsaid, SEX_VALUES, sexFromGender, sexGenderAgree, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier, backfillNpcGender, reconcileGeneratedNpcWithMeet, npcFearsForGM, npcReactionsForGM, repairUnnamedPeople } from "./engine/npcs.js";   // SNG-431 §1: the pre-namer saves get their names
@@ -182,7 +182,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.13.1";
+const APP_VERSION = "2.14.0";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -9336,6 +9336,12 @@ function applyTurn(turn, resolution, playerWords = null) {
       // it stands, and nothing moves it yet." This is the thing that moves it, and the prices it reaches are
       // already authored — 8 raw material is 32 in the valley and 115 in the Gearlands.
       // ⚠️ CARRIERS ARE NAMED PEOPLE because Erik ruled they can die, and an anonymous loss is not a consequence.
+      // ✅ SNG-654 A — THE GM'S DOOR TO A STANDING RUN, beside the one-off caravan below. `route: null` stops it.
+      else if (kind === "route") { const h = (character.holdings || []).find(x => x.id === id);
+        const to = op.toId || op.to || op.locationId || null;
+        if (h && to) { const r = setRoute(character, id, { toId: to, carriers: op.npcIds || (h.crew || []).slice(0, 2), locations: CONTENT.locations, day: absoluteWorldDay() });
+          said(r.ok ? `A run stands out of ${h.name} to ${r.to}.` : `No run out of ${h.name} — ${r.why}`); }
+        else if (h) { const r = clearRoute(character, id); if (r.ok) said(`The run out of ${h.name} has stopped.`); } }
       else if (kind === "caravan") {
         const r = sendCaravan(character, { holdingId: id, toId: op.toId || op.to || op.locationId || null,
           goods: op.goods || null, carriers: op.npcIds || (op.npcId ? [op.npcId] : []), locations: CONTENT.locations,
@@ -14647,6 +14653,22 @@ function wireHoldingOffers() {
     // carries the change with its reason. The handler beside this one does exactly the same.
     saveCharacter(character); again();
   };
+  // ✅ SNG-654 A — SETTING THE RUN, which is what makes the comparison a decision rather than a readout. ⛑ One
+  // writer (`setRoute`), which refuses for the same reasons `sendCaravan` refuses, so a save never carries a standing
+  // run to nowhere. ⚠️ The carriers are the hold's own hands: they are who is there, and `crewKeepPerPass` then charges
+  // nothing extra for them because `upkeepFor` already pays a hand's wage.
+  for (const btn of app.querySelectorAll("[data-route-set]")) btn.onclick = () => {
+    const [holdId, toId] = String(btn.dataset.routeSet || "").split("|");
+    const h = (character.holdings || []).find(x => x && x.id === holdId);
+    if (!h || !toId) return;
+    const r = setRoute(character, holdId, { toId, carriers: (h.crew || []).slice(0, 2), locations: CONTENT.locations || {}, day: absoluteWorldDay() });
+    if (!r.ok) { console.warn("[route] refused:", r.why); return; }   // prose-cap-ok: a console diagnostic
+    saveCharacter(character); again();
+  };
+  for (const btn of app.querySelectorAll("[data-route-stop]")) btn.onclick = () => {
+    clearRoute(character, String(btn.dataset.routeStop || ""));
+    saveCharacter(character); again();
+  };
   for (const btn of app.querySelectorAll("[data-hold-accept]")) btn.onclick = () => {
     const o = (character.holdingOffers || [])[Number(btn.dataset.holdAccept)];
     if (!o) return;
@@ -15088,15 +15110,25 @@ function renderHoldingsTab(manageId = null, tab = null) {
           const holdPeople = { ...(CONTENT.npcs || {}), ...(character.npcRegistry || {}) };
           const npcSheetCfg = CONTENT.rules?.npcStanding || {};
           let ex = null, rk = null;
-          try { ex = storeExits(character, h, { cfg: sCfg, economy: econ, locations: CONTENT.locations || {}, regionId: reg }); } catch { ex = null; }
+          // ⛔ SNG-654 A — WITH THE DANGER WHERE THE STOCK STANDS, and the same people bag the tick uses. Without them the
+          // waiting stock reads as safe and every long haul looks better than it is.
+          try { ex = storeExits(character, h, { cfg: sCfg, economy: econ, locations: CONTENT.locations || {}, regionId: reg,
+            dangerLevel: Number(CONTENT.locations?.[h.locationId]?.dangerLevel) || 0,
+            people: holdPeople, npcCfg: npcSheetCfg, day: absoluteWorldDay() }); } catch { ex = null; }
           try { rk = raidRisk(character, h, { cfg: sCfg, economy: econ, regionId: reg,
             dangerLevel: Number(CONTENT.locations?.[h.locationId]?.dangerLevel) || 0,
             people: holdPeople, npcCfg: npcSheetCfg, day: absoluteWorldDay() }); } catch { rk = null; }
+          // ✅ SNG-654 §4 (Erik: "yes on a-d") — THE COLUMN THAT CHANGED IS "when": a route's clock is not how long the
+          // pile takes to sell, it is WHEN THE FIRST COIN COMES BACK, and after that it pays every pass.
+          const isHaul = (r) => String(r.id).startsWith("caravan") || String(r.id).startsWith("company");
+          const standing = h.route?.toId ? (CONTENT.locations?.[h.route.toId]?.name || h.route.toId) : null;
           const cmp = ex && ex.rows.length > 1 ? `<div class="hs-cmp"><span class="hs-lbl">Moving the store</span>
             <table class="hs-table"><tr><th>how</th><th>gets</th><th>when</th><th>a pass</th></tr>
-            ${ex.rows.map(r => `<tr${ex.best && r.id === ex.best.id ? ` class="hs-best"` : ""}><td>${esc(r.who)}${r.where && r.id.startsWith("caravan") || r.id.startsWith("company") ? ` <span class="hint">→ ${esc(r.where)}</span>` : ""}${r.quote ? ` <span class="hint">(a quote — no company is hired yet)</span>` : ""}</td>
-              <td>${r.net}</td><td>${r.passes <= 1 ? "now" : `${r.passes} passes`}${r.risk ? ` <span class="hint">· danger ${r.risk}</span>` : ""}</td><td><strong>${r.perPass}</strong></td></tr>`).join("")}</table>
+            ${ex.rows.map(r => `<tr${ex.best && r.id === ex.best.id ? ` class="hs-best"` : ""}><td>${esc(r.who)}${isHaul(r) && r.where ? ` <span class="hint">→ ${esc(r.where)}</span>` : ""}${r.quote ? ` <span class="hint">(a quote — no company is hired yet)</span>` : ""}${r.speedMult > 1 ? ` <span class="hint">· ${esc(r.speedLabel)}, ×${r.speedMult}</span>` : ""}${r.runs ? ` <span class="hint">· walked ${r.runs}×, ${Math.round((1 - r.hazardMult) * 100)}% less trouble</span>` : ""}</td>
+              <td>${r.net}</td><td>${isHaul(r) ? `first coin in ${r.firstCoin} pass${r.firstCoin === 1 ? "" : "es"}` : r.passes <= 1 ? "now" : `${r.passes} passes`}${r.risk ? ` <span class="hint">· danger ${r.risk}</span>` : ""}</td><td><strong>${r.perPass}</strong>${isHaul(r) && !r.quote ? ` <button class="link-btn" data-route-set="${esc(h.id)}|${esc(String(r.id).split(":")[1] || "")}" title="Set a standing run there — each departure carries what the hold has made since the last one, and the keeper holds the stock back for the cart">${standing ? "run this instead" : "run this"}</button>` : ""}</td></tr>`).join("")}</table>
             ${ex.best ? `<div class="hint">Best per pass: <strong>${esc(ex.best.who)}</strong> — ${esc(ex.best.said)}</div>` : ""}
+            ${standing ? `<div class="hint">A run stands to <strong>${esc(standing)}</strong>${h.route.runs ? `, walked ${h.route.runs} time${h.route.runs === 1 ? "" : "s"}` : ", not yet walked"} — the keeper holds the stock for the cart rather than selling it here. <button class="link-btn" data-route-stop="${esc(h.id)}">Stop the run</button></div>` : ""}
+            ${ex.waiting && ex.waiting.cost > 0 ? `<div class="hint">What is in the shed already risks <strong>${ex.waiting.cost}</strong> a pass — ${ex.waiting.units} unit(s) standing, ${Math.round(ex.waiting.chance * 100)}% a raid comes.</div>` : ""}
             ${ex.why ? `<div class="hint">${esc(ex.why)}</div>` : ""}</div>` : "";
           // ⛔ SNG-652 §7 — THE WATCH, AND WHAT IT ACTUALLY DECIDES. Aevi asked for "Raid seen: 84%".
           // Measured: there is no watch roll — `resolveRaid` opens `if (!watchOf(...).length)`, so one body on

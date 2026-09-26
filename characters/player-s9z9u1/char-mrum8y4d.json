@@ -173,7 +173,8 @@
       },
       "aliases": [
         "Road Rations (4 days) — additional bundle"
-      ]
+      ],
+      "pinned": true
     },
     {
       "id": null,
@@ -1916,22 +1917,6 @@
       {
         "day": 5,
         "worldDay": 88,
-        "text": "The Last Walker of the Sealed Wood is spoken of: talking to a Thornwake child about the world outside.",
-        "tier": "murmur",
-        "section": "world",
-        "locationId": "the_greenward"
-      },
-      {
-        "day": 5,
-        "worldDay": 88,
-        "text": "Overseer Grael of the Edge District has not been seen at home in a long while — whatever is happening has all of them.",
-        "tier": "murmur",
-        "section": "world",
-        "locationId": "radiant_plateau_edge"
-      },
-      {
-        "day": 5,
-        "worldDay": 88,
         "text": "The Hollow King of the Wild Half has not been seen at home in a long while — whatever is happening has all of them.",
         "tier": "murmur",
         "section": "world",
@@ -2075,11 +2060,25 @@
         "text": "The Harvest Hand has taken an interest in you — you have killed 12 of theirs.",
         "tier": "event",
         "section": "world"
+      },
+      {
+        "day": 8,
+        "worldDay": 88,
+        "text": "The Wardens of Cairnhold has lost people it will not get back.",
+        "tier": "event",
+        "section": "world"
+      },
+      {
+        "day": 8,
+        "worldDay": 88,
+        "text": "The Harvest Hand has lost people it will not get back.",
+        "tier": "event",
+        "section": "world"
       }
     ],
     "unseenNews": [],
     "lastGenCount": 2116,
-    "lastSharedReadAt": "2026-09-26T04:25:40.189Z",
+    "lastSharedReadAt": "2026-09-26T04:47:34.110Z",
     "lastTickWorldDay": 88,
     "lastCanonWorldDay": 88,
     "turnsSinceOffer": 2,
@@ -9712,7 +9711,7 @@
       "the_doubting_lattice": 84,
       "the_war_ender": 84
     },
-    "updatesToldTo": "2.9.3",
+    "updatesToldTo": "2.9.5",
     "newsLog": [
       {
         "day": 4,
@@ -11065,6 +11064,22 @@
         "worldDay": 88,
         "text": "The game was updated to v2.9.3 — 2 fixed.",
         "loggedAt": "2026-09-26T04:25:45.771Z"
+      },
+      {
+        "day": 8,
+        "worldDay": 88,
+        "text": "The Harvest Hand has lost people it will not get back.",
+        "tier": "event",
+        "section": "world",
+        "loggedAt": "2026-09-26T04:47:37.463Z"
+      },
+      {
+        "kind": "update",
+        "section": "world",
+        "version": "2.9.5",
+        "worldDay": 88,
+        "text": "The game was updated to v2.9.5 — 2 new, 2 fixed.",
+        "loggedAt": "2026-09-26T04:47:37.463Z"
       }
     ]
   },
@@ -14254,8 +14269,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790397256416,
-  "rev": 956,
+  "updatedAt": 1790398077758,
+  "rev": 962,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -18266,7 +18281,7 @@
       "lastVerbDay": 8,
       "losses": 1,
       "lost": {
-        "0": 32
+        "0": 64
       },
       "noticed": {
         "trigger": "crossed",
@@ -18320,7 +18335,7 @@
       },
       "lastVerb": "expand",
       "lastVerbDay": 8,
-      "wins": 2,
+      "wins": 1,
       "grownHeads": 44,
       "grewDay": 8
     },
@@ -18372,21 +18387,21 @@
     "power_flesh_temple": {
       "lastVerb": "recruit",
       "lastVerbDay": 8,
-      "wins": 2,
+      "wins": 1,
       "grownHeads": 18,
       "grewDay": 5
     },
     "power_vacated_custody": {
       "lastVerb": "expand",
       "lastVerbDay": 8,
-      "wins": 2,
+      "wins": 1,
       "grownHeads": 6,
       "grewDay": 5
     },
     "power_the_ceaseless": {
       "lastVerb": "expand",
       "lastVerbDay": 8,
-      "wins": 0,
+      "wins": 2,
       "grownHeads": 10,
       "grewDay": 5,
       "losses": 0
@@ -18404,7 +18419,7 @@
       "grewDay": 5,
       "losses": 0,
       "lost": {
-        "0": 12
+        "0": 24
       },
       "noticed": {
         "trigger": "crossed",

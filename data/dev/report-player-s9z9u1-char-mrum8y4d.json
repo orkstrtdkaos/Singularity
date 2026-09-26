@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
   "id": "dev_report",
-  "at": "2026-09-26T02:54:52.147Z",
-  "build": "2.8.5",
+  "at": "2026-09-26T03:02:28.494Z",
+  "build": "2.9.0",
   "field": null,
   "character": {
     "id": "char-mrum8y4d",
     "name": "Loki",
     "playerKey": "player-s9z9u1",
     "level": 10,
-    "rev": 921,
-    "day": 7,
-    "turns": 236,
+    "rev": 929,
+    "day": 8,
+    "turns": 237,
     "countingSince": "2026-09-14T22:51:56.913Z",
     "countsCoverWholeLife": false
   },
@@ -120,28 +120,28 @@
   },
   "ops": {
     "emitted": {
-      "sceneSummary": 236,
-      "choices": 236,
-      "characterDeltas": 120,
-      "scene": 236,
+      "sceneSummary": 237,
+      "choices": 237,
+      "characterDeltas": 121,
+      "scene": 237,
       "placeUpdates": 28,
-      "codexUpdates": 137,
-      "timeOps": 189,
-      "offer": 41,
+      "codexUpdates": 138,
+      "timeOps": 190,
+      "offer": 42,
       "generateRequest": 7,
-      "sceneEnded": 105,
-      "npcUpdates": 188,
-      "moveTo": 8,
-      "gambitApt": 64,
+      "sceneEnded": 106,
+      "npcUpdates": 189,
+      "moveTo": 9,
+      "gambitApt": 65,
       "deeds": 14,
-      "questUpdates": 42,
+      "questUpdates": 43,
       "standingOps": 4,
-      "factUpdates": 18,
+      "factUpdates": 19,
       "stageOps": 7,
       "encounterOps": 9,
       "ledgerEvents": 12,
       "newEncounter": 3,
-      "imagePrompt": 37,
+      "imagePrompt": 38,
       "scene_ended": 1,
       "stateOps": 3,
       "_engineClosedScene": 4,
@@ -149,12 +149,12 @@
       "intentsHeard": 8,
       "delegateOps": 1,
       "scene_summary": 1,
-      "partyOps": 3,
+      "partyOps": 4,
       "bandOps": 1
     },
     "outcomes": {
       "offer": {
-        "applied": 46,
+        "applied": 47,
         "rejected": 2,
         "lastWhy": "rejected-shape",
         "exceedsEmissions": true
@@ -167,8 +167,8 @@
       },
       "moveTo": {
         "applied": 0,
-        "rejected": 2,
-        "lastWhy": "refused-unearned",
+        "rejected": 3,
+        "lastWhy": "journey-planned",
         "exceedsEmissions": false
       }
     },
@@ -199,7 +199,7 @@
     "neverCount": 22,
     "knownCount": 48,
     "unknown": {
-      "sceneSummary": 63,
+      "sceneSummary": 64,
       "scene_summary": 1
     },
     "inProse": {},
@@ -236,8 +236,8 @@
     }
   },
   "fireTests": {
-    "at": "2026-09-26T02:02:43.068Z",
-    "build": "2.8.3",
+    "at": "2026-09-26T02:55:11.539Z",
+    "build": "2.8.5",
     "results": [
       {
         "op": "jobOps",
@@ -748,7 +748,7 @@
     }
   },
   "world": {
-    "locations": 147,
+    "locations": 148,
     "abilities": 441,
     "npcs": 186
   }

@@ -591,6 +591,66 @@
           "name": "Test Hero (dev)"
         }
       }
+    },
+    "wardhouse-officer": {
+      "id": "wardhouse-officer",
+      "name": "Halvra Stenn",
+      "canonId": "wardhouse_officer",
+      "intro": {
+        "role": "Wardhouse intake officer, the Marchward",
+        "description": "Compact, unhurried, reads a man the way she reads a ledger — top to bottom, nothing missed. No warmth she hasn't decided to spend.",
+        "firstSeenDay": 1,
+        "where": "the_marchward",
+        "metBy": {
+          "characterId": "char-mrrzi63o",
+          "name": "Brynjar Andyrsson"
+        }
+      }
+    },
+    "doss": {
+      "id": "doss",
+      "name": "Doss Halveck",
+      "canonId": "doss",
+      "intro": {
+        "role": "Innkeep, the Crow and Thistle",
+        "description": "Stout, fifties, unhurried behind her bar. Reads a stranger the way she reads a tab — fast and without flattery. Noticed Freki before she noticed you.",
+        "firstSeenDay": 1,
+        "where": "the_marchward",
+        "metBy": {
+          "characterId": "char-mrrzi63o",
+          "name": "Brynjar Andyrsson"
+        }
+      }
+    },
+    "ragnar-solmyr": {
+      "id": "ragnar-solmyr",
+      "name": "Ragnar Solmyr",
+      "canonId": "ragnar_solmyr",
+      "intro": {
+        "role": "Redline Warrior, walking south with Brynjar",
+        "description": "Hard-built, jawbone necklace worn smooth with age. Moves without waste and watches a square the way a fisherman watches a river. Reads fighters on sight — yesterday it was your shoulder; today it is your face.",
+        "firstSeenDay": 1,
+        "where": "the_marchward",
+        "metBy": {
+          "characterId": "char-mrrzi63o",
+          "name": "Brynjar Andyrsson"
+        }
+      }
+    },
+    "sera": {
+      "id": "sera",
+      "name": "Maret Threnwick",
+      "canonId": "sera",
+      "intro": {
+        "role": "Stillhold woman, the subject of the pursuit",
+        "description": "A woman in her thirties, pale, grey wool cloak, with the stillness of someone who learned early that showing surprise is expensive. Walks with a light outside-edge stride.",
+        "firstSeenDay": 1,
+        "where": "the_marchward",
+        "metBy": {
+          "characterId": "char-mrrzi63o",
+          "name": "Brynjar Andyrsson"
+        }
+      }
     }
   },
   "fates": {

@@ -37,7 +37,7 @@ import { buildFeedPost, appendFeedPost, feedForViewer, FEED_PATH } from "./engin
 // family this session has been chasing all day, committed by me while fixing it.
 import { composeImagePrompt } from "./engine/imageprompt.js";   // CCODE-190: code selects the parts, a model composes the line
 import { ITEM_KINDS, itemKindsIn, itemKindLabel, wieldBonusFor, usableCombatItems, normalizeInventory, reclaimEstablishedItems, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName, itemUses, ensurePins, togglePin, pinnedItems, applyItemUpdates, deriveItem, findItem, skillBonus, startingSkills } from "./engine/inventory.js"; // CCODE-161: reclaim items the story conferred but the ledger missed
-import { grantCeiling, evolutionBudget, recordEvolution, foldGrants, canDerive } from "./engine/earnedpower.js"; // SNG-251 §2c/§4: the earned-power economy (ceiling = f(level, craft rank); ~1 evolution/day)
+import { grantCeiling, evolutionBudget, recordEvolution, foldGrants, canDerive, madeAtLevelOf } from "./engine/earnedpower.js"; // SNG-251 §2c · SNG-659 §2b: the level an item was made at/§4: the earned-power economy (ceiling = f(level, craft rank); ~1 evolution/day)
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, absoluteWorldDay, worldCount, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch, positionedPlace, seasonCalendar, seasonOfWorldDay } from "./engine/worldtime.js";
 import { smartClamp, playerText, normName } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
 import { LIBRARY_INDEX, loreToHtml, libMdToHtml, circleRows } from "./engine/library.js";
@@ -180,7 +180,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.9.7";
+const APP_VERSION = "2.9.8";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -5550,7 +5550,11 @@ function itemEvolveDeps(ops = []) {
     if (mentioned) { rank = Math.max(rank, owned.level || 1); }
   }
   if (!rank) for (const owned of (character.abilities || [])) rank = Math.max(rank, owned.level || 1); // best craft stands in
-  return { ceiling: grantCeiling(character, rank), foldGrants };
+  // ⛔ SNG-659 §2b.2 — THE CEILING IS A FUNCTION OF THE ITEM, because it is now a property of the item: a
+  // turn can carry ops about several, and a master's artifact must not be measured against the ceiling built
+  // for the trinket beside it. This keeps the promise above ("ONE set of numbers for every path") — one
+  // function, asked per item, rather than one number asked once.
+  return { ceiling: (item) => grantCeiling(character, rank, { item }), foldGrants };
 }
 
 /** SNG-250 §5: the generatable set, DERIVED — a type generates when a derived genSchema exists for it
@@ -8057,7 +8061,7 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
     });
     if (!held.length) return null;
     const it = held[0];
-    const ceiling = grantCeiling(character, Math.max(0, ...(character.abilities || []).map(a => a.level || 1)));
+    const ceiling = grantCeiling(character, Math.max(0, ...(character.abilities || []).map(a => a.level || 1)), { item: it });
     const budget = evolutionBudget(it, (() => { try { return absoluteWorldDay(); } catch { return null; } })(), character);
     // SNG-251 §4: Aevi's grant-strength GUIDANCE for THIS character's band — what a reasonable grant READS
     // like at their level and craft. Without it the GM knows only the arithmetic ("at most N grants") and has
@@ -19209,6 +19213,16 @@ function itemCard(it, { open = false, toggleAttr = "data-item-toggle", showPin =
       ${/* SNG-251 §2c: THE MECHANICAL SHEET. Erik's ask, literally on the item — what the story's work
             translated to in rules. Every grant states where it came FROM and what it explicitly CANNOT do,
             because "explicit" without a stated bound is just power creep with better typography. */""}
+      ${(() => {
+        // ⛔ SNG-659 §2c — WHAT LEVEL IT WAS MADE AT, beside yours. An item's earned-power ceiling reads
+        // `max(made-at, your level)`, so a master's artifact is strong in an apprentice's hand — and that is
+        // only true for the player if the card says which number it is reading.
+        const made = madeAtLevelOf(it);
+        if (made == null) return "";
+        const mine = Math.max(1, Number(character?.level) || 1);
+        const c = grantCeiling(character, Math.max(0, ...(character.abilities || []).map(a => a.level || 1)), { item: it });
+        return `<div class="item-made">forged at level ${made}${made === mine ? "" : ` · you are level ${mine}`}<span class="hint"> · ${esc(c.band)}</span></div>`;
+      })()}
       ${Array.isArray(it.grants) && it.grants.length ? `<div class="item-grants">
         <div class="item-grants-lbl">what it grants${it.derivedFrom ? ` — split from ${esc(it.derivedFrom)}` : ""}</div>
         ${it.grants.map(g => `<div class="item-grant">

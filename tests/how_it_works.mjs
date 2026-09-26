@@ -7824,6 +7824,7 @@ console.log("\n── §L100 · a level-100 person, through every reader ──"
   const Hl = await import("../engine/holdings.js");
   const Jl = await import("../engine/jobstate.js");
   const LGl = await import("../engine/legends.js");   // the tier bands, for the rank ladder
+  const EPl = await import("../engine/earnedpower.js");   // SNG-659 \u00a72: the grant ceiling reads a level too
   const { loadContentHeadless: lchL } = await import("./headless_content.mjs");
   const CL = await lchL();
   const npcCfgL = CL.rules.npcStanding || {};
@@ -7860,6 +7861,11 @@ console.log("\n── §L100 · a level-100 person, through every reader ──"
         "dutyHand": (lv) => Hl.dutyHand(person(lv), { duty: "watch", npcs: {}, npcCfg: npcCfgL, day: 100, rules: CL.rules }).hand,
         "jobLevel": (lv) => Jl.normalizeJob({ label: "x", where: "y", level: lv, effort: 1,
           needs: [{ family: "HARM", weight: 1, what: "f" }], stakes: {} }).job.level,
+        // \u2b1c SNG-659 \u00a73.1 \u2014 Aevi asked for this one by name. Two readers, because the ceiling answers two
+        // numbers and a clamp can hide in either: it used to stop rising at about 40 and sit there to 100.
+        "grantCeiling.effectCap": (lv) => EPl.grantCeiling({ level: lv }, 3).effectCap,
+        "grantCeiling.maxGrants": (lv) => EPl.grantCeiling({ level: lv }, 3).maxGrants,
+        "grantCeiling.byMadeAt": (lv) => EPl.grantCeiling({ level: 1 }, 3, { madeAtLevel: lv }).effectCap,
       };
       const bad = [];
       for (const [name, fn] of Object.entries(readers)) {
@@ -28322,6 +28328,127 @@ console.log("\n── §360 · the nemesis, and both halves of Erik's ask ──
       const after = NM.inheritNemesis(d, { content: C360, day: 20 });
       return !after || after.figureId !== next.figureId;
     })());
+}
+
+/* ══════════ §361 · SNG-659 §2 — AN ITEM CARRIES THE LEVEL IT WAS MADE AT ══════════ */
+// ✅ ERIK, 2026-09-25: "item power can mostly rely on artifacts being crafted at higher levels… however, I
+// don't see why we can't also have some higher power items."
+//
+// ⛔ THE DEFECT: `grantCeiling` read the BEARER's level, and an item had no level of its own — so an artifact
+// a level-80 master forged read exactly the same as a level-40 one, and at craft rank 3 both numbers hit their
+// cap by about level 40 and sat there to 100. A master's work was indistinguishable from a journeyman's.
+//
+// ⚠️ AEVI'S OPEN QUESTION, MEASURED RATHER THAN ARGUED. She flagged a step at 40 (effect 15 → 19 in one level)
+// and proposed ramping the cap from 35 to 45. Run over all 160 (level × rank) pairs below 40, that window
+// drifts 5 of them — which breaks the floor she set two paragraphs earlier, that an item made below 40 reads
+// exactly what it reads today. ⛑ So the ramp starts WHERE THE OLD CAP ENDED: `15 + max(0, level − 39)`,
+// rising one per level until it meets the formula. Step +1, nothing below 40 moved, monotonic to 100.
+console.log("\n── §361 · the level an item was made at ──");
+{
+  const EP = await import("../engine/earnedpower.js");
+  const IV = await import("../engine/inventory.js");
+
+  // ⛔ THE REFERENCE IS FROZEN, NOT RE-DERIVED. Today's formula, verbatim from the version this replaces. A
+  // gate that asks the new code to confirm itself is a gate that will pass through any change at all.
+  const before = (level, rank) => ({
+    maxGrants: Math.min(6, 1 + Math.floor(level / 10) + Math.max(0, rank - 1)),
+    effectCap: Math.max(2, Math.min(15, Math.round(level / 3) + rank * 2)),
+  });
+
+  check("§361: ⛔ AN ITEM WITH NO `madeAtLevel` READS EXACTLY WHAT IT READ BEFORE — every level, every rank",
+    (() => {
+      const bad = [];
+      for (let L = 1; L <= 100; L++) for (let r = 0; r <= 3; r++) {
+        const now = EP.grantCeiling({ level: L }, r), was = before(L, r);
+        // above 39 the ceiling is MEANT to lift for the bearer too — an item with no level of its own reads
+        // the bearer's, and a level-70 character's own work is a level-70 item. Below 40 nothing may move.
+        if (L < 40 && (now.maxGrants !== was.maxGrants || now.effectCap !== was.effectCap)) bad.push(`L${L}r${r}: ${was.maxGrants}\u00b7${was.effectCap} \u2192 ${now.maxGrants}\u00b7${now.effectCap}`);
+        if (now.maxGrants < was.maxGrants || now.effectCap < was.effectCap) bad.push(`L${L}r${r} FELL: ${was.effectCap} \u2192 ${now.effectCap}`);
+      }
+      if (bad.length) console.log("      " + bad.slice(0, 6).join(" \u00b7 "));
+      return bad.length === 0;
+    })(), "160 below-40 pairs frozen, and nothing anywhere reads lower than it did");
+
+  check("§361: ⛑ …and §2d's five rows, run rather than estimated",
+    (() => {
+      const f = (L, r, made) => { const c = EP.grantCeiling({ level: L }, r, { madeAtLevel: made }); return `${c.maxGrants}\u00b7${c.effectCap}`; };
+      const got = [f(20, 2, null), f(39, 3, null), f(31, 3, 45), f(31, 3, 72), f(31, 3, 95)];
+      const want = ["4\u00b711", "6\u00b715", "6\u00b721", "7\u00b730", "8\u00b738"];
+      return got.join(" | ") === want.join(" | ");
+    })(), "L20r2 · L39r3 · made-45 · made-72 · made-95, all in a level-31 hand for the last three");
+
+  check("§361: ⛔ THE CEILING TAKES THE HIGHER OF THE TWO, NEVER THE ITEM'S ALONE — a journeyman's blade in a master's hand is still bounded by the master",
+    EP.grantCeiling({ level: 90 }, 3, { madeAtLevel: 20 }).effectCap === EP.grantCeiling({ level: 90 }, 3).effectCap
+    && EP.grantCeiling({ level: 31 }, 3, { madeAtLevel: 72 }).effectCap > EP.grantCeiling({ level: 31 }, 3).effectCap);
+
+  check("§361: ⛑ …and both ceilings are MONOTONIC in the made-at level, all the way to 100",
+    (() => {
+      let pm = 0, pe = 0;
+      for (let made = 1; made <= 100; made++) {
+        const c = EP.grantCeiling({ level: 1 }, 3, { madeAtLevel: made });
+        if (c.maxGrants < pm || c.effectCap < pe) return false;
+        pm = c.maxGrants; pe = c.effectCap;
+      }
+      return pm === 8 && pe === 39;
+    })(), "a made-at-100 rank-3 item tops out at 8 grants and effect 39");
+
+  check("§361: ⚠️ …and the step Aevi flagged is +1, not +4 — no single level is a leap",
+    (() => {
+      let worst = 0, prev = null;
+      for (let L = 30; L <= 60; L++) { const e = EP.grantCeiling({ level: 1 }, 3, { madeAtLevel: L }).effectCap; if (prev != null) worst = Math.max(worst, e - prev); prev = e; }
+      return worst === 1;
+    })(), "the flat 15 lifts one per level from 40 rather than coming off at once");
+
+  // ⛔ THE DOORS. A field is only real when it is authored, carried, kept and read — and `addItem` builds from
+  // a WHITELIST, which drops an ungated field in silence. That is the door this feature dies at.
+  check("§361: ⛔ THE FIELD SURVIVES `addItem`'s WHITELIST — a whitelist drops what it does not name, in silence",
+    (() => {
+      const c = { inventory: [], level: 10 };
+      const it = IV.addItem(c, { name: "a master's blade", kind: "weapon", madeAtLevel: 72 }, {});
+      return it?.madeAtLevel === 72 && c.inventory[0]?.madeAtLevel === 72;
+    })());
+
+  check("§361: ⛑ …and it comes off an AUTHORED catalogue item through `fromCatalog`, which is a fixed destructure",
+    IV.fromCatalog({ id: "relic", name: "keystone", kind: "relic", madeAtLevel: 90 }).madeAtLevel === 90
+    && IV.fromCatalog({ id: "cup", name: "cup", kind: "misc" }).madeAtLevel === undefined);
+
+  check("§361: ⚠️ …and a nonsense level is refused rather than believed — 0, a word, and 900 all read as absent or clamped",
+    EP.madeAtLevelOf({ madeAtLevel: 0 }) === null && EP.madeAtLevelOf({ madeAtLevel: "forty" }) === null
+    && EP.madeAtLevelOf({ madeAtLevel: 900 }) === 100 && EP.madeAtLevelOf({}) === null && EP.madeAtLevelOf(null) === null);
+
+  check("§361: ⛔ A SPLIT IS WORK, AND DERIVED IS NOT LESSER — the child takes the HIGHER of its parent's level and its maker's",
+    (() => {
+      const c = { inventory: [], level: 31 };
+      IV.addItem(c, { name: "the Keystone", kind: "relic", madeAtLevel: 90 }, {});
+      const a = IV.deriveItem(c, { parent: "the Keystone", name: "Keystone Shard", kind: "relic" }, { catalog: {} });
+      IV.addItem(c, { name: "a plain rod", kind: "tool" }, {});
+      const b = IV.deriveItem(c, { parent: "a plain rod", name: "Rod's Head", kind: "tool" }, { catalog: {} });
+      return a?.item?.madeAtLevel === 90 && b?.item?.madeAtLevel === 31;
+    })(), "a shard of a relic made at 90 is not a trinket because the hand that struck it is level 31");
+
+  // ⛔ AND THE READING BRANCH IS REACHABLE. `applyItemUpdates` is handed a LIST of ops about DIFFERENT items
+  // and had ONE ceiling for all of them, so the per-item ceiling has to arrive as a FUNCTION of the item.
+  check("§361: ⛔ THE APPLIER ASKS PER ITEM — one ceiling for a turn's worth of ops would measure a master's artifact against a trinket",
+    (() => {
+      const c = { inventory: [], level: 3 };
+      IV.addItem(c, { name: "the Keystone", kind: "relic", madeAtLevel: 95 }, {});
+      IV.addItem(c, { name: "a tin cup", kind: "misc" }, {});
+      const asked = [];
+      const ceiling = (item) => { asked.push(item?.name); return EP.grantCeiling(c, 3, { item }); };
+      IV.applyItemUpdates(c, [
+        { name: "the Keystone", grants: [{ name: "g1", from: "f", effect: "e", clamp: "c" }] },
+        { name: "a tin cup", grants: [{ name: "g2", from: "f", effect: "e", clamp: "c" }] },
+      ], { ceiling, foldGrants: EP.foldGrants });
+      return asked.length === 2 && asked[0] === "the Keystone" && asked[1] === "a tin cup";
+    })());
+
+  check("§361: ⛑ …and app.js asks it that way, and the item card SAYS which level it read",
+    /return \{ ceiling: \(item\) => grantCeiling\(character, rank, \{ item \}\), foldGrants \};/.test(rd("app.js"))
+    && /forged at level \$\{made\}/.test(rd("app.js")) && /\.item-made \{/.test(rd("style.css")));
+
+  check("§361: ⛑ …and the schema declares it, so an author can write it on a relic",
+    (() => { const s = JSON.parse(rd("schemas/item.schema.json")); const p = s.properties?.madeAtLevel;
+      return p?.type === "integer" && p.minimum === 1 && p.maximum === 100; })());
 }
 
 /* ══════════ REPORT ══════════ */

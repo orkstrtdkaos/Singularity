@@ -601,6 +601,8 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 .item-img { width: 100%; border-radius: 4px; margin-bottom: 6px; }
 .item-desc { font-size: 12px; color: var(--ink); font-style: italic; margin-bottom: 4px; }
 .item-tags { font-size: 11px; color: var(--accent2); margin-bottom: 6px; }
+/* SNG-659 §2c: the level an item was MADE at, beside the bearer's — the number its ceiling is read from. */
+.item-made { font-size: 12px; color: var(--ink-dim); margin-bottom: 6px; }
 .item-actions { display: flex; gap: 6px; }
 .item-actions .opt { font-size: 11px; padding: 4px 8px; }
 /* SNG-215 §B: the inventory BAG — a grid of kind-icon tiles you scan; tap opens the detail popup. */

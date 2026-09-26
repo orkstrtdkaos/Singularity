@@ -9,7 +9,7 @@
 // of forking. Catalog re-link happens on any resolvable name, not just at normalize.
 
 import { namesMatch, resolveByName, smartClamp } from "./namematch.js"; // SNG-152
-import { grantSummary } from "./earnedpower.js"; // SNG-251 §2c: the item's mechanical sheet, one line
+import { grantSummary, madeAtLevelOf } from "./earnedpower.js"; // SNG-251 §2c: the item's mechanical sheet, one line · SNG-659 §2b: ONE reader of `madeAtLevel`
 
 // ⛔ CCODE-168: THE ONE ITEM-KIND VOCABULARY, because there were two copies of a five-entry whitelist and
 // content ships SEVEN kinds. Every `focus`, `relic` and `armor` item in the game — 11 of the 37 shipped —
@@ -105,8 +105,14 @@ export function normalizeInventory(character, catalog = {}) {
  *  the AUTHORED ones on the way in, so a content alias was a writer with no reader: you could name three
  *  ways to say a thing and the game would understand exactly one of them. */
 export function fromCatalog(catItem, qty = 1) {
-  const { id, name, kind, description, effects, bonusTags, consumable, image, aliases } = catItem;
-  return { id, name, kind, qty, description, effects, bonusTags, consumable, image, ...(aliases?.length ? { aliases: [...aliases] } : {}) };
+  const { id, name, kind, description, effects, bonusTags, consumable, image, aliases, madeAtLevel } = catItem;
+  // ⛑ SNG-659 §2b.4 — an AUTHORED relic or legend-gear item carries its own made-at level, and this
+  // destructure is the door it comes through. A field the catalogue declares and this line omits is a field
+  // the game does not have.
+  const made = madeAtLevelOf({ madeAtLevel });
+  return { id, name, kind, qty, description, effects, bonusTags, consumable, image,
+    ...(made != null ? { madeAtLevel: made } : {}),
+    ...(aliases?.length ? { aliases: [...aliases] } : {}) };
 }
 
 // CCODE-161: bump when a NEW item gains an `establishedBy` block, so existing saves get one more pass.
@@ -219,6 +225,11 @@ export function addItem(character, incoming, catalog = {}, opts = {}) {
       // sold at another's price. Validated: an id-shaped goods kind, and only a band a trader can price.
       goods: /^[a-z][a-z0-9_]{1,39}$/.test(String(incoming.goods || "")) ? String(incoming.goods) : undefined,
       worth: ["trivial", "useful", "valuable", "precious"].includes(incoming.worth) ? incoming.worth : undefined,
+      // ⛔ SNG-659 §2b.1 — THE LEVEL IT WAS MADE AT. `addItem` builds from a whitelist, so an ungated field is
+      // dropped in silence (the note above says so of grants, and it is true of every field): without this
+      // line an authored relic's level would never survive the trip into a pack. An item with none reads the
+      // bearer's level, which is today's behaviour for every item in every existing save.
+      madeAtLevel: madeAtLevelOf(incoming) ?? undefined,
       image: incoming.image
     };
   }
@@ -378,7 +389,11 @@ export function applyItemUpdates(character, ops = [], opts = {}) {
     // context (ceiling + a fiction cite), so the GM's path and the player's own evolve action are held to
     // the same bar, and the ceiling is Erik's §4 function of level + craft rank rather than a flat cap.
     if (op.grants && opts.ceiling && typeof opts.foldGrants === "function") {
-      const fold = opts.foldGrants(it.grants || [], op.grants, opts.ceiling);
+      // ⛔ SNG-659 §2b.2 — THE CEILING IS PER ITEM NOW, and this function is handed a LIST of ops about
+      // DIFFERENT items. A single ceiling VALUE would measure a master's artifact against whatever item the
+      // caller happened to build it for, so `ceiling` may be a function of the item. A plain value still
+      // works, which is what a caller with one item in hand passes.
+      const fold = opts.foldGrants(it.grants || [], op.grants, typeof opts.ceiling === "function" ? opts.ceiling(it) : opts.ceiling);
       if (fold.added.length || fold.replaced.length) {
         it.grants = fold.grants;
         changed.push("grants");
@@ -442,8 +457,16 @@ export function deriveItem(character, op = {}, opts = {}) {
   if (op.imagePrompt) child.imagePrompt = smartClamp(String(op.imagePrompt), 300);
   child.imageStamp = 1; child.imageDirty = true;         // §2b: a new item is a new picture, always
   child.evoStage = 1;
+  // ⛑ SNG-659 §2b.1 — A SPLIT IS WORK, so the child carries the level it was made at. ⛔ And DERIVED IS NOT
+  // LESSER (Erik corrected Aevi's first spec on exactly this): a shard struck from a relic made at 90 does not
+  // become a trinket because the hand that struck it is level 31, so the child takes the HIGHER of the two.
+  {
+    const made = Math.max(madeAtLevelOf(parent) || 0, Math.max(1, Number(character?.level) || 1));
+    if (made > 1) child.madeAtLevel = Math.min(100, made);
+  }
   if (op.grants && opts.ceiling && typeof opts.foldGrants === "function") {
-    const fold = opts.foldGrants([], op.grants, opts.ceiling);   // its OWN sheet, same ceiling — never scaled down
+    // its OWN sheet, measured against its OWN made-at level — never scaled down
+    const fold = opts.foldGrants([], op.grants, typeof opts.ceiling === "function" ? opts.ceiling(child) : opts.ceiling);
     if (fold.grants.length) child.grants = fold.grants;
   }
   parent.derived = [...(parent.derived || []), child.customName || child.name].slice(0, 4);

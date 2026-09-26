@@ -36,9 +36,22 @@ import { smartClamp } from "./namematch.js";   // SNG-152: prose is clamped on a
 const GRANT_FIELDS = ["id", "name", "from", "effect", "band", "clamp"];
 
 /** Hard structural ceilings — the backstop under the scaled ones below, so a malformed level or rank can
- *  never open the gate wider than the game's own limits. */
-const MAX_GRANTS_EVER = 6;
+ *  never open the gate wider than the game's own limits.
+ *
+ *  ⛔ SNG-659 §2b.3 (ERIK): the grant ceiling rises for items MADE HIGH — "mostly rely on artifacts being
+ *  crafted at higher levels". The 7th grant opens at made-at 60 and the 8th at 85, the two mythic rungs;
+ *  below 60 the old cap of 6 is exactly what it always was. */
+const MAX_GRANTS_EVER = 8;
+const GRANT_RUNGS = [{ from: 85, cap: 8 }, { from: 60, cap: 7 }, { from: 0, cap: 6 }];
 const MAX_DERIVED_PER_ITEM = 2;
+
+/** ⛑ SNG-659 §2b.1 — THE LEVEL AN ITEM WAS MADE AT, or null when it has none.
+ *  An item with no `madeAtLevel` reads the bearer's level, which IS today's behaviour — so every item in
+ *  every existing save keeps the ceiling it has always had, and the new field is the only thing that moves. */
+export function madeAtLevelOf(item) {
+  const n = Number(item?.madeAtLevel);
+  return Number.isFinite(n) && n >= 1 ? Math.min(100, Math.round(n)) : null;
+}
 
 /** How much earned power may this item hold, for THIS character?
  *
@@ -48,17 +61,36 @@ const MAX_DERIVED_PER_ITEM = 2;
  *
  *  Returns { maxGrants, effectCap, band } — `band` is the human phrase the item and the GM both quote, so
  *  the player can see the ceiling they are working against rather than discovering it by being refused. */
-export function grantCeiling(character = {}, craftRank = 0) {
-  const level = Math.max(1, Number(character?.level) || 1);
+export function grantCeiling(character = {}, craftRank = 0, { item = null, madeAtLevel = null } = {}) {
+  const bearerLevel = Math.max(1, Number(character?.level) || 1);
   const rank = Math.max(0, Math.min(3, Number(craftRank) || 0));
+  // ⛔ SNG-659 §2b.2 — THE CEILING READS THE ITEM, NOT ONLY THE HAND. "A master's artifact is strong in an
+  // apprentice's hand." What the apprentice can DO with it is the fight engine's business — their own rolls
+  // and their own energy — not the item's. ⛑ `max` and never `replace`: a journeyman's blade in a master's
+  // hand is still bounded by the master, so the field can only ever RAISE a ceiling, never lower one.
+  const made = madeAtLevel != null ? madeAtLevelOf({ madeAtLevel }) : madeAtLevelOf(item);
+  const level = Math.max(bearerLevel, made || 0);
   // 1 base + 1 per full 10 levels + 1 per craft rank above the first. Silas at L29 with a rank-3 craft
   // reaches 5, and Memory's authored worked example carries 4 — the reference fits with room, which is the
   // check that matters: the economy must not retroactively make Aevi's own exemplar illegal.
-  const maxGrants = Math.min(MAX_GRANTS_EVER, 1 + Math.floor(level / 10) + Math.max(0, rank - 1));
+  const rungCap = (GRANT_RUNGS.find(r => level >= r.from) || { cap: 6 }).cap;
+  const maxGrants = Math.min(MAX_GRANTS_EVER, rungCap, 1 + Math.floor(level / 10) + Math.max(0, rank - 1));
   // The one numeric lever a grant can move (clampEffects bounds it again at write time; this is the
   // per-character ceiling UNDER that hard bound, so a low-level character cannot reach the global cap).
-  const effectCap = Math.max(2, Math.min(15, Math.round(level / 3) + rank * 2));
-  return { maxGrants, effectCap, band: `reasonable @ L${level}${rank ? ` / craft rank ${rank}` : ""}`, level, rank };
+  //
+  // ⚠️ THE FLAT 15 DOES NOT COME OFF AT ONCE. Aevi flagged the step — "a level-40 artifact shouldn't read as
+  // a sudden leap" — and proposed ramping it 35→45. Measured, that window drifts 5 of the 160 below-40
+  // (level × rank) pairs, which breaks the floor she set in the same section: an item made below 40 reads
+  // exactly what it reads today. ⛑ So the ramp starts WHERE THE OLD CAP ENDED and rises one per level, and
+  // meets the formula in its own time: +1 at every step, nothing below 40 moved, monotonic to 100.
+  const raw = Math.round(level / 3) + rank * 2;
+  const effectCap = Math.max(2, Math.min(15 + Math.max(0, level - 39), raw));
+  return {
+    maxGrants, effectCap, level, rank, bearerLevel, madeAtLevel: made,
+    // ⛑ §2c: the band names the level the CEILING was read at, so a player holding a master's work sees the
+    // master's number rather than their own and can tell which it is.
+    band: `reasonable @ L${level}${rank ? ` / craft rank ${rank}` : ""}`,
+  };
 }
 
 /** May this item evolve right now? Erik: "~1 evolution attempt per day, capped by level/ability."

@@ -16,6 +16,18 @@
   "next": [],
   "releases": [
     {
+      "version": "2.9.8",
+      "date": "2026-09-26",
+      "entries": [
+        {
+          "kind": "change",
+          "title": "A thing is as strong as the hand that made it",
+          "summary": "An item now carries the level it was made at, and what it can hold is read from that — so a master's artifact is strong in an apprentice's hand.",
+          "detail": "Until now an item's power was read from whoever was holding it, so an artifact a level-80 master forged was indistinguishable from a level-40 one, and past about level 40 nothing rose at all. An item now remembers the level it was made at, and the ceiling reads whichever is higher — the item's or yours. It never reads lower: your own skill still counts. Items made below level 40 are untouched, and what you can actually DO with a master's work is still your own rolls and your own energy. Work made above 40 keeps climbing: a seventh power opens on items made at 60, an eighth at 85."
+        }
+      ]
+    },
+    {
       "version": "2.9.7",
       "date": "2026-09-26",
       "entries": [

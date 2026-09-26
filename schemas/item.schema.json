@@ -3,34 +3,87 @@
   "title": "Generated item",
   "description": "SNG-296 / WORK ORDER v2 Track C. A generated piece of gear. ⚠️ THE MECHANICAL HOOK IS `bonusTags`, not `effects` — the consumer map records that 19/19 authored valley items carry neither an `effect` nor an `effects` field: gear resolves through `bonusTags` (inventory.js:equipmentBonus and wieldBonusFor), and only CONSUMABLES resolve through `effects`. An item generated without bonusTags is a name — exactly the failure the born-whole contract exists to prevent.",
   "type": "object",
-  "required": ["id", "name", "kind", "description", "bonusTags"],
+  "required": [
+    "id",
+    "name",
+    "kind",
+    "description",
+    "bonusTags"
+  ],
   "properties": {
-    "id": { "type": "string", "minLength": 1, "description": "catalog key; without it an inventory entry can never be re-linked to its bonuses (inventory.js:37)" },
-    "name": { "type": "string", "minLength": 1 },
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "catalog key; without it an inventory entry can never be re-linked to its bonuses (inventory.js:37)"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
     "kind": {
       "type": "string",
-      "enum": ["weapon", "shield", "armor", "focus", "tool", "consumable", "relic", "misc"],
+      "enum": [
+        "weapon",
+        "shield",
+        "armor",
+        "focus",
+        "tool",
+        "consumable",
+        "relic",
+        "misc"
+      ],
       "description": "⚠️ `shield` is new here. The catalog has ZERO shields at HEAD while guard-shaped crafts are 19 of the defensive logics — Aevi's finding, and the reason the enum names it explicitly rather than letting shields hide under `armor`. `relic` (SNG-658): a substrate-charged find (keystone shard, snarl bead, the far token), carried for its charge; its bonusTags still hook rolls."
     },
-    "description": { "type": "string", "minLength": 1 },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
     "bonusTags": {
       "type": "array",
       "minItems": 1,
       "maxItems": 4,
-      "items": { "type": "string", "minLength": 1 },
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
       "description": "THE MECHANICAL HOOK. Matched against an action's tags by equipmentBonus (ordinary rolls) and wieldBonusFor (skill-battle rounds). Empty means the item cannot affect any roll."
     },
-    "tradition": { "type": "string", "description": "whose people made it — the grammar Aevi authors keys on this, so an ashwarden blade reads ashwarden" },
-    "worth": { "type": "string", "description": "a band, not a price — there is no pricing engine" },
-    "provenance": { "type": "string", "description": "where it came from, so a found thing has a history" },
+    "tradition": {
+      "type": "string",
+      "description": "whose people made it — the grammar Aevi authors keys on this, so an ashwarden blade reads ashwarden"
+    },
+    "worth": {
+      "type": "string",
+      "description": "a band, not a price — there is no pricing engine"
+    },
+    "provenance": {
+      "type": "string",
+      "description": "where it came from, so a found thing has a history"
+    },
     "effects": {
       "type": "object",
       "description": "CONSUMABLES ONLY. Gear does not use this — see the description above. ⛑ SNG-658: an OBJECT of numeric pools, e.g. { energy: 10 } or { health: 8 }, because that is what every reader takes (encounters.js restores from fx.energy / fx.health, inventory.js reads item.effects || {}, app.js lists Object.entries). The earlier 'array' type described a shape nothing reads.",
-      "additionalProperties": { "type": "number" }
+      "additionalProperties": {
+        "type": "number"
+      }
     },
-    "substrateCharge": { "type": "number", "minimum": 0, "description": "relics only: the substrate charge the thing carries (0.06-0.09 on the three authored). A relic is gathered for its charge, not worn as gear." },
-    "consumable": { "type": "boolean" },
-    "image": { "type": "string" }
+    "substrateCharge": {
+      "type": "number",
+      "minimum": 0,
+      "description": "relics only: the substrate charge the thing carries (0.06-0.09 on the three authored). A relic is gathered for its charge, not worn as gear."
+    },
+    "consumable": {
+      "type": "boolean"
+    },
+    "image": {
+      "type": "string"
+    },
+    "madeAtLevel": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 100,
+      "description": "SNG-659 §2b: the level this item was MADE at — the maker's level when it was crafted, or the authored level of a relic or a legend's gear. The earned-power ceiling reads max(this, the bearer's level), so a master's artifact is strong in an apprentice's hand. Omit it and the item reads the bearer's level, which is what every item did before this field existed."
+    }
   },
   "additionalProperties": true
 }

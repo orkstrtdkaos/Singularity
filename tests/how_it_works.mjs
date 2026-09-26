@@ -23,6 +23,24 @@ import { fileURLToPath } from "node:url";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const rd = (p) => readFileSync(join(root, p), "utf8");
+/** ⛔ CCODE-527 — A GATE MAY NOT READ A SAVE SOMEBODY IS PLAYING.
+ *
+ *  ⚠️ AEVI, BLOCKED BY IT: "a test broke in the last hour, and it now blocks every push that isn't a save
+ *  … The nemesis check (§360) loads Silas's live save and assumes his nemesis hasn't been chosen yet. You
+ *  chose it in play, so the check now fails. It's a test reading a live save, which CCode ruled out on 09-12."
+ *
+ *  ⚠️ She named one; there were ELEVEN, across §188, §190, §300, §310 and §360, and this file read a live save
+ *  45 times. None of the eleven was wrong about the engine. They were right about a world that moved under
+ *  them — and a gate that reddens because the game was played correctly teaches everybody to re-baseline past
+ *  it, which §115 and §188 had each already written down after being bitten once.
+ *
+ *  ⛑ THE CLAIMS ARE ABOUT REAL PLAYED HISTORY, so the history is frozen rather than the claims weakened. A
+ *  frozen save is still a real save — 1,788 turns of it — and it holds still while the suite reads it.
+ *  Refresh deliberately with `node scripts/freeze_save_fixtures.mjs`.
+ *
+ *  ⛔ `save_fixtures.mjs` STILL READS THE LIVE ONES, and it is the only suite that should: proving the real
+ *  saves still load is its entire job, and it asserts nothing about what is IN them. */
+const savedSave = (rel) => rd(join("tests", "fixtures", "saves", rel.replace("/", "__")));
 const rj = (p) => JSON.parse(rd(p));
 // ✅ §184 (AEVI 2026-09-12, SNG-538 §5): THE CLAIM, NOT ITS CAPITALS. These two gates matched her headings' shouting register
 // literally — one `.test` with no flag, one `.includes` — so she could not re-register a PLAYER document without reddening a gate
@@ -11739,7 +11757,7 @@ console.log("\n── §115 · the runner is at the post again, on the phone too
     c.inventory.length === n1 && JSON.stringify(c) === f1 && !again.notes);
   const o = { id: "someone-else", inventory: [], npcRegistry: {}, codex: { topics: {} }, holdings: [] }; const oo = step.apply(o);
   check("§115: ⛔ …and NEVER another character — Silas's slate does not appear in anyone else's pack", !o.inventory.length && !oo.notes);
-  const disk = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+  const disk = JSON.parse(savedSave("player-s9z9u1/char-mrhs8286.json"));
   // ⚠️ NO REV CLAUSE. The repair stamped an absurd `rev` so the copy would win one race in September; asserting
   // that number made this gate fail every time Erik played on. The durable claims are the CONTENT and the
   // `reconcileVersion` — §117 is where the rev RULE lives, and it is the one that protects the copy.
@@ -11801,7 +11819,7 @@ console.log("\n── §118 · a hill overlooking the Crossing, a day and a half
   check("§118: …idempotent — twice changes nothing and says nothing", JSON.stringify(c) === snap && !again.notes);
   const o = { id: "someone-else", holdings: [{ name: "Threshold Post", locationId: null }] }; step.apply(o);
   check("§118: ⛔ …and never another character", o.holdings[0].locationId === null && !o.generated);
-  const disk = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+  const disk = JSON.parse(savedSave("player-s9z9u1/char-mrhs8286.json"));
   // ⛔ 2026-09-12: a holding can be released or transferred in play; the place the step minted persists. Assert the place and the version.
   check("§118: ⚑ the repo copy has SEEN the step (version ≥ 42) and the place it minted persists — whether the holding on it is still held is play's",
     !!disk.generated.location["gen-threshold-post"] && disk.reconcileVersion >= 42);
@@ -11841,7 +11859,7 @@ console.log("\n── §119 · six hooks, one district, and a reading that arriv
   // existed, folded nothing, and was stamped (§175). The repo copy is rewritten by every beat Erik plays; it is a ledger, not a fixture.
   // The claim that survives: brought up to date on load (through reconcile(), every registered step), the copy has no edge-district-*
   // topic left and the district stands.
-  const disk = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+  const disk = JSON.parse(savedSave("player-s9z9u1/char-mrhs8286.json"));
   RC.reconcile(disk, "character", {});
   check("§119: ⚑ the repo copy, brought up to date on load, has no edge-district-* topic left, and the folded one stands",
     !Object.keys(disk.codex.topics).some(k => k.startsWith("edge-district-")) && !!disk.codex.topics["radiant-plateau-edge"] && disk.reconcileVersion >= 52);
@@ -11969,7 +11987,7 @@ console.log("\n── §121 · the record kept the picture and dropped the build
   check("§121: …idempotent — twice builds nothing and says nothing", JSON.stringify(c.holdings) === snap && !again.notes);
   const o = fx(); o.id = "someone-else"; step.apply(o, { content: C });
   check("§121: ⛔ …never another character, and never without the catalogue", !o.holdings.some(h => h.id === "hold-made-gate") && !(o.holdings[0].features || []).length && !step.apply(fx(), {}).notes);
-  const disk = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+  const disk = JSON.parse(savedSave("player-s9z9u1/char-mrhs8286.json"));
   const dmg = disk.holdings.find(h => h.id === "hold-made-gate");
   // ⚠️ THAT THE GATE HAS A GARRISON, not WHO is in it. The check named "logana" and now reads ["siol"] — because
   // Erik moved someone, which is the game working. A roster is a running state; the structure is the fact.
@@ -11994,7 +12012,7 @@ console.log("\n── §122 · forty days on foot, or hours through the gate Sil
   const J = await import("../engine/journey.js");
   const { loadContentHeadless: lch122 } = await import("./headless_content.mjs");
   const C = await lch122();
-  const disk = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+  const disk = JSON.parse(savedSave("player-s9z9u1/char-mrhs8286.json"));
   const L = { ...C.locations, ...disk.generated.location };
   const d = (a, b) => WM.walkingDays(L[a], L[b]);
   check("§122: ⛔ THE CLUSTER IS ONE LOCAL AREA — the Whistling Woman a quarter-day from the gate, the gate a half-day from Stillwater's Trouble",
@@ -12071,7 +12089,7 @@ console.log("\n── §123 · the list and the popup say the same thing, with a
   check("§123: ⛔ THE LIST AND THE POPUP RENDER THE SAME FACTS LINE from the same engine call, and name the owner",
     (app.match(/\$\{factsOf\(h\)\}/g) || []).length === 2 && (app.match(/\$\{ownerOf\(h\)\}/g) || []).length === 2 && /holdingFactsLine\(h, \{ nameOf, holdings: character\.holdings/.test(app)
     && /import \{[^}]*\bholdingFactsLine\b/.test(app));
-  const disk = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+  const disk = JSON.parse(savedSave("player-s9z9u1/char-mrhs8286.json"));
   // ⛔ THE DEFECT WAS A STOLEN PICTURE, NOT A MISSING PREFIX. Stillwater's Trouble wore RAVEN'S HOME's art. My
   // first form demanded every prompt begin with its own hold's name, which fails two BESPOKE prompts that are
   // each about their own hold (the Fell Pell's forge, the Made Gate's portal). Ask the real question instead:
@@ -12901,7 +12919,7 @@ console.log("\n── §141 · a receipt that is saved is a description, not a h
   check("§141: ⛔ …and the receipt is assigned THROUGH it, so no caller has to remember",
     /o\.targetChoice = persistableChoice\(aimedAt\)/.test(rd("engine/skill_battle.js")));
   // ⛔ AND THE LIVE PROPERTY, MEASURED END TO END: play the step that threw on his save, and serialise.
-  const c141 = JSON.parse(rd("characters/player-s9z9u1/char-mrum8y4d.json"));
+  const c141 = JSON.parse(savedSave("player-s9z9u1/char-mrum8y4d.json"));
   // ⛔ SNG-563: THIS NAMED ONE ENCOUNTER OFF A LIVE SAVE, and `customEncounters` is CAPPED — `re-beast_hollow_pace`
   // aged out of Loki's five and the gate went red for it, having tested nothing that changed. ⚠️ THE CLAIM IS ABOUT
   // THE SHAPE, not about that opponent: a persisted choice keeps its identifiers and drops every live object, and the
@@ -13924,7 +13942,7 @@ console.log("\n── §188 · who has thrown in with you: plural bands, a deriv
     && !/\b99\b/.test(gmOut) && !/fresh, 6/.test(gmOut), gmOut.split("\n").filter(l => /raised/.test(l)).join(" | "));
 
   // ⛔ AND THE LIVE CASE, ON SILAS'S OWN SAVE — the state Erik was looking at when he said he could not find the roster
-  const silas = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+  const silas = JSON.parse(savedSave("player-s9z9u1/char-mrhs8286.json"));
   const sOpts = { content: C188, worldDay: 19 };
   const sRows = [...FW.atSideRows(silas, sOpts), ...FW.poolRows(silas, sOpts)];
   check("§188: ⛔ LIVE — the Fellowship of the Fell Pell reads six sworn with one at his side, every one of them named and levelled",
@@ -13968,7 +13986,7 @@ console.log("\n── §189 · one reader for every player-facing quest surface,
   const { loadContentHeadless: lch189 } = await import("./headless_content.mjs");
   const C189 = await lch189();
   const A189 = rd("app.js");
-  const silas189 = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+  const silas189 = JSON.parse(savedSave("player-s9z9u1/char-mrhs8286.json"));
 
   // ⛔ HER FINDING, AS A GATE: `questsFor` was not in app.js's import list at all, so no player surface could hydrate.
   check("§189: ⛔ app.js IMPORTS the one reader — Aevi: \"`hydrateQuest` already repairs all three broken quests. app.js does not import it\"",
@@ -14039,7 +14057,7 @@ console.log("\n── §190 · the push rides on the save, a failure says so, an
   const { loadContentHeadless: lch190 } = await import("./headless_content.mjs");
   const C190 = await lch190();
   const A190 = rd("app.js");
-  const silas190 = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+  const silas190 = JSON.parse(savedSave("player-s9z9u1/char-mrhs8286.json"));
 
   /* ---- 1 · THE CADENCE. Erik: "I just loaded my Silas Character on my phone... it is quite a bit out of date." ---- */
   // ⛔ THE MEASUREMENT THAT FOUND IT: `saveCharacter` is called ~176 times in app.js and `backupSaves` was called ONCE,
@@ -14196,7 +14214,7 @@ console.log("\n── §191 · the meetings already on the record, the quest its
   // the act ONCE. ⛑ So the transition is driven on a COPY rewound to just before the step (its own version and the four fields the
   // step writes, stripped), which is a state that cannot move, and the LIVE save is asserted separately for the end state it now
   // holds. Both halves are true forever: the step still does what it claims, and his save still carries what it did.
-  const silasLive = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+  const silasLive = JSON.parse(savedSave("player-s9z9u1/char-mrhs8286.json"));
   const silas191 = JSON.parse(JSON.stringify(silasLive));
   silas191.reconcileVersion = 54;
   // ⚠️ A COUNT ABOVE THE FLOOR IS REAL PLAY AND SURVIVES THE REWIND. The step only ever RAISES `met` to the number of history
@@ -14324,7 +14342,7 @@ console.log("\n── §193 · a name that cannot vanish, four sources with thei
   const C193 = await lch193();
   const A193 = rd("app.js");
   const CSS193 = rd("style.css");
-  const silas193 = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+  const silas193 = JSON.parse(savedSave("player-s9z9u1/char-mrhs8286.json"));
 
   /* ---- 1 · the load screen. "load screen ui got tweaked a bit. Quick simple fix." ---- */
   // ⛔ MY OWN DOING: SNG-543's sync line went in as a THIRD flex child of `.roster-item`, so the row split three ways and every
@@ -14507,7 +14525,7 @@ console.log("\n── §194 · acquiring a craft you aspired to carries the prac
   /* ---- the one-shot, on a save that already has one stranded ---- */
   // ⛔ HIS CASE: `hunters_strike` owned at rank 1, one use, and a 10/10 aspiration still holding a slot and offering a ✓ that
   // `learnAbility` would refuse as a duplicate. ⚠️ Driven on a REWOUND COPY, because the repair is one-shot and lands once.
-  const silas194 = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+  const silas194 = JSON.parse(savedSave("player-s9z9u1/char-mrhs8286.json"));
   const rewound = JSON.parse(JSON.stringify(silas194));
   rewound.reconcileVersion = 55;
   rewound.practice.uses.hunters_strike = 1;
@@ -14546,7 +14564,7 @@ console.log("\n── §195 · the parser can see the canon, an item answers to 
   const { loadContentHeadless: lch195 } = await import("./headless_content.mjs");
   const C195 = await lch195();
   const G195 = rd("engine/gm.js");
-  const silas195 = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+  const silas195 = JSON.parse(savedSave("player-s9z9u1/char-mrhs8286.json"));
 
   /* ---- O1 · infeasible requires a positive contradiction ---- */
   // ⛔ HER RULING, AND IT IS THE WHOLE SPEC IN ONE SENTENCE: "A classifier that cannot see the canon must not be permitted to rule
@@ -14649,11 +14667,11 @@ console.log("\n── §196 · a guard that cannot see must refuse, and the game
 {
   const SY196 = await import("../engine/sync.js");
   const S196 = rd("engine/sync.js");
-  const silas196 = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+  const silas196 = JSON.parse(savedSave("player-s9z9u1/char-mrhs8286.json"));
 
   // ⛔ THE CAUSE, AS A FACT ABOUT THE FILE: the GitHub contents API stops returning inline `content` above 1,000,000 bytes and
   // answers 200 with an empty body. This save is past that line, so every read came back unparseable → null → "no remote".
-  const bytes196 = rd("characters/player-s9z9u1/char-mrhs8286.json").length;
+  const bytes196 = savedSave("player-s9z9u1/char-mrhs8286.json").length;
   check(`§196: ⛔ the save is ${bytes196.toLocaleString("en-US")} bytes — past the API's 1,000,000-byte inline limit, which is WHY the read went blind`,
     bytes196 > 1_000_000);
   check("§196: ⛔ so the read asks for the RAW body, which has no such limit, and falls back to `download_url` if a host ignores it",
@@ -15786,7 +15804,7 @@ console.log("\n── §208 · the player reads the quest through the same door 
   const QS208 = await import("../engine/quests.js");
   const { loadContentHeadless: lch208 } = await import("./headless_content.mjs");
   const C208 = await lch208();
-  const silas208 = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+  const silas208 = JSON.parse(savedSave("player-s9z9u1/char-mrhs8286.json"));
   const blanks = (silas208.quests || []).filter(q => Array.isArray(q.stages) && q.stages.length && q.stages.every(s => !s || !Object.keys(s).length));
   const read = QS208.questsFor(silas208, C208.quests);
   const healed = blanks.map(b => read.find(q => q.id === b.id)).filter(Boolean);
@@ -18322,7 +18340,7 @@ console.log("\n── §237 · somebody else takes the fight ──");
 
   // ⚠️ A REAL PARTY OFF A REAL SAVE. A fixture party would prove the sort and nothing about whether the
   // sheets these people actually have can be built — which is the half that failed first.
-  const save237 = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+  const save237 = JSON.parse(savedSave("player-s9z9u1/char-mrhs8286.json"));
   const allies237 = CB237.alliesOf(save237, { companions: C237.companions || {}, npcs: C237.npcs || {}, party: save237.party || null });
   const cfg237 = C237.rules?.npcStanding || {};
   const sheetOf237 = (rec) => BT237.personOpponentFor(rec, { catalog: C237.abilities || {}, cfg: cfg237, day: 400,
@@ -18524,7 +18542,7 @@ console.log("\n── §239 · what a number is a number OF ──");
   // rather than hoped for, by holding the level where his abilities actually fill the cap. That is the state
   // the claim is about, and it cannot drift out from under it again.
   const ST239 = await import("../engine/skilltree.js");
-  const live239 = JSON.parse(rd("characters/player-s9z9u1/char-mrum8y4d.json"));
+  const live239 = JSON.parse(savedSave("player-s9z9u1/char-mrum8y4d.json"));
   const loki239 = (() => {
     const c = JSON.parse(JSON.stringify(live239));
     // his own non-native crafts set the bar; the table maps a level to a cap, so walk down to the level that
@@ -18733,7 +18751,7 @@ console.log("\n── §241 · who is near, what they are doing, and what a meet
   /* ---- 2 · ⛔ AND IT RIDES THE ROSTER THE GM ACTUALLY READS ---- */
   // ⚠️ ON A REAL SAVE AT A REAL PLACE. A synthetic roster would prove the sentence and nothing about whether
   // the ladder reaches the block — which is the door that was shut on `power_bands.json` yesterday.
-  const loki241 = JSON.parse(rd("characters/player-s9z9u1/char-mrum8y4d.json"));
+  const loki241 = JSON.parse(savedSave("player-s9z9u1/char-mrum8y4d.json"));
   const bandOf241 = (t) => LG241.tierRank(t, b241);
   const myBand241 = bandOf241(LG241.tierForArc(loki241.level, b241));
   let sawRel241 = 0, sawAny241 = 0;
@@ -18948,7 +18966,7 @@ console.log("\n── §243 · one person, one stack ──");
 {
   const N242 = await import("../engine/npcs.js");
   const R242 = await import("../engine/reconcile.js");
-  const save242 = JSON.parse(rd("characters/player-s9z9u1/char-mrum8y4d.json"));
+  const save242 = JSON.parse(savedSave("player-s9z9u1/char-mrum8y4d.json"));
   const reg242 = save242.npcRegistry || {};
 
   /* ---- 1 · ⛑ THE RESOLVER READS THE REGISTRY, SUFFIX AND ALL ---- */
@@ -19041,7 +19059,7 @@ console.log("\n── §244 · an unknown gender is the absence of an answer, no
 {
   const N244 = await import("../engine/npcs.js");
   const A244 = rd("app.js");
-  const save244 = JSON.parse(rd("characters/player-s9z9u1/char-mrum8y4d.json"));
+  const save244 = JSON.parse(savedSave("player-s9z9u1/char-mrum8y4d.json"));
   const veln244 = save244.npcRegistry?.["hourkeeper-confluence"];
 
   /* ---- 1 · ⛔ THE PREDICATE, AND THE RECORD THAT PROVES IT WAS NEEDED ---- */
@@ -19052,9 +19070,21 @@ console.log("\n── §244 · an unknown gender is the absence of an answer, no
   const contradictory244 = { sex: "male", gender: "unknown", pronouns: "they/them" };
   check("§244: ⚠️ the shape Erik was looking at — a sex recorded, a gender that is the ABSENCE of one, and pronouns defaulted around it; a record disagreeing with itself in the one place nobody could correct",
     N244.genderUnsaid(contradictory244) && !N244.sexUnsaid(contradictory244) && contradictory244.pronouns === "they/them");
-  check("§244: ⛑ …and the live record has since been PUT RIGHT through that corrector, which is what it is for — she carries a real gender now, and a repaired subject must never redden the gate that asked for the repair",
-    !!veln244 && !N244.genderUnsaid(veln244),
-    JSON.stringify({ sex: veln244?.sex, gender: veln244?.gender, pronouns: veln244?.pronouns }));
+  // ⛔ A CHECK REMOVED HERE, DELIBERATELY, AND THE REASON IS THE POINT (CCODE-527).
+  //
+  // It read: "the live record has since been PUT RIGHT through that corrector … she carries a real gender
+  // now". ⚠️ DRIVEN, once the saves were frozen: `backfillNpcGender` returns `[]` for her and leaves
+  // `gender: "unknown"`; a full `reconcile` leaves it too. **No corrector repairs her.** She was put right IN
+  // PLAY — the GM recorded her gender — and this check had been reading that outcome and crediting the machine
+  // for it: green every run, without the corrector ever having done anything.
+  //
+  // ⚠️ A CHECK THAT NAMES A MECHANISM AND IS SATISFIED BY A COINCIDENCE IS WORSE THAN NO CHECK. It is this
+  // project's own "a message is a claim about a mechanism", in gate form: the sentence described a repair that
+  // does not exist, and nothing could tell, because what it asserted was true for another reason.
+  //
+  // ⛑ The section's real claims are untouched: the contradictory SHAPE is driven on a fixture just above, and
+  // `genderUnsaid`'s semantics are gated immediately below. What is gone is the one line that was an
+  // observation about one record on one day — a measurement, and measurements belong in `po/`.
   check("§244: ⛔ an UNKNOWN gender is unsaid, not said — the truthiness that locked her out of both readers",
     N244.genderUnsaid({ gender: "unknown" }) && N244.genderUnsaid({}) && N244.genderUnsaid({ gender: "" })
     && !N244.genderUnsaid({ gender: "woman" }) && !N244.genderUnsaid({ gender: "man" }));
@@ -22984,7 +23014,7 @@ console.log("\n── §291 · an invitation rides the next beat with room and i
     && /threatsPaused \? null\s*:\s*threatAttackPressure\(/.test(A291));
 
   /* ---- 9 · ⛔ HER SAVE, THROUGH THE RUNNER ---- */
-  const real9 = JSON.parse(rd("characters/player-54seyk/char-mr5ns3hh.json"));
+  const real9 = JSON.parse(savedSave("player-54seyk/char-mr5ns3hh.json"));
   const step9 = RC291.CHARACTER_STEPS.find(s => s.id === "a-calmer-valley-for-adelheid");
   check("§291: ⛔ the step is OWED to her save — its version is above the reconcileVersion her committed save carries, or her save already carries the pause (proving `apply` on a copy is not proving the gate)",
     !!step9 && (step9.version > (Number(real9.reconcileVersion) || 0) || !!real9.worldState?.threatsPaused),
@@ -22992,7 +23022,7 @@ console.log("\n── §291 · an invitation rides the next beat with room and i
   const copy9 = JSON.parse(JSON.stringify(real9)); copy9.reconcileVersion = step9.version - 1;
   const queued9 = (copy9.worldState?.pressureQueue || []).length;
   RC291.reconcile(copy9, "character", {}, RC291.CHARACTER_STEPS.filter(s => s.version === step9.version));
-  const loki9 = JSON.parse(rd("characters/player-s9z9u1/char-mrum8y4d.json")); loki9.reconcileVersion = step9.version - 1;
+  const loki9 = JSON.parse(savedSave("player-s9z9u1/char-mrum8y4d.json")); loki9.reconcileVersion = step9.version - 1;
   RC291.reconcile(loki9, "character", {}, RC291.CHARACTER_STEPS.filter(s => s.version === step9.version));
   check("§291: ⛔ THROUGH THE RUNNER, on a copy of HER real save: the pause is set by Erik, the version is stamped, and nothing is removed (additive, like every step) — while another player's character is left without it",
     copy9.worldState?.threatsPaused?.by === "erik" && copy9.reconcileVersion === step9.version && (copy9.worldState?.pressureQueue || []).length === queued9
@@ -23699,7 +23729,7 @@ console.log("\n── §300 · jobs — sent, timed, and decided by the dice the
     Number.isInteger(whole300.backAtHours) && whole300.backAtHours === 443, String(whole300.backAtHours));
 
   /* ---- 10 · ON SILAS'S REAL SAVE ---- */
-  const disk300 = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+  const disk300 = JSON.parse(savedSave("player-s9z9u1/char-mrhs8286.json"));
   const L300 = { ...CT300.locations };
   for (const rec of Object.values(disk300.generated?.location || {})) if (rec?.id && !L300[rec.id]) L300[rec.id] = rec;
   const pool300 = JB.jobPoolOf(disk300, { content: CT300, abilityCatalog: CT300.abilities, locations: L300 });
@@ -23782,7 +23812,7 @@ console.log("\n── §301 · one person, one id — a name the world already h
     (A301.match(/npcs: CONTENT\.npcs \|\| \{\}/g) || []).length >= 2);
 
   /* ---- 4 · ⛑ LOKI'S HALVEX, ON HIS REAL SAVE (a copy) ---- */
-  const loki301 = JSON.parse(rd("characters/player-s9z9u1/char-mrum8y4d.json"));
+  const loki301 = JSON.parse(savedSave("player-s9z9u1/char-mrum8y4d.json"));
   const had301 = !!loki301.npcRegistry?.["churn-revel-orchestrator"];
   const levelBefore301 = had301 ? F301.levelOfPerson(loki301, "churn-revel-orchestrator", { content: CT301 }) : null;
   const out301 = RC301.reconcile(loki301, "character", { content: CT301 }, RC301.CHARACTER_STEPS.filter(s => s.version === 67));
@@ -23792,7 +23822,7 @@ console.log("\n── §301 · one person, one id — a name the world already h
       && Object.keys(loki301.likeness || {}).some(k => k === "figure:whois-halvex_coil") && !!loki301.worldState?.epicStatus?.halvex_coil
       && F301.levelOfPerson(loki301, "halvex_coil", { content: CT301 }) === levelBefore301 && /one man/.test((out301?.notes || [])[0] || "")),
     JSON.stringify({ had301, keys: Object.keys(loki301.npcRegistry || {}).filter(k => /halvex|churn/.test(k)) }));
-  const silas301 = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+  const silas301 = JSON.parse(savedSave("player-s9z9u1/char-mrhs8286.json"));
   const silasBefore = JSON.stringify(silas301.npcRegistry);
   RC301.reconcile(silas301, "character", { content: CT301 }, RC301.CHARACTER_STEPS.filter(s => s.version === 67));
   check("§301: …and it is Loki's alone — Silas's registry is untouched", JSON.stringify(silas301.npcRegistry) === silasBefore);
@@ -24039,7 +24069,7 @@ console.log("\n── §306 · the fire tests, sealed — every door applyTurn c
   const RC306 = await import("../engine/reconcile.js");
   const { loadContentHeadless: lch306 } = await import("./headless_content.mjs");
   const CT306 = await lch306();
-  const cel306 = JSON.parse(rd("characters/player-s9z9u1/char-mr4ejo8c.json"));
+  const cel306 = JSON.parse(savedSave("player-s9z9u1/char-mr4ejo8c.json"));
   const blank306 = !String(cel306.activeScene?.lastTurn?.narration || "").trim();
   const last306 = [...(cel306.activeScene?.turns || [])].reverse().find(t => String(t?.narration || "").trim());
   const o306 = RC306.reconcile(cel306, "character", { content: CT306, day: 30 }, RC306.CHARACTER_STEPS.filter(s => s.version === 69));
@@ -24066,7 +24096,7 @@ console.log("\n── §307 · errands by the job's roll — a charge is a one-n
   const { loadContentHeadless: lch307 } = await import("./headless_content.mjs");
   const CT307 = await lch307();
   const fn307 = FN307.buildFunctionIndex(CT307.functionVocabulary);
-  const silas307 = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+  const silas307 = JSON.parse(savedSave("player-s9z9u1/char-mrhs8286.json"));
   const charges307 = Object.values(silas307.worldState?.assignments || {});
   const odds307 = charges307.map(a => ({ a, o: J307.errandOdds(silas307, a, { content: CT307, fnIndex: fn307 }) }));
 
@@ -24274,7 +24304,7 @@ console.log("\n── §310 · troops are not furniture — a band's hands and a
   const fn310 = FN310.buildFunctionIndex(CT310.functionVocabulary);
   const hcfg310 = { ...CT310.rules.economy.holdStore, features: CT310.rules.economy.holdFeatures };
   // ⚑ SILAS'S OWN SAVE — his one band is six named people and no hands, so a contingent of twelve raised at the Fell Pell is added to a copy
-  const fresh = () => { const c = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+  const fresh = () => { const c = JSON.parse(savedSave("player-s9z9u1/char-mrhs8286.json"));
     M310.addContingent(c.bands[0], { n: 12, quality: 1, does: ["HARM", "MARTIAL"], what: "rank and file", from: "the-fell-pell" }); return c; };
   const heads = (b) => M310.contingentsOf(b).reduce((a, x) => a + x.n, 0);
   const s310 = fresh();
@@ -24377,7 +24407,7 @@ console.log("\n── §311 · where the mounts are kept, you ride — a journey
     && H311.trainingAt(a311, "p1", cfg311) === null, riders.join(", "));
 
   // ⚑ SILAS'S OWN ROAD: from Stillwater's Trouble to Millbrook, with and without a stable granted there on a copy
-  const s311 = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+  const s311 = JSON.parse(savedSave("player-s9z9u1/char-mrhs8286.json"));
   const still = (s311.holdings || []).find(h => /Stillwater/.test(h.name || ""));
   s311.currentLocationId = still?.locationId;
   const plan = (c) => JP311.planJourney({ character: c, destId: "millbrook", locations: CT311.locations, rules: CT311.rules, catalog: CT311.items, abilities: CT311.abilities, worldDay: 30 });
@@ -24399,7 +24429,7 @@ console.log("\n── §311 · where the mounts are kept, you ride — a journey
     && Math.abs(byLabel(marched)[walked].days - Math.round(o0[walked].days * (1 - Math.max(0.33, JP311.journeyCraftsOf(long, CT311.rules, CT311.abilities).march.share)) * 10) / 10) <= 0.2);
 
   const road = J311.jobRouteOf(s311, { locations: CT311.locations, rules: CT311.rules, abilityCatalog: CT311.abilities });
-  const road0 = J311.jobRouteOf(JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json")), { locations: CT311.locations, rules: CT311.rules, abilityCatalog: CT311.abilities });
+  const road0 = J311.jobRouteOf(JSON.parse(savedSave("player-s9z9u1/char-mrhs8286.json")), { locations: CT311.locations, rules: CT311.rules, abilityCatalog: CT311.abilities });
   const person = { locationId: still.locationId, abilities: [], wits: 3, regionsKnown: {} };
   check("§311: ⛑ and a job team setting out from that hold rides as well — the same share, from the same stable",
     road(person, "millbrook").days < road0(person, "millbrook").days);
@@ -28192,7 +28222,7 @@ console.log("\n── §360 · the nemesis, and both halves of Erik's ask ──
   const { loadContentHeadless: lch360 } = await import("./headless_content.mjs");
   const C360 = await lch360();
   const dials = C360.rules?.nemesis;
-  const silas = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+  const silas = JSON.parse(savedSave("player-s9z9u1/char-mrhs8286.json"));
   const staged = JSON.parse(rd("po/staged_content/SNG-648_silas_nemesis.json"));
   const herPick = staged.nemesis?.figureId || staged.figureId || null;
 
@@ -28310,7 +28340,7 @@ console.log("\n── §360 · the nemesis, and both halves of Erik's ask ──
       const row = GR360.GM_CONTEXT.find(r => r.key === "nemesisDetail");
       if (!row) return false;
       const shortlist = NM.nemesisCandidates(silas, { content: C360 }).candidates;
-      const c = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+      const c = JSON.parse(savedSave("player-s9z9u1/char-mrhs8286.json"));
       NM.applyNemesisChoice(c, { figureId: shortlist[0].id, legendTie: dials.legendTie.relations[0], legendTieWhy: "because" }, { content: C360, shortlist, day: 300 });
       const block = NM.nemesisForGM(c, { content: C360 });
       const consumed = rd("engine/gm.js").includes("${nemesisDetail}");
@@ -28320,7 +28350,7 @@ console.log("\n── §360 · the nemesis, and both halves of Erik's ask ──
 
   check("§360: ⛑ …AND RECONCILE STAKES THE SHORTLIST FOR EVERY EXISTING CHARACTER, which is the half a reconcile step can honestly do: the choice itself is a model call, and a step runs on load with no key and no network. ⛔ A step that pretended to choose would be binding a nemesis by score alone and calling it a judgement. It is idempotent, and it never overwrites a choice already made",
     (() => {
-      const c = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+      const c = JSON.parse(savedSave("player-s9z9u1/char-mrhs8286.json"));
       RC360.reconcile(c, "character", { content: C360, day: 300 });
       const staked = c.nemesis;
       if (!staked?.pending || !staked.shortlist?.length || staked.figureId) return false;
@@ -28328,7 +28358,7 @@ console.log("\n── §360 · the nemesis, and both halves of Erik's ask ──
       RC360.reconcile(c, "character", { content: C360, day: 301 });
       if (c.reconcileVersion !== v || JSON.stringify(c.nemesis) !== JSON.stringify(staked)) return false;
       // and a character already bound is left alone
-      const bound = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+      const bound = JSON.parse(savedSave("player-s9z9u1/char-mrhs8286.json"));
       bound.nemesis = { figureId: "cinder_vael", why: ["chosen"], shortlist: [] };
       bound.reconcileVersion = 81;
       RC360.reconcile(bound, "character", { content: C360, day: 302 });
@@ -28337,14 +28367,14 @@ console.log("\n── §360 · the nemesis, and both halves of Erik's ask ──
 
   check("§360: ⛑ …AND THE NEXT NAME INHERITS THE GRUDGE, re-scored rather than trusted: the shortlist was written when the world was in another state, and a candidate may since have died or lost the ground the score was about",
     (() => {
-      const c = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+      const c = JSON.parse(savedSave("player-s9z9u1/char-mrhs8286.json"));
       const shortlist = NM.nemesisCandidates(c, { content: C360 }).candidates;
       NM.applyNemesisChoice(c, { figureId: shortlist[0].id, legendTie: dials.legendTie.relations[0] }, { content: C360, shortlist, day: 10 });
       const first = c.nemesis.figureId;
       const next = NM.inheritNemesis(c, { content: C360, day: 20 });
       if (!next || next.figureId === first || next.inheritedFrom !== first) return false;
       // and a dead heir is skipped
-      const d = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+      const d = JSON.parse(savedSave("player-s9z9u1/char-mrhs8286.json"));
       d.worldState = { ...(d.worldState || {}), epicStatus: { ...(d.worldState?.epicStatus || {}), [next.figureId]: { status: "dead" } } };
       NM.applyNemesisChoice(d, { figureId: shortlist[0].id, legendTie: dials.legendTie.relations[0] }, { content: C360, shortlist, day: 10 });
       const after = NM.inheritNemesis(d, { content: C360, day: 20 });
@@ -28775,6 +28805,41 @@ console.log("\n── §363 · who walks with you, and who you have killed ─�
       const vs = RC.CHARACTER_STEPS.map(s => Number(s.version));
       return vs.length === new Set(vs).size && vs.every(Number.isFinite);
     })(), (() => { const vs = RC.CHARACTER_STEPS.map(s => Number(s.version)); const dup = vs.filter((v, i) => vs.indexOf(v) !== i); return dup.length ? `duplicated: ${[...new Set(dup)].join(", ")}` : `${vs.length} steps, all distinct`; })());
+}
+
+/* ══════════ §364 · CCODE-527 — A GATE MAY NOT READ A SAVE SOMEBODY IS PLAYING ══════════ */
+// ⛔ AEVI, BLOCKED: "a test broke in the last hour, and it now blocks every push that isn't a save, CCode's
+// included … It's a test reading a live save, which CCode ruled out on 09-12. The fix is CCode's."
+// ⚠️ She named one; there were ELEVEN, across §188, §190, §300, §310 and §360, and this file read a live save
+// 38 times. None of them was wrong about the engine — they were right about a world that moved under them, and
+// a check that reddens because the game was played correctly teaches everybody to re-baseline past it.
+// ⛑ The claims are about real played history, so the history is FROZEN rather than the claims weakened.
+console.log("\n── §364 · the saves a gate reads hold still ──");
+{
+  const howSrc = rd("tests/how_it_works.mjs");
+  const liveReads = [...howSrc.matchAll(/rd\("characters\/[^"]+"\)/g)].map((m) => m[0]);
+  check("§364: ⛔ NO GATE READS A LIVE SAVE — a check that reddens because the game was played correctly is a check everybody learns to step over",
+    liveReads.length === 0, liveReads.slice(0, 4).join(" · "));
+
+  const frozen = [...new Set([...howSrc.matchAll(/savedSave\("([^"]+)"\)/g)].map((m) => m[1]))];
+  check("§364: ⛑ …and the frozen copies are really there, and really are saves",
+    frozen.length >= 3 && frozen.every((rel) => {
+      try { const c = JSON.parse(savedSave(rel)); return !!c?.id && !!c?.npcRegistry; } catch { return false; }
+    }), `${frozen.length} frozen saves`);
+
+  // ⛔ AND `save_fixtures.mjs` STILL READS THE LIVE ONES. It is the only suite that should: proving the real
+  // saves still load is its entire job, and it asserts nothing about what is IN them. A rule that stopped it
+  // would be the fix eating the thing it exists to protect.
+  check("§364: ⛑ …while `save_fixtures` still reads the LIVE saves, which is its whole job — reconcile a copy, assert nothing shrank",
+    /readdirSync/.test(rd("tests/save_fixtures.mjs")) && /characters/.test(rd("tests/save_fixtures.mjs"))
+    && /NOTHING SHRANK/.test(rd("tests/save_fixtures.mjs")));
+
+  // ⚠️ AND THE FREEZER'S LIST IS DERIVED, never maintained by hand: a save a gate starts reading tomorrow is
+  // frozen by the next run without anybody remembering to add it.
+  const frz = rd("scripts/freeze_save_fixtures.mjs");
+  check("§364: ⚠️ …and the freezer derives its list from what the gates read, and can take a COMMIT rather than the working tree",
+    /matchAll\(\/savedSave/.test(frz) && /--from/.test(frz) && /git", \["show"/.test(frz),
+    "freezing the working tree freezes the drift — the first run did exactly that and the gates stayed red");
 }
 
 /* ══════════ REPORT ══════════ */

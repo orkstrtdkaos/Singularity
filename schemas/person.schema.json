@@ -1,71 +1,255 @@
 {
- "$schema": "http://json-schema.org/draft-07/schema#",
- "title": "person",
- "_what": "⛔ SNG-658 §2 — A PERSON YOU HAVE MET, as `character.npcRegistry` holds them. One schema per TYPE, not per file: an authored NPC and a met person are two types, and validating one against the other is how 133 of 133 registry people 'failed' the npc schema — `spectrum`, `fears` and `schemaVersion` are things an AUTHOR writes, which somebody you met in play has never had.",
- "_derivedFrom": "All 134 registry people across the 16 live saves, 2026-09-26. Each field's description says how often it is actually present, so the next reader knows which fields are the shape and which are the exceptions.",
- "_forAevi": "⬜ §4.4 is yours: which of these are authored-only and belong in `npc` rather than here. My read from the corpus is that everything below is written BY PLAY — `domains`, `age`, `sex` and `appearance` are the ones a generator also fills, and `trueName`/`nameUnknown` exist precisely because a minted person carries a real name before the character learns it. Tighten `status` and `bondType`'s enums if the vocabulary is settled.",
- "type": "object",
- "required": ["id", "name"],
- "additionalProperties": false,
- "patternProperties": {
-  "^_": { "_what": "a note or a provenance stamp, which is allowed to be anything — `_mergedFrom`, `_filledFromGenerate`, `_portraitTier`" }
- },
- "properties": {
-  "id": { "type": "string", "description": "100% — the stable key this person is known by, for the life of the save. ⛔ Never re-coined when a name is revealed: the id stays and the display name changes (gm.js directive 14)." },
-  "name": { "type": "string", "description": "100% — what the CHARACTER calls them, which is not always their real name. A person the character cannot yet name shows a label here and carries `trueName` beneath it." },
-  "role": { "type": "string", "description": "97% — what they do, in a few words. A role is not a name." },
-  "description": { "type": "string", "description": "97% — one line on who they are to look at." },
-  "firstMet": { "type": "object", "description": "97% — `{locationId, day}`: where and when the character first met them." },
-  "relationship": { "type": "number", "description": "97% — standing, running roughly −10..10. `relationshipBand` names the rungs: enemy · hostile · wary · neutral · friendly · ally · devoted." },
-  "history": { "type": "array", "description": "97% — what has passed between you, newest last, each line stamped with its day." },
-  "knownFacts": { "type": "array", "description": "97% — facts the character has learned about them." },
-  "skillsObserved": { "type": "array", "description": "97% — things the character has SEEN them do. Read by `contributionsOf` for what they bring to a fight or a watch." },
-  "status": { "type": "string", "description": "97% — active · injured · missing · dead · departed. ⛔ `dead` and `departed` are the two that mean GONE (CCODE-514): a keeper loses their post on these and on nothing else." },
-  "lastSeen": { "type": "object", "description": "88% — `{locationId, day}` of the most recent meeting." },
-  "statusNote": { "type": "string", "description": "80% — their CURRENT situation in one line, fed to the GM every turn so it is remembered rather than scrolling away." },
-  "gender": { "type": ["string", "null"], "description": "80% — how they present. Separate from `sex` and gates nothing." },
-  "pronouns": { "type": ["string", "null"], "description": "80% — so narration stays consistent." },
-  "met": { "type": "number", "description": "78% — how many times the character has met them." },
-  "domains": { "type": "object", "description": "66% — the NPC sheet's domains, `{primary, …}`. Read for what they are made of." },
-  "domainsSource": { "type": "string", "description": "66% — where the domains came from: authored, derived, or generated." },
-  "sex": { "type": "string", "description": "31% — male · female · none. Set on first writing and never later; `none` is a real answer." },
-  "aliases": { "type": "array", "description": "18% — every prior name this person has gone by. ⛔ Matched exactly by `findExistingNpc`, which is what stops a re-introduction forking a second record." },
-  "image": { "type": "string", "description": "14% — their portrait." },
-  "nameRevealed": { "type": "boolean", "description": "13% — the fiction has given the character their real name." },
-  "age": { "type": "number", "description": "11% — years. The gate for every adult-only interaction; nothing infers it from prose." },
-  "peopleSource": { "type": "string", "description": "9% — where their people/kind was determined from." },
-  "people": { "type": "string", "description": "8% — the people or kind they belong to." },
-  "bondType": { "type": "string", "description": "7% — platonic · mentor · student · rival · family · romantic · sworn. ⛔ `sworn` outranks the band on both doors: a sworn person travels with you and comes forward at any standing (CCODE-511)." },
-  "imagePinned": { "type": "boolean", "description": "7% — the player has fixed this portrait." },
-  "appearance": { "type": "string", "description": "7% — what they look like, for the portrait." },
-  "trueName": { "type": "string", "description": "7% — ⛔ their REAL name, carried from the moment they are minted and held back until the fiction reveals it. `findExistingNpc` matches it (CCODE-514) — without that, revealing a name forked a second record, which is exactly what happened to Orla Yardley." },
-  "nameUnknown": { "type": "boolean", "description": "5% — the character has not learned their name; `name` holds a label and `trueName` holds the truth." },
-  "creditedQuests": { "type": "array", "description": "4% — quests this person is credited on." },
-  "completions": { "type": "number", "description": "4% — how many pieces of work they have finished for the character." },
-  "roleSince": { "type": "number", "description": "3% — the day they took their current role." },
-  "questState": { "type": "string", "description": "3% — where they stand in a quest that involves them." },
-  "questNote": { "type": "string", "description": "3% — one line about that quest." },
-  "bondStage": { "type": "string", "description": "3% — a romantic bond's stage: courting · together · committed · partner. One step at a time." },
-  "imageSeedKey": { "type": "string", "description": "2% — the seed their portrait was drawn from, so it stays the same face." },
-  "formerIds": { "type": "array", "description": "1% — ids this person used to be keyed by. ⛔ Matched by `findExistingNpc`, so an op written against an old id still finds them." },
-  "linkedByReveal": { "type": "object", "description": "1% — the record this one was joined to when a name was revealed." },
-  "ally": { "type": "boolean", "description": "1% — a marker set by the quest path." },
-  "allyNote": { "type": "string", "description": "1% — one line on that alliance." },
-  "domainsNote": { "type": "string", "description": "1% — why their domains are what they are." },
-  "kin": { "type": "string", "description": "1% — a kinship or a sworn tie, in a word." },
-  "distinctFrom": { "type": "array", "description": "rare — ids this person is explicitly NOT, so an op for the legend Sable never lands on the woman Sable (CCODE-423)." },
-  "deathState": { "type": "object", "description": "rare — set when they die: the depth they have sunk to, whether the way is held open, and whether they are sealed." },
-  "returnedFromDeath": { "type": "object", "description": "rare — `{day, changed}` when somebody reached for them and the roll came back." },
-  "fateBy": { "type": "string", "description": "rare — whose account of their death this was." },
-  "vouchedBy": { "type": "string", "description": "rare — a known person who vouched for them in a scene." },
-  "carries": { "type": "array", "description": "rare — items of the character's that they are holding." },
-  "teaches": { "type": "string", "description": "rare — a tradition they can teach." },
-  "liaisonFor": { "type": "string", "description": "rare — a people they represent." },
-  "title": { "type": "string", "description": "rare — their office or epithet, separate from the name: it is how a second Maren stays a different person." },
-  "fullName": { "type": "string", "description": "rare — their whole name where the world's name pools have completed it." },
-  "pledge": { "type": "object", "description": "rare — they said, aloud in a scene, that they would come for the character if death took them (SNG-653). A bond is not a promise." },
-  "deeds": { "type": "array", "description": "rare — notable things THEY did that people would talk about, each with its day, place and weight. Not what passed between you two — that is ." },
-  "wants": { "type": "array", "description": "rare — what they want, which the world can act on." },
-  "npcId": { "type": "string", "description": "rare — a legacy echo of `id` on a few older records." }
- }
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "person",
+  "_what": "⛔ SNG-658 §2 — A PERSON YOU HAVE MET, as `character.npcRegistry` holds them. One schema per TYPE, not per file: an authored NPC and a met person are two types, and validating one against the other is how 133 of 133 registry people 'failed' the npc schema — `spectrum`, `fears` and `schemaVersion` are things an AUTHOR writes, which somebody you met in play has never had.",
+  "_derivedFrom": "All 134 registry people across the 16 live saves, 2026-09-26. Each field's description says how often it is actually present, so the next reader knows which fields are the shape and which are the exceptions.",
+  "_forAevi": "⬜ §4.4 is yours: which of these are authored-only and belong in `npc` rather than here. My read from the corpus is that everything below is written BY PLAY — `domains`, `age`, `sex` and `appearance` are the ones a generator also fills, and `trueName`/`nameUnknown` exist precisely because a minted person carries a real name before the character learns it. Tighten `status` and `bondType`'s enums if the vocabulary is settled.",
+  "type": "object",
+  "required": [
+    "id",
+    "name"
+  ],
+  "additionalProperties": false,
+  "patternProperties": {
+    "^_": {
+      "_what": "a note or a provenance stamp, which is allowed to be anything — `_mergedFrom`, `_filledFromGenerate`, `_portraitTier`"
+    }
+  },
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "100% — the stable key this person is known by, for the life of the save. ⛔ Never re-coined when a name is revealed: the id stays and the display name changes (gm.js directive 14)."
+    },
+    "name": {
+      "type": "string",
+      "description": "100% — what the CHARACTER calls them, which is not always their real name. A person the character cannot yet name shows a label here and carries `trueName` beneath it."
+    },
+    "role": {
+      "type": "string",
+      "description": "97% — what they do, in a few words. A role is not a name."
+    },
+    "description": {
+      "type": "string",
+      "description": "97% — one line on who they are to look at."
+    },
+    "firstMet": {
+      "type": "object",
+      "description": "97% — `{locationId, day}`: where and when the character first met them."
+    },
+    "relationship": {
+      "type": "number",
+      "description": "97% — standing, running roughly −10..10. `relationshipBand` names the rungs: enemy · hostile · wary · neutral · friendly · ally · devoted."
+    },
+    "history": {
+      "type": "array",
+      "description": "97% — what has passed between you, newest last, each line stamped with its day."
+    },
+    "knownFacts": {
+      "type": "array",
+      "description": "97% — facts the character has learned about them."
+    },
+    "skillsObserved": {
+      "type": "array",
+      "description": "97% — things the character has SEEN them do. Read by `contributionsOf` for what they bring to a fight or a watch."
+    },
+    "status": {
+      "type": "string",
+      "description": "97% — active · injured · missing · dead · departed. ⛔ `dead` and `departed` are the two that mean GONE (CCODE-514): a keeper loses their post on these and on nothing else."
+    },
+    "lastSeen": {
+      "type": "object",
+      "description": "88% — `{locationId, day}` of the most recent meeting."
+    },
+    "statusNote": {
+      "type": "string",
+      "description": "80% — their CURRENT situation in one line, fed to the GM every turn so it is remembered rather than scrolling away."
+    },
+    "gender": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "80% — how they present. Separate from `sex` and gates nothing."
+    },
+    "pronouns": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "80% — so narration stays consistent."
+    },
+    "met": {
+      "type": "number",
+      "description": "78% — how many times the character has met them."
+    },
+    "domains": {
+      "type": "object",
+      "description": "66% — the NPC sheet's domains, `{primary, …}`. Read for what they are made of."
+    },
+    "domainsSource": {
+      "type": "string",
+      "description": "66% — where the domains came from: authored, derived, or generated."
+    },
+    "sex": {
+      "type": "string",
+      "description": "31% — male · female · none. Set on first writing and never later; `none` is a real answer."
+    },
+    "aliases": {
+      "type": "array",
+      "description": "18% — every prior name this person has gone by. ⛔ Matched exactly by `findExistingNpc`, which is what stops a re-introduction forking a second record."
+    },
+    "image": {
+      "type": "string",
+      "description": "14% — their portrait."
+    },
+    "nameRevealed": {
+      "type": "boolean",
+      "description": "13% — the fiction has given the character their real name."
+    },
+    "age": {
+      "type": "number",
+      "description": "11% — years. The gate for every adult-only interaction; nothing infers it from prose."
+    },
+    "peopleSource": {
+      "type": "string",
+      "description": "9% — where their people/kind was determined from."
+    },
+    "people": {
+      "type": "string",
+      "description": "8% — the people or kind they belong to."
+    },
+    "bondType": {
+      "type": "string",
+      "description": "7% — platonic · mentor · student · rival · family · romantic · sworn. ⛔ `sworn` outranks the band on both doors: a sworn person travels with you and comes forward at any standing (CCODE-511)."
+    },
+    "imagePinned": {
+      "type": "boolean",
+      "description": "7% — the player has fixed this portrait."
+    },
+    "appearance": {
+      "type": "string",
+      "description": "7% — what they look like, for the portrait."
+    },
+    "trueName": {
+      "type": "string",
+      "description": "7% — ⛔ their REAL name, carried from the moment they are minted and held back until the fiction reveals it. `findExistingNpc` matches it (CCODE-514) — without that, revealing a name forked a second record, which is exactly what happened to Orla Yardley."
+    },
+    "nameUnknown": {
+      "type": "boolean",
+      "description": "5% — the character has not learned their name; `name` holds a label and `trueName` holds the truth."
+    },
+    "creditedQuests": {
+      "type": "array",
+      "description": "4% — quests this person is credited on."
+    },
+    "completions": {
+      "type": "number",
+      "description": "4% — how many pieces of work they have finished for the character."
+    },
+    "roleSince": {
+      "type": "number",
+      "description": "3% — the day they took their current role."
+    },
+    "questState": {
+      "type": "string",
+      "description": "3% — where they stand in a quest that involves them."
+    },
+    "questNote": {
+      "type": "string",
+      "description": "3% — one line about that quest."
+    },
+    "bondStage": {
+      "type": "string",
+      "description": "3% — a romantic bond's stage: courting · together · committed · partner. One step at a time."
+    },
+    "imageSeedKey": {
+      "type": "string",
+      "description": "2% — the seed their portrait was drawn from, so it stays the same face."
+    },
+    "formerIds": {
+      "type": "array",
+      "description": "1% — ids this person used to be keyed by. ⛔ Matched by `findExistingNpc`, so an op written against an old id still finds them."
+    },
+    "linkedByReveal": {
+      "type": "object",
+      "description": "1% — the record this one was joined to when a name was revealed."
+    },
+    "ally": {
+      "type": "boolean",
+      "description": "1% — a marker set by the quest path."
+    },
+    "allyNote": {
+      "type": "string",
+      "description": "1% — one line on that alliance."
+    },
+    "domainsNote": {
+      "type": "string",
+      "description": "1% — why their domains are what they are."
+    },
+    "kin": {
+      "type": "string",
+      "description": "1% — a kinship or a sworn tie, in a word."
+    },
+    "distinctFrom": {
+      "type": "array",
+      "description": "rare — ids this person is explicitly NOT, so an op for the legend Sable never lands on the woman Sable (CCODE-423)."
+    },
+    "deathState": {
+      "type": "object",
+      "description": "rare — set when they die: the depth they have sunk to, whether the way is held open, and whether they are sealed."
+    },
+    "returnedFromDeath": {
+      "type": "object",
+      "description": "rare — `{day, changed}` when somebody reached for them and the roll came back."
+    },
+    "fateBy": {
+      "type": "string",
+      "description": "rare — whose account of their death this was."
+    },
+    "vouchedBy": {
+      "type": "string",
+      "description": "rare — a known person who vouched for them in a scene."
+    },
+    "carries": {
+      "type": "array",
+      "description": "rare — items of the character's that they are holding."
+    },
+    "teaches": {
+      "type": "string",
+      "description": "rare — a tradition they can teach."
+    },
+    "liaisonFor": {
+      "type": "string",
+      "description": "rare — a people they represent."
+    },
+    "title": {
+      "type": "string",
+      "description": "rare — their office or epithet, separate from the name: it is how a second Maren stays a different person."
+    },
+    "fullName": {
+      "type": "string",
+      "description": "rare — their whole name where the world's name pools have completed it."
+    },
+    "pledge": {
+      "type": "object",
+      "description": "rare — they said, aloud in a scene, that they would come for the character if death took them (SNG-653). A bond is not a promise."
+    },
+    "deeds": {
+      "type": "array",
+      "description": "rare — notable things THEY did that people would talk about, each with its day, place and weight. Not what passed between you two — that is ."
+    },
+    "wants": {
+      "type": "array",
+      "description": "rare — what they want, which the world can act on."
+    },
+    "npcId": {
+      "type": "string",
+      "description": "rare — a legacy echo of `id` on a few older records."
+    },
+    "worldLife": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "What the WORLD knows about this person that the character does not yet — a new role or a lesser status held beside what they know (`fates.js`), for the GM to let surface in the fiction, and cleared once what the character knows has caught up."
+    }
+  }
 }

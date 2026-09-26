@@ -1567,15 +1567,22 @@
     "quiet": [
      "MOVE",
      "INFLUENCE"
+    ],
+    "defence": [
+     "PROTECT"
     ]
    },
-   "_dutyFamilies": "which craft families each duty reads, from §2's table. ⚠️ ONLY `watch` AND `quiet` ARE WIRED (`quiet` is the other side of the same contest — a named raider coming unseen) — the other nine duties in your table (production, craft, trade, defence, muster, care, meaning, transit, recruiting) have no reader yet, and authoring a row here before one exists would be a dial that does nothing. `dutyHand` takes a `duty`, so each one is a line at its own call site when we build it.",
+   "_dutyFamilies": "which craft families each duty reads, from §2's table. ⚠️ ONLY `watch`, `quiet` AND `defence` ARE WIRED (defence is SNG-657 §2 — Erik: named defenders fight with what their level and skills call for) (`quiet` is the other side of the same contest — a named raider coming unseen) — the other nine duties in your table (production, craft, trade, defence, muster, care, meaning, transit, recruiting) have no reader yet, and authoring a row here before one exists would be a dial that does nothing. `dutyHand` takes a `duty`, so each one is a line at its own call site when we build it.",
    "dutyVocations": {
     "watch": [
      "READER"
     ],
     "quiet": [
      "WALKER",
+     "EDGE"
+    ],
+    "defence": [
+     "KEEPER",
      "EDGE"
     ]
    },

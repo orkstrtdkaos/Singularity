@@ -627,7 +627,7 @@ export function contingentsOf(band) {
  *  ⛔ QUALITY IS `1 + floor(level/10)`, DELIBERATELY FLAT. A level-27 smith is worth three soldiers, not
  *  twenty-seven: `bandStrength` multiplies quality by count, so anything steeper would let one named
  *  person out-weigh a company and make the unit layer a way to smuggle a hero into a headcount. */
-export function contingentsFromPeople(people = [], { contributionsOf = null, levelOf = null } = {}) {
+export function contingentsFromPeople(people = [], { contributionsOf = null, levelOf = null, qualityOf = null } = {}) {
   const named = [], plain = [];
   for (const p of people) {
     if (!p) continue;
@@ -639,9 +639,15 @@ export function contingentsFromPeople(people = [], { contributionsOf = null, lev
     else plain.push(p);
   }
   const out = named.map(({ p, does }) => {
+    // ⛔ SNG-657 §2 — A CALLER MAY STATE THE QUALITY IT HAS ALREADY RULED. `levelOf` means a LEVEL and this
+    // function turns it into a quality with `1 + floor(lvl/10)`; a caller that has computed a RUNG (1–7, the
+    // scale a raid leader rides at) would have it divided by ten and land back on 1. ⚠️ That is exactly what
+    // happened: the defender change measured as NO CHANGE across all 29 powers until this door existed.
+    const stated = qualityOf ? Number(qualityOf(p)) : null;
     const lvl = Math.max(1, Number(levelOf ? levelOf(p) : p.level) || 1);
     // ⚠️ AND THE OTHER DIRECTION STAMPS IT, so people → contingents → people is lossless rather than one-way.
-    return { n: 1, quality: 1 + Math.floor(lvl / 10), does, what: p.name || p.id || "one of yours", npcId: p.id || null };
+    return { n: 1, quality: Number.isFinite(stated) && stated > 0 ? Math.max(1, Math.round(stated)) : 1 + Math.floor(lvl / 10),
+      does, what: p.name || p.id || "one of yours", npcId: p.id || null };
   });
   // ⛔ AND THE SIMPLE SOLDIERS ARE COUNTED, NOT DROPPED. Erik asked for the number explicitly, and a unit
   // that reports only its notables is a unit whose losses land on nobody.

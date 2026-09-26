@@ -7521,6 +7521,143 @@ console.log("\n── §76b · a crafted feature carries its craft, its season, 
   }
 }
 
+/* ═════ §D2 — NAMED DEFENDERS FIGHT AS THEMSELVES (SNG-657 §2, CCODE-512) ═════ */
+// ✅ ERIK, 2026-09-25: "The named defenders should definitely fight with what their level and skills call
+// for... not the lowest quality."
+// ⚠️ THEY HAD FOUGHT AT QUALITY 1 SINCE `contingentsFromPeople` SHIPPED: both callers passed
+// `levelOf: p => Number(p?.level) || 1` and **0 of 132 people across all 16 saves store a `level`**, so the
+// fallback WAS the rule for every named defender in the game.
+console.log("\n── §D2 · a warden is not a filtration engineer on a wall ──");
+{
+  const Hd = await import("../engine/holdings.js");
+  const Md = await import("../engine/melee.js");
+  const { loadContentHeadless: lchD } = await import("./headless_content.mjs");
+  const CD = await lchD();
+  const cfgD = { ...CD.rules.economy.holdStore, features: CD.rules.economy.holdFeatures };
+  const npcCfgD = CD.rules.npcStanding || {};
+  const warden = { id: "w0", name: "Warden", role: "march-warden and gate-guard, veteran of the feud" };
+  const engineer = { id: "e0", name: "Engineer", role: "Pre-Transition filtration engineer, keeps the valves" };
+  const pplD = { w0: warden, e0: engineer };
+  const holdD = { id: "hd", kind: "keep", condition: "holding", features: [{ kind: "watch", name: "W", count: 1, day: 1 }],
+    garrison: ["w0", "e0"], improvements: [], store: {}, history: [] };
+
+  check("§D2: ⛔ a named defender's quality is their RUNG scaled by what they bring — not 1, and not their level",
+    (() => {
+      const wr = Hd.watchReadout({ npcRegistry: pplD, bands: [] }, holdD,
+        { cfg: cfgD, people: pplD, npcs: pplD, npcCfg: npcCfgD, day: 5, rules: CD.rules });
+      const w = wr.defenders.find(d => d.what === "Warden");
+      const e = wr.defenders.find(d => d.what === "Engineer");
+      // the warden is a leader rung, evidenced for defence; the engineer is neither
+      return w && e && w.quality > e.quality && w.quality >= 3 && e.quality === 1
+        // ⚠️ AND NOT THEIR LEVEL: a level-66 legendary would be quality 7, never 66 — one unit on both
+        // sides of the field, the same one a raid leader rides at.
+        && w.quality <= Object.keys(CD.rules.death.watch.tierWeight).length;
+    })(), "0 of 132 people store a level, so `p.level || 1` WAS the rule for every named defender");
+
+  // ⛔ AND THE UNIT SURVIVES THE SEAM. `levelOf` means a LEVEL and `contingentsFromPeople` turns it into a
+  // quality with `1 + floor(lvl/10)` — so a RUNG handed through that door is divided by ten and lands back on
+  // 1. ⚠️ That is exactly what happened: the whole change measured as NO CHANGE across all 29 powers, and I
+  // almost reported it as such. A number crossing a seam in the wrong unit reads as a feature doing nothing.
+  check("§D2: ⛔ …and the quality crosses the seam in its own unit — `qualityOf` is used as given, never re-divided",
+    (() => {
+      const co = (p) => ["PROTECT", "HARM", "MARTIAL"];
+      const three = Md.contingentsFromPeople([warden], { qualityOf: () => 3, contributionsOf: co })[0];
+      const six = Md.contingentsFromPeople([warden], { qualityOf: () => 6, contributionsOf: co })[0];
+      // … and `levelOf` still means a level for every caller that was already using it
+      const byLevel = Md.contingentsFromPeople([warden], { levelOf: () => 30, contributionsOf: co })[0];
+      return three.quality === 3 && six.quality === 6 && byLevel.quality === 1 + Math.floor(30 / 10)
+        && /qualityOf: defenderQuality/.test(rd("engine/holdings.js"))
+        && !/levelOf: \(p\) => Number\(p\?\.level\) \|\| 1/.test(rd("engine/holdings.js"));
+    })(), "two units for one number is how a shipped feature measures as nothing");
+
+  check("§D2: …and the CARD shows the line the RAID fights — one read, not a promise and a different delivery",
+    (() => {
+      const app = rd("app.js");
+      return /watchReadout\(character, h, \{ cfg: sCfg, people: holdPeople, npcs: holdPeople, npcCfg: npcSheetCfg, day: absoluteWorldDay\(\), rules: CONTENT\.rules \}\)/.test(app)
+        && rd("engine/holdings.js").match(/qualityOf: defenderQuality/g).length === 2;
+    })(), "a card that shows quality 1 while the fight resolves a 3 is a promise the engine does not keep");
+
+  check("§D2: …and the rank and file are UNCHANGED — Aevi's spec: plain hands keep their authored quality",
+    Md.contingentsFromPeople([{ id: "x", name: "X" }], { contributionsOf: () => ["HARM"] })
+      .some(c => c.what === "rank and file" && c.quality === 1));
+}
+
+/* ═════ §L100 — LEVELS GO TO 100, AND EVERYTHING KNOWS IT (SNG-657 §1, CCODE-512) ═════ */
+// ✅ ERIK, 2026-09-25: "Levels go to 100 — so make sure everything in the game knows that."
+// ⛔ A GATE, NOT A SWEEP — Aevi's ask, and she is right: "a grep for literals finds today's 60 and misses
+// tomorrow's." So this DRIVES a level-100 person through every function that reads a level and asserts three
+// things: nothing clamps below 100, nothing throws, and each answer is MONOTONIC from 60 to 100 — a level-90
+// reading weaker than a level-70 is the shape a clamp takes when it is hiding.
+// ⚠️ WHAT IT CAUGHT: `jobstate.JOB_LIMITS.levelMax` was 60, and a job's level is what its crystal, its xp
+// and its harm all scale from — so a level-70 character's work was priced as a level-60's, with no error and
+// nothing on any screen to say so. And the GM's own `jobOps` schema said "integer 1-60", so the narrator was
+// being told the retired ceiling as fact.
+// ⛑ ADD EACH NEW LEVEL READER TO THE LIST BELOW WHEN IT IS WRITTEN.
+console.log("\n── §L100 · a level-100 person, through every reader ──");
+{
+  const NSl = await import("../engine/npcsheet.js");
+  const Ml = await import("../engine/melee.js");
+  const Hl = await import("../engine/holdings.js");
+  const Jl = await import("../engine/jobstate.js");
+  const LGl = await import("../engine/legends.js");   // the tier bands, for the rank ladder
+  const { loadContentHeadless: lchL } = await import("./headless_content.mjs");
+  const CL = await lchL();
+  const npcCfgL = CL.rules.npcStanding || {};
+  const meleeL = { ...(CL.rules.melee || {}), ...(CL.rules.martial || {}) };
+  const person = (lv) => ({ id: "p", name: "P", level: lv, role: "warden of the march", subAttributes: { presence: 10 } });
+
+  // ① NOTHING CLAMPS BELOW 100
+  check("§L100: ⛔ a level-100 person is read AS level 100 — nothing clamps them down on the way",
+    (() => {
+      const sh = NSl.sheetFor(person(100), { day: 100, cfg: npcCfgL });
+      const job = Jl.normalizeJob({ label: "clear the road", where: "millbrook", level: 100, effort: 4,
+        needs: [{ family: "HARM", weight: 2, what: "fighting" }], stakes: { crystal: 10 } });
+      return sh.level === 100 && Jl.JOB_LIMITS.levelMax === 100 && job.ok !== false && job.job.level === 100;
+    })(), "a job's level is what its crystal, xp and harm scale from — a silent clamp underpays every rung above it");
+
+  // ② THE TOP RUNG IS REACHABLE, and past it is the Veil rather than a bigger number
+  check("§L100: …and 100 reaches the LADDER's own top rung — mythic, which `DEFAULT_RUNGS` puts at 85–100",
+    NSl.tierOf(NSl.sheetFor(person(100), { day: 100, cfg: npcCfgL }).level, { cfg: npcCfgL }) === "mythic"
+    && NSl.tierOf(NSl.sheetFor(person(84), { day: 100, cfg: npcCfgL }).level, { cfg: npcCfgL }) === "legendary");
+
+  // ③ THE GM IS TOLD THE REAL CEILING — it was being handed the retired one as fact
+  check("§L100: ⛔ …and the GM's own jobOps schema says 1-100, not the ceiling that was retired under it",
+    /"level": "integer 1-100/.test(rd("engine/gm.js")) && !/integer 1-60/.test(rd("engine/gm.js")),
+    "a narrator told the old ceiling offers the old work");
+
+  // ④ MONOTONIC, 60 → 100, ACROSS EVERY READER — the shape a hidden clamp actually takes
+  check("§L100: ⛔ …and every reader is MONOTONIC from 60 to 100 — level 90 never reads weaker than level 70",
+    (() => {
+      const readers = {
+        "sheet.level": (lv) => NSl.sheetFor(person(lv), { day: 100, cfg: npcCfgL }).level,
+        "sheet.health": (lv) => NSl.sheetFor(person(lv), { day: 100, cfg: npcCfgL }).health,
+        "tierRank": (lv) => LGl.tierRank(NSl.tierOf(NSl.sheetFor(person(lv), { day: 100, cfg: npcCfgL }).level, { cfg: npcCfgL })),
+        "commandSlots": (lv) => Ml.commandSlots(person(lv), { cfg: meleeL }).slots,
+        "dutyHand": (lv) => Hl.dutyHand(person(lv), { duty: "watch", npcs: {}, npcCfg: npcCfgL, day: 100, rules: CL.rules }).hand,
+        "jobLevel": (lv) => Jl.normalizeJob({ label: "x", where: "y", level: lv, effort: 1,
+          needs: [{ family: "HARM", weight: 1, what: "f" }], stakes: {} }).job.level,
+      };
+      const bad = [];
+      for (const [name, fn] of Object.entries(readers)) {
+        let prev = null;
+        for (let lv = 60; lv <= 100; lv++) {
+          let v; try { v = Number(fn(lv)); } catch (e) { bad.push(`${name} threw at ${lv}: ${e.message}`); break; }
+          if (!Number.isFinite(v)) { bad.push(`${name} is not a number at ${lv}`); break; }
+          if (prev != null && v < prev) { bad.push(`${name} fell at ${lv}: ${prev} → ${v}`); break; }
+          prev = v;
+        }
+      }
+      if (bad.length) console.log("      " + bad.join(" · "));
+      return bad.length === 0;
+    })(), "a reader that falls as the level rises is a clamp wearing a curve");
+
+  // ⑤ AND `reachOf` IS RANK, NOT LEVEL — Aevi asked for this one by name: check it is untouched.
+  check("§L100: …and `reachOf` still reads a craft RANK and not a level — a level-100 hand reaches no deeper",
+    (await import("../engine/death.js")).reachOf(100, "standard") === 2
+    && (await import("../engine/death.js")).reachOf(3, "standard") === 2,
+    "two ladders would be two answers to how deep someone reaches");
+}
+
 /* ═════ §76h — ATTACK & DEFENSE: FOUR CARDS, EVERY NUMBER READ (SNG-652 §8, CCODE-506) ═════ */
 // Aevi's §8: defensive features with their next rung · the watch (§76f/g) · muster, with a link into the band
 // flow · powers & influence. ⛑ Her §1 renames land HERE, with their sections — I reported that none of those
@@ -23196,9 +23333,16 @@ console.log("\n── §300 · jobs — sent, timed, and decided by the dice the
 
   /* ---- 7 · ⛔ THE RECORD: POSTED CLAMPED, SENT, OUT, BACK, TOLD ---- */
   const big = JS.normalizeJob({ label: "  A   task  ", where: "millbrook", level: 99, needs: [{ family: "know", weight: 9 }, { family: "nope" }], stakes: { crystal: 9999, harm: 500, xp: -3 } });
-  check("§300: ⛔ a posted job is clamped to what its level can honestly pay — level 60 at most, weights 1–3, unknown families dropped, crystal ≤ 4× level, harm ≤ level",
-    big.ok && big.job.level === 60 && big.job.needs.length === 1 && big.job.needs[0].weight === 3 && big.job.stakes.crystal === 240
-    && big.job.stakes.harm === 60 && !("xp" in big.job.stakes) && big.job.label === "A task", JSON.stringify(big.job));
+  // ✅ SNG-657 §1 (ERIK): "Levels go to 100." ⚠️ This asserted `level === 60` — the retired ceiling — and
+  // that clamp is exactly the defect: a job's crystal, xp and harm all scale from its level, so a level-70
+  // character's work was priced as a level-60's. The CLAIM survives unchanged (the stakes are clamped to what
+  // the level can honestly pay); only the ceiling moves, and the derived numbers follow it.
+  const past300 = JS.normalizeJob({ label: "Too much", where: "millbrook", level: 140, needs: [{ family: "know", weight: 2 }], stakes: {} });
+  check("§300: ⛔ a posted job is clamped to what its level can honestly pay — level 100 at most, weights 1–3, unknown families dropped, crystal ≤ 4× level, harm ≤ level",
+    big.ok && big.job.level === 99 && big.job.needs.length === 1 && big.job.needs[0].weight === 3 && big.job.stakes.crystal === 396
+    && big.job.stakes.harm === 99 && !("xp" in big.job.stakes) && big.job.label === "A task"
+    && past300.ok && past300.job.level === 100,   // … and 100 is the door: past it is the Veil, not a bigger number
+    JSON.stringify({ big: big.job, past: past300.job?.level }));
   const ch300 = { id: "c", name: "Hero", npcRegistry: {}, jobs: null };
   JS.postJob(ch300, job300, { day: 3 });
   const plan300 = { dist: distSure, cover: coverSure, backAtHours: 100, work: { family: "KNOW", hours: 1, days: 0.04 }, trip: { there: 2 } };

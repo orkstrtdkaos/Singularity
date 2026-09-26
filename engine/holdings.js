@@ -723,8 +723,10 @@ export function resolveRaid(character, holding, { cfg = null, dangerLevel = 0, r
     // ⚠️ BEFORE THIS, NO CALLER INJECTED `contributionsOf` AT ALL — `does` fell through to `p.contributions`,
     // which a registry record has never carried, so EVERY defender landed in the anonymous block. The named/plain
     // split existed and nothing could ever reach the named half.
+    // ✅ SNG-657 §2 — they fight as themselves now: the rung their derived level puts them on, scaled by what
+    // their own record says they bring to a defence. Not `p.level || 1`, which nobody has.
     const defenders = contingentsFromPeople(watchOf(holding, cfg).filter(id => !/^unit:/.test(String(id))).map(id => people?.[id] || character?.npcRegistry?.[id] || { id, name: id }),
-      { levelOf: (p) => Number(p?.level) || 1, contributionsOf: (p) => contributionsOf(p, { evidence: true }) });
+      { qualityOf: defenderQuality({ npcs: people, npcCfg, day, rules }), contributionsOf: (p) => contributionsOf(p, { evidence: true }) });
     // ⛔ CCODE-450: a band's hands put to guarding or patrolling meet the raiders as what they are — their heads, at their quality
     for (const id of watchOf(holding, cfg).filter(x => /^unit:/.test(String(x)))) {
       const m = /^unit:(.+):(\d+)$/.exec(String(id));
@@ -818,6 +820,35 @@ export function watchOf(holding, cfg = null) {
  * 100%; in a ratio each added body raises `seen` by less than the last on its own. `nextBody` is now MEASURED by
  * asking the contest again with one more hand rather than read off a dial — the honest marginal, computed.
  */
+
+/** ⛔ SNG-657 §2 · ERIK: "The named defenders should definitely fight with what their level and skills call
+ *  for... not the lowest quality."
+ *
+ *  ⚠️ THEY HAVE BEEN FIGHTING AT QUALITY 1 SINCE `contingentsFromPeople` SHIPPED. Both callers passed
+ *  `levelOf: p => Number(p?.level) || 1`, and **0 of 132 people across all 16 saves store a `level`** — so the
+ *  fallback WAS the rule, for every named defender in the game, silently.
+ *
+ *  ⛑ QUALITY IS THE RUNG, NOT THE LEVEL, which is the same scale a raid leader rides at (CCODE-509) — so both
+ *  sides of the field are measured in one unit. A legendary warden is a 6 where their contingents are 1–4; their
+ *  LEVEL of 66 on that field would decide every raid by itself.
+ *  ⛑ AND WHAT THEY BRING SCALES IT: the defence-duty hand (SNG-652 §2, duty #1 in Aevi's order) — evidenced
+ *  1.0, a vocation leaning 0.6, plain 0.3. A warden holds a wall; a filtration engineer is on it, not of it.
+ *
+ *  Returns a `levelOf` for `contingentsFromPeople`. */
+function defenderQuality({ npcs = {}, npcCfg = {}, day = null, rules = {} } = {}) {
+  const w = (rules?.death || {}).watch || {};
+  const weights = (w.tierWeight && typeof w.tierWeight === "object") ? w.tierWeight : {};
+  const dflt = Number.isFinite(Number(w.tierWeightDefault)) ? Number(w.tierWeightDefault) : 1;
+  return (p) => {
+    try {
+      const h = dutyHand(p || {}, { duty: "defence", npcs, npcCfg, day, rules });
+      const rung = Number(weights[h.tier]) || dflt;
+      // ⚠️ NEVER BELOW 1. A plain hand on a wall is still a body on a wall, and a quality of 0 would delete
+      // them from the clash rather than making them weak.
+      return Math.max(1, Math.round(rung * (Number(h.fit) || 1)));
+    } catch { return Math.max(1, Number(p?.level) > 0 ? 1 : 1); }
+  };
+}
 
 /** ⛔ SNG-652 §2 · WHAT ONE PERSON IS WORTH AT A DUTY: `hand = tierWeight(level) × fit`.
  *
@@ -1057,7 +1088,7 @@ export function watchOdds(character, holding, { cfg = null, rules = {}, dangerLe
  *  fight that follows, which is a different question and one the engine does answer.
  *
  *  Returns `{ seen, watchers, named, hands, fromFeatures, stone, defenders, marginal }`. Pure. */
-export function watchReadout(character, holding, { cfg = null, people = {} } = {}) {
+export function watchReadout(character, holding, { cfg = null, people = {}, npcs = null, npcCfg = {}, day = null, rules = {} } = {}) {
   const ids = watchOf(holding, cfg) || [];
   const isUnit = (id) => /^unit:/.test(String(id));
   const isFeature = (id) => !isUnit(id) && /^[a-z_]+:\d+$/.test(String(id));
@@ -1071,8 +1102,10 @@ export function watchReadout(character, holding, { cfg = null, people = {} } = {
   // bring to bear", and `contributionsOf` is how a filtration engineer stops counting as one more sword.
   let defenders = [];
   try {
+    // ✅ SNG-657 §2 — THE SAME READ THE RAID MAKES. A card that shows the line at quality 1 while the fight
+    // resolves it at their rung is a promise the engine does not keep.
     defenders = contingentsFromPeople(named.map(n => people?.[n.id] || character?.npcRegistry?.[n.id] || { id: n.id, name: n.name }),
-      { levelOf: (p) => Number(p?.level) || 1, contributionsOf: (p) => contributionsOf(p, { evidence: true }) });
+      { qualityOf: defenderQuality({ npcs: npcs || people, npcCfg, day, rules }), contributionsOf: (p) => contributionsOf(p, { evidence: true }) });
   } catch { defenders = []; }
   const seen = ids.length > 0;
   return { seen, watchers: ids.length, named, hands, fromFeatures,

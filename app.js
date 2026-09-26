@@ -180,7 +180,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.8.5";
+const APP_VERSION = "2.9.0";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -14982,7 +14982,7 @@ function renderHoldingsTab(manageId = null) {
           // watch means SEEN AND MET and none means it comes unseen. A percentage here would be a rule I
           // invented, and rules are Erik's. This says the rule that exists, in the place the number would go.
           const wDanger = Number(CONTENT.locations?.[h.locationId]?.dangerLevel) || 0;
-          const wr = (() => { try { return watchReadout(character, h, { cfg: sCfg, people: holdPeople }); } catch { return null; } })();
+          const wr = (() => { try { return watchReadout(character, h, { cfg: sCfg, people: holdPeople, npcs: holdPeople, npcCfg: npcSheetCfg, day: absoluteWorldDay(), rules: CONTENT.rules }); } catch { return null; } })();
           // ✅ SNG-655 (ERIK: "i agree with a watch vs stealth contest") — the % shown is the % `resolveRaid`
           // rolls, from the one function, and BOTH SIDES come with it. A bare percentage is a number to take on
           // faith; a contest the player can read is one they can change.

@@ -16,6 +16,24 @@
   "next": [],
   "releases": [
     {
+      "version": "2.9.0",
+      "date": "2026-09-26",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "Work above level 60 is finally paid as what it is",
+          "summary": "A job could not be pitched above level 60, and a job's level is what its crystal, its experience and its danger all scale from — so past that point your work was quietly priced as a level-60's.",
+          "detail": "Levels run to 100. Everything that reads one now carries the whole way, and the game checks it by driving a level-100 person through every reader rather than hunting for the number in the code."
+        },
+        {
+          "kind": "feature",
+          "title": "The people on your wall fight as themselves",
+          "summary": "A march-warden on your gate now meets a raid as a warden; a filtration engineer standing the same watch meets it as what he is. Before this, every named defender in the game fought at the lowest quality there is.",
+          "detail": "What they are worth comes from the standing they have earned and from what their own record says they do, and it is the same number the card shows you before the raid ever comes."
+        }
+      ]
+    },
+    {
       "version": "2.8.5",
       "date": "2026-09-26",
       "entries": [

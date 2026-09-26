@@ -13,7 +13,12 @@
 import { smartClamp } from "./namematch.js";
 
 export const JOB_FAMILIES = ["HARM", "PROTECT", "RESTORE", "KNOW", "SHAPE", "MOVE", "SUSTAIN", "INFLUENCE"];
-export const JOB_LIMITS = { board: 12, back: 12, needs: 4, items: 3, levelMax: 60 };
+// ✅ SNG-657 §1 (ERIK 2026-09-25): "Levels go to 100 — so make sure everything in the game knows that."
+// ⚠️ `levelMax` WAS 60, and a job's level is what its crystal, its xp and its harm all scale from — so a
+// level-70 character's work was priced as a level-60's, with no error and nothing on the screen to say so.
+// ⛑ 100 is the ladder's own top (`legends.DEFAULT_RUNGS`: mythic is 85–100), and `npcsheet` calls it "a door,
+// not a ceiling" — past it is the Veil, not a bigger number.
+export const JOB_LIMITS = { board: 12, back: 12, needs: 4, items: 3, levelMax: 100 };
 
 const num = (v, d = 0) => (Number.isFinite(Number(v)) ? Number(v) : d);
 const clampInt = (v, lo, hi, d = lo) => Math.max(lo, Math.min(hi, Math.round(num(v, d))));

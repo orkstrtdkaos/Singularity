@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
   "id": "dev_report",
-  "at": "2026-09-26T03:43:27.360Z",
-  "build": "2.9.1",
+  "at": "2026-09-26T04:28:05.248Z",
+  "build": "2.9.3",
   "field": null,
   "character": {
     "id": "char-mrum8y4d",
     "name": "Loki",
     "playerKey": "player-s9z9u1",
     "level": 10,
-    "rev": 947,
+    "rev": 952,
     "day": 8,
-    "turns": 242,
+    "turns": 243,
     "countingSince": "2026-09-14T22:51:56.913Z",
     "countsCoverWholeLife": false
   },
@@ -141,21 +141,21 @@
   },
   "ops": {
     "emitted": {
-      "sceneSummary": 242,
-      "choices": 242,
-      "characterDeltas": 126,
-      "scene": 242,
+      "sceneSummary": 243,
+      "choices": 243,
+      "characterDeltas": 127,
+      "scene": 243,
       "placeUpdates": 32,
       "codexUpdates": 142,
       "timeOps": 194,
-      "offer": 46,
+      "offer": 47,
       "generateRequest": 7,
-      "sceneEnded": 111,
-      "npcUpdates": 193,
+      "sceneEnded": 112,
+      "npcUpdates": 194,
       "moveTo": 10,
-      "gambitApt": 70,
+      "gambitApt": 71,
       "deeds": 14,
-      "questUpdates": 46,
+      "questUpdates": 47,
       "standingOps": 4,
       "factUpdates": 20,
       "stageOps": 7,
@@ -176,7 +176,7 @@
     },
     "outcomes": {
       "offer": {
-        "applied": 52,
+        "applied": 53,
         "rejected": 2,
         "lastWhy": "rejected-shape",
         "exceedsEmissions": true
@@ -220,7 +220,7 @@
     "neverCount": 21,
     "knownCount": 48,
     "unknown": {
-      "sceneSummary": 70,
+      "sceneSummary": 71,
       "scene_summary": 1
     },
     "inProse": {},
@@ -257,8 +257,8 @@
     }
   },
   "fireTests": {
-    "at": "2026-09-26T03:33:58.515Z",
-    "build": "2.9.1",
+    "at": "2026-09-26T04:26:05.480Z",
+    "build": "2.9.3",
     "results": [
       {
         "op": "jobOps",
@@ -364,408 +364,408 @@
   },
   "promptRows": {
     "character": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "location": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "region": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "groundDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 27
     },
     "lore": {
-      "reached": 58,
+      "reached": 59,
       "produced": 51
     },
     "traditionMotiveDetail": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "sheetsDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 38
     },
     "rules": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "recentTurns": {
-      "reached": 58,
+      "reached": 59,
       "produced": 52
     },
     "timeLabel": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "npcRegistryDetail": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "mintedUnmetDetail": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "npcSeedDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 24
     },
     "traditionVocab": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "standingDetail": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "recalledDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 6
     },
     "bearingsDetail": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "caravansDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 0
     },
     "commandDetail": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "presenceDetail": {
-      "reached": 58,
-      "produced": 48
+      "reached": 59,
+      "produced": 49
     },
     "worthHereDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 0
     },
     "inventoryDetail": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "sceneState": {
-      "reached": 58,
+      "reached": 59,
       "produced": 52
     },
     "holdingsDetail": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "debtsDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 0
     },
     "carriedDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 0
     },
     "abilityLawDetail": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "questsDetail": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "structuredQuestsDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 0
     },
     "traditionArcDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 0
     },
     "npcErrandsDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 0
     },
     "codexDetail": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "companionsDetail": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "placeMemoryDetail": {
-      "reached": 58,
-      "produced": 42
+      "reached": 59,
+      "produced": 43
     },
     "agesMissingDetail": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "newsDetail": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "worldArcsDetail": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "legendsPursuableDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 12
     },
     "wakesDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 0
     },
     "arcMoodDetail": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "reachableDeadDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 46
     },
     "threatToPlayer": {
-      "reached": 58,
+      "reached": 59,
       "produced": 0
     },
     "guardiansDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 0
     },
     "resolution": {
-      "reached": 58,
+      "reached": 59,
       "produced": 48
     },
     "playerInput": {
-      "reached": 58,
-      "produced": 10
+      "reached": 59,
+      "produced": 11
     },
     "exactWords": {
-      "reached": 58,
+      "reached": 59,
       "produced": 31
     },
     "travelDirective": {
-      "reached": 58,
+      "reached": 59,
       "produced": 4
     },
     "itemAdvance": {
-      "reached": 58,
+      "reached": 59,
       "produced": 0
     },
     "encounterWeaveDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 7
     },
     "encounterOfferDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 4
     },
     "fightFramingDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 0
     },
     "abilityGrantDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 0
     },
     "stageRevealDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 0
     },
     "itemEvolveDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 0
     },
     "worldPressureDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 2
     },
     "offerDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 2
     },
     "teacherOfferDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 0
     },
     "substrateDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 17
     },
     "romanceGuidanceDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 4
     },
     "factsDetail": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "evolvedItemsDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 0
     },
     "opLossNote": {
-      "reached": 58,
+      "reached": 59,
       "produced": 0
     },
     "emergenceDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 0
     },
     "perilNote": {
-      "reached": 58,
+      "reached": 59,
       "produced": 0
     },
     "encounterDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 4
     },
     "masteryDetail": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "bookkeepingRestate": {
-      "reached": 58,
+      "reached": 59,
       "produced": 0
     },
     "anomalyDetail": {
-      "reached": 58,
-      "produced": 56
+      "reached": 59,
+      "produced": 57
     },
     "repairPanelDetail": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "teacherDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 0
     },
     "toolkitDetail": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "availableEncounters": {
-      "reached": 58,
-      "produced": 54
+      "reached": 59,
+      "produced": 55
     },
     "partyDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 0
     },
     "ratingDetail": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "registerDetail": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "legendDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 1
     },
     "livingWorldDetail": {
-      "reached": 58,
-      "produced": 29
+      "reached": 59,
+      "produced": 30
     },
     "assignmentsDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 0
     },
     "latentArcsDetail": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "seasonalDetail": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "schoolsDetail": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "sharedCanonDetail": {
-      "reached": 58,
-      "produced": 35
+      "reached": 59,
+      "produced": 36
     },
     "worldCountLabel": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "waygateDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 27
     },
     "readAloudDetail": {
-      "reached": 58,
-      "produced": 58
+      "reached": 59,
+      "produced": 59
     },
     "scenePacingDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 22
     },
     "wishesDetail": {
-      "reached": 38,
+      "reached": 39,
       "produced": 0
     },
     "worldMovedOnDetail": {
-      "reached": 38,
+      "reached": 39,
       "produced": 2
     },
     "companionLivesDetail": {
-      "reached": 38,
+      "reached": 39,
       "produced": 18
     },
     "homeDetail": {
-      "reached": 38,
+      "reached": 39,
       "produced": 0
     },
     "invitationsDetail": {
-      "reached": 38,
+      "reached": 39,
       "produced": 0
     },
     "bandsJoinedDetail": {
-      "reached": 38,
+      "reached": 39,
       "produced": 0
     },
     "travelersHereDetail": {
-      "reached": 38,
-      "produced": 11
+      "reached": 39,
+      "produced": 12
     },
     "travelersDetail": {
-      "reached": 38,
+      "reached": 39,
       "produced": 2
     },
     "journeyDetail": {
-      "reached": 36,
-      "produced": 5
+      "reached": 37,
+      "produced": 6
     },
     "journeyUnderwayDetail": {
-      "reached": 36,
+      "reached": 37,
       "produced": 4
     },
     "holdsNearDetail": {
-      "reached": 36,
-      "produced": 32
+      "reached": 37,
+      "produced": 33
     },
     "moneyDetail": {
-      "reached": 35,
-      "produced": 35
+      "reached": 36,
+      "produced": 36
     },
     "jobsDetail": {
-      "reached": 35,
+      "reached": 36,
       "produced": 0
     },
     "powersHereDetail": {
-      "reached": 12,
+      "reached": 13,
       "produced": 6
     },
     "nemesisDetail": {
-      "reached": 12,
-      "produced": 12
+      "reached": 13,
+      "produced": 13
     }
   },
   "world": {

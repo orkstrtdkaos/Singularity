@@ -1790,16 +1790,6 @@
       {
         "day": 5,
         "worldDay": 87,
-        "text": "Sera Voight the Ashvow has hit trouble — Sera was passed over for a duty that would have honored the memory she carries — given instead to someone with fewer scars and a cleaner record — and the slight landed harder than she expected.",
-        "tier": "event",
-        "section": "world",
-        "figureId": "person-83693e0ee6487310",
-        "locationId": "the_ceaseless",
-        "placedBy": "figureId"
-      },
-      {
-        "day": 5,
-        "worldDay": 87,
         "text": "Halvex Coil keeps The Standing Annex now.",
         "tier": "event",
         "section": "yours"
@@ -1958,11 +1948,24 @@
         "tier": "ambient",
         "section": "world",
         "figureId": "the-scouring-hand"
+      },
+      {
+        "day": 5,
+        "worldDay": 88,
+        "text": "The Archive That Walks turned Cinder the Unshadowed back. Cinder the Unshadowed learned something, which is worse for everyone else.",
+        "tier": "event",
+        "section": "world",
+        "kind": "clash",
+        "winnerId": "the_archive_that_walks",
+        "loserId": "person-daf1562a9d614dae",
+        "outcome": "stopped",
+        "locationId": "the_told_ground",
+        "placedBy": "winnerId"
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 2112,
-    "lastSharedReadAt": "2026-09-26T00:39:07.336Z",
+    "lastGenCount": 2113,
+    "lastSharedReadAt": "2026-09-26T01:52:31.771Z",
     "lastTickWorldDay": 88,
     "lastCanonWorldDay": 88,
     "turnsSinceOffer": 1,
@@ -2255,7 +2258,7 @@
         "kind": "decision",
         "premise": "Someone who keeps the count of what has been unmade has begun rounding down, telling themselves the difference is noise — but the rounding has a direction, and it has been consistent for long enough…",
         "cause": "The act of counting the unmade requires a decision about what constitutes a thing distinct enough to be counted, and that threshold has always been left to…",
-        "stage": 12,
+        "stage": 13,
         "seededAtCount": 1917,
         "surfaced": true,
         "fate": "growing",
@@ -2268,7 +2271,7 @@
         "kind": "decision",
         "premise": "The person who holds authority to formally designate what has been unmade as 'resolved' has not done so for anything in years, and the backlog of unresolved unmakings is beginning to press against…",
         "cause": "In the_unmade, the act of resolution is itself an act of power, and the authority-holder has quietly discovered that unresolved things remain partially…",
-        "stage": 8,
+        "stage": 9,
         "seededAtCount": 1968,
         "surfaced": true,
         "fate": "growing",
@@ -2293,7 +2296,7 @@
         "kind": "decision",
         "premise": "Someone has begun quietly counting what no longer exists — cataloguing absences — and has not yet decided whether to share what the count implies.",
         "cause": "The Unmade is defined by what has been lost or undone; its people have long customs around not naming absence directly, because naming draws attention to the…",
-        "stage": 3,
+        "stage": 4,
         "seededAtCount": 2053,
         "surfaced": true,
         "fate": "growing",
@@ -2306,7 +2309,7 @@
         "kind": "decision",
         "premise": "An elder who alone remembers the last time something like the current unraveling occurred has not yet spoken, weighing whether the knowing will help or hasten what is coming.",
         "cause": "In the_unmade, what is lost or dissolved carries weight equal to what remains — silence is understood as a form of preservation, and the elder has lived long…",
-        "stage": 2,
+        "stage": 3,
         "seededAtCount": 2100,
         "surfaced": true,
         "fate": "growing",
@@ -8622,6 +8625,16 @@
           "characterId": "char-devtest",
           "name": "Test Hero (dev)"
         }
+      },
+      "person-daf1562a9d614dae": {
+        "status": "stopped",
+        "sinceWorldDay": 88,
+        "stoppedUntilDay": 91,
+        "stoppedBy": "the_archive_that_walks",
+        "fateBy": {
+          "characterId": "char-mrrzi63o",
+          "name": "Brynjar Andyrsson"
+        }
       }
     },
     "unavenged": {
@@ -9571,7 +9584,7 @@
       "the_doubting_lattice": 84,
       "the_war_ender": 84
     },
-    "updatesToldTo": "2.8.1",
+    "updatesToldTo": "2.8.3",
     "newsLog": [
       {
         "day": 4,
@@ -10780,6 +10793,28 @@
         "worldDay": 88,
         "text": "The game was updated to v2.8.1 — 2 new, 1 fixed.",
         "loggedAt": "2026-09-26T00:39:11.724Z"
+      },
+      {
+        "day": 5,
+        "worldDay": 88,
+        "text": "The Archive That Walks turned Cinder the Unshadowed back. Cinder the Unshadowed learned something, which is worse for everyone else.",
+        "tier": "event",
+        "section": "world",
+        "kind": "clash",
+        "winnerId": "the_archive_that_walks",
+        "loserId": "person-daf1562a9d614dae",
+        "outcome": "stopped",
+        "locationId": "the_told_ground",
+        "placedBy": "winnerId",
+        "loggedAt": "2026-09-26T01:52:37.541Z"
+      },
+      {
+        "kind": "update",
+        "section": "world",
+        "version": "2.8.3",
+        "worldDay": 88,
+        "text": "The game was updated to v2.8.3 — 1 new, 2 fixed.",
+        "loggedAt": "2026-09-26T01:52:37.541Z"
       }
     ]
   },
@@ -12828,6 +12863,16 @@
   "reconcileVersion": 83,
   "gallery": [
     {
+      "kind": "battle",
+      "prompt": "Two figures—a collector in open stance and a verist in bare light—face each other at The Told Ground, the collector's hands empty and firm, the verist advancing with an uncovered truth; neither yields",
+      "url": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Two%20figures%E2%80%94a%20collector%20in%20open%20stance%20and%20a%20verist%20in%20bare%20light%E2%80%94face%20each%20other%20at%20The%20Told%20Ground%2C%20the%20collector's%20hands%20empty%20and%20firm%2C%20the%20verist%20advancing%20with%20an%20uncovered%20truth%3B%20neither%20yields%20ground%2C%20the%20collector%20checking%20each%E2%80%A6%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=24531&nologo=true",
+      "caption": "The Archive That Walks checked Cinder the Unshadowed",
+      "worldDay": 88,
+      "at": "2026-09-26T01:52:48.021Z",
+      "subjectKind": "battle",
+      "subjectId": "person-daf1562a9d614dae|the_archive_that_walks|-|88|stopped"
+    },
+    {
       "kind": "moment",
       "prompt": "Four figures stand in a circle in a lamp-lit stone cellar—Loki at the center, speaking a name aloud; Sable with her eyes clear and forward; Ravel with her hand extended, palm open; Estry stepping into",
       "url": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Four%20figures%20stand%20in%20a%20circle%20in%20a%20lamp-lit%20stone%20cellar%E2%80%94Loki%20at%20the%20center%2C%20speaking%20a%20name%20aloud%3B%20Sable%20with%20her%20eyes%20clear%20and%20forward%3B%20Ravel%20with%20her%20hand%20extended%2C%20palm%20open%3B%20Estry%20stepping%20into%20the%20circle.%20The%20lamp-light%20catches%20on%20damp%20stone%20walls%2C%20and%20herbs%20hang%20like%20witnesses%20from%20the%20ceil%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=49901&nologo=true",
@@ -13801,8 +13846,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790384020036,
-  "rev": 900,
+  "updatedAt": 1790387568021,
+  "rev": 903,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -16328,7 +16373,8 @@
     "cp10lfzo5": "Two figures—an ash-grey-haired guide in lightless dark cloth carrying an unlit lamp, and a lost soul—stand in a dead grass ring; the guide's hand grips the soul's arm, pulling them back from encroaching darkness, unbending, offering no…",
     "cp1bg2wjv": "Two figures — a woman speaking, and a man in dark cloth holding an unlit lamp — her voice empties his face as she utters syllables no language holds; he stands unmoved, giving no ground, while the lamp's extinguished flame snuffs the…",
     "cp145pa6c": "Tall lean figure, dark wavy hair to chin in loose asymmetrical braids, mismatched expression between eyes and mouth, full-body portrait, carrying worn traveler's pack and waterskin, bearing ritual marks of bargains made, seasoned and…",
-    "cp1y1mnjn": "Tall lean figure, dark wavy hair to chin in loose asymmetrical braids, mismatched expression between eyes and mouth, ritual bargain marks scarred across skin, worn traveler's pack and waterskin, mechanized limbs catching light, seasoned…"
+    "cp1y1mnjn": "Tall lean figure, dark wavy hair to chin in loose asymmetrical braids, mismatched expression between eyes and mouth, ritual bargain marks scarred across skin, worn traveler's pack and waterskin, mechanized limbs catching light, seasoned…",
+    "cp1hb4je1": "Two figures—a collector in open stance and a verist in bare light—face each other at The Told Ground, the collector's hands empty and firm, the verist advancing with an uncovered truth; neither yields ground, the collector checking each…"
   },
   "likeness": {
     "moment:solo:cap:vessin of the long bough": {
@@ -17350,6 +17396,11 @@
       "url": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Two%20figures%20%E2%80%94%20a%20woman%20speaking%2C%20and%20a%20man%20in%20dark%20cloth%20holding%20an%20unlit%20lamp%20%E2%80%94%20her%20voice%20empties%20his%20face%20as%20she%20utters%20syllables%20no%20language%20holds%3B%20he%20stands%20unmoved%2C%20giving%20no%20ground%2C%20while%20the%20lamp's%20extinguished%20flame%20snuffs%20the%E2%80%A6%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=18740&nologo=true",
       "prompt": "Two figures — a woman speaking, and a man in dark cloth holding an unlit lamp — her voice empties his face as she utters syllables no language holds; he stands unmoved, giving no ground, while the lamp's extinguished flame snuffs the…",
       "kind": "battle"
+    },
+    "person-daf1562a9d614dae|the_archive_that_walks|-|88|stopped": {
+      "url": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Two%20figures%E2%80%94a%20collector%20in%20open%20stance%20and%20a%20verist%20in%20bare%20light%E2%80%94face%20each%20other%20at%20The%20Told%20Ground%2C%20the%20collector's%20hands%20empty%20and%20firm%2C%20the%20verist%20advancing%20with%20an%20uncovered%20truth%3B%20neither%20yields%20ground%2C%20the%20collector%20checking%20each%E2%80%A6%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=24531&nologo=true",
+      "prompt": "Two figures—a collector in open stance and a verist in bare light—face each other at The Told Ground, the collector's hands empty and firm, the verist advancing with an uncovered truth; neither yields ground, the collector checking each…",
+      "kind": "battle"
     }
   },
   "composedImages": {
@@ -17387,7 +17438,7 @@
         "how": "renown",
         "day": null
       },
-      "wins": 2,
+      "wins": 1,
       "lastVerb": "raid",
       "lastVerbDay": 5,
       "grownHeads": 23,
@@ -17416,7 +17467,7 @@
       },
       "lastVerb": "expand",
       "lastVerbDay": 5,
-      "wins": 1
+      "wins": 2
     },
     "power_radiant_plateau": {
       "known": {
@@ -17425,7 +17476,7 @@
       },
       "lastVerb": "expand",
       "lastVerbDay": 5,
-      "wins": 1,
+      "wins": 2,
       "grownHeads": 32,
       "grewDay": 5
     },
@@ -17436,7 +17487,7 @@
       },
       "lastVerb": "expand",
       "lastVerbDay": 5,
-      "wins": 1,
+      "wins": 2,
       "grownHeads": 28,
       "grewDay": 5
     },
@@ -17503,7 +17554,7 @@
       },
       "lastVerb": "expand",
       "lastVerbDay": 5,
-      "wins": 1,
+      "wins": 2,
       "grownHeads": 52,
       "grewDay": 5
     },
@@ -17514,7 +17565,7 @@
       },
       "lastVerb": "expand",
       "lastVerbDay": 5,
-      "wins": 1,
+      "wins": 2,
       "grownHeads": 30,
       "grewDay": 5
     },
@@ -17549,35 +17600,35 @@
     "power_firstsight_barony": {
       "lastVerb": "expand",
       "lastVerbDay": 5,
-      "wins": 1,
+      "wins": 2,
       "grownHeads": 14,
       "grewDay": 5
     },
     "power_blaze_unshadowed": {
       "lastVerb": "recruit",
       "lastVerbDay": 5,
-      "wins": 1,
+      "wins": 2,
       "grownHeads": 14,
       "grewDay": 5
     },
     "power_flesh_temple": {
       "lastVerb": "recruit",
       "lastVerbDay": 5,
-      "wins": 1,
+      "wins": 2,
       "grownHeads": 18,
       "grewDay": 5
     },
     "power_vacated_custody": {
       "lastVerb": "expand",
       "lastVerbDay": 5,
-      "wins": 1,
+      "wins": 2,
       "grownHeads": 6,
       "grewDay": 5
     },
     "power_the_ceaseless": {
       "lastVerb": "expand",
       "lastVerbDay": 5,
-      "wins": 1,
+      "wins": 2,
       "grownHeads": 10,
       "grewDay": 5
     },
@@ -17588,14 +17639,14 @@
     "power_harvest_hand": {
       "lastVerb": "recruit",
       "lastVerbDay": 5,
-      "wins": 1,
+      "wins": 2,
       "grownHeads": 12,
       "grewDay": 5
     },
     "power_the_scouring": {
       "lastVerb": "recruit",
       "lastVerbDay": 5,
-      "wins": 1,
+      "wins": 2,
       "grownHeads": 16,
       "grewDay": 5
     },

@@ -28847,7 +28847,11 @@ console.log("\n── §364 · the saves a gate reads hold still ──");
   // ⛔ CODE ONLY, OR THE GATE ACCUSES ITS OWN EXPLANATION. Written without this, the check below found three
   // "live reads" and all three were PROSE — the places where this file writes ABOUT the pattern it forbids.
   // ⚠️ Fifth time a source regex in this repo has read its own comments; it is always a green-looking red.
-  const howCode = howSrc.replace(/\/\*[\s\S]*?\*\//g, "").split("\n").map((l) => l.replace(/^\s*\/\/.*$/, "")).join("\n");
+  // ⚠️ SPLIT ON /\r?\n/, NOT ON "\n". I write this file with LF and the checkout is CRLF, so after the first
+  // rebase every line ended in `\r` — and `/^\s*\/\/.*$/` cannot match one: `.` will not cross a line terminator
+  // and `$` without `m` matches only the very end of the string. The strip silently did nothing, the gate read
+  // its own prose again, and a push blocked on two checks that had passed twice on my own disk.
+  const howCode = howSrc.replace(/\/\*[\s\S]*?\*\//g, "").split(/\r?\n/).map((l) => l.replace(/^\s*\/\/.*$/, "")).join("\n");
   // ⚠️ AND IT ASKS ABOUT EVERY ROUTE TO A SAVE, NOT THE ONE I HAD JUST FIXED. Written, this matched only
   // `rd("characters/…")` — and §339 walked the same directory with `readdirSync(join(root, "characters"))`
   // and a template literal, so it was invisible here and reddened on the next push, after Loki was played.

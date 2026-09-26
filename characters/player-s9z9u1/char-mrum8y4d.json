@@ -843,19 +843,6 @@
       "startedAt": "2026-09-26T02:04:07.737Z",
       "startedAtDay": 5,
       "journeyDestId": "gen-the-standing-annex"
-    },
-    {
-      "id": "journey-gen-the-road-from-kindly-rest-to-standing-an-88",
-      "kind": "journey",
-      "structured": false,
-      "status": "active",
-      "title": "Journey to The Road From Kindly Rest To Standing Annex",
-      "summary": "about 1 day on foot · 1 ration for the road — you carry 0 (1 short) · 1 night in the open · the worst of the road: The Road From Kindly Rest To Standing Annex (uneasy) · alone. Ready yourself — rations, your people, what you leave behind — and set out when you are ready.",
-      "progress": [],
-      "giver": null,
-      "startedAt": "2026-09-26T02:55:02.572Z",
-      "startedAtDay": 7,
-      "journeyDestId": "gen-the-road-from-kindly-rest-to-standing-an"
     }
   ],
   "npcRegistry": {
@@ -14320,8 +14307,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790393929152,
-  "rev": 945,
+  "updatedAt": 1790393945913,
+  "rev": 946,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -18035,57 +18022,7 @@
     "out": [],
     "back": []
   },
-  "journey": {
-    "id": "journey-gen-the-road-from-kindly-rest-to-standing-an-88",
-    "destId": "gen-the-road-from-kindly-rest-to-standing-an",
-    "destName": "The Road From Kindly Rest To Standing Annex",
-    "fromId": "millbrook",
-    "fromName": "Millbrook",
-    "createdWorldDay": 88,
-    "options": [
-      {
-        "key": "road-0",
-        "kind": "road",
-        "label": "on foot",
-        "days": 1,
-        "energy": 0,
-        "path": [
-          "millbrook",
-          "gen-the-road-from-kindly-rest-to-standing-an"
-        ],
-        "gate": null,
-        "worst": {
-          "id": "gen-the-road-from-kindly-rest-to-standing-an",
-          "name": "The Road From Kindly Rest To Standing Annex",
-          "level": 1
-        },
-        "nights": 1,
-        "roofs": 0,
-        "camps": 1,
-        "legs": [
-          {
-            "i": 0,
-            "fromId": "millbrook",
-            "toId": "gen-the-road-from-kindly-rest-to-standing-an",
-            "fromName": "Millbrook",
-            "toName": "The Road From Kindly Rest To Standing Annex",
-            "days": 1.0004702294901273,
-            "danger": 1,
-            "roof": false,
-            "gate": null
-          }
-        ]
-      }
-    ],
-    "chosenKey": "road-0",
-    "soleWay": true,
-    "rations": {
-      "needed": 1,
-      "carried": 0
-    },
-    "company": [],
-    "crafts": {}
-  },
+  "journey": null,
   "allyOrders": {
     "traveler-woman": {
       "stance": "cautious"

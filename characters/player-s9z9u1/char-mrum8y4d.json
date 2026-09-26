@@ -2092,16 +2092,6 @@
       {
         "day": 5,
         "worldDay": 88,
-        "text": "Vessin of the Long Bough has hit trouble — Vessin learned the third letter — the one that mattered — was carried off by a dog from a nearby steading, and whatever remained of it is too chewed and wet to read.",
-        "tier": "event",
-        "section": "world",
-        "figureId": "vessin-of-the-long-bough",
-        "regionId": "the_quickwood",
-        "placedBy": "figureId"
-      },
-      {
-        "day": 5,
-        "worldDay": 88,
         "text": "The Scouring Hand: A traveler who sheltered briefly in the abandoned settlement moved on before dawn, and someone watching for the Hand noted the name of the road they took — a small piece of information, quietly passed along.",
         "tier": "ambient",
         "section": "world",
@@ -2240,11 +2230,18 @@
         "text": "The Wardens of Cairnhold has lost people it will not get back.",
         "tier": "event",
         "section": "world"
+      },
+      {
+        "day": 8,
+        "worldDay": 88,
+        "text": "The Harvest Hand has lost people it will not get back — 12 of them, to its feud with The Wardens of Cairnhold.",
+        "tier": "event",
+        "section": "world"
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 2125,
-    "lastSharedReadAt": "2026-09-26T13:34:54.969Z",
+    "lastGenCount": 2126,
+    "lastSharedReadAt": "2026-09-26T14:05:13.531Z",
     "lastTickWorldDay": 88,
     "lastCanonWorldDay": 88,
     "turnsSinceOffer": 0,
@@ -2537,7 +2534,7 @@
         "kind": "decision",
         "premise": "Someone who keeps the count of what has been unmade has begun rounding down, telling themselves the difference is noise — but the rounding has a direction, and it has been consistent for long enough…",
         "cause": "The act of counting the unmade requires a decision about what constitutes a thing distinct enough to be counted, and that threshold has always been left to…",
-        "stage": 17,
+        "stage": 18,
         "seededAtCount": 1917,
         "surfaced": true,
         "fate": "growing",
@@ -2550,7 +2547,7 @@
         "kind": "decision",
         "premise": "The person who holds authority to formally designate what has been unmade as 'resolved' has not done so for anything in years, and the backlog of unresolved unmakings is beginning to press against…",
         "cause": "In the_unmade, the act of resolution is itself an act of power, and the authority-holder has quietly discovered that unresolved things remain partially…",
-        "stage": 13,
+        "stage": 14,
         "seededAtCount": 1968,
         "surfaced": true,
         "fate": "growing",
@@ -2575,7 +2572,7 @@
         "kind": "decision",
         "premise": "Someone has begun quietly counting what no longer exists — cataloguing absences — and has not yet decided whether to share what the count implies.",
         "cause": "The Unmade is defined by what has been lost or undone; its people have long customs around not naming absence directly, because naming draws attention to the…",
-        "stage": 8,
+        "stage": 9,
         "seededAtCount": 2053,
         "surfaced": true,
         "fate": "growing",
@@ -2588,7 +2585,7 @@
         "kind": "decision",
         "premise": "An elder who alone remembers the last time something like the current unraveling occurred has not yet spoken, weighing whether the knowing will help or hasten what is coming.",
         "cause": "In the_unmade, what is lost or dissolved carries weight equal to what remains — silence is understood as a form of preservation, and the elder has lived long…",
-        "stage": 7,
+        "stage": 8,
         "seededAtCount": 2100,
         "surfaced": true,
         "fate": "growing",
@@ -9877,7 +9874,7 @@
       "the_doubting_lattice": 84,
       "the_war_ender": 84
     },
-    "updatesToldTo": "2.9.10",
+    "updatesToldTo": "2.10.0",
     "newsLog": [
       {
         "day": 4,
@@ -11268,6 +11265,22 @@
         "worldDay": 88,
         "text": "The game was updated to v2.9.10 — 1 fixed.",
         "loggedAt": "2026-09-26T13:29:00.702Z"
+      },
+      {
+        "day": 8,
+        "worldDay": 88,
+        "text": "The Harvest Hand has lost people it will not get back — 12 of them, to its feud with The Wardens of Cairnhold.",
+        "tier": "event",
+        "section": "world",
+        "loggedAt": "2026-09-26T14:05:17.258Z"
+      },
+      {
+        "kind": "update",
+        "section": "world",
+        "version": "2.10.0",
+        "worldDay": 88,
+        "text": "The game was updated to v2.10.0 — 1 new, 2 fixed.",
+        "loggedAt": "2026-09-26T14:05:17.258Z"
       }
     ]
   },
@@ -12517,13 +12530,22 @@
         "label": "Seraphine the Unbending Witness",
         "kind": "person",
         "facts": [
-          "[d5] [while away] Seraphine holds her silence for now — the true thing she carries is not yet ripe enough to be said to anyone who would hear it."
+          "[d5] [while away] Seraphine holds her silence for now — the true thing she carries is not yet ripe enough to be said to anyone who would hear it.",
+          "[d8] The High Luminary knows about the sealed chamber beneath Millbrook and has sent an agent to intercept Loki at Whistling Woman Post. She moves to control what surfaces from beneath the valley before the Wardens of Cairnhold take action."
         ],
-        "links": [],
-        "aliases": [],
+        "links": [
+          "the-hub-crossing",
+          "millbrook",
+          "radiant-agent-whistling-woman"
+        ],
+        "aliases": [
+          "Seraphine",
+          "the High Luminary",
+          "Seraphine, the High Luminary"
+        ],
         "createdDay": 5,
         "entityId": "the-unbending-witness",
-        "updatedDay": 5
+        "updatedDay": 8
       },
       "the-archive-that-walks": {
         "id": "the-archive-that-walks",
@@ -12996,26 +13018,6 @@
         "createdDay": 8,
         "entityId": "radiant-agent-whistling-woman",
         "updatedDay": 8
-      },
-      "the-high-luminary": {
-        "id": "the-high-luminary",
-        "label": "Seraphine, the High Luminary",
-        "kind": "person",
-        "facts": [
-          "[d8] The High Luminary knows about the sealed chamber beneath Millbrook and has sent an agent to intercept Loki at Whistling Woman Post. She moves to control what surfaces from beneath the valley before the Wardens of Cairnhold take action."
-        ],
-        "links": [
-          "the-hub-crossing",
-          "millbrook",
-          "radiant-agent-whistling-woman"
-        ],
-        "aliases": [
-          "Seraphine",
-          "the High Luminary"
-        ],
-        "createdDay": 8,
-        "entityId": "the-high-luminary",
-        "updatedDay": 8
       }
     },
     "mergeUndo": [
@@ -13334,6 +13336,39 @@
           "entityId": "the-woman-with-the"
         },
         "relinked": []
+      },
+      {
+        "at": "2026-09-26T14:05:13.222Z",
+        "source": {
+          "id": "the-high-luminary",
+          "label": "Seraphine, the High Luminary",
+          "kind": "person",
+          "facts": [
+            "[d8] The High Luminary knows about the sealed chamber beneath Millbrook and has sent an agent to intercept Loki at Whistling Woman Post. She moves to control what surfaces from beneath the valley before the Wardens of Cairnhold take action."
+          ],
+          "links": [
+            "the-hub-crossing",
+            "millbrook",
+            "radiant-agent-whistling-woman"
+          ],
+          "aliases": [
+            "Seraphine",
+            "the High Luminary"
+          ],
+          "createdDay": 8,
+          "entityId": "the-high-luminary",
+          "updatedDay": 8
+        },
+        "targetId": "the-unbending-witness",
+        "targetBefore": {
+          "facts": [
+            "[d5] [while away] Seraphine holds her silence for now — the true thing she carries is not yet ripe enough to be said to anyone who would hear it."
+          ],
+          "links": [],
+          "aliases": [],
+          "entityId": "the-unbending-witness"
+        },
+        "relinked": []
       }
     ],
     "swept": [
@@ -13464,7 +13499,7 @@
     }
   ],
   "nativeGrantsVersion": 2,
-  "reconcileVersion": 83,
+  "reconcileVersion": 85,
   "gallery": [
     {
       "kind": "portrait",
@@ -14516,8 +14551,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790431010123,
-  "rev": 982,
+  "updatedAt": 1790431517258,
+  "rev": 984,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -15583,7 +15618,7 @@
       "departedWhy": "you parted ways"
     },
     {
-      "npcId": "sable",
+      "npcId": "taken-person",
       "roles": [
         "ally"
       ],
@@ -15592,7 +15627,7 @@
       "joinedDay": 83
     },
     {
-      "npcId": "ravel",
+      "npcId": "steady-voice-woman",
       "roles": [
         "ally"
       ],
@@ -18419,11 +18454,6 @@
       "losses": 0,
       "lost": {
         "0": 28
-      },
-      "noticed": {
-        "trigger": "crossed",
-        "why": "you have killed 28 of theirs",
-        "day": 7
       }
     },
     "power_grovehome_moot": {
@@ -18448,11 +18478,6 @@
       "losses": 0,
       "lost": {
         "0": 30
-      },
-      "noticed": {
-        "trigger": "crossed",
-        "why": "you have killed 30 of theirs",
-        "day": 7
       }
     },
     "power_pressureholt_schedule": {
@@ -18470,15 +18495,11 @@
       },
       "lastVerb": "patrol",
       "lastVerbDay": 8,
-      "losses": 0,
+      "losses": 1,
       "lost": {
         "0": 128
       },
-      "noticed": {
-        "trigger": "crossed",
-        "why": "you have killed 32 of theirs",
-        "day": 8
-      }
+      "lossFrom": "power_harvest_hand"
     },
     "power_the_scour": {
       "known": {
@@ -18490,11 +18511,6 @@
       "losses": 0,
       "lost": {
         "0": 28
-      },
-      "noticed": {
-        "trigger": "crossed",
-        "why": "you have killed 28 of theirs",
-        "day": 7
       }
     },
     "power_grand_lattice": {
@@ -18526,7 +18542,7 @@
       },
       "lastVerb": "expand",
       "lastVerbDay": 8,
-      "wins": 1,
+      "wins": 2,
       "grownHeads": 44,
       "grewDay": 8
     },
@@ -18540,11 +18556,6 @@
       "losses": 0,
       "lost": {
         "0": 8
-      },
-      "noticed": {
-        "trigger": "crossed",
-        "why": "you have killed 8 of theirs",
-        "day": 7
       }
     },
     "power_switchback_tollmen": {
@@ -18578,21 +18589,21 @@
     "power_flesh_temple": {
       "lastVerb": "recruit",
       "lastVerbDay": 8,
-      "wins": 1,
+      "wins": 2,
       "grownHeads": 18,
       "grewDay": 5
     },
     "power_vacated_custody": {
       "lastVerb": "expand",
       "lastVerbDay": 8,
-      "wins": 1,
+      "wins": 2,
       "grownHeads": 6,
       "grewDay": 5
     },
     "power_the_ceaseless": {
       "lastVerb": "expand",
       "lastVerbDay": 8,
-      "wins": 2,
+      "wins": 0,
       "grownHeads": 10,
       "grewDay": 5,
       "losses": 0
@@ -18608,19 +18619,15 @@
       "wins": 0,
       "grownHeads": 12,
       "grewDay": 5,
-      "losses": 1,
+      "losses": 0,
       "lost": {
-        "0": 36
-      },
-      "noticed": {
-        "trigger": "crossed",
-        "why": "you have killed 12 of theirs",
-        "day": 8
+        "0": 48
       },
       "known": {
         "how": "noticed",
         "day": 8
-      }
+      },
+      "lossFrom": null
     },
     "power_the_scouring": {
       "lastVerb": "patrol",

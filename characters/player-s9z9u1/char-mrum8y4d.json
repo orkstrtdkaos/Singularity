@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 10,
-  "xp": 925,
+  "xp": 928,
   "attributes": {
     "physical": 4,
     "mental": 5,
@@ -119,10 +119,10 @@
   ],
   "alignment": {
     "mechanical_spiritual": 0.0077000000000000055,
-    "falsehood_truth": 0.3794363144285966,
+    "falsehood_truth": 0.3954644987071667,
     "demonic_angelic": -0.020000000000000004,
     "dark_light": 0.085,
-    "concrete_abstract": 0.18185445886718746,
+    "concrete_abstract": 0.20276173592382807,
     "chaos_order": -0.087398125,
     "body_mind": 0.0658375,
     "emotional_logical": 0.045960551562499986,
@@ -132,7 +132,7 @@
   "maxHealth": 83,
   "health": 83,
   "maxEnergy": 161,
-  "energy": 139,
+  "energy": 134,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -433,91 +433,58 @@
         "player": "Knock plainly and wait for an answer—let the hour speak for itself.",
         "summary": "At Mara Wells' Store in deep night, the band arrives ready to gather supplies—and finds the keeper awake and willing to answer their honesty with her own.",
         "narration": "You raise your knuckles to the store's weathered door and knock. The sound carries clear in the deep night—firm, unhurried, honest. No performance, no apology. Behind you, Ravel stands watchful at your left flank. Estry has positioned herself where she can see both the store's dark front and the street beyond. Orla waits at the circle's edge, learning still. Cy's lamp settles to a steady glow.\n\nFor a long moment, nothing moves. The chimney smoke continues its pale rise toward the stars.\n\nThen a bolt slides back inside the door. Once. Twice. The door opens to a width of a hand, and a woman's voice—older, careful, steady—speaks from the lamplight beyond. \"It is deep night. The store is closed to travelers.\" She does not ask who you are. She waits.\n\nMara Wells—for that is who reads the threshold—studies the four of you through the gap. Her eyes catch the lamplight, sharp and measuring. A woman who has learned to read strangers in their worst hours. She sees Cy's articulated body and her expression does not shift. She sees the band's bearing and the deliberate calm that comes of moving together—and something in her settles, very slightly. \"But you are not random travelers,\" she says. It is not a question. \"What do you need, and why do you need it now?\""
+      },
+      {
+        "player": "Offer Mara honest payment in crystal for whatever supplies will travel—rations, shelter, anything the road demands—and let her decide what you need.",
+        "summary": "At Mara Wells' Store in deep night, the band learns that Millbrook's earth itself resists their passage—the fold met interference from something beneath the settlement. Mara offers honest supplies and directs them toward safer roads.",
+        "narration": "Mara Wells steps into the lamplight fully, and you read her assessment in a single glance—keeper's eyes that measure strangers by bearing before words are spoken. She studies the four of you in turn: Ravel steady and weathered, Estry poised at the threshold of trust, Orla still learning the shape of movement among people, Cy's lamp casting its steady brass glow across the store's wooden threshold.\n\n\"Rations I have,\" Mara says plainly. Her voice carries the tone of someone used to speaking in the hours when the world sleeps. \"Dried meat, hard bread, salt. Enough for a journey if you travel lean.\" She moves to the counter inside, unhurried, and you catch sight of shelves lined with traveler's stock—the ordinary tools of the road. But there is something else in the way she speaks, a hesitation beneath the clarity. \"The shelter part is harder. The road from here runs uneasy. Something beneath Millbrook itself pushed back against your fold—I felt it move when you landed. The land here does not welcome shortcuts.\"\n\nShe names a price in crystal—fair, neither generous nor cruel—and waits. Ravel's hand steadies at your shoulder, reading the texture of the woman's doubt. \"You're not certain what you felt,\" Ravel says quietly. It is not a question.\n\nMara's eyes flick toward her. \"No. But the stone spoke. Whatever is underneath has weight and will, and it does not want travelers folding past the town's bones.\" She pauses, then: \"For shelter, you'll need the road itself. There's a warden's post two hours north on the spinward path—Whistling Woman Post. They keep dry quarters and do not ask names. But I cannot vouch for what the land will do with you if you try shortcuts again.\" She looks back to you. \"Will you take the rations, or do you need something I cannot provide?\""
       }
     ],
     "lastTurn": {
-      "narration": "You raise your knuckles to the store's weathered door and knock. The sound carries clear in the deep night—firm, unhurried, honest. No performance, no apology. Behind you, Ravel stands watchful at your left flank. Estry has positioned herself where she can see both the store's dark front and the street beyond. Orla waits at the circle's edge, learning still. Cy's lamp settles to a steady glow.\n\nFor a long moment, nothing moves. The chimney smoke continues its pale rise toward the stars.\n\nThen a bolt slides back inside the door. Once. Twice. The door opens to a width of a hand, and a woman's voice—older, careful, steady—speaks from the lamplight beyond. \"It is deep night. The store is closed to travelers.\" She does not ask who you are. She waits.\n\nMara Wells—for that is who reads the threshold—studies the four of you through the gap. Her eyes catch the lamplight, sharp and measuring. A woman who has learned to read strangers in their worst hours. She sees Cy's articulated body and her expression does not shift. She sees the band's bearing and the deliberate calm that comes of moving together—and something in her settles, very slightly. \"But you are not random travelers,\" she says. It is not a question. \"What do you need, and why do you need it now?\"",
-      "sceneSummary": "At Mara Wells' Store in deep night, the band arrives ready to gather supplies—and finds the keeper awake and willing to answer their honesty with her own.",
+      "narration": "Mara Wells steps into the lamplight fully, and you read her assessment in a single glance—keeper's eyes that measure strangers by bearing before words are spoken. She studies the four of you in turn: Ravel steady and weathered, Estry poised at the threshold of trust, Orla still learning the shape of movement among people, Cy's lamp casting its steady brass glow across the store's wooden threshold.\n\n\"Rations I have,\" Mara says plainly. Her voice carries the tone of someone used to speaking in the hours when the world sleeps. \"Dried meat, hard bread, salt. Enough for a journey if you travel lean.\" She moves to the counter inside, unhurried, and you catch sight of shelves lined with traveler's stock—the ordinary tools of the road. But there is something else in the way she speaks, a hesitation beneath the clarity. \"The shelter part is harder. The road from here runs uneasy. Something beneath Millbrook itself pushed back against your fold—I felt it move when you landed. The land here does not welcome shortcuts.\"\n\nShe names a price in crystal—fair, neither generous nor cruel—and waits. Ravel's hand steadies at your shoulder, reading the texture of the woman's doubt. \"You're not certain what you felt,\" Ravel says quietly. It is not a question.\n\nMara's eyes flick toward her. \"No. But the stone spoke. Whatever is underneath has weight and will, and it does not want travelers folding past the town's bones.\" She pauses, then: \"For shelter, you'll need the road itself. There's a warden's post two hours north on the spinward path—Whistling Woman Post. They keep dry quarters and do not ask names. But I cannot vouch for what the land will do with you if you try shortcuts again.\" She looks back to you. \"Will you take the rations, or do you need something I cannot provide?\"",
+      "sceneSummary": "At Mara Wells' Store in deep night, the band learns that Millbrook's earth itself resists their passage—the fold met interference from something beneath the settlement. Mara offers honest supplies and directs them toward safer roads.",
       "choices": [
         {
-          "label": "Tell Mara plainly why you're here—the Standing Annex, the road ahead, the band's purpose—and ask what supplies she has that will serve the journey.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "falsehood_truth": 0.8,
-            "concrete_abstract": 0.3
-          },
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "rapport",
-            "negotiate"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Mara what she's heard about the Standing Annex and who's been traveling that road lately—read what she knows before committing to why you're asking.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "falsehood_truth": 0.4,
-            "concrete_abstract": -0.2
-          },
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "scout",
-            "study"
-          ],
-          "abilityId": "prism_sight",
-          "energyCost": 3,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Offer Mara honest payment in crystal for whatever supplies will travel—rations, shelter, anything the road demands—and let her decide what you need.",
+          "label": "Accept the rations and the warden's post directions—take the long road and trust the land to speak plainly.",
           "attribute": "practical",
           "subAttribute": "wits",
           "axes": {
-            "falsehood_truth": 0.7,
-            "concrete_abstract": 0.6
-          },
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "negotiate",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Have Ravel speak—she is known on the road, and a keeper like Mara will read her as someone whose word carries weight.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "falsehood_truth": 0.6,
+            "chaos_order": 0.3,
             "concrete_abstract": 0.2
           },
           "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "rapport",
-            "help"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": false
+        },
+        {
+          "label": "Ask Mara directly what lies beneath Millbrook and why it resists the shortfolds—use Appetite-Sense to read what hunger she is refusing to name.",
+          "attribute": "social",
+          "subAttribute": "insight",
+          "axes": {
+            "falsehood_truth": 0.4,
+            "emotional_logical": 0.2
+          },
+          "difficulty": "normal",
+          "abilityId": "appetite_sense"
+        },
+        {
+          "label": "Offer Mara more crystal to speak plainly about what moved beneath the town—there is something she knows and is weighing whether to say.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "falsehood_truth": 0.3
+          },
+          "difficulty": "easy",
+          "trivial": false
+        },
+        {
+          "label": "Pay her for the rations and ask if she will sell anything else—maps, news of the Standing Annex, or word of who travels this road in deep night.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "concrete_abstract": -0.2
+          },
+          "difficulty": "easy",
+          "trivial": false
         }
       ],
       "deeds": [],
@@ -525,15 +492,14 @@
         "health": 0,
         "energy": 0,
         "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
+        "inventoryRemove": []
       },
       "ledgerEvents": [],
       "questUpdates": [
         {
           "op": "progress",
           "questId": "journey-gen-the-road-from-kindly-rest-to-standing-an-88",
-          "note": "The band has reached Millbrook and Mara Wells' Store—midpoint of the journey toward the Standing Annex. Supplies can be gathered here before continuing on the road."
+          "note": "The band has reached Millbrook and learned that the settlement itself resists shortcuts—the land beneath has will and weight. The long road is safer. Mara directs them toward Whistling Woman Post, two hours north on the spinward path."
         }
       ],
       "standingOps": [],
@@ -542,98 +508,73 @@
       "arcOps": [],
       "adoptSchool": null,
       "offer": {
-        "thing": "Mara Wells, the store's keeper—a woman who reads strangers clearly and knows the road well enough to guess at true need",
-        "from": "the road itself, which brings travelers to her door in all hours, and the decision to arrive at her threshold honestly"
+        "thing": "Mara Wells speaks plainly about the land's resistance, revealing that something beneath Millbrook has awareness and agency.",
+        "from": "The fold met interference—the land itself testing or refusing the band's passage through the settlement."
       },
       "stageOps": [],
       "scene": {
-        "setting": "Mara Wells' Store on Millbrook's northern edge, deep night under bright stars. The storefront is weathered wood and shuttered glass, but the rear chimney rises with pale smoke. Mara stands at the threshold, door open a hand's width, lamplight spilling past her shoulder. The road beyond is clear and starlit.",
+        "setting": "Mara Wells' Store on Millbrook's northern edge, deep night under bright stars. The storefront is weathered wood with shuttered glass; the rear chimney rises with pale smoke. The door stands open a hand's width, lamplight spilling past Mara's shoulder. The road beyond is clear and starlit.",
         "npcsPresent": [
           {
             "name": "Mara Wells",
-            "state": "Standing at the store's threshold, door half-open, studying the band with a keeper's clear eye. Waiting for an answer."
+            "state": "Standing in the store's threshold, having opened the door fully. Calm, measuring, speaking with the plainness of someone accustomed to the late hours. Has just named a price for rations and directed the band toward Whistling Woman Post."
           }
         ],
         "objects": [
-          "Mara Wells' Store—weathered wood, shuttered front",
-          "A lamp burning inside, casting light through the open gap",
-          "The rear chimney, smoking pale into the night",
-          "Cy's lamp, steady and bright",
-          "The road stretching beyond, clear under stars"
+          "The store's weathered wood door, now open",
+          "Lamplight from inside, steady and warm",
+          "Shelves visible beyond the threshold, lined with traveler's stock—dried meat, hard bread, salt, and other road supplies",
+          "The pale smoke from the rear chimney, rising toward the stars",
+          "Cy's lamp, casting brass glow across the threshold",
+          "The road beyond, clear and starlit"
         ],
         "threads": [
-          "Why did the fold resist Millbrook? Something beneath the settlement is pushing back against shortcuts and close-work.",
-          "What will Mara tell you about the Standing Annex and the road ahead?",
-          "Will she sell supplies, and what will she ask in return?"
+          "What lies beneath Millbrook and why it resists shortcuts through the town?",
+          "Will the band accept Mara's price and directions, or ask more questions?",
+          "Is Whistling Woman Post safe, and what will the land do if they attempt shortcuts again?"
         ]
       },
       "npcUpdates": [
         {
-          "op": "meet",
-          "npcId": "mara-wells-keeper",
+          "op": "update",
+          "npcId": "mara-wells",
           "name": "Mara Wells",
-          "title": "Keeper of Mara Wells' Store",
-          "role": "Shopkeeper and traveler's keeper, awake in deep night when the town sleeps",
-          "age": 52,
-          "sex": "female",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "description": "A woman of measured years, with eyes that read strangers clearly. Sharp-voiced, steady-handed, dressed for the cooler nights in a deep-brown coat. She moves like someone used to assessing people in their worst hours.",
-          "note": "Opened her store to the band in deep night without hesitation—read them as honest rather than threatening. Waiting for an answer about what they need.",
-          "learned": [
-            "Keeps the store open through deep night hours—either by choice or by the traffic of road-travelers who cannot wait for daylight",
-            "Reads character in silence and body before words are spoken"
-          ],
-          "skillsObserved": [
-            "Clear assessment of strangers",
-            "Steady judgment under unusual hours"
-          ],
-          "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "Present at her store, keeper and merchant both"
+          "statusNote": "At her store in deep night, having opened to the band and offered supplies. Carries knowledge of something beneath Millbrook that resists shortcuts. Directs travelers toward Whistling Woman Post.",
+          "learned": [
+            "The fold that brought the band to Millbrook met resistance from something beneath the settlement—something with weight and will.",
+            "The land does not welcome shortcuts through Millbrook's bones.",
+            "Whistling Woman Post lies two hours north on the spinward path and keeps dry quarters for travelers."
+          ],
+          "note": "Offered rations at fair price and named her doubt plainly—the earth spoke when the band folded into town."
         }
       ],
       "intentsHeard": [],
-      "factUpdates": [],
-      "placeUpdates": [
+      "factUpdates": [
         {
-          "note": "Mara Wells' Store is a working merchant point in deep night, suggesting regular traffic from road-travelers and a keeper accustomed to late-hour business."
+          "op": "add",
+          "text": "Something beneath Millbrook has awareness and will—it resisted the band's shortfold and pushed back against their passage through the settlement. The land does not welcome shortcuts through the town's bones.",
+          "subjectId": "millbrook"
         }
       ],
-      "discovery": null,
+      "placeUpdates": [
+        {
+          "note": "The earth beneath Millbrook resists shortfolds and close-work—something with weight and agency beneath the settlement pushes back against direct passage. The land prefers the long road."
+        }
+      ],
       "codexUpdates": [
         {
-          "topic": "gen-mara-wells-store",
-          "label": "Mara Wells' Store",
+          "topic": "millbrook",
+          "label": "Millbrook",
           "kind": "place",
-          "fact": "The store's keeper is Mara Wells, a woman who reads strangers clearly and opens her shop in deep night to serve road-travelers. She judges character through bearing and quiet observation before words are exchanged.",
+          "entityId": "millbrook",
+          "fact": "Something beneath Millbrook has awareness and will—it resisted the band's shortfold when they attempted to fold directly into the town. The settlement's earth pushes back against shortcuts and close-work. The land prefers the long road.",
           "links": [
-            "millbrook"
+            "journey-gen-the-road-from-kindly-rest-to-standing-an-88"
           ]
         }
       ],
-      "holdingOps": [],
-      "holdTrades": [],
-      "debtOps": [],
-      "exchangeOps": [],
-      "partyOps": [],
-      "generateRequest": [],
-      "encounterOps": [],
-      "projectOps": [],
-      "bandOps": [],
-      "strikeOps": [],
-      "deathOps": [],
-      "newEncounter": null,
-      "unlockPrecursor": null,
-      "unlockSubstrate": null,
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "a brief walk through Millbrook's quiet streets and time at the store's threshold"
-      },
-      "moveTo": null,
-      "stateOps": [],
-      "itemUpdates": [],
-      "deriveItem": null,
+      "discovery": null,
       "imagePrompt": null,
       "imageMedium": null,
       "newAbility": null,
@@ -644,30 +585,53 @@
       "offerPromotion": null,
       "offerAcquisition": null,
       "offerIntent": null,
-      "sceneEnded": false
+      "sceneEnded": false,
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "a short exchange at the store threshold"
+      },
+      "moveTo": null,
+      "partyOps": [],
+      "holdingOps": [],
+      "holdTrades": [],
+      "exchangeOps": [],
+      "debtOps": [],
+      "strikeOps": [],
+      "newEncounter": null,
+      "encounterOps": [],
+      "projectOps": [],
+      "bandOps": [],
+      "deathOps": [],
+      "unlockPrecursor": null,
+      "unlockSubstrate": null,
+      "generateRequest": [],
+      "itemUpdates": [],
+      "deriveItem": null,
+      "stateOps": []
     },
     "sceneState": {
-      "setting": "Mara Wells' Store on Millbrook's northern edge, deep night under bright stars. The storefront is weathered wood and shuttered glass, but the rear chimney rises with pale smoke. Mara stands at the threshold, door open a hand's width, lamplight spilling past her shoulder. The road beyond is clear and starlit.",
+      "setting": "Mara Wells' Store on Millbrook's northern edge, deep night under bright stars. The storefront is weathered wood with shuttered glass; the rear chimney rises with pale smoke. The door stands open a hand's width, lamplight spilling past Mara's shoulder. The road beyond is clear and starlit.",
       "npcsPresent": [
         {
           "name": "Mara Wells",
-          "state": "Standing at the store's threshold, door half-open, studying the band with a keeper's clear eye. Waiting for an answer."
+          "state": "Standing in the store's threshold, having opened the door fully. Calm, measuring, speaking with the plainness of someone"
         }
       ],
       "objects": [
-        "Mara Wells' Store—weathered wood, shuttered front",
-        "A lamp burning inside, casting light through the open gap",
-        "The rear chimney, smoking pale into the night",
-        "Cy's lamp, steady and bright",
-        "The road stretching beyond, clear under stars"
+        "The store's weathered wood door, now open",
+        "Lamplight from inside, steady and warm",
+        "Shelves visible beyond the threshold, lined with traveler's stock—dried meat, ha",
+        "The pale smoke from the rear chimney, rising toward the stars",
+        "Cy's lamp, casting brass glow across the threshold",
+        "The road beyond, clear and starlit"
       ],
       "threads": [
-        "Why did the fold resist Millbrook? Something beneath the settlement is pushing back against shortcuts and close-work.",
-        "What will Mara tell you about the Standing Annex and the road ahead?",
-        "Will she sell supplies, and what will she ask in return?"
+        "What lies beneath Millbrook and why it resists shortcuts through the town?",
+        "Will the band accept Mara's price and directions, or ask more questions?",
+        "Is Whistling Woman Post safe, and what will the land do if they attempt shortcuts again?"
       ]
     },
-    "beats": 7,
+    "beats": 8,
     "subPlace": null
   },
   "clock": {
@@ -1563,11 +1527,15 @@
       },
       "relationship": 0,
       "history": [
-        "[d8] Opened her store to the band in deep night without hesitation—read them as honest rather than threatening. Waiting for an answer about what they need."
+        "[d8] Opened her store to the band in deep night without hesitation—read them as honest rather than threatening. Waiting for an answer about what they need.",
+        "[d8] Offered rations at fair price and named her doubt plainly—the earth spoke when the band folded into town."
       ],
       "knownFacts": [
         "Keeps the store open through deep night hours—either by choice or by the traffic of road-travelers who cannot wait for daylight",
-        "Reads character in silence and body before words are spoken"
+        "Reads character in silence and body before words are spoken",
+        "The fold that brought the band to Millbrook met resistance from something beneath the settlement—something with weight and will.",
+        "The land does not welcome shortcuts through Millbrook's bones.",
+        "Whistling Woman Post lies two hours north on the spinward path and keeps dry quarters for travelers."
       ],
       "skillsObserved": [
         "Clear assessment of strangers",
@@ -1578,7 +1546,7 @@
       "gender": "woman",
       "pronouns": "she/her",
       "age": 52,
-      "statusNote": "Present at her store, keeper and merchant both",
+      "statusNote": "At her store in deep night, having opened to the band and offered supplies. Carries knowledge of something beneath Millbrook that resists shortcuts. Directs travelers toward Whistling Woman Post.",
       "domains": {
         "primary": "mason"
       },
@@ -1587,7 +1555,7 @@
         "locationId": "gen-mara-wells-store",
         "day": 8
       },
-      "met": 1
+      "met": 2
     }
   },
   "placeMemory": {
@@ -1889,7 +1857,8 @@
     "gen-mara-wells-store": {
       "visits": 1,
       "notes": [
-        "[d8] Mara Wells' Store is a working merchant point in deep night, suggesting regular traffic from road-travelers and a keeper accustomed to late-hour business."
+        "[d8] Mara Wells' Store is a working merchant point in deep night, suggesting regular traffic from road-travelers and a keeper accustomed to late-hour business.",
+        "[d8] The earth beneath Millbrook resists shortfolds and close-work—something with weight and agency beneath the settlement pushes back against direct passage. The land prefers the long road."
       ],
       "flags": {},
       "lastVisit": 8,
@@ -2105,10 +2074,6 @@
     "turnsSinceOffer": 0,
     "recentOffers": [
       {
-        "thing": "A Syllogist who has waited on the road with a question and a breaking belief",
-        "from": "The architecture beneath the valley—someone in the lower Annex is asking about the Hub crossing and the Null Stone. Halvex Coil's mandate…"
-      },
-      {
         "thing": "Orla Yardley, a Syllogist who has broken their own conviction and come to test Loki's in exchange",
         "from": "the breaking mandate that Halvex sent, and the choice Loki made to listen rather than destroy—the valley carries word of this, and Orla…"
       },
@@ -2123,6 +2088,10 @@
       {
         "thing": "Mara Wells, the store's keeper—a woman who reads strangers clearly and knows the road well enough to guess at true need",
         "from": "the road itself, which brings travelers to her door in all hours, and the decision to arrive at her threshold honestly"
+      },
+      {
+        "thing": "Mara Wells speaks plainly about the land's resistance, revealing that something beneath Millbrook has awareness and agency.",
+        "from": "The fold met interference—the land itself testing or refusing the band's passage through the settlement."
       }
     ],
     "wantProgress": {
@@ -12675,12 +12644,14 @@
         "facts": [
           "[d7] you have walked here",
           "[d?] Millbrook governs itself through an elder panel in its common house, led by Councilor Dresh. It decides slowly, in public, and on the record.",
-          "[d8] The fold's resistance suggests something beneath the settlement is actively pushing back against shortcuts and close-work—the working that should have landed the band at the village heart instead set them at its edge."
+          "[d8] The fold's resistance suggests something beneath the settlement is actively pushing back against shortcuts and close-work—the working that should have landed the band at the village heart instead set them at its edge.",
+          "[d8] Something beneath Millbrook has awareness and will—it resisted the band's shortfold when they attempted to fold directly into the town. The settlement's earth pushes back against shortcuts and close-work. The land prefers the long road."
         ],
         "links": [
           "the-taken-from-the-city",
           "halvex-coil",
-          "what-descended-with-them"
+          "what-descended-with-them",
+          "journey-gen-the-road-from-kindly-rest-to"
         ],
         "aliases": [
           "Millbrook's Elder Panel"
@@ -13110,29 +13081,28 @@
     "deferredMysteries": []
   },
   "tendencies": {
-    "devotion": 0.6489280049856921,
-    "cerebral": 14.670981557012462,
-    "social": 16.55968352209569,
-    "strategic": 11.376379107737225,
-    "cautious": 5.559852089642145,
-    "amorous": 6.123425023492791,
-    "generous": 5.014608598449916,
-    "ruthless": 0.1625396139681991,
-    "risky": 0.13283470494260072,
-    "patient": 0.0362747690838759,
-    "deception": 0.04222571015666397,
-    "carousing": 0.9036878906249999,
-    "leadership": 1.8537187499999999
+    "devotion": 0.6327048048610499,
+    "cerebral": 14.30420701808715,
+    "social": 17.145691434043297,
+    "strategic": 11.091969630043794,
+    "cautious": 6.4208557874010905,
+    "amorous": 5.970339397905471,
+    "generous": 4.889243383488668,
+    "ruthless": 0.15847612361899413,
+    "risky": 0.1295138373190357,
+    "patient": 0.035367899856778996,
+    "deception": 0.041170067402747375,
+    "carousing": 0.8810956933593749,
+    "leadership": 1.8073757812499998
   },
   "aptitudes": [
     "strategist",
     "silver_tongue",
     "scholar",
     "orator",
-    "faithful",
-    "charmer"
+    "faithful"
   ],
-  "actionCount": 209,
+  "actionCount": 210,
   "grantsVersion": 1,
   "precursorAccess": [
     "address_sense"
@@ -14236,8 +14206,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790393638155,
-  "rev": 943,
+  "updatedAt": 1790393796115,
+  "rev": 944,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -15312,7 +15282,7 @@
     "umbral_depths": 54,
     "the_quickwood": 101,
     "the_center": 50,
-    "valley": 29,
+    "valley": 30,
     "the_open_reach": 3
   },
   "opLossPending": false,
@@ -15464,10 +15434,10 @@
     {
       "id": "sess-19",
       "startedAt": "2026-09-26T00:51:07.826Z",
-      "lastAt": "2026-09-26T03:33:58.138Z",
+      "lastAt": "2026-09-26T03:36:36.114Z",
       "startDay": 88,
       "endDay": 88,
-      "beats": 10
+      "beats": 11
     }
   ],
   "establishedFacts": [
@@ -15608,11 +15578,17 @@
       "text": "Orla Yardley has accepted companionship with the band—they walk toward the Standing Annex together. The breaking belief is now openly questioned in shared space.",
       "day": 7,
       "subjectId": "orla-yardley"
+    },
+    {
+      "id": "millbrook",
+      "text": "Something beneath Millbrook has awareness and will—it resisted the band's shortfold and pushed back against their passage through the settlement. The land does not welcome shortcuts through the town's bones.",
+      "day": 8,
+      "subjectId": "millbrook"
     }
   ],
   "_opLedger": {
     "offer": {
-      "applied": 49,
+      "applied": 50,
       "rejected": 2,
       "lastWhy": "rejected-shape"
     },
@@ -15629,23 +15605,23 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 239,
-    "choices": 239,
-    "characterDeltas": 123,
-    "scene": 239,
-    "placeUpdates": 29,
-    "codexUpdates": 139,
-    "timeOps": 192,
-    "offer": 43,
+    "sceneSummary": 240,
+    "choices": 240,
+    "characterDeltas": 124,
+    "scene": 240,
+    "placeUpdates": 30,
+    "codexUpdates": 140,
+    "timeOps": 193,
+    "offer": 44,
     "generateRequest": 7,
-    "sceneEnded": 108,
-    "npcUpdates": 190,
+    "sceneEnded": 109,
+    "npcUpdates": 191,
     "moveTo": 10,
-    "gambitApt": 67,
+    "gambitApt": 68,
     "deeds": 14,
-    "questUpdates": 44,
+    "questUpdates": 45,
     "standingOps": 4,
-    "factUpdates": 19,
+    "factUpdates": 20,
     "stageOps": 7,
     "encounterOps": 9,
     "ledgerEvents": 12,
@@ -15661,7 +15637,7 @@
     "partyOps": 4,
     "bandOps": 1
   },
-  "_opTurns": 239,
+  "_opTurns": 240,
   "customAbilities": {
     "mirror-bright": {
       "id": "mirror-bright",
@@ -16637,7 +16613,7 @@
     "travel": 10,
     "scout": 7,
     "prepare": 6,
-    "careful": 11,
+    "careful": 12,
     "woo": 1,
     "rapport": 16,
     "retreat": 1,
@@ -16649,7 +16625,7 @@
     "comfort": 2,
     "finesse": 3,
     "persuade": 1,
-    "negotiate": 7,
+    "negotiate": 8,
     "truth": 1,
     "devote": 1,
     "romantic": 4,
@@ -17107,412 +17083,412 @@
   },
   "_promptRows": {
     "character": {
-      "reached": 55,
-      "produced": 55
+      "reached": 56,
+      "produced": 56
     },
     "location": {
-      "reached": 55,
-      "produced": 55
+      "reached": 56,
+      "produced": 56
     },
     "region": {
-      "reached": 55,
-      "produced": 55
+      "reached": 56,
+      "produced": 56
     },
     "groundDetail": {
-      "reached": 55,
+      "reached": 56,
       "produced": 27
     },
     "lore": {
-      "reached": 55,
+      "reached": 56,
       "produced": 51
     },
     "traditionMotiveDetail": {
-      "reached": 55,
-      "produced": 55
+      "reached": 56,
+      "produced": 56
     },
     "sheetsDetail": {
-      "reached": 55,
-      "produced": 35
+      "reached": 56,
+      "produced": 36
     },
     "rules": {
-      "reached": 55,
-      "produced": 55
+      "reached": 56,
+      "produced": 56
     },
     "recentTurns": {
-      "reached": 55,
-      "produced": 49
+      "reached": 56,
+      "produced": 50
     },
     "timeLabel": {
-      "reached": 55,
-      "produced": 55
+      "reached": 56,
+      "produced": 56
     },
     "npcRegistryDetail": {
-      "reached": 55,
-      "produced": 55
+      "reached": 56,
+      "produced": 56
     },
     "mintedUnmetDetail": {
-      "reached": 55,
-      "produced": 55
+      "reached": 56,
+      "produced": 56
     },
     "npcSeedDetail": {
-      "reached": 55,
+      "reached": 56,
       "produced": 24
     },
     "traditionVocab": {
-      "reached": 55,
-      "produced": 55
+      "reached": 56,
+      "produced": 56
     },
     "standingDetail": {
-      "reached": 55,
-      "produced": 55
+      "reached": 56,
+      "produced": 56
     },
     "recalledDetail": {
-      "reached": 55,
+      "reached": 56,
       "produced": 6
     },
     "bearingsDetail": {
-      "reached": 55,
-      "produced": 55
+      "reached": 56,
+      "produced": 56
     },
     "caravansDetail": {
-      "reached": 55,
+      "reached": 56,
       "produced": 0
     },
     "commandDetail": {
-      "reached": 55,
-      "produced": 55
+      "reached": 56,
+      "produced": 56
     },
     "presenceDetail": {
-      "reached": 55,
-      "produced": 45
+      "reached": 56,
+      "produced": 46
     },
     "worthHereDetail": {
-      "reached": 55,
+      "reached": 56,
       "produced": 0
     },
     "inventoryDetail": {
-      "reached": 55,
-      "produced": 55
+      "reached": 56,
+      "produced": 56
     },
     "sceneState": {
-      "reached": 55,
-      "produced": 49
+      "reached": 56,
+      "produced": 50
     },
     "holdingsDetail": {
-      "reached": 55,
-      "produced": 55
+      "reached": 56,
+      "produced": 56
     },
     "debtsDetail": {
-      "reached": 55,
+      "reached": 56,
       "produced": 0
     },
     "carriedDetail": {
-      "reached": 55,
+      "reached": 56,
       "produced": 0
     },
     "abilityLawDetail": {
-      "reached": 55,
-      "produced": 55
+      "reached": 56,
+      "produced": 56
     },
     "questsDetail": {
-      "reached": 55,
-      "produced": 55
+      "reached": 56,
+      "produced": 56
     },
     "structuredQuestsDetail": {
-      "reached": 55,
+      "reached": 56,
       "produced": 0
     },
     "traditionArcDetail": {
-      "reached": 55,
+      "reached": 56,
       "produced": 0
     },
     "npcErrandsDetail": {
-      "reached": 55,
+      "reached": 56,
       "produced": 0
     },
     "codexDetail": {
-      "reached": 55,
-      "produced": 55
+      "reached": 56,
+      "produced": 56
     },
     "companionsDetail": {
-      "reached": 55,
-      "produced": 55
+      "reached": 56,
+      "produced": 56
     },
     "placeMemoryDetail": {
-      "reached": 55,
-      "produced": 39
+      "reached": 56,
+      "produced": 40
     },
     "agesMissingDetail": {
-      "reached": 55,
-      "produced": 55
+      "reached": 56,
+      "produced": 56
     },
     "newsDetail": {
-      "reached": 55,
-      "produced": 55
+      "reached": 56,
+      "produced": 56
     },
     "worldArcsDetail": {
-      "reached": 55,
-      "produced": 55
+      "reached": 56,
+      "produced": 56
     },
     "legendsPursuableDetail": {
-      "reached": 55,
+      "reached": 56,
       "produced": 12
     },
     "wakesDetail": {
-      "reached": 55,
+      "reached": 56,
       "produced": 0
     },
     "arcMoodDetail": {
-      "reached": 55,
-      "produced": 55
+      "reached": 56,
+      "produced": 56
     },
     "reachableDeadDetail": {
-      "reached": 55,
+      "reached": 56,
       "produced": 46
     },
     "threatToPlayer": {
-      "reached": 55,
+      "reached": 56,
       "produced": 0
     },
     "guardiansDetail": {
-      "reached": 55,
+      "reached": 56,
       "produced": 0
     },
     "resolution": {
-      "reached": 55,
-      "produced": 45
+      "reached": 56,
+      "produced": 46
     },
     "playerInput": {
-      "reached": 55,
+      "reached": 56,
       "produced": 10
     },
     "exactWords": {
-      "reached": 55,
+      "reached": 56,
       "produced": 31
     },
     "travelDirective": {
-      "reached": 55,
+      "reached": 56,
       "produced": 3
     },
     "itemAdvance": {
-      "reached": 55,
+      "reached": 56,
       "produced": 0
     },
     "encounterWeaveDetail": {
-      "reached": 55,
-      "produced": 6
+      "reached": 56,
+      "produced": 7
     },
     "encounterOfferDetail": {
-      "reached": 55,
+      "reached": 56,
       "produced": 4
     },
     "fightFramingDetail": {
-      "reached": 55,
+      "reached": 56,
       "produced": 0
     },
     "abilityGrantDetail": {
-      "reached": 55,
+      "reached": 56,
       "produced": 0
     },
     "stageRevealDetail": {
-      "reached": 55,
+      "reached": 56,
       "produced": 0
     },
     "itemEvolveDetail": {
-      "reached": 55,
+      "reached": 56,
       "produced": 0
     },
     "worldPressureDetail": {
-      "reached": 55,
+      "reached": 56,
       "produced": 2
     },
     "offerDetail": {
-      "reached": 55,
+      "reached": 56,
       "produced": 2
     },
     "teacherOfferDetail": {
-      "reached": 55,
+      "reached": 56,
       "produced": 0
     },
     "substrateDetail": {
-      "reached": 55,
+      "reached": 56,
       "produced": 17
     },
     "romanceGuidanceDetail": {
-      "reached": 55,
+      "reached": 56,
       "produced": 4
     },
     "factsDetail": {
-      "reached": 55,
-      "produced": 55
+      "reached": 56,
+      "produced": 56
     },
     "evolvedItemsDetail": {
-      "reached": 55,
+      "reached": 56,
       "produced": 0
     },
     "opLossNote": {
-      "reached": 55,
+      "reached": 56,
       "produced": 0
     },
     "emergenceDetail": {
-      "reached": 55,
+      "reached": 56,
       "produced": 0
     },
     "perilNote": {
-      "reached": 55,
+      "reached": 56,
       "produced": 0
     },
     "encounterDetail": {
-      "reached": 55,
+      "reached": 56,
       "produced": 4
     },
     "masteryDetail": {
-      "reached": 55,
-      "produced": 55
+      "reached": 56,
+      "produced": 56
     },
     "bookkeepingRestate": {
-      "reached": 55,
+      "reached": 56,
       "produced": 0
     },
     "anomalyDetail": {
-      "reached": 55,
-      "produced": 53
+      "reached": 56,
+      "produced": 54
     },
     "repairPanelDetail": {
-      "reached": 55,
-      "produced": 55
+      "reached": 56,
+      "produced": 56
     },
     "teacherDetail": {
-      "reached": 55,
+      "reached": 56,
       "produced": 0
     },
     "toolkitDetail": {
-      "reached": 55,
-      "produced": 55
+      "reached": 56,
+      "produced": 56
     },
     "availableEncounters": {
-      "reached": 55,
-      "produced": 51
+      "reached": 56,
+      "produced": 52
     },
     "partyDetail": {
-      "reached": 55,
+      "reached": 56,
       "produced": 0
     },
     "ratingDetail": {
-      "reached": 55,
-      "produced": 55
+      "reached": 56,
+      "produced": 56
     },
     "registerDetail": {
-      "reached": 55,
-      "produced": 55
+      "reached": 56,
+      "produced": 56
     },
     "legendDetail": {
-      "reached": 55,
+      "reached": 56,
       "produced": 1
     },
     "livingWorldDetail": {
-      "reached": 55,
-      "produced": 26
+      "reached": 56,
+      "produced": 27
     },
     "assignmentsDetail": {
-      "reached": 55,
+      "reached": 56,
       "produced": 0
     },
     "latentArcsDetail": {
-      "reached": 55,
-      "produced": 55
+      "reached": 56,
+      "produced": 56
     },
     "seasonalDetail": {
-      "reached": 55,
-      "produced": 55
+      "reached": 56,
+      "produced": 56
     },
     "schoolsDetail": {
-      "reached": 55,
-      "produced": 55
+      "reached": 56,
+      "produced": 56
     },
     "sharedCanonDetail": {
-      "reached": 55,
-      "produced": 32
+      "reached": 56,
+      "produced": 33
     },
     "worldCountLabel": {
-      "reached": 55,
-      "produced": 55
+      "reached": 56,
+      "produced": 56
     },
     "waygateDetail": {
-      "reached": 55,
+      "reached": 56,
       "produced": 27
     },
     "readAloudDetail": {
-      "reached": 55,
-      "produced": 55
+      "reached": 56,
+      "produced": 56
     },
     "scenePacingDetail": {
-      "reached": 55,
+      "reached": 56,
       "produced": 20
     },
     "wishesDetail": {
-      "reached": 35,
+      "reached": 36,
       "produced": 0
     },
     "worldMovedOnDetail": {
-      "reached": 35,
+      "reached": 36,
       "produced": 2
     },
     "companionLivesDetail": {
-      "reached": 35,
+      "reached": 36,
       "produced": 18
     },
     "homeDetail": {
-      "reached": 35,
+      "reached": 36,
       "produced": 0
     },
     "invitationsDetail": {
-      "reached": 35,
+      "reached": 36,
       "produced": 0
     },
     "bandsJoinedDetail": {
-      "reached": 35,
+      "reached": 36,
       "produced": 0
     },
     "travelersHereDetail": {
-      "reached": 35,
-      "produced": 8
+      "reached": 36,
+      "produced": 9
     },
     "travelersDetail": {
-      "reached": 35,
+      "reached": 36,
       "produced": 2
     },
     "journeyDetail": {
-      "reached": 33,
-      "produced": 3
+      "reached": 34,
+      "produced": 4
     },
     "journeyUnderwayDetail": {
-      "reached": 33,
+      "reached": 34,
       "produced": 4
     },
     "holdsNearDetail": {
-      "reached": 33,
-      "produced": 29
+      "reached": 34,
+      "produced": 30
     },
     "moneyDetail": {
-      "reached": 32,
-      "produced": 32
+      "reached": 33,
+      "produced": 33
     },
     "jobsDetail": {
-      "reached": 32,
+      "reached": 33,
       "produced": 0
     },
     "powersHereDetail": {
-      "reached": 9,
+      "reached": 10,
       "produced": 6
     },
     "nemesisDetail": {
-      "reached": 9,
-      "produced": 9
+      "reached": 10,
+      "produced": 10
     }
   },
   "_opUnknown": {
-    "sceneSummary": 67,
+    "sceneSummary": 68,
     "scene_summary": 1
   },
   "_bandNotes": null,

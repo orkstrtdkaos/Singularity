@@ -2,6 +2,46 @@
   "schemaVersion": 1,
   "regionId": "valley",
   "holds": {
+    "char-mrum8y4d:the_standing_annex": {
+      "key": "char-mrum8y4d:the_standing_annex",
+      "id": "the_standing_annex",
+      "ownerId": "char-mrum8y4d",
+      "ownerName": "Loki",
+      "name": "The Standing Annex",
+      "kind": "enterprise",
+      "describedAs": "floating tower",
+      "locationId": "gen-the-made-gate",
+      "placeName": "The Made Gate",
+      "settlementId": "millbrook",
+      "settlementName": "Millbrook",
+      "worldPos": {
+        "colatitude": 20.4,
+        "longitude": 251.95,
+        "depth": 0
+      },
+      "keeperId": "halvex_coil",
+      "keeperName": "Halvex Coil",
+      "condition": "thriving",
+      "has": [
+        "a watchtower",
+        "a shrine"
+      ],
+      "guardedBy": [
+        "Kael",
+        "Ravel",
+        "Estry"
+      ],
+      "trades": {
+        "goods": [
+          {
+            "goods": "raw_material",
+            "name": "hide, sinew, timber, ore",
+            "units": 10,
+            "each": 4
+          }
+        ]
+      }
+    },
     "char-mrhs8286:hold-fendt::warden-of-the-threshold-post-at-the-ridg": {
       "key": "char-mrhs8286:hold-fendt::warden-of-the-threshold-post-at-the-ridg",
       "id": "hold-fendt::warden-of-the-threshold-post-at-the-ridg",
@@ -35,8 +75,8 @@
           {
             "goods": "raw_material",
             "name": "hide, sinew, timber, ore",
-            "units": 20,
-            "each": 4
+            "units": 21,
+            "each": 7
           }
         ]
       }
@@ -50,9 +90,9 @@
       "kind": "post",
       "describedAs": null,
       "locationId": "the_old_warden_post",
-      "placeName": "Raven's Home (the Old Warden Post)",
+      "placeName": "Stillwater's Trouble",
       "settlementId": "the_old_warden_post",
-      "settlementName": "Raven's Home (the Old Warden Post)",
+      "settlementName": "Stillwater's Trouble",
       "worldPos": {
         "colatitude": 73,
         "longitude": 71,
@@ -202,46 +242,6 @@
             "goods": "raw_material",
             "name": "hide, sinew, timber, ore",
             "units": 7,
-            "each": 4
-          }
-        ]
-      }
-    },
-    "char-mrum8y4d:the_standing_annex": {
-      "key": "char-mrum8y4d:the_standing_annex",
-      "id": "the_standing_annex",
-      "ownerId": "char-mrum8y4d",
-      "ownerName": "Loki",
-      "name": "The Standing Annex",
-      "kind": "enterprise",
-      "describedAs": "floating tower",
-      "locationId": "gen-the-made-gate",
-      "placeName": "The Made Gate",
-      "settlementId": "millbrook",
-      "settlementName": "Millbrook",
-      "worldPos": {
-        "colatitude": 20.4,
-        "longitude": 251.95,
-        "depth": 0
-      },
-      "keeperId": "halvex_coil",
-      "keeperName": "Halvex Coil",
-      "condition": "thriving",
-      "has": [
-        "a watchtower",
-        "a shrine"
-      ],
-      "guardedBy": [
-        "Kael",
-        "Ravel",
-        "Estry"
-      ],
-      "trades": {
-        "goods": [
-          {
-            "goods": "raw_material",
-            "name": "hide, sinew, timber, ore",
-            "units": 10,
             "each": 4
           }
         ]

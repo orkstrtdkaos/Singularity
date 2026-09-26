@@ -374,6 +374,7 @@
    ],
    "verbs": [
     "protect",
+    "quest",
     "patrol",
     "tax",
     "recruit"
@@ -396,7 +397,8 @@
    "descriptionSeed": "Ines Harrowgate holds the Slip because her grandmother built the first watch-house on it, and she holds it the way her grandmother did: the tariff is carved on a stone at the waterline and has not changed in forty years. She hangs anyone who wrecks a hull on purpose and feeds anyone who wrecks one by accident. The Baron at Firstsight holds the only road down to her, and he wants the water.",
    "appearance": "A stone slipway running down into brown estuary water, a squat watch-house with a lantern, a tariff carved into a waterline stone, boatyards full of half-built hulls",
    "recognizedBy": "council_of_mavens",
-   "comes": "loud"
+   "comes": "loud",
+   "_verbsWhy": "A harbour lordship that recruits already; its captains go looking for what the harbour needs."
   },
   {
    "id": "power_firstsight_barony",
@@ -810,7 +812,8 @@
     }
    ],
    "verbs": [
-    "protect"
+    "protect",
+    "quest"
    ],
    "noticesYouWhen": [
     "crossed"
@@ -840,7 +843,8 @@
    "_notOnThePanel": {
     "aldric": "Aldric, the smokehouse operator, appears only at an evening meeting Silas called at Pell's forge with Dara, Fendt, Mara and Calvar. That gathering was not the panel, and no save seats him. The fifth seat is open if Erik wants him in it."
    },
-   "comes": "loud"
+   "comes": "loud",
+   "_verbsWhy": "A council that only protects sends someone, when it must."
   },
   {
    "encounters": [],
@@ -952,7 +956,9 @@
    ],
    "verbs": [
     "tax",
+    "crusade",
     "patrol",
+    "quest",
     "protect",
     "inform"
    ],
@@ -977,7 +983,8 @@
    "plainly": "Glasshome's governing assembly. It meets in the open, because the city has no interior walls, and it holds the border against the Blaze with lenses.",
    "descriptionSeed": "The Glass Assembly governs a city built on the plain the Blaze made, by people the Blaze made, and it spends most of its strength keeping the Blaze from finishing the job. Its arrays at the Lensward focus the light back on itself. It is fair, it is exhausting, and it hears every case in public.",
    "appearance": "An open hall of clear glass in a city without interior walls, a crowd watching every speaker, the great lens-arrays of the border catching the light beyond",
-   "comes": "loud"
+   "comes": "loud",
+   "_verbsWhy": "The Assembly is fair and patient, and the Blaze Unshadowed will not stop. Patience ends somewhere."
   },
   {
    "encounters": [],
@@ -1017,6 +1024,7 @@
    ],
    "verbs": [
     "protect",
+    "quest",
     "patrol",
     "recruit"
    ],
@@ -1033,7 +1041,8 @@
    "descriptionSeed": "The High Temple rises a mountain in tiers of training-grounds, and every soul on it hones breath, poise and endurance as worship. Its adepts keep the Grindstone for soldiers who want to be trained properly, and they look down the mountain at the Cogitarium with a grief they rarely say aloud.",
    "appearance": "Tiered training grounds climbing a mountain, adepts moving in unison at dawn, a long yard and a steaming bathhouse below",
    "comes": "mixed",
-   "_comesWhy": "adepts whose bodies are disciplined enough to be quiet when they choose"
+   "_comesWhy": "adepts whose bodies are disciplined enough to be quiet when they choose",
+   "_verbsWhy": "Its disciplined go out to prove themselves."
   },
   {
    "encounters": [],
@@ -1145,6 +1154,7 @@
    ],
    "verbs": [
     "protect",
+    "quest",
     "patrol",
     "tax"
    ],
@@ -1161,7 +1171,8 @@
    "descriptionSeed": "The Moot sits under the oldest trees in Grovehome and argues in seasons. It keeps the Quickwood's one door open to the world because trade requires it, and it keeps the Greenward thorned because the world requires that too. In the Heartroot, the argument to seal the wood is gaining ground.",
    "appearance": "A ring of seats grown from living roots under vast trees, Rootkin elders listening for a very long time, a thorned green wall at the edge of the wood",
    "comes": "mixed",
-   "_comesWhy": "slow to muster and easy to see coming — but in the Greenward they are the wood"
+   "_comesWhy": "slow to muster and easy to see coming — but in the Greenward they are the wood",
+   "_verbsWhy": "No crusade: the Deepwood Moot is kin, and the Green Schism is a quarrel within a family. The Moot holds (protect) and sends seekers (quest) rather than marching on its own."
   },
   {
    "encounters": [],
@@ -1259,6 +1270,7 @@
    ],
    "verbs": [
     "tax",
+    "crusade",
     "protect",
     "expand"
    ],
@@ -1274,7 +1286,8 @@
    "plainly": "The Making's governing contest. Each season the best plan wins, and whoever drew it governs until someone draws a better one.",
    "descriptionSeed": "The Wrights believe a finished thing has stopped being alive, so they govern the way they build: by improvement. Each season plans are laid before the Court, and the winner holds the Planmaster's office until a better one arrives. It is fair, it is glorious, and it is never done.",
    "appearance": "A hall of drafting tables under cathedral scaffolding, plans pinned over plans, Wrights arguing over a model with obvious delight",
-   "comes": "loud"
+   "comes": "loud",
+   "_verbsWhy": "The Ceaseless feuds the Court; the Court answers."
   },
   {
    "encounters": [],
@@ -1373,6 +1386,7 @@
    ],
    "verbs": [
     "protect",
+    "quest",
     "recruit",
     "expand"
    ],
@@ -1399,7 +1413,8 @@
     "The Choirmaster is the Unbodied's agent; the choir is not (R40b.4). A kind power feeding a Sovereign is the lore's individually reasonable, cumulatively impossible."
    ],
    "comes": "mixed",
-   "_comesWhy": "singers further away than they look: you hear them, and you are wrong about where"
+   "_comesWhy": "singers further away than they look: you hear them, and you are wrong about where",
+   "_verbsWhy": "A kind order: its singers go out to find the lost."
   },
   {
    "encounters": [],
@@ -1442,7 +1457,9 @@
    ],
    "verbs": [
     "protect",
+    "crusade",
     "patrol",
+    "quest",
     "tax"
    ],
    "dangerLift": 0,
@@ -1475,7 +1492,8 @@
     "Neth holds the Life / Death seat (SNG-644) and lives at the Quiet Ground under the Wardens' protection. The Wardens do not know what she is holding back; they only know she must not be disturbed."
    ],
    "comes": "mixed",
-   "_comesWhy": "march-wardens move unseen on the moor; the grave-crews do not"
+   "_comesWhy": "march-wardens move unseen on the moor; the grave-crews do not",
+   "_verbsWhy": "Kind wardens of the Ashwarden grey, feuded by the Harvest Hand. They carry the fight to the reapers and send their champions after the things that come out of the dark."
   },
   {
    "encounters": [],
@@ -1577,7 +1595,9 @@
    ],
    "verbs": [
     "tax",
+    "crusade",
     "protect",
+    "quest",
     "patrol"
    ],
    "dangerLift": 0,
@@ -1609,7 +1629,8 @@
    "secretsGM": [
     "The Last Mercy holds the Breaking / Building seat (SNG-644) and works the Clearing Ground. The Masters count her as one of their own and do not know what she holds back."
    ],
-   "comes": "loud"
+   "comes": "loud",
+   "_verbsWhy": "The Scour exists to stop the Scouring. A body whose whole reason is one enemy goes after that enemy."
   },
   {
    "encounters": [],
@@ -1861,6 +1882,7 @@
    ],
    "verbs": [
     "protect",
+    "crusade",
     "patrol",
     "levy",
     "recruit",
@@ -1903,7 +1925,8 @@
     "The Burning Certainty is the claimant on the Angelic half of the Hollow King's axis (SNG-642 §3). Her inquisition inside the Orders is her road.",
     "Eosphor, the Dawn Seraph, walks among them. He casts no shadow. They have not noticed yet."
    ],
-   "comes": "loud"
+   "comes": "loud",
+   "_verbsWhy": "The Seraphic Orders are the word crusade. Against the Hollow Court, their rival."
   },
   {
    "encounters": [],
@@ -1944,6 +1967,7 @@
    ],
    "verbs": [
     "protect",
+    "quest",
     "patrol",
     "recruit"
    ],
@@ -1963,7 +1987,8 @@
     "The Harborward is a counterweight to Lucifer (SNG-640): privacy kept on purpose. It starves him without knowing. It is also opposed by the Starless, who wants no refuge in the dark — only the Void."
    ],
    "comes": "quiet",
-   "_comesWhy": "Umbral keepers; the dark is where they live"
+   "_comesWhy": "Umbral keepers; the dark is where they live",
+   "_verbsWhy": "A kind order with no rival: its champions go out on errands of rescue."
   },
   {
    "encounters": [],

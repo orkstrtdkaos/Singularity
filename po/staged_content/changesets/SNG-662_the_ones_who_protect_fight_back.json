@@ -1,0 +1,111 @@
+{
+ "schemaVersion": 1,
+ "id": "SNG-662_the_ones_who_protect_fight_back",
+ "kind": "changeset",
+ "_title": "Orders that protect also quest and crusade",
+ "_why": "Erik 2026-09-26: 'orders that primarily protect... they not only fight back, but quest and crusade as well.' CCode measured the feud as one-sided by construction: protect/patrol/tax have no effect in powerPass, so a protecting power only ever takes losses while its feuder's expand/recruit cancel its own. 25 shrink events a year, always the same five powers.",
+ "ids": [],
+ "removed": [],
+ "renamed": [],
+ "added": [],
+ "modified": [
+  {
+   "id": "power_cairnhold_wardens",
+   "kind": "power",
+   "field": "verbs",
+   "change": "add: crusade, quest (from po/staged_content/SNG-662_protectors_verbs.merged.json)"
+  },
+  {
+   "id": "power_the_scour",
+   "kind": "power",
+   "field": "verbs",
+   "change": "add: crusade, quest (from po/staged_content/SNG-662_protectors_verbs.merged.json)"
+  },
+  {
+   "id": "power_glass_assembly",
+   "kind": "power",
+   "field": "verbs",
+   "change": "add: crusade, quest (from po/staged_content/SNG-662_protectors_verbs.merged.json)"
+  },
+  {
+   "id": "power_grovehome_moot",
+   "kind": "power",
+   "field": "verbs",
+   "change": "add: quest (from po/staged_content/SNG-662_protectors_verbs.merged.json)"
+  },
+  {
+   "id": "power_keelmouth_slip",
+   "kind": "power",
+   "field": "verbs",
+   "change": "add: quest (from po/staged_content/SNG-662_protectors_verbs.merged.json)"
+  },
+  {
+   "id": "power_seraphic_orders",
+   "kind": "power",
+   "field": "verbs",
+   "change": "add: crusade (from po/staged_content/SNG-662_protectors_verbs.merged.json)"
+  },
+  {
+   "id": "power_scaffold_court",
+   "kind": "power",
+   "field": "verbs",
+   "change": "add: crusade (from po/staged_content/SNG-662_protectors_verbs.merged.json)"
+  },
+  {
+   "id": "power_harborward",
+   "kind": "power",
+   "field": "verbs",
+   "change": "add: quest (from po/staged_content/SNG-662_protectors_verbs.merged.json)"
+  },
+  {
+   "id": "power_long_choir",
+   "kind": "power",
+   "field": "verbs",
+   "change": "add: quest (from po/staged_content/SNG-662_protectors_verbs.merged.json)"
+  },
+  {
+   "id": "power_flesh_temple",
+   "kind": "power",
+   "field": "verbs",
+   "change": "add: quest (from po/staged_content/SNG-662_protectors_verbs.merged.json)"
+  },
+  {
+   "id": "power_millbrook_council",
+   "kind": "power",
+   "field": "verbs",
+   "change": "add: quest (from po/staged_content/SNG-662_protectors_verbs.merged.json)"
+  }
+ ],
+ "referrers": [
+  "engine/powers.js VERB_EFFECT",
+  "engine/powers.js verbForPass (rotation length grows by the added verbs)"
+ ],
+ "migration": "none: verbs are read fresh each pass; powerState tallies carry over",
+ "expectedGates": [
+  "changeset_check",
+  "content_ci",
+  "how_it_works (powers)"
+ ],
+ "_forCCode": "Apply only after VERB_EFFECT knows quest, crusade and protect's new effect (SPEC_SNG-662 §2); before that the new verbs are null and the rotation only dilutes what the power does.",
+ "_rulesToo": {
+  "file": "content/packs/core/rules/powers.json",
+  "edits": [
+   {
+    "path": "kinds.order",
+    "field": "verbs",
+    "change": "add: quest, crusade"
+   },
+   {
+    "path": "kinds.sovereignty",
+    "field": "verbs",
+    "change": "add: quest, crusade"
+   },
+   {
+    "path": "kinds.lordship",
+    "field": "verbs",
+    "change": "add: quest"
+   }
+  ],
+  "why": "the kind palettes the generator draws from, so generated orders and sovereignties can quest and crusade too"
+ }
+}

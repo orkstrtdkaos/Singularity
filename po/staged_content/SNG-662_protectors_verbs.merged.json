@@ -1,0 +1,112 @@
+{
+ "schemaVersion": 1,
+ "id": "SNG-662_protectors_verbs",
+ "kind": "staged_content",
+ "note": "The full verbs array each power should carry after SNG-662. Order kept, new verbs placed so the rotation interleaves them with the old.",
+ "powers": {
+  "power_cairnhold_wardens": {
+   "verbs": [
+    "protect",
+    "crusade",
+    "patrol",
+    "quest",
+    "tax"
+   ],
+   "_verbsWhy": "Kind wardens of the Ashwarden grey, feuded by the Harvest Hand. They carry the fight to the reapers and send their champions after the things that come out of the dark."
+  },
+  "power_the_scour": {
+   "verbs": [
+    "tax",
+    "crusade",
+    "protect",
+    "quest",
+    "patrol"
+   ],
+   "_verbsWhy": "The Scour exists to stop the Scouring. A body whose whole reason is one enemy goes after that enemy."
+  },
+  "power_glass_assembly": {
+   "verbs": [
+    "tax",
+    "crusade",
+    "patrol",
+    "quest",
+    "protect",
+    "inform"
+   ],
+   "_verbsWhy": "The Assembly is fair and patient, and the Blaze Unshadowed will not stop. Patience ends somewhere."
+  },
+  "power_grovehome_moot": {
+   "verbs": [
+    "protect",
+    "quest",
+    "patrol",
+    "tax"
+   ],
+   "_verbsWhy": "No crusade: the Deepwood Moot is kin, and the Green Schism is a quarrel within a family. The Moot holds (protect) and sends seekers (quest) rather than marching on its own."
+  },
+  "power_keelmouth_slip": {
+   "verbs": [
+    "protect",
+    "quest",
+    "patrol",
+    "tax",
+    "recruit"
+   ],
+   "_verbsWhy": "A harbour lordship that recruits already; its captains go looking for what the harbour needs."
+  },
+  "power_seraphic_orders": {
+   "verbs": [
+    "protect",
+    "crusade",
+    "patrol",
+    "levy",
+    "recruit",
+    "expand"
+   ],
+   "_verbsWhy": "The Seraphic Orders are the word crusade. Against the Hollow Court, their rival."
+  },
+  "power_scaffold_court": {
+   "verbs": [
+    "tax",
+    "crusade",
+    "protect",
+    "expand"
+   ],
+   "_verbsWhy": "The Ceaseless feuds the Court; the Court answers."
+  },
+  "power_harborward": {
+   "verbs": [
+    "protect",
+    "quest",
+    "patrol",
+    "recruit"
+   ],
+   "_verbsWhy": "A kind order with no rival: its champions go out on errands of rescue."
+  },
+  "power_long_choir": {
+   "verbs": [
+    "protect",
+    "quest",
+    "recruit",
+    "expand"
+   ],
+   "_verbsWhy": "A kind order: its singers go out to find the lost."
+  },
+  "power_flesh_temple": {
+   "verbs": [
+    "protect",
+    "quest",
+    "patrol",
+    "recruit"
+   ],
+   "_verbsWhy": "Its disciplined go out to prove themselves."
+  },
+  "power_millbrook_council": {
+   "verbs": [
+    "protect",
+    "quest"
+   ],
+   "_verbsWhy": "A council that only protects sends someone, when it must."
+  }
+ }
+}

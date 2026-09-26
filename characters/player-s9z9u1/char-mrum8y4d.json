@@ -800,7 +800,7 @@
       "structured": false,
       "status": "active",
       "title": "Journey to The Standing Annex",
-      "summary": "On the road: 1 of 6 legs walked, 2 days out · you are at Millbrook · about 1.6 days ahead, 1 ration for it — you carry 0 (1 short) · 1 day walked hungry so far.",
+      "summary": "about 1.6 days on foot, by way of The Made Gate · 1 ration for the road — you carry 0 (1 short) · 0 nights in the open, 1 under a roof · the worst of the road: The Pale March Waygate (dangerous) · alone. Ready yourself — rations, your people, what you leave behind — and set out when you are ready.",
       "progress": [
         "Reached Millbrook — day 2 of the road.",
         "Stopped at Millbrook — the road held something."
@@ -14042,8 +14042,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790390850897,
-  "rev": 917,
+  "updatedAt": 1790391014382,
+  "rev": 920,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -17654,18 +17654,17 @@
     "id": "journey-gen-the-standing-annex-88",
     "destId": "gen-the-standing-annex",
     "destName": "The Standing Annex",
-    "fromId": "the_kindly_rest",
-    "fromName": "The Kindly Rest",
+    "fromId": "millbrook",
+    "fromName": "Millbrook",
     "createdWorldDay": 88,
     "options": [
       {
         "key": "road-0",
         "kind": "road",
-        "label": "on foot, by way of Millbrook",
-        "days": 3.2,
+        "label": "on foot, by way of The Made Gate",
+        "days": 1.6,
         "energy": 0,
         "path": [
-          "the_kindly_rest",
           "millbrook",
           "gen-waygate",
           "gen-ashwarden-march-road",
@@ -17679,23 +17678,12 @@
           "name": "The Pale March Waygate",
           "level": 2
         },
-        "nights": 3,
-        "roofs": 3,
+        "nights": 1,
+        "roofs": 1,
         "camps": 0,
         "legs": [
           {
             "i": 0,
-            "fromId": "the_kindly_rest",
-            "toId": "millbrook",
-            "fromName": "The Kindly Rest",
-            "toName": "Millbrook",
-            "days": 1.6248307809025717,
-            "danger": 0,
-            "roof": true,
-            "gate": null
-          },
-          {
-            "i": 1,
             "fromId": "millbrook",
             "toId": "gen-waygate",
             "fromName": "Millbrook",
@@ -17706,7 +17694,7 @@
             "gate": null
           },
           {
-            "i": 2,
+            "i": 1,
             "fromId": "gen-waygate",
             "toId": "gen-ashwarden-march-road",
             "fromName": "The Pale March Waygate",
@@ -17717,7 +17705,7 @@
             "gate": null
           },
           {
-            "i": 3,
+            "i": 2,
             "fromId": "gen-ashwarden-march-road",
             "toId": "gen-stillwater-s-trouble",
             "fromName": "The Ashwarden March Road",
@@ -17728,7 +17716,7 @@
             "gate": null
           },
           {
-            "i": 4,
+            "i": 3,
             "fromId": "gen-stillwater-s-trouble",
             "toId": "gen-the-made-gate",
             "fromName": "Stillwater's Trouble",
@@ -17739,7 +17727,7 @@
             "gate": null
           },
           {
-            "i": 5,
+            "i": 4,
             "fromId": "gen-the-made-gate",
             "toId": "gen-the-standing-annex",
             "fromName": "The Made Gate",
@@ -17755,7 +17743,7 @@
     "chosenKey": "road-0",
     "soleWay": true,
     "rations": {
-      "needed": 2,
+      "needed": 1,
       "carried": 0
     },
     "company": [],
@@ -17765,7 +17753,7 @@
       "fromId": "the_kindly_rest",
       "fromName": "The Kindly Rest",
       "wayKey": "road-0",
-      "legIndex": 1,
+      "legIndex": 0,
       "daysWalked": 1.6248307809025717,
       "countedDays": 2,
       "foodDaysLeft": 0,
@@ -17796,7 +17784,8 @@
         }
       ],
       "pending": null,
-      "inGambit": null
+      "inGambit": null,
+      "replanned": 1
     }
   },
   "allyOrders": {

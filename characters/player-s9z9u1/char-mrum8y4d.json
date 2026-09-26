@@ -437,7 +437,7 @@
     "At Mara Wells' Store in deep night, the band gathers road rations and learns that Millbrook's earth resists shortcuts—the land will not permit close-work passage through the town. Mara directs them northward toward Whistling Woman Post on the long road, naming Halvex Coil as keeper of the Standing Annex and offering the wisdom of trust in the slower way.",
     "The band departs Mara Wells' Store at dawn for Whistling Woman Post, planning a two-hour walk on the spinward road to the relay station, then on to the Standing Annex where Halvex Coil awaits them."
   ],
-  "currentLocationId": "gen-whistling-woman-post",
+  "currentLocationId": "gen-the-made-gate",
   "activeScene": {
     "locationId": "gen-whistling-woman-post",
     "turns": [
@@ -2090,27 +2090,6 @@
     },
     "news": [
       {
-        "day": 5,
-        "worldDay": 88,
-        "text": "The Scouring Hand: A traveler who sheltered briefly in the abandoned settlement moved on before dawn, and someone watching for the Hand noted the name of the road they took — a small piece of information, quietly passed along.",
-        "tier": "ambient",
-        "section": "world",
-        "figureId": "the-scouring-hand"
-      },
-      {
-        "day": 5,
-        "worldDay": 88,
-        "text": "The Archive That Walks turned Cinder the Unshadowed back. Cinder the Unshadowed learned something, which is worse for everyone else.",
-        "tier": "event",
-        "section": "world",
-        "kind": "clash",
-        "winnerId": "the_archive_that_walks",
-        "loserId": "person-daf1562a9d614dae",
-        "outcome": "stopped",
-        "locationId": "the_told_ground",
-        "placedBy": "winnerId"
-      },
-      {
         "day": 7,
         "worldDay": 88,
         "text": "The Glass Assembly has lost people it will not get back.",
@@ -2237,11 +2216,31 @@
         "text": "The Harvest Hand has lost people it will not get back — 12 of them, to its feud with The Wardens of Cairnhold.",
         "tier": "event",
         "section": "world"
+      },
+      {
+        "day": 8,
+        "worldDay": 88,
+        "text": "The Wardens of Cairnhold has lost people it will not get back — 31 of them, to its feud with The Harvest Hand.",
+        "tier": "event",
+        "section": "world"
+      },
+      {
+        "day": 8,
+        "worldDay": 88,
+        "text": "Halvex Coil, the Rewriter turned The Last Choirmistress back. The Last Choirmistress learned something, which is worse for everyone else.",
+        "tier": "event",
+        "section": "world",
+        "kind": "clash",
+        "winnerId": "halvex_coil",
+        "loserId": "the_last_choirmistress",
+        "outcome": "stopped",
+        "locationId": "the_service_ways",
+        "placedBy": "winnerId"
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 2126,
-    "lastSharedReadAt": "2026-09-26T14:05:13.531Z",
+    "lastGenCount": 2127,
+    "lastSharedReadAt": "2026-09-26T15:18:31.285Z",
     "lastTickWorldDay": 88,
     "lastCanonWorldDay": 88,
     "turnsSinceOffer": 0,
@@ -2534,7 +2533,7 @@
         "kind": "decision",
         "premise": "Someone who keeps the count of what has been unmade has begun rounding down, telling themselves the difference is noise — but the rounding has a direction, and it has been consistent for long enough…",
         "cause": "The act of counting the unmade requires a decision about what constitutes a thing distinct enough to be counted, and that threshold has always been left to…",
-        "stage": 18,
+        "stage": 19,
         "seededAtCount": 1917,
         "surfaced": true,
         "fate": "growing",
@@ -2547,7 +2546,7 @@
         "kind": "decision",
         "premise": "The person who holds authority to formally designate what has been unmade as 'resolved' has not done so for anything in years, and the backlog of unresolved unmakings is beginning to press against…",
         "cause": "In the_unmade, the act of resolution is itself an act of power, and the authority-holder has quietly discovered that unresolved things remain partially…",
-        "stage": 14,
+        "stage": 15,
         "seededAtCount": 1968,
         "surfaced": true,
         "fate": "growing",
@@ -2572,7 +2571,7 @@
         "kind": "decision",
         "premise": "Someone has begun quietly counting what no longer exists — cataloguing absences — and has not yet decided whether to share what the count implies.",
         "cause": "The Unmade is defined by what has been lost or undone; its people have long customs around not naming absence directly, because naming draws attention to the…",
-        "stage": 9,
+        "stage": 10,
         "seededAtCount": 2053,
         "surfaced": true,
         "fate": "growing",
@@ -2585,7 +2584,7 @@
         "kind": "decision",
         "premise": "An elder who alone remembers the last time something like the current unraveling occurred has not yet spoken, weighing whether the knowing will help or hasten what is coming.",
         "cause": "In the_unmade, what is lost or dissolved carries weight equal to what remains — silence is understood as a form of preservation, and the elder has lived long…",
-        "stage": 8,
+        "stage": 9,
         "seededAtCount": 2100,
         "surfaced": true,
         "fate": "growing",
@@ -8925,6 +8924,16 @@
           "characterId": "char-mrrzi63o",
           "name": "Brynjar Andyrsson"
         }
+      },
+      "the_last_choirmistress": {
+        "status": "stopped",
+        "sinceWorldDay": 88,
+        "stoppedUntilDay": 91,
+        "stoppedBy": "halvex_coil",
+        "fateBy": {
+          "characterId": "char-mrhs8286",
+          "name": "Silas Weir"
+        }
       }
     },
     "unavenged": {
@@ -9874,7 +9883,7 @@
       "the_doubting_lattice": 84,
       "the_war_ender": 84
     },
-    "updatesToldTo": "2.10.0",
+    "updatesToldTo": "2.10.1",
     "newsLog": [
       {
         "day": 4,
@@ -11281,6 +11290,36 @@
         "worldDay": 88,
         "text": "The game was updated to v2.10.0 — 1 new, 2 fixed.",
         "loggedAt": "2026-09-26T14:05:17.258Z"
+      },
+      {
+        "day": 8,
+        "worldDay": 88,
+        "text": "The Wardens of Cairnhold has lost people it will not get back — 31 of them, to its feud with The Harvest Hand.",
+        "tier": "event",
+        "section": "world",
+        "loggedAt": "2026-09-26T15:18:39.280Z"
+      },
+      {
+        "day": 8,
+        "worldDay": 88,
+        "text": "Halvex Coil, the Rewriter turned The Last Choirmistress back. The Last Choirmistress learned something, which is worse for everyone else.",
+        "tier": "event",
+        "section": "world",
+        "kind": "clash",
+        "winnerId": "halvex_coil",
+        "loserId": "the_last_choirmistress",
+        "outcome": "stopped",
+        "locationId": "the_service_ways",
+        "placedBy": "winnerId",
+        "loggedAt": "2026-09-26T15:18:39.280Z"
+      },
+      {
+        "kind": "update",
+        "section": "world",
+        "version": "2.10.1",
+        "worldDay": 88,
+        "text": "The game was updated to v2.10.1 — 1 new, 2 fixed.",
+        "loggedAt": "2026-09-26T15:18:39.280Z"
       }
     ]
   },
@@ -13499,7 +13538,7 @@
     }
   ],
   "nativeGrantsVersion": 2,
-  "reconcileVersion": 85,
+  "reconcileVersion": 86,
   "gallery": [
     {
       "kind": "portrait",
@@ -14551,8 +14590,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790431795238,
-  "rev": 996,
+  "updatedAt": 1790435919294,
+  "rev": 999,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -16654,7 +16693,7 @@
     "lastDeployDay": 76,
     "lastBeat": "witness_power"
   },
-  "syncedAt": 1790340921709,
+  "syncedAt": 1790431795238,
   "_applyFailures": null,
   "companionMemory": {
     "coil": [
@@ -18466,11 +18505,11 @@
       },
       "lastVerb": "patrol",
       "lastVerbDay": 8,
-      "losses": 1,
+      "losses": 0,
       "lost": {
-        "0": 128
+        "0": 159
       },
-      "lossFrom": "power_harvest_hand"
+      "lossFrom": null
     },
     "power_the_scour": {
       "known": {
@@ -18513,7 +18552,7 @@
       },
       "lastVerb": "expand",
       "lastVerbDay": 8,
-      "wins": 2,
+      "wins": 0,
       "grownHeads": 44,
       "grewDay": 8
     },
@@ -18560,21 +18599,21 @@
     "power_flesh_temple": {
       "lastVerb": "recruit",
       "lastVerbDay": 8,
-      "wins": 2,
+      "wins": 0,
       "grownHeads": 18,
       "grewDay": 5
     },
     "power_vacated_custody": {
       "lastVerb": "expand",
       "lastVerbDay": 8,
-      "wins": 2,
+      "wins": 0,
       "grownHeads": 6,
       "grewDay": 5
     },
     "power_the_ceaseless": {
       "lastVerb": "expand",
       "lastVerbDay": 8,
-      "wins": 0,
+      "wins": 1,
       "grownHeads": 10,
       "grewDay": 5,
       "losses": 0
@@ -18590,7 +18629,7 @@
       "wins": 0,
       "grownHeads": 12,
       "grewDay": 5,
-      "losses": 0,
+      "losses": 1,
       "lost": {
         "0": 48
       },
@@ -18598,7 +18637,7 @@
         "how": "noticed",
         "day": 8
       },
-      "lossFrom": null
+      "lossFrom": "power_cairnhold_wardens"
     },
     "power_the_scouring": {
       "lastVerb": "patrol",

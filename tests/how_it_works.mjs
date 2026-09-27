@@ -30705,6 +30705,87 @@ console.log("\n── §378 · one record, two schemas ──");
     })(), `${RC8.CHARACTER_STEPS.length} steps, top ${RC8.topReconcileVersion("character")}, no two share a number`);
 }
 
+/* ══════════ §379 · SNG-652 §6 — THE STOCK POLICY ══════════ */
+// ⛔ ERIK'S TRADE-OFF, AS A CONTROL: *"run it lean when you're exposed, and stock up when you're walled."* Keep all,
+// keep up to N and sell the rest, or sell what she can each pass.
+//
+// ⛑ TWO NUMBERS MEET IN ONE READER. `sellShareFor` says how much of the store the keeper can MOVE in a pass (Erik's
+// correction, twice: a share is not a price); the policy says how much she is ALLOWED to. `sellPlanFor` composes them,
+// and the TICK CARRIES OUT THAT PLAN rather than computing its own — which is the only reason the card and the pass
+// cannot disagree.
+console.log("\n── §379 · the stock policy ──");
+{
+  const H9 = await import("../engine/holdings.js");
+  const { loadContentHeadless: lch9 } = await import("./headless_content.mjs");
+  const C9 = await lch9();
+  const econ9 = C9.rules.economy, cfg9 = { ...econ9.holdStore, features: econ9.holdFeatures };
+  const at9 = C9.locations.millbrook ? "millbrook" : Object.keys(C9.locations)[0];
+  const mk9 = (over = {}) => ({ id: "h9", kind: "enterprise", condition: "thriving", locationId: at9, yields: "raw_material",
+    steward: "a keeper", store: { raw_material: 40, mech_parts: 10 }, features: [], garrison: [], crew: [], improvements: [], ...over });
+
+  check("§379: ⛑ A HOLD WITH NO POLICY SELLS EXACTLY WHAT IT SOLD YESTERDAY — `sellAll` is the default, so the plan IS the keeper's share and no save changes behaviour by existing",
+    (() => {
+      const h = mk9();
+      const plan = H9.sellPlanFor(h, cfg9);
+      const share = H9.sellShareFor(h, cfg9);
+      const byHand = Object.fromEntries(Object.entries(h.store).map(([g, n]) => [g, Math.round(n * share)]));
+      return H9.stockPolicyFor(h).policy === "sellAll" && H9.stockPolicyFor(h).from === "default"
+        && JSON.stringify(plan.goods) === JSON.stringify(byHand) && plan.share === share;
+    })(), `share ${H9.sellShareFor(mk9(), cfg9)} · ${JSON.stringify(H9.sellPlanFor(mk9(), cfg9).goods)}`);
+
+  check("§379: ⛔ THE THREE POLICIES DO WHAT THEY SAY — keep all sells nothing; keep up to N sells the EXCESS over N and then stops; sell-all sells what she can carry",
+    (() => {
+      const all = H9.sellPlanFor(mk9({ stock: { all: { policy: "keepAll" } } }), cfg9);
+      const upto = H9.sellPlanFor(mk9({ stock: { all: { policy: "keepUpTo", keep: 20 } } }), cfg9);
+      const sell = H9.sellPlanFor(mk9({ stock: { all: { policy: "sellAll" } } }), cfg9);
+      // 40 raw with 20 to keep: the excess is 20 and her capacity is 20, so 20. 10 parts under the line: nothing.
+      return all.units === 0 && !all.any
+        && upto.goods.raw_material === 20 && upto.goods.mech_parts === undefined
+        && sell.units === 25;
+    })());
+
+  check("§379: ⛑ …and a PER-GOOD row wins over the store's, so one good can be held for the cart while the rest is sold",
+    (() => {
+      const h = mk9({ stock: { all: { policy: "keepAll" }, goods: { mech_parts: { policy: "sellAll" } } } });
+      const plan = H9.sellPlanFor(h, cfg9);
+      return H9.stockPolicyFor(h, "mech_parts").from === "goods" && H9.stockPolicyFor(h, "raw_material").from === "all"
+        && plan.goods.mech_parts === 5 && plan.goods.raw_material === undefined;
+    })());
+
+  check("§379: ⛔ AND THE TICK CARRIES OUT THE PLAN, not a second sum of its own — what the card says will be sold is what the pass sells, good for good",
+    (() => {
+      const h = mk9({ stock: { all: { policy: "keepUpTo", keep: 20 } } });
+      const before = { ...h.store };
+      const st = H9.tickStore({ holdings: [h], npcRegistry: {}, purse: { crystal: 0 } }, h,
+        { cfg: cfg9, economy: econ9, regionId: C9.locations[at9]?.regionId || null, dangerLevel: 0, rng: () => 0.99, day: 3, locations: C9.locations, rules: C9.rules });
+      const soldNow = st?.keeperSold?.goods || {};
+      // ⚠️ ASKED AT THE MOMENT OF THE SALE. The pass's YIELD lands in the store before the keeper sells — she sells
+      // from what is there, including what was just made — so the plan to compare against is the plan for
+      // before + made, not for what was in the shed when the pass began. My first form of this check compared two
+      // different stores and called the engine wrong: 24 sold against a plan of 20, on 40 units that were really 48.
+      const atSale = { ...before };
+      for (const y of (st?.yields || [])) if (y?.units > 0) atSale[y.goods] = (Number(atSale[y.goods]) || 0) + y.units;
+      const expect = H9.sellPlanFor({ ...h, store: atSale }, cfg9).goods;
+      return Object.keys(expect).length > 0 && JSON.stringify(soldNow) === JSON.stringify(expect)
+        && before.raw_material === 40 && atSale.raw_material > before.raw_material;
+    })(), "one plan, read twice — and read of the same store both times");
+
+  check("§379: ⚡ …and a STANDING RUN holds everything back, because that is what the run is for — one policy, derived from the route, never a second flag beside it",
+    (() => {
+      const h = mk9({ route: { toId: "the_axis_gate", crew: [] } });
+      const plan = H9.sellPlanFor(h, cfg9);
+      const would = H9.sellPlanFor(h, cfg9, { ignoreRoute: true });
+      return plan.units === 0 && plan.share === 0 && would.units > 0;
+    })());
+
+  check("§379: ⛑ the card reads the SAME function and the GM has a door to it",
+    (() => {
+      const app = rd("app.js");
+      return /sellPlanFor\(h, holdCfgNow\(\)\)/.test(app) && /data-stock-policy/.test(app)
+        && /kind === "stock"/.test(app) && /stockPolicyFor\(h\)/.test(app);
+    })());
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

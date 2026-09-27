@@ -68,7 +68,7 @@ import { enterDeathState, rollRetrieval, pledgeFrom } from "./engine/death.js";
 // duplicated in this codebase, and each time the copies drifted before anyone noticed.
 wireDeathModel(DeathModel);
 import { carriageOf, voyageOf, isMoored, canSail, sailHolding, voyageLine, featureRuling, canBuildOn } from "./engine/carriage.js";
-import { roomOf, roomRefusal, promotionOffer, promoteHolding, trainingAt, mountsAt, healingAt, quarteringOf, vaultOf, chargeOf, chargeWord, depositToVault, withdrawFromVault, holdingFieldSources } from "./engine/holdings.js";   // ⛔ CCODE-429: a hold has room · CCODE-430: a yard trains   // B6b: the holding that moves
+import { roomOf, roomRefusal, promotionOffer, promoteHolding, trainingAt, mountsAt, healingAt, quarteringOf, vaultOf, chargeOf, chargeWord, depositToVault, withdrawFromVault, holdingFieldSources, sellPlanFor, stockPolicyFor} from "./engine/holdings.js";   // ⛔ CCODE-429: a hold has room · CCODE-430: a yard trains   // B6b: the holding that moves
 import { raidRisk, watchReadout, watchOdds, craftPlacementCost, defenceOf, featureCost, featureDef, featureDoes, featureCategory, allFeatures, refreshImprovement, canBeAskedToWork, holdingFactsLine, answerFeatureOffer, holdingLedger, addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, yieldsFor, upkeepFor, appointKeeper, reclaimHolding, improveHolding, setCrew, setGarrison, holdingGround, addFeature, removeFeature, renameHolding, featureKinds, residentsOf, holdingMeaningAura, holdingFieldDelta } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
 import { buildDevReport, unknownOpsIn } from "./engine/devreport.js";   // SNG-559: the Play/Dev instrument
 import { makeField, fieldDataFrom, FIELD_KINDS, KIND_LABEL, MEMBERSHIP } from "./engine/field.js";
@@ -182,7 +182,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.14.2";
+const APP_VERSION = "2.14.3";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -9336,6 +9336,20 @@ function applyTurn(turn, resolution, playerWords = null) {
       // it stands, and nothing moves it yet." This is the thing that moves it, and the prices it reaches are
       // already authored — 8 raw material is 32 in the valley and 115 in the Gearlands.
       // ⚠️ CARRIERS ARE NAMED PEOPLE because Erik ruled they can die, and an anonymous loss is not a consequence.
+      // ✅ SNG-652 §6 — THE GM MAY SET THE STOCK POLICY, per good or for the whole store: `{ op: "stock", policy,
+      // keep, goods }`. ⛑ The per-good form exists in the engine and has no control on the card, deliberately — a
+      // per-good row for every good would bury the one decision that matters.
+      else if (kind === "stock") { const h = (character.holdings || []).find(x => x.id === id);
+        const policy = ["keepAll", "keepUpTo", "sellAll"].includes(String(op.policy)) ? String(op.policy) : null;
+        if (h && policy) {
+          const row = policy === "keepUpTo" ? { policy, keep: Math.max(0, Math.floor(Number(op.keep) || 0)) } : { policy };
+          h.stock = h.stock && typeof h.stock === "object" ? h.stock : {};
+          if (op.goods) { h.stock.goods = h.stock.goods && typeof h.stock.goods === "object" ? h.stock.goods : {}; h.stock.goods[String(op.goods)] = row; }
+          else h.stock.all = row;
+          said(policy === "keepAll" ? `Nothing leaves ${h.name} now — it all waits there.`
+            : policy === "keepUpTo" ? `${h.name} keeps ${row.keep}${op.goods ? ` ${String(op.goods).replace(/_/g, " ")}` : ""} back and sells the rest.`
+            : `${h.name} sells what it can each pass again.`);
+        } }
       // ✅ SNG-654 A — THE GM'S DOOR TO A STANDING RUN, beside the one-off caravan below. `route: null` stops it.
       else if (kind === "route") { const h = (character.holdings || []).find(x => x.id === id);
         const to = op.toId || op.to || op.locationId || null;
@@ -14657,6 +14671,29 @@ function wireHoldingOffers() {
   // writer (`setRoute`), which refuses for the same reasons `sendCaravan` refuses, so a save never carries a standing
   // run to nowhere. ⚠️ The carriers are the hold's own hands: they are who is there, and `crewKeepPerPass` then charges
   // nothing extra for them because `upkeepFor` already pays a hand's wage.
+  // ✅ SNG-652 §6 — the policy is set from anywhere, because everything in §6's table except selling in person works
+  // by sending word to the keeper. ⛑ `keepUpTo` with no number means keep nothing back, which is `sellAll` — so the
+  // number defaults to what is there now, which is the reading a player means by "keep what I have".
+  for (const sel of app.querySelectorAll("[data-stock-policy]")) sel.onchange = () => {
+    const h = (character.holdings || []).find(x => x && x.id === sel.dataset.stockPolicy);
+    if (!h) return;
+    const policy = String(sel.value || "sellAll");
+    if (policy === "sellAll") { if (h.stock) { delete h.stock.all; if (!Object.keys(h.stock).length) delete h.stock; } }
+    else {
+      h.stock = h.stock && typeof h.stock === "object" ? h.stock : {};
+      const keep = policy === "keepUpTo" ? (Number(h.stock.all?.keep) || storeTotal(h)) : 0;
+      h.stock.all = policy === "keepUpTo" ? { policy, keep } : { policy };
+    }
+    saveCharacter(character); again();
+  };
+  for (const inp of app.querySelectorAll("[data-stock-keep]")) inp.onchange = () => {
+    const h = (character.holdings || []).find(x => x && x.id === inp.dataset.stockKeep);
+    if (!h) return;
+    const keep = Math.max(0, Math.floor(Number(inp.value) || 0));
+    h.stock = h.stock && typeof h.stock === "object" ? h.stock : {};
+    h.stock.all = { policy: "keepUpTo", keep };
+    saveCharacter(character); again();
+  };
   for (const btn of app.querySelectorAll("[data-route-set]")) btn.onclick = () => {
     const [holdId, toId] = String(btn.dataset.routeSet || "").split("|");
     const h = (character.holdings || []).find(x => x && x.id === holdId);
@@ -15589,6 +15626,28 @@ function renderHoldingsTab(manageId = null, tab = null) {
           if (!line && !m.cap) return "";
           const atHold = hereNow()?.id === h.locationId;
           return `<div class="hint hold-has hold-armory"><span class="hold-ctl-label">armory</span><span>${esc(line || "empty")}</span>${m.cap ? `<span class="armory-make"><select data-make-gear aria-label="What to make">${Object.entries(A.gear).map(([k, g]) => `<option value="${esc(k)}"${h.forgeOrder?.gear === k ? " selected" : ""}>${esc(g.many)}</option>`).join("")}</select><input type="number" class="armory-count" min="1" max="999" step="1" value="${h.forgeOrder?.left || 10}" data-make-count aria-label="How many"><button class="opt" data-make-order="${esc(h.id)}" title="${esc(`Makes ${m.cap} a pass (${m.by.join(", ")}), from the store's raw material`)}">${h.forgeOrder ? "Change the order" : "Make"}</button>${h.forgeOrder ? `<button class="opt" data-make-stop="${esc(h.id)}">Stop</button>` : ""}</span>` : ""}${atHold && Object.values(armoryOf(h)).some(n => n > 0) ? `<button class="opt" data-sell-gear="${esc(h.id)}" title="Sell gear from the armory, at this place's price for arms, in its own money">Sell gear</button>` : ""}</div>`; })()}
+          ${(() => {
+            // ✅ SNG-652 §6 — THE STOCK POLICY, and the trade-off Erik asked to be able to read: "run it lean when
+            // you're exposed, and stock up when you're walled." ⛑ The plan shown is the SAME function the tick carries
+            // out (`sellPlanFor`), so the card cannot promise a sale the pass does not make.
+            if (!storeTotal(h)) return "";
+            const pol = stockPolicyFor(h);
+            const plan = (() => { try { return sellPlanFor(h, holdCfgNow()); } catch { return null; } })();
+            const said = h.route?.toId
+              ? `held for the cart — a run stands to ${esc(CONTENT.locations?.[h.route.toId]?.name || h.route.toId)}`
+              : plan && plan.any
+                ? `sells ${Object.entries(plan.goods).map(([g, n]) => `${n} ${String(g).replace(/_/g, " ")}`).join(" · ")} a pass`
+                : pol.policy === "keepAll" ? "nothing leaves — it all waits here"
+                : plan && plan.share === 0 ? "nobody here to sell it" : "nothing to sell this pass";
+            return `<div class="hint hold-has hold-stock"><span class="hold-ctl-label">stock</span>
+              <select data-stock-policy="${esc(h.id)}" aria-label="What the keeper does with the stock">
+                <option value="sellAll"${pol.policy === "sellAll" ? " selected" : ""}>sell what she can each pass</option>
+                <option value="keepUpTo"${pol.policy === "keepUpTo" ? " selected" : ""}>keep up to</option>
+                <option value="keepAll"${pol.policy === "keepAll" ? " selected" : ""}>keep all of it</option>
+              </select>
+              ${pol.policy === "keepUpTo" ? `<input type="number" class="armory-count" min="0" max="9999" step="1" value="${pol.keep}" data-stock-keep="${esc(h.id)}" aria-label="How many units to keep"> units` : ""}
+              <span>— ${said}</span></div>`;
+          })()}
           ${B.store || ""}
           <div class="opt-row" style="gap:6px;flex-wrap:wrap;margin-top:8px">
             ${/* ⚠️ §2.3 — an action that needs you STANDING THERE is greyed and SAID, never hidden: "Today they

@@ -251,6 +251,33 @@ for (const k of ["typesWithoutSchema", "typesUnratified", "undeclaredSaveKeys", 
     "a writer that validates against nothing is the craftIds defect with a different field name");
 }
 
+// ⛔ AND NO SCHEMA MAY DECLARE A KEY TWICE. `holding.schema.json` went out with its `route` block written TWICE — a
+// patch whose idempotence guard was computed and then not used — and NOTHING complained: a duplicate key is legal to
+// `JSON.parse`, last one wins, so the file parsed, every record still validated, and 32 suites went green over a schema
+// that said the same thing twice. One of the two was never read, and which one is not something a reader can know.
+//
+// ⚠️ A PARSED OBJECT CANNOT SHOW THIS: by the time you hold it, the second write has replaced the first. So the keys
+// are counted from the TEXT, per object depth — which is what a duplicate actually is.
+{
+  const files = readdirSync(join(root, "schemas")).filter(n => n.endsWith(".json"));
+  const dupes = [];
+  for (const f of files) {
+    const stack = [new Set()];
+    for (const ln of readFileSync(join(root, "schemas", f), "utf8").split(/\r?\n/)) {
+      const key = ln.match(/^\s*"([^"]+)"\s*:/);
+      if (key) {
+        const top = stack[stack.length - 1];
+        if (top.has(key[1])) dupes.push(`${f}: "${key[1]}" twice`);
+        else top.add(key[1]);
+      }
+      for (let i = 0, n = (ln.match(/\{/g) || []).length; i < n; i++) stack.push(new Set());
+      for (let i = 0, n = (ln.match(/\}/g) || []).length; i < n && stack.length > 1; i++) stack.pop();
+    }
+  }
+  check(`no schema declares a key twice (${files.length} file(s))`,
+    dupes.length === 0, dupes.slice(0, 4).join(" · ") || "a duplicate key parses fine, and one of the two is never read");
+}
+
 console.log(`\n${checks} checks · ${failures} FAILURE(S)`);
 if (process.env.SCHEMA_CENSUS_REBASELINE === "1") {
   const out = { _note: "⛔ SNG-658 §3 — per-type schema failures. Counts may only go DOWN. A type at 0 is LOCKED at 0; a `_draft` schema is ratcheted but never locked, because Aevi derived it FROM the corpus and tightening it must not red the build. Re-baseline deliberately with SCHEMA_CENSUS_REBASELINE=1.", _updatedAt: new Date().toISOString().slice(0, 10), counts: now };

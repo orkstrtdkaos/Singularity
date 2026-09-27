@@ -1488,6 +1488,46 @@ export function sellShareFor(holding, cfg, { ignoreRoute = false } = {}) {
   return 0;
 }
 
+/** ⛑ SNG-652 §6 — THE STOCK POLICY, per good or for the whole store: `keepAll`, `keepUpTo` (with `keep`), or
+ *  `sellAll`. A per-good row wins over the store's; absent is `sellAll`, which is exactly what every hold does today.
+ *
+ *  ⚠️ IT IS NOT A SHARE AND NOT A PRICE. `keeperSells` says how much of the store a keeper can MOVE in a pass
+ *  (Erik's correction, twice); this says how much she is ALLOWED to. The two compose — see `sellPlanFor`. PURE. */
+export function stockPolicyFor(holding, goods = null) {
+  const s = holding?.stock && typeof holding.stock === "object" ? holding.stock : null;
+  const per = goods && s?.goods && typeof s.goods === "object" ? s.goods[goods] : null;
+  const row = per || s?.all || null;
+  const named = String(row?.policy || "");
+  const policy = ["keepAll", "keepUpTo", "sellAll"].includes(named) ? named : "sellAll";
+  const keep = Number.isFinite(Number(row?.keep)) ? Math.max(0, Math.floor(Number(row.keep))) : 0;
+  return { policy, keep, from: per ? "goods" : (s?.all ? "all" : "default") };
+}
+
+/** ⛔ WHAT THE KEEPER SELLS THIS PASS, GOOD BY GOOD — the one plan the tick carries out and the card shows. Two
+ *  numbers meet here: her CAPACITY (`sellShareFor` × what is there) and what the POLICY permits. She sells the
+ *  smaller.
+ *
+ *  ⚡ `keepUpTo` sells the excess over `keep`, so a hold told to keep 20 sells down toward 20 and then stops — which
+ *  is the trade-off Erik asked to be able to read: stock is worth more on a caravan and worth less in a shed a raid
+ *  can reach. ⚠️ A hold with no policy sells its share, exactly as it does today. PURE. */
+export function sellPlanFor(holding, cfg = null, { ignoreRoute = false } = {}) {
+  const share = sellShareFor(holding, cfg, { ignoreRoute });
+  const goods = {};
+  let units = 0;
+  for (const [g, n] of Object.entries(holding?.store || {})) {
+    const have = Number(n) || 0;
+    if (!(have > 0)) continue;
+    const p = stockPolicyFor(holding, g);
+    const capacity = Math.round(have * share);
+    const allowed = p.policy === "keepAll" ? 0
+      : p.policy === "keepUpTo" ? Math.max(0, have - p.keep)
+      : have;
+    const sell = Math.max(0, Math.min(capacity, allowed));
+    if (sell > 0) { goods[g] = sell; units += sell; }
+  }
+  return { share, goods, units, any: units > 0 };
+}
+
 export function tickStore(character, holding, { cfg = null, economy = null, regionId = null, dangerLevel = 0, rng = Math.random, day = null, density = null, meaning = 0, people = {}, npcCfg = {}, locations = {}, rules = {}, kitDeps = null, power = null } = {}) {
   // ⛔ SNG-657 §3 — `power` WAS PASSED HERE AND DESTRUCTURED AWAY. `worldtick` has computed
   // `raiderPowerAt(loc.id, …)` and handed it to this function since SNG-634 C1, and the signature had no such
@@ -1527,15 +1567,20 @@ export function tickStore(character, holding, { cfg = null, economy = null, regi
   // and only a keeper lifts the condition floor — but a place with people in it is no longer a place that
   // earns nothing. ⛔ AND A PLACE WITH NOBODY IN IT STILL EARNS NOTHING, which is the part of the old rule
   // that was right: an empty hold has nobody to carry anything to market.
+  // ⚠️ ASKED OF THE PLAN, not of the share alone: a hold told to keep everything has a keeper who CAN sell and is
+  // not selling, and entering this block to sell nothing would leave `keeperSold` unset in a way that reads the same
+  // as having nobody there.
   if (sellShareFor(holding, cfg) > 0 && regionId) {
     // ⛑ HALF, MEASURED. Every share fixes the drain; the choice is between a hold that pays and a hold with
     // stock worth carrying. Over ten passes of the Fell Pell: 0.9 nets +256 and leaves 1 unit (14 crystal in
     // the Gearlands); 0.5 nets +224 and leaves 9 (130); 0.25 nets +148 and leaves 28 (403). ⚑ Half is where
     // the hold is clearly profitable AND the surplus is worth a caravan — which is the whole point of both.
-    const share = sellShareFor(holding, cfg);   // CCODE-470b: the same number the card projects
+    // ⛑ SNG-652 §6 — THE PLAN, NOT A SECOND SUM. `sellPlanFor` composes the keeper's capacity with the stock policy,
+    // and the card reads the same function — which is the whole reason `keeperSold` and the panel agree at all.
+    const plan = sellPlanFor(holding, cfg);
     const sold = {}; let earned = 0;
     for (const [g, n] of Object.entries(holding.store || {})) {
-      const units = Math.round((Number(n) || 0) * share);
+      const units = Number(plan.goods[g]) || 0;
       if (units <= 0) continue;
       const w = unitWorth(g, { economy, regionId, cfg });
       if (!w) continue;

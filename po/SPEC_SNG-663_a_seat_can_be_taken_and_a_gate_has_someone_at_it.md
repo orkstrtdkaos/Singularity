@@ -88,8 +88,18 @@ gate, or charging passage there) has two costs:
    holder's gate.
 3. **The Made Gate is the exception.** It was permitted. It doesn't count as holding a Lattice gate.
 
-⬜ **CCode, measure first:** does any power or save hold a gate location today? If so, name them before this ships,
-so the keepers don't arrive on day one without anybody having chosen it.
+**Measured (Aevi, on origin): 9 powers `holds` a location that carries a waygate today.** Four are settlements that get a
+yard in §2b (the Grand Lattice at tier_seven, the Hollow Court at the_bargain_gate, the Seraphic Orders at choirheight,
+the Glass Assembly at the_lensward), so the gate moves out from under them. Five are gates in the wild: the Echo
+Bridge at echo_river_crossing, the Ender Host at the_marchward, the Pressureholt Schedule at the_gearlands_verge,
+the Long Choir at the_thinning, the Deepwood Moot at dw_the_thinedge.
+
+**So "holding a gate" is not "holding the place it stands in."** A power that holds the ground around an open gate,
+and lets anyone through, is not holding the gate: no stigma, no keepers. **Holding the gate** is an act on the arch
+itself: closing it, charging for passage through it, or garrisoning it to decide who passes. None of the nine does
+that today, so nothing wakes on day one. ⬜ **CCode:** make it a flag the act sets (a power's `gateHeld`, a hold's
+gate garrison or a toll on the arch), never derived from `holds`. The Ender Host (cruel, `raid`) at the Marchward is
+the likeliest power to take one first, and when a generated power's verbs would do it, the news should say so.
 
 ### §2d — The market charges for the right to sell
 
@@ -115,8 +125,9 @@ holder). What it does, per Erik's "that's interesting":
 ⬜ Erik hasn't picked among these; this is my default set. Word from your wardens selling a load's route to
 raiders is held back as a later layer.
 
-**Content (mine, after the reader):** `marketFee` and `corrupt` on the powers that hold markets, and a line in each
-one's voice for the card.
+**Content (mine, staged):** `po/staged_content/SNG-663_market_fees.json`: 11 market-holding powers with a fee, `corrupt`
+(the Undercount and the Firstsight Barony only) and a line in each one's voice. Yards: `SNG-663_gate_yards.json` (15).
+Keepers: `SNG-663_lattice_keepers.json` (class + 4 rungs, all `random: false`).
 
 **Gates:** a gate leg is never charged · a gate raid lands in the yard, never the town · a released gate stops the
 keepers within one tick · the Made Gate never draws keepers · the card's fee and the run's fee agree · a corrupt

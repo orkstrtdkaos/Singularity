@@ -1,0 +1,164 @@
+{
+  "schemaVersion": 1,
+  "id": "SNG-652_trade_companies_and_traders",
+  "kind": "staged_content",
+  "note": "SNG-652 §6, in CCode's record shapes (CCODE-543). Four companies spread so the Crossing reaches everywhere, the Hundred Markets reaches the centre and the foothills, Keelmouth reaches by water, and the Bargain Gate reaches anywhere at a price. SNG-652 §6 visiting traders. buys = what a power's factors will pay per unit, in shards, above the settled rate; offersInBarter = what they'll trade instead of coin. Each power wants what its own land can't make and offers what it makes. A trader visits a hold with a trading post or market (CCode: `market`'s family is `people` today and draws no one; give it a `draws: [\"traders\"]` or a trading_post kind).",
+  "companies": [
+    {
+      "id": "company_of_the_hub_yard",
+      "name": "the Hub Yard Porters",
+      "kind": "trade_company",
+      "cut": 0.22,
+      "operatesFrom": [
+        "the_crossing"
+      ],
+      "guards": 6,
+      "knowsGates": true,
+      "standing": "neutral",
+      "what": "The Crossing's porters' guild, which has walked the world's goods out of the Hub Yard for longer than the city has had walls. They carry anything, anywhere the network reaches, and they take their cut in a ledger older than any power. Nobody tolls the porters twice."
+    },
+    {
+      "id": "company_of_the_low_market",
+      "name": "the Hundred-Market Carters",
+      "kind": "trade_company",
+      "cut": 0.18,
+      "operatesFrom": [
+        "the_hundred_markets"
+      ],
+      "reaches": [
+        "the_center",
+        "valley",
+        "foothill_hardline",
+        "the_echo_vale"
+      ],
+      "guards": 3,
+      "knowsGates": true,
+      "standing": "neutral",
+      "answersTo": "power_undercount",
+      "what": "Cheap, fast and not entirely honest. The carters answer to the Undercount, so a load in their wagons is safe from the Undercount's own and from anyone the Undercount has an arrangement with, which is most people. It is also counted, by someone, at every stop."
+    },
+    {
+      "id": "company_of_keelmouth",
+      "name": "the Keelmouth Slip Lighters",
+      "kind": "trade_company",
+      "cut": 0.2,
+      "operatesFrom": [
+        "keelmouth"
+      ],
+      "guards": 4,
+      "knowsGates": false,
+      "standing": "neutral",
+      "answersTo": "power_keelmouth_slip",
+      "water": true,
+      "what": "Flat-bottomed lighters and the families who work them, carrying anything that can go by water at water's speed. They don't use the gates and don't trust them. They are kind, and slow on land, and the best on the rivers there are."
+    },
+    {
+      "id": "company_of_the_asking_floor",
+      "name": "the Asking Floor Factors",
+      "kind": "trade_company",
+      "cut": 0.25,
+      "operatesFrom": [
+        "the_bargain_gate"
+      ],
+      "guards": 5,
+      "knowsGates": true,
+      "standing": "neutral",
+      "answersTo": "power_hollow_court",
+      "what": "The Abyssal Choir's factors carry your goods exactly as far as you paid for, exactly as safely as they promised, and they tell you the cost in public before you agree. They are the most expensive company in the world and they have never once lost a load they undertook."
+    }
+  ],
+  "traders": {
+    "power_harvest_hand": {
+      "buys": {
+        "living_stock": 7,
+        "medicines": 5
+      },
+      "offersInBarter": [
+        "raw_material"
+      ]
+    },
+    "power_cairnhold_wardens": {
+      "buys": {
+        "medicines": 6,
+        "documents": 4
+      },
+      "offersInBarter": [
+        "cut_stone"
+      ]
+    },
+    "power_keelmouth_slip": {
+      "buys": {
+        "raw_material": 5,
+        "instruments": 5
+      },
+      "offersInBarter": [
+        "living_stock"
+      ]
+    },
+    "power_glass_assembly": {
+      "buys": {
+        "cut_stone": 6,
+        "instruments": 6
+      },
+      "offersInBarter": [
+        "worked_light"
+      ]
+    },
+    "power_grand_lattice": {
+      "buys": {
+        "living_stock": 6,
+        "raw_material": 5
+      },
+      "offersInBarter": [
+        "documents",
+        "instruments"
+      ]
+    },
+    "power_hollow_court": {
+      "buys": {
+        "documents": 7,
+        "worked_light": 6
+      },
+      "offersInBarter": [
+        "medicines"
+      ]
+    },
+    "power_seraphic_orders": {
+      "buys": {
+        "medicines": 5,
+        "raw_material": 4
+      },
+      "offersInBarter": [
+        "documents"
+      ]
+    },
+    "power_scaffold_court": {
+      "buys": {
+        "cut_stone": 8,
+        "mech_parts": 7
+      },
+      "offersInBarter": [
+        "instruments"
+      ]
+    },
+    "power_millbrook_council": {
+      "buys": {
+        "mech_parts": 5,
+        "medicines": 5
+      },
+      "offersInBarter": [
+        "living_stock",
+        "raw_material"
+      ]
+    },
+    "power_undercount": {
+      "buys": {
+        "precursor_salvage": 9,
+        "arms": 7
+      },
+      "offersInBarter": [
+        "documents"
+      ]
+    }
+  }
+}

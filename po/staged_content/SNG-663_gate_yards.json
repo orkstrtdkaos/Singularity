@@ -1,0 +1,925 @@
+{
+  "schemaVersion": 1,
+  "id": "SNG-663_gate_yards",
+  "kind": "staged_content",
+  "note": "SNG-663 §2b. One yard per waygate that stands at a settlement (15). Each takes the gate: `waygate`/`waygateTier` (and the Crossing's `waygateHub`) move from `_movesGateFrom` to the yard, the town keeps a short leg (`_yardLeg`), and `connections` put the yard on the network (the_axis_gate) and beside its town. Apply with the reader, never before: a yard with the flag while the town still has it would be two gates.",
+  "yards": [
+    {
+      "schemaVersion": 1,
+      "id": "bedrock_gate_yard",
+      "name": "the Weighed Arch",
+      "regionId": "the_given_land",
+      "communityId": "mason.bedrock",
+      "parentId": "bedrock",
+      "tier": "site",
+      "tags": [
+        "waygate",
+        "gate_yard",
+        "mason",
+        "concrete",
+        "stone",
+        "craft"
+      ],
+      "connections": [
+        "bedrock",
+        "the_axis_gate"
+      ],
+      "descriptionSeed": "The Masons put their gate a mile out and built a yard round it, because a thing that arrives from nowhere has not been weighed. Nothing enters Bedrock until the weigh-house has written it down. They are not suspicious of you; they are suspicious of anything that has not been measured, and you have not been yet.",
+      "appearance": "A square yard of dressed stone around the gate arch, walled to shoulder height, every flag numbered. A weigh-house on the town side with a scale big enough for a cart and a ledger clerk who writes down what came through, how heavy it was, and what it said its business was.",
+      "encounterFlavor": "A clerk weighing a crate twice because the first number was inconvenient; a Mason running a palm along the gate arch and frowning at a join nobody made; a Figurist envoy asking to be weighed in a unit that does not exist.",
+      "dangerLevel": 2,
+      "spectrum": {
+        "concrete_abstract": -0.7,
+        "body_mind": -0.3,
+        "chaos_order": 0.2
+      },
+      "axisVector": [
+        0,
+        0,
+        0,
+        0,
+        -0.7,
+        0,
+        0.2,
+        0,
+        0,
+        0,
+        -0.3,
+        0
+      ],
+      "poleIntensity": {
+        "concrete": 0.7,
+        "body": 0.3,
+        "order": 0.2
+      },
+      "worldPos": {
+        "colatitude": 79.7,
+        "longitude": 115,
+        "depth": 0
+      },
+      "waygate": true,
+      "waygateTier": 2,
+      "_movesGateFrom": "bedrock",
+      "_yardLeg": {
+        "to": "bedrock",
+        "hours": 1.5
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "cairnhold_gate_yard",
+      "name": "the Gate Cairn",
+      "regionId": "the_palelands",
+      "communityId": "ashwarden.cairnhold",
+      "parentId": "cairnhold",
+      "tier": "site",
+      "tags": [
+        "waygate",
+        "gate_yard",
+        "ashwarden",
+        "death",
+        "grey",
+        "tended"
+      ],
+      "connections": [
+        "cairnhold",
+        "the_axis_gate"
+      ],
+      "descriptionSeed": "The Ashwardens keep their gate where they keep everything that crosses from one state to another: outside, tended, with a lamp. What comes through walks the cairn-path in, slowly, past the dead, and by the time it reaches the terraces the wardens know what it is. Nobody has ever been turned away; a few have turned back.",
+      "appearance": "Out on the heath at the end of a cairn-row, a low stone ring round the gate with a warden's hut and a lamp that never goes out. A grey path of flat stones leads the two miles in to Cairnhold between the rows.",
+      "encounterFlavor": "A warden asking your name and writing it on a slate she will wipe tonight; a mourner waiting at the arch for someone who is not coming through; the lamp guttering once, for no reason, when a stranger steps out.",
+      "dangerLevel": 2,
+      "spectrum": {
+        "death_life": -0.7,
+        "violence_peace": 0.4,
+        "falsehood_truth": 0.5,
+        "emotional_logical": -0.2
+      },
+      "axisVector": [
+        0,
+        0.5,
+        0,
+        0.4,
+        0,
+        0,
+        0,
+        0,
+        -0.7,
+        0,
+        0,
+        0
+      ],
+      "poleIntensity": {
+        "death": 0.7,
+        "truth": 0.5,
+        "peace": 0.4
+      },
+      "worldPos": {
+        "colatitude": 75.7,
+        "longitude": 74,
+        "depth": 0
+      },
+      "waygate": true,
+      "waygateTier": 3,
+      "_movesGateFrom": "cairnhold",
+      "_yardLeg": {
+        "to": "cairnhold",
+        "hours": 1.5
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "choirheight_gate_yard",
+      "name": "the Lower Court",
+      "regionId": "the_ascent",
+      "communityId": "seraphic.choirheight",
+      "parentId": "choirheight",
+      "tier": "site",
+      "tags": [
+        "waygate",
+        "gate_yard",
+        "seraphic",
+        "angelic",
+        "tiered",
+        "sacred"
+      ],
+      "connections": [
+        "choirheight",
+        "the_axis_gate"
+      ],
+      "descriptionSeed": "The Seraphic Orders receive every arrival from below, deliberately. The Lower Court is where you are seen before you are admitted: the choir sings, the sisters watch who flinches, and a mercy-reader comes down the stair to ask what you have come for. You may go up. You will be looked at first.",
+      "appearance": "A walled court at the foot of the lowest spire, paved in white and open to the sky, the gate arch at its centre. Choristers sing the hours from a gallery above it, and every arrival hears them before anything else.",
+      "encounterFlavor": "A sister kneeling to wash the feet of a carter who did not ask; a chorister stopping mid-phrase when an armed band steps through; the gallery going silent, all at once, because something came through the gate that the hymn did not know.",
+      "dangerLevel": 2,
+      "spectrum": {
+        "demonic_angelic": 0.7,
+        "chaos_order": 0.4,
+        "dark_light": 0.3
+      },
+      "axisVector": [
+        0,
+        0,
+        0.7,
+        0,
+        0,
+        0,
+        0.4,
+        0.3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "poleIntensity": {
+        "angelic": 0.7,
+        "order": 0.4,
+        "light": 0.3
+      },
+      "worldPos": {
+        "colatitude": 83.7,
+        "longitude": 216,
+        "depth": 0
+      },
+      "waygate": true,
+      "waygateTier": 3,
+      "_movesGateFrom": "choirheight",
+      "_yardLeg": {
+        "to": "choirheight",
+        "hours": 1.5
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "cloudform_gate_yard",
+      "name": "the Arrival Figure",
+      "regionId": "the_pattern_reach",
+      "communityId": "figurist.cloudform",
+      "parentId": "cloudform",
+      "tier": "site",
+      "tags": [
+        "waygate",
+        "gate_yard",
+        "figurist",
+        "abstract",
+        "strange",
+        "sacred"
+      ],
+      "connections": [
+        "cloudform",
+        "the_axis_gate"
+      ],
+      "descriptionSeed": "The Figurists built a yard round their gate because arrivals kept stepping through into places that had not agreed to have them. Now you arrive in a figure drawn to receive you, and a courteous Figurist explains which of the paths is real today. Armies find this very difficult.",
+      "appearance": "A plaza that is not quite square, around a gate arch that is not quite where the plaza's centre should be. Paths lead off toward the city at angles that suggest several different cities. One of them is right.",
+      "encounterFlavor": "A courier walking the wrong path for the third time, cheerfully; a guide drawing the way in on your palm in chalk that does not rub off; a cart that arrived at an angle and has to be persuaded out of it.",
+      "dangerLevel": 3,
+      "spectrum": {
+        "concrete_abstract": 0.7,
+        "mechanical_spiritual": 0.4,
+        "space_time": 0.2
+      },
+      "axisVector": [
+        0,
+        0,
+        0,
+        0,
+        0.7,
+        0.4,
+        0,
+        0,
+        0,
+        0.2,
+        0,
+        0
+      ],
+      "poleIntensity": {
+        "abstract": 0.7,
+        "spiritual": 0.4,
+        "time": 0.2
+      },
+      "worldPos": {
+        "colatitude": 87.7,
+        "longitude": 303,
+        "depth": 0
+      },
+      "waygate": true,
+      "waygateTier": 2,
+      "_movesGateFrom": "cloudform",
+      "_yardLeg": {
+        "to": "cloudform",
+        "hours": 1.5
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "the_axiom_gate_yard",
+      "name": "the Premise Yard",
+      "regionId": "the_reasoned_hold",
+      "communityId": "syllogist.axiom",
+      "parentId": "the_axiom",
+      "tier": "site",
+      "tags": [
+        "waygate",
+        "gate_yard",
+        "syllogist",
+        "logical",
+        "order"
+      ],
+      "connections": [
+        "the_axiom",
+        "the_axis_gate"
+      ],
+      "descriptionSeed": "In the Axiom, nothing is admitted until it has been stated. The Premise Yard is where you say what you are and why you have come, and a Syllogist writes it down and checks it against itself. A premise that holds is admitted. One that contradicts itself is courteously asked to try again.",
+      "appearance": "A rectangular yard of grey stone, perfectly ordered, the gate arch at one end and a gatehouse at the other with a single door. Above the door, carved: STATE YOUR PREMISE.",
+      "encounterFlavor": "A trader restating her business for the fourth time until it is consistent; a Syllogist apologising for having been wrong about you; an armed man trying to explain that he is a merchant, and the clerk gently pointing out the swords.",
+      "dangerLevel": 2,
+      "spectrum": {
+        "emotional_logical": 0.7,
+        "chaos_order": 0.4,
+        "concrete_abstract": 0.2
+      },
+      "axisVector": [
+        0.7,
+        0,
+        0,
+        0,
+        0.2,
+        0,
+        0.4,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "poleIntensity": {
+        "logical": 0.7,
+        "order": 0.4,
+        "abstract": 0.2
+      },
+      "worldPos": {
+        "colatitude": 81.7,
+        "longitude": 172,
+        "depth": 0
+      },
+      "waygate": true,
+      "waygateTier": 2,
+      "_movesGateFrom": "the_axiom",
+      "_yardLeg": {
+        "to": "the_axiom",
+        "hours": 1.5
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "the_bargain_gate_gate_yard",
+      "name": "the Asking Floor",
+      "regionId": "the_descent",
+      "communityId": "abyssal.gate",
+      "parentId": "the_bargain_gate",
+      "tier": "site",
+      "tags": [
+        "waygate",
+        "gate_yard",
+        "abyssal",
+        "demonic",
+        "trade",
+        "social"
+      ],
+      "connections": [
+        "the_bargain_gate",
+        "the_axis_gate"
+      ],
+      "descriptionSeed": "The city is named for the bargain it makes with whatever comes through its gate, and the bargain is struck here, outside the walls, in public. You name what you want; they name what it costs. Everything that enters the Bargain Gate has agreed to something first. Armies are offered terms. Most take them.",
+      "appearance": "A forecourt of red stone before the horned city walls, the gate arch at its back, stalls and offices round its edge with every price written on the wall in letters a yard high. Nothing here is hidden, including what the Choir wants from you.",
+      "encounterFlavor": "A Choir-factor reading your want off your face before you open your mouth; a price-board updated by hand as a caravan steps through; a band of raiders arriving, hearing the terms read aloud, and paying them.",
+      "dangerLevel": 3,
+      "spectrum": {
+        "demonic_angelic": -0.7,
+        "falsehood_truth": 0.3,
+        "emotional_logical": -0.2
+      },
+      "axisVector": [
+        -0.2,
+        0.3,
+        -0.7,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "poleIntensity": {
+        "demonic": 0.7,
+        "truth": 0.3,
+        "emotional": 0.2
+      },
+      "worldPos": {
+        "colatitude": 78.7,
+        "longitude": 29,
+        "depth": 0
+      },
+      "waygate": true,
+      "waygateTier": 3,
+      "_movesGateFrom": "the_bargain_gate",
+      "_yardLeg": {
+        "to": "the_bargain_gate",
+        "hours": 1.5
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "the_crossing_gate_yard",
+      "name": "the Hub Yard",
+      "regionId": "the_center",
+      "communityId": "center.crossing",
+      "parentId": "the_crossing",
+      "tier": "site",
+      "tags": [
+        "waygate",
+        "gate_yard",
+        "center",
+        "cosmopolitan",
+        "neutral",
+        "sacred"
+      ],
+      "connections": [
+        "the_crossing",
+        "the_axis_gate"
+      ],
+      "descriptionSeed": "Every road in the network comes home here, and the Crossing learned long ago not to let them come home into its streets. The Hub Yard is where the world arrives: traders from every pole, pilgrims, delegations, all sorted, registered and walked in by porters who know the city. Nobody controls the arch. The Crossing controls the yard, and that has always been enough.",
+      "appearance": "A great round yard at the edge of the city, the oldest gate arch in the world at its centre and the lattice lines running out from under it to every other gate. Waystations, porters, a registry office, and more languages than anywhere else on the map.",
+      "encounterFlavor": "A registry clerk switching between four languages in one sentence; porters bidding for a caravan before its last cart is through; two delegations from opposite poles pointedly not looking at each other across the yard.",
+      "dangerLevel": 2,
+      "spectrum": {
+        "violence_peace": 0.1,
+        "chaos_order": -0.1,
+        "death_life": 0.1,
+        "mechanical_spiritual": 0,
+        "concrete_abstract": 0
+      },
+      "axisVector": [
+        0,
+        0,
+        0,
+        0.1,
+        0,
+        0,
+        -0.1,
+        0,
+        0.1,
+        0,
+        0,
+        0
+      ],
+      "poleIntensity": {
+        "peace": 0.1,
+        "order": -0.1,
+        "life": 0.1,
+        "spiritual": 0,
+        "concrete": 0
+      },
+      "worldPos": {
+        "colatitude": 0,
+        "longitude": 0,
+        "depth": 0
+      },
+      "waygate": true,
+      "waygateTier": 1,
+      "waygateHub": true,
+      "_movesGateFrom": "the_crossing",
+      "_yardLeg": {
+        "to": "the_crossing",
+        "hours": 1.5
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "the_forge_eternal_gate_yard",
+      "name": "the Unfinished Yard",
+      "regionId": "the_making",
+      "communityId": "wright.forge",
+      "parentId": "the_forge_eternal",
+      "tier": "site",
+      "tags": [
+        "waygate",
+        "gate_yard",
+        "wright",
+        "creation",
+        "craft",
+        "unfinished"
+      ],
+      "connections": [
+        "the_forge_eternal",
+        "the_axis_gate"
+      ],
+      "descriptionSeed": "The Wrights built their gate a yard, then a better one, then started on a third before the second was done. Arrivals step through into constant work, and are usually handed something to carry in. It is the only reception yard in the world that has been attacked and was improved by the damage.",
+      "appearance": "A yard that is being built. Scaffolds round the gate arch, half-laid paving, a gatehouse with three walls and plans for a fourth. The Wrights have been improving it for sixty years and have never once finished it.",
+      "encounterFlavor": "A Wright pressing a hod of bricks into a stranger's arms; a new wing of the gatehouse going up while you watch; a carter complaining that the road in was not here yesterday, which is true.",
+      "dangerLevel": 2,
+      "spectrum": {
+        "destruction_creation": 0.7,
+        "chaos_order": -0.3,
+        "mechanical_spiritual": -0.2
+      },
+      "axisVector": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        -0.2,
+        -0.3,
+        0,
+        0,
+        0,
+        0,
+        0.7
+      ],
+      "poleIntensity": {
+        "creation": 0.7,
+        "chaos": 0.3,
+        "mechanical": 0.2
+      },
+      "worldPos": {
+        "colatitude": 79.7,
+        "longitude": 236,
+        "depth": 0
+      },
+      "waygate": true,
+      "waygateTier": 2,
+      "_movesGateFrom": "the_forge_eternal",
+      "_yardLeg": {
+        "to": "the_forge_eternal",
+        "hours": 1.5
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "the_hall_of_mirrors_gate_yard",
+      "name": "the Glass Porch",
+      "regionId": "the_veiled_reach",
+      "communityId": "veilwright.hall",
+      "parentId": "the_hall_of_mirrors",
+      "tier": "site",
+      "tags": [
+        "waygate",
+        "gate_yard",
+        "veilwright",
+        "falsehood",
+        "strange",
+        "social"
+      ],
+      "connections": [
+        "the_hall_of_mirrors",
+        "the_axis_gate"
+      ],
+      "descriptionSeed": "The Veilwrights receive you lavishly, and outside, and with mirrors. By the time you reach the end of the Glass Porch you have been looked at from every side, and so has everything you brought. They will tell you frankly that the welcome is a performance. It is also a very good look at you.",
+      "appearance": "A long porch of mirrors before the city, the gate arch at one end. Every arrival sees themselves from nine angles before they see anyone else, and the hosts are already walking toward them with open arms.",
+      "encounterFlavor": "A host embracing a stranger by name, and the name being wrong on purpose; a mirror that shows a caravan one cart longer than it is; an armed party arriving to find their reflections already surrounded.",
+      "dangerLevel": 3,
+      "spectrum": {
+        "falsehood_truth": -0.7,
+        "concrete_abstract": 0.3,
+        "dark_light": -0.2
+      },
+      "axisVector": [
+        0,
+        -0.7,
+        0,
+        0,
+        0.3,
+        0,
+        0,
+        -0.2,
+        0,
+        0,
+        0,
+        0
+      ],
+      "poleIntensity": {
+        "falsehood": 0.7,
+        "abstract": 0.3,
+        "dark": 0.2
+      },
+      "worldPos": {
+        "colatitude": 80.7,
+        "longitude": 9,
+        "depth": 0
+      },
+      "waygate": true,
+      "waygateTier": 3,
+      "_movesGateFrom": "the_hall_of_mirrors",
+      "_yardLeg": {
+        "to": "the_hall_of_mirrors",
+        "hours": 1.5
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "the_scour_gate_yard",
+      "name": "the Cleared Ground",
+      "regionId": "the_unmade",
+      "communityId": "unmaker.scour",
+      "parentId": "the_scour",
+      "tier": "site",
+      "tags": [
+        "waygate",
+        "gate_yard",
+        "unmaker",
+        "destruction",
+        "craft"
+      ],
+      "connections": [
+        "the_scour",
+        "the_axis_gate"
+      ],
+      "descriptionSeed": "The Unmakers keep nothing near their gate. They cleared the ground on purpose: whatever steps through arrives on bare stone in plain sight, with nothing to hide behind and nothing to take. What should be here stays. What should not is ended, well and quickly, before it reaches the city.",
+      "appearance": "A wide space swept down to bare stone round the gate arch, nothing standing on it, the city's demolition-towers a mile off. Ash-marked stakes show where things were once built and deliberately removed.",
+      "encounterFlavor": "An Unmaker marking a stake where a trader's tent stood last night; the wind across the cleared ground carrying nothing at all; a raiding party stepping out onto the stone and understanding, too late, why it is empty.",
+      "dangerLevel": 3,
+      "spectrum": {
+        "destruction_creation": -0.7,
+        "chaos_order": -0.2,
+        "death_life": -0.2
+      },
+      "axisVector": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        -0.2,
+        0,
+        -0.2,
+        0,
+        0,
+        -0.7
+      ],
+      "poleIntensity": {
+        "destruction": 0.7,
+        "chaos": 0.2,
+        "death": 0.2
+      },
+      "worldPos": {
+        "colatitude": 76.7,
+        "longitude": 67,
+        "depth": 0
+      },
+      "waygate": true,
+      "waygateTier": 2,
+      "_movesGateFrom": "the_scour",
+      "_yardLeg": {
+        "to": "the_scour",
+        "hours": 1.5
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "the_slow_hour_gate_yard",
+      "name": "the Waiting Hall",
+      "regionId": "the_kept_reach",
+      "communityId": "hourkeeper.slowhour",
+      "parentId": "the_slow_hour",
+      "tier": "site",
+      "tags": [
+        "waygate",
+        "gate_yard",
+        "hourkeeper",
+        "time",
+        "archive",
+        "strange"
+      ],
+      "connections": [
+        "the_slow_hour",
+        "the_axis_gate"
+      ],
+      "descriptionSeed": "The Hourkeepers do not hurry anything, least of all what comes through the gate. You wait in the hall until your hour, which the keeper at the desk will tell you, and it is usually not long. The keeper sometimes greets people by name before they step through. Nobody has ever arrived in the Slow Hour unexpected.",
+      "appearance": "A long hall of benches under clock-faces that show different hours, the gate arch at the far end. An Hourkeeper sits at a desk by the city door with a book of arrivals, some of whom have not come yet.",
+      "encounterFlavor": "A keeper looking up from the book and saying 'you are early' to someone who has never been here; a clock-face stopping as a stranger passes it; a courier who arrived tomorrow, asking what day it is.",
+      "dangerLevel": 3,
+      "spectrum": {
+        "space_time": 0.7,
+        "chaos_order": 0.4,
+        "emotional_logical": 0.2
+      },
+      "axisVector": [
+        0.2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0.4,
+        0,
+        0,
+        0.7,
+        0,
+        0
+      ],
+      "poleIntensity": {
+        "time": 0.7,
+        "order": 0.4,
+        "logical": 0.2
+      },
+      "worldPos": {
+        "colatitude": 77.7,
+        "longitude": 312,
+        "depth": 0
+      },
+      "waygate": true,
+      "waygateTier": 2,
+      "_movesGateFrom": "the_slow_hour",
+      "_yardLeg": {
+        "to": "the_slow_hour",
+        "hours": 1.5
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "the_unblinking_stone_gate_yard",
+      "name": "the Plain Yard",
+      "regionId": "the_stark_reach",
+      "communityId": "verist.stone",
+      "parentId": "the_unblinking_stone",
+      "tier": "site",
+      "tags": [
+        "waygate",
+        "gate_yard",
+        "verist",
+        "truth",
+        "stark"
+      ],
+      "connections": [
+        "the_unblinking_stone",
+        "the_axis_gate"
+      ],
+      "descriptionSeed": "The Verists will not let you in on a pleasantry. At the Plain Yard you are asked what you came for, and you answer, and they know whether it is so. Traders learn to say exactly what they are carrying. Liars wait in the yard, sometimes for a long time, until they are ready to say it plainly or go back through.",
+      "appearance": "A bare stone yard with a wall and a gate arch and nothing else: no ornament, no benches, no shade. A Verist stands at the city door and asks one question of everyone who comes through.",
+      "encounterFlavor": "A Verist telling a merchant, kindly, that his second cart is lying; a traveller standing in the yard all afternoon rather than say why she came; a band of armed men declaring themselves, honestly, a raid, and being told to wait.",
+      "dangerLevel": 2,
+      "spectrum": {
+        "falsehood_truth": 0.7,
+        "chaos_order": 0.3,
+        "emotional_logical": 0.2
+      },
+      "axisVector": [
+        0.2,
+        0.7,
+        0,
+        0,
+        0,
+        0,
+        0.3,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "poleIntensity": {
+        "truth": 0.7,
+        "order": 0.3,
+        "logical": 0.2
+      },
+      "worldPos": {
+        "colatitude": 75.7,
+        "longitude": 199,
+        "depth": 0
+      },
+      "waygate": true,
+      "waygateTier": 2,
+      "_movesGateFrom": "the_unblinking_stone",
+      "_yardLeg": {
+        "to": "the_unblinking_stone",
+        "hours": 1.5
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "tier_seven_gate_yard",
+      "name": "Intake Level",
+      "regionId": "the_lattice_cities",
+      "communityId": "lattice.tier7",
+      "parentId": "tier_seven",
+      "tier": "site",
+      "tags": [
+        "waygate",
+        "gate_yard",
+        "lattice",
+        "order",
+        "arcology"
+      ],
+      "connections": [
+        "tier_seven",
+        "the_axis_gate"
+      ],
+      "descriptionSeed": "Tier Seven does not have a yard; it has an Intake Level, and it is the best-run reception in the world. You step through, you are received, assessed, fed and routed, and by the time you reach the lift you have a schedule. Nothing unplanned enters the arcology. The planning is the wall.",
+      "appearance": "A clean, bright receiving level below the arcology proper, the gate arch at one end of a long hall of numbered booths. Every arrival is assigned a booth, a route, a meal and an hour, and all of them are correct.",
+      "encounterFlavor": "A booth-attendant handing you the itinerary you were about to ask for; a trader discovering her stock has already been sold, at a good price, to someone who needed it; an armed band processed, disarmed and routed before they understand what happened.",
+      "dangerLevel": 2,
+      "spectrum": {
+        "chaos_order": 0.7,
+        "mechanical_spiritual": -0.3,
+        "concrete_abstract": -0.2
+      },
+      "axisVector": [
+        0,
+        0,
+        0,
+        0,
+        -0.2,
+        -0.3,
+        0.7,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "poleIntensity": {
+        "order": 0.7,
+        "mechanical": 0.3,
+        "concrete": 0.2
+      },
+      "worldPos": {
+        "colatitude": 79.7,
+        "longitude": 227,
+        "depth": 0
+      },
+      "waygate": true,
+      "waygateTier": 2,
+      "_movesGateFrom": "tier_seven",
+      "_yardLeg": {
+        "to": "tier_seven",
+        "hours": 1.5
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "wellspring_gate_yard",
+      "name": "the Tide Steps",
+      "regionId": "the_feeling_coast",
+      "communityId": "threnodist.wellspring",
+      "parentId": "wellspring",
+      "tier": "site",
+      "tags": [
+        "waygate",
+        "gate_yard",
+        "threnodist",
+        "emotional",
+        "sacred",
+        "social"
+      ],
+      "connections": [
+        "wellspring",
+        "the_axis_gate"
+      ],
+      "descriptionSeed": "In Wellspring you arrive into feeling. The gate stands in the tide at the foot of the city's steps, and what comes through climbs them into the sound of the first hall, where whatever you brought with you is felt, publicly, before you go further. Visitors either weep on the Tide Steps or turn back into the water.",
+      "appearance": "Broad steps down to a tidal pool, the gate arch standing in the shallows so that everything that comes through arrives with wet feet. The first of the public halls stands at the top of the steps, and its doors are open, and you can hear it.",
+      "encounterFlavor": "A carter sitting on the steps, crying, unsure why; the first hall going quiet as a grief-band steps out of the gate; a raiding party stopping halfway up the steps because they can hear what they came here to do.",
+      "dangerLevel": 2,
+      "spectrum": {
+        "emotional_logical": -0.7,
+        "death_life": 0.3,
+        "falsehood_truth": 0.2
+      },
+      "axisVector": [
+        -0.7,
+        0.2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0.3,
+        0,
+        0,
+        0
+      ],
+      "poleIntensity": {
+        "emotional": 0.7,
+        "life": 0.3,
+        "truth": 0.2
+      },
+      "worldPos": {
+        "colatitude": 81.1,
+        "longitude": 339.6,
+        "depth": 0
+      },
+      "waygate": true,
+      "waygateTier": 2,
+      "_movesGateFrom": "wellspring",
+      "_yardLeg": {
+        "to": "wellspring",
+        "hours": 1.5
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "the_lensward_gate_yard",
+      "name": "the Lit Apron",
+      "regionId": "radiant_wastes",
+      "communityId": "blazeborn.lensward",
+      "parentId": "the_lensward",
+      "tier": "site",
+      "tags": [
+        "waygate",
+        "gate_yard",
+        "blazeborn",
+        "light",
+        "craft",
+        "border"
+      ],
+      "connections": [
+        "the_lensward",
+        "the_axis_gate"
+      ],
+      "descriptionSeed": "The Blazeborn trust light, and they put their gate where the light is kindest to them and hardest on everyone else. What arrives at the Lensward stands on the Lit Apron in full focus until the lens-keepers have seen it. Traders learn to wait patiently. Anything that comes through armed learns what the lenses are for.",
+      "appearance": "A glass-paved apron at the edge of the border town, the gate arch at its centre, surrounded by standing lenses on iron frames. Everything that steps through stands in focused light, and the Blazeborn at the lenses can see it very clearly.",
+      "encounterFlavor": "A lens-keeper turning a frame a fraction and a stranger's shadow disappearing; a trader shading her eyes and holding very still; a column stepping through at noon and every lens on the apron turning toward it at once.",
+      "dangerLevel": 3,
+      "spectrum": {
+        "dark_light": 0.5,
+        "mechanical_spiritual": -0.2,
+        "concrete_abstract": -0.2
+      },
+      "axisVector": [
+        0,
+        0,
+        0,
+        0,
+        -0.2,
+        -0.2,
+        0,
+        0.5,
+        0,
+        0,
+        0,
+        0
+      ],
+      "poleIntensity": {
+        "light": 0.5,
+        "mechanical": 0.2,
+        "concrete": 0.2
+      },
+      "worldPos": {
+        "colatitude": 66.7,
+        "longitude": 183,
+        "depth": 0
+      },
+      "waygate": true,
+      "waygateTier": 3,
+      "_movesGateFrom": "the_lensward",
+      "_yardLeg": {
+        "to": "the_lensward",
+        "hours": 1.5
+      }
+    }
+  ]
+}

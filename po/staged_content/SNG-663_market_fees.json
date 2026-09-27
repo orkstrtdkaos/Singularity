@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "id": "SNG-663_market_fees",
+  "kind": "staged_content",
+  "note": "SNG-663 §2d. Flat, per load that sells (a traveller selling in person pays once per visit), in shards. Scaled against today's runs (56 to 130 shards a pass on Silas's holds) so a fee matters at the margin and never eats a run. Only the two powers whose own verbs already steal, smuggle, extort or levy by force are corrupt: the Undercount (a thieves' guild) and the Firstsight Barony (cruel, toll and levy). Everyone else's wardens are as their temper says.",
+  "markets": {
+    "power_millbrook_council": {
+      "at": "millbrook",
+      "marketFee": 2,
+      "corrupt": false,
+      "line": "Two shards to the Council's box by the well, and a stall till dusk. Millbrook likes you well enough to want you back."
+    },
+    "power_keelmouth_slip": {
+      "at": "keelmouth",
+      "marketFee": 3,
+      "corrupt": false,
+      "line": "The Slip's clerk takes three shards and a look at your hands; anyone who's worked a rope pays and gets a smile."
+    },
+    "power_flesh_temple": {
+      "at": "the_grindstone",
+      "marketFee": 4,
+      "corrupt": false,
+      "line": "Four shards to the Temple, paid into a hand that has been trained until it is very steady."
+    },
+    "power_harmonic_heights": {
+      "at": "harmonic_heights_terrace",
+      "marketFee": 5,
+      "corrupt": false,
+      "line": "Five shards and a tuning: the Terrace wardens strike a fork over your load and listen. Paid and in tune, you may sell."
+    },
+    "power_glass_assembly": {
+      "at": "the_lensward",
+      "marketFee": 5,
+      "corrupt": false,
+      "line": "Five shards, weighed against the Assembly's glass and written into the ledger in front of you. The Assembly is patient and it is exact."
+    },
+    "power_hollow_court": {
+      "at": "the_bargain_gate",
+      "marketFee": 6,
+      "corrupt": false,
+      "line": "Six shards, posted a yard high on the Asking Floor, and not one shard more or less for anyone. The Court's fairness is the frightening kind."
+    },
+    "power_seraphic_orders": {
+      "at": "choirheight",
+      "marketFee": 6,
+      "corrupt": false,
+      "line": "Six shards to the almoners, and your goods blessed whether you asked or not. The Orders tithe what they allow."
+    },
+    "power_radiant_plateau": {
+      "at": "radiant_plateau_edge",
+      "marketFee": 6,
+      "corrupt": false,
+      "line": "Six shards at the Edge District's lamp-post, and a Plateau warden's opinion of your goods, which is not negotiable."
+    },
+    "power_grand_lattice": {
+      "at": "tier_seven",
+      "marketFee": 8,
+      "corrupt": false,
+      "line": "Eight shards, deducted at Intake before you knew you'd agreed. The Lattice's schedule has already decided you are selling, and to whom."
+    },
+    "power_undercount": {
+      "at": "the_hundred_markets",
+      "marketFee": 4,
+      "corrupt": true,
+      "line": "Four shards to sell in the Hundred Markets, officially. A Counter's man will tell you what it is today, and today it depends on you."
+    },
+    "power_firstsight_barony": {
+      "at": "firstsight",
+      "marketFee": 10,
+      "corrupt": true,
+      "line": "Ten shards to the Baron's wardens at the market gate, they say, and the Baron sees perhaps four of them."
+    }
+  }
+}

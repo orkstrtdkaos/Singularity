@@ -31044,6 +31044,60 @@ console.log("\n── §381 · a villain you fail to stop ──");
     })());
 }
 
+/* ══════════ §382 · SNG-663 §2a — A GATE LEG IS NEVER CHARGED ══════════ */
+// ✅ ERIK 2026-09-26: *"It doesn't cost to go through a gate but you might have to pay someone or suffer the
+// consequences."* The first draft of §2 was a percentage toll at the gate; it is withdrawn, and the charge moves to
+// the market you go to (§2d) — which is a different thing in a different place.
+//
+// ⛑ THE RULE IS ALREADY TRUE, AND THAT IS PRECISELY WHY IT NEEDS A GATE: a passage fee is the obvious thing to add
+// the next time somebody wants powers to profit from their ground, and Erik has ruled that it is not this.
+console.log("\n── §382 · a gate leg is never charged ──");
+{
+  const J82 = await import("../engine/journey.js");
+  const { loadContentHeadless: lch82 } = await import("./headless_content.mjs");
+  const C82 = await lch82();
+
+  // ⚠️ A REAL GATE ROUTE, not a synthetic one: a traveller who knows the gates, over the shipped map.
+  const gates = Object.entries(C82.locations).filter(([, l]) => l && (l.waygate === true || l.waygate)).map(([id]) => id);
+  const traveller = { knownPlaces: gates, skills: { wayfaring: 9 }, level: 20 };
+  const pair = (() => {
+    for (const from of ["millbrook", "archive_hollow"]) for (const to of ["tier_seven", "the_forge_eternal", "cairnhold"]) {
+      const r = J82.routeBetween(from, to, C82.locations, { traveller });
+      const g = (r?.options || []).find(o => o && o.kind !== "road");
+      if (g) return { from, to, route: r, gate: g };
+    }
+    return null;
+  })();
+
+  check("§382: ⛔ A GATE LEG COSTS NO COIN — no toll, no fee, no standing check, for a traveller, a load or a company alike",
+    (() => {
+      if (!pair) return false;
+      // the route option carries days, a path and (for a traveller) energy — and nothing that spends money
+      const o = pair.gate;
+      const moneyish = ["cost", "fee", "toll", "price", "charge", "crystal", "coin", "scrip"];
+      return !moneyish.some(k => k in o)
+        && !/toll|fee|passage charge/i.test(JSON.stringify(o).replace(/tollmen/gi, ""));
+    })(), pair ? `${pair.from} → ${pair.to} by ${pair.gate.label} in ${pair.gate.days} days` : "no gate route found on the shipped map");
+
+  // ⛑ AND THE ONLY THING A GATE DOES COST IS A TRAVELLER'S OWN ENERGY, which predates this ruling and is not a fee.
+  check("§382: ⛑ …and the one thing it does cost is the TRAVELLER'S OWN ENERGY, which is not a fee and not paid to anybody",
+    (() => {
+      if (!pair) return false;
+      const withE = J82.routeBetween(pair.from, pair.to, C82.locations, { traveller, gateEnergy: true });
+      const without = J82.routeBetween(pair.from, pair.to, C82.locations, { traveller, gateEnergy: false });
+      const a = (withE?.options || []).find(o => o.kind !== "road"), b = (without?.options || []).find(o => o.kind !== "road");
+      return !!a && !!b && Number(b.energy) === 0 && Number(a.energy) >= 0;
+    })(), "⬜ whether a LOAD pays that energy is still with Erik — a cart has no energy, and nothing is charged one");
+
+  // ⛔ AND NOTHING IN THE TRADE READER CHARGES FOR THE GATE EITHER, which is where a toll would have landed.
+  check("§382: ⛔ the trade reader prices a gate route at its DAYS and nothing else — a toll here would have been the withdrawn draft arriving by the back door",
+    (() => {
+      const cv = rd("engine/caravan.js");
+      const routeValue = cv.slice(cv.indexOf("export function routeValue"), cv.indexOf("export function waitingExposure") >= 0 ? cv.indexOf("export function waitingExposure") : undefined);
+      return !/toll|gateFee|passageFee/i.test(routeValue);
+    })());
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

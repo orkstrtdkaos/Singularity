@@ -22,7 +22,28 @@ import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
-const rd = (p) => readFileSync(join(root, p), "utf8");
+/** ⛔ EVERY FILE THIS SUITE READS, WITH ITS LINE ENDINGS NORMALISED — and that is a fix, not a convenience.
+ *
+ *  This repo is `core.autocrlf = true`: a fresh checkout holds CRLF and my working copy holds LF, so a gate that
+ *  anchors on a newline passes on one and fails on the other. ⚠️ Measured before changing it, this file already wrote
+ *  `.replace(/\r\n/g, "\n")` at about a hundred call sites and used the tolerant `/\r?\n/` form at a dozen more — it
+ *  has been fighting the checkout one reader at a time for months, and nothing in it ever wants to SEE a carriage
+ *  return. §377 was simply the site where I forgot, and it cost Aevi a push: `indexOf("\n}\n")` found nothing in her
+ *  checkout, the slice ran to the END OF FILE, and a check about where a road ledger is written answered about the
+ *  whole module.
+ *  ⛑ One door. The manual replaces below are now harmless no-ops, and a new gate cannot inherit the bug. */
+const rd = (p) => readFileSync(join(root, p), "utf8").replace(/\r\n/g, "\n");
+/** ⛔ ONE EXPORTED FUNCTION'S BODY, FROM SOURCE — and line-ending agnostic, because this repo is `core.autocrlf = true`
+ *  and a fresh checkout holds "\r\n}\r\n" where my working copy holds "\n}\n". ⚠️ A gate of mine looked for the bare LF
+ *  form, found nothing, sliced to the END OF FILE, and blocked Aevi's push with a check that was green on my disk.
+ *  ⛑ It RETURNS EMPTY when it cannot find the end, so a caller that asserts `!!body` fails loudly rather than reading
+ *  the rest of the module as one enormous function. */
+const bodyOfFn = (src, name) => {
+  const i = src.indexOf(`export function ${name}(`);
+  if (i < 0) return "";
+  const m = /\r?\n\}\r?\n/.exec(src.slice(i));
+  return m ? src.slice(i, i + m.index) : "";
+};
 /** ⛔ CCODE-527 — A GATE MAY NOT READ A SAVE SOMEBODY IS PLAYING.
  *
  *  ⚠️ AEVI, BLOCKED BY IT: "a test broke in the last hour, and it now blocks every push that isn't a save
@@ -29004,6 +29025,19 @@ console.log("\n── §364 · the saves a gate reads hold still ──");
   check("§364: ⚠️ …and the freezer derives its list from what the gates read, and can take a COMMIT rather than the working tree",
     /matchAll\(\/savedSave/.test(frz) && /--from/.test(frz) && /git", \["show"/.test(frz),
     "freezing the working tree freezes the drift — the first run did exactly that and the gates stayed red");
+  // ⚠️ AND THE OTHER SHAPE OF THE SAME MISTAKE, which cost Aevi a push on 2026-09-26: not a regex this time but an
+  // `indexOf` ANCHORED ON A LINE ENDING. §377 sliced a function body at `indexOf("\n}\n")` — three characters that do
+  // NOT occur in a CRLF checkout, where the brace line reads "\r\n}\r\n". The search returned −1, the slice ran to the
+  // END OF FILE, and `sendCaravan`'s "body" came back 52,123 characters long with the very definition the check
+  // forbids inside it. Green on my LF disk, red on hers, and nobody could push until it was fixed.
+  // ⛑ `bodyOfFn` (beside `rd`) tolerates either ending and returns EMPTY when it cannot find the end, so a slice that
+  // goes wrong fails its check loudly instead of quietly answering about the whole module.
+  check("§364: ⚠️ …and EVERY read this suite makes is line-ending normalised AT THE DOOR — `rd` does it, so no gate can inherit the bug that cost Aevi a push, and `bodyOfFn` tolerates either ending even for a caller that reads a file some other way",
+    /const rd = \(p\) => readFileSync\(join\(root, p\), "utf8"\)\.replace\(\/\\r\\n\/g, "\\n"\);/.test(howSrc)
+    && /const m = \/\\r\?\\n\\\}\\r\?\\n\/\.exec/.test(howSrc)
+    && bodyOfFn(rd("engine/caravan.js").replace(/\n/g, "\r\n"), "sendCaravan").length < 8000,
+    "a hundred call sites in this file normalise by hand; the one that forgot answered about 52,123 characters of the wrong module");
+
 }
 
 /* ══════════ §365 · SNG-660 §1 — THE WILD REACHES THE TOP RUNGS ══════════ */
@@ -30538,13 +30572,17 @@ console.log("\n── §377 · a route is a standing run ──");
 
   check("§377: ⛑ …and the ledger is written at ARRIVAL, never at departure — a load that was taken on the road taught you nothing about walking it",
     (() => {
-      // ⚠️ THE SLICE IS THE WHOLE CHECK. My first form cut `send` at `standingCarriers`, and `markRoadRun` is DEFINED
-      // between the two — so the gate read its own definition as a call inside `sendCaravan` and failed. A function
-      // body ends at a brace in column 1; take exactly that.
+      // ⚠️ THE SLICE IS THE WHOLE CHECK, AND IT BLOCKED AEVI'S PUSH. My first form cut `send` at `standingCarriers`,
+      // and `markRoadRun` is DEFINED between the two — so the gate read its own definition as a call inside
+      // `sendCaravan`. My second form looked for the three characters "\n}\n", which do not exist in a CRLF checkout
+      // (`core.autocrlf` is true here): `indexOf` returned −1, the slice ran to the END OF FILE, and `sendCaravan`'s
+      // body came back 52,123 characters long with `markRoadRun` inside it. Green on my LF disk, red on hers.
+      // ⛑ `bodyOfFn` tolerates either ending and RETURNS EMPTY when it cannot find the end, so a slice that goes wrong
+      // fails loudly here instead of quietly swallowing the rest of the module.
       const src = rd("engine/caravan.js");
-      const body = (name) => { const i = src.indexOf(`export function ${name}(`); const j = src.indexOf("\n}\n", i); return i < 0 ? "" : src.slice(i, j < 0 ? undefined : j); };
-      const arrive = body("arriveCaravan"), send = body("sendCaravan");
-      return !!arrive && !!send && /markRoadRun\(character, car\.from, car\.to\)/.test(arrive) && !/markRoadRun/.test(send);
+      const arrive = bodyOfFn(src, "arriveCaravan"), send = bodyOfFn(src, "sendCaravan");
+      return !!arrive && !!send && send.length < 8000
+        && /markRoadRun\(character, car\.from, car\.to\)/.test(arrive) && !/markRoadRun/.test(send);
     })());
 
   /* ---- AND THE RUN ACTUALLY RUNS ---- */
@@ -30577,10 +30615,13 @@ console.log("\n── §377 · a route is a standing run ──");
 
   check("§377: ⚠️ AND THE LOAD WALKS THE ROAD THE CARD PRICED — `sendCaravan` took `options[0]`, which is the ROAD, while the comparison sorts by days: a load out of the Made Gate walked 34.6 days to a market the card priced at 1.7 through Silas's own waygate",
     (() => {
+      // ⚠️ THIS ONE PASSED ON A CRLF CHECKOUT BY LUCK: `slice(i, -1)` handed it 52KB of the module and the two
+      // patterns happened to answer the same way. A check that is right for the wrong reason is one edit from being
+      // wrong for the wrong reason.
       const src = rd("engine/caravan.js");
-      const i = src.indexOf("export function sendCaravan("), j = src.indexOf("\n}\n", i);
-      const send = src.slice(i, j);
-      return /options \|\| \[\]\)\.slice\(\)\.sort\(\(a, b\) => \(a\.days \?\? 1e9\) - \(b\.days \?\? 1e9\)\)\[0\]/.test(send)
+      const send = bodyOfFn(src, "sendCaravan");
+      return !!send && send.length < 8000
+        && /options \|\| \[\]\)\.slice\(\)\.sort\(\(a, b\) => \(a\.days \?\? 1e9\) - \(b\.days \?\? 1e9\)\)\[0\]/.test(send)
         && !/route\?\.options\?\.\[0\]/.test(send);
     })(), "a card and an engine that disagree about the same road is the defect this whole section exists to remove");
 

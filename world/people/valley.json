@@ -1092,7 +1092,7 @@
           "name": "Loki"
         }
       },
-      "role": "Agent of the High Luminary",
+      "role": "Agent of the High Luminary, Seraphine",
       "roleSince": 88,
       "roleBy": {
         "characterId": "char-mrum8y4d",
@@ -1313,12 +1313,13 @@
     },
     "the_last_seraph": {
       "status": "stopped",
-      "stoppedUntilDay": 42,
-      "stoppedBy": "sunwrack_valen",
-      "atWorldDay": 39,
+      "stoppedUntilDay": 92,
+      "stoppedBy": "the_burning_certainty",
+      "sinceWorldDay": 89,
+      "atWorldDay": 89,
       "fateBy": {
-        "characterId": "char-mrhs8286",
-        "name": "Silas Weir"
+        "characterId": "char-mrum8y4d",
+        "name": "Loki"
       }
     },
     "the_burning_certainty": {
@@ -1656,14 +1657,16 @@
       }
     },
     "the_last_choirmistress": {
-      "status": "stopped",
-      "sinceWorldDay": 88,
+      "status": "wounded",
+      "sinceWorldDay": 89,
       "stoppedUntilDay": 91,
       "stoppedBy": "halvex_coil",
-      "atWorldDay": 88,
+      "woundedUntilDay": 97,
+      "woundedBy": "the_unbodied_choir_master",
+      "atWorldDay": 89,
       "fateBy": {
-        "characterId": "char-mrhs8286",
-        "name": "Silas Weir"
+        "characterId": "char-mrum8y4d",
+        "name": "Loki"
       }
     }
   }

@@ -15180,8 +15180,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790541866417,
-  "rev": 1030,
+  "updatedAt": 1790542022991,
+  "rev": 1031,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -17641,7 +17641,17 @@
       "growthPasses": 2,
       "trade": true,
       "neglectPasses": 1,
-      "conditionSince": 2100
+      "conditionSince": 2100,
+      "route": {
+        "toId": "gearsflat",
+        "crew": [
+          "tessvel-cairn",
+          "traveler-woman"
+        ],
+        "setDay": 89,
+        "lastDepartureDay": null,
+        "runs": 0
+      }
     }
   ],
   "_lastProjectDay": 8,

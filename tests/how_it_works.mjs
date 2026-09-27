@@ -11161,10 +11161,19 @@ console.log("\n── §106 · a hold says what it costs, and every control does
   // whose `{homes, people}` has no `.length`, so the card said "undefined people"), and a ledger with no
   // `character` (no runner fees) and no `density` (rich and poor ground flattened to one yield). Nothing threw
   // and nothing reddened, because every gate that touches these readers builds its own bag.
-  check("§106: ⚑ the card shows Aevi's three — people · per pass · condition — and each from the reader that owns it",
-    /hold-card-nums/.test(app106) && /residentsOf\(h, holdCfgNow\(\)\)\.people\.length/.test(app106)
+  // ⚠️ RE-POINTED 2026-09-27, AND THE CLAIM MOVED ON PURPOSE. Erik: *"I want the ui for the party and holds to look
+  // a lot more like the mockup aevi made … her look was better."* Her card puts the CONDITION beside the name in green
+  // and gives three LABELLED columns to keeper · people · per pass. So §2.2's three become four readings on one card,
+  // each still from the reader that owns it — and the old form of this check pinned a CLASS NAME (`hold-card-nums`),
+  // which is a spelling and not a claim.
+  check("§106: ⚑ the card shows her four — the condition by the name, and keeper · people · per pass under labels — each from the reader that owns it",
+    /hold-card-grid/.test(app106) && /hold-card-cond/.test(app106)
+    && /residentsOf\(h, holdCfgNow\(\)\)\.people\.length/.test(app106)
     && /const per = \(\(\) => \{ const L = holdLedgerOf\(h\);/.test(app106)
-    && /\.hold-card-nums/.test(rd("style.css")));
+    && /h\.steward \? esc\(nameOf\(h\.steward\)\)/.test(app106)
+    // ⛑ AND THE LABELS ARE REAL, which is what makes it her card rather than three bare numbers
+    && /<div class="l">keeper<\/div>/.test(app106) && /<div class="l">people<\/div>/.test(app106) && /<div class="l">per pass<\/div>/.test(app106)
+    && /\.hold-card-grid \.l \{[^}]*text-transform: uppercase/.test(rd("style.css")));
   // ⛔ AND THE BAG IS THE READING, SO THERE IS ONE OF IT. `holdingLedger` answers whatever it is handed: no
   // `character` and a relay hold's runner fees vanish, no `density` and rich ground yields what poor ground
   // does — neither throws, neither shows in the answer. Four sites carried four different bags, and the ground
@@ -11198,8 +11207,10 @@ console.log("\n── §106 · a hold says what it costs, and every control does
   // ⛑ …and the two that left the card are read on the place page, so nothing Erik named is unreachable.
   check("§106: ⛑ …and the keeper and what it makes are read on the Overview tab, where their sentences live",
     /keeper: \$\{h\.steward \? esc\(nameOf\(h\.steward\)\) : "<em>nobody<\/em>"\} \u00b7 produces:/.test(app106) && /Per pass \$\{infoDot\("hold\.pass"\)\}/.test(app106));
-  check("§106: …and the popup opens, closes on the ✕, and closes on the backdrop — the house pattern",
-    /<button class="opt hold-card-open" data-hold-open=/.test(app106) && /hold-modal-close/.test(app106)
+  // ⚠️ AND THIS ONE PINNED `class="opt hold-card-open"` — the button is styled as her gold primary now and has
+  // dropped `opt`, which changed nothing about whether it opens the popup. The claim is the DOOR, not the class.
+  check("§106: …and the popup opens from the card, closes on the ✕, and closes on the backdrop — the house pattern",
+    /class="hold-card-open" data-hold-open=/.test(app106) && /hold-modal-close/.test(app106)
     && /hmBack\.onclick = \(e\) => \{ if \(e\.target === hmBack\)/.test(app106));
 }
 
@@ -30825,6 +30836,75 @@ console.log("\n── §379 · the stock policy ──");
       return /sellPlanFor\(h, holdCfgNow\(\)\)/.test(app) && /data-stock-policy/.test(app)
         && /kind === "stock"/.test(app) && /stockPolicyFor\(h\)/.test(app);
     })());
+}
+
+/* ══════════ §380 · THE HOLDINGS AND PARTY BOARDS — ONE READING, THREE SURFACES ══════════ */
+// ⛑ ERIK 2026-09-27: *"I want the ui for the party and holds to look a lot more like the mockup aevi made … her look
+// was better."* Her boards are the Design canvas "Holdings Screen Mockup".
+//
+// ⛔ AND PORTING THEM TURNED UP A REAL DEFECT, which is what this section holds: the alerts were derived TWICE, by two
+// different rules. The ground strip knew unkept · full · raided; the card knew a six-state priority list and the tab
+// that answers each. So a FAILING hold was loud on its card and absent from the strip. Her "To review" list is only
+// possible when there is one rule — it IS the alerts, one row each, with the verb as a button.
+//
+// ⚠️ AND THE TWO COUNTS HAVE TO READ THE SAME SET. Written the other way, the board said "Needs you 0" over a review
+// list of four rows — one number and one list about one question, disagreeing on screen. Seen on the screen, in the
+// browser, with a real save's holds; nothing in the suite could have said it.
+console.log("\n── §380 · one reading, three surfaces ──");
+{
+  const appB = rd("app.js"), cssB = rd("style.css");
+
+  check("§380: ⛔ ONE ALERT READER — `alertOf` is derived once and read by the board, the review list and the card, so a place cannot be urgent on one surface and quiet on another",
+    (appB.match(/const alertOf = \(h\) =>/g) || []).length === 1
+    && (appB.match(/alertOf\(h\)/g) || []).length >= 2
+    // ⛔ and the old second copy is gone: no card-local priority list any more
+    && !/const alert = \(\(\) => \{[\s\S]{0,200}?if \(!h\.steward\) return/.test(appB),
+    "the strip knew three states and the card knew six, from two rules");
+
+  check("§380: ⛑ …and the board's count IS the list — the same rows, not a second filter that can disagree with what is on screen",
+    /const asks = reviewRows\.length \+ offers\.length/.test(appB)
+    && /reviewRows\.map\(r => r\.a\.said\)/.test(appB));
+
+  // ⛑ HER GRAMMAR, as structure rather than as taste: panels on the ground, a labelled board, a review row that
+  // carries its verb, and a card whose numbers sit under 10px uppercase labels.
+  check("§380: ⛔ THE PANELS FLOAT ON THE GROUND — `.screen` is itself a panel, so a card inside it has no edge; this one class is the largest single difference between the two looks",
+    /\.screen-ground \{[^}]*background: none/.test(cssB)
+    && (appB.match(/class="screen screen-ground"/g) || []).length === 2);
+
+  check("§380: ⛑ the board reads label · number · one line, and the card that WANTS you is outlined in gold",
+    /\.gs-stat-l \{[^}]*text-transform: uppercase/.test(cssB)
+    && /\.gs-stat-n \{[^}]*font-family: var\(--font\)/.test(cssB)
+    && /\.gs-stat\.asks \{ border-color: var\(--gold-line\)/.test(cssB)
+    && /class="gs-stat\$\{cls \? " " \+ cls : ""\}"/.test(appB));
+
+  check("§380: ⛔ every review row carries the VERB that answers it, and it opens the tab where that verb lives (Erik's own rule, kept)",
+    /class="gs-go" data-hold-open="\$\{esc\(h\.id\)\}" data-pp-goto="\$\{esc\(a\.tab\)\}"/.test(appB)
+    && /go: "Open People"/.test(appB) && /go: "Open Store"/.test(appB) && /go: "Open Attack & Defense"/.test(appB));
+
+  // ⚠️ AND SIX TOKENS THIS FILE USED WERE NEVER DECLARED — each site fell through to its own fallback, and the
+  // fallbacks disagreed: `--good` was #79c08a in three places and #4fa36b in two, `--warn` was #e0b25a, #c9913a and
+  // #c96. One semantic colour, three colours on screen.
+  check("§380: ⚠️ the semantic colours are DECLARED, so one meaning is one colour",
+    (() => {
+      const root = cssB.slice(cssB.indexOf(":root {"), cssB.indexOf("}", cssB.indexOf(":root {")));
+      return ["--good", "--bad", "--warn", "--line-soft", "--ink-mid", "--gold-line"].every(v => new RegExp(`\\s${v}:`).test(root));
+    })(), "every fallback in this file is now dead weight rather than a second answer");
+
+  // ⛑ THE PARTY TAKES THE SAME GRAMMAR, and keeps every control it had.
+  check("§380: ⛑ the party reads in the same grammar — chips, labelled numbers, and the line's state said one condition per line",
+    /class="ob-chips"/.test(appB) && /class="ob-before"/.test(appB)
+    && /<div class="l">brings<\/div>/.test(appB) && /<div class="l">it lands<\/div>/.test(appB) && /<div class="l">place<\/div>/.test(appB)
+    // and nothing a player could do before has left: stance, forward, prefer
+    && /data-ally-stance/.test(appB) && /data-ally-forward/.test(appB) && /data-ally-prefer/.test(appB));
+
+  // ⛔ A PLAYER READS THE PURSE AS MONEY. Found by putting it where her board puts it.
+  check("§380: ⛔ the purse line is money, not a rate's leftovers — two decimals at most, and the region by its NAME",
+    (() => {
+      const src = rd("engine/purse.js");
+      return /const tidy = \(n\) =>/.test(src) && /regionNameOf/.test(src)
+        && /function regionDisplayName\(rid\) \{/.test(appB)
+        && (appB.match(/regionNameOf: regionDisplayName/g) || []).length === 2;
+    })(), "it read `899.9700000000001 the_palelands scrip` on a real save");
 }
 
 /* ══════════ REPORT ══════════ */

@@ -204,15 +204,25 @@ export function purseBand(totalInCrystal, economy) {
 
 /** A one-line purse readout. ⚠️ Erik's visibility rule: the interface says the number; the trader says
  *  "ten for those, and I'm being generous". This is the interface half. */
-export function purseLine(purse, { regionId = null } = {}) {
+export function purseLine(purse, { regionId = null, regionNameOf = null } = {}) {
+  // ⚠️ TIDY, BECAUSE A PLAYER READS THIS. Measured on a real purse, this line said "899.9700000000001
+  // the_palelands scrip": scrip is earned at an exchange RATE, so a float lands in the save, and the region was
+  // printed by its KEY. Two decimals at most, and no trailing zeros — the money a player counts, not the number a
+  // rate produced. ⛑ `regionNameOf` is optional: a caller with no door to the map gets the id, with its
+  // underscores taken out, which is still better than `the_palelands`.
+  const tidy = (n) => {
+    const v = Math.round(num(n, 0) * 100) / 100;
+    return Number.isInteger(v) ? String(v) : String(v).replace(/0+$/, "").replace(/\.$/, "");
+  };
   const bits = [];
   for (const cur of ["crystal", "coin", "paper", "marks"]) {
     const n = num(purse?.[cur], 0);
-    if (n) bits.push(`${n} ${cur}`);
+    if (n) bits.push(`${tidy(n)} ${cur}`);
   }
   for (const [rid, n] of Object.entries(purse?.scrip || {})) {
     if (!num(n, 0)) continue;
-    bits.push(`${n} ${rid} scrip${regionId && rid !== regionId ? " (not good here)" : ""}`);
+    const said = (typeof regionNameOf === "function" ? regionNameOf(rid) : null) || String(rid).replace(/_/g, " ").replace(/^the /, "");
+    bits.push(`${tidy(n)} ${said} scrip${regionId && rid !== regionId ? " (not good here)" : ""}`);
   }
   return bits.length ? bits.join(" · ") : "empty";
 }

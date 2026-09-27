@@ -182,7 +182,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.14.3";
+const APP_VERSION = "2.14.4";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -15048,6 +15048,12 @@ function workerName(id) {
 // ⛑ SNG-651 §2.3 — WHICH TAB YOU WERE ON survives a re-render, because every action here re-renders the
 // screen and a page that snapped back to Overview after every click would be unusable.
 let holdTab = "overview";
+/** ⛑ A REGION'S OWN NAME, for the one place a player reads a region id as money. ⚠️ The key is `regionId`, not
+ *  `id`: the array carries `{ regionId, name, terrain, … }`, and a lookup on `id` finds nothing and says nothing. */
+function regionDisplayName(rid) {
+  const r = (CONTENT.regions || []).find(x => x && x.regionId === rid);
+  return r?.name || null;
+}
 function renderHoldingsTab(manageId = null, tab = null) {
   if (tab) holdTab = tab;
   _workMemo = null; _workCands = null;   // CCODE-450: one sheet per worker per render
@@ -15084,46 +15090,102 @@ function renderHoldingsTab(manageId = null, tab = null) {
   // arrears, what it watches), composed in the engine so the two surfaces cannot disagree. §5.4 — whose it is, when not yours.
   const ownerOf = (h) => (h.owner && h.owner !== character.id && h.owner !== "you") ? esc(nameOf(h.owner)) + "'s · " : "";
   const factsOf = (h) => { const line = holdingFactsLine(h, { nameOf, holdings: character.holdings || [] }); return line ? `<div class="hint hold-card-facts" title="${esc(line)}">${esc(line)}</div>` : ""; };
-  // ═════ SNG-651 §2.1 · THE GROUND STRIP — your whole estate in one line ═════
-  // ⛔ Aevi: "how many holdings, the NET PER PASS across all of them (coloured, since a quiet drain is what a
-  // player most needs to notice), and the alerts: unkept · full · raided · offers waiting. Each alert is a LINK
-  // to the hold it means."
-  // ⛑ §3 — NO ENGINE CHANGE: every figure comes through `holdLedgerOf`, the SAME CALL the cards make, so the
-  // strip and a card cannot disagree about the same place.
-  // ⚠️ THIS LINE USED TO SAY "the same functions" AND WAS FALSE. It was the same function with a shorter bag,
-  // and the live screen showed the cards adding to +372 a pass under a strip that said +347.
+  // ═════ ONE ALERT READER, FOR THE BOARD, THE REVIEW LIST AND THE CARD ═════
+  //
+  // ⛔ THESE WERE TWO RULES AND THEY DISAGREED. The ground strip derived its own alerts (unkept · full · raided) while
+  // each card derived a different one: a PRIORITY LIST that also knows failing, arrears owed and a place that costs
+  // more than it makes, and that names the tab which answers each. So a failing hold was loud on its card and absent
+  // from the strip, and a full one was loud in the strip while its card said something more urgent.
+  // ⛑ Aevi's board and her "To review" list are both this one reader, read twice — which is the only reason they
+  // cannot disagree with the card the player then opens.
+  const alertOf = (h) => {
+    const cfgA = holdCfgNow();
+    const per = (() => { try { const L = holdLedgerOf(h); return L?.perPass && Number.isFinite(Number(L.perPass.net)) ? Number(L.perPass.net) : null; } catch { return null; } })();
+    if (!h.steward) return { cls: "warn", said: "nobody is keeping it", tab: "people", go: "Open People", verb: "Open the People tab — an unkept hold cannot climb" };
+    if ((h.history || []).slice(-4).some(e => /raid/i.test(String(e?.note || "")))) return { cls: "bad", said: "raided recently", tab: "defence", go: "Open Attack & Defense", verb: "Open Attack & Defense — what comes at it, and what stands against them" };
+    if (String(h.condition) === "failing") return { cls: "bad", said: "failing", tab: "people", go: "Open People", verb: "Open the People tab — a keeper sets the floor it will not drop below" };
+    try { const r = roomOf(h, cfgA); if (r && r.total > 0 && r.used >= r.total) return { cls: "warn", said: "no feature spots left", tab: "build", go: "Open Build", verb: "Open the Build tab — it may be ready to be named something greater" }; } catch { /* no reader, no alert */ }
+    if (Number(h.arrears) > 0) return { cls: "warn", said: `${h.arrears} of keep owed`, tab: "store", go: "Open Store", verb: "Open Store & money" };
+    if (per != null && per < 0) return { cls: "warn", said: "costs more than it makes", tab: "store", go: "Open Store", verb: "Open Store & money — what it sells, and what it costs to keep" };
+    // ⛑ AND A QUIET STATE IS STILL A STATE, which is what her pill carries when nothing is wrong.
+    // ⚠️ MEASURED ON THE SCREEN AND NARROWED: "store ready to sell" on any stock at all put the row on FOUR of
+    // Silas's five holds, permanently, which is noise wearing an alert's clothes. A FULL store is the real state —
+    // the tick's own `fullAt`, the line at which its news says the goods "sit waiting for a road, a buyer, or a
+    // thief" — and an unsold store at a hold with nobody to sell it is the other.
+    try {
+      const fullAt = Math.max(1, Number(cfgA?.fullAt) || 40);
+      const total = storeTotal(h);
+      if (total >= fullAt) return { cls: "warn", said: "store is full", tab: "store", go: "Open Store", verb: "Open Store & money — it can hold no more, and what it holds is what a raid takes" };
+      if (total > 0 && sellPlanFor(h, cfgA).units === 0) return { cls: "", said: "nothing of the store is being sold", tab: "store", go: "Open Store", verb: "Open Store & money — nobody there is selling it; a keeper, or a standing run, would", quiet: true };
+    } catch { /* no store reader, no alert */ }
+    return null;
+  };
+
+  // ═════ SNG-651 §2.1 · THE BOARD — your whole estate at a glance (Aevi's Main board) ═════
+  // ⛔ Aevi: "how many holdings, the NET PER PASS across all of them (coloured, since a quiet drain is what a player
+  // most needs to notice), and the alerts." Her board adds the two readings a player actually acts on: how many PEOPLE
+  // stand at your places, and how many things WANT YOU — that last card outlined in gold, which is the whole of her
+  // "Needs you" treatment.
+  // ⛑ §3 — NO ENGINE CHANGE: every figure comes through `holdLedgerOf`, `residentsOf` and `alertOf`, the SAME calls
+  // the cards make, so the board and a card cannot disagree about the same place.
+  const reviewRows = [];
   const groundStrip = (() => {
     if (!hs.length && !offers.length) return "";
-    const cfgG = holdCfgNow(), ecoG = CONTENT.rules?.economy || null;
-    let net = 0, netKnown = false;
-    const unkept = [], full = [], raided = [];
+    const ecoG = CONTENT.rules?.economy || null;
+    let net = 0, netKnown = false, inn = 0, out = 0, folk = 0;
     for (const h of hs) {
       try {
         const L = holdLedgerOf(h);
-        if (L?.perPass && Number.isFinite(Number(L.perPass.net))) { net += Number(L.perPass.net); netKnown = true; }
+        if (L?.perPass && Number.isFinite(Number(L.perPass.net))) {
+          net += Number(L.perPass.net); netKnown = true;
+          inn += (Number(L.perPass.sells) || 0) + (Number(L.perPass.fees) || 0);
+          out += Number(L.perPass.upkeep) || 0;
+        }
       } catch { /* a hold whose ledger will not read is not a reason to hide the estate */ }
-      if (!h.steward) unkept.push(h);
-      // ⚠️ FULL IS THE ROOM'S OWN ANSWER, not a guess at a number: `roomOf` knows what this kind holds.
-      try { const r = roomOf(h, cfgG); if (r && r.used >= r.total && r.total > 0) full.push(h); } catch { /* no room reader, no alert */ }
-      // ⛑ RAIDED IS WHAT THE PLACE REMEMBERS — its own history line, not a flag somebody has to remember to set.
-      if ((h.history || []).slice(-4).some(e => /raid/i.test(String(e?.note || "")))) raided.push(h);
+      try { folk += residentsOf(h, holdCfgNow()).people.length; } catch { /* no reader, no count */ }
+      const a = alertOf(h);
+      if (a) reviewRows.push({ h, a });
     }
-    const jump = (h, label, cls) => `<button class="opt gs-alert${cls ? " " + cls : ""}" data-hold-open="${esc(h.id)}" title="${esc(h.name || h.id)}">${label}</button>`;
-    const alerts = [
-      ...unkept.map(h => jump(h, `${esc(h.name || h.id)} — unkept`, "warn")),
-      ...full.map(h => jump(h, `${esc(h.name || h.id)} — full`, "warn")),
-      ...raided.map(h => jump(h, `${esc(h.name || h.id)} — raided`, "bad")),
-    ];
+    // ⚡ THE MOST URGENT FIRST, because a list in record order buries the thing that matters.
+    const rank = { bad: 0, warn: 1, "": 2 };
+    reviewRows.sort((x, y) => (rank[x.a.cls] ?? 3) - (rank[y.a.cls] ?? 3));
+    const kept = hs.filter(h => h.steward).length;
+    const crew = hs.reduce((n, h) => n + (h.crew || []).length, 0);
+    const watch = hs.reduce((n, h) => n + (h.garrison || []).length, 0);
+    const kinds = hs.reduce((m, h) => { const k = String(h.kind || "post"); m[k] = (m[k] || 0) + 1; return m; }, {});
+    const conds = [...new Set(hs.map(h => String(h.condition || "holding")))];
+    // ⚠️ THE SAME SET THE LIST SHOWS. Written as "not quiet", the board said "Needs you 0" over a review list of
+    // four rows — one number and one list about one question, disagreeing on screen.
+    const asks = reviewRows.length + offers.length + (character.featureOffers || []).length + (character.captives || []).length;
+    const money = (v) => { const p = priceHere(Math.abs(v), hereRegionId(), ecoG); return `${v < 0 ? "\u2212" : v > 0 ? "+" : ""}${esc(p.label)}`; };
     const netCls = net > 0 ? "good" : net < 0 ? "bad" : "";
-    const money = (v) => { const p = priceHere(Math.abs(v), hereRegionId(), ecoG); return `${v < 0 ? "−" : v > 0 ? "+" : ""}${esc(p.label)}`; };
-    return `<div class="gs-strip">
-      <div class="gs-line">
-        <span class="gs-n"><strong>${hs.length}</strong> ${hs.length === 1 ? "holding" : "holdings"}</span>
-        ${netKnown ? `<span class="gs-net ${netCls}" title="What your whole estate does to your purse each pass — everything it sells and charges, less what it costs to keep">${money(Math.round(net * 100) / 100)} a pass</span>` : ""}
-      </div>
-      ${alerts.length ? `<div class="gs-alerts">${alerts.join("")}</div>` : `<div class="hint">nothing wants your attention</div>`}
+    const stat = (cls, label, value, under, title) => `<div class="gs-stat${cls ? " " + cls : ""}"${title ? ` title="${esc(title)}"` : ""}>
+      <div class="gs-stat-l">${label}</div><div class="gs-stat-n${cls === "asks" ? "" : value.cls ? " " + value.cls : ""}">${value.text}</div>
+      <div class="gs-stat-w">${under}</div></div>`;
+    return `<div class="gs-board">
+      ${stat("", "Holdings", { text: String(hs.length) },
+        `${esc(Object.entries(kinds).map(([k, n]) => `${n} ${k}${n === 1 ? "" : "s"}`).join(" · "))}${conds.length === 1 ? ` · all ${esc(conds[0])}` : ""}`)}
+      ${netKnown ? stat("", `Net each pass ${infoDot("hold.pass")}`, { text: money(Math.round(net * 100) / 100), cls: netCls },
+        `${Math.round(inn)} in, ${Math.round(out)} out · a pass ≈ 3 days`,
+        "What your whole estate does to your purse each pass — everything it sells and charges, less what it costs to keep") : ""}
+      ${stat("", "People at your holds", { text: String(folk) },
+        `${kept} kept · ${crew} crew · ${watch} on watch`, "The keeper, the crew and the watch, at every place you hold")}
+      ${stat("asks", "Needs you", { text: String(asks) },
+        asks ? esc([...new Set(reviewRows.map(r => r.a.said))].slice(0, 3).join(" · ") || "something waits below") : "nothing wants your attention")}
     </div>`;
   })();
+
+  // ═════ TO REVIEW — the alerts, one row each, with the verb as a button (her Main board) ═════
+  // ⛔ Erik's own rule, kept: the row that names a problem carries the verb for it, and the verb OPENS THE TAB that
+  // answers it. Her list makes that a page-level reading rather than something you find card by card.
+  const reviewPanel = () => {
+    const rows = reviewRows.map(({ h, a }) => `<div class="gs-row${a.cls ? " " + a.cls : " ok"}">
+      <span class="gs-dot" aria-hidden="true"></span>
+      <span class="gs-row-t"><b>${esc(h.name || h.id)}</b> <span>— ${esc(a.said)}</span></span>
+      <button class="gs-go" data-hold-open="${esc(h.id)}" data-pp-goto="${esc(a.tab)}" title="${esc(a.verb)}">${esc(a.go)}</button>
+    </div>`).join("");
+    return rows;
+  };
 
   // ═════ SNG-651 §2 · WHAT A PLACE READS AS — composed ONCE, for the place page ═════
   // ⛔ Aevi, §1: "Each holding card shows a facts line, a grid, where it is, who lives there, standing work,
@@ -15260,7 +15322,6 @@ function renderHoldingsTab(manageId = null, tab = null) {
     const locName = h.locationId ? (CONTENT.locations?.[h.locationId]?.name || h.locationId) : null;
     const loc = locName && String(locName).trim().toLowerCase() !== String(h.name || h.id).trim().toLowerCase() ? locName : null;
     const art = ensureHoldingImage(h) || h.image || null;
-    const cfgC = holdCfgNow();
     // ⛑ THE THREE NUMBERS, each from the reader that owns it — so a card and the place page cannot disagree.
     // ⛔ AND EACH FROM THE READER'S OWN BAG, COPIED, NOT RECONSTRUCTED. My first cut passed `{ nameOf }` to
     // `residentsOf` (which takes the hold config) and read `.length` off its `{homes, people}` — undefined, with
@@ -15271,37 +15332,40 @@ function renderHoldingsTab(manageId = null, tab = null) {
     const per = (() => { const L = holdLedgerOf(h);
       return L?.perPass && Number.isFinite(Number(L.perPass.net)) ? Math.round(Number(L.perPass.net) * 100) / 100 : null; })();
     const perCls = per == null ? "" : per > 0 ? "good" : per < 0 ? "bad" : "";
-    // ⛔ ONE ALERT, THE MOST URGENT — not a list. A card that shows four warnings shows none.
-    const alert = (() => {
-      // ⛑ §345 — each alert names the TAB that answers it, so naming the problem and carrying the verb for it
-      // are the same act. An alert with nowhere to go is the thing Erik objected to.
-      if (!h.steward) return { cls: "warn", said: "nobody is keeping it", tab: "people", verb: "Open the People tab — an unkept hold cannot climb" };
-      if ((h.history || []).slice(-4).some(e => /raid/i.test(String(e?.note || "")))) return { cls: "bad", said: "raided recently", tab: "defence", verb: "Open Attack & Defense — what comes at it, and what stands against them" };
-      if (String(h.condition) === "failing") return { cls: "bad", said: "failing", tab: "people", verb: "Open the People tab — a keeper sets the floor it will not drop below" };
-      try { const r = roomOf(h, cfgC); if (r && r.total > 0 && r.used >= r.total) return { cls: "warn", said: "no feature spots left", tab: "build", verb: "Open the Build tab — it may be ready to be named something greater" }; } catch { /* no reader, no alert */ }
-      if (Number(h.arrears) > 0) return { cls: "warn", said: `${h.arrears} of keep owed`, tab: "store", verb: "Open Store & money" };
-      if (per != null && per < 0) return { cls: "warn", said: "costs more than it makes", tab: "store", verb: "Open Store & money — what it sells, and what it costs to keep" };
-      return null;
-    })();
+    // ⛔ ONE ALERT, THE MOST URGENT — not a list. A card that shows four warnings shows none. ⛑ And it is the SAME
+    // reader the board and the review list use, so the three surfaces cannot disagree about one place: this WAS a
+    // second copy of the priority list, and the strip's own third copy knew only three of its six states.
+    const alert = alertOf(h);
+    // ⛑ HER CARD ANATOMY: a tone panel carrying the kind, the name with its condition in green, the facts line, three
+    // LABELLED numbers, and a foot pairing the state pill with a gold Open. The three are keeper / people / per pass,
+    // which is what she chose and is the right three: who holds it, who is there, what it does to the purse.
+    const condCls = String(h.condition) === "failing" ? "bad" : String(h.condition) === "strained" ? "warn" : "";
     return `<div class="hold-card" data-hold-open="${esc(h.id)}" role="button" tabindex="0" title="Open ${esc(h.name || h.id)}">
       ${/* ⛑ CCODE-169 · SNG-546's precedent — THE WHOLE CARD IS THE CONTROL, so its picture defers its lightbox
-            and NAMES the surface that opens one: a second lightbox here would make one click mean two things.
-            The place page's own image carries both the lightbox and the re-mint hook. */""}
-      ${art ? `<img class="hold-card-art" src="${esc(art)}" loading="lazy" alt="${esc(h.name || h.id)}" data-lightbox-via="hold-modal">` : `<div class="hold-card-art hold-card-noart" aria-hidden="true"></div>`}
-      <div class="hold-card-body">
-        <div class="hold-card-top"><strong>${ownerOf(h)}${esc(h.name || h.id)}</strong>${loc ? `<span class="hint"> \u00b7 ${esc(loc)}</span>` : ""}</div>
-        ${factsOf(h)}
-        <div class="hold-card-nums">
-          <span title="Everybody at this place \u2014 the keeper, the crew and the watch"><strong>${people}</strong> ${people === 1 ? "person" : "people"}</span>
-          ${per == null ? "" : `<span class="${perCls}" title="What your purse feels each pass, once its keep is paid"><strong>${per > 0 ? "+" : ""}${per}</strong> a pass</span>`}
-          <span title="How the place is faring">${esc(h.condition || "holding")}</span>
-        </div>
-        ${/* ⛔ §345 · SNG-651 §2.2 — THE ALERT IS THE DOOR. Aevi's card carries one alert and one button;
-              Erik's ruling is that the card naming a problem carries the verb for it. Both hold when the alert
-              OPENS THE TAB THE VERB LIVES ON — unkept goes to People, a full place to Build, a raid to Defence. */""}
-        ${alert ? `<button class="hold-card-alert ${alert.cls}" data-hold-open="${esc(h.id)}" data-pp-goto="${alert.tab}" title="${esc(alert.verb)}">${esc(alert.said)}</button>` : ""}
+            and NAMES the surface that opens one. The place page's own image carries the lightbox and the re-mint hook. */""}
+      <div class="hold-card-tone">
+        ${art ? `<img class="hold-card-art" src="${esc(art)}" loading="lazy" alt="${esc(h.name || h.id)}" data-lightbox-via="hold-modal">` : `<div class="hold-card-art hold-card-noart" aria-hidden="true"></div>`}
+        <span class="hold-card-kind">${esc(h.kind || "post")}</span>
       </div>
-      <button class="opt hold-card-open" data-hold-open="${esc(h.id)}">Open</button>
+      <div class="hold-card-body">
+        <div class="hold-card-top">
+          <strong>${ownerOf(h)}${esc(h.name || h.id)}</strong>
+          <span class="hold-card-cond${condCls ? " " + condCls : ""}" title="How the place is faring">${esc(h.condition || "holding")}</span>
+        </div>
+        ${factsOf(h)}
+        <div class="hold-card-grid">
+          <div><div class="l">keeper</div><div class="v">${h.steward ? esc(nameOf(h.steward)) : "<em>nobody</em>"}</div></div>
+          <div><div class="l">people</div><div class="v" title="Everybody at this place \u2014 the keeper, the crew and the watch">${people}</div></div>
+          <div><div class="l">per pass</div><div class="v${perCls ? " " + perCls : ""}" title="What your purse feels each pass, once its keep is paid">${per == null ? "\u2014" : `${per > 0 ? "+" : ""}${per}`}</div></div>
+        </div>
+        ${/* ⛔ §345 · SNG-651 §2.2 — THE ALERT IS THE DOOR, and in her grammar it is a PILL beside the button.
+              Erik's ruling holds: the row naming a problem carries the verb for it, and the pill OPENS THE TAB the
+              verb lives on — unkept goes to People, a full place to Build, a raid to Attack & Defense. */""}
+        <div class="hold-card-foot">
+          ${alert ? `<button class="hold-card-alert ${alert.cls}" data-hold-open="${esc(h.id)}" data-pp-goto="${alert.tab}" title="${esc(alert.verb)}">${esc(alert.said)}</button>` : `<span></span>`}
+          <button class="hold-card-open" data-hold-open="${esc(h.id)}">Open</button>
+        </div>
+      </div>
     </div>`;
   }).join("");
 
@@ -15341,14 +15405,24 @@ function renderHoldingsTab(manageId = null, tab = null) {
       <button class="opt" data-hold-dismiss="${i}">Not a place</button>
     </div></div>`).join("");
 
-  chrome(`<div class="screen" style="max-width:760px">
+  // ⛔ `screen-ground`, NOT A PANEL. Her boards float panels on the GROUND; ours sat inside `.screen`, which is itself
+  // a panel — so every card edge disappeared into it and the same colours read as a flat page. This one class is the
+  // largest single difference between the two looks.
+  const anythingToReview = reviewRows.length || offers.length || (character.featureOffers || []).length || (character.captives || []).length;
+  chrome(`<div class="screen screen-ground">
     ${characterTabBar("holdings")}
+    ${/* ⛑ HER TITLE ROW: the page's name in ink, and the purse on the right — the one fact a player checks before
+          deciding anything on this screen. `purseLine` is the same composer the Purse panel uses. */""}
+    <div class="page-title"><h2>What stands in your name</h2>
+      <span class="aside">${(() => { try { return esc(purseLine(character.purse || {}, { regionId: hereRegionId(), regionNameOf: regionDisplayName })); } catch { return ""; } })()}</span></div>
     ${groundStrip}
-    <div class="cs-block"><h3 class="codex-title" style="font-size:15px">What stands in your name</h3>
-      ${holdingRows || `<p class="hint">Nothing yet. A post or an enterprise becomes yours through play — or through work you have already delegated, below.</p>`}</div>
-    ${(offers.length || (character.featureOffers || []).length || (character.captives || []).length) ? `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">To review</h3>${captiveRows}${featRows}
-      <p class="hint">${offers.length} thing${offers.length === 1 ? "" : "s"} you have people working on may be ${offers.length === 1 ? "a place" : "places"} you hold. Only you can say.</p>
-      ${offerRows}</div>` : ""}
+    ${anythingToReview ? `<section class="gs-review">
+      <div class="gs-review-h"><h3>To review</h3><span class="gs-count">${reviewRows.length + offers.length + (character.featureOffers || []).length + (character.captives || []).length}</span></div>
+      ${reviewPanel()}
+      ${captiveRows}${featRows}
+      ${offers.length ? `<p class="hint">${offers.length} thing${offers.length === 1 ? "" : "s"} you have people working on may be ${offers.length === 1 ? "a place" : "places"} you hold. Only you can say.</p>${offerRows}` : ""}
+    </section>` : ""}
+    ${holdingRows ? `<div class="hold-grid">${holdingRows}</div>` : `<p class="hint">Nothing yet. A post or an enterprise becomes yours through play — or through work you have already delegated, below.</p>`}
     ${(character.formerHoldings || []).length ? `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">No longer yours</h3>
       ${(character.formerHoldings || []).map(f => `<div class="codex-f"><strong>${esc(f.name || f.id)}</strong> <span class="hint">${f.transferredTo ? `handed to ${esc(f.transferredToName || nameOf(f.transferredTo))}${f.transferredDay != null ? ` on day ${f.transferredDay}` : ""}` : `given up${f.reason ? ` — ${esc(f.reason)}` : ""}${f.obligationUnpaid ? " · what it owed is still owed" : ""}`}</span>
         ${f.transferredTo ? `<button class="opt" data-hold-reclaim="${esc(f.id)}" title="Take it back — it is yours again; they keep it for you">Take it back</button>` : ""}</div>`).join("")}</div>` : ""}
@@ -15789,7 +15863,7 @@ function renderCharacterScreen() {
       const purse = ensurePurse(character);
       const here = hereNow()?.regionId || null;
       const w = worthOf(purse, CONTENT.rules?.economy, { regionId: here, worldState: character.worldState });
-      const line = purseLine(purse, { regionId: here });
+      const line = purseLine(purse, { regionId: here, regionNameOf: regionDisplayName });
       // ⛔ ERIK 2026-09-12: "The Purse is good, but should list all the potential types of money. It could also show any trade or
       // sales going on (sum of your enterprises and holdings)." A purse that lists only what you HOLD cannot teach a player that
       // marks exist, or that the scrip in their pocket is another Reach's paper. All five authored currencies are named, and the
@@ -18108,36 +18182,57 @@ function renderPartyTab() {
       <div class="ob-row"><button class="opt" data-ally-hold="${esc(a.id)}" title="${a.present === false ? "Bring them back into the line" : "Let them keep out of the fighting"}">${a.present === false ? "Back into the line" : "Let them hang back"}</button></div>
     </article>`;
     return `<article class="ob-card">
-      <div class="ob-top"><span class="ob-nm">${esc(p.name)}</span><span class="hint">level ${esc(String(p.level))}</span></div>
+      <div class="ob-top"><span class="ob-nm">${esc(p.name)}</span><span class="ob-where">level ${esc(String(p.level))}${isFwd ? " \u00b7 forward" : ""}</span></div>
+      ${/* ⛑ HER THREE LABELLED NUMBERS. What they bring, how it lands, and where they stand — the same three readings
+            her People board puts under 10px uppercase labels, each from the reader that owns it. */""}
+      <div class="ob-grid">
+        <div><div class="l">brings</div><div class="v">${c ? esc(FAMILY_WORDS[c.family] || c.family) : "\u2014"}</div></div>
+        <div><div class="l">it lands</div><div class="v${c && c.chance >= 60 ? " good" : ""}">${c ? `${c.chance}%` : "\u2014"}</div></div>
+        <div><div class="l">place</div><div class="v${isFwd ? " teal" : ""}">${isFwd ? "brought forward" : "in the line"}</div></div>
+      </div>
       <div class="ob-row">${stancePickHtml("data-ally-stance", a.id, st)}
         <label class="ob-narr${pickable ? "" : " fixed"}" title="${esc(pickable ? (isFwd ? "told by name, first" : "bring them forward: told by name, first") : split.why)}"><input type="checkbox" data-ally-forward="${esc(a.id)}"${isFwd ? " checked" : ""}${pickable ? "" : " disabled"}> brought forward</label></div>
-      <div class="ob-now"><span class="hint">${isFwd ? "brought forward:" : "in the line:"}</span> ${c ? `${esc(c.name)}${c.verb ? ` — ${esc(c.verb)}` : ""} <span class="hint">(${esc(FAMILY_WORDS[c.family] || c.family)})</span>` : "nothing to fight with"}</div>
-      ${c ? `<div class="ob-odds">${oddsBarHtml(c.odds, { wide: true })}<span class="hint">${c.chance}% · ${Math.round(100 * (c.odds.crit_success || 0))}% strong</span></div>` : ""}
-      ${crafts.length ? `<div class="hint ob-pref-lbl">prefer — like your own boost</div><div class="ob-pref">${crafts.map(([id, nm]) =>
-        `<button class="${liked.has(id) ? "on" : ""}" data-ally-prefer="${esc(a.id)}" data-craft="${esc(id)}" aria-pressed="${liked.has(id)}">${liked.has(id) ? "★ " : ""}${esc(nm)}</button>`).join("")}</div>` : ""}
+      <div class="ob-now">${c ? `${esc(c.name)}${c.verb ? ` \u2014 ${esc(c.verb)}` : ""}` : "nothing to fight with"}</div>
+      ${c ? `<div class="ob-odds">${oddsBarHtml(c.odds, { wide: true })}<span class="hint">${Math.round(100 * (c.odds.crit_success || 0))}% of those land strong</span></div>` : ""}
+      ${crafts.length ? `<div class="ob-pref-lbl">prefer \u2014 like your own boost</div><div class="ob-pref">${crafts.map(([id, nm]) =>
+        `<button class="${liked.has(id) ? "on" : ""}" data-ally-prefer="${esc(a.id)}" data-craft="${esc(id)}" aria-pressed="${liked.has(id)}">${liked.has(id) ? "\u2605 " : ""}${esc(nm)}</button>`).join("")}</div>` : ""}
     </article>`;
   };
   const r = _partyRoll;
   const roundHtml = r ? `<div class="ob-round">${[...r.forward, ...r.folded].map(x => `<div class="ob-rline${r.folded.includes(x) ? " folded" : ""}"><span><b>${esc(x.name)}</b> — ${esc(x.craft)}${x.verb ? ` (${esc(x.verb)})` : ""}${r.folded.includes(x) ? ` <span class="hint">in the line</span>` : ""}</span><span class="ob-dg ${esc(x.degree)}">${esc(x.said)}</span></div>`).join("")}</div>
       <pre class="ob-directive">${esc(r.directive)}</pre>` : `<p class="hint">Roll a round to see what the GM would be handed.</p>`;
-  chrome(`<div class="screen" style="max-width:980px">
+  chrome(`<div class="screen screen-ground">
     ${characterTabBar("party")}
-    <h2 class="codex-title">At your side</h2>
+    <div class="page-title"><h2>At your side</h2>
+      <span class="aside">${hereNow()?.name ? esc(`at ${hereNow().name}`) : ""}</span></div>
     ${/* ⛔ CCODE-524 · ERIK: "I need an easy way to add people I know to my party, band, and legion." The band
           had a picker; the party had no door at all. */""}
-    <div class="opt-row" style="gap:6px;flex-wrap:wrap;margin:2px 0 8px">
+    <div class="opt-row" style="gap:6px;flex-wrap:wrap;margin:2px 0 10px">
       <button class="opt" id="party-add" title="Ask someone you know to walk with you">➕ Ask someone to walk with you</button>
       <button class="opt" id="party-goto-bands" title="Your bands — and who stands in them">⚔ Bands</button>
     </div>
-    <div class="ob-summary"><span><b>${esc(character.name)}</b> and <b>${allies.length}</b> more</span>${hereNow()?.name ? `<span>at <b>${esc(hereNow().name)}</b></span>` : ""}<span>${esc(split.why)}</span></div>
-    ${allies.length ? `<div class="ob-controls">${obFoeSlider()}<span class="hint">${split.everyoneActs ? "everyone acts" : `${fwdAllies.length} of ${Math.max(0, split.slots - 1)} brought forward`}</span></div>
+    ${/* ⛑ HER CHIPS, in place of the grey summary line: how many walk with you, where you are, how many have a named
+          place. Each is a reading this tab already had and buried in one dim sentence. */""}
+    <div class="ob-chips">
+      <span class="ob-chip on">${esc(character.name)} and ${allies.length} more</span>
+      ${allies.length ? `<span class="ob-chip">${split.everyoneActs ? "everyone acts" : `${fwdAllies.length} of ${Math.max(0, split.slots - 1)} brought forward`}</span>` : ""}
+    </div>
+    ${allies.length ? `<div class="ob-controls">${obFoeSlider()}</div>
       ${(() => {
-        // ⛑ THE ENGINE'S OWN COUNT, not a second one taken here. `forwardCompany` answers who comes forward
-        // and who travels alongside; the tab says what it answers.
+        // ⛑ …AND HER "BEFORE IT CAN TAKE THE FIELD": one coloured line per condition, instead of three clauses in one
+        // grey sentence. ⚡ THE ENGINE'S OWN COUNT, not a second one taken here — `forwardCompany` answers who comes
+        // forward and who travels alongside, and the tab says what it answers.
         const fc = (() => { try { return forwardCompany(character, { ladder: CONTENT.rules?.subAttributeLadder || null }); } catch { return null; } })();
         const along = allies.filter(x => !canFwd(x.a)).length;
-        if (!along && !fc) return "";
-        return `<div class="hint" style="margin:4px 0">${fc ? esc(fc.why) : ""}${along ? `${fc ? " · " : ""}${along} of them travel with you without a named place — they are in the line, and closeness is what earns the rest.` : ""}</div>`;
+        const rows = [];
+        if (fc?.why) rows.push({ cls: "", said: fc.why });
+        if (!split.everyoneActs) rows.push({ cls: fwdAllies.length ? "good" : "warn", said: split.why });
+        if (along) rows.push({ cls: "warn", said: `${along} of them travel with you without a named place — they are in the line, and closeness is what earns the rest.` });
+        if (!rows.length) return "";
+        return `<section class="ob-before">
+          <div class="l">how the line stands</div>
+          ${rows.map(r => `<div class="row${r.cls ? " " + r.cls : ""}">• ${esc(r.said)}</div>`).join("")}
+        </section>`;
       })()}
       <div class="ob-roster">${allies.map(card).join("")}</div>
       <div class="ob-panel"><div class="ob-head"><h3 class="codex-title" style="margin:0">The next round, as the GM receives it</h3><button class="btn" id="party-roll">Roll a round</button></div>

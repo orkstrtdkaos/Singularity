@@ -10,6 +10,21 @@
   --danger: #c05b4d;
   --ok: #7ba05b;
   --border: #33363f;
+  /* ⚠️ DECLARED 2026-09-27 (Erik: "her look was better") — these six were USED THROUGHOUT THIS FILE AND NEVER
+     DECLARED, so every site fell through to its own fallback and they disagreed: `--good` was #79c08a in three places
+     and #4fa36b in two, `--warn` was #e0b25a, #c9913a and #c96, `--bad` was #d98b8b and #c46, `--line-soft` was
+     #2e2e2e and #3a3a3a. One semantic colour, three colours on screen. ⛑ The values are the mockup's own. */
+  --ink-mid: #b7b2a4;     /* a second ink: what a fact reads as beside a name */
+  --line: #3a3d45;        /* a quiet edge — a pill nobody needs to look at */
+  --line-soft: #2a2d35;   /* the rule between rows inside a panel */
+  --line-inner: #25282f;  /* the rule between rows of a table */
+  --good: #8fb86c;        /* it pays, it holds, they are here */
+  --warn: #e0b25a;        /* it wants you */
+  --warn-line: #7a6230;
+  --bad: #e08a7e;         /* it is going wrong — lighter than `--danger`, which is a DOT colour and fails as ink */
+  --bad-line: #7a3a33;
+  --teal-line: #2f5f5a;   /* forming, sent for, costs nothing yet */
+  --gold-line: #c9a24a;   /* the outline on the one card that needs you */
   --font: Georgia, "Times New Roman", serif;
   --font-ui: "Segoe UI", system-ui, sans-serif;
   /* CCODE-414: the five ways a roll lands */
@@ -2214,3 +2229,134 @@ table.ob-matrix { border-collapse: collapse; width: 100%; min-width: 640px; font
 .pp-hist-row { display: flex; gap: 8px; align-items: baseline; font-size: 12.5px; }
 .pp-when { min-width: 54px; flex: 0 0 auto; font-variant-numeric: tabular-nums; }
 @media (max-width: 480px) { .hold-card-art { width: 44px; height: 44px; } .pp-tab { padding: 5px 7px; font-size: 12px; } }
+
+/* ══════════ THE HOLDS AND THE PARTY, IN AEVI'S GRAMMAR (Erik 2026-09-27) ══════════
+ *
+ * ⛑ Erik: *"I want the ui for the party and holds to look a lot more like the mockup aevi made … her look was
+ * better."* Her boards are the Design canvas "Holdings Screen Mockup": Main, Place, Phone, People & bands.
+ *
+ * ⛔ THE ONE STRUCTURAL THING THAT MAKES HERS READ: PANELS FLOAT ON THE GROUND. Our `.screen` is itself a panel, so a
+ * card inside it is panel-on-panel and every edge vanishes. `.screen-ground` takes the panel away and lets the ground
+ * through, which is what her boards do — and it is why the same colours look like a different screen.
+ *
+ * ⚡ Every number on these surfaces is still composed by the engine. Her mockup's figures are illustrative and she
+ * says so in the canvas; what is ported here is the GRAMMAR — the shapes, the type scale and the states. */
+.screen-ground { background: none; border: 0; padding: 0; max-width: 1100px; }
+.screen-ground > h2 { margin-bottom: 10px; }
+/* ⛑ HER PAGE TITLE — the NAME of the page in plain ink at 30px, with one quiet fact pushed to the right. Gold at
+   17px reads as a section label; this reads as where you are. */
+.page-title { display: flex; align-items: baseline; justify-content: space-between; gap: 12px 18px; flex-wrap: wrap; margin: 0 0 14px; }
+.page-title h2 { font-family: var(--font); font-size: 30px; font-weight: normal; color: var(--ink); margin: 0; }
+.page-title .aside { font-family: var(--font-ui); font-size: 13px; color: var(--ink-dim); }
+@media (max-width: 480px) { .page-title h2 { font-size: 24px; } }
+
+/* ── the board: label · a big Georgia number · one dim line ── */
+.gs-board { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin: 0 0 14px; }
+.gs-stat { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; min-width: 0; }
+.gs-stat-l { font-family: var(--font-ui); font-size: 11px; letter-spacing: .8px; text-transform: uppercase; color: var(--ink-dim); }
+.gs-stat-n { font-family: var(--font); font-size: 30px; line-height: 1.15; font-variant-numeric: tabular-nums; }
+.gs-stat-n.good { color: var(--good); }
+.gs-stat-n.bad { color: var(--bad); }
+.gs-stat-w { font-family: var(--font-ui); font-size: 12px; color: var(--ink-dim); line-height: 1.45; }
+/* ⛔ THE ONE CARD THAT WANTS YOU IS OUTLINED, which is the whole of her "Needs you" treatment. */
+.gs-stat.asks { border-color: var(--gold-line); }
+.gs-stat.asks .gs-stat-l, .gs-stat.asks .gs-stat-n { color: var(--accent); }
+
+/* ── to review: a dot, the place, what it wants, and the verb ── */
+.gs-review { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 14px 18px; margin: 0 0 14px; display: grid; gap: 10px; }
+.gs-review-h { display: flex; align-items: baseline; gap: 10px; }
+.gs-review-h h3 { margin: 0; font-family: var(--font); font-size: 18px; font-weight: normal; color: var(--ink); }
+.gs-count { font-family: var(--font-ui); font-size: 12px; background: var(--accent); color: var(--bg); border-radius: 10px; padding: 1px 8px; }
+.gs-row { display: flex; align-items: center; gap: 14px; font-family: var(--font-ui); font-size: 14px; border-top: 1px solid var(--line-soft); padding-top: 10px; }
+.gs-row .gs-dot { width: 10px; height: 10px; border-radius: 5px; flex: 0 0 auto; background: var(--ink-dim); }
+.gs-row.warn .gs-dot { background: var(--warn); }
+.gs-row.bad .gs-dot { background: var(--danger); }
+.gs-row.ok .gs-dot { background: var(--accent2); }
+.gs-row-t { flex: 1 1 auto; min-width: 0; }
+.gs-row-t b { font-weight: 600; color: var(--ink); }
+.gs-row-t span { color: var(--ink-mid); }
+.gs-go { font-family: var(--font-ui); font-size: 13px; background: none; border: 1px solid var(--border); border-radius: 6px; padding: 8px 12px; color: var(--ink); white-space: nowrap; }
+.gs-go:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ── the holds, two up ── */
+.hold-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.hold-card { display: flex; gap: 14px; align-items: stretch; padding: 14px; margin: 0;
+  background: var(--panel); border: 1px solid var(--border); border-radius: 10px; cursor: pointer; text-align: left; min-width: 0; }
+.hold-card:hover, .hold-card:focus-visible { border-color: var(--gold-line); }
+.hold-card-art { width: 96px; height: auto; min-height: 96px; flex: 0 0 96px; object-fit: cover; border-radius: 6px; align-self: stretch; }
+.hold-card-noart { background: var(--panel2); }
+/* ⛑ HER TONE PANEL CARRIES THE KIND at its foot — a post and an enterprise are told apart before you read a word. */
+.hold-card-tone { position: relative; }
+.hold-card-kind { position: absolute; left: 6px; bottom: 5px; font-family: var(--font-ui); font-size: 10px; letter-spacing: .6px;
+  text-transform: uppercase; color: var(--ink); opacity: .82; text-shadow: 0 1px 2px rgba(0,0,0,.6); }
+.hold-card-body { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.hold-card-top { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+.hold-card-top strong { font-family: var(--font); font-size: 19px; font-weight: normal; color: var(--ink); }
+.hold-card-cond { font-family: var(--font-ui); font-size: 12px; color: var(--good); white-space: nowrap; }
+.hold-card-cond.warn { color: var(--warn); }
+.hold-card-cond.bad { color: var(--bad); }
+.hold-card-facts { font-family: var(--font-ui); font-size: 12px; color: var(--ink-dim); opacity: 1; }
+/* ── three labelled numbers, her exact scale ── */
+.hold-card-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 2px; }
+.hold-card-grid .l { font-family: var(--font-ui); font-size: 10px; letter-spacing: .6px; text-transform: uppercase; color: var(--ink-dim); }
+.hold-card-grid .v { font-family: var(--font-ui); font-size: 14px; color: var(--ink); overflow-wrap: anywhere; }
+.hold-card-grid .v.good { color: var(--good); }
+.hold-card-grid .v.bad { color: var(--bad); }
+.hold-card-foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: auto; padding-top: 4px; }
+/* ⛔ THE STATE IS A PILL, not a button pretending to be one — and it is still the door to the tab that answers it. */
+.hold-card-alert { font-family: var(--font-ui); font-size: 12px; background: none; border: 1px solid var(--line); border-radius: 12px;
+  padding: 3px 10px; color: var(--ink-mid); margin: 0; }
+.hold-card-alert.warn { color: var(--warn); border-color: var(--warn-line); }
+.hold-card-alert.bad { color: var(--bad); border-color: var(--bad-line); }
+.hold-card-alert:hover { border-color: currentColor; }
+.hold-card-open { font-family: var(--font-ui); font-size: 13px; background: var(--accent); color: var(--bg); border: 1px solid var(--accent);
+  border-radius: 6px; padding: 9px 16px; flex: 0 0 auto; }
+.hold-card-open:hover { background: #e8bd6a; border-color: #e8bd6a; color: var(--bg); }
+
+/* ── the party, in the same grammar ── */
+.ob-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 12px; }
+.ob-chip { font-family: var(--font-ui); font-size: 12px; border: 1px solid var(--border); border-radius: 14px; padding: 5px 12px; color: var(--ink-mid); background: none; }
+.ob-chip.on { color: var(--accent); border-color: var(--gold-line); }
+.ob-roster { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 14px; }
+.ob-card { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 16px; gap: 10px; }
+.ob-card.ob-alongside { border-style: dashed; border-color: var(--line); }
+.ob-nm { font-family: var(--font); font-size: 19px; color: var(--ink); }
+.ob-where { font-family: var(--font-ui); font-size: 12px; color: var(--ink-dim); white-space: nowrap; }
+.ob-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); gap: 8px; }
+.ob-grid .l { font-family: var(--font-ui); font-size: 10px; letter-spacing: .6px; text-transform: uppercase; color: var(--ink-dim); }
+.ob-grid .v { font-family: var(--font-ui); font-size: 14px; color: var(--ink); overflow-wrap: anywhere; }
+.ob-grid .v.good { color: var(--good); }
+.ob-grid .v.teal { color: var(--accent2); }
+.ob-now { font-family: var(--font-ui); font-size: 13px; color: var(--ink); border-top: 1px solid var(--line-soft); padding-top: 8px; }
+.ob-pref-lbl { font-family: var(--font-ui); font-size: 10px; letter-spacing: .6px; text-transform: uppercase; color: var(--ink-dim); }
+.ob-pref button { background: var(--panel2); border: 1px solid var(--border); border-radius: 12px; padding: 4px 10px; font: 12px var(--font-ui); color: var(--ink-mid); }
+.ob-pref button.on { color: var(--accent); border-color: var(--gold-line); background: rgba(212, 162, 74, .14); }
+/* ⛑ HER "BEFORE IT CAN TAKE THE FIELD" — one coloured line per condition, which is how a party reads what it lacks. */
+.ob-before { display: grid; gap: 6px; border-top: 1px solid var(--line-soft); padding-top: 12px; }
+.ob-before .l { font-family: var(--font-ui); font-size: 11px; letter-spacing: .6px; text-transform: uppercase; color: var(--ink-dim); }
+.ob-before .row { font-family: var(--font-ui); font-size: 13px; color: var(--ink-mid); }
+.ob-before .row.warn { color: var(--warn); }
+.ob-before .row.good { color: var(--good); }
+.ob-panel { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 18px; margin-top: 14px; }
+.ob-panel h3 { font-family: var(--font); font-size: 22px; font-weight: normal; color: var(--ink); }
+/* forming, sent for, costs nothing yet — her dashed teal */
+.ob-forming { border: 1px dashed var(--accent2); }
+.ob-state { font-family: var(--font-ui); font-size: 11px; letter-spacing: .6px; text-transform: uppercase; color: var(--accent2); }
+.ob-state.raised { color: var(--good); }
+
+/* ── a phone: her Phone board is one column of 64px rows ── */
+@media (max-width: 760px) {
+  .hold-grid { grid-template-columns: 1fr; }
+  .gs-board { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .gs-stat-n { font-size: 24px; }
+  .gs-review { padding: 12px 14px; }
+  .ob-roster { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .hold-card { padding: 12px; gap: 12px; min-height: 64px; }
+  .hold-card-art { width: 44px; flex: 0 0 44px; min-height: 44px; align-self: flex-start; }
+  .hold-card-kind { display: none; }
+  .hold-card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .hold-card-top strong { font-size: 16px; }
+  .hold-card-foot { flex-wrap: wrap; }
+}

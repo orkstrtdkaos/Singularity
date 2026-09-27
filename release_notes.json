@@ -16,6 +16,30 @@
   "next": [],
   "releases": [
     {
+      "version": "2.14.4",
+      "date": "2026-09-27",
+      "entries": [
+        {
+          "kind": "change",
+          "title": "Your holdings, at a glance",
+          "summary": "The Holdings screen opens with four readings — how many places, what they do to your purse each pass, who stands at them, and how many want you — and a list of exactly what wants you, each with the button that answers it.",
+          "detail": "The screen used to open with a thin line and a wall of cards. It now opens the way the design for it always intended: four boards across the top, the last one outlined when something needs a decision from you; then “To review” — one row per place that wants something, saying what it wants and carrying the button that goes straight to the tab where you do it. Underneath, the places themselves are two to a row, each with its condition beside its name, its keeper, how many people stand there, and what it pays you a pass, under labels so you can read down the column instead of hunting. On a phone they stack to one column. ⚠️ And the three surfaces now count the same things: the board, the list and the cards ask one reader, so a place cannot be quietly urgent on its card and missing from the list."
+        },
+        {
+          "kind": "change",
+          "title": "Your party reads like the rest of it",
+          "summary": "Who walks with you, what they bring, how often it lands and where they stand — under labels, with the state of the line said in plain lines instead of one grey sentence.",
+          "detail": "The party screen carries the same shapes as the holdings one: chips across the top for how the party stands, then “how the line stands” — one line per condition, amber when something is holding you back — and a card each, with what they bring, how often their craft lands, and whether they are brought forward or in the line. Everything you could do before you can still do: stance, bringing someone forward, starring the crafts you would rather they used."
+        },
+        {
+          "kind": "fix",
+          "title": "Your purse reads as money",
+          "summary": "Scrip was printed with sixteen decimal places and named by its internal id.",
+          "detail": "A purse holding another Reach's scrip read “899.9700000000001 the_palelands scrip” — the number a rate produced rather than the money you have, and the region's key instead of its name. It says “899.97 The Palelands scrip” now, wherever the purse is shown."
+        }
+      ]
+    },
+    {
       "version": "2.14.3",
       "date": "2026-09-27",
       "entries": [

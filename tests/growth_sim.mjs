@@ -22,7 +22,7 @@ import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { grantCeiling, evolutionBudget, recordEvolution, foldGrants, canDerive } from "../engine/earnedpower.js";
 import { checkBorn, contractedTypes } from "../engine/borncontract.js";
-import { bestiaryEncounters, generatedCreatureEncounters, eligibleEncountersFor, synthesizeDuelDef } from "../engine/random_encounters.js";
+import { bestiaryEncounters, generatedCreatureEncounters, eligibleEncountersFor, synthesizeDuelDef, BEAST_TIER } from "../engine/random_encounters.js";   // ⛔ the tier ladder is the ENGINE's, never a list typed here: mine had four rungs of the seven
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const rj = rel => JSON.parse(readFileSync(join(root, rel), "utf8"));
@@ -160,12 +160,17 @@ console.log("GROWTH SIM — the rate at which the world grows\n");
 // pessimistic end rather than the comfortable one.
 {
   const PLAYERS = 4, DAYS = 180, PER_PLAYER_PER_10_DAYS = 1;   // aggressive: ~72 grown creatures in a campaign
+  const RUNGS = Object.keys(BEAST_TIER);   // ⛑ seven, not the four this sim used to know
   const rng = mulberry32(0x5EED5);
   const generated = {};
   for (let p = 0; p < PLAYERS; p++) {
     for (let d = 0; d < DAYS; d += 10 / PER_PLAYER_PER_10_DAYS) {
       const id = `gen-thing-${p}-${Math.round(d)}`;
-      generated[id] = { id, name: `a grown thing ${p}-${Math.round(d)}`, tier: ["riffraff", "notable", "leader", "epic"][Math.floor(rng() * 4)],
+      // ⛔ EVERY RUNG THE ENGINE KNOWS, derived. The hardcoded four (riffraff, notable, leader, epic) predate the
+      // bestiary's seven, so this sim never minted a grown LEGENDARY — `minDanger` 5, the top of the danger scale — or
+      // a grown MYTHIC, which must never roll at all. Those are precisely the two rungs where the danger gate below
+      // could fail, and the harness could not produce either of them.
+      generated[id] = { id, name: `a grown thing ${p}-${Math.round(d)}`, tier: RUNGS[Math.floor(rng() * RUNGS.length)],
         class: "beast", look: "l", danger: "d", pressures: ["HARM"] };
     }
   }
@@ -174,6 +179,27 @@ console.log("GROWTH SIM — the rate at which the world grows\n");
   const pool = [...authored, ...grown];
 
   console.log(`      shared pool after ${PLAYERS} players × ${DAYS} days: ${authored.length} authored + ${grown.length} grown = ${pool.length} entries`);
+  // ⚠️ THE COVERAGE IS PRINTED, because a harness that quietly stops reaching a rung is worth less than no harness.
+  const mintedTiers = [...new Set(Object.values(generated).map(c => c.tier))].sort();
+  console.log(`      minted across ${mintedTiers.length} of ${RUNGS.length} rungs: ${mintedTiers.join(", ")}`);
+  check(`every rung the engine knows is actually MINTED (${mintedTiers.length} of ${RUNGS.length})`,
+    mintedTiers.length === RUNGS.length,
+    "a sim that cannot mint a legendary cannot test the gate that keeps one out of a quiet place");
+  // ✅ SNG-660 (Erik) — AND NOW THAT THE TOP RUNGS ARE MINTED, THE RULINGS ABOUT THEM CAN BE ASKED. Mythic never
+  // rolls (`random: false`, weight 0), and a legendary belongs only to the worst ground there is.
+  {
+    // ⚠️ COUNTED AND TIER-CHECKED, NOT MATCHED ON ID SUBSTRINGS. My first form asked whether a pool id CONTAINED a
+    // mythic's id, and these ids are `gen-thing-0-10` and `gen-thing-0-100` — so a pooled riffraff “contained” a
+    // mythic and the check failed against a correct engine. Compare what the thing IS, never what its name looks like.
+    const mythicCount = Object.values(generated).filter(c => c.tier === "mythic").length;
+    const legend = grown.filter(e => /legendary/.test(e.tier || "") || e.minDanger === 5);
+    check(`a grown MYTHIC never enters the pool at all (${mythicCount} minted, ${Object.keys(generated).length - grown.length} left out) — Erik's ruling, now askable`,
+      mythicCount > 0 && grown.length === Object.keys(generated).length - mythicCount
+      && !grown.some(e => String(e.tier || "") === "mythic"),
+      "a mythic that can be rolled for is a mythic that is not mythic");
+    check(`a grown LEGENDARY is gated to danger 5 and weighted a tenth (${legend.length} of ${grown.length} grown)`,
+      legend.length > 0 && legend.every(e => e.minDanger === 5 && e.weight <= 0.1));
+  }
   check("ids NEVER collide — a grown creature can never shadow an authored one in the pool",
     new Set(pool.map(e => e.id)).size === pool.length,
     "two pool entries share an id; one silently shadows the other");

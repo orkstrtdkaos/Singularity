@@ -16,6 +16,24 @@
   "next": [],
   "releases": [
     {
+      "version": "2.14.2",
+      "date": "2026-09-27",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "Three characters get their people's crafts back",
+          "summary": "A character whose record named their people by an old name was being handed none of the basics that people is born to.",
+          "detail": "Peoples were renamed a while ago — \"valley\" became Valleyfolk, \"radiant\" the Radiant Plateau — and three saves still carried the old name. Because nothing in the game could find a people by a name that no longer existed, those characters were given none of the crafts their people are born to, no home region, and no innate reach into the substrate. Their records are corrected on the next load, the withheld basics are handed over, and the game says which ones they are."
+        },
+        {
+          "kind": "fix",
+          "title": "A recovered save keeps the quests it finished",
+          "summary": "Merging a recovered copy could drop every quest ending it held.",
+          "detail": "A chronicle holds two kinds of entry: a line about a scene, and the full record of a quest's ending — its outcome, what was said, the day. When a recovered copy was merged into a live one, the check for \"do I already have this\" could not tell one ending from another, so a save that already held one quest ending would refuse every ending the recovered copy brought. Fixed, and the merge now counts them properly."
+        }
+      ]
+    },
+    {
       "version": "2.14.1",
       "date": "2026-09-26",
       "entries": [

@@ -280,9 +280,26 @@
     },
     "chronicle": {
       "type": "array",
-      "description": "One-line summaries per scene, oldest first. Compressed when long.",
+      "description": "⛔ SNG-658 §2 — SCENE SUMMARIES, OLDEST FIRST, AND THEY ARE NOT ALL STRINGS. `app.js` pushes a one-line summary; `quests.js` pushes a STRUCTURED resolution (`kind: \"quest_resolved\"`) because a quest's ending carries its outcome, its narration and its day, and a sentence cannot. Measured: 4 such entries across 2 of the 16 saves. Compressed when long.",
       "items": {
-        "type": "string"
+        "anyOf": [
+          { "type": "string" },
+          {
+            "type": "object",
+            "description": "a quest's ending, written by `resolveStructuredQuest`",
+            "required": ["kind"],
+            "properties": {
+              "kind": { "type": "string" },
+              "questId": { "type": "string" },
+              "title": { "type": "string" },
+              "outcome": { "type": "string" },
+              "summary": { "type": "string" },
+              "narration": { "type": "array", "items": { "type": "string" } },
+              "worldDay": { "type": "number" },
+              "at": { "type": "string" }
+            }
+          }
+        ]
       }
     },
     "currentLocationId": {

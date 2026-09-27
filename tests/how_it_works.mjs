@@ -30602,6 +30602,109 @@ console.log("\n── §377 · a route is a standing run ──");
     })());
 }
 
+/* ══════════ §378 · SNG-658 — ONE RECORD, TWO SCHEMAS, AND A NAME THAT CHANGED ══════════ */
+// ⛔ THE THREE THINGS THIS SECTION HOLDS, all found by measuring rather than by reading a spec:
+//   · the 57 npc records that failed on `schemaVersion` are the tradition epics and the lore figures, and STAMPING them
+//     broke the LEGEND schema that reads the same records — one record validated by two schemas that disagreed;
+//   · a chronicle entry is a string OR a quest's ending, and `recovery.js` deduped them with `String(e)`, so one object
+//     in a save made a merge drop every structured entry the snapshot held;
+//   · three saves name an origin that no longer exists, which costs them their people's crafts outright.
+console.log("\n── §378 · one record, two schemas ──");
+{
+  const G8 = await import("../engine/genschema.js");
+  const RC8 = await import("../engine/reconcile.js");
+  const PR8 = await import("../engine/progression.js");
+  const RV8 = await import("../engine/recovery.js");
+  const { loadContentHeadless: lch8 } = await import("./headless_content.mjs");
+  const C8 = await lch8();
+  const schema8 = (name) => JSON.parse(rd(`schemas/${name}.schema.json`));
+
+  // ⛑ THE STAMP, AND BOTH SCHEMAS THAT READ IT.
+  check("§378: ⛔ EVERY AUTHORED FIGURE CARRIES `schemaVersion`, AND BOTH SCHEMAS THAT READ ONE AGREE ABOUT IT — the epics and the lore figures are validated as `npc` (where it is required) AND as `legend` (where the schema is closed), so stamping the rows without declaring it there turned 0 invalid legends into 70",
+    (() => {
+      const npcS = schema8("npc"), legS = schema8("legend"), creS = schema8("creature");
+      const npcs = Object.values(C8.npcs || {});
+      const legends = Object.values(C8.legends?.roster || {});
+      const beasts = Object.values(C8.bestiary?.roster || {});
+      const bad = (rows, sch) => rows.filter(r => !G8.validate(r, sch).valid).length;
+      return npcs.length > 100 && legends.length > 50 && beasts.length > 50
+        && npcs.every(r => r.schemaVersion !== undefined)
+        && legends.every(r => r.schemaVersion !== undefined)
+        && beasts.every(r => r.schemaVersion !== undefined)
+        && (npcS.required || []).includes("schemaVersion")
+        && (legS.required || []).includes("schemaVersion")
+        && (creS.required || []).includes("schemaVersion")
+        && bad(npcs, npcS) === 0 && bad(legends, legS) === 0 && bad(beasts, creS) === 0;
+    })(), (() => {
+      const n = Object.values(C8.npcs || {}).length, l = Object.values(C8.legends?.roster || {}).length, b = Object.values(C8.bestiary?.roster || {}).length;
+      return `${n} npcs · ${l} legends · ${b} creatures, all stamped and all valid`;
+    })());
+
+  // ⛔ A CHRONICLE ENTRY IS NOT ALWAYS A SENTENCE.
+  check("§378: ⛔ A CHRONICLE ENTRY IS A SUMMARY *OR* A QUEST'S ENDING, and the schema says so — `quests.js` pushes a structured resolution because an ending carries its outcome, its narration and its day, and a sentence cannot",
+    (() => {
+      const ch = schema8("character");
+      const items = ch.properties?.chronicle?.items;
+      const anyOf = items?.anyOf || [];
+      const str = anyOf.some(x => x.type === "string");
+      const obj = anyOf.find(x => x.type === "object");
+      const ok = str && obj && (obj.required || []).includes("kind") && !!obj.properties?.questId && !!obj.properties?.outcome;
+      // and it accepts BOTH shapes in one array
+      const v = G8.validate({ id: "c", name: "n", chronicle: ["a sentence", { kind: "quest_resolved", questId: "q", title: "t", outcome: "o", summary: "s", narration: ["x"], worldDay: 3, at: "2026-09-26" }] }, { ...ch, required: [] });
+      return ok && v.valid;
+    })());
+
+  check("§378: ⚠️ …and a MERGE no longer drops them. `String(e)` is “[object Object]” for every structured entry, so ONE object already in the save made the recovery merge treat every one in the snapshot as a duplicate — in the one code path whose whole job is not losing things",
+    (() => {
+      const cur = { chronicle: ["a kept sentence", { kind: "quest_resolved", questId: "one", at: "t1" }] };
+      const snap = { chronicle: ["a kept sentence",
+        { kind: "quest_resolved", questId: "one", at: "t1" },      // the same ending: must NOT double
+        { kind: "quest_resolved", questId: "two", at: "t2" },      // a different one: must arrive
+        { kind: "quest_resolved", questId: "three", at: "t3" }] };
+      const r = RV8.mergeRecovery(cur, snap);
+      const ids = cur.chronicle.filter(e => e && typeof e === "object").map(e => e.questId).sort();
+      return r.chronicle === 2 && ids.join(",") === "one,three,two" && cur.chronicle.filter(e => typeof e === "string").length === 1;
+    })(), "two arrive, the duplicate does not, and the sentence is untouched");
+
+  // ⛔ AND THE RENAMED PEOPLE.
+  check("§378: ⛔ AN ORIGIN ID THAT NO LONGER EXISTS COSTS A CHARACTER THEIR PEOPLE'S CRAFTS — `nativeGrantIdsFor` gates on `folkOriginIds.includes(origin)`, so a Valleyfolk whose record still says “valley” is handed NOTHING. Erik's own OI-9 ruling, unapplied on the saves the rename came after",
+    (() => {
+      const step = RC8.CHARACTER_STEPS.find(s => s.id === "the-renamed-people");
+      if (!step) return false;
+      const c = { id: "c8", origin: "valley", abilities: [], attributes: {}, level: 1 };
+      const poolBefore = PR8.nativeGrantIdsFor(c, C8.rules).length;
+      const out = step.apply(c, { content: C8 });
+      const poolAfter = PR8.nativeGrantIdsFor(c, C8.rules).length;
+      return poolBefore === 0 && c.origin === "valleyfolk" && poolAfter > 0
+        && (out.notes || []).some(n => /Valleyfolk/.test(n))
+        // ⛑ AND IT RE-RUNS THE GRANT WALK ITSELF, because `retroNativeGrants` is gated at `nativeGrantsVersion >= 2`
+        // and every one of these saves already carries it — renaming alone would have handed back nothing.
+        && (out.notes || []).some(n => /withheld while the record was wrong/.test(n));
+    })());
+
+  check("§378: ⛑ …and the rename is DERIVED, never a typed map: the stored id must match no origin and exactly ONE must begin with it. Two matches leaves the record alone and says so — guessing between two peoples is worse than waiting",
+    (() => {
+      const step = RC8.CHARACTER_STEPS.find(s => s.id === "the-renamed-people");
+      const fake = { origins: [{ id: "stillhold", name: "A" }, { id: "stillwater", name: "B" }], rules: C8.rules };
+      const c = { id: "c8b", origin: "still", abilities: [] };
+      const out = step.apply(c, { content: fake });
+      const good = { id: "c8c", origin: "radiant", abilities: [] };
+      const gOut = step.apply(good, { content: C8 });
+      const already = { id: "c8d", origin: "valleyfolk", abilities: [] };
+      return c.origin === "still" && (out.warnings || []).some(w => /matches 2 of/.test(w))
+        && good.origin === "radiant_plateau" && (gOut.notes || []).length === 1
+        && Object.keys(step.apply(already, { content: C8 })).length === 0;
+    })());
+
+  check("§378: ⚠️ AND THE STEP'S VERSION IS ABOVE EVERY OTHER ONE — I numbered it 72 because the array's first entry is 71, and the array is NOT sorted: 72 was already taken and the top was 86, so the step would never have run on any save it exists for",
+    (() => {
+      const vs = RC8.CHARACTER_STEPS.map(s => s.version);
+      const dupes = vs.filter((v, i) => vs.indexOf(v) !== i);
+      const mine = RC8.CHARACTER_STEPS.find(s => s.id === "the-renamed-people");
+      return dupes.length === 0 && mine.version === Math.max(...vs) && mine.version === RC8.topReconcileVersion("character");
+    })(), `${RC8.CHARACTER_STEPS.length} steps, top ${RC8.topReconcileVersion("character")}, no two share a number`);
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

@@ -4,6 +4,7 @@
  "_draft": "SNG-658: DERIVED FROM THE CORPUS (70 records) on 2026-09-25 — required = present on every record. Aevi reviews and tightens; do not treat as ratified until _draft is removed.",
  "type": "object",
  "required": [
+  "schemaVersion",
   "id",
   "name",
   "tier",
@@ -25,6 +26,10 @@
   "legend"
  ],
  "properties": {
+  "schemaVersion": {
+   "type": "integer",
+   "description": "⛔ SNG-658 §1 — THE SAME RECORD IS VALIDATED AS AN `npc` TOO, where this field is required: the epics and figures are merged into `CONTENT.npcs` and read one by one. A row inside a versioned document repeats the version — the decision Aevi made for the 87 bestiary rows, and the same one here, so the two schemas agree about the fields one record carries."
+  },
   "id": {
    "type": "string",
    "description": "present on 70 of 70"

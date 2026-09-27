@@ -13,6 +13,15 @@
 const bare = (f) => String(f).replace(/^\[d\d+\]\s*/, "").trim();
 
 /** Merge `snap` into `cur`. Returns a receipt of what was added; mutates `cur`. */
+/** ⛑ WHAT MAKES A CHRONICLE ENTRY ITSELF. A string is its own key; a quest's ending is its kind, its quest and the
+ *  moment it was written — never `String(e)`, which is "[object Object]" for every one of them. PURE. */
+function chronicleKey(e) {
+  if (typeof e === "string") return e;
+  if (!e || typeof e !== "object") return String(e);
+  const parts = [e.kind, e.questId, e.at, e.worldDay, e.title].filter(v => v !== undefined && v !== null && v !== "");
+  return parts.length ? `❖${parts.join("|")}` : `❖${JSON.stringify(e)}`;
+}
+
 export function mergeRecovery(cur, snap) {
   const r = { items: [], people: [], topics: [], facts: 0, quests: [], chronicle: 0, deeds: 0, holdings: [], bands: [], level: null, xp: null };
   if (!cur || !snap || typeof snap !== "object") return r;
@@ -48,10 +57,18 @@ export function mergeRecovery(cur, snap) {
   };
   byId("quests", r.quests); byId("holdings", r.holdings); byId("bands", r.bands);
 
-  // chronicle — by text; deeds — by `at`
+  // chronicle — by text or, for a quest's ending, by what makes it that ending; deeds — by `at`
+  // ⛔ SNG-658 §2 — `String(e)` WAS A DATA-LOSS BUG HERE. A chronicle entry is a one-line summary OR a structured
+  // quest resolution (`quests.js` pushes `{ kind: "quest_resolved", … }`), and every object stringifies to
+  // "[object Object]" — so ONE object already in the save made this loop treat EVERY structured entry in the snapshot
+  // as a duplicate and drop it. Measured: 4 such entries across 2 of the 16 saves, in the one code path whose whole
+  // job is not losing things.
   cur.chronicle = Array.isArray(cur.chronicle) ? cur.chronicle : [];
-  const haveC = new Set(cur.chronicle.map(String));
-  for (const e of (snap.chronicle || [])) if (e && !haveC.has(String(e))) { cur.chronicle.push(e); haveC.add(String(e)); r.chronicle++; }
+  const haveC = new Set(cur.chronicle.map(chronicleKey));
+  for (const e of (snap.chronicle || [])) {
+    const k = chronicleKey(e);
+    if (e && !haveC.has(k)) { cur.chronicle.push(e); haveC.add(k); r.chronicle++; }
+  }
   cur.deeds = Array.isArray(cur.deeds) ? cur.deeds : [];
   const haveD = new Set(cur.deeds.map(d => d && d.at).filter(Boolean));
   for (const d of (snap.deeds || [])) if (d && d.at && !haveD.has(d.at)) { cur.deeds.push(d); haveD.add(d.at); r.deeds++; }

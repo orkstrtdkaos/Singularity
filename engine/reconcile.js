@@ -30,7 +30,7 @@ import { mergeCodexTopics, ensureCodex, applyCodexUpdates, foldTopicsByIdPrefix,
 import { mergeRecovery, mergeReceiptLine } from "./recovery.js";   // step 41: the Settings door's merge, run where every copy passes
 import { SNAPSHOTS } from "./recovery_snapshots.js";              // step 41: the overwritten branch, as a diff
 import { dedupeQuests, normalizeProse, creditQuestGiver, slugify } from "./quests.js";   // ⛔ step 55: a quest its giver was never credited for
-import { settleAspiration } from "./progression.js";   // ⛔ step 56: an aspiration for a craft already in hand   // ⛔ step 55: a quest its giver was never credited for
+import { settleAspiration, applyNativeGrants } from "./progression.js";   // ⛔ step 72: a renamed origin has to re-run the grant walk, because its version gate already passed   // ⛔ step 56: an aspiration for a craft already in hand   // ⛔ step 55: a quest its giver was never credited for
 import { dedupeInventory } from "./inventory.js";
 import { inferDomains } from "./traditions.js";
 import { fallbackPersonalArc, repairArcNameOn } from "./personalArc.js";
@@ -95,6 +95,49 @@ function renameTargets(spec, entry, character, known) {
 // "has this entity seen this step yet" via entity.reconcileVersion.
 
 export const CHARACTER_STEPS = [
+  {
+    // ⚠️ VERSION 87, NOT 72. I numbered this 72 because the array's FIRST entry is 71 — and the array is not sorted:
+    // `topReconcileVersion` is 86, and 72 is already `pictures-to-our-service`. A step numbered below a save's
+    // `reconcileVersion` is never run, so the three saves this exists for would never have been repaired and nothing
+    // would have said so. Caught by asking the runner what the top version was instead of reading the top LINE.
+    version: 87, id: "the-renamed-people", playerFacing: true,
+    // ⛔ SNG-658 §2 — AN ORIGIN ID THAT NO LONGER EXISTS COSTS A CHARACTER THEIR PEOPLE'S CRAFTS.
+    //
+    // Measured on the sixteen saves: three carry `origin: "valley"` or `"radiant"`, and the ids are `valleyfolk` and
+    // `radiant_plateau`. `originRecord()` returns `{}` for them — no homeRegion, no starting place, no innate
+    // substrate seed — and `nativeGrantIdsFor` gates on `folkOriginIds.includes(character.origin)`, so a Valleyfolk
+    // whose record still says "valley" is handed NOTHING. ⚡ That is the exact defect OI-9 closed (Erik, 2026-08-31:
+    // "wire `folkAccessible` to derive Valleyfolk starting pool"), still live on two saves because the rename came
+    // after the fix.
+    //
+    // ⛑ THE RENAME IS DERIVED, NEVER A TYPED MAP: the stored id must match NO origin, and exactly ONE origin id
+    // must begin with it. "valley" → valleyfolk, "radiant" → radiant_plateau, both unique. ⚠️ If two ever match, the
+    // record is left exactly as it is and a warning says so — guessing between two peoples is worse than waiting.
+    //
+    // ⚠️ AND RENAMING ALONE GIVES NOTHING BACK. `retroNativeGrants` is gated at `nativeGrantsVersion >= 2` and those
+    // saves already carry it, so the grant walk would never run again. This step runs it itself, with the corrected
+    // origin, and says what it handed over — capacity given back silently is indistinguishable from a bug.
+    apply: (c, ctx) => {
+      const stored = String(c?.origin || "");
+      if (!stored) return {};
+      const origins = ctx?.content?.origins || [];
+      if (!origins.length || origins.some(o => o && o.id === stored)) return {};
+      const matches = origins.filter(o => o && String(o.id).startsWith(stored)).map(o => o.id);
+      if (matches.length !== 1) {
+        return { warnings: [`origin "${stored}" matches ${matches.length} of the ${origins.length} peoples \u2014 left as it is`] };
+      }
+      const to = matches[0];
+      c.origin = to;
+      const name = origins.find(o => o.id === to)?.name || to;
+      const notes = [`Your people's name in the records was the old one \u2014 you are ${name}, and always were.`];
+      // ⛑ and the crafts that were withheld while the name was wrong
+      try {
+        const granted = applyNativeGrants(c, ctx?.content?.rules || {});
+        if (granted?.length) notes.push(`By right of your people, basics that were withheld while the record was wrong are yours: ${granted.join(", ")}.`);
+      } catch { /* a grant walk never blocks a load */ }
+      return { notes };
+    }
+  },
   {
     version: 71, id: "the-owed-purse", playerFacing: true,
     // ⛔ CCODE-443 — ERIK 2026-09-19: "backfill the saves to the floor and credit them like we did for silas for their deeds." Aevi's

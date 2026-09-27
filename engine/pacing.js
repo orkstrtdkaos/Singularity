@@ -4,6 +4,10 @@
 // place (a farming village gets a frightened neighbour, not a bandit ambush). Pure + headless-testable;
 // the GM narrates the pressure the engine decides to apply (Law 1).
 
+// ⚠️ THE 0..4 TABLE IN THIS FILE IS A PACING TABLE, NOT THE DANGER SCALE (Aevi, 2026-09-26). The danger scale
+// runs 0..5 since Erik's ruling (CCODE-538) and its top rung is "forsaken"; these rungs are how OFTEN the world
+// turns up, which is a different question with a coincidentally similar shape. Nothing here should be widened to
+// five to "match" — they are not the same ladder.
 export const QUIET_THRESHOLD = 3;
  // registry:internal
 

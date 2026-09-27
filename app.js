@@ -182,7 +182,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.14.5";
+const APP_VERSION = "2.14.6";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -12233,7 +12233,10 @@ async function onAsk(text) {
 // at danger 5 read "deadly" — the same word as a 4, which is the silent-4 Aevi asked me to hunt for.
 // ⚠️ "unsurvivable" IS MY PLACEHOLDER AND THE WORD IS AEVI'S. It is the only rung label I have ever added and the
 // prose in this game is hers; say a better one and I will change it.
-function dangerLabel(dl) { return ["safe", "quiet", "uneasy", "dangerous", "deadly", "unsurvivable"][Math.max(0, Math.min(5, dl | 0))]; }
+/** ⛑ THE SIX WORDS FOR THE SIX RUNGS. ⚠️ "forsaken" is AEVI'S WORD for the top (her reply to CCODE-538), and
+ *  it replaces my placeholder "unsurvivable" — which was mine to hold the slot until she chose, and then sat on
+ *  the map for a week after she had. The scale itself is Erik's ruling: 0–5, and 5 is the worst ground there is. */
+function dangerLabel(dl) { return ["safe", "quiet", "uneasy", "dangerous", "deadly", "forsaken"][Math.max(0, Math.min(5, dl | 0))]; }
 
 // SNG-154 stage 6: ZOOM IS NAVIGATION BETWEEN TIERS, not a scale slider. 95 places on one
 // 800×440 canvas is unreadable — every label collides and the thing you're looking for is a dot

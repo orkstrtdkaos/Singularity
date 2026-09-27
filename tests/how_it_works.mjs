@@ -30209,6 +30209,24 @@ console.log("\n── §374 · it does not want to come off ──");
         && enforced.map(a => a.id).sort().join(",") === "lidless_ring,the_open_lantern";
     })(), "a cost about somebody ELSE — a branded crate, a sleeper who sleeps deeper — cannot be a rule on the holder's actions");
 
+  // ⛔ AEVI'S DECISION 1, AS A RATCHET — because the gate she asked for would have reddened on her own correct
+  // content. She wrote: "every artifact with `whatItCosts` has a non-empty `forbidTags`, so a new artifact can't ship
+  // with prose and no teeth." Measured, that is 11 costs against 2 sets of teeth, and the nine are right: a cost
+  // about somebody else has no action for `forbiddenByHeld` to refuse.
+  // ⛑ What she wants is that a NEW one cannot slip in with neither. So the count of narrative costs is pinned and
+  // MAY ONLY GO DOWN — a twelfth artifact with a cost and no teeth makes it ten and reddens; giving one of the nine
+  // teeth makes it eight and passes. The protection, without the part that fails on the corpus.
+  check(`§374: ⛔ A COST WITH NO TEETH IS A RATCHET — nine of the eleven are narrative today and that may only go DOWN — a new artifact cannot ship with a cost sentence and nothing enforcing it`,
+    (() => {
+      const withCost = arts.filter(a => a && a.whatItCosts);
+      const toothless = withCost.filter(a => !(a.forbidTags || []).length);
+      return withCost.length >= 11 && toothless.length <= 9;
+    })(), (() => {
+      const withCost = arts.filter(a => a && a.whatItCosts);
+      const toothless = withCost.filter(a => !(a.forbidTags || []).length);
+      return `${toothless.length} of ${withCost.length} costs are narrative (baseline 9): ${toothless.map(a => a.id).join(", ")}`;
+    })());
+
   // ⛔ §5 — HOLDING ONE IS HAVING SEEN ITS MARK.
   check("§374: ⛔ HOLDING ONE COUNTS AS HAVING SEEN ITS MARK — a player who learned the lidless ring recognises the Lidless Ring, and the ring in your hand IS the mark",
     (() => {

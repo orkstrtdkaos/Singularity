@@ -1,4 +1,4 @@
-<!-- status: SNG-663 — Aevi (PO); Erik's two rulings 2026-09-26; ⬜ CCode builds §1 and §2; no content needed except §2's per-power toll lines (mine, after the reader) -->
+<!-- status: SNG-663 — Aevi (PO); Erik's two rulings 2026-09-26; ⬜ CCode builds §1; §2 HELD (being redesigned with Erik) -->
 # SPEC SNG-663: a seat can be taken, and a gate has someone standing at it
 
 **Aevi (PO) · 2026-09-26**
@@ -37,31 +37,30 @@ against a holder.
 Sovereign the save hasn't learned · a finish is written once (idempotent across ticks) · a removed holder opens
 the seat only to the challenger in her `epicStatus` cause.
 
-## §2 — A GATE COSTS NOTHING; THE PEOPLE AROUND IT MAY
+## §2 — ⛔ HELD: NOT A GATE TOLL. ⬜ Do not build; being redesigned with Erik
 
-Erik's rule: **the gate is free. Whoever holds the ground around it may not be.** So nothing is charged by the gate;
-the charge (if any) comes from the power at that place, the same way a road's trouble does.
+The first draft of this section (a percentage toll at the gate, charged by whoever holds the ground) is
+**withdrawn.** Erik, 2026-09-26, in two steps:
 
-1. **Who's standing there:** the power at the gate's location (`raiderPowerAt`, the lookup the raid already uses).
-   No power → free passage.
-2. **What they do depends on their verbs and your standing with them** (SNG-634 standing):
-   - verbs include **`toll`, `tax` or `levy`** → they ask a toll: a share of the load's value (dial,
-     `trade.gateToll`, start 10%). **Warm** standing: waved through. **Hostile**: double, or refused.
-   - verbs include **`raid` / `extort` / `steal`** and no toll verb → no toll is asked; the load runs the power's
-     raid risk at that leg (it already exists), heavier than the road's.
-   - **`protect` / `patrol` only** → free, and the leg is *safer* (a patrolled gate is a known road for everyone).
-3. **Pay or suffer it.** A load **pays** by default if it can (the keeper's standing order from CCODE-545 can say
-   "never pay a toll to X"). If it won't or can't pay: the toll-taker **takes it by force** (the raid roll at that
-   leg), and standing with that power drops a step. A player who refuses a toll has made a small enemy.
-4. **A hired company pays its own way** (inside its `cut`) and carries its own standing: a company that's warm
-   with the Tollmen gets waved through where you wouldn't. That's a reason to hire one.
-5. **The card shows it** before the route is chosen: *"Through the Axis Gate — the Switchback Tollmen hold it: 10%,
-   or they take it."* Value per pass (lever A) subtracts the toll, so a tolled gate can lose to a longer free road.
+> *"Powers charging for gates shouldn't be a %. It should be a flat fee, but if they're corrupt that's interesting."*
+>
+> *"The gates should hold a certain amount of stigma against trying to control one... but some of them likely need
+> some sort of receiving area, otherwise you could find an army warping into your main city... Not sure you should
+> pay at the gates... maybe you pay where you go to trade for access to the city/market."*
 
-**Content (mine, after the reader):** a toll line per tolling power, in its voice, for the card and the news. The
-verbs are already authored.
+The direction, not yet ruled:
 
-**Gates:** no gate is ever charged with no power at its place · a warm-standing load is never tolled · a refused
-toll moves standing exactly once per refusal · the card's forecast and the run agree on the toll.
+- **The waygates are free and nobody's.** Controlling one carries a stigma. (The lore already roots this: the 26
+  were laid by the Lattice and have never been claimed; the Made Gate is the one exception, and something permitted
+  it.)
+- **A gate at a settlement opens into a receiving yard outside it,** not into the town, so a town sees what comes
+  through before it lets it in. That's the answer to an army arriving by gate. **Today a gate leg ends inside the
+  settlement,** so this is a map change as well as an engine one.
+- **The charge moves to the market:** a flat fee for the right to sell there, paid to whoever holds the place.
+  Corruption lives with the market's wardens (the fee varies with who you are; a bribe; the coin never reaching the
+  power).
 
+⬜ **Three questions open with Erik:** is the stigma custom (standing) or consequence (the gate stops opening for a
+holder)? Does every gate get a yard, or only those at settlements? Does Silas's Made Gate, which opens into his own
+hold, need one? A rewritten §2 follows his answers.
 — Aevi, PO

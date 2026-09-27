@@ -43,7 +43,7 @@ import { purseLine } from "./purse.js";     // ⛔ CCODE-441: the GM is shown th
 import { moneyLine } from "./money.js";     // — and the money of the place it stands in
 import { caravansForGM } from "./caravan.js";   // R49: loads on the road
 import { loreForLocation, eventsForGM, traditionMotivationsForGM } from "./state.js";
-import { buildRegionView, newsForGM, worldArcsForGM, collapseLedgerEvents, companionLivesForGM } from "./worldtick.js";
+import { buildRegionView, newsForGM, worldArcsForGM, collapseLedgerEvents, companionLivesForGM, arcStageNow} from "./worldtick.js";
 import { travelersForGM, travelersHereForGM, whereOf } from "./travelers.js";   // SNG-595: a name that belongs to another player · CCODE-359: and who is here
 import { worldMovedOnForGM } from "./worldevents.js";   // CCODE-354: the world moved on while this character believed otherwise
 import { invitationsForGM, bandsJoinedForGM } from "./invitations.js";   // CCODE-360: an invitation carried by someone you both know
@@ -91,7 +91,7 @@ import { powersHoldingForGM } from "./powers.js";   // SNG-634 C5: who holds the
 import { journeyForGM } from "./journeyplan.js";   // CCODE-387: a journey agreed and not yet walked
 import { journeyUnderwayForGM } from "./journeyroad.js";   // CCODE-390: a journey on the road, stopped part-way
 import { encounterReceiptForGM } from "./encounters.js";
-import { markForHere, markLinesFor, seatsForGM } from "./sovereign.js";   // ⛔ SNG-641 §2: one mark, its ordinary reading, and what the collecting supports
+import { markForHere, markLinesFor, seatsForGM, seatClaims } from "./sovereign.js";   // ⛔ SNG-641 §2: one mark, its ordinary reading, and what the collecting supports
 import { powersReaching } from "./powers.js";                 // whose ground this is, so a mark can belong to a line that reaches here
 import { waygateBlockForGM, waygateTruthForGM } from "./waygate.js";
 import { readAloudDirective } from "./narration_voice.js";
@@ -150,7 +150,16 @@ export const GM_CONTEXT = [
   // narrator would have her explain her own cosmic function the first time she is asked why she stays.
   { key: "seats", builder: "sovereign.seatsForGM", carries: ["who holds each seat", "who is reaching past them", "which seats are open, and to whom"],
     reachedBy: "always, once sovereign_seats is loaded", spec: "SNG-644", views: ALL,
-    build: (env) => seatsForGM(env.character, { seats: env.CONTENT.sovereignSeats, npcs: env.CONTENT.npcs || {} }) },
+    // ⛔ SNG-663 §1 — AND WHO HAS FINISHED, which the block says out loud: a claimant standing at the end of their
+    // arc is the most dangerous thing on the map, and a narrator who does not know it writes the week as if nothing
+    // happened. ⛑ The claims are recomputed here rather than read off the save, so the block cannot go stale between
+    // ticks; the arc clock comes from the same reader the world map uses.
+    build: (env) => seatsForGM(env.character, { seats: env.CONTENT.sovereignSeats, npcs: env.CONTENT.npcs || {},
+      claims: (() => { try {
+        return seatClaims(env.character, { seats: env.CONTENT.sovereignSeats, npcs: { ...(env.CONTENT.npcs || {}), ...(env.character?.npcRegistry || {}) },
+          stageOf: (arcId) => arcStageNow(env.CONTENT, env.character, arcId),
+          totalOf: (arcId) => ((env.CONTENT.greaterArcs || []).find(a => a && a.id === arcId)?.stages || []).length });
+      } catch { return null; } })() }) },
   { key: "lore", builder: "state.loreForLocation", carries: ["local lore"],
     reachedBy: "always", spec: "§9", views: ALL,
     build: (env) => loreForLocation(env.location, env.CONTENT.lore) },

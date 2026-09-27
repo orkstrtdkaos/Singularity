@@ -654,18 +654,147 @@ export function seatState(character, { seats = null, npcs = {} } = {}) {
 /** ⛑ WHAT THE GM IS TOLD ABOUT THE SEATS, and it is GM-only — nothing here reaches a player. ⛔ A HOLDER DOES NOT
  *  KNOW SHE HOLDS A SEAT: Aevi's line is exact, "what she is holding back — not that it is a seat", so the block says
  *  so rather than leaving a narrator to have her explain her own cosmic function. PURE. */
-export function seatsForGM(character, { seats = null, npcs = {} } = {}) {
+export function seatsForGM(character, { seats = null, npcs = {}, claims = null } = {}) {
   const rows = seatState(character, { seats, npcs });
   if (!rows.length) return "";
   const name = (id) => npcs?.[id]?.name || String(id || "").replace(/_/g, " ");
+  // ⛔ SNG-663 §1 — AND WHO HAS FINISHED. A claimant whose arc has ended is the most dangerous thing on the map,
+  // and a narrator who does not know it will write the week as though nothing happened.
+  const ws663 = character?.worldState || {};
+  const pressOn = (axis) => ws663.seatPress?.[axis] || null;
+  const takenOn = (axis) => ws663.seatsTaken?.[axis] || null;
   const lines = rows.map(r => {
     if (r.kind === "open") {
-      return `${r.axis}: NOBODY HOLDS IT. ${r.why} Reaching for it: ${r.challengers.map(name).join(", ") || "nobody"}. A finish alone takes this one.`;
+      const seatedO = takenOn(r.axis);
+      return `${r.axis}: ${seatedO ? `${name(seatedO.by)} HAS TAKEN IT${seatedO.day != null ? ` (day ${seatedO.day})` : ""} — their power's lines feed this hunger now.` : `NOBODY HOLDS IT. ${r.why}`} `
+        + `Reaching for it: ${r.challengers.map(name).join(", ") || "nobody"}.${seatedO ? " A second finisher presses whoever sits there." : " A finish alone takes this one."}`;
     }
-    return r.holderStands
+    const p = pressOn(r.axis), seated = takenOn(r.axis);
+    const finished = (claims || []).filter(c => c && c.axis === r.axis && c.finished);
+    const tail = seated ? ` ⛔ ${name(seated.by)} HAS TAKEN THIS SEAT${seated.day != null ? ` (day ${seated.day})` : ""} — their power's lines feed this hunger now.`
+      : p ? ` ⛔ ${name(p.by)} HAS FINISHED and is PRESSING${p.target ? ` against ${name(p.target)}` : ""}: ${p.why || "they reached the end of their arc and found the way blocked"}. Play them as arrived, not as coming.`
+      : finished.length ? ` ⚠️ ${finished.map(c => name(c.claimant)).join(", ")} stands at the end of their arc.` : "";
+    return (r.holderStands
       ? `${r.axis}: ${name(r.holder)} IS IN THE WAY — ${r.why} ⛔ She does NOT know it is a seat; she knows ${r.knows || "what she is holding back"}. `
         + `Reaching past her: ${r.challengers.map(name).join(", ")}. While she stands, none of them can finish into it, however far along they are.`
-      : `${r.axis}: ${name(r.holder)} IS GONE — ${r.why}. The seat is open to ${r.openTo.map(name).join(", ") || "nobody, because it was not a challenger who removed her"}.`;
+      : `${r.axis}: ${name(r.holder)} IS GONE — ${r.why}. The seat is open to ${r.openTo.map(name).join(", ") || "nobody, because it was not a challenger who removed her"}.`) + tail;
   });
   return lines.join("\n");
+}
+
+/* ═════ SNG-663 §1 · THE PROMOTION PATH — A VILLAIN YOU FAIL TO STOP IS A PROMOTION ═════
+ *
+ * ✅ ERIK 2026-09-26, on the gap CCODE-541 reported: *"Yes."*
+ *
+ * ⛑ AEVI'S ORDER, RULED AS WRITTEN: an arc reaching its end has a consequence · the consequence reads `openTo` · the
+ * world says so without naming the Sovereign.
+ *
+ * ⚠️ AND THE TRIGGER IS THE ARC CLOCK THAT EXISTS, not the spectrum. `arcStageNow` is base + this actor's push +
+ * everyone else's + the epics' (`epicArcPushes`, fed by `applyEpicArcPush` from a figure's own `arcAffinity`),
+ * clamped to the arc's stages. An arc has ENDED when that stands at its last stage — and "unresisted" is not a
+ * separate test, it is what the sum already means: on `arc_what_wakes_beneath` Morvane leans +1×3 and Neth −1×2.
+ * The claimant drives the arc; the holder resists it. That IS "a holder is in the way", authored, today.
+ *
+ * ⛔ THREE OF THE FIVE CLAIMANTS CANNOT FINISH, AND THE READER SAYS SO. Measured: every LEGENDARY claimant —
+ * `thornmother_sealed`, `the_scouring_hand`, `the_still_lattice` — carries no `arcAffinity` and no `wantArcId`, so
+ * there is no arc of theirs to end. The open Chaos / Order seat has one claimant and it is one of the three. That is
+ * a content gap and it is Aevi's; what this must not do is invent an arc to make the rule look alive. */
+
+/** ⛔ WHERE EVERY CLAIMANT STANDS WITH THE SEAT THEY REACH FOR. One row per claimant per seat:
+ *  `act` is `"takes"` · `"presses"` · `"waiting"` · `"cannot"` · `"seated"`, and `why` says it in words.
+ *
+ *  ⛑ PURE, and the arc clock stays where it lives: `stageOf(arcId)` and `totalOf(arcId)` are handed in by the tick,
+ *  which owns `arcStageNow`. A caller with neither gets `act: "waiting"` and a reason, never a guess. */
+export function seatClaims(character, { seats = null, npcs = {}, stageOf = null, totalOf = null } = {}) {
+  const rows = seatState(character, { seats, npcs });
+  const taken = character?.worldState?.seatsTaken || {};
+  const nameOf = (id) => npcs?.[id]?.name || String(id || "").replace(/_/g, " ");
+  const out = [];
+  for (const r of rows) {
+    const seated = taken[r.axis] || null;
+    for (const id of (r.challengers || [])) {
+      const rec = npcs?.[id] || null;
+      const aff = rec?.arcAffinity || null;
+      // ⚠️ `dir > 0` IS THE WHOLE OF "THEIR" ARC. A figure leaning the other way is RESISTING it, and a resister
+      // finishing would be the arc ending against them — which is not a promotion, it is a defeat.
+      const drives = !!(aff && aff.arcId && Number(aff.dir) > 0);
+      const stage = drives && typeof stageOf === "function" ? Number(stageOf(aff.arcId)) : null;
+      const total = drives && typeof totalOf === "function" ? Number(totalOf(aff.arcId)) : null;
+      const finished = drives && Number.isFinite(stage) && Number.isFinite(total) && total > 0 && stage >= total;
+      let act = "waiting", why = "";
+      if (!drives) { act = "cannot"; why = "no arc of their own to finish — nothing of theirs can end"; }
+      else if (!Number.isFinite(stage) || !Number.isFinite(total)) { act = "waiting"; why = "the arc clock was not handed over"; }
+      else if (!finished) { act = "waiting"; why = `their arc stands at ${stage} of ${total}`; }
+      else if (seated) {
+        // ⛔ ONE PROMOTION PER SEAT, EVER. A second finisher presses whoever sits there, exactly as against a holder.
+        act = seated.by === id ? "seated" : "presses";
+        why = seated.by === id ? "they took it" : `${nameOf(seated.by)} sits there now`;
+      }
+      else if (r.kind === "open") { act = "takes"; why = "nobody is in the way"; }
+      else if (r.holderStands) { act = "presses"; why = `${r.holderName || nameOf(r.holder)} is still in the way`; }
+      else if ((r.openTo || []).includes(String(id))) { act = "takes"; why = "they removed the one who stood there"; }
+      else { act = "presses"; why = "the seat opened to nobody — they press an empty chair they cannot sit in"; }
+      out.push({ axis: r.axis, kind: r.kind, claimant: String(id), name: nameOf(id),
+        arcId: aff?.arcId || null, stage, total, finished, act, why,
+        holder: r.holder || null, holderName: r.holderName || null, holderStands: !!r.holderStands });
+    }
+  }
+  return out;
+}
+
+/** ⛑ WHAT THE WORLD SAYS WHEN SOMEBODY FINISHES, and it NEVER NAMES THE SOVEREIGN — C17's rule, and the one thing
+ *  a narrator would otherwise give away. The seat and the hunger are GM-eyes; what a player hears is that a figure
+ *  has done the thing their arc was about, and that something is different because of it. PURE. */
+export function finishNews(claim) {
+  if (!claim) return null;
+  const who = claim.name || claim.claimant;
+  if (claim.act === "takes") {
+    return `${who} has finished what they started. Something is fed that was not fed before, and the shape of things has changed to suit it.`;
+  }
+  if (claim.act === "presses") {
+    return claim.holderStands
+      ? `${who} has finished what they started — and found ${claim.holderName || "someone"} standing where they meant to arrive. Neither of them is going anywhere.`
+      : `${who} has finished what they started, and it has bought them nothing. Whatever they reached for is not there to be had.`;
+  }
+  return null;
+}
+
+/** ⛔ AND THE ONE WRITER. A finish is written ONCE and never again: `seatsTaken[axis]` is the seat's whole history,
+ *  and a claim already said is not said twice — a tick runs every pass, and news that repeats is news nobody reads.
+ *
+ *  ⚠️ THE PRESS IS RECORDED AS WHAT IT IS, and not as a crusade. Aevi's §1 says a pressing claimant makes the holder
+ *  "a `crusade` foe from SNG-662, for free" — measured, that verb acts on POWERS through `foesOf` (`rivals[]` both
+ *  ways), and NEITHER HOLDER LEADS A POWER: Neth and the Last Mercy are figures with no faction to be a foe of. Four
+ *  of the five claimants do lead one, so the half of her clause that maps is the claimant's; the half that does not
+ *  is the target's. ⛑ So the press is a figure-level standing target on the save, which the GM block reads — the
+ *  same shape C18 used for the seats themselves — rather than a power-level war nobody ruled.
+ *
+ *  Returns the news to say, already filtered to what has not been said. MUTATES `character.worldState`. */
+export function applySeatClaims(character, claims = [], { day = null } = {}) {
+  if (!character || !Array.isArray(claims) || !claims.length) return [];
+  const ws = character.worldState || (character.worldState = {});
+  ws.seatsTaken = ws.seatsTaken && typeof ws.seatsTaken === "object" ? ws.seatsTaken : {};
+  ws.seatPress = ws.seatPress && typeof ws.seatPress === "object" ? ws.seatPress : {};
+  const said = new Set(Array.isArray(ws.seatsSaid) ? ws.seatsSaid : []);
+  const out = [];
+  for (const c of claims) {
+    if (!c || !c.axis) continue;
+    if (c.act === "takes" && !ws.seatsTaken[c.axis]) {
+      ws.seatsTaken[c.axis] = { by: c.claimant, day, arcId: c.arcId || null, from: c.holder || null };
+      // ⛑ AND THE PRESS ENDS WHERE THE SEAT IS TAKEN — they are not reaching for it any more.
+      delete ws.seatPress[c.axis];
+    } else if (c.act === "presses") {
+      const cur = ws.seatPress[c.axis] || {};
+      if (cur.by !== c.claimant || cur.target !== (c.holder || null)) {
+        ws.seatPress[c.axis] = { by: c.claimant, target: c.holder || null, since: day, why: c.why };
+      }
+    }
+    const key = `${c.axis}|${c.claimant}|${c.act}`;
+    if ((c.act === "takes" || c.act === "presses") && !said.has(key)) {
+      const line = finishNews(c);
+      if (line) { out.push(line); said.add(key); }
+    }
+  }
+  ws.seatsSaid = [...said].slice(-40);
+  return out;
 }

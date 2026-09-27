@@ -45,7 +45,7 @@ import { protectsOffscreen, nemesisIdOf } from "./nemesis.js";   // ⛔ SNG-648 
 import { travelerCard, cardChanged, mergeTravelerCard, ledgerMonthsSince, whereOf, meetKey } from "./travelers.js";   // SNG-595: a fellow traveler is a person the world has a record of
 import { stampEventChange, mergeEventStages, mergeQuestOutcomes, actorOf, questKey } from "./worldevents.js";   // CCODE-354: a crisis another traveler answered reads as answered
 import { bandDialsOf } from "./melee.js";                                    // SNG-634 C1: a raiding power bleeds on the dials a band does
-import { arcReading, knowsSovereign, masksFrom, sovereignOfArc, confirmedLines, deedAgainstSupply, supplyDeedLine } from "./sovereign.js";   // ⛔ SNG-642 §2.3: which of an arc's three readings this character has unlocked, and the mask over the name
+import { arcReading, knowsSovereign, masksFrom, sovereignOfArc, confirmedLines, deedAgainstSupply, supplyDeedLine, seatClaims, applySeatClaims } from "./sovereign.js";   // ⛔ SNG-642 §2.3: which of an arc's three readings this character has unlocked, and the mask over the name
 import { raiderPowerAt, dangerLiftAt, powerPass, noticePass } from "./powers.js";  // SNG-634 C1/C2/C4/C7: whose raid, whose ground, what they do, who has noticed you
 import { worthOf } from "./purse.js";                                              // ⛔ SNG-634 C7 `wealth`: a crown notices a rich stranger
 import { INVITES_PATH, mergeInvitation, answerInto, applyAnswers } from "./invitations.js";   // CCODE-360: an invitation carried by someone you both know
@@ -777,6 +777,22 @@ export function advanceHoldings({ character, now = Date.now(), ladder = null, co
   // ⚑ R49 — AND THE CARAVANS ON THE ROAD, on the same cadence and for the same reason: a caravan is worth
   // having rather than a trip you take precisely because it runs while you are not looking. ⛔ It can be
   // robbed and its carriers can die (Erik 2026-09-06), so it produces news the way a raid does.
+  // ✅ SNG-663 §1 (ERIK: "Yes.") — AND A CLAIMANT WHOSE ARC HAS ENDED FINISHES. The arc clock is this module's, so
+  // the reader is handed it rather than reaching for it: `arcStageNow` is the same number the world map and the GM
+  // block read, and `stages.length` is the arc's own last rung.
+  // ⛑ ONE PROMOTION PER SEAT, EVER, and one line of news per claim — `applySeatClaims` is idempotent across ticks,
+  // which matters here more than anywhere: this runs every pass forever.
+  try {
+    const seatsDoc = content?.sovereignSeats || null;
+    if (seatsDoc) {
+      const npcsAll = { ...(content?.npcs || {}), ...(character?.npcRegistry || {}) };
+      const claims = seatClaims(character, { seats: seatsDoc, npcs: npcsAll,
+        stageOf: (arcId) => arcStageNow(content, character, arcId),
+        totalOf: (arcId) => (findGreaterArc(content, arcId)?.stages || []).length });
+      for (const line of applySeatClaims(character, claims, { day: (() => { try { return absoluteWorldDay(); } catch { return null; } })() })) news.push(line);
+    }
+  } catch (err) { console.warn("[seats] a finish was not read:", err.message); }   // prose-cap-ok: a console diagnostic
+
   // ✅ SNG-654 A — AND THE STANDING RUNS SEND THE NEXT LOAD. ⛑ BEFORE `tickCaravans`, so a departure that happens
   // today is on the road today rather than sitting at the hold for a pass; and it sends nothing while a cart of that
   // hold's is out, because there is one crew and they are walking.

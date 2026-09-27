@@ -30907,6 +30907,125 @@ console.log("\n── §380 · one reading, three surfaces ──");
     })(), "it read `899.9700000000001 the_palelands scrip` on a real save");
 }
 
+/* ══════════ §381 · SNG-663 §1 — A VILLAIN YOU FAIL TO STOP IS A PROMOTION ══════════ */
+// ✅ ERIK 2026-09-26, on the gap CCODE-541 reported: *"Yes."*
+//
+// ⛔ CCODE-541 SHIPPED THE HELD SEATS WITH THE GUARD IN THE ANSWER (`openTo` is empty while the holder stands) and
+// said plainly that nothing acted on it. This is the thing that acts on it, and the guard is what it reads.
+//
+// ⚠️ AND THE SPEC'S TRIGGER WAS NOT THE ARITHMETIC THAT EXISTS. It says "its `spectrum` at ±0.95, the arithmetic
+// that already exists" — a spectrum is WHERE A FIGURE STANDS on an axis, and has no clock. What has a clock is
+// `arcStageNow`: base + this actor's push + everyone else's + the epics' (`epicArcPushes`, fed from a figure's own
+// `arcAffinity`), clamped to the arc's rungs. An arc ENDS at its last rung, and "unresisted" is not a second test —
+// it is what the sum already means, because the holder is leaning the other way on the same arc.
+console.log("\n── §381 · a villain you fail to stop ──");
+{
+  const SV81 = await import("../engine/sovereign.js");
+  const { loadContentHeadless: lch81 } = await import("./headless_content.mjs");
+  const C81 = await lch81();
+  const seats81 = C81.sovereignSeats, npcs81 = C81.npcs || {};
+  const totalOf = (id) => ((C81.greaterArcs || []).find(a => a && a.id === id)?.stages || []).length;
+  const atRest = (id) => (C81.greaterArcs || []).find(a => a && a.id === id)?.currentStage ?? 1;
+  const ended = (id) => totalOf(id);
+  const claims = (ch, stageOf) => SV81.seatClaims(ch, { seats: seats81, npcs: npcs81, stageOf, totalOf });
+
+  // ⛔ THE OPPOSITION IS AUTHORED, and it is what makes the rule legible.
+  check("§381: ⛑ THE CLAIMANT DRIVES THE ARC AND THE HOLDER RESISTS IT — authored, in content, today: on `arc_what_wakes_beneath` Morvane leans +1×3 and Neth −1×2. THAT is “a holder is in the way”, and it is why no second test for “unresisted” is needed",
+    (() => {
+      const m = npcs81.morvane_the_harvest?.arcAffinity, n = npcs81.neth_the_stayed?.arcAffinity;
+      const c = npcs81.cinder_vael?.arcAffinity, l = npcs81.the_last_mercy?.arcAffinity;
+      return m?.arcId === n?.arcId && Number(m.dir) > 0 && Number(n.dir) < 0
+        && c?.arcId === l?.arcId && Number(c.dir) > 0 && Number(l.dir) < 0;
+    })(), "the claimant and the holder of a seat lean opposite ways on one arc");
+
+  check("§381: ⛔ AT REST NOBODY HAS FINISHED — every claimant is waiting or cannot, and no seat is taken by accident on a save that has done nothing",
+    (() => {
+      const rows = claims({}, atRest);
+      return rows.length >= 5 && rows.every(r => r.act === "waiting" || r.act === "cannot") && rows.some(r => /stands at 1 of 4/.test(r.why));
+    })());
+
+  // ⚠️ THE CONTENT GAP, ASSERTED RATHER THAN PAPERED OVER.
+  check("§381: ⚠️ THREE OF THE FIVE CLAIMANTS CANNOT FINISH AT ALL — every LEGENDARY one carries no `arcAffinity`, so there is no arc of theirs to end, and the OPEN seat's only claimant is one of them. The reader says `cannot`; it does not invent an arc to make the rule look alive",
+    (() => {
+      const rows = claims({}, ended);
+      const cannot = rows.filter(r => r.act === "cannot").map(r => r.claimant).sort();
+      const open = rows.filter(r => r.kind === "open");
+      return cannot.join(",") === "the_scouring_hand,the_still_lattice,thornmother_sealed"
+        && open.length === 1 && open[0].act === "cannot";
+    })(), (() => {
+      const rows = claims({}, ended);
+      return `${rows.filter(r => r.act === "cannot").length} of ${rows.length} claimants have no arc — content, and Aevi's`;
+    })());
+
+  // ⛔ THE FOUR BRANCHES OF HER §1.2, each on a real save shape.
+  check("§381: ⛔ A FINISHED CLAIMANT AGAINST A STANDING HOLDER **PRESSES** — it cannot take the seat, and the arc waits at its end",
+    (() => {
+      const r = claims({}, ended).find(x => x.claimant === "morvane_the_harvest");
+      return r.finished === true && r.act === "presses" && /still in the way/.test(r.why);
+    })());
+  check("§381: ⛔ …REMOVE THE HOLDER YOURSELF AND IT IS YOURS",
+    (() => {
+      const ch = { worldState: { epicStatus: { neth_the_stayed: { status: "dead", killedBy: "morvane_the_harvest" } } } };
+      const r = claims(ch, ended).find(x => x.claimant === "morvane_the_harvest");
+      return r.act === "takes" && /removed the one who stood there/.test(r.why);
+    })());
+  check("§381: ⛔ …AND A ROCKFALL HANDS OUT NO THRONES — a holder removed by anything that is not a challenger leaves an empty chair nobody may sit in (C18's rule, kept)",
+    (() => {
+      const ch = { worldState: { epicStatus: { neth_the_stayed: { status: "dead", killedBy: "a_rockfall" } } } };
+      const r = claims(ch, ended).find(x => x.claimant === "morvane_the_harvest");
+      return r.act === "presses" && /empty chair/.test(r.why);
+    })());
+  check("§381: ⛔ ONE PROMOTION PER SEAT, EVER — a second finisher presses whoever sits there, exactly as against a holder",
+    (() => {
+      const ch = { worldState: { seatsTaken: { "Life / Death": { by: "thornmother_sealed", day: 3 } } } };
+      const r = claims(ch, ended).find(x => x.claimant === "morvane_the_harvest");
+      return r.act === "presses" && /sits there now/.test(r.why);
+    })());
+
+  // ⛑ THE WRITER, and the thing that matters most about a tick that runs forever.
+  check("§381: ⛔ A FINISH IS WRITTEN ONCE AND SAID ONCE — the tick runs every pass, and news that repeats is news nobody reads",
+    (() => {
+      const ch = { worldState: { epicStatus: { neth_the_stayed: { status: "dead", killedBy: "morvane_the_harvest" } } } };
+      const first = SV81.applySeatClaims(ch, claims(ch, ended), { day: 84 });
+      const again = SV81.applySeatClaims(ch, claims(ch, ended), { day: 87 });
+      const taken = ch.worldState.seatsTaken["Life / Death"];
+      return first.length === 2 && again.length === 0
+        && taken.by === "morvane_the_harvest" && taken.day === 84 && taken.arcId === "arc_what_wakes_beneath"
+        && ch.worldState.seatPress["Breaking / Building"].by === "cinder_vael";
+    })());
+
+  // ⛔ C17's RULE HOLDS THROUGH THE NEWS.
+  check("§381: ⛔ THE WORLD SAYS SO WITHOUT NAMING THE SOVEREIGN — the seat and the hunger are GM-eyes, and a finish reaches a player as a figure having done the thing their arc was about",
+    (() => {
+      const ch = { worldState: { epicStatus: { neth_the_stayed: { status: "dead", killedBy: "morvane_the_harvest" } } } };
+      const lines = SV81.applySeatClaims(ch, claims(ch, ended), { day: 84 }).join(" ");
+      const sovereignNames = Object.values(C81.sovereignMarks?.marks || {}).map(m => m && m.sovereign).filter(Boolean);
+      const forbidden = ["Sovereign", "seat", "hunger", ...new Set(sovereignNames)];
+      return lines.length > 40 && forbidden.every(w => !new RegExp(w, "i").test(lines));
+    })(), "a player hears that something finished, never what it finished into");
+
+  // ⛑ AND THE GM HEARS ALL OF IT.
+  check("§381: ⛑ the GM block says who has finished, who is pressing whom, and who has taken a seat — and it is still sealed",
+    (() => {
+      const ch = { worldState: { epicStatus: { neth_the_stayed: { status: "dead", killedBy: "morvane_the_harvest" } },
+        seatsTaken: { "Life / Death": { by: "morvane_the_harvest", day: 84 } },
+        seatPress: { "Breaking / Building": { by: "cinder_vael", target: "the_last_mercy", since: 84, why: "in the way" } } } };
+      const said = SV81.seatsForGM(ch, { seats: seats81, npcs: npcs81, claims: claims(ch, ended) });
+      return /HAS TAKEN THIS SEAT \(day 84\)/.test(said) && /HAS FINISHED and is PRESSING against/.test(said)
+        && /Play them as arrived, not as coming/.test(said) && /does NOT know it is a seat/.test(said);
+    })());
+
+  // ⛔ AND THE TICK CALLS IT, with the arc clock the rest of the world reads.
+  check("§381: ⛔ the world tick reads a finish every pass, through the SAME arc clock the map and the GM block read",
+    (() => {
+      const wt = rd("engine/worldtick.js");
+      return /seatClaims\(character, \{ seats: seatsDoc/.test(wt)
+        && /stageOf: \(arcId\) => arcStageNow\(content, character, arcId\)/.test(wt)
+        && /totalOf: \(arcId\) => \(findGreaterArc\(content, arcId\)\?\.stages \|\| \[\]\)\.length/.test(wt)
+        && /for \(const line of applySeatClaims\(character, claims/.test(wt);
+    })());
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

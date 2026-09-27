@@ -1,4 +1,4 @@
-<!-- status: SNG-663 — Aevi (PO); Erik's two rulings 2026-09-26; ⬜ CCode builds §1; §2 HELD (being redesigned with Erik) -->
+<!-- status: SNG-663 — Aevi (PO); Erik's two rulings 2026-09-26; ⬜ CCode builds §1 and §2 (§2 rewritten with Erik: gates free, yards, keepers, market fees) -->
 # SPEC SNG-663: a seat can be taken, and a gate has someone standing at it
 
 **Aevi (PO) · 2026-09-26**
@@ -37,30 +37,88 @@ against a holder.
 Sovereign the save hasn't learned · a finish is written once (idempotent across ticks) · a removed holder opens
 the seat only to the challenger in her `epicStatus` cause.
 
-## §2 — ⛔ HELD: NOT A GATE TOLL. ⬜ Do not build; being redesigned with Erik
+## §2 — THE WAYGATES ARE NOBODY'S, AND YOU PAY WHERE YOU TRADE
 
-The first draft of this section (a percentage toll at the gate, charged by whoever holds the ground) is
-**withdrawn.** Erik, 2026-09-26, in two steps:
+> **Erik**, 2026-09-26, over four messages: *"Powers charging for gates shouldn't be a %. It should be a flat fee, but
+> if they're corrupt that's interesting."* · *"The gates should hold a certain amount of stigma against trying to
+> control one... some of them likely need some sort of receiving area, otherwise you could find an army warping
+> into your main city... maybe you pay where you go to trade for access to the city/market."* · On the stigma:
+> *"Both stigma AND consequence of something coming for you from the gate... the gate keeps of some sort."* · Yards
+> only where a gate is at a settlement: *"Agreed."* · *"The made gate is actually a short distance from the hold. So
+> it's good."*
 
-> *"Powers charging for gates shouldn't be a %. It should be a flat fee, but if they're corrupt that's interesting."*
->
-> *"The gates should hold a certain amount of stigma against trying to control one... but some of them likely need
-> some sort of receiving area, otherwise you could find an army warping into your main city... Not sure you should
-> pay at the gates... maybe you pay where you go to trade for access to the city/market."*
+(The first draft here, a percentage toll at the gate, is withdrawn.)
 
-The direction, not yet ruled:
+### §2a — Passing a gate costs nothing
 
-- **The waygates are free and nobody's.** Controlling one carries a stigma. (The lore already roots this: the 26
-  were laid by the Lattice and have never been claimed; the Made Gate is the one exception, and something permitted
-  it.)
-- **A gate at a settlement opens into a receiving yard outside it,** not into the town, so a town sees what comes
-  through before it lets it in. That's the answer to an army arriving by gate. **Today a gate leg ends inside the
-  settlement,** so this is a map change as well as an engine one.
-- **The charge moves to the market:** a flat fee for the right to sell there, paid to whoever holds the place.
-  Corruption lives with the market's wardens (the fee varies with who you are; a bribe; the coin never reaching the
-  power).
+No toll, no fee, no standing check. A gate leg is free for a traveller, a load and a company alike.
 
-⬜ **Three questions open with Erik:** is the stigma custom (standing) or consequence (the gate stops opening for a
-holder)? Does every gate get a yard, or only those at settlements? Does Silas's Made Gate, which opens into his own
-hold, need one? A rewritten §2 follows his answers.
+### §2b — A gate at a settlement opens into a yard outside it
+
+Measured on origin: **27 locations carry `waygate`, and 14 of them are cities** (bedrock, cairnhold, choirheight,
+cloudform, the_axiom, the_bargain_gate, the_crossing, the_forge_eternal, the_hall_of_mirrors, the_scour,
+the_slow_hour, the_unblinking_stone, tier_seven, wellspring; plus the_lensward, a market). Today the gate is a flag
+on the city itself, so a gate leg ends inside it.
+
+- **Each of those gets a yard:** its own location, a short walk from the town (an hour or two), where the gate
+  actually stands. The `waygate` flag moves to the yard, and the town keeps a short leg to it. **Content: mine** (14
+  or 15 yard records, each in its town's voice); ⬜ **CCode:** the reader, i.e. gate legs land at the yard, and a
+  save standing *in* a moved city is not stranded.
+- **A raid or army that comes by gate arrives in the yard,** and meets the town's watch and defence there before it
+  can reach anything (the watch roll from SNG-655 and the defence duty that exist). A force can't appear in a
+  market square.
+- **Gates in the wild keep no yard.** The Made Gate stands a short way from Silas's hold already, so it's right as
+  it is.
+
+### §2c — Holding a gate: stigma, and the keepers come
+
+The 26 inherited gates were laid by the Lattice and have never been claimed; the lore says whether one opens is
+the apparatus's business. **Holding one** (a power's `holds` at a gate, a player's hold feature or garrison on a
+gate, or charging passage there) has two costs:
+
+1. **Stigma.** Every power and people who knows of it thinks less of the holder: a standing drop with all of them
+   on seizing, and a slow drift down while it's held. It's news: *"The Firstsight Barony has put men on the Axis
+   Gate. Nobody has done that in living memory."*
+2. **The keepers come.** Something comes through the gate for whoever holds it, and it escalates the longer they do:
+   first signs (the gate opens somewhere it doesn't lead; a lattice line hums under the town), then keepers at a
+   rising rung (notable → heroic → epic → legendary) on a season's rhythm, against the holder's people at that gate.
+   **Let the gate go, and it stops.** The keepers aren't anyone's servants and can't be bargained with; they are the
+   Lattice keeping its own. **Content: mine** (a keeper class for the bestiary, four rungs, with a `storyRule`: they
+   leave when the gate is released). ⬜ **CCode:** the holding test, the escalation clock, and the encounter at the
+   holder's gate.
+3. **The Made Gate is the exception.** It was permitted. It doesn't count as holding a Lattice gate.
+
+⬜ **CCode, measure first:** does any power or save hold a gate location today? If so, name them before this ships,
+so the keepers don't arrive on day one without anybody having chosen it.
+
+### §2d — The market charges for the right to sell
+
+- **A flat fee** to sell at a market held by a power, paid to that power, per load that sells there (a traveller
+  selling in person pays it once per visit). **Authored per power** (`marketFee`): a lordship's market asks more
+  than a moot's; a place no power holds charges nothing. The trade card subtracts it from a run's value per pass,
+  so a far market with a steep fee can lose to a near one.
+- **Refusing:** you can't sell there. The load goes home or on to the next market.
+- **Standing:** paying a fair power is ordinary and moves nothing. Hostile standing doubles the fee; allied waives
+  it.
+
+### §2e — Corruption (a trait, not a temper)
+
+A fair lord can have corrupt wardens, so it's its own field: `corrupt: true` on the power (or on the market's
+holder). What it does, per Erik's "that's interesting":
+
+1. **The fee is what they say it is today:** it varies with who you are (strangers and the plainly rich pay more;
+   friends of the wardens less).
+2. **A bribe opens the market** when the power itself is hostile to you.
+3. **The coin never reaches the power:** paying a corrupt market moves no standing with the power at all.
+4. **Exposing them is a deed:** it raises standing with the power, and the wardens become an enemy.
+
+⬜ Erik hasn't picked among these; this is my default set. Word from your wardens selling a load's route to
+raiders is held back as a later layer.
+
+**Content (mine, after the reader):** `marketFee` and `corrupt` on the powers that hold markets, and a line in each
+one's voice for the card.
+
+**Gates:** a gate leg is never charged · a gate raid lands in the yard, never the town · a released gate stops the
+keepers within one tick · the Made Gate never draws keepers · the card's fee and the run's fee agree · a corrupt
+payment moves no standing.
 — Aevi, PO

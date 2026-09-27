@@ -1,0 +1,43 @@
+diff --git a/content/packs/core/rules/arc_response.json b/content/packs/core/rules/arc_response.json
+index 73ad780db..008323ee7 100644
+--- a/content/packs/core/rules/arc_response.json
++++ b/content/packs/core/rules/arc_response.json
+@@ -200,8 +200,6 @@
+    "hungers": {
+     "lucifer": {
+      "kinds": [
+-      "order",
+-      "guild"
+      ],
+      "verbs": [
+       "inform"
+@@ -215,8 +213,7 @@
+     "the_hollow_king": {
+      "kinds": [
+       "outlaw_crown",
+-      "lordship",
+-      "guild"
++      "lordship"
+      ],
+      "verbs": [
+       "tribute",
+@@ -225,15 +222,16 @@
+     },
+     "the_ninefold_ascendant": {
+      "kinds": [
+-      "guild",
+-      "order"
++      "guild"
+      ],
+      "verbs": [
+       "fence",
+-      "smuggle"
++      "smuggle",
++      "steal"
+      ]
+     }
+    },
++   "_hungersExclusive_20260927": "SNG-663 follow-up (Aevi), answering CCODE-550: ten powers tied because `guild` sat under all three hungers and `order` under two, and a kind is the weakest evidence, so every power matching only by kind tied. Each kind now belongs to one hunger: Lucifer takes no kind at all (being seen is something a power DOES: informs, heralds, holds an arena or a board), lordships and outlaw crowns the Hollow King's (petition), guilds the Ninefold Ascendant's (bodies; +steal). Verbs and tags still outweigh a kind.",
+    "_hungers": "what each Sovereign's hunger looks like in a power's own fields — its kind, its verbs, its tags. Being seen: arenas, boards, heralds, orders that inform. Petition: outlaw crowns wanting a grant, lordships with a contested claim, guilds that take tribute. Bodies: guilds that fence or smuggle, orders leaning to Mind."
+   }
+  },

@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "id": "SNG-663_claimant_arcs",
+  "kind": "staged_content",
+  "note": "SNG-663 §1 content gap (CCODE-549 §381): the three LEGENDARY claimants cannot finish. Cause, measured: each has TWO records. The tradition_epics row carries an arcAffinity; the npcs/<id>.json file does not, and the npc file is what the game reads, so the row is shadowed and the claimant pushes nothing. Two rows also lean -1, and a claimant leaning DOWN an arc can never reach its last rung. Fix: put the affinity on the npc file (the live one), every claimant leaning +1 on the arc its finish is, and bring the shadowed rows into agreement so they can't mislead the next reader. ⬜ CCode: these are NEW pushes on live arcs (today these three push nothing). Measure the four arcs' stage over a simulated year before and after, then apply with the result. The storm is the one to watch: Cinder Vael +3 and the Scouring Hand +3 against the Last Mercy's -2.",
+  "claimants": [
+    { "id": "thornmother_sealed", "seat": "Life / Death", "arcAffinity": { "arcId": "arc_green_schism", "dir": 1, "weight": 3 }, "wantArcId": "arc_green_schism",
+      "why": "Her finish is the Sealing: the wood closed and humankind out. Unchanged from her shadowed row; it just never reached the game." },
+    { "id": "the_scouring_hand", "seat": "Breaking / Building", "arcAffinity": { "arcId": "arc_manifestation_storm", "dir": 1, "weight": 3 }, "wantArcId": "arc_manifestation_storm", "was": { "dir": -1 },
+      "why": "Flipped from -1. It wants everything unmade, and a world remaking its furniture faster than it can be named is a world unmaking its old furniture faster than anyone can grieve it. It feeds the churn, not the new ground; its finish is the storm at full height, where nothing that was stays. Cinder Vael rides the same arc for the opposite reason, and the Last Mercy holds against both." },
+    { "id": "the_still_lattice", "seat": "Chaos / Order", "arcAffinity": { "arcId": "arc_block_bleed", "dir": 1, "weight": 3 }, "wantArcId": "arc_block_bleed", "was": { "dir": -1 },
+      "why": "Flipped from -1. Stage 3 of the Bleeding Grammar is the Resolve: the crossing settles into a new stable form, or unravels. The Still Lattice drives it there so that it settles, in its form, once and forever. Holding the bleed back would leave the world moving; resolving it is the single correct configuration. This is the open seat's only claimant, so this is the row that makes the most dangerous seat in the world finishable." }
+  ]
+}

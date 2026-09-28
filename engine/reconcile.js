@@ -21,7 +21,7 @@ import { carriageOf } from "./carriage.js";   // ⛔ step 61: a carriage the one
 import { canRaiseBand, raiseBand } from "./melee.js";   // R49: the fellowship the fiction already named
 import { worldPosForGenerated } from "./worldmap.js";
 import { personName, looksLikeRole } from "./names.js";
-import { sexFromGender, sexUnsaid, normalizeSex } from "./npcs.js";   // ⛔ step 75: Erik's ruling — the sex matches the gender, and gender leads   // ⛔ step 73: everyone already met has the name the world knows them by
+import { sexFromGender, sexUnsaid, normalizeSex, mergePeople} from "./npcs.js";   // ⛔ step 75: Erik's ruling — the sex matches the gender, and gender leads   // ⛔ step 73: everyone already met has the name the world knows them by
 import { grantMartialKit, retiredBaselineIds } from "./martial.js";
 import { applyLadderGrants } from "./ladder.js";
 import { servicedURL } from "./art.js";   // ⛔ step 72: the pictures now ask our own service
@@ -95,6 +95,86 @@ function renameTargets(spec, entry, character, known) {
 // "has this entity seen this step yet" via entity.reconcileVersion.
 
 export const CHARACTER_STEPS = [
+  {
+    version: 89, id: "one-person-one-record", playerFacing: true,
+    // ✅ SNG-664 §3 — ERIK, PLAYING LOKI (2026-09-28): *"we aren't crisp on our minted people not being duplicated
+    // yet. In this case, Loki got the generic person, then the named one, and now the same person the GM introduced
+    // again... we need to make it so that the person gets minted ONCE and correctly."*
+    //
+    // ⛔ THE MATCHER WAS FIXED GOING FORWARD AND NOTHING REPAIRED WHAT WAS ALREADY THERE. CCODE-514 taught
+    // `findExistingNpc` to read `trueName`, which is why no new save forks that way — and the pair it was written for
+    // is still sitting in Loki's registry as two women.
+    //
+    // ⛑ TWO THINGS HAPPEN HERE, and they are different in kind:
+    //   · A RULE, live for every save from now on: a record still marked `nameUnknown` whose `trueName` or alias
+    //     slug-matches another record's NAME is that person. Exactly one candidate, never one marked `distinctFrom`.
+    //     ⚠️ Dry-run across all 16 saves before it was written: it fires on two pairs, both Loki's, 0 ambiguous.
+    //   · A NAMED REPAIR, for one pair no rule can reach: "Radiant authority sent to intercept", "Corm Whitlock" and
+    //     "Vail Langley" share no name, alias or trueName, so nothing mechanical joins them. Erik confirmed it in
+    //     play and the GM's own place history agrees. Guarded to the save that holds both ids.
+    //
+    // ⚠️ AND A THIRD RECORD AEVI'S SCAN MISSED, because it looked at `trueName` and not at aliases:
+    // `enforcer-of-seraphine-s-will` is Vail Langley's own recorded alias, minted again as a person. The rule finds it.
+    //
+    // Every write goes through `mergePeople` — one writer, idempotent — so nothing here knows how a merge works.
+    apply: (c, ctx) => {
+      const reg = c?.npcRegistry;
+      if (!reg || typeof reg !== "object") return {};
+      const day = ctx?.day ?? null;
+      const slug = (s) => String(s || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+      const notes = [], warnings = [];
+      const rows = () => Object.entries(reg).filter(([, n]) => n && typeof n === "object");
+      const distinct = (a, b) => (Array.isArray(a.distinctFrom) && a.distinctFrom.some(x => slug(x) === slug(b.id)))
+        || (Array.isArray(b.distinctFrom) && b.distinctFrom.some(x => slug(x) === slug(a.id)));
+      const fold = (keepId, dropId, why) => {
+        const r = mergePeople(c, keepId, dropId, { why, day });
+        if (r.ok && !r.already) notes.push(r.news);
+        else if (!r.ok && r.why) warnings.push(`${dropId}: ${r.why}`);
+        return r;
+      };
+
+      // ── the rule · a stranger whose own trueName or alias IS somebody's name
+      for (const [sid, s] of rows()) {
+        if (!s.nameUnknown) continue;
+        const claims = [s.trueName, ...(Array.isArray(s.aliases) ? s.aliases : [])].filter(Boolean).map(slug);
+        if (!claims.length) continue;
+        const hits = rows().filter(([kid, k]) => kid !== sid && !k.nameUnknown && k.name
+          && claims.includes(slug(k.name)) && !distinct(s, k));
+        // ⚠️ TWO CANDIDATES IS A QUESTION, NOT A MERGE. Guessing between two people is worse than waiting.
+        if (hits.length !== 1) {
+          if (hits.length) warnings.push(`${sid} could be ${hits.length} different people — left as it is`);
+          continue;
+        }
+        fold(hits[0][0], sid, "the stranger's own true name is that person's name");
+      }
+
+      // ── the rule, the other way round · a person's recorded alias, minted again as a record
+      for (const [kid, k] of rows()) {
+        if (k.nameUnknown) continue;
+        const aliases = (Array.isArray(k.aliases) ? k.aliases : []).map(slug);
+        if (!aliases.length) continue;
+        for (const [sid, s] of rows()) {
+          if (sid === kid || !s.name || !aliases.includes(slug(s.name)) || distinct(s, k)) continue;
+          // ⚠️ ONLY THE PLAINLY THINNER RECORD. A record with a bond of its own, or met more than once, is somebody
+          // the player has a relationship with — that is a question for them, not a repair.
+          if ((Number(s.relationship) || 0) > 0 || (Number(s.met) || 0) > 1) {
+            warnings.push(`${sid} matches ${kid}'s own alias but has a bond of its own — left as it is`);
+            continue;
+          }
+          fold(kid, sid, "it is that person's own recorded alias, minted again as a record");
+        }
+      }
+
+      // ── the named repair · one woman, met at the Post and again at the Made Gate on the same day
+      if (reg["radiant-agent-whistling-woman"] && reg["radiant-agent-seraphine-s-hand"]) {
+        fold("radiant-agent-seraphine-s-hand", "radiant-agent-whistling-woman",
+          "Erik confirmed in play that the Radiant agent at the Post and Vail Langley are one woman; the GM's own place history agrees");
+      }
+
+      if (!notes.length && !warnings.length) return {};
+      return { ...(notes.length ? { notes } : {}), ...(warnings.length ? { warnings } : {}) };
+    }
+  },
   {
     version: 88, id: "the-gate-that-moved-out-of-town", playerFacing: true,
     // ✅ SNG-663 §2b — A GATE FOUND IS A GATE FOUND. Erik ruled a yard outside every settlement whose gate stood in

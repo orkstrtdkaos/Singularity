@@ -31360,8 +31360,12 @@ console.log("\n── §383 · a gate at a settlement opens into a yard outside 
     })());
   // ⛑ AND THE LEDGER HALF, WHICH IS A DIFFERENT QUESTION WITH THE SAME ANSWER: the map and travel read `knownPlaces`.
   const step383 = R383.CHARACTER_STEPS.find(s => s.id === "the-gate-that-moved-out-of-town");
-  check("§383: ⛔ …and the reconcile step writes it into the DISCOVERY LEDGER too, above every version a save can carry",
-    !!step383 && step383.version === R383.topReconcileVersion("character") && step383.playerFacing === true);
+  // ⚠️ THIS PINNED "AND IT IS THE TOP STEP" and went red the next day, when SNG-664 added step 89 — the same
+  // mistake §378 taught me this morning, made again before lunch. ⛑ The claim is that a step sits above every version
+  // a save could already carry when it was written; 88 was the top then and that number does not move.
+  check("§383: ⛔ …and the reconcile step writes it into the DISCOVERY LEDGER too, above every version a save could carry when it was written",
+    !!step383 && step383.version >= 88 && R383.topReconcileVersion("character") >= step383.version
+    && step383.playerFacing === true, `step ${step383?.version} of ${R383.topReconcileVersion("character")}`);
   check("§383: ⛑ …driven: a save that knew the town gains the yard, it is told, and a second pass changes nothing",
     (() => {
       const c = { knownPlaces: ["bedrock", "cairnhold", "millbrook"] };
@@ -31666,6 +31670,237 @@ console.log("\n── §384 · the buttons that did nothing ──");
   check("§384: ⛑ …and the sweep that found it is a TOOL, so the next one is a command rather than a memory",
     /querySelectorAll\\\("\\\[\(data-\[a-z-\]\+\)\\\]"\\\)/.test(rd("po/tools/sweep_button_writes.mjs"))
     || /HANDLER = /.test(rd("po/tools/sweep_button_writes.mjs")));
+}
+
+
+/* ══════════ §385 · SNG-664 — A PERSON IS MINTED ONCE, AND CORRECTLY ══════════ */
+// ⛔ ERIK, PLAYING LOKI (2026-09-28): *"we aren't crisp on our minted people not being duplicated yet. In this case,
+// Loki got the generic person, then the named one, and now the same person the GM introduced again… we need to make it
+// so that the person gets minted ONCE and correctly."*
+//
+// ⚠️ MEASURED, AND WORSE THAN THE REPORT: one woman sits in his registry THREE times — the stranger at the Post
+// ("Radiant authority sent to intercept", minted trueName "Corm Whitlock"), Vail Langley at the Made Gate, and
+// `enforcer-of-seraphine-s-will`, which is Vail's own recorded alias minted again as a person and whose entire `role`
+// is a truncated action sentence. Plus the Orla pair CCODE-514 was written for and nothing ever repaired.
+console.log("\n── §385 · a person is minted once, and correctly ──");
+{
+  const N385 = await import("../engine/npcs.js");
+  const R385 = await import("../engine/reconcile.js");
+
+  /* ---- 1 · ⛔ EVERY REFERENCE, FOUND BY WALKING ---- */
+  // ⛔ NOT A LIST OF FIELDS. `tests/changeset_check.mjs` already records what a list costs: it reported "0 entries
+  // across 16 saves" while one save named the departing person three times, under `quests[].giver` and
+  // `quests[].outcomes[].effects[].npc`, neither of which was on anybody's list. MEASURED on Loki's save, the Orla
+  // pair alone needs six references re-pointed across `npcRegistry` keys, `worldState.offscreenBacklog` keys,
+  // `codex.topics` keys AND `.id` AND `.entityId` AND `.links[]`, and `establishedFacts[].subjectId`.
+  const deepFixture = () => ({
+    npcRegistry: {
+      keeper: { id: "keeper", name: "Orla Yardley", relationship: 2, met: 4, lastSeen: { locationId: "here", day: 8 } },
+      ghost: { id: "ghost", name: "Unmet yet", nameUnknown: true, trueName: "Orla Yardley", relationship: 0, met: 1,
+        role: "a Syllogist traveling between the reaches", description: "tall and narrow" },
+    },
+    company: [{ npcId: "ghost", roles: ["ally"], joinedDay: 3 }],
+    allyOrders: { ghost: { holdBack: true } },
+    codex: { topics: { ghost: { id: "ghost", entityId: "ghost", links: ["ghost", "elsewhere"] } } },
+    establishedFacts: [{ id: "ghost", subjectId: "ghost", text: "she argued with herself" }],
+    worldState: { offscreenBacklog: { ghost: [{ beat: "walked north" }] } },
+    quests: [{ id: "q", giver: "ghost", outcomes: [{ effects: [{ npc: "ghost" }] }] }],
+    holdings: [{ id: "h", steward: "ghost", garrison: ["ghost", "someone-else"] }],
+    activeScene: { npcsPresent: ["ghost"] },
+  });
+  const deep = deepFixture();
+  const merged = N385.mergePeople(deep, "keeper", "ghost", { why: "the stranger's own true name is that person's name", day: 30 });
+  const strayPaths = [];
+  (function walk(node, path) {
+    if (node == null) return;
+    if (typeof node === "string") { if (node === "ghost") strayPaths.push(path); return; }
+    if (Array.isArray(node)) { node.forEach(v => walk(v, `${path}[]`)); return; }
+    if (typeof node !== "object") return;
+    for (const [k, v] of Object.entries(node)) {
+      if (k === "formerIds" || k === "aliases" || k === "mergedFrom" || k === "_mergedFrom") continue;   // the ledger RECORDS the id
+      if (k === "ghost") strayPaths.push(`${path}.{ghost}`);
+      walk(v, `${path}.${k}`);
+    }
+  })(deep, "");
+  check("§385: ⛔ A MERGE RE-POINTS EVERY REFERENCE, FOUND BY WALKING THE SAVE — a hand-written list is a list of the shapes somebody thought of, and this repo has already paid for that",
+    merged.ok === true && strayPaths.length === 0 && merged.refs >= 9,
+    strayPaths.length ? `still pointing at the dropped id: ${strayPaths.join(" · ")}` : `${merged.refs} references re-pointed`);
+  check("§385: ⛑ …including the shapes no list had — a codex topic's KEY, its `entityId` and its `links[]`, a quest's `giver`, a hold's `steward` and its garrison, and an offscreen backlog keyed by the person",
+    deep.codex.topics.keeper?.entityId === "keeper" && deep.codex.topics.keeper?.links.includes("keeper")
+    && deep.quests[0].giver === "keeper" && deep.quests[0].outcomes[0].effects[0].npc === "keeper"
+    && deep.holdings[0].steward === "keeper" && deep.holdings[0].garrison.includes("keeper")
+    && !!deep.worldState.offscreenBacklog.keeper && deep.company[0].npcId === "keeper"
+    && !!deep.allyOrders.keeper && deep.activeScene.npcsPresent[0] === "keeper",
+    JSON.stringify({ codex: Object.keys(deep.codex.topics), quest: deep.quests[0].giver, hold: deep.holdings[0].steward }));
+  // ⚠️ AND A KEY COLLISION KEEPS THE MERGED RECORD. Both ids are in the registry — that is the whole case — so the
+  // dropped one's value must not be written back over the record the merge has just built.
+  check("§385: ⚠️ …and the KEPT record survives a key collision — both ids were in the registry, which is the case this exists for",
+    Object.keys(deep.npcRegistry).length === 1 && deep.npcRegistry.keeper?.name === "Orla Yardley" && !deep.npcRegistry.ghost);
+
+  /* ---- 2 · ⛔ WHICH RECORD KEEPS WHAT ---- */
+  check("§385: ⛔ `met` IS A COUNT OF INTERACTIONS AND IT SUMS — Aevi's rule says \"the earlier `met`\", which in the units of the FIELD took Orla from four interactions to one",
+    deep.npcRegistry.keeper.met === 5 && /n\.met = \(Number\(n\.met\) \|\| 0\) \+ 1/.test(rd("engine/npcs.js")),
+    `met ${deep.npcRegistry.keeper.met}`);
+  check("§385: ⛑ …the HIGHER bond, the EARLIER first meeting, the LATER sighting, and the dropped id in `formerIds` so an op written against it still finds them",
+    deep.npcRegistry.keeper.relationship === 2
+    && deep.npcRegistry.keeper.formerIds.includes("ghost")
+    && deep.npcRegistry.keeper.lastSeen?.day === 8
+    && /formerIds/.test(rd("engine/npcs.js")));
+  // ⛔ AND THE LEDGER SURVIVES THE WALK. My first draft came back with `formerIds: ["keeper"]` — the KEPT id — because
+  // the walk found the dropped id inside the very field that records it, which also broke idempotence.
+  check("§385: ⛔ …and the LEDGER OF THE MERGE is held out of the re-point — it records the dropped id, so a walk that rewrote it would erase the record of what happened",
+    deep.npcRegistry.keeper.formerIds.length === 1 && deep.npcRegistry.keeper.formerIds[0] === "ghost"
+    && deep.npcRegistry.keeper._mergedFrom === "ghost");
+  check("§385: ⛑ …and it is IDEMPOTENT, which is what a reconcile step needs: a second call finds nothing and says so",
+    (() => {
+      const again = N385.mergePeople(deep, "keeper", "ghost", { why: "again" });
+      return again.ok === true && again.already === true && again.refs === 0 && again.moved.length === 0;
+    })());
+  check("§385: ⚠️ …and it refuses what it cannot do, with a sentence — one id, a missing record, no registry",
+    N385.mergePeople(deep, "keeper", "keeper", {}).ok === false
+    && N385.mergePeople(deep, "nobody", "ghost", {}).ok === false
+    && N385.mergePeople({}, "a", "b", {}).ok === false
+    && typeof N385.mergePeople(deep, "keeper", "keeper", {}).why === "string");
+
+  /* ---- 3 · ⛔ A DESCRIPTOR IS NOT A NAME, AND AN UNSEEN MINT IS DROPPED ---- */
+  // ⛔ §2.3: *"Once the player has seen a name on screen, that name wins… the mint is dropped quietly if the player
+  // never saw it."* The stranger at the Post carried `trueName: "Corm Whitlock"` and the woman Erik has spoken to is
+  // Vail Langley. ⚠️ Leaving Corm Whitlock in `aliases` is WORSE than losing it: that ledger is what
+  // `findExistingNpc` searches, so the next stranger who gives that name would land on her.
+  const mintFixture = {
+    npcRegistry: {
+      vail: { id: "vail", name: "Vail Langley", aliases: ["Enforcer of Seraphine's will"], relationship: 4, met: 7 },
+      post: { id: "post", name: "Radiant authority sent to intercept", nameUnknown: true, trueName: "Corm Whitlock",
+        role: "Radiant authority sent to intercept", relationship: 0, met: 1 },
+    },
+  };
+  const mintMerge = N385.mergePeople(mintFixture, "vail", "post", { why: "confirmed by Erik in play", day: 30 });
+  const vail = mintFixture.npcRegistry.vail;
+  check("§385: ⛔ AN UNSEEN MINT IS DROPPED, NOT PROMOTED — and never into the alias ledger, which is the list the matcher searches",
+    !vail.trueName && !(vail.aliases || []).some(a => /Corm Whitlock/i.test(a))
+    && vail.name === "Vail Langley"
+    && mintMerge.moved.some(m => /dropped the unseen mint/.test(m)),
+    JSON.stringify({ trueName: vail.trueName, aliases: vail.aliases }));
+  check("§385: ⛑ …and the decision is RECORDED rather than silent — the merge row says which name was dropped and why",
+    (vail.mergedFrom || []).some(r => r.id === "post" && r.droppedMint === "Corm Whitlock" && r.why));
+  check("§385: ⛔ …and a STRANGER'S DESCRIPTION never becomes an alias, or the next person in a grey coat matches her",
+    !(vail.aliases || []).some(a => /Radiant authority/i.test(a)) && !vail.nameUnknown);
+  check("§385: ⚠️ …and the news names what the player actually SAW, which is the descriptor, not the placeholder \"Unmet yet\"",
+    /You realise the Radiant authority sent to intercept was Vail Langley\./.test(mintMerge.news), mintMerge.news);
+  // ⛑ AND A REVEALED NAME BEATS A DESCRIPTOR when the kept record is the stranger — otherwise the merge would go on
+  // calling her by the description she was introduced with.
+  check("§385: ⛑ …and when the STRANGER is the kept record, the revealed name wins and the placeholder flag goes",
+    (() => {
+      const f = { npcRegistry: { s: { id: "s", name: "a woman in grey", nameUnknown: true, relationship: 0, met: 1 },
+        n: { id: "n", name: "Vail Langley", relationship: 3, met: 2 } } };
+      const r = N385.mergePeople(f, "s", "n", { why: "x" });
+      return r.ok && f.npcRegistry.s.name === "Vail Langley" && !f.npcRegistry.s.nameUnknown
+        && (f.npcRegistry.s.aliases || []).length === 0;
+    })());
+
+  /* ---- 4 · ⛔ THE REPAIRS, DRIVEN ---- */
+  const step385 = R385.CHARACTER_STEPS.find(s => s.id === "one-person-one-record");
+  check("§385: ⛔ the repair step is above every version a save can carry, or the saves it exists for would never see it",
+    !!step385 && step385.version === R385.topReconcileVersion("character") && step385.playerFacing === true,
+    `step ${step385?.version} of ${R385.topReconcileVersion("character")}`);
+  check("§385: ⛔ THE RULE FINDS A STRANGER WHOSE OWN TRUE NAME IS SOMEBODY'S NAME — the CCODE-514 rule, applied to what was already there",
+    (() => {
+      const f = deepFixture();
+      const r = step385.apply(f, { day: 30 });
+      return Object.keys(f.npcRegistry).length === 1 && !!f.npcRegistry.keeper
+        && (r.notes || []).some(n => /was Orla Yardley/.test(n));
+    })());
+  check("§385: ⛑ …and the other way round: a person's own recorded ALIAS, minted again as a record — the third copy of Vail that the trueName scan missed",
+    (() => {
+      const f = { npcRegistry: {
+        vail: { id: "vail", name: "Vail Langley", aliases: ["Enforcer of Seraphine's will"], relationship: 4, met: 7 },
+        enf: { id: "enf", name: "Enforcer Of Seraphine S Will", relationship: 0, met: 1 } } };
+      const r = step385.apply(f, { day: 30 });
+      return Object.keys(f.npcRegistry).length === 1 && !!f.npcRegistry.vail
+        && (r.notes || []).some(n => /was Vail Langley/.test(n));
+    })());
+  check("§385: ⛔ …and TWO CANDIDATES IS A QUESTION, NOT A MERGE — guessing between two people is worse than waiting, and it says so",
+    (() => {
+      const f = { npcRegistry: {
+        a: { id: "a", name: "Orla Yardley", relationship: 1, met: 2 },
+        b: { id: "b", name: "Orla Yardley", relationship: 1, met: 2 },
+        g: { id: "g", name: "Unmet yet", nameUnknown: true, trueName: "Orla Yardley", relationship: 0, met: 1 } } };
+      const r = step385.apply(f, { day: 30 });
+      return Object.keys(f.npcRegistry).length === 3 && (r.warnings || []).some(w => /could be 2 different people/.test(w));
+    })());
+  check("§385: ⚠️ …and a record MARKED DISTINCT is never folded (CCODE-423), nor one with a bond of its own",
+    (() => {
+      const f = { npcRegistry: {
+        k: { id: "k", name: "Sable", relationship: 5, met: 3 },
+        g: { id: "g", name: "Unmet yet", nameUnknown: true, trueName: "Sable", relationship: 0, met: 1, distinctFrom: ["k"] } } };
+      const bonded = { npcRegistry: {
+        k: { id: "k", name: "Vail Langley", aliases: ["the Enforcer"], relationship: 4, met: 7 },
+        s: { id: "s", name: "the Enforcer", relationship: 3, met: 4 } } };
+      const r1 = step385.apply(f, { day: 1 }), r2 = step385.apply(bonded, { day: 1 });
+      return Object.keys(f.npcRegistry).length === 2 && Object.keys(bonded.npcRegistry).length === 2
+        && (r2.warnings || []).some(w => /bond of its own/.test(w));
+    })());
+  check("§385: ⛑ …and it is silent on a save with nothing to repair, and runs twice with no second effect",
+    (() => {
+      const clean = { npcRegistry: { a: { id: "a", name: "Arden", relationship: 3, met: 2 } } };
+      const f = deepFixture();
+      step385.apply(f, { day: 30 });
+      const twice = step385.apply(f, { day: 30 });
+      return !Object.keys(step385.apply(clean, { day: 1 })).length && !Object.keys(twice).length && !Object.keys(step385.apply({}, {})).length;
+    })());
+
+  /* ---- 5 · ⛔ THE RULE, OVER A POPULATION BUILT FROM THE REAL RECORDS ---- */
+  // ⛔ AEVI'S §4 ASKS FOR A LIVE-SAVE RATCHET AND §364 FORBIDS ONE: *"NO NEW GATE MAY WALK THE LIVE SAVE DIRECTORY
+  // — eleven already do and each is named; the list may shrink, never grow."* ⚠️ And the FROZEN copies cannot answer
+  // it either — `tests/fixtures/saves/player-s9z9u1__char-mrum8y4d.json` was taken before this play and holds 11
+  // records, none of the five — so a ratchet over them would pass over an empty list, which is worse than none.
+  // ⛑ SO THE RULE IS ASSERTED OVER THE REAL RECORDS, copied in as a population, and the live scan stays where §364
+  // leaves it: `po/tools/measure_duplicate_people.mjs` walks every save and reports what it finds.
+  const slug385 = (s) => String(s || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  const dupes385 = (reg) => {
+    const seen = new Map();
+    for (const [id, n] of Object.entries(reg || {})) {
+      if (!n) continue;
+      for (const nm of [n.nameUnknown ? null : n.name, n.trueName, ...(n.aliases || [])]) {
+        const k = slug385(nm);
+        if (!k) continue;
+        if (!seen.has(k)) seen.set(k, new Set());
+        seen.get(k).add(id);
+      }
+    }
+    return [...seen.values()].filter(ids => ids.size > 1).length;
+  };
+  // the five records as Loki's save actually holds them, 2026-09-28
+  const population385 = () => ({ npcRegistry: {
+    "orla-yardley": { id: "orla-yardley", name: "Orla Yardley", relationship: 2, met: 4, lastSeen: { locationId: "gen-the-made-gate", day: 8 },
+      role: "A Syllogist who came carrying a breaking mandate and chose to question it instead" },
+    "syllogist-of-the-margins": { id: "syllogist-of-the-margins", name: "Unmet yet", nameUnknown: true, trueName: "Orla Yardley",
+      relationship: 0, met: 1, role: "a Syllogist traveling between the reaches", lastSeen: { locationId: "millbrook", day: 7 } },
+    "radiant-agent-seraphine-s-hand": { id: "radiant-agent-seraphine-s-hand", name: "Vail Langley", aliases: ["Enforcer of Seraphine's will"],
+      role: "Agent of the High Luminary, Seraphine", relationship: 4, met: 7, lastSeen: { locationId: "gen-whistling-woman-post", day: 8 } },
+    "radiant-agent-whistling-woman": { id: "radiant-agent-whistling-woman", name: "Radiant authority sent to intercept", nameUnknown: true,
+      trueName: "Corm Whitlock", role: "Radiant authority sent to intercept", relationship: 0, met: 1, lastSeen: { locationId: "gen-whistling-woman-post", day: 8 } },
+    "enforcer-of-seraphine-s-will": { id: "enforcer-of-seraphine-s-will", name: "Enforcer Of Seraphine S Will", relationship: 0, met: 1,
+      role: "She has chosen to ride ahead to the Standing Annex with the band to understand w" },
+    "someone-else": { id: "someone-else", name: "Halvex Coil", relationship: 9, met: 3 },
+  } });
+  const pop385 = population385();
+  // ⚠️ TWO, NOT THREE, AND THE DIFFERENCE IS THE POINT. A name scan sees the Orla pair and the Enforcer pair; the
+  // third copy — "Radiant authority sent to intercept" with a mint of "Corm Whitlock" against "Vail Langley" — shares
+  // no name, alias or trueName with her, which is exactly why §3 asks for it as a NAMED repair and not as a rule.
+  check("§385: ⚠️ the population is not vacuous — two duplicate groups a NAME scan can see, in the five records Loki's save actually holds",
+    dupes385(pop385.npcRegistry) === 2, `${dupes385(pop385.npcRegistry)} duplicate group(s) before the repair`);
+  const popNotes = step385.apply(pop385, { day: 30 });
+  check("§385: ⛔ AND AFTER THE STEP THERE ARE NONE — one woman met three times and one met twice become two people, and nobody else is touched",
+    dupes385(pop385.npcRegistry) === 0
+    && Object.keys(pop385.npcRegistry).length === 3
+    && !!pop385.npcRegistry["orla-yardley"] && !!pop385.npcRegistry["radiant-agent-seraphine-s-hand"]
+    && pop385.npcRegistry["someone-else"]?.relationship === 9
+    && (popNotes.notes || []).length === 3,
+    `${dupes385(pop385.npcRegistry)} left · ${Object.keys(pop385.npcRegistry).join(", ")}`);
+  check("§385: ⛑ …and the LIVE population is the tool's job, because §364 forbids a twelfth gate that walks the saves",
+    /readdirSync\(join\(ROOT, "characters"\)\)/.test(rd("po/tools/measure_duplicate_people.mjs"))
+    && /name\/trueName duplicate group/.test(rd("po/tools/measure_duplicate_people.mjs")));
 }
 
 /* ══════════ REPORT ══════════ */

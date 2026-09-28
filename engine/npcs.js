@@ -1456,3 +1456,215 @@ export function carriedForGM(character) {
   const rows = bearersOf(character).map(n => `${n.name || n.id} carries ${n.inventory.map(i => i.customName || i.name).join(", ")}`);
   return rows.length ? rows.join("\n") : null;
 }
+
+/* ═══ ✅ SNG-664 §2.5 — ONE MERGE WRITER: A PERSON MET TWICE IS ONE PERSON ═══
+ *
+ * ⛔ ERIK, PLAYING LOKI (2026-09-28): *"we aren't crisp on our minted people not being duplicated yet. In this case,
+ * Loki got the generic person, then the named one, and now the same person the GM introduced again… we need to make it
+ * so that the person gets minted ONCE and correctly."*
+ *
+ * ⚠️ MEASURED ON HIS SAVE, AND IT IS WORSE THAN THE REPORT SAID: one woman sits there THREE times —
+ * `radiant-agent-whistling-woman` ("Radiant authority sent to intercept", trueName Corm Whitlock),
+ * `radiant-agent-seraphine-s-hand` ("Vail Langley", alias "Enforcer of Seraphine's will"), and
+ * `enforcer-of-seraphine-s-will`, whose whole `role` is a truncated action sentence. Plus the Orla pair CCODE-514
+ * found and nothing ever repaired.
+ *
+ * ⛔ AND "EVERY REFERENCE" IS FOUND BY WALKING, NOT BY A LIST. `tests/changeset_check.mjs` already records what a list
+ * costs: it reported "0 entries across 16 saves" while one save named the departing person three times under
+ * `quests[].giver` and `quests[].outcomes[].effects[].npc`. Measured with the same walk, the Orla pair needs 19
+ * references re-pointed across 14 shapes, including `codex.topics.{id}`, `.entityId`, `.links[]`,
+ * `establishedFacts[].subjectId` and `worldState.offscreenBacklog.{id}`. A list is a list of the shapes somebody
+ * thought of; a walk is what is there. */
+
+/** ⛑ EVERY PATH IN A SAVE THAT NAMES THIS ID — as a string value, or as an object KEY. `rewrite` returns the
+ *  replacement for a matching string, or null to leave it; keys are renamed in place, keeping their order.
+ *  ⚠️ EXACT MATCHES ONLY: `the_high_luminary` does not name `high_luminary`. Returns the number of hits. Mutates. */
+export function repointPersonId(node, fromId, toId, { skip = null } = {}) {
+  let n = 0;
+  const walk = (obj) => {
+    if (!obj || typeof obj !== "object") return;
+    if (Array.isArray(obj)) {
+      for (let i = 0; i < obj.length; i++) {
+        if (obj[i] === fromId) { obj[i] = toId; n++; }
+        else walk(obj[i]);
+      }
+      return;
+    }
+    // ⛔ A KEY IS A REFERENCE TOO, and rekeying has to keep the insertion order — a registry that reorders itself on a
+    // merge would make every diff of a save unreadable. So the object is rebuilt in place, key by key.
+    const keys = Object.keys(obj);
+    const rekey = keys.some(k => k === fromId);
+    if (rekey) {
+      const rebuilt = [];
+      for (const k of keys) rebuilt.push([k === fromId ? toId : k, obj[k]]);
+      for (const k of keys) delete obj[k];
+      for (const [k, v] of rebuilt) {
+        // ⚠️ THE KEPT RECORD WINS A KEY COLLISION. Both ids can be present — that is the whole case — and the merged
+        // record has already been built before this runs, so the dropped one's value must not overwrite it.
+        if (k === toId && Object.prototype.hasOwnProperty.call(obj, k)) { n++; continue; }
+        obj[k] = v;
+      }
+      n++;
+    }
+    for (const [k, v] of Object.entries(obj)) {
+      if (skip && skip.has(v)) continue;
+      if (typeof v === "string") { if (v === fromId) { obj[k] = toId; n++; } continue; }
+      walk(v);
+    }
+  };
+  walk(node);
+  return n;
+}
+
+/** ⛔ SNG-664 §2.5 — THE ONE WRITER. Fold `dropId` into `keepId` and re-point everything that named the dropped one.
+ *
+ *  ⛑ WHICH RECORD KEEPS WHAT, and every one of these is Aevi's rule rather than mine:
+ *    · the dropped id goes into `formerIds`, so an op written against it still finds them (`findExistingNpc` reads it)
+ *    · its names — `name`, `trueName`, every alias — go into `aliases`, so the matcher can never fork them again
+ *    · the HIGHER relationship, because a bond earned is earned
+ *    · the EARLIER `met`, because that is when the character actually met them
+ *    · the union of the memory, the bond log and the quest state
+ *  ⚠️ AND A PLACEHOLDER NEVER BECOMES AN ALIAS. "Unmet yet" and "Radiant authority sent to intercept" are descriptions
+ *  of a stranger, not names she answers to, and putting them in the alias ledger would make the next stranger with a
+ *  grey coat match her.
+ *
+ *  ⚑ IDEMPOTENT: a second call with the same pair finds nothing to move and says so. Returns
+ *  `{ ok, kept, dropped, moved, refs, news, why }`. Mutates `character`. */
+export function mergePeople(character, keepId, dropId, { why = null, day = null } = {}) {
+  const reg = character?.npcRegistry;
+  if (!reg || !keepId || !dropId) return { ok: false, why: "a merge needs two ids and a registry", moved: [], refs: 0 };
+  if (keepId === dropId) return { ok: false, why: "that is one id, not two", moved: [], refs: 0 };
+  const keep = reg[keepId], drop = reg[dropId];
+  if (!keep) return { ok: false, why: `no record under ${keepId}`, moved: [], refs: 0 };
+  if (!drop) {
+    // ⛑ ALREADY DONE is not a failure — it is what idempotent means, and a reconcile step will run this again.
+    const already = Array.isArray(keep.formerIds) && keep.formerIds.includes(dropId);
+    return { ok: already, already, why: already ? `${dropId} is already folded into ${keepId}` : `no record under ${dropId}`, moved: [], refs: 0 };
+  }
+  const moved = [];
+  const num = (v) => (Number.isFinite(Number(v)) ? Number(v) : null);
+
+  // ⚠️ A DESCRIPTOR IS NOT A NAME. `nameUnknown` marks a record whose `name` is the fiction's description of a
+  // stranger; only a real name, a revealed true name and the aliases already earned may join the ledger.
+  // ⛔ AND A MINT THE PLAYER NEVER SAW IS DROPPED, NOT PROMOTED. §2.3: *"Once the player has seen a name on screen,
+  // that name wins… the mint is dropped quietly if the player never saw it."* The stranger at the Post carried
+  // `trueName: "Corm Whitlock"` and the woman Erik has spoken to is Vail Langley; putting Corm Whitlock in the alias
+  // ledger would be worse than losing it, because that ledger is what `findExistingNpc` searches — the next stranger
+  // who gives that name would land on her. It is recorded on the merge row instead, so the decision stays legible.
+  const seenName = (rec) => !rec.nameUnknown && typeof rec.name === "string" && rec.name.trim();
+  const dropMint = !!(drop.nameUnknown && drop.trueName && seenName(keep) && slugify(drop.trueName) !== slugify(keep.name));
+  const namesOf = (rec, { withMint = true } = {}) => [
+    ...(rec.nameUnknown ? [] : [rec.name]),
+    ...(withMint ? [rec.trueName] : []),
+    ...(Array.isArray(rec.aliases) ? rec.aliases : []),
+  ].filter(x => typeof x === "string" && x.trim());
+  // ⚠️ DE-DUPLICATED BY SLUG, because that is how the matcher compares them: "Enforcer of Seraphine's will" and
+  // "Enforcer Of Seraphine S Will" are one alias in two spellings, and keeping both reads as a mistake on her card.
+  const bySlug = new Map();
+  for (const nm of [...namesOf(keep), ...namesOf(drop, { withMint: !dropMint })]) {
+    const k = slugify(nm);
+    if (!k || k === slugify(keep.name)) continue;              // the name they go by is not an alias of itself
+    const had = bySlug.get(k);
+    // prefer the spelling with real capitalisation and punctuation over a flattened one
+    if (!had || (nm.match(/[a-z]/) && nm.match(/['’]/) && !had.match(/['’]/))) bySlug.set(k, nm);
+  }
+  const before = (keep.aliases || []).length;
+  keep.aliases = [...bySlug.values()];
+  if (keep.aliases.length !== before) moved.push(`aliases (${keep.aliases.length})`);
+
+  keep.formerIds = [...new Set([...(keep.formerIds || []), dropId, ...(drop.formerIds || [])])];
+  moved.push("formerIds");
+
+  // ⛑ THE HIGHER BOND, THE EARLIER MEETING — AND `met` IS NOT THE MEETING.
+  const kb = num(keep.relationship), db = num(drop.relationship);
+  if (db != null && (kb == null || db > kb)) { keep.relationship = db; moved.push(`relationship ${kb} → ${db}`); }
+  // ⛔ `met` IS A COUNT OF INTERACTIONS, NOT A DAY — SNG-333, and `noteMet` writes `(Number(n.met) || 0) + 1`. Aevi's
+  // rule says "the earlier `met`", which is the right rule in the units of the RULING; in the units of the FIELD it
+  // took Orla from four interactions to one and would have taken Vail from seven to one. Two records of one person
+  // split the interactions between them, so the count SUMS.
+  const km = num(keep.met) || 0, dm = num(drop.met) || 0;
+  if (dm > 0) { keep.met = km + dm; moved.push(`met ${km} + ${dm} interactions`); }
+  // ⛑ …AND THE DAY, which is where the meeting actually is: the earliest first meeting, the latest sighting.
+  for (const f of ["firstMet", "metDay", "firstMetDay"]) {
+    const kv = num(keep[f]), dv = num(drop[f]);
+    if (dv != null && (kv == null || dv < kv)) { keep[f] = dv; moved.push(`${f} ${kv} → ${dv}`); }
+  }
+  if (drop.lastSeen && typeof drop.lastSeen === "object") {
+    const kd = num(keep.lastSeen?.day), dd = num(drop.lastSeen.day);
+    if (dd != null && (kd == null || dd > kd)) { keep.lastSeen = { ...drop.lastSeen }; moved.push(`lastSeen → d${dd}`); }
+  }
+  // ⛑ …AND THE TRUE NAME, IF ONLY ONE OF THEM HAD IT AND THE PLAYER MIGHT YET SEE IT. ⚠️ Never overwritten, and
+  // never taken from a mint the player never saw while the kept record already carries a name they HAVE seen (§2.3).
+  if (!keep.trueName && drop.trueName && !dropMint) { keep.trueName = drop.trueName; moved.push("trueName"); }
+  if (dropMint) moved.push(`dropped the unseen mint "${drop.trueName}"`);
+  // ⛔ AND A REVEALED NAME BEATS A DESCRIPTOR. If the kept record is still a stranger and the dropped one is named,
+  // the person's name is the name — otherwise the merge would keep calling her "Radiant authority sent to intercept".
+  if (keep.nameUnknown && !drop.nameUnknown && drop.name) {
+    keep.name = drop.name;
+    delete keep.nameUnknown;
+    // ⚠️ AND THE PROMOTED NAME LEAVES THE LEDGER. The aliases were built before this line ran, so "Vail Langley"
+    // was sitting in them as the dropped record's name and stayed there as an alias of itself.
+    keep.aliases = keep.aliases.filter(a => slugify(a) !== slugify(keep.name));
+    moved.push(`name → ${drop.name}`);
+  }
+
+  // ⛑ THE UNIONS. Lists are concatenated and de-duplicated by their own shape; maps take the dropped one's entries
+  // only where the kept record has none, because the kept record is the one the rest of the save points at.
+  const listUnion = (f, keyOf) => {
+    const a = Array.isArray(keep[f]) ? keep[f] : [], b = Array.isArray(drop[f]) ? drop[f] : [];
+    if (!b.length) return;
+    const seen = new Set(a.map(keyOf));
+    const add = b.filter(x => !seen.has(keyOf(x)));
+    if (!add.length) return;
+    keep[f] = [...a, ...add];
+    moved.push(`${f} +${add.length}`);
+  };
+  const ident = (x) => (x && typeof x === "object" ? JSON.stringify(x) : String(x));
+  for (const f of ["memory", "bondLog", "skillsObserved", "assistTags", "titles", "roles", "questState", "wants", "seenAt", "distinctFrom"]) listUnion(f, ident);
+  for (const f of ["questStates", "bonds", "facts"]) {
+    if (!drop[f] || typeof drop[f] !== "object" || Array.isArray(drop[f])) continue;
+    keep[f] = keep[f] && typeof keep[f] === "object" ? keep[f] : {};
+    let n = 0;
+    for (const [k, v] of Object.entries(drop[f])) if (keep[f][k] === undefined) { keep[f][k] = v; n++; }
+    if (n) moved.push(`${f} +${n}`);
+  }
+  // ⚠️ AND ANY FIELD THE KEPT RECORD SIMPLY LACKS. A stranger's record carries the description and the place; the
+  // named one may not. Never an overwrite: the kept record's own answer always stands.
+  // ⛔ AND NEVER THE FLAGS THAT SAY "THIS IS A STRANGER". My first draft copied `nameUnknown: true` off the
+  // descriptor record onto Orla Yardley — the merge undoing the reveal it exists to record — and `met`, `lastSeen`
+  // and the ledger fields are all decided above by their own rules, so a blind copy must not reach them either.
+  const NEVER_COPY = new Set(["id", "aliases", "formerIds", "_mergedFrom", "nameUnknown", "name", "met", "lastSeen",
+    "relationship", "firstMet", "metDay", "firstMetDay", "trueName", "nameRevealed", "linkedByReveal"]);
+  for (const [k, v] of Object.entries(drop)) {
+    if (NEVER_COPY.has(k) || v == null) continue;
+    if (keep[k] === undefined) { keep[k] = v; moved.push(`${k} (was absent)`); }
+  }
+
+  // ⛔ THE DROPPED RECORD GOES, AND THEN EVERY REFERENCE TO IT. Deleted first so the walk cannot re-point the record
+  // onto itself, and the kept record is protected from being overwritten by a key collision.
+  delete reg[dropId];
+  // ⛔ AND THE LEDGER OF THE MERGE IS HELD OUT OF THE WALK. My first draft came back with `formerIds:
+  // ["orla-yardley"]` — the KEPT id — because the walk found the dropped id inside the very field that records it
+  // and re-pointed that too, which also broke the idempotence check that reads it.
+  const ledger = { formerIds: keep.formerIds, aliases: keep.aliases, mergedFrom: keep.mergedFrom };
+  delete keep.formerIds; delete keep.aliases; delete keep.mergedFrom;
+  const refs = repointPersonId(character, dropId, keepId);
+  keep.formerIds = ledger.formerIds; keep.aliases = ledger.aliases;
+  if (ledger.mergedFrom) keep.mergedFrom = ledger.mergedFrom;
+
+  // ⛑ AND THE SENTENCE NAMES WHAT THE PLAYER SAW. A stranger's `name` is a placeholder ("Unmet yet"); the thing
+  // they were called to their face is the DESCRIPTOR, which lives in `role`. Aevi's own example: *"You realise the
+  // Radiant agent at the Post was Vail Langley."*
+  const nameOf = keep.name || keepId;
+  const said = drop.nameUnknown ? (drop.role || drop.name || "stranger") : (drop.name || drop.role || dropId);
+  const wasCalled = /^(a|an|the) /i.test(String(said)) ? String(said) : `the ${said}`;
+  // ⚠️ NOTHING TO ANNOUNCE WHEN BOTH RECORDS ALREADY CARRIED THE SAME NAME — "You realise the Vail Langley was
+  // Vail Langley" is the sentence saying that two ids were tidied, which is not news to a player.
+  const news = slugify(said) === slugify(nameOf) ? null : `You realise ${wasCalled} was ${nameOf}.`;
+  // ⛑ `_mergedFrom` IS AN EXISTING FIELD WITH AN EXISTING READER — `mintedUnmetForGM` filters on it so a person
+  // re-homed under a met id is not offered to the GM as unmet. Written here rather than a second name for one fact.
+  keep._mergedFrom = dropId;
+  keep.mergedFrom = [...(Array.isArray(keep.mergedFrom) ? keep.mergedFrom : []).filter(x => x && x.id !== dropId),
+    { id: dropId, why: why || null, day: day ?? null, ...(dropMint ? { droppedMint: drop.trueName } : {}) }];
+  return { ok: true, kept: keepId, dropped: dropId, moved, refs, news, why: why || null };
+}

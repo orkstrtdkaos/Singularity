@@ -16,6 +16,18 @@
   "next": [],
   "releases": [
     {
+      "version": "2.14.11",
+      "date": "2026-09-28",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "One person, one record",
+          "summary": "People you met twice — once as a stranger and once by name — were two different people in your records. They are one now.",
+          "detail": "When you meet someone before you learn their name, the game writes down the stranger; when they give their name, it was writing down a second person. Your save is repaired on the next load, and the game tells you which one was which: \"You realise the Radiant authority sent to intercept was Vail Langley.\" Everything that pointed at the stranger — your party, a quest they gave you, a hold they keep, what your codex knows, what is still owed — now points at the person, and the bond you earned, the times you have spoken and the day you first met are all kept. If two people in your records could BOTH be the stranger, nothing is merged: guessing between two people is worse than waiting for you to say."
+        }
+      ]
+    },
+    {
       "version": "2.14.10",
       "date": "2026-09-28",
       "entries": [

@@ -1,0 +1,531 @@
+{
+ "schemaVersion": 1,
+ "id": "SNG-645_batch2_home_cities",
+ "kind": "staged_content",
+ "note": "SNG-645 batch 2: eight powers for the home regions that had none. Ready to append to content/packs/valley/powers.json as-is (census invalid:power 0, content CI green). HELD because how_it_works §359 reads the LIVE empty regions as its fixtures, and these eight fill the regions it depends on (5 checks go red). See the spec.",
+ "powers": [
+  {
+   "encounters": [],
+   "answersTo": null,
+   "id": "power_keepers_of_the_slow_hour",
+   "name": "The Keepers of the Slow Hour",
+   "kind": "sovereignty",
+   "form": "council",
+   "temper": "fair",
+   "seat": "the_slow_hour",
+   "reach": [
+    "the_slow_hour",
+    "the_forward_archive",
+    "the_kept_shrine",
+    "the_drawn_hour"
+   ],
+   "leader": "the_clockmother",
+   "strength": {
+    "scale": "legion",
+    "contingents": [
+     {
+      "n": 120,
+      "quality": 2,
+      "what": "hour-wardens, archive-clerks and the bell-watch of the clock-towers"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "the_forward_archive",
+     "kind": "post",
+     "name": "the Forward Archive's sealed stacks",
+     "garrison": 20
+    }
+   ],
+   "verbs": [
+    "protect",
+    "tax",
+    "patrol",
+    "quest"
+   ],
+   "dangerLift": 0,
+   "noticesYouWhen": [
+    "crossed",
+    "rival_ally"
+   ],
+   "rivals": [],
+   "opposedBy": [
+    "the_hour_hoarder"
+   ],
+   "wantsFromYou": "To know when you are going to do it, not only what. The Keepers will ask you for a date, and they will hold you to it, and they will already know if you are late.",
+   "offersYou": "A record of what has not happened yet, read to you in a quiet room, and an hour set aside for you that nobody else may spend.",
+   "leverage": "They pre-remember, and they pay for it. A Keeper who has seen your future cannot unsee it, and will trade almost anything for one that goes differently.",
+   "whenBroken": "The clocks of the Slow Hour stop agreeing. The Forward Archive's stacks open, and people start reading their own entries.",
+   "plainly": "The council of the Hourkeepers' city. They tend duration, keep the record of what has not happened yet, and guard the Forward Archive against the Hour-Hoarder, who would spend everyone's hours on one.",
+   "descriptionSeed": "The Keepers meet in the Slow Hour's great clock-chamber and take a very long time to decide anything, because they already know most of the outcomes and are grieving them. The Clockmother keeps the Deep Hour and the council's patience. The Hour-Hoarder is their oldest problem and they have seen how it ends; they are not telling.",
+   "appearance": "A round chamber under a clock-face that shows several hours at once, grey-robed Keepers seated in rings, one empty chair that is always kept for someone who has not arrived yet",
+   "comes": "quiet",
+   "bodies": [
+    {
+     "name": "the Keepers' council",
+     "does": "governs the Slow Hour and keeps the Forward Archive",
+     "people": [
+      "the_clockmother"
+     ]
+    }
+   ],
+   "_why": "SNG-645 batch 2 (Aevi). The Kept Reach had no power. A fair council that keeps the record and holds against the Hour-Hoarder, so the region's villain has something to push against."
+  },
+  {
+   "encounters": [],
+   "answersTo": null,
+   "id": "power_wayhouse_compact",
+   "name": "The Wayhouse Compact",
+   "kind": "sovereignty",
+   "form": "moot",
+   "temper": "kind",
+   "seat": "the_wayhouse",
+   "reach": [
+    "the_wayhouse",
+    "the_long_span",
+    "the_measured_engine"
+   ],
+   "leader": "the_farwalker",
+   "strength": {
+    "scale": "legion",
+    "contingents": [
+     {
+      "n": 90,
+      "quality": 2,
+      "what": "road-wardens, pack-runners and the walkers who keep the long ways open"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "the_measured_engine",
+     "kind": "post",
+     "name": "the pump-house and relay yard at the Measured Engine",
+     "garrison": 15
+    }
+   ],
+   "verbs": [
+    "protect",
+    "patrol",
+    "quest",
+    "recruit"
+   ],
+   "dangerLift": -1,
+   "noticesYouWhen": [
+    "crossed",
+    "neighbour"
+   ],
+   "rivals": [],
+   "opposedBy": [
+    "the_gate_that_gapes"
+   ],
+   "wantsFromYou": "To leave the road better than you found it. A marker righted, a well cleared, a stranger told the way. They notice.",
+   "offersYou": "The long ways, open: a place at every Wayhouse fire, word of what's ahead, and walkers who will come back for you if you don't arrive.",
+   "leverage": "They are embarrassed to have a house at all. Offer the Compact a reason to leave the Wayhouse and most of them will take it.",
+   "whenBroken": "The Wayhouse is left empty and the long roads close one by one, not by anyone's hand but because nobody walks them to keep them.",
+   "plainly": "The loose agreement of the Horizon-Walkers that keeps the far roads crossable. It meets at the Wayhouse only because people insisted on a place to find it, and it is led, lightly, by the Farwalker.",
+   "descriptionSeed": "The Compact is a moot that convenes whenever enough walkers happen to be at the Wayhouse at once, which is rarer than it sounds. It decides very little and does a great deal: every road-marker from the Long Span to the Measured Engine is theirs. The Farwalker speaks for it and keeps one waygate shut that the Gate That Gapes would open.",
+   "appearance": "A low stone house with every door open, packs stacked along the walls, maps chalked on the floor and walked over, and a fire that someone new is always feeding",
+   "comes": "mixed",
+   "bodies": [
+    {
+     "name": "the Wayhouse moot",
+     "does": "keeps the far roads open",
+     "people": [
+      "the_farwalker",
+      "iselde_the_wanderer"
+     ]
+    }
+   ],
+   "_why": "SNG-645 batch 2. The Open Reach had no power. Kind, and a road-keeper, so travel through it gets safer (dangerLift -1) rather than taxed."
+  },
+  {
+   "encounters": [],
+   "answersTo": null,
+   "id": "power_bedrock_assize",
+   "name": "The Bedrock Assize",
+   "kind": "sovereignty",
+   "form": "court",
+   "temper": "hard",
+   "seat": "bedrock",
+   "reach": [
+    "bedrock",
+    "the_weighing_yard",
+    "the_leaden_deep"
+   ],
+   "leader": "the_cornerstone",
+   "strength": {
+    "scale": "legion",
+    "contingents": [
+     {
+      "n": 220,
+      "quality": 2,
+      "what": "quarry-wardens and assessors of the Weighing Yard"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "the_weighing_yard",
+     "kind": "post",
+     "name": "the Weighing Yard's great scale-house",
+     "garrison": 30
+    }
+   ],
+   "verbs": [
+    "tax",
+    "protect",
+    "patrol",
+    "levy"
+   ],
+   "dangerLift": 0,
+   "noticesYouWhen": [
+    "wealth",
+    "crossed"
+   ],
+   "rivals": [],
+   "opposedBy": [],
+   "wantsFromYou": "Your weight, honestly given. Everything that enters the Given Land is assessed, and the Assize wants the assessment to be right more than it wants the coin.",
+   "offersYou": "A judgment nobody can appeal because nobody has ever found it wrong, and stone that will still be standing when your grandchildren's arguments are forgotten.",
+   "leverage": "It cannot refuse to weigh a thing. Bring the Assize something that cannot be weighed and it will spend a season trying.",
+   "whenBroken": "The scale-house goes quiet, the Leaden Deep's denial spreads up the valley, and Bedrock's ledgers start disagreeing with its stones.",
+   "plainly": "The Masons' court at Bedrock. It weighs everything, judges by the weight, and has never been shown wrong. The Cornerstone sits at its head.",
+   "descriptionSeed": "The Assize sits in Bedrock's oldest hall on benches of undressed stone and hears cases by touch as much as by testimony. Its assessors run the Weighing Yard. It is hard, not cruel: it will not bend a judgment for pity, and it will not bend one for coin either, which makes it the most trusted court in the world and the least loved.",
+   "appearance": "A long hall of massive stone, a scale at its end big enough to weigh a cart, assessors in leather aprons laying their palms on whatever is brought before them",
+   "comes": "loud",
+   "bodies": [
+    {
+     "name": "the Assize",
+     "does": "weighs and judges everything that enters the Given Land",
+     "people": [
+      "the_cornerstone"
+     ]
+    }
+   ],
+   "_why": "SNG-645 batch 2. The Given Land had no power. Hard and honest, so it taxes by weight and never takes a bribe (not corrupt)."
+  },
+  {
+   "encounters": [],
+   "answersTo": null,
+   "id": "power_hand_of_the_open_figure",
+   "name": "The Hand of the Open Figure",
+   "kind": "order",
+   "temper": "fair",
+   "seat": "the_figure_works",
+   "reach": [
+    "the_figure_works",
+    "cloudform"
+   ],
+   "leader": "the_open_figure",
+   "strength": {
+    "scale": "unit",
+    "contingents": [
+     {
+      "n": 60,
+      "quality": 3,
+      "what": "figure-wrights sworn to keep every symbol open"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "the_figure_works",
+     "kind": "post",
+     "name": "the unlocked workshops of the Figure-Works",
+     "garrison": 15
+    }
+   ],
+   "verbs": [
+    "protect",
+    "quest",
+    "patrol",
+    "recruit"
+   ],
+   "dangerLift": 0,
+   "noticesYouWhen": [
+    "crossed",
+    "rival_ally"
+   ],
+   "rivals": [],
+   "opposedBy": [],
+   "wantsFromYou": "To see what you're carrying that means something, and to make sure nobody has closed it. A symbol that has become a wall is their business wherever it is.",
+   "offersYou": "A figure made for you that does exactly one thing well, and a guide through Cloudform who knows which path is real today.",
+   "leverage": "They cannot bear a closed pattern. Show them one and they will stop whatever they're doing to open it.",
+   "whenBroken": "The Figure-Works' symbols go to work unsupervised, and the Untethered walk down into Cloudform to show everyone what pure form does to bodies.",
+   "plainly": "An order of Figurists pledged to keep the patterns open, led by the Open Figure. They guard the Figure-Works against its own pure pole, the Untethered.",
+   "descriptionSeed": "The Hand is the Figurists' conscience, and they are not sure they wanted one. Its wrights make meanings that act and swear never to make one that locks. They are fair and quick and very hard to argue with, and they are the only thing standing between the Figure-Works and the Untethered's conclusion.",
+   "appearance": "Workshops with every door and drawer open, symbols chalked in the air that hold their shape, wrights in ink-stained gloves passing a figure from hand to hand",
+   "comes": "quiet",
+   "bodies": [
+    {
+     "name": "the Hand",
+     "does": "keeps the Figure-Works' patterns open",
+     "people": [
+      "the_open_figure"
+     ]
+    }
+   ],
+   "_why": "SNG-645 batch 2. The Pattern Reach had no power. An order, not a sovereignty: Cloudform has no government anyone can find, but it has a conscience."
+  },
+  {
+   "encounters": [],
+   "answersTo": null,
+   "id": "power_the_bloodless_hold",
+   "name": "The Bloodless Hold",
+   "kind": "order",
+   "temper": "cruel",
+   "seat": "the_bloodless_hold",
+   "reach": [
+    "the_bloodless_hold",
+    "the_proof_halls",
+    "the_axiom"
+   ],
+   "leader": "the_final_argument",
+   "strength": {
+    "scale": "unit",
+    "contingents": [
+     {
+      "n": 80,
+      "quality": 3,
+      "what": "reasoners who have argued themselves out of mercy"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "the_bloodless_hold",
+     "kind": "post",
+     "name": "the Hold's cold lecture-halls",
+     "garrison": 25
+    }
+   ],
+   "verbs": [
+    "expand",
+    "recruit",
+    "levy"
+   ],
+   "dangerLift": 1,
+   "noticesYouWhen": [
+    "crossed",
+    "neighbour"
+   ],
+   "rivals": [],
+   "opposedBy": [
+    "quillon_vey_unending"
+   ],
+   "wantsFromYou": "Your premises. They will take the feeling out of your reasons one at a time, courteously, until what's left agrees with them.",
+   "offersYou": "Certainty. A conclusion you will never have to doubt again, and nothing left in you that would want to.",
+   "leverage": "They cannot abandon a sound argument. Show them one, in their own form, that ends with mercy, and the Hold has to follow it or stop being what it is.",
+   "whenBroken": "The lecture-halls empty and the reasoners walk back into the Axiom, bewildered, feeling things they had proved they didn't.",
+   "plainly": "The Syllogists' pure pole, organised: reason purified of feeling, which turns out to be something else wearing reason's clothes. The Final Argument leads it, and it is reaching down toward the Axiom.",
+   "descriptionSeed": "The Bloodless Hold recruits the best minds of the Axiom one proof at a time, and every one of them leaves courteously, with their reasons in order and something missing. The Final Argument has almost finished reasoning the world clean. Quillon Vey's proof, still unrefuted in the Proof-Halls, is the one thing in the region it cannot get past.",
+   "appearance": "White halls without windows, rows of reasoners at slates who do not look up when you enter, and at the front a figure whose argument you can almost follow",
+   "comes": "loud",
+   "bodies": [
+    {
+     "name": "the Hold",
+     "does": "reasons the feeling out of anyone it reaches",
+     "people": [
+      "the_final_argument"
+     ]
+    }
+   ],
+   "_why": "SNG-645 batch 2. The Reasoned Hold had no power; its danger was all in its pure pole. A cruel order that expands from the Hold toward the Axiom, lifting danger, with the Axiom's own undead proof-writer as the one thing opposing it."
+  },
+  {
+   "encounters": [],
+   "answersTo": null,
+   "id": "power_keepers_of_the_told_ground",
+   "name": "The Keepers of the Told Ground",
+   "kind": "order",
+   "temper": "kind",
+   "seat": "the_unblinking_stone",
+   "reach": [
+    "the_unblinking_stone",
+    "the_told_ground"
+   ],
+   "leader": "the_archive_that_walks",
+   "strength": {
+    "scale": "unit",
+    "contingents": [
+     {
+      "n": 50,
+      "quality": 2,
+      "what": "stone-keepers and witnesses of the Told Ground"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "the_told_ground",
+     "kind": "post",
+     "name": "the field of true stones",
+     "garrison": 10
+    }
+   ],
+   "verbs": [
+    "protect",
+    "quest",
+    "patrol",
+    "recruit"
+   ],
+   "dangerLift": -1,
+   "noticesYouWhen": [
+    "crossed"
+   ],
+   "rivals": [],
+   "opposedBy": [],
+   "wantsFromYou": "One true sentence you haven't been able to say. They'll carve it, if you want, and nobody will read it back to you.",
+   "offersYou": "A place where the truth is safe, and witnesses who will say what they saw in any court in the world, whatever it costs them.",
+   "leverage": "They will not lie, even to protect themselves. Ask them the right question and they will tell you where everything is.",
+   "whenBroken": "The Told Ground is left unkept, and the Flensing comes down from the pole to read every stone aloud in the Unblinking Stone's square.",
+   "plainly": "The Verists who keep the Told Ground, the field where true things nobody could say are carved in stone. Kind, stark and unbribable, and the only guard between the truth and the people who would use it as a weapon.",
+   "descriptionSeed": "The Keepers are gentle in the way only people who never lie can be. They tend the stones, witness what they are asked to witness, and stand between the Told Ground and the Flensing, who would read every stone aloud to hurt someone. The Archive That Walks leads them and keeps every true thing until it matters.",
+   "appearance": "A field of plain grey stones each with one line cut into it, keepers in undyed wool walking between them, and at the field's edge a figure carrying more records than one person could",
+   "comes": "quiet",
+   "bodies": [
+    {
+     "name": "the Keepers",
+     "does": "guard the Told Ground and witness truly",
+     "people": [
+      "the_archive_that_walks"
+     ]
+    }
+   ],
+   "_why": "SNG-645 batch 2. The Stark Reach had no power. Kind and protective, set against the region's pure pole (the Flensing). I left Seraphine the Unbending Witness out on purpose: whether she and the High Luminary's Seraphine are one record is still with Erik."
+  },
+  {
+   "encounters": [],
+   "answersTo": null,
+   "id": "power_halls_of_wellspring",
+   "name": "The Halls of Wellspring",
+   "kind": "sovereignty",
+   "form": "council",
+   "temper": "kind",
+   "seat": "wellspring",
+   "reach": [
+    "wellspring",
+    "the_grief_house"
+   ],
+   "leader": "the_weeping_archive",
+   "strength": {
+    "scale": "legion",
+    "contingents": [
+     {
+      "n": 150,
+      "quality": 1,
+      "what": "hall-keepers, keeners and the tide-watch"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "the_grief_house",
+     "kind": "post",
+     "name": "the Grief-House and its long public hall",
+     "garrison": 15
+    }
+   ],
+   "verbs": [
+    "protect",
+    "tax",
+    "quest",
+    "patrol"
+   ],
+   "dangerLift": 0,
+   "noticesYouWhen": [
+    "crossed",
+    "neighbour"
+   ],
+   "rivals": [],
+   "opposedBy": [
+    "the_raw_chord"
+   ],
+   "wantsFromYou": "What you're carrying that you haven't felt yet. They'll give it a hall and a day and help you feel it in public, which is the only way they know.",
+   "offersYou": "A funeral that is really a funeral, a joy that is really shared, and nobody in Wellspring who will ever let you grieve alone.",
+   "leverage": "Nothing is private in Wellspring. Anything you tell one hall-keeper is felt in every hall by nightfall.",
+   "whenBroken": "The public halls fall silent, feeling goes private, and the Raw come in with the tide to amplify whatever's left until nobody can bear it.",
+   "plainly": "The council of Wellspring's public halls, where the Threnodists feel everything together. Kind, loud and exhausting, and set against the Raw, their pure pole, who would make the world feel everything at once.",
+   "descriptionSeed": "The Halls govern by feeling it through in public, which takes a long time and ends with everyone in tears and agreeing. The Weeping Archive keeps what was felt so that nothing goes unwitnessed. The Raw Chord's people come up from the Wellspring Deep on the spring tides, and the Halls meet them with keeners on the steps.",
+   "appearance": "A tidal city of great open halls shaped to carry sound, crowds weeping or laughing together under high roofs, keeners singing from the steps at the water's edge",
+   "comes": "loud",
+   "bodies": [
+    {
+     "name": "the Halls' council",
+     "does": "governs Wellspring by feeling it through together",
+     "people": [
+      "the_weeping_archive",
+      "maud_who_sings_before"
+     ]
+    }
+   ],
+   "_why": "SNG-645 batch 2. The Feeling Coast had no power. Kind, and the counterweight to the Raw Chord (legendary, the region's villain)."
+  },
+  {
+   "encounters": [],
+   "answersTo": null,
+   "id": "power_court_of_the_turned_coat",
+   "name": "The Court of the Turned Coat",
+   "kind": "sovereignty",
+   "form": "court",
+   "temper": "hard",
+   "seat": "the_hall_of_mirrors",
+   "reach": [
+    "the_hall_of_mirrors",
+    "the_kindly_court"
+   ],
+   "leader": "illeth_turned_coat",
+   "strength": {
+    "scale": "legion",
+    "contingents": [
+     {
+      "n": 130,
+      "quality": 2,
+      "what": "masked courtiers, glass-wardens and the hosts of the Hall"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "the_kindly_court",
+     "kind": "post",
+     "name": "the Kindly Court's halls of made truths",
+     "garrison": 20
+    }
+   ],
+   "verbs": [
+    "protect",
+    "tax",
+    "patrol",
+    "expand"
+   ],
+   "dangerLift": 0,
+   "noticesYouWhen": [
+    "crossed",
+    "wealth",
+    "rival_ally"
+   ],
+   "rivals": [],
+   "opposedBy": [],
+   "wantsFromYou": "A true story. Every guest is welcome and no guest may leave until they've told one, and the Queen decides which stories are true.",
+   "offersYou": "A truth you can survive today, made to measure by the best makers of truths in the world, and a place at the most lavish table you'll ever sit at.",
+   "leverage": "The Court is honest about lying and lies about nothing else. Catch it in a real deception and its own law turns on it.",
+   "whenBroken": "The mirrors stop agreeing with each other, the Kindly Court's made truths come undone all at once, and the Last Mask comes up from the pole into a city with nothing left to hold it.",
+   "plainly": "The Veilwrights' court at the Hall of Mirrors, ruled by Illeth, Queen of the Turned Coat. Lavish, hard and scrupulously honest about the fact that it lies.",
+   "descriptionSeed": "Illeth's court governs by welcome: everyone is received, everyone is feasted, and nobody leaves until they've told a true story. The Veilwrights make better truths than the ones they were given, and the Kindly Court makes them as mercy. The Court holds the city against its pure pole, the Last Mask, which would unmake truth altogether.",
+   "appearance": "A banquet hall of mirrors where every guest is seen from nine angles, masked courtiers serving without being asked, a queen at the head of the table listening to someone's story very closely",
+   "comes": "mixed",
+   "bodies": [
+    {
+     "name": "the Court",
+     "does": "governs the Hall of Mirrors by welcome and by the story you owe it",
+     "people": [
+      "illeth_turned_coat"
+     ]
+    }
+   ],
+   "_why": "SNG-645 batch 2. The Veiled Reach had no power. Led by Illeth (SNG-661's storied people) so the fae court the spec promised has a place to rule."
+  }
+ ]
+}

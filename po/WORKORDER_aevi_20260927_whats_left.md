@@ -53,7 +53,7 @@ SNG-645 (powers for the 24 empty regions) · two more epics (SNG-660 §1d) · ra
 ## Waiting on Erik
 
 SNG-634 §8 and SNG-636 §8 (powers on the ground, the hierarchy above them) · SNG-641 §7's remaining items (Lucifer's
-mask, the Starless, the seat count) · SNG-640 §6 · Sera / Seraphine (one record or two).
+mask, the Starless, the seat count) · SNG-640 §6. *(Sera / Seraphine: settled 2026-09-28. Sera IS the High Luminary, one record since SNG-646; Seraphine the Unbending Witness is a different woman, and the Hollow King's dangling rival `seraphine_unbending` now points at her.)*
 
 **Suggested order:** A (all five are small) → B1 → B3 → C1 → B2 → C2 → D.
 

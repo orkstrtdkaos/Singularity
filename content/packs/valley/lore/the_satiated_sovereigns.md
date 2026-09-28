@@ -290,8 +290,9 @@ thematic:**
 | **The Appetite** | **The Hundred Hands** |
 | **The Final Argument** | **The Kind Liar** |
 
-⬜ **Three carry unresolved or absent rivals** — `the_hollow_king` names `maren_ossitide` and
-`seraphine_unbending`, **neither of which exists on the roster.**
+⬜ **Three carry unresolved or absent rivals** — `the_hollow_king` names `maren_ossitide`, **which does not exist on the roster.** (His other named rival,
+once `seraphine_unbending`, is `the_unbending_witness`, the Verist Seraphine; a different woman from the High
+Luminary, who is Sera. Resolved 2026-09-28.)
 
 ---
 

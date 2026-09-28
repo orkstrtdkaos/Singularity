@@ -226,7 +226,7 @@
       },
       "keeperId": "halvex_coil",
       "keeperName": "Halvex Coil",
-      "condition": "holding",
+      "condition": "thriving",
       "has": [
         "a watchtower",
         "a shrine"
@@ -237,7 +237,14 @@
         "Estry"
       ],
       "trades": {
-        "goods": []
+        "goods": [
+          {
+            "goods": "raw_material",
+            "name": "hide, sinew, timber, ore",
+            "units": 14,
+            "each": 4
+          }
+        ]
       }
     }
   }

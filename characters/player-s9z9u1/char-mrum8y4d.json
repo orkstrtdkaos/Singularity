@@ -104,7 +104,7 @@
     },
     {
       "abilityId": "the_old_procedure",
-      "level": 3
+      "level": 1
     },
     {
       "abilityId": "shadow-image",
@@ -127,9 +127,9 @@
     "demonic_angelic": -0.020000000000000004,
     "dark_light": 0.085,
     "concrete_abstract": 0.20506701093165375,
-    "chaos_order": -0.027395467421874986,
+    "chaos_order": -0.016025694050781233,
     "body_mind": 0.0658375,
-    "emotional_logical": 0.06547939778515624,
+    "emotional_logical": 0.06720542789589842,
     "space_time": 0.0316,
     "violence_peace": 0.06510059374999999,
     "destruction_creation": 0.07800000000000001
@@ -571,23 +571,28 @@
         "player": "Step inside and speak with Halvex about what the sealed chamber showed him while you were descending.",
         "summary": "Halvex Coil speaks plainly about the sealed chamber's true nature as a mutual threshold, and reveals that someone in the lower Annex hired the Churn-Revel to force it open—a name not yet known.",
         "narration": "You step through the threshold and the warmth of the Annex wraps around you. Halvex is moving a coffee pot away from the fire—a small gesture that reads as deliberate, giving space for what you need to say. The interior opens wider than the exterior promised: timber beams rise to a peaked roof, and the walls carry an old precision in how they fit. Cy clicks past your boot, already mapping.\n\nHalfvex pours two cups and sets them on a worn table. He does not sit, and neither do you yet. \"The chamber listened,\" he says simply. \"When you promised it honest ground, the seam opened like it had been waiting for exactly that shape of asking. I read what I could from above while you descended.\" His eyes are steady on yours. \"The alcove is a threshold—a mutual test. The water asks the supplicant for readiness. The supplicant asks the water for what it can carry. It is not a lock. It is an exchange.\"\n\nHe lifts his cup, pauses, then continues. \"The regulator measures the water's preparation. The chamber measures the asker. Vessin felt it through the stone. We both understood—breaking was never the point. Understanding was.\" His voice carries the weight of a mandate surrendered. \"But there is something else. Someone paid coin in the lower Annex to send the Revel to break it. Someone wanted the sealed seam open by force, and they knew enough to hire an orchestrator. That name—the one who paid—I do not have it yet. But it is a thread that leads somewhere darker than just curiosity about old work.\"\n\n*✦ The charge is set — the work goes on while you are away, and you'll hear how it fared when you return.*"
+      },
+      {
+        "player": "Wait for the band to arrive and have Orla, Ravel, and the others hear this directly—shared knowing rather than second-hand account.",
+        "summary": "At the Standing Annex with Halvex Coil—waiting for the band's arrival while Cy surveys the Precursor work beneath the building.",
+        "narration": "You settle at the table across from Halvex, the coffee steaming between you. Cy's clicking fades toward the back rooms as it continues its survey, leaving the two of you in the clear morning light. Halvex nods at your choice—a quiet recognition that some truths carry better when they reach everyone at once.\n\n\"They'll be here soon,\" Halvex says. It's not a question. He knows the road times as well as you do, knows Veln moves with purpose, knows the band walks together now. \"The water beneath the stone reads what it reads. The chamber's answer doesn't change whether one person knows it or ten.\" He pauses, considering the coffee. \"But ten people carrying it forward—that changes what it means.\"\n\nOutside, the morning settles into the kind of stillness that precedes a day of work. The watchtower casts a long shadow across the yard. Somewhere deeper in the Annex, Cy's lens irises and clicks—old work speaking to old work in a language that predates the words either of you carry. The standing shrine to the east catches the early light, and the doors of the Annex stand open to the spinward road."
       }
     ],
     "lastTurn": {
-      "narration": "You step through the threshold and the warmth of the Annex wraps around you. Halvex is moving a coffee pot away from the fire—a small gesture that reads as deliberate, giving space for what you need to say. The interior opens wider than the exterior promised: timber beams rise to a peaked roof, and the walls carry an old precision in how they fit. Cy clicks past your boot, already mapping.\n\nHalfvex pours two cups and sets them on a worn table. He does not sit, and neither do you yet. \"The chamber listened,\" he says simply. \"When you promised it honest ground, the seam opened like it had been waiting for exactly that shape of asking. I read what I could from above while you descended.\" His eyes are steady on yours. \"The alcove is a threshold—a mutual test. The water asks the supplicant for readiness. The supplicant asks the water for what it can carry. It is not a lock. It is an exchange.\"\n\nHe lifts his cup, pauses, then continues. \"The regulator measures the water's preparation. The chamber measures the asker. Vessin felt it through the stone. We both understood—breaking was never the point. Understanding was.\" His voice carries the weight of a mandate surrendered. \"But there is something else. Someone paid coin in the lower Annex to send the Revel to break it. Someone wanted the sealed seam open by force, and they knew enough to hire an orchestrator. That name—the one who paid—I do not have it yet. But it is a thread that leads somewhere darker than just curiosity about old work.\"\n\n*✦ The charge is set — the work goes on while you are away, and you'll hear how it fared when you return.*",
-      "sceneSummary": "Halvex Coil speaks plainly about the sealed chamber's true nature as a mutual threshold, and reveals that someone in the lower Annex hired the Churn-Revel to force it open—a name not yet known.",
+      "narration": "You settle at the table across from Halvex, the coffee steaming between you. Cy's clicking fades toward the back rooms as it continues its survey, leaving the two of you in the clear morning light. Halvex nods at your choice—a quiet recognition that some truths carry better when they reach everyone at once.\n\n\"They'll be here soon,\" Halvex says. It's not a question. He knows the road times as well as you do, knows Veln moves with purpose, knows the band walks together now. \"The water beneath the stone reads what it reads. The chamber's answer doesn't change whether one person knows it or ten.\" He pauses, considering the coffee. \"But ten people carrying it forward—that changes what it means.\"\n\nOutside, the morning settles into the kind of stillness that precedes a day of work. The watchtower casts a long shadow across the yard. Somewhere deeper in the Annex, Cy's lens irises and clicks—old work speaking to old work in a language that predates the words either of you carry. The standing shrine to the east catches the early light, and the doors of the Annex stand open to the spinward road.",
+      "sceneSummary": "At the Standing Annex with Halvex Coil—waiting for the band's arrival while Cy surveys the Precursor work beneath the building.",
       "choices": [
         {
-          "label": "Ask Halvex directly: who in the lower Annex would have that kind of reach and coin?",
+          "label": "Walk the Annex's interior with Halvex while you wait—ask him directly about the lower Annex and who paid coin to hire the Revel.",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {
-            "falsehood_truth": 0.3,
-            "emotional_logical": -0.2
+            "falsehood_truth": 0.3
           },
           "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
+            "ask",
             "study"
           ],
           "abilityId": null,
@@ -597,37 +602,35 @@
           "emergenceId": null
         },
         {
-          "label": "Use See the Made Thing to read the Annex's structure and uncover what Halvex might be holding back about the person who paid.",
+          "label": "Use Appetite-Sense to read what Halvex is refusing to admit to himself—the want beneath the words he's choosing.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "falsehood_truth": 0.5,
-            "concrete_abstract": 0.2
+            "falsehood_truth": 0.2
           },
-          "difficulty": "normal",
+          "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
             "study"
           ],
-          "abilityId": "see_the_made_thing",
+          "abilityId": "appetite_sense",
           "energyCost": 2,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Show Halvex the engineering records from the lower Annex that bore your name—ask what he knows about why they were kept, and who would care about them.",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Step outside and work alongside Cy—read the Precursor work with it, let your understanding of the old lattice speak directly to what it's finding.",
+          "attribute": "practical",
+          "subAttribute": "craft",
           "axes": {
-            "falsehood_truth": 0.4,
-            "mechanical_spiritual": -0.3
+            "mechanical_spiritual": 0.4
           },
-          "difficulty": "normal",
+          "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
             "study",
-            "careful"
+            "craft"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -636,18 +639,16 @@
           "emergenceId": null
         },
         {
-          "label": "Wait for the band to arrive and have Orla, Ravel, and the others hear this directly—shared knowing rather than second-hand account.",
+          "label": "Listen to what Halvex doesn't say—settle with the coffee and wait for him to speak what matters when he's ready.",
           "attribute": "social",
-          "subAttribute": "presence",
+          "subAttribute": "rapport",
           "axes": {
-            "chaos_order": 0.2,
-            "emotional_logical": 0.1
+            "emotional_logical": -0.2
           },
           "difficulty": "very easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "plan",
-            "lead"
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -657,43 +658,26 @@
         }
       ],
       "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
-      },
+      "characterDeltas": {},
       "ledgerEvents": [],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "the-taken-from-the-city",
-          "note": "The sealed chamber beneath the Crossing is confirmed as a mutual threshold—not a lock, but an exchange of readiness between supplicant and stone. Someone in the lower Annex paid coin to force it open. The thread of the payer's identity now surfaces as the thread to pull."
-        }
-      ],
+      "questUpdates": [],
       "standingOps": [],
-      "delegateOps": [
-        {
-          "npcId": "cy",
-          "charge": "survey and plan expansion of the Standing Annex—assess dormant capacity, locate control-lattice, recommend integration points and growth thresholds"
-        }
-      ],
+      "delegateOps": [],
       "jobOps": [],
       "arcOps": [],
       "adoptSchool": null,
       "offer": null,
       "stageOps": [],
       "scene": {
-        "setting": "Interior of the Standing Annex—timber beams rising to a peaked roof, walls carrying old precision in their fit, a fire warming a corner, a worn table with two cups of coffee. Morning light through open windows. The stone beneath carries a faint harmonic thrumming.",
+        "setting": "Interior of the Standing Annex—timber beams rising to a peaked roof, walls carrying old precision in their fit, a fire warming a corner, two cups of coffee steaming on a worn wooden table. Morning light through open windows. The stone beneath carries a faint harmonic thrumming. The eastern threshold opens to the yard where Cy moves along the foundation.",
         "npcsPresent": [
           {
             "name": "Halvex Coil",
-            "state": "Standing at the table, having just poured coffee, speaking plainly about the sealed chamber's true nature and the unknown person who paid to force it open"
+            "state": "Standing at the table, holding a coffee cup, reading the space and waiting for what comes next"
           },
           {
             "name": "Cy",
-            "state": "Moving with precise intent across the Annex's interior, lens irising as it reads the old work beneath and around the building"
+            "state": "Moving through the Annex's interior and exterior, surveying the Precursor work beneath the stone with methodical precision"
           }
         ],
         "objects": [
@@ -710,52 +694,12 @@
           "Cy's assessment of the Annex's expansion potential and integration with the old work beneath"
         ]
       },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "halvex_coil",
-          "note": "Spoke plainly about the sealed chamber's true nature as a mutual threshold between supplicant and stone. Revealed that someone in the lower Annex hired the Revel to force it open by coin. The mandate to break has been surrendered; understanding now drives his seeking."
-        }
-      ],
+      "npcUpdates": [],
       "intentsHeard": [],
       "factUpdates": [],
-      "placeUpdates": [
-        {
-          "note": "The Standing Annex's interior confirmed as Precursor work with dormant integration points—old lattice work runs beneath the structure, marked by harmonic thrumming in the stone. Cy has begun preliminary assessment for expansion.",
-          "subPlace": {
-            "name": "The southeastern corner foundation",
-            "parent": "gen-the-standing-annex",
-            "note": "First integration point identified by Cy—deep-lying Precursor work, patient and old",
-            "visited": true
-          }
-        }
-      ],
+      "placeUpdates": [],
       "discovery": null,
-      "codexUpdates": [
-        {
-          "topic": "the-regulator-question",
-          "label": "The Regulator's Question",
-          "kind": "mystery",
-          "entityId": null,
-          "fact": "Halvex Coil confirmed the sealed chamber is not a lock but a mutual threshold—the alcove serves as the point where water and supplicant ask each other's readiness. The regulator measures the water's preparation; the chamber measures the asker. Breaking was never the point; understanding was.",
-          "links": [
-            "the-sealed-chamber",
-            "halvex-coil",
-            "the-hub-crossing"
-          ]
-        },
-        {
-          "topic": "halvex-coil",
-          "label": "Halvex",
-          "kind": "person",
-          "entityId": "halvex_coil",
-          "fact": "The Revel sent to break the Null Stone's sealed seam was hired by someone in the lower Annex who paid in coin. Halvex does not yet have the name of the payer, but knows it is a person with reach and resources.",
-          "links": [
-            "the-revel-sent-to-break-the-stone",
-            "the-lower-annex"
-          ]
-        }
-      ],
+      "codexUpdates": [],
       "holdingOps": [],
       "holdTrades": [],
       "debtOps": [],
@@ -763,24 +707,14 @@
       "partyOps": [],
       "generateRequest": [],
       "encounterOps": [],
-      "projectOps": [
-        {
-          "op": "open",
-          "abilityId": "the_old_procedure",
-          "name": "Standing Annex expansion and integration assessment",
-          "why": "Cy has accepted the assignment to survey the Annex's dormant capacity and plan its growth"
-        }
-      ],
+      "projectOps": [],
       "bandOps": [],
       "strikeOps": [],
       "deathOps": [],
       "newEncounter": null,
       "unlockPrecursor": null,
       "unlockSubstrate": null,
-      "timeOps": {
-        "hoursPassed": 0.5,
-        "why": "Brief conversation over warming coffee"
-      },
+      "timeOps": {},
       "moveTo": null,
       "stateOps": [],
       "itemUpdates": [],
@@ -798,15 +732,15 @@
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Interior of the Standing Annex—timber beams rising to a peaked roof, walls carrying old precision in their fit, a fire warming a corner, a worn table with two cups of coffee. Morning light through open windows. The stone beneath carries a faint harmonic thrumming.",
+      "setting": "Interior of the Standing Annex—timber beams rising to a peaked roof, walls carrying old precision in their fit, a fire warming a corner, two cups of coffee steaming on a worn wooden table. Morning light through open windows. The stone beneath carries a faint harmonic thrumming. The eastern threshold opens to the yard where Cy moves along the foundation.",
       "npcsPresent": [
         {
           "name": "Halvex Coil",
-          "state": "Standing at the table, having just poured coffee, speaking plainly about the sealed chamber's true nature and the unknow"
+          "state": "Standing at the table, holding a coffee cup, reading the space and waiting for what comes next"
         },
         {
           "name": "Cy",
-          "state": "Moving with precise intent across the Annex's interior, lens irising as it reads the old work beneath and around the bui"
+          "state": "Moving through the Annex's interior and exterior, surveying the Precursor work beneath the stone with methodical precisi"
         }
       ],
       "objects": [
@@ -823,7 +757,7 @@
         "Cy's assessment of the Annex's expansion potential and integration with the old work beneath"
       ]
     },
-    "beats": 4,
+    "beats": 5,
     "subPlace": {
       "slug": "the-southeastern-corner-foundation",
       "name": "The southeastern corner foundation",
@@ -833,7 +767,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 10,
-    "hour": 10,
+    "hour": 11,
     "realAnchor": null
   },
   "companions": [
@@ -2479,7 +2413,7 @@
     "lastSharedReadAt": "2026-09-28T22:03:43.051Z",
     "lastTickWorldDay": 90,
     "lastCanonWorldDay": 90,
-    "turnsSinceOffer": 2,
+    "turnsSinceOffer": 3,
     "recentOffers": [
       {
         "thing": "The shrine's four cardinal alcoves now hold living positions—Vail's Radiant light in the east, your shadow-image in the west, two…",
@@ -14596,19 +14530,19 @@
     "deferredMysteries": []
   },
   "tendencies": {
-    "devotion": 0.3813233911051845,
-    "cerebral": 14.065711619583594,
-    "social": 19.571237244172373,
-    "strategic": 12.310758243053819,
-    "cautious": 3.8697706795301468,
-    "amorous": 3.5982500018443484,
-    "generous": 4.626704264302807,
-    "ruthless": 0.8335099531406976,
-    "risky": 0.07805639417008353,
-    "patient": 0.021315797518903577,
-    "deception": 0.024812692417425803,
-    "carousing": 0.5310255194818012,
-    "leadership": 1.0892831168857462
+    "devotion": 0.3717903063275549,
+    "cerebral": 13.714068829094003,
+    "social": 19.081956313068062,
+    "strategic": 13.002989286977472,
+    "cautious": 3.773026412541893,
+    "amorous": 3.5082937517982398,
+    "generous": 4.511036657695237,
+    "ruthless": 0.8126722043121802,
+    "risky": 0.07610498431583144,
+    "patient": 0.020782902580930986,
+    "deception": 0.02419237510699016,
+    "carousing": 0.5177498814947562,
+    "leadership": 2.0620510389636024
   },
   "aptitudes": [
     "strategist",
@@ -14617,7 +14551,7 @@
     "orator",
     "faithful"
   ],
-  "actionCount": 230,
+  "actionCount": 231,
   "grantsVersion": 1,
   "precursorAccess": [
     "address_sense"
@@ -15867,8 +15801,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790633448006,
-  "rev": 1075,
+  "updatedAt": 1790633901340,
+  "rev": 1077,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -16986,7 +16920,7 @@
     "umbral_depths": 54,
     "the_quickwood": 101,
     "the_center": 50,
-    "valley": 59,
+    "valley": 60,
     "the_open_reach": 3
   },
   "opLossPending": false,
@@ -17162,10 +17096,10 @@
     {
       "id": "sess-22",
       "startedAt": "2026-09-28T20:26:42.371Z",
-      "lastAt": "2026-09-28T22:00:52.702Z",
+      "lastAt": "2026-09-28T22:18:21.333Z",
       "startDay": 90,
       "endDay": 90,
-      "beats": 11
+      "beats": 12
     }
   ],
   "establishedFacts": [
@@ -17375,19 +17309,19 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 267,
-    "choices": 267,
+    "sceneSummary": 268,
+    "choices": 268,
     "characterDeltas": 150,
-    "scene": 267,
+    "scene": 268,
     "placeUpdates": 36,
     "codexUpdates": 153,
     "timeOps": 214,
     "offer": 59,
     "generateRequest": 7,
-    "sceneEnded": 135,
+    "sceneEnded": 136,
     "npcUpdates": 214,
     "moveTo": 16,
-    "gambitApt": 91,
+    "gambitApt": 92,
     "deeds": 18,
     "questUpdates": 63,
     "standingOps": 8,
@@ -17410,7 +17344,7 @@
     "discoveryEligible": 1,
     "projectOps": 1
   },
-  "_opTurns": 267,
+  "_opTurns": 268,
   "customAbilities": {
     "mirror-bright": {
       "id": "mirror-bright",
@@ -18415,7 +18349,7 @@
   "featureOffers": [],
   "_debtReceipts": [],
   "skillUses": {
-    "plan": 14,
+    "plan": 15,
     "discuss": 1,
     "travel": 14,
     "scout": 8,
@@ -18442,7 +18376,7 @@
     "insight": 1,
     "discipline": 1,
     "gamble": 1,
-    "lead": 1,
+    "lead": 2,
     "rally": 1,
     "honest": 1,
     "confront": 1,
@@ -18975,440 +18909,440 @@
   },
   "_promptRows": {
     "character": {
-      "reached": 76,
-      "produced": 76
+      "reached": 77,
+      "produced": 77
     },
     "location": {
-      "reached": 76,
-      "produced": 76
+      "reached": 77,
+      "produced": 77
     },
     "region": {
-      "reached": 76,
-      "produced": 76
+      "reached": 77,
+      "produced": 77
     },
     "groundDetail": {
-      "reached": 76,
+      "reached": 77,
       "produced": 27
     },
     "lore": {
-      "reached": 76,
+      "reached": 77,
       "produced": 51
     },
     "traditionMotiveDetail": {
-      "reached": 76,
-      "produced": 76
+      "reached": 77,
+      "produced": 77
     },
     "sheetsDetail": {
-      "reached": 76,
-      "produced": 49
+      "reached": 77,
+      "produced": 50
     },
     "rules": {
-      "reached": 76,
-      "produced": 76
+      "reached": 77,
+      "produced": 77
     },
     "recentTurns": {
-      "reached": 76,
-      "produced": 64
+      "reached": 77,
+      "produced": 65
     },
     "timeLabel": {
-      "reached": 76,
-      "produced": 76
+      "reached": 77,
+      "produced": 77
     },
     "npcRegistryDetail": {
-      "reached": 76,
-      "produced": 76
+      "reached": 77,
+      "produced": 77
     },
     "mintedUnmetDetail": {
-      "reached": 76,
-      "produced": 76
+      "reached": 77,
+      "produced": 77
     },
     "npcSeedDetail": {
-      "reached": 76,
-      "produced": 31
+      "reached": 77,
+      "produced": 32
     },
     "traditionVocab": {
-      "reached": 76,
-      "produced": 76
+      "reached": 77,
+      "produced": 77
     },
     "standingDetail": {
-      "reached": 76,
-      "produced": 76
+      "reached": 77,
+      "produced": 77
     },
     "recalledDetail": {
-      "reached": 76,
+      "reached": 77,
       "produced": 14
     },
     "bearingsDetail": {
-      "reached": 76,
-      "produced": 76
+      "reached": 77,
+      "produced": 77
     },
     "caravansDetail": {
-      "reached": 76,
-      "produced": 11
+      "reached": 77,
+      "produced": 12
     },
     "commandDetail": {
-      "reached": 76,
-      "produced": 76
+      "reached": 77,
+      "produced": 77
     },
     "presenceDetail": {
-      "reached": 76,
-      "produced": 66
+      "reached": 77,
+      "produced": 67
     },
     "worthHereDetail": {
-      "reached": 76,
+      "reached": 77,
       "produced": 0
     },
     "inventoryDetail": {
-      "reached": 76,
-      "produced": 76
+      "reached": 77,
+      "produced": 77
     },
     "sceneState": {
-      "reached": 76,
-      "produced": 64
+      "reached": 77,
+      "produced": 65
     },
     "holdingsDetail": {
-      "reached": 76,
-      "produced": 76
+      "reached": 77,
+      "produced": 77
     },
     "debtsDetail": {
-      "reached": 76,
+      "reached": 77,
       "produced": 0
     },
     "carriedDetail": {
-      "reached": 76,
+      "reached": 77,
       "produced": 0
     },
     "abilityLawDetail": {
-      "reached": 76,
-      "produced": 76
+      "reached": 77,
+      "produced": 77
     },
     "questsDetail": {
-      "reached": 76,
-      "produced": 76
+      "reached": 77,
+      "produced": 77
     },
     "structuredQuestsDetail": {
-      "reached": 76,
+      "reached": 77,
       "produced": 0
     },
     "traditionArcDetail": {
-      "reached": 76,
+      "reached": 77,
       "produced": 0
     },
     "npcErrandsDetail": {
-      "reached": 76,
+      "reached": 77,
       "produced": 0
     },
     "codexDetail": {
-      "reached": 76,
-      "produced": 76
+      "reached": 77,
+      "produced": 77
     },
     "companionsDetail": {
-      "reached": 76,
-      "produced": 76
+      "reached": 77,
+      "produced": 77
     },
     "placeMemoryDetail": {
-      "reached": 76,
-      "produced": 52
+      "reached": 77,
+      "produced": 53
     },
     "agesMissingDetail": {
-      "reached": 76,
-      "produced": 76
+      "reached": 77,
+      "produced": 77
     },
     "newsDetail": {
-      "reached": 76,
-      "produced": 76
+      "reached": 77,
+      "produced": 77
     },
     "worldArcsDetail": {
-      "reached": 76,
-      "produced": 76
+      "reached": 77,
+      "produced": 77
     },
     "legendsPursuableDetail": {
-      "reached": 76,
+      "reached": 77,
       "produced": 12
     },
     "wakesDetail": {
-      "reached": 76,
+      "reached": 77,
       "produced": 0
     },
     "arcMoodDetail": {
-      "reached": 76,
-      "produced": 76
+      "reached": 77,
+      "produced": 77
     },
     "reachableDeadDetail": {
-      "reached": 76,
+      "reached": 77,
       "produced": 46
     },
     "threatToPlayer": {
-      "reached": 76,
+      "reached": 77,
       "produced": 0
     },
     "guardiansDetail": {
-      "reached": 76,
+      "reached": 77,
       "produced": 0
     },
     "resolution": {
-      "reached": 76,
-      "produced": 61
+      "reached": 77,
+      "produced": 62
     },
     "playerInput": {
-      "reached": 76,
+      "reached": 77,
       "produced": 15
     },
     "exactWords": {
-      "reached": 76,
+      "reached": 77,
       "produced": 38
     },
     "travelDirective": {
-      "reached": 76,
+      "reached": 77,
       "produced": 7
     },
     "itemAdvance": {
-      "reached": 76,
+      "reached": 77,
       "produced": 0
     },
     "encounterWeaveDetail": {
-      "reached": 76,
+      "reached": 77,
       "produced": 10
     },
     "encounterOfferDetail": {
-      "reached": 76,
+      "reached": 77,
       "produced": 5
     },
     "fightFramingDetail": {
-      "reached": 76,
+      "reached": 77,
       "produced": 0
     },
     "abilityGrantDetail": {
-      "reached": 76,
+      "reached": 77,
       "produced": 0
     },
     "stageRevealDetail": {
-      "reached": 76,
+      "reached": 77,
       "produced": 0
     },
     "itemEvolveDetail": {
-      "reached": 76,
+      "reached": 77,
       "produced": 0
     },
     "worldPressureDetail": {
-      "reached": 76,
+      "reached": 77,
       "produced": 2
     },
     "offerDetail": {
-      "reached": 76,
+      "reached": 77,
       "produced": 2
     },
     "teacherOfferDetail": {
-      "reached": 76,
+      "reached": 77,
       "produced": 0
     },
     "substrateDetail": {
-      "reached": 76,
+      "reached": 77,
       "produced": 19
     },
     "romanceGuidanceDetail": {
-      "reached": 76,
+      "reached": 77,
       "produced": 4
     },
     "factsDetail": {
-      "reached": 76,
-      "produced": 76
+      "reached": 77,
+      "produced": 77
     },
     "evolvedItemsDetail": {
-      "reached": 76,
+      "reached": 77,
       "produced": 0
     },
     "opLossNote": {
-      "reached": 76,
+      "reached": 77,
       "produced": 0
     },
     "emergenceDetail": {
-      "reached": 76,
+      "reached": 77,
       "produced": 0
     },
     "perilNote": {
-      "reached": 76,
+      "reached": 77,
       "produced": 0
     },
     "encounterDetail": {
-      "reached": 76,
+      "reached": 77,
       "produced": 4
     },
     "masteryDetail": {
-      "reached": 76,
-      "produced": 76
+      "reached": 77,
+      "produced": 77
     },
     "bookkeepingRestate": {
-      "reached": 76,
+      "reached": 77,
       "produced": 0
     },
     "anomalyDetail": {
-      "reached": 76,
-      "produced": 74
+      "reached": 77,
+      "produced": 75
     },
     "repairPanelDetail": {
-      "reached": 76,
-      "produced": 76
+      "reached": 77,
+      "produced": 77
     },
     "teacherDetail": {
-      "reached": 76,
+      "reached": 77,
       "produced": 0
     },
     "toolkitDetail": {
-      "reached": 76,
-      "produced": 76
+      "reached": 77,
+      "produced": 77
     },
     "availableEncounters": {
-      "reached": 76,
-      "produced": 72
+      "reached": 77,
+      "produced": 73
     },
     "partyDetail": {
-      "reached": 76,
+      "reached": 77,
       "produced": 0
     },
     "ratingDetail": {
-      "reached": 76,
-      "produced": 76
+      "reached": 77,
+      "produced": 77
     },
     "registerDetail": {
-      "reached": 76,
-      "produced": 76
+      "reached": 77,
+      "produced": 77
     },
     "legendDetail": {
-      "reached": 76,
+      "reached": 77,
       "produced": 1
     },
     "livingWorldDetail": {
-      "reached": 76,
-      "produced": 47
+      "reached": 77,
+      "produced": 48
     },
     "assignmentsDetail": {
-      "reached": 76,
-      "produced": 2
+      "reached": 77,
+      "produced": 3
     },
     "latentArcsDetail": {
-      "reached": 76,
-      "produced": 76
+      "reached": 77,
+      "produced": 77
     },
     "seasonalDetail": {
-      "reached": 76,
-      "produced": 76
+      "reached": 77,
+      "produced": 77
     },
     "schoolsDetail": {
-      "reached": 76,
-      "produced": 76
+      "reached": 77,
+      "produced": 77
     },
     "sharedCanonDetail": {
-      "reached": 76,
-      "produced": 53
+      "reached": 77,
+      "produced": 54
     },
     "worldCountLabel": {
-      "reached": 76,
-      "produced": 76
+      "reached": 77,
+      "produced": 77
     },
     "waygateDetail": {
-      "reached": 76,
+      "reached": 77,
       "produced": 29
     },
     "readAloudDetail": {
-      "reached": 76,
-      "produced": 76
+      "reached": 77,
+      "produced": 77
     },
     "scenePacingDetail": {
-      "reached": 76,
+      "reached": 77,
       "produced": 24
     },
     "wishesDetail": {
-      "reached": 56,
+      "reached": 57,
       "produced": 0
     },
     "worldMovedOnDetail": {
-      "reached": 56,
+      "reached": 57,
       "produced": 2
     },
     "companionLivesDetail": {
-      "reached": 56,
-      "produced": 29
+      "reached": 57,
+      "produced": 30
     },
     "homeDetail": {
-      "reached": 56,
+      "reached": 57,
       "produced": 0
     },
     "invitationsDetail": {
-      "reached": 56,
+      "reached": 57,
       "produced": 0
     },
     "bandsJoinedDetail": {
-      "reached": 56,
+      "reached": 57,
       "produced": 0
     },
     "travelersHereDetail": {
-      "reached": 56,
+      "reached": 57,
       "produced": 17
     },
     "travelersDetail": {
-      "reached": 56,
+      "reached": 57,
       "produced": 4
     },
     "journeyDetail": {
-      "reached": 54,
+      "reached": 55,
       "produced": 7
     },
     "journeyUnderwayDetail": {
-      "reached": 54,
+      "reached": 55,
       "produced": 5
     },
     "holdsNearDetail": {
-      "reached": 54,
-      "produced": 50
+      "reached": 55,
+      "produced": 51
     },
     "moneyDetail": {
-      "reached": 53,
-      "produced": 53
+      "reached": 54,
+      "produced": 54
     },
     "jobsDetail": {
-      "reached": 53,
+      "reached": 54,
       "produced": 0
     },
     "powersHereDetail": {
-      "reached": 30,
+      "reached": 31,
       "produced": 6
     },
     "nemesisDetail": {
-      "reached": 30,
-      "produced": 30
+      "reached": 31,
+      "produced": 31
     },
     "sovereignMark": {
-      "reached": 13,
+      "reached": 14,
       "produced": 0
     },
     "seats": {
-      "reached": 11,
-      "produced": 11
+      "reached": 12,
+      "produced": 12
     },
     "couldBeHereDetail": {
-      "reached": 11,
-      "produced": 11
+      "reached": 12,
+      "produced": 12
     },
     "heldMeetDetail": {
-      "reached": 11,
+      "reached": 12,
       "produced": 0
     },
     "askedMeetDetail": {
-      "reached": 11,
+      "reached": 12,
       "produced": 0
     }
   },
   "_opUnknown": {
-    "sceneSummary": 97,
+    "sceneSummary": 98,
     "scene_summary": 1,
     "discoveryEligible": 1
   },
   "_bandNotes": null,
   "_opCountingSince": "2026-09-14T22:51:56.913Z",
   "_fireTests": {
-    "at": "2026-09-28T21:34:20.552Z",
-    "build": "2.15.0",
+    "at": "2026-09-28T22:18:21.612Z",
+    "build": "2.15.1",
     "results": [
       {
         "op": "jobOps",
@@ -19624,15 +19558,18 @@
       "why": "repaired via the Repair panel",
       "worldDay": 83,
       "at": "2026-09-21T16:26:25.322Z"
+    },
+    {
+      "kind": "abilityRank",
+      "id": "the_old_procedure",
+      "from": 3,
+      "to": 1,
+      "why": "repaired via the Repair panel",
+      "worldDay": 90,
+      "at": "2026-09-28T22:17:30.263Z"
     }
   ],
   "_axesDropped": [
-    {
-      "at": "2026-09-14T23:52:18.901Z",
-      "key": "spectrumId",
-      "value": 0,
-      "why": "not a spectrum id"
-    },
     {
       "at": "2026-09-14T23:56:02.576Z",
       "key": "spectrumId",
@@ -19749,6 +19686,13 @@
       "key": "creation_destruction",
       "value": 0.8,
       "why": "not a spectrum id"
+    },
+    {
+      "at": "2026-09-28T22:18:21.329Z",
+      "key": "violation_autonomy",
+      "value": -0.3,
+      "why": "not a spectrum id",
+      "from": "choice"
     }
   ],
   "braids": [

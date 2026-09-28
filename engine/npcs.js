@@ -300,14 +300,52 @@ export function rekeyPerson(character, fromId, toId) {
 export function applyNpcUpdates(character, updates = [], ctx = {}) {
   character.npcRegistry = character.npcRegistry || {};
   const reg = character.npcRegistry;
+  // ⛑ SNG-664 §2.2 — the questions this pass could not answer, for the GM to answer next beat. Cleared and rebuilt
+  // each pass, so a question answered stops being asked.
+  const ws664 = (character.worldState = character.worldState || {});
+  const held664 = [], asked664 = [];
   for (const u of (updates || []).slice(0, 5)) {
     let id = u.npcId ? slugify(u.npcId) : slugify(u.name || "");   // ⛔ CCODE-421: `let` — a met authored person takes the authored id
     if (!id) continue;
-    let n = findExistingNpc(reg, id, u.name || "");
+    // ✅ SNG-664 §2.2 — `sameAs` IS THE GM ANSWERING THE QUESTION, and it outranks the matcher: the model has just
+    // told us which person this is. ⚠️ If a separate record already exists under the op's own id, the two are folded
+    // through the ONE merge writer rather than left as the pair this whole spec exists to prevent.
+    let sameAs664 = null;
+    if (u.sameAs) {
+      const wanted = canonNpcId(String(u.sameAs));
+      sameAs664 = findExistingNpc(reg, wanted, "") || Object.values(reg).find(x => x && canonNpcId(x.id || "") === wanted) || null;
+      if (sameAs664 && canonNpcId(sameAs664.id || "") !== canonNpcId(id)) {
+        const mine = reg[id] || Object.values(reg).find(x => x && canonNpcId(x.id || "") === canonNpcId(id));
+        if (mine && mine !== sameAs664) {
+          try { mergePeople(character, sameAs664.id, mine.id, { why: "the GM said they are the same person", day: ctx.day ?? null }); } catch { /* a merge never blocks a meet */ }
+        }
+        id = sameAs664.id;
+      }
+    }
+    let n = sameAs664 || findExistingNpc(reg, id, u.name || "");
     if (!n) {
       // only a "meet" may create a person; updates for unknown people are dropped
       // (this is what let the legacy path spawn duplicate id-named entries)
       if (u.op && u.op !== "meet") continue;
+      // ⛔ SNG-664 §2.2 — KNOWN BEFORE NEW. Before a stranger is minted, ask whether the registry already holds them.
+      // ⚠️ MEASURED over Loki's 190 pairs: an OFFICE match (the same role or title, word for word, naming somebody the
+      // world knows — or two rare office words plus a shared master) caught the pair Erik hit and held ONE pair that is
+      // two people; a LIKENESS match (five rare words of description) caught the other pair and would hold three. So an
+      // office match HOLDS the op and a likeness is only a question: holding a meet on a 3-in-190 guess would stop the
+      // world building, which is worse than a duplicate the player can now fix in one click.
+      if (!u.sameAs && !(Array.isArray(u.distinctFrom) && u.distinctFrom.length)) {
+        let maybe = [];
+        try {
+          maybe = perhapsTheSame(character, { id, name: u.name, role: u.role, title: u.title, description: u.description },
+            { npcs: ctx.npcs || {}, powers: ctx.powers || [] });
+        } catch { maybe = []; }                       // a reader that throws must never lose a meet
+        const strong = maybe.filter(c => c.strength === "office");
+        if (strong.length) {
+          held664.push({ op: u, id, name: u.name || id, candidates: strong.map(c => ({ id: c.id, name: c.name, why: c.why })), day: ctx.day ?? null });
+          continue;                                   // ⛔ NOT MINTED. The question is put to the GM instead.
+        }
+        if (maybe.length) asked664.push({ id, name: u.name || id, candidates: maybe.map(c => ({ id: c.id, name: c.name, why: c.why })), day: ctx.day ?? null });
+      }
       // SNG-333 — ⛔ EVICT, DO NOT REFUSE. This used to `continue`, so once you knew 40 people you could
       // never meet anyone again — the comment said "keep the people who matter" while the actual rule was
       // insertion order, which is not the same thing and is not what anybody wants.
@@ -672,7 +710,17 @@ export function applyNpcUpdates(character, updates = [], ctx = {}) {
     // interactions and keep the ones you meet more than once from dropping off." This is the only new
     // field, and it is written at the one place every interaction already passes through.
     n.met = (Number(n.met) || 0) + 1;
+    // ✅ SNG-664 §2.2 — AND THE GM CAN FINALLY SAY "NOT THEM". `distinctFrom` was read in four places and written only
+    // by one hand-rolled reconcile step; the matcher has honoured it since CCODE-423 and nothing in play could set it.
+    if (Array.isArray(u.distinctFrom) && u.distinctFrom.length) {
+      const add = u.distinctFrom.map(x => canonNpcId(String(x || ""))).filter(Boolean);
+      if (add.length) n.distinctFrom = [...new Set([...(Array.isArray(n.distinctFrom) ? n.distinctFrom : []), ...add])];
+    }
   }
+  // ⛑ THE QUESTIONS, WHERE THE GM ROW CAN READ THEM. Replaced rather than appended: a question the GM has answered
+  // must stop being asked, and the answer arrives as the next pass's `sameAs` or `distinctFrom`.
+  if (held664.length) ws664.heldMeets = held664; else if (ws664.heldMeets) delete ws664.heldMeets;
+  if (asked664.length) ws664.askedMeets = asked664; else if (ws664.askedMeets) delete ws664.askedMeets;
   return character.npcRegistry;
 }
 
@@ -1585,9 +1633,16 @@ export function mergePeople(character, keepId, dropId, { why = null, day = null 
   const km = num(keep.met) || 0, dm = num(drop.met) || 0;
   if (dm > 0) { keep.met = km + dm; moved.push(`met ${km} + ${dm} interactions`); }
   // ⛑ …AND THE DAY, which is where the meeting actually is: the earliest first meeting, the latest sighting.
-  for (const f of ["firstMet", "metDay", "firstMetDay"]) {
+  for (const f of ["metDay", "firstMetDay"]) {
     const kv = num(keep[f]), dv = num(drop[f]);
     if (dv != null && (kv == null || dv < kv)) { keep[f] = dv; moved.push(`${f} ${kv} → ${dv}`); }
+  }
+  // ⚠️ `firstMet` AND `lastSeen` ARE OBJECTS, NOT NUMBERS — `{ locationId, day }`, which `noteSeen` writes. My first
+  // draft compared them with `Number(…)`, so the earliest meeting was never taken at all: silently skipped, not wrong
+  // in a way anything would have shown. Read on the real record rather than assumed from the field's name.
+  if (drop.firstMet && typeof drop.firstMet === "object") {
+    const kd = num(keep.firstMet?.day), dd = num(drop.firstMet.day);
+    if (dd != null && (kd == null || dd < kd)) { keep.firstMet = { ...drop.firstMet }; moved.push(`firstMet → d${dd}`); }
   }
   if (drop.lastSeen && typeof drop.lastSeen === "object") {
     const kd = num(keep.lastSeen?.day), dd = num(drop.lastSeen.day);
@@ -1610,17 +1665,29 @@ export function mergePeople(character, keepId, dropId, { why = null, day = null 
 
   // ⛑ THE UNIONS. Lists are concatenated and de-duplicated by their own shape; maps take the dropped one's entries
   // only where the kept record has none, because the kept record is the one the rest of the save points at.
-  const listUnion = (f, keyOf) => {
+  const listUnion = (f, keyOf, cap = 0) => {
     const a = Array.isArray(keep[f]) ? keep[f] : [], b = Array.isArray(drop[f]) ? drop[f] : [];
     if (!b.length) return;
     const seen = new Set(a.map(keyOf));
     const add = b.filter(x => !seen.has(keyOf(x)));
     if (!add.length) return;
-    keep[f] = [...a, ...add];
+    const joined = [...a, ...add];
+    // ⚠️ CAPPED THE WAY THE OLD WRITER CAPPED IT. `history` and `knownFacts` go into the GM prompt, and two merged
+    // records with 24 entries apiece is 48 lines of somebody's past re-sent every turn.
+    keep[f] = cap > 0 ? joined.slice(-cap) : joined;
     moved.push(`${f} +${add.length}`);
   };
   const ident = (x) => (x && typeof x === "object" ? JSON.stringify(x) : String(x));
-  for (const f of ["memory", "bondLog", "skillsObserved", "assistTags", "titles", "roles", "questState", "wants", "seenAt", "distinctFrom"]) listUnion(f, ident);
+  // ⛔ THE LIST IS MEASURED, NOT GUESSED, and my first draft proved why: it dropped `history` and `knownFacts` — the
+  // two longest-standing unions `mergeEntity` had — and smoke SNG-137 caught a survivor with one entry where the old
+  // writer left two. Every list field that actually appears on a registry record across all 16 saves: history (135),
+  // knownFacts (135), skillsObserved (135), aliases (25), creditedQuests (5), formerIds (2), distinctFrom (1),
+  // deeds (1). ⚠️ `creditedQuests` is the sharpest: `creditChampion` reads it so a champion is not credited twice, and
+  // losing it on a merge would hand out a second level for a fight already won.
+  for (const [f, cap] of [["history", 24], ["knownFacts", 24], ["skillsObserved", 24], ["creditedQuests", 0], ["deeds", 24],
+                          ["distinctFrom", 0],
+                          // ⚑ and the shapes content records carry, so a merge with an authored person keeps them too
+                          ["assistTags", 0], ["titles", 0], ["roles", 0], ["memory", 24], ["bondLog", 24], ["wants", 0]]) listUnion(f, ident, cap);
   for (const f of ["questStates", "bonds", "facts"]) {
     if (!drop[f] || typeof drop[f] !== "object" || Array.isArray(drop[f])) continue;
     keep[f] = keep[f] && typeof keep[f] === "object" ? keep[f] : {};
@@ -1667,4 +1734,157 @@ export function mergePeople(character, keepId, dropId, { why = null, day = null 
   keep.mergedFrom = [...(Array.isArray(keep.mergedFrom) ? keep.mergedFrom : []).filter(x => x && x.id !== dropId),
     { id: dropId, why: why || null, day: day ?? null, ...(dropMint ? { droppedMint: drop.trueName } : {}) }];
   return { ok: true, kept: keepId, dropped: dropId, moved, refs, news, why: why || null };
+}
+
+/* ═══ ✅ SNG-664 §2.1 / §2.2 — KNOWN BEFORE NEW, AND AN OVERLAP IS A QUESTION ═══
+ *
+ * ⛔ THE REPAIR (§3, CCODE-556) FIXES WHAT HAPPENED; THIS IS WHAT STOPS THE NEXT ONE. Erik met one woman three times
+ * because nothing asked the GM whether the stranger it was introducing might be somebody already in the registry.
+ *
+ * ⚠️ AEVI'S SIGNAL — *"same power, same master, same office"* — DOES NOT REACH HER OWN EXAMPLE ON ITS OWN. Measured
+ * over Loki's 190 registry pairs, of which 4 are the same woman twice:
+ *     same power/master/office alone      caught 2 of 4  ·  held 26 pairs that are two people
+ *     3+ rare words shared in the prose   caught 2 of 4  ·  held  1 pair  that is two people
+ * ⛑ The two find different pairs, so both are read: the Post stranger and Vail Langley share
+ * "agent · high · luminary · seraphine" AND both resolve to `person:the_high_luminary`, while the third copy of her
+ * has no description at all and is reachable only by the NAME rule that reconcile step 89 already applies.
+ *
+ * ⚠️ AND TOKENS, NOT PHRASES. My first version resolved her role to nothing: the world's record is "Seraphine, the
+ * High Luminary" and her role reads "Agent of the High Luminary, Seraphine", which is not a substring of it. A token
+ * that names more than `ANCHOR_SPREAD` anchors ("radiant" — a council, a plateau and a dozen people) names nothing. */
+
+// ⚠️ THE STOPWORDS ARE THE COST OF READING PROSE, and they are listed rather than clever: the GM describes people in
+// grey with quiet voices and still hands, so those words carry no information about WHICH person it is.
+const SAME_STOP = new Set(("a an the of and or to in on at with with for from by as is are was were be been am " +
+  "her his their its who whom whose that this those these what which when where why how " +
+  "woman man person people someone somebody something anyone nobody child boy girl " +
+  "has have had not no yes very quite rather just only also then than too so but if because while " +
+  "grey gray tall short young old dark light quiet still calm eyes face voice hands hair coat cloak dressed wearing " +
+  "she he they it you your yours his hers theirs mine ours one two three four five some any all more most less least " +
+  "standing sitting walking come came comes coming chosen choose chose gone went ride rides riding " +
+  "absolute particular bearing needed never always again ever here there now soon late early " +
+  "looks look looking seems seem seeming appears appear").split(/\s+/));
+const sameToks = (s) => [...new Set(String(s || "").toLowerCase().split(/[^a-z0-9]+/).filter(w => w.length > 3 && !SAME_STOP.has(w)))];
+/** ⚠️ a token belonging to more than this many of the world's names is an adjective, not an anchor */
+export const ANCHOR_SPREAD = 4;
+
+/** ⛑ WHO A PIECE OF PROSE ANSWERS TO — the powers and people of the world it actually names, by token. PURE. */
+export function whoAnswersTo(text, { npcs = {}, powers = [] } = {}) {
+  const byToken = new Map();
+  const add = (name, key) => { for (const w of sameToks(name)) { if (!byToken.has(w)) byToken.set(w, new Set()); byToken.get(w).add(key); } };
+  for (const p of (Array.isArray(powers) ? powers : [])) {
+    if (!p?.id) continue;
+    add(p.name, `power:${p.id}`);
+    const lead = p.leader ? npcs?.[p.leader] : null;
+    if (lead) { add(lead.name, `power:${p.id}`); add(lead.title, `power:${p.id}`); }
+  }
+  for (const [id, n] of Object.entries(npcs || {})) { add(n?.name, `person:${id}`); add(n?.title, `person:${id}`); }
+  const out = new Set();
+  for (const w of sameToks(text)) {
+    const keys = byToken.get(w);
+    if (!keys || keys.size > ANCHOR_SPREAD) continue;      // an adjective the whole world shares is not an anchor
+    for (const k of keys) out.add(k);
+  }
+  return [...out];
+}
+
+/** ⛔ SNG-664 §2.2 — WHO THIS STRANGER MIGHT ALREADY BE. Returns the known people a new person could be, ranked,
+ *  each with a REASON and a STRENGTH. Empty is the common answer and the one play depends on.
+ *
+ *  ⛔ THE OFFICE AND THE LIKENESS ARE DIFFERENT SIGNALS AND ARE READ SEPARATELY, because one threshold over all the
+ *  prose could not tell one woman twice from two Unlit seated in the same chamber: the false pairs shared the SETTING,
+ *  the true pair shared the OFFICE. Swept over Loki's 190 registry pairs, of which 4 are the same woman twice:
+ *
+ *      the SAME role or title, word for word       caught 1 of 4  ·  would hold  1 pair that is two people
+ *      2+ rare office words AND a shared anchor    caught 1 of 4  ·  would hold  1
+ *      5+ rare words in the description            caught 2 of 4  ·  would hold  3
+ *
+ *  ⚠️ 2 OF 4 IS THE CEILING FOR ANY PROSE READER HERE, by construction: the third copy of Vail Langley has no
+ *  description at all and its whole `role` is a truncated action sentence, so it shares nothing with either of the
+ *  others. The NAME rule in reconcile step 89 is what finds that one — it is her own recorded alias.
+ *
+ *  ⛑ SO `strength` IS THE ANSWER, NOT A SCORE: `"office"` is strong enough to HOLD an op (1 false in 190, and it is
+ *  exactly the pair Erik hit), `"likeness"` is a question to ask rather than a reason to stop the world building.
+ *
+ *  ⚠️ NEVER SOMEBODY ALREADY RULED OUT. `distinctFrom` is the GM's or the player's answer to this very question, and
+ *  asking it twice is how a held op becomes a held op forever. PURE. */
+export const SAME_PERSON_DIALS = { officeWords: 2, likenessWords: 5, rareAt: 3 };
+export function perhapsTheSame(character, incoming, { npcs = {}, powers = [], dials = null, max = 4 } = {}) {
+  const d = { ...SAME_PERSON_DIALS, ...(dials && typeof dials === "object" ? dials : {}) };
+  const reg = character?.npcRegistry || {};
+  const officeOf = (n) => [n?.role, n?.title].filter(Boolean).join(" \u00b7 ");
+  const lookOf = (n) => [n?.description, ...(Array.isArray(n?.skillsObserved) ? n.skillsObserved : [])].filter(Boolean).join(" \u00b7 ");
+  if (!officeOf(incoming).trim() && !lookOf(incoming).trim()) return [];
+  // ⚠️ `canonNpcId`, NOT `slugify`. A registry key can spell an id with `_` (`halvex_coil`) where the slug says `-`,
+  // which is CCODE-24's own finding one function over — and with the wrong compare the reader offered a person as a
+  // candidate to be THEMSELVES, which would have held every meet with an authored person forever.
+  const myId = canonNpcId(incoming?.id ? String(incoming.id) : slugify(incoming?.name || ""));
+  const rows = Object.entries(reg).filter(([, n]) => n && typeof n === "object");
+  // ⚠️ RARE IN THIS REGISTRY, not rare in English: "syllogist" is distinctive here and "keeper" is not, and only the
+  // save can say which. ⛔ And counted over EVERYBODY, once — recomputing it per question with the record removed
+  // quietly promoted every df-3 word to "rare" and tripled the false holds.
+  const df = new Map();
+  for (const [, n] of rows) for (const w of sameToks(`${officeOf(n)} \u00b7 ${lookOf(n)}`)) df.set(w, (df.get(w) || 0) + 1);
+  const rare = (w) => (df.get(w) || 0) <= d.rareAt;
+  const sharedIn = (a, b, of) => { const B = new Set(sameToks(of(b))); return sameToks(of(a)).filter(w => B.has(w) && rare(w)); };
+  const myOffice = officeOf(incoming), myAnchors = new Set(whoAnswersTo(myOffice, { npcs, powers }));
+  const sameString = (a, b) => {
+    const pairs = [[a?.role, b?.title], [a?.title, b?.role], [a?.role, b?.role], [a?.title, b?.title]];
+    return pairs.some(([x, y]) => x && y && slugify(x) && slugify(x) === slugify(y));
+  };
+  const out = [];
+  for (const [id, n] of rows) {
+    if (canonNpcId(id) === myId) continue;
+    if (Array.isArray(n.distinctFrom) && n.distinctFrom.some(x => canonNpcId(x) === canonNpcId(myId))) continue;
+    if (Array.isArray(incoming?.distinctFrom) && incoming.distinctFrom.some(x => canonNpcId(x) === canonNpcId(id))) continue;
+    const office = sharedIn(incoming, n, officeOf);
+    const look = sharedIn(incoming, n, lookOf);
+    const anchors = whoAnswersTo(officeOf(n), { npcs, powers }).filter(k => myAnchors.has(k));
+    let strength = null, why = null;
+    // ⚠️ AND A SHARED OFFICE ONLY COUNTS WHEN IT NAMES SOMEBODY THE WORLD KNOWS. Measured: "visitor at the Kindly
+    // Rest" is two different people's whole role, word for word, and holding a meet over it would be the rule refusing
+    // the commonest thing in the game — two travellers at one inn. "Agent of the High Luminary, Seraphine" resolves to
+    // `person:the_high_luminary`, and that is what makes it a claim about WHO rather than about WHERE.
+    if (sameString(incoming, n) && myAnchors.size) { strength = "office"; why = `the same office, word for word: "${smartClamp(n.role || n.title || "", 60)}"`; }
+    else if (office.length >= d.officeWords && anchors.length) { strength = "office"; why = `the same office (${office.slice(0, 4).join(", ")}) and answers to the same ${anchors[0].startsWith("power:") ? "power" : "person"}`; }
+    else if (look.length >= d.likenessWords) { strength = "likeness"; why = `described the same way (${look.slice(0, 5).join(", ")})`; }
+    if (!strength) continue;
+    out.push({ id, name: n.name || id, role: n.role || null, nameUnknown: !!n.nameUnknown, strength, why,
+      office, look, anchors, score: (strength === "office" ? 100 : 0) + office.length * 2 + look.length + anchors.length });
+  }
+  return out.sort((a, b) => b.score - a.score).slice(0, Math.max(1, max));
+}
+
+/** ⛔ SNG-664 §2.1 — THE PEOPLE WHO COULD PLAUSIBLY BE HERE, for the GM to check BEFORE it invents a stranger.
+ *  Aevi's three tests, each named on the row so the GM can see why somebody is on the list: met recently, last known
+ *  to be here (or one road away), or answering to a power or person this scene already names.
+ *  ⚠️ SHORT ON PURPOSE. `npcRegistryForGM` already sends up to twelve people ranked by bond; this is a different
+ *  question — who might walk in — and a long list is one the model skims. PURE. */
+export function whoCouldBeHere(character, { locationId = null, day = null, sceneText = "", locations = {}, npcs = {}, powers = [], withinDays = 12, max = 6 } = {}) {
+  const reg = character?.npcRegistry || {};
+  const here = locationId ? locations?.[locationId] || null : null;
+  const nextDoor = new Set([locationId, ...((here?.connections || []).filter(Boolean))].filter(Boolean));
+  const sceneAnchors = new Set(sceneText ? whoAnswersTo(sceneText, { npcs, powers }) : []);
+  const rows = [];
+  for (const [id, n] of Object.entries(reg)) {
+    if (!n || typeof n !== "object") continue;
+    const why = [];
+    const seenDay = Number(n.lastSeen?.day);
+    if (Number.isFinite(seenDay) && Number.isFinite(Number(day)) && Number(day) - seenDay <= withinDays) {
+      why.push(`you saw them ${Math.max(0, Number(day) - seenDay)} day${Number(day) - seenDay === 1 ? "" : "s"} ago`);
+    }
+    const seenAt = n.lastSeen?.locationId || n.firstMet?.locationId || null;
+    if (seenAt && nextDoor.has(seenAt)) why.push(seenAt === locationId ? "last known to be HERE" : `last known to be at ${locations?.[seenAt]?.name || seenAt}, one road away`);
+    if (sceneAnchors.size) {
+      const theirs = whoAnswersTo([n.role, n.title, n.description].filter(Boolean).join(" \u00b7 "), { npcs, powers });
+      if (theirs.some(k => sceneAnchors.has(k))) why.push("answers to somebody this scene already names");
+    }
+    if (!why.length) continue;
+    rows.push({ id, name: n.name || id, nameUnknown: !!n.nameUnknown, role: n.role || null,
+      answersTo: whoAnswersTo([n.role, n.title].filter(Boolean).join(" \u00b7 "), { npcs, powers })[0] || null,
+      bond: Number(n.relationship) || 0, why });
+  }
+  // the ones with the most reasons first, then the strongest bond — a stranger is likeliest to be somebody who is
+  // both nearby and recently seen.
+  return rows.sort((a, b) => (b.why.length - a.why.length) || (Math.abs(b.bond) - Math.abs(a.bond))).slice(0, Math.max(1, max));
 }

@@ -60,7 +60,7 @@ import { wakesForGM } from "./wake.js"; // SNG-204: the aftermath waiting to bec
 import { priceLine } from "./economy.js";   // SNG-302: what a thing fetches HERE, so the GM can be honest about it
 import { reachableDeadForGM } from "./death.js"; // SNG-209: the dead who are NOT gone — reachable in the death state, latent hooks
 import { threatToPlayer, guardiansFor, worldRoster } from "./worldtick.js"; // SNG-310: the mark the world engine leaves for the GM to narrate
-import { npcRegistryForGM, npcQuestSeedBlock, bearersOf, carriedForGM, findExistingNpc, agesMissingForGM } from "./npcs.js";
+import { npcRegistryForGM, npcQuestSeedBlock, bearersOf, carriedForGM, findExistingNpc, agesMissingForGM, whoCouldBeHere} from "./npcs.js";
 import { debtRefusalAt } from "./holdings.js";   // §177: "The GM block reads it" — now it does
 import { presenceForGM, resolvePresence } from "./presence.js";   // SPEC_npc_presence_cadence: who the day could offer
 import { placeMemoryForGM, recallForGM } from "./places.js";
@@ -593,6 +593,19 @@ export const GM_CONTEXT = [
   { key: "bookkeepingRestate", builder: "app.applyTurn failure flags → this row (§172)", carries: ["which op step failed last beat", "whom it touched", "restate them"],
     reachedBy: "any beat after an isolated op-group failure", spec: "§172", views: ["turn"],
     build: (env) => restateForGM(env.character) },
+  // ✅ SNG-664 §2.1/§2.2 — KNOWN BEFORE NEW, and the question the engine held rather than guessing at.
+  { key: "couldBeHereDetail", builder: "gm_registry.couldBeHereForGM (SNG-664 §2.1)", carries: ["known people who could plausibly be here", "why each one", "never introduce a met person as a stranger"],
+    reachedBy: "always", spec: "SNG-664 §2.1", views: ["turn"],
+    build: (env) => couldBeHereForGM(env.character, { locationId: env.location?.id || null,
+      day: (() => { try { return env.app.absoluteWorldDay(); } catch { return null; } })(),
+      sceneText: [env.playerInput, env.character?.activeScene?.lastTurn?.narration].filter(Boolean).join(" \u00b7 ").slice(0, 1200),   // prose-cap-ok: tokenised, never rendered
+      locations: env.CONTENT?.locations || {}, npcs: env.CONTENT?.npcs || {}, powers: env.CONTENT?.powers || [] }) },
+  { key: "heldMeetDetail", builder: "gm_registry.heldMeetsForGM (SNG-664 §2.2)", carries: ["a meet that was NOT written", "the known people it might be", "sameAs / distinctFrom"],
+    reachedBy: "a stranger whose office matches somebody known", spec: "SNG-664 §2.2", views: ["turn"],
+    build: (env) => heldMeetsForGM(env.character) },
+  { key: "askedMeetDetail", builder: "gm_registry.askedMeetsForGM (SNG-664 §2.2)", carries: ["a minted person described like somebody known"],
+    reachedBy: "a stranger described much like somebody known", spec: "SNG-664 §2.2", views: ["turn"],
+    build: (env) => askedMeetsForGM(env.character) },
   { key: "anomalyDetail", builder: "corrections.detectAnomalies→anomaliesForGM (SNG-137)", carries: ["POSSIBLE ERROR repairs"],
     reachedBy: "Repair panel", spec: "§11", views: ["turn"],
     build: (env) => anomaliesForGM(detectAnomalies(env.character, { rules: env.CONTENT.rules })) },
@@ -837,6 +850,63 @@ export function mintedUnmetForGM(character, { max = 16 } = {}) {
     const minted = p.day != null ? " · minted d" + p.day + (p.locationId ? " at " + p.locationId : "") + (p.why ? ": " + clip(p.why, 100) : "") : "";
     return "- [" + n.id + "] " + n.name + " — " + clip(n.role, 140) + " · home: " + (n.homeLocation || "unknown") + minted;
   }).join("\n");
+}
+
+/** ⛔ SNG-664 §2.1 — KNOWN BEFORE NEW. Aevi: *"Before a stranger is minted, the GM is shown the people this character
+ *  already knows who could plausibly be here… The instruction: a person the player has met is never introduced as a
+ *  stranger; write the op against their id."*
+ *
+ *  ⚠️ THIS IS A DIFFERENT QUESTION FROM `npcRegistryDetail`, which sends up to twelve people ranked by BOND. This one
+ *  asks who might walk in, and it is short on purpose: a long list is one the model skims. Each row says WHY it is
+ *  there, so the GM can weigh it. Null when nobody qualifies, which is the common case. PURE. */
+export function couldBeHereForGM(character, { locationId = null, day = null, sceneText = "", locations = {}, npcs = {}, powers = [], max = 6 } = {}) {
+  const rows = whoCouldBeHere(character, { locationId, day, sceneText, locations, npcs, powers, max });
+  if (!rows.length) return null;
+  // ⚠️ AND THE MASTER IS NAMED, NOT ID'D. "answers to power_radiant_plateau" is a line about the database; the GM
+  // needs "answers to The Radiant Council", which is what the fiction calls it.
+  const nameAnchor = (key) => {
+    if (!key) return null;
+    const [kind, id] = String(key).split(":");
+    if (kind === "power") return (Array.isArray(powers) ? powers : []).find(p => p?.id === id)?.name || id;
+    return npcs?.[id]?.name || id;
+  };
+  // ⛑ `smartClamp`, NOT `slice` — the wiring audit's rawProseCaps ratchet caught the raw one, and it is right: a role
+  // cut mid-word hands the GM a typo to read aloud.
+  const line = (r) => `- [${r.id}] ${r.nameUnknown ? `${r.name} (name not learned)` : r.name}`
+    + `${r.role ? ` — ${smartClamp(r.role, 90)}` : ""}`
+    + `${r.answersTo ? ` · answers to ${nameAnchor(r.answersTo)}` : ""}`
+    + ` · ${r.why.join("; ")}`;
+  return rows.map(line).join(String.fromCharCode(10));
+}
+
+/** ⛔ SNG-664 §2.2 — THE QUESTION THE ENGINE HELD. When a stranger's OFFICE matches somebody already known, the meet is
+ *  not written: *"a name is a fact; a role overlap is a question."* This is that question, put to the GM.
+ *
+ *  ⚠️ ONE BEAT LATER, NOT THE SAME BEAT. Aevi's §2.2 asks in the same beat, which means a second model call on every
+ *  ambiguous meet — Erik's key, spent on a question. The restate row has carried exactly this shape of "say it again
+ *  properly" since §172 and costs nothing, so the question rides there. Null when nothing is held. PURE. */
+export function heldMeetsForGM(character) {
+  const held = character?.worldState?.heldMeets;
+  if (!Array.isArray(held) || !held.length) return null;
+  const rows = held.map(h => `- You introduced "${h.name}"`
+    + ` — and ${h.candidates.length === 1 ? "this person is already known" : "these people are already known"}: `
+    + h.candidates.map(c => `[${c.id}] ${c.name} (${c.why})`).join("; "));
+  return `${rows.join("\n")}\n`
+    + `⛔ THEY WERE NOT WRITTEN DOWN. Answer in this beat's npcUpdates, once, and the scene goes on either way:\n`
+    + `  · the same person → {op:"meet", npcId:"<the KNOWN id above>", sameAs:"<the KNOWN id>", name, role} — and name them as the character knows them\n`
+    + `  · a different person → {op:"meet", npcId:"<your id>", distinctFrom:["<the known id>"], name, role} — and you will never be asked about that pair again\n`
+    + `⚠️ A person the player has met is never introduced as a stranger. If they are the same, say so; do not invent a second one.`;
+}
+
+/** ⛔ SNG-664 §2.2 — AND THE WEAKER SIGNAL IS ASKED, NOT HELD. A LIKENESS match (the same description, not the same
+ *  office) mints the person and raises the question, because measured it would hold three unrelated meets for every
+ *  two it caught, and holding a meet on a guess stops the world building. PURE. */
+export function askedMeetsForGM(character) {
+  const asked = character?.worldState?.askedMeets;
+  if (!Array.isArray(asked) || !asked.length) return null;
+  return asked.map(a => `- "${a.name}" [${a.id}] is described much like `
+    + a.candidates.map(c => `[${c.id}] ${c.name} (${c.why})`).join("; ")
+    + ` — if they ARE that person, emit {op:"meet", npcId:"${a.candidates[0].id}", sameAs:"${a.candidates[0].id}"} next beat; if not, {op:"update", npcId:"${a.id}", distinctFrom:["${a.candidates[0].id}"]} and it will not be raised again.`).join("\n");
 }
 
 export function restateForGM(character) {

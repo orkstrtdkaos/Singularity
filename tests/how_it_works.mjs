@@ -31903,6 +31903,189 @@ console.log("\n── §385 · a person is minted once, and correctly ──");
     && /name\/trueName duplicate group/.test(rd("po/tools/measure_duplicate_people.mjs")));
 }
 
+
+/* ══════════ §386 · SNG-664 §2.1–§2.6 — KNOWN BEFORE NEW, AND AN OVERLAP IS A QUESTION ══════════ */
+// ⛔ §385 REPAIRED WHAT HAPPENED; THIS IS WHAT STOPS THE NEXT ONE. Erik met one woman three times because nothing
+// asked the GM whether the stranger it was introducing might already be in the registry.
+//
+// ⚠️ AEVI'S SIGNAL — *"same power, same master, same office"* — DOES NOT REACH HER OWN EXAMPLE ON ITS OWN, and the
+// measurement is what set the shape of this whole section. Over Loki's 190 registry pairs, 4 of which are one woman:
+//     same power/master/office alone       caught 2 of 4  ·  would hold 26 pairs that are two people
+//     3+ rare words shared in the prose    caught 2 of 4  ·  would hold  1
+// and separating the OFFICE from the LIKENESS is what made it usable: the false pairs shared the SETTING ("outer,
+// chamber, robed" — two Unlit in one room), the true pair shared the OFFICE, word for word.
+console.log("\n── §386 · known before new, and an overlap is a question ──");
+{
+  const N386 = await import("../engine/npcs.js");
+  const GR386 = await import("../engine/gm_registry.js");
+  const CO386 = await import("../engine/corrections.js");
+  const { loadContentHeadless: lch386 } = await import("./headless_content.mjs");
+  const C386 = await lch386();
+  const world386 = { npcs: C386.npcs || {}, powers: C386.powers || [] };
+
+  // the two records as Loki's save actually holds them — the stranger's `title` and Vail's `role` are the same string
+  const vail386 = () => ({ id: "vail", name: "Vail Langley", aliases: ["Enforcer of Seraphine's will"],
+    role: "Agent of the High Luminary, Seraphine", relationship: 4, met: 7,
+    description: "A woman in grey, utterly still, with the bearing of someone who has never needed to raise her voice to be obeyed.",
+    lastSeen: { locationId: "gen-whistling-woman-post", day: 8 } });
+  const strangerOp = () => ({ op: "meet", npcId: "radiant-agent-whistling-woman", name: "Radiant authority sent to intercept",
+    role: "Radiant authority sent to intercept", title: "Agent of the High Luminary, Seraphine",
+    description: "A woman in the grey coat of the Radiant Plateau, standing with absolute stillness at the waystation threshold." });
+  const charWithVail = () => ({ id: "c386", name: "Probe", npcRegistry: { vail: vail386() }, worldState: {} });
+  const ctx386 = { day: 9, locationId: "gen-whistling-woman-post", ...world386 };
+
+  /* ---- 1 · ⛔ THE OP THAT MADE THE DUPLICATE IS HELD, NOT WRITTEN ---- */
+  const held386 = charWithVail();
+  N386.applyNpcUpdates(held386, [strangerOp()], ctx386);
+  check("§386: ⛔ THE VERY OP THAT MADE ERIK'S DUPLICATE IS NOW HELD — the person is NOT written down, and the question goes to the GM",
+    Object.keys(held386.npcRegistry).length === 1
+    && !held386.npcRegistry["radiant-agent-whistling-woman"]
+    && held386.worldState.heldMeets?.length === 1
+    && held386.worldState.heldMeets[0].candidates[0].id === "vail",
+    JSON.stringify(held386.worldState.heldMeets?.[0]?.candidates || null));
+  check("§386: ⛑ …and the reason is the one a person can check — the same office, word for word",
+    /the same office, word for word: "Agent of the High Luminary, Seraphine"/.test(held386.worldState.heldMeets[0].candidates[0].why),
+    held386.worldState.heldMeets[0].candidates[0].why);
+  // ⚠️ AND A PLAINLY NEW PERSON IS NOT HELD, which is what play depends on: a rule that holds most meets stops the
+  // world building, and that is worse than a duplicate the player can fix in one click.
+  const newPerson386 = charWithVail();
+  N386.applyNpcUpdates(newPerson386, [{ op: "meet", npcId: "bel-harrow", name: "Bel Harrow", role: "a cartwright mending a wheel",
+    description: "A heavy man with tar on his forearms, arguing with a spoke." }], ctx386);
+  check("§386: ⚠️ …and a plainly new person is minted with no question asked — a rule that held most meets would stop the world building",
+    !!newPerson386.npcRegistry["bel-harrow"] && !newPerson386.worldState.heldMeets);
+
+  /* ---- 2 · ⛔ THE GM CAN ANSWER, BOTH WAYS ---- */
+  const said386 = charWithVail();
+  N386.applyNpcUpdates(said386, [{ ...strangerOp(), sameAs: "vail" }], ctx386);
+  check("§386: ⛔ `sameAs` ROUTES THE OP ONTO THE PERSON — one record, and the interaction counts on theirs",
+    Object.keys(said386.npcRegistry).length === 1 && !said386.npcRegistry["radiant-agent-whistling-woman"]
+    && said386.npcRegistry.vail.met === 8 && !said386.worldState.heldMeets,
+    JSON.stringify({ ids: Object.keys(said386.npcRegistry), met: said386.npcRegistry.vail.met }));
+  const notThem386 = charWithVail();
+  N386.applyNpcUpdates(notThem386, [{ ...strangerOp(), distinctFrom: ["vail"] }], ctx386);
+  check("§386: ⛔ `distinctFrom` IS WRITABLE AT LAST — it was read in four places and the only writer in the repo was a hand-rolled reconcile step",
+    !!notThem386.npcRegistry["radiant-agent-whistling-woman"]
+    && notThem386.npcRegistry["radiant-agent-whistling-woman"].distinctFrom.includes("vail")
+    && !notThem386.worldState.heldMeets);
+  check("§386: ⛑ …and the answer STICKS: a person ruled out is never offered as that candidate again, so a held op cannot become a held op forever",
+    N386.perhapsTheSame(notThem386, notThem386.npcRegistry["radiant-agent-whistling-woman"], world386).every(c => c.id !== "vail"));
+  check("§386: ⚠️ …and the SAME OFFICE under a new name is still asked about — the answer was about that pair, not about the office",
+    (() => {
+      const c = charWithVail();
+      N386.applyNpcUpdates(c, [{ ...strangerOp(), distinctFrom: ["vail"] }], ctx386);
+      N386.applyNpcUpdates(c, [{ op: "meet", npcId: "grey-envoy", name: "a grey envoy at the arch",
+        role: "Radiant authority sent to intercept", title: "Agent of the High Luminary, Seraphine" }], ctx386);
+      return !c.npcRegistry["grey-envoy"] && c.worldState.heldMeets?.length === 1;
+    })());
+
+  /* ---- 3 · ⛔ THE TWO SIGNALS, AND WHY THEY ARE SEPARATE ---- */
+  check("§386: ⛔ AN OFFICE MATCH HOLDS AND A LIKENESS ONLY ASKS — measured, one threshold over all the prose could not tell one woman twice from two people in the same room",
+    (() => {
+      const officeHit = N386.perhapsTheSame({ npcRegistry: { vail: vail386() } },
+        { id: "x", role: "Radiant authority sent to intercept", title: "Agent of the High Luminary, Seraphine" }, world386);
+      // two people whose DESCRIPTIONS share the setting and nothing else
+      const roomA = { id: "a", name: "Standing Unlit", role: "Robed figure of the outer chamber", description: "Robed, in the outer chamber of the Unlit Deep, hands folded and waiting." };
+      const roomB = { id: "b", name: "Unlit Elder", role: "Seated elder of the outer chamber", description: "Seated, robed, in the outer chamber of the Unlit Deep, waiting." };
+      const likeHit = N386.perhapsTheSame({ npcRegistry: { b: roomB } }, roomA, world386);
+      return officeHit[0]?.strength === "office" && (!likeHit.length || likeHit[0].strength === "likeness");
+    })());
+  check("§386: ⚠️ …and a SHARED OFFICE ONLY COUNTS WHEN IT NAMES SOMEBODY THE WORLD KNOWS — \"visitor at the Kindly Rest\" is two travellers at one inn, word for word, and holding that meet would refuse the commonest thing in the game",
+    (() => {
+      const inn = { id: "one", name: "a steady-voiced woman", role: "visitor at the Kindly Rest" };
+      const other = { id: "two", name: "a younger visitor", role: "visitor at the Kindly Rest" };
+      return N386.perhapsTheSame({ npcRegistry: { two: other } }, inn, world386).every(c => c.strength !== "office");
+    })());
+  // ⛔ AND THE SELF-COMPARE USES `canonNpcId`, NOT `slugify`. A registry key can spell an id with `_` (`halvex_coil`)
+  // where the slug says `-`, and with the wrong compare the reader offered a person as a candidate to be THEMSELVES —
+  // which would have held every meet with an authored person forever. CCODE-24's own finding, one function over.
+  check("§386: ⛔ …and nobody is ever a candidate to be THEMSELVES — a registry key spelled with `_` is the same id as one with `-`",
+    (() => {
+      const rec = { id: "halvex_coil", name: "Halvex Coil", role: "Master of coordinated chaos", description: "sharp, softening" };
+      return N386.perhapsTheSame({ npcRegistry: { halvex_coil: rec } }, rec, world386).length === 0;
+    })());
+  check("§386: ⚑ …and a word the whole world shares is not an anchor — \"radiant\" belongs to a council, a plateau and a dozen people",
+    N386.whoAnswersTo("Agent of the High Luminary, Seraphine", world386).includes("person:the_high_luminary")
+    && N386.ANCHOR_SPREAD >= 2,
+    JSON.stringify(N386.whoAnswersTo("Agent of the High Luminary, Seraphine", world386)));
+
+  /* ---- 4 · ⛔ THE GM ACTUALLY READS IT ---- */
+  // A registry row with no `world.push` is CCODE-441's defect exactly: registered, built, and never in the prompt.
+  const REG386 = rd("engine/gm_registry.js"), GM386 = rd("engine/gm.js");
+  check("§386: ⛔ …and the three rows LAND IN THE PROMPT — a registry row nothing pushes reaches the GM never (CCODE-441)",
+    /key: "couldBeHereDetail"/.test(REG386) && /key: "heldMeetDetail"/.test(REG386) && /key: "askedMeetDetail"/.test(REG386)
+    && /const \{[^}]*\bcouldBeHereDetail\b[^}]*\} = ctx;/.test(GM386)
+    && /if \(couldBeHereDetail\) world\.push/.test(GM386) && /if \(heldMeetDetail\) world\.push/.test(GM386)
+    && /if \(askedMeetDetail\) world\.push/.test(GM386));
+  const could386 = GR386.couldBeHereForGM({ npcRegistry: { vail: vail386() } },
+    { locationId: "gen-whistling-woman-post", day: 9, locations: C386.locations || {}, ...world386,
+      sceneText: "A woman in grey waits at the threshold, sent by the High Luminary." });
+  check("§386: ⛔ §2.1 — THE PEOPLE WHO COULD BE HERE, each with WHY, and the master NAMED rather than id'd",
+    /\[vail\] Vail Langley/.test(could386) && /last known to be HERE/.test(could386)
+    && /answers to The Radiant Council/.test(could386) && !/power_radiant_plateau/.test(could386),
+    could386);
+  check("§386: ⛑ …and the instruction the GM needs is in the block it is pushed with, not only in the spec",
+    /never introduced as a stranger/i.test(GM386) && /ALREADY KNOWS WHO COULD PLAUSIBLY BE HERE/.test(GM386));
+  const heldText386 = GR386.heldMeetsForGM(held386);
+  check("§386: ⛔ §2.2 — the held question names both answers as OPS the GM can emit, and says the person was not written down",
+    /THEY WERE NOT WRITTEN DOWN/.test(heldText386) && /sameAs:/.test(heldText386) && /distinctFrom:/.test(heldText386)
+    && /never be asked about that pair again/.test(heldText386), String(heldText386).slice(0, 120));
+  check("§386: ⚠️ …and it is EMPTY when nothing is held, so no beat carries a question it does not have",
+    GR386.heldMeetsForGM({ worldState: {} }) === null && GR386.askedMeetsForGM({ worldState: {} }) === null
+    && GR386.couldBeHereForGM({ npcRegistry: {} }, {}) === null);
+  // ⛑ §2.3 WAS ALREADY BUILT, and I checked rather than adding a second copy of it.
+  check("§386: ⛑ §2.3 — the mint already goes to the GM with the stranger: `npcRegistryForGM` hands over the unlearned name GM-EYES-ONLY and names the op that reveals it",
+    /GM-EYES-ONLY \u2014 their name is \$\{n\.trueName\}/.test(rd("engine/npcs.js"))
+    && /emit revealName: "\$\{n\.trueName\}"/.test(rd("engine/npcs.js")));
+
+  /* ---- 5 · ⛔ ONE MERGE WRITER, FOR EVERY DOOR ---- */
+  // ⛔ `mergeEntity` WAS A SECOND WRITER AND A MUCH WEAKER ONE: it re-pointed not one reference, never wrote
+  // `formerIds`, overwrote `met`, and put a stranger's PLACEHOLDER name into the alias ledger the matcher searches.
+  // And it is the op the GM is instructed to use for "two records for one person", and the one the player's own merge
+  // picker calls — so both doors did the weaker merge.
+  check("§386: ⛔ THE PLAYER'S AND THE GM'S MERGE GO THROUGH THE ONE WRITER — `mergeEntity` was a second, weaker one that re-pointed nothing",
+    /mergePeople\(character, op\.intoId, op\.fromId,/.test(rd("engine/corrections.js"))
+    && /import \{[^}]*\bmergePeople\b[^}]*\} from "\.\/npcs\.js"/.test(rd("engine/corrections.js")));
+  check("§386: ⛑ …driven through that op: the references move, the dropped id is remembered, and the interactions SUM",
+    (() => {
+      const c = { npcRegistry: { keep: { id: "keep", name: "Orla Yardley", relationship: 2, met: 4, history: ["a"], knownFacts: ["x"] },
+        ghost: { id: "ghost", name: "Unmet yet", nameUnknown: true, trueName: "Orla Yardley", relationship: 0, met: 1, history: ["b"], knownFacts: ["y"] } },
+        company: [{ npcId: "ghost", roles: ["ally"] }], codex: { topics: { ghost: { id: "ghost", entityId: "ghost" } } } };
+      const r = CO386.applyStateOps(c, [{ op: "mergeEntity", fromId: "ghost", intoId: "keep", why: "player: same person" }], { worldDay: 9 });
+      return r.applied.length === 1 && r.applied[0].refs >= 3
+        && c.company[0].npcId === "keep" && !!c.codex.topics.keep && c.npcRegistry.keep.met === 5
+        && c.npcRegistry.keep.formerIds.includes("ghost");
+    })());
+  // ⚠️ AND IT MUST NOT LOSE WHAT THE OLD WRITER UNIONED. My first draft dropped `history` and `knownFacts` — the two
+  // longest-standing unions — and smoke SNG-137 caught a survivor with one entry where there had been two. The list is
+  // measured from what records actually carry, not from what I remembered: history/knownFacts/skillsObserved (135
+  // each), aliases (25), creditedQuests (5), formerIds (2), distinctFrom (1), deeds (1).
+  check("§386: ⛔ …and it loses NOTHING the old writer unioned — history, knownFacts and `creditedQuests`, which is what keeps a champion from being credited twice",
+    (() => {
+      const c = { npcRegistry: {
+        a: { id: "a", name: "Silas", history: ["met at the weir"], knownFacts: ["a wright"], relationship: 3, met: 2, creditedQuests: ["q1"] },
+        b: { id: "b", name: "Silas", history: ["fought the raider"], knownFacts: ["carries a scar"], relationship: 5, met: 1, creditedQuests: ["q2"] } } };
+      const r = CO386.applyStateOps(c, [{ op: "mergeEntity", fromId: "b", intoId: "a", why: "one person, two records" }], { worldDay: 1 });
+      const s = c.npcRegistry.a;
+      return r.applied.length === 1 && s.history.length === 2 && s.knownFacts.length === 2
+        && s.relationship === 5 && s.met === 3 && s.creditedQuests.length === 2;
+    })());
+  check("§386: ⚑ …and the long lists are CAPPED, because `history` is re-sent to the GM every turn",
+    (() => {
+      const many = (p) => Array.from({ length: 20 }, (_, i) => `${p}${i}`);
+      const c = { npcRegistry: { a: { id: "a", name: "A", history: many("a"), met: 1 }, b: { id: "b", name: "A", history: many("b"), met: 1 } } };
+      CO386.applyStateOps(c, [{ op: "mergeEntity", fromId: "b", intoId: "a", why: "x" }], { worldDay: 1 });
+      return c.npcRegistry.a.history.length === 24;
+    })());
+  // ⛑ §2.6's DOOR WAS ALREADY THERE (SNG-370's merge picker); what it needed was the plausible matches first.
+  const APP386 = rd("app.js").replace(/\r\n/g, "\n");
+  check("§386: ⛑ §2.6 — the player's \"same person as…\" picker lists the plausible matches FIRST, from the same reader the GM is held on",
+    /is really the same person as/.test(APP386)
+    && /perhapsTheSame\(character, from, \{/.test(APP386)
+    && /\(!!b\.why - !!a\.why\)/.test(APP386));
+  check("§386: ⚠️ …and it tells the player what the merge actually did, because a merge moves records and a silent repair looks like nothing happening",
+    /re-pointed/.test(APP386) && /r\.applied\?\.\[0\]\?\.refs/.test(APP386));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

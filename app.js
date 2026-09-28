@@ -59,7 +59,7 @@ import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf,
 // declaration, the rank, the guards, the turn, the apply, the end — lives in the engine now and the harness drives the same functions.
 import { phaseDenier } from "./engine/skill_battle.js";   // which effect shut the step, so the screen can say so
 import { battleSkillsForCharacter, declFromSelection, resolveDeclRank, guardBlockFor, openGuards, applyRoundToCharacter, collapseIfFinished, personOpponentFor, duelFromTarget, freshTurn, playTurn, endBattle } from "./engine/battle_turn.js";
-import { bearersOf, giveItemTo, takeItemFrom } from "./engine/npcs.js";   // R45c: a person can hold a thing
+import { bearersOf, giveItemTo, takeItemFrom, perhapsTheSame} from "./engine/npcs.js";   // R45c: a person can hold a thing
 import { incapacitationOutcome, playerDeathState, deathStopsPlay, deathLine, wireDeathModel } from "./engine/incapacitation.js";
 import * as DeathModel from "./engine/death.js";
 import { enterDeathState, rollRetrieval, pledgeFrom } from "./engine/death.js";
@@ -182,7 +182,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.14.11";
+const APP_VERSION = "2.14.12";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -434,22 +434,32 @@ function showMergePicker(fromId) {
   if (!from) return;
   // ⚠️ SORTED BY HOW WELL YOU KNOW THEM, not alphabetically: a duplicate is almost always someone you have just
   // met being written down beside someone you already knew, so the strong bonds belong at the top of the list.
+  // ✅ SNG-664 §2.6 — AND THE PLAUSIBLE MATCHES COME FIRST, with the reason on the row: Aevi asked for "same place,
+  // same day, overlapping role", and `perhapsTheSame` is the reader that answers it (the same one the GM is held on),
+  // so the player's list and the engine's question cannot disagree about who this might be.
+  const likely = (() => {
+    try {
+      const hits = perhapsTheSame(character, from, { npcs: CONTENT.npcs || {}, powers: CONTENT.powers || [], max: 4 });
+      return new Map(hits.map(h => [h.id, h.why]));
+    } catch { return new Map(); }
+  })();
   const others = Object.entries(reg).filter(([id]) => id !== fromId)
-    .map(([id, n]) => ({ id, n }))
-    .sort((a, b) => Math.abs(b.n.relationship || 0) - Math.abs(a.n.relationship || 0)
+    .map(([id, n]) => ({ id, n, why: likely.get(id) || null }))
+    .sort((a, b) => (!!b.why - !!a.why)
+      || Math.abs(b.n.relationship || 0) - Math.abs(a.n.relationship || 0)
       || String(a.n.name || "").localeCompare(String(b.n.name || "")));
   if (!others.length) { alert("There's no one else you know to merge them with yet."); return; }
   const pop = document.createElement("div");
   pop.id = "help-pop"; pop.className = "help-overlay";
-  const line = ({ id, n }) => {
+  const line = ({ id, n, why: likelyWhy }) => {
     // ⚠️ RESOLVED AGAINST BOTH MAPS. A place you met someone at is as often one the world generated in play as
     // one that was authored, and `nameOf` here is a function-local NPC namer three thousand lines away — reaching
     // for it threw `ReferenceError` and swallowed the whole popup, which is why this is verified in the browser.
     const placeOf = (lid) => CONTENT.locations?.[lid]?.name || character.generated?.location?.[lid]?.name || null;
     const where = n.lastSeen?.locationId ? placeOf(n.lastSeen.locationId) : null;
-    const who = [n.role, where ? `last seen at ${where}` : null].filter(Boolean).join(" · ");
-    return `<button class="opt codex-merge-target" data-mergeinto="${esc(id)}" data-hay="${esc(String(n.name || "").toLowerCase() + " " + String(n.role || "").toLowerCase())}">
-      ${esc(n.name || id)}${who ? ` <span class="cost">${esc(who)}</span>` : ""}</button>`;
+    const who = [likelyWhy, n.role, where ? `last seen at ${where}` : null].filter(Boolean).join(" · ");
+    return `<button class="opt codex-merge-target" data-mergeinto="${esc(id)}" data-hay="${esc(String(n.name || "").toLowerCase() + " " + String(n.role || "").toLowerCase())}"${likelyWhy ? ' style="border-color:var(--teal-line,#3a6)"' : ""}>
+      ${likelyWhy ? "⛑ " : ""}${esc(n.name || id)}${who ? ` <span class="cost">${esc(who)}</span>` : ""}</button>`;
   };
   pop.innerHTML = `<div class="help-card" role="dialog" aria-label="Merge ${esc(from.name || fromId)}" style="max-height:min(86vh,760px); display:flex; flex-direction:column; overflow:hidden">
     <div class="whois-head" style="flex:0 0 auto">"${esc(from.name || fromId)}" is really the same person as…</div>
@@ -481,7 +491,10 @@ function showMergePicker(fromId) {
     });
     saveCharacter(character);
     const ok = r.applied.length > 0;
-    renderPlay(character.activeScene?.lastTurn || null, { aside: ok ? `Merged — ${from.name} and ${into?.name || intoId} are one person now.` : (r.refused?.[0]?.reason || "Couldn't merge those two.") });
+    const refs = r.applied?.[0]?.refs ?? null;
+    renderPlay(character.activeScene?.lastTurn || null, { aside: ok
+      ? `${r.applied?.[0]?.news || `Merged — ${from.name} and ${into?.name || intoId} are one person now.`}${refs ? ` (${refs} record${refs === 1 ? "" : "s"} re-pointed)` : ""}`
+      : (r.refused?.[0]?.reason || "Couldn't merge those two.") });
   };
 }
 

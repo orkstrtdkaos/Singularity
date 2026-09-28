@@ -13,7 +13,7 @@
 import { SUBS, syncParentAttributes } from "./progression.js";
 import { isMinorSubject } from "./art.js";
 import { smartClamp, namesMatch } from "./namematch.js"; // SNG-152 (missed in the first sweep — see below)
-import { BOND_TYPES, ROMANTIC_STAGES, applyNpcUpdates, findExistingNpc, normalizeSex } from "./npcs.js"; // SNG-207/213: register + correct reuse the registry helpers
+import { BOND_TYPES, ROMANTIC_STAGES, applyNpcUpdates, findExistingNpc, normalizeSex, mergePeople} from "./npcs.js"; // SNG-207/213: register + correct reuse the registry helpers
 import { addItem } from "./inventory.js"; // SNG-207 §2: grant-story-conferred-item
 
 const CORRECTABLE_FIELDS = new Set(["background", "origin", "nativeTradition", "form"]);
@@ -260,18 +260,26 @@ export function applyStateOps(character, ops = [], ctx = {}) {
         break;
       }
       // SNG-137: merge two registry entries for ONE person (a dedup repair). Folds `fromId` into `intoId`.
+      //
+      // ⛔ SNG-664 §2.5 — ONE MERGE WRITER, AND THIS WAS THE SECOND ONE. What stood here folded history, knownFacts,
+      // skillsObserved, the higher relationship and one alias — and re-pointed NOT ONE REFERENCE. Measured on Loki's
+      // save, the Orla pair alone leaves six: `company[].npcId`, `codex.topics` keys AND `.entityId` AND `.links[]`,
+      // `establishedFacts[].subjectId`, `worldState.offscreenBacklog` keys. It also never wrote `formerIds`, so the
+      // next op against the dropped id minted the stranger again; it overwrote `met` instead of summing the
+      // interactions; and it put `from.name` into `aliases` even when that name is a PLACEHOLDER — "Unmet yet" in the
+      // ledger `findExistingNpc` searches.
+      //
+      // ⚠️ AND THIS IS THE OP THE GM IS INSTRUCTED TO USE for "two records for one person", and the one the player's
+      // own merge picker calls — so both doors did the weaker merge. They delegate now. The LOG and the refusal
+      // sentence stay here, because the corrections ledger is this module's job and not the registry's.
       case "mergeEntity": {
         const reg = character.npcRegistry || {};
         const from = reg[op.fromId], into = reg[op.intoId];
         if (!from || !into || op.fromId === op.intoId) { refused.push({ op, reason: "mergeEntity needs two distinct known people (fromId → intoId)" }); break; }
-        into.history = [...(into.history || []), ...(from.history || [])].slice(-24);
-        into.knownFacts = [...new Set([...(into.knownFacts || []), ...(from.knownFacts || [])])].slice(-24);
-        into.skillsObserved = [...new Set([...(into.skillsObserved || []), ...(from.skillsObserved || [])])].slice(-24);
-        into.relationship = Math.max(into.relationship || 0, from.relationship || 0);
-        into.aliases = [...new Set([...(into.aliases || []), from.name].filter(Boolean))];
-        delete reg[op.fromId];
-        log(character, { kind: "merge", id: op.fromId, into: op.intoId, why }, ctx);
-        applied.push({ merged: op.fromId, into: op.intoId });
+        const m664 = mergePeople(character, op.intoId, op.fromId, { why: why || "a repair: two records for one person", day: ctx?.day ?? null });
+        if (!m664.ok) { refused.push({ op, reason: m664.why || "those two could not be merged" }); break; }
+        log(character, { kind: "merge", id: op.fromId, into: op.intoId, why, refs: m664.refs }, ctx);
+        applied.push({ merged: op.fromId, into: op.intoId, refs: m664.refs, ...(m664.news ? { news: m664.news } : {}) });
         break;
       }
       // SNG-143: correct a known person's sex/gender + pronouns (the Pell-rendered-male fix, player-side).

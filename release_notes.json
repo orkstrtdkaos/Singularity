@@ -16,6 +16,24 @@
   "next": [],
   "releases": [
     {
+      "version": "2.14.12",
+      "date": "2026-09-28",
+      "entries": [
+        {
+          "kind": "change",
+          "title": "The game asks before it invents somebody you have already met",
+          "summary": "A stranger whose office matches someone you know is a question now, not a second record.",
+          "detail": "Before anyone new is written down, the GM is shown the people you already know who could plausibly be here — seen in the last few days, last known to be here or one road away, or answering to somebody this scene already names — with the instruction that a person you have met is never introduced as a stranger. And when a stranger turns up in the same office as someone you know (the same post, the same master, word for word), they are NOT written down until the GM says whether it is the same person or a different one. It says which, once, and if they are different you will never be asked about that pair again."
+        },
+        {
+          "kind": "fix",
+          "title": "Saying \"that is the same person\" now moves everything",
+          "summary": "Merging two records left your party, your quests and your codex pointing at the record that was deleted.",
+          "detail": "The merge on a person's card folded their notes together and then left every other reference behind — the party entry, a quest they gave you, a hold they keep, what your codex knows. It moves all of it now, and tells you how many records moved; the times you have spoken to them add up instead of being overwritten; and the id that was folded away is remembered, so anything written against the old one still finds them. The list of people to merge with puts the likely matches at the top, with the reason."
+        }
+      ]
+    },
+    {
       "version": "2.14.11",
       "date": "2026-09-28",
       "entries": [

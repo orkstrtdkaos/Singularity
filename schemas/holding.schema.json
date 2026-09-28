@@ -58,7 +58,7 @@
       "description": "100% — the day it became yours."
     },
     "lastMovedWorldCount": {
-      "type": "number",
+      "type": ["number", "null"],
       "description": "100% — when its condition last drifted, in world hours."
     },
     "history": {
@@ -178,7 +178,7 @@
       "description": "17% — consecutive passes nobody tended it."
     },
     "conditionSince": {
-      "type": "number",
+      "type": ["number", "null"],
       "description": "17% — the day it entered its current condition."
     },
     "forgeOrder": {

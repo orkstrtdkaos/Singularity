@@ -31824,9 +31824,23 @@ console.log("\n── §385 · a person is minted once, and correctly ──");
 
   /* ---- 4 · ⛔ THE REPAIRS, DRIVEN ---- */
   const step385 = R385.CHARACTER_STEPS.find(s => s.id === "one-person-one-record");
-  check("§385: ⛔ the repair step is above every version a save can carry, or the saves it exists for would never see it",
-    !!step385 && step385.version === R385.topReconcileVersion("character") && step385.playerFacing === true,
-    `step ${step385?.version} of ${R385.topReconcileVersion("character")}`);
+  // ⛔ REACHABILITY, NOT "IS IT THE TOPMOST". This asserted `version === topReconcileVersion(...)` and went red the day
+  // a LATER step was added — which is the project growing, not this repair breaking. ⚠️ It is the THIRD time I have
+  // pinned "and it is the top reconcile step": §378, then §383 two days later, then here. ⛑ The durable claim is a fact
+  // about the past: when this shipped, the highest `reconcileVersion` any live save carried was 89, so a step at 90 runs
+  // for every one of them. That number is history and never needs revisiting. The rest is about the step itself — one
+  // version, nobody else's, and playerFacing so the repair is SAID rather than done silently.
+  // ⛔ THIS CHECK USED TO SAY "and it is the TOP reconcile step", and reddened the day a later repair shipped — the
+  // THIRD time I have pinned that (§378, §383, here). ⛑ The position claim is true only AT SHIP TIME: a save is stamped
+  // to the registry's maximum, so a new step must be numbered above the old one, and step 89 having run and been
+  // overtaken by 90 is success rather than regression. That claim now lives in §390, on the step that has yet to run.
+  // ⚠️ A second wrong re-point measured its own way out: "monotonic in list order" fails too, because the registry is
+  // NOT in version order (90 89 88 87 71 70 … 1 2 3) and the runner filters by version, never by position.
+  // ⛑ What stays true of a SHIPPED repair forever: one version, nobody else's, and playerFacing so it is SAID.
+  check("§385: ⛔ the repair carries one version nobody else holds, and says what it did rather than repairing in silence",
+    !!step385 && step385.playerFacing === true && typeof step385.apply === "function"
+    && R385.CHARACTER_STEPS.filter(s => s.version === step385.version).length === 1,
+    `step ${step385?.version}; the registry tops out at ${R385.topReconcileVersion("character")}`);
   check("§385: ⛔ THE RULE FINDS A STRANGER WHOSE OWN TRUE NAME IS SOMEBODY'S NAME — the CCODE-514 rule, applied to what was already there",
     (() => {
       const f = deepFixture();
@@ -32742,6 +32756,142 @@ console.log("\n── §389 · the road's own share, and who walks with the load
       };
       return run(8) > run(1);
     })(), `authored ${R389.economy.holdStore?.trade?.companyGuardQuality}`);
+}
+
+/* ══════════ §390 · A NAME THE SCENE TAUGHT ITSELF, AND A SLOT NOBODY COULD EARN ══════════ */
+// ⛔ TWO THINGS ERIK FOUND IN ONE HOUR OF PLAY, and they are the same defect pointing opposite ways.
+//
+//  1 · *"why does the GM sometimes spell the name 'Halfvex'?"* — because a beat did, and `gm.js` puts the FULL narration
+//      of the last three turns into every prompt. One drift is read back, repeated, and re-stored: the scene teaches
+//      itself. Measured: "Halfvex" sat in exactly two fields of Loki's save (one turn's narration and the `lastTurn`
+//      copy) while the correct name appeared 91 times — including that same turn's summary, its choice labels, and its
+//      own `npcUpdates[0].name`. The model got the STRUCTURED half right and drifted only in the prose.
+//
+//  2 · *"he still has no band. Do I need to add it manually?"* — no: he had earned it and the engine was reading a field
+//      nothing ever wrote. `commandSlots` has three earned sources (Erik's own: level, presence, renown) and the renown
+//      one reads `character.renownBand` — set on 0 of 16 saves, written by NOTHING in the repo. Thirteen readers, no
+//      writer. Meanwhile `renownScore` was always real: Loki's is 32 and the engine's own threshold for legendary is 30.
+console.log("\n── §390 · a name the scene taught itself, and a slot nobody could earn ──");
+{
+  const N390 = await import("../engine/npcs.js");
+  const M390 = await import("../engine/melee.js");
+  const RC390 = await import("../engine/recurrence.js");
+  const R390 = await import("../engine/reconcile.js");
+  const { loadContentHeadless: lch390 } = await import("./headless_content.mjs");
+  const C390 = await lch390();
+  const mcfg390 = C390.rules?.martial || {};
+
+  /* ---- 1 · THE CORRECTOR, AND MOSTLY WHAT IT REFUSES ---- */
+  const who390 = () => ({
+    npcRegistry: {
+      halvex_coil: { id: "halvex_coil", name: "Halvex Coil", aliases: ["The Churn-Revel orchestrator"] },
+      "ossivyn-tallow": { id: "ossivyn-tallow", name: "Ossivyn Tallow" },
+      "traveler-woman": { id: "traveler-woman", name: "Vessin Tallow-bark" },
+    },
+  });
+  check("§390: ⛔ A ONE-CHARACTER SLIP ON SOMEBODY THE SAVE KNOWS IS SET RIGHT, and the rest of the prose is untouched",
+    (() => {
+      const src = "Halfvex Coil meets you at the threshold before you knock. He is lean-framed and sharp-featured.";
+      const r = N390.correctKnownNames(src, who390(), {});
+      return r.fixed.length === 1 && r.fixed[0].was === "Halfvex" && r.fixed[0].now === "Halvex"
+        && r.text === src.replace("Halfvex", "Halvex") && r.text.length === src.length - 1;
+    })());
+  // ⛔ THE GUARDS ARE THE DESIGN. Rewriting near-misses freely would merge distinct people — Loki knows two Tallows.
+  check("§390: ⛔ …and it REFUSES a word two different people answer to — the two-Tallows guard, which is why this is safe at all",
+    (() => {
+      const src = "Tallov came down the road.";                 // one letter from BOTH "Tallow" and "Tallow-bark"
+      return N390.correctKnownNames(src, who390(), {}).text === src;
+    })());
+  check("§390: ⛑ …and it refuses a name this very beat is MINTING, so a new person is never rewritten into an old one",
+    (() => {
+      const src = "Halfvex Dorn is nobody you have met.";
+      const free = N390.correctKnownNames(src, who390(), {});
+      const held = N390.correctKnownNames(src, who390(), { introduced: ["Halfvex Dorn"] });
+      return free.fixed.length === 1 && held.fixed.length === 0 && held.text === src;
+    })());
+  check("§390: ⚠️ …and it refuses a correct name, a short word, and an ordinary word that merely sits near one",
+    (() => {
+      const same = (s, o = {}) => N390.correctKnownNames(s, who390(), o).text === s;
+      return same("Halvex Coil poured the coffee.") && same("Then Cy spoke.") && same("The Taken stood in the doorway.")
+        && same("Hallway lamps were lit.");
+    })());
+  // ⛔ AND THE AMBIGUITY GUARD COUNTS PEOPLE, NOT LABELS — this refused the very case it was built for until it did.
+  check("§390: ⛔ ONE PERSON UNDER TWO LABELS IS ONE PERSON — the pool's legend and the registry's man share an id, and the guard must not read them as two",
+    (() => {
+      const ch = who390();
+      const words = N390.knownNameWords(ch, { content: { npcs: { halvex_coil: { name: "Halvex Coil, the Rewriter" } } } });
+      // `knownPeople` is empty, but the registry's own keys count as known, so the pool record joins under ONE id
+      return words.get("Halvex")?.size === 1 && words.get("Tallow")?.size === 2;
+    })(), JSON.stringify({ halvex: [...(N390.knownNameWords(who390(), { content: { npcs: { halvex_coil: { name: "Halvex Coil, the Rewriter" } } } }).get("Halvex") || [])] }));
+
+  /* ---- 2 · THE WRITE DOOR AND THE REPAIR ---- */
+  check("§390: ⛔ THE NARRATION IS CORRECTED ONCE, BEFORE ANY DURABLE USE — beside the sceneSummary coercion, which is there for the same reason",
+    (() => {
+      // ⛑ comments stripped, in the idiom §220 already uses — the notes AROUND these lines quote the very strings
+      // this check looks for, and a source regex reading its own commentary is a failure this file records four times.
+      const src = rd("app.js").split(String.fromCharCode(10)).filter(l => !/^\s*(\/\/|\*|\/\*)/.test(l)).join(String.fromCharCode(10));
+      const i = src.indexOf("turn.sceneSummary = coerceSceneSummary(");
+      const j = src.indexOf("correctKnownNames(turn.narration");
+      const k = src.indexOf("sceneTurns.push({ player:");
+      // corrected after the coercion and BEFORE the push that `gm.js` will feed back
+      return i > 0 && j > i && k > j;
+    })());
+  const step390 = R390.CHARACTER_STEPS.find(s => s.id === "the-name-the-scene-taught-itself");
+  check("§390: ⛔ …and the REPAIR clears what is already in the prompt window, through the runner's own door",
+    (() => {
+      if (!step390 || typeof step390.apply !== "function") return false;     // ⚠️ `apply`, not `run` — the runner calls `apply`
+      const ch = who390();
+      ch.activeScene = {
+        turns: [{ narration: "Halfvex Coil meets you at the threshold.", summary: "Halvex Coil met you." }],
+        lastTurn: { narration: "Halfvex Coil meets you at the threshold.", npcUpdates: [{ npcId: "halvex_coil", name: "Halvex Coil" }] },
+      };
+      const r = step390.apply(ch, {});
+      const fixedBoth = !/Halfvex/.test(ch.activeScene.turns[0].narration) && !/Halfvex/.test(ch.activeScene.lastTurn.narration);
+      const again = step390.apply(ch, {});
+      return (r.notes || []).length === 1 && fixedBoth && !(again.notes || []).length;    // idempotent
+    })());
+  check("§390: ⛑ …and it is reachable and says what it did — above the 89 every live save carried, and playerFacing",
+    !!step390 && step390.version > 89 && step390.playerFacing === true
+    && R390.CHARACTER_STEPS.filter(s => s.version === step390.version).length === 1);
+
+  /* ---- 3 · THE SLOT NOBODY COULD EARN ---- */
+  // ⛔ `renownBand` HAS THIRTEEN READERS AND NO WRITER. Gated as a claim about the DERIVATION, not about the field:
+  // if Aevi or a future pass ever does write one, passing it must still win, and this stays true either way.
+  check("§390: ⛔ RENOWN IS DERIVED FROM THE DEEDS THAT WERE ALWAYS THERE — `renownBand` is read in thirteen places and written by nothing",
+    (() => {
+      const mk = (weights) => ({ deeds: weights.map(w => ({ weight: w })) });
+      return RC390.renownBandOf(mk([])) === "unknown"
+        && RC390.renownBandOf(mk([10])) === "known"
+        && RC390.renownBandOf(mk([20])) === "renowned"
+        && RC390.renownBandOf(mk([32])) === "legendary"
+        // ⚠️ the BANDS, never the thresholds' numbers: pinning `legendary === 30` would redden the day Aevi retunes them,
+        // and the claim is that deeds resolve to a band at all — which the four lines above already prove.
+        && RC390.renownBandOf(mk([1000])) === "legendary";
+    })());
+  check("§390: ⛔ …and it REACHES `commandSlots`, so Erik's third source finally grants a slot — Loki was legendary and led two",
+    (() => {
+      const loki = { level: 11, deeds: [{ weight: 32 }], subAttributes: { presence: 5 } };
+      const now = M390.commandSlots(loki, { cfg: mcfg390 });
+      const before = M390.commandSlots(loki, { cfg: mcfg390, renownBand: "unknown" });   // what every caller used to get
+      return now.slots === before.slots + 1
+        && now.earned.some(e => e.from === "renown" && /legendary/.test(e.why))
+        && !before.earned.some(e => e.from === "renown");
+    })(), JSON.stringify(M390.commandSlots({ level: 11, deeds: [{ weight: 32 }], subAttributes: { presence: 5 } }, { cfg: mcfg390 })));
+  check("§390: ⛑ …and an explicitly passed band still wins, so the argument is an OVERRIDE and not dead weight",
+    (() => {
+      const famous = { level: 1, deeds: [{ weight: 99 }] };
+      const forced = M390.commandSlots(famous, { cfg: mcfg390, renownBand: "unknown" });
+      const derived = M390.commandSlots(famous, { cfg: mcfg390 });
+      return derived.slots > forced.slots;
+    })());
+  check("§390: ⛔ …and it is what opens the band — the gate Erik's fiction had already named, one dead field away",
+    (() => {
+      const loki = { level: 11, deeds: [{ weight: 32 }], subAttributes: { presence: 5 },
+        holdings: [{ id: "h", condition: "thriving" }] };
+      const now = M390.canRaiseBand(loki, { cfg: mcfg390 });
+      const before = M390.canRaiseBand(loki, { cfg: mcfg390, renownBand: "unknown" });
+      return now.ready === true && before.ready === false;
+    })());
 }
 
 /* ══════════ REPORT ══════════ */

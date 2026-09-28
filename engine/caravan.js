@@ -236,6 +236,33 @@ export function runStandingRoutes(character, { locations = {}, cfg = null, day =
 
 const tradeCfg = (cfg) => (cfg && typeof cfg.trade === "object" && cfg.trade ? cfg.trade : {});
 
+/** ⛔ WHICH HOLDS ARE EARNING NOTHING AT HOME BECAUSE A CART IS COMING FOR THE STOCK.
+ *
+ *  ⚠️ Erik, in play 2026-09-28: *"even though it's thriving I have lost my income."* The estate board said **0 in, 24
+ *  out** — which is SNG-654 working exactly as ruled (a standing run means the keeper holds the stock for the cart
+ *  rather than selling it here) and reads exactly like a defect. His run is the Annex to Gearsflat: 75.7 days each way,
+ *  a cart out since world-day 90, about 26 passes before the first coin comes back.
+ *
+ *  ⛑ The comparison card said "first coin in 26 passes" when he chose it. The BOARD, where he noticed the loss, said
+ *  nothing — so this is the sentence that number needed. Returns one row per hold that is holding, with the cart if one
+ *  is out. PURE. */
+export function heldForRuns(character, { locations = {} } = {}) {
+  const out = [];
+  for (const h of (character?.holdings || [])) {
+    if (!h?.route?.toId) continue;
+    const car = caravansOf(character).find(c => c && c.holdingId === h.id && (c.status === "travelling" || c.status === "returning")) || null;
+    out.push({
+      holdId: h.id, name: h.name || h.id,
+      toId: h.route.toId, toName: locations?.[h.route.toId]?.name || h.route.toId,
+      by: h.route.by || null, runs: Math.max(0, num(h.route.runs, 0)),
+      waiting: Object.values(h.store || {}).reduce((a, n) => a + num(n), 0),
+      out: car ? { status: car.status, load: car.load, arriveDay: car.arriveDay ?? null, homeDay: car.homeDay ?? null,
+        days: num(car.days, 0), departedDay: car.departedDay ?? null } : null,
+    });
+  }
+  return out;
+}
+
 /** ⛑ WHO WALKS A STANDING RUN OUT OF THIS HOLD — the hold's own hands, capped by `trade.crew`.
  *
  *  ⛔ THIS DECISION LIVED IN `app.js` AS `carriers: (h.crew || []).slice(0, 2)` while the card forecast a flat two, so a

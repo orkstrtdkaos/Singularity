@@ -16,6 +16,30 @@
   "next": [],
   "releases": [
     {
+      "version": "2.15.2",
+      "date": "2026-09-28",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "The narrator stops respelling people you know",
+          "summary": "A name misspelled once in a beat was read back out of the scene's own history and repeated until it became the spelling.",
+          "detail": "The last few beats of a scene go back to the storyteller each turn so it remembers what happened — which meant a single slip in a name became permanent: it read its own mistake and wrote it again. Now a one-character misspelling of somebody your character already knows is set right before the beat is saved, and scenes that had already learned one are repaired when you open them. It is deliberately narrow: it will not touch a name being introduced for the first time, a word that two different people answer to, or anything that is not a single letter away from a name on your own roster."
+        },
+        {
+          "kind": "fix",
+          "title": "Renown finally counts toward who follows you",
+          "summary": "Being known was one of the three things that earn you command of more people, and it had never once been counted.",
+          "detail": "Command of a band grows from three things: how long you have been at it, how well you hold a room, and how widely you are known. The third read a value that nothing in the game ever set, so for every character it silently counted for nothing — while the renown itself was being tallied from their deeds the whole time. It is now read from those deeds, which is what it always described. Characters who have made a name for themselves lead one more person than they did, and some of them can raise a band who could not."
+        },
+        {
+          "kind": "fix",
+          "title": "A hold that is holding its goods back says so",
+          "summary": "A thriving holding showing no income and a standing upkeep looked broken; it was waiting for a cart.",
+          "detail": "When a standing run is set, the keeper stops selling at home and holds everything for the next cart — which on a long road can be many passes before the first coin comes back. The estate board showed the resulting nought-in, upkeep-out and said nothing about why. It now names the holding, where the run goes, how much is waiting, where the cart is, and that stopping the run puts the keeper back to selling. The standing-work panel likewise says when nobody at a hold is free to be put to work, and why, instead of listing jobs you cannot start."
+        }
+      ]
+    },
+    {
       "version": "2.15.1",
       "date": "2026-09-28",
       "entries": [

@@ -105,6 +105,106 @@ const DEFAULT_STAGE_FLOORS = { courting: 2, together: 4, committed: 6, partner: 
 
 /** Fuzzy-find an existing person before ever creating a new one — the GM refers
  *  to the same human as "davan", "davan-channel-worker", or "Davan" across turns. */
+/* ═════ NAME DRIFT — A NARRATOR MAY NOT RESPELL SOMEBODY THE SAVE ALREADY KNOWS ═════
+ *
+ * ⛔ ERIK 2026-09-28, with a screenshot of one beat: *"why does the GM sometimes spell the name 'Halfvex'?"* Because a
+ * previous beat did, and the beat before it is in the prompt.
+ *
+ * ⛑ MEASURED: "Halfvex" sits in exactly two fields of Loki's save and they are the same text twice —
+ * `activeScene.turns[0].narration` and the `lastTurn` copy of it — while "Halvex" appears 91 times, including that very
+ * turn's summary, its choice labels, and its own `npcUpdates[0].name`. The model got the STRUCTURED half right and
+ * drifted in the PROSE half of one generation. `gm.js` then feeds the full narration of the last three turns back into
+ * every prompt, so the drift is read back and repeated, and re-stored. A single slip becomes the scene's own spelling.
+ *
+ * ⚠️ THE REGISTRY IS AUTHORITATIVE FOR A NAME, WHICH IS WHY THIS IS SAFE AT ALL — but only just, and the guards are the
+ * whole design. Loki knows TWO Vessins (Tallow-bark, and a Long Bough courier), so a corrector that rewrote every near
+ * miss would quietly merge people. Hence: one edit only, a shared opening, never a word this turn INTRODUCES as
+ * somebody, and never a word that is close to two different names. Anything else is left exactly as the GM wrote it.
+ */
+export const NAME_DRIFT = { maxEdits: 1, minPrefix: 3, minLength: 5 };
+
+function editDistance1(a, b) {                      // ⛑ true iff exactly one insert, delete or substitution apart
+  if (a === b) return false;
+  const m = a.length, n = b.length;
+  if (Math.abs(m - n) > 1) return false;
+  let i = 0; while (i < m && i < n && a[i] === b[i]) i++;
+  let j = 0; while (j < m - i && j < n - i && a[m - 1 - j] === b[n - 1 - j]) j++;
+  return (m - i - j) <= 1 && (n - i - j) <= 1;
+}
+
+/** ⛑ EVERY NAME-WORD THIS CHARACTER KNOWS, mapped to whoever holds it — the registry first, then the shared pool for
+ *  people they have met. A word is a name-word only if it opens capitalised and is long enough to be a name rather than
+ *  a sentence's first word. PURE. */
+export function knownNameWords(character, { content = null } = {}) {
+  const out = new Map();
+  // ⛔ HOLDERS ARE KEYED BY ID, NEVER BY LABEL. Keyed by name, this guard refused the very case it was built for:
+  // "Halvex" answered to *"Halvex Coil"* and *"Halvex Coil, the Rewriter"*, which are ONE MAN UNDER ONE ID — the
+  // registry record of the man Loki met, and the authored legend in the shared pool. A pool carries both, so counting
+  // labels sees two people where there is one, and the corrector declined to correct the drift Erik actually reported.
+  // ⛑ Ossivyn Tallow and Vessin Tallow-bark are two different ids, so "Tallow" is still untouchable — which is the
+  // guard doing its real job rather than being defeated by its own bookkeeping.
+  const labels = new Map();                                  // word → a display name, for the receipt
+  const add = (n, id, label) => {
+    if (typeof n !== "string") return;
+    for (const w of n.split(/[\s'\u2019\u2014-]+/)) {
+      if (!/^[A-Z][a-z]{3,}$/.test(w)) continue;
+      if (!out.has(w)) out.set(w, new Set());
+      out.get(w).add(id);
+      if (!labels.has(w)) labels.set(w, label);
+    }
+  };
+  for (const [id, p] of Object.entries(character?.npcRegistry || {})) {
+    if (!p) continue;
+    const label = p.name || id;
+    add(p.name, id, label); add(p.trueName, id, label);
+    for (const a of (Array.isArray(p.aliases) ? p.aliases : [])) add(a, id, label);
+  }
+  // ⛔ AND THE PEOPLE IN THE POOL THEY HAVE MET — `content.npcs` holds authored, grown (`_gen`) and shared (`_canon`)
+  // records alike, and a narrator writes about all of them. Only the ones this character knows, or the vocabulary
+  // becomes every name in the world and a coincidental near-miss gets "corrected" into a stranger.
+  const known = new Set((character?.knownPeople || []).concat(Object.keys(character?.npcRegistry || {})));
+  for (const [id, p] of Object.entries(content?.npcs || {})) if (p && known.has(id)) add(p.name, id, p.name || id);
+  out.labels = labels;
+  return out;
+}
+
+/** ⛔ CORRECT A NARRATOR'S ONE-CHARACTER SLIP ON SOMEBODY THE SAVE ALREADY KNOWS, and nothing else.
+ *
+ *  ⚠️ `introduced` is the set of names this same turn is MINTING (from its own `npcUpdates`): a brand-new person whose
+ *  name happens to sit one letter from an old one is not a misspelling, and rewriting them would merge two people.
+ *  Returns the text and a list of what it changed, so the caller can say so rather than edit silently. PURE. */
+export function correctKnownNames(text, character, { content = null, introduced = [], vocab = null } = {}) {
+  const src = String(text ?? "");
+  if (!src) return { text: src, fixed: [] };
+  const words = vocab || knownNameWords(character, { content });
+  if (!words.size) return { text: src, fixed: [] };
+  const mint = new Set();
+  for (const n of introduced) for (const w of String(n || "").split(/[\s'\u2019\u2014-]+/)) if (w) mint.add(w);
+  const fixed = [];
+  const seen = new Map();
+  const out = src.replace(/\b[A-Z][a-z]{3,}\b/g, (w) => {
+    if (words.has(w) || mint.has(w)) return w;            // already a name they know, or one being minted now
+    if (seen.has(w)) { const r = seen.get(w); if (r) fixed.push({ was: w, now: r.now, person: r.person }); return r ? r.now : w; }
+    if (w.length < NAME_DRIFT.minLength) { seen.set(w, null); return w; }
+    let hit = null;
+    for (const [cand, holders] of words) {
+      if (cand.length < NAME_DRIFT.minLength) continue;
+      if (!editDistance1(w, cand)) continue;
+      let pre = 0; while (pre < w.length && pre < cand.length && w[pre] === cand[pre]) pre++;
+      if (pre < NAME_DRIFT.minPrefix) continue;
+      // ⛔ AMBIGUOUS IS LEFT ALONE — a word one letter from two different names, or from a name two people share, is
+      // not something a spelling rule may decide. This is the two-Vessins guard.
+      if (hit || holders.size > 1) { hit = null; break; }
+      hit = { now: cand, person: (words.labels && words.labels.get(cand)) || [...holders][0] };
+    }
+    seen.set(w, hit);
+    if (!hit) return w;
+    fixed.push({ was: w, now: hit.now, person: hit.person });
+    return hit.now;
+  });
+  return { text: out, fixed };
+}
+
 export function findExistingNpc(reg, id, name = "") {
   if (reg[id]) return reg[id];
   const nameNorm = slugify(name);

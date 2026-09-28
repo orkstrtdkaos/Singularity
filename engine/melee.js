@@ -1,3 +1,4 @@
+import { renownBandOf } from "./recurrence.js";   // ⛔ CCODE-562: `renownBand` had thirteen readers and no writer — the band is derived from the deeds that were always there
 // engine/melee.js — CCODE-251. DIFFERENT LEVELS OF RESOLUTION FOR DIFFERENT SCALES OF FIGHT.
 //
 // ⛔ ERIK, AND HE EXPLICITLY DID NOT DECIDE THIS: "it would be amazing if we could have everyone doing full
@@ -64,6 +65,13 @@ export function resolutionTier(allyCount, foeCount = 1, { tiers = null } = {}) {
  *  so raising it later is an authoring decision rather than an engine change — and the comment says so,
  *  because a number with no note beside it becomes a law by silence. */
 export function commandSlots(character, { cfg = {}, renownBand = null } = {}) {
+  // ⛔ DERIVED WHEN NOBODY HANDS ONE IN. Every caller sourced this from `character.renownBand` — a field written by
+  // NOTHING in the repo and present on 0 of 16 saves — so RENOWN, one of Erik's three earned sources, has never once
+  // granted anybody a slot. ⚠️ The renown itself was always real: `renownScore` sums deed weights, Loki's is 32, and the
+  // engine's own thresholds put "legendary" at 30. He was owed this slot, and the band he named in the fiction was one
+  // dead field away from working. ⛑ The argument stays, as an OVERRIDE — which also repairs the three call sites that
+  // never passed it and quietly under-reported the same character's command.
+  const band = renownBand || renownBandOf(character, { thresholds: cfg.renownThresholds || null });
   const maxNamed = Math.max(1, num(cfg.maxNamed, 3));
   const per = Math.max(1, num(cfg.levelsPerSlot, 10));
   const presenceAt = num(cfg.presenceForSlot, 7);
@@ -76,7 +84,7 @@ export function commandSlots(character, { cfg = {}, renownBand = null } = {}) {
   const byLevel = Math.floor(level / per);
   if (byLevel > 0) earned.push({ from: "level", n: byLevel, why: `level ${level}` });
   if (presence >= presenceAt) earned.push({ from: "presence", n: 1, why: `presence ${presence} — you can hold a room` });
-  if (renownBand && renowned.has(String(renownBand))) earned.push({ from: "renown", n: 1, why: `${renownBand} — people follow someone they have heard of` });
+  if (band && renowned.has(String(band))) earned.push({ from: "renown", n: 1, why: `${band} — people follow someone they have heard of` });
 
   const extra = earned.reduce((a, e) => a + e.n, 0);
   // ⛔ +1 IS ALWAYS YOU. A character who can bring nobody forward still takes their own turn; a slot count

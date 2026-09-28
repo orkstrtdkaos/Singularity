@@ -59,7 +59,7 @@ import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf,
 // declaration, the rank, the guards, the turn, the apply, the end — lives in the engine now and the harness drives the same functions.
 import { phaseDenier } from "./engine/skill_battle.js";   // which effect shut the step, so the screen can say so
 import { battleSkillsForCharacter, declFromSelection, resolveDeclRank, guardBlockFor, openGuards, applyRoundToCharacter, collapseIfFinished, personOpponentFor, duelFromTarget, freshTurn, playTurn, endBattle } from "./engine/battle_turn.js";
-import { bearersOf, giveItemTo, takeItemFrom, perhapsTheSame} from "./engine/npcs.js";   // R45c: a person can hold a thing
+import { bearersOf, giveItemTo, takeItemFrom, perhapsTheSame, correctKnownNames } from "./engine/npcs.js";   // R45c: a person can hold a thing
 import { incapacitationOutcome, playerDeathState, deathStopsPlay, deathLine, wireDeathModel } from "./engine/incapacitation.js";
 import * as DeathModel from "./engine/death.js";
 import { enterDeathState, rollRetrieval, pledgeFrom } from "./engine/death.js";
@@ -92,7 +92,7 @@ import { resolveWaygateTransit, routeGmMoveTo, isNetworkGate, networkGatesFrom, 
 import { routeBetween, routeLine, twoWayRoads } from "./engine/journey.js";
 import { planJob, suggestTeam, jobPoolOf, jobRouteOf, jobCost, jobWages, jobEffects, sayEffects, settleDueJobs, degreeWord, jobOpposition, mainNeedOf, jobCraftsOf, bestCraftFor, OUTCOMES as JOB_OUTCOMES, errandOdds, detachForJob, jobPersonFor, workCraftsOf, workDayChance, workHeads, bandTeamOf, sendBandOnMission, bandMissionParty } from "./engine/jobs.js";   // CCODE-420 · CCODE-428 · CCODE-431
 import { ensureJobs, postJob, sendOnJob, awayOnJob, untoldJobs, markJobsTold, dropJob, detachedFrom } from "./engine/jobstate.js";   // CCODE-420 · CCODE-431
-import { sendCaravan, caravansOf, storeExits, setRoute, clearRoute, hireCompany, routeCompany, standingCrewFor } from "./engine/caravan.js";   // R49: a caravan is a delegate + a route + a load   // SNG-331 §1 / SNG-386 §4.4: two named options over roads + gates // SNG-148: waygates — map control routes named/hub; GM offer via the registry row. SNG-243 §4: the gate network
+import { sendCaravan, caravansOf, storeExits, setRoute, clearRoute, hireCompany, routeCompany, standingCrewFor , heldForRuns } from "./engine/caravan.js";   // R49: a caravan is a delegate + a route + a load   // SNG-331 §1 / SNG-386 §4.4: two named options over roads + gates // SNG-148: waygates — map control routes named/hub; GM offer via the registry row. SNG-243 §4: the gate network
 import { skillDetail, npcDetail, itemDetail, relationshipsParagraph, craftRollsLine, craftRollsShort } from "./engine/entityDetail.js";
 import { wholeNameFor, learnWholeName } from "./engine/names.js";   // ⛔ SNG-643 §5 (C17): a whole name is shown only when this character may see it
 import { collapseScenePresence, canonicalPersonId, personArtSeed, applyNpcUpdates, findExistingNpc, genderUnsaid, sexUnsaid, SEX_VALUES, sexFromGender, sexGenderAgree, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier, backfillNpcGender, reconcileGeneratedNpcWithMeet, npcFearsForGM, npcReactionsForGM, repairUnnamedPeople } from "./engine/npcs.js";   // SNG-431 §1: the pre-namer saves get their names
@@ -182,7 +182,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.15.1";
+const APP_VERSION = "2.15.2";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -10247,6 +10247,22 @@ function applyTurn(turn, resolution, playerWords = null) {
   // it has one; else it falls back to the narration clamp (gm.js's own fallback for a MISSING summary).
   // Reassigned so every downstream read (party beat, sceneTurns, gallery caption) gets the clean string.
   turn.sceneSummary = coerceSceneSummary(turn.sceneSummary, turn.narration);
+  // ⛔ ERIK 2026-09-28: *"why does the GM sometimes spell the name 'Halfvex'?"* Because a beat did, and the last three
+  // beats' FULL narration go back into every prompt (`gm.js`), so one slip is read back and repeated until it IS the
+  // scene's spelling. Measured: "Halfvex" sat in exactly two fields of Loki's save — one turn's narration and the
+  // `lastTurn` copy — while the correct name appeared 91 times, including that same turn's summary, its choice labels
+  // and its own `npcUpdates[0].name`. The model got the STRUCTURED half right and drifted in the prose.
+  // ⛑ So the registry, which is authoritative for a person's name, corrects a ONE-character slip before the narration is
+  // stored or shown — here, for the same reason the coercion above is here: once, before any durable use.
+  // ⚠️ The beat's own `npcUpdates` are passed as the guard, so a person this beat is MINTING is never rewritten into
+  // somebody older who is spelled almost the same. Measured across all 16 saves, this touches 2 strings.
+  {
+    const nameFix = correctKnownNames(turn.narration, character, { content: CONTENT, introduced: (turn.npcUpdates || []).map(u => u?.name) });
+    if (nameFix.fixed.length) {
+      turn.narration = nameFix.text;
+      console.warn(`[names] the narrator respelled ${nameFix.fixed.map(f => `"${f.was}" → "${f.now}" (${f.person})`).join(", ")}`);   // prose-cap-ok: a console diagnostic
+    }
+  }
   // party: publish this beat to the shared scene (fire-and-forget)
   if (sharedScene && turn.sceneSummary) publishPartyBeat(resolution?.action?.label || "acted", resolution?.degree ?? null, turn.sceneSummary);
   // ⛔ SPEC_intent_heard_and_unheard — settled on the LEADER'S turn, because the leader's turn IS the party's decision.
@@ -15210,7 +15226,19 @@ function renderHoldingsTab(manageId = null, tab = null) {
       ${stat("", "Holdings", { text: String(hs.length) },
         `${esc(Object.entries(kinds).map(([k, n]) => `${n} ${k}${n === 1 ? "" : "s"}`).join(" · "))}${conds.length === 1 ? ` · all ${esc(conds[0])}` : ""}`)}
       ${netKnown ? stat("", `Net each pass ${infoDot("hold.pass")}`, { text: money(Math.round(net * 100) / 100), cls: netCls },
-        `${Math.round(inn)} in, ${Math.round(out)} out · a pass ≈ 3 days`,
+        `${Math.round(inn)} in, ${Math.round(out)} out · a pass ≈ 3 days`
+        // ⛔ AND WHY "IN" IS ZERO, WHEN IT IS. A standing run means the keeper holds the stock for the cart instead of
+        // selling it here (SNG-654), so a hold with a route earns nothing AT HOME until the cart comes back — which on a
+        // long road is many passes. Erik read the red number as lost income; the number is right and it had no sentence.
+        + (() => {
+          const held = (() => { try { return heldForRuns(character, { locations: CONTENT.locations || {} }); } catch { return []; } })();
+          if (!held.length) return "";
+          const now = (() => { try { return absoluteWorldDay(); } catch { return null; } })();
+          return `<br><span class="hint">${held.map(r => `${esc(r.name)} is holding ${r.waiting} unit(s) for the run to ${esc(r.toName)}`
+            + `${r.out ? ` — a cart is ${r.out.status === "returning" ? "walking home" : `on the road with ${Object.values(r.out.load || {}).reduce((a, n) => a + (Number(n) || 0), 0)} unit(s)`}`
+              + `${Number.isFinite(r.out.arriveDay) && Number.isFinite(now) ? `, ${Math.max(0, Math.round(r.out.arriveDay - now))} day(s) out` : ""}` : ", and no cart has left yet"}`).join(" · ")}`
+            + ` — it sells nothing here while a run stands. Stop the run on the hold's card and the keeper starts selling again.</span>`;
+        })(),
         "What your whole estate does to your purse each pass — everything it sells and charges, less what it costs to keep") : ""}
       ${stat("", "People at your holds", { text: String(folk) },
         `${kept} kept · ${crew} crew · ${watch} on watch`, "The keeper, the crew and the watch, at every place you hold")}
@@ -15687,6 +15715,18 @@ function renderHoldingsTab(manageId = null, tab = null) {
               <span class="hw-gain">${ids.length ? `${perPass.toFixed(1)} good days a pass${K.per ? ` · ${banked} of ${K.per} banked` : " · while it lasts"}` : ""}</span></div>`;
           }).join("");
           return `<details class="hw"${at.length ? " open" : ""}><summary>Standing work${at.length ? ` — ${at.length} at it, ${esc(String(wage))} ${esc(CONTENT.rules?.economy?.holdStore?.upkeepCurrency || "crystal")} a pass in wages` : ""}</summary>
+            ${cands.length ? "" : `<p class="hint pp-must">⚠️ Nobody here is free to be put to work.${(() => {
+              // ⛔ SAY WHICH RULE EXCLUDED THEM, AND THE WAY OUT. Erik: "I can't assign people to standing work" — on his
+              // save every single person was excluded by one of the three rules below, and the panel drew six job rows
+              // with empty columns and no explanation. An empty state that does not say it is empty reads as a broken
+              // control. ⛑ Counted from the SAME sets the filter uses, never a second guess at them.
+              const side = (() => { try { return jobPoolOf(character, { content: CONTENT, abilityCatalog: fullCatalog(), worldDay: null, rules: CONTENT.rules }).filter(p => p && !p.isYou && p.from === "at your side").length; } catch { return 0; } })();
+              const here = [...new Set([...(Array.isArray(h.garrison) ? h.garrison : []), ...(Array.isArray(h.crew) ? h.crew : []), h.steward].filter(Boolean))].length;
+              const bits = [];
+              if (here) bits.push(`${here} here already ${here === 1 ? "has a post" : "have posts"} — the keeper, the crew and the watch`);
+              if (side) bits.push(`${side} walk at your side rather than living here`);
+              return bits.length ? ` ${bits.join(", and ")}.` : "";
+            })()} Stand somebody down on this card, or add hands, and they can be put to any of these.</p>`}
             <p class="hint">People with no job, put to what the hold needs. They stay here and are nobody else's while they work it, and each is paid a hand's wage a pass, in the money of this place. Scouting, crafting and teaching come with the hold's levels.</p>
             <div class="hw-rows">${rows}</div></details>`;
         })()}

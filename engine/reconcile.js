@@ -21,7 +21,7 @@ import { carriageOf } from "./carriage.js";   // ⛔ step 61: a carriage the one
 import { canRaiseBand, raiseBand } from "./melee.js";   // R49: the fellowship the fiction already named
 import { worldPosForGenerated } from "./worldmap.js";
 import { personName, looksLikeRole } from "./names.js";
-import { sexFromGender, sexUnsaid, normalizeSex, mergePeople} from "./npcs.js";   // ⛔ step 75: Erik's ruling — the sex matches the gender, and gender leads   // ⛔ step 73: everyone already met has the name the world knows them by
+import { sexFromGender, sexUnsaid, normalizeSex, mergePeople, correctKnownNames, knownNameWords } from "./npcs.js";   // ⛔ step 75: Erik's ruling — the sex matches the gender, and gender leads   // ⛔ step 73: everyone already met has the name the world knows them by
 import { grantMartialKit, retiredBaselineIds } from "./martial.js";
 import { applyLadderGrants } from "./ladder.js";
 import { servicedURL } from "./art.js";   // ⛔ step 72: the pictures now ask our own service
@@ -95,6 +95,50 @@ function renameTargets(spec, entry, character, known) {
 // "has this entity seen this step yet" via entity.reconcileVersion.
 
 export const CHARACTER_STEPS = [
+  {
+    version: 90, id: "the-name-the-scene-taught-itself", playerFacing: true,
+    // ⛔ ERIK, PLAYING LOKI (2026-09-28), with a screenshot of ONE beat carrying both spellings: *"why does the GM
+    // sometimes spell the name 'Halfvex'?"*
+    //
+    // ⛑ BECAUSE A BEAT DID, AND THE BEAT BEFORE IT IS IN THE PROMPT. `gm.js` puts the FULL narration of the last three
+    // turns into every prompt, so a slip stored in `activeScene.turns[].narration` is read back and repeated — and
+    // re-stored. Measured: "Halfvex" sits in exactly two fields of his save and they are the same text twice (one turn's
+    // narration and the `lastTurn` copy), while the correct name appears 91 times, INCLUDING that same turn's summary,
+    // its choice labels, and its own `npcUpdates[0].name`. The model wrote the structured half right and drifted in the
+    // prose half of one generation; the scene then taught it to itself.
+    //
+    // ⚠️ THE WRITE DOOR (app.js, beside the sceneSummary coercion) STOPS THE NEXT ONE. This clears the one already in
+    // the window, because otherwise the fix cannot take effect until the drift scrolls out of the prompt on its own.
+    // ⛑ `correctKnownNames` is the same function the write door calls, with the same guards — one character, a shared
+    // opening, never a person this beat is minting, never a word two different people answer to. Across all 16 saves it
+    // touches 2 strings.
+    // ⛔ `apply`, NOT `run`, AND `{ notes: [] }`, NOT `{ note }`. The runner calls `step.apply(entity, ctx)` and reads
+    // `r.notes?.length`. My first cut named the method `run`, so `step.apply` was undefined, calling it threw, the
+    // catch held `reconcileVersion` BELOW this step, and it would have retried forever on every load with its warning
+    // going to a console nobody reads. ⚠️ The third distinct way I have proved a reconcile step against something that
+    // is not the runner — and my own driver hid it, calling `reconcile(clone, {})` so `{}` landed where `kind` goes and
+    // the registry resolved to an EMPTY list. Zero steps ran, and I read that as "the step did nothing".
+    apply(character, ctx = {}) {
+      const scene = character?.activeScene;
+      if (!scene) return {};
+      const introduced = (scene.lastTurn?.npcUpdates || []).map(u => u?.name);
+      const vocab = knownNameWords(character, { content: ctx?.content || null });
+      const fixed = [];
+      const mend = (holder, key) => {
+        const was = holder?.[key];
+        if (typeof was !== "string" || !was) return;
+        const r = correctKnownNames(was, character, { introduced, vocab });
+        if (!r.fixed.length) return;
+        holder[key] = r.text;
+        fixed.push(...r.fixed);
+      };
+      for (const turn of (Array.isArray(scene.turns) ? scene.turns : [])) mend(turn, "narration");
+      mend(scene.lastTurn, "narration");
+      if (!fixed.length) return {};
+      const said = [...new Set(fixed.map(f => `"${f.was}" → ${f.now} (${f.person})`))].join(", ");
+      return { notes: [`The scene had taught itself a misspelling — set right: ${said}.`] };
+    },
+  },
   {
     version: 89, id: "one-person-one-record", playerFacing: true,
     // ✅ SNG-664 §3 — ERIK, PLAYING LOKI (2026-09-28): *"we aren't crisp on our minted people not being duplicated

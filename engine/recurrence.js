@@ -11,6 +11,23 @@ const slug = s => String(s || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").repl
 
 // Default renown thresholds per band NAME (an arc may override via recurrence.bandThresholds).
 const DEFAULT_THRESHOLDS = { unknown: 0, known: 6, renowned: 16, legendary: 30 };
+/* ⛑ NOT EXPORTED, ON PURPOSE. A second reader appeared (`commandSlots`, for Erik's "people follow someone they have
+ * heard of") and the temptation was to export this table for it — but the reader it needs is `renownBandOf` just below,
+ * in this same file, so the numbers never leave. ⚠️ The wiring audit caught the export as reachable only from a test,
+ * which was exactly right: a constant with no production caller is a door onto nothing. */
+/** ⛔ WHAT BAND THIS CHARACTER STANDS IN, FROM THEIR OWN DEEDS. `character.renownBand` is read in thirteen places and
+ *  WRITTEN BY NOTHING — 0 of 16 live saves carry it — so every reader of it has been answering "unknown" forever. The
+ *  score was always there; only the field was missing. PURE. */
+export function renownBandOf(character, { thresholds = null } = {}) {
+  const score = renownScore(character);
+  const t = thresholds && typeof thresholds === "object" ? thresholds : DEFAULT_THRESHOLDS;
+  let band = null, best = -Infinity;
+  for (const [name, at] of Object.entries(t)) {
+    const n = Number(at);
+    if (Number.isFinite(n) && score >= n && n >= best) { best = n; band = name; }
+  }
+  return band;
+}
 // Fallback thresholds by band INDEX when a band name isn't in the default map (reusable pools).
 const INDEX_THRESHOLDS = [0, 6, 16, 30, 48];
 

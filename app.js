@@ -92,7 +92,7 @@ import { resolveWaygateTransit, routeGmMoveTo, isNetworkGate, networkGatesFrom, 
 import { routeBetween, routeLine, twoWayRoads } from "./engine/journey.js";
 import { planJob, suggestTeam, jobPoolOf, jobRouteOf, jobCost, jobWages, jobEffects, sayEffects, settleDueJobs, degreeWord, jobOpposition, mainNeedOf, jobCraftsOf, bestCraftFor, OUTCOMES as JOB_OUTCOMES, errandOdds, detachForJob, jobPersonFor, workCraftsOf, workDayChance, workHeads, bandTeamOf, sendBandOnMission, bandMissionParty } from "./engine/jobs.js";   // CCODE-420 · CCODE-428 · CCODE-431
 import { ensureJobs, postJob, sendOnJob, awayOnJob, untoldJobs, markJobsTold, dropJob, detachedFrom } from "./engine/jobstate.js";   // CCODE-420 · CCODE-431
-import { sendCaravan, caravansOf, storeExits, setRoute, clearRoute } from "./engine/caravan.js";   // R49: a caravan is a delegate + a route + a load   // SNG-331 §1 / SNG-386 §4.4: two named options over roads + gates // SNG-148: waygates — map control routes named/hub; GM offer via the registry row. SNG-243 §4: the gate network
+import { sendCaravan, caravansOf, storeExits, setRoute, clearRoute, hireCompany, routeCompany } from "./engine/caravan.js";   // R49: a caravan is a delegate + a route + a load   // SNG-331 §1 / SNG-386 §4.4: two named options over roads + gates // SNG-148: waygates — map control routes named/hub; GM offer via the registry row. SNG-243 §4: the gate network
 import { skillDetail, npcDetail, itemDetail, relationshipsParagraph, craftRollsLine, craftRollsShort } from "./engine/entityDetail.js";
 import { wholeNameFor, learnWholeName } from "./engine/names.js";   // ⛔ SNG-643 §5 (C17): a whole name is shown only when this character may see it
 import { collapseScenePresence, canonicalPersonId, personArtSeed, applyNpcUpdates, findExistingNpc, genderUnsaid, sexUnsaid, SEX_VALUES, sexFromGender, sexGenderAgree, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier, backfillNpcGender, reconcileGeneratedNpcWithMeet, npcFearsForGM, npcReactionsForGM, repairUnnamedPeople } from "./engine/npcs.js";   // SNG-431 §1: the pre-namer saves get their names
@@ -182,7 +182,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.14.13";
+const APP_VERSION = "2.15.0";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -14718,6 +14718,20 @@ function wireHoldingOffers() {
     if (!r.ok) { console.warn("[route] refused:", r.why); return; }   // prose-cap-ok: a console diagnostic
     saveCharacter(character); again();
   };
+  // ✅ SNG-652 §6 / C1 — HIRE THEM. Its own door rather than `data-route-set`'s, because a hired run needs the
+  // company on the route (`by`/`cut`/`guards`) for the road and the arrival to read, and because the destination is the
+  // THIRD segment of a `hire:<co>:<place>` id — taking the second would hand `setRoute` a company id.
+  // ⛔ AND THE REFUSAL IS SAID. `hireCompany` answers in prose ("the Hundred-Market Carters does not carry into the
+  // Palelands"); its sibling above sends its refusal to `console.warn`, which the player never sees.
+  for (const btn of app.querySelectorAll("[data-route-hire]")) btn.onclick = () => {
+    const [holdId, companyId, toId] = String(btn.dataset.routeHire || "").split("|");
+    if (!holdId || !companyId || !toId) return;
+    const r = hireCompany(character, holdId, { companyId, toId, companies: CONTENT.tradeCompanies || [],
+      locations: CONTENT.locations || {}, cfg: holdCfgNow(), day: absoluteWorldDay() });
+    if (!r.ok) { alert(r.why); return; }
+    queueHoldingEvent(character, r.said);
+    saveCharacter(character); again();
+  };
   for (const btn of app.querySelectorAll("[data-route-stop]")) btn.onclick = () => {
     clearRoute(character, String(btn.dataset.routeStop || ""));
     saveCharacter(character); again();
@@ -15238,8 +15252,10 @@ function renderHoldingsTab(manageId = null, tab = null) {
           let ex = null, rk = null;
           // ⛔ SNG-654 A — WITH THE DANGER WHERE THE STOCK STANDS, and the same people bag the tick uses. Without them the
           // waiting stock reads as safe and every long haul looks better than it is.
+          // ✅ SNG-652 §6 / C1 — AND THE COMPANIES, or the card computes no hire rows and the whole feature is
+          // unreachable from the game. Measured before this line existed: 0 hire rows on 4 holds.
           try { ex = storeExits(character, h, { powers: CONTENT.powers || [], rules: CONTENT.rules, cfg: sCfg, economy: econ, locations: CONTENT.locations || {}, regionId: reg,
-            dangerLevel: Number(CONTENT.locations?.[h.locationId]?.dangerLevel) || 0,
+            dangerLevel: Number(CONTENT.locations?.[h.locationId]?.dangerLevel) || 0, companies: CONTENT.tradeCompanies || [],
             people: holdPeople, npcCfg: npcSheetCfg, day: absoluteWorldDay() }); } catch { ex = null; }
           // ✅ SNG-652 §6 — WITH `rules`, so the readout can carry the detection term §7's watch now provides.
           try { rk = raidRisk(character, h, { cfg: sCfg, economy: econ, regionId: reg,
@@ -15248,14 +15264,24 @@ function renderHoldingsTab(manageId = null, tab = null) {
             npcCfg: npcSheetCfg, day: absoluteWorldDay() }); } catch { rk = null; }
           // ✅ SNG-654 §4 (Erik: "yes on a-d") — THE COLUMN THAT CHANGED IS "when": a route's clock is not how long the
           // pile takes to sell, it is WHEN THE FIRST COIN COMES BACK, and after that it pays every pass.
-          const isHaul = (r) => String(r.id).startsWith("caravan") || String(r.id).startsWith("company");
+          // ⛔ AND A HIRED RUN IS A HAUL. Without `hire:` here every hired row rendered in the sell-here column
+          // ("3 passes" instead of "first coin in 2 passes") and fell OUTSIDE the branch that draws the run button — a
+          // row the player could read with no door to take it.
+          const isHaul = (r) => String(r.id).startsWith("caravan") || String(r.id).startsWith("company") || String(r.id).startsWith("hire:");
           const standing = h.route?.toId ? (CONTENT.locations?.[h.route.toId]?.name || h.route.toId) : null;
           const cmp = ex && ex.rows.length > 1 ? `<div class="hs-cmp"><span class="hs-lbl">Moving the store</span>
             <table class="hs-table"><tr><th>how</th><th>gets</th><th>when</th><th>a pass</th></tr>
             ${ex.rows.map(r => `<tr${ex.best && r.id === ex.best.id ? ` class="hs-best"` : ""}><td>${esc(r.who)}${isHaul(r) && r.where ? ` <span class="hint">→ ${esc(r.where)}</span>` : ""}${r.quote ? ` <span class="hint">(a quote — no company is hired yet)</span>` : ""}${r.speedMult > 1 ? ` <span class="hint">· ${esc(r.speedLabel)}, ×${r.speedMult}</span>` : ""}${r.runs ? ` <span class="hint">· walked ${r.runs}×, ${Math.round((1 - r.hazardMult) * 100)}% less trouble</span>` : ""}</td>
-              <td>${r.net}</td><td>${isHaul(r) ? `first coin in ${r.firstCoin} pass${r.firstCoin === 1 ? "" : "es"}` : r.passes <= 1 ? "now" : `${r.passes} passes`}${r.risk ? ` <span class="hint">· danger ${r.risk}</span>` : ""}</td><td><strong>${r.perPass}</strong>${isHaul(r) && !r.quote ? ` <button class="link-btn" data-route-set="${esc(h.id)}|${esc(String(r.id).split(":")[1] || "")}" title="Set a standing run there — each departure carries what the hold has made since the last one, and the keeper holds the stock back for the cart">${standing ? "run this instead" : "run this"}</button>` : ""}</td></tr>`).join("")}</table>
+              <td>${r.net}</td><td>${isHaul(r) ? `first coin in ${r.firstCoin} pass${r.firstCoin === 1 ? "" : "es"}` : r.passes <= 1 ? "now" : `${r.passes} passes`}${r.risk ? ` <span class="hint">· danger ${r.risk}</span>` : ""}</td><td><strong>${r.perPass}</strong>${r.company ? ` <button class="link-btn" data-route-hire="${esc(h.id)}|${esc(r.company.id)}|${esc(String(r.id).split(":").slice(2).join(":"))}" title="Send word and hire them — their people walk it, yours stay home, and they take their cut of what the load sells for">${r.hired ? "they carry it" : standing ? "hire them instead" : "hire them"}</button>` : isHaul(r) && !r.quote ? ` <button class="link-btn" data-route-set="${esc(h.id)}|${esc(String(r.id).split(":")[1] || "")}" title="Set a standing run there — each departure carries what the hold has made since the last one, and the keeper holds the stock back for the cart">${standing ? "run this instead" : "run this"}</button>` : ""}</td></tr>`).join("")}</table>
             ${ex.best ? `<div class="hint">Best per pass: <strong>${esc(ex.best.who)}</strong> — ${esc(ex.best.said)}</div>` : ""}
-            ${standing ? `<div class="hint">A run stands to <strong>${esc(standing)}</strong>${h.route.runs ? `, walked ${h.route.runs} time${h.route.runs === 1 ? "" : "s"}` : ", not yet walked"} — the keeper holds the stock for the cart rather than selling it here. <button class="link-btn" data-route-stop="${esc(h.id)}">Stop the run</button></div>` : ""}
+            ${standing ? (() => {
+              // ✅ SNG-652 §6 / C1 — WHO IS WALKING IT. The route carries `by`/`cut`/`guards`, so the line that says a
+              // run stands can say whose people they are — and a hired run explicitly does NOT take your crew.
+              const rco = routeCompany(h, CONTENT.tradeCompanies || []);
+              return `<div class="hint">A run stands to <strong>${esc(standing)}</strong>${h.route.runs ? `, walked ${h.route.runs} time${h.route.runs === 1 ? "" : "s"}` : ", not yet walked"} — ${rco
+                ? `<strong>${esc(rco.name)}</strong> carry it for ${Math.round((Number(h.route.cut) || 0) * 100)}% of what it sells for, with ${Math.max(0, Number(h.route.guards) || 0)} of their guards walking, and your people stay home.`
+                : "the keeper holds the stock for the cart rather than selling it here."} <button class="link-btn" data-route-stop="${esc(h.id)}">Stop the run</button></div>`;
+            })() : ""}
             ${ex.waiting && ex.waiting.cost > 0 ? `<div class="hint">What is in the shed already risks <strong>${ex.waiting.cost}</strong> a pass — ${ex.waiting.units} unit(s) standing, ${Math.round(ex.waiting.chance * 100)}% a raid comes.</div>` : ""}
             ${ex.why ? `<div class="hint">${esc(ex.why)}</div>` : ""}
             ${(() => {

@@ -539,6 +539,9 @@ export async function loadContent() {
   // change and ran on a world with no powers in it before this line existed — which is the order Aevi
   // asked for: "content first would be the no-reader shape this project keeps closing."
   const powersP = jSettled((valley.provides.powers || []).map(valleyPath));
+  // ✅ SNG-652 §6 / C1 — THE CARRIERS YOU CAN HIRE. `jSettled` for the same reason `powers` uses it: an optional
+  // collection a pack may not have must not take the whole load down with it.
+  const tradeCompaniesP = jSettled((valley.provides.trade_companies || []).map(valleyPath));
   const traditionMotivationsP = jSettled((valley.provides.tradition_motivations || []).map(valleyPath)); // SNG-229 §2c
   const npcInteriorityP = jSettled((valley.provides.npc_interiority || []).map(valleyPath)); // SNG-233 §2a
 
@@ -694,6 +697,14 @@ export async function loadContent() {
     if (r.status !== "fulfilled") continue;
     const list = Array.isArray(r.value?.powers) ? r.value.powers : (Array.isArray(r.value) ? r.value : []);
     for (const p of list) if (p && p.id) powers.push(p);
+  }
+  // ✅ C1 — FLATTENED THE SAME WAY, for the same reason: every reader asks "who can carry out of here" and none of
+  // them cares which file the company was authored in.
+  const tradeCompanies = [];
+  for (const r of await tradeCompaniesP) {
+    if (r.status !== "fulfilled") continue;
+    const list = Array.isArray(r.value?.companies) ? r.value.companies : (Array.isArray(r.value) ? r.value : []);
+    for (const c of list) if (c && c.id) tradeCompanies.push(c);
   }
   if (randomEncounters && Array.isArray(bestiary.roster) && bestiary.roster.length) {
     const monsters = bestiaryEncounters(bestiary);
@@ -946,7 +957,7 @@ export async function loadContent() {
   // passes is a dial nobody reads. ⚠ `tierFromRole` returns null without it, so nothing moves until it lands.
   if (tierSignalsDoc && rules?.npcStanding) rules.npcStanding.tierSignals = tierSignalsDoc;
   if (tierRarityDoc && rules?.npcStanding) rules.npcStanding.tierRarity = tierRarityDoc;   // §2.1: the target pyramid, beside the role signals
-  const content = { craftMechanics, damageFamilies, spectrums, rules, foothills: foothillsDoc, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, challengerPools, events, companions, encounters, randomEncounters, lore, region, substrate, greaterArcs, sovereignMarks: sovereignMarksDoc || null, sovereignSeats: sovereignSeatsDoc || null, genSchemas, legends, traditions, traditionIndex, prologue, origins, backgrounds, quests, traditionArcs, npcQuests, regions, accords, helpText, substrateModel, powerSources: powerSourcesDoc || null, romanceGuidance, skillBattle, functionVocabulary, worldClock, schools, classArchetypes, repairPanelManifest, trait_readouts: traitReadoutsDoc?.readouts || traitReadoutsDoc || {}, traditionVisualAesthetics: traditionAestheticsDoc?.traditions || {}, visualAesthetics: traditionAestheticsDoc || {},   /* SNG-435 §C3: the WHOLE doc — `powerSystems` was flattened away at load */  bestiary, powers, traditionMotivations, npcInteriority, encounterFrameContent: frameContentDoc || {}, frameKinds: frameKindsDoc?.frameKinds || {}, receiptLine: receiptLineDoc || {}, consumerContract: consumerMapDoc || { contentTypes: {} }, moveHints: moveHintsDoc || { byKind: {}, default: {} }, ribbonCopy: ribbonCopyDoc || {}, earnedPowerGuidance: earnedPowerDoc || { bands: {} }, theVeil: theVeilDoc || null, regionRules: regionsDoc || null,   /* § the dials beside `regions` */ powerCosmology: powerCosmologyDoc || null, startingLocation: valley.startingLocation };
+  const content = { craftMechanics, damageFamilies, spectrums, rules, foothills: foothillsDoc, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, challengerPools, events, companions, encounters, randomEncounters, lore, region, substrate, greaterArcs, sovereignMarks: sovereignMarksDoc || null, sovereignSeats: sovereignSeatsDoc || null, genSchemas, legends, traditions, traditionIndex, prologue, origins, backgrounds, quests, traditionArcs, npcQuests, regions, accords, helpText, substrateModel, powerSources: powerSourcesDoc || null, romanceGuidance, skillBattle, functionVocabulary, worldClock, schools, classArchetypes, repairPanelManifest, trait_readouts: traitReadoutsDoc?.readouts || traitReadoutsDoc || {}, traditionVisualAesthetics: traditionAestheticsDoc?.traditions || {}, visualAesthetics: traditionAestheticsDoc || {},   /* SNG-435 §C3: the WHOLE doc — `powerSystems` was flattened away at load */  bestiary, powers, tradeCompanies, traditionMotivations, npcInteriority, encounterFrameContent: frameContentDoc || {}, frameKinds: frameKindsDoc?.frameKinds || {}, receiptLine: receiptLineDoc || {}, consumerContract: consumerMapDoc || { contentTypes: {} }, moveHints: moveHintsDoc || { byKind: {}, default: {} }, ribbonCopy: ribbonCopyDoc || {}, earnedPowerGuidance: earnedPowerDoc || { bands: {} }, theVeil: theVeilDoc || null, regionRules: regionsDoc || null,   /* § the dials beside `regions` */ powerCosmology: powerCosmologyDoc || null, startingLocation: valley.startingLocation };
   // SNG-022: bring every loaded record up to current (derive missing additive fields,
   // flag dangling cross-refs). In-memory only — Pages files are static.
   try { reconcileContent(content); } catch (err) { console.warn("[loadContent] reconcile skipped:", err.message); }

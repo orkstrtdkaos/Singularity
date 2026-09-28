@@ -10644,9 +10644,30 @@ console.log("\n── §100 · the numbers are read, and a load on the road can 
       return plain && wanted && wanted.each > plain.each * 1.5;
     })(),
     `baseline region: ${ordinaryRegion || "(all regions are priced)"}`);
+  // ⛔ THE CLAIM, NOT THE SPELLING OF A LOCAL. This pinned `earnAt(character, total, …)` and went red the day the
+  // arrival started taking a hired company's cut before the purse — `total` became `yours`, which is the FIX, not a
+  // regression. What is actually being asserted is that the arrival's one door into the purse is `earnAt`, carrying the
+  // region and the economy so the money is the place's, and that caravan.js never reaches `credit` itself.
+  const c100src = rd("engine/caravan.js");
   check("§100: …and the coin comes through `credit`, the purse's one door in — trade MOVES coin, never mints it (through `earnAt`, CCODE-437)",
-    /earnAt\(character, total, regionId, economy, \{ origin: "traded" \}\)/.test(rd("engine/caravan.js"))
+    /earnAt\(character, \w+, regionId, economy, \{ origin: "traded" \}\)/.test(c100src)
+    && !/[^.\w]credit\(/.test(c100src.replace(/^\s*(\/\/|\*).*$/gm, ""))
     && /credit\(character, here\.pays\.currency, amount, \{ origin, regionId: here\.pays\.regionId \}\)/.test(rd("engine/money.js")));
+  // ⛑ …AND THE BEHAVIOURAL HALF THE PROSE WAS ALREADY CLAIMING: what the purse gains is what the receipt says, and a
+  // hired company's cut is NOT credited to the player. Two gates above assert the source shape; this one spends the coin.
+  {
+    const cutCh = mk();
+    cutCh.purse = { crystal: 0, coin: 0, paper: 0, marks: 0, scrip: {} };
+    const sC = CV100.sendCaravan(cutCh, { holdingId: "h", toId: "the_crossing", carriers: [], locations: locs100, cfg: cfg100, day: 0,
+      company: { id: "co", cut: 0.25, guards: 4, knowsGates: false } });
+    const arr = CV100.arriveCaravan(cutCh, sC.caravan, { locations: locs100, cfg: cfg100, economy: econ100, day: 1 });
+    check("§100: ⛑ …and a hired company's cut never reaches the purse — the gross is split BEFORE `earnAt`, not after",
+      arr.ok && arr.gross > 0 && arr.company?.took > 0
+      && arr.crystal === arr.gross - arr.company.took
+      && Math.abs(arr.company.took - Math.round(arr.gross * 0.25)) < 1
+      && arr.company.tookSaid,
+      JSON.stringify({ gross: arr?.gross, yours: arr?.crystal, theirs: arr?.company?.took, said: arr?.company?.tookSaid }));
+  }
 
   // ⛔ ON THE ROAD OR AT THE HOLD, NEVER BOTH — a load left on the store could be sold twice.
   const dbl = mk();
@@ -24839,7 +24860,7 @@ console.log("\n── §316 · money by place — what a place pays in, what it 
   check("§316: ⛔ NO FLOW HARDCODES CRYSTAL ANY MORE — the keep, a keeper's sale, runner fees, a build, a store sold, quartering, a caravan, a job, a call and a trade between holds all pay through `payAt` and are paid through `earnAt`",
     hard.length === 0
     && /const r = payAt\(character, up, regionId, economy\);/.test(flows[0][1]) && /earnAt\(character, earned, regionId, economy, \{ origin: "traded" \}\)/.test(flows[0][1])
-    && /const r = payAt\(character, q\.cost, regionId, economy\);/.test(flows[0][1]) && /earnAt\(character, total, regionId, economy, \{ origin: "traded" \}\)/.test(flows[1][1])
+    && /const r = payAt\(character, q\.cost, regionId, economy\);/.test(flows[0][1]) && /earnAt\(character, \w+, regionId, economy, \{ origin: "traded" \}\)/.test(flows[1][1])
     && /const e = earnAt\(character, fx\.crystal, reg437, eco437, \{ origin: "reward" \}\)/.test(flows[2][1]) && /const paid = payAt\(buyer, total, regionId, economy\);/.test(flows[3][1])
     && /const paid = payAt\(character, cost\.total, region, eco437/.test(flows[4][1]) && /if \(due442s > 0\) payAt\(character, due442s, jobReg2/.test(flows[4][1]),
     hard.join(" | "));
@@ -32287,6 +32308,253 @@ console.log("\n── §387 · the market charges for the right to sell ──")
         && far387.stall < on.stall && on.stall === on.market.fee
         && far387.stall === Math.round((far387.market.fee / far387.wait.perDeparture) * 10) / 10;
     })(), `off ${far387.stall} a pass · on ${far387.market?.fee} a pass`);
+}
+
+/* ══════════ §388 · SNG-652 §6 / C1 — THE CARRIERS YOU CAN HIRE ══════════ */
+// ⛑ AEVI §6: *"a hired trade company: they take a cut, they carry the road risk and bring their own guards, and your
+// people stay home."* ⛔ AND §6b: *"every way of moving the whole store, in one table."*
+//
+// ⚠️ THIS SECTION'S SPINE IS ONE CLAIM — THE CARD AND THE CART WALK THE SAME ROAD. C1 broke that twice on the day it was
+// built. First by 134 days: `storeExits` routes a gate-knowing company through the public network (`gatesUsableBy(null)`)
+// and `sendCaravan` resolved the route with `traveller: character`, so the card quoted 1.6 days through a gate Silas does
+// not know and the news said 135.3. Then by exactly ×2: Erik's lever-C speed table lived in `carriageFor`, whose only
+// caller was the card, so every cart went on foot at the quoted price of animals. ⛑ Both are gated by DRIVING BOTH SIDES
+// and comparing — never by pinning either one's source, which is what let them drift apart in the first place.
+console.log("\n── §388 · the carriers you can hire ──");
+{
+  const CV388 = await import("../engine/caravan.js");
+  const { loadContentHeadless: lch388 } = await import("./headless_content.mjs");
+  const C388 = await lch388();
+  const R388 = C388.rules;
+  const cfg388 = { ...R388.economy.holdStore, features: R388.economy.holdFeatures || null };
+  const L388 = C388.locations;
+  const CO388 = Object.values(C388.tradeCompanies || {});
+
+  /* ---- 1 · ⛔ THE FOUR DOORS: authored → registered → loaded → READ ---- */
+  check("§388: ⛔ FOUR COMPANIES ARE AUTHORED, LOADED AND CARRY THEIR OWN TERMS — a cut, guards, a depot, and whether they use the gates",
+    CO388.length === 4
+    && CO388.every(c => c.id && c.name && Number(c.cut) > 0 && Number(c.cut) < 1 && Number(c.guards) > 0
+      && (c.operatesFrom || []).length && (c.operatesFrom || []).every(p => L388[p]) && typeof c.knowsGates === "boolean"),
+    CO388.map(c => `${c.id} ${c.cut}/${c.guards}g${c.knowsGates ? " gates" : ""}`).join(" · "));
+  // ⛔ AND THE DOOR THAT WAS SHUT: `storeExits` takes `companies`, and without it there is not one hire row anywhere.
+  // Measured before app.js passed it: 0 hire rows on 4 holds with stock — the whole of C1 unreachable from the game.
+  // ⚠️ THE SHAPE OF THE REAL HOLD AT MILLBROOK — an `enterprise`, thriving, with a `market` feature. A hold that
+  // makes nothing in a pass has an empty basket, `routeValue` refuses every haul row with "this hold makes nothing in a
+  // pass", and then a card with NO rows agrees with every cart about every road. ⛑ §387 wrote this same note ten
+  // sections ago about the same mistake; the row-count check below is here so it cannot pass over an empty list again.
+  const hold388 = () => ({ id: "h", name: "The Test Hold", kind: "enterprise", locationId: "millbrook", condition: "thriving",
+    store: { raw_material: 12 }, steward: "s", crew: [], features: [{ kind: "market", count: 1 }], history: [] });
+  const char388 = () => ({ id: "c388", name: "T", clock: { day: 40 }, worldState: {}, holdings: [hold388()],
+    npcRegistry: { s: { id: "s", name: "Keeper", status: "active" } },
+    purse: { crystal: 0, coin: 0, paper: 0, marks: 0, scrip: {} } });
+  const exits388 = (extra = {}) => {
+    const ch = char388();
+    return { ch, ex: CV388.storeExits(ch, ch.holdings[0], { cfg: cfg388, economy: R388.economy, locations: L388,
+      regionId: L388.millbrook?.regionId || null, powers: C388.powers, rules: R388, ...extra }) };
+  };
+  const noCo = exits388().ex, withCo = exits388({ companies: CO388 }).ex;
+  check("§388: ⛔ …AND THE CARD ONLY OFFERS THEM WHEN IT IS HANDED THEM — no `companies`, no hire rows, which is how this shipped unreachable once",
+    noCo.rows.filter(r => String(r.id).startsWith("hire:")).length === 0
+    && withCo.rows.filter(r => String(r.id).startsWith("hire:")).length > 0
+    && noCo.rows.filter(r => String(r.id).startsWith("caravan:")).length > 0,   // ⛑ and the fixture DOES make something, or nothing below compares anything
+    `${noCo.rows.length} rows without · ${withCo.rows.length} with, ${withCo.rows.filter(r => String(r.id).startsWith("hire:")).length} of them hires`);
+
+  /* ---- 2 · ⛔ THE CARD AND THE CART WALK THE SAME ROAD ---- */
+  // ⛑ DRIVEN ON BOTH SIDES. For every hire row the card prices, `sendCaravan` is asked for the same journey with the same
+  // company record, and the days must match. ⚠️ This is the gate that would have caught BOTH defects: the traveller one
+  // (134 days apart) and the carriage one (exactly ×2 apart).
+  const agree388 = [];
+  for (const r of withCo.rows) {
+    if (!r.value || !(r.value.roadDays > 0)) continue;
+    const dest = String(r.id).split(":").pop();
+    if (!L388[dest]) continue;
+    const ch2 = char388();
+    const byCo = r.company ? { id: r.company.id, cut: r.company.cut, guards: r.company.guards, knowsGates: !!r.company.knowsGates } : null;
+    const sent = CV388.sendCaravan(ch2, { holdingId: "h", toId: dest, carriers: [], locations: L388, cfg: cfg388,
+      day: 40, traveller: ch2, company: byCo });
+    if (!sent.ok) continue;
+    agree388.push({ id: r.id, card: r.value.roadDays, cart: sent.caravan.days, mult: r.value.speedMult, hired: !!byCo });
+  }
+  check("§388: ⛔ THE CARD AND THE CART WALK THE SAME ROAD — every priced row, driven on both sides, to the tenth of a day",
+    agree388.length >= 4 && agree388.some(a => a.hired) && agree388.every(a => Math.abs(a.card - a.cart) < 0.15),
+    agree388.map(a => `${a.id.slice(0, 26)} ${a.card}/${a.cart}`).join(" · "));
+  // ⛔ AND THE TWO REASONS IT DID NOT, each one asserted as the MECHANISM rather than as a number.
+  check("§388: ⛔ …because a company that knows the gates walks the GATES' road, not the player's — a gate Silas cannot use is one the porters can",
+    (() => {
+      const gateCo = CO388.find(c => c.knowsGates), footCo = CO388.find(c => !c.knowsGates);
+      if (!gateCo || !footCo) return false;
+      const ch2 = char388();
+      const g = CV388.sendCaravan(ch2, { holdingId: "h", toId: "tier_seven_gate_yard", carriers: [], locations: L388,
+        cfg: cfg388, day: 40, traveller: ch2, company: { id: gateCo.id, cut: gateCo.cut, guards: gateCo.guards, knowsGates: true } });
+      const ch3 = char388();
+      const f = CV388.sendCaravan(ch3, { holdingId: "h", toId: "tier_seven_gate_yard", carriers: [], locations: L388,
+        cfg: cfg388, day: 40, traveller: ch3, company: { id: footCo.id, cut: footCo.cut, guards: footCo.guards, knowsGates: false } });
+      // the gate-knower takes the gate; the gate-blind one walks, and walking is very much longer
+      return g.ok && f.ok && g.caravan.routeKind === "gate" && f.caravan.routeKind !== "gate" && f.caravan.days > g.caravan.days * 10;
+    })());
+  check("§388: ⛔ …and ERIK'S RULED SPEED IS WALKED, not merely quoted — `carriageFor` had ONE caller, the card, so every cart went on foot at the price of animals",
+    (() => {
+      const ch2 = char388();
+      const s = CV388.sendCaravan(ch2, { holdingId: "h", toId: "plainstead", carriers: [], locations: L388, cfg: cfg388,
+        day: 40, traveller: ch2, company: { id: "x", cut: 0.2, guards: 3, knowsGates: false } });
+      const ch3 = char388();
+      const own = CV388.sendCaravan(ch3, { holdingId: "h", toId: "plainstead", carriers: [], locations: L388, cfg: cfg388, day: 40, traveller: ch3 });
+      // the SAME road, walked at two speeds, and the raw road is kept beside the walked one so nothing has to re-derive it
+      return s.ok && own.ok && s.caravan.roadDays === own.caravan.roadDays
+        && s.caravan.carriage.mult === 2 && own.caravan.carriage.mult === 1
+        && Math.abs(s.caravan.days - own.caravan.days / 2) < 0.15
+        && s.caravan.arriveDay === Math.round(40 + s.caravan.days);
+    })());
+  // ⚠️ AND THE RULE HAS ALMOST NO POPULATION YET, which is why it shipped unnoticed: every hold in the world carries ×1.
+  // ⛔ Gated as a claim about the READER, not about the count — it must stay true the day Aevi authors a stable.
+  check("§388: ⚠️ …and the table's other rungs are LIVE BUT UNPOPULATED — a hold with a stable would go ×2 today, and not one hold has one",
+    (() => {
+      const bare = CV388.carriageFor(char388(), hold388(), { toId: "plainstead", locations: L388, cfg: cfg388 });
+      const stabled = CV388.carriageFor(char388(), { ...hold388(), features: [{ kind: "stable", name: "a stable" }] },
+        { toId: "plainstead", locations: L388, cfg: cfg388 });
+      return bare.mult === 1 && stabled.mult > 1;
+    })());
+
+  /* ---- 3 · ⛔ WHO WILL CARRY WHERE — `reaches` gates BOTH ends, and water is water ---- */
+  const near388 = CV388.companiesFor(char388(), hold388(), { companies: CO388, locations: L388, cfg: cfg388 });
+  check("§388: ⛔ `reaches` GATES BOTH ENDS — absent means anywhere, a named list excludes a region, and an EMPTY list means nowhere rather than everywhere",
+    (() => {
+      const open = CO388.find(c => !Array.isArray(c.reaches));
+      const named = CO388.find(c => Array.isArray(c.reaches) && c.reaches.length);
+      if (!open || !named) return false;
+      const outside = Object.values(L388).find(l => l?.regionId && !named.reaches.includes(l.regionId));
+      return CV388.companyReaches(open, "plainstead", { locations: L388, cfg: cfg388 })
+        && !CV388.companyReaches(named, outside.id, { locations: L388, cfg: cfg388 })
+        && !CV388.companyReaches({ ...open, reaches: [] }, "plainstead", { locations: L388, cfg: cfg388 });
+    })());
+  check("§388: ⛑ …and a water company goes where WATER goes — `water: true` was authored and read by nothing, so the lighters offered to carry a load 125 days over dry ground",
+    (() => {
+      const wet = CO388.find(c => c.water);
+      if (!wet) return false;
+      const tags = (id) => (L388[id]?.tags || []).map(String);
+      const dry = Object.keys(L388).find(id => L388[id]?.regionId && !tags(id).some(x => /water|river|harbour|harbor|riverside|coast|wharf/i.test(x)));
+      return CV388.companyReaches(wet, "millbrook", { locations: L388, cfg: cfg388 })
+        && !CV388.companyReaches(wet, dry, { locations: L388, cfg: cfg388 });
+    })(), `wet company: ${CO388.find(c => c.water)?.id}`);
+
+  /* ---- 4 · ⛔ THE ROW IS AN OFFER WITH A WORKING DOOR ---- */
+  // ⛔ AND THE DOOR IS WHERE C1 NEARLY SHIPPED A DEAD BUTTON. The card's own `data-route-set` takes the SECOND segment of
+  // a row id, which on `hire:<company>:<place>` is the COMPANY — so the button would have handed `setRoute` a company id
+  // and `setRoute` would have answered "nowhere by that name" into a `console.warn` no player ever sees.
+  const hireRow = withCo.rows.find(r => r.company);
+  check("§388: ⛔ A HIRE ROW'S ID CARRIES THE COMPANY AND THE PLACE, in that order, and the third segment is a REAL place",
+    !!hireRow && String(hireRow.id).split(":").length === 3
+    && String(hireRow.id).split(":")[1] === hireRow.company.id
+    && !!L388[String(hireRow.id).split(":")[2]]
+    && String(hireRow.id).split(":")[1] !== String(hireRow.id).split(":")[2],
+    hireRow?.id);
+  {
+    const { ch } = exits388({ companies: CO388 });
+    const co = hireRow.company.id, to = String(hireRow.id).split(":")[2];
+    const hr = CV388.hireCompany(ch, "h", { companyId: co, toId: to, companies: CO388, locations: L388, cfg: cfg388, day: 40 });
+    check("§388: ⛔ HIRING THEM PUTS THEIR TERMS ON THE ROUTE — the cut, the guards and whether they use the gates, so the road and the arrival read ONE record",
+      hr.ok && ch.holdings[0].route?.by === co && ch.holdings[0].route?.toId === to
+      && ch.holdings[0].route.cut === hireRow.company.cut
+      && ch.holdings[0].route.guards === hireRow.company.guards
+      && ch.holdings[0].route.knowsGates === !!hireRow.company.knowsGates
+      && (ch.holdings[0].route.crew || []).length === 0,
+      JSON.stringify(ch.holdings[0].route));
+    check("§388: ⛑ …and the card then says which row is the one they walk, so the standing run is visible in the comparison it was chosen from",
+      (() => {
+        const again = CV388.storeExits(ch, ch.holdings[0], { cfg: cfg388, economy: R388.economy, locations: L388,
+          regionId: L388.millbrook?.regionId || null, powers: C388.powers, rules: R388, companies: CO388 });
+        const mine = again.rows.filter(r => r.hired);
+        return mine.length === 1 && mine[0].id === hireRow.id && CV388.routeCompany(ch.holdings[0], CO388)?.id === co;
+      })());
+    // ⛔ AND THE REFUSAL IS PROSE A PLAYER CAN ACT ON, because its sibling button sends its refusal to the console.
+    const bad = CV388.hireCompany(ch, "h", { companyId: "company_of_nowhere", toId: to, companies: CO388, locations: L388, cfg: cfg388, day: 40 });
+    const far = (() => {
+      const named = CO388.find(c => Array.isArray(c.reaches) && c.reaches.length);
+      const outside = Object.values(L388).find(l => l?.regionId && !named.reaches.includes(l.regionId));
+      return CV388.hireCompany(ch, "h", { companyId: named.id, toId: outside.id, companies: CO388, locations: L388, cfg: cfg388, day: 40 });
+    })();
+    check("§388: ⛔ …and a refusal SAYS WHY, in words — a button whose only failure path is a console line is a dead button",
+      bad.ok === false && /no company by that name/.test(bad.why)
+      && far.ok === false && /does not (carry into|work out of)/.test(far.why),
+      `${bad.why} | ${far.why}`);
+  }
+
+  /* ---- 5 · ⛔ THE TABLE STAYS A COMPARISON ---- */
+  check("§388: ⚠️ AT MOST TWO COMPANIES PER MARKET — four companies across three markets is twelve rows on a card that had five, and a table nobody reads is not the comparison §6b asks for",
+    (() => {
+      const per = {};
+      for (const r of withCo.rows) if (r.company) per[String(r.id).split(":")[2]] = (per[String(r.id).split(":")[2]] || 0) + 1;
+      const counts = Object.values(per);
+      return counts.length > 0 && counts.every(n => n <= 2)
+        && withCo.rows.filter(r => r.company).every(r => Array.isArray(r.alsoOffered));
+    })(), JSON.stringify((() => { const p = {}; for (const r of withCo.rows) if (r.company) p[String(r.id).split(":")[2]] = (p[String(r.id).split(":")[2]] || 0) + 1; return p; })()));
+  check("§388: ⛑ …and every row is in the SAME UNIT as the rest of the table — what it earns in a pass, so selling at home and hiring porters are one comparison",
+    withCo.rows.every(r => r.perPass != null && Number.isFinite(Number(r.perPass)))
+    && withCo.rows.filter(r => r.company).every(r => r.costs.some(c => /their cut/.test(c.label))));
+
+  /* ---- 6 · ⛔ THEIR GUARDS ACTUALLY WALK IT ---- */
+  // ⛔ WITHOUT THIS A HIRED RUN WAS WORSE ON THE ROAD THAN AN ESCORTED ONE. `resolveRoadHazard` reads the hold's own
+  // people; a hired caravan has `carriers: []` by construction, so it took the *"nobody walking beside it"* branch and
+  // the road simply took half the load. The card quoted 174 a pass while the journey stripped 50% of every departure.
+  check("§388: ⛔ A HIRED COMPANY'S GUARDS FIGHT FOR THE LOAD — a hired run is NOT the \"nobody walking beside it\" branch, which took half of every departure",
+    (() => {
+      const mkCar = (co) => {
+        const ch = char388();
+        const s = CV388.sendCaravan(ch, { holdingId: "h", toId: "plainstead", carriers: [], locations: L388, cfg: cfg388, day: 40, traveller: ch, company: co });
+        s.caravan.danger = 4;
+        return { ch, car: s.caravan };
+      };
+      const a = mkCar({ id: "co", cut: 0.2, guards: 6, knowsGates: false });
+      const ra = CV388.resolveRoadHazard(a.ch, a.car, { rng: () => 0.5, cfg: cfg388, people: {}, day: 41, where: { placeId: "plainstead", danger: 4 } });
+      const b = mkCar(null);
+      const rb = CV388.resolveRoadHazard(b.ch, b.car, { rng: () => 0.5, cfg: cfg388, people: {}, day: 41, where: { placeId: "plainstead", danger: 4 } });
+      // theirs is a FIGHT; nobody's is a share taken with no fight at all
+      return ra.fought === true && rb.fought === false
+        && /nobody walking beside it/.test(b.car.events.at(-1)?.what || "")
+        && !/nobody walking beside it/.test(a.car.events.at(-1)?.what || "");
+    })());
+  // ⛑ …AND WHAT THE CARD PREDICTS IS ROLLED FROM THE SAME INPUTS. ⚠️ Deliberately NOT gated: that the card gives guards no
+  // discount. The measurement behind that choice is a finding for Erik — losing a fight loses the WHOLE load while
+  // walking with nobody loses half, so an escort that loses is worse than no escort — and if he rules an escort discount
+  // tomorrow, a gate asserting its absence would fire in his lane. This asserts the AGREEMENT, which survives his ruling.
+  check("§388: ⛑ …and the loss the CARD predicts is rolled from the same inputs the ROAD rolls — expected encounters against the days the cart will actually walk",
+    (() => {
+      const { ch, ex } = exits388({ companies: CO388 });
+      const r = ex.rows.find(x => x.company && x.value.encounters > 0);
+      if (!r) return false;
+      const dest = String(r.id).split(":")[2];
+      const s = CV388.sendCaravan(ch, { holdingId: "h", toId: dest, carriers: [], locations: L388, cfg: cfg388, day: 40, traveller: ch,
+        company: { id: r.company.id, cut: r.company.cut, guards: r.company.guards, knowsGates: !!r.company.knowsGates } });
+      const expect = s.caravan.danger * CV388.ROAD_HAZARD_PER_DANGER_DAY * s.caravan.days;
+      return s.ok && s.caravan.danger === r.value.danger && Math.abs(expect - r.value.encounters) < 0.02;
+    })());
+
+  /* ---- 7 · ⛔ A STANDING HIRED RUN, DRIVEN END TO END ---- */
+  {
+    const ch = char388();
+    const h = ch.holdings[0];
+    const hr = CV388.hireCompany(ch, "h", { companyId: "company_of_the_hub_yard", toId: "plainstead", companies: CO388, locations: L388, cfg: cfg388, day: 40 });
+    const notes = CV388.runStandingRoutes(ch, { locations: L388, cfg: cfg388, day: 50, people: {} });
+    const dep = notes.find(n => n.kind === "departure");
+    const car = (ch.caravans || []).at(-1);
+    check("§388: ⛔ THE TICK SENDS IT, AND THE NEWS NAMES WHO WALKS WITH IT — \"and NOBODY walking with it\" read `crew`, which a hired run empties by construction",
+      hr.ok && !!dep && !!car && car.company?.id === "company_of_the_hub_yard"
+      && /6 of their guards walking with it/.test(dep.note) && !/NOBODY/.test(dep.note)
+      && (car.carriers || []).length === 0,
+      dep?.note);
+    // walk it home, and take their cut where the coin lands
+    for (let d = 51; d <= 51 + Math.ceil(car.days) + 2 && car.status === "travelling"; d++) {
+      CV388.tickCaravans(ch, { locations: L388, cfg: cfg388, economy: R388.economy, day: d, people: {}, rng: () => 0.99 });
+    }
+    check("§388: ⛑ …and the cut is taken WHERE THE COIN LANDS, once, in the market's own money — a receipt that mixed crystal and scrip made a 22% share read as 8%",
+      (() => {
+        const sold = (car.events || []).find(e => /^reached /.test(e.what));
+        if (!sold) return false;
+        const m = sold.what.match(/sold for ([\d.]+) ([^,]+), after ([\d.]+) (.+) to the carriers$/);
+        return !!m && m[2].trim() === m[4].trim() && Number(m[3]) > 0
+          && Math.abs(Number(m[3]) / (Number(m[1]) + Number(m[3])) - 0.22) < 0.02;
+      })(), (car.events || []).find(e => /^reached /.test(e.what))?.what);
+  }
 }
 
 /* ══════════ REPORT ══════════ */

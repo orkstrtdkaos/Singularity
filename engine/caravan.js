@@ -30,7 +30,7 @@ import { legionClash, contingentsFromPeople } from "./melee.js";
 import { kitFor, personRecordFor } from "./npcsheet.js";   // SNG-659 §1: the DERIVED kit, the same one every duel fights with
 import { contributionsOf } from "./combatants.js";   // SNG-541c / Erik: a defender is what they can DO, not one more body
 import { unitWorth, producesPerPass, worthOfGoods, crewKeepPerPass, featuresOf, featureDef, raidChanceFor, sellShareFor, storeTotal } from "./holdings.js";   // ⛑ SNG-654 A: a route's value is what the hold MAKES, priced where it is going — through the tick's own producer
-import { earnAt, saidEarned } from "./money.js";   // ⛔ CCODE-437: sold for the market's own money — `earnAt` goes through `credit`   // ⛔ CCODE-437: a load is sold for the money of the market it reaches
+import { earnAt, saidEarned, incomeHere } from "./money.js";   // ⛔ CCODE-437: sold for the market's own money — `earnAt` goes through `credit`   // ⛔ CCODE-437: a load is sold for the money of the market it reaches
 import { enterDeathState } from "./death.js";
 import { routeBetween, roadDistances, pathFrom } from "./journey.js";   // ⛑ SNG-654 B: ONE search from the hold answers every market at once — 38 regions for the cost of one route
 import { storeWorth } from "./holdings.js";
@@ -81,6 +81,7 @@ export function roadDanger(path = [], locations = {}) {
  *  consequence. `carriers` are npcIds; an empty escort is allowed and is its own answer — see `tickCaravans`. */
 export function sendCaravan(character, {
   holdingId, toId, goods = null, carriers = [], locations = {}, cfg = null, day = null, traveller = null,
+  company = null,   // ✅ SNG-652 §6 / C1: {id, cut, guards, knowsGates} — a hired company walks ITS roads, not yours
 } = {}) {
   const h = (character?.holdings || []).find(x => x && x.id === holdingId);
   if (!h) return { ok: false, why: "no such holding" };
@@ -89,7 +90,12 @@ export function sendCaravan(character, {
   if (!locations[toId]) return { ok: false, why: "nowhere by that name" };
   if (toId === h.locationId) return { ok: false, why: "the load is already there" };
 
-  const route = routeBetween(h.locationId, toId, locations, { traveller: traveller || character });
+  // ⛔ THE ROUTE IS RESOLVED FOR WHOEVER WALKS IT. A hired company is not the player: one that knows the gates reads
+  // the whole public network (`gatesUsableBy(null)`), and one that does not — the Keelmouth lighters "don't use the gates
+  // and don't trust them" — must be gate-BLIND rather than merely unlucky. ⚠️ This exact line read `character` and made
+  // the card's 1.6-day quote into a 135.3-day walk, priced per day for hazard the whole way. One reading for both.
+  const carrier = company ? (company.knowsGates ? null : { knownPlaces: [], abilities: [] }) : (traveller || character);
+  const route = routeBetween(h.locationId, toId, locations, { traveller: carrier });
   // ⛔ SNG-654 — THE FASTEST WAY, NOT THE FIRST ONE IN THE LIST, and this was a live defect: `options[0]` is the ROAD
   // and the gate leg comes after it, so a load out of the Made Gate walked 34.6 days to the Axis Gate while the
   // comparison card — which sorts by days — priced the same run at 1.7 through Silas's own waygate. ⚠️ A card and an
@@ -108,15 +114,28 @@ export function sendCaravan(character, {
   }
   if (!Object.keys(load).length) return { ok: false, why: goods ? `the store holds no ${goods}` : "the store is empty" };
 
+  // ⛔ AT THE RULED SPEED, THROUGH THE FUNCTION THE CARD READS. `carriageFor` had one caller — `routeValue`, the
+  // comparison — so Erik's lever-C table ("a stable 2×, a lizard-den 2.5×, by water 3×, a hired company 2×") moved the
+  // estimate and no cart ever went faster. ⚠️ It went unseen because the rule had no population: all 6 holds in the
+  // world carry ×1 on foot, so card and cart agreed by coincidence until C1 hired somebody with animals, and then 6 of
+  // 12 priced rows quoted half the journey. ⛑ One function, both readers — and because the hazard loop rolls once per
+  // elapsed day, "a faster road is a safer one" is now true of the ROAD and not only of the quote.
+  const carriage = carriageFor(character, h, { toId, locations, cfg, company: !!company });
+  const walkDays = Math.round((num(leg.days, 0) / Math.max(0.1, num(carriage.mult, 1))) * 10) / 10;
   const car = {
     id: `car-${h.id}-${day ?? 0}-${Object.keys(load).join("+")}`.slice(0, 64),
     holdingId: h.id, from: h.locationId, to: toId,
     load, carriers: [...new Set(carriers.filter(Boolean))],
-    routeKind: leg.kind, routeLabel: leg.label, days: leg.days,
+    routeKind: leg.kind, routeLabel: leg.label, days: walkDays, roadDays: leg.days,
+    carriage: { mult: num(carriage.mult, 1), label: carriage.label },
     path: leg.path || [h.locationId, toId],
     danger: roadDanger(leg.path || [], locations),
-    departedDay: day, arriveDay: day == null ? null : Math.round(num(day) + num(leg.days)),
+    departedDay: day, arriveDay: day == null ? null : Math.round(num(day) + walkDays),
     lastTickDay: day, status: "travelling", events: [],
+    // ✅ SNG-652 §6 / C1 — set HERE, where the route that produced it was chosen, so the road's hazard, the arrival's
+    // cut and the news all read one record. `runStandingRoutes` used to stamp this on afterwards, which left the route
+    // and the company decided in two different places.
+    ...(company ? { company: { id: company.id, cut: clamp01(num(company.cut, 0)), guards: Math.max(0, num(company.guards, 0)) } } : {}),
   };
   ensureCaravans(character).push(car);
   return { ok: true, caravan: car, route };
@@ -178,13 +197,22 @@ export function runStandingRoutes(character, { locations = {}, cfg = null, day =
       continue;
     }
     if (!Object.keys(h.store || {}).length) continue;                  // nothing made yet: the cart waits
-    const sent = sendCaravan(character, { holdingId: h.id, toId: r.toId, carriers: crew, locations, cfg, day, traveller: character });
+    // ✅ SNG-652 §6 / C1 — WHO IS CARRYING IT GOES IN WITH THE ASK, not onto the caravan afterwards: `sendCaravan`
+    // chooses the ROAD, and a company that knows the gates walks a different one. Stamping it on after the route was
+    // already picked is what made the card and the news disagree by 134 days.
+    const byCo = r.by ? { id: r.by, cut: clamp01(num(r.cut, 0)), guards: Math.max(0, num(r.guards, 0)), knowsGates: !!r.knowsGates } : null;
+    const sent = sendCaravan(character, { holdingId: h.id, toId: r.toId, carriers: crew, locations, cfg, day, traveller: character, company: byCo });
     if (!sent.ok) { out.push({ kind: "route-refused", holdingId: h.id, note: null, why: sent.why }); continue; }
     r.lastDepartureDay = day;
     sent.caravan.standing = true;                                      // ⛑ so arrival knows to walk them home
     const units = Object.values(sent.caravan.load || {}).reduce((a, n) => a + num(n), 0);
+    // ⛔ AND THE NOTE SAYS WHO WALKS WITH IT. "and NOBODY walking with it" read `crew`, which a hired run empties by
+    // construction — so the news said nobody was walking beside a load six of their guards had just fought for.
+    const walking = byCo
+      ? (byCo.guards ? `, ${byCo.guards} of their guards walking with it` : ", and they sent nobody to walk with it")
+      : crew.length ? `, ${crew.length} walking with it` : ", and NOBODY walking with it";
     out.push({ kind: "departure", holdingId: h.id, caravanId: sent.caravan.id,
-      note: `${units} unit(s) left ${h.name || "the hold"} for ${locations[r.toId]?.name || r.toId} — ${sent.caravan.days} days on the road${crew.length ? `, ${crew.length} walking with it` : ", and NOBODY walking with it"}.` });
+      note: `${units} unit(s) left ${h.name || "the hold"} for ${locations[r.toId]?.name || r.toId} — ${sent.caravan.days} days on the road${walking}.` });
   }
   return out;
 }
@@ -318,6 +346,7 @@ export function routeValue(character, holding, {
   crew = null, companyCut = null, density = null, perDangerChance = ROAD_HAZARD_PER_DANGER_DAY,
   dangerLevel = null, people = {}, npcCfg = {}, day = null, baseWaitCost = 0,
   powers = null, rules = null,   // ⚠️ NOT `character`: it is already this function's first positional parameter, and node --check called that out
+  companyGuards = null,           // ✅ SNG-652 §6 / C1: how many guards the hired company walks with — said, not priced
 } = {}) {
   const t = tradeCfg(cfg);
   const passDays = Math.max(0.1, num(t.passDays, 3));
@@ -338,6 +367,13 @@ export function routeValue(character, holding, {
   // ⚑ HAZARD IS PER DAY AND PER POINT OF THE ROAD'S DANGER, so a faster road is a safer one — which is Erik's own
   // note on lever C, and it falls out of the arithmetic rather than being added to it.
   const encounters = Math.max(0, num(danger)) * perDangerChance * Math.max(0, roadDays) * known.mult;
+  // ⛔ "THEY CARRY THE ROAD RISK AND BRING THEIR OWN GUARDS" IS RESOLVED ON THE ROAD, NOT PREDICTED HERE. My first cut
+  // subtracted `guards × a dial` from the expected loss, and measuring the real contest showed that dial would lie in
+  // both directions: at danger 1–3 the guards lose NOTHING where an unescorted cart loses half, and at danger 5 three
+  // guards lose EVERYTHING — because losing the fight takes the whole load while walking with nobody takes half.
+  // ⚠️ THAT INVERSION IS NOT ABOUT COMPANIES: it is equally true of your own carriers, and it lives in
+  // `resolveRoadHazard`, so it went to the PO as a measurement instead of into a number I chose. This line therefore
+  // charges a hired run exactly what it charges your own crew — one rule for both — and the guards are SAID on the row.
   const lossShare = Math.min(1, encounters * takeShare);
   const keep = companyCut != null ? 0 : crewKeepPerPass(holding, cfg, { crew: crew ?? num(t.crew, 2) }).keep;
   const cut = companyCut != null ? clamp01(Number(companyCut)) : 0;
@@ -378,6 +414,7 @@ export function routeValue(character, holding, {
   const perPass = Math.round((there - keep - loss - fee - exposure - stall) * 10) / 10;
   return {
     ok: true, made, basket, there, local, keep, loss, fee, exposure, stall, perPass,
+    companyGuards: companyGuards != null ? Math.max(0, num(companyGuards, 0)) : null,
     ...(market ? { market } : {}),
     wait: { ...wait, perDeparture, roundTrip: Math.round(roadDays * 2 * 10) / 10, atHomeDanger: homeDanger },
     firstCoin: Math.max(1, Math.ceil(Math.max(0, roadDays) / passDays)),
@@ -405,7 +442,7 @@ export function routeValue(character, holding, {
  *
  *  ⬜ WHAT IS NOT HERE IS NOT PRICED: visiting traders and hired companies are unbuilt, so a hired-company row
  *  appears only when a caller passes a cut, and says plainly that it is a quote rather than an offer. Pure. */
-export function storeExits(character, holding, { cfg = null, economy = null, locations = {}, regionId = null, companyCut = null, maxMarkets = null, density = null, dangerLevel = null, people = {}, npcCfg = {}, day = null, powers = null, rules = null } = {}) {
+export function storeExits(character, holding, { cfg = null, economy = null, locations = {}, regionId = null, companyCut = null, maxMarkets = null, density = null, dangerLevel = null, people = {}, npcCfg = {}, day = null, powers = null, rules = null, companies = null } = {}) {
   // ⚠️ `maxMarkets` WAS 4 AND THAT WAS THE DEFECT AEVI MEASURED: two 147-day markets at ×3.6 took both slots and the
   // Crossing, 33 days out at ×1.8, never appeared. It is now an override for a caller that wants one, and content
   // decides (`trade.showMarkets`, chosen over `trade.candidates` valued). ⛑ `density` is the ground under the hold —
@@ -532,6 +569,52 @@ export function storeExits(character, holding, { cfg = null, economy = null, loc
       said: `${v.perPass} a pass at ${m.loc.name || m.id} — what this hold makes, sold there${sped}. First coin in ${v.firstCoin} pass${v.firstCoin === 1 ? "" : "es"}${danger ? `, danger ${danger} on the way` : ", a quiet road"}${road}`
         + `${v.exposure > 0 ? `. It departs every ${v.wait.perDeparture} passes, so about ${v.wait.units} units stand waiting for it — ${v.exposure} a pass in raid risk beyond what the shed already carries` : ""}`
         + `${v.stall > 0 ? `. ${v.market.powerName} takes ${v.market.fee} a load for the right to sell there` : v.market?.waived ? `. ${v.market.powerName} waives its stall fee for you` : ""}` });
+    // ✅ SNG-652 §6 / C1 — AND THE COMPANIES THAT WILL ACTUALLY CARRY THERE, each with its own cut and its own guards.
+    // ⛔ This row has existed since SNG-654 and never rendered: it needed a `companyCut` from a caller, and no caller
+    // passed one. `companies` is the content that was missing, and a row is now an OFFER rather than a quote.
+    const coRows = [];
+    for (const co of companiesFor(character, holding, { companies, locations, cfg, dist: dd?.dist || null })) {
+      if (!companyReaches(co, m.id, { locations, cfg })) continue;
+      // they know the gates or they do not, and that decides which road they take (`gatesUsableBy(null)` is every gate)
+      const coRoute = (() => { try { return routeBetween(holding.locationId, m.id, locations, { traveller: co.knowsGates ? null : { knownPlaces: [], abilities: [] } }); } catch { return null; } })();
+      const coOpt = (coRoute?.options || []).slice().sort((a, b) => (a.days ?? 99) - (b.days ?? 99))[0] || null;
+      const coDays = coOpt ? num(coOpt.days, days) : days;
+      const coPath = coOpt?.path?.length ? coOpt.path : path;
+      const rv = routeValue(character, holding, { powers, rules, toId: m.id, days: coDays, danger: roadDanger(coPath, locations),
+        path: coPath, cfg, economy, locations, density, companyCut: co.cut, companyGuards: co.guards,
+        dangerLevel: danger654, people, npcCfg, day, baseWaitCost: base654.cost });
+      if (!rv.ok) continue;
+      const hired = holding?.route?.by === co.id && holding?.route?.toId === m.id;
+      coRows.push({ id: `hire:${co.id}:${m.id}`, who: co.name, where: m.loc.name || m.id, price: "there",
+        company: { id: co.id, name: co.name, cut: co.cut, guards: co.guards, knowsGates: !!co.knowsGates,
+          depot: co.depotName, depotDays: co.depotDays, what: co.what || null, answersTo: co.answersTo || null },
+        hired, gross: worthAt(m.loc.regionId), net: worthAt(m.loc.regionId), days: rv.roadDays, risk: rv.danger,
+        perPass: rv.perPass, firstCoin: rv.firstCoin, speedMult: rv.speedMult, speedLabel: rv.speedLabel, value: rv,
+        market: rv.market || null,
+        costs: [{ label: `their cut (${Math.round(clamp01(Number(co.cut) || 0) * 100)}%)`, value: rv.fee },
+                ...(rv.loss > 0 ? [{ label: `what the road is expected to take — their ${co.guards} guards walk it`, value: rv.loss }] : []),
+                { label: `the stock waiting for them, beyond what the shed already risks`, value: rv.exposure },
+                ...(rv.stall > 0 ? [{ label: `${rv.market.powerName}'s fee to sell there`, value: rv.stall }] : [])],
+        said: `${rv.perPass} a pass after their ${Math.round(clamp01(Number(co.cut) || 0) * 100)}% — their people walk it and yours stay home`
+          + `, and ${co.guards} of their guards walk with it${rv.danger ? ` against danger ${rv.danger} on that road` : " on a quiet road"}`
+          + `${co.knowsGates && coOpt?.kind === "gate" ? `. They know the gates (${rv.roadDays} days)` : ""}`
+          + `. First coin in ${rv.firstCoin} pass${rv.firstCoin === 1 ? "" : "es"}` });
+    }
+    // ⚠️ AT MOST TWO PER MARKET: the best rate, and the cheapest cut when that is somebody else — the two ends of the
+    // real decision. Four companies across three markets was twelve rows on a card that had five, and a table nobody
+    // reads is not the comparison §6b asks for. ⛑ A company already HIRED is always shown, whatever it costs.
+    {
+      const byRate = coRows.slice().sort((a, b) => (b.perPass ?? 0) - (a.perPass ?? 0));
+      const cheapest = coRows.slice().sort((a, b) => (a.company.cut ?? 1) - (b.company.cut ?? 1))[0] || null;
+      const keep = [];
+      for (const r of coRows) if (r.hired) keep.push(r);
+      for (const r of [byRate[0], cheapest]) if (r && !keep.includes(r)) keep.push(r);
+      for (const r of keep) {
+        if (coRows.length > keep.length) r.said += `. ${coRows.length} companies will carry to ${m.loc.name || m.id}`;
+        r.alsoOffered = coRows.filter(x => x !== r).map(x => ({ id: x.company.id, name: x.company.name, cut: x.company.cut, perPass: x.perPass }));
+        rows.push(r);
+      }
+    }
     if (companyCut != null) {
       const cv = routeValue(character, holding, { powers, rules, toId: m.id, days, danger, path, cfg, economy, locations, density, companyCut, dangerLevel: danger654, people, npcCfg, day, baseWaitCost: base654.cost });
       // ⛔ GATE-AWARE, which is lever C's last row: a company knows the gates whether or not YOU have found them, so
@@ -643,6 +726,11 @@ export function resolveRoadHazard(character, car, { rng = Math.random, cfg = nul
   const raidCfg = cfg?.raid || {};
   const baseShare = Number.isFinite(Number(raidCfg.takeShare)) ? Number(raidCfg.takeShare) : 0.5;
   const escort = standingCarriers(car, people, character);
+  // ✅ SNG-652 §6 / C1 — AND A HIRED COMPANY WALKS WITH ITS OWN GUARDS. Without this the hired run took the
+  // nobody-walking-with-it branch and lost half the load, because "your people stay home" leaves `carriers` empty — so
+  // the card quoted a rate the road would never pay. ⛑ They fight through the machinery an escort already fights
+  // through, so a bad enough road still beats them: this is a better escort, not an insurance policy.
+  const hiredGuards = Math.max(0, num(car.company?.guards, 0));
 
   const take = (share) => {
     const taken = {};
@@ -657,7 +745,7 @@ export function resolveRoadHazard(character, car, { rng = Math.random, cfg = nul
   // ⛔ NOBODY WALKING WITH IT IS ITS OWN ANSWER — the same shape as a hold with no watch: they take what they
   // came for, and there is no fight to have. ⚠️ Not a total loss: Erik's total loss is people DYING, and an
   // unescorted cart has nobody to kill. It is simply a bad way to move goods.
-  if (!escort.length) {
+  if (!escort.length && !hiredGuards) {
     const taken = take(baseShare);
     car.events.push({ at: day, what: `set upon${atWhere} with nobody walking beside it — ${describe(taken)} taken`, where: where?.placeId || null });
     return { fought: false, held: false, wiped: false, taken, fallen: [] };
@@ -679,6 +767,12 @@ export function resolveRoadHazard(character, car, { rng = Math.random, cfg = nul
       contributionsOf: (p) => contributionsOf(p, { evidence: true }),
       craftsOf: (p) => escortCraftIds(p, people, kitDeps, { day, npcCfg }), energyOf: (p) => num(p?.energy, 0),
       catalogue: kitDeps?.catalog || {}, enemies: d, cfg: meleeCfg });
+    // ⛑ …and the company's guards beside them, as a contingent of the shape `legionClash` already takes. Their
+    // quality is a dial, not a guess at a number: `trade.companyGuardQuality`.
+    if (hiredGuards) {
+      defenders.push({ n: hiredGuards, quality: Math.max(1, num(tradeCfg(cfg).companyGuardQuality, 3)),
+        what: `${car.company?.id ? "hired" : "hired"} guards` });
+    }
   const clash = legionClash(defenders, raiders, { rng, cfg: raidCfg.clash || {} });
   const held = clash.tide > 0.05;
 
@@ -814,9 +908,19 @@ export function arriveCaravan(character, car, { locations = {}, economy = null, 
   // ⛑ LEVER D — THE ROAD IS KNOWN NOW. Written at ARRIVAL, not departure: a load that was taken on the way taught you
   // nothing about walking this road safely.
   markRoadRun(character, car.from, car.to);
-  const cr = earnAt(character, total, regionId, economy, { origin: "traded" });
+  // ✅ SNG-652 §6 / C1 — THEIR CUT, TAKEN WHERE THE COIN LANDS. Aevi asked whether a hired company is "a caravan whose
+  // carriers are the company's people, with a cut taken on `arriveCaravan`" — it is, and taking it here means the card's
+  // quote and the coin the player receives are one arithmetic rather than two.
+  const cut = clamp01(num(car.company?.cut, 0));
+  const theirs = cut > 0 ? Math.round(total * cut) : 0;
+  const yours = Math.max(0, total - theirs);
+  const cr = earnAt(character, yours, regionId, economy, { origin: "traded" });
   if (!cr.ok) { car.events.push({ at: day, what: `reached ${dest?.name || car.to}, but the coin would not settle` }); return { ok: false, why: cr.why, sold, crystal: 0, regionId }; }
-  car.events.push({ at: day, what: `reached ${dest?.name || car.to} — ${describe(Object.fromEntries(Object.entries(sold).map(([g, s]) => [g, s.units])))} sold for ${saidEarned(cr)}` });
+  // ⛔ IN ONE CURRENCY. This line read "sold for 940 Lattice Cities scrip, after 80 to the carriers" — the 940 in the
+  // market's money and the 80 in crystal, so the cut looked like 8% of a 22% share. `incomeHere` is the pure half of
+  // `earnAt`: the same rate, the same rounding, the same label.
+  const theirSaid = theirs ? incomeHere(theirs, regionId, economy).label : null;
+  car.events.push({ at: day, what: `reached ${dest?.name || car.to} — ${describe(Object.fromEntries(Object.entries(sold).map(([g, s]) => [g, s.units])))} sold for ${saidEarned(cr)}${theirSaid ? `, after ${theirSaid} to the carriers` : ""}` });
   // ⛔ AND ON A STANDING RUN THEY WALK BACK, because the next departure needs them. ⚑ Nothing to take on the way home,
   // so no hazard is rolled for it — the road's risk in this game is a risk to the LOAD.
   if (car.standing) {
@@ -824,7 +928,8 @@ export function arriveCaravan(character, car, { locations = {}, economy = null, 
     const h = (character?.holdings || []).find(x => x && x.id === car.holdingId);
     if (h?.route) h.route.runs = Math.max(0, Math.floor(num(h.route.runs, 0))) + 1;
   }
-  return { ok: true, sold, crystal: total, said: saidEarned(cr), regionId, standing: !!car.standing };
+  return { ok: true, sold, crystal: yours, gross: total, said: saidEarned(cr), regionId, standing: !!car.standing,
+    ...(theirs ? { company: { id: car.company.id, cut, took: theirs, tookSaid: theirSaid } } : {}) };
 }
 
 /** ⚑ WHAT THE GM IS TOLD, so a caravan is something the world MENTIONS rather than a number in a panel. */
@@ -844,4 +949,122 @@ export function caravansForGM(character, locations = {}) {
       + ` — ${c.routeLabel}, ${c.days} days, ${who ? `${who} walking with it` : "⛔ NOBODY walking with it"}`
       + (c.danger ? ` · the worst of that road is danger ${c.danger}` : "");
   }).concat(standing).join("\n");
+}
+
+/* ═══ ✅ SNG-652 §6 / C1 — HIRE A TRADE COMPANY ═══
+ *
+ * ⛔ AEVI'S §6 TABLE: *"a company from Your People or a power's roster · the destination's price, minus their cut (e.g.
+ * 15–25%) · they carry the road risk and bring their own guards; your people stay home."* And her work order: *"a row
+ * you can accept on the hold's card; the load leaves with their people."*
+ *
+ * ⛑ THE ROW HAS BEEN IN `storeExits` SINCE SNG-654 AND HAS NEVER RENDERED, because `companyCut` had no caller anywhere
+ * in app.js — its own comment said so: *"a hired-company row appears only when a caller passes a cut, and says plainly
+ * that it is a quote rather than an offer."* Four authored companies are what was missing.
+ *
+ * ⚠️ `guards` IS READ, NOT DECORATION. "They carry the road risk" read absolutely would make a company a guaranteed
+ * return and `guards` an unread field — the fourth door, on a number Aevi troubled to vary from 3 to 6. So the guards
+ * ABSORB the road's expected loss: `guards × absorbPerGuard` of it, capped at all of it. At the authored default that
+ * means the Keelmouth lighters (4) and the Hub Yard porters (6) carry the whole risk and the Hundred-Market carters (3)
+ * leave a quarter of it with you — which is what "cheap, fast and not entirely honest" should cost. */
+
+/** ⛔ WHICH COMPANIES CAN CARRY OUT OF THIS HOLD, and to where. A company works out of the places it `operatesFrom`, so
+ *  it can take a load that starts within reach of one of them; `reaches` (a list of REGION ids) bounds where it will
+ *  go, and a company with none goes anywhere the world does.
+ *
+ *  ⚠️ `withinDays` IS THE HOLD-TO-DEPOT LEG, and it is a real constraint rather than a flourish: the Keelmouth
+ *  lighters cannot carry out of a hold in the Deepwood. Measured on the live holds: the Crossing's porters reach all
+ *  six, the Keelmouth lighters reach none of them. PURE. */
+export function companiesFor(character, holding, { companies = null, locations = {}, cfg = null, withinDays = null, dist = null } = {}) {
+  const list = Array.isArray(companies) ? companies.filter(c => c && c.id) : [];
+  if (!list.length || !holding?.locationId) return [];
+  if (!locations[holding.locationId]) return [];
+  const t = tradeCfg(cfg);
+  // ⛔ NO BAR BY DEFAULT. §6's own line is that every way of moving the store is "available from anywhere by sending
+  // word" — you do not walk to a porters' guild. At 30 days not one valley hold could hire anybody (34 to the nearest
+  // depot), so a distance bar shipped the feature unreachable. `companyWithinDays` stays for content to bound one.
+  const barRaw = withinDays != null ? withinDays : t.companyWithinDays;
+  const bar = barRaw == null ? Infinity : num(barRaw, Infinity);
+  // ⚠️ A ROAD, NOT A GEODESIC. The leg from a hold to a company's depot is one the load actually travels, and a
+  // straight-line reading would have put the Keelmouth lighters eight days from a hold with no road to the coast at all.
+  // ⛑ And `storeExits` already ran this Dijkstra, so it hands the map in: one search per card, not one per company.
+  const dd = dist || (() => { try { return roadDistances(holding.locationId, locations)?.dist || {}; } catch { return {}; } })();
+  const out = [];
+  for (const c of list) {
+    let best = null;
+    for (const from of (Array.isArray(c.operatesFrom) ? c.operatesFrom : [])) {
+      const d = dd[from];
+      if (!Number.isFinite(d)) continue;                 // no road from here to their depot: not an option
+      if (best == null || d < best.days) best = { from, days: Math.round(d * 10) / 10 };
+    }
+    if (best && best.days > bar) continue;
+    // ⛔ AND THE HOLD'S OWN REGION MUST BE ONE THEY WORK. `reaches` gates BOTH ends — the Hundred-Market carters name
+    // four regions and the Palelands is not among them, so Stillwater's Trouble can hire the other three and not the
+    // cheapest. A company with no `reaches` works anywhere, which is three of the four.
+    if (!companyReaches(c, holding.locationId, { locations, cfg })) continue;
+    out.push({ ...c, depot: best?.from || (Array.isArray(c.operatesFrom) ? c.operatesFrom[0] : null) || null,
+      depotName: best ? (locations[best.from]?.name || best.from) : null,
+      depotDays: best ? best.days : null });
+  }
+  return out.sort((a, b) => (Number(a.cut) || 0) - (Number(b.cut) || 0) || (a.depotDays ?? 1e9) - (b.depotDays ?? 1e9));
+}
+
+/** ⛑ AND WILL THIS ONE CARRY TO THERE? `reaches` is a list of REGIONS, absent means anywhere, and a company that does
+ *  not use the gates is bounded by the road. PURE. */
+export function companyReaches(company, toId, { locations = {}, cfg = null } = {}) {
+  if (!company || !toId) return false;
+  const dest = locations[toId];
+  if (!dest) return false;
+  const regions = Array.isArray(company.reaches) ? company.reaches : null;
+  if (regions && !regions.includes(dest.regionId)) return false;
+  // ⛔ AND A WATER COMPANY GOES WHERE WATER GOES. `water: true` was authored and read by nothing, so the Keelmouth
+  // lighters offered to carry a load 125 days inland over dry ground. Lever C's own test decides it — the place's own
+  // `tags` against `trade.waterTags` — so a wharf and a river town are one rule in this file, not two.
+  // ⚠️ AND LEVER C'S OWN NOTE IS NOW STALE: it recorded that no location carried a water tag. FOUR DO — keelmouth
+  // (harbour, river), echo_river_crossing, firstsight and millbrook (riverside) — so the lighters serve the Fell Pell
+  // and nothing else of Silas's, which is exactly the shape a water carrier should have.
+  if (company.water) {
+    const tags = new Set((Array.isArray(tradeCfg(cfg).waterTags) ? tradeCfg(cfg).waterTags : []).map(x => String(x).toLowerCase()));
+    if (!tags.size) return false;
+    return (dest.tags || []).some(x => tags.has(String(x).toLowerCase()));
+  }
+  return true;
+}
+
+/** ⛔ HIRE THEM — the accept. A standing run carried by their people: the hold's own crew stays home, and the route
+ *  remembers WHO so every departure and every arrival reads the same company.
+ *  ⚠️ IT REFUSES WITH A SENTENCE, never a bare null: every refusal here is something the player can act on. */
+export function hireCompany(character, holdingId, { companyId = null, toId = null, companies = null, locations = {}, cfg = null, day = null } = {}) {
+  const h = (character?.holdings || []).find(x => x && x.id === holdingId);
+  if (!h) return { ok: false, why: "no such holding" };
+  const can = companiesFor(character, h, { companies, locations, cfg });
+  const c = can.find(x => x.id === companyId);
+  if (!c) {
+    const named = (Array.isArray(companies) ? companies : []).find(x => x && x.id === companyId);
+    return { ok: false, why: named
+      ? `${named.name} does not work out of anywhere near ${h.name || "the hold"}`
+      : "no company by that name" };
+  }
+  if (!companyReaches(c, toId, { locations, cfg })) {
+    return { ok: false, why: `${c.name} does not carry into ${locations[toId]?.name || toId}` };
+  }
+  // ⛑ THROUGH `setRoute`, which already checks the road, the map and the hold's own place — one door for a standing run
+  // whoever walks it, so a hired run and your own cannot drift apart.
+  const r = setRoute(character, holdingId, { toId, carriers: [], locations, day });
+  if (!r.ok) return r;
+  h.route.by = c.id;
+  h.route.cut = clamp01(Number(c.cut) || 0);
+  h.route.guards = Math.max(0, Number(c.guards) || 0);
+  // ⛔ AND WHETHER THEY USE THE GATES, because the ROAD has to be resolved the way the CARD priced it. Without this
+  // the card quoted 1.6 days through a gate Silas does not know and `sendCaravan` walked his own roads for 135.3.
+  h.route.knowsGates = !!c.knowsGates;
+  return { ok: true, route: h.route, company: { id: c.id, name: c.name, cut: h.route.cut, guards: h.route.guards, depot: c.depotName },
+    to: locations[toId]?.name || toId,
+    said: `${c.name} will carry out of ${h.name || "the hold"} to ${locations[toId]?.name || toId} for ${Math.round(h.route.cut * 100)}% of what the load sells for. Your people stay home.` };
+}
+
+/** ⛑ THE COMPANY A HOLD HAS HIRED, resolved from the route. Null when the hold's own people walk it. PURE. */
+export function routeCompany(holding, companies = null) {
+  const id = holding?.route?.by;
+  if (!id) return null;
+  return (Array.isArray(companies) ? companies : []).find(c => c && c.id === id) || null;
 }

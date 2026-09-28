@@ -16,6 +16,24 @@
   "next": [],
   "releases": [
     {
+      "version": "2.15.0",
+      "date": "2026-09-28",
+      "entries": [
+        {
+          "kind": "feature",
+          "title": "Carriers you can hire, so your own people stay home",
+          "summary": "Four trade companies will carry a hold's whole output to market for a share of what it sells for — their animals, their guards, their roads.",
+          "detail": "The hold's card now lists them beside selling at home and sending your own cart, in the same unit as everything else: what it earns in a pass. The Hub Yard Porters take 22% and walk anywhere the gate network reaches; the Hundred-Market Carters are cheaper at 18% but answer to the Undercount and only work four regions; the Keelmouth Slip Lighters go by water and do not trust the gates; the Asking Floor Factors are the most expensive in the world and have never lost a load. Hiring them is a standing arrangement — every pass their people come, take what the hold has made, and bring back your share. Whether it beats your own carriers depends on the road: on a long haul through a gate they know and you do not, the Porters turn a 135-day walk into two days; on a short safe road their cut is simply money you kept before. Their guards walk with the load and fight for it, and a bad enough road still beats them."
+        },
+        {
+          "kind": "fix",
+          "title": "A cart now travels at the speed the card quoted",
+          "summary": "The comparison table priced a stable, a river or a hired company's animals into the journey, and then every cart went on foot.",
+          "detail": "The speed table — on foot, a stable, a lizard-den, by water, a hired company — was read only where routes are priced, never where a cart is actually sent. Nobody noticed because no hold in the world owns a stable, so the quoted journey and the walked one agreed by coincidence; hiring a company with its own animals is the first thing that made them differ, and it differed by half. Journeys now take the days the card promised, which also means fewer days on a dangerous road — a faster route really is a safer one now, not just a cheaper-looking one. Two other places where the quote and the journey disagreed are fixed with it: a company that knows the gates now walks the gates when it carries for you, and the news that says a load has left no longer reports nobody walking beside it when six hired guards are."
+        }
+      ]
+    },
+    {
       "version": "2.14.13",
       "date": "2026-09-28",
       "entries": [

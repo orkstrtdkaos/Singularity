@@ -236,6 +236,46 @@ export function runStandingRoutes(character, { locations = {}, cfg = null, day =
 
 const tradeCfg = (cfg) => (cfg && typeof cfg.trade === "object" && cfg.trade ? cfg.trade : {});
 
+/** ⛑ WHO WALKS A STANDING RUN OUT OF THIS HOLD — the hold's own hands, capped by `trade.crew`.
+ *
+ *  ⛔ THIS DECISION LIVED IN `app.js` AS `carriers: (h.crew || []).slice(0, 2)` while the card forecast a flat two, so a
+ *  hold with no hands was quoted two wages it will never pay and an escorted road it will never walk — and FOUR OF THE
+ *  SIX HOLDS IN THE WORLD HAVE NO CREW. ⚠️ It also meant `unescortedTakeShare` was unreachable from any real hold: the
+ *  card could not produce `walking === 0`, so the dial had no population and nothing could test it.
+ *
+ *  ⛑ One function, both readers — the same cure `crewKeepPerPass` names in its own docstring. A route that is already
+ *  SET answers with the crew it was set with, because that is who is walking it. PURE. */
+export function standingCrewFor(holding, cfg = null) {
+  if (Array.isArray(holding?.route?.crew)) return [...holding.route.crew];
+  const cap = Math.max(0, Math.round(num(tradeCfg(cfg).crew, 2)));
+  return (Array.isArray(holding?.crew) ? holding.crew : []).filter(Boolean).slice(0, cap);
+}
+
+/** ⛔ WHAT A ROBBERY ON THE ROAD COSTS — THE ROAD'S OWN DIALS, NOT THE HOLD'S.
+ *
+ *  ⚠️ `resolveRoadHazard` and `routeValue` both read `raid.takeShare` for this, which is Erik's Q8 ruling about A RAID
+ *  ON A HOLD — economy.json's own note: *"a raid takes takeShare and arrives as news"*. One dial was answering two
+ *  different questions, so tuning a raid on a shed silently retuned every road in the world. Erik, 2026-09-28: *"unescorted
+ *  loses shouldn't be 50%.. .not sure how that happened."* It happened through my own po table of 09-06, which printed the
+ *  row as "Erik's ruling" when the only words he spoke there were about the wipe.
+ *
+ *  ⛑ THE LADDER, and only the middle two are dials:
+ *      beat them off        → 0        (R46a: a won fight loses nothing, whatever it cost in people)
+ *      lose the fight       → `roadTakeShare`
+ *      nobody walking       → `unescortedTakeShare`   — strictly worse than losing, or bringing people is a penalty
+ *      escort WIPED         → 1        (Erik: "especially if all your people get killed")
+ *
+ *  ⛔ The fallback chain keeps a save with no authored trade block on exactly today's behaviour. PURE. */
+export function roadShares(cfg) {
+  const t = tradeCfg(cfg);
+  const hold = Number.isFinite(Number(cfg?.raid?.takeShare)) ? Number(cfg.raid.takeShare) : 0.5;
+  const lost = Number.isFinite(Number(t.roadTakeShare)) ? Number(t.roadTakeShare) : hold;
+  const alone = Number.isFinite(Number(t.unescortedTakeShare)) ? Number(t.unescortedTakeShare) : lost;
+  // ⚠️ CLAMPED BELOW 1: a total loss is RULED to mean the people died, so no dial may reach it. Content that asks for
+  // 1.0 here is asking for a wipe without a body, which is the one shape Erik's ruling forbids.
+  return { lost: clamp01(lost), alone: Math.min(0.99, clamp01(alone)), wiped: 1 };
+}
+
 /** ⛑ LEVER C — HOW FAST THE LOAD TRAVELS, and it is the FASTEST MEANS THE HOLD HAS, never the product of them: a
  *  stable and a river do not make a load six times as fast. Erik's table: on foot 1×, a stable 2×, a lizard-den 2.5×,
  *  by water with BOTH ENDS water-tagged 3×, a hired company 2×.
@@ -311,6 +351,9 @@ export function markRoadRun(character, fromId, toId) {
  *  Nothing here is a second raid model. ⚠️ Priced at the LOCAL price, because that is what the stock is worth while
  *  it is still standing here. Returns the cost PER PASS. PURE. */
 export function waitingExposure(character, holding, { units = 0, basket = null, cfg = null, economy = null, regionId = null, dangerLevel = 0, people = {}, npcCfg = {}, day = null } = {}) {
+  // ⛑ AND THIS ONE IS THE HOLD'S DIAL ON PURPOSE — NOT A LINE THAT WAS MISSED. The road was split off
+  // `raid.takeShare` on 2026-09-28 (see `roadShares`), and stock standing in the shed waiting for the next departure is
+  // exactly what Q8's 0.5 rules: a raid on a hold. ⚠️ Do not "fix" this to `roadShares`; the load is not on the road yet.
   const take = Number.isFinite(Number(cfg?.raid?.takeShare)) ? Number(cfg.raid.takeShare) : 0.5;
   const waiting = Math.max(0, num(units));
   if (!(waiting > 0) || !(num(dangerLevel) > 0)) {
@@ -363,7 +406,18 @@ export function routeValue(character, holding, {
   const carriage = carriageFor(character, holding, { toId, locations, cfg, company: companyCut != null });
   const roadDays = num(days) > 0 ? Math.round((num(days) / carriage.mult) * 10) / 10 : num(days, 0);
   const known = knownRoad(character, holding?.locationId, toId, { cfg, path });
-  const takeShare = Number.isFinite(Number(cfg?.raid?.takeShare)) ? Number(cfg.raid.takeShare) : 0.5;
+  // ⛔ THE SHARE FOR THE ARRANGEMENT BEING PRICED, through the one helper the ROAD reads. This was a flat
+  // `raid.takeShare` for every row, so a run with nobody walking was quoted the same expected loss as a run with five of
+  // your own people — the card could not show the difference it was asking the player to pay for. ⚠️ It still does not
+  // model escort STRENGTH: two carriers and five are priced alike, and the wipe rate says they are not alike. That is
+  // Erik's open question, and §389 gates the card/road agreement rather than guessing at it.
+  const sh = roadShares(cfg);
+  // ⛔ WHO WILL ACTUALLY WALK IT — `standingCrewFor`, the same answer the button uses. A flat `t.crew` here quoted every
+  // crewless hold an escort it does not have, and made `unescortedTakeShare` unreachable from any real hold.
+  const willWalk = crew != null ? crew : standingCrewFor(holding, cfg);
+  const walking = companyGuards != null ? Math.max(0, num(companyGuards, 0))
+    : Array.isArray(willWalk) ? willWalk.length : num(willWalk, 0);
+  const takeShare = walking > 0 ? sh.lost : sh.alone;
   // ⚑ HAZARD IS PER DAY AND PER POINT OF THE ROAD'S DANGER, so a faster road is a safer one — which is Erik's own
   // note on lever C, and it falls out of the arithmetic rather than being added to it.
   const encounters = Math.max(0, num(danger)) * perDangerChance * Math.max(0, roadDays) * known.mult;
@@ -375,7 +429,7 @@ export function routeValue(character, holding, {
   // `resolveRoadHazard`, so it went to the PO as a measurement instead of into a number I chose. This line therefore
   // charges a hired run exactly what it charges your own crew — one rule for both — and the guards are SAID on the row.
   const lossShare = Math.min(1, encounters * takeShare);
-  const keep = companyCut != null ? 0 : crewKeepPerPass(holding, cfg, { crew: crew ?? num(t.crew, 2) }).keep;
+  const keep = companyCut != null ? 0 : crewKeepPerPass(holding, cfg, { crew: willWalk }).keep;
   const cut = companyCut != null ? clamp01(Number(companyCut)) : 0;
   const fee = Math.round(there * cut * 10) / 10;
   const loss = Math.round(there * lossShare * 10) / 10;
@@ -415,6 +469,8 @@ export function routeValue(character, holding, {
   return {
     ok: true, made, basket, there, local, keep, loss, fee, exposure, stall, perPass,
     companyGuards: companyGuards != null ? Math.max(0, num(companyGuards, 0)) : null,
+    // ⛑ …and how many walk with it, plus the share that implies, so the row can SAY why a crewless hold loses more.
+    walking, takeShare, unescorted: walking === 0,
     ...(market ? { market } : {}),
     wait: { ...wait, perDeparture, roundTrip: Math.round(roadDays * 2 * 10) / 10, atHomeDanger: homeDanger },
     firstCoin: Math.max(1, Math.ceil(Math.max(0, roadDays) / passDays)),
@@ -560,13 +616,21 @@ export function storeExits(character, holding, { cfg = null, economy = null, loc
       perPass: v.perPass, firstCoin: v.firstCoin, speedMult: v.speedMult, speedLabel: v.speedLabel,
       runs: v.runs, hazardMult: v.hazardMult, relay: v.relay, value: v, label: opt?.label || null,
       market: v.market || null,
-      costs: [{ label: `the crew's keep (${num(t654.crew, 2)} carriers)`, value: v.keep },
-              { label: `what the road is expected to take`, value: v.loss },
+      costs: [{ label: v.walking ? `the crew's keep (${v.walking} carrier${v.walking === 1 ? "" : "s"} from this hold)` : `nobody to pay — this hold has no hands to send`, value: v.keep },
+              { label: v.unescorted
+                ? `what the road is expected to take — ${Math.round(v.takeShare * 100)}%, because nobody walks with it`
+                : `what the road is expected to take`, value: v.loss },
               { label: `the stock waiting for it, beyond what the shed already risks`, value: v.exposure },
               // ✅ SNG-663 §2d — the market's own stall fee, spread over the passes between departures, and it is the
               // number `routeValue` charged rather than a second reading of the same rule.
               ...(v.stall > 0 ? [{ label: `${v.market.powerName}'s fee to sell there (${v.market.fee} a load${v.market.doubled ? ", doubled — they think ill of you" : ""})`, value: v.stall }] : [])],
-      said: `${v.perPass} a pass at ${m.loc.name || m.id} — what this hold makes, sold there${sped}. First coin in ${v.firstCoin} pass${v.firstCoin === 1 ? "" : "es"}${danger ? `, danger ${danger} on the way` : ", a quiet road"}${road}`
+      said: `${v.perPass} a pass at ${m.loc.name || m.id} — what this hold makes, sold there${sped}`
+        // ⛔ WHO WALKS IT, SAID. On a hold with no hands the cart goes out ALONE and the road takes a bigger share — which
+        // is the real reason to hire somebody, and it was computed and never shown.
+        + `${v.unescorted
+            ? `. ⚠️ This hold has nobody to send, so the cart goes out alone and a robbing takes ${Math.round(v.takeShare * 100)}% rather than ${Math.round(roadShares(cfg).lost * 100)}%`
+            : `, ${v.walking} of this hold's hands walking with it`}`
+        + `. First coin in ${v.firstCoin} pass${v.firstCoin === 1 ? "" : "es"}${danger ? `, danger ${danger} on the way` : ", a quiet road"}${road}`
         + `${v.exposure > 0 ? `. It departs every ${v.wait.perDeparture} passes, so about ${v.wait.units} units stand waiting for it — ${v.exposure} a pass in raid risk beyond what the shed already carries` : ""}`
         + `${v.stall > 0 ? `. ${v.market.powerName} takes ${v.market.fee} a load for the right to sell there` : v.market?.waived ? `. ${v.market.powerName} waives its stall fee for you` : ""}` });
     // ✅ SNG-652 §6 / C1 — AND THE COMPANIES THAT WILL ACTUALLY CARRY THERE, each with its own cut and its own guards.
@@ -724,7 +788,9 @@ export function resolveRoadHazard(character, car, { rng = Math.random, cfg = nul
   // reading the log knows which stretch of road took the load rather than only that the road did.
   const atWhere = where?.name ? ` near ${where.name}` : "";
   const raidCfg = cfg?.raid || {};
-  const baseShare = Number.isFinite(Number(raidCfg.takeShare)) ? Number(raidCfg.takeShare) : 0.5;
+  // ⛔ THE ROAD'S OWN SHARES — see `roadShares`. This line read the HOLD's raid dial for both the lost fight and the
+  // unescorted cart, which is how an unruled 50% ended up on every road in the world.
+  const shares = roadShares(cfg);
   const escort = standingCarriers(car, people, character);
   // ✅ SNG-652 §6 / C1 — AND A HIRED COMPANY WALKS WITH ITS OWN GUARDS. Without this the hired run took the
   // nobody-walking-with-it branch and lost half the load, because "your people stay home" leaves `carriers` empty — so
@@ -746,7 +812,7 @@ export function resolveRoadHazard(character, car, { rng = Math.random, cfg = nul
   // came for, and there is no fight to have. ⚠️ Not a total loss: Erik's total loss is people DYING, and an
   // unescorted cart has nobody to kill. It is simply a bad way to move goods.
   if (!escort.length && !hiredGuards) {
-    const taken = take(baseShare);
+    const taken = take(shares.alone);
     car.events.push({ at: day, what: `set upon${atWhere} with nobody walking beside it — ${describe(taken)} taken`, where: where?.placeId || null });
     return { fought: false, held: false, wiped: false, taken, fallen: [] };
   }
@@ -797,7 +863,7 @@ export function resolveRoadHazard(character, car, { rng = Math.random, cfg = nul
   }
 
   // ⛔ ERIK'S RULING. Wiped in a fight you lost — nobody left to carry it, nobody left to argue.
-  const share = wiped ? 1 : baseShare;
+  const share = wiped ? shares.wiped : shares.lost;
   const taken = take(share);
   car.events.push({ at: day, what: wiped
     ? `taken on the road — every hand that walked with it fell, and the whole load went with them`

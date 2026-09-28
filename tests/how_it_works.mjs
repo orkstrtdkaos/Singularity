@@ -32557,6 +32557,193 @@ console.log("\n── §388 · the carriers you can hire ──");
   }
 }
 
+/* ══════════ §389 · THE ROAD'S OWN SHARE, AND WHO WALKS WITH THE LOAD ══════════ */
+// ⛔ ERIK 2026-09-28, reading the C1 measurements: *"unescorted loses shouldn't be 50%.. .not sure how that happened."*
+//
+// ⛑ HOW IT HAPPENED, and it is the worst provenance failure in this file. `resolveRoadHazard` read `raid.takeShare` —
+// authored under `holdStore.raid`, where economy.json's own note says *"a raid takes takeShare and arrives as news"*. That
+// is Erik's Q8 ruling about A RAID ON A HOLD: a raided shed loses half. The road borrowed it for TWO different events (a
+// lost fight, and a cart nobody walks with), and my own po table of 2026-09-06 printed the row as **"Erik's ruling"** when
+// the only words he spoke there were about the wipe: *"especially if all your people get killed."* ⚠️ So a hold's dial
+// acquired a road's authority from my summary of him, and he was right that he had never ruled it.
+//
+// ⛔ AND THE SAME PASS FOUND THE REASON THE NEW DIAL WOULD HAVE HAD NO POPULATION: `routeValue` forecast a flat two
+// carriers for every hold while `app.js` sent `(h.crew || []).slice(0, 2)` — and FOUR OF THE SIX HOLDS IN THE WORLD HAVE
+// NO CREW. So the card quoted every crewless hold two wages it will never pay and an escorted road it will never walk,
+// and `walking === 0` was unreachable. `standingCrewFor` is now the one answer both readers ask.
+console.log("\n── §389 · the road's own share, and who walks with the load ──");
+{
+  const CV389 = await import("../engine/caravan.js");
+  const H389 = await import("../engine/holdings.js");
+  const { loadContentHeadless: lch389 } = await import("./headless_content.mjs");
+  const C389 = await lch389();
+  const R389 = C389.rules;
+  const cfg389 = { ...R389.economy.holdStore, features: R389.economy.holdFeatures || null };
+  const L389 = C389.locations;
+
+  /* ---- 1 · ⛔ THE ROAD'S DIALS ARE THE ROAD'S ---- */
+  check("§389: ⛔ THE ROAD HAS ITS OWN TWO SHARES, AUTHORED — and the hold's ruled `raid.takeShare` is untouched beside them",
+    (() => {
+      const tr = R389.economy.holdStore?.trade || {};
+      return Number.isFinite(Number(tr.roadTakeShare)) && Number.isFinite(Number(tr.unescortedTakeShare))
+        && R389.economy.holdStore?.raid?.takeShare === 0.5
+        && typeof tr._roadShares === "string" && /unescorted loses shouldn't be 50%/.test(tr._roadShares);
+    })(), JSON.stringify({ road: R389.economy.holdStore?.trade?.roadTakeShare, alone: R389.economy.holdStore?.trade?.unescortedTakeShare, hold: R389.economy.holdStore?.raid?.takeShare }));
+  // ⛔ THE SEPARATION ITSELF, DRIVEN BOTH WAYS. This is the defect: one dial answering two questions, so tuning a raid on
+  // a shed silently retuned every road in the world. ⚑ Asserted as INDEPENDENCE, not as either value.
+  check("§389: ⛔ …and they are INDEPENDENT — moving the hold's raid share does not move the road, and moving the road's does not move a hold raid",
+    (() => {
+      const base = CV389.roadShares(cfg389);
+      const holdMoved = CV389.roadShares({ ...cfg389, raid: { ...cfg389.raid, takeShare: 0.11 } });
+      const roadMoved = CV389.roadShares({ ...cfg389, trade: { ...cfg389.trade, roadTakeShare: 0.11, unescortedTakeShare: 0.12 } });
+      // the road ignores the hold's dial while its own is authored…
+      return holdMoved.lost === base.lost && holdMoved.alone === base.alone
+        && roadMoved.lost === 0.11 && roadMoved.alone === 0.12
+        // …and a hold raid keeps reading its own, whatever the road says
+        && (() => {
+          const mk = () => ({ name: "T", clock: { day: 1 }, worldState: {}, npcRegistry: {}, purse: { crystal: 500, coin: 0, paper: 0, marks: 0, scrip: {} },
+            holdings: [{ id: "h", name: "H", kind: "post", locationId: "millbrook", condition: "thriving", store: { raw_material: 40 }, features: [], history: [] }] });
+          const a = mk(), b = mk();
+          const cfgB = { ...cfg389, trade: { ...cfg389.trade, roadTakeShare: 0.01, unescortedTakeShare: 0.01 } };
+          const ra = H389.resolveRaid(a, a.holdings[0], { cfg: cfg389, rng: () => 0.99, day: 1 });
+          const rb = H389.resolveRaid(b, b.holdings[0], { cfg: cfgB, rng: () => 0.99, day: 1 });
+          return JSON.stringify(a.holdings[0].store) === JSON.stringify(b.holdings[0].store);
+        })();
+    })());
+  // ⛑ AND A SAVE WITH NO AUTHORED TRADE BLOCK STAYS EXACTLY WHERE IT WAS — the fallback chain is road → hold → 0.5, so
+  // the separation costs nothing on its own.
+  check("§389: ⛑ …and with no trade block authored the road falls back to the hold's share, so the split alone changes nothing",
+    (() => {
+      const bare = CV389.roadShares({ raid: { takeShare: 0.5 } });
+      const none = CV389.roadShares(null);
+      return bare.lost === 0.5 && bare.alone === 0.5 && none.lost === 0.5 && none.alone === 0.5;
+    })());
+
+  /* ---- 2 · ⛔ THE LADDER'S ORDERING, WHICH SURVIVES WHATEVER ERIK SETS ---- */
+  // ⚠️ NOT the value 0.75 — Erik turns that, and a gate pinning it fires in his lane the day he does. The ORDERING is the
+  // claim: bringing people must never be worse for the load than bringing nobody, and only a wipe takes all of it.
+  check("§389: ⛔ THE LADDER IS ORDERED — beat them off 0 < lose the fight < nobody walking < wiped 1, whatever the dials are set to",
+    (() => {
+      const s = CV389.roadShares(cfg389);
+      return s.lost > 0 && s.alone > s.lost && s.wiped === 1 && s.alone < s.wiped;
+    })(), JSON.stringify(CV389.roadShares(cfg389)));
+  check("§389: ⛑ …and no dial can reach a TOTAL loss — Erik's ruling is that losing everything means your people died, and an unescorted cart has nobody to kill",
+    (() => {
+      const greedy = CV389.roadShares({ raid: { takeShare: 0.5 }, trade: { roadTakeShare: 5, unescortedTakeShare: 5 } });
+      return greedy.alone < 1 && greedy.alone === 0.99 && greedy.lost === 1;   // a LOST FIGHT may be ruled total; nobody-walking may not
+    })(), JSON.stringify(CV389.roadShares({ raid: { takeShare: 0.5 }, trade: { roadTakeShare: 5, unescortedTakeShare: 5 } })));
+  // ⛔ AND THE ROAD SPENDS THEM — driven, not read off the config.
+  check("§389: ⛔ …and the ROAD spends them: a cart with nobody loses the unescorted share, and every rung is the dial it names",
+    (() => {
+      const mkCar = (crewN) => {
+        const ppl = {};
+        const crew = Array.from({ length: crewN }, (_, i) => ({ id: `p${i}`, name: `P${i}`, level: 3, energy: 10, status: "active" }));
+        for (const p of crew) ppl[p.id] = { ...p };
+        const ch = { name: "T", npcRegistry: ppl, holdings: [], clock: { day: 1 } };
+        const car = { id: "c", holdingId: "h", from: "millbrook", to: "plainstead", danger: 3,
+          load: { raw_material: 100 }, carriers: crew.map(p => p.id), events: [], status: "travelling" };
+        return { ch, car, ppl };
+      };
+      const s = CV389.roadShares(cfg389);
+      const a = mkCar(0);
+      const ra = CV389.resolveRoadHazard(a.ch, a.car, { rng: () => 0.5, cfg: cfg389, people: a.ppl, day: 1, where: { placeId: "plainstead", danger: 3 } });
+      return !ra.fought && ra.taken.raw_material === Math.floor(100 * s.alone) && a.car.load.raw_material === 100 - Math.floor(100 * s.alone);
+    })());
+
+  /* ---- 3 · ⛔ WHO WALKS IT IS ONE ANSWER ---- */
+  const hold389 = (crew) => ({ id: "h", name: "The Test Hold", kind: "enterprise", locationId: "millbrook", condition: "thriving",
+    store: { raw_material: 12 }, steward: "s", crew, features: [{ kind: "market", count: 1 }], history: [] });
+  const char389 = (crew) => ({ id: "c389", name: "T", clock: { day: 40 }, worldState: {}, holdings: [hold389(crew)],
+    npcRegistry: { s: { id: "s", name: "Keeper", status: "active" }, a: { id: "a", name: "A", status: "active" }, b: { id: "b", name: "B", status: "active" }, c: { id: "c", name: "C", status: "active" } },
+    purse: { crystal: 0, coin: 0, paper: 0, marks: 0, scrip: {} } });
+  check("§389: ⛔ `standingCrewFor` IS THE ONE ANSWER — the hold's own hands, capped by `trade.crew`, and a set route answers with the crew it was set with",
+    (() => {
+      const cap = Math.max(0, Math.round(Number(cfg389.trade?.crew) || 2));
+      const none = CV389.standingCrewFor(hold389([]), cfg389);
+      const some = CV389.standingCrewFor(hold389(["a", "b", "c"]), cfg389);
+      const set = CV389.standingCrewFor({ ...hold389(["a", "b", "c"]), route: { toId: "plainstead", crew: ["a"] } }, cfg389);
+      return none.length === 0 && some.length === Math.min(3, cap) && set.length === 1 && set[0] === "a";
+    })(), `cap ${cfg389.trade?.crew}`);
+  // ⛔ AND THE CARD PRICES THE CREW THE BUTTON SENDS. Before this it forecast a flat two for every hold: a crewless hold
+  // was quoted two wages it will never pay and an escorted road it will never walk, and `walking === 0` was unreachable.
+  check("§389: ⛔ …and the CARD prices exactly that crew — a hold with no hands is priced UNESCORTED, and one with hands is not",
+    (() => {
+      const deps = { cfg: cfg389, economy: R389.economy, locations: L389, regionId: L389.millbrook?.regionId || null, powers: C389.powers, rules: R389 };
+      const bare = CV389.storeExits(char389([]), hold389([]), deps);
+      const crewed = CV389.storeExits(char389(["a", "b", "c"]), hold389(["a", "b", "c"]), deps);
+      const rb = bare.rows.find(r => String(r.id).startsWith("caravan:"));
+      const rc = crewed.rows.find(r => String(r.id).startsWith("caravan:"));
+      const s = CV389.roadShares(cfg389);
+      return rb && rc
+        && rb.value.walking === 0 && rb.value.unescorted === true && rb.value.takeShare === s.alone
+        && rc.value.walking > 0 && rc.value.unescorted === false && rc.value.takeShare === s.lost
+        // …and it SAYS so, because a computed field nothing shows is the fourth door
+        && /nobody to send/.test(rb.said) && /hands walking with it/.test(rc.said)
+        && rb.costs.some(c => /no hands to send/.test(c.label))
+        && rc.costs.some(c => new RegExp(`${rc.value.walking} carrier`).test(c.label));
+    })());
+  // ⛑ AND THE SHARE THE CARD USED IS THE SHARE THE ROAD SPENDS — the same helper, driven on both sides. §388's spine.
+  check("§389: ⛑ …and the share the card quoted is the share the road spends, driven on both sides",
+    (() => {
+      for (const crew of [[], ["a", "b"]]) {
+        const ch = char389(crew);
+        const ex = CV389.storeExits(ch, ch.holdings[0], { cfg: cfg389, economy: R389.economy, locations: L389,
+          regionId: L389.millbrook?.regionId || null, powers: C389.powers, rules: R389 });
+        const row = ex.rows.find(r => String(r.id).startsWith("caravan:"));
+        if (!row) return false;
+        const dest = String(row.id).split(":").pop();
+        const sent = CV389.sendCaravan(ch, { holdingId: "h", toId: dest, carriers: CV389.standingCrewFor(ch.holdings[0], cfg389), locations: L389, cfg: cfg389, day: 40, traveller: ch });
+        if (!sent.ok) return false;
+        const ppl = { ...ch.npcRegistry };
+        sent.caravan.danger = 3;
+        const before = sent.caravan.load.raw_material || 0;
+        const r = CV389.resolveRoadHazard(ch, sent.caravan, { rng: () => 0.5, cfg: cfg389, people: ppl, day: 41, where: { placeId: dest, danger: 3 } });
+        // an unescorted cart takes exactly the share the card named; an escorted one FIGHTS, which the card cannot price
+        if (crew.length === 0) {
+          if (r.fought) return false;
+          if (Math.floor(before * row.value.takeShare) !== (r.taken.raw_material || 0)) return false;
+        } else if (!r.fought) return false;
+      }
+      return true;
+    })());
+
+  /* ---- 4 · ⛑ THE HOLD'S DIAL STILL HAS ITS OWN READER ---- */
+  // ⚠️ `waitingExposure` reads `raid.takeShare` ON PURPOSE — stock standing in the shed waiting for the next departure is
+  // a raid on a hold, which is exactly what Q8's 0.5 rules. Gated so nobody "completes" the split by moving it.
+  check("§389: ⛑ THE STOCK WAITING IN THE SHED IS STILL A RAID ON A HOLD — `waitingExposure` reads the hold's dial, and moving the ROAD's does not touch it",
+    (() => {
+      const h = hold389([]);
+      const ask = (cfg) => CV389.waitingExposure(char389([]), h, { units: 40, basket: { raw_material: 40 }, cfg,
+        economy: R389.economy, regionId: L389.millbrook?.regionId || null, dangerLevel: 3, day: 40 });
+      const base = ask(cfg389);
+      const roadMoved = ask({ ...cfg389, trade: { ...cfg389.trade, roadTakeShare: 0.01, unescortedTakeShare: 0.01 } });
+      const holdMoved = ask({ ...cfg389, raid: { ...cfg389.raid, takeShare: 0.9 } });
+      return base.takeShare === R389.economy.holdStore.raid.takeShare
+        && roadMoved.cost === base.cost && holdMoved.cost !== base.cost;
+    })());
+
+  /* ---- 5 · ⛑ A DIAL A COMMENT CLAIMED, NOW AUTHORED ---- */
+  check("§389: ⛑ `companyGuardQuality` IS AUTHORED — `resolveRoadHazard`'s own comment called it \"a dial, not a guess at a number\" while falling back to a literal",
+    (() => {
+      const q = R389.economy.holdStore?.trade?.companyGuardQuality;
+      if (!Number.isFinite(Number(q))) return false;
+      // and it is SPENT: a company whose guards fight at a higher quality holds a road its weaker twin loses
+      const run = (quality) => {
+        let held = 0;
+        for (let i = 0; i < 300; i++) {
+          const ch = { name: "T", npcRegistry: {}, holdings: [], clock: { day: 1 } };
+          const car = { id: "c", holdingId: "h", from: "millbrook", to: "plainstead", danger: 4,
+            load: { raw_material: 100 }, carriers: [], events: [], status: "travelling", company: { id: "co", cut: 0.2, guards: 3 } };
+          const r = CV389.resolveRoadHazard(ch, car, { rng: Math.random, cfg: { ...cfg389, trade: { ...cfg389.trade, companyGuardQuality: quality } },
+            people: {}, day: 1, where: { placeId: "plainstead", danger: 4 } });
+          if (r.held) held++;
+        }
+        return held;
+      };
+      return run(8) > run(1);
+    })(), `authored ${R389.economy.holdStore?.trade?.companyGuardQuality}`);
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

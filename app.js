@@ -92,7 +92,7 @@ import { resolveWaygateTransit, routeGmMoveTo, isNetworkGate, networkGatesFrom, 
 import { routeBetween, routeLine, twoWayRoads } from "./engine/journey.js";
 import { planJob, suggestTeam, jobPoolOf, jobRouteOf, jobCost, jobWages, jobEffects, sayEffects, settleDueJobs, degreeWord, jobOpposition, mainNeedOf, jobCraftsOf, bestCraftFor, OUTCOMES as JOB_OUTCOMES, errandOdds, detachForJob, jobPersonFor, workCraftsOf, workDayChance, workHeads, bandTeamOf, sendBandOnMission, bandMissionParty } from "./engine/jobs.js";   // CCODE-420 · CCODE-428 · CCODE-431
 import { ensureJobs, postJob, sendOnJob, awayOnJob, untoldJobs, markJobsTold, dropJob, detachedFrom } from "./engine/jobstate.js";   // CCODE-420 · CCODE-431
-import { sendCaravan, caravansOf, storeExits, setRoute, clearRoute, hireCompany, routeCompany } from "./engine/caravan.js";   // R49: a caravan is a delegate + a route + a load   // SNG-331 §1 / SNG-386 §4.4: two named options over roads + gates // SNG-148: waygates — map control routes named/hub; GM offer via the registry row. SNG-243 §4: the gate network
+import { sendCaravan, caravansOf, storeExits, setRoute, clearRoute, hireCompany, routeCompany, standingCrewFor } from "./engine/caravan.js";   // R49: a caravan is a delegate + a route + a load   // SNG-331 §1 / SNG-386 §4.4: two named options over roads + gates // SNG-148: waygates — map control routes named/hub; GM offer via the registry row. SNG-243 §4: the gate network
 import { skillDetail, npcDetail, itemDetail, relationshipsParagraph, craftRollsLine, craftRollsShort } from "./engine/entityDetail.js";
 import { wholeNameFor, learnWholeName } from "./engine/names.js";   // ⛔ SNG-643 §5 (C17): a whole name is shown only when this character may see it
 import { collapseScenePresence, canonicalPersonId, personArtSeed, applyNpcUpdates, findExistingNpc, genderUnsaid, sexUnsaid, SEX_VALUES, sexFromGender, sexGenderAgree, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier, backfillNpcGender, reconcileGeneratedNpcWithMeet, npcFearsForGM, npcReactionsForGM, repairUnnamedPeople } from "./engine/npcs.js";   // SNG-431 §1: the pre-namer saves get their names
@@ -182,7 +182,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.15.0";
+const APP_VERSION = "2.15.1";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -14714,7 +14714,10 @@ function wireHoldingOffers() {
     const [holdId, toId] = String(btn.dataset.routeSet || "").split("|");
     const h = (character.holdings || []).find(x => x && x.id === holdId);
     if (!h || !toId) return;
-    const r = setRoute(character, holdId, { toId, carriers: (h.crew || []).slice(0, 2), locations: CONTENT.locations || {}, day: absoluteWorldDay() });
+    // ⛔ THROUGH `standingCrewFor`, NOT AN INLINE SLICE. This line WAS the decision about who walks a standing run,
+    // while the card forecast a flat two — so four of the six holds in the world were quoted two wages they will never
+    // pay and an escorted road they will never walk. One function, both readers.
+    const r = setRoute(character, holdId, { toId, carriers: standingCrewFor(h, holdCfgNow()), locations: CONTENT.locations || {}, day: absoluteWorldDay() });
     if (!r.ok) { console.warn("[route] refused:", r.why); return; }   // prose-cap-ok: a console diagnostic
     saveCharacter(character); again();
   };

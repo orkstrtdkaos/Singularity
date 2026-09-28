@@ -397,6 +397,11 @@
     "mounts": 2
    },
    "waterSpeed": 3,
+   "_roadShares": "⛔ THE ROAD'S OWN SHARES, SPLIT OFF `raid.takeShare` ON 2026-09-28. Erik, reading the C1 measurements: \"unescorted loses shouldn't be 50%.. .not sure how that happened.\" It happened because `resolveRoadHazard` read the HOLD's raid dial — Q8's ruling that a raided shed loses half — for two different road events, and CCode's own po table of 09-06 printed the row as \"Erik's ruling\". His only words there were about the wipe. So: `roadTakeShare` is what a LOST road fight costs and stays at the 0.5 that was in play; `unescortedTakeShare` is what a cart nobody walks with costs, and it is now the second-WORST rung rather than tied with losing a fight, because bringing people must never be worse for the load than bringing nobody. ⛑ Bounded strictly below 1.0 by Erik's own ruling: a total loss means your people died, and an unescorted cart has nobody to kill. ⚠️ THE FULL LADDER IS beat them off 0 → lose the fight `roadTakeShare` → nobody walking `unescortedTakeShare` → escort WIPED 1.0 (ruled, not a dial). Erik turns these two.",
+   "roadTakeShare": 0.5,
+   "unescortedTakeShare": 0.75,
+   "companyGuardQuality": 3,
+   "_companyGuardQuality": "✅ SNG-652 §6 / C1 — the quality a hired company's guards fight at in `legionClash`, as one contingent of `company.guards` heads. ⚠️ `resolveRoadHazard`'s comment called this \"a dial, not a guess at a number\" while falling back to a literal 3, because nobody had written it down; this is that number, authored.",
    "companySpeed": 2,
    "waterTags": [
     "harbour",

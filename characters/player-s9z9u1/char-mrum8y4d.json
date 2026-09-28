@@ -164,7 +164,7 @@
       "id": null,
       "name": "Road Rations (4 days)",
       "kind": "consumable",
-      "qty": 2,
+      "qty": 1,
       "description": "Dried meat and hard bread wrapped in cloth bundles. Enough for lean travel.",
       "effects": {
         "energy": 13
@@ -365,7 +365,8 @@
       ],
       "weight": 1,
       "spread": [
-        "the_mountain_pass"
+        "the_mountain_pass",
+        "waystone"
       ],
       "day": 5,
       "worldDay": 83
@@ -394,7 +395,9 @@
         "clarity"
       ],
       "weight": 1,
-      "spread": [],
+      "spread": [
+        "the_mountain_pass"
+      ],
       "_bonusApplied": 0.15,
       "day": 5,
       "worldDay": 88
@@ -537,47 +540,33 @@
     "At Mara Wells' Store in deep night, the band gathers road rations and learns that Millbrook's earth resists shortcuts—the land will not permit close-work passage through the town. Mara directs them northward toward Whistling Woman Post on the long road, naming Halvex Coil as keeper of the Standing Annex and offering the wisdom of trust in the slower way.",
     "The band departs Mara Wells' Store at dawn for Whistling Woman Post, planning a two-hour walk on the spinward road to the relay station, then on to the Standing Annex where Halvex Coil awaits them."
   ],
-  "currentLocationId": "gen-whistling-woman-post",
+  "currentLocationId": "gen-the-made-gate",
   "activeScene": {
-    "locationId": "gen-whistling-woman-post",
+    "locationId": "gen-the-made-gate",
     "turns": [
       {
         "player": null,
-        "summary": "A Radiant agent waits at Whistling Woman Post with foreknowledge and a demand—the sealed chamber is no longer hidden.",
-        "narration": "The relay station rises out of the moorland like something half-decided about permanence. Whistling Woman Post—a long stone building with a shingled roof, a watchtower at its north corner, and a shrine tucked into the courtyard's eastern edge. The night is clear and cold. Your breath mists. The moorland around stretches flat and open, dotted with the small rocks that give this ground its name, and the sky above holds more stars than you remember seeing in any town.\n\nLight spills warm from the main building's windows. You can hear voices inside—low, carrying the cadence of evening talk. The doors are not locked. As your band crosses the threshold, the warmth hits first, then the smell of woodsmoke and something cooking.\n\nThe common room is wider than you expected. A hearth dominates the far wall, tended by a woman in a grey coat who turns at the sound of your arrival. She is absolutely still. Her eyes find you first, then move across your companions with the precision of someone taking inventory. She knows your name. The recognition on her face is not surprise—it is arrival. She has been waiting for this moment with certainty.\n\n\"Loki,\" she says. The voice is clear, trained in Harmonic speech, and it carries without effort. \"I am sent from the High Luminary to ask a question before you reach the Standing Annex. The sealed chamber beneath Millbrook—I need to know your intention with it before the band proceeds further.\""
-      },
-      {
-        "player": "Ask everyone to come to the local shrine- especially Vail... see if she'd like to participate in establishing a Radiant position on the circle the shrine that currently holds places for the 4 cardinal directions.",
-        "summary": "At Whistling Woman Post's shrine, Loki invited Vail and other travelers to establish a shared position at the cardinal points—offering ground that no single authority held yet. Vail stepped into the invitation, reading it for what it actually was: a choice, not a command.",
-        "narration": "You step into the common room and name it plainly: a shrine stands here, kept in the way of this place, and it holds positions for the four cardinal directions. You speak to the room—to Vail first, meeting her stillness directly, and to the travelers warming themselves by the fire. You ask them to come to the shrine and establish something together there. Not a demand. An offer of ground that belongs to nobody yet.\n\nVail's head tilts. Her grey coat catches the firelight as she considers you without moving. Then she nods—not a promise, but a willingness to hear it out. The other travelers, two merchants heading outbound and a courier resting between runs, exchange glances. They rise without comment and follow as you lead toward the courtyard.\n\nThe shrine is small and old, built into the corner where two stone walls meet. The moonlight falls clean across its face. Four carved alcoves mark the cardinal points—each one waiting, empty of any sign or stone or binding. You can feel the architecture of it: a place made to hold something, not yet decided what. Vail stands at the threshold and reads it the way she reads everything—with absolute attention. When you speak of a Radiant position, of her choosing to establish it here, something shifts in her certainty. Not a breaking. A reorientation. She looks at you, then back at the shrine's empty alcoves.\n\n\"You are asking me to choose,\" she says quietly. Not hostile. Precise. The other travelers stand waiting, patient, giving the moment its weight."
-      },
-      {
-        "player": "Silas Weir and his Ashwarden built this place for all who would embrace the value in diversity.  It does not allow you to bring foreclosure into the circle... so, No Vail, I'm not asking you to choose - I'm asking you to embrace alternate approaches and the value that asking questions and seeking answers brings... THAT is what I hope a Radiant can build a shining example of at this shrine.  Will you do it? ",
-        "summary": "At Whistling Woman Post's shrine, Loki called Vail to embrace the founding principle of shared ground—asking questions instead of closing doors. Vail accepted, choosing to become a threshold rather than a fortress, and committed to carrying that choice back to the High Luminary herself.",
-        "narration": "You name it plainly to Vail: Silas Weir and his Ashwarden built this shrine for all who would embrace the value in diversity. It does not allow foreclosure into the circle—not for the Radiant, not for any single authority. You are not asking her to choose a side. You are asking her to build something here that the Radiant can offer without taking: the shining example of an authority willing to ask questions and seek answers instead of closing doors.\n\nVail's stillness deepens. Her eyes move from your face to the shrine's empty alcoves, one cardinal point at a time. Her hands, which have rested at her sides since you arrived, shift slightly—not a tremor. A recalibration. When she speaks, her voice carries the same absolute clarity it always has, but the ground beneath it has changed.\n\n\"The High Luminary sent me to seize,\" she says quietly. \"To make certain of what could not be trusted to answer on its own. I came believing that was mercy.\" She turns back to you. \"You are offering something else. Not permission. Not a concession. An architecture where asking holds as much weight as answering.\"\n\nShe walks toward the shrine's threshold. The merchants and the courier watch her move, reading something in her bearing that has shifted. She stands at the eastern alcove—the place where the Radiant might stand—and turns to face outward toward the open courtyard. \"I will hold this place as a threshold, not a fortress. I will ask what the valley is becoming, instead of deciding what it should be.\" She pauses. \"And I will tell Seraphine that her agent found something here that changes what an enforcer can do.\"\n\nThe other travelers rise quietly and move toward the shrine. They do not speak, but their presence becomes an answer to your answer.\n\n*✦ The Radiant: +1 — offered a path through absolute order that preserves both authority and the value of asking questions.*"
-      },
-      {
-        "player": "Ask Vail to perform a Radiant working that will stand at her location... Move to the opposite side from her and use shadow Image as an offering of veilcraft to the shine of possibilities.",
-        "summary": "At Whistling Woman Post's shrine, Loki and Vail established a shared threshold: Radiant light and Veilcraft shadow held together at opposite cardinal points, offered as a shining example that authority can ask questions instead of closing doors. Four travelers now stand at the cardinal alcoves. Vail commits to carrying this choice back to Seraphine.",
-        "narration": "Vail's stillness holds the moment steady. When you ask her to perform a Radiant working—to stand at her location and let the Radiant's own craft answer the shrine's invitation—she closes her eyes. Just for a breath. Then she nods, and her voice carries across the courtyard with that trained, carrying tone: a working of harmony and order, the words of her people shaped to affirm and bind. Light gathers around her in the eastern alcove—not bright, but present. Real.\n\nYou move to the western point, directly opposite. The shrine's carved stone holds the cardinal weight of the place, and you feel it the moment you stand there. Cy clicks softly at your shoulder, reading what you are about to do.\n\nYou reach for Shadow-Image—Umbracraft and Falsecraft braided together—and you do not conceal yourself. Instead, you offer an image: the shrine as it could be, reflected in darkness and light both, a threshold where asking and answer hold equal ground. Where possibilities shimmer without foreclosure. The veil thins, and for one moment, anyone looking sees not just Vail's Radiant light but also the shadow-reflection of what asking itself looks like when it is held as sacred.\n\nIt lands. Not perfectly—the image wavers slightly, the two crafts still learning to walk together—but it lands. Vail's working and your offering settle into the shrine's stone like they were always meant to be there. The other travelers step forward without being asked. The two merchants take the northern point. The courier moves to the south. Four positions held. Four different approaches to the same ground.\n\nVail opens her eyes and looks at you across the shrine. She will carry this back to Seraphine. The High Luminary will have to decide what to do with a threshold that refuses to foreclose.\n\n*You feel it settle into you — a new steadiness. (Level 11: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*\n\n*✦ The Radiant: +1 — offered a path through unified order that preserves diversity and the value of asking.*\n\n*✦ The Veilwrights: +1 — wove Veilcraft into a threshold rather than a concealment—made the shadow a working principle.*"
+        "summary": "The shrine at Whistling Woman Post greets Loki on a third visit — the door opens before being touched, knowing its guest now. Veln Ashpause stands in the threshold-light to deliver word: the band is gathered at the Standing Annex, and something beneath the valley is waking.",
+        "narration": "The door of the shrine opens before you reach for it — the wood knowing you now, on the third visit, and moving with the ease of something certain of its welcome. Inside, the threshold-light sits steady in its four cardinal alcoves: east holds Vail's Radiant presence, a stillness that has learned to ask; west carries the shadow-image of your own veilcraft offering; north and south hold the merchant's and courier's simple ground. Nobody remarks on the door's knowing. It is simply how this place works now.\n\nBut the shrine itself is changed in a way that matters. The alcove-light casts true shadows instead of the even wash you remember — the east and west positions are in real conversation with each other, light and shadow trading places across the floor as the flames breathe. Someone has been here since the band departed. Someone has been tending.\n\nVeln Ashpause stands at the center threshold, motionless, her grey coat catching the amber and the black in equal measure. She does not turn to greet you — she simply tilts her head with that terrible sympathy, the one that belongs to someone who reads what the moment requires. When she speaks, her voice carries the weight of foreknowledge.\n\n\"You asked the hard question and held the space for an honest answer,\" she says quietly. \"The Churn-Revellers took their name in lamp-light and chose understanding over breaking. This ground remembers it. The shrine remembers it.\" She pauses, and the pause itself is a choice — not rushing, not hiding, simply allowing the space to settle. \"Halvex Coil is at the Annex. The others are ready. And something beneath the valley has begun to wake.\""
       }
     ],
     "lastTurn": {
-      "narration": "Vail's stillness holds the moment steady. When you ask her to perform a Radiant working—to stand at her location and let the Radiant's own craft answer the shrine's invitation—she closes her eyes. Just for a breath. Then she nods, and her voice carries across the courtyard with that trained, carrying tone: a working of harmony and order, the words of her people shaped to affirm and bind. Light gathers around her in the eastern alcove—not bright, but present. Real.\n\nYou move to the western point, directly opposite. The shrine's carved stone holds the cardinal weight of the place, and you feel it the moment you stand there. Cy clicks softly at your shoulder, reading what you are about to do.\n\nYou reach for Shadow-Image—Umbracraft and Falsecraft braided together—and you do not conceal yourself. Instead, you offer an image: the shrine as it could be, reflected in darkness and light both, a threshold where asking and answer hold equal ground. Where possibilities shimmer without foreclosure. The veil thins, and for one moment, anyone looking sees not just Vail's Radiant light but also the shadow-reflection of what asking itself looks like when it is held as sacred.\n\nIt lands. Not perfectly—the image wavers slightly, the two crafts still learning to walk together—but it lands. Vail's working and your offering settle into the shrine's stone like they were always meant to be there. The other travelers step forward without being asked. The two merchants take the northern point. The courier moves to the south. Four positions held. Four different approaches to the same ground.\n\nVail opens her eyes and looks at you across the shrine. She will carry this back to Seraphine. The High Luminary will have to decide what to do with a threshold that refuses to foreclose.\n\n*You feel it settle into you — a new steadiness. (Level 11: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*\n\n*✦ The Radiant: +1 — offered a path through unified order that preserves diversity and the value of asking.*\n\n*✦ The Veilwrights: +1 — wove Veilcraft into a threshold rather than a concealment—made the shadow a working principle.*\n\n*▲ Practiced — **Unbearable Word** is fluent now (rank 2), earned through use.*",
-      "sceneSummary": "At Whistling Woman Post's shrine, Loki and Vail established a shared threshold: Radiant light and Veilcraft shadow held together at opposite cardinal points, offered as a shining example that authority can ask questions instead of closing doors. Four travelers now stand at the cardinal alcoves. Vail commits to carrying this choice back to Seraphine.",
+      "narration": "The door of the shrine opens before you reach for it — the wood knowing you now, on the third visit, and moving with the ease of something certain of its welcome. Inside, the threshold-light sits steady in its four cardinal alcoves: east holds Vail's Radiant presence, a stillness that has learned to ask; west carries the shadow-image of your own veilcraft offering; north and south hold the merchant's and courier's simple ground. Nobody remarks on the door's knowing. It is simply how this place works now.\n\nBut the shrine itself is changed in a way that matters. The alcove-light casts true shadows instead of the even wash you remember — the east and west positions are in real conversation with each other, light and shadow trading places across the floor as the flames breathe. Someone has been here since the band departed. Someone has been tending.\n\nVeln Ashpause stands at the center threshold, motionless, her grey coat catching the amber and the black in equal measure. She does not turn to greet you — she simply tilts her head with that terrible sympathy, the one that belongs to someone who reads what the moment requires. When she speaks, her voice carries the weight of foreknowledge.\n\n\"You asked the hard question and held the space for an honest answer,\" she says quietly. \"The Churn-Revellers took their name in lamp-light and chose understanding over breaking. This ground remembers it. The shrine remembers it.\" She pauses, and the pause itself is a choice — not rushing, not hiding, simply allowing the space to settle. \"Halvex Coil is at the Annex. The others are ready. And something beneath the valley has begun to wake.\"",
+      "sceneSummary": "The shrine at Whistling Woman Post greets Loki on a third visit — the door opens before being touched, knowing its guest now. Veln Ashpause stands in the threshold-light to deliver word: the band is gathered at the Standing Annex, and something beneath the valley is waking.",
       "choices": [
         {
-          "label": "Speak with Vail before she departs — ask what she will tell Seraphine, and why she chose this.",
+          "label": "Ask Veln plainly what she means — what has woken, and how she knows it.",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {
             "falsehood_truth": 0.3,
-            "demonic_angelic": 0.2
+            "emotional_logical": -0.2
           },
           "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
-            "negotiate"
+            "ask",
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -586,32 +575,38 @@
           "emergenceId": null
         },
         {
-          "label": "Step back from the shrine and rest — the band has walked hard to reach this place, and the night is still long.",
-          "attribute": "physical",
-          "subAttribute": "strength",
-          "axes": {},
-          "difficulty": "very easy",
+          "label": "Ask if the shrine itself is a message — whether the four cardinal positions hold meaning that concerns what wakes below.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "concrete_abstract": 0.4,
+            "falsehood_truth": 0.2
+          },
+          "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
-            "calm"
+            "study",
+            "ask"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
+          "abilityId": "see_the_made_thing",
+          "energyCost": 2,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Ask Cy what it reads from the shrine now — it saw the working, it read the stone, it knows what was made.",
-          "attribute": "mental",
+          "label": "Move toward the Standing Annex immediately — let Veln accompany you if she will, but do not wait for explanation.",
+          "attribute": "practical",
           "subAttribute": "wits",
           "axes": {
-            "concrete_abstract": 0.1
+            "violence_peace": -0.1,
+            "body_mind": -0.2
           },
           "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "study"
+            "travel",
+            "lead"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -620,224 +615,147 @@
           "emergenceId": null
         },
         {
-          "label": "Head inside the relay station to find Halvex Coil and learn what the sealed chamber revealed beneath the Crossing.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
-          "difficulty": "easy",
+          "label": "Read the shrine's light-pattern with Prism Sight — understand what tending has changed here since the band left.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "concrete_abstract": -0.3,
+            "falsehood_truth": 0.2
+          },
+          "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
-            "travel"
+            "study",
+            "careful"
           ],
-          "abilityId": null,
-          "energyCost": null,
+          "abilityId": "prism_sight",
+          "energyCost": 2,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
       ],
-      "deeds": [
-        {
-          "description": "Offered Vail Langley a path through absolute order that preserves the value of asking questions—and she chose it, accepting a threshold instead of a fortress",
-          "tags": [
-            "wisdom",
-            "mercy",
-            "choice"
-          ],
-          "weight": 2,
-          "communityId": "valley.whistling-woman-post"
-        },
-        {
-          "description": "Established a shared shrine threshold at Whistling Woman Post where four different traditions hold cardinal ground together, none claiming sole authority",
-          "tags": [
-            "communion",
-            "foundation",
-            "balance"
-          ],
-          "weight": 2,
-          "communityId": "valley.whistling-woman-post"
-        }
-      ],
+      "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": -8,
+        "energy": 0,
         "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 12
+        "inventoryRemove": []
       },
-      "ledgerEvents": [
-        {
-          "what": "A Radiant agent accepted a threshold at the shrine instead of seizing authority—the Radiant Plateau's own chain will learn that asking and closing doors are different choices",
-          "tags": [
-            "authority",
-            "precedent",
-            "breaking-mandate"
-          ],
-          "visibility": "witnessed",
-          "spectrumDeltas": {
-            "falsehood_truth": 0.05,
-            "demonic_angelic": 0.1,
-            "violence_peace": 0.15
-          },
-          "impactsLocal": true
-        }
-      ],
+      "ledgerEvents": [],
       "questUpdates": [
         {
           "op": "progress",
-          "questId": "the-taken-from-the-city",
-          "title": "The Taken: Someone was brought from the city to the Unlit Deep, and the city is pretending it did not happen",
-          "summary": "Vail Langley, agent of the High Luminary, now carries word to Seraphine that the sealed chamber is not a thing to seize, but part of a larger conversation about what the valley is becoming. Authority can ask questions instead of closing doors.",
-          "giver": "the elder of the Unlit Deep",
-          "note": "The path forward has shifted: the chamber's secrecy is broken, but not as a crisis—as an opening. What Seraphine does with that choice will reshape the entire conversation.",
-          "xpReward": 0
+          "questId": "journey-gen-the-standing-annex-90",
+          "title": "Journey to The Standing Annex",
+          "summary": "The long road north — one day walking to the Annex.",
+          "giver": "the road itself",
+          "note": "Arrived at Whistling Woman Post. The shrine greets you on a third visit — the door opens before being touched. Veln Ashpause waits with word: the band is gathered at the Standing Annex, and something beneath the valley has begun to wake."
         }
       ],
-      "standingOps": [
-        {
-          "people": "radiant_folk",
-          "delta": 1,
-          "why": "offered a path through unified order that preserves diversity and the value of asking"
-        },
-        {
-          "people": "veilwright",
-          "delta": 1,
-          "why": "wove Veilcraft into a threshold rather than a concealment—made the shadow a working principle"
-        }
-      ],
-      "discoveryEligible": false,
+      "standingOps": [],
+      "delegateOps": [],
+      "jobOps": [],
+      "arcOps": [],
+      "adoptSchool": null,
       "offer": {
-        "thing": "The shrine's four cardinal alcoves now hold living positions—Vail's Radiant light in the east, your shadow-image in the west, two travelers' quiet presence in the north and south. The ground itself has shifted.",
-        "from": "Loki's own offer of shared threshold, made plainly to a room full of strangers who were listening"
+        "thing": "Veln Ashpause, waiting at the threshold with foreknowledge — present to guide you the next step",
+        "from": "The Hourkeeper perceives past, present, and future — and knows which direction to stand in. She has come to deliver what you need to hear at the moment you are ready to hear it."
       },
+      "stageOps": [],
       "scene": {
-        "setting": "The shrine at Whistling Woman Post's courtyard—stone built into the corner of two walls, now lit by spilled warmth from the relay station's windows and the clear autumn moonlight. Four cardinal alcoves stand occupied: east holds Vail in her grey coat with Radiant light around her; west holds the shadow-image of asking itself; north and south hold two merchants and a courier, quietly present. The moorland stretches flat around the post, studded with small rocks. The night is clear, cold, and still.",
+        "setting": "The shrine at Whistling Woman Post, deep night, mid-autumn. Four cardinal alcoves hold threshold-light — east and west in real conversation, north and south in quiet ground. The door of living wood stands open, knowing its guest.",
         "npcsPresent": [
           {
-            "name": "Vail Langley",
-            "state": "Standing in the eastern alcove with Radiant working settled around her, eyes open now, looking at Loki across the shrine with something like recognition"
-          },
-          {
-            "name": "Two merchants",
-            "state": "Standing at the northern cardinal point, holding the ground quietly, no longer moving or speaking"
-          },
-          {
-            "name": "A courier",
-            "state": "Standing at the southern cardinal point, presence affirming the choice that has been made"
+            "name": "Veln Ashpause",
+            "state": "Standing at the center threshold, motionless, reading what the moment requires. She carries foreknowledge and has chosen to speak it."
           }
         ],
         "objects": [
-          "The shrine's four carved stone alcoves at the cardinal points",
-          "Radiant light gathered in the eastern alcove",
-          "The shadow-image of asking, reflected in darkness and light both, hovering in the western point",
-          "Clear autumn moonlight falling across the shrine's face",
-          "The relay station warm and lit behind the shrine, smoke rising from its chimney"
+          "The shrine's threshold-light, burning true in four cardinal positions",
+          "The door of living wood, still open, its edges catching amber and shadow"
         ],
         "threads": [
-          "What Vail will tell Seraphine and how the High Luminary will respond to a threshold instead of a seized chamber",
-          "Whether this becomes a real precedent for other authorities, or whether Seraphine will try to reclaim the shrine",
-          "The band's journey continuing to the Standing Annex to meet Halvex Coil and learn what the sealed chamber beneath the Crossing revealed"
+          "What has woken beneath the valley, and why Veln speaks of it now",
+          "Whether the four cardinal positions of the shrine hold meaning for what is rising",
+          "The Standing Annex waiting, the band gathered, and what comes next"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "vail-langley",
-          "name": "Vail Langley",
-          "title": "Enforcer of the High Luminary's Will (Threshold-keeper, Whistling Woman Post Shrine)",
-          "role": "Agent of Seraphine; now a living example of authority willing to ask",
+          "npcId": "hourkeeper-confluence",
+          "name": "Veln Ashpause",
           "status": "active",
-          "statusNote": "Standing in the eastern alcove of the shrine at Whistling Woman Post, having accepted a threshold position instead of a fortress. Will carry word to Seraphine that authority can hold ground and ask questions instead of closing doors.",
-          "learned": [
-            "The shrine at Whistling Woman Post is built on a founding principle of shared ground and refuses foreclosure into the circle",
-            "A threshold and a fortress are different things—one asks, one commands",
-            "Loki offered her a path that honored her need for order while preserving the value of questioning",
-            "She can reorganize her mandate in real time and still carry her authority with her"
-          ],
-          "skillsObserved": [
-            "Absolute stillness and patience—she held the moment without rushing judgment",
-            "Willingness to accept correction and rebuild certainty around it",
-            "Courage to reshape her own mandate in the presence of those watching",
-            "Ability to perform Radiant working with precision and presence"
-          ],
-          "relationshipDelta": 2,
-          "note": "She chose the threshold. She will carry this choice back to Seraphine and speak for it.",
-          "deed": {
-            "description": "Accepted a threshold at the shrine instead of seizing authority—became a living example that the Radiant can hold ground and ask questions instead of closing doors",
-            "weight": 2,
-            "tags": [
-              "wisdom",
-              "courage",
-              "precedent"
-            ]
-          }
+          "statusNote": "At Whistling Woman Post shrine, waiting to deliver word — something beneath the valley has begun to wake.",
+          "note": "Greeted Loki at the shrine threshold on their third visit, the door opening before being touched. Spoke with foreknowledge of the band's gathering at the Standing Annex and the waking beneath the valley."
         }
       ],
-      "intentsHeard": [
-        "Loki offered shared threshold, Vail answered with her own working"
-      ],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "The shrine at Whistling Woman Post now holds four cardinal positions: Radiant light in the east (Vail Langley), shadow-image of asking in the west (Loki's veilcraft offering), merchants' presence in the north, courier's presence in the south. No single authority claims the ground. It stands as a threshold and a precedent.",
-          "subjectId": "gen-whistling-woman-post"
-        }
-      ],
+      "intentsHeard": [],
+      "factUpdates": [],
       "placeUpdates": [
         {
-          "note": "The four cardinal alcoves now hold living positions—not empty ground waiting, but actively occupied by those who chose to stand there. The shrine's founding principle of refusing foreclosure is now proven in stone and light and choice.",
+          "note": "The shrine at Whistling Woman Post now holds four cardinal alcove-positions in real conversation: east (Radiant light, Vail's threshold-presence), west (shadow-image of asking, veilcraft offering), north (merchant's simple ground), south (courier's simple ground). The light casts true shadows. Someone has tended the flame since the band departed.",
           "flag": {
-            "cardinal_alcoves_occupied": true,
-            "radiant_threshold_established": true,
-            "veilcraft_woven_into_stone": true
-          },
-          "subPlace": {
-            "name": "The Shrine",
-            "parent": "gen-whistling-woman-post",
-            "note": "Four cardinal alcoves holding four different positions, none claiming sole authority. A threshold, not a fortress.",
-            "visited": true
+            "cardinal_positions_active": true,
+            "light_conversation": true
           }
         }
       ],
       "discovery": null,
-      "imagePrompt": "Two figures stand opposite each other across an ancient shrine's open courtyard, bathed in moonlight and firelight both. On the east, a woman in grey stands still and certain, light gathering around her—Radiant working made visible. On the west, a shadow deepens and clarifies into a mirror-image that shows not absence but the shimmer of asking itself—darkness and light held together without foreclosure. Between them, the shrine's carved stone alcoves hold quiet presences at north and south. The moorland stretches flat and open beyond, and the sky holds more stars than ordinary places claim.",
-      "imageMedium": null,
+      "codexUpdates": [],
+      "holdingOps": [],
+      "holdTrades": [],
+      "debtOps": [],
+      "exchangeOps": [],
+      "partyOps": [],
+      "generateRequest": [],
+      "encounterOps": [],
+      "projectOps": [],
+      "bandOps": [],
+      "strikeOps": [],
+      "deathOps": [],
+      "newEncounter": null,
+      "unlockPrecursor": null,
+      "unlockSubstrate": null,
       "timeOps": {
-        "hoursPassed": 0.5,
-        "why": "the working and the offering took time to settle; the shrine needed a moment to accept what was woven into it"
+        "hoursPassed": 2,
+        "why": "The walk from Mara Wells' Store to Whistling Woman Post on the spinward road — two hours on the long way, deep night holding steady"
       },
-      "sceneEnded": false
+      "moveTo": {
+        "location": "Whistling Woman Post",
+        "why": "Arrived at the waystation on the long road north — the band's next gathering point before pressing on to the Standing Annex"
+      },
+      "stateOps": [],
+      "itemUpdates": [],
+      "deriveItem": null,
+      "imagePrompt": "A shrine threshold at deep night: four alcoves burning with cardinal light, east and west in conversation across shadow and flame, their brightness and darkness trading places as the flames breathe. The door of living wood stands open, its edges gilded with amber. A woman in grey stands motionless at the center, reading what the moment requires.",
+      "imageMedium": null,
+      "newAbility": null,
+      "gambitOps": null,
+      "gambitApt": false,
+      "sceneEnded": false,
+      "momentArt": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/A%20shrine%20threshold%20at%20deep%20night%3A%20four%20alcoves%20burning%20with%20cardinal%20light%2C%20east%20and%20west%20in%20conversation%20across%20shadow%20and%20flame%2C%20their%20brightness%20and%20darkness%20trading%20places%20as%20the%20flames%20breathe.%20The%20door%20of%20living%20wood%20stands%20open%2C%20its%20edges%20gilded%20with%20amber.%20A%20woman%20in%20grey%20stands%20motionless%20a%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=92141&nologo=true"
     },
     "sceneState": {
-      "setting": "The shrine at Whistling Woman Post's courtyard—stone built into the corner of two walls, now lit by spilled warmth from the relay station's windows and the clear autumn moonlight. Four cardinal alcoves stand occupied: east holds Vail in her grey coat with Radiant light around her; west holds the shadow-image of asking itself; north and south hold two merchants and a courier, quietly present. The…",
+      "setting": "The shrine at Whistling Woman Post, deep night, mid-autumn. Four cardinal alcoves hold threshold-light — east and west in real conversation, north and south in quiet ground. The door of living wood stands open, knowing its guest.",
       "npcsPresent": [
         {
-          "name": "Vail Langley",
-          "state": "Standing in the eastern alcove with Radiant working settled around her, eyes open now, looking at Loki across the shrine"
-        },
-        {
-          "name": "Two merchants",
-          "state": "Standing at the northern cardinal point, holding the ground quietly, no longer moving or speaking"
-        },
-        {
-          "name": "A courier",
-          "state": "Standing at the southern cardinal point, presence affirming the choice that has been made"
+          "name": "Veln Ashpause",
+          "state": "Standing at the center threshold, motionless, reading what the moment requires. She carries foreknowledge and has chosen"
         }
       ],
       "objects": [
-        "The shrine's four carved stone alcoves at the cardinal points",
-        "Radiant light gathered in the eastern alcove",
-        "The shadow-image of asking, reflected in darkness and light both, hovering in th",
-        "Clear autumn moonlight falling across the shrine's face",
-        "The relay station warm and lit behind the shrine, smoke rising from its chimney"
+        "The shrine's threshold-light, burning true in four cardinal positions",
+        "The door of living wood, still open, its edges catching amber and shadow"
       ],
       "threads": [
-        "What Vail will tell Seraphine and how the High Luminary will respond to a threshold instead of a seized chamber",
-        "Whether this becomes a real precedent for other authorities, or whether Seraphine will try to reclaim the shrine",
-        "The band's journey continuing to the Standing Annex to meet Halvex Coil and learn what the sealed chamber beneath the Crossing revealed"
+        "What has woken beneath the valley, and why Veln speaks of it now",
+        "Whether the four cardinal positions of the shrine hold meaning for what is rising",
+        "The Standing Annex waiting, the band gathered, and what comes next"
       ]
     },
-    "beats": 4,
+    "beats": 1,
     "subPlace": {
       "slug": "the-shrine",
       "name": "The Shrine",
@@ -847,7 +765,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 9,
-    "hour": 0,
+    "hour": 5,
     "realAnchor": null
   },
   "companions": [
@@ -970,6 +888,23 @@
       "giver": null,
       "startedAt": "2026-09-26T02:04:07.737Z",
       "startedAtDay": 5,
+      "journeyDestId": "gen-the-standing-annex"
+    },
+    {
+      "id": "journey-gen-the-standing-annex-90",
+      "kind": "journey",
+      "structured": false,
+      "status": "active",
+      "title": "Journey to The Standing Annex",
+      "summary": "On the road: 1 of 2 legs walked, 1 day out · you are at The Made Gate · about 1 days ahead.",
+      "progress": [
+        "Reached The Made Gate — day 1 of the road.",
+        "Arrived at Whistling Woman Post. The shrine greets you on a third visit — the door opens before being touched. Veln Ashpause waits with word: the band is gathered at the Standing Annex, and something beneath the valley has begun to wake.",
+        "Stopped at The Made Gate — the road held something."
+      ],
+      "giver": null,
+      "startedAt": "2026-09-28T21:43:06.017Z",
+      "startedAtDay": 9,
       "journeyDestId": "gen-the-standing-annex"
     }
   ],
@@ -1244,7 +1179,6 @@
       },
       "relationship": 0,
       "history": [
-        "[d3] Now identified by the road-warden. Present at the Hub crossing, watching the waygate arches with fixed attention on Loki. Arrived this morning asking after someone matching Loki's description. Does not move; does not explain.",
         "[d3] Loki read the light-history around them and glimpsed a layered trace—as if Veln exists in two moments at once. Their attention sharpened when the reading touched them.",
         "[d3] Gaze fixed entirely on Loki and the seam. Their stillness has deepened—they are not waiting anymore; they are witnessing.",
         "[d4] Moved from stillness into directed motion. Something in the recognition between Loki and the orchestrator triggered their approach.",
@@ -1253,7 +1187,8 @@
         "[d4] Remains unmoved at the seam's threshold. Does not volunteer what he foreknew, only that he is present for it.",
         "[d4] Unmoved, stillness absolute—watching the opening with that same terrible sympathy. They foreknew this moment arriving and seem to know what comes next, but will not speak it.",
         "[d4] Will not descend but will hold the threshold open. Reads that their presence is needed above, not below. Carries foreknowledge of what waits and has chosen their place in it.",
-        "[d5] Stood witness at the threshold while Loki emerged from the sealed chamber. Volunteered to gather Halvex and Vessin and bring them to the Standing Annex. Speaks as though they foreknew this departure."
+        "[d5] Stood witness at the threshold while Loki emerged from the sealed chamber. Volunteered to gather Halvex and Vessin and bring them to the Standing Annex. Speaks as though they foreknew this departure.",
+        "[d9] Greeted Loki at the shrine threshold on their third visit, the door opening before being touched. Spoke with foreknowledge of the band's gathering at the Standing Annex and the waking beneath the valley."
       ],
       "knownFacts": [
         "They have stood in this exact spot, unmoved, since dawn—as if they stepped into it fully formed",
@@ -1269,21 +1204,21 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "At the Hub crossing, acting as guide and gatherer for the others. Will deliver them to the Standing Annex.",
+      "statusNote": "At Whistling Woman Post shrine, waiting to deliver word — something beneath the valley has begun to wake.",
       "domains": {
         "primary": "hourkeeper"
       },
       "domainsSource": "role",
       "lastSeen": {
         "locationId": "gen-the-made-gate",
-        "day": 5
+        "day": 9
       },
       "_filledFromGenerate": true,
       "_mergedFrom": "veln-ashpause",
       "people": "human",
       "peopleSource": "generated",
       "appearance": "A human woman, late fifties, with the pale-olive complexion of someone who lives under canopy rather than sky. The grey coat falls to mid-calf, unmarked, unweathered, impossibly clean for the Orchard's mud-season — early spring has not touched it. Her hair is cut short and practical, silver at the temples, darker beneath. She carries no visible instrument of timekeeping; her hands are the instruments, folded at her waist, utterly still. Her eyes are already somewhere past you.",
-      "met": 10,
+      "met": 11,
       "sex": "female",
       "age": 47
     },
@@ -2133,15 +2068,18 @@
       ]
     },
     "gen-the-made-gate": {
-      "visits": 1,
+      "visits": 2,
       "notes": [
         "[d4] A vast sealed chamber beneath the Null Stone has been opened—it contains pre-Transition water-works of impossible scale, notation-marked walls, and a river moving through deliberate darkness. The chamber was sealed deliberately and remains only partially explored.",
         "[d4] The vast sealed chamber has been mapped by sight: phosphorescent notation bands at eye height, a river moving through deliberate darkness, a regulator housing at the far end, and worked stone throughout. The darkness above the lantern-light is absolute and shaped by old craft.",
-        "[d4] The vast sealed chamber beneath the Null Stone has responded to harmonic resonance—the phosphorescent notation bands pulse and brighten when asked in acoustic harmony; the water's roar shifts to a harmonic frequency; the chamber listens and answers."
+        "[d4] The vast sealed chamber beneath the Null Stone has responded to harmonic resonance—the phosphorescent notation bands pulse and brighten when asked in acoustic harmony; the water's roar shifts to a harmonic frequency; the chamber listens and answers.",
+        "[d9] The shrine at Whistling Woman Post now holds four cardinal alcove-positions in real conversation: east (Radiant light, Vail's threshold-presence), west (shadow-image of asking, veilcraft offering), north (merchant's simple ground), south (courier's simple ground). The light casts true shadows…"
       ],
       "flags": {
         "harmonic_responsive": true,
-        "notation_reactive": true
+        "notation_reactive": true,
+        "cardinal_positions_active": true,
+        "light_conversation": true
       },
       "vectorsKnown": [
         "violence_peace",
@@ -2151,7 +2089,8 @@
       ],
       "_containmentNotes": [
         "\"The Sealed Chamber\" was placed in the_unlit_deep (the fiction named it), not gen-the-made-gate"
-      ]
+      ],
+      "lastVisit": 9
     },
     "the_wayhouse": {
       "visits": 1,
@@ -2246,7 +2185,7 @@
   },
   "worldState": {
     "schemaVersion": 1,
-    "lastTickDay": 8,
+    "lastTickDay": 9,
     "eventStages": {
       "water_crisis": {
         "stage": 2,
@@ -2275,20 +2214,6 @@
       "falsehood_truth": -0.05
     },
     "news": [
-      {
-        "day": 8,
-        "worldDay": 90,
-        "text": "Maintained Veil at The Standing Annex has gone quiet.",
-        "tier": "event",
-        "section": "yours"
-      },
-      {
-        "day": 8,
-        "worldDay": 90,
-        "text": "3 crystal left at The Standing Annex by those who came to it.",
-        "tier": "event",
-        "section": "yours"
-      },
       {
         "day": 8,
         "worldDay": 90,
@@ -2439,19 +2364,33 @@
         "text": "Vail Langley walks with you now.",
         "tier": "event",
         "section": "yours"
+      },
+      {
+        "day": 9,
+        "worldDay": 90,
+        "text": "As far as waystone: Asked the hard question and held the space for an honest answer — did not push, did not deflect, did not settle for less than the full shape of why",
+        "tier": "event",
+        "section": "elsewhere",
+        "regionId": "valley",
+        "communityId": "waystone"
+      },
+      {
+        "day": 9,
+        "worldDay": 90,
+        "text": "As far as the_mountain_pass: Named a band and spoke the oath that binds it—the Churn-Revellers took their name in a cellar lamp-light and chose understanding over breaking.",
+        "tier": "event",
+        "section": "elsewhere",
+        "regionId": "valley",
+        "communityId": "the_mountain_pass"
       }
     ],
     "unseenNews": [],
     "lastGenCount": 2181,
-    "lastSharedReadAt": "2026-09-28T21:30:36.742Z",
+    "lastSharedReadAt": "2026-09-28T21:43:11.721Z",
     "lastTickWorldDay": 90,
     "lastCanonWorldDay": 90,
     "turnsSinceOffer": 0,
     "recentOffers": [
-      {
-        "thing": "Vail Langley's moment of hesitation—the first crack in absolute certainty that runs on false ground",
-        "from": "Loki's honest correction of Seraphine's misbelief"
-      },
       {
         "thing": "Orla's own breaking certainty—offered as a mirror to what Vail is living through",
         "from": "Orla's presence in the band and their willingness to speak plainly about the mandate they came carrying"
@@ -2467,6 +2406,10 @@
       {
         "thing": "The shrine's four cardinal alcoves now hold living positions—Vail's Radiant light in the east, your shadow-image in the west, two…",
         "from": "Loki's own offer of shared threshold, made plainly to a room full of strangers who were listening"
+      },
+      {
+        "thing": "Veln Ashpause, waiting at the threshold with foreknowledge — present to guide you the next step",
+        "from": "The Hourkeeper perceives past, present, and future — and knows which direction to stand in. She has come to deliver what you need to hear…"
       }
     ],
     "wantProgress": {
@@ -2822,12 +2765,12 @@
         "subjectId": "tessvel-cairn",
         "aimedAtPlayer": true,
         "urgency": 3,
-        "oneLineHook": "Tessvel Cairn, unseen for 7 days, has come looking for you — driven by an unmet want: To complete her apprenticeship without a single incorrectly filed document, and to be assigned to the Intake's pressure-routing team rather than continued…. They arrive now, not content to keep waiting.",
+        "oneLineHook": "Tessvel Cairn, unseen for 8 days, has come looking for you — driven by an unmet want: To complete her apprenticeship without a single incorrectly filed document, and to be assigned to the Intake's pressure-routing team rather than continued…. They arrive now, not content to keep waiting.",
         "becomes": {
           "type": "scene",
           "who": "tessvel-cairn"
         },
-        "addedDay": 8
+        "addedDay": 9
       },
       {
         "source": "threat-attack",
@@ -12155,6 +12098,26 @@
         "worldDay": 90,
         "text": "The game was updated to v2.15.0 — 1 new, 1 fixed.",
         "loggedAt": "2026-09-28T21:30:44.064Z"
+      },
+      {
+        "day": 9,
+        "worldDay": 90,
+        "text": "As far as waystone: Asked the hard question and held the space for an honest answer — did not push, did not deflect, did not settle for less than the full shape of why",
+        "tier": "event",
+        "section": "elsewhere",
+        "regionId": "valley",
+        "communityId": "waystone",
+        "loggedAt": "2026-09-28T21:43:19.389Z"
+      },
+      {
+        "day": 9,
+        "worldDay": 90,
+        "text": "As far as the_mountain_pass: Named a band and spoke the oath that binds it—the Churn-Revellers took their name in a cellar lamp-light and chose understanding over breaking.",
+        "tier": "event",
+        "section": "elsewhere",
+        "regionId": "valley",
+        "communityId": "the_mountain_pass",
+        "loggedAt": "2026-09-28T21:43:19.389Z"
       }
     ],
     "seatsTaken": {
@@ -14526,6 +14489,22 @@
   "reconcileVersion": 89,
   "gallery": [
     {
+      "kind": "location",
+      "prompt": "The Made Gate",
+      "url": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/The%20Made%20Gate%3A%20A%20cut%20stone%20archway%20standing%20alone%20on%20open%20ground%20at%20a%20river%20crossing%2C%20freshly%20worked%2C%20its%20edges%20still%20sharp.%20The%20opening%20holds%20a%20still%20dark%20plane%20that%20does%20not%20reflect.%20Tool%20marks%20are%20visible%20on%20the%20jambs.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=90346&nologo=true",
+      "caption": "The Made Gate",
+      "worldDay": 90,
+      "at": "2026-09-28T21:43:44.891Z"
+    },
+    {
+      "kind": "moment",
+      "prompt": "A shrine threshold at deep night: four alcoves burning with cardinal light, east and west in conversation across shadow and flame, their brightness and darkness trading places as the flames breathe. T",
+      "url": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/A%20shrine%20threshold%20at%20deep%20night%3A%20four%20alcoves%20burning%20with%20cardinal%20light%2C%20east%20and%20west%20in%20conversation%20across%20shadow%20and%20flame%2C%20their%20brightness%20and%20darkness%20trading%20places%20as%20the%20flames%20breathe.%20The%20door%20of%20living%20wood%20stands%20open%2C%20its%20edges%20gilded%20with%20amber.%20A%20woman%20in%20grey%20stands%20motionless%20a%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=92141&nologo=true",
+      "caption": "The shrine at Whistling Woman Post greets Loki on a third visit — the door opens before be",
+      "worldDay": 90,
+      "at": "2026-09-28T21:43:44.836Z"
+    },
+    {
       "kind": "portrait",
       "prompt": "A woman in grey, utterly still, with the bearing of someone who has never needed to raise her voice to be obeyed. Her certainty is absolute., character portrait, named Vail Langley, woman, Agent of Se",
       "url": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/A%20woman%20in%20grey%2C%20utterly%20still%2C%20with%20the%20bearing%20of%20someone%20who%20has%20never%20needed%20to%20raise%20her%20voice%20to%20be%20obeyed.%20Her%20certainty%20is%20absolute.%2C%20character%20portrait%2C%20named%20Vail%20Langley%2C%20woman%2C%20Agent%20of%20Seraphine%3B%20now%20a%20living%20example%20of%20authority%20willing%20to%20ask%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=26493&nologo=true",
@@ -15629,8 +15608,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790631613470,
-  "rev": 1052,
+  "updatedAt": 1790631824891,
+  "rev": 1060,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -16190,7 +16169,7 @@
           "entityId": "veln-ashpause",
           "type": "npc",
           "birthWeight": 6,
-          "engagementScore": 0,
+          "engagementScore": 2,
           "tier": "fresh",
           "rating": "R+",
           "provenance": {
@@ -16202,7 +16181,12 @@
             "hint": "An Hourkeeper at the confluence in the Disputed Zone — grey-coated, bearing terrible foreknowledge of Loki's immediate s",
             "why": "The engine's something-happens event surfaced them as a real challenge: present, witnessed, radiating pre-remembered kno"
           },
-          "attentionHistory": [],
+          "attentionHistory": [
+            {
+              "kind": "interact",
+              "day": 9
+            }
+          ],
           "createdDay": 1,
           "repaired": false,
           "stubbed": false,
@@ -16218,7 +16202,8 @@
               "note": "Veln has quietly positioned herself closer to the place she knows the moment will arrive, sitting with the stillness of someone who is not waiting but simply already there.",
               "outcome": "progress"
             }
-          ]
+          ],
+          "lastAttentionDay": 9
         },
         "peopleSource": "generated",
         "domainsSource": "generated",
@@ -16736,7 +16721,7 @@
     "umbral_depths": 54,
     "the_quickwood": 101,
     "the_center": 50,
-    "valley": 51,
+    "valley": 52,
     "the_open_reach": 3
   },
   "opLossPending": false,
@@ -16912,10 +16897,10 @@
     {
       "id": "sess-22",
       "startedAt": "2026-09-28T20:26:42.371Z",
-      "lastAt": "2026-09-28T21:39:59.568Z",
+      "lastAt": "2026-09-28T21:43:44.825Z",
       "startDay": 90,
       "endDay": 90,
-      "beats": 3
+      "beats": 4
     }
   ],
   "establishedFacts": [
@@ -17108,7 +17093,7 @@
   ],
   "_opLedger": {
     "offer": {
-      "applied": 62,
+      "applied": 63,
       "rejected": 3,
       "lastWhy": "rejected-shape"
     },
@@ -17119,34 +17104,38 @@
     },
     "moveTo": {
       "applied": 1,
-      "rejected": 5,
+      "rejected": 6,
       "lastWhy": "refused-unearned"
     }
   },
-  "_pendingArrival": null,
+  "_pendingArrival": {
+    "ref": "Whistling Woman Post",
+    "name": "Whistling Woman Post",
+    "destId": "gen-whistling-woman-post"
+  },
   "_opEmitted": {
-    "sceneSummary": 260,
-    "choices": 260,
-    "characterDeltas": 144,
-    "scene": 260,
-    "placeUpdates": 35,
+    "sceneSummary": 261,
+    "choices": 261,
+    "characterDeltas": 145,
+    "scene": 261,
+    "placeUpdates": 36,
     "codexUpdates": 152,
-    "timeOps": 208,
-    "offer": 55,
+    "timeOps": 209,
+    "offer": 56,
     "generateRequest": 7,
-    "sceneEnded": 129,
-    "npcUpdates": 210,
-    "moveTo": 13,
-    "gambitApt": 85,
+    "sceneEnded": 130,
+    "npcUpdates": 211,
+    "moveTo": 14,
+    "gambitApt": 86,
     "deeds": 18,
-    "questUpdates": 60,
+    "questUpdates": 61,
     "standingOps": 8,
     "factUpdates": 25,
     "stageOps": 7,
     "encounterOps": 9,
     "ledgerEvents": 17,
     "newEncounter": 3,
-    "imagePrompt": 51,
+    "imagePrompt": 52,
     "scene_ended": 1,
     "stateOps": 3,
     "_engineClosedScene": 4,
@@ -17159,7 +17148,7 @@
     "exchangeOps": 2,
     "discoveryEligible": 1
   },
-  "_opTurns": 260,
+  "_opTurns": 261,
   "customAbilities": {
     "mirror-bright": {
       "id": "mirror-bright",
@@ -17453,7 +17442,8 @@
     "the_slow_hour_gate_yard",
     "the_unblinking_stone_gate_yard",
     "tier_seven_gate_yard",
-    "wellspring_gate_yard"
+    "wellspring_gate_yard",
+    "gen-the-made-gate"
   ],
   "_devActions": [
     {
@@ -17484,7 +17474,8 @@
     "the_wayhouse": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/The%20Wayhouse%3A%20One%20long%20stone%20building%20alone%20at%20a%20crossroads%2C%20with%20a%20lamp%20on%20a%20pole%20outside%20and%20a%20board%20of%20pinned%20notes%20by%20the%20door.%20Stabling%20at%20one%20end%2C%20a%20wide%20common%20room%20at%20the%20other.%20Roads%20leaving%20in%20every%20direction.%2C%20adventurous%2C%20mild%2C%20no%20gore%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20a%20child%2C%20fully%20clothed%2C%20non-sexual%2C%20wholesome%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=91201&nologo=true",
     "the_kindly_rest": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/The%20Kindly%20Rest%3A%20Low%20buildings%20of%20pale%20stone%20around%20three%20sides%20of%20a%20planted%20court%2C%20roofed%20in%20weathered%20shingle%20with%20deep%20eaves.%20Drying%20lofts%20stand%20open%20under%20the%20roofline%2C%20hung%20with%20cut%20herbs%20in%20bunches.%20Terraced%20beds%20step%20down%20the%20slope%20in%20stone-edged%20rows%2C%20a%20covered%20walk%20runs%20the%20inner%20faces%2C%20and%20water%20is%20led%20thr%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=91172&nologo=true",
     "gen-mara-wells-store": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Mara%20Wells'%20Store%3A%20A%20timber-fronted%20supply%20store%20with%20wide%20shutters%20folded%20back%2C%20goods%20stacked%20in%20the%20opening%20%E2%80%94%20rope%2C%20sacking%2C%20crates%2C%20lamp%20oil.%20A%20counter%20across%20the%20front%2C%20shelves%20deep%20inside%2C%20and%20a%20loading%20yard%20to%20one%20side.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=13548&nologo=true",
-    "gen-whistling-woman-post": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Whistling%20Woman%20Post%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Whistling%20Woman%20Post.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=32614&nologo=true"
+    "gen-whistling-woman-post": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Whistling%20Woman%20Post%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Whistling%20Woman%20Post.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=32614&nologo=true",
+    "gen-the-made-gate": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/The%20Made%20Gate%3A%20A%20cut%20stone%20archway%20standing%20alone%20on%20open%20ground%20at%20a%20river%20crossing%2C%20freshly%20worked%2C%20its%20edges%20still%20sharp.%20The%20opening%20holds%20a%20still%20dark%20plane%20that%20does%20not%20reflect.%20Tool%20marks%20are%20visible%20on%20the%20jambs.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=90346&nologo=true"
   },
   "customEncounters": {
     "re-re_raider_duel": {
@@ -18152,7 +18143,7 @@
       }
     }
   ],
-  "_lastProjectDay": 8,
+  "_lastProjectDay": 9,
   "featureOffers": [],
   "_debtReceipts": [],
   "skillUses": {
@@ -18712,432 +18703,432 @@
   },
   "_promptRows": {
     "character": {
-      "reached": 68,
-      "produced": 68
+      "reached": 69,
+      "produced": 69
     },
     "location": {
-      "reached": 68,
-      "produced": 68
+      "reached": 69,
+      "produced": 69
     },
     "region": {
-      "reached": 68,
-      "produced": 68
+      "reached": 69,
+      "produced": 69
     },
     "groundDetail": {
-      "reached": 68,
+      "reached": 69,
       "produced": 27
     },
     "lore": {
-      "reached": 68,
+      "reached": 69,
       "produced": 51
     },
     "traditionMotiveDetail": {
-      "reached": 68,
-      "produced": 68
+      "reached": 69,
+      "produced": 69
     },
     "sheetsDetail": {
-      "reached": 68,
+      "reached": 69,
       "produced": 44
     },
     "rules": {
-      "reached": 68,
-      "produced": 68
+      "reached": 69,
+      "produced": 69
     },
     "recentTurns": {
-      "reached": 68,
+      "reached": 69,
       "produced": 59
     },
     "timeLabel": {
-      "reached": 68,
-      "produced": 68
+      "reached": 69,
+      "produced": 69
     },
     "npcRegistryDetail": {
-      "reached": 68,
-      "produced": 68
+      "reached": 69,
+      "produced": 69
     },
     "mintedUnmetDetail": {
-      "reached": 68,
-      "produced": 68
+      "reached": 69,
+      "produced": 69
     },
     "npcSeedDetail": {
-      "reached": 68,
-      "produced": 25
+      "reached": 69,
+      "produced": 26
     },
     "traditionVocab": {
-      "reached": 68,
-      "produced": 68
+      "reached": 69,
+      "produced": 69
     },
     "standingDetail": {
-      "reached": 68,
-      "produced": 68
+      "reached": 69,
+      "produced": 69
     },
     "recalledDetail": {
-      "reached": 68,
-      "produced": 11
+      "reached": 69,
+      "produced": 12
     },
     "bearingsDetail": {
-      "reached": 68,
-      "produced": 68
+      "reached": 69,
+      "produced": 69
     },
     "caravansDetail": {
-      "reached": 68,
-      "produced": 3
+      "reached": 69,
+      "produced": 4
     },
     "commandDetail": {
-      "reached": 68,
-      "produced": 68
+      "reached": 69,
+      "produced": 69
     },
     "presenceDetail": {
-      "reached": 68,
-      "produced": 58
+      "reached": 69,
+      "produced": 59
     },
     "worthHereDetail": {
-      "reached": 68,
+      "reached": 69,
       "produced": 0
     },
     "inventoryDetail": {
-      "reached": 68,
-      "produced": 68
+      "reached": 69,
+      "produced": 69
     },
     "sceneState": {
-      "reached": 68,
+      "reached": 69,
       "produced": 59
     },
     "holdingsDetail": {
-      "reached": 68,
-      "produced": 68
+      "reached": 69,
+      "produced": 69
     },
     "debtsDetail": {
-      "reached": 68,
+      "reached": 69,
       "produced": 0
     },
     "carriedDetail": {
-      "reached": 68,
+      "reached": 69,
       "produced": 0
     },
     "abilityLawDetail": {
-      "reached": 68,
-      "produced": 68
+      "reached": 69,
+      "produced": 69
     },
     "questsDetail": {
-      "reached": 68,
-      "produced": 68
+      "reached": 69,
+      "produced": 69
     },
     "structuredQuestsDetail": {
-      "reached": 68,
+      "reached": 69,
       "produced": 0
     },
     "traditionArcDetail": {
-      "reached": 68,
+      "reached": 69,
       "produced": 0
     },
     "npcErrandsDetail": {
-      "reached": 68,
+      "reached": 69,
       "produced": 0
     },
     "codexDetail": {
-      "reached": 68,
-      "produced": 68
+      "reached": 69,
+      "produced": 69
     },
     "companionsDetail": {
-      "reached": 68,
-      "produced": 68
+      "reached": 69,
+      "produced": 69
     },
     "placeMemoryDetail": {
-      "reached": 68,
-      "produced": 51
+      "reached": 69,
+      "produced": 52
     },
     "agesMissingDetail": {
-      "reached": 68,
-      "produced": 68
+      "reached": 69,
+      "produced": 69
     },
     "newsDetail": {
-      "reached": 68,
-      "produced": 68
+      "reached": 69,
+      "produced": 69
     },
     "worldArcsDetail": {
-      "reached": 68,
-      "produced": 68
+      "reached": 69,
+      "produced": 69
     },
     "legendsPursuableDetail": {
-      "reached": 68,
+      "reached": 69,
       "produced": 12
     },
     "wakesDetail": {
-      "reached": 68,
+      "reached": 69,
       "produced": 0
     },
     "arcMoodDetail": {
-      "reached": 68,
-      "produced": 68
+      "reached": 69,
+      "produced": 69
     },
     "reachableDeadDetail": {
-      "reached": 68,
+      "reached": 69,
       "produced": 46
     },
     "threatToPlayer": {
-      "reached": 68,
+      "reached": 69,
       "produced": 0
     },
     "guardiansDetail": {
-      "reached": 68,
+      "reached": 69,
       "produced": 0
     },
     "resolution": {
-      "reached": 68,
+      "reached": 69,
       "produced": 55
     },
     "playerInput": {
-      "reached": 68,
-      "produced": 13
+      "reached": 69,
+      "produced": 14
     },
     "exactWords": {
-      "reached": 68,
+      "reached": 69,
       "produced": 37
     },
     "travelDirective": {
-      "reached": 68,
+      "reached": 69,
       "produced": 5
     },
     "itemAdvance": {
-      "reached": 68,
+      "reached": 69,
       "produced": 0
     },
     "encounterWeaveDetail": {
-      "reached": 68,
+      "reached": 69,
       "produced": 9
     },
     "encounterOfferDetail": {
-      "reached": 68,
+      "reached": 69,
       "produced": 4
     },
     "fightFramingDetail": {
-      "reached": 68,
+      "reached": 69,
       "produced": 0
     },
     "abilityGrantDetail": {
-      "reached": 68,
+      "reached": 69,
       "produced": 0
     },
     "stageRevealDetail": {
-      "reached": 68,
+      "reached": 69,
       "produced": 0
     },
     "itemEvolveDetail": {
-      "reached": 68,
+      "reached": 69,
       "produced": 0
     },
     "worldPressureDetail": {
-      "reached": 68,
+      "reached": 69,
       "produced": 2
     },
     "offerDetail": {
-      "reached": 68,
+      "reached": 69,
       "produced": 2
     },
     "teacherOfferDetail": {
-      "reached": 68,
+      "reached": 69,
       "produced": 0
     },
     "substrateDetail": {
-      "reached": 68,
+      "reached": 69,
       "produced": 18
     },
     "romanceGuidanceDetail": {
-      "reached": 68,
+      "reached": 69,
       "produced": 4
     },
     "factsDetail": {
-      "reached": 68,
-      "produced": 68
+      "reached": 69,
+      "produced": 69
     },
     "evolvedItemsDetail": {
-      "reached": 68,
+      "reached": 69,
       "produced": 0
     },
     "opLossNote": {
-      "reached": 68,
+      "reached": 69,
       "produced": 0
     },
     "emergenceDetail": {
-      "reached": 68,
+      "reached": 69,
       "produced": 0
     },
     "perilNote": {
-      "reached": 68,
+      "reached": 69,
       "produced": 0
     },
     "encounterDetail": {
-      "reached": 68,
+      "reached": 69,
       "produced": 4
     },
     "masteryDetail": {
-      "reached": 68,
-      "produced": 68
+      "reached": 69,
+      "produced": 69
     },
     "bookkeepingRestate": {
-      "reached": 68,
+      "reached": 69,
       "produced": 0
     },
     "anomalyDetail": {
-      "reached": 68,
-      "produced": 66
+      "reached": 69,
+      "produced": 67
     },
     "repairPanelDetail": {
-      "reached": 68,
-      "produced": 68
+      "reached": 69,
+      "produced": 69
     },
     "teacherDetail": {
-      "reached": 68,
+      "reached": 69,
       "produced": 0
     },
     "toolkitDetail": {
-      "reached": 68,
-      "produced": 68
+      "reached": 69,
+      "produced": 69
     },
     "availableEncounters": {
-      "reached": 68,
-      "produced": 64
+      "reached": 69,
+      "produced": 65
     },
     "partyDetail": {
-      "reached": 68,
+      "reached": 69,
       "produced": 0
     },
     "ratingDetail": {
-      "reached": 68,
-      "produced": 68
+      "reached": 69,
+      "produced": 69
     },
     "registerDetail": {
-      "reached": 68,
-      "produced": 68
+      "reached": 69,
+      "produced": 69
     },
     "legendDetail": {
-      "reached": 68,
+      "reached": 69,
       "produced": 1
     },
     "livingWorldDetail": {
-      "reached": 68,
-      "produced": 39
+      "reached": 69,
+      "produced": 40
     },
     "assignmentsDetail": {
-      "reached": 68,
+      "reached": 69,
       "produced": 0
     },
     "latentArcsDetail": {
-      "reached": 68,
-      "produced": 68
+      "reached": 69,
+      "produced": 69
     },
     "seasonalDetail": {
-      "reached": 68,
-      "produced": 68
+      "reached": 69,
+      "produced": 69
     },
     "schoolsDetail": {
-      "reached": 68,
-      "produced": 68
+      "reached": 69,
+      "produced": 69
     },
     "sharedCanonDetail": {
-      "reached": 68,
-      "produced": 45
+      "reached": 69,
+      "produced": 46
     },
     "worldCountLabel": {
-      "reached": 68,
-      "produced": 68
+      "reached": 69,
+      "produced": 69
     },
     "waygateDetail": {
-      "reached": 68,
-      "produced": 28
+      "reached": 69,
+      "produced": 29
     },
     "readAloudDetail": {
-      "reached": 68,
-      "produced": 68
+      "reached": 69,
+      "produced": 69
     },
     "scenePacingDetail": {
-      "reached": 68,
+      "reached": 69,
       "produced": 24
     },
     "wishesDetail": {
-      "reached": 48,
+      "reached": 49,
       "produced": 0
     },
     "worldMovedOnDetail": {
-      "reached": 48,
+      "reached": 49,
       "produced": 2
     },
     "companionLivesDetail": {
-      "reached": 48,
-      "produced": 21
+      "reached": 49,
+      "produced": 22
     },
     "homeDetail": {
-      "reached": 48,
+      "reached": 49,
       "produced": 0
     },
     "invitationsDetail": {
-      "reached": 48,
+      "reached": 49,
       "produced": 0
     },
     "bandsJoinedDetail": {
-      "reached": 48,
+      "reached": 49,
       "produced": 0
     },
     "travelersHereDetail": {
-      "reached": 48,
-      "produced": 16
+      "reached": 49,
+      "produced": 17
     },
     "travelersDetail": {
-      "reached": 48,
+      "reached": 49,
       "produced": 4
     },
     "journeyDetail": {
-      "reached": 46,
+      "reached": 47,
       "produced": 7
     },
     "journeyUnderwayDetail": {
-      "reached": 46,
-      "produced": 4
+      "reached": 47,
+      "produced": 5
     },
     "holdsNearDetail": {
-      "reached": 46,
-      "produced": 42
+      "reached": 47,
+      "produced": 43
     },
     "moneyDetail": {
-      "reached": 45,
-      "produced": 45
+      "reached": 46,
+      "produced": 46
     },
     "jobsDetail": {
-      "reached": 45,
+      "reached": 46,
       "produced": 0
     },
     "powersHereDetail": {
-      "reached": 22,
+      "reached": 23,
       "produced": 6
     },
     "nemesisDetail": {
-      "reached": 22,
-      "produced": 22
+      "reached": 23,
+      "produced": 23
     },
     "sovereignMark": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "seats": {
-      "reached": 3,
-      "produced": 3
+      "reached": 4,
+      "produced": 4
     },
     "couldBeHereDetail": {
-      "reached": 3,
-      "produced": 3
+      "reached": 4,
+      "produced": 4
     },
     "heldMeetDetail": {
-      "reached": 3,
+      "reached": 4,
       "produced": 0
     },
     "askedMeetDetail": {
-      "reached": 3,
+      "reached": 4,
       "produced": 0
     }
   },
   "_opUnknown": {
-    "sceneSummary": 89,
+    "sceneSummary": 90,
     "scene_summary": 1,
     "discoveryEligible": 1
   },
@@ -19575,7 +19566,114 @@
     "out": [],
     "back": []
   },
-  "journey": null,
+  "journey": {
+    "id": "journey-gen-the-standing-annex-90",
+    "destId": "gen-the-standing-annex",
+    "destName": "The Standing Annex",
+    "fromId": "gen-whistling-woman-post",
+    "fromName": "Whistling Woman Post",
+    "createdWorldDay": 90,
+    "options": [
+      {
+        "key": "road-0",
+        "kind": "road",
+        "label": "on foot, by way of The Made Gate",
+        "days": 1.1,
+        "energy": 0,
+        "path": [
+          "gen-whistling-woman-post",
+          "gen-the-made-gate",
+          "gen-the-standing-annex"
+        ],
+        "gate": null,
+        "worst": {
+          "id": "gen-the-made-gate",
+          "name": "The Made Gate",
+          "level": 2
+        },
+        "nights": 1,
+        "roofs": 1,
+        "camps": 0,
+        "legs": [
+          {
+            "i": 0,
+            "fromId": "gen-whistling-woman-post",
+            "toId": "gen-the-made-gate",
+            "fromName": "Whistling Woman Post",
+            "toName": "The Made Gate",
+            "days": 0.10965440479072047,
+            "danger": 2,
+            "roof": true,
+            "gate": null
+          },
+          {
+            "i": 1,
+            "fromId": "gen-the-made-gate",
+            "toId": "gen-the-standing-annex",
+            "fromName": "The Made Gate",
+            "toName": "The Standing Annex",
+            "days": 0.9998460789114456,
+            "danger": 2,
+            "roof": false,
+            "gate": null
+          }
+        ]
+      }
+    ],
+    "chosenKey": "road-0",
+    "soleWay": true,
+    "rations": {
+      "needed": 1,
+      "carried": 4
+    },
+    "company": [
+      "Vessin Tallow-bark",
+      "Halvex Coil",
+      "Sable",
+      "Ravel",
+      "Orla Yardley",
+      "Vail Langley"
+    ],
+    "crafts": {},
+    "underway": {
+      "startedWorldDay": 90,
+      "fromId": "gen-whistling-woman-post",
+      "fromName": "Whistling Woman Post",
+      "wayKey": "road-0",
+      "legIndex": 1,
+      "daysWalked": 0.10965440479072047,
+      "countedDays": 1,
+      "foodDaysLeft": 1,
+      "rationsEaten": 1,
+      "foraged": 0,
+      "hungryDays": 0,
+      "healthTaken": 0,
+      "legs": [
+        {
+          "i": 0,
+          "fromName": "Whistling Woman Post",
+          "toId": "gen-the-made-gate",
+          "toName": "The Made Gate",
+          "days": 0.10965440479072047,
+          "danger": 2,
+          "roof": true
+        }
+      ],
+      "stops": [
+        {
+          "atId": "gen-the-made-gate",
+          "atName": "The Made Gate",
+          "why": "encounter",
+          "note": null,
+          "worldDay": 90,
+          "daysWalked": 0.1,
+          "legsWalked": 1
+        }
+      ],
+      "pending": null,
+      "inGambit": null
+    }
+  },
   "allyOrders": {
     "traveler-woman": {
       "stance": "aggressive",
@@ -19597,8 +19695,8 @@
         "day": null
       },
       "wins": 0,
-      "lastVerb": "expand",
-      "lastVerbDay": 8,
+      "lastVerb": "feud",
+      "lastVerbDay": 9,
       "grownHeads": 23,
       "grewDay": 5,
       "winHow": null
@@ -19608,55 +19706,58 @@
         "how": "renown",
         "day": null
       },
-      "lastVerb": "inform",
-      "lastVerbDay": 8
+      "lastVerb": "steal",
+      "lastVerbDay": 9
     },
     "power_echo_bridge": {
       "known": {
         "how": "home",
         "day": null
       },
-      "lastVerb": "protect",
-      "lastVerbDay": 8
+      "lastVerb": "patrol",
+      "lastVerbDay": 9
     },
     "power_ender_host": {
       "known": {
         "how": "renown",
         "day": null
       },
-      "lastVerb": "levy",
-      "lastVerbDay": 8,
-      "wins": 2
+      "lastVerb": "expand",
+      "lastVerbDay": 9,
+      "wins": 0,
+      "winHow": "expand"
     },
     "power_radiant_plateau": {
       "known": {
         "how": "home",
         "day": null
       },
-      "lastVerb": "patrol",
-      "lastVerbDay": 8,
-      "wins": 2,
+      "lastVerb": "expand",
+      "lastVerbDay": 9,
+      "wins": 0,
       "grownHeads": 32,
-      "grewDay": 5
+      "grewDay": 5,
+      "winHow": "expand"
     },
     "power_harmonic_heights": {
       "known": {
         "how": "home",
         "day": null
       },
-      "lastVerb": "protect",
-      "lastVerbDay": 8,
-      "wins": 2,
+      "lastVerb": "expand",
+      "lastVerbDay": 9,
+      "wins": 0,
       "grownHeads": 28,
-      "grewDay": 5
+      "grewDay": 5,
+      "winHow": "expand"
     },
     "power_millbrook_council": {
       "known": {
         "how": "home",
         "day": null
       },
-      "lastVerb": "quest",
-      "lastVerbDay": 8,
+      "lastVerb": "protect",
+      "lastVerbDay": 9,
       "wins": 0,
       "winHow": "quest",
       "grownHeads": 4,
@@ -19667,8 +19768,8 @@
         "how": "renown",
         "day": null
       },
-      "lastVerb": "protect",
-      "lastVerbDay": 8,
+      "lastVerb": "inform",
+      "lastVerbDay": 9,
       "losses": 0,
       "lost": {
         "0": 28
@@ -19679,20 +19780,22 @@
         "how": "renown",
         "day": null
       },
-      "lastVerb": "protect",
-      "lastVerbDay": 8,
+      "lastVerb": "quest",
+      "lastVerbDay": 9,
       "losses": 0,
       "lost": {
         "0": 40
-      }
+      },
+      "wins": 1,
+      "winHow": "quest"
     },
     "power_scaffold_court": {
       "known": {
         "how": "renown",
         "day": null
       },
-      "lastVerb": "tax",
-      "lastVerbDay": 8,
+      "lastVerb": "crusade",
+      "lastVerbDay": 9,
       "losses": 0,
       "lost": {
         "0": 30
@@ -19703,16 +19806,16 @@
         "how": "home",
         "day": null
       },
-      "lastVerb": "inform",
-      "lastVerbDay": 8
+      "lastVerb": "tax",
+      "lastVerbDay": 9
     },
     "power_cairnhold_wardens": {
       "known": {
         "how": "renown",
         "day": null
       },
-      "lastVerb": "crusade",
-      "lastVerbDay": 8,
+      "lastVerb": "patrol",
+      "lastVerbDay": 9,
       "losses": 0,
       "lost": {
         "0": 159
@@ -19725,8 +19828,8 @@
         "how": "renown",
         "day": null
       },
-      "lastVerb": "quest",
-      "lastVerbDay": 8,
+      "lastVerb": "patrol",
+      "lastVerbDay": 9,
       "losses": 0,
       "lost": {
         "0": 28
@@ -19741,8 +19844,8 @@
         "how": "renown",
         "day": null
       },
-      "lastVerb": "levy",
-      "lastVerbDay": 8,
+      "lastVerb": "inform",
+      "lastVerbDay": 9,
       "wins": 2,
       "grownHeads": 52,
       "grewDay": 5
@@ -19752,19 +19855,20 @@
         "how": "renown",
         "day": null
       },
-      "lastVerb": "inform",
-      "lastVerbDay": 8,
-      "wins": 2,
+      "lastVerb": "expand",
+      "lastVerbDay": 9,
+      "wins": 0,
       "grownHeads": 30,
-      "grewDay": 5
+      "grewDay": 5,
+      "winHow": "expand"
     },
     "power_seraphic_orders": {
       "known": {
         "how": "renown",
         "day": null
       },
-      "lastVerb": "expand",
-      "lastVerbDay": 8,
+      "lastVerb": "protect",
+      "lastVerbDay": 9,
       "wins": 0,
       "grownHeads": 44,
       "grewDay": 8,
@@ -19775,77 +19879,86 @@
         "how": "renown",
         "day": null
       },
-      "lastVerb": "protect",
-      "lastVerbDay": 8,
+      "lastVerb": "patrol",
+      "lastVerbDay": 9,
       "losses": 0,
       "lost": {
         "0": 8
       }
     },
     "power_switchback_tollmen": {
-      "lastVerb": "tribute",
-      "lastVerbDay": 8
+      "lastVerb": "toll",
+      "lastVerbDay": 9
     },
     "power_edge_riders": {
-      "lastVerb": "tribute",
-      "lastVerbDay": 8
+      "lastVerb": "extort",
+      "lastVerbDay": 9
     },
     "power_keelmouth_slip": {
-      "lastVerb": "tax",
-      "lastVerbDay": 8,
-      "wins": 2
+      "lastVerb": "recruit",
+      "lastVerbDay": 9,
+      "wins": 0,
+      "winHow": null,
+      "grownHeads": 9,
+      "grewDay": 9
     },
     "power_firstsight_barony": {
-      "lastVerb": "levy",
-      "lastVerbDay": 8,
+      "lastVerb": "tax",
+      "lastVerbDay": 9,
       "wins": 2,
       "grownHeads": 14,
       "grewDay": 5
     },
     "power_blaze_unshadowed": {
-      "lastVerb": "protect",
-      "lastVerbDay": 8,
+      "lastVerb": "patrol",
+      "lastVerbDay": 9,
       "wins": 0,
       "grownHeads": 14,
       "grewDay": 5,
       "losses": 0
     },
     "power_flesh_temple": {
-      "lastVerb": "patrol",
-      "lastVerbDay": 8,
-      "wins": 0,
+      "lastVerb": "recruit",
+      "lastVerbDay": 9,
+      "wins": 1,
       "grownHeads": 18,
-      "grewDay": 5
+      "grewDay": 5,
+      "winHow": "recruit"
     },
     "power_vacated_custody": {
-      "lastVerb": "expand",
-      "lastVerbDay": 8,
+      "lastVerb": "protect",
+      "lastVerbDay": 9,
       "wins": 0,
       "grownHeads": 6,
       "grewDay": 5,
       "winHow": "expand"
     },
     "power_the_ceaseless": {
-      "lastVerb": "expand",
-      "lastVerbDay": 8,
+      "lastVerb": "recruit",
+      "lastVerbDay": 9,
       "wins": 1,
       "grownHeads": 10,
       "grewDay": 5,
       "losses": 0,
-      "winHow": "expand"
+      "winHow": "recruit",
+      "lossFrom": null,
+      "lossHow": null
     },
     "power_long_choir": {
-      "lastVerb": "protect",
-      "lastVerbDay": 8,
-      "wins": 2
+      "lastVerb": "quest",
+      "lastVerbDay": 9,
+      "wins": 0,
+      "winHow": null,
+      "grownHeads": 12,
+      "grewDay": 9
     },
     "power_harvest_hand": {
-      "lastVerb": "feud",
-      "lastVerbDay": 8,
+      "lastVerb": "recruit",
+      "lastVerbDay": 9,
       "wins": 0,
       "grownHeads": 12,
       "grewDay": 5,
-      "losses": 1,
+      "losses": 0,
       "lost": {
         "0": 60
       },
@@ -19853,22 +19966,27 @@
         "how": "noticed",
         "day": 8
       },
-      "lossFrom": "power_cairnhold_wardens",
-      "lossHow": "feud",
-      "shrankDay": 8
+      "lossFrom": null,
+      "lossHow": null,
+      "shrankDay": 8,
+      "winHow": null
     },
     "power_the_scouring": {
-      "lastVerb": "patrol",
-      "lastVerbDay": 8,
-      "wins": 0,
+      "lastVerb": "recruit",
+      "lastVerbDay": 9,
+      "wins": 1,
       "grownHeads": 16,
       "grewDay": 5,
-      "losses": 0
+      "losses": 0,
+      "winHow": "recruit"
     },
     "power_harborward": {
-      "lastVerb": "protect",
-      "lastVerbDay": 8,
-      "wins": 2
+      "lastVerb": "quest",
+      "lastVerbDay": 9,
+      "wins": 0,
+      "winHow": null,
+      "grownHeads": 14,
+      "grewDay": 9
     }
   },
   "nemesis": {

@@ -130,7 +130,7 @@
     "chaos_order": -0.027395467421874986,
     "body_mind": 0.0658375,
     "emotional_logical": 0.06547939778515624,
-    "space_time": 0.028000000000000004,
+    "space_time": 0.0316,
     "violence_peace": 0.06510059374999999,
     "destruction_creation": 0.07800000000000001
   },
@@ -545,193 +545,15 @@
     "At the Kindly Rest in early morning, Loki learns the patient lies in the cellars below and is awake, asking after Ravel. The path forward is clear.",
     "At the Kindly Rest, Loki speaks plainly with Sister Vreni about the Churn-Revellers and their purpose. Vreni confirms the house's shelter and silence, and promises to listen when answers return.",
     "At Mara Wells' Store in deep night, the band gathers road rations and learns that Millbrook's earth resists shortcuts—the land will not permit close-work passage through the town. Mara directs them northward toward Whistling Woman Post on the long road, naming Halvex Coil as keeper of the Standing Annex and offering the wisdom of trust in the slower way.",
-    "The band departs Mara Wells' Store at dawn for Whistling Woman Post, planning a two-hour walk on the spinward road to the relay station, then on to the Standing Annex where Halvex Coil awaits them."
+    "The band departs Mara Wells' Store at dawn for Whistling Woman Post, planning a two-hour walk on the spinward road to the relay station, then on to the Standing Annex where Halvex Coil awaits them.",
+    "On the glass plain at dawn, Vessin reads the cost of Loki's choice to hold rather than break—and the band walks on toward the Standing Annex."
   ],
   "currentLocationId": "gen-the-standing-annex",
-  "activeScene": {
-    "locationId": "gen-the-standing-annex",
-    "turns": [
-      {
-        "player": null,
-        "summary": "At dawn on the glass plain, the band pauses before the final stretch to the Standing Annex. The ruined beauty of the shattered landscape reflects Loki's own choice: understanding over breaking, listening over shattering.",
-        "narration": "Dawn breaks over the glass plain as the band reaches its edge—the Standing Annex still half a day's walk ahead, but this place has pulled them aside. The light comes in sideways, catching the fractured surface and throwing it back upward in a way that makes the whole land glow from underneath. Vessin stops walking. So do you. The glass is cold to look at and warm in the hand, and it stretches outward until the horizon swallows it. Cy clicks quietly on your shoulder, lens irising at the brightness.\n\nYou know, from Halvex's telling, what this place cost to make. A civilization spent itself making this—pouring the old work into precision and then shattering it into something beautiful and dead. The Churn-Revellers were born from this kind of breaking, Halvex said. They looked at beauty made of ruin and decided they could make more of it, better it, control it.\n\nBut you have been inside the sealed chamber. You have heard it answer in the language it understands—harmonic resonance meeting harmonic resonance, a conversation that did not break the stone but asked it to listen, and it listened. The Elder in the Deep heard you speak a true thing in a shape the Unlit could understand, and they acknowledged it. Not with words. With presence. With the acceptance of someone who has waited a long time to be heard by someone willing to listen back.\n\nThe glass plain is beautiful. And it is not the only way to make something last."
-      },
-      {
-        "player": "Sit for a while on the glass edge with Vessin. Let her read the light the way she reads falsecrafts—the way things break and the way they hold.",
-        "summary": "Dawn on the glass plain: Vessin reads the shattered light the way she reads falsecrafts, naming the cost of Loki's choice to hold rather than break.",
-        "narration": "You settle onto the edge of the glass plain beside Vessin, and she goes very still. Her eyes move across the fractured surface the way they move across a person's face when she's reading them—tracking the seams, the places where something was whole and then wasn't, the way the light catches in the breaks and refuses to go anywhere else.\n\nShe reaches down. Her fingers find a shard at random and lift it. The glass is warm from the earth underneath, and she turns it slowly, watching how the dawn light moves through it. \"This is what falsecraft looks like when you actually finish it,\" she says quietly. Her voice is steady, the way it always is. \"Not the lying part. The other part—when you commit to the shape and let go of defending it.\"\n\nShe sets the shard back down without replacing it exactly. The glass plain glows from underneath, indifferent to the detail.\n\n\"You broke what you broke,\" Vessin says. It's not a question. \"The mandate to shatter the stone. And then you stopped. And now the stone stands, and the chamber listens, and everything that comes next is going to be different because you chose not to finish the breaking.\" She looks at you, and her eyes are steady and serious. \"This is the harder thing. This is what holding costs.\""
-      }
-    ],
-    "lastTurn": {
-      "narration": "You settle onto the edge of the glass plain beside Vessin, and she goes very still. Her eyes move across the fractured surface the way they move across a person's face when she's reading them—tracking the seams, the places where something was whole and then wasn't, the way the light catches in the breaks and refuses to go anywhere else.\n\nShe reaches down. Her fingers find a shard at random and lift it. The glass is warm from the earth underneath, and she turns it slowly, watching how the dawn light moves through it. \"This is what falsecraft looks like when you actually finish it,\" she says quietly. Her voice is steady, the way it always is. \"Not the lying part. The other part—when you commit to the shape and let go of defending it.\"\n\nShe sets the shard back down without replacing it exactly. The glass plain glows from underneath, indifferent to the detail.\n\n\"You broke what you broke,\" Vessin says. It's not a question. \"The mandate to shatter the stone. And then you stopped. And now the stone stands, and the chamber listens, and everything that comes next is going to be different because you chose not to finish the breaking.\" She looks at you, and her eyes are steady and serious. \"This is the harder thing. This is what holding costs.\"",
-      "sceneSummary": "Dawn on the glass plain: Vessin reads the shattered light the way she reads falsecrafts, naming the cost of Loki's choice to hold rather than break.",
-      "choices": [
-        {
-          "label": "Ask her what she sees in the light that you don't.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "falsehood_truth": 0.2,
-            "concrete_abstract": -0.1
-          },
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Tell her what you chose, and why you chose it.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "falsehood_truth": 0.4,
-            "emotional_logical": -0.1
-          },
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Take her hand and keep walking. The Standing Annex is waiting.",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {
-            "space_time": 0.1
-          },
-          "difficulty": "very easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "travel"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        }
-      ],
-      "deeds": [],
-      "characterDeltas": {},
-      "ledgerEvents": [],
-      "questUpdates": [],
-      "standingOps": [],
-      "delegateOps": [],
-      "jobOps": [],
-      "arcOps": [],
-      "adoptSchool": null,
-      "offer": {
-        "thing": "Vessin reading the glass plain as a text—recognizing the pattern of your choice written in the fractured light",
-        "from": "Vessin's own clarity about what falsecraft means when you finish it—and what it costs"
-      },
-      "stageOps": [],
-      "scene": {
-        "setting": "The glass plain at dawn, mid-autumn. A vast fractured expanse of worked glass stretching to the horizon, glowing from underneath in the sideways light. The Standing Annex lies half a day's walk ahead, spinward and outward.",
-        "npcsPresent": [
-          {
-            "name": "Vessin Tallow-bark",
-            "state": "Seated beside you, turning a shard of glass in the dawn light, reading its breaks the way she reads falsecrafts."
-          }
-        ],
-        "objects": [
-          "The fractured glass surface—beautiful and cold, warm in the hand",
-          "A single shard Vessin lifted and set back down",
-          "The light, coming sideways and glowing from underneath"
-        ],
-        "threads": [
-          "The band's destination: the Standing Annex, and Halvex Coil waiting there",
-          "What the glass plain cost to make, and how it reflects Loki's choice not to break the sealed chamber"
-        ]
-      },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "vessin-tallow-bark",
-          "learned": [
-            "Reads falsecraft in the breaks and holds of the light itself—sees what happens when a lie is committed to completely and then released",
-            "Names the cost of holding as the harder choice, the one that leaves you standing in the breaking"
-          ],
-          "note": "Reads the glass plain as text. Speaks her clarity plainly, without deflection."
-        }
-      ],
-      "intentsHeard": [],
-      "factUpdates": [],
-      "placeUpdates": [],
-      "discovery": null,
-      "codexUpdates": [],
-      "holdingOps": [],
-      "holdTrades": [],
-      "debtOps": [],
-      "exchangeOps": [],
-      "partyOps": [],
-      "generateRequest": [],
-      "encounterOps": [],
-      "projectOps": [],
-      "bandOps": [],
-      "strikeOps": [],
-      "deathOps": [],
-      "newEncounter": null,
-      "unlockPrecursor": null,
-      "unlockSubstrate": null,
-      "timeOps": {
-        "hoursPassed": 0.5,
-        "why": "A quiet pause on the glass edge before the final stretch to the Standing Annex"
-      },
-      "moveTo": null,
-      "stateOps": [],
-      "itemUpdates": [],
-      "deriveItem": null,
-      "imagePrompt": "Dawn light breaking sideways across a vast plain of fractured glass, each shard glowing from underneath. Two figures sit at its edge—one holding a single piece of glass up to the light, reading it the way others read a face. Behind them, the horizon swallows the glittering expanse. The air is cold to look at and warm to touch.",
-      "imageMedium": null,
-      "newAbility": null,
-      "gambitOps": null,
-      "gambitApt": false,
-      "markDefiningMoment": null,
-      "markTeacher": null,
-      "offerPromotion": null,
-      "offerAcquisition": null,
-      "offerIntent": null,
-      "sceneEnded": false
-    },
-    "sceneState": {
-      "setting": "The glass plain at dawn, mid-autumn. A vast fractured expanse of worked glass stretching to the horizon, glowing from underneath in the sideways light. The Standing Annex lies half a day's walk ahead, spinward and outward.",
-      "npcsPresent": [
-        {
-          "name": "Vessin Tallow-bark",
-          "state": "Seated beside you, turning a shard of glass in the dawn light, reading its breaks the way she reads falsecrafts."
-        }
-      ],
-      "objects": [
-        "The fractured glass surface—beautiful and cold, warm in the hand",
-        "A single shard Vessin lifted and set back down",
-        "The light, coming sideways and glowing from underneath"
-      ],
-      "threads": [
-        "The band's destination: the Standing Annex, and Halvex Coil waiting there",
-        "What the glass plain cost to make, and how it reflects Loki's choice not to break the sealed chamber"
-      ]
-    },
-    "beats": 2,
-    "subPlace": {
-      "slug": "the-shrine",
-      "name": "The Shrine",
-      "day": 8
-    }
-  },
+  "activeScene": null,
   "clock": {
     "schemaVersion": 1,
     "day": 10,
-    "hour": 5,
+    "hour": 7,
     "realAnchor": null
   },
   "companions": [
@@ -2368,7 +2190,7 @@
     "lastSharedReadAt": "2026-09-28T21:45:06.630Z",
     "lastTickWorldDay": 90,
     "lastCanonWorldDay": 90,
-    "turnsSinceOffer": 0,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "The shrine's four empty cardinal alcoves await filling—a structure of held positions, not yet claimed by any single power",
@@ -14385,19 +14207,19 @@
     "deferredMysteries": []
   },
   "tendencies": {
-    "devotion": 0.4219635950211276,
-    "cerebral": 14.458212569991629,
-    "social": 21.657075907741447,
-    "strategic": 11.464974080695283,
-    "cautious": 4.28219822316505,
-    "amorous": 3.981739756804488,
-    "generous": 5.119803321811617,
-    "ruthless": 0.9223427267175547,
-    "risky": 0.08637539019815671,
-    "patient": 0.023587565729315405,
-    "deception": 0.027457148286301688,
-    "carousing": 0.5876204882136226,
-    "leadership": 1.2053753604382
+    "devotion": 0.4114145051455994,
+    "cerebral": 14.096757255741837,
+    "social": 21.11564901004791,
+    "strategic": 11.178349728677901,
+    "cautious": 4.1751432675859235,
+    "amorous": 3.882196262884376,
+    "generous": 4.991808238766326,
+    "ruthless": 0.8992841585496157,
+    "risky": 0.08421600544320279,
+    "patient": 0.02299787658608252,
+    "deception": 0.026770719579144144,
+    "carousing": 0.572929976008282,
+    "leadership": 1.1752409764272451
   },
   "aptitudes": [
     "strategist",
@@ -14406,7 +14228,7 @@
     "orator",
     "faithful"
   ],
-  "actionCount": 226,
+  "actionCount": 227,
   "grantsVersion": 1,
   "precursorAccess": [
     "address_sense"
@@ -15656,8 +15478,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790632063324,
-  "rev": 1065,
+  "updatedAt": 1790632133533,
+  "rev": 1066,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -16951,10 +16773,10 @@
     {
       "id": "sess-22",
       "startedAt": "2026-09-28T20:26:42.371Z",
-      "lastAt": "2026-09-28T21:47:43.322Z",
+      "lastAt": "2026-09-28T21:48:53.530Z",
       "startDay": 90,
       "endDay": 90,
-      "beats": 6
+      "beats": 7
     }
   ],
   "establishedFacts": [
@@ -17164,19 +16986,19 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 263,
-    "choices": 263,
-    "characterDeltas": 146,
-    "scene": 263,
+    "sceneSummary": 264,
+    "choices": 264,
+    "characterDeltas": 147,
+    "scene": 264,
     "placeUpdates": 36,
     "codexUpdates": 153,
-    "timeOps": 211,
+    "timeOps": 212,
     "offer": 57,
     "generateRequest": 7,
-    "sceneEnded": 132,
+    "sceneEnded": 133,
     "npcUpdates": 212,
-    "moveTo": 14,
-    "gambitApt": 88,
+    "moveTo": 15,
+    "gambitApt": 89,
     "deeds": 18,
     "questUpdates": 61,
     "standingOps": 8,
@@ -17198,7 +17020,7 @@
     "exchangeOps": 2,
     "discoveryEligible": 1
   },
-  "_opTurns": 263,
+  "_opTurns": 264,
   "customAbilities": {
     "mirror-bright": {
       "id": "mirror-bright",
@@ -18200,7 +18022,7 @@
   "skillUses": {
     "plan": 13,
     "discuss": 1,
-    "travel": 12,
+    "travel": 13,
     "scout": 8,
     "prepare": 9,
     "careful": 12,
@@ -19179,7 +19001,7 @@
     }
   },
   "_opUnknown": {
-    "sceneSummary": 92,
+    "sceneSummary": 93,
     "scene_summary": 1,
     "discoveryEligible": 1
   },

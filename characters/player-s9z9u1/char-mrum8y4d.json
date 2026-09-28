@@ -2657,29 +2657,7 @@
         "section": "world"
       }
     ],
-    "unseenNews": [
-      {
-        "day": 10,
-        "worldDay": 90,
-        "text": "You put Old Procedure to The Standing Annex — it is as good as it gets.",
-        "tier": "event",
-        "section": "yours"
-      },
-      {
-        "day": 10,
-        "worldDay": 90,
-        "text": "The Wardens of Cairnhold is stronger than it was — 32 more under it, their champion home from the grey road.",
-        "tier": "event",
-        "section": "world"
-      },
-      {
-        "day": 10,
-        "worldDay": 90,
-        "text": "The Grovehome Moot has lost people it will not get back — 40 of them, to its feud with The Deepwood Standing Moot.",
-        "tier": "event",
-        "section": "world"
-      }
-    ],
+    "unseenNews": [],
     "lastGenCount": 2182,
     "lastSharedReadAt": "2026-09-28T22:56:07.984Z",
     "lastTickWorldDay": 90,
@@ -10608,7 +10586,7 @@
       "the_war_ender": 84,
       "the_last_choirmistress": 90
     },
-    "updatesToldTo": "2.15.1",
+    "updatesToldTo": "2.15.2",
     "newsLog": [
       {
         "day": 4,
@@ -12480,6 +12458,38 @@
         "worldDay": 90,
         "text": "The game was updated to v2.15.1 — 1 fixed.",
         "loggedAt": "2026-09-28T22:03:48.012Z"
+      },
+      {
+        "day": 10,
+        "worldDay": 90,
+        "text": "You put Old Procedure to The Standing Annex — it is as good as it gets.",
+        "tier": "event",
+        "section": "yours",
+        "loggedAt": "2026-09-28T22:56:14.355Z"
+      },
+      {
+        "day": 10,
+        "worldDay": 90,
+        "text": "The Wardens of Cairnhold is stronger than it was — 32 more under it, their champion home from the grey road.",
+        "tier": "event",
+        "section": "world",
+        "loggedAt": "2026-09-28T22:56:14.355Z"
+      },
+      {
+        "day": 10,
+        "worldDay": 90,
+        "text": "The Grovehome Moot has lost people it will not get back — 40 of them, to its feud with The Deepwood Standing Moot.",
+        "tier": "event",
+        "section": "world",
+        "loggedAt": "2026-09-28T22:56:14.355Z"
+      },
+      {
+        "kind": "update",
+        "section": "world",
+        "version": "2.15.2",
+        "worldDay": 90,
+        "text": "The game was updated to v2.15.2 — 3 fixed.",
+        "loggedAt": "2026-09-28T22:56:14.355Z"
       }
     ],
     "seatsTaken": {
@@ -16142,8 +16152,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790636167652,
-  "rev": 1094,
+  "updatedAt": 1790636174361,
+  "rev": 1096,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -20646,9 +20656,5 @@
       "events": [],
       "standing": true
     }
-  ],
-  "_reconcileNotes": [
-    "The scene had taught itself a misspelling — set right: \"Halfvex\" → Halvex (Halvex Coil).",
-    "Kept this device's newer version — the other device's copy was saved as a recovery copy."
   ]
 }

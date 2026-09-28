@@ -1,0 +1,40 @@
+{
+ "schemaVersion": 1,
+ "id": "warden_sella_varre",
+ "name": "Sella Varre, Market-Warden of Firstsight",
+ "tier": "notable",
+ "level": 11,
+ "role": "Chief of the Baron's market wardens at Firstsight: collects ten shards at the market gate and sends the Baron four",
+ "people": "valleyfolk",
+ "gender": "woman",
+ "pronouns": "she/her",
+ "sex": "female",
+ "romanceEligible": false,
+ "homeLocation": "firstsight",
+ "domains": {
+  "primary": "valleyfolk"
+ },
+ "spectrum": {
+  "truth_falsehood": 0.5,
+  "chaos_order": 0.3
+ },
+ "knowledge": [
+  "Exactly how much the Baron thinks the market makes, and how much it does",
+  "Which of her wardens would testify, and which would run",
+  "The Baron's temper, to the day"
+ ],
+ "wants": [
+  "To leave Firstsight rich before the Baron counts"
+ ],
+ "fears": [
+  "The Baron counting.",
+  "A merchant who keeps receipts."
+ ],
+ "appearance": "A tall woman in the Barony's grey with a warden's staff and very good boots, standing at the market gate with her hand out and her eyes on the road.",
+ "voiceHints": "Clipped and official, every sentence a regulation, until she lowers her voice to name the other price.",
+ "marketWardenOf": "power_firstsight_barony",
+ "_why": "SNG-663 §2e.4 (CCODE-558): the Barony's corrupt wardens, as the one person exposing them makes an enemy of. Cruel Baron, so exposing her is dangerous for her too.",
+ "questSeeds": [
+  "A merchant turned away at Firstsight's market gate says Sella Varre named him a price twice the Baron's posted one, and he means to tell the Baron, which will get him killed unless someone gets there with proof first."
+ ]
+}

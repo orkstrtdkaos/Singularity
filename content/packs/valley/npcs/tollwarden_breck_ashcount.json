@@ -1,0 +1,40 @@
+{
+ "schemaVersion": 1,
+ "id": "tollwarden_breck_ashcount",
+ "name": "Breck Ashcount, Toll-Warden of the Hundred Markets",
+ "tier": "notable",
+ "level": 9,
+ "role": "The Undercount's warden over the Hundred Markets: sets the stall fee each morning, and keeps what isn't written down",
+ "people": "valleyfolk",
+ "gender": "man",
+ "pronouns": "he/him",
+ "sex": "male",
+ "romanceEligible": false,
+ "homeLocation": "the_hundred_markets",
+ "domains": {
+  "primary": "valleyfolk"
+ },
+ "spectrum": {
+  "truth_falsehood": 0.6,
+  "chaos_order": -0.2
+ },
+ "knowledge": [
+  "What every stall in the Hundred Markets paid today, and what it was told it paid",
+  "Which carters the Undercount has an arrangement with",
+  "Who in the markets owes him, and for what"
+ ],
+ "wants": [
+  "To keep the fee a number nobody can check"
+ ],
+ "fears": [
+  "A ledger kept by someone else.",
+  "The Undercount noticing how much of the take is his."
+ ],
+ "appearance": "A pleasant, round-faced man in a clean apron with a brass counting-board on a strap, smiling at everyone, writing nothing down.",
+ "voiceHints": "Warm, quick, sympathetic about the fee as if it were weather, and it changes while he talks.",
+ "marketWardenOf": "power_undercount",
+ "_why": "SNG-663 §2e.4 (CCODE-558): 'the wardens become an enemy' needs a record. The Undercount's wardens at the Hundred Markets, in one person the player can find, expose and make an enemy of.",
+ "questSeeds": [
+  "A stall-keeper in the Hundred Markets has kept three years of receipts in a boot, and the numbers do not match what Breck sends up to the Undercount. She wants someone else to carry them."
+ ]
+}

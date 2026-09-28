@@ -897,3 +897,161 @@ export function breakPower(character, power, { day = null, why = null } = {}) {
   if (why) st.brokenWhy = smartClamp(String(why), 200);
   return { id: power.id, name: power.name || power.id, whenBroken: power.whenBroken || null };
 }
+
+/* ═══ ✅ SNG-663 §2d/§2e — THE MARKET CHARGES FOR THE RIGHT TO SELL ═══
+ *
+ * ⛔ ERIK 2026-09-26, on whether a load pays at a gate: *"It doesn't cost to go through a gate but you might have to pay
+ * someone or suffer the consequences."* §2a made the gate free; this is the someone. Aevi: *"A flat fee to sell at a
+ * market held by a power, paid to that power, per load that sells there (a traveller selling in person pays it once per
+ * visit). Authored per power (`marketFee`): a lordship's market asks more than a moot's; a place no power holds charges
+ * nothing."*
+ *
+ * ⛑ ONE READER, because her own gate for this section is *"the card's fee and the run's fee agree"* — and a fee
+ * computed at the surface and again in the tick is exactly how a card and an engine come to disagree.
+ *
+ * ⚠️ AND THE BANDS ARE DIALS, NOT MY OPINION. §2d says hostile doubles and allied waives; §2e says a hostile power's
+ * market is CLOSED and a corrupt one takes a bribe to open it. Those two readings sit in tension in the spec, so both
+ * are here with their thresholds authored in `rules.economy.markets` — waived at `trusted` and up, doubled at `wary` and
+ * down, closed at `hated` — and Erik or Aevi can move any of them without touching this file.
+ *
+ * ⚠️ "THE FEE IS WHAT THEY SAY IT IS TODAY" IS READ AS "BY WHO YOU ARE", not by a die. A corrupt fee that rolled every
+ * visit could not be quoted on the trade card, and a number the player cannot plan against is not a mechanic — it is
+ * noise. So it varies deterministically: more from a stranger, more from the plainly rich, less from a friend. */
+export const MARKET_DIALS = {
+  waivedAtBand: "trusted",      // allied waives the fee
+  doubledAtBand: "wary",        // hostile doubles it
+  closedAtBand: "hated",        // and at the bottom the market is shut to you
+  hostileMult: 2,
+  corruptStranger: 1.5,         // §2e.1 — a power you are not known to pays more
+  corruptRich: 1.5,             // …and so does the plainly rich
+  corruptFriend: 0.5,           // …and a friend of the wardens less
+  corruptRichAt: 400,           // "plainly rich" in shards of purse worth
+  bribeMult: 3,                 // §2e.2 — what it takes to open a hostile corrupt market
+  // ⛔ THE LEVER AEVI'S OWN SENTENCE NEEDS, AND IT IS OFF. She wrote that the card subtracts the fee "per pass, so a far
+  // market with a steep fee can lose to a near one" — and measured, a flat per-LOAD fee does the opposite: the Grand
+  // Lattice's 8 shards cost 0.15% of a far run's rate while Millbrook's 2 cost 3.13% of selling at home, because a far
+  // market means one big load rather than many small ones. Turn this on and the stall fee is charged every pass a run
+  // is running, which makes distance cost more rather than less. ⚠️ OFF by default: the arithmetic then is exactly the
+  // rule she specified, and the shape of the rule is hers and Erik's to change, not mine.
+  chargePerPass: false,
+  exposeStanding: 8,            // §2e.4 — what showing a power its wardens' take is worth to them
+};
+function marketDials(rules) {
+  const a = rules?.economy?.markets;
+  return { ...MARKET_DIALS, ...(a && typeof a === "object" ? a : {}) };
+}
+/** where a band sits on the ladder — lower index is better standing */
+function bandRank(band, rules) {
+  const order = (rules?.reputationBands || []).map(b => b.band);
+  const i = order.indexOf(band);
+  return i < 0 ? Math.floor(order.length / 2) : i;      // an unknown band is the middle, never the best or worst
+}
+
+/** ⛔ WHO HOLDS THE MARKET HERE. A power that HOLDS this place and authors a `marketFee`. Null is the common answer —
+ *  18 of the 29 powers charge nothing, and a place no power holds charges nothing at all. PURE. */
+export function marketHolderAt(locationId, { content = null, powers = null, character = null, locations = null } = {}) {
+  if (!locationId) return null;
+  // ⚠️ `tickStore` AND `sellStore` HAVE NO CONTENT BAG — they take `locations` and `rules` and nothing else — so the
+  // reader accepts the powers list on its own rather than forcing every call site to carry the whole world.
+  const all = powersFrom(content || (powers ? { powers } : null)).filter(p => Number.isFinite(Number(p?.marketFee)));
+  // ⚠️ `holds`, NOT `reach`. Aevi's line is "a market HELD by a power": a power whose writ merely runs through a town
+  // does not take a stall fee there, and reading `reach` would have put a fee on every town in a crown's shadow.
+  const holds = all.filter(p => (Array.isArray(p.holds) ? p.holds : []).some(h => h?.at === locationId));
+  if (!holds.length) return null;
+  // a standing power first (one that has been broken is not collecting), then the steeper fee — a tie between two
+  // holders of one market is not a thing this world has, and if it ever is, the one still on its feet takes it.
+  holds.sort((a, b) => (isStanding(character, b) - isStanding(character, a)) || (Number(b.marketFee) - Number(a.marketFee)));
+  return holds[0] || null;
+}
+
+/** ⛔ SNG-663 §2b MOVED THE DESTINATION OUT FROM UNDER THE MARKET. A gate leg now lands in the YARD, and the market is
+ *  the town's — driven on Silas's Fell Pell, the best run goes to `tier_seven_gate_yard` while the Grand Lattice holds
+ *  its market at `tier_seven`, so the fee missed by an hour and a half's walk. A load that arrives by gate walks in to
+ *  sell. ⚠️ `locations` is optional: without it this is exactly the place it was handed. PURE. */
+function marketPlaceOf(locationId, locations) {
+  const l = locationId && locations ? locations[locationId] : null;
+  return (l && l.gateYardFor && locations[l.gateYardFor]) ? l.gateYardFor : locationId;
+}
+
+/** ⛔ WHAT IT COSTS TO SELL HERE, and whether you may at all. Returns null where nothing is charged — the common case —
+ *  else `{ fee, base, power, powerName, band, waived, doubled, closed, corrupt, bribe, toPower, line, why }`.
+ *
+ *  ⛑ `worth` is the purse's worth, for §2e's "the plainly rich pay more". Absent, nobody is read as rich: an unmeasured
+ *  purse must not become a surcharge. PURE. */
+export function marketFeeAt(locationId, { content = null, powers = null, character = null, rules = null, worth = null, locations = null } = {}) {
+  const at = marketPlaceOf(locationId, locations);
+  const power = marketHolderAt(at, { content, powers, character, locations });
+  if (!power) return null;
+  const d = marketDials(rules);
+  const base = Math.max(0, Number(power.marketFee) || 0);
+  if (!base) return null;
+  const st = standingWithPower(character, power.id, rules);
+  const rank = bandRank(st.band, rules);
+  const waivedRank = bandRank(d.waivedAtBand, rules), doubledRank = bandRank(d.doubledAtBand, rules), closedRank = bandRank(d.closedAtBand, rules);
+  const waived = rank <= waivedRank;
+  const doubled = !waived && rank >= doubledRank;
+  const closed = rank >= closedRank;
+  const corrupt = !!power.corrupt;
+  let fee = base;
+  const why = [];
+  if (waived) { fee = 0; why.push(`${power.name || power.id} waives it for you`); }
+  else if (doubled) { fee = Math.round(base * Math.max(1, Number(d.hostileMult) || 2)); why.push(`doubled — they think of you as ${st.band}`); }
+  // ⛔ §2e.1 — A CORRUPT FEE IS WHAT THE WARDENS SAY IT IS, and what they say depends on who is asking. Never a die:
+  // the trade card has to be able to quote this number, and a fee that moves every visit cannot be planned against.
+  if (corrupt && !waived) {
+    const known = isKnownPower(character, power.id);
+    const rich = Number.isFinite(Number(worth)) && Number(worth) >= Number(d.corruptRichAt);
+    const friend = rank < bandRank("neutral", rules);
+    let mult = 1;
+    // ⚠️ AND A STRANGER IS NOT SOMEBODY THEY KNOW. `isKnownPower` reads the `knownPowers` ledger and `friend` reads the
+    // STANDING, which are two different records — so at a standing of 8 the line read "you are a stranger to them" and
+    // "the wardens know you, and it is less today" in the same breath. A person cannot be both, and a contradictory
+    // sentence on a receipt is worse than a wrong number, because it tells the player the game is not thinking.
+    if (!known && !friend) { mult *= Number(d.corruptStranger) || 1; why.push("you are a stranger to them, and the wardens can see it"); }
+    if (rich) { mult *= Number(d.corruptRich) || 1; why.push("you are plainly carrying, and the price rose"); }
+    if (friend) { mult *= Number(d.corruptFriend) || 1; why.push("the wardens know you, and it is less today"); }
+    fee = Math.max(0, Math.round(fee * mult));
+  }
+  // ⛔ §2e.2 — A BRIBE OPENS A HOSTILE MARKET, and only a corrupt one can be bribed. A fair power that has shut its
+  // market to you has shut it: that is what standing means.
+  // ⚠️ AND IT IS NEVER CHEAPER THAN THE FEE IT REPLACES. At `hated` the doubled fee came to 45 and the bribe to 30 —
+  // a discount for being hated, which is the arithmetic saying the opposite of the rule.
+  const bribe = closed && corrupt ? Math.max(1, fee, Math.round(base * (Number(d.bribeMult) || 3))) : null;
+  // ⛔ §2e.2 — AND AT THE SHUT BAND THE THING YOU PAY IS THE BRIBE. Charging the ordinary fee there let a hated trader
+  // sell at a neutral trader's price and made `bribe` a number nobody ever paid. `fee` is what it costs to sell today,
+  // whatever it is called; `base` and `bribe` say where that number came from.
+  const owed = closed && bribe != null ? bribe : fee;
+  if (owed !== fee) why.push(`shut to you — ${bribe} into a warden's hand opens it`);
+  return {
+    fee: owed, feeIfWelcome: fee, base, bribe, at,
+    power: power.id, powerName: power.name || power.id,
+    band: st.band, standing: st.score,
+    waived, doubled, closed, corrupt,
+    // ⛔ §2e.3 — THE COIN NEVER REACHES THE POWER. A fair fee is the power's own income; a corrupt one is the wardens'.
+    // Neither MOVES standing (§2d: "paying a fair power is ordinary and moves nothing") — what differs is who has it,
+    // and that is the fact exposing them rests on.
+    toPower: !corrupt,
+    line: power.marketLine || null,
+    why: why.join("; ") || null,
+  };
+}
+
+/** ⛔ §2e.4 — EXPOSING THEM IS A DEED. *"It raises standing with the power, and the wardens become an enemy."*
+ *  ⚠️ THE WARDENS ARE NOT A RECORD. There is no warden power in content, so "the wardens become an enemy" has nowhere
+ *  to land yet — and inventing one would be authoring. What this writes is the half that HAS somewhere to go: the
+ *  standing with the power, through `movePowerStanding`, the one writer of a power's opinion. The other half is
+ *  reported to the PO rather than guessed at. Returns the receipt, or null when there is nothing to expose. */
+export function exposeMarket(character, locationId, { content = null, powers = null, rules = null, day = null, delta = null, locations = null } = {}) {
+  const power = marketHolderAt(marketPlaceOf(locationId, locations), { content, powers, character, locations });
+  if (!power || !power.corrupt) return null;
+  const d = marketDials(rules);
+  // ⛔ `delta == null`, NOT `Number.isFinite(Number(delta))`. `Number(null)` is 0 and `Number.isFinite(0)` is TRUE, so
+  // the default took the VALUE branch with zero on every caller that omitted it — and `movePowerStanding` refuses a
+  // delta of 0, so exposing a corrupt market moved nobody while handing back a receipt that said it had. CCODE-492's
+  // own finding, in `melee.js`, one module over.
+  const step = delta == null ? Math.max(1, Number(d.exposeStanding) || 8) : Math.round(Number(delta) || 0);
+  const moved = movePowerStanding(character, power, step, { why: `you showed them what their wardens were taking at ${locationId}`, day });
+  return { power: power.id, powerName: power.name || power.id, moved,
+    wardens: null,   // ⬜ no warden record exists to make an enemy of — SNG-663 §2e.4, reported to the PO
+    said: `${power.name || power.id} knows now what its wardens were taking.` };
+}

@@ -29571,7 +29571,10 @@ console.log("\n── §369 · a raid is not a conquest ──");
       // THREE DOORS, ALL THREE ASSERTED: the world tick HANDS the power over, `tickStore` RECEIVES it in its
       // signature, and the raid comes out NAMED. The middle one is the word that was missing.
       const handsOver = /power: raiderPowerAt\(loc\?\.id, \{ content, character \}\)/.test(rd("engine/worldtick.js"));
-      const receives = /kitDeps = null, power = null \} = \{\}\) \{/.test(rd("engine/holdings.js"));
+      // ⚠️ THIS PINNED `power = null }` AS THE LAST PARAMETER and went red when SNG-663 §2d added `powers` after it. The
+      // claim is that `tickStore` RECEIVES the power in its signature — the word that was missing — not where in the
+      // list it sits, which moves every time the function learns something new.
+      const receives = /export function tickStore\([^)]*\bpower = null\b/.test(rd("engine/holdings.js"));
       const passesOn = /resolveRaid\(character, holding, \{[^}]*, power,/.test(rd("engine/holdings.js"));
       return !!r && (!!r.power?.name || !!r.led) && handsOver && receives && passesOn;
     })(), "the world tick has always computed who is raiding; the raid never received it");
@@ -32084,6 +32087,206 @@ console.log("\n── §386 · known before new, and an overlap is a question �
     && /\(!!b\.why - !!a\.why\)/.test(APP386));
   check("§386: ⚠️ …and it tells the player what the merge actually did, because a merge moves records and a silent repair looks like nothing happening",
     /re-pointed/.test(APP386) && /r\.applied\?\.\[0\]\?\.refs/.test(APP386));
+}
+
+
+/* ══════════ §387 · SNG-663 §2d/§2e — THE MARKET CHARGES FOR THE RIGHT TO SELL ══════════ */
+// ⛔ ERIK 2026-09-26, on whether a load pays at a gate: *"It doesn't cost to go through a gate but you might have to pay
+// someone or suffer the consequences."* §2a made the gate free; this is the someone.
+//
+// ⛑ AEVI'S OWN GATE FOR THIS SECTION IS *"the card's fee and the run's fee agree"*, and the way that is made unbreakable
+// is that neither of them computes a fee: all four doors that sell read `marketFeeAt` and print what it returned.
+console.log("\n── §387 · the market charges for the right to sell ──");
+{
+  const PW387 = await import("../engine/powers.js");
+  const CV387 = await import("../engine/caravan.js");
+  const H387 = await import("../engine/holdings.js");
+  const { loadContentHeadless: lch387 } = await import("./headless_content.mjs");
+  const C387 = await lch387();
+  const R387 = C387.rules;
+  const cfg387 = { ...R387.economy.holdStore, features: R387.economy.holdFeatures || null };
+
+  /* ---- 1 · ⛔ AUTHORED PER POWER, AND MOST POWERS CHARGE NOTHING ---- */
+  const feeing = (C387.powers || []).filter(p => Number.isFinite(Number(p.marketFee)));
+  check("§387: ⛔ ELEVEN MARKETS CHARGE AND THE REST DO NOT — a place no power holds charges nothing, which is most of the world",
+    feeing.length === 11 && feeing.filter(p => p.corrupt).length === 2
+    && (C387.powers || []).length - feeing.length >= 15
+    && feeing.every(p => (p.holds || []).some(h => h?.at && C387.locations?.[h.at])),
+    `${feeing.length} of ${(C387.powers || []).length} · ${feeing.filter(p => p.corrupt).length} corrupt`);
+  // ⚠️ `holds`, NOT `reach`. Aevi's line is "a market HELD by a power" — reading `reach` would have put a stall fee on
+  // every town in a crown's shadow, and measured, the reaches of these eleven cover 60 places.
+  check("§387: ⚠️ …and it is `holds`, never `reach` — a power whose writ merely runs through a town takes no stall fee there",
+    (() => {
+      const lattice = (C387.powers || []).find(p => p.id === "power_grand_lattice");
+      const reachOnly = (lattice?.reach || []).find(a => !(lattice.holds || []).some(h => h?.at === a));
+      return !!reachOnly && PW387.marketFeeAt(reachOnly, { content: C387, character: {}, rules: R387 }) === null
+        && !!PW387.marketFeeAt("tier_seven", { content: C387, character: {}, rules: R387 });
+    })());
+  check("§387: ⛑ …and a place nobody holds a market at answers NULL, not a fee of zero — the common case stays the cheap one",
+    PW387.marketFeeAt("the_wend", { content: C387, character: {}, rules: R387 }) === null
+    && PW387.marketFeeAt(null, { content: C387, character: {}, rules: R387 }) === null);
+
+  /* ---- 2 · ⛔ THE BANDS: WAIVED, DOUBLED, SHUT ---- */
+  const atBand = (standing, opts = {}) => PW387.marketFeeAt("firstsight",
+    { content: C387, character: { powerState: { power_firstsight_barony: { standing } }, knownPowers: {} }, rules: R387, ...opts });
+  const ladder = [60, 25, 8, 0, -10, -60].map(s => atBand(s, { worth: 800 }));
+  check("§387: ⛔ ALLIED WAIVES, HOSTILE DOUBLES, AND THE BOTTOM BAND IS SHUT — §2d's three rules, on the one ladder every standing in this game reads",
+    ladder[0].waived && ladder[0].fee === 0 && ladder[1].waived
+    && !ladder[3].waived && !ladder[3].doubled
+    && ladder[4].doubled && ladder[4].fee > ladder[3].fee
+    && ladder[5].closed,
+    ladder.map(f => `${f.band}:${f.fee}${f.waived ? "w" : ""}${f.doubled ? "d" : ""}${f.closed ? "X" : ""}`).join(" "));
+  // ⛔ AND THE FEE ONLY EVER RISES AS THEY THINK LESS OF YOU. A ladder that dipped anywhere would be the arithmetic
+  // saying the opposite of the rule, which is exactly what the bribe did on the first run.
+  check("§387: ⛔ …and it never DIPS as standing falls, nor is a bribe ever cheaper than the fee it replaces — a discount for being hated is the arithmetic contradicting the rule",
+    ladder.every((f, i) => i === 0 || f.fee >= ladder[i - 1].fee)
+    && ladder.filter(f => f.bribe != null).every(f => f.bribe >= f.fee),
+    ladder.map(f => f.fee + (f.bribe != null ? `/bribe ${f.bribe}` : "")).join(" → "));
+  check("§387: ⚠️ …and the thresholds are AUTHORED BANDS, not numbers I picked — Aevi retunes `reputationBands` and this follows",
+    /waivedAtBand: "trusted"/.test(rd("engine/powers.js")) && /doubledAtBand: "wary"/.test(rd("engine/powers.js"))
+    && /reputationBands/.test(rd("engine/powers.js")));
+
+  /* ---- 3 · ⛔ CORRUPTION IS A TRAIT, NOT A TEMPER ---- */
+  // §2e.1: *"The fee is what they say it is today: it varies with who you are."* ⚠️ Read as "by who you are", never by a
+  // die: the trade card has to be able to QUOTE this number, and a fee that rolled every visit could not be planned
+  // against. So the same person asking twice is told the same price.
+  const twice = [atBand(0, { worth: 800 }), atBand(0, { worth: 800 })];
+  check("§387: ⛔ A CORRUPT FEE VARIES WITH WHO YOU ARE AND NOT WITH A DIE — the same person asking twice is told the same price, because a card that cannot quote it is not a mechanic",
+    twice[0].fee === twice[1].fee && twice[0].corrupt === true
+    && atBand(0, { worth: 800 }).fee > atBand(0, { worth: 10 }).fee
+    && atBand(0, { worth: 10 }).fee > atBand(0, { worth: 10, content: C387 }).base - 1,
+    `rich ${atBand(0, { worth: 800 }).fee} vs poor ${atBand(0, { worth: 10 }).fee} on a base of ${atBand(0).base}`);
+  check("§387: ⚠️ …and a STRANGER is not also a FRIEND — the ledger of who you know and the ledger of what they think are two records, and the receipt said both in one breath",
+    (() => {
+      const known = atBand(8, { worth: 800 });   // a standing of 8 is "known" — a friend of the wardens
+      return !/stranger/.test(known.why || "") && /the wardens know you/.test(known.why || "");
+    })(), atBand(8, { worth: 800 }).why);
+  check("§387: ⛔ …and a BRIBE opens a hostile CORRUPT market and only a corrupt one — a fair power that has shut its market to you has shut it",
+    ladder[5].bribe > 0
+    && (() => {
+      const fair = PW387.marketFeeAt("tier_seven", { content: C387, rules: R387,
+        character: { powerState: { power_grand_lattice: { standing: -60 } } } });
+      return fair.closed && fair.bribe === null;
+    })());
+  check("§387: ⛔ …and THE COIN NEVER REACHES THE POWER at a corrupt market, which is the fact exposing them rests on",
+    ladder[3].toPower === false
+    && PW387.marketFeeAt("tier_seven", { content: C387, character: {}, rules: R387 }).toPower === true);
+  check("§387: ⛑ …and exposing them moves the power's standing through the ONE writer of a power's opinion",
+    (() => {
+      const c = { powerState: {} };
+      const r = PW387.exposeMarket(c, "firstsight", { content: C387, rules: R387, day: 9 });
+      return r && r.moved && Number(c.powerState.power_firstsight_barony.standing) > 0
+        && PW387.exposeMarket({ powerState: {} }, "tier_seven", { content: C387, rules: R387 }) === null;   // nothing to expose at a fair market
+    })());
+  // ⬜ AND THE OTHER HALF OF §2e.4 HAS NOWHERE TO LAND. "The wardens become an enemy" needs a warden record, and there
+  // is none in content — inventing one would be authoring, so the receipt says `wardens: null` and the PO is told.
+  check("§387: ⬜ …and the half that has no record says so rather than guessing — there is no warden power to make an enemy of",
+    PW387.exposeMarket({ powerState: {} }, "firstsight", { content: C387, rules: R387 })?.wardens === null
+    && /no warden record exists to make an enemy of/.test(rd("engine/powers.js")));
+
+  /* ---- 4 · ⛔ THE CARD'S FEE AND THE RUN'S FEE AGREE — AEVI'S OWN GATE ---- */
+  // ⚠️ THE SHAPE OF THE REAL HOLD AT MILLBROOK: an `enterprise`, thriving, with a `market` feature. My first fixture had
+  // no `kind`, so `producesPerPass` returned an empty basket, `routeValue` refused with "this hold makes nothing in a
+  // pass", and three checks failed for the fixture's reason rather than the engine's.
+  const hold387 = () => ({ id: "h387", name: "The Fell Pell", kind: "enterprise", locationId: "millbrook", condition: "thriving",
+    store: { raw_material: 8 }, steward: "s", crew: [], features: [{ kind: "market", count: 1 }] });
+  const char387 = (standing = 0) => ({ id: "c387", purse: { crystal: 500 },
+    powerState: { power_millbrook_council: { standing } },
+    holdings: [hold387()], npcRegistry: { s: { id: "s", name: "Keeper" } } });
+  const deps387 = { cfg: cfg387, economy: R387.economy, locations: C387.locations, powers: C387.powers, rules: R387, day: 9 };
+  const ex387 = CV387.storeExits(char387(), hold387(), deps387);
+  const hereRow = ex387.rows.find(r => r.id === "sell-here");
+  const keeperRow = ex387.rows.find(r => r.id === "keeper-sells");
+  check("§387: ⛔ THE CARD SUBTRACTS THE FEE THE TICK PAYS — one reader, so the card and the engine cannot disagree, which is this section's own gate",
+    hereRow.market?.fee === 2 && keeperRow.market?.fee === 2
+    && (hereRow.costs || []).some(c => /fee to sell here/.test(c.label) && c.value === 2)
+    && (keeperRow.costs || []).some(c => /each pass that sells/.test(c.label) && c.value === 2)
+    && hereRow.perPass === keeperRow.perPass,
+    JSON.stringify({ here: hereRow.perPass, keeper: keeperRow.perPass, fee: hereRow.market?.fee }));
+  // ⚠️ AND THE NORMALISATION AT THE BOTTOM OF THE CARD WAS OVERWRITING IT. Every row is re-expressed as a per-pass rate
+  // in steady state, and that rate is built from what the hold MAKES — which knows nothing about a stall fee.
+  check("§387: ⚠️ …and the per-pass RATE carries it too, not only the cost line — the card's own normalisation was writing my subtraction over",
+    (() => {
+      const free = CV387.storeExits(char387(40), hold387(), deps387).rows.find(r => r.id === "keeper-sells");
+      return free.market?.waived === true && free.perPass > keeperRow.perPass && free.perPass - keeperRow.perPass === 2;
+    })(), `waived ${CV387.storeExits(char387(40), hold387(), deps387).rows.find(r => r.id === "keeper-sells").perPass} vs charged ${keeperRow.perPass}`);
+  // ⛔ AND THE RUN PAYS IT AT THE FAR MARKET, resolved through the yard B1 moved the gate into.
+  check("§387: ⛔ …and a GATE YARD SELLS AT ITS TOWN'S MARKET — §2b moved the destination out from under the market by an hour and a half's walk",
+    PW387.marketFeeAt("tier_seven_gate_yard", { content: C387, character: {}, rules: R387, locations: C387.locations })?.at === "tier_seven"
+    && PW387.marketFeeAt("tier_seven_gate_yard", { content: C387, character: {}, rules: R387 }) === null,   // …and without `locations` it is exactly the place it was handed
+    "the load arrives in the yard and walks in to sell");
+  const far387 = CV387.routeValue(char387(), hold387(), { ...deps387, toId: "tier_seven_gate_yard", days: 40, danger: 2 });
+  check("§387: ⛑ …and the run charges it PER LOAD, once per departure, which is what §2d authors",
+    far387.ok && far387.market?.fee === 8 && far387.stall > 0
+    && Math.abs(far387.stall - Math.round((8 / far387.wait.perDeparture) * 10) / 10) < 1e-9,
+    `${far387.market?.fee} a load, one load every ${far387.wait?.perDeparture} passes → ${far387.stall} a pass`);
+
+  /* ---- 5 · ⛔ REFUSING: YOU CAN'T SELL THERE, AND NOTHING IS LOST ---- */
+  const shut387 = char387(-60);
+  const sold387 = H387.sellStore(shut387, "h387", { ...deps387, hereId: "millbrook", regionId: "valley" });
+  check("§387: ⛔ A SHUT MARKET REFUSES AND THE STORE IS STILL THERE — the goods leave `store` before the price is known, so a refusal after that would have eaten them",
+    sold387.ok === false && /will not let you sell/.test(sold387.why)
+    && shut387.holdings[0].store.raw_material === 8,
+    JSON.stringify({ why: sold387.why, store: shut387.holdings[0].store }));
+  check("§387: ⛑ …and the keeper's pass sells nothing rather than selling and being refused, and the news says whose market it is",
+    (() => {
+      const c = char387(-60);
+      const st = H387.tickStore(c, c.holdings[0], { ...deps387, regionId: "valley", people: c.npcRegistry, rng: () => 0.99, dangerLevel: 0 });
+      const news = H387.storeNews(c.holdings[0], st);
+      // ⚠️ NOT `=== 8`: `tickStore` PRODUCES before it sells, so the shed holds this pass's yield too. The claim is that
+      // NOTHING WAS TAKEN, which is the store standing at or above what it started with.
+      return !st.keeperSold && !!st.marketShut && c.holdings[0].store.raw_material >= 8
+        && news.some(l => /has shut the market at Millbrook to you/.test(l));
+    })());
+  check("§387: ⛔ …and the run REFUSES too rather than quoting a rate it cannot earn",
+    (() => {
+      // ⚠️ ON A FAIR POWER. Firstsight is CORRUPT, so a hated trader can bribe their way in — which is §2e.2 working,
+      // not a refusal. The Grand Lattice is fair, and a fair power that has shut its market has shut it.
+      const r = CV387.routeValue(char387(), hold387(), { ...deps387, toId: "tier_seven", days: 30, danger: 2 });
+      const hated = CV387.routeValue({ ...char387(), powerState: { power_grand_lattice: { standing: -60 } } },
+        hold387(), { ...deps387, toId: "tier_seven", days: 30, danger: 2 });
+      // …and the corrupt one is NOT refused: the bribe is the price, and it is dearer than the fee
+      const bribed = CV387.routeValue({ ...char387(), powerState: { power_firstsight_barony: { standing: -60 } } },
+        hold387(), { ...deps387, toId: "firstsight", days: 30, danger: 2 });
+      return r.ok === true && hated.ok === false && /will not let you sell/.test(hated.why)
+        // the value of a bribe is that you can sell AT ALL, not that it costs more: at this band the doubled fee and the
+        // bribe come to the same 30, and what the corrupt wardens sell is the door rather than a discount.
+        && bribed.ok === true && bribed.market.closed === true && bribed.market.bribe >= bribed.market.feeIfWelcome
+        && bribed.market.fee === bribed.market.bribe;
+    })());
+  check("§387: ⚑ …and a waiver is SAID, once, because a power doing you a favour is worth being told",
+    (() => {
+      const c = char387(40);
+      const st = H387.tickStore(c, c.holdings[0], { ...deps387, regionId: "valley", people: c.npcRegistry, rng: () => 0.99, dangerLevel: 0 });
+      const first = H387.storeNews(c.holdings[0], st).filter(l => /waives the stall fee/.test(l));
+      const st2 = H387.tickStore(c, c.holdings[0], { ...deps387, regionId: "valley", people: c.npcRegistry, rng: () => 0.99, dangerLevel: 0, day: 12 });
+      const again = H387.storeNews(c.holdings[0], st2).filter(l => /waives the stall fee/.test(l));
+      return first.length === 1 && again.length === 0;
+    })());
+
+  /* ---- 6 · ⛔ THE FEE AS SPECIFIED IS REGRESSIVE WITH DISTANCE, AND THE LEVER IS OFF ---- */
+  // ⛔ Aevi: *"so a far market with a steep fee can lose to a near one."* MEASURED, it does the opposite: the Grand
+  // Lattice's 8 a load costs a far run a fraction of a percent of its rate while Millbrook's 2 a pass costs selling at
+  // home several percent, because distance means ONE BIG LOAD rather than many small ones. The authored rule ships as
+  // authored; `chargePerPass` is the lever that would make her sentence true, and it is OFF.
+  check("§387: ⛔ THE FLAT PER-LOAD FEE IS REGRESSIVE WITH DISTANCE — measured, it costs the NEAR market a far larger share of its rate than the FAR one, which is the opposite of §2d's stated purpose",
+    (() => {
+      const nearShare = 2 / (keeperRow.perPass + 2);
+      const farShare = far387.stall / (far387.perPass + far387.stall);
+      return nearShare > farShare * 5;
+    })(), (() => {
+      const nearShare = (2 / (keeperRow.perPass + 2) * 100).toFixed(2);
+      const farShare = (far387.stall / (far387.perPass + far387.stall) * 100).toFixed(2);
+      return `near ${nearShare}% of its rate vs far ${farShare}% — reported to the PO, not papered over`;
+    })());
+  check("§387: ⛑ …and the lever that would make her sentence true is AUTHORED AND OFF, so the default costs exactly nothing",
+    (() => {
+      const on = CV387.routeValue(char387(), hold387(), { ...deps387, toId: "tier_seven_gate_yard", days: 40, danger: 2,
+        rules: { ...R387, economy: { ...R387.economy, markets: { chargePerPass: true } } } });
+      return PW387.MARKET_DIALS.chargePerPass === false
+        && far387.stall < on.stall && on.stall === on.market.fee
+        && far387.stall === Math.round((far387.market.fee / far387.wait.perDeparture) * 10) / 10;
+    })(), `off ${far387.stall} a pass · on ${far387.market?.fee} a pass`);
 }
 
 /* ══════════ REPORT ══════════ */

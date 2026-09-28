@@ -73,7 +73,7 @@ import { raidRisk, watchReadout, watchOdds, craftPlacementCost, defenceOf, featu
 import { buildDevReport, unknownOpsIn } from "./engine/devreport.js";   // SNG-559: the Play/Dev instrument
 import { makeField, fieldDataFrom, FIELD_KINDS, KIND_LABEL, MEMBERSHIP } from "./engine/field.js";
 import { deedAgainstSupply, supplyDeedLine, artifactsHeld, artifactUsed, forbiddenByHeld, marksFromHeld } from "./engine/sovereign.js";   // ⛔ SNG-641 §1 (C13): breaking or taking a supply-line power is a deed against the arc its Sovereign arrives on
-import { assaultableAt, garrisonContingents, noteHoldLoss, takeHold, encounterOwnerFilter, seedPowerKnowledge, isKnownPower, powersReaching, dangerLiftAt, movePowerStanding } from "./engine/powers.js";
+import { assaultableAt, garrisonContingents, noteHoldLoss, takeHold, encounterOwnerFilter, seedPowerKnowledge, isKnownPower, powersReaching, dangerLiftAt, movePowerStanding, exposeMarket, marketFeeAt} from "./engine/powers.js";
 import { buildNemesisPrompt, applyNemesisChoice } from "./engine/nemesis.js";   // ⛔ SNG-648: the choosing call   // SNG-634 C5: their holds are places you can take   // CCODE-457: why the ground here reads the way it does · CCODE-472: and the layer the map draws
 import { FIRE_TESTS, diffKeys } from "./engine/firetests.js";   // SNG-560: the parts that have never been used
 import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, bondAllowsForward, forwardCompany, offeredRoles, trainerFor, liaisonFactions, roleBadges, teacherOfferReady, applyPartyOps, activeCompany, formerCompany } from "./engine/company.js";
@@ -182,7 +182,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.14.12";
+const APP_VERSION = "2.14.13";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -9314,7 +9314,7 @@ function applyTurn(turn, resolution, playerWords = null) {
       else if (kind === "transfer") transferHolding(character, id, { toEntity: op.toEntity || op.steward || null, toName: op.toName || null, day: absoluteWorldDay(), worldCount: worldCount() });
       // ✅ Q8: sell what is stored, where the character stands, at this Reach's prices — refused elsewhere, and said so
       else if (kind === "sell") {
-        const r = sellStore(character, id, { economy: CONTENT.rules?.economy, cfg: CONTENT.rules?.economy?.holdStore, hereId: location.id, regionId: location.regionId || null, day: absoluteWorldDay() });   // CCODE-437: paid in this place's money
+        const r = sellStore(character, id, { powers: CONTENT.powers || [], rules: CONTENT.rules, locations: CONTENT.locations || {}, economy: CONTENT.rules?.economy, cfg: CONTENT.rules?.economy?.holdStore, hereId: location.id, regionId: location.regionId || null, day: absoluteWorldDay() });   // CCODE-437: paid in this place's money
         if (!r.ok) console.warn("[holdingOps] sell refused:", r.why);
       }
       // ✅ Q18: a craft put to the place; the hands; the watch
@@ -14885,6 +14885,17 @@ function wireHoldingOffers() {
     saveCharacter(character); again();
   };
   // ⛔ CCODE-440: a hold is a local market — sell what you carry, and change money, where you stand
+  // ✅ SNG-663 §2e.4 — EXPOSING THEM IS A DEED. One click, through the one writer of a power's opinion.
+  for (const btn of app.querySelectorAll("[data-expose-market]")) btn.onclick = () => {
+    const h = (character.holdings || []).find(x => x && x.id === btn.dataset.exposeMarket);
+    if (!h) return;
+    const r = exposeMarket(character, h.locationId, { powers: CONTENT.powers || [], rules: CONTENT.rules,
+      locations: CONTENT.locations || {}, day: absoluteWorldDay() });
+    if (!r) { alert("There is nothing to expose here — this market's fee goes where it is supposed to go."); return; }
+    queueHoldingEvent(character, r.said);
+    saveCharacter(character);
+    renderPlay(character.activeScene?.lastTurn || null, { aside: `${r.said}${r.moved ? ` Their opinion of you moves from ${r.moved.from} to ${r.moved.to}.` : ""}` });
+  };
   for (const btn of app.querySelectorAll("[data-hold-sellpack]")) btn.onclick = () => showSellFromPack(btn.dataset.holdSellpack, again);
   for (const btn of app.querySelectorAll("[data-hold-raise]")) btn.onclick = () => showRaise(btn.dataset.holdRaise, Number(btn.dataset.index));   // CCODE-452
   // ⛔ CCODE-450: put someone to standing work, or take them off it
@@ -14931,7 +14942,7 @@ function wireHoldingOffers() {
   for (const btn of app.querySelectorAll("[data-hold-sell]")) btn.onclick = () => {
     const id = btn.dataset.holdSell;
     const here = hereNow();
-    const r = sellStore(character, id, { economy: CONTENT.rules?.economy, cfg: CONTENT.rules?.economy?.holdStore, hereId: here?.id || null, regionId: here?.regionId || null, day: absoluteWorldDay() });
+    const r = sellStore(character, id, { powers: CONTENT.powers || [], rules: CONTENT.rules, locations: CONTENT.locations || {}, economy: CONTENT.rules?.economy, cfg: CONTENT.rules?.economy?.holdStore, hereId: here?.id || null, regionId: here?.regionId || null, day: absoluteWorldDay() });
     if (!r.ok) { alert(r.why); return; }
     saveCharacter(character); again();
   };
@@ -15227,7 +15238,7 @@ function renderHoldingsTab(manageId = null, tab = null) {
           let ex = null, rk = null;
           // ⛔ SNG-654 A — WITH THE DANGER WHERE THE STOCK STANDS, and the same people bag the tick uses. Without them the
           // waiting stock reads as safe and every long haul looks better than it is.
-          try { ex = storeExits(character, h, { cfg: sCfg, economy: econ, locations: CONTENT.locations || {}, regionId: reg,
+          try { ex = storeExits(character, h, { powers: CONTENT.powers || [], rules: CONTENT.rules, cfg: sCfg, economy: econ, locations: CONTENT.locations || {}, regionId: reg,
             dangerLevel: Number(CONTENT.locations?.[h.locationId]?.dangerLevel) || 0,
             people: holdPeople, npcCfg: npcSheetCfg, day: absoluteWorldDay() }); } catch { ex = null; }
           // ✅ SNG-652 §6 — WITH `rules`, so the readout can carry the detection term §7's watch now provides.
@@ -15246,7 +15257,19 @@ function renderHoldingsTab(manageId = null, tab = null) {
             ${ex.best ? `<div class="hint">Best per pass: <strong>${esc(ex.best.who)}</strong> — ${esc(ex.best.said)}</div>` : ""}
             ${standing ? `<div class="hint">A run stands to <strong>${esc(standing)}</strong>${h.route.runs ? `, walked ${h.route.runs} time${h.route.runs === 1 ? "" : "s"}` : ", not yet walked"} — the keeper holds the stock for the cart rather than selling it here. <button class="link-btn" data-route-stop="${esc(h.id)}">Stop the run</button></div>` : ""}
             ${ex.waiting && ex.waiting.cost > 0 ? `<div class="hint">What is in the shed already risks <strong>${ex.waiting.cost}</strong> a pass — ${ex.waiting.units} unit(s) standing, ${Math.round(ex.waiting.chance * 100)}% a raid comes.</div>` : ""}
-            ${ex.why ? `<div class="hint">${esc(ex.why)}</div>` : ""}</div>` : "";
+            ${ex.why ? `<div class="hint">${esc(ex.why)}</div>` : ""}
+            ${(() => {
+              // ✅ SNG-663 §2d/§2e — WHOSE MARKET THIS IS, in the power's own voice, and §2e.4's deed where the player can
+              // reach it. ⚠️ Only at a CORRUPT market, and only while standing there: exposing wardens from across the
+              // world is not a deed.
+              const mk = (ex.rows.find(r => r.id === "sell-here") || {}).market;
+              if (!mk) return "";
+              const here = hereNow()?.id === h.locationId;
+              return `<div class="hint">${esc(mk.line || `${mk.powerName} takes ${mk.fee} for the stall here.`)}`
+                + `${mk.waived ? ` <span class="hs-best">— waived for you</span>` : ""}`
+                + `${mk.closed ? ` <span class="pp-must">— shut to you${mk.bribe ? `; ${mk.bribe} into a warden's hand opens it` : ""}</span>` : ""}`
+                + `${mk.corrupt && here ? ` <button class="link-btn" data-expose-market="${esc(h.id)}" title="Say publicly what the wardens are taking. It raises your standing with the power itself — and the wardens will not forget it">Show them what their wardens take</button>` : ""}</div>`;
+            })()}</div>` : "";
           // ⛔ SNG-652 §7 — THE WATCH, AND WHAT IT ACTUALLY DECIDES. Aevi asked for "Raid seen: 84%".
           // Measured: there is no watch roll — `resolveRaid` opens `if (!watchOf(...).length)`, so one body on
           // watch means SEEN AND MET and none means it comes unseen. A percentage here would be a rule I

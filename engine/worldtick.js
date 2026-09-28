@@ -711,6 +711,8 @@ export function advanceHoldings({ character, now = Date.now(), ladder = null, co
       // ⛔ SNG-634 C1 — WHOSE RAID. Null at every place with nobody standing on it, which is the common case
       // and the one that must go on playing exactly as it did.
       power: raiderPowerAt(loc?.id, { content, character }),
+      powers: content?.powers || [],   // ✅ SNG-663 §2d: the market's stall fee, read off the power that holds it
+
       meleeCfg: bandDialsOf(content),   // ⛑ the ONE builder — a raiding power bleeds on the same dials a band does
       rng, day: (() => { try { return absoluteWorldDay(); } catch { return null; } })(),
       density: holdingGround(h, { locations: content?.locations || {}, substrate: content?.substrateModel || null }),

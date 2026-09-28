@@ -95,6 +95,18 @@
    "type": "array",
    "description": "present on 29 of 29"
   },
+  "marketFee": {
+   "type": "number",
+      "description": "SNG-663 \u00a72d: the flat fee, in shards, to sell at the market this power holds \u2014 per load that sells, or once per visit for a traveller selling in person. A power with no marketFee charges nothing. engine/powers.js marketFeeAt() reads it; hostile standing doubles it and allied waives it."
+  },
+  "corrupt": {
+   "type": "boolean",
+      "description": "SNG-663 \u00a72e: the wardens are corrupt \u2014 a TRAIT, not a temper, because a fair lord can have corrupt wardens. The fee then varies with who you are, a bribe opens the market when the power itself is hostile, the coin never reaches the power, and exposing them is a deed."
+  },
+  "marketLine": {
+   "type": "string",
+      "description": "SNG-663 \u00a72d: what the market says as it takes the fee, in this power's own voice. Shown to the player where the fee is charged."
+  },
   "dangerLift": {
    "type": "number",
    "description": "present on 29 of 29"

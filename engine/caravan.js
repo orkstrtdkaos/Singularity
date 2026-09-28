@@ -33,7 +33,8 @@ import { unitWorth, producesPerPass, worthOfGoods, crewKeepPerPass, featuresOf, 
 import { earnAt, saidEarned } from "./money.js";   // ⛔ CCODE-437: sold for the market's own money — `earnAt` goes through `credit`   // ⛔ CCODE-437: a load is sold for the money of the market it reaches
 import { enterDeathState } from "./death.js";
 import { routeBetween, roadDistances, pathFrom } from "./journey.js";   // ⛑ SNG-654 B: ONE search from the hold answers every market at once — 38 regions for the cost of one route
-import { storeWorth } from "./holdings.js";   // §6b: the comparison prices the store through the one reader that prices it
+import { storeWorth } from "./holdings.js";
+import { marketFeeAt } from "./powers.js";   // ✅ SNG-663 §2d: the market held by a power charges for the right to sell   // §6b: the comparison prices the store through the one reader that prices it
 
 const num = (v, d = 0) => (Number.isFinite(Number(v)) ? Number(v) : d);
 const clamp01 = (n) => Math.max(0, Math.min(1, n));
@@ -316,6 +317,7 @@ export function routeValue(character, holding, {
   toId = null, days = null, danger = 0, path = null, cfg = null, economy = null, locations = {},
   crew = null, companyCut = null, density = null, perDangerChance = ROAD_HAZARD_PER_DANGER_DAY,
   dangerLevel = null, people = {}, npcCfg = {}, day = null, baseWaitCost = 0,
+  powers = null, rules = null,   // ⚠️ NOT `character`: it is already this function's first positional parameter, and node --check called that out
 } = {}) {
   const t = tradeCfg(cfg);
   const passDays = Math.max(0.1, num(t.passDays, 3));
@@ -346,6 +348,8 @@ export function routeValue(character, holding, {
   // risks when you sell at home, so what a route costs is the DIFFERENCE: this is the road's own toll on the pile, not
   // a second charge for a risk the hold already ran.
   const madeUnits = Object.values(basket).reduce((a, n) => a + num(n), 0);
+  // ⚠️ READ BEFORE THE STALL FEE USES IT. `node --check` cannot see a temporal-dead-zone read of a `const`; the first
+  // draft divided by `perDeparture` three lines above its declaration and threw only when a market actually charged.
   const perDeparture = Math.max(1, Math.ceil((roadDays * 2) / passDays));
   const waiting = madeUnits * perDeparture / 2;
   // ⚠️ NOT `danger` — that parameter is the ROAD's worst danger, and this is the danger where the stock STANDS. Two
@@ -354,9 +358,27 @@ export function routeValue(character, holding, {
   const homeDanger = dangerLevel != null ? num(dangerLevel) : num(locations?.[holding?.locationId]?.dangerLevel, 0);
   const wait = waitingExposure(character, holding, { units: waiting, basket, cfg, economy, regionId: homeRegion, dangerLevel: homeDanger, people, npcCfg, day });
   const exposure = Math.max(0, Math.round((wait.cost - num(baseWaitCost)) * 10) / 10);
-  const perPass = Math.round((there - keep - loss - fee - exposure) * 10) / 10;
+  // ✅ SNG-663 §2d — AND THE MARKET TAKES ITS STALL FEE, per load that sells. ⚠️ PER DEPARTURE, NOT PER PASS: a standing
+  // run leaves once per round trip, so a fee charged every pass would bill a market the cart has not reached.
+  // ⛔ AND A SHUT MARKET IS NOT A PRICE, IT IS A NO — the run cannot sell there at all, which is the thing that makes a
+  // steep fee a real decision rather than a subtraction.
+  const market = marketFeeAt(toId, { powers, character, rules, locations, worth: there });
+  if (market?.closed && !market.bribe) {
+    return { ok: false, why: `${market.powerName} will not let you sell at ${dest?.name || toId} — they think of you as ${market.band}`,
+      made, basket, local, there, market };
+  }
+  // ⚠️ PER DEPARTURE BY DEFAULT — a fee per LOAD, which is what §2d authors. `markets.chargePerPass` turns it into a fee
+  // per pass, which is what §2d's stated PURPOSE needs: measured, a flat per-load fee costs a far market 0.15% of its
+  // rate and a near one 3.13%, so "a far market with a steep fee can lose to a near one" is not what the authored shape
+  // does. Off, this line is the authored rule exactly.
+  const perPassFee = !!(rules?.economy?.markets?.chargePerPass);
+  const stall = market && market.fee > 0
+    ? (perPassFee ? market.fee : Math.round((market.fee / Math.max(1, perDeparture)) * 10) / 10)
+    : 0;
+  const perPass = Math.round((there - keep - loss - fee - exposure - stall) * 10) / 10;
   return {
-    ok: true, made, basket, there, local, keep, loss, fee, exposure, perPass,
+    ok: true, made, basket, there, local, keep, loss, fee, exposure, stall, perPass,
+    ...(market ? { market } : {}),
     wait: { ...wait, perDeparture, roundTrip: Math.round(roadDays * 2 * 10) / 10, atHomeDanger: homeDanger },
     firstCoin: Math.max(1, Math.ceil(Math.max(0, roadDays) / passDays)),
     days: num(days, 0), roadDays, speedMult: carriage.mult, speedLabel: carriage.label, carriage,
@@ -383,7 +405,7 @@ export function routeValue(character, holding, {
  *
  *  ⬜ WHAT IS NOT HERE IS NOT PRICED: visiting traders and hired companies are unbuilt, so a hired-company row
  *  appears only when a caller passes a cut, and says plainly that it is a quote rather than an offer. Pure. */
-export function storeExits(character, holding, { cfg = null, economy = null, locations = {}, regionId = null, companyCut = null, maxMarkets = null, density = null, dangerLevel = null, people = {}, npcCfg = {}, day = null } = {}) {
+export function storeExits(character, holding, { cfg = null, economy = null, locations = {}, regionId = null, companyCut = null, maxMarkets = null, density = null, dangerLevel = null, people = {}, npcCfg = {}, day = null, powers = null, rules = null } = {}) {
   // ⚠️ `maxMarkets` WAS 4 AND THAT WAS THE DEFECT AEVI MEASURED: two 147-day markets at ×3.6 took both slots and the
   // Crossing, 33 days out at ×1.8, never appeared. It is now an override for a caller that wants one, and content
   // decides (`trade.showMarkets`, chosen over `trade.candidates` valued). ⛑ `density` is the ground under the hold —
@@ -397,9 +419,18 @@ export function storeExits(character, holding, { cfg = null, economy = null, loc
   if (!units || local == null) return { rows, local, units, best: null, why: units ? "these goods have no price anywhere" : "the store is empty" };
 
   // 1 · YOU, IN PERSON — the baseline every other row is compared against.
+  // ✅ SNG-663 §2d — AND SELLING HERE IS SELLING AT A MARKET TOO. A traveller pays the stall fee once per visit, so the
+  // baseline every other row is compared against has to carry it, or a far market looks worse than it is.
+  const hereFee = marketFeeAt(holding?.locationId, { powers, character, rules, locations, worth: local });
   rows.push({ id: "sell-here", who: "you, in person", where: here?.name || "here", price: "local",
-    gross: local, costs: [], net: local, days: 0, risk: 0,
-    said: `what this place makes, sold here, at the price it fetches here — and the store's ${local} today in one go if you want it` });
+    gross: local, market: hereFee || null,
+    costs: hereFee && hereFee.fee > 0 ? [{ label: `${hereFee.powerName}'s fee to sell here (once per visit)`, value: hereFee.fee }] : [],
+    net: Math.max(0, local - (hereFee?.fee || 0)), days: 0, risk: 0,
+    ...(hereFee?.closed && !hereFee.bribe ? { shut: true } : {}),
+    said: hereFee?.closed && !hereFee.bribe
+      ? `${hereFee.powerName} will not let you sell here — they think of you as ${hereFee.band}`
+      : `what this place makes, sold here, at the price it fetches here — and the store's ${local} today in one go if you want it`
+        + `${hereFee && hereFee.fee > 0 ? `, less ${hereFee.fee} to ${hereFee.powerName} for the stall` : hereFee?.waived ? `, and ${hereFee.powerName} waives its stall fee for you` : ""}` });
 
   // 2 · THE KEEPER (or the hands, unkept) — a SHARE per pass, at the SAME price.
   const share = holding?.steward
@@ -407,8 +438,12 @@ export function storeExits(character, holding, { cfg = null, economy = null, loc
     : (Number.isFinite(Number(cfg?.handsSell)) ? Number(cfg.handsSell) : 0.25);
   const perPass = Math.round(local * share);
   rows.push({ id: "keeper-sells", who: holding?.steward ? "the keeper" : "the hands, with nobody keeping it",
-    where: here?.name || "here", price: "local", gross: local, costs: [], net: local, days: share > 0 ? Math.ceil(1 / share) : null,
-    perPass, risk: 0,
+    where: here?.name || "here", price: "local", gross: local, market: hereFee || null,
+    // ✅ SNG-663 §2d: `tickStore` charges the keeper the stall fee every pass that sells, so the card must show it —
+    // a card that quoted the keeper's rate without it would be the card and the tick disagreeing.
+    costs: hereFee && hereFee.fee > 0 ? [{ label: `${hereFee.powerName}'s fee to sell here (each pass that sells)`, value: hereFee.fee }] : [],
+    net: Math.max(0, local - (hereFee?.fee || 0)), days: share > 0 ? Math.ceil(1 / share) : null,
+    perPass: Math.max(0, perPass - (hereFee?.fee || 0)), risk: 0,
     said: `${Math.round(share * 100)}% of the store a pass, at the same price — about ${perPass} next pass, settling at what the place makes, and it sits here while it waits` });
 
   // 3 · THE MARKETS — SNG-654 LEVER B. ⛔ RANKED BY WHAT THEY WOULD EARN, not by their gross price; ONE ROW PER
@@ -458,7 +493,7 @@ export function storeExits(character, holding, { cfg = null, economy = null, loc
     // and every hold with a market threw "path is not iterable". Read the shape; never assume it.
     const path = (() => { try { return pathFrom(dd, holding.locationId, m.id)?.path || []; } catch { return []; } })();
     const danger = roadDanger(path, locations);
-    const v = routeValue(character, holding, { toId: m.id, days: m.days, danger, path, cfg, economy, locations, density, dangerLevel: danger654, people, npcCfg, day, baseWaitCost: base654.cost });
+    const v = routeValue(character, holding, { powers, rules, toId: m.id, days: m.days, danger, path, cfg, economy, locations, density, dangerLevel: danger654, people, npcCfg, day, baseWaitCost: base654.cost });
     if (!v.ok) continue;
     // ⛑ THE OLD FILTER'S CONTRACT, KEPT, in the new unit: a market that does not beat selling at home is not a
     // reason to travel. ⚠️ The old one compared the STORE's gross ("w <= local"), which is why a market that pays
@@ -479,7 +514,7 @@ export function storeExits(character, holding, { cfg = null, economy = null, loc
     const days = opt ? num(opt.days, m.days) : m.days;
     const path = opt?.path?.length ? opt.path : m.path;
     const danger = roadDanger(path, locations);
-    const v = routeValue(character, holding, { toId: m.id, days, danger, path, cfg, economy, locations, density, dangerLevel: danger654, people, npcCfg, day, baseWaitCost: base654.cost });
+    const v = routeValue(character, holding, { powers, rules, toId: m.id, days, danger, path, cfg, economy, locations, density, dangerLevel: danger654, people, npcCfg, day, baseWaitCost: base654.cost });
     if (!v.ok) continue;
     const sped = v.speedMult > 1 ? `, ${v.speedLabel} rather than on foot (${v.roadDays} days instead of ${v.days})` : "";
     const road = v.runs > 0 ? `, and you have walked this road ${v.runs} time${v.runs === 1 ? "" : "s"} — ${Math.round((1 - v.hazardMult) * 100)}% less trouble on it${v.relay ? " (a relay station of yours stands on it)" : ""}` : "";
@@ -487,19 +522,24 @@ export function storeExits(character, holding, { cfg = null, economy = null, loc
       gross: worthAt(m.loc.regionId), net: worthAt(m.loc.regionId), days: v.roadDays, risk: danger,
       perPass: v.perPass, firstCoin: v.firstCoin, speedMult: v.speedMult, speedLabel: v.speedLabel,
       runs: v.runs, hazardMult: v.hazardMult, relay: v.relay, value: v, label: opt?.label || null,
+      market: v.market || null,
       costs: [{ label: `the crew's keep (${num(t654.crew, 2)} carriers)`, value: v.keep },
               { label: `what the road is expected to take`, value: v.loss },
-              { label: `the stock waiting for it, beyond what the shed already risks`, value: v.exposure }],
+              { label: `the stock waiting for it, beyond what the shed already risks`, value: v.exposure },
+              // ✅ SNG-663 §2d — the market's own stall fee, spread over the passes between departures, and it is the
+              // number `routeValue` charged rather than a second reading of the same rule.
+              ...(v.stall > 0 ? [{ label: `${v.market.powerName}'s fee to sell there (${v.market.fee} a load${v.market.doubled ? ", doubled — they think ill of you" : ""})`, value: v.stall }] : [])],
       said: `${v.perPass} a pass at ${m.loc.name || m.id} — what this hold makes, sold there${sped}. First coin in ${v.firstCoin} pass${v.firstCoin === 1 ? "" : "es"}${danger ? `, danger ${danger} on the way` : ", a quiet road"}${road}`
-        + `${v.exposure > 0 ? `. It departs every ${v.wait.perDeparture} passes, so about ${v.wait.units} units stand waiting for it — ${v.exposure} a pass in raid risk beyond what the shed already carries` : ""}` });
+        + `${v.exposure > 0 ? `. It departs every ${v.wait.perDeparture} passes, so about ${v.wait.units} units stand waiting for it — ${v.exposure} a pass in raid risk beyond what the shed already carries` : ""}`
+        + `${v.stall > 0 ? `. ${v.market.powerName} takes ${v.market.fee} a load for the right to sell there` : v.market?.waived ? `. ${v.market.powerName} waives its stall fee for you` : ""}` });
     if (companyCut != null) {
-      const cv = routeValue(character, holding, { toId: m.id, days, danger, path, cfg, economy, locations, density, companyCut, dangerLevel: danger654, people, npcCfg, day, baseWaitCost: base654.cost });
+      const cv = routeValue(character, holding, { powers, rules, toId: m.id, days, danger, path, cfg, economy, locations, density, companyCut, dangerLevel: danger654, people, npcCfg, day, baseWaitCost: base654.cost });
       // ⛔ GATE-AWARE, which is lever C's last row: a company knows the gates whether or not YOU have found them, so
       // its route is asked with no traveller — which is exactly what `gatesUsableBy(null)` means.
       const cRoute = (() => { try { return routeBetween(holding.locationId, m.id, locations, { traveller: null }); } catch { return null; } })();
       const cOpt = (cRoute?.options || []).slice().sort((a, b) => (a.days ?? 99) - (b.days ?? 99))[0] || null;
       const cDays = cOpt ? num(cOpt.days, days) : days;
-      const cv2 = cDays < days ? routeValue(character, holding, { toId: m.id, days: cDays, danger: roadDanger(cOpt?.path || path, locations), path: cOpt?.path || path, cfg, economy, locations, density, companyCut, dangerLevel: danger654, people, npcCfg, day, baseWaitCost: base654.cost }) : cv;
+      const cv2 = cDays < days ? routeValue(character, holding, { powers, rules, toId: m.id, days: cDays, danger: roadDanger(cOpt?.path || path, locations), path: cOpt?.path || path, cfg, economy, locations, density, companyCut, dangerLevel: danger654, people, npcCfg, day, baseWaitCost: base654.cost }) : cv;
       if (cv2.ok) rows.push({ id: `company:${m.id}`, who: "a hired company", where: m.loc.name || m.id, price: "there",
         gross: worthAt(m.loc.regionId), net: worthAt(m.loc.regionId), days: cv2.roadDays, risk: 0, quote: true,
         perPass: cv2.perPass, firstCoin: cv2.firstCoin, speedMult: cv2.speedMult, speedLabel: cv2.speedLabel, value: cv2,
@@ -530,7 +570,11 @@ export function storeExits(character, holding, { cfg = null, economy = null, loc
       // ⛑ A HOLD THAT MAKES NOTHING HAS NO RATE, so it keeps the old arithmetic — what the pile fetches, over the
       // passes it takes to sell. Measured: 1 of the 6 live holds is in that case.
       r.thisPass = r.perPass != null ? r.perPass : Math.round((Number(r.net) || 0) / passes);
-      r.perPass = localFlow != null ? localFlow : r.thisPass;
+      // ✅ SNG-663 §2d — LESS THE STALL FEE, which this block was overwriting. It normalises every row to the rate the
+      // arrangement settles at, and `localFlow` is what the hold MAKES at the local price — which does not know about
+      // the market's fee. The fee I had subtracted two hundred lines up was written over here, so the card showed the
+      // cost on the receipt and the wrong total beside it.
+      r.perPass = Math.max(0, (localFlow != null ? localFlow : r.thisPass) - (hereFee?.fee || 0));
       r.steady = localFlow;
     } else if (r.perPass == null) {
       r.perPass = Math.round((Number(r.net) || 0) / passes);

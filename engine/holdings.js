@@ -26,7 +26,7 @@ import { regionDemand } from "./economy.js";       // Q8: a unit is worth what T
 import { sheetFor as personSheetFor, tierOf as tierOfLevel, personRecordFor, kitFor } from "./npcsheet.js";   // Q18 → v2 §1: the keeper's tie · SNG-659 §1: the DERIVED kit, the same one every duel fights withr sets the FLOOR
 import { locationDensity } from "./substrate.js";   // Q18: the ground scales an enterprise's yield
 import { legionClash, contingentsFromPeople, contingentsOf, bloodBand } from "./melee.js";
-import { raidersFrom, notePowerLoss, contingentsOf as powerContingents } from "./powers.js";   // SNG-634 C1: the raiders have an owner
+import { raidersFrom, notePowerLoss, contingentsOf as powerContingents, marketFeeAt} from "./powers.js";   // SNG-634 C1: the raiders have an owner
 import { isMoored, carriageOf } from "./carriage.js";   // ⛔ SPEC_mobile_holdings §4: moored is raidable, moving is not   // R46a: a detected raid is a FIGHT, resolved unattended
 import { smartClamp } from "./namematch.js";   // an evidence quote is prose — cut at a word, never mid-word
 import { isNetworkGate, comesByGate, gateArrivalFor } from "./waygate.js";   // runner fees: a NETWORK gate near a relay post brings traffic   // ⛔ SNG-663 §2b: a force that comes by gate lands in the yard
@@ -1540,7 +1540,7 @@ export function sellPlanFor(holding, cfg = null, { ignoreRoute = false } = {}) {
   return { share, goods, units, any: units > 0 };
 }
 
-export function tickStore(character, holding, { cfg = null, economy = null, regionId = null, dangerLevel = 0, rng = Math.random, day = null, density = null, meaning = 0, people = {}, npcCfg = {}, locations = {}, rules = {}, kitDeps = null, power = null } = {}) {
+export function tickStore(character, holding, { cfg = null, economy = null, regionId = null, dangerLevel = 0, rng = Math.random, day = null, density = null, meaning = 0, people = {}, npcCfg = {}, locations = {}, rules = {}, kitDeps = null, power = null, powers = null } = {}) {
   // ⛔ SNG-657 §3 — `power` WAS PASSED HERE AND DESTRUCTURED AWAY. `worldtick` has computed
   // `raiderPowerAt(loc.id, …)` and handed it to this function since SNG-634 C1, and the signature had no such
   // parameter — so it vanished, `resolveRaid` was called without it, and EVERY RAID IN THE GAME WAS THE
@@ -1590,7 +1590,7 @@ export function tickStore(character, holding, { cfg = null, economy = null, regi
     // ⛑ SNG-652 §6 — THE PLAN, NOT A SECOND SUM. `sellPlanFor` composes the keeper's capacity with the stock policy,
     // and the card reads the same function — which is the whole reason `keeperSold` and the panel agree at all.
     const plan = sellPlanFor(holding, cfg);
-    const sold = {}; let earned = 0;
+    const sold = {}; let earned = 0;   // ⚠️ `let`: a shut market puts the goods back and zeroes the takings
     for (const [g, n] of Object.entries(holding.store || {})) {
       const units = Number(plan.goods[g]) || 0;
       if (units <= 0) continue;
@@ -1602,11 +1602,28 @@ export function tickStore(character, holding, { cfg = null, economy = null, regi
       if (!(holding.store[g] > 0)) delete holding.store[g];
       sold[g] = units; earned += val;
     }
+    // ✅ SNG-663 §2d — AND THE KEEPER PAYS THE STALL FEE, at the market where the hold stands, per pass that sells.
+    // ⚠️ A CLOSED MARKET SELLS NOTHING: the goods stay in the shed rather than being taken and then refused.
+    const mkt664 = marketFeeAt(holding.locationId, { powers, character, rules, worth: earned, locations });
+    if (mkt664?.closed && !mkt664.bribe && earned > 0) {
+      for (const [g, units] of Object.entries(sold)) holding.store[g] = (Number(holding.store[g]) || 0) + units;
+      out.marketShut = { power: mkt664.power, powerName: mkt664.powerName, band: mkt664.band, at: holding.locationId,
+        placeName: locations?.[holding.locationId]?.name || null };
+      earned = 0;
+    }
     if (earned > 0) {
       // ⛔ CCODE-437: the keeper is paid in the money of the place it sells — a Reach's scrip in a Reach
       const cr = earnAt(character, earned, regionId, economy, { origin: "traded" });
       // ⚠️ `by` NAMES WHOEVER ACTUALLY SOLD IT, so the news cannot say a keeper did something a hand did.
       if (cr.ok) out.keeperSold = { by: holding.steward || (holding.crew || [])[0] || (holding.garrison || [])[0], byKeeper: !!holding.steward, goods: sold, crystal: earned, said: saidEarned(cr) };
+      if (cr.ok && mkt664) {
+        out.marketFee = mkt664;
+        if (mkt664.fee > 0) {
+          const pf = payAt(character, mkt664.fee, regionId, economy);
+          out.marketFee = { ...mkt664, paid: pf.ok, said: pf.ok ? saidPaid(pf) : null };
+          if (!pf.ok) holding.arrears = (Number(holding.arrears) || 0) + mkt664.fee;
+        }
+      }
     }
   }
   const alms = pilgrimIncome(holding, { cfg, meaning });
@@ -1705,6 +1722,14 @@ export function storeNews(holding, st) {
     const sold = Object.entries(st.keeperSold.goods).map(([g, n]) => `${n} ${String(g).replace(/_/g, " ")}`).join(", ");
     lines.push(`${where}'s keeper sold ${sold} for ${st.keeperSold.said || `${st.keeperSold.crystal} crystal`}.`);
   }
+  // ✅ SNG-663 §2d — the stall fee, AFTER the sale it was charged on. ⚠️ Only when there is something to say: a market
+  // nobody holds is not news, and a waiver is said ONCE rather than every pass.
+  // ⚠️ AND IT NAMES THE PLACE, not the hold — the market is the town's, and "shut the market at The Fell Pell" reads as
+  // the player's own shed refusing them.
+  if (st.marketShut) lines.push(`${st.marketShut.powerName} has shut the market at ${st.marketShut.placeName || st.marketShut.at} to you — nothing sold this pass.`);
+  else if (st.marketFee?.fee > 0) lines.push(`${st.marketFee.line || `${st.marketFee.fee} to ${st.marketFee.powerName} for the stall.`}${st.marketFee.paid ? "" : " — unpaid, and it is owed."}`);
+  else if (st.marketFee?.waived && !holding.marketWaiverSaid) { lines.push(`${st.marketFee.powerName} waives the stall fee for you now.`); holding.marketWaiverSaid = true; }
+  if (st.marketFee && !st.marketFee.waived && holding.marketWaiverSaid) delete holding.marketWaiverSaid;
   if (st.pilgrims) lines.push(`${st.pilgrimsSaid || `${st.pilgrims} crystal`} left at ${where} by those who came to it.`);
   if (Array.isArray(st.yields) && st.yields.length > 1) { /* several goods — the store line on the tab says which */ }
   if (st.grew) lines.push(`${where} has come up to ${holding.condition}${st.grew.keeper ? ` under ${st.grew.keeper}` : ""}.`);
@@ -1713,7 +1738,7 @@ export function storeNews(holding, st) {
   return lines;
 }
 /** Sell what is stored, where it stands, at this Reach's prices. Refuses away from the hold and where nothing is wanted. */
-export function sellStore(character, holdingId, { economy = null, cfg = null, hereId = null, regionId = null, day = null, goods = null } = {}) {
+export function sellStore(character, holdingId, { economy = null, cfg = null, hereId = null, regionId = null, day = null, goods = null, powers = null, rules = null, locations = null } = {}) {
   const h = (character?.holdings || []).find(x => x && x.id === holdingId);
   if (!h) return { ok: false, why: "no such holding" };
   if (hereId && h.locationId && hereId !== h.locationId) return { ok: false, why: "the store is at the hold — you sell where it stands, and nothing moves it yet" };
@@ -1729,11 +1754,30 @@ export function sellStore(character, holdingId, { economy = null, cfg = null, he
     total += val; delete h.store[g];
   }
   if (!total) return { ok: false, why: storeTotal(h) > 0 ? "nobody here wants what is stored — this Reach has no need of it" : "the store is empty" };
+  // ✅ SNG-663 §2d — THE MARKET CHARGES FOR THE RIGHT TO SELL, and a traveller selling in person pays it ONCE per visit
+  // rather than per good. ⛔ A closed market refuses before any coin moves, because "you can't sell there" has to happen
+  // BEFORE the store is emptied — the goods are already out of `h.store` by here, so a refusal below this line would
+  // lose them.
+  const fee664 = marketFeeAt(h.locationId, { powers, character, rules, worth: total, locations });
+  if (fee664?.closed && !fee664.bribe) {
+    for (const [g, s] of Object.entries(sold)) h.store[g] = (Number(h.store[g]) || 0) + s.units;   // put it all back
+    return { ok: false, why: `${fee664.powerName} will not let you sell at ${h.locationId} — they think of you as ${fee664.band}`, market: fee664 };
+  }
   const cr = earnAt(character, total, regionId, economy, { origin: "traded" });   // ⛔ CCODE-437: sold in the place's money
   if (!cr.ok) return { ok: false, why: cr.why };
+  // ⚠️ PAID AFTER THE SALE, out of the same purse the sale filled: a fee larger than the takings is a debt, not a
+  // refusal, and `payAt` already knows how to answer that.
+  // ⚠️ THE RECEIPT EXISTS WHENEVER A POWER HOLDS THIS MARKET, waived or not. My first version made one only when coin
+  // moved, so a power WAIVING the fee for you — a thing it did, and worth being told — read as there being no market.
+  let feePaid664 = fee664 || null;
+  if (fee664 && fee664.fee > 0) {
+    const pf = payAt(character, fee664.fee, regionId, economy);
+    feePaid664 = { ...fee664, paid: pf.ok, said: pf.ok ? saidPaid(pf) : null, short: pf.ok ? 0 : fee664.fee };
+    if (!pf.ok) h.arrears = (Number(h.arrears) || 0) + fee664.fee;
+  }
   if (h.storeFullAnnounced && storeTotal(h) < Math.max(1, Number(cfg?.fullAt) || 40)) delete h.storeFullAnnounced;
-  h.history = [...(h.history || []), { at: null, from: h.condition, to: h.condition, note: `sold the store — ${saidEarned(cr)}` }].slice(-12);
-  return { ok: true, crystal: total, said: saidEarned(cr), sold, day };
+  h.history = [...(h.history || []), { at: null, from: h.condition, to: h.condition, note: `sold the store — ${saidEarned(cr)}${feePaid664 ? `, less ${feePaid664.fee} to ${feePaid664.powerName}` : ""}` }].slice(-12);
+  return { ok: true, crystal: total, said: saidEarned(cr), sold, day, ...(feePaid664 ? { market: feePaid664 } : {}) };
 }
 
 /* ═══ 2026-09-05 — APPOINT A KEEPER; TAKE A HANDED-OVER HOLD BACK (Erik: "now it says I gave them to the stewards!") ═══

@@ -138,7 +138,7 @@
   "maxHealth": 88,
   "health": 88,
   "maxEnergy": 166,
-  "energy": 139,
+  "energy": 131,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -15867,8 +15867,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790633256319,
-  "rev": 1074,
+  "updatedAt": 1790633448006,
+  "rev": 1075,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -18258,12 +18258,6 @@
           "at": 2005,
           "from": "thriving",
           "to": "thriving",
-          "note": "hands: Tessvel Cairn, Vessin Tallow-bark"
-        },
-        {
-          "at": 2005,
-          "from": "thriving",
-          "to": "thriving",
           "note": "hands: Tessvel Cairn, Vessin Tallow-bark, Veln Ashpause"
         },
         {
@@ -18325,6 +18319,12 @@
           "from": "thriving",
           "to": "thriving",
           "note": "improved with Old Procedure"
+        },
+        {
+          "at": 2182,
+          "from": "thriving",
+          "to": "thriving",
+          "note": "Maintained Veil refreshed (8 energy)"
         }
       ],
       "carriage": {
@@ -18345,12 +18345,9 @@
           "name": "Maintained Veil",
           "day": 76,
           "energy": 8,
-          "expiresDay": 88,
+          "expiresDay": 102,
           "refreshCost": 8,
-          "warned": true,
-          "lapsed": true,
-          "lapsedDay": 90,
-          "tookRung": true
+          "warned": false
         },
         {
           "abilityId": "better_story",

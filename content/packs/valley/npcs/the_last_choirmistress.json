@@ -152,5 +152,8 @@
  },
  "fullName": "Ledda Halia Sheerwater",
  "nameKnown": "world",
- "title": "the Last Choirmistress"
+ "title": "the Last Choirmistress",
+ "arcAffinity": {"arcId": "arc_what_wakes_beneath", "dir": -1, "weight": 2},
+ "wantArcId": "arc_what_wakes_beneath",
+ "_arcAffinityWhy_20260928": "Copied from this figure's tradition_epics row, which the npc file shadows; without it the figure pushed nothing on its arc (CCODE-552's gate found it). Aevi, SNG-663."
 }

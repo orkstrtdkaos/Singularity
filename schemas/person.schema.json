@@ -166,6 +166,23 @@
       "type": "string",
       "description": "2% — the seed their portrait was drawn from, so it stays the same face."
     },
+    "mergedFrom": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": { "type": "string" },
+          "why": { "type": "string" },
+          "day": { "type": [ "number", "null" ] },
+          "droppedMint": { "type": "string" }
+        },
+        "additionalProperties": false
+      },
+      "description": "1% — the ledger of merges that made this one record, written by `mergePeople` (SNG-664 §2): the id that was folded in, a reason a person can check, the day, and — when the merge answered a MINT rather than an existing record — the name that was never written down. ⛔ NOT `_mergedFrom`, which is an older and DIFFERENT field: one dropped id as a bare string, read by `gm_registry.js` to keep a merged stub out of the minted-unmet list. `mergePeople` writes both. ⛔ HELD OUT OF THE RE-POINT WALK, with `formerIds` and `aliases`: the merge rewrites every reference to the dropped id across the save, and without the exemption it overwrites its own audit trail and the record forgets who it used to be. ⚠️ Undeclared until 2026-09-28, and every suite accepted that for three days because no save had merged yet — then Erik played Loki, two staged merges became real records, and the push ratchet caught it on 2 of 136 people. A rule with no population asks nothing. ⬜ Nothing in the GAME reads this yet; §386 does. It is the trail §2 asked for so a merge can be argued with, and it wants a surface that shows it."
+    },
     "formerIds": {
       "type": "array",
       "description": "1% — ids this person used to be keyed by. ⛔ Matched by `findExistingNpc`, so an op written against an old id still finds them."

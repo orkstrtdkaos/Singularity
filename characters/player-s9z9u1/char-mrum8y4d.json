@@ -549,11 +549,219 @@
     "On the glass plain at dawn, Vessin reads the cost of Loki's choice to hold rather than break—and the band walks on toward the Standing Annex."
   ],
   "currentLocationId": "gen-the-standing-annex",
-  "activeScene": null,
+  "activeScene": {
+    "locationId": "gen-the-standing-annex",
+    "turns": [
+      {
+        "player": "Arrive at the Standing Annex and meet Halvex Coil.",
+        "summary": "The band arrives at the Standing Annex to find Halvex Coil waiting. Veln has already passed through; Halvex is prepared to speak about the sealed chamber's discovery and what comes next.",
+        "narration": "The Annex rises from the pale morning like a ship in still water—timber and stone, weathered to silver-grey by years the valley kept to itself. Smoke rises from the chimney in a thin, purposeful line. The road levels as you approach, and the building settles into view in full: a long structure on legs, as Mara described, with a watchtower at one corner and a shrine-shaped addition on the eastern face. The windows are open. Someone is moving inside.\n\nHalfvex Coil meets you at the threshold before you knock. He is lean-framed and sharp-featured, with eyes that calculate and estimate—the way someone who reads a room for weakness always looks. His voice is hoarse when he speaks, but steady. \"The word came ahead,\" he says simply. \"Veln reached here yesterday evening and waited. She left at first light to gather the others from the deep.\" He steps aside, opening the door fully. \"Come in. There is coffee, and we need to talk about what you found beneath the stone.\""
+      }
+    ],
+    "lastTurn": {
+      "narration": "The Annex rises from the pale morning like a ship in still water—timber and stone, weathered to silver-grey by years the valley kept to itself. Smoke rises from the chimney in a thin, purposeful line. The road levels as you approach, and the building settles into view in full: a long structure on legs, as Mara described, with a watchtower at one corner and a shrine-shaped addition on the eastern face. The windows are open. Someone is moving inside.\n\nHalfvex Coil meets you at the threshold before you knock. He is lean-framed and sharp-featured, with eyes that calculate and estimate—the way someone who reads a room for weakness always looks. His voice is hoarse when he speaks, but steady. \"The word came ahead,\" he says simply. \"Veln reached here yesterday evening and waited. She left at first light to gather the others from the deep.\" He steps aside, opening the door fully. \"Come in. There is coffee, and we need to talk about what you found beneath the stone.\"",
+      "sceneSummary": "The band arrives at the Standing Annex to find Halvex Coil waiting. Veln has already passed through; Halvex is prepared to speak about the sealed chamber's discovery and what comes next.",
+      "choices": [
+        {
+          "label": "Ask Halvex what he learned while you were in the passage",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": "trivial",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Speak plainly about Seraphine's mistake—the chamber is beneath the Crossing, not Millbrook",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "falsehood_truth": 0.8
+          },
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study",
+            "lead"
+          ],
+          "abilityId": "unbearable_word",
+          "energyCost": 4,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask what Cy has learned about the chamber's language",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "axes": {
+            "mechanical_spiritual": 0.3
+          },
+          "difficulty": "trivial",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Sit with the coffee first and read the room",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "concrete_abstract": -0.2
+          },
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": "prism_sight",
+          "energyCost": 2,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        }
+      ],
+      "deeds": [],
+      "characterDeltas": {
+        "energy": 0,
+        "health": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": []
+      },
+      "ledgerEvents": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "the-taken-from-the-city",
+          "note": "The band has arrived at the Standing Annex where Halvex waits with knowledge of the sealed chamber. The next stage is to understand what lies beyond the regulator and what the High Luminary's false ground means for the valley's future."
+        }
+      ],
+      "standingOps": [],
+      "delegateOps": [],
+      "jobOps": [],
+      "arcOps": [],
+      "adoptSchool": null,
+      "offer": {
+        "thing": "Halvex Coil, waiting with coffee and foreknowledge—the orchestrator who chose understanding over breaking now holds the Standing Annex and awaits the band's return.",
+        "from": "The chain of knowing that moved through Veln's foreknowledge and Mara's directing hand—the world honoring what Loki taught instead of destroyed."
+      },
+      "stageOps": [],
+      "scene": {
+        "setting": "The Standing Annex at dawn, mid-autumn—a timber and stone building on legs, silver-weathered, with chimney smoke rising and open windows. The watchtower and shrine-addition frame the eastern face. The threshold is open and Halvex Coil stands in the doorway.",
+        "npcsPresent": [
+          {
+            "name": "Halvex Coil",
+            "state": "Standing in the doorway with coffee ready, prepared to speak about the sealed chamber and what lies ahead. Eyes sharp with calculation and something softer underneath—a man who has chosen a different path and is still learning to stand in it."
+          }
+        ],
+        "objects": [
+          "Coffee—hot and ready inside",
+          "The watchtower stairs ascending from the main room",
+          "The shrine addition on the eastern face",
+          "The open door"
+        ],
+        "threads": [
+          "What Halvex learned while Loki descended into the passage",
+          "Veln's departure and what she carried back to the deeper sites",
+          "The sealed chamber's true nature and location beneath the Crossing, not Millbrook",
+          "What Cy has learned about the chamber's language and how it listens",
+          "What comes next now that the regulator has closed and the veil has thinned"
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "halvex_coil",
+          "name": "Halvex Coil",
+          "statusNote": "At the Standing Annex, keeper and orchestrator of understanding—waiting for the band with coffee and foreknowledge. Ready to speak about the chamber beneath the stone and what the High Luminary does not yet know.",
+          "note": "Met you at the threshold with coffee and word that Veln came ahead yesterday and left at first light to gather the others."
+        }
+      ],
+      "intentsHeard": [],
+      "factUpdates": [],
+      "placeUpdates": [],
+      "discovery": null,
+      "codexUpdates": [],
+      "holdingOps": [],
+      "holdTrades": [],
+      "debtOps": [],
+      "exchangeOps": [],
+      "partyOps": [],
+      "generateRequest": [],
+      "encounterOps": [],
+      "projectOps": [],
+      "bandOps": [],
+      "strikeOps": [],
+      "deathOps": [],
+      "newEncounter": null,
+      "unlockPrecursor": null,
+      "unlockSubstrate": null,
+      "timeOps": {
+        "hoursPassed": 2,
+        "why": "A two-hour walk from Mara Wells' Store to the Standing Annex on the spinward road, dawn to full morning."
+      },
+      "moveTo": {
+        "location": "gen-the-standing-annex",
+        "why": "The band departs Mara Wells' Store at dawn and walks the spinward road toward Whistling Woman Post, but Halvex waits here first—the longer route takes them through the Standing Annex where understanding began to take root."
+      },
+      "stateOps": [],
+      "itemUpdates": [],
+      "deriveItem": null,
+      "imagePrompt": null,
+      "imageMedium": null,
+      "newAbility": null,
+      "gambitOps": null,
+      "gambitApt": false,
+      "markDefiningMoment": null,
+      "markTeacher": null,
+      "offerPromotion": null,
+      "offerAcquisition": null,
+      "offerIntent": null,
+      "sceneEnded": false
+    },
+    "sceneState": {
+      "setting": "The Standing Annex at dawn, mid-autumn—a timber and stone building on legs, silver-weathered, with chimney smoke rising and open windows. The watchtower and shrine-addition frame the eastern face. The threshold is open and Halvex Coil stands in the doorway.",
+      "npcsPresent": [
+        {
+          "name": "Halvex Coil",
+          "state": "Standing in the doorway with coffee ready, prepared to speak about the sealed chamber and what lies ahead. Eyes sharp wi"
+        }
+      ],
+      "objects": [
+        "Coffee—hot and ready inside",
+        "The watchtower stairs ascending from the main room",
+        "The shrine addition on the eastern face",
+        "The open door"
+      ],
+      "threads": [
+        "What Halvex learned while Loki descended into the passage",
+        "Veln's departure and what she carried back to the deeper sites",
+        "The sealed chamber's true nature and location beneath the Crossing, not Millbrook",
+        "What Cy has learned about the chamber's language and how it listens",
+        "What comes next now that the regulator has closed and the veil has thinned"
+      ]
+    },
+    "beats": 1,
+    "subPlace": null
+  },
   "clock": {
     "schemaVersion": 1,
     "day": 10,
-    "hour": 7,
+    "hour": 9,
     "realAnchor": null
   },
   "companions": [
@@ -573,14 +781,14 @@
       "locationEntityId": "the-unlit-deep",
       "status": "active",
       "progress": [
-        "Loki has corrected Seraphine's fundamental assumption about the sealed chamber's location—it lies beneath the Crossing, not Millbrook. Vail Langley's absolute certainty is now reorganizing around a fact that unmakes her mandate to seize control at the wrong site. The balance of power has shifted.",
         "Loki has corrected the High Luminary's fundamental misreading of the sealed chamber's location. Vail Langley's mandate to seize control at Millbrook is now built on false ground. The enforcer's certainty is reorganizing.",
         "Orla speaks directly to Vail's breaking mandate—offering the language of someone who has lived through exactly this reshuffling of conviction. The Enforcer's absolute certainty is being offered a doorway out.",
         "Vail Langley, Seraphine's direct agent, has heard the sealed chamber's true location and watched her mandate collapse. She stands at the threshold between returning to broken certainty and riding ahead to understand what the broken ground actually holds.",
         "Vail Langley, Seraphine's direct agent, has been corrected about the sealed chamber's true location and has chosen to ride ahead to the Standing Annex to understand what it actually contains before reporting back. Her absolute mandate has reorganized into a choice.",
         "Vail Langley encountered at Whistling Woman Post and invited into shared ground—the Radiant position at the shrine becomes a place where her reorganized certainty can settle.",
         "Vail Langley has accepted a place at the shrine as a threshold rather than a fortress—she will carry word to Seraphine that an authority can ask questions and seek answers instead of closing doors. The sealed chamber is no longer a secret to be seized; it is part of a larger conversation about what the valley is becoming.",
-        "The path forward has shifted: the chamber's secrecy is broken, but not as a crisis—as an opening. What Seraphine does with that choice will reshape the entire conversation."
+        "The path forward has shifted: the chamber's secrecy is broken, but not as a crisis—as an opening. What Seraphine does with that choice will reshape the entire conversation.",
+        "The band has arrived at the Standing Annex where Halvex waits with knowledge of the sealed chamber. The next stage is to understand what lies beyond the regulator and what the High Luminary's false ground means for the valley's future."
       ],
       "aliases": [
         "The Taken: Someone was brought from the city to the Unlit Deep, and the city is "
@@ -1177,7 +1385,6 @@
       },
       "relationship": 9,
       "history": [
-        "[d4] Loki named the partnership plainly—search for answers that do not fit neat shapes. The orchestrator accepted, gripping Loki's hand. Introduced to Vessin and Kael. Standing at Loki's side now, no longer calculating for escape but for the meaning underneath the chaos.",
         "[d4] Named themselves plainly for the first time—their hunger for proof that chaos matters, their uncertainty now that the proof has been offered and refused. Standing at Loki's side without calculation.",
         "[d4] Their name is revealed: Halvex Coil (was known as \"The Churn-Revel orchestrator\")",
         "[d4] Named himself plainly at the Hub crossing—Halvex Coil, hired to break what will not break. Believes chaos matters but recognizes the proof was wrong. Now searching for answers that do not fit neat shapes with Loki.",
@@ -1186,7 +1393,8 @@
         "[d4] Watched the stone open at honest asking—the breaking he was sent to do stands behind him now, and partnership with Loki moves forward into uncertainty. The opening waits.",
         "[d4] Yielded the mandate to break and chose understanding instead. Faces the descent with uncertainty but commitment. Learning what accountability beyond the mandate feels like.",
         "[d4] Standing at the threshold with recognition crossing his face—the mandate to break stands behind him, and this moment of the chamber *answering* has reached him with the weight of a mandate orchestrated *right*",
-        "[d4] Read the sealed chamber's orchestration—it is a mutual test of readiness and integrity, not a one-way mechanism. The alcove is a threshold where the question is asked and answered in the same breath."
+        "[d4] Read the sealed chamber's orchestration—it is a mutual test of readiness and integrity, not a one-way mechanism. The alcove is a threshold where the question is asked and answered in the same breath.",
+        "[d10] Met you at the threshold with coffee and word that Veln came ahead yesterday and left at first light to gather the others."
       ],
       "knownFacts": [
         "The breaking has always been his proof—that he matters, that chaos matters",
@@ -1209,12 +1417,12 @@
       "gender": "man",
       "pronouns": "he/him",
       "age": 34,
-      "statusNote": "At Loki's side, searching for answers that do not fit neat shapes—partnership accepted",
+      "statusNote": "At the Standing Annex, keeper and orchestrator of understanding—waiting for the band with coffee and foreknowledge. Ready to speak about the chamber beneath the stone and what the High Luminary does not yet know.",
       "lastSeen": {
-        "locationId": "gen-the-made-gate",
-        "day": 4
+        "locationId": "gen-the-standing-annex",
+        "day": 10
       },
-      "met": 12,
+      "met": 13,
       "bondType": "platonic",
       "image": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Hoarse%20voice%2C%20sharp%20features%20softening%20now%2C%20eyes%20that%20calculate%20and%20estimate.%20He%20moves%20like%20someone%20used%20to%20reading%20a%20room%20for%20weak%20points.%2C%20character%20portrait%2C%20named%20The%20Churn-Revel%20orchestrator%2C%20man%2C%20Master%20of%20coordinated%20chaos%2C%20now%20questioning%20their%20mandate%2C%20platonic%20to%20Loki%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=39738&nologo=true",
       "_portraitTier": "devoted",
@@ -2190,12 +2398,8 @@
     "lastSharedReadAt": "2026-09-28T21:45:06.630Z",
     "lastTickWorldDay": 90,
     "lastCanonWorldDay": 90,
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 0,
     "recentOffers": [
-      {
-        "thing": "The shrine's four empty cardinal alcoves await filling—a structure of held positions, not yet claimed by any single power",
-        "from": "The architecture of Whistling Woman Post itself, and Loki's reading of what Vail had just become—someone whose certainty had reorganized…"
-      },
       {
         "thing": "Vail Langley's choice to become a threshold instead of a fortress—her commitment to carry that choice back to the High Luminary herself…",
         "from": "the shrine's founding principle of shared ground, which Loki named plainly and Vail chose to honor"
@@ -2211,6 +2415,10 @@
       {
         "thing": "Vessin reading the glass plain as a text—recognizing the pattern of your choice written in the fractured light",
         "from": "Vessin's own clarity about what falsecraft means when you finish it—and what it costs"
+      },
+      {
+        "thing": "Halvex Coil, waiting with coffee and foreknowledge—the orchestrator who chose understanding over breaking now holds the Standing Annex and…",
+        "from": "The chain of knowing that moved through Veln's foreknowledge and Mara's directing hand—the world honoring what Loki taught instead of…"
       }
     ],
     "wantProgress": {
@@ -14207,19 +14415,19 @@
     "deferredMysteries": []
   },
   "tendencies": {
-    "devotion": 0.4114145051455994,
-    "cerebral": 14.096757255741837,
-    "social": 21.11564901004791,
-    "strategic": 11.178349728677901,
-    "cautious": 4.1751432675859235,
-    "amorous": 3.882196262884376,
-    "generous": 4.991808238766326,
-    "ruthless": 0.8992841585496157,
-    "risky": 0.08421600544320279,
-    "patient": 0.02299787658608252,
-    "deception": 0.026770719579144144,
-    "carousing": 0.572929976008282,
-    "leadership": 1.1752409764272451
+    "devotion": 0.4011291425169594,
+    "cerebral": 13.744338324348291,
+    "social": 20.58775778479671,
+    "strategic": 10.898890985460953,
+    "cautious": 4.070764685896275,
+    "amorous": 3.7851413563122667,
+    "generous": 4.867013032797168,
+    "ruthless": 0.8768020545858753,
+    "risky": 0.08211060530712272,
+    "patient": 0.022422929671430458,
+    "deception": 0.02610145158966554,
+    "carousing": 0.558606726608075,
+    "leadership": 1.145859952016564
   },
   "aptitudes": [
     "strategist",
@@ -14228,7 +14436,7 @@
     "orator",
     "faithful"
   ],
-  "actionCount": 227,
+  "actionCount": 228,
   "grantsVersion": 1,
   "precursorAccess": [
     "address_sense"
@@ -15478,8 +15686,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790632133533,
-  "rev": 1066,
+  "updatedAt": 1790632181950,
+  "rev": 1067,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -16597,7 +16805,7 @@
     "umbral_depths": 54,
     "the_quickwood": 101,
     "the_center": 50,
-    "valley": 55,
+    "valley": 56,
     "the_open_reach": 3
   },
   "opLossPending": false,
@@ -16773,10 +16981,10 @@
     {
       "id": "sess-22",
       "startedAt": "2026-09-28T20:26:42.371Z",
-      "lastAt": "2026-09-28T21:48:53.530Z",
+      "lastAt": "2026-09-28T21:49:41.946Z",
       "startDay": 90,
       "endDay": 90,
-      "beats": 7
+      "beats": 8
     }
   ],
   "establishedFacts": [
@@ -16969,7 +17177,7 @@
   ],
   "_opLedger": {
     "offer": {
-      "applied": 64,
+      "applied": 65,
       "rejected": 3,
       "lastWhy": "rejected-shape"
     },
@@ -16986,21 +17194,21 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 264,
-    "choices": 264,
-    "characterDeltas": 147,
-    "scene": 264,
+    "sceneSummary": 265,
+    "choices": 265,
+    "characterDeltas": 148,
+    "scene": 265,
     "placeUpdates": 36,
     "codexUpdates": 153,
-    "timeOps": 212,
-    "offer": 57,
+    "timeOps": 213,
+    "offer": 58,
     "generateRequest": 7,
-    "sceneEnded": 133,
-    "npcUpdates": 212,
-    "moveTo": 15,
-    "gambitApt": 89,
+    "sceneEnded": 134,
+    "npcUpdates": 213,
+    "moveTo": 16,
+    "gambitApt": 90,
     "deeds": 18,
-    "questUpdates": 61,
+    "questUpdates": 62,
     "standingOps": 8,
     "factUpdates": 25,
     "stageOps": 7,
@@ -17020,7 +17228,7 @@
     "exchangeOps": 2,
     "discoveryEligible": 1
   },
-  "_opTurns": 264,
+  "_opTurns": 265,
   "customAbilities": {
     "mirror-bright": {
       "id": "mirror-bright",
@@ -18022,7 +18230,7 @@
   "skillUses": {
     "plan": 13,
     "discuss": 1,
-    "travel": 13,
+    "travel": 14,
     "scout": 8,
     "prepare": 9,
     "careful": 12,
@@ -18576,432 +18784,432 @@
   },
   "_promptRows": {
     "character": {
-      "reached": 72,
-      "produced": 72
+      "reached": 73,
+      "produced": 73
     },
     "location": {
-      "reached": 72,
-      "produced": 72
+      "reached": 73,
+      "produced": 73
     },
     "region": {
-      "reached": 72,
-      "produced": 72
+      "reached": 73,
+      "produced": 73
     },
     "groundDetail": {
-      "reached": 72,
+      "reached": 73,
       "produced": 27
     },
     "lore": {
-      "reached": 72,
+      "reached": 73,
       "produced": 51
     },
     "traditionMotiveDetail": {
-      "reached": 72,
-      "produced": 72
+      "reached": 73,
+      "produced": 73
     },
     "sheetsDetail": {
-      "reached": 72,
+      "reached": 73,
       "produced": 46
     },
     "rules": {
-      "reached": 72,
-      "produced": 72
+      "reached": 73,
+      "produced": 73
     },
     "recentTurns": {
-      "reached": 72,
+      "reached": 73,
       "produced": 61
     },
     "timeLabel": {
-      "reached": 72,
-      "produced": 72
+      "reached": 73,
+      "produced": 73
     },
     "npcRegistryDetail": {
-      "reached": 72,
-      "produced": 72
+      "reached": 73,
+      "produced": 73
     },
     "mintedUnmetDetail": {
-      "reached": 72,
-      "produced": 72
+      "reached": 73,
+      "produced": 73
     },
     "npcSeedDetail": {
-      "reached": 72,
+      "reached": 73,
       "produced": 28
     },
     "traditionVocab": {
-      "reached": 72,
-      "produced": 72
+      "reached": 73,
+      "produced": 73
     },
     "standingDetail": {
-      "reached": 72,
-      "produced": 72
+      "reached": 73,
+      "produced": 73
     },
     "recalledDetail": {
-      "reached": 72,
+      "reached": 73,
       "produced": 13
     },
     "bearingsDetail": {
-      "reached": 72,
-      "produced": 72
+      "reached": 73,
+      "produced": 73
     },
     "caravansDetail": {
-      "reached": 72,
-      "produced": 7
+      "reached": 73,
+      "produced": 8
     },
     "commandDetail": {
-      "reached": 72,
-      "produced": 72
+      "reached": 73,
+      "produced": 73
     },
     "presenceDetail": {
-      "reached": 72,
-      "produced": 62
+      "reached": 73,
+      "produced": 63
     },
     "worthHereDetail": {
-      "reached": 72,
+      "reached": 73,
       "produced": 0
     },
     "inventoryDetail": {
-      "reached": 72,
-      "produced": 72
+      "reached": 73,
+      "produced": 73
     },
     "sceneState": {
-      "reached": 72,
+      "reached": 73,
       "produced": 61
     },
     "holdingsDetail": {
-      "reached": 72,
-      "produced": 72
+      "reached": 73,
+      "produced": 73
     },
     "debtsDetail": {
-      "reached": 72,
+      "reached": 73,
       "produced": 0
     },
     "carriedDetail": {
-      "reached": 72,
+      "reached": 73,
       "produced": 0
     },
     "abilityLawDetail": {
-      "reached": 72,
-      "produced": 72
+      "reached": 73,
+      "produced": 73
     },
     "questsDetail": {
-      "reached": 72,
-      "produced": 72
+      "reached": 73,
+      "produced": 73
     },
     "structuredQuestsDetail": {
-      "reached": 72,
+      "reached": 73,
       "produced": 0
     },
     "traditionArcDetail": {
-      "reached": 72,
+      "reached": 73,
       "produced": 0
     },
     "npcErrandsDetail": {
-      "reached": 72,
+      "reached": 73,
       "produced": 0
     },
     "codexDetail": {
-      "reached": 72,
-      "produced": 72
+      "reached": 73,
+      "produced": 73
     },
     "companionsDetail": {
-      "reached": 72,
-      "produced": 72
+      "reached": 73,
+      "produced": 73
     },
     "placeMemoryDetail": {
-      "reached": 72,
+      "reached": 73,
       "produced": 52
     },
     "agesMissingDetail": {
-      "reached": 72,
-      "produced": 72
+      "reached": 73,
+      "produced": 73
     },
     "newsDetail": {
-      "reached": 72,
-      "produced": 72
+      "reached": 73,
+      "produced": 73
     },
     "worldArcsDetail": {
-      "reached": 72,
-      "produced": 72
+      "reached": 73,
+      "produced": 73
     },
     "legendsPursuableDetail": {
-      "reached": 72,
+      "reached": 73,
       "produced": 12
     },
     "wakesDetail": {
-      "reached": 72,
+      "reached": 73,
       "produced": 0
     },
     "arcMoodDetail": {
-      "reached": 72,
-      "produced": 72
+      "reached": 73,
+      "produced": 73
     },
     "reachableDeadDetail": {
-      "reached": 72,
+      "reached": 73,
       "produced": 46
     },
     "threatToPlayer": {
-      "reached": 72,
+      "reached": 73,
       "produced": 0
     },
     "guardiansDetail": {
-      "reached": 72,
+      "reached": 73,
       "produced": 0
     },
     "resolution": {
-      "reached": 72,
-      "produced": 57
+      "reached": 73,
+      "produced": 58
     },
     "playerInput": {
-      "reached": 72,
+      "reached": 73,
       "produced": 15
     },
     "exactWords": {
-      "reached": 72,
+      "reached": 73,
       "produced": 37
     },
     "travelDirective": {
-      "reached": 72,
-      "produced": 6
+      "reached": 73,
+      "produced": 7
     },
     "itemAdvance": {
-      "reached": 72,
+      "reached": 73,
       "produced": 0
     },
     "encounterWeaveDetail": {
-      "reached": 72,
+      "reached": 73,
       "produced": 9
     },
     "encounterOfferDetail": {
-      "reached": 72,
+      "reached": 73,
       "produced": 5
     },
     "fightFramingDetail": {
-      "reached": 72,
+      "reached": 73,
       "produced": 0
     },
     "abilityGrantDetail": {
-      "reached": 72,
+      "reached": 73,
       "produced": 0
     },
     "stageRevealDetail": {
-      "reached": 72,
+      "reached": 73,
       "produced": 0
     },
     "itemEvolveDetail": {
-      "reached": 72,
+      "reached": 73,
       "produced": 0
     },
     "worldPressureDetail": {
-      "reached": 72,
+      "reached": 73,
       "produced": 2
     },
     "offerDetail": {
-      "reached": 72,
+      "reached": 73,
       "produced": 2
     },
     "teacherOfferDetail": {
-      "reached": 72,
+      "reached": 73,
       "produced": 0
     },
     "substrateDetail": {
-      "reached": 72,
+      "reached": 73,
       "produced": 18
     },
     "romanceGuidanceDetail": {
-      "reached": 72,
+      "reached": 73,
       "produced": 4
     },
     "factsDetail": {
-      "reached": 72,
-      "produced": 72
+      "reached": 73,
+      "produced": 73
     },
     "evolvedItemsDetail": {
-      "reached": 72,
+      "reached": 73,
       "produced": 0
     },
     "opLossNote": {
-      "reached": 72,
+      "reached": 73,
       "produced": 0
     },
     "emergenceDetail": {
-      "reached": 72,
+      "reached": 73,
       "produced": 0
     },
     "perilNote": {
-      "reached": 72,
+      "reached": 73,
       "produced": 0
     },
     "encounterDetail": {
-      "reached": 72,
+      "reached": 73,
       "produced": 4
     },
     "masteryDetail": {
-      "reached": 72,
-      "produced": 72
+      "reached": 73,
+      "produced": 73
     },
     "bookkeepingRestate": {
-      "reached": 72,
+      "reached": 73,
       "produced": 0
     },
     "anomalyDetail": {
-      "reached": 72,
-      "produced": 70
+      "reached": 73,
+      "produced": 71
     },
     "repairPanelDetail": {
-      "reached": 72,
-      "produced": 72
+      "reached": 73,
+      "produced": 73
     },
     "teacherDetail": {
-      "reached": 72,
+      "reached": 73,
       "produced": 0
     },
     "toolkitDetail": {
-      "reached": 72,
-      "produced": 72
+      "reached": 73,
+      "produced": 73
     },
     "availableEncounters": {
-      "reached": 72,
-      "produced": 68
+      "reached": 73,
+      "produced": 69
     },
     "partyDetail": {
-      "reached": 72,
+      "reached": 73,
       "produced": 0
     },
     "ratingDetail": {
-      "reached": 72,
-      "produced": 72
+      "reached": 73,
+      "produced": 73
     },
     "registerDetail": {
-      "reached": 72,
-      "produced": 72
+      "reached": 73,
+      "produced": 73
     },
     "legendDetail": {
-      "reached": 72,
+      "reached": 73,
       "produced": 1
     },
     "livingWorldDetail": {
-      "reached": 72,
-      "produced": 43
+      "reached": 73,
+      "produced": 44
     },
     "assignmentsDetail": {
-      "reached": 72,
+      "reached": 73,
       "produced": 0
     },
     "latentArcsDetail": {
-      "reached": 72,
-      "produced": 72
+      "reached": 73,
+      "produced": 73
     },
     "seasonalDetail": {
-      "reached": 72,
-      "produced": 72
+      "reached": 73,
+      "produced": 73
     },
     "schoolsDetail": {
-      "reached": 72,
-      "produced": 72
+      "reached": 73,
+      "produced": 73
     },
     "sharedCanonDetail": {
-      "reached": 72,
-      "produced": 49
+      "reached": 73,
+      "produced": 50
     },
     "worldCountLabel": {
-      "reached": 72,
-      "produced": 72
+      "reached": 73,
+      "produced": 73
     },
     "waygateDetail": {
-      "reached": 72,
+      "reached": 73,
       "produced": 29
     },
     "readAloudDetail": {
-      "reached": 72,
-      "produced": 72
+      "reached": 73,
+      "produced": 73
     },
     "scenePacingDetail": {
-      "reached": 72,
+      "reached": 73,
       "produced": 24
     },
     "wishesDetail": {
-      "reached": 52,
+      "reached": 53,
       "produced": 0
     },
     "worldMovedOnDetail": {
-      "reached": 52,
+      "reached": 53,
       "produced": 2
     },
     "companionLivesDetail": {
-      "reached": 52,
-      "produced": 25
+      "reached": 53,
+      "produced": 26
     },
     "homeDetail": {
-      "reached": 52,
+      "reached": 53,
       "produced": 0
     },
     "invitationsDetail": {
-      "reached": 52,
+      "reached": 53,
       "produced": 0
     },
     "bandsJoinedDetail": {
-      "reached": 52,
+      "reached": 53,
       "produced": 0
     },
     "travelersHereDetail": {
-      "reached": 52,
+      "reached": 53,
       "produced": 17
     },
     "travelersDetail": {
-      "reached": 52,
+      "reached": 53,
       "produced": 4
     },
     "journeyDetail": {
-      "reached": 50,
+      "reached": 51,
       "produced": 7
     },
     "journeyUnderwayDetail": {
-      "reached": 50,
+      "reached": 51,
       "produced": 5
     },
     "holdsNearDetail": {
-      "reached": 50,
-      "produced": 46
+      "reached": 51,
+      "produced": 47
     },
     "moneyDetail": {
-      "reached": 49,
-      "produced": 49
+      "reached": 50,
+      "produced": 50
     },
     "jobsDetail": {
-      "reached": 49,
+      "reached": 50,
       "produced": 0
     },
     "powersHereDetail": {
-      "reached": 26,
+      "reached": 27,
       "produced": 6
     },
     "nemesisDetail": {
-      "reached": 26,
-      "produced": 26
+      "reached": 27,
+      "produced": 27
     },
     "sovereignMark": {
-      "reached": 9,
+      "reached": 10,
       "produced": 0
     },
     "seats": {
-      "reached": 7,
-      "produced": 7
+      "reached": 8,
+      "produced": 8
     },
     "couldBeHereDetail": {
-      "reached": 7,
-      "produced": 7
+      "reached": 8,
+      "produced": 8
     },
     "heldMeetDetail": {
-      "reached": 7,
+      "reached": 8,
       "produced": 0
     },
     "askedMeetDetail": {
-      "reached": 7,
+      "reached": 8,
       "produced": 0
     }
   },
   "_opUnknown": {
-    "sceneSummary": 93,
+    "sceneSummary": 94,
     "scene_summary": 1,
     "discoveryEligible": 1
   },

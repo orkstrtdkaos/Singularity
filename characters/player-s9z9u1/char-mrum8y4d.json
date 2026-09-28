@@ -16152,8 +16152,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790636445322,
-  "rev": 1107,
+  "updatedAt": 1790636541141,
+  "rev": 1108,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -18997,7 +18997,7 @@
     {
       "id": "band-the-questioning-churn-revelers",
       "name": "The Questioning Churn-Revelers",
-      "count": 8,
+      "count": 9,
       "quality": 1,
       "from": "the_standing_annex",
       "condition": "fresh",
@@ -19091,6 +19091,17 @@
           ],
           "what": "Ravel — visitor at the Kindly Rest",
           "npcId": "steady-voice-woman"
+        },
+        {
+          "n": 1,
+          "quality": 2,
+          "does": [
+            "INFLUENCE",
+            "MOVE",
+            "HARM"
+          ],
+          "what": "Orla Yardley — A Syllogist who came carrying a breaking mandate and chose to que",
+          "npcId": "orla-yardley"
         }
       ],
       "captain": "halvex_coil"
@@ -19485,6 +19496,10 @@
     },
     {
       "text": "Halvex Coil captains The Questioning Churn-Revelers now.",
+      "announced": false
+    },
+    {
+      "text": "Orla Yardley stands in The Questioning Churn-Revelers now.",
       "announced": false
     }
   ],

@@ -2139,26 +2139,6 @@
     "news": [
       {
         "day": 8,
-        "worldDay": 89,
-        "text": "Ganna the Edgeholder: Ganna refused a small, familiar task they were handed by habit — said nothing, just set it down and walked past it, the first crack in the settled life.",
-        "tier": "ambient",
-        "section": "world",
-        "figureId": "person-5e7fbd40733ed12e",
-        "locationId": "the_great_coliseum",
-        "placedBy": "figureId"
-      },
-      {
-        "day": 8,
-        "worldDay": 89,
-        "text": "Cinder the Unshadowed has hit trouble — Cinder spoke the name of the one who did not come back aloud for the first time — and heard someone nearby laugh at something unrelated, a coincidence that felt like verdict.",
-        "tier": "event",
-        "section": "world",
-        "figureId": "person-daf1562a9d614dae",
-        "locationId": "the_blaze",
-        "placedBy": "figureId"
-      },
-      {
-        "day": 8,
         "worldDay": 90,
         "text": "Maintained Veil at The Standing Annex has gone quiet.",
         "tier": "event",
@@ -2307,11 +2287,25 @@
         "text": "The Standing Annex has come up to thriving under Halvex Coil.",
         "tier": "event",
         "section": "yours"
+      },
+      {
+        "day": 8,
+        "worldDay": 90,
+        "text": "Halvex Coil walks with you now.",
+        "tier": "event",
+        "section": "yours"
+      },
+      {
+        "day": 8,
+        "worldDay": 90,
+        "text": "Vail Langley walks with you now.",
+        "tier": "event",
+        "section": "yours"
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 2180,
-    "lastSharedReadAt": "2026-09-28T20:12:06.867Z",
+    "lastGenCount": 2181,
+    "lastSharedReadAt": "2026-09-28T21:30:36.742Z",
     "lastTickWorldDay": 90,
     "lastCanonWorldDay": 90,
     "turnsSinceOffer": 0,
@@ -2616,7 +2610,7 @@
         "kind": "decision",
         "premise": "Someone who keeps the count of what has been unmade has begun rounding down, telling themselves the difference is noise — but the rounding has a direction, and it has been consistent for long enough…",
         "cause": "The act of counting the unmade requires a decision about what constitutes a thing distinct enough to be counted, and that threshold has always been left to…",
-        "stage": 23,
+        "stage": 24,
         "seededAtCount": 1917,
         "surfaced": true,
         "fate": "growing",
@@ -2629,7 +2623,7 @@
         "kind": "decision",
         "premise": "The person who holds authority to formally designate what has been unmade as 'resolved' has not done so for anything in years, and the backlog of unresolved unmakings is beginning to press against…",
         "cause": "In the_unmade, the act of resolution is itself an act of power, and the authority-holder has quietly discovered that unresolved things remain partially…",
-        "stage": 19,
+        "stage": 20,
         "seededAtCount": 1968,
         "surfaced": true,
         "fate": "growing",
@@ -2654,7 +2648,7 @@
         "kind": "decision",
         "premise": "Someone has begun quietly counting what no longer exists — cataloguing absences — and has not yet decided whether to share what the count implies.",
         "cause": "The Unmade is defined by what has been lost or undone; its people have long customs around not naming absence directly, because naming draws attention to the…",
-        "stage": 14,
+        "stage": 15,
         "seededAtCount": 2053,
         "surfaced": true,
         "fate": "growing",
@@ -2667,7 +2661,7 @@
         "kind": "decision",
         "premise": "An elder who alone remembers the last time something like the current unraveling occurred has not yet spoken, weighing whether the knowing will help or hasten what is coming.",
         "cause": "In the_unmade, what is lost or dissolved carries weight equal to what remains — silence is understood as a form of preservation, and the elder has lived long…",
-        "stage": 13,
+        "stage": 14,
         "seededAtCount": 2100,
         "surfaced": true,
         "fate": "growing",
@@ -10223,7 +10217,7 @@
       "the_war_ender": 84,
       "the_last_choirmistress": 90
     },
-    "updatesToldTo": "2.14.13",
+    "updatesToldTo": "2.15.0",
     "newsLog": [
       {
         "day": 4,
@@ -11999,6 +11993,30 @@
         "worldDay": 90,
         "text": "The game was updated to v2.14.13 — 2 new, 7 fixed, 2 changed.",
         "loggedAt": "2026-09-28T20:12:14.195Z"
+      },
+      {
+        "day": 8,
+        "worldDay": 90,
+        "text": "Halvex Coil walks with you now.",
+        "tier": "event",
+        "section": "yours",
+        "loggedAt": "2026-09-28T21:30:44.064Z"
+      },
+      {
+        "day": 8,
+        "worldDay": 90,
+        "text": "Vail Langley walks with you now.",
+        "tier": "event",
+        "section": "yours",
+        "loggedAt": "2026-09-28T21:30:44.064Z"
+      },
+      {
+        "kind": "update",
+        "section": "world",
+        "version": "2.15.0",
+        "worldDay": 90,
+        "text": "The game was updated to v2.15.0 — 1 new, 1 fixed.",
+        "loggedAt": "2026-09-28T21:30:44.064Z"
       }
     ],
     "seatsTaken": {
@@ -13762,7 +13780,9 @@
           "[d8] Radiant authority sent to intercept"
         ],
         "links": [],
-        "aliases": [],
+        "aliases": [
+          "Enforcer of Seraphine's will"
+        ],
         "createdDay": 8,
         "entityId": "radiant-agent-seraphine-s-hand",
         "updatedDay": 8
@@ -15423,8 +15443,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790627202378,
-  "rev": 1045,
+  "updatedAt": 1790631044064,
+  "rev": 1047,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -16901,21 +16921,21 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 259,
-    "choices": 259,
-    "characterDeltas": 143,
-    "scene": 259,
-    "placeUpdates": 34,
+    "sceneSummary": 258,
+    "choices": 258,
+    "characterDeltas": 142,
+    "scene": 258,
+    "placeUpdates": 33,
     "codexUpdates": 151,
-    "timeOps": 207,
-    "offer": 54,
+    "timeOps": 206,
+    "offer": 53,
     "generateRequest": 7,
-    "sceneEnded": 128,
-    "npcUpdates": 209,
+    "sceneEnded": 127,
+    "npcUpdates": 208,
     "moveTo": 13,
-    "gambitApt": 85,
+    "gambitApt": 84,
     "deeds": 17,
-    "questUpdates": 59,
+    "questUpdates": 58,
     "standingOps": 6,
     "factUpdates": 23,
     "stageOps": 7,
@@ -16934,7 +16954,7 @@
     "bandOps": 1,
     "exchangeOps": 2
   },
-  "_opTurns": 259,
+  "_opTurns": 258,
   "customAbilities": {
     "mirror-bright": {
       "id": "mirror-bright",
@@ -18460,11 +18480,11 @@
     },
     {
       "text": "Halvex Coil walks with you now.",
-      "announced": false
+      "announced": true
     },
     {
       "text": "Vail Langley walks with you now.",
-      "announced": false
+      "announced": true
     }
   ],
   "figureImages": {
@@ -18907,8 +18927,8 @@
   "_bandNotes": null,
   "_opCountingSince": "2026-09-14T22:51:56.913Z",
   "_fireTests": {
-    "at": "2026-09-28T20:26:42.625Z",
-    "build": "2.14.13",
+    "at": "2026-09-26T21:46:55.823Z",
+    "build": "2.12.1",
     "results": [
       {
         "op": "jobOps",
@@ -19420,7 +19440,7 @@
       },
       "lastVerb": "quest",
       "lastVerbDay": 8,
-      "wins": 2,
+      "wins": 0,
       "winHow": "quest",
       "grownHeads": 4,
       "grewDay": 8
@@ -19494,7 +19514,7 @@
       "lost": {
         "0": 28
       },
-      "wins": 2,
+      "wins": 0,
       "winHow": "quest",
       "grownHeads": 28,
       "grewDay": 8
@@ -19528,7 +19548,7 @@
       },
       "lastVerb": "expand",
       "lastVerbDay": 8,
-      "wins": 2,
+      "wins": 0,
       "grownHeads": 44,
       "grewDay": 8,
       "winHow": "expand"
@@ -19583,7 +19603,7 @@
     "power_vacated_custody": {
       "lastVerb": "expand",
       "lastVerbDay": 8,
-      "wins": 2,
+      "wins": 0,
       "grownHeads": 6,
       "grewDay": 5,
       "winHow": "expand"
@@ -19591,7 +19611,7 @@
     "power_the_ceaseless": {
       "lastVerb": "expand",
       "lastVerbDay": 8,
-      "wins": 0,
+      "wins": 1,
       "grownHeads": 10,
       "grewDay": 5,
       "losses": 0,

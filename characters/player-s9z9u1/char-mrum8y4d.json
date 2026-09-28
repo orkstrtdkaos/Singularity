@@ -16152,8 +16152,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790636174361,
-  "rev": 1096,
+  "updatedAt": 1790636325736,
+  "rev": 1098,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -18993,7 +18993,18 @@
     }
   ],
   "_exchangeReceipts": [],
-  "bands": [],
+  "bands": [
+    {
+      "id": "band-the-questioning-churn-revelers",
+      "name": "The Questioning Churn-Revelers",
+      "count": 0,
+      "quality": 1,
+      "from": "the_standing_annex",
+      "condition": "fresh",
+      "raisedDay": 90,
+      "losses": 0
+    }
+  ],
   "_silasGrantsRevoked": true,
   "_fightLog": [
     {
@@ -19344,6 +19355,10 @@
     {
       "text": "You put Old Procedure to The Standing Annex — it is as good as it gets.",
       "announced": true
+    },
+    {
+      "text": "The Questioning Churn-Revelers is raised at The Standing Annex — and stands empty until somebody joins it.",
+      "announced": false
     }
   ],
   "figureImages": {
@@ -20622,7 +20637,8 @@
   ],
   "imagePinned": true,
   "partyForward": [
-    "traveler-woman"
+    "traveler-woman",
+    "halvex_coil"
   ],
   "caravans": [
     {

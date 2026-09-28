@@ -1460,44 +1460,6 @@
       ],
       "nameRevealed": true
     },
-    "syllogist-of-the-margins": {
-      "id": "syllogist-of-the-margins",
-      "name": "Unmet yet",
-      "nameUnknown": true,
-      "trueName": "Orla Yardley",
-      "role": "a Syllogist traveling between the reaches",
-      "fullName": "Orla Florence Yardley",
-      "description": "Tall and narrow, dressed in quiet grey. Face bearing the particular calm of someone who has just finished an argument with themselves. Eyes that carry precision and a recent breaking.",
-      "firstMet": {
-        "locationId": "millbrook",
-        "day": 7
-      },
-      "relationship": 0,
-      "history": [
-        "[d7] Emerged from the shadows of the road with foreknowledge of Loki's presence and Halvex's account. Came to question a belief and to offer that their own held belief has shattered."
-      ],
-      "knownFacts": [
-        "Connected to Halvex Coil's circle—knows of the Null Stone, the breaking mandate, and what Loki taught instead",
-        "Practices the Syllogist's discipline: precision, logic, willingness to follow an argument to its end",
-        "Has held a belief for fifteen years that they now know to be false"
-      ],
-      "skillsObserved": [],
-      "status": "active",
-      "sex": "male",
-      "gender": "man",
-      "pronouns": "he/him",
-      "age": 47,
-      "statusNote": "Standing on the road in mid-autumn night, waiting for Loki to emerge from the Kindly Rest",
-      "domains": {
-        "primary": "syllogist"
-      },
-      "domainsSource": "role",
-      "lastSeen": {
-        "locationId": "millbrook",
-        "day": 7
-      },
-      "met": 1
-    },
     "orla-yardley": {
       "id": "orla-yardley",
       "name": "Orla Yardley",
@@ -1512,7 +1474,8 @@
         "[d7] Arrived on the road from the reaches with foreknowledge of Loki's presence and Halvex Coil's account. Came to question a belief held for fifteen years—that breaking sealed things is mercy. Watched Loki choose understanding over destruction, and that choice moved through the valley until it reached…",
         "[d7] Orla walks with the band now, moving toward the Standing Annex. The breaking is spoken, witnessed, and carried forward together.",
         "[d8] Named themselves directly when asked. Honest about the mandates they carry and the questions that broke them. Present without defensiveness or fear.",
-        "[d8] Spoke directly to Vail's breaking certainty—using their own unraveling conviction as a mirror and a doorway. The broken mandate became a bridge."
+        "[d8] Spoke directly to Vail's breaking certainty—using their own unraveling conviction as a mirror and a doorway. The broken mandate became a bridge.",
+        "[d7] Emerged from the shadows of the road with foreknowledge of Loki's presence and Halvex's account. Came to question a belief and to offer that their own held belief has shattered."
       ],
       "knownFacts": [
         "Accepted a breaking mandate from Halvex Coil through trusted channels",
@@ -1522,7 +1485,10 @@
         "Came to the road toward the Standing Annex to test both their own conviction and Loki's in return",
         "Came to the valley carrying a breaking mandate born from belief that sealed things should be destroyed as mercy",
         "Watched Loki choose understanding at the Hub crossing and felt their fifteen-year certainty crack",
-        "Believes now that breaking itself needs to be examined"
+        "Believes now that breaking itself needs to be examined",
+        "Connected to Halvex Coil's circle—knows of the Null Stone, the breaking mandate, and what Loki taught instead",
+        "Practices the Syllogist's discipline: precision, logic, willingness to follow an argument to its end",
+        "Has held a belief for fifteen years that they now know to be false"
       ],
       "skillsObserved": [
         "Carries conviction with precision",
@@ -1546,8 +1512,22 @@
         "locationId": "gen-the-made-gate",
         "day": 8
       },
-      "met": 4,
-      "roleSince": 88
+      "met": 5,
+      "roleSince": 88,
+      "trueName": "Orla Yardley",
+      "fullName": "Orla Florence Yardley",
+      "formerIds": [
+        "syllogist-of-the-margins"
+      ],
+      "aliases": [],
+      "_mergedFrom": "syllogist-of-the-margins",
+      "mergedFrom": [
+        {
+          "id": "syllogist-of-the-margins",
+          "why": "the stranger's own true name is that person's name",
+          "day": null
+        }
+      ]
     },
     "mara-wells-keeper": {
       "id": "mara-wells-keeper",
@@ -1603,49 +1583,6 @@
       },
       "met": 8
     },
-    "radiant-agent-whistling-woman": {
-      "id": "radiant-agent-whistling-woman",
-      "name": "Radiant authority sent to intercept",
-      "nameUnknown": true,
-      "trueName": "Corm Whitlock",
-      "role": "Radiant authority sent to intercept",
-      "title": "Agent of the High Luminary, Seraphine",
-      "fullName": "Corm Edwin Whitlock",
-      "description": "A woman in the grey coat of the Radiant Plateau, standing with absolute stillness at the waystation threshold. Dark eyes that find their mark. Voice trained in the Harmonic—clear and carrying.",
-      "firstMet": {
-        "locationId": "gen-whistling-woman-post",
-        "day": 8
-      },
-      "relationship": 0,
-      "history": [
-        "[d8] Waits with foreknowledge at the threshold. Names Loki by the lower Annex records and by the Wardens of Cairnhold's own naming. Knows the sealed chamber exists. Speaks for Seraphine, the High Luminary."
-      ],
-      "knownFacts": [
-        "The engineering records in the lower Annex name Loki",
-        "The Wardens of Cairnhold have named Loki",
-        "Someone in the Radiant hierarchy knows about the sealed chamber beneath Millbrook"
-      ],
-      "skillsObserved": [
-        "Trained in Harmonic voice—clear, carrying speech",
-        "Absolute stillness and patience—has waited for this moment with certainty",
-        "Knowledge of sealed things and what they contain"
-      ],
-      "status": "active",
-      "sex": "female",
-      "gender": "woman",
-      "pronouns": "she/her",
-      "age": 35,
-      "statusNote": "Standing at the waystation threshold, authorized agent of the High Luminary",
-      "domains": {
-        "primary": "radiant_folk"
-      },
-      "domainsSource": "role",
-      "lastSeen": {
-        "locationId": "gen-whistling-woman-post",
-        "day": 8
-      },
-      "met": 1
-    },
     "radiant-agent-seraphine-s-hand": {
       "id": "radiant-agent-seraphine-s-hand",
       "name": "Vail Langley",
@@ -1666,7 +1603,8 @@
         "[d8] Listened to Orla Yardley name their own broken certainty and felt the precision of it land—the Enforcer is now choosing understanding over absolute order",
         "[d8] Their name is revealed: Vail Langley (was known as \"Enforcer of Seraphine's will\")",
         "[d8] Her absolute mandate collapsed when corrected about the sealed chamber's true location beneath the Crossing, not Millbrook. She has chosen to ride ahead to the Standing Annex to understand what lies there before reporting back to Seraphine. Her certainty has reorganized—no longer an order she…",
-        "[d8] Waited at Whistling Woman Post with foreknowledge. Names Loki by the lower Annex records. Authorized to demand on behalf of the High Luminary."
+        "[d8] Waited at Whistling Woman Post with foreknowledge. Names Loki by the lower Annex records. Authorized to demand on behalf of the High Luminary.",
+        "[d8] Waits with foreknowledge at the threshold. Names Loki by the lower Annex records and by the Wardens of Cairnhold's own naming. Knows the sealed chamber exists. Speaks for Seraphine, the High Luminary."
       ],
       "knownFacts": [
         "A broken mandate built on false ground can be rebuilt, or abandoned entirely",
@@ -1676,7 +1614,9 @@
         "Her own honesty matters more than absolute obedience",
         "The engineering records in the lower Annex name Loki",
         "The Radiant Plateau knows about the sealed chamber",
-        "This agent was sent to intercept before the band reaches the Standing Annex"
+        "This agent was sent to intercept before the band reaches the Standing Annex",
+        "The Wardens of Cairnhold have named Loki",
+        "Someone in the Radiant hierarchy knows about the sealed chamber beneath Millbrook"
       ],
       "skillsObserved": [
         "Listens without flinching when her certainty is unmade",
@@ -1700,30 +1640,34 @@
         "locationId": "gen-whistling-woman-post",
         "day": 8
       },
-      "met": 7,
+      "met": 9,
       "roleSince": 88,
-      "aliases": [
-        "Enforcer of Seraphine's will"
-      ],
-      "nameRevealed": true
-    },
-    "enforcer-of-seraphine-s-will": {
-      "id": "enforcer-of-seraphine-s-will",
-      "name": "Enforcer Of Seraphine S Will",
-      "role": "She has chosen to ride ahead to the Standing Annex with the band to understand w",
-      "relationship": 0,
-      "status": "active",
-      "met": 1,
-      "firstMet": {
-        "day": 88
-      },
-      "history": [],
-      "knownFacts": [],
-      "skillsObserved": [],
+      "nameRevealed": true,
       "_mintedByJoin": {
         "day": 88,
         "why": "a join named somebody the registry did not hold"
-      }
+      },
+      "_mergedFrom": "radiant-agent-whistling-woman",
+      "formerIds": [
+        "enforcer-of-seraphine-s-will",
+        "radiant-agent-whistling-woman"
+      ],
+      "aliases": [
+        "Enforcer of Seraphine's will"
+      ],
+      "mergedFrom": [
+        {
+          "id": "enforcer-of-seraphine-s-will",
+          "why": "it is that person's own recorded alias, minted again as a record",
+          "day": null
+        },
+        {
+          "id": "radiant-agent-whistling-woman",
+          "why": "Erik confirmed in play that the Radiant agent at the Post and Vail Langley are one woman; the GM's own place history agrees",
+          "day": null,
+          "droppedMint": "Corm Whitlock"
+        }
+      ]
     },
     "deni-cors": {
       "id": "deni-cors",
@@ -2122,28 +2066,6 @@
       {
         "day": 8,
         "worldDay": 89,
-        "text": "The Last Seraph of the Pre-Transition Choir has dug in over What Wakes Beneath.",
-        "tier": "murmur",
-        "section": "world",
-        "figureId": "the_last_seraph",
-        "arcId": "arc_what_wakes_beneath",
-        "locationId": "the_unfallen",
-        "placedBy": "figureId"
-      },
-      {
-        "day": 8,
-        "worldDay": 89,
-        "text": "The One Who Reads the Coming Shape has stopped spending themselves on The Bleeding Grammar.",
-        "tier": "murmur",
-        "section": "world",
-        "figureId": "the_pattern_prophet",
-        "arcId": "arc_block_bleed",
-        "locationId": "cloudform",
-        "placedBy": "figureId"
-      },
-      {
-        "day": 8,
-        "worldDay": 89,
         "text": "Ganna the Edgeholder: Ganna refused a small, familiar task they were handed by habit — said nothing, just set it down and walked past it, the first crack in the settled life.",
         "tier": "ambient",
         "section": "world",
@@ -2297,11 +2219,25 @@
         "tier": "ambient",
         "section": "world",
         "figureId": "the-architect-in-the-lower-annex"
+      },
+      {
+        "day": 8,
+        "worldDay": 90,
+        "text": "3 crystal left at The Standing Annex by those who came to it.",
+        "tier": "event",
+        "section": "yours"
+      },
+      {
+        "day": 8,
+        "worldDay": 90,
+        "text": "The Standing Annex has come up to thriving under Halvex Coil.",
+        "tier": "event",
+        "section": "yours"
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 2174,
-    "lastSharedReadAt": "2026-09-28T14:31:29.718Z",
+    "lastGenCount": 2180,
+    "lastSharedReadAt": "2026-09-28T20:12:06.867Z",
     "lastTickWorldDay": 90,
     "lastCanonWorldDay": 90,
     "turnsSinceOffer": 4,
@@ -2606,7 +2542,7 @@
         "kind": "decision",
         "premise": "Someone who keeps the count of what has been unmade has begun rounding down, telling themselves the difference is noise — but the rounding has a direction, and it has been consistent for long enough…",
         "cause": "The act of counting the unmade requires a decision about what constitutes a thing distinct enough to be counted, and that threshold has always been left to…",
-        "stage": 22,
+        "stage": 23,
         "seededAtCount": 1917,
         "surfaced": true,
         "fate": "growing",
@@ -2619,7 +2555,7 @@
         "kind": "decision",
         "premise": "The person who holds authority to formally designate what has been unmade as 'resolved' has not done so for anything in years, and the backlog of unresolved unmakings is beginning to press against…",
         "cause": "In the_unmade, the act of resolution is itself an act of power, and the authority-holder has quietly discovered that unresolved things remain partially…",
-        "stage": 18,
+        "stage": 19,
         "seededAtCount": 1968,
         "surfaced": true,
         "fate": "growing",
@@ -2644,7 +2580,7 @@
         "kind": "decision",
         "premise": "Someone has begun quietly counting what no longer exists — cataloguing absences — and has not yet decided whether to share what the count implies.",
         "cause": "The Unmade is defined by what has been lost or undone; its people have long customs around not naming absence directly, because naming draws attention to the…",
-        "stage": 13,
+        "stage": 14,
         "seededAtCount": 2053,
         "surfaced": true,
         "fate": "growing",
@@ -2657,7 +2593,7 @@
         "kind": "decision",
         "premise": "An elder who alone remembers the last time something like the current unraveling occurred has not yet spoken, weighing whether the knowing will help or hasten what is coming.",
         "cause": "In the_unmade, what is lost or dissolved carries weight equal to what remains — silence is understood as a form of preservation, and the elder has lived long…",
-        "stage": 12,
+        "stage": 13,
         "seededAtCount": 2100,
         "surfaced": true,
         "fate": "growing",
@@ -8666,11 +8602,6 @@
         "since": 88,
         "want": null
       },
-      "syllogist-of-the-margins": {
-        "days": 2,
-        "since": 89,
-        "want": null
-      },
       "orla-yardley": {
         "days": 2,
         "since": 89,
@@ -8681,17 +8612,7 @@
         "since": 89,
         "want": null
       },
-      "radiant-agent-whistling-woman": {
-        "days": 2,
-        "since": 89,
-        "want": null
-      },
       "radiant-agent-seraphine-s-hand": {
-        "days": 2,
-        "since": 89,
-        "want": null
-      },
-      "enforcer-of-seraphine-s-will": {
         "days": 2,
         "since": 89,
         "want": null
@@ -10228,7 +10149,7 @@
       "the_war_ender": 84,
       "the_last_choirmistress": 90
     },
-    "updatesToldTo": "2.14.8",
+    "updatesToldTo": "2.14.13",
     "newsLog": [
       {
         "day": 4,
@@ -11988,6 +11909,22 @@
         "worldDay": 90,
         "text": "The game was updated to v2.14.8 — 1 changed.",
         "loggedAt": "2026-09-28T14:31:43.696Z"
+      },
+      {
+        "day": 8,
+        "worldDay": 90,
+        "text": "The Standing Annex has come up to thriving under Halvex Coil.",
+        "tier": "event",
+        "section": "yours",
+        "loggedAt": "2026-09-28T20:12:14.195Z"
+      },
+      {
+        "kind": "update",
+        "section": "world",
+        "version": "2.14.13",
+        "worldDay": 90,
+        "text": "The game was updated to v2.14.13 — 2 new, 7 fixed, 2 changed.",
+        "loggedAt": "2026-09-28T20:12:14.195Z"
       }
     ],
     "seatsTaken": {
@@ -13274,7 +13211,7 @@
           "[d8] Seraphine's authority and knowledge extend beyond the Radiant Plateau into the valley's deepest secrets. She knows of the sealed chamber beneath Millbrook, the engineering records that name Loki, and what the engineer buried. Her reach is absolute and her will to seize control is real."
         ],
         "links": [
-          "radiant-agent-whistling-woman",
+          "radiant-agent-seraphine-s-hand",
           "seraphine-s-reach",
           "the-regulator-question",
           "the-sealed-chamber",
@@ -13669,8 +13606,8 @@
         "updatedDay": 8,
         "summarisedAt": 0
       },
-      "syllogist-of-the-margins": {
-        "id": "syllogist-of-the-margins",
+      "orla-yardley": {
+        "id": "orla-yardley",
         "label": "Unmet yet",
         "kind": "person",
         "facts": [
@@ -13679,7 +13616,7 @@
         "links": [],
         "aliases": [],
         "createdDay": 7,
-        "entityId": "syllogist-of-the-margins",
+        "entityId": "orla-yardley",
         "updatedDay": 7
       },
       "syllogist-tradition": {
@@ -13696,25 +13633,6 @@
         "aliases": [],
         "createdDay": 7,
         "updatedDay": 7
-      },
-      "orla-yardley": {
-        "id": "orla-yardley",
-        "label": "Orla Yardley",
-        "kind": "person",
-        "facts": [
-          "[d7] A Syllogist from the reaches, traveler between communities",
-          "[d8] Orla Yardley is an Architect of the Reaches who carries the title formally but no longer believes in the shape it holds. They came to the valley bearing a breaking mandate—a belief that sealed things should be unmade as mercy—but witnessed Loki choose understanding over destruction at the Hub…"
-        ],
-        "links": [
-          "the-hub-crossing",
-          "the-null-stone",
-          "the-taken-from-the-city",
-          "halvex-coil"
-        ],
-        "aliases": [],
-        "createdDay": 7,
-        "entityId": "orla-yardley",
-        "updatedDay": 8
       },
       "gen-mara-wells-store": {
         "id": "gen-mara-wells-store",
@@ -13762,8 +13680,8 @@
         "entityId": "gen-whistling-woman-post",
         "updatedDay": 8
       },
-      "radiant-agent-whistling-woman": {
-        "id": "radiant-agent-whistling-woman",
+      "radiant-agent-seraphine-s-hand": {
+        "id": "radiant-agent-seraphine-s-hand",
         "label": "Radiant authority sent to intercept",
         "kind": "person",
         "facts": [
@@ -13772,7 +13690,7 @@
         "links": [],
         "aliases": [],
         "createdDay": 8,
-        "entityId": "radiant-agent-whistling-woman",
+        "entityId": "radiant-agent-seraphine-s-hand",
         "updatedDay": 8
       },
       "seraphine-s-reach": {
@@ -14178,7 +14096,7 @@
           "links": [
             "the-hub-crossing",
             "millbrook",
-            "radiant-agent-whistling-woman"
+            "radiant-agent-seraphine-s-hand"
           ],
           "aliases": [
             "Seraphine",
@@ -14343,7 +14261,7 @@
     }
   ],
   "nativeGrantsVersion": 2,
-  "reconcileVersion": 87,
+  "reconcileVersion": 89,
   "gallery": [
     {
       "kind": "battle",
@@ -15431,8 +15349,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790605903697,
-  "rev": 1037,
+  "updatedAt": 1790626334200,
+  "rev": 1040,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -16868,10 +16786,10 @@
       "subjectId": null
     },
     {
-      "id": "enforcer-of-seraphine-s-will",
+      "id": "radiant-agent-seraphine-s-hand",
       "text": "Vail Langley, Seraphine's direct agent, has had her absolute mandate reshuffled by correction—the sealed chamber lies beneath the Crossing, not Millbrook. She has chosen to ride ahead to the Standing Annex with the band to understand what lies there before reporting back to the High Luminary.",
       "day": 8,
-      "subjectId": "enforcer-of-seraphine-s-will"
+      "subjectId": "radiant-agent-seraphine-s-hand"
     }
   ],
   "_opLedger": {
@@ -17209,7 +17127,16 @@
     "the_kindly_rest",
     "millbrook",
     "gen-the-road-from-kindly-rest-to-standing-an",
-    "gen-whistling-woman-post"
+    "gen-whistling-woman-post",
+    "the_crossing_gate_yard",
+    "the_forge_eternal_gate_yard",
+    "the_hall_of_mirrors_gate_yard",
+    "the_lensward_gate_yard",
+    "the_scour_gate_yard",
+    "the_slow_hour_gate_yard",
+    "the_unblinking_stone_gate_yard",
+    "tier_seven_gate_yard",
+    "wellspring_gate_yard"
   ],
   "_devActions": [
     {
@@ -17736,7 +17663,7 @@
   "nameRepairVersion": 1,
   "bondLogFrom": null,
   "purse": {
-    "crystal": 98,
+    "crystal": 77,
     "coin": 0,
     "paper": 0,
     "marks": 0,
@@ -17750,16 +17677,10 @@
       "locationId": "gen-the-made-gate",
       "steward": "halvex_coil",
       "obligation": null,
-      "condition": "holding",
+      "condition": "thriving",
       "claimedDay": 3,
-      "lastMovedWorldCount": null,
+      "lastMovedWorldCount": 2180,
       "history": [
-        {
-          "at": 2005,
-          "from": "thriving",
-          "to": "thriving",
-          "note": "Vessin Tallow-bark appointed keeper"
-        },
         {
           "at": 2005,
           "from": "thriving",
@@ -17825,6 +17746,12 @@
           "from": "thriving",
           "to": "holding",
           "note": "Maintained Veil has gone quiet"
+        },
+        {
+          "at": 2180,
+          "from": "holding",
+          "to": "thriving",
+          "note": "grew under Halvex Coil (legendary)"
         }
       ],
       "carriage": {
@@ -17833,7 +17760,9 @@
         "voyage": null
       },
       "describedAs": "floating tower",
-      "store": {},
+      "store": {
+        "raw_material": 14
+      },
       "arrears": 4,
       "lastFeatureOfferCount": 1836,
       "image": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/technomage%20tower%20floating%20walking%20machine%20legs%20magic%2C%20The%20Standing%20Annex%3A%20a%20working%20enterprise%2C%20thriving%2C%20busy%20and%20well-found%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=58509&nologo=true",
@@ -17891,7 +17820,7 @@
         "traveler-woman",
         "hourkeeper-confluence"
       ],
-      "growthPasses": 3,
+      "growthPasses": 0,
       "trade": true,
       "conditionSince": null,
       "route": {
@@ -19382,7 +19311,7 @@
       },
       "lastVerb": "quest",
       "lastVerbDay": 8,
-      "wins": 1,
+      "wins": 2,
       "winHow": "quest",
       "grownHeads": 4,
       "grewDay": 8
@@ -19456,7 +19385,7 @@
       "lost": {
         "0": 28
       },
-      "wins": 1,
+      "wins": 2,
       "winHow": "quest",
       "grownHeads": 28,
       "grewDay": 8
@@ -19490,7 +19419,7 @@
       },
       "lastVerb": "expand",
       "lastVerbDay": 8,
-      "wins": 1,
+      "wins": 2,
       "grownHeads": 44,
       "grewDay": 8,
       "winHow": "expand"
@@ -19545,7 +19474,7 @@
     "power_vacated_custody": {
       "lastVerb": "expand",
       "lastVerbDay": 8,
-      "wins": 1,
+      "wins": 2,
       "grownHeads": 6,
       "grewDay": 5,
       "winHow": "expand"
@@ -19553,7 +19482,7 @@
     "power_the_ceaseless": {
       "lastVerb": "expand",
       "lastVerbDay": 8,
-      "wins": 2,
+      "wins": 0,
       "grownHeads": 10,
       "grewDay": 5,
       "losses": 0,

@@ -36,7 +36,8 @@
   "the_stopped",
   "the_axis_gate",
   "the_kept_shrine",
-  "the_drawn_hour"
+  "the_drawn_hour",
+  "the_slow_hour_gate_yard"
  ],
  "descriptionSeed": "Clock-towers and an unbearable patience. The Hourkeepers tend duration — they remember, and they PRE-remember, and they pay for both. Conversations here have gaps in them because your interlocutor is also, partly, elsewhen. They are the saddest people in the world and among the kindest, because they know how much time everything has. A waygate stands in the outer archive, and the Hourkeepers log every arrival to the minute — not from suspicion, but because a gate is a place where duration behaves oddly and they want the record.",
  "loreRefs": [
@@ -59,8 +60,6 @@
   "logical": 0.2
  },
  "startingLocation": true,
- "waygate": true,
- "waygateTier": 2,
  "worldPos": {
   "colatitude": 78.0,
   "longitude": 312.0,
@@ -69,5 +68,6 @@
  "worldPosNote": "Ordinary ground within the_kept_reach, on its bearing. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
  "tier": "region",
  "parentId": null,
- "appearance": "A town of clock-towers — a dozen of them at different heights, faces on every side, pendulums visible through open lower stages. Low buildings between. Escapement noise from every direction, slightly out of step."
+ "appearance": "A town of clock-towers — a dozen of them at different heights, faces on every side, pendulums visible through open lower stages. Low buildings between. Escapement noise from every direction, slightly out of step.",
+ "gateYardId": "the_slow_hour_gate_yard"
 }

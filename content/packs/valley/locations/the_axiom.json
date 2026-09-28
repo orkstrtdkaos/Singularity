@@ -34,7 +34,8 @@
   "the_proof_halls",
   "the_bloodless_hold",
   "the_axis_gate",
-  "the_second_reading"
+  "the_second_reading",
+  "the_axiom_gate_yard"
  ],
  "descriptionSeed": "A city built like an argument, from premises, in order. Everything is derivable. The Syllogists are courteous, precise, and genuinely humble in the specific sense that they will abandon any position the moment it is shown false — which is a virtue nobody expects and which makes them extremely hard to hate and extremely tiring to love. The Axiom's waygate carries a proof of its own soundness engraved beside it. The proof is correct. The Syllogists still send someone to check the gate physically every morning.",
  "loreRefs": [
@@ -57,8 +58,6 @@
   "abstract": 0.2
  },
  "startingLocation": true,
- "waygate": true,
- "waygateTier": 2,
  "worldPos": {
   "colatitude": 82.0,
   "longitude": 172.0,
@@ -67,5 +66,6 @@
  "worldPosNote": "Ordinary ground within the_reasoned_hold, on its bearing. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
  "tier": "region",
  "parentId": null,
- "appearance": "A city laid out in strict order — each district a regular extension of the one before it, buildings identical in proportion and rising in fixed steps. Straight streets meeting at right angles, pale stone, inscriptions cut above every door."
+ "appearance": "A city laid out in strict order — each district a regular extension of the one before it, buildings identical in proportion and rising in fixed steps. Straight streets meeting at right angles, pale stone, inscriptions cut above every door.",
+ "gateYardId": "the_axiom_gate_yard"
 }

@@ -61,7 +61,8 @@
   "the_null_stone",
   "the_quiet_house",
   "the_worn_yard",
-  "thinwater"
+  "thinwater",
+  "the_crossing_gate_yard"
  ],
  "descriptionSeed": "Every axis crosses here at nothing, and the result is not grey — it is CROWDED. The Crossing leans toward no pole, which is precisely why it can hold them all: an Umbral and a Blazeborn drink at the same table because neither has the standing to make the other leave. The poles are lonely places. The center is where the world comes to meet its opposite, and the fact that this is possible at all is the most hopeful thing in existence. Nobody is from here. Everybody is here.",
  "loreRefs": [
@@ -87,9 +88,6 @@
   "concrete": 0.0
  },
  "startingLocation": true,
- "waygate": true,
- "waygateHub": true,
- "waygateTier": 1,
  "worldPos": {
   "colatitude": 0,
   "longitude": 0,
@@ -99,5 +97,6 @@
  "tier": "region",
  "parentId": null,
  "appearance": "A dense crossroads city where nothing matches — grown wood beside dressed stone beside riveted plate, roofs at every height, stairs and bridges linking upper floors. Crowded streets, hanging signs in many scripts, no single style anywhere.",
- "_spectrumWhy": "⛑ SNG-622 — CCode, reading `coverage.mjs`: '`poleIntensity` is missing on `the_crossing` and on `gen-the-made-gate`. Those are not obscure — the Crossing is the hub, and Erik walks Loki through the Made Gate. The substrate reads that field, so those two places answer differently from their neighbours for a reason nobody chose.' ⛔ AND THE SPECTRUM WAS EMPTY TOO, WHICH IS WHY: `poleIntensity` is derived from it. ⚠️ AUTHORED FROM WHAT EACH PLACE ALREADY SAYS IT IS, and the Crossing's own line makes it nearly unmissable — 'every axis crosses here at NOTHING, and the result is not grey, it is CROWDED. The Crossing leans toward no pole, which is precisely why it can hold them all.' **A place whose whole character is leaning toward no pole should read at or near zero on every axis, and that is a chosen answer rather than an absent one.** ⛑ NEAR ZERO ON EVERY AXIS, DELIBERATELY. Not an absent value — the authored answer. The tiny offsets keep it from reading as unsurveyed: it leans a hair toward peace and life because people live there and drink at the same table, and a hair toward chaos because nothing matches."
+ "_spectrumWhy": "⛑ SNG-622 — CCode, reading `coverage.mjs`: '`poleIntensity` is missing on `the_crossing` and on `gen-the-made-gate`. Those are not obscure — the Crossing is the hub, and Erik walks Loki through the Made Gate. The substrate reads that field, so those two places answer differently from their neighbours for a reason nobody chose.' ⛔ AND THE SPECTRUM WAS EMPTY TOO, WHICH IS WHY: `poleIntensity` is derived from it. ⚠️ AUTHORED FROM WHAT EACH PLACE ALREADY SAYS IT IS, and the Crossing's own line makes it nearly unmissable — 'every axis crosses here at NOTHING, and the result is not grey, it is CROWDED. The Crossing leans toward no pole, which is precisely why it can hold them all.' **A place whose whole character is leaning toward no pole should read at or near zero on every axis, and that is a chosen answer rather than an absent one.** ⛑ NEAR ZERO ON EVERY AXIS, DELIBERATELY. Not an absent value — the authored answer. The tiny offsets keep it from reading as unsurveyed: it leans a hair toward peace and life because people live there and drink at the same table, and a hair toward chaos because nothing matches.",
+ "gateYardId": "the_crossing_gate_yard"
 }

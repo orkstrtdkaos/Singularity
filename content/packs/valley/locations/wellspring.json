@@ -34,7 +34,8 @@
  "connections": [
   "the_grief_house",
   "the_wellspring_deep",
-  "the_axis_gate"
+  "the_axis_gate",
+  "wellspring_gate_yard"
  ],
  "descriptionSeed": "A tidal city where nobody feels anything privately. Grief is conducted in public halls; joy is conducted in public halls; the architecture is SHAPED for feeling and it amplifies it deliberately. Visitors either weep within a day or flee within a day, and the Threnodists consider both responses entirely healthy and neither of them embarrassing. A waygate opens onto the lower steps, where the singers can hear who has come. Arriving here is loud in a way no other gate is: the city feels you land.",
  "loreRefs": [
@@ -57,8 +58,6 @@
   "truth": 0.2
  },
  "startingLocation": true,
- "waygate": true,
- "waygateTier": 2,
  "worldPos": {
   "colatitude": 81.4,
   "longitude": 339.6,
@@ -67,5 +66,6 @@
  "worldPosNote": "⛔ SNG-407: moved 4.81° (8 walking days) onto the nearest coast the built terrain actually has. Erik: 'keep the land as ground truth now and move the locations slightly to fit the land.' Was colatitude 86.0, longitude 341.0.",
  "tier": "region",
  "parentId": null,
- "appearance": "A tidal city of great open halls facing the water, tiered seating inside each one, fronts standing wide with no doors. Channels run through the streets and fill and empty with the tide. Everything built to carry sound."
+ "appearance": "A tidal city of great open halls facing the water, tiered seating inside each one, fronts standing wide with no doors. Channels run through the streets and fill and empty with the tide. Everything built to carry sound.",
+ "gateYardId": "wellspring_gate_yard"
 }

@@ -1,0 +1,63 @@
+{
+ "schemaVersion": 1,
+ "id": "the_lensward_gate_yard",
+ "name": "the Lit Apron",
+ "regionId": "radiant_wastes",
+ "communityId": "blazeborn.lensward",
+ "parentId": "the_lensward",
+ "tier": "site",
+ "tags": [
+  "waygate",
+  "gate_yard",
+  "blazeborn",
+  "light",
+  "craft",
+  "border"
+ ],
+ "connections": [
+  "the_lensward",
+  "the_axis_gate"
+ ],
+ "descriptionSeed": "The Blazeborn trust light, and they put their gate where the light is kindest to them and hardest on everyone else. What arrives at the Lensward stands on the Lit Apron in full focus until the lens-keepers have seen it. Traders learn to wait patiently. Anything that comes through armed learns what the lenses are for.",
+ "appearance": "A glass-paved apron at the edge of the border town, the gate arch at its centre, surrounded by standing lenses on iron frames. Everything that steps through stands in focused light, and the Blazeborn at the lenses can see it very clearly.",
+ "encounterFlavor": "A lens-keeper turning a frame a fraction and a stranger's shadow disappearing; a trader shading her eyes and holding very still; a column stepping through at noon and every lens on the apron turning toward it at once.",
+ "loreRefs": [],
+ "questSeeds": [],
+ "dangerLevel": 3,
+ "spectrum": {
+  "dark_light": 0.5,
+  "mechanical_spiritual": -0.2,
+  "concrete_abstract": -0.2
+ },
+ "axisVector": [
+  0,
+  0,
+  0,
+  0,
+  -0.2,
+  -0.2,
+  0,
+  0.5,
+  0,
+  0,
+  0,
+  0
+ ],
+ "poleIntensity": {
+  "light": 0.5,
+  "mechanical": 0.2,
+  "concrete": 0.2
+ },
+ "map": {
+  "x": 631,
+  "y": 305
+ },
+ "worldPos": {
+  "colatitude": 66.9625,
+  "longitude": 183,
+  "depth": 0
+ },
+ "waygate": true,
+ "waygateTier": 3,
+ "gateYardFor": "the_lensward"
+}

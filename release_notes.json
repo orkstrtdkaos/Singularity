@@ -16,6 +16,24 @@
   "next": [],
   "releases": [
     {
+      "version": "2.14.9",
+      "date": "2026-09-28",
+      "entries": [
+        {
+          "kind": "change",
+          "title": "A waygate stands outside the town now, not in it",
+          "summary": "Fifteen cities kept their gate in the middle of the streets. The gate is an hour and a half out, in a yard, and the walk in is yours to make.",
+          "detail": "Step through toward Bedrock and you arrive at the Weighed Arch: a walled yard of numbered flagstones with a weigh-house on the town side and a clerk who writes down what came through. The Crossing has the Hub Yard, where the world arrives and is walked in by porters who know the city. Aiming at a town still works — the gate takes you to its yard, and the town is ninety minutes down the road. The reason is what it means for anyone ELSE coming through: a raiding party cannot appear in a market square any more. It lands in the yard, outside the walls, with open ground to cross, and whoever stands watch has a far better chance of seeing it come."
+        },
+        {
+          "kind": "fix",
+          "title": "The gates you had already found are still yours",
+          "summary": "A gate you discovered at a town is the same gate now that it stands outside it.",
+          "detail": "Your record of where you have been named the town, and the gate moved out of the town — so without this every gate you had found at one of the fifteen would have become a gate you had never heard of. They are all still there, under the yard's name, and the world tells you so once."
+        }
+      ]
+    },
+    {
       "version": "2.14.8",
       "date": "2026-09-28",
       "entries": [

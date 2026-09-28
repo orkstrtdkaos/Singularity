@@ -191,7 +191,7 @@ is a road somebody keeps**, and people who will still make the crossing.
 
 ## VI · Who is out there
 
-A hundred and thirty-one great figures walk Exesa, spread across a hundred and forty-three authored places — and
+A hundred and thirty-one great figures walk Exesa, spread across a hundred and fifty-eight authored places — and
 **most of them have never heard of you. They are doing their own work — and the world counts what they do
 whether or not you are in the room. The trickster you brushed past in a market may be a gang leader when you
 meet again, and nobody arranged that.

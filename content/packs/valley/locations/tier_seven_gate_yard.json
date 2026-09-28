@@ -1,0 +1,62 @@
+{
+ "schemaVersion": 1,
+ "id": "tier_seven_gate_yard",
+ "name": "Intake Level",
+ "regionId": "the_lattice_cities",
+ "communityId": "lattice.tier7",
+ "parentId": "tier_seven",
+ "tier": "site",
+ "tags": [
+  "waygate",
+  "gate_yard",
+  "lattice",
+  "order",
+  "arcology"
+ ],
+ "connections": [
+  "tier_seven",
+  "the_axis_gate"
+ ],
+ "descriptionSeed": "Tier Seven does not have a yard; it has an Intake Level, and it is the best-run reception in the world. You step through, you are received, assessed, fed and routed, and by the time you reach the lift you have a schedule. Nothing unplanned enters the arcology. The planning is the wall.",
+ "appearance": "A clean, bright receiving level below the arcology proper, the gate arch at one end of a long hall of numbered booths. Every arrival is assigned a booth, a route, a meal and an hour, and all of them are correct.",
+ "encounterFlavor": "A booth-attendant handing you the itinerary you were about to ask for; a trader discovering her stock has already been sold, at a good price, to someone who needed it; an armed band processed, disarmed and routed before they understand what happened.",
+ "loreRefs": [],
+ "questSeeds": [],
+ "dangerLevel": 2,
+ "spectrum": {
+  "chaos_order": 0.7,
+  "mechanical_spiritual": -0.3,
+  "concrete_abstract": -0.2
+ },
+ "axisVector": [
+  0,
+  0,
+  0,
+  0,
+  -0.2,
+  -0.3,
+  0.7,
+  0,
+  0,
+  0,
+  0,
+  0
+ ],
+ "poleIntensity": {
+  "order": 0.7,
+  "mechanical": 0.3,
+  "concrete": 0.2
+ },
+ "map": {
+  "x": 538,
+  "y": 179
+ },
+ "worldPos": {
+  "colatitude": 79.9625,
+  "longitude": 227,
+  "depth": 0
+ },
+ "waygate": true,
+ "waygateTier": 2,
+ "gateYardFor": "tier_seven"
+}

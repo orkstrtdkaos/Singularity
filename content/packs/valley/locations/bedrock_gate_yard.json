@@ -1,0 +1,63 @@
+{
+ "schemaVersion": 1,
+ "id": "bedrock_gate_yard",
+ "name": "the Weighed Arch",
+ "regionId": "the_given_land",
+ "communityId": "mason.bedrock",
+ "parentId": "bedrock",
+ "tier": "site",
+ "tags": [
+  "waygate",
+  "gate_yard",
+  "mason",
+  "concrete",
+  "stone",
+  "craft"
+ ],
+ "connections": [
+  "bedrock",
+  "the_axis_gate"
+ ],
+ "descriptionSeed": "The Masons put their gate a mile out and built a yard round it, because a thing that arrives from nowhere has not been weighed. Nothing enters Bedrock until the weigh-house has written it down. They are not suspicious of you; they are suspicious of anything that has not been measured, and you have not been yet.",
+ "appearance": "A square yard of dressed stone around the gate arch, walled to shoulder height, every flag numbered. A weigh-house on the town side with a scale big enough for a cart and a ledger clerk who writes down what came through, how heavy it was, and what it said its business was.",
+ "encounterFlavor": "A clerk weighing a crate twice because the first number was inconvenient; a Mason running a palm along the gate arch and frowning at a join nobody made; a Figurist envoy asking to be weighed in a unit that does not exist.",
+ "loreRefs": [],
+ "questSeeds": [],
+ "dangerLevel": 2,
+ "spectrum": {
+  "concrete_abstract": -0.7,
+  "body_mind": -0.3,
+  "chaos_order": 0.2
+ },
+ "axisVector": [
+  0,
+  0,
+  0,
+  0,
+  -0.7,
+  0,
+  0.2,
+  0,
+  0,
+  0,
+  -0.3,
+  0
+ ],
+ "poleIntensity": {
+  "concrete": 0.7,
+  "body": 0.3,
+  "order": 0.2
+ },
+ "map": {
+  "x": 148,
+  "y": 316
+ },
+ "worldPos": {
+  "colatitude": 79.9625,
+  "longitude": 115,
+  "depth": 0
+ },
+ "waygate": true,
+ "waygateTier": 2,
+ "gateYardFor": "bedrock"
+}

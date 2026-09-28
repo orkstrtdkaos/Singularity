@@ -312,7 +312,10 @@ export function locationRows(canon, oldMeta = {}) {
     if (!wp || !Number.isFinite(wp.colatitude) || !Number.isFinite(wp.longitude)) continue;
     const kRow = (canon.kinds?.kinds || canon.kinds || {})[l.id];
     meta[l.id] = { n: l.name || l.id, r: l.regionId || l.region || null,
-      wg: (l.waygate || oldMeta[l.id]?.wg) ? 1 : 0, t: l.tier || null, ro: l.role || null,
+      // ⛔ SNG-663 §2b — THE RATCHET HOLDS, EXCEPT FOR A GATE THAT MOVED. `wg` is carried forward so a rebuild could
+      // never lose a gate pin; a town that now names a `gateYardId` did not lose its gate, the gate walked an hour and
+      // a half out of town, and keeping the old pin would draw THIRTY gates on the map where fifteen stand.
+      wg: (l.waygate || (oldMeta[l.id]?.wg && !l.gateYardId)) ? 1 : 0, t: l.tier || null, ro: l.role || null,
       k: (typeof kRow === "string" ? kRow : kRow?.kind) || null };
   }
   return meta;

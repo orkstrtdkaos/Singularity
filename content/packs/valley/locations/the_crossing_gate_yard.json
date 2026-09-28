@@ -1,0 +1,68 @@
+{
+ "schemaVersion": 1,
+ "id": "the_crossing_gate_yard",
+ "name": "the Hub Yard",
+ "regionId": "the_center",
+ "communityId": "center.crossing",
+ "parentId": "the_crossing",
+ "tier": "site",
+ "tags": [
+  "waygate",
+  "gate_yard",
+  "center",
+  "cosmopolitan",
+  "neutral",
+  "sacred"
+ ],
+ "connections": [
+  "the_crossing",
+  "the_axis_gate"
+ ],
+ "descriptionSeed": "Every road in the network comes home here, and the Crossing learned long ago not to let them come home into its streets. The Hub Yard is where the world arrives: traders from every pole, pilgrims, delegations, all sorted, registered and walked in by porters who know the city. Nobody controls the arch. The Crossing controls the yard, and that has always been enough.",
+ "appearance": "A great round yard at the edge of the city, the oldest gate arch in the world at its centre and the lattice lines running out from under it to every other gate. Waystations, porters, a registry office, and more languages than anywhere else on the map.",
+ "encounterFlavor": "A registry clerk switching between four languages in one sentence; porters bidding for a caravan before its last cart is through; two delegations from opposite poles pointedly not looking at each other across the yard.",
+ "loreRefs": [],
+ "questSeeds": [],
+ "dangerLevel": 2,
+ "spectrum": {
+  "violence_peace": 0.1,
+  "chaos_order": -0.1,
+  "death_life": 0.1,
+  "mechanical_spiritual": 0,
+  "concrete_abstract": 0
+ },
+ "axisVector": [
+  0,
+  0,
+  0,
+  0.1,
+  0,
+  0,
+  -0.1,
+  0,
+  0.1,
+  0,
+  0,
+  0
+ ],
+ "poleIntensity": {
+  "peace": 0.1,
+  "order": -0.1,
+  "life": 0.1,
+  "spiritual": 0,
+  "concrete": 0
+ },
+ "map": {
+  "x": 331,
+  "y": 306
+ },
+ "worldPos": {
+  "colatitude": 0.0375,
+  "longitude": 0,
+  "depth": 0
+ },
+ "waygate": true,
+ "waygateTier": 1,
+ "waygateHub": true,
+ "gateYardFor": "the_crossing"
+}

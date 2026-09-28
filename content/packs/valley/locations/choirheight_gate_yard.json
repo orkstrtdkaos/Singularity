@@ -1,0 +1,63 @@
+{
+ "schemaVersion": 1,
+ "id": "choirheight_gate_yard",
+ "name": "the Lower Court",
+ "regionId": "the_ascent",
+ "communityId": "seraphic.choirheight",
+ "parentId": "choirheight",
+ "tier": "site",
+ "tags": [
+  "waygate",
+  "gate_yard",
+  "seraphic",
+  "angelic",
+  "tiered",
+  "sacred"
+ ],
+ "connections": [
+  "choirheight",
+  "the_axis_gate"
+ ],
+ "descriptionSeed": "The Seraphic Orders receive every arrival from below, deliberately. The Lower Court is where you are seen before you are admitted: the choir sings, the sisters watch who flinches, and a mercy-reader comes down the stair to ask what you have come for. You may go up. You will be looked at first.",
+ "appearance": "A walled court at the foot of the lowest spire, paved in white and open to the sky, the gate arch at its centre. Choristers sing the hours from a gallery above it, and every arrival hears them before anything else.",
+ "encounterFlavor": "A sister kneeling to wash the feet of a carter who did not ask; a chorister stopping mid-phrase when an armed band steps through; the gallery going silent, all at once, because something came through the gate that the hymn did not know.",
+ "loreRefs": [],
+ "questSeeds": [],
+ "dangerLevel": 2,
+ "spectrum": {
+  "demonic_angelic": 0.7,
+  "chaos_order": 0.4,
+  "dark_light": 0.3
+ },
+ "axisVector": [
+  0,
+  0,
+  0.7,
+  0,
+  0,
+  0,
+  0.4,
+  0.3,
+  0,
+  0,
+  0,
+  0
+ ],
+ "poleIntensity": {
+  "angelic": 0.7,
+  "order": 0.4,
+  "light": 0.3
+ },
+ "map": {
+  "x": 378,
+  "y": 63
+ },
+ "worldPos": {
+  "colatitude": 83.9625,
+  "longitude": 216,
+  "depth": 0
+ },
+ "waygate": true,
+ "waygateTier": 3,
+ "gateYardFor": "choirheight"
+}

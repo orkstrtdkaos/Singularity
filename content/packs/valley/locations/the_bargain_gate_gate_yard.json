@@ -1,0 +1,63 @@
+{
+ "schemaVersion": 1,
+ "id": "the_bargain_gate_gate_yard",
+ "name": "the Asking Floor",
+ "regionId": "the_descent",
+ "communityId": "abyssal.gate",
+ "parentId": "the_bargain_gate",
+ "tier": "site",
+ "tags": [
+  "waygate",
+  "gate_yard",
+  "abyssal",
+  "demonic",
+  "trade",
+  "social"
+ ],
+ "connections": [
+  "the_bargain_gate",
+  "the_axis_gate"
+ ],
+ "descriptionSeed": "The city is named for the bargain it makes with whatever comes through its gate, and the bargain is struck here, outside the walls, in public. You name what you want; they name what it costs. Everything that enters the Bargain Gate has agreed to something first. Armies are offered terms. Most take them.",
+ "appearance": "A forecourt of red stone before the horned city walls, the gate arch at its back, stalls and offices round its edge with every price written on the wall in letters a yard high. Nothing here is hidden, including what the Choir wants from you.",
+ "encounterFlavor": "A Choir-factor reading your want off your face before you open your mouth; a price-board updated by hand as a caravan steps through; a band of raiders arriving, hearing the terms read aloud, and paying them.",
+ "loreRefs": [],
+ "questSeeds": [],
+ "dangerLevel": 3,
+ "spectrum": {
+  "demonic_angelic": -0.7,
+  "falsehood_truth": 0.3,
+  "emotional_logical": -0.2
+ },
+ "axisVector": [
+  -0.2,
+  0.3,
+  -0.7,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0
+ ],
+ "poleIntensity": {
+  "demonic": 0.7,
+  "truth": 0.3,
+  "emotional": 0.2
+ },
+ "map": {
+  "x": 327,
+  "y": 488
+ },
+ "worldPos": {
+  "colatitude": 78.9625,
+  "longitude": 29,
+  "depth": 0
+ },
+ "waygate": true,
+ "waygateTier": 3,
+ "gateYardFor": "the_bargain_gate"
+}

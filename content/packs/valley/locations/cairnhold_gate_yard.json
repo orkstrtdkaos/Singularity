@@ -1,0 +1,64 @@
+{
+ "schemaVersion": 1,
+ "id": "cairnhold_gate_yard",
+ "name": "the Gate Cairn",
+ "regionId": "the_palelands",
+ "communityId": "ashwarden.cairnhold",
+ "parentId": "cairnhold",
+ "tier": "site",
+ "tags": [
+  "waygate",
+  "gate_yard",
+  "ashwarden",
+  "death",
+  "grey",
+  "tended"
+ ],
+ "connections": [
+  "cairnhold",
+  "the_axis_gate"
+ ],
+ "descriptionSeed": "The Ashwardens keep their gate where they keep everything that crosses from one state to another: outside, tended, with a lamp. What comes through walks the cairn-path in, slowly, past the dead, and by the time it reaches the terraces the wardens know what it is. Nobody has ever been turned away; a few have turned back.",
+ "appearance": "Out on the heath at the end of a cairn-row, a low stone ring round the gate with a warden's hut and a lamp that never goes out. A grey path of flat stones leads the two miles in to Cairnhold between the rows.",
+ "encounterFlavor": "A warden asking your name and writing it on a slate she will wipe tonight; a mourner waiting at the arch for someone who is not coming through; the lamp guttering once, for no reason, when a stranger steps out.",
+ "loreRefs": [],
+ "questSeeds": [],
+ "dangerLevel": 2,
+ "spectrum": {
+  "death_life": -0.7,
+  "violence_peace": 0.4,
+  "falsehood_truth": 0.5,
+  "emotional_logical": -0.2
+ },
+ "axisVector": [
+  0,
+  0.5,
+  0,
+  0.4,
+  0,
+  0,
+  0,
+  0,
+  -0.7,
+  0,
+  0,
+  0
+ ],
+ "poleIntensity": {
+  "death": 0.7,
+  "truth": 0.5,
+  "peace": 0.4
+ },
+ "map": {
+  "x": 623,
+  "y": 354
+ },
+ "worldPos": {
+  "colatitude": 75.9625,
+  "longitude": 74,
+  "depth": 0
+ },
+ "waygate": true,
+ "waygateTier": 3,
+ "gateYardFor": "cairnhold"
+}

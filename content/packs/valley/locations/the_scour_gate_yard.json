@@ -1,0 +1,62 @@
+{
+ "schemaVersion": 1,
+ "id": "the_scour_gate_yard",
+ "name": "the Cleared Ground",
+ "regionId": "the_unmade",
+ "communityId": "unmaker.scour",
+ "parentId": "the_scour",
+ "tier": "site",
+ "tags": [
+  "waygate",
+  "gate_yard",
+  "unmaker",
+  "destruction",
+  "craft"
+ ],
+ "connections": [
+  "the_scour",
+  "the_axis_gate"
+ ],
+ "descriptionSeed": "The Unmakers keep nothing near their gate. They cleared the ground on purpose: whatever steps through arrives on bare stone in plain sight, with nothing to hide behind and nothing to take. What should be here stays. What should not is ended, well and quickly, before it reaches the city.",
+ "appearance": "A wide space swept down to bare stone round the gate arch, nothing standing on it, the city's demolition-towers a mile off. Ash-marked stakes show where things were once built and deliberately removed.",
+ "encounterFlavor": "An Unmaker marking a stake where a trader's tent stood last night; the wind across the cleared ground carrying nothing at all; a raiding party stepping out onto the stone and understanding, too late, why it is empty.",
+ "loreRefs": [],
+ "questSeeds": [],
+ "dangerLevel": 3,
+ "spectrum": {
+  "destruction_creation": -0.7,
+  "chaos_order": -0.2,
+  "death_life": -0.2
+ },
+ "axisVector": [
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  -0.2,
+  0,
+  -0.2,
+  0,
+  0,
+  -0.7
+ ],
+ "poleIntensity": {
+  "destruction": 0.7,
+  "chaos": 0.2,
+  "death": 0.2
+ },
+ "map": {
+  "x": 590,
+  "y": 435
+ },
+ "worldPos": {
+  "colatitude": 76.9625,
+  "longitude": 67,
+  "depth": 0
+ },
+ "waygate": true,
+ "waygateTier": 2,
+ "gateYardFor": "the_scour"
+}

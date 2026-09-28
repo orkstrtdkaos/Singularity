@@ -14,7 +14,7 @@
 // world honestly has only one way through, this SAYS SO rather than manufacturing a decision.
 
 import { walkingDays } from "./worldmap.js";
-import { isNetworkGate, waygateTierOf, wayfaringTier, hubWaygate, gateHopCost, aimsOpen } from "./waygate.js";
+import { isNetworkGate, waygateTierOf, wayfaringTier, hubWaygate, gateHopCost, aimsOpen, knowsGate } from "./waygate.js";
 
 /** ⚑ THE ROAD GRAPH IS `connections`, WEIGHTED BY REAL DISTANCE. Measured on the shipped world: 135 places,
  *  182 undirected edges, ONE connected component, and not a single asymmetric edge — so a road always goes
@@ -97,9 +97,10 @@ export function gatesUsableBy(traveller, locations = {}) {
   const all = Object.values(locations).filter(isNetworkGate);
   if (!traveller) return all.map(g => g.id);
   const hub = hubWaygate(locations);
-  const known = new Set(traveller.knownPlaces || []);
   const tier = wayfaringTier(traveller);
-  return all.filter(g => (hub && g.id === hub.id) || (known.has(g.id) && tier >= waygateTierOf(g))).map(g => g.id);
+  // ⛔ SNG-663 §2b — THE SAME DISCOVERY RULE THE ROUTER USES (`knowsGate`), not a copy of it: a route offered
+  // through a gate the router would refuse is a trap, and a route refused through one it allows is a lost gate.
+  return all.filter(g => (hub && g.id === hub.id) || (knowsGate(traveller, g, locations) && tier >= waygateTierOf(g))).map(g => g.id);
 }
 
 /** ⚠️ NAME THE ROUTE BY WHAT YOU GO THROUGH. "Four days through the Wend" only works if something names the

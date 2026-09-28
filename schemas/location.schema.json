@@ -159,6 +159,14 @@
       "type": "number",
       "description": "SNG-148: how hard this gate is to AIM at (wayfaringTier gate); default 1"
     },
+    "gateYardId": {
+      "type": "string",
+      "description": "SNG-663 \u00a72b: the gate yard this settlement's waygate stands in, a short walk outside the walls. The pair of the yard's own gateYardFor; engine/waygate.js reads both directions."
+    },
+    "gateYardFor": {
+      "type": "string",
+      "description": "SNG-663 \u00a72b: the settlement this gate yard serves. A gate in the wild keeps no yard and carries neither field."
+    },
     "waygateHub": {
       "type": "boolean",
       "description": "SNG-148: the network hub (the Crossing) — every unaimed transit lands here"

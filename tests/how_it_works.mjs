@@ -10456,6 +10456,7 @@ console.log("\n── §98 · hubward is toward balance, and the engine says so 
 console.log("\n── §99 · four days through the Wend, or seven around it ──");
 {
   const J99 = await import("../engine/journey.js");
+  const WG99 = await import("../engine/waygate.js");
   const WM99 = await import("../engine/worldmap.js");
   const { loadContentHeadless: lch99b } = await import("./headless_content.mjs");
   const C99 = await lch99b();
@@ -10508,8 +10509,15 @@ console.log("\n── §99 · four days through the Wend, or seven around it ─
   check("§99: …and the unrestricted view reaches gates the greenhorn cannot — so the filter is doing work",
     J99.gatesUsableBy(null, locs99).length > J99.gatesUsableBy(greenhorn, locs99).length,
     `${J99.gatesUsableBy(null, locs99).length} vs ${J99.gatesUsableBy(greenhorn, locs99).length}`);
+  // ⚠️ THIS PINNED `the_crossing` BY ID and went red on SNG-663 §2b, when the hub's gate moved out to the Hub Yard
+  // an hour and a half outside the city. ⛑ The claim is that THE CENTRE is always findable, so the gate asks the
+  // world which gate the centre keeps and checks that a traveller who has found nothing can still reach it — and
+  // that it IS the centre, itself or the yard outside it.
+  const hub99 = WG99.hubWaygate(locs99);
   check("§99: ⚑ …and the hub is always findable — everyone can find the centre, which is why it is the centre",
-    J99.gatesUsableBy(greenhorn, locs99).includes("the_crossing"));
+    !!hub99 && J99.gatesUsableBy(greenhorn, locs99).includes(hub99.id)
+    && (hub99.id === "the_crossing" || WG99.townOfGateYard(hub99, locs99)?.id === "the_crossing"),
+    `hub ${hub99?.id}`);
 
   // ⚠️ WEIGHTED BY DAYS, NOT BY HOPS. Kindlerow → the Blaze is ONE leg and 150 days; a hop count would call
   // it the shortest road in the world.
@@ -12919,8 +12927,11 @@ console.log("\n── §139 · the gates are a network whether or not you are st
   const L = C.locations;
   const hub = W.hubWaygate(L);
   const c = { id: "fixture", knownPlaces: W.allWaygates(L).map(l => l.id), currentLocationId: "millbrook" };
+  // ⚠️ ALSO PINNED `the_crossing` BY ID (SNG-663 §2b). The fixture's point is that the world HAS a hub and a
+  // network worth asking about, and that the hub is the centre — the Crossing, or the yard the Crossing keeps.
   check("§139: the world really is a network with a hub — the fixture is not vacuous",
-    !!hub && hub.id === "the_crossing" && Object.values(L).filter(W.isNetworkGate).length >= 20);
+    !!hub && (hub.id === "the_crossing" || W.townOfGateYard(hub, L)?.id === "the_crossing")
+    && Object.values(L).filter(W.isNetworkGate).length >= 20, `hub ${hub?.id}`);
   const away = W.waygateTruthForGM(c, L);
   check("§139: ⛔ A QUESTION IS ANSWERED FROM FACT — away from any gate the GM is told the gates ARE a network and where the hub is",
     !!away && /They ARE a network/.test(away) && /is its HUB/.test(away), String(away).slice(0, 80));
@@ -23581,8 +23592,17 @@ console.log("\n── §297 · a gate leads to the hub through the network, and 
   check("§297: …and after it, not one road in the world runs one way", oneWay297(L297) === 0);
   const best297 = (r) => (r?.options || [])[0] || null;
   const out297 = best297(route297("gen-whistling-woman-post", "the_crossing")), back297 = route297("the_crossing", "gen-whistling-woman-post");
-  check("§297: ⛔ from the Whistling Woman to the Crossing the way is the gate beside it — a hop of hours through the Made Gate, not a season's walk",
-    out297?.kind === "gate" && out297.gate.from === "gen-the-made-gate" && out297.gate.to === "the_crossing" && out297.days < 3, JSON.stringify(out297));
+  // ⚠️ THIS PINNED `gate.to === "the_crossing"` and went red on SNG-663 §2b, when the hub's gate moved out to the
+  // yard. ⛑ Erik's claim is a HOP OF HOURS to the hub at the Crossing, and it still holds: the hop ends at the
+  // centre's gate and the walk in is counted inside the three days. ⛔ AND THE GATE NOW PINS WHAT §2b ADDED — the leg
+  // does NOT end inside the city: the path runs through the yard and then walks in.
+  const hubGate297 = W297.hubWaygate(L297);
+  check("§297: ⛔ from the Whistling Woman to the Crossing the way is the gate beside it — a hop of hours through the Made Gate, not a season's walk, and it lands in the YARD rather than the market square",
+    out297?.kind === "gate" && out297.gate.from === "gen-the-made-gate" && out297.days < 3
+    && out297.gate.to === hubGate297.id
+    && (W297.townOfGateYard(L297[out297.gate.to], L297)?.id === "the_crossing" || out297.gate.to === "the_crossing")
+    && out297.path[out297.path.length - 1] === "the_crossing"
+    && out297.path[out297.path.length - 2] === hubGate297.id, JSON.stringify(out297));
   check("§297: …and the way back is the same gate the other way, with the long road there too for anyone who will not take it",
     best297(back297)?.kind === "gate" && best297(back297).gate.to === "gen-the-made-gate" && best297(back297).days < 3
     && (back297.options || []).some(o => o.kind === "road"), JSON.stringify(back297?.options?.map(o => [o.kind, o.days])));
@@ -30806,12 +30826,17 @@ console.log("\n── §378 · one record, two schemas ──");
         && Object.keys(step.apply(already, { content: C8 })).length === 0;
     })());
 
-  check("§378: ⚠️ AND THE STEP'S VERSION IS ABOVE EVERY OTHER ONE — I numbered it 72 because the array's first entry is 71, and the array is NOT sorted: 72 was already taken and the top was 86, so the step would never have run on any save it exists for",
+  // ⚠️ THIS PINNED "AND IT IS THE TOP STEP", which was true for a week and stopped being true when SNG-663 §2b
+  // added step 88. ⛑ The lesson was never that this step is the newest — it is that a step numbered AT OR BELOW a
+  // save's `reconcileVersion` never runs, so it has to sit above every version that already existed. 86 was the top
+  // when this was written; that number does not move when somebody adds a step after it, and the no-duplicates rule
+  // is the other half (72 was already `pictures-to-our-service`).
+  check("§378: ⚠️ AND THE STEP'S VERSION IS ABOVE EVERY ONE THAT EXISTED WHEN IT WAS WRITTEN — I numbered it 72 because the array's first entry is 71, and the array is NOT sorted: 72 was already taken and the top was 86, so the step would never have run on any save it exists for",
     (() => {
       const vs = RC8.CHARACTER_STEPS.map(s => s.version);
       const dupes = vs.filter((v, i) => vs.indexOf(v) !== i);
       const mine = RC8.CHARACTER_STEPS.find(s => s.id === "the-renamed-people");
-      return dupes.length === 0 && mine.version === Math.max(...vs) && mine.version === RC8.topReconcileVersion("character");
+      return dupes.length === 0 && mine.version > 86 && RC8.topReconcileVersion("character") >= mine.version;
     })(), `${RC8.CHARACTER_STEPS.length} steps, top ${RC8.topReconcileVersion("character")}, no two share a number`);
 }
 
@@ -31218,6 +31243,255 @@ console.log("\n── §382 · a gate leg is never charged ──");
       const cv = rd("engine/caravan.js");
       const routeValue = cv.slice(cv.indexOf("export function routeValue"), cv.indexOf("export function waitingExposure") >= 0 ? cv.indexOf("export function waitingExposure") : undefined);
       return !/toll|gateFee|passageFee/i.test(routeValue);
+    })());
+}
+
+
+/* ══════════ §383 · SNG-663 §2b — A GATE AT A SETTLEMENT OPENS INTO A YARD OUTSIDE IT ══════════ */
+// ⛔ ERIK 2026-09-26, on yards only where a gate stands at a settlement: *"Agreed."* And Aevi's reason, which is the
+// whole of the rule: *"A force can't appear in a market square."* Fifteen towns carried `waygate` on the town itself,
+// so a gate leg ended INSIDE the city. The flag moved out to a yard an hour and a half's walk away.
+//
+// ⚠️ MOVING A FLAG BROKE FOUR THINGS AT ONCE, measured before it moved (po/tools/measure_gate_yards.mjs):
+//   · both made gates default to `the_crossing`, which stopped being a gate — the default endpoint vanished from the
+//     network and the router handed the leg back as a 34-day overland walk, on Erik's own save, which is the exact
+//     bug §297 exists to forbid;
+//   · an aim at any of the fifteen towns fell through to ordinary travel;
+//   · 5 of 16 live saves lost HALF the gates they had discovered (Loki 18 → 9), because a save's ledger names the
+//     TOWN it walked to and no save has ever heard of a yard;
+//   · the hub started calling itself "the Hub Yard" in every sentence that named it.
+console.log("\n── §383 · a gate at a settlement opens into a yard outside it ──");
+{
+  const W383 = await import("../engine/waygate.js");
+  const J383 = await import("../engine/journey.js");
+  const WM383 = await import("../engine/worldmap.js");
+  const H383 = await import("../engine/holdings.js");
+  const R383 = await import("../engine/reconcile.js");
+  const GW383 = await import("../scripts/world/generate_world.mjs");
+  const { loadContentHeadless: lch383 } = await import("./headless_content.mjs");
+  const C383 = await lch383();
+  const L383 = C383.locations;
+
+  /* ---- 1 · ⛔ THE LINK AGREES IN BOTH DIRECTIONS ---- */
+  // ⚑ Two fields carry it — the yard's `gateYardFor` and the town's `gateYardId` — because both directions are read:
+  // a yard names its town for prose and the hub, a town names its yard to aim at. Two fields can disagree; this is
+  // the gate that says they do not. A RATCHET at fifteen: more yards may be authored, and none may go unlinked.
+  const yards383 = Object.values(L383).filter(W383.isGateYard);
+  check("§383: ⛔ every gate yard names its town AND its town names it back — a one-way link is a yard nobody can aim at",
+    yards383.length >= 15 && yards383.every(y => {
+      const town = L383[y.gateYardFor];
+      return y.waygate && town && town.gateYardId === y.id && !town.waygate && !town.waygateHub
+        && (town.connections || []).includes(y.id) && (y.connections || []).includes(town.id);
+    }), `${yards383.length} yards · broken: ${yards383.filter(y => L383[y.gateYardFor]?.gateYardId !== y.id || L383[y.gateYardFor]?.waygate).map(y => y.id).join(", ") || "none"}`);
+  check("§383: ⚑ …and a gate IN THE WILD keeps no yard, which is the other half of Erik's ruling — the Made Gate is right as it is",
+    Object.values(L383).filter(l => l.waygate && !W383.isGateYard(l)).length >= 10
+    && !L383["gen-the-made-gate"]?.gateYardId && !L383["the_marchward"]?.gateYardId);
+
+  /* ---- 2 · ⛔ THE WALK OUT IS AN HOUR OR TWO, AND IT HAS ONE SOURCE ---- */
+  // ⛔ THE STAGED RECORDS CARRIED THE SAME WALK TWICE AND THE TWO DISAGREED BY 8x. Each declared
+  // `_yardLeg: { hours: 1.5 }` beside a `worldPos` 0.3° from its town — which at this world's scale (300/π days per
+  // radian, so 1° = 1.667 days) is TWELVE HOURS, and the road graph reads the position, not the field. The positions
+  // were rescaled to make the authored leg true and no hours field was stored: the distance between two placed
+  // locations is already the one answer to that question.
+  const walkHours383 = (a, b) => { const d = WM383.walkingDays(a, b); return d == null ? null : d * 24; };
+  const legs383 = yards383.map(y => ({ id: y.id, h: walkHours383(y, L383[y.gateYardFor]) }));
+  check("§383: ⛔ every yard is the SHORT WALK the ruling names — *\"a short walk from the town (an hour or two)\"* — measured off the map, not off a field",
+    legs383.every(l => l.h !== null && l.h >= 0.5 && l.h <= 2),
+    legs383.filter(l => l.h === null || l.h < 0.5 || l.h > 2).map(l => `${l.id} ${l.h === null ? "unplaced" : l.h.toFixed(1) + "h"}`).join(" · ") || `all ${legs383.length} within an hour or two`);
+  // ⚠️ AND THIS CHECK READ ITS OWN COMMENT THE FIRST TIME. The paragraph above names `_yardLeg` to explain the
+  // defect, and a source regex over the whole file found it there — the fifth time a gate of mine has asserted
+  // something about code and been answered by prose. Comment lines are stripped before the question is asked.
+  const codeOnly383 = (s) => String(s || "").split(NEWLINE_RE).filter(l => !/^\s*(\/\/|\*|\/\*)/.test(l)).join(String.fromCharCode(10));
+  check("§383: ⛑ …and nothing stores that walk as a number — one walk with two lengths is how the staged records arrived",
+    !/_yardLeg|yardWalkHours/.test(codeOnly383(rd("engine/waygate.js")))
+    && yards383.every(y => y._yardLeg === undefined && y.yardWalkHours === undefined));
+  // ⚠️ AND A YARD IS STILL A SITE OF ITS TOWN by SNG-398's own threshold — a site is somewhere you walk to from the
+  // place it belongs to, and 1.5 hours is inside the day that rule names.
+  check("§383: ⚠️ …and a yard is a SITE of its town, inside SNG-398's day — a yard that was its own journey would not be a yard",
+    yards383.every(y => y.tier === "site" && y.parentId === y.gateYardFor && walkHours383(y, L383[y.gateYardFor]) < 24));
+
+  /* ---- 3 · ⛔ A GATE LEG LANDS IN THE YARD ---- */
+  const wayfarer383 = { currentLocationId: "the_axis_gate", knownPlaces: ["the_axis_gate", "bedrock"], subAttributes: { wits: 8 } };
+  const aim383 = W383.resolveWaygateTransit({ character: wayfarer383, destId: "bedrock", locations: L383 });
+  check("§383: ⛔ AIMING AT A TOWN WHOSE GATE MOVED LANDS IN ITS YARD, with the walk in named — before the reader this was ordinary travel",
+    aim383?.destId === "bedrock_gate_yard" && aim383.routed === "named" && aim383.yardFor === "bedrock"
+    && aim383.walkDays > 0 && aim383.walkDays * 24 <= 2, JSON.stringify(aim383));
+  check("§383: ⛑ …and `gateArrivalFor` is the ONE answer to where a gate leg lands — safe on a wild gate, a town with no yard, and an id that resolves to nothing",
+    W383.gateArrivalFor("bedrock", L383).at === "bedrock_gate_yard" && W383.gateArrivalFor("bedrock", L383).moved === true
+    && W383.gateArrivalFor("millbrook", L383).at === "millbrook" && W383.gateArrivalFor("millbrook", L383).moved === false
+    && W383.gateArrivalFor("no_such_place", L383).at === "no_such_place"
+    && W383.gateArrivalFor(null, L383).at === null);
+  // ⛔ THE MADE GATE'S DEFAULT ENDPOINT — the §297 bug arriving by the front door, on Erik's save.
+  const made383 = { currentLocationId: "gen-the-made-gate", knownPlaces: ["gen-the-made-gate", "the_crossing"], subAttributes: { wits: 4 } };
+  const net383 = W383.networkGatesFrom(made383, L383, { walkingDays: WM383.walkingDays });
+  check("§383: ⛔ THE MADE GATE'S DEFAULT ENDPOINT IS STILL A GATE — it defaults to `the_crossing`, and without normalising through the yard the default vanished and a hop became a 34-day walk",
+    L383["gen-the-made-gate"]?.waygateDefaultTo === "the_crossing"
+    && net383.some(g => g.isDefault && g.id === W383.hubWaygate(L383).id),
+    JSON.stringify(net383.filter(g => g.isDefault).map(g => g.id)));
+  check("§383: ⛑ …and the GM naming a gate town in a `moveTo` lands there too, rather than falling through to an overland walk",
+    (() => {
+      const r = W383.routeGmMoveTo({ character: wayfarer383, moveRef: "bedrock", locations: L383, resolve: (ref) => (L383[ref] ? ref : null) });
+      return r?.destId === "bedrock_gate_yard" && r.why === "gate-to-yard";
+    })());
+
+  /* ---- 4 · ⛔ A SAVE STANDING IN A MOVED CITY IS NOT STRANDED ---- */
+  // ⛔ ONE DISCOVERY RULE, FOUR READERS. `knownWaygates`, `networkGatesFrom`, `resolveWaygateTransit` and
+  // `gatesUsableBy` each had their own copy of "has this character been here", and four copies are four chances to
+  // offer a route the router then refuses. They all call `knowsGate` now.
+  const townOnly383 = { currentLocationId: "bedrock", knownPlaces: ["bedrock"], subAttributes: { wits: 8 } };
+  check("§383: ⛔ A GATE FOUND IS A GATE FOUND — a save whose ledger names the TOWN can aim at its yard, or moving a gate an hour down the road takes every discovered gate in the world away",
+    W383.knowsGate(townOnly383, L383.bedrock_gate_yard, L383) === true
+    && W383.knowsGate({ knownPlaces: [] }, L383.bedrock_gate_yard, L383) === false
+    && W383.knownWaygates(townOnly383, L383).some(g => g.id === "bedrock_gate_yard")
+    && J383.gatesUsableBy(townOnly383, L383).includes("bedrock_gate_yard"));
+  check("§383: ⛑ …and it is ONE rule: all four readers call `knowsGate` rather than matching ids themselves",
+    (() => {
+      const wg = rd("engine/waygate.js"), jy = rd("engine/journey.js");
+      const calls = (wg.match(/knowsGate\(/g) || []).length + (jy.match(/knowsGate\(/g) || []).length;
+      // the definition, plus one call in each of the four readers
+      return calls >= 5 && /export function knowsGate\(/.test(wg) && /knowsGate\(traveller, g, locations\)/.test(jy);
+    })());
+  // ⛑ AND THE LEDGER HALF, WHICH IS A DIFFERENT QUESTION WITH THE SAME ANSWER: the map and travel read `knownPlaces`.
+  const step383 = R383.CHARACTER_STEPS.find(s => s.id === "the-gate-that-moved-out-of-town");
+  check("§383: ⛔ …and the reconcile step writes it into the DISCOVERY LEDGER too, above every version a save can carry",
+    !!step383 && step383.version === R383.topReconcileVersion("character") && step383.playerFacing === true);
+  check("§383: ⛑ …driven: a save that knew the town gains the yard, it is told, and a second pass changes nothing",
+    (() => {
+      const c = { knownPlaces: ["bedrock", "cairnhold", "millbrook"] };
+      const first = step383.apply(c, { content: { locations: L383 } });
+      const before = c.knownPlaces.length;
+      const second = step383.apply(c, { content: { locations: L383 } });
+      return c.knownPlaces.includes("bedrock_gate_yard") && c.knownPlaces.includes("cairnhold_gate_yard")
+        && !c.knownPlaces.includes("wellspring_gate_yard")          // a town they never walked to gives nothing
+        && (first.notes || []).length === 1 && /out past the walls/.test(first.notes[0])
+        && c.knownPlaces.length === before && !Object.keys(second).length;
+    })());
+  check("§383: ⚠️ …and it is silent on a save with nothing to repair, and on a world with no yards at all",
+    !Object.keys(step383.apply({ knownPlaces: ["millbrook"] }, { content: { locations: L383 } })).length
+    && !Object.keys(step383.apply({ knownPlaces: ["millbrook"] }, { content: { locations: {} } })).length
+    && !Object.keys(step383.apply({}, { content: { locations: L383 } })).length);
+
+  /* ---- 5 · ⚠️ THE HUB IS STILL THE CROSSING'S ---- */
+  // ⚠️ `hubWaygate` follows the flag, so moving it made the hub "the Hub Yard" wherever the world named it — and the
+  // Crossing is the Crossing. A yard is a PART of its town, so prose says both, and says OUTSIDE.
+  const hub383 = W383.hubWaygate(L383);
+  check("§383: ⚠️ THE HUB IS THE CROSSING'S YARD, AND THE PROSE SAYS SO — canon does not change because a flag moved",
+    hub383 && W383.townOfGateYard(hub383, L383)?.id === "the_crossing"
+    && /the gate yard outside The Crossing/.test(W383.gateLabel(hub383, L383))
+    && /The Crossing/.test(W383.waygateTruthForGM({ currentLocationId: "millbrook", knownPlaces: [] }, L383) || ""),
+    W383.gateLabel(hub383, L383));
+  // ⛔ AND THE moveTo INSTRUCTION STILL GETS BARE NAMES. The block tells the model its `moveTo` must name one of the
+  // gates it listed; a parenthetical inside that list is a parenthetical inside the moveTo, and a destination the
+  // resolver cannot find is how a character lands in a room that does not exist (§297's whole subject).
+  const blk383 = W383.waygateBlockForGM({ currentLocationId: "bedrock_gate_yard", knownPlaces: ["bedrock_gate_yard", "the_crossing", "cairnhold"], subAttributes: { wits: 8 } }, L383) || "";
+  check("§383: ⛔ …and the aimable list the GM must copy into a `moveTo` is BARE NAMES — where they stand is a separate sentence",
+    /Gates they can aim true at: [^.(]+\./.test(blk383) && /stand outside their towns/.test(blk383), blk383.slice(blk383.indexOf("Gates they can aim"), blk383.indexOf("Gates they can aim") + 160));
+  check("§383: ⛑ …and standing IN a yard, the GM is told it is outside the walls and that whoever comes through arrives here",
+    /the gate yard OUTSIDE Bedrock/.test(blk383) && /outside the walls/.test(blk383));
+
+  /* ---- 6 · ⛑ A WALK TOO SHORT FOR DAYS ---- */
+  // ⛔ THE NEAREST-GATE SENTENCE READ `Math.max(1, Math.round(days))` BESIDE A PLURAL COMPUTED FROM
+  // `Math.round(days)` ALONE, so a ninety-minute walk came out "about 1 dayS off" — a wrong number and a broken
+  // plural in the same clause, and a GM told the gate is a day away will not offer it this beat.
+  check("§383: ⛑ a walk too short for days is told in HOURS, and the plural agrees with the number actually printed",
+    W383.walkPhrase(1.5 / 24) === "about 1.5 hours off" && W383.walkPhrase(1 / 24) === "about 1 hour off"
+    && W383.walkPhrase(3) === "about 3 days off" && W383.walkPhrase(1) === "about 1 day off"
+    && W383.walkPhrase(0) === "right here" && W383.walkPhrase(null) === "right here",
+    [1.5 / 24, 1 / 24, 3, 1].map(W383.walkPhrase).join(" · "));
+  check("§383: ⛔ …and the sentence a GM actually reads uses it — standing in a moved town, the gate is hours off, not a day",
+    /the nearest they know is the Weighed Arch \(the gate yard outside Bedrock\), about 1\.5 hours off\./
+      .test(W383.waygateTruthForGM({ currentLocationId: "bedrock", knownPlaces: ["bedrock"] }, L383) || ""),
+    String(W383.waygateTruthForGM({ currentLocationId: "bedrock", knownPlaces: ["bedrock"] }, L383)).match(/the nearest[^.]*\./)?.[0]);
+
+  /* ---- 7 · ⛔ A FORCE THAT COMES BY GATE LANDS IN THE YARD ---- */
+  // ⛔ AND ITS POPULATION IS EMPTY TODAY, WHICH IS SAID HERE RATHER THAN DISCOVERED LATER. Measured: 6 of 29 powers
+  // raid or toll, and NOT ONE of them reaches any of the fifteen towns with a yard; none holds a gate as an ACT. So
+  // the reader is ahead of its population on purpose, driven by a fixture, and goes live with §2c's `gateHeld` or the
+  // day a grown power is authored with a yard in its reach.
+  const atArch383 = { id: "power_probe", name: "The Probe", verbs: ["raid"], reach: ["bedrock_gate_yard"] };
+  const inTown383 = { ...atArch383, reach: ["bedrock"] };
+  check("§383: ⛔ COMING BY GATE IS READ OFF THE RECORD — a writ that runs at the arch and not inside the walls, never guessed from distance",
+    W383.comesByGate(atArch383, "bedrock", L383)?.at === "bedrock_gate_yard"
+    && W383.comesByGate(inTown383, "bedrock", L383) === null
+    && W383.comesByGate(atArch383, "millbrook", L383) === null
+    && W383.comesByGate(null, "bedrock", L383) === null);
+  check("§383: ⚠️ …and HOLDING THE GROUND IS NOT HOLDING THE GATE — `holds` alone never makes a raid a gate raid, which is §2c's whole distinction",
+    W383.comesByGate({ ...inTown383, holds: [{ at: "bedrock" }] }, "bedrock", L383) === null
+    && W383.comesByGate({ ...inTown383, gateHeld: "the_marchward" }, "bedrock", L383)?.at === "bedrock_gate_yard");
+  const cfg383 = { ...C383.rules.economy.holdStore, features: C383.rules.economy.holdFeatures || null };
+  const hold383 = () => ({ id: "h", name: "The Weigh Shed", locationId: "bedrock", condition: "kept", store: { stone: 20 }, garrison: ["w1", "w2"], crew: [] });
+  const ch383 = { holdings: [], npcRegistry: { w1: { id: "w1", name: "Watcher One", role: "warden" }, w2: { id: "w2", name: "Watcher Two" } } };
+  const odds383 = (extra) => H383.watchOdds(ch383, extra?.hold || hold383(), { cfg: cfg383, rules: C383.rules, dangerLevel: 3,
+    people: ch383.npcRegistry, npcs: ch383.npcRegistry, day: 10, raiders: [{ n: 12, quality: 3, what: "raiders" }], byGate: extra?.byGate || null });
+  const road383 = odds383(), gate383 = odds383({ byGate: W383.comesByGate(atArch383, "bedrock", L383) });
+  check("§383: ⛔ …AND THE YARD TAKES THEIR SURPRISE, NOT THE DEFENDERS' EYESIGHT — the term divides their STEALTH, so the watch sees more of them",
+    gate383.pct > road383.pct && gate383.raw.stealth < road383.raw.stealth
+    && Math.abs(gate383.raw.stealth * 2 - road383.raw.stealth) < 1e-9 && gate383.raw.watch === road383.raw.watch,
+    `road ${road383.pct}% (stealth ${road383.stealth}) → gate ${gate383.pct}% (stealth ${gate383.stealth})`);
+  check("§383: ⛑ …and R46a's floor is ABOVE it, never through it — a hold with nobody on watch is still a flat zero, by gate or by road",
+    odds383({ hold: { ...hold383(), garrison: [] } }).pct === 0
+    && odds383({ hold: { ...hold383(), garrison: [] }, byGate: W383.comesByGate(atArch383, "bedrock", L383) }).pct === 0);
+  check("§383: ⚠️ …and the dial is AUTHORED, so turning it to 1 turns the rule off rather than needing an edit",
+    Number(C383.rules?.death?.watch?.gateYardOpenGround) === 2
+    && odds383({ byGate: { at: "x" } }).byGate?.openGround === 2);
+  // ⛔ AND IT RIDES EVERY ENDING. `resolveRaid` returns from four places, and a fact carried on one of them is a fact
+  // the news can only sometimes read — the trap the last return's own comment already records.
+  const endings383 = [
+    ["found nothing", () => 0.99, { store: {} }],
+    ["took it unseen", () => 0.99, { store: { stone: 20 } }],
+    ["met and lost", () => 0.01, { store: { stone: 20 } }],
+  ].map(([label, rng, over]) => {
+    const h = { ...hold383(), ...over };
+    const r = H383.resolveRaid(ch383, h, { cfg: cfg383, rules: C383.rules, dangerLevel: 3, rng, day: 10,
+      people: ch383.npcRegistry, power: atArch383, byGate: W383.comesByGate(atArch383, "bedrock", L383) });
+    return { label, r, news: H383.storeNews(h, { raid: r }) };
+  });
+  check("§383: ⛔ …and WHERE THEY LANDED rides every ending `resolveRaid` has, not just one — four returns, and a fact on one of them is a fact the news can only sometimes read",
+    endings383.every(e => e.r.byGate?.at === "bedrock_gate_yard" && e.r.byGate.yard === "the Weighed Arch" && e.r.byGate.town === "Bedrock"),
+    endings383.filter(e => !e.r.byGate).map(e => e.label).join(", ") || "all carried it");
+  check("§383: ⛑ …and the news says it AFTER what they did, as the explanation — led with, \"they crossed the open ground\" sat above \"nobody saw them\" and read as the news arguing with itself",
+    endings383.every(e => e.news.some(l => /came out of the arch at the Weighed Arch, outside Bedrock/.test(l)))
+    && endings383.every(e => e.news.findIndex(l => /came out of the arch/.test(l)) === e.news.length - 1),
+    endings383.map(e => e.news[e.news.length - 1]).join(" | ").slice(0, 150));
+  check("§383: ⚠️ …and a raid that walked up the road says nothing about a gate — the common case, and every case until a power takes one",
+    (() => {
+      const h = hold383();
+      const r = H383.resolveRaid(ch383, h, { cfg: cfg383, rules: C383.rules, dangerLevel: 3, rng: () => 0.99, day: 10, people: ch383.npcRegistry, power: inTown383 });
+      return r.byGate === undefined && !H383.storeNews(h, { raid: r }).some(l => /arch/.test(l));
+    })());
+  // ⛑ AND THE TICK IS WHAT DECIDES IT, so `resolveRaid` stays pure over what it is handed.
+  check("§383: ⛑ …and the TICK decides it from the world — `resolveRaid` never reaches for the locations itself",
+    /const byGate = power \? comesByGate\(power, holding\.locationId, locations\) : null;/.test(rd("engine/holdings.js")));
+  const measured383 = Object.values(C383.powers || []).filter(p => ((p.verbs || []).includes("raid") || (p.verbs || []).includes("toll")));
+  check("§383: ⛔ …and the MEASUREMENT is recorded here: not one raiding power reaches a town with a yard today, so this fires for nobody until §2c",
+    measured383.length >= 5 && measured383.every(p => !(p.reach || []).some(a => L383[a]?.gateYardId)),
+    `${measured383.length} raid/toll powers · ${measured383.filter(p => (p.reach || []).some(a => L383[a]?.gateYardId)).map(p => p.id).join(", ") || "none reaches a yard town"}`);
+
+  /* ---- 8 · ⛔ THE MAP DOES NOT DRAW THIRTY GATES WHERE FIFTEEN STAND ---- */
+  // ⛔ `locationRows` carried `wg` forward from the frozen asset — the right rule, so a rebuild could never LOSE a
+  // gate pin, and exactly wrong for a gate that MOVED: fifteen towns would have kept their pin beside their yard's.
+  check("§383: ⛔ a town that names a gate yard is no longer a gate PIN — the sticky flag would have drawn thirty gates where fifteen stand",
+    (() => {
+      const GW = rd("scripts/world/generate_world.mjs");
+      return /wg: \(l\.waygate \|\| \(oldMeta\[l\.id\]\?\.wg && !l\.gateYardId\)\) \? 1 : 0/.test(GW);
+    })());
+  check("§383: ⛑ …and the ratchet still holds for every other row — a gate the asset knows and canon has stopped saying is kept",
+    (() => {
+      const rows = GW383.locationRows({ locs: { a: { id: "a", name: "A", worldPos: { colatitude: 10, longitude: 10 } } } },
+        { a: { wg: 1 } });
+      const moved = GW383.locationRows({ locs: { b: { id: "b", name: "B", gateYardId: "b_yard", worldPos: { colatitude: 10, longitude: 10 } } } },
+        { b: { wg: 1 } });
+      return rows.a.wg === 1 && moved.b.wg === 0;
+    })());
+  // ⛔ AND THE DOOR THAT SPLICES THOSE ROWS MUST NOT DELETE WHAT CANON CANNOT SUPPLY. `canon.kinds` holds 138 rows
+  // against canon's 158 locations, so a plain splice replaced five `k` values with null — five kinds deleted out of
+  // Erik's frozen asset by the one command that promises to touch nothing but the place list.
+  check("§383: ⛔ the frozen world's place-list door keeps a FIELD canon cannot supply, exactly as it keeps a ROW canon no longer knows",
+    (() => {
+      const PR = rd("scripts/world/place_rows.mjs");
+      return /keptFields/.test(PR) && /row\[k\] = have\[id\]\[k\]/.test(PR)
+        && !/the asset is minified/.test(PR)                     // …and the false premise that made it re-flow the file
+        && /JSON\.stringify\(next, null, indent\)/.test(PR);
     })());
 }
 

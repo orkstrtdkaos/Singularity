@@ -29,7 +29,7 @@ import { legionClash, contingentsFromPeople, contingentsOf, bloodBand } from "./
 import { raidersFrom, notePowerLoss, contingentsOf as powerContingents } from "./powers.js";   // SNG-634 C1: the raiders have an owner
 import { isMoored, carriageOf } from "./carriage.js";   // ⛔ SPEC_mobile_holdings §4: moored is raidable, moving is not   // R46a: a detected raid is a FIGHT, resolved unattended
 import { smartClamp } from "./namematch.js";   // an evidence quote is prose — cut at a word, never mid-word
-import { isNetworkGate } from "./waygate.js";   // runner fees: a NETWORK gate near a relay post brings traffic
+import { isNetworkGate, comesByGate, gateArrivalFor } from "./waygate.js";   // runner fees: a NETWORK gate near a relay post brings traffic   // ⛔ SNG-663 §2b: a force that comes by gate lands in the yard
 import { walkingDays } from "./worldmap.js";
 import { workMods } from "./holdwork.js";   // ⛔ CCODE-450: standing work — who joins the watch, the yields and the upkeep while it is done
 import { postJob } from "./jobstate.js";   // ⛔ CCODE-452: a raise is a job on the board     // …within gateWithinDays of it
@@ -677,7 +677,7 @@ export function yieldFor(holding, cfg, { density = null } = {}) {
  *
  *  ⚠️ A WATCH IS WHAT DETECTS: people on the garrison, or a feature that keeps one (sentries, a tower). Stone alone does not
  *  see. Returns the receipt the news reads, or null when nothing came of it. */
-export function resolveRaid(character, holding, { cfg = null, dangerLevel = 0, rng = Math.random, day = null, people = {}, npcCfg = {}, keeperFloor = null, power = null, meleeCfg = null, rules = {}, kitDeps = null } = {}) {
+export function resolveRaid(character, holding, { cfg = null, dangerLevel = 0, rng = Math.random, day = null, people = {}, npcCfg = {}, keeperFloor = null, power = null, meleeCfg = null, rules = {}, kitDeps = null, byGate = null } = {}) {
   // ⛔ ERIK 2026-09-12, OVER AEVI'S §4: a hull under way is RAIDABLE WHERE SHE IS — "it doesn't make sense to only update their
   // location at the very end." Her whereabouts come from the day (`carriage.voyagePosition`), the danger is the nearest place's,
   // and the crew aboard defends as a garrison does in port. The receipt says she was taken at sea so the news can read right.
@@ -709,19 +709,22 @@ export function resolveRaid(character, holding, { cfg = null, dangerLevel = 0, r
   const whose = party ? (power.name || power.id) : null;
   // ⛑ The bottom of the old rule is kept exactly — an empty wall is a flat zero, never a base chance — and
   // above it the contest decides, rolled on the same d100 every other number in this game pays.
-  const wOdds = watchOdds(character, holding, { cfg, rules, dangerLevel, people, npcs: people, npcCfg, day, raiders });
+  const wOdds = watchOdds(character, holding, { cfg, rules, dangerLevel, people, npcs: people, npcCfg, day, raiders, byGate });
   const sawThem = wOdds.pct > 0 && (Math.floor(rng() * 100) + 1) <= wOdds.pct;
+  // ⛑ SNG-663 §2b — WHERE THEY LANDED IS PART OF THE RECEIPT, so the news can say it and a reader can tell a raid
+  // that walked up the road from one that came out of the arch. Null on every raid that did not come by gate.
+  const arrived = byGate ? { at: byGate.at, yard: byGate.yard?.name || byGate.at, town: byGate.town?.name || null, why: byGate.why || null } : null;
   if (!sawThem) {
     // ⛔ nobody saw them coming. Stone still slows them; nothing stops them.
     // ⚠️ AND THERE ARE TWO WAYS TO NOT SEE THEM NOW — an empty wall, and a watch that missed. The record
     // says which, because "raided unseen" over a full watch reads as a bug to the person who posted them.
     const share = Math.max(0, Math.min(1, baseShare - step * defenceOf(holding, cfg)));
     const taken = take(share);
-    if (!Object.keys(taken).length) return { detected: false, taken: {}, day, atSea, why: atSea ? "they came alongside and found nothing worth the carrying" : "they found nothing worth the carrying" };
+    if (!Object.keys(taken).length) return { detected: false, taken: {}, day, atSea, ...(arrived ? { byGate: arrived } : {}), why: atSea ? "they came alongside and found nothing worth the carrying" : "they found nothing worth the carrying" };
     if (Object.keys(taken).length) advanceHolding(holding, "problem", null, "raided", keeperFloor ? { keeperFloor } : null);   // ⚑ SLIP FIRST, THEN NOTE — the raid's own line stays the last entry (§78). AN EVENT SLIPS AT ONCE — time slips slowly, a raid does not
     const how = wOdds.watchers || wOdds.features ? `the watch missed them (${wOdds.pct}% to see)` : "nobody was watching";
     note(`raided — ${how} — ${Object.entries(taken).map(([g, n]) => `${n} ${g}`).join(", ")} taken`);
-    return { detected: false, taken, day, atSea, watch: wOdds, ...paid() };
+    return { detected: false, taken, day, atSea, watch: wOdds, ...(arrived ? { byGate: arrived } : {}), ...paid() };
   }
   // ⛔ SNG-659 §1c.1 — HOW MANY OF THEM THERE ARE, read before the defenders are built: a craft reaching six
   // against three raiders reaches three. A reach uncapped by who is actually coming would make a wide craft
@@ -858,6 +861,7 @@ export function resolveRaid(character, holding, { cfg = null, dangerLevel = 0, r
       : `raid beaten off — ${spoils} ${spoilKind} taken from them`) + (told.length ? ` · ${told.join("; ")}` : ""));
     return { detected: true, held: true, taken: {}, spoils: { [spoilKind]: spoils }, outcome: clash.outcome, day, atSea,
       ...(contest ? { captainsContest: contest } : {}), ...(captured ? { leaderCaptured: captured } : {}),
+      ...(arrived ? { byGate: arrived } : {}),
       power: powerHit || (whose ? { name: whose } : null) };
   }
   const taken = take(Math.max(0, Math.min(1, baseShare - step * stone)));
@@ -881,6 +885,7 @@ export function resolveRaid(character, holding, { cfg = null, dangerLevel = 0, r
     ...(contest ? { captainsContest: contest } : {}), ...(captured ? { leaderCaptured: captured } : {}),
     ...(cruelHarm ? { cruelHarm } : {}),
     led: leadCon ? { id: leadCon._person, name: leadCon.what } : null,
+    ...(arrived ? { byGate: arrived } : {}),
     power: powerHit || (whose ? { name: whose } : null), ...paid() };   // the path where the raiders WIN carried the fact too
 }
 
@@ -1217,7 +1222,7 @@ export function stealthStrength(raiders, { rules = {}, theft = false, npcs = nul
  *  it is in the note, in the po, and Aevi and Erik can zero it in one edit.
  *
  *  Returns `{ pct, terms, watch, stealth, watchers, features, nextBody }`. Pure. */
-export function watchOdds(character, holding, { cfg = null, rules = {}, dangerLevel = 0, people = {}, npcs = null, npcCfg = {}, day = null, raiders = null, theft = false } = {}) {
+export function watchOdds(character, holding, { cfg = null, rules = {}, dangerLevel = 0, people = {}, npcs = null, npcCfg = {}, day = null, raiders = null, theft = false, byGate = null } = {}) {
   const w = (rules?.death || {}).watch || {};
   const num = (v, d) => (Number.isFinite(Number(v)) ? Number(v) : d);
   const floor = num(w.floor, 5), ceil = num(w.ceiling, 95);
@@ -1232,7 +1237,13 @@ export function watchOdds(character, holding, { cfg = null, rules = {}, dangerLe
   const S = stealthStrength(party, { rules, theft, npcs: npcs || people, npcCfg, day });
   const many = S.heads * perHeadSeen;
   const watch = W.total + many;
-  const stealth = Math.max(0.01, S.total);
+  // ⛔ SNG-663 §2b — A FORCE THAT CAME BY GATE CANNOT BE QUIET. It walked out of a walled arch a mile and a half
+  // outside the town and crossed open road to get here; Aevi's whole reason for the yards is that *"a force can't
+  // appear in a market square."* ⛑ ONE TERM ON THE SIDE IT BELONGS TO: their stealth is divided, never the watch
+  // multiplied, because what the yard takes away is their surprise and not the defenders' eyesight. ⚠️ And R46a's
+  // floor is above this — a hold with nobody on watch returned a flat zero before any of it.
+  const openGround = byGate ? Math.max(1, num(w.gateYardOpenGround, 2)) : 1;
+  const stealth = Math.max(0.01, S.total / openGround);
   const terms = [...W.terms];
   if (many > 0) terms.push({ label: `${S.heads} of them coming is ${S.heads} chances to be seen`, value: Math.round(many * 10) / 10 });
   const raw = 100 * (watch / (watch + stealth));
@@ -1247,7 +1258,8 @@ export function watchOdds(character, holding, { cfg = null, rules = {}, dangerLe
   // engine because I asserted a falling curve against DISPLAY values — first the whole-number `pct`, then this
   // one-decimal `watch`, where each added hand contributes 0.15 and the rounding makes the steps alternate.
   // ⛑ A claim about a rule has to be asked of the rule's own number, so the unrounded pair comes back too.
-  return { pct: clamped, terms, watch: Math.round(watch * 10) / 10, stealth: Math.round(stealth * 10) / 10,
+  return { pct: clamped, terms, byGate: byGate ? { at: byGate.at || null, openGround } : null,
+    watch: Math.round(watch * 10) / 10, stealth: Math.round(stealth * 10) / 10,
     raw: { watch, stealth, seen: watch / (watch + stealth) },
     watchers: W.watchers, features: W.features, captain: W.captain, heads: S.heads, stealthTerms: S.terms,
     clampedFrom: clamped !== Math.round(raw) ? Math.round(raw) : null, nextBody };
@@ -1652,7 +1664,11 @@ export function tickStore(character, holding, { cfg = null, economy = null, regi
     const rc = raidChanceFor(character, holding, { cfg, dangerLevel, people, npcCfg, day, total, fullAt });
     const keeperFloor = holding.steward ? keeperFloorFor(rc.keeperTier, cfg?.growth) : null;
     // ⛔ CCODE-504 — the rules bag rides, because the watch ROLLS now and its dials live in rules.death.watch.
-    if (rng() < rc.chance) out.raid = resolveRaid(character, holding, { cfg, dangerLevel, rng, day, people, npcCfg, keeperFloor, rules, kitDeps, power,
+    // ⛔ SNG-663 §2b — AND WHETHER THEY CAME BY GATE IS DECIDED HERE, from the power's own record and the place's own
+    // yard (`comesByGate`), so `resolveRaid` stays pure and the tick owns the world it reads. Null for every raid
+    // without a power, which is the common case and goes on exactly as it did.
+    const byGate = power ? comesByGate(power, holding.locationId, locations) : null;
+    if (rng() < rc.chance) out.raid = resolveRaid(character, holding, { cfg, dangerLevel, rng, day, people, npcCfg, keeperFloor, rules, kitDeps, power, byGate,
       meleeCfg: { ...(rules?.melee || {}), ...(rules?.martial || {}) } });
   }
   return out;
@@ -1671,6 +1687,11 @@ export function storeNews(holding, st) {
     else if (Object.keys(r.taken || {}).length) lines.push(`${where} was robbed in the night — ${list(r.taken)} gone, and nobody saw them.`);
     else lines.push(`Something came at ${where} in the night and found nothing worth the carrying.`);
   }
+  // ⛑ SNG-663 §2b — WHERE THEY CAME FROM, AFTER WHAT THEY DID. A force that comes by gate lands in the yard:
+  // *"a force can't appear in a market square."* ⚠️ It states the MECHANISM, not what anyone saw — led with, above an
+  // unseen raid, "they crossed the open ground" read as the news arguing with itself. Empty on every raid that walked
+  // up the road, which is all of them until a power takes a gate.
+  if (st.raid?.byGate) lines.push(`They came out of the arch at ${st.raid.byGate.yard}${st.raid.byGate.town ? `, outside ${st.raid.byGate.town}` : ""}, and anyone who comes that way has open ground to cross — ${st.raid.byGate.why || "the gate is theirs"}.`);
   if (st.raid?.voucherCost) lines.push(`${st.raid.voucherCost.voucherName}'s word for ${st.raid.voucherCost.keeper} cost them — ${where} slipped on that watch.`);
   // ⚑ runner fees are news TWICE — when they begin, and when word of the gate has got out — never every pass
   if (st.relay?.first) lines.push(`The relay at ${where} has begun to pay: ${st.relay.said || `${st.relay.crystal} crystal`} in runner fees this pass${st.relay.gate ? ", and the gate nearby will bring more as word gets out" : ""}.`);

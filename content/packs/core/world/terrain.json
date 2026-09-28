@@ -233,7 +233,7 @@
   "bedrock": {
    "n": "Bedrock",
    "r": "the_given_land",
-   "wg": 1,
+   "wg": 0,
    "t": "region",
    "ro": null,
    "k": "waygate"
@@ -241,7 +241,7 @@
   "cairnhold": {
    "n": "Cairnhold",
    "r": "the_palelands",
-   "wg": 1,
+   "wg": 0,
    "t": "region",
    "ro": null,
    "k": "waygate"
@@ -257,7 +257,7 @@
   "choirheight": {
    "n": "Choir-Height",
    "r": "the_ascent",
-   "wg": 1,
+   "wg": 0,
    "t": "region",
    "ro": null,
    "k": "waygate"
@@ -265,7 +265,7 @@
   "cloudform": {
    "n": "Cloudform",
    "r": "the_pattern_reach",
-   "wg": 1,
+   "wg": 0,
    "t": "region",
    "ro": null,
    "k": "waygate"
@@ -336,7 +336,7 @@
   },
   "gen-ashwarden-march-road": {
    "n": "The Ashwarden March Road",
-   "r": "the_palelands",
+   "r": "valley",
    "wg": 0,
    "t": "site",
    "ro": null,
@@ -408,7 +408,7 @@
   },
   "gen-stillwater-s-trouble": {
    "n": "Stillwater's Trouble",
-   "r": "the_palelands",
+   "r": "valley",
    "wg": 0,
    "t": "site",
    "ro": null,
@@ -416,7 +416,7 @@
   },
   "gen-the-ent-grove": {
    "n": "The Ent Grove",
-   "r": "manifest_domain",
+   "r": "the_center",
    "wg": 0,
    "t": "site",
    "ro": null,
@@ -432,7 +432,7 @@
   },
   "gen-the-made-gate": {
    "n": "The Made Gate",
-   "r": "the_center",
+   "r": "valley",
    "wg": 1,
    "t": "settlement",
    "ro": "gate",
@@ -455,9 +455,9 @@
    "k": "road"
   },
   "gen-waygate": {
-   "n": "The March Waygate",
-   "r": "the_palelands",
-   "wg": 0,
+   "n": "The Pale March Waygate",
+   "r": "valley",
+   "wg": 1,
    "t": "site",
    "ro": null,
    "k": "waygate"
@@ -625,7 +625,7 @@
   "the_axiom": {
    "n": "The Axiom",
    "r": "the_reasoned_hold",
-   "wg": 1,
+   "wg": 0,
    "t": "region",
    "ro": null,
    "k": "waygate"
@@ -641,7 +641,7 @@
   "the_bargain_gate": {
    "n": "The Bargain Gate",
    "r": "the_descent",
-   "wg": 1,
+   "wg": 0,
    "t": "region",
    "ro": null,
    "k": "waygate"
@@ -705,7 +705,7 @@
   "the_crossing": {
    "n": "The Crossing",
    "r": "the_center",
-   "wg": 1,
+   "wg": 0,
    "t": "region",
    "ro": null,
    "k": "waygate"
@@ -745,7 +745,7 @@
   "the_forge_eternal": {
    "n": "The Forge-Eternal",
    "r": "the_making",
-   "wg": 1,
+   "wg": 0,
    "t": "region",
    "ro": null,
    "k": "waygate"
@@ -833,7 +833,7 @@
   "the_hall_of_mirrors": {
    "n": "The Hall of Mirrors",
    "r": "the_veiled_reach",
-   "wg": 1,
+   "wg": 0,
    "t": "region",
    "ro": null,
    "k": "waygate"
@@ -929,7 +929,7 @@
   "the_lensward": {
    "n": "The Lensward",
    "r": "radiant_wastes",
-   "wg": 1,
+   "wg": 0,
    "t": "settlement",
    "ro": null,
    "k": "waygate"
@@ -1015,7 +1015,7 @@
    "k": "pole"
   },
   "the_old_warden_post": {
-   "n": "Raven's Home (the Old Warden Post)",
+   "n": "Stillwater's Trouble",
    "r": "the_palelands",
    "wg": 0,
    "t": "settlement",
@@ -1065,7 +1065,7 @@
   "the_scour": {
    "n": "The Scour",
    "r": "the_unmade",
-   "wg": 1,
+   "wg": 0,
    "t": "region",
    "ro": null,
    "k": "waygate"
@@ -1097,7 +1097,7 @@
   "the_slow_hour": {
    "n": "The Slow Hour",
    "r": "the_kept_reach",
-   "wg": 1,
+   "wg": 0,
    "t": "region",
    "ro": null,
    "k": "waygate"
@@ -1161,7 +1161,7 @@
   "the_unblinking_stone": {
    "n": "The Unblinking Stone",
    "r": "the_stark_reach",
-   "wg": 1,
+   "wg": 0,
    "t": "region",
    "ro": null,
    "k": "waygate"
@@ -1273,7 +1273,7 @@
   "tier_seven": {
    "n": "Tier Seven",
    "r": "the_lattice_cities",
-   "wg": 1,
+   "wg": 0,
    "t": "region",
    "ro": null,
    "k": "waygate"
@@ -1297,7 +1297,7 @@
   "wellspring": {
    "n": "Wellspring",
    "r": "the_feeling_coast",
-   "wg": 1,
+   "wg": 0,
    "t": "region",
    "ro": null,
    "k": "waygate"
@@ -1365,6 +1365,126 @@
    "t": "site",
    "ro": null,
    "k": "underplace"
+  },
+  "bedrock_gate_yard": {
+   "n": "the Weighed Arch",
+   "r": "the_given_land",
+   "wg": 1,
+   "t": "site",
+   "ro": null,
+   "k": null
+  },
+  "cairnhold_gate_yard": {
+   "n": "the Gate Cairn",
+   "r": "the_palelands",
+   "wg": 1,
+   "t": "site",
+   "ro": null,
+   "k": null
+  },
+  "choirheight_gate_yard": {
+   "n": "the Lower Court",
+   "r": "the_ascent",
+   "wg": 1,
+   "t": "site",
+   "ro": null,
+   "k": null
+  },
+  "cloudform_gate_yard": {
+   "n": "the Arrival Figure",
+   "r": "the_pattern_reach",
+   "wg": 1,
+   "t": "site",
+   "ro": null,
+   "k": null
+  },
+  "the_axiom_gate_yard": {
+   "n": "the Premise Yard",
+   "r": "the_reasoned_hold",
+   "wg": 1,
+   "t": "site",
+   "ro": null,
+   "k": null
+  },
+  "the_bargain_gate_gate_yard": {
+   "n": "the Asking Floor",
+   "r": "the_descent",
+   "wg": 1,
+   "t": "site",
+   "ro": null,
+   "k": null
+  },
+  "the_crossing_gate_yard": {
+   "n": "the Hub Yard",
+   "r": "the_center",
+   "wg": 1,
+   "t": "site",
+   "ro": null,
+   "k": null
+  },
+  "the_forge_eternal_gate_yard": {
+   "n": "the Unfinished Yard",
+   "r": "the_making",
+   "wg": 1,
+   "t": "site",
+   "ro": null,
+   "k": null
+  },
+  "the_hall_of_mirrors_gate_yard": {
+   "n": "the Glass Porch",
+   "r": "the_veiled_reach",
+   "wg": 1,
+   "t": "site",
+   "ro": null,
+   "k": null
+  },
+  "the_lensward_gate_yard": {
+   "n": "the Lit Apron",
+   "r": "radiant_wastes",
+   "wg": 1,
+   "t": "site",
+   "ro": null,
+   "k": null
+  },
+  "the_scour_gate_yard": {
+   "n": "the Cleared Ground",
+   "r": "the_unmade",
+   "wg": 1,
+   "t": "site",
+   "ro": null,
+   "k": null
+  },
+  "the_slow_hour_gate_yard": {
+   "n": "the Waiting Hall",
+   "r": "the_kept_reach",
+   "wg": 1,
+   "t": "site",
+   "ro": null,
+   "k": null
+  },
+  "the_unblinking_stone_gate_yard": {
+   "n": "the Plain Yard",
+   "r": "the_stark_reach",
+   "wg": 1,
+   "t": "site",
+   "ro": null,
+   "k": null
+  },
+  "tier_seven_gate_yard": {
+   "n": "Intake Level",
+   "r": "the_lattice_cities",
+   "wg": 1,
+   "t": "site",
+   "ro": null,
+   "k": null
+  },
+  "wellspring_gate_yard": {
+   "n": "the Tide Steps",
+   "r": "the_feeling_coast",
+   "wg": 1,
+   "t": "site",
+   "ro": null,
+   "k": null
   }
  },
  "seats": {

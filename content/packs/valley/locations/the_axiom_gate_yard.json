@@ -1,0 +1,62 @@
+{
+ "schemaVersion": 1,
+ "id": "the_axiom_gate_yard",
+ "name": "the Premise Yard",
+ "regionId": "the_reasoned_hold",
+ "communityId": "syllogist.axiom",
+ "parentId": "the_axiom",
+ "tier": "site",
+ "tags": [
+  "waygate",
+  "gate_yard",
+  "syllogist",
+  "logical",
+  "order"
+ ],
+ "connections": [
+  "the_axiom",
+  "the_axis_gate"
+ ],
+ "descriptionSeed": "In the Axiom, nothing is admitted until it has been stated. The Premise Yard is where you say what you are and why you have come, and a Syllogist writes it down and checks it against itself. A premise that holds is admitted. One that contradicts itself is courteously asked to try again.",
+ "appearance": "A rectangular yard of grey stone, perfectly ordered, the gate arch at one end and a gatehouse at the other with a single door. Above the door, carved: STATE YOUR PREMISE.",
+ "encounterFlavor": "A trader restating her business for the fourth time until it is consistent; a Syllogist apologising for having been wrong about you; an armed man trying to explain that he is a merchant, and the clerk gently pointing out the swords.",
+ "loreRefs": [],
+ "questSeeds": [],
+ "dangerLevel": 2,
+ "spectrum": {
+  "emotional_logical": 0.7,
+  "chaos_order": 0.4,
+  "concrete_abstract": 0.2
+ },
+ "axisVector": [
+  0.7,
+  0,
+  0,
+  0,
+  0.2,
+  0,
+  0.4,
+  0,
+  0,
+  0,
+  0,
+  0
+ ],
+ "poleIntensity": {
+  "logical": 0.7,
+  "order": 0.4,
+  "abstract": 0.2
+ },
+ "map": {
+  "x": 186,
+  "y": 129
+ },
+ "worldPos": {
+  "colatitude": 81.9625,
+  "longitude": 172,
+  "depth": 0
+ },
+ "waygate": true,
+ "waygateTier": 2,
+ "gateYardFor": "the_axiom"
+}

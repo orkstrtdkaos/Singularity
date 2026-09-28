@@ -34,7 +34,8 @@
  "connections": [
   "the_appetite_halls",
   "the_maw",
-  "the_axis_gate"
+  "the_axis_gate",
+  "the_bargain_gate_gate_yard"
  ],
  "descriptionSeed": "Horned architecture and scrupulous fairness. The Abyssal Choir names what you want — plainly, in public, without the decency of pretending otherwise — and then offers you exactly that at exactly what it costs. Their bargains are perfectly fair. That is the horror: they will not protect you from the price of your own wanting, and they consider protecting you from it the true cruelty. The Bargain Gate is named for the waygate, not the trade. Arriving through it is free; the Abyssals note, without pressing the point, that most people who arrive want something.",
  "loreRefs": [
@@ -57,8 +58,6 @@
   "emotional": 0.2
  },
  "startingLocation": true,
- "waygate": true,
- "waygateTier": 3,
  "encounterSeeds": [
   {
    "encounterId": "duel_bargain_gate",
@@ -73,5 +72,6 @@
  "worldPosNote": "Ordinary ground within the_descent, on its bearing. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
  "tier": "region",
  "parentId": null,
- "appearance": "Horned architecture — buildings whose gables and lintels curve up into paired points. Dark stone, precise joinery, wide public forecourts with stone tables set out in the open. Everything symmetrical and immaculately kept."
+ "appearance": "Horned architecture — buildings whose gables and lintels curve up into paired points. Dark stone, precise joinery, wide public forecourts with stone tables set out in the open. Everything symmetrical and immaculately kept.",
+ "gateYardId": "the_bargain_gate_gate_yard"
 }

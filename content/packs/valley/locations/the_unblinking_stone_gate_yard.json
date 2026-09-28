@@ -1,0 +1,62 @@
+{
+ "schemaVersion": 1,
+ "id": "the_unblinking_stone_gate_yard",
+ "name": "the Plain Yard",
+ "regionId": "the_stark_reach",
+ "communityId": "verist.stone",
+ "parentId": "the_unblinking_stone",
+ "tier": "site",
+ "tags": [
+  "waygate",
+  "gate_yard",
+  "verist",
+  "truth",
+  "stark"
+ ],
+ "connections": [
+  "the_unblinking_stone",
+  "the_axis_gate"
+ ],
+ "descriptionSeed": "The Verists will not let you in on a pleasantry. At the Plain Yard you are asked what you came for, and you answer, and they know whether it is so. Traders learn to say exactly what they are carrying. Liars wait in the yard, sometimes for a long time, until they are ready to say it plainly or go back through.",
+ "appearance": "A bare stone yard with a wall and a gate arch and nothing else: no ornament, no benches, no shade. A Verist stands at the city door and asks one question of everyone who comes through.",
+ "encounterFlavor": "A Verist telling a merchant, kindly, that his second cart is lying; a traveller standing in the yard all afternoon rather than say why she came; a band of armed men declaring themselves, honestly, a raid, and being told to wait.",
+ "loreRefs": [],
+ "questSeeds": [],
+ "dangerLevel": 2,
+ "spectrum": {
+  "falsehood_truth": 0.7,
+  "chaos_order": 0.3,
+  "emotional_logical": 0.2
+ },
+ "axisVector": [
+  0.2,
+  0.7,
+  0,
+  0,
+  0,
+  0,
+  0.3,
+  0,
+  0,
+  0,
+  0,
+  0
+ ],
+ "poleIntensity": {
+  "truth": 0.7,
+  "order": 0.3,
+  "logical": 0.2
+ },
+ "map": {
+  "x": 206,
+  "y": 397
+ },
+ "worldPos": {
+  "colatitude": 75.9625,
+  "longitude": 199,
+  "depth": 0
+ },
+ "waygate": true,
+ "waygateTier": 2,
+ "gateYardFor": "the_unblinking_stone"
+}

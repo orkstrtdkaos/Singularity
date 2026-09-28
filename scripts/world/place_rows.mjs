@@ -28,13 +28,27 @@ import { loadCanon, locationRows, readTerrain, TERRAIN_PATH } from "./generate_w
 const root = join(dirname(fileURLToPath(import.meta.url)), "../..");
 
 /** What would change, without changing it: rows the asset lacks, and rows whose fields have moved.
- *  ⛔ SAME SHAPE COMPARED, not a deep-equal on objects built in different orders — the asset is minified
- *  JSON and key order is whatever the last writer used. */
+ *  ⛔ SAME SHAPE COMPARED, not a deep-equal on objects built in different orders — key order in the asset is
+ *  whatever the last writer used. */
 export function planRows(canon, terrain) {
   const want = locationRows(canon, terrain?.locations || {});
   const have = terrain?.locations || {};
-  const added = [], changed = [];
+  const added = [], changed = [], keptFields = [];
   const norm = (r) => JSON.stringify([r?.n ?? null, r?.r ?? null, r?.wg ?? 0, r?.t ?? null, r?.ro ?? null, r?.k ?? null]);
+  // ⛔ A FIELD CANON CANNOT SUPPLY IS KEPT, exactly as a ROW canon no longer knows is kept. Measured when the
+  // SNG-663 yards went in: `canon.kinds` holds 138 rows against canon's 158 locations, so a plain splice would have
+  // replaced the Kindly Rest's "hall", the Null Stone's "monument", the Painter's Shelf's "hermitage" and two
+  // "underplace" rows with null — five kinds deleted out of the frozen asset by the one command that promises to
+  // touch nothing but the list. ⚠️ Where canon DIFFERS the row still moves: canon is the authority for what a place
+  // is called, and freezing a stale name would be the opposite error.
+  for (const [id, row] of Object.entries(want)) {
+    for (const k of ["n", "r", "wg", "t", "ro", "k"]) {
+      if ((row[k] === null || row[k] === undefined) && have[id] && have[id][k] !== null && have[id][k] !== undefined) {
+        row[k] = have[id][k];
+        keptFields.push(`${id}.${k}`);
+      }
+    }
+  }
   for (const [id, row] of Object.entries(want)) {
     if (!have[id]) added.push(id);
     else if (norm(have[id]) !== norm(row)) changed.push(id);
@@ -43,7 +57,7 @@ export function planRows(canon, terrain) {
   // destructive, and a place can be retired from the pack while the map still wants to remember it.
   // Named, never removed.
   const orphan = Object.keys(have).filter((id) => !want[id]).sort();
-  return { want, added: added.sort(), changed: changed.sort(), orphan };
+  return { want, added: added.sort(), changed: changed.sort(), orphan, keptFields: keptFields.sort() };
 }
 
 const isMain = process.argv[1] && process.argv[1].replace(/\\/g, "/").endsWith("place_rows.mjs");
@@ -57,6 +71,7 @@ if (isMain) {
     if (plan.added.length) console.log(`  ⛔ ${plan.added.length} placed location(s) the frozen world does not know: ${plan.added.join(", ")}`);
     if (plan.changed.length) console.log(`  ⚠️ ${plan.changed.length} row(s) whose canon has moved: ${plan.changed.join(", ")}`);
     if (plan.orphan.length) console.log(`  ⬜ ${plan.orphan.length} row(s) with no canon record, kept: ${plan.orphan.slice(0, 6).join(", ")}${plan.orphan.length > 6 ? ", …" : ""}`);
+    if (plan.keptFields.length) console.log(`  ⬜ ${plan.keptFields.length} field(s) canon cannot supply, kept from the asset: ${plan.keptFields.slice(0, 8).join(", ")}${plan.keptFields.length > 8 ? ", …" : ""}`);
   };
 
   if (process.argv.includes("--check")) {
@@ -71,7 +86,11 @@ if (isMain) {
   say();
   // ⛑ ORPHANS FIRST, then the derived rows over them: every existing row survives unless canon replaces it.
   const next = { ...terrain, locations: { ...terrain.locations, ...plan.want } };
-  writeFileSync(join(root, TERRAIN_PATH), JSON.stringify(next));
+  // ⛑ WRITTEN AT THE INDENT THE ASSET ALREADY HAS, so the diff is the rows that moved and nothing else. A
+  // `JSON.stringify(next)` here re-flowed 12,284 pretty-printed lines into one, over Erik's frozen ground — which
+  // is why `noteCcode471` records five values "carried across by hand" instead of run through this door.
+  const indent = /^\{\n (\S)/.test(readFileSync(join(root, TERRAIN_PATH), "utf8").slice(0, 40).replace(/\r/g, "")) ? 1 : 0;
+  writeFileSync(join(root, TERRAIN_PATH), indent ? JSON.stringify(next, null, indent) : JSON.stringify(next));
   console.log(`wrote ${TERRAIN_PATH} — ${plan.added.length} added, ${plan.changed.length} updated, ` +
     `${Object.keys(next.locations).length} rows · layers, seeds, biomes, hydrology and seats untouched`);
 }

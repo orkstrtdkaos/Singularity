@@ -96,6 +96,38 @@ function renameTargets(spec, entry, character, known) {
 
 export const CHARACTER_STEPS = [
   {
+    version: 88, id: "the-gate-that-moved-out-of-town", playerFacing: true,
+    // ✅ SNG-663 §2b — A GATE FOUND IS A GATE FOUND. Erik ruled a yard outside every settlement whose gate stood in
+    // it, so fifteen cities handed their `waygate` flag to a yard an hour and a half down the road.
+    //
+    // ⛔ MEASURED ON THE LIVE SAVES BEFORE THE FLAG MOVED: matching ids alone took HALF the discovered gates in the
+    // world away — Loki 18 down to 9, Silas 4 down to 2, Brynjar 3 down to 1 — and three saves were STANDING in a city
+    // whose gate had just walked out of it. A character who had been to the gate at Cairnhold had been to THAT gate;
+    // the ledger has to say so under the id the gate now carries.
+    //
+    // ⚠️ THE ROUTING HALF IS A READER, NOT THIS STEP. `knowsGate` in engine/waygate.js counts the yard of a town you
+    // know, so aiming, planning and the GM block are right for every character including ones made after today. This
+    // step is the DISCOVERY LEDGER — what the map draws and where travel says you have been — and the two are
+    // different questions with the same answer. Idempotent; silent when the world has no yards.
+    apply: (c, ctx) => {
+      const locs = ctx?.content?.locations || {};
+      if (!Array.isArray(c?.knownPlaces) || !c.knownPlaces.length) return {};
+      const known = new Set(c.knownPlaces);
+      const gained = [];
+      for (const l of Object.values(locs)) {
+        // the yard carries the flag and names its town; the town is what a save's ledger holds
+        if (!l || !l.gateYardFor || !l.waygate) continue;
+        if (!known.has(l.gateYardFor) || known.has(l.id)) continue;
+        c.knownPlaces = [...c.knownPlaces, l.id];
+        known.add(l.id);
+        gained.push(l.name || l.id);
+      }
+      if (!gained.length) return {};
+      const where = gained.length === 1 ? gained[0] : `${gained.slice(0, -1).join(", ")} and ${gained[gained.length - 1]}`;
+      return { notes: [`The gates you had found have been moved out past the walls, into yards, and nothing arrives in a market square any more — you know the way to ${where}.`] };
+    }
+  },
+  {
     // ⚠️ VERSION 87, NOT 72. I numbered this 72 because the array's FIRST entry is 71 — and the array is not sorted:
     // `topReconcileVersion` is 86, and 72 is already `pictures-to-our-service`. A step numbered below a save's
     // `reconcileVersion` is never run, so the three saves this exists for would never have been repaired and nothing

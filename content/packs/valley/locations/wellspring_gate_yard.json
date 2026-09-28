@@ -1,0 +1,63 @@
+{
+ "schemaVersion": 1,
+ "id": "wellspring_gate_yard",
+ "name": "the Tide Steps",
+ "regionId": "the_feeling_coast",
+ "communityId": "threnodist.wellspring",
+ "parentId": "wellspring",
+ "tier": "site",
+ "tags": [
+  "waygate",
+  "gate_yard",
+  "threnodist",
+  "emotional",
+  "sacred",
+  "social"
+ ],
+ "connections": [
+  "wellspring",
+  "the_axis_gate"
+ ],
+ "descriptionSeed": "In Wellspring you arrive into feeling. The gate stands in the tide at the foot of the city's steps, and what comes through climbs them into the sound of the first hall, where whatever you brought with you is felt, publicly, before you go further. Visitors either weep on the Tide Steps or turn back into the water.",
+ "appearance": "Broad steps down to a tidal pool, the gate arch standing in the shallows so that everything that comes through arrives with wet feet. The first of the public halls stands at the top of the steps, and its doors are open, and you can hear it.",
+ "encounterFlavor": "A carter sitting on the steps, crying, unsure why; the first hall going quiet as a grief-band steps out of the gate; a raiding party stopping halfway up the steps because they can hear what they came here to do.",
+ "loreRefs": [],
+ "questSeeds": [],
+ "dangerLevel": 2,
+ "spectrum": {
+  "emotional_logical": -0.7,
+  "death_life": 0.3,
+  "falsehood_truth": 0.2
+ },
+ "axisVector": [
+  -0.7,
+  0.2,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0.3,
+  0,
+  0,
+  0
+ ],
+ "poleIntensity": {
+  "emotional": 0.7,
+  "life": 0.3,
+  "truth": 0.2
+ },
+ "map": {
+  "x": 254,
+  "y": 88
+ },
+ "worldPos": {
+  "colatitude": 81.3625,
+  "longitude": 339.6,
+  "depth": 0
+ },
+ "waygate": true,
+ "waygateTier": 2,
+ "gateYardFor": "wellspring"
+}

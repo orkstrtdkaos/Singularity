@@ -21,6 +21,110 @@ import { walkingDays } from "./worldmap.js";
 export function isWaygate(loc) { return !!loc?.waygate; }
 export function waygateTierOf(loc) { return Math.max(1, Number(loc?.waygateTier) || 1); } // registry:internal
 
+/* ═══ ✅ SNG-663 §2b — A GATE AT A SETTLEMENT OPENS INTO A YARD OUTSIDE IT ═══
+ *
+ * ⛔ ERIK 2026-09-26, on yards only where a gate stands at a settlement: *"Agreed."* And Aevi's reason: *"A force
+ * can't appear in a market square."* Fifteen towns carried `waygate` on the town itself, so a gate leg ended INSIDE
+ * the city. The flag moves out to a yard an hour and a half's walk away; the town keeps the road to it.
+ *
+ * ⛑ THE LINK IS TWO FIELDS AND THEY MUST AGREE: the yard says `gateYardFor: "<townId>"`, the town says
+ * `gateYardId: "<yardId>"`. Both directions are read — a yard has to name its town (prose, and the hub), a town has
+ * to name its yard (an aim at the town, and telling the GM how far out the gate is) — and §383 gates that no yard
+ * and town disagree.
+ *
+ * ⚠️ THE WALK IS THE ROAD GRAPH'S, NOT A FIELD. The staged records carried a `_yardLeg: { hours: 1.5 }` beside a
+ * `worldPos` that put every yard HALF A DAY out — one walk with two lengths, and `walkingDays` reads the position.
+ * The positions were corrected to make the authored hour and a half true, and nothing here stores an hours number:
+ * the distance between two placed locations is already the one answer to that question. */
+
+/** Is this the yard a town's gate stands in? */
+export function isGateYard(loc) { return !!loc?.gateYardFor; }
+
+/** The town a gate yard serves — null for a gate in the wild, which keeps no yard. */
+export function townOfGateYard(loc, locations) {
+  return isGateYard(loc) ? (locations?.[loc.gateYardFor] || null) : null;
+}
+
+/** The yard a town's gate moved out to — null for a town that never had a gate. */
+export function gateYardOf(loc, locations) {
+  const y = loc?.gateYardId ? locations?.[loc.gateYardId] : null;
+  return y && isWaygate(y) ? y : null;
+}
+
+/** ⛔ WHERE A GATE LEG ACTUALLY LANDS — the one answer every caller asks for, because a gate leg aimed at Bedrock
+ *  now ends at the Weighed Arch and the walk in is the traveller's to make.
+ *  ⚑ IT IS SAFE ON EVERYTHING: a gate in the wild, a town with no yard, a made gate, an id that resolves to
+ *  nothing. `moved` is the fact a caller branches on; `walkDays` is the leg left to walk, from the map. PURE. */
+export function gateArrivalFor(destId, locations) {
+  const dest = locations?.[destId] || null;
+  const yard = gateYardOf(dest, locations);
+  if (!yard) return { at: destId || null, moved: false, yard: null, town: dest, walkDays: 0 };
+  return { at: yard.id, moved: true, yard, town: dest, walkDays: walkingDays(yard, dest) || 0 };
+}
+
+/** ⛔ WHETHER THIS CHARACTER CAN BE SAID TO KNOW THIS GATE — ONE RULE, read by every gate reader in the game
+ *  (`knownWaygates`, `networkGatesFrom`, `resolveWaygateTransit`, `gatesUsableBy`), because four copies of a
+ *  discovery test is four chances to disagree about whether a player found something.
+ *
+ *  ⛔ AND THE YARD RULE IS THE WHOLE REASON IT EXISTS. A save's `knownPlaces` names the TOWN it walked to; no save
+ *  has ever heard of a yard. Measured on the live saves before the flag moved: matching ids alone took HALF the
+ *  discovered gates in the world away — Loki 18 down to 9, Brynjar 3 down to 1 — for a change that moved a gate an
+ *  hour and a half down the road. A gate found is a gate found. PURE. */
+export function knowsGate(character, gate, locations) {
+  if (!gate) return false;
+  const known = character?.knownPlaces || [];
+  return known.includes(gate.id) || (isGateYard(gate) && known.includes(gate.gateYardFor));
+}
+
+/** ⛔ SNG-663 §2b — IS THIS POWER COMING BY GATE? *"A raid or army that comes by gate arrives in the yard."* Two ways
+ *  to be coming by gate, and both are READ off the power's own record rather than inferred from distance:
+ *
+ *    · it HOLDS A GATE (§2c's `gateHeld`, the act — closing, charging, garrisoning the arch) and the place it is
+ *      coming at keeps a gate yard on the same network, so there is an arch at both ends; or
+ *    · its `reach` names the YARD and not the town — a writ that runs at the arch and not inside the walls, which is
+ *      exactly what a power that took a gate looks like.
+ *
+ *  ⚠️ MEASURED, THIS FIRES FOR NOBODY TODAY: of the 6 powers that raid or toll, none reaches any of the fifteen towns
+ *  with a yard, and none holds a gate as an ACT (the four that held a gate held the TOWN it stood in, and §2b moved
+ *  the gate out from under them). It goes live when a power takes a gate — §2c — or when a grown one is authored
+ *  with a yard in reach. `holds` alone is never enough: holding the ground around an open gate is not holding it.
+ *  Returns null when the force is not coming by gate, else `{ at, yard, town, walkDays, why }`. PURE. */
+export function comesByGate(power, placeId, locations) {
+  if (!power || !placeId) return null;
+  const arrival = gateArrivalFor(placeId, locations);
+  if (!arrival.moved || !isNetworkGate(arrival.yard)) return null;
+  const reach = Array.isArray(power.reach) ? power.reach : [];
+  const atArch = reach.includes(arrival.yard.id) && !reach.includes(placeId);
+  const holdsAGate = !!power.gateHeld && Object.values(locations || {}).some(l => isNetworkGate(l) && (
+    l.id === power.gateHeld || (Array.isArray(power.holds) && power.holds.some(h => h?.at === l.id && h?.gate))));
+  if (!atArch && !holdsAGate) return null;
+  return { ...arrival, why: atArch ? "its writ runs at the arch and not inside the walls" : "it holds a gate of its own" };
+}
+
+/** ⚠️ A YARD NAMES ITS TOWN, OR THE WORLD CONTRADICTS ITS OWN CANON. `hubWaygate` follows the flag, so moving it
+ *  made the hub "the Hub Yard" in every sentence that named it — and the Crossing is the Crossing. A yard is a PART
+ *  of its town, so prose says both, and says OUTSIDE, which is the point of a yard. PURE. */
+export function gateLabel(loc, locations) {
+  const town = townOfGateYard(loc, locations);
+  const name = String(loc?.name || "the gate");
+  return town ? `${name} (the gate yard outside ${town.name})` : name;
+}
+
+/** ⛑ A WALK TOO SHORT FOR DAYS. The nearest-gate sentence read `Math.max(1, Math.round(days))` beside a plural
+ *  computed from `Math.round(days)` alone, so a ninety-minute walk came out "about 1 days off" — a wrong number AND
+ *  a broken plural, and a GM told the gate is a day away will not offer it this beat. PURE. */
+export function walkPhrase(days) {
+  const d = Number(days);
+  if (!Number.isFinite(d) || d <= 0) return "right here";
+  const hours = d * 24;
+  if (hours < 20) {
+    const h = Math.round(hours * 2) / 2;
+    return `about ${Number.isInteger(h) ? h : h.toFixed(1)} hour${h === 1 ? "" : "s"} off`;
+  }
+  const n = Math.max(1, Math.round(d));
+  return `about ${n} day${n === 1 ? "" : "s"} off`;
+}
+
 /** The hub gate — the location flagged waygateHub, falling back to the_crossing
  *  if it carries the waygate flag. Null when no hub is authored (network dark). */
 export function hubWaygate(locations) {
@@ -35,8 +139,7 @@ export function allWaygates(locations) { // registry:internal
 
 /** Gates this character has DISCOVERED (been to — the knowledge half). */
 export function knownWaygates(character, locations) {
-  const known = new Set(character?.knownPlaces || []);
-  return allWaygates(locations).filter(l => known.has(l.id));
+  return allWaygates(locations).filter(l => knowsGate(character, l, locations));   // ⛔ SNG-663 §2b: the yard of a town they know counts
 }
 
 /** The skill half — a wayfaring tier from wits (the navigation-facing
@@ -115,12 +218,15 @@ export function networkGatesFrom(character, locations, { walkingDays } = {}) {
   const origin = locations?.[character?.currentLocationId];
   if (!isNetworkGate(origin)) return [];
   const hub = hubWaygate(locations);
-  const known = new Set(character?.knownPlaces || []);
   const tier = wayfaringTier(character);
-  const defaultTo = origin.waygateDefaultTo || null; // SNG-243 §3: the made gate's default endpoint
+  // ⛔ SNG-663 §2b — AND THE DEFAULT IS NORMALISED THROUGH THE YARD. Both made gates in the world default to
+  // `the_crossing`, which stopped being a gate the moment the flag moved: the default endpoint vanished from the
+  // network list and the router handed the leg back as ordinary travel — a 34-day walk standing in for a gate, on
+  // Erik's own save, which is the exact bug §297 exists to forbid.
+  const defaultTo = gateArrivalFor(origin.waygateDefaultTo || null, locations).at; // SNG-243 §3: the made gate's default endpoint
   return Object.values(locations || {})
     .filter(l => isNetworkGate(l) && l.id !== origin.id)
-    .filter(l => (hub && l.id === hub.id) || (known.has(l.id) && tier >= waygateTierOf(l)))
+    .filter(l => (hub && l.id === hub.id) || (knowsGate(character, l, locations) && tier >= waygateTierOf(l)))
     .map(l => {
       const overlandDays = (typeof walkingDays === "function") ? (walkingDays(origin, l) || 0) : 0;
       return { id: l.id, name: l.name, tier: waygateTierOf(l), isHub: !!(hub && l.id === hub.id), isDefault: l.id === defaultTo, overlandDays, cost: gateHopCost(overlandDays) };
@@ -142,13 +248,25 @@ export function resolveWaygateTransit({ character, destId, locations, rules = {}
   if (!hub) return null;
   const dest = locations?.[destId];
   if (!dest || dest.id === origin.id) return null;
+  // ⛔ SNG-663 §2b — AIMING AT A TOWN WHOSE GATE MOVED OUT IS AIMING AT ITS YARD. The gate a traveller found at
+  // Bedrock is still the gate they found; it now stands an hour and a half outside the walls, and `walkDays` is the
+  // leg they have left to walk. ⚠️ WITHOUT THIS a moved town is a non-gate place, and the Made Gate's own default
+  // endpoint became an overland walk.
+  const yard = gateYardOf(dest, locations);
+  if (yard && yard.id !== origin.id) {
+    const knewIt = knowsGate(character, yard, locations);
+    const skilledEnough = wayfaringTier(character) >= waygateTierOf(yard);
+    return (knewIt && skilledEnough)
+      ? { destId: yard.id, routed: "named", known: knewIt, skilled: skilledEnough, yardFor: dest.id, walkDays: walkingDays(yard, dest) || 0 }
+      : { destId: hub.id, routed: "hub", known: knewIt, skilled: skilledEnough };
+  }
   if (!isWaygate(dest)) {
     if (!isNetworkGate(origin)) return null;
     const known = (character?.knownPlaces || []).includes(dest.id);
     return known && aimsOpen(character, rules).ok ? { destId: dest.id, routed: "open", known, skilled: true } : null;
   }
   if (dest.id === hub.id) return { destId: hub.id, routed: "hub", known: true, skilled: true };
-  const known = (character?.knownPlaces || []).includes(dest.id);
+  const known = knowsGate(character, dest, locations);
   const skilled = wayfaringTier(character) >= waygateTierOf(dest);
   return (known && skilled)
     ? { destId: dest.id, routed: "named", known, skilled }
@@ -178,6 +296,13 @@ export function routeGmMoveTo({ character, moveRef, locations, resolve }) {
   if (!ref) return null;
 
   const directId = resolve ? resolve(ref, locations) : (locations[ref] ? ref : null);
+  // ⛔ SNG-663 §2b — A GATE TOWN NAMED BY THE GM IS ITS YARD. The block below tells the model to name where the
+  // character COMES OUT, and the honest answer for a moved town is the town: "you step through and arrive at
+  // Bedrock". Without this line that is a non-gate place, and the leg falls through to an overland walk.
+  if (directId && gateYardOf(locations[directId], locations)) {
+    const moved = resolveWaygateTransit({ character, destId: directId, locations });
+    return moved ? { ...moved, why: "gate-to-yard" } : null;
+  }
   if (directId && locations[directId] && !isWaygate(locations[directId])) return null; // a real non-gate place: ordinary travel
 
   if (directId && isWaygate(locations[directId])) {
@@ -208,7 +333,7 @@ export function waygateTruthForGM(character, locations) {
   if (!hub) return null;
   const net = Object.values(locations || {}).filter(isNetworkGate);
   if (!net.length) return null;
-  const hubName = String(hub.name || "the hub");
+  const hubName = gateLabel(hub, locations);   // ⛑ SNG-663 §2b: the hub's yard is a PART of the Crossing — canon stays canon
   const theHub = /^the\s/i.test(hubName) ? hubName : `the ${hubName}`;   // "The Crossing" carries its own article
   const origin = locations?.[character?.currentLocationId] || null;
   const atGate = isWaygate(origin);
@@ -219,7 +344,7 @@ export function waygateTruthForGM(character, locations) {
     + ` so ${theHub} is reachable THROUGH the gates and does NOT have to be walked to.`
     + ` ⛔ NEVER tell the character the waygates are isolated landmarks, that they do not connect onward, or that ${theHub} must be reached overland. All three are false.`
     + (atGate ? ` They are standing at one right now (${origin.name}).`
-      : near ? ` They are not at a gate this moment; the nearest they know is ${near.l.name}, about ${Math.max(1, Math.round(near.d))} day${Math.round(near.d) === 1 ? "" : "s"} off.`
+      : near ? ` They are not at a gate this moment; the nearest they know is ${gateLabel(near.l, locations)}, ${walkPhrase(near.d)}.`
       : ` They are not at a gate this moment and know of none nearby yet.`)
     + ` If they want to reach a gate or travel through one, say so plainly and let the journey carry them — that is a direction, not a refusal.`;
 }
@@ -230,22 +355,35 @@ export function waygateBlockForGM(character, locations, rules = {}) {
   const hub = hubWaygate(locations);
   if (!hub) return null;
   const tier = wayfaringTier(character);
-  const aimable = knownWaygates(character, locations)
-    .filter(l => l.id !== origin.id && (l.id === hub.id || tier >= waygateTierOf(l)))
-    .map(l => l.name);
+  const hubLabel = gateLabel(hub, locations);
+  const canAim = knownWaygates(character, locations)
+    .filter(l => l.id !== origin.id && (l.id === hub.id || tier >= waygateTierOf(l)));
+  // ⚠️ THE LIST STAYS BARE NAMES, because the instruction below says the moveTo must name one of them and a
+  // parenthetical in that list is a parenthetical in the moveTo. Where they STAND is a separate sentence.
+  const aimable = canAim.map(l => l.name);
+  const yardsAimable = canAim.filter(l => isGateYard(l))
+    .map(l => `${l.name} outside ${locations[l.gateYardFor]?.name || l.gateYardFor}`);
   // SNG-243 §4: if the character stands at a NETWORK gate, the committed connections + default are canon — the
   // GM reads them instead of improvising where the gate goes. A networkCapable gate reaches the whole network.
   const net = isNetworkGate(origin);
-  const defaultName = origin.waygateDefaultTo ? (locations?.[origin.waygateDefaultTo]?.name || null) : null;
+  const defaultName = origin.waygateDefaultTo ? (locations?.[gateArrivalFor(origin.waygateDefaultTo, locations).at]?.name || null) : null;
   const netLine = net
     ? `This is a NETWORK gate — from it the character can fold directly to any gate they know across the network (hub-and-spoke), not only the hub. ` +
       (defaultName ? `Its DEFAULT endpoint, if they step through without naming a destination, is ${defaultName}. ` : "")
     : "";
+  // ⛑ SNG-663 §2b — AND STANDING IN A YARD IS STANDING OUTSIDE THE TOWN, which is the whole point of a yard:
+  // nothing arrives in a market square, and whoever comes through has the walk in still to make.
+  const yardTown = townOfGateYard(origin, locations);
+  const yardLine = yardTown
+    ? `⚑ This gate stands in ${origin.name}, the gate yard OUTSIDE ${yardTown.name} — the town itself is ${walkPhrase(walkingDays(origin, yardTown) || 0)}. Whoever comes through arrives HERE, outside the walls, and has to walk in. `
+    : "";
+  const yardsLine = yardsAimable.length ? `⚑ Some of those are gate YARDS and stand outside their towns: ${yardsAimable.join(", ")}. ` : "";
   return `WAYGATE: the character stands at ${origin.name}, a living waygate. Transit is real travel (hours pass). ` +
+    yardLine +
     netLine +
     (aimable.length
-      ? `Gates they can aim true at: ${aimable.join(", ")}. Anywhere else through the gate lands at ${hub.name} — the hub; that is routing, not failure. `
-      : `They cannot yet aim at a distant gate (undiscovered, or beyond their wayfaring) — the gate will carry them to ${hub.name}, the hub. `) +
+      ? `Gates they can aim true at: ${aimable.join(", ")}. ${yardsLine}Anywhere else through the gate lands at ${hubLabel} — the hub; that is routing, not failure. `
+      : `They cannot yet aim at a distant gate (undiscovered, or beyond their wayfaring) — the gate will carry them to ${hubLabel}, the hub. `) +
     // ⛔ CCODE-418: a wayfarer good enough aims a network gate at any place they know — the GM is told, or it will refuse what the engine allows
     (net && aimsOpen(character, rules).ok
       ? `⚑ They are wayfarer enough to AIM THIS GATE OPEN — straight to any place they know, not only to a gate. If they step through aimed at a place, your "moveTo" names that place. `

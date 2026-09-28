@@ -35,7 +35,8 @@
   "the_half_cathedral",
   "the_ceaseless",
   "the_axis_gate",
-  "greenforge"
+  "greenforge",
+  "the_forge_eternal_gate_yard"
  ],
  "descriptionSeed": "Scaffolds forever, half-built cathedrals, and a people who cannot stop making. Nothing here is finished and that is the point — the Wrights believe a completed thing has stopped being alive. The city is glorious, wasteful, and expanding in nine directions, and none of it is done, and they are so happy. The Wrights built their waygate's housing themselves, around a gate they did not build, and it is the most over-engineered doorframe in the world.",
  "loreRefs": [
@@ -58,8 +59,6 @@
   "mechanical": 0.2
  },
  "startingLocation": true,
- "waygate": true,
- "waygateTier": 2,
  "worldPos": {
   "colatitude": 80.0,
   "longitude": 236.0,
@@ -68,5 +67,6 @@
  "worldPosNote": "Ordinary ground within the_making, on its bearing. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
  "tier": "region",
  "parentId": null,
- "appearance": "Half-built cathedrals under permanent scaffolding — vaults open to the sky, cranes standing on the unfinished roofs, ladders and walkways at every level. Stone dust, stacked blocks, and scaffold poles as far as the eye goes."
+ "appearance": "Half-built cathedrals under permanent scaffolding — vaults open to the sky, cranes standing on the unfinished roofs, ladders and walkways at every level. Stone dust, stacked blocks, and scaffold poles as far as the eye goes.",
+ "gateYardId": "the_forge_eternal_gate_yard"
 }

@@ -1028,8 +1028,14 @@ for (const pack of PACKS) {
     // `parentId: the_crossing` while sitting 11.7–18.3 walking days away, so the region map drew them nested
     // inside a place a fortnight's walk from them; and the Regulator Chamber, which is one stair below the Null
     // Stone, was a settlement only because `geodesic` charged 4.8 days for that stair. ⛑ 101 − 5 = 96, 17 + 5 = 22.
-    check("SNG-392/398/396: the hierarchy matches the RATIFIED census — 25 regions, 96 settlements, 22 authored-in-play sites",
-      tiers.region === 25 && tiers.settlement === 96 && tiers.site === 22, JSON.stringify(tiers));
+    // ⚠️ 37 SINCE 2026-09-28 (SNG-663 §2b, CCODE-554): AEVI AUTHORED FIFTEEN GATE YARDS and Erik ruled them in — yards
+    // only where a gate stands at a settlement: *"Agreed."* The `waygate` flag moved off fifteen cities onto a yard an hour
+    // and a half outside each, because a gate leg used to end inside the walls and, in Aevi's words, *"a force can't appear
+    // in a market square."* ⛑ 22 + 15 = 37, and NOT ONE SETTLEMENT OR REGION MOVED: the towns are all still there, which
+    // is what makes this a yard added rather than a place re-read. `po/staged_content/SNG-663_gate_yards.json` is the
+    // authoring; 37 gate yards and all of them sites of their own town is what the line now ratifies.
+    check("SNG-392/398/396: the hierarchy matches the RATIFIED census — 25 regions, 96 settlements, 37 authored-in-play sites",
+      tiers.region === 25 && tiers.settlement === 96 && tiers.site === 37, JSON.stringify(tiers));
     const ids = new Set(allLocs.map((l) => l.id));
     const badParent = allLocs.filter((l) => l.parentId !== null && !ids.has(l.parentId));
     check("SNG-392: every parentId resolves and every site HAS a parent",

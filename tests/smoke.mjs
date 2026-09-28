@@ -5652,10 +5652,16 @@ await (async () => {
   check("148: GM block only when STANDING at a gate (no per-turn spam)",
     waygateBlockForGM(novice, locs) !== null && waygateBlockForGM({ ...novice, currentLocationId: "plain_town" }, locs) === null);
   check("148: the GM block carries the offer-lightly discipline", /never as a menu/.test(waygateBlockForGM(master, locs)));
-  check("148: the REAL content seed — the Crossing is the hub, the Axis Gate is a gate", (() => {
+  // ⚠️ THIS READ THE FLAG OFF `the_crossing.json` AND WENT RED ON SNG-663 §2b — Erik ruled a yard outside every
+  // settlement with a gate, so the hub flag lives on the Hub Yard now and the city keeps the road to it.
+  // ⛑ The claim is unchanged and still content's to keep: THE CENTRE KEEPS THE HUB GATE, and the Axis Gate is a gate.
+  check("148: the REAL content seed — the centre keeps the hub gate (its own yard, since §2b), and the Axis Gate is a gate", (() => {
     const crossing = JSON.parse(readFileSync(new URL('../content/packs/valley/locations/the_crossing.json', import.meta.url), 'utf8'));
     const axis = JSON.parse(readFileSync(new URL('../content/packs/valley/locations/the_axis_gate.json', import.meta.url), 'utf8'));
-    return crossing.waygate === true && crossing.waygateHub === true && axis.waygate === true && hubWaygate({ the_crossing: crossing }).id === "the_crossing";
+    const yard = JSON.parse(readFileSync(new URL('../content/packs/valley/locations/the_crossing_gate_yard.json', import.meta.url), 'utf8'));
+    return axis.waygate === true && crossing.waygate !== true && crossing.gateYardId === yard.id
+      && yard.waygate === true && yard.waygateHub === true && yard.gateYardFor === "the_crossing"
+      && hubWaygate({ the_crossing: crossing, the_crossing_gate_yard: yard }).id === yard.id;
   })());
 }
 

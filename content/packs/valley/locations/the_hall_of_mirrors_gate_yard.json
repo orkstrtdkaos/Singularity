@@ -1,0 +1,63 @@
+{
+ "schemaVersion": 1,
+ "id": "the_hall_of_mirrors_gate_yard",
+ "name": "the Glass Porch",
+ "regionId": "the_veiled_reach",
+ "communityId": "veilwright.hall",
+ "parentId": "the_hall_of_mirrors",
+ "tier": "site",
+ "tags": [
+  "waygate",
+  "gate_yard",
+  "veilwright",
+  "falsehood",
+  "strange",
+  "social"
+ ],
+ "connections": [
+  "the_hall_of_mirrors",
+  "the_axis_gate"
+ ],
+ "descriptionSeed": "The Veilwrights receive you lavishly, and outside, and with mirrors. By the time you reach the end of the Glass Porch you have been looked at from every side, and so has everything you brought. They will tell you frankly that the welcome is a performance. It is also a very good look at you.",
+ "appearance": "A long porch of mirrors before the city, the gate arch at one end. Every arrival sees themselves from nine angles before they see anyone else, and the hosts are already walking toward them with open arms.",
+ "encounterFlavor": "A host embracing a stranger by name, and the name being wrong on purpose; a mirror that shows a caravan one cart longer than it is; an armed party arriving to find their reflections already surrounded.",
+ "loreRefs": [],
+ "questSeeds": [],
+ "dangerLevel": 3,
+ "spectrum": {
+  "falsehood_truth": -0.7,
+  "concrete_abstract": 0.3,
+  "dark_light": -0.2
+ },
+ "axisVector": [
+  0,
+  -0.7,
+  0,
+  0,
+  0.3,
+  0,
+  0,
+  -0.2,
+  0,
+  0,
+  0,
+  0
+ ],
+ "poleIntensity": {
+  "falsehood": 0.7,
+  "abstract": 0.3,
+  "dark": 0.2
+ },
+ "map": {
+  "x": 131,
+  "y": 216
+ },
+ "worldPos": {
+  "colatitude": 80.9625,
+  "longitude": 9,
+  "depth": 0
+ },
+ "waygate": true,
+ "waygateTier": 3,
+ "gateYardFor": "the_hall_of_mirrors"
+}

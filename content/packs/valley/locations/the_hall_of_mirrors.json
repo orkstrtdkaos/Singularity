@@ -34,7 +34,8 @@
  "connections": [
   "the_kindly_court",
   "the_last_mask",
-  "the_axis_gate"
+  "the_axis_gate",
+  "the_hall_of_mirrors_gate_yard"
  ],
  "descriptionSeed": "A city where every truth is understood to be a made thing, so the Veilwrights simply make better ones. Nothing is quite where it appears; hospitality is lavish and cannot be trusted; and everyone is scrupulously honest about the fact that they are lying, which they consider a higher form of candor than the Verists' brutality. They are charming. They mean it. Both of those are also true. There is a waygate in the Hall of Mirrors, and there are several things that look like one. The Veilwrights find this funny and will tell you which is which for a fair price.",
  "loreRefs": [
@@ -57,8 +58,6 @@
   "dark": 0.2
  },
  "startingLocation": true,
- "waygate": true,
- "waygateTier": 3,
  "encounterSeeds": [
   {
    "encounterId": "duel_hall_of_mirrors",
@@ -73,5 +72,6 @@
  "worldPosNote": "Ordinary ground within the_veiled_reach, on its bearing. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
  "tier": "region",
  "parentId": null,
- "appearance": "A city whose surfaces reflect — glazed facades, polished stone, still water channels running the streets, so every view is doubled and it is hard to tell depth from image. Lavish frontages, ornamented, immaculately maintained."
+ "appearance": "A city whose surfaces reflect — glazed facades, polished stone, still water channels running the streets, so every view is doubled and it is hard to tell depth from image. Lavish frontages, ornamented, immaculately maintained.",
+ "gateYardId": "the_hall_of_mirrors_gate_yard"
 }

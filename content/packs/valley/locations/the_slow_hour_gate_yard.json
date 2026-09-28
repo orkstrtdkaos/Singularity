@@ -1,0 +1,63 @@
+{
+ "schemaVersion": 1,
+ "id": "the_slow_hour_gate_yard",
+ "name": "the Waiting Hall",
+ "regionId": "the_kept_reach",
+ "communityId": "hourkeeper.slowhour",
+ "parentId": "the_slow_hour",
+ "tier": "site",
+ "tags": [
+  "waygate",
+  "gate_yard",
+  "hourkeeper",
+  "time",
+  "archive",
+  "strange"
+ ],
+ "connections": [
+  "the_slow_hour",
+  "the_axis_gate"
+ ],
+ "descriptionSeed": "The Hourkeepers do not hurry anything, least of all what comes through the gate. You wait in the hall until your hour, which the keeper at the desk will tell you, and it is usually not long. The keeper sometimes greets people by name before they step through. Nobody has ever arrived in the Slow Hour unexpected.",
+ "appearance": "A long hall of benches under clock-faces that show different hours, the gate arch at the far end. An Hourkeeper sits at a desk by the city door with a book of arrivals, some of whom have not come yet.",
+ "encounterFlavor": "A keeper looking up from the book and saying 'you are early' to someone who has never been here; a clock-face stopping as a stranger passes it; a courier who arrived tomorrow, asking what day it is.",
+ "loreRefs": [],
+ "questSeeds": [],
+ "dangerLevel": 3,
+ "spectrum": {
+  "space_time": 0.7,
+  "chaos_order": 0.4,
+  "emotional_logical": 0.2
+ },
+ "axisVector": [
+  0.2,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0.4,
+  0,
+  0,
+  0.7,
+  0,
+  0
+ ],
+ "poleIntensity": {
+  "time": 0.7,
+  "order": 0.4,
+  "logical": 0.2
+ },
+ "map": {
+  "x": 439,
+  "y": 119
+ },
+ "worldPos": {
+  "colatitude": 77.9625,
+  "longitude": 312,
+  "depth": 0
+ },
+ "waygate": true,
+ "waygateTier": 2,
+ "gateYardFor": "the_slow_hour"
+}

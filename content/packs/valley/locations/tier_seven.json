@@ -33,7 +33,8 @@
  "connections": [
   "the_unplanned_room",
   "the_grand_lattice",
-  "the_axis_gate"
+  "the_axis_gate",
+  "tier_seven_gate_yard"
  ],
  "descriptionSeed": "One level of one arcology, and it is a perfect machine for living. Nothing is unplanned. Your work, your meal, your route, your hour of rest, your suitable partner — all optimized, all correct, all genuinely BETTER than what you would have chosen. The Lattice-folk are not oppressed; they are well-served, and they will tell you so, and they will be telling the truth, and the truth is somehow the most disturbing part. Tier Seven's waygate is scheduled: arrivals land in assigned slots, and the Lattice regards an unscheduled gating as a minor structural offence rather than a rudeness.",
  "loreRefs": [
@@ -57,8 +58,6 @@
   "concrete": 0.2
  },
  "startingLocation": true,
- "waygate": true,
- "waygateTier": 2,
  "worldPos": {
   "colatitude": 80.0,
   "longitude": 227.0,
@@ -67,5 +66,6 @@
  "worldPosNote": "Ordinary ground within the_lattice_cities, on its bearing. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
  "tier": "region",
  "parentId": null,
- "appearance": "One level of an arcology: a continuous engineered floor of identical dwellings along curved corridors, everything fitted and flush. Uniform lighting from recessed strips. No windows, no variation, no visible seams."
+ "appearance": "One level of an arcology: a continuous engineered floor of identical dwellings along curved corridors, everything fitted and flush. Uniform lighting from recessed strips. No windows, no variation, no visible seams.",
+ "gateYardId": "tier_seven_gate_yard"
 }

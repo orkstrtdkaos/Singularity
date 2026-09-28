@@ -1,0 +1,63 @@
+{
+ "schemaVersion": 1,
+ "id": "cloudform_gate_yard",
+ "name": "the Arrival Figure",
+ "regionId": "the_pattern_reach",
+ "communityId": "figurist.cloudform",
+ "parentId": "cloudform",
+ "tier": "site",
+ "tags": [
+  "waygate",
+  "gate_yard",
+  "figurist",
+  "abstract",
+  "strange",
+  "sacred"
+ ],
+ "connections": [
+  "cloudform",
+  "the_axis_gate"
+ ],
+ "descriptionSeed": "The Figurists built a yard round their gate because arrivals kept stepping through into places that had not agreed to have them. Now you arrive in a figure drawn to receive you, and a courteous Figurist explains which of the paths is real today. Armies find this very difficult.",
+ "appearance": "A plaza that is not quite square, around a gate arch that is not quite where the plaza's centre should be. Paths lead off toward the city at angles that suggest several different cities. One of them is right.",
+ "encounterFlavor": "A courier walking the wrong path for the third time, cheerfully; a guide drawing the way in on your palm in chalk that does not rub off; a cart that arrived at an angle and has to be persuaded out of it.",
+ "loreRefs": [],
+ "questSeeds": [],
+ "dangerLevel": 3,
+ "spectrum": {
+  "concrete_abstract": 0.7,
+  "mechanical_spiritual": 0.4,
+  "space_time": 0.2
+ },
+ "axisVector": [
+  0,
+  0,
+  0,
+  0,
+  0.7,
+  0.4,
+  0,
+  0,
+  0,
+  0.2,
+  0,
+  0
+ ],
+ "poleIntensity": {
+  "abstract": 0.7,
+  "spiritual": 0.4,
+  "time": 0.2
+ },
+ "map": {
+  "x": 169,
+  "y": 234
+ },
+ "worldPos": {
+  "colatitude": 87.9625,
+  "longitude": 303,
+  "depth": 0
+ },
+ "waygate": true,
+ "waygateTier": 2,
+ "gateYardFor": "cloudform"
+}

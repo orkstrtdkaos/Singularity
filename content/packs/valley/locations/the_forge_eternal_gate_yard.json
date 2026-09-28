@@ -1,0 +1,63 @@
+{
+ "schemaVersion": 1,
+ "id": "the_forge_eternal_gate_yard",
+ "name": "the Unfinished Yard",
+ "regionId": "the_making",
+ "communityId": "wright.forge",
+ "parentId": "the_forge_eternal",
+ "tier": "site",
+ "tags": [
+  "waygate",
+  "gate_yard",
+  "wright",
+  "creation",
+  "craft",
+  "unfinished"
+ ],
+ "connections": [
+  "the_forge_eternal",
+  "the_axis_gate"
+ ],
+ "descriptionSeed": "The Wrights built their gate a yard, then a better one, then started on a third before the second was done. Arrivals step through into constant work, and are usually handed something to carry in. It is the only reception yard in the world that has been attacked and was improved by the damage.",
+ "appearance": "A yard that is being built. Scaffolds round the gate arch, half-laid paving, a gatehouse with three walls and plans for a fourth. The Wrights have been improving it for sixty years and have never once finished it.",
+ "encounterFlavor": "A Wright pressing a hod of bricks into a stranger's arms; a new wing of the gatehouse going up while you watch; a carter complaining that the road in was not here yesterday, which is true.",
+ "loreRefs": [],
+ "questSeeds": [],
+ "dangerLevel": 2,
+ "spectrum": {
+  "destruction_creation": 0.7,
+  "chaos_order": -0.3,
+  "mechanical_spiritual": -0.2
+ },
+ "axisVector": [
+  0,
+  0,
+  0,
+  0,
+  0,
+  -0.2,
+  -0.3,
+  0,
+  0,
+  0,
+  0,
+  0.7
+ ],
+ "poleIntensity": {
+  "creation": 0.7,
+  "chaos": 0.3,
+  "mechanical": 0.2
+ },
+ "map": {
+  "x": 637,
+  "y": 416
+ },
+ "worldPos": {
+  "colatitude": 79.9625,
+  "longitude": 236,
+  "depth": 0
+ },
+ "waygate": true,
+ "waygateTier": 2,
+ "gateYardFor": "the_forge_eternal"
+}

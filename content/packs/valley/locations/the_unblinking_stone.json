@@ -34,7 +34,8 @@
   "the_told_ground",
   "the_flensing",
   "the_axis_gate",
-  "plainstead"
+  "plainstead",
+  "the_unblinking_stone_gate_yard"
  ],
  "descriptionSeed": "Unadorned stone, no ornament, no comfort, and no lies. The Verists say what is so, whatever it costs, and it costs. They are not cruel — many of them are gentle — but they will tell you the thing nobody has ever told you, on the day you meet, and they will not apologize, and years later you may be grateful. The Verists' waygate has no housing, no ornament, and a plain sign giving its failure rate. The number is small and it is posted anyway, which is the whole Reach in one gesture.",
  "loreRefs": [
@@ -57,8 +58,6 @@
   "logical": 0.2
  },
  "startingLocation": true,
- "waygate": true,
- "waygateTier": 2,
  "worldPos": {
   "colatitude": 76.0,
   "longitude": 199.0,
@@ -67,5 +66,6 @@
  "worldPosNote": "Ordinary ground within the_stark_reach, on its bearing. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
  "tier": "region",
  "parentId": null,
- "appearance": "Buildings of unadorned grey stone — no carving, no paint, no hangings, no furnishings beyond the plain necessary. Square openings, flat lintels, straight streets. Hard daylight, nothing softened."
+ "appearance": "Buildings of unadorned grey stone — no carving, no paint, no hangings, no furnishings beyond the plain necessary. Square openings, flat lintels, straight streets. Hard daylight, nothing softened.",
+ "gateYardId": "the_unblinking_stone_gate_yard"
 }

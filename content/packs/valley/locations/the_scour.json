@@ -36,7 +36,8 @@
   "the_axis_gate",
   "the_worn_yard",
   "cairn_and_scour",
-  "the_spent_yard"
+  "the_spent_yard",
+  "the_scour_gate_yard"
  ],
  "descriptionSeed": "A city of controlled ruin and beautiful demolitions, where ending a thing WELL is a craft and the world is held to be choked with what should have ended. The Unmakers are not nihilists — they are gardeners with a very long view of what needs clearing, and they are usually right, and being usually right is not the same as being welcome. The Unmakers keep a waygate and keep, beside it, the written method for taking it apart safely — the only region that has bothered to work out how to close one properly.",
  "loreRefs": [
@@ -59,8 +60,6 @@
   "death": 0.2
  },
  "startingLocation": true,
- "waygate": true,
- "waygateTier": 2,
  "worldPos": {
   "colatitude": 77.0,
   "longitude": 67.0,
@@ -69,5 +68,6 @@
  "worldPosNote": "Ordinary ground within the_unmade, on its bearing. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
  "tier": "region",
  "parentId": null,
- "appearance": "A city of deliberate ruins — structures taken down to clean stumps, their materials sorted and stacked beside them in labelled piles. Demolition rigs standing over half-cleared blocks. Swept ground, nothing left lying."
+ "appearance": "A city of deliberate ruins — structures taken down to clean stumps, their materials sorted and stacked beside them in labelled piles. Demolition rigs standing over half-cleared blocks. Swept ground, nothing left lying.",
+ "gateYardId": "the_scour_gate_yard"
 }

@@ -45,7 +45,7 @@ import { protectsOffscreen, nemesisIdOf } from "./nemesis.js";   // ⛔ SNG-648 
 import { travelerCard, cardChanged, mergeTravelerCard, ledgerMonthsSince, whereOf, meetKey } from "./travelers.js";   // SNG-595: a fellow traveler is a person the world has a record of
 import { stampEventChange, mergeEventStages, mergeQuestOutcomes, actorOf, questKey } from "./worldevents.js";   // CCODE-354: a crisis another traveler answered reads as answered
 import { bandDialsOf } from "./melee.js";                                    // SNG-634 C1: a raiding power bleeds on the dials a band does
-import { arcReading, knowsSovereign, masksFrom, sovereignOfArc, confirmedLines, deedAgainstSupply, supplyDeedLine, seatClaims, applySeatClaims } from "./sovereign.js";   // ⛔ SNG-642 §2.3: which of an arc's three readings this character has unlocked, and the mask over the name
+import { arcReading, knowsSovereign, masksFrom, sovereignOfArc, confirmedLines, deedAgainstSupply, supplyDeedLine, seatClaims, applySeatClaims, mergeSeatsTaken} from "./sovereign.js";   // ⛔ SNG-642 §2.3: which of an arc's three readings this character has unlocked, and the mask over the name
 import { raiderPowerAt, dangerLiftAt, powerPass, noticePass } from "./powers.js";  // SNG-634 C1/C2/C4/C7: whose raid, whose ground, what they do, who has noticed you
 import { worthOf } from "./purse.js";                                              // ⛔ SNG-634 C7 `wealth`: a crown notices a rich stranger
 import { INVITES_PATH, mergeInvitation, answerInto, applyAnswers } from "./invitations.js";   // CCODE-360: an invitation carried by someone you both know
@@ -1325,6 +1325,30 @@ export async function syncSharedWorld({ character, content }) {
     } else {
       mergedArcs = (await fetchRepoJSON("world/arcs/valley.json"))?.arcs || null;
     }
+    // ✅ SNG-663 §1 / A5 — AND THE SEATS, BESIDE THE ARCS, with the opposite merge rule: an arc is a net vector and a
+    // seat is a once-ever event, so this is FIRST WRITER WINS by the day the finish happened. ⛑ A player who has
+    // taken none still READS, because a seat taken in another player's world is taken in theirs.
+    try {
+      const mineSeats = ws.seatsTaken && Object.keys(ws.seatsTaken).length ? ws.seatsTaken : null;
+      if (mineSeats) {
+        await pushMergedFile("world/seats/valley.json", (remoteSeats) => {
+          const m = mergeSeatsTaken(mineSeats, remoteSeats?.seats || {}, { actorId: me });
+          ws.seatsTaken = m.seats;
+          for (const a of m.adopted) {
+            // ⚠️ THE LOSER IS TOLD. A throne that changed hands between one pass and the next, with no line about it,
+            // is the world contradicting what it said last week.
+            news.push(`Word comes back changed: it was not ${a.was?.replace(/_/g, " ")} who finished first.`);
+          }
+          return { schemaVersion: 1, region: "valley", seats: m.seats, lastTick: new Date().toISOString() };
+        }, `seats: ${character.name || me} consolidated the world's thrones`);
+      } else {
+        const remoteSeats = (await fetchRepoJSON("world/seats/valley.json"))?.seats || null;
+        if (remoteSeats && Object.keys(remoteSeats).length) {
+          ws.seatsTaken = mergeSeatsTaken({}, remoteSeats, { actorId: me }).seats;
+        }
+      }
+    } catch (err) { console.warn("[seats] the shared thrones were not read:", err.message); }   // prose-cap-ok: a console diagnostic
+
     // learn what everyone ELSE has pushed → update othersPush; news when the CANONICAL stage shifts (either way).
     if (mergedArcs) {
       ws.arcStages = ws.arcStages || {};

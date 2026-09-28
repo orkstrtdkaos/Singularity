@@ -798,3 +798,34 @@ export function applySeatClaims(character, claims = [], { day = null } = {}) {
   ws.seatsSaid = [...said].slice(-40);
   return out;
 }
+
+/** ⛔ SNG-663 §1 / A5 — ONE PROMOTION PER SEAT, EVER, PER WORLD. The seats live beside the arcs in the shared world,
+ *  and the merge rule is the OPPOSITE of the arcs': an arc is a net vector (every actor owns `byActor[me]`, and the
+ *  union is safe because the stage is a sum), while a seat is a unique once-ever event. Two players cannot each seat
+ *  their own claimant.
+ *
+ *  ⛑ SO IT IS FIRST WRITER WINS, decided by the world DAY the finish happened (earliest takes it), and by the actor
+ *  id only to break an exact tie — a rule that gives the same answer whichever player runs the merge, which is what
+ *  makes it a merge rather than a race.
+ *
+ *  ⚠️ AND THE LOSER ADOPTS THE WINNER. A player whose local take loses does not keep a private throne: their
+ *  `seatsTaken` is corrected, and `seatClaims` then answers `presses` for their claimant, which is already the rule
+ *  for a seat somebody else holds. Returns `{ seats, adopted, kept }`. PURE. */
+export function mergeSeatsTaken(mine = {}, remote = {}, { actorId = null } = {}) {
+  const out = {}, adopted = [], kept = [];
+  const axes = new Set([...Object.keys(mine || {}), ...Object.keys(remote || {})]);
+  for (const axis of axes) {
+    const a = mine?.[axis] || null, b = remote?.[axis] || null;
+    if (!a) { out[axis] = b; continue; }
+    if (!b) { out[axis] = { ...a, ...(actorId ? { actor: a.actor || actorId } : {}) }; kept.push(axis); continue; }
+    if (a.by === b.by) { out[axis] = { ...b, ...a, day: Math.min(Number(a.day ?? Infinity), Number(b.day ?? Infinity)) }; continue; }
+    // ⛑ THE EARLIER FINISH IS THE REAL ONE. A missing day loses to a known one, and an exact tie is broken by the
+    // actor id so that every player's merge agrees — never by who happened to push first.
+    const ad = Number.isFinite(Number(a.day)) ? Number(a.day) : Infinity;
+    const bd = Number.isFinite(Number(b.day)) ? Number(b.day) : Infinity;
+    const mineWins = ad < bd || (ad === bd && String(a.actor || actorId || "") < String(b.actor || ""));
+    if (mineWins) { out[axis] = { ...a, ...(actorId ? { actor: a.actor || actorId } : {}) }; kept.push(axis); }
+    else { out[axis] = b; adopted.push({ axis, was: a.by, now: b.by }); }
+  }
+  return { seats: out, adopted, kept };
+}

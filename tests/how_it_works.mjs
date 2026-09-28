@@ -31113,6 +31113,39 @@ console.log("\n── §381 · a villain you fail to stop ──");
         && rows.filter(r => r.kind === "open").every(r => r.act !== "cannot");
     })(), "three legendary claimants carried no affinity on the record the game reads; they do now");
 
+  // ✅ A5 — ONE PROMOTION PER SEAT, PER WORLD (Aevi: "a seat taken in one player's world is taken in everyone's").
+  //
+  // ⛔ AND THE MERGE RULE IS THE OPPOSITE OF THE ARCS', which is the whole design. An arc is a NET VECTOR — every
+  // actor owns `byActor[me]` and the union is safe because the stage is a sum. A seat is a UNIQUE ONCE-EVER EVENT, so
+  // two players cannot each seat their own claimant: first writer wins, by the DAY the finish happened.
+  check("§381: ⛔ THE EARLIER FINISH TAKES THE SEAT, whichever player's merge runs — and the loser ADOPTS the winner rather than keeping a private throne",
+    (() => {
+      const mine = { "Life / Death": { by: "morvane_the_harvest", day: 84, actor: "char-a" } };
+      const theirs = { "Life / Death": { by: "thornmother_sealed", day: 80, actor: "char-b" } };
+      const a = SV81.mergeSeatsTaken(mine, theirs, { actorId: "char-a" });
+      const b = SV81.mergeSeatsTaken(theirs, mine, { actorId: "char-b" });
+      return a.seats["Life / Death"].by === "thornmother_sealed"
+        && b.seats["Life / Death"].by === "thornmother_sealed"
+        && a.adopted.length === 1 && a.adopted[0].was === "morvane_the_harvest" && b.adopted.length === 0;
+    })(), "a throne that changes hands between two passes with no line about it is the world contradicting itself");
+
+  check("§381: ⛑ …and an exact tie is settled the SAME WAY from both sides — which is what makes it a merge and not a race",
+    (() => {
+      const one = { z: { by: "one", day: 7, actor: "char-a" } }, two = { z: { by: "two", day: 7, actor: "char-b" } };
+      const a = SV81.mergeSeatsTaken(one, two, { actorId: "char-a" }), b = SV81.mergeSeatsTaken(two, one, { actorId: "char-b" });
+      // ⛑ …and a player with no seats of their own adopts the world's, which is the whole point of sharing them
+      const reader = SV81.mergeSeatsTaken({}, two, { actorId: "char-c" });
+      return a.seats.z.by === b.seats.z.by && reader.seats.z.by === "two" && reader.adopted.length === 0;
+    })());
+
+  check("§381: ⛔ and the tick SHARES them beside the arcs — a player who has taken none still READS, because a seat taken in another player's world is taken in theirs",
+    (() => {
+      const wt = rd("engine/worldtick.js");
+      return /pushMergedFile\("world\/seats\/valley\.json"/.test(wt)
+        && /mergeSeatsTaken\(mineSeats, remoteSeats\?\.seats \|\| \{\}, \{ actorId: me \}\)/.test(wt)
+        && /fetchRepoJSON\("world\/seats\/valley\.json"\)/.test(wt);
+    })());
+
   // ⛔ AND THE TICK CALLS IT, with the arc clock the rest of the world reads.
   check("§381: ⛔ the world tick reads a finish every pass, through the SAME arc clock the map and the GM block read",
     (() => {

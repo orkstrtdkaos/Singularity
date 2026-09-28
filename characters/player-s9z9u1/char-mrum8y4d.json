@@ -138,7 +138,7 @@
   "maxHealth": 88,
   "health": 88,
   "maxEnergy": 166,
-  "energy": 153,
+  "energy": 139,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -15867,8 +15867,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790633028017,
-  "rev": 1073,
+  "updatedAt": 1790633256319,
+  "rev": 1074,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -18258,12 +18258,6 @@
           "at": 2005,
           "from": "thriving",
           "to": "thriving",
-          "note": "Halvex Coil appointed keeper (was Vessin Tallow-bark)"
-        },
-        {
-          "at": 2005,
-          "from": "thriving",
-          "to": "thriving",
           "note": "hands: Tessvel Cairn, Vessin Tallow-bark"
         },
         {
@@ -18325,6 +18319,12 @@
           "from": "holding",
           "to": "thriving",
           "note": "grew under Halvex Coil (legendary)"
+        },
+        {
+          "at": 2182,
+          "from": "thriving",
+          "to": "thriving",
+          "note": "improved with Old Procedure"
         }
       ],
       "carriage": {
@@ -18357,6 +18357,12 @@
           "name": "Better Story",
           "day": 87,
           "energy": 8
+        },
+        {
+          "abilityId": "the_old_procedure",
+          "name": "Old Procedure",
+          "day": 90,
+          "energy": 14
         }
       ],
       "imageSeedKey": "the_standing_annex#r1",
@@ -18957,6 +18963,10 @@
     {
       "text": "Vail Langley walks with you now.",
       "announced": true
+    },
+    {
+      "text": "You put Old Procedure to The Standing Annex — it is as good as it gets.",
+      "announced": false
     }
   ],
   "figureImages": {

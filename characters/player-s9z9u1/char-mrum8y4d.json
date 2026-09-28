@@ -15349,8 +15349,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790626556331,
-  "rev": 1041,
+  "updatedAt": 1790627007957,
+  "rev": 1044,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -16411,8 +16411,7 @@
       "teaches": null,
       "liaisonFor": null,
       "joinedDay": 77,
-      "leftDay": 83,
-      "departedWhy": "you parted ways"
+      "rejoinedDay": 90
     },
     {
       "npcId": "taken-person",
@@ -16440,6 +16439,15 @@
       "teaches": null,
       "liaisonFor": null,
       "joinedDay": 88
+    },
+    {
+      "npcId": "radiant-agent-seraphine-s-hand",
+      "roles": [
+        "ally"
+      ],
+      "teaches": null,
+      "liaisonFor": null,
+      "joinedDay": 90
     }
   ],
   "_pinsInitialized": true,
@@ -17824,13 +17832,13 @@
       "trade": true,
       "conditionSince": null,
       "route": {
-        "toId": "gearsflat",
+        "toId": "the_axis_gate",
         "crew": [
           "tessvel-cairn",
           "traveler-woman"
         ],
-        "setDay": 89,
-        "lastDepartureDay": 90,
+        "setDay": 90,
+        "lastDepartureDay": null,
         "runs": 0
       }
     }
@@ -18366,6 +18374,14 @@
     {
       "text": "Halvex Coil keeps The Standing Annex now.",
       "announced": true
+    },
+    {
+      "text": "Halvex Coil walks with you now.",
+      "announced": false
+    },
+    {
+      "text": "Vail Langley walks with you now.",
+      "announced": false
     }
   ],
   "figureImages": {

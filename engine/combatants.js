@@ -371,6 +371,37 @@ export function alliesOf(character, { companions = {}, npcs = {}, tagFamilies = 
   // can only find a family, never take one away. ⚠️ THE DOCUMENTED RESTRAINT IS THAT A NEW CALLER MUST DECIDE RATHER THAN INHERIT, so
   // this is decided here and named here: a person's families are a fact about the person, not about the screen.
   const opts = { tagFamilies, stageOf, evidence: true };
+  // ⛔ CCODE-555 — THE PERSON'S OWN RECORD, WHEREVER IT LIVES. This read only the `npcs` map the caller injected, and
+  // of the four callers TWO passed `{ ...CONTENT.npcs, ...character.npcRegistry }` while two passed `CONTENT.npcs`
+  // alone. ⚠️ Almost everybody you meet in play lives ONLY in the character's registry — measured on Loki, 3 of his
+  // 4 travelling companions have no CONTENT record — so for those two callers they arrived as the bare company entry:
+  // `name` fell through to the raw id, `championsNow` built a champion sheet with no attributes or crafts, and the
+  // folded-line narration read "HARM" for people whose crafts say otherwise.
+  // ⛑ One rule, in the one place that has `character` — and IT IS A MERGE PER PERSON, not per map. ⚠️ I tried both
+  // whole-map orders first and MEASURED what each cost. Registry-over-content dropped Pell from six contribution
+  // families to two and Veth-Ondra from six to four, because a registry record for a person who is ALSO authored is a
+  // thinner copy — met, bonded, hurt — and replacing the whole record throws the authored `assistTags` away.
+  // Content-over-registry made this function disagree with the party tab, which merges the other way.
+  // ⛔ THE PARTY TAB HAS BEEN PAYING THAT COST ALL ALONG: it injects `{ ...CONTENT.npcs, ...registry }`, so Pell has
+  // been reading as HARM+SHAPE on the party screen while the champions panel read all six of her families.
+  // ⛑ A person is the authored record WITH what play has written onto it. Per id, authored first, played over it.
+  const people = (() => {
+    const reg = character?.npcRegistry || {};
+    const out = { ...(npcs || {}) };
+    for (const id of Object.keys(reg)) out[id] = out[id] ? { ...out[id], ...reg[id] } : reg[id];
+    return out;
+  })();
+  // ⛑ …AND THE FAMILIES ARE THE UNION OVER BOTH RECORDS. The rule twenty lines up is that the prose reader may only
+  // FIND a family, never take one away — and a merged record CAN take one away, because a `description` or `role`
+  // written in play replaces the authored one a family was found in. Measured: that is what cost Pell SUSTAIN.
+  const famUnion = (id, rec) => {
+    const seen = new Set(contributionsOf(rec, opts));
+    for (const src of [npcs?.[id], character?.npcRegistry?.[id]]) {
+      if (!src || src === rec) continue;
+      for (const f of contributionsOf(src, opts)) seen.add(f);
+    }
+    return [...seen];
+  };
   const out = [{
     id: character?.id || "player", name: character?.name || "you", kind: "player",
     // ⛔ CCODE-259 — THE PLAYER IS A COMBATANT BY DEFINITION AND THIS LINE SAID OTHERWISE. It listed only
@@ -394,6 +425,11 @@ export function alliesOf(character, { companions = {}, npcs = {}, tagFamilies = 
   for (const c of (character?.companions || [])) {
     const def = companions?.[c?.id || c] || (typeof c === "object" ? c : null);
     if (!def) continue;
+    // ⛔ AND A COMPANION'S RECORD IS THE AUTHORED ONE, NOT THE REGISTRY'S. I folded the registry in here too and
+    // MEASURED WHAT IT COST: Pell fell from six contribution families to two and Veth-Ondra from six to four, because
+    // a registry record for an authored companion is a THINNER copy — met, bonded, hurt — and spreading it over the
+    // def drops the `assistTags` the def carries. ⛑ Nothing is lost by leaving it out: a companion's live state
+    // rides on the character's own `companions` entry (`...c`), which is what `withdrawalOf` and `withdrawn` read.
     const rec = { ...def, ...(typeof c === "object" ? c : {}) };
     const contrib = contributionsOf(rec, opts);
     out.push({
@@ -403,7 +439,10 @@ export function alliesOf(character, { companions = {}, npcs = {}, tagFamilies = 
       // every consumer honour it at once. A parallel `withdrawn` flag would have had to be added to each of
       // them, and the one that got missed would be the one that swung at someone in the air.
       // ⛔ CCODE-420: and so does being OUT ON A JOB — the same one field, for the same reason
-      present: !(withdrawalOf(rec)?.auto === true) && rec.withdrawn !== true && !awayOnJob(character, def.id),
+      // ⛔ CCODE-555: …and so does the player TELLING THEM TO HANG BACK. `allyOrders[id].holdBack` was written by a
+      // button and read by nothing, so the order never became the fact and the label never flipped.
+      present: !(withdrawalOf(rec)?.auto === true) && rec.withdrawn !== true && !awayOnJob(character, def.id) && !heldBack(character, def.id),
+      ...(heldBack(character, def.id) ? { heldBack: true } : {}),
       ...(awayOnJob(character, def.id) ? { awayOn: awayOnJob(character, def.id).job?.label || "a job" } : {}),
       ...(withdrawalOf(rec) ? { withdrawal: withdrawalOf(rec) } : {}),
       canAct: contrib.length > 0, contributions: contrib,
@@ -421,15 +460,15 @@ export function alliesOf(character, { companions = {}, npcs = {}, tagFamilies = 
     // the seat she already has.
     const seated = out.find(a => a && !a.isPlayer && e.npcId && String(a.id) === String(e.npcId));
     if (seated) {
-      const npc0 = npcs?.[e.npcId] || {};
+      const npc0 = people[e.npcId] || {};
       seated.roles = [...new Set([...(seated.roles || []), ...(e.roles || [])])];
-      seated.contributions = [...new Set([...(seated.contributions || []), ...contributionsOf({ ...npc0, ...e, roles: e.roles || [] }, opts)])];
+      seated.contributions = [...new Set([...(seated.contributions || []), ...famUnion(e.npcId, { ...npc0, ...e, roles: e.roles || [] })])];
       seated.canAct = seated.contributions.length > 0;
       continue;
     }
-    const npc = npcs?.[e.npcId] || {};
+    const npc = people[e.npcId] || {};
     const rec = { ...npc, ...e, roles: e.roles || [] };
-    const contrib = contributionsOf(rec, opts);
+    const contrib = famUnion(e.npcId, rec);
     out.push({
       id: e.npcId, name: npc.name || e.npcId, kind: "company", roles: e.roles || [],
       // ⛔ CCODE-272: WITHDRAWN READS AS NOT PRESENT, deliberately, because `chooseTarget`,
@@ -437,7 +476,9 @@ export function alliesOf(character, { companions = {}, npcs = {}, tagFamilies = 
       // every consumer honour it at once. A parallel `withdrawn` flag would have had to be added to each of
       // them, and the one that got missed would be the one that swung at someone in the air.
       // ⛔ CCODE-420: and so does being OUT ON A JOB
-      present: !(withdrawalOf(rec)?.auto === true) && rec.withdrawn !== true && !awayOnJob(character, e.npcId),
+      // ⛔ CCODE-555: …and so does the player's own order to keep out of it (`allyOrders[id].holdBack`)
+      present: !(withdrawalOf(rec)?.auto === true) && rec.withdrawn !== true && !awayOnJob(character, e.npcId) && !heldBack(character, e.npcId),
+      ...(heldBack(character, e.npcId) ? { heldBack: true } : {}),
       ...(awayOnJob(character, e.npcId) ? { awayOn: awayOnJob(character, e.npcId).job?.label || "a job" } : {}),
       ...(withdrawalOf(rec) ? { withdrawal: withdrawalOf(rec) } : {}),
       canAct: contrib.length > 0, contributions: contrib,
@@ -484,6 +525,16 @@ export function alliesOf(character, { companions = {}, npcs = {}, tagFamilies = 
     });
   }
   return out;
+}
+
+/** ⛔ CCODE-555 (BUG_aevi_20260928, Erik in play) — "let them hang back, or keep out of it. They don't seem to do
+ *  anything." ⚠️ `allyOrders[id].holdBack` had ONE hit in the whole tree and it was the write: the card's label and
+ *  every fight reader ask `present === false`, and nothing turned the order into the fact.
+ *
+ *  ⛑ Exported so a surface can ask the question without building a roster — but `alliesOf` is the one place that
+ *  applies it, for the reason its own comment gives: one field makes every consumer honour it at once. PURE. */
+export function heldBack(character, id) {
+  return !!(id && character?.allyOrders && character.allyOrders[id] && character.allyOrders[id].holdBack);
 }
 
 /** ⛔ WHO CAN BE HIT. The set interception cares about — and it is deliberately WIDER than who can fight,

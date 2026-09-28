@@ -16,6 +16,36 @@
   "next": [],
   "releases": [
     {
+      "version": "2.14.10",
+      "date": "2026-09-28",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "Anyone who will come can walk with you",
+          "summary": "Asking someone to join your party said they refused. They were not refusing — and often they had already joined.",
+          "detail": "Two things were wrong at once. The number of people you can bring FORWARD is what closeness earns, and that limit was also turning away anyone who simply wanted to travel with you — so a full party meant every new ask came back as \"They will not come.\" And underneath it, the picker was reporting a refusal even when the person had joined, then throwing the join away. Both are fixed: anyone who will come walks with you, the ones closeness has earned a named place come forward, and the rest stand in the line and are told so. A real refusal now says what it is instead of blaming the person."
+        },
+        {
+          "kind": "fix",
+          "title": "\"Keep out of it\" keeps them out of it",
+          "summary": "Telling someone to hang back did nothing at all — the order was recorded and never read.",
+          "detail": "The button wrote the order down and nothing in the game ever looked at it, so the label never changed and the person stayed in the line and in every fight. Now one reader answers for the whole game: the card says \"Back into the line\", nothing targets them, and they are out of it until you say otherwise."
+        },
+        {
+          "kind": "fix",
+          "title": "Your people are named, and what they bring is read",
+          "summary": "On some screens the people travelling with you showed as raw ids, with no skills behind them.",
+          "detail": "Almost everyone you meet in play lives only in your own record of them, and two screens were only looking in the authored catalogue — so those people arrived with no name and nothing on their sheet: a champion with no crafts, a mender counted as one more sword. They are read from both now, wherever their record lives, and what each of them brings is the whole of it rather than whichever half the screen happened to ask for."
+        },
+        {
+          "kind": "fix",
+          "title": "A recap that fails says so",
+          "summary": "When a session recap could not be written, nothing appeared and nothing explained why.",
+          "detail": "The apology had been written and saved for months and was never shown on screen. It shows now, and the button offers to try again."
+        }
+      ]
+    },
+    {
       "version": "2.14.9",
       "date": "2026-09-28",
       "entries": [

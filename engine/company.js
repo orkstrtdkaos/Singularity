@@ -135,26 +135,37 @@ export function formerCompany(character) {
   return (character?.company || []).filter(m => m && m.leftDay);
 }
 
-/** ⛔ SNG-390 — THE CAPACITY CHECK LIVES HERE, and the comment thirty lines down is why: "the fallback
- *  lives here, not at the call site, because there are now two callers and a fallback written at one of
- *  them is a fallback the other lacks." I put this in `applyPartyOps` first, which was the wrong door —
- *  measured, `recruit()` has exactly ONE caller (the button) and the GM's `join` op writes
- *  `pendingCompanyOffers`, which NOTHING READS. A cap on the path nobody travels is not a cap.
+/** ⛔ CCODE-555 (BUG_aevi_20260928, Erik in play) — "when I try to add my other allies to my party, it says they
+ *  refuse. Is that because they are not next to me?" It is not: location is read nowhere on this path. TWO defects
+ *  sat on top of each other, and the second one made the button useless for EVERYBODY.
  *
- *  ⚠️ REFUSES A NEW JOIN, NEVER EJECTS. A save whose rapport no longer covers its company keeps
- *  everyone: removing someone a player has travelled with, to satisfy a rule introduced afterwards, is the
- *  cruellest reading of a cap. Returns null on refusal so the caller can say why.
+ *  ⛔ 1 · THE RETURN SHAPE. This returned the company ENTRY, and the CCODE-524 picker — the one he used — asks
+ *  `if (!r?.ok)`. An entry has no `ok`, so the guard fired on every SUCCESS: the person joined, the alert said "They
+ *  will not come.", and the `return` skipped `saveCharacter`, so the join was discarded as well. Two sides of one
+ *  call disagreeing about the shape, and the failure mode is that success reads as refusal.
+ *  ⛑ So the contract is now `{ ok, entry, why }` — what the newest caller already expects — and ALL FOUR call sites
+ *  moved with it, because a truthy `{ ok: false }` would make the three that test truthiness read a refusal as a join.
  *
- *  ⚠️ AND A REJOIN IS NOT A NEW PLACE — someone walking back into a party they already belong to is
- *  not taking a seat, they are returning to one. */
+ *  ⛔ 2 · THE CAP IS ON THE NAMED PLACE, NOT ON THE JOIN. Erik, CCODE-511: *"The bond level should only gate who
+ *  you can bring forward… while anyone who joins you for whatever reason in the story can and should be reflected in
+ *  your party list."* `forwardCompany` has derived that since CCODE-511; this function was still refusing the join
+ *  underneath it. ⚠️ MEASURED ON HIS SAVE: Loki travels with four and has three places, so EVERY new join was
+ *  refused — 7 of the first 8 people the picker offered him — and the sentence blamed the person.
+ *
+ *  ⛑ IT NEVER EJECTS, which was always right: a save whose rapport no longer covers its company keeps everyone.
+ *  And a rejoin is not a new place — someone walking back into a party they already belong to is returning to one.
+ *
+ *  Returns `{ ok, entry, why, placed: "forward"|"line", places, rejoined, already }`. `placed` is READ from
+ *  `forwardCompany`, never recomputed, so the picker's sentence and the party tab cannot disagree. */
 export function recruit(character, npcId, { roles = ["ally"], teaches = null, liaisonFor = null, day = null, ladder = null } = {}) {
   ensureCompany(character);
-  if (ladder) {
-    const existing = character.company.find(m => m.npcId === npcId);
-    const rejoining = !!(existing && existing.leftDay);
-    const isNew = !existing || rejoining;
-    if (isNew && !rejoining && activeCompany(character).length >= companyPlaces(ladder, character)) return null;
-  }
+  // ⚠️ THE ONE REFUSAL LEFT, and it is a caller's mistake rather than a rule: there is nobody to recruit. Every
+  // other gate belongs to the caller (`canBringForward` runs before the Bands button, for instance) — and a REASON
+  // comes back rather than a bare null, because a null became "They will not come." on screen.
+  if (!npcId) return { ok: false, entry: null, why: "There is nobody there to ask.", placed: null, places: null };
+  const existing = character.company.find(m => m.npcId === npcId);
+  const rejoining = !!(existing && existing.leftDay);
+  const already = !!(existing && !existing.leftDay);
   const clean = [...new Set(roles.map(String).filter(r => COMPANY_ROLES.includes(r) && r !== "partner"))];
   let entry = character.company.find(m => m.npcId === npcId);
   if (!entry) { entry = { npcId, roles: [], teaches: null, liaisonFor: null, joinedDay: day }; character.company.push(entry); }
@@ -175,7 +186,18 @@ export function recruit(character, npcId, { roles = ["ally"], teaches = null, li
   if (teaches || fromRegistry) entry.teaches = teaches || fromRegistry;
   if (!teaches && fromRegistry) entry.roles = [...new Set([...entry.roles, "trainer"])];
   if (liaisonFor) entry.liaisonFor = liaisonFor;
-  return entry;
+  // ⛑ WHICH OF THE TWO TIERS THEY LANDED IN, asked of the function that OWNS the answer. A second derivation here
+  // would be the party tab and the picker disagreeing about where somebody stands, which is the defect class this
+  // whole fix is about.
+  const fwd = ladder ? forwardCompany(character, { ladder }) : null;
+  const inLine = !!fwd && !fwd.forward.some(m => String(m.npcId) === String(npcId));
+  return {
+    ok: true, entry, rejoined: rejoining, already,
+    placed: inLine ? "line" : "forward", places: fwd ? fwd.places : null,
+    why: inLine
+      ? `They walk with you and stand in the line — you can bring ${fwd.places} forward, and closeness is what earns a named place.`
+      : null,
+  };
 }
 
 /** Leave the company — remove the membership and, with it, its benefits (the teacher gate closes for

@@ -182,7 +182,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.14.9";
+const APP_VERSION = "2.14.10";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -17491,9 +17491,17 @@ function showPartyAddPicker() {
   for (const b of pop.querySelectorAll("[data-party-take]")) b.onclick = () => {
     const id = b.dataset.partyTake;
     const r = recruit(character, id, { roles: ["ally"], day: absoluteWorldDay(), ladder: CONTENT.rules?.subAttributeLadder || null });
-    if (!r?.ok) { alert(r?.why || "They will not come."); return; }
     const nm = character.npcRegistry?.[id]?.name || CONTENT.npcs?.[id]?.name || id;   // ⚠️ every `nameOf` in this file is a LOCAL closure; there is no global one to call
-    queueHoldingEvent(character, `${nm} walks with you now.`);
+    // ⛔ CCODE-555 — THIS GUARD FIRED ON EVERY SUCCESS. `recruit` returned a company ENTRY, which has no `ok`, so
+    // `!r?.ok` was always true: the person joined, the alert said "They will not come.", and this `return` skipped
+    // the save so the join was thrown away as well. Erik: *"when I try to add my other allies to my party, it says
+    // they refuse."* ⛑ The function returns `{ ok, entry, why, placed }` now, and a refusal carries a sentence.
+    if (!r.ok) { alert(r.why || "They will not come."); return; }
+    // ⛑ AND WHERE THEY STAND IS SAID, because the cap is on the named place and not on the join (Erik, CCODE-511).
+    // `placed` is `forwardCompany`'s own answer, so this line and the party tab cannot disagree.
+    queueHoldingEvent(character, r.placed === "line"
+      ? `${nm} walks with you now, in the line — you can bring ${r.places} forward, and closeness is what earns a named place.`
+      : `${nm} walks with you now.`);
     saveCharacter(character); close(); renderPartyTab();
   };
 }
@@ -18117,7 +18125,7 @@ function wireObFoe(again) { for (const el of app.querySelectorAll("[data-ob-foe]
  *  (`lineSplit`, with the Party tab's pick as the default the fight also reads). */
 function partyNow() {
   const all = alliesOf(character, { catalog: fullCatalog(), fnIndex: FN_INDEX, party: seatParty(), companions: CONTENT.companions || {},
-    npcs: { ...(CONTENT.npcs || {}), ...(character.npcRegistry || {}) }, company: character.company || null });
+    npcs: CONTENT.npcs || {}, company: character.company || null });   // ⛑ CCODE-555: `alliesOf` merges the registry PER PERSON now — a whole-map merge here was narrowing Pell by four families
   const lead = commandSlots(character, { cfg: meleeCfg() });
   const present = all.filter(a => a.present !== false && !a.isPlayer && a.kind !== "player");
   const split = lineSplit(all, { chosen: character.partyForward || null, lead, presentCount: present.length });
@@ -18572,7 +18580,11 @@ function renderBandsTab() {
     const row = poolRows(character, opts).find(r => r.id === id);
     const gate = canBringForward(character, row, { ladder });
     if (!gate.ok) { alert(gate.why); return; }
-    if (!recruit(character, id, { roles: ["ally"], day, ladder })) { alert("There is no place at your side for them today."); return; }
+    // ⛑ CCODE-555: the cap is on the named place, not on the join, so the old "no place at your side" refusal is
+    // gone — what is left is a real refusal with its own sentence, and otherwise where they landed.
+    const r555 = recruit(character, id, { roles: ["ally"], day, ladder });
+    if (!r555.ok) { alert(r555.why); return; }
+    if (r555.placed === "line" && r555.why) queueHoldingEvent(character, `${esc(row?.name || id)} is at your side, in the line. ${r555.why}`);
     saveCharacter(character); renderBandsTab();
   };
   for (const b of app.querySelectorAll("[data-band-part]")) b.onclick = () => {
@@ -18717,10 +18729,14 @@ function renderChronicle() {
         const raw = (character.sessions || []).find(x => x.id === s.id) || {};
         const span = s.startDay != null && s.endDay != null ? (s.startDay === s.endDay ? `day ${s.startDay}` : `days ${s.startDay}–${s.endDay}`) : "";
         const title = `${s.ended ? "▪" : "▸"} ${span || s.id} · ${s.beats} beat${s.beats === 1 ? "" : "s"}${s.deeds.length ? ` · ${s.deeds.length} deed${s.deeds.length === 1 ? "" : "s"}` : ""}`;
-        const recap = raw._recapBusy ? `<div class="insight">writing the recap…</div>` : raw.recap ? `<p class="chronicle-para">${esc(raw.recap)}</p>` : "";
+        // ⛔ CCODE-555 — AND THE REFUSAL IS SHOWN. `_recapError` has been written and saved since SNG-128 and rendered
+        // nowhere: a failed recap looked exactly like nothing happening. Found by the §3 sweep Aevi asked for.
+        const recap = raw._recapBusy ? `<div class="insight">writing the recap…</div>`
+          : raw.recap ? `<p class="chronicle-para">${esc(raw.recap)}</p>`
+          : raw._recapError ? `<div class="hint" style="color:var(--warn,#e0b25a)">${esc(raw._recapError)}</div>` : "";
         return `<details class="session-entry"><summary>${esc(title)}</summary><div class="sec-body">
           ${recap}
-          ${getApiKey() && !raw.recap ? `<button class="btn secondary session-recap" data-sess="${esc(s.id)}" style="margin:2px 0 6px" ${raw._recapBusy ? "disabled" : ""}>✍ Write session recap</button>` : ""}
+          ${getApiKey() && !raw.recap ? `<button class="btn secondary session-recap" data-sess="${esc(s.id)}" style="margin:2px 0 6px" ${raw._recapBusy ? "disabled" : ""}>✍ ${raw._recapError ? "Try the recap again" : "Write session recap"}</button>` : ""}
           ${syncEnabled() && raw.recap ? `<button class="btn secondary session-post" data-postsess="${esc(s.id)}" style="margin:2px 0 6px" title="Share this session's story on the family feed — a little narrative of what happened, lensed to each viewer's rating. Never canon.">📮 Post this session to the feed</button>` : ""}
           ${s.deeds.length ? `${s.deeds.map(d => `<div class="chronicle-deed"><span class="rep-band ${d.weight >= 0 ? "trusted" : "wary"}">${d.weight > 0 ? "+" : ""}${d.weight}</span> ${esc(d.description)}</div>`).join("")}` : "<div class='insight'>a quiet span — no deeds of note</div>"}
           ${s.placesMinted.length ? `<div class="hint">✦ Places you made: ${s.placesMinted.map(esc).join(", ")}</div>` : ""}
@@ -20236,7 +20252,7 @@ function skillBattlePanel() {
       // R36 for a human: an ally's CRAFTS say what they bring, so the forward/folded pips are labelled by what
       // each person actually does rather than by a hardcoded "HARM, MARTIAL" for everyone.
       const all = alliesOf(character, { catalog: fullCatalog(), fnIndex: FN_INDEX, party: seatParty(), companions: CONTENT.companions || {},
-        npcs: { ...(CONTENT.npcs || {}), ...(character.npcRegistry || {}) }, company: character.company || null });
+        npcs: CONTENT.npcs || {}, company: character.company || null });   // ⛑ CCODE-555: `alliesOf` merges the registry PER PERSON now — a whole-map merge here was narrowing Pell by four families
       if (all.length < 2) return "";
       const lead = commandSlots(character, { cfg: meleeCfg() });
       // ⛔ SNG-588 — THE SAME SPLIT THE FIGHT RESOLVES FROM. This called `bringForward(all, { slots: lead.slots })`
@@ -22202,15 +22218,16 @@ function renderPlay(turn, opts = {}) {
   for (const btn of app.querySelectorAll("[data-recruit]")) btn.onclick = () => {
     const id = btn.dataset.recruit; const cat = CONTENT.npcs[id] || {}; const nm = character.npcRegistry?.[id]?.name || cat.name || "They";
     if (!confirm(`Ask ${nm} to travel with you?`)) return;
-    // ⚠️ SNG-390: the ladder decides how many places are at your side. A refusal returns null and is
-    // SAID, not swallowed — a button that silently does nothing is indistinguishable from a broken one.
+    // ⛑ CCODE-555 — THE LADDER DECIDES THE NAMED PLACES, NOT WHO MAY COME (Erik, CCODE-511). The refusal this
+    // branch used to print was the cap turning away someone who would have come; `placed` says which tier they
+    // landed in instead, and a real refusal still speaks rather than being swallowed.
     const joined = recruit(character, id, { roles: offeredRoles(cat), teaches: cat.teaches || null, liaisonFor: cat.liaisonFor || null, day: absoluteWorldDay(), ladder: CONTENT.rules.subAttributeLadder });
-    if (!joined) {
-      renderPlay(character.activeScene?.lastTurn || null, { aside: `${nm} would come, but you can keep ${companyPlaces(CONTENT.rules.subAttributeLadder, character)} at your side. Rapport is what widens that.` });
+    if (!joined.ok) {
+      renderPlay(character.activeScene?.lastTurn || null, { aside: joined.why });
       return;
     }
     saveCharacter(character);
-    renderPlay(character.activeScene?.lastTurn || null, { aside: `${nm} joins your company${cat.teaches ? ` — they can teach you the ${traditionLabel(cat.teaches)} craft` : ""}${cat.liaisonFor ? `, and speak for you among their people` : ""}.` });
+    renderPlay(character.activeScene?.lastTurn || null, { aside: `${nm} joins your company${joined.placed === "line" ? `, in the line — you can bring ${joined.places} forward, and closeness is what earns a named place` : ""}${cat.teaches ? ` — they can teach you the ${traditionLabel(cat.teaches)} craft` : ""}${cat.liaisonFor ? `, and speak for you among their people` : ""}.` });
   };
   for (const btn of app.querySelectorAll("[data-partally]")) btn.onclick = () => {
     const id = btn.dataset.partally; const nm = character.npcRegistry?.[id]?.name || "They";
@@ -22325,7 +22342,10 @@ function renderPlay(turn, opts = {}) {
     const off = (character.pendingCompanyOffers || []).find(o => o.npcId === id);
     const got = recruit(character, id, { roles: off?.roles?.length ? off.roles : ["ally"], day: absoluteWorldDay(), ladder: CONTENT.rules.subAttributeLadder });
     character.pendingCompanyOffers = (character.pendingCompanyOffers || []).filter(o => o.npcId !== id);
-    if (!got) { alert("There is no place at your side for them today — rapport is what widens that."); }
+    // ⛑ CCODE-555: accepting an offer no longer runs into the cap — it says where they stand instead, in the
+    // channel this screen already speaks through rather than a dialog over a thing that worked.
+    if (!got.ok) alert(got.why);
+    else if (got.placed === "line" && got.why) queueHoldingEvent(character, got.why);
     saveCharacter(character); renderPlay(character.activeScene?.lastTurn, {});
   };
   // ⛔ CCODE-360: her answer goes to the shared file first; a yes is only recorded on her save once it has gone.

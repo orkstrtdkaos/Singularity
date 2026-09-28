@@ -22399,11 +22399,18 @@ console.log("\n── §283 · one person, one answer, every door ──");
       seen283++;
       const door = [...(a.contributions || [])].sort().join(",");
       const own = CB283.contributionsOf(rec, { evidence: true }).slice().sort().join(",");
-      if (door === own) agreed283++; else off283.push(`${rec.name || a.id}: door [${door}] vs record [${own}]`);
+      // ⚠️ THIS ASKED FOR EQUALITY AND WENT RED ON CCODE-555, when `alliesOf` began reading a person's AUTHORED
+      // record and the one play wrote onto them as the same person. ⛑ What this gate guards is in its own title:
+      // *a surface that forgets to ask the FULLER question* — a door that says LESS than the record. Equality was that
+      // rule's tight form while there was only one record to compare against; the rule is CONTAINMENT, and a door
+      // that says more because it read a second record of the same person is not the defect.
+      const ownFams = own ? own.split(",") : [], doorFams = door ? door.split(",") : [];
+      if (ownFams.every(f => doorFams.includes(f))) agreed283++;
+      else off283.push(`${rec.name || a.id}: door [${door}] is MISSING ${ownFams.filter(f => !doorFams.includes(f)).join(",")} that the record says`);
     }
   }
-  check("§283: ⛔ WHAT THE PARTY SCREEN SAYS A PERSON BRINGS IS WHAT THEIR RECORD SAYS THEY BRING — every ally on every save, so a surface that forgets to ask the fuller question is caught by the population and not by one fixture",
-    seen283 > 0 && agreed283 === seen283, off283.slice(0, 4).join(" · ") || `${agreed283} of ${seen283} allies agree`);
+  check("§283: ⛔ THE PARTY SCREEN NEVER SAYS LESS THAN THE RECORD SAYS — every ally on every save, so a surface that forgets to ask the fuller question is caught by the population and not by one fixture",
+    seen283 > 0 && agreed283 === seen283, off283.slice(0, 4).join(" · ") || `${agreed283} of ${seen283} allies say at least what their record says`);
   check("§283: ⛑ …and it rides through `alliesOf`'s own options, the third time this exact defect has appeared one level up (CCODE-265 was `stageOf`)",
     // ⚠️ and asserted as the RULE, not the literal: CCODE-265's version of this check pinned the whole object and went red the
     // moment `evidence` joined it, which is the fifth gate of mine to measure the punctuation instead of the rule.
@@ -31493,6 +31500,172 @@ console.log("\n── §383 · a gate at a settlement opens into a yard outside 
         && !/the asset is minified/.test(PR)                     // …and the false premise that made it re-flow the file
         && /JSON\.stringify\(next, null, indent\)/.test(PR);
     })());
+}
+
+
+/* ══════════ §384 · CCODE-555 — THE BUTTONS THAT DID NOTHING, AND THE RECORD BEHIND THEM ══════════ */
+// ⛔ ERIK, PLAYING LOKI (2026-09-28): *"some buttons don't work — such as let them hang back, or keep out of it. They
+// don't seem to do anything. Also, when I try to add my other allies to my party, it says they refuse. Is that
+// because they are not next to me?"*
+//
+// ⚠️ IT WAS NOT DISTANCE. Location is read nowhere on that path. It was three separate defects, all of the same
+// family — a write with no reader, and two sides of one call disagreeing about a shape:
+//   1 · `allyOrders[id].holdBack` had ONE hit in the whole tree and it was the write. The card's label and every
+//       fight reader ask `present === false`, and nothing turned the order into the fact.
+//   2 · the CCODE-524 picker asks `if (!r?.ok)`, and `recruit` returned a company ENTRY with no `ok` field — so the
+//       guard fired on every SUCCESS: the person joined, the alert said "They will not come.", and the `return`
+//       skipped the save so the join was discarded too. Capped or not, that button had never worked.
+//   3 · and the cap underneath it was refusing the JOIN, which Erik's CCODE-511 ruling had already moved to the
+//       named place. Measured: Loki travels with four and has three places, so every new join was refused.
+console.log("\n── §384 · the buttons that did nothing ──");
+{
+  const CB384 = await import("../engine/combatants.js");
+  const CO384 = await import("../engine/company.js");
+  const { loadContentHeadless: lch384 } = await import("./headless_content.mjs");
+  const C384 = await lch384();
+  const ladder384 = C384.rules?.subAttributeLadder || null;
+
+  /* ---- 1 · ⛔ AN ORDER TO HANG BACK IS READ ---- */
+  const mkChar = (extra = {}) => ({
+    id: "c384", name: "Probe", level: 8, subAttributes: { rapport: 5 },
+    npcRegistry: { a1: { id: "a1", name: "Arden", relationship: 40, role: "warden" },
+                   a2: { id: "a2", name: "Beryl", relationship: 40, role: "mender" } },
+    company: [{ npcId: "a1", roles: ["ally"], joinedDay: 1 }, { npcId: "a2", roles: ["ally"], joinedDay: 1 }],
+    ...extra,
+  });
+  const deps384 = { companions: C384.companions || {}, npcs: C384.npcs || {}, rules: C384.rules, catalog: C384.abilities || null };
+  const plain384 = CB384.alliesOf(mkChar(), deps384);
+  const held384 = CB384.alliesOf(mkChar({ allyOrders: { a1: { holdBack: true } } }), deps384);
+  check("§384: ⛔ \"KEEP OUT OF IT\" LEAVES THE LINE — `allyOrders[id].holdBack` had one hit in the whole tree and it was the write; the card's label and every fight reader ask `present === false`",
+    plain384.every(a => a.present !== false)
+    && held384.find(a => a.id === "a1")?.present === false
+    && held384.find(a => a.id === "a1")?.heldBack === true
+    && held384.find(a => a.id === "a2")?.present !== false,
+    JSON.stringify(held384.filter(a => !a.isPlayer).map(a => [a.id, a.present])));
+  // ⛑ AND IT IS ONE READER, which is why every consumer honours it at once. `targetableAllies` is the one the
+  // comment beside `present` names: "the one that got missed would be the one that swung at someone in the air."
+  check("§384: ⛑ …and the FIGHT honours it through the same field — `targetableAllies` cannot see them, so nothing swings at someone who is not in the line",
+    CB384.targetableAllies(mkChar({ allyOrders: { a1: { holdBack: true } } }), deps384).every(a => a.id !== "a1")
+    && CB384.targetableAllies(mkChar(), deps384).some(a => a.id === "a1"));
+  check("§384: ⚠️ …and the order is a PREDICATE, exported, so a surface can ask it without building a roster",
+    CB384.heldBack({ allyOrders: { x: { holdBack: true } } }, "x") === true
+    && CB384.heldBack({ allyOrders: { x: { holdBack: false } } }, "x") === false
+    && CB384.heldBack({ allyOrders: {} }, "x") === false
+    && CB384.heldBack(null, "x") === false && CB384.heldBack({}, null) === false);
+  // ⛔ AND THE BUTTON WRITES WHAT THE READER READS. A gate on the engine alone would have passed the whole time
+  // this was broken: the write and the read have to be the same field name, and that is the defect.
+  const APP384 = rd("app.js").replace(/\r\n/g, "\n");
+  check("§384: ⛔ …and the BUTTON writes the field the reader reads — the engine half alone was never the bug",
+    /\[data-ally-hold\]/.test(APP384) && /o\.holdBack = !o\.holdBack;/.test(APP384)
+    && /holdBack/.test(rd("engine/combatants.js")));
+
+  /* ---- 2 · ⛔ THE JOIN SUCCEEDS, AND SAYS WHERE THEY STAND ---- */
+  // ⚠️ MEASURED ON LOKI'S LIVE SAVE: four travelling, three places, so `activeCompany >= companyPlaces` and every
+  // new join returned a bare null — 7 of the first 8 people the picker offered him.
+  const atCap384 = mkChar({ subAttributes: { rapport: 1 }, level: 1 });
+  const placesAt = ladder384 ? CO384.forwardCompany(atCap384, { ladder: ladder384 }).places : null;
+  check("§384: ⚠️ the fixture is AT THE CAP, or the next check proves nothing — two travelling against the places a rapport of 1 earns",
+    placesAt != null && CO384.activeCompany(atCap384).length >= placesAt, `${CO384.activeCompany(atCap384).length} vs ${placesAt}`);
+  const joined384 = CO384.recruit(atCap384, "a3", { roles: ["ally"], day: 5, ladder: ladder384 });
+  check("§384: ⛔ THE CAP IS ON THE NAMED PLACE, NOT ON THE JOIN (Erik, CCODE-511) — at the cap they still come, and they stand in the line",
+    joined384.ok === true && !!joined384.entry && joined384.entry.npcId === "a3"
+    && joined384.placed === "line" && joined384.places === placesAt
+    && /stand in the line/.test(joined384.why || "")
+    && CO384.activeCompany(atCap384).some(m => m.npcId === "a3"),
+    JSON.stringify(joined384));
+  check("§384: ⛑ …and `placed` is `forwardCompany`'s OWN answer, never a second derivation — the picker's sentence and the party tab cannot disagree",
+    (() => {
+      const fwd = CO384.forwardCompany(atCap384, { ladder: ladder384 });
+      const inLine = fwd.alongside.some(m => m.npcId === "a3");
+      return inLine && joined384.placed === "line" && /forwardCompany\(character, \{ ladder \}\)/.test(rd("engine/company.js"));
+    })());
+  // ⚠️ AND THE ROOMY FIXTURE HAS TO ACTUALLY BE ROOMY. My first one reused `mkChar()` — rapport 5 at level 8
+  // earns TWO places, and it already had two members, so "with room" was at the cap and the check was asking the
+  // wrong question of the right code.
+  const roomyChar = { id: "c384b", name: "Roomy", level: 20, subAttributes: { rapport: 9 },
+    npcRegistry: { a1: { id: "a1", name: "Arden", relationship: 40, role: "warden" } },
+    company: [{ npcId: "a1", roles: ["ally"], joinedDay: 1 }] };
+  const roomyPlaces = CO384.forwardCompany(roomyChar, { ladder: ladder384 }).places;
+  check("§384: ⚠️ the roomy fixture has ROOM, or the next check asks the wrong question of the right code",
+    roomyPlaces > CO384.activeCompany(roomyChar).length, `${CO384.activeCompany(roomyChar).length} of ${roomyPlaces}`);
+  const roomy384 = CO384.recruit(roomyChar, "a3", { roles: ["ally"], day: 5, ladder: ladder384 });
+  check("§384: ⚑ …and with room they come FORWARD and there is nothing to say about it",
+    roomy384.ok === true && roomy384.placed === "forward" && roomy384.why === null, JSON.stringify(roomy384));
+  // ⛔ THE RETURN SHAPE, AND EVERY CALLER ON IT. `{ ok: false }` is TRUTHY, so a caller still testing `if (!got)`
+  // would read a refusal as a join — the same trap one turn later, and silent.
+  const bad384 = CO384.recruit(mkChar(), null, { ladder: ladder384 });
+  check("§384: ⛔ A REFUSAL CARRIES A SENTENCE, never a bare null — a null became \"They will not come.\" on screen and blamed the person",
+    bad384.ok === false && typeof bad384.why === "string" && bad384.why.length > 10 && bad384.entry === null);
+  // ⚠️ AND THE QUESTION IS ASKED AT THE CALL SITE, not over the file. My first version counted `!r.ok` across all
+  // of app.js, which says it in a dozen unrelated handlers — a gate that would have passed with every recruit caller
+  // still on truthiness. Each call site's own next 400 characters have to name the variable and test `.ok` on it.
+  check("§384: ⛔ …and ALL FOUR call sites test `.ok` ON THE VALUE THEY GOT, not truthiness — `{ ok: false }` is truthy, so one left behind would read a refusal as a join",
+    (() => {
+      const sites = [...APP384.matchAll(/(?:const|let) (\w+) = recruit\(character,/g)];
+      if (sites.length < 4) return false;
+      return sites.every((m, i) => {
+        // ⚠️ THE WINDOW RUNS TO THE NEXT CALL SITE, not a fixed 600 characters: my first version cut the picker's
+        // own guard off, because the comment explaining the defect sits between the call and the test.
+        const after = APP384.slice(m.index, Math.min(sites[i + 1]?.index ?? APP384.length, m.index + 2400));
+        return new RegExp(`!${m[1]}\\.ok`).test(after) && !new RegExp(`if \\(!${m[1]}\\)`).test(after);
+      });
+    })(), `recruit call sites: ${[...APP384.matchAll(/(?:const|let) (\w+) = recruit\(character,/g)].map(m => m[1]).join(", ")}`);
+  check("§384: ⚠️ …and a SUCCESS does not get a modal — where they stand goes to the channel each screen already speaks through",
+    !/alert\(`\$\{nm\} walks with you/.test(APP384) && /queueHoldingEvent\(character, r\.placed === "line"/.test(APP384));
+  // ⛔ AND THE OLD REFUSAL SENTENCE IS GONE FROM EVERY SCREEN, because the rule it described is retired.
+  // ⚠️ AND THIS READ ITS OWN COMMENT the first time it ran: the line above the fix NAMES the retired sentence to
+  // explain it. Sixth time. Comment lines are stripped before the question is asked.
+  const codeOnly384 = (s) => String(s || "").split(NEWLINE_RE).filter(l => !/^\s*(\/\/|\*|\/\*)/.test(l)).join(String.fromCharCode(10));
+  check("§384: ⛔ …and \"there is no place at your side\" is gone from the CODE — it described a cap Erik moved to the named place",
+    !/no place at your side/i.test(codeOnly384(APP384)));
+
+  /* ---- 3 · ⛔ ONE RECORD RULE, AND IT MAY NOT NARROW ANYBODY ---- */
+  // ⚠️ THE SWEEP AEVI ASKED FOR FOUND THIS. `alliesOf` looked a company member up in the `npcs` map its CALLER
+  // injected, and of four callers TWO passed `{ ...CONTENT.npcs, ...npcRegistry }` while two passed `CONTENT.npcs`
+  // alone. Almost everybody you meet in play lives ONLY in the registry — measured, 3 of Loki's 4 companions have no
+  // CONTENT record — so for two callers they arrived as the bare company entry: the raw id as a name, no attributes
+  // for a champion sheet, and HARM for people whose crafts say otherwise.
+  const reg384 = { z1: { id: "z1", name: "Zephyr", relationship: 40, role: "mender", description: "a quiet healer" } };
+  const only384 = CB384.alliesOf({ npcRegistry: reg384, company: [{ npcId: "z1", roles: ["ally"], joinedDay: 1 }] },
+    { companions: {}, npcs: {}, rules: C384.rules, catalog: C384.abilities || null });
+  check("§384: ⛔ A PERSON WHO LIVES ONLY IN THE SAVE'S OWN REGISTRY IS STILL A PERSON — the raw id was on screen, and a champion sheet was built from nothing",
+    only384.find(a => a.id === "z1")?.name === "Zephyr"
+    && Object.keys(only384.find(a => a.id === "z1")?.record || {}).length > 3,
+    JSON.stringify(only384.filter(a => !a.isPlayer).map(a => a.name)));
+  // ⛑ AND THE MERGE IS PER PERSON, WITH THE FAMILIES AS A UNION — because a whole-map merge CAN narrow, and did:
+  // registry-over-content dropped Pell from six contribution families to two on the party screen.
+  const bothAuthored = { id: "w1", name: "Authored", role: "warden", assistTags: ["PROTECT"], description: "stands in front" };
+  const bothPlayed = { id: "w1", name: "Authored", relationship: 55, description: "has taken to mending since" };
+  const union384 = CB384.alliesOf(
+    { npcRegistry: { w1: bothPlayed }, company: [{ npcId: "w1", roles: ["ally"], joinedDay: 1 }] },
+    { companions: {}, npcs: { w1: bothAuthored }, rules: C384.rules, catalog: C384.abilities || null });
+  const onlyAuthored = CB384.alliesOf({ company: [{ npcId: "w1", roles: ["ally"], joinedDay: 1 }] },
+    { companions: {}, npcs: { w1: bothAuthored }, rules: C384.rules, catalog: C384.abilities || null });
+  const famsOf = (r, id) => (r.find(a => a.id === id)?.contributions || []).slice().sort();
+  check("§384: ⛔ …AND THE MERGE MAY NOT NARROW ANYBODY. A record written in play replaces an authored `description` a family was found in — so the FAMILIES are a union over both records, which is this module's own stated rule",
+    famsOf(union384, "w1").length >= famsOf(onlyAuthored, "w1").length
+    && famsOf(onlyAuthored, "w1").every(f => famsOf(union384, "w1").includes(f))
+    && union384.find(a => a.id === "w1")?.record?.relationship === 55,
+    `authored [${famsOf(onlyAuthored, "w1")}] · merged [${famsOf(union384, "w1")}]`);
+  check("§384: ⛑ …and the RULE IS IN ONE PLACE — the two call sites that merged the maps by hand were the ones doing the narrowing",
+    !/npcs: \{ \.\.\.\(CONTENT\.npcs \|\| \{\}\), \.\.\.\(character\.npcRegistry \|\| \{\}\) \}/.test(APP384)
+    && /const people = \(\(\) => \{/.test(rd("engine/combatants.js")));
+  // ⚠️ AND A COMPANION'S RECORD IS THE AUTHORED ONE. I folded the registry into that branch too and measured what it
+  // cost: Pell fell from six families to two, because a registry copy of an authored companion is a thinner one.
+  check("§384: ⚠️ …and a COMPANION keeps its authored record, which is what the companions map is for",
+    /const rec = \{ \.\.\.def, \.\.\.\(typeof c === "object" \? c : \{\}\) \};/.test(rd("engine/combatants.js")));
+
+  /* ---- 4 · ⛔ THE FOURTH DOOR THE SWEEP FOUND: AN APOLOGY NOBODY RENDERED ---- */
+  // `ensureSessionRecap` writes `_recapError = "Couldn't write the recap — try again."` and SAVES it. Two hits in the
+  // whole tree, both writes, and the fixture save carries it on three sessions — so a failed recap has looked exactly
+  // like nothing happening since SNG-128.
+  check("§384: ⛔ A FAILED RECAP SAYS SO — the apology was written, saved for months, and rendered nowhere",
+    /raw\._recapError = "Couldn't write the recap/.test(APP384)
+    && /raw\._recapError \? `<div class="hint"/.test(APP384)
+    && /raw\._recapError \? "Try the recap again"/.test(APP384));
+  check("§384: ⛑ …and the sweep that found it is a TOOL, so the next one is a command rather than a memory",
+    /querySelectorAll\\\("\\\[\(data-\[a-z-\]\+\)\\\]"\\\)/.test(rd("po/tools/sweep_button_writes.mjs"))
+    || /HANDLER = /.test(rd("po/tools/sweep_button_writes.mjs")));
 }
 
 /* ══════════ REPORT ══════════ */

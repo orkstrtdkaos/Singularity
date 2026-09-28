@@ -7425,8 +7425,16 @@ await (async () => {
     check("395: rapport names the places at your side — 1, then 2 at rank 4, 3 at 7, 4 at 10",
       [1, 2, 3, 4].every((n, i) => L390.companyPlaces(lad390, at({ rapport: [1, 4, 7, 10][i] })) === n));
     const full = { subAttributes: { rapport: 1 }, company: [{ npcId: "a", roles: ["ally"], joinedDay: 1 }], npcRegistry: {} };
-    check("395: a join past capacity is REFUSED, and refused where joins really happen (recruit, not the dead op)",
-      co390.recruit(full, "b", { day: 2, ladder: lad390 }) === null);
+    // ⚠️ THIS ASSERTED "a join past capacity is REFUSED" AND ERIK OVERRULED IT (CCODE-511, and Erik in play on
+    // 2026-09-28: *"when I try to add my other allies to my party, it says they refuse"*). The cap is on the NAMED
+    // PLACE now, so a full company still takes them — into the line, and the result says which tier they landed in.
+    // ⛑ What the cap still does is everything below: rapport names the places, nobody is ejected, a rejoin is free,
+    // and with no ladder there is no cap. Only "and turns the rest away" is gone.
+    const capped390 = co390.recruit(full, "b", { day: 2, ladder: lad390 });
+    check("395: a join past capacity STILL COMES — into the line, because the cap is on the named place (CCODE-511)",
+      capped390.ok === true && capped390.placed === "line" && capped390.places === 1
+      && co390.activeCompany(full).some(m => m.npcId === "b")
+      && /stand in the line/.test(capped390.why || ""), JSON.stringify(capped390));
     // ⚠️ NEVER RETROACTIVE. A save whose rapport no longer covers its company keeps everyone.
     const over = { subAttributes: { rapport: 1 }, company: [{ npcId: "a", roles: ["ally"], joinedDay: 1 }, { npcId: "b", roles: ["ally"], joinedDay: 1 }], npcRegistry: {} };
     check("395: an over-capacity save loses NOBODY — the cap refuses a new join, it never ejects",
@@ -7434,9 +7442,12 @@ await (async () => {
     // ⚠️ A REJOIN IS NOT A NEW PLACE — someone walking back in is returning to a seat, not taking one.
     const left = { subAttributes: { rapport: 1 }, company: [{ npcId: "a", roles: ["ally"], joinedDay: 1 }, { npcId: "gone", roles: ["ally"], joinedDay: 1, leftDay: 5 }], npcRegistry: {} };
     check("395: …and someone who left can come back even at capacity",
-      !!co390.recruit(left, "gone", { day: 9, ladder: lad390 }));
-    check("395: with no ladder passed the cap does not apply — every existing caller keeps working",
-      !!co390.recruit({ subAttributes: { rapport: 1 }, company: [{ npcId: "a", roles: ["ally"], joinedDay: 1 }], npcRegistry: {} }, "b", { day: 2 }));
+      co390.recruit(left, "gone", { day: 9, ladder: lad390 }).ok === true);
+    check("395: with no ladder passed there is no cap and no tier to report — every existing caller keeps working",
+      (() => {
+        const r = co390.recruit({ subAttributes: { rapport: 1 }, company: [{ npcId: "a", roles: ["ally"], joinedDay: 1 }], npcRegistry: {} }, "b", { day: 2 });
+        return r.ok === true && r.placed === "forward" && r.places === null;
+      })());
   }
 
   // ══ SNG-390 — THE WORLD AS A GLOBE. Erik: the 3D map takes the place of the card table.

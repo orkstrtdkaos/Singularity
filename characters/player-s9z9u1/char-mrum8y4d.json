@@ -16152,8 +16152,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790636670760,
-  "rev": 1109,
+  "updatedAt": 1790636792009,
+  "rev": 1110,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -18989,7 +18989,7 @@
     {
       "id": "band-the-questioning-churn-revelers",
       "name": "The Questioning Churn-Revelers",
-      "count": 9,
+      "count": 12,
       "quality": 1,
       "from": "the_standing_annex",
       "condition": "fresh",
@@ -19094,6 +19094,16 @@
           ],
           "what": "Orla Yardley — A Syllogist who came carrying a breaking mandate and chose to que",
           "npcId": "orla-yardley"
+        },
+        {
+          "n": 3,
+          "quality": 1,
+          "does": [
+            "HARM",
+            "MARTIAL"
+          ],
+          "what": "raised at The Standing Annex",
+          "from": "the_standing_annex"
         }
       ],
       "captain": "halvex_coil"
@@ -19492,6 +19502,10 @@
     },
     {
       "text": "Orla Yardley stands in The Questioning Churn-Revelers now.",
+      "announced": false
+    },
+    {
+      "text": "3 hands raised at The Standing Annex for The Questioning Churn-Revelers.",
       "announced": false
     }
   ],

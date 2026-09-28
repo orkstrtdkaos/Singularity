@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 11,
-  "xp": 1035,
+  "xp": 1046,
   "attributes": {
     "physical": 4,
     "mental": 5,
@@ -104,7 +104,7 @@
     },
     {
       "abilityId": "the_old_procedure",
-      "level": 1
+      "level": 3
     },
     {
       "abilityId": "shadow-image",
@@ -122,23 +122,23 @@
     }
   ],
   "alignment": {
-    "mechanical_spiritual": -0.05768500000000001,
+    "mechanical_spiritual": -0.024800750000000003,
     "falsehood_truth": 0.39737634150992956,
     "demonic_angelic": -0.020000000000000004,
     "dark_light": 0.085,
     "concrete_abstract": 0.20506701093165375,
-    "chaos_order": -0.016025694050781233,
+    "chaos_order": 0.004775590651757833,
     "body_mind": 0.0658375,
     "emotional_logical": 0.06720542789589842,
     "space_time": 0.0316,
     "violence_peace": 0.06510059374999999,
-    "destruction_creation": 0.07800000000000001
+    "destruction_creation": 0.11410000000000002
   },
   "attunement": 11,
   "maxHealth": 88,
   "health": 88,
   "maxEnergy": 166,
-  "energy": 115,
+  "energy": 110,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -517,6 +517,22 @@
       "_bonusApplied": 0.15,
       "day": 9,
       "worldDay": 90
+    },
+    {
+      "at": "2026-09-28T22:42:13.432Z",
+      "locationId": "gen-the-standing-annex",
+      "communityId": "valley.standing_annex",
+      "description": "Named a band—not to break, but to question—and spoke it into stone that listens. The Questioning Churn-Revelers were formed at the Standing Annex with intention and craft both.",
+      "tags": [
+        "valor",
+        "leadership",
+        "understanding"
+      ],
+      "weight": 2,
+      "spread": [],
+      "_bonusApplied": 0.15,
+      "day": 10,
+      "worldDay": 90
     }
   ],
   "relationships": {},
@@ -601,204 +617,273 @@
         "player": "invite Vail into the Annex so that everyone is together.",
         "summary": "The Churn-Revellers gather complete at the Standing Annex—Loki, Halvex, Orla, Ravel, Estry, Sable, Vail, and Cy all in one room at midday. The name Vessa Torquen of Pressureholt is about to be shared.",
         "narration": "You step to the threshold where Vail stands, her horse settling into the afternoon stillness. She does not turn until you are close—the precision of her attention is absolute.\n\n\"Come inside,\" you say. \"They're all here now. All of them. The ones you need to hear this from.\" You do not make it a command. You make it an invitation, steady and clear.\n\nShe reads your face for a moment—that same measuring stillness she turned on you at Whistling Woman Post. Then she moves. Her hand releases the horse's bridle and she steps across the threshold into the Annex's warmth, into the light from the open windows, into a room full of people watching her arrival.\n\nHalfvex stands by the interior window still. Orla is there with quiet precision. Ravel and Estry flank Sable, who has moved to the fire's edge. Cy clicks softly in its corner, lens irising. And now Vail is in the center of it, grey coat and absolute stillness, with nowhere left to stand at a distance."
+      },
+      {
+        "player": "Use the Old Procedure in the Standing Annex to anounce the official formation of the Questioning Churn-Revelers. Vessin Tallow-bark, Halvex Coil, Sable, Ravel, Orla Yardley, Vail Langley, Veln Ashpause, and Loki and Cy.  This band if formed not to break with chaos, but to question and find answers, which all here need.",
+        "summary": "You stand at the center of the Standing Annex, where the Precursor work beneath the stone hums faintly in the timbers…",
+        "narration": "You stand at the center of the Standing Annex, where the Precursor work beneath the stone hums faintly in the timbers. The fire crackles. Light falls steady through the windows. Eight people and one maintenance-thing gather in the circle you make—not accident, not convenience. Intention.\n\nYou reach for the Old Procedure, the craft that speaks to Precursor mechanism in the language mechanisms understand. Your hands move with the precision Cy taught you—a gesture that opens, that asks, that makes request of the stone itself. \"I name this gathering,\" you say, and your voice carries the harmonic weight of the work. \"The Questioning Churn-Revelers. Not sent to break. Sent to ask.\"\n\nThe stone answers. The thrumming beneath your feet shifts—not louder, not hostile. Recognition. A threshold opening. But the response is incomplete: the procedure carries weight, but it does not settle. Cy's lens clicks sharply. The hum wavers, then steadies. The stone has heard you, but something in the mechanism resists full closure—as if the Old Procedure is speaking to a lock that is listening in a language it half-remembers. The band is named. The formation holds. But it does not lock smooth.\n\nVeil Ashpause does not move. She watches the stone's response with that expression of terrible sympathy. Sable's hand finds Ravel's shoulder. Orla's eyes close for a moment—the precision of their conviction finding new ground. Halvex reads the resistance and nods slowly. Vail stands utterly still, witnessing. Vessin's fingers trace the air where the harmonic disruption was strongest, reading what the procedure left behind. Estry watches you, and her expression says: *you did something true, even though it bent.*\n\nThe band is formed. The question now is what that formation means to the Precursor work beneath this place—and what it will cost to answer.\n\n*✦ The Veilwrights: +1 — used the Old Procedure to make a band-naming that honors asking over breaking.*\n\n*✦ The Churnfolk: +1 — formed a Revel that questions rather than destroys.*"
       }
     ],
     "lastTurn": {
-      "narration": "You step to the threshold where Vail stands, her horse settling into the afternoon stillness. She does not turn until you are close—the precision of her attention is absolute.\n\n\"Come inside,\" you say. \"They're all here now. All of them. The ones you need to hear this from.\" You do not make it a command. You make it an invitation, steady and clear.\n\nShe reads your face for a moment—that same measuring stillness she turned on you at Whistling Woman Post. Then she moves. Her hand releases the horse's bridle and she steps across the threshold into the Annex's warmth, into the light from the open windows, into a room full of people watching her arrival.\n\nHalfvex stands by the interior window still. Orla is there with quiet precision. Ravel and Estry flank Sable, who has moved to the fire's edge. Cy clicks softly in its corner, lens irising. And now Vail is in the center of it, grey coat and absolute stillness, with nowhere left to stand at a distance.",
-      "sceneSummary": "The Churn-Revellers gather complete at the Standing Annex—Loki, Halvex, Orla, Ravel, Estry, Sable, Vail, and Cy all in one room at midday. The name Vessa Torquen of Pressureholt is about to be shared.",
+      "narration": "You stand at the center of the Standing Annex, where the Precursor work beneath the stone hums faintly in the timbers. The fire crackles. Light falls steady through the windows. Eight people and one maintenance-thing gather in the circle you make—not accident, not convenience. Intention.\n\nYou reach for the Old Procedure, the craft that speaks to Precursor mechanism in the language mechanisms understand. Your hands move with the precision Cy taught you—a gesture that opens, that asks, that makes request of the stone itself. \"I name this gathering,\" you say, and your voice carries the harmonic weight of the work. \"The Questioning Churn-Revelers. Not sent to break. Sent to ask.\"\n\nThe stone answers. The thrumming beneath your feet shifts—not louder, not hostile. Recognition. A threshold opening. But the response is incomplete: the procedure carries weight, but it does not settle. Cy's lens clicks sharply. The hum wavers, then steadies. The stone has heard you, but something in the mechanism resists full closure—as if the Old Procedure is speaking to a lock that is listening in a language it half-remembers. The band is named. The formation holds. But it does not lock smooth.\n\nVeil Ashpause does not move. She watches the stone's response with that expression of terrible sympathy. Sable's hand finds Ravel's shoulder. Orla's eyes close for a moment—the precision of their conviction finding new ground. Halvex reads the resistance and nods slowly. Vail stands utterly still, witnessing. Vessin's fingers trace the air where the harmonic disruption was strongest, reading what the procedure left behind. Estry watches you, and her expression says: *you did something true, even though it bent.*\n\nThe band is formed. The question now is what that formation means to the Precursor work beneath this place—and what it will cost to answer.\n\n*✦ The Veilwrights: +1 — used the Old Procedure to make a band-naming that honors asking over breaking.*\n\n*✦ The Churnfolk: +1 — formed a Revel that questions rather than destroys.*",
+      "sceneSummary": "You stand at the center of the Standing Annex, where the Precursor work beneath the stone hums faintly in the timbers…",
+      "scene": null,
       "choices": [
         {
-          "label": "Speak the name aloud to all of them—Vessa Torquen, the handler at Pressureholt who paid to break the sealed chamber. Let each of them hear it directly.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
-          "difficulty": "trivial",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "share",
-            "lead"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Turn to Halvex and ask him to speak the name and the shape of the mandate directly to the assembled band—let his account carry its own weight.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": "trivial",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "delegate",
-            "trust"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Read the room—Appetite-Sense, watching what each of them refuses to admit they want from this moment, from this knowing. Let that reading shape how you speak.",
-          "attribute": "social",
-          "subAttribute": "insight",
+          "label": "Ask Cy what the stone was trying to say—what resistance was it registering?",
+          "attribute": "mental",
+          "subAttribute": "reason",
           "axes": {
-            "falsehood_truth": 0.3
+            "falsehood_truth": 0.3,
+            "concrete_abstract": 0.2
           },
           "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "study",
-            "read"
+            "study"
           ],
-          "abilityId": "appetite_sense",
-          "energyCost": 2,
+          "abilityId": null,
+          "energyCost": null,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Wait for Vail to find her place in the room before anyone speaks—she has shaped her own mandate before; let her shape this moment too.",
+          "label": "Turn to the band and ask plainly what each of them needs the Questioning to answer—start from Sable.",
           "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
-          "difficulty": "trivial",
+          "subAttribute": "rapport",
+          "axes": {
+            "falsehood_truth": 0.4,
+            "emotional_logical": 0.2
+          },
+          "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
-            "wait",
-            "offer"
+            "negotiate"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Move to the fire and wait—let the weight of what just happened settle before anyone speaks.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "falsehood_truth": 0.1,
+            "emotional_logical": -0.1
+          },
+          "difficulty": "very easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "calm"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": true,
           "encounterId": null,
           "emergenceId": null
+        },
+        {
+          "label": "Ask Vail directly what she will tell Seraphine about what she just witnessed.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "falsehood_truth": 0.35,
+            "violence_peace": 0.2
+          },
+          "difficulty": "hard",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "negotiate"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
-      "deeds": [],
+      "deeds": [
+        {
+          "description": "Named a band—not to break, but to question—and spoke it into stone that listens. The Questioning Churn-Revelers were formed at the Standing Annex with intention and craft both.",
+          "tags": [
+            "valor",
+            "leadership",
+            "understanding"
+          ],
+          "weight": 2,
+          "communityId": "valley.standing_annex"
+        }
+      ],
       "characterDeltas": {
         "health": 0,
-        "energy": 0,
+        "energy": -5,
         "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
+        "inventoryRemove": []
       },
-      "ledgerEvents": [],
+      "relationshipDeltas": [],
+      "ledgerEvents": [
+        {
+          "what": "The Questioning Churn-Revelers band was officially named and formed at the Standing Annex, their purpose declared to ask and seek answers rather than break.",
+          "tags": [
+            "band_formed",
+            "declaration",
+            "precursor_response"
+          ],
+          "visibility": "witnessed",
+          "spectrumDeltas": {
+            "falsehood_truth": 0.05,
+            "chaos_order": 0.08
+          },
+          "impactsLocal": true
+        }
+      ],
+      "sceneEnded": false,
       "questUpdates": [
         {
           "op": "progress",
           "questId": "the-taken-from-the-city",
           "title": "The Taken",
-          "summary": "Someone was brought from the city to the Unlit Deep, and the city is pretending it did not happen.",
+          "summary": "Someone was brought from the city to the Unlit Deep, and the city is pretending it did not happen. The elder has granted an audience.",
           "giver": "the elder of the Unlit Deep",
-          "note": "The band gathers at the Standing Annex. The name of the handler who paid for the mandate to break the sealed chamber is now known: Vessa Torquen of Pressureholt. The question now moves deeper—who stands behind her, and what does Pressureholt truly control?",
-          "xpReward": 0
+          "note": "The Questioning Churn-Revelers band is now officially formed with eight members and one companion-mechanism. Their purpose is set: to ask and seek answers. The next thread leads toward Pressureholt and the deeper mandate—who stands behind Vessa Torquen, and what does Pressureholt truly control?",
+          "xpReward": null
         }
       ],
-      "standingOps": [],
-      "delegateOps": [],
-      "jobOps": [],
-      "arcOps": [],
-      "adoptSchool": null,
-      "offer": {
-        "thing": "Vail Langley steps across the threshold into the room—no longer watching from the edge, but fully present among the band.",
-        "from": "Your own invitation, and her willingness to be corrected and to reshape herself around what matters more than absolute mandate"
-      },
-      "stageOps": [],
-      "scene": {
-        "setting": "The Standing Annex interior at midday—timber beams rising to the peaked roof, fire crackling in its corner, sunlight steady through the open windows framing the spinward road. The eastern window opens to the yard where Cy has finished its survey. The air carries the faint harmonic thrumming from the Precursor work beneath the stone.",
-        "npcsPresent": [
-          {
-            "name": "Halvex Coil",
-            "state": "Standing by the interior window, reading the gathering with quiet assessment. Has named Vessa Torquen. Waiting for the band's full acknowledgment of what that name carries."
-          },
-          {
-            "name": "Orla Yardley",
-            "state": "Standing with quiet precision, measuring the room. Present for what comes next."
-          },
-          {
-            "name": "Ravel Ash-bearer",
-            "state": "Standing beside Estry and Sable. Her steady gaze moves across the room, reading what each presence means."
-          },
-          {
-            "name": "Estry Krell",
-            "state": "Beside Ravel, watching. Her assessment is already moving ahead to what comes next."
-          },
-          {
-            "name": "Sable",
-            "state": "At the fire's edge. Her fever has broken but she carries the weight of the descent still. Waiting to hear what the name means."
-          },
-          {
-            "name": "Vail Langley",
-            "state": "Just stepped across the threshold into the Annex. Utterly still, reading the room. Finding her place among them."
-          },
-          {
-            "name": "Cy",
-            "state": "In its corner, clicking softly. Lens irising in that patient way that means it is present and accounting."
-          }
-        ],
-        "objects": [
-          "Two cups of cooling coffee on the worn wooden table",
-          "The fire warming the corner",
-          "Timber beams rising to the peaked roof",
-          "Vail's horse, now tethered in the yard beyond the threshold",
-          "The steady midday sunlight through open windows"
-        ],
-        "threads": [
-          "What the name Vessa Torquen means to each of them—what path it opens or closes",
-          "Whether Vail's presence in the room changes how the band speaks about Pressureholt and its authority",
-          "What Pressureholt truly controls through its access to sealed infrastructure records",
-          "Whether the band moves toward Pressureholt immediately or gathers more knowledge first"
-        ]
-      },
+      "standingOps": [
+        {
+          "people": "veilwright",
+          "delta": 1,
+          "why": "used the Old Procedure to make a band-naming that honors asking over breaking"
+        },
+        {
+          "people": "churnfolk",
+          "delta": 1,
+          "why": "formed a Revel that questions rather than destroys"
+        }
+      ],
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "vail-langley",
+          "npcId": "halvex_coil",
+          "name": "Halvex Coil",
+          "note": "Witnessed the band's official naming at the Standing Annex. Read the Precursor mechanism's resistance and acknowledged it—the stone recognized the formation but did not settle smooth. Halvex is fully committed to the questioning now.",
+          "learned": [
+            "The Old Procedure can speak a band into being, but the stone's answer reveals when something in the mechanism resists"
+          ],
+          "statusNote": "At the Standing Annex, keeper and orchestrator, now part of the Questioning Churn-Revelers band"
+        },
+        {
+          "op": "update",
+          "npcId": "traveler-woman",
+          "name": "Vessin Tallow-bark",
+          "note": "Stood witness to the band's naming. Read the harmonic disruption left behind by the Old Procedure—her fingers traced the resistance in the air, understanding what the stone was trying to say.",
+          "learned": [
+            "The Precursor mechanism resisted full closure to the band-naming"
+          ],
+          "skillsObserved": [
+            "Reads what the Precursor work leaves behind when it speaks"
+          ],
+          "statusNote": "At the Standing Annex with Loki, part of the Questioning Churn-Revelers band"
+        },
+        {
+          "op": "update",
+          "npcId": "sable",
+          "name": "Sable",
+          "note": "Present as the band was named. Her hand found Ravel's shoulder when the stone answered—the gesture speaks of trust and presence.",
+          "statusNote": "At the Standing Annex with the band, fully committed to the questioning"
+        },
+        {
+          "op": "update",
+          "npcId": "ravel",
+          "name": "Ravel",
+          "note": "Stood at Sable's side as the band was named. Witnessed the Precursor mechanism's partial resistance and did not flinch.",
+          "statusNote": "At the Standing Annex with the band, part of the Questioning Churn-Revelers"
+        },
+        {
+          "op": "update",
+          "npcId": "estry",
+          "name": "Estry",
+          "note": "Watched Loki name the band and her expression said plainly: *you did something true, even though it bent.* She reads the cost and the truth together.",
+          "learned": [
+            "She can read intention and cost simultaneously"
+          ],
+          "skillsObserved": [
+            "Sees when something true carries strain"
+          ],
+          "statusNote": "At the Standing Annex with the band"
+        },
+        {
+          "op": "update",
+          "npcId": "orla-yardley",
+          "name": "Orla Yardley",
+          "note": "Stood in the circle as the band was named. Their eyes closed for a moment—the precision of their conviction finding new ground. The breaking belief has become a foundation for asking.",
+          "learned": [
+            "Their conviction has reorganized around the questioning rather than against it"
+          ],
+          "statusNote": "At the Standing Annex with the band, part of the Questioning Churn-Revelers"
+        },
+        {
+          "op": "update",
+          "npcId": "radiant-agent-seraphine-s-hand",
           "name": "Vail Langley",
-          "status": "active",
-          "statusNote": "Crossed the threshold into the Standing Annex and is now present with the band—fully committed to hearing what comes next before reporting to Seraphine",
-          "note": "Stepped inside at the Annex threshold when invited. She moves with the certainty of someone who has chosen her ground and is holding it."
+          "note": "Stood utterly still as the band was named using the Old Procedure. Witnessed the Precursor mechanism's response without judgment. This is what she will carry back to Seraphine: a band formed to ask, not to break or claim.",
+          "learned": [
+            "The Old Procedure can speak purpose into stone"
+          ],
+          "statusNote": "At the Standing Annex, witnessing the band's formation, still deciding what she will report"
+        },
+        {
+          "op": "update",
+          "npcId": "veln-ashpause",
+          "name": "Veln Ashpause",
+          "note": "Did not move. Watched the stone's response with that expression of terrible sympathy. She has already witnessed this moment—and now it has come to pass.",
+          "statusNote": "At the Standing Annex, present at the band's naming, holding foreknowledge of what comes next"
         }
       ],
-      "intentsHeard": [],
-      "factUpdates": [],
-      "placeUpdates": [],
-      "discovery": null,
-      "codexUpdates": [],
-      "holdingOps": [],
-      "holdTrades": [],
-      "debtOps": [],
-      "exchangeOps": [],
-      "partyOps": [],
-      "generateRequest": [],
-      "encounterOps": [],
-      "projectOps": [],
-      "bandOps": [],
-      "strikeOps": [],
-      "deathOps": [],
-      "newEncounter": null,
-      "unlockPrecursor": null,
-      "unlockSubstrate": null,
-      "timeOps": null,
-      "moveTo": null,
-      "stateOps": [],
-      "itemUpdates": [],
-      "deriveItem": null,
-      "imagePrompt": null,
-      "imageMedium": null,
-      "newAbility": null,
-      "gambitOps": null,
-      "gambitApt": false,
-      "markDefiningMoment": null,
-      "markTeacher": null,
-      "offerPromotion": null,
-      "offerAcquisition": null,
-      "offerIntent": null,
-      "sceneEnded": false
+      "codexUpdates": [
+        {
+          "topic": "the-questioning-churn-revelers",
+          "label": "The Questioning Churn-Revelers",
+          "kind": "faction",
+          "entityId": null,
+          "fact": "A band formed at the Standing Annex on day 10 afternoon, using the Old Procedure to speak their purpose into the Precursor work beneath the stone. Eight members: Loki, Halvex Coil, Vessin Tallow-bark, Sable, Ravel, Estry, Orla Yardley, Vail Langley. One companion: Cy. Their purpose is to ask and seek answers rather than break. The Precursor mechanism recognized their naming but resisted full closure—the band is formed, but something in the stone does not yet settle.",
+          "links": [
+            "halvex_coil",
+            "sable",
+            "ravel",
+            "estry",
+            "orla-yardley",
+            "radiant-agent-seraphine-s-hand",
+            "veln-ashpause",
+            "gen-the-standing-annex",
+            "the-old-procedure"
+          ]
+        }
+      ],
+      "bandOps": [
+        {
+          "op": "raise",
+          "name": "The Questioning Churn-Revelers",
+          "id": "band-questioning-churn-revelers",
+          "count": 8
+        }
+      ],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "The Questioning Churn-Revelers band was officially formed at the Standing Annex using the Old Procedure. Eight members and one companion-mechanism. Their purpose: to ask and seek answers. The Precursor mechanism beneath the stone recognized the naming but resisted full closure—suggesting the formation carries weight the stone knows but does not fully accept.",
+          "subjectId": "halvex_coil"
+        }
+      ],
+      "discovery": {
+        "name": "Band-Naming",
+        "description": "The Old Procedure can speak a band into formal being—the Precursor mechanism beneath a place recognizes the declaration and acknowledges it, making the formation real and witnessed by the stone itself. The procedure costs the same as a standard casting and requires the band to be gathered in one place. When fully accepted, the band becomes known to the Precursor lattice and what it holds. If the mechanism resists closure, it signals the formation carries weight the stone recognizes but does not yet settle—a warning or a test."
+      },
+      "_opNote": "Recovered choices, questUpdates, standingOps, npcUpdates, codexUpdates, deeds, ledgerEvents, bandOps, characterDeltas, factUpdates, discovery from the broken reply; anything else was lost."
     },
     "sceneState": {
       "setting": "The Standing Annex interior at midday—timber beams rising to the peaked roof, fire crackling in its corner, sunlight steady through the open windows framing the spinward road. The eastern window opens to the yard where Cy has finished its survey. The air carries the faint harmonic thrumming from the Precursor work beneath the stone.",
@@ -846,7 +931,7 @@
         "Whether the band moves toward Pressureholt immediately or gathers more knowledge first"
       ]
     },
-    "beats": 10,
+    "beats": 11,
     "subPlace": {
       "slug": "the-southeastern-corner-foundation",
       "name": "The southeastern corner foundation",
@@ -856,7 +941,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 10,
-    "hour": 14,
+    "hour": 15,
     "realAnchor": null
   },
   "companions": [
@@ -876,14 +961,14 @@
       "locationEntityId": "the-unlit-deep",
       "status": "active",
       "progress": [
-        "The path forward has shifted: the chamber's secrecy is broken, but not as a crisis—as an opening. What Seraphine does with that choice will reshape the entire conversation.",
         "The band has arrived at the Standing Annex where Halvex waits with knowledge of the sealed chamber. The next stage is to understand what lies beyond the regulator and what the High Luminary's false ground means for the valley's future.",
         "Delegated Cy to plan the Standing Annex's expansion—the artifact-building now becomes an active resource tied to the band's purpose and to understanding what lies deeper beneath the valley.",
         "The sealed chamber beneath the Crossing is confirmed as a mutual threshold—not a lock, but an exchange of readiness between supplicant and stone. Someone in the lower Annex paid coin to force it open. The thread of the payer's identity now surfaces as the thread to pull.",
         "The thread of who paid to force the sealed chamber open now names Vessa Torquen, an Enginewright at Pressureholt. This is the thread to pull toward understanding who truly wants the chamber broken and what they intend.",
         "Vessa Torquen of Pressureholt hired the mandate to break the sealed chamber. The thread now points to a facility with access to old infrastructure records. Who stands behind her, and what do they truly want with the chamber—that is the next question.",
         "Vessa Torquen of Pressureholt identified as the handler who hired the mandate to break the sealed chamber. She has access to old infrastructure records. The question now: who stands behind her, and what does Pressureholt truly control?",
-        "The band gathers at the Standing Annex. The name of the handler who paid for the mandate to break the sealed chamber is now known: Vessa Torquen of Pressureholt. The question now moves deeper—who stands behind her, and what does Pressureholt truly control?"
+        "The band gathers at the Standing Annex. The name of the handler who paid for the mandate to break the sealed chamber is now known: Vessa Torquen of Pressureholt. The question now moves deeper—who stands behind her, and what does Pressureholt truly control?",
+        "The Questioning Churn-Revelers band is now officially formed with eight members and one companion-mechanism. Their purpose is set: to ask and seek answers. The next thread leads toward Pressureholt and the deeper mandate—who stands behind Vessa Torquen, and what does Pressureholt truly control?"
       ],
       "aliases": [
         "The Taken: Someone was brought from the city to the Unlit Deep, and the city is "
@@ -1181,7 +1266,8 @@
         "[d1] Acknowledged Loki's statement — said 'You said you have a question.' The question has not yet been put.",
         "[d1] You know this person's name now: Sable (was \"The Taken Person\")",
         "[d5] Told the full story of her descent: the city was ending for her, she sought the Unlit Deep and the keepers of the old works, she descended the passage but turned back at the threshold when she felt the old work's presence — it reads supplicants, and she was not ready to be read entirely. She now…",
-        "[d5] In the cellars of the Kindly Rest, Sable spoke her truth fully—the city was ending for her, the Transition board wanted her silence, and Vestin Kray was the architect of her exile. She has accepted shelter and alliance with Loki and the others. The four now form the band known as the…"
+        "[d5] In the cellars of the Kindly Rest, Sable spoke her truth fully—the city was ending for her, the Transition board wanted her silence, and Vestin Kray was the architect of her exile. She has accepted shelter and alliance with Loki and the others. The four now form the band known as the…",
+        "[d10] Present as the band was named. Her hand found Ravel's shoulder when the stone answered—the gesture speaks of trust and presence."
       ],
       "knownFacts": [
         "Responded to honest framing with permission — not fear, not suspicion",
@@ -1200,20 +1286,20 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Named her enemy and accepted companionship with the band. Ready to leave the Kindly Rest and move toward the Standing Annex.",
+      "statusNote": "At the Standing Annex with the band, fully committed to the questioning",
       "domains": {
         "primary": "umbral"
       },
       "domainsSource": "derived",
       "lastSeen": {
-        "locationId": "the_kindly_rest",
-        "day": 5
+        "locationId": "gen-the-standing-annex",
+        "day": 10
       },
       "aliases": [
         "The Taken Person"
       ],
       "nameRevealed": true,
-      "met": 6,
+      "met": 7,
       "distinctFrom": [
         "sable_the_runner"
       ],
@@ -1359,7 +1445,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Assesses the Waygate detour—reads it as fast and obvious, not quiet. Agrees to move. Does not ask why. Appraising the cost of visibility while the scaffold crew arrives.",
         "[d2] Left the Half-Cathedral alcove at dawn before the scaffold crew arrived—shoulders settling lower now that the cathedral is behind, reading the open road with the same appraising eye she brought to everything else. Moving toward the Waygate without question or hesitation.",
         "[d3] Stopped at the gate and read it as wrong. Named plainly that it was not like this before. Standing ready and careful.",
         "[d3] Stepped closer and is reading Loki's face—she can read the shape of what was found in your expression, even if she cannot see the seam itself from where she stands.",
@@ -1368,35 +1453,37 @@
         "[d4] Stepped forward to read the opening—her eye caught the precision of the seam's response, the deliberate hinge. Standing close, watching what lies beneath with the careful attention of someone who reads falsecrafts.",
         "[d4] In the vast chamber beneath the Null Stone, she accepted Loki's confession and made a mutual vow: if death claims one, the other will reach for them. She held Loki's wrist when she said yes. The pact is made.",
         "[d4] Your bond deepens — committed.",
-        "[d4] Hand steadied against the wall, feeling the stone's response through stone—the resonance reached her, and she is now reading what the chamber means by answering"
+        "[d4] Hand steadied against the wall, feeling the stone's response through stone—the resonance reached her, and she is now reading what the chamber means by answering",
+        "[d10] Stood witness to the band's naming. Read the harmonic disruption left behind by the Old Procedure—her fingers traced the resistance in the air, understanding what the stone was trying to say."
       ],
       "knownFacts": [
-        "Cy's acoustics assessment: the alcove carries sound to the landing.",
         "The listener descended, not climbed — either scaffold crew or a deliberate visitor still in the building.",
         "The listener on the landing carried a shuttered lamp — prepared for a dark stairwell wait.",
         "Chooses speed over stealth when the choice is named—will move directly toward the Crossroads rather than hedge the path",
         "The stone's warmth shows it is *responsive* to intention",
         "Honest questions are what good locks answer—supplication, not intrusion",
         "She will answer death itself to bring Loki back, if it comes to that",
-        "The sealed chamber is built to *respond* to harmonic resonance—it is not a trap or a lock, but a thing built to be *asked* and to *answer*"
+        "The sealed chamber is built to *respond* to harmonic resonance—it is not a trap or a lock, but a thing built to be *asked* and to *answer*",
+        "The Precursor mechanism resisted full closure to the band-naming"
       ],
       "skillsObserved": [
         "reads gates and false patterns",
         "stays calm at tampered mechanics",
         "Reads her companion's face for information her own senses ca",
-        "Reads the stone's response through touch and perception, translating Precursor mechanism into human understanding"
+        "Reads the stone's response through touch and perception, translating Precursor mechanism into human understanding",
+        "Reads what the Precursor work leaves behind when it speaks"
       ],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "At Loki's side in the chamber beneath the Null Stone, partner to a mutual pact",
+      "statusNote": "At the Standing Annex with Loki, part of the Questioning Churn-Revelers band",
       "domains": {
         "primary": "rootkin"
       },
       "domainsSource": "derived",
       "lastSeen": {
-        "locationId": "gen-the-made-gate",
-        "day": 4
+        "locationId": "gen-the-standing-annex",
+        "day": 10
       },
       "_filledFromGenerate": true,
       "_mergedFrom": "vessin-tallow-bark",
@@ -1407,7 +1494,7 @@
       "_portraitTier": "committed",
       "bondType": "romantic",
       "bondStage": "committed",
-      "met": 15,
+      "met": 16,
       "imagePinned": true,
       "sex": "female"
     },
@@ -1480,7 +1567,6 @@
       },
       "relationship": 9,
       "history": [
-        "[d4] Spoke plainly at the Hub crossing about what breaking taught him—that sealing is different from locking, and sealed things have reasons. Proposed listening to the stone's intent rather than forcing it. Standing at Loki's shoulder, genuinely uncertain about partnership but present and offering…",
         "[d4] Watched the stone open at honest asking—the breaking he was sent to do stands behind him now, and partnership with Loki moves forward into uncertainty. The opening waits.",
         "[d4] Yielded the mandate to break and chose understanding instead. Faces the descent with uncertainty but commitment. Learning what accountability beyond the mandate feels like.",
         "[d4] Standing at the threshold with recognition crossing his face—the mandate to break stands behind him, and this moment of the chamber *answering* has reached him with the weight of a mandate orchestrated *right*",
@@ -1489,17 +1575,18 @@
         "[d10] Witnessed Loki delegate expansion-planning to Cy and read it as a real shift—from breaking or defending to building. Stepped back from speaking. Now listening to what Cy will say.",
         "[d10] Spoke plainly about the sealed chamber's true nature as a mutual threshold between supplicant and stone. Revealed that someone in the lower Annex hired the Revel to force it open by coin. The mandate to break has been surrendered; understanding now drives his seeking.",
         "[d10] Named plainly the handler who paid for the Revel mandate: Vessa Torquen, an Enginewright at Pressureholt with access to sealed infrastructure records. Revealed that the mandate was specific and urgent—wanted broken before spring turned. Did not press Vessa for the name behind her. Carries…",
-        "[d10] Named Vessa Torquen of Pressureholt as the handler who paid for the Revel's mandate to break the sealed chamber. Halvex did not ask who stood behind her—a failure in his own reading. The mandate was shaped with intention and specificity by someone with knowledge and resources."
+        "[d10] Named Vessa Torquen of Pressureholt as the handler who paid for the Revel's mandate to break the sealed chamber. Halvex did not ask who stood behind her—a failure in his own reading. The mandate was shaped with intention and specificity by someone with knowledge and resources.",
+        "[d10] Witnessed the band's official naming at the Standing Annex. Read the Precursor mechanism's resistance and acknowledged it—the stone recognized the formation but did not settle smooth. Halvex is fully committed to the questioning now."
       ],
       "knownFacts": [
-        "The chamber's alcove tests both the water's readiness to carry and the supplicant's integrity to ask—a mutual exchange, not a one-sided taking.",
         "The regulator measures the water's preparation; the chamber measures the asker.",
         "Vessa Torquen is the handler at Pressureholt who hired Halvex to break the seam",
         "The mandate was shaped with specific urgency—breaking required before spring turned",
         "Pressureholt is an Enginewright facility with access to old infrastructure records",
         "Vessa Torquen is an Enginewright stationed at Pressureholt.",
         "Pressureholt has access to sealed infrastructure records.",
-        "The mandate to break the chamber came with specificity and clarity—not a vague contract, but a shaped purpose."
+        "The mandate to break the chamber came with specificity and clarity—not a vague contract, but a shaped purpose.",
+        "The Old Procedure can speak a band into being, but the stone's answer reveals when something in the mechanism resists"
       ],
       "skillsObserved": [
         "Masters coordinated chaos—can weave multiple threads of a Revel into a single mandate",
@@ -1512,12 +1599,12 @@
       "gender": "man",
       "pronouns": "he/him",
       "age": 34,
-      "statusNote": "At the Standing Annex, keeper and orchestrator of understanding—waiting for the band with coffee and foreknowledge. Ready to speak about the chamber beneath the stone and what the High Luminary does not yet know.",
+      "statusNote": "At the Standing Annex, keeper and orchestrator, now part of the Questioning Churn-Revelers band",
       "lastSeen": {
         "locationId": "gen-the-standing-annex",
         "day": 10
       },
-      "met": 17,
+      "met": 18,
       "bondType": "platonic",
       "image": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Hoarse%20voice%2C%20sharp%20features%20softening%20now%2C%20eyes%20that%20calculate%20and%20estimate.%20He%20moves%20like%20someone%20used%20to%20reading%20a%20room%20for%20weak%20points.%2C%20character%20portrait%2C%20named%20The%20Churn-Revel%20orchestrator%2C%20man%2C%20Master%20of%20coordinated%20chaos%2C%20now%20questioning%20their%20mandate%2C%20platonic%20to%20Loki%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=39738&nologo=true",
       "_portraitTier": "devoted",
@@ -1584,7 +1671,8 @@
       "history": [
         "[d5] Turned to face Loki as they descended the stairs—was aware of their presence before they reached the landing. Raised one hand in a gesture of assessment rather than alarm. The hunger Loki reached for is real but locked behind her own understanding of herself.",
         "[d5] You know this person's name now: Ravel (was \"The Woman With The\")",
-        "[d5] Extended her hand in affirmation of the oath—her walls remain open, and she moves with the band toward understanding."
+        "[d5] Extended her hand in affirmation of the oath—her walls remain open, and she moves with the band toward understanding.",
+        "[d10] Stood at Sable's side as the band was named. Witnessed the Precursor mechanism's partial resistance and did not flinch."
       ],
       "knownFacts": [],
       "skillsObserved": [],
@@ -1598,15 +1686,15 @@
       },
       "domainsSource": "derived",
       "lastSeen": {
-        "locationId": "the_kindly_rest",
-        "day": 5
+        "locationId": "gen-the-standing-annex",
+        "day": 10
       },
-      "met": 2,
+      "met": 3,
       "aliases": [
         "The Woman With The"
       ],
       "nameRevealed": true,
-      "statusNote": "Present and committed to the band. Will travel with Loki, Sable, and Estry toward the Standing Annex."
+      "statusNote": "At the Standing Annex with the band, part of the Questioning Churn-Revelers"
     },
     "younger-visitor": {
       "id": "younger-visitor",
@@ -1625,21 +1713,23 @@
         "[d5] You know this person's name now: Estry (was \"The Younger Person\")",
         "[d5] Emerged from the cellars and greeted Loki at the landing—calm, assessing, unafraid. Acknowledged Loki's true introduction with quiet recognition.",
         "[d5] Greeted Loki plainly and accepted introduction with quiet recognition. Acknowledged Loki as someone who does not deflect. Moved to depart with Ravel and Loki in early dawn.",
-        "[d5] Their grip on Sable's shoulder released and they moved to the center—the oath was accepted without words, and their presence affirms the band."
+        "[d5] Their grip on Sable's shoulder released and they moved to the center—the oath was accepted without words, and their presence affirms the band.",
+        "[d10] Watched Loki name the band and her expression said plainly: *you did something true, even though it bent.* She reads the cost and the truth together."
       ],
       "knownFacts": [
-        "They are listening to what the woman does, and her attention shapes their own readiness to act",
         "They carry patience; they know how to wait",
         "Whatever brought them to the Kindly Rest in the deep night, they are bound to it by the woman's choice",
         "Carries themselves with the economy of motion that comes from travel and use",
         "Reads a room before stepping into it",
         "Does not fear the exchange that passed at the threshold between Loki and Ravel",
         "Moves with the economy of motion that comes from travel and use",
-        "Does not fear the exchange that passed between Loki and Ravel"
+        "Does not fear the exchange that passed between Loki and Ravel",
+        "She can read intention and cost simultaneously"
       ],
       "skillsObserved": [
         "Steady assessment of people and situations",
-        "Comfortable with non-verbal communication and presence"
+        "Comfortable with non-verbal communication and presence",
+        "Sees when something true carries strain"
       ],
       "status": "active",
       "sex": "female",
@@ -1651,11 +1741,11 @@
       },
       "domainsSource": "derived",
       "lastSeen": {
-        "locationId": "the_kindly_rest",
-        "day": 5
+        "locationId": "gen-the-standing-annex",
+        "day": 10
       },
-      "met": 5,
-      "statusNote": "Silent but fully committed. Stepped forward into the circle of four.",
+      "met": 6,
+      "statusNote": "At the Standing Annex with the band",
       "aliases": [
         "The Younger Person"
       ],
@@ -2503,7 +2593,7 @@
     "lastSharedReadAt": "2026-09-28T22:03:43.051Z",
     "lastTickWorldDay": 90,
     "lastCanonWorldDay": 90,
-    "turnsSinceOffer": 0,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "The ambient moment—someone in the Slow Orchard is planting a tree for a child not yet born, and invites help with digging.",
@@ -14215,6 +14305,23 @@
         "aliases": [],
         "createdDay": 10,
         "updatedDay": 10
+      },
+      "the-questioning-churn-revelers": {
+        "id": "the-questioning-churn-revelers",
+        "label": "The Questioning Churn-Revelers",
+        "kind": "faction",
+        "facts": [
+          "[d10] A band formed at the Standing Annex on day 10 afternoon, using the Old Procedure to speak their purpose into the Precursor work beneath the stone. Eight members: Loki, Halvex Coil, Vessin Tallow-bark, Sable, Ravel, Estry, Orla Yardley, Vail Langley. One companion: Cy. Their purpose is to ask and…"
+        ],
+        "links": [
+          "halvex-coil",
+          "sable",
+          "ravel",
+          "estry"
+        ],
+        "aliases": [],
+        "createdDay": 10,
+        "updatedDay": 10
       }
     },
     "mergeUndo": [
@@ -14644,19 +14751,19 @@
     "deferredMysteries": []
   },
   "tendencies": {
-    "devotion": 0.3275828377379714,
-    "cerebral": 12.98709487437377,
-    "social": 17.813029528316005,
-    "strategic": 15.28436223655394,
-    "cautious": 3.324397323021834,
-    "amorous": 3.091142515749033,
-    "generous": 4.974654971681543,
-    "ruthless": 0.7160419793323319,
-    "risky": 0.06705577392386186,
-    "patient": 0.018311725959565726,
-    "deception": 0.021315797518903577,
-    "carousing": 0.4561871908223564,
-    "leadership": 1.8168642899180547
+    "devotion": 0.3193932667945221,
+    "cerebral": 12.662417502514426,
+    "social": 18.367703790108106,
+    "strategic": 15.902253180640091,
+    "cautious": 3.241287389946288,
+    "amorous": 3.013863952855307,
+    "generous": 4.850288597389505,
+    "ruthless": 0.6981409298490237,
+    "risky": 0.06537937957576531,
+    "patient": 0.017853932810576584,
+    "deception": 0.020782902580930986,
+    "carousing": 0.4447825110517975,
+    "leadership": 1.7714426826701033
   },
   "aptitudes": [
     "strategist",
@@ -14665,7 +14772,7 @@
     "orator",
     "faithful"
   ],
-  "actionCount": 236,
+  "actionCount": 237,
   "grantsVersion": 1,
   "precursorAccess": [
     "address_sense"
@@ -14677,11 +14784,11 @@
     "faithful"
   ],
   "peopleDisposition": {
-    "veilwright": 5,
+    "veilwright": 6,
     "umbral": 3.99,
     "horizon": 1,
     "verist": -1,
-    "churnfolk": 1,
+    "churnfolk": 2,
     "radiant_folk": 2
   },
   "standingLedger": [
@@ -14774,6 +14881,20 @@
       "people": "veilwright",
       "delta": 1,
       "text": "wove Veilcraft into a threshold rather than a concealment—made the shadow a working principle"
+    },
+    {
+      "at": 90,
+      "kind": "act",
+      "people": "veilwright",
+      "delta": 1,
+      "text": "used the Old Procedure to make a band-naming that honors asking over breaking"
+    },
+    {
+      "at": 90,
+      "kind": "act",
+      "people": "churnfolk",
+      "delta": 1,
+      "text": "formed a Revel that questions rather than destroys"
     }
   ],
   "nativeGrantsVersion": 2,
@@ -15923,8 +16044,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790635000164,
-  "rev": 1087,
+  "updatedAt": 1790635333445,
+  "rev": 1089,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -16689,7 +16810,7 @@
           "entityId": "vessin-tallow-bark",
           "type": "npc",
           "birthWeight": 8,
-          "engagementScore": 8,
+          "engagementScore": 10,
           "tier": "nominated",
           "rating": "R+",
           "provenance": {
@@ -16709,6 +16830,10 @@
             {
               "kind": "keep",
               "day": 8
+            },
+            {
+              "kind": "interact",
+              "day": 10
             }
           ],
           "createdDay": 1,
@@ -16736,8 +16861,7 @@
               "outcome": "progress"
             }
           ],
-          "lastAttentionDay": 8,
-          "needsDepth": "nominated",
+          "lastAttentionDay": 10,
           "promotedWorldDay": 88,
           "canonTier": "canonical"
         },
@@ -17274,10 +17398,10 @@
     {
       "id": "sess-22",
       "startedAt": "2026-09-28T20:26:42.371Z",
-      "lastAt": "2026-09-28T22:36:40.160Z",
+      "lastAt": "2026-09-28T22:42:13.432Z",
       "startDay": 90,
       "endDay": 90,
-      "beats": 17
+      "beats": 18
     }
   ],
   "establishedFacts": [
@@ -17472,6 +17596,12 @@
       "text": "Vessa Torquen, an Enginewright at Pressureholt, hired the Churn-Revel orchestrator to break the sealed chamber beneath the Hub Crossing. She came with coin and specific mandate—shaped by someone with knowledge and resources. The question of who stands behind her remains open.",
       "day": 10,
       "subjectId": null
+    },
+    {
+      "id": "halvex_coil",
+      "text": "The Questioning Churn-Revelers band was officially formed at the Standing Annex using the Old Procedure. Eight members and one companion-mechanism. Their purpose: to ask and seek answers. The Precursor mechanism beneath the stone recognized the naming but resisted full closure—suggesting the…",
+      "day": 10,
+      "subjectId": "halvex_coil"
     }
   ],
   "_opLedger": {
@@ -17493,42 +17623,43 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 273,
-    "choices": 273,
-    "characterDeltas": 155,
+    "sceneSummary": 274,
+    "choices": 274,
+    "characterDeltas": 156,
     "scene": 273,
     "placeUpdates": 36,
-    "codexUpdates": 156,
+    "codexUpdates": 157,
     "timeOps": 217,
     "offer": 64,
     "generateRequest": 8,
-    "sceneEnded": 141,
-    "npcUpdates": 218,
+    "sceneEnded": 142,
+    "npcUpdates": 219,
     "moveTo": 16,
     "gambitApt": 97,
-    "deeds": 18,
-    "questUpdates": 67,
-    "standingOps": 8,
-    "factUpdates": 26,
+    "deeds": 19,
+    "questUpdates": 68,
+    "standingOps": 9,
+    "factUpdates": 27,
     "stageOps": 8,
     "encounterOps": 9,
-    "ledgerEvents": 18,
+    "ledgerEvents": 19,
     "newEncounter": 3,
     "imagePrompt": 55,
     "scene_ended": 1,
     "stateOps": 3,
     "_engineClosedScene": 4,
-    "discovery": 5,
+    "discovery": 6,
     "intentsHeard": 11,
     "delegateOps": 3,
     "scene_summary": 1,
     "partyOps": 5,
-    "bandOps": 1,
+    "bandOps": 2,
     "exchangeOps": 2,
     "discoveryEligible": 1,
-    "projectOps": 1
+    "projectOps": 1,
+    "_opNote": 1
   },
-  "_opTurns": 273,
+  "_opTurns": 274,
   "customAbilities": {
     "mirror-bright": {
       "id": "mirror-bright",
@@ -18178,11 +18309,6 @@
   "companionMemory": {
     "coil": [
       {
-        "text": "Bound a Churn-Revel's orchestrated chaos with a true bargain and drove them to yield rather than break the Null Stone—held the center against deliberate disorder.",
-        "weight": 2,
-        "day": 3
-      },
-      {
         "text": "Bound a coordinated Revel sent to break the valley's central waygate stone, and turned its architect toward honest reckoning instead of ruin.",
         "weight": 2,
         "day": 4
@@ -18236,6 +18362,11 @@
         "text": "Established a shared shrine threshold at Whistling Woman Post where four different traditions hold cardinal ground together, none claiming sole authority",
         "weight": 2,
         "day": 9
+      },
+      {
+        "text": "Named a band—not to break, but to question—and spoke it into stone that listens. The Questioning Churn-Revelers were formed at the Standing Annex with intention and craft both.",
+        "weight": 2,
+        "day": 10
       }
     ]
   },
@@ -18533,14 +18664,14 @@
   "featureOffers": [],
   "_debtReceipts": [],
   "skillUses": {
-    "plan": 18,
+    "plan": 19,
     "discuss": 1,
     "travel": 14,
     "scout": 8,
     "prepare": 11,
     "careful": 12,
     "woo": 1,
-    "rapport": 19,
+    "rapport": 20,
     "retreat": 1,
     "ask": 10,
     "help": 13,
@@ -18558,7 +18689,7 @@
     "misdirect": 2,
     "analyze": 1,
     "insight": 1,
-    "discipline": 1,
+    "discipline": 2,
     "gamble": 1,
     "lead": 2,
     "rally": 1,
@@ -18568,7 +18699,8 @@
     "calm": 1,
     "speak plainly": 1,
     "propose": 1,
-    "spiritual": 1
+    "spiritual": 1,
+    "announce": 1
   },
   "aptitudeEarnCount": {
     "faithful": 1,
@@ -18728,6 +18860,14 @@
       "day": 9,
       "worldDay": 90,
       "actionCount": 225
+    },
+    {
+      "companionId": "coil",
+      "kind": "deed",
+      "delta": 0.5,
+      "day": 10,
+      "worldDay": 90,
+      "actionCount": 236
     }
   ],
   "_exchangeReceipts": [],
@@ -19518,7 +19658,7 @@
     }
   },
   "_opUnknown": {
-    "sceneSummary": 103,
+    "sceneSummary": 104,
     "scene_summary": 1,
     "discoveryEligible": 1
   },
@@ -19902,7 +20042,54 @@
       "discovered": true
     }
   ],
-  "_pendingLedger": [],
+  "_pendingLedger": [
+    {
+      "schemaVersion": 1,
+      "at": "2026-09-28T22:42:13.445Z",
+      "worldDay": 90,
+      "who": "char-mrum8y4d",
+      "playerKey": "player-s9z9u1",
+      "where": "gen-the-standing-annex",
+      "what": "The Questioning Churn-Revelers band was officially named and formed at the Standing Annex, their purpose declared to ask and seek answers rather than break.",
+      "tags": [
+        "band_formed",
+        "declaration",
+        "precursor_response"
+      ],
+      "spectrumDeltas": {
+        "falsehood_truth": 0.05,
+        "chaos_order": 0.08
+      },
+      "visibility": "witnessed",
+      "impactsLocal": true,
+      "people": [
+        {
+          "id": "taken-person",
+          "name": "Sable",
+          "role": "The person who came willingly from the city to the Unlit Deep",
+          "why": "present"
+        },
+        {
+          "id": "halvex_coil",
+          "name": "Halvex Coil",
+          "role": "Master of coordinated chaos, now questioning their mandate",
+          "why": "present"
+        },
+        {
+          "id": "orla-yardley",
+          "name": "Orla Yardley",
+          "role": "A Syllogist who came carrying a breaking mandate and chose to question it instea",
+          "why": "present"
+        },
+        {
+          "id": "radiant-agent-seraphine-s-hand",
+          "name": "Vail Langley",
+          "role": "Agent of Seraphine; now a living example of authority willing to ask",
+          "why": "present"
+        }
+      ]
+    }
+  ],
   "_gmRefusals": [
     {
       "at": "2026-09-15T00:29:28.269Z",

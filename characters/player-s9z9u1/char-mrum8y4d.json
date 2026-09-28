@@ -16152,8 +16152,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790636325736,
-  "rev": 1098,
+  "updatedAt": 1790636414050,
+  "rev": 1106,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -18997,12 +18997,102 @@
     {
       "id": "band-the-questioning-churn-revelers",
       "name": "The Questioning Churn-Revelers",
-      "count": 0,
+      "count": 8,
       "quality": 1,
       "from": "the_standing_annex",
       "condition": "fresh",
       "raisedDay": 90,
-      "losses": 0
+      "losses": 0,
+      "contingents": [
+        {
+          "n": 1,
+          "quality": 3,
+          "does": [
+            "KNOW",
+            "SHAPE",
+            "PROTECT",
+            "MOVE",
+            "SUSTAIN",
+            "HARM",
+            "MARTIAL"
+          ],
+          "what": "Kael — Road-warden; a traveler who moves between the reaches and carries true ne",
+          "npcId": "kael-road-warden"
+        },
+        {
+          "n": 1,
+          "quality": 5,
+          "does": [
+            "INFLUENCE",
+            "KNOW",
+            "SHAPE",
+            "HARM"
+          ],
+          "what": "Halvex Coil — Master of coordinated chaos, now questioning their mandate",
+          "npcId": "halvex_coil"
+        },
+        {
+          "n": 1,
+          "quality": 5,
+          "does": [
+            "INFLUENCE",
+            "KNOW",
+            "MOVE",
+            "HARM"
+          ],
+          "what": "Vessin Tallow-bark — Lone traveler; reader of falsecrafts; partner",
+          "npcId": "traveler-woman"
+        },
+        {
+          "n": 1,
+          "quality": 4,
+          "does": [
+            "INFLUENCE",
+            "HARM"
+          ],
+          "what": "Vail Langley — Agent of Seraphine; now a living example of authority willing to ",
+          "npcId": "radiant-agent-seraphine-s-hand"
+        },
+        {
+          "n": 1,
+          "quality": 4,
+          "does": [
+            "MOVE",
+            "HARM"
+          ],
+          "what": "Veln Ashpause — Hourkeeper who perceives time differently",
+          "npcId": "hourkeeper-confluence"
+        },
+        {
+          "n": 1,
+          "quality": 3,
+          "does": [
+            "INFLUENCE",
+            "HARM"
+          ],
+          "what": "Sable — The person who came willingly from the city to the Unlit Deep",
+          "npcId": "taken-person"
+        },
+        {
+          "n": 1,
+          "quality": 3,
+          "does": [
+            "SHAPE",
+            "HARM"
+          ],
+          "what": "Tessvel Cairn — Junior wright on posting-duty at the Eastern Intake notice board",
+          "npcId": "tessvel-cairn"
+        },
+        {
+          "n": 1,
+          "quality": 1,
+          "does": [
+            "HARM"
+          ],
+          "what": "Ravel — visitor at the Kindly Rest",
+          "npcId": "steady-voice-woman"
+        }
+      ]
     }
   ],
   "_silasGrantsRevoked": true,
@@ -19358,6 +19448,38 @@
     },
     {
       "text": "The Questioning Churn-Revelers is raised at The Standing Annex — and stands empty until somebody joins it.",
+      "announced": false
+    },
+    {
+      "text": "Kael stands in The Questioning Churn-Revelers now.",
+      "announced": false
+    },
+    {
+      "text": "Halvex Coil stands in The Questioning Churn-Revelers now.",
+      "announced": false
+    },
+    {
+      "text": "Vessin Tallow-bark stands in The Questioning Churn-Revelers now.",
+      "announced": false
+    },
+    {
+      "text": "Vail Langley stands in The Questioning Churn-Revelers now.",
+      "announced": false
+    },
+    {
+      "text": "Veln Ashpause stands in The Questioning Churn-Revelers now.",
+      "announced": false
+    },
+    {
+      "text": "Sable stands in The Questioning Churn-Revelers now.",
+      "announced": false
+    },
+    {
+      "text": "Tessvel Cairn stands in The Questioning Churn-Revelers now.",
+      "announced": false
+    },
+    {
+      "text": "Ravel stands in The Questioning Churn-Revelers now.",
       "announced": false
     }
   ],

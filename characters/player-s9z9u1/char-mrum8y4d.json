@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 10,
-  "xp": 982,
+  "xp": 987,
   "attributes": {
     "physical": 4,
     "mental": 5,
@@ -123,21 +123,22 @@
   ],
   "alignment": {
     "mechanical_spiritual": 0.0077000000000000055,
-    "falsehood_truth": 0.4045152042918214,
+    "falsehood_truth": 0.41428944407723034,
     "demonic_angelic": -0.020000000000000004,
     "dark_light": 0.085,
     "concrete_abstract": 0.19010195117080747,
-    "chaos_order": -0.04462680781249999,
+    "chaos_order": -0.027395467421874986,
     "body_mind": 0.0658375,
     "emotional_logical": 0.06547939778515624,
     "space_time": 0.028000000000000004,
-    "violence_peace": 0.06510059374999999
+    "violence_peace": 0.06510059374999999,
+    "destruction_creation": 0.04000000000000001
   },
   "attunement": 10,
   "maxHealth": 83,
   "health": 83,
   "maxEnergy": 161,
-  "energy": 115,
+  "energy": 107,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -517,87 +518,76 @@
         "player": "Ask everyone to come to the local shrine- especially Vail... see if she'd like to participate in establishing a Radiant position on the circle the shrine that currently holds places for the 4 cardinal directions.",
         "summary": "At Whistling Woman Post's shrine, Loki invited Vail and other travelers to establish a shared position at the cardinal points—offering ground that no single authority held yet. Vail stepped into the invitation, reading it for what it actually was: a choice, not a command.",
         "narration": "You step into the common room and name it plainly: a shrine stands here, kept in the way of this place, and it holds positions for the four cardinal directions. You speak to the room—to Vail first, meeting her stillness directly, and to the travelers warming themselves by the fire. You ask them to come to the shrine and establish something together there. Not a demand. An offer of ground that belongs to nobody yet.\n\nVail's head tilts. Her grey coat catches the firelight as she considers you without moving. Then she nods—not a promise, but a willingness to hear it out. The other travelers, two merchants heading outbound and a courier resting between runs, exchange glances. They rise without comment and follow as you lead toward the courtyard.\n\nThe shrine is small and old, built into the corner where two stone walls meet. The moonlight falls clean across its face. Four carved alcoves mark the cardinal points—each one waiting, empty of any sign or stone or binding. You can feel the architecture of it: a place made to hold something, not yet decided what. Vail stands at the threshold and reads it the way she reads everything—with absolute attention. When you speak of a Radiant position, of her choosing to establish it here, something shifts in her certainty. Not a breaking. A reorientation. She looks at you, then back at the shrine's empty alcoves.\n\n\"You are asking me to choose,\" she says quietly. Not hostile. Precise. The other travelers stand waiting, patient, giving the moment its weight."
+      },
+      {
+        "player": "Silas Weir and his Ashwarden built this place for all who would embrace the value in diversity.  It does not allow you to bring foreclosure into the circle... so, No Vail, I'm not asking you to choose - I'm asking you to embrace alternate approaches and the value that asking questions and seeking answers brings... THAT is what I hope a Radiant can build a shining example of at this shrine.  Will you do it? ",
+        "summary": "At Whistling Woman Post's shrine, Loki called Vail to embrace the founding principle of shared ground—asking questions instead of closing doors. Vail accepted, choosing to become a threshold rather than a fortress, and committed to carrying that choice back to the High Luminary herself.",
+        "narration": "You name it plainly to Vail: Silas Weir and his Ashwarden built this shrine for all who would embrace the value in diversity. It does not allow foreclosure into the circle—not for the Radiant, not for any single authority. You are not asking her to choose a side. You are asking her to build something here that the Radiant can offer without taking: the shining example of an authority willing to ask questions and seek answers instead of closing doors.\n\nVail's stillness deepens. Her eyes move from your face to the shrine's empty alcoves, one cardinal point at a time. Her hands, which have rested at her sides since you arrived, shift slightly—not a tremor. A recalibration. When she speaks, her voice carries the same absolute clarity it always has, but the ground beneath it has changed.\n\n\"The High Luminary sent me to seize,\" she says quietly. \"To make certain of what could not be trusted to answer on its own. I came believing that was mercy.\" She turns back to you. \"You are offering something else. Not permission. Not a concession. An architecture where asking holds as much weight as answering.\"\n\nShe walks toward the shrine's threshold. The merchants and the courier watch her move, reading something in her bearing that has shifted. She stands at the eastern alcove—the place where the Radiant might stand—and turns to face outward toward the open courtyard. \"I will hold this place as a threshold, not a fortress. I will ask what the valley is becoming, instead of deciding what it should be.\" She pauses. \"And I will tell Seraphine that her agent found something here that changes what an enforcer can do.\"\n\nThe other travelers rise quietly and move toward the shrine. They do not speak, but their presence becomes an answer to your answer.\n\n*✦ The Radiant: +1 — offered a path through absolute order that preserves both authority and the value of asking questions.*"
       }
     ],
     "lastTurn": {
-      "narration": "You step into the common room and name it plainly: a shrine stands here, kept in the way of this place, and it holds positions for the four cardinal directions. You speak to the room—to Vail first, meeting her stillness directly, and to the travelers warming themselves by the fire. You ask them to come to the shrine and establish something together there. Not a demand. An offer of ground that belongs to nobody yet.\n\nVail's head tilts. Her grey coat catches the firelight as she considers you without moving. Then she nods—not a promise, but a willingness to hear it out. The other travelers, two merchants heading outbound and a courier resting between runs, exchange glances. They rise without comment and follow as you lead toward the courtyard.\n\nThe shrine is small and old, built into the corner where two stone walls meet. The moonlight falls clean across its face. Four carved alcoves mark the cardinal points—each one waiting, empty of any sign or stone or binding. You can feel the architecture of it: a place made to hold something, not yet decided what. Vail stands at the threshold and reads it the way she reads everything—with absolute attention. When you speak of a Radiant position, of her choosing to establish it here, something shifts in her certainty. Not a breaking. A reorientation. She looks at you, then back at the shrine's empty alcoves.\n\n\"You are asking me to choose,\" she says quietly. Not hostile. Precise. The other travelers stand waiting, patient, giving the moment its weight.",
-      "sceneSummary": "At Whistling Woman Post's shrine, Loki invited Vail and other travelers to establish a shared position at the cardinal points—offering ground that no single authority held yet. Vail stepped into the invitation, reading it for what it actually was: a choice, not a command.",
+      "narration": "You name it plainly to Vail: Silas Weir and his Ashwarden built this shrine for all who would embrace the value in diversity. It does not allow foreclosure into the circle—not for the Radiant, not for any single authority. You are not asking her to choose a side. You are asking her to build something here that the Radiant can offer without taking: the shining example of an authority willing to ask questions and seek answers instead of closing doors.\n\nVail's stillness deepens. Her eyes move from your face to the shrine's empty alcoves, one cardinal point at a time. Her hands, which have rested at her sides since you arrived, shift slightly—not a tremor. A recalibration. When she speaks, her voice carries the same absolute clarity it always has, but the ground beneath it has changed.\n\n\"The High Luminary sent me to seize,\" she says quietly. \"To make certain of what could not be trusted to answer on its own. I came believing that was mercy.\" She turns back to you. \"You are offering something else. Not permission. Not a concession. An architecture where asking holds as much weight as answering.\"\n\nShe walks toward the shrine's threshold. The merchants and the courier watch her move, reading something in her bearing that has shifted. She stands at the eastern alcove—the place where the Radiant might stand—and turns to face outward toward the open courtyard. \"I will hold this place as a threshold, not a fortress. I will ask what the valley is becoming, instead of deciding what it should be.\" She pauses. \"And I will tell Seraphine that her agent found something here that changes what an enforcer can do.\"\n\nThe other travelers rise quietly and move toward the shrine. They do not speak, but their presence becomes an answer to your answer.\n\n*✦ The Radiant: +1 — offered a path through absolute order that preserves both authority and the value of asking questions.*",
+      "sceneSummary": "At Whistling Woman Post's shrine, Loki called Vail to embrace the founding principle of shared ground—asking questions instead of closing doors. Vail accepted, choosing to become a threshold rather than a fortress, and committed to carrying that choice back to the High Luminary herself.",
       "choices": [
         {
-          "label": "Speak plainly about what you saw in her—how she reorganized her certainty when false ground broke. Tell her the shrine needs someone who can hold that kind of integrity.",
+          "label": "Walk with Vail into the shrine's eastern alcove and stand witness to what she decides to establish",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {
-            "falsehood_truth": 0.3,
-            "chaos_order": 0.2
-          },
-          "difficulty": "normal",
+          "axes": {},
+          "difficulty": "very easy",
+          "opposedDifficulty": null,
           "intentTags": [
-            "negotiate",
-            "comfort",
-            "truth"
+            "calm",
+            "negotiate"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Step back and let Vail speak first—offer her the space to name what she wants to do with this moment, without your voice shaping it.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "violence_peace": 0.2,
-            "falsehood_truth": 0.1
-          },
-          "difficulty": "easy",
-          "intentTags": [
-            "wait",
-            "listen"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Use Harmonic Voice to hold the moment steady—make certain every person here can feel the weight of what is being offered, so the choice is made in full clarity.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "chaos_order": 0.3,
-            "falsehood_truth": 0.1
-          },
-          "difficulty": "normal",
-          "intentTags": [
-            "command",
-            "empower"
-          ],
-          "abilityId": "harmonic_voice",
-          "energyCost": 5,
-          "trivial": false
-        },
-        {
-          "label": "Ask Vail directly what the Radiant would want a shrine position to be—not what Seraphine wants, but what Vail sees as worth holding here.",
+          "label": "Ask Vail a direct question about what she will tell Seraphine—and what it will cost her to deliver that truth",
           "attribute": "social",
           "subAttribute": "insight",
           "axes": {
-            "falsehood_truth": 0.2,
-            "chaos_order": -0.1
+            "falsehood_truth": 0.4
           },
           "difficulty": "normal",
+          "opposedDifficulty": null,
           "intentTags": [
-            "ask",
-            "listen",
-            "understand"
+            "study",
+            "negotiate"
+          ],
+          "abilityId": "unbearable_word",
+          "energyCost": 6,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Step back and let the shrine settle into what it is becoming—move to where Halvex and the others are waiting, carrying this news forward",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {
+            "violence_peace": 0.2
+          },
+          "difficulty": "very easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "travel"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
       "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": 0,
+        "energy": -3,
         "inventoryAdd": [],
         "inventoryRemove": []
       },
@@ -606,66 +596,127 @@
         {
           "op": "progress",
           "questId": "the-taken-from-the-city",
-          "note": "Vail Langley encountered at Whistling Woman Post and invited into shared ground—the Radiant position at the shrine becomes a place where her reorganized certainty can settle."
+          "title": "The Taken",
+          "summary": "Someone was brought from the city to the Unlit Deep, and the city is pretending it did not happen.",
+          "giver": "the elder of the Unlit Deep",
+          "note": "Vail Langley has accepted a place at the shrine as a threshold rather than a fortress—she will carry word to Seraphine that an authority can ask questions and seek answers instead of closing doors. The sealed chamber is no longer a secret to be seized; it is part of a larger conversation about what the valley is becoming.",
+          "xpReward": null
         }
       ],
-      "standingOps": [],
+      "standingOps": [
+        {
+          "people": "radiant_folk",
+          "delta": 1,
+          "why": "offered a path through absolute order that preserves both authority and the value of asking questions"
+        }
+      ],
       "delegateOps": [],
       "jobOps": [],
       "arcOps": [],
       "adoptSchool": null,
       "offer": {
-        "thing": "The shrine's four empty cardinal alcoves await filling—a structure of held positions, not yet claimed by any single power",
-        "from": "The architecture of Whistling Woman Post itself, and Loki's reading of what Vail had just become—someone whose certainty had reorganized into choice"
+        "thing": "Vail Langley's choice to become a threshold instead of a fortress—her commitment to carry that choice back to the High Luminary herself, risking her own standing to reshape what an enforcer can do",
+        "from": "the shrine's founding principle of shared ground, which Loki named plainly and Vail chose to honor"
       },
       "stageOps": [],
       "scene": {
-        "setting": "The shrine at Whistling Woman Post's courtyard—a small stone structure built into the corner of two walls, moonlit and clear. Four carved alcoves mark the cardinal points, each empty. Vail stands at the threshold. Two merchants and a courier wait nearby, patient and present.",
+        "setting": "The shrine at Whistling Woman Post's courtyard—a small stone structure built into the corner of two walls, now lit by the spilled warmth from the main building's windows. Four carved alcoves mark the cardinal points. The eastern alcove is no longer empty: Vail Langley stands in it, facing outward toward the open courtyard. The night is clear and cold. The moorland stretches flat around the relay station.",
         "npcsPresent": [
           {
             "name": "Vail Langley",
-            "state": "Reading the shrine with absolute attention, then looking at Loki—considering what the invitation actually means"
+            "state": "Standing in the eastern alcove of the shrine, having accepted a place as a threshold rather than a fortress. Her certainty has reorganized itself around a new understanding of what an enforcer can do."
           },
           {
-            "name": "Two merchants and a courier",
-            "state": "Standing in the courtyard, warm from the fire-house, waiting to see what this gathering is"
+            "name": "Two merchants",
+            "state": "Rising from the warmth of the fire-house, moving toward the shrine with quiet presence. They do not speak, but their movement is an answer."
+          },
+          {
+            "name": "A courier",
+            "state": "Rising from rest between runs, moving toward the shrine. Their presence affirms the choice that has been made."
           }
         ],
         "objects": [
           "A small stone shrine built into two meeting walls",
-          "Four carved alcoves facing the cardinal directions, each one empty and waiting",
+          "Four carved alcoves facing the cardinal directions—the eastern alcove now occupied by Vail",
           "Clear autumn moonlight falling across the shrine's face",
-          "The relay station warm and lit behind them"
+          "The relay station warm and lit behind them",
+          "The moorland stretching flat around the post, dotted with small rocks that give this ground its name"
         ],
         "threads": [
-          "What Vail will choose—to establish a Radiant position here, or to refuse it, or to reshape it into something else",
-          "Whether the other travelers will participate in whatever is established",
-          "Whether this becomes a real change in the shrine's function, or a gesture that dissolves when the band leaves"
+          "What Vail will say to Seraphine and how it will change the High Luminary's understanding of the sealed chamber",
+          "Whether this becomes a real threshold for the Radiant, or whether Seraphine's response will reshape it into something else",
+          "The band's journey continuing toward the Standing Annex to meet Halvex Coil and learn what the chamber beneath the Null Stone has revealed"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "vail-langley",
-          "note": "Encountered at Whistling Woman Post's shrine. Offered the choice to establish a Radiant position at the cardinal points—not a command, an invitation. Read it for what it is: a reorientation of her certainty. Considering.",
-          "statusNote": "At the Whistling Woman Post shrine, reading the empty alcoves and what Loki is offering"
+          "npcId": "radiant-agent-seraphine-s-hand",
+          "name": "Vail Langley",
+          "learned": [
+            "She can reorganize her understanding of duty when given a path that honors both her authority and the value of asking questions",
+            "She has chosen to carry a truth back to Seraphine that will reshape what an enforcer's role can be",
+            "She commits to standing at the shrine as a threshold rather than a fortress—offering a shining example of authority willing to seek answers"
+          ],
+          "skillsObserved": [
+            "Ability to accept correction without breaking",
+            "Courage to reshape her own mandate in real time",
+            "Willingness to risk her standing with her own authority to honor a larger principle"
+          ],
+          "relationshipDelta": 1,
+          "status": "active",
+          "statusNote": "Standing in the eastern alcove of the shrine at Whistling Woman Post, having accepted a place as a threshold. Will carry word back to Seraphine that an authority can ask questions and seek answers instead of closing doors.",
+          "note": "Loki appealed to the shrine's founding principle—that it holds ground for all who embrace the value in diversity, and does not allow foreclosure into the circle. Vail recognized this as an architecture where asking holds as much weight as answering. Her absolute mandate has reorganized around a new understanding of what mercy and enforcing can mean."
         }
       ],
       "intentsHeard": [],
-      "factUpdates": [],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "Vail Langley has accepted a place at the shrine as a threshold rather than a fortress—she will carry word to Seraphine that an authority can ask questions and seek answers instead of closing doors. The sealed chamber is no longer a secret to be seized; it is part of a larger conversation about what the valley is becoming.",
+          "subjectId": "radiant-agent-seraphine-s-hand"
+        },
+        {
+          "op": "add",
+          "text": "The shrine at Whistling Woman Post now holds a Radiant position in its eastern alcove—not claimed by absolute authority, but offered as a threshold and example of how an authority can ask questions and seek answers instead of closing doors.",
+          "subjectId": "gen-whistling-woman-post"
+        }
+      ],
       "placeUpdates": [
         {
-          "note": "The shrine's four cardinal alcoves now hold a live offer: a place for positions to be established by those who choose to hold them. The ground is shared, not claimed by any single power.",
-          "subPlace": {
-            "name": "The Shrine",
-            "parent": "Whistling Woman Post",
-            "note": "Four carved alcoves at the cardinal points—empty, waiting, offered as shared ground",
-            "visited": true
+          "note": "The shrine's eastern alcove now holds a Radiant position—not a fortress or a claim, but a threshold offered as an example of authority willing to ask questions and seek answers instead of closing doors. This represents a real change in what the shrine offers and what it means to hold ground here.",
+          "flag": {
+            "radiant_position_established": true,
+            "threshold_not_fortress": true
           }
         }
       ],
       "discovery": null,
-      "codexUpdates": [],
+      "codexUpdates": [
+        {
+          "topic": "vail-langley",
+          "label": "Vail Langley, Enforcer",
+          "kind": "person",
+          "entityId": "radiant-agent-seraphine-s-hand",
+          "fact": "Has accepted a place at the shrine as a threshold rather than a fortress—she will carry word to Seraphine that an authority can ask questions and seek answers instead of closing doors. Her absolute mandate has reorganized around a new understanding of what mercy and enforcing can mean.",
+          "links": [
+            "gen-whistling-woman-post",
+            "the-sealed-chamber",
+            "seraphine-high-luminary"
+          ]
+        },
+        {
+          "topic": "gen-whistling-woman-post",
+          "label": "Whistling Woman Post",
+          "kind": "place",
+          "entityId": "gen-whistling-woman-post",
+          "fact": "The shrine now holds a Radiant position in its eastern alcove—not claimed by absolute authority, but offered as a threshold and example of how an authority can ask questions and seek answers instead of closing doors.",
+          "links": [
+            "vail-langley",
+            "the-architect-in-the-lower-annex"
+          ]
+        }
+      ],
       "holdingOps": [],
       "holdTrades": [],
       "debtOps": [],
@@ -681,50 +732,51 @@
       "unlockPrecursor": null,
       "unlockSubstrate": null,
       "timeOps": {
-        "hoursPassed": 0.5,
-        "why": "a brief crossing to the shrine and the opening of this moment"
+        "hoursPassed": 1,
+        "why": "standing witness to Vail's choice and the shrine's settling into what it is becoming"
       },
       "moveTo": null,
       "stateOps": [],
       "itemUpdates": [],
       "deriveItem": null,
-      "imagePrompt": null,
+      "imagePrompt": "Vail Langley stands in the eastern alcove of the shrine, her grey coat catching firelight from the relay station behind her. Her stillness has deepened into something new—not the absence of motion, but a stillness that contains reorganization. She faces outward toward the open courtyard and the moonlit moorland beyond. Behind her, the shrine's three other alcoves wait empty. Merchants and a courier move quietly toward her, their presence affirming something that has shifted in what an authority can choose to become.",
       "imageMedium": null,
       "newAbility": null,
       "gambitOps": null,
       "gambitApt": false,
-      "markDefiningMoment": null,
-      "markTeacher": null,
-      "offerPromotion": null,
-      "offerAcquisition": null,
-      "offerIntent": null,
-      "sceneEnded": false
+      "sceneEnded": false,
+      "momentArt": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Vail%20Langley%20stands%20in%20the%20eastern%20alcove%20of%20the%20shrine%2C%20her%20grey%20coat%20catching%20firelight%20from%20the%20relay%20station%20behind%20her.%20Her%20stillness%20has%20deepened%20into%20something%20new%E2%80%94not%20the%20absence%20of%20motion%2C%20but%20a%20stillness%20that%20contains%20reorganization.%20She%20faces%20outward%20toward%20the%20open%20courtyard%20and%20the%20moon%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=54352&nologo=true"
     },
     "sceneState": {
-      "setting": "The shrine at Whistling Woman Post's courtyard—a small stone structure built into the corner of two walls, moonlit and clear. Four carved alcoves mark the cardinal points, each empty. Vail stands at the threshold. Two merchants and a courier wait nearby, patient and present.",
+      "setting": "The shrine at Whistling Woman Post's courtyard—a small stone structure built into the corner of two walls, now lit by the spilled warmth from the main building's windows. Four carved alcoves mark the cardinal points. The eastern alcove is no longer empty: Vail Langley stands in it, facing outward toward the open courtyard. The night is clear and cold. The moorland stretches flat around the relay…",
       "npcsPresent": [
         {
           "name": "Vail Langley",
-          "state": "Reading the shrine with absolute attention, then looking at Loki—considering what the invitation actually means"
+          "state": "Standing in the eastern alcove of the shrine, having accepted a place as a threshold rather than a fortress. Her certain"
         },
         {
-          "name": "Two merchants and a courier",
-          "state": "Standing in the courtyard, warm from the fire-house, waiting to see what this gathering is"
+          "name": "Two merchants",
+          "state": "Rising from the warmth of the fire-house, moving toward the shrine with quiet presence. They do not speak, but their mov"
+        },
+        {
+          "name": "A courier",
+          "state": "Rising from rest between runs, moving toward the shrine. Their presence affirms the choice that has been made."
         }
       ],
       "objects": [
         "A small stone shrine built into two meeting walls",
-        "Four carved alcoves facing the cardinal directions, each one empty and waiting",
+        "Four carved alcoves facing the cardinal directions—the eastern alcove now occupi",
         "Clear autumn moonlight falling across the shrine's face",
-        "The relay station warm and lit behind them"
+        "The relay station warm and lit behind them",
+        "The moorland stretching flat around the post, dotted with small rocks that give "
       ],
       "threads": [
-        "What Vail will choose—to establish a Radiant position here, or to refuse it, or to reshape it into something else",
-        "Whether the other travelers will participate in whatever is established",
-        "Whether this becomes a real change in the shrine's function, or a gesture that dissolves when the band leaves"
+        "What Vail will say to Seraphine and how it will change the High Luminary's understanding of the sealed chamber",
+        "Whether this becomes a real threshold for the Radiant, or whether Seraphine's response will reshape it into something else",
+        "The band's journey continuing toward the Standing Annex to meet Halvex Coil and learn what the chamber beneath the Null Stone has revealed"
       ]
     },
-    "beats": 2,
+    "beats": 3,
     "subPlace": {
       "slug": "the-shrine",
       "name": "The Shrine",
@@ -733,8 +785,8 @@
   },
   "clock": {
     "schemaVersion": 1,
-    "day": 8,
-    "hour": 23,
+    "day": 9,
+    "hour": 0,
     "realAnchor": null
   },
   "companions": [
@@ -754,14 +806,14 @@
       "locationEntityId": "the-unlit-deep",
       "status": "active",
       "progress": [
-        "The High Luminary's reach extends into the valley—she knows of the sealed chamber and has sent an agent to intercept the band. The question of what Seraphine will do with that knowledge is now immediate.",
         "Vail Langley, agent of the High Luminary, has named herself and made Seraphine's position explicit: the sealed chamber is known in Radiant halls, and she will negotiate or seize. The choice of how to answer will determine whether the band reaches the Standing Annex unimpeded or faces direct opposition.",
         "Loki has corrected Seraphine's fundamental assumption about the sealed chamber's location—it lies beneath the Crossing, not Millbrook. Vail Langley's absolute certainty is now reorganizing around a fact that unmakes her mandate to seize control at the wrong site. The balance of power has shifted.",
         "Loki has corrected the High Luminary's fundamental misreading of the sealed chamber's location. Vail Langley's mandate to seize control at Millbrook is now built on false ground. The enforcer's certainty is reorganizing.",
         "Orla speaks directly to Vail's breaking mandate—offering the language of someone who has lived through exactly this reshuffling of conviction. The Enforcer's absolute certainty is being offered a doorway out.",
         "Vail Langley, Seraphine's direct agent, has heard the sealed chamber's true location and watched her mandate collapse. She stands at the threshold between returning to broken certainty and riding ahead to understand what the broken ground actually holds.",
         "Vail Langley, Seraphine's direct agent, has been corrected about the sealed chamber's true location and has chosen to ride ahead to the Standing Annex to understand what it actually contains before reporting back. Her absolute mandate has reorganized into a choice.",
-        "Vail Langley encountered at Whistling Woman Post and invited into shared ground—the Radiant position at the shrine becomes a place where her reorganized certainty can settle."
+        "Vail Langley encountered at Whistling Woman Post and invited into shared ground—the Radiant position at the shrine becomes a place where her reorganized certainty can settle.",
+        "Vail Langley has accepted a place at the shrine as a threshold rather than a fortress—she will carry word to Seraphine that an authority can ask questions and seek answers instead of closing doors. The sealed chamber is no longer a secret to be seized; it is part of a larger conversation about what the valley is becoming."
       ],
       "aliases": [],
       "startedAt": "2026-07-24T21:30:43.637Z"
@@ -1652,7 +1704,7 @@
         "locationId": "gen-the-made-gate",
         "day": 8
       },
-      "relationship": 4,
+      "relationship": 5,
       "history": [
         "[d8] She knows about the sealed chamber beneath Millbrook and has been sent to intercept Loki before the band reaches the Standing Annex. She knows Loki's name. She knows what lies under the Null Stone.",
         "[d8] Named herself directly when asked—spoke without hedging the way someone speaks who has spent years learning to speak truth rather than deflect. Offered negotiation before force on Seraphine's direct instruction. She believes the band will yield.",
@@ -1662,34 +1714,33 @@
         "[d8] Their name is revealed: Vail Langley (was known as \"Enforcer of Seraphine's will\")",
         "[d8] Her absolute mandate collapsed when corrected about the sealed chamber's true location beneath the Crossing, not Millbrook. She has chosen to ride ahead to the Standing Annex to understand what lies there before reporting back to Seraphine. Her certainty has reorganized—no longer an order she…",
         "[d8] Waited at Whistling Woman Post with foreknowledge. Names Loki by the lower Annex records. Authorized to demand on behalf of the High Luminary.",
-        "[d8] Waits with foreknowledge at the threshold. Names Loki by the lower Annex records and by the Wardens of Cairnhold's own naming. Knows the sealed chamber exists. Speaks for Seraphine, the High Luminary."
+        "[d8] Waits with foreknowledge at the threshold. Names Loki by the lower Annex records and by the Wardens of Cairnhold's own naming. Knows the sealed chamber exists. Speaks for Seraphine, the High Luminary.",
+        "[d8] Loki appealed to the shrine's founding principle—that it holds ground for all who embrace the value in diversity, and does not allow foreclosure into the circle. Vail recognized this as an architecture where asking holds as much weight as answering. Her absolute mandate has reorganized around a…"
       ],
       "knownFacts": [
-        "A broken mandate built on false ground can be rebuilt, or abandoned entirely",
-        "Understanding can be brought to Seraphine in place of mere correction",
-        "Seraphine's mandate was built on false ground",
-        "Understanding can reshape order without breaking it",
-        "Her own honesty matters more than absolute obedience",
         "The engineering records in the lower Annex name Loki",
         "The Radiant Plateau knows about the sealed chamber",
         "This agent was sent to intercept before the band reaches the Standing Annex",
         "The Wardens of Cairnhold have named Loki",
-        "Someone in the Radiant hierarchy knows about the sealed chamber beneath Millbrook"
+        "Someone in the Radiant hierarchy knows about the sealed chamber beneath Millbrook",
+        "She can reorganize her understanding of duty when given a path that honors both her authority and the value of asking questions",
+        "She has chosen to carry a truth back to Seraphine that will reshape what an enforcer's role can be",
+        "She commits to standing at the shrine as a threshold rather than a fortress—offering a shining example of authority willing to seek answers"
       ],
       "skillsObserved": [
-        "Listens without flinching when her certainty is unmade",
-        "Reorganizes conviction in real time when false ground is revealed",
-        "The ability to reorganize conviction when false ground is revealed",
         "Trained in Harmonic voice—clear, carrying speech",
         "Absolute stillness and patience—has waited for this moment with certainty",
-        "Knowledge of sealed things and what they contain"
+        "Knowledge of sealed things and what they contain",
+        "Ability to accept correction without breaking",
+        "Courage to reshape her own mandate in real time",
+        "Willingness to risk her standing with her own authority to honor a larger principle"
       ],
       "status": "active",
       "sex": "female",
       "gender": "woman",
       "pronouns": "she/her",
       "age": 42,
-      "statusNote": "Riding ahead with the band toward the Standing Annex, choosing understanding over absolute order",
+      "statusNote": "Standing in the eastern alcove of the shrine at Whistling Woman Post, having accepted a place as a threshold. Will carry word back to Seraphine that an authority can ask questions and seek answers instead of closing doors.",
       "domains": {
         "primary": "mason"
       },
@@ -1698,7 +1749,7 @@
         "locationId": "gen-whistling-woman-post",
         "day": 8
       },
-      "met": 9,
+      "met": 10,
       "roleSince": 88,
       "nameRevealed": true,
       "_mintedByJoin": {
@@ -2084,9 +2135,13 @@
       "visits": 2,
       "notes": [
         "[d8] A Radiant agent waits at the threshold with foreknowledge and a demand from the High Luminary—the sealed chamber is no longer hidden.",
-        "[d8] The shrine's four cardinal alcoves now hold a live offer: a place for positions to be established by those who choose to hold them. The ground is shared, not claimed by any single power."
+        "[d8] The shrine's four cardinal alcoves now hold a live offer: a place for positions to be established by those who choose to hold them. The ground is shared, not claimed by any single power.",
+        "[d8] The shrine's eastern alcove now holds a Radiant position—not a fortress or a claim, but a threshold offered as an example of authority willing to ask questions and seek answers instead of closing doors. This represents a real change in what the shrine offers and what it means to hold ground here."
       ],
-      "flags": {},
+      "flags": {
+        "radiant_position_established": true,
+        "threshold_not_fortress": true
+      },
       "lastVisit": 8,
       "vectorsKnown": [],
       "subPlaces": {
@@ -2311,10 +2366,6 @@
     "turnsSinceOffer": 0,
     "recentOffers": [
       {
-        "thing": "The woman from the Radiant Plateau speaks her mandate clearly and without malice — but the clarity is the threat itself",
-        "from": "Seraphine's knowledge of the sealed chamber and her belief that only unified order can meet what wakes"
-      },
-      {
         "thing": "Vail Langley names herself directly—a significant breach of operational security that speaks to her own confidence or her belief that the…",
         "from": "Seraphine's strategy: offering negotiation before force, trusting that Loki will see reason. Vail believes the band will yield."
       },
@@ -2329,6 +2380,10 @@
       {
         "thing": "The shrine's four empty cardinal alcoves await filling—a structure of held positions, not yet claimed by any single power",
         "from": "The architecture of Whistling Woman Post itself, and Loki's reading of what Vail had just become—someone whose certainty had reorganized…"
+      },
+      {
+        "thing": "Vail Langley's choice to become a threshold instead of a fortress—her commitment to carry that choice back to the High Luminary herself…",
+        "from": "the shrine's founding principle of shared ground, which Loki named plainly and Vail chose to honor"
       }
     ],
     "wantProgress": {
@@ -13762,10 +13817,13 @@
         "facts": [
           "[d8] A waystation kept by Deni Cors, lying two hours north on the spinward path from Millbrook. Offers dry quarters, relay station facilities, and shrine space. Known as safe ground for travelers.",
           "[d8] A waystation on the spinward relay network, kept by Deni Cors. Safe ground for travelers. Located two hours north of Millbrook on the long road.",
-          "[d8] you have walked here"
+          "[d8] you have walked here",
+          "[d8] The shrine now holds a Radiant position in its eastern alcove—not claimed by absolute authority, but offered as a threshold and example of how an authority can ask questions and seek answers instead of closing doors."
         ],
         "links": [
-          "millbrook"
+          "millbrook",
+          "vail-langley",
+          "the-architect-in-the-lower-annex"
         ],
         "aliases": [],
         "createdDay": 8,
@@ -13777,11 +13835,17 @@
         "label": "Radiant authority sent to intercept",
         "kind": "person",
         "facts": [
-          "[d8] Radiant authority sent to intercept"
+          "[d8] Radiant authority sent to intercept",
+          "[d8] Has accepted a place at the shrine as a threshold rather than a fortress—she will carry word to Seraphine that an authority can ask questions and seek answers instead of closing doors. Her absolute mandate has reorganized around a new understanding of what mercy and enforcing can mean."
         ],
-        "links": [],
+        "links": [
+          "gen-whistling-woman-post",
+          "the-sealed-chamber",
+          "seraphine-high-luminary"
+        ],
         "aliases": [
-          "Enforcer of Seraphine's will"
+          "Enforcer of Seraphine's will",
+          "Vail Langley, Enforcer"
         ],
         "createdDay": 8,
         "entityId": "radiant-agent-seraphine-s-hand",
@@ -14243,19 +14307,19 @@
     "deferredMysteries": []
   },
   "tendencies": {
-    "devotion": 0.4438801788519423,
-    "cerebral": 15.209165096638136,
-    "social": 17.601131789866088,
-    "strategic": 11.008519743006216,
-    "cautious": 4.504613515492492,
-    "amorous": 4.188549382568824,
-    "generous": 4.333783901971457,
-    "ruthless": 0.9702487592032134,
-    "risky": 0.09086168594151924,
-    "patient": 0.024812692417425803,
-    "deception": 0.028883259209784816,
-    "carousing": 0.6181412104811282,
-    "leadership": 1.267981970217699
+    "devotion": 0.43278317438064373,
+    "cerebral": 14.828935969222183,
+    "social": 20.161103495119434,
+    "strategic": 10.73330674943106,
+    "cautious": 4.3919981776051795,
+    "amorous": 4.083835648004603,
+    "generous": 4.225439304422171,
+    "ruthless": 0.9459925402231331,
+    "risky": 0.08859014379298125,
+    "patient": 0.02419237510699016,
+    "deception": 0.028161177729540195,
+    "carousing": 0.6026876802191,
+    "leadership": 1.2362824209622565
   },
   "aptitudes": [
     "strategist",
@@ -14264,7 +14328,7 @@
     "orator",
     "faithful"
   ],
-  "actionCount": 224,
+  "actionCount": 225,
   "grantsVersion": 1,
   "precursorAccess": [
     "address_sense"
@@ -14281,7 +14345,7 @@
     "horizon": 1,
     "verist": -1,
     "churnfolk": 1,
-    "radiant_folk": 0
+    "radiant_folk": 1
   },
   "standingLedger": [
     {
@@ -14352,11 +14416,26 @@
       "people": "radiant_folk",
       "delta": -1,
       "text": "corrected Seraphine's fundamental assumption about the sealed chamber's location, reshaping her mandate"
+    },
+    {
+      "at": 90,
+      "kind": "act",
+      "people": "radiant_folk",
+      "delta": 1,
+      "text": "offered a path through absolute order that preserves both authority and the value of asking questions"
     }
   ],
   "nativeGrantsVersion": 2,
   "reconcileVersion": 89,
   "gallery": [
+    {
+      "kind": "moment",
+      "prompt": "Vail Langley stands in the eastern alcove of the shrine, her grey coat catching firelight from the relay station behind her. Her stillness has deepened into something new—not the absence of motion, bu",
+      "url": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Vail%20Langley%20stands%20in%20the%20eastern%20alcove%20of%20the%20shrine%2C%20her%20grey%20coat%20catching%20firelight%20from%20the%20relay%20station%20behind%20her.%20Her%20stillness%20has%20deepened%20into%20something%20new%E2%80%94not%20the%20absence%20of%20motion%2C%20but%20a%20stillness%20that%20contains%20reorganization.%20She%20faces%20outward%20toward%20the%20open%20courtyard%20and%20the%20moon%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=54352&nologo=true",
+      "caption": "At Whistling Woman Post's shrine, Loki called Vail to embrace the founding principle of sh",
+      "worldDay": 90,
+      "at": "2026-09-28T21:34:20.301Z"
+    },
     {
       "kind": "battle",
       "prompt": "Two figures — a saint in unsettled robes, numinous and half-dissolving at the edges, and a soul being driven backward — the saint's blow lands before the arm finishes moving, the soul reeling but stil",
@@ -15443,8 +15522,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790631044064,
-  "rev": 1047,
+  "updatedAt": 1790631260301,
+  "rev": 1049,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -16550,7 +16629,7 @@
     "umbral_depths": 54,
     "the_quickwood": 101,
     "the_center": 50,
-    "valley": 49,
+    "valley": 50,
     "the_open_reach": 3
   },
   "opLossPending": false,
@@ -16726,10 +16805,10 @@
     {
       "id": "sess-22",
       "startedAt": "2026-09-28T20:26:42.371Z",
-      "lastAt": "2026-09-28T20:26:42.371Z",
+      "lastAt": "2026-09-28T21:34:20.284Z",
       "startDay": 90,
       "endDay": 90,
-      "beats": 1
+      "beats": 2
     }
   ],
   "establishedFacts": [
@@ -16900,11 +16979,23 @@
       "text": "Vail Langley, Seraphine's direct agent, has had her absolute mandate reshuffled by correction—the sealed chamber lies beneath the Crossing, not Millbrook. She has chosen to ride ahead to the Standing Annex with the band to understand what lies there before reporting back to the High Luminary.",
       "day": 8,
       "subjectId": "radiant-agent-seraphine-s-hand"
+    },
+    {
+      "id": "radiant-agent-seraphine-s-hand",
+      "text": "Vail Langley has accepted a place at the shrine as a threshold rather than a fortress—she will carry word to Seraphine that an authority can ask questions and seek answers instead of closing doors. The sealed chamber is no longer a secret to be seized; it is part of a larger conversation about…",
+      "day": 8,
+      "subjectId": "radiant-agent-seraphine-s-hand"
+    },
+    {
+      "id": "gen-whistling-woman-post",
+      "text": "The shrine at Whistling Woman Post now holds a Radiant position in its eastern alcove—not claimed by absolute authority, but offered as a threshold and example of how an authority can ask questions and seek answers instead of closing doors.",
+      "day": 8,
+      "subjectId": "gen-whistling-woman-post"
     }
   ],
   "_opLedger": {
     "offer": {
-      "applied": 60,
+      "applied": 61,
       "rejected": 3,
       "lastWhy": "rejected-shape"
     },
@@ -16921,28 +17012,28 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 258,
-    "choices": 258,
-    "characterDeltas": 142,
-    "scene": 258,
-    "placeUpdates": 33,
-    "codexUpdates": 151,
-    "timeOps": 206,
-    "offer": 53,
+    "sceneSummary": 259,
+    "choices": 259,
+    "characterDeltas": 143,
+    "scene": 259,
+    "placeUpdates": 34,
+    "codexUpdates": 152,
+    "timeOps": 207,
+    "offer": 54,
     "generateRequest": 7,
-    "sceneEnded": 127,
-    "npcUpdates": 208,
+    "sceneEnded": 128,
+    "npcUpdates": 209,
     "moveTo": 13,
-    "gambitApt": 84,
+    "gambitApt": 85,
     "deeds": 17,
-    "questUpdates": 58,
-    "standingOps": 6,
-    "factUpdates": 23,
+    "questUpdates": 59,
+    "standingOps": 7,
+    "factUpdates": 24,
     "stageOps": 7,
     "encounterOps": 9,
     "ledgerEvents": 16,
     "newEncounter": 3,
-    "imagePrompt": 49,
+    "imagePrompt": 50,
     "scene_ended": 1,
     "stateOps": 3,
     "_engineClosedScene": 4,
@@ -16954,7 +17045,7 @@
     "bandOps": 1,
     "exchangeOps": 2
   },
-  "_opTurns": 258,
+  "_opTurns": 259,
   "customAbilities": {
     "mirror-bright": {
       "id": "mirror-bright",
@@ -17962,11 +18053,11 @@
     "help": 11,
     "study": 13,
     "investigate": 18,
-    "charm": 2,
+    "charm": 3,
     "comfort": 2,
     "finesse": 4,
-    "persuade": 2,
-    "negotiate": 12,
+    "persuade": 3,
+    "negotiate": 13,
     "truth": 1,
     "devote": 1,
     "romantic": 4,
@@ -18496,439 +18587,439 @@
   },
   "_promptRows": {
     "character": {
-      "reached": 66,
-      "produced": 66
+      "reached": 67,
+      "produced": 67
     },
     "location": {
-      "reached": 66,
-      "produced": 66
+      "reached": 67,
+      "produced": 67
     },
     "region": {
-      "reached": 66,
-      "produced": 66
+      "reached": 67,
+      "produced": 67
     },
     "groundDetail": {
-      "reached": 66,
+      "reached": 67,
       "produced": 27
     },
     "lore": {
-      "reached": 66,
+      "reached": 67,
       "produced": 51
     },
     "traditionMotiveDetail": {
-      "reached": 66,
-      "produced": 66
+      "reached": 67,
+      "produced": 67
     },
     "sheetsDetail": {
-      "reached": 66,
-      "produced": 42
+      "reached": 67,
+      "produced": 43
     },
     "rules": {
-      "reached": 66,
-      "produced": 66
+      "reached": 67,
+      "produced": 67
     },
     "recentTurns": {
-      "reached": 66,
-      "produced": 57
+      "reached": 67,
+      "produced": 58
     },
     "timeLabel": {
-      "reached": 66,
-      "produced": 66
+      "reached": 67,
+      "produced": 67
     },
     "npcRegistryDetail": {
-      "reached": 66,
-      "produced": 66
+      "reached": 67,
+      "produced": 67
     },
     "mintedUnmetDetail": {
-      "reached": 66,
-      "produced": 66
+      "reached": 67,
+      "produced": 67
     },
     "npcSeedDetail": {
-      "reached": 66,
+      "reached": 67,
       "produced": 25
     },
     "traditionVocab": {
-      "reached": 66,
-      "produced": 66
+      "reached": 67,
+      "produced": 67
     },
     "standingDetail": {
-      "reached": 66,
-      "produced": 66
+      "reached": 67,
+      "produced": 67
     },
     "recalledDetail": {
-      "reached": 66,
-      "produced": 10
+      "reached": 67,
+      "produced": 11
     },
     "bearingsDetail": {
-      "reached": 66,
-      "produced": 66
+      "reached": 67,
+      "produced": 67
     },
     "caravansDetail": {
-      "reached": 66,
-      "produced": 1
+      "reached": 67,
+      "produced": 2
     },
     "commandDetail": {
-      "reached": 66,
-      "produced": 66
+      "reached": 67,
+      "produced": 67
     },
     "presenceDetail": {
-      "reached": 66,
-      "produced": 56
+      "reached": 67,
+      "produced": 57
     },
     "worthHereDetail": {
-      "reached": 66,
+      "reached": 67,
       "produced": 0
     },
     "inventoryDetail": {
-      "reached": 66,
-      "produced": 66
+      "reached": 67,
+      "produced": 67
     },
     "sceneState": {
-      "reached": 66,
-      "produced": 57
+      "reached": 67,
+      "produced": 58
     },
     "holdingsDetail": {
-      "reached": 66,
-      "produced": 66
+      "reached": 67,
+      "produced": 67
     },
     "debtsDetail": {
-      "reached": 66,
+      "reached": 67,
       "produced": 0
     },
     "carriedDetail": {
-      "reached": 66,
+      "reached": 67,
       "produced": 0
     },
     "abilityLawDetail": {
-      "reached": 66,
-      "produced": 66
+      "reached": 67,
+      "produced": 67
     },
     "questsDetail": {
-      "reached": 66,
-      "produced": 66
+      "reached": 67,
+      "produced": 67
     },
     "structuredQuestsDetail": {
-      "reached": 66,
+      "reached": 67,
       "produced": 0
     },
     "traditionArcDetail": {
-      "reached": 66,
+      "reached": 67,
       "produced": 0
     },
     "npcErrandsDetail": {
-      "reached": 66,
+      "reached": 67,
       "produced": 0
     },
     "codexDetail": {
-      "reached": 66,
-      "produced": 66
+      "reached": 67,
+      "produced": 67
     },
     "companionsDetail": {
-      "reached": 66,
-      "produced": 66
+      "reached": 67,
+      "produced": 67
     },
     "placeMemoryDetail": {
-      "reached": 66,
-      "produced": 49
+      "reached": 67,
+      "produced": 50
     },
     "agesMissingDetail": {
-      "reached": 66,
-      "produced": 66
+      "reached": 67,
+      "produced": 67
     },
     "newsDetail": {
-      "reached": 66,
-      "produced": 66
+      "reached": 67,
+      "produced": 67
     },
     "worldArcsDetail": {
-      "reached": 66,
-      "produced": 66
+      "reached": 67,
+      "produced": 67
     },
     "legendsPursuableDetail": {
-      "reached": 66,
+      "reached": 67,
       "produced": 12
     },
     "wakesDetail": {
-      "reached": 66,
+      "reached": 67,
       "produced": 0
     },
     "arcMoodDetail": {
-      "reached": 66,
-      "produced": 66
+      "reached": 67,
+      "produced": 67
     },
     "reachableDeadDetail": {
-      "reached": 66,
+      "reached": 67,
       "produced": 46
     },
     "threatToPlayer": {
-      "reached": 66,
+      "reached": 67,
       "produced": 0
     },
     "guardiansDetail": {
-      "reached": 66,
+      "reached": 67,
       "produced": 0
     },
     "resolution": {
-      "reached": 66,
-      "produced": 53
+      "reached": 67,
+      "produced": 54
     },
     "playerInput": {
-      "reached": 66,
+      "reached": 67,
       "produced": 13
     },
     "exactWords": {
-      "reached": 66,
-      "produced": 35
+      "reached": 67,
+      "produced": 36
     },
     "travelDirective": {
-      "reached": 66,
+      "reached": 67,
       "produced": 5
     },
     "itemAdvance": {
-      "reached": 66,
+      "reached": 67,
       "produced": 0
     },
     "encounterWeaveDetail": {
-      "reached": 66,
+      "reached": 67,
       "produced": 8
     },
     "encounterOfferDetail": {
-      "reached": 66,
+      "reached": 67,
       "produced": 4
     },
     "fightFramingDetail": {
-      "reached": 66,
+      "reached": 67,
       "produced": 0
     },
     "abilityGrantDetail": {
-      "reached": 66,
+      "reached": 67,
       "produced": 0
     },
     "stageRevealDetail": {
-      "reached": 66,
+      "reached": 67,
       "produced": 0
     },
     "itemEvolveDetail": {
-      "reached": 66,
+      "reached": 67,
       "produced": 0
     },
     "worldPressureDetail": {
-      "reached": 66,
+      "reached": 67,
       "produced": 2
     },
     "offerDetail": {
-      "reached": 66,
+      "reached": 67,
       "produced": 2
     },
     "teacherOfferDetail": {
-      "reached": 66,
+      "reached": 67,
       "produced": 0
     },
     "substrateDetail": {
-      "reached": 66,
+      "reached": 67,
       "produced": 17
     },
     "romanceGuidanceDetail": {
-      "reached": 66,
+      "reached": 67,
       "produced": 4
     },
     "factsDetail": {
-      "reached": 66,
-      "produced": 66
+      "reached": 67,
+      "produced": 67
     },
     "evolvedItemsDetail": {
-      "reached": 66,
+      "reached": 67,
       "produced": 0
     },
     "opLossNote": {
-      "reached": 66,
+      "reached": 67,
       "produced": 0
     },
     "emergenceDetail": {
-      "reached": 66,
+      "reached": 67,
       "produced": 0
     },
     "perilNote": {
-      "reached": 66,
+      "reached": 67,
       "produced": 0
     },
     "encounterDetail": {
-      "reached": 66,
+      "reached": 67,
       "produced": 4
     },
     "masteryDetail": {
-      "reached": 66,
-      "produced": 66
+      "reached": 67,
+      "produced": 67
     },
     "bookkeepingRestate": {
-      "reached": 66,
+      "reached": 67,
       "produced": 0
     },
     "anomalyDetail": {
-      "reached": 66,
-      "produced": 64
+      "reached": 67,
+      "produced": 65
     },
     "repairPanelDetail": {
-      "reached": 66,
-      "produced": 66
+      "reached": 67,
+      "produced": 67
     },
     "teacherDetail": {
-      "reached": 66,
+      "reached": 67,
       "produced": 0
     },
     "toolkitDetail": {
-      "reached": 66,
-      "produced": 66
+      "reached": 67,
+      "produced": 67
     },
     "availableEncounters": {
-      "reached": 66,
-      "produced": 62
+      "reached": 67,
+      "produced": 63
     },
     "partyDetail": {
-      "reached": 66,
+      "reached": 67,
       "produced": 0
     },
     "ratingDetail": {
-      "reached": 66,
-      "produced": 66
+      "reached": 67,
+      "produced": 67
     },
     "registerDetail": {
-      "reached": 66,
-      "produced": 66
+      "reached": 67,
+      "produced": 67
     },
     "legendDetail": {
-      "reached": 66,
+      "reached": 67,
       "produced": 1
     },
     "livingWorldDetail": {
-      "reached": 66,
-      "produced": 37
+      "reached": 67,
+      "produced": 38
     },
     "assignmentsDetail": {
-      "reached": 66,
+      "reached": 67,
       "produced": 0
     },
     "latentArcsDetail": {
-      "reached": 66,
-      "produced": 66
+      "reached": 67,
+      "produced": 67
     },
     "seasonalDetail": {
-      "reached": 66,
-      "produced": 66
+      "reached": 67,
+      "produced": 67
     },
     "schoolsDetail": {
-      "reached": 66,
-      "produced": 66
+      "reached": 67,
+      "produced": 67
     },
     "sharedCanonDetail": {
-      "reached": 66,
-      "produced": 43
+      "reached": 67,
+      "produced": 44
     },
     "worldCountLabel": {
-      "reached": 66,
-      "produced": 66
+      "reached": 67,
+      "produced": 67
     },
     "waygateDetail": {
-      "reached": 66,
+      "reached": 67,
       "produced": 28
     },
     "readAloudDetail": {
-      "reached": 66,
-      "produced": 66
+      "reached": 67,
+      "produced": 67
     },
     "scenePacingDetail": {
-      "reached": 66,
+      "reached": 67,
       "produced": 24
     },
     "wishesDetail": {
-      "reached": 46,
+      "reached": 47,
       "produced": 0
     },
     "worldMovedOnDetail": {
-      "reached": 46,
+      "reached": 47,
       "produced": 2
     },
     "companionLivesDetail": {
-      "reached": 46,
-      "produced": 19
+      "reached": 47,
+      "produced": 20
     },
     "homeDetail": {
-      "reached": 46,
+      "reached": 47,
       "produced": 0
     },
     "invitationsDetail": {
-      "reached": 46,
+      "reached": 47,
       "produced": 0
     },
     "bandsJoinedDetail": {
-      "reached": 46,
+      "reached": 47,
       "produced": 0
     },
     "travelersHereDetail": {
-      "reached": 46,
+      "reached": 47,
       "produced": 16
     },
     "travelersDetail": {
-      "reached": 46,
-      "produced": 2
+      "reached": 47,
+      "produced": 3
     },
     "journeyDetail": {
-      "reached": 44,
+      "reached": 45,
       "produced": 7
     },
     "journeyUnderwayDetail": {
-      "reached": 44,
+      "reached": 45,
       "produced": 4
     },
     "holdsNearDetail": {
-      "reached": 44,
-      "produced": 40
+      "reached": 45,
+      "produced": 41
     },
     "moneyDetail": {
-      "reached": 43,
-      "produced": 43
+      "reached": 44,
+      "produced": 44
     },
     "jobsDetail": {
-      "reached": 43,
+      "reached": 44,
       "produced": 0
     },
     "powersHereDetail": {
-      "reached": 20,
+      "reached": 21,
       "produced": 6
     },
     "nemesisDetail": {
-      "reached": 20,
-      "produced": 20
+      "reached": 21,
+      "produced": 21
     },
     "sovereignMark": {
-      "reached": 3,
+      "reached": 4,
       "produced": 0
     },
     "seats": {
-      "reached": 1,
-      "produced": 1
+      "reached": 2,
+      "produced": 2
     },
     "couldBeHereDetail": {
-      "reached": 1,
-      "produced": 1
+      "reached": 2,
+      "produced": 2
     },
     "heldMeetDetail": {
-      "reached": 1,
+      "reached": 2,
       "produced": 0
     },
     "askedMeetDetail": {
-      "reached": 1,
+      "reached": 2,
       "produced": 0
     }
   },
   "_opUnknown": {
-    "sceneSummary": 87,
+    "sceneSummary": 88,
     "scene_summary": 1
   },
   "_bandNotes": null,
   "_opCountingSince": "2026-09-14T22:51:56.913Z",
   "_fireTests": {
-    "at": "2026-09-26T21:46:55.823Z",
-    "build": "2.12.1",
+    "at": "2026-09-28T21:34:20.552Z",
+    "build": "2.15.0",
     "results": [
       {
         "op": "jobOps",

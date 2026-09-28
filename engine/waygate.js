@@ -91,7 +91,14 @@ export function isNetworkGate(loc) {
 // whole point is that a season becomes an afternoon — plus a flat ENERGY toll (the wayfaring effort). Never free:
 // a cost keeps the network infrastructure, not a teleport cheat. Caps keep the shortest hop meaningful, the
 // longest sane. timeFraction 0.04 → a 300-day antipodal walk becomes ~12h (capped at maxHours regardless).
-export const GATE_HOP = { timeFraction: 0.04, minHours: 2, maxHours: 72, energy: 10 };
+/** ✅ SNG-663 §2a — ERIK 2026-09-27: *"It doesn't cost to go through a gate"*, and then: *"I also think the energy
+ *  cost at a gate is kind of pointless at this point... 10e is next to nothing."* So a gate leg costs TIME and
+ *  nothing else, for a traveller, a load and a company alike.
+ *
+ *  ⛑ THE PRICE STAYS A NUMBER IN ONE PLACE. Everything downstream — the route option's `energy`, the journey plan's
+ *  "(N energy at the gate)", the map's aim-the-gate button, `travelTo`'s spend — reads `gateHopCost`, so the ruling is
+ *  this field and the plumbing is untouched. If a gate is ever priced again it is one number, not a rebuild. */
+export const GATE_HOP = { timeFraction: 0.04, minHours: 2, maxHours: 72, energy: 0 };
 /** Price a hop from an overland distance (days on foot) → { hours, energy, overlandDays }. Pure. */
 export function gateHopCost(overlandDays = 0) {
   const d = Math.max(0, Number(overlandDays) || 0);

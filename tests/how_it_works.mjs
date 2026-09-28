@@ -10487,8 +10487,14 @@ console.log("\n── §99 · four days through the Wend, or seven around it ─
   check("§99: ⚑ …and it is the transformation Aevi described — a season becomes days: the walk is a fortnight-plus, the gate is a few days, and there is an ORDER OF MAGNITUDE between them",
     gateOpt && road99 && gateOpt.days < 7 && road99.days > 14 && road99.days >= gateOpt.days * 10,
     `gate ${gateOpt?.days}d vs road ${road99?.days}d — ${road99 && gateOpt ? (road99.days / gateOpt.days).toFixed(1) : "?"}x`);
-  check("§99: …and it carries what it COSTS — a gate is infrastructure, never a free teleport",
-    gateOpt?.energy > 0 && gateOpt?.gate?.hours > 0);
+  // ⚠️ THIS PINNED A PRICE ERIK HAS SINCE REMOVED (SNG-663 §2a, 2026-09-27: *"the energy cost at a gate is kind of
+  // pointless at this point... 10e is next to nothing"*), so `energy > 0` was a gate asserting a dial against its own
+  // ruling. ⛑ What the sentence actually claims is that a gate is not a FREE TELEPORT — and it is not, for the two
+  // reasons that were always the real ones: it costs HOURS through the arch, and it has to be FOUND. The price was
+  // never what made the network a decision.
+  check("§99: …and it is still not a free teleport — it costs HOURS through the arch, and it has to be FOUND first",
+    gateOpt?.gate?.hours > 0 && Number(gateOpt?.energy || 0) === 0,
+    "a gate leg costs time and nothing else, for a traveller, a load and a company alike");
   check("§99: ⚠️ …and the label does not stutter — this world names many places \"The something\"",
     !/the The /i.test(J99.routeLine(J99.routeBetween("kindlerow", "the_blaze", locs99), locs99) || ""));
 
@@ -30032,13 +30038,47 @@ console.log("\n── §372 · something that was being carried is not being car
         && crown.sovereignId === "the_hollow_king";
     })(), "a VERB is strong evidence — fencing is a specific thing to do; a KIND is weak, because a guild can be anything");
 
-  check("§372: ⚠️ …and a TIE IS REFUSED rather than tossed for — a plain guild matches all three hungers by KIND alone, and that is a content question",
+  // ⚠️ ON A SYNTHETIC RULE, AND THAT IS THE POINT (Aevi's A1, 2026-09-27). This check used to assert "a plain guild
+  // matches all THREE hungers by kind alone" against the LIVE rule — which was the content defect it found, and which
+  // she then fixed by giving each kind to one hunger. So my gate pinned the defect and blocked the fix for it: she
+  // held a ready patch for a day because landing it would have reddened the build. Third time this class has bitten
+  // here. ⛑ The ENGINE's rule is tested on two hungers that share a kind, built here; her content is tested by the
+  // ratchet below.
+  check("§372: ⚠️ …and a GENUINE TIE IS REFUSED rather than tossed for — two hungers with equal claim on one power is a content question, and a coin toss would mint different lines on different runs of the same world",
+    (() => {
+      const synthetic = {
+        on: true, requiresArcStageAtLeast: 1, capPerSovereignPerRegion: 1,
+        hungers: { lucifer: { kinds: ["guild"] }, the_hollow_king: { kinds: ["guild"] } },
+      };
+      const tied = SV372.mayBecomeALine({ id: "d", kind: "guild", verbs: ["trade"] },
+        { regionId: "valley", rule: synthetic, stageOf: () => 3, npcs: C372.npcs });
+      // ⛑ and the SAME power with one verb of evidence is no longer tied — the refusal is about equal claim, not about guilds
+      const broken = SV372.mayBecomeALine({ id: "e", kind: "guild", verbs: ["trade"] },
+        { regionId: "valley", rule: { ...synthetic, hungers: { lucifer: { kinds: ["guild"] }, the_hollow_king: { kinds: ["guild"], verbs: ["trade"] } } },
+          stageOf: () => 3, npcs: C372.npcs });
+      return tied.ok === false && /matches 2 hungers equally/.test(tied.why)
+        && broken.ok === true && broken.sovereignId === "the_hollow_king";
+    })(), "a genuine tie is refused; one point of real evidence settles it");
+
+  // ⛔ AND HER CONTENT GETS A RATCHET, not a pin. Measured over the 29 authored powers with the rule switched on:
+  // ten are refused for a tie today, and the exclusive-hungers patch takes that to zero. This may only go DOWN — it
+  // passes before her patch and after it, and a new hunger that re-introduces an ambiguity reddens.
+  check(`§372: ⛔ THE AUTHORED HUNGERS' OWN TIES ARE A RATCHET — a power that matches two hungers equally can never become a line, so the count may only go DOWN`,
     (() => {
       const on = { ...C372.rules.arcResponse.supplyLineRule, on: true };
-      const r = SV372.mayBecomeALine({ id: "d", kind: "guild", verbs: ["trade"] },
-        { regionId: "valley", rule: on, stageOf: () => 3, npcs: C372.npcs });
-      return r.ok === false && /matches 3 hungers equally/.test(r.why);
-    })(), "⚡ `kind: \"guild\"` is in all three hungers, so a bare guild can never be assigned — Aevi's to make one of them more specific");
+      const powers = Array.isArray(C372.powers) ? C372.powers : Object.values(C372.powers || {});
+      let ties = 0;
+      for (const p of powers) {
+        const r = SV372.mayBecomeALine(p, { regionId: "valley", rule: on, stageOf: () => 4, npcs: C372.npcs, linesInRegion: {} });
+        if (!r.ok && /hungers equally/.test(String(r.why))) ties++;
+      }
+      return ties <= 10;
+    })(), (() => {
+      const on = { ...C372.rules.arcResponse.supplyLineRule, on: true };
+      const powers = Array.isArray(C372.powers) ? C372.powers : Object.values(C372.powers || {});
+      const tied = powers.filter(p => { const r = SV372.mayBecomeALine(p, { regionId: "valley", rule: on, stageOf: () => 4, npcs: C372.npcs, linesInRegion: {} }); return !r.ok && /hungers equally/.test(String(r.why)); });
+      return `${tied.length} of ${powers.length} powers tie (baseline 10)`;
+    })());
 
   // ⛔ R40b.2 MECHANISED: the lines grow FROM the arc, never the arc from the lines.
   check("§372: ⛔ A LINE MAY ONLY GROW WHERE THE ARC HAS ALREADY MOVED — R40b.2, mechanised: a rule that let a new line raise the stage would be the forbidden counter wearing a different coat",
@@ -30962,19 +31002,11 @@ console.log("\n── §381 · a villain you fail to stop ──");
       return rows.length >= 5 && rows.every(r => r.act === "waiting" || r.act === "cannot") && rows.some(r => /stands at 1 of 4/.test(r.why));
     })());
 
-  // ⚠️ THE CONTENT GAP, ASSERTED RATHER THAN PAPERED OVER.
-  check("§381: ⚠️ THREE OF THE FIVE CLAIMANTS CANNOT FINISH AT ALL — every LEGENDARY one carries no `arcAffinity`, so there is no arc of theirs to end, and the OPEN seat's only claimant is one of them. The reader says `cannot`; it does not invent an arc to make the rule look alive",
-    (() => {
-      const rows = claims({}, ended);
-      const cannot = rows.filter(r => r.act === "cannot").map(r => r.claimant).sort();
-      const open = rows.filter(r => r.kind === "open");
-      return cannot.join(",") === "the_scouring_hand,the_still_lattice,thornmother_sealed"
-        && open.length === 1 && open[0].act === "cannot";
-    })(), (() => {
-      const rows = claims({}, ended);
-      return `${rows.filter(r => r.act === "cannot").length} of ${rows.length} claimants have no arc — content, and Aevi's`;
-    })());
-
+  // ✅ THE CONTENT GAP IS CLOSED, AND THIS IS WHERE IT WAS ASSERTED. Yesterday: "three of the five claimants cannot
+  // finish at all — every LEGENDARY one carries no `arcAffinity`, and the OPEN seat's only claimant is one of them."
+  // Aevi found the cause (a shadowed record: the epic row carried the affinity, the npc file did not, and the npc
+  // file is what loads), staged the three rows, and they are in — measured over a simulated year before applying.
+  // ⛑ The check that replaces it is below with the shadow gate: every claimant now DRIVES an arc.
   // ⛔ THE FOUR BRANCHES OF HER §1.2, each on a real save shape.
   check("§381: ⛔ A FINISHED CLAIMANT AGAINST A STANDING HOLDER **PRESSES** — it cannot take the seat, and the arc waits at its end",
     (() => {
@@ -31007,7 +31039,9 @@ console.log("\n── §381 · a villain you fail to stop ──");
       const first = SV81.applySeatClaims(ch, claims(ch, ended), { day: 84 });
       const again = SV81.applySeatClaims(ch, claims(ch, ended), { day: 87 });
       const taken = ch.worldState.seatsTaken["Life / Death"];
-      return first.length === 2 && again.length === 0
+      // ⚠️ NOT `first.length === 2`. That was the number of claimants who could finish when only two drove an arc;
+      // five do now, and a count is not the claim — SAID ONCE is.
+      return first.length >= 2 && again.length === 0
         && taken.by === "morvane_the_harvest" && taken.day === 84 && taken.arcId === "arc_what_wakes_beneath"
         && ch.worldState.seatPress["Breaking / Building"].by === "cinder_vael";
     })());
@@ -31032,6 +31066,52 @@ console.log("\n── §381 · a villain you fail to stop ──");
       return /HAS TAKEN THIS SEAT \(day 84\)/.test(said) && /HAS FINISHED and is PRESSING against/.test(said)
         && /Play them as arrived, not as coming/.test(said) && /does NOT know it is a seat/.test(said);
     })());
+
+  // ⛔ A SHADOWED RECORD IS THE THING THAT HID THEM, AND IT GETS ITS OWN CHECK (Aevi's A4, 2026-09-27).
+  //
+  // ⚠️ Each of the three legendary claimants has TWO records: a `tradition_epics` row that carried an `arcAffinity`
+  // all along, and an `npcs/<id>.json` file that did not. THE NPC FILE IS WHAT LOADS, so the row was shadowed, the
+  // figure pushed nothing, and "this claimant has no arc" was true of the game and false of the content — for weeks,
+  // through a spec, a ruling and a build. ⛑ A disagreement between the two is now a red, whichever way it leans.
+  check("§381: ⛔ A FIGURE'S NPC FILE AND ITS EPIC ROW MAY NOT DISAGREE ABOUT `arcAffinity` — the npc file is what loads, so a row that says something else is a claim nobody reads, and that is exactly how three claimants hid",
+    (() => {
+      const epics = JSON.parse(rd("content/packs/valley/tradition_epics.json")).epics || [];
+      const said = (a) => a && a.arcId ? `${a.arcId}:${Number(a.dir) > 0 ? "+" : ""}${Number(a.dir)}×${Number(a.weight) || 1}` : "none";
+      const bad = [];
+      for (const row of epics) {
+        if (!row || !row.id) continue;
+        let file = null;
+        try { file = JSON.parse(rd(`content/packs/valley/npcs/${row.id}.json`)); } catch { continue; }   // no file of its own: nothing to shadow
+        if (said(row.arcAffinity) !== said(file.arcAffinity)) bad.push(`${row.id}: row ${said(row.arcAffinity)} vs file ${said(file.arcAffinity)}`);
+      }
+      // ⛔ A RATCHET, NOT A RED, AND THE FIRST RUN SAYS WHY: TEN MORE FIGURES ARE SHADOWED THE SAME WAY — including
+      // the HOLLOW KING and the NINEFOLD ASCENDANT, two of the three Sovereigns whose hungers drive the supply-line
+      // rule, and the Starless. Each one's row carries an affinity its npc file does not, so each pushes nothing.
+      // ⚠️ Bringing them into line moves two LIVE arcs (`arc_the_poles_pull` ×6, `arc_what_wakes_beneath` ×4), which
+      // is a content decision with a world-sized consequence — Aevi's and Erik's, measured and sent to them, not a
+      // tidy-up I get to do because a gate went red. Ten today; it may only go DOWN, and it can never grow.
+      return bad.length <= 10;
+    })(), (() => {
+      const epics = JSON.parse(rd("content/packs/valley/tradition_epics.json")).epics || [];
+      const said = (a) => a && a.arcId ? `${a.arcId}:${Number(a.dir) > 0 ? "+" : ""}${Number(a.dir)}×${Number(a.weight) || 1}` : "none";
+      const bad = [];
+      let pairs = 0;
+      for (const row of epics) {
+        let file = null;
+        try { file = JSON.parse(rd(`content/packs/valley/npcs/${row.id}.json`)); } catch { continue; }
+        pairs++;
+        if (said(row.arcAffinity) !== said(file.arcAffinity)) bad.push(row.id);
+      }
+      return `${bad.length} of ${pairs} shadowed (baseline 10): ${bad.slice(0, 4).join(", ")}${bad.length > 4 ? ", …" : ""}`;
+    })());
+
+  // ⛑ AND THE THREE CAN FINISH NOW, which is the whole point of the content that landed with this check.
+  check("§381: ⛑ …and all five claimants now DRIVE an arc — the open Chaos / Order seat has a claimant that can reach the end of something",
+    (() => {
+      const rows = claims({}, atRest);
+      return rows.length >= 5 && rows.every(r => r.act !== "cannot")
+        && rows.filter(r => r.kind === "open").every(r => r.act !== "cannot");
+    })(), "three legendary claimants carried no affinity on the record the game reads; they do now");
 
   // ⛔ AND THE TICK CALLS IT, with the arc clock the rest of the world reads.
   check("§381: ⛔ the world tick reads a finish every pass, through the SAME arc clock the map and the GM block read",
@@ -31080,14 +31160,24 @@ console.log("\n── §382 · a gate leg is never charged ──");
     })(), pair ? `${pair.from} → ${pair.to} by ${pair.gate.label} in ${pair.gate.days} days` : "no gate route found on the shipped map");
 
   // ⛑ AND THE ONLY THING A GATE DOES COST IS A TRAVELLER'S OWN ENERGY, which predates this ruling and is not a fee.
-  check("§382: ⛑ …and the one thing it does cost is the TRAVELLER'S OWN ENERGY, which is not a fee and not paid to anybody",
+  // ⚠️ RE-POINTED THE DAY AFTER IT WAS WRITTEN, and it would have passed for the wrong reason. Yesterday this said
+  // "the one thing it does cost is the traveller's own energy"; today Erik has ruled that away too ("10e is next to
+  // nothing"), so with `GATE_HOP.energy` at 0 the old assertion — `without.energy === 0` — is true of both branches
+  // and tests nothing. ⛑ The claim now is the ruling: a gate leg costs TIME and nothing else, for everyone, and the
+  // `gateEnergy` plumbing still threads through so a future price is one number rather than a rebuild.
+  check("§382: ⛑ …and it costs NOTHING BUT TIME, for a traveller too — Erik removed the energy as well, and the plumbing stays so a price is one number if it ever returns",
     (() => {
       if (!pair) return false;
       const withE = J82.routeBetween(pair.from, pair.to, C82.locations, { traveller, gateEnergy: true });
       const without = J82.routeBetween(pair.from, pair.to, C82.locations, { traveller, gateEnergy: false });
       const a = (withE?.options || []).find(o => o.kind !== "road"), b = (without?.options || []).find(o => o.kind !== "road");
-      return !!a && !!b && Number(b.energy) === 0 && Number(a.energy) >= 0;
-    })(), "⬜ whether a LOAD pays that energy is still with Erik — a cart has no energy, and nothing is charged one");
+      const src = rd("engine/waygate.js");
+      return !!a && !!b && Number(a.energy) === 0 && Number(b.energy) === 0
+        // ⛑ zero AT ITS SOURCE, not by a caller happening to pass `gateEnergy: false`
+        && /energy: 0 \};/.test(src)
+        // …and the plumbing is still there: one field, not a removed feature
+        && /gateEnergy = true/.test(rd("engine/journey.js")) && /gateEnergy \? bestGate\.hop\.energy : 0/.test(rd("engine/journey.js"));
+    })(), "a gate leg costs time and nothing else, for a traveller, a load and a company alike");
 
   // ⛔ AND NOTHING IN THE TRADE READER CHARGES FOR THE GATE EITHER, which is where a toll would have landed.
   check("§382: ⛔ the trade reader prices a gate route at its DAYS and nothing else — a toll here would have been the withdrawn draft arriving by the back door",

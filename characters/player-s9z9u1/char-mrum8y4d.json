@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 11,
-  "xp": 1030,
+  "xp": 1035,
   "attributes": {
     "physical": 4,
     "mental": 5,
@@ -138,7 +138,7 @@
   "maxHealth": 88,
   "health": 88,
   "maxEnergy": 166,
-  "energy": 126,
+  "energy": 121,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -591,21 +591,50 @@
         "player": "Make sure Vail hears this news when she arrives.",
         "summary": "Loki positions to meet Vail Langley's arrival and shares the name of the handler who paid for the Revel mandate—Vessa Torquen of Pressureholt.",
         "narration": "You step to the eastern window where Cy's work is visible in the yard, scanning the spinward road. The morning is clear, the paths steady. Vail should arrive within the hour—she rides ahead of the band, and her pace is precise.\n\nYou turn back to Halvex. \"When Vail arrives, she needs to hear this directly. Not the name alone—the shape of it. Someone at Pressureholt knew what they wanted broken, knew it required precision, and paid coin to make it happen.\" Halvex nods. He understands. The knowing matters more than the messenger.\n\nYou position yourself at the threshold where the road becomes visible—between the interior warmth and the morning air. Cy's lens catches the light as it works, patient and methodical. When Vail's horse appears on the spinward approach, you step out to meet her, and the morning's clarity carries your voice steady: \"The handler who paid for the Revel's mandate is named Vessa Torquen. She works at Pressureholt—an Enginewright facility with access to sealed infrastructure records. The mandate came shaped with intention. Someone there knew exactly what they wanted broken.\" \n\nVail's stillness deepens as the name settles. Her eyes measure what you've just named—not surprise, but the weight of confirmation. She nods once, precise and final. \"Seraphine will need this. And the question beneath it.\" She glances back at the road. \"The band follows an hour behind. They walked steady through the night.\""
+      },
+      {
+        "player": "It is time for the band of the Churn-Revelers to gather fully.  Everyone in the Standing Annex. ",
+        "summary": "The Churn-Revellers gather fully at the Standing Annex at midday—Loki, Halvex, Orla, Ravel, Estry, and Sable in one room. Vail Langley remains at the threshold. The name Vessa Torquen is about to be spoken to all of them.",
+        "narration": "You step into the yard where Cy works, the morning sun steady on the stone. The clicking stops as the maintenance-thing looks up—lens irising in that particular way that means it has understood. You need them all here. Now.\n\nCy moves with you back to the threshold and you pitch your voice clear across the spinward road: a call that carries without shouting, shaped by the harmonic work you've learned. It reaches. Within the hour, the first figures appear on the road—Orla coming steady, their grey coat catching the light. Then Ravel and Estry, with Sable walking between them. The morning has turned them into silhouettes against the paler sky, but you know their shapes now. They know what that call means.\n\nHalfvex moves to the doorway as they approach, and you see him read the gathering the way he reads everything—taking the weight of four separate people choosing to arrive together, to be in the same room, to hear what comes next. Vail Langley stands by her tethered horse at the yard's edge, utterly still, watching. She does not move to join but she does not leave.\n\nThey file in one after another. The fire crackles. Cy's lens settles to a patient click-click-click. The Standing Annex is full in a way it was not an hour ago."
       }
     ],
     "lastTurn": {
-      "narration": "You step to the eastern window where Cy's work is visible in the yard, scanning the spinward road. The morning is clear, the paths steady. Vail should arrive within the hour—she rides ahead of the band, and her pace is precise.\n\nYou turn back to Halvex. \"When Vail arrives, she needs to hear this directly. Not the name alone—the shape of it. Someone at Pressureholt knew what they wanted broken, knew it required precision, and paid coin to make it happen.\" Halvex nods. He understands. The knowing matters more than the messenger.\n\nYou position yourself at the threshold where the road becomes visible—between the interior warmth and the morning air. Cy's lens catches the light as it works, patient and methodical. When Vail's horse appears on the spinward approach, you step out to meet her, and the morning's clarity carries your voice steady: \"The handler who paid for the Revel's mandate is named Vessa Torquen. She works at Pressureholt—an Enginewright facility with access to sealed infrastructure records. The mandate came shaped with intention. Someone there knew exactly what they wanted broken.\" \n\nVail's stillness deepens as the name settles. Her eyes measure what you've just named—not surprise, but the weight of confirmation. She nods once, precise and final. \"Seraphine will need this. And the question beneath it.\" She glances back at the road. \"The band follows an hour behind. They walked steady through the night.\"\n\n*✦ The world grows — **The Pressureholt Mandate** begins to stir as a thread of its own.*",
-      "sceneSummary": "Loki positions to meet Vail Langley's arrival and shares the name of the handler who paid for the Revel mandate—Vessa Torquen of Pressureholt.",
+      "narration": "You step into the yard where Cy works, the morning sun steady on the stone. The clicking stops as the maintenance-thing looks up—lens irising in that particular way that means it has understood. You need them all here. Now.\n\nCy moves with you back to the threshold and you pitch your voice clear across the spinward road: a call that carries without shouting, shaped by the harmonic work you've learned. It reaches. Within the hour, the first figures appear on the road—Orla coming steady, their grey coat catching the light. Then Ravel and Estry, with Sable walking between them. The morning has turned them into silhouettes against the paler sky, but you know their shapes now. They know what that call means.\n\nHalfvex moves to the doorway as they approach, and you see him read the gathering the way he reads everything—taking the weight of four separate people choosing to arrive together, to be in the same room, to hear what comes next. Vail Langley stands by her tethered horse at the yard's edge, utterly still, watching. She does not move to join but she does not leave.\n\nThey file in one after another. The fire crackles. Cy's lens settles to a patient click-click-click. The Standing Annex is full in a way it was not an hour ago.",
+      "sceneSummary": "The Churn-Revellers gather fully at the Standing Annex at midday—Loki, Halvex, Orla, Ravel, Estry, and Sable in one room. Vail Langley remains at the threshold. The name Vessa Torquen is about to be spoken to all of them.",
       "choices": [
         {
-          "label": "Step inside and wait for the full band to arrive—the telling is better done once, to everyone together.",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {},
-          "difficulty": "trivial",
+          "label": "Speak plainly: Tell them all that Vessa Torquen of Pressureholt hired Halvex to break the sealed chamber, and that someone behind her shaped that mandate with precision.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "falsehood_truth": 0.8
+          },
+          "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "careful"
+            "speak",
+            "lead",
+            "reveal"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Let Halvex name her—he carries the weight of being hired, and this is his to say first.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "emotional_logical": 0.3
+          },
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "lead",
+            "defer",
+            "trust"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -614,16 +643,18 @@
           "emergenceId": null
         },
         {
-          "label": "Ask Vail directly what Seraphine already knows about Pressureholt and its access to sealed records.",
+          "label": "Ask Orla what they know about Pressureholt and sealed infrastructure records—let them speak what the Syllogist's precision has already gathered.",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {
-            "falsehood_truth": 0.3
+            "emotional_logical": 0.2
           },
-          "difficulty": "normal",
+          "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "study"
+            "ask",
+            "learn",
+            "draw-out"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -632,37 +663,21 @@
           "emergenceId": null
         },
         {
-          "label": "Use Appetite-Sense to read what Vail truly wants beneath her mandate—what she's not yet admitting to herself.",
+          "label": "Use Appetite-Sense to read what each of them is refusing to name aloud—what hunger brought them here and what they want the next move to be.",
           "attribute": "social",
           "subAttribute": "insight",
           "axes": {
-            "falsehood_truth": 0.2
+            "falsehood_truth": 0.5
           },
           "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
-            "study"
+            "study",
+            "read",
+            "reach"
           ],
           "abilityId": "appetite_sense",
           "energyCost": 2,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Vail to ride to Pressureholt ahead of the band and assess Vessa Torquen's position there before the Churn-Revellers arrive.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "violence_peace": -0.2
-          },
-          "difficulty": "hard",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "command"
-          ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
@@ -677,103 +692,76 @@
         "xp": 0
       },
       "ledgerEvents": [],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "the-taken-from-the-city",
-          "note": "Vessa Torquen of Pressureholt identified as the handler who hired the mandate to break the sealed chamber. She has access to old infrastructure records. The question now: who stands behind her, and what does Pressureholt truly control?"
-        }
-      ],
+      "questUpdates": [],
       "standingOps": [],
       "delegateOps": [],
       "jobOps": [],
       "arcOps": [],
       "adoptSchool": null,
       "offer": {
-        "thing": "Vail Langley arriving with precise timing—she reads the need and is present without being asked.",
-        "from": "Her own decision to ride ahead and her commitment to the threshold rather than the fortress."
+        "thing": "Vail Langley holds her position at the threshold—not inside the gathering, not turning away.",
+        "from": "The choice to stand at a threshold rather than a fortress; the question of whether authority can listen without deciding"
       },
       "stageOps": [],
       "scene": {
-        "setting": "The Standing Annex interior and threshold—morning light steady through open windows, the fire crackling in its corner. The eastern window frames the spinward road and the yard where Cy continues its methodical survey. Timber beams rise to a peaked roof. The stone beneath carries that faint harmonic thrumming.",
+        "setting": "The Standing Annex interior at midday—sunlight steady through open windows, fire crackling in its corner. The eastern window frames the spinward road and the yard beyond, where Cy has finished its initial survey. Timber beams rise to the peaked roof. The air carries the faint harmonic thrumming from the stone beneath.",
         "npcsPresent": [
           {
             "name": "Halvex Coil",
-            "state": "Standing by the window where he named Vessa Torquen, waiting for the band's arrival. His earlier certainty has settled into something more honest."
+            "state": "Standing by the interior window, reading the gathering with quiet assessment. Has just named Vessa Torquen."
+          },
+          {
+            "name": "Orla Yardley",
+            "state": "Entered first among the band members, standing with quiet precision, measuring the room."
+          },
+          {
+            "name": "Ravel Ash-bearer",
+            "state": "Just arrived, standing beside Estry and Sable. Her steady gaze moves across the Annex interior, reading the space."
+          },
+          {
+            "name": "Estry Krell",
+            "state": "Beside Ravel, watching. Her assessment is already moving ahead to what comes next."
+          },
+          {
+            "name": "Sable",
+            "state": "Entered with Ravel and Estry, standing quiet. Her fever has broken but she carries the weight of the descent still."
           },
           {
             "name": "Vail Langley",
-            "state": "Just arrived on the spinward road, dismounting as Loki meets her with the name. Her stillness deepens as the implications settle. She will enter the Annex soon."
+            "state": "At the yard's edge beside her tethered horse, utterly still, watching from the threshold. Not inside. Not leaving."
           },
           {
             "name": "Cy",
-            "state": "In the eastern yard, continuing its systematic survey of the Precursor work beneath the Annex. Clicks and lens-iris movements steady and methodical."
+            "state": "Returned from the yard survey, clicking quietly in its patient way. Lens settled to steady observation."
           }
         ],
         "objects": [
           "Two cups of cooling coffee on the worn wooden table",
           "The fire warming the corner",
           "Timber beams rising to the peaked roof",
-          "Vail's horse, tethered near the threshold"
+          "Vail's horse, tethered near the threshold",
+          "The steady morning sunlight through open windows"
         ],
         "threads": [
-          "Who truly stands behind Vessa Torquen and shaped the mandate to break the sealed chamber?",
-          "What does Pressureholt control through its access to sealed infrastructure records?",
-          "Will the band pursue this thread immediately, or gather more knowledge first?",
-          "What will Seraphine do when Vail carries this name back to the Radiant Plateau?"
+          "The full name and purpose behind Vessa Torquen's mandate to break the sealed chamber",
+          "What Pressureholt controls through its access to sealed infrastructure records",
+          "Whether the band moves toward Pressureholt immediately or gathers more knowledge first",
+          "What Seraphine will do when Vail carries this intelligence back to the Radiant Plateau",
+          "Whether Vail steps inside the gathering or remains at the threshold"
         ]
       },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "vail-langley",
-          "statusNote": "Arrived at the Standing Annex with news of the band's approach. Has heard the name Vessa Torquen and understands its weight. Will carry this to Seraphine.",
-          "note": "Received the name of the handler who paid for the Revel mandate and the location of Pressureholt's access to sealed records. Her mandate has deepened—no longer simply seizing the chamber, but understanding what Pressureholt truly wants from it."
-        }
-      ],
+      "npcUpdates": [],
       "intentsHeard": [],
       "factUpdates": [],
       "placeUpdates": [],
       "discovery": null,
-      "codexUpdates": [
-        {
-          "topic": "vessa-torquen",
-          "label": "Vessa Torquen, Handler",
-          "kind": "person",
-          "entityId": "vessa-torquen",
-          "fact": "Enginewright stationed at Pressureholt. Hired Halvex Coil and the Churn-Revel to break the Null Stone's sealed seam. Came with coin and a shaped mandate—someone at Pressureholt knew exactly what they wanted broken and required precision to do it. Access to sealed infrastructure records.",
-          "links": [
-            "intake-plaza",
-            "the-revel-sent-to-break-the-stone",
-            "the-water-crisis-pressureholt"
-          ]
-        },
-        {
-          "topic": "pressureholt-mandate",
-          "label": "The Pressureholt Mandate",
-          "kind": "mystery",
-          "fact": "Someone at Pressureholt—a facility with access to sealed infrastructure records—shaped and paid for a specific mandate to break the Null Stone's sealed seam. The mandate came with precision and intention. The question remains: who stands behind Vessa Torquen, and what does breaking the chamber serve?",
-          "links": [
-            "vessa-torquen",
-            "the-sealed-chamber",
-            "the-revel-sent-to-break-the-stone",
-            "intake-plaza"
-          ]
-        }
-      ],
+      "codexUpdates": [],
       "holdingOps": [],
       "holdTrades": [],
       "debtOps": [],
       "exchangeOps": [],
       "partyOps": [],
-      "generateRequest": [
-        {
-          "type": "arc",
-          "hint": "Someone at Pressureholt—a facility with access to sealed infrastructure records—shaped and paid for a specific mandate to break the Null Stone's sealed seam. The mandate came with precision and intention. The question remains: who stands…",
-          "fromMystery": true,
-          "why": "R49 — a mystery must arrive with its story, not as a hook: The Pressureholt Mandate"
-        }
-      ],
+      "generateRequest": [],
       "encounterOps": [],
       "projectOps": [],
       "bandOps": [],
@@ -782,56 +770,68 @@
       "newEncounter": null,
       "unlockPrecursor": null,
       "unlockSubstrate": null,
-      "timeOps": {
-        "hoursPassed": 1,
-        "why": "waiting for Vail to arrive and the band to follow"
-      },
+      "timeOps": null,
       "moveTo": null,
       "stateOps": [],
       "itemUpdates": [],
       "deriveItem": null,
-      "imagePrompt": null,
+      "imagePrompt": "Six figures in a timber-beamed room with a fire in the corner—Halvex by the window, Orla with quiet precision, Ravel and Estry flanking Sable, and Loki standing at the center where the light falls from the eastern windows. Morning sunlight cuts across the stone floor. Outside, visible through the threshold, Vail Langley stands perfectly still beside her horse, watching but not entering.",
       "imageMedium": null,
       "newAbility": null,
       "gambitOps": null,
       "gambitApt": false,
-      "markDefiningMoment": null,
-      "markTeacher": null,
-      "offerPromotion": null,
-      "offerAcquisition": null,
+      "sceneEnded": false,
       "offerIntent": null,
-      "sceneEnded": false
+      "momentArt": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Six%20figures%20in%20a%20timber-beamed%20room%20with%20a%20fire%20in%20the%20corner%E2%80%94Halvex%20by%20the%20window%2C%20Orla%20with%20quiet%20precision%2C%20Ravel%20and%20Estry%20flanking%20Sable%2C%20and%20Loki%20standing%20at%20the%20center%20where%20the%20light%20falls%20from%20the%20eastern%20windows.%20Morning%20sunlight%20cuts%20across%20the%20stone%20floor.%20Outside%2C%20visible%20through%20the%20th%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=91922&nologo=true"
     },
     "sceneState": {
-      "setting": "The Standing Annex interior and threshold—morning light steady through open windows, the fire crackling in its corner. The eastern window frames the spinward road and the yard where Cy continues its methodical survey. Timber beams rise to a peaked roof. The stone beneath carries that faint harmonic thrumming.",
+      "setting": "The Standing Annex interior at midday—sunlight steady through open windows, fire crackling in its corner. The eastern window frames the spinward road and the yard beyond, where Cy has finished its initial survey. Timber beams rise to the peaked roof. The air carries the faint harmonic thrumming from the stone beneath.",
       "npcsPresent": [
         {
           "name": "Halvex Coil",
-          "state": "Standing by the window where he named Vessa Torquen, waiting for the band's arrival. His earlier certainty has settled i"
+          "state": "Standing by the interior window, reading the gathering with quiet assessment. Has just named Vessa Torquen."
+        },
+        {
+          "name": "Orla Yardley",
+          "state": "Entered first among the band members, standing with quiet precision, measuring the room."
+        },
+        {
+          "name": "Ravel Ash-bearer",
+          "state": "Just arrived, standing beside Estry and Sable. Her steady gaze moves across the Annex interior, reading the space."
+        },
+        {
+          "name": "Estry Krell",
+          "state": "Beside Ravel, watching. Her assessment is already moving ahead to what comes next."
+        },
+        {
+          "name": "Sable",
+          "state": "Entered with Ravel and Estry, standing quiet. Her fever has broken but she carries the weight of the descent still."
         },
         {
           "name": "Vail Langley",
-          "state": "Just arrived on the spinward road, dismounting as Loki meets her with the name. Her stillness deepens as the implication"
+          "state": "At the yard's edge beside her tethered horse, utterly still, watching from the threshold. Not inside. Not leaving."
         },
         {
           "name": "Cy",
-          "state": "In the eastern yard, continuing its systematic survey of the Precursor work beneath the Annex. Clicks and lens-iris move"
+          "state": "Returned from the yard survey, clicking quietly in its patient way. Lens settled to steady observation."
         }
       ],
       "objects": [
         "Two cups of cooling coffee on the worn wooden table",
         "The fire warming the corner",
         "Timber beams rising to the peaked roof",
-        "Vail's horse, tethered near the threshold"
+        "Vail's horse, tethered near the threshold",
+        "The steady morning sunlight through open windows"
       ],
       "threads": [
-        "Who truly stands behind Vessa Torquen and shaped the mandate to break the sealed chamber?",
-        "What does Pressureholt control through its access to sealed infrastructure records?",
-        "Will the band pursue this thread immediately, or gather more knowledge first?",
-        "What will Seraphine do when Vail carries this name back to the Radiant Plateau?"
+        "The full name and purpose behind Vessa Torquen's mandate to break the sealed chamber",
+        "What Pressureholt controls through its access to sealed infrastructure records",
+        "Whether the band moves toward Pressureholt immediately or gathers more knowledge first",
+        "What Seraphine will do when Vail carries this intelligence back to the Radiant Plateau",
+        "Whether Vail steps inside the gathering or remains at the threshold"
       ]
     },
-    "beats": 8,
+    "beats": 9,
     "subPlace": {
       "slug": "the-southeastern-corner-foundation",
       "name": "The southeastern corner foundation",
@@ -841,7 +841,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 10,
-    "hour": 12,
+    "hour": 13,
     "realAnchor": null
   },
   "companions": [
@@ -2491,10 +2491,6 @@
     "turnsSinceOffer": 0,
     "recentOffers": [
       {
-        "thing": "Halvex Coil, waiting with coffee and foreknowledge—the orchestrator who chose understanding over breaking now holds the Standing Annex and…",
-        "from": "The chain of knowing that moved through Veln's foreknowledge and Mara's directing hand—the world honoring what Loki taught instead of…"
-      },
-      {
         "thing": "The moment Cy accepts the assignment, it becomes real—the standing Annex transitions from refuge to active project, from place to tool.",
         "from": "Loki's deliberate choice to delegate and trust Cy with something that matters, something that extends into the future, something that…"
       },
@@ -2509,6 +2505,10 @@
       {
         "thing": "Vail Langley arriving with precise timing—she reads the need and is present without being asked.",
         "from": "Her own decision to ride ahead and her commitment to the threshold rather than the fortress."
+      },
+      {
+        "thing": "Vail Langley holds her position at the threshold—not inside the gathering, not turning away.",
+        "from": "The choice to stand at a threshold rather than a fortress; the question of whether authority can listen without deciding"
       }
     ],
     "wantProgress": {
@@ -14629,19 +14629,19 @@
     "deferredMysteries": []
   },
   "tendencies": {
-    "devotion": 0.34459733095381606,
-    "cerebral": 13.661638263641048,
-    "social": 17.686290102107566,
-    "strategic": 14.026942523659635,
-    "cautious": 3.497064902587071,
-    "amorous": 3.2516949541081215,
-    "generous": 4.1810966171534965,
-    "ruthless": 0.7532328513686596,
-    "risky": 0.07053861819735634,
-    "patient": 0.019262828096847578,
-    "deception": 0.022422929671430458,
-    "carousing": 0.4798813315685538,
-    "leadership": 1.911231337191905
+    "devotion": 0.3359823976799707,
+    "cerebral": 13.320097307050021,
+    "social": 17.244132849554877,
+    "strategic": 15.676268960568144,
+    "cautious": 3.409638280022394,
+    "amorous": 3.1704025802554185,
+    "generous": 4.076569201724659,
+    "ruthless": 0.734402030084443,
+    "risky": 0.06877515274242242,
+    "patient": 0.018781257394426387,
+    "deception": 0.021862356429644694,
+    "carousing": 0.4678842982793399,
+    "leadership": 1.8634505537621073
   },
   "aptitudes": [
     "strategist",
@@ -14650,7 +14650,7 @@
     "orator",
     "faithful"
   ],
-  "actionCount": 234,
+  "actionCount": 235,
   "grantsVersion": 1,
   "precursorAccess": [
     "address_sense"
@@ -14764,6 +14764,14 @@
   "nativeGrantsVersion": 2,
   "reconcileVersion": 89,
   "gallery": [
+    {
+      "kind": "moment",
+      "prompt": "Six figures in a timber-beamed room with a fire in the corner—Halvex by the window, Orla with quiet precision, Ravel and Estry flanking Sable, and Loki standing at the center where the light falls fro",
+      "url": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Six%20figures%20in%20a%20timber-beamed%20room%20with%20a%20fire%20in%20the%20corner%E2%80%94Halvex%20by%20the%20window%2C%20Orla%20with%20quiet%20precision%2C%20Ravel%20and%20Estry%20flanking%20Sable%2C%20and%20Loki%20standing%20at%20the%20center%20where%20the%20light%20falls%20from%20the%20eastern%20windows.%20Morning%20sunlight%20cuts%20across%20the%20stone%20floor.%20Outside%2C%20visible%20through%20the%20th%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=91922&nologo=true",
+      "caption": "The Churn-Revellers gather fully at the Standing Annex at midday—Loki, Halvex, Orla, Ravel",
+      "worldDay": 90,
+      "at": "2026-09-28T22:30:40.280Z"
+    },
     {
       "kind": "moment",
       "prompt": "The glass plain at dawn: a vast, fractured expanse glowing from underneath, light coming sideways through the broken surface in shades of gold and amber. The horizon swallows the glass into haze. A sm",
@@ -15900,8 +15908,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790634396094,
-  "rev": 1084,
+  "updatedAt": 1790634640280,
+  "rev": 1086,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -17075,7 +17083,7 @@
     "umbral_depths": 54,
     "the_quickwood": 101,
     "the_center": 50,
-    "valley": 63,
+    "valley": 64,
     "the_open_reach": 3
   },
   "opLossPending": false,
@@ -17251,10 +17259,10 @@
     {
       "id": "sess-22",
       "startedAt": "2026-09-28T20:26:42.371Z",
-      "lastAt": "2026-09-28T22:26:14.307Z",
+      "lastAt": "2026-09-28T22:30:40.270Z",
       "startDay": 90,
       "endDay": 90,
-      "beats": 15
+      "beats": 16
     }
   ],
   "establishedFacts": [
@@ -17453,7 +17461,7 @@
   ],
   "_opLedger": {
     "offer": {
-      "applied": 69,
+      "applied": 70,
       "rejected": 3,
       "lastWhy": "rejected-shape"
     },
@@ -17470,19 +17478,19 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 271,
-    "choices": 271,
-    "characterDeltas": 153,
-    "scene": 271,
+    "sceneSummary": 272,
+    "choices": 272,
+    "characterDeltas": 154,
+    "scene": 272,
     "placeUpdates": 36,
     "codexUpdates": 156,
     "timeOps": 217,
-    "offer": 62,
+    "offer": 63,
     "generateRequest": 8,
-    "sceneEnded": 139,
+    "sceneEnded": 140,
     "npcUpdates": 217,
     "moveTo": 16,
-    "gambitApt": 95,
+    "gambitApt": 96,
     "deeds": 18,
     "questUpdates": 66,
     "standingOps": 8,
@@ -17491,7 +17499,7 @@
     "encounterOps": 9,
     "ledgerEvents": 18,
     "newEncounter": 3,
-    "imagePrompt": 54,
+    "imagePrompt": 55,
     "scene_ended": 1,
     "stateOps": 3,
     "_engineClosedScene": 4,
@@ -17505,7 +17513,7 @@
     "discoveryEligible": 1,
     "projectOps": 1
   },
-  "_opTurns": 271,
+  "_opTurns": 272,
   "customAbilities": {
     "mirror-bright": {
       "id": "mirror-bright",
@@ -18510,11 +18518,11 @@
   "featureOffers": [],
   "_debtReceipts": [],
   "skillUses": {
-    "plan": 17,
+    "plan": 18,
     "discuss": 1,
     "travel": 14,
     "scout": 8,
-    "prepare": 10,
+    "prepare": 11,
     "careful": 12,
     "woo": 1,
     "rapport": 18,
@@ -19070,432 +19078,432 @@
   },
   "_promptRows": {
     "character": {
-      "reached": 80,
-      "produced": 80
+      "reached": 81,
+      "produced": 81
     },
     "location": {
-      "reached": 80,
-      "produced": 80
+      "reached": 81,
+      "produced": 81
     },
     "region": {
-      "reached": 80,
-      "produced": 80
+      "reached": 81,
+      "produced": 81
     },
     "groundDetail": {
-      "reached": 80,
+      "reached": 81,
       "produced": 27
     },
     "lore": {
-      "reached": 80,
+      "reached": 81,
       "produced": 51
     },
     "traditionMotiveDetail": {
-      "reached": 80,
-      "produced": 80
+      "reached": 81,
+      "produced": 81
     },
     "sheetsDetail": {
-      "reached": 80,
-      "produced": 53
+      "reached": 81,
+      "produced": 54
     },
     "rules": {
-      "reached": 80,
-      "produced": 80
+      "reached": 81,
+      "produced": 81
     },
     "recentTurns": {
-      "reached": 80,
-      "produced": 68
+      "reached": 81,
+      "produced": 69
     },
     "timeLabel": {
-      "reached": 80,
-      "produced": 80
+      "reached": 81,
+      "produced": 81
     },
     "npcRegistryDetail": {
-      "reached": 80,
-      "produced": 80
+      "reached": 81,
+      "produced": 81
     },
     "mintedUnmetDetail": {
-      "reached": 80,
-      "produced": 80
+      "reached": 81,
+      "produced": 81
     },
     "npcSeedDetail": {
-      "reached": 80,
-      "produced": 35
+      "reached": 81,
+      "produced": 36
     },
     "traditionVocab": {
-      "reached": 80,
-      "produced": 80
+      "reached": 81,
+      "produced": 81
     },
     "standingDetail": {
-      "reached": 80,
-      "produced": 80
+      "reached": 81,
+      "produced": 81
     },
     "recalledDetail": {
-      "reached": 80,
-      "produced": 14
-    },
-    "bearingsDetail": {
-      "reached": 80,
-      "produced": 80
-    },
-    "caravansDetail": {
-      "reached": 80,
+      "reached": 81,
       "produced": 15
     },
+    "bearingsDetail": {
+      "reached": 81,
+      "produced": 81
+    },
+    "caravansDetail": {
+      "reached": 81,
+      "produced": 16
+    },
     "commandDetail": {
-      "reached": 80,
-      "produced": 80
+      "reached": 81,
+      "produced": 81
     },
     "presenceDetail": {
-      "reached": 80,
-      "produced": 70
+      "reached": 81,
+      "produced": 71
     },
     "worthHereDetail": {
-      "reached": 80,
+      "reached": 81,
       "produced": 0
     },
     "inventoryDetail": {
-      "reached": 80,
-      "produced": 80
+      "reached": 81,
+      "produced": 81
     },
     "sceneState": {
-      "reached": 80,
-      "produced": 68
+      "reached": 81,
+      "produced": 69
     },
     "holdingsDetail": {
-      "reached": 80,
-      "produced": 80
+      "reached": 81,
+      "produced": 81
     },
     "debtsDetail": {
-      "reached": 80,
+      "reached": 81,
       "produced": 0
     },
     "carriedDetail": {
-      "reached": 80,
+      "reached": 81,
       "produced": 0
     },
     "abilityLawDetail": {
-      "reached": 80,
-      "produced": 80
+      "reached": 81,
+      "produced": 81
     },
     "questsDetail": {
-      "reached": 80,
-      "produced": 80
+      "reached": 81,
+      "produced": 81
     },
     "structuredQuestsDetail": {
-      "reached": 80,
+      "reached": 81,
       "produced": 0
     },
     "traditionArcDetail": {
-      "reached": 80,
+      "reached": 81,
       "produced": 0
     },
     "npcErrandsDetail": {
-      "reached": 80,
+      "reached": 81,
       "produced": 0
     },
     "codexDetail": {
-      "reached": 80,
-      "produced": 80
+      "reached": 81,
+      "produced": 81
     },
     "companionsDetail": {
-      "reached": 80,
-      "produced": 80
+      "reached": 81,
+      "produced": 81
     },
     "placeMemoryDetail": {
-      "reached": 80,
-      "produced": 56
+      "reached": 81,
+      "produced": 57
     },
     "agesMissingDetail": {
-      "reached": 80,
-      "produced": 80
+      "reached": 81,
+      "produced": 81
     },
     "newsDetail": {
-      "reached": 80,
-      "produced": 80
+      "reached": 81,
+      "produced": 81
     },
     "worldArcsDetail": {
-      "reached": 80,
-      "produced": 80
+      "reached": 81,
+      "produced": 81
     },
     "legendsPursuableDetail": {
-      "reached": 80,
+      "reached": 81,
       "produced": 12
     },
     "wakesDetail": {
-      "reached": 80,
+      "reached": 81,
       "produced": 0
     },
     "arcMoodDetail": {
-      "reached": 80,
-      "produced": 80
+      "reached": 81,
+      "produced": 81
     },
     "reachableDeadDetail": {
-      "reached": 80,
+      "reached": 81,
       "produced": 46
     },
     "threatToPlayer": {
-      "reached": 80,
+      "reached": 81,
       "produced": 0
     },
     "guardiansDetail": {
-      "reached": 80,
+      "reached": 81,
       "produced": 0
     },
     "resolution": {
-      "reached": 80,
-      "produced": 65
+      "reached": 81,
+      "produced": 66
     },
     "playerInput": {
-      "reached": 80,
+      "reached": 81,
       "produced": 15
     },
     "exactWords": {
-      "reached": 80,
-      "produced": 39
+      "reached": 81,
+      "produced": 40
     },
     "travelDirective": {
-      "reached": 80,
+      "reached": 81,
       "produced": 7
     },
     "itemAdvance": {
-      "reached": 80,
+      "reached": 81,
       "produced": 0
     },
     "encounterWeaveDetail": {
-      "reached": 80,
+      "reached": 81,
       "produced": 11
     },
     "encounterOfferDetail": {
-      "reached": 80,
+      "reached": 81,
       "produced": 5
     },
     "fightFramingDetail": {
-      "reached": 80,
+      "reached": 81,
       "produced": 0
     },
     "abilityGrantDetail": {
-      "reached": 80,
+      "reached": 81,
       "produced": 0
     },
     "stageRevealDetail": {
-      "reached": 80,
+      "reached": 81,
       "produced": 0
     },
     "itemEvolveDetail": {
-      "reached": 80,
+      "reached": 81,
       "produced": 0
     },
     "worldPressureDetail": {
-      "reached": 80,
+      "reached": 81,
       "produced": 2
     },
     "offerDetail": {
-      "reached": 80,
+      "reached": 81,
       "produced": 2
     },
     "teacherOfferDetail": {
-      "reached": 80,
+      "reached": 81,
       "produced": 0
     },
     "substrateDetail": {
-      "reached": 80,
+      "reached": 81,
       "produced": 19
     },
     "romanceGuidanceDetail": {
-      "reached": 80,
+      "reached": 81,
       "produced": 4
     },
     "factsDetail": {
-      "reached": 80,
-      "produced": 80
+      "reached": 81,
+      "produced": 81
     },
     "evolvedItemsDetail": {
-      "reached": 80,
+      "reached": 81,
       "produced": 0
     },
     "opLossNote": {
-      "reached": 80,
+      "reached": 81,
       "produced": 0
     },
     "emergenceDetail": {
-      "reached": 80,
+      "reached": 81,
       "produced": 0
     },
     "perilNote": {
-      "reached": 80,
+      "reached": 81,
       "produced": 0
     },
     "encounterDetail": {
-      "reached": 80,
+      "reached": 81,
       "produced": 4
     },
     "masteryDetail": {
-      "reached": 80,
-      "produced": 80
+      "reached": 81,
+      "produced": 81
     },
     "bookkeepingRestate": {
-      "reached": 80,
+      "reached": 81,
       "produced": 0
     },
     "anomalyDetail": {
-      "reached": 80,
-      "produced": 78
+      "reached": 81,
+      "produced": 79
     },
     "repairPanelDetail": {
-      "reached": 80,
-      "produced": 80
+      "reached": 81,
+      "produced": 81
     },
     "teacherDetail": {
-      "reached": 80,
+      "reached": 81,
       "produced": 0
     },
     "toolkitDetail": {
-      "reached": 80,
-      "produced": 80
+      "reached": 81,
+      "produced": 81
     },
     "availableEncounters": {
-      "reached": 80,
-      "produced": 76
+      "reached": 81,
+      "produced": 77
     },
     "partyDetail": {
-      "reached": 80,
+      "reached": 81,
       "produced": 0
     },
     "ratingDetail": {
-      "reached": 80,
-      "produced": 80
+      "reached": 81,
+      "produced": 81
     },
     "registerDetail": {
-      "reached": 80,
-      "produced": 80
+      "reached": 81,
+      "produced": 81
     },
     "legendDetail": {
-      "reached": 80,
+      "reached": 81,
       "produced": 1
     },
     "livingWorldDetail": {
-      "reached": 80,
-      "produced": 51
+      "reached": 81,
+      "produced": 52
     },
     "assignmentsDetail": {
-      "reached": 80,
-      "produced": 6
+      "reached": 81,
+      "produced": 7
     },
     "latentArcsDetail": {
-      "reached": 80,
-      "produced": 80
+      "reached": 81,
+      "produced": 81
     },
     "seasonalDetail": {
-      "reached": 80,
-      "produced": 80
+      "reached": 81,
+      "produced": 81
     },
     "schoolsDetail": {
-      "reached": 80,
-      "produced": 80
+      "reached": 81,
+      "produced": 81
     },
     "sharedCanonDetail": {
-      "reached": 80,
-      "produced": 57
+      "reached": 81,
+      "produced": 58
     },
     "worldCountLabel": {
-      "reached": 80,
-      "produced": 80
+      "reached": 81,
+      "produced": 81
     },
     "waygateDetail": {
-      "reached": 80,
+      "reached": 81,
       "produced": 29
     },
     "readAloudDetail": {
-      "reached": 80,
-      "produced": 80
+      "reached": 81,
+      "produced": 81
     },
     "scenePacingDetail": {
-      "reached": 80,
-      "produced": 24
+      "reached": 81,
+      "produced": 25
     },
     "wishesDetail": {
-      "reached": 60,
+      "reached": 61,
       "produced": 0
     },
     "worldMovedOnDetail": {
-      "reached": 60,
+      "reached": 61,
       "produced": 2
     },
     "companionLivesDetail": {
-      "reached": 60,
-      "produced": 33
+      "reached": 61,
+      "produced": 34
     },
     "homeDetail": {
-      "reached": 60,
+      "reached": 61,
       "produced": 0
     },
     "invitationsDetail": {
-      "reached": 60,
+      "reached": 61,
       "produced": 0
     },
     "bandsJoinedDetail": {
-      "reached": 60,
+      "reached": 61,
       "produced": 0
     },
     "travelersHereDetail": {
-      "reached": 60,
+      "reached": 61,
       "produced": 17
     },
     "travelersDetail": {
-      "reached": 60,
+      "reached": 61,
       "produced": 4
     },
     "journeyDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 7
     },
     "journeyUnderwayDetail": {
-      "reached": 58,
+      "reached": 59,
       "produced": 5
     },
     "holdsNearDetail": {
-      "reached": 58,
-      "produced": 54
+      "reached": 59,
+      "produced": 55
     },
     "moneyDetail": {
-      "reached": 57,
-      "produced": 57
+      "reached": 58,
+      "produced": 58
     },
     "jobsDetail": {
-      "reached": 57,
+      "reached": 58,
       "produced": 0
     },
     "powersHereDetail": {
-      "reached": 34,
+      "reached": 35,
       "produced": 6
     },
     "nemesisDetail": {
-      "reached": 34,
-      "produced": 34
+      "reached": 35,
+      "produced": 35
     },
     "sovereignMark": {
-      "reached": 17,
+      "reached": 18,
       "produced": 0
     },
     "seats": {
-      "reached": 15,
-      "produced": 15
+      "reached": 16,
+      "produced": 16
     },
     "couldBeHereDetail": {
-      "reached": 15,
-      "produced": 15
+      "reached": 16,
+      "produced": 16
     },
     "heldMeetDetail": {
-      "reached": 15,
+      "reached": 16,
       "produced": 0
     },
     "askedMeetDetail": {
-      "reached": 15,
+      "reached": 16,
       "produced": 0
     }
   },
   "_opUnknown": {
-    "sceneSummary": 101,
+    "sceneSummary": 102,
     "scene_summary": 1,
     "discoveryEligible": 1
   },
@@ -19732,12 +19740,6 @@
   ],
   "_axesDropped": [
     {
-      "at": "2026-09-14T23:56:02.576Z",
-      "key": "spectrumId",
-      "value": 0,
-      "why": "not a spectrum id"
-    },
-    {
       "at": "2026-09-15T00:18:44.635Z",
       "key": "spectrumId",
       "value": 0,
@@ -19854,6 +19856,12 @@
       "value": -0.3,
       "why": "not a spectrum id",
       "from": "choice"
+    },
+    {
+      "at": "2026-09-28T22:30:13.598Z",
+      "key": "order_chaos",
+      "value": 0.4,
+      "why": "not a spectrum id"
     }
   ],
   "braids": [

@@ -304,7 +304,9 @@ export function roomOf(holding, cfg = null) {
   let fits = ladder.findIndex(r => Number(r.slots) >= used);
   if (fits < 0) fits = ladder.length - 1;
   const i = Math.max(stored, fits);
-  const rungSlots = Number(ladder[i].slots);
+  // ✅ SNG-666 §2.1 — AND GROUND THE HOLD HAS CLEARED ADDS TO ITS RUNG'S ROOM. Without this the clearing job finishes, the
+  // spot is recorded, and `roomOf` still says the hold is full — a feature that runs to completion and changes nothing.
+  const rungSlots = Number(ladder[i].slots) + Math.max(0, Number(holding?.spotsCleared) || 0);
   const c = carriageOf(holding);
   const frames = S?.frames?.kinds || {};
   const frame = c ? Object.keys(frames).find(k => !k.startsWith("_") && String(frames[k]?.moves || "").toLowerCase() === c.moves) || null : null;
@@ -1505,6 +1507,110 @@ export function sellShareFor(holding, cfg, { ignoreRoute = false } = {}) {
   return 0;
 }
 
+/* ═════ SNG-666 — HOLDS GROW: CLEAR GROUND, THEN BUILD ON IT ═════
+ *
+ * ✅ ERIK 2026-09-29: *"there is supposed to be a way to clear more ground (or prepare space) for new features. Adding
+ * space and filling it with features is how your holds grow."*
+ *
+ * ⛔ THE HOLE, MEASURED BY AEVI AND CONFIRMED HERE: `addFeature` works, `roomRefusal` names the way out — *"it would have
+ * to become a hamlet, which has N more"* — and **neither way out existed**. Nothing added a spot; nothing raised a
+ * frame. Loki's Annex is a post (2) on legs (2) with two features, so every build was refused and there was no door.
+ *
+ * ⚠️ AND THE CONSTRAINT `slots.earnedNotBought` WRITES DOWN ITSELF: *"ROOM IS WON, NEVER PURCHASED… if a rung can be
+ * bought the ladder collapses into money."* So clearing is WORK — hands at it, over passes — and the goods are a cost
+ * beside the work, never a price that buys a rung. A hold with a full purse and nobody to swing a tool clears nothing.
+ */
+
+/** ⛑ WHAT CLEARING A SPOT COSTS AND HOW LONG IT TAKES, at this hold's rung.
+ *
+ *  ⬜ AEVI RESERVED THE NUMBERS (§2.5: *"Authored by me once you've built the reader"*) and gave a starting shape: base
+ *  goods × (rung index + 1), passes 2 + rung index, at two average hands. That shape is implemented here so the feature
+ *  WORKS today and Erik can grow the Annex — and `holdStore.slots.clearing` overrides every part of it the moment she
+ *  authors one, which is the point of measuring it for her rather than choosing it. PURE. */
+export const CLEARING = { baseGoods: { raw_material: 6 }, basePasses: 2, atHands: 2, budgets: ["defence", "production", "community", "open"] };
+
+export function clearingQuote(holding, cfg = null) {
+  const room = roomOf(holding, cfg);
+  if (!room) return { ok: false, why: "no ladder is authored, so this hold has no rungs to grow through" };
+  const C = cfg?.slots?.clearing || null;
+  const idx = Math.max(0, Number(room.rungIndex) || 0);
+  const base = C?.baseGoods && typeof C.baseGoods === "object" ? C.baseGoods : CLEARING.baseGoods;
+  const goods = {};
+  for (const [g, n] of Object.entries(base)) goods[g] = Math.max(1, Math.round((Number(n) || 0) * (idx + 1)));
+  const passes = Math.max(1, Math.round(Number(C?.basePasses ?? CLEARING.basePasses) + idx));
+  const budgets = Array.isArray(C?.budgets) && C.budgets.length ? C.budgets : CLEARING.budgets;
+  // ⛔ A MOVING HOLD GROWS ITS FRAME INSTEAD (§2.3). "Prepare space" for legs, a hull, a lift is the same job wearing the
+  // frame's name — and `roomOf` already says WHICH of the two is binding, so the card never offers the one that would
+  // add nothing. ⚠️ The Standing Annex is a post (2) on legs (2): a new rung would give it nothing. Its growth is legs.
+  const onFrame = room.boundBy === "frame";
+  return {
+    ok: true, goods, passes, atHands: Math.max(1, Number(C?.atHands ?? CLEARING.atHands)), budgets,
+    rung: room.rung, rungIndex: idx, onFrame, frame: room.frame || null,
+    authored: !!C,                                   // ⛑ says plainly whether these are Aevi's numbers or my reading of her shape
+    label: onFrame
+      ? `Build out the ${room.frame || "frame"}`
+      : "Clear a new spot",
+    said: onFrame
+      ? `${room.frame ? `Its ${room.frame} carry ${room.frameSlots}` : "Its frame is full"} — building them out adds one more place to put something.`
+      : `${room.used} of ${room.slots} places are taken. Clearing ground adds one more.`,
+  };
+}
+
+/** ⛔ START THE WORK. It is a job at the hold, not a purchase: the goods are taken now and the PASSES are what it costs.
+ *  ⚠️ Refused when the hold is not actually full, because clearing ground you are not using is not a thing to spend on. */
+export function startClearing(character, holding, { budget = "open", cfg = null, day = null } = {}) {
+  const q = clearingQuote(holding, cfg);
+  if (!q.ok) return q;
+  if (holding.clearing) return { ok: false, why: "ground is already being cleared here", already: true };
+  if (!q.budgets.includes(String(budget))) return { ok: false, why: `"${budget}" is not one of the budgets` };
+  const short = [];
+  for (const [g, n] of Object.entries(q.goods)) {
+    const have = Math.max(0, Number(holding.store?.[g]) || 0);
+    if (have < n) short.push(`${n - have} more ${String(g).replace(/_/g, " ")}`);
+  }
+  if (short.length) return { ok: false, why: `the store needs ${short.join(" and ")}`, short };
+  for (const [g, n] of Object.entries(q.goods)) {
+    holding.store[g] = Math.max(0, (Number(holding.store[g]) || 0) - n);
+    if (!(holding.store[g] > 0)) delete holding.store[g];
+  }
+  holding.clearing = { budget: String(budget), progress: 0, passes: q.passes, startedDay: day, onFrame: !!q.onFrame, frame: q.frame || null };
+  return { ok: true, clearing: holding.clearing, quote: q,
+    said: q.onFrame
+      ? `Work has started on the ${q.frame || "frame"}. About ${q.passes} pass${q.passes === 1 ? "" : "es"} with ${q.atHands} hands at it.`
+      : `Ground is being cleared. About ${q.passes} pass${q.passes === 1 ? "" : "es"} with ${q.atHands} hands at it.` };
+}
+
+/** ⛔ A PASS OF THE WORK, weighted by the hands actually at it — §2.1's *"progress weighted by their hand at the clearing
+ *  duty"*. ⛑ Nobody at it is no progress: that is what makes this WORK rather than a timer, and what keeps a rung from
+ *  being bought. Returns a note when the spot lands. */
+export function clearingTick(character, holding, { cfg = null, hands = null, day = null } = {}) {
+  const c = holding?.clearing;
+  if (!c) return null;
+  const q = clearingQuote(holding, cfg);
+  const at = hands != null ? Math.max(0, Number(hands) || 0)
+    : (Array.isArray(holding.crew) ? holding.crew.length : 0) + (Array.isArray(holding.garrison) ? holding.garrison.length : 0);
+  if (at <= 0) return { stalled: true, note: null };
+  const perPass = at / Math.max(1, Number(q.atHands) || 2) / Math.max(1, Number(c.passes) || 1);
+  c.progress = Math.min(1, (Number(c.progress) || 0) + perPass);
+  if (c.progress < 1) return { stalled: false, note: null, progress: c.progress };
+  delete holding.clearing;
+  if (c.onFrame) {
+    holding.frameRaised = Math.max(0, Number(holding.frameRaised) || 0) + 1;
+    return { stalled: false, cleared: true, onFrame: true, note: `The ${c.frame || "frame"} at ${holding.name || holding.id} will carry one more.` };
+  }
+  holding.spotsCleared = Math.max(0, Number(holding.spotsCleared) || 0) + 1;
+  holding.slotBudgets = holding.slotBudgets && typeof holding.slotBudgets === "object" ? holding.slotBudgets : {};
+  holding.slotBudgets[c.budget] = Math.max(0, Number(holding.slotBudgets[c.budget]) || 0) + 1;
+  return { stalled: false, cleared: true, budget: c.budget, note: `Ground is cleared at ${holding.name || holding.id} — one more place to put something.` };
+}
+
+/* ⛔ PROMOTION IS ALREADY BUILT, AND I NEARLY WROTE IT AGAIN. `promotionOffer` and `promoteHolding` are above, wired
+ * to the card's own button since CCODE-429 — and stricter than the pair I had drafted here: full AND thriving AND
+ * thriving for a season, offered rather than applied, and never when the FRAME binds. §2.2 was done before this spec
+ * was written. `node --check` caught the duplicate identifier, which is the cheapest way I have ever caught this.
+ * ⛑ What §2 actually needed was the half that did not exist: clearing, and a cleared spot COUNTING toward the room.
+ */
+
 /** ⛑ SNG-652 §6 — THE STOCK POLICY, per good or for the whole store: `keepAll`, `keepUpTo` (with `keep`), or
  *  `sellAll`. A per-good row wins over the store's; absent is `sellAll`, which is exactly what every hold does today.
  *
@@ -1568,6 +1674,14 @@ export function tickStore(character, holding, { cfg = null, economy = null, regi
   }
   out.yielded = ys.length ? ys[0] : null;
   out.yields = ys;
+  // ✅ SNG-666 §2.1 — AND A PASS OF THE CLEARING, if hands are at it. ⛑ In `tickStore` because that is where a hold's pass
+  // already happens, and because the goods it cost came off this same store. Nobody at it is no progress — which is what
+  // keeps a rung earned rather than bought, the rule `slots.earnedNotBought` writes down in capitals.
+  if (holding.clearing) {
+    const cl = clearingTick(character, holding, { cfg, day });
+    if (cl?.note) { out.cleared = cl; queueHoldingEvent(character, cl.note); }
+    else if (cl?.stalled) out.clearingStalled = true;
+  }
   // ✅ SNG-665 §1.1 — AND THE RUNS TAKE THEIR SHARE OF **THIS PASS'S PRODUCT**, here, before the keeper sells any of it.
   //
   // ⛔ MY FIRST CUT SCRAPED IT OFF THE SHELF AFTERWARDS, in `runStandingRoutes`, which runs later in the tick. Measured

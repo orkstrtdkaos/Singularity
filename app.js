@@ -69,7 +69,7 @@ import { enterDeathState, rollRetrieval, pledgeFrom } from "./engine/death.js";
 // duplicated in this codebase, and each time the copies drifted before anyone noticed.
 wireDeathModel(DeathModel);
 import { carriageOf, voyageOf, isMoored, canSail, sailHolding, voyageLine, featureRuling, canBuildOn } from "./engine/carriage.js";
-import { roomOf, roomRefusal, promotionOffer, promoteHolding, trainingAt, mountsAt, healingAt, quarteringOf, vaultOf, chargeOf, chargeWord, depositToVault, withdrawFromVault, holdingFieldSources, sellPlanFor, stockPolicyFor} from "./engine/holdings.js";   // ⛔ CCODE-429: a hold has room · CCODE-430: a yard trains   // B6b: the holding that moves
+import { roomOf, roomRefusal, promotionOffer, promoteHolding, trainingAt, mountsAt, healingAt, quarteringOf, vaultOf, chargeOf, chargeWord, depositToVault, withdrawFromVault, holdingFieldSources, sellPlanFor, stockPolicyFor, clearingQuote, startClearing } from "./engine/holdings.js";   // ⛔ CCODE-429: a hold has room · CCODE-430: a yard trains   // B6b: the holding that moves
 import { raidRisk, watchReadout, watchOdds, craftPlacementCost, defenceOf, featureCost, featureDef, featureDoes, featureCategory, allFeatures, refreshImprovement, canBeAskedToWork, holdingFactsLine, answerFeatureOffer, holdingLedger, addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, yieldsFor, upkeepFor, appointKeeper, reclaimHolding, improveHolding, setCrew, setGarrison, holdingGround, addFeature, removeFeature, renameHolding, featureKinds, residentsOf, holdingMeaningAura, holdingFieldDelta } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
 import { buildDevReport, unknownOpsIn } from "./engine/devreport.js";   // SNG-559: the Play/Dev instrument
 import { makeField, fieldDataFrom, FIELD_KINDS, KIND_LABEL, MEMBERSHIP } from "./engine/field.js";
@@ -183,7 +183,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.15.4";
+const APP_VERSION = "2.15.5";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -14922,6 +14922,22 @@ function wireHoldingOffers() {
   // ✅ SNG-663 §2e.4 — EXPOSING THEM IS A DEED. One click, through the one writer of a power's opinion.
   // ✅ SNG-663 §2c — TAKING AN ARCH, AND LETTING IT GO. ⛔ The refusal is SAID: `takeGate` answers in the fiction's own
   // terms at a made gate ("it was permitted"), which is the whole exemption and would be invisible in a console.
+  // ✅ SNG-666 §2 — CLEAR GROUND, OR BUILD OUT THE FRAME. ⛔ The refusal is SAID: `startClearing` answers "the store needs
+  // 12 more raw material", which is the whole difference between a button that does nothing and one that tells you why.
+  for (const btn of app.querySelectorAll("[data-clear-start]")) btn.onclick = () => {
+    const h = (character.holdings || []).find(x => x && x.id === btn.dataset.clearStart);
+    if (!h) return;
+    const r = startClearing(character, h, { budget: "open", cfg: holdCfgNow(), day: absoluteWorldDay() });
+    if (!r.ok) { alert(r.why); return; }
+    queueHoldingEvent(character, r.said);
+    saveCharacter(character); again();
+  };
+  for (const btn of app.querySelectorAll("[data-clear-stop]")) btn.onclick = () => {
+    const h = (character.holdings || []).find(x => x && x.id === btn.dataset.clearStop);
+    if (!h || !h.clearing) return;
+    delete h.clearing;
+    saveCharacter(character); again();
+  };
   // ✅ SNG-665 §2 — THE ◀ ▶, THE TOGGLE AND THE STOP. Aevi: "No save button: what the row says is what happens."
   for (const btn of app.querySelectorAll("[data-run-units]")) btn.onclick = () => {
     const [holdId, runId] = String(btn.dataset.runUnits || "").split("|");
@@ -15789,6 +15805,29 @@ function renderHoldingsTab(manageId = null, tab = null) {
 
         ${pane("build", `
         ${head("What stands here")}
+        ${(() => {
+          // ✅ SNG-666 §2.4 — THE SPOTS, AND THE WAY TO MAKE ANOTHER, sitting beside Build exactly as Aevi drew it:
+          // "2 of 2 spots · Clear a new spot — 12 raw material, ~3 passes with these hands · Build…"
+          // ⛔ §3's gate is that a FULL hold always shows a way to grow and never a dead end — which is what Loki's Annex was
+          // when I reported "no door" yesterday: a post on legs, 2 of 2, every build refused and nothing to do about it.
+          const cfgC = holdCfgNow();
+          const room = (() => { try { return roomOf(h, cfgC); } catch { return null; } })();
+          if (!room) return "";
+          const q = (() => { try { return clearingQuote(h, cfgC); } catch { return null; } })();
+          const busy = h.clearing || null;
+          const cost = q?.ok ? Object.entries(q.goods).map(([g, n]) => `${n} ${esc(String(g).replace(/_/g, " "))}`).join(" + ") : "";
+          const hands = (h.crew || []).length + (h.garrison || []).length;
+          return `<div class="hold-ctl"><span class="hold-ctl-label">Room</span>
+            <span><strong>${room.used} of ${room.slots}</strong> place${room.slots === 1 ? "" : "s"} taken${room.boundBy === "frame" ? ` — its ${esc(room.frame || "frame")} are what bind it` : ""}.
+            ${busy
+              ? `<span class="hint">${esc(busy.onFrame ? `Building out the ${busy.frame || "frame"}` : "Clearing ground")} — ${Math.round((busy.progress || 0) * 100)}% done${hands ? "" : ", and <strong>nobody is at it</strong>"}.</span>
+                 <button class="link-btn" data-clear-stop="${esc(h.id)}" title="Stop the work — what it cost is spent">Stop</button>`
+              : q?.ok
+                ? `<span class="hint">${esc(q.said)}</span>
+                   <button class="opt" data-clear-start="${esc(h.id)}" title="${esc(cost)} and about ${q.passes} pass${q.passes === 1 ? "" : "es"} with ${q.atHands} hands at it">${esc(q.label)} — ${cost}, ~${q.passes} pass${q.passes === 1 ? "" : "es"}${hands ? ` with ${hands} hand${hands === 1 ? "" : "s"}` : ", and you have nobody here to do it"}</button>`
+                : `<span class="hint">${esc(q?.why || "there is no way to make more room here")}</span>`}
+            </span></div>`;
+        })()}
         ${(() => {
           // ⛔ §179 — THE CONTROLS ARE LABELLED ROWS, not a drift of loose buttons. "Put a craft to it" is the
           // Build tab's own job, and it keeps the shape the gate asserts because the shape is the point.

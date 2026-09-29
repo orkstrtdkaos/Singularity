@@ -33209,6 +33209,127 @@ console.log("\n── §392 · many runs, and the keeper never holds everything 
     })());
 }
 
+/* ══════════ §393 · SNG-666 — HOLDS GROW: CLEAR GROUND, THEN BUILD ON IT ══════════ */
+// ✅ ERIK 2026-09-29: *"on building hold features… YES! And there is supposed to be a way to clear more ground (or
+// prepare space) for new features. Adding space and filling it with features is how your holds grow."*
+//
+// ⛔ THE HOLE: `addFeature` worked, `roomRefusal` named the way out — *"it would have to become a hamlet"* — and NEITHER
+// WAY OUT EXISTED. Nothing added a spot; nothing raised a frame. Loki's Annex, a post (2) on legs (2) with two
+// features, refused every build with no door, which is what I reported to Erik on 09-28.
+//
+// ⚠️ AND THE CONSTRAINT THE CONFIG WRITES DOWN ITSELF (`slots.earnedNotBought`): *"ROOM IS WON, NEVER PURCHASED… if a
+// rung can be bought the ladder collapses into money."* So clearing is WORK, and nobody at it is no progress.
+console.log("\n── §393 · holds grow: clear ground, then build on it ──");
+{
+  const H393 = await import("../engine/holdings.js");
+  const { loadContentHeadless: lch393 } = await import("./headless_content.mjs");
+  const C393 = await lch393();
+  const cfg393 = { ...C393.rules.economy.holdStore, features: C393.rules.economy.holdFeatures };
+  // ⛑ THE REAL SHAPE: a post on legs with two features, which is the Standing Annex — the hold the spec names.
+  const annex = () => ({ id: "h", name: "The Annex", kind: "post", locationId: "millbrook", condition: "thriving",
+    store: { raw_material: 30 }, carriage: { moves: "powered" }, features: [{ kind: "tower" }, { kind: "shrine" }], history: [] });
+  const chA = () => ({ id: "cA", name: "T", holdings: [annex()], purse: { crystal: 0, coin: 0, paper: 0, marks: 0, scrip: {} }, worldState: {} });
+
+  /* ---- 1 · ⛔ A FULL HOLD ALWAYS SHOWS A WAY OUT ---- */
+  check("§393: ⛔ A FULL HOLD IS NEVER A DEAD END — every hold with no room can name the work that would make some",
+    (() => {
+      const ch = chA(), h = ch.holdings[0];
+      const room = H393.roomOf(h, cfg393);
+      const q = H393.clearingQuote(h, cfg393);
+      return room.full === true && q.ok === true && Object.keys(q.goods).length > 0 && q.passes > 0 && !!q.label && !!q.said;
+    })());
+  // ⛔ AND IT IS THE RIGHT WORK FOR THE HOLD. §2.3: a moving hold "grows its frame instead", and `roomOf` already says
+  // WHICH of the two is binding — so the card never offers the one that would add nothing.
+  check("§393: ⛔ …and a MOVING hold builds out its frame while a rooted one clears ground — the job is named for whichever is binding",
+    (() => {
+      const moving = H393.clearingQuote(annex(), cfg393);
+      const rooted = H393.clearingQuote({ ...annex(), carriage: null }, cfg393);
+      return moving.onFrame === true && /legs/.test(moving.label) && rooted.onFrame === false && /Clear/.test(rooted.label);
+    })());
+  // ⛑ THE COST CLIMBS WITH THE HOLD, which is Aevi's §2.5 starting shape — and it lands on her own worked example.
+  check("§393: ⛑ …and clearing costs more the bigger the hold — a post for 6, a keep for 36, which is the spec's own worked example",
+    (() => {
+      const at = (rung, features) => H393.clearingQuote({ ...annex(), carriage: null, rung, features }, cfg393);
+      const post = at("post", [{ kind: "tower" }, { kind: "shrine" }]);
+      const keep = at("keep", Array.from({ length: 20 }, (_, i) => ({ kind: `f${i}` })));
+      return post.goods.raw_material === 6 && keep.goods.raw_material === 36 && keep.passes > post.passes;
+    })(), `post ${JSON.stringify(H393.clearingQuote({ ...annex(), carriage: null }, cfg393).goods)}`);
+
+  /* ---- 2 · ⛔ IT IS WORK, NOT A PURCHASE ---- */
+  // ⛔ `slots.earnedNotBought` in capitals: "ROOM IS WON, NEVER PURCHASED." A full purse and nobody to swing a tool
+  // clears nothing — which is the one property that keeps the ladder from collapsing into money.
+  check("§393: ⛔ ROOM IS WON, NEVER PURCHASED — with nobody at it the work makes no progress, however full the store",
+    (() => {
+      const ch = chA(), h = ch.holdings[0];
+      h.store.raw_material = 9999;
+      if (!H393.startClearing(ch, h, { cfg: cfg393, day: 1 }).ok) return false;
+      for (let p = 0; p < 50; p++) H393.clearingTick(ch, h, { cfg: cfg393, hands: 0 });
+      return !!h.clearing && (h.clearing.progress || 0) === 0 && !h.frameRaised && !h.spotsCleared;
+    })());
+  check("§393: ⛑ …and the goods come off the store when the work starts, and a store that cannot pay is REFUSED in words",
+    (() => {
+      const ch = chA(), h = ch.holdings[0];
+      const q = H393.clearingQuote(h, cfg393);
+      const before = h.store.raw_material;
+      const ok = H393.startClearing(ch, h, { cfg: cfg393, day: 1 });
+      const twice = H393.startClearing(ch, h, { cfg: cfg393, day: 1 });
+      const poor = chA(); poor.holdings[0].store = { raw_material: 1 };
+      const no = H393.startClearing(poor, poor.holdings[0], { cfg: cfg393, day: 1 });
+      return ok.ok && h.store.raw_material === before - q.goods.raw_material
+        && twice.ok === false && twice.already === true
+        && no.ok === false && /more raw material/.test(no.why) && !poor.holdings[0].clearing;
+    })());
+
+  /* ---- 3 · ⛔ AND WHEN IT LANDS, THE ROOM IS REALLY THERE ---- */
+  // ⛔ WITHOUT `roomOf` COUNTING IT the job runs to completion, the spot is recorded, and the hold is still full — a
+  // feature that finishes and changes nothing, which is this project's most-repeated defect wearing a new hat.
+  check("§393: ⛔ A CLEARED SPOT IS REAL ROOM — `roomOf` counts it, or the job finishes and the hold is still full",
+    (() => {
+      const ch = chA(), h = ch.holdings[0];
+      h.carriage = null;                                    // a rooted hold clears GROUND
+      const before = H393.roomOf(h, cfg393).slots;
+      H393.startClearing(ch, h, { cfg: cfg393, day: 1 });
+      let landed = null;
+      for (let p = 0; p < 20 && h.clearing; p++) landed = H393.clearingTick(ch, h, { cfg: cfg393, hands: 2 });
+      const after = H393.roomOf(h, cfg393);
+      return landed?.cleared === true && h.spotsCleared === 1 && after.slots === before + 1 && after.full === false
+        && (h.slotBudgets?.open || 0) === 1;
+    })());
+  check("§393: ⛑ …and a MOVING hold's frame carries one more instead, which is what §2.3 means by \"prepare space\"",
+    (() => {
+      const ch = chA(), h = ch.holdings[0];
+      const before = H393.roomOf(h, cfg393).frameSlots;
+      H393.startClearing(ch, h, { cfg: cfg393, day: 1 });
+      for (let p = 0; p < 20 && h.clearing; p++) H393.clearingTick(ch, h, { cfg: cfg393, hands: 2 });
+      return h.frameRaised === 1 && !h.spotsCleared && H393.roomOf(h, cfg393).frameSlots === before + 1;
+    })());
+
+  /* ---- 4 · ⛑ AND THE WHOLE PATH AEVI'S §3 NAMES ---- */
+  // ⚠️ HER GATE READS AS THOUGH THE BUILD FOLLOWS THE FRAME DIRECTLY. Driven, it takes one more step — and it is the
+  // step her own §2.2 specifies: raising the legs makes the FRAME stop binding, so the RUNG starts to, and that is
+  // exactly when `promotionOffer` begins offering. Reported to her rather than worked around.
+  check("§393: ⛑ LOKI'S ANNEX CAN GROW — build out the legs, take the promotion it then offers, and the third feature goes up",
+    (() => {
+      const ch = chA(), h = ch.holdings[0];
+      if (!H393.startClearing(ch, h, { cfg: cfg393, day: 1 }).ok) return false;
+      for (let p = 0; p < 20 && h.clearing; p++) H393.clearingTick(ch, h, { cfg: cfg393, hands: 2 });
+      const offer = H393.promotionOffer(h, cfg393, { worldCount: 1e9 });
+      if (!offer || offer.from !== "post" || offer.to !== "steading") return false;
+      const up = H393.promoteHolding(ch, h.id, cfg393, { worldCount: 1e9 });
+      const room = H393.roomOf(h, cfg393);
+      return up.ok && room.slots === 3 && room.full === false;
+    })());
+  // ⛔ AND PROMOTION WAS ALREADY BUILT. I nearly wrote a second `promotionOffer`; `node --check` caught the duplicate
+  // identifier. Gated so the next reader finds the one that exists instead of adding a third.
+  check("§393: ⛔ …and there is exactly ONE promotion reader — it was built in CCODE-429 and §2.2 needed nothing new",
+    (() => {
+      const src = rd("engine/holdings.js");
+      return (src.match(/export function promotionOffer\(/g) || []).length === 1
+        && (src.match(/export function promoteHolding\(/g) || []).length === 1
+        && !/export function promoteHold\(/.test(src);
+    })());
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

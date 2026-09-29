@@ -16,6 +16,9 @@
     }
   },
   "properties": {
+    "runs": { "type": "array", "description": "SNG-665 (CCODE-564): the hold's standing trade runs, each asking for units a pass; allocatePass splits a pass between the upkeep reserve, the runs and selling at home." },
+    "clearing": { "type": ["object", "null"], "description": "SNG-666 (CCODE-565): ground being cleared (or a frame built out) at this hold: budget, progress, passes." },
+    "spotsCleared": { "type": "number", "description": "SNG-666: feature spots this hold has cleared by work; roomOf adds them to its rung's room." },
     "id": {
       "type": "string",
       "description": "100% — the stable key."

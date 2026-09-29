@@ -290,6 +290,20 @@
    "groundYieldWeight": 0.5
   },
   "slots": {
+   "clearing": {
+    "baseGoods": {
+     "raw_material": 6
+    },
+    "basePasses": 2,
+    "atHands": 2,
+    "budgets": [
+     "defence",
+     "production",
+     "community",
+     "open"
+    ],
+    "_why": "SNG-666 §2.5 (Aevi 2026-09-29), measured by CCode (CCODE-565) on Silas's and Loki's holds: clearing a spot costs raw material 6 × (rung index + 1) and 2 + rung index passes at two average hands. A post clears for 6 and 2 passes; a keep for 36 and 7. Room is won by work, not bought: nobody at the job is no progress. Budgets are SNG-652 §4's."
+   },
    "_statement": "⛔ ERIK 2026-09-18, CORRECTING ME TWICE. First: 'a post can have many features if they fit in the narrative and area — look at the posts Silas has. However, sometimes space is constrained: a ship, Loki's standing annex, a floating citadel. A brand new post might start with just a couple of feature slots, but they should be EXPANDABLE.' Then: **'the hold will grow into larger things — village, town, fortress, keep, stronghold.'** ⛑ SO THE KIND IS A RUNG, NOT A CATEGORY, and room comes with the rung. ⚠️ MY FIRST CUT CAPPED A POST AT 2 AND WOULD HAVE BROKEN THE LARGEST HOLD IN PLAY: **Stillwater's Trouble is a `post` carrying NINETEEN FEATURES** — a keep, a market, a longhouse, a muster yard, a ward-line. **It is not a post. Nothing ever promoted it, because there was no ladder to be promoted on.**",
    "ladder": [
     {

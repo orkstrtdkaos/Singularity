@@ -16477,8 +16477,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790715460952,
-  "rev": 1127,
+  "updatedAt": 1790715640985,
+  "rev": 1131,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -17647,6 +17647,15 @@
       "teaches": null,
       "liaisonFor": null,
       "joinedDay": 90
+    },
+    {
+      "npcId": "kael-road-warden",
+      "roles": [
+        "ally"
+      ],
+      "teaches": null,
+      "liaisonFor": null,
+      "joinedDay": 91
     }
   ],
   "_pinsInitialized": true,
@@ -19855,6 +19864,10 @@
     {
       "text": "Work has started on the legs. About 2 passes with 2 hands at it.",
       "announced": true
+    },
+    {
+      "text": "Kael walks with you now, in the line — you can bring 3 forward, and closeness is what earns a named place.",
+      "announced": false
     }
   ],
   "figureImages": {
@@ -20757,6 +20770,12 @@
         "glasswork",
         "bark_and_briar"
       ]
+    },
+    "halvex_coil": {
+      "prefer": [
+        "forced_bloom",
+        "quieting"
+      ]
     }
   },
   "pinnedLooks": {
@@ -21138,7 +21157,8 @@
   "imagePinned": true,
   "partyForward": [
     "traveler-woman",
-    "halvex_coil"
+    "halvex_coil",
+    "radiant-agent-seraphine-s-hand"
   ],
   "caravans": [
     {

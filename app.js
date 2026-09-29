@@ -93,7 +93,7 @@ import { resolveWaygateTransit, routeGmMoveTo, isNetworkGate, networkGatesFrom, 
 import { routeBetween, routeLine, twoWayRoads } from "./engine/journey.js";
 import { planJob, suggestTeam, jobPoolOf, jobRouteOf, jobCost, jobWages, jobEffects, sayEffects, settleDueJobs, degreeWord, jobOpposition, mainNeedOf, jobCraftsOf, bestCraftFor, OUTCOMES as JOB_OUTCOMES, errandOdds, detachForJob, jobPersonFor, workCraftsOf, workDayChance, workHeads, bandTeamOf, sendBandOnMission, bandMissionParty } from "./engine/jobs.js";   // CCODE-420 · CCODE-428 · CCODE-431
 import { ensureJobs, postJob, sendOnJob, awayOnJob, untoldJobs, markJobsTold, dropJob, detachedFrom } from "./engine/jobstate.js";   // CCODE-420 · CCODE-431
-import { sendCaravan, caravansOf, storeExits, setRoute, clearRoute, hireCompany, routeCompany, standingCrewFor , heldForRuns } from "./engine/caravan.js";   // R49: a caravan is a delegate + a route + a load   // SNG-331 §1 / SNG-386 §4.4: two named options over roads + gates // SNG-148: waygates — map control routes named/hub; GM offer via the registry row. SNG-243 §4: the gate network
+import { sendCaravan, caravansOf, storeExits, setRoute, clearRoute, hireCompany, routeCompany, standingCrewFor , heldForRuns , allocatePass, setRunUnits, removeRun, addRun, runLoadTarget, routeValue } from "./engine/caravan.js";   // R49: a caravan is a delegate + a route + a load   // SNG-331 §1 / SNG-386 §4.4: two named options over roads + gates // SNG-148: waygates — map control routes named/hub; GM offer via the registry row. SNG-243 §4: the gate network
 import { skillDetail, npcDetail, itemDetail, relationshipsParagraph, craftRollsLine, craftRollsShort } from "./engine/entityDetail.js";
 import { wholeNameFor, learnWholeName } from "./engine/names.js";   // ⛔ SNG-643 §5 (C17): a whole name is shown only when this character may see it
 import { collapseScenePresence, canonicalPersonId, personArtSeed, applyNpcUpdates, findExistingNpc, genderUnsaid, sexUnsaid, SEX_VALUES, sexFromGender, sexGenderAgree, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier, backfillNpcGender, reconcileGeneratedNpcWithMeet, npcFearsForGM, npcReactionsForGM, repairUnnamedPeople } from "./engine/npcs.js";   // SNG-431 §1: the pre-namer saves get their names
@@ -183,7 +183,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.15.3";
+const APP_VERSION = "2.15.4";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -14922,6 +14922,30 @@ function wireHoldingOffers() {
   // ✅ SNG-663 §2e.4 — EXPOSING THEM IS A DEED. One click, through the one writer of a power's opinion.
   // ✅ SNG-663 §2c — TAKING AN ARCH, AND LETTING IT GO. ⛔ The refusal is SAID: `takeGate` answers in the fiction's own
   // terms at a made gate ("it was permitted"), which is the whole exemption and would be invisible in a console.
+  // ✅ SNG-665 §2 — THE ◀ ▶, THE TOGGLE AND THE STOP. Aevi: "No save button: what the row says is what happens."
+  for (const btn of app.querySelectorAll("[data-run-units]")) btn.onclick = () => {
+    const [holdId, runId] = String(btn.dataset.runUnits || "").split("|");
+    const r = setRunUnits(character, holdId, runId, Number(btn.dataset.to) || 0);
+    if (!r.ok) { alert(r.why); return; }
+    // ⛑ a run that was "whatever is spare" becomes a dialled one the moment the player moves the dial
+    const h = (character.holdings || []).find(x => x && x.id === holdId);
+    const run = (h?.runs || []).find(x => x && x.id === runId);
+    if (run) delete run.wholeProduct;
+    saveCharacter(character); again();
+  };
+  for (const box of app.querySelectorAll("[data-run-reserve]")) box.onchange = () => {
+    const h = (character.holdings || []).find(x => x && x.id === box.dataset.runReserve);
+    if (!h) return;
+    h.reserveUpkeep = !!box.checked;
+    saveCharacter(character); again();
+  };
+  for (const btn of app.querySelectorAll("[data-run-stop]")) btn.onclick = () => {
+    const [holdId, runId] = String(btn.dataset.runStop || "").split("|");
+    const r = removeRun(character, holdId, runId);
+    if (!r.ok) { alert(r.why); return; }
+    if (r.returned) queueHoldingEvent(character, `The run is stopped — ${r.returned} unit(s) it had gathered go back into the store.`);
+    saveCharacter(character); again();
+  };
   for (const btn of app.querySelectorAll("[data-gate-take]")) btn.onclick = () => {
     const h = (character.holdings || []).find(x => x && x.id === btn.dataset.gateTake);
     if (!h) return;
@@ -15814,6 +15838,77 @@ function renderHoldingsTab(manageId = null, tab = null) {
         `)}
 
         ${pane("store", `
+          ${(() => {
+            // ✅ SNG-665 §2 — THE TRADING SCREEN. Erik: *"You can put more or less into a run (of which you can have many
+            // different routes set up) and you should be able to see the effect on the $ expected to be brought in."*
+            // ⛑ Every number is a reader that already exists: `allocatePass` splits the pass, `routeValue` prices a run,
+            // the home row is this market's own price and fee. §3's gate — the total equals the sum of the rows — holds
+            // because nothing here computes anything twice.
+            const eco = CONTENT.rules?.economy, sc = holdCfgNow();
+            const reg = CONTENT.locations?.[h.locationId]?.regionId || null;
+            // ⛔ ASSEMBLED HERE, not borrowed from the overview block — those names are out of scope in this pane and the
+            // scope scan caught it before a click could. ⚠️ The WHOLE people bag the tick uses, never the registry slice:
+            // a person's level is derived from their whole record, and 32 of 132 sheet differently without the authored half.
+            const runPeople = { ...(CONTENT.npcs || {}), ...(character.npcRegistry || {}) };
+            const runNpcCfg = CONTENT.rules?.npcStanding || {};
+            let s = null;
+            try {
+              s = allocatePass(character, h, { cfg: sc, economy: eco, locations: CONTENT.locations || {},
+                powers: CONTENT.powers || [], rules: CONTENT.rules, day: absoluteWorldDay() });
+            } catch { s = null; }
+            if (!s) return "";
+            const co = CONTENT.tradeCompanies || [];
+            const money = (v) => esc(priceHere(Math.max(0, Math.round(Number(v) || 0)), reg, eco).label);
+            // ⛑ a run's worth per pass, from the SAME reader the comparison card uses
+            const valueOf = (r) => {
+              try {
+                const path = (routeBetween(h.locationId, r.toId, CONTENT.locations || {}, { traveller: r.by ? null : character })?.options || [])
+                  .slice().sort((a, b) => (a.days ?? 1e9) - (b.days ?? 1e9))[0] || null;
+                return routeValue(character, h, { powers: CONTENT.powers || [], rules: CONTENT.rules, toId: r.toId,
+                  days: path?.days ?? null, path: path?.path || null, cfg: sc, economy: eco, locations: CONTENT.locations || {},
+                  companyCut: r.by ? r.cut : null, companyGuards: r.by ? r.guards : null,
+                  people: runPeople, npcCfg: runNpcCfg, day: absoluteWorldDay() });
+              } catch { return null; }
+            };
+            const runRows = (h.runs || []).map(r => {
+              const row = s.runs.find(x => x.id === r.id) || { asked: 0, getting: 0, short: false, whole: !!r.wholeProduct };
+              const v = valueOf(r);
+              const carrier = r.by ? (co.find(c => c.id === r.by)?.name || r.by) : "your own cart";
+              const out = (character.caravans || []).find(c => c && c.runId === r.id && (c.status === "travelling" || c.status === "returning"));
+              const tgt = (() => { try { return runLoadTarget(character, h, r, { locations: CONTENT.locations || {}, cfg: sc, perPass: row.getting }); } catch { return null; } })();
+              // ⛑ the run earns its per-pass rate SCALED BY WHAT IT ACTUALLY CARRIES: `routeValue` prices a whole pass's
+              // product, and a run that takes four of fourteen earns four fourteenths of it. One reader, one scaling.
+              const share = s.total > 0 ? row.getting / s.total : 0;
+              const back = v?.ok ? Math.round((v.perPass || 0) * share * 10) / 10 : null;
+              return { r, row, v, carrier, out, tgt, back };
+            });
+            const totalBack = runRows.reduce((a, x) => a + (x.back || 0), 0);
+            const homeWorth = s.netPerUnit > 0 ? Math.round(s.home * s.netPerUnit * s.sellShare * 10) / 10 : 0;
+            const net = Math.round((totalBack + homeWorth - s.upkeep) * 10) / 10;
+            return `<div class="hs-cmp"><span class="hs-lbl">What this hold's work goes to</span>
+              <table class="hs-table"><tr><th>where</th><th>per pass</th><th>into it</th><th>expected back</th><th>first coin</th></tr>
+              <tr><td><label style="cursor:pointer"><input type="checkbox" data-run-reserve="${esc(h.id)}"${s.reserveOn ? " checked" : ""}> Cover the keep first</label>
+                ${s.shortOfKeep ? `<div class="hint pp-must">${esc(s.said)}</div>` : ""}</td>
+                <td>${money(s.upkeep)}</td><td>${s.reserve} unit${s.reserve === 1 ? "" : "s"}</td><td>covers the keep</td><td>now</td></tr>
+              <tr><td>Sell here${s.market?.powerName ? ` <span class="hint">· ${esc(s.market.powerName)} takes ${s.market.fee}</span>` : ""}</td>
+                <td></td><td>${s.home} unit${s.home === 1 ? "" : "s"}</td><td>${money(homeWorth)}</td><td>now</td></tr>
+              ${runRows.map(({ r, row, carrier, out, tgt, back }) => `<tr><td>Run → <strong>${esc(CONTENT.locations?.[r.toId]?.name || r.toId)}</strong>
+                  <span class="hint">${esc(carrier)}${out ? ` · a cart is ${out.status === "returning" ? "walking home" : "on the road"}` : tgt && tgt.units ? ` · leaves at ${tgt.units} units` : ""}</span>
+                  ${row.short ? `<div class="hint pp-must">asking ${row.asked}, getting ${row.getting}</div>` : ""}</td>
+                <td class="opt-row" style="gap:3px">${row.whole ? `<span class="hint">whatever is spare</span>`
+                  : `<button class="link-btn" data-run-units="${esc(h.id)}|${esc(r.id)}" data-to="${Math.max(0, row.asked - 1)}" title="less into this run">◀</button>
+                     <strong>${row.asked}</strong>
+                     <button class="link-btn" data-run-units="${esc(h.id)}|${esc(r.id)}" data-to="${row.asked + 1}" title="more into this run">▶</button>`}</td>
+                <td>${row.getting} unit${row.getting === 1 ? "" : "s"}</td>
+                <td>${back != null ? money(back) : "—"}</td>
+                <td>${out ? "on its way" : tgt ? `${tgt.passes} pass${tgt.passes === 1 ? "" : "es"}` : "—"}</td></tr>`).join("")}
+              <tr class="hs-best"><td><strong>Total</strong></td><td>makes ${s.total}</td><td></td>
+                <td><strong>${money(totalBack + homeWorth)}</strong> a pass · keep ${money(s.upkeep)} · <strong>${net >= 0 ? "+" : "−"}${money(Math.abs(net))}</strong></td><td></td></tr>
+              </table>
+              <div class="hint">${esc(s.said)}</div>
+              ${(h.runs || []).map(r => `<button class="link-btn" data-run-stop="${esc(h.id)}|${esc(r.id)}" title="Stop this run — whatever it has gathered goes back to the store">Stop the run to ${esc(CONTENT.locations?.[r.toId]?.name || r.toId)}</button>`).join(" ")}
+              </div>`;
+          })()}
           ${(() => {
             // ⛑ WHAT IS ACTUALLY STORED HERE, in the goods' own words.
             const tot = storeTotal(h);

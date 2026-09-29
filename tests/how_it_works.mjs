@@ -12078,7 +12078,14 @@ console.log("\n── §120 · Deni keeps it, the place thrives anyway, and the 
     /kept by cassiel \(in charge, vouched by veth\)/.test(H.holdingsForGM(c2, null, {})));
   check("§120: …and the GM is told the act exists — vouchedBy is in the npcUpdates contract", /"vouchedBy": "npcId of a KNOWN person/.test(rd("engine/gm.js")));
   check("§120: ⚑ the tick hands the keeper's real tier to the store — the multiplier and the floor come from the same read",
-    /tickStore\(character, h, \{[^\n]*npcCfg: content\?\.rules\?\.npcStanding \|\| \{\},/.test(rd("engine/worldtick.js")));
+    // ⛑ ACROSS THE CALL, NOT ALONG ONE LINE. This was `\{[^\n]*npcCfg:` and broke the day the call grew a second line
+    // of arguments — the claim is that the tick hands the store the keeper's tier, not that the call is one line long.
+    (() => {
+      const wt = rd("engine/worldtick.js");
+      const i = wt.indexOf("tickStore(character, h, {");
+      if (i < 0) return false;
+      return /npcCfg: content\?\.rules\?\.npcStanding \|\| \{\},/.test(wt.slice(i, i + 900));
+    })());
 }
 
 /* ═════ §121 — ERIK'S HOLDS: THE FEATURES THE FICTION BUILT, THE MADE GATE AS A HOLD, AND ONE HOLD THAT WATCHES ANOTHER ═════ */
@@ -30708,7 +30715,7 @@ console.log("\n── §377 · a route is a standing run ──");
   /* ---- AND THE RUN ACTUALLY RUNS ---- */
   // ⛔ WITHOUT THIS THE CARD IS A CLAIM ABOUT A MECHANISM THAT DOES NOT EXIST. It says "first coin in N passes" and
   // "it departs every N passes", and until SNG-654 the only way a load ever left a hold was a GM op, once, by hand.
-  check("§377: ⛔ A ROUTE IS A STANDING RUN — it is set, the keeper stops selling the stock out from under it, the tick sends the next load when the crew is home, arrival counts the run, and they walk back",
+  check("§377: ⛔ A ROUTE IS A STANDING RUN — it is set, the keeper GOES ON SELLING while it runs (Erik 09-29), the tick sends the next load when the crew is home, arrival counts the run, and they walk back",
     (() => {
       // ⚠️ WITH A KEEPER, or the check proves nothing: `sellShareFor` is 0 for a hold with no steward, no crew and no
       // garrison — nobody is there to sell — so "the route stops the selling" would have been true of a hold that was
@@ -30727,7 +30734,10 @@ console.log("\n── §377 · a route is a standing run ──");
       const departures = log.filter(k => k === "departure").length;
       const arrivals = log.filter(k => k === "arrival").length;
       const homes = log.filter(k => k === "home").length;
-      return sellsWhileStanding === 0 && sellsIfItStopped > 0
+      // ⛔ THIS READ `sellsWhileStanding === 0` — the rule Erik withdrew on 2026-09-29: *"No — a keeper does NOT hold
+      // the entire stock while a trade route runs."* The clause is inverted rather than dropped, because the new
+      // ruling deserves a gate as much as the old one had: the keeper goes on selling WHILE the run runs.
+      return sellsWhileStanding > 0 && sellsWhileStanding === sellsIfItStopped
         && departures >= 2 && arrivals >= 2 && homes >= 1
         && h.route.runs === arrivals && (c.roadsKnown?.[[h.locationId, "the_axis_gate"].sort().join("|")] || 0) === arrivals
         && (c.purse.crystal > 100);
@@ -30936,12 +30946,17 @@ console.log("\n── §379 · the stock policy ──");
         && before.raw_material === 40 && atSale.raw_material > before.raw_material;
     })(), "one plan, read twice — and read of the same store both times");
 
-  check("§379: ⚡ …and a STANDING RUN holds everything back, because that is what the run is for — one policy, derived from the route, never a second flag beside it",
+  // ⛔ THIS CHECK ASSERTED THE OPPOSITE UNTIL 2026-09-29, and it was right to go red: ERIK WITHDREW THE RULE — *"No — a
+  // keeper does NOT hold the entire stock while a trade route runs."* It said a standing run holds everything back,
+  // "because that is what the run is for", which is the sentence that earned Loki's thriving Annex nothing for 26
+  // passes. ⛑ The claim that survives is the one underneath it: the keeper's share has ONE definition, and a run does
+  // not silence it. How much goes to a run is `allocatePass`'s answer now (§392), not a share of zero here.
+  check("§379: ⚡ …and a RUN NO LONGER SILENCES THE KEEPER — Erik withdrew that rule; the share has one definition and a run does not change it",
     (() => {
-      const h = mk9({ route: { toId: "the_axis_gate", crew: [] } });
+      const h = mk9({ runs: [{ id: "r1", toId: "the_axis_gate", units: 4, gathered: {} }] });
       const plan = H9.sellPlanFor(h, cfg9);
-      const would = H9.sellPlanFor(h, cfg9, { ignoreRoute: true });
-      return plan.units === 0 && plan.share === 0 && would.units > 0;
+      const bare = H9.sellPlanFor(mk9({}), cfg9);
+      return plan.units > 0 && plan.share > 0 && plan.share === bare.share;
     })());
 
   check("§379: ⛑ the card reads the SAME function and the GM has a door to it",
@@ -33023,6 +33038,174 @@ console.log("\n── §391 · holding a gate, and what the Lattice sends ──
     (() => {
       const wt = rd("engine/worldtick.js");
       return /import \{ gateHoldPass \} from "\.\/gatehold\.js"/.test(wt) && /gateHoldPass\(character, \{/.test(wt);
+    })());
+}
+
+/* ══════════ §392 · SNG-665 — MANY RUNS, AND THE KEEPER NEVER HOLDS EVERYTHING ══════════ */
+// ✅ ERIK 2026-09-29: *"No — a keeper does NOT hold the entire stock while a trade route runs… You can put more or less
+// into a run (of which you can have many different routes set up) and you should be able to see the effect on the $
+// expected to be brought in. You should have a toggle that lets you always hold enough product back for operating
+// costs."*
+//
+// ⛔ THE RULE HE WITHDREW WAS MINE. `sellShareFor` returned 0 the moment a route stood — "the policy IS the route" — and
+// it left no way to send LESS, so it was all or nothing. Loki's THRIVING Annex earned nothing for 26 passes while
+// paying its keep every one of them, because its cart is 75.7 days each way. He reported it as lost income.
+console.log("\n── §392 · many runs, and the keeper never holds everything ──");
+{
+  const CV392 = await import("../engine/caravan.js");
+  const H392 = await import("../engine/holdings.js");
+  const R392 = await import("../engine/reconcile.js");
+  const { loadContentHeadless: lch392 } = await import("./headless_content.mjs");
+  const C392 = await lch392();
+  const eco392 = C392.rules.economy;
+  const cfg392 = { ...eco392.holdStore, features: eco392.holdFeatures };
+  const L392 = C392.locations;
+  const deps392 = { cfg: cfg392, economy: eco392, locations: L392, powers: C392.powers, rules: C392.rules };
+  const hold392 = () => ({ id: "h", name: "The Test Hold", kind: "enterprise", locationId: "millbrook", condition: "thriving",
+    store: {}, steward: "s", crew: [], features: [{ kind: "market", count: 1 }], history: [] });
+  const char392 = () => ({ id: "c392", name: "T", clock: { day: 40 }, worldState: {}, holdings: [hold392()],
+    npcRegistry: { s: { id: "s", name: "Keeper", status: "active" } }, purse: { crystal: 0, coin: 0, paper: 0, marks: 0, scrip: {} } });
+
+  /* ---- 1 · ⛔ THE WITHDRAWN RULE IS GONE ---- */
+  check("§392: ⛔ A KEEPER SELLS WHILE A RUN STANDS — Erik withdrew the rule that returned 0, and it is the rule that earned Loki nothing for 26 passes",
+    (() => {
+      const ch = char392(), h = ch.holdings[0];
+      const bare = H392.sellShareFor(h, cfg392);
+      h.runs = [{ id: "r1", toId: "the_axis_gate", units: 4, gathered: {} }];
+      h.route = { toId: "the_axis_gate" };                     // even the OLD shape must not silence the keeper now
+      return bare > 0 && H392.sellShareFor(h, cfg392) === bare;
+    })());
+
+  /* ---- 2 · ⛔ ONE ALLOCATOR, AND ITS ROWS SUM TO THE PASS ---- */
+  // ⛑ §3's gate: "The screen's total equals the sum of its rows." That is only unbreakable if the screen and the tick
+  // both read this, so it is asserted as an identity over every setting rather than on one fixture.
+  check("§392: ⛔ THE SPLIT ALWAYS ADDS UP — reserve + every run's draw + what sells at home is exactly the pass's product, at every setting",
+    (() => {
+      for (const units of [0, 1, 3, 7, 99]) {
+        for (const toggle of [true, false]) {
+          const ch = char392(), h = ch.holdings[0];
+          h.reserveUpkeep = toggle;
+          h.runs = [{ id: "r1", toId: "the_axis_gate", units, gathered: {} }, { id: "r2", toId: "plainstead", units, gathered: {} }];
+          const s = CV392.allocatePass(ch, h, deps392);
+          const sum = s.reserve + s.runs.reduce((a, r) => a + r.getting, 0) + s.home;
+          if (sum !== s.total) return false;
+          if (s.runs.some(r => r.getting > r.asked)) return false;      // ⛔ never more than asked
+          if (s.runs.some(r => r.getting < 0)) return false;
+        }
+      }
+      return true;
+    })());
+  check("§392: ⛔ A RUN NEVER STARVES THE HOLD — the keep is covered first, and when the runs ask for more than is free they share it proportionally and the row SAYS so",
+    (() => {
+      const ch = char392(), h = ch.holdings[0];
+      h.runs = [{ id: "r1", toId: "the_axis_gate", units: 100, gathered: {} }, { id: "r2", toId: "plainstead", units: 100, gathered: {} }];
+      const s = CV392.allocatePass(ch, h, deps392);
+      const drawn = s.runs.reduce((a, r) => a + r.getting, 0);
+      return s.reserve > 0 && drawn === s.free && s.runs.every(r => r.short === true)
+        && Math.abs(s.runs[0].getting - s.runs[1].getting) <= 1;        // ⛑ equal asks, equal shares, to the rounding
+    })());
+  // ⛔ ERIK'S TOGGLE, AND ITS DEFAULT. §1.3 says ON by default, so `undefined` must be ON — a default that behaves like a
+  // value is this project's most-repeated defect, and here it would quietly stop covering the keep on every old save.
+  check("§392: ⛔ THE TOGGLE IS ON BY DEFAULT — `undefined` covers the keep, and only an explicit false turns it off",
+    (() => {
+      const ch = char392(), h = ch.holdings[0];
+      h.runs = [{ id: "r1", toId: "the_axis_gate", units: 99, gathered: {} }];
+      const on = CV392.allocatePass(ch, h, deps392);
+      h.reserveUpkeep = false;
+      const off = CV392.allocatePass(ch, h, deps392);
+      h.reserveUpkeep = true;
+      const back = CV392.allocatePass(ch, h, deps392);
+      return CV392.coversUpkeepFirst(hold392()) === true
+        && on.reserve > 0 && off.reserve === 0 && back.reserve === on.reserve
+        && off.runs[0].getting > on.runs[0].getting;
+    })());
+  // ⛑ …and the reserve is the units that will be SOLD, not the units that are worth the upkeep: a keeper sells a SHARE.
+  check("§392: ⛑ …and the reserve counts what will be SOLD, through the same reader the tick sells with — a keeper sells a share, not the shelf",
+    (() => {
+      const ch = char392(), h = ch.holdings[0];
+      h.runs = [{ id: "r1", toId: "the_axis_gate", units: 99, gathered: {} }];
+      const s = CV392.allocatePass(ch, h, deps392);
+      const share = H392.sellShareFor(h, cfg392);
+      if (!(share > 0 && s.netPerUnit > 0)) return false;
+      return s.reserve === Math.min(s.total, Math.ceil(s.upkeep / (s.netPerUnit * share)));
+    })());
+
+  /* ---- 3 · ⛔ THE DRAW COMES OUT OF THE PRODUCT, NOT THE SHELF ---- */
+  // ⛔ MEASURED ON LOKI'S OWN HOLD: drawn after the keeper had sold, the hold went THRIVING → HOLDING in ONE pass with
+  // its product halved. §1.4 forbids exactly that. The control is the same hold with no runs at all.
+  check("§392: ⛔ A RUN DOES NOT STARVE THE HOLD — twenty passes with runs leave it in the same condition as twenty passes without",
+    (() => {
+      const run = (withRuns) => {
+        const ch = char392(), h = ch.holdings[0];
+        h.runs = withRuns ? [{ id: "r1", toId: "the_axis_gate", units: 4, gathered: {} }] : [];
+        for (let p = 1; p <= 20; p++) {
+          H392.tickStore(ch, h, { cfg: cfg392, economy: eco392, regionId: L392.millbrook?.regionId || null,
+            rng: () => 0.99, day: 1000 + p * 3, people: {}, locations: L392, rules: C392.rules, powers: C392.powers,
+            divert: CV392.divertToRuns });
+          CV392.runStandingRoutes(ch, { locations: L392, cfg: cfg392, economy: eco392, powers: C392.powers, rules: C392.rules, day: 1000 + p * 3, people: {} });
+          CV392.tickCaravans(ch, { locations: L392, cfg: cfg392, economy: eco392, day: 1000 + p * 3, people: {}, rng: () => 0.99 });
+        }
+        return { condition: h.condition, purse: ch.purse.crystal };
+      };
+      const withR = run(true), without = run(false);
+      return withR.condition === without.condition && withR.purse > 0 && without.purse > 0;
+    })());
+
+  /* ---- 4 · ⛔ THE CART LEAVES WHEN ITS LOAD IS GATHERED, ONE PER RUN ---- */
+  check("§392: ⛔ THE CART'S TARGET IS ITS UNITS A PASS × THE PASSES A ROUND TRIP TAKES — measured against what the run DRAWS, never what the shelf allowed",
+    (() => {
+      const ch = char392(), h = ch.holdings[0];
+      const run = { id: "r1", toId: "plainstead", units: 4, gathered: {} };
+      h.runs = [run];
+      const far = CV392.runLoadTarget(ch, h, run, { locations: L392, cfg: cfg392, perPass: 4 });
+      const near = CV392.runLoadTarget(ch, h, { ...run, toId: "the_axis_gate" }, { locations: L392, cfg: cfg392, perPass: 4 });
+      // ⛑ a far market gathers more before it goes; a near one goes often. And `perPass` overrides the dial, which is
+      // what a `wholeProduct` run needs — reading the dial gave it a target of ZERO and it sent every pass.
+      const whole = CV392.runLoadTarget(ch, h, { ...run, units: 0, wholeProduct: true }, { locations: L392, cfg: cfg392, perPass: 5 });
+      return far.units > near.units && far.passes > near.passes && whole.units === 5 * whole.passes && whole.units > 0;
+    })());
+  // ⛔ ASSERTED ON THE BUSY PREDICATE, NOT ON TWO CARTS BOTH COMPLETING. My first form ran thirty passes with runs to
+  // the Axis Gate (1.8 days) and Plainstead (65 days) and expected both to depart — but a 65-day run gathers 3 a pass
+  // toward a target of 3 × 22 passes, so it could not possibly have gone in thirty. The gate's PREMISE was wrong, not the
+  // engine, and a gate that cannot be satisfied is worse than none. This asks the actual question: does one run's cart
+  // stop another run's from leaving?
+  check("§392: ⛑ …and one cart per RUN, not per hold — a cart already walking for one run must not block another's",
+    (() => {
+      const ch = char392(), h = ch.holdings[0];
+      h.runs = [{ id: "r1", toId: "the_axis_gate", units: 3, gathered: { raw_material: 99 } },
+                { id: "r2", toId: "the_axis_gate", units: 3, gathered: { raw_material: 99 }, by: null }];
+      h.runs[1].id = "r2";
+      // r1's cart is out; r2 has never sent one
+      ch.caravans = [{ id: "c1", holdingId: "h", runId: "r1", status: "travelling", load: { raw_material: 9 } }];
+      const notes = CV392.runStandingRoutes(ch, { locations: L392, cfg: cfg392, economy: eco392, powers: C392.powers, rules: C392.rules, day: 1200, people: {} });
+      const sent = (ch.caravans || []).filter(c => c.runId === "r2");
+      const r1still = (ch.caravans || []).filter(c => c.runId === "r1").length === 1;
+      return sent.length === 1 && r1still && notes.some(n => n.kind === "departure");
+    })());
+
+  /* ---- 5 · ⛑ AND AN EXISTING SAVE CARRIES OVER ---- */
+  const step392 = R392.CHARACTER_STEPS.find(s => s.id === "one-route-becomes-one-run");
+  check("§392: ⛔ AN EXISTING ROUTE BECOMES ONE RUN, and the cart already walking is claimed by it — or the hold sends a second one",
+    (() => {
+      if (!step392 || typeof step392.apply !== "function") return false;
+      const ch = char392(), h = ch.holdings[0];
+      h.route = { toId: "the_axis_gate", crew: ["a"], setDay: 90, runs: 2, by: "co", cut: 0.2, guards: 6, knowsGates: true };
+      ch.caravans = [{ id: "c1", holdingId: "h", status: "travelling", load: { raw_material: 4 } }];
+      const r = step392.apply(ch, {});
+      const run = (h.runs || [])[0];
+      const again = step392.apply(ch, {});
+      return (r.notes || []).length === 1 && !h.route && !!run
+        && run.toId === "the_axis_gate" && run.by === "co" && run.guards === 6 && run.knowsGates === true
+        && run.wholeProduct === true && run.runs === 2
+        && ch.caravans[0].runId === run.id
+        && !(again.notes || []).length;                 // idempotent
+    })());
+  check("§392: ⛑ …and the carried-over run asks for whatever is SPARE — §3's own words — one run carrying its whole product minus the reserve",
+    (() => {
+      const ch = char392(), h = ch.holdings[0];
+      h.runs = [{ id: "r1", toId: "the_axis_gate", units: 0, wholeProduct: true, gathered: {} }];
+      const s = CV392.allocatePass(ch, h, deps392);
+      return s.runs[0].whole === true && s.runs[0].asked === s.free && s.runs[0].getting === s.free && s.home === 0 && s.reserve > 0;
     })());
 }
 

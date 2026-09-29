@@ -16,6 +16,18 @@
   "next": [],
   "releases": [
     {
+      "version": "2.15.4",
+      "date": "2026-09-29",
+      "entries": [
+        {
+          "kind": "feature",
+          "title": "The trading screen: many runs, and the keeper never holds everything",
+          "summary": "A holding can run to several markets at once, you choose how much of each pass goes to each, and what is left over is sold at home — every pass.",
+          "detail": "A standing run used to take everything: while one stood, the keeper sold nothing and the whole output waited for the cart. On a long road that meant a thriving holding earning nothing for months while it paid its keep. Now a holding can have as many runs as you like, each asking for a number of units out of each pass's work, and the trading screen shows them as one table — what the keep costs, what is going to each run, what is being sold at home, and what each is expected to bring back per pass, with a running total. The arrows change a run's share and every number moves at once; there is no save button. A tick-box, on by default, holds back enough to cover the holding's upkeep before any run draws, and if the runs ask for more than is spare they share it out and each row says what it is actually getting. A run's cart still leaves when its load is gathered, so a far market still departs rarely and pays in a lump. Holdings that already had a route keep running to the same place with the same carriers, and start selling the remainder at home on the next pass."
+        }
+      ]
+    },
+    {
       "version": "2.15.3",
       "date": "2026-09-29",
       "entries": [

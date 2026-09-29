@@ -18,7 +18,7 @@ import { applyNpcUpdates } from "./npcs.js";
 import { activeCompany } from "./company.js";   // SNG-358: a holding's keeper must still be with you
 import { queueFeatureOffers, advanceHolding, holdingNews, unstewardedHoldings, takeHoldingEvents, CONDITIONS, tickStore, storeNews, advanceDebts, growHolding, holdingGround, holdingMeaningAura, healingAt, chargeQuartering } from "./holdings.js";
 import { tickArmory } from "./armory.js";   // CCODE-445: the forge works the order, a pass at a time
-import { tickCaravans, runStandingRoutes } from "./caravan.js";
+import { tickCaravans, runStandingRoutes , divertToRuns } from "./caravan.js";
 import { gateHoldPass } from "./gatehold.js";   // ✅ SNG-663 §2c: holding one of the Lattice's arches has a cost, and it climbs   // R49: the road runs itself, and can be robbed   // ✅ SNG-654 A (Erik: "yes on a-d"): and a standing route sends the next load itself
 import { domainAccess } from "./traditions.js";   // SNG-659 §1: the three-domain draw a person's kit is dealt from
 import { meaningDensity, peoplePresentAt } from "./substrate.js";   // R46b: what the pilgrims come for   // SNG-358: holdings ride the same world-gated pass
@@ -698,7 +698,10 @@ export function advanceHoldings({ character, now = Date.now(), ladder = null, co
     const holdCfg = content?.rules?.economy?.holdStore ? { ...content.rules.economy.holdStore, features: content.rules.economy.holdFeatures || null } : null;
     const grew = growHolding(character, h, { cfg: holdCfg, npcs: content?.npcs || {}, npcCfg: content?.rules?.npcStanding || {},
       worldCount: count, day: (() => { try { return absoluteWorldDay(); } catch { return null; } })(), nameOf: (id) => character?.npcRegistry?.[id]?.name || content?.npcs?.[id]?.name || id });
-    const st = tickStore(character, h, { cfg: holdCfg, economy: content?.rules?.economy || null, npcCfg: content?.rules?.npcStanding || {}, locations: content?.locations || {}, rules: content?.rules || {},
+    const st = tickStore(character, h, { cfg: holdCfg, economy: content?.rules?.economy || null,
+      // ✅ SNG-665: the runs draw their units out of this pass's product, before the keeper sells any of it.
+      // Handed in because `holdings.js` cannot import `caravan.js` without a cycle, and this is where both meet.
+      divert: divertToRuns, locations: content?.locations || {}, powers: content?.powers || [], rules: content?.rules || null, npcCfg: content?.rules?.npcStanding || {}, locations: content?.locations || {}, rules: content?.rules || {},
       kitDeps: kitDeps659,   // ⛔ SNG-659 §1: a raid that cannot draw a defender's kit fights them as bodies   // ⛔ CCODE-504: the watch ROLLS, and its dials are in rules.death.watch   // v2 §1: the keeper's tier joins the raid product and sets the floor; runner fees read the gate nearby
       // ⛔ SNG-634 C2 — AND WHO IS STANDING HERE MOVES IT. The signed sum of the `dangerLift` of every power
       // whose `reach` covers this place, which mechanises Erik's 2026-07-19 ruling: clearing them lowers it.
@@ -820,6 +823,10 @@ export function advanceHoldings({ character, now = Date.now(), ladder = null, co
   // hold's is out, because there is one crew and they are walking.
   for (const ev of runStandingRoutes(character, { locations: content?.locations || {},
     cfg: content?.rules?.economy?.holdStore || null,
+    // ✅ SNG-665 — the allocator reads what a unit fetches HERE and what this market charges for the stall, so it needs
+    // the economy, the powers and the rules. Without them the upkeep reserve reads zero and Erik's toggle silently does
+    // nothing — the four-doors defect, one argument wide.
+    economy: content?.rules?.economy || null, powers: content?.powers || [], rules: content?.rules || null,
     day: (() => { try { return absoluteWorldDay(); } catch { return null; } })(),
     people: { ...(content?.npcs || {}), ...(character?.npcRegistry || {}) } })) {
     if (ev?.note) news.push(ev.note);

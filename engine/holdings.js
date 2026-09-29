@@ -1489,11 +1489,16 @@ export function serviceIncome(character, holding, { cfg = null, locations = {}, 
  *  nothing, which is the part of the old rule that was always right. PURE. */
 export function sellShareFor(holding, cfg, { ignoreRoute = false } = {}) {
   if (!holding) return 0;
-  // ⛔ SNG-654 A — AND NOBODY SELLS WHAT THE CARAVAN IS WAITING FOR. Aevi: "stock waiting for the caravan counts
-  // toward raid exposure — that ties into the stock policy: keep for the caravan." ⛑ The policy IS the route: a second
-  // boolean beside it would be a second answer to one question, and the pair would drift within a week.
-  // ⚠️ `ignoreRoute` is for the COMPARISON, which has to price what selling at home WOULD earn while a route stands.
-  if (!ignoreRoute && holding.route && holding.route.toId) return 0;
+  // ⛔ SNG-665 — ERIK 2026-09-29 WITHDREW THE RULE THAT STOOD HERE, in as many words: *"No — a keeper does NOT hold the
+  // entire stock while a trade route runs."* It read `if (a route stands) return 0`, on the reasoning that the stock
+  // policy IS the route and a second boolean beside it would drift. That reasoning was fine and the rule was still
+  // wrong, because it left no way to send LESS: it was all or nothing.
+  // ⚠️ WHAT IT DID IN PLAY: Loki's THRIVING Annex earned nothing for 26 passes while paying its keep every one of them,
+  // because its cart is 75.7 days each way and every unit was being held for it. He reported it as lost income.
+  // ⛑ WHAT REPLACES IT is `allocatePass` in caravan.js: runs ask for units a pass, the keep is covered first (Erik's
+  // toggle), and whatever no run asked for sells here exactly as it always did. `ignoreRoute` stays in the signature
+  // because callers pass it, and it now names nothing — there is no route bar left to ignore.
+  void ignoreRoute;
   if (holding.steward) return Math.max(0, Math.min(1, Number(cfg?.keeperSells ?? 0.5)));
   const hands = (holding.crew || []).length + (holding.garrison || []).length;
   if (hands > 0) return Math.max(0, Math.min(1, Number(cfg?.handsSell ?? 0.25)));
@@ -1540,7 +1545,8 @@ export function sellPlanFor(holding, cfg = null, { ignoreRoute = false } = {}) {
   return { share, goods, units, any: units > 0 };
 }
 
-export function tickStore(character, holding, { cfg = null, economy = null, regionId = null, dangerLevel = 0, rng = Math.random, day = null, density = null, meaning = 0, people = {}, npcCfg = {}, locations = {}, rules = {}, kitDeps = null, power = null, powers = null } = {}) {
+export function tickStore(character, holding, { cfg = null, economy = null, regionId = null, dangerLevel = 0, rng = Math.random, day = null, density = null, meaning = 0, people = {}, npcCfg = {}, locations = {}, rules = {}, kitDeps = null, power = null, powers = null,
+  divert = null } = {}) {   // ✅ SNG-665: `caravan.divertToRuns`, handed in — this file cannot import caravan.js without a cycle
   // ⛔ SNG-657 §3 — `power` WAS PASSED HERE AND DESTRUCTURED AWAY. `worldtick` has computed
   // `raiderPowerAt(loc.id, …)` and handed it to this function since SNG-634 C1, and the signature had no such
   // parameter — so it vanished, `resolveRaid` was called without it, and EVERY RAID IN THE GAME WAS THE
@@ -1562,6 +1568,19 @@ export function tickStore(character, holding, { cfg = null, economy = null, regi
   }
   out.yielded = ys.length ? ys[0] : null;
   out.yields = ys;
+  // ✅ SNG-665 §1.1 — AND THE RUNS TAKE THEIR SHARE OF **THIS PASS'S PRODUCT**, here, before the keeper sells any of it.
+  //
+  // ⛔ MY FIRST CUT SCRAPED IT OFF THE SHELF AFTERWARDS, in `runStandingRoutes`, which runs later in the tick. Measured
+  // on Loki's Annex: the keeper sold its share, the run then drew from what was left, and the hold went
+  // THRIVING → HOLDING in a single pass with its product halved — a run starving the hold, which §1.4 forbids in as
+  // many words. ⛑ Drawn from the product, the run and the keeper are dividing one pass's work instead of competing
+  // over a shelf, and `allocatePass` — the same function the screen prints — decides the split.
+  // ⚠️ HANDED IN, NOT IMPORTED: `caravan.js` imports this file, so importing it back would be a cycle. `worldtick`
+  // assembles both and passes `divert` — an explicit dependency rather than a module-level hook nobody can see.
+  if (typeof divert === "function" && Array.isArray(holding.runs) && holding.runs.length) {
+    try { out.toRuns = divert(character, holding, { cfg, economy, locations, density, powers, rules, day }) || 0; }
+    catch (err) { console.warn("[runs] the pass was not divided:", err.message); }   // prose-cap-ok: a console diagnostic
+  }
   // ✅ R46b: what the pilgrims leave, before the keep is paid — attendance is an earning shape beside production.
   // ⛔ A KEEPER SELLS — that is what a keeper IS. Measured before this: a thriving enterprise kept by a
   // steward drained 14 crystal a pass forever while its entire output sat in a shed, because `tickStore`

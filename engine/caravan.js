@@ -29,7 +29,7 @@
 import { legionClash, contingentsFromPeople } from "./melee.js";
 import { kitFor, personRecordFor } from "./npcsheet.js";   // SNG-659 §1: the DERIVED kit, the same one every duel fights with
 import { contributionsOf } from "./combatants.js";   // SNG-541c / Erik: a defender is what they can DO, not one more body
-import { unitWorth, producesPerPass, worthOfGoods, crewKeepPerPass, featuresOf, featureDef, raidChanceFor, sellShareFor, storeTotal } from "./holdings.js";   // ⛑ SNG-654 A: a route's value is what the hold MAKES, priced where it is going — through the tick's own producer
+import { unitWorth, producesPerPass, worthOfGoods, crewKeepPerPass, featuresOf, featureDef, raidChanceFor, sellShareFor, storeTotal , upkeepFor } from "./holdings.js";   // ⛑ SNG-654 A: a route's value is what the hold MAKES, priced where it is going — through the tick's own producer
 import { earnAt, saidEarned, incomeHere } from "./money.js";   // ⛔ CCODE-437: sold for the market's own money — `earnAt` goes through `credit`   // ⛔ CCODE-437: a load is sold for the money of the market it reaches
 import { enterDeathState } from "./death.js";
 import { routeBetween, roadDistances, pathFrom } from "./journey.js";   // ⛑ SNG-654 B: ONE search from the hold answers every market at once — 38 regions for the cost of one route
@@ -82,6 +82,7 @@ export function roadDanger(path = [], locations = {}) {
 export function sendCaravan(character, {
   holdingId, toId, goods = null, carriers = [], locations = {}, cfg = null, day = null, traveller = null,
   company = null,   // ✅ SNG-652 §6 / C1: {id, cut, guards, knowsGates} — a hired company walks ITS roads, not yours
+  carry = null,     // ✅ SNG-665: the pile a run has gathered — given, not scraped off the store
 } = {}) {
   const h = (character?.holdings || []).find(x => x && x.id === holdingId);
   if (!h) return { ok: false, why: "no such holding" };
@@ -106,11 +107,18 @@ export function sendCaravan(character, {
   if (!leg) return { ok: false, why: "no way there from the hold" };
 
   // ⛔ TAKE THE LOAD OFF THE STORE NOW, and refuse rather than send an empty cart.
+  // ✅ SNG-665 — OR CARRY A PILE THAT IS ALREADY GATHERED. A run draws its units a pass into its own pile (`gathered`),
+  // and the cart carries THAT — not the hold's whole shelf, which is the rule Erik withdrew. `goods` filtered by KIND
+  // and never by amount, so it could not express "four of the fourteen".
   const load = {};
-  for (const [g, n] of Object.entries(h.store || {})) {
-    if (goods && g !== goods) continue;
-    const units = Math.floor(num(n));
-    if (units > 0) { load[g] = units; delete h.store[g]; }
+  if (carry && typeof carry === "object") {
+    for (const [g, n] of Object.entries(carry)) { const u = Math.floor(num(n)); if (u > 0) load[g] = u; }
+  } else {
+    for (const [g, n] of Object.entries(h.store || {})) {
+      if (goods && g !== goods) continue;
+      const units = Math.floor(num(n));
+      if (units > 0) { load[g] = units; delete h.store[g]; }
+    }
   }
   if (!Object.keys(load).length) return { ok: false, why: goods ? `the store holds no ${goods}` : "the store is empty" };
 
@@ -180,12 +188,61 @@ export function clearRoute(character, holdingId) {
  *
  *  ⚠️ A CREW THAT IS ALL DEAD STOPS THE ROUTE and says so. A route that keeps sending carts nobody walks with would
  *  quietly turn a standing run into a standing robbery. Returns notes for the news. */
-export function runStandingRoutes(character, { locations = {}, cfg = null, day = null, people = {} } = {}) {
+export function runStandingRoutes(character, { locations = {}, cfg = null, day = null, people = {},
+  economy = null, powers = null, rules = null, density = null } = {}) {
   const out = [];
   for (const h of (character?.holdings || [])) {
+    // ✅ SNG-665 — EVERY RUN ON THIS HOLD DRAWS ITS UNITS FIRST, through the same `allocatePass` the screen prints. The
+    // draw happens whether or not a cart can leave: a run gathers while its last cart is still walking, which is what
+    // makes "how much goes into it" a dial rather than an on/off switch.
+    const runs = ensureRuns(h);
+    // ⛑ THE DRAW ALREADY HAPPENED, in `tickStore` via `divertToRuns`, out of this pass's product and before the
+    // keeper sold any of it. It used to happen HERE, scraped off the shelf afterwards, and it starved the hold:
+    // Loki's Annex went THRIVING → HOLDING in one pass with its product halved. This loop only SENDS.
+    for (const r of runs) {
+      if (!r || !r.toId) continue;
+      // ⛔ ONE CART PER RUN, not per hold — two runs out of one hold walk different roads and must not block each other.
+      const busy = caravansOf(character).some(c => c && c.holdingId === h.id && c.runId === r.id && (c.status === "travelling" || c.status === "returning"));
+      if (busy) continue;
+      const gathered = Object.values(r.gathered || {}).reduce((a, n) => a + num(n), 0);
+      if (gathered <= 0) continue;
+      // ✅ §1.5 — THE CART LEAVES WHEN ITS LOAD IS GATHERED: its units a pass × the passes a round trip takes. ⚠️ The
+      // spec also says "capped by what the carrier can carry" and NOTHING AUTHORS A CAPACITY yet, so there is no cap
+      // here rather than one I chose — `trade.carryCap` is read the day it is written.
+      // ⛔ THE TARGET IS MEASURED AGAINST WHAT THE RUN DRAWS, not what the shelf happened to allow — `lastDraw` is
+      // the allocator's own figure for this run, stamped when it drew. Reading the realised take made the target
+      // wobble pass to pass and sent a cart with two units against a target of eight.
+      const target = runLoadTarget(character, h, r, { locations, cfg, day, perPass: r.lastDraw ?? null });
+      if (gathered < target.units) continue;
+      const crew = (r.crew || []).filter(id => {
+        const p = people?.[id] || character?.npcRegistry?.[id] || null;
+        return !p || p.status !== "dead";
+      });
+      if ((r.crew || []).length && !crew.length) {
+        out.push({ kind: "route-stopped", holdingId: h.id, note: `The run out of ${h.name || "the hold"} to ${locations[r.toId]?.name || r.toId} has stopped — nobody who walked it is left to walk it again.` });
+        removeRun(character, h.id, r.id);
+        continue;
+      }
+      const byCo = r.by ? { id: r.by, cut: clamp01(num(r.cut, 0)), guards: Math.max(0, num(r.guards, 0)), knowsGates: !!r.knowsGates } : null;
+      const carrying = { ...r.gathered };
+      const sent = sendCaravan(character, { holdingId: h.id, toId: r.toId, carriers: crew, locations, cfg, day, traveller: character, company: byCo, carry: carrying });
+      if (!sent.ok) { out.push({ kind: "route-refused", holdingId: h.id, note: null, why: sent.why }); continue; }
+      r.gathered = {};
+      r.lastDepartureDay = day;
+      sent.caravan.standing = true;
+      sent.caravan.runId = r.id;                                      // ⛑ so the next pass knows THIS run's cart is out
+      const units = Object.values(sent.caravan.load || {}).reduce((a, n) => a + num(n), 0);
+      const walking = byCo
+        ? (byCo.guards ? `, ${byCo.guards} of their guards walking with it` : ", and they sent nobody to walk with it")
+        : crew.length ? `, ${crew.length} walking with it` : ", and NOBODY walking with it";
+      out.push({ kind: "departure", holdingId: h.id, caravanId: sent.caravan.id,
+        note: `${units} unit(s) left ${h.name || "the hold"} for ${locations[r.toId]?.name || r.toId} — ${sent.caravan.days} days on the road${walking}.` });
+    }
+    // ⛑ AND THE OLD SINGLE `route`, for a save the migration has not reached yet. It is not removed here: reconcile
+    // step 91 turns it into a run, and doing it in two places would be two answers to one question.
     const r = h?.route;
     if (!r || !r.toId) continue;
-    const busy = caravansOf(character).some(c => c && c.holdingId === h.id && (c.status === "travelling" || c.status === "returning"));
+    const busy = caravansOf(character).some(c => c && c.holdingId === h.id && !c.runId && (c.status === "travelling" || c.status === "returning"));
     if (busy) continue;
     const crew = (r.crew || []).filter(id => {
       const p = people?.[id] || character?.npcRegistry?.[id] || null;
@@ -261,6 +318,221 @@ export function heldForRuns(character, { locations = {} } = {}) {
     });
   }
   return out;
+}
+
+/* ═════ SNG-665 — MANY RUNS, AND THE KEEPER NEVER HOLDS EVERYTHING ═════
+ *
+ * ✅ ERIK 2026-09-29: *"No — a keeper does NOT hold the entire stock while a trade route runs… You can put more or less
+ * into a run (of which you can have many different routes set up) and you should be able to see the effect on the $
+ * expected to be brought in. You should have a toggle that lets you always hold enough product back to sell for
+ * operating costs."*
+ *
+ * ⛔ THE WITHDRAWN RULE WAS MINE. `sellShareFor` answered 0 while a route stood — "the policy IS the route", which read
+ * well and meant Loki's thriving Annex earned NOTHING for 26 passes while paying 24 a pass, because its cart is 75.7
+ * days each way. One route, all the stock, and no way to send less.
+ *
+ * ⛑ THE SHAPE NOW: a hold has any number of runs, each asking for a number of units a pass. Before any of them draws,
+ * the keeper keeps back enough to cover upkeep (a per-hold toggle, ON by default). What no run asked for stays in the
+ * store and sells at home as it always did. A run can never starve the hold, and the hold can never hold everything.
+ */
+
+/** ⛑ THE RUNS ON A HOLD, always an array. PURE apart from creating it. */
+export function ensureRuns(holding) {
+  if (!holding) return [];
+  if (!Array.isArray(holding.runs)) holding.runs = [];
+  return holding.runs;
+}
+
+/** ⛔ WHETHER THE KEEPER COVERS THE KEEP FIRST. Erik's toggle, and §1.3 says ON by default — so `undefined` is ON, and
+ *  only an explicit `false` turns it off. ⚠️ A default that behaves like a value is this project's most-repeated defect;
+ *  written this way round, a save that predates the toggle behaves the way the ruling says. PURE. */
+export function coversUpkeepFirst(holding) {
+  return holding?.reserveUpkeep !== false;
+}
+
+/** ⛔ WHAT ONE PASS'S PRODUCT IS SPLIT INTO — THE ONE ANSWER THE SCREEN PRINTS AND THE TICK SPENDS.
+ *
+ *  ⛑ §3's gate is that the screen's total equals the sum of its rows and that the tick lands inside the card's forecast.
+ *  That is only unbreakable if neither side computes the split, so both call this. Returns units, never money: what a
+ *  unit fetches is `routeValue`'s job for a run and the market's for the home sale, and computing worth twice is how a
+ *  card and an engine come to disagree.
+ *
+ *  ⚠️ THE RESERVE IS IN THE UNITS THE SPEC ASKS FOR — *"the keeper sells enough at home to pay the hold's upkeep that
+ *  pass. The screen says how many units that takes."* So it is `upkeep ÷ what a unit fetches HERE, after this market's
+ *  fee`, and it is capped by the pass's whole product: a hold that cannot cover its own keep says so rather than
+ *  reserving a number it does not have. PURE. */
+export function allocatePass(character, holding, { cfg = null, economy = null, locations = {}, density = null,
+  powers = null, rules = null, day = null } = {}) {
+  const made = producesPerPass(holding, cfg, { density });
+  const total = made.reduce((a, y) => a + Math.max(0, num(y?.units)), 0);
+  const homeRegion = locations?.[holding?.locationId]?.regionId ?? null;
+  const basket = {};
+  for (const y of made) if (num(y?.units) > 0) basket[y.goods] = num(basket[y.goods]) + num(y.units);
+  const grossHome = total > 0 ? num(worthOfGoods(basket, { economy, regionId: homeRegion, cfg }), 0) : 0;
+  const perUnit = total > 0 ? grossHome / total : 0;
+
+  // ⛑ the market's own fee here, through the one reader — a stall fee is part of what a unit actually fetches
+  const market = marketFeeAt(holding?.locationId, { content: { powers: powers || [], locations }, powers, character, rules, locations });
+  const feePerPass = market && !market.waived && !market.closed ? Math.max(0, num(market.fee, 0)) : 0;
+  const netHome = Math.max(0, grossHome - feePerPass);
+  const netPerUnit = total > 0 ? netHome / total : 0;
+
+  const upkeep = Math.max(0, num(upkeepFor(holding, cfg), 0));
+  const wants = coversUpkeepFirst(holding);
+  // ⛔ THE UNITS THAT WILL BE *SOLD*, NOT THE UNITS THAT ARE WORTH THE UPKEEP. A keeper sells a SHARE of the store each
+  // pass — `sellShareFor`, and it is the same reader the tick sells with — so reserving `upkeep ÷ what a unit fetches`
+  // keeps back half of what the keep actually needs. ⚠️ And a hold nobody sells at (no keeper, no hands) has a share of
+  // zero: reserving its whole product for a sale that will not happen would be a default behaving like a value, so it
+  // says it is short instead.
+  const share = Math.max(0, Math.min(1, num(sellShareFor(holding, cfg), 0)));
+  const canSell = share > 0 && netPerUnit > 0;
+  const needed = wants && canSell ? Math.ceil(upkeep / (netPerUnit * share)) : 0;
+  const reserve = Math.min(total, needed);
+  // ⛔ AND IT SAYS SO WHEN IT CANNOT. §3: "unless its whole product is less than its upkeep (and then the row says that)."
+  const shortOfKeep = wants && upkeep > 0 && (!canSell || needed > total);
+
+  const free = Math.max(0, total - reserve);
+  // ⛑ `wholeProduct` ASKS FOR WHATEVER IS SPARE — §3's migration shape ("one run carrying its whole product minus the
+  // reserve"), and a useful setting in its own right: send the surplus, whatever the pass happened to make. A fixed
+  // `units` is the dial the screen's ◀ ▶ moves; this is the run that does not want a dial.
+  const runs = ensureRuns(holding).map(r => ({
+    id: r.id, toId: r.toId, by: r.by || null, whole: !!r.wholeProduct,
+    asked: r.wholeProduct ? free : Math.max(0, Math.round(num(r.units, 0))),
+  }));
+  const asked = runs.reduce((a, r) => a + r.asked, 0);
+  // ⛔ PROPORTIONALLY WHEN SHORT — §1.4, "each takes its share proportionally, and the row says so". ⚠️ The remainders
+  // are handed out largest-first rather than dropped, or a hold with three runs quietly loses units to rounding.
+  let getting = runs.map(r => ({ ...r, getting: asked > 0 ? Math.min(r.asked, Math.floor(free * r.asked / asked)) : 0 }));
+  if (asked > free && free > 0) {
+    let left = free - getting.reduce((a, r) => a + r.getting, 0);
+    const order = getting.map((r, i) => ({ i, frac: asked > 0 ? (free * r.asked / asked) % 1 : 0 })).sort((a, b) => b.frac - a.frac);
+    for (const { i } of order) { if (left <= 0) break; if (getting[i].getting < getting[i].asked) { getting[i].getting++; left--; } }
+  }
+  const toRuns = getting.reduce((a, r) => a + r.getting, 0);
+  return {
+    made, total, basket, perUnit: Math.round(perUnit * 100) / 100, netPerUnit: Math.round(netPerUnit * 100) / 100,
+    upkeep, reserve, reserveOn: wants, shortOfKeep, sellShare: share,
+    runs: getting.map(r => ({ ...r, short: r.getting < r.asked })),
+    toRuns, home: Math.max(0, total - reserve - toRuns), free, asked,
+    market: market || null,
+    // ⛑ the sentence the row needs, in the spec's own register
+    // ⛔ AND IT NAMES *WHICH* REASON. "Nobody here sells anything" went out over a hold with a keeper and a 0.5 share,
+    // because `canSell` is two conditions and the sentence only knew one of them: the Whistling Woman Post makes
+    // nothing, which is a different problem with a different answer. A message is a claim about a mechanism.
+    said: shortOfKeep
+      ? (total <= 0 ? `This hold makes nothing a pass, so nothing can be held back against a keep of ${upkeep}.`
+        : share <= 0 ? `Nobody here sells anything — no keeper and no hands — so no amount held back covers the keep of ${upkeep}.`
+        : netPerUnit <= 0 ? `What this hold makes fetches nothing here, so holding it back cannot cover the keep of ${upkeep}.`
+        : `This hold makes ${total} a pass and its keep is ${upkeep} — its whole product will not cover it.`)
+      : `${total} a pass: ${reserve} to cover the keep, ${toRuns} into ${getting.filter(r => r.getting > 0).length} run(s), ${Math.max(0, total - reserve - toRuns)} sold here.`,
+  };
+}
+
+/** ⛑ SET, ADD AND REMOVE A RUN. A run is a destination plus how much of a pass goes to it; the carrier is either your
+ *  own people or a hired company, exactly as `setRoute`/`hireCompany` already decide. */
+export function addRun(character, holdingId, { toId = null, units = 0, carriers = [], companyId = null,
+  companies = null, locations = {}, cfg = null, day = null } = {}) {
+  const h = (character?.holdings || []).find(x => x && x.id === holdingId);
+  if (!h) return { ok: false, why: "no such holding" };
+  if (!locations[toId]) return { ok: false, why: "nowhere by that name" };
+  if (toId === h.locationId) return { ok: false, why: "the load is already there" };
+  const route = routeBetween(h.locationId, toId, locations, { traveller: character });
+  if (!(route?.options || []).length) return { ok: false, why: "no way there from the hold" };
+  const runs = ensureRuns(h);
+  if (runs.some(r => r?.toId === toId && (r.by || null) === (companyId || null))) return { ok: false, why: "a run already goes there with those carriers" };
+  const co = companyId ? (Array.isArray(companies) ? companies : []).find(c => c && c.id === companyId) : null;
+  if (companyId && !co) return { ok: false, why: "no company by that name" };
+  if (co && !companyReaches(co, toId, { locations, cfg })) return { ok: false, why: `${co.name} does not carry into ${locations[toId]?.name || toId}` };
+  const run = { id: `run-${toId}${co ? `-${co.id}` : ""}`.slice(0, 64), toId, units: Math.max(0, Math.round(num(units, 0))),
+    crew: co ? [] : [...new Set((carriers || []).filter(Boolean))], setDay: day, lastDepartureDay: null, runs: 0, gathered: {} };
+  if (co) { run.by = co.id; run.cut = clamp01(num(co.cut, 0)); run.guards = Math.max(0, num(co.guards, 0)); run.knowsGates = !!co.knowsGates; }
+  runs.push(run);
+  return { ok: true, run, to: locations[toId]?.name || toId };
+}
+
+export function setRunUnits(character, holdingId, runId, units) {
+  const h = (character?.holdings || []).find(x => x && x.id === holdingId);
+  const r = ensureRuns(h).find(x => x && x.id === runId);
+  if (!r) return { ok: false, why: "no such run" };
+  r.units = Math.max(0, Math.round(num(units, 0)));
+  return { ok: true, run: r };
+}
+
+/** ⛔ AND STOPPING ONE RETURNS WHAT IT HAD GATHERED TO THE STORE — it is the hold's product, and it never left. */
+export function removeRun(character, holdingId, runId) {
+  const h = (character?.holdings || []).find(x => x && x.id === holdingId);
+  const runs = ensureRuns(h);
+  const i = runs.findIndex(x => x && x.id === runId);
+  if (i < 0) return { ok: false, why: "no such run" };
+  const [was] = runs.splice(i, 1);
+  let back = 0;
+  for (const [g, n] of Object.entries(was.gathered || {})) {
+    if (!(num(n) > 0)) continue;
+    h.store = h.store && typeof h.store === "object" ? h.store : {};
+    h.store[g] = num(h.store[g]) + num(n);
+    back += num(n);
+  }
+  return { ok: true, was, returned: back };
+}
+
+/** ✅ SNG-665 §1.1 — DRAW EACH RUN'S UNITS OUT OF **THIS PASS'S PRODUCT**, the moment it lands and before the keeper
+ *  sells any of it. Handed to `tickStore` by the world tick, because this file imports `holdings.js` and importing it
+ *  back would be a cycle.
+ *
+ *  ⛔ IT USED TO HAPPEN LATER, in `runStandingRoutes`, scraped off the shelf after the keeper had already sold. Measured
+ *  on Loki's Annex: the hold went THRIVING → HOLDING in one pass with its product halved — a run starving the hold,
+ *  which §1.4 forbids in as many words. Drawn from the product, the run and the keeper divide one pass's work instead
+ *  of competing over a shelf. Returns the units drawn. */
+export function divertToRuns(character, holding, { cfg = null, economy = null, locations = {}, density = null,
+  powers = null, rules = null, day = null } = {}) {
+  const runs = ensureRuns(holding);
+  if (!runs.length) return 0;
+  const split = allocatePass(character, holding, { cfg, economy, locations, density, powers, rules, day });
+  let drawn = 0;
+  for (const row of split.runs) {
+    if (!(row.getting > 0)) continue;
+    const run = runs.find(x => x && x.id === row.id);
+    if (!run) continue;
+    run.gathered = run.gathered && typeof run.gathered === "object" ? run.gathered : {};
+    run.lastDraw = row.getting;                      // ⛑ what the cart's target is measured against, not what the shelf allowed
+    let want = row.getting;
+    for (const y of [...split.made].sort((a, b) => num(b?.units) - num(a?.units))) {
+      if (want <= 0) break;
+      const take = Math.min(want, Math.floor(num(holding.store?.[y.goods], 0)));
+      if (take <= 0) continue;
+      holding.store[y.goods] = num(holding.store[y.goods]) - take;
+      if (!(num(holding.store[y.goods]) > 0)) delete holding.store[y.goods];
+      run.gathered[y.goods] = num(run.gathered[y.goods]) + take;
+      want -= take; drawn += take;
+    }
+  }
+  return drawn;
+}
+
+/** ✅ SNG-665 §1.5 — THE LOAD A RUN GATHERS BEFORE ITS CART LEAVES: its units a pass × the passes a round trip takes, so
+ *  the first coin still comes back when the cart does and a far market still departs rarely.
+ *  ⚠️ The spec also says "capped by what the carrier can carry" and NOTHING AUTHORS A CAPACITY. There is no cap here
+ *  rather than a number I chose — `trade.carryCap` is read the day Aevi writes one, and until then the cap is the road.
+ *  PURE. */
+export function runLoadTarget(character, holding, run, { locations = {}, cfg = null, day = null, perPass = null } = {}) {
+  // ⛔ THE DRAW, NOT THE DIAL. A `wholeProduct` run has no `units` — it asks for whatever is spare — so reading the
+  // dial gave it a target of zero and its cart would have left every pass with whatever was in the pile, however far
+  // the market. `perPass` is the allocator's own `getting` for this run, which is the only place that number exists.
+  const per = Math.max(0, Math.round(num(perPass != null ? perPass : run?.units, 0)));
+  const passDays = Math.max(0.1, num(tradeCfg(cfg).passDays, 3));
+  const co = run?.by ? { knowsGates: !!run.knowsGates } : null;
+  const carrier = co ? (co.knowsGates ? null : { knownPlaces: [], abilities: [] }) : character;
+  let days = 0;
+  try {
+    const rt = routeBetween(holding?.locationId, run?.toId, locations, { traveller: carrier });
+    const leg = (rt?.options || []).slice().sort((a, b) => (a.days ?? 1e9) - (b.days ?? 1e9))[0];
+    const carriage = carriageFor(character, holding, { toId: run?.toId, locations, cfg, company: !!run?.by });
+    days = leg ? num(leg.days, 0) / Math.max(0.1, num(carriage.mult, 1)) : 0;
+  } catch { days = 0; }
+  const passes = Math.max(1, Math.ceil((days * 2) / passDays));
+  const cap = num(tradeCfg(cfg).carryCap, 0);
+  const units = cap > 0 ? Math.min(per * passes, cap) : per * passes;
+  return { units: Math.max(0, units), per, passes, roundTripDays: Math.round(days * 2 * 10) / 10, cap: cap > 0 ? cap : null };
 }
 
 /** ⛑ WHO WALKS A STANDING RUN OUT OF THIS HOLD — the hold's own hands, capped by `trade.crew`.

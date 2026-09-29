@@ -96,6 +96,47 @@ function renameTargets(spec, entry, character, known) {
 
 export const CHARACTER_STEPS = [
   {
+    version: 91, id: "one-route-becomes-one-run", playerFacing: true,
+    // ✅ SNG-665 §3 — ERIK 2026-09-29: *"No — a keeper does NOT hold the entire stock while a trade route runs."*
+    //
+    // ⛔ THE WITHDRAWN RULE WAS MINE AND IT COST HIM 26 PASSES. One `route` per hold, and while it stood the keeper sold
+    // nothing: Loki's THRIVING Annex earned nothing while paying its keep every pass, because its cart is 75.7 days each
+    // way. He reported it as lost income; this is the ruling, and the shape that replaces it lets a run ask for PART of
+    // a pass instead of all of it.
+    //
+    // ⛑ THE ROUTE BECOMES ONE RUN asking for the whole pass's product less the upkeep reserve — so a save that was
+    // mid-run keeps running to the same place with the same carriers, and starts selling the remainder at home next
+    // pass. ⚠️ The cart that is ALREADY ON THE ROAD is claimed by the new run (`runId`), or the run would count no cart
+    // of its own, send a second one, and the hold would have two carts where the player set one.
+    apply(character, ctx = {}) {
+      const moved = [];
+      for (const h of (character?.holdings || [])) {
+        const r = h?.route;
+        if (!r || !r.toId) continue;
+        if (!Array.isArray(h.runs)) h.runs = [];
+        const id = `run-${r.toId}${r.by ? `-${r.by}` : ""}`.slice(0, 64);
+        if (!h.runs.some(x => x && x.id === id)) {
+          h.runs.push({
+            id, toId: r.toId, units: 0,          // ⛑ 0 means "whatever is free after the keep" — see below
+            crew: Array.isArray(r.crew) ? [...r.crew] : [],
+            setDay: r.setDay ?? null, lastDepartureDay: r.lastDepartureDay ?? null,
+            runs: Math.max(0, Number(r.runs) || 0), gathered: {}, wholeProduct: true,
+            ...(r.by ? { by: r.by, cut: Number(r.cut) || 0, guards: Number(r.guards) || 0, knowsGates: !!r.knowsGates } : {}),
+          });
+        }
+        // ⛔ THE CART ALREADY WALKING BELONGS TO THIS RUN. Without this the run sees no cart of its own and sends a
+        // second one next pass, and the player who set one run has two on the road.
+        for (const c of (character.caravans || [])) {
+          if (c && c.holdingId === h.id && !c.runId && (c.status === "travelling" || c.status === "returning")) c.runId = id;
+        }
+        delete h.route;
+        moved.push(`${h.name || h.id} → ${r.toId}`);
+      }
+      if (!moved.length) return {};
+      return { notes: [`Your holds no longer keep everything back for the cart — each run now takes a share of what a pass makes and the keeper sells the rest at home. Carried over: ${moved.join(", ")}.`] };
+    },
+  },
+  {
     version: 90, id: "the-name-the-scene-taught-itself", playerFacing: true,
     // ⛔ ERIK, PLAYING LOKI (2026-09-28), with a screenshot of ONE beat carrying both spellings: *"why does the GM
     // sometimes spell the name 'Halfvex'?"*

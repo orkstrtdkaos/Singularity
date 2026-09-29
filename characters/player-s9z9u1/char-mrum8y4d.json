@@ -16477,8 +16477,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790704984014,
-  "rev": 1123,
+  "updatedAt": 1790705504836,
+  "rev": 1125,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -19104,6 +19104,12 @@
         "startedDay": 91,
         "onFrame": true,
         "frame": "legs"
+      },
+      "stock": {
+        "all": {
+          "policy": "keepUpTo",
+          "keep": 2
+        }
       }
     }
   ],

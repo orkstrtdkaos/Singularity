@@ -2594,8 +2594,8 @@
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 2196,
-    "lastSharedReadAt": "2026-09-29T12:49:54.194Z",
+    "lastGenCount": 2198,
+    "lastSharedReadAt": "2026-09-29T14:38:00.350Z",
     "lastTickWorldDay": 91,
     "lastCanonWorldDay": 91,
     "turnsSinceOffer": 1,
@@ -2924,7 +2924,7 @@
         "kind": "decision",
         "premise": "Someone who keeps the count of what has been unmade has begun rounding down, telling themselves the difference is noise — but the rounding has a direction, and it has been consistent for long enough…",
         "cause": "The act of counting the unmade requires a decision about what constitutes a thing distinct enough to be counted, and that threshold has always been left to…",
-        "stage": 26,
+        "stage": 27,
         "seededAtCount": 1917,
         "surfaced": true,
         "fate": "growing",
@@ -2937,7 +2937,7 @@
         "kind": "decision",
         "premise": "The person who holds authority to formally designate what has been unmade as 'resolved' has not done so for anything in years, and the backlog of unresolved unmakings is beginning to press against…",
         "cause": "In the_unmade, the act of resolution is itself an act of power, and the authority-holder has quietly discovered that unresolved things remain partially…",
-        "stage": 22,
+        "stage": 23,
         "seededAtCount": 1968,
         "surfaced": true,
         "fate": "growing",
@@ -2962,7 +2962,7 @@
         "kind": "decision",
         "premise": "Someone has begun quietly counting what no longer exists — cataloguing absences — and has not yet decided whether to share what the count implies.",
         "cause": "The Unmade is defined by what has been lost or undone; its people have long customs around not naming absence directly, because naming draws attention to the…",
-        "stage": 17,
+        "stage": 18,
         "seededAtCount": 2053,
         "surfaced": true,
         "fate": "growing",
@@ -2975,7 +2975,7 @@
         "kind": "decision",
         "premise": "An elder who alone remembers the last time something like the current unraveling occurred has not yet spoken, weighing whether the knowing will help or hasten what is coming.",
         "cause": "In the_unmade, what is lost or dissolved carries weight equal to what remains — silence is understood as a form of preservation, and the elder has lived long…",
-        "stage": 16,
+        "stage": 17,
         "seededAtCount": 2100,
         "surfaced": true,
         "fate": "growing",
@@ -10612,7 +10612,7 @@
     "retrievalTried": {
       "the_scouring_hand": 80
     },
-    "quarteredAtCount": 2125,
+    "quarteredAtCount": 2198,
     "crusades": {
       "the_undefeated": {
         "arcId": "arc_the_poles_pull",
@@ -10644,7 +10644,7 @@
       "the_war_ender": 84,
       "the_last_choirmistress": 90
     },
-    "updatesToldTo": "2.15.3",
+    "updatesToldTo": "2.15.5",
     "newsLog": [
       {
         "day": 4,
@@ -12778,6 +12778,14 @@
         "worldDay": 91,
         "text": "The game was updated to v2.15.3 — 1 new.",
         "loggedAt": "2026-09-29T12:50:09.806Z"
+      },
+      {
+        "kind": "update",
+        "section": "world",
+        "version": "2.15.5",
+        "worldDay": 91,
+        "text": "The game was updated to v2.15.5 — 2 new.",
+        "loggedAt": "2026-09-29T14:38:06.087Z"
       }
     ],
     "seatsTaken": {
@@ -15299,7 +15307,7 @@
     }
   ],
   "nativeGrantsVersion": 2,
-  "reconcileVersion": 90,
+  "reconcileVersion": 91,
   "gallery": [
     {
       "kind": "moment",
@@ -16453,8 +16461,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790690451687,
-  "rev": 1116,
+  "updatedAt": 1790692686093,
+  "rev": 1119,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -19067,16 +19075,22 @@
       "growthPasses": 0,
       "trade": true,
       "conditionSince": null,
-      "route": {
-        "toId": "the_axis_gate",
-        "crew": [
-          "tessvel-cairn",
-          "traveler-woman"
-        ],
-        "setDay": 90,
-        "lastDepartureDay": null,
-        "runs": 0
-      }
+      "runs": [
+        {
+          "id": "run-the_axis_gate",
+          "toId": "the_axis_gate",
+          "units": 0,
+          "crew": [
+            "tessvel-cairn",
+            "traveler-woman"
+          ],
+          "setDay": 90,
+          "lastDepartureDay": null,
+          "runs": 0,
+          "gathered": {},
+          "wholeProduct": true
+        }
+      ]
     }
   ],
   "_lastProjectDay": 10,
@@ -20268,14 +20282,13 @@
   "_bandNotes": null,
   "_opCountingSince": "2026-09-14T22:51:56.913Z",
   "_fireTests": {
-    "at": "2026-09-29T14:01:00.627Z",
-    "build": "2.15.3",
+    "at": "2026-09-28T22:18:21.612Z",
+    "build": "2.15.1",
     "results": [
       {
         "op": "jobOps",
         "verdict": "applied",
         "moved": [
-          "chronicle",
           "jobs"
         ],
         "why": null
@@ -20801,7 +20814,7 @@
       },
       "lastVerb": "quest",
       "lastVerbDay": 10,
-      "wins": 1,
+      "wins": 2,
       "winHow": "quest",
       "grownHeads": 4,
       "grewDay": 8
@@ -20825,14 +20838,14 @@
       },
       "lastVerb": "patrol",
       "lastVerbDay": 10,
-      "losses": 1,
+      "losses": 0,
       "lost": {
         "0": 80
       },
       "wins": 0,
       "winHow": null,
-      "lossFrom": "power_deepwood_moot",
-      "lossHow": "feud",
+      "lossFrom": null,
+      "lossHow": null,
       "shrankDay": 10
     },
     "power_scaffold_court": {
@@ -20871,7 +20884,7 @@
       },
       "lossFrom": "power_harvest_hand",
       "lossHow": "feud",
-      "wins": 1,
+      "wins": 2,
       "winHow": "quest",
       "grownHeads": 32,
       "grewDay": 10
@@ -20899,7 +20912,7 @@
       },
       "lastVerb": "expand",
       "lastVerbDay": 10,
-      "wins": 0,
+      "wins": 1,
       "grownHeads": 52,
       "grewDay": 5,
       "winHow": "expand"
@@ -20915,9 +20928,9 @@
       "grownHeads": 30,
       "grewDay": 5,
       "winHow": "expand",
-      "lossFrom": null,
-      "lossHow": null,
-      "losses": 0,
+      "lossFrom": "power_seraphic_orders",
+      "lossHow": "crusade",
+      "losses": 1,
       "lost": {
         "0": 30
       },
@@ -20942,12 +20955,12 @@
       },
       "lastVerb": "feud",
       "lastVerbDay": 10,
-      "losses": 0,
+      "losses": 1,
       "lost": {
         "0": 16
       },
-      "lossFrom": null,
-      "lossHow": null,
+      "lossFrom": "power_grovehome_moot",
+      "lossHow": "feud",
       "shrankDay": 10
     },
     "power_switchback_tollmen": {
@@ -20969,7 +20982,7 @@
     "power_firstsight_barony": {
       "lastVerb": "expand",
       "lastVerbDay": 10,
-      "wins": 0,
+      "wins": 1,
       "grownHeads": 14,
       "grewDay": 5,
       "winHow": "expand"
@@ -20977,7 +20990,7 @@
     "power_blaze_unshadowed": {
       "lastVerb": "recruit",
       "lastVerbDay": 10,
-      "wins": 1,
+      "wins": 2,
       "grownHeads": 14,
       "grewDay": 5,
       "losses": 0,
@@ -21005,10 +21018,10 @@
       "wins": 0,
       "grownHeads": 10,
       "grewDay": 5,
-      "losses": 1,
+      "losses": 0,
       "winHow": null,
-      "lossFrom": "power_scaffold_court",
-      "lossHow": "feud",
+      "lossFrom": null,
+      "lossHow": null,
       "lost": {
         "0": 22
       },
@@ -21017,7 +21030,7 @@
     "power_long_choir": {
       "lastVerb": "recruit",
       "lastVerbDay": 10,
-      "wins": 1,
+      "wins": 2,
       "winHow": "recruit",
       "grownHeads": 12,
       "grewDay": 9
@@ -21044,7 +21057,7 @@
     "power_the_scouring": {
       "lastVerb": "expand",
       "lastVerbDay": 10,
-      "wins": 2,
+      "wins": 0,
       "grownHeads": 16,
       "grewDay": 5,
       "losses": 0,
@@ -21137,7 +21150,8 @@
       "lastTickDay": 91,
       "status": "travelling",
       "events": [],
-      "standing": true
+      "standing": true,
+      "runId": "run-the_axis_gate"
     }
   ]
 }

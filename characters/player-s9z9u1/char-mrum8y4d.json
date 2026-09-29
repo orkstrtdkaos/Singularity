@@ -16461,8 +16461,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790692686093,
-  "rev": 1119,
+  "updatedAt": 1790692741928,
+  "rev": 1120,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -19018,7 +19018,7 @@
       },
       "describedAs": "floating tower",
       "store": {
-        "raw_material": 14
+        "raw_material": 8
       },
       "arrears": 4,
       "lastFeatureOfferCount": 1836,
@@ -19090,7 +19090,15 @@
           "gathered": {},
           "wholeProduct": true
         }
-      ]
+      ],
+      "clearing": {
+        "budget": "open",
+        "progress": 0,
+        "passes": 2,
+        "startedDay": 91,
+        "onFrame": true,
+        "frame": "legs"
+      }
     }
   ],
   "_lastProjectDay": 10,
@@ -19835,6 +19843,10 @@
     {
       "text": "3 hands raised at The Standing Annex for The Questioning Churn-Revelers.",
       "announced": true
+    },
+    {
+      "text": "Work has started on the legs. About 2 passes with 2 hands at it.",
+      "announced": false
     }
   ],
   "figureImages": {

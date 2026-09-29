@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "dev_report",
-  "at": "2026-09-29T14:00:38.395Z",
+  "at": "2026-09-29T14:02:52.287Z",
   "build": "2.15.3",
   "field": null,
   "character": {
@@ -9,9 +9,9 @@
     "name": "Loki",
     "playerKey": "player-s9z9u1",
     "level": 11,
-    "rev": 1114,
+    "rev": 1116,
     "day": 10,
-    "turns": 275,
+    "turns": 276,
     "countingSince": "2026-09-14T22:51:56.913Z",
     "countsCoverWholeLife": false
   },
@@ -148,33 +148,33 @@
   },
   "ops": {
     "emitted": {
-      "sceneSummary": 275,
-      "choices": 275,
-      "characterDeltas": 157,
-      "scene": 274,
+      "sceneSummary": 276,
+      "choices": 276,
+      "characterDeltas": 158,
+      "scene": 275,
       "placeUpdates": 36,
       "codexUpdates": 157,
-      "timeOps": 217,
+      "timeOps": 218,
       "offer": 65,
       "generateRequest": 8,
-      "sceneEnded": 143,
-      "npcUpdates": 220,
-      "moveTo": 16,
-      "gambitApt": 97,
+      "sceneEnded": 144,
+      "npcUpdates": 221,
+      "moveTo": 17,
+      "gambitApt": 98,
       "deeds": 20,
-      "questUpdates": 69,
+      "questUpdates": 70,
       "standingOps": 10,
       "factUpdates": 28,
       "stageOps": 8,
       "encounterOps": 9,
       "ledgerEvents": 20,
       "newEncounter": 3,
-      "imagePrompt": 55,
+      "imagePrompt": 56,
       "scene_ended": 1,
       "stateOps": 3,
       "_engineClosedScene": 4,
       "discovery": 6,
-      "intentsHeard": 12,
+      "intentsHeard": 13,
       "delegateOps": 3,
       "scene_summary": 1,
       "partyOps": 5,
@@ -199,7 +199,7 @@
       },
       "moveTo": {
         "applied": 1,
-        "rejected": 6,
+        "rejected": 7,
         "lastWhy": "refused-unearned",
         "exceedsEmissions": false
       }
@@ -229,7 +229,7 @@
     "neverCount": 20,
     "knownCount": 48,
     "unknown": {
-      "sceneSummary": 105,
+      "sceneSummary": 106,
       "scene_summary": 1,
       "discoveryEligible": 1
     },
@@ -267,13 +267,14 @@
     }
   },
   "fireTests": {
-    "at": "2026-09-28T22:18:21.612Z",
-    "build": "2.15.1",
+    "at": "2026-09-29T14:01:00.627Z",
+    "build": "2.15.3",
     "results": [
       {
         "op": "jobOps",
         "verdict": "applied",
         "moved": [
+          "chronicle",
           "jobs"
         ],
         "why": null

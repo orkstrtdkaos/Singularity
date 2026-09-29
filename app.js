@@ -183,7 +183,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.15.5";
+const APP_VERSION = "2.15.6";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -15715,20 +15715,45 @@ function renderHoldingsTab(manageId = null, tab = null) {
             const myName = String(h.name || "").trim().toLowerCase();
             const isSelf = (id) => id === h.locationId || holdPlaces.has(id)
               || (!!myName && String(CONTENT.locations?.[id]?.name || "").trim().toLowerCase() === myName);
-            const near = [...new Set([...(at?.connections || []), ...Object.keys(character.generated?.location || {})])]
-              .filter(id => id && !isSelf(id)).slice(0, 40);
+            // ⛔ ERIK 2026-09-29: *"What happened to my options to sail the standing annex to various locations? It should
+            // show places by region and distance."* ⛑ This read `connections + every location the save has grown`, which on
+            // his save is FIVE records — the Made Gate has one connection, and four of the five are stretches of road the
+            // GM named while he walked them. **The 158-place authored world was not in the list at all.**
+            // ⚠️ A PLACE YOU PASS THROUGH IS NOT A PLACE YOU SAIL A HOLDING TO. Struck by the flag the MINTER writes
+            // (`_mintedAs: "transit"`, `tags: ["transitional"]`), never by reading names — "The Waygate Path" is a road and
+            // "The Passage Below the Unlit Deep" is a road, and no name rule would separate those from a real place.
+            const isTransit = (l) => String(l?._mintedAs || "").toLowerCase() === "transit"
+              || (Array.isArray(l?.tags) && l.tags.some(x => String(x).toLowerCase() === "transitional"));
+            const everywhere = { ...(CONTENT.locations || {}), ...(character.generated?.location || {}) };
+            const near = Object.keys(everywhere)
+              .filter(id => id && !isSelf(id) && !isTransit(everywhere[id]));
             if (!near.length) return "";
-            const nm = (id) => esc(CONTENT.locations?.[id]?.name || id);
-            const gate = (id) => canSail(character, h, id, { locations: CONTENT.locations, npcs: character.npcRegistry, cfg: CONTENT.rules?.economy?.carriage, routeDays: walkingDays(at, CONTENT.locations[id]) });
-            // ⚠️ NEAREST FIRST, UNREACHABLE LAST. The list was in `connections`-then-`Object.keys` order, so a
-            // 205-day passage sat above a one-day neighbour and the default selection was whatever came first.
-            const rows = near.map(id => ({ id, g: gate(id) }))
+            const nm = (id) => esc(everywhere[id]?.name || id);
+            const gate = (id) => canSail(character, h, id, { locations: everywhere, npcs: character.npcRegistry, cfg: CONTENT.rules?.economy?.carriage, routeDays: walkingDays(at, everywhere[id]) });
+            // ⚠️ NEAREST FIRST, UNREACHABLE LAST — the list was in `connections`-then-`Object.keys` order, so a 205-day
+            // passage sat above a one-day neighbour and the default selection was whatever came first.
+            // ✅ AND GROUPED BY REGION, which is the half Erik asked for by name. Regions are ordered by their NEAREST
+            // place, so the one she is standing in comes first and the far side of the world comes last.
+            const rows = near.map(id => ({ id, g: gate(id), region: everywhere[id]?.regionId || null }))
               .sort((a, b) => (a.g.ok === b.g.ok ? 0 : a.g.ok ? -1 : 1)
                 || ((a.g.days ?? Infinity) - (b.g.days ?? Infinity))
                 || String(nm(a.id)).localeCompare(String(nm(b.id))));
-            const opts = rows.map(({ id, g }) => {
-              const d = g.ok && g.days != null ? ` — ${g.days < 1 ? "under a day" : Math.round(g.days) + ` day${Math.round(g.days) === 1 ? "" : "s"}`}` : "";
-              return `<option value="${esc(id)}"${g.ok ? "" : " disabled"}>${nm(id)}${d}${g.ok ? "" : " — " + esc(String(g.why || "cannot go"))}</option>`; }).join("");
+            const said = (g) => g.ok && g.days != null
+              ? ` — ${g.days < 1 ? "under a day" : Math.round(g.days) + ` day${Math.round(g.days) === 1 ? "" : "s"}`}` : "";
+            const byRegion = new Map();
+            for (const r of rows) {
+              const key = r.region || "_nowhere";
+              if (!byRegion.has(key)) byRegion.set(key, []);
+              byRegion.get(key).push(r);
+            }
+            // ⛔ `CONTENT.regions` IS AN ARRAY OF 37, KEYED BY `regionId` — not a map, and there is no `rules.regions` at all.
+            // I guessed at the bag; the wiring audit's unauthored-rules-key ratchet caught it in one run.
+            const regionName = (id) => esc((CONTENT.regions || []).find(r => r && r.regionId === id)?.name || String(id || "").replace(/_/g, " "));
+            const opts = [...byRegion.entries()]
+              .sort((a, b) => Math.min(...a[1].map(r => r.g.days ?? Infinity)) - Math.min(...b[1].map(r => r.g.days ?? Infinity)))
+              .map(([region, list]) => `<optgroup label="${region === "_nowhere" ? "nowhere named" : regionName(region)}">`
+                + list.map(({ id, g }) => `<option value="${esc(id)}"${g.ok ? "" : " disabled"}>${nm(id)}${said(g)}${g.ok ? "" : " — " + esc(String(g.why || "cannot go"))}</option>`).join("")
+                + `</optgroup>`).join("");
             const any = near.some(id => gate(id).ok);
             return `<div class="opt-row" style="gap:6px;flex-wrap:wrap;margin-top:6px">
               <select data-hold-dest="${esc(h.id)}">${opts}</select>

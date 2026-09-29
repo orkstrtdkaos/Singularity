@@ -33330,6 +33330,90 @@ console.log("\n── §393 · holds grow: clear ground, then build on it ──
     })());
 }
 
+/* ══════════ §394 · WHERE A MOVING HOLD MAY SAIL — THE WORLD, BY REGION AND DISTANCE ══════════ */
+// ⛔ ERIK, IN PLAY 2026-09-29, with a screenshot of four options: *"What happened to my options to sail the standing
+// annex to various locations? It should show places by region and distance."*
+//
+// ⛑ MEASURED, AND HE WAS RIGHT TWICE. The pool was `connections + every location this save has grown`, which on his
+// save is FIVE records: the Made Gate has exactly ONE connection, and four of the five are stretches of road the GM
+// named while he walked them — *The Waygate Path*, *The Passage Below the Unlit Deep*, *The Road From Kindly Rest To
+// Standing Annex*. **The 158-place authored world was not in the list at all.**
+//
+// ⚠️ AND THE OPTION AT THE TOP WAS A LIE OF SORTS: *"Stillwater's Trouble — under a day"* is a GROWN record in the
+// valley minted in transit; the hold of that name is `the_old_warden_post`, in the Palelands, **195 days away**.
+console.log("\n── §394 · where a moving hold may sail ──");
+{
+  const CA394 = await import("../engine/carriage.js");
+  const WM394 = await import("../engine/worldmap.js");
+  const { loadContentHeadless: lch394 } = await import("./headless_content.mjs");
+  const C394 = await lch394();
+
+  // ⛑ THE FILTER IS THE MINTER'S OWN FLAG, never a name rule — "The Waygate Path" is a road and "The Ent Grove" is a
+  // road, and no rule about names would separate those from a real place.
+  const isTransit394 = (l) => String(l?._mintedAs || "").toLowerCase() === "transit"
+    || (Array.isArray(l?.tags) && l.tags.some(x => String(x).toLowerCase() === "transitional"));
+
+  check("§394: ⛔ A PLACE YOU PASS THROUGH IS NOT A PLACE YOU SAIL A HOLDING TO — struck by `_mintedAs: \"transit\"`, the flag the minter writes",
+    (() => {
+      // every transit record the live corpus has, and none of them is a destination
+      const grown = Object.values(C394.locations || {}).filter(isTransit394);
+      return grown.every(l => isTransit394(l)) && typeof isTransit394({ _mintedAs: "transit" }) === "boolean"
+        && isTransit394({ _mintedAs: "transit" }) === true
+        && isTransit394({ tags: ["transitional"] }) === true
+        && isTransit394({ name: "The Waygate Path" }) === false;   // ⛔ a NAME never decides it
+    })());
+  // ⛔ AND IT CANNOT STRIKE A REAL DESTINATION. Measured: ZERO authored places carry the flag, so the filter reaches
+  // only what the GM minted in passing. This is the check that would catch it if an author ever tagged a settlement.
+  check("§394: ⛔ …and it can never strike an AUTHORED place — zero of them carry the flag, so the filter cannot reach the world",
+    (() => {
+      const authored = Object.values(C394.locations || {}).filter(l => l && !l._gen && !l._canon);
+      return authored.length > 100 && authored.filter(isTransit394).length === 0;
+    })(), `${Object.values(C394.locations || {}).filter(l => l && !l._gen && !l._canon).length} authored`);
+
+  // ⛑ AND THE LIST IS THE WORLD, GROUPED BY REGION, NEAREST FIRST — which is what he asked for by name.
+  check("§394: ⛔ THE LIST IS THE WORLD, BY REGION AND DISTANCE — not one place's connections, which on his save was FIVE records",
+    (() => {
+      const h = { id: "h", name: "The Annex", locationId: "millbrook", condition: "thriving",
+        carriage: { moves: "powered", speed: 1 }, features: [], garrison: [] };
+      const ch = { id: "c", name: "T", holdings: [h], npcRegistry: {}, generated: {} };
+      const all = C394.locations || {};
+      const at = all[h.locationId];
+      const holdPlaces = new Set([h.locationId]);
+      const near = Object.keys(all).filter(id => id && !holdPlaces.has(id) && !isTransit394(all[id]));
+      const rows = near.map(id => ({ id, region: all[id]?.regionId || null,
+        g: CA394.canSail(ch, h, id, { locations: all, npcs: {}, cfg: C394.rules?.economy?.carriage, routeDays: WM394.walkingDays(at, all[id]) }) }));
+      const regions = new Set(rows.map(r => r.region).filter(Boolean));
+      const reachable = rows.filter(r => r.g.ok);
+      // ⛔ many regions, most of the world reachable, and every reachable row carries a distance to sort by
+      return near.length > 100 && regions.size > 10 && reachable.length > 100
+        && reachable.every(r => Number.isFinite(r.g.days));
+    })());
+  check("§394: ⛑ …and the distance is the REAL one — the hold named \"Stillwater's Trouble\" is 195 days off, not the under-a-day copy minted in transit",
+    (() => {
+      const all = C394.locations || {};
+      const named = Object.entries(all).filter(([, l]) => /stillwater/i.test(String(l?.name || "")));
+      // the authored one exists, is NOT transit, and is far; any grown same-name copy IS transit and is struck
+      const authored = named.filter(([, l]) => l && !l._gen && !l._canon);
+      const grown = named.filter(([, l]) => l && (l._gen || l._canon));
+      return authored.length === 1 && !isTransit394(authored[0][1])
+        && grown.every(([, l]) => isTransit394(l));
+    })(), Object.entries(C394.locations || {}).filter(([, l]) => /stillwater/i.test(String(l?.name || ""))).map(([id]) => id).join(", "));
+
+  // ⛔ AND THE CARD ACTUALLY DRAWS IT THAT WAY — a claim about the SOURCE, because the readers above would all pass
+  // while the screen still listed one place's connections.
+  check("§394: ⛔ …and the card builds the list from the whole map, grouped into regions — the readers above would all pass while the screen still showed five",
+    (() => {
+      const src = rd("app.js").split(String.fromCharCode(10)).filter(l => !/^\s*(\/\/|\*|\/\*)/.test(l)).join(String.fromCharCode(10));
+      // ⛑ THE `<select>`, NOT THE HANDLER. `data-hold-dest` appears twice — the click handler sits 55,000 characters
+      // EARLIER in the file than the render, so `indexOf` anchored on the wrong one and the window held neither line.
+      const i = src.indexOf("<select data-hold-dest=");
+      if (i < 0) return false;
+      const near = src.slice(Math.max(0, i - 4000), i);
+      return /const everywhere = \{ \.\.\.\(CONTENT\.locations \|\| \{\}\), \.\.\.\(character\.generated\?\.location \|\| \{\}\) \}/.test(near)
+        && /isTransit/.test(near) && /optgroup/.test(near);
+    })());
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

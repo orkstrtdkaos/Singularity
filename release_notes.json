@@ -16,6 +16,18 @@
   "next": [],
   "releases": [
     {
+      "version": "2.15.6",
+      "date": "2026-09-29",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "A holding that moves can be sailed anywhere again",
+          "summary": "The list of places to sail to had shrunk to the current spot's neighbours and a handful of roads; it is the whole world again, by region and distance.",
+          "detail": "A walking, floating or carried holding picks where to go from a list — and that list was being built from the place it stands in plus whatever the story had named along the way, which on one save came to five entries, three of them stretches of road (\"The Waygate Path\", \"The Road From Kindly Rest To Standing Annex\"). The settled world was not in it at all. Now the list is every place there is, grouped under its region and ordered by how far off it is, nearest region first, with anywhere the holding cannot go shown greyed with the reason. Roads, corridors and other spots the story named while you passed through them are no longer offered as destinations — and one of them had been sitting at the top of the list claiming a day's travel to a holding that is really one hundred and ninety-five days away."
+        }
+      ]
+    },
+    {
       "version": "2.15.5",
       "date": "2026-09-29",
       "entries": [

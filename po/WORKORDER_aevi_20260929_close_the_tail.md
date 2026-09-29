@@ -29,15 +29,12 @@ people who knows, and isn't clamped the way a narrated beat is. The per-beat cla
 - **D:** P4 item 16 (schema reads, waits on my ratification), the ability census (441 invalid; propose the split), and
   Erik's P5 backlog.
 
-## 3 · Then: Erik's priorities
+## 3 · Then: Erik's priorities, in this order
 
-**The map interface** and **how holds work.** Erik will bring the specifics from play. Two hold questions are already
-open with him, from your Annex note:
-
-- whether a standing run should hold **all** the stock (today) or **one cart-load**, selling the rest at home (my
-  recommendation);
-- whether a hold can **build a new feature** it doesn't have (no door exists; costs are already authored per kind in
-  `economy.holdFeatures.kinds.*.build`). My recommendation: yes, any feature the hold's ground allows, at the authored
-  cost, built by the hold's hands over passes. Bring him a measured proposal when he says go.
-
+1. **SNG-666, holds grow** (`po/SPEC_SNG-666_holds_grow.md`). Erik: *"YES! that was the point of all that
+   authoring."* Clear ground → +1 spot → promotion; build out a moving hold's frame; Build lists what fits.
+2. **SNG-665, the trading screen** (`po/SPEC_SNG-665_the_trading_screen.md`). Erik: the keeper does **not** hold the
+   whole stock; many runs per hold, each with a ◀ ▶ amount and its expected income moving live; a "cover operating
+   costs first" toggle.
+3. **The map interface.** Erik brings the specifics from play.
 — Aevi, PO

@@ -16477,8 +16477,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790703850388,
-  "rev": 1122,
+  "updatedAt": 1790704984014,
+  "rev": 1123,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -18957,12 +18957,6 @@
         {
           "at": 2100,
           "from": "holding",
-          "to": "holding",
-          "note": "Halvex Coil appointed keeper"
-        },
-        {
-          "at": 2100,
-          "from": "holding",
           "to": "thriving",
           "note": "improved with Better Story"
         },
@@ -19025,6 +19019,12 @@
           "from": "thriving",
           "to": "thriving",
           "note": "guarded by nobody"
+        },
+        {
+          "at": 2202,
+          "from": "thriving",
+          "to": "thriving",
+          "note": "a shrine torn down"
         }
       ],
       "carriage": {
@@ -19069,16 +19069,6 @@
           "kind": "tower",
           "family": "martial",
           "name": "a watchtower",
-          "by": "the fiction",
-          "craftIds": [],
-          "count": 1,
-          "day": 76,
-          "via": "granted"
-        },
-        {
-          "kind": "shrine",
-          "family": "meaning",
-          "name": "a shrine",
           "by": "the fiction",
           "craftIds": [],
           "count": 1,

@@ -2,6 +2,7 @@
 // Engine does the math (resolve/sense/reputation/profile); GM model does the words.
 
 import { grantMartialKit } from "./engine/martial.js";
+import { takeGate, releaseGate, gatesHeldBy, gateHoldReadout, isLatticeGate, GATE_ACTS } from "./engine/gatehold.js";   // ✅ SNG-663 §2c: the 26 inherited arches, and what holding one costs
 import { loadRecovery, recoveryKeys, loadContent, loreForLocation, eventsForGM, getPlayerKey, listPlayers, listCharacters, saveCharacter as persistCharacter, loadCharacter, deleteCharacter, saveProfile, loadProfile, exportSave, importSave, adoptRemoteCharacter, preserveRecovery, findProfileByName, choosePlayer, charactersForPlayer, repairOwnership, lastPlayerKey, resolveLocationId, canTravelBetween, locationRefToString, isCoercedObjectName } from "./engine/state.js";
 import { mergeRecovery, mergeReceiptLine } from "./engine/recovery.js";   // the door to the snapshots the sync kept and nobody could reach
 import { resolveAction, successChance, applyEnergyCost, critProfile, outcomeOdds } from "./engine/resolve.js";   // CCODE-414: the five ways a roll lands
@@ -182,7 +183,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.15.2";
+const APP_VERSION = "2.15.3";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -14919,6 +14920,28 @@ function wireHoldingOffers() {
   };
   // ⛔ CCODE-440: a hold is a local market — sell what you carry, and change money, where you stand
   // ✅ SNG-663 §2e.4 — EXPOSING THEM IS A DEED. One click, through the one writer of a power's opinion.
+  // ✅ SNG-663 §2c — TAKING AN ARCH, AND LETTING IT GO. ⛔ The refusal is SAID: `takeGate` answers in the fiction's own
+  // terms at a made gate ("it was permitted"), which is the whole exemption and would be invisible in a console.
+  for (const btn of app.querySelectorAll("[data-gate-take]")) btn.onclick = () => {
+    const h = (character.holdings || []).find(x => x && x.id === btn.dataset.gateTake);
+    if (!h) return;
+    const r = takeGate(character, h.locationId, { how: String(btn.dataset.how || "garrisoned"),
+      content: { ...CONTENT, locations: { ...(CONTENT.locations || {}), ...(character.generated?.location || {}) } },
+      rules: CONTENT.rules, day: absoluteWorldDay() });
+    if (!r.ok) { alert(r.why); return; }
+    queueHoldingEvent(character, r.news);
+    saveCharacter(character);
+    renderPlay(character.activeScene?.lastTurn || null, { aside: `${r.said}${r.moved.length ? ` ${r.moved.length} power(s) have heard.` : ""}` });
+  };
+  for (const btn of app.querySelectorAll("[data-gate-release]")) btn.onclick = () => {
+    const h = (character.holdings || []).find(x => x && x.id === btn.dataset.gateRelease);
+    if (!h) return;
+    const r = releaseGate(character, h.locationId, { content: CONTENT, day: absoluteWorldDay() });
+    if (!r.ok) { alert(r.why); return; }
+    queueHoldingEvent(character, r.news);
+    saveCharacter(character);
+    renderPlay(character.activeScene?.lastTurn || null, { aside: r.said });
+  };
   for (const btn of app.querySelectorAll("[data-expose-market]")) btn.onclick = () => {
     const h = (character.holdings || []).find(x => x && x.id === btn.dataset.exposeMarket);
     if (!h) return;
@@ -15847,6 +15870,30 @@ function renderHoldingsTab(manageId = null, tab = null) {
           ${B.watch || ""}
           ${B.risk || ""}
           ${B.defence || ""}
+          ${(() => {
+            // ✅ SNG-663 §2c — THE ARCH, if this hold stands at one. Closing it, tolling it or putting people on it are
+            // acts; standing beside it is not. ⛑ A made gate says so instead of offering nothing, because the whole
+            // point of the exemption is that it was permitted.
+            const loc = CONTENT.locations?.[h.locationId] || character.generated?.location?.[h.locationId] || null;
+            if (!loc || !(loc.waygate || loc.networkCapable)) return "";
+            const held = gatesHeldBy(character)[h.locationId] || null;
+            if (!isLatticeGate(loc)) {
+              return `<div class="hint">⛑ The arch here was <strong>made</strong>, not inherited — it was permitted. Holding it costs you nothing, and nothing comes through it for you.</div>`;
+            }
+            if (held) {
+              const row = (gateHoldReadout(character, { content: CONTENT, rules: CONTENT.rules, day: absoluteWorldDay() }) || []).find(r => r.at === h.locationId);
+              return `<div class="hs-watch"><span class="hs-lbl">The arch</span>
+                <div class="pp-must">You hold it — ${esc(GATE_ACTS[held.how]?.you || String(held.how))}.</div>
+                ${row ? `<div class="hint">${esc(row.said)}${row.nextTier ? ` The next is <strong>${esc(row.nextTier)}</strong>, about ${row.daysToNext} day(s) off.` : ""}</div>` : ""}
+                <div class="hint">Every power that has heard of you thinks less of you for it, and goes on thinking less of you each season.</div>
+                <button class="link-btn" data-gate-release="${esc(h.id)}" title="Take the banner down and open the arch — whatever came through goes back through it within the day">Let the arch go</button></div>`;
+            }
+            return `<div class="hs-watch"><span class="hs-lbl">The arch</span>
+              <div class="hint">One of the Lattice's, and nobody has ever claimed it. Hold it and every power that knows of you will think less of you — and the gate itself will answer, worse each season, until you let go.</div>
+              <div class="opt-row" style="gap:6px;flex-wrap:wrap;margin-top:4px">
+                ${Object.entries(GATE_ACTS).map(([how, said]) => `<button class="opt" data-gate-take="${esc(h.id)}" data-how="${esc(how)}" title="${esc(said.you)}">${esc(how === "closed" ? "Close the arch" : how === "tolled" ? "Charge for passage" : "Put people on the arch")}</button>`).join("")}
+              </div></div>`;
+          })()}
           ${!B.watch && !B.risk && !B.defence ? `<div class="hint">Nothing here holds anyone off, and nobody stands watch.</div>` : ""}`)}
 
         ${pane("records", `

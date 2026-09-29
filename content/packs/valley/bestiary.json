@@ -178,6 +178,13 @@
     }
    ],
    "_whyThisClass": "SNG-661 (Erik 2026-09-26: 'think of all the types of creatures in the monster compendiums of games like this... those would likely exist here in all kinds of different areas because the people manifested them'). The in-world reason is the Manifestation Storm: belief made real. That is why each creature carries `storiedBy` (whose story), `habitat` (where it lives, matched against place tags) and `storyRule` (the folk-remedy from the tale, which works)."
+  },
+  "lattice_keeper": {
+   "concept": "What the Lattice sends to keep its own. The 26 waygates were laid in one act by something that did not need to try twice, and they have never been anyone's. When someone takes one (puts men on the arch, charges for passage, closes it) the gate itself answers: first it misbehaves, then things come through it for whoever is holding it, a little worse each season, until they let go.",
+   "readsFromArc": "arc_precursor_waking",
+   "morallyClean": "There is no one in there. A keeper is the network's maintenance, wearing a shape, and it has no grievance and no mercy. It cannot be bargained with or turned, only outlasted or answered by releasing the gate. It never pursues past the gate's yard, and it never comes for a gate nobody holds.",
+   "hasSelf": false,
+   "_why": "SNG-663 Â§2c (Erik 2026-09-26: 'Both stigma AND consequence of something coming for you from the gate... the gate keeps of some sort')."
   }
  },
  "roster": [
@@ -266,7 +273,9 @@
     "WARD (against resolution)",
     "SHAPE (impose your own order)"
    ],
-   "readsAlsoFrom": ["arc_block_bleed"],
+   "readsAlsoFrom": [
+    "arc_block_bleed"
+   ],
    "clean": "It is the bleed made flesh — geometry, not a being. You are correcting a grammar error that grew teeth.",
    "aggressorKind": "hazard"
   },
@@ -290,7 +299,9 @@
     "SHAPE (give it a true fiction)",
     "MOVE (survive inside it)"
    ],
-   "readsAlsoFrom": ["arc_manifestation_storm"],
+   "readsAlsoFrom": [
+    "arc_manifestation_storm"
+   ],
    "clean": "A birth that went wrong and never became anyone. Ending it is the stemming 'Present at the Birth' offers — grief for a wonder, not a death.",
    "aggressorKind": "hazard"
   },
@@ -2519,6 +2530,137 @@
    "unique": true,
    "epicNote": "Mythic, unique. Never rolled. Met through the peoples' shared arc: the verses of the lullaby are a quest across every tradition.",
    "class": "great_manifestation"
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_arch_warden",
+   "tier": "notable",
+   "name": "an arch-warden",
+   "affinity": {
+    "physical": "resist",
+    "truth": "vulnerable"
+   },
+   "look": "A figure made of the gate's own stone, grey and seamless, the lattice lines glowing faintly along where its joints should be. It steps out of the arch and stands there, facing whoever holds it, and does not blink because it has nothing to blink with.",
+   "danger": "It walks to the nearest of the holder's people at the gate and puts them out of the yard, not gently. If they come back it does it again, harder. Two or three of them can hold a gatehouse empty for a day.",
+   "pressures": [
+    "WARD (hold the arch against a thing made of it)",
+    "KNOW (read what it was sent to do)",
+    "MOVE (be somewhere else)",
+    "HARM (stone, but only stone)"
+   ],
+   "class": "lattice_keeper",
+   "aggressorKind": "hazard",
+   "random": false,
+   "storyRule": "They leave when the gate is released. Take down the banner, open the arch, stop charging for passage, and whatever came through goes back through it within the day. Every people tells some version of this; the Crossing's porters say it to every new lord who looks at the Hub Yard too long.",
+   "storiedBy": "every people",
+   "habitat": [
+    "waygate"
+   ],
+   "clean": "The network keeping itself. Nobody sent it and nobody is in it. Releasing the gate is the whole answer.",
+   "readsAlsoFrom": [
+    "arc_precursor_waking"
+   ],
+   "_why": "SNG-663 Â§2c. Never on a random table: a keeper comes only for whoever holds a gate, on the escalation clock (notable, heroic, epic, legendary, a season apart), and stops when the gate is released."
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_threshold_choir",
+   "tier": "heroic",
+   "name": "the threshold choir",
+   "affinity": {
+    "physical": "immune",
+    "psychic": "resist",
+    "numinous": "vulnerable"
+   },
+   "look": "A ring of light that stands in the arch and sings, one sustained chord in a key the lattice lines answer to. Anyone standing under the arch hears it inside their teeth. The stones of the yard begin to ring in sympathy.",
+   "danger": "The chord unmakes what the holder has built at the gate: bars, gatehouses, the chains across the arch, the toll-board. People are not its target, but they are standing inside it. A garrison that stays through a full verse comes out deaf, or doesn't come out.",
+   "pressures": [
+    "WARD (keep your shape inside a note)",
+    "SHAPE (answer it in its own key)",
+    "UNMAKE (the chord, at a cost to the arch)",
+    "KNOW (hear what it's saying)"
+   ],
+   "class": "lattice_keeper",
+   "aggressorKind": "hazard",
+   "random": false,
+   "storyRule": "They leave when the gate is released. Take down the banner, open the arch, stop charging for passage, and whatever came through goes back through it within the day. Every people tells some version of this; the Crossing's porters say it to every new lord who looks at the Hub Yard too long.",
+   "storiedBy": "every people",
+   "habitat": [
+    "waygate"
+   ],
+   "clean": "The network keeping itself. Nobody sent it and nobody is in it. Releasing the gate is the whole answer.",
+   "readsAlsoFrom": [
+    "arc_precursor_waking"
+   ],
+   "_why": "SNG-663 Â§2c. Never on a random table: a keeper comes only for whoever holds a gate, on the escalation clock (notable, heroic, epic, legendary, a season apart), and stops when the gate is released."
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_lattice_hound",
+   "tier": "epic",
+   "name": "a lattice-hound",
+   "affinity": {
+    "physical": "resist",
+    "mechanical": "immune",
+    "truth": "vulnerable"
+   },
+   "look": "A long shape of joined light running on the lattice lines under the ground, surfacing where it wants to, the size of a horse and very fast. It follows the lines from the gate toward wherever the holder keeps their people, and the lines lead everywhere.",
+   "danger": "It hunts the holder, not the yard. It comes up under their hold, their camp, their barracks at the gate, and it takes the ones who gave the order to hold it. It goes back down the line when it has taken enough, and it knows who it came for.",
+   "pressures": [
+    "KNOW (which line it's running)",
+    "WARD (cut it off from the lattice)",
+    "MOVE (don't be where the lines go)",
+    "HARM (while it's up)",
+    "SHAPE (a line that leads it home)"
+   ],
+   "class": "lattice_keeper",
+   "aggressorKind": "hazard",
+   "random": false,
+   "storyRule": "They leave when the gate is released. Take down the banner, open the arch, stop charging for passage, and whatever came through goes back through it within the day. Every people tells some version of this; the Crossing's porters say it to every new lord who looks at the Hub Yard too long.",
+   "storiedBy": "every people",
+   "habitat": [
+    "waygate"
+   ],
+   "clean": "The network keeping itself. Nobody sent it and nobody is in it. Releasing the gate is the whole answer.",
+   "readsAlsoFrom": [
+    "arc_precursor_waking"
+   ],
+   "_why": "SNG-663 Â§2c. Never on a random table: a keeper comes only for whoever holds a gate, on the escalation clock (notable, heroic, epic, legendary, a season apart), and stops when the gate is released."
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_keeper_of_the_arch",
+   "tier": "legendary",
+   "name": "the Keeper of the Arch",
+   "affinity": {
+    "physical": "immune",
+    "mechanical": "immune",
+    "psychic": "resist",
+    "truth": "resist",
+    "numinous": "vulnerable"
+   },
+   "look": "The gate itself stands up. The arch unfolds from its footings into something tall and many-jointed, the lattice lines running up it like veins, and it looks at the holder's banner over the yard with a patience older than any people.",
+   "danger": "It takes the gate back. Everything the holder built within sight of it comes down; everyone the holder left to guard it is thrown back through the arch to somewhere else on the network. Then it folds itself down into an arch again, and the gate is nobody's.",
+   "pressures": [
+    "UNMAKE (nothing you have reaches it)",
+    "SHAPE (give the gate back, formally, before it finishes)",
+    "KNOW (what it will leave standing)",
+    "MOVE (not be the holder's)",
+    "WARD (whoever didn't choose this)"
+   ],
+   "class": "lattice_keeper",
+   "aggressorKind": "hazard",
+   "random": false,
+   "storyRule": "They leave when the gate is released. Take down the banner, open the arch, stop charging for passage, and whatever came through goes back through it within the day. Every people tells some version of this; the Crossing's porters say it to every new lord who looks at the Hub Yard too long.",
+   "storiedBy": "every people",
+   "habitat": [
+    "waygate"
+   ],
+   "clean": "The network keeping itself. Nobody sent it and nobody is in it. Releasing the gate is the whole answer.",
+   "readsAlsoFrom": [
+    "arc_precursor_waking"
+   ],
+   "_why": "SNG-663 Â§2c. Never on a random table: a keeper comes only for whoever holds a gate, on the escalation clock (notable, heroic, epic, legendary, a season apart), and stops when the gate is released."
   }
  ],
  "_classKits_20260908": "⛑ CLASS KITS, AUTHORED 2026-09-08 — the bestiary's half of `SPEC_generative_arcs_and_bestiary`. ⛔ MEASURED: all 28 roster entries carry a `tier` and `pressures`; ZERO carry a `level` or a declarable move set. ⚠️ EXACTLY THE NPC FINDING ONE TIER OVER — the people were 40-of-40 at level 1 for want of `tier`; the beasts HAVE tier and want `level`, and `tierFloor` already maps one to the other. ⚑ A BEAST DOES NOT NEED `domains`. It is not a person and the bestiary's first law says so. It needs a move set, and the CLASS is where that lives — six classes, six distinct fictions, six kits. ⚠️ AND TWO CLASSES ALREADY CARRY ENGINE MEANING: `deathSave.notForClasses` bars `feral_construct` and `made_weapon`, so the classes were already load-bearing and nothing else read them. ⛔ THREE MOVES EACH, same as the contribution-family archetypes — a two-move opponent is a coin flip."

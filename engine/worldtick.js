@@ -18,7 +18,8 @@ import { applyNpcUpdates } from "./npcs.js";
 import { activeCompany } from "./company.js";   // SNG-358: a holding's keeper must still be with you
 import { queueFeatureOffers, advanceHolding, holdingNews, unstewardedHoldings, takeHoldingEvents, CONDITIONS, tickStore, storeNews, advanceDebts, growHolding, holdingGround, holdingMeaningAura, healingAt, chargeQuartering } from "./holdings.js";
 import { tickArmory } from "./armory.js";   // CCODE-445: the forge works the order, a pass at a time
-import { tickCaravans, runStandingRoutes } from "./caravan.js";   // R49: the road runs itself, and can be robbed   // ✅ SNG-654 A (Erik: "yes on a-d"): and a standing route sends the next load itself
+import { tickCaravans, runStandingRoutes } from "./caravan.js";
+import { gateHoldPass } from "./gatehold.js";   // ✅ SNG-663 §2c: holding one of the Lattice's arches has a cost, and it climbs   // R49: the road runs itself, and can be robbed   // ✅ SNG-654 A (Erik: "yes on a-d"): and a standing route sends the next load itself
 import { domainAccess } from "./traditions.js";   // SNG-659 §1: the three-domain draw a person's kit is dealt from
 import { meaningDensity, peoplePresentAt } from "./substrate.js";   // R46b: what the pilgrims come for   // SNG-358: holdings ride the same world-gated pass
 import { commitGrowth } from "./npcsheet.js";   // ✅ R37: growth writes, on the tick
@@ -794,6 +795,25 @@ export function advanceHoldings({ character, now = Date.now(), ladder = null, co
       for (const line of applySeatClaims(character, claims, { day: (() => { try { return absoluteWorldDay(); } catch { return null; } })() })) news.push(line);
     }
   } catch (err) { console.warn("[seats] a finish was not read:", err.message); }   // prose-cap-ok: a console diagnostic
+
+  // ✅ SNG-663 §2c — AND THE ARCH ANSWERS WHOEVER IS HOLDING IT. Stigma drifts down a step a season while a gate is
+  // held, and a keeper comes at a rising rung; letting the gate go stops both, which is why `gatesHeld` is the only
+  // input. ⚠️ On day one this does nothing at all: nobody in any save holds a Lattice gate, and the two players whose
+  // holdings stand at `gen-the-made-gate` are exempt because it was MADE rather than inherited.
+  try {
+    const gh = gateHoldPass(character, { content, rules: content?.rules || null,
+      day: (() => { try { return absoluteWorldDay(); } catch { return null; } })() });
+    for (const line of gh.news) news.push(line);
+    // ⛑ A KEEPER IS STAGED, NOT ROLLED. Aevi authored all four `random: false` — one comes for whoever holds a gate and
+    // for nobody else — so it is put where the player will meet it rather than dropped into the encounter pool.
+    if (gh.keepers.length) {
+      const ws = character.worldState || (character.worldState = {});
+      ws.gateKeepers = [...(Array.isArray(ws.gateKeepers) ? ws.gateKeepers : []), ...gh.keepers.map(k => ({
+        at: k.at, placeName: k.name, creatureId: k.creatureId, tier: k.tier, rung: k.rung,
+        day: (() => { try { return absoluteWorldDay(); } catch { return null; } })(), met: false,
+      }))].slice(-8);
+    }
+  } catch (err) { console.warn("[gatehold] the arch was not answered:", err.message); }   // prose-cap-ok: a console diagnostic
 
   // ✅ SNG-654 A — AND THE STANDING RUNS SEND THE NEXT LOAD. ⛑ BEFORE `tickCaravans`, so a departure that happens
   // today is on the road today rather than sitting at the hold for a pass; and it sends nothing while a cart of that

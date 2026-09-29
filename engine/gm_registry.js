@@ -87,7 +87,8 @@ import { renderNamesDeep } from "./names.js"; // SNG-182
 import { worldCount, worldCountLabel, positionedPlace } from "./worldtime.js";
 import { holdsNearForGM } from "./sharedholds.js";
 import { nemesisForGM } from "./nemesis.js";   // ⛔ SNG-648: who the antagonist IS — `pacing.js` never had one to point at   // CCODE-383: a hold nearby is known
-import { powersHoldingForGM } from "./powers.js";   // SNG-634 C5: who holds the ground you are standing on
+import { powersHoldingForGM } from "./powers.js";
+import { holderOfGate, isLatticeGate, latticeGates } from "./gatehold.js";   // ✅ SNG-663 §2c: whose arch this is, and whether it is one of the Lattice's   // SNG-634 C5: who holds the ground you are standing on
 import { journeyForGM } from "./journeyplan.js";   // CCODE-387: a journey agreed and not yet walked
 import { journeyUnderwayForGM } from "./journeyroad.js";   // CCODE-390: a journey on the road, stopped part-way
 import { encounterReceiptForGM } from "./encounters.js";
@@ -376,6 +377,24 @@ export const GM_CONTEXT = [
         sayArmory: (h) => armorySaid(h, armoryTable(env.CONTENT?.rules?.economy?.armory || null))
           + workSaid(h, { nameOf: (id) => (/^unit:/.test(String(id)) ? `the hands of ${(env.character?.bands || []).find(b => b && String(id).startsWith(`unit:${b.id}:`))?.name || "a band"}`
             : (env.character?.npcRegistry?.[id]?.name || env.CONTENT?.npcs?.[id]?.name || id)) }) }) },   // ⛔ CCODE-429: and each hold's room · CCODE-444: its vault · CCODE-445: its armory
+  // ✅ SNG-663 §2c — THE ARCH, WHERE THERE IS ONE. A GM narrating at one of the Lattice's twenty-six should know that
+  // nobody has ever claimed it, and whether that is still true. ⚠️ A MADE gate is named as made: the whole exemption is
+  // that it was permitted, and a GM that did not know would invent the wrong awe about it.
+  { key: "archDetail", builder: "gatehold.holderOfGate + isLatticeGate", carries: ["whose arch this is", "the made/inherited difference"],
+    reachedBy: "at a waygate", spec: "SNG-663 §2c", views: ["turn", "ask"],
+    build: (env) => {
+      const id = env.character?.currentLocationId || null;
+      const loc = env.location || env.CONTENT?.locations?.[id] || env.character?.generated?.location?.[id] || null;
+      if (!loc || !(loc.waygate || loc.networkCapable)) return null;
+      const name = loc.name || id;
+      if (!isLatticeGate(loc)) return `THE ARCH — ${name}'s gate was MADE, not inherited. It was permitted; it is nobody's to resent and nothing comes through it for whoever holds it.`;
+      const held = holderOfGate(id, { character: env.character, powers: env.CONTENT?.powers || [] });
+      const total = latticeGates(env.CONTENT?.locations || {}).length;
+      if (!held) return `THE ARCH — ${name} is one of the ${total} the Lattice laid, and it has never been claimed. Whether it opens is the apparatus's business, not anyone's.`;
+      return held.kind === "you"
+        ? `THE ARCH — ${name} is one of the ${total} the Lattice laid, and YOU hold it. Nobody had done that in living memory. Every power that knows of you thinks less of you for it, and the gate itself has begun to answer.`
+        : `THE ARCH — ${name} is one of the ${total} the Lattice laid, and ${held.name || held.id} holds it. Nobody had done that in living memory.`;
+    } },
   // ⛔ CCODE-441 — THE PURSE AND THE MONEY OF THE PLACE. The GM was never shown the purse, so it could not be honest about a price or
   // know what the character could pay; and it had no op to move money. Both halves arrive together (exchangeOps in the contract).
   { key: "moneyDetail", builder: "purse.purseLine + money.moneyLine", carries: ["purse", "the money of the place"],

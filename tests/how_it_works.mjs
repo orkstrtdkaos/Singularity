@@ -32894,6 +32894,138 @@ console.log("\n── §390 · a name the scene taught itself, and a slot nobody
     })());
 }
 
+/* ══════════ §391 · SNG-663 §2c — HOLDING A GATE, AND WHAT THE LATTICE SENDS ══════════ */
+// ✅ ERIK 2026-09-26: *"Both stigma AND consequence of something coming for you from the gate… the gate keeps of some
+// sort."* ⛑ AEVI §2c, and the sentence the whole build turns on: *"A power that holds the ground around an open gate,
+// and lets anyone through, is not holding the gate… make it a flag the act sets, never derived from `holds`."*
+//
+// ⛔ MEASURED BEFORE A LINE WAS WRITTEN, AND IT IS WHY SHE IS RIGHT. Five powers' `holds` still names a place carrying an
+// arch (§2b moved four others' gates out into yards), and TWO PLAYERS keep a holding at `gen-the-made-gate` — **both
+// with a garrison posted**. A rule derived from holds-or-garrisons would wake keepers on seven holders on day one, two
+// of whom §2c.3 explicitly exempts. Derived from the act, it wakes nobody.
+console.log("\n── §391 · holding a gate, and what the Lattice sends ──");
+{
+  const G391 = await import("../engine/gatehold.js");
+  const { loadContentHeadless: lch391 } = await import("./headless_content.mjs");
+  const C391 = await lch391();
+  const R391 = C391.rules;
+  const per391 = G391.seasonDays(R391);
+
+  /* ---- 1 · ⛔ IT WAKES NOBODY ---- */
+  // ⛑ THE CLAIM IS ABOUT THE POPULATION, not about one fixture: no save holds an arch, and running the pass on every
+  // one of them produces nothing. ⚠️ Over the frozen copies, never the live directory — §364's ratchet.
+  check("§391: ⛔ ON DAY ONE IT WAKES NOBODY — the act has not been taken, so no stigma, no keepers, no news",
+    (() => {
+      let woke = 0, looked = 0;
+      for (const f of readdirSync(join(root, "tests/fixtures/saves")).filter(x => x.endsWith(".json"))) {
+        let ch; try { ch = JSON.parse(savedSave(f)); } catch { continue; }
+        looked++;
+        if (Object.keys(G391.gatesHeldBy(ch)).length) woke++;
+        const out = G391.gateHoldPass(JSON.parse(JSON.stringify(ch)), { content: C391, rules: R391, day: 4000 });
+        if (out.news.length || out.keepers.length || out.stigma.length) woke++;
+      }
+      return looked > 0 && woke === 0;   // ⛑ and it LOOKED at somebody — a gate over an empty list passes for the wrong reason
+    })());
+  // ⛔ AND THE TWO THINGS IT MUST NOT BE DERIVED FROM, asserted as behaviour rather than as an absent line of source.
+  check("§391: ⛔ …because holding the GROUND is not holding the GATE — five powers hold a place with an arch and none of them holds the arch",
+    (() => {
+      const gateIds = new Set(G391.latticeGates(C391.locations));
+      const holdingOne = (C391.powers || []).filter(p => (p.holds || []).some(h => gateIds.has(h?.at)));
+      return holdingOne.length >= 3 && holdingOne.every(p => G391.gateHeldByPower(p) === null)
+        && holdingOne.every(p => G391.holderOfGate((p.holds || []).find(h => gateIds.has(h?.at)).at, { powers: C391.powers }) === null);
+    })(), `${(C391.powers || []).filter(p => (p.holds || []).some(h => G391.latticeGates(C391.locations).includes(h?.at))).length} power(s) hold a place with an arch`);
+
+  /* ---- 2 · ⛑ THE EXEMPTION IS THE CORPUS, NOT A FLAG ---- */
+  check("§391: ⛑ THE LATTICE LAID EXACTLY THE 26 §2c NAMES — the authored ones; a gate built in play is nobody's inheritance",
+    (() => {
+      const lattice = G391.latticeGates(C391.locations);
+      const grown = Object.entries(C391.locations).filter(([, l]) => l && (l.waygate || l.networkCapable) && (l._gen || l._canon));
+      return lattice.length === 26 && grown.length > 0 && grown.every(([id]) => !lattice.includes(id));
+    })(), `${G391.latticeGates(C391.locations).length} authored`);
+  check("§391: ⛔ …so taking a MADE gate is refused in the fiction's own terms — it was permitted, and two players keep a garrison at one",
+    (() => {
+      const ch = { name: "T", npcRegistry: {}, powerState: {} };
+      const made = { name: "The Made Gate", waygate: true, networkCapable: true, _gen: true };
+      const r = G391.takeGate(ch, "gen-made", { how: "garrisoned", content: { ...C391, locations: { "gen-made": made } }, rules: R391, day: 1 });
+      return r.ok === false && /permitted/.test(r.why) && !Object.keys(G391.gatesHeldBy(ch)).length;
+    })());
+
+  /* ---- 3 · ⛔ THE ACT, AND WHAT IT COSTS THE SAME MOMENT ---- */
+  const holder391 = () => ({ name: "T", npcRegistry: {}, powerState: Object.fromEntries((C391.powers || []).slice(0, 6).map(p => [p.id, { known: { how: "renown" } }])) });
+  check("§391: ⛔ THE ACT SETS THE FLAG AND THE STIGMA LANDS WITH IT — every power that knows of it thinks less of you, the day you take one",
+    (() => {
+      const ch = holder391();
+      const r = G391.takeGate(ch, "the_axis_gate", { how: "tolled", content: C391, rules: R391, day: 100 });
+      const twice = G391.takeGate(ch, "the_axis_gate", { how: "tolled", content: C391, rules: R391, day: 101 });
+      return r.ok && ch.gatesHeld?.the_axis_gate?.since === 100 && ch.gatesHeld.the_axis_gate.how === "tolled"
+        && r.moved.length === 6 && r.moved.every(m => m.to < m.from)
+        && /Nobody has done that in living memory/.test(r.said)
+        && twice.ok === false && twice.already === true;
+    })());
+  // ⛑ AND THE DRIFT STOPS AT THE BOTTOM — a step a season forever runs past every band the game has.
+  check("§391: ⛑ …and the slow drift stops at the WORST BAND — content's own vocabulary, so retuning the bands moves the floor",
+    (() => {
+      const ch = holder391();
+      const worst = [...(R391.reputationBands || [])].sort((a, b) => b.min - a.min).at(-2);
+      for (const id of Object.keys(ch.powerState)) ch.powerState[id].standing = worst.min - 5;   // already hated
+      const moved = G391.stigmaFor(ch, { content: C391, rules: R391, delta: -1, why: "x" });
+      const unfloored = G391.stigmaFor(ch, { content: C391, rules: R391, delta: -1, why: "x", floor: false });
+      return moved.length === 0 && unfloored.length === 6;
+    })());
+
+  /* ---- 4 · ⛔ THE LADDER, ON A SEASON'S RHYTHM ---- */
+  // ⚠️ A DIAL IN THE UNITS OF THE RULING: Aevi ruled "a season", and `seasonCalendar().seasons` is the PORTION-expanded
+  // list (early-/mid-/late-), so dividing by it made a season TWELVE days and a legendary keeper arrive in 48.
+  check("§391: ⛔ A SEASON IS A SEASON — derived from the world's own year and its band's four, never from the twelve portion names",
+    (() => {
+      const cal = (C391.rules?.worldClock?.calendar) || null;
+      const seasons = cal?.bands?.find(b => b.id === (cal.defaultBand || "far"))?.seasons?.length || 4;
+      return per391 === Math.round((cal?.yearDays || 144) / seasons) && per391 >= 24;
+    })(), `${per391} days`);
+  check("§391: ⛔ SIGNS, THEN A KEEPER A SEASON, CLIMBING — and each rung is the creature Aevi tiered, matched by tier and never by position",
+    (() => {
+      const ch = holder391();
+      G391.takeGate(ch, "the_axis_gate", { how: "closed", content: C391, rules: R391, day: 0 });
+      const seen = [];
+      for (let s = 0; s <= 5; s++) {
+        const out = G391.gateHoldPass(ch, { content: C391, rules: R391, day: per391 * s });
+        seen.push(out.keepers[0] ? out.keepers[0].tier : (out.news.some(n => /hummed/.test(n)) ? "signs" : null));
+      }
+      return seen[0] === "signs" && seen[1] === "notable" && seen[2] === "heroic" && seen[3] === "epic"
+        && seen[4] === "legendary" && seen[5] === null;   // ⛑ legendary is the top; it does not come again
+    })());
+  check("§391: ⛑ …and the creatures are AEVI'S, off the random table — a keeper comes for whoever holds a gate and for nobody else",
+    (() => {
+      const roster = (C391.bestiary?.roster || []).filter(c => c && c.class === "lattice_keeper");
+      const pool = (C391.encounterTable?.encounters || []).concat(C391.encounters ? Object.values(C391.encounters) : []);
+      return roster.length === 4
+        && roster.every(c => c.random === false && (c.habitat || []).includes("waygate") && typeof c.storyRule === "string")
+        && ["notable", "heroic", "epic", "legendary"].every(t => !!G391.keeperFor(G391.GATE_HOLD.rungs.indexOf(t), { content: C391 }))
+        && !pool.some(e => e && /lattice_keeper|arch_warden|threshold_choir|lattice_hound|keeper_of_the_arch/.test(String(e.id || e.creatureId || "")));
+    })(), `${(C391.bestiary?.roster || []).filter(c => c && c.class === "lattice_keeper").length} keepers authored`);
+
+  /* ---- 5 · ⛔ LET THE GATE GO, AND IT STOPS ---- */
+  check("§391: ⛔ LETTING IT GO STOPS IT — §2c's own escape, and the stigma is NOT refunded because it happened",
+    (() => {
+      const ch = holder391();
+      G391.takeGate(ch, "the_axis_gate", { how: "garrisoned", content: C391, rules: R391, day: 0 });
+      G391.gateHoldPass(ch, { content: C391, rules: R391, day: per391 * 2 });
+      const stoodAt = Object.values(ch.powerState).map(s => s.standing);
+      const go = G391.releaseGate(ch, "the_axis_gate", { content: C391, day: per391 * 2 });
+      const after = G391.gateHoldPass(ch, { content: C391, rules: R391, day: per391 * 9 });
+      return go.ok && !Object.keys(G391.gatesHeldBy(ch)).length
+        && after.keepers.length === 0 && after.news.length === 0 && after.stigma.length === 0
+        && Object.values(ch.powerState).map(s => s.standing).every((v, i) => v === stoodAt[i]);
+    })());
+
+  /* ---- 6 · ⛑ AND IT IS REACHED FROM PLAY ---- */
+  check("§391: ⛑ THE PASS IS CALLED BY THE WORLD TICK — an engine module with only a test for a caller passes CI and cannot fire in play",
+    (() => {
+      const wt = rd("engine/worldtick.js");
+      return /import \{ gateHoldPass \} from "\.\/gatehold\.js"/.test(wt) && /gateHoldPass\(character, \{/.test(wt);
+    })());
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

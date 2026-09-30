@@ -24445,7 +24445,10 @@ console.log("\n── §308 · a hold has room — its rung or its frame; a buil
 
   /* ---- 6 · ⛑ WHERE THE PLAYER DOES IT ---- */
   check("§308: ⛑ the hold's popup shows its room, offers the next rung with a button, says the refusal when full — and the Build verb asks the hull rule the GM's build asked",
-    /const room = roomOf\(h, cfgF\);/.test(A308) && /data-hold-promote="\$\{esc\(h\.id\)\}"/.test(A308)
+    // ⚠️ AND THIS CLAUSE PINNED THE NAME OF A LOCAL. Item 7 merged the Build tab's TWO spots readouts into one, and
+    // the survivor asks `roomOf(h, cfgC)` rather than `roomOf(h, cfgF)` — the same call, a different cfg variable in the
+    // surviving block. The claim is that the page READS its room, not which letter the config was bound to.
+    /roomOf\(h, cfg[A-Z]\)/.test(A308) && /data-hold-promote="\$\{esc\(h\.id\)\}"/.test(A308)
     && /const r = promoteHolding\(character, btn\.dataset\.holdPromote, holdCfgNow\(\)/.test(A308)
     && /room\.full \? `<div class="hint hold-full">\$\{esc\(roomRefusal\(h, room\)\)\}<\/div>`/.test(A308)
     // ⚠️ THIS CLAUSE PINNED THE WHOLE CALL AS TYPED, and item 9 had to add an argument to it — my own rule broken by
@@ -33980,6 +33983,63 @@ console.log("\n── §399 · the Work tab, and a list that does not stretch �
   check("§399: ⚠️ …and a person with no charge, and a hold nobody was charged with, read back nothing",
     AS399.chargesOf(save399, "nobody").length === 0 && AS399.chargesAbout(save399, "no_hold").length === 0
     && AS399.chargesOf(null, "cy").length === 0);
+}
+
+/* ══════════ §400 · THE BUILD TAB SAYS ITS SPOTS ONCE ══════════ */
+// ⛔ AEVI item 7: *"The hold's content is scattered. Every tab in one order: what it is now → what you can do → the
+// detail. Build: spots bar ('2 of 2 · legs 0%'), what stands, one Build form, the growth job."*
+//
+// ⛑ MEASURED: the Build pane stated its spots TWICE — a room bar saying "2 of 2 places taken" and, four blocks below
+// it, a dots line saying "2 of 2 feature spots — a post on legs · full". Same two numbers, different words, with a
+// loose craft-picker sitting in the gap between them. And the clearing quote's own sentence opened by restating the
+// spots a third time. That is what "scattered" means in practice, and one fact said three ways is the defect.
+//
+// ⚠️ WHAT ONLY THE RETIRED READOUT HELD CAME ACROSS: the promotion offer and the refusal a full hold gives were on
+// that block and nowhere else. Nine of eleven reds the last time I replaced a surface were losses, not moved claims.
+console.log("\n── §400 · the Build tab says its spots once ──");
+{
+  const A400 = rd("app.js");
+  const build400 = (A400.match(/\$\{pane\("build", `[\s\S]*?\n        `\)\}/) || A400.match(/\$\{pane\("build", `[\s\S]{0,9000}/) || [""])[0];
+
+  /* ---- 1 · ⛔ ONE SPOTS READOUT ---- */
+  // ⛑ COUNTED IN THE PANE'S OWN SOURCE, so a third one added later is caught wherever it is written.
+  const spotSays400 = [...build400.matchAll(/of \$\{room\.slots\}/g)].length;
+  check("§400: ⛔ THE BUILD TAB STATES ITS SPOTS ONCE — it stated them twice, in two different sentences",
+    spotSays400 === 1, `${spotSays400} spots sentence(s) in the Build pane`);
+  check("§400: ⛑ …and the one that survived carries the dots, the rung and the frame — the words only the other had",
+    /hold-room-dots" aria-hidden="true">\$\{dots7\}/.test(A400)
+    && /place\$\{room\.slots === 1 \? "" : "s"\} taken — \$\{\/\^\[aeiou\]\/i\.test\(room\.rung\)/.test(A400));
+  // ⚠️ AND THE CLEARING QUOTE MUST NOT RESTATE THEM EITHER — `q.said` opens with "N of M places are taken."
+  check("§400: ⚠️ …and the clearing quote does not open by repeating the number beside it",
+    /q\.said\)\.replace\(\/\^\[\^\.\]\*\\bplaces\? \(are \)\?taken/.test(A400));
+
+  /* ---- 2 · ⛔ THE TWO DOORS THAT ONLY THE RETIRED BLOCK HELD ---- */
+  check("§400: ⛔ THE PROMOTION OFFER AND THE FULL REFUSAL SURVIVED THE MOVE — they lived on the retired block alone",
+    /data-hold-promote="\$\{esc\(h\.id\)\}"/.test(build400)
+    && /hold-full">\$\{esc\(roomRefusal\(h, room\)\)\}/.test(build400)
+    && /const offer7 = /.test(A400));
+
+  /* ---- 3 · ⛑ THE CRAFT PICKER MOVED, AND BROUGHT WHAT IT READS ---- */
+  // ⛔ THIS IS THE REAL LESSON OF THE ITEM. Moving the row and leaving its computation behind put it in a scope where
+  // the nearest `crafts` is a joined STRING of <option> tags — whose own filter reads `a.id` where an ability record
+  // carries `abilityId`, so it is empty for every character alive. `crafts.length` was 0, the control rendered never,
+  // nothing threw, and 32 suites stayed green. A moved control must bring its list with it.
+  check("§400: ⛔ THE CRAFT PICKER CARRIES ITS OWN LIST — a moved control that leaves its computation behind is a dead control",
+    /const canApply7 = \(character\.abilities \|\| \[\]\)\.map\(a => fullCatalog\(\)\[a\.abilityId\]\)/.test(A400)
+    && /canApply7\.map\(d => `<option value="\$\{esc\(d\.id\)\}"/.test(A400)
+    && !/\$\{crafts\.length \? `<div class="hold-ctl"><span class="hold-ctl-label">Put a craft to it/.test(A400));
+  check("§400: ⛑ …and it sits with the Build form, which is the other thing you can do here",
+    (() => { const i = A400.indexOf("Put a craft to it"), j = A400.indexOf('data-hold-build="${esc(h.id)}"');
+      return i > 0 && j > 0 && Math.abs(j - i) < 4000 && i < j; })());
+
+  /* ---- 4 · ⚠️ AND THE LIST IT ALL SITS IN STILL BUILDS ---- */
+  // ⛔ I SHIPPED A TEMPORAL DEAD ZONE INTO THIS PANE ONE VERSION AGO: `charged14` was used on the line that builds the
+  // rows and declared six lines below it, so "Who does what here" threw and the whole tab rendered blank. `node --check`
+  // parsed it, the scope scan saw a name declared in an enclosing scope, and 32 suites stayed green — because none of
+  // them RENDERS this pane. The gate is the ORDER of the two, which is the thing that was wrong.
+  check("§400: ⛔ …and every name the job list reads is declared BEFORE the line that reads it",
+    (() => { const d = A400.indexOf("const charged14 ="), u = A400.indexOf("+ charged14 + clearRow");
+      return d > 0 && u > 0 && d < u; })());
 }
 
 /* ══════════ REPORT ══════════ */

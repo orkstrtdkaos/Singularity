@@ -184,7 +184,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.15.11";
+const APP_VERSION = "2.15.12";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -15893,6 +15893,18 @@ function renderHoldingsTab(manageId = null, tab = null) {
             ? `<select data-job-put="${esc(h.id)}" data-kind="${esc(kind)}" aria-label="${esc(label)}"><option value="">+ ${esc(label)}</option>${freeNow.map(id => `<option value="${esc(id)}">${esc(workerName(id))}</option>`).join("")}</select>`
             : `<span class="hint">nobody free</span>`;
           const jobChip = (kind, id) => `<button class="hw-chip" data-job-drop="${esc(h.id)}" data-kind="${esc(kind)}" data-id="${esc(id)}" title="Take them off this">${esc(workerName(id))} ✕</button>`;
+          // ✅ AEVI item 14 — AND A CHARGE THAT NAMES THIS PLACE IS WORK AT THIS PLACE. ⛔ ERIK saw the legs being built
+          // with "nobody at it" while the person he had charged with exactly that stood in another list. The charge is
+          // the same record the Work tab holds; this is a reading of it, never a second copy.
+          const charged14 = (() => {
+            try {
+              const rows = chargesAbout(character, h.id);
+              if (!rows.length) return "";
+              return `<div class="hw-row"><span class="hw-kind">Charged with it<small>given on the Work tab</small></span>
+                <span class="hw-who">${rows.map(r => `<span class="hw-chip" title="${esc(r.charge || "")}">${esc(r.name)}</span>`).join("")}</span>
+                <span class="hw-gain">${rows.length} ${rows.length === 1 ? "person" : "people"}${rows.some(r => r.purpose) ? ` · ${esc([...new Set(rows.map(r => r.purpose).filter(Boolean))].join(", "))}` : ""}</span></div>`;
+            } catch { return ""; }
+          })();
           const roleRows = [
             { kind: "_keeper", label: "Keeper", what: "runs the place — a hold climbs only under one",
               ids: h.steward ? [String(h.steward)] : [],
@@ -15934,18 +15946,6 @@ function renderHoldingsTab(manageId = null, tab = null) {
           }).join("") + charged14 + clearRow;
           // ⛑ OPEN BY DEFAULT NOW, because it is no longer a sub-panel of extras — it is the list of what happens here,
           // and the keeper and the watch live in it.
-          // ✅ AEVI item 14 — AND A CHARGE THAT NAMES THIS PLACE IS WORK AT THIS PLACE. ⛔ ERIK saw the legs being built
-          // with "nobody at it" while the person he had charged with exactly that stood in another list. The charge is
-          // the same record the Work tab holds; this is a reading of it, never a second copy.
-          const charged14 = (() => {
-            try {
-              const rows = chargesAbout(character, h.id);
-              if (!rows.length) return "";
-              return `<div class="hw-row"><span class="hw-kind">Charged with it<small>given on the Work tab</small></span>
-                <span class="hw-who">${rows.map(r => `<span class="hw-chip" title="${esc(r.charge || "")}">${esc(r.name)}</span>`).join("")}</span>
-                <span class="hw-gain">${rows.length} ${rows.length === 1 ? "person" : "people"}${rows.some(r => r.purpose) ? ` · ${esc([...new Set(rows.map(r => r.purpose).filter(Boolean))].join(", "))}` : ""}</span></div>`;
-            } catch { return ""; }
-          })();
           return `<details class="hw" open><summary>Who does what here${at.length ? ` — ${at.length} at standing work, ${esc(String(wage))} ${esc(CONTENT.rules?.economy?.holdStore?.upkeepCurrency || "crystal")} a pass in wages` : ""}</summary>
             ${cands.length ? "" : `<p class="hint pp-must">⚠️ Nobody here is free to be put to work.${(() => {
               // ⛔ SAY WHICH RULE EXCLUDED THEM, AND THE WAY OUT. Erik: "I can't assign people to standing work" — on his
@@ -15986,41 +15986,36 @@ function renderHoldingsTab(manageId = null, tab = null) {
           const busy = h.clearing || null;
           const cost = q?.ok ? Object.entries(q.goods).map(([g, n]) => `${n} ${esc(String(g).replace(/_/g, " "))}`).join(" + ") : "";
           const hands = (h.crew || []).length + (h.garrison || []).length;
+          // ✅ AEVI item 7 — ONE SPOTS BAR, and it is the first thing on the tab: "2 of 2 · legs 0%". The dots, the rung
+          // and the frame came up from the readout below, which is gone.
+          const offer7 = (() => { try { return promotionOffer(h, cfgC, { worldCount: worldCount(), seasonHours: holdSeasonHours() }); } catch { return null; } })();
+          const dots7 = `${"<i class='on'></i>".repeat(Math.max(0, Math.min(room.used, room.slots)))}${"<i></i>".repeat(Math.max(0, room.free))}`;
           return `<div class="hold-ctl"><span class="hold-ctl-label">Room</span>
-            <span><strong>${room.used} of ${room.slots}</strong> place${room.slots === 1 ? "" : "s"} taken${room.boundBy === "frame" ? ` — its ${esc(room.frame || "frame")} are what bind it` : ""}.
+            <span class="hold-room-dots" aria-hidden="true">${dots7}</span>
+            <span><strong>${room.used} of ${room.slots}</strong> place${room.slots === 1 ? "" : "s"} taken — ${/^[aeiou]/i.test(room.rung) ? "an" : "a"} ${esc(room.rung)}${room.frame ? ` on ${esc(room.frame)}` : ""}${room.boundBy === "frame" ? `, and its ${esc(room.frame || "frame")} are what bind it` : ""}.
             ${busy
               ? `<span class="hint">${esc(busy.onFrame ? `Building out the ${busy.frame || "frame"}` : "Clearing ground")} — ${Math.round((busy.progress || 0) * 100)}% done${hands ? "" : ", and <strong>nobody is at it</strong>"}.</span>
                  <button class="link-btn" data-clear-stop="${esc(h.id)}" title="Stop the work — what it cost is spent">Stop</button>`
               : q?.ok
-                ? `<span class="hint">${esc(q.said)}</span>
+                ? `${/* ⚠️ `q.said` OPENS BY RESTATING THE SPOTS — "7 of 7 places are taken. Clearing ground adds one
+                        more." — which is the sentence directly to its left. Item 7's whole complaint is one fact said
+                        twice, so only the part that is NEWS here survives. */""}<span class="hint">${esc(String(q.said).replace(/^[^.]*\bplaces? (are )?taken\.\s*/i, ""))}</span>
                    <button class="opt" data-clear-start="${esc(h.id)}" title="${esc(cost)} and about ${q.passes} pass${q.passes === 1 ? "" : "es"} with ${q.atHands} hands at it">${esc(q.label)} — ${cost}, ~${q.passes} pass${q.passes === 1 ? "" : "es"}${hands ? ` with ${hands} hand${hands === 1 ? "" : "s"}` : ", and you have nobody here to do it"}</button>`
                 : `<span class="hint">${esc(q?.why || "there is no way to make more room here")}</span>`}
-            </span></div>`;
+            </span></div>
+            ${/* ✅ AEVI item 7 — THE TWO DOORS THE RETIRED READOUT ALONE CARRIED. A promotion offer and the refusal a
+                  full hold gives are the only reasons that block existed besides its duplicate numbers; dropping them
+                  with it would have been the migration failure this file has recorded twice. */""}
+            ${offer7 ? `<div class="hold-promo"><span>${esc(h.name || "It")} has filled its room and thrived — it could be ${/^[aeiou]/i.test(offer7.to) ? "an" : "a"} ${esc(offer7.to)}, with ${offer7.more} more ${offer7.more === 1 ? "room" : "rooms"}.</span>
+              <button class="opt" data-hold-promote="${esc(h.id)}">Name it ${/^[aeiou]/i.test(offer7.to) ? "an" : "a"} ${esc(offer7.to)}</button></div>`
+              : room.full ? `<div class="hint hold-full">${esc(roomRefusal(h, room))}</div>` : ""}`;
         })()}
-        ${(() => {
-          // ⛔ §179 — THE CONTROLS ARE LABELLED ROWS, not a drift of loose buttons. "Put a craft to it" is the
-          // Build tab's own job, and it keeps the shape the gate asserts because the shape is the point.
-          const g = CONTENT.rules?.economy?.holdStore?.growth || null;
-          if (!g) return "";
-          const fns = new Set((g.improveFunctions || []).map(String));
-          const crafts = (character.abilities || []).map(a => fullCatalog()[a.abilityId]).filter(d => d && (d.functions || []).some(v => fns.has(String(v))) && !(h.improvements || []).some(i => i.abilityId === d.id));
-          return `<div class="hold-controls">
-          ${crafts.length ? `<div class="hold-ctl"><span class="hold-ctl-label">Put a craft to it</span><select data-hold-craft="${esc(h.id)}">${crafts.map(d => `<option value="${esc(d.id)}">${esc(d.name || d.id)}</option>`).join("")}</select><button class="opt" data-hold-improve="${esc(h.id)}" title="Put a craft you carry to the place — it comes up a rung, once per craft">Apply</button></div>` : ""}
-          </div>`;
-        })()}
-        ${(() => { // ⛔ CCODE-429 (SNG-628/630): the room — its rung or frame, what is taken, and when it is full both ways out, or the next rung
-          const room = roomOf(h, cfgF);
-          if (!room) return "";
-          const offer = promotionOffer(h, cfgF, { worldCount: worldCount(), seasonHours: holdSeasonHours() });
-          const dots = `${"<i class='on'></i>".repeat(Math.min(room.used, room.slots))}${"<i></i>".repeat(room.free)}`;
-          return `<div class="hold-room"><span class="hold-room-dots" aria-hidden="true">${dots}</span>
-            ${/* ⚠️ SNG-652 §1 — "Rooms" → "feature spots". Aevi: a well, a wall or a mine is not a room. The
-                  engine field is still `room`/`roomOf`, which is right: it is the room a PLACE has, and what
-                  goes in it is a feature. Only the player's word changes. */""}
-            <span class="hint">${room.used} of ${room.slots} feature spots — ${/^[aeiou]/i.test(room.rung) ? "an" : "a"} ${esc(room.rung)}${room.frame ? ` on ${esc(room.frame)}` : ""}${room.full ? " · full" : ""}</span></div>
-            ${offer ? `<div class="hold-promo"><span>${esc(h.name || "It")} has filled its room and thrived — it could be ${/^[aeiou]/i.test(offer.to) ? "an" : "a"} ${esc(offer.to)}, with ${offer.more} more ${offer.more === 1 ? "room" : "rooms"}.</span>
-              <button class="opt" data-hold-promote="${esc(h.id)}">Name it ${/^[aeiou]/i.test(offer.to) ? "an" : "a"} ${esc(offer.to)}</button></div>`
-              : room.full ? `<div class="hint hold-full">${esc(roomRefusal(h, room))}</div>` : ""}`; })()}
+        ${(() => { // ✅ AEVI item 7 — THE SECOND SPOTS READOUT IS GONE; what only IT carried moved up into the first.
+          // ⛔ MEASURED: this said "2 of 2 feature spots — a post on legs · full" four blocks below a bar that had just
+          // said "2 of 2 places taken". Two sentences, the same two numbers, a loose control between them — which is
+          // what "the hold's content is scattered" means in practice. ⚠️ THE PROMOTION OFFER AND THE FULL REFUSAL WERE
+          // ONLY EVER HERE, so they moved rather than went: a migration loses what only the old surface held.
+          return ""; })()}
         <div class="hint" style="margin-top:2px">${built || "nothing built yet"}</div>
         <div class="opt-row" style="gap:6px;flex-wrap:wrap;margin-top:4px">
           ${/* ⛔ CCODE-495 (SNG-652 §8a) — WHICH CRAFT MADE IT. `craftIds` has been on a feature record since the
@@ -16028,6 +16023,23 @@ function renderHoldingsTab(manageId = null, tab = null) {
                 `addFeature`'s six callers cannot name a craft and the sixth is the GM's op, which has never sent
                 one. ⚠️ So the field was authored, registered, loaded and read, and the door a PLAYER walks —
                 standing there having just cast the thing — could not express it. This is that door. */""}
+          ${/* ✅ AEVI item 7 — "Put a craft to it" now sits WITH the Build form: both are things you can do to the
+                place, and it used to sit in the middle of what the place IS. ⚠️ It applies a craft to the HOLD (a rung),
+                which is why it is beside the form and not on a feature row — see the reply's open question. */""}
+          ${(() => {
+            // ⛔ §179 — THE CONTROLS ARE LABELLED ROWS, not a drift of loose buttons, and this one carries its OWN list.
+            // ⚠️ WHEN I MOVED THIS ROW I LEFT ITS COMPUTATION BEHIND, and the nearest `crafts` at the new site is a joined
+            // STRING of <option> tags whose own filter reads `a.id` where an ability carries `abilityId` — so it is empty
+            // for every character alive. `crafts.length` was 0, the control rendered never, and nothing threw. A moved
+            // control must bring what it reads with it.
+            const g7 = CONTENT.rules?.economy?.holdStore?.growth || null;
+            if (!g7) return "";
+            const fns7 = new Set((g7.improveFunctions || []).map(String));
+            const canApply7 = (character.abilities || []).map(a => fullCatalog()[a.abilityId])
+              .filter(d => d && (d.functions || []).some(v => fns7.has(String(v))) && !(h.improvements || []).some(i => i.abilityId === d.id));
+            if (!canApply7.length) return "";
+            return `<div class="hold-ctl"><span class="hold-ctl-label">Put a craft to it</span><select data-hold-craft="${esc(h.id)}">${canApply7.map(d => `<option value="${esc(d.id)}">${esc(d.name || d.id)}</option>`).join("")}</select><button class="opt" data-hold-improve="${esc(h.id)}" title="Put a craft you carry to the place — it comes up a rung, once per craft">Apply</button></div>`;
+          })()}
           ${opts ? `<select data-hold-kind="${esc(h.id)}">${opts}</select><input data-hold-fname="${esc(h.id)}" placeholder="what it is called (optional)" style="max-width:200px"><select data-hold-bcraft="${esc(h.id)}" title="Which of your crafts raised it — what it DOES decides how long it stands: a craft that makes or mends is permanent, one that holds ground or defends lasts a season and then wants renewing. It costs the craft's own energy, the same as putting it to the place through Apply a craft."><option value="">— no craft, just work —</option>${(character.abilities || []).map(a => fullCatalog()[a.abilityId]).filter(d => d && (d.functions || []).length).map(d => { const e = craftPlacementCost(d, CONTENT.rules?.economy?.holdStore?.growth); return `<option value="${esc(d.id)}"${e > (Number(character.energy) || 0) ? " disabled" : ""}>${esc(d.name || d.id)} — ${e} energy${e > (Number(character.energy) || 0) ? ` (you have ${Number(character.energy) || 0})` : ""}</option>`; }).join("")}</select><button class="opt" data-hold-build="${esc(h.id)}" title="Pay the price — goods from the store, then the purse — and the work begins; it stands when its days have run">Build</button><button class="opt" data-hold-feature="${esc(h.id)}" title="The story built it, or the place came with it — free to record, and it still costs its keep">Record what the story built</button>` : ""}
           ${/* ⛔ MEASURED AT 375px: eight of these eleven costs sat off the right edge of a 309px sheet —
                 unreadable, and with overflow visible unscrollable too.

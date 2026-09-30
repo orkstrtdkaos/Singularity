@@ -16,6 +16,18 @@
   "next": [],
   "releases": [
     {
+      "version": "2.15.12",
+      "date": "2026-09-30",
+      "entries": [
+        {
+          "kind": "change",
+          "title": "A holding’s Build tab reads in one order",
+          "summary": "The spots, what stands, what you can build, and the work in progress — once each, in that order.",
+          "detail": "The Build tab said how many feature spots a place had twice, in different words, with a control sitting between the two. There is one spots bar now — how many places are taken, what the place is, and how the ground is being cleared — then what stands there, then the things you can do."
+        }
+      ]
+    },
+    {
       "version": "2.15.11",
       "date": "2026-09-30",
       "entries": [

@@ -327,11 +327,133 @@
     "On the switchback descent into deep night, Splarf calls ahead to Cevaine seeking conversation—and learns that some forms of presence work best when they do not break into speech."
   ],
   "currentLocationId": "the_thinning",
-  "activeScene": null,
+  "activeScene": {
+    "locationId": "the_thinning",
+    "turns": [
+      {
+        "player": "Ask Cevaine her thoughts on death.",
+        "summary": "On the descent toward the waystation, Splarf asks Cevaine directly about death—and receives the precise, fearful, half-understanding of a lattice-trained sentinel beginning to question what her own discipline was built to deny.",
+        "narration": "The path down has grown steep enough that footing matters. You call ahead into the dark where Cevaine walks ten paces in front of you, her form visible only because you know where to look—the precise geometry of her moving through the night.\n\n\"What do you think about death?\" The question sits strangely in the dark, too large and too direct. There is no preamble, no leading. Just the thing you need to know.\n\nCevaine does not break stride. For a long time—long enough that you wonder if she heard—there is only the sound of boots on stone and the distant roar of water from the switchbacks below. Then: \"Death is the only perfect lattice.\" Her voice carries back even, untiring. \"Everything else moves through time. Everything else changes. Death is the one thing that completes—the equation that solves, the form that holds without further iteration.\"\n\nShe does not turn. Does not slow. The ten paces between you remains the ten paces.\n\n\"I spent two years learning to hold order that refuses to end. Learning to *be* precision that cannot yield. And I was wrong about what that precision was *for*.\" A pause as the path curves. \"The lattice teaches that endings are failure. Loss of pattern. But I think—\" She stops, not to rest but to breathe, to choose her next words with the same care she uses to read stone. \"I think the lattice is afraid of the only perfect thing it cannot control.\"\n\nAnother curve, and the water-sound grows louder. She speaks over it without raising her voice. \"What made you ask?\"\n\nIt is a real question. She genuinely wants to know."
+      }
+    ],
+    "lastTurn": {
+      "narration": "The path down has grown steep enough that footing matters. You call ahead into the dark where Cevaine walks ten paces in front of you, her form visible only because you know where to look—the precise geometry of her moving through the night.\n\n\"What do you think about death?\" The question sits strangely in the dark, too large and too direct. There is no preamble, no leading. Just the thing you need to know.\n\nCevaine does not break stride. For a long time—long enough that you wonder if she heard—there is only the sound of boots on stone and the distant roar of water from the switchbacks below. Then: \"Death is the only perfect lattice.\" Her voice carries back even, untiring. \"Everything else moves through time. Everything else changes. Death is the one thing that completes—the equation that solves, the form that holds without further iteration.\"\n\nShe does not turn. Does not slow. The ten paces between you remains the ten paces.\n\n\"I spent two years learning to hold order that refuses to end. Learning to *be* precision that cannot yield. And I was wrong about what that precision was *for*.\" A pause as the path curves. \"The lattice teaches that endings are failure. Loss of pattern. But I think—\" She stops, not to rest but to breathe, to choose her next words with the same care she uses to read stone. \"I think the lattice is afraid of the only perfect thing it cannot control.\"\n\nAnother curve, and the water-sound grows louder. She speaks over it without raising her voice. \"What made you ask?\"\n\nIt is a real question. She genuinely wants to know.",
+      "sceneSummary": "On the descent toward the waystation, Splarf asks Cevaine directly about death—and receives the precise, fearful, half-understanding of a lattice-trained sentinel beginning to question what her own discipline was built to deny.",
+      "choices": [
+        {
+          "label": "Tell her about Hoss—about the life that was erased, and why ending one family's claim mattered enough to send a message across the veil.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "death_life": -0.3
+          },
+          "difficulty": "normal",
+          "intentTags": [
+            "speak",
+            "share",
+            "honor"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Walk in silence with her, letting the question settle—sometimes the strongest answer is to keep the question alive, unresolved.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "violence_peace": 0.5,
+            "concrete_abstract": 0.3
+          },
+          "difficulty": "very easy",
+          "intentTags": [
+            "careful",
+            "present"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Ask her to teach you what she knows about ending—about the perfect lattice—so you can understand it the way she is learning to.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {
+            "mechanical_spiritual": -0.4,
+            "death_life": 0.3
+          },
+          "difficulty": "normal",
+          "intentTags": [
+            "learn",
+            "study"
+          ],
+          "trivial": false
+        }
+      ],
+      "deeds": [],
+      "characterDeltas": {},
+      "ledgerEvents": [],
+      "questUpdates": [],
+      "standingOps": [],
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "cevaine",
+          "note": "Called ahead into the dark and asked directly about death—no preamble, no softening. Answered with precision and then fear: the lattice teaches that endings are failure, but she is beginning to think the lattice is afraid of the only perfect thing it cannot control. Asked in return why the question mattered.",
+          "learned": [
+            "Cevaine sees death as the only perfect lattice—the equation that solves, the form that holds. She spent two years learning to be precision that cannot yield, and is now questioning what that was built to defend against."
+          ],
+          "age": 28,
+          "sex": "female"
+        }
+      ],
+      "scene": {
+        "setting": "A steep switchback descent into deep night—the path carved into rock face, footing treacherous, water-roar from below growing louder. Cevaine ten paces ahead, visible only by her precise movement. Stars visible overhead where the ridge allows. Cold air rising from the lower elevations.",
+        "npcsPresent": [
+          {
+            "name": "Cevaine",
+            "state": "Walking downhill into the dark, ten paces ahead, speaking toward the question without turning"
+          }
+        ],
+        "objects": [
+          "The stone path beneath your feet",
+          "The dark all around",
+          "The water-sound below"
+        ],
+        "threads": [
+          "Cevaine has asked why you needed to know her thoughts on death—a genuine question waiting for answer",
+          "The waystation shelter waits below, still hours of descent away",
+          "The voided assignment is still in your pack—the proof that death, or at least erasure, can be undone on paper"
+        ]
+      },
+      "sceneEnded": false
+    },
+    "sceneState": {
+      "setting": "A steep switchback descent into deep night—the path carved into rock face, footing treacherous, water-roar from below growing louder. Cevaine ten paces ahead, visible only by her precise movement. Stars visible overhead where the ridge allows. Cold air rising from the lower elevations.",
+      "npcsPresent": [
+        {
+          "name": "Cevaine",
+          "state": "Walking downhill into the dark, ten paces ahead, speaking toward the question without turning"
+        }
+      ],
+      "objects": [
+        "The stone path beneath your feet",
+        "The dark all around",
+        "The water-sound below"
+      ],
+      "threads": [
+        "Cevaine has asked why you needed to know her thoughts on death—a genuine question waiting for answer",
+        "The waystation shelter waits below, still hours of descent away",
+        "The voided assignment is still in your pack—the proof that death, or at least erasure, can be undone on paper"
+      ]
+    },
+    "beats": 1,
+    "subPlace": {
+      "slug": "the-lower-pass-waystation",
+      "name": "The Lower-Pass Waystation",
+      "day": 3
+    }
+  },
   "clock": {
     "schemaVersion": 1,
     "day": 5,
-    "hour": 1,
+    "hour": 2,
     "realAnchor": null
   },
   "companions": [
@@ -497,7 +619,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d4] At the waystation, her sentinel-form finally loosens into rest. She sits beside Splarf, maintaining careful distance but present. Her breathing deepens toward sleep. The discipline that held the veil is beginning to release—not shattering, but yielding with precision, moment by moment.",
         "[d4] Descended from The Thinning's opened veil with Splarf at her side. Entered the waystation shelter and allowed her lattice-trained form to release into rest—falling asleep against Splarf's shoulder, the discipline finally yielding to exhaustion. The sentinel's form is no longer held rigid by duty…",
         "[d4] Has entered full rest against Splarf—her lattice-trained form finally releasing the discipline that held her upright through the vigil. Sleep is deep and unguarded. This is integration, a stage the form permits.",
         "[d4] Sleeping deeply at the waystation, her sentinel-form finally released, the discipline that held the veil breaking yielding to rest. Her hand rests relaxed at her side, her breathing matched to the shelter's quiet rhythm.",
@@ -506,17 +627,18 @@
         "[d4] Wakes to Splarf's quiet call and rises with geometric precision—the form releasing into choice rather than rigidity. Moves toward the downhill path with the character, ready for descent and the meeting that waits there.",
         "[d4] On the descent, her body has become something she's allowing to be noticed—not performance, but deliberate awareness of being seen. The sentinel's discipline has shifted into choice.",
         "[d4] On the path down, she moves with deliberate awareness of your presence ten paces behind. She paused on a wider section, not quite looking back but enough that you knew the pause was for you. She's chosen to let you see her this way.",
-        "[d5] Called ahead to break the silence; recognized the question as the moment when form and presence require distance to remain what it is. Her response was precise refusal of conversation—not coldness, but geometry. She continues downhill, reading the path with her whole body."
+        "[d5] Called ahead to break the silence; recognized the question as the moment when form and presence require distance to remain what it is. Her response was precise refusal of conversation—not coldness, but geometry. She continues downhill, reading the path with her whole body.",
+        "[d5] Called ahead into the dark and asked directly about death—no preamble, no softening. Answered with precision and then fear: the lattice teaches that endings are failure, but she is beginning to think the lattice is afraid of the only perfect thing it cannot control. Asked in return why the…"
       ],
       "knownFacts": [
-        "Presence without demand can be a form of holding that the lattice honors",
         "Rest is not failure—it is integration, a stage the form permits and even honors",
         "The body released can trust its anchor",
         "Sleep is a form of choice, and she can choose it",
         "Sleep is a choice, and she can choose it",
         "The form can recognize when silence is doing work that words cannot",
         "Distance and presence are not opposed things—they are both forms of choice and respect",
-        "Sometimes the answer to an invitation is 'I should not', and that answer is itself a form of honoring what came before"
+        "Sometimes the answer to an invitation is 'I should not', and that answer is itself a form of honoring what came before",
+        "Cevaine sees death as the only perfect lattice—the equation that solves, the form that holds. She spent two years learning to be precision that cannot yield, and is now questioning what that was…"
       ],
       "skillsObserved": [
         "The ability to release precision without losing presence",
@@ -540,7 +662,7 @@
       },
       "image": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Tall%20angular%20woman%2C%20translucent%20pale%20skin%2C%20geometric%20precision%20in%20gaze%2C%20rigid%20lattice-disciplined%20posture%2C%20ethereal%20sentinel%20bearing%20witness%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=47408&nologo=true",
       "_portraitTier": "devoted",
-      "met": 25,
+      "met": 26,
       "bondType": "romantic",
       "bondStage": "together",
       "deeds": [
@@ -559,7 +681,8 @@
         }
       ],
       "imagePinned": true,
-      "sex": "female"
+      "sex": "female",
+      "age": 28
     },
     "the-messenger": {
       "id": "the-messenger",
@@ -1045,7 +1168,7 @@
         "locationId": "the_thinning"
       }
     ],
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 2,
     "recentOffers": [
       {
         "thing": "The caretaker's quiet competence and the shelter's genuine welcome—a place that asks nothing and offers warmth without demand",
@@ -9325,18 +9448,18 @@
     ]
   },
   "tendencies": {
-    "stealth": 2.637753095167232,
-    "strategic": 4.942454255077598,
-    "cautious": 13.642871783238627,
-    "cerebral": 6.631674640750208,
-    "patient": 4.457906623674149,
-    "devotion": 0.947001013562269,
-    "risky": 2.885479058738784,
-    "generous": 6.285972550327032,
-    "social": 10.243188881211994,
-    "craft": 0.5940295773527055,
-    "amorous": 3.5781780747823086,
-    "leadership": 0.7195483871809846
+    "stealth": 2.571809267788051,
+    "strategic": 4.818892898700658,
+    "cautious": 13.301799988657661,
+    "cerebral": 7.465882774731453,
+    "patient": 4.346458958082295,
+    "devotion": 0.9233259882232122,
+    "risky": 2.8133420822703146,
+    "generous": 6.128823236568856,
+    "social": 10.987109159181694,
+    "craft": 0.5791788379188878,
+    "amorous": 3.488723622912751,
+    "leadership": 0.70155967750146
   },
   "aptitudes": [
     "silver_tongue",
@@ -9344,7 +9467,7 @@
     "shadow",
     "naive"
   ],
-  "actionCount": 63,
+  "actionCount": 64,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -9811,8 +9934,8 @@
     "source": "personal",
     "notes_for_gm": "A generated PERSONAL arc (SNG-133) — surface it as a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790737627634,
-  "rev": 291,
+  "updatedAt": 1790737824065,
+  "rev": 292,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -10041,7 +10164,7 @@
   ],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "the_numinous_reach": 70
+    "the_numinous_reach": 71
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -10081,10 +10204,10 @@
     {
       "id": "sess-5",
       "startedAt": "2026-09-30T02:56:49.543Z",
-      "lastAt": "2026-09-30T03:07:07.627Z",
+      "lastAt": "2026-09-30T03:10:24.054Z",
       "startDay": 92,
       "endDay": 92,
-      "beats": 6
+      "beats": 7
     }
   ],
   "establishedFacts": [
@@ -10146,14 +10269,14 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 63,
-    "scene": 63,
-    "choices": 63,
+    "sceneSummary": 64,
+    "scene": 64,
+    "choices": 64,
     "offer": 34,
     "codexUpdates": 34,
     "imagePrompt": 26,
     "gambitApt": 48,
-    "sceneEnded": 61,
+    "sceneEnded": 62,
     "characterDeltas": 50,
     "arcOps": 1,
     "factUpdates": 7,
@@ -10162,7 +10285,7 @@
     "deeds": 11,
     "ledgerEvents": 4,
     "questUpdates": 18,
-    "npcUpdates": 52,
+    "npcUpdates": 53,
     "generateRequest": 2,
     "newEncounter": 1,
     "encounterOps": 1,
@@ -10173,7 +10296,7 @@
     "standingOps": 1,
     "moveTo": 1
   },
-  "_opTurns": 63,
+  "_opTurns": 64,
   "practice": {
     "schemaVersion": 1,
     "uses": {
@@ -10346,7 +10469,7 @@
     "negotiate": 1,
     "travel": 3,
     "romantic": 3,
-    "rapport": 4,
+    "rapport": 5,
     "care": 1,
     "heal": 1,
     "prepare": 1,
@@ -10356,7 +10479,8 @@
     "endure": 1,
     "rest": 1,
     "scout": 2,
-    "risky": 1
+    "risky": 1,
+    "investigate": 1
   },
   "_stageOpRefusals": [
     "the-document-and-the-ditch: not-current-stage (named \"stage_4_record\", current is \"null\")"
@@ -10782,7 +10906,7 @@
   "worldEvents": [],
   "locationState": {},
   "_opUnknown": {
-    "sceneSummary": 6
+    "sceneSummary": 7
   },
   "_debtReceipts": [],
   "_bandNotes": null,
@@ -10807,5 +10931,14 @@
   ],
   "aurasOff": {
     "hush": true
-  }
+  },
+  "_axesDropped": [
+    {
+      "at": "2026-09-30T03:10:24.053Z",
+      "key": "truth_falsehood",
+      "value": 0.4,
+      "why": "not a spectrum id",
+      "from": "choice"
+    }
+  ]
 }

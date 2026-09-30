@@ -1007,7 +1007,7 @@
   },
   "worldState": {
     "schemaVersion": 1,
-    "lastTickDay": 4,
+    "lastTickDay": 5,
     "eventStages": {
       "water_crisis": {
         "stage": 2,
@@ -1044,14 +1044,6 @@
       "falsehood_truth": -0.05
     },
     "news": [
-      {
-        "day": 4,
-        "worldDay": 88,
-        "text": "This reaches your area — A Radiant agent from the High Luminary appears at Whistling Woman Post bearing knowledge of the sealed chamber and demanding its surrender—the machinery beneath the valley is no longer hidden. (near gen-whistling-woman-post)",
-        "tier": "event",
-        "section": "elsewhere",
-        "impactsLocal": true
-      },
       {
         "day": 4,
         "worldDay": 88,
@@ -1236,11 +1228,18 @@
         "tier": "event",
         "section": "world",
         "figureId": "waystation-caretaker"
+      },
+      {
+        "day": 5,
+        "worldDay": 92,
+        "text": "The Gralloch Crown is stronger than it was — 23 more under it.",
+        "tier": "event",
+        "section": "world"
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 2210,
-    "lastSharedReadAt": "2026-09-30T02:49:53.448Z",
+    "lastGenCount": 2211,
+    "lastSharedReadAt": "2026-09-30T03:27:48.673Z",
     "lastTickWorldDay": 92,
     "lastCanonWorldDay": 92,
     "pressureQueue": [
@@ -1287,6 +1286,21 @@
           "name": "glimmerlings"
         },
         "addedDay": 4,
+        "locationId": "the_thinning"
+      },
+      {
+        "source": "threat-attack",
+        "kind": "threat-attack",
+        "subjectId": "beast_hollow_pace",
+        "aimedAtPlayer": true,
+        "urgency": 3,
+        "oneLineHook": "A a hollow-pace has come down onto the character here — not stumbled into, but ARRIVED, hunting. Defend, or drive it off.",
+        "becomes": {
+          "type": "encounter",
+          "encounterId": "beast_hollow_pace",
+          "name": "a hollow-pace"
+        },
+        "addedDay": 5,
         "locationId": "the_thinning"
       }
     ],
@@ -8406,6 +8420,14 @@
         "worldDay": 92,
         "text": "The game was updated to v2.15.6 — 61 new, 68 fixed, 24 changed.",
         "loggedAt": "2026-09-30T02:50:09.794Z"
+      },
+      {
+        "day": 5,
+        "worldDay": 92,
+        "text": "The Gralloch Crown is stronger than it was — 23 more under it.",
+        "tier": "event",
+        "section": "world",
+        "loggedAt": "2026-09-30T03:27:52.533Z"
       }
     ],
     "seatsTaken": {
@@ -8572,10 +8594,6 @@
         "label": "Cevaine",
         "kind": "person",
         "facts": [
-          "[d3] Cevaine's discipline is a lattice-trained structure that processes information by distributing weight. When Splarf told her that the message has a witness on this side, the variable changed the equation she has been holding. The refusal is no longer the only option. She can now *stop* refusing—and…",
-          "[d3] The sentinel of the sealed veil who held form through blood loss and exhaustion released her burden when offered genuine presence without demand. The lattice-trained form can yield with precision. She has accepted Splarf's offer to learn together and travel downhill.",
-          "[d4] [while away] Cevaine has begun the first lattice-reading exercises in earnest, tracing the residual pattern the veil left at the moment of release — rough work, but the shape of it is starting to hold in her mind.",
-          "[d4] The lattice-trained discipline is no longer a cage but a framework chosen moment by moment. She is learning to name what it holds: the witness, the presence, the one who cannot be categorized. Acceptable does not begin to encompass it.",
           "[d4] [while away] Cevaine spent the day cross-referencing two contradictory lattice-readings from the veil's edge, and though the contradiction isn't resolved, she has named it — written it down in her own terms — which is the first real grip she has on the problem.",
           "[d4] [while away] Cevaine spent two nights cross-referencing veil-fracture patterns against the lattice ledgers, isolating a second resonance signature — the order is becoming legible to her, if only in fragments.",
           "[d4] [while away] A section of Cevaine's schema collapsed under its own notation — two Lattice symbols she chose for the Thinning's boundary-states turn out to be formally identical, meaning the grammar she built around them is, at its core, a loop that proves nothing.",
@@ -8608,9 +8626,9 @@
         "createdDay": 1,
         "entityId": "cevaine",
         "updatedDay": 5,
-        "summary": "Cevaine is a Lattice-Cities order-reader trained in geometric precision, stationed as sentinel at the veil-breach at The Thinning. They discovered that absolute precision cannot read will or choice—specifically, The Unbroken Practice's centered stillness that yields no pattern to solve—and held their post through blood loss and exhaustion rather than yield, until offered genuine presence without demand by Splarf, which changed the equation they were holding and allowed them to release their burden. Since then, Cevaine has begun learning to use their lattice-trained discipline as a chosen framework rather than a cage, tracing residual patterns from the veil's release and attempting to map…",
+        "summary": "Cevaine is a Lattice-Cities order-reader trained in geometric precision, tasked with reading and stabilizing the sealed veil at The Thinning. They encountered the veil's own agency—a stillness and refusal that geometric systems cannot solve or categorize—and held their post through blood loss and exhaustion by maintaining absolute formal discipline, until offered genuine presence without demand by Splarf. They have since released their burden, begun traveling downhill with Splarf, and are now learning to apply lattice-reading to the veil's patterns themselves, discovering both contradictions in their schema and fragments of new order. Cevaine is beginning to question whether the lattice's…",
         "summarisedAt": 8,
-        "summaryDay": 4,
+        "summaryDay": 5,
         "archive": [
           "[d1] Cevaine of the Seventh Measure has encountered something that geometric precision cannot solve: the veil's own agency, and the stillness of The Unbroken Practice. They are waiting to understand how to think about problems that have no seam to close.",
           "[d1] Geometric precision cannot read choice or will. A boundary that refuses is not structure but agency—a decision. The Seventh Measure has no category for things that choose.",
@@ -8624,7 +8642,11 @@
           "[d2] A discipline of absolute geometric form can hold a body steady through blood loss, through cold, through the refusal of care—but only to a point. Cevaine's own admission: the form is now *compensating*, not solving. This is the first visible crack in their practice—not a breaking, but a bending at…",
           "[d2] The Unbroken Practice can hold form through blood loss and exhaustion by pure geometric discipline, but it cannot heal the body—it can only defer the problem. Changing posture reads as doubt to a Lattice-trained sentinel; stillness is the work itself. The form is holding, but it is now…",
           "[d3] The sealed veil at The Thinning recognized Splarf through his story and reached toward knowledge of Hoss—the mending woman who packed and left Crestfall Notch. The boundary knows her, and the sent figure was meant to deliver something *about* that loss.",
-          "[d3] Cevaine's discipline can hold form through blood loss, through exhaustion, through the refusal of care—but it cannot hold forever. The form is compensating now, visibly. The sentinel is on the edge of a choice: yield and let the veil break, or hold until the body fails entirely. The fear shows for…"
+          "[d3] Cevaine's discipline can hold form through blood loss, through exhaustion, through the refusal of care—but it cannot hold forever. The form is compensating now, visibly. The sentinel is on the edge of a choice: yield and let the veil break, or hold until the body fails entirely. The fear shows for…",
+          "[d3] Cevaine's discipline is a lattice-trained structure that processes information by distributing weight. When Splarf told her that the message has a witness on this side, the variable changed the equation she has been holding. The refusal is no longer the only option. She can now *stop* refusing—and…",
+          "[d3] The sentinel of the sealed veil who held form through blood loss and exhaustion released her burden when offered genuine presence without demand. The lattice-trained form can yield with precision. She has accepted Splarf's offer to learn together and travel downhill.",
+          "[d4] [while away] Cevaine has begun the first lattice-reading exercises in earnest, tracing the residual pattern the veil left at the moment of release — rough work, but the shape of it is starting to hold in her mind.",
+          "[d4] The lattice-trained discipline is no longer a cage but a framework chosen moment by moment. She is learning to name what it holds: the witness, the presence, the one who cannot be categorized. Acceptable does not begin to encompass it."
         ]
       },
       "presence-without-demand": {
@@ -10083,8 +10105,8 @@
     "source": "personal",
     "notes_for_gm": "A generated PERSONAL arc (SNG-133) — surface it as a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790738738244,
-  "rev": 297,
+  "updatedAt": 1790738872540,
+  "rev": 303,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -10424,23 +10446,23 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 69,
-    "scene": 69,
-    "choices": 69,
+    "sceneSummary": 68,
+    "scene": 68,
+    "choices": 68,
     "offer": 34,
-    "codexUpdates": 38,
-    "imagePrompt": 31,
-    "gambitApt": 53,
-    "sceneEnded": 67,
-    "characterDeltas": 55,
+    "codexUpdates": 37,
+    "imagePrompt": 30,
+    "gambitApt": 52,
+    "sceneEnded": 66,
+    "characterDeltas": 54,
     "arcOps": 1,
     "factUpdates": 8,
-    "placeUpdates": 19,
-    "timeOps": 47,
+    "placeUpdates": 18,
+    "timeOps": 46,
     "deeds": 12,
     "ledgerEvents": 4,
     "questUpdates": 18,
-    "npcUpdates": 58,
+    "npcUpdates": 57,
     "generateRequest": 2,
     "newEncounter": 1,
     "encounterOps": 1,
@@ -10451,7 +10473,7 @@
     "standingOps": 1,
     "moveTo": 1
   },
-  "_opTurns": 69,
+  "_opTurns": 68,
   "practice": {
     "schemaVersion": 1,
     "uses": {
@@ -10824,7 +10846,7 @@
   },
   "bands": [],
   "_silasGrantsRevoked": true,
-  "_lastProjectDay": 4,
+  "_lastProjectDay": 5,
   "featureOffers": [],
   "purse": {
     "crystal": 0,
@@ -10851,56 +10873,66 @@
         "how": "renown",
         "day": null
       },
-      "lastVerb": "feud",
-      "lastVerbDay": 4
+      "lastVerb": "raid",
+      "lastVerbDay": 5,
+      "wins": 1,
+      "winHow": null,
+      "grownHeads": 23,
+      "grewDay": 5
     },
     "power_undercount": {
       "known": {
         "how": "renown",
         "day": null
       },
-      "lastVerb": "steal",
-      "lastVerbDay": 4
+      "lastVerb": "fence",
+      "lastVerbDay": 5
     },
     "power_echo_bridge": {
       "known": {
         "how": "renown",
         "day": null
       },
-      "lastVerb": "toll",
-      "lastVerbDay": 4
+      "lastVerb": "protect",
+      "lastVerbDay": 5
     },
     "power_ender_host": {
       "known": {
         "how": "renown",
         "day": null
       },
-      "lastVerb": "levy",
-      "lastVerbDay": 4
+      "lastVerb": "expand",
+      "lastVerbDay": 5,
+      "wins": 2,
+      "winHow": "expand"
     },
     "power_radiant_plateau": {
       "known": {
         "how": "renown",
         "day": null
       },
-      "lastVerb": "patrol",
-      "lastVerbDay": 4
+      "lastVerb": "expand",
+      "lastVerbDay": 5,
+      "wins": 2,
+      "winHow": "expand"
     },
     "power_harmonic_heights": {
       "known": {
         "how": "renown",
         "day": null
       },
-      "lastVerb": "protect",
-      "lastVerbDay": 4
+      "lastVerb": "expand",
+      "lastVerbDay": 5,
+      "wins": 2,
+      "winHow": "expand"
     },
     "power_millbrook_council": {
       "known": {
         "how": "renown",
         "day": null
       },
-      "lastVerb": "quest",
-      "lastVerbDay": 4,
+      "lastVerb": "protect",
+      "lastVerbDay": 5,
       "wins": 1,
       "winHow": "quest"
     },
@@ -10909,19 +10941,21 @@
         "how": "renown",
         "day": null
       },
-      "lastVerb": "tax",
-      "lastVerbDay": 4
+      "lastVerb": "crusade",
+      "lastVerbDay": 5
     },
     "power_grovehome_moot": {
       "known": {
         "how": "renown",
         "day": null
       },
-      "lastVerb": "protect",
-      "lastVerbDay": 4,
-      "lossFrom": "power_deepwood_moot",
-      "lossHow": "feud",
-      "losses": 1
+      "lastVerb": "quest",
+      "lastVerbDay": 5,
+      "lossFrom": null,
+      "lossHow": null,
+      "losses": 0,
+      "wins": 1,
+      "winHow": "quest"
     },
     "power_scaffold_court": {
       "known": {
@@ -10931,133 +10965,161 @@
       "lossFrom": "power_the_ceaseless",
       "lossHow": "feud",
       "losses": 1,
-      "lastVerb": "tax",
-      "lastVerbDay": 4
+      "lastVerb": "crusade",
+      "lastVerbDay": 5
     },
     "power_pressureholt_schedule": {
       "known": {
         "how": "renown",
         "day": null
       },
-      "lastVerb": "inform",
-      "lastVerbDay": 4
+      "lastVerb": "tax",
+      "lastVerbDay": 5
     },
     "power_long_choir": {
       "known": {
         "how": "home",
         "day": null
       },
-      "lastVerb": "protect",
-      "lastVerbDay": 4
+      "lastVerb": "quest",
+      "lastVerbDay": 5,
+      "wins": 2,
+      "winHow": "quest"
     },
     "power_cairnhold_wardens": {
       "known": {
         "how": "renown",
         "day": null
       },
-      "lastVerb": "patrol",
-      "lastVerbDay": 4,
-      "lossFrom": "power_harvest_hand",
-      "lossHow": "feud",
-      "losses": 1
+      "lastVerb": "quest",
+      "lastVerbDay": 5,
+      "lossFrom": null,
+      "lossHow": null,
+      "losses": 0,
+      "wins": 1,
+      "winHow": "quest"
     },
     "power_the_scour": {
       "known": {
         "how": "renown",
         "day": null
       },
-      "lastVerb": "patrol",
-      "lastVerbDay": 4
+      "lastVerb": "tax",
+      "lastVerbDay": 5
     },
     "power_grand_lattice": {
       "known": {
         "how": "renown",
         "day": null
       },
-      "lastVerb": "inform",
-      "lastVerbDay": 4
+      "lastVerb": "expand",
+      "lastVerbDay": 5,
+      "wins": 2,
+      "winHow": "expand"
     },
     "power_hollow_court": {
       "known": {
         "how": "renown",
         "day": null
       },
-      "lastVerb": "inform",
-      "lastVerbDay": 4,
-      "lossFrom": "power_seraphic_orders",
-      "lossHow": "crusade",
-      "losses": 1
+      "lastVerb": "expand",
+      "lastVerbDay": 5,
+      "lossFrom": null,
+      "lossHow": null,
+      "losses": 0,
+      "wins": 1,
+      "winHow": "expand"
     },
     "power_seraphic_orders": {
       "known": {
         "how": "renown",
         "day": null
       },
-      "lastVerb": "crusade",
-      "lastVerbDay": 4
+      "lastVerb": "patrol",
+      "lastVerbDay": 5
     },
     "power_deepwood_moot": {
       "known": {
         "how": "renown",
         "day": null
       },
-      "lastVerb": "feud",
-      "lastVerbDay": 4,
-      "lossFrom": "power_grovehome_moot",
-      "lossHow": "feud",
-      "losses": 1
+      "lastVerb": "protect",
+      "lastVerbDay": 5,
+      "lossFrom": null,
+      "lossHow": null,
+      "losses": 0,
+      "heldDay": 5
     },
     "power_switchback_tollmen": {
-      "lastVerb": "raid",
-      "lastVerbDay": 4
+      "lastVerb": "tribute",
+      "lastVerbDay": 5
     },
     "power_edge_riders": {
-      "lastVerb": "raid",
-      "lastVerbDay": 4
+      "lastVerb": "tribute",
+      "lastVerbDay": 5
     },
     "power_keelmouth_slip": {
-      "lastVerb": "recruit",
-      "lastVerbDay": 4,
+      "lastVerb": "protect",
+      "lastVerbDay": 5,
       "wins": 1,
       "winHow": "recruit"
     },
     "power_firstsight_barony": {
-      "lastVerb": "tax",
-      "lastVerbDay": 4
+      "lastVerb": "expand",
+      "lastVerbDay": 5,
+      "wins": 2,
+      "winHow": "expand"
     },
     "power_blaze_unshadowed": {
-      "lastVerb": "patrol",
-      "lastVerbDay": 4
+      "lastVerb": "recruit",
+      "lastVerbDay": 5,
+      "wins": 0,
+      "winHow": null,
+      "lossFrom": null,
+      "lossHow": null,
+      "losses": 0
     },
     "power_flesh_temple": {
-      "lastVerb": "patrol",
-      "lastVerbDay": 4
+      "lastVerb": "recruit",
+      "lastVerbDay": 5,
+      "wins": 2,
+      "winHow": "recruit"
     },
     "power_vacated_custody": {
-      "lastVerb": "levy",
-      "lastVerbDay": 4
+      "lastVerb": "expand",
+      "lastVerbDay": 5,
+      "wins": 2,
+      "winHow": "expand"
     },
     "power_the_ceaseless": {
-      "lastVerb": "feud",
-      "lastVerbDay": 4,
+      "lastVerb": "expand",
+      "lastVerbDay": 5,
       "lossFrom": "power_scaffold_court",
-      "lossHow": "feud",
-      "losses": 1
+      "lossHow": "crusade",
+      "losses": 1,
+      "wins": 0,
+      "winHow": null
     },
     "power_harvest_hand": {
-      "lastVerb": "feud",
-      "lastVerbDay": 4,
-      "lossFrom": "power_cairnhold_wardens",
-      "lossHow": "feud",
-      "losses": 1
+      "lastVerb": "recruit",
+      "lastVerbDay": 5,
+      "lossFrom": null,
+      "lossHow": null,
+      "losses": 0,
+      "wins": 1,
+      "winHow": "recruit"
     },
     "power_the_scouring": {
-      "lastVerb": "patrol",
-      "lastVerbDay": 4
+      "lastVerb": "recruit",
+      "lastVerbDay": 5,
+      "wins": 2,
+      "winHow": "recruit"
     },
     "power_harborward": {
-      "lastVerb": "protect",
-      "lastVerbDay": 4
+      "lastVerb": "quest",
+      "lastVerbDay": 5,
+      "wins": 2,
+      "winHow": "quest"
     }
   },
   "worldEvents": [],

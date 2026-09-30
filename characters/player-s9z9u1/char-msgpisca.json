@@ -1046,42 +1046,6 @@
     "news": [
       {
         "day": 4,
-        "worldDay": 88,
-        "text": "This reaches your area — The High Luminary's reach extends beyond the Radiant Plateau — she knows of the sealed chamber beneath Millbrook and has stationed an agent to intercept the band before they reach the Standing Annex (near gen-the-made-gate)",
-        "tier": "event",
-        "section": "elsewhere",
-        "impactsLocal": true,
-        "locationId": "gen-the-made-gate"
-      },
-      {
-        "day": 4,
-        "worldDay": 92,
-        "text": "Across the valley, What Wakes Beneath moved forward to Stirring: The substrate that runs the crafts is flickering in more than one place at once; something under everything is coming back online.",
-        "tier": "event",
-        "section": "world"
-      },
-      {
-        "day": 4,
-        "worldDay": 83,
-        "text": "The Scouring Hand has come back from death. The valley has one of its own again.",
-        "tier": "event",
-        "section": "world"
-      },
-      {
-        "day": 4,
-        "worldDay": 89,
-        "text": "The Choirmaster Who Would Not Return and The Last Choirmistress finally met. The Choirmaster walked away from it; The Last Choirmistress did not, and will not be seen for a season.",
-        "tier": "event",
-        "section": "world",
-        "kind": "clash",
-        "winnerId": "the_unbodied_choir_master",
-        "loserId": "the_last_choirmistress",
-        "outcome": "wounded",
-        "locationId": "the_thinning",
-        "placedBy": "winnerId"
-      },
-      {
-        "day": 4,
         "worldDay": 87,
         "text": "Vessa Who Trades in True Names broke The Glad Dissolution — a stranger, and now an enemy. The Glad Dissolution is out of the reckoning while the wound holds.",
         "tier": "event",
@@ -1235,11 +1199,39 @@
         "text": "The Gralloch Crown is stronger than it was — 23 more under it.",
         "tier": "event",
         "section": "world"
+      },
+      {
+        "day": 5,
+        "worldDay": 92,
+        "text": "The Radiant Council is stronger than it was — 32 more under it.",
+        "tier": "event",
+        "section": "world"
+      },
+      {
+        "day": 5,
+        "worldDay": 92,
+        "text": "The Harmonic Council is stronger than it was — 28 more under it.",
+        "tier": "event",
+        "section": "world"
+      },
+      {
+        "day": 5,
+        "worldDay": 92,
+        "text": "The Grovehome Moot is stronger than it was — 40 more under it, their champion home from the grey road.",
+        "tier": "event",
+        "section": "world"
+      },
+      {
+        "day": 5,
+        "worldDay": 92,
+        "text": "The Wardens of Cairnhold is stronger than it was — 32 more under it, their champion home from the grey road.",
+        "tier": "event",
+        "section": "world"
       }
     ],
     "unseenNews": [],
     "lastGenCount": 2211,
-    "lastSharedReadAt": "2026-09-30T03:27:48.673Z",
+    "lastSharedReadAt": "2026-09-30T03:29:41.228Z",
     "lastTickWorldDay": 92,
     "lastCanonWorldDay": 92,
     "pressureQueue": [
@@ -1270,7 +1262,7 @@
           "encounterId": "beast_cinder_mote_drift",
           "name": "a cinder-mote drift"
         },
-        "addedDay": 4,
+        "addedDay": 5,
         "locationId": "the_thinning"
       },
       {
@@ -1299,6 +1291,21 @@
           "type": "encounter",
           "encounterId": "beast_hollow_pace",
           "name": "a hollow-pace"
+        },
+        "addedDay": 5,
+        "locationId": "the_thinning"
+      },
+      {
+        "source": "threat-attack",
+        "kind": "threat-attack",
+        "subjectId": "beast_warpling_hare",
+        "aimedAtPlayer": true,
+        "urgency": 3,
+        "oneLineHook": "A a warpling has come down onto the character here — not stumbled into, but ARRIVED, hunting. Defend, or drive it off.",
+        "becomes": {
+          "type": "encounter",
+          "encounterId": "beast_warpling_hare",
+          "name": "a warpling"
         },
         "addedDay": 5,
         "locationId": "the_thinning"
@@ -8428,6 +8435,38 @@
         "tier": "event",
         "section": "world",
         "loggedAt": "2026-09-30T03:27:52.533Z"
+      },
+      {
+        "day": 5,
+        "worldDay": 92,
+        "text": "The Radiant Council is stronger than it was — 32 more under it.",
+        "tier": "event",
+        "section": "world",
+        "loggedAt": "2026-09-30T03:29:24.032Z"
+      },
+      {
+        "day": 5,
+        "worldDay": 92,
+        "text": "The Harmonic Council is stronger than it was — 28 more under it.",
+        "tier": "event",
+        "section": "world",
+        "loggedAt": "2026-09-30T03:29:24.032Z"
+      },
+      {
+        "day": 5,
+        "worldDay": 92,
+        "text": "The Grovehome Moot is stronger than it was — 40 more under it, their champion home from the grey road.",
+        "tier": "event",
+        "section": "world",
+        "loggedAt": "2026-09-30T03:29:46.044Z"
+      },
+      {
+        "day": 5,
+        "worldDay": 92,
+        "text": "The Wardens of Cairnhold is stronger than it was — 32 more under it, their champion home from the grey road.",
+        "tier": "event",
+        "section": "world",
+        "loggedAt": "2026-09-30T03:29:46.044Z"
       }
     ],
     "seatsTaken": {
@@ -10105,8 +10144,8 @@
     "source": "personal",
     "notes_for_gm": "A generated PERSONAL arc (SNG-133) — surface it as a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790738872540,
-  "rev": 303,
+  "updatedAt": 1790738986050,
+  "rev": 308,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -10875,7 +10914,7 @@
       },
       "lastVerb": "raid",
       "lastVerbDay": 5,
-      "wins": 1,
+      "wins": 2,
       "winHow": null,
       "grownHeads": 23,
       "grewDay": 5
@@ -10903,7 +10942,7 @@
       },
       "lastVerb": "expand",
       "lastVerbDay": 5,
-      "wins": 2,
+      "wins": 1,
       "winHow": "expand"
     },
     "power_radiant_plateau": {
@@ -10913,8 +10952,10 @@
       },
       "lastVerb": "expand",
       "lastVerbDay": 5,
-      "wins": 2,
-      "winHow": "expand"
+      "wins": 1,
+      "winHow": "expand",
+      "grownHeads": 32,
+      "grewDay": 5
     },
     "power_harmonic_heights": {
       "known": {
@@ -10923,8 +10964,10 @@
       },
       "lastVerb": "expand",
       "lastVerbDay": 5,
-      "wins": 2,
-      "winHow": "expand"
+      "wins": 1,
+      "winHow": "expand",
+      "grownHeads": 28,
+      "grewDay": 5
     },
     "power_millbrook_council": {
       "known": {
@@ -10954,8 +10997,10 @@
       "lossFrom": null,
       "lossHow": null,
       "losses": 0,
-      "wins": 1,
-      "winHow": "quest"
+      "wins": 0,
+      "winHow": null,
+      "grownHeads": 40,
+      "grewDay": 5
     },
     "power_scaffold_court": {
       "known": {
@@ -10983,8 +11028,10 @@
       },
       "lastVerb": "quest",
       "lastVerbDay": 5,
-      "wins": 2,
-      "winHow": "quest"
+      "wins": 1,
+      "winHow": "quest",
+      "grownHeads": 12,
+      "grewDay": 5
     },
     "power_cairnhold_wardens": {
       "known": {
@@ -10996,8 +11043,10 @@
       "lossFrom": null,
       "lossHow": null,
       "losses": 0,
-      "wins": 1,
-      "winHow": "quest"
+      "wins": 0,
+      "winHow": null,
+      "grownHeads": 32,
+      "grewDay": 5
     },
     "power_the_scour": {
       "known": {
@@ -11014,8 +11063,10 @@
       },
       "lastVerb": "expand",
       "lastVerbDay": 5,
-      "wins": 2,
-      "winHow": "expand"
+      "wins": 1,
+      "winHow": "expand",
+      "grownHeads": 52,
+      "grewDay": 5
     },
     "power_hollow_court": {
       "known": {
@@ -11027,8 +11078,10 @@
       "lossFrom": null,
       "lossHow": null,
       "losses": 0,
-      "wins": 1,
-      "winHow": "expand"
+      "wins": 0,
+      "winHow": null,
+      "grownHeads": 30,
+      "grewDay": 5
     },
     "power_seraphic_orders": {
       "known": {
@@ -11067,8 +11120,10 @@
     "power_firstsight_barony": {
       "lastVerb": "expand",
       "lastVerbDay": 5,
-      "wins": 2,
-      "winHow": "expand"
+      "wins": 1,
+      "winHow": "expand",
+      "grownHeads": 14,
+      "grewDay": 5
     },
     "power_blaze_unshadowed": {
       "lastVerb": "recruit",
@@ -11082,14 +11137,18 @@
     "power_flesh_temple": {
       "lastVerb": "recruit",
       "lastVerbDay": 5,
-      "wins": 2,
-      "winHow": "recruit"
+      "wins": 1,
+      "winHow": "recruit",
+      "grownHeads": 18,
+      "grewDay": 5
     },
     "power_vacated_custody": {
       "lastVerb": "expand",
       "lastVerbDay": 5,
-      "wins": 2,
-      "winHow": "expand"
+      "wins": 1,
+      "winHow": "expand",
+      "grownHeads": 6,
+      "grewDay": 5
     },
     "power_the_ceaseless": {
       "lastVerb": "expand",
@@ -11106,20 +11165,26 @@
       "lossFrom": null,
       "lossHow": null,
       "losses": 0,
-      "wins": 1,
-      "winHow": "recruit"
+      "wins": 0,
+      "winHow": null,
+      "grownHeads": 12,
+      "grewDay": 5
     },
     "power_the_scouring": {
       "lastVerb": "recruit",
       "lastVerbDay": 5,
-      "wins": 2,
-      "winHow": "recruit"
+      "wins": 1,
+      "winHow": "recruit",
+      "grownHeads": 16,
+      "grewDay": 5
     },
     "power_harborward": {
       "lastVerb": "quest",
       "lastVerbDay": 5,
-      "wins": 2,
-      "winHow": "quest"
+      "wins": 1,
+      "winHow": "quest",
+      "grownHeads": 14,
+      "grewDay": 5
     }
   },
   "worldEvents": [],

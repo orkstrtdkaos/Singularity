@@ -67,7 +67,10 @@ export function worldTabHtml({ arcs = [], foot = {}, effects = [], name = "", ta
     ${foot.coverage && foot.coverage.lived && !foot.coverage.onThePage ? `<div class="hint">The valley’s people keep time for themselves; what they do with it is still being written.</div>` : ""}
   </div>` : "";
 
-  return `<div class="screen" style="max-width:680px">
+  // ✅ AEVI items 1+5 — THE PAGE WIDTH, like the other eight tabs. ⚠️ This one lives in its own module, so a sweep whose
+  // population was app.js alone left The World at 680 while the other eight moved to 1100 — the population of a fix is
+  // not the file you happened to be editing.
+  return `<div class="screen screen-ground">
     <h2>${esc(name)}</h2>
     ${tabBar("world")}
     <p class="hint">What the valley is arguing about, and who is spending themselves on it. Names you have met are <span class="wt-who wt-known">marked</span>.</p>

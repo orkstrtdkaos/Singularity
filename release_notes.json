@@ -16,6 +16,30 @@
   "next": [],
   "releases": [
     {
+      "version": "2.15.10",
+      "date": "2026-09-30",
+      "entries": [
+        {
+          "kind": "change",
+          "title": "Every page is one width",
+          "summary": "Screens and tabs share one width instead of seventeen.",
+          "detail": "Page widths were written screen by screen and had drifted to seventeen different values between 520 and 1180 pixels — the nine character tabs alone used five, so Bands was noticeably narrower than Holdings, and on the title screen the banner stopped 220 pixels short of the card beneath it. There are two widths now, one for a page and one for a form, and no screen carries its own."
+        },
+        {
+          "kind": "feature",
+          "title": "A holding opens as a page",
+          "summary": "A place you hold fills the page instead of a cramped pop-up.",
+          "detail": "Opening a holding used to raise a pop-up 560 pixels wide with six tabs of controls inside it. It is a full page now, at the width of the holdings board, with a link back to the list. All six tabs and everything on them are unchanged."
+        },
+        {
+          "kind": "change",
+          "title": "Who walks with you is on Party",
+          "summary": "Capacity and Personnel moved from Holdings to Party, and say what they mean.",
+          "detail": "How many people can walk with you, how many can run work in your name, and who is actually at your side were at the bottom of the Holdings page, which is about places. They are on Party now. \"At your side 8 of 3 · full\" also read as a limit you had broken: the number beside it is how many can stand forward in a fight, not how many may travel with you, so it now reads \"8 with you · 3 can stand forward\"."
+        }
+      ]
+    },
+    {
       "version": "2.15.9",
       "date": "2026-09-30",
       "entries": [

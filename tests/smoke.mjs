@@ -16616,8 +16616,11 @@ await (async () => {
   // and this check follows the name: the claim is only allowed while that surface really does open a picture.
   const via = surfaces.filter(t => /data-lightbox-via/.test(t)).map(t => (t.match(/data-lightbox-via="([^"]+)"/) || [])[1]);
   check(`CCODE-169: …and every ${via.length} thumbnail that defers its lightbox names a surface that really opens one`,
+    // ⚠️ THE SECOND CLAUSE PINNED `class="item-detail-modal" id="hold-modal"` — the wrapper, not the claim. Aevi's
+    // item 6 made the hold a PAGE, so the overlay class is gone and the surface is `hold-page`. What must hold is that
+    // the surface a thumbnail DEFERS TO really opens a lightbox; which element carries it is not this gate's business.
     via.every(target => new RegExp(`id="${target}"`).test(markup169))
-    && via.every(() => /class="item-detail-modal" id="hold-modal"[\s\S]{0,900}data-lightbox=/.test(markup169)),
+    && via.every(target => new RegExp(`id="${target}"[\\s\\S]{0,900}data-lightbox=`).test(markup169)),
     () => `via: ${via.join(", ")}`);
 
   // ⚠️ AND A FACE MUST BE REDRAWABLE, not merely viewable. A quest illustration or a scene banner has no

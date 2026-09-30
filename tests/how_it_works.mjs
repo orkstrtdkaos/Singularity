@@ -11254,9 +11254,12 @@ console.log("\n── §106 · a hold says what it costs, and every control does
     /keeper: \$\{h\.steward \? esc\(nameOf\(h\.steward\)\) : "<em>nobody<\/em>"\} \u00b7 produces:/.test(app106) && /Per pass \$\{infoDot\("hold\.pass"\)\}/.test(app106));
   // ⚠️ AND THIS ONE PINNED `class="opt hold-card-open"` — the button is styled as her gold primary now and has
   // dropped `opt`, which changed nothing about whether it opens the popup. The claim is the DOOR, not the class.
-  check("§106: …and the popup opens from the card, closes on the ✕, and closes on the backdrop — the house pattern",
+  // ⚠️ AND THIS CLAUSE PINNED THE BACKDROP, which AEVI'S ITEM 6 DELIBERATELY RETIRED: the hold is a page now, and a
+  // page has no outside to click. The claim was never "there is a backdrop" — it was **there is a door in and a way
+  // out**, which is what this asks now. ⛔ The way out must still exist; only its shape moved.
+  check("§106: …and the place opens from the card and has a way back out — the house pattern, on a page",
     /class="hold-card-open" data-hold-open=/.test(app106) && /hold-modal-close/.test(app106)
-    && /hmBack\.onclick = \(e\) => \{ if \(e\.target === hmBack\)/.test(app106));
+    && /hold-page-back/.test(app106) && /All your holdings/.test(app106));
 }
 
 /* ═════ §107 — THE WORLD SHOULD BE CROWDED, AND NOTHING EVER OFFERED IT (SPEC_npc_presence_cadence) ═════ */
@@ -31032,8 +31035,12 @@ console.log("\n── §380 · one reading, three surfaces ──");
   // ⛑ HER GRAMMAR, as structure rather than as taste: panels on the ground, a labelled board, a review row that
   // carries its verb, and a card whose numbers sit under 10px uppercase labels.
   check("§380: ⛔ THE PANELS FLOAT ON THE GROUND — `.screen` is itself a panel, so a card inside it has no edge; this one class is the largest single difference between the two looks",
+    // ⚠️ THIS PINNED THE COUNT AT TWO, which was true when only Holdings and Party floated on the ground. Items 1+5
+    // made every top-level page a ground page, so an exact count was measuring how much of the app had adopted her look
+    // rather than whether the look exists. The claim is the CLASS and that the boards use it.
     /\.screen-ground \{[^}]*background: none/.test(cssB)
-    && (appB.match(/class="screen screen-ground"/g) || []).length === 2);
+    && (appB.match(/class="screen screen-ground"/g) || []).length >= 2
+    && /chrome\(`<div class="screen screen-ground">\s*\n\s*\$\{characterTabBar\("holdings"\)\}/.test(appB));
 
   check("§380: ⛑ the board reads label · number · one line, and the card that WANTS you is outlined in gold",
     /\.gs-stat-l \{[^}]*text-transform: uppercase/.test(cssB)
@@ -33476,8 +33483,11 @@ console.log("\n── §395 · the hold sheet stays open, and every job is one l
   // ⛑ AND THE CLOSES THAT SHOULD CLOSE STILL DO — the ✕, the backdrop, and arriving from another screen.
   check("§395: ⛑ …and the ways OUT still close it — the ✕, the backdrop, and coming in from the character screen",
     (() => {
+      // ⚠️ ONE OF THE TWO CLOSERS WAS THE BACKDROP, and item 6 retired it with the overlay. What must hold is that a
+      // way out EXISTS and lands on the list — and, still, that opening a hold from the character screen works.
       const closers = [...code395.matchAll(/renderHoldingsTab\(null\)/g)].length;
-      return closers >= 2 && /hold-modal-close.*renderHoldingsTab\(null\)/s.test(code395);
+      return closers >= 1 && /hold-modal-close.*renderHoldingsTab\(null\)/s.test(code395)
+        && /hold-page-back/.test(code395);
     })());
 
   /* ---- 2 · ⛔ ONE LIST, AND EVERY JOB IS IN IT ---- */
@@ -33791,6 +33801,107 @@ console.log("\n── §397 · which frames carry which feature ──");
   check("§397: ⛔ `roomOf` AND THE FRAME RULE ASK ONE FUNCTION WHICH FRAME A HOLD IS ON",
     frameNames397.every(f => { const h = on397(f); return H397.roomOf(h, cfg397)?.frame === CR397.frameOf(h, frames397); })
     && CR397.frameOf(on397(null), frames397) === null);
+}
+
+/* ══════════ §398 · ONE PAGE WIDTH, A HOLD THAT IS A PAGE, AND CAPACITY WHERE THE PEOPLE ARE ══════════ */
+// ⛔ ERIK, FROM PLAY 2026-09-30 (items 1, 5, 6, 11): page widths differ (*"the landing banner vs the player card"*;
+// *"Bands narrower than Holdings"*), the hold *"opens in a pop-up that cramps it"*, Capacity and Personnel sit at the
+// bottom of Holdings, and *"At your side 8 of 3 · full"* reads as a capacity he has broken. And: *"the holdings screen
+// is excellent"* — make the rest match it.
+//
+// ⛑ MEASURED IN THE BROWSER, on his own save at 1440px: FIFTY-ONE screen roots across SEVENTEEN widths from 520 to
+// 1180, forty-six written inline as `style="max-width:Npx"`. The nine character tabs alone spanned five of them
+// (Holdings/Party 1100, Legion 980, Jobs 820, Bands/Traits 760, Chronicle/News 680) and `renderCreate` used six inside
+// one flow. On the landing screen the hero ran to 760 and the player card inside it stopped at 540 — a 220px step on a
+// single screen, which is exactly what his eye caught.
+//
+// ⚠️ THE ROLES WERE ALREADY IN THE CSS and only the numbers were loose — `.screen` is a card, `.screen-ground` is a
+// page — so the token went on those two classes. A number written at the call site is a number that drifts, which is
+// why the ratchet below is the most important check in this section.
+console.log("\n── §398 · one page width ──");
+{
+  const CSS398 = rd("style.css");
+  const A398 = rd("app.js");
+
+  /* ---- 1 · ⛔ THE TOKEN EXISTS AND THE TWO ROLES READ IT ---- */
+  check("§398: ⛔ ONE PAGE WIDTH AND ONE CARD WIDTH, declared as tokens and read by the two role classes",
+    /--page-w:\s*\d+px/.test(CSS398) && /--card-w:\s*\d+px/.test(CSS398)
+    && /\.screen \{[^}]*max-width:\s*var\(--card-w\)/.test(CSS398)
+    && /\.screen-ground \{[^}]*max-width:\s*var\(--page-w\)/.test(CSS398));
+
+  // ⛔ THE RATCHET, AND THE POINT OF THE WHOLE SECTION: a screen root may not carry its width inline again. This is
+  // what went wrong for 51 screens — not one bad number, but a place to write numbers.
+  const inline398 = [...A398.matchAll(/chrome\(`<div class="screen[a-z \-]*"[^>]*?max-width:\s*\d+px/g)];
+  check("§398: ⛔ NO SCREEN ROOT WRITES ITS OWN WIDTH — the ratchet, because a number at the call site is a number that drifts",
+    inline398.length === 0, `${inline398.length} screen root(s) still carry an inline max-width`);
+
+  // ⚠️ AND THE SWEEP'S POPULATION IS EVERY FILE THAT PAINTS A SCREEN, not the one I happened to be editing. The World
+  // tab's markup lives in `engine/worldtab.js`, and a sweep over app.js alone left it at 680 while the other eight moved.
+  const ENGINE398 = readdirSync(join(root, "engine")).filter(f => f.endsWith(".js")).map(f => rd(`engine/${f}`)).join(String.fromCharCode(10));
+  check("§398: ⚠️ …and the ratchet covers the engine too — one of the nine tabs paints from its own module",
+    !/<div class="screen[a-z \-]*"[^>]*?max-width:\s*\d+px/.test(ENGINE398));
+
+  /* ---- 2 · ⛑ EVERY ONE OF THE NINE TABS IS A PAGE ---- */
+  // ⛑ ASKED OF THE TAB BAR ITSELF, so a tenth tab added later is covered without touching this check.
+  const bar398 = (A398.match(/function characterTabBar\(active\) \{[\s\S]*?\n\}/) || [""])[0];
+  const tabKeys398 = [...bar398.matchAll(/active === "([a-z]+)"/g)].map(m => m[1]);
+  check("§398: ⛑ THE TAB BAR NAMES NINE TABS, and the check below is over whatever it names",
+    tabKeys398.length >= 9 && tabKeys398.includes("holdings") && tabKeys398.includes("bands"));
+  // every screen that renders the bar must render it inside a PAGE, not a card
+  const carriers398 = [...A398.matchAll(/chrome\(`<div class="(screen[a-z \-]*)"[^`]{0,400}?characterTabBar\("([a-z]+)"\)/g)]
+    .map(m => ({ cls: m[1].trim(), tab: m[2] }));
+  const world398 = /<div class="(screen[a-z \-]*)">[\s\S]{0,200}?What the valley/.test(ENGINE398)
+    ? (ENGINE398.match(/<div class="(screen[a-z \-]*)">[\s\S]{0,200}?What the valley/) || [])[1] : null;
+  check("§398: ⛔ BANDS IS NOT NARROWER THAN HOLDINGS — every tab that carries the bar is a page, none a 640px card",
+    carriers398.length >= 7 && carriers398.every(c => /screen-ground/.test(c.cls)),
+    `${carriers398.filter(c => !/screen-ground/.test(c.cls)).map(c => c.tab).join(", ") || "all pages"}`);
+  check("§398: ⚠️ …including The World, whose markup is in engine/worldtab.js and which a sweep over app.js missed",
+    world398 === null || /screen-ground/.test(world398));
+
+  /* ---- 3 · ⛑ THE LANDING IS ONE EDGE ---- */
+  // ⛔ The hero ran to 760 and the card inside it to 540. The claim is that they share ONE declaration now, so the step
+  // cannot come back by editing one of them.
+  check("§398: ⛔ THE LANDING BANNER AND THE PLAYER CARD SHARE ONE EDGE — the 220px step Erik saw",
+    /\.pick-screen \{[^}]*max-width:\s*var\(--card-w\)/.test(CSS398)
+    && /\.pick-card \{[^}]*max-width:\s*100%/.test(CSS398));
+  check("§398: ⛑ …and the what's-new banner is the page's width, not 640 under a 1100 page",
+    /\.wn-shell \{[^}]*max-width:\s*var\(--page-w\)/.test(CSS398));
+
+  /* ---- 4 · ⛔ A HOLD IS A PAGE, NOT A POP-UP (item 6) ---- */
+  check("§398: ⛔ THE HOLD IS A PAGE AT THE PAGE WIDTH — it was a fixed overlay around a 560px sheet",
+    /\.hold-page \{[^}]*max-width:\s*var\(--page-w\)/.test(CSS398)
+    && /return `<div class="hold-page" id="hold-modal">/.test(A398)
+    && !/item-detail-sheet pp-sheet[^`]*max-width:560px/.test(A398));
+  // ⛑ ITS SIX TABS STAY — she asked for the page, not a redesign of what is on it.
+  check("§398: ⛑ …and its six tabs are untouched: overview, people, build, store, defence, records",
+    (() => { const m = A398.match(/const TABS = \[\["overview"[^\]]*\]\];?/) || A398.match(/const TABS = \[[\s\S]{0,260}?\];/);
+      const s = m ? m[0] : ""; return ["overview","people","build","store","defence","records"].every(k => s.includes(`"${k}"`)); })());
+  // ⛔ AND THE BACKDROP HANDLER IS GONE WITH THE BACKDROP. A page has no outside to click; leaving that handler in
+  // would have re-created "it kicks me back out to the screen behind it" through geometry rather than through state.
+  check("§398: ⛔ …and no click-outside handler survives — a page has no backdrop, and that was last week's bug",
+    !/getElementById\("hold-modal"\);\s*if \(hmBack\)/.test(A398)
+    && /getElementById\("hold-modal-close"\)/.test(A398));
+  check("§398: ⛑ …and the list steps aside rather than sitting behind it",
+    /\$\{manageId \? "" : `<div class="page-title">/.test(A398));
+
+  /* ---- 5 · ⛑ CAPACITY AND PERSONNEL ARE WHERE THE PEOPLE ARE (item 11) ---- */
+  const holdFn398 = (A398.match(/function renderHoldingsTab\([\s\S]*?\n\}\nfunction /) || [""])[0];
+  const partyFn398 = (A398.match(/function renderPartyTab\([\s\S]*?\n\}\nfunction /) || [""])[0];
+  check("§398: ⛔ CAPACITY AND PERSONNEL MOVED TO PARTY — out of the page about places, onto the page about people",
+    !/codex-title[^`]*>Capacity</.test(holdFn398) && /holdCapacityHtml\(/.test(partyFn398)
+    && /function holdCapacityHtml\(/.test(A398));
+  // ⚠️ ONE COMPOSER, ONE FORMATTER. Two copies of a sentence is how "8 of 3" got written in the first place.
+  check("§398: ⚠️ …composed once, and the meter lifted to one definition rather than copied into the second tab",
+    A398.split("function holdCapacityHtml(").length - 1 === 1
+    && A398.split("function capacityMeter(").length - 1 === 1);
+  // ⛔ THE REWORD: "8 of 3 · full" was a TRUE number under a FALSE label — since CCODE-555 the cap governs forward
+  // places, not how many may walk with you. Her words, and "full" must not follow them.
+  check("§398: ⛔ “At your side” SAYS WHAT IT MEANS — “N with you · M can stand forward”, and never “full”",
+    /with you · \$\{places\} can stand forward/.test(A398)
+    && /!said && used >= total/.test(A398));
+  check("§398: ⛑ …while “Running things for you” keeps “used of total”, where the cap really is a ceiling",
+    /meter\("Running things for you", delegates\.length, delegCap,/.test(A398)
+    && !/meter\("Running things for you"[^)]*`\$\{[^}]*with you/.test(A398));
 }
 
 /* ══════════ REPORT ══════════ */

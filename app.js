@@ -183,7 +183,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.15.9";
+const APP_VERSION = "2.15.10";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -3654,7 +3654,7 @@ function openFeedback() {
   const ctx = buildFeedbackContext();
   const TYPES = [["bug", "🐛 Bug"], ["idea", "💡 Idea"], ["feel", "🤔 Felt off"]];
   const q = feedbackQueue().length;
-  chrome(`<div class="screen" style="max-width:560px">
+  chrome(`<div class="screen">
     <h2>⚑ Feedback</h2>
     <p class="hint" style="margin-bottom:10px">One tap, one sentence. Your version, where you are, your character and the last beat attach automatically — Aevi reads it without asking a single follow-up.</p>
     <div class="fb-types">${TYPES.map(([id, label]) => `<button class="fb-type ${id === _feedbackType ? "on" : ""}" data-fbtype="${id}">${label}</button>`).join("")}</div>
@@ -3749,7 +3749,7 @@ async function renderPreviewLegs() {
     </div>`;
   };
 
-  chrome(`<div class="screen" style="max-width:820px">
+  chrome(`<div class="screen screen-ground">
     <h2>🧪 Preview Legs <span class="hint" style="text-transform:none">— ${verifiedActive} of ${active.length} left${cleared.length ? ` · ${cleared.length} cleared` : ""}${_previewLegsData.buildVersion ? ` · data for v${esc(_previewLegsData.buildVersion)}` : ""}</span></h2>
     <div class="cs-block">
       <h3 class="codex-title" style="font-size:15px">Try each kind <span class="hint" style="text-transform:none">— SNG-247: five kinds, five colours, five exit rules</span></h3>
@@ -4044,7 +4044,7 @@ function renderMachine() {
       ${rounds.map(roundCard).join("")}` : "<div class='hint'>No skill-battle rounds yet — run a 🧪 Legs fight or a test encounter, take a few rounds, then return.</div>"}
   </div>`;
 
-  chrome(`<div class="screen" style="max-width:900px">
+  chrome(`<div class="screen screen-ground">
     <h2>🔬 See the Machine <span class="hint" style="text-transform:none">— last ${caps.length} model call${caps.length === 1 ? "" : "s"} this session</span></h2>
     <p class="hint" style="margin-bottom:12px">The assembled prompt, the raw model response, what parsed, and which ops fired — the SNG-179 diagnosis as a standing panel. Captures live in memory for this session only (dev-mode; a player never reaches this).</p>
     ${gmCalls.length ? `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">GM prompt load <span class="hint" style="text-transform:none">— the SNG-236/237/238 root: a saturated prompt drops soft directives</span></h3>
@@ -4191,7 +4191,7 @@ function renderAuthorPanel() {
   const now = `L${character.level} · ${character.xp || 0} xp · ${character.skillPoints || 0} sp · ${character.health}/${character.maxHealth} hp · ${character.energy}/${character.maxEnergy} en · ${(character.abilities || []).length} crafts · ${(character.inventory || []).length} items`;
   const vitals = ["health", "energy", "maxHealth", "maxEnergy", "attunement"];
   const genLocs = Object.values(character.generated?.location || {}).filter(l => l && !l.supersededBy); // CCODE-15: reparentable stubs
-  chrome(`<div class="screen" style="max-width:760px">
+  chrome(`<div class="screen screen-ground">
     <h2>⚙ Author — god-mode <span class="dev-badge">DEV</span></h2>
     <p class="hint" style="margin-bottom:6px">Erik-as-<strong>author</strong>, not the character. No fairness, no trace — this is the separate god-mode surface (SNG-207b), never the in-fiction GM. Safety (content-rating, minor-safety) lives in its own controls and is never touched here. Every edit is logged below.</p>
     <div class="cs-block" style="font-family:var(--font-ui);font-size:12px;margin-bottom:10px">${esc(now)}</div>
@@ -4537,7 +4537,7 @@ function renderRoster() {
  *  say which one they are. Sync config is the ONLY setup a new device needs — no export/import. */
 async function renderDiscover(note = "") {
   if (!syncEnabled()) { renderSettings("Add your GitHub owner, repo, and token in Settings — then your characters follow you across devices automatically."); return; }
-  chrome(`<div class="screen" style="max-width:640px">
+  chrome(`<div class="screen">
     <h2>Find your characters</h2>
     <p class="hint" style="margin-bottom:12px">Reading the shared world for the characters you've played on other devices. No files to move — this is the only setup a new device needs.</p>
     ${note ? `<p class="hint" style="margin-bottom:10px">${esc(note)}</p>` : ""}
@@ -4586,7 +4586,7 @@ async function renderDiscoverCharacters(entry) {
   if (entry.profile) { const lp = loadProfile(entry.playerKey); if (!lp || String(lp.displayName || "") !== String(entry.profile.displayName || "") || lp.retired) saveProfile(entry.profile); }
   choosePlayer(entry.playerKey);
   loadIdentity();
-  chrome(`<div class="screen" style="max-width:640px">
+  chrome(`<div class="screen">
     <h2>${esc(entry.displayName)}'s characters</h2>
     <p class="hint" style="margin-bottom:12px">From the shared world. Adopt one to play it here — its latest save comes with it.</p>
     <div id="disc-chars"><div class="insight">Reading characters…</div></div>
@@ -6363,7 +6363,7 @@ function renderNewsTab() {
     if (g && g.day === d) g.items.push(n); else groups.push({ day: d, items: [n] });
   }
   const dayHead = (d) => d == null ? "Undated" : `World-day ${d}${(() => { try { return ` · ${seasonOfWorldDay(d)}`; } catch { return ""; } })()}`;
-  chrome(`<div class="screen" style="max-width:680px">
+  chrome(`<div class="screen screen-ground">
     <h2>${esc(character.name)}</h2>
     ${characterTabBar("news")}
     <div class="cs-block news-log">
@@ -7188,7 +7188,7 @@ function renderCreate() {
     const left = () => POOL - spent();
     const flat = () => new Set(Object.values(state.attrs)).size === 1;
     const drawAttrs = () => {
-      chrome(`<div class="screen" style="max-width:560px">
+      chrome(`<div class="screen">
         <h2>What are you made of?</h2>
         <p class="hint" style="margin-bottom:14px">${state.attrsSeeded
           ? "A starting position, drawn from what you have told us. Change anything you like — this is yours."
@@ -7340,7 +7340,7 @@ function renderCreate() {
       centerTop: phase === "done" ? "your domains" : "choose your " + phase,
       centerSub: phase === "secondary" ? "kin to your primary" : phase === "tertiary" ? "free — your wildcard reach" : phase === "done" ? "" : "the opposite pole closes" });
     const slot = (label, t) => `<div class="dom-slot"><span class="dom-slot-label">${label}</span> ${t ? `<strong>${esc(traditionLabel(t))}</strong>` : "<em>—</em>"}</div>`;
-    chrome(`<div class="screen" style="max-width:640px">
+    chrome(`<div class="screen">
       <h2>Your place on the Great Circle</h2>
       <p class="hint" style="margin-bottom:8px">Twelve axes, twenty-four peoples — a ring where every craft sits opposite its antithesis. Your <strong>primary</strong> is who you are (all you can master); your <strong>secondary</strong> (<em>kin to your primary</em>) reaches tier III — a concentrated core; your <strong>tertiary</strong> is a <em>free wildcard</em>, reaching anywhere on the ring to tier II. The <strong>opposite pole</strong> of your primary and secondary is the hardest ground you can walk — you may learn and use it, but it costs more the further you have leaned away from it, and it opens as you carry it.</p>
       ${svg}
@@ -7369,7 +7369,7 @@ function renderCreate() {
     if (!roster.length) { renderBioStep(); return; }
     if (!state.companionId) state.companionId = roster[0].id;
     const chosen = roster.find(c => c.id === state.companionId) || roster[0];
-    chrome(`<div class="screen" style="max-width:640px">
+    chrome(`<div class="screen">
       <h2>Who walks with you?</h2>
       <p class="hint" style="margin-bottom:10px">A companion is yours from the first step. Pick who — and call them what you like.</p>
       <div class="companion-pick">
@@ -7399,7 +7399,7 @@ function renderCreate() {
 
   // SNG-059 / SNG-053: describe the character's physical FORM so the portrait is right on first render.
   function renderFormStep() {
-    chrome(`<div class="screen" style="max-width:640px">
+    chrome(`<div class="screen">
       <h2>What do they look like?</h2>
       <p class="hint" style="margin-bottom:10px">Describe their physical form — species, build, features. This LEADS the portrait, so a non-human (an Ent, a construct) renders true from the start. Leave it blank for an ordinary person.</p>
       <div class="field"><textarea id="form-text" rows="3" style="width:100%" placeholder="e.g. a towering treefolk of bark and heartwood, moss-bearded, eyes like knots of amber">${esc(state.form)}</textarea></div>
@@ -7578,7 +7578,7 @@ function renderCreate() {
   /** The door: play the opening (recommended) or the quick-start form (express lane). */
   function renderCreateDoor() {
     if (!PRO()?.openings?.length) { draw(); return; } // no prologue content → straight to the form
-    chrome(`<div class="screen" style="max-width:620px">
+    chrome(`<div class="screen">
       <h2>Begin</h2>
       <p class="hint" style="margin-bottom:16px">Three ways to make a character. Say who you want to be and the game shows you where that lands. Play an opening and the world tells you who you turned out to be. Or build one yourself, if you already know.</p>
       <div class="create-door">
@@ -7626,7 +7626,7 @@ function renderCreate() {
   function renderDescribeDoor(err = "") {
     const idx = CONTENT.traditionIndex;
     if (!idx) { draw(); return; } // no ring content → fall back to the quick-start form
-    chrome(`<div class="screen" style="max-width:620px">
+    chrome(`<div class="screen">
       <h2>Describe yourself</h2>
       <p class="hint" style="margin-bottom:12px">Say who you want to be — species or look, temperament, what you're good at, what you care about. Whole sentences or a scatter of words, either works. The game reads it and shows you where you land on the great circle, and what it costs. You can change everything after.</p>
       ${err ? `<p class="hint" style="color:var(--warn,#c88); margin-bottom:10px">${esc(err)}</p>` : ""}
@@ -7698,7 +7698,7 @@ function renderCreate() {
     const folk = Array.isArray(sug.folk) ? sug.folk.filter(f => f?.name) : [];
     const notDom = Array.isArray(sug.notDomains) ? sug.notDomains.filter(n => n?.label) : [];
     const comp = state.companionId ? roster.find(c => c.id === state.companionId) : null;
-    chrome(`<div class="screen" style="max-width:660px">
+    chrome(`<div class="screen">
       <h2>Where you land on the Great Circle</h2>
       <p class="hint" style="margin-bottom:8px">This is a suggestion, not a sentence — read the reasons and the costs, then keep it or adjust anything.</p>
       ${circle}
@@ -7731,7 +7731,7 @@ function renderCreate() {
     const origins = ORIGINS();
     if (!origins.some(o => o.id === state.origin)) state.origin = origins[0]?.id || "valleyfolk";
     const org = origins.find(o => o.id === state.origin);
-    chrome(`<div class="screen" style="max-width:600px">
+    chrome(`<div class="screen">
       <h2>Before the scene</h2>
       <p class="hint" style="margin-bottom:12px">A few things, then we begin. Who you become on the circle, and what you can do, you'll find out by playing.</p>
       <div class="field"><label>Name</label><input id="p-name" value="${esc(state.name)}"></div>
@@ -7761,7 +7761,7 @@ function renderCreate() {
   /** Prologue step 2: choose which opening to play (or let the valley pick). */
   function renderPrologueOpening() {
     const ops = PRO().openings;
-    chrome(`<div class="screen" style="max-width:640px">
+    chrome(`<div class="screen">
       <h2>${esc(state.name)}, where does it find you?</h2>
       <p class="hint" style="margin-bottom:12px">Each opening is a different kind of trouble. There is no wrong one — every road makes a whole person.</p>
       ${ops.map(o => `<button class="opening-card" data-open="${esc(o.id)}">
@@ -7781,7 +7781,7 @@ function renderCreate() {
     const i = state.prologue.step;
     if (i >= probs.length) { renderPrologueCompanion(); return; }
     const p = probs[i];
-    chrome(`<div class="screen" style="max-width:640px">
+    chrome(`<div class="screen">
       <div class="prologue-progress">${probs.map((_, k) => `<span class="${k < i ? "done" : k === i ? "now" : ""}"></span>`).join("")}</div>
       <h2>${esc(o.name)}</h2>
       ${i === 0 && !outcomeShown ? `<p class="prologue-hook">${esc(o.hook)}</p>` : ""}
@@ -7810,7 +7810,7 @@ function renderCreate() {
     if (!state.companionId) state.companionId = offered[0].id;
     const chosen = offered.find(c => c.id === state.companionId) || offered[0];
     const arrival = beat.arrivals?.[chosen.id] || chosen.appearance || "";
-    chrome(`<div class="screen" style="max-width:640px">
+    chrome(`<div class="screen">
       <h2>Someone stayed</h2>
       <p class="prologue-situation">${esc(beat.situation || "When it was over, someone was still there.")}</p>
       <div class="companion-pick" style="margin-top:10px">
@@ -7843,7 +7843,7 @@ function renderCreate() {
     const circle = domainCircleSVG(idx, { primary: d.primary, secondary: d.secondary, tertiary: d.tertiary,
       closed: new Set([d.primary && antipodeOf(d.primary, idx), d.secondary && antipodeOf(d.secondary, idx)].filter(Boolean)),
       selectable: () => false, centerTop: "who you are", centerSub: nm(d.primary) });
-    chrome(`<div class="screen" style="max-width:640px">
+    chrome(`<div class="screen">
       <h2>This is who you turned out to be</h2>
       ${circle}
       <div class="dom-slots"><div class="dom-slot"><span class="dom-slot-label">Primary</span> <strong>${esc(nm(d.primary))}</strong></div>
@@ -12010,7 +12010,7 @@ function faceLegPlan() {
     const s = g.steps[failed.index];
     const a = failed.action || s.action;
     const fb = (s.fallbacks || [])[run.tried[failed.index] || 0] || null;
-    chrome(`<div class="screen" style="max-width:640px">
+    chrome(`<div class="screen">
       <h2>The road turns on you</h2>
       <p class="hint">The leg into ${esc(g.toName)} — step ${failed.index + 1} of ${actions.length}.</p>
       <div class="roll-receipt" style="margin:10px 0">${esc(a.label)} — d100: ${failed.roll} vs ${failed.breakdown ? `<span class="roll-chance" data-breakdown="${attrJson({ ...failed.breakdown, roll: failed.roll, degree: failed.degree })}" tabindex="0" role="button" title="Why this number?">${failed.chance}</span>` : failed.chance} — <span class="${failed.degree}">${failed.degree.replace("_", " ")}</span></div>
@@ -12681,7 +12681,7 @@ function renderMapWorld() {
       <p class="world-arc-face">${esc(a.publicFace)}</p>
     </div>`).join("")}
   </div>` : "";
-  chrome(`<div class="screen" style="max-width:900px">
+  chrome(`<div class="screen screen-ground">
     <h2>World Map</h2>
     <p class="hint" style="margin-bottom:8px">${nodes.length} regions${nodes.reduce((n, r) => n + r.gates.length, 0) ? ` · ${nodes.reduce((n, r) => n + r.gates.length, 0)} waygates` : ""}. The scale where the question is <em>which Reach am I in</em>.</p>
     ${mapTierBar()}
@@ -13230,7 +13230,7 @@ function renderMapLocation(locationId) {
             District (long authored names) before this. The full name stays in the <title>. */""}
       <text x="${c.x.toFixed(1)}" y="${(c.y + (c.y > 230 ? 26 + (i % 2) * 14 : -14 - (i % 2) * 14)).toFixed(1)}" text-anchor="middle" class="map-label">${esc(c.name.length > 20 ? c.name.slice(0, 19) + "…" : c.name)}</text>
     </g>`).join("");
-  chrome(`<div class="screen" style="max-width:900px">
+  chrome(`<div class="screen screen-ground">
     <h2>${esc(name)} — inside</h2>
     <p class="hint" style="margin-bottom:8px">${children.length ? `${children.length} place${children.length === 1 ? "" : "s"} within.` : "Nothing recorded inside here yet — the places you visit and the GM names will appear here."} A ringed node is somewhere that grew into a place of its own.</p>
     ${mapTierBar()}
@@ -13462,7 +13462,7 @@ function renderMap(selectedId = null) {
         <span class="net-hop-name">${esc(g.name)}${g.isHub ? ` <span class="net-tag">hub</span>` : ""}${g.isDefault ? ` <span class="net-tag net-tag-default">default</span>` : ""}</span>
         <span class="net-hop-cost">+${g.cost.hours}h · ${g.cost.energy}⚡</span></button>`).join("")}
     </div>` : "";
-  chrome(`<div class="screen" style="max-width:900px">
+  chrome(`<div class="screen screen-ground">
     <h2>${esc((CONTENT.regions || []).find(r => r.regionId === focusRegion)?.name || "Region")}</h2>
     ${/* SNG-154 stage 6: this count is now the REGION's, not the world's — and it is derived, so it
           can't drift the way the old hardcoded "92 places across 24 regions" line silently did. */""}
@@ -14030,7 +14030,7 @@ function renderSkillWheel(selectedId = null, status = "") {
       : skillSelectionActions(selAb)}
   </div>` : "";
 
-  chrome(`<div class="screen" style="max-width:1180px">
+  chrome(`<div class="screen screen-ground">
     <h2>The Skill Wheel ${infoDot("circle.what")}</h2>
     ${/* ⛔ SNG-365 (Erik): "we need to get more room in for the skill wheel". This legend was THREE LINES
          of standing prose above a viewport that is the actual feature — read once, then in the way forever.
@@ -14184,7 +14184,7 @@ function renderSkillGraph(selectedId = null, status = "") {
     ${skillSelectionActions(selAb)}
   </div>` : "";
 
-  chrome(`<div class="screen" style="max-width:960px">
+  chrome(`<div class="screen screen-ground">
     <h2>Skill Graph</h2>
     <p class="hint" style="margin-bottom:8px">Every ability by class (color) and Tier I–V (size). Filled = owned. Gold ring = aspired · teal ring = ripe to claim · 🔒 = gated. Diamonds are emergence techniques; lines link their components. <strong>Tap a node to learn it here</strong> — depth is earned by USE, never bought. Scroll to zoom, drag to pan.</p>
     <p class="hint" style="margin-bottom:8px"><span class="grow-badge">${character.skillPoints || 0} skill point${(character.skillPoints || 0) === 1 ? "" : "s"}</span> · ${breadthUsed(character)} of ${breadthCap(character, CONTENT.skillCapacity)} crafts${atCapacity(character, CONTENT.skillCapacity) ? " — at capacity" : ""}</p>
@@ -14421,7 +14421,7 @@ function renderLevelUp(status = "") {
   const useCachedSuggest = cachedPicks.length > 0;
   if (useCachedSuggest) wheelRecommended = new Set(cachedPicks.map(p => p.abilityId));
 
-  chrome(`<div class="screen" style="max-width:720px">
+  chrome(`<div class="screen">
     <h2>⬆ Level Up ${infoDot("ability.ranks")}</h2>
     <p class="hint" style="margin-bottom:10px">You have <strong>${sp} skill point${sp === 1 ? "" : "s"}</strong> — points <strong>learn new crafts</strong> (breadth). <strong>Depth is earned through use</strong>, not bought. <span class="cap-line">${breadthUsed(character)} of ${breadthCap(character, CONTENT.skillCapacity)} crafts${cap ? " — at capacity" : ""}</span> ${infoDot("lock.capacity")}</p>
     ${status ? `<div class="cs-block" style="border-left:3px solid var(--accent)">${esc(status)}</div>` : ""}
@@ -14652,6 +14652,32 @@ function wireCharacterTabs() {
   go("tab-world", () => renderWorldTab());
   go("tab-news", () => renderNewsTab());   // CCODE-439
 }
+/** ✅ AEVI item 11 — CAPACITY AND PERSONNEL, composed once and shown on PARTY.
+ *  ⛔ They lived at the bottom of the Holdings tab. Holdings is a page about PLACES; how many people can walk with you,
+ *  who runs work in your name, and who is actually at your side is a page about PEOPLE. Erik read them there and asked
+ *  for them here. PURE but for the module-level `character`/`CONTENT` the other composers on this screen also read. */
+function capacityMeter(label, used, total, why, said = null) {
+  return `<div class="codex-f" style="display:flex;gap:8px;align-items:baseline;flex-wrap:wrap">
+    <strong style="min-width:150px">${esc(label)}</strong>
+    <span style="font-variant-numeric:tabular-nums">${said ? esc(said) : `${used} of ${total}`}</span>
+    ${!said && used >= total && total > 0 ? `<span class="hint" style="color:var(--warn,#e0b25a)">full</span>` : ""}
+    <span class="hint" style="width:100%">${esc(why)}</span></div>`;
+}
+
+function holdCapacityHtml({ company, delegates, places, delegCap, band, holdings, nameOf, meter = capacityMeter }) {
+  const unkept = (holdings || []).filter(h => h && !h.steward).length;
+  return `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">Capacity</h3>
+      ${meter("At your side", company.length, places, "Rapport carries the first four places; presence carries the fifth and sixth. Rapport is who will follow you — presence is who will follow a name.", `${company.length} with you · ${places} can stand forward`)}
+      ${meter("Running things for you", delegates.length, delegCap, delegCap === 0 ? "Nobody yet runs work in your name — that comes with level, and with rapport at 14." : "People who hold a charge while you are elsewhere. A second errand for someone you already trust costs nothing more.")}
+      <div class="codex-f"><strong style="min-width:150px">A following</strong>
+        <span>${band.ready ? "within reach" : "not yet"}</span>
+        <span class="hint" style="width:100%">${esc(band.why)}</span></div></div>
+    ${company.length || delegates.length ? `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">Personnel</h3>
+      ${company.length ? `<div class="codex-f"><strong>At your side</strong> <span class="hint">${company.map(m => esc(nameOf(m.npcId))).join(" · ")}</span></div>` : ""}
+      ${delegates.length ? `<div class="codex-f"><strong>In your service</strong> <span class="hint">${delegates.map(id => esc(nameOf(id))).join(" · ")}</span></div>` : ""}
+      ${unkept ? `<p class="hint" style="margin-top:6px;color:var(--warn,#e0b25a)">${unkept} of your holdings has nobody keeping it.</p>` : ""}</div>` : ""}`;
+}
+
 function characterTabBar(active) {
   return `<div class="char-tabs">
     <button class="char-tab${active === "traits" ? " on" : ""}" id="tab-traits">Traits</button>
@@ -15237,10 +15263,16 @@ function renderHoldingsTab(manageId = null, tab = null) {
   const askable = () => [...new Set([...company.map(m => m.npcId), ...delegates, ...Object.keys(character.npcRegistry || {}).filter(id => canBeAskedToWork(character.npcRegistry[id]))])].filter(Boolean);
 
   // ⚠️ A BAR THAT READS AS A BAR. Used against earned, so "3 of 3" is legible as full without arithmetic.
-  const meter = (label, used, total, why) => `<div class="codex-f" style="display:flex;gap:8px;align-items:baseline;flex-wrap:wrap">
+  // ✅ AEVI item 11 — A SECOND WORDING, because "of" was telling the player something untrue. ⛔ ERIK saw
+  // *"At your side 8 of 3 · full"*: eight people walk with him and the number beside it is THREE, which reads as a
+  // capacity he has broken. Since CCODE-555 the cap governs FORWARD PLACES, not how many may walk with you — so the row
+  // was a true number under a false label. Her words: *"8 with you · 3 can stand forward"*.
+  // ⚠️ `used of total` is still right for "Running things for you", where the cap really is a ceiling, so this is a
+  // SECOND wording rather than a replacement — one meter, two sentences, each where it is true.
+  const meter = (label, used, total, why, said = null) => `<div class="codex-f" style="display:flex;gap:8px;align-items:baseline;flex-wrap:wrap">
     <strong style="min-width:150px">${esc(label)}</strong>
-    <span style="font-variant-numeric:tabular-nums">${used} of ${total}</span>
-    ${used >= total && total > 0 ? `<span class="hint" style="color:var(--warn,#e0b25a)">full</span>` : ""}
+    <span style="font-variant-numeric:tabular-nums">${said ? esc(said) : `${used} of ${total}`}</span>
+    ${!said && used >= total && total > 0 ? `<span class="hint" style="color:var(--warn,#e0b25a)">full</span>` : ""}
     <span class="hint" style="width:100%">${esc(why)}</span></div>`;
 
   // ⛔ SPEC_holdings_screen §3/§4 — ONE line of facts, the SAME on the list and in the popup (hands, guard, features, store,
@@ -15610,7 +15642,9 @@ function renderHoldingsTab(manageId = null, tab = null) {
     ${characterTabBar("holdings")}
     ${/* ⛑ HER TITLE ROW: the page's name in ink, and the purse on the right — the one fact a player checks before
           deciding anything on this screen. `purseLine` is the same composer the Purse panel uses. */""}
-    <div class="page-title"><h2>What stands in your name</h2>
+    ${/* ✅ AEVI item 6 — A HOLD IS ITS OWN PAGE, so the list does not sit behind it. This one conditional is what turns
+          an overlay into a page: open a hold and the board steps aside; the back link brings it back. */""}
+    ${manageId ? "" : `<div class="page-title"><h2>What stands in your name</h2>
       <span class="aside">${(() => { try { return esc(purseLine(character.purse || {}, { regionId: hereRegionId(), regionNameOf: regionDisplayName })); } catch { return ""; } })()}</span></div>
     ${groundStrip}
     ${anythingToReview ? `<section class="gs-review">
@@ -15623,17 +15657,11 @@ function renderHoldingsTab(manageId = null, tab = null) {
     ${(character.formerHoldings || []).length ? `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">No longer yours</h3>
       ${(character.formerHoldings || []).map(f => `<div class="codex-f"><strong>${esc(f.name || f.id)}</strong> <span class="hint">${f.transferredTo ? `handed to ${esc(f.transferredToName || nameOf(f.transferredTo))}${f.transferredDay != null ? ` on day ${f.transferredDay}` : ""}` : `given up${f.reason ? ` — ${esc(f.reason)}` : ""}${f.obligationUnpaid ? " · what it owed is still owed" : ""}`}</span>
         ${f.transferredTo ? `<button class="opt" data-hold-reclaim="${esc(f.id)}" title="Take it back — it is yours again; they keep it for you">Take it back</button>` : ""}</div>`).join("")}</div>` : ""}
-    <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Capacity</h3>
-      ${meter("At your side", company.length, places, "Rapport carries the first four places; presence carries the fifth and sixth. Rapport is who will follow you — presence is who will follow a name.")}
-      ${meter("Running things for you", delegates.length, delegCap, delegCap === 0 ? "Nobody yet runs work in your name — that comes with level, and with rapport at 14." : "People who hold a charge while you are elsewhere. A second errand for someone you already trust costs nothing more.")}
-      <div class="codex-f"><strong style="min-width:150px">A following</strong>
-        <span>${band.ready ? "within reach" : "not yet"}</span>
-        <span class="hint" style="width:100%">${esc(band.why)}</span></div></div>
-    ${company.length || delegates.length ? `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">Personnel</h3>
-      ${company.length ? `<div class="codex-f"><strong>At your side</strong> <span class="hint">${company.map(m => esc(nameOf(m.npcId))).join(" · ")}</span></div>` : ""}
-      ${delegates.length ? `<div class="codex-f"><strong>In your service</strong> <span class="hint">${delegates.map(id => esc(nameOf(id))).join(" · ")}</span></div>` : ""}
-      ${hs.some(h => !h.steward) ? `<p class="hint" style="margin-top:6px;color:var(--warn,#e0b25a)">${hs.filter(h => !h.steward).length} of your holdings has nobody keeping it.</p>` : ""}</div>` : ""}
-    ${(() => { // ⛔ THE POPUP — every control that CHANGES a place, in one screen, per Erik. The card is for
+    ${/* ✅ AEVI item 11 — CAPACITY AND PERSONNEL MOVED TO PARTY. They sat at the bottom of Holdings, which is a page
+          about PLACES; who walks with you and who holds a charge is a page about PEOPLE. `holdCapacityHtml` is the one
+          composer and the Party tab is its only caller now. */""}
+    `}
+    ${(() => { // ⛔ THE PLACE'S OWN PAGE (item 6; was a pop-up) — every control that CHANGES a place, in one screen, per Erik. The card is for
       // READING (the four things he named); this is for DOING. They were interleaved, so neither worked.
       const h = manageId ? hs.find(x => x && x.id === manageId) : null;
       if (!h) return "";
@@ -15694,8 +15722,13 @@ function renderHoldingsTab(manageId = null, tab = null) {
       const TABS = [["overview", "Overview"], ["people", "People"], ["build", "Build"], ["store", "Store &amp; money"], ["defence", "Attack &amp; Defense"], ["records", "Records"]];
       const tabNow = TABS.some(([k]) => k === holdTab) ? holdTab : "overview";
       const pane = (key, html) => `<div class="pp-pane" data-pp-pane="${key}"${key === tabNow ? "" : " hidden"}>${html}</div>`;
-      return `<div class="item-detail-modal" id="hold-modal"><div class="item-detail-sheet pp-sheet" style="max-width:560px;text-align:left">
-        <button class="item-modal-close" id="hold-modal-close" title="Close">\u2715</button>
+      // ✅ AEVI item 6 — A PAGE, NOT A POP-UP. ⛔ ERIK: the hold opened in a 560px overlay that cramped six tabs of
+      // controls into less than half the page. It is the Holdings page's own width now, with a back link where the ✕
+      // was; the six tabs, every pane and every handler below are untouched.
+      // ⚠️ THE ID `hold-modal` STAYS. Its handlers, the lightbox's `data-lightbox-via="hold-modal"` and the scroll
+      // restore all name it — renaming the element would have been a second change wearing the first one's clothes.
+      return `<div class="hold-page" id="hold-modal">
+        <button class="opt hold-page-back" id="hold-modal-close" title="Back to what stands in your name">← All your holdings</button>
         <h3 class="codex-title" style="font-size:15px;margin-bottom:2px">${esc(h.name || h.id)}</h3>
         ${art ? `<img src="${esc(art)}" loading="lazy" alt="${esc(h.name || h.id)}" style="width:100%;max-height:180px;object-fit:cover;border-radius:6px;margin:6px 0;cursor:zoom-in" data-lightbox="${esc(art)}" data-regen-kind="holding" data-regen-subject="${esc(h.id)}">` : ""}
         <div class="hint">${ownerOf(h)}${esc(h.kind || "post")} \u00b7 ${esc(h.condition || "holding")}${h.steward ? " \u00b7 kept by " + esc(nameOf(h.steward)) : " \u00b7 unkept"}</div>
@@ -16163,7 +16196,7 @@ function renderHoldingsTab(manageId = null, tab = null) {
           <div class="opt-row" style="gap:6px;flex-wrap:wrap;margin-top:8px">
             <button class="opt" data-hold-release="${esc(h.id)}" title="Walk away from it. What it owes stays with you, unpaid">Give it up</button>
           </div>`)}
-      </div></div>`; })()}
+      </div>`; })()}
     <button class="btn secondary" id="cs-back" style="margin-top:10px">Back</button>
   </div>`);
   wireCharacterTabs();
@@ -16230,8 +16263,10 @@ function renderHoldingsTab(manageId = null, tab = null) {
     for (const x of document.querySelectorAll("[data-pp-tab]")) { const on = x === b; x.classList.toggle("on", on); x.setAttribute("aria-selected", String(on)); }
     for (const p of document.querySelectorAll("[data-pp-pane]")) p.hidden = p.dataset.ppPane !== holdTab;
   };
+  // ✅ AEVI item 6 — the back link. ⚠️ THE CLICK-OUTSIDE-TO-CLOSE IS GONE WITH THE OVERLAY: a page has no backdrop,
+  // and a handler that closed the hold whenever a click landed on the container itself would now fire on the page's own
+  // empty space — which is exactly the "it kicks me back out" bug I fixed last week, re-introduced by geometry.
   const hmClose = document.getElementById("hold-modal-close"); if (hmClose) hmClose.onclick = () => renderHoldingsTab(null);
-  const hmBack = document.getElementById("hold-modal"); if (hmBack) hmBack.onclick = (e) => { if (e.target === hmBack) renderHoldingsTab(null); };
   const back = document.getElementById("cs-back"); if (back) back.onclick = () => renderPlay(character.activeScene?.lastTurn || null);
 }
 function renderCharacterScreen() {
@@ -16241,7 +16276,7 @@ function renderCharacterScreen() {
   const b = character.bio || {};
   const xpNeed = character.level * (rules.leveling?.xpPerLevel ?? 100);
   const galleryCount = (character.gallery || []).length;
-  chrome(`<div class="screen" style="max-width:760px">
+  chrome(`<div class="screen screen-ground">
     <div class="cs-header">
       ${character.portrait ? `<img class="cs-portrait" src="${esc(character.portrait)}" alt="${esc(character.name)}" data-lightbox="portrait" data-regen-kind="character" onerror="this.style.display='none'">` : ""}
       <div class="cs-header-text">
@@ -16742,7 +16777,7 @@ function renderGallery() {
   if (galleryFilter !== "all" && !counts[galleryFilter]) galleryFilter = "all"; // the last filter emptied out → fall back
   const shown = galleryFilter === "all" ? gallery : gallery.filter(g => galleryCategory(g) === galleryFilter);
   const chip = (key, label, n) => `<button class="opt gal-cat ${galleryFilter === key ? "selected" : ""}" data-galcat="${key}">${galleryFilter === key ? "✓ " : ""}${esc(label)} <span class="cost">${n}</span></button>`;
-  chrome(`<div class="screen" style="max-width:860px">
+  chrome(`<div class="screen screen-ground">
     <h2>${esc(character.name)} — Gallery</h2>
     <p class="hint" style="margin-bottom:10px">${imagesEnabled()
       ? "Portraits, the people and places you've grown, the crafts you wield, the beasts that came for you, and the moments worth a picture. New art is added as you play."
@@ -16834,7 +16869,7 @@ async function postTurnToFeed(turn) {
 // above your ceiling is softened, or hidden entirely — the same lens shared canon uses). ⛔ NOT canon: reading
 // the feed never changes your game. Pulls the one shared feed file; the "family" is everyone on the shared valley.
 async function renderFeed() {
-  chrome(`<div class="screen" style="max-width:1000px"><h2>📮 The Family Feed</h2>
+  chrome(`<div class="screen screen-ground"><h2>📮 The Family Feed</h2>
     <div class="hint">Moments the family chose to share — lensed to your rating. Nothing here is canon; it never touches your game.</div>
     <div id="feed-body" class="feed-body" style="margin-top:12px"><div class="insight">Loading the feed…</div></div>
     <button class="btn secondary" id="feed-back" style="margin-top:14px">Back</button></div>`);
@@ -16891,7 +16926,7 @@ function renderRepairScreen(note = "") {
     (idx ? ringOrder(idx).map(t => `<option value="${esc(t)}" ${sel === t ? "selected" : ""}>${esc(traditionLabel(t))}</option>`).join("") : "");
   const log = (character.corrections || []).slice().reverse();
   const anomalies = detectAnomalies(character, { rules: CONTENT.rules }); // SNG-137: cheap consistency check, advisory
-  chrome(`<div class="screen" style="max-width:720px">
+  chrome(`<div class="screen">
     <h2>🔧 Repair ${esc(character.name)}</h2>
     <p class="hint" style="margin-bottom:6px">Fix what the game got wrong when this character was made — no arguing with the GM. Every change is validated, logged, and reversible.</p>
     <p class="hint" style="margin-bottom:14px"><strong>Repair, not wish:</strong> you can correct data that is <em>wrong</em>, but nothing here grants power — xp, levels, and abilities still come from play. Stripping an ability you never chose is a repair, not a loss; it frees your breadth so you can re-pick with your own skill points.</p>
@@ -17075,7 +17110,7 @@ function renderInventoryScreen(openName = null) {
   const extra = kindless.length ? `<div class="bag-section"><h3 class="codex-title bag-kind">other</h3><div class="bag-grid">${kindless.map(tile).join("")}</div></div>` : "";
   // growth (SNG-215 §B): a story item that GREW shows the stage it reached, so earned power is visible.
   const growth = openIt && (openIt.evoStageName || openIt.evoStage) ? `<div class="item-growth">✦ grown to <em>${esc(openIt.evoStageName || ("stage " + openIt.evoStage))}</em>${openIt.evoStage ? ` (stage ${esc(String(openIt.evoStage))})` : ""}</div>` : "";
-  chrome(`<div class="screen" style="max-width:680px">
+  chrome(`<div class="screen">
     <h2>Inventory — ${esc(character.name)} <span class="cost">(${inv.length})</span></h2>
     ${grid}${extra}
     <button class="btn secondary" id="inv-back" style="margin-top:10px">Back</button>
@@ -17097,7 +17132,7 @@ function renderQuestDetail(questId, guidance = null, loading = false) {
   const q = myQuests().find(x => x.id === questId);
   if (!q) { renderPlay(character.activeScene?.lastTurn || null, {}); return; }
   if (q.structured) { renderStructuredQuestDetail(q); return; }
-  chrome(`<div class="screen" style="max-width:680px">
+  chrome(`<div class="screen">
     <div class="codex-kind">${esc(q.status)}</div>
     <h2 style="margin-top:4px">${esc(q.title)}</h2>
     <p class="map-details-desc">${esc(q.summary)}</p>
@@ -17333,7 +17368,7 @@ function renderStructuredQuestDetail(q) {
     </div>`; };
   // SNG-238 §3b: the quest's iconic header image (generate-on-view, cached). Aevi authored q.image as a prompt.
   const questImg = imagesEnabled() ? ensureQuestArt(q.image, `quest-${q.id}`) : null;
-  chrome(`<div class="screen" style="max-width:720px">
+  chrome(`<div class="screen">
     <div class="codex-kind">${esc(q.status)}${q.tier ? " · " + esc(q.tier) : ""}${q.axis ? " · " + esc(String(q.axis).replace(/_/g, " ↔ ")) : ""}</div>
     ${questImg ? `<img class="quest-img" data-lightbox="quest" src="${esc(questImg)}" alt="" loading="lazy" onerror="this.style.display='none'">` : ""}
     <h2 style="margin-top:4px">${esc(q.title)}</h2>
@@ -17411,7 +17446,7 @@ function renderQuestLog() {
         <div class="quest-note"><strong>Stakes:</strong> ${mdProse(def.stakes || "")}</div>${/* SNG-076: authored stakes render IN FULL — the prose IS the game; SNG-217: bold + line breaks, not raw ** and \n */""}
         <button class="btn" data-startquest="${esc(def.id)}" style="margin-top:6px">Take it on</button>
       </div>`).join("")}</div>` : "";
-  chrome(`<div class="screen" style="max-width:680px">
+  chrome(`<div class="screen screen-ground">
     <h2>Quest Log</h2>
     ${availSection}
     ${q.length ? section("Active", group("active")) + section("Resolved", group("resolved")) + section("Completed", group("completed")) + section("Failed", group("failed"))
@@ -18429,7 +18464,7 @@ function renderJobsTab(selId = null) {
       <button class="opt" id="jp-post">Post it</button></div>
     <p class="hint">The level is how hard it is, on the scale of a person of that level — the place's danger sets where it starts.</p></div>`;
 
-  chrome(`<div class="screen" style="max-width:820px">
+  chrome(`<div class="screen screen-ground">
     ${characterTabBar("jobs")}
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">The board</h3>
       ${J.board.length ? `<div class="job-shelf">${J.board.map(tile).join("")}</div>` : `<p class="hint">Nothing offered. Work comes to the board when someone in the story asks for a thing done — or post one yourself, below.</p>`}</div>
@@ -18554,6 +18589,16 @@ function partyNow() {
  *  fight's own count. "Roll a round" shows what the GM is handed. */
 function renderPartyTab() {
   const { split, allies } = partyNow();
+  // ✅ AEVI item 11 — the five readings Capacity and Personnel need, asked of the same functions the Holdings tab asked.
+  const cap11 = (() => {
+    try {
+      const ladder11 = CONTENT.rules?.subAttributeLadder;
+      return { company: activeCompany(character), delegates: activeDelegates(character.worldState || {}),
+        places: companyPlaces(ladder11, character), delegCap: delegationCapacity(ladder11, character),
+        band: canRaiseBand(character, { cfg: meleeCfg() }), holdings: character.holdings || [],
+        nameOf: (id) => character?.npcRegistry?.[id]?.name || CONTENT.npcs?.[id]?.name || id };
+    } catch { return null; }   // ⚠️ a reading that cannot be taken hides the block; it never breaks the tab
+  })();
   const fwdAllies = split.forward.filter(a => !a.isPlayer && a.kind !== "player");
   const fwd = new Set(fwdAllies.map(a => a.id));
   const pickable = !split.everyoneActs && split.slots > 1;
@@ -18635,6 +18680,8 @@ function renderPartyTab() {
       <span class="ob-chip on">${esc(character.name)} and ${allies.length} more</span>
       ${allies.length ? `<span class="ob-chip">${split.everyoneActs ? "everyone acts" : `${fwdAllies.length} of ${Math.max(0, split.slots - 1)} brought forward`}</span>` : ""}
     </div>
+    ${/* ✅ AEVI item 11 — Capacity and Personnel, moved here from the bottom of Holdings. */""}
+    ${cap11 ? holdCapacityHtml(cap11) : ""}
     ${allies.length ? `<div class="ob-controls">${obFoeSlider()}</div>
       ${(() => {
         // ⛑ …AND HER "BEFORE IT CAN TAKE THE FIELD": one coloured line per condition, instead of three clauses in one
@@ -18756,7 +18803,7 @@ function renderLegionTab() {
       ${matrix(rows, "The legion")}
       <p class="hint">A legion's turn is its bands' turns: each band cuts its own turn by its own stance, and the legion is the sum.</p></div>`;
   };
-  chrome(`<div class="screen" style="max-width:980px">
+  chrome(`<div class="screen screen-ground">
     ${characterTabBar("legion")}
     <h2 class="codex-title">Legion</h2>
     <div class="ob-controls">${obFoeSlider()}</div>
@@ -18888,7 +18935,7 @@ function renderBandsTab() {
       ${u.posture === "dispersed" ? "Spread out, they live off the region and are slower to bring together." : "Concentrated, and fed from what you carry."}</div>`;
   };
 
-  chrome(`<div class="screen" style="max-width:760px">
+  chrome(`<div class="screen screen-ground">
     ${characterTabBar("bands")}
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">${esc(rosterLine(character, opts))}</h3>
       ${(() => { // ⛔ CCODE-435: where the hands with no home hold sleep — the barracks, and what the rest cost to quarter
@@ -19078,7 +19125,7 @@ function renderChronicle() {
     : cache?.text
       ? `<p class="chronicle-para">${esc(cache.text)}</p>${stale ? `<div class="hint">the story has moved on since this was written — regenerate to catch it up</div>` : ""}`
       : `<div class="insight">${getApiKey() ? "Your story is just beginning — generate the chronicle to read it." : "Add your API key in Settings to write the chronicle."}</div>`;
-  chrome(`<div class="screen" style="max-width:680px">
+  chrome(`<div class="screen screen-ground">
     <h2>${esc(character.name)}</h2>
     ${characterTabBar("chronicle")}
     ${character.portrait ? `<img class="cs-portrait" src="${esc(character.portrait)}" alt="${esc(character.name)}" data-lightbox="portrait" data-regen-kind="character" onerror="this.style.display='none'">` : ""}
@@ -19225,7 +19272,7 @@ function renderSessionSynopsisReview(sessionId) {
   const draft = raw._synopsisDraft != null ? raw._synopsisDraft : (raw.recap || "");
   const details = raw._synopsisCaption != null ? raw._synopsisCaption : sessionKeyDetails(entry);
   const span = entry.startDay != null && entry.endDay != null ? (entry.startDay === entry.endDay ? `day ${entry.startDay}` : `days ${entry.startDay}–${entry.endDay}`) : "";
-  chrome(`<div class="screen" style="max-width:680px">
+  chrome(`<div class="screen">
     <h2>📮 Share this session</h2>
     <div class="hint">A little narrative of what happened this session — ${esc(span || entry.id)}. Trim the story, choose the key details, then post. It's lensed to each viewer's rating and is never canon.</div>
     ${raw._synopsisBusy ? `<div class="insight" style="margin-top:8px">writing…</div>` : ""}
@@ -19400,7 +19447,7 @@ async function renderLibrary(catIdx = 0, entryId = null) {
   else { const data = await libFetch(entry.path, entry.kind);
     body = data == null ? "<div class='insight'>This entry could not be loaded.</div>"
       : entry.kind === "md" ? libMdToHtml(data) : loreToHtml(data, 0); }
-  chrome(`<div class="screen" style="max-width:820px">
+  chrome(`<div class="screen screen-ground">
     <h2>📖 The Library <span class="hint" style="text-transform:none">— the world's guide, open to read</span></h2>
     <div class="library-cats">${LIBRARY_INDEX.map((c, i) => `<button class="lib-cat ${i === catIdx ? "on" : ""}" data-libcat="${i}">${esc(c.cat)}</button>`).join("")}</div>
     <div class="library-entries">${cat.entries.map(e => `<button class="lib-entry ${e.id === entry.id ? "on" : ""}" data-libentry="${esc(e.id)}">${esc(e.label)}</button>`).join("")}</div>
@@ -19575,7 +19622,7 @@ function renderCodexScreen(query = "", openTopicId = null, mergeMode = false) {
     .filter(s => !q || String(s.a).toLowerCase().includes(q) || String(s.b).toLowerCase().includes(q));
   if (!open) maybeAdjudicateMerges(query); // SNG-153: tidy the codex itself, off the play loop
   maybeSummariseTopics();                    // SPEC_codex §3a: write the readings, off the play loop
-  chrome(`<div class="screen" style="max-width:720px">
+  chrome(`<div class="screen screen-ground">
     <h2>Codex — what ${esc(character.name)} knows</h2>
     <div class="field"><input id="codex-search" value="${esc(query)}" placeholder="Search topics, facts, factions, mysteries…"></div>
     ${open ? `
@@ -19806,7 +19853,7 @@ function renderGambitBuilder(status = "") {
   const stepEnergy = g.actions ? g.actions.map(gambitStepEnergy) : null;
   const totalEnergy = stepEnergy ? stepEnergy.reduce((a, b) => a + b, 0) : null;
   const overBudget = totalEnergy != null && totalEnergy > (character.energy ?? 0);
-  chrome(`<div class="screen" style="max-width:720px">
+  chrome(`<div class="screen">
     <h2>Plan a Gambit ${infoDot("gambit.what")} ${infoDot("gambit.fewer_is_harder")}</h2>
     <p class="hint" style="margin-bottom:12px">Declare a sequence of moves. Assess it to read your odds (as far as your experience allows), then run it. A failed step forces a decision: fallback, adapt, press on, or abandon. Adaptation points available: <strong>${adaptationPointsFor(profile, CONTENT.rules)}</strong>.</p>
     <div class="field"><label>Goal</label><input id="g-goal" value="${esc(g.goal)}" placeholder="e.g. get the falsified purity logs out of the array office" style="width:100%; box-sizing:border-box"></div>
@@ -19960,7 +20007,7 @@ async function runGambit() {
   };
   const renderComplication = (failed) => {
     const a = g.actions[failed.index];
-    chrome(`<div class="screen" style="max-width:640px">
+    chrome(`<div class="screen">
       <h2>The plan hits a wall</h2>
       <div class="roll-receipt" style="margin:10px 0">Step ${failed.index + 1}: ${esc(a.label)} — d100: ${failed.roll} vs ${failed.breakdown ? `<span class="roll-chance" data-breakdown="${attrJson({ ...failed.breakdown, roll: failed.roll, degree: failed.degree, ...(failed.crit ? { crit: failed.crit, critRoll: failed.critRoll, critText: failed.critText } : {}) })}" tabindex="0" role="button" title="Why this number?">${failed.chance}</span>` : failed.chance} — <span class="${failed.degree}">${failed.degree.replace("_", " ")}</span></div>
       <div style="display:flex; flex-direction:column; gap:8px; margin-top:14px;">
@@ -20167,7 +20214,7 @@ function openUseIntent(item) {
   const nm = displayName(item);
   const uses = itemUses(item, nm);
   const submit = promptText => onFreeform(promptText);
-  chrome(`<div class="screen" style="max-width:520px">
+  chrome(`<div class="screen">
     <h2>Use ${esc(nm)}</h2>
     ${item.description ? `<p class="hint" style="margin-bottom:10px">${esc(item.description)}</p>` : ""}
     ${uses.length ? `<div class="use-list">${uses.map((u, i) => `<button class="btn secondary use-opt" data-use-idx="${i}" style="display:block; width:100%; text-align:left; margin:4px 0">${esc(u.label)}</button>`).join("")}</div>` : ""}

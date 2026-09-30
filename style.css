@@ -14,6 +14,14 @@
      DECLARED, so every site fell through to its own fallback and they disagreed: `--good` was #79c08a in three places
      and #4fa36b in two, `--warn` was #e0b25a, #c9913a and #c96, `--bad` was #d98b8b and #c46, `--line-soft` was
      #2e2e2e and #3a3a3a. One semantic colour, three colours on screen. ⛑ The values are the mockup's own. */
+  /* ✅ AEVI items 1+5 2026-09-30 — ONE PAGE WIDTH. ⛔ ERIK: page widths differ (the landing banner against the player
+     card; Bands narrower than Holdings) and *"the holdings screen is excellent"*. ⛑ MEASURED: 51 screen roots across
+     SEVENTEEN widths from 520 to 1180, forty-six of them written inline as `style="max-width:Npx"`, and the nine
+     character tabs alone spanning five of them. The two ROLES were already in the CSS and only the numbers were loose:
+     `.screen` is a card and `.screen-ground` is a page. ⚠️ Change these two and every screen moves together, which is
+     the whole point of a token — a number written at the call site is a number that drifts. */
+  --page-w: 1100px;       /* a PAGE: a board, a tab, a map, the wheel — the Holdings width, which is #app's own */
+  --card-w: 640px;        /* a CARD that fills a screen: a form, a dialog, one thing to read or fill in */
   --ink-mid: #b7b2a4;     /* a second ink: what a fact reads as beside a name */
   --line: #3a3d45;        /* a quiet edge — a pill nobody needs to look at */
   --line-soft: #2a2d35;   /* the rule between rows inside a panel */
@@ -636,6 +644,13 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 .bag-icon { font-size: 18px; line-height: 1; flex: 0 0 auto; opacity: .85; }
 .bag-name { flex: 1 1 auto; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .bag-flag { flex: 0 0 auto; font-size: 10px; opacity: .8; }
+/* ✅ AEVI item 6 2026-09-30 — A HOLD IS A PAGE. ⛔ ERIK: *"the hold opens in a pop-up that cramps it."* It was
+   `.item-detail-modal` (a fixed full-screen overlay) wrapping a sheet capped at 560px, so six tabs of controls were read
+   through a letterbox half the page wide. It is the page width now, in flow, with a back link. */
+.hold-page { max-width: var(--page-w); margin: 0 auto; text-align: left; }
+.hold-page-back { margin-bottom: 10px; }
+.hold-page .pp-tabs { position: sticky; top: 0; z-index: 4; background: var(--bg); padding-top: 4px; }
+
 .item-detail-modal { position: fixed; inset: 0; background: rgba(0,0,0,.55); display: flex; align-items: center; justify-content: center; z-index: 60; padding: 16px; }
 .item-detail-sheet { position: relative; background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 16px; max-width: 380px; width: 100%; max-height: 86vh; overflow-y: auto; }
 .item-modal-close { position: absolute; top: 8px; right: 10px; background: none; border: none; color: var(--ink-dim); font-size: 16px; cursor: pointer; }
@@ -1057,7 +1072,7 @@ img[data-lightbox] { cursor: zoom-in; }
 .error-card { border: 1px solid var(--danger); border-radius: 8px; padding: 12px; margin-top: 12px; font-family: var(--font-ui); font-size: 13px; }
 
 /* ---------- screens (create / settings / roster) ---------- */
-.screen { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 24px; max-width: 640px; margin: 0 auto; font-family: var(--font-ui); font-size: 14px; }
+.screen { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 24px; max-width: var(--card-w); margin: 0 auto; font-family: var(--font-ui); font-size: 14px; }
 .screen h2 { font-family: var(--font); color: var(--accent); font-weight: normal; margin-bottom: 12px; }
 .screen .field { margin-bottom: 14px; }
 .screen label { display: block; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--ink-dim); margin-bottom: 4px; }
@@ -1187,8 +1202,11 @@ img[data-lightbox] { cursor: zoom-in; }
 .roster-player strong { color: #d4a24a; }
 .link-btn { background: none; border: none; color: #5aa8a0; cursor: pointer; font-size: 12px; text-decoration: underline; padding: 0 2px; }
 /* ⛔ CCODE-355 — WHO'S PLAYING, every load: one row per player, the characters they have here, the last one first. */
-.pick-screen { background: none; border: none; padding: 0; max-width: 760px; }
-.pick-card { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 22px 24px; max-width: 540px; margin: 0 auto; }
+/* ✅ AEVI item 1 — THE LANDING IS ONE EDGE NOW. ⛔ MEASURED on Erik's own landing screen: the hero banner ran to 760
+   and the player card inside it stopped at 540 — a 220px step on a single screen, which is his "the landing banner vs
+   the player card". The landing's job is ONE choice, so it is a card screen: both take the card token and share an edge. */
+.pick-screen { background: none; border: none; padding: 0; max-width: var(--card-w); }
+.pick-card { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 22px 24px; max-width: 100%; margin: 0 auto; }   /* ✅ item 1: fills the banner above it rather than stopping 220px short */
 .player-pick { display: flex; flex-direction: column; gap: 8px; margin: 10px 0 14px; }
 .player-choice {
   display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: 2px 12px;
@@ -1249,7 +1267,9 @@ details.wn-entry > summary { cursor:pointer; }
 details.wn-entry > p { margin:4px 0 8px 16px; color:var(--ink-dim); }
 .wn-rule { margin-top:10px; font-size:12px; }
 .link-btn.wn-stamp { font:inherit; color:inherit; padding:0; text-decoration:underline dotted; cursor:pointer; }
-.wn-shell { max-width:640px; margin:0 auto; }
+/* ✅ item 1 — THE BANNER IS THE PAGE'S WIDTH. Pinned at 640 while the page under it ran to 1100, it stopped short of
+   the content it sat above on every screen: Erik's "the landing banner vs the player card". */
+.wn-shell { max-width: var(--page-w); margin: 0 auto; }
 .wn-shell:empty { display:none; }
 .wn-shell .whats-new-banner { margin:10px 0 12px; }
 /* ⛔ CCODE-439 — the news, kept: filters by whose it is, newest first by world-day */
@@ -2241,7 +2261,7 @@ table.ob-matrix { border-collapse: collapse; width: 100%; min-width: 640px; font
  *
  * ⚡ Every number on these surfaces is still composed by the engine. Her mockup's figures are illustrative and she
  * says so in the canvas; what is ported here is the GRAMMAR — the shapes, the type scale and the states. */
-.screen-ground { background: none; border: 0; padding: 0; max-width: 1100px; }
+.screen-ground { background: none; border: 0; padding: 0; max-width: var(--page-w); }
 .screen-ground > h2 { margin-bottom: 10px; }
 /* ⛑ HER PAGE TITLE — the NAME of the page in plain ink at 30px, with one quiet fact pushed to the right. Gold at
    17px reads as a section label; this reads as where you are. */

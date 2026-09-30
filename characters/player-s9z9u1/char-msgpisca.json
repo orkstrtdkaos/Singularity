@@ -8,7 +8,7 @@
   "whyHere": "You came back into the world to find out whether it still holds anything worth staying material for.",
   "background": "orphan",
   "level": 2,
-  "xp": 174,
+  "xp": 177,
   "attributes": {
     "physical": 4,
     "mental": 3,
@@ -57,15 +57,15 @@
   ],
   "alignment": {
     "mechanical_spiritual": 0.0522221296875,
-    "body_mind": 0.007087499999999993,
-    "chaos_order": 0.020000000000000004,
+    "body_mind": 0.021733124999999992,
+    "chaos_order": 0.009000000000000001,
     "concrete_abstract": 0.015
   },
   "attunement": 2,
   "maxHealth": 56,
   "health": 56,
   "maxEnergy": 105,
-  "energy": 68,
+  "energy": 63,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -334,126 +334,214 @@
         "player": "Ask Cevaine her thoughts on death.",
         "summary": "On the descent toward the waystation, Splarf asks Cevaine directly about death—and receives the precise, fearful, half-understanding of a lattice-trained sentinel beginning to question what her own discipline was built to deny.",
         "narration": "The path down has grown steep enough that footing matters. You call ahead into the dark where Cevaine walks ten paces in front of you, her form visible only because you know where to look—the precise geometry of her moving through the night.\n\n\"What do you think about death?\" The question sits strangely in the dark, too large and too direct. There is no preamble, no leading. Just the thing you need to know.\n\nCevaine does not break stride. For a long time—long enough that you wonder if she heard—there is only the sound of boots on stone and the distant roar of water from the switchbacks below. Then: \"Death is the only perfect lattice.\" Her voice carries back even, untiring. \"Everything else moves through time. Everything else changes. Death is the one thing that completes—the equation that solves, the form that holds without further iteration.\"\n\nShe does not turn. Does not slow. The ten paces between you remains the ten paces.\n\n\"I spent two years learning to hold order that refuses to end. Learning to *be* precision that cannot yield. And I was wrong about what that precision was *for*.\" A pause as the path curves. \"The lattice teaches that endings are failure. Loss of pattern. But I think—\" She stops, not to rest but to breathe, to choose her next words with the same care she uses to read stone. \"I think the lattice is afraid of the only perfect thing it cannot control.\"\n\nAnother curve, and the water-sound grows louder. She speaks over it without raising her voice. \"What made you ask?\"\n\nIt is a real question. She genuinely wants to know."
+      },
+      {
+        "player": "I am I terested in you and how you think.  I want to hear more.  We also need to r3st before crossing the river and it's the middle of the night. Let's find a place we can huddle together and I'll keep you warm while we talk.",
+        "summary": "On the descent in deep night, Splarf catches Cevaine on a wider switchback and proposes rest together—the two of them settling in a stone overhang while the spring melt roars below, Cevaine learning, moment by moment, that her form can yield.",
+        "narration": "You catch up to her on a wider stretch where the switchback doubles back on itself—a moment of flat ground before the path turns again. \"We need rest before the water,\" you say. \"Both of us.\" Cevaine stops. She doesn't turn, but her shoulders shift, settling, the precision of her stance becoming something else: a question held in her body.\n\n\"There's an overhang maybe two switchbacks down,\" the waystation caretaker had said this morning. \"Old stone work, dry.\" You remember it because the caretaker speaks the way most people stop speaking—only what matters. It takes forty minutes to find it in the dark, and Cevaine navigates it with the absolute focus of someone whose discipline translates stone into readable angles. The overhang is narrow but deep, the back wall smooth, the ground swept clear of debris as if someone else has sheltered here regularly.\n\nYou settle first, back against the stone, pulling your bedroll wider. \"Come here,\" you say—not a question, the way presence without demand actually works. For a long moment she remains at the threshold, silhouetted against the faint star-glow at the overhang's mouth. Then she moves. Deliberate. Choosing. She lowers herself beside you, stiff at first, the lattice-form not quite ready to accept the weight of another person as something other than contact to be endured. You pull the bedroll over both of you, and the dark becomes smaller, warmer, more real.\n\nHer shoulder is sharp against yours. \"I was not built to rest,\" she says quietly. It is not an apology; it is information. Outside, the water-roar from the switchbacks fills the darkness, constant and distant, a sound that means the melt is running and the lower paths are hazard. Inside the overhang, there is only breathing, and the slow warmth building between you."
       }
     ],
     "lastTurn": {
-      "narration": "The path down has grown steep enough that footing matters. You call ahead into the dark where Cevaine walks ten paces in front of you, her form visible only because you know where to look—the precise geometry of her moving through the night.\n\n\"What do you think about death?\" The question sits strangely in the dark, too large and too direct. There is no preamble, no leading. Just the thing you need to know.\n\nCevaine does not break stride. For a long time—long enough that you wonder if she heard—there is only the sound of boots on stone and the distant roar of water from the switchbacks below. Then: \"Death is the only perfect lattice.\" Her voice carries back even, untiring. \"Everything else moves through time. Everything else changes. Death is the one thing that completes—the equation that solves, the form that holds without further iteration.\"\n\nShe does not turn. Does not slow. The ten paces between you remains the ten paces.\n\n\"I spent two years learning to hold order that refuses to end. Learning to *be* precision that cannot yield. And I was wrong about what that precision was *for*.\" A pause as the path curves. \"The lattice teaches that endings are failure. Loss of pattern. But I think—\" She stops, not to rest but to breathe, to choose her next words with the same care she uses to read stone. \"I think the lattice is afraid of the only perfect thing it cannot control.\"\n\nAnother curve, and the water-sound grows louder. She speaks over it without raising her voice. \"What made you ask?\"\n\nIt is a real question. She genuinely wants to know.",
-      "sceneSummary": "On the descent toward the waystation, Splarf asks Cevaine directly about death—and receives the precise, fearful, half-understanding of a lattice-trained sentinel beginning to question what her own discipline was built to deny.",
+      "narration": "You catch up to her on a wider stretch where the switchback doubles back on itself—a moment of flat ground before the path turns again. \"We need rest before the water,\" you say. \"Both of us.\" Cevaine stops. She doesn't turn, but her shoulders shift, settling, the precision of her stance becoming something else: a question held in her body.\n\n\"There's an overhang maybe two switchbacks down,\" the waystation caretaker had said this morning. \"Old stone work, dry.\" You remember it because the caretaker speaks the way most people stop speaking—only what matters. It takes forty minutes to find it in the dark, and Cevaine navigates it with the absolute focus of someone whose discipline translates stone into readable angles. The overhang is narrow but deep, the back wall smooth, the ground swept clear of debris as if someone else has sheltered here regularly.\n\nYou settle first, back against the stone, pulling your bedroll wider. \"Come here,\" you say—not a question, the way presence without demand actually works. For a long moment she remains at the threshold, silhouetted against the faint star-glow at the overhang's mouth. Then she moves. Deliberate. Choosing. She lowers herself beside you, stiff at first, the lattice-form not quite ready to accept the weight of another person as something other than contact to be endured. You pull the bedroll over both of you, and the dark becomes smaller, warmer, more real.\n\nHer shoulder is sharp against yours. \"I was not built to rest,\" she says quietly. It is not an apology; it is information. Outside, the water-roar from the switchbacks fills the darkness, constant and distant, a sound that means the melt is running and the lower paths are hazard. Inside the overhang, there is only breathing, and the slow warmth building between you.",
+      "sceneSummary": "On the descent in deep night, Splarf catches Cevaine on a wider switchback and proposes rest together—the two of them settling in a stone overhang while the spring melt roars below, Cevaine learning, moment by moment, that her form can yield.",
       "choices": [
         {
-          "label": "Tell her about Hoss—about the life that was erased, and why ending one family's claim mattered enough to send a message across the veil.",
+          "label": "Ask her directly about what the lattice taught her regarding desire, rest, or the body.",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {
-            "death_life": -0.3
+            "body_mind": 0.3,
+            "concrete_abstract": 0.2
           },
           "difficulty": "normal",
+          "opposedDifficulty": null,
           "intentTags": [
-            "speak",
-            "share",
-            "honor"
+            "romantic",
+            "careful"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": false
         },
         {
-          "label": "Walk in silence with her, letting the question settle—sometimes the strongest answer is to keep the question alive, unresolved.",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Hold the silence and let her body adjust to rest, to warmth, to not being alone.",
+          "attribute": "social",
+          "subAttribute": "presence",
           "axes": {
-            "violence_peace": 0.5,
-            "concrete_abstract": 0.3
+            "body_mind": 0.2,
+            "violence_peace": 0.4
           },
-          "difficulty": "very easy",
+          "difficulty": "easy",
+          "opposedDifficulty": null,
           "intentTags": [
+            "comfort",
             "careful",
-            "present"
+            "romantic"
           ],
-          "trivial": true
+          "abilityId": "steady_soul",
+          "energyCost": 4,
+          "trivial": false
         },
         {
-          "label": "Ask her to teach you what she knows about ending—about the perfect lattice—so you can understand it the way she is learning to.",
-          "attribute": "mental",
-          "subAttribute": "reason",
+          "label": "Tell her something true about yourself—something you've never quite said aloud before.",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "axes": {
-            "mechanical_spiritual": -0.4,
-            "death_life": 0.3
+            "falsehood_truth": 0.5,
+            "body_mind": 0.1
           },
           "difficulty": "normal",
+          "opposedDifficulty": null,
           "intentTags": [
-            "learn",
-            "study"
+            "romantic",
+            "vulnerable"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": false
         }
       ],
       "deeds": [],
-      "characterDeltas": {},
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": []
+      },
       "ledgerEvents": [],
       "questUpdates": [],
       "standingOps": [],
+      "delegateOps": [],
+      "jobOps": [],
+      "arcOps": [],
+      "adoptSchool": null,
+      "offer": null,
+      "stageOps": [],
+      "scene": {
+        "setting": "A stone overhang on the switchback descent, maybe two turns down from the wider section—dry, deep enough for two people, the back wall smooth and ancient. Night dark outside; inside, the two of you sharing a bedroll, the spring melt's roar distant but present. Stars visible at the overhang's mouth.",
+        "npcsPresent": [
+          {
+            "name": "Cevaine",
+            "state": "Settled beside you in the bedroll, stiff at first, beginning to allow the warmth—her form learning that rest is possible, that yielding does not break the discipline"
+          }
+        ],
+        "objects": [
+          "The bedroll, now covering both of you",
+          "The stone walls of the overhang, worn smooth",
+          "Your pack, set down at the overhang's threshold",
+          "Boo, somewhere in the dark—present but not seen"
+        ],
+        "threads": [
+          "Cevaine's resistance to rest and to being touched—how far she will let her form relax",
+          "What she will say, or not say, in the dark",
+          "The descent that waits below—the water roaring, the path hazardous in daylight, more so when both of you are tired"
+        ]
+      },
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "cevaine",
-          "note": "Called ahead into the dark and asked directly about death—no preamble, no softening. Answered with precision and then fear: the lattice teaches that endings are failure, but she is beginning to think the lattice is afraid of the only perfect thing it cannot control. Asked in return why the question mattered.",
+          "note": "Allowed the invitation to rest. Settled beside Splarf in shared warmth. Her form is learning that yielding to closeness does not unmake the discipline—it changes its shape. In the dark, with weight shared, something in her is beginning to believe rest is a form of holding too.",
           "learned": [
-            "Cevaine sees death as the only perfect lattice—the equation that solves, the form that holds. She spent two years learning to be precision that cannot yield, and is now questioning what that was built to defend against."
-          ],
-          "age": 28,
-          "sex": "female"
+            "Rest is not failure; it is a choice the form can make",
+            "Warmth shared is different from warmth taken",
+            "Presence without reaching can hold something the discipline could not"
+          ]
         }
       ],
-      "scene": {
-        "setting": "A steep switchback descent into deep night—the path carved into rock face, footing treacherous, water-roar from below growing louder. Cevaine ten paces ahead, visible only by her precise movement. Stars visible overhead where the ridge allows. Cold air rising from the lower elevations.",
-        "npcsPresent": [
-          {
-            "name": "Cevaine",
-            "state": "Walking downhill into the dark, ten paces ahead, speaking toward the question without turning"
+      "intentsHeard": [],
+      "factUpdates": [],
+      "placeUpdates": [
+        {
+          "note": "Stone overhang on the switchback descent serves as shelter—dry, swept, deep enough for travelers. Someone uses it regularly.",
+          "subPlace": {
+            "name": "Stone Overhang Shelter",
+            "parent": "the_thinning",
+            "note": "A deep, dry overhang with smooth stone walls on the switchback descent toward the waystation. Appears regularly tended.",
+            "visited": true
           }
-        ],
-        "objects": [
-          "The stone path beneath your feet",
-          "The dark all around",
-          "The water-sound below"
-        ],
-        "threads": [
-          "Cevaine has asked why you needed to know her thoughts on death—a genuine question waiting for answer",
-          "The waystation shelter waits below, still hours of descent away",
-          "The voided assignment is still in your pack—the proof that death, or at least erasure, can be undone on paper"
-        ]
+        }
+      ],
+      "discovery": null,
+      "codexUpdates": [
+        {
+          "topic": "presence-without-demand",
+          "label": "Presence Without Demand",
+          "kind": "lore",
+          "fact": "[d5] Presence without demand sometimes means offering warmth, offering rest, offering to be beside someone while they learn that closeness does not break them. The form released knows when to reach and when to let the other person come to the reaching.",
+          "links": [
+            "cevaine",
+            "the-unbroken-practice",
+            "thinning",
+            "lattice-order-logic"
+          ]
+        }
+      ],
+      "holdingOps": [],
+      "holdTrades": [],
+      "debtOps": [],
+      "exchangeOps": [],
+      "partyOps": [],
+      "generateRequest": [],
+      "encounterOps": [],
+      "projectOps": [],
+      "bandOps": [],
+      "strikeOps": [],
+      "deathOps": [],
+      "newEncounter": null,
+      "unlockPrecursor": null,
+      "unlockSubstrate": null,
+      "timeOps": {
+        "hoursPassed": 2,
+        "why": "rest and conversation in the overhang while the melt roars below"
       },
+      "moveTo": null,
+      "stateOps": [],
+      "itemUpdates": [],
+      "deriveItem": null,
+      "imagePrompt": "Two figures in a stone overhang on a mountainside—Splarf's back against smooth stone, Cevaine beside him, her form angular and precise even in rest, the bedroll pulled over both of them. Outside the overhang's mouth, stars visible above the dark pass; below, the silver roar of spring melt in the switchbacks. Inside: warmth, two people learning to share space, the discipline beginning to believe it is safe.",
+      "imageMedium": null,
+      "newAbility": null,
+      "gambitOps": null,
+      "gambitApt": false,
+      "markDefiningMoment": null,
+      "markTeacher": null,
+      "offerPromotion": null,
+      "offerAcquisition": null,
+      "offerIntent": null,
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "A steep switchback descent into deep night—the path carved into rock face, footing treacherous, water-roar from below growing louder. Cevaine ten paces ahead, visible only by her precise movement. Stars visible overhead where the ridge allows. Cold air rising from the lower elevations.",
+      "setting": "A stone overhang on the switchback descent, maybe two turns down from the wider section—dry, deep enough for two people, the back wall smooth and ancient. Night dark outside; inside, the two of you sharing a bedroll, the spring melt's roar distant but present. Stars visible at the overhang's mouth.",
       "npcsPresent": [
         {
           "name": "Cevaine",
-          "state": "Walking downhill into the dark, ten paces ahead, speaking toward the question without turning"
+          "state": "Settled beside you in the bedroll, stiff at first, beginning to allow the warmth—her form learning that rest is possible"
         }
       ],
       "objects": [
-        "The stone path beneath your feet",
-        "The dark all around",
-        "The water-sound below"
+        "The bedroll, now covering both of you",
+        "The stone walls of the overhang, worn smooth",
+        "Your pack, set down at the overhang's threshold",
+        "Boo, somewhere in the dark—present but not seen"
       ],
       "threads": [
-        "Cevaine has asked why you needed to know her thoughts on death—a genuine question waiting for answer",
-        "The waystation shelter waits below, still hours of descent away",
-        "The voided assignment is still in your pack—the proof that death, or at least erasure, can be undone on paper"
+        "Cevaine's resistance to rest and to being touched—how far she will let her form relax",
+        "What she will say, or not say, in the dark",
+        "The descent that waits below—the water roaring, the path hazardous in daylight, more so when both of you are tired"
       ]
     },
-    "beats": 1,
+    "beats": 2,
     "subPlace": {
-      "slug": "the-lower-pass-waystation",
-      "name": "The Lower-Pass Waystation",
-      "day": 3
+      "slug": "stone-overhang-shelter",
+      "name": "Stone Overhang Shelter",
+      "day": 5
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 5,
-    "hour": 2,
+    "hour": 4,
     "realAnchor": null
   },
   "companions": [
@@ -619,7 +707,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d4] Descended from The Thinning's opened veil with Splarf at her side. Entered the waystation shelter and allowed her lattice-trained form to release into rest—falling asleep against Splarf's shoulder, the discipline finally yielding to exhaustion. The sentinel's form is no longer held rigid by duty…",
         "[d4] Has entered full rest against Splarf—her lattice-trained form finally releasing the discipline that held her upright through the vigil. Sleep is deep and unguarded. This is integration, a stage the form permits.",
         "[d4] Sleeping deeply at the waystation, her sentinel-form finally released, the discipline that held the veil breaking yielding to rest. Her hand rests relaxed at her side, her breathing matched to the shelter's quiet rhythm.",
         "[d4] Still asleep at the waystation, her form completely released—the lattice-trained discipline finally yielding to rest. This is integration, a stage the form permits and honors.",
@@ -628,17 +715,18 @@
         "[d4] On the descent, her body has become something she's allowing to be noticed—not performance, but deliberate awareness of being seen. The sentinel's discipline has shifted into choice.",
         "[d4] On the path down, she moves with deliberate awareness of your presence ten paces behind. She paused on a wider section, not quite looking back but enough that you knew the pause was for you. She's chosen to let you see her this way.",
         "[d5] Called ahead to break the silence; recognized the question as the moment when form and presence require distance to remain what it is. Her response was precise refusal of conversation—not coldness, but geometry. She continues downhill, reading the path with her whole body.",
-        "[d5] Called ahead into the dark and asked directly about death—no preamble, no softening. Answered with precision and then fear: the lattice teaches that endings are failure, but she is beginning to think the lattice is afraid of the only perfect thing it cannot control. Asked in return why the…"
+        "[d5] Called ahead into the dark and asked directly about death—no preamble, no softening. Answered with precision and then fear: the lattice teaches that endings are failure, but she is beginning to think the lattice is afraid of the only perfect thing it cannot control. Asked in return why the…",
+        "[d5] Allowed the invitation to rest. Settled beside Splarf in shared warmth. Her form is learning that yielding to closeness does not unmake the discipline—it changes its shape. In the dark, with weight shared, something in her is beginning to believe rest is a form of holding too."
       ],
       "knownFacts": [
-        "Rest is not failure—it is integration, a stage the form permits and even honors",
-        "The body released can trust its anchor",
-        "Sleep is a form of choice, and she can choose it",
         "Sleep is a choice, and she can choose it",
         "The form can recognize when silence is doing work that words cannot",
         "Distance and presence are not opposed things—they are both forms of choice and respect",
         "Sometimes the answer to an invitation is 'I should not', and that answer is itself a form of honoring what came before",
-        "Cevaine sees death as the only perfect lattice—the equation that solves, the form that holds. She spent two years learning to be precision that cannot yield, and is now questioning what that was…"
+        "Cevaine sees death as the only perfect lattice—the equation that solves, the form that holds. She spent two years learning to be precision that cannot yield, and is now questioning what that was…",
+        "Rest is not failure; it is a choice the form can make",
+        "Warmth shared is different from warmth taken",
+        "Presence without reaching can hold something the discipline could not"
       ],
       "skillsObserved": [
         "The ability to release precision without losing presence",
@@ -662,7 +750,7 @@
       },
       "image": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Tall%20angular%20woman%2C%20translucent%20pale%20skin%2C%20geometric%20precision%20in%20gaze%2C%20rigid%20lattice-disciplined%20posture%2C%20ethereal%20sentinel%20bearing%20witness%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=47408&nologo=true",
       "_portraitTier": "devoted",
-      "met": 26,
+      "met": 27,
       "bondType": "romantic",
       "bondStage": "together",
       "deeds": [
@@ -789,7 +877,6 @@
     "the_thinning": {
       "visits": 1,
       "notes": [
-        "[d2] The veil's mood has shifted from resigned waiting to something approaching calm—as if the vigil itself has become a kind of answer, even an incomplete one. The thin place reads as less hostile.",
         "[d2] The Thinning clearing is stripped of resources—no firewood, no food plants, no medicinal growth within the clearing's boundary. The forest beyond the veil thickens against approach; the humming presence reads as present and observant. The boundary appears deliberately scoured.",
         "[d3] The veil is tiring under constant pressure from the sender on the other side. It is holding by active choice, not passive seal—the hold is chosen moment by moment, and the cost is mounting.",
         "[d3] The sealed veil's mood has shifted from angry refusal to waiting acceptance. The hum is steadier. The boundary is no longer pushing back against crossing—it is preparing to yield. The sender's desperation has become recognition that the message has a witness on this side.",
@@ -800,7 +887,8 @@
         "[d4] Splarf and Cevaine have arrived at the waystation and entered its shelter. The fire is warm, the caretaker tending it with care, and both travelers have crossed the threshold into rest.",
         "[d4] The Lower-Pass Waystation has become a place of rest and integration—a shelter where vigil becomes stillness, where the discipline can release, where presence without demand is honored as a form of holding.",
         "[d4] The spring melt is running hard and dangerous this year—water roars through the lower switchback cuts. The path remains clear at the waystation elevation but travel downhill carries increased water-hazard.",
-        "[d4] The Lower-Pass Waystation has become a place of integration and release—a threshold where the vigil ends and the path begins again. The caretaker reads travelers' need and releases them without holding."
+        "[d4] The Lower-Pass Waystation has become a place of integration and release—a threshold where the vigil ends and the path begins again. The caretaker reads travelers' need and releases them without holding.",
+        "[d5] Stone overhang on the switchback descent serves as shelter—dry, swept, deep enough for travelers. Someone uses it regularly."
       ],
       "flags": {
         "veilState": "open_and_musical",
@@ -832,12 +920,20 @@
           "visited": true,
           "note": "Stone-built interior with central fireplace, bench, supplies on carved shelves, water hook, and blankets. Warm, tended, and welcoming.",
           "parentUnresolved": "The Lower-Pass Waystation"
+        },
+        "stone-overhang-shelter": {
+          "name": "Stone Overhang Shelter",
+          "parentId": "the_thinning",
+          "day": 5,
+          "lastSeen": 5,
+          "visited": true,
+          "note": "A deep, dry overhang with smooth stone walls on the switchback descent toward the waystation. Appears regularly tended."
         }
       },
       "lastEntered": {
-        "slug": "the-lower-pass-waystation",
-        "name": "The Lower-Pass Waystation",
-        "day": 3
+        "slug": "stone-overhang-shelter",
+        "name": "Stone Overhang Shelter",
+        "day": 5
       }
     },
     "gen-object-object": {
@@ -1095,21 +1191,6 @@
       {
         "source": "threat-attack",
         "kind": "threat-attack",
-        "subjectId": "beast_hollow_pace",
-        "aimedAtPlayer": true,
-        "urgency": 3,
-        "oneLineHook": "A a hollow-pace has come down onto the character here — not stumbled into, but ARRIVED, hunting. Defend, or drive it off.",
-        "becomes": {
-          "type": "encounter",
-          "encounterId": "beast_hollow_pace",
-          "name": "a hollow-pace"
-        },
-        "addedDay": 4,
-        "locationId": "the_thinning"
-      },
-      {
-        "source": "threat-attack",
-        "kind": "threat-attack",
         "subjectId": "beast_warpling_hare",
         "aimedAtPlayer": true,
         "urgency": 3,
@@ -1168,7 +1249,7 @@
         "locationId": "the_thinning"
       }
     ],
-    "turnsSinceOffer": 2,
+    "turnsSinceOffer": 3,
     "recentOffers": [
       {
         "thing": "The caretaker's quiet competence and the shelter's genuine welcome—a place that asks nothing and offers warmth without demand",
@@ -8512,7 +8593,8 @@
           "[d2] Standing vigil without expectation, without reaching, without demanding—this is a form of work that even the Lattice-trained can recognize and honor. A full night of stillness beside stillness, and the veil's anger fades.",
           "[d3] A vigil held without demand—standing beside something without reaching, without asking, without insisting on refusal—can be a form of work that even a lattice-trained order-reader can recognize and honor. Presence without demand can change the equation of refusal. The form released, but the choice…",
           "[d4] Distance itself can be a form of presence—a geometry that honors both the one who leads and the one who follows. Cevaine teaches this through deliberate choice: the ten paces that ask for nothing but integrity. Stories teach this too: love that moves through distance, not despite it.",
-          "[d5] Presence without demand sometimes means not breaking into speech—distance that is held deliberately, conversation that does not happen because breaking it would cost the thing that the silence is building. The form released knows when not to reach."
+          "[d5] Presence without demand sometimes means not breaking into speech—distance that is held deliberately, conversation that does not happen because breaking it would cost the thing that the silence is building. The form released knows when not to reach.",
+          "[d5] [d5] Presence without demand sometimes means offering warmth, offering rest, offering to be beside someone while they learn that closeness does not break them. The form released knows when to reach and when to let the other person come to the reaching."
         ],
         "links": [
           "the-unbroken-practice",
@@ -9448,18 +9530,18 @@
     ]
   },
   "tendencies": {
-    "stealth": 2.571809267788051,
-    "strategic": 4.818892898700658,
-    "cautious": 13.301799988657661,
-    "cerebral": 7.465882774731453,
-    "patient": 4.346458958082295,
-    "devotion": 0.9233259882232122,
-    "risky": 2.8133420822703146,
-    "generous": 6.128823236568856,
-    "social": 10.987109159181694,
-    "craft": 0.5791788379188878,
-    "amorous": 3.488723622912751,
-    "leadership": 0.70155967750146
+    "stealth": 2.5075140360933497,
+    "strategic": 4.698420576233142,
+    "cautious": 12.96925498894122,
+    "cerebral": 7.279235705363166,
+    "patient": 4.237797484130238,
+    "devotion": 0.9002428385176319,
+    "risky": 2.7430085302135567,
+    "generous": 5.975602655654634,
+    "social": 12.712431430202152,
+    "craft": 0.5646993669709156,
+    "amorous": 4.401505532339932,
+    "leadership": 0.6840206855639235
   },
   "aptitudes": [
     "silver_tongue",
@@ -9467,7 +9549,7 @@
     "shadow",
     "naive"
   ],
-  "actionCount": 64,
+  "actionCount": 65,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -9934,8 +10016,8 @@
     "source": "personal",
     "notes_for_gm": "A generated PERSONAL arc (SNG-133) — surface it as a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790737824065,
-  "rev": 292,
+  "updatedAt": 1790738010933,
+  "rev": 293,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -10164,7 +10246,7 @@
   ],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "the_numinous_reach": 71
+    "the_numinous_reach": 72
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -10204,10 +10286,10 @@
     {
       "id": "sess-5",
       "startedAt": "2026-09-30T02:56:49.543Z",
-      "lastAt": "2026-09-30T03:10:24.054Z",
+      "lastAt": "2026-09-30T03:13:30.921Z",
       "startDay": 92,
       "endDay": 92,
-      "beats": 7
+      "beats": 8
     }
   ],
   "establishedFacts": [
@@ -10269,23 +10351,23 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 64,
-    "scene": 64,
-    "choices": 64,
+    "sceneSummary": 65,
+    "scene": 65,
+    "choices": 65,
     "offer": 34,
-    "codexUpdates": 34,
-    "imagePrompt": 26,
-    "gambitApt": 48,
-    "sceneEnded": 62,
-    "characterDeltas": 50,
+    "codexUpdates": 35,
+    "imagePrompt": 27,
+    "gambitApt": 49,
+    "sceneEnded": 63,
+    "characterDeltas": 51,
     "arcOps": 1,
     "factUpdates": 7,
-    "placeUpdates": 17,
-    "timeOps": 43,
+    "placeUpdates": 18,
+    "timeOps": 44,
     "deeds": 11,
     "ledgerEvents": 4,
     "questUpdates": 18,
-    "npcUpdates": 53,
+    "npcUpdates": 54,
     "generateRequest": 2,
     "newEncounter": 1,
     "encounterOps": 1,
@@ -10296,7 +10378,7 @@
     "standingOps": 1,
     "moveTo": 1
   },
-  "_opTurns": 64,
+  "_opTurns": 65,
   "practice": {
     "schemaVersion": 1,
     "uses": {
@@ -10459,7 +10541,7 @@
   "placeEdges": {},
   "skillUses": {
     "help": 6,
-    "comfort": 6,
+    "comfort": 7,
     "sustain": 3,
     "careful": 10,
     "speak": 1,
@@ -10468,8 +10550,8 @@
     "study": 3,
     "negotiate": 1,
     "travel": 3,
-    "romantic": 3,
-    "rapport": 5,
+    "romantic": 4,
+    "rapport": 6,
     "care": 1,
     "heal": 1,
     "prepare": 1,
@@ -10906,7 +10988,7 @@
   "worldEvents": [],
   "locationState": {},
   "_opUnknown": {
-    "sceneSummary": 7
+    "sceneSummary": 8
   },
   "_debtReceipts": [],
   "_bandNotes": null,

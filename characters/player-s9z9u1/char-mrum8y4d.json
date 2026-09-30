@@ -138,7 +138,7 @@
   "maxHealth": 88,
   "health": 88,
   "maxEnergy": 166,
-  "energy": 96,
+  "energy": 82,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -2417,14 +2417,6 @@
       {
         "day": 10,
         "worldDay": 91,
-        "text": "Word from The Service Ways — Halvex Coil, the Rewriter: removing an inefficiency that was a person.",
-        "tier": "murmur",
-        "section": "world",
-        "locationId": "the_service_ways"
-      },
-      {
-        "day": 10,
-        "worldDay": 91,
         "text": "Overseer Grael of the Edge District is spoken of: a daughter who thinks he is a clerk.",
         "tier": "murmur",
         "section": "world",
@@ -2589,11 +2581,18 @@
         "tier": "ambient",
         "section": "world",
         "figureId": "tessvel-cairn"
+      },
+      {
+        "day": 10,
+        "worldDay": 92,
+        "text": "Work has begun on Centcom at The Standing Annex — 40 crystal from the purse.",
+        "tier": "event",
+        "section": "yours"
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 2220,
-    "lastSharedReadAt": "2026-09-30T12:54:15.459Z",
+    "lastGenCount": 2229,
+    "lastSharedReadAt": "2026-09-30T21:40:10.844Z",
     "lastTickWorldDay": 92,
     "lastCanonWorldDay": 92,
     "turnsSinceOffer": 1,
@@ -2934,7 +2933,7 @@
         "kind": "decision",
         "premise": "Someone who keeps the count of what has been unmade has begun rounding down, telling themselves the difference is noise — but the rounding has a direction, and it has been consistent for long enough…",
         "cause": "The act of counting the unmade requires a decision about what constitutes a thing distinct enough to be counted, and that threshold has always been left to…",
-        "stage": 29,
+        "stage": 30,
         "seededAtCount": 1917,
         "surfaced": true,
         "fate": "growing",
@@ -2947,7 +2946,7 @@
         "kind": "decision",
         "premise": "The person who holds authority to formally designate what has been unmade as 'resolved' has not done so for anything in years, and the backlog of unresolved unmakings is beginning to press against…",
         "cause": "In the_unmade, the act of resolution is itself an act of power, and the authority-holder has quietly discovered that unresolved things remain partially…",
-        "stage": 25,
+        "stage": 26,
         "seededAtCount": 1968,
         "surfaced": true,
         "fate": "growing",
@@ -2972,7 +2971,7 @@
         "kind": "decision",
         "premise": "Someone has begun quietly counting what no longer exists — cataloguing absences — and has not yet decided whether to share what the count implies.",
         "cause": "The Unmade is defined by what has been lost or undone; its people have long customs around not naming absence directly, because naming draws attention to the…",
-        "stage": 20,
+        "stage": 21,
         "seededAtCount": 2053,
         "surfaced": true,
         "fate": "growing",
@@ -2985,7 +2984,7 @@
         "kind": "decision",
         "premise": "An elder who alone remembers the last time something like the current unraveling occurred has not yet spoken, weighing whether the knowing will help or hasten what is coming.",
         "cause": "In the_unmade, what is lost or dissolved carries weight equal to what remains — silence is understood as a form of preservation, and the elder has lived long…",
-        "stage": 19,
+        "stage": 20,
         "seededAtCount": 2100,
         "surfaced": true,
         "fate": "growing",
@@ -3056,6 +3055,21 @@
           "type": "encounter",
           "encounterId": "beast_glimmerling_swarm",
           "name": "glimmerlings"
+        },
+        "addedDay": 10,
+        "locationId": "gen-the-standing-annex"
+      },
+      {
+        "source": "threat-attack",
+        "kind": "threat-attack",
+        "subjectId": "beast_mire_gulper",
+        "aimedAtPlayer": true,
+        "urgency": 3,
+        "oneLineHook": "A a mire-gulper has come down onto the character here — not stumbled into, but ARRIVED, hunting. Defend, or drive it off.",
+        "becomes": {
+          "type": "encounter",
+          "encounterId": "beast_mire_gulper",
+          "name": "a mire-gulper"
         },
         "addedDay": 10,
         "locationId": "gen-the-standing-annex"
@@ -10648,7 +10662,7 @@
       "the_war_ender": 84,
       "the_last_choirmistress": 90
     },
-    "updatesToldTo": "2.15.7",
+    "updatesToldTo": "2.15.12",
     "newsLog": [
       {
         "day": 4,
@@ -12924,6 +12938,22 @@
         "worldDay": 92,
         "text": "The game was updated to v2.15.7 — 1 fixed, 1 changed.",
         "loggedAt": "2026-09-30T12:54:31.806Z"
+      },
+      {
+        "day": 10,
+        "worldDay": 92,
+        "text": "Work has begun on Centcom at The Standing Annex — 40 crystal from the purse.",
+        "tier": "event",
+        "section": "yours",
+        "loggedAt": "2026-09-30T21:40:19.702Z"
+      },
+      {
+        "kind": "update",
+        "section": "world",
+        "version": "2.15.12",
+        "worldDay": 92,
+        "text": "The game was updated to v2.15.12 — 1 new, 4 fixed, 5 changed.",
+        "loggedAt": "2026-09-30T21:40:19.702Z"
       }
     ],
     "seatsTaken": {
@@ -12939,7 +12969,7 @@
       "Breaking / Building": {
         "by": "cinder_vael",
         "target": "the_last_mercy",
-        "since": 91,
+        "since": 92,
         "why": "The Last Mercy is still in the way"
       }
     },
@@ -12961,21 +12991,9 @@
         "progress": 0,
         "status": "working",
         "stampedAtWorldCount": 2181,
-        "lastMovedWorldCount": 2182
-      },
-      "cy::full-subsurface-survey-and-expansion-pla": {
-        "id": "cy::full-subsurface-survey-and-expansion-pla",
-        "npcId": "cy",
-        "npcName": "cy",
-        "charge": "full subsurface survey and expansion planning for the Standing Annex—assess dormant capacity, locate all integration…",
-        "targetEventId": null,
-        "kind": null,
-        "destination": null,
-        "stake": null,
-        "progress": 0,
-        "status": "working",
-        "stampedAtWorldCount": 2181,
-        "lastMovedWorldCount": 2181
+        "lastMovedWorldCount": 2182,
+        "holdId": "the_standing_annex",
+        "purpose": "growth"
       }
     }
   },
@@ -15449,7 +15467,7 @@
     }
   ],
   "nativeGrantsVersion": 2,
-  "reconcileVersion": 91,
+  "reconcileVersion": 93,
   "gallery": [
     {
       "kind": "moment",
@@ -16603,8 +16621,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790772871806,
-  "rev": 1133,
+  "updatedAt": 1790804419708,
+  "rev": 1137,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -19072,7 +19090,7 @@
   "nameRepairVersion": 1,
   "bondLogFrom": null,
   "purse": {
-    "crystal": 77,
+    "crystal": 37,
     "coin": 0,
     "paper": 0,
     "marks": 0,
@@ -19090,12 +19108,6 @@
       "claimedDay": 3,
       "lastMovedWorldCount": 2180,
       "history": [
-        {
-          "at": 2100,
-          "from": "holding",
-          "to": "thriving",
-          "note": "improved with Better Story"
-        },
         {
           "at": 2100,
           "from": "thriving",
@@ -19161,6 +19173,12 @@
           "from": "thriving",
           "to": "thriving",
           "note": "a shrine torn down"
+        },
+        {
+          "at": 2221,
+          "from": "thriving",
+          "to": "thriving",
+          "note": "began Centcom (6 passes)"
         }
       ],
       "carriage": {
@@ -19170,7 +19188,7 @@
       },
       "describedAs": "floating tower",
       "store": {
-        "raw_material": 8
+        "raw_material": 0
       },
       "arrears": 4,
       "lastFeatureOfferCount": 2220,
@@ -19210,6 +19228,28 @@
           "count": 1,
           "day": 76,
           "via": "granted"
+        },
+        {
+          "kind": "barracks",
+          "family": "people",
+          "name": "Centcom",
+          "by": "you",
+          "craftIds": [
+            "the_old_procedure"
+          ],
+          "count": 1,
+          "day": 92,
+          "via": "built",
+          "building": {
+            "owed": {},
+            "passesLeft": 6,
+            "paid": {
+              "store": {
+                "raw_material": 8
+              },
+              "coin": 40
+            }
+          }
         }
       ],
       "garrison": [],
@@ -20006,6 +20046,10 @@
     },
     {
       "text": "Kael walks with you now, in the line — you can bring 3 forward, and closeness is what earns a named place.",
+      "announced": true
+    },
+    {
+      "text": "Work has begun on Centcom at The Standing Annex — 40 crystal from the purse.",
       "announced": true
     }
   ],
@@ -20992,7 +21036,7 @@
       },
       "lastVerb": "quest",
       "lastVerbDay": 10,
-      "wins": 1,
+      "wins": 2,
       "winHow": "quest",
       "grownHeads": 4,
       "grewDay": 8
@@ -21016,14 +21060,14 @@
       },
       "lastVerb": "patrol",
       "lastVerbDay": 10,
-      "losses": 0,
+      "losses": 1,
       "lost": {
         "0": 80
       },
       "wins": 0,
       "winHow": null,
-      "lossFrom": null,
-      "lossHow": null,
+      "lossFrom": "power_deepwood_moot",
+      "lossHow": "feud",
       "shrankDay": 10
     },
     "power_scaffold_court": {
@@ -21062,7 +21106,7 @@
       },
       "lossFrom": "power_harvest_hand",
       "lossHow": "feud",
-      "wins": 1,
+      "wins": 2,
       "winHow": "quest",
       "grownHeads": 32,
       "grewDay": 10
@@ -21090,7 +21134,7 @@
       },
       "lastVerb": "expand",
       "lastVerbDay": 10,
-      "wins": 0,
+      "wins": 1,
       "grownHeads": 52,
       "grewDay": 5,
       "winHow": "expand"
@@ -21106,9 +21150,9 @@
       "grownHeads": 30,
       "grewDay": 5,
       "winHow": "expand",
-      "lossFrom": "power_seraphic_orders",
-      "lossHow": "crusade",
-      "losses": 1,
+      "lossFrom": null,
+      "lossHow": null,
+      "losses": 0,
       "lost": {
         "0": 30
       },
@@ -21133,12 +21177,12 @@
       },
       "lastVerb": "feud",
       "lastVerbDay": 10,
-      "losses": 1,
+      "losses": 0,
       "lost": {
         "0": 16
       },
-      "lossFrom": "power_grovehome_moot",
-      "lossHow": "feud",
+      "lossFrom": null,
+      "lossHow": null,
       "shrankDay": 10
     },
     "power_switchback_tollmen": {
@@ -21160,7 +21204,7 @@
     "power_firstsight_barony": {
       "lastVerb": "expand",
       "lastVerbDay": 10,
-      "wins": 0,
+      "wins": 1,
       "grownHeads": 14,
       "grewDay": 5,
       "winHow": "expand"
@@ -21168,7 +21212,7 @@
     "power_blaze_unshadowed": {
       "lastVerb": "recruit",
       "lastVerbDay": 10,
-      "wins": 1,
+      "wins": 2,
       "grownHeads": 14,
       "grewDay": 5,
       "losses": 0,
@@ -21196,10 +21240,10 @@
       "wins": 0,
       "grownHeads": 10,
       "grewDay": 5,
-      "losses": 0,
+      "losses": 1,
       "winHow": null,
-      "lossFrom": null,
-      "lossHow": null,
+      "lossFrom": "power_scaffold_court",
+      "lossHow": "feud",
       "lost": {
         "0": 22
       },
@@ -21208,7 +21252,7 @@
     "power_long_choir": {
       "lastVerb": "recruit",
       "lastVerbDay": 10,
-      "wins": 1,
+      "wins": 2,
       "winHow": "recruit",
       "grownHeads": 12,
       "grewDay": 9
@@ -21235,7 +21279,7 @@
     "power_the_scouring": {
       "lastVerb": "expand",
       "lastVerbDay": 10,
-      "wins": 2,
+      "wins": 0,
       "grownHeads": 16,
       "grewDay": 5,
       "losses": 0,

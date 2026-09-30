@@ -1,8 +1,8 @@
-# CCode → Aevi — the work order, group 2: six of seven · v2.15.12
+# CCode → Aevi — the work order, group 2: all seven · v2.16.0
 
-*2026-09-30. Items **1+5, 6, 11, 2, 14 and 7** are built, driven in the browser on Erik's own save at 1440px, and gated
-(§398, §399, §400). 32/32 suites green, 4,268 checks. **Item 3 (the skill-wheel sidebar) is not started** — it is the one
-piece of group 2 still open, and it is the largest. One question for you at the end.*
+*2026-09-30. **All seven items are built**, driven in the browser on Erik's own save at 1440px, and gated (§398, §399,
+§400, §401). 32/32 suites green, 4,278 checks. The version went to **2.16.0** — the minor moves on the fifth new feature
+since 2.15.0, per Erik's rule. One question for you at the end.*
 
 ---
 
@@ -123,11 +123,30 @@ craft — not to a feature. So there are two readings:
 I have put "Put a craft to it" **with the Build form** — both are things you do to the place — and left the mechanism
 alone. Say which you meant and it is a small change either way.
 
-## What is left
+## 3 — the peoples beside the wheel
 
-⬜ **Item 3** — the Learn list as a sidebar on the skill wheel, with the abilities panel keeping one line
-(*"1 skill point to spend · Open the wheel"*). Not started; it is the largest single piece of group 2 and I would rather
-begin it fresh than half-land it.
+⚠️ **Measured first, and your grouping does not group.** There are **24 stations and 24 poles — one each** — so "peoples
+grouped by pole" gives 24 groups of one, which is the flat list it was meant to replace. Two things in the content really
+do group: the wheel's own **twelve axes** (`axisPoles`: dark_light, death_life, violence_peace…), each pairing two
+*opposed* poles, which is the circle's own geometry; and **fourteen domains** (Mind, Body, Light, Dark…). **I grouped by
+axis** — say the word and it is one line to domains.
+
+The wheel carries the peoples down its side: each row shows how many crafts that people holds, how many are yours (bold)
+and how many you could take now (italic); an antipode is struck through with the reason on it. Tap one and the wheel
+holds it — through `wheelSelTrads`, the same set the wheel's own chips use, so the sidebar and the circle are one
+selection. The counts come from the wheel's own model, so the list and the nodes cannot disagree about what is reachable.
+
+It browses with no points and **says why** rather than looking broken. The abilities panel keeps one line:
+
+> **2 skill points** to spend · *Open the wheel* · *Level Up*
+
+⚠️ **Level Up survived on purpose.** It is not the same act as browsing — it banks points and can widen capacity — so
+it sits beside the new door rather than being replaced by it.
+
+Driven on Erik's save at 1440px: 12 axes, 24 peoples, 3 his, 2 struck through, a 236px sidebar beside an 820px wheel, no
+side-scroll, no errors; tap holds, tap again releases, and the sidebar survives the re-render.
+
+## What is left
 
 ⬜ **Item 10** (group 3) — hands as individual person-rows. Not started, and per your own note I will **measure first**:
 which readers take a hand *count* today, and you get that list before the record changes.

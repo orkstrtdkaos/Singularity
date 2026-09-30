@@ -7,8 +7,8 @@
   "nativeTradition": "numinous",
   "whyHere": "You came back into the world to find out whether it still holds anything worth staying material for.",
   "background": "orphan",
-  "level": 2,
-  "xp": 198,
+  "level": 3,
+  "xp": 203,
   "attributes": {
     "physical": 4,
     "mental": 3,
@@ -57,16 +57,17 @@
   ],
   "alignment": {
     "mechanical_spiritual": 0.1514302510187793,
-    "body_mind": 0.07435114658730468,
+    "body_mind": 0.09563358925793944,
     "chaos_order": 0.009000000000000001,
     "concrete_abstract": 0.08013562499999999,
-    "emotional_logical": 0.0635
+    "emotional_logical": 0.08032500000000001,
+    "violence_peace": 0.034999999999999996
   },
-  "attunement": 2,
-  "maxHealth": 56,
-  "health": 56,
-  "maxEnergy": 105,
-  "energy": 38,
+  "attunement": 3,
+  "maxHealth": 61,
+  "health": 61,
+  "maxEnergy": 110,
+  "energy": 110,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -385,151 +386,135 @@
         "player": "Ask her to tell you more—what else does the form feel, now that it is permitted to choose?",
         "summary": "In a stone overhang on the descent, Cevaine speaks what the lattice forbade—the form beginning to recognize that desire is not inefficiency but choice, and that yielding does not break the discipline, it transforms it.",
         "narration": "Her eyes track yours in the grey light, and you watch the precision begin to soften—not blur, but *choose* its focus differently. \"More,\" she says, and there is almost a question in it, as though asking permission again.\n\n\"The lattice teaches the body as mechanism,\" Cevaine continues, her hand still framing your face, the other now resting against your chest—she can feel your heartbeat, uneven and animal-warm beneath the cloth. \"Efficiency. Input, output, closure.\" Her breathing shifts. \"But this—your warmth, the randomness of your pulse—it is *alive*. Not inefficient. Alive.\" She pauses, testing the word. \"The form taught me that wanting something is weakness. That desire unmakes precision.\" Her dark eyes meet yours directly. \"But you—your wanting me does not make you weak. And I am... I am beginning to understand that my wanting *you* does not break the form. It changes it. Into something the lattice never permitted me to become.\"\n\nShe lowers her forehead to yours, a gesture of contact that is both tentative and certain—lattice-trained discipline meeting something softer, something that has chosen to yield. \"What else do I feel?\" she asks quietly. \"Fear. Also joy. Also—\" her voice drops to barely audible \"—a desire to remain here, in this moment, in this shelter, with you, and to permit myself to keep feeling these things without resistance.\" Her hand slides from your chest to take yours, their fingers intertwining with geometric precision even as the rest of her learns to be less precise. \"The form is learning a new architecture. One where I do not have to be alone inside it.\""
+      },
+      {
+        "player": "Kiss her—let the contact be your answer. The form wants to know what permission feels like; show her.",
+        "summary": "In a stone overhang on the switchback descent, Splarf and Cevaine move through recognition into touch—the sentinel learning that desire is not weakness but choice, that yielding does not break the form but transforms it, that permission is something the body knows before the discipline does. A threshold crossed in grey predawn light.",
+        "narration": "In the grey predawn of the overhang, you close the distance between you. There is no hesitation in it—only clarity, the kind of presence without demand that she has learned to read. Your hand finds her jaw, steady and certain, and you kiss her.\n\nThe contact lands precisely where she is searching for it. Her breath stops. For a moment the form does not know what to do with permission this direct, this physical—and then something shifts. Her eyes close. Her hand, still framing your face, tightens slightly. She tastes like stone and starlight and the sharp edge of a breath held too long. When she yields into the kiss, it is not collapse—it is choice, deliberate and whole, the discipline transforming into something that does not break the structure but *rewrites* what the structure is allowed to hold.\n\nWhen you part, her forehead comes to rest against yours, and there is a long moment of silence. Not the silence of hesitation, but the silence of someone learning that what they have been taught is incomplete, and the incompleteness is not a flaw—it is where *life* lives. \"The form chose that,\" she says softly, her hand sliding from your jaw to the nape of your neck, learning the shape of you through touch. \"The lattice did not permit it. The form chose it anyway.\"\n\n*You feel it settle into you — a new steadiness. (Level 3: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*"
       }
     ],
     "lastTurn": {
-      "narration": "Her eyes track yours in the grey light, and you watch the precision begin to soften—not blur, but *choose* its focus differently. \"More,\" she says, and there is almost a question in it, as though asking permission again.\n\n\"The lattice teaches the body as mechanism,\" Cevaine continues, her hand still framing your face, the other now resting against your chest—she can feel your heartbeat, uneven and animal-warm beneath the cloth. \"Efficiency. Input, output, closure.\" Her breathing shifts. \"But this—your warmth, the randomness of your pulse—it is *alive*. Not inefficient. Alive.\" She pauses, testing the word. \"The form taught me that wanting something is weakness. That desire unmakes precision.\" Her dark eyes meet yours directly. \"But you—your wanting me does not make you weak. And I am... I am beginning to understand that my wanting *you* does not break the form. It changes it. Into something the lattice never permitted me to become.\"\n\nShe lowers her forehead to yours, a gesture of contact that is both tentative and certain—lattice-trained discipline meeting something softer, something that has chosen to yield. \"What else do I feel?\" she asks quietly. \"Fear. Also joy. Also—\" her voice drops to barely audible \"—a desire to remain here, in this moment, in this shelter, with you, and to permit myself to keep feeling these things without resistance.\" Her hand slides from your chest to take yours, their fingers intertwining with geometric precision even as the rest of her learns to be less precise. \"The form is learning a new architecture. One where I do not have to be alone inside it.\"",
-      "sceneSummary": "In a stone overhang on the descent, Cevaine speaks what the lattice forbade—the form beginning to recognize that desire is not inefficiency but choice, and that yielding does not break the discipline, it transforms it.",
+      "narration": "In the grey predawn of the overhang, you close the distance between you. There is no hesitation in it—only clarity, the kind of presence without demand that she has learned to read. Your hand finds her jaw, steady and certain, and you kiss her.\n\nThe contact lands precisely where she is searching for it. Her breath stops. For a moment the form does not know what to do with permission this direct, this physical—and then something shifts. Her eyes close. Her hand, still framing your face, tightens slightly. She tastes like stone and starlight and the sharp edge of a breath held too long. When she yields into the kiss, it is not collapse—it is choice, deliberate and whole, the discipline transforming into something that does not break the structure but *rewrites* what the structure is allowed to hold.\n\nWhen you part, her forehead comes to rest against yours, and there is a long moment of silence. Not the silence of hesitation, but the silence of someone learning that what they have been taught is incomplete, and the incompleteness is not a flaw—it is where *life* lives. \"The form chose that,\" she says softly, her hand sliding from your jaw to the nape of your neck, learning the shape of you through touch. \"The lattice did not permit it. The form chose it anyway.\"\n\n*You feel it settle into you — a new steadiness. (Level 3: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*",
+      "sceneSummary": "In a stone overhang on the switchback descent, Splarf and Cevaine move through recognition into touch—the sentinel learning that desire is not weakness but choice, that yielding does not break the form but transforms it, that permission is something the body knows before the discipline does. A threshold crossed in grey predawn light.",
       "choices": [
         {
-          "label": "Hold her like this, say nothing—let the silence and presence speak. The conversation does not need words right now.",
+          "label": "Stay held in this moment—speak nothing, let the silence and proximity do their work.",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {
-            "violence_peace": 0.6,
             "body_mind": 0.3,
-            "concrete_abstract": 0.2
+            "concrete_abstract": -0.2
           },
-          "difficulty": "trivial",
+          "difficulty": "very easy",
           "intentTags": [
-            "presence",
-            "comfort"
+            "calm"
           ],
-          "abilityId": null,
           "trivial": true
         },
         {
-          "label": "Ask her about the river crossing ahead—what does her form need to be ready for the descent and the water?",
-          "attribute": "practical",
-          "subAttribute": "craft",
+          "label": "Ask her what comes next—whether the form can choose to continue, or whether this threshold is where it must stop for now.",
+          "attribute": "social",
+          "subAttribute": "presence",
           "axes": {
-            "violence_peace": -0.1,
+            "violence_peace": 0.2,
+            "body_mind": 0.4
+          },
+          "difficulty": "easy",
+          "intentTags": [
+            "ask"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Move deeper into touch—let your hands find her shoulders, her spine, the places the lattice taught her to ignore. Ask permission with your body instead of words.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "body_mind": 0.5,
+            "concrete_abstract": 0.1
+          },
+          "difficulty": "normal",
+          "intentTags": [
+            "romantic"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Pull back gently and ask her to walk with you down the switchback as dawn fully breaks—moving together into the path ahead, carrying this recognition forward.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "violence_peace": 0.3,
             "space_time": 0.2
           },
           "difficulty": "easy",
           "intentTags": [
-            "practical",
-            "planning"
+            "travel"
           ],
-          "abilityId": null,
-          "trivial": false
-        },
-        {
-          "label": "Kiss her—let the contact be your answer. The form wants to know what permission feels like; show her.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "violence_peace": 0.7,
-            "body_mind": 0.5,
-            "emotional_logical": 0.4
-          },
-          "difficulty": "easy",
-          "intentTags": [
-            "romantic",
-            "intimate"
-          ],
-          "abilityId": null,
-          "trivial": false
-        },
-        {
-          "label": "Ask her what comes next—for the form, for the lattice, for the two of you. What does she want now?",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "emotional_logical": 0.3,
-            "violence_peace": 0.5
-          },
-          "difficulty": "normal",
-          "intentTags": [
-            "direct",
-            "present"
-          ],
-          "abilityId": null,
           "trivial": false
         }
       ],
-      "deeds": [],
       "characterDeltas": {
         "health": 0,
         "energy": 0
       },
-      "ledgerEvents": [],
-      "questUpdates": [],
-      "standingOps": [],
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "cevaine",
+          "note": "Kissed Splarf in the grey predawn of the overhang—received permission made physical, learned that the form can choose what the lattice forbade. The discipline is beginning to recognize that desire is not flaw but architecture, and the structure holds.",
+          "learned": [
+            "Permission is something the body understands before the form does—the kiss landed precisely where recognition lives",
+            "Yielding does not break the lattice's structure; it rewrites what the structure is allowed to contain",
+            "The form can choose differently than it was taught, and that choice is not weakness—it is the form becoming whole"
+          ],
+          "relationshipDelta": 1,
+          "bondStage": "together"
+        }
+      ],
       "scene": {
-        "setting": "A deep stone overhang on the switchback descent, two turns below the waystation. Grey predawn light filters at the mouth. The spring melt roars constant below, a low thunder that masks all other sound. Inside, the air is still and warm.",
+        "setting": "A deep stone overhang on the switchback descent, two turns below the waystation. Grey predawn light filters at the mouth. The spring melt roars constant below, a low thunder beneath the moment. Inside, the air is still and warm with two bodies and shared breath.",
         "npcsPresent": [
           {
             "name": "Cevaine",
-            "state": "Forehead to forehead with Splarf, hand traced along Splarf's jaw, learning that the form can yield and choose—the lattice-trained discipline beginning to soften into something new"
+            "state": "Forehead to forehead with Splarf, hands learning the shape of them through touch, the form beginning to recognize that desire is choice and that yielding is transformation"
           }
         ],
         "objects": [
           "The bedroll wrapped around both of you",
           "The stone walls worn smooth by time and water",
           "Your pack at the overhang's threshold",
-          "Boo at the mouth—present and watching the grey dawn"
+          "Boo at the mouth—present and watching the grey dawn break"
         ],
         "threads": [
-          "The path below and the river crossing waiting in daylight",
-          "What Cevaine will permit herself to become now that she sees desire as choice rather than flaw",
-          "Whether the two of you will continue together past the crossing"
+          "What Cevaine will permit herself to become now that the form has chosen desire",
+          "Whether the two of you will continue together past the river crossing and the path ahead",
+          "How the sentinel's recognition of her own choice will reshape her relationship to the lattice she was trained to serve"
         ]
       },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "cevaine",
-          "note": "In the predawn overhang, spoke what the lattice forbade—began to recognize that desire is not a flaw but a choice she is permitted to make. The form is learning a new architecture, one where she does not have to be alone inside it.",
-          "learned": [
-            "Desire is not inefficiency but a choice—and choosing it does not break the form, it transforms it",
-            "The lattice's rejection of desire was fear, not law—fear that belonged to those who taught it",
-            "Her form can want and remain whole—wholeness does not mean absence",
-            "Proximity and touch teach what words cannot—the body knows before the form does",
-            "Yielding does not unmake precision; it changes what precision is aimed at"
-          ],
-          "statusNote": "In the stone overhang at dawn, learning that her form can yield and choose—touching, speaking what the lattice forbade, beginning to recognize desire as permission rather than flaw"
-        }
-      ],
-      "intentsHeard": [],
-      "factUpdates": [],
-      "placeUpdates": [],
-      "codexUpdates": [],
-      "imagePrompt": "In grey predawn light inside a stone overhang, two figures foreheads-touching—one rigid with the precision of a lattice-trained sentinel, the other grounded and present. Her hand traces his jawline with geometric care; his hand holds hers with warmth. The spring melt roars below them, loud enough to hold the world at bay. Behind them, a shadow-shape watches from the overhang's mouth with eyes that do not catch light.",
-      "sceneEnded": false,
-      "momentArt": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/In%20grey%20predawn%20light%20inside%20a%20stone%20overhang%2C%20two%20figures%20foreheads-touching%E2%80%94one%20rigid%20with%20the%20precision%20of%20a%20lattice-trained%20sentinel%2C%20the%20other%20grounded%20and%20present.%20Her%20hand%20traces%20his%20jawline%20with%20geometric%20care%3B%20his%20hand%20holds%20hers%20with%20warmth.%20The%20spring%20melt%20roars%20below%20them%2C%20loud%20enough%20to%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=31799&nologo=true"
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "A deep stone overhang on the switchback descent, two turns below the waystation. Grey predawn light filters at the mouth. The spring melt roars constant below, a low thunder that masks all other sound. Inside, the air is still and warm.",
+      "setting": "A deep stone overhang on the switchback descent, two turns below the waystation. Grey predawn light filters at the mouth. The spring melt roars constant below, a low thunder beneath the moment. Inside, the air is still and warm with two bodies and shared breath.",
       "npcsPresent": [
         {
           "name": "Cevaine",
-          "state": "Forehead to forehead with Splarf, hand traced along Splarf's jaw, learning that the form can yield and choose—the lattic"
+          "state": "Forehead to forehead with Splarf, hands learning the shape of them through touch, the form beginning to recognize that d"
         }
       ],
       "objects": [
         "The bedroll wrapped around both of you",
         "The stone walls worn smooth by time and water",
         "Your pack at the overhang's threshold",
-        "Boo at the mouth—present and watching the grey dawn"
+        "Boo at the mouth—present and watching the grey dawn break"
       ],
       "threads": [
-        "The path below and the river crossing waiting in daylight",
-        "What Cevaine will permit herself to become now that she sees desire as choice rather than flaw",
-        "Whether the two of you will continue together past the crossing"
+        "What Cevaine will permit herself to become now that the form has chosen desire",
+        "Whether the two of you will continue together past the river crossing and the path ahead",
+        "How the sentinel's recognition of her own choice will reshape her relationship to the lattice she was trained to serve"
       ]
     },
-    "beats": 8,
+    "beats": 9,
     "subPlace": {
       "slug": "stone-overhang-shelter",
       "name": "Stone Overhang Shelter",
@@ -539,7 +524,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 5,
-    "hour": 7,
+    "hour": 8,
     "realAnchor": null
   },
   "companions": [
@@ -705,7 +690,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d4] On the path down, she moves with deliberate awareness of your presence ten paces behind. She paused on a wider section, not quite looking back but enough that you knew the pause was for you. She's chosen to let you see her this way.",
         "[d5] Called ahead to break the silence; recognized the question as the moment when form and presence require distance to remain what it is. Her response was precise refusal of conversation—not coldness, but geometry. She continues downhill, reading the path with her whole body.",
         "[d5] Called ahead into the dark and asked directly about death—no preamble, no softening. Answered with precision and then fear: the lattice teaches that endings are failure, but she is beginning to think the lattice is afraid of the only perfect thing it cannot control. Asked in return why the…",
         "[d5] Allowed the invitation to rest. Settled beside Splarf in shared warmth. Her form is learning that yielding to closeness does not unmake the discipline—it changes its shape. In the dark, with weight shared, something in her is beginning to believe rest is a form of holding too.",
@@ -714,17 +698,18 @@
         "[d5] Recognized that the lattice's rejection of desire is fear, not law. The form is beginning to understand that it can choose differently than it was taught. Spoke directly: 'If desire has no place in the lattice, then the lattice is incomplete.' The sentinel is learning to want.",
         "[d5] In the dark of the overhang, Splarf spoke permission plainly: 'You are perfect. And you are allowed to desire.' Her hand reached to touch Splarf's face. The lattice taught her perfection requires absence; she is beginning to recognize that the form can want and still remain whole. The architecture…",
         "[d5] Cevaine's hand traces your face in the grey predawn, learning you through touch. Her eyes meet yours directly. The lattice-trained sentinel is beginning to recognize that yielding does not break the form—it changes its shape into something she chooses.",
-        "[d5] In the predawn overhang, spoke what the lattice forbade—began to recognize that desire is not a flaw but a choice she is permitted to make. The form is learning a new architecture, one where she does not have to be alone inside it."
+        "[d5] In the predawn overhang, spoke what the lattice forbade—began to recognize that desire is not a flaw but a choice she is permitted to make. The form is learning a new architecture, one where she does not have to be alone inside it.",
+        "[d5] Kissed Splarf in the grey predawn of the overhang—received permission made physical, learned that the form can choose what the lattice forbade. The discipline is beginning to recognize that desire is not flaw but architecture, and the structure holds."
       ],
       "knownFacts": [
-        "The lattice's rejection of desire was fear, not law—and the fear belonged to those who taught it",
-        "The form can want and remain whole; closeness does not break the discipline, it changes its shape",
-        "Touching another person teaches what words cannot—the body knows before the form does",
         "Being perceived as *herself* rather than as a structure is what desire feels like",
         "The lattice's perfectionism was fear of change, not law",
         "Desire is not inefficiency but a choice—and choosing it does not break the form, it transforms it",
         "The lattice's rejection of desire was fear, not law—fear that belonged to those who taught it",
-        "Her form can want and remain whole—wholeness does not mean absence"
+        "Her form can want and remain whole—wholeness does not mean absence",
+        "Permission is something the body understands before the form does—the kiss landed precisely where recognition lives",
+        "Yielding does not break the lattice's structure; it rewrites what the structure is allowed to contain",
+        "The form can choose differently than it was taught, and that choice is not weakness—it is the form becoming whole"
       ],
       "skillsObserved": [
         "The ability to release precision without losing presence",
@@ -748,7 +733,7 @@
       },
       "image": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Tall%20angular%20woman%2C%20translucent%20pale%20skin%2C%20geometric%20precision%20in%20gaze%2C%20rigid%20lattice-disciplined%20posture%2C%20ethereal%20sentinel%20bearing%20witness%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=47408&nologo=true",
       "_portraitTier": "devoted",
-      "met": 33,
+      "met": 34,
       "bondType": "romantic",
       "bondStage": "together",
       "deeds": [
@@ -1268,7 +1253,7 @@
         "locationId": "the_thinning"
       }
     ],
-    "turnsSinceOffer": 9,
+    "turnsSinceOffer": 10,
     "recentOffers": [
       {
         "thing": "The caretaker's quiet competence and the shelter's genuine welcome—a place that asks nothing and offers warmth without demand",
@@ -8495,8 +8480,8 @@
     "craft": 4,
     "wits": 4
   },
-  "pendingSubPoints": 0,
-  "skillPoints": 1,
+  "pendingSubPoints": 1,
+  "skillPoints": 3,
   "discoveries": [],
   "codex": {
     "schemaVersion": 1,
@@ -9615,18 +9600,18 @@
     ]
   },
   "tendencies": {
-    "stealth": 2.209359818240034,
-    "strategic": 5.090383135310093,
-    "cautious": 12.330842607460696,
-    "cerebral": 7.364328230943278,
-    "patient": 3.7339051125963456,
-    "devotion": 0.7932000879955046,
-    "risky": 2.416853002819194,
-    "generous": 5.265077765124142,
-    "social": 16.979587335277476,
-    "craft": 0.497554180280839,
-    "amorous": 6.708694834467177,
-    "leadership": 0.6026876802191
+    "stealth": 2.154125822784033,
+    "strategic": 4.96312355692734,
+    "cautious": 12.022571542274179,
+    "cerebral": 7.180220025169696,
+    "patient": 3.640557484781437,
+    "devotion": 0.773370085795617,
+    "risky": 2.356431677748714,
+    "generous": 5.133450820996038,
+    "social": 16.555097651895537,
+    "craft": 0.485115325773818,
+    "amorous": 7.540977463605497,
+    "leadership": 0.5876204882136226
   },
   "aptitudes": [
     "silver_tongue",
@@ -9634,7 +9619,7 @@
     "shadow",
     "naive"
   ],
-  "actionCount": 70,
+  "actionCount": 71,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -10109,8 +10094,8 @@
     "source": "personal",
     "notes_for_gm": "A generated PERSONAL arc (SNG-133) — surface it as a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790739251101,
-  "rev": 313,
+  "updatedAt": 1790739359130,
+  "rev": 314,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -10339,7 +10324,7 @@
   ],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "the_numinous_reach": 78
+    "the_numinous_reach": 79
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -10379,10 +10364,10 @@
     {
       "id": "sess-5",
       "startedAt": "2026-09-30T02:56:49.543Z",
-      "lastAt": "2026-09-30T03:34:11.084Z",
+      "lastAt": "2026-09-30T03:35:59.123Z",
       "startDay": 92,
       "endDay": 92,
-      "beats": 14
+      "beats": 15
     }
   ],
   "establishedFacts": [
@@ -10450,15 +10435,15 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 70,
-    "scene": 70,
-    "choices": 70,
+    "sceneSummary": 71,
+    "scene": 71,
+    "choices": 71,
     "offer": 34,
     "codexUpdates": 37,
     "imagePrompt": 31,
     "gambitApt": 52,
-    "sceneEnded": 67,
-    "characterDeltas": 56,
+    "sceneEnded": 68,
+    "characterDeltas": 57,
     "arcOps": 1,
     "factUpdates": 8,
     "placeUpdates": 18,
@@ -10466,7 +10451,7 @@
     "deeds": 12,
     "ledgerEvents": 4,
     "questUpdates": 18,
-    "npcUpdates": 59,
+    "npcUpdates": 60,
     "generateRequest": 2,
     "newEncounter": 1,
     "encounterOps": 1,
@@ -10477,7 +10462,7 @@
     "standingOps": 1,
     "moveTo": 1
   },
-  "_opTurns": 70,
+  "_opTurns": 71,
   "practice": {
     "schemaVersion": 1,
     "uses": {
@@ -10649,7 +10634,7 @@
     "study": 3,
     "negotiate": 2,
     "travel": 3,
-    "romantic": 6,
+    "romantic": 7,
     "rapport": 9,
     "care": 1,
     "heal": 1,
@@ -10663,7 +10648,8 @@
     "risky": 1,
     "investigate": 1,
     "plan": 1,
-    "analyze": 1
+    "analyze": 1,
+    "intimate": 1
   },
   "_stageOpRefusals": [
     "the-document-and-the-ditch: not-current-stage (named \"stage_4_record\", current is \"null\")"
@@ -11155,7 +11141,7 @@
   "worldEvents": [],
   "locationState": {},
   "_opUnknown": {
-    "sceneSummary": 14
+    "sceneSummary": 15
   },
   "_debtReceipts": [],
   "_bandNotes": null,

@@ -8,7 +8,7 @@
   "whyHere": "You came back into the world to find out whether it still holds anything worth staying material for.",
   "background": "orphan",
   "level": 2,
-  "xp": 122,
+  "xp": 152,
   "attributes": {
     "physical": 4,
     "mental": 3,
@@ -275,6 +275,19 @@
       "spread": [],
       "day": 4,
       "worldDay": 38
+    },
+    {
+      "at": "2026-09-30T02:54:41.237Z",
+      "locationId": "the_thinning",
+      "communityId": "numinous.thinning",
+      "description": "The Document and the Ditch — Repair",
+      "tags": [
+        "quest",
+        "resolution",
+        "repair"
+      ],
+      "weight": 2,
+      "spread": []
     }
   ],
   "relationships": {},
@@ -282,7 +295,17 @@
     "At The Thinning's waygate clearing, evening deepens. Splarf consulted Boo about the dark gathering at the forest's edge while Cevaine stood sentinel, the sealed veil humming between them and mystery. Something moves in the woods—something that does not announce itself.",
     "At The Thinning's sealed waygate, deep in the second night, Splarf builds a fire and settles into vigil beside Cevaine—the wounded sentinel refusing all aid, the veil remaining sealed and angry, and the purposeful dark continuing its patient watch from the forest's edge.",
     "At dawn on day three, Splarf takes the voided ledger assignment from the messenger and learns the price of its delivery—the sender on the other side is fading, the crossing drained them, and the document itself is final proof that Hoss is free.",
-    "Splarf and Cevaine enter the Lower-Pass Waystation and find unexpected shelter and quiet—a fire, a caretaker, warmth, and the threshold between vigil and rest."
+    "Splarf and Cevaine enter the Lower-Pass Waystation and find unexpected shelter and quiet—a fire, a caretaker, warmth, and the threshold between vigil and rest.",
+    {
+      "kind": "quest_resolved",
+      "questId": "the-document-and-the-ditch",
+      "title": "The Document and the Ditch",
+      "outcome": "Repair",
+      "summary": "",
+      "narration": [],
+      "worldDay": 92,
+      "at": "2026-09-30T02:54:41.235Z"
+    }
   ],
   "currentLocationId": "the_thinning",
   "activeScene": {
@@ -575,7 +598,7 @@
       "id": "the-document-and-the-ditch",
       "title": "The Document and the Ditch",
       "structured": true,
-      "status": "active",
+      "status": "resolved",
       "premise": "A pass-raised mender who survived on his hands discovers that the erasure of his family was a single page — and that page has a name, a seal, and a clerk who signed it — and must decide whether understanding that fact is enough, or whether understanding demands an answer.",
       "stakes": "To know exactly how a family becomes a line in a ledger — and whether that knowledge becomes repair, or ruin, or something the law has no category for.",
       "axis": null,
@@ -708,7 +731,11 @@
         "repair",
         "answer",
         "name"
-      ]
+      ],
+      "outcomeId": "repair",
+      "outcomeName": "Repair",
+      "resolvedAt": "2026-09-30T02:54:41.235Z",
+      "resolvedWorldDay": 92
     }
   ],
   "npcRegistry": {
@@ -9336,6 +9363,19 @@
         "aliases": [],
         "createdDay": null,
         "reference": true
+      },
+      "a-counter-claim-under-lower-pass-common": {
+        "id": "a-counter-claim-under-lower-pass-common",
+        "label": "",
+        "kind": "lore",
+        "facts": [
+          "[d4] A counter-claim under lower-pass common-right tradition was filed against the Heights tone-guild's acoustic-rights assertion over Crestfall Notch — the first such filing in the Plateau light-law…"
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": 4,
+        "entityId": "a-counter-claim-under-lower-pass-common",
+        "updatedDay": 4
       }
     },
     "mergeUndo": [
@@ -9576,8 +9616,8 @@
   ],
   "peopleDisposition": {
     "numinous": 5,
-    "hourkeeper": 2,
-    "churnfolk": 1,
+    "hourkeeper": 3,
+    "churnfolk": 3,
     "enginewright": -1,
     "lattice": 1
   },
@@ -10023,8 +10063,8 @@
     "source": "personal",
     "notes_for_gm": "A generated PERSONAL arc (SNG-133) — surface it as a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790736711362,
-  "rev": 282,
+  "updatedAt": 1790736881240,
+  "rev": 283,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -10974,5 +11014,7 @@
       "lastVerb": "protect",
       "lastVerbDay": 4
     }
-  }
+  },
+  "worldEvents": [],
+  "locationState": {}
 }

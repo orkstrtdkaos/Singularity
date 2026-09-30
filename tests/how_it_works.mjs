@@ -25474,8 +25474,21 @@ console.log("\n── §330 · standing work — only the kinds whose effect is 
   const { loadContentHeadless: lch330 } = await import("./headless_content.mjs");
   const C330 = await lch330();
   const T = HW.workTable();
-  check("§330: ⚑ ONLY WHAT IS WIRED IS OFFERED — foraging, hunting, training, mending, guarding, patrolling, tending, keeping the accounts; scouting, crafting and teaching wait (a row that does nothing would be a claim about a mechanism)",
-    Object.keys(T.kinds).sort().join() === "forage,guard,hunt,keep,mend,patrol,tend,train" && !T.kinds.scout && !T.kinds.craft && !T.kinds.teach);
+  // ⛑ GUARDING IS NOT ON THIS LIST ANY MORE — Erik 2026-09-30: *"yes, merge guarding into the watch."* It reached only
+  // `workMods().watch`, the same watch `garrison` feeds, so it was a second door onto one room. ⚠️ Asserted as the
+  // READER both ways rather than as a bare absence: putting somebody to the watch works, putting them to "guard" is
+  // refused in words, and the watch still counts the garrison. A rule stated only as "X is missing" fires the day Erik
+  // changes his mind; this states what the watch IS.
+  check("§330: ⚑ ONLY WHAT IS WIRED IS OFFERED — foraging, hunting, training, mending, patrolling, tending, keeping the accounts; scouting, crafting and teaching wait (a row that does nothing would be a claim about a mechanism)",
+    Object.keys(T.kinds).sort().join() === "forage,hunt,keep,mend,patrol,tend,train" && !T.kinds.scout && !T.kinds.craft && !T.kinds.teach);
+  check("§330: ⛔ …and GUARDING IS THE WATCH — posting somebody to it is the job; there is no second control that means the same thing",
+    (() => {
+      const w = { garrison: ["g"], work: { patrol: ["p"] } };
+      const mods = HW.workMods(w);
+      const refused = HW.assignWork({ holdings: [{ id: "h", work: {} }] }, "h", "guard", "x", { table: T });
+      return mods.watch.includes("p") && !mods.watch.includes("g")     // ⛑ patrol joins the watch; the garrison IS it
+        && refused.ok === false && /not work this hold offers/.test(refused.why);
+    })());
   const mk = () => ({ holdings: [{ id: "h1", name: "Fell Pell", locationId: "mill", condition: "holding", steward: "pell", store: {} }, { id: "h2", name: "Made Gate", locationId: "gate" }],
     bands: [{ id: "b1", name: "Ridge", contingents: [{ n: 4, quality: 1, does: ["HARM"], from: "h1" }, { n: 3, quality: 3, does: ["HARM"], from: "h1" }, { n: 5, quality: 1, from: "elsewhere" }] }] });
   const who = mk();
@@ -25501,13 +25514,19 @@ console.log("\n── §330 · standing work — only the kinds whose effect is 
   HW.tickWork(u, hu, { goodDayOf: () => 1, headsOf: () => 4, rng: () => 0 });
   check("§330: ⛑ …and a band's hands work as hands — four of them forage twelve good days in a pass", hu.store.raw_material === 12, JSON.stringify(hu.store));
   const cfg = { ...C330.rules.economy.holdStore, features: C330.rules.economy.holdFeatures };
-  const base = { id: "hx", name: "Hx", kind: "enterprise", yields: "raw_material", condition: "thriving", locationId: "x", store: {}, garrison: ["g1"], crew: [] };
+  // ⛑ THE BAND'S HANDS ARE POSTED TO THE WATCH, not put to a "guard" job — Erik merged the two on 2026-09-30, and the
+  // reconcile step moves exactly this shape on any save that still carries it. The claim is unchanged: people AND a
+  // band's hands both stand the watch, and a walker joins it while patrolling.
+  // ⚠️ THE GARRISON IS ON *BOTH* FIXTURES, or this stops isolating what it is about: a posted hand costs upkeep, so
+  // adding one to `tended` alone made it dearer than `plain` and broke the "kept accounts are a tenth less" comparison
+  // — the fixture would have been measuring the watch's wage bill and calling it the accounts.
+  const base = { id: "hx", name: "Hx", kind: "enterprise", yields: "raw_material", condition: "thriving", locationId: "x", store: {}, garrison: ["g1", "unit:b1:0"], crew: [] };
   const plain = JSON.parse(JSON.stringify(base)), tended = JSON.parse(JSON.stringify(base));
-  tended.work = { tend: ["dara"], keep: ["mara"], guard: ["unit:b1:0"], patrol: ["fendt"] };
+  tended.work = { tend: ["dara"], keep: ["mara"], patrol: ["fendt"] };
   H330.tickStore({ holdings: [plain] }, plain, { cfg });
   H330.tickStore({ holdings: [tended] }, tended, { cfg });
   const yPlain = plain.store.raw_material || 0, yTended = tended.store.raw_material || 0;
-  check("§330: ⛔ THE HOLD'S OWN READERS CHANGE WHILE THE WORK IS DONE — the guards and the walkers stand the watch (people and hands); the accounts kept, upkeep is a tenth less; tended, the yield is a quarter more",
+  check("§330: ⛔ THE HOLD'S OWN READERS CHANGE WHILE THE WORK IS DONE — the posted and the walkers stand the watch (people and hands); the accounts kept, upkeep is a tenth less; tended, the yield is a quarter more",
     H330.watchOf(tended, cfg).includes("unit:b1:0") && H330.watchOf(tended, cfg).includes("fendt") && H330.watchOf(tended, cfg).includes("g1")
     && Math.abs(H330.upkeepFor(tended, cfg) - 0.9 * H330.upkeepFor(plain, cfg)) < 1e-9 && H330.upkeepFor(plain, cfg) > 0
     && yPlain > 0 && yTended === Math.round(yPlain * 1.25), JSON.stringify({ yPlain, yTended, up: [H330.upkeepFor(plain, cfg), H330.upkeepFor(tended, cfg)] }));

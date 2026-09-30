@@ -183,7 +183,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.15.7";
+const APP_VERSION = "2.15.8";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -15844,11 +15844,14 @@ function renderHoldingsTab(manageId = null, tab = null) {
               ids: h.steward ? [String(h.steward)] : [],
               gain: h.steward ? `a rung every ${gDials?.passesPerClimb || 4} passes` : "it cannot climb unkept" },
             { kind: "_hand", label: "Hands", what: "the crew who live and work here", ids: (h.crew || []).map(String), gain: "" },
+            // ✅ ERIK 2026-09-30 — GUARDING IS THIS ROW NOW. It was a separate job that fed the same watch, which is what
+            // he saw as two controls for one thing; its own sentence lives here, where the job does. Patrolling still
+            // joins the watch from elsewhere, being a different job that happens to keep eyes out while it runs.
             { kind: "_watch", label: "The watch", what: "they stand it, and meet what comes at the hold",
               ids: (h.garrison || []).map(String),
               gain: (() => {
-                const also = [...((workOf(h).guard) || []), ...((workOf(h).patrol) || [])].map(String);
-                return also.length ? `${also.length} more stand it from Guarding and Patrolling` : "";
+                const also = ((workOf(h).patrol) || []).map(String);
+                return also.length ? `${also.length} more watch while patrolling` : "";
               })() },
           ].map(r => `<div class="hw-row"><span class="hw-kind">${esc(r.label)}<small>${esc(r.what)}</small></span>
             <span class="hw-who">${r.ids.map(id => jobChip(r.kind, id)).join(" ")}${r.kind === "_keeper" && r.ids.length ? "" : putter(r.kind, r.kind === "_keeper" ? "make one keeper" : r.kind === "_watch" ? "post a guard" : "add a hand")}</span>

@@ -96,6 +96,33 @@ function renameTargets(spec, entry, character, known) {
 
 export const CHARACTER_STEPS = [
   {
+    version: 92, id: "guarding-is-the-watch", playerFacing: true,
+    // ✅ ERIK 2026-09-30: *"yes, merge guarding into the watch - proceed."*
+    //
+    // ⛑ THEY WERE ONE MECHANISM WEARING TWO CONTROLS. `workMods().watch` folded everyone at Guarding into the same
+    // watch `holding.garrison` feeds, and the `guard` kind reached nothing else — so the hold's card offered "post a
+    // guard" and "put someone to Guarding" as if they were different jobs. They were not.
+    //
+    // ⛔ AND A RETIRED KIND STRANDS WHOEVER WAS ON IT: not counted by the watch, not assignable, not rendered. Anyone
+    // the save still holds at `work.guard` is posted to the watch itself, which is where they already effectively were.
+    // ⚡ Measured at the ruling: zero people in any live save were on guard-work, so for today this moves nobody — which
+    // is exactly when a migration is cheap to write.
+    apply(character, ctx = {}) {
+      const moved = [];
+      for (const h of (character?.holdings || [])) {
+        const w = h?.work;
+        const was = Array.isArray(w?.guard) ? w.guard.filter(Boolean).map(String) : [];
+        if (!was.length) { if (w && "guard" in w) delete w.guard; continue; }
+        const on = new Set((Array.isArray(h.garrison) ? h.garrison : []).map(String));
+        for (const id of was) if (!on.has(id)) { h.garrison = [...(h.garrison || []), id]; on.add(id); }
+        delete w.guard;
+        moved.push(`${was.length} at ${h.name || h.id}`);
+      }
+      if (!moved.length) return {};
+      return { notes: [`Guarding and standing the watch are one job now — whoever was put to Guarding is on the watch itself: ${moved.join(", ")}.`] };
+    },
+  },
+  {
     version: 91, id: "one-route-becomes-one-run", playerFacing: true,
     // ✅ SNG-665 §3 — ERIK 2026-09-29: *"No — a keeper does NOT hold the entire stock while a trade route runs."*
     //

@@ -8,7 +8,7 @@
   "whyHere": "You came back into the world to find out whether it still holds anything worth staying material for.",
   "background": "orphan",
   "level": 2,
-  "xp": 157,
+  "xp": 162,
   "attributes": {
     "physical": 4,
     "mental": 3,
@@ -56,7 +56,7 @@
     }
   ],
   "alignment": {
-    "mechanical_spiritual": 0.0007500000000000007,
+    "mechanical_spiritual": 0.010712500000000003,
     "body_mind": 0.034999999999999996,
     "chaos_order": 0.020000000000000004
   },
@@ -362,99 +362,183 @@
         "player": "Notice the curve of Cevaines backside and see if she is intentionally letting her womanly charms show.",
         "summary": "Descending the switchback path in spring afternoon, Splarf watches Cevaine move ahead—and recognizes in the deliberate curve of her body an awareness of being seen that she's chosen not to conceal.",
         "narration": "You're watching the rhythm of her descent—the geometric precision of each step, the way her lattice-trained form moves through space with absolute intention. And yes, there it is: the curve of her spine as she leans into a turn, the shift of her weight through her hips as the path switchbacks. She's moving with purpose, but there's something else underneath it—a deliberateness in how her body occupies the space. Not unconscious. Not accidental.\n\nShe knows you're watching. The knowledge sits in how she places her feet, in the slight tilt of her shoulders as she navigates a steeper section. There's no performance in it—Cevaine doesn't perform—but there's an *awareness* of being seen that she's chosen not to hide. After three days of holding herself in absolute discipline, after the sentinel's form finally cracked and released, her body has become something she's allowing you to notice. It's not an invitation exactly. It's an acknowledgment that you're there, and that she is here, and that the boundary between watching and being watched has become permeable."
+      },
+      {
+        "player": "Hold back and let her lead—honor the shape she's giving you by keeping distance, and see what she does with it",
+        "summary": "On the switchback descent into the foothills at day's end, Splarf follows Cevaine downhill and recognizes deliberate awareness in the curve of her body—a choice she's made to be seen, to lead, to let distance mean something other than refusal.",
+        "narration": "Cevaine descends ahead of you down the switchback, and you hold the distance she's given you—ten paces that feel purposeful, that feel chosen. Her body moves through the path's geometry with that lattice precision, each step deliberate, each turn of her spine announcing awareness of the space behind her. The afternoon light catches the near-translucence of her skin as she navigates a sharper bend, and you see her pause—just briefly—on a wider section of path where the view opens toward the foothills below.\n\nShe turns her head slightly, not quite looking back, but enough that you know the pause was for you. Enough that you understand she's waiting to see what you'll do with the shape she's offering. The thin place's discipline has released into something else—not performance, but choice. Deliberate. Present. And the afternoon light, the mechanical clarity of the path beneath you, the spiritual weight of what passed between the two of you at the boundary—it all aligns into something that feels almost inevitable.\n\nYou keep the distance. Ten paces. The roar of melt-water below grows louder as you descend, a constant presence that fills the space between you with something other than silence. Ahead, Cevaine continues downward, and the curve of her awareness—that she knows you're there, that she's chosen to move this way—settles something in your chest that's been unsettled since the waystation's warmth released you both into motion."
       }
     ],
     "lastTurn": {
-      "narration": "You're watching the rhythm of her descent—the geometric precision of each step, the way her lattice-trained form moves through space with absolute intention. And yes, there it is: the curve of her spine as she leans into a turn, the shift of her weight through her hips as the path switchbacks. She's moving with purpose, but there's something else underneath it—a deliberateness in how her body occupies the space. Not unconscious. Not accidental.\n\nShe knows you're watching. The knowledge sits in how she places her feet, in the slight tilt of her shoulders as she navigates a steeper section. There's no performance in it—Cevaine doesn't perform—but there's an *awareness* of being seen that she's chosen not to hide. After three days of holding herself in absolute discipline, after the sentinel's form finally cracked and released, her body has become something she's allowing you to notice. It's not an invitation exactly. It's an acknowledgment that you're there, and that she is here, and that the boundary between watching and being watched has become permeable.",
-      "sceneSummary": "Descending the switchback path in spring afternoon, Splarf watches Cevaine move ahead—and recognizes in the deliberate curve of her body an awareness of being seen that she's chosen not to conceal.",
+      "narration": "Cevaine descends ahead of you down the switchback, and you hold the distance she's given you—ten paces that feel purposeful, that feel chosen. Her body moves through the path's geometry with that lattice precision, each step deliberate, each turn of her spine announcing awareness of the space behind her. The afternoon light catches the near-translucence of her skin as she navigates a sharper bend, and you see her pause—just briefly—on a wider section of path where the view opens toward the foothills below.\n\nShe turns her head slightly, not quite looking back, but enough that you know the pause was for you. Enough that you understand she's waiting to see what you'll do with the shape she's offering. The thin place's discipline has released into something else—not performance, but choice. Deliberate. Present. And the afternoon light, the mechanical clarity of the path beneath you, the spiritual weight of what passed between the two of you at the boundary—it all aligns into something that feels almost inevitable.\n\nYou keep the distance. Ten paces. The roar of melt-water below grows louder as you descend, a constant presence that fills the space between you with something other than silence. Ahead, Cevaine continues downward, and the curve of her awareness—that she knows you're there, that she's chosen to move this way—settles something in your chest that's been unsettled since the waystation's warmth released you both into motion.",
+      "sceneSummary": "On the switchback descent into the foothills at day's end, Splarf follows Cevaine downhill and recognizes deliberate awareness in the curve of her body—a choice she's made to be seen, to lead, to let distance mean something other than refusal.",
       "choices": [
         {
-          "label": "Match her pace and move level with her—close enough to speak, close enough to be near",
+          "label": "Close the distance slightly—not to break the shape she's given you, but to move nearer, to let her know you're choosing to follow not because you must but because you want to",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {
             "body_mind": 0.3,
-            "mechanical_spiritual": -0.2
+            "mechanical_spiritual": -0.2,
+            "falsehood_truth": 0.1
           },
-          "difficulty": "easy",
-          "trivial": false
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "romantic"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Hold back and let her lead—honor the shape she's giving you by keeping distance, and see what she does with it",
-          "attribute": "social",
+          "label": "Keep the ten paces steady—honor what she's offered by not changing it, and watch the path unwind to the valley below",
+          "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "mechanical_spiritual": 0.2
+            "body_mind": -0.2,
+            "mechanical_spiritual": 0.3
           },
           "difficulty": "easy",
-          "trivial": false
+          "opposedDifficulty": null,
+          "intentTags": [
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Call to her about Hoss or the path—break the thread deliberately and settle back into the work at hand",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {},
+          "label": "Call ahead to her—ask her what she thinks the valley will be like when you arrive, or what comes next after Hoss",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "falsehood_truth": 0.2,
+            "mechanical_spiritual": -0.1
+          },
           "difficulty": "easy",
-          "trivial": true
+          "opposedDifficulty": null,
+          "intentTags": [
+            "romantic"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [],
+      "standingOps": [],
+      "delegateOps": [],
+      "jobOps": [],
+      "arcOps": [],
+      "adoptSchool": null,
+      "offer": null,
+      "stageOps": [],
       "scene": {
-        "setting": "The switchback path descending into the foothills, late afternoon spring light slanting across the stone. The path is clear and dry here, but the roar of melt-water grows louder as elevation drops. Cevaine leads about ten paces ahead, moving with deliberate precision. Splarf follows, watching.",
+        "setting": "The switchback path descending into the foothills, late afternoon shifting toward evening. The path is clear and dry here, but the roar of melt-water grows louder with each switchback downward. Spring light slanting across stone, warm on skin. Cevaine leads about ten paces ahead, moving with deliberate precision and deliberate awareness of being seen.",
         "npcsPresent": [
           {
             "name": "Cevaine",
-            "state": "Leading the descent with geometric precision, her lattice-trained form moving with deliberate awareness of being observed"
+            "state": "Leading the descent, her lattice-trained form moving with geometric precision and deliberate awareness of Splarf's presence ten paces behind"
           }
         ],
         "objects": [
           "The switchback path, clear and dry",
           "Spring daylight, warm and slanting",
-          "The roar of melt-water below",
+          "The roar of melt-water below, growing louder",
           "Splarf's Traveler's Pack",
           "Waystation Provision Bundle",
           "The Ledger Assignment—Void",
-          "Boo, moving in the shadows"
+          "Boo, moving in the shadows nearby"
         ],
         "threads": [
-          "Hoss on the downhill path, still within reach",
-          "The melt-water's roar—a clock measuring safe passage",
-          "What Cevaine will do when the lattice work is finally put down",
-          "The boundary between watching and being watched, now permeable"
+          "Hoss on the downhill path, still within reach but the melt-water is climbing as afternoon deepens",
+          "What Cevaine intends with this deliberate awareness of being seen",
+          "The boundary between lattice discipline and chosen presence—where Cevaine stands now"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "cevaine",
-          "note": "On the descent, her body has become something she's allowing to be noticed—not performance, but deliberate awareness of being seen. The sentinel's discipline has shifted into choice."
+          "name": "Cevaine of the Seventh Measure",
+          "statusNote": "Descending the switchback path, her form deliberately present and aware of being seen—the lattice discipline released into choice",
+          "note": "On the path down, she moves with deliberate awareness of your presence ten paces behind. She paused on a wider section, not quite looking back but enough that you knew the pause was for you. She's chosen to let you see her this way."
         }
-      ]
+      ],
+      "intentsHeard": [],
+      "factUpdates": [],
+      "placeUpdates": [],
+      "discovery": null,
+      "codexUpdates": [],
+      "holdingOps": [],
+      "holdTrades": [],
+      "debtOps": [],
+      "exchangeOps": [],
+      "partyOps": [],
+      "generateRequest": [],
+      "encounterOps": [],
+      "projectOps": [],
+      "bandOps": [],
+      "strikeOps": [],
+      "deathOps": [],
+      "newEncounter": null,
+      "unlockPrecursor": null,
+      "unlockSubstrate": null,
+      "timeOps": {
+        "hoursPassed": 1.5,
+        "why": "an afternoon descent on the switchback path toward the valley floor"
+      },
+      "moveTo": null,
+      "stateOps": [],
+      "itemUpdates": [],
+      "deriveItem": null,
+      "imagePrompt": null,
+      "imageMedium": null,
+      "newAbility": null,
+      "gambitOps": null,
+      "gambitApt": false,
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The switchback path descending into the foothills, late afternoon spring light slanting across the stone. The path is clear and dry here, but the roar of melt-water grows louder as elevation drops. Cevaine leads about ten paces ahead, moving with deliberate precision. Splarf follows, watching.",
+      "setting": "The switchback path descending into the foothills, late afternoon shifting toward evening. The path is clear and dry here, but the roar of melt-water grows louder with each switchback downward. Spring light slanting across stone, warm on skin. Cevaine leads about ten paces ahead, moving with deliberate precision and deliberate awareness of being seen.",
       "npcsPresent": [
         {
           "name": "Cevaine",
-          "state": "Leading the descent with geometric precision, her lattice-trained form moving with deliberate awareness of being observe"
+          "state": "Leading the descent, her lattice-trained form moving with geometric precision and deliberate awareness of Splarf's prese"
         }
       ],
       "objects": [
         "The switchback path, clear and dry",
         "Spring daylight, warm and slanting",
-        "The roar of melt-water below",
+        "The roar of melt-water below, growing louder",
         "Splarf's Traveler's Pack",
         "Waystation Provision Bundle",
         "The Ledger Assignment—Void",
-        "Boo, moving in the shadows"
+        "Boo, moving in the shadows nearby"
       ],
       "threads": [
-        "Hoss on the downhill path, still within reach",
-        "The melt-water's roar—a clock measuring safe passage",
-        "What Cevaine will do when the lattice work is finally put down",
-        "The boundary between watching and being watched, now permeable"
+        "Hoss on the downhill path, still within reach but the melt-water is climbing as afternoon deepens",
+        "What Cevaine intends with this deliberate awareness of being seen",
+        "The boundary between lattice discipline and chosen presence—where Cevaine stands now"
       ]
     },
-    "beats": 10,
+    "beats": 11,
     "subPlace": {
       "slug": "the-lower-pass-waystation",
       "name": "The Lower-Pass Waystation",
@@ -464,7 +548,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 4,
-    "hour": 21,
+    "hour": 22,
     "realAnchor": null
   },
   "companions": [
@@ -630,7 +714,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d4] At the waystation threshold, she names what lattice-discipline held hidden: 'You are remarkably difficult to categorize. Which I find—valuable. Acceptable does not begin to encompass it.' The form holds, but choice is present within it now.",
         "[d4] Descended from The Thinning's sealed veil and entered the waystation shelter. She chose to sit beside Splarf—maintaining careful distance, but present. Her sentinel-form is beginning to release its tension as warmth reaches her.",
         "[d4] At the waystation, her sentinel-form finally loosens into rest. She sits beside Splarf, maintaining careful distance but present. Her breathing deepens toward sleep. The discipline that held the veil is beginning to release—not shattering, but yielding with precision, moment by moment.",
         "[d4] Descended from The Thinning's opened veil with Splarf at her side. Entered the waystation shelter and allowed her lattice-trained form to release into rest—falling asleep against Splarf's shoulder, the discipline finally yielding to exhaustion. The sentinel's form is no longer held rigid by duty…",
@@ -639,7 +722,8 @@
         "[d4] Still asleep at the waystation, her form completely released—the lattice-trained discipline finally yielding to rest. This is integration, a stage the form permits and honors.",
         "[d4] Your bond deepens — together.",
         "[d4] Wakes to Splarf's quiet call and rises with geometric precision—the form releasing into choice rather than rigidity. Moves toward the downhill path with the character, ready for descent and the meeting that waits there.",
-        "[d4] On the descent, her body has become something she's allowing to be noticed—not performance, but deliberate awareness of being seen. The sentinel's discipline has shifted into choice."
+        "[d4] On the descent, her body has become something she's allowing to be noticed—not performance, but deliberate awareness of being seen. The sentinel's discipline has shifted into choice.",
+        "[d4] On the path down, she moves with deliberate awareness of your presence ten paces behind. She paused on a wider section, not quite looking back but enough that you knew the pause was for you. She's chosen to let you see her this way."
       ],
       "knownFacts": [
         "Rest is integration, not failure—a stage the lattice permits and even honors",
@@ -662,7 +746,7 @@
       "status": "active",
       "gender": "Woman",
       "pronouns": "she/her",
-      "statusNote": "Descending the switchback path with Splarf toward the valley floor—the vigil ended, her discipline now a chosen frame rather than a cage",
+      "statusNote": "Descending the switchback path, her form deliberately present and aware of being seen—the lattice discipline released into choice",
       "domains": {
         "primary": "lattice"
       },
@@ -673,7 +757,7 @@
       },
       "image": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Tall%20angular%20woman%2C%20translucent%20pale%20skin%2C%20geometric%20precision%20in%20gaze%2C%20rigid%20lattice-disciplined%20posture%2C%20ethereal%20sentinel%20bearing%20witness%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=47408&nologo=true",
       "_portraitTier": "devoted",
-      "met": 23,
+      "met": 24,
       "bondType": "romantic",
       "bondStage": "together",
       "deeds": [
@@ -1105,21 +1189,6 @@
       {
         "source": "threat-attack",
         "kind": "threat-attack",
-        "subjectId": "beast_rust_choir_gnats",
-        "aimedAtPlayer": true,
-        "urgency": 3,
-        "oneLineHook": "A rust-choir gnats has come down onto the character here — not stumbled into, but ARRIVED, hunting. Defend, or drive it off.",
-        "becomes": {
-          "type": "encounter",
-          "encounterId": "beast_rust_choir_gnats",
-          "name": "rust-choir gnats"
-        },
-        "addedDay": 4,
-        "locationId": "the_thinning"
-      },
-      {
-        "source": "threat-attack",
-        "kind": "threat-attack",
         "subjectId": "beast_hollow_pace",
         "aimedAtPlayer": true,
         "urgency": 3,
@@ -1193,7 +1262,7 @@
         "locationId": "the_thinning"
       }
     ],
-    "turnsSinceOffer": 2,
+    "turnsSinceOffer": 3,
     "recentOffers": [
       {
         "thing": "The caretaker approaches with warm food—something simple, root-stock in broth, bread that smells of yesterday's baking—and sets it near…",
@@ -8347,7 +8416,7 @@
     },
     "worldMovedOnSeen": {
       "water_crisis": {
-        "beats": 2
+        "beats": 3
       }
     }
   },
@@ -9949,8 +10018,8 @@
     "source": "personal",
     "notes_for_gm": "A generated PERSONAL arc (SNG-133) — surface it as a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790737134582,
-  "rev": 285,
+  "updatedAt": 1790737214050,
+  "rev": 286,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -10219,10 +10288,10 @@
     {
       "id": "sess-5",
       "startedAt": "2026-09-30T02:56:49.543Z",
-      "lastAt": "2026-09-30T02:58:54.569Z",
+      "lastAt": "2026-09-30T03:00:14.036Z",
       "startDay": 92,
       "endDay": 92,
-      "beats": 2
+      "beats": 3
     }
   ],
   "establishedFacts": [
@@ -10284,23 +10353,23 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 59,
-    "scene": 59,
-    "choices": 59,
+    "sceneSummary": 60,
+    "scene": 60,
+    "choices": 60,
     "offer": 33,
     "codexUpdates": 32,
     "imagePrompt": 25,
-    "gambitApt": 44,
-    "sceneEnded": 57,
-    "characterDeltas": 46,
+    "gambitApt": 45,
+    "sceneEnded": 58,
+    "characterDeltas": 47,
     "arcOps": 1,
     "factUpdates": 7,
     "placeUpdates": 17,
-    "timeOps": 39,
+    "timeOps": 40,
     "deeds": 10,
     "ledgerEvents": 4,
     "questUpdates": 18,
-    "npcUpdates": 50,
+    "npcUpdates": 51,
     "generateRequest": 2,
     "newEncounter": 1,
     "encounterOps": 1,
@@ -10311,7 +10380,7 @@
     "standingOps": 1,
     "moveTo": 1
   },
-  "_opTurns": 59,
+  "_opTurns": 60,
   "practice": {
     "schemaVersion": 1,
     "uses": {
@@ -10913,7 +10982,7 @@
   "worldEvents": [],
   "locationState": {},
   "_opUnknown": {
-    "sceneSummary": 2
+    "sceneSummary": 3
   },
   "_debtReceipts": [],
   "_bandNotes": null,

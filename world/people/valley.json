@@ -1113,6 +1113,51 @@
           "name": "Loki"
         }
       }
+    },
+    "cevaine": {
+      "id": "cevaine",
+      "name": "Cevaine",
+      "canonId": "cevaine",
+      "intro": {
+        "role": "Sentinel of the released veil, lattice-trained order-reader",
+        "description": "Tall, angular, skin nearly translucent. Eyes that track with geometric precision. Moves with the eerie discipline of lattice-trained structure-thinking.",
+        "firstSeenDay": 1,
+        "where": "gen-object-object",
+        "metBy": {
+          "characterId": "char-msgpisca",
+          "name": "Splarf"
+        }
+      }
+    },
+    "the-messenger": {
+      "id": "the-messenger",
+      "name": "Sennet Thackeray",
+      "canonId": "the_messenger",
+      "intro": {
+        "role": "A sent thing, tasked with delivery",
+        "description": "Too-many-jointed geometry, half-real on the valley side of the veil. Its form stabilizes in the real world but remains distorted—something that does not quite fit into ordinary space. Its voice is the sound of time moving backward.",
+        "firstSeenDay": 3,
+        "where": "the_thinning",
+        "metBy": {
+          "characterId": "char-msgpisca",
+          "name": "Splarf"
+        }
+      }
+    },
+    "waystation-caretaker": {
+      "id": "waystation-caretaker",
+      "name": "Corm Nettles",
+      "canonId": "waystation_caretaker",
+      "intro": {
+        "role": "Tender of the Lower-Pass Waystation",
+        "description": "A figure of indeterminate age with dark hair and the calm of long solitude—tending the fire with unhurried care, welcoming travelers without fanfare.",
+        "firstSeenDay": 4,
+        "where": "the_thinning",
+        "metBy": {
+          "characterId": "char-msgpisca",
+          "name": "Splarf"
+        }
+      }
     }
   },
   "fates": {
@@ -1217,16 +1262,16 @@
       }
     },
     "the_first_moot": {
-      "status": "stopped",
-      "woundedUntilDay": 86,
+      "status": "wounded",
+      "woundedUntilDay": 100,
       "woundedBy": "the_starless",
-      "sinceWorldDay": 83,
+      "sinceWorldDay": 92,
       "stoppedUntilDay": 86,
       "stoppedBy": "the_starless",
-      "atWorldDay": 83,
+      "atWorldDay": 92,
       "fateBy": {
-        "characterId": "char-mr4ejo8c",
-        "name": "Cellaceron"
+        "characterId": "char-msgpisca",
+        "name": "Splarf"
       }
     },
     "the_apostate_choir": {
@@ -1404,13 +1449,13 @@
       "status": "wounded",
       "stoppedUntilDay": 72,
       "stoppedBy": "ember_who_banks_the_fire",
-      "sinceWorldDay": 83,
-      "woundedUntilDay": 91,
-      "woundedBy": "the_deep_lantern",
-      "atWorldDay": 83,
+      "sinceWorldDay": 92,
+      "woundedUntilDay": 100,
+      "woundedBy": "the_hundred_hands",
+      "atWorldDay": 92,
       "fateBy": {
-        "characterId": "char-mr4ejo8c",
-        "name": "Cellaceron"
+        "characterId": "char-msgpisca",
+        "name": "Splarf"
       }
     },
     "the_undefeated": {

@@ -16,6 +16,36 @@
   "next": [],
   "releases": [
     {
+      "version": "2.15.9",
+      "date": "2026-09-30",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "A hold's debts can be paid",
+          "summary": "What a place owes now comes down — out of what it earns, or out of your purse.",
+          "detail": "A hold that could not pay its keep, or its stall fee at market, carried the shortfall as arrears. Three things added to that number and nothing anywhere took any away, so it could only grow. Now the row says what it is owed for and on which day, a hold pays down what it owes out of what it earned once its keep is covered, and \"Pay it now\" on the review row and the hold card settles it from your purse. Paying part of a large debt is allowed and is the ordinary case."
+        },
+        {
+          "kind": "fix",
+          "title": "A keep on a walking hold",
+          "summary": "A keep, a gate, a muster yard or a ward-line can stand on any moving hold except a ship.",
+          "detail": "Nine features were refused on every moving hold by a rule written for boats — so a fortress on legs, which is the whole point of a fortress on legs, could not have a keep. A feature now says which frames can carry it: a keep, gate, muster yard or ward-line rides anything but a hull; a mine, quarry, grave-ground or reclamation bowl has to be dug into ground that stays still. The refusal names the frame and the reason instead of saying \"something that moves\"."
+        },
+        {
+          "kind": "fix",
+          "title": "One charge, one piece of work",
+          "summary": "Delegating someone to grow a hold puts them on that hold's work, and cannot be given twice.",
+          "detail": "A charge you gave someone and a job running on one of your holds were two separate records with nothing joining them, so a hold could report expansion work with nobody at it while the person you sent was charged with exactly that. A charge about one of your holds now knows which hold and which purpose, counts as a hand on that work, and a second wording of the same charge folds into the first instead of sitting beside it."
+        },
+        {
+          "kind": "internal",
+          "title": "A feature cannot be built where it cannot stand",
+          "summary": "The frame rule moved into the engine, where every caller meets it.",
+          "detail": "The rule about which holds can carry which feature was asked at two places in the interface and not by the engine that builds them, so twenty-four kind-and-frame combinations refused on screen and built anyway underneath."
+        }
+      ]
+    },
+    {
       "version": "2.15.8",
       "date": "2026-09-30",
       "entries": [

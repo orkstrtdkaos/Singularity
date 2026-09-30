@@ -217,11 +217,66 @@ export function featureRuling(holding, kinds) {
   return { rides, grounded, underWay, earnsAtSea: underWay.length > 0 };
 }
 
-/** Can this feature be built on this holding at all? A mobile holding refuses the kinds that cannot ride, with the reason. Pure. */
-export function canBuildOn(holding, kind, kinds) {
-  if (!carriageOf(holding)) return { ok: true };
-  const hullable = ((kinds || {})[kind] || {}).hullable;
-  return hullable === false
-    ? { ok: false, why: `a ${String(kind).replace(/_/g, " ")} cannot be built aboard something that moves` }
-    : { ok: true };
+/** ⛑ THE FRAME A HOLDING RIDES ON, derived from how it moves — ONE definition, because `roomOf` needs the same answer
+ *  and had its own copy of this line. Null when it does not move at all (which is "rooted"). PURE. */
+export function frameOf(holding, frameKinds) {
+  const c = carriageOf(holding);
+  if (!c) return null;
+  const F = frameKinds || {};
+  return Object.keys(F).find(k => !k.startsWith("_") && String(F[k]?.moves || "").toLowerCase() === c.moves) || null;
+}
+
+/** ⛔ WHICH FRAMES CAN CARRY WHICH FEATURE — AEVI, item 9, IN HER OWN WORDS:
+ *  *"A feature says which frames can carry it. Keep, gate, muster yard, ward line: any frame except a hull. Mine, quarry,
+ *  grave ground, reclamation bowl: rooted only. Waygate: never built."*
+ *
+ *  ⛔ ERIK, IN PLAY 2026-09-30: *"It said I can't have a keep on a moving hold."* ⛑ MEASURED: `canBuildOn` asked
+ *  `carriageOf(holding)` — *does it move at all* — and then refused on a field called `hullable`. Nine features declare
+ *  `hullable: false`; all nine were refused on all five frames. A walking fortress is the fantasy, and the engine was
+ *  saying no to it with a boat's rule.
+ *
+ *  ⚠️ THIS TABLE IS HER SENTENCE HELD IN CODE UNTIL SHE AUTHORS IT, and content WINS the moment it exists: a kind's
+ *  own `frames: [...]` or `rootedOnly: true` is read first, so authoring is a content change and not an engine change.
+ *  That is the whole point of writing the reader before the content — the four doors run authored → registered → loaded
+ *  → read, and a reader that arrives second is a field nobody uses. */
+export const FRAME_PLACEMENT_20260930 = {
+  rootedOnly: ["mine", "quarry", "grave_ground", "reclamation_bowl"],   // dug into the ground; they are their ground
+  notOnAHull: ["keep", "gate", "muster_yard", "ward_line"],             // ⛔ the bug: these were refused on legs too
+};
+
+/** ⛑ WHAT CAN CARRY A KIND. → { rooted, frames: "any" | string[], why } where `frames` lists frame KINDS. PURE.
+ *  Precedence: the kind's authored `frames` → its authored `rootedOnly` → Aevi's table → legacy `hullable` → anything. */
+export function framePlacement(kind, kinds, frameKinds = null) {
+  const k = String(kind || "");
+  const spec = (kinds || {})[k] || {};
+  const all = Object.keys(frameKinds || {}).filter(f => !f.startsWith("_"));
+  if (Array.isArray(spec.frames)) return { rooted: true, frames: spec.frames.map(String), why: "authored" };
+  if (spec.rootedOnly === true) return { rooted: true, frames: [], why: "authored" };
+  if (FRAME_PLACEMENT_20260930.rootedOnly.includes(k)) return { rooted: true, frames: [], why: "it is dug into the ground" };
+  if (FRAME_PLACEMENT_20260930.notOnAHull.includes(k) || spec.hullable === false) {
+    return { rooted: true, frames: all.filter(f => f !== "hull"), why: "it cannot be carried in a hull" };
+  }
+  return { rooted: true, frames: "any", why: "anything can carry it" };
+}
+
+/** Can this feature be built on this holding at all? → { ok, why }. PURE.
+ *  ⚠️ `frameKinds` IS HOW IT KNOWS WHICH FRAME. Without it the frame cannot be named, so it keeps the OLD conservative
+ *  answer (nothing that moves carries a `hullable: false` kind) rather than guessing — a caller I did not update stays
+ *  exactly as strict as it is today instead of silently opening up. */
+export function canBuildOn(holding, kind, kinds, frameKinds = null) {
+  const c = carriageOf(holding);
+  if (!c) return { ok: true };                                   // rooted: every kind can stand on the ground
+  const say = (w) => `a ${String(kind).replace(/_/g, " ")} ${w}`;
+  if (!frameKinds) {
+    return ((kinds || {})[kind] || {}).hullable === false
+      ? { ok: false, why: say("cannot be built aboard something that moves") } : { ok: true };
+  }
+  const frame = frameOf(holding, frameKinds);
+  const p = framePlacement(kind, kinds, frameKinds);
+  if (p.frames === "any") return { ok: true };
+  if (!frame) return { ok: false, why: say(`cannot be built on this — nothing here says what carries it`) };
+  if (p.frames.includes(frame)) return { ok: true };
+  return { ok: false, frame, why: p.frames.length
+    ? say(`cannot be built on ${frame} — ${p.why}`)
+    : say(`has to be built on the ground — ${p.why}`) };
 }

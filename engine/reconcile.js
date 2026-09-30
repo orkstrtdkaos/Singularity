@@ -21,7 +21,8 @@ import { carriageOf } from "./carriage.js";   // ⛔ step 61: a carriage the one
 import { canRaiseBand, raiseBand } from "./melee.js";   // R49: the fellowship the fiction already named
 import { worldPosForGenerated } from "./worldmap.js";
 import { personName, looksLikeRole } from "./names.js";
-import { sexFromGender, sexUnsaid, normalizeSex, mergePeople, correctKnownNames, knownNameWords } from "./npcs.js";   // ⛔ step 75: Erik's ruling — the sex matches the gender, and gender leads   // ⛔ step 73: everyone already met has the name the world knows them by
+import { sexFromGender, sexUnsaid, normalizeSex, mergePeople, correctKnownNames, knownNameWords } from "./npcs.js";
+import { holdPurposeOf } from "./assignments.js";   // ✅ Aevi item 13: a charge knows which hold and which purpose it is about   // ⛔ step 75: Erik's ruling — the sex matches the gender, and gender leads   // ⛔ step 73: everyone already met has the name the world knows them by
 import { grantMartialKit, retiredBaselineIds } from "./martial.js";
 import { applyLadderGrants } from "./ladder.js";
 import { servicedURL } from "./art.js";   // ⛔ step 72: the pictures now ask our own service
@@ -95,6 +96,57 @@ function renameTargets(spec, entry, character, known) {
 // "has this entity seen this step yet" via entity.reconcileVersion.
 
 export const CHARACTER_STEPS = [
+  {
+    version: 93, id: "one-charge-one-purpose", playerFacing: true,
+    // ⛔ ERIK, IN PLAY 2026-09-30: *"Cy somehow picked up 2 of the same delegation as a job"* and *"It says the legs are
+    // being built but no one is at it? Cy… was delegated to work that."* Aevi found the one root behind both: a charge
+    // is a JOBS record and a hold's growth is a job on the HOLD, and nothing joined them.
+    //
+    // ⛑ MEASURED ON HIS SAVE: two assignments, both `cy`, both stamped at world-count 2181 — the same moment — reading
+    // "survey and plan expansion of the Standing Annex…" and "full subsurface survey and expansion planning for the
+    // Standing Annex…". The id was `npcId::slug(charge)`, so two WORDINGS of one purpose were two records; and
+    // `destination` was null on both, so nothing tied either to the Annex, whose `clearing` counted crew + garrison and
+    // found nobody.
+    //
+    // ⛑ THIS DOES BOTH HALVES ON WHAT IS ALREADY THERE: stamp every charge with the hold and purpose it is about, and
+    // fold the ones that now collide. The write door (`addAssignment`) keys on purpose from here on.
+    apply(character, ctx = {}) {
+      const ws = character?.worldState;
+      const all = ws?.assignments;
+      if (!all || typeof all !== "object") return {};
+      const stamped = [], merged = [];
+      // ⛑ stamp first, so the fold below can compare what a charge IS ABOUT rather than how it was worded
+      for (const a of Object.values(all)) {
+        if (!a || a.holdId) continue;
+        const about = holdPurposeOf(a.charge, character);
+        if (!about) continue;
+        a.holdId = about.holdId; a.purpose = about.purpose;
+        stamped.push(`${a.npcName || a.npcId} → ${about.holdName}`);
+      }
+      // ⛔ ONE PER PERSON, PER PLACE, PER PURPOSE — the oldest record wins its id, and the rest fold into it, keeping the
+      // furthest progress so nobody loses work they had already done.
+      const seen = new Map();
+      for (const [key, a] of Object.entries(all)) {
+        if (!a?.holdId || !a.purpose) continue;
+        const who = a.npcId || (a.bandId ? `band:${a.bandId}` : null);
+        if (!who) continue;
+        const k = `${who}|${a.holdId}|${a.purpose}`;
+        const prior = seen.get(k);
+        if (!prior) { seen.set(k, { key, a }); continue; }
+        const [keep, drop] = (Number(a.stampedAtWorldCount) || 0) < (Number(prior.a.stampedAtWorldCount) || 0)
+          ? [{ key, a }, prior] : [prior, { key, a }];
+        keep.a.progress = Math.max(Number(keep.a.progress) || 0, Number(drop.a.progress) || 0);
+        delete all[drop.key];
+        seen.set(k, keep);
+        merged.push(`${keep.a.npcName || keep.a.npcId} at ${keep.a.holdId}`);
+      }
+      if (!stamped.length && !merged.length) return {};
+      const said = [];
+      if (merged.length) said.push(`${merged.length} doubled charge${merged.length === 1 ? "" : "s"} folded into one (${[...new Set(merged)].join(", ")})`);
+      if (stamped.length) said.push(`${stamped.length} charge${stamped.length === 1 ? "" : "s"} now count toward the work ${[...new Set(stamped.map(s => s.split(" → ")[1]))].join(", ")} is doing`);
+      return { notes: [`A charge to grow one of your holds IS that hold's growth job now — ${said.join("; ")}.`] };
+    },
+  },
   {
     version: 92, id: "guarding-is-the-watch", playerFacing: true,
     // ✅ ERIK 2026-09-30: *"yes, merge guarding into the watch - proceed."*

@@ -27,11 +27,12 @@ import { sheetFor as personSheetFor, tierOf as tierOfLevel, personRecordFor, kit
 import { locationDensity } from "./substrate.js";   // Q18: the ground scales an enterprise's yield
 import { legionClash, contingentsFromPeople, contingentsOf, bloodBand } from "./melee.js";
 import { raidersFrom, notePowerLoss, contingentsOf as powerContingents, marketFeeAt} from "./powers.js";   // SNG-634 C1: the raiders have an owner
-import { isMoored, carriageOf } from "./carriage.js";   // ⛔ SPEC_mobile_holdings §4: moored is raidable, moving is not   // R46a: a detected raid is a FIGHT, resolved unattended
+import { isMoored, carriageOf, frameOf, canBuildOn } from "./carriage.js";   // ⛔ SPEC_mobile_holdings §4: moored is raidable, moving is not   // R46a: a detected raid is a FIGHT, resolved unattended
 import { smartClamp } from "./namematch.js";   // an evidence quote is prose — cut at a word, never mid-word
 import { isNetworkGate, comesByGate, gateArrivalFor } from "./waygate.js";   // runner fees: a NETWORK gate near a relay post brings traffic   // ⛔ SNG-663 §2b: a force that comes by gate lands in the yard
 import { walkingDays } from "./worldmap.js";
 import { workMods } from "./holdwork.js";   // ⛔ CCODE-450: standing work — who joins the watch, the yields and the upkeep while it is done
+import { chargedWith } from "./assignments.js";   // ✅ Aevi item 8: whoever is CHARGED with a hold's growth is a hand on that job
 import { postJob } from "./jobstate.js";   // ⛔ CCODE-452: a raise is a job on the board     // …within gateWithinDays of it
 
 export const HOLDING_KINDS = ["post", "enterprise"];
@@ -309,7 +310,9 @@ export function roomOf(holding, cfg = null) {
   const rungSlots = Number(ladder[i].slots) + Math.max(0, Number(holding?.spotsCleared) || 0);
   const c = carriageOf(holding);
   const frames = S?.frames?.kinds || {};
-  const frame = c ? Object.keys(frames).find(k => !k.startsWith("_") && String(frames[k]?.moves || "").toLowerCase() === c.moves) || null : null;
+  // ✅ ONE DEFINITION (CCODE item 9): this line existed here and again inside `canBuildOn`'s new reader, and two copies of
+  // "which frame is this" is the defect I have repaired five times this month. `frameOf` is the copy that stayed.
+  const frame = frameOf(holding, frames);
   const frameSlots = frame ? Math.max(0, Number(frames[frame].slots) || 0) + Math.max(0, Number(holding?.frameRaised) || 0) : null;
   const slots = frameSlots != null ? Math.min(rungSlots, frameSlots) : rungSlots;
   const up = ladder[i + 1] || null;
@@ -1482,6 +1485,68 @@ export function serviceIncome(character, holding, { cfg = null, locations = {}, 
   return { crystal: Math.round(base * traffic), traffic, gate: gate?.id || null, ramp, stations: stations.length };
 }
 
+/* ═════ ARREARS — WHAT A HOLD OWES, AND THE THREE WAYS IT COMES DOWN ═════
+ *
+ * ⛔ ERIK 2026-09-30: *"'in arrears 4' — not sure, because I can't seem to do anything about it."* He was right that
+ * there was nothing to do. ⛑ MEASURED BEFORE BUILDING, and Aevi's reading (item 12) is exact: THREE places added to
+ * `arrears` and **not one anywhere took any away** — engine, app and reconcile, all of it. A number that could only
+ * grow, sitting on a hold that was thriving.
+ *
+ * ⛑ It comes down three ways now: the hold pays it out of what it earned before anything is kept, the player can pay it
+ * from their own purse, and it SAYS WHAT IT IS FOR. The third is not decoration — a debt with no reason attached is
+ * precisely the thing nobody can act on, which is what he reported.
+ */
+
+/** ⛔ OWE IT, AND SAY WHY. Every add goes through this one door, so the reason is never optional. Mutates. */
+export function oweIt(holding, amount, why, day = null) {
+  const n = Math.max(0, Math.round(Number(amount) || 0));
+  if (!holding || !(n > 0)) return 0;
+  holding.arrears = (Number(holding.arrears) || 0) + n;
+  const owed = Array.isArray(holding.arrearsWhy) ? holding.arrearsWhy : (holding.arrearsWhy = []);
+  // ⛑ the same reason on the same day is ONE line that grows, not a list of identical sentences
+  const last = owed[owed.length - 1];
+  if (last && last.why === why && last.day === (day ?? null)) last.n += n;
+  else owed.push({ n, why: String(why || "unpaid"), day: day ?? null });
+  holding.arrearsWhy = owed.slice(-6);
+  return n;
+}
+
+/** ⛑ WHAT IT IS OWED FOR, in the hold's own words — newest first, short enough for a row. PURE.
+ *  ⚠️ A hold carrying `arrears` from before this was written has no reasons at all; it says so rather than nothing. */
+export function arrearsSaid(holding) {
+  const owed = Math.max(0, Number(holding?.arrears) || 0);
+  if (!owed) return null;
+  const why = [...(Array.isArray(holding?.arrearsWhy) ? holding.arrearsWhy : [])].reverse();
+  if (!why.length) return `${owed} owed, from before the reasons were written down`;
+  return `${owed} owed — ${why.slice(0, 2).map(w => `${w.why}${Number.isFinite(Number(w.day)) ? ` on day ${Math.round(w.day)}` : ""} (${w.n})`).join("; ")}`;
+}
+
+/** ⛔ PAY IT DOWN, from a purse — the player's on the button, the hold's takings in the tick.
+ *  ⛑ PARTIAL IS THE COMMON CASE and is not a refusal: a hold that owes 40 and earned 12 gets twelve closer. Mutates. */
+export function payArrears(character, holding, { regionId = null, economy = null, upTo = null } = {}) {
+  const owed = Math.max(0, Number(holding?.arrears) || 0);
+  if (!owed) return { ok: false, why: "nothing is owed here", paid: 0 };
+  const want = upTo == null ? owed : Math.min(owed, Math.max(0, Math.round(Number(upTo) || 0)));
+  if (!(want > 0)) return { ok: false, why: "nothing to pay against it", paid: 0, owed };
+  // ⛑ through `payAt`, the one door into the purse — the place's own money first, else that place's worse rate
+  const r = payAt(character, want, regionId, economy);
+  if (!r.ok) return { ok: false, why: r.why, paid: 0, owed };
+  const left = Math.max(0, owed - want);
+  if (!(left > 0)) { delete holding.arrears; delete holding.arrearsWhy; }
+  else {
+    holding.arrears = left;
+    // ⛑ the OLDEST reasons clear first, so the line that remains describes the debt that remains
+    let spend = want;
+    const why = Array.isArray(holding.arrearsWhy) ? holding.arrearsWhy : [];
+    while (spend > 0 && why.length) {
+      if (why[0].n > spend) { why[0].n -= spend; spend = 0; } else { spend -= why[0].n; why.shift(); }
+    }
+    holding.arrearsWhy = why;
+  }
+  return { ok: true, paid: want, said: saidPaid(r), left,
+    note: `${holding.name || holding.id} paid ${want} against what it owed — ${left ? `${left} still owing` : "the debt is clear"}.` };
+}
+
 /** ⛔ WHAT SHARE OF THE STORE GOES TO MARKET IN A PASS — ONE DEFINITION, because there are two readers and
  *  they were two copies. `tickStore` does the selling; `holdingLedger` PROJECTS it onto the card as "income
  *  vs keep". ⚠️ Erik's screenshot caught them disagreeing an hour after the rule changed: the tick had been
@@ -1587,8 +1652,20 @@ export function clearingTick(character, holding, { cfg = null, hands = null, day
   const c = holding?.clearing;
   if (!c) return null;
   const q = clearingQuote(holding, cfg);
-  const at = hands != null ? Math.max(0, Number(hands) || 0)
-    : (Array.isArray(holding.crew) ? holding.crew.length : 0) + (Array.isArray(holding.garrison) ? holding.garrison.length : 0);
+  // ✅ AEVI, item 8 — AND WHOEVER IS *CHARGED* WITH THIS HOLD'S GROWTH IS ON IT. Erik: *"It says the legs are being
+  // built but no one is at it? Cy, a maintenance bot, was delegated to work that."* His charge was a Jobs charge and the
+  // legs are the hold's growth job — two systems for one piece of work, so Cy worked one and the legs counted the other.
+  // ⛑ `chargedWith` reads the assignments that now know which hold and which purpose they are about, and they count as
+  // hands here. ⚠️ Nobody is counted twice: a charged person already on the crew or the watch is one hand, not two.
+  const posted = new Set([...(Array.isArray(holding.crew) ? holding.crew : []),
+    ...(Array.isArray(holding.garrison) ? holding.garrison : [])].map(String));
+  // ⚠️ ONE PERSON IS ONE HAND, however many charges name them. Erik's Cy holds TWO records for the same purpose (item
+  // 13, fixed at the write door and repaired by step 93) — counted naively that is two hands building the legs, which
+  // would turn a duplication bug into a speed bonus.
+  const delegated = [...new Map(chargedWith(character, holding?.id, "growth")
+    .filter(p => p?.id && !posted.has(String(p.id)))
+    .map(p => [String(p.id), p])).values()];
+  const at = hands != null ? Math.max(0, Number(hands) || 0) : posted.size + delegated.length;
   if (at <= 0) return { stalled: true, note: null };
   const perPass = at / Math.max(1, Number(q.atHands) || 2) / Math.max(1, Number(c.passes) || 1);
   c.progress = Math.min(1, (Number(c.progress) || 0) + perPass);
@@ -1754,7 +1831,7 @@ export function tickStore(character, holding, { cfg = null, economy = null, regi
         if (mkt664.fee > 0) {
           const pf = payAt(character, mkt664.fee, regionId, economy);
           out.marketFee = { ...mkt664, paid: pf.ok, said: pf.ok ? saidPaid(pf) : null };
-          if (!pf.ok) holding.arrears = (Number(holding.arrears) || 0) + mkt664.fee;
+          if (!pf.ok) oweIt(holding, mkt664.fee, `couldn't pay the stall${mkt664.powerName ? ` to ${mkt664.powerName}` : ""} at ${locations?.[holding.locationId]?.name || holding.locationId}`, day);
         }
       }
     }
@@ -1800,7 +1877,22 @@ export function tickStore(character, holding, { cfg = null, economy = null, regi
   if (up > 0) {
     // ⛔ CCODE-437: the keep is paid where the hold stands — its own money first, else what that place takes at its worse rate
     const r = payAt(character, up, regionId, economy);
-    if (r.ok) { out.upkeep = up; out.upkeepSaid = saidPaid(r); } else { out.short = up; out.shortWhy = r.why; holding.arrears = (Number(holding.arrears) || 0) + up; }
+    if (r.ok) { out.upkeep = up; out.upkeepSaid = saidPaid(r); }
+    else { out.short = up; out.shortWhy = r.why; oweIt(holding, up, `couldn't pay its keep`, day); }
+  }
+  // ✅ AEVI item 12(a) — AND THEN WHAT IT OWES, out of what it took in this pass. ⛔ WHERE this sits in the tick is the
+  // rule, not an implementation detail (the runs draw taught me that the hard way): AFTER the keep, so her gate reads
+  // *"a hold that earns more than its keep clears them"*. Before the keep it would be a treadmill — clear the debt, fail
+  // the keep, owe it again, every pass forever.
+  // ⚠️ AND ONLY OUT OF THIS PASS'S TAKINGS, never out of the player's purse behind their back: the button does that,
+  // deliberately, and this does not.
+  if (Number(holding.arrears) > 0 && !out.short) {
+    const tookIn664 = (Number(out.keeperSold?.crystal) || 0) + (Number(out.pilgrims) || 0) + (Number(out.relay?.crystal) || 0);
+    const spare664 = tookIn664 - (Number(out.upkeep) || 0) - (out.marketFee?.paid ? Number(out.marketFee.fee) || 0 : 0);
+    if (spare664 > 0) {
+      const pd = payArrears(character, holding, { regionId, economy, upTo: spare664 });
+      if (pd.ok) out.arrearsPaid = { crystal: pd.paid, said: pd.said, left: pd.left, cleared: !pd.left };
+    }
   }
   const total = storeTotal(holding);
   const fullAt = Math.max(1, Number(cfg.fullAt) || 40);
@@ -1866,6 +1958,9 @@ export function storeNews(holding, st) {
   if (st.pilgrims) lines.push(`${st.pilgrimsSaid || `${st.pilgrims} crystal`} left at ${where} by those who came to it.`);
   if (Array.isArray(st.yields) && st.yields.length > 1) { /* several goods — the store line on the tab says which */ }
   if (st.grew) lines.push(`${where} has come up to ${holding.condition}${st.grew.keeper ? ` under ${st.grew.keeper}` : ""}.`);
+  // ✅ AEVI item 12(a) — AND WHEN IT PAYS ITS DEBT DOWN, because a number that moves in silence is the same problem as
+  // a number that cannot move: Erik could see the 4 and nothing about it.
+  if (st.arrearsPaid) lines.push(`${where} put ${st.arrearsPaid.said || `${st.arrearsPaid.crystal} crystal`} toward what it owed — ${st.arrearsPaid.cleared ? "it owes nothing now" : `${st.arrearsPaid.left} still owing`}.`);
   if (st.short) lines.push(`${where} could not pay its keep this pass${st.shortWhy ? ` — ${st.shortWhy}` : ` (${st.short} owed)`} — the arrears sit on the place.`);
   if (st.justFull) lines.push(`The store at ${where} is full — ${Object.entries(holding.store || {}).filter(([, n]) => n > 0).map(([g, n]) => `${n} ${g.replace(/_/g, " ")}`).join(", ")} sit waiting for a road, a buyer, or a thief.`);
   return lines;
@@ -1906,7 +2001,7 @@ export function sellStore(character, holdingId, { economy = null, cfg = null, he
   if (fee664 && fee664.fee > 0) {
     const pf = payAt(character, fee664.fee, regionId, economy);
     feePaid664 = { ...fee664, paid: pf.ok, said: pf.ok ? saidPaid(pf) : null, short: pf.ok ? 0 : fee664.fee };
-    if (!pf.ok) h.arrears = (Number(h.arrears) || 0) + fee664.fee;
+    if (!pf.ok) oweIt(h, fee664.fee, `couldn't pay the stall${fee664.powerName ? ` to ${fee664.powerName}` : ""} at ${locations?.[h.locationId]?.name || h.locationId}`, day);
   }
   if (h.storeFullAnnounced && storeTotal(h) < Math.max(1, Number(cfg?.fullAt) || 40)) delete h.storeFullAnnounced;
   h.history = [...(h.history || []), { at: null, from: h.condition, to: h.condition, note: `sold the store — ${saidEarned(cr)}${feePaid664 ? `, less ${feePaid664.fee} to ${feePaid664.powerName}` : ""}` }].slice(-12);
@@ -2309,6 +2404,16 @@ export function addFeature(character, id, { kind, name = null, by = null, craftI
   if (via === "built") {
     const cost = featureCost(def.kind, cfg);
     if (!cost?.buildable) return { ok: false, why: `${def.label || def.kind} cannot be built — you come to hold one, or you make one, and that is a story` };
+    // ⛔ AND WHETHER THIS FRAME CAN CARRY IT, HERE, IN THE ENGINE. ⛑ FOUND BY GATING TWO DOORS AGAINST EACH OTHER
+    // (§397): the frame rule lived at TWO app.js call sites and `addFeature` never asked it, so 24 of 264 (kind × frame)
+    // pairs refused at the tab and BUILT through the engine — a mine on a longship, today, by any other caller. Erik's
+    // standing ruling: play logic goes in the engine, and app.js and the tests call the same functions.
+    // ⚠️ `built` ONLY. An INHERITED or GRANTED feature arrives narratively and `featureRuling` already models a
+    // grounded thing aboard a moving hold (it rides in the `grounded` list and earns nothing under way), so a story that
+    // hands you a mine on a barge is a state the engine has, not a contradiction. Whether it should be refused too is
+    // Aevi's call, and it is asked in the reply rather than decided here.
+    const frame664 = canBuildOn(h, def.kind, cfg?.features?.kinds || cfg?.features || null, cfg?.slots?.frames?.kinds || null);
+    if (!frame664.ok) return { ok: false, why: frame664.why, frame: frame664.frame || null };
     const owed = {};
     for (const [g, n] of Object.entries(cost.build.goods)) owed[g] = Math.max(0, Math.round(Number(n) || 0) * f.count);
     // the STORE first

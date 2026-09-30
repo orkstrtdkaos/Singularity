@@ -859,7 +859,7 @@ export function sendBandOnMission(character, bandId, { kind, charge, destination
   const fit = canSendOn({ npcName: name, does: party.does }, kindId);   // judged on those who go
   if (!fit.ok) return { ok: false, why: fit.why };
   character.worldState = character.worldState || {};
-  const a = addAssignment(character.worldState, { bandId: band.id, npcName: name, charge: words, kind: kindId, destination: destination || null, stake: stake || null }, worldCount);
+  const a = addAssignment(character.worldState, { character, bandId: band.id, npcName: name, charge: words, kind: kindId, destination: destination || null, stake: stake || null }, worldCount);
   if (!a) return { ok: false, why: "that could not be sent" };
   const said = `${k.verb}${destination ? ` to ${placeName || destination}` : ""} — ${smartClamp(words, 120)}`;
   band.mission = { assignmentId: a.id, kind: kindId, destination: destination || null, said, went: party.goes.map(g => g.id) };

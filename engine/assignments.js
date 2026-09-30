@@ -13,19 +13,83 @@ import { smartClamp } from "./namematch.js";   // SNG-152: model text clamps on 
 import { familiesFromEvidence } from "./combatants.js";   // SNG-541c: what someone is good for, read from the GM's own prose
 const slugCharge = s => String(s || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "").slice(0, 40);
 
+const num = (v, d = 0) => (Number.isFinite(Number(v)) ? Number(v) : d);
+
 export function ensureAssignments(worldState) {
   if (!worldState.assignments) worldState.assignments = {};
   return worldState.assignments;
 }
 
+/** ⛔ WHAT A CHARGE IS *ABOUT*, WHEN IT IS ABOUT A HOLD OF YOURS.
+ *
+ *  ⚠️ ERIK, IN PLAY 2026-09-30: *"It says the legs are being built but no one is at it? Cy… was delegated to work that."*
+ *  A charge is free text the player or the GM writes; a hold's growth is a job on the hold. Nothing joined them, so Cy
+ *  worked one and the legs counted the other. Aevi's item 8: *"A charge whose purpose is a hold's growth IS that hold's
+ *  growth job, with that person on it, and their hand counts."*
+ *
+ *  ⛑ THE MATCH IS OVER A CLOSED SET — this character's own holds, one to six of them — so it is a name lookup rather
+ *  than a guess at English. A charge that names no hold of yours answers null and stays an ordinary charge.
+ *  PURE. */
+export const CHARGE_PURPOSES = {
+  // ⛑ the words a growth charge actually used in play, plus the two the card itself offers
+  growth: ["expansion", "expand", "clear ground", "clearing", "build out", "enlarge", "more room", "grow the", "growth"],
+};
+
+export function holdPurposeOf(charge, character) {
+  const text = String(charge || "").toLowerCase();
+  if (!text) return null;
+  const holds = Array.isArray(character?.holdings) ? character.holdings : [];
+  // ⛔ THE LONGEST NAME FIRST, so "The Standing Annex" is not shadowed by a hold called "The Annex".
+  const named = holds
+    .filter(h => h && h.id && String(h.name || "").trim().length > 3)
+    .sort((a, b) => String(b.name).length - String(a.name).length)
+    .find(h => text.includes(String(h.name).toLowerCase()));
+  if (!named) return null;
+  for (const [purpose, words] of Object.entries(CHARGE_PURPOSES)) {
+    if (words.some(w => text.includes(w))) return { holdId: named.id, holdName: named.name, purpose };
+  }
+  return null;
+}
+
+/** ⛑ WHO IS CHARGED WITH A HOLD'S GROWTH — the people a `clearingTick` should count beside its crew and its watch.
+ *  Only those still working it: a charge that is done or failed is not a hand on the job. PURE. */
+export function chargedWith(character, holdId, purpose) {
+  const out = [];
+  for (const a of Object.values(character?.worldState?.assignments || {})) {
+    if (!a || a.status === "done" || a.status === "failed") continue;
+    if (a.holdId !== holdId || a.purpose !== purpose) continue;
+    out.push({ id: a.npcId || a.bandId, name: a.npcName || a.npcId || a.bandId, charge: a.charge });
+  }
+  return out;
+}
+
 /** Record a delegation. Keyed by npcId + charge so re-delegating the same charge UPDATES rather than
  *  duplicating (idempotent). A charge with no person, or no charge, is not an assignment. */
-export function addAssignment(worldState, { npcId, npcName, charge, targetEventId = null, kind = null, destination = null, stake = null, bandId = null } = {}, worldCount = null) {
+export function addAssignment(worldState, { character = null, npcId, npcName, charge, targetEventId = null, kind = null, destination = null, stake = null, bandId = null } = {}, worldCount = null) {
   // ⛔ CCODE-453: a BAND may carry a charge as a band — the assignment names it instead of a person, and the dice roll its people as a team
   if ((!npcId && !bandId) || !charge) return null;
   const a = ensureAssignments(worldState);
-  const id = `${npcId || `band:${bandId}`}::${slugCharge(charge)}`;
-  const prev = a[id];
+  // ⛔ ONE CHARGE PER PERSON, PER PLACE, PER PURPOSE (Aevi, item 13). The id was `npcId::slug(charge)`, so two WORDINGS
+  // of one job were two records — Erik's Cy picked up "survey and plan expansion of the Standing Annex" and "full
+  // subsurface survey and expansion planning for the Standing Annex" in the same world-moment, and nothing noticed.
+  // ⛑ When a charge is about a hold of yours, the key is the PURPOSE; otherwise it stays the wording, as before.
+  const about = holdPurposeOf(charge, character);
+  const id = about
+    ? `${npcId || `band:${bandId}`}::${about.holdId}::${about.purpose}`
+    : `${npcId || `band:${bandId}`}::${slugCharge(charge)}`;
+  // ⛑ …and a SECOND wording merges into the first rather than sitting beside it: an older record under the old
+  // text-key for the same person, hold and purpose is folded in and removed.
+  let prev = a[id];
+  if (about) {
+    for (const [k, old] of Object.entries(a)) {
+      if (k === id || !old) continue;
+      if ((old.npcId || `band:${old.bandId}`) !== (npcId || `band:${bandId}`)) continue;
+      const oldAbout = old.holdId && old.purpose ? { holdId: old.holdId, purpose: old.purpose } : holdPurposeOf(old.charge, character);
+      if (!oldAbout || oldAbout.holdId !== about.holdId || oldAbout.purpose !== about.purpose) continue;
+      prev = { ...old, ...(prev || {}) , progress: Math.max(num(old.progress, 0), num(prev?.progress, 0)) };
+      delete a[k];
+    }
+  }
   a[id] = {
     id, npcId: npcId || null, ...(bandId ? { bandId: String(bandId) } : {}), npcName: npcName || prev?.npcName || npcId || bandId,
     charge: smartClamp(String(charge), 120),
@@ -41,7 +105,9 @@ export function addAssignment(worldState, { npcId, npcName, charge, targetEventI
     progress: prev?.progress || 0,
     status: prev?.status && prev.status !== "done" ? prev.status : "working",
     stampedAtWorldCount: prev?.stampedAtWorldCount ?? worldCount,
-    lastMovedWorldCount: worldCount
+    lastMovedWorldCount: worldCount,
+    // ✅ AND WHAT IT IS ABOUT, so a hold's own job can count the person charged with it rather than asking the text again
+    ...(about ? { holdId: about.holdId, purpose: about.purpose } : {}),
   };
   return a[id];
 }

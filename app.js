@@ -69,7 +69,7 @@ import { enterDeathState, rollRetrieval, pledgeFrom } from "./engine/death.js";
 // duplicated in this codebase, and each time the copies drifted before anyone noticed.
 wireDeathModel(DeathModel);
 import { carriageOf, voyageOf, isMoored, canSail, sailHolding, voyageLine, featureRuling, canBuildOn } from "./engine/carriage.js";
-import { roomOf, roomRefusal, promotionOffer, promoteHolding, trainingAt, mountsAt, healingAt, quarteringOf, vaultOf, chargeOf, chargeWord, depositToVault, withdrawFromVault, holdingFieldSources, sellPlanFor, stockPolicyFor, clearingQuote, startClearing } from "./engine/holdings.js";   // ⛔ CCODE-429: a hold has room · CCODE-430: a yard trains   // B6b: the holding that moves
+import { roomOf, roomRefusal, promotionOffer, promoteHolding, trainingAt, mountsAt, healingAt, quarteringOf, vaultOf, chargeOf, chargeWord, depositToVault, withdrawFromVault, holdingFieldSources, sellPlanFor, stockPolicyFor, clearingQuote, startClearing, payArrears, arrearsSaid } from "./engine/holdings.js";   // ⛔ CCODE-429: a hold has room · CCODE-430: a yard trains   // B6b: the holding that moves
 import { raidRisk, watchReadout, watchOdds, craftPlacementCost, defenceOf, featureCost, featureDef, featureDoes, featureCategory, allFeatures, refreshImprovement, canBeAskedToWork, holdingFactsLine, answerFeatureOffer, holdingLedger, addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, yieldsFor, upkeepFor, appointKeeper, reclaimHolding, improveHolding, setCrew, setGarrison, holdingGround, addFeature, removeFeature, renameHolding, featureKinds, residentsOf, holdingMeaningAura, holdingFieldDelta } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
 import { buildDevReport, unknownOpsIn } from "./engine/devreport.js";   // SNG-559: the Play/Dev instrument
 import { makeField, fieldDataFrom, FIELD_KINDS, KIND_LABEL, MEMBERSHIP } from "./engine/field.js";
@@ -183,7 +183,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.15.8";
+const APP_VERSION = "2.15.9";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -9323,7 +9323,7 @@ function applyTurn(turn, resolution, playerWords = null) {
       else if (kind === "crew") setCrew(character, id, op.npcIds || (op.npcId ? [op.npcId] : []), { cfg: CONTENT.rules?.economy?.holdStore, worldCount: worldCount() });
       else if (kind === "garrison") setGarrison(character, id, op.npcIds || (op.npcId ? [op.npcId] : []), { worldCount: worldCount() });
       // ✅ features and names — what a hold HAS, and what it is called
-      else if (kind === "feature") { const hb = (character.holdings || []).find(x => x.id === id); const bld = hb ? canBuildOn(hb, op.kind, CONTENT.rules?.economy?.holdFeatures?.kinds) : { ok: true };
+      else if (kind === "feature") { const hb = (character.holdings || []).find(x => x.id === id); const bld = hb ? canBuildOn(hb, op.kind, CONTENT.rules?.economy?.holdFeatures?.kinds, CONTENT.rules?.economy?.holdStore?.slots?.frames?.kinds) : { ok: true };
         if (!bld.ok) { said(`${hb.name}: ${bld.why}.`); continue; }   // ✅ B6b: a mine cannot be built aboard a ship, and the refusal is said
         // ⚠️ CCODE-495 — `featureKind` is the schema's name for this now: the `holdingOps` object declared
         // "kind" TWICE, once as a feature kind and once as post|enterprise, so one key meant two things in the
@@ -10024,7 +10024,7 @@ function applyTurn(turn, resolution, playerWords = null) {
       // player watched themselves give that then does not exist is the worst of both.
       const refusal = delegationRefusal(character.worldState, d.npcId, { ladder: CONTENT.rules?.subAttributeLadder || null, character });
       if (refusal) { refusals.push(refusal.note); logOpOutcome("delegateOps", "refused-capacity"); continue; }
-      const a = addAssignment(character.worldState, { npcId: d.npcId, npcName, charge: d.charge, targetEventId }, worldCount());
+      const a = addAssignment(character.worldState, { character, npcId: d.npcId, npcName, charge: d.charge, targetEventId }, worldCount());
       if (a) { n++; logOpOutcome("delegateOps", "applied"); }
     }
     if (n) turn.narration = (turn.narration || "") + `\n\n*✦ The charge is set — the work goes on while you are away, and you'll hear how it fared when you return.*`;
@@ -14797,7 +14797,8 @@ function wireHoldingOffers() {
     if (!sel?.value) return;
     const h = (character.holdings || []).find(x => x.id === id);
     // ⛔ CCODE-429: the Build verb asks what the GM's build asks — a mine cannot go aboard something that moves (only the GM path asked)
-    const hull = h ? canBuildOn(h, sel.value, CONTENT.rules?.economy?.holdFeatures?.kinds) : { ok: true };
+    // ✅ item 9 — AND THE FRAMES RIDE, so "a keep cannot be built aboard something that moves" became "on a hull".
+    const hull = h ? canBuildOn(h, sel.value, CONTENT.rules?.economy?.holdFeatures?.kinds, CONTENT.rules?.economy?.holdStore?.slots?.frames?.kinds) : { ok: true };
     if (!hull.ok) { alert(`${h.name}: ${hull.why}.`); return; }
     // ⛔ CCODE-495 — the craft rides, and `catalog` rides with it because the DURATION is read from the craft's
     // FUNCTIONS (`craftDuration`, the same rule an improvement pays).
@@ -15058,6 +15059,17 @@ function wireHoldingOffers() {
     saveCharacter(character); again();
   };
   for (const btn of app.querySelectorAll("[data-sell-gear]")) btn.onclick = () => showSellGear(btn.dataset.sellGear, again);
+  // ✅ AEVI item 12(b) — PAY IT NOW, from the purse. ⚠️ PARTIAL IS NOT A REFUSAL: a purse holding less than the debt
+  // pays what it can and the row says what is left, because `payArrears` caps at what `payAt` will actually move.
+  for (const btn of app.querySelectorAll("[data-arrears-pay]")) btn.onclick = (ev) => {
+    ev.stopPropagation();   // ⛔ the whole card is a control — without this, paying also opens the place
+    const id = btn.dataset.arrearsPay;
+    const h = (character?.holdings || []).find(x => x && x.id === id);
+    if (!h) return;
+    const r = payArrears(character, h, { regionId: CONTENT.locations?.[h.locationId]?.regionId || null, economy: CONTENT.rules?.economy || null });
+    if (!r.ok) { alert(r.why); return; }
+    saveCharacter(character); again();
+  };
   for (const btn of app.querySelectorAll("[data-hold-sell]")) btn.onclick = () => {
     const id = btn.dataset.holdSell;
     const here = hereNow();
@@ -15250,7 +15262,10 @@ function renderHoldingsTab(manageId = null, tab = null) {
     if ((h.history || []).slice(-4).some(e => /raid/i.test(String(e?.note || "")))) return { cls: "bad", said: "raided recently", tab: "defence", go: "Open Attack & Defense", verb: "Open Attack & Defense — what comes at it, and what stands against them" };
     if (String(h.condition) === "failing") return { cls: "bad", said: "failing", tab: "people", go: "Open People", verb: "Open the People tab — a keeper sets the floor it will not drop below" };
     try { const r = roomOf(h, cfgA); if (r && r.total > 0 && r.used >= r.total) return { cls: "warn", said: "no feature spots left", tab: "build", go: "Open Build", verb: "Open the Build tab — it may be ready to be named something greater" }; } catch { /* no reader, no alert */ }
-    if (Number(h.arrears) > 0) return { cls: "warn", said: `${h.arrears} of keep owed`, tab: "store", go: "Open Store", verb: "Open Store & money" };
+    // ✅ AEVI item 12 — IT SAYS WHY, AND THE ROW CARRIES THE VERB. ⛔ Erik: *"'4 of keep owed' — not sure, because I
+    // can't seem to do anything about it."* The row named a debt, sent him to a tab, and that tab had nothing to do
+    // either; three places added to `arrears` and none anywhere took any away. `arrearsSaid` is the hold's own reason.
+    if (Number(h.arrears) > 0) return { cls: "warn", said: arrearsSaid(h) || `${h.arrears} of keep owed`, tab: "store", go: "Open Store", verb: "Open Store & money", pay: Number(h.arrears) };
     if (per != null && per < 0) return { cls: "warn", said: "costs more than it makes", tab: "store", go: "Open Store", verb: "Open Store & money — what it sells, and what it costs to keep" };
     // ⛑ AND A QUIET STATE IS STILL A STATE, which is what her pill carries when nothing is wrong.
     // ⚠️ MEASURED ON THE SCREEN AND NARROWED: "store ready to sell" on any stock at all put the row on FOUR of
@@ -15339,6 +15354,7 @@ function renderHoldingsTab(manageId = null, tab = null) {
     const rows = reviewRows.map(({ h, a }) => `<div class="gs-row${a.cls ? " " + a.cls : " ok"}">
       <span class="gs-dot" aria-hidden="true"></span>
       <span class="gs-row-t"><b>${esc(h.name || h.id)}</b> <span>— ${esc(a.said)}</span></span>
+      ${a.pay ? `<button class="gs-go" data-arrears-pay="${esc(h.id)}" title="${esc(`Pay ${a.pay} against what ${h.name || h.id} owes, out of your own purse`)}">Pay it now: ${esc(priceHere(a.pay, CONTENT.locations?.[h.locationId]?.regionId || null, CONTENT.rules?.economy || null).label)}</button>` : ""}
       <button class="gs-go" data-hold-open="${esc(h.id)}" data-pp-goto="${esc(a.tab)}" title="${esc(a.verb)}">${esc(a.go)}</button>
     </div>`).join("");
     return rows;
@@ -16059,7 +16075,9 @@ function renderHoldingsTab(manageId = null, tab = null) {
             // ⛑ §69 — AND WHAT IT IS WORTH HERE, which is the number that decides whether to sell or to carry. The
             // card's own sentence; a heap of goods with no price on it is not an answer to "should I sell".
             const w = storeWorth(h, { economy: CONTENT.rules?.economy, regionId: CONTENT.locations?.[h.locationId]?.regionId || null, cfg: CONTENT.rules?.economy?.holdStore });
-            return `<div class="codex-f"><strong style="min-width:110px">Stored</strong> <span>${esc(line)}${w ? ` · worth ~${w} crystal here` : ""}${h.arrears ? ` · in arrears ${h.arrears}` : ""}</span></div>`;
+            // ✅ AEVI item 12 — "in arrears 4" became the reason and the verb. A bare number here was the other half of
+            // what Erik could do nothing about.
+            return `<div class="codex-f"><strong style="min-width:110px">Stored</strong> <span>${esc(line)}${w ? ` · worth ~${w} crystal here` : ""}${h.arrears ? ` · ${esc(arrearsSaid(h))} <button class="opt" data-arrears-pay="${esc(h.id)}" title="${esc(`Pay ${h.arrears} against what it owes, out of your own purse`)}">Pay it now: ${esc(priceHere(Number(h.arrears), CONTENT.locations?.[h.locationId]?.regionId || null, CONTENT.rules?.economy || null).label)}</button>` : ""}</span></div>`;
           })()}
         ${(() => { const v = vaultOf(h); if (!v.length) return ""; const atHold = hereNow()?.id === h.locationId;   // ⛔ CCODE-444: what its vault keeps
           return `<div class="hint hold-has hold-vault"><span class="hold-ctl-label">vault</span>${v.map((it, i) => { const c = chargeOf(it, CONTENT.items || {}); const on = it.active !== false;
@@ -17678,7 +17696,7 @@ function showErrandPicker(npcId) {
     // ⛔ ONE GESTURE: they leave the company first, because they cannot be here and there.
     if (atSide && row?.id) partCompany(character, row.id, { day, why: "sent on an errand" });
     character.worldState = character.worldState || {};
-    const made = addAssignment(character.worldState, { npcId, npcName: who.npcName, charge, kind, destination, stake }, worldCount());
+    const made = addAssignment(character.worldState, { character, npcId, npcName: who.npcName, charge, kind, destination, stake }, worldCount());
     close();
     saveCharacter(character);
     renderBandsTab();

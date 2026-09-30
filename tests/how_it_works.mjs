@@ -24445,7 +24445,10 @@ console.log("\n── §308 · a hold has room — its rung or its frame; a buil
     /const room = roomOf\(h, cfgF\);/.test(A308) && /data-hold-promote="\$\{esc\(h\.id\)\}"/.test(A308)
     && /const r = promoteHolding\(character, btn\.dataset\.holdPromote, holdCfgNow\(\)/.test(A308)
     && /room\.full \? `<div class="hint hold-full">\$\{esc\(roomRefusal\(h, room\)\)\}<\/div>`/.test(A308)
-    && /const hull = h \? canBuildOn\(h, sel\.value, CONTENT\.rules\?\.economy\?\.holdFeatures\?\.kinds\) : \{ ok: true \};/.test(A308));
+    // ⚠️ THIS CLAUSE PINNED THE WHOLE CALL AS TYPED, and item 9 had to add an argument to it — my own rule broken by
+    // me again: a gate may not pin the TYPOGRAPHY of a signature. ⛑ THE CLAIM is that the Build verb asks the frame rule
+    // and asks it WITH the frames — without them `canBuildOn` keeps the old blanket refusal, which IS the bug Erik hit.
+    && /canBuildOn\(h, sel\.value,[^)]*holdFeatures\?\.kinds,[^)]*frames\?\.kinds\)/.test(A308));
 }
 
 // ══════════ §309 · CCODE-430 — A YARD TRAINS: A BAND CALLED WHERE IT CAN BE WORKED UP COSTS LESS ══════════
@@ -33528,6 +33531,266 @@ console.log("\n── §395 · the hold sheet stays open, and every job is one l
       ];
       return kept.every(s => src395.includes(s));
     })());
+}
+
+/* ══════════ §396 · A DEBT THAT CAN COME DOWN, AND SAYS WHAT IT IS FOR ══════════ */
+// ⛔ ERIK, IN PLAY 2026-09-30: *"'4 of keep owed' / 'in arrears 4' — not sure, because I can't seem to do anything about
+// it."* ⛑ MEASURED BEFORE BUILDING, and Aevi's item 12 reading is exact: THREE places added to `arrears` — the stall fee
+// when the keeper sells, the stall fee when you sell in person, the unpaid keep — and **not one place anywhere took any
+// away**, in the engine, the app or reconcile. A number that could only grow, on a hold that was thriving.
+//
+// ⛑ IT COMES DOWN THREE WAYS NOW, and the gate below is her sentence: *"arrears go down as well as up, and a hold that
+// earns more than its keep clears them."* ⚠️ DRIVEN AT THE TIPPING POINT, not at a comfortable number: the sweep puts
+// watch hands on the hold until the keep passes the takings, because a rule about a surplus proves nothing where the
+// surplus is large. ⚠️ AND ORDER IS THE RULE, NOT AN IMPLEMENTATION DETAIL — after the keep, never before it, or a hold
+// clears its debt, fails its keep and owes it again every pass forever.
+console.log("\n── §396 · a debt that can come down ──");
+{
+  const H396 = await import("../engine/holdings.js");
+  const { loadContentHeadless: lch396 } = await import("./headless_content.mjs");
+  const C396 = await lch396();
+  const cfg396 = { ...C396.rules.economy.holdStore, features: C396.rules.economy.holdFeatures };
+  const rid396 = "valley";
+  // ⛑ THE FIXTURE IS BUILT OUT HERE, outside every `if`, because a check inside one vanishes green.
+  const hold396 = (over = {}) => ({ id: "h396", name: "The Owing Post", kind: "post", condition: "holding",
+    locationId: "millbrook", steward: "keeper", crew: [], garrison: [], features: [],
+    store: { ore: 6, raw_material: 4 }, ...over });
+  const who396 = (purse = 9999, over = {}) => ({ name: "T396", holdings: [hold396(over)], purse: { crystal: purse, scrip: {} } });
+  const tick396 = (ch, h, day = 400) => H396.tickStore(ch, h, { cfg: cfg396, economy: C396.rules.economy,
+    regionId: rid396, dangerLevel: 0, rng: () => 0.99, day, people: {}, locations: C396.locations || {},
+    rules: C396.rules, powers: C396.powers || [] });
+
+  /* ---- 1 · ⛔ EVERY ADD SAYS WHY ---- */
+  // ⚠️ ASKED OF THE SOURCE, because the claim is that there is no OTHER door: a fourth site added later without a
+  // reason is exactly the regression this catches. Comments are stripped first — a gate that reads its own prose is a
+  // gate I have written four times by accident.
+  const src396 = (() => { const s = rd("engine/holdings.js");
+    return s.split(NEWLINE_RE).filter(l => !/^\s*(\/\/|\*|\/\*)/.test(l)).join(String.fromCharCode(10)); })();
+  // ⚠️ MY FIRST VERSION OF THIS CHECK ASKED FOR THE ABSENCE of `x.arrears = (Number(x.arrears) || 0) + …`, which is
+  // precisely the line INSIDE `oweIt` — the one legitimate writer. It went red the moment the door existed. "One
+  // writer" is a COUNT, never a negation, and a gate whose question is phrased as an absence cannot tell the door from
+  // the leak.
+  check("§396: ⛔ THERE IS ONE DOOR INTO A DEBT AND IT TAKES A REASON — exactly one writer, and every add goes through it",
+    (() => {
+      const adds = [...src396.matchAll(/([A-Za-z_$][\w$]*)\.arrears = \(Number\(/g)];
+      const owe = src396.indexOf("export function oweIt(");
+      const oweEnd = src396.indexOf(String.fromCharCode(10) + "}", owe);
+      // ⛑ exactly one hand-rolled add in the file, and it sits inside `oweIt`'s own body
+      const onlyWriter = adds.length === 1 && adds[0].index > owe && adds[0].index < oweEnd;
+      // ⛑ …and the three sites Aevi measured now call it — the stall fee twice and the unpaid keep
+      const callers = src396.split("oweIt(").length - 1 - 1;   // occurrences less the definition
+      return onlyWriter && callers >= 3 && /export function payArrears\(/.test(src396)
+        && /export function arrearsSaid\(/.test(src396);
+    })());
+
+  check("§396: ⛑ …and a reason carries what it was for, on which day, and how much — the row Erik could act on",
+    (() => {
+      const h = hold396(); H396.oweIt(h, 3, "couldn't pay the stall at Millbrook", 112);
+      const said = H396.arrearsSaid(h);
+      return Number(h.arrears) === 3 && /couldn't pay the stall at Millbrook/.test(said)
+        && /day 112/.test(said) && /3 owed/.test(said);
+    })());
+
+  // ⛔ THE SAME REASON ON THE SAME DAY IS ONE LINE THAT GROWS. Four identical sentences is a readout nobody reads.
+  check("§396: ⛑ …and the same reason on the same day is one line, not four copies of one sentence",
+    (() => {
+      const h = hold396();
+      for (let i = 0; i < 4; i++) H396.oweIt(h, 2, "couldn't pay its keep", 7);
+      return Number(h.arrears) === 8 && h.arrearsWhy.length === 1 && h.arrearsWhy[0].n === 8;
+    })());
+
+  // ⚠️ AND A HOLD THAT ALREADY CARRIES A DEBT SAYS SO RATHER THAN SAYING NOTHING. Every arrears in the live saves today
+  // predates the reasons; a readout that went blank for them would have hidden the thing he reported.
+  check("§396: ⚠️ …and a debt from before the reasons were written still reads as a debt",
+    /from before the reasons were written down/.test(H396.arrearsSaid({ arrears: 4 }) || ""));
+
+  /* ---- 2 · ⛔ IT GOES DOWN, WHICH NOTHING COULD DO BEFORE ---- */
+  check("§396: ⛔ THE PLAYER CAN PAY IT, from the purse, through `payAt` — the one door into the money",
+    (() => {
+      const ch = who396(200); const h = ch.holdings[0];
+      H396.oweIt(h, 12, "couldn't pay its keep", 9);
+      const r = H396.payArrears(ch, h, { regionId: rid396, economy: C396.rules.economy });
+      return r.ok && r.paid === 12 && !h.arrears && !h.arrearsWhy && Number(ch.purse.crystal) === 188;
+    })());
+
+  // ⛔ PARTIAL IS NOT A REFUSAL. A hold that owes 40 and a purse that holds 10 gets ten closer; the alternative is a
+  // debt that can only be cleared all at once, which for a large one is a debt that can never be cleared at all.
+  check("§396: ⛑ …and paying part of it is not a refusal — what is left is what is left",
+    (() => {
+      const ch = who396(200); const h = ch.holdings[0];
+      H396.oweIt(h, 500, "couldn't pay its keep", 9);
+      const r = H396.payArrears(ch, h, { regionId: rid396, economy: C396.rules.economy, upTo: 30 });
+      return r.ok && r.paid === 30 && Number(h.arrears) === 470 && h.arrearsWhy[0].n === 470;
+    })());
+
+  check("§396: ⚠️ …and an empty purse refuses and leaves the debt exactly where it was",
+    (() => {
+      const ch = who396(0); const h = ch.holdings[0];
+      H396.oweIt(h, 9, "couldn't pay its keep", 9);
+      const r = H396.payArrears(ch, h, { regionId: rid396, economy: C396.rules.economy });
+      return r.ok === false && typeof r.why === "string" && r.why.length > 0 && Number(h.arrears) === 9;
+    })());
+
+  /* ---- 3 · ⛔ AEVI'S GATE, SWEPT ACROSS THE TIPPING POINT ---- */
+  // ⛔ HER SENTENCE: "arrears go down as well as up, and a hold that earns more than its keep clears them." The sweep
+  // raises the KEEP (watch hands cost `garrisonUpkeepPerHand`) until it crosses the takings, so BOTH sides of the rule
+  // are driven. ⚠️ A hold with an empty shed still takes in money — it YIELDS and then sells in one pass — so emptying
+  // the store does not get you below the line and would have proved only the easy half.
+  const sweep396 = [0, 2, 4, 6, 8, 10, 14].map(watch => {
+    const ch = who396(9999, { garrison: Array.from({ length: watch }, (_, i) => `g${i}`) });
+    const h = ch.holdings[0];
+    H396.oweIt(h, 6, "couldn't pay its keep", 1);
+    const st = tick396(ch, h);
+    const took = (Number(st.keeperSold?.crystal) || 0) + (Number(st.pilgrims) || 0) + (Number(st.relay?.crystal) || 0);
+    const fee = st.marketFee?.paid ? Number(st.marketFee.fee) || 0 : 0;
+    return { watch, surplus: took - (Number(st.upkeep) || 0) - fee, paid: Number(st.arrearsPaid?.crystal) || 0, left: Number(h.arrears) || 0 };
+  });
+  check("§396: ⛔ A HOLD THAT EARNS MORE THAN ITS KEEP CLEARS WHAT IT OWES — and one that does not, pays nothing",
+    sweep396.every(r => r.paid === Math.max(0, Math.min(6, r.surplus))));
+  // ⚠️ AND THE SWEEP MUST ACTUALLY CROSS THE LINE, or it is seven copies of the same easy case dressed as a range.
+  check("§396: ⚠️ …and the sweep crosses the line in both directions, so neither half passed by coincidence",
+    sweep396.some(r => r.surplus > 0 && r.paid > 0) && sweep396.some(r => r.surplus <= 0 && r.paid === 0 && r.left > 0));
+
+  // ⛔ WHERE IT SITS IN THE TICK IS THE RULE. A pass that could not pay its keep does not also pay the debt down — the
+  // debt GROWS with its reason and nothing is taken against it. Before the keep this is a treadmill.
+  check("§396: ⛔ …and a pass short of its keep pays NOTHING against the debt — it grows, with a reason, and no treadmill",
+    (() => {
+      const ch = who396(0, { steward: null, crew: [], garrison: ["a", "b", "c", "d"], store: {} });
+      const h = ch.holdings[0];
+      H396.oweIt(h, 6, "couldn't pay its keep", 1);
+      const st = tick396(ch, h, 512);
+      return !!st.short && !st.arrearsPaid && Number(h.arrears) > 6 && /couldn't pay its keep/.test(H396.arrearsSaid(h));
+    })());
+
+  /* ---- 4 · ⛑ AND THE PLAYER IS TOLD, ON BOTH SURFACES ---- */
+  check("§396: ⛑ THE PASS THAT PAID SAYS IT PAID — a number that moves in silence is the same problem as one that cannot",
+    (() => {
+      const ch = who396(9999); const h = ch.holdings[0];
+      H396.oweIt(h, 6, "couldn't pay its keep", 1);
+      const st = tick396(ch, h);
+      return H396.storeNews(h, st).some(l => /toward what it owed/.test(l));
+    })());
+
+  // ⛔ BOTH SURFACES CARRY THE VERB. The review row named the debt and sent him to a tab that could not pay it either;
+  // "a card that names a problem and withholds the verb for it is worse than one that says nothing" is already this
+  // file's rule, from CCODE-470.
+  const A396 = rd("app.js");
+  check("§396: ⛔ …and BOTH surfaces that show the debt carry the button and the reason, not just a number",
+    A396.split("data-arrears-pay").length - 1 >= 3            // two renders plus the one handler
+    && /arrearsSaid\(h\)/.test(A396)
+    && /payArrears\(character, h, \{/.test(A396)
+    && /ev\.stopPropagation\(\)/.test(A396.slice(A396.indexOf("data-arrears-pay]")))); // the whole card is a control
+}
+
+/* ══════════ §397 · A FEATURE SAYS WHICH FRAMES CAN CARRY IT ══════════ */
+// ⛔ ERIK, IN PLAY 2026-09-30: *"It said I can't have a keep on a moving hold."* ⛑ MEASURED: `canBuildOn` asked
+// `carriageOf(holding)` — *does it move at all* — and then refused on a field named `hullable`. Nine feature kinds
+// declare `hullable: false` and all nine were refused on all five frames. **A walking fortress is exactly the fantasy,
+// and the engine was saying no to it with a boat's rule.**
+//
+// ⛑ AEVI, item 9: *"A feature says which frames can carry it. Keep, gate, muster yard, ward line: any frame except a
+// hull. Mine, quarry, grave ground, reclamation bowl: rooted only. Waygate: never built."*
+//
+// ⚠️ AND HER SENTENCE IS HELD IN THE READER ONLY UNTIL SHE AUTHORS IT — a kind's own `frames: [...]` or
+// `rootedOnly: true` is read FIRST, so her content is a content change and not an engine change. That ordering is the
+// point: the four doors run authored → registered → loaded → read, and a reader that arrives after the content is a
+// field nobody uses. ⚠️ `family` happens to partition her three groups exactly; deriving the rule from it would have
+// been authoring by coincidence, and a new martial feature would silently inherit a placement nobody wrote.
+console.log("\n── §397 · which frames carry which feature ──");
+{
+  const CR397 = await import("../engine/carriage.js");
+  const H397 = await import("../engine/holdings.js");
+  const { loadContentHeadless: lch397 } = await import("./headless_content.mjs");
+  const C397 = await lch397();
+  const kinds397 = C397.rules.economy.holdFeatures.kinds || C397.rules.economy.holdFeatures;
+  const frames397 = C397.rules.economy.holdStore?.slots?.frames?.kinds || {};
+  const frameNames397 = Object.keys(frames397).filter(f => !f.startsWith("_"));
+  const cfg397 = { ...C397.rules.economy.holdStore, features: C397.rules.economy.holdFeatures };
+  // ⛑ THE FIXTURE IS OUT HERE, outside every `if`. `null` means rooted — no carriage at all.
+  const on397 = (frame) => frame === null ? { id: "h397", name: "T397", kind: "post", condition: "holding", locationId: "millbrook", features: [], store: { cut_stone: 9999, raw_material: 9999, ore: 9999 } }
+    : { id: "h397", name: "T397", kind: "post", condition: "holding", locationId: "millbrook", features: [], store: { cut_stone: 9999, raw_material: 9999, ore: 9999 },
+        carriage: { moves: String(frames397[frame].moves).toLowerCase(), speed: 1 } };
+
+  // ⚠️ ASKED OF THE CONTENT'S OWN POPULATION, never of a list I typed: whatever declares `hullable: false` is what
+  // this rule is about, so a tenth kind gaining the flag is covered the day Aevi authors it.
+  const flagged397 = Object.keys(kinds397).filter(k => !k.startsWith("_") && kinds397[k] && typeof kinds397[k] === "object" && kinds397[k].hullable === false);
+  check("§397: ⛑ THE POPULATION IS WHAT THE CONTENT DECLARES — every kind carrying `hullable: false`, not a list in this file",
+    flagged397.length >= 9 && flagged397.includes("keep") && flagged397.includes("mine"));
+
+  /* ---- 1 · ⛔ ERIK'S OWN CASE ---- */
+  check("§397: ⛔ A KEEP STANDS ON LEGS — the walking fortress — and still not in a hull",
+    CR397.canBuildOn(on397("legs"), "keep", kinds397, frames397).ok === true
+    && CR397.canBuildOn(on397("hull"), "keep", kinds397, frames397).ok === false
+    && CR397.canBuildOn(on397(null), "keep", kinds397, frames397).ok === true);
+
+  // ⛔ AND THE REFUSAL NAMES THE FRAME, because "something that moves" was the wrong reason as well as the wrong answer.
+  check("§397: ⛑ …and the refusal names the frame and the reason, rather than 'something that moves'",
+    (() => { const r = CR397.canBuildOn(on397("hull"), "keep", kinds397, frames397);
+      return r.frame === "hull" && /hull/.test(String(r.why)) && !/something that moves/.test(String(r.why)); })());
+
+  /* ---- 2 · ⛔ HER THREE GROUPS, OVER EVERY FRAME ---- */
+  const cells397 = (k) => [null, ...frameNames397].map(f => CR397.canBuildOn(on397(f), k, kinds397, frames397).ok);
+  const notAHull397 = (k) => { const c = cells397(k); return c[0] === true && c.slice(1).every((x, i) => x === (frameNames397[i] !== "hull")); };
+  const rooted397 = (k) => { const c = cells397(k); return c[0] === true && c.slice(1).every(x => x === false); };
+  check("§397: ⛔ KEEP, GATE, MUSTER YARD, WARD LINE — any frame except a hull, which is the bug he hit",
+    ["keep", "gate", "muster_yard", "ward_line"].every(notAHull397));
+  check("§397: ⛔ MINE, QUARRY, GRAVE GROUND, RECLAMATION BOWL — rooted only, because they are their ground",
+    ["mine", "quarry", "grave_ground", "reclamation_bowl"].every(rooted397));
+
+  // ⚠️ WAYGATE IS NOT A FRAME QUESTION, and gating it as one was MY driver being wrong rather than the reader. Her
+  // "never built" is enforced at the BUILD door — so the check is that the two doors AGREE, not that one mimics the other.
+  check("§397: ⚠️ …and a waygate is refused on the ground and on every frame — her never-built rule, at the build door",
+    [null, ...frameNames397].every(f => H397.addFeature({ name: "T397", holdings: [on397(f)], purse: { crystal: 9999, scrip: {} } },
+      "h397", { kind: "waygate", by: "you", day: 1, worldCount: 1, cfg: cfg397, via: "built" }).ok === false));
+
+  /* ---- 3 · ⛔ THE TWO DOORS AGREE, DRIVEN BOTH WAYS ---- */
+  // ⛔ WHEN TWO CALLERS COMPUTE ONE THING, DRIVE BOTH SIDES AND COMPARE. The frame door is consulted by the Build tab
+  // and the GM's build op; the build door is `addFeature`. The thing that must never happen is the frame door refusing
+  // while the build door builds it anyway.
+  const pairs397 = [];
+  for (const k of Object.keys(kinds397).filter(x => !x.startsWith("_") && kinds397[x] && typeof kinds397[x] === "object")) {
+    for (const f of [null, ...frameNames397]) {
+      const h = on397(f);
+      const frameSays = CR397.canBuildOn(h, k, kinds397, frames397);
+      const built = H397.addFeature({ name: "T397", holdings: [h], purse: { crystal: 99999, scrip: {} } },
+        "h397", { kind: k, by: "you", day: 1, worldCount: 1, cfg: cfg397, via: "built" });
+      pairs397.push({ k, f, frameOk: frameSays.ok, builtOk: built.ok !== false });
+    }
+  }
+  check("§397: ⛔ NOTHING THE FRAME DOOR REFUSES GETS BUILT — both doors driven over every kind × every frame",
+    pairs397.length >= 6 * frameNames397.length && pairs397.every(p => p.frameOk || !p.builtOk));
+  // ⚠️ AND THE SWEEP MUST CONTAIN REFUSALS, or "every refusal is honoured" passes over an empty set.
+  check("§397: ⚠️ …and the sweep actually contains refusals, so the agreement is not over an empty list",
+    pairs397.some(p => !p.frameOk) && pairs397.some(p => p.frameOk));
+
+  /* ---- 4 · ⛑ CONTENT WINS, SO AEVI'S AUTHORING NEEDS NO ENGINE CHANGE ---- */
+  check("§397: ⛑ A KIND'S OWN `frames: [...]` IS OBEYED EXACTLY — her content overrides the reader's held sentence",
+    (() => {
+      const authored = { ...kinds397, keep: { ...kinds397.keep, frames: ["legs", "grown"] } };
+      return frameNames397.every(f => CR397.canBuildOn(on397(f), "keep", authored, frames397).ok === ["legs", "grown"].includes(f));
+    })());
+  check("§397: ⛑ …and `rootedOnly: true` refuses every frame, which is the other half she offered to author",
+    (() => {
+      const authored = { ...kinds397, fishery: { ...kinds397.fishery, rootedOnly: true } };
+      return frameNames397.every(f => CR397.canBuildOn(on397(f), "fishery", authored, frames397).ok === false)
+        && CR397.canBuildOn(on397(null), "fishery", authored, frames397).ok === true;
+    })());
+
+  /* ---- 5 · ⚠️ NOTHING ELSE MOVED, AND A MISSED CALLER STAYS STRICT ---- */
+  const untouched397 = Object.keys(kinds397).filter(k => !k.startsWith("_") && kinds397[k] && typeof kinds397[k] === "object" && !flagged397.includes(k));
+  check("§397: ⚠️ A KIND THAT SAYS NOTHING ABOUT FRAMES IS CARRIED BY ANYTHING, exactly as before",
+    untouched397.length > 0 && untouched397.every(k => [null, ...frameNames397].every(f => CR397.canBuildOn(on397(f), k, kinds397, frames397).ok === true)));
+  // ⛔ A CALLER THAT DOES NOT PASS THE FRAMES CANNOT NAME THE FRAME, so it keeps TODAY's blanket answer rather than
+  // guessing — a call site I failed to update stays as strict as it is now instead of silently opening up.
+  check("§397: ⛔ …and a three-argument call keeps the OLD blanket refusal — a missed caller does not silently open up",
+    frameNames397.every(f => CR397.canBuildOn(on397(f), "keep", kinds397).ok === false));
+
+  /* ---- 6 · ⛑ ONE DEFINITION OF "WHICH FRAME" ---- */
+  // ⛔ `roomOf` had its own copy of the moves→frame line, and two derivations of one number is the defect I have
+  // repaired five times this month. The gate is that they AGREE, not that either one is right.
+  check("§397: ⛔ `roomOf` AND THE FRAME RULE ASK ONE FUNCTION WHICH FRAME A HOLD IS ON",
+    frameNames397.every(f => { const h = on397(f); return H397.roomOf(h, cfg397)?.frame === CR397.frameOf(h, frames397); })
+    && CR397.frameOf(on397(null), frames397) === null);
 }
 
 /* ══════════ REPORT ══════════ */

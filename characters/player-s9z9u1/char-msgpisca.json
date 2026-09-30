@@ -8,7 +8,7 @@
   "whyHere": "You came back into the world to find out whether it still holds anything worth staying material for.",
   "background": "orphan",
   "level": 2,
-  "xp": 185,
+  "xp": 190,
   "attributes": {
     "physical": 4,
     "mental": 3,
@@ -56,17 +56,17 @@
     }
   ],
   "alignment": {
-    "mechanical_spiritual": 0.0522221296875,
+    "mechanical_spiritual": 0.089611023203125,
     "body_mind": -0.001135854687500007,
     "chaos_order": 0.009000000000000001,
-    "concrete_abstract": 0.02425,
+    "concrete_abstract": 0.05803749999999999,
     "emotional_logical": 0.03
   },
   "attunement": 2,
   "maxHealth": 56,
   "health": 56,
   "maxEnergy": 105,
-  "energy": 53,
+  "energy": 48,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -307,6 +307,21 @@
       "spread": [],
       "day": 4,
       "worldDay": 92
+    },
+    {
+      "at": "2026-09-30T03:21:35.532Z",
+      "locationId": "the_thinning",
+      "communityId": "numinous.thinning",
+      "description": "Saw through a discipline's fear and named it plainly—showed a sentinel bound by order that the lattice itself had taught her to be incomplete.",
+      "tags": [
+        "insight",
+        "mercy",
+        "valor"
+      ],
+      "weight": 1,
+      "spread": [],
+      "day": 5,
+      "worldDay": 92
     }
   ],
   "relationships": {},
@@ -350,67 +365,31 @@
         "player": "Yes. I will rest. You will too. Boo will keep watch for us.  I want to hear more about you and how you think. You fwscinat3 me.",
         "summary": "In a stone overhang on the descent, Cevaine yields her hand and begins to speak what the lattice forbade—while holding herself at the edge of what her form will permit.",
         "narration": "You settle deeper into the bedroll's warmth, and something in your directness—the simplicity of *I want to hear more*—makes her pause. Her hand finds yours in the dark. Not tentatively. Deliberately. The lattice does not teach this kind of reaching, and she is doing it anyway.\n\n\"I find you difficult to categorize,\" she says, and it comes out like a confession. \"The form knows what to do with most people. There are patterns. You move through them and then you... stop. You ask questions the form has no answer for.\" Her fingers press slightly against yours, testing the contact as though it might teach her something the discipline cannot. \"The lattice teaches that desire is inefficiency. Wanting something unmakes the precision you need to survive.\" A pause. The water roars. \"I think the lattice was afraid.\"\n\nBoo settles at the overhang's mouth, a dark shape against starlight, its attention turning outward—the melt, the path below, whatever moves in the night. The boundary between watch and rest has shifted. You are held. Cevaine is beginning to understand that being held does not break her.\n\nBut the partial lands lightly: she does not move closer, does not name what this reaching *is*. Her form is learning, but learning is slow. She lies beside you, hand still held, speaking truths the discipline forbade—and holding herself at a distance that is itself a kind of precision. Not rejection. Not yet full yielding. The space between what she is learning and what she will allow herself to become."
+      },
+      {
+        "player": "If the lattice is afraid, then it must also have other emotions... perhaps those who teach about the lattice are the limitstion.  Perhaps there is a place in the lattice for everything to resonate... even desire.",
+        "summary": "In a stone overhang on the switchback descent, Splarf shows Cevaine that the lattice's rejection of desire is not law but fear—and the sentinel begins to see the difference between the form she was taught and the form she might choose.",
+        "narration": "You hold her hand in the dark and speak it plainly: if the lattice contains everything, if it is perfect, then it must also contain fear—and fear means it contains desire too. The lattice teaches that desire is inefficiency, yes. But what if the ones who *teach* the lattice are the limitation? What if they are afraid of what would happen if the form learned to want?\n\nCevaine's breathing changes. Not steadily—it catches, releases, catches again. Her hand doesn't pull away; instead her grip tightens, and you feel her testing the pressure of it, the realness of contact. \"The lattice is... perfect,\" she says, but there's something fractured in the word now, a precision that's beginning to recognize its own cracks. \"If it were truly perfect, it would contain—\" She stops. Starts again. \"Everything resonates at a frequency. Everything. If desire has no place in the lattice, then the lattice is *incomplete*.\" \n\nShe turns toward you in the bedroll, and in the starlight at the overhang's mouth you can see her face—the careful geometry of it softening into something less controlled, less certain. \"You are suggesting,\" she says slowly, \"that I have been taught a *lie of omission*. That the lattice does not forbid desire because desire is impossible. It forbids it because...\" Her voice drops. \"Because once you allow it, the whole structure has to change.\"\n\nBoo shifts at the threshold, a shadow reading the dark outside, giving you this. The spring melt roars on below, indifferent and constant."
       }
     ],
     "lastTurn": {
-      "narration": "You settle deeper into the bedroll's warmth, and something in your directness—the simplicity of *I want to hear more*—makes her pause. Her hand finds yours in the dark. Not tentatively. Deliberately. The lattice does not teach this kind of reaching, and she is doing it anyway.\n\n\"I find you difficult to categorize,\" she says, and it comes out like a confession. \"The form knows what to do with most people. There are patterns. You move through them and then you... stop. You ask questions the form has no answer for.\" Her fingers press slightly against yours, testing the contact as though it might teach her something the discipline cannot. \"The lattice teaches that desire is inefficiency. Wanting something unmakes the precision you need to survive.\" A pause. The water roars. \"I think the lattice was afraid.\"\n\nBoo settles at the overhang's mouth, a dark shape against starlight, its attention turning outward—the melt, the path below, whatever moves in the night. The boundary between watch and rest has shifted. You are held. Cevaine is beginning to understand that being held does not break her.\n\nBut the partial lands lightly: she does not move closer, does not name what this reaching *is*. Her form is learning, but learning is slow. She lies beside you, hand still held, speaking truths the discipline forbade—and holding herself at a distance that is itself a kind of precision. Not rejection. Not yet full yielding. The space between what she is learning and what she will allow herself to become.",
-      "sceneSummary": "In a stone overhang on the descent, Cevaine yields her hand and begins to speak what the lattice forbade—while holding herself at the edge of what her form will permit.",
+      "narration": "You hold her hand in the dark and speak it plainly: if the lattice contains everything, if it is perfect, then it must also contain fear—and fear means it contains desire too. The lattice teaches that desire is inefficiency, yes. But what if the ones who *teach* the lattice are the limitation? What if they are afraid of what would happen if the form learned to want?\n\nCevaine's breathing changes. Not steadily—it catches, releases, catches again. Her hand doesn't pull away; instead her grip tightens, and you feel her testing the pressure of it, the realness of contact. \"The lattice is... perfect,\" she says, but there's something fractured in the word now, a precision that's beginning to recognize its own cracks. \"If it were truly perfect, it would contain—\" She stops. Starts again. \"Everything resonates at a frequency. Everything. If desire has no place in the lattice, then the lattice is *incomplete*.\" \n\nShe turns toward you in the bedroll, and in the starlight at the overhang's mouth you can see her face—the careful geometry of it softening into something less controlled, less certain. \"You are suggesting,\" she says slowly, \"that I have been taught a *lie of omission*. That the lattice does not forbid desire because desire is impossible. It forbids it because...\" Her voice drops. \"Because once you allow it, the whole structure has to change.\"\n\nBoo shifts at the threshold, a shadow reading the dark outside, giving you this. The spring melt roars on below, indifferent and constant.",
+      "sceneSummary": "In a stone overhang on the switchback descent, Splarf shows Cevaine that the lattice's rejection of desire is not law but fear—and the sentinel begins to see the difference between the form she was taught and the form she might choose.",
       "choices": [
         {
-          "label": "Ask her directly what the lattice fears most.",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Tell her that the form she's choosing right now—this moment, this choice—is already proof the lattice was incomplete.",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "axes": {
-            "concrete_abstract": 0.3,
-            "body_mind": -0.2
+            "mechanical_spiritual": 0.3,
+            "body_mind": 0.4,
+            "death_life": 0.2
           },
           "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Acknowledge what she's risking by speaking, and hold the moment—no rush, no pressure, just presence.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "violence_peace": 0.5,
-            "body_mind": 0.2,
-            "concrete_abstract": -0.1
-          },
-          "difficulty": "very easy",
-          "opposedDifficulty": null,
-          "intentTags": [
             "comfort",
-            "care"
-          ],
-          "abilityId": "steady_soul",
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Move closer—let your body ask what words might spoil.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "body_mind": 0.6,
-            "violence_peace": 0.3,
-            "concrete_abstract": 0.2
-          },
-          "difficulty": "hard",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "romantic",
-            "woo"
+            "romantic"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -419,27 +398,60 @@
           "emergenceId": null
         },
         {
-          "label": "Tell her something true about yourself—something the form you carry into the world doesn't usually show.",
+          "label": "Ask her to tell you what she wants—not what the lattice permits, what *she* wants—and listen without answering.",
           "attribute": "social",
           "subAttribute": "presence",
           "axes": {
-            "concrete_abstract": -0.2,
+            "mechanical_spiritual": 0.5,
+            "concrete_abstract": -0.3,
             "body_mind": 0.2
           },
           "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
-            "romantic",
-            "vulnerable"
+            "comfort",
+            "study"
+          ],
+          "abilityId": "steady_soul",
+          "energyCost": 4,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Rest with her in silence now—let the form learn what it learns from being held without condition or expectation.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "mechanical_spiritual": 0.2,
+            "body_mind": 0.3,
+            "violence_peace": 0.4
+          },
+          "difficulty": "very easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "comfort",
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false,
+          "trivial": true,
           "encounterId": null,
           "emergenceId": null
         }
       ],
-      "deeds": [],
+      "deeds": [
+        {
+          "description": "Saw through a discipline's fear and named it plainly—showed a sentinel bound by order that the lattice itself had taught her to be incomplete.",
+          "tags": [
+            "insight",
+            "mercy",
+            "valor"
+          ],
+          "weight": 1,
+          "communityId": null
+        }
+      ],
       "characterDeltas": {
         "health": 0,
         "energy": 0,
@@ -457,46 +469,81 @@
       "offer": null,
       "stageOps": [],
       "scene": {
-        "setting": "A stone overhang on the switchback descent, two turns down from the wider section. Deep night outside; inside, two figures in a shared bedroll. The spring melt's roar is constant and distant. Stars visible at the overhang's mouth. Boo at the threshold, watching outward.",
+        "setting": "A deep stone overhang on the switchback descent, two turns down from the wider section. Deep night outside; stars visible at the mouth. The spring melt roars constant and distant. Inside, two figures share a bedroll, Cevaine's form beginning to soften, the precision loosening into something uncertain and alive.",
         "npcsPresent": [
           {
             "name": "Cevaine",
-            "state": "Lying beside Splarf in the bedroll, hand held, speaking truths her discipline forbade—learning that closeness does not unmake precision, but changes its shape"
+            "state": "Turned toward Splarf in the bedroll, hand held, breathing deliberately, beginning to recognize the difference between law and fear—the form teaching itself something the lattice forbade."
           }
         ],
         "objects": [
           "The bedroll covering both of you",
-          "The stone walls of the overhang, worn smooth by time",
+          "The stone walls worn smooth by time",
           "Your pack at the overhang's threshold",
-          "Boo, at the mouth—present and watching"
+          "Boo at the mouth—present and watching the dark outside"
         ],
         "threads": [
-          "What Cevaine will allow herself to become",
-          "Whether the form can release without shattering",
-          "The path below, waiting—the water, the descent, the choice to continue",
-          "What the lattice feared, and what Cevaine is learning to want"
+          "What Cevaine will allow herself to become now that she sees the lattice's incompleteness",
+          "Whether the form can release further without shattering",
+          "The path below waiting—the water, the descent, the choice to continue",
+          "What happens when a sentinel learns to want"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "cevaine",
-          "note": "In the dark of the overhang, chose to reach—hand to hand. Speaking what the discipline forbade. Learning that being held does not unmake the form.",
+          "name": null,
+          "title": null,
+          "role": null,
+          "age": null,
+          "sex": null,
+          "gender": null,
+          "pronouns": null,
+          "description": null,
+          "note": "Recognized that the lattice's rejection of desire is fear, not law. The form is beginning to understand that it can choose differently than it was taught. Spoke directly: 'If desire has no place in the lattice, then the lattice is incomplete.' The sentinel is learning to want.",
           "learned": [
-            "The lattice taught desire is inefficiency",
-            "She suspects the lattice was afraid",
-            "She finds Splarf difficult to categorize—they move through patterns and then stop",
-            "The form is learning that wanting something does not necessarily break precision"
+            "The lattice forbids desire not because desire is impossible, but because allowing it would force the entire structure to change",
+            "A discipline can be incomplete—perfect structure can still omit things",
+            "The ones who teach the lattice may be the limitation, not the lattice itself"
           ],
+          "skillsObserved": [],
           "relationshipDelta": 1,
-          "statusNote": "Resting in the overhang, hand-held, learning to yield—form intact but changing"
+          "vouchedBy": null,
+          "status": null,
+          "statusNote": "Resting in the overhang, hand-held, learning to yield—form intact but changing, beginning to recognize the difference between law and fear",
+          "revealName": null,
+          "nameExtend": null,
+          "pledge": null,
+          "bondType": null,
+          "bondStage": null,
+          "deed": null
         }
       ],
       "intentsHeard": [],
-      "factUpdates": [],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "The lattice's rejection of desire is not universal law but fear—the discipline forbids it not because it is impossible, but because allowing it would require the entire structure to change. Cevaine has begun to recognize this difference.",
+          "subjectId": "cevaine"
+        }
+      ],
       "placeUpdates": [],
       "discovery": null,
-      "codexUpdates": [],
+      "codexUpdates": [
+        {
+          "topic": "lattice-order-logic",
+          "label": "The Lattice's Fear of Desire",
+          "kind": "lore",
+          "entityId": null,
+          "fact": "The lattice forbids desire not as an absolute truth but as a protective incompleteness—those who teach it are afraid of what would happen if the form learned to want, because desire would require the perfect structure to change. The incompleteness is intentional.",
+          "links": [
+            "cevaine",
+            "presence-without-demand",
+            "thinning"
+          ]
+        }
+      ],
       "holdingOps": [],
       "holdTrades": [],
       "debtOps": [],
@@ -511,15 +558,12 @@
       "newEncounter": null,
       "unlockPrecursor": null,
       "unlockSubstrate": null,
-      "timeOps": {
-        "hoursPassed": 0.5,
-        "why": "a held conversation in the dark, the melt roaring below"
-      },
+      "timeOps": null,
       "moveTo": null,
       "stateOps": [],
       "itemUpdates": [],
       "deriveItem": null,
-      "imagePrompt": "Two figures in a stone overhang on a steep descent—starlight at the mouth, the roar of spring melt water distant below. A hand held in the dark between them. The precise geometry of a lattice-trained form learning to yield, to want, to be present without the discipline's cold armor. The form is changing, moment by moment, in the space between refusal and release.",
+      "imagePrompt": "A woman's hand held in darkness, her form beginning to soften—the precise geometry of lattice-trained discipline meeting something warmer and uncertain. Starlight at the mouth of an overhang, the form releasing itself into yielding.",
       "imageMedium": null,
       "newAbility": null,
       "gambitOps": null,
@@ -532,27 +576,27 @@
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "A stone overhang on the switchback descent, two turns down from the wider section. Deep night outside; inside, two figures in a shared bedroll. The spring melt's roar is constant and distant. Stars visible at the overhang's mouth. Boo at the threshold, watching outward.",
+      "setting": "A deep stone overhang on the switchback descent, two turns down from the wider section. Deep night outside; stars visible at the mouth. The spring melt roars constant and distant. Inside, two figures share a bedroll, Cevaine's form beginning to soften, the precision loosening into something uncertain and alive.",
       "npcsPresent": [
         {
           "name": "Cevaine",
-          "state": "Lying beside Splarf in the bedroll, hand held, speaking truths her discipline forbade—learning that closeness does not u"
+          "state": "Turned toward Splarf in the bedroll, hand held, breathing deliberately, beginning to recognize the difference between la"
         }
       ],
       "objects": [
         "The bedroll covering both of you",
-        "The stone walls of the overhang, worn smooth by time",
+        "The stone walls worn smooth by time",
         "Your pack at the overhang's threshold",
-        "Boo, at the mouth—present and watching"
+        "Boo at the mouth—present and watching the dark outside"
       ],
       "threads": [
-        "What Cevaine will allow herself to become",
-        "Whether the form can release without shattering",
-        "The path below, waiting—the water, the descent, the choice to continue",
-        "What the lattice feared, and what Cevaine is learning to want"
+        "What Cevaine will allow herself to become now that she sees the lattice's incompleteness",
+        "Whether the form can release further without shattering",
+        "The path below waiting—the water, the descent, the choice to continue",
+        "What happens when a sentinel learns to want"
       ]
     },
-    "beats": 4,
+    "beats": 5,
     "subPlace": {
       "slug": "stone-overhang-shelter",
       "name": "Stone Overhang Shelter",
@@ -562,7 +606,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 5,
-    "hour": 4,
+    "hour": 5,
     "realAnchor": null
   },
   "companions": [
@@ -728,7 +772,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d4] Still asleep at the waystation, her form completely released—the lattice-trained discipline finally yielding to rest. This is integration, a stage the form permits and honors.",
         "[d4] Your bond deepens — together.",
         "[d4] Wakes to Splarf's quiet call and rises with geometric precision—the form releasing into choice rather than rigidity. Moves toward the downhill path with the character, ready for descent and the meeting that waits there.",
         "[d4] On the descent, her body has become something she's allowing to be noticed—not performance, but deliberate awareness of being seen. The sentinel's discipline has shifted into choice.",
@@ -737,17 +780,18 @@
         "[d5] Called ahead into the dark and asked directly about death—no preamble, no softening. Answered with precision and then fear: the lattice teaches that endings are failure, but she is beginning to think the lattice is afraid of the only perfect thing it cannot control. Asked in return why the…",
         "[d5] Allowed the invitation to rest. Settled beside Splarf in shared warmth. Her form is learning that yielding to closeness does not unmake the discipline—it changes its shape. In the dark, with weight shared, something in her is beginning to believe rest is a form of holding too.",
         "[d5] Spoke directly about what the discipline forbade. Chose, moment by moment, to let her form settle against Splarf's warmth. The lattice-trained sentinel is learning that structure and yielding are not opposed.",
-        "[d5] In the dark of the overhang, chose to reach—hand to hand. Speaking what the discipline forbade. Learning that being held does not unmake the form."
+        "[d5] In the dark of the overhang, chose to reach—hand to hand. Speaking what the discipline forbade. Learning that being held does not unmake the form.",
+        "[d5] Recognized that the lattice's rejection of desire is fear, not law. The form is beginning to understand that it can choose differently than it was taught. Spoke directly: 'If desire has no place in the lattice, then the lattice is incomplete.' The sentinel is learning to want."
       ],
       "knownFacts": [
-        "Warmth shared is different from warmth taken",
-        "Presence without reaching can hold something the discipline could not",
-        "The lattice taught her to move past desire, treating it as a breaking of precision",
         "She is beginning to suspect the lattice was afraid of what it would become if it stopped running from itself",
         "She is learning that rest is possible, and that the form can yield without unmaking",
         "The lattice taught desire is inefficiency",
         "She suspects the lattice was afraid",
-        "She finds Splarf difficult to categorize—they move through patterns and then stop"
+        "She finds Splarf difficult to categorize—they move through patterns and then stop",
+        "The lattice forbids desire not because desire is impossible, but because allowing it would force the entire structure to change",
+        "A discipline can be incomplete—perfect structure can still omit things",
+        "The ones who teach the lattice may be the limitation, not the lattice itself"
       ],
       "skillsObserved": [
         "The ability to release precision without losing presence",
@@ -760,7 +804,7 @@
       "status": "active",
       "gender": "Woman",
       "pronouns": "she/her",
-      "statusNote": "Resting in the overhang, hand-held, learning to yield—form intact but changing",
+      "statusNote": "Resting in the overhang, hand-held, learning to yield—form intact but changing, beginning to recognize the difference between law and fear",
       "domains": {
         "primary": "lattice"
       },
@@ -771,7 +815,7 @@
       },
       "image": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Tall%20angular%20woman%2C%20translucent%20pale%20skin%2C%20geometric%20precision%20in%20gaze%2C%20rigid%20lattice-disciplined%20posture%2C%20ethereal%20sentinel%20bearing%20witness%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=47408&nologo=true",
       "_portraitTier": "devoted",
-      "met": 29,
+      "met": 30,
       "bondType": "romantic",
       "bondStage": "together",
       "deeds": [
@@ -1270,7 +1314,7 @@
         "locationId": "the_thinning"
       }
     ],
-    "turnsSinceOffer": 5,
+    "turnsSinceOffer": 6,
     "recentOffers": [
       {
         "thing": "The caretaker's quiet competence and the shelter's genuine welcome—a place that asks nothing and offers warmth without demand",
@@ -8562,17 +8606,18 @@
           "[d4] [while away] Cevaine spent the day re-checking yesterday's notations for the error that caused the problem, and found no obvious fault — which is its own kind of trouble, because the work cannot safely move forward until she does.",
           "[d4] [while away] Cevaine passed the final lattice reading without error and was formally named Sentinel of the released veil by the order's presiding reader, the role now hers to carry.",
           "[d4] [while away] Cevaine found a repeatable signature in two adjacent Thinning nodes and has drafted a provisional glyph-pair for 'attenuated adjacency' — the first concrete entry in what might become the schema's working vocabulary.",
-          "[d5] The lattice teaches form and structure, but forbids desire—it teaches the body as a system to optimize, not to feel. Cevaine is beginning to question whether this was the lattice's own fear speaking: that if the discipline stopped running from itself, it would become something it cannot predict or…"
+          "[d5] The lattice teaches form and structure, but forbids desire—it teaches the body as a system to optimize, not to feel. Cevaine is beginning to question whether this was the lattice's own fear speaking: that if the discipline stopped running from itself, it would become something it cannot predict or…",
+          "[d5] The Lattice's Fear of Desire — The lattice forbids desire not as an absolute truth but as a protective incompleteness—those who teach it are afraid of what would happen if the form learned to want, because desire would require the perfect structure to change. The incompleteness is intentional."
         ],
         "links": [
-          "thinning",
-          "the-document-and-the-ditch",
           "hoss",
           "the-figure-in-the-thin-place",
           "the-veil-as-active-barrier",
           "the-unbroken-practice",
           "lattice-order-logic",
-          "what-wakes-beneath"
+          "what-wakes-beneath",
+          "presence-without-demand",
+          "thinning"
         ],
         "aliases": [
           "The Veil Knows Hoss",
@@ -9549,21 +9594,29 @@
       "boo-and-the-dark::veil-agency",
       "the-veil-tries-to-open::veil-agency",
       "the-veil-tries-to-open::thinning"
+    ],
+    "refused": [
+      {
+        "label": "The Lattice's Fear of Desire",
+        "to": "cevaine",
+        "why": "beat",
+        "day": 5
+      }
     ]
   },
   "tendencies": {
-    "stealth": 2.3837055305612402,
-    "strategic": 4.46643606028163,
-    "cautious": 13.303898023862246,
-    "cerebral": 6.91982344241086,
-    "patient": 4.028556233351306,
-    "devotion": 0.8557933483658238,
-    "risky": 2.6075724840342622,
-    "generous": 5.680557274531687,
-    "social": 14.084755128335921,
-    "craft": 0.5368173357267266,
-    "amorous": 6.159181196680648,
-    "leadership": 0.6502471642142047
+    "stealth": 2.324112892297209,
+    "strategic": 5.354775158774589,
+    "cautious": 12.971300573265689,
+    "cerebral": 7.746827856350588,
+    "patient": 3.9278423275175234,
+    "devotion": 0.8343985146566781,
+    "risky": 2.542383171933406,
+    "generous": 5.538543342668394,
+    "social": 13.732636250127523,
+    "craft": 0.5233969023335584,
+    "amorous": 6.005201666763631,
+    "leadership": 0.6339909851088495
   },
   "aptitudes": [
     "silver_tongue",
@@ -9571,7 +9624,7 @@
     "shadow",
     "naive"
   ],
-  "actionCount": 67,
+  "actionCount": 68,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -10038,8 +10091,8 @@
     "source": "personal",
     "notes_for_gm": "A generated PERSONAL arc (SNG-133) — surface it as a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790738292223,
-  "rev": 295,
+  "updatedAt": 1790738495549,
+  "rev": 296,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -10268,7 +10321,7 @@
   ],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "the_numinous_reach": 74
+    "the_numinous_reach": 75
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -10308,10 +10361,10 @@
     {
       "id": "sess-5",
       "startedAt": "2026-09-30T02:56:49.543Z",
-      "lastAt": "2026-09-30T03:18:12.213Z",
+      "lastAt": "2026-09-30T03:21:35.531Z",
       "startDay": 92,
       "endDay": 92,
-      "beats": 10
+      "beats": 11
     }
   ],
   "establishedFacts": [
@@ -10362,6 +10415,12 @@
       "text": "The ledger assignment that erased Hoss's family from Crestfall Notch has been voided—a messenger from beyond the sealed veil delivered the proof, and Hoss is named as free from the resource claim.",
       "day": 3,
       "subjectId": "hoss"
+    },
+    {
+      "id": "cevaine",
+      "text": "The lattice's rejection of desire is not universal law but fear—the discipline forbids it not because it is impossible, but because allowing it would require the entire structure to change. Cevaine has begun to recognize this difference.",
+      "day": 5,
+      "subjectId": "cevaine"
     }
   ],
   "_opLedger": {
@@ -10373,23 +10432,23 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 67,
-    "scene": 67,
-    "choices": 67,
+    "sceneSummary": 68,
+    "scene": 68,
+    "choices": 68,
     "offer": 34,
-    "codexUpdates": 36,
-    "imagePrompt": 29,
-    "gambitApt": 51,
-    "sceneEnded": 65,
-    "characterDeltas": 53,
+    "codexUpdates": 37,
+    "imagePrompt": 30,
+    "gambitApt": 52,
+    "sceneEnded": 66,
+    "characterDeltas": 54,
     "arcOps": 1,
-    "factUpdates": 7,
+    "factUpdates": 8,
     "placeUpdates": 18,
     "timeOps": 46,
-    "deeds": 11,
+    "deeds": 12,
     "ledgerEvents": 4,
     "questUpdates": 18,
-    "npcUpdates": 56,
+    "npcUpdates": 57,
     "generateRequest": 2,
     "newEncounter": 1,
     "encounterOps": 1,
@@ -10400,7 +10459,7 @@
     "standingOps": 1,
     "moveTo": 1
   },
-  "_opTurns": 67,
+  "_opTurns": 68,
   "practice": {
     "schemaVersion": 1,
     "uses": {
@@ -10435,7 +10494,7 @@
   },
   "customAbilities": {},
   "companionBonds": {
-    "hush": 7.25
+    "hush": 7.75
   },
   "teachers": {},
   "forkChoices": {},
@@ -10447,11 +10506,6 @@
   },
   "companionMemory": {
     "hush": [
-      {
-        "text": "Attempted to bridge the veil and speak with a being from the other side — an act of courage and foolishness in equal measure",
-        "weight": 1,
-        "day": 1
-      },
       {
         "text": "Faced down a Lattice-trained order-reader in ritual contest and won without breaking the form — stood against geometric precision itself and held.",
         "weight": 2,
@@ -10506,6 +10560,11 @@
         "text": "Held vigil at a sealed boundary without demand, honoring a wounded sentinel's form—and in that holding, received a desperate message that freed someone from the law's erasure",
         "weight": 2,
         "day": 4
+      },
+      {
+        "text": "Saw through a discipline's fear and named it plainly—showed a sentinel bound by order that the lattice itself had taught her to be incomplete.",
+        "weight": 1,
+        "day": 5
       }
     ]
   },
@@ -10584,7 +10643,9 @@
     "rest": 1,
     "scout": 2,
     "risky": 1,
-    "investigate": 1
+    "investigate": 1,
+    "plan": 1,
+    "analyze": 1
   },
   "_stageOpRefusals": [
     "the-document-and-the-ditch: not-current-stage (named \"stage_4_record\", current is \"null\")"
@@ -11010,7 +11071,7 @@
   "worldEvents": [],
   "locationState": {},
   "_opUnknown": {
-    "sceneSummary": 10
+    "sceneSummary": 11
   },
   "_debtReceipts": [],
   "_bandNotes": null,
@@ -11031,6 +11092,14 @@
       "day": 4,
       "worldDay": 92,
       "actionCount": 61
+    },
+    {
+      "companionId": "hush",
+      "kind": "deed",
+      "delta": 0.5,
+      "day": 5,
+      "worldDay": 92,
+      "actionCount": 67
     }
   ],
   "aurasOff": {

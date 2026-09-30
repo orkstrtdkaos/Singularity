@@ -57,8 +57,8 @@
   ],
   "alignment": {
     "mechanical_spiritual": 0.1514302510187793,
-    "body_mind": 0.12505931430529033,
-    "chaos_order": 0.009000000000000001,
+    "body_mind": 0.0988063485900258,
+    "chaos_order": -0.006449999999999999,
     "concrete_abstract": 0.062072401562499976,
     "emotional_logical": 0.08032500000000001,
     "violence_peace": 0.034999999999999996,
@@ -68,7 +68,7 @@
   "maxHealth": 61,
   "health": 61,
   "maxEnergy": 110,
-  "energy": 100,
+  "energy": 110,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -417,38 +417,24 @@
         "player": "Move with her—match her intention, let the contact deepen, follow where the form is choosing to lead.",
         "summary": "In a stone overhang on the descent, Cevaine and Splarf reach the edge of deeper touch—and the mountain itself calls them onward. The sentinel has chosen desire, and now she must choose what that choice means for the path ahead.",
         "narration": "Your hands draw her closer, seeking the deepening she is choosing—and the stone overhang *resists*. Not unkindly, but with the weight of a place that has held vigil longer than desire. The rock beneath you shifts slightly, enough to break the moment's building momentum. Cevaine's breath catches, not from want but from the ground itself refusing to be still—a tremor, minor but present, running through the stone like the mountain reminding you both that this shelter was borrowed, and borrowed time always ends.\n\nShe does not pull away. Instead, her hand stills on your shoulder, and you feel her attention sharpen—the sentinel's precision returning, not as rejection but as recognition. \"The place is tired,\" she says quietly, her voice steady but carrying something new underneath the discipline: not regret, but the lattice reasserting itself around the permission she has just learned she can give. Her eyes meet yours in the grey predawn. \"We should move. The descent calls.\"\n\nIt is not refusal. It is the form choosing integrity—the lattice teaching her that some boundaries are not fear but *necessity*. Some permissions must be taken further down the road, where the ground is not holding its breath. She sits back slowly, her hand still finding yours, fingers interlacing with the deliberation she brings to everything—each contact a choice, still new, still being learned."
+      },
+      {
+        "player": "Acknowledge her point and tell  her we both still need so.e sleep. Offer to pause the discovery and just sleep for now.",
+        "summary": "On the switchback descent, Splarf and Cevaine pause at the edge of deeper touch—the mountain itself calling them back to rest, and both of them choosing to yield to that call. The sentinel has learned desire is permissible; now she learns that yielding sometimes means knowing when to stop.",
+        "narration": "You nod, acknowledging the truth she's named—the mountain does know what it's doing. Your hand stills on her shoulder, and you speak quietly into the grey predawn. \"We both need sleep still. Real sleep.\" There's no argument in it, just the clarity of someone who has watched her hold discipline through exhaustion. \"We can let the discovery wait. The path will still be there after we've rested.\"\n\nCevaine's breathing steadies. Her hand releases from your shoulder, not in rejection but in recognition—the form choosing rest as deliberately as it chose the kiss. She shifts slightly, creating space that is not distance, and settles against the stone with you beside her. The bedroll, still half-unwound from before, becomes shelter again rather than threshold. Outside, the spring melt roars on, indifferent and constant. Inside the overhang, the grey light softens. Boo watches from the mouth—patient, present, asking nothing.\n\nSleep comes easier than it has in days."
       }
     ],
     "lastTurn": {
-      "narration": "Your hands draw her closer, seeking the deepening she is choosing—and the stone overhang *resists*. Not unkindly, but with the weight of a place that has held vigil longer than desire. The rock beneath you shifts slightly, enough to break the moment's building momentum. Cevaine's breath catches, not from want but from the ground itself refusing to be still—a tremor, minor but present, running through the stone like the mountain reminding you both that this shelter was borrowed, and borrowed time always ends.\n\nShe does not pull away. Instead, her hand stills on your shoulder, and you feel her attention sharpen—the sentinel's precision returning, not as rejection but as recognition. \"The place is tired,\" she says quietly, her voice steady but carrying something new underneath the discipline: not regret, but the lattice reasserting itself around the permission she has just learned she can give. Her eyes meet yours in the grey predawn. \"We should move. The descent calls.\"\n\nIt is not refusal. It is the form choosing integrity—the lattice teaching her that some boundaries are not fear but *necessity*. Some permissions must be taken further down the road, where the ground is not holding its breath. She sits back slowly, her hand still finding yours, fingers interlacing with the deliberation she brings to everything—each contact a choice, still new, still being learned.",
-      "sceneSummary": "In a stone overhang on the descent, Cevaine and Splarf reach the edge of deeper touch—and the mountain itself calls them onward. The sentinel has chosen desire, and now she must choose what that choice means for the path ahead.",
+      "narration": "You nod, acknowledging the truth she's named—the mountain does know what it's doing. Your hand stills on her shoulder, and you speak quietly into the grey predawn. \"We both need sleep still. Real sleep.\" There's no argument in it, just the clarity of someone who has watched her hold discipline through exhaustion. \"We can let the discovery wait. The path will still be there after we've rested.\"\n\nCevaine's breathing steadies. Her hand releases from your shoulder, not in rejection but in recognition—the form choosing rest as deliberately as it chose the kiss. She shifts slightly, creating space that is not distance, and settles against the stone with you beside her. The bedroll, still half-unwound from before, becomes shelter again rather than threshold. Outside, the spring melt roars on, indifferent and constant. Inside the overhang, the grey light softens. Boo watches from the mouth—patient, present, asking nothing.\n\nSleep comes easier than it has in days.",
+      "sceneSummary": "On the switchback descent, Splarf and Cevaine pause at the edge of deeper touch—the mountain itself calling them back to rest, and both of them choosing to yield to that call. The sentinel has learned desire is permissible; now she learns that yielding sometimes means knowing when to stop.",
       "choices": [
         {
-          "label": "Ask her to stay longer—the descent can wait, and what she is learning does not need to be rushed.",
-          "attribute": "social",
-          "subAttribute": "presence",
+          "label": "Wake rested and continue the descent toward Dirtmouth Crossing",
+          "attribute": "physical",
+          "subAttribute": "agility",
           "axes": {
-            "violence_peace": 0.3,
-            "concrete_abstract": -0.2
-          },
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "comfort",
-            "woo"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Honor her readiness—gather your pack and the bedroll. The path waits, and there will be other stops ahead.",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "axes": {
-            "violence_peace": 0.2
+            "violence_peace": 0.2,
+            "space_time": 0.1
           },
           "difficulty": "very easy",
           "opposedDifficulty": null,
@@ -462,36 +448,16 @@
           "emergenceId": null
         },
         {
-          "label": "Ask her what the lattice is telling her now—after all that choosing, what does the form know that it did not before?",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "mechanical_spiritual": -0.4,
-            "body_mind": 0.3
-          },
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": "storykeeper",
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Move into her space—let your hands frame her face the way she framed yours, and ask without words what comes next.",
+          "label": "Before departing, ask Cevaine what comes next for her—whether she returns to the Lattice or chooses another path",
           "attribute": "social",
-          "subAttribute": "presence",
+          "subAttribute": "rapport",
           "axes": {
-            "violence_peace": 0.3,
-            "concrete_abstract": -0.3
+            "destruction_creation": 0.3,
+            "body_mind": -0.2
           },
           "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
-            "woo",
             "romantic"
           ],
           "abilityId": null,
@@ -499,12 +465,50 @@
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
+        },
+        {
+          "label": "Let Boo step closer while you both rest—ask it silently what it read in the dark last night, what watcher still lingers",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "concrete_abstract": -0.3,
+            "dark_light": -0.4
+          },
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "the_kept_dark",
+          "energyCost": 0,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Sit with Cevaine in silence and let the morning light grow—no questions, no conversation, just presence",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "violence_peace": 0.3,
+            "emotional_logical": -0.2
+          },
+          "difficulty": "very easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "defend"
+          ],
+          "abilityId": "unbroken_practice",
+          "energyCost": 0,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
       "deeds": [],
       "characterDeltas": {
-        "health": 0,
-        "energy": 0,
+        "health": 3,
+        "energy": 40,
         "inventoryAdd": [],
         "inventoryRemove": [],
         "xp": 0
@@ -519,54 +523,34 @@
       "offer": null,
       "stageOps": [],
       "scene": {
-        "setting": "A deep stone overhang on the switchback descent, two turns below the waystation. Grey-blue predawn light filters at the mouth. The spring melt roars constant below, a low thunder beneath the moment. The stone beneath you is cool and slightly damp—the mountain's breath, present and patient.",
+        "setting": "A deep stone overhang on the switchback descent, two turns below the waystation. Early-morning grey light filters weakly at the mouth. The spring melt's roar is distant now, muffled by the curves of the path. The stone is cool and patient, holding the warmth of two bodies at rest.",
         "npcsPresent": [
           {
             "name": "Cevaine",
-            "state": "Sitting back slowly, hand still finding yours, the sentinel learning what it means to choose desire and then choose something else—the form reasserting itself not as fear but as integrity. Her eyes track the grey light at the overhang's mouth."
+            "state": "Sleeping beside Splarf, her angular form relaxed into a stillness that the discipline rarely permits. Her breathing is even. The lattice-trained precision has yielded to rest."
           }
         ],
         "objects": [
-          "The bedroll, now partially unwound, wrapped around both of you",
-          "Your pack at the overhang's threshold, waiting",
-          "Boo at the mouth—present and watching, shadow-still, patient as only the dark can be"
+          "The bedroll, wrapped around both of you",
+          "Your pack at the threshold, waiting",
+          "Boo at the mouth—shadow-still, watching, patient"
         ],
         "threads": [
-          "Whether Cevaine will permit herself to continue learning what the form can choose, and where that learning leads",
-          "The descent still ahead—the path continues, and Splarf and the sentinel must decide whether they move together or part ways",
-          "What the lattice means now that it has been revealed as fear rather than law—how that changes what Cevaine carries forward"
+          "What Cevaine will choose when the path demands she make a choice between the Lattice and what she is becoming",
+          "The descent still ahead—Dirtmouth Crossing and the valley floor wait",
+          "What watcher still lingers in the dark, if anything remains"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "cevaine",
-          "name": null,
-          "title": null,
-          "role": null,
-          "age": null,
-          "sex": null,
-          "gender": null,
-          "pronouns": null,
-          "description": null,
-          "note": "In the grey predawn of the overhang, the sentinel recognized that the lattice's refusal of desire was not law but fear—and chose to yield anyway. Now the form is learning that some choices must be honored by restraint, and some boundaries are integrity rather than limitation.",
+          "name": "Cevaine",
+          "note": "Rested beside Splarf in the overhang. Chose to yield to the call for rest as deliberately as she chose desire. Learning that stopping is also a form of permission.",
+          "statusNote": "Sleeping peacefully in the overhang, learning the discipline of rest. The form is beginning to recognize that all choices—yielding, pausing, choosing rest—are expressions of the same permission.",
           "learned": [
-            "The form can choose what the discipline forbade, and that choice does not break the structure—it transforms it.",
-            "Desire is not weakness; it is permission the body knows before the mind does.",
-            "Yielding to touch does not unmake the lattice; it rewrites what the form is allowed to contain.",
-            "Some boundaries are not fear but necessity—and the discipline can honor both permission and timing."
-          ],
-          "skillsObserved": [],
-          "relationshipDelta": 0,
-          "vouchedBy": null,
-          "status": null,
-          "statusNote": "On the descent, learning the shape of desire and what it means to choose it deliberately. The form is beginning to recognize integrity as something different from control.",
-          "revealName": null,
-          "nameExtend": null,
-          "pledge": null,
-          "bondType": null,
-          "bondStage": null,
-          "deed": null
+            "Pausing is not failure—it is choice, and the form knows when to choose it"
+          ]
         }
       ],
       "intentsHeard": [],
@@ -589,8 +573,8 @@
       "unlockPrecursor": null,
       "unlockSubstrate": null,
       "timeOps": {
-        "hoursPassed": 0.5,
-        "why": "the grey predawn deepens toward full morning; the mountain calls the descent onward"
+        "hoursPassed": 6,
+        "why": "Slept through the early morning—rest earned, the mountain's call honored"
       },
       "moveTo": null,
       "stateOps": [],
@@ -601,33 +585,28 @@
       "newAbility": null,
       "gambitOps": null,
       "gambitApt": false,
-      "markDefiningMoment": null,
-      "markTeacher": null,
-      "offerPromotion": null,
-      "offerAcquisition": null,
-      "offerIntent": null,
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "A deep stone overhang on the switchback descent, two turns below the waystation. Grey-blue predawn light filters at the mouth. The spring melt roars constant below, a low thunder beneath the moment. The stone beneath you is cool and slightly damp—the mountain's breath, present and patient.",
+      "setting": "A deep stone overhang on the switchback descent, two turns below the waystation. Early-morning grey light filters weakly at the mouth. The spring melt's roar is distant now, muffled by the curves of the path. The stone is cool and patient, holding the warmth of two bodies at rest.",
       "npcsPresent": [
         {
           "name": "Cevaine",
-          "state": "Sitting back slowly, hand still finding yours, the sentinel learning what it means to choose desire and then choose some"
+          "state": "Sleeping beside Splarf, her angular form relaxed into a stillness that the discipline rarely permits. Her breathing is e"
         }
       ],
       "objects": [
-        "The bedroll, now partially unwound, wrapped around both of you",
-        "Your pack at the overhang's threshold, waiting",
-        "Boo at the mouth—present and watching, shadow-still, patient as only the dark ca"
+        "The bedroll, wrapped around both of you",
+        "Your pack at the threshold, waiting",
+        "Boo at the mouth—shadow-still, watching, patient"
       ],
       "threads": [
-        "Whether Cevaine will permit herself to continue learning what the form can choose, and where that learning leads",
-        "The descent still ahead—the path continues, and Splarf and the sentinel must decide whether they move together or part ways",
-        "What the lattice means now that it has been revealed as fear rather than law—how that changes what Cevaine carries forward"
+        "What Cevaine will choose when the path demands she make a choice between the Lattice and what she is becoming",
+        "The descent still ahead—Dirtmouth Crossing and the valley floor wait",
+        "What watcher still lingers in the dark, if anything remains"
       ]
     },
-    "beats": 11,
+    "beats": 12,
     "subPlace": {
       "slug": "stone-overhang-shelter",
       "name": "Stone Overhang Shelter",
@@ -637,7 +616,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 5,
-    "hour": 8,
+    "hour": 14,
     "realAnchor": null
   },
   "companions": [
@@ -803,7 +782,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d5] Allowed the invitation to rest. Settled beside Splarf in shared warmth. Her form is learning that yielding to closeness does not unmake the discipline—it changes its shape. In the dark, with weight shared, something in her is beginning to believe rest is a form of holding too.",
         "[d5] Spoke directly about what the discipline forbade. Chose, moment by moment, to let her form settle against Splarf's warmth. The lattice-trained sentinel is learning that structure and yielding are not opposed.",
         "[d5] In the dark of the overhang, chose to reach—hand to hand. Speaking what the discipline forbade. Learning that being held does not unmake the form.",
         "[d5] Recognized that the lattice's rejection of desire is fear, not law. The form is beginning to understand that it can choose differently than it was taught. Spoke directly: 'If desire has no place in the lattice, then the lattice is incomplete.' The sentinel is learning to want.",
@@ -812,17 +790,18 @@
         "[d5] In the predawn overhang, spoke what the lattice forbade—began to recognize that desire is not a flaw but a choice she is permitted to make. The form is learning a new architecture, one where she does not have to be alone inside it.",
         "[d5] Kissed Splarf in the grey predawn of the overhang—received permission made physical, learned that the form can choose what the lattice forbade. The discipline is beginning to recognize that desire is not flaw but architecture, and the structure holds.",
         "[d5] In a stone overhang on the switchback descent, learned that the form can choose what the lattice forbade—that desire is not weakness but architecture, and that yielding does not break the discipline, it transforms it. Pulled Splarf closer with intention, recognizing her own wanting as permission…",
-        "[d5] In the grey predawn of the overhang, the sentinel recognized that the lattice's refusal of desire was not law but fear—and chose to yield anyway. Now the form is learning that some choices must be honored by restraint, and some boundaries are integrity rather than limitation."
+        "[d5] In the grey predawn of the overhang, the sentinel recognized that the lattice's refusal of desire was not law but fear—and chose to yield anyway. Now the form is learning that some choices must be honored by restraint, and some boundaries are integrity rather than limitation.",
+        "[d5] Rested beside Splarf in the overhang. Chose to yield to the call for rest as deliberately as she chose desire. Learning that stopping is also a form of permission."
       ],
       "knownFacts": [
-        "Yielding does not break the lattice's structure; it rewrites what the structure is allowed to contain",
         "The form can choose differently than it was taught, and that choice is not weakness—it is the form becoming whole",
         "The lattice's rejection of desire was fear, not law—fear taught by those who could not bear their own wanting",
         "The body knows permission before the discipline does—touch is a language the form understands",
         "Yielding to desire does not break the structure; it rewrites what the structure is allowed to contain",
         "The form can choose what the discipline forbade, and that choice does not break the structure—it transforms it.",
         "Desire is not weakness; it is permission the body knows before the mind does.",
-        "Yielding to touch does not unmake the lattice; it rewrites what the form is allowed to contain."
+        "Yielding to touch does not unmake the lattice; it rewrites what the form is allowed to contain.",
+        "Pausing is not failure—it is choice, and the form knows when to choose it"
       ],
       "skillsObserved": [
         "The ability to release precision without losing presence",
@@ -835,7 +814,7 @@
       "status": "active",
       "gender": "Woman",
       "pronouns": "she/her",
-      "statusNote": "On the descent, learning the shape of desire and what it means to choose it deliberately. The form is beginning to recognize integrity as something different from control.",
+      "statusNote": "Sleeping peacefully in the overhang, learning the discipline of rest. The form is beginning to recognize that all choices—yielding, pausing, choosing rest—are expressions of the same permission.",
       "domains": {
         "primary": "lattice"
       },
@@ -846,7 +825,7 @@
       },
       "image": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Tall%20angular%20woman%2C%20translucent%20pale%20skin%2C%20geometric%20precision%20in%20gaze%2C%20rigid%20lattice-disciplined%20posture%2C%20ethereal%20sentinel%20bearing%20witness%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=47408&nologo=true",
       "_portraitTier": "devoted",
-      "met": 36,
+      "met": 37,
       "bondType": "romantic",
       "bondStage": "together",
       "deeds": [
@@ -1351,7 +1330,7 @@
         "locationId": "the_thinning"
       }
     ],
-    "turnsSinceOffer": 12,
+    "turnsSinceOffer": 13,
     "recentOffers": [
       {
         "thing": "The caretaker's quiet competence and the shelter's genuine welcome—a place that asks nothing and offers warmth without demand",
@@ -9698,18 +9677,18 @@
     ]
   },
   "tendencies": {
-    "stealth": 2.047765860284071,
-    "strategic": 4.7180693313040525,
-    "cautious": 11.428957072374391,
-    "cerebral": 6.825696661426941,
-    "patient": 3.4608049589703533,
-    "devotion": 0.7351849378094583,
-    "risky": 2.2400828636598713,
-    "generous": 4.879986686709358,
-    "social": 15.737689705333196,
-    "craft": 0.4611627565637357,
-    "amorous": 9.143641701339975,
-    "leadership": 0.558606726608075
+    "stealth": 1.9965717137769694,
+    "strategic": 4.600117598021451,
+    "cautious": 11.14323314556503,
+    "cerebral": 6.655054244891268,
+    "patient": 3.3742848349960943,
+    "devotion": 0.7168053143642218,
+    "risky": 2.1840807920683747,
+    "generous": 4.757987019541624,
+    "social": 17.344247462699865,
+    "craft": 0.4496336876496423,
+    "amorous": 8.915050658806475,
+    "leadership": 0.5446415584428731
   },
   "aptitudes": [
     "silver_tongue",
@@ -9717,7 +9696,7 @@
     "shadow",
     "naive"
   ],
-  "actionCount": 73,
+  "actionCount": 74,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -10192,8 +10171,8 @@
     "source": "personal",
     "notes_for_gm": "A generated PERSONAL arc (SNG-133) — surface it as a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790739750615,
-  "rev": 322,
+  "updatedAt": 1790739895557,
+  "rev": 323,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -10422,7 +10401,7 @@
   ],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "the_numinous_reach": 81
+    "the_numinous_reach": 82
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -10462,10 +10441,10 @@
     {
       "id": "sess-5",
       "startedAt": "2026-09-30T02:56:49.543Z",
-      "lastAt": "2026-09-30T03:42:30.601Z",
+      "lastAt": "2026-09-30T03:44:55.542Z",
       "startDay": 92,
       "endDay": 92,
-      "beats": 17
+      "beats": 18
     }
   ],
   "establishedFacts": [
@@ -10533,23 +10512,23 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 73,
-    "scene": 73,
-    "choices": 73,
+    "sceneSummary": 74,
+    "scene": 74,
+    "choices": 74,
     "offer": 34,
     "codexUpdates": 37,
     "imagePrompt": 32,
-    "gambitApt": 54,
-    "sceneEnded": 70,
-    "characterDeltas": 59,
+    "gambitApt": 55,
+    "sceneEnded": 71,
+    "characterDeltas": 60,
     "arcOps": 1,
     "factUpdates": 8,
     "placeUpdates": 19,
-    "timeOps": 48,
+    "timeOps": 49,
     "deeds": 13,
     "ledgerEvents": 4,
     "questUpdates": 18,
-    "npcUpdates": 62,
+    "npcUpdates": 63,
     "generateRequest": 2,
     "newEncounter": 1,
     "encounterOps": 1,
@@ -10560,7 +10539,7 @@
     "standingOps": 1,
     "moveTo": 1
   },
-  "_opTurns": 73,
+  "_opTurns": 74,
   "practice": {
     "schemaVersion": 1,
     "uses": {
@@ -10723,7 +10702,7 @@
   "placeEdges": {},
   "skillUses": {
     "help": 6,
-    "comfort": 9,
+    "comfort": 10,
     "sustain": 3,
     "careful": 11,
     "speak": 1,
@@ -10733,7 +10712,7 @@
     "negotiate": 2,
     "travel": 3,
     "romantic": 9,
-    "rapport": 9,
+    "rapport": 10,
     "care": 1,
     "heal": 1,
     "prepare": 1,
@@ -11240,7 +11219,7 @@
   "worldEvents": [],
   "locationState": {},
   "_opUnknown": {
-    "sceneSummary": 17
+    "sceneSummary": 18
   },
   "_debtReceipts": [],
   "_bandNotes": null,

@@ -33904,6 +33904,84 @@ console.log("\n── §398 · one page width ──");
     && !/meter\("Running things for you"[^)]*`\$\{[^}]*with you/.test(A398));
 }
 
+/* ══════════ §399 · THE WORK TAB, AND A LIST THAT DOES NOT STRETCH THE PAGE ══════════ */
+// ⛔ ERIK (items 2 and 14): the abilities panel *"stretches the page"*, and jobs come *"from people in places we visit,
+// so they aren't just tied to holds."*
+//
+// ⛑ MEASURED IN THE BROWSER on his own save: the abilities list was **7,433px** tall in a 900px window — the sidebar
+// ran longer than everything beside it. It is capped at min(58vh, 640px) with its own scroll and sticky group headers,
+// because a list you scroll without headers is a list where you lose which people a craft belongs to.
+//
+// ⛑ AND A CHARGE IS ONE RECORD READ THREE WAYS: on the Work tab where it is given, on the PERSON'S card, and — when it
+// names one of your holds — on THAT HOLD in "Who does what here". ⚠️ Readings, never copies: the checks below drive the
+// store and the two readers and require them to agree, because two copies of one fact is how "the legs are being built
+// but no one is at it" happened in the first place.
+console.log("\n── §399 · the Work tab, and a list that does not stretch ──");
+{
+  const A399 = rd("app.js");
+  const CSS399 = rd("style.css");
+  const AS399 = await import("../engine/assignments.js");
+  const { reconcile: rec399 } = await import("../engine/reconcile.js");
+
+  /* ---- 1 · ⛔ THE ABILITIES PANEL HAS ITS OWN SCROLL (item 2) ---- */
+  // ⚠️ VIEWPORT-TIED, NOT A PIXEL HEIGHT. A panel pinned at 420px is a panel that is wrong on every screen but the one
+  // it was measured on, so the gate requires a viewport unit and refuses a bare px cap.
+  const rule399 = (CSS399.match(/\.sidebar-sec\[data-sec="abilities"\] > \.sec-body \{[^}]*\}/) || [""])[0];
+  check("§399: ⛔ THE ABILITIES LIST SCROLLS IN ITS OWN BOX — it was 7,433px tall in a 900px window",
+    /overflow-y:\s*auto/.test(rule399) && /max-height:[^;]*vh/.test(rule399));
+  check("§399: ⛑ …and the group headings stay put, so you keep which people a craft belongs to",
+    /\.sidebar-sec\[data-sec="abilities"\] > \.sec-body \.skill-group > summary \{[^}]*position:\s*sticky/.test(CSS399));
+  // ⚠️ AND A PHONE HAS NO ROOM TO GIVE ONE PANEL 58vh, so below the fold it is a plain block again.
+  check("§399: ⚠️ …and on a narrow screen it is a plain block again rather than a box inside a box",
+    /@media \(max-width: 800px\) \{\s*\.sidebar-sec\[data-sec="abilities"\] > \.sec-body \{[^}]*max-height:\s*none/.test(CSS399));
+
+  /* ---- 2 · ⛑ THE TAB IS CALLED WORK, AND ITS KEY IS UNTOUCHED (item 14) ---- */
+  check("§399: ⛑ THE TAB READS “Work”, and the page says so too",
+    /id="tab-jobs">⚒ Work/.test(A399) && /<div class="page-title"><h2>Work<\/h2>/.test(A399));
+  // ⛔ THE KEY IS STATE AND THE LABEL IS NOT — the same line the Attack & Defense rename drew. Moving `jobs` would
+  // strand the router and every alert that names it.
+  check("§399: ⛔ …and the KEY is still `jobs`, because the router and the alerts name it",
+    /go\("tab-jobs", \(\) => renderJobsTab\(\)\)/.test(A399) && /active === "jobs"/.test(A399));
+
+  /* ---- 3 · ⛔ ONE RECORD, READ ON THE PERSON AND ON THE PLACE ---- */
+  check("§399: ⛑ BOTH READERS EXIST AND BOTH SURFACES CALL THEM",
+    /export function chargesOf\(/.test(rd("engine/assignments.js"))
+    && /export function chargesAbout\(/.test(rd("engine/assignments.js"))
+    && /chargesOf\(character, rec\?\.id\)/.test(A399) && /chargesAbout\(character, h\.id\)/.test(A399));
+
+  // ⛑ DRIVEN ON A BUILT SAVE, through the production path: a charge is STAMPED with its hold by reconcile step 93 when
+  // a character loads, so a fixture that reads a raw record asks the question before the answer exists — which is exactly
+  // how my own driver reported this feature broken an hour ago.
+  const save399 = { name: "T399", level: 3, holdings: [{ id: "h399", name: "The Standing Annex", kind: "post", condition: "holding" }],
+    worldState: { assignments: {
+      "cy::survey": { npcId: "cy", npcName: "Cy", charge: "survey and plan expansion of the Standing Annex", status: "working", stampedAtWorldCount: 10 },
+      "cy::full": { npcId: "cy", npcName: "Cy", charge: "full subsurface survey and expansion planning for the Standing Annex", status: "working", stampedAtWorldCount: 20 },
+      "vex::road": { npcId: "vex", npcName: "Vex", charge: "walk the road to Millbrook and back", status: "working", stampedAtWorldCount: 30 },
+    } } };
+  try { rec399(save399, "character", {}); } catch { /* the reading below says whether it ran */ }
+  const about399 = AS399.chargesAbout(save399, "h399");
+  const cy399 = AS399.chargesOf(save399, "cy");
+  const vex399 = AS399.chargesOf(save399, "vex");
+  check("§399: ⛔ A CHARGE ABOUT A HOLD READS ON THAT HOLD — with the person's name and what it is for",
+    about399.length === 1 && about399[0].name === "Cy" && about399[0].purpose === "growth");
+  check("§399: ⛑ …and the person's card reads what they hold, including a charge about no place at all",
+    cy399.length === 1 && vex399.length === 1 && vex399[0].holdId === null);
+  // ⚠️ A READING, NOT A COPY: the two readers and the store must all say the same number.
+  const stored399 = Object.values(save399.worldState.assignments).filter(a => a.npcId === "cy").length;
+  check("§399: ⚠️ …and all three are the SAME record — the store, the person's card and the hold's list agree",
+    stored399 === cy399.length && stored399 === about399.length);
+  // ⛔ AND THE HOLD'S LIST AGREES WITH THE JOB IT FEEDS. Two callers computing one thing is the defect this item exists
+  // to close, so the gate is on their AGREEMENT rather than on either number.
+  check("§399: ⛔ …and the hold's list agrees with the growth job that counts those same hands",
+    AS399.chargedWith(save399, "h399", "growth").length === about399.filter(r => r.purpose === "growth").length
+    && AS399.chargedWith(save399, "h399", "growth").length === 1);
+  // ⚠️ AND NEITHER READER MAY ANSWER FOR SOMEBODY WHO HOLDS NOTHING — a reader that answers for everyone is a reader
+  // that has stopped reading.
+  check("§399: ⚠️ …and a person with no charge, and a hold nobody was charged with, read back nothing",
+    AS399.chargesOf(save399, "nobody").length === 0 && AS399.chargesAbout(save399, "no_hold").length === 0
+    && AS399.chargesOf(null, "cy").length === 0);
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

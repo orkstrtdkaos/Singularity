@@ -1430,6 +1430,28 @@ details.wn-entry > p { margin:4px 0 8px 16px; color:var(--ink-dim); }
 .sidebar-sec > summary .sec-sum { font-size: 11px; color: var(--ink-dim); font-family: var(--font-ui); }
 .sidebar-sec[open] > summary .sec-title { color: var(--accent2); }
 .sec-body { padding-top: 8px; }
+
+/* ✅ AEVI item 2 2026-09-30 — THE ABILITIES PANEL GETS ITS OWN SCROLL. ⛔ ERIK: it *"stretches the page"* — on a
+   character with thirty-odd crafts the sidebar list ran longer than everything beside it, so the play screen scrolled
+   to a column nobody was reading. ⚠️ VIEWPORT-TIED, not a fixed pixel height: a panel pinned at 420px is a panel that
+   is wrong on every screen but the one it was measured on. ⛑ And the group headers stick, because a list you scroll
+   without headers is a list where you lose which people a craft belongs to. */
+.sidebar-sec[data-sec="abilities"] > .sec-body {
+  max-height: min(58vh, 640px);
+  overflow-y: auto;
+  overscroll-behavior: contain;     /* ⛑ scrolling past the end does not then scroll the page behind it */
+  padding-right: 6px;               /* room for the scrollbar so it never sits on the text */
+  scrollbar-width: thin;
+}
+.sidebar-sec[data-sec="abilities"] > .sec-body .skill-group > summary {
+  position: sticky; top: 0; z-index: 2;
+  background: var(--bg);
+}
+/* ⚠️ A SHORT LIST SHOULD NOT GROW A SCROLLBAR, and a phone has no room to give one 58vh: below the fold the panel is
+   a plain block again, as it is today. */
+@media (max-width: 800px) {
+  .sidebar-sec[data-sec="abilities"] > .sec-body { max-height: none; overflow-y: visible; }
+}
 .company-group { margin-bottom: 8px; }
 /* SNG-121 — item pin toggle */
 .item-pin { background: none; border: none; font-size: 13px; padding: 0 4px; opacity: 0.6; }

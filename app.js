@@ -122,6 +122,7 @@ import { workTable, workOf, workersAt, assignWork, unassignWork } from "./engine
 import { featureLevel, levelEffectOf, raiseQuote, postRaise, returnRaiseGoods, featureDef as featureDefOf } from "./engine/holdings.js";   // CCODE-452: levels
 import { homeOf, isHome, makeHome } from "./engine/home.js";   // CCODE-369: a home is a place that is yours   // CCODE-360: an invitation carried by someone you both know
 import { runWakeGeneration } from "./engine/wake.js"; // SNG-204 Phase 2: open wakes generate the next thread
+import { chargesOf, chargesAbout } from "./engine/assignments.js";   // ✅ Aevi item 14: one record, read on the person and on the place
 import { addAssignment, delegationRefusal, activeDelegates, MISSION_KINDS, MISSION_KIND_IDS, canSendOn, sayFamilies, endBandMission } from "./engine/assignments.js"; // SNG-191 §4: the world honours delegated work
 import { setArcFate } from "./engine/latentarcs.js"; // SNG-191 §7: the player closing a surfaced arc (the handled/resolved fate)
 import { parseGambitSteps, assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "./engine/gambit.js";
@@ -183,7 +184,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.15.10";
+const APP_VERSION = "2.15.11";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -14686,7 +14687,11 @@ function characterTabBar(active) {
     <button class="char-tab${active === "party" ? " on" : ""}" id="tab-party">⚑ Party</button>
     <button class="char-tab${active === "bands" ? " on" : ""}" id="tab-bands">⚔ Bands</button>
     <button class="char-tab${active === "legion" ? " on" : ""}" id="tab-legion">♜ Legion</button>
-    <button class="char-tab${active === "jobs" ? " on" : ""}" id="tab-jobs">⚒ Jobs${(() => { const n = (character?.jobs?.board || []).length + (character?.jobs?.out || []).length; return n ? ` <span class="job-count">${n}</span>` : ""; })()}</button>
+    ${/* ✅ AEVI item 14 — THE TAB IS CALLED **WORK**. ⛔ ERIK: jobs also come *"from people in places we visit, so they
+          aren't just tied to holds"* — "Jobs" read as a holdings feature. ⚠️ THE KEY STAYS `jobs`: it is STATE (the tab
+          router, `go("tab-jobs")`, every alert that routes by it), and the LABEL is not. This is the same line the
+          Attack & Defense rename drew, and for the same reason — moving the key strands what names it. */""}
+    <button class="char-tab${active === "jobs" ? " on" : ""}" id="tab-jobs">⚒ Work${(() => { const n = (character?.jobs?.board || []).length + (character?.jobs?.out || []).length; return n ? ` <span class="job-count">${n}</span>` : ""; })()}</button>
     <button class="char-tab${active === "world" ? " on" : ""}" id="tab-world">🌍 The World</button>
     <button class="char-tab${active === "news" ? " on" : ""}" id="tab-news">📰 News</button>
   </div>`;
@@ -15926,9 +15931,21 @@ function renderHoldingsTab(manageId = null, tab = null) {
             return `<div class="hw-row"><span class="hw-kind">${esc(K.label)}<small>${esc(K.what)}</small></span>
               <span class="hw-who">${ids.map(id => `<button class="hw-chip" data-work-drop="${esc(h.id)}" data-kind="${esc(k)}" data-id="${esc(id)}" title="Take them off this work">${esc(workerName(id))} ✕</button>`).join("")}${cands.length ? `<select data-work-add="${esc(h.id)}" data-kind="${esc(k)}" aria-label="${esc(`Put someone to ${K.label.toLowerCase()}`)}"><option value="">+ put someone to it</option>${cands.map(p => `<option value="${esc(p.id)}">${esc(p.short || p.name)} — ${Math.round(100 * workDayChance(workCraftsCached(p.id), k, T))}% a good day</option>`).join("")}</select>` : ""}</span>
               <span class="hw-gain">${ids.length ? `${perPass.toFixed(1)} good days a pass${K.per ? ` · ${banked} of ${K.per} banked` : " · while it lasts"}` : ""}</span></div>`;
-          }).join("") + clearRow;
+          }).join("") + charged14 + clearRow;
           // ⛑ OPEN BY DEFAULT NOW, because it is no longer a sub-panel of extras — it is the list of what happens here,
           // and the keeper and the watch live in it.
+          // ✅ AEVI item 14 — AND A CHARGE THAT NAMES THIS PLACE IS WORK AT THIS PLACE. ⛔ ERIK saw the legs being built
+          // with "nobody at it" while the person he had charged with exactly that stood in another list. The charge is
+          // the same record the Work tab holds; this is a reading of it, never a second copy.
+          const charged14 = (() => {
+            try {
+              const rows = chargesAbout(character, h.id);
+              if (!rows.length) return "";
+              return `<div class="hw-row"><span class="hw-kind">Charged with it<small>given on the Work tab</small></span>
+                <span class="hw-who">${rows.map(r => `<span class="hw-chip" title="${esc(r.charge || "")}">${esc(r.name)}</span>`).join("")}</span>
+                <span class="hw-gain">${rows.length} ${rows.length === 1 ? "person" : "people"}${rows.some(r => r.purpose) ? ` · ${esc([...new Set(rows.map(r => r.purpose).filter(Boolean))].join(", "))}` : ""}</span></div>`;
+            } catch { return ""; }
+          })();
           return `<details class="hw" open><summary>Who does what here${at.length ? ` — ${at.length} at standing work, ${esc(String(wage))} ${esc(CONTENT.rules?.economy?.holdStore?.upkeepCurrency || "crystal")} a pass in wages` : ""}</summary>
             ${cands.length ? "" : `<p class="hint pp-must">⚠️ Nobody here is free to be put to work.${(() => {
               // ⛔ SAY WHICH RULE EXCLUDED THEM, AND THE WAY OUT. Erik: "I can't assign people to standing work" — on his
@@ -18466,6 +18483,10 @@ function renderJobsTab(selId = null) {
 
   chrome(`<div class="screen screen-ground">
     ${characterTabBar("jobs")}
+    ${/* ✅ AEVI item 14 — the page says what it is, like every other tab. The board and Post a job live here; a charge
+          given here also reads on the person's card and on the place it names. */""}
+    <div class="page-title"><h2>Work</h2>
+      <span class="aside">${J.out.length ? esc(`${J.out.length} out`) : ""}</span></div>
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">The board</h3>
       ${J.board.length ? `<div class="job-shelf">${J.board.map(tile).join("")}</div>` : `<p class="hint">Nothing offered. Work comes to the board when someone in the story asks for a thing done — or post one yourself, below.</p>`}</div>
     ${panel}
@@ -19570,7 +19591,19 @@ function personSheetHtml(rec) {
   // is hidden. ⛑ SORTED STRONGEST-FIRST so the SHAPE of a person reads at a glance and the magnitude is exact.
   const attrRow = (attrs) => Object.entries(attrs).sort((a, b) => (Number(b[1]) || 0) - (Number(a[1]) || 0))
     .map(([k, v], i) => i === 0 ? `<strong>${esc(k)} ${Number(v) || 0}</strong>` : `${esc(k)} ${Number(v) || 0}`).join(" · ");
-  return `<div class="cs-block" style="margin-top:10px"><h3 class="codex-title" style="font-size:14px">Their sheet <span class="hint" style="text-transform:none">— as much of it as you have seen</span></h3>
+  // ✅ AEVI item 14 — WHAT THEY ARE DOING FOR YOU, on their own card. ⛔ A charge lived in the Work tab and nowhere
+  // else, so the person you gave it to carried no sign of it. One record, read where you meet them.
+  const doing14 = (() => {
+    try {
+      const mine = chargesOf(character, rec?.id).filter(c => !c.done);
+      if (!mine.length) return "";
+      const holdName = (id) => (character?.holdings || []).find(h => h && h.id === id)?.name || id;
+      return `<div class="cs-block" style="margin-top:10px"><h3 class="codex-title" style="font-size:14px">What they are doing for you</h3>
+        ${mine.map(c => `<div class="codex-fact">${esc(c.charge || "a charge you gave them")}${c.holdId ? ` <span class="hint">— at ${esc(holdName(c.holdId))}</span>` : ""}${c.progress ? ` <span class="hint">· ${Math.round(c.progress * 100)}%</span>` : ""}</div>`).join("")}
+        <p class="hint" style="margin-top:4px">Given on the Work tab, and the same record wherever it shows.</p></div>`;
+    } catch { return ""; }
+  })();
+  return `${doing14}<div class="cs-block" style="margin-top:10px"><h3 class="codex-title" style="font-size:14px">Their sheet <span class="hint" style="text-transform:none">— as much of it as you have seen</span></h3>
     ${s.witnessed.length ? `<div class="hint" style="margin:0 0 4px">What you have watched them do</div>
       ${s.witnessed.map(w => `<div class="codex-fact">${esc(w)}</div>`).join("")}` : ""}
     ${s.is ? `<div class="hint" style="margin:8px 0 4px">What they are</div>

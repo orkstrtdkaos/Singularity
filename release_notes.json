@@ -16,6 +16,24 @@
   "next": [],
   "releases": [
     {
+      "version": "2.15.11",
+      "date": "2026-09-30",
+      "entries": [
+        {
+          "kind": "change",
+          "title": "The Jobs tab is called Work",
+          "summary": "Charges now read on the person you gave them to and on the place they name.",
+          "detail": "Work comes from people in places you visit, not only from holdings, so the tab is called Work. A charge you give someone also appears on their own card under \"what they are doing for you\", and when it names one of your holdings it appears there too in \"Who does what here\" — one record, read wherever you meet it."
+        },
+        {
+          "kind": "fix",
+          "title": "The abilities list scrolls on its own",
+          "summary": "A long list of crafts no longer stretches the play screen.",
+          "detail": "With thirty-odd crafts the sidebar list ran longer than everything beside it. It has its own scroll area now, sized to the window rather than a fixed height, and the group headings stay put while you scroll so you can still see which people a craft belongs to."
+        }
+      ]
+    },
+    {
       "version": "2.15.10",
       "date": "2026-09-30",
       "entries": [

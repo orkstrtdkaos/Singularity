@@ -51,6 +51,30 @@ export function holdPurposeOf(charge, character) {
   return null;
 }
 
+/** ✅ AEVI item 14 — WHAT ONE PERSON IS DOING FOR YOU. ⛔ ERIK: a charge lived in the Jobs tab and nowhere else, so
+ *  the person you gave it to carried no sign of it and the place it was about carried no sign of it either. "One record,
+ *  managed in one place" needs the record to be READABLE from the two places you meet it. PURE. */
+export function chargesOf(character, npcId) {
+  const id = String(npcId || "");
+  if (!id) return [];
+  return Object.values(character?.worldState?.assignments || {})
+    .filter(a => a && (a.npcId === id || a.bandId === id))
+    .map(a => ({ charge: a.charge, status: a.status || "out", holdId: a.holdId || null, purpose: a.purpose || null,
+                 progress: Number(a.progress) || 0, done: a.status === "done" || a.status === "failed" }));
+}
+
+/** ✅ AEVI item 14 — EVERY CHARGE ABOUT ONE HOLD, whatever its purpose. ⚠️ `chargedWith` asks for ONE purpose because
+ *  the growth job counts hands; this asks the question the hold's own list asks, which is "who is doing anything here".
+ *  PURE. */
+export function chargesAbout(character, holdId) {
+  const id = String(holdId || "");
+  if (!id) return [];
+  return Object.values(character?.worldState?.assignments || {})
+    .filter(a => a && String(a.holdId || "") === id && a.status !== "done" && a.status !== "failed")
+    .map(a => ({ id: a.npcId || a.bandId, name: a.npcName || a.npcId || a.bandId, charge: a.charge,
+                 purpose: a.purpose || null, progress: Number(a.progress) || 0 }));
+}
+
 /** ⛑ WHO IS CHARGED WITH A HOLD'S GROWTH — the people a `clearingTick` should count beside its crew and its watch.
  *  Only those still working it: a charge that is done or failed is not a hand on the job. PURE. */
 export function chargedWith(character, holdId, purpose) {

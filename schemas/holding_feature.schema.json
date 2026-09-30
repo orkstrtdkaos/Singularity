@@ -50,8 +50,13 @@
    "description": "the rung it has been raised to, 1–3. Absent means 1."
   },
   "building": {
-   "type": "boolean",
-   "description": "set while it is still going up — a feature under construction does not watch, defend or cost keep."
+   "type": "object",
+   "description": "set while it is still going up — a feature under construction does not watch, defend or cost keep. ⚠️ DECLARED `boolean` until 2026-09-30 and written as an OBJECT since the build system shipped: `addFeature` records what is still owed and how many passes are left, and `tickStore` pays it down from the store each pass. Nothing ever carried a boolean here; the census only caught it the day Erik started a barracks, because the field does not exist until somebody builds something.",
+   "properties": {
+    "owed": { "type": "object", "description": "goods still to be found, by kind — emptied as the store pays it off." },
+    "passesLeft": { "type": "number", "description": "passes of work remaining; it stands when this and `owed` are both clear." },
+    "paid": { "type": "object", "description": "what it has already cost — `store` by good, and `coin`." }
+   }
   },
   "via": {
    "type": "string",

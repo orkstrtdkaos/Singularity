@@ -172,6 +172,23 @@
       "type": "object",
       "description": "17% — for a hull: how it moves and where it is on its voyage."
     },
+    "notFeature": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "feature kinds the player has said this place does NOT have, so the reader stops offering them. Written by `answerFeatureOffer` (holdings.js) and read back by the same function before it offers. ⚠️ Undeclared until 2026-09-30 — it does not exist on a hold until somebody declines an offer, so the census could not see it until Erik declined a shrine at the Standing Annex."
+    },
+    "arrearsWhy": {
+      "type": "array",
+      "description": "what the arrears are FOR, newest last — `{ n, why, day }`, at most six. Written only by `oweIt`, cleared as `payArrears` pays the oldest off first. Erik, on seeing a bare number: \"not sure, because I can't seem to do anything about it.\"",
+      "items": {
+        "type": "object",
+        "properties": {
+          "n": { "type": "number", "description": "how much of the debt this reason accounts for." },
+          "why": { "type": "string", "description": "the reason in the hold's own words — \"couldn't pay the stall at Millbrook\"." },
+          "day": { "type": "number", "description": "the day it was owed, when the tick knew one." }
+        }
+      }
+    },
     "arrears": {
       "type": "number",
       "description": "17% — keep owed and unpaid."

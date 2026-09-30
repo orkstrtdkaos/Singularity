@@ -1,4 +1,4 @@
-<!-- status: RUNNING LIST — Erik is still gathering (2026-09-30). ⬜ CCode: read, don't start until Erik says the list is ready (or Aevi turns it into a work order) -->
+<!-- status: READY — ordered in po/WORKORDER_aevi_20260930_eriks_list.md (Erik 2026-09-30: "write all this up for ccode"). More may be added later -->
 # UI & MECHANICS: Erik's running list (2026-09-30)
 
 **Aevi (PO).** Erik, playing: *"keep a running list, I'm still gathering items for you."* Numbered as they arrive;

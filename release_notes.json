@@ -16,6 +16,24 @@
   "next": [],
   "releases": [
     {
+      "version": "2.15.7",
+      "date": "2026-09-30",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "The holding sheet stays open while you use it",
+          "summary": "Every button inside a holding's manage sheet closed it and dropped you back to the list behind.",
+          "detail": "The sheet takes the holding it is showing as an argument, and everything that redrew it from inside forgot to pass it — so the sheet shut itself the moment you changed anything in it. It stays open now, on the tab you were reading, and the ✕ and the backdrop still close it."
+        },
+        {
+          "kind": "change",
+          "title": "One list of who does what at a holding",
+          "summary": "Choosing a keeper, adding hands, posting a guard, putting somebody to work and clearing ground were four places; they are one.",
+          "detail": "A holding's People tab had a name-picker with Add hands, Post a guard and Make keeper beside it, a separate table of standing work below that, and the expansion work on another tab entirely — four ways to say \"this person does this here\". They are one list now: every job at the place, who is on it, and a way to put somebody to it or take them off. The keeper, the hands and the watch are the first three rows; foraging, hunting, training, mending, guarding, patrolling, tending and keeping the accounts follow; and clearing ground or building out the frame is the last, because it is work somebody has to do. Nothing about how any of it works has changed — the rows do exactly what the old buttons did."
+        }
+      ]
+    },
+    {
       "version": "2.15.6",
       "date": "2026-09-29",
       "entries": [

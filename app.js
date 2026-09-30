@@ -183,7 +183,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.15.6";
+const APP_VERSION = "2.15.7";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -14673,7 +14673,11 @@ function characterTabBar(active) {
  *  ⚠️ IT RE-RENDERS WHICHEVER SURFACE IS SHOWING, so answering from either place lands in the same state
  *  rather than bouncing the player to the other screen. */
 function wireHoldingOffers() {
-  const again = () => (document.getElementById("tab-holdings")?.classList.contains("on") ? renderHoldingsTab() : renderCharacterScreen());
+  // ⛑ …AND IT KEEPS THE OPEN SHEET. This was `renderHoldingsTab()` — bare — so `manageId` defaulted to null and every
+  // button inside the sheet closed it. The comment above has always said this lands "in the same state"; now it does.
+  const again = () => (document.getElementById("tab-holdings")?.classList.contains("on")
+    ? renderHoldingsTab(holdManaging, holdTab)
+    : renderCharacterScreen());
   // ⛔ SNG-358 — ANSWERING THE MIGRATION QUESTION. Both answers are final for that assignment: accepting
   // mints the holding, dismissing records that it is NOT a place. ⚠️ EITHER WAY THE OFFER GOES AWAY — a
   // question that keeps being asked after it has been answered is nagging.
@@ -14862,10 +14866,9 @@ function wireHoldingOffers() {
     if (!r.ok) { alert(r.why); return; }
     saveCharacter(character); again();
   };
-  // ⛔ §178 (Erik 2026-09-12): the card and the manage modal each render <select data-hold-hand="<id>"> for the same place, and
-  // `app.querySelector` took the FIRST — the card's — so a pick in the modal landed on whoever the card's select showed. The select
-  // beside the clicked button is the one that was used.
-  const handSelFor = (btn, id) => btn.parentElement?.querySelector(`select[data-hold-hand="${id}"]`) || app.querySelector(`[data-hold-hand="${id}"]`);
+  // ⛑ §178's TWO-SELECTS PROBLEM IS GONE WITH THE SELECTS. The card and the modal each rendered `<select data-hold-hand>`
+  // for one place and `app.querySelector` took the card's, so a pick in the modal landed on the wrong person; `handSelFor`
+  // existed only to disambiguate them. The job list has one control per row, so there is nothing to disambiguate.
   // ✅ B6b: put out. She arrives with you if you are aboard (and the clock moves with her); otherwise she is at sea and the world
   // brings her in. A refusal is SAID — a control that silently does nothing is indistinguishable from a broken one.
   for (const btn of app.querySelectorAll("[data-hold-sail]")) btn.onclick = () => {
@@ -14882,20 +14885,9 @@ function wireHoldingOffers() {
       ? `${h.name} makes ${CONTENT.locations?.[to]?.name || to} in ${r.days < 1 ? "under a day" : Math.round(r.days) + " days"}, and you are aboard.`
       : `${h.name} puts out for ${CONTENT.locations?.[to]?.name || to} without you — ${r.days < 1 ? "under a day" : Math.round(r.days) + " days"} out. She cannot be raided under way.` });
   };
-  for (const btn of app.querySelectorAll("[data-hold-crew]")) btn.onclick = () => {
-    const id = btn.dataset.holdCrew, sel = handSelFor(btn, id);
-    const h = (character.holdings || []).find(x => x.id === id);
-    if (!h || !sel?.value) return;
-    setCrew(character, id, [...(h.crew || []), sel.value], { cfg: CONTENT.rules?.economy?.holdStore, worldCount: worldCount(), nameOf: nmOf });
-    saveCharacter(character); again();
-  };
-  for (const btn of app.querySelectorAll("[data-hold-guard]")) btn.onclick = () => {
-    const id = btn.dataset.holdGuard, sel = handSelFor(btn, id);
-    const h = (character.holdings || []).find(x => x.id === id);
-    if (!h || !sel?.value) return;
-    setGarrison(character, id, [...(h.garrison || []), sel.value], { worldCount: worldCount(), nameOf: nmOf });
-    saveCharacter(character); again();
-  };
+  // ✅ ERIK 2026-09-29 — THE `Add hands` AND `Post a guard` HANDLERS ARE GONE WITH THEIR BUTTONS. Both are rows in the
+  // one job list now and both still call `setCrew`/`setGarrison`, through `jobPut`. §106 is why they had to go in the
+  // same pass: "a handler bound to a control nothing renders is a feature that left the screen."
   for (const btn of app.querySelectorAll("[data-hold-clear]")) btn.onclick = () => {
     const id = btn.dataset.holdClear;
     setCrew(character, id, [], { cfg: CONTENT.rules?.economy?.holdStore, worldCount: worldCount(), nameOf: nmOf });
@@ -14995,6 +14987,37 @@ function wireHoldingOffers() {
   for (const btn of app.querySelectorAll("[data-hold-sellpack]")) btn.onclick = () => showSellFromPack(btn.dataset.holdSellpack, again);
   for (const btn of app.querySelectorAll("[data-hold-raise]")) btn.onclick = () => showRaise(btn.dataset.holdRaise, Number(btn.dataset.index));   // CCODE-452
   // ⛔ CCODE-450: put someone to standing work, or take them off it
+  // ✅ ERIK 2026-09-29 — ONE DOOR FOR EVERY JOB AT A HOLD. The keeper, the hands and the watch used to be three buttons
+  // beside a person-picker, above a separate table of standing work; they are rows in one list now. ⛑ Each kind still
+  // routes to the function it always routed to — `appointKeeper`, `setCrew`, `setGarrison`, `assignWork` — so this is a
+  // surface change and not a rules change, which is the whole reason it was safe to do in one pass.
+  const jobPut = (holdId, kind, who) => {
+    const h = (character.holdings || []).find(x => x && x.id === holdId);
+    if (!h || !who) return;
+    if (kind === "_keeper") {
+      appointKeeper(character, holdId, who, { day: absoluteWorldDay(), worldCount: worldCount(),
+        nameOf: (x) => character?.npcRegistry?.[x]?.name || CONTENT.npcs?.[x]?.name || x });
+    } else if (kind === "_hand") {
+      setCrew(character, holdId, [...(h.crew || []), who], { cfg: CONTENT.rules?.economy?.holdStore, worldCount: worldCount(), nameOf: nmOf });
+    } else if (kind === "_watch") {
+      setGarrison(character, holdId, [...(h.garrison || []), who], { worldCount: worldCount(), nameOf: nmOf });
+    } else {
+      const r = assignWork(character, holdId, kind, who, { table: workTable(CONTENT.rules?.holdWork || null) });
+      if (!r.ok) { alert(r.why); return; }
+    }
+    saveCharacter(character); again();
+  };
+  const jobDrop = (holdId, kind, who) => {
+    const h = (character.holdings || []).find(x => x && x.id === holdId);
+    if (!h) return;
+    if (kind === "_keeper") { delete h.steward; }
+    else if (kind === "_hand") setCrew(character, holdId, (h.crew || []).filter(x => String(x) !== String(who)), { cfg: CONTENT.rules?.economy?.holdStore, worldCount: worldCount(), nameOf: nmOf });
+    else if (kind === "_watch") setGarrison(character, holdId, (h.garrison || []).filter(x => String(x) !== String(who)), { worldCount: worldCount(), nameOf: nmOf });
+    else unassignWork(character, holdId, kind, who);
+    saveCharacter(character); again();
+  };
+  for (const s of app.querySelectorAll("[data-job-put]")) s.onchange = () => { if (s.value) jobPut(s.dataset.jobPut, s.dataset.kind, s.value); };
+  for (const b of app.querySelectorAll("[data-job-drop]")) b.onclick = () => jobDrop(b.dataset.jobDrop, b.dataset.kind, b.dataset.id);
   for (const s of app.querySelectorAll("[data-work-add]")) s.onchange = () => {
     if (!s.value) return;
     const r = assignWork(character, s.dataset.workAdd, s.dataset.kind, s.value, { table: workTable(CONTENT.rules?.holdWork || null) });
@@ -15052,19 +15075,12 @@ function wireHoldingOffers() {
     appointKeeper(character, id, to, { day: absoluteWorldDay(), worldCount: worldCount(), nameOf: (x) => character?.npcRegistry?.[x]?.name || CONTENT.npcs?.[x]?.name || x });
     saveCharacter(character); again();
   };
-  // ⛔ CCODE-470 — THE VERB WAS ONLY IN THE EXPANDED PANEL. The card Erik was looking at said "unkept" and
-  // "nobody — it will not climb", offered Add hands / Post a guard / Stand them down, and had NO WAY TO
-  // APPOINT ONE: the keeper control lived behind "Manage this place". ⚠️ A card that names a problem and
-  // withholds the verb for it is worse than a card that says nothing — and the person he wanted was already
-  // in that dropdown, because it is `askable()` and she is in his company.
-  // ⛑ It reads the SAME select the other verbs on the row read, so there is one selection and one rule.
-  for (const btn of app.querySelectorAll("[data-hold-keeper-here]")) btn.onclick = () => {
-    const id = btn.dataset.holdKeeperHere;
-    const to = app.querySelector(`[data-hold-hand="${id}"]`)?.value || null;
-    if (!to) return;
-    appointKeeper(character, id, to, { day: absoluteWorldDay(), worldCount: worldCount(), nameOf: (x) => character?.npcRegistry?.[x]?.name || CONTENT.npcs?.[x]?.name || x });
-    saveCharacter(character); again();
-  };
+  // ⛔ CCODE-470's CLAIM SURVIVES ITS BUTTON. The card Erik was looking at then said "unkept · nobody — it will not
+  // climb" and had NO WAY TO APPOINT ONE, because the keeper control lived behind "Manage this place"; a card that names
+  // a problem and withholds the verb for it is worse than one that says nothing. ⛑ The verb is now the FIRST ROW of the
+  // job list — "Keeper · runs the place — a hold climbs only under one" — with the same `askable()` people in it and the
+  // same `appointKeeper` behind it, through `jobPut`. ⚠️ Its own handler is gone with its button (§106: a handler bound
+  // to a control nothing renders is a feature that left the screen).
   for (const btn of app.querySelectorAll("[data-hold-transfer]")) btn.onclick = () => {
     const id = btn.dataset.holdTransfer;
     const sel = app.querySelector(`[data-hold-to="${id}"]`);
@@ -15171,6 +15187,11 @@ function workerName(id) {
 // ⛑ SNG-651 §2.3 — WHICH TAB YOU WERE ON survives a re-render, because every action here re-renders the
 // screen and a page that snapped back to Overview after every click would be unusable.
 let holdTab = "overview";
+// ⛔ WHICH HOLD'S SHEET IS OPEN. Erik: *"whenever I click things in the holding manage screen it kicks me back out to the
+// screen behind it."* `renderHoldingsTab(manageId)` takes the open sheet as its FIRST parameter, and every re-render from
+// inside the sheet called it bare — so `manageId` defaulted to null and the sheet closed under the player's hand. The tab
+// it was showing was already kept here; the sheet itself was not.
+let holdManaging = null;
 /** ⛑ A REGION'S OWN NAME, for the one place a player reads a region id as money. ⚠️ The key is `regionId`, not
  *  `id`: the array carries `{ regionId, name, terrain, … }`, and a lookup on `id` finds nothing and says nothing. */
 function regionDisplayName(rid) {
@@ -15178,6 +15199,7 @@ function regionDisplayName(rid) {
   return r?.name || null;
 }
 function renderHoldingsTab(manageId = null, tab = null) {
+  holdManaging = manageId || null;   // ⛑ so a re-render from inside the sheet can put it back exactly as it was
   if (tab) holdTab = tab;
   _workMemo = null; _workCands = null;   // CCODE-450: one sheet per worker per render
   bannerFrom("holds");   // CCODE-355
@@ -15786,7 +15808,14 @@ function renderHoldingsTab(manageId = null, tab = null) {
           ${lives}
           <div class="hint">grows: ${h.steward ? `one rung every ${g.passesPerClimb || 4} passes under a keeper, as far as their standing allows` : "<em>not while nobody keeps it</em>"}${done ? ` · improved with ${done}` : ""}${hands ? ` · hands: ${hands}` : ""}${guards ? ` · watch: ${guards}` : ""}</div>
           <div class="hold-controls">
-          ${people.length ? `<div class="hold-ctl"><span class="hold-ctl-label">People</span><select data-hold-hand="${esc(h.id)}">${people.map(id => `<option value="${esc(id)}">${esc(nameOf(id))}</option>`).join("")}</select><button class="opt" data-hold-crew="${esc(h.id)}" title="Put them to work here — more hands, more yield (up to ${g.maxHands || 0})">Add hands</button><button class="opt" data-hold-guard="${esc(h.id)}" title="Post them on watch — halves a raid, costs ${g.garrisonUpkeepPerHand || 0} crystal a pass">Post a guard</button><button class="opt" data-hold-keeper-here="${esc(h.id)}" title="${h.steward ? "Make them keeper instead — the place stays yours; they run it" : "Make them keeper — the place stays yours, they run it, and an unkept hold cannot climb"}">${h.steward ? "Make keeper instead" : "Make keeper"}</button>${(h.crew || []).length || (h.garrison || []).length ? `<button class="opt" data-hold-clear="${esc(h.id)}" title="Stand the hands and the watch down">Stand them down</button>` : ""}</div>` : ((h.crew || []).length || (h.garrison || []).length ? `<div class="hold-ctl"><span class="hold-ctl-label">People</span><button class="opt" data-hold-clear="${esc(h.id)}" title="Stand the hands and the watch down">Stand them down</button></div>` : "")}
+          ${/* ✅ ERIK 2026-09-29 — THE PERSON-PICKER AND ITS THREE VERBS ARE GONE, into the one list below. It read
+              "People [somebody ▾] [Add hands] [Post a guard] [Make keeper]" above a separate table of jobs, which is
+              the duplication he named: "These should probably be one and the same." ⛑ Every one of those verbs is a row
+              in that list now, writing where it always wrote. ⚠️ ONLY the BULK stand-down stays here, because the list
+              takes people off one at a time and clearing a whole hold in one motion is a different act. */""}
+          ${(h.crew || []).length || (h.garrison || []).length
+            ? `<div class="hold-ctl"><span class="hold-ctl-label">Everyone</span><button class="opt" data-hold-clear="${esc(h.id)}" title="Stand the hands and the watch down — the keeper stays">Stand them all down</button></div>`
+            : ""}
           </div>`;
         })()}
         ${(() => {   // ⛔ CCODE-450: standing work — who is put to what the hold needs, and what comes of it
@@ -15794,15 +15823,61 @@ function renderHoldingsTab(manageId = null, tab = null) {
           const at = workersAt(h);
           const cands = workCandidates();
           const wage = (Number(CONTENT.rules?.economy?.holdStore?.growth?.wagePerHand) || 0) * at.reduce((a, [, id]) => a + Math.max(1, workHeads(character, id)), 0);
-          const rows = Object.entries(T.kinds).map(([k, K]) => {
+          // ✅ ERIK 2026-09-29 — ONE LIST. *"we can choose a name and have them work the holding, or guard it… then we
+          // also have the jobs list below. These should probably be one and the same. In addition, the expansion work
+          // should be on the list too."* The keeper, the hands and the watch were a person-picker with three verbs ABOVE
+          // this table; the expansion job was on another tab entirely. They are all jobs at this place, so they are all
+          // rows here. ⛑ NOTHING MECHANICAL MOVED: each row writes exactly where it wrote before — `steward`, `crew[]`,
+          // `garrison[]`, `work[kind][]`, `clearing`. ⚠️ And the engine already agreed with him: `workMods().watch` folds
+          // everyone at Guarding or Patrolling into the SAME watch the garrison feeds (holdings.js), so "post a guard"
+          // and the Guarding job were one thing wearing two controls.
+          // ⛑ the growth dials, read HERE — the `g` in the block above is out of scope in this one, which the scope
+          // scan caught before a click could.
+          const gDials = CONTENT.rules?.economy?.holdStore?.growth || null;
+          const freeNow = cands.map(c => c.id);
+          const putter = (kind, label) => freeNow.length
+            ? `<select data-job-put="${esc(h.id)}" data-kind="${esc(kind)}" aria-label="${esc(label)}"><option value="">+ ${esc(label)}</option>${freeNow.map(id => `<option value="${esc(id)}">${esc(workerName(id))}</option>`).join("")}</select>`
+            : `<span class="hint">nobody free</span>`;
+          const jobChip = (kind, id) => `<button class="hw-chip" data-job-drop="${esc(h.id)}" data-kind="${esc(kind)}" data-id="${esc(id)}" title="Take them off this">${esc(workerName(id))} ✕</button>`;
+          const roleRows = [
+            { kind: "_keeper", label: "Keeper", what: "runs the place — a hold climbs only under one",
+              ids: h.steward ? [String(h.steward)] : [],
+              gain: h.steward ? `a rung every ${gDials?.passesPerClimb || 4} passes` : "it cannot climb unkept" },
+            { kind: "_hand", label: "Hands", what: "the crew who live and work here", ids: (h.crew || []).map(String), gain: "" },
+            { kind: "_watch", label: "The watch", what: "they stand it, and meet what comes at the hold",
+              ids: (h.garrison || []).map(String),
+              gain: (() => {
+                const also = [...((workOf(h).guard) || []), ...((workOf(h).patrol) || [])].map(String);
+                return also.length ? `${also.length} more stand it from Guarding and Patrolling` : "";
+              })() },
+          ].map(r => `<div class="hw-row"><span class="hw-kind">${esc(r.label)}<small>${esc(r.what)}</small></span>
+            <span class="hw-who">${r.ids.map(id => jobChip(r.kind, id)).join(" ")}${r.kind === "_keeper" && r.ids.length ? "" : putter(r.kind, r.kind === "_keeper" ? "make one keeper" : r.kind === "_watch" ? "post a guard" : "add a hand")}</span>
+            <span class="hw-gain">${esc(r.gain)}</span></div>`).join("");
+          // ✅ AND THE EXPANSION WORK, which he asked for by name. The Build tab prices it; this is where people are put
+          // to things, and that is what clearing ground IS — work somebody has to do.
+          const clearRow = (() => {
+            const q = (() => { try { return clearingQuote(h, holdCfgNow()); } catch { return null; } })();
+            if (!q?.ok) return "";
+            const busyC = h.clearing || null;
+            const cost = Object.entries(q.goods).map(([gd, n]) => `${n} ${esc(String(gd).replace(/_/g, " "))}`).join(" + ");
+            const handsHere = (h.crew || []).length + (h.garrison || []).length;
+            return `<div class="hw-row"><span class="hw-kind">${esc(q.label)}<small>${esc(q.said)}</small></span>
+              <span class="hw-who">${busyC
+                ? `${Math.round((busyC.progress || 0) * 100)}% done <button class="hw-chip" data-clear-stop="${esc(h.id)}" title="Stop the work — what it cost is spent">stop ✕</button>`
+                : `<button class="opt" data-clear-start="${esc(h.id)}" title="${esc(cost)}, about ${q.passes} pass${q.passes === 1 ? "" : "es"} at ${q.atHands} hands">start it — ${cost}</button>`}</span>
+              <span class="hw-gain">${busyC ? (handsHere ? "hands are at it" : "<strong>nobody is at it</strong>") : `~${q.passes} pass${q.passes === 1 ? "" : "es"}`}</span></div>`;
+          })();
+          const rows = roleRows + Object.entries(T.kinds).map(([k, K]) => {
             const ids = (workOf(h)[k] || []).map(String);
             const perPass = ids.reduce((a, id) => a + workDayChance(workCraftsCached(id), k, T) * 3 * Math.max(1, workHeads(character, id)), 0);
             const banked = Number(h.workBank?.[k]) || 0;
             return `<div class="hw-row"><span class="hw-kind">${esc(K.label)}<small>${esc(K.what)}</small></span>
               <span class="hw-who">${ids.map(id => `<button class="hw-chip" data-work-drop="${esc(h.id)}" data-kind="${esc(k)}" data-id="${esc(id)}" title="Take them off this work">${esc(workerName(id))} ✕</button>`).join("")}${cands.length ? `<select data-work-add="${esc(h.id)}" data-kind="${esc(k)}" aria-label="${esc(`Put someone to ${K.label.toLowerCase()}`)}"><option value="">+ put someone to it</option>${cands.map(p => `<option value="${esc(p.id)}">${esc(p.short || p.name)} — ${Math.round(100 * workDayChance(workCraftsCached(p.id), k, T))}% a good day</option>`).join("")}</select>` : ""}</span>
               <span class="hw-gain">${ids.length ? `${perPass.toFixed(1)} good days a pass${K.per ? ` · ${banked} of ${K.per} banked` : " · while it lasts"}` : ""}</span></div>`;
-          }).join("");
-          return `<details class="hw"${at.length ? " open" : ""}><summary>Standing work${at.length ? ` — ${at.length} at it, ${esc(String(wage))} ${esc(CONTENT.rules?.economy?.holdStore?.upkeepCurrency || "crystal")} a pass in wages` : ""}</summary>
+          }).join("") + clearRow;
+          // ⛑ OPEN BY DEFAULT NOW, because it is no longer a sub-panel of extras — it is the list of what happens here,
+          // and the keeper and the watch live in it.
+          return `<details class="hw" open><summary>Who does what here${at.length ? ` — ${at.length} at standing work, ${esc(String(wage))} ${esc(CONTENT.rules?.economy?.holdStore?.upkeepCurrency || "crystal")} a pass in wages` : ""}</summary>
             ${cands.length ? "" : `<p class="hint pp-must">⚠️ Nobody here is free to be put to work.${(() => {
               // ⛔ SAY WHICH RULE EXCLUDED THEM, AND THE WAY OUT. Erik: "I can't assign people to standing work" — on his
               // save every single person was excluded by one of the three rules below, and the panel drew six job rows
@@ -15814,8 +15889,8 @@ function renderHoldingsTab(manageId = null, tab = null) {
               if (here) bits.push(`${here} here already ${here === 1 ? "has a post" : "have posts"} — the keeper, the crew and the watch`);
               if (side) bits.push(`${side} walk at your side rather than living here`);
               return bits.length ? ` ${bits.join(", and ")}.` : "";
-            })()} Stand somebody down on this card, or add hands, and they can be put to any of these.</p>`}
-            <p class="hint">People with no job, put to what the hold needs. They stay here and are nobody else's while they work it, and each is paid a hand's wage a pass, in the money of this place. Scouting, crafting and teaching come with the hold's levels.</p>
+            })()} Take somebody off a job in this list and they are free again.</p>`}
+            <p class="hint">Every job at this place, and who is on it. Somebody with no job here can be put to any of them, and taking them off puts them back. They stay here and are nobody else's while they work it, and each is paid a hand's wage a pass, in the money of this place. Scouting, crafting and teaching come with the hold's levels.</p>
             <div class="hw-rows">${rows}</div></details>`;
         })()}
         ${(() => { // ⛔ CCODE-431: a guard out on a job is not on this watch until they are back

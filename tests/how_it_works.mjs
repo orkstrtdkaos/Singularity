@@ -2379,10 +2379,13 @@ console.log("\n── §178 · the hands control reads the select beside it, and
   const app178 = rd("app.js").replace(/^\s*\/\/.*$/gm, "");
   // ⛔ the card and the manage modal both rendered <select data-hold-hand="<id>">; the handler took the FIRST in the page — the card's —
   // so a pick in the modal landed on whoever the card's select showed. The select beside the clicked button is the one that was used.
-  check("§178: ⛔ Add hands and Post a guard read the select BESIDE the button, never the first one in the page with that key",
-    /const handSelFor = \(btn, id\) => btn\.parentElement\?\.querySelector\(`select\[data-hold-hand="\$\{id\}"\]`\) \|\| app\.querySelector\(`\[data-hold-hand="\$\{id\}"\]`\);/.test(app178)
-    && /const id = btn\.dataset\.holdCrew, sel = handSelFor\(btn, id\);/.test(app178) && /const id = btn\.dataset\.holdGuard, sel = handSelFor\(btn, id\);/.test(app178)
-    && !/sel = app\.querySelector\(`\[data-hold-hand="\$\{id\}"\]`\)/.test(app178));
+  // ⛔ §178's BUG IS GONE BECAUSE ITS SELECTS ARE. The card and the manage modal each rendered `<select data-hold-hand>`
+  // for one place and `app.querySelector` took the card's, so a pick in the modal landed on whoever the CARD showed;
+  // `handSelFor` existed only to disambiguate them. ⛑ Erik 2026-09-29 merged the person-picker and its three verbs into
+  // one job list, where every row carries its own control — so the claim now is that there is nothing to disambiguate.
+  check("§178: ⛔ THERE IS ONE CONTROL PER JOB, so no two selects for one place can disagree about who was picked",
+    !/data-hold-hand=/.test(app178) && !/handSelFor/.test(app178)
+    && /data-job-put="\$\{esc\(h\.id\)\}" data-kind=/.test(app178));
   // ⛔ the card offered company + delegates; the modal offered everyone known, here and not hostile (SPEC_hold_costs §5). One rule feeds both.
   check("§178: ⛔ the card and the modal offer the SAME people — one askable() rule (company, delegates, and anyone canBeAskedToWork), the steward excluded on the card",
     /const askable = \(\) => \[\.\.\.new Set\(\[\.\.\.company\.map\(m => m\.npcId\), \.\.\.delegates, \.\.\.Object\.keys\(character\.npcRegistry \|\| \{\}\)\.filter\(id => canBeAskedToWork\(character\.npcRegistry\[id\]\)\)\]\)\]\.filter\(Boolean\);/.test(app178)
@@ -2394,9 +2397,13 @@ console.log("\n── §179 · labelled rows and chips on the holding card; Hugi
 {
   const app179 = rd("app.js").replace(/^\s*\/\/.*$/gm, "");
   const css179 = rd("style.css");
-  check("§179: ⛔ the card's controls are two labelled rows — a craft to put to it, and the people — and the hands select shares its row with its buttons (what handSelFor reads)",
-    /<div class="hold-controls">/.test(app179) && /<div class="hold-ctl"><span class="hold-ctl-label">Put a craft to it<\/span><select data-hold-craft=/.test(app179)
-    && /<div class="hold-ctl"><span class="hold-ctl-label">People<\/span><select data-hold-hand="\$\{esc\(h\.id\)\}">[^\n]*<button class="opt" data-hold-crew=/.test(app179)
+  // ⛑ §179's CLAIM IS THAT CONTROLS ARE LABELLED ROWS, NOT A DRIFT OF LOOSE BUTTONS — and that survives. The craft row
+  // is unchanged; the PEOPLE row became the job list Erik asked for, which is the strong form of the same idea: one row
+  // per job, each labelled, each with its own control.
+  check("§179: ⛔ the controls are labelled rows, never a drift of loose buttons — a craft to put to it, and one row per job",
+    /<div class="hold-controls">/.test(app179)
+    && /<div class="hold-ctl"><span class="hold-ctl-label">Put a craft to it<\/span><select data-hold-craft=/.test(app179)
+    && /<div class="hw-row"><span class="hw-kind">/.test(app179)
     && !/<div class="opt-row" style="margin-top:4px;gap:6px;flex-wrap:wrap">/.test(app179));
   // ⛑ SNG-651 §2.2 MOVED THE HOME, NOT THE CLAIM. The compact "has: chip chip chip" sentence lived on the list
   // card, and the card now only reads; what the hold has is rendered ONCE, on the Build tab, as one row per
@@ -7152,7 +7159,10 @@ console.log("\n── §74 · a hold grows — the keeper's ceiling, a craft app
   const gm74 = rd("engine/gm.js"), app74 = rd("app.js");
   check("§74: …the GM has `improve` / `crew` / `garrison` and the app applies them; the tab has *Apply a craft* / *Add hands* / *Post a guard* and says how the hold grows",
     /claim\|steward\|release\|transfer\|sell\|improve\|crew\|garrison/.test(gm74) && /kind === "improve"/.test(app74) && /kind === "crew"/.test(app74) && /kind === "garrison"/.test(app74)
-    && /data-hold-improve=/.test(app74) && /data-hold-crew=/.test(app74) && /data-hold-guard=/.test(app74) && /grows: /.test(app74) && /improveHolding\(character, id, sel\.value/.test(app74));
+    // ⛑ THE GM'S OPS ARE UNCHANGED; THE TAB'S ACTS MOVED INTO THE ONE JOB LIST (Erik 2026-09-29). `crew` and `garrison`
+    // are rows in it — `_hand` and `_watch` — routed to the same `setCrew`/`setGarrison` the ops call, which is the claim:
+    // the GM can do it and so can the player, through one implementation.
+    && /data-hold-improve=/.test(app74) && /kind === "_hand"/.test(app74) && /kind === "_watch"/.test(app74) && /grows: /.test(app74) && /improveHolding\(character, id, sel\.value/.test(app74));
   check("§74: …the body and the index say so", /growHolding/.test(rd("docs/HOW_IT_WORKS.md")) && /~~\*\*Q18\*\*~~/.test(rd("docs/RULINGS.md")));
 }
 /* ═════ §75 — A HOLD CARRIES FEATURES: what a post becomes; and a re-claim no longer renames it (Erik, 2026-09-05) ═════ */
@@ -26809,10 +26819,13 @@ console.log("\n── §345 · the card, the verb, and the second reader ──"
   const A345 = rd("app.js");
   const codeOnly345 = (s) => String(s || "").split(NEWLINE_RE).filter(l => !/^\s*(\/\/|\*|\/\*)/.test(l)).join("\n");
   check("§345: ⛔ AND THE CARD THAT NAMES THE PROBLEM CARRIES THE VERB FOR IT — a card reading \"unkept · nobody — it will not climb\" that offers three people-verbs and not the one he needed is worse than a card that says nothing. ⛑ It reads the SAME select the other verbs on that row read, so there is one selection and one rule, and the label says which act it is when a keeper is already in place",
-    /data-hold-keeper-here=/.test(A345)
-    && /Make keeper instead/.test(A345) && /an unkept hold cannot climb/.test(A345)
-    && /data-hold-hand="\$\{id\}"/.test(A345)
-    && /appointKeeper\(character, id, to,/.test(codeOnly345(A345)));
+    // ⛑ THE CLAIM SURVIVES ITS BUTTON. CCODE-470's defect was that a card naming "unkept · nobody — it will not climb"
+    // had no way to appoint one. Erik's 09-29 merge made the verb the FIRST ROW of the job list — "Keeper · runs the
+    // place — a hold climbs only under one" — with the same `askable()` people and the same `appointKeeper` behind it.
+    /_keeper/.test(A345) && /runs the place/.test(A345)
+    && /it cannot climb unkept/.test(A345)
+    && /data-job-put=/.test(A345)
+    && /appointKeeper\(character, holdId, who,/.test(codeOnly345(A345)));
 
   check("§345: ⛔ AN OFFER ABOUT A HOLD YOU DO NOT OWN IS NOT SHOWN — the Fell Pell is Silas's, and that offer was written onto Loki's save and Brynjar's, who holds nothing at all. `queueFeatureOffers` iterates `character.holdings`, so it cannot have produced them there: the array crossed between characters (the CCODE-427 class — swapping `character` is not sealing). ⛑ Filtered at the READ door, because that is true whatever the route in was, and scrubbed by the writer that owns the array",
     /const ownHold = new Set\(\(character\.holdings \|\| \[\]\)\.map/.test(A345)
@@ -33411,6 +33424,90 @@ console.log("\n── §394 · where a moving hold may sail ──");
       const near = src.slice(Math.max(0, i - 4000), i);
       return /const everywhere = \{ \.\.\.\(CONTENT\.locations \|\| \{\}\), \.\.\.\(character\.generated\?\.location \|\| \{\}\) \}/.test(near)
         && /isTransit/.test(near) && /optgroup/.test(near);
+    })());
+}
+
+/* ══════════ §395 · THE HOLD SHEET STAYS OPEN, AND EVERY JOB IS ONE LIST ══════════ */
+// ⛔ ERIK, IN PLAY 2026-09-29, two things at once: *"whenever I click things in the holding manage screen it kicks me
+// back out to the screen behind it"*, and *"we can choose a name and have them work the holding, or guard it… then we
+// also have the jobs list below. These should probably be one and the same. In addition, the expansion work should be
+// on the list too."*
+//
+// ⛑ THE FIRST WAS ONE MISSING ARGUMENT. `renderHoldingsTab(manageId = null, tab = null)` takes the OPEN SHEET as its
+// first parameter, and `wireHoldingOffers`'s `again()` called it bare — so every button inside the sheet re-rendered
+// the tab with the sheet shut. ⚠️ The comment directly above it claimed the opposite in as many words: *"IT RE-RENDERS
+// WHICHEVER SURFACE IS SHOWING, so answering from either place lands in the same state rather than bouncing the player
+// to the other screen."* A comment describing a mechanism that was not what happened, for as long as the sheet existed.
+//
+// ⛑ THE SECOND WAS REAL DUPLICATION, AND THE ENGINE ALREADY AGREED WITH HIM: `workMods().watch` folds everyone at
+// Guarding or Patrolling into the SAME watch the garrison feeds, so "post a guard" and the Guarding job were one thing
+// wearing two controls. Nothing mechanical moved — each row writes where it always wrote.
+console.log("\n── §395 · the hold sheet stays open, and every job is one list ──");
+{
+  const src395 = rd("app.js");
+  const code395 = src395.split(String.fromCharCode(10)).filter(l => !/^\s*(\/\/|\*|\/\*)/.test(l)).join(String.fromCharCode(10));
+
+  /* ---- 1 · ⛔ THE SHEET SURVIVES A CLICK ---- */
+  check("§395: ⛔ A BUTTON INSIDE THE HOLD SHEET DOES NOT CLOSE IT — `again()` carries the open sheet and the tab, which it never did",
+    /const again = \(\) => \(document\.getElementById\("tab-holdings"\)\?\.classList\.contains\("on"\)\s*\n?\s*\? renderHoldingsTab\(holdManaging, holdTab\)/.test(code395)
+    && /function renderHoldingsTab\(manageId = null, tab = null\) \{\s*\n\s*holdManaging = manageId \|\| null;/.test(code395));
+  // ⛑ AND THE CLOSES THAT SHOULD CLOSE STILL DO — the ✕, the backdrop, and arriving from another screen.
+  check("§395: ⛑ …and the ways OUT still close it — the ✕, the backdrop, and coming in from the character screen",
+    (() => {
+      const closers = [...code395.matchAll(/renderHoldingsTab\(null\)/g)].length;
+      return closers >= 2 && /hold-modal-close.*renderHoldingsTab\(null\)/s.test(code395);
+    })());
+
+  /* ---- 2 · ⛔ ONE LIST, AND EVERY JOB IS IN IT ---- */
+  check("§395: ⛔ THE KEEPER, THE HANDS AND THE WATCH ARE ROWS IN THE JOB LIST — not a person-picker with three verbs above it",
+    (() => {
+      // the three roles exist as rows with a door each…
+      const rows = /_keeper/.test(code395) && /_hand/.test(code395) && /_watch/.test(code395)
+        && /data-job-put/.test(code395) && /data-job-drop/.test(code395);
+      // …and the old picker and its three verbs are gone
+      const gone = !/data-hold-crew=/.test(code395) && !/data-hold-guard=/.test(code395)
+        && !/data-hold-keeper-here=/.test(code395) && !/data-hold-hand=/.test(code395);
+      return rows && gone;
+    })());
+  check("§395: ⛑ …and the expansion work is a row on the same list, which Erik asked for by name",
+    /data-clear-start=/.test(code395) && code395.indexOf("data-clear-start=") > code395.indexOf("const roleRows"));
+  // ⛔ AND EVERY ROW WRITES WHERE IT ALWAYS WROTE. This is a SURFACE change; if a kind ever stopped routing to its own
+  // engine call it would be a rules change wearing a layout change's clothes.
+  check("§395: ⛔ …and each row routes to the function it always routed to — a surface change, never a rules change",
+    (() => {
+      const i = code395.indexOf("const jobPut = (holdId, kind, who)");
+      if (i < 0) return false;
+      const body = code395.slice(i, i + 1600);
+      return /kind === "_keeper"[\s\S]{0,200}appointKeeper\(/.test(body)
+        && /kind === "_hand"[\s\S]{0,200}setCrew\(/.test(body)
+        && /kind === "_watch"[\s\S]{0,200}setGarrison\(/.test(body)
+        && /assignWork\(character, holdId, kind, who/.test(body);
+    })());
+  check("§395: ⛑ …and taking somebody off routes the same way, so a row's two directions cannot drift apart",
+    (() => {
+      const i = code395.indexOf("const jobDrop = (holdId, kind, who)");
+      if (i < 0) return false;
+      const body = code395.slice(i, i + 1200);
+      return /_keeper[\s\S]{0,120}delete h\.steward/.test(body) && /setCrew\(/.test(body)
+        && /setGarrison\(/.test(body) && /unassignWork\(/.test(body);
+    })());
+
+  /* ---- 3 · ⚠️ AND THE MIGRATION LOST NOTHING ---- */
+  // ⛔ NINE OF ELEVEN REDS LAST TIME I REPLACED A CARD BODY WERE LOSSES, NOT MOVED CLAIMS. So the lines that only the
+  // old surface carried are named here one by one, and a future rewrite has to keep carrying them.
+  check("§395: ⚠️ …and nothing the old surface alone carried was lost — swept and named, because a diff only shows what you wrote",
+    (() => {
+      const kept = [
+        "at work here:",                       // people away on an errand
+        "who lives here:",                     // the residents line
+        "grows:",                              // how it climbs, and that it does not unkept
+        "off the watch:",                      // a guard out on a job
+        "Stand them all down",                 // the BULK act the per-person chips cannot do
+        "Nobody here is free to be put to work", // the empty state, with which rule excluded them
+        "a hand's wage a pass",                // what standing work costs
+        "good days a pass",                    // each kind's own readout
+      ];
+      return kept.every(s => src395.includes(s));
     })());
 }
 

@@ -16621,8 +16621,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790804419708,
-  "rev": 1137,
+  "updatedAt": 1790804570983,
+  "rev": 1139,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -19090,7 +19090,7 @@
   "nameRepairVersion": 1,
   "bondLogFrom": null,
   "purse": {
-    "crystal": 37,
+    "crystal": 33,
     "coin": 0,
     "paper": 0,
     "marks": 0,
@@ -19190,7 +19190,6 @@
       "store": {
         "raw_material": 0
       },
-      "arrears": 4,
       "lastFeatureOfferCount": 2220,
       "image": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/technomage%20tower%20floating%20walking%20machine%20legs%20magic%2C%20The%20Standing%20Annex%3A%20a%20working%20enterprise%2C%20thriving%2C%20busy%20and%20well-found%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=58509&nologo=true",
       "improvements": [
@@ -19286,19 +19285,14 @@
           "policy": "keepUpTo",
           "keep": 2
         }
-      }
+      },
+      "notFeature": [
+        "shrine"
+      ]
     }
   ],
   "_lastProjectDay": 10,
-  "featureOffers": [
-    {
-      "holdingId": "the_standing_annex",
-      "holdingName": "The Standing Annex",
-      "kind": "shrine",
-      "why": "the record reads: “a shrine torn down”",
-      "from": "its own record"
-    }
-  ],
+  "featureOffers": [],
   "_debtReceipts": [],
   "skillUses": {
     "plan": 20,

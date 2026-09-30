@@ -34042,6 +34042,79 @@ console.log("\n── §400 · the Build tab says its spots once ──");
       return d > 0 && u > 0 && d < u; })());
 }
 
+/* ══════════ §401 · THE PEOPLES SIT BESIDE THE WHEEL ══════════ */
+// ⛔ ERIK (item 3): the *"Learn The …"* list pops up inside the abilities panel. ⛑ AEVI: *"Make it a sidebar on the
+// skill wheel: peoples grouped by pole, counts, click to turn the wheel there; usable for browsing with no points (learn
+// disabled, with why). The abilities panel keeps one line."*
+//
+// ⚠️ MEASURED BEFORE BUILDING, AND HER GROUPING DOES NOT GROUP. There are 24 stations and **24 poles** — one each — so
+// "peoples grouped by pole" yields 24 groups of one, which is the flat list it was meant to replace. Two things in the
+// content really do group: the wheel's own twelve AXES (`axisPoles`: dark_light, death_life, …), each pairing two
+// OPPOSED poles, which is the circle's geometry; and fourteen domains. The sidebar groups by AXIS, and the reply says
+// so, so she can move it to domains with one line.
+console.log("\n── §401 · the peoples beside the wheel ──");
+{
+  const A401 = rd("app.js");
+  const CSS401 = rd("style.css");
+  const { loadContentHeadless: lch401 } = await import("./headless_content.mjs");
+  const C401 = await lch401();
+  const idx401 = C401.traditionIndex;
+
+  /* ---- 1 · ⚠️ THE MEASUREMENT THAT CHOSE THE GROUPING ---- */
+  // ⛔ ASKED OF THE CONTENT, not of a number I typed: if Aevi ever authors a second people onto a pole, this reddens
+  // and the grouping is worth revisiting — which is exactly when someone should look at it again.
+  const poles401 = new Set((idx401.stations || []).map(s => s.pole).filter(Boolean));
+  check("§401: ⚠️ A POLE IS ONE PEOPLE, so grouping by pole would not group — which is why the sidebar groups by AXIS",
+    poles401.size === (idx401.stations || []).length && Object.keys(idx401.axisPoles || {}).length * 2 === (idx401.stations || []).length,
+    `${(idx401.stations || []).length} station(s), ${poles401.size} pole(s), ${Object.keys(idx401.axisPoles || {}).length} axes`);
+
+  /* ---- 2 ⛔ THE SIDEBAR IS ON THE WHEEL, AND IT IS THE WHOLE WORLD ---- */
+  check("§401: ⛔ THE PEOPLES ARE A SIDEBAR ON THE WHEEL — every station, paired by axis",
+    /<aside class="wheel-peoples"/.test(A401)
+    && /Object\.entries\(axes3\)/.test(A401)
+    && /posOf3\.get\(ends\.neg\), posOf3\.get\(ends\.pos\)/.test(A401));
+  // ⛑ THE COUNTS COME FROM THE WHEEL'S OWN MODEL, so the sidebar and the nodes cannot disagree about what is
+  // reachable — `nd.reachable` IS `canLearnAbility`, the one gate SNG-218 §1 made authoritative.
+  check("§401: ⛑ …and its counts are read from the wheel's own model, so the list and the nodes cannot disagree",
+    /for \(const nd of \(m\.nodes \|\| \[\]\)\)/.test(A401)
+    && /if \(nd\.reachable\) cur\.can\+\+; if \(nd\.owned\) cur\.owned\+\+/.test(A401));
+  check("§401: ⛔ …and tapping one HOLDS it, through the same set the wheel's own chips use",
+    /data-wheel-people="\$\{esc\(s\.traditionId\)\}"/.test(A401)
+    && /wheelSelTrads\.has\(tid\)\) wheelSelTrads\.delete\(tid\); else wheelSelTrads\.add\(tid\)/.test(A401));
+
+  /* ---- 3 · ⛔ USABLE WITH NO POINTS, AND IT SAYS WHY ---- */
+  // ⛔ A SURFACE THAT LOOKS BROKEN WHEN YOU HAVE NOTHING TO SPEND is the thing this item exists to stop.
+  check("§401: ⛔ IT BROWSES WITH NO POINTS, and says why rather than looking broken",
+    /wp-nopts/.test(A401) && /No points to spend — browse freely/.test(A401)
+    // ⚠️ THIS CLAUSE PINNED THE TYPOGRAPHY OF A TERNARY — it wanted the points branch to open with the count, and
+    // the branch opens with its wrapper div first. The claim is that BOTH branches exist and each says its own thing.
+    && /wp-pts">\$\{character\.skillPoints\} point/.test(A401)
+    && /\(character\.skillPoints \|\| 0\) > 0/.test(A401));
+  check("§401: ⛑ …and a people you cannot take is struck through with the reason on it",
+    /wheel-people\.shut \.wp-name \{[^}]*text-decoration: line-through/.test(CSS401)
+    && /your antipode: closed to you/.test(A401));
+
+  /* ---- 4 · ⛑ THE ABILITIES PANEL KEEPS ONE LINE ---- */
+  check("§401: ⛑ THE ABILITIES PANEL KEEPS ONE LINE — the points, and the way to the wheel",
+    /sidebar-wheel-line/.test(A401) && /id="sidebar-wheel"/.test(A401)
+    && /skill point\$\{\(character\.skillPoints \|\| 0\) === 1 \? "" : "s"\}<\/strong> to spend/.test(A401));
+  // ⚠️ AND LEVEL UP SURVIVED. It is not the same act as browsing — it banks points and can widen capacity — so
+  // dropping it because a new door opened would be the migration failure this file has recorded three times.
+  check("§401: ⚠️ …and BOTH doors survive: browsing the wheel did not swallow Level Up",
+    /id="sidebar-levelup"/.test(A401) && /luBtn\.onclick = \(\) => renderLevelUp\(\)/.test(A401)
+    && /swBtn\.onclick = \(\) => \{ wheelLearnMode = /.test(A401));
+
+  /* ---- 5 · ⚠️ AND IT CANNOT PUSH THE WHEEL OFF THE SCREEN ---- */
+  // ⛔ THE SAME DEFECT AS ITEM 2, ONE PANEL OVER: a 24-row list beside a fixed-height circle either scrolls on its own
+  // or grows the page until the circle is gone.
+  check("§401: ⚠️ THE SIDEBAR SCROLLS ON ITS OWN, so 24 rows can never push the wheel off the screen",
+    /\.wheel-peoples \{[^}]*overflow-y: auto/.test(CSS401)
+    && /\.wheel-peoples \{[^}]*max-height: min\(/.test(CSS401)
+    && /\.wheel-split \{[^}]*display: flex/.test(CSS401));
+  check("§401: ⚠️ …and on a narrow screen it goes under the circle rather than squeezing it",
+    /@media \(max-width: 900px\) \{\s*\.wheel-split \{[^}]*flex-direction: column/.test(CSS401));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

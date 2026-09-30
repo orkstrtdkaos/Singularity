@@ -184,7 +184,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.15.12";
+const APP_VERSION = "2.16.0";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -14078,6 +14078,7 @@ function renderSkillWheel(selectedId = null, status = "") {
     </details>
 
     ${status ? `<div class="cs-block" style="border-left:3px solid var(--accent); margin-bottom:8px">${esc(status)}</div>` : ""}
+    <div class="wheel-split">
     <div class="graph-wrap" id="graph-wrap">
       <div class="graph-zoom-ctl">
         <button id="gz-in" title="Zoom in">＋</button>
@@ -14085,6 +14086,48 @@ function renderSkillWheel(selectedId = null, status = "") {
         <button id="gz-fit" title="Fit to view">⤢</button>
       </div>
       ${svg}
+    </div>
+    ${/* ✅ AEVI item 3 — THE PEOPLES, BESIDE THE WHEEL. ⛔ ERIK: the "Learn The …" list popped up inside the abilities
+          panel, which is a sidebar pretending to be a screen. It is the wheel's own sidebar now: click a people and the
+          wheel holds it.
+          ⚠️ GROUPED BY AXIS, NOT BY POLE, AND MEASURED BEFORE BUILDING: there are 24 stations and 24 poles — one each —
+          so "grouped by pole" gives 24 groups of one, which is the flat list it was meant to replace. An AXIS pairs two
+          opposed poles (dark ↔ light, death ↔ life), twelve of them, and it is the circle's own geometry. */""}
+    ${(() => {
+      const st3 = idx.stations || [];
+      if (!st3.length) return "";
+      const axes3 = idx.axisPoles || {};
+      const posOf3 = new Map(st3.map(s => [s.position, s]));
+      const rows3 = Object.entries(axes3)
+        .map(([axis, ends]) => ({ axis, ends: [posOf3.get(ends.neg), posOf3.get(ends.pos)].filter(Boolean) }))
+        .filter(r => r.ends.length);
+      // ⛑ THE COUNTS ARE ASKED OF THE SAME MODEL THE WHEEL DRAWS, so the sidebar and the nodes cannot disagree about
+      // what is reachable — `reachable` is `canLearnAbility`, the one gate SNG-218 §1 made authoritative.
+      const reach3 = new Map();
+      for (const nd of (m.nodes || [])) {
+        const tr = nd.tradition || nd.t;
+        if (!tr) continue;
+        const cur = reach3.get(tr) || { all: 0, can: 0, owned: 0 };
+        cur.all++; if (nd.reachable) cur.can++; if (nd.owned) cur.owned++;
+        reach3.set(tr, cur);
+      }
+      const label3 = (id) => { try { return traditionLabel(id); } catch { return id; } };
+      const cell3 = (s) => {
+        const c = reach3.get(s.traditionId) || { all: 0, can: 0, owned: 0 };
+        const mine = s.traditionId === primary || s.traditionId === secondary || s.traditionId === domains.tertiary;
+        const shut = s.traditionId === antiP || s.traditionId === antiS;
+        const why = shut ? " · your antipode: closed to you" : c.can ? `, ${c.can} you could take now` : ", none you can take right now";
+        return `<button class="wheel-people${mine ? " mine" : ""}${shut ? " shut" : ""}${wheelSelTrads.has(s.traditionId) ? " on" : ""}" data-wheel-people="${esc(s.traditionId)}" title="${esc(`${label3(s.traditionId)} — ${c.all} craft${c.all === 1 ? "" : "s"}${c.owned ? `, ${c.owned} yours` : ""}${why}. Tap to hold it on the wheel.`)}"><span class="wp-name">${esc(label3(s.traditionId))}</span><span class="wp-n">${c.owned ? `<b>${c.owned}</b>/` : ""}${c.all}${c.can ? ` · <em>${c.can}</em>` : ""}</span></button>`;
+      };
+      return `<aside class="wheel-peoples" aria-label="The peoples, by axis">
+        <div class="wp-head">The peoples <span class="hint">${st3.length} · by axis</span></div>
+        ${(character.skillPoints || 0) > 0
+          ? `<div class="hint wp-pts">${character.skillPoints} point${character.skillPoints === 1 ? "" : "s"} to spend — tap a node to take a craft.</div>`
+          : `<div class="hint wp-pts wp-nopts">${/* ⛔ USABLE WITH NO POINTS, and it says WHY instead of looking broken. */""}No points to spend — browse freely; learning waits on your next level.</div>`}
+        ${rows3.map(r => `<div class="wp-axis"><span class="wp-axis-n">${esc(String(r.axis).replace(/_/g, " ↔ "))}</span>${r.ends.map(cell3).join("")}</div>`).join("")}
+        <div class="hint wp-foot"><b>bold</b> is yours · <em>italic</em> is what you could take now · struck through is your antipode</div>
+      </aside>`;
+    })()}
     </div>
     ${details}
     <div style="display:flex; gap:8px; margin-top:12px">
@@ -14126,6 +14169,13 @@ function renderSkillWheel(selectedId = null, status = "") {
   // filter can be in is invisible and on.
   const fnClear = document.getElementById("fn-filter-clear"); if (fnClear) fnClear.onclick = () => { wheelFnFilter = new Set(); wheelSelTrads = new Set(); wheelSuggestFilter = false; wheelBuyableFilter = false; renderSkillWheel(selectedId, status); };
   wireSkillSelectionActions((id, msg) => renderSkillWheel(id, msg)); // SNG-097: learn/deepen in place
+  // ✅ AEVI item 3 — TAP A PEOPLE, THE WHEEL HOLDS IT. ⛑ Through `wheelSelTrads`, the SAME set the wheel's own chips
+  // use, so the sidebar and the circle are one selection and cannot disagree about what is held.
+  for (const b3 of document.querySelectorAll("[data-wheel-people]")) b3.onclick = () => {
+    const tid = b3.dataset.wheelPeople;
+    if (wheelSelTrads.has(tid)) wheelSelTrads.delete(tid); else wheelSelTrads.add(tid);
+    renderSkillWheel(selectedId, status);
+  };
   document.getElementById("wheel-back").onclick = () => { graphViews[graphSurface] = null; clearTimeout(_wheelLODTimer); _rerenderWheel = null; const rt = wheelReturnTo; wheelReturnTo = null; wheelLearnMode = false; wheelSuggestFilter = false; wheelBuyableFilter = false; if (rt === "levelup") renderLevelUp(); else renderCharacterScreen(); }; // SNG-218 §3: reset browse modes + cancel any pending LOD re-render
   document.getElementById("wheel-list").onclick = () => { graphViews[graphSurface] = null; renderSkillGraph(); };
 }
@@ -21816,7 +21866,19 @@ function renderPlay(turn, opts = {}) {
       ${SUBS.map(s => `<div style="text-transform:capitalize" title="${esc(SUB_DESC[s])} (${SUB_OF[s]})${subRaiseTip(s) ? ". " + esc(subRaiseTip(s)) : ""}">${s}</div><div>${(character.subAttributes?.[s] ?? 0) > 6 ? (character.subAttributes[s] + " ●●●●●●⁺") : "●".repeat(character.subAttributes?.[s] ?? 0) + "○".repeat(Math.max(0, 4 - (character.subAttributes?.[s] ?? 0)))}${character.pendingSubPoints > 0 && (character.subAttributes?.[s] ?? 0) < (CONTENT.rules.leveling?.subAttributeCap ?? 6) ? ` <button class="grow-btn" data-grow="${s}" title="${esc(subRaiseTip(s) || "Raise " + s)}">+</button>` : ""}</div>`).join("")}
     </div></div></details>
     <details class="sidebar-sec" data-sec="abilities"${sectionOpen("abilities", true) ? " open" : ""}><summary><span class="sec-title">Abilities</span>${character.skillPoints > 0 ? ` <span class="grow-badge">${character.skillPoints} skill pt</span>` : ""}</summary><div class="sec-body">
-      ${canLevelUp(character) ? `<button class="opt" id="sidebar-levelup" title="Spend your skill points" style="padding:2px 8px; margin-bottom:6px; display:block">⬆ Level Up</button>` : ""}
+      ${/* ✅ AEVI item 3 — ONE LINE, and the wheel is where you go. ⛔ ERIK: the "Learn The …" list popped up inside
+            this panel, which is a browse surface the width of a sidebar. The list lives on the wheel now, with the
+            peoples beside it; this keeps the count and the door.
+            ⚠️ BOTH VERBS SURVIVE. "Level Up" is not the same act as browsing — it banks points, sets attributes and can
+            widen capacity — so it stays wherever it can be done, and the wheel is added beside it rather than replacing
+            it. Dropping a door because a new one opened is how a migration loses what only the old surface held. */""}
+      <div class="hint sidebar-wheel-line" style="margin-bottom:6px">
+        ${(character.skillPoints || 0) > 0
+          ? `<strong>${character.skillPoints} skill point${(character.skillPoints || 0) === 1 ? "" : "s"}</strong> to spend`
+          : `No skill points yet`}
+        · <button class="link-btn" id="sidebar-wheel" title="The great circle: every people, every craft, and what you could take now">Open the wheel</button>
+        ${canLevelUp(character) ? ` · <button class="link-btn" id="sidebar-levelup" title="Spend your skill points — attributes, capacity and what banks">Level Up</button>` : ""}
+      </div>
       ${(() => {
         // SNG-047: group owned abilities by type/tradition (same taxonomy as the skill graph),
         // show each ability's FUNCTIONS as chips (what it DOES at a glance).
@@ -22876,6 +22938,10 @@ function renderPlay(turn, opts = {}) {
   const libBtn = document.getElementById("open-library"); if (libBtn) libBtn.onclick = () => renderLibrary();
   const charBtn = document.getElementById("open-character"); if (charBtn) charBtn.onclick = () => renderCharacterScreen();
   const luBtn = document.getElementById("sidebar-levelup"); if (luBtn) luBtn.onclick = () => renderLevelUp();
+  // ✅ AEVI item 3 — the wheel, from the abilities panel. ⛑ `wheelLearnMode` is the same flag the Level-Up screen's own
+  // "Browse crafts on the wheel" sets, so the two doors land on the same surface in the same mode.
+  const swBtn = document.getElementById("sidebar-wheel");
+  if (swBtn) swBtn.onclick = () => { wheelLearnMode = (character.skillPoints || 0) > 0; renderSkillWheel(); };
   const invBtn = document.getElementById("open-inventory"); if (invBtn) invBtn.onclick = () => renderInventoryScreen();
   const feedNav = document.getElementById("open-feed"); if (feedNav) feedNav.onclick = () => renderFeed();
   const postBtn = document.getElementById("post-to-feed"); if (postBtn) postBtn.onclick = () => postTurnToFeed(turn); // SNG-168 §2

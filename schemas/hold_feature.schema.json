@@ -92,6 +92,13 @@
    "type": "number",
    "description": "present on 6 of 44"
   },
+  "bandBeds": {
+   "type": "number",
+   "description": "beds a feature gives a BAND (engine bandBedsOf); barracks 40"
+  },
+  "_bandBedsWhy": {
+   "type": "string"
+  },
   "residents": {
    "type": [
     "number",

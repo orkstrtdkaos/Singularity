@@ -33016,13 +33016,36 @@ console.log("\n── §391 · holding a gate, and what the Lattice sends ──
       return looked > 0 && woke === 0;   // ⛑ and it LOOKED at somebody — a gate over an empty list passes for the wrong reason
     })());
   // ⛔ AND THE TWO THINGS IT MUST NOT BE DERIVED FROM, asserted as behaviour rather than as an absent line of source.
-  check("§391: ⛔ …because holding the GROUND is not holding the GATE — five powers hold a place with an arch and none of them holds the arch",
+  // ⚠️ RE-POINTED 2026-10-01 AT AEVI'S ASK (09-29 tail item 2). This clause asserted that NO authored power holds an
+  // arch — the corpus as it stood — so the moment she authors the Ender Host's seizure it reddens in HER lane. That is
+  // my own named failure mode and this is its third instance. ⛑ THE CLAIM IS THE RULE: holding the ground is not
+  // holding the gate, so a power that holds the ground and does NOT declare `gateHeld` holds no arch — and one that
+  // DOES declare it holds exactly the arch it declares, which is what her seizure will say.
+  check("§391: ⛔ …because holding the GROUND is not holding the GATE — a power on the ground without `gateHeld` holds no arch",
     (() => {
       const gateIds = new Set(G391.latticeGates(C391.locations));
-      const holdingOne = (C391.powers || []).filter(p => (p.holds || []).some(h => gateIds.has(h?.at)));
-      return holdingOne.length >= 3 && holdingOne.every(p => G391.gateHeldByPower(p) === null)
-        && holdingOne.every(p => G391.holderOfGate((p.holds || []).find(h => gateIds.has(h?.at)).at, { powers: C391.powers }) === null);
-    })(), `${(C391.powers || []).filter(p => (p.holds || []).some(h => G391.latticeGates(C391.locations).includes(h?.at))).length} power(s) hold a place with an arch`);
+      const onTheGround = (C391.powers || []).filter(p => (p.holds || []).some(h => gateIds.has(h?.at)));
+      // ⛑ the population must not be empty, or "none of them holds it" passes over nobody
+      if (onTheGround.length < 3) return false;
+      const withoutClaim = onTheGround.filter(p => G391.gateHeldByPower(p) === null);
+      if (!withoutClaim.length) return false;
+      // ⛔ standing on the ground buys nothing: neither the power's own claim nor the gate's holder
+      const groundIsNotTheGate = withoutClaim.every(p =>
+        G391.holderOfGate((p.holds || []).find(h => gateIds.has(h?.at)).at, { powers: withoutClaim }) === null);
+      // ✅ …and the OTHER half, so the rule is gated both ways: a power that DOES declare one holds that one, and only
+      // that one. This is the branch Aevi's seizure lands in, and it is live today or dark today — either is fine.
+      const claiming = onTheGround.filter(p => G391.gateHeldByPower(p) !== null);
+      const claimHolds = claiming.every(p => {
+        const claimed = G391.gateHeldByPower(p);
+        return gateIds.has(claimed) && G391.holderOfGate(claimed, { powers: C391.powers })?.id === p.id;
+      });
+      return groundIsNotTheGate && claimHolds;
+    })(), (() => {
+      const gateIds = new Set(G391.latticeGates(C391.locations));
+      const onTheGround = (C391.powers || []).filter(p => (p.holds || []).some(h => gateIds.has(h?.at)));
+      const claiming = onTheGround.filter(p => G391.gateHeldByPower(p) !== null);
+      return `${onTheGround.length} power(s) on an arch's ground, ${claiming.length} of them claiming the arch`;
+    })());
 
   /* ---- 2 · ⛑ THE EXEMPTION IS THE CORPUS, NOT A FLAG ---- */
   check("§391: ⛑ THE LATTICE LAID EXACTLY THE 26 §2c NAMES — the authored ones; a gate built in play is nobody's inheritance",
@@ -34305,6 +34328,104 @@ console.log("\n── §403 · two dials, and the door one could not reach ─�
   // LESS than a near one, which is the opposite of the sentence the shape was written to serve.
   check("§403: ⛔ …and that is the inversion — the SAME fee cost a far market less than a near one",
     far403.load.stall < near403.load.stall && far403.pass.stall === near403.pass.stall);
+}
+
+/* ══════════ §404 · THE WARDENS HAVE NAMES, AND A SUPERSEDED PLACE DRAWS NOWHERE ══════════ */
+// ⛑ AEVI'S 09-29 WORK ORDER, tail items 7 and 9.
+//
+// ⛔ ITEM 7 is the other half of something I reported rather than guessed. `exposeMarket`'s own note read: *"THE
+// WARDENS ARE NOT A RECORD. There is no warden power in content, so 'the wardens become an enemy' has nowhere to land
+// yet — and inventing one would be authoring."* She authored PEOPLE instead of a power, which is better: a
+// market-warden is somebody you can meet. Measured, it is a clean 1:1 — two corrupt powers, two wardens, each naming
+// the other.
+//
+// ⛔ ITEM 9 was two-thirds done, and the missing third is the tier Erik would be looking at. Measured on his save
+// across all three map tiers: the world tier and the region tier both filter `supersededBy` and the alias bridge;
+// the INTERIOR tier did not, so his second Stillwater's Trouble went on drawing as a child of its parent road after
+// the other two had stopped showing it. Three readers of one rule, two of them told.
+console.log("\n── §404 · the wardens, and a superseded place ──");
+{
+  const PW404 = await import("../engine/powers.js");
+  const WM404 = await import("../engine/worldmap.js");
+  const { loadContentHeadless: lch404 } = await import("./headless_content.mjs");
+  const C404 = await lch404();
+
+  /* ---- 1 · ⛔ A CORRUPT RECEIPT NAMES WHO HAS THE COIN ---- */
+  // ⚠️ THE POPULATION IS ASKED OF THE CONTENT, so a third warden Aevi authors is covered without touching this.
+  const wardens404 = Object.values(C404.npcs || {}).filter(n => n?.marketWardenOf);
+  const corrupt404 = (C404.powers || []).filter(p => p?.marketCorrupt === true || p?.corrupt === true);
+  check("§404: ⛑ THE WARDENS ARE AUTHORED, and every one of them names a power that really is corrupt",
+    wardens404.length > 0
+    && wardens404.every(n => corrupt404.some(p => p.id === n.marketWardenOf)),
+    `${wardens404.length} warden(s) over ${corrupt404.length} corrupt power(s)`);
+
+  const receipt404 = (at) => PW404.marketFeeAt(at, { content: C404, powers: C404.powers || [],
+    character: { name: "probe404", level: 10 }, rules: C404.rules, locations: C404.locations || {}, worth: 200 });
+  check("§404: ⛔ A CORRUPT MARKET'S RECEIPT NAMES ITS WARDENS — the coin never reaches the power, and this says who has it",
+    (() => {
+      const held = corrupt404.map(p => (p.holds || [])[0]?.at).filter(Boolean);
+      if (!held.length) return false;
+      return held.every(at => {
+        const r = receipt404(at);
+        return r && r.corrupt === true && r.toPower === false
+          && Array.isArray(r.wardens) && r.wardens.length > 0
+          && r.wardens.every(w => w.id && w.name);
+      });
+    })());
+  // ⛔ AND A FAIR MARKET NAMES NONE. On a fair market the coin IS the power's income (§2e.3), so listing a warden
+  // there would say the opposite of the rule.
+  check("§404: ⛔ …and a FAIR market names none — there the coin is the power's own income",
+    (() => {
+      const r = receipt404("millbrook");
+      return r && r.corrupt !== true && r.toPower === true && Array.isArray(r.wardens) && r.wardens.length === 0;
+    })());
+  // ⚠️ AND THE READER MUST NOT ANSWER FOR A POWER THAT HAS NO WARDEN — a reader that answers for everyone has stopped
+  // reading, which is the shape that cost a subsystem once already.
+  check("§404: ⚠️ …and a power nobody wardens reads back nothing, as does a missing id",
+    PW404.wardensOf("power_that_does_not_exist", { content: C404 }).length === 0
+    && PW404.wardensOf(null, { content: C404 }).length === 0
+    && PW404.wardensOf("power_undercount", { content: C404 }).length > 0);
+
+  /* ---- 2 · ⛔ A SUPERSEDED PLACE DRAWS ON NO TIER ---- */
+  // ⛑ DRIVEN ON A FIXTURE THAT CARRIES BOTH SIGNALS, because that is what reconcile leaves: the stamp AND the bridge.
+  const host404 = "host-404", stub404 = "gen-stub-404", twin404 = "canon-404";
+  const ch404 = {
+    name: "T404",
+    locationAliases: { [stub404]: twin404 },
+    generated: { location: {
+      [stub404]: { id: stub404, name: "The Twice-Named", regionId: "valley", parentId: host404,
+        supersededBy: twin404, _gen: { type: "location" } },
+      "gen-kept-404": { id: "gen-kept-404", name: "A Place That Stands", regionId: "valley", parentId: host404,
+        _gen: { type: "location" } },
+    } },
+  };
+  const content404 = { ...C404, locations: { ...(C404.locations || {}),
+    [host404]: { id: host404, name: "The Road", regionId: "valley" },
+    ...ch404.generated.location } };
+  const kids404 = (WM404.locationTierNodes(ch404, content404, host404)?.children || []).map(c => c.id);
+  check("§404: ⛔ THE INTERIOR TIER DOES NOT DRAW A SUPERSEDED PLACE — the tier the other two left behind",
+    !kids404.includes(stub404));
+  // ⚠️ …AND IT STILL DRAWS THE ONES THAT STAND. A filter that hides everything is not a fix, and "it does not draw"
+  // passes trivially over an empty list.
+  check("§404: ⚠️ …while a sibling that has NOT been superseded still draws",
+    kids404.includes("gen-kept-404"), `interior drew: ${kids404.join(", ") || "(nothing)"}`);
+  // ⛔ AND THE FILTER IS WHAT HIDES IT — strip the two signals and it comes back, or this gate is measuring something else.
+  check("§404: ⛔ …and it is the signals that hide it: strip them and it draws again",
+    (() => {
+      const bare = JSON.parse(JSON.stringify(ch404));
+      delete bare.locationAliases;
+      delete bare.generated.location[stub404].supersededBy;
+      const back = (WM404.locationTierNodes(bare, content404, host404)?.children || []).map(c => c.id);
+      return back.includes(stub404);
+    })());
+  // ⛑ AND ALL THREE TIERS AGREE, which is the actual claim — one rule, three readers.
+  check("§404: ⛑ …and all THREE tiers agree about it — world, region and interior",
+    (() => {
+      const ids = (o) => JSON.stringify(o?.locations ?? o?.children ?? o).match(/"id":"[^"]+"/g)?.map(s => s.slice(6, -1)) || [];
+      return !ids(WM404.worldTierNodes(content404, ch404)).includes(stub404)
+        && !ids(WM404.regionTierNodes(content404, ch404, "valley")).includes(stub404)
+        && !kids404.includes(stub404);
+    })());
 }
 
 /* ══════════ REPORT ══════════ */

@@ -16,6 +16,24 @@
   "next": [],
   "releases": [
     {
+      "version": "2.16.3",
+      "date": "2026-10-01",
+      "entries": [
+        {
+          "kind": "feature",
+          "title": "A crooked market names who is taking the coin",
+          "summary": "The receipt names the warden whose pocket a corrupt fee goes into.",
+          "detail": "Where a market is run crookedly the fee never reaches the power that holds it — it is the wardens’ take. Those wardens are people now, and the receipt names them, so there is somebody to go to about it."
+        },
+        {
+          "kind": "fix",
+          "title": "A place that was renamed stops appearing twice",
+          "summary": "A promoted place no longer draws beside the one that replaced it.",
+          "detail": "When a place you discovered is folded into the world’s own record, the old stub stops being drawn. The world and region maps already knew that; the view inside a place did not, so a second Stillwater’s Trouble went on showing there."
+        }
+      ]
+    },
+    {
       "version": "2.16.2",
       "date": "2026-10-01",
       "entries": [

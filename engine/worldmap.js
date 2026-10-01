@@ -152,10 +152,18 @@ export function locationTierNodes(character, CONTENT, locationId) {
     visited: !!sp.visited, note: sp.note || "", parentId: sp.parentId || locationId
   }));
   // places promoted OUT of here keep their containment (SNG-154) — draw them as interiors too
+  // ✅ …BUT NOT ONE THAT HAS BEEN SUPERSEDED (Aevi's 09-29 tail item 9). ⛔ A gen location PROMOTED into a canonical
+  // file keeps `supersededBy` plus an id bridge in `character.locationAliases`, and the canonical twin now owns the
+  // place. The world tier and the region tier were both taught that; THIS tier was not, so Silas's second Stillwater's
+  // Trouble went on drawing as a child under `gen-ashwarden-march-road` after the other two had stopped showing it.
+  // ⚠️ Three readers of one rule and only two of them told. The record stays in place so any lingering id still
+  // resolves — this hides the node, it does not delete the data, exactly as the other two tiers do it.
+  const aliasedL = character?.locationAliases || {};
   const promoted = [];
   for (const recs of Object.values(character?.generated || {})) {
     for (const r of Object.values(recs || {})) {
       if (r?.parentId === locationId && r?._gen?.type === "location") {
+        if (r.supersededBy || aliasedL[r.id]) continue;
         promoted.push({ id: r.id, name: r.name, kind: "location", visited: true, note: "", parentId: locationId, promoted: true });
       }
     }

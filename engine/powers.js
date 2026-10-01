@@ -983,6 +983,27 @@ function marketPlaceOf(locationId, locations) {
  *
  *  ⛑ `worth` is the purse's worth, for §2e's "the plainly rich pay more". Absent, nobody is read as rich: an unmeasured
  *  purse must not become a surcharge. PURE. */
+/** ✅ AEVI'S 09-29 TAIL ITEM 7 — WHO THE WARDENS ARE. A person whose `marketWardenOf` names this power is one of the
+ *  wardens whose take a corrupt fee is. ⛑ This is the half `exposeMarket` said had nowhere to land: *"there is no
+ *  warden power in content, so 'the wardens become an enemy' has nowhere to land yet — and inventing one would be
+ *  authoring."* She authored the people instead of a power, which is better: a market-warden is a person you can meet.
+ *  ⚠️ IT READS THE WHOLE NPC MAP, including anyone this character has met — so a warden the GM grows later is found
+ *  without a second door. PURE. → [{ id, name }], newest-authored last, and EMPTY is the ordinary answer. */
+export function wardensOf(powerId, { content = null, character = null } = {}) {
+  const id = String(powerId || "");
+  if (!id) return [];
+  const seen = new Map();
+  for (const bag of [content?.npcs, character?.npcRegistry]) {
+    for (const n of Object.values(bag || {})) {
+      if (!n || String(n.marketWardenOf || "") !== id) continue;
+      const key = String(n.id || n.name || "");
+      if (!key || seen.has(key)) continue;
+      seen.set(key, { id: n.id || key, name: n.name || n.id || key });
+    }
+  }
+  return [...seen.values()];
+}
+
 export function marketFeeAt(locationId, { content = null, powers = null, character = null, rules = null, worth = null, locations = null } = {}) {
   const at = marketPlaceOf(locationId, locations);
   const power = marketHolderAt(at, { content, powers, character, locations });
@@ -1036,6 +1057,10 @@ export function marketFeeAt(locationId, { content = null, powers = null, charact
     // Neither MOVES standing (§2d: "paying a fair power is ordinary and moves nothing") — what differs is who has it,
     // and that is the fact exposing them rests on.
     toPower: !corrupt,
+    // ✅ AEVI item 7 — AND WHO HAS IT, WHEN IT IS NOT THE POWER. A corrupt fee is the wardens' take, and the wardens
+    // are people now: anyone whose `marketWardenOf` names this power. ⚠️ NAMED ONLY ON A CORRUPT RECEIPT — on a fair
+    // market the coin IS the power's income, and listing a warden there would say the opposite of §2e.3.
+    wardens: corrupt ? wardensOf(power.id, { content, character }) : [],
     line: power.marketLine || null,
     why: why.join("; ") || null,
   };

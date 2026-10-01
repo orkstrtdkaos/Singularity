@@ -1966,8 +1966,10 @@
           "spread": []
         }
       ],
-      "image": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/A%20woman%20in%20grey%2C%20utterly%20still%2C%20with%20the%20bearing%20of%20someone%20who%20has%20never%20needed%20to%20raise%20her%20voice%20to%20be%20obeyed.%20Her%20certainty%20is%20absolute.%2C%20character%20portrait%2C%20named%20Vail%20Langley%2C%20woman%2C%20Agent%20of%20Seraphine%3B%20now%20a%20living%20example%20of%20authority%20willing%20to%20ask%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=26493&nologo=true",
-      "_portraitTier": "devoted"
+      "image": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Grey-clad%20woman%2C%20motionless%2C%20spine%20rigid%2C%20eyes%20steady%20and%20cold%2C%20the%20complete%20absence%20of%20doubt%20written%20across%20her%20face%2C%20soft%20light%20catching%20the%20sharp%20geometry%20of%20her%20shoulders.%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=17871&nologo=true",
+      "_portraitTier": "devoted",
+      "imageSeedKey": "radiant-agent-seraphine-s-hand#r1",
+      "imagePinned": true
     },
     "deni-cors": {
       "id": "deni-cors",
@@ -15683,6 +15685,26 @@
   "reconcileVersion": 94,
   "gallery": [
     {
+      "kind": "holding",
+      "prompt": "Floating tower on giant mechanical legs, glowing magical runes, busy figures moving through illuminated windows, well-stocked workshops visible inside, thriving activity and organized purpose througho",
+      "url": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Floating%20tower%20on%20giant%20mechanical%20legs%2C%20glowing%20magical%20runes%2C%20busy%20figures%20moving%20through%20illuminated%20windows%2C%20well-stocked%20workshops%20visible%20inside%2C%20thriving%20activity%20and%20organized%20purpose%20throughout.%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=58509&nologo=true",
+      "caption": "The Standing Annex",
+      "worldDay": 93,
+      "at": "2026-10-01T22:58:55.803Z",
+      "subjectKind": "holding",
+      "subjectId": "the_standing_annex"
+    },
+    {
+      "kind": "portrait",
+      "prompt": "Grey-clad woman, motionless, spine rigid, eyes steady and cold, the complete absence of doubt written across her face, soft light catching the sharp geometry of her shoulders.",
+      "url": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Grey-clad%20woman%2C%20motionless%2C%20spine%20rigid%2C%20eyes%20steady%20and%20cold%2C%20the%20complete%20absence%20of%20doubt%20written%20across%20her%20face%2C%20soft%20light%20catching%20the%20sharp%20geometry%20of%20her%20shoulders.%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=17871&nologo=true",
+      "caption": "Vail Langley — devoted",
+      "worldDay": 93,
+      "at": "2026-10-01T22:58:11.731Z",
+      "subjectKind": "npc",
+      "subjectId": "radiant-agent-seraphine-s-hand"
+    },
+    {
       "kind": "ability",
       "prompt": "Soul Stare",
       "url": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Soul%20Stare%3A%20Meet%20something's%20gaze%20and%20show%20it%20its%20own%20ending%20%E2%80%94%20it%20stops%20being%20able%20to%20read%20you%2C%20and%20what%20it%20was%20relying%20on%20to%20keep%20it%20whole%20stops%20working%20as%20well.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20ashwarden%20tradition%3A%20greys%2C%20bone-white%2C%20faded%20charcoal%2C%20a%20single%20quiet%20ember%3B%20ash%2C%20grave-stone%2C%20worn%20iron%2C%20chalk%3B%20low%2C%20level%2C%20the%20grey%20light%20of%20a%20still%20morning%3B%20the%20mercy%20of%20stopping%20%E2%80%94%20solemn%2C%20tender%2C%20kept%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20greys%2C%20bone-white%2C%20faded%20charcoal%2C%20a%20single%20quiet%20ember%2C%20low%2C%20level%2C%20the%20grey%20light%20of%20a%20still%20morning%2C%20the%20mercy%20of%20stopping?width=1024&height=512&seed=76630&nologo=true",
@@ -16854,8 +16876,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790895140184,
-  "rev": 1156,
+  "updatedAt": 1790895535803,
+  "rev": 1159,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -19964,7 +19986,9 @@
     "cp1y1mnjn": "Tall lean figure, dark wavy hair to chin in loose asymmetrical braids, mismatched expression between eyes and mouth, ritual bargain marks scarred across skin, worn traveler's pack and waterskin, mechanized limbs catching light, seasoned…",
     "cp1hb4je1": "Two figures—a collector in open stance and a verist in bare light—face each other at The Told Ground, the collector's hands empty and firm, the verist advancing with an uncovered truth; neither yields ground, the collector checking each…",
     "cpzoidx4": "Two figures — a saint in unsettled robes, numinous and half-dissolving at the edges, and a soul being driven backward — the saint's blow lands before the arm finishes moving, the soul reeling but still standing, both half-present as if…",
-    "cpstsb5c": "Two figures — a grey-throated singer with marked throat, and a figure spinning a sling — the stone's wasp-hum passes between them as the singer chases the sound while the figure holds ground at Wellspring."
+    "cpstsb5c": "Two figures — a grey-throated singer with marked throat, and a figure spinning a sling — the stone's wasp-hum passes between them as the singer chases the sound while the figure holds ground at Wellspring.",
+    "cpuy88mp": "Grey-clad woman, motionless, spine rigid, eyes steady and cold, the complete absence of doubt written across her face, soft light catching the sharp geometry of her shoulders.",
+    "cp9f7k5e": "Floating tower on giant mechanical legs, glowing magical runes, busy figures moving through illuminated windows, well-stocked workshops visible inside, thriving activity and organized purpose throughout."
   },
   "likeness": {
     "moment:solo:cap:vessin of the long bough": {
@@ -19993,6 +20017,13 @@
           "note": null,
           "seedKey": "the_standing_annex#r1",
           "at": 76
+        },
+        {
+          "url": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Floating%20tower%20on%20giant%20mechanical%20legs%2C%20glowing%20magical%20runes%2C%20busy%20figures%20moving%20through%20illuminated%20windows%2C%20well-stocked%20workshops%20visible%20inside%2C%20thriving%20activity%20and%20organized%20purpose%20throughout.%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=58509&nologo=true",
+          "prompt": "Floating tower on giant mechanical legs, glowing magical runes, busy figures moving through illuminated windows, well-stocked workshops visible inside, thriving activity and organized purpose throughout.",
+          "note": null,
+          "seedKey": "the_standing_annex#r1",
+          "at": 93
         }
       ]
     },
@@ -20171,6 +20202,17 @@
           "note": null,
           "seedKey": null,
           "at": 88
+        }
+      ]
+    },
+    "npc:radiant-agent-seraphine-s-hand": {
+      "keeps": [
+        {
+          "url": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/Grey-clad%20woman%2C%20motionless%2C%20spine%20rigid%2C%20eyes%20steady%20and%20cold%2C%20the%20complete%20absence%20of%20doubt%20written%20across%20her%20face%2C%20soft%20light%20catching%20the%20sharp%20geometry%20of%20her%20shoulders.%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=17871&nologo=true",
+          "prompt": "Grey-clad woman, motionless, spine rigid, eyes steady and cold, the complete absence of doubt written across her face, soft light catching the sharp geometry of her shoulders.",
+          "note": null,
+          "seedKey": "radiant-agent-seraphine-s-hand#r1",
+          "at": 93
         }
       ]
     }

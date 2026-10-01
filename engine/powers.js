@@ -927,16 +927,21 @@ export const MARKET_DIALS = {
   corruptFriend: 0.5,           // …and a friend of the wardens less
   corruptRichAt: 400,           // "plainly rich" in shards of purse worth
   bribeMult: 3,                 // §2e.2 — what it takes to open a hostile corrupt market
-  // ⛔ THE LEVER AEVI'S OWN SENTENCE NEEDS, AND IT IS OFF. She wrote that the card subtracts the fee "per pass, so a far
-  // market with a steep fee can lose to a near one" — and measured, a flat per-LOAD fee does the opposite: the Grand
-  // Lattice's 8 shards cost 0.15% of a far run's rate while Millbrook's 2 cost 3.13% of selling at home, because a far
-  // market means one big load rather than many small ones. Turn this on and the stall fee is charged every pass a run
-  // is running, which makes distance cost more rather than less. ⚠️ OFF by default: the arithmetic then is exactly the
-  // rule she specified, and the shape of the rule is hers and Erik's to change, not mine.
-  chargePerPass: false,
+  // ✅ ON 2026-10-01 — AEVI RULED IT (09-29 work order, tail item 5: *"`economy.markets.chargePerPass` ON (stall rent
+  // per pass a run stands)"*).
+  // ⛔ THIS IS THE LEVER HER OWN SENTENCE NEEDED. She wrote that the card subtracts the fee "per pass, so a far market
+  // with a steep fee can lose to a near one" — and measured, a flat per-LOAD fee does the OPPOSITE: the Grand Lattice's
+  // 8 shards cost 0.15% of a far run's rate while Millbrook's 2 cost 3.13% of selling at home, because a far market
+  // means one big load rather than many small ones. A rule whose stated purpose was contradicted by its own shape.
+  // ⛑ Charged every pass a run stands, distance now costs more rather than less, which is what she wrote.
+  chargePerPass: true,
   exposeStanding: 8,            // §2e.4 — what showing a power its wardens' take is worth to them
 };
-function marketDials(rules) {
+/** ⛔ THE MARKET DIALS, ASSEMBLED — the authored `economy.markets` over the defaults above. EXPORTED 2026-10-01
+ *  because caravan.js was reading `rules?.economy?.markets?.chargePerPass` directly, and `economy.markets` is
+ *  unauthored, so that reach saw `undefined` for ever and never met a default. Two bags for one dial; this is the bag.
+ *  PURE. */
+export function marketDials(rules) {
   const a = rules?.economy?.markets;
   return { ...MARKET_DIALS, ...(a && typeof a === "object" ? a : {}) };
 }

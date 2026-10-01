@@ -34,7 +34,7 @@ import { earnAt, saidEarned, incomeHere } from "./money.js";   // ⛔ CCODE-437:
 import { enterDeathState } from "./death.js";
 import { routeBetween, roadDistances, pathFrom } from "./journey.js";   // ⛑ SNG-654 B: ONE search from the hold answers every market at once — 38 regions for the cost of one route
 import { storeWorth } from "./holdings.js";
-import { marketFeeAt } from "./powers.js";   // ✅ SNG-663 §2d: the market held by a power charges for the right to sell   // §6b: the comparison prices the store through the one reader that prices it
+import { marketDials, marketFeeAt } from "./powers.js";   // ✅ SNG-663 §2d: the market held by a power charges for the right to sell   // §6b: the comparison prices the store through the one reader that prices it
 
 const num = (v, d = 0) => (Number.isFinite(Number(v)) ? Number(v) : d);
 const clamp01 = (n) => Math.max(0, Math.min(1, n));
@@ -756,11 +756,13 @@ export function routeValue(character, holding, {
     return { ok: false, why: `${market.powerName} will not let you sell at ${dest?.name || toId} — they think of you as ${market.band}`,
       made, basket, local, there, market };
   }
-  // ⚠️ PER DEPARTURE BY DEFAULT — a fee per LOAD, which is what §2d authors. `markets.chargePerPass` turns it into a fee
-  // per pass, which is what §2d's stated PURPOSE needs: measured, a flat per-load fee costs a far market 0.15% of its
-  // rate and a near one 3.13%, so "a far market with a steep fee can lose to a near one" is not what the authored shape
-  // does. Off, this line is the authored rule exactly.
-  const perPassFee = !!(rules?.economy?.markets?.chargePerPass);
+  // ✅ PER PASS SINCE 2026-10-01 (Aevi's tail item 5). A fee per LOAD is what §2d's shape authored; a fee per PASS is
+  // what §2d's stated PURPOSE needs — measured, a flat per-load fee costs a far market 0.15% of its rate and a near one
+  // 3.13%, so "a far market with a steep fee can lose to a near one" was the opposite of what the shape did.
+  // ⛔ AND IT ASKS THE DIALS, NOT THE SLICE. This line read `rules?.economy?.markets?.chargePerPass` directly, and
+  // `economy.markets` is unauthored — so it saw `undefined` for ever and the default in powers.js was never consulted.
+  // Flipping that default moved 0 of 34 measured rows until this line met it. One bag, one door.
+  const perPassFee = !!marketDials(rules).chargePerPass;
   const stall = market && market.fee > 0
     ? (perPassFee ? market.fee : Math.round((market.fee / Math.max(1, perDeparture)) * 10) / 10)
     : 0;

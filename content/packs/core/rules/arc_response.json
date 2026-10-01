@@ -191,8 +191,8 @@
   },
   "supplyLineRule": {
    "_what": "⛔ SNG-641 §6 — WHETHER A NEWLY MINTED POWER MAY BECOME A SUPPLY LINE. ⚠️ OFF, AND NOT BY OVERSIGHT: Aevi's work order calls this row RULED, and her own spec §7.4 lists it under \"RULINGS I NEED\" with the staged data's `_status` reading \"proposal — Erik §7.4\". Two of her documents disagree and the more specific two agree with each other, so the rule is BUILT and switched off. Broadening how much of the world feeds a Sovereign is Erik's call, not CCode's default.",
-   "on": false,
-   "_on": "set true once Erik answers SNG-641 §7.4. Nothing else has to change.",
+   "on": true,
+   "_on": "✅ ON 2026-10-01. Aevi's 09-29 work order, tail item 1: \"Flip supplyLineRule.on (my hungers patch is in since 54c914faf; Erik said yes)\". ⛑ MEASURED BEFORE FLIPPING, which is the condition she set in REPLY_aevi_ccode_535_544: 10 of the 29 authored powers become lines — the_hollow_king 5, lucifer 4, the_ninefold_ascendant 1 — and NO region ends with more than one line per Sovereign, so the cap holds. The 19 refused: 16 match no hunger, 4 already carry somebody's freight, 2 are capped. po/tools/measure_supply_lines.mjs reproduces it.",
    "requiresArcStageAtLeast": 1,
    "_requiresArcStageAtLeast": "⛑ R40b.2, mechanised: the lines grow FROM the arc, never the arc from the lines. A new line may only appear where that Sovereign's arc has already moved off its floor.",
    "capPerSovereignPerRegion": 1,

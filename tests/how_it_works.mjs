@@ -30122,13 +30122,23 @@ console.log("\n── §372 · something that was being carried is not being car
   // ⛔ AEVI'S OWN DOCUMENTS DISAGREE, and the specific ones win. Her work order row 3b says "(RULED)"; her spec
   // §7.4 lists "The generator rule in §6, at one line per Sovereign per region?" under "RULINGS I NEED", and the
   // staged `generatorRule._status` reads "proposal — Erik §7.4". So it is built and switched OFF.
-  check("§372: ⛔ THE SUPPLY-LINE RULE IS OFF, AND NOT BY OVERSIGHT — her spec §7.4 still lists it as a ruling she needs, whatever the work order's table says",
-    C372.rules.arcResponse?.supplyLineRule?.on === false
+  check("§372: ⛔ THE SUPPLY-LINE RULE IS ON, AND NOT AS A BLANKET — both guards authored, a power matching no hunger refused, and an arc on its floor grows no line",
+    // ✅ ON since 2026-10-01 (Aevi's 09-29 tail item 1). ⛔ THIS GATE ASSERTED IT WAS OFF, and said why: two of her
+    // documents disagreed and the more specific two agreed with each other, so I shipped the rule built and switched
+    // off. Her work order settles it, and her OWN condition for flipping was the measurement in
+    // po/tools/measure_supply_lines.mjs — 10 of 29 powers become lines and no region breaks the cap.
+    // ⚠️ What must still hold is that the rule is not a blanket: both guards authored, and a power that matches no
+    // hunger is still refused.
+    C372.rules.arcResponse?.supplyLineRule?.on === true
     // \u26a0\ufe0f BOTH NOTES, not `_on || _what`: `_on` is truthy, so the `||` never reached `_what`, which is where the
     // word lives. A `||` chain that stops at the first truthy value is the same shape as reading a default as a value.
     && /proposal/.test(String(C372.rules.arcResponse?.supplyLineRule?._on || "") + String(C372.rules.arcResponse?.supplyLineRule?._what || ""))
+    && SV372.mayBecomeALine({ id: "x", kind: "nothing_any_sovereign_wants", verbs: [], tags: [] },
+        { regionId: "valley", rule: C372.rules.arcResponse.supplyLineRule, stageOf: () => 4, npcs: C372.npcs }).ok === false
+    // ⛔ AND THE ARC GUARD IS THE WHOLE OF R40b.2 — the lines grow FROM the arc, never the arc from the lines. A
+    // Sovereign still on its floor may gain no line however hungry it is.
     && SV372.mayBecomeALine({ id: "x", kind: "guild", verbs: ["fence"] },
-        { regionId: "valley", rule: C372.rules.arcResponse.supplyLineRule, stageOf: () => 4, npcs: C372.npcs }).ok === false,
+        { regionId: "valley", rule: C372.rules.arcResponse.supplyLineRule, stageOf: () => 0, npcs: C372.npcs }).ok === false,
     "broadening how much of the world feeds a Sovereign is Erik's call, not a default I get to pick");
 
   // ⛔ THE KEY ORDER DEFECT, gated. Second time in this project a JSON declaration order became a priority rule.
@@ -32317,10 +32327,12 @@ console.log("\n── §387 · the market charges for the right to sell ──")
     && PW387.marketFeeAt("tier_seven_gate_yard", { content: C387, character: {}, rules: R387 }) === null,   // …and without `locations` it is exactly the place it was handed
     "the load arrives in the yard and walks in to sell");
   const far387 = CV387.routeValue(char387(), hold387(), { ...deps387, toId: "tier_seven_gate_yard", days: 40, danger: 2 });
-  check("§387: ⛑ …and the run charges it PER LOAD, once per departure, which is what §2d authors",
-    far387.ok && far387.market?.fee === 8 && far387.stall > 0
-    && Math.abs(far387.stall - Math.round((8 / far387.wait.perDeparture) * 10) / 10) < 1e-9,
-    `${far387.market?.fee} a load, one load every ${far387.wait?.perDeparture} passes → ${far387.stall} a pass`);
+  // ✅ AEVI RULED IT PER PASS on 2026-09-29 (tail item 5). This clause asserted the per-LOAD shape — the arithmetic
+  // §2d's words authored, whose own stated purpose it defeated. The claim is now the rule she ruled.
+  check("§387: ⛔ …and the run charges the stall EVERY PASS it stands, which is what §2d's purpose needs",
+    far387.ok && far387.market?.fee === 8 && far387.stall === far387.market.fee
+    && far387.wait.perDeparture > 1,
+    `${far387.market?.fee} a pass, standing ${far387.wait?.perDeparture} passes per departure`);
 
   /* ---- 5 · ⛔ REFUSING: YOU CAN'T SELL THERE, AND NOTHING IS LOST ---- */
   const shut387 = char387(-60);
@@ -32370,24 +32382,35 @@ console.log("\n── §387 · the market charges for the right to sell ──")
   // Lattice's 8 a load costs a far run a fraction of a percent of its rate while Millbrook's 2 a pass costs selling at
   // home several percent, because distance means ONE BIG LOAD rather than many small ones. The authored rule ships as
   // authored; `chargePerPass` is the lever that would make her sentence true, and it is OFF.
-  check("§387: ⛔ THE FLAT PER-LOAD FEE IS REGRESSIVE WITH DISTANCE — measured, it costs the NEAR market a far larger share of its rate than the FAR one, which is the opposite of §2d's stated purpose",
+  // ⛔ THE FINDING THAT EARNED THE RULING, KEPT. Under the per-LOAD shape the same fee cost a NEAR market several
+  // percent of its rate and a FAR one a fraction of one percent, because distance means one big load rather than many
+  // small ones — the opposite of "a far market with a steep fee can lose to a near one". It is measured here with the
+  // dial forced OFF, so the gate still demonstrates WHY the lever exists and reddens if the shape ever stops being
+  // regressive without the lever (which would mean something else moved).
+  check("§387: ⛔ THE OLD PER-LOAD SHAPE WAS REGRESSIVE WITH DISTANCE — the reason Aevi turned the lever on",
     (() => {
+      const off = CV387.routeValue(char387(), hold387(), { ...deps387, toId: "tier_seven_gate_yard", days: 40, danger: 2,
+        rules: { ...R387, economy: { ...R387.economy, markets: { chargePerPass: false } } } });
       const nearShare = 2 / (keeperRow.perPass + 2);
-      const farShare = far387.stall / (far387.perPass + far387.stall);
+      const farShare = off.stall / (off.perPass + off.stall);
       return nearShare > farShare * 5;
     })(), (() => {
+      const off = CV387.routeValue(char387(), hold387(), { ...deps387, toId: "tier_seven_gate_yard", days: 40, danger: 2,
+        rules: { ...R387, economy: { ...R387.economy, markets: { chargePerPass: false } } } });
       const nearShare = (2 / (keeperRow.perPass + 2) * 100).toFixed(2);
-      const farShare = (far387.stall / (far387.perPass + far387.stall) * 100).toFixed(2);
-      return `near ${nearShare}% of its rate vs far ${farShare}% — reported to the PO, not papered over`;
+      const farShare = (off.stall / (off.perPass + off.stall) * 100).toFixed(2);
+      return `per load: near ${nearShare}% of its rate vs far ${farShare}% — now corrected by the ruling`;
     })());
-  check("§387: ⛑ …and the lever that would make her sentence true is AUTHORED AND OFF, so the default costs exactly nothing",
+  // ✅ THE LEVER IS ON NOW, and the two shapes must still be demonstrably different — a lever whose positions agree is
+  // not a lever, and that is how I would fail to notice it had stopped working.
+  check("§387: ⛔ …and the lever is ON by default, with the two shapes still measurably apart",
     (() => {
-      const on = CV387.routeValue(char387(), hold387(), { ...deps387, toId: "tier_seven_gate_yard", days: 40, danger: 2,
-        rules: { ...R387, economy: { ...R387.economy, markets: { chargePerPass: true } } } });
-      return PW387.MARKET_DIALS.chargePerPass === false
-        && far387.stall < on.stall && on.stall === on.market.fee
-        && far387.stall === Math.round((far387.market.fee / far387.wait.perDeparture) * 10) / 10;
-    })(), `off ${far387.stall} a pass · on ${far387.market?.fee} a pass`);
+      const off = CV387.routeValue(char387(), hold387(), { ...deps387, toId: "tier_seven_gate_yard", days: 40, danger: 2,
+        rules: { ...R387, economy: { ...R387.economy, markets: { chargePerPass: false } } } });
+      return PW387.MARKET_DIALS.chargePerPass === true
+        && off.stall < far387.stall && far387.stall === far387.market.fee
+        && off.stall === Math.round((off.market.fee / off.wait.perDeparture) * 10) / 10;
+    })(), `per load ${far387.market?.fee}/${far387.wait?.perDeparture} a pass · per pass ${far387.stall}`);
 }
 
 /* ══════════ §388 · SNG-652 §6 / C1 — THE CARRIERS YOU CAN HIRE ══════════ */
@@ -34190,6 +34213,98 @@ console.log("\n── §402 · the rail, and the newest save first ──");
       // b (300), d (200), a (100), then the one with no stamp
       return sorted.map(r => r.id).join("") === "bdac";
     })());
+}
+
+/* ══════════ §403 · TWO DIALS AEVI RULED ON, AND THE DOOR ONE OF THEM COULD NOT REACH ══════════ */
+// ⛑ AEVI'S 09-29 WORK ORDER, tail items 1 and 5.
+//
+// ⛔ ITEM 1 — `supplyLineRule.on`. Shipped OFF because two of her documents disagreed and the more specific two agreed
+// with each other; her 09-29 order settles it. ⚠️ HER OWN CONDITION FOR FLIPPING was a measurement: *"report how many
+// minted powers become lines, per Sovereign and per region. If any region ends with more than one line per Sovereign,
+// the cap is broken."* Measured before flipping: 10 of 29 authored powers, hollow king 5 · lucifer 4 · ninefold 1, and
+// no region over the cap.
+//
+// ⛔ ITEM 5 — `chargePerPass`. This is the lever her own sentence needed: she wrote that the card subtracts the fee
+// "per pass, so a far market with a steep fee can lose to a near one", and a flat per-LOAD fee does the OPPOSITE,
+// because a far market means one big load rather than many small ones.
+//
+// ⚠️ AND FLIPPING IT CHANGED NOTHING, THREE TIMES OVER, which is why the dial is gated through its DOOR here:
+//   1. caravan.js read `rules?.economy?.markets?.chargePerPass` directly and `economy.markets` is unauthored — so that
+//      reach saw `undefined` for ever and the default was never consulted. Two bags for one dial.
+//   2. my probe asked six place ids I had picked by hand and found one market; the world holds FIFTEEN.
+//   3. `routeValue` takes `days` as a PARAMETER, and a fixture that passes none measures every run at 0 days, where
+//      `perDeparture` is 1 and fee/1 === fee makes the two rules identical by construction.
+console.log("\n── §403 · two dials, and the door one could not reach ──");
+{
+  const CV403 = await import("../engine/caravan.js");
+  const P403 = await import("../engine/powers.js");
+  const J403 = await import("../engine/journey.js");
+  const { loadContentHeadless: lch403 } = await import("./headless_content.mjs");
+  const C403 = await lch403();
+  const econ403 = C403.rules.economy;
+  const cfg403 = { ...econ403.holdStore, features: econ403.holdFeatures };
+
+  /* ---- 1 · ⛔ THE SUPPLY-LINE RULE IS ON, AND ITS CAP HOLDS ---- */
+  const rule403 = C403.rules?.arcResponse?.supplyLineRule || {};
+  check("§403: ⛑ THE SUPPLY-LINE RULE IS ON (Aevi's tail item 1), with both guards still authored",
+    rule403.on === true && Number(rule403.requiresArcStageAtLeast) >= 1 && Number(rule403.capPerSovereignPerRegion) >= 1);
+  // ⚠️ AND IT HAS A POPULATION THAT IS NEITHER EMPTY NOR EVERYTHING — a rule matching 0 powers says nothing, and one
+  // matching all 29 is not a rule either. Asked of the authored hungers against the authored powers.
+  const reach403 = (() => {
+    const h = rule403.hungers || {};
+    let n = 0;
+    for (const p of (C403.powers || [])) {
+      const kind = String(p?.kind || ""), tags = (p?.tags || []).map(String), verbs = (p?.verbs || []).map(String);
+      if (Object.values(h).some(x => (x.kinds || []).includes(kind) || (x.tags || []).some(tg => tags.includes(String(tg))) || (x.verbs || []).some(v => verbs.includes(String(v))))) n++;
+    }
+    return n;
+  })();
+  check("§403: ⚠️ …and the hungers reach SOME of the world, not none of it and not all of it",
+    reach403 > 0 && reach403 < (C403.powers || []).length,
+    `${reach403} of ${(C403.powers || []).length} authored powers match a hunger`);
+
+  /* ---- 2 · ⛔ THE STALL DIAL IS READ THROUGH THE DIALS, NOT AROUND THEM ---- */
+  check("§403: ⛔ THE STALL FEE IS CHARGED PER PASS, and the caravan asks the DIALS rather than the raw slice",
+    P403.marketDials(C403.rules).chargePerPass === true
+    && /const perPassFee = !!marketDials\(rules\)\.chargePerPass;/.test(rd("engine/caravan.js"))
+    // ⚠️ CODE ONLY. My own replacement COMMENT in caravan.js names the old reach verbatim, and a gate that reads
+    // its own prose is a gate I have written five times by accident.
+    && !/rules\?\.economy\?\.markets\?\.chargePerPass/.test(
+      rd("engine/caravan.js").split(NEWLINE_RE).filter(l => !/^\s*(\/\/|\*|\/\*)/.test(l)).join(String.fromCharCode(10))));
+  // ⛔ AND THE DEFAULT MUST SURVIVE AN UNAUTHORED BAG. `economy.markets` is null today, so a reader that reaches past
+  // the defaults sees `undefined` — which is exactly the bug: the dial was on and nothing felt it.
+  check("§403: ⛔ …and the dial still reads ON when `economy.markets` is unauthored, which it is",
+    C403.rules?.economy?.markets == null
+    && P403.marketDials({ economy: {} }).chargePerPass === true);
+
+  /* ---- 3 · ⛑ DRIVEN AT THE TIPPING POINT, WHICH IS DISTANCE ---- */
+  // ⛔ NEAR A MARKET THE TWO RULES AGREE EXACTLY (one departure a pass), so a test near a market proves nothing. The
+  // claim is about what distance does, and it is measured at both ends.
+  const yield403 = Object.keys(cfg403.features?.kinds || {}).filter(k => !k.startsWith("_")).find(k => cfg403.features.kinds[k]?.yields);
+  const stall403 = (from, on) => {
+    const ch = { name: "T403", level: 10, purse: { crystal: 9999, scrip: {} }, holdings: [{
+      id: "h403", name: "The Far Shed", kind: "post", condition: "thriving", locationId: from,
+      crew: ["a", "b"], garrison: [], store: { raw_material: 30 },
+      features: [{ kind: yield403, name: "a mine", count: 2, by: "you" }] }] };
+    const road = J403.roadRoute(from, "millbrook", C403.locations || {});
+    const rules = JSON.parse(JSON.stringify(C403.rules));
+    rules.economy.markets = { chargePerPass: on };
+    // ⚠️ `days` IS A PARAMETER. Omit it and every run measures 0 days, where the two rules are identical by construction.
+    return CV403.routeValue(ch, ch.holdings[0], { toId: "millbrook", days: road?.days ?? 0,
+      locations: C403.locations || {}, powers: C403.powers || [], rules, cfg: cfg403, economy: econ403 });
+  };
+  const near403 = { load: stall403("millbrook", false), pass: stall403("millbrook", true) };
+  const far403 = { load: stall403("archive_hollow", false), pass: stall403("archive_hollow", true) };
+  check("§403: ⛑ ON THE DOORSTEP the two rules agree exactly — one departure a pass, so there is nothing to divide",
+    near403.load.ok && near403.load.wait.perDeparture === 1 && near403.load.stall === near403.pass.stall);
+  check("§403: ⛔ FAR OFF, the per-LOAD fee had shrunk toward nothing and the rule now charges it every pass",
+    far403.load.ok && far403.load.wait.perDeparture > 4
+    && far403.pass.stall > far403.load.stall * 2
+    && far403.pass.stall === (far403.pass.market?.fee ?? -1));
+  // ⛔ THE INVERSION ITSELF, which is why the lever exists: under the authored shape the SAME fee cost a far market
+  // LESS than a near one, which is the opposite of the sentence the shape was written to serve.
+  check("§403: ⛔ …and that is the inversion — the SAME fee cost a far market less than a near one",
+    far403.load.stall < near403.load.stall && far403.pass.stall === near403.pass.stall);
 }
 
 /* ══════════ REPORT ══════════ */

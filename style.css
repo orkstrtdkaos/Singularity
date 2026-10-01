@@ -2192,8 +2192,24 @@ table.ob-matrix { border-collapse: collapse; width: 100%; min-width: 640px; font
 /* SNG-651 §2.3 · measured at 375px: the build-cost catalogue's items were `white-space:nowrap` and one of them
    was 422px inside a 309px sheet, so eight of eleven sat off the edge with nothing to scroll. A wrapping list,
    with each quantity glued to its unit in the markup, fits any width without splitting a price. */
-.hold-costs { display: flex; flex-wrap: wrap; gap: 1px 12px; }
-.hold-cost { white-space: normal; }
+/* ⛔ ERIK 2026-10-01: *"the Build page is a mess… the selections should be categorized and show the cost/benefit."*
+   The forty-cost wall `.hold-costs` styled is retired — its rules went with it, because a selector matching nothing is
+   the stylesheet's version of a handler bound to no button. What the picker says now is one kind at a time. */
+.hb-panel { border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; margin-top: 6px; width: 100%;
+  background: color-mix(in srgb, var(--panel) 70%, transparent); }
+.hb-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.hb-head strong { font-size: 14px; }
+.hb-cat { font-size: 10px; text-transform: uppercase; letter-spacing: .6px; color: var(--ink-dim); }
+.hb-what { margin: 4px 0 6px; color: var(--ink-mid); font-size: 12px; }
+.hb-does { margin: 0 0 8px; padding-left: 18px; font-size: 12px; }
+.hb-does li { margin: 1px 0; }
+/* ⚠️ THE THREE NUMBERS LAY OUT AS A WRAPPING LIST, each glued together inside itself — measured at 375px, where a
+   cost that cannot break mid-quantity is the difference between a readable row and one off the right edge. */
+.hb-cost { display: flex; flex-wrap: wrap; gap: 2px 14px; font-size: 12px; }
+.hb-cost > span { white-space: nowrap; }
+.hb-no { margin: 6px 0 0; font-size: 12px; color: var(--warn); }
+/* ⛔ AND SOMEBODY AT THE BUILDING, by name. Erik could not put anyone on the expansion; these are the hands that are. */
+.hw-hand-x { opacity: .7; }
 .hold-chip-up { background: none; border: 0; color: var(--accent2); cursor: pointer; font-size: 12px; line-height: 1; padding: 0 3px; }
 .hold-chip-up:hover { color: var(--accent); }
 

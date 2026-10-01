@@ -1645,6 +1645,50 @@ export function startClearing(character, holding, { budget = "open", cfg = null,
       : `Ground is being cleared. About ${q.passes} pass${q.passes === 1 ? "" : "es"} with ${q.atHands} hands at it.` };
 }
 
+/** ⛔ WHO IS ACTUALLY AT THE CLEARING — and there is exactly ONE of these now.
+ *
+ *  ⛑ ERIK, 2026-10-01: *"it says Cy is delegated, but no one is working the legs expansion?"* — and he was reading a
+ *  screen that counted `crew + garrison` while this tick counted `posted ∪ charged-with-growth`. Driven on his own
+ *  save: the legs advance 0% → 25% a pass with Cy on them, under a line reading **"nobody is at it"**. The work was
+ *  never stalled; the sentence about it was wrong, which is the worse of the two failures because it argues a player
+ *  out of a thing that works.
+ *
+ *  ⚠️ THREE WAYS SOMEBODY IS AT IT, and a person counts ONCE however many of them name them:
+ *    • **posted** — they live and work here (the crew and the watch), so the hold's hands are on its own growth;
+ *    • **put** — `clearing.hands[]`, somebody sent to this job by name. This did not exist, which is the other half of
+ *      what he asked for; it lives on the clearing record so stopping the work frees them with it;
+ *    • **delegated** — charged with this hold's GROWTH on the Work tab (Aevi item 8). One person holding two charges
+ *      for the one purpose is one hand, not two — a duplication bug must never read as a speed bonus. */
+export function clearingHands(character, holding) {
+  const seen = new Set();
+  const take = (list) => {
+    const out = [];
+    for (const raw of Array.isArray(list) ? list : []) {
+      const id = raw == null ? "" : String(raw.id ?? raw);
+      if (!id || seen.has(id)) continue;
+      seen.add(id); out.push(id);
+    }
+    return out;
+  };
+  const posted = take([...(Array.isArray(holding?.crew) ? holding.crew : []),
+    ...(Array.isArray(holding?.garrison) ? holding.garrison : [])]);
+  const put = take(holding?.clearing?.hands);
+  let delegated = [];
+  // ⛑ a save with no assignments at all must not throw a card over
+  try { delegated = take(chargedWith(character, holding?.id, "growth")); } catch { delegated = []; }
+  return { posted, put, delegated, ids: [...posted, ...put, ...delegated], n: seen.size };
+}
+
+/** ⛔ PUT SOMEBODY ON THE CLEARING, or take them off — the control Erik could not find, because it did not exist.
+ *  ⚠️ Refused when no clearing is under way: these hands live ON that record, so there is nothing to join. */
+export function setClearingHands(character, holding, ids) {
+  if (!holding?.clearing) return { ok: false, why: "no work is under way here to put them to" };
+  const clean = [...new Set((Array.isArray(ids) ? ids : []).map(x => String(x)).filter(Boolean))];
+  if (clean.length) holding.clearing.hands = clean;
+  else delete holding.clearing.hands;
+  return { ok: true, hands: clean, at: clearingHands(character, holding).n };
+}
+
 /** ⛔ A PASS OF THE WORK, weighted by the hands actually at it — §2.1's *"progress weighted by their hand at the clearing
  *  duty"*. ⛑ Nobody at it is no progress: that is what makes this WORK rather than a timer, and what keeps a rung from
  *  being bought. Returns a note when the spot lands. */
@@ -1652,20 +1696,10 @@ export function clearingTick(character, holding, { cfg = null, hands = null, day
   const c = holding?.clearing;
   if (!c) return null;
   const q = clearingQuote(holding, cfg);
-  // ✅ AEVI, item 8 — AND WHOEVER IS *CHARGED* WITH THIS HOLD'S GROWTH IS ON IT. Erik: *"It says the legs are being
-  // built but no one is at it? Cy, a maintenance bot, was delegated to work that."* His charge was a Jobs charge and the
-  // legs are the hold's growth job — two systems for one piece of work, so Cy worked one and the legs counted the other.
-  // ⛑ `chargedWith` reads the assignments that now know which hold and which purpose they are about, and they count as
-  // hands here. ⚠️ Nobody is counted twice: a charged person already on the crew or the watch is one hand, not two.
-  const posted = new Set([...(Array.isArray(holding.crew) ? holding.crew : []),
-    ...(Array.isArray(holding.garrison) ? holding.garrison : [])].map(String));
-  // ⚠️ ONE PERSON IS ONE HAND, however many charges name them. Erik's Cy holds TWO records for the same purpose (item
-  // 13, fixed at the write door and repaired by step 93) — counted naively that is two hands building the legs, which
-  // would turn a duplication bug into a speed bonus.
-  const delegated = [...new Map(chargedWith(character, holding?.id, "growth")
-    .filter(p => p?.id && !posted.has(String(p.id)))
-    .map(p => [String(p.id), p])).values()];
-  const at = hands != null ? Math.max(0, Number(hands) || 0) : posted.size + delegated.length;
+  // ✅ AEVI item 8 + ⛔ ERIK 2026-10-01 — WHO IS AT IT IS `clearingHands`, AND THE SCREEN ASKS THE SAME FUNCTION.
+  // This block used to compute the answer here; the card computed a different one four files away and told Erik
+  // "nobody is at it" while this line advanced the legs. When two callers compute one thing, there must be one of it.
+  const at = hands != null ? Math.max(0, Number(hands) || 0) : clearingHands(character, holding).n;
   if (at <= 0) return { stalled: true, note: null };
   const perPass = at / Math.max(1, Number(q.atHands) || 2) / Math.max(1, Number(c.passes) || 1);
   c.progress = Math.min(1, (Number(c.progress) || 0) + perPass);

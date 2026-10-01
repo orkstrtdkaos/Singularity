@@ -16,6 +16,36 @@
   "next": [],
   "releases": [
     {
+      "version": "2.16.10",
+      "date": "2026-10-01",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "The expansion said nobody was at it while somebody was",
+          "summary": "Work you had delegated was building your hold the whole time. The screen just would not say so.",
+          "detail": "If you charged someone with a hold's growth, they were already working its expansion — the engine counted them and the ground was being cleared. But the hold's card counted only the crew and the watch, so it said \"nobody is at it\" over work that was moving. Both now ask the same question, so the card and the world agree. And you can put somebody on the building by name, which there was no way to do before: a row on the job list, with a picker, and they stop being offered other work while they are on it."
+        },
+        {
+          "kind": "change",
+          "title": "Build & work is one tab",
+          "summary": "Who does what at a place now sits with what is being built there.",
+          "detail": "Building out a hold's legs is both a build and a job somebody has to do, and its progress was on one tab while the people who could do it were on another. They are together now, under Build & work. The People tab keeps who lives at the place and whose it is."
+        },
+        {
+          "kind": "change",
+          "title": "The Build page says what a thing costs and what it gives",
+          "summary": "Grouped by what it is for, with the price and the benefit on the one you are looking at.",
+          "detail": "The list of things to build was flat — every kind in one run, over a block of forty prices for all of them at once. It is grouped now, by what each thing is for: defence, watch, muster, production, craft, community, market, travel and meaning. Each choice carries its own price, and the panel beneath says what it would give you, what it costs to keep, and whether this place can take it at all."
+        },
+        {
+          "kind": "change",
+          "title": "Your estate reads in one place",
+          "summary": "The holdings summary left the Traits page; the Holdings board carries it.",
+          "detail": "The same facts were on two screens. The Holdings board now also says what a pass makes before anything is sold, and what is sitting unsold in your stores — the two things the Traits line alone used to carry."
+        }
+      ]
+    },
+    {
       "version": "2.16.9",
       "date": "2026-10-01",
       "entries": [

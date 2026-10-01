@@ -11258,13 +11258,22 @@ console.log("\n── §106 · a hold says what it costs, and every control does
   // items) and re-measuring said no — breaking BETWEEN costs cannot help a cost that is itself too wide.
   // ⛑ Nowrap where it matters: the quantity is glued to its unit in the MARKUP, so "3 raw material" never
   // splits, and everything else wraps.
-  check("§106: ⛔ …and the build-cost catalogue wraps rather than running off a phone — a 422px item in a 309px sheet",
-    // ⚠️ `.` STANDS FOR THE BACKSLASH ON PURPOSE. Writing `\\u00a0` here is a count a shell heredoc will
-    // change out from under the file, and in a regex the one-backslash form silently becomes the NBSP
-    // CHARACTER — which the source does not contain — so the gate reddens against correct code.
-    /class="hold-cost"/.test(app106) && /`\$\{n\}.u00a0\$\{g\.replace/.test(app106) && !/`\$\{n\} \$\{g\.replace/.test(app106)
-    && /\.hold-costs \{[^}]*flex-wrap: wrap/.test(rd("style.css")) && /\.hold-cost \{[^}]*white-space: normal/.test(rd("style.css"))
+  // ⛔ ERIK 2026-10-01: *"the Build page is a mess… the selections should be categorized and show the cost/benefit."*
+  // ⛑ THE FORTY-COST CATALOGUE THIS GATE MEASURED IS RETIRED — it printed every kind's price at once under a picker
+  // that said nothing about the one you had chosen. The RULE it was written for is not retired: a cost must wrap rather
+  // than run off a 375px phone, and a quantity must never split from its unit. That rule is the new panel's now.
+  // ⚠️ `.` STILL STANDS FOR THE BACKSLASH ON PURPOSE. Writing the two-backslash form here is a count a shell
+  // heredoc changes out from under the file, and the one-backslash form silently becomes the NBSP CHARACTER — which
+  // the source does not contain — so the gate would redden against correct code. This bit me again on 2026-10-01.
+  check("§106: ⛔ …and what a build costs wraps rather than running off a phone — a 422px item in a 309px sheet",
+    /class="hb-cost"/.test(app106) && /`\$\{c\.build\.days\}.u00a0days of work`|\$\{c\.build\.days\}.u00a0days/.test(app106)
+    && /\.hb-cost \{[^}]*flex-wrap: wrap/.test(rd("style.css"))
+    && /\.hb-cost > span \{[^}]*white-space: nowrap/.test(rd("style.css"))
     && !/<span style="white-space:nowrap">/.test(app106));
+  // ⛑ AND THE CLASS THE RETIRED WALL WORE IS GONE FROM BOTH FILES — a selector matching nothing is the stylesheet's
+  // version of a handler bound to no button, and this file has recorded that defect by name twice.
+  check("§106: ⛑ …and the retired catalogue took its own class with it, markup and stylesheet together",
+    !/class="hold-cost"/.test(app106) && !/\.hold-costs \{/.test(rd("style.css")) && !/\.hold-cost \{/.test(rd("style.css")));
   // ⛑ …and the two that left the card are read on the place page, so nothing Erik named is unreachable.
   check("§106: ⛑ …and the keeper and what it makes are read on the Overview tab, where their sentences live",
     /keeper: \$\{h\.steward \? esc\(nameOf\(h\.steward\)\) : "<em>nobody<\/em>"\} \u00b7 produces:/.test(app106) && /Per pass \$\{infoDot\("hold\.pass"\)\}/.test(app106));
@@ -14611,10 +14620,19 @@ console.log("\n── §193 · a name that cannot vanish, four sources with thei
     (C193.rules?.economy?.currencies || []).length === 5
     && /curDefs\.map\(curRow\)/.test(A193) && /purse-none/.test(A193)
     && /\.purse-none \.purse-cur, \.purse-none \.purse-n \{ opacity: \.45; \}/.test(CSS193));
-  check("§193: …and it shows what the estate is DOING — every holding's pass summed, with `net` as the headline because that is the field the purse receives",
-    /What your holdings are doing/.test(A193) && /x\.L\.perPass\?\.worth/.test(A193)
-    && /x\.L\.perPass\?\.net/.test(A193) && /caravansOf\(character\)\.filter\(c => c && !c\.arrivedDay\)/.test(A193)
+  // ⛔ ERIK 2026-10-01: *"the old holdings status is covered by the Holdings tab header info. the one on the traits
+  // page can be removed."* ⛑ THE CLAIM SURVIVES THE SURFACE. The estate summary is on the Holdings BOARD now — and it
+  // had to LEARN two of these facts first, because the board summed `sells + fees` and not the gross a pass makes.
+  // ⚠️ THE `worth`-NOT-`made` CLAUSE IS THE POINT OF THE CHECK AND MOVES WITH IT: reading `perPass.made` gets
+  // undefined and prints "makes 0 · sold 189", a number that is wrong by all of itself and reads entirely plausible.
+  check("§193: …and what the estate is DOING is on the Holdings board — summed from `worth`, never from a field that does not exist",
+    /made \+= Number\(L\?\.perPass\?\.worth\) \|\| 0;/.test(A193)
+    && /shelf \+= Number\(L\?\.store\?\.worth\) \|\| 0;/.test(A193)
+    && /\$\{made \? `makes \$\{Math\.round\(made\)\}/.test(A193)
+    && /unsold in their stores/.test(A193)
     && !/perPass\?\.made/.test(A193));
+  check("§193: ⛔ …and the Traits page no longer says it a second time — one fact, one surface",
+    !/What your holdings are doing/.test(A193) && !/purse-trade/.test(A193));
   check("§193: ⛔ the Holdings section shows each place's PICTURE AND NAME, and a tile is a door to that place's manage screen",
     /class="hold-shelf"/.test(A193) && /class="hold-tile" data-hold-open=/.test(A193)
     && /ensureHoldingImage\(h\) \|\| h\.image/.test(A193)
@@ -31133,9 +31151,30 @@ console.log("\n── §380 · one reading, three surfaces ──");
     && /\.gs-stat\.asks \{ border-color: var\(--gold-line\)/.test(cssB)
     && /class="gs-stat\$\{cls \? " " \+ cls : ""\}"/.test(appB));
 
-  check("§380: ⛔ every review row carries the VERB that answers it, and it opens the tab where that verb lives (Erik's own rule, kept)",
-    /class="gs-go" data-hold-open="\$\{esc\(h\.id\)\}" data-pp-goto="\$\{esc\(a\.tab\)\}"/.test(appB)
-    && /go: "Open People"/.test(appB) && /go: "Open Store"/.test(appB) && /go: "Open Attack & Defense"/.test(appB));
+  // ⚠️ THIS LISTED THREE TAB NAMES BY HAND, so moving a control reddened it — and worse, it could not have caught
+  // the thing that actually goes wrong. On 2026-10-01 the standing-work panel moved from People to Build & work, and
+  // two alerts kept saying "Open the People tab" about a verb that was no longer there: a row pointing at a tab that
+  // does not answer it. A name list cannot see that; this asks the question the bug is in.
+  check("§380: ⛔ every review row carries the VERB that answers it, and the tab it opens EXISTS (Erik's own rule, kept)",
+    (() => {
+      if (!/class="gs-go" data-hold-open="\$\{esc\(h\.id\)\}" data-pp-goto="\$\{esc\(a\.tab\)\}"/.test(appB)) return false;
+      // the tab ids the sheet actually renders, read from TABS rather than typed here
+      const tabsSrc = appB.slice(appB.indexOf("const TABS = ["));
+      const ids = [...tabsSrc.slice(0, tabsSrc.indexOf("];") + 2).matchAll(/\["([a-z]+)",/g)].map(m => m[1]);
+      if (ids.length < 5) return false;
+      // every alert this reader returns names one of them, and carries both a verb and a button word
+      const body = appB.slice(appB.indexOf("const alertOf = (h) =>"));
+      // ⚠️ BY LINE, NOT BY BRACE. My first cut matched `{ cls: [^}]*?}` and stopped at the first `}` — and one
+      // alert's `said` is a template holding `${h.arrears}`, so the match ended before the fields being checked and
+      // the gate accused a correct return of having no tab. A gate that mis-lexes its subject reports a defect that
+      // is its own.
+      const rets = body.slice(0, body.indexOf("\n  };")).split("\n").filter(l => /return \{ cls: /.test(l));
+      if (rets.length < 5) return false;
+      return rets.every(r => {
+        const tab = /tab: "([a-z]+)"/.exec(r);
+        return tab && ids.includes(tab[1]) && /go: "/.test(r) && /verb: "/.test(r);
+      });
+    })(), "an alert whose tab is not one the sheet renders sends the player nowhere");
 
   // ⚠️ AND SIX TOKENS THIS FILE USED WERE NEVER DECLARED — each site fell through to its own fallback, and the
   // fallbacks disagreed: `--good` was #79c08a in three places and #4fa36b in two, `--warn` was #e0b25a, #c9913a and
@@ -33628,8 +33667,30 @@ console.log("\n── §395 · the hold sheet stays open, and every job is one l
         && !/data-hold-keeper-here=/.test(code395) && !/data-hold-hand=/.test(code395);
       return rows && gone;
     })());
+  // ⚠️ THIS WAS AN ORDER PIN — "`data-clear-start` appears after `const roleRows`" — and it went red on 2026-10-01
+  // when the panel moved onto Build & work, where the room bar's own start button now comes FIRST in the file. The
+  // ordering was never the claim. The claim is that the expansion is one of the rows the job list is built from, and
+  // `rows` is where that is decided, so that is what this asks.
   check("§395: ⛑ …and the expansion work is a row on the same list, which Erik asked for by name",
-    /data-clear-start=/.test(code395) && code395.indexOf("data-clear-start=") > code395.indexOf("const roleRows"));
+    /const rows = roleRows \+ Object\.entries\(T\.kinds\)/.test(code395)
+    && /\}\)\.join\(""\) \+ charged14 \+ clearRow;/.test(code395)
+    && /const clearRow = \(\(\) => \{/.test(code395)
+    && /data-clear-start="\$\{esc\(h\.id\)\}"/.test(code395));
+  // ✅ ERIK 2026-10-01: *"I still can't allocate someone to making more room (working on expansion)… it says Cy is
+  // delegated, but no one is working the legs expansion?"* ⛔ TWO FAULTS, AND THIS IS BOTH OF THEM.
+  // ⛑ FIRST, THE ROW LIED. It counted `crew.length + garrison.length` while `clearingTick` counted everyone charged
+  // with the hold's GROWTH as well — driven on his own save, the legs advance 0% → 25% a pass under a line reading
+  // "nobody is at it". One function answers it now, and the tick asks the same one.
+  check("§395: ⛔ …and who is at it is `clearingHands`, the SAME function the tick asks — not a second count on the screen",
+    /const who = \(\(\) => \{ try \{ return clearingHands\(character, h\); \}/.test(code395)
+    && /const hands = \(\(\) => \{ try \{ return clearingHands\(character, h\)\.n; \}/.test(code395)
+    && !/const handsHere = \(h\.crew \|\| \[\]\)\.length \+ \(h\.garrison \|\| \[\]\)\.length/.test(code395));
+  // ⛑ SECOND, THERE WAS NO DOOR. The only way onto the job was a charge made on another tab — a job you can join
+  // only by accident is not a job you can be put to.
+  check("§395: ⛔ …and somebody can be PUT on it by name, and taken off, and is not offered elsewhere while they are",
+    /data-clear-put="\$\{esc\(h\.id\)\}"/.test(code395) && /data-clear-drop="\$\{esc\(h\.id\)\}"/.test(code395)
+    && /setClearingHands\(character, h, \[\.\.\.\(h\.clearing\?\.hands \|\| \[\]\), s\.value\]\)/.test(code395)
+    && /\.\.\.\(Array\.isArray\(h\?\.clearing\?\.hands\) \? h\.clearing\.hands : \[\]\)\]\)/.test(code395));
   // ⛔ AND EVERY ROW WRITES WHERE IT ALWAYS WROTE. This is a SURFACE change; if a kind ever stopped routing to its own
   // engine call it would be a rules change wearing a layout change's clothes.
   check("§395: ⛔ …and each row routes to the function it always routed to — a surface change, never a rules change",
@@ -35000,6 +35061,157 @@ console.log("\n── §408 · the learn list left the sidebar ──");
       return ripe.length === 2
         && PR408.aspirationRipe({ practice: { aspirations: [{ abilityId: ids[0], progress: ripeAt - 1 }] } }, ids[0], C408.rules) === false;
     })());
+}
+
+/* ══════════ §409 · BUILD & WORK: THE JOB, THE HANDS ON IT, AND A PICKER THAT SAYS WHAT A THING COSTS ══════════ */
+// ⛔ ERIK, 2026-10-01, with four screenshots:
+//   *"Hold work should show up in the Build and Work tab on the holds."*
+//   *"the Build page is a mess… the selections should be categorized and show the cost/benefit. I thought Aevi's
+//    prototype had some good style for this page, but maybe that was a gap."*
+//   *"I still can't allocate someone to making more room (working on expansion)… it says Cy is delegated, but no one is
+//    working the legs expansion?"*
+//
+// ⛑ HIS PROTOTYPE MEMORY WAS A GAP: `po/prototype/` holds one file, a map renderer. But the STYLE did exist and was
+// not being used — Aevi has authored nine `holdFeatures.categories`, and this tab already groups what STANDS by them
+// while the picker for what you could BUILD was flat. So the fix is a reader catching up with content, not a grouping
+// I invented, and this section asks it that way: EVERY buildable kind is grouped, however many she authors.
+console.log("\n── §409 · build & work ──");
+{
+  const A409 = rd("app.js");
+  const CSS409 = rd("style.css");
+  const { loadContentHeadless: lch409 } = await import("./headless_content.mjs");
+  const C409 = await lch409();
+  const H409 = await import("../engine/holdings.js");
+  const cfg409 = C409.rules?.economy?.holdStore
+    ? { ...C409.rules.economy.holdStore, features: C409.rules.economy.holdFeatures || null } : null;
+
+  /* ---- 1 · ⛔ WHO IS AT THE CLEARING IS ONE FUNCTION, AND BOTH SIDES ASK IT ---- */
+  // ⚠️ THE DEFECT WAS TWO CALLERS COMPUTING ONE THING. Driven on Erik's own save before the fix: the screen read
+  // `crew.length + garrison.length` = 0 and printed "nobody is at it", while the tick counted Cy — charged with the
+  // hold's growth — and advanced the legs 25% a pass. The work was never stalled; the sentence was wrong, which argues
+  // a player out of something that works.
+  check("§409: ⛔ WHO IS AT THE CLEARING IS ONE READER — the screen cannot keep a second count beside the tick's",
+    /export function clearingHands\(character, holding\)/.test(rd("engine/holdings.js"))
+    && /const at = hands != null \? Math\.max\(0, Number\(hands\) \|\| 0\) : clearingHands\(character, holding\)\.n;/.test(rd("engine/holdings.js"))
+    && !/const delegated = \[\.\.\.new Map\(chargedWith/.test(rd("engine/holdings.js")));
+  // ⛑ AND IT IS DRIVEN, three doors and the empty case, on a CONSTRUCTED hold — the live saves exercise exactly ONE
+  // of the three, so the corpus could never have told me the other two work.
+  check("§409: ⚠️ …and a hand counts once however it arrives — posted, put, or charged with the hold's growth",
+    (() => {
+      const mk = () => ({ id: "h1", crew: [], garrison: [], store: {},
+        clearing: { budget: "open", progress: 0, passes: 2, onFrame: false, frame: null } });
+      const charged = (id) => ({ worldState: { assignments: { a1: { id: "a1", npcId: id, npcName: id, status: "working", holdId: "h1", purpose: "growth" } } } });
+      const n = (ch, h) => H409.clearingHands(ch, h).n;
+      const posted = mk(); posted.crew = ["ann"];
+      const put = mk(); put.clearing.hands = ["bert"];
+      const all = mk(); all.crew = ["ann"]; all.clearing.hands = ["bert"];
+      const dupe = mk(); dupe.crew = ["ann"]; dupe.clearing.hands = ["ann"];
+      return n({}, mk()) === 0 && n({}, posted) === 1 && n({}, put) === 1 && n(charged("cy"), mk()) === 1
+        && n(charged("cy"), all) === 3
+        // ⛔ THE SAME PERSON THREE WAYS IS ONE HAND. A duplicated charge must never read as a speed bonus.
+        && n(charged("ann"), dupe) === 1;
+    })());
+  // ⛔ AND THE TICK AGREES WITH IT — the whole point. A screen saying "nobody" over a job that moves, or "somebody" over
+  // one that does not, is the defect either way round, so the gate is on the AGREEMENT, never on either number.
+  check("§409: ⛔ …and the tick stalls exactly when that reader says nobody, and moves exactly when it says somebody",
+    (() => {
+      const mk = () => ({ id: "h1", crew: [], garrison: [], store: {},
+        clearing: { budget: "open", progress: 0, passes: 2, onFrame: false, frame: null } });
+      const cases = [[{}, mk()], [{}, (() => { const h = mk(); h.crew = ["ann"]; return h; })()],
+        [{}, (() => { const h = mk(); h.clearing.hands = ["b"]; return h; })()],
+        [{ worldState: { assignments: { a1: { npcId: "cy", status: "working", holdId: "h1", purpose: "growth" } } } }, mk()]];
+      return cases.every(([ch, h]) => {
+        const said = H409.clearingHands(ch, h).n > 0;
+        const r = H409.clearingTick(ch, h, { cfg: cfg409, day: 1 });
+        return said === !r?.stalled;
+      });
+    })(), "the screen's sentence and the tick's behaviour are one function or they are two bugs");
+
+  /* ---- 2 · ⛔ AND THERE IS A DOOR ONTO THE JOB ---- */
+  // ⛑ `setClearingHands` did not exist. The only way onto the legs was a charge made on another tab about a different
+  // thing — which is why Erik could read "Cy is delegated" and "nobody is at it" on one screen and believe both.
+  check("§409: ⛔ SOMEBODY CAN BE PUT ON THE BUILDING BY NAME — the control that did not exist",
+    (() => {
+      const h = { id: "h1", clearing: { budget: "open", progress: 0, passes: 2 } };
+      const a = H409.setClearingHands({}, h, ["bert", "dala"]);
+      const b = H409.setClearingHands({}, h, []);
+      // ⚠️ AND IT REFUSES WHEN THERE IS NO WORK: these hands live ON the clearing record, so stopping the work frees
+      // them with it rather than leaving a list pointing at a job nobody is doing.
+      const no = H409.setClearingHands({}, { id: "h2", clearing: null }, ["bert"]);
+      return a.ok && a.at === 2 && b.ok && !("hands" in h.clearing) && no.ok === false && /no work is under way/.test(no.why);
+    })());
+  check("§409: ⚠️ …and they are not offered another job while they are on it — one person, one post",
+    /\.\.\.\(Array\.isArray\(h\?\.clearing\?\.hands\) \? h\.clearing\.hands : \[\]\)\]\)\.filter\(Boolean\)\.map\(String\)\);/.test(A409));
+
+  /* ---- 3 · ⛔ THE PICKER IS GROUPED BY AEVI'S OWN CATEGORIES ---- */
+  check("§409: ⛔ THE BUILD PICKER IS GROUPED, and by the categories SHE authored rather than a list typed in the view",
+    /<optgroup label="\$\{esc\(String\(g\.label\)\.split\(" — "\)\[0\]\)\}">/.test(A409)
+    && /featureCategory\(e\[0\], cfgF\)/.test(A409));
+  // ⚠️ ASKED OF THE POPULATION THE CONTENT DECLARES, not the one that already passes: every kind a player can be
+  // offered has a category, so a kind Aevi adds tomorrow lands in a group instead of silently falling into "everything
+  // else". If this reddens, the kind is new and wants a category — which is a content answer, not a code one.
+  check("§409: ⚠️ …and every buildable kind lands under one — however many she authors",
+    (() => {
+      const kinds = cfg409?.features?.kinds || {};
+      const ids = Object.keys(kinds).filter(k => !k.startsWith("_"));
+      if (ids.length < 10) return false;
+      const ungrouped = ids.filter(k => !H409.featureCategory(k, cfg409)?.id);
+      return ungrouped.length === 0;
+    })(), "a kind with no category falls into Everything else, which is a grouping that explains nothing");
+  // ⛔ AND THE COST IS WHERE THE CHOICE IS. The wall of forty prices under the form answered one question with forty
+  // lines of text; the one you are reading says what it costs where you read it.
+  check("§409: ⛔ …and each option carries its own price, so the retired wall of forty costs is not missed",
+    /\$\{c\.build\.days\}.u00a0days · \$\{c\.upkeep\}\/pass to keep/.test(A409)
+    && /featureCost\(k, cfgF\)/.test(A409));
+
+  /* ---- 4 · ⛔ AND THE BENEFIT, WHICH NOTHING ON THIS TAB EVER SAID ---- */
+  // ⛑ `featureDoes` is the same reader that writes the effect lines on a feature that already STANDS, and the hold is
+  // handed in so a yield is this place's real number rather than a second composition of it. A figure composed twice is
+  // a figure that drifts — this file has recorded that by name.
+  check("§409: ⛔ WHAT A THING GIVES IS READ FROM `featureDoes`, the same reader a standing feature uses",
+    /featureDoes\(k, cfgF, \{ level: 1, count: 1 \}\)/.test(A409) && /class="hb-does"/.test(A409));
+  // ⛔ AND THE TWO THINGS ONLY RENDERING THE PANE COULD TELL ME. No suite here draws a pane, so both of these were
+  // green and wrong until the panel was read on Erik's own save.
+  check("§409: ⚠️ …and it prints `said` BARE, as the standing-feature row does — escaping it put `<strong>` on screen",
+    /<li>\$\{x\.said\}<\/li>/.test(A409) && !/<li>\$\{esc\(x\.said\)\}<\/li>/.test(A409));
+  check("§409: ⚠️ …and it does NOT hand the hold to a kind that is not built — that turns an absence into an answer",
+    (() => {
+      // driven, because the difference is one word on screen and entirely invisible to a source read
+      const h = { id: "x", name: "X", condition: "thriving", kind: "post", features: [], store: {} };
+      const withHold = (H409.featureDoes("mine", cfg409, { holding: h }) || []).map(x => x.said).join(" ");
+      const without = (H409.featureDoes("mine", cfg409, { level: 1, count: 1 }) || []).map(x => x.said).join(" ");
+      // ⛔ the hold's answer is about a mine that does not exist; the other is about the mine you are considering
+      return /nothing/.test(withHold) && !/nothing/.test(without) && /depends on/.test(without)
+        && !/featureDoes\(k, cfgF, \{ holding: h \}\)/.test(A409);
+    })());
+  check("§409: ⚠️ …and that reader actually answers for the kinds it will be asked about — not an empty list on every one",
+    (() => {
+      const kinds = Object.keys(cfg409?.features?.kinds || {}).filter(k => !k.startsWith("_"));
+      const answered = kinds.filter(k => (H409.featureDoes(k, cfg409, {}) || []).length > 0);
+      // ⚠️ A READER RETURNING ONE ANSWER FOR A WHOLE POPULATION MAY BE RETURNING ITS DEFAULT. Most kinds must say
+      // something, or the panel is a heading over an apology.
+      return answered.length >= Math.ceil(kinds.length * 0.6);
+    })());
+  // ⛔ AND A KIND THIS PLACE CANNOT TAKE SAYS SO WHERE IT IS CHOSEN. `addFeature` refuses it on item 9's frame rule
+  // anyway; a control that offers what the engine will refuse is a control that lies.
+  check("§409: ⛔ …and a kind the frame refuses is marked where it is CHOSEN, not after the click",
+    /canBuildOn\(h, k, kinds, CONTENT\.rules\?\.economy\?\.holdStore\?\.slots\?\.frames\?\.kinds\)/.test(A409)
+    && /\$\{off \? " disabled" : ""\}/.test(A409)
+    && /class="hb-no"/.test(A409));
+
+  /* ---- 5 · ⛔ ONE TAB, AND THE ALERTS FOLLOW IT ---- */
+  check("§409: ⛔ HOLD WORK IS ON THE BUILD & WORK TAB — and on exactly one tab, not two",
+    (() => {
+      const build = A409.slice(A409.indexOf('pane("build"'), A409.indexOf('pane("store"'));
+      const people = A409.slice(A409.indexOf('pane("people"'), A409.indexOf('pane("build"'));
+      return /\["build", "Build &amp; work"\]/.test(A409)
+        && /Who does what here/.test(build) && !/Who does what here/.test(people);
+    })());
+  // ⚠️ AND A MOVED SURFACE TAKES ITS DOORS WITH IT. Two alerts said "Open the People tab" about Make-keeper, which
+  // is a row in the panel that moved — §380 is the general form of this and it is asked there, over every alert.
+  check("§409: ⚠️ …and the alerts that answered with a control in that panel point at the tab it is on now",
+    /said: "nobody is keeping it", tab: "build"/.test(A409) && /said: "failing", tab: "build"/.test(A409)
+    && !/go: "Open People"/.test(A409));
 }
 
 /* ══════════ REPORT ══════════ */

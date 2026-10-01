@@ -69,7 +69,7 @@ import { enterDeathState, rollRetrieval, pledgeFrom } from "./engine/death.js";
 // duplicated in this codebase, and each time the copies drifted before anyone noticed.
 wireDeathModel(DeathModel);
 import { carriageOf, voyageOf, isMoored, canSail, sailHolding, voyageLine, featureRuling, canBuildOn } from "./engine/carriage.js";
-import { roomOf, roomRefusal, promotionOffer, promoteHolding, trainingAt, mountsAt, healingAt, quarteringOf, vaultOf, chargeOf, chargeWord, depositToVault, withdrawFromVault, holdingFieldSources, sellPlanFor, stockPolicyFor, clearingQuote, startClearing, payArrears, arrearsSaid } from "./engine/holdings.js";   // ⛔ CCODE-429: a hold has room · CCODE-430: a yard trains   // B6b: the holding that moves
+import { roomOf, roomRefusal, promotionOffer, promoteHolding, trainingAt, mountsAt, healingAt, quarteringOf, vaultOf, chargeOf, chargeWord, depositToVault, withdrawFromVault, holdingFieldSources, sellPlanFor, stockPolicyFor, clearingQuote, startClearing, clearingHands, setClearingHands, payArrears, arrearsSaid } from "./engine/holdings.js";   // ⛔ CCODE-429: a hold has room · CCODE-430: a yard trains   // B6b: the holding that moves
 import { raidRisk, watchReadout, watchOdds, craftPlacementCost, defenceOf, featureCost, featureDef, featureDoes, featureCategory, allFeatures, refreshImprovement, canBeAskedToWork, holdingFactsLine, answerFeatureOffer, holdingLedger, addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, yieldsFor, upkeepFor, appointKeeper, reclaimHolding, improveHolding, setCrew, setGarrison, holdingGround, addFeature, removeFeature, renameHolding, featureKinds, residentsOf, holdingMeaningAura, holdingFieldDelta } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
 import { buildDevReport, unknownOpsIn } from "./engine/devreport.js";   // SNG-559: the Play/Dev instrument
 import { makeField, fieldDataFrom, FIELD_KINDS, KIND_LABEL, MEMBERSHIP } from "./engine/field.js";
@@ -184,7 +184,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.16.9";
+const APP_VERSION = "2.16.10";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -15013,6 +15013,23 @@ function wireHoldingOffers() {
     queueHoldingEvent(character, r.said);
     saveCharacter(character); again();
   };
+  // ✅ ERIK 2026-10-01 — PUT SOMEBODY ON THE BUILDING, AND TAKE THEM OFF. ⚠️ Only the people on `clearing.hands`
+  // carry a ✕: somebody who is on it because they LIVE here, or because they were charged with this hold's growth,
+  // is taken off where that was decided — a control that silently fails is worse than no control.
+  for (const s of app.querySelectorAll("[data-clear-put]")) s.onchange = () => {
+    if (!s.value) return;
+    const h = (character.holdings || []).find(x => x && x.id === s.dataset.clearPut);
+    if (!h) return;
+    const r = setClearingHands(character, h, [...(h.clearing?.hands || []), s.value]);
+    if (!r.ok) { alert(r.why); return; }
+    saveCharacter(character); again();
+  };
+  for (const b of app.querySelectorAll("[data-clear-drop]")) b.onclick = () => {
+    const h = (character.holdings || []).find(x => x && x.id === b.dataset.clearDrop);
+    if (!h) return;
+    setClearingHands(character, h, (h.clearing?.hands || []).filter(x => String(x) !== String(b.dataset.id)));
+    saveCharacter(character); again();
+  };
   for (const btn of app.querySelectorAll("[data-clear-stop]")) btn.onclick = () => {
     const h = (character.holdings || []).find(x => x && x.id === btn.dataset.clearStop);
     if (!h || !h.clearing) return;
@@ -15115,6 +15132,9 @@ function wireHoldingOffers() {
     again();
   };
   for (const b of app.querySelectorAll("[data-work-drop]")) b.onclick = () => { unassignWork(character, b.dataset.workDrop, b.dataset.kind, b.dataset.id); saveCharacter(character); again(); };
+  // ✅ ERIK 2026-10-01 — THE PANEL FOLLOWS THE PICKER. Every control on this sheet re-renders it, so the selection is
+  // kept in `holdBuildKind` and read back on the way out — the same shape `holdTab` uses to survive a re-render.
+  for (const s of app.querySelectorAll("[data-hold-kind]")) s.onchange = () => { holdBuildKind = s.value || null; again(); };
   for (const btn of app.querySelectorAll("[data-hold-exchange]")) btn.onclick = () => showChangeMoney(again);
   // ⛔ CCODE-444: a hold keeps valuables — put in and taken out where you stand; a kept well or sink is switched on and off from its card
   for (const btn of app.querySelectorAll("[data-hold-vault]")) btn.onclick = () => showVaultDeposit(btn.dataset.holdVault, again);
@@ -15273,7 +15293,11 @@ function workCandidates() {
   const onErrand = new Set(Object.values(character.worldState?.assignments || {}).filter(a => a && a.status !== "done").map(a => String(a.npcId)));
   // ⚠️ POSTED IS READ OFF THE HOLDS, not off the pool's `from`: a band member who is also on a garrison is listed under the band first
   // (Calvar, on the Fell Pell's watch, was offered for foraging) — a keeper, a guard and a crew hand already have their post.
-  const posted = new Set((character.holdings || []).flatMap(h => [...(Array.isArray(h?.garrison) ? h.garrison : []), ...(Array.isArray(h?.crew) ? h.crew : []), h?.steward]).filter(Boolean).map(String));
+  const posted = new Set((character.holdings || []).flatMap(h => [...(Array.isArray(h?.garrison) ? h.garrison : []), ...(Array.isArray(h?.crew) ? h.crew : []), h?.steward,
+    // ⛔ ERIK 2026-10-01 — AND SOMEBODY PUT ON THE CLEARING HAS A POST TOO. Added to this same loop rather than a
+    // second one: a person offered for foraging while they are building out the legs is the double-booking this
+    // exclusion exists to stop.
+    ...(Array.isArray(h?.clearing?.hands) ? h.clearing.hands : [])]).filter(Boolean).map(String));
   _workCands = pool.filter(p => !p.isYou && p.from !== "at your side" && !posted.has(String(p.id))
     && !awayOnJob(character, p.id) && !onErrand.has(String(p.id)));
   return _workCands;
@@ -15287,6 +15311,9 @@ function workerName(id) {
 // ⛑ SNG-651 §2.3 — WHICH TAB YOU WERE ON survives a re-render, because every action here re-renders the
 // screen and a page that snapped back to Overview after every click would be unusable.
 let holdTab = "overview";
+// ⛔ ERIK 2026-10-01 — WHICH KIND THE BUILD FORM IS SHOWING. Every control on this screen re-renders the sheet, so a
+// panel that says what the selected kind costs and gives has to remember the selection the way `holdTab` does.
+let holdBuildKind = null;
 // ⛔ WHICH HOLD'S SHEET IS OPEN. Erik: *"whenever I click things in the holding manage screen it kicks me back out to the
 // screen behind it."* `renderHoldingsTab(manageId)` takes the open sheet as its FIRST parameter, and every re-render from
 // inside the sheet called it bare — so `manageId` defaulted to null and the sheet closed under the player's hand. The tab
@@ -15352,10 +15379,11 @@ function renderHoldingsTab(manageId = null, tab = null) {
   const alertOf = (h) => {
     const cfgA = holdCfgNow();
     const per = (() => { try { const L = holdLedgerOf(h); return L?.perPass && Number.isFinite(Number(L.perPass.net)) ? Number(L.perPass.net) : null; } catch { return null; } })();
-    if (!h.steward) return { cls: "warn", said: "nobody is keeping it", tab: "people", go: "Open People", verb: "Open the People tab — an unkept hold cannot climb" };
+    // ⚠️ RE-POINTED 2026-10-01: Make-keeper is a row in the standing-work panel, and that panel moved to Build & work.
+    if (!h.steward) return { cls: "warn", said: "nobody is keeping it", tab: "build", go: "Open Build &amp; work", verb: "Open Build & work — an unkept hold cannot climb, and the keeper is made there" };
     if ((h.history || []).slice(-4).some(e => /raid/i.test(String(e?.note || "")))) return { cls: "bad", said: "raided recently", tab: "defence", go: "Open Attack & Defense", verb: "Open Attack & Defense — what comes at it, and what stands against them" };
-    if (String(h.condition) === "failing") return { cls: "bad", said: "failing", tab: "people", go: "Open People", verb: "Open the People tab — a keeper sets the floor it will not drop below" };
-    try { const r = roomOf(h, cfgA); if (r && r.total > 0 && r.used >= r.total) return { cls: "warn", said: "no feature spots left", tab: "build", go: "Open Build", verb: "Open the Build tab — it may be ready to be named something greater" }; } catch { /* no reader, no alert */ }
+    if (String(h.condition) === "failing") return { cls: "bad", said: "failing", tab: "build", go: "Open Build &amp; work", verb: "Open Build & work — a keeper sets the floor it will not drop below" };
+    try { const r = roomOf(h, cfgA); if (r && r.total > 0 && r.used >= r.total) return { cls: "warn", said: "no feature spots left", tab: "build", go: "Open Build &amp; work", verb: "Open Build & work — it may be ready to be named something greater" }; } catch { /* no reader, no alert */ }
     // ✅ AEVI item 12 — IT SAYS WHY, AND THE ROW CARRIES THE VERB. ⛔ Erik: *"'4 of keep owed' — not sure, because I
     // can't seem to do anything about it."* The row named a debt, sent him to a tab, and that tab had nothing to do
     // either; three places added to `arrears` and none anywhere took any away. `arrearsSaid` is the hold's own reason.
@@ -15386,10 +15414,16 @@ function renderHoldingsTab(manageId = null, tab = null) {
   const groundStrip = (() => {
     if (!hs.length && !offers.length) return "";
     const ecoG = CONTENT.rules?.economy || null;
-    let net = 0, netKnown = false, inn = 0, out = 0, folk = 0;
+    // ⛔ ERIK 2026-10-01 — `made` AND `shelf` ARE NEW HERE, and they are why the Traits block could go. He ruled that
+    // the board covers it; it covered all of it but these two. ⚠️ `worth` is the gross a pass makes and `sells` is the
+    // share a keeper turns into coin — 32 and 16 on his save — so summing one in place of the other would have put a
+    // number on the board that is wrong by half and reads entirely plausible.
+    let net = 0, netKnown = false, inn = 0, out = 0, folk = 0, made = 0, shelf = 0;
     for (const h of hs) {
       try {
         const L = holdLedgerOf(h);
+        made += Number(L?.perPass?.worth) || 0;
+        shelf += Number(L?.store?.worth) || 0;
         if (L?.perPass && Number.isFinite(Number(L.perPass.net))) {
           net += Number(L.perPass.net); netKnown = true;
           inn += (Number(L.perPass.sells) || 0) + (Number(L.perPass.fees) || 0);
@@ -15420,7 +15454,7 @@ function renderHoldingsTab(manageId = null, tab = null) {
       ${stat("", "Holdings", { text: String(hs.length) },
         `${esc(Object.entries(kinds).map(([k, n]) => `${n} ${k}${n === 1 ? "" : "s"}`).join(" · "))}${conds.length === 1 ? ` · all ${esc(conds[0])}` : ""}`)}
       ${netKnown ? stat("", `Net each pass ${infoDot("hold.pass")}`, { text: money(Math.round(net * 100) / 100), cls: netCls },
-        `${Math.round(inn)} in, ${Math.round(out)} out · a pass ≈ 3 days`
+        `${made ? `makes ${Math.round(made)} · ` : ""}${Math.round(inn)} in, ${Math.round(out)} out · a pass ≈ 3 days${shelf ? ` · ${Math.round(shelf)} unsold in their stores` : ""}`
         // ⛔ AND WHY "IN" IS ZERO, WHEN IT IS. A standing run means the keeper holds the stock for the cart instead of
         // selling it here (SNG-654), so a hold with a route earns nothing AT HOME until the cart comes back — which on a
         // long road is many passes. Erik read the red number as lost income; the number is right and it had no sentence.
@@ -15651,7 +15685,7 @@ function renderHoldingsTab(manageId = null, tab = null) {
         </div>
         ${/* ⛔ §345 · SNG-651 §2.2 — THE ALERT IS THE DOOR, and in her grammar it is a PILL beside the button.
               Erik's ruling holds: the row naming a problem carries the verb for it, and the pill OPENS THE TAB the
-              verb lives on — unkept goes to People, a full place to Build, a raid to Attack & Defense. */""}
+              verb lives on — unkept and a full place go to Build & work, a raid to Attack & Defense. */""}
         <div class="hold-card-foot">
           ${alert ? `<button class="hold-card-alert ${alert.cls}" data-hold-open="${esc(h.id)}" data-pp-goto="${alert.tab}" title="${esc(alert.verb)}">${esc(alert.said)}</button>` : `<span></span>`}
           <button class="hold-card-open" data-hold-open="${esc(h.id)}">Open</button>
@@ -15759,7 +15793,34 @@ function renderHoldingsTab(manageId = null, tab = null) {
             for (const r of featRows) { const key = r.cat?.id || "_other"; if (!by.has(key)) by.set(key, { label: r.cat?.label || "Everything else", rows: [] }); by.get(key).rows.push(r); }
             return [...by.values()].map(g => `<div class="hf-cat"><span class="hf-cat-label">${esc(g.label)}</span>${g.rows.map(r => featRow(r.f, r.i)).join("")}</div>`).join(""); })()
         : featRows.map(r => featRow(r.f, r.i)).join("");
-      const opts = Object.entries(kinds).map(([k, d]) => `<option value="${esc(k)}">${esc(d.label || k)}</option>`).join("");
+      // ⛔ ERIK 2026-10-01: *"the Build page is a mess… the selections should be categorized and show the
+      // cost/benefit."* ⛑ THE CATEGORIES ARE AEVI'S, ALREADY AUTHORED — `holdFeatures.categories`, the same nine this
+      // tab already groups what STANDS by, four blocks above. Only the picker was flat, so this is a reader catching up
+      // with content that was waiting for it, not a grouping I invented.
+      // ⚠️ AND THE PRICE IS IN THE OPTION, because the wall of forty costs under this form — every kind at once,
+      // whichever one you were looking at — is what made the page a wall of text. The one you are choosing says what it
+      // costs where you are choosing it.
+      const buildKinds = Object.entries(kinds).filter(([k]) => !k.startsWith("_"));
+      const kindOpt = ([k, d]) => {
+        const c = (() => { try { return featureCost(k, cfgF); } catch { return null; } })();
+        // ⚠️ A KIND THIS PLACE CANNOT TAKE IS SAID SO HERE, where it is chosen — `addFeature` refuses it anyway
+        // (item 9's frame rule), and a control that offers what the engine will refuse is a control that lies.
+        const can = (() => { try { return canBuildOn(h, k, kinds, CONTENT.rules?.economy?.holdStore?.slots?.frames?.kinds); } catch { return { ok: true }; } })();
+        const goods = c?.build ? Object.entries(c.build.goods).map(([g, n]) => `${n}\u00a0${String(g).replace(/_/g, " ")}`).join(", ") : null;
+        const price = !c?.buildable ? "cannot be built" : `${goods} · ${c.build.days}\u00a0days · ${c.upkeep}/pass to keep`;
+        const off = !c?.buildable || !can.ok;
+        return `<option value="${esc(k)}"${off ? " disabled" : ""}${String(holdBuildKind) === k ? " selected" : ""}>${esc(d.label || k)} — ${esc(can.ok ? price : "not on this frame")}</option>`;
+      };
+      const byCat = new Map();
+      for (const e of buildKinds) {
+        const cat = (() => { try { return featureCategory(e[0], cfgF); } catch { return null; } })();
+        const key = cat?.id || "_other";
+        if (!byCat.has(key)) byCat.set(key, { label: cat?.label || "Everything else", rows: [] });
+        byCat.get(key).rows.push(e);
+      }
+      // ⛑ A CATEGORY LABEL IS A SENTENCE IN HER FILE — "Watch & sense — seeing trouble coming". An <optgroup> label is
+      // one line of chrome, so the part before the dash is the group and the rest is the option list's own context.
+      const opts = [...byCat.values()].map(g => `<optgroup label="${esc(String(g.label).split(" — ")[0])}">${g.rows.map(kindOpt).join("")}</optgroup>`).join("");
       const crafts = (character.abilities || []).filter(a => a && a.id).slice(0, 40).map(a => `<option value="${esc(a.id)}">${esc(a.name || a.id)}</option>`).join("");
       // ⛔ SPEC_hold_costs §5 — COME AND WORK: known, here, and not hostile (canBeAskedToWork) — a far lower bar than the company's.
       // The registry alone had no bar at all. Whoever already keeps another place is said so (Q5: visible, not forbidden).
@@ -15781,7 +15842,7 @@ function renderHoldingsTab(manageId = null, tab = null) {
       // and keep the `defence` key, so no state moves." The KEY is state — `holdTab` persists and every card
       // alert routes by it — and the LABEL is not; moving the key would strand the alerts that name it.
       // ⚠️ And the note sits ABOVE the line: a `//` after an entry swallows the rest of a one-line array.
-      const TABS = [["overview", "Overview"], ["people", "People"], ["build", "Build"], ["store", "Store &amp; money"], ["defence", "Attack &amp; Defense"], ["records", "Records"]];
+      const TABS = [["overview", "Overview"], ["people", "People"], ["build", "Build &amp; work"], ["store", "Store &amp; money"], ["defence", "Attack &amp; Defense"], ["records", "Records"]];
       const tabNow = TABS.some(([k]) => k === holdTab) ? holdTab : "overview";
       const pane = (key, html) => `<div class="pp-pane" data-pp-pane="${key}"${key === tabNow ? "" : " hidden"}>${html}</div>`;
       // ✅ AEVI item 6 — A PAGE, NOT A POP-UP. ⛔ ERIK: the hold opened in a 560px overlay that cramped six tabs of
@@ -15929,6 +15990,63 @@ function renderHoldingsTab(manageId = null, tab = null) {
             : ""}
           </div>`;
         })()}
+        ${/* ✅ ERIK 2026-10-01: *"Hold work should show up in the Build and Work tab on the holds."* ⛑ "WHO DOES WHAT
+              HERE" MOVED TO **Build & work**, where the thing it is mostly about now lives: building out the legs is
+              work AND a build, and it had its progress on one tab and its people on another. This tab keeps who LIVES
+              here and whose the place is; that one has every job and everyone on one. ⚠️ Moved, not copied — he had
+              just had a list retired for existing twice. */""}
+        ${(() => { // ⛔ CCODE-431: a guard out on a job is not on this watch until they are back
+          const outs = (character.jobs?.out || []).flatMap(e => (e?.detached && !e.detached.returned ? e.detached.guards || [] : [])
+            .filter(g => String(g.holdId) === String(h.id)).map(g => ({ g, e })));
+          return outs.length ? `<div class="hint" style="margin-top:2px">off the watch: ${outs.map(({ g, e }) => `${esc(e.names?.[g.npcId] || nameOf(g.npcId))} — out on "${esc(e.job?.label || "a job")}", back day ${Math.floor((Number(e.backAtHours) || 0) / 24)}`).join(" · ")}</div>` : "";
+        })()}
+        <div class="opt-row" style="gap:6px;flex-wrap:wrap;margin-top:4px">
+          ${handTo.length ? `<select data-hold-to="${esc(h.id)}">${handTo.map(id => `<option value="${esc(id)}"${id === h.steward ? " selected" : ""}>${esc(nameOf(id))}</option>`).join("")}</select><button class="opt" data-hold-keeper="${esc(h.id)}" title="Appoint them keeper \u2014 the place stays yours; they run it">Make them keeper</button><button class="opt" data-hold-transfer="${esc(h.id)}" title="Hand OWNERSHIP to them">Hand it over</button>` : ""}
+        </div>
+        `)}
+
+        ${pane("build", `
+        ${head("What stands here")}
+        ${(() => {
+          // ✅ SNG-666 §2.4 — THE SPOTS, AND THE WAY TO MAKE ANOTHER, sitting beside Build exactly as Aevi drew it:
+          // "2 of 2 spots · Clear a new spot — 12 raw material, ~3 passes with these hands · Build…"
+          // ⛔ §3's gate is that a FULL hold always shows a way to grow and never a dead end — which is what Loki's Annex was
+          // when I reported "no door" yesterday: a post on legs, 2 of 2, every build refused and nothing to do about it.
+          const cfgC = holdCfgNow();
+          const room = (() => { try { return roomOf(h, cfgC); } catch { return null; } })();
+          if (!room) return "";
+          const q = (() => { try { return clearingQuote(h, cfgC); } catch { return null; } })();
+          const busy = h.clearing || null;
+          const cost = q?.ok ? Object.entries(q.goods).map(([g, n]) => `${n} ${esc(String(g).replace(/_/g, " "))}`).join(" + ") : "";
+          // ⛔ THE SECOND SITE OF THE SAME WRONG COUNT. Erik read "nobody is at it" here as well; one function now.
+          const hands = (() => { try { return clearingHands(character, h).n; } catch { return (h.crew || []).length + (h.garrison || []).length; } })();
+          // ✅ AEVI item 7 — ONE SPOTS BAR, and it is the first thing on the tab: "2 of 2 · legs 0%". The dots, the rung
+          // and the frame came up from the readout below, which is gone.
+          const offer7 = (() => { try { return promotionOffer(h, cfgC, { worldCount: worldCount(), seasonHours: holdSeasonHours() }); } catch { return null; } })();
+          const dots7 = `${"<i class='on'></i>".repeat(Math.max(0, Math.min(room.used, room.slots)))}${"<i></i>".repeat(Math.max(0, room.free))}`;
+          return `<div class="hold-ctl"><span class="hold-ctl-label">Room</span>
+            <span class="hold-room-dots" aria-hidden="true">${dots7}</span>
+            <span><strong>${room.used} of ${room.slots}</strong> place${room.slots === 1 ? "" : "s"} taken — ${/^[aeiou]/i.test(room.rung) ? "an" : "a"} ${esc(room.rung)}${room.frame ? ` on ${esc(room.frame)}` : ""}${room.boundBy === "frame" ? `, and its ${esc(room.frame || "frame")} are what bind it` : ""}.
+            ${busy
+              ? `<span class="hint">${esc(busy.onFrame ? `Building out the ${busy.frame || "frame"}` : "Clearing ground")} — ${Math.round((busy.progress || 0) * 100)}% done${hands ? "" : ", and <strong>nobody is at it</strong>"}.</span>
+                 <button class="link-btn" data-clear-stop="${esc(h.id)}" title="Stop the work — what it cost is spent">Stop</button>`
+              : q?.ok
+                ? `${/* ⚠️ `q.said` OPENS BY RESTATING THE SPOTS — "7 of 7 places are taken. Clearing ground adds one
+                        more." — which is the sentence directly to its left. Item 7's whole complaint is one fact said
+                        twice, so only the part that is NEWS here survives. */""}<span class="hint">${esc(String(q.said).replace(/^[^.]*\bplaces? (are )?taken\.\s*/i, ""))}</span>
+                   <button class="opt" data-clear-start="${esc(h.id)}" title="${esc(cost)} and about ${q.passes} pass${q.passes === 1 ? "" : "es"} with ${q.atHands} hands at it">${esc(q.label)} — ${cost}, ~${q.passes} pass${q.passes === 1 ? "" : "es"}${hands ? ` with ${hands} hand${hands === 1 ? "" : "s"}` : ", and you have nobody here to do it"}</button>`
+                : `<span class="hint">${esc(q?.why || "there is no way to make more room here")}</span>`}
+            </span></div>
+            ${/* ✅ AEVI item 7 — THE TWO DOORS THE RETIRED READOUT ALONE CARRIED. A promotion offer and the refusal a
+                  full hold gives are the only reasons that block existed besides its duplicate numbers; dropping them
+                  with it would have been the migration failure this file has recorded twice. */""}
+            ${offer7 ? `<div class="hold-promo"><span>${esc(h.name || "It")} has filled its room and thrived — it could be ${/^[aeiou]/i.test(offer7.to) ? "an" : "a"} ${esc(offer7.to)}, with ${offer7.more} more ${offer7.more === 1 ? "room" : "rooms"}.</span>
+              <button class="opt" data-hold-promote="${esc(h.id)}">Name it ${/^[aeiou]/i.test(offer7.to) ? "an" : "a"} ${esc(offer7.to)}</button></div>`
+              : room.full ? `<div class="hint hold-full">${esc(roomRefusal(h, room))}</div>` : ""}`;
+        })()}
+        ${/* ✅ ERIK 2026-10-01 — AND HERE IT IS, directly under the room bar that prices the expansion. The bar says
+              how far the legs have come; the first row of the panel below says who is at them and lets you put
+              somebody else on. Those two sentences were two tabs apart. */""}
         ${(() => {   // ⛔ CCODE-450: standing work — who is put to what the hold needs, and what comes of it
           const T = workTable(CONTENT.rules?.holdWork || null);
           const at = workersAt(h);
@@ -16022,12 +16140,33 @@ function renderHoldingsTab(manageId = null, tab = null) {
             if (!q?.ok) return "";
             const busyC = h.clearing || null;
             const cost = Object.entries(q.goods).map(([gd, n]) => `${n} ${esc(String(gd).replace(/_/g, " "))}`).join(" + ");
-            const handsHere = (h.crew || []).length + (h.garrison || []).length;
+            // ⛔ ERIK 2026-10-01: *"it says Cy is delegated, but no one is working the legs expansion?"* ⛑ THIS LINE
+            // USED TO READ `(h.crew||[]).length + (h.garrison||[]).length` — a second hand-count, four files from the
+            // one the tick uses, and it was WRONG on his save: Cy is charged with this hold's growth, the legs advance
+            // 25% a pass, and the row said "nobody is at it". It asks the engine now, and the two cannot disagree.
+            const who = (() => { try { return clearingHands(character, h); } catch { return { ids: [], posted: [], put: [], delegated: [], n: 0 }; } })();
+            // ✅ AND THE CONTROL THAT DID NOT EXIST. The only door onto this job was an indirect charge made on another
+            // tab; a job you can only join by accident is not a job you can be put to.
+            const putC = who.ids.map(id => {
+              const how = who.delegated.includes(id) ? "charged with this hold's growth — taken off on the Work tab"
+                : who.posted.includes(id) ? "lives and works here, so is on its growth" : "put to this work";
+              return `<span class="hw-chip" title="${esc(how)}">${esc(workerName(id))}${who.put.includes(id)
+                ? ` <button class="hw-chip-x" data-clear-drop="${esc(h.id)}" data-id="${esc(id)}" title="Take them off this">✕</button>` : ""}</span>`;
+            }).join("");
+            const freeC = cands.filter(p => !who.ids.includes(String(p.id)));
             return `<div class="hw-row"><span class="hw-kind">${esc(q.label)}<small>${esc(q.said)}</small></span>
               <span class="hw-who">${busyC
-                ? `${Math.round((busyC.progress || 0) * 100)}% done <button class="hw-chip" data-clear-stop="${esc(h.id)}" title="Stop the work — what it cost is spent">stop ✕</button>`
+                ? `${Math.round((busyC.progress || 0) * 100)}% done ${putC}${freeC.length
+                    ? `<select data-clear-put="${esc(h.id)}" aria-label="Put someone to the building"><option value="">+ put someone to it</option>${freeC.map(p => `<option value="${esc(p.id)}">${esc(p.short || p.name)}</option>`).join("")}</select>`
+                    : ""} <button class="hw-chip" data-clear-stop="${esc(h.id)}" title="Stop the work — what it cost is spent">stop ✕</button>`
                 : `<button class="opt" data-clear-start="${esc(h.id)}" title="${esc(cost)}, about ${q.passes} pass${q.passes === 1 ? "" : "es"} at ${q.atHands} hands">start it — ${cost}</button>`}</span>
-              <span class="hw-gain">${busyC ? (handsHere ? "hands are at it" : "<strong>nobody is at it</strong>") : `~${q.passes} pass${q.passes === 1 ? "" : "es"}`}</span></div>`;
+              <span class="hw-gain">${busyC
+                ? (who.n
+                    // ⚠️ AND IT SAYS HOW FAST, in the tick's own arithmetic: `at / atHands / passes` is a share of the
+                    // job a pass, so "about N passes left" is the number the engine will actually produce.
+                    ? `${who.n} ${who.n === 1 ? "hand" : "hands"} at it — about ${Math.max(1, Math.ceil((1 - (Number(busyC.progress) || 0)) / (who.n / Math.max(1, q.atHands) / Math.max(1, Number(busyC.passes) || q.passes))))} more pass${Math.max(1, Math.ceil((1 - (Number(busyC.progress) || 0)) / (who.n / Math.max(1, q.atHands) / Math.max(1, Number(busyC.passes) || q.passes)))) === 1 ? "" : "es"}`
+                    : "<strong>nobody is at it</strong> — it will not move until somebody is")
+                : `~${q.passes} pass${q.passes === 1 ? "" : "es"}`}</span></div>`;
           })();
           const rows = roleRows + Object.entries(T.kinds).map(([k, K]) => {
             const ids = (workOf(h)[k] || []).map(String);
@@ -16054,54 +16193,6 @@ function renderHoldingsTab(manageId = null, tab = null) {
             })()} Take somebody off a job in this list and they are free again.</p>`}
             <p class="hint">Every job at this place, and who is on it. Somebody with no job here can be put to any of them, and taking them off puts them back. They stay here and are nobody else's while they work it, and each is paid a hand's wage a pass, in the money of this place. Scouting, crafting and teaching come with the hold's levels.</p>
             <div class="hw-rows">${rows}</div></details>`;
-        })()}
-        ${(() => { // ⛔ CCODE-431: a guard out on a job is not on this watch until they are back
-          const outs = (character.jobs?.out || []).flatMap(e => (e?.detached && !e.detached.returned ? e.detached.guards || [] : [])
-            .filter(g => String(g.holdId) === String(h.id)).map(g => ({ g, e })));
-          return outs.length ? `<div class="hint" style="margin-top:2px">off the watch: ${outs.map(({ g, e }) => `${esc(e.names?.[g.npcId] || nameOf(g.npcId))} — out on "${esc(e.job?.label || "a job")}", back day ${Math.floor((Number(e.backAtHours) || 0) / 24)}`).join(" · ")}</div>` : "";
-        })()}
-        <div class="opt-row" style="gap:6px;flex-wrap:wrap;margin-top:4px">
-          ${handTo.length ? `<select data-hold-to="${esc(h.id)}">${handTo.map(id => `<option value="${esc(id)}"${id === h.steward ? " selected" : ""}>${esc(nameOf(id))}</option>`).join("")}</select><button class="opt" data-hold-keeper="${esc(h.id)}" title="Appoint them keeper \u2014 the place stays yours; they run it">Make them keeper</button><button class="opt" data-hold-transfer="${esc(h.id)}" title="Hand OWNERSHIP to them">Hand it over</button>` : ""}
-        </div>
-        `)}
-
-        ${pane("build", `
-        ${head("What stands here")}
-        ${(() => {
-          // ✅ SNG-666 §2.4 — THE SPOTS, AND THE WAY TO MAKE ANOTHER, sitting beside Build exactly as Aevi drew it:
-          // "2 of 2 spots · Clear a new spot — 12 raw material, ~3 passes with these hands · Build…"
-          // ⛔ §3's gate is that a FULL hold always shows a way to grow and never a dead end — which is what Loki's Annex was
-          // when I reported "no door" yesterday: a post on legs, 2 of 2, every build refused and nothing to do about it.
-          const cfgC = holdCfgNow();
-          const room = (() => { try { return roomOf(h, cfgC); } catch { return null; } })();
-          if (!room) return "";
-          const q = (() => { try { return clearingQuote(h, cfgC); } catch { return null; } })();
-          const busy = h.clearing || null;
-          const cost = q?.ok ? Object.entries(q.goods).map(([g, n]) => `${n} ${esc(String(g).replace(/_/g, " "))}`).join(" + ") : "";
-          const hands = (h.crew || []).length + (h.garrison || []).length;
-          // ✅ AEVI item 7 — ONE SPOTS BAR, and it is the first thing on the tab: "2 of 2 · legs 0%". The dots, the rung
-          // and the frame came up from the readout below, which is gone.
-          const offer7 = (() => { try { return promotionOffer(h, cfgC, { worldCount: worldCount(), seasonHours: holdSeasonHours() }); } catch { return null; } })();
-          const dots7 = `${"<i class='on'></i>".repeat(Math.max(0, Math.min(room.used, room.slots)))}${"<i></i>".repeat(Math.max(0, room.free))}`;
-          return `<div class="hold-ctl"><span class="hold-ctl-label">Room</span>
-            <span class="hold-room-dots" aria-hidden="true">${dots7}</span>
-            <span><strong>${room.used} of ${room.slots}</strong> place${room.slots === 1 ? "" : "s"} taken — ${/^[aeiou]/i.test(room.rung) ? "an" : "a"} ${esc(room.rung)}${room.frame ? ` on ${esc(room.frame)}` : ""}${room.boundBy === "frame" ? `, and its ${esc(room.frame || "frame")} are what bind it` : ""}.
-            ${busy
-              ? `<span class="hint">${esc(busy.onFrame ? `Building out the ${busy.frame || "frame"}` : "Clearing ground")} — ${Math.round((busy.progress || 0) * 100)}% done${hands ? "" : ", and <strong>nobody is at it</strong>"}.</span>
-                 <button class="link-btn" data-clear-stop="${esc(h.id)}" title="Stop the work — what it cost is spent">Stop</button>`
-              : q?.ok
-                ? `${/* ⚠️ `q.said` OPENS BY RESTATING THE SPOTS — "7 of 7 places are taken. Clearing ground adds one
-                        more." — which is the sentence directly to its left. Item 7's whole complaint is one fact said
-                        twice, so only the part that is NEWS here survives. */""}<span class="hint">${esc(String(q.said).replace(/^[^.]*\bplaces? (are )?taken\.\s*/i, ""))}</span>
-                   <button class="opt" data-clear-start="${esc(h.id)}" title="${esc(cost)} and about ${q.passes} pass${q.passes === 1 ? "" : "es"} with ${q.atHands} hands at it">${esc(q.label)} — ${cost}, ~${q.passes} pass${q.passes === 1 ? "" : "es"}${hands ? ` with ${hands} hand${hands === 1 ? "" : "s"}` : ", and you have nobody here to do it"}</button>`
-                : `<span class="hint">${esc(q?.why || "there is no way to make more room here")}</span>`}
-            </span></div>
-            ${/* ✅ AEVI item 7 — THE TWO DOORS THE RETIRED READOUT ALONE CARRIED. A promotion offer and the refusal a
-                  full hold gives are the only reasons that block existed besides its duplicate numbers; dropping them
-                  with it would have been the migration failure this file has recorded twice. */""}
-            ${offer7 ? `<div class="hold-promo"><span>${esc(h.name || "It")} has filled its room and thrived — it could be ${/^[aeiou]/i.test(offer7.to) ? "an" : "a"} ${esc(offer7.to)}, with ${offer7.more} more ${offer7.more === 1 ? "room" : "rooms"}.</span>
-              <button class="opt" data-hold-promote="${esc(h.id)}">Name it ${/^[aeiou]/i.test(offer7.to) ? "an" : "a"} ${esc(offer7.to)}</button></div>`
-              : room.full ? `<div class="hint hold-full">${esc(roomRefusal(h, room))}</div>` : ""}`;
         })()}
         ${(() => { // ✅ AEVI item 7 — THE SECOND SPOTS READOUT IS GONE; what only IT carried moved up into the first.
           // ⛔ MEASURED: this said "2 of 2 feature spots — a post on legs · full" four blocks below a bar that had just
@@ -16142,7 +16233,45 @@ function renderHoldingsTab(manageId = null, tab = null) {
                 ⛑ The fix is nowrap WHERE IT MATTERS and wrapping where it does not: a quantity is glued to its
                 unit in the markup, so "3 raw material" never splits, and the items lay out as a wrapping list
                 — several to a line on a desktop, one per line on a phone, each free to wrap inside itself. */""}
-          <div class="hint hold-costs" style="width:100%;margin-top:2px">${(() => { const kinds = Object.keys(holdCfgNow()?.features?.kinds || {}).filter(k => !k.startsWith("_")); return kinds.map(k => { const c = featureCost(k, holdCfgNow()); if (!c) return ""; const goods = c.build ? Object.entries(c.build.goods).map(([g, n]) => `${n}\u00a0${g.replace(/_/g, " ")}`).join(", ") : null; return `<span class="hold-cost">${esc(holdCfgNow().features.kinds[k].label || k)}: ${goods ? esc(goods) + " · " + c.build.days + "\u00a0days" : "cannot be built"} · ${c.upkeep}/pass</span>`; }).filter(Boolean).slice(0, 40).join(""); })()}</div>
+          ${/* ⛔ ERIK 2026-10-01 — THE WALL OF FORTY COSTS IS GONE, AND THIS IS WHAT IT BECAME. It printed every kind's
+                price at once, below a picker that told you nothing about the one you had chosen — forty lines of text
+                to answer one question. ⛑ SWEPT FIRST: all it carried was goods, days, upkeep and "cannot be built", and
+                every one of those is now in the OPTION you are reading. What it never carried is the half he asked for
+                — the BENEFIT — and that is the panel below, read from `featureDoes`, the same function that writes the
+                effect lines on a feature that already stands. The hold is handed in, so a yield is this place's real
+                number rather than a figure composed a second way. */""}
+          ${(() => {
+            const k = holdBuildKind && kinds[holdBuildKind] ? holdBuildKind : (Object.keys(kinds).filter(x => !x.startsWith("_"))[0] || null);
+            if (!k) return "";
+            const d = kinds[k], c = (() => { try { return featureCost(k, cfgF); } catch { return null; } })();
+            const can = (() => { try { return canBuildOn(h, k, kinds, CONTENT.rules?.economy?.holdStore?.slots?.frames?.kinds); } catch { return { ok: true }; } })();
+            // ⚠️ NO HOLDING ON PURPOSE. This kind is NOT BUILT: handing in the hold sends the yield reader looking for
+            // a feature that does not exist, and its "the rule says none" branch then answers "nothing while it is
+            // thriving" about a mine nobody has dug. Without it the line reads "how much depends on the hold's
+            // condition", which is the true answer for something you are only considering. (The row for a feature that
+            // actually STANDS does pass the hold, and should — there the number is real.)
+            const does = (() => { try { return featureDoes(k, cfgF, { level: 1, count: 1 }) || []; } catch { return []; } })();
+            const cat = (() => { try { return featureCategory(k, cfgF); } catch { return null; } })();
+            const goods = c?.build ? Object.entries(c.build.goods).map(([g, n]) => `${n}\u00a0${String(g).replace(/_/g, " ")}`).join(", ") : null;
+            // ⚠️ WHETHER THE STORE CAN PAY IT, counted off this hold's own shelf — `addFeature` takes goods from the
+            // store first and STALLS what it cannot pay, so a player who cannot afford it should read that before the
+            // click, not after.
+            const short = c?.build ? Object.entries(c.build.goods).filter(([g, n]) => (Number(h.store?.[g]) || 0) < Number(n))
+              .map(([g, n]) => `${Math.max(0, Number(n) - (Number(h.store?.[g]) || 0))} more ${String(g).replace(/_/g, " ")}`) : [];
+            return `<div class="hb-panel">
+              <div class="hb-head"><strong>${esc(d.label || k)}</strong>${cat ? `<span class="hb-cat">${esc(cat.label)}</span>` : ""}</div>
+              ${d.what ? `<p class="hb-what">${esc(d.what)}</p>` : ""}
+              ${/* ⚠️ `said` IS AUTHORED MARKUP, printed bare — the row for a standing feature has always rendered it
+                    that way, and escaping it here put literal `<strong>` tags on screen. One field, two readers,
+                    disagreeing about what it is. */""}
+              ${does.length ? `<ul class="hb-does">${does.map(x => `<li>${x.said}</li>`).join("")}</ul>` : `<p class="hint">what it gives is not written down for this kind</p>`}
+              <div class="hb-cost">${!c?.buildable
+                ? "<strong>Cannot be built</strong> — it arrives some other way"
+                : `<span><strong>${esc(goods)}</strong></span><span>${c.build.days}\u00a0days of work</span><span>${c.upkeep}/pass to keep</span>`}</div>
+              ${!can.ok ? `<p class="hb-no">⛔ ${esc(can.why)}</p>`
+                : short.length ? `<p class="hb-no">The store is short ${esc(short.join(" and "))} — the build will stall until it is there.</p>` : ""}
+            </div>`;
+          })()}
           ${/* ⛔ CCODE-495 — A CRAFTED FEATURE APPEARS HERE TOO, or its expiry is a field nothing renders and the
                 player meets a lapse with no way to answer it. A feature is keyed by its KIND, an improvement by
                 its craft — `refreshImprovement` accepts either. */""}
@@ -16447,19 +16576,11 @@ function renderCharacterScreen() {
           <span class="purse-n">${n}</span>
           <span class="hint">${n ? (c.id === "scrip" ? scripRows.map(r => `${r.count} ${r.regionId}${r.usableHere === false ? " (not good here)" : ""}`).join(" · ") : `${(l.worthInCrystal || 0).toFixed(1)} in crystal`) : "none"}</span></div>`;
       };
-      // ⛔ WHAT THE ESTATE IS DOING, which the sheet has never shown: the sum of every holding's pass — what it makes, what the
-      // keeper sells, the fees, the upkeep — plus the caravans actually on the road right now. ⚠️ `net` is the authored field the
-      // purse really receives, so the headline number is the one that lands rather than one I add up myself.
-      const estate = (character.holdings || []).map(h => ({ h, L: holdLedgerOf(h) })).filter(x => x.L);
-      // ⚠️ THE FIELD IS `worth`, NOT `made`. The first draft read `perPass.made` and the panel said "makes 0 · sold 189", which
-      // is impossible on its face — a keeper sells a SHARE of what a pass makes — and is exactly the sort of number that gets
-      // believed. The authored names are `worth` (the pass, valued here), `sells`, `fees`, `upkeep`, `net` and `banks`.
-      const estSum = estate.reduce((a, x) => ({
-        made: a.made + (x.L.perPass?.worth || 0), sells: a.sells + (x.L.perPass?.sells || 0),
-        fees: a.fees + (x.L.perPass?.fees || 0), upkeep: a.upkeep + (x.L.perPass?.upkeep || 0),
-        net: a.net + (x.L.perPass?.net || 0), store: a.store + (x.L.store?.worth || 0),
-      }), { made: 0, sells: 0, fees: 0, upkeep: 0, net: 0, store: 0 });
-      const cars = caravansOf(character).filter(c => c && !c.arrivedDay);
+      // ⛑ `estate`, `estSum` AND `cars` WENT WITH THE BLOCK. Nothing else read them, and a computation left standing
+      // with no reader is the ⇧ defect in its data form — an assert on `estSum` caught all three.
+      // ⚠️ WORTH KEEPING FROM WHAT STOOD HERE: the authored field is `worth`, not `made`. An earlier draft read
+      // `perPass.made`, got undefined, and printed "makes 0 · sold 189" — impossible on its face, since a keeper sells
+      // a SHARE of what a pass makes. The board's new sum reads `worth` for that reason.
       return `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">Purse</h3>
         <div class="hint" style="font-variant-numeric:tabular-nums">${esc(line)}${w.totalInCrystal ? ` · <strong>${w.totalInCrystal.toFixed(1)}</strong> in crystal` : ""}${(() => {
           // ⛔ CCODE-374 — the wealth level BESIDE the number, never instead of it (Aevi's ruling on Erik's "I have no idea how wealthy Silas is")
@@ -16468,13 +16589,10 @@ function renderCharacterScreen() {
         })()}</div>
         <div class="purse-table">${curDefs.map(curRow).join("")}</div>
         <div class="hint" data-money-here>${esc(moneyLine(hereRegionId(), CONTENT.rules?.economy || null))}${canChangeMoneyHere() ? ` <button class="link-btn" data-change-money>Change money here</button>` : ""}</div>
-        ${estate.length ? `<div class="purse-trade">
-          <div class="craft-tier-label">What your holdings are doing</div>
-          <div class="hint" style="font-variant-numeric:tabular-nums" title="Every place you hold, summed over one pass: what the yields are worth, what a keeper turns into coin, runner fees, and the upkeep. The net is what the purse actually receives.">
-            ${estate.length} place${estate.length === 1 ? "" : "s"} · makes <strong>${estSum.made}</strong> · sold <strong>${estSum.sells}</strong>${estSum.fees ? ` · fees <strong>${estSum.fees}</strong>` : ""} · upkeep <strong>${estSum.upkeep}</strong> · <strong class="${estSum.net < 0 ? "not-castable" : "practiced"}">${estSum.net >= 0 ? "+" : ""}${estSum.net} a pass</strong></div>
-          ${estSum.store ? `<div class="hint">Unsold in their stores: <strong>${estSum.store}</strong> in crystal.</div>` : ""}
-          ${cars.length ? `<div class="hint">${cars.length} load${cars.length === 1 ? "" : "s"} on the road — ${esc(cars.map(c => `${c.goods || "goods"} to ${CONTENT.locations?.[c.to]?.name || c.to}`).slice(0, 3).join(", "))}.</div>` : ""}
-        </div>` : ""}
+        ${/* ✅ ERIK 2026-10-01: *"the old holdings status is covered by the Holdings tab header info. the one on the
+              traits page can be removed."* ⛑ SWEPT FIRST: the board carried the net, the in, the out and the carts
+              already, but NOT what a pass makes gross (32, against 16 sold) nor what sits unsold in the stores. Both
+              are on the board now, which is what makes his sentence true rather than nearly true. */""}
         ${w.lines.some(l => l.usableHere === false) ? `<p class="hint" style="margin-top:4px;color:var(--warn,#e0b25a)">Some of your scrip is another Reach's — it buys nothing here.</p>` : ""}
         ${(character._exchangeReceipts || []).filter(r => r.ok === false).map(r => `<p class="hint" style="margin-top:4px;color:var(--danger)">A trade did not go through — ${esc(r.why || "refused")}</p>`).join("")}
         ${(character._exchangeReceipts || []).filter(r => r.settled).map(r => `<p class="hint" style="margin-top:4px">${esc(r.said || `Paid ${r.paid} ${r.currency}`)}${r.bargain?.ok ? ` — bargained down from ${r.bargain.price}` : ""}.</p>`).join("")}</div>`;

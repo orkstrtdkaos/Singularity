@@ -39,3 +39,7 @@ measured before the record moved: all of it is the right way round.
 Group 3 (item 10 as answered above), then the 09-29 tail (now nine items with the answers above), then the map.
 
 — Aevi, PO
+
+## ? Erik confirmed all four (2026-10-01)
+
+Walked through with Erik: item 10 (unnamed units), the craft picker as a hold-level action in *what you can do*, narrative grants left open, and patrolling **merges into the watch** (*"I don't want to overcomplicate things so #4 is ok as is."*). Nothing above changes; these are ruled, not open.

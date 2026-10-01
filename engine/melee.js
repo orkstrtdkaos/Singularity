@@ -856,6 +856,105 @@ export function kitLift(c) {
 }
 
 /** What a unit's hands carry, summed by kind across its contingents — never more of a kind than there are heads to carry it. Pure. */
+/* ═════ A LEVY IS SPLIT AND COMBINED, AND NOBODY IS GIVEN A NAME ═════
+ *
+ * ⛔ ERIK: *"The raised hands need to be individual units I can apply to various tasks (split or combined)."*
+ * ⛔ ERIK, overruling the PO's first answer: *"I don't want raised hands or soldiers to have names in general. Not even
+ * when they get assigned to a job."* ⛑ So these two functions mint NOTHING. No name pool is read, no registry person is
+ * made, and a split unit is described by what it IS — a hand, from somewhere, of some quality, good at something.
+ * Only the story can turn one into a person, through the GM's ordinary npc write.
+ */
+
+/** ⛑ WHAT A LEVY ROW SAYS WHEN IT HAS NO NAME — "3 hands · raised at Millbrook · quality 2 · good at clearing".
+ *  ⚠️ A NAMED CONTINGENT IS NOT ONE OF THESE and answers its own name, because the whole point of the rule is that the
+ *  two are different kinds of row. PURE. */
+export function unitLabel(cg, { locations = null, holdings = null, nameOf = null } = {}) {
+  if (!cg) return "";
+  if (cg.npcId) return String(nameOf ? nameOf(cg.npcId) : (cg.what || cg.npcId));
+  const n = Math.max(0, num(cg.n, 0));
+  const noun = cg.kind ? String(cg.kind) : (n === 1 ? "hand" : "hands");
+  const bits = [`${n} ${noun}`];
+  if (cg.from) {
+    const where = (holdings || []).find(h => h && h.id === cg.from)?.name
+      || locations?.[cg.from]?.name || null;
+    if (where) bits.push(`raised at ${where}`);
+  }
+  if (num(cg.quality, 0) > 0) bits.push(`quality ${num(cg.quality, 1)}`);
+  const does = (Array.isArray(cg.does) ? cg.does : []).filter(x => String(x) !== "MARTIAL");
+  if (does.length) bits.push(`good at ${does.map(x => String(x).toLowerCase()).join(", ")}`);
+  return bits.join(" · ");
+}
+
+/** ⛔ SPLIT A LEVY — peel `take` heads off into a row of their own, so they can be sent somewhere else.
+ *
+ *  ⚠️ IT NAMES NOBODY. The new row carries the same quality, the same verbs, the same ward and the place they were
+ *  raised, and no name at all; Erik ruled that explicitly and twice.
+ *  ⚠️ AND THE KIT DIVIDES RATHER THAN DUPLICATING. `kit` is `{ gear: { n } }` clamped by the contingent's own `n`, so
+ *  splitting without dividing it would have handed the same swords to both halves — ten hands with ten swords split into
+ *  one and nine would have carried eleven.
+ *  → { ok, index, from, to } or { ok: false, why }. Mutates the band. */
+export function splitContingent(band, index, { take = 1 } = {}) {
+  const list = Array.isArray(band?.contingents) ? band.contingents : null;
+  const cg = list?.[index];
+  if (!cg) return { ok: false, why: "no such group" };
+  if (cg.npcId) return { ok: false, why: "they are one person already" };
+  const have = Math.max(0, Math.round(num(cg.n, 0)));
+  const n = Math.max(1, Math.round(num(take, 1)));
+  if (have < 2) return { ok: false, why: "there is only one of them" };
+  if (n >= have) return { ok: false, why: `there are only ${have} — take fewer` };
+
+  // ⛑ the kit goes with the people, up to what the split takes and never more than exists
+  const kit = {};
+  const keptKit = {};
+  for (const [key, k] of Object.entries(cg.kit || {})) {
+    const held = Math.min(Math.max(0, num(k?.n, 0)), have);
+    const goes = Math.min(n, held);
+    if (goes > 0) kit[key] = { ...k, n: goes };
+    if (held - goes > 0) keptKit[key] = { ...k, n: held - goes };
+  }
+  const piece = { ...cg, n, ...(Object.keys(kit).length ? { kit } : {}) };
+  if (!Object.keys(kit).length) delete piece.kit;
+  const rest = { ...cg, n: have - n, ...(Object.keys(keptKit).length ? { kit: keptKit } : {}) };
+  if (!Object.keys(keptKit).length) delete rest.kit;
+
+  list.splice(index, 1, rest, piece);
+  band.count = list.reduce((a, x) => a + Math.max(0, num(x?.n, 0)), 0);
+  return { ok: true, index: index + 1, from: have, to: [have - n, n],
+    said: `${n} of the ${have} stand apart now. Nobody is named — they are ${unitLabel(piece)}.` };
+}
+
+/** ⛔ …AND COMBINE TWO THAT ARE THE SAME KIND OF PEOPLE, which is the other half of Erik's "split or combined".
+ *  ⚠️ ONLY WHERE THEY REALLY ARE ALIKE — same quality, same verbs, same ward, same place raised, neither of them a
+ *  person. Merging two unlike levies would quietly average away a difference the player chose.
+ *  → { ok, index } or { ok: false, why }. Mutates the band. */
+export function combineContingents(band, a, b) {
+  const list = Array.isArray(band?.contingents) ? band.contingents : null;
+  const x = list?.[a], y = list?.[b];
+  if (!x || !y || a === b) return { ok: false, why: "pick two different groups" };
+  if (x.npcId || y.npcId) return { ok: false, why: "a person is not a group to fold in" };
+  const same = (p, q) => num(p.quality, 1) === num(q.quality, 1)
+    && String(p.kind || "") === String(q.kind || "")
+    && String(p.from || "") === String(q.from || "")
+    && [...(p.does || [])].sort().join() === [...(q.does || [])].sort().join()
+    && [...(p.wards || [])].sort().join() === [...(q.wards || [])].sort().join();
+  if (!same(x, y)) return { ok: false, why: "they are not the same kind of people" };
+
+  const kit = {};
+  for (const src of [x, y]) for (const [key, k] of Object.entries(src.kit || {})) {
+    const held = Math.min(Math.max(0, num(k?.n, 0)), Math.max(0, num(src.n, 0)));
+    if (!held) continue;
+    kit[key] = kit[key] ? { ...kit[key], n: num(kit[key].n, 0) + held } : { ...k, n: held };
+  }
+  const merged = { ...x, n: Math.max(0, num(x.n, 0)) + Math.max(0, num(y.n, 0)),
+    ...(Object.keys(kit).length ? { kit } : {}) };
+  if (!Object.keys(kit).length) delete merged.kit;
+  const lo = Math.min(a, b), hi = Math.max(a, b);
+  list.splice(hi, 1);
+  list.splice(lo, 1, merged);
+  band.count = list.reduce((acc, z) => acc + Math.max(0, num(z?.n, 0)), 0);
+  return { ok: true, index: lo, said: `They stand together again — ${unitLabel(merged)}.` };
+}
+
 export function kitSummary(contingents) {
   const by = new Map();
   for (const c of contingents || []) for (const k of Object.values(c?.kit || {})) {

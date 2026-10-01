@@ -2170,6 +2170,20 @@ table.ob-matrix { border-collapse: collapse; width: 100%; min-width: 640px; font
 .hw-who { display: flex; flex-wrap: wrap; gap: 5px; align-items: center; min-width: 0; }
 .hw-who select { font-size: 12px; padding: 3px 6px; max-width: 100%; }
 .hw-chip { background: rgba(212, 162, 74, 0.14); color: var(--accent); border: 1px solid var(--accent); border-radius: 999px; padding: 1px 8px; font: 11px var(--font-ui); cursor: pointer; }
+
+/* ✅ ITEM 10 2026-10-01 — A HAND IS A ROW. ⛔ Erik: *"The raised hands need to be individual units I can apply to various
+   tasks (split or combined)"* — so each one says what it is (how many heads stand in it, what it is good at) instead of
+   being a chip carrying only a name. ⚠️ Names are NOT minted for raised hands; a row with no name is the normal case
+   and reads as "3 hands of The Fellowship". */
+.hw-hands { display: flex; flex-direction: column; gap: 3px; width: 100%; }
+.hw-hand { display: flex; align-items: baseline; gap: 8px; background: var(--panel2); border: 1px solid var(--border);
+  border-radius: 7px; padding: 3px 7px; }
+.hw-hand-n { font-weight: 600; white-space: nowrap; }
+.hw-hand-is { flex: 1 1 auto; min-width: 0; }
+.hw-hand .hw-chip-x { margin-left: auto; flex: 0 0 auto; }
+/* ⛑ the Split row's own number box, sized so it does not stretch the band row */
+.cg-split { display: inline-flex; align-items: center; gap: 4px; }
+.cg-split .armory-count { width: 56px; }
 .hw-gain { color: var(--ok); font-variant-numeric: tabular-nums; white-space: nowrap; }
 @media (max-width: 680px) { .hw-row { grid-template-columns: 1fr; } .hw-gain { white-space: normal; } }
 

@@ -169,7 +169,7 @@ import { championsFor, resolveChampion, creditChampion, championLine, sendingIsG
 // ⛔ CCODE-404 (Erik) — `addContingent` and `musteredFrom` are new; `unitComposition` and `bandGaps` had NO caller outside the tests.
 // ⛔ CCODE-405 (Erik's legion ruling): formed of bands that keep their identity, placed and postured once CALLED, and free until then.
 // ⚠️ ONE LINE ON PURPOSE — `import_integrity` reads an import statement per line, and a comment inside the braces hides what follows it.
-import { commandSlots, bringForward, lineSplit, canRaiseBand, bandReady, raiseBand, bandStrength, bandThreat, bloodBand, recoverBand, legionClash, addContingent, musteredFrom, unitComposition, bandGaps, formLegion, disbandLegion, callCostOf, callUnit, standDown, setUnitPosture, bloodUnit, resolvedUnit, UNIT_POSTURES, setUnitLeader, leaderBonusOf, editContingent, kitSummary, bandDialsOf, onMissionWith, MELEE_TIERS } from "./engine/melee.js"; // CCODE-276: the forward pick is a UI control, per Erik's ruling
+import { commandSlots, bringForward, lineSplit, canRaiseBand, bandReady, raiseBand, bandStrength, bandThreat, bloodBand, recoverBand, legionClash, addContingent, musteredFrom, unitComposition, bandGaps, formLegion, disbandLegion, callCostOf, callUnit, standDown, setUnitPosture, bloodUnit, resolvedUnit, UNIT_POSTURES, setUnitLeader, leaderBonusOf, editContingent, splitContingent, combineContingents, unitLabel, kitSummary, bandDialsOf, onMissionWith, MELEE_TIERS } from "./engine/melee.js"; // CCODE-276: the forward pick is a UI control, per Erik's ruling
 import { groupCapability, loadBearing } from "./engine/group.js";   // CCODE-317/322: what your line covers, and who holds it alone
 import { characterPower, threatBand } from "./engine/threat.js"; // CCODE-52: built power sets the mean the encounter pool revolves around
 import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, collapseMode, collapseResult, collapseFloor, frameCollapsible, swingDegree, wardAgainst, wardBroken, trivializes, playerReceiptLine, FRAME_FREEFORM_CUE } from "./engine/encounterFrame.js"; // SNG-230: the ENCOUNTER FRAME — obvious kind/win/exits; frameSize routes takeover-vs-banner; chaseFromFight = the chase you flee into (§6a); collapse* = a finisher ends a collapsible foe (§6b/§7a); wardAgainst/wardBroken = a ward FORBIDS a mechanic (§7b); trivializes = the right kit VOIDS a challenge's premise (§7c). SNG-246 Fix D: playerReceiptLine = the mechanical receipt SHOWN to the player
@@ -184,7 +184,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.16.6";
+const APP_VERSION = "2.16.7";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -15950,6 +15950,39 @@ function renderHoldingsTab(manageId = null, tab = null) {
             ? `<select data-job-put="${esc(h.id)}" data-kind="${esc(kind)}" aria-label="${esc(label)}"><option value="">+ ${esc(label)}</option>${freeNow.map(id => `<option value="${esc(id)}">${esc(workerName(id))}</option>`).join("")}</select>`
             : `<span class="hint">nobody free</span>`;
           const jobChip = (kind, id) => `<button class="hw-chip" data-job-drop="${esc(h.id)}" data-kind="${esc(kind)}" data-id="${esc(id)}" title="Take them off this">${esc(workerName(id))} ✕</button>`;
+          // ✅ ITEM 10 — A HAND IS A ROW THAT SAYS WHAT IT IS, not a chip carrying only a name. ⛔ ERIK: *"The raised
+          // hands need to be individual units I can apply to various tasks"*, and — overruling the PO's first answer —
+          // *"I don't want raised hands or soldiers to have names in general. Not even when they get assigned to a job."*
+          // ⛑ A `unit:bandId:index` id already works here and `workerName` already renders it unnamed ("3 hands of The
+          // Fellowship"), so this adds the READING: how many heads stand in it, and what the engine says they are good
+          // at. ⚠️ WHAT THEY ARE GOOD AT IS ASKED OF `workDayChance`, the same function the "put someone to it" picker
+          // asks — so the row and the picker can never disagree about who is worth putting where.
+          const handRow10 = (kind, id) => {
+            const heads = (() => { try { return Math.max(1, workHeads(character, id)); } catch { return 1; } })();
+            const best = (() => {
+              try {
+                const crafts = workCraftsCached(id);
+                // ⚠️ `T.kinds`, THE ASSEMBLED TABLE — not the raw `WORK_KINDS` defaults. `workTable` merges content over
+                // them, so reading the slice would ignore any kind Aevi retunes, and the row would disagree with the
+                // picker beside it. Calling the function that assembles the bag is this repo's own standing rule.
+                const scored = Object.entries(T.kinds).map(([k, K]) => ({ k, label: K.label, p: workDayChance(crafts, k, T) }))
+                  .sort((a, b) => b.p - a.p);
+                const top = scored[0];
+                if (!top || !(top.p > 0)) return null;
+                // ⚠️ TIES ARE REPORTED, NOT BROKEN ARBITRARILY. Measured on Erik's save: Dara Holt reads 88% at FIVE of the
+                // six kinds, so naming one of them would be the sort order speaking, not the person — the same defect I
+                // fixed in the power generator this morning, where a stable sort let declaration order decide a seat.
+                const tied = scored.filter(s => Math.round(s.p * 100) === Math.round(top.p * 100));
+                const words = tied.slice(0, 2).map(s => String(s.label).toLowerCase());
+                const more = tied.length - words.length;
+                return `good at ${words.join(" and ")}${more > 0 ? ` and ${more} more` : ""} (${Math.round(top.p * 100)}% a good day)`;
+              } catch { return null; }
+            })();
+            const bits = [heads > 1 ? `${heads} heads` : null, best].filter(Boolean);
+            return `<div class="hw-hand"><span class="hw-hand-n">${esc(workerName(id))}</span>${
+              bits.length ? `<span class="hint hw-hand-is">${esc(bits.join(" · "))}</span>` : ""}
+              <button class="hw-chip-x" data-job-drop="${esc(h.id)}" data-kind="${esc(kind)}" data-id="${esc(id)}" title="Take them off this">✕</button></div>`;
+          };
           // ✅ AEVI item 14 — AND A CHARGE THAT NAMES THIS PLACE IS WORK AT THIS PLACE. ⛔ ERIK saw the legs being built
           // with "nobody at it" while the person he had charged with exactly that stood in another list. The charge is
           // the same record the Work tab holds; this is a reading of it, never a second copy.
@@ -15977,7 +16010,10 @@ function renderHoldingsTab(manageId = null, tab = null) {
                 return also.length ? `${also.length} more watch while patrolling` : "";
               })() },
           ].map(r => `<div class="hw-row"><span class="hw-kind">${esc(r.label)}<small>${esc(r.what)}</small></span>
-            <span class="hw-who">${r.ids.map(id => jobChip(r.kind, id)).join(" ")}${r.kind === "_keeper" && r.ids.length ? "" : putter(r.kind, r.kind === "_keeper" ? "make one keeper" : r.kind === "_watch" ? "post a guard" : "add a hand")}</span>
+            ${/* ✅ ITEM 10 — the hands and the watch are ROWS now; the keeper stays a chip, being one person by definition. */""}
+            <span class="hw-who">${r.kind === "_keeper"
+              ? r.ids.map(id => jobChip(r.kind, id)).join(" ")
+              : `<div class="hw-hands">${r.ids.map(id => handRow10(r.kind, id)).join("")}</div>`}${r.kind === "_keeper" && r.ids.length ? "" : putter(r.kind, r.kind === "_keeper" ? "make one keeper" : r.kind === "_watch" ? "post a guard" : "add a hand")}</span>
             <span class="hw-gain">${esc(r.gain)}</span></div>`).join("");
           // ✅ AND THE EXPANSION WORK, which he asked for by name. The Build tab prices it; this is where people are put
           // to things, and that is what clearing ground IS — work somebody has to do.
@@ -18938,7 +18974,25 @@ function renderBandsTab() {
       return `<div class="codex-f" style="display:flex;gap:8px;align-items:baseline;flex-wrap:wrap"><strong>${r.n} ${esc(r.unitKind || "hands")}</strong>
         <span class="hint" style="flex:1 1 200px">${esc(r.what || "no charge written")}${r.verbs ? " · " + esc(r.verbs) : ""}${(r.wards || []).length ? ` · warded against ${esc(r.wards.join(", "))}` : ""}${kitWords ? ` · carrying ${esc(kitWords)}` : ""}</span>
         <button class="opt" data-cg-edit="${esc(r.unitId)}" data-cg-index="${r.contingentIndex}" title="Name them and say what they do">What are they?</button>${atAHold && cgRec && !cgRec.npcId && !onMissionWith(character.bands, `unit:${r.unitId}:${r.contingentIndex}`) ? `
-        <button class="opt" data-cg-outfit="${esc(r.unitId)}" data-cg-index="${r.contingentIndex}" title="Hand them weapons, shields and armour from this hold's armory">Outfit</button>` : ""}</div>`;
+        <button class="opt" data-cg-outfit="${esc(r.unitId)}" data-cg-index="${r.contingentIndex}" title="Hand them weapons, shields and armour from this hold's armory">Outfit</button>` : ""}
+        ${/* ✅ ITEM 10 — SPLIT AND COMBINE, AND NOBODY IS NAMED. ⛔ ERIK: *"The raised hands need to be individual units I
+              can apply to various tasks (split or combined)"* — and, overruling the PO's first answer, *"I don't want
+              raised hands or soldiers to have names in general. Not even when they get assigned to a job."*
+              ⚠️ So this peels heads off into a row of their own and mints NOTHING: same quality, same verbs, same ward,
+              the place they were raised, and no name. A named person has no Split — they are one row already. */""}
+        ${(() => {
+          if (!cgRec || cgRec.npcId || Number(r.n) < 2) return "";
+          const alike = (character.bands || []).find(b => b.id === r.unitId)?.contingents
+            ?.findIndex((x, i) => i !== r.contingentIndex && x && !x.npcId
+              && Number(x.quality || 1) === Number(cgRec.quality || 1)
+              && String(x.kind || "") === String(cgRec.kind || "")
+              && String(x.from || "") === String(cgRec.from || "")
+              && [...(x.does || [])].sort().join() === [...(cgRec.does || [])].sort().join()
+              && [...(x.wards || [])].sort().join() === [...(cgRec.wards || [])].sort().join());
+          return `<span class="cg-split"><input type="number" class="armory-count" min="1" max="${Math.max(1, Number(r.n) - 1)}" step="1" value="1" data-cg-take="${esc(r.unitId)}|${r.contingentIndex}" aria-label="How many to stand apart">
+            <button class="opt" data-cg-split="${esc(r.unitId)}" data-cg-index="${r.contingentIndex}" title="${esc(`Stand some of them apart as their own group, to send somewhere else. They get no name — they are ${r.n} ${r.unitKind || "hands"} and some of them will be fewer.`)}">Split</button>${
+            alike != null && alike >= 0 ? `<button class="opt" data-cg-join="${esc(r.unitId)}" data-cg-index="${r.contingentIndex}" data-cg-with="${alike}" title="Fold them back together with the other group just like them">Combine</button>` : ""}</span>`;
+        })()}</div>`;
     }
     const w = wherePerson(r, whereOpts);
     const gate = r.atSide ? null : canBringForward(character, r, { ladder });
@@ -19152,6 +19206,24 @@ function renderBandsTab() {
   const lp407 = document.getElementById("legion-plan"); if (lp407) lp407.onclick = () => showLegionPlan();
   for (const b of app.querySelectorAll("[data-unit-lead]")) b.onclick = () => showLeaderPicker(b.dataset.unitLead);
   for (const b of app.querySelectorAll("[data-cg-edit]")) b.onclick = () => showContingentEditor(b.dataset.cgEdit, Number(b.dataset.cgIndex));   // CCODE-409
+  // ✅ ITEM 10 — stand some of them apart, or fold them back. ⚠️ NO NAME IS MINTED on either path; the engine refuses a
+  // named person outright, and the refusal is shown rather than swallowed.
+  for (const b of app.querySelectorAll("[data-cg-split]")) b.onclick = () => {
+    const band = (character.bands || []).find(x => x && x.id === b.dataset.cgSplit);
+    if (!band) return;
+    const i = Number(b.dataset.cgIndex);
+    const take = Math.max(1, Number(app.querySelector(`[data-cg-take="${b.dataset.cgSplit}|${i}"]`)?.value) || 1);
+    const r = splitContingent(band, i, { take });
+    if (!r.ok) { alert(r.why); return; }
+    saveCharacter(character); renderBandsTab();
+  };
+  for (const b of app.querySelectorAll("[data-cg-join]")) b.onclick = () => {
+    const band = (character.bands || []).find(x => x && x.id === b.dataset.cgJoin);
+    if (!band) return;
+    const r = combineContingents(band, Number(b.dataset.cgIndex), Number(b.dataset.cgWith));
+    if (!r.ok) { alert(r.why); return; }
+    saveCharacter(character); renderBandsTab();
+  };
   for (const b of app.querySelectorAll("[data-cg-outfit]")) b.onclick = () => showOutfit(b.dataset.cgOutfit, Number(b.dataset.cgIndex));   // CCODE-445
   wireBandStance(() => renderBandsTab());   // CCODE-448: a band's stance
   wireObFoe(() => renderBandsTab());

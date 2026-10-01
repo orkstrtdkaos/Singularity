@@ -34703,6 +34703,154 @@ console.log("\n── §406 · a rout on a road ──");
     `uncapped ${oneUncapped406.mean.toFixed(2)} · capped ${one406.mean.toFixed(2)} · nobody ${none406.mean.toFixed(2)}`);
 }
 
+/* ══════════ §407 · A LEVY SPLITS AND COMBINES, AND NOBODY IS GIVEN A NAME ══════════ */
+// ⛔ ERIK: *"The raised hands need to be individual units I can apply to various tasks (split or combined)."*
+// ⛔ ERIK AGAIN, 2026-09-30, OVERRULING THE PO'S FIRST ANSWER: *"I don't want raised hands or soldiers to have names in
+// general. Not even when they get assigned to a job."* ⛑ So the split mints NOTHING: no name pool is read and no
+// registry person is made, at either end.
+//
+// ⛑ MEASURED BEFORE THE RECORD MOVED (Aevi asked for exactly that, and it shrank the item): a hold's `crew`/`garrison`
+// are ALREADY arrays of person ids in every live holding, and `unit:bandId:index` ALREADY works as a worker id —
+// `workerName` renders one as "3 hands of The Fellowship" and `workHeads` counts it. A band's `count` is DERIVED from
+// its contingents, and 16 of 22 are already named people. The only thing that is a COUNT is a levy: 6 contingents,
+// 29 of 45 heads, and that is the whole of item 10.
+console.log("\n── §407 · a levy splits, and nobody is named ──");
+{
+  const M407 = await import("../engine/melee.js");
+  const J407 = await import("../engine/jobs.js");
+
+  const levy407 = (over = {}) => ({ n: 9, quality: 2, does: ["HARM", "MARTIAL"], kind: null,
+    from: "the-fell-pell", what: "raised at The Fell Pell", wards: [], crafts: [], ...over });
+  const band407 = (cgs) => ({ id: "b407", name: "The Fellowship", contingents: cgs.map(c => ({ ...c })),
+    count: cgs.reduce((a, c) => a + (Number(c.n) || 0), 0) });
+
+  /* ---- 1 · ⛔ IT SPLITS, AND IT NAMES NOBODY ---- */
+  check("§407: ⛔ A LEVY SPLITS INTO A ROW OF ITS OWN, and NEITHER piece carries a name",
+    (() => {
+      const b = band407([levy407()]);
+      const r = M407.splitContingent(b, 0, { take: 4 });
+      return r.ok && b.contingents.length === 2
+        && b.contingents[0].n === 5 && b.contingents[1].n === 4
+        && b.contingents.every(c => !c.npcId)
+        && !/name/i.test(JSON.stringify(b.contingents).replace(/"name"/g, ""));
+    })());
+  // ⛔ THE RULE ERIK STATED TWICE, asked of the SOURCE: nothing on this path may reach a name pool or mint a person.
+  check("§407: ⛔ …and the split path reads NO name pool and mints NO person — he ruled it twice",
+    (() => {
+      const src = rd("engine/melee.js");
+      const fn = src.slice(src.indexOf("export function splitContingent"), src.indexOf("export function combineContingents"));
+      return fn.length > 100
+        && !/mintedNames|namePool|pickName|nameFor|npcRegistry/.test(fn)
+        && !/npcId\s*:/.test(fn.replace(/if \(cg\.npcId\)/g, ""));
+    })());
+  // ⛑ AND THE PIECES CARRY WHAT THEY ARE: the same quality, verbs, ward and the place they were raised.
+  check("§407: ⛑ …and a piece is the same KIND of people — quality, verbs, ward and where they were raised all ride along",
+    (() => {
+      const b = band407([levy407({ wards: ["fire"], kind: "archers", quality: 3 })]);
+      M407.splitContingent(b, 0, { take: 2 });
+      return b.contingents.every(c => c.quality === 3 && c.kind === "archers"
+        && c.from === "the-fell-pell" && (c.wards || []).join() === "fire");
+    })());
+
+  /* ---- 2 · ⚠️ THE GEAR DIVIDES RATHER THAN DOUBLING ---- */
+  // ⚠️ `kit` IS CLAMPED BY THE CONTINGENT'S OWN `n`, so splitting without dividing it hands the same swords to both
+  // halves — ten hands with ten swords, split one off, would carry eleven.
+  check("§407: ⚠️ THE KIT DIVIDES WITH THE PEOPLE — ten hands with ten swords split into seven and three carry ten, not twenty",
+    (() => {
+      const b = band407([levy407({ n: 10, kit: { sword: { gear: "sword", one: "sword", many: "swords", n: 10 } } })]);
+      const before = M407.kitSummary(b.contingents).reduce((a, k) => a + k.n, 0);
+      M407.splitContingent(b, 0, { take: 3 });
+      const after = M407.kitSummary(b.contingents).reduce((a, k) => a + k.n, 0);
+      return before === 10 && after === 10
+        && b.contingents.map(c => c.kit?.sword?.n).join() === "7,3";
+    })());
+  // ⛔ AND THE BAND'S HEAD COUNT IS UNCHANGED BY A SPLIT. `count` is derived from the contingents, so a split that
+  // moved it would be conjuring or losing people.
+  check("§407: ⛔ …and splitting conjures nobody and loses nobody — the band's count is the same on both sides of it",
+    (() => {
+      const b = band407([levy407({ n: 9 }), levy407({ n: 1, npcId: "pell", what: "Pell" })]);
+      const before = b.count;
+      M407.splitContingent(b, 0, { take: 4 });
+      return b.count === before && b.count === b.contingents.reduce((a, c) => a + c.n, 0);
+    })());
+
+  /* ---- 3 · ⛔ WHAT IT REFUSES ---- */
+  check("§407: ⛔ A NAMED PERSON HAS NO SPLIT — they are one row already, which is the whole distinction",
+    (() => {
+      const b = band407([levy407({ n: 1, npcId: "pell", what: "Pell Ran Marsh" })]);
+      const r = M407.splitContingent(b, 0, { take: 1 });
+      return !r.ok && /one person already/.test(r.why);
+    })());
+  check("§407: ⛑ …and so does a group of one, and taking all of them, and a group that is not there",
+    (() => {
+      const one = M407.splitContingent(band407([levy407({ n: 1 })]), 0);
+      const all = M407.splitContingent(band407([levy407({ n: 4 })]), 0, { take: 4 });
+      const none = M407.splitContingent(band407([levy407()]), 9);
+      return !one.ok && !all.ok && !none.ok && [one, all, none].every(r => typeof r.why === "string" && r.why);
+    })());
+
+  /* ---- 4 · ⛔ AND IT GOES BACK ---- */
+  check("§407: ⛔ SPLIT THEN COMBINE IS THE ROW YOU STARTED WITH — exactly, kit included",
+    (() => {
+      const b = band407([levy407({ n: 9, kit: { sword: { gear: "sword", one: "sword", many: "swords", n: 9 } } })]);
+      const orig = JSON.stringify(b.contingents[0]);
+      M407.splitContingent(b, 0, { take: 4 });
+      const back = M407.combineContingents(b, 0, 1);
+      return back.ok && b.contingents.length === 1 && JSON.stringify(b.contingents[0]) === orig;
+    })());
+  // ⚠️ AND ONLY WHERE THEY REALLY ARE ALIKE. Folding two unlike levies would quietly average away a difference the
+  // player chose — and a person is never folded into a group.
+  check("§407: ⚠️ …and two UNLIKE groups refuse, as does folding a person into one",
+    !M407.combineContingents(band407([levy407({ quality: 1 }), levy407({ quality: 5 })]), 0, 1).ok
+    && !M407.combineContingents(band407([levy407(), levy407({ from: "elsewhere" })]), 0, 1).ok
+    && !M407.combineContingents(band407([levy407(), levy407({ n: 1, npcId: "pell" })]), 0, 1).ok
+    && !M407.combineContingents(band407([levy407(), levy407()]), 0, 0).ok);
+
+  /* ---- 5 · ⛑ A PIECE CAN BE PUT TO WORK WITHOUT EVER BEING NAMED ---- */
+  // ⛑ THE TWO HALVES OF ITEM 10 MEET HERE: `unit:bandId:index` already works as a worker id, so the split is what
+  // makes the pieces the player wants to post, and nothing has to learn a name for it.
+  check("§407: ⛑ A SPLIT PIECE IS ADDRESSABLE AS A WORKER, with no name anywhere in the path",
+    (() => {
+      const ch = { name: "T407", bands: [band407([levy407({ n: 9 })])] };
+      M407.splitContingent(ch.bands[0], 0, { take: 2 });
+      return J407.workHeads(ch, "unit:b407:0") === 7 && J407.workHeads(ch, "unit:b407:1") === 2
+        && J407.workHeads(ch, "unit:b407:9") === 0;
+    })());
+  // ⛑ AND THE ROW SAYS WHAT THEY ARE, in the shape Aevi asked for, with no name in it.
+  check("§407: ⛑ …and the row reads “N hands · raised at X · quality Q · good at …”, never a name",
+    (() => {
+      const said = M407.unitLabel(levy407({ n: 3, quality: 2, does: ["SHAPE", "MARTIAL"] }),
+        { holdings: [{ id: "the-fell-pell", name: "The Fell Pell" }] });
+      return /^3 hands/.test(said) && /raised at The Fell Pell/.test(said)
+        && /quality 2/.test(said) && /good at shape/.test(said) && !/MARTIAL/.test(said);
+    })());
+  // ⛔ …AND A NAMED CONTINGENT ANSWERS ITS NAME, because the two kinds of row are the whole point of the rule.
+  check("§407: ⛔ …while a NAMED contingent answers its name — the two kinds of row are the point",
+    M407.unitLabel({ n: 1, npcId: "pell" }, { nameOf: (id) => (id === "pell" ? "Pell Ran Marsh" : id) }) === "Pell Ran Marsh");
+
+  /* ---- 6 · ⚠️ THE HOLD'S ROWS SAY WHAT A HAND IS, AND DO NOT INVENT IT ---- */
+  const A407 = rd("app.js");
+  check("§407: ⛑ A HOLD'S HANDS ARE ROWS, drawn for the crew and the watch and not for the keeper, who is one person",
+    /const handRow10 = \(kind, id\) =>/.test(A407)
+    && /r\.kind === "_keeper"\s*\n?\s*\? r\.ids\.map\(id => jobChip/.test(A407)
+    && /handRow10\(r\.kind, id\)/.test(A407));
+  // ⚠️ IT ASKS THE ASSEMBLED TABLE, not the raw defaults — or the row would ignore a kind Aevi retunes and disagree
+  // with the picker beside it, which reads the same function.
+  check("§407: ⚠️ …and it reads the ASSEMBLED work table, so the row and the picker cannot disagree",
+    /Object\.entries\(T\.kinds\)\.map\(\(\[k, K\]\) => \(\{ k, label: K\.label, p: workDayChance\(crafts, k, T\) \}\)\)/.test(A407));
+  // ⛔ AND A TIE IS REPORTED RATHER THAN BROKEN BY SORT ORDER. Measured on Erik's save: Dara Holt reads the same
+  // percentage at FIVE of the six kinds, so naming one would be the sort speaking — the identical defect to the one
+  // fixed in the power generator the same day.
+  check("§407: ⛔ …and a TIE is said out loud, never broken by the sort order",
+    /const tied = scored\.filter\(s => Math\.round\(s\.p \* 100\) === Math\.round\(top\.p \* 100\)\);/.test(A407)
+    && /and \$\{more\} more/.test(A407));
+  // ⛑ AND BOTH CONTROLS ARE WIRED, with the refusal shown rather than swallowed.
+  check("§407: ⛑ …and Split and Combine are wired, with the engine's refusal shown",
+    /data-cg-split="/.test(A407) && /data-cg-join="/.test(A407)
+    && /const r = splitContingent\(band, i, \{ take \}\);/.test(A407)
+    && /if \(!r\.ok\) \{ alert\(r\.why\); return; \}/.test(A407));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

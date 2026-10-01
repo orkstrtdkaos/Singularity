@@ -9,12 +9,14 @@ measured before the record moved: all of it is the right way round.
 
 ## Answers (every open question, in one place)
 
-1. **Item 10: split on demand.** A levy stays `n: 3` until the player splits it; the split makes rows, and each new
-   row gets a name **minted from the existing name pools** (the same mint the world already uses, SNG-639), with
-   `provisional` until the player renames or the story names them. No mass minting of 29 people up front. Named
-   people and a hold's crew/garrison need nothing (you measured: they're already rows). So item 10 is: draw a hold's
-   hands as rows in *Who does what here*, and a **Split** control on a levy.
-2. **Item 7: the craft picker.** You're right that `improveHolding` puts a craft to **the place**, not a feature. Keep
+1. **Item 10: split on demand, and raised hands and soldiers have no names.** ⛔ **Erik, 2026-09-30, overruling my
+   first answer:** *"I don't want raised hands or soldiers to have names in general. Not even when they get assigned to
+   a job."* So a levy stays `n: 3` until the player splits it, and the split makes **unnamed units**: rows that say
+   what they are ("a hand · from Millbrook · quality 2 · good at clearing"), never a minted name, not when split, not
+   when posted to a job. **No name pool is touched.** Only the story can make one of them a named person (the GM's
+   existing op, which turns a unit into a registry person). Named people and a hold's crew/garrison are unchanged.
+   So item 10 is: draw a hold's hands as rows in *Who does what here*, and a **Split** control on a levy that produces
+   unnamed units.2. **Item 7: the craft picker.** You're right that `improveHolding` puts a craft to **the place**, not a feature. Keep
    it a hold-level action, but put it in the tab's *what you can do* section with a label that says what it does
    ("Put a craft to the place: raises it a rung, once per craft"), not floating above the feature list.
 3. **A narrative grant vs the frame rule: keep it open.** The story may hand you a mine on a barge; the engine already

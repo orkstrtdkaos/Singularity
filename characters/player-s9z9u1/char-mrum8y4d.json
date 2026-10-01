@@ -2417,13 +2417,6 @@
       {
         "day": 10,
         "worldDay": 92,
-        "text": "The Standing Annex reads as if it has a shrine — the record does not say so. See Holdings.",
-        "tier": "event",
-        "section": "yours"
-      },
-      {
-        "day": 10,
-        "worldDay": 92,
         "text": "The Hundred Hands broke The One Who Walks Toward the Edge — a stranger, and now an enemy. The One is out of the reckoning while the wound holds.",
         "tier": "event",
         "section": "world",
@@ -2606,11 +2599,18 @@
         "tier": "ambient",
         "section": "world",
         "figureId": "taken-person"
+      },
+      {
+        "day": 10,
+        "worldDay": 93,
+        "text": "The Standing Annex's keeper sold 1 raw material for 4 crystal.",
+        "tier": "event",
+        "section": "yours"
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 2249,
-    "lastSharedReadAt": "2026-10-01T17:51:24.403Z",
+    "lastGenCount": 2254,
+    "lastSharedReadAt": "2026-10-01T22:28:53.513Z",
     "lastTickWorldDay": 93,
     "lastCanonWorldDay": 93,
     "turnsSinceOffer": 1,
@@ -2951,7 +2951,7 @@
         "kind": "decision",
         "premise": "Someone who keeps the count of what has been unmade has begun rounding down, telling themselves the difference is noise — but the rounding has a direction, and it has been consistent for long enough…",
         "cause": "The act of counting the unmade requires a decision about what constitutes a thing distinct enough to be counted, and that threshold has always been left to…",
-        "stage": 33,
+        "stage": 34,
         "seededAtCount": 1917,
         "surfaced": true,
         "fate": "growing",
@@ -2964,7 +2964,7 @@
         "kind": "decision",
         "premise": "The person who holds authority to formally designate what has been unmade as 'resolved' has not done so for anything in years, and the backlog of unresolved unmakings is beginning to press against…",
         "cause": "In the_unmade, the act of resolution is itself an act of power, and the authority-holder has quietly discovered that unresolved things remain partially…",
-        "stage": 29,
+        "stage": 30,
         "seededAtCount": 1968,
         "surfaced": true,
         "fate": "growing",
@@ -2989,7 +2989,7 @@
         "kind": "decision",
         "premise": "Someone has begun quietly counting what no longer exists — cataloguing absences — and has not yet decided whether to share what the count implies.",
         "cause": "The Unmade is defined by what has been lost or undone; its people have long customs around not naming absence directly, because naming draws attention to the…",
-        "stage": 24,
+        "stage": 25,
         "seededAtCount": 2053,
         "surfaced": true,
         "fate": "growing",
@@ -3002,7 +3002,7 @@
         "kind": "decision",
         "premise": "An elder who alone remembers the last time something like the current unraveling occurred has not yet spoken, weighing whether the knowing will help or hasten what is coming.",
         "cause": "In the_unmade, what is lost or dissolved carries weight equal to what remains — silence is understood as a form of preservation, and the elder has lived long…",
-        "stage": 23,
+        "stage": 24,
         "seededAtCount": 2100,
         "surfaced": true,
         "fate": "growing",
@@ -10738,16 +10738,8 @@
       "the_war_ender": 84,
       "the_last_choirmistress": 90
     },
-    "updatesToldTo": "2.16.10",
+    "updatesToldTo": "2.16.11",
     "newsLog": [
-      {
-        "day": 4,
-        "worldDay": 80,
-        "text": "Cinder Vael, the Wright Who Would Not Stop is spoken of: arguing with Halcyon by letter, for twenty years, about finishing.",
-        "tier": "murmur",
-        "section": "world",
-        "locationId": "the_ceaseless"
-      },
       {
         "day": 4,
         "worldDay": 80,
@@ -13157,6 +13149,22 @@
         "worldDay": 93,
         "text": "The game was updated to v2.16.10 — 1 fixed, 4 changed.",
         "loggedAt": "2026-10-01T17:51:30.258Z"
+      },
+      {
+        "day": 10,
+        "worldDay": 93,
+        "text": "The Standing Annex's keeper sold 1 raw material for 4 crystal.",
+        "tier": "event",
+        "section": "yours",
+        "loggedAt": "2026-10-01T22:29:02.466Z"
+      },
+      {
+        "kind": "update",
+        "section": "world",
+        "version": "2.16.11",
+        "worldDay": 93,
+        "text": "The game was updated to v2.16.11 — 2 fixed, 1 changed.",
+        "loggedAt": "2026-10-01T22:29:02.466Z"
       }
     ],
     "seatsTaken": {
@@ -13192,9 +13200,9 @@
         "destination": null,
         "stake": null,
         "progress": 0,
-        "status": "working",
+        "status": "stalled",
         "stampedAtWorldCount": 2181,
-        "lastMovedWorldCount": 2182,
+        "lastMovedWorldCount": 2254,
         "holdId": "the_standing_annex",
         "purpose": "growth"
       }
@@ -16846,8 +16854,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790877090258,
-  "rev": 1148,
+  "updatedAt": 1790893742466,
+  "rev": 1150,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -19325,7 +19333,7 @@
   "nameRepairVersion": 1,
   "bondLogFrom": null,
   "purse": {
-    "crystal": 33,
+    "crystal": 31,
     "coin": 0,
     "paper": 0,
     "marks": 0,
@@ -19341,7 +19349,7 @@
       "obligation": null,
       "condition": "thriving",
       "claimedDay": 3,
-      "lastMovedWorldCount": 2180,
+      "lastMovedWorldCount": 2254,
       "history": [
         {
           "at": 2100,
@@ -19423,7 +19431,7 @@
       },
       "describedAs": "floating tower",
       "store": {
-        "raw_material": 0
+        "raw_material": 2
       },
       "lastFeatureOfferCount": 2220,
       "image": "https://singularity-art.orkstrtdkaos.workers.dev/prompt/technomage%20tower%20floating%20walking%20machine%20legs%20magic%2C%20The%20Standing%20Annex%3A%20a%20working%20enterprise%2C%20thriving%2C%20busy%20and%20well-found%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=58509&nologo=true",
@@ -19476,7 +19484,7 @@
           "via": "built",
           "building": {
             "owed": {},
-            "passesLeft": 6,
+            "passesLeft": 5,
             "paid": {
               "store": {
                 "raw_material": 8
@@ -19488,7 +19496,7 @@
       ],
       "garrison": [],
       "crew": [],
-      "growthPasses": 0,
+      "growthPasses": 1,
       "trade": true,
       "conditionSince": null,
       "runs": [
@@ -19503,13 +19511,16 @@
           "setDay": 90,
           "lastDepartureDay": null,
           "runs": 0,
-          "gathered": {},
-          "wholeProduct": true
+          "gathered": {
+            "raw_material": 5
+          },
+          "wholeProduct": true,
+          "lastDraw": 5
         }
       ],
       "clearing": {
         "budget": "open",
-        "progress": 0,
+        "progress": 0.25,
         "passes": 2,
         "startedDay": 91,
         "onFrame": true,
@@ -21271,7 +21282,7 @@
       },
       "lastVerb": "quest",
       "lastVerbDay": 10,
-      "wins": 2,
+      "wins": 0,
       "winHow": "quest",
       "grownHeads": 4,
       "grewDay": 8
@@ -21295,14 +21306,14 @@
       },
       "lastVerb": "patrol",
       "lastVerbDay": 10,
-      "losses": 0,
+      "losses": 1,
       "lost": {
         "0": 80
       },
       "wins": 0,
       "winHow": null,
-      "lossFrom": null,
-      "lossHow": null,
+      "lossFrom": "power_deepwood_moot",
+      "lossHow": "feud",
       "shrankDay": 10
     },
     "power_scaffold_court": {
@@ -21341,7 +21352,7 @@
       },
       "lossFrom": "power_harvest_hand",
       "lossHow": "feud",
-      "wins": 2,
+      "wins": 0,
       "winHow": "quest",
       "grownHeads": 32,
       "grewDay": 10
@@ -21369,7 +21380,7 @@
       },
       "lastVerb": "expand",
       "lastVerbDay": 10,
-      "wins": 1,
+      "wins": 2,
       "grownHeads": 52,
       "grewDay": 5,
       "winHow": "expand"
@@ -21385,9 +21396,9 @@
       "grownHeads": 30,
       "grewDay": 5,
       "winHow": "expand",
-      "lossFrom": "power_seraphic_orders",
-      "lossHow": "crusade",
-      "losses": 1,
+      "lossFrom": null,
+      "lossHow": null,
+      "losses": 0,
       "lost": {
         "0": 30
       },
@@ -21412,12 +21423,12 @@
       },
       "lastVerb": "feud",
       "lastVerbDay": 10,
-      "losses": 1,
+      "losses": 0,
       "lost": {
         "0": 16
       },
-      "lossFrom": "power_grovehome_moot",
-      "lossHow": "feud",
+      "lossFrom": null,
+      "lossHow": null,
       "shrankDay": 10
     },
     "power_switchback_tollmen": {
@@ -21439,7 +21450,7 @@
     "power_firstsight_barony": {
       "lastVerb": "expand",
       "lastVerbDay": 10,
-      "wins": 1,
+      "wins": 2,
       "grownHeads": 14,
       "grewDay": 5,
       "winHow": "expand"
@@ -21447,7 +21458,7 @@
     "power_blaze_unshadowed": {
       "lastVerb": "recruit",
       "lastVerbDay": 10,
-      "wins": 2,
+      "wins": 0,
       "grownHeads": 14,
       "grewDay": 5,
       "losses": 0,
@@ -21475,10 +21486,10 @@
       "wins": 0,
       "grownHeads": 10,
       "grewDay": 5,
-      "losses": 0,
+      "losses": 1,
       "winHow": null,
-      "lossFrom": null,
-      "lossHow": null,
+      "lossFrom": "power_scaffold_court",
+      "lossHow": "feud",
       "lost": {
         "0": 22
       },
@@ -21487,7 +21498,7 @@
     "power_long_choir": {
       "lastVerb": "recruit",
       "lastVerbDay": 10,
-      "wins": 2,
+      "wins": 0,
       "winHow": "recruit",
       "grownHeads": 12,
       "grewDay": 9
@@ -21514,7 +21525,7 @@
     "power_the_scouring": {
       "lastVerb": "expand",
       "lastVerbDay": 10,
-      "wins": 0,
+      "wins": 1,
       "grownHeads": 16,
       "grewDay": 5,
       "losses": 0,
@@ -21543,14 +21554,18 @@
     "power_hand_of_the_open_figure": {
       "lastVerb": "recruit",
       "lastVerbDay": 10,
-      "wins": 2,
-      "winHow": "recruit"
+      "wins": 0,
+      "winHow": null,
+      "grownHeads": 12,
+      "grewDay": 10
     },
     "power_the_bloodless_hold": {
       "lastVerb": "recruit",
       "lastVerbDay": 10,
-      "wins": 2,
-      "winHow": "recruit"
+      "wins": 0,
+      "winHow": null,
+      "grownHeads": 16,
+      "grewDay": 10
     },
     "power_keepers_of_the_told_ground": {
       "lastVerb": "patrol",

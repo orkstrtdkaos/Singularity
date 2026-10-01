@@ -184,7 +184,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.16.10";
+const APP_VERSION = "2.16.11";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -16487,17 +16487,11 @@ function renderHoldingsTab(manageId = null, tab = null) {
     saveCharacter(character); renderPartyTab();
   };
   for (const b of document.querySelectorAll("[data-ad-raise]")) b.onclick = () => renderBandsTab();
-  for (const b of document.querySelectorAll("[data-wc-ask]")) b.onclick = () => {
-    const id = b.dataset.wcAsk;
-    const who = character.npcRegistry?.[id]?.name || "them";
-    const ask = `I want to talk to ${who} about what happens if I die — whether they would come for me.`;
-    renderPlay(character.activeScene?.lastTurn || null, { aside: `You go to find ${who}.` });
-    const ff = document.getElementById("freeform-input");
-    // ⚠️ `focus()` ALONE, AND NO `scrollIntoView`. §238 holds the page to exactly one self-scroll — the
-    // waiting line — because Erik once read a silence as a crash when the panel moved out from under him.
-    // A focus brings the field into view in every browser anyway, so obeying the rule costs nothing here.
-    if (ff) { ff.value = ask; ff.focus(); }
-  };
+  // ⛔ THE `[data-wc-ask]` HANDLER WAS HERE AND THE BUTTON WAS NEVER ON THIS SCREEN. It is rendered by the death
+  // block, which lived in `renderCharacterScreen` — a different screen, whose markup is gone by the time this runs.
+  // MEASURED IN THE BROWSER on Loki's save before moving it: **3 buttons rendered, 0 with a handler.** SNG-653 §5 added
+  // that button because "the screen kept telling him to have a conversation it could not help him start"; it has never
+  // once worked. It is wired in `renderPartyTab` now, where the block renders.
   // ═════ SNG-651 · THE DOORS ═════
   // ⛔ OPEN A PLACE. The whole card is the target and so is its button — on a phone the card is one row high
   // and a player should not have to find a 60px button on it.
@@ -16640,95 +16634,10 @@ function renderCharacterScreen() {
         ${offers.length ? `<p class="hint" style="margin-top:4px;color:var(--warn,#e0b25a)">${offers.length} assignment${offers.length === 1 ? "" : "s"} may describe a place you hold — review ${offers.length === 1 ? "it" : "them"}.</p>` : ""}
         <button class="opt" id="cs-goto-holdings" style="margin-top:6px">⌂ Holdings</button></div>`;
     })()}
-    ${(() => {
-      // ⛔ SNG-566 (Aevi) — "THE ENGINE KNOWS EXACTLY WHERE YOU ARE AND HAS NO WAY TO SAY SO."
-      //
-      // ⚑ `deathDepth` had ELEVEN readers in the engine and ZERO here. Four depths, a world clock that reaches the
-      // player, holds that stop it and slows that lengthen it — all correct, all wired, none of it sayable to the
-      // person it is happening to. ⛑ Aevi: "most of this is already built, and it is right."
-      //
-      // ⛔ AND SNG-569 DECIDED THE SHAPE. She first argued this should be INVISIBLE while alive, lest a devotion read
-      // as a stat line. Erik: "The game needs to show the mechanics somewhere. If Maren IS holding your name and can
-      // use crafts for you, it should indicate that. You can also have it indicate you should have the conversation
-      // with her." ⚠️ HER OWN CORRECTION IS THE ARGUMENT: "hiding a mechanic does not protect it from becoming a stat
-      // line. It just hides it — and a player cannot make a decision about a system they cannot see."
-      // ⛑ So: the fact AND its owner, and the door to the conversation beside it.
-      const st = DeathModel.deathStandingFor(character, { currentDay: absoluteWorldDay(), rules: CONTENT.rules });
-      const rung = (r) => `<div class="codex-fact${r.here ? " mach-fired" : ""}"><strong>${esc(r.name)}</strong> — ${r.reachedBy ? esc(r.reachedBy) : "reached by nothing, at any rank"}${r.here ? " ← <strong>you are here</strong>" : ""}</div>`;
-      const held = st.heldOpenBy ? (character.npcRegistry?.[st.heldOpenBy]?.name || st.heldOpenBy) : null;
-      return `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">${st.dead ? "Where you are" : "If it goes badly"} <span class="hint" style="text-transform:none">— death is a state, not a terminus</span></h3>
-        ${st.dead
-          ? `<p class="hint" style="margin:0 0 6px">You are at <strong>${esc(st.depthName)}</strong>${st.cause ? `, ${esc(st.cause)}` : ""} — ${st.daysDead} day${st.daysDead === 1 ? "" : "s"} gone.${
-              st.sealed ? " <strong>Sealed.</strong> No rank reaches this."
-              : held ? ` <strong>${esc(held)} is holding the way open.</strong> While they hold it you do not sink at all.`
-              : st.daysLeft != null ? ` <strong>${st.daysLeft} day${st.daysLeft === 1 ? "" : "s"}</strong> before you sink further.`
-              : " You do not sink further from here on time alone."}${
-              st.sinkFactor > 1 ? ` Your sinking is slowed ${st.sinkFactor}× — every span is that much longer.` : ""}</p>`
-          : `<p class="hint" style="margin:0 0 6px">Dying is a <strong>state</strong> here, and it has rungs. Someone can come for you — how deep they can reach is set by their rank, and how long they have is set by the clock.${
-              held ? ` <strong>${esc(held)} is holding your name.</strong>` : ""}</p>`}
-        ${st.ladder.map(rung).join("")}
-        ${(() => {
-          // ⛑ SNG-569's second half: OPEN THE DOOR TO THE CONVERSATION. The mechanic named, and the person named
-          // beside it — because the stat was never the problem; the stat INSTEAD OF the relationship would have been.
-          // ⛔ ERIK 2026-09-14: the bond "gates whether they would BOTHER to".
-          //
-          // ⛔ SNG-653 — AND THEN HE HAD THE CONVERSATION AND THIS LINE KEPT ASKING FOR IT. Loki's history carries
-          // the scene: Vess accepted his confession and made a mutual vow that if death claims one, the other will
-          // reach for them. This block still said *"that is a conversation to have with them, not a setting"*,
-          // because `wouldReachFor` reads the BOND — and a bond is not a promise. Nothing changed after the vow
-          // because nothing could: no field, no op and no tag existed for one.
-          //
-          // ⚠️ THREE QUESTIONS, KEPT APART, which is the rule `death.js` already states about the first two:
-          // "canReach answers CAN; wouldReachFor answers WOULD, and the two must never be the same function."
-          // HAVE THEY SAID SO is the third and it is the one a player acts on.
-          //
-          // ⛑ CAN IS DERIVED, AND SAYS SO. Measured 2026-09-25: of 114 registry people across 14 saves, ZERO
-          // store a level — and `npcsheet` derives one for 114 of 114, which makes `canReach` answer differently
-          // per person instead of "unknown" for everybody.
-          const people = Object.fromEntries(Object.entries(character.npcRegistry || {}).filter(([, n]) => n && n.status !== "dead" && n.status !== "departed"));
-          const rows = DeathModel.whoComesFor(character, people, { rules: CONTENT.rules, currentDay: absoluteWorldDay(),
-            rankFor: (n) => { try { return Math.max(1, Math.round((derivedLevel(n, { day: absoluteWorldDay(), cfg: CONTENT.rules?.npcStanding }) || 1) / 5)); } catch { return 1; } } });
-          const pledged = rows.filter(r => r.pledge);
-          const coming = pledged.filter(r => r.canAtAll);
-          const shortR = pledged.filter(r => !r.canAtAll);
-          const couldAsk = rows.filter(r => !r.pledge && r.would && r.canAtAll);
-          const ableOnly = rows.filter(r => !r.pledge && !r.would && r.canAtAll).length;
-          const mine = pledged.filter(r => r.mutual);
-          if (!rows.length) return "";
-          // ⚠️ CAN / CAN'T PER DEPTH, NO NUMBER. `resolveRetrieval` takes an outcome from its caller and is NOT
-          // rolled, so a percentage here would be one I invented. Erik has backlogged the retrieval roll; when it
-          // lands the odds come from the same function the resolver uses, and not before.
-          const depths = (r) => r.reach.map(d => `<span class="wc-depth${d.can ? " wc-can" : ""}" title="${esc(d.can ? `they can reach ${d.name}` : (d.why || `${d.name} is past their reach`))}">${esc(d.name)} ${d.can ? "✓" : "—"}</span>`).join("");
-          const seenTag = (r) => r.seen
-            ? `<span class="hint" title="you have watched them work">you have seen this</span>`
-            : `<span class="hint" title="derived from who they are, not from anything you have watched them do">as far as you have seen them</span>`;
-          const line = (r, extra = "") => `<div class="wc-row"><div class="wc-who"><strong>${esc(r.name)}</strong>${r.mutual ? ` <span class="wc-mutual" title="you promised it back">⇄ both ways</span>` : ""}${r.pledge?.day != null ? ` <span class="hint">said on day ${r.pledge.day}</span>` : ""}</div>
-            <div class="wc-reach">${depths(r)} · ${seenTag(r)}</div>${(() => {
-              // ✅ CCODE-504 (ERIK: "Yes on the rolls for return from death") — AND NOW THERE IS A NUMBER, so
-              // the screen shows it. SNG-653 §7 said Can/Can't "until the roll exists"; it exists, and the %
-              // here is the one `rollRetrieval` pays. Only where they CAN reach — a depth past their reach has
-              // no odds, it has a refusal, and the two must not read alike.
-              const odds = r.reach.filter(d => d.can).map(d => {
-                try { const o = DeathModel.retrievalOdds({ status: "dead", deathState: { diedDay: absoluteWorldDay() - 1, depthOverride: d.depth } },
-                  { rank: r.rank, bond: r.bond, rules: CONTENT.rules, currentDay: absoluteWorldDay() });
-                  return o.pct ? `${esc(d.name)} <strong>${o.pct}%</strong>` : null; } catch { return null; }
-              }).filter(Boolean);
-              return odds.length ? `<div class="wc-odds">${odds.join(" · ")}</div>` : "";
-            })()}${r.pledge?.words ? `<div class="wc-words">“${esc(smartClamp(String(r.pledge.words), 160))}”</div>` : ""}${extra}</div>`;
-          return `<div class="wc-block">
-            <div class="craft-tier-label">Who comes for you</div>
-            ${coming.length ? `<div class="wc-group"><span class="wc-head">Coming for you</span>${coming.map(r => line(r)).join("")}</div>` : ""}
-            ${shortR.length ? `<div class="wc-group"><span class="wc-head">Would come, cannot reach</span>${shortR.map(r => line(r)).join("")}</div>` : ""}
-            <p class="hint" style="margin:2px 0">A reach that can be made is still a <strong>roll</strong> — and a failed one sinks them deeper, or seals them at the deep dark.</p>
-            ${!pledged.length ? `<p class="hint" style="margin:4px 0"><strong>Nobody has said they will come for you.</strong> That is a conversation, and these are the people who could have it.</p>` : ""}
-            ${couldAsk.length ? `<div class="wc-group"><span class="wc-head">Could come, hasn\u2019t said</span>${couldAsk.slice(0, 5).map(r => line(r, `<button class="opt wc-ask" data-wc-ask="${esc(r.id)}" title="Start a scene with them about this">Ask them</button>`)).join("")}</div>` : ""}
-            ${ableOnly ? `<p class="hint" style="margin:4px 0">${ableOnly} more could reach you, but have no reason to.</p>` : ""}
-            ${mine.length ? `<p class="hint" style="margin:6px 0 0">⇄ <strong>You have promised to go for:</strong> ${esc(mine.map(r => r.name).join(", "))}. That is your road when they are the one who falls.</p>` : ""}
-          </div>`;
-        })()}
-        ${st.willing === false ? `<p class="hint" style="margin:6px 0 0;color:var(--warn,#e0b25a)">You have refused to be brought back. That is yours to say and it is honoured.</p>` : ""}
-      </div>`;
-    })()}
+    ${/* ✅ ERIK 2026-10-01: *"The Death Wishes section needs an update to combine the content nicely. Then we can move
+          it to the party tab I think."* ⛑ IT IS ON THE PARTY TAB NOW — `deathWishesHtml()`, below `renderPartyTab`.
+          It is about your people and who would come for you, which is what that tab is for, and it was saying the
+          depths twice: once as a ladder and again as a chip row under every name. ⚠️ Moved, not copied. */""}
     ${Object.values(b).some(v => v) ? `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">Story</h3>
       ${["hometown", "residence", "livelihood", "hobbies", "motivation"].filter(k => b[k]).map(k => `<div class="codex-fact"><strong style="text-transform:capitalize">${k}:</strong> ${esc(b[k])}</div>`).join("")}
       ${(() => { // SNG-215 §C-2 dedup: the lived "story so far" paragraph is the Chronicle tab's job now; the
@@ -18831,6 +18740,111 @@ function partyNow() {
 
 /** ⛔ AT YOUR SIDE — each ally's stance and the crafts they prefer decide what they reach for in a fight; who is brought forward is the
  *  fight's own count. "Roll a round" shows what the GM is handed. */
+/** ⛔ "IF IT GOES BADLY" — ONE TABLE, ON THE RUNG. (SNG-566 / SNG-569 / SNG-653, regrouped by Aevi's work order of
+ *  2026-10-01 on Erik's report: *"The Death Wishes section needs an update to combine the content nicely. Then we can
+ *  move it to the party tab I think."*)
+ *
+ *  ⛑ WHAT WAS WRONG WITH IT: it said the depths TWICE. The ladder listed every rung with the rank that reaches it,
+ *  and then every person's row listed every rung again as ✓/— chips with their odds under them. A player read the
+ *  depths once, read them again per name, and had to join the two in their head. Aevi: *"Combine them on the depth."*
+ *
+ *  ⚠️ NOTHING NEW IS COMPUTED. `deathStandingFor`, `whoComesFor` and `retrievalOdds` already returned all of it;
+ *  this is the same numbers grouped the other way round. The per-person section keeps only what is ABOUT THE PERSON
+ *  — the pledge words, how well you know what they can do, the Ask, and the counts — and no depth chips at all.
+ *
+ *  ⛔ AND IT IS HERE BECAUSE THE DOOR WAS BROKEN. `[data-wc-ask]` was wired at the tail of `renderHoldingsTab` while
+ *  the button rendered on the character screen: two screens that never run together. Measured in the browser on
+ *  Loki's save — **3 buttons rendered, 0 with a handler**. SNG-653 §5 added that button precisely because "the screen
+ *  kept telling him to have a conversation it could not help him start", and it has never once worked. */
+function deathWishesHtml() {
+  const st = DeathModel.deathStandingFor(character, { currentDay: absoluteWorldDay(), rules: CONTENT.rules });
+  const held = st.heldOpenBy ? (character.npcRegistry?.[st.heldOpenBy]?.name || st.heldOpenBy) : null;
+  // ⛑ CAN IS DERIVED, AND SAYS SO. Of 114 registry people across 14 saves, ZERO store a level; `npcsheet` derives
+  // one for 114 of 114, which is what makes `canReach` answer per person instead of "unknown" for everybody.
+  const people = Object.fromEntries(Object.entries(character.npcRegistry || {}).filter(([, n]) => n && n.status !== "dead" && n.status !== "departed"));
+  const rows = DeathModel.whoComesFor(character, people, { rules: CONTENT.rules, currentDay: absoluteWorldDay(),
+    rankFor: (n) => { try { return Math.max(1, Math.round((derivedLevel(n, { day: absoluteWorldDay(), cfg: CONTENT.rules?.npcStanding }) || 1) / 5)); } catch { return 1; } } });
+  const pledged = rows.filter(r => r.pledge);
+  const coming = pledged.filter(r => r.canAtAll);
+  const shortR = pledged.filter(r => !r.canAtAll);
+  const couldAsk = rows.filter(r => !r.pledge && r.would && r.canAtAll);
+  const ableOnly = rows.filter(r => !r.pledge && !r.would && r.canAtAll).length;
+  const mine = pledged.filter(r => r.mutual);
+
+  // ✅ CCODE-504 (ERIK: "Yes on the rolls for return from death") — the % is the one `rollRetrieval` pays, asked
+  // only where they CAN reach: a depth past their reach has no odds, it has a refusal, and the two must not read alike.
+  const oddsAt = (r, depth) => {
+    try {
+      const o = DeathModel.retrievalOdds({ status: "dead", deathState: { diedDay: absoluteWorldDay() - 1, depthOverride: depth } },
+        { rank: r.rank, bond: r.bond, rules: CONTENT.rules, currentDay: absoluteWorldDay() });
+      return o.pct || null;
+    } catch { return null; }
+  };
+  const nameWithOdds = (r, depth, strong) => {
+    const pct = oddsAt(r, depth);
+    const nm = `${esc(r.name)}${pct ? ` ${pct}%` : ""}`;
+    return `<span class="dw-p" title="${esc(r.pledge ? "they have said they will come" : "they would come, but have not said so")}">${strong ? `<strong>${nm}</strong>` : nm}${r.mutual ? ' <span class="wc-mutual" title="you promised it back">\u21c4</span>' : ""}</span>`;
+  };
+
+  // ⚠️ THE LADDER IS FOUR RUNGS AND `whoComesFor` PROBES THREE (its `depths` default is [0,1,2]) — the deep dark
+  // is depth 3 and no rank reaches it, which is why `find` and not an index: a missing probe is "cannot", never a
+  // silent zero.
+  const rungRow = (L) => {
+    const here = rows.map(r => ({ r, d: r.reach.find(x => x.depth === L.depth) })).filter(x => x.d && x.d.can).map(x => x.r);
+    const pl = here.filter(r => r.pledge);
+    const cd = here.filter(r => !r.pledge && r.would);
+    const who = st.sealed && L.depth >= 3 ? "<em>sealed</em>"
+      : L.depth >= 3 ? "<em>sealed</em>"
+      : !here.length ? '<span class="dw-none">nobody you know reaches this</span>'
+      : [pl.length ? pl.map(r => nameWithOdds(r, L.depth, true)).join(" · ") : "",
+         cd.length ? `<span class="dw-could">could come, hasn\u2019t said:</span> ${cd.map(r => nameWithOdds(r, L.depth, false)).join(" · ")}` : ""]
+        .filter(Boolean).join(" · ");
+    return `<tr class="dw-row${L.here ? " dw-here" : ""}">
+      <th scope="row" class="dw-rung">${L.here ? '<span class="dw-you">you are here ←</span> ' : ""}${esc(L.name)}</th>
+      <td class="dw-by">${L.reachedBy ? esc(L.reachedBy) : "nothing reaches it, at any rank"}</td>
+      <td class="dw-who">${who}</td></tr>`;
+  };
+
+  const seenTag = (r) => r.seen
+    ? '<span class="hint" title="you have watched them work">you have seen this</span>'
+    : '<span class="hint" title="derived from who they are, not from anything you have watched them do">as far as you have seen them</span>';
+  // ⛑ THE PERSON ROW IS ABOUT THE PERSON NOW — no depth chips, no odds. Those are in the table, once each.
+  const line = (r, extra = "") => `<div class="wc-row"><div class="wc-who"><strong>${esc(r.name)}</strong>${r.mutual ? ' <span class="wc-mutual" title="you promised it back">\u21c4 both ways</span>' : ""}${r.pledge?.day != null ? ` <span class="hint">said on day ${r.pledge.day}</span>` : ""} · ${seenTag(r)}</div>${
+    r.pledge?.words ? `<div class="wc-words">“${esc(smartClamp(String(r.pledge.words), 160))}”</div>` : ""}${extra}</div>`;
+
+  // ⛔ THE ONE LINE IT COLLAPSES TO, which is what Aevi asked for: "If it goes badly: 2 would come for you".
+  const sum = st.dead
+    ? `Where you are — <strong>${esc(st.depthName)}</strong>, ${st.daysDead} day${st.daysDead === 1 ? "" : "s"} gone`
+    : `If it goes badly — ${coming.length
+        ? `<strong>${coming.length}</strong> would come for you`
+        : pledged.length ? `${pledged.length} would come, and cannot reach` : "<strong>nobody has said they will come</strong>"}`;
+
+  return `<details class="cs-block dw"${st.dead ? " open" : ""}>
+    <summary class="dw-sum">${sum} <span class="hint" style="text-transform:none">— death is a state, not a terminus</span></summary>
+    ${st.dead
+      ? `<p class="hint" style="margin:6px 0">You are at <strong>${esc(st.depthName)}</strong>${st.cause ? `, ${esc(st.cause)}` : ""} — ${st.daysDead} day${st.daysDead === 1 ? "" : "s"} gone.${
+          st.sealed ? " <strong>Sealed.</strong> No rank reaches this."
+          : held ? ` <strong>${esc(held)} is holding the way open.</strong> While they hold it you do not sink at all.`
+          : st.daysLeft != null ? ` <strong>${st.daysLeft} day${st.daysLeft === 1 ? "" : "s"}</strong> before you sink further.`
+          : " You do not sink further from here on time alone."}${
+          st.sinkFactor > 1 ? ` Your sinking is slowed ${st.sinkFactor}× — every span is that much longer.` : ""}</p>`
+      : `<p class="hint" style="margin:6px 0">Dying is a <strong>state</strong> here, and it has rungs. Someone can come for you — how deep they can reach is set by their rank, and how long they have is set by the clock.${
+          held ? ` <strong>${esc(held)} is holding your name.</strong>` : ""}</p>`}
+    <table class="dw-table"><thead><tr><th scope="col">rung</th><th scope="col">what reaches it</th><th scope="col">who of yours can</th></tr></thead>
+      <tbody>${st.ladder.map(rungRow).join("")}</tbody></table>
+    <p class="hint" style="margin:4px 0">A reach that can be made is still a <strong>roll</strong> — and a failed one sinks them deeper, or seals them at the deep dark.</p>
+    ${rows.length ? `<div class="wc-block">
+      ${coming.length ? `<div class="wc-group"><span class="wc-head">Coming for you</span>${coming.map(r => line(r)).join("")}</div>` : ""}
+      ${shortR.length ? `<div class="wc-group"><span class="wc-head">Would come, cannot reach</span>${shortR.map(r => line(r)).join("")}</div>` : ""}
+      ${!pledged.length ? `<p class="hint" style="margin:4px 0"><strong>Nobody has said they will come for you.</strong> That is a conversation, and these are the people who could have it.</p>` : ""}
+      ${couldAsk.length ? `<div class="wc-group"><span class="wc-head">Could come, hasn\u2019t said</span>${couldAsk.slice(0, 5).map(r => line(r, `<button class="opt wc-ask" data-wc-ask="${esc(r.id)}" title="Start a scene with them about this">Ask them</button>`)).join("")}</div>` : ""}
+      ${ableOnly ? `<p class="hint" style="margin:4px 0">${ableOnly} more could reach you, but have no reason to.</p>` : ""}
+      ${mine.length ? `<p class="hint" style="margin:6px 0 0">\u21c4 <strong>You have promised to go for:</strong> ${esc(mine.map(r => r.name).join(", "))}. That is your road when they are the one who falls.</p>` : ""}
+    </div>` : ""}
+    ${st.willing === false ? `<p class="hint" style="margin:6px 0 0;color:var(--warn,#e0b25a)">You have refused to be brought back. That is yours to say and it is honoured.</p>` : ""}
+  </details>`;
+}
+
 function renderPartyTab() {
   const { split, allies } = partyNow();
   // ✅ AEVI item 11 — the five readings Capacity and Personnel need, asked of the same functions the Holdings tab asked.
@@ -18947,10 +18961,26 @@ function renderPartyTab() {
       <div class="ob-panel"><div class="ob-head"><h3 class="codex-title" style="margin:0">The next round, as the GM receives it</h3><button class="btn" id="party-roll">Roll a round</button></div>
         ${roundHtml}<p class="hint">In a fight the GM is handed this every turn: each ally's craft, chosen by their stance and what you prefer, rolled by the engine, to be told as it fell. The fight's own numbers are unchanged.</p></div>`
       : `<p class="hint">Nobody walks at your side. ⚠️ <b>Ask someone to walk with you</b>, above — anyone you know who would come. (This line used to say "bring someone forward from a band", and a band needs three command slots or two holdings, so it sent a player who has neither somewhere they cannot get to.)</p>`}
+    ${/* ✅ ERIK 2026-10-01 — "If it goes badly" lives here now, below the party, collapsed to its one line. */""}
+    ${(() => { try { return deathWishesHtml(); } catch { return ""; } })()}
   </div>`);
   wireCharacterTabs();
   const again = () => renderPartyTab();
   wireObFoe(again);
+  // ✅ ERIK 2026-10-01 — THE ASK, WIRED WHERE ITS BUTTON ACTUALLY RENDERS. ⚠️ IT DOES NOT MAKE THE PROMISE: it seeds
+  // the ask and hands it to the player, because whether they say yes is the GM's and the person's, never a button's.
+  // `wouldReachFor` is advice, not a gate — an ask at low bond is allowed, and it is a story.
+  for (const b of app.querySelectorAll("[data-wc-ask]")) b.onclick = () => {
+    const id = b.dataset.wcAsk;
+    const who = character.npcRegistry?.[id]?.name || "them";
+    const ask = `I want to talk to ${who} about what happens if I die — whether they would come for me.`;
+    renderPlay(character.activeScene?.lastTurn || null, { aside: `You go to find ${who}.` });
+    const ff = document.getElementById("freeform-input");
+    // ⚠️ `focus()` ALONE, AND NO `scrollIntoView`. §238 holds the page to exactly one self-scroll — the waiting
+    // line — because Erik once read a silence as a crash when the panel moved out from under him. A focus brings the
+    // field into view in every browser anyway, so obeying the rule costs nothing here.
+    if (ff) { ff.value = ask; ff.focus(); }
+  };
   { const b = document.getElementById("party-add"); if (b) b.onclick = () => showPartyAddPicker(); }
   { const b = document.getElementById("party-goto-bands"); if (b) b.onclick = () => renderBandsTab(); }
   const order = (id) => { character.allyOrders = { ...(character.allyOrders || {}) }; return (character.allyOrders[id] = { ...(character.allyOrders[id] || {}) }); };

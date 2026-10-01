@@ -16284,9 +16284,37 @@ console.log("\n── §211 · death is a state, and the player can finally read
   check("§211: ⛑ …and opens the door to the conversation rather than offering a setting",
     /data-wc-ask="\$\{esc\(r\.id\)\}"/.test(A211)
     && /Nobody has said they will come for you.*That is a conversation/.test(A211)
-    && /for \(const b of document\.querySelectorAll\("\[data-wc-ask\]"\)\)/.test(A211)
+    && /querySelectorAll\("\[data-wc-ask\]"\)/.test(A211)
     && !/set the pledge|markPledge\(/.test(A211),
     "the screen must open the conversation and never settle it — a button that made the promise would be the setting this check forbids");
+  // ⛔ AND THE DOOR HAS TO BE REACHABLE FROM THE BUTTON, which is the question the clause above could not ask.
+  //
+  // ⚠️ THIS GATE PINNED `for (const b of document.querySelectorAll("[data-wc-ask]"))` — the exact broken form. A
+  // handler DID exist, at the tail of `renderHoldingsTab`, while the button rendered in `renderCharacterScreen`: two
+  // screens that never run together, so the second one's markup is gone by the time the first one wires anything.
+  // Measured in the browser on Erik's save, 2026-10-01: **3 "Ask them" buttons rendered, 0 with a handler.** SNG-653
+  // §5 added that button because "the screen kept telling him to have a conversation it could not help him start" —
+  // and for its whole life the button did nothing. The gate was green throughout.
+  //
+  // ⛑ SO IT ASKS WHERE EACH ONE LIVES. Both sites must sit inside the SAME top-level render function, which is the
+  // only thing that makes one run when the other has drawn.
+  check("§211: ⛔ …and the Ask is WIRED BY THE SCREEN THAT DRAWS IT — a handler in another render function never runs",
+    (() => {
+      const fns = [...A211.matchAll(/^(?:async )?function ([A-Za-z0-9_$]+)\s*\(/gm)].map(m => ({ at: m.index, name: m[1] }));
+      if (fns.length < 20) return false;
+      const owner = (i) => { let last = null; for (const f of fns) { if (f.at <= i) last = f; else break; } return last?.name || null; };
+      const draws = [...A211.matchAll(/data-wc-ask="/g)].map(m => owner(m.index));
+      const wires = [...A211.matchAll(/querySelectorAll\("\[data-wc-ask\]"\)/g)].map(m => owner(m.index));
+      if (!draws.length || !wires.length) return false;
+      // ⚠️ the drawing site may be a HELPER the render function calls; what must never happen is a wiring site in a
+      // render function that draws nothing — that is a handler bound to a button that screen does not have.
+      return wires.every(w => w && draws.length > 0)
+        && draws.every(d => d !== null)
+        && wires.every(w => w === "renderPartyTab")
+        && draws.every(d => d === "deathWishesHtml")
+        // ⛔ and the function that draws it is CALLED by the one that wires it, which is what joins the two
+        && new RegExp(`${draws[0]}\\(\\)`).test(A211.slice(A211.indexOf("function renderPartyTab(")));
+    })(), "the button and its handler must be reachable from one another, not merely both present in the file");
   // ⛔ A REFUSAL IS HONOURED AND SAID. `willing: false` is the player's own word about their own ending.
   check("§211: ⛔ a refusal to be brought back is shown as honoured, not as a flag",
     /You have refused to be brought back\. That is yours to say and it is honoured/.test(A211));
@@ -24762,12 +24790,47 @@ console.log("\n── §314 · a band with no barracks is quartered — who need
   const per314 = Math.max(0, Number(mar314.quarterPerHead ?? 1) || 0);
   const bedsOf = (k) => H314.bandBedsOf({ kind: k }, cfg314, { martial: mar314 });
   const barracksBeds = typeof kinds314.barracks?.bandBeds === "number" ? kinds314.barracks.bandBeds : Number(mar314.barracksBeds ?? 20);
-  // ⛔ the population the CONTENT declares: every housing record that says it has residents without counting them
-  const uncounted = Object.entries(kinds314).filter(([k, d]) => !k.startsWith("_") && d?.property === "housing" && d.residents === true && k !== "barracks" && d.variantOf !== "barracks" && typeof d.bandBeds !== "number").map(([k]) => k);
-  check("§314: ⛔ a barracks houses a band — and the tag alone cannot say so: every other housing record with uncounted residents houses no band",
-    barracksBeds > 0 && bedsOf("barracks") === barracksBeds && uncounted.length > 0 && uncounted.every(k => bedsOf(k) === 0)
-    && H314.bandBedsOf({ kind: "war_lodge" }, { features: { kinds: { war_lodge: { property: "housing", bandBeds: 7 } } } }, { martial: mar314 }) === 7,
-    `barracks ${bedsOf("barracks")} · ${uncounted.map(k => `${k} ${bedsOf(k)}`).join(", ")}`);
+  // ⛔ AEVI, 2026-10-01: *"§314 asserts `uncounted.length > 0` … so authoring them turns it red. Same family as
+  // §359/§391/§405: please give §314 its own fixture record and I will count them."* ⛑ SHE IS RIGHT, AND THIS IS THE
+  // FOURTH TIME. `uncounted.length > 0` was there to prove the check was not vacuous, and it did that by requiring
+  // that her catalogue still contain a housing record she has not finished counting — a gate holding content still
+  // for the sake of its own non-vacuity.
+  //
+  // ⚠️ THE RULE IS ABOUT THE TAG, NOT THE CATALOGUE: `property: "housing"` alone never means band beds; only an
+  // authored `bandBeds`, or being a barracks, does. That is asked over a CONSTRUCTED catalogue below, which cannot
+  // empty under her and covers both shapes she is moving between — uncounted `true` and a real number.
+  const fixture314 = { features: { kinds: {
+    barracks: { property: "housing", bandBeds: 40, family: "people" },
+    war_lodge: { property: "housing", bandBeds: 7, family: "people" },
+    sail_loft: { property: "housing", variantOf: "barracks", family: "people" },   // a variant, beds unauthored
+    hearth_hall: { property: "housing", residents: true, family: "people" },       // housing, residents UNCOUNTED
+    bunk_row: { property: "housing", residents: 6, family: "people" },             // housing, residents COUNTED
+    smithy: { property: "craft", family: "craft" },                                 // not housing at all
+  } } };
+  const fBeds = (k) => H314.bandBedsOf({ kind: k }, fixture314, { martial: mar314 });
+  check("§314: ⛔ a barracks houses a band — and the housing TAG alone cannot say so, however the catalogue is counted",
+    fBeds("barracks") === 40 && fBeds("war_lodge") === 7 && fBeds("sail_loft") > 0
+    // ⛔ the point: a housing record is NOT band beds, whether its residents are counted or not
+    && fBeds("hearth_hall") === 0 && fBeds("bunk_row") === 0 && fBeds("smithy") === 0,
+    `fixture: barracks ${fBeds("barracks")} · lodge ${fBeds("war_lodge")} · uncounted ${fBeds("hearth_hall")} · counted ${fBeds("bunk_row")}`);
+  // ⛑ AND THE LIVE CATALOGUE IS READ FOR WHAT IT IS, with no floor on how many records are in any state — so
+  // counting the last uncounted housing record is a green run, not a red one.
+  const housing314 = Object.entries(kinds314).filter(([k, d]) => !k.startsWith("_") && d?.property === "housing"
+    && k !== "barracks" && d.variantOf !== "barracks" && typeof d.bandBeds !== "number").map(([k]) => k);
+  check("§314: ⛑ …and in the live catalogue every housing record that is not a barracks beds no band, and the barracks beds what she authored",
+    barracksBeds > 0 && bedsOf("barracks") === barracksBeds && housing314.every(k => bedsOf(k) === 0),
+    `barracks ${bedsOf("barracks")} · ${housing314.length} other housing record(s), all 0`);
+  // ✅ AEVI item 2 — AND THE CARD SAYS IT. Erik saw "homes for 1" on a barracks; dropping `residents: true` fixed the
+  // lie and left the card silent about beds, which is the half that was mine.
+  check("§314: ✅ …and the card SAYS how many it beds, through the same reader — by count, never by level",
+    (() => {
+      const said = (o) => (H314.featureDoes("barracks", cfg314, o) || []).map(x => x.said).join(" · ");
+      const one = said({ level: 1, count: 1 }), two = said({ level: 1, count: 2 }), lv = said({ level: 2, count: 1 });
+      return new RegExp(`beds for ${barracksBeds} soldiers`).test(one)
+        && new RegExp(`beds for ${barracksBeds * 2} soldiers`).test(two)
+        && one === lv                                   // ⚠️ a level does not add beds, and the card must not say it does
+        && !/homes for/.test(one);                      // ⛔ and the sentence Erik complained about is gone
+    })());
   check("§314: …and a barracks' beds are the band's, not homes for the hands (Number(true) read a barracks as a home for one worker)",
     H314.residentsOf({ features: [{ kind: "barracks" }] }, cfg314).homes === 0
     && H314.residentsOf({ features: [{ kind: "quarters" }] }, cfg314).homes === Number(kinds314.quarters.residents));

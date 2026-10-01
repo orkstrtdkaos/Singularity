@@ -2327,7 +2327,7 @@ export function craftDuration(verbs = [], { growth = null, day = null, energy = 
  *  code also computes, and the two parting. So the words are hers and every NUMBER here is read.
  *
  *  Returns `[{ key, said }]`, in a fixed order so two features read alike. `level` scales what scales. Pure. */
-export function featureDoes(kind, cfg, { level = 1, count = 1, holding = null, density = null, feature = null } = {}) {
+export function featureDoes(kind, cfg, { level = 1, count = 1, holding = null, density = null, feature = null, martial = {} } = {}) {
   const def = featureDef(kind, cfg);
   if (!def) return [];
   const n = Math.max(1, Number(count) || 1), lv = Math.max(1, Number(level) || 1);
@@ -2362,6 +2362,15 @@ export function featureDoes(kind, cfg, { level = 1, count = 1, holding = null, d
   if (def.watch) say("watch", "it watches — a raid here is SEEN coming, and met");
   if (Number(def.hands)) say("hands", `${Number(def.hands) * n * lv} more ${Number(def.hands) * n * lv === 1 ? "hand" : "hands"} can work here`);
   if (Number(def.residents)) say("residents", `homes for ${Number(def.residents) * n}`);
+  // ✅ AEVI work order 2026-10-01 · item 2. ⛔ ERIK, playing: *"the barracks says homes for 1, but should be 40 beds."*
+  // ⛑ She authored `bandBeds: 40` and dropped `residents: true` — which was right twice over: a barracks houses a
+  // BAND, not the hold's workers, and `Number(true) === 1` is the same coercion the `watch` comment five lines above
+  // records. But it left the card saying nothing about beds at all, because this reader had no sentence for them.
+  // ⚠️ `bandBedsOf` IS THE READER, not `def.bandBeds` — it knows the variants and the unauthored fallback, so the
+  // card and `quarteringOf` cannot answer differently about the same barracks. And it multiplies by COUNT and not by
+  // level, exactly as that function does: two barracks are 80 beds, a level-2 barracks is still 40.
+  const beds = bandBedsOf({ kind, count: n }, cfg, { martial });
+  if (beds) say("bandBeds", `beds for ${beds} soldier${beds === 1 ? "" : "s"}`);
   if (Number(def.pilgrims)) say("pilgrims", `draws ${Number(def.pilgrims) * n} pilgrim${Number(def.pilgrims) * n === 1 ? "" : "s"} a pass`);
   if (def.aura) say("aura", typeof def.aura === "string" ? def.aura : `an aura on the ground`);
   if (def.facility) say("facility", `a ${String(def.facility).replace(/_/g, " ")} on the record — work that needs one can be done here`);

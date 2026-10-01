@@ -2227,9 +2227,35 @@ table.ob-matrix { border-collapse: collapse; width: 100%; min-width: 640px; font
 .wc-row:last-child { border-bottom: 0; }
 .wc-who { display: flex; gap: 6px; align-items: baseline; flex-wrap: wrap; }
 .wc-mutual { font-size: 11px; opacity: .8; }
-.wc-reach { display: flex; gap: 8px; flex-wrap: wrap; font-size: 12px; margin-top: 2px; }
-.wc-depth { opacity: .45; }
-.wc-depth.wc-can { opacity: 1; font-weight: 600; }
+/* ⛔ ERIK 2026-10-01: *"The Death Wishes section needs an update to combine the content nicely."* ⛑ `.wc-reach` and
+   the `.wc-depth` chips are RETIRED — they were the per-person repeat of the ladder, which is the duplication he
+   named. The depths are a table now and each is said once. Rules for markup nothing emits are the stylesheet's
+   version of a handler bound to no button, so they go with it. */
+.dw-sum { cursor: pointer; font-weight: 600; }
+.dw-sum::marker { color: var(--ink-dim); }
+.dw-table { width: 100%; border-collapse: collapse; font-size: 12px; margin: 6px 0; }
+.dw-table th, .dw-table td { text-align: left; padding: 4px 8px 4px 0; vertical-align: top; }
+.dw-table thead th { font-size: 10px; text-transform: uppercase; letter-spacing: .6px; color: var(--ink-dim);
+  font-weight: 500; border-bottom: 1px solid var(--line); }
+.dw-row { border-bottom: 1px dashed var(--line-soft); }
+.dw-row:last-child { border-bottom: 0; }
+.dw-rung { font-weight: 600; white-space: nowrap; }
+.dw-by { color: var(--ink-mid); }
+/* ⚠️ THE RUNG YOU ARE ON IS THE ONE FACT ON THIS TABLE A DYING PLAYER NEEDS FIRST — it is a state, not a decoration. */
+.dw-here { background: color-mix(in srgb, var(--warn) 12%, transparent); }
+.dw-you { font-size: 10px; text-transform: uppercase; letter-spacing: .6px; color: var(--warn); }
+.dw-who { line-height: 1.5; }
+.dw-p { white-space: nowrap; }
+.dw-could { font-size: 11px; color: var(--ink-dim); }
+.dw-none { color: var(--ink-dim); font-style: italic; }
+/* ⛑ a phone reads the three columns as rows rather than squeezing a name list into a third of 309px */
+@media (max-width: 520px) {
+  .dw-table, .dw-table tbody, .dw-table tr, .dw-table th, .dw-table td { display: block; width: 100%; }
+  .dw-table thead { display: none; }
+  .dw-row { padding: 6px 0; }
+  .dw-by { font-size: 11px; }
+  .dw-p { white-space: normal; }
+}
 .wc-words { font-size: 12px; opacity: .7; font-style: italic; margin-top: 2px; }
 .wc-ask { margin-top: 4px; }
 

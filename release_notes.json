@@ -16,6 +16,30 @@
   "next": [],
   "releases": [
     {
+      "version": "2.16.11",
+      "date": "2026-10-01",
+      "entries": [
+        {
+          "kind": "change",
+          "title": "If it goes badly: one table, on the Party tab",
+          "summary": "The rungs and the people who can reach them are one reading now, not two.",
+          "detail": "The block said the depths twice — once as a ladder of rungs, and again as a row of marks under every name — so you read them once and then joined them up in your head. It is one table now: a row per rung, what rank reaches it, and which of your people can, with the odds each of them rolls. What is about the PERSON — what they said, how well you know what they can do, and the way to ask them — stays under it. And it lives on the Party tab, where your people are."
+        },
+        {
+          "kind": "fix",
+          "title": "\"Ask them\" now actually opens the conversation",
+          "summary": "The button that starts the talk about who would come for you had never worked.",
+          "detail": "The button was drawn by one screen and its handler was attached by another, so clicking it did nothing at all — on every save, since it was added. It works now: it takes you to the scene and writes the opening line for you. Whether they say yes is still theirs to answer."
+        },
+        {
+          "kind": "fix",
+          "title": "A barracks beds forty",
+          "summary": "It said \"homes for 1\". It is forty cots, and the card says so.",
+          "detail": "A barracks houses a band, not the hold's workers, and the card was reading a yes/no flag as if it were a number of people. It now reads \"beds for 40 soldiers\" — eighty if you have built two."
+        }
+      ]
+    },
+    {
       "version": "2.16.10",
       "date": "2026-10-01",
       "entries": [

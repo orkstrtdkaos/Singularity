@@ -85,6 +85,12 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
    gold worn thin over a dark ground, a rule that frays at both ends rather than meeting its margins, and
    real ground underneath that never quite resolves. Nothing here is decoration borrowed from elsewhere.
    ⚠️ Six plates, 1024×320, ~50KB each — the only six of 34 declared location images that exist. */
+/* ✅ ERIK 2026-10-01 — THE BANNER IS THE WIDTH OF WHAT IS UNDER IT. ⛔ Measured at 1280px: on the roster the hero ran
+   to 1068 over a 640 card — 428px wider, 214 proud on each side — while on "Who's playing?" the same element was 640,
+   because there it sits INSIDE the screen and here `chrome(…, {hero:true})` emits it as a sibling that nothing caps.
+   One element, two widths, which is also why he saw the two screens disagree with each other.
+   ⚠️ §402 gates that the hero and the screen beneath it MEASURE THE SAME, so a page-width hero screen added later
+   reddens and whoever adds it chooses deliberately rather than drifting. */
 .title-hero {
   position: relative; overflow: hidden; isolation: isolate;
   border: 1px solid var(--border); border-radius: 10px;
@@ -1298,7 +1304,11 @@ details.wn-entry > p { margin:4px 0 8px 16px; color:var(--ink-dim); }
 .link-btn.wn-stamp { font:inherit; color:inherit; padding:0; text-decoration:underline dotted; cursor:pointer; }
 /* ✅ item 1 — THE BANNER IS THE PAGE'S WIDTH. Pinned at 640 while the page under it ran to 1100, it stopped short of
    the content it sat above on every screen: Erik's "the landing banner vs the player card". */
-.wn-shell { max-width: var(--page-w); margin: 0 auto; }
+/* ✅ ERIK 2026-10-01 — THE RAIL, and the two things that ride it. Neither carries a width of its own any more: both
+   were wrong on half the screens, in opposite directions, and a sibling cannot know the width of its neighbour. */
+.chrome-rail { max-width: var(--card-w); margin: 0 auto; }
+.chrome-rail.on-page { max-width: var(--page-w); }
+.wn-shell { margin: 0 auto; }
 .wn-shell:empty { display:none; }
 .wn-shell .whats-new-banner { margin:10px 0 12px; }
 /* ⛔ CCODE-439 — the news, kept: filters by whose it is, newest first by world-day */

@@ -1232,14 +1232,34 @@ export function choosePlayer(key) {
  *  (SNG-045 removes the duplicate's profile). A key that still has a profile is a player in their own right, whatever a
  *  name-match wrote — measured in the browser: with Courtney's profile present and the old redirect still standing, both
  *  "Erik" and "Courtney" listed Adelheid and Loki, because every key collapsed into Erik's. */
+/** ✅ ERIK 2026-10-01 — WHEN EACH SAVE WAS LAST WRITTEN, newest first.
+ *  ⛔ The index has carried `{id, name, level, origin, playerKey}` and no stamp, so every index written before today is
+ *  missing the one field the sort needs. This backfills those entries from their saves ONCE and writes the index back;
+ *  an entry that already has a stamp is never opened. ⚠️ A save with no `updatedAt` of its own sorts LAST rather than
+ *  being stamped `now` — "I don't know when" is not "just now", and converting absence into a value is a mistake this
+ *  repo has made four times. Mutates localStorage; returns the list. */
+export function backfillCharacterStamps() {
+  const idx = listCharacters();
+  let moved = 0;
+  for (const e of idx) {
+    if (e && Number.isFinite(Number(e.updatedAt))) continue;
+    try { const c = loadCharacter(e.id); const at = Number(c?.updatedAt);
+      if (Number.isFinite(at)) { e.updatedAt = at; moved++; } else { e.updatedAt = 0; moved++; }
+    } catch { e.updatedAt = 0; moved++; }
+  }
+  if (moved) { try { localStorage.setItem(LS.characterIndex, JSON.stringify(idx)); } catch { /* a full disk is not a reason to fail the roster */ } }
+  return idx;
+}
+
 export function charactersForPlayer(key) {
   const effective = (pk) => (loadProfile(pk) ? pk : resolvePlayerKey(pk));
   const want = effective(key);
-  return listCharacters().filter(e => {
+  // ✅ ERIK: newest save first. The stamp is backfilled once for any index written before it existed.
+  return backfillCharacterStamps().filter(e => {
     let pk = e.playerKey;
     if (pk === undefined) { try { pk = loadCharacter(e.id)?.playerKey ?? null; } catch { pk = null; } }
     return !pk || effective(pk) === want;
-  });
+  }).sort((a, b) => (Number(b?.updatedAt) || 0) - (Number(a?.updatedAt) || 0));
 }
 
 /** ⛔ THE REPO FOLDER IS THE OWNERSHIP RECORD. A save lives at `characters/<player>/<id>.json`; when this device holds a
@@ -1321,7 +1341,11 @@ export function saveCharacter(c, { stamp = true } = {}) {
   const idx = listCharacters().filter(e => e.id !== c.id);
   // ⛑ CCODE-355: the index carries WHOSE character it is, so the roster can show one player's characters without
   // parsing every save on the device (Silas's alone is over a megabyte).
-  idx.push({ id: c.id, name: c.name, level: c.level, origin: c.origin, playerKey: c.playerKey || null });
+  // ✅ ERIK 2026-10-01: *"please sort the saves by latest save first."* ⛔ THE INDEX DID NOT CARRY WHEN A SAVE WAS LAST
+  // WRITTEN, so the roster had nothing to sort on — the field lives on the save, and the whole point of this index is
+  // that the roster never opens one. Stamped here, at the one door that writes it.
+  idx.push({ id: c.id, name: c.name, level: c.level, origin: c.origin, playerKey: c.playerKey || null,
+    updatedAt: Number(c.updatedAt) || Date.now() });
   localStorage.setItem(LS.characterIndex, JSON.stringify(idx));
 }
 

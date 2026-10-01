@@ -24947,7 +24947,13 @@ console.log("\n── §317 · the version rule, the notes every update carries,
     (RN.summaries || []).some(s => s.line === "2.0" && (s.entries || []).filter(e => e.kind === "feature").length >= 5 && (s.entries || []).some(e => e.kind === "fix")));
   const A317 = rd("app.js").replace(/\r\n/g, "\n").split("\n").filter(l => !/^\s*\/\//.test(l)).join("\n");
   check("§317: ⛑ after an update a banner says how much arrived — on EVERY screen, from the shell they are all drawn in — and the popup groups New · Fixed · Changed, each line opening for more; internal work is never shown",
-    /\$\{hero \? titleHero\(\) : ""\}\n\s*<div class="wn-shell" id="wn-shell">\$\{whatsNewBannerHtml\(\)\}<\/div>\n\s*\$\{inner\}/.test(A317)
+    // ⚠️ THIS PINNED THE EXACT ADJACENCY hero → band → inner, and the band now rides a RAIL between them (§402), so the
+    // three are no longer siblings in a row. ⛑ THE CLAIM IS UNCHANGED: the band is drawn on every screen, from the one
+    // shell they all pass through, above `inner` — which is what this asks now.
+    /<div class="wn-shell" id="wn-shell">\$\{whatsNewBannerHtml\(\)\}<\/div>/.test(A317)
+    && /chrome\(inner, \{ hero = false \} = \{\}\) \{/.test(A317)
+    && A317.indexOf('id="wn-shell"') < A317.indexOf("${inner}`;")
+    && /\$\{hero \? titleHero\(\) : ""\}/.test(A317)
     && /function shownEntries\(r\) \{ return \(Array\.isArray\(r\?\.entries\) \? r\.entries : \[\]\)\.filter\(e => e && e\.kind !== "internal" && e\.title\); \}/.test(A317)
     && /<details class="wn-entry"><summary>/.test(A317) && /\["feature", "fix", "change"\]\.map\(k =>/.test(A317));
   check("§317: …the version stamp opens the notes at any time, back through the whole line; and a device that played before the notes existed is told what arrived, while a new one is told nothing",
@@ -33867,8 +33873,14 @@ console.log("\n── §398 · one page width ──");
   check("§398: ⛔ THE LANDING BANNER AND THE PLAYER CARD SHARE ONE EDGE — the 220px step Erik saw",
     /\.pick-screen \{[^}]*max-width:\s*var\(--card-w\)/.test(CSS398)
     && /\.pick-card \{[^}]*max-width:\s*100%/.test(CSS398));
-  check("§398: ⛑ …and the what's-new banner is the page's width, not 640 under a 1100 page",
-    /\.wn-shell \{[^}]*max-width:\s*var\(--page-w\)/.test(CSS398));
+  // ⚠️ I WROTE THIS CLAUSE PINNING `.wn-shell` TO THE PAGE WIDTH, and it was right on pages and wrong on cards — Erik
+  // saw the band run 428px over a 640 roster the next morning. Either fixed width is wrong on half the screens. §402
+  // put both the band and the banner on a rail that reads the width from the screen's own root class; the claim here is
+  // that the band AGREES with the screen beneath it, whichever kind it is.
+  check("§398: ⛑ …and the what's-new band agrees with the screen under it, on a page and on a card alike",
+    /\.chrome-rail \{[^}]*max-width: var\(--card-w\)/.test(CSS398)
+    && /\.chrome-rail\.on-page \{[^}]*max-width: var\(--page-w\)/.test(CSS398)
+    && !/\.wn-shell \{[^}]*max-width:/.test(CSS398));
 
   /* ---- 4 · ⛔ A HOLD IS A PAGE, NOT A POP-UP (item 6) ---- */
   check("§398: ⛔ THE HOLD IS A PAGE AT THE PAGE WIDTH — it was a fixed overlay around a 560px sheet",
@@ -34113,6 +34125,71 @@ console.log("\n── §401 · the peoples beside the wheel ──");
     && /\.wheel-split \{[^}]*display: flex/.test(CSS401));
   check("§401: ⚠️ …and on a narrow screen it goes under the circle rather than squeezing it",
     /@media \(max-width: 900px\) \{\s*\.wheel-split \{[^}]*flex-direction: column/.test(CSS401));
+}
+
+/* ══════════ §402 · THE RAIL ABOVE A SCREEN IS THAT SCREEN'S WIDTH, AND THE NEWEST SAVE IS FIRST ══════════ */
+// ⛔ ERIK 2026-10-01, with a screenshot: *"the first couple of screens are not the same width to eachother nor the
+// section below the header. and please sort the saves by latest save first."*
+//
+// ⛑ MEASURED AT 1280px:
+//     "Who's playing?"  hero 640, screen 640            — one edge
+//     the roster        hero 1068, screen 640           — 428px wider, 214 proud on each side
+// The hero is the SAME element on both. On the landing it sits inside `.pick-screen`, which is capped; on the roster
+// `chrome(…, {hero:true})` emits it as a SIBLING of `inner`, where nothing caps it.
+//
+// ⚠️ AND I HAD PUT HALF OF IT THERE THE DAY BEFORE. `.wn-shell` was pinned at 640 and stopped short on a page (his
+// earlier "landing banner vs the player card"), so I pinned it to the PAGE width — and on a 640 card it then ran 428px
+// over, which is the bar in today's screenshot. **Either fixed width is wrong on half the screens.** The rail reads the
+// width from `inner`'s own root class instead, which is the one thing `chrome` actually knows about what it is wrapping.
+console.log("\n── §402 · the rail, and the newest save first ──");
+{
+  const A402 = rd("app.js");
+  const CSS402 = rd("style.css");
+  const S402 = rd("engine/state.js");
+
+  /* ---- 1 · ⛔ THE RAIL CARRIES THE WIDTH, AND NEITHER RIDER DOES ---- */
+  check("§402: ⛔ THE BANNER AND THE UPDATE BAND RIDE ONE RAIL, which takes the width from the screen's own class",
+    /<div class="chrome-rail\$\{\/\^\\s\*<div class="screen screen-ground"\/\.test\(String\(inner\)\)/.test(A402)
+    && /\.chrome-rail \{[^}]*max-width: var\(--card-w\)/.test(CSS402)
+    && /\.chrome-rail\.on-page \{[^}]*max-width: var\(--page-w\)/.test(CSS402));
+  // ⛔ THE RIDERS MUST NOT CARRY A WIDTH OF THEIR OWN — that is precisely the bug, in both directions.
+  check("§402: ⛔ …and NEITHER rider pins a width itself — a sibling cannot know its neighbour's width",
+    !/\.title-hero \{[^}]*max-width:/.test(CSS402)
+    && !/\.wn-shell \{[^}]*max-width:/.test(CSS402));
+  // ⚠️ THE TEST MUST MATCH WHAT THE SCREENS ACTUALLY EMIT. All 51 chrome calls open with a screen root; if one ever
+  // does not, the rail silently falls to the card width and this says so.
+  const roots402 = [...A402.matchAll(/chrome\(`<div class="(screen(?: screen-ground)?)"/g)].map(m => m[1]);
+  check("§402: ⚠️ …and every screen still opens with the root class the rail reads",
+    roots402.length >= 45 && roots402.some(r => r === "screen") && roots402.some(r => /screen-ground/.test(r)),
+    `${roots402.length} screen root(s): ${roots402.filter(r => /ground/.test(r)).length} page(s), ${roots402.filter(r => !/ground/.test(r)).length} card(s)`);
+
+  /* ---- 2 · ⛔ THE NEWEST SAVE IS FIRST, AND THE FIELD IT SORTS ON EXISTS ---- */
+  // ⛔ THE SORT COULD NOT HAVE WORKED: the index stored {id, name, level, origin, playerKey} and no stamp. The field
+  // the sort needs was not in the record it reads — a reader with no writer, which this file has recorded twice.
+  check("§402: ⛔ THE INDEX CARRIES WHEN A SAVE WAS LAST WRITTEN — it had no such field, so nothing could sort on it",
+    /idx\.push\(\{ id: c\.id[^}]*updatedAt: Number\(c\.updatedAt\) \|\| Date\.now\(\)/.test(S402));
+  check("§402: ⛑ …and the roster is sorted newest first",
+    /\.sort\(\(a, b\) => \(Number\(b\?\.updatedAt\) \|\| 0\) - \(Number\(a\?\.updatedAt\) \|\| 0\)\)/.test(S402));
+  // ⚠️ EVERY INDEX WRITTEN BEFORE TODAY IS MISSING THE STAMP, so a sort alone would have ordered every existing
+  // device by nothing at all. The backfill reads each save ONCE, and only those with no stamp.
+  check("§402: ⚠️ …and an index written before the stamp existed is backfilled once, not re-read every render",
+    /export function backfillCharacterStamps\(\)/.test(S402)
+    && /if \(e && Number\.isFinite\(Number\(e\.updatedAt\)\)\) continue;/.test(S402)
+    && /return backfillCharacterStamps\(\)\.filter/.test(S402));
+  // ⛔ AND A SAVE THAT DOES NOT KNOW WHEN IT WAS WRITTEN SORTS LAST, never `now`. Converting absence into a value is
+  // the mistake this repo has made four times; "I don't know when" is not "just now".
+  check("§402: ⛔ …and a save with no stamp of its own sorts LAST rather than being dated today",
+    /else \{ e\.updatedAt = 0; moved\+\+; \}/.test(S402)
+    && !/e\.updatedAt = Date\.now\(\)/.test(S402));
+
+  /* ---- 3 · ⛑ DRIVEN: THE SORT IS A SORT, over a list that is out of order to begin with ---- */
+  check("§402: ⛑ THE ORDER IS BY STAMP, driven over a list deliberately shuffled",
+    (() => {
+      const rows = [{ id: "a", updatedAt: 100 }, { id: "b", updatedAt: 300 }, { id: "c" }, { id: "d", updatedAt: 200 }];
+      const sorted = [...rows].sort((a, b) => (Number(b?.updatedAt) || 0) - (Number(a?.updatedAt) || 0));
+      // b (300), d (200), a (100), then the one with no stamp
+      return sorted.map(r => r.id).join("") === "bdac";
+    })());
 }
 
 /* ══════════ REPORT ══════════ */

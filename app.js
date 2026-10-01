@@ -184,7 +184,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.16.0";
+const APP_VERSION = "2.16.1";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -1407,8 +1407,15 @@ function chrome(inner, { hero = false } = {}) {
         ${devEnabled() ? `<button id="nav-author" title="SNG-207b — AUTHOR god-mode: set anything on this character (xp, level, items, abilities, world arcs), no fairness check. Dev only.">⚙ Author</button>` : ""}
       </div>
     </div>
-    ${hero ? titleHero() : ""}
-    <div class="wn-shell" id="wn-shell">${whatsNewBannerHtml()}</div>
+    ${/* ✅ ERIK 2026-10-01 — THE RAIL ABOVE THE SCREEN IS THE SCREEN'S WIDTH. ⛔ The banner and the what's-new band are
+          SIBLINGS of `inner`, so nothing tied them to it, and either fixed width is wrong half the time: pinned at 640
+          the band stopped 428px short on a page (his "landing banner vs the player card"), and pinned at the page width
+          it ran 428px over on a card (today's screenshot). ⛑ Every one of the 51 screens opens with its own root class,
+          and that class IS the width — so the rail reads it rather than guessing. */""}
+    <div class="chrome-rail${/^\s*<div class="screen screen-ground"/.test(String(inner)) ? " on-page" : ""}">
+      ${hero ? titleHero() : ""}
+      <div class="wn-shell" id="wn-shell">${whatsNewBannerHtml()}</div>
+    </div>
     ${inner}`;   // ⛔ CCODE-438: every screen carries it — a reload lands on "Who's playing?", Settings or the roster, not only in play
   document.getElementById("nav-roster").onclick = () => renderRoster();
   // ⛔ CCODE-355 (Erik: "the library is likely redundant at the bottom of the screen and should move to the top and be an

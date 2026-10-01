@@ -16,6 +16,24 @@
   "next": [],
   "releases": [
     {
+      "version": "2.16.1",
+      "date": "2026-10-01",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "The title banner matches the page under it",
+          "summary": "The banner and the update notice both match the page under them.",
+          "detail": "On the character roster the banner ran 428 pixels wider than the card below it, 214 proud on each side, while on the \"Who is playing?\" screen the same banner matched. The strip that says what is new had the opposite problem on narrow screens. Both sit on one rail now that takes the width of whatever page is under it, so every screen agrees with itself and the first screens agree with each other."
+        },
+        {
+          "kind": "fix",
+          "title": "Characters are listed newest first",
+          "summary": "The character you played last is at the top.",
+          "detail": "The list was in the order the device happened to store them. It is sorted by when each was last saved, newest first. The list did not record that until now, so it is filled in once from the saves themselves; a save with no record of when it was written sorts last rather than pretending to be recent."
+        }
+      ]
+    },
+    {
       "version": "2.16.0",
       "date": "2026-09-30",
       "entries": [

@@ -184,7 +184,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.16.8";
+const APP_VERSION = "2.16.9";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -21972,6 +21972,26 @@ function renderPlay(turn, opts = {}) {
         ${(character.skillPoints || 0) > 0
           ? `<strong>${character.skillPoints} skill point${(character.skillPoints || 0) === 1 ? "" : "s"}</strong> to spend`
           : `No skill points yet`}
+        ${/* ⛔ THE CAPACITY SENTENCE, CARRIED OFF THE RETIRED LIST. It is in Erik's screenshot and it is the one thing a
+              player with spare points most needs: at capacity the points BANK rather than being lost. Deleting the list
+              without it would have been the migration failure this repo has recorded three times. */""}
+        ${(() => {
+          try {
+            const used = breadthUsed(character), capN = breadthCap(character, CONTENT.skillCapacity);
+            return ` · ${used} of ${capN} skills${atCapacity(character, CONTENT.skillCapacity)
+              ? ` — at capacity; points bank until your next level ${infoDot("lock.capacity")}` : ""}`;
+          } catch { return ""; }
+        })()}
+        ${/* ⛔ …AND THAT ONE IS FREE. The retired list appeared when points > 0 **or an aspiration was ripe** — so
+              without this, the only signal that something has been practiced into reach would have gone with it. */""}
+        ${(() => {
+          try {
+            const ripe = (character.practice?.aspirations || []).filter(a => aspirationRipe(character, a.abilityId, CONTENT.rules));
+            if (!ripe.length) return "";
+            const nm = fullCatalog()[ripe[0].abilityId]?.name || "something you have practiced";
+            return ` · <strong>${esc(nm)}</strong> is practiced — free on the wheel${ripe.length > 1 ? `, and ${ripe.length - 1} more` : ""}`;
+          } catch { return ""; }
+        })()}
         · <button class="link-btn" id="sidebar-wheel" title="The great circle: every people, every craft, and what you could take now">Open the wheel</button>
         ${canLevelUp(character) ? ` · <button class="link-btn" id="sidebar-levelup" title="Spend your skill points — attributes, capacity and what banks">Level Up</button>` : ""}
       </div>
@@ -22034,66 +22054,15 @@ function renderPlay(turn, opts = {}) {
         return braidGroup + order.map(fam => `<details class="skill-group ${familyClass(fam)}" data-fold="skills:fam:${esc(fam)}"${sectionOpen("skills:fam:" + fam, true) ? " open" : ""}><summary>${FAMILY_GLYPH?.[fam] || "◆"} ${esc(famLabel(fam))} <span class="cost">(${byFam[fam].length})</span></summary>${
           byFam[fam].sort((x, y) => (x.ab.levelReq || 1) - (y.ab.levelReq || 1)).map(row).join("")}</details>`).join("");
       })()}
-      ${(() => {
-        const canShow = character.skillPoints > 0 || (character.practice?.aspirations || []).some(a => aspirationRipe(character, a.abilityId, CONTENT.rules));
-        if (!canShow) return "";
-        const cap = atCapacity(character, CONTENT.skillCapacity);
-        const learnable = Object.values(CONTENT.abilities).filter(ab => {
-          if (character.abilities.some(a => a.abilityId === ab.id)) return false;
-          if (character.skillPoints <= 0 && !aspirationRipe(character, ab.id, CONTENT.rules)) return false;
-          const req = learnLevelReq(ab); // SNG-094: domain gate, not the legacy powerSystem==origin filter
-          if (req === null || character.level < req) return false;
-          // SNG-055: the domain gate decides what's OFFERED — the antipode of a chosen pole and
-          // over-tier picks (secondary>III, tertiary>II, kin-capstones) simply aren't shown.
-          return domainVerdict(ab).allowed;
-        });
-        const capLine = `<div class="cap-line">${breadthUsed(character)} of ${breadthCap(character, CONTENT.skillCapacity)} skills${cap ? " — at capacity; points bank until your next level" : ""}${cap ? " " + infoDot("lock.capacity") : ""}</div>`;
-        if (!learnable.length) return capLine;
-        // SNG-059: group the learn list by TRADITION (the people)
-        const byClass = {};
-        for (const ab of learnable) { const key = abilityGroupKey(ab, "learned"); (byClass[key] = byClass[key] || []).push(ab); }
-        const groupHtml = Object.keys(byClass).sort((a, b) => traditionLabel(a).localeCompare(traditionLabel(b))).map(cls => [cls, `<details class="learn-group" data-fold="learn:${esc(cls)}"${sectionOpen("learn:" + cls, false) ? " open" : ""}><summary>Learn ${esc(traditionLabel(cls))} <span class="cost">(${byClass[cls].length})</span></summary>${
-          byClass[cls].sort((a,b)=>(a.levelReq||1)-(b.levelReq||1)).map(ab => {
-            const gate = meetsLearnGate(character, ab.id, CONTENT.attributeGates);
-            const capBlock = cap && ab.powerSystem !== "learned";
-            const ripe = aspirationRipe(character, ab.id, CONTENT.rules);
-            const dv = domainVerdict(ab); // SNG-055 band + skill-point penalty
-            // SNG-BATCH-10: once domains are set the ring-distance penalty is authoritative (matches
-            // the engine in learnAbility); pre-domain/legacy characters keep the old cross-class cost.
-            const learnCost = learnPointCost(ab, character, CONTENT.skillCapacity, dv);
-            const tooExpensive = !ripe && character.skillPoints < learnCost;
-            const blocked = !gate.ok || capBlock || tooExpensive;
-            const bandTag = dv.band === "far" ? ", far" : dv.band === "adjacent" ? ", kin" : "";
-            return `<button class="opt ${ripe ? "practiced" : ""} ${blocked ? "locked" : ""}" ${blocked ? "disabled" : `data-learn="${esc(ab.id)}"`} title="${esc(playerText(ab.description) + " — " + dv.reason + (gate.ok ? "" : " · " + gate.why))}" style="margin:2px 0; display:block; width:100%"><span class="tier-badge">${tierOf(abilityTier(ab))}</span> ${esc(ab.name)} <span class="cost">L${ab.levelReq || 1}${bandTag}${learnCost > 1 ? ` · ${learnCost} pts` : ""}${ripe ? " — FREE" : ""}${!gate.ok ? " 🔒 " + esc(gate.why) : capBlock ? " 🔒 at capacity" : tooExpensive ? " 🔒 need " + learnCost + " pts" : ""}</span></button>`;
-          }).join("")}</details>`]);
-        // ⛔ CCODE-338 (D) — POLES GROUPED UNDER A DOMAIN HEADING, AND THE THING YOU PICK IS STILL THE POLE.
-        // Aevi’s ruling, and the reasoning is Reading B’s: the learn screen is where ACCESS IS DECIDED, and
-        // access is the only place the domain does real work — a player choosing a secondary needs to see
-        // that `figurist` sits with `cogitant`, or the choice is arbitrary.
-        //
-        // ⚠️ A GROUPING, NOT A LABEL. The domain is a heading over the peoples; every clickable thing below
-        // it is still a people. ⛔ SHE REFUSED THE CHARACTER SHEET for exactly this reason: putting "Mind" where
-        // a player reads who they ARE makes Mind the identity, which is Reading A wearing a label.
-        //
-        // ⚠️ AND A PEOPLE WITH NO DOMAIN IS NOT AN ERROR — the foothills are PLACES where poles meet, so they
-        // gather under their own heading rather than being forced into one (§31C).
-        const byDomain = new Map();
-        for (const [cls, html] of groupHtml) {
-          const dom = domainOfTradition(cls, CONTENT.traditionIndex);
-          const key = dom || "";
-          if (!byDomain.has(key)) byDomain.set(key, []);
-          byDomain.get(key).push(html);
-        }
-        const domOrder = [...byDomain.keys()].sort((a, b) => (a === "" ? 1 : b === "" ? -1 : a.localeCompare(b)));
-        const groups = domOrder.map(dom => {
-          const inner = byDomain.get(dom).join("");
-          // ⚠️ WITH NO DOMAIN LAYER LOADED every people lands under "" and this renders exactly what it
-          // rendered before — the heading appears only when there is something true to say.
-          if (!dom) return domOrder.length === 1 ? inner : `<div class="learn-domain learn-domain-none"><div class="learn-domain-head">elsewhere</div>${inner}</div>`;
-          return `<div class="learn-domain"><div class="learn-domain-head">${esc(String(dom).toUpperCase())}</div>${inner}</div>`;
-        }).join("");
-        return capLine + groups;
-      })()}
+      ${/* ✅ ERIK 2026-10-01 — THE "LEARN THE …" LIST IS RETIRED. It was item 3's other half and I left it behind: the
+          peoples moved to the wheel's own sidebar and this stayed, so the same list existed twice and the narrow copy
+          was the one in the player's way.
+          ⛑ SWEPT BEFORE DELETING. Everything it DID lives on the wheel — including learning a practiced craft FREE
+          (`skillSelectionActions` → `data-skilllearn` → `learnAbility(… { free })`) — and the two sentences it ALONE
+          carried moved up into the line above: the capacity line ("12 of 12 skills — at capacity; points bank until
+          your next level") and the signal that something is practiced and free right now. Its `[data-learn]` handler
+          went with it, because `data-learn` was produced in exactly one place and a handler waiting for a button
+          nobody renders is a defect this file has recorded by name. */""}
       ${(character.discoveries || []).length ? `<details class="skill-group discoveries" data-fold="skills:discoveries"${sectionOpen("skills:discoveries", true) ? " open" : ""}><summary>Discoveries &amp; Combinations <span class="cost">(${character.discoveries.length})</span></summary>${character.discoveries.map(d => {
         // SNG-047: adopt the orphan combo — show the source abilities it braids (recipe parts)
         const parts = (d.abilityIds || []).map(id => fullCatalog()[id]?.name || id.replace(/-/g, " "));
@@ -23082,16 +23051,12 @@ function renderPlay(turn, opts = {}) {
   };
   // ability-arch v2: no rank-up handlers in the play ability panel — depth is earned through use
   // (rank 2 auto) and a GM-marked defining moment (rank 3), not bought here.
-  for (const b of app.querySelectorAll("[data-learn]")) b.onclick = () => {
-    const free = aspirationRipe(character, b.dataset.learn, CONTENT.rules);
-    const r = learnAbility(character, b.dataset.learn, fullCatalog(), CONTENT.rules, { free, attributeGates: CONTENT.attributeGates, skillCapacity: CONTENT.skillCapacity, traditionIndex: CONTENT.traditionIndex });
-    if (r.ok) {
-      if (free) dropAspiration(character, b.dataset.learn);
-      saveCharacter(character);
-      renderPlay(turn || character.activeScene?.lastTurn || null, { aside: `You ${free ? "have practiced your way into" : "begin learning"} ${fullCatalog()[b.dataset.learn]?.name}${free ? " — no point spent" : ""}.` });
-    } else alert(r.why);
-  };
-  // ⛔ R17/R20 — THE CALL SITE THAT DID NOT EXIST. Mirrors the [data-learn] handler above.
+  // ✅ ERIK 2026-10-01 — THE `[data-learn]` HANDLER WENT WITH THE LIST IT SERVED. `data-learn` was produced in exactly
+  // one place, so leaving this would be a handler waiting for a button nobody renders — the ⇧ defect this repo has
+  // recorded by name. Learning happens on the wheel now, through `[data-skilllearn]`, which has always offered the
+  // free/practiced case too.
+  // ⛔ R17/R20 — THE CALL SITE THAT DID NOT EXIST. ⚠️ It mirrored the `[data-learn]` handler that stood here until the
+  // learn list was retired; the shape it copies now lives in `[data-skilllearn]` on the wheel.
   for (const b of app.querySelectorAll("[data-train]")) b.onclick = () => {
     const id = b.dataset.train;
     const r = rankUpAbility(character, id, CONTENT.rules, {

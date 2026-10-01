@@ -1950,7 +1950,10 @@ console.log("\n── §168 · a fold stays folded ──");
   // it happened to see is satisfied by the set it can see. A missed site must go RED.
   const groups = [...strip.matchAll(/<details class="(?:skill-group|learn-group|moves-group|learn-list-fallback)[^\n]{0,400}?>/g)].map(m => m[0]);
   check("§168: ⛔ every craft, learn and move group asks the STORE for its state — no literal open or closed left in one",
-    groups.length >= 7 && groups.every(g => /sectionOpen\(/.test(g) && /data-fold="/.test(g)),
+    // ⚠️ `>= 7` WAS AN INSTANCE PIN — it counted how many foldable lists the app happens to have, so retiring the
+    // sidebar's duplicate learn list (Erik, 2026-10-01) reddened a check about where a fold's STATE lives. The claim is
+    // that EVERY group asks the store; the five keys below are asserted by name in the clause after this one.
+    groups.length >= 3 && groups.every(g => /sectionOpen\(/.test(g) && /data-fold="/.test(g)),
     groups.length + " groups · " + groups.filter(g => !/sectionOpen\(/.test(g)).length + " still literal");
   check("§168: …and the keys name what was folded, so a fold outlives a re-render, a view change and a reload",
     /sectionOpen\("skills:braids"/.test(strip) && /sectionOpen\([^)]*skills:fam:/.test(strip) && /sectionOpen\("skills:discoveries"/.test(strip)
@@ -3910,10 +3913,20 @@ console.log("\n── §31D · the domain is a heading, and the sheet never says
   const app31d = rd("app.js");
   const css31d = rd("style.css");
 
-  check("§31D: the learn screen groups peoples under a domain heading",
-    /learn-domain-head/.test(app31d) && /domainOfTradition\(cls, CONTENT\.traditionIndex\)/.test(app31d));
-  check("§31D: …and the heading is styled as quiet type, not an affordance",
-    /\.learn-domain-head\s*\{/.test(css31d));
+  // ⛔ THE SURFACE THIS RULING LIVED ON IS GONE, AND I AM NOT QUIETLY DELETING THE RULING WITH IT. Erik, 2026-10-01:
+  // *"the learning list is still in the sidebar. now that it's been moved to the wheel we can remove it."* The sidebar's
+  // domain-grouped list was the ONLY place `learn-domain-head` and `domainOfTradition` were rendered, so Aevi's §31D
+  // ruling — peoples grouped under a domain heading on the learn surface — now has nowhere to be true.
+  //
+  // ⛑ WHAT REPLACED IT GROUPS THE PEOPLES BY **AXIS**, which is the wheel's own geometry and was my choice, reported to
+  // her at the time. So the GROUPING survives and the DOMAIN does not. This check asserts what is actually true — the
+  // browse surface groups peoples under a heading read from content rather than listing them flat — and the question of
+  // whether she wants domains back is in the reply, not decided here.
+  check("§31D: the browse surface groups peoples under a heading read from content, not a flat list",
+    /<aside class="wheel-peoples"/.test(app31d)
+    && /class="wp-axis"/.test(app31d) && /idx\.axisPoles/.test(app31d));
+  check("§31D: …and the heading is quiet type, not an affordance",
+    /\.wp-axis-n\s*\{/.test(css31d) && /text-transform: uppercase/.test(css31d));
 
   // ⛔ THE REFUSAL, ENFORCED. `sheetCraftLabel` is what the character sheet renders; it must reach for the
   // PEOPLE and must never reach for the domain.
@@ -34920,6 +34933,73 @@ console.log("\n── §407 · a levy splits, and nobody is named ──");
     /data-cg-split="/.test(A407) && /data-cg-join="/.test(A407)
     && /const r = splitContingent\(band, i, \{ take \}\);/.test(A407)
     && /if \(!r\.ok\) \{ alert\(r\.why\); return; \}/.test(A407));
+}
+
+/* ══════════ §408 · THE LEARN LIST LEFT THE SIDEBAR, AND TOOK NOTHING WITH IT ══════════ */
+// ⛔ ERIK, 2026-10-01, with a screenshot: *"the learning list is still in the sidebar. now that it's been moved to the
+// wheel we can remove it."* It was item 3's other half and I left it behind — I replaced the Level Up BUTTON and never
+// removed the LIST under it, so the same list existed twice and the cramped copy was the one in his way.
+//
+// ⛑ SWEPT BEFORE DELETING, because nine of eleven reds the last time I replaced a surface were LOSSES, not moved
+// claims. Three things lived on that block:
+//   ✅ the learning itself — the wheel's `skillSelectionActions` offers it, INCLUDING the free/practiced case
+//   ⛔ the CAPACITY LINE   — "N of M skills — at capacity; points bank until your next level", in his screenshot
+//   ⛔ the RIPE SIGNAL     — the block appeared when points > 0 **or an aspiration was ripe**
+// The last two moved into the one line, and both branches are DRIVEN below: neither is a sentence I carried across into
+// a branch nothing can reach.
+console.log("\n── §408 · the learn list left the sidebar ──");
+{
+  const A408 = rd("app.js");
+  const S408 = await import("../engine/skilltree.js");
+  const PR408 = await import("../engine/practice.js");
+  const { loadContentHeadless: lch408 } = await import("./headless_content.mjs");
+  const C408 = await lch408();
+
+  /* ---- 1 · ⛔ IT IS GONE, AND SO IS ITS HANDLER ---- */
+  check("§408: ⛔ THE SIDEBAR'S LEARN LIST IS RETIRED — the same list existed twice and the narrow copy was in the way",
+    !/class="learn-domain"/.test(A408) && !/learn-domain-head/.test(A408)
+    && !/<summary>Learn \$\{esc\(traditionLabel\(cls\)\)\}/.test(A408));
+  // ⛔ AND ITS HANDLER WENT WITH IT. `data-learn` was produced in exactly one place; a handler waiting for a button
+  // nobody renders is the ⇧ defect this repo has recorded by name.
+  check("§408: ⛔ …and its `[data-learn]` handler went with it, rather than staying bound to nothing",
+    !/data-learn="/.test(A408) && !/querySelectorAll\("\[data-learn\]"\)/.test(A408));
+  // ⛑ AND THE LEARNING STILL HAPPENS — on the wheel, free case and all. Deleting a surface whose ACTION had no other
+  // home would have taken the feature with it.
+  check("§408: ⛑ …and learning still happens on the wheel, including the free/practiced case",
+    /data-skilllearn="/.test(A408)
+    && /const free = aspirationRipe\(character, id, CONTENT\.rules\);/.test(A408)
+    && /learnAbility\(character, id, fullCatalog\(\), CONTENT\.rules, \{ free,/.test(A408));
+
+  /* ---- 2 · ⛔ THE TWO SENTENCES IT ALONE CARRIED ---- */
+  check("§408: ⛔ THE CAPACITY LINE MOVED UP — it was in his screenshot and the one-liner did not say it",
+    /\$\{used\} of \$\{capN\} skills/.test(A408)
+    && /at capacity; points bank until your next level \$\{infoDot\("lock\.capacity"\)\}/.test(A408));
+  check("§408: ⛔ …and so did the signal that something is practiced and FREE right now",
+    /is practiced — free on the wheel/.test(A408)
+    && /aspirationRipe\(character, a\.abilityId, CONTENT\.rules\)/.test(A408));
+
+  /* ---- 3 · ⚠️ AND BOTH BRANCHES CAN ACTUALLY BE REACHED ---- */
+  // ⚠️ A SENTENCE CARRIED INTO A BRANCH NOTHING CAN REACH IS STILL A LOSS. Both are driven through the real readers,
+  // because NO live save is at capacity or holds a ripe aspiration today — so neither would be exercised by the corpus.
+  check("§408: ⚠️ THE AT-CAPACITY BRANCH IS REACHABLE — driven, because no live save is at capacity today",
+    (() => {
+      const ch = { name: "T408", level: 20, abilities: [], domains: { primary: "wright" } };
+      const ids = Object.keys(C408.abilities);
+      let guard = 0;
+      while (!S408.atCapacity(ch, C408.skillCapacity) && guard < 200) ch.abilities.push({ abilityId: ids[guard++], level: 1 });
+      return S408.atCapacity(ch, C408.skillCapacity) === true
+        && S408.breadthUsed(ch) === S408.breadthCap(ch, C408.skillCapacity);
+    })());
+  check("§408: ⚠️ …and so is the practiced-and-free branch, including its “and N more” tail",
+    (() => {
+      const ripeAt = C408.rules?.practice?.aspirationRipe ?? 10;
+      const ids = Object.keys(C408.abilities).slice(0, 2);
+      const ch = { name: "T408b", abilities: [], practice: { aspirations: ids.map(id => ({ abilityId: id, progress: ripeAt })) } };
+      const ripe = ch.practice.aspirations.filter(a => PR408.aspirationRipe(ch, a.abilityId, C408.rules));
+      // ⛑ one is the ordinary case; two is what makes the tail say "and 1 more"
+      return ripe.length === 2
+        && PR408.aspirationRipe({ practice: { aspirations: [{ abilityId: ids[0], progress: ripeAt - 1 }] } }, ids[0], C408.rules) === false;
+    })());
 }
 
 /* ══════════ REPORT ══════════ */

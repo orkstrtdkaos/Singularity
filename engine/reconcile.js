@@ -97,6 +97,34 @@ function renameTargets(spec, entry, character, known) {
 
 export const CHARACTER_STEPS = [
   {
+    version: 94, id: "patrolling-is-the-watch", playerFacing: true,
+    // ✅ ERIK 2026-10-01 (through Aevi): *"Patrolling merges like Guarding: yes. One watch, the stance is the
+    // difference."* ⛑ THE SAME MERGE AS STEP 92, for the same reason: `patrol` reached only `workMods().watch` — the
+    // watch `holding.garrison` already feeds — so it was a second door onto one room, and its own line promised eyes
+    // on the road that nothing implemented.
+    //
+    // ⚡ MEASURED BEFORE IT WENT: nobody in any of the 6 live holdings is on patrol, and a patroller and a watcher cost
+    // the same 3 a pass, so this moves no one today and changes no keep. It exists for the save written tomorrow by a
+    // copy of the app that still had the control.
+    apply(character, ctx = {}) {
+      void ctx;
+      const moved = [];
+      for (const h of (character?.holdings || [])) {
+        const w = h?.work;
+        if (!w || typeof w !== "object") continue;
+        const onPatrol = Array.isArray(w.patrol) ? w.patrol.map(String).filter(Boolean) : [];
+        if (!onPatrol.length) { if ("patrol" in w) delete w.patrol; continue; }
+        const garrison = Array.isArray(h.garrison) ? h.garrison.map(String) : (h.garrison = []);
+        for (const id of onPatrol) if (!garrison.includes(id)) garrison.push(id);
+        h.garrison = garrison;
+        delete w.patrol;
+        moved.push(`${onPatrol.length} at ${h.name || h.id}`);
+      }
+      if (!moved.length) return {};
+      return { notes: [`Patrolling and the watch were one job wearing two controls — ${moved.join(", ")} now stand on the watch, at the same wage.`] };
+    },
+  },
+  {
     version: 93, id: "one-charge-one-purpose", playerFacing: true,
     // ⛔ ERIK, IN PLAY 2026-09-30: *"Cy somehow picked up 2 of the same delegation as a job"* and *"It says the legs are
     // being built but no one is at it? Cy… was delegated to work that."* Aevi found the one root behind both: a charge

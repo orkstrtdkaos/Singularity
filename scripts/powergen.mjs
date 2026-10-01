@@ -202,7 +202,16 @@ export function proposePowers(regionId, { content = null, standing = null, seed 
   const bySpecificity = (a, b) => {
     if (b.matched.length !== a.matched.length) return b.matched.length - a.matched.length;
     const rarity = (x) => (x.matched.length ? x.matched.reduce((n, tg) => n + (freq.get(tg) || 0), 0) / x.matched.length : Infinity);
-    return rarity(a) - rarity(b);
+    if (rarity(a) !== rarity(b)) return rarity(a) - rarity(b);
+    // ⛔ AND A THIRD TIE-BREAK, BECAUSE HER TWO LEAVE ONE. When two kinds match the same number of tags AND the same
+    // mean rarity, this comparator returned 0 — and `Array.sort` is stable, so DECLARATION ORDER decided after all.
+    // Her ruling's whole point is that "a JSON key order is not a design decision", and it was still deciding.
+    // ⛑ FOUND BY WIDENING §359's FIXTURE to the whole map (Aevi's own ask): over 38 regions rather than the 15 she had
+    // left empty, reordering the rules keys moved TWO of 84 seats — kestrels_roost guild↔lordship and the_lensward
+    // outlaw_band↔lordship. Her two criteria never reached them.
+    // ⚠️ THE KIND'S OWN NAME IS AN ARBITRARY LAST RESORT, and it is deliberately arbitrary: it is STABLE, it is not the
+    // file's key order, and it keeps the dry run reviewable. A better third criterion is hers to rule — reported.
+    return String(a.kind).localeCompare(String(b.kind));
   };
 
   // ⛔ CCODE-490 (AEVI, ruling 6) — A GOVERNMENT LIVES IN THE REGION'S CITY, NOT ON THE EXTREMISTS' HOLY GROUND.

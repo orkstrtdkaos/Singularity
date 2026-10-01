@@ -16,6 +16,24 @@
   "next": [],
   "releases": [
     {
+      "version": "2.16.6",
+      "date": "2026-10-01",
+      "entries": [
+        {
+          "kind": "change",
+          "title": "Patrolling is the watch",
+          "summary": "One job, not two controls that meant the same thing.",
+          "detail": "Putting somebody on patrol and posting them to the watch did the same thing at the same wage, and patrolling promised eyes on the road that nothing behind it delivered. Posting somebody to the watch is the job now; anyone already on patrol has been moved onto it, at the same pay."
+        },
+        {
+          "kind": "internal",
+          "title": "The power generator is tested on a stripped world",
+          "summary": "Its dry-run checks no longer depend on how much of the map is authored.",
+          "detail": "The generator’s tests took their regions from whatever was still unwritten, so authoring more of the world shrank the test. They run over a copy of the world with the powers removed now, which found a real gap: with the rules file reordered, two of eighty-four seats still changed hands, so a third tie-break was added that is not the order of the file."
+        }
+      ]
+    },
+    {
       "version": "2.16.5",
       "date": "2026-10-01",
       "entries": [

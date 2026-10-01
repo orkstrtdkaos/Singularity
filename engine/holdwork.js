@@ -14,14 +14,17 @@
 // thing — `workMods().watch`, the same watch `holding.garrison` feeds — so it was a second door onto one room, and Erik
 // saw it as two controls for one job. Posting somebody to the watch IS guarding now. ⚡ Measured before it went: both
 // cost 3 a pass (`garrisonUpkeepPerHand` equals `wagePerHand`) and NOBODY in any live save was on guard-work, so the
-// merge moved no one and changed no one's keep. ⬜ `patrol` stays, and is in the same position: it too reaches only the
-// watch, and its own line promises eyes on the road that nothing implements — that question went to Erik separately.
+// merge moved no one and changed no one's keep.
+//
+// ✅ ERIK 2026-10-01: *"Patrolling merges like Guarding"* — *"One watch, the stance is the difference."* ⛔ AND THERE IS
+// NO `patrol` KIND EITHER. It was in exactly the position `guard` had been: it reached only `workMods().watch`, and its
+// own line promised *eyes on the road* that nothing implemented. ⚡ Measured the same way before it went: both cost 3 a
+// pass and NOBODY in any of the 6 live holdings was on patrol, so this merge also moves no one and changes no keep.
 export const WORK_KINDS = {
   forage: { label: "Foraging", needs: ["SUSTAIN", "KNOW"], per: 1, what: "each good day brings in a unit of raw material" },
   hunt: { label: "Hunting", needs: ["HARM", "KNOW"], per: 2, what: "living stock every two good days, and the danger around the hold eases while it is hunted" },
   train: { label: "Training", needs: ["HARM", "PROTECT"], per: 10, what: "every ten good days lifts the hands raised here one step of quality" },
   mend: { label: "Mending the place", needs: ["SHAPE", "RESTORE"], per: 8, what: "every eight good days, the hold's condition rises a step" },
-  patrol: { label: "Patrolling", needs: ["MOVE", "PROTECT", "KNOW"], per: 0, what: "they walk the bounds — the hold has eyes on the road while they do" },
   tend: { label: "Tending", needs: ["SUSTAIN", "RESTORE"], per: 0, what: "the hold's yields are a quarter more while it is tended" },
   keep: { label: "Keeping the accounts", needs: ["KNOW", "INFLUENCE"], per: 0, what: "the hold's upkeep is a tenth less while its accounts are kept" },
 };
@@ -64,6 +67,8 @@ export function workMods(holding, { table = null } = {}) {
   return {
     // ⛔ `w.guard` IS GONE (Erik 2026-09-30, merging Guarding into the watch). Anyone who used to be put to Guarding is
     // posted to the watch itself now; `patrol` still joins it, being a different job that also happens to watch.
+    // ⛑ AN OLD SAVE'S `patrol` STILL FOLDS IN. The kind is gone, but a record written before 2026-10-01 may carry the
+    // list, and reconcile step 94 moves it — this keeps the reading right for the pass between load and repair.
     watch: arr(w.patrol).map(String),
     yieldMult: any("tend") ? Number(T.dials.tendYield) || 1 : 1,
     upkeepMult: any("keep") ? Number(T.dials.keptUpkeep) || 1 : 1,

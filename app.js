@@ -184,7 +184,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.16.5";
+const APP_VERSION = "2.16.6";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -16095,7 +16095,7 @@ function renderHoldingsTab(manageId = null, tab = null) {
             const canApply7 = (character.abilities || []).map(a => fullCatalog()[a.abilityId])
               .filter(d => d && (d.functions || []).some(v => fns7.has(String(v))) && !(h.improvements || []).some(i => i.abilityId === d.id));
             if (!canApply7.length) return "";
-            return `<div class="hold-ctl"><span class="hold-ctl-label">Put a craft to it</span><select data-hold-craft="${esc(h.id)}">${canApply7.map(d => `<option value="${esc(d.id)}">${esc(d.name || d.id)}</option>`).join("")}</select><button class="opt" data-hold-improve="${esc(h.id)}" title="Put a craft you carry to the place — it comes up a rung, once per craft">Apply</button></div>`;
+            return `<div class="hold-ctl"><span class="hold-ctl-label">Put a craft to the place</span><select data-hold-craft="${esc(h.id)}">${canApply7.map(d => `<option value="${esc(d.id)}">${esc(d.name || d.id)}</option>`).join("")}</select><button class="opt" data-hold-improve="${esc(h.id)}" title="Put a craft you carry to the place — it comes up a rung, once per craft">Apply</button><span class="hint">raises the place a rung, once per craft</span></div>`;
           })()}
           ${opts ? `<select data-hold-kind="${esc(h.id)}">${opts}</select><input data-hold-fname="${esc(h.id)}" placeholder="what it is called (optional)" style="max-width:200px"><select data-hold-bcraft="${esc(h.id)}" title="Which of your crafts raised it — what it DOES decides how long it stands: a craft that makes or mends is permanent, one that holds ground or defends lasts a season and then wants renewing. It costs the craft's own energy, the same as putting it to the place through Apply a craft."><option value="">— no craft, just work —</option>${(character.abilities || []).map(a => fullCatalog()[a.abilityId]).filter(d => d && (d.functions || []).length).map(d => { const e = craftPlacementCost(d, CONTENT.rules?.economy?.holdStore?.growth); return `<option value="${esc(d.id)}"${e > (Number(character.energy) || 0) ? " disabled" : ""}>${esc(d.name || d.id)} — ${e} energy${e > (Number(character.energy) || 0) ? ` (you have ${Number(character.energy) || 0})` : ""}</option>`; }).join("")}</select><button class="opt" data-hold-build="${esc(h.id)}" title="Pay the price — goods from the store, then the purse — and the work begins; it stands when its days have run">Build</button><button class="opt" data-hold-feature="${esc(h.id)}" title="The story built it, or the place came with it — free to record, and it still costs its keep">Record what the story built</button>` : ""}
           ${/* ⛔ MEASURED AT 375px: eight of these eleven costs sat off the right edge of a 309px sheet —

@@ -2402,7 +2402,10 @@ console.log("\n── §179 · labelled rows and chips on the holding card; Hugi
   // per job, each labelled, each with its own control.
   check("§179: ⛔ the controls are labelled rows, never a drift of loose buttons — a craft to put to it, and one row per job",
     /<div class="hold-controls">/.test(app179)
-    && /<div class="hold-ctl"><span class="hold-ctl-label">Put a craft to it<\/span><select data-hold-craft=/.test(app179)
+    // ⚠️ THE LABEL ITSELF MOVED (Aevi, 2026-09-30: *"put it in the tab's what-you-can-do section with a label that
+    // says what it does"*), so this asks for a labelled row carrying the craft picker rather than for one wording.
+    && /<div class="hold-ctl"><span class="hold-ctl-label">Put a craft to the place<\/span><select data-hold-craft=/.test(app179)
+    && /raises the place a rung, once per craft/.test(app179)
     && /<div class="hw-row"><span class="hw-kind">/.test(app179)
     && !/<div class="opt-row" style="margin-top:4px;gap:6px;flex-wrap:wrap">/.test(app179));
   // ⛑ SNG-651 §2.2 MOVED THE HOME, NOT THE CLAIM. The compact "has: chip chip chip" sentence lived on the list
@@ -25494,9 +25497,17 @@ console.log("\n── §330 · standing work — only the kinds whose effect is 
   // READER both ways rather than as a bare absence: putting somebody to the watch works, putting them to "guard" is
   // refused in words, and the watch still counts the garrison. A rule stated only as "X is missing" fires the day Erik
   // changes his mind; this states what the watch IS.
-  check("§330: ⚑ ONLY WHAT IS WIRED IS OFFERED — foraging, hunting, training, mending, patrolling, tending, keeping the accounts; scouting, crafting and teaching wait (a row that does nothing would be a claim about a mechanism)",
-    Object.keys(T.kinds).sort().join() === "forage,hunt,keep,mend,patrol,tend,train" && !T.kinds.scout && !T.kinds.craft && !T.kinds.teach);
-  check("§330: ⛔ …and GUARDING IS THE WATCH — posting somebody to it is the job; there is no second control that means the same thing",
+  // ✅ PATROLLING WENT THE WAY GUARDING WENT (Erik, 2026-10-01: *"Patrolling merges like Guarding: yes. One watch, the
+  // stance is the difference."*). It reached only `workMods().watch` and promised eyes on the road that nothing
+  // implemented — and "a row that does nothing would be a claim about a mechanism" is this check's own rule.
+  check("§330: ⚑ ONLY WHAT IS WIRED IS OFFERED — foraging, hunting, training, mending, tending, keeping the accounts; guarding and patrolling ARE the watch, and scouting, crafting and teaching wait",
+    Object.keys(T.kinds).sort().join() === "forage,hunt,keep,mend,tend,train"
+    && !T.kinds.guard && !T.kinds.patrol
+    && !T.kinds.scout && !T.kinds.craft && !T.kinds.teach);
+  // ⛑ AND AN OLD SAVE'S `patrol` STILL FOLDS INTO THE WATCH between load and repair — the kind is gone from the
+  // controls, but a record written before today may still carry the list, and reading it wrong for even one pass would
+  // be a hold that forgets who is standing on it.
+  check("§330: ⛔ …and GUARDING AND PATROLLING ARE THE WATCH — posting somebody to it is the job; no second control means the same thing",
     (() => {
       const w = { garrison: ["g"], work: { patrol: ["p"] } };
       const mods = HW.workMods(w);
@@ -28303,11 +28314,22 @@ console.log("\n── §359 · the power generator names the rule behind every c
   const locs = C359.locations || {};
   const rules = C359.rules?.powers || {};
   const REGIONS = [...new Set(Object.values(locs).map(l => l.regionId).filter(Boolean))];
-  const held = new Set((C359.powers || []).flatMap(p => [p.seat, ...(p.reach || [])].filter(Boolean).map(id => locs[id]?.regionId)).filter(Boolean));
-  const empty = REGIONS.filter(r => !held.has(r));
-  const runAll = (content = C359) => empty.map(r => PG.proposePowers(r, { content }));
+  // ⛔ THE FIXTURE IS A STRIPPED COPY OF THE WORLD, NOT THE WORLD AS IT STANDS (Aevi, SPEC_SNG-645, tail item 8).
+  //
+  // ⚠️ THIS GATE USED TO TAKE ITS REGIONS FROM `REGIONS.filter(r => !held.has(r))` — the regions nobody had authored a
+  // power into yet. So its population was "whatever Aevi has not finished", and her finishing a pass SHRANK it: filling
+  // the eight home cities would have left only the 11 one-place foothill towns, which carry none of the tags these
+  // checks read, and five of them would have gone red on correct content. A gate that measures how much of her world is
+  // done rather than whether the generator works — and the third time I have written this same note.
+  //
+  // ⛑ WITH THE POWERS STRIPPED, every region is a fixture: 38 rather than today's 15, and it never moves again however
+  // much she authors. ⚠️ The copy is SHALLOW on purpose — same locations, same rules, no powers — so the generator is
+  // handed the real world minus the one thing whose presence was deciding the test's own scope.
+  const STRIPPED = { ...C359, powers: [] };
+  const empty = REGIONS;
+  const runAll = (content = STRIPPED) => empty.map(r => PG.proposePowers(r, { content }));
 
-  check("§359: ⛔ IT WRITES NOTHING, AND THAT IS STRUCTURAL RATHER THAN PROMISED — the module imports no writer at all, and the content it was handed is byte-identical after a run over every empty region. ⛑ Aevi's ask was \“write nothing to content\”; a dry run that mutated the loaded world would corrupt the very corpus she is reviewing against",
+  check("§359: ⛔ IT WRITES NOTHING, AND THAT IS STRUCTURAL RATHER THAN PROMISED — the module imports no writer at all, and the content it was handed is byte-identical after a run over every region of a stripped world. ⛑ Aevi's ask was \“write nothing to content\”; a dry run that mutated the loaded world would corrupt the very corpus she is reviewing against",
     (() => {
       const src = rd("scripts/powergen.mjs");
       const before = JSON.stringify({ powers: C359.powers, rules: C359.rules?.powers });
@@ -28328,7 +28350,7 @@ console.log("\n── §359 · the power generator names the rule behind every c
 
   check("§359: ⛔ …AND NOT ONE NUMBER IN IT IS MINE. The count a region supports TRACKS `density`: raise the base and more arrive, drop `maxPerRegion` to one and every region gets one. ⛑ Asserted as tracking rather than as a value, so retuning the dial cannot redden this",
     (() => {
-      const dial = (over) => ({ ...C359, rules: { ...C359.rules, powers: { ...rules, density: { ...rules.density, ...over } } } });
+      const dial = (over) => ({ ...STRIPPED, rules: { ...C359.rules, powers: { ...rules, density: { ...rules.density, ...over } } } });
       const base = runAll().flatMap(r => r.proposals).length;
       const more = runAll(dial({ base: 4 })).flatMap(r => r.proposals).length;
       const one = runAll(dial({ maxPerRegion: 1 }));
@@ -28352,13 +28374,25 @@ console.log("\n── §359 · the power generator names the rule behind every c
 
   check("§359: ⛑ …AND `perRegionMax` HOLDS, counting what is ALREADY authored there and not only this pass. A region Aevi has written a guild into does not get a second one, which is the difference between a generator that fills gaps and one that duplicates her work",
     (() => {
+      // ⚠️ A CONSTRUCTED POPULATION, not the live corpus. This check is about the generator counting what is ALREADY
+      // there — so it needs something to BE there, and reading that from `C359.powers` while running against a stripped
+      // world counted authored powers that the run could not see. ⛑ One power of a capped kind is PLACED in a region of
+      // the stripped world, and the generator is asked for that same region: the claim without the drift.
       const capped = Object.entries(rules.kinds).filter(([, k]) => k.perRegionMax != null).map(([kind]) => kind);
       if (!capped.length) return false;
-      const out = runAll();
-      return out.every(r => capped.every(kind => {
-        const authored = (C359.powers || []).filter(p => p.kind === kind && locs[p.seat]?.regionId === r.regionId).length;
-        return authored + r.proposals.filter(p => p.kind === kind).length <= Number(rules.kinds[kind].perRegionMax);
-      }));
+      return capped.every(kind => {
+        const max = Number(rules.kinds[kind].perRegionMax);
+        // a region with a seat the generator would actually consider for this kind
+        const seat = Object.values(locs).find(l => l?.regionId && l?.id);
+        if (!seat) return false;
+        const planted = Array.from({ length: max }, (_, i) => ({
+          id: `planted_${kind}_${i}`, name: `A Planted ${kind}`, kind, seat: seat.id, reach: [] }));
+        const world = { ...STRIPPED, powers: planted };
+        const out = PG.proposePowers(seat.regionId, { content: world });
+        const already = planted.filter(p => locs[p.seat]?.regionId === seat.regionId).length;
+        const proposed = (out?.proposals || []).filter(p => p.kind === kind).length;
+        return already >= max && already + proposed <= max;   // ⛔ the cap is already full, so it may add none
+      });
     })(), `capped kinds: ${Object.entries(rules.kinds).filter(([, k]) => k.perRegionMax != null).map(([k2, k]) => `${k2}\u2264${k.perRegionMax}`).join(" ")}`);
 
   check("§359: ⛔ …AND AN OUTLAW CROWN IS NOT FOUNDED, IT ACCRETES — `formsWhenBandsInRegion` refuses one where the bands are not, and produces one where they are. ⚠️ THIS ASKED THE WRONG THING AFTER AEVI’S RULINGS: with specificity and exclusive seats the crown is never REACHED as a candidate — a more particular kind takes each seat first — so the rule was passing for the wrong reason and its refusal never got recorded. ⛑ The density dial is raised in the fixture so SEATS are not the variable, and then the rule is the only thing deciding",
@@ -28367,7 +28401,7 @@ console.log("\n── §359 · the power generator names the rule behind every c
       if (!crownKind) return false;
       const [kind, k] = crownKind;
       // room enough that seat competition cannot be the reason, so only the band count can be
-      const roomy = { ...C359, rules: { ...C359.rules, powers: { ...rules, seatsAreExclusive: undefined,
+      const roomy = { ...STRIPPED, rules: { ...C359.rules, powers: { ...rules, seatsAreExclusive: undefined,
         density: { ...rules.density, base: 8, maxPerRegion: 12 } } } };
       const target = empty.find(r => Object.values(locs).some(l => l.regionId === r
         && (l.tags || []).map(x => String(x).toLowerCase()).some(tg => (k.placeAtTags || []).includes(tg))));
@@ -28375,7 +28409,9 @@ console.log("\n── §359 · the power generator names the rule behind every c
       const withoutBands = PG.proposePowers(target, { content: roomy });
       const seats = Object.values(locs).filter(l => l.regionId === target).slice(0, Number(k.formsWhenBandsInRegion));
       const bands = seats.map((l, n) => ({ id: `band_${n}`, kind: "outlaw_band", temper: "hard", seat: l.id }));
-      const withBands = PG.proposePowers(target, { content: roomy, standing: [...(C359.powers || []), ...bands] });
+      // ⚠️ THE BANDS ALONE. This passed `[...C359.powers, ...bands]` — the live corpus — as what is standing, while
+      // running against a stripped world; the generator then saw seats taken that its own world did not contain.
+      const withBands = PG.proposePowers(target, { content: roomy, standing: [...bands] });
       return !withoutBands.proposals.some(p => p.kind === kind)
         && withoutBands.refused.some(x => /formsWhenBandsInRegion/.test(x.why))
         && withBands.proposals.some(p => p.kind === kind)
@@ -28388,7 +28424,7 @@ console.log("\n── §359 · the power generator names the rule behind every c
       if (rules.seatsAreExclusive !== true) return false;          // the ruling is authored, or this is stale
       const perSeat = (rows) => { const m = {}; for (const p of rows) m[p.seat] = (m[p.seat] || 0) + 1; return Object.values(m); };
       const out = runAll();
-      const relaxed = runAll({ ...C359, rules: { ...C359.rules, powers: { ...rules, seatsAreExclusive: undefined } } });
+      const relaxed = runAll({ ...STRIPPED, rules: { ...C359.rules, powers: { ...rules, seatsAreExclusive: undefined } } });
       return new Set(authoredSeats).size === authoredSeats.length && authoredSeats.length >= 29
         && perSeat(out.flatMap(r => r.proposals)).every(n => n === 1)
         && out.some(r => r.refused.some(x => /seatsAreExclusive/.test(x.why)))
@@ -28397,19 +28433,24 @@ console.log("\n── §359 · the power generator names the rule behind every c
 
   check("§359: ✅ …AND SPECIFICITY DECIDES A CONTESTED SEAT, NOT THE ORDER OF THE KEYS IN THE RULES FILE (AEVI, ruling 1). ⚠️ THE DEFECT: `the_unlanded` is tagged both `cult` and `dangerous`, `outlaw_band` is declared before `order`, and a gang took the holy site — the only one of eight pole regions where the cult locus did not become an order. A JSON key order is not a design decision and it outranked one. ⛑ “The match on more tags takes the seat, and a tie falls to the kind whose tags are rarer in the corpus” — proved by REORDERING the rules and getting the same answer",
     (() => {
-      const shuffled = { ...C359, rules: { ...C359.rules, powers: { ...rules,
+      const shuffled = { ...STRIPPED, rules: { ...C359.rules, powers: { ...rules,
         kinds: Object.fromEntries(Object.entries(rules.kinds).reverse()) } } };
       const key = (rows) => rows.flatMap(r => r.proposals.map(p => `${p.seat}:${p.kind}`)).sort().join("|");
       // ⚠️ THE WITNESS MUST BE IN A REGION THE DRY RUN ACTUALLY VISITS. My first version took the first
       // cult+dangerous place in the corpus, which is the Blaze — in the Radiant Wastes, a region Aevi already
       // holds, so it is not in the empty list and the run had nothing to say about it.
-      const cult = Object.values(locs).find(l => empty.includes(l.regionId)
-        && (l.tags || []).map(x => String(x).toLowerCase()).includes("cult")
-        && (l.tags || []).map(x => String(x).toLowerCase()).includes("dangerous"));
-      const region = cult && runAll().find(r => r.regionId === cult.regionId);
-      const atCult = region?.proposals.find(p => p.seat === cult.id);
-      return key(runAll()) === key(runAll(shuffled))              // the key order no longer decides anything
-        && !!atCult && atCult.kind === "order";                   // and the holy site goes to the order
+      // ⚠️ THE WITNESS IS *A* CONTESTED HOLY SITE, NOT THE FIRST ONE FOUND. Pinning one seat was an instance pin: over
+      // the whole map (38 regions, not the 15 Aevi had left empty) some cult+dangerous places sit in regions where a
+      // more particular kind rightly takes that seat, or where no proposal lands on it at all. ⛑ What must hold is
+      // that where the contest happens, the order wins it — and that NO gang ever takes one, which was the defect.
+      const cultSeats = new Set(Object.values(locs).filter(l =>
+        (l.tags || []).map(x => String(x).toLowerCase()).includes("cult")
+        && (l.tags || []).map(x => String(x).toLowerCase()).includes("dangerous")).map(l => l.id));
+      const atCultSeats = runAll().flatMap(r => r.proposals).filter(p => cultSeats.has(p.seat));
+      return key(runAll()) === key(runAll(shuffled))                        // the key order no longer decides anything
+        && atCultSeats.length > 0                                          // ⛑ and the contest actually happened
+        && atCultSeats.every(p => p.kind !== "outlaw_band")                 // ⛔ no gang takes a holy site — the defect
+        && atCultSeats.some(p => p.kind === "order");                       // …and the order wins one
     })());
 
   check("§359: ✅ …AND A GOVERNMENT LIVES IN THE REGION'S CITY (AEVI, ruling 6 — her own finding from my run). Three sovereignties had been seated at the region's `cult` locus: the extremists' holy ground. `seatPrefersTags` is the key she withheld until this reader existed, and it is a PREFERENCE — a region with no city still gets its government seated somewhere",
@@ -28418,13 +28459,25 @@ console.log("\n── §359 · the power generator names the rule behind every c
       if (!want.length) return false;
       const sovs = runAll().flatMap(r => r.proposals.filter(p => p.kind === "sovereignty"));
       if (!sovs.length) return false;
-      const preferred = sovs.filter(p => (locs[p.seat]?.tags || []).map(x => String(x).toLowerCase()).some(tg => want.includes(tg)));
+      // ⚠️ A PREFERENCE IS NOT A REQUIREMENT, and this check's own sentence says so: "a region with no city still
+      // gets its government seated somewhere". It asserted that EVERY sovereignty sat on a preferred tag, which held
+      // only because the old fixture happened to exclude the regions that have no city. Over the whole map some do not.
+      // ⛑ The rule is: where a preferred place EXISTS in the region, the government takes it.
+      const hasPreferred = (rid) => Object.values(locs).some(l => l.regionId === rid
+        && (l.tags || []).map(x => String(x).toLowerCase()).some(tg => want.includes(tg)));
+      const couldPrefer = sovs.filter(p => hasPreferred(locs[p.seat]?.regionId));
+      const preferred = couldPrefer.filter(p => (locs[p.seat]?.tags || []).map(x => String(x).toLowerCase()).some(tg => want.includes(tg)));
       // and the fallback: strip the preferred tags from a region's places and the government is still seated
-      const bare = { ...C359, locations: Object.fromEntries(Object.entries(locs).map(([id, l]) =>
+      const bare = { ...STRIPPED, locations: Object.fromEntries(Object.entries(locs).map(([id, l]) =>
         [id, { ...l, tags: (l.tags || []).filter(tg => !want.includes(String(tg).toLowerCase())) }])) };
       const still = empty.map(r => PG.proposePowers(r, { content: bare })).flatMap(r => r.proposals.filter(p => p.kind === "sovereignty"));
-      return preferred.length === sovs.length && still.length > 0;
-    })(), `${runAll().flatMap(r => r.proposals.filter(p => p.kind === "sovereignty")).length} sovereignt(ies), all in a city`);
+      return couldPrefer.length > 0 && preferred.length === couldPrefer.length && still.length > 0;
+    })(), (() => {
+      const want2 = (rules.kinds.sovereignty?.seatPrefersTags || []).map(x => String(x).toLowerCase());
+      const sovs2 = runAll().flatMap(r => r.proposals.filter(p => p.kind === "sovereignty"));
+      const inCity = sovs2.filter(p => (locs[p.seat]?.tags || []).map(x => String(x).toLowerCase()).some(tg => want2.includes(tg)));
+      return `${sovs2.length} sovereignt(ies), ${inCity.length} of them in a city`;
+    })());
 
   check("§359: ✅ …AND EVERY PROPOSED LEADER HAS A WHOLE NAME, from their OWN people's pools (AEVI: “that’s how I’ll see whether the names read like the corpus”). ⛑ The namer is `names.js` — naming is authorship and the generator composes not a syllable. The people is the origin whose `homeRegion` is this region, so a power rising in the Quickwood is led by a rootkin",
     (() => {
@@ -28444,9 +28497,9 @@ console.log("\n── §359 · the power generator names the rule behind every c
   check("§359: ⛑ …AND IT IS DETERMINISTIC, so a dry run is reviewable and a diff of the REPORT is a diff of the rules. Two runs of the same region agree exactly; a different seed does not",
     (() => {
       const r = empty[0];
-      const a = JSON.stringify(PG.proposePowers(r, { content: C359 }));
-      const b = JSON.stringify(PG.proposePowers(r, { content: C359 }));
-      const c = JSON.stringify(PG.proposePowers(r, { content: C359, seed: "a different morning" }));
+      const a = JSON.stringify(PG.proposePowers(r, { content: STRIPPED }));
+      const b = JSON.stringify(PG.proposePowers(r, { content: STRIPPED }));
+      const c = JSON.stringify(PG.proposePowers(r, { content: STRIPPED, seed: "a different morning" }));
       return a === b && a !== c;
     })());
 

@@ -2609,8 +2609,8 @@
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 2243,
-    "lastSharedReadAt": "2026-10-01T11:55:56.844Z",
+    "lastGenCount": 2247,
+    "lastSharedReadAt": "2026-10-01T15:33:33.374Z",
     "lastTickWorldDay": 93,
     "lastCanonWorldDay": 93,
     "turnsSinceOffer": 1,
@@ -2951,7 +2951,7 @@
         "kind": "decision",
         "premise": "Someone who keeps the count of what has been unmade has begun rounding down, telling themselves the difference is noise — but the rounding has a direction, and it has been consistent for long enough…",
         "cause": "The act of counting the unmade requires a decision about what constitutes a thing distinct enough to be counted, and that threshold has always been left to…",
-        "stage": 31,
+        "stage": 32,
         "seededAtCount": 1917,
         "surfaced": true,
         "fate": "growing",
@@ -2964,7 +2964,7 @@
         "kind": "decision",
         "premise": "The person who holds authority to formally designate what has been unmade as 'resolved' has not done so for anything in years, and the backlog of unresolved unmakings is beginning to press against…",
         "cause": "In the_unmade, the act of resolution is itself an act of power, and the authority-holder has quietly discovered that unresolved things remain partially…",
-        "stage": 27,
+        "stage": 28,
         "seededAtCount": 1968,
         "surfaced": true,
         "fate": "growing",
@@ -2989,7 +2989,7 @@
         "kind": "decision",
         "premise": "Someone has begun quietly counting what no longer exists — cataloguing absences — and has not yet decided whether to share what the count implies.",
         "cause": "The Unmade is defined by what has been lost or undone; its people have long customs around not naming absence directly, because naming draws attention to the…",
-        "stage": 22,
+        "stage": 23,
         "seededAtCount": 2053,
         "surfaced": true,
         "fate": "growing",
@@ -3002,7 +3002,7 @@
         "kind": "decision",
         "premise": "An elder who alone remembers the last time something like the current unraveling occurred has not yet spoken, weighing whether the knowing will help or hasten what is coming.",
         "cause": "In the_unmade, what is lost or dissolved carries weight equal to what remains — silence is understood as a form of preservation, and the elder has lived long…",
-        "stage": 21,
+        "stage": 22,
         "seededAtCount": 2100,
         "surfaced": true,
         "fate": "growing",
@@ -3044,8 +3044,8 @@
           "encounterId": "beast_hollow_pace",
           "name": "a hollow-pace"
         },
-        "addedDay": 8,
-        "locationId": "gen-the-made-gate"
+        "addedDay": 10,
+        "locationId": "gen-the-standing-annex"
       },
       {
         "source": "threat-attack",
@@ -10738,7 +10738,7 @@
       "the_war_ender": 84,
       "the_last_choirmistress": 90
     },
-    "updatesToldTo": "2.16.0",
+    "updatesToldTo": "2.16.8",
     "newsLog": [
       {
         "day": 4,
@@ -13141,6 +13141,14 @@
         "worldDay": 93,
         "text": "The game was updated to v2.16.0 — 1 new.",
         "loggedAt": "2026-10-01T11:56:09.227Z"
+      },
+      {
+        "kind": "update",
+        "section": "world",
+        "version": "2.16.8",
+        "worldDay": 93,
+        "text": "The game was updated to v2.16.8 — 4 new, 4 fixed, 5 changed.",
+        "loggedAt": "2026-10-01T15:33:40.302Z"
       }
     ],
     "seatsTaken": {
@@ -15656,7 +15664,7 @@
     }
   ],
   "nativeGrantsVersion": 2,
-  "reconcileVersion": 93,
+  "reconcileVersion": 94,
   "gallery": [
     {
       "kind": "battle",
@@ -16820,8 +16828,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790856066760,
-  "rev": 1143,
+  "updatedAt": 1790868820302,
+  "rev": 1145,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -21244,7 +21252,7 @@
       },
       "lastVerb": "quest",
       "lastVerbDay": 10,
-      "wins": 0,
+      "wins": 1,
       "winHow": "quest",
       "grownHeads": 4,
       "grewDay": 8
@@ -21268,14 +21276,14 @@
       },
       "lastVerb": "patrol",
       "lastVerbDay": 10,
-      "losses": 0,
+      "losses": 1,
       "lost": {
         "0": 80
       },
       "wins": 0,
       "winHow": null,
-      "lossFrom": null,
-      "lossHow": null,
+      "lossFrom": "power_deepwood_moot",
+      "lossHow": "feud",
       "shrankDay": 10
     },
     "power_scaffold_court": {
@@ -21314,7 +21322,7 @@
       },
       "lossFrom": "power_harvest_hand",
       "lossHow": "feud",
-      "wins": 0,
+      "wins": 1,
       "winHow": "quest",
       "grownHeads": 32,
       "grewDay": 10
@@ -21342,7 +21350,7 @@
       },
       "lastVerb": "expand",
       "lastVerbDay": 10,
-      "wins": 2,
+      "wins": 0,
       "grownHeads": 52,
       "grewDay": 5,
       "winHow": "expand"
@@ -21358,9 +21366,9 @@
       "grownHeads": 30,
       "grewDay": 5,
       "winHow": "expand",
-      "lossFrom": "power_seraphic_orders",
-      "lossHow": "crusade",
-      "losses": 1,
+      "lossFrom": null,
+      "lossHow": null,
+      "losses": 0,
       "lost": {
         "0": 30
       },
@@ -21385,12 +21393,12 @@
       },
       "lastVerb": "feud",
       "lastVerbDay": 10,
-      "losses": 1,
+      "losses": 0,
       "lost": {
         "0": 16
       },
-      "lossFrom": "power_grovehome_moot",
-      "lossHow": "feud",
+      "lossFrom": null,
+      "lossHow": null,
       "shrankDay": 10
     },
     "power_switchback_tollmen": {
@@ -21412,7 +21420,7 @@
     "power_firstsight_barony": {
       "lastVerb": "expand",
       "lastVerbDay": 10,
-      "wins": 2,
+      "wins": 0,
       "grownHeads": 14,
       "grewDay": 5,
       "winHow": "expand"
@@ -21420,7 +21428,7 @@
     "power_blaze_unshadowed": {
       "lastVerb": "recruit",
       "lastVerbDay": 10,
-      "wins": 0,
+      "wins": 1,
       "grownHeads": 14,
       "grewDay": 5,
       "losses": 0,
@@ -21448,10 +21456,10 @@
       "wins": 0,
       "grownHeads": 10,
       "grewDay": 5,
-      "losses": 0,
+      "losses": 1,
       "winHow": null,
-      "lossFrom": null,
-      "lossHow": null,
+      "lossFrom": "power_scaffold_court",
+      "lossHow": "feud",
       "lost": {
         "0": 22
       },
@@ -21460,7 +21468,7 @@
     "power_long_choir": {
       "lastVerb": "recruit",
       "lastVerbDay": 10,
-      "wins": 0,
+      "wins": 1,
       "winHow": "recruit",
       "grownHeads": 12,
       "grewDay": 9
@@ -21487,7 +21495,7 @@
     "power_the_scouring": {
       "lastVerb": "expand",
       "lastVerbDay": 10,
-      "wins": 1,
+      "wins": 2,
       "grownHeads": 16,
       "grewDay": 5,
       "losses": 0,
@@ -21500,6 +21508,42 @@
       "winHow": null,
       "grownHeads": 14,
       "grewDay": 9
+    },
+    "power_keepers_of_the_slow_hour": {
+      "lastVerb": "protect",
+      "lastVerbDay": 10
+    },
+    "power_wayhouse_compact": {
+      "lastVerb": "protect",
+      "lastVerbDay": 10
+    },
+    "power_bedrock_assize": {
+      "lastVerb": "patrol",
+      "lastVerbDay": 10
+    },
+    "power_hand_of_the_open_figure": {
+      "lastVerb": "recruit",
+      "lastVerbDay": 10,
+      "wins": 1,
+      "winHow": "recruit"
+    },
+    "power_the_bloodless_hold": {
+      "lastVerb": "recruit",
+      "lastVerbDay": 10,
+      "wins": 1,
+      "winHow": "recruit"
+    },
+    "power_keepers_of_the_told_ground": {
+      "lastVerb": "patrol",
+      "lastVerbDay": 10
+    },
+    "power_halls_of_wellspring": {
+      "lastVerb": "patrol",
+      "lastVerbDay": 10
+    },
+    "power_court_of_the_turned_coat": {
+      "lastVerb": "protect",
+      "lastVerbDay": 10
     }
   },
   "nemesis": {

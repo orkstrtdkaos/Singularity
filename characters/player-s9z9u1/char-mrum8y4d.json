@@ -2608,106 +2608,11 @@
         "figureId": "taken-person"
       }
     ],
-    "unseenNews": [
-      {
-        "day": 10,
-        "worldDay": 93,
-        "text": "The Hundred Hands declared the strike on The Hollow King of the Wild Half at The Maw, a master of the Somatics, unarmed and unafraid of it and got Morvane of the Harvest Hand instead, a cut-thread motion that ends rather than wounds, with Attended End. It was short and it was public.",
-        "tier": "event",
-        "section": "world",
-        "kind": "strike",
-        "winnerId": "morvane_the_harvest",
-        "loserId": "the_hundred_hands",
-        "outcome": "guarded",
-        "figureId": "the_hollow_king",
-        "locationId": "the_maw",
-        "arcId": "arc_the_poles_pull",
-        "strike": "crusade"
-      },
-      {
-        "day": 10,
-        "worldDay": 93,
-        "text": "The Raw Chord was between The Kind Liar and The Choirmaster Who Would Not Return at The Thinning when the knife came, the note doing what the hands only shape, with Wellspring, which was not an accident. The Kind Liar is a maskmaker of the Veilwrights, hard to have seen, and left without finishing the murder.",
-        "tier": "event",
-        "section": "world",
-        "kind": "strike",
-        "winnerId": "the_raw_chord",
-        "loserId": "the_kind_liar",
-        "outcome": "guarded",
-        "figureId": "the_unbodied_choir_master",
-        "locationId": "the_thinning",
-        "arcId": "arc_manifestation_storm",
-        "strike": "quiet"
-      },
-      {
-        "day": 10,
-        "worldDay": 93,
-        "text": "Ganna the Edgeholder held Seeker of the Lost Chord at Wellspring — Sling and Stone — and Seeker's design is stalled, not stopped.",
-        "tier": "event",
-        "section": "world",
-        "kind": "clash",
-        "winnerId": "person-5e7fbd40733ed12e",
-        "loserId": "the_lost_chord_seeker",
-        "outcome": "stopped",
-        "abilityId": "sling_and_stone",
-        "locationId": "wellspring"
-      },
-      {
-        "day": 10,
-        "worldDay": 93,
-        "text": "Halvex Coil, the Rewriter is spoken of: patching a district into silence.",
-        "tier": "murmur",
-        "section": "world",
-        "locationId": "the_service_ways"
-      },
-      {
-        "day": 10,
-        "worldDay": 93,
-        "text": "Word from Radiant Plateau — Edge District — Overseer Grael of the Edge District: noticing a name that should not be there.",
-        "tier": "murmur",
-        "section": "world",
-        "locationId": "radiant_plateau_edge"
-      },
-      {
-        "day": 10,
-        "worldDay": 93,
-        "text": "Word from The Maw — The Hollow King of the Wild Half: cataloguing what he has been given.",
-        "tier": "murmur",
-        "section": "world",
-        "locationId": "the_maw"
-      },
-      {
-        "day": 10,
-        "worldDay": 93,
-        "text": "The Thornmother of the Closing Wood has not been seen at home in a long while — whatever is happening has all of them.",
-        "tier": "murmur",
-        "section": "world",
-        "locationId": "the_heartroot"
-      },
-      {
-        "day": 10,
-        "worldDay": 93,
-        "text": "Cinder the Burning Truth has stopped spending themselves on The Second Manifestation.",
-        "tier": "murmur",
-        "section": "world",
-        "figureId": "person-d9f15497a71b44d7",
-        "arcId": "arc_manifestation_storm",
-        "locationId": "the_blaze",
-        "placedBy": "figureId"
-      },
-      {
-        "day": 10,
-        "worldDay": 93,
-        "text": "Sable: Sable has moved deeper into the rhythms of the Unlit Deep, performing a small rite alongside the cult members — no longer merely watched, now quietly participating.",
-        "tier": "ambient",
-        "section": "world",
-        "figureId": "taken-person"
-      }
-    ],
+    "unseenNews": [],
     "lastGenCount": 2243,
     "lastSharedReadAt": "2026-10-01T11:55:56.844Z",
     "lastTickWorldDay": 93,
-    "lastCanonWorldDay": 92,
+    "lastCanonWorldDay": 93,
     "turnsSinceOffer": 1,
     "recentOffers": [
       {
@@ -10833,7 +10738,7 @@
       "the_war_ender": 84,
       "the_last_choirmistress": 90
     },
-    "updatesToldTo": "2.15.12",
+    "updatesToldTo": "2.16.0",
     "newsLog": [
       {
         "day": 4,
@@ -13125,6 +13030,117 @@
         "worldDay": 92,
         "text": "The game was updated to v2.15.12 — 1 new, 4 fixed, 5 changed.",
         "loggedAt": "2026-09-30T21:40:19.702Z"
+      },
+      {
+        "day": 10,
+        "worldDay": 93,
+        "text": "The Hundred Hands declared the strike on The Hollow King of the Wild Half at The Maw, a master of the Somatics, unarmed and unafraid of it and got Morvane of the Harvest Hand instead, a cut-thread motion that ends rather than wounds, with Attended End. It was short and it was public.",
+        "tier": "event",
+        "section": "world",
+        "kind": "strike",
+        "winnerId": "morvane_the_harvest",
+        "loserId": "the_hundred_hands",
+        "outcome": "guarded",
+        "figureId": "the_hollow_king",
+        "locationId": "the_maw",
+        "arcId": "arc_the_poles_pull",
+        "strike": "crusade",
+        "loggedAt": "2026-10-01T11:56:09.227Z"
+      },
+      {
+        "day": 10,
+        "worldDay": 93,
+        "text": "The Raw Chord was between The Kind Liar and The Choirmaster Who Would Not Return at The Thinning when the knife came, the note doing what the hands only shape, with Wellspring, which was not an accident. The Kind Liar is a maskmaker of the Veilwrights, hard to have seen, and left without finishing the murder.",
+        "tier": "event",
+        "section": "world",
+        "kind": "strike",
+        "winnerId": "the_raw_chord",
+        "loserId": "the_kind_liar",
+        "outcome": "guarded",
+        "figureId": "the_unbodied_choir_master",
+        "locationId": "the_thinning",
+        "arcId": "arc_manifestation_storm",
+        "strike": "quiet",
+        "loggedAt": "2026-10-01T11:56:09.227Z"
+      },
+      {
+        "day": 10,
+        "worldDay": 93,
+        "text": "Ganna the Edgeholder held Seeker of the Lost Chord at Wellspring — Sling and Stone — and Seeker's design is stalled, not stopped.",
+        "tier": "event",
+        "section": "world",
+        "kind": "clash",
+        "winnerId": "person-5e7fbd40733ed12e",
+        "loserId": "the_lost_chord_seeker",
+        "outcome": "stopped",
+        "abilityId": "sling_and_stone",
+        "locationId": "wellspring",
+        "loggedAt": "2026-10-01T11:56:09.227Z"
+      },
+      {
+        "day": 10,
+        "worldDay": 93,
+        "text": "Halvex Coil, the Rewriter is spoken of: patching a district into silence.",
+        "tier": "murmur",
+        "section": "world",
+        "locationId": "the_service_ways",
+        "loggedAt": "2026-10-01T11:56:09.227Z"
+      },
+      {
+        "day": 10,
+        "worldDay": 93,
+        "text": "Word from Radiant Plateau — Edge District — Overseer Grael of the Edge District: noticing a name that should not be there.",
+        "tier": "murmur",
+        "section": "world",
+        "locationId": "radiant_plateau_edge",
+        "loggedAt": "2026-10-01T11:56:09.227Z"
+      },
+      {
+        "day": 10,
+        "worldDay": 93,
+        "text": "Word from The Maw — The Hollow King of the Wild Half: cataloguing what he has been given.",
+        "tier": "murmur",
+        "section": "world",
+        "locationId": "the_maw",
+        "loggedAt": "2026-10-01T11:56:09.227Z"
+      },
+      {
+        "day": 10,
+        "worldDay": 93,
+        "text": "The Thornmother of the Closing Wood has not been seen at home in a long while — whatever is happening has all of them.",
+        "tier": "murmur",
+        "section": "world",
+        "locationId": "the_heartroot",
+        "loggedAt": "2026-10-01T11:56:09.227Z"
+      },
+      {
+        "day": 10,
+        "worldDay": 93,
+        "text": "Cinder the Burning Truth has stopped spending themselves on The Second Manifestation.",
+        "tier": "murmur",
+        "section": "world",
+        "figureId": "person-d9f15497a71b44d7",
+        "arcId": "arc_manifestation_storm",
+        "locationId": "the_blaze",
+        "placedBy": "figureId",
+        "loggedAt": "2026-10-01T11:56:09.227Z"
+      },
+      {
+        "day": 10,
+        "worldDay": 93,
+        "text": "Sable: Sable has moved deeper into the rhythms of the Unlit Deep, performing a small rite alongside the cult members — no longer merely watched, now quietly participating.",
+        "tier": "ambient",
+        "section": "world",
+        "figureId": "taken-person",
+        "loggedAt": "2026-10-01T11:56:09.227Z"
+      },
+      {
+        "kind": "update",
+        "section": "world",
+        "version": "2.16.0",
+        "worldDay": 93,
+        "text": "The game was updated to v2.16.0 — 1 new.",
+        "loggedAt": "2026-10-01T11:56:09.227Z"
       }
     ],
     "seatsTaken": {
@@ -16794,8 +16810,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1790855756115,
-  "rev": 1140,
+  "updatedAt": 1790855769227,
+  "rev": 1141,
   "generated": {
     "schemaVersion": 1,
     "npc": {

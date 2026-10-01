@@ -199,18 +199,31 @@ export function proposePowers(regionId, { content = null, standing = null, seed 
   // all — the only one of eight pole regions where the cult locus failed to become one. Nobody decided that.
   // ⛑ RARITY IS COUNTED FROM THE PLACES, not from a table of mine: `sacred` on eleven places beats `dangerous` on
   // forty because the rarer tag is the more particular claim about the ground.
+  // ✅ AEVI'S THIRD TIE-BREAK, RULED 2026-10-01: *"the higher seat tier takes the seat: the kind that governs ground
+  // outranks one that governs a trade or a gang."*
+  // ⚠️ NO AUTHORED FIELD SAYS THIS. `leaderTier` separates lordship from outlaw_band but not from guild (both heroic),
+  // and `scale`/`holdKind` do not give her order either — so her sentence is held here, as item 9's frame table is, and
+  // a kind's own `governs` wins the day she authors one. ⬜ `order` is the kind her sentence does not place: it governs
+  // neither ground nor a trade, and sits above a gang. That placement is mine and is reported to her.
+  const GOVERNS_RANK = { sovereignty: 3, lordship: 3, order: 2, guild: 1, outlaw_crown: 0, outlaw_band: 0 };
+  const governs = (kind) => {
+    const authored = rules.kinds?.[kind]?.governs;
+    if (authored != null && Number.isFinite(Number(authored))) return Number(authored);
+    const named = { ground: 3, people: 2, trade: 1, gang: 0 }[String(authored || "").toLowerCase()];
+    if (named != null) return named;
+    return GOVERNS_RANK[kind] ?? 1;
+  };
+
   const bySpecificity = (a, b) => {
     if (b.matched.length !== a.matched.length) return b.matched.length - a.matched.length;
     const rarity = (x) => (x.matched.length ? x.matched.reduce((n, tg) => n + (freq.get(tg) || 0), 0) / x.matched.length : Infinity);
     if (rarity(a) !== rarity(b)) return rarity(a) - rarity(b);
-    // ⛔ AND A THIRD TIE-BREAK, BECAUSE HER TWO LEAVE ONE. When two kinds match the same number of tags AND the same
-    // mean rarity, this comparator returned 0 — and `Array.sort` is stable, so DECLARATION ORDER decided after all.
-    // Her ruling's whole point is that "a JSON key order is not a design decision", and it was still deciding.
-    // ⛑ FOUND BY WIDENING §359's FIXTURE to the whole map (Aevi's own ask): over 38 regions rather than the 15 she had
-    // left empty, reordering the rules keys moved TWO of 84 seats — kestrels_roost guild↔lordship and the_lensward
-    // outlaw_band↔lordship. Her two criteria never reached them.
-    // ⚠️ THE KIND'S OWN NAME IS AN ARBITRARY LAST RESORT, and it is deliberately arbitrary: it is STABLE, it is not the
-    // file's key order, and it keeps the dry run reviewable. A better third criterion is hers to rule — reported.
+    // ⛔ THIRD: WHAT THE KIND GOVERNS (Aevi, 2026-10-01). Her two criteria leave a true tie, and `Array.sort` is stable,
+    // so DECLARATION ORDER was deciding after all — the one thing her ruling exists to forbid.
+    // ⛑ FOUND BY WIDENING §359's FIXTURE to the whole map, which was her own ask: over 38 regions rather than the 15 she
+    // had left empty, reordering the rules keys moved TWO of 84 seats. She ruled the fix: ground over a trade over a gang.
+    if (governs(a.kind) !== governs(b.kind)) return governs(b.kind) - governs(a.kind);
+    // ⚠️ AND THE NAME LAST, as she asked — deliberately arbitrary, but STABLE and never the file's key order.
     return String(a.kind).localeCompare(String(b.kind));
   };
 

@@ -923,36 +923,87 @@ export function splitContingent(band, index, { take = 1 } = {}) {
     said: `${n} of the ${have} stand apart now. Nobody is named — they are ${unitLabel(piece)}.` };
 }
 
-/** ⛔ …AND COMBINE TWO THAT ARE THE SAME KIND OF PEOPLE, which is the other half of Erik's "split or combined".
- *  ⚠️ ONLY WHERE THEY REALLY ARE ALIKE — same quality, same verbs, same ward, same place raised, neither of them a
- *  person. Merging two unlike levies would quietly average away a difference the player chose.
- *  → { ok, index } or { ok: false, why }. Mutates the band. */
+/** ⛑ WHAT FOLDING TWO GROUPS TOGETHER WOULD COST, before anybody does it. → { alike, loses: […] }. PURE.
+ *  ⚠️ A CONTINGENT IS UNIFORM BY CONSTRUCTION — one `n`, one quality, one list of verbs — so merging two unlike ones
+ *  MUST lose something, and the player should read what before they press it rather than after. */
+export function combineCost(x, y) {
+  if (!x || !y) return { alike: false, loses: ["there is nothing to fold"] };
+  const loses = [];
+  const qx = num(x.quality, 1), qy = num(y.quality, 1);
+  if (qx !== qy) loses.push(`they all drop to quality ${Math.min(qx, qy)}`);
+  const vx = [...(x.does || [])].sort(), vy = [...(y.does || [])].sort();
+  const lostVerbs = [...new Set([...vx, ...vy])].filter(v => !(vx.includes(v) && vy.includes(v)));
+  if (lostVerbs.length) loses.push(`only what they all do is kept (${lostVerbs.map(v => String(v).toLowerCase()).join(", ")} goes)`);
+  const wx = [...(x.wards || [])].sort(), wy = [...(y.wards || [])].sort();
+  const lostWards = [...new Set([...wx, ...wy])].filter(w => !(wx.includes(w) && wy.includes(w)));
+  if (lostWards.length) loses.push(`a ward only some of them carry stops protecting the group (${lostWards.join(", ")})`);
+  if (String(x.kind || "") !== String(y.kind || "")) loses.push("they stop being one named kind");
+  // ⛔ `from` IS NOT DECORATION — `quarteringOf` reads it to decide which hold houses them, and a group with none is
+  // HOMELESS and boarded at a crystal a head a pass. Measured in play: folding 3 into 10 made all thirteen homeless at
+  // 13 a pass, a tax the player never asked for. So the LARGER part's home is kept and the row says so, rather than
+  // nulling a field whose absence costs money.
+  if (String(x.from || "") !== String(y.from || "")) {
+    const big = num(x.n, 0) >= num(y.n, 0) ? x : y;
+    loses.push(big.from
+      ? `they are all counted as raised where the larger part was, and are quartered there`
+      : `no hold keeps them, so they must be boarded`);
+  }
+  return { alike: loses.length === 0, loses };
+}
+
+/** ⛔ …AND COMBINE TWO GROUPS, which is the other half of Erik's *"split or combined"* — and, 2026-10-01, *"make sure
+ *  you add a way to merge hands as well as split them."*
+ *
+ *  ⚠️ IT USED TO REFUSE ANYTHING NOT ALIKE, and he would never have seen it: all five levies in his save are raised at
+ *  DIFFERENT holds, so the control only appeared after he had split something. A merge you can only reach by undoing a
+ *  split is not a merge.
+ *  ⛑ SO UNLIKE GROUPS FOLD TOO, AND EVERY LOSS GOES DOWNWARD: the LOWER quality, because merging may never conjure; the
+ *  verbs and wards they ALL share, because claiming the whole group can do what half of them can is a lie a fight would
+ *  then act on; and no single place raised them. The kit sums — the gear is still there.
+ *  ⛔ A PERSON IS STILL NEVER FOLDED IN: a named contingent is one row for a reason.
+ *  → { ok, index, lost } or { ok: false, why }. Mutates the band. */
 export function combineContingents(band, a, b) {
   const list = Array.isArray(band?.contingents) ? band.contingents : null;
   const x = list?.[a], y = list?.[b];
   if (!x || !y || a === b) return { ok: false, why: "pick two different groups" };
   if (x.npcId || y.npcId) return { ok: false, why: "a person is not a group to fold in" };
-  const same = (p, q) => num(p.quality, 1) === num(q.quality, 1)
-    && String(p.kind || "") === String(q.kind || "")
-    && String(p.from || "") === String(q.from || "")
-    && [...(p.does || [])].sort().join() === [...(q.does || [])].sort().join()
-    && [...(p.wards || [])].sort().join() === [...(q.wards || [])].sort().join();
-  if (!same(x, y)) return { ok: false, why: "they are not the same kind of people" };
 
+  const cost = combineCost(x, y);
+  const keepBoth = (p, q) => [...(p || [])].filter(v => (q || []).includes(v));
   const kit = {};
   for (const src of [x, y]) for (const [key, k] of Object.entries(src.kit || {})) {
     const held = Math.min(Math.max(0, num(k?.n, 0)), Math.max(0, num(src.n, 0)));
     if (!held) continue;
     kit[key] = kit[key] ? { ...kit[key], n: num(kit[key].n, 0) + held } : { ...k, n: held };
   }
-  const merged = { ...x, n: Math.max(0, num(x.n, 0)) + Math.max(0, num(y.n, 0)),
-    ...(Object.keys(kit).length ? { kit } : {}) };
+  const merged = {
+    ...x,
+    n: Math.max(0, num(x.n, 0)) + Math.max(0, num(y.n, 0)),
+    // ⛔ DOWNWARD, ALWAYS. A merge that raised anybody's quality or claimed a verb half of them lack would be
+    // conjuring, and the fight reads these fields as the truth about the group.
+    quality: Math.min(num(x.quality, 1), num(y.quality, 1)),
+    does: keepBoth(x.does, y.does).length ? keepBoth(x.does, y.does) : ["MARTIAL"],
+    wards: keepBoth(x.wards, y.wards),
+    kind: String(x.kind || "") === String(y.kind || "") ? (x.kind || null) : null,
+    // ⛔ THE LARGER PART'S HOME, not null. `quarteringOf` reads `from` to decide which hold houses them; nulling it
+    // made the whole merged group homeless and charged board, which is a penalty nobody asked for. Keeping the home of
+    // the larger part is the one answer that is nearly true and does not cost the player money for tidying up.
+    from: String(x.from || "") === String(y.from || "") ? (x.from || null)
+      : ((num(x.n, 0) >= num(y.n, 0) ? x.from : y.from) || null),
+    crafts: keepBoth(x.crafts, y.crafts),
+    ...(Object.keys(kit).length ? { kit } : {}),
+  };
   if (!Object.keys(kit).length) delete merged.kit;
+  // ⛑ the sentence on the row follows what actually happened, rather than a stored label that would go stale
+  if (!merged.kind && !merged.from) delete merged.what;
   const lo = Math.min(a, b), hi = Math.max(a, b);
   list.splice(hi, 1);
   list.splice(lo, 1, merged);
   band.count = list.reduce((acc, z) => acc + Math.max(0, num(z?.n, 0)), 0);
-  return { ok: true, index: lo, said: `They stand together again — ${unitLabel(merged)}.` };
+  return { ok: true, index: lo, lost: cost.loses,
+    said: cost.alike
+      ? `They stand together again — ${unitLabel(merged)}.`
+      : `They stand together now — ${unitLabel(merged)}. ${cost.loses.join("; ")}.` };
 }
 
 export function kitSummary(contingents) {

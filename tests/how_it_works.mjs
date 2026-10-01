@@ -34506,6 +34506,15 @@ console.log("\n── §405 · a world consequence, and a power's temper ──"
   const { loadContentHeadless: lch405 } = await import("./headless_content.mjs");
   const C405 = await lch405();
   const R405 = C405.rules;
+  // ⛔ A FIXTURE POWER OF ITS OWN (Aevi's ask, 2026-10-01). These checks used to drive the seizure on the LIVE Ender
+  // Host — so the moment she authors `gateHeld` on it, the rule she asked for reddens the gate that proves it. That is
+  // the THIRD time in two days: §359 took its regions from whatever she had not authored, §391 asserted that no power
+  // holds an arch, and then this one drove the rule on the record she was about to write.
+  // ⛑ A constructed power standing on a real Lattice arch tests the mechanism whatever the corpus says.
+  const arch405 = G405.latticeGates(C405.locations)[0];
+  const mkPower405 = (temper) => ({ id: `probe405_${temper}`, name: `A ${temper} probe`, temper,
+    holds: [{ at: arch405 }], reach: [] });
+  const world405 = (p) => ({ ...C405, powers: [...(C405.powers || []), p] });
 
   /* ---- 1 · ⛔ THE WORLD'S DOOR IS NOT THE GM'S DOOR ---- */
   const who405 = () => ({ name: "T405", peopleDisposition: { ashwarden: 1, cogitant: 1, verist: 5 } });
@@ -34578,39 +34587,56 @@ console.log("\n── §405 · a world consequence, and a power's temper ──"
     && G405.breakRungFor(undefined, { rules: R405 }) === ladder405.indexOf("signs"),
     `signs ${ladder405.indexOf("signs")} · heroic ${ladder405.indexOf("heroic")} · epic ${ladder405.indexOf("epic")}`);
   // ⛑ AEVI'S OWN EXAMPLE, DRIVEN: *"the Ender Host will hold through two keepers and break at the third."*
-  check("§405: ⛑ THE ENDER HOST HOLDS THROUGH TWO KEEPERS AND BREAKS AT THE THIRD — her own example, driven",
+  // ⛑ AEVI'S OWN EXAMPLE — *"the Ender Host will hold through two keepers and break at the third"* — driven on a CRUEL
+  // power built here. ⚠️ Not on the live Ender Host: her seizure makes that one already-held, and a gate that reddens
+  // when the PO authors the thing it describes is a gate in her lane.
+  check("§405: ⛑ A CRUEL POWER HOLDS THROUGH TWO KEEPERS AND BREAKS AT THE THIRD — her Ender Host example, on a fixture",
     (() => {
-      const host = (C405.powers || []).find(p => p.id === "power_ender_host");
-      if (!host || String(host.temper) !== "cruel") return false;
-      const seize = () => { const ch = { name: "T405d", powerState: {} };
-        return { ch, r: G405.powerSeizesArch(ch, host, { content: C405, rules: R405, day: 100 }) }; };
-      const first = seize();
-      if (!first.r.ok) return false;
+      const cruel = mkPower405("cruel");
+      const content = world405(cruel);
+      const ch = { name: "T405d", powerState: {} };
+      const took = G405.powerSeizesArch(ch, cruel, { content, rules: R405, day: 100 });
+      if (!took.ok) return false;
       const per = 36;
-      const held = [0, 1, 2].every(s => {
-        const probe = JSON.parse(JSON.stringify(first.ch));
-        return G405.powersReleaseArches(probe, { content: C405, rules: R405, day: 100 + s * per }).length === 0;
-      });
-      const broke = G405.powersReleaseArches(JSON.parse(JSON.stringify(first.ch)),
-        { content: C405, rules: R405, day: 100 + 3 * per });
-      return held && broke.length === 1 && broke[0].power === "power_ender_host" && /come off the arch/.test(broke[0].news);
+      const held = [0, 1, 2].every(s => G405.powersReleaseArches(JSON.parse(JSON.stringify(ch)),
+        { content, rules: R405, day: 100 + s * per }).length === 0);
+      const broke = G405.powersReleaseArches(JSON.parse(JSON.stringify(ch)),
+        { content, rules: R405, day: 100 + 3 * per });
+      return held && broke.length === 1 && broke[0].power === cruel.id && /come off the arch/.test(broke[0].news);
     })());
+  // ✅ …AND THE LIVE CORPUS IS READ FOR WHAT IT IS, NOT ASSERTED INTO A SHAPE: whatever powers declare `gateHeld` today,
+  // each of them holds exactly the arch it names. Aevi's Ender Host line lands in THIS check rather than breaking one.
+  check("§405: ⛑ …and every power that declares `gateHeld` in content holds exactly the arch it names",
+    (() => {
+      const lattice = new Set(G405.latticeGates(C405.locations));
+      const claiming = (C405.powers || []).filter(p => G405.gateHeldByPower(p) !== null);
+      return claiming.every(p => {
+        const at = G405.gateHeldByPower(p);
+        return lattice.has(at) && G405.holderOfGate(at, { powers: C405.powers })?.id === p.id;
+      });
+    })(), `${(C405.powers || []).filter(p => G405.gateHeldByPower(p) !== null).length} power(s) hold an arch in content today`);
   // ⛔ AND IT TAKES ONLY AN ARCH OF THE LATTICE'S OWN LAYING, and only one, and not one somebody already holds.
   check("§405: ⛔ …and a power takes only an unheld LATTICE arch it already stands on, and only one",
     (() => {
-      const host = (C405.powers || []).find(p => p.id === "power_ender_host");
+      const probe = mkPower405("hard");
+      const content = world405(probe);
       const ch = { name: "T405e", powerState: {} };
-      const a = G405.powerSeizesArch(ch, host, { content: C405, rules: R405, day: 100 });
-      const b = G405.powerSeizesArch(ch, host, { content: C405, rules: R405, day: 101 });
+      const a = G405.powerSeizesArch(ch, probe, { content, rules: R405, day: 100 });
+      const b = G405.powerSeizesArch(ch, probe, { content, rules: R405, day: 101 });
       const lattice = new Set(G405.latticeGates(C405.locations));
-      return a.ok && lattice.has(a.at) && !b.ok && /already holds one/.test(b.why);
+      // ⛑ and one that stands on no arch at all is refused for THAT reason, not by accident
+      const nowhere = G405.powerSeizesArch({ name: "T405f", powerState: {} },
+        { id: "probe405_nowhere", name: "Nowhere", holds: [], reach: [] }, { content, rules: R405, day: 100 });
+      return a.ok && lattice.has(a.at) && !b.ok && /already holds one/.test(b.why)
+        && !nowhere.ok && /stands on no arch/.test(nowhere.why);
     })());
   // ⚠️ AND A SEIZURE WITH NO DAY CANNOT BE TIMED, so it HOLDS — absence is not "a season ago", which is this repo's
   // most repeated defect.
   check("§405: ⚠️ …and a seizure with no day recorded holds rather than being treated as ancient",
     (() => {
-      const ch = { name: "T405f", powerState: { power_ender_host: { gateHeld: "the_marchward" } } };
-      return G405.powersReleaseArches(ch, { content: C405, rules: R405, day: 99999 }).length === 0;
+      const probe = mkPower405("cruel");
+      const ch = { name: "T405g", powerState: { [probe.id]: { gateHeld: arch405 } } };
+      return G405.powersReleaseArches(ch, { content: world405(probe), rules: R405, day: 99999 }).length === 0;
     })());
   // ⛔ AND THE VERB IS DECLARED, so the runner never warns on it as an unknown — Aevi asked for exactly this.
   check("§405: ⛔ …and `seize_arch` is DECLARED in VERB_EFFECT, so it never falls through as a silent null",
@@ -34800,11 +34826,56 @@ console.log("\n── §407 · a levy splits, and nobody is named ──");
     })());
   // ⚠️ AND ONLY WHERE THEY REALLY ARE ALIKE. Folding two unlike levies would quietly average away a difference the
   // player chose — and a person is never folded into a group.
-  check("§407: ⚠️ …and two UNLIKE groups refuse, as does folding a person into one",
-    !M407.combineContingents(band407([levy407({ quality: 1 }), levy407({ quality: 5 })]), 0, 1).ok
-    && !M407.combineContingents(band407([levy407(), levy407({ from: "elsewhere" })]), 0, 1).ok
-    && !M407.combineContingents(band407([levy407(), levy407({ n: 1, npcId: "pell" })]), 0, 1).ok
+  // ✅ ERIK 2026-10-01: *"Make sure you add a way to merge hands as well as split them."* ⛔ COMBINE USED TO REFUSE
+  // ANYTHING NOT ALIKE — and all five levies in his save are raised at DIFFERENT holds, so he would never have seen the
+  // control until he had split something. A merge reachable only by undoing a split is not a merge.
+  check("§407: ⛔ UNLIKE GROUPS FOLD TOO — they had to, or the control never appears on a real save",
+    (() => {
+      const b = band407([levy407({ n: 3, quality: 2, does: ["HARM", "MARTIAL"], kind: "archers", from: "a", wards: ["fire"] }),
+                         levy407({ n: 4, quality: 1, does: ["MOVE", "MARTIAL"], kind: "riders", from: "b", wards: [] })]);
+      const r = M407.combineContingents(b, 0, 1);
+      const m = b.contingents[0];
+      return r.ok && b.contingents.length === 1 && m.n === 7 && b.count === 7;
+    })());
+  // ⛔ AND EVERY LOSS GOES DOWNWARD. A contingent is uniform, so a merge must lose something — and raising anybody's
+  // quality, or claiming a verb half of them lack, would be conjuring that a fight then acts on.
+  check("§407: ⛔ …and every loss goes DOWNWARD — the weaker quality, and only the verbs and wards they ALL share",
+    (() => {
+      const b = band407([levy407({ n: 3, quality: 2, does: ["HARM", "MARTIAL"], wards: ["fire"] }),
+                         levy407({ n: 4, quality: 1, does: ["MOVE", "MARTIAL"], wards: [] })]);
+      M407.combineContingents(b, 0, 1);
+      const m = b.contingents[0];
+      return m.quality === 1 && m.does.join() === "MARTIAL" && (m.wards || []).length === 0;
+    })());
+  // ⛔ BUT NOT THEIR QUARTERS. `quarteringOf` reads `from` to decide which hold houses them, so nulling it made the
+  // whole merged group HOMELESS and boarded at a crystal a head a pass — measured in play, folding 3 into 10 cost 13 a
+  // pass for tidying up. The larger part's home is kept, and the warning says so.
+  check("§407: ⛔ …but NOT their quarters — the larger part's home is kept, because `from` is what houses them",
+    (() => {
+      const b = band407([levy407({ n: 3, from: "small-hold" }), levy407({ n: 10, from: "big-hold" })]);
+      M407.combineContingents(b, 0, 1);
+      return b.contingents[0].from === "big-hold";
+    })());
+  // ⛑ AND THE COST IS READABLE BEFORE IT HAPPENS, which is the whole reason it is a separate function.
+  check("§407: ⛑ …and the cost is readable BEFORE folding, so the row can warn rather than explain afterwards",
+    (() => {
+      const alike = M407.combineCost(levy407(), levy407());
+      const unlike = M407.combineCost(levy407({ quality: 2 }), levy407({ quality: 1, does: ["MOVE"] }));
+      return alike.alike && alike.loses.length === 0
+        && !unlike.alike && unlike.loses.length >= 2 && unlike.loses.every(s => typeof s === "string" && s.length > 8);
+    })());
+  check("§407: ⚠️ …and a PERSON is still never folded in, nor a group into itself",
+    !M407.combineContingents(band407([levy407(), levy407({ n: 1, npcId: "pell" })]), 0, 1).ok
     && !M407.combineContingents(band407([levy407(), levy407()]), 0, 0).ok);
+  // ⛑ AND THE CONTROL OFFERS ITSELF WHEREVER THERE IS ANYTHING TO FOLD WITH — the actual bug he reported.
+  check("§407: ⛔ …and the row offers Combine beside ANY other group, not only an identical one",
+    (() => {
+      const A = rd("app.js");
+      return /data-cg-into="/.test(A)
+        && /\.filter\(\(\{ x, i \}\) => i !== r\.contingentIndex && x && !x\.npcId && Number\(x\.n\) > 0\)/.test(A)
+        && /const cost = combineCost\(band\.contingents\?\.\[i\], band\.contingents\?\.\[j\]\);/.test(A)
+        && /if \(!cost\.alike && !confirm\(/.test(A);
+    })());
 
   /* ---- 5 · ⛑ A PIECE CAN BE PUT TO WORK WITHOUT EVER BEING NAMED ---- */
   // ⛑ THE TWO HALVES OF ITEM 10 MEET HERE: `unit:bandId:index` already works as a worker id, so the split is what

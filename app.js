@@ -169,7 +169,7 @@ import { championsFor, resolveChampion, creditChampion, championLine, sendingIsG
 // ⛔ CCODE-404 (Erik) — `addContingent` and `musteredFrom` are new; `unitComposition` and `bandGaps` had NO caller outside the tests.
 // ⛔ CCODE-405 (Erik's legion ruling): formed of bands that keep their identity, placed and postured once CALLED, and free until then.
 // ⚠️ ONE LINE ON PURPOSE — `import_integrity` reads an import statement per line, and a comment inside the braces hides what follows it.
-import { commandSlots, bringForward, lineSplit, canRaiseBand, bandReady, raiseBand, bandStrength, bandThreat, bloodBand, recoverBand, legionClash, addContingent, musteredFrom, unitComposition, bandGaps, formLegion, disbandLegion, callCostOf, callUnit, standDown, setUnitPosture, bloodUnit, resolvedUnit, UNIT_POSTURES, setUnitLeader, leaderBonusOf, editContingent, splitContingent, combineContingents, unitLabel, kitSummary, bandDialsOf, onMissionWith, MELEE_TIERS } from "./engine/melee.js"; // CCODE-276: the forward pick is a UI control, per Erik's ruling
+import { commandSlots, bringForward, lineSplit, canRaiseBand, bandReady, raiseBand, bandStrength, bandThreat, bloodBand, recoverBand, legionClash, addContingent, musteredFrom, unitComposition, bandGaps, formLegion, disbandLegion, callCostOf, callUnit, standDown, setUnitPosture, bloodUnit, resolvedUnit, UNIT_POSTURES, setUnitLeader, leaderBonusOf, editContingent, splitContingent, combineContingents, combineCost, unitLabel, kitSummary, bandDialsOf, onMissionWith, MELEE_TIERS } from "./engine/melee.js"; // CCODE-276: the forward pick is a UI control, per Erik's ruling
 import { groupCapability, loadBearing } from "./engine/group.js";   // CCODE-317/322: what your line covers, and who holds it alone
 import { characterPower, threatBand } from "./engine/threat.js"; // CCODE-52: built power sets the mean the encounter pool revolves around
 import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, collapseMode, collapseResult, collapseFloor, frameCollapsible, swingDegree, wardAgainst, wardBroken, trivializes, playerReceiptLine, FRAME_FREEFORM_CUE } from "./engine/encounterFrame.js"; // SNG-230: the ENCOUNTER FRAME — obvious kind/win/exits; frameSize routes takeover-vs-banner; chaseFromFight = the chase you flee into (§6a); collapse* = a finisher ends a collapsible foe (§6b/§7a); wardAgainst/wardBroken = a ward FORBIDS a mechanic (§7b); trivializes = the right kit VOIDS a challenge's premise (§7c). SNG-246 Fix D: playerReceiptLine = the mechanical receipt SHOWN to the player
@@ -184,7 +184,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.16.7";
+const APP_VERSION = "2.16.8";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -18981,17 +18981,25 @@ function renderBandsTab() {
               ⚠️ So this peels heads off into a row of their own and mints NOTHING: same quality, same verbs, same ward,
               the place they were raised, and no name. A named person has no Split — they are one row already. */""}
         ${(() => {
-          if (!cgRec || cgRec.npcId || Number(r.n) < 2) return "";
-          const alike = (character.bands || []).find(b => b.id === r.unitId)?.contingents
-            ?.findIndex((x, i) => i !== r.contingentIndex && x && !x.npcId
-              && Number(x.quality || 1) === Number(cgRec.quality || 1)
-              && String(x.kind || "") === String(cgRec.kind || "")
-              && String(x.from || "") === String(cgRec.from || "")
-              && [...(x.does || [])].sort().join() === [...(cgRec.does || [])].sort().join()
-              && [...(x.wards || [])].sort().join() === [...(cgRec.wards || [])].sort().join());
-          return `<span class="cg-split"><input type="number" class="armory-count" min="1" max="${Math.max(1, Number(r.n) - 1)}" step="1" value="1" data-cg-take="${esc(r.unitId)}|${r.contingentIndex}" aria-label="How many to stand apart">
-            <button class="opt" data-cg-split="${esc(r.unitId)}" data-cg-index="${r.contingentIndex}" title="${esc(`Stand some of them apart as their own group, to send somewhere else. They get no name — they are ${r.n} ${r.unitKind || "hands"} and some of them will be fewer.`)}">Split</button>${
-            alike != null && alike >= 0 ? `<button class="opt" data-cg-join="${esc(r.unitId)}" data-cg-index="${r.contingentIndex}" data-cg-with="${alike}" title="Fold them back together with the other group just like them">Combine</button>` : ""}</span>`;
+          if (!cgRec || cgRec.npcId) return "";
+          const band = (character.bands || []).find(b => b.id === r.unitId);
+          const others = (band?.contingents || []).map((x, i) => ({ x, i }))
+            .filter(({ x, i }) => i !== r.contingentIndex && x && !x.npcId && Number(x.n) > 0);
+          // ✅ ERIK 2026-10-01: *"Make sure you add a way to merge hands as well as split them."*
+          // ⚠️ IT USED TO APPEAR ONLY BESIDE AN IDENTICAL GROUP — and all five of his levies are raised at different
+          // holds, so he would never have seen it until he had split something first. A merge you can only reach by
+          // undoing a split is not a merge. It offers itself wherever there is ANY other group now, and the engine
+          // says what folding will cost before it happens.
+          const split = Number(r.n) >= 2
+            ? `<input type="number" class="armory-count" min="1" max="${Math.max(1, Number(r.n) - 1)}" step="1" value="1" data-cg-take="${esc(r.unitId)}|${r.contingentIndex}" aria-label="How many to stand apart">
+               <button class="opt" data-cg-split="${esc(r.unitId)}" data-cg-index="${r.contingentIndex}" title="${esc(`Stand some of them apart as their own group, to send somewhere else. They are given no name.`)}">Split</button>`
+            : "";
+          const join = others.length
+            ? `<select data-cg-into="${esc(r.unitId)}|${r.contingentIndex}" aria-label="Fold them in with">${others.map(({ x, i }) =>
+                 `<option value="${i}">with ${esc(unitLabel(x, { holdings: character.holdings || [], locations: CONTENT.locations || {} }))}</option>`).join("")}</select>
+               <button class="opt" data-cg-join="${esc(r.unitId)}" data-cg-index="${r.contingentIndex}" title="Fold the two groups into one. If they are not the same kind of people it will say what that costs before it happens.">Combine</button>`
+            : "";
+          return split || join ? `<span class="cg-split">${split}${join}</span>` : "";
         })()}</div>`;
     }
     const w = wherePerson(r, whereOpts);
@@ -19220,7 +19228,16 @@ function renderBandsTab() {
   for (const b of app.querySelectorAll("[data-cg-join]")) b.onclick = () => {
     const band = (character.bands || []).find(x => x && x.id === b.dataset.cgJoin);
     if (!band) return;
-    const r = combineContingents(band, Number(b.dataset.cgIndex), Number(b.dataset.cgWith));
+    const i = Number(b.dataset.cgIndex);
+    const sel = app.querySelector(`[data-cg-into="${b.dataset.cgJoin}|${i}"]`);
+    const j = Number(sel?.value);
+    if (!Number.isFinite(j)) return;
+    // ⛔ SAY WHAT IT COSTS FIRST. A contingent is uniform, so folding two unlike ones loses something — and every loss
+    // goes DOWNWARD (the weaker quality, only the verbs they all share). The player reads that before it happens, not
+    // after, because afterwards there is nothing on the row to tell them it used to be otherwise.
+    const cost = combineCost(band.contingents?.[i], band.contingents?.[j]);
+    if (!cost.alike && !confirm(`Fold them together?\n\n• ${cost.loses.join("\n• ")}\n\nThis cannot be undone by splitting them again.`)) return;
+    const r = combineContingents(band, i, j);
     if (!r.ok) { alert(r.why); return; }
     saveCharacter(character); renderBandsTab();
   };

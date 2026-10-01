@@ -136,6 +136,46 @@ export function accrueStandingForDays(character, days, { rules = {}, focusedPeop
   return { moved, days: n, peoples: Object.keys(rates) };
 }
 
+/** ⛔ A WORLD CONSEQUENCE, WHICH IS NOT A NARRATED BEAT — the bulk door beside `applyStandingOps`.
+ *
+ *  ⛔ ERIK, 2026-09-29: *"Yes: a world consequence may cross a band edge. The peoples half of the gate stigma moves
+ *  every people who knows, and isn't clamped the way a narrated beat is. The per-beat clamp stays for the GM's door."*
+ *
+ *  ⚠️ THE THREE CLAMPS BELOW EXIST FOR THE GM, and every one of them is wrong here. "A scene is not a life" caps a
+ *  narrated beat at ±3; a world rule is not a scene. The band edge stops a beat talking the engine into a jump; a
+ *  consequence the world imposes is exactly the thing allowed to move a band. And four ops a beat is a throttle on a
+ *  storyteller, not a limit on how many peoples may hear a thing — using a throttle as a mechanism is why I would not
+ *  route this through that door before it was ruled.
+ *
+ *  ⛑ WHAT IT KEEPS: the bottom. A people already in the worst band has nothing further to think, so it stops moving —
+ *  the same floor `stigmaFor` gives powers, for the same reason, and read from content's own `peopleStandingBands`
+ *  rather than a number picked here.
+ *
+ *  ⛑ WHO MOVES: every people this character has a standing with — the ones who know them. A people on the far side of
+ *  the world does not think less of you for something they have no way to hear.
+ *  → [{ people, from, to, band, wasBand, crossed }]; an EMPTY array is an ordinary answer. Mutates the standings. */
+export function worldConsequenceForPeoples(character, delta, { rules = {}, why = "", peoples = null, floor = true } = {}) {
+  ensure(character);
+  const d = Number(delta);
+  if (!Number.isFinite(d) || d === 0) return [];
+  const bands = [...(Array.isArray(rules?.peopleStandingBands) ? rules.peopleStandingBands : [])]
+    .sort((a, b) => (Number(b?.min) || 0) - (Number(a?.min) || 0));
+  const secondWorst = bands.length > 1 ? bands[bands.length - 2] : null;
+  const who = Array.isArray(peoples) && peoples.length ? peoples.map(String) : Object.keys(character.peopleDisposition || {});
+  const moved = [];
+  for (const tid of who) {
+    const before = Number(character.peopleDisposition?.[tid]) || 0;
+    // ⛑ already at the bottom — nothing further to lose, exactly as a power at the worst band stops moving
+    if (floor && d < 0 && secondWorst && before < (Number(secondWorst.min) ?? -Infinity)) continue;
+    const after = before + d;
+    const wasBand = bandOf(before, rules);
+    character.peopleDisposition[tid] = after;
+    const band = bandOf(after, rules);
+    moved.push({ people: tid, from: before, to: after, band, wasBand, crossed: band !== wasBand, why: String(why || "") });
+  }
+  return moved;
+}
+
 /** §3d — standingOps from the GM. The model REPORTS what happened; the engine adjudicates.
  *  Three clamps, each for a reason play would notice:
  *    · delta bounded to ±3 — a scene is not a life

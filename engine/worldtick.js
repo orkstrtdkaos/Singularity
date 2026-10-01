@@ -19,7 +19,7 @@ import { activeCompany } from "./company.js";   // SNG-358: a holding's keeper m
 import { queueFeatureOffers, advanceHolding, holdingNews, unstewardedHoldings, takeHoldingEvents, CONDITIONS, tickStore, storeNews, advanceDebts, growHolding, holdingGround, holdingMeaningAura, healingAt, chargeQuartering } from "./holdings.js";
 import { tickArmory } from "./armory.js";   // CCODE-445: the forge works the order, a pass at a time
 import { tickCaravans, runStandingRoutes , divertToRuns } from "./caravan.js";
-import { gateHoldPass } from "./gatehold.js";   // ✅ SNG-663 §2c: holding one of the Lattice's arches has a cost, and it climbs   // R49: the road runs itself, and can be robbed   // ✅ SNG-654 A (Erik: "yes on a-d"): and a standing route sends the next load itself
+import { gateHoldPass, powerSeizesArch, powersReleaseArches } from "./gatehold.js";   // ✅ SNG-663 §2c: holding one of the Lattice's arches has a cost, and it climbs   // R49: the road runs itself, and can be robbed   // ✅ SNG-654 A (Erik: "yes on a-d"): and a standing route sends the next load itself
 import { domainAccess } from "./traditions.js";   // SNG-659 §1: the three-domain draw a person's kit is dealt from
 import { meaningDensity, peoplePresentAt } from "./substrate.js";   // R46b: what the pilgrims come for   // SNG-358: holdings ride the same world-gated pass
 import { commitGrowth } from "./npcsheet.js";   // ✅ R37: growth writes, on the tick
@@ -47,7 +47,7 @@ import { travelerCard, cardChanged, mergeTravelerCard, ledgerMonthsSince, whereO
 import { stampEventChange, mergeEventStages, mergeQuestOutcomes, actorOf, questKey } from "./worldevents.js";   // CCODE-354: a crisis another traveler answered reads as answered
 import { bandDialsOf } from "./melee.js";                                    // SNG-634 C1: a raiding power bleeds on the dials a band does
 import { arcReading, knowsSovereign, masksFrom, sovereignOfArc, confirmedLines, deedAgainstSupply, supplyDeedLine, seatClaims, applySeatClaims, mergeSeatsTaken} from "./sovereign.js";   // ⛔ SNG-642 §2.3: which of an arc's three readings this character has unlocked, and the mask over the name
-import { raiderPowerAt, dangerLiftAt, powerPass, noticePass } from "./powers.js";  // SNG-634 C1/C2/C4/C7: whose raid, whose ground, what they do, who has noticed you
+import { raiderPowerAt, dangerLiftAt, powerPass, noticePass , verbForPass } from "./powers.js";  // SNG-634 C1/C2/C4/C7: whose raid, whose ground, what they do, who has noticed you
 import { worthOf } from "./purse.js";                                              // ⛔ SNG-634 C7 `wealth`: a crown notices a rich stranger
 import { INVITES_PATH, mergeInvitation, answerInto, applyAnswers } from "./invitations.js";   // CCODE-360: an invitation carried by someone you both know
 import { boundFigures } from "./companionlives.js";   // SNG-597 §3: a companion who is also a figure of the world
@@ -873,6 +873,23 @@ export async function runWorldTick({ character, content, currentDay, advanceAssi
   // every consequence lands on `character.powerState` rather than on the shared record: the Gralloch grows
   // in YOUR world because YOUR Tollmen went on paying it. ⚠️ A broken power takes no verb at all.
   const powersPass = powerPass(character, { content, rules: content?.rules || null, day: currentDay });
+  // ✅ AEVI'S 09-29 TAIL ITEM 4 — A POWER TAKES AN ARCH, AND LETS IT GO BY ITS TEMPER.
+  // ⛔ THE VERB IS THE TRIGGER: when `seize_arch` comes up in a power's own rotation and it stands on an unheld arch of
+  // the Lattice's laying, it takes it. ⚠️ No power carries the verb yet — Aevi's note says the generator may give it to
+  // `outlaw_crown` and cruel `lordship` palettes only — so this loop does nothing until she authors one, which is the
+  // right order: the reader before the content, never after.
+  // ⛑ AND THE LETTING-GO IS UNCONDITIONAL — asked every pass of every power holding one, because a power that could
+  // seize and never release would be half a rule, and the half that is missing is the one the news was going to tell.
+  try {
+    for (const p of (content?.powers || [])) {
+      if (verbForPass(p, currentDay) !== "seize_arch") continue;
+      const took = powerSeizesArch(character, p, { content, rules: content?.rules || null, day: currentDay });
+      if (took.ok) news.push(took.news);
+    }
+    for (const let_ of powersReleaseArches(character, { content, rules: content?.rules || null, day: currentDay })) {
+      news.push(let_.news);
+    }
+  } catch { /* a power's arch is never a reason the world stops turning */ }
   // ⛔ SNG-634 C7 — AND WHO HAS TAKEN AN INTEREST IN YOU. ⚠️ THE PURSE IS PRICED HERE, not in powers.js:
   // `worthOf` needs the economy and a region and that module is pure. A caller that cannot price it passes
   // null and the `wealth` trigger simply does not fire, which is honest rather than a guessed zero.

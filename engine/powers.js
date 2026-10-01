@@ -348,6 +348,11 @@ export const VERB_EFFECT = {
   expand:  "selfWin",      // pushing outward: their own success compounds
   recruit: "selfWin",      // more hands is literally what it is
   feud:    "bothLose",     // two powers grinding each other down, on `rivals[]`
+  // ✅ AEVI (REPLY_aevi_ccode_563): *"`VERB_EFFECT` needs the entry so it never falls through as a silent null."*
+  // ⛔ DECLARED AS `null` ON PURPOSE, and that is the point of declaring it: taking an arch is not a win or a loss on
+  // the growth ledger — its whole effect is the seizure itself, which `powerSeizesArch` performs and the stigma and
+  // the keepers answer. Without this line the runner would warn on it for ever as an undeclared verb.
+  seize_arch: null,
   // ⛔ SNG-662 §2 — THE FEUD WAS ONE-SIDED BY CONSTRUCTION, and this is the half that was missing. A feuder
   // rotates `feud` with `expand`/`recruit`, so its wins cancel its own losses; its target rotates
   // `protect`/`patrol`/`tax`, none of which could do anything at all, so every loss stuck. ⚠️ MEASURED over a

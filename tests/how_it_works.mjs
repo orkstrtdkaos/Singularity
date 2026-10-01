@@ -33133,8 +33133,14 @@ console.log("\n── §391 · holding a gate, and what the Lattice sends ──
   /* ---- 6 · ⛑ AND IT IS REACHED FROM PLAY ---- */
   check("§391: ⛑ THE PASS IS CALLED BY THE WORLD TICK — an engine module with only a test for a caller passes CI and cannot fire in play",
     (() => {
+      // ⚠️ THIS PINNED THE IMPORT LINE AS TYPED, and tail item 4 added two names to it. The claim is that every one of
+      // this module's passes is CALLED BY THE TICK — which is now three of them, so it asks for all three rather than
+      // for one line's punctuation.
       const wt = rd("engine/worldtick.js");
-      return /import \{ gateHoldPass \} from "\.\/gatehold\.js"/.test(wt) && /gateHoldPass\(character, \{/.test(wt);
+      return /from "\.\/gatehold\.js"/.test(wt)
+        && /gateHoldPass\(character, \{/.test(wt)
+        && /powerSeizesArch\(character, p, \{/.test(wt)
+        && /powersReleaseArches\(character, \{/.test(wt);
     })());
 }
 
@@ -34425,6 +34431,139 @@ console.log("\n── §404 · the wardens, and a superseded place ──");
       return !ids(WM404.worldTierNodes(content404, ch404)).includes(stub404)
         && !ids(WM404.regionTierNodes(content404, ch404, "valley")).includes(stub404)
         && !kids404.includes(stub404);
+    })());
+}
+
+/* ══════════ §405 · A WORLD CONSEQUENCE CROSSES A BAND, AND A POWER LETS GO BY ITS TEMPER ══════════ */
+// ⛔ ERIK, in Aevi's 09-29 work order (tail item 3): *"Yes: a world consequence may cross a band edge. The peoples half
+// of the gate stigma moves every people who knows, and isn't clamped the way a narrated beat is. The per-beat clamp
+// stays for the GM's door."*
+//
+// ⛑ THIS IS A ⬜ OF MINE, ANSWERED. gatehold.js said: *"applyStandingOps is the GM's NARRATED door — it caps at four
+// ops a beat and clamps at a band edge on purpose… a world rule moving every people at once through it would be using
+// a throttle as a mechanism. That needs either a bulk door or Erik's ruling on whether a world consequence may cross a
+// band."* He ruled; `worldConsequenceForPeoples` is the door, and the GM's clamps are untouched.
+//
+// ⛑ AEVI (tail item 4): *"Powers let go, by temper… (kind/fair: at the first signs; hard: heroic; cruel: epic). So the
+// Ender Host will hold through two keepers and break at the third."*
+console.log("\n── §405 · a world consequence, and a power's temper ──");
+{
+  const G405 = await import("../engine/gatehold.js");
+  const ST405 = await import("../engine/standing.js");
+  const { loadContentHeadless: lch405 } = await import("./headless_content.mjs");
+  const C405 = await lch405();
+  const R405 = C405.rules;
+
+  /* ---- 1 · ⛔ THE WORLD'S DOOR IS NOT THE GM'S DOOR ---- */
+  const who405 = () => ({ name: "T405", peopleDisposition: { ashwarden: 1, cogitant: 1, verist: 5 } });
+  // ⛔ THE RULING ITSELF: a world consequence crosses a band edge. The GM's own door, handed the same move, must NOT.
+  check("§405: ⛔ A WORLD CONSEQUENCE CROSSES A BAND EDGE — Erik's ruling, and the thing the GM's door refuses to do",
+    (() => {
+      const w = who405();
+      const moved = ST405.worldConsequenceForPeoples(w, -2, { rules: R405, why: "held an arch" });
+      return moved.length === 3 && moved.some(m => m.crossed);
+    })());
+  check("§405: ⛔ …while the GM's narrated door still stops AT the edge, which is why it needed its own door",
+    (() => {
+      const g = who405();
+      const r = ST405.applyStandingOps(g, [{ people: "cogitant", delta: -2, why: "a scene" }], { rules: R405 });
+      const op = (r.applied || [])[0];
+      return !!op && op.heldAtBand === true;
+    })());
+  // ⛔ AND THE MAGNITUDE CLAMP IS THE GM'S TOO — "a scene is not a life" caps a beat at ±3; a world rule is not a scene.
+  check("§405: ⛔ …and a world consequence is not capped at ±3 either — a world rule is not a scene",
+    (() => {
+      const w = who405();
+      const moved = ST405.worldConsequenceForPeoples(w, -9, { rules: R405, why: "a world rule" });
+      return moved.every(m => m.to === m.from - 9);
+    })());
+  // ⛑ BUT IT KEEPS THE BOTTOM. A people already in the worst band has nothing further to think — the same floor
+  // `stigmaFor` gives powers, and read from content's own bands rather than a number typed here.
+  check("§405: ⛑ …and it still stops at the bottom, because a people already at the worst band has nothing more to think",
+    (() => {
+      const deep = { name: "T405b", peopleDisposition: { ashwarden: -500 } };
+      return ST405.worldConsequenceForPeoples(deep, -2, { rules: R405, why: "x" }).length === 0
+        && ST405.worldConsequenceForPeoples(deep, +2, { rules: R405, why: "x" }).length === 1;   // ⛑ …and climbing back is never floored
+    })());
+  // ⚠️ AND IT MOVES ONLY THOSE WHO KNOW. A reader that answers for everybody has stopped reading.
+  check("§405: ⚠️ …and only the peoples this character has a standing with — a stranger people hears nothing",
+    (() => {
+      const w = who405();
+      const moved = ST405.worldConsequenceForPeoples(w, -1, { rules: R405, why: "x" });
+      return moved.length === 3 && !moved.some(m => m.people === "umbral")
+        && ST405.worldConsequenceForPeoples({ name: "nobody" }, -1, { rules: R405 }).length === 0;
+    })());
+
+  /* ---- 2 · ⛔ BOTH HALVES OF THE STIGMA, ON BOTH SITES ---- */
+  // ⛔ A STIGMA THAT LANDS ON THE SEIZURE AND NOT THE DRIFT IS HALF A RULE, and half a rule is harder to find than none.
+  const gate405 = G405.latticeGates(C405.locations)[0];
+  const seized405 = (() => {
+    const ch = { name: "T405c", peopleDisposition: { ashwarden: 5, cogitant: 1 }, powerState: {} };
+    for (const p of (C405.powers || []).slice(0, 4)) ch.powerState[p.id] = { standing: 0 };
+    return { ch, r: G405.takeGate(ch, gate405, { how: "tolled", content: C405, rules: R405, day: 100 }) };
+  })();
+  check("§405: ⛔ TAKING AN ARCH MOVES THE POWERS **AND** THE PEOPLES — Aevi's line is “every power and people”",
+    seized405.r.ok && Array.isArray(seized405.r.moved) && Array.isArray(seized405.r.movedPeoples)
+    && seized405.r.movedPeoples.length === 2);
+  check("§405: ⛑ …and the season's drift moves both halves too, not just the powers",
+    (() => {
+      const ch = seized405.ch;
+      ch.gatesHeld[gate405].since = 100;
+      const pass = G405.gateHoldPass(ch, { content: C405, rules: R405, day: 100 + 40 });
+      return Array.isArray(pass.peoples) && pass.peoples.length === 2 && pass.stigma.length > 0;
+    })());
+
+  /* ---- 3 · ⛔ A POWER LETS GO AT ITS TEMPER'S RUNG ---- */
+  // ⚠️ THE RUNG IS READ FROM THE LADDER BY NAME, never an index typed in the engine — retune the ladder and this
+  // follows it. The gate asserts the MAPPING, so a content retune that breaks the correspondence is visible.
+  const ladder405 = G405.GATE_HOLD.rungs;
+  check("§405: ⛔ TEMPER DECIDES THE RUNG — kind and fair at the first signs, hard at heroic, cruel at epic",
+    G405.breakRungFor("kind", { rules: R405 }) === ladder405.indexOf("signs")
+    && G405.breakRungFor("fair", { rules: R405 }) === ladder405.indexOf("signs")
+    && G405.breakRungFor("hard", { rules: R405 }) === ladder405.indexOf("heroic")
+    && G405.breakRungFor("cruel", { rules: R405 }) === ladder405.indexOf("epic")
+    && G405.breakRungFor(undefined, { rules: R405 }) === ladder405.indexOf("signs"),
+    `signs ${ladder405.indexOf("signs")} · heroic ${ladder405.indexOf("heroic")} · epic ${ladder405.indexOf("epic")}`);
+  // ⛑ AEVI'S OWN EXAMPLE, DRIVEN: *"the Ender Host will hold through two keepers and break at the third."*
+  check("§405: ⛑ THE ENDER HOST HOLDS THROUGH TWO KEEPERS AND BREAKS AT THE THIRD — her own example, driven",
+    (() => {
+      const host = (C405.powers || []).find(p => p.id === "power_ender_host");
+      if (!host || String(host.temper) !== "cruel") return false;
+      const seize = () => { const ch = { name: "T405d", powerState: {} };
+        return { ch, r: G405.powerSeizesArch(ch, host, { content: C405, rules: R405, day: 100 }) }; };
+      const first = seize();
+      if (!first.r.ok) return false;
+      const per = 36;
+      const held = [0, 1, 2].every(s => {
+        const probe = JSON.parse(JSON.stringify(first.ch));
+        return G405.powersReleaseArches(probe, { content: C405, rules: R405, day: 100 + s * per }).length === 0;
+      });
+      const broke = G405.powersReleaseArches(JSON.parse(JSON.stringify(first.ch)),
+        { content: C405, rules: R405, day: 100 + 3 * per });
+      return held && broke.length === 1 && broke[0].power === "power_ender_host" && /come off the arch/.test(broke[0].news);
+    })());
+  // ⛔ AND IT TAKES ONLY AN ARCH OF THE LATTICE'S OWN LAYING, and only one, and not one somebody already holds.
+  check("§405: ⛔ …and a power takes only an unheld LATTICE arch it already stands on, and only one",
+    (() => {
+      const host = (C405.powers || []).find(p => p.id === "power_ender_host");
+      const ch = { name: "T405e", powerState: {} };
+      const a = G405.powerSeizesArch(ch, host, { content: C405, rules: R405, day: 100 });
+      const b = G405.powerSeizesArch(ch, host, { content: C405, rules: R405, day: 101 });
+      const lattice = new Set(G405.latticeGates(C405.locations));
+      return a.ok && lattice.has(a.at) && !b.ok && /already holds one/.test(b.why);
+    })());
+  // ⚠️ AND A SEIZURE WITH NO DAY CANNOT BE TIMED, so it HOLDS — absence is not "a season ago", which is this repo's
+  // most repeated defect.
+  check("§405: ⚠️ …and a seizure with no day recorded holds rather than being treated as ancient",
+    (() => {
+      const ch = { name: "T405f", powerState: { power_ender_host: { gateHeld: "the_marchward" } } };
+      return G405.powersReleaseArches(ch, { content: C405, rules: R405, day: 99999 }).length === 0;
+    })());
+  // ⛔ AND THE VERB IS DECLARED, so the runner never warns on it as an unknown — Aevi asked for exactly this.
+  check("§405: ⛔ …and `seize_arch` is DECLARED in VERB_EFFECT, so it never falls through as a silent null",
+    (() => {
+      const PW = rd("engine/powers.js");
+      return /^\s*seize_arch: null,/m.test(PW);
     })());
 }
 

@@ -21,6 +21,7 @@
 // number the spec names. A gate that exists because somebody built one in play is `_gen`/`_canon` and is nobody's
 // inheritance to resent.
 import { isNetworkGate } from "./waygate.js";
+import { worldConsequenceForPeoples } from "./standing.js";   // ✅ Erik 2026-09-29: a world consequence may cross a band edge
 import { movePowerStanding, powerStateOf } from "./powers.js";
 import { seasonCalendar } from "./worldtime.js";
 
@@ -120,9 +121,12 @@ export function takeGate(character, locationId, { how = "garrisoned", content = 
   if (held[locationId]) return { ok: false, why: `you already hold ${loc.name || locationId}`, already: true };
   held[locationId] = { since: day, how, seasonsHeld: 0, lastKeeperDay: null, rung: 0 };
 
-  const moved = stigmaFor(character, { content, rules, day, delta: num(rules?.gateHold?.seizeStigma, GATE_HOLD.seizeStigma),
-    why: `took the arch at ${loc.name || locationId}` });
-  return { ok: true, at: locationId, name: loc.name || locationId, how, moved,
+  const whyTook = `took the arch at ${loc.name || locationId}`;
+  const seize = num(rules?.gateHold?.seizeStigma, GATE_HOLD.seizeStigma);
+  const moved = stigmaFor(character, { content, rules, day, delta: seize, why: whyTook });
+  // ✅ ERIK 2026-09-29 — AND THE PEOPLES, who are not clamped the way a narrated beat is.
+  const movedPeoples = peoplesStigmaFor(character, { rules, day, delta: seize, why: whyTook });
+  return { ok: true, at: locationId, name: loc.name || locationId, how, moved, movedPeoples,
     said: `You have ${GATE_ACTS[how].you} at ${loc.name || locationId}. Nobody has done that in living memory.`,
     news: `${character?.name || "Someone"} ${GATE_ACTS[how].they} at ${loc.name || locationId}. Nobody has done that in living memory.` };
 }
@@ -141,10 +145,10 @@ export function releaseGate(character, locationId, { content = null, day = null 
 }
 
 /** ⛔ THE STIGMA — every power that knows of it thinks less of you. Aevi's line covers *"every power and people"*;
- *  ⬜ THE PEOPLES HALF IS NOT DONE HERE and I am not pretending it is: `applyStandingOps` is the GM's NARRATED door —
- *  it caps at four ops a beat and clamps at a band edge on purpose, because "a scene is not a life" — and a world rule
- *  moving every people at once through it would be using a throttle as a mechanism. That needs either a bulk door or
- *  Erik's ruling on whether a world consequence may cross a band; it is in the PO note rather than guessed at. */
+ *  ✅ THE PEOPLES HALF IS `peoplesStigmaFor`, below, since 2026-10-01. It waited on a ruling rather than a guess: the
+ *  GM's door caps at four ops a beat and clamps at a band edge ON PURPOSE, and routing a world rule through it would
+ *  have been using a throttle as a mechanism. ERIK RULED on 09-29 — *"a world consequence may cross a band edge"* — and
+ *  `worldConsequenceForPeoples` implements it, leaving the GM's clamps exactly where they are. */
 export function stigmaFor(character, { content = null, rules = null, day = null, delta = -2, why = "", floor = true } = {}) {
   const moved = [];
   // ⛑ AND IT STOPS AT THE BOTTOM. A step a season forever runs past every band the game has: `reputationBands` ends at
@@ -167,6 +171,84 @@ export function stigmaFor(character, { content = null, rules = null, day = null,
     if (r) moved.push({ power: r.id, name: r.name, from: r.from, to: r.to });
   }
   return moved;
+}
+
+/** ✅ THE PEOPLES HALF OF THE STIGMA (Erik, 2026-09-29). Every people this character has a standing with thinks less of
+ *  them for holding an arch — and unlike a narrated beat, this one may carry a band with it.
+ *  ⚠️ THE SAME SHAPE AS `stigmaFor` ON PURPOSE: only those who know, a floor at the bottom band, and the moves
+ *  RETURNED so the player can be told what the holding cost them. "A consequence the player pays and cannot see" is a
+ *  defect this file has already recorded once. Mutates the standings. */
+export function peoplesStigmaFor(character, { rules = null, day = null, delta = -2, why = "" } = {}) {
+  void day;   // ⛑ kept in the signature to match `stigmaFor`'s; the peoples door keeps no log of its own
+  return worldConsequenceForPeoples(character, delta, { rules, why });
+}
+
+/* ═════ A POWER TAKES AN ARCH, AND LETS IT GO BY ITS TEMPER ═════
+ *
+ * ⛑ AEVI, REPLY_aevi_ccode_563: *"A verb, for powers in play: `seize_arch`… Powers let go, by temper. A power isn't a
+ * fool: it releases the arch when a keeper at its temper's rung arrives (kind/fair: at the first signs; hard: heroic;
+ * cruel: epic). So the Ender Host will hold through two keepers and break at the third."*
+ */
+
+/** ⛔ WHICH RUNG BREAKS A POWER OF THIS TEMPER. ⚠️ READ FROM THE LADDER BY NAME, never by an index typed here — the
+ *  rungs are `["signs","notable","heroic","epic","legendary"]` and a content retune of that ladder must retune this
+ *  with it, not silently disagree. An unknown temper breaks at the first signs, which is the cautious answer. PURE. */
+export const TEMPER_BREAKS_AT = { kind: "signs", fair: "signs", hard: "heroic", cruel: "epic" };
+
+export function breakRungFor(temper, { rules = null } = {}) {
+  const ladder = Array.isArray(rules?.gateHold?.rungs) && rules.gateHold.rungs.length ? rules.gateHold.rungs : GATE_HOLD.rungs;
+  const want = TEMPER_BREAKS_AT[String(temper || "").toLowerCase()] || "signs";
+  const i = ladder.indexOf(want);
+  return i >= 0 ? i : 0;
+}
+
+/** ⛔ A POWER TAKES AN ARCH IT STANDS ON BUT DOES NOT HOLD. Written to the SAVE's power state, never to the authored
+ *  record — a seizure in play is this character's world, not everyone's.
+ *  ⚠️ IT REFUSES A MADE GATE, exactly as the player's own seizure does: the inheritance is the 26 authored names, and
+ *  a gate built in play is nobody's to inherit. → { ok, at, news } or { ok: false, why }. Mutates. */
+export function powerSeizesArch(character, power, { content = null, locations = null, rules = null, day = null } = {}) {
+  if (!power?.id) return { ok: false, why: "no power" };
+  if (gateHeldByPower(power, character)) return { ok: false, why: "it already holds one" };
+  const locs = locations || content?.locations || {};
+  const lattice = new Set(latticeGates(locs));
+  // ⛑ the ground it stands on, and only an arch of the Lattice's own laying
+  const at = (power.holds || []).map(h => h?.at).find(a => a && lattice.has(a));
+  if (!at) return { ok: false, why: "it stands on no arch of the Lattice's laying" };
+  const taken = holderOfGate(at, { character, powers: content?.powers || [] });
+  if (taken) return { ok: false, why: `${taken.name || taken.id} holds it already` };
+  // ⚠️ `powerStateOf` READS; it does not create. A power the character has never heard of has no state at all, and
+  // seizing an arch is exactly how they hear of it — so the bag is made here rather than assumed.
+  const bag = character.powerState && typeof character.powerState === "object" ? character.powerState : (character.powerState = {});
+  const s = bag[power.id] || (bag[power.id] = {});
+  s.gateHeld = at;
+  s.gateHeldSince = day ?? null;
+  const name = locs?.[at]?.name || at;
+  return { ok: true, at, power: power.id,
+    news: `${power.name || power.id} has put its people on the arch at ${name}.` };
+}
+
+/** ⛔ …AND LETS IT GO WHEN SOMEBODY IT CANNOT FACE ARRIVES. The keeper rung climbs on the same season rhythm the
+ *  player's own holding does, and a power breaks at the rung its temper can stand. → the releases, which the caller
+ *  turns into news. ⚠️ A power with no seizure DAY cannot be timed, so it holds — absence is not "a season ago".
+ *  Mutates. */
+export function powersReleaseArches(character, { content = null, locations = null, rules = null, day = null } = {}) {
+  const out = [];
+  if (day == null) return out;
+  const locs = locations || content?.locations || {};
+  for (const p of (content?.powers || [])) {
+    const s = powerStateOf(character, p?.id);
+    const at = s?.gateHeld;
+    if (!at) continue;
+    if (!Number.isFinite(Number(s.gateHeldSince))) continue;   // ⚠️ never timed — it holds
+    const rung = keeperRungAt(s.gateHeldSince, day, { rules });
+    const breaks = breakRungFor(p.temper || p.tempers?.now || null, { rules });
+    if (rung < breaks) continue;
+    delete s.gateHeld; delete s.gateHeldSince;
+    const name = locs?.[at]?.name || at;
+    out.push({ power: p.id, name: p.name || p.id, at, rung, temper: p.temper || null,
+      news: `${p.name || p.id} has come off the arch at ${name}.` });
+  }
+  return out;
 }
 
 /* ═════ THE CLOCK, AND WHAT COMES THROUGH ═════ */
@@ -209,7 +291,7 @@ export function keeperDue(record, day, { rules = null } = {}) {
  *  Then a keeper a season, climbing. ⚠️ Nothing here pursues: Aevi's own line is *"It never pursues past the gate's yard,
  *  and it never comes for a gate nobody holds."* Releasing the gate ends it, which is why `gatesHeld` is the only input. */
 export function gateHoldPass(character, { content = null, rules = null, day = null } = {}) {
-  const out = { news: [], keepers: [], stigma: [] };
+  const out = { news: [], keepers: [], stigma: [], peoples: [] };   // ✅ `peoples` since Erik's 09-29 ruling
   const held = gatesHeldBy(character);
   const per = seasonDays(rules);
   for (const [locId, rec] of Object.entries(held)) {
@@ -221,10 +303,16 @@ export function gateHoldPass(character, { content = null, rules = null, day = nu
     const drifted = num(rec.seasonsDrifted, 0);
     if (seasons > drifted) {
       rec.seasonsDrifted = seasons;
-      const moved = stigmaFor(character, { content, rules, day,
-        delta: num(rules?.gateHold?.driftStigma, GATE_HOLD.driftStigma),
-        why: `still holds the arch at ${name}` });
-      if (moved.length) { out.stigma.push(...moved); out.news.push(`Word has gone round again that the arch at ${name} is still held.`); }
+      const whyStill = `still holds the arch at ${name}`;
+      const drift = num(rules?.gateHold?.driftStigma, GATE_HOLD.driftStigma);
+      const moved = stigmaFor(character, { content, rules, day, delta: drift, why: whyStill });
+      // ✅ ERIK 2026-09-29 — the peoples drift with the powers. Both halves on both sites, or it is half a rule.
+      const movedPeoples = peoplesStigmaFor(character, { rules, day, delta: drift, why: whyStill });
+      if (movedPeoples.length) out.peoples = [...(out.peoples || []), ...movedPeoples];
+      if (moved.length || movedPeoples.length) {
+        out.stigma.push(...moved);
+        out.news.push(`Word has gone round again that the arch at ${name} is still held.`);
+      }
     }
 
     // ⛔ AND WHAT COMES THROUGH IT

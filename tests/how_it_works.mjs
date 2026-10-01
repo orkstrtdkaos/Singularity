@@ -34567,6 +34567,89 @@ console.log("\n── §405 · a world consequence, and a power's temper ──"
     })());
 }
 
+/* ══════════ §406 · ON A ROAD, A WIPE IS THE DISASTER AND NOT THE DEFAULT ══════════ */
+// ⛑ AEVI, ruling 2 (REPLY_aevi_ccode_558_561): *"The wipe rule stays as Erik wrote it (an escort that all dies loses
+// the whole load), but ON A ROAD it must be the disaster, not the default. People guarding a cart run when a fight is
+// lost; soldiers in a legion clash don't get to… Gate: in expectation, sending people is never worse for the load than
+// sending nobody, at every escort size and danger 1–5. If 0.35 doesn't clear it, lower it until it does."*
+//
+// ⛔ MEASURED OVER 2,000 RUNS A CELL (po/tools/measure_road_rout.mjs), and the inversion was severe:
+//     danger 3, escort 1 — **0.00** of 20 units arrived with a guard, **5.00** with nobody at all
+//     danger 4–5        — escorts of one to three lost the whole load every single time
+// A SMALL escort is the easiest to wipe entirely, and a wipe takes everything — so one guard was five units WORSE than
+// no guard. With her 0.35 the worst cell becomes +1.50, and her number clears her own gate without being lowered.
+//
+// ⚠️ THREE TIMES THIS MEASUREMENT LIED BEFORE IT TOLD THE TRUTH, each a fixture naming a field the engine does not
+// read: `goods` where it takes from `load`; `crew` where the escort comes from `carriers`; and before that, no hazard
+// firing at all. Every one produced a table of IDENTICAL numbers that agreed with whatever rule I might have written.
+// The tool reports how many fights actually happened now, so a flat table can never be mistaken for a result again.
+console.log("\n── §406 · a rout on a road ──");
+{
+  const CV406 = await import("../engine/caravan.js");
+  const { loadContentHeadless: lch406 } = await import("./headless_content.mjs");
+  const C406 = await lch406();
+  const econ406 = C406.rules.economy;
+
+  /* ---- 1 · ⛔ THE DIAL IS HERS, AND IT IS A CAP ---- */
+  check("§406: ⛑ THE ROAD'S ROUT CAP IS AEVI'S 0.35, overridable in `holdStore.trade`",
+    CV406.ROAD_ROUT_RISK === 0.35
+    && /roadRoutRisk/.test(rd("engine/caravan.js")));
+  // ⛔ A CAP, NOT A RATE — a rout gentler than this stays gentler, and a fight that HELD is not capped at all, because
+  // R46a already protects a won fight's load whatever it cost.
+  check("§406: ⛔ …and it is a CAP on a ROUT — a held fight is untouched, and a gentler rout stays gentler",
+    (() => {
+      const src = rd("engine/caravan.js").split(NEWLINE_RE).filter(l => !/^\s*(\/\/|\*|\/\*)/.test(l)).join(String.fromCharCode(10));
+      return /const routCap = held \? 1 : clamp01\(num\(tradeCfg\(cfg\)\.roadRoutRisk, ROAD_ROUT_RISK\)\);/.test(src)
+        && /const risk = Math\.min\(clamp01\(clash\.personalRisk\), routCap\);/.test(src);
+    })());
+  // ⚠️ AND `legionClash` IS UNTOUCHED, which is the half of her ruling that is about where the rule does NOT go:
+  // a legion's soldiers do not get to run, so the clash itself must not learn this cap.
+  check("§406: ⚠️ …and `legionClash` never learned it — a legion's soldiers do not get to run",
+    !/roadRoutRisk/.test(rd("engine/melee.js")));
+
+  /* ---- 2 · ⛔ HER GATE, DRIVEN ---- */
+  // ⛑ THE WORST CELL THE 2,000-RUN TABLE FOUND (danger 3, one guard), re-run here at a smaller sample. A gate that
+  // samples the EASY cells proves nothing — this one asks the question where the answer was wrong.
+  const RUNS406 = 400, UNITS406 = 20;
+  const mul406 = (a) => () => { a |= 0; a = a + 0x6D2B79F5 | 0;
+    let x = Math.imul(a ^ a >>> 15, 1 | a); x = x + Math.imul(x ^ x >>> 7, 61 | x) ^ x;
+    return ((x ^ x >>> 14) >>> 0) / 4294967296; };
+  const cfg406 = (cap) => { const b = JSON.parse(JSON.stringify({ ...econ406.holdStore, features: econ406.holdFeatures }));
+    b.trade = { ...(b.trade || {}), ...(cap == null ? {} : { roadRoutRisk: cap }) }; return b; };
+  const arrive406 = (escortSize, danger, cap) => {
+    let kept = 0, fights = 0;
+    for (let i = 0; i < RUNS406; i++) {
+      const rng = mul406(danger * 100000 + escortSize * 1000 + i);
+      const people = {}, ids = Array.from({ length: escortSize }, (_, k) => `g${k}`);
+      for (const id of ids) people[id] = { id, name: id, level: 2, health: 20, maxHealth: 20 };
+      const ch = { name: "T406", purse: { crystal: 999, scrip: {} }, npcRegistry: { ...people } };
+      // ⚠️ `load` and `carriers` — the fields the engine actually reads. Naming the wrong ones gave a flat table twice.
+      const car = { id: "c", from: "millbrook", toId: "the_axis_gate", units: UNITS406,
+        load: { raw_material: UNITS406 }, carriers: [...ids], events: [], danger };
+      const r = CV406.resolveRoadHazard(ch, car, { rng, cfg: cfg406(cap), people, day: 1,
+        meleeCfg: C406.rules?.death?.melee || {}, npcCfg: C406.rules?.npcStanding || {} });
+      if (r?.fought) fights++;
+      kept += Object.values(car.load || {}).reduce((a, n) => a + (Number(n) || 0), 0);
+    }
+    return { mean: kept / RUNS406, fights };
+  };
+  const none406 = arrive406(0, 3, 0.35);
+  const one406 = arrive406(1, 3, 0.35);
+  const oneUncapped406 = arrive406(1, 3, 1);
+  // ⛔ THE FIXTURE MUST HAVE FOUGHT, or the three numbers below are three ways of saying nothing.
+  check("§406: ⚠️ THE FIXTURE ACTUALLY FIGHTS — three flat tables taught me to check this before reading any of it",
+    one406.fights > 0 && oneUncapped406.fights > 0,
+    `${one406.fights} of ${RUNS406} escorted runs came to a fight`);
+  check("§406: ⛔ SENDING PEOPLE IS NEVER WORSE FOR THE LOAD THAN SENDING NOBODY — her gate, at the cell where it failed",
+    one406.mean >= none406.mean,
+    `danger 3, one guard: ${one406.mean.toFixed(2)} of ${UNITS406} arrive, against ${none406.mean.toFixed(2)} with nobody`);
+  // ⛔ AND THE CAP IS WHAT DOES IT. Without it the same cell is WORSE than sending nobody — so this gate cannot pass
+  // for some other reason, and it reddens if the cap ever stops biting.
+  check("§406: ⛔ …and it is the CAP that does it — uncapped, that same cell is worse than sending nobody at all",
+    oneUncapped406.mean < none406.mean && one406.mean > oneUncapped406.mean,
+    `uncapped ${oneUncapped406.mean.toFixed(2)} · capped ${one406.mean.toFixed(2)} · nobody ${none406.mean.toFixed(2)}`);
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

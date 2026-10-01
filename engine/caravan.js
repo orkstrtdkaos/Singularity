@@ -683,6 +683,10 @@ export function waitingExposure(character, holding, { units = 0, basket = null, 
  *
  *  ⛔ AND A HOLD THAT MAKES NOTHING HAS NO ROUTE VALUE AT ALL — `ok: false`, not 0, because those are different
  *  answers and the card says the second one out loud. PURE. */
+/** ✅ AEVI ruling 2 — the cap on a ROUT's personal risk, on a road. Her starting number; `holdStore.trade.roadRoutRisk`
+ *  overrides it. ⚠️ IT IS A CAP, NOT A RATE: a rout gentler than this stays gentler. */
+export const ROAD_ROUT_RISK = 0.35;
+
 export function routeValue(character, holding, {
   toId = null, days = null, danger = 0, path = null, cfg = null, economy = null, locations = {},
   crew = null, companyCut = null, density = null, perDangerChance = ROAD_HAZARD_PER_DANGER_DAY,
@@ -1144,9 +1148,17 @@ export function resolveRoadHazard(character, car, { rng = Math.random, cfg = nul
   const held = clash.tide > 0.05;
 
   // ⚑ WHO FELL — a function of the tide, not of their own roll. This is `personalRisk`'s first reader.
+  //
+  // ✅ AEVI, ruling 2 (REPLY_aevi_ccode_558_561) — ON A ROAD A WIPE IS THE DISASTER, NOT THE DEFAULT. *"People guarding
+  // a cart run when a fight is lost; soldiers in a legion clash don't get to."* So a ROUT's risk is capped here, at the
+  // road, and `legionClash` is left exactly as it is — the rule is about who may run, not about how a clash resolves.
+  // ⚠️ THE CAP IS ON THE ROUT ONLY. A fight that HELD already protects the load whatever it cost (R46a), so capping a
+  // won fight would be changing a rule nobody asked about.
+  const routCap = held ? 1 : clamp01(num(tradeCfg(cfg).roadRoutRisk, ROAD_ROUT_RISK));
+  const risk = Math.min(clamp01(clash.personalRisk), routCap);
   const fallen = [];
   for (const p of escort) {
-    if (rng() < clamp01(clash.personalRisk)) {
+    if (rng() < risk) {
       fallen.push(p.id || p.name || "someone");
       const rec = people?.[p.id] || character?.npcRegistry?.[p.id] || p;
       if (rec) enterDeathState(rec, { diedDay: day, cause: `killed on the road, escorting a load out of ${car.from}` });

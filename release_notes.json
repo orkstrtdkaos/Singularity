@@ -16,6 +16,18 @@
   "next": [],
   "releases": [
     {
+      "version": "2.16.5",
+      "date": "2026-10-01",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "A small escort no longer loses the whole load",
+          "summary": "Guards on a road run when a fight is lost, so a wipe is a disaster rather than the usual outcome.",
+          "detail": "An escort that all dies loses everything the cart carried. A small escort is the easiest to kill to the last, so a single guard could be worse for your goods than sending none at all — measured at a dangerous stretch of road, one guard brought home nothing where an unescorted cart kept a quarter. People guarding a cart can run now when a fight turns; soldiers in a line battle still cannot. Sending people is never worse for the load than sending nobody."
+        }
+      ]
+    },
+    {
       "version": "2.16.4",
       "date": "2026-10-01",
       "entries": [

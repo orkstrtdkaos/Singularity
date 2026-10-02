@@ -184,7 +184,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.16.11";
+const APP_VERSION = "2.16.12";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2996,7 +2996,12 @@ function fieldSourcesIn(ext) {
  *  that holds 3% of the world and 80% of the Echo Vale is the whole point of looking at one region. */
 function fieldPanel(ext) {
   const f = worldField();
-  if (!f) return `<div class="hint" style="margin-bottom:8px">The power field loads with the map — open the world tier once and it will draw here.</div>`;
+  // ⛔ ERIK'S MAP, 2026-10-01 — THIS SENTENCE WAS TRUE, AND THAT WAS THE DEFECT. The terrain asset is 617KB and
+  // loaded lazily; this panel is built in the same synchronous pass that inserts the screen, so on a first open the
+  // voters have not landed and nothing re-rendered the panel when they did. The player was told to go and open
+  // another tier — a missing repaint wearing instructions. `refreshFieldPanel` is that repaint; the sentence stays
+  // for the moment before the load returns, and for a load that genuinely fails.
+  if (!f) return `<div class="hint" data-field-panel="1" style="margin-bottom:8px">The power field is still loading with the ground…</div>`;
   const win = ext ? fieldWindowFor(ext, 72, 72) : null;
   const covKey = ext ? `${ext.la0},${ext.lo0},${ext.la1},${ext.lo1}` : "world";
   const pct = (k) => {
@@ -3007,7 +3012,7 @@ function fieldPanel(ext) {
   const kindBtn = (k) => `<button class="opt field-kind${fieldCtl.kinds.has(k) ? " selected" : ""}" data-fieldkind="${esc(k)}"
       title="${esc(KIND_LABEL[k] || k)} — ${pct(k)}% of ${ext ? "this region" : "the world"} reads above the membership line">${fieldCtl.kinds.has(k) ? "✓ " : ""}${esc(KIND_LABEL[k] || k)} <span class="hint">${pct(k)}%</span></button>`;
   const mark = (key, label, title) => `<button class="opt field-mark${fieldCtl[key] ? " selected" : ""}" data-fieldmark="${key}" title="${esc(title)}">${fieldCtl[key] ? "✓ " : ""}${label}</button>`;
-  return `<div class="field-ctl" style="margin-bottom:8px;display:flex;gap:6px;flex-wrap:wrap;align-items:center">
+  return `<div class="field-ctl" data-field-panel="1" style="margin-bottom:8px;display:flex;gap:6px;flex-wrap:wrap;align-items:center">
     ${mark("on", "◈ Field", "The evaluated power field, washed over the ground. Turning a SOURCE KIND off re-renders it; these marker buttons only hide markers.")}
     ${[...FIELD_KINDS].map(kindBtn).join("")}
     <span class="hint" style="margin:0 4px">│</span>
@@ -3020,6 +3025,22 @@ function fieldPanel(ext) {
 
 /** ⛑ ONE WIRING FOR ALL THREE TIERS, because three copies of a toggle is three chances for one of them to
  *  stop re-rendering. `repaint` is the tier's own redraw. */
+/** ⛔ DRAW THE FIELD PANEL AGAIN once the terrain has actually landed. ⚠️ IT REPLACES IN PLACE rather than
+ *  re-rendering the screen, because the screen holds a canvas that has just been painted and a `<details>` the player
+ *  may have opened — a full re-render would throw both away to show a row of buttons.
+ *  ⛑ A NO-OP WHEN THERE IS NOTHING NEW: if the field still will not build, the panel keeps the sentence it has. */
+function refreshFieldPanel(ext, repaint) {
+  const host = app.querySelector("[data-field-panel]");
+  if (!host || !worldField()) return false;
+  const html = fieldPanel(ext);
+  if (!/field-ctl/.test(html)) return false;
+  host.outerHTML = html;
+  // ⚠️ AND IT IS RE-WIRED. The old node's handlers died with it; a panel that redraws without this is a row of
+  // toggles that do nothing, which is the ⇧ defect this file has recorded by name.
+  wireFieldPanel(repaint);
+  return true;
+}
+
 function wireFieldPanel(repaint) {
   for (const b of app.querySelectorAll("[data-fieldkind]")) b.onclick = () => {
     const k = b.dataset.fieldkind;
@@ -12360,7 +12381,14 @@ function queueRegionMap(regionId) {
     if (left > 0) requestAnimationFrame(() => tryPaint(left - 1));
   };
   Promise.all([loadWorldGenerator(), loadTerrain()])
-    .then(() => tryPaint(60))
+    .then(() => {
+      tryPaint(60);
+      // ✅ …AND THE FIELD PANEL, which was built before this promise resolved and has been saying so ever since.
+      try {
+        refreshFieldPanel(regionExtent(regionId, CONTENT.locations, { authored: (_regionMaps && _regionMaps[regionId]) || null }),
+          () => paintRegionMap(regionId));
+      } catch (err) { console.warn("[region-map] the field panel could not be redrawn:", err); }
+    })
     .catch(() => { /* enhancement only — the connection diagram below is still a working map */ });
 }
 function paintRegionMap(regionId) {
@@ -12632,7 +12660,29 @@ function paintRegionMap(regionId) {
   const LABEL_FONT = "600 10px system-ui, sans-serif";
   ctx.font = LABEL_FONT;
   const rank416 = (m) => (m.id === here ? 0 : m.l.waygate ? 1 : m.l.tier === "site" ? 3 : 2);
-  const labels416 = placeLabels(marks416.map(m => ({ id: m.id, x: m.p.x, y: m.p.y + 18, w: ctx.measureText(m.name).width, h: 10, rank: rank416(m) })));
+  // ⛔ ERIK'S MAP, 2026-10-01 — A LABEL IS PLACED AT THE WIDTH IT IS ACTUALLY DRAWN AT.
+  // ⚠️ This measured `m.name` and then drew `m.name + " +N"`. The badge `placeLabels` itself produces was not in
+  // the box `placeLabels` reserved, so it hung over its neighbour and the neighbour was drawn into it — measured on
+  // the Valley of Echoes, where "The Standing Annex +2", "The Moth Gate +4" and "Echo River Crossing" overlap.
+  // ⛑ TWO PASSES, because N is not knowable before the first. Pass 1 decides who is hidden and therefore what each
+  // survivor will SAY; pass 2 re-places the survivors at their true drawn widths. A wider box can only hide more, so
+  // pass 2 never resurrects what pass 1 dropped. ⚠️ AND A SURVIVOR DROPPED IN PASS 2 HANDS ITS TALLY ON, through
+  // `hiddenInto` — the pairing the engine always had — so no place vanishes off the screen uncounted.
+  const text416 = (m, by) => m.name + (by[m.id] ? ` +${by[m.id]}` : "");
+  const boxes416 = (ms, by) => ms.map(m => ({ id: m.id, x: m.p.x, y: m.p.y + 18, w: ctx.measureText(text416(m, by)).width, h: 10, rank: rank416(m) }));
+  const pass1 = placeLabels(boxes416(marks416, {}));
+  const kept1 = marks416.filter(m => pass1.shown.has(m.id));
+  const pass2 = placeLabels(boxes416(kept1, pass1.hiddenBy));
+  const hidden416 = { ...pass1.hiddenBy };
+  for (const m of kept1) {
+    if (pass2.shown.has(m.id)) continue;
+    const taker = pass2.hiddenInto[m.id];
+    const carry = (hidden416[m.id] || 0) + 1;      // the places it stood for, plus itself
+    delete hidden416[m.id];
+    if (taker) hidden416[taker] = (hidden416[taker] || 0) + carry;
+  }
+  for (const id of Object.keys(hidden416)) if (!pass2.shown.has(id)) delete hidden416[id];
+  const labels416 = { shown: pass2.shown, hiddenBy: hidden416 };
   for (const m of marks416) {
     const meta = _terrain.locations[m.id] || {};
     const g = glyphFor({ ...meta, k: meta.k });
@@ -13147,7 +13197,10 @@ function wireWorldGlobe() {
   ctx.fillStyle = "#0a0a12"; ctx.fillRect(0, 0, cv.width, cv.height);
   ctx.fillStyle = "#8d8b81"; ctx.font = "13px ui-sans-serif, system-ui, sans-serif"; ctx.textAlign = "center";
   ctx.fillText("reading the world…", cv.width / 2, cv.height / 2);
+  // ✅ THE WORLD TIER RACES THE SAME LOAD. It is only ever seen on a session that opens straight to the world, which
+  // is why the region tier is where Erik met it — but it is the same panel and the same promise.
   loadTerrain().then((t) => {
+    try { refreshFieldPanel(null, () => renderMapWorld()); } catch { /* the globe is the screen; the panel is a strip on it */ }
     if (!t) {
       // ⛔ A MISSING ASSET MUST NOT LEAVE A BLACK BOX. Say what happened and what still works.
       ctx.fillStyle = "#0a0a12"; ctx.fillRect(0, 0, cv.width, cv.height);

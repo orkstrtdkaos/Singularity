@@ -16,6 +16,24 @@
   "next": [],
   "releases": [
     {
+      "version": "2.16.12",
+      "date": "2026-10-02",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "The map's field panel no longer tells you to go somewhere else",
+          "summary": "It drew itself as soon as the ground finished loading, instead of waiting for you to visit another tier.",
+          "detail": "Opening the map on your own region showed \"the power field loads with the map — open the world tier once and it will draw here\". That was true, and that was the problem: the panel was built while the ground was still loading and nothing redrew it when the ground arrived. It redraws itself now, on every tier."
+        },
+        {
+          "kind": "fix",
+          "title": "A place name on the map is measured as it is drawn",
+          "summary": "Labels that carry a “+2” badge now reserve room for it.",
+          "detail": "When several places sit close together the map draws one name and marks it \"+2\" for the ones behind it. The room reserved for that name did not include the badge, so it could hang over its neighbour. It does now — and if a name loses its place in the process, its count is handed to whichever name took it, so no place vanishes uncounted."
+        }
+      ]
+    },
+    {
       "version": "2.16.11",
       "date": "2026-10-01",
       "entries": [

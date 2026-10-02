@@ -594,17 +594,20 @@ export function bearingsToKnown(from, locations = {}, { isKnown = null, limit = 
  *  then sites), ties in the order given. Each item is a label's box: `x` its centre, `y` its baseline, `w`/`h` its size.
  *  The PLACE is still drawn by the caller; only its name yields. Pure → { shown: Set of ids, hiddenBy: { shownId: n } }. */
 export function placeLabels(items = [], { pad = 2 } = {}) {
-  const boxes = [], shown = new Set(), hiddenBy = {};
+  // ✅ `hiddenInto` IS NEW: hidden id → the id that displaced it. This function has always computed it (`hit.id`)
+  // and thrown the pairing away, keeping only the tally — so a caller that places twice could not carry a dropped
+  // label's own tally to whoever took its place, and had to guess. A guess there puts "+2" on an arbitrary neighbour.
+  const boxes = [], shown = new Set(), hiddenBy = {}, hiddenInto = {};
   const order = items.map((it, i) => ({ it, i })).sort((a, b) => ((a.it.rank ?? 9) - (b.it.rank ?? 9)) || (a.i - b.i));
   for (const { it } of order) {
     const w = Math.max(0, Number(it.w) || 0), h = Math.max(0, Number(it.h) || 0);
     const box = { id: it.id, l: it.x - w / 2 - pad, r: it.x + w / 2 + pad, t: it.y - h - pad, b: it.y + pad };
     const hit = boxes.find(o => box.l < o.r && o.l < box.r && box.t < o.b && o.t < box.b);
-    if (hit) { hiddenBy[hit.id] = (hiddenBy[hit.id] || 0) + 1; continue; }
+    if (hit) { hiddenBy[hit.id] = (hiddenBy[hit.id] || 0) + 1; hiddenInto[it.id] = hit.id; continue; }
     boxes.push(box);
     shown.add(it.id);
   }
-  return { shown, hiddenBy };
+  return { shown, hiddenBy, hiddenInto };
 }
 
 export function walkingDays(a, b, opts = {}) {

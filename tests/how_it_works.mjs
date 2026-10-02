@@ -23733,8 +23733,40 @@ console.log("\n── §297 · a gate leads to the hub through the network, and 
     lab297.shown.has("here") && lab297.shown.has("far") && !lab297.shown.has("town") && !lab297.shown.has("site") && lab297.hiddenBy.here === 2,
     JSON.stringify({ shown: [...lab297.shown], hiddenBy: lab297.hiddenBy }));
   const paint297 = A297.slice(A297.indexOf("function paintRegionMap("), A297.indexOf("function renderMapWorld("));
+  // ⚠️ `placeLabels(marks416.map` WAS THE CALL'S TEXT, not its claim — so giving the placement a second pass
+  // reddened a check about whether the ground map names its places at all.
   check("§297: …and the region's ground map names its places through it, and draws no promoted stub its own schematic already drops",
-    paint297.length > 0 && /placeLabels\(marks416\.map/.test(paint297) && /l\.supersededBy \|\| aliased416\[id\]/.test(paint297));
+    paint297.length > 0 && /placeLabels\(/.test(paint297) && /l\.supersededBy \|\| aliased416\[id\]/.test(paint297));
+  // ⛔ ERIK'S MAP, 2026-10-01 — AND THE BOX IS MEASURED FROM THE STRING THAT IS DRAWN.
+  // ⚠️ It measured `m.name` and drew `m.name + " +N"` — the badge the placement itself produces was not in the box
+  // the placement reserved. Measured in the browser at the real font: " +2" is 15.2px, so 7.6px hangs past each end
+  // of an approved box. ⛑ MEASURED HONESTLY, IT COSTS NOTHING TODAY: driven over all 38 regions
+  // (`po/tools/measure_map_labels.mjs`), the shipped one-pass placement produces ZERO overlapping drawn pairs,
+  // because enough labels are hidden that the survivors stand well apart. This closes the class, not a visible
+  // defect — and it will start to matter as Aevi authors places into a crowded region.
+  check("§297: ⛔ …and a label's box is measured from the string it DRAWS, badge and all — not from the bare name",
+    /const text416 = \(m, by\) => m\.name \+ \(by\[m\.id\] \? ` \+\$\{by\[m\.id\]\}` : ""\);/.test(paint297)
+    && /ctx\.measureText\(text416\(m, by\)\)\.width/.test(paint297)
+    && /const pass2 = placeLabels\(boxes416\(kept1, pass1\.hiddenBy\)\);/.test(paint297)
+    && !/w: ctx\.measureText\(m\.name\)\.width/.test(paint297));
+  // ⛑ AND NO PLACE FALLS OFF THE MAP UNCOUNTED. A survivor dropped by the second pass was standing for others;
+  // its tally goes to whoever displaced it, through the pairing `placeLabels` now returns rather than a guess at it.
+  check("§297: ⚠️ …and a label dropped by the second pass hands its tally on, so every place is drawn or counted",
+    (() => {
+      // four names on one point, as the valley really has: a stack must end up one label and a tally of the rest
+      const marks = [
+        { id: "a", x: 100, y: 100, w: 80, h: 10, rank: 0 },
+        { id: "b", x: 101, y: 100, w: 80, h: 10, rank: 2 },
+        { id: "c", x: 102, y: 100, w: 80, h: 10, rank: 2 },
+        { id: "d", x: 103, y: 100, w: 80, h: 10, rank: 2 },
+      ];
+      const r = WM297.placeLabels(marks);
+      const tallied = Object.values(r.hiddenBy).reduce((a, n) => a + n, 0);
+      return r.shown.size + tallied === marks.length
+        // ✅ and the pairing is RETURNED, which is what lets a two-pass caller carry a tally instead of guessing
+        && r.hiddenInto && Object.keys(r.hiddenInto).length === 3
+        && Object.values(r.hiddenInto).every(v => r.shown.has(v));
+    })());
 }
 
 // ══════════ §298 · CCODE-417 — A TRAINED HAND CAN STILL FAIL BADLY ══════════

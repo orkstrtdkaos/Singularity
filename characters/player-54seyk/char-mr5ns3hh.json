@@ -6,7 +6,7 @@
   "origin": "harmonic",
   "background": "medic",
   "level": 2,
-  "xp": 154,
+  "xp": 184,
   "attributes": {
     "physical": 2,
     "mental": 5,
@@ -229,6 +229,19 @@
       "spread": [],
       "day": 2,
       "worldDay": 82
+    },
+    {
+      "at": "2026-10-03T21:15:02.202Z",
+      "locationId": "millbrook",
+      "communityId": "valley.millbrook",
+      "description": "The Patient Who Is Not Sick Enough — Treated, and Kept",
+      "tags": [
+        "quest",
+        "resolution",
+        "treated_and_kept"
+      ],
+      "weight": 2,
+      "spread": []
     }
   ],
   "relationships": {},
@@ -237,7 +250,20 @@
     "Adelheid learned that Silas Weir's instrument was built for listening, not transmission — and that he was at the sluice-turn three weeks before the contamination deepened, likely hearing the Precursor system's signal. The scene closed with the arrival of Sister Vreni, a wayhouse sister seeking the healer who closed a traveler's wound, bearing a warm invitation.",
     "Adelheid exchanged a last word with Mara — be her road-eyes — and walked out into the moonlit night with Sister Vreni, taking the stone-cut sluice-road up from the terrace gardens.",
     "Adelheid descended the terrace by the field-edge path, slipping past the ridge watcher's sightline and reaching the wayhouse unseen — fever-root harvest in hand, compress still warm inside.",
-    "Adelheid briefed Sister Vreni on the full fever-root course at the wayhouse trestle at dawn — first dose now, second at midday, third in the evening cooler; worse-before-better expected tonight; darkening wound tracking is the sign to send for Millbrook. Vreni absorbed it precisely and repeated it back in her own order. The patient is stable. The scene ended in the quiet of the wayhouse at early dawn, the treatment handed off, and the patient's unnamed status quietly acknowledged by them both."
+    "Adelheid briefed Sister Vreni on the full fever-root course at the wayhouse trestle at dawn — first dose now, second at midday, third in the evening cooler; worse-before-better expected tonight; darkening wound tracking is the sign to send for Millbrook. Vreni absorbed it precisely and repeated it back in her own order. The patient is stable. The scene ended in the quiet of the wayhouse at early dawn, the treatment handed off, and the patient's unnamed status quietly acknowledged by them both.",
+    {
+      "kind": "quest_resolved",
+      "questId": "the-patient-who-is-not-sick-enough",
+      "title": "The Patient Who Is Not Sick Enough",
+      "outcome": "Treated, and Kept",
+      "summary": "He lives, and the house keeps his secret — and decides, having discussed it, that this is what it is for.",
+      "narration": [
+        "Danic mends over about nine days and is walking the court properly by the end of them. Sister Vreni asks you to stay on: the high terraces need someone who will actually climb them, and the house needs somebody who can look at a person.",
+        "The kinder of the two parties is told where he is. The other is told nothing, courteously, twice."
+      ],
+      "worldDay": 95,
+      "at": "2026-10-03T21:15:02.198Z"
+    }
   ],
   "currentLocationId": "millbrook",
   "activeScene": {
@@ -606,7 +632,7 @@
       "id": "the-patient-who-is-not-sick-enough",
       "title": "The Patient Who Is Not Sick Enough",
       "structured": true,
-      "status": "active",
+      "status": "resolved",
       "premise": "A man came down off the Mountain Pass road eleven days ago with a wound in his thigh that had been cleaned properly by somebody who knew how. It closed. He eats, he walks the court, he thanks people. Sister Vreni cannot say what is wrong and will not say he is well, and she has stopped being able to sleep about it. She is asking you because she has read your hands and because the house has nobody else who was trained to look at a person rather than at a wound.",
       "stakes": "He has perhaps four days of looking fine left. What treats him grows on the high terraces the house has not harvested in two seasons, beside something that looks very like it and will finish him faster than the thing in his blood. And he is not called what he says he is, which is the second reason two parties have come to the gate asking after him politely.",
       "axis": "death_life",
@@ -799,7 +825,11 @@
       "startedAt": "2026-09-20T03:05:17.338Z",
       "startedWorldDay": 82,
       "stageStartedAt": 85,
-      "awaitingResolution": true
+      "awaitingResolution": true,
+      "outcomeId": "treated_and_kept",
+      "outcomeName": "Treated, and Kept",
+      "resolvedAt": "2026-10-03T21:15:02.198Z",
+      "resolvedWorldDay": 95
     }
   ],
   "npcRegistry": {
@@ -1016,7 +1046,17 @@
       "domains": {
         "primary": "mason"
       },
-      "domainsSource": "derived"
+      "domainsSource": "derived",
+      "creditedQuests": [
+        "the-patient-who-is-not-sick-enough"
+      ],
+      "completions": 1
+    },
+    "sister_vreni": {
+      "id": "sister_vreni",
+      "name": "sister_vreni",
+      "questState": "allied",
+      "questNote": null
     }
   },
   "placeMemory": {
@@ -1158,6 +1198,13 @@
         "name": "Mara's Garden",
         "day": 2
       }
+    },
+    "the_kindly_rest": {
+      "visits": 1,
+      "notes": [
+        "[d3] the high terraces are being worked again, and the house has a second pair of trained hands"
+      ],
+      "flags": {}
     }
   },
   "worldState": {
@@ -8927,6 +8974,12 @@
       "text": "Silas Weir has identified himself by name to Adelheid at the wayhouse — spoken voluntarily, in the quiet of dawn, after three days of false names.",
       "day": 3,
       "subjectId": "silas-weir"
+    },
+    {
+      "id": "f10",
+      "text": "A healer new to the valley opened a closed wound at the Kindly Rest, named the infection under it, and brought fever-root down off the high terraces to treat it. The man lived.",
+      "day": 3,
+      "subjectId": null
     }
   ],
   "precursorAccess": [],
@@ -9084,10 +9137,11 @@
   "peopleDisposition": {
     "mason": 5,
     "threnodist": 2,
-    "numinous": 1,
+    "numinous": 3,
     "figurist": -1,
     "stillhold": 0.5,
-    "verist": 0.3
+    "verist": 0.3,
+    "rootkin": 2
   },
   "standingLedger": [
     {
@@ -9116,6 +9170,20 @@
         }
       ],
       "text": "Your birth and training are known: mason +4, threnodist +2, numinous +1, figurist -1."
+    },
+    {
+      "at": 3,
+      "kind": "act",
+      "people": "rootkin",
+      "delta": 2,
+      "text": "you brought the right leaf down off a terrace nobody had worked in two seasons"
+    },
+    {
+      "at": 3,
+      "kind": "act",
+      "people": "numinous",
+      "delta": 2,
+      "text": "you sat with a frightened man through the worst of it and did not ask him anything"
     }
   ],
   "_standingHistoryCredit": {
@@ -9143,8 +9211,8 @@
   "bands": [],
   "_silasGrantsRevoked": true,
   "reconcileVersion": 94,
-  "updatedAt": 1791061974086,
-  "rev": 120,
+  "updatedAt": 1791062102211,
+  "rev": 121,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -9900,5 +9968,7 @@
   },
   "_stageOpRefusals": [
     "the-patient-who-is-not-sick-enough: already-done"
-  ]
+  ],
+  "worldEvents": [],
+  "locationState": {}
 }

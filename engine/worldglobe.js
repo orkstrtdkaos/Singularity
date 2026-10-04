@@ -850,31 +850,102 @@ export function roadNetwork(locations, { k = 1.08 } = {}) {
  *  ⚠️ AND IT RETURNS THE REASON WITH THE PATH. A bend with no cited cause is decoration (Aevi's §4), so
  *  the result carries how much climb the detour saved. If it saves nothing, the straight line is
  *  returned and says so — the honest answer on flat ground is a straight road. */
-export function bendRoad(t, a, b, { samples = 9, offsets = 7, maxOffsetFrac = 0.28 } = {}) {
+/** ⛔ ONE GROUND-COST RULE — how hard it is to cross a step of ground. (AEVI B1, 2026-10-04: "Three callers, one
+ *  rule.") Before this there was no cost surface at all: `bendRoad` summed raw climb with no water term and no
+ *  normalisation, which is a different question from "how hard is this to cross".
+ *
+ *  ⛑ THE RULE: `distance × (1 + climb·slope² + water·isWater)`, with slope measured against **this region's own
+ *  90th percentile**, so "steep" means steep FOR HERE — a 200m rise is nothing in the Palelands and a wall in the
+ *  valley. Divided by the TYPICAL step so the terrain BENDS a route without inflating its total.
+ *
+ *  ⚠️ TWO SETTINGS OF ONE RULE, NOT TWO RULES. Roads care hard about climb and avoid water almost absolutely
+ *  (climb 7, water 30 — slope SQUARED, so a gentle grade is nearly free and a cliff is impassable); territory
+ *  spreads more softly (climb 1.4, water 2.5). Her numbers, from the prototype, named here so both callers read the
+ *  same ones.
+ *
+ *  ⚠️ ELEVATION THROUGH `elevSmooth`, which is the ONE reader — bilinear and wrap-aware. Her round-1 appendix read
+ *  the raw raster instead, and I flagged it: a road bending around a ridge the border runs straight over, on the
+ *  same ground, is two readers disagreeing about the shape of the world.
+ *
+ *  Returns `{ at(lat, lon), step(aLat, aLon, bLat, bLon), slopeRef, typical }`. Pure but for the terrain handed in. */
+export const GROUND_COST = {
+  road: { climb: 7, water: 30 },        // a road hunts for the pass and does not ford
+  territory: { climb: 1.4, water: 2.5 }, // a realm spreads over rough ground, more slowly
+};
+export function makeGroundCost(t, { climb = 7, water = 30, extent = null, samples = 48 } = {}) {
+  const RAD = Math.PI / 180;
+  const elevAt = (lat, lon) => elevSmooth(t, lon, lat);
+  const wetAt = (lat, lon) => { const s = sampleAt(t, lon, lat); return s ? (s.type & 3) === 0 : false; };
+  // ⛑ THE REGION'S OWN 90th PERCENTILE. Sampled over the extent when one is given, else over the whole world — a
+  // global reference would call the valley flat and the Palelands sheer, which is the opposite of what is wanted.
+  const la0 = extent ? Math.min(extent.la0, extent.la1) : -80, la1 = extent ? Math.max(extent.la0, extent.la1) : 80;
+  const lo0 = extent ? extent.lo0 : -180, lo1 = extent ? extent.lo1 : 180;
+  const diffs = [];
+  for (let i = 0; i < samples; i++) {
+    for (let j = 0; j < samples; j++) {
+      const lat = la0 + (la1 - la0) * ((i + 0.5) / samples);
+      const lon = lo0 + (lo1 - lo0) * ((j + 0.5) / samples);
+      if (wetAt(lat, lon)) continue;                       // ⚠️ the sea is flat and would drag the reference down
+      const dLat = (la1 - la0) / samples, dLon = (lo1 - lo0) / samples;
+      diffs.push(Math.abs(elevAt(lat + dLat, lon) - elevAt(lat, lon)));
+      diffs.push(Math.abs(elevAt(lat, lon + dLon) - elevAt(lat, lon)));
+    }
+  }
+  diffs.sort((a, b) => a - b);
+  const slopeRef = Math.max(1e-6, diffs[Math.floor(diffs.length * 0.9)] || 1e-6);
+  // ⚠️ NORMALISED BY THE TYPICAL STEP, so terrain bends a route rather than making every route longer. Without
+  // this a rough region's realms would simply be smaller, which is a claim about the world nobody made.
+  const mults = diffs.map((d) => 1 + climb * Math.min(1.5, d / slopeRef) ** 2).sort((a, b) => a - b);
+  const typical = mults[Math.floor(mults.length / 2)] || 1;
+  /** the multiplier at a point: 1 on easy dry ground, higher on a slope, much higher in water */
+  const at = (lat, lon, slope = 0) =>
+    (1 + climb * Math.min(1.5, slope / slopeRef) ** 2 + water * (wetAt(lat, lon) ? 1 : 0)) / typical;
+  /** the cost of ONE step a→b: ground distance × the multiplier of the ground it lands on */
+  const step = (aLat, aLon, bLat, bLon) => {
+    const cl = Math.cos(((aLat + bLat) / 2) * RAD);
+    const d = Math.hypot(bLat - aLat, (bLon - aLon) * cl);
+    return d * at(bLat, bLon, Math.abs(elevAt(bLat, bLon) - elevAt(aLat, aLon)));
+  };
+  return { at, step, slopeRef, typical, elevAt, wetAt };
+}
+
+export function bendRoad(t, a, b, { samples = 9, offsets = 7, maxOffsetFrac = 0.28, cost = null } = {}) {
   const R2 = Math.PI / 180;
   const elevAt = (lat, lon) => elevSmooth(t, lon, lat);
+  // ⛔ THE SHORT WAY ROUND. `b[1] - a[1]` raw sends a road whose ends straddle the 0°/360° seam ALL THE WAY AROUND
+  // THE WORLD: the Lampless Market and the Slow Stair are 3° apart and it drew 357°. Measured 2026-10-04 while
+  // checking what B1 changed — 35 of 224 real segments, 15.6%, every one of them since bendRoad shipped. A 112°
+  // "midpoint shift" on a bend capped at 0.28 of the separation is arithmetically impossible, and that is what made
+  // me look rather than file the number.
+  // ⚠️ WRAPPED ONCE, HERE, so no path below can take the long way: every use of the difference reads `dLonTotal`.
+  const dLonTotal = ((b[1] - a[1] + 540) % 360) - 180;
   const along = (f, offDeg) => {
     // a point at fraction f along a→b, pushed sideways by offDeg (perpendicular, in ground degrees)
-    const lat = a[0] + (b[0] - a[0]) * f, lon = a[1] + (b[1] - a[1]) * f;
-    const dLat = b[0] - a[0], dLon = (b[1] - a[1]) * Math.cos(lat * R2);
+    const lat = a[0] + (b[0] - a[0]) * f, lon = a[1] + dLonTotal * f;
+    const dLat = b[0] - a[0], dLon = dLonTotal * Math.cos(lat * R2);
     const m = Math.hypot(dLat, dLon) || 1;
     const pLat = -dLon / m, pLon = dLat / m;                   // unit perpendicular, ground-corrected
     return [lat + pLat * offDeg, lon + (pLon * offDeg) / Math.max(0.12, Math.cos(lat * R2))];
   };
+  // ✅ AEVI B1 — PRICED BY THE ONE RULE. ⚠️ This used to sum raw |Δelevation| and knew nothing about water, so a
+  // road would happily bend across a bay to save a hill. `groundCost` prices slope SQUARED against the region's own
+  // 90th percentile and charges for water, which is the same question the territory spread and the road router ask.
+  // ⛑ The cost surface is handed in when the caller has one (it is expensive to build and worth reusing); without
+  // one, bendRoad builds its own over the whole world, which is what every existing caller gets.
+  const G = cost || makeGroundCost(t, GROUND_COST.road);
   const climbOf = (offDeg) => {
-    let climb = 0, prev = null;
+    let sum = 0, prev = null;
     for (let i = 0; i <= samples; i++) {
       const f = i / samples;
       // the deviation eases in and out — a road leaves and rejoins its endpoints, it does not start bent
       const w = Math.sin(Math.PI * f);
       const p = along(f, offDeg * w);
-      const e = elevAt(p[0], p[1]);
-      if (prev !== null) climb += Math.abs(e - prev);
-      prev = e;
+      if (prev !== null) sum += G.step(prev[0], prev[1], p[0], p[1]);
+      prev = p;
     }
-    return climb;
+    return sum;
   };
-  const sep = Math.hypot(b[0] - a[0], (b[1] - a[1]) * Math.cos(((a[0] + b[0]) / 2) * R2));
+  const sep = Math.hypot(b[0] - a[0], dLonTotal * Math.cos(((a[0] + b[0]) / 2) * R2));
   const maxOff = sep * maxOffsetFrac;
   let best = { off: 0, climb: climbOf(0) };
   const straight = best.climb;
@@ -896,8 +967,8 @@ export function bendRoad(t, a, b, { samples = 9, offsets = 7, maxOffsetFrac = 0.
     bent: Math.abs(best.off) > 1e-9,
     // ⚠️ the reason, in the units the decision was made in — a bend that saved nothing is not a bend
     why: Math.abs(best.off) > 1e-9
-      ? `bends ${best.off > 0 ? "left" : "right"} to save ${Math.round(saved)} of ${Math.round(straight)} elevation units of climb`
-      : "runs straight — no detour on this ground saves any climb",
+      ? `bends ${best.off > 0 ? "left" : "right"} to save ${saved.toFixed(2)} of ${straight.toFixed(2)} in ground cost`
+      : "runs straight — no detour on this ground costs less",
     climbSaved: saved, straightClimb: straight,
   };
 }

@@ -16,6 +16,24 @@
   "next": [],
   "releases": [
     {
+      "version": "2.16.20",
+      "date": "2026-10-04",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "Some roads were drawn the long way round the world",
+          "summary": "Two places three degrees apart had their road drawn across the whole planet.",
+          "detail": "Where a road's two ends sat either side of the world's seam, the map drew it the long way round — 357 degrees instead of 3. It affected 35 of the 224 roads in the world, and had since roads were first bent to the ground. They take the short way now."
+        },
+        {
+          "kind": "change",
+          "title": "Roads bend around water, not just around hills",
+          "summary": "One rule now prices crossing the ground, and roads obey it.",
+          "detail": "A road looking for an easier line only counted climbing, so it would happily bend across a bay to avoid a slope. It now counts steepness and water together, judged against how rough that region actually is — so 28 roads run over less water than before and none over more. The same rule will decide how far a power's territory reaches."
+        }
+      ]
+    },
+    {
       "version": "2.16.19",
       "date": "2026-10-04",
       "entries": [

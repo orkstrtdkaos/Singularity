@@ -35816,6 +35816,96 @@ console.log("\n── §412 · the map's meaning is the rules' meaning ──");
     })());
 }
 
+/* ══════════ §413 · ONE GROUND-COST RULE, AND THE SEAM ══════════ */
+// ✅ AEVI B1, 2026-10-04: *"One `groundCost(a → b)` in the engine… `bendRoad` uses it too. Three callers, one rule."*
+// ⛑ I had reported there was no cost surface to reuse: `bendRoad` summed raw climb, with no water term anywhere in
+// it, between two fixed points. So this IS the rule, and bendRoad is its first caller rather than its second
+// definition — which is the difference between one rule and two that drift.
+console.log("\n── §413 · one ground-cost rule, and the seam ──");
+{
+  const WG413 = await import("../engine/worldglobe.js");
+  const terr413 = WG413.decodeTerrain(JSON.parse(rd("content/packs/core/world/terrain.json")));
+
+  /* ---- 1 · ⛔ TWO SETTINGS OF ONE RULE ---- */
+  check("§413: ⛔ THE RULE HAS ONE DEFINITION AND TWO SETTINGS — roads and territory read the same function",
+    typeof WG413.makeGroundCost === "function"
+    && WG413.GROUND_COST?.road?.climb === 7 && WG413.GROUND_COST?.road?.water === 30
+    && WG413.GROUND_COST?.territory?.climb === 1.4 && WG413.GROUND_COST?.territory?.water === 2.5);
+  // ⚠️ AND THE SETTINGS REALLY DIFFER IN THE DIRECTION THEY CLAIM: a road hunts the pass and will not ford; a realm
+  // spreads over rough ground, more slowly. If these ever converged, "two settings" would be a story about one.
+  check("§413: ⚠️ …and a road avoids water far harder than a realm does, which is what the two settings mean",
+    (() => {
+      const R = WG413.makeGroundCost(terr413, WG413.GROUND_COST.road);
+      const T = WG413.makeGroundCost(terr413, WG413.GROUND_COST.territory);
+      // find real water and real dry land rather than assuming a coordinate is either
+      let wetPt = null, dryPt = null;
+      for (let la = -70; la <= 70 && (!wetPt || !dryPt); la += 7) {
+        for (let lo = -180; lo < 180 && (!wetPt || !dryPt); lo += 11) {
+          if (R.wetAt(la, lo)) { if (!wetPt) wetPt = [la, lo]; } else if (!dryPt) dryPt = [la, lo];
+        }
+      }
+      if (!wetPt || !dryPt) return false;
+      const rRatio = R.at(wetPt[0], wetPt[1]) / R.at(dryPt[0], dryPt[1], 0);
+      const tRatio = T.at(wetPt[0], wetPt[1]) / T.at(dryPt[0], dryPt[1], 0);
+      return rRatio > tRatio * 2 && rRatio > 5;
+    })());
+  // ⛑ SLOPE IS MEASURED AGAINST THIS GROUND, not an absolute: "steep" has to mean steep FOR HERE, or a rough region
+  // simply grows smaller realms, which is a claim about the world nobody made.
+  check("§413: ⛑ …and slope is judged against the region's OWN 90th percentile, so steep means steep for here",
+    (() => {
+      const whole = WG413.makeGroundCost(terr413, WG413.GROUND_COST.road);
+      const small = WG413.makeGroundCost(terr413, { ...WG413.GROUND_COST.road, extent: { la0: -75, la1: -62, lo0: 233, lo1: 271 } });
+      return whole.slopeRef > 0 && small.slopeRef > 0 && whole.slopeRef !== small.slopeRef
+        // ⚠️ and the normalisation keeps typical ground near 1, so terrain BENDS a route without inflating it
+        && whole.typical > 0.5 && whole.typical < 4 && small.typical > 0.5 && small.typical < 4;
+    })());
+
+  /* ---- 2 · ⛔ bendRoad IS A CALLER, NOT A SECOND DEFINITION ---- */
+  check("§413: ⛔ `bendRoad` PRICES ITS CANDIDATES WITH THE RULE — it used to sum raw climb and know nothing of water",
+    (() => {
+      const src = rd("engine/worldglobe.js").split(NEWLINE_RE).filter(l => !/^\s*(\/\/|\*|\/\*)/.test(l)).join("\n");
+      const body = src.slice(src.indexOf("export function bendRoad("), src.indexOf("export function makeGroundCost(") > src.indexOf("export function bendRoad(")
+        ? src.indexOf("export function makeGroundCost(") : src.length);
+      const b = body || src.slice(src.indexOf("export function bendRoad("));
+      return /const G = cost \|\| makeGroundCost\(t, GROUND_COST\.road\);/.test(b)
+        && /sum \+= G\.step\(/.test(b)
+        && !/climb \+= Math\.abs\(e - prev\);/.test(b);      // the old raw-climb sum is gone
+    })());
+
+  /* ---- 3 · ⛔ THE SEAM ---- */
+  // ⛔ FOUND BY MEASURING B1, NOT CAUSED BY IT. `bendRoad` took `b.lon - a.lon` RAW, so a road whose ends straddle
+  // the 0°/360° seam was drawn ALL THE WAY ROUND THE WORLD — the Lampless Market and the Slow Stair are 3° apart
+  // and it drew 357°. 35 of 224 real segments, 15.6%, every one of them since bendRoad shipped.
+  // ⚠️ The old code had the same subtraction, so this is not a B1 regression; what surfaced it was a 112° midpoint
+  // shift on a bend capped at 0.28 of the separation — arithmetically impossible, and so worth looking at rather
+  // than filing. The two-longitude-conventions trap, in a third place.
+  check("§413: ⛔ A ROAD TAKES THE SHORT WAY ROUND — ends either side of the seam are near, not a world apart",
+    (() => {
+      // ⛑ two points 4° apart across the seam, in the unwrapped convention the world uses
+      const a = [10, 358], b = [10, 2];
+      const r = WG413.bendRoad(terr413, a, b);
+      const lons = r.points.map(p => ((p[1] % 360) + 360) % 360);
+      // every point sits in the short arc 358→360→0→2, never out across the far side of the world
+      return r.points.length > 2 && lons.every(l => l >= 357 || l <= 3);
+    })());
+  check("§413: ⚠️ …and the wrap is done ONCE, so no path inside can take the long way",
+    (() => {
+      const src = rd("engine/worldglobe.js").split(NEWLINE_RE).filter(l => !/^\s*(\/\/|\*|\/\*)/.test(l)).join("\n");
+      const i = src.indexOf("export function bendRoad(");
+      const body = src.slice(i, i + 2600);
+      return /const dLonTotal = \(\(b\[1\] - a\[1\] \+ 540\) % 360\) - 180;/.test(body)
+        // ⛔ and no raw difference survives anywhere in the function
+        && !/\(b\[1\] - a\[1\]\)/.test(body);
+    })());
+  // ⛑ AND A ROAD THAT WAS ALREADY SHORT IS UNTOUCHED — the fix may not move the 189 segments that were right.
+  check("§413: ⛑ …and a road that never crossed the seam is drawn exactly where it was",
+    (() => {
+      const a = [12, 40], b = [15, 46];
+      const r = WG413.bendRoad(terr413, a, b);
+      return r.points.every(p => p[1] >= 39 && p[1] <= 47);
+    })());
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

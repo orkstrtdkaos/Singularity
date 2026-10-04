@@ -103,7 +103,13 @@ const runOne = ([name, cmd, args]) => new Promise((resolve) => {
     const all = [...out.matchAll(/(\d+)\s+FAILURE\(S\)/gi)];
     const lineCount = (out.match(/^FAIL/gm) || []).length;
     const fails = all.length ? Number(all[all.length - 1][1]) : (ok ? 0 : lineCount || null);
-    resolve({ name, ok, fails, lineCount, ms: Date.now() - t0, out });
+    // ⛔ A CRASH IS NOT A FAILED CHECK, and it used to read like one. A suite that THREW stops dead, so `fails`
+    // falls back to counting the FAIL lines it managed to print first — on 2026-10-04 that reported "1 failure(s)"
+    // for a suite whose section had died nine checks early, and nothing in the run said the rest were never asked.
+    // ⚠️ THE MARKER IS NODE'S OWN STACK FRAME, not a missing report line: several suites legitimately never print
+    // a total, so their absence proves nothing, while `    at …:12:34` only appears when something threw uncaught.
+    const crashed = !ok && /^\s+at .+:\d+:\d+\)?\s*$/m.test(out);
+    resolve({ name, ok, fails, lineCount, crashed, ms: Date.now() - t0, out });
   };
   let p;
   try { p = spawn(cmd, args, { shell: false, windowsHide: true }); } catch (err) { return finish(1, err); }
@@ -119,7 +125,11 @@ if (!serial) {
   let cursor = 0;
   await Promise.all(Array.from({ length: jobs }, async () => { while (cursor < run.length) { const i = cursor++; pooled[i] = await runOne(run[i]); } }));
   results.push(...pooled);
-  for (const { name, ok, fails, lineCount, ms } of results) {
+  for (const { name, ok, fails, lineCount, crashed, ms } of results) {
+    // ⛔ SAID FIRST AND SAID PLAINLY: everything after the throw was never asked, so the count beside it is a floor
+    // and not a total.
+    if (crashed && !quiet)
+      process.stdout.write(`      ⛔ ${name}: THREW — it stopped where it threw, so every check after that point was never asked. The count below is a floor, not a total.\n`);
     if (fails != null && lineCount && fails !== lineCount && !quiet)
       process.stdout.write(`      ⚠ ${name}: reported total ${fails} ≠ ${lineCount} FAIL lines — read the suite directly\n`);
     if (!quiet) process.stdout.write(`${ok ? "ok  " : "FAIL"}  ${name}${fails ? ` — ${fails} failure(s)` : ""}${process.env.RUN_TESTS_TIMES ? ` (${(ms / 1000).toFixed(1)}s)` : ""}\n`);

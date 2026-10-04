@@ -35499,8 +35499,17 @@ console.log("\n── §411 · the ground map answers the pointer ──");
       return FJ.makeField(FJ.fieldDataFrom(terr411.fields, model411, { content: C411, substrate: C411?.rules?.the_substrate || null }));
     } catch { return null; }
   })();
-  const paint411 = A411.slice(A411.indexOf("function paintRegionMap("), A411.indexOf("function wireRegionGroundMap("));
-  const wire411 = A411.slice(A411.indexOf("function wireRegionGroundMap("), A411.indexOf("/** WORLD tier"));
+  /** ⛔ SLICE BETWEEN CODE MARKERS, AND REFUSE A MISSING ONE. My first cut sliced on a COMMENT SENTENCE; rewriting
+   *  that comment made `indexOf` return −1, `slice(start, −1)` ran to the end of app.js, and the evaluated body
+   *  picked up a browser `fetch` and threw — this section died after four checks and the rest never ran.
+   *  ⚠️ A −1 now fails the check it is in, loudly. A silently widened slice is how a gate stops asking. */
+  const cut411 = (from, to) => {
+    const a = A411.indexOf(from), b = A411.indexOf(to);
+    if (a < 0 || b < 0 || b <= a) return "";
+    return A411.slice(a, b);
+  };
+  const paint411 = cut411("function paintRegionMap(", "function wireRegionGroundMap(");
+  const wire411 = cut411("function wireRegionGroundMap(", "/** WORLD tier");
 
   /* ---- 1 · ⛔ THE MARKS ARE KEPT, NOT RECOMPUTED ---- */
   // ⛑ The pointer must hit-test the SAME arithmetic the painter drew. A second projection for the pointer is two
@@ -35524,14 +35533,17 @@ console.log("\n── §411 · the ground map answers the pointer ──");
   /* ---- 2 · ⛔ THE CLUSTERING RULE, DRIVEN ---- */
   check("§411: ⛔ A STACK IS WHAT A CLICK CANNOT SEPARATE — single-link, so a chain is one fan and not three",
     (() => {
-      const F = new Function("marks", "radius", `${A411.slice(A411.indexOf("function clusterMarks("), A411.indexOf("/** \u26d4 WHERE A FANNED MEMBER SITS"))}
+      const body = cut411("const TIER_RANK =", "function clusterLayout(");
+      if (!body) return false;
+      const F = new Function("CONTENT", "REGION_HIT", "marks", "radius", `${body}
         return clusterMarks(marks, radius);`);
       const far = [{ id: "a", name: "A", x: 10, y: 10 }, { id: "b", name: "B", x: 400, y: 300 }];
       const stack = [{ id: "a", name: "A", x: 100, y: 100 }, { id: "b", name: "B", x: 101, y: 100 }, { id: "c", name: "C", x: 102, y: 101 }];
       // ⚠️ A CHAIN: a–b and b–c are each inside the radius, a–c is not. Single-link makes it ONE stack; a naive
       // pairwise grouping would make overlapping fans that fight for the same clicks.
       const chain = [{ id: "a", name: "A", x: 100, y: 100 }, { id: "b", name: "B", x: 112, y: 100 }, { id: "c", name: "C", x: 124, y: 100 }];
-      const c1 = F(far, 14), c2 = F(stack, 14), c3 = F(chain, 14);
+      const C = { locations: {} };
+      const c1 = F(C, 14, far, 14), c2 = F(C, 14, stack, 14), c3 = F(C, 14, chain, 14);
       return c1.length === 2 && c1.every(c => c.members.length === 1)
         && c2.length === 1 && c2[0].members.length === 3
         && c3.length === 1 && c3[0].members.length === 3
@@ -35541,11 +35553,13 @@ console.log("\n── §411 · the ground map answers the pointer ──");
   // ⛔ EVERY PLACE IS IN EXACTLY ONE STACK. A place in two fans, or in none, is a place you cannot reach.
   check("§411: ⛔ …and every place lands in exactly one stack — none shared, none dropped",
     (() => {
-      const F = new Function("marks", "radius", `${A411.slice(A411.indexOf("function clusterMarks("), A411.indexOf("/** \u26d4 WHERE A FANNED MEMBER SITS"))}
+      const body = cut411("const TIER_RANK =", "function clusterLayout(");
+      if (!body) return false;
+      const F = new Function("CONTENT", "REGION_HIT", "marks", "radius", `${body}
         return clusterMarks(marks, radius);`);
       const marks = [];
       for (let i = 0; i < 40; i++) marks.push({ id: "m" + i, name: "M" + i, x: (i * 37) % 700 + 20, y: (i * 53) % 380 + 20 });
-      const cl = F(marks, 14);
+      const cl = F({ locations: {} }, 14, marks, 14);
       const seen = cl.flatMap(c => c.members.map(m => m.id));
       return seen.length === marks.length && new Set(seen).size === marks.length;
     })());
@@ -35554,27 +35568,103 @@ console.log("\n── §411 · the ground map answers the pointer ──");
   // ⛑ OverlappingMarkerSpiderfier's own rule is a circle up to 8 and a spiral above. ⚠️ Every cluster in the world
   // today is 2 to 7, so the spiral has NO POPULATION and is deliberately not built — recorded here so the absence is
   // a decision rather than an oversight.
-  check("§411: ⛔ A FAN IS A RING, AND IT STAYS ON THE CANVAS — a member off the edge is a member nobody can click",
+  // ⛔ AEVI A3 RETIRED THE RING, and from the same measurement I patched around: *"a ring overlapped pills at seven
+  // members; columns cannot."* I had thrown the LABELS outward; columns remove the cause. A column has one pill per
+  // ROW, so names cannot collide however many a cluster holds.
+  check("§411: ⛔ AN OPEN CLUSTER IS TWO COLUMNS, NOT A RING — one pill a row, so names cannot collide at seven",
     (() => {
-      // ⚠️ SLICED TO A REAL MARKER. My first cut took a fixed 900 characters from the start of the function,
-      // which overran into the next statement and pulled a browser `fetch` into the evaluated body.
-      const F = new Function("n", "cx", "cy", "W", "H", `${A411.slice(A411.indexOf("function fanPositions("), A411.indexOf('fetch("content/packs/core/world/region_maps.json'))}
-        return fanPositions(n, cx, cy, W, H);`);
-      const mid = F(7, 400, 210, 800, 420);
-      if (mid.length !== 7) return false;
-      const spread = new Set(mid.map(p => `${Math.round(p.x)},${Math.round(p.y)}`));
-      if (spread.size !== 7) return false;                      // seven distinct places to click
-      // ⚠️ at the very corner, every member is still inside the frame
-      const corner = F(7, 2, 2, 800, 420);
-      return corner.every(p => p.x >= 0 && p.y >= 0 && p.x <= 800 && p.y <= 420);
+      const body = cut411("const PILL_H =", 'fetch("content/packs/core/world/region_maps.json');
+      if (!body.includes("function clusterLayout(")) return false;
+      const F = new Function("cluster", "W", "H", "widthOf", `${body}
+        return clusterLayout(cluster, W, H, widthOf);`);
+      const mk = (id, x, y) => ({ id, name: id, x, y });
+      const lead = mk("lead", 400, 210);
+      const cluster = { lead, rooms: [mk("r1", 400, 210), mk("r2", 400, 210)],
+        neighbours: [mk("w1", 360, 190), mk("w2", 370, 250), mk("e1", 440, 180), mk("e2", 430, 260)], members: [] };
+      const pills = F(cluster, 800, 420, (s2) => s2.length * 5);
+      if (pills.length !== 7) return false;
+      const west = pills.filter(p => p.kind === "neighbour" && p.from.x < lead.x);
+      const east = pills.filter(p => p.kind === "neighbour" && p.from.x >= lead.x);
+      // ⛑ WEST ON THE LEFT, EAST ON THE RIGHT — the side a pill stands on says something true about the ground
+      if (!west.length || !east.length) return false;
+      if (!west.every(p => p.x < lead.x) || !east.every(p => p.x > lead.x)) return false;
+      // ⛑ AND EACH COLUMN RUNS TRUE NORTH TO SOUTH, so the order on screen is the order on the ground
+      const byRow = (col) => col.slice().sort((a, b) => a.y - b.y);
+      const ns = (col) => byRow(col).every((p, i, arr) => i === 0 || arr[i - 1].from.y <= p.from.y);
+      if (!ns(west) || !ns(east)) return false;
+      // ⛔ NO TWO PILLS SHARE A ROW — which is the whole reason columns replaced the ring
+      if (new Set(west.map(p => Math.round(p.y))).size !== west.length) return false;
+      if (new Set(east.map(p => Math.round(p.y))).size !== east.length) return false;
+      // ⚠️ AND EVERY PILL IS ON THE CANVAS AT EVERY CORNER, not just comfortably mid-frame.
+      // ⛔ THIS CHECK PASSED WHILE TWO OF THE DISPUTED ZONE'S FOUR PLACES WERE UNREACHABLE, because it only ever
+      // built a cluster at (400, 210). That cluster sits near the top of the frame, its rooms stack UPWARD, and the
+      // third one landed at y ≈ −43. A gate that tests the easy position is a gate that agrees with you.
+      const corners = [[400, 210], [30, 24], [770, 24], [30, 396], [770, 396]];
+      for (const [cx, cy] of corners) {
+        const L2 = mk("lead", cx, cy);
+        const c2 = { lead: L2, rooms: [mk("ra", cx, cy), mk("rb", cx, cy), mk("rc", cx, cy)],
+          neighbours: [mk("na", cx - 20, cy - 10), mk("nb", cx + 20, cy + 10), mk("nc", cx - 15, cy + 12)], members: [] };
+        const ps = F(c2, 800, 420, (s2) => s2.length * 5);
+        if (ps.length !== 7) return false;
+        if (!ps.every(p => p.x >= 0 && p.y >= 0 && p.x <= 800 && p.y <= 420)) return false;
+        // ⛑ and the rooms are still a STACK, not three pills piled on one row by a clamp
+        const rs = ps.filter(p => p.kind === "room");
+        if (new Set(rs.map(p => Math.round(p.y))).size !== rs.length) return false;
+      }
+      return pills.every(p => p.x >= 0 && p.y >= 0 && p.x <= 800 && p.y <= 420);
+    })());
+  // ⛔ ROOMS AND NEIGHBOURS ARE DIFFERENT FACTS AND READ DIFFERENTLY (A3.3). A room of Millbrook IS at Millbrook —
+  // it hangs above the lead's pill because it belongs TO it; a neighbour stands out because it does not.
+  // ⚠️ SPLIT ON THE AUTHORED POSITION, never on screen pixels: two places can round to one pixel at this zoom and
+  // still be a mile apart, and calling those "insides" is a lie the player can check by walking.
+  check("§411: ⛔ …and a ROOM hangs above the lead while a NEIGHBOUR stands out — they are different facts",
+    (() => {
+      const body = cut411("const PILL_H =", 'fetch("content/packs/core/world/region_maps.json');
+      if (!body.includes("function clusterLayout(")) return false;
+      const F = new Function("cluster", "W", "H", "widthOf", `${body}
+        return clusterLayout(cluster, W, H, widthOf);`);
+      const mk = (id, x, y) => ({ id, name: id, x, y });
+      const lead = mk("lead", 400, 210);
+      const pills = F({ lead, rooms: [mk("r1", 400, 210)], neighbours: [mk("n1", 450, 215)], members: [] },
+        800, 420, (s2) => s2.length * 5);
+      const room = pills.find(p => p.kind === "room"), nb = pills.find(p => p.kind === "neighbour");
+      const ld = pills.find(p => p.kind === "lead");
+      return !!room && !!nb && !!ld && Math.abs(room.x - ld.x) < 1 && room.y < ld.y && nb.x > ld.x + 40
+        && /const rooms = group\.filter\(g => g !== lead && posOf\(g\) === leadPos\);/.test(rd("app.js"));
+    })());
+  // ⛑ AND THE SEAL SAYS WHICH KIND OF CROWD IT IS BEFORE IT OPENS — "a doubled ring when it is only rooms".
+  check("§411: ⛑ …and the closed seal carries the lead, the count and her two sentences",
+    (() => {
+      const A = rd("app.js");
+      return /const roomsOnly = c\.neighbours\.length === 0;/.test(A)
+        && /ctx\.arc\(c\.x, c\.y, 15\.5, 0, Math\.PI \* 2\)/.test(A)
+        && /ctx\.fillText\(c\.lead\.name, c\.x, c\.y \+ 22\);/.test(A)
+        && /\$\{c\.neighbours\.length\} nearby/.test(A) && /\$\{c\.rooms\.length\} within/.test(A);
     })());
   check("§411: ⛑ …and the open fan is dropped when its stack is no longer on screen",
     /if \(_regionFan && !_regionPick\.clusters\.some\(c => c\.key === _regionFan\.key\)\) _regionFan = null;/.test(paint411));
   // ⚠️ A CLICK ON EMPTY GROUND MUST NOT DESELECT. The selected place is what the Look inside and travel buttons
   // read; losing it on a stray click is the "it kicks me back out" complaint wearing new clothes.
-  check("§411: ⚠️ …and a click on empty ground closes the fan WITHOUT deselecting the place",
-    /if \(!hit\) \{[\s\S]{0,600}?if \(_regionFan\) \{ _regionFan = null; repaint\(\); \}[\s\S]{0,60}?return;/.test(wire411)
-    && !/if \(!hit\) \{[\s\S]{0,600}?renderMap\(null\)/.test(wire411));
+  check("§411: ⚠️ …and a click on empty ground closes it WITHOUT deselecting the place",
+    /if \(!hit\) \{[\s\S]{0,700}?_regionFan = null; hideChip\(\); repaint\(\);[\s\S]{0,80}?return;/.test(wire411)
+    && !/if \(!hit\) \{[\s\S]{0,700}?renderMap\(null\)/.test(wire411));
+  // ✅ AND ESC CLOSES IT (A3.2), through ONE listener: a window handler re-added on every render and never removed
+  // would stack, each copy holding a stale `_regionPick`.
+  check("§411: ✅ …and Esc closes it, through exactly one listener that each render replaces",
+    /if \(_regionEsc\) window\.removeEventListener\("keydown", _regionEsc\);/.test(wire411)
+    && /e\.key !== "Escape"/.test(wire411)
+    && /window\.addEventListener\("keydown", _regionEsc\);/.test(wire411));
+  // ⛔ THE HOVER CHIP CARRIES THE TWO VERBS (A3.4/A3.5) through the doors that already exist — Look inside is the
+  // location tier, Travel asks the journey planner first because a far arrival is a journey (CCODE-387).
+  check("§411: ⛔ …and the hover chip offers Look inside and Travel, through the doors that already exist",
+    /data-rmc-inside=/.test(wire411) && /data-rmc-travel=/.test(wire411)
+    && /mapTier = "location"; mapFocus = ib\.dataset\.rmcInside/.test(wire411)
+    && /if \(!planJourneyTo\(d\)\) travelTo\(d\)/.test(wire411)
+    && /walkingDays\(lead, l\)/.test(wire411) && /a short walk from/.test(wire411));
+  // ⚠️ AND AN OPEN CLUSTER OWNS THE POINTER. If the ground still answered under the dim, a click meant for a pill
+  // that missed would select whatever the dim is hiding.
+  check("§411: ⚠️ …and while it is open only its pills answer the pointer",
+    /if \(_regionFan\?\.pills\) \{[\s\S]{0,600}?return null;/.test(wire411));
 
   /* ---- 4 · ⛔ THE MODE THAT EXISTED AND COULD NOT BE REACHED ---- */
   // ⛔ ERIK: "I want the power sources to be more obvious." `texture()` has had the answer since it was written —

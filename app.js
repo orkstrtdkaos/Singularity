@@ -184,7 +184,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.16.17";
+const APP_VERSION = "2.16.19";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -3026,7 +3026,7 @@ function fieldPanel(ext) {
     <button class="opt field-mark${fieldCtl.mode === "max" ? " selected" : ""}" data-fieldmode="1"
       title="${esc(fieldCtl.mode === "max"
         ? "Strongest source wins each point — the colour says WHICH source is here. Click for the blend."
-        : "The registers are blended — the colour says HOW MUCH field is here. Click to let the strongest source take each point.")}">${fieldCtl.mode === "max" ? "✓ strongest" : "blended"}</button>
+        : "The registers are blended — the colour says HOW MUCH field is here. Click to let the strongest source take each point.")}">${fieldCtl.mode === "max" ? "✓ Strongest" : "Mix"}</button>
     ${[...FIELD_KINDS].map(kindBtn).join("")}
     <span class="hint" style="margin:0 4px">│</span>
     ${mark("wells", "◆ wells", "The authored crystal wells — places the lattice pools")}
@@ -12371,9 +12371,12 @@ let _regionFan = null;       // { key, cx, cy, members:[{id,name,x,y}] }
 /** ⛑ THE CLICK RADIUS THE GLOBE HAS USED ALL ALONG (`nearest` in `wireWorldGlobe`), so one map does not feel
  *  tighter than the other — and the radius that the 41% was measured at. */
 const REGION_HIT = 14;
+/** ⛑ THE ONE Esc LISTENER. Kept so each re-render REPLACES it rather than stacking another on the window. */
+let _regionEsc = null;
 /** ⛔ A STACK IS WHATEVER A SINGLE CLICK CANNOT SEPARATE, which is a question about the SCREEN, not about whether
  *  two places share a coordinate. 21 of 157 places share an exact point; 39 of 95 are inside another's click radius.
  *  ⚠️ Single-link, so a chain of near-neighbours is one fan rather than several overlapping ones. */
+const TIER_RANK = { region: 3, settlement: 2, site: 1 };
 function clusterMarks(marks, radius = REGION_HIT) {
   const seen = new Set(), out = [];
   for (const m of marks) {
@@ -12385,29 +12388,82 @@ function clusterMarks(marks, radius = REGION_HIT) {
         if (Math.hypot(o.x - group[i].x, o.y - group[i].y) < radius) { group.push(o); seen.add(o.id); }
       }
     }
-    // ⛑ THE MARK SITS WHERE THE PLACES ARE, not at a tidy centroid of a chain: the mean of the group.
-    const cx = group.reduce((a, g) => a + g.x, 0) / group.length;
-    const cy = group.reduce((a, g) => a + g.y, 0) / group.length;
-    out.push({ x: cx, y: cy, members: group, key: group.map(g => g.id).sort().join("|") });
+    // ⛔ AEVI A3: "lead = the highest tier, then the most connections." A tie after both is settled by id so the
+    // same cluster always names the same lead — a seal whose name changed between repaints would be its own bug.
+    const score = (g) => {
+      const l = CONTENT.locations[g.id] || {};
+      return [TIER_RANK[String(l.tier || "")] || 0, (l.connections || []).length];
+    };
+    const lead = group.slice().sort((a, b) => {
+      const sa = score(a), sb = score(b);
+      return (sb[0] - sa[0]) || (sb[1] - sa[1]) || String(a.id).localeCompare(String(b.id));
+    })[0];
+    // ⛔ ROOMS ARE THE EXACT SAME POINT, which is a different fact from "near". A room of Millbrook IS at Millbrook
+    // — 21 of 157 places are a grown sub-place sitting on its parent's coordinates — while the Made Gate is simply
+    // close. Aevi: rooms "belong TO it" and hang above its pill; neighbours stand out in columns.
+    // ⚠️ COMPARED ON THE AUTHORED POSITION, not on screen pixels: two places can round to one pixel at this zoom
+    // and still be a mile apart, and calling those "insides" would be a lie the player can check.
+    const posOf = (g) => { const l = CONTENT.locations[g.id]; return l?.worldPos ? `${l.worldPos.longitude},${l.worldPos.colatitude}` : `@${g.id}`; };
+    const leadPos = posOf(lead);
+    const rooms = group.filter(g => g !== lead && posOf(g) === leadPos);
+    const neighbours = group.filter(g => g !== lead && posOf(g) !== leadPos);
+    out.push({
+      // ⛑ THE SEAL SITS ON ITS LEAD, not at a centroid: the lead is a real place and the ring is around it.
+      x: lead.x, y: lead.y, lead, rooms, neighbours, members: group,
+      key: group.map(g => g.id).sort().join("|"),
+    });
   }
   return out;
 }
-/** ⛔ WHERE A FANNED MEMBER SITS. OverlappingMarkerSpiderfier's own geometry: a CIRCLE up to 8, a spiral above.
- *  ⚠️ Measured 2026-10-04: every cluster in the world is 2 to 7, so the spiral has no population and is not
- *  built — if one is ever needed this is the single place that learns it. */
-function fanPositions(n, cx, cy, W, H, minR = 0) {
-  // ⚠️ THE RING GROWS WITH WHAT IT CARRIES. A fixed radius made a seven-member fan draw seven labels on top of one
-  // another: clickable, unreadable. The painter measures the widest name and asks for the radius that separates them.
-  const r = Math.max(26, 13 + n * 5, minR);
-  const out = [];
-  for (let i = 0; i < n; i++) {
-    // ⛑ start at the top and go clockwise, so the order on screen is the order in the list beside it
-    const a = -Math.PI / 2 + (i / n) * Math.PI * 2;
-    // ⚠️ nudged back inside the canvas, or a fan near an edge puts half its members where nobody can click them
-    out.push({ x: Math.max(14, Math.min(W - 14, cx + Math.cos(a) * r)),
-               y: Math.max(14, Math.min(H - 14, cy + Math.sin(a) * r)) });
-  }
-  return out;
+/** ⛔ WHERE AN OPENED CLUSTER'S PILLS SIT. (AEVI A3, 2026-10-04.)
+ *
+ *  ⚠️ A RING WAS THE FIRST ANSWER AND IT DOES NOT SCALE. Mine put seven pills on a circle and their labels landed
+ *  on one another; I patched that by throwing the names outward, and Aevi reached the same wall from the other side:
+ *  *"a ring overlapped pills at seven members; columns cannot."* Columns remove the cause instead of the symptom — a
+ *  column has one pill per ROW, so names cannot collide however many there are.
+ *
+ *  ⛑ ROOMS ABOVE, NEIGHBOURS IN TWO COLUMNS: west of the lead on the left, east on the right, each in true
+ *  north-to-south order so the arrangement on screen still says something true about the ground.
+ *  Returns pills in canvas pixels, each remembering the real spot its leader line goes back to. */
+const PILL_H = 17, PILL_GAP = 5;
+function clusterLayout(cluster, W, H, widthOf) {
+  const pills = [];
+  const lead = cluster.lead;
+  // ① the rooms hang above the lead, closest last so the lead's own pill sits under its insides
+  // ⚠️ …OR BELOW IT, when there is no room above. The Disputed Zone sits near the top of the frame and its three
+  // rooms stacked to y ≈ −43: off the canvas, and two of its four places were unreachable. A clamp alone would have
+  // piled them on one row, so the stack FLIPS instead and stays a stack.
+  const roomRun = cluster.rooms.length * (PILL_H + PILL_GAP);
+  const roomsBelow = lead.y - 26 - roomRun < PILL_H;
+  cluster.rooms.forEach((m, i) => {
+    const step = roomsBelow ? (i + 1) : (cluster.rooms.length - i);
+    const y = roomsBelow ? lead.y + 26 + step * (PILL_H + PILL_GAP) : lead.y - 26 - step * (PILL_H + PILL_GAP);
+    pills.push({ ...m, kind: "room", from: { x: m.x, y: m.y },
+      x: lead.x, y: Math.max(PILL_H, Math.min(H - PILL_H, y)) });
+  });
+  pills.push({ ...lead, kind: "lead", from: { x: lead.x, y: lead.y }, x: lead.x,
+    y: Math.max(PILL_H, Math.min(H - PILL_H, lead.y - 22)) });
+  // ② the neighbours, split by which side of the lead they really lie on
+  const west = cluster.neighbours.filter(m => m.x < lead.x);
+  const east = cluster.neighbours.filter(m => m.x >= lead.x);
+  const place = (list, side) => {
+    // ⛑ TRUE NORTH-TO-SOUTH, by the real y, so the column's order is the ground's order
+    const col = list.slice().sort((a, b) => a.y - b.y);
+    const span = col.length * (PILL_H + PILL_GAP);
+    let top = Math.max(PILL_H, Math.min(H - span - 4, lead.y - span / 2));
+    for (const m of col) {
+      const w = widthOf(m.name) + 18;
+      // ⚠️ pushed back inside on BOTH axes — a lead near the left edge would otherwise put its west column off it
+      const x = side === "w"
+        ? Math.max(4 + w / 2, Math.min(W - 4 - w / 2, lead.x - 86))
+        : Math.min(W - 4 - w / 2, Math.max(4 + w / 2, lead.x + 86));
+      pills.push({ ...m, kind: "neighbour", from: { x: m.x, y: m.y }, x, y: top + PILL_H / 2 });
+      top += PILL_H + PILL_GAP;
+    }
+  };
+  place(west, "w");
+  place(east, "e");
+  return pills;
 }
 fetch("content/packs/core/world/region_maps.json?v=" + APP_VERSION)
   .then((r) => r.json()).then((d) => { _regionMaps = d; })
@@ -12785,6 +12841,14 @@ function paintRegionMap(regionId) {
   ctx.textAlign = "center";
   for (const m of marks416) {
     if (!labels416.shown.has(m.id)) continue;
+    // ⛔ AEVI A3: "labels of other places inside it hide (glyphs stay)". A name left under an open cluster reads as
+    // one of its members, which is the confusion the dim exists to prevent — the GLYPH stays, so the place does not
+    // vanish, only its name steps back.
+    if (_regionFan?.dim) {
+      const d = _regionFan.dim;
+      const inside = ((m.p.x - d.gx) / d.rx) ** 2 + ((m.p.y - d.gy) / d.ry) ** 2 < 1;
+      if (inside) continue;
+    }
     const more = labels416.hiddenBy[m.id];
     ctx.fillText(m.name + (more ? ` +${more}` : ""), m.p.x, m.p.y + 18);
   }
@@ -12806,58 +12870,83 @@ function paintRegionMap(regionId) {
   // goes — otherwise a click would select a place that is no longer where the ring says it is.
   if (_regionFan && !_regionPick.clusters.some(c => c.key === _regionFan.key)) _regionFan = null;
 
-  // ⛔ A STACK SAYS IT IS ONE, on the mark itself. The label already carries "+N" through `placeLabels`, but a
-  // label can be the one hidden; the ring is on the thing you click.
-  for (const c of _regionPick.clusters) {
+  // ══ ⛔ AEVI A3 · CLOSED: THE SEAL ══
+  // "The lead place's glyph inside a gold ring, a gold count badge, the lead's name, and a second italic line
+  // '4 nearby · 2 within'. A doubled ring when it is only rooms."
+  // ⛑ THE SEAL SAYS WHICH KIND OF CROWD IT IS BEFORE YOU OPEN IT: a doubled ring means there is nothing to spread
+  // out to — the others are this place's insides — so a player learns what the click will do from the mark.
+  if (!_regionFan) for (const c of _regionPick.clusters) {
     if (c.members.length < 2) continue;
-    ctx.strokeStyle = "rgba(232,230,221,0.55)"; ctx.lineWidth = 1;
-    ctx.beginPath(); ctx.arc(c.x, c.y, 11, 0, Math.PI * 2); ctx.stroke();
-    ctx.fillStyle = "rgba(10,12,16,0.78)";
-    ctx.beginPath(); ctx.arc(c.x + 9, c.y - 9, 6.5, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = "#e8e6dd"; ctx.font = "600 9px system-ui, sans-serif"; ctx.textAlign = "center";
-    ctx.fillText(String(c.members.length), c.x + 9, c.y - 6);
+    const roomsOnly = c.neighbours.length === 0;
+    ctx.strokeStyle = "#e8c14a"; ctx.lineWidth = 1.3;
+    ctx.beginPath(); ctx.arc(c.x, c.y, 12, 0, Math.PI * 2); ctx.stroke();
+    if (roomsOnly) { ctx.globalAlpha = 0.65; ctx.beginPath(); ctx.arc(c.x, c.y, 15.5, 0, Math.PI * 2); ctx.stroke(); ctx.globalAlpha = 1; }
+    ctx.fillStyle = "#e8c14a";
+    ctx.beginPath(); ctx.arc(c.x + 10, c.y - 10, 7, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = "#15171c"; ctx.font = "700 9px system-ui, sans-serif"; ctx.textAlign = "center";
+    ctx.fillText(String(c.members.length), c.x + 10, c.y - 7);
+    ctx.fillStyle = "rgba(232,230,221,0.9)"; ctx.font = "600 10px system-ui, sans-serif";
+    ctx.fillText(c.lead.name, c.x, c.y + 22);
+    // ⚠️ HER EXACT SENTENCE, and the two counts are different facts: how many stand NEARBY, how many are WITHIN.
+    const bits = [];
+    if (c.neighbours.length) bits.push(`${c.neighbours.length} nearby`);
+    if (c.rooms.length) bits.push(`${c.rooms.length} within`);
+    ctx.fillStyle = "rgba(232,230,221,0.6)"; ctx.font = "italic 9px system-ui, sans-serif";
+    ctx.fillText(bits.join(" · "), c.x, c.y + 32);
+    ctx.font = "600 10px system-ui, sans-serif";
   }
 
-  // ⛔ AND THE OPEN FAN. Spokes first so a mark sits on top of its own line.
+  // ══ ⛔ AEVI A3 · OPEN: THE GROUND DIMS AND DOES NOT MOVE ══
+  // "The ground stays put and dims under a soft ellipse; no zoom, so the player never loses where they are."
   if (_regionFan) {
-    ctx.font = "600 10px system-ui, sans-serif";
-    const n416 = _regionFan.members.length;
-    // ⛑ THE RADIUS THE NAMES NEED. Neighbours on the ring are 2πr/n apart; a label is at most `widest` across, so
-    // the ring has to be at least n·(widest+gap)/2π for two adjacent names not to touch. Capped, because a fan that
-    // fills the canvas is its own kind of unreadable — and the radial placement below carries the rest.
-    const widest = Math.max(...(_regionFan.members.map(m => ctx.measureText(m.name).width)), 40);
-    const need = Math.min(0.34 * Math.min(W, H), (n416 * (widest * 0.62 + 10)) / (2 * Math.PI));
-    const pos = fanPositions(n416, _regionFan.cx, _regionFan.cy, W, H, need);
-    _regionFan.members.forEach((m, i) => { m.x = pos[i].x; m.y = pos[i].y; });
-    ctx.strokeStyle = "rgba(232,193,74,0.5)"; ctx.lineWidth = 1;
-    for (const m of _regionFan.members) {
-      ctx.beginPath(); ctx.moveTo(_regionFan.cx, _regionFan.cy); ctx.lineTo(m.x, m.y); ctx.stroke();
-    }
-    ctx.font = "600 10px system-ui, sans-serif"; ctx.textAlign = "center";
-    for (const m of _regionFan.members) {
-      ctx.fillStyle = "rgba(10,12,16,0.88)";
-      ctx.beginPath(); ctx.arc(m.x, m.y, 7, 0, Math.PI * 2); ctx.fill();
-      ctx.strokeStyle = m.id === here ? "#e8c14a" : "rgba(232,230,221,0.8)"; ctx.lineWidth = 1.4;
-      ctx.beginPath(); ctx.arc(m.x, m.y, 7, 0, Math.PI * 2); ctx.stroke();
-      // ⚠️ THE NAME IS THE POINT OF THE FAN — "every member nameable and clickable". A plate under it, because a
-      // fan opens over whatever ground the stack sat on and unplated text on a hillside is unreadable.
-      // ⛔ AND IT GOES RADIALLY OUTWARD. Centred-below put seven labels on top of each other; away from the ring's
-      // centre is away from the neighbours, which is the whole trick.
-      const w = ctx.measureText(m.name).width;
-      const ux = m.x - _regionFan.cx, uy = m.y - _regionFan.cy;
-      const ul = Math.hypot(ux, uy) || 1;
-      const side = ux / ul;
-      let lx = m.x, ly = m.y, align = "center";
-      if (side > 0.34) { align = "left"; lx = m.x + 11; ly = m.y + 3; }
-      else if (side < -0.34) { align = "right"; lx = m.x - 11; ly = m.y + 3; }
-      else { ly = uy < 0 ? m.y - 12 : m.y + 19; }     // top of the ring reads above, bottom reads below
-      ctx.textAlign = align;
-      const px = align === "left" ? lx - 3 : align === "right" ? lx - w - 3 : lx - w / 2 - 3;
-      ctx.fillStyle = "rgba(10,12,16,0.82)";
-      ctx.fillRect(px, ly - 9, w + 6, 12);
-      ctx.fillStyle = "#e8e6dd";
-      ctx.fillText(m.name, lx, ly);
-      ctx.textAlign = "center";
+    const cl = _regionPick.clusters.find(c => c.key === _regionFan.key);
+    if (cl) {
+      const pills = clusterLayout(cl, W, H, (s) => ctx.measureText(s).width);
+      _regionFan.pills = pills;
+      // ① the soft ellipse, wide enough to hold the columns it is dimming under
+      const xs = pills.map(p => p.x), ys = pills.map(p => p.y);
+      const rx = Math.max(120, (Math.max(...xs) - Math.min(...xs)) / 2 + 80);
+      const ry = Math.max(80, (Math.max(...ys) - Math.min(...ys)) / 2 + 60);
+      const gx = (Math.max(...xs) + Math.min(...xs)) / 2, gy = (Math.max(...ys) + Math.min(...ys)) / 2;
+      const grad = ctx.createRadialGradient(gx, gy, Math.min(rx, ry) * 0.35, gx, gy, Math.max(rx, ry));
+      grad.addColorStop(0, "rgba(8,10,14,0.72)"); grad.addColorStop(1, "rgba(8,10,14,0)");
+      ctx.save();
+      ctx.beginPath(); ctx.ellipse(gx, gy, rx, ry, 0, 0, Math.PI * 2);
+      ctx.fillStyle = grad; ctx.fill();
+      ctx.restore();
+      _regionFan.dim = { gx, gy, rx, ry };
+
+      // ② the leaders back to the real spots, dotted — "a dotted leader back to its real spot"
+      ctx.save();
+      ctx.setLineDash([2, 3]); ctx.strokeStyle = "rgba(232,193,74,0.55)"; ctx.lineWidth = 1;
+      for (const p of pills) {
+        if (p.kind === "lead") continue;
+        ctx.beginPath(); ctx.moveTo(p.from.x, p.from.y); ctx.lineTo(p.x, p.y); ctx.stroke();
+      }
+      ctx.restore();
+      // ⛑ and the real spots keep a small mark, so the leader points at something
+      for (const p of pills) {
+        if (p.kind === "lead") continue;
+        ctx.fillStyle = "rgba(232,193,74,0.8)";
+        ctx.beginPath(); ctx.arc(p.from.x, p.from.y, 2.2, 0, Math.PI * 2); ctx.fill();
+      }
+
+      // ③ the pills themselves
+      ctx.font = "600 10px system-ui, sans-serif"; ctx.textAlign = "center";
+      for (const p of pills) {
+        const w = ctx.measureText(p.name).width + 18;
+        p.w = w; p.h = PILL_H;                                   // ⛑ kept for the hit test, not recomputed there
+        const lead = p.kind === "lead";
+        ctx.fillStyle = lead ? "rgba(232,193,74,0.92)" : "rgba(14,17,22,0.94)";
+        ctx.strokeStyle = lead ? "#e8c14a" : (p.kind === "room" ? "rgba(232,193,74,0.55)" : "rgba(232,230,221,0.7)");
+        ctx.lineWidth = 1.1;
+        const x0 = p.x - w / 2, y0 = p.y - PILL_H / 2;
+        ctx.beginPath();
+        if (ctx.roundRect) ctx.roundRect(x0, y0, w, PILL_H, 8); else ctx.rect(x0, y0, w, PILL_H);
+        ctx.fill(); ctx.stroke();
+        ctx.fillStyle = lead ? "#15171c" : "#e8e6dd";
+        ctx.fillText(p.name, p.x, p.y + 3.5);
+      }
     }
   }
 }
@@ -12878,24 +12967,24 @@ function paintRegionMap(regionId) {
 function wireRegionGroundMap(selectedId) {
   const cv = document.getElementById("region-map");
   if (!cv) return;
-  const readout = document.getElementById("region-map-readout");
-  // ⚠️ CSS PIXELS ARE NOT CANVAS PIXELS. The canvas is 800×420 of backing store laid out at up to 100% width, so
-  // the pointer has to be scaled into the frame the marks were computed in or every hit is off by the ratio.
+  const chip = document.getElementById("region-map-chip");
+  // ⚠️ CSS PIXELS ARE NOT CANVAS PIXELS. The canvas is laid out up to 1600px over a backing store sized to match,
+  // but the two can differ for a frame after a resize — so the pointer is scaled, never read raw.
   const toCanvas = (e) => {
     const r = cv.getBoundingClientRect();
     return { x: (e.clientX - r.left) * (cv.width / r.width), y: (e.clientY - r.top) * (cv.height / r.height) };
   };
+  /** ⛔ WHAT IS UNDER THE POINTER. When a cluster is open its PILLS are the targets — they are what the player can
+   *  see and aim at — and the ground beneath is closed to clicks so a stray one does not select what the dim hides. */
   const pickAt = (x, y) => {
     const P = _regionPick;
     if (!P) return null;
-    // ⛔ A FANNED MEMBER WINS, because it is drawn on top and the player opened it to reach exactly that.
-    if (_regionFan) {
-      let best = null, bd = REGION_HIT * REGION_HIT;
-      for (const m of _regionFan.members) {
-        const d = (m.x - x) ** 2 + (m.y - y) ** 2;
-        if (d < bd) { bd = d; best = { kind: "place", id: m.id, name: m.name }; }
+    if (_regionFan?.pills) {
+      for (const p of _regionFan.pills) {
+        const w = (p.w || 60) / 2 + 2, h = (p.h || PILL_H) / 2 + 2;
+        if (Math.abs(p.x - x) <= w && Math.abs(p.y - y) <= h) return { kind: "pill", pill: p, id: p.id, name: p.name };
       }
-      if (best) return best;
+      return null;                       // ⛑ inside an open cluster, only its pills answer
     }
     let best = null, bd = REGION_HIT * REGION_HIT;
     for (const c of P.clusters) {
@@ -12904,44 +12993,78 @@ function wireRegionGroundMap(selectedId) {
     }
     if (!best) return null;
     return best.members.length > 1
-      ? { kind: "stack", cluster: best, name: `${best.members[0].name} +${best.members.length - 1}` }
+      ? { kind: "seal", cluster: best, id: best.lead.id, name: best.lead.name }
       : { kind: "place", id: best.members[0].id, name: best.members[0].name };
   };
   const repaint = () => { try { paintRegionMap(_regionPick?.regionId || mapFocus || currentRegionId()); } catch { /* the diagram below is still a map */ } };
+
+  /** ⛔ THE HOVER CHIP (AEVI A3.4): what it is, how far from the lead, and the two verbs.
+   *  ⚠️ "N days from <lead>" is `walkingDays`, the SAME reader the place card and the journey planner use — a
+   *  second distance here would be a number the player could catch disagreeing with itself one click later. */
+  const hideChip = () => { if (chip) { chip.hidden = true; chip.innerHTML = ""; } };
+  const showChip = (hit, px, py) => {
+    if (!chip) return;
+    const l = CONTENT.locations[hit.id];
+    if (!l) return hideChip();
+    const leadId = _regionFan ? _regionPick.clusters.find(c => c.key === _regionFan.key)?.lead?.id : null;
+    const lead = leadId && leadId !== hit.id ? CONTENT.locations[leadId] : null;
+    const days = lead ? walkingDays(lead, l) : null;
+    // ⛑ HER WORDING, including the floor: "a short walk" under 0.1 — because "0.0 days" is a number pretending to
+    // be a measurement.
+    const far = days == null ? "" : days < 0.1 ? `a short walk from ${esc(lead.name)}`
+      : `${days < 1 ? days.toFixed(1) : Math.round(days)} day${days >= 1 && Math.round(days) === 1 ? "" : "s"} from ${esc(lead.name)}`;
+    const kind = esc(String(l.tier || "place"));
+    chip.hidden = false;
+    chip.innerHTML = `<div class="rmc-what"><strong>${esc(l.name || hit.id)}</strong> <span class="hint">${kind}</span></div>`
+      + (far ? `<div class="hint rmc-far">${far}</div>` : "")
+      + `<div class="rmc-acts"><button class="opt" data-rmc-inside="${esc(hit.id)}">Look inside</button>`
+      + `<button class="opt" data-rmc-travel="${esc(hit.id)}">Travel</button></div>`;
+    // ⚠️ PLACED IN CSS PIXELS over the canvas, and kept inside it — a chip half off the right edge is a button
+    // nobody can press.
+    const r = cv.getBoundingClientRect();
+    const sx = r.width / cv.width, sy = r.height / cv.height;
+    const w = chip.offsetWidth || 160, h = chip.offsetHeight || 60;
+    chip.style.left = `${Math.max(2, Math.min(r.width - w - 2, px * sx - w / 2))}px`;
+    chip.style.top = `${Math.max(2, Math.min(r.height - h - 2, py * sy + 12))}px`;
+    // ⛑ THE SAME TWO DOORS THE PLACE CARD USES. `Look inside` is the location tier; `Travel` asks the journey
+    // planner first, because a far arrival is a journey to ready rather than a tap away (CCODE-387).
+    const ib = chip.querySelector("[data-rmc-inside]");
+    if (ib) ib.onclick = (e) => { e.stopPropagation(); mapTier = "location"; mapFocus = ib.dataset.rmcInside; _regionFan = null; renderMap(); };
+    const tb = chip.querySelector("[data-rmc-travel]");
+    if (tb) tb.onclick = (e) => { e.stopPropagation(); const d = tb.dataset.rmcTravel; _regionFan = null; if (!planJourneyTo(d)) travelTo(d); };
+  };
 
   cv.style.cursor = "default";
   cv.onmousemove = (e) => {
     const p = toCanvas(e), hit = pickAt(p.x, p.y);
     cv.style.cursor = hit ? "pointer" : "default";
-    // ⛑ THE NAME UNDER THE POINTER. Aevi's hover CARD is hers to draw; this is the one line that makes the map
-    // feel answerable, and it is the same `pickAt` the card will read when it lands.
-    if (readout) {
-      readout.textContent = hit
-        ? (hit.kind === "stack" ? `${hit.name} — ${hit.cluster.members.length} places here, click to open` : hit.name)
-        : "";
-    }
+    if (!hit) return;                                   // ⛑ the chip stays until the pointer finds something else
+    if (hit.kind === "seal") { hideChip(); return; }     // a closed seal says its piece on the canvas already
+    showChip(hit, p.x, p.y);
   };
-  cv.onmouseleave = () => { cv.style.cursor = "default"; if (readout) readout.textContent = ""; };
+  cv.onmouseleave = () => { cv.style.cursor = "default"; };
   cv.onclick = (e) => {
     const p = toCanvas(e), hit = pickAt(p.x, p.y);
     if (!hit) {
-      // ⚠️ A CLICK ON EMPTY GROUND CLOSES THE FAN AND NOTHING ELSE. It must not deselect: the selected place is
-      // what the Look inside / travel buttons below read, and losing it on a stray click is the "it kicks me back
-      // out" complaint in a new shape.
-      if (_regionFan) { _regionFan = null; repaint(); }
+      // ⚠️ CLICK-AWAY CLOSES AND DOES NOT DESELECT. The selected place is what the Look inside and travel buttons
+      // under the map read; losing it on a stray click is "it kicks me back out" in a new shape.
+      if (_regionFan) { _regionFan = null; hideChip(); repaint(); }
       return;
     }
-    if (hit.kind === "stack") {
-      _regionFan = _regionFan && _regionFan.key === hit.cluster.key
-        ? null                                             // clicking the open stack closes it
-        : { key: hit.cluster.key, cx: hit.cluster.x, cy: hit.cluster.y,
-            members: hit.cluster.members.map(m => ({ id: m.id, name: m.name, x: m.x, y: m.y })) };
-      repaint();
-      return;
-    }
-    _regionFan = null;
-    renderMap(hit.id === selectedId ? null : hit.id);      // the diagram's own door
+    if (hit.kind === "seal") { _regionFan = { key: hit.cluster.key }; hideChip(); repaint(); return; }
+    if (hit.kind === "pill" && hit.pill.kind === "lead") { _regionFan = null; hideChip(); repaint(); return; }
+    _regionFan = null; hideChip();
+    renderMap(hit.id === selectedId ? null : hit.id);    // the diagram's own door
   };
+  // ⛔ AND ESC CLOSES IT (AEVI A3). ⚠️ Bound on the WINDOW and removed when the screen is replaced, or every
+  // re-render would leave another listener behind holding a stale `_regionPick`.
+  if (_regionEsc) window.removeEventListener("keydown", _regionEsc);
+  _regionEsc = (e) => {
+    if (e.key !== "Escape" || !_regionFan) return;
+    if (!document.getElementById("region-map")) { window.removeEventListener("keydown", _regionEsc); _regionEsc = null; return; }
+    _regionFan = null; hideChip(); repaint();
+  };
+  window.addEventListener("keydown", _regionEsc);
 }
 
 /** WORLD tier — regions as territories. Individual settlements are noise at this scale; the
@@ -13774,8 +13897,11 @@ function renderMap(selectedId = null) {
           store is sized to the pane on open (`sizeRegionCanvas`), so the marks, the hit test and the labels are all
           computed in the frame that is actually on screen. ⚠️ A canvas laid out wider than its backing store blurs
           AND throws the pointer off by the ratio — which is why the two are set together, never in CSS alone. */""}
-    <canvas id="region-map" width="800" height="420" style="width:100%;max-width:1600px;border-radius:8px;display:block;background:#0a0c10"></canvas>
+    <div class="rm-wrap" style="position:relative;max-width:1600px">
+    <canvas id="region-map" width="800" height="420" style="width:100%;border-radius:8px;display:block;background:#0a0c10"></canvas>
     ${/* ⛑ the name under the pointer. Empty until something is under it, so it costs no height when idle. */""}
+    <div id="region-map-chip" class="rm-chip" hidden></div></div>
+    ${/* ⛑ the name under the pointer stays as the quiet fallback; the chip is what carries the verbs. */""}
     <div id="region-map-readout" class="hint" style="min-height:14px;margin:2px 0 6px"></div>
     ${fieldPanel(regionExtent(focusRegion, CONTENT.locations, { authored: (_regionMaps && _regionMaps[focusRegion]) || null }))}
     <p class="hint" style="margin-bottom:10px">⛰ The ground as it is — generated once at the scale where the world still has features, and kept. ◈ The field over it is EVALUATED at every point, not washed between the places — a source turned off re-renders it. The diagram below shows how the places CONNECT, which the ground does not say.</p>

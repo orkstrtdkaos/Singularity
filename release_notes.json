@@ -16,6 +16,30 @@
   "next": [],
   "releases": [
     {
+      "version": "2.16.19",
+      "date": "2026-10-04",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "A crowded spot near the map's edge opens fully",
+          "summary": "Two of the Disputed Zone's four places opened off the top of the picture.",
+          "detail": "Places inside a crowded spot list upward from it — and where that spot sits near the top of the map, the list ran off the edge where nothing could be clicked. It flips below when there is no room above, so every place in a crowd is reachable wherever the crowd happens to be."
+        }
+      ]
+    },
+    {
+      "version": "2.16.18",
+      "date": "2026-10-04",
+      "entries": [
+        {
+          "kind": "change",
+          "title": "A crowded spot on the map opens properly now",
+          "summary": "One seal where several places sit together — click it and they step out into two readable columns.",
+          "detail": "Where places crowd one spot the map draws a single seal: the main place's name, how many are nearby and how many are within it, and a doubled ring when the others are simply its insides. Click and the ground dims without moving, its rooms list above it and its neighbours step out west and east in the order they really lie, each with a dotted line back to its true spot. Hovering one gives you what it is, how far it is, and buttons to look inside or travel. Click away or press Escape to close."
+        }
+      ]
+    },
+    {
       "version": "2.16.17",
       "date": "2026-10-04",
       "entries": [

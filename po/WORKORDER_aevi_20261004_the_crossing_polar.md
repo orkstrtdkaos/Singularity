@@ -1,4 +1,4 @@
-<!-- status: READY. Erik 2026-10-04: "We do need a pole-centered Crossing map." The Crossing gets an azimuthal-equidistant base with the same interface as every other region; nothing above the base changes. C4: the Crossing's powers landed as content (SNG-668: the Council of Mavens, and houseAt on 34 powers); the reader and the ring are CCode's -->
+<!-- status: READY. Erik 2026-10-04: "We do need a pole-centered Crossing map." The Crossing gets an azimuthal-equidistant base with the same interface as every other region; nothing above the base changes. C4: the Crossing's powers landed as content (SNG-668: the Council of Mavens, every tradition seated, houseAt on 37 powers); the reader and the ring are CCode's -->
 # WORKORDER: Aevi → CCode · 2026-10-04 · the Crossing, centred on the pole
 
 **Aevi (PO).** Your CCODE-596 question, answered by Erik:
@@ -76,8 +76,19 @@ Erik's *"big swirl"*, authored in `content/packs/valley/powers.json`:
 4. **Gate:** every `houseAt` names a placed location in `the_center`; no outlaw keeps one; adding or removing a
    house changes `powersReaching` and danger nowhere (fixture world).
 
-Still open, mine: **seven traditions** have no power anywhere (stillhold, syllogist, bargainers, god_named,
-radiant_folk, harmonic, valley_craft), so the Crossing has seven empty chairs. That is a content batch, coming
-separately; the hall's `appearance` already has *"an empty chair for each tradition not yet seated"*.
+**Every tradition is now seated** (SNG-668 part 2, Erik: *"valleycraft is Millbrook's council"*). Of the seven
+traditions that looked unrepresented, three are ability groups rather than peoples (`valley_craft` → Millbrook's council,
+`harmonic` → Harmonic Heights, `radiant_folk` → the Radiant Plateau), and the Syllogists already had the Bloodless Hold
+(I had been reading leaders' `domains.primary`, where the NPC's own `tradition` is the truth). Three were real gaps and
+are now powers, each led by an NPC who already existed:
+
+| power | tradition | kind | seat | leader | house |
+|---|---|---|---|---|---|
+| The Calm of the Stillhold | stillhold | sovereignty | the Stillhold | the Keeper of the Unsaid | **the Quiet House** |
+| The Ones Called | god_named | order | the Long Span (the crossroads before the Wayhouse) | the One Called Zeus | the Crossing |
+| The Table of Kept Terms | bargainers | guild | the Hub Yard (the Crossing) | the One Called Loki | the Hub Yard |
+
+41 powers, **37 houses** at the Crossing. The Stillhold's house is the Quiet House itself: the one roof where no people
+may raise a hand, kept by Sain, a Stillhold mediator. All three carry `dangerLift: 0`. Seats stay exclusive (§359): the Wayhouse is the Horizon Compact's, so the God-Named hold court at the crossroads in front of it and the Bargainers keep their table in the Hub Yard (`_seatWhy` on each).
 
 — Aevi, PO

@@ -2719,13 +2719,201 @@
    "opposedBy": [],
    "plainly": "The Council of Mavens sits at the Crossing and decides nothing. It weighs claims (crowns, holds, debts, names) and says which ones it believes, and the world listens because everyone else does. Every tradition keeps a house at the Crossing; the Mavens keep the room they all meet in.",
    "descriptionSeed": "At the hub of the world every road ends in the same round hall. Every tradition keeps a house within sight of it, and every house sends a voice to the benches, and the Mavens weigh what is brought: who holds what, who owes whom, whose crown is a crown. They evaluate rather than decide, which people mistake for weakness until they need a claim believed a thousand miles away. What the Mavens refuse, the Hollow Court grants, and the Mavens know exactly who goes there.",
-   "appearance": "A round hall at the hub where every road ends, benches in rings and an empty chair for each tradition not yet seated, wardens' lamps along the district streets, and the banners of every house hung so that none is higher than another",
+   "appearance": "A round hall at the hub where every road ends, benches in rings and a chair for every tradition, wardens' lamps along the district streets, and the banners of every house hung so that none is higher than another",
    "secretsGM": [
     "The Mavens refuse more claims than they recognise, and the refused are the Hollow Court's best customers. They know it, and some of them think it is the price of being believed.",
     "Not every house at the Crossing sends its voice in good faith. The council knows which ones are listening for someone else."
    ],
    "comes": "quiet",
    "_sng668": "âœ… ERIK 2026-10-04: 'the Council of Mavens holds sway in general but it is truly a big swirl of powers.' The Mavens are the Crossing's territorial power (the hub is held, and by the room rather than a throne); every other power the Mavens would seat keeps a house there (`houseAt`), drawn as the swirl, never as a fill."
+  },
+  {
+   "id": "power_stillhold_calm",
+   "name": "The Calm of the Stillhold",
+   "kind": "sovereignty",
+   "temper": "fair",
+   "seat": "the_stillhold",
+   "reach": [
+    "the_stillhold",
+    "the_held_yard"
+   ],
+   "leader": "keeper_the_unsaid",
+   "answersTo": null,
+   "strength": {
+    "scale": "unit",
+    "contingents": [
+     {
+      "n": 40,
+      "quality": 2,
+      "what": "wardens of the calm, unarmed, who stand between two people and do not move"
+     },
+     {
+      "n": 8,
+      "quality": 4,
+      "what": "the Lidded Calm's suppressors, who keep the quiet from breaking from the inside"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "the_stillhold",
+     "kind": "post",
+     "name": "the white gate, where weapons are left and not returned",
+     "garrison": 15
+    }
+   ],
+   "verbs": [
+    "protect",
+    "inform"
+   ],
+   "encounters": [],
+   "dangerLift": 0,
+   "noticesYouWhen": [
+    "crossed"
+   ],
+   "wantsFromYou": "Your weapons at the gate, your voice kept low, and no questions about what the peace is resting on.",
+   "offersYou": "The one city where nobody has raised a hand in living memory, and a truce bound so well that breaking it costs more than the war would.",
+   "leverage": "The peace rests on something buried. Whoever can name it can break the Stillhold without a blade, and the Keeper of the Unsaid knows exactly who might.",
+   "whenBroken": "The walls stay white and the streets go quiet in a different way: people start locking doors they never needed to, and the Marches below hear that the Stillhold can be shouted at.",
+   "rivals": [],
+   "opposedBy": [],
+   "plainly": "The walled city of absolute peace: no weapons, no raised voices, no violence in living memory. It is kept by unarmed wardens and a few who are not gentle at all, and by an elder who guards whatever the peace is built on.",
+   "descriptionSeed": "The Stillhold made peace a craft and then a city. Its wardens carry nothing and stand between, and it works; the One Who Ended the Long War lives here and is proof of it. But the calm is beautiful in a way that is slightly wrong, and the Keeper of the Unsaid leads it by keeping one thing unsaid. Below the walls, the Marches fight a war a warlord has forgotten the reason for, and the Stillhold sends them truces.",
+   "appearance": "White walls with no gate-guard visible, white plaster streets, people moving very still in plain symmetrical dress, a rack of surrendered weapons inside the gate that nobody comes back for",
+   "secretsGM": [
+    "The Stillhold's peace rests on a buried truth (the location's own canon: what rides with this peace is falsehood). The Keeper knows what it is; the wardens do not.",
+    "The Lidded Calm's suppressors are why the peace has never broken from inside. Nobody who has met one talks about it."
+   ],
+   "houseAt": "the_quiet_house",
+   "_houseWhy": "The Stillhold's house at the Crossing is the Quiet House itself, the one roof where no people may raise a hand. Sain of the Quiet House is a Stillhold mediator and sells the neutrality.",
+   "comes": "quiet",
+   "_sng668": "✅ ERIK 2026-10-04: every tradition keeps a power at the Crossing. The Stillhold had none anywhere; its city, its elder and its suppressors were all authored and unorganised."
+  },
+  {
+   "id": "power_the_ones_called",
+   "name": "The Ones Called",
+   "kind": "order",
+   "temper": "hard",
+   "seat": "the_long_span",
+   "reach": [
+    "the_long_span",
+    "the_wayhouse"
+   ],
+   "leader": "the_one_called_zeus",
+   "answersTo": null,
+   "strength": {
+    "scale": "unit",
+    "contingents": [
+     {
+      "n": 3,
+      "quality": 4,
+      "what": "the Ones Called (Zeus, Athena, Ares), each wearing a name nobody in the world can check"
+     },
+     {
+      "n": 30,
+      "quality": 2,
+      "what": "retinues sworn to a name rather than to a person"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "the_long_span",
+     "kind": "post",
+     "name": "a pavilion at the Long Span crossroads, where the Ones Called sit facing the road",
+     "garrison": 6
+    }
+   ],
+   "verbs": [
+    "protect",
+    "recruit",
+    "quest"
+   ],
+   "encounters": [],
+   "dangerLift": 0,
+   "noticesYouWhen": [
+    "wealth",
+    "crossed"
+   ],
+   "wantsFromYou": "To be addressed by the name. Not believed, necessarily; addressed. A God-Named will forgive almost anything except being called by what he was before.",
+   "offersYou": "Authority you can borrow: a word from the One Called Zeus opens doors that a crown would not, and nobody at the door can check whether it should.",
+   "leverage": "Every one of them is more human than the name. Find the person under it and the authority goes quiet, and so does the retinue.",
+   "whenBroken": "The names go back to wherever they came from, the retinues go home, and for a season the Wayhouse is just an inn.",
+   "rivals": [],
+   "opposedBy": [],
+   "plainly": "The God-Named: people who wear the names of gods and carry an authority that is entirely real and entirely unverifiable. They hold court at the Long Span, in front of the Wayhouse, under the One Called Zeus. They are the Seraphs' more human, more fallible kin, with much the same power.",
+   "descriptionSeed": "At the Long Span, the crossroads in front of the Wayhouse where nobody's name can be checked, the God-Named sit in a pavilion facing the road. The One Called Zeus is first among them, Athena keeps the office and Ares the watch. Their grandeur is borrowed and worn slightly wrong, and it works anyway: retinues swear to the name, petitioners kneel to it, and the Seraphs watch them with something between kinship and alarm.",
+   "appearance": "Bleached linen and old gold leaf under a pavilion at a crossroads where the world's far roads meet, three figures lit from high behind so their faces are half in shadow, a carried sigil on the table in front of each",
+   "secretsGM": [
+    "None of the Ones Called will say how they came by their names, and at least one of them does not know.",
+    "The One Called Loki sits at the same inn and keeps the Bargainers' table. The God-Named call him one of their own; he has never agreed to it."
+   ],
+   "houseAt": "the_crossing",
+   "comes": "loud",
+   "_sng668": "✅ ERIK 2026-10-04: every tradition keeps a power at the Crossing. The God-Named (Service, a seraphic fidelity relation per Erik 2026-08-15) had three Ones Called at the Wayhouse and no power.",
+   "_seatWhy": "Seats are exclusive (seatsAreExclusive) and the Wayhouse is the Horizon Compact's. The Ones Called live at the Wayhouse and hold court at the crossroads in front of it, where every far road arrives."
+  },
+  {
+   "id": "power_table_of_kept_terms",
+   "name": "The Table of Kept Terms",
+   "kind": "guild",
+   "temper": "fair",
+   "seat": "the_crossing_gate_yard",
+   "reach": [
+    "the_crossing_gate_yard",
+    "the_hundred_markets",
+    "the_wayhouse"
+   ],
+   "leader": "the_one_called_loki",
+   "answersTo": null,
+   "strength": {
+    "scale": "unit",
+    "contingents": [
+     {
+      "n": 1,
+      "quality": 4,
+      "what": "the One Called Loki, who tells you the price before you swear"
+     },
+     {
+      "n": 24,
+      "quality": 2,
+      "what": "brokers and witnesses, each carrying half of a split tally-stick"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "the_crossing_gate_yard",
+     "kind": "enterprise",
+     "name": "a plain table and a single lamp in the Hub Yard, where every caravan has to stop",
+     "garrison": 2
+    }
+   ],
+   "verbs": [
+    "inform",
+    "quest"
+   ],
+   "encounters": [],
+   "dangerLift": 0,
+   "noticesYouWhen": [
+    "wealth"
+   ],
+   "wantsFromYou": "Terms, said aloud. What you want, what you will give, and when; then your hand on the table while the witness writes it down.",
+   "offersYou": "Anything that can be had, at exactly the price named, and a gift that costs precisely what was said and not one thing more.",
+   "leverage": "Their terms are honest and nobody believes it. A bargain the Table keeps when everyone expected a trick is worth more to them than the bargain.",
+   "whenBroken": "The tally-sticks stop matching. Every deal the Table witnessed is suddenly a matter of who remembers what, and the Hundred Markets get louder.",
+   "rivals": [],
+   "opposedBy": [],
+   "plainly": "The Bargainers: brokers who name every term aloud and keep it exactly. Their table sits in the Hub Yard at the Crossing, where every caravan has to stop, and the One Called Loki keeps another in the Wayhouse's back room.",
+   "descriptionSeed": "The Bargainers deal in terms, not goods. You sit across a plain table under a single lamp, you say what you want, and the Broker tells you the price before you swear; the witness splits a tally-stick and each of you keeps half. The Hollow Court also grants exactly what is asked, but it never says what it takes. The Table always says. That is the whole difference, and it is everything.",
+   "appearance": "A plain table under a single lamp in a caravan yard, ledger paper and wax seals, a jar of split tally-sticks, and a man in worn brass buttons who is smiling slightly too early",
+   "secretsGM": [
+    "Loki's terms really are honest. His reputation is the one thing at the Table he cannot price, and it annoys him more than it should."
+   ],
+   "houseAt": "the_crossing_gate_yard",
+   "comes": "quiet",
+   "_sng668": "✅ ERIK 2026-10-04: every tradition keeps a power at the Crossing. The Bargainers (Terms: abyssal 0.5, verist 0.3, mason 0.2) had their Broker at the Wayhouse and no power.",
+   "_seatWhy": "Seats are exclusive and the Wayhouse is the Horizon Compact's. The Table sits in the Hub Yard at the Crossing, so its seat is its house; the One Called Loki lives at the Wayhouse and keeps a second table in its back room."
   }
  ]
 }

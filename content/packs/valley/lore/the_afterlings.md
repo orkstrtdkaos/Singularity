@@ -50,6 +50,15 @@ A living woman there is married to a man who drowned forty years ago, and everyb
 **A player raised as an Afterling can go home here.** Cairnsend is the one place in the world where what they are is
 ordinary.
 
+## Under the ground
+
+Erik, 2026-10-04: *"There should be Afterlings in various places underground."* The under-world is cold, sleepless
+and dug by crews, so the dead who stayed are thick down there. There is **the Long Shift** along the harvest bores,
+four centuries unattended, some still people and some narrowed into the driven. There are **the drowned of
+Undermere**, **the shift-keepers of Deepmark**, where the dead are asked (the Vigil's proof that asking can be done),
+the keeper of **the Orchard Gone Out**, and the uncounted mappers of **the Service Ways**. They keep to the dark
+strata, because a kept sun is daylight and daylight hurts. Full canon: `the_deep_below` → `theDeadBelow`.
+
 ## Who holds power over them
 
 | power | what it is | temper |

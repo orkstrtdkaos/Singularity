@@ -54,6 +54,8 @@ import { territoryByGround, CLAIM_FLOOR, isTerritorial } from "./engine/influenc
 import { housesAt } from "./engine/powers.js";
 // ⛔ B4 — a lens is WHERE the marks go (pure, here) and HOW they are inked (below, in this file)
 import { isoLines, blurGrid, stipple, hexGather, nearness, crystalFacets } from "./engine/lenses.js";
+// ⛔ ✅ ERIK: *"Can we make it look like a big city with these places laid out?"*
+import { cityPlan, blockPath, blockRoofs } from "./engine/cityplan.js";
 import { makeInfluence } from "./engine/influence.js";
 import { glyphFor, drawGlyph } from "./engine/mapicons.mjs";   // SNG-409 §4: a pole must never read as a town   // SNG-390: the globe, read-only
 import { walkingDays, milesFor, worldPosForGenerated, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout, fieldBlobs, fieldAlpha, placeLabels } from "./engine/worldmap.js";
@@ -192,7 +194,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.18.1";
+const APP_VERSION = "2.18.2";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -12506,7 +12508,7 @@ function powerColour(p) {
  *  about roads. Aevi's C4: *"the ring IS the swirl."*
  *  ⛑ PRESENCE, NOT GROUND: these marks sit beside the place, never fill it. The Mavens hold the Crossing; the
  *  rest are guests with a door key. */
-function paintHouses(ctx, base, W, H, ids) {
+function paintHouses(ctx, base, W, H, ids, city = null) {
   if (!CONTENT?.locations) return [];
   const out = [];
   for (const id of ids) {
@@ -12514,7 +12516,9 @@ function paintHouses(ctx, base, W, H, ids) {
     if (!l?.worldPos) continue;
     const houses = housesAt(id, CONTENT);
     if (!houses.length) continue;
-    const c = base.toScreen(l.worldPos.longitude, l.worldPos.colatitude - 90, W, H);
+    // ⛑ the banners ring the hall where the city put it, not where the pole is
+    const cm = city ? city.marks.find((q) => q.id === id) : null;
+    const c = cm ? { x: cm.x, y: cm.y } : base.toScreen(l.worldPos.longitude, l.worldPos.colatitude - 90, W, H);
     // fanned the way A3 opens a cluster: an arc above the place, widening with the count
     const r = 13 + Math.min(9, houses.length * 0.35);
     const spread = Math.min(Math.PI * 1.7, 0.34 * houses.length);
@@ -12756,6 +12760,293 @@ function paintTerritory(ctx, base, ext, regionId, W, H) {
     ctx.restore();
   }
   return T;
+}
+
+/** ⛔ X · THE CROSSING, DRAWN AS A CITY. ✅ ERIK, on the polar terrain: *"really bad"*, then *"Can we make it
+ *  look like a big city with these places laid out?"*
+ *
+ *  ⛑ THE GROUND IS NOT DRAWN AT ALL HERE, and that is the fix rather than a workaround: the Crossing is ~1°
+ *  across and the terrain's information floor is 0.25°, so the concentric rings and radial seams he saw were the
+ *  generator meeting the pole. There is nothing down there. A city is what the place IS.
+ *  ⚠️ C1's PROJECTION STAYS UNDERNEATH: every road leaves on its true bearing and every gate points where it
+ *  really points. Only the RADIUS is re-scaled, so a city half a degree wide fills a frame. */
+let _cityPlan = { key: null, plan: null };
+function cityFor(regionId, W, H) {
+  if (!CONTENT?.locations) return null;
+  const key = `${regionId}|${W}x${H}|${Object.keys(CONTENT.locations).length}`;
+  if (_cityPlan.key === key) return _cityPlan.plan;
+  const inRegion = (id) => (CONTENT.locations[id]?.regionId || CONTENT.locations[id]?.region) === regionId;
+  const places = Object.keys(CONTENT.locations).filter((id) => inRegion(id) && CONTENT.locations[id]?.worldPos)
+    .map((id) => {
+      const l = CONTENT.locations[id];
+      return { id, name: l.name || id, tier: l.tier, rho: Number(l.worldPos.colatitude),
+        bearingDeg: Number(l.worldPos.longitude), big: id === "the_great_coliseum" };
+    });
+  if (!places.length) return null;
+  const hall = places.find((p) => p.tier === "region") || places[0];
+  const bearingOf = (id) => { const l = CONTENT.locations[id]; return l?.worldPos ? Number(l.worldPos.longitude) : null; };
+  const hubL = CONTENT.locations[hall.id];
+  // ⛑ the roads out ARE the avenues — twelve of them, to the twelve foothills
+  const roadsOut = (hubL?.connections || []).filter((o) => !inRegion(o) && CONTENT.locations[o]?.worldPos)
+    .map((o) => ({ to: o, name: CONTENT.locations[o]?.name || o, bearingDeg: bearingOf(o) }));
+  // ⛔ ROADS GO TO FOOTHILLS, GATES GO TO POLES. Drawing both as lines would say they are the same kind of way.
+  const arch = Object.keys(CONTENT.locations).find((id) => inRegion(id) && /axis_gate/.test(id));
+  const gates = arch ? (CONTENT.locations[arch].connections || [])
+    .filter((o) => CONTENT.locations[o]?.worldPos && (CONTENT.locations[o]?.role === "gate" || /gate|waygate/.test(o)))
+    .map((o) => ({ to: o, name: CONTENT.locations[o]?.name || o, bearingDeg: bearingOf(o) })) : [];
+  const plan = cityPlan(places, { W, H, hallId: hall.id, roadsOut, gates, seed: regionId });
+  _cityPlan = { key, plan };
+  return plan;
+}
+
+/** ⛔ X3 · THE LANDMARKS, one drawing each by location id. ✅ ERIK: *"The coliseum is central in the culture
+ *  here."* ✅ AEVI: *"the biggest thing in the city."* Anything unlisted gets a plain plaza and keeps its glyph,
+ *  so a place Aevi authors tomorrow is drawn as a place rather than as nothing. */
+function paintLandmarks(ctx, plan) {
+  const ink = "rgba(38,30,22,0.82)";
+  const plaza = (x, y, r, fill) => {
+    ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2);
+    ctx.fillStyle = fill || "#e4dcc6"; ctx.fill();
+    ctx.strokeStyle = ink; ctx.lineWidth = 1.2; ctx.stroke();
+  };
+  const drawn = new Set();
+  for (const m of plan.marks) {
+    const { x, y, id } = m;
+    ctx.save();
+    switch (id) {
+      case "the_great_coliseum": {
+        // ⛔ THE BIGGEST THING IN THE CITY — an oval of tiers round sand, and it is meant to dominate
+        ctx.save(); ctx.translate(x, y); ctx.scale(1.28, 1);
+        ctx.beginPath(); ctx.arc(0, 0, 34, 0, Math.PI * 2); ctx.fillStyle = "#c2b291"; ctx.fill();
+        ctx.strokeStyle = ink; ctx.lineWidth = 1.6; ctx.stroke();
+        for (let i = 0; i < 3; i++) {
+          ctx.beginPath(); ctx.arc(0, 0, 30 - i * 7, 0, Math.PI * 2);
+          ctx.strokeStyle = "rgba(38,30,22,0.34)"; ctx.lineWidth = 1; ctx.stroke();
+        }
+        ctx.beginPath(); ctx.arc(0, 0, 11, 0, Math.PI * 2); ctx.fillStyle = "#e8dcbc"; ctx.fill();
+        ctx.strokeStyle = ink; ctx.lineWidth = 1; ctx.stroke();
+        ctx.restore();
+        // the arches round the outside, which is what makes it read as a coliseum and not a pond
+        for (let i = 0; i < 18; i++) {
+          const a = (i / 18) * Math.PI * 2;
+          ctx.beginPath();
+          ctx.arc(x + Math.cos(a) * 43.5, y + Math.sin(a) * 34, 2.1, 0, Math.PI * 2);
+          ctx.fillStyle = "rgba(38,30,22,0.5)"; ctx.fill();
+        }
+        drawn.add(id); break;
+      }
+      case "the_hundred_markets": {
+        plaza(x, y, 21, "#ddd2b2");
+        for (let i = 0; i < 10; i++) {
+          const a = (i / 10) * Math.PI * 2, r = 12;
+          ctx.fillStyle = i % 2 ? "#b4643f" : "#8a7f62";
+          ctx.fillRect(x + Math.cos(a) * r - 3, y + Math.sin(a) * r - 3, 6, 6);
+        }
+        drawn.add(id); break;
+      }
+      case "the_axis_gate": {
+        const g = ctx.createRadialGradient(x, y, 0, x, y, 30);
+        g.addColorStop(0, "rgba(120,180,255,0.42)"); g.addColorStop(1, "rgba(120,180,255,0)");
+        ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, 30, 0, Math.PI * 2); ctx.fill();
+        plaza(x, y, 17, "#d7d8e0");
+        ctx.strokeStyle = "rgba(90,150,230,0.95)"; ctx.lineWidth = 3; ctx.lineCap = "round";
+        ctx.beginPath(); ctx.arc(x, y + 5, 9, Math.PI, 0); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(x - 9, y + 5); ctx.lineTo(x - 9, y + 11);
+        ctx.moveTo(x + 9, y + 5); ctx.lineTo(x + 9, y + 11); ctx.stroke();
+        drawn.add(id); break;
+      }
+      case "the_quiet_house": {
+        ctx.fillStyle = "#efeadc"; ctx.strokeStyle = ink; ctx.lineWidth = 1.4;
+        ctx.beginPath(); ctx.rect(x - 17, y - 13, 34, 26); ctx.fill(); ctx.stroke();
+        ctx.fillStyle = "#ded7c2";
+        ctx.fillRect(x - 10, y - 6, 20, 12);
+        ctx.strokeRect(x - 10, y - 6, 20, 12);
+        drawn.add(id); break;
+      }
+      case "gen-the-ent-grove": {
+        for (let i = 0; i < 7; i++) {
+          const a = (i / 7) * Math.PI * 2, r = i ? 13 : 0;
+          const tx = x + Math.cos(a) * r, ty = y + Math.sin(a) * r;
+          ctx.beginPath(); ctx.arc(tx, ty, i ? 6 : 8, 0, Math.PI * 2);
+          ctx.fillStyle = i ? "#6f8a56" : "#5d7a46"; ctx.fill();
+          ctx.strokeStyle = "rgba(30,44,22,0.6)"; ctx.lineWidth = 0.9; ctx.stroke();
+        }
+        drawn.add(id); break;
+      }
+      case "the_crossing_gate_yard": {
+        plaza(x, y, 16, "#d2c6a6");
+        for (let i = 0; i < 4; i++) {
+          ctx.fillStyle = "#9a8e72";
+          ctx.fillRect(x - 11 + i * 6, y - 4, 4, 8);
+        }
+        drawn.add(id); break;
+      }
+      default: break;
+    }
+    ctx.restore();
+  }
+
+  // ⛑ THE NULL STONE AND THE REGULATOR CHAMBER ARE ONE PRECINCT (Aevi X3), which is also why the relaxation
+  // pushed them apart: they are authored at the SAME point, so the city draws the ground they share.
+  const stone = plan.marks.find((m) => m.id === "the_null_stone");
+  const cham = plan.marks.find((m) => m.id === "the_regulator_chamber");
+  if (stone && cham) {
+    ctx.save();
+    const mx = (stone.x + cham.x) / 2, my = (stone.y + cham.y) / 2;
+    const d = Math.hypot(stone.x - cham.x, stone.y - cham.y);
+    ctx.beginPath();
+    ctx.ellipse(mx, my, d / 2 + 18, 20, Math.atan2(cham.y - stone.y, cham.x - stone.x), 0, Math.PI * 2);
+    ctx.fillStyle = "rgba(214,206,186,0.9)"; ctx.fill();
+    ctx.strokeStyle = ink; ctx.lineWidth = 1.2; ctx.setLineDash([4, 3]); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle = "#4a4336";
+    ctx.beginPath(); ctx.arc(stone.x, stone.y, 6, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = "#8d8470";
+    ctx.fillRect(cham.x - 7, cham.y - 6, 14, 12);
+    ctx.strokeStyle = ink; ctx.lineWidth = 1; ctx.strokeRect(cham.x - 7, cham.y - 6, 14, 12);
+    ctx.restore();
+    drawn.add("the_null_stone"); drawn.add("the_regulator_chamber");
+  }
+
+  // ---- the hall last, so it sits over everything, with its banners ----
+  // ✅ AEVI X3: *"the Mavens' round hall; the houses as a ring of banners round it, one per houseAt power in its
+  // id colour."* ⛔ THIRTY-THREE POWERS KEEP A DOOR HERE and the ring is how that reads as a swirl rather than
+  // as thirty-three lines to thirty-three seats across the world.
+  const hall = plan.marks.find((m) => m.hall);
+  if (hall) {
+    const houses = housesAt(hall.id, CONTENT);
+    const R = 30;
+    for (let i = 0; i < houses.length; i++) {
+      const a = (i / Math.max(1, houses.length)) * Math.PI * 2 - Math.PI / 2;
+      const bx = hall.x + Math.cos(a) * (R + 9), by = hall.y + Math.sin(a) * (R + 9);
+      ctx.save();
+      ctx.translate(bx, by); ctx.rotate(a + Math.PI / 2);
+      ctx.fillStyle = powerColour(houses[i]);
+      ctx.beginPath(); ctx.moveTo(-2.4, -6); ctx.lineTo(2.4, -6); ctx.lineTo(2.4, 4); ctx.lineTo(0, 1.6); ctx.lineTo(-2.4, 4);
+      ctx.closePath(); ctx.fill();
+      ctx.strokeStyle = "rgba(20,16,12,0.65)"; ctx.lineWidth = 0.5; ctx.stroke();
+      ctx.restore();
+    }
+    ctx.beginPath(); ctx.arc(hall.x, hall.y, R, 0, Math.PI * 2);
+    ctx.fillStyle = "#e8dfc4"; ctx.fill();
+    ctx.strokeStyle = ink; ctx.lineWidth = 2; ctx.stroke();
+    ctx.beginPath(); ctx.arc(hall.x, hall.y, R - 7, 0, Math.PI * 2);
+    ctx.strokeStyle = "rgba(38,30,22,0.4)"; ctx.lineWidth = 1; ctx.stroke();
+    for (let i = 0; i < 12; i++) {
+      const a = (i / 12) * Math.PI * 2;
+      ctx.beginPath();
+      ctx.moveTo(hall.x + Math.cos(a) * (R - 7), hall.y + Math.sin(a) * (R - 7));
+      ctx.lineTo(hall.x + Math.cos(a) * R, hall.y + Math.sin(a) * R);
+      ctx.strokeStyle = "rgba(38,30,22,0.45)"; ctx.lineWidth = 1; ctx.stroke();
+    }
+    drawn.add(hall.id);
+  }
+
+  // anything unlisted: a plain plaza, and its own glyph still draws on top
+  for (const m of plan.marks) if (!drawn.has(m.id)) plaza(m.x, m.y, 13);
+  return drawn;
+}
+
+const CITY = {
+  paper: "#d9cfb6", paperDark: "#cfc3a4", ink: "rgba(38,30,22,0.78)",
+  roof: "#b4643f", roofDark: "#8e4b2f", garden: "#7d9360", court: "#e4dcc6",
+  wall: "#6b5a44", outside: "#14161a", lattice: "rgba(120,180,255,0.9)",
+};
+
+/** Paint it. Returns the plan, so the hit test can use the same marks the eye did. */
+function paintCrossingCity(ctx, regionId, W, H) {
+  const plan = cityFor(regionId, W, H);
+  if (!plan) return null;
+  const { cx, cy, wallR, rimR } = plan;
+  const rad = (d) => d * Math.PI / 180;
+
+  // the field beyond the wall, and the city's own paper inside it
+  ctx.save();
+  ctx.fillStyle = CITY.outside; ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = CITY.paper;
+  ctx.beginPath(); ctx.arc(cx, cy, wallR, 0, Math.PI * 2); ctx.fill();
+
+  // ---- the fabric: ring streets, then the blocks between them ----
+  ctx.strokeStyle = "rgba(38,30,22,0.14)"; ctx.lineWidth = 7;
+  for (const r of plan.fabric.rings) { ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.stroke(); }
+  for (const b of plan.fabric.blocks) {
+    const pts = blockPath(b, cx, cy, 4);
+    ctx.beginPath(); ctx.moveTo(pts[0][0], pts[0][1]);
+    for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i][0], pts[i][1]);
+    ctx.closePath();
+    ctx.fillStyle = b.kind === "garden" ? CITY.garden : b.kind === "courtyard" ? CITY.court : CITY.paperDark;
+    ctx.fill();
+    if (b.kind === "roofs") {
+      for (const q of blockRoofs(b, cx, cy)) {
+        ctx.beginPath(); ctx.moveTo(q[0][0], q[0][1]);
+        for (let i = 1; i < q.length; i++) ctx.lineTo(q[i][0], q[i][1]);
+        ctx.closePath();
+        ctx.fillStyle = CITY.roof; ctx.fill();
+        ctx.strokeStyle = CITY.roofDark; ctx.lineWidth = 0.7; ctx.stroke();
+      }
+    }
+  }
+
+  // ---- the avenues, from the hall out through their gates ----
+  // ✅ regionMaps' own guidance for the_center: *"Every road on the map ends here. Draw the twelve roads as the
+  // map's spine."* So they are drawn wide and under everything else, which is what a spine is.
+  ctx.lineCap = "round";
+  for (const a of plan.avenues) {
+    ctx.strokeStyle = "rgba(38,30,22,0.20)"; ctx.lineWidth = 11;
+    ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(a.rim.x, a.rim.y); ctx.stroke();
+    ctx.strokeStyle = CITY.paper; ctx.lineWidth = 8;
+    ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(a.rim.x, a.rim.y); ctx.stroke();
+  }
+
+  // ---- the wall, with one gate per road ----
+  ctx.strokeStyle = CITY.wall; ctx.lineWidth = 5;
+  ctx.beginPath(); ctx.arc(cx, cy, wallR, 0, Math.PI * 2); ctx.stroke();
+  ctx.strokeStyle = "rgba(20,16,12,0.55)"; ctx.lineWidth = 1.2;
+  ctx.beginPath(); ctx.arc(cx, cy, wallR + 3.2, 0, Math.PI * 2); ctx.stroke();
+  for (const a of plan.avenues) {
+    ctx.save();
+    ctx.translate(a.gate.x, a.gate.y); ctx.rotate(rad(a.bearingDeg));
+    ctx.fillStyle = CITY.paper; ctx.fillRect(-7, -6, 14, 12);
+    ctx.strokeStyle = CITY.wall; ctx.lineWidth = 2; ctx.strokeRect(-7, -6, 14, 12);
+    ctx.restore();
+  }
+
+  // ---- the gate ring: poles the arch reaches, at their true bearing ----
+  ctx.save();
+  ctx.strokeStyle = "rgba(120,180,255,0.30)"; ctx.lineWidth = 1;
+  ctx.setLineDash([3, 5]);
+  ctx.beginPath(); ctx.arc(cx, cy, Math.min(W, H) * 0.5 - 30, 0, Math.PI * 2); ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.font = "600 8px system-ui, sans-serif";
+  for (const g of plan.poleRing) {
+    ctx.fillStyle = CITY.lattice;
+    ctx.beginPath(); ctx.arc(g.x, g.y, 2.4, 0, Math.PI * 2); ctx.fill();
+    const left = g.x < cx;
+    ctx.textAlign = left ? "right" : "left";
+    ctx.lineWidth = 2.2; ctx.strokeStyle = "rgba(10,12,18,0.85)";
+    const nm = String(g.name).slice(0, 18);
+    ctx.strokeText(nm, g.x + (left ? -5 : 5), g.y + 3);
+    ctx.fillStyle = "rgba(170,210,255,0.92)";
+    ctx.fillText(nm, g.x + (left ? -5 : 5), g.y + 3);
+  }
+  ctx.restore();
+
+  // ---- X3 · the landmarks, over the fabric ----
+  paintLandmarks(ctx, plan);
+
+  // ---- the foothill each avenue runs to, lettered on the rim ----
+  ctx.font = "600 9px system-ui, sans-serif";
+  for (const a of plan.avenues) {
+    const left = a.rim.x < cx;
+    ctx.textAlign = left ? "right" : "left";
+    ctx.lineWidth = 2.4; ctx.strokeStyle = "rgba(10,12,18,0.85)"; ctx.lineJoin = "round";
+    const nm = String(a.name).slice(0, 20) + " →";
+    const lx = Math.max(6, Math.min(W - 6, a.rim.x + (left ? -4 : 4)));
+    ctx.strokeText(nm, lx, a.rim.y + 3);
+    ctx.fillStyle = "rgba(232,226,210,0.92)";
+    ctx.fillText(nm, lx, a.rim.y + 3);
+  }
+  ctx.restore();
+  return plan;
 }
 
 const TIER_RANK = { region: 3, settlement: 2, site: 1 };
@@ -13012,10 +13303,16 @@ function paintRegionMap(regionId) {
   ctx.clearRect(0, 0, W, H);
   const img = ctx.createImageData(W, H);
   const D = img.data;
-  const muteGround = !!(fieldCtl.on && fieldCtl.kinds.size && worldField());
+  // ⛔ X · A POLAR REGION IS DRAWN AS A CITY, not as ground. ✅ ERIK on the polar terrain: *"really bad"* — and
+  // he was right: at ~1° across the Crossing is below the terrain's 0.25° information floor, so what he saw was
+  // the generator meeting the pole. There is no ground down there to draw better.
+  // ⛑ EVERYTHING BELOW STILL RUNS. The city only replaces the RASTER; the places, the chip, the clusters, the
+  // clicks and the lenses all carry on, because the plan gives them screen positions the same way a base does.
+  const city = ext.polar ? paintCrossingCity(ctx, regionId, W, H) : null;
+  const muteGround = !city && !!(fieldCtl.on && fieldCtl.kinds.size && worldField());
   const step = contourStepFor(ext.polar ? 2 * ext.poleRadiusDeg
     : Math.max(ext.la1 - ext.la0, (ext.lo1 - ext.lo0) * base.conv));
-  for (let y = 0; y < H; y++) {
+  for (let y = 0; city ? false : y < H; y++) {
     for (let x = 0; x < W; x++) {
       const w = base.toWorld(x + 0.5, y + 0.5, W, H);
       const sm = base.sample(w.lon, w.lat);
@@ -13044,10 +13341,10 @@ function paintRegionMap(regionId) {
       D[o] = c[0]; D[o + 1] = c[1]; D[o + 2] = c[2]; D[o + 3] = 255;
     }
   }
-  ctx.putImageData(img, 0, 0);
+  if (!city) ctx.putImageData(img, 0, 0);
 
   // ⛔ B5 · WHOSE GROUND — under the field's own marks, because the ground is what the field sits ON.
-  if (fieldCtl.territory) {
+  if (fieldCtl.territory && !city) {
     try { paintTerritory(ctx, base, ext, regionId, W, H); }
     catch (err) { console.warn("[region-map] the territory layer did not draw — the ground still did:", err); }
   }
@@ -13071,7 +13368,7 @@ function paintRegionMap(regionId) {
   // wild scatter that runs in DOTS are legible together at a glance; two tints of the same wash are not.
   // ⛑ The dots are deterministic (hashed, not random), so the same world stipples identically every repaint
   // — a field that re-scattered each frame would read as a world that keeps changing.
-  if (fieldCtl.on && fieldCtl.kinds.size && worldField()) {
+  if (fieldCtl.on && fieldCtl.kinds.size && worldField() && !city) {
     try {
       const F = worldField();
       const GW = 110, GH = 110;
@@ -13348,7 +13645,9 @@ function paintRegionMap(regionId) {
     // ⚠️ the network folds journeys that go through another town onto their legs, so a triangle does not draw
     // its third side alongside the other two (SNG-422)
     const net = roadNetwork(CONTENT.locations, { k: 1.1 });
-    const routed = routedRoadsFor(regionId, net.roads, ext, base, W, H);
+    // ⛑ on a city the AVENUES are the roads — drawn already, from the hall out through the wall — so routing
+    // them a second time would lay a duplicate set over the top on a projection the city no longer uses.
+    const routed = city ? null : routedRoadsFor(regionId, net.roads, ext, base, W, H);
     const exits = [];
     if (routed) {
       const lines = routed.roads.map((r) => ({ r, pts: smoothRoad(r.points) }));
@@ -13395,7 +13694,7 @@ function paintRegionMap(regionId) {
     }
     // ⛔ C4.3 · the houses, where any place here keeps them — the Crossing's swirl
     _houseMarks = paintHouses(ctx, base, W, H,
-      Object.keys(CONTENT.locations || {}).filter((id) => (CONTENT.locations[id]?.regionId || CONTENT.locations[id]?.region) === regionId));
+      Object.keys(CONTENT.locations || {}).filter((id) => (CONTENT.locations[id]?.regionId || CONTENT.locations[id]?.region) === regionId), city);
 
     // ⛑ THE NOTICE IS GONE because the map exists. It said *"No flat map here — this ground sits on the
     // world's axis"*, which was true for a lon/lat frame and stopped being true the moment Erik ruled
@@ -13451,7 +13750,11 @@ function paintRegionMap(regionId) {
     const l = CONTENT.locations[id];
     if (!l?.worldPos || (l.regionId || l.region) !== regionId) continue;
     if (l.supersededBy || aliased416[id]) continue;
-    const p = base.toScreen(l.worldPos.longitude, l.worldPos.colatitude - 90, W, H);
+    // ⛔ ON A CITY THE PLAN IS THE PROJECTION. Reading `base.toScreen` here would put the hub's eleven places
+    // back on one pixel at the pole — which is the whole thing the city exists to fix — and the labels, the
+    // cluster seals and every click would go with them.
+    const m = city ? city.marks.find((q) => q.id === id) : null;
+    const p = m ? { x: m.x, y: m.y } : base.toScreen(l.worldPos.longitude, l.worldPos.colatitude - 90, W, H);
     if (p.x < -20 || p.y < -20 || p.x > W + 20 || p.y > H + 20) continue;
     marks416.push({ id, l, p, name: String(l.name || id).slice(0, 22) });
   }

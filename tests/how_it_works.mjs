@@ -36871,6 +36871,118 @@ console.log("\n── §420 · whose ground, drawn ──");
     })());
 }
 
+/* ══════════ §421 · A HUB DRAWN AS A CITY ══════════ */
+// ✅ ERIK, 2026-10-04, seeing the polar Crossing in the game: *"really bad"*, then *"Can we make it look like a
+// big city with these places laid out?"*
+//
+// ⛔ THE GROUND WAS NEVER THE PROBLEM TO FIX. The Crossing is about one degree across and the terrain's
+// information floor is 0.25°, so the concentric rings and radial seams he saw were the generator meeting the
+// pole. There is nothing down there to draw better. A city is what the place IS.
+//
+// ⛑ C1's PROJECTION SURVIVES UNDERNEATH: bearing is still longitude, so every road leaves pointing where it
+// really goes. Only the RADIUS is re-scaled, logarithmically, so a city half a degree wide fills a frame.
+console.log("\n── §421 · a hub drawn as a city ──");
+{
+  const CP = await import("../engine/cityplan.js");
+
+  // a fixture hub: a hall, three places AT the pole, and a spread of others — the shape the Crossing has
+  const hub421 = [
+    { id: "hall", name: "Hall", tier: "region", rho: 0, bearingDeg: 0 },
+    { id: "p1", name: "P1", tier: "site", rho: 0, bearingDeg: 0 },
+    { id: "p2", name: "P2", tier: "site", rho: 0, bearingDeg: 0 },
+    { id: "yard", name: "Yard", tier: "site", rho: 0.04, bearingDeg: 0 },
+    { id: "arch", name: "Arch", tier: "site", rho: 0.2, bearingDeg: 0 },
+    { id: "market", name: "Market", tier: "site", rho: 0.29, bearingDeg: 27 },
+    { id: "coliseum", name: "Coliseum", tier: "site", rho: 0.42, bearingDeg: 40, big: true },
+    { id: "quiet", name: "Quiet", tier: "site", rho: 0.5, bearingDeg: 290 },
+  ];
+  const roads421 = Array.from({ length: 12 }, (_, i) => ({ to: `road${i}`, name: `Road ${i}`, bearingDeg: i * 30 }));
+  const gates421 = Array.from({ length: 5 }, (_, i) => ({ to: `pole${i}`, name: `Pole ${i}`, bearingDeg: i * 71 }));
+  const W421 = 900, H421 = 560;
+  const plan421 = CP.cityPlan(hub421, { W: W421, H: H421, hallId: "hall", roadsOut: roads421, gates: gates421, seed: "fixture" });
+
+  /* ---- 1 · ⛔ NOTHING STACKS ON THE POLE ANY MORE ---- */
+  // ⚠️ THREE OF THE CROSSING'S ELEVEN PLACES SIT AT COLATITUDE 0. An honest projection puts them on one pixel,
+  // which is correct and useless — and is exactly what the region map did before this.
+  check("§421: ⛔ EVERY PLACE GETS ITS OWN GROUND — three at the pole no longer land on one pixel",
+    (() => {
+      let worst = Infinity;
+      for (let i = 0; i < plan421.marks.length; i++) for (let j = i + 1; j < plan421.marks.length; j++) {
+        const a = plan421.marks[i], b = plan421.marks[j];
+        worst = Math.min(worst, Math.hypot(a.x - b.x, a.y - b.y));
+      }
+      return plan421.marks.length === hub421.length && worst > 24;
+    })(), "the hub's own places were landing on one another at the axis");
+  check("§421: ⛔ …the hall is the centre, and nothing escapes the wall",
+    (() => {
+      const hall = plan421.marks.find((m) => m.id === "hall");
+      if (!hall || hall.x !== plan421.cx || hall.y !== plan421.cy) return false;
+      return plan421.marks.every((m) => Math.hypot(m.x - plan421.cx, m.y - plan421.cy) <= plan421.wallR + 0.001);
+    })());
+
+  /* ---- 2 · ⛔ BEARING IS TRUE, WHICH IS WHY THE PROJECTION WAS KEPT ---- */
+  // ⛑ a road that leaves the city must point where it leaves the WORLD, or the city is a decoration
+  check("§421: ⛔ A ROAD LEAVES ON ITS TRUE BEARING — north is up, and the twelve roads make twelve gates",
+    (() => {
+      if (plan421.avenues.length !== 12) return false;
+      for (const a of plan421.avenues) {
+        const dx = a.gate.x - plan421.cx, dy = a.gate.y - plan421.cy;
+        const got = ((Math.atan2(dx, -dy) * 180 / Math.PI) + 360) % 360;
+        if (Math.abs(((got - a.bearingDeg + 540) % 360) - 180) > 0.001) return false;
+      }
+      return true;
+    })());
+  // ⛔ ROADS GO TO FOOTHILLS, GATES GO TO POLES, and they are drawn as different things
+  check("§421: ⛔ …and the gate ring is its own ring, outside the wall",
+    plan421.poleRing.length === 5
+    && plan421.poleRing.every((g) => Math.hypot(g.x - plan421.cx, g.y - plan421.cy) > plan421.wallR));
+
+  /* ---- 3 · ⚠️ THE RADIUS IS LOG-SCALED, which is what makes the near places legible ---- */
+  check("§421: ⚠️ THE RADIUS IS LOG-SCALED — linear, everything near the hall piles up at the middle",
+    (() => {
+      const o = { rHall: 34, wallR: 300, pad: 26, rhoMax: 0.5 };
+      const near = CP.cityRadius(0.04, o) - CP.cityRadius(0, o);
+      const far = CP.cityRadius(0.5, o) - CP.cityRadius(0.46, o);
+      // the same step of colatitude buys far more room near the hall than out at the wall
+      return near > far * 2 && CP.cityRadius(0, o) === 34
+        && Math.abs(CP.cityRadius(0.5, o) - (300 - 26)) < 0.001;
+    })());
+  // ⛑ and it is MONOTONIC, or a place further out would draw nearer in
+  check("§421: ⛑ …and still monotonic: further from the hub is always further out",
+    (() => {
+      let last = -1;
+      for (const rho of [0, 0.01, 0.05, 0.12, 0.3, 0.5]) {
+        const r = CP.cityRadius(rho, { rhoMax: 0.5 });
+        if (!(r > last)) return false;
+        last = r;
+      }
+      return true;
+    })());
+
+  /* ---- 4 · ⛔ THE FABRIC IS GENERATED, SEEDED, AND KEEPS OFF THE LANDMARKS ---- */
+  check("§421: ⛔ THE CITY HOLDS STILL — the same world plans the same city, street for street",
+    (() => {
+      const again = CP.cityPlan(hub421, { W: W421, H: H421, hallId: "hall", roadsOut: roads421, gates: gates421, seed: "fixture" });
+      return JSON.stringify(again.fabric.blocks) === JSON.stringify(plan421.fabric.blocks)
+        && again.marks.every((m, i) => Math.abs(m.x - plan421.marks[i].x) < 1e-9);
+    })(), "streets that reshuffled between paints would read as a town rebuilding itself while you watched");
+  check("§421: ⛔ …and no block is built on a landmark, which is what makes the landmarks readable",
+    (() => {
+      const F = plan421.fabric;
+      if (F.blocks.length < 20 || F.rings.length < 2) return false;
+      for (const b of F.blocks) {
+        const mid = (b.a0 + b.a1) / 2, rm = (b.r0 + b.r1) / 2;
+        const x = plan421.cx + Math.sin(mid * Math.PI / 180) * rm;
+        const y = plan421.cy - Math.cos(mid * Math.PI / 180) * rm;
+        for (const m of plan421.marks) {
+          if (m.hall) continue;
+          if (Math.hypot(x - m.x, y - m.y) < 20) return false;
+        }
+      }
+      return true;
+    })());
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

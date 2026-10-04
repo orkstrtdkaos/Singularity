@@ -17792,7 +17792,17 @@ console.log("\n── §227 · the look the world agrees on ──");
   // ⚠️ AND "ALL" MEANS "ALL THAT HAVE A SUBJECT". A moment, a battle and a death scene are one-off tiles with
   // no durable subject (`needsId` absent) — there is nothing for a shared look to be ABOUT, and inventing an id
   // so the button could appear would be the button doing nothing wearing a costume.
-  const table227 = A227.slice(A227.indexOf("const REGEN_KINDS = {"));
+  // ⛔ BOUNDED TO THE TABLE. This used to slice from `const REGEN_KINDS = {` TO THE END OF THE FILE, so it went
+  // on matching `  name: {` through every unrelated object in the rest of app.js.
+  // ⚠️ IT CAUGHT ME 2026-10-04 WITH A PALETTE. A faubourg colour table twelve hundred lines away aligns its
+  // colons, so every entry had two spaces and none matched — except `destruction`, the longest key, which had
+  // exactly one. The gate read it as an image kind and then took FOUR THOUSAND CHARACTERS of unrelated code as
+  // its body, found a `canon:` in there and failed on a claim about canon looks.
+  // ⛑ Same shape as §411's `cut`, which sliced to EOF on a missing end marker and swallowed a browser `fetch`.
+  // A slice needs BOTH ends, and a source regex that can wander is a source regex that will.
+  const start227 = A227.indexOf("const REGEN_KINDS = {");
+  const end227 = start227 < 0 ? -1 : A227.indexOf("\n};", start227);
+  const table227 = start227 < 0 || end227 < 0 ? "" : A227.slice(start227, end227);
   const kinds227 = [];
   for (const m of table227.matchAll(/^  ([a-zA-Z]+): \{/gm)) {
     const from = m.index + m[0].length;
@@ -17802,7 +17812,7 @@ console.log("\n── §227 · the look the world agrees on ──");
     if (kinds227.length > 24) break;
   }
   check("§227: the kind table really was read — a zero-match here would pass every claim below vacuously",
-    kinds227.length >= 10, `${kinds227.length} kinds`);
+    kinds227.length >= 10 && table227.length > 200, `${kinds227.length} kinds from ${table227.length} chars`);
   const missing227 = kinds227.filter(k => k.subject && !k.canon).map(k => k.kind);
   check("§227: ⛔ EVERY image type with a subject can be made canon",
     missing227.length === 0, missing227.join(", ") || kinds227.filter(k => k.canon).map(k => k.kind).join(", "));
@@ -36966,6 +36976,57 @@ console.log("\n── §421 · a hub drawn as a city ──");
       return JSON.stringify(again.fabric.blocks) === JSON.stringify(plan421.fabric.blocks)
         && again.marks.every((m, i) => Math.abs(m.x - plan421.marks[i].x) < 1e-9);
     })(), "streets that reshuffled between paints would read as a town rebuilding itself while you watched");
+  /* ---- 5 · ⛔ THE QUARTERS OUTSIDE THE GATES ---- */
+  // ✅ ERIK, 2026-10-04: *"Let's render some areas outside the city walls. Each can be a loose arrangement that
+  // matches the tradition in that direction."*
+  // ⛑ THE TRADITION IS READ, NOT INVENTED: every foothill already carries a `spectrum`, and the quarter takes
+  // its dominant axis. That is the whole claim, and it is the one worth gating.
+  check("§421: ⛔ A QUARTER'S CHARACTER COMES FROM THE AUTHORED SPECTRUM, never from its name or its order",
+    (() => {
+      const L = (s) => CP.leanOf(s);
+      if (L({ dark_light: -0.4, falsehood_truth: -0.2 })?.key !== "dark_light-") return false;
+      if (L({ mechanical_spiritual: 0.4, emotional_logical: -0.2 })?.key !== "mechanical_spiritual+") return false;
+      // the DOMINANT axis wins, not the first one written
+      if (L({ chaos_order: 0.25, death_life: 0.4 })?.key !== "death_life+") return false;
+      // a tie breaks by name, so one world never reads two ways
+      if (L({ body_mind: 0.3, chaos_order: 0.3 })?.key !== "body_mind+") return false;
+      return L({})?.key === undefined && L(null) === null;
+    })());
+  // ⚠️ FOUR OF THE TWELVE ROADS ARE OPPOSITE POLES OF ONE AXIS — dark against light, life against death,
+  // angelic against demonic, mechanical against spiritual. If a pole and its opposite drew the same, the lens
+  // would be decoration wearing the clothes of information.
+  check("§421: ⚠️ OPPOSITE POLES OF ONE AXIS ARE DRAWN AS OPPOSITES, or the quarter is decoration",
+    (() => {
+      for (const axis of ["dark_light", "death_life", "demonic_angelic", "mechanical_spiritual",
+                          "falsehood_truth", "destruction_creation", "chaos_order", "body_mind"]) {
+        const a = CP.LEANS[`${axis}+`], b = CP.LEANS[`${axis}-`];
+        if (!a || !b || a.kind === b.kind) return false;
+        // and they differ in HOW they are arranged, not only in what they are called
+        if (a.rows === b.rows && Math.abs(a.jitter - b.jitter) < 0.15 && a.n === b.n) return false;
+      }
+      return true;
+    })());
+  check("§421: ⛔ …and every quarter sits OUTSIDE the wall and inside the frame",
+    (() => {
+      const withLean = plan421.avenues.map((a, i) => ({ ...a,
+        lean: { axis: "dark_light", value: i % 2 ? 0.4 : -0.4, key: i % 2 ? "dark_light+" : "dark_light-" } }));
+      const q = CP.faubourgs(withLean, { cx: plan421.cx, cy: plan421.cy, wallR: plan421.wallR, rimR: plan421.rimR, seed: "fixture" });
+      if (q.length !== 12) return false;
+      const huts = q.flatMap((x) => x.huts);
+      if (huts.length < 60) return false;
+      return huts.every((h) => {
+        const d = Math.hypot(h.x - plan421.cx, h.y - plan421.cy);
+        return d > plan421.wallR && d <= plan421.rimR;
+      });
+    })(), "a structure inside the wall is in the city; one off the frame did not get drawn at all");
+  // ⛑ and a road whose destination has no spectrum still gets a quarter, rather than a hole in the ring
+  check("§421: ⛑ …and a road with nothing authored about it still gets a plain quarter, not a gap",
+    (() => {
+      const q = CP.faubourgs([{ to: "x", name: "X", bearingDeg: 10, lean: null }],
+        { cx: 400, cy: 300, wallR: 150, rimR: 260, seed: "s" });
+      return q.length === 1 && q[0].kind === "plain" && q[0].huts.length > 0;
+    })());
+
   check("§421: ⛔ …and no block is built on a landmark, which is what makes the landmarks readable",
     (() => {
       const F = plan421.fabric;

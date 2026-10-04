@@ -55,7 +55,7 @@ import { housesAt } from "./engine/powers.js";
 // ⛔ B4 — a lens is WHERE the marks go (pure, here) and HOW they are inked (below, in this file)
 import { isoLines, blurGrid, stipple, hexGather, nearness, crystalFacets } from "./engine/lenses.js";
 // ⛔ ✅ ERIK: *"Can we make it look like a big city with these places laid out?"*
-import { cityPlan, blockPath, blockRoofs } from "./engine/cityplan.js";
+import { cityPlan, blockPath, blockRoofs, faubourgs, leanOf } from "./engine/cityplan.js";
 import { makeInfluence } from "./engine/influence.js";
 import { glyphFor, drawGlyph } from "./engine/mapicons.mjs";   // SNG-409 §4: a pole must never read as a town   // SNG-390: the globe, read-only
 import { walkingDays, milesFor, worldPosForGenerated, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout, fieldBlobs, fieldAlpha, placeLabels } from "./engine/worldmap.js";
@@ -194,7 +194,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.18.2";
+const APP_VERSION = "2.18.3";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -12795,8 +12795,136 @@ function cityFor(regionId, W, H) {
     .filter((o) => CONTENT.locations[o]?.worldPos && (CONTENT.locations[o]?.role === "gate" || /gate|waygate/.test(o)))
     .map((o) => ({ to: o, name: CONTENT.locations[o]?.name || o, bearingDeg: bearingOf(o) })) : [];
   const plan = cityPlan(places, { W, H, hallId: hall.id, roadsOut, gates, seed: regionId });
+  // ⛔ the quarters outside the gates, each from the tradition its road runs toward
+  const withLean = plan.avenues.map((a) => {
+    const l = CONTENT.locations[a.to];
+    return { ...a, lean: leanOf(l?.spectrum), toward: l?.betweenCrossingAnd || null };
+  });
+  plan.quarters = faubourgs(withLean, { cx: plan.cx, cy: plan.cy, wallR: plan.wallR, rimR: plan.rimR, seed: regionId, W, H });
   _cityPlan = { key, plan };
   return plan;
+}
+
+/** ⛔ THE QUARTERS OUTSIDE THE GATES. ✅ ERIK: *"Let's render some areas outside the city walls. Each can be a
+ *  loose arrangement that matches the tradition in that direction."*
+ *
+ *  ⛑ THE TRADITION IS READ, NEVER INVENTED. Each of the twelve roads runs to a foothill that already carries a
+ *  `spectrum`, and the quarter takes the dominant axis of it: Dusklow leans dark because the Underlight is that
+ *  way, Kindlerow leans light because the Blaze is. MEASURED: twelve roads, twelve different characters.
+ *  ⚠️ AND FOUR PAIRS ARE OPPOSITE POLES OF ONE AXIS — dark/light, life/death, angelic/demonic,
+ *  mechanical/spiritual — so they are inked to read as opposites. If they looked alike the lens would be
+ *  decoration pretending to be information. */
+const QUARTER = {
+  dark:        { roof: "#3b3228", edge: "rgba(12,10,8,0.85)", ground: "rgba(28,24,18,0.5)" },
+  light:       { roof: "#f0e6c8", edge: "rgba(120,104,70,0.7)", ground: "rgba(246,238,206,0.26)" },
+  mechanical:  { roof: "#7d7468", edge: "rgba(24,22,18,0.8)", ground: "rgba(70,66,58,0.34)" },
+  spiritual:   { roof: "#d8d2e4", edge: "rgba(78,70,96,0.7)", ground: "rgba(186,176,212,0.22)" },
+  life:        { roof: "#6f9253", edge: "rgba(28,48,22,0.72)", ground: "rgba(88,120,64,0.3)" },
+  death:       { roof: "#8f8a7e", edge: "rgba(30,28,24,0.8)", ground: "rgba(72,70,64,0.3)" },
+  mind:        { roof: "#a9b6cc", edge: "rgba(34,42,58,0.78)", ground: "rgba(96,110,136,0.26)" },
+  body:        { roof: "#b08763", edge: "rgba(44,30,18,0.78)", ground: "rgba(120,88,58,0.28)" },
+  time:        { roof: "#b7a98c", edge: "rgba(40,34,24,0.76)", ground: "rgba(104,94,72,0.26)" },
+  space:       { roof: "#9a9ea8", edge: "rgba(30,32,38,0.76)", ground: "rgba(84,88,96,0.26)" },
+  truth:       { roof: "#ded8c4", edge: "rgba(52,48,38,0.85)", ground: "rgba(150,142,120,0.24)" },
+  falsehood:   { roof: "#9c8f7a", edge: "rgba(36,30,22,0.7)", ground: "rgba(84,74,58,0.28)" },
+  angelic:     { roof: "#efe6cf", edge: "rgba(132,116,72,0.75)", ground: "rgba(236,226,186,0.28)" },
+  demonic:     { roof: "#5a2f2c", edge: "rgba(14,8,8,0.88)", ground: "rgba(48,22,20,0.44)" },
+  destruction: { roof: "#6d6155", edge: "rgba(20,16,12,0.82)", ground: "rgba(56,48,40,0.38)" },
+  creation:    { roof: "#c9a96f", edge: "rgba(52,38,18,0.72)", ground: "rgba(140,112,64,0.26)" },
+  plain:       { roof: "#a08a6a", edge: "rgba(38,30,22,0.75)", ground: "rgba(90,78,60,0.26)" },
+};
+
+function paintFaubourgs(ctx, plan, quarters) {
+  for (const q of quarters) {
+    const C = QUARTER[q.kind] || QUARTER.plain;
+    // the quarter's own ground, a soft wash under its structures so it reads as a place and not as scatter
+    ctx.save();
+    const xs = q.huts.map((h) => h.x), ys = q.huts.map((h) => h.y);
+    if (xs.length) {
+      const mx = xs.reduce((a, b) => a + b, 0) / xs.length, my = ys.reduce((a, b) => a + b, 0) / ys.length;
+      const rad = Math.max(...q.huts.map((h) => Math.hypot(h.x - mx, h.y - my))) + 16;
+      const g = ctx.createRadialGradient(mx, my, 0, mx, my, rad);
+      g.addColorStop(0, C.ground); g.addColorStop(1, "rgba(0,0,0,0)");
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(mx, my, rad, 0, Math.PI * 2); ctx.fill();
+    }
+    ctx.restore();
+
+    for (const h of q.huts) {
+      ctx.save();
+      ctx.translate(h.x, h.y); ctx.rotate(h.rot);
+      ctx.fillStyle = C.roof; ctx.strokeStyle = C.edge; ctx.lineWidth = 0.9; ctx.lineJoin = "round";
+      switch (q.kind) {
+        case "life": {                                   // a grove, not a street
+          ctx.beginPath(); ctx.arc(0, 0, h.w * 0.46, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+          break;
+        }
+        case "death": {                                  // cairns, in their rows
+          ctx.beginPath(); ctx.moveTo(-h.w * 0.4, h.h * 0.4); ctx.lineTo(0, -h.h * 0.5); ctx.lineTo(h.w * 0.4, h.h * 0.4);
+          ctx.closePath(); ctx.fill(); ctx.stroke();
+          break;
+        }
+        case "angelic": {                                // a pale spire with a lit tip
+          ctx.beginPath(); ctx.moveTo(-h.w * 0.3, h.h * 0.6); ctx.lineTo(0, -h.h * 0.9); ctx.lineTo(h.w * 0.3, h.h * 0.6);
+          ctx.closePath(); ctx.fill(); ctx.stroke();
+          ctx.beginPath(); ctx.arc(0, -h.h * 0.95, 1.5, 0, Math.PI * 2);
+          ctx.fillStyle = "rgba(255,246,200,0.95)"; ctx.fill();
+          break;
+        }
+        case "demonic": {                                // jagged, leaning, dark
+          ctx.beginPath();
+          ctx.moveTo(-h.w * 0.5, h.h * 0.5); ctx.lineTo(-h.w * 0.15, -h.h * 0.7);
+          ctx.lineTo(h.w * 0.1, h.h * 0.1); ctx.lineTo(h.w * 0.5, -h.h * 0.4); ctx.lineTo(h.w * 0.45, h.h * 0.5);
+          ctx.closePath(); ctx.fill(); ctx.stroke();
+          break;
+        }
+        case "spiritual": {                              // a standing stone, upright and alone
+          ctx.beginPath(); ctx.ellipse(0, 0, h.w * 0.22, h.h * 0.8, 0, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+          break;
+        }
+        case "mechanical": {                             // a shed with a chimney
+          ctx.beginPath(); ctx.rect(-h.w / 2, -h.h / 2, h.w, h.h); ctx.fill(); ctx.stroke();
+          ctx.fillStyle = C.edge;
+          ctx.fillRect(h.w * 0.22, -h.h * 0.95, h.w * 0.14, h.h * 0.55);
+          break;
+        }
+        case "mind": {                                   // a thin tower
+          ctx.beginPath(); ctx.rect(-h.w * 0.2, -h.h * 1.1, h.w * 0.4, h.h * 1.7); ctx.fill(); ctx.stroke();
+          break;
+        }
+        case "time": {                                   // a long terrace, strung along the road
+          ctx.beginPath(); ctx.rect(-h.w * 0.95, -h.h * 0.3, h.w * 1.9, h.h * 0.6); ctx.fill(); ctx.stroke();
+          break;
+        }
+        case "truth": {                                  // one plain stone, square to the road
+          ctx.beginPath(); ctx.rect(-h.w * 0.36, -h.h * 0.5, h.w * 0.72, h.h); ctx.fill(); ctx.stroke();
+          break;
+        }
+        case "destruction": {                            // a broken wall, open on one side
+          ctx.beginPath();
+          ctx.moveTo(-h.w / 2, h.h / 2); ctx.lineTo(-h.w / 2, -h.h * 0.2);
+          ctx.lineTo(-h.w * 0.1, -h.h * 0.45); ctx.lineTo(h.w * 0.1, -h.h * 0.05);
+          ctx.lineTo(h.w / 2, -h.h * 0.3); ctx.lineTo(h.w / 2, h.h / 2);
+          ctx.closePath(); ctx.fill(); ctx.stroke();
+          break;
+        }
+        case "creation": {                               // a scaffold: a frame, not a roof
+          ctx.beginPath(); ctx.rect(-h.w / 2, -h.h / 2, h.w, h.h); ctx.stroke();
+          ctx.beginPath(); ctx.moveTo(-h.w / 2, h.h / 2); ctx.lineTo(h.w / 2, -h.h / 2); ctx.stroke();
+          break;
+        }
+        case "light": {                                  // an open court, pale, with room round it
+          ctx.beginPath(); ctx.rect(-h.w * 0.6, -h.h * 0.6, h.w * 1.2, h.h * 1.2); ctx.fill(); ctx.stroke();
+          ctx.fillStyle = "rgba(255,250,228,0.55)";
+          ctx.fillRect(-h.w * 0.26, -h.h * 0.26, h.w * 0.52, h.h * 0.52);
+          break;
+        }
+        default: {                                       // a roof
+          ctx.beginPath(); ctx.rect(-h.w / 2, -h.h / 2, h.w, h.h); ctx.fill(); ctx.stroke();
+        }
+      }
+      ctx.restore();
+    }
+  }
 }
 
 /** ⛔ X3 · THE LANDMARKS, one drawing each by location id. ✅ ERIK: *"The coliseum is central in the culture
@@ -13009,6 +13137,9 @@ function paintCrossingCity(ctx, regionId, W, H) {
     ctx.strokeStyle = CITY.wall; ctx.lineWidth = 2; ctx.strokeRect(-7, -6, 14, 12);
     ctx.restore();
   }
+
+  // ---- the quarters outside the gates ----
+  if (plan.quarters?.length) paintFaubourgs(ctx, plan, plan.quarters);
 
   // ---- the gate ring: poles the arch reaches, at their true bearing ----
   ctx.save();

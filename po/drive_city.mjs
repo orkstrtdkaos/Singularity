@@ -38,3 +38,20 @@ const again = CP.cityPlan(places, { W, H, hallId: "the_crossing", roadsOut, gate
 const same = JSON.stringify(plan.fabric.blocks) === JSON.stringify(again.fabric.blocks)
   && plan.marks.every((m, i) => Math.abs(m.x - again.marks[i].x) < 1e-9);
 console.log(`deterministic: ${same}`);
+
+// ---- the quarters outside the gates, from the tradition in that direction ----
+const withLean = plan.avenues.map(a => {
+  const l = C.locations[a.to];
+  return { ...a, lean: CP.leanOf(l?.spectrum), toward: l?.betweenCrossingAnd || null };
+});
+const fb = CP.faubourgs(withLean, { cx: plan.cx, cy: plan.cy, wallR: plan.wallR, rimR: plan.rimR, seed: "the_center" });
+console.log(`\n${fb.length} quarters outside the wall:`);
+for (const q of fb.slice().sort((a,b)=>a.bearingDeg-b.bearingDeg)) {
+  console.log(`  ${String(q.name).padEnd(16)} ${String(q.bearingDeg).padStart(5)}deg  toward ${String(q.toward||'-').padEnd(22)} ${String(q.lean?.key||'-').padEnd(24)} -> ${String(q.kind).padEnd(12)} ${q.huts.length} structures`);
+}
+const kinds = new Set(fb.map(q => q.kind));
+console.log(`\ndistinct characters: ${kinds.size} of ${fb.length} roads — ${[...kinds].join(", ")}`);
+const insideWall = fb.flatMap(q => q.huts).filter(h => Math.hypot(h.x - plan.cx, h.y - plan.cy) <= plan.wallR).length;
+console.log(`structures inside the wall (want 0): ${insideWall}`);
+const far = fb.flatMap(q => q.huts).filter(h => Math.hypot(h.x - plan.cx, h.y - plan.cy) > Math.min(900,560)/2).length;
+console.log(`structures off the canvas (want 0): ${far}`);

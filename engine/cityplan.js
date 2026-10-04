@@ -48,7 +48,11 @@ export function cityRadius(rho, { rHall = 34, wallR = 300, pad = 26, rhoMax = 0.
  *
  *  Returns everything positioned, in canvas pixels, with the hall at the centre. */
 export function cityPlan(places, {
-  W = 800, H = 520, wallFrac = 0.42, pad = 26, rHall = 34, hallId = null,
+  // ⚠️ THE WALL PULLED IN FROM 0.42 TO 0.33 TO MAKE ROOM OUTSIDE IT. ✅ ERIK asked for *"areas outside the
+  // city walls"*, and at 0.42 the ring between the wall and the frame was 33px — enough for a hedge, not for a
+  // quarter. The city loses a fifth of its radius and the faubourgs gain two and a half times their depth,
+  // which is the right trade when the thing outside is the thing that was asked for.
+  W = 800, H = 520, wallFrac = 0.33, pad = 26, rHall = 30, hallId = null,
   roadsOut = [], gates = [], seed = "city", wardR = 62, relaxPasses = 60,
 } = {}) {
   const cx = W / 2, cy = H / 2;
@@ -133,6 +137,104 @@ export function cityPlan(places, {
   const fabric = cityFabric({ cx, cy, wallR, rHall, marks, avenues, seed: S, foot });
 
   return { cx, cy, wallR, rimR, rHall, rhoMax, marks, avenues, poleRing, fabric, atBearing };
+}
+
+/** ⛔ THE GROUND OUTSIDE THE GATES. ✅ ERIK, 2026-10-04: *"Let's render some areas outside the city walls. Each
+ *  can be a loose arrangement that matches the tradition in that direction."*
+ *
+ *  ⛑ THE TRADITION IN THAT DIRECTION IS ALREADY AUTHORED, and nothing here invents it. Every one of the twelve
+ *  foothills carries a `spectrum` — the world's own signed description of what lies that way — and a
+ *  `betweenCrossingAnd` naming the great place the road runs toward. The faubourg takes its character from the
+ *  DOMINANT AXIS of that spectrum, so the quarter outside a gate is the quarter the road earns.
+ *
+ *  ⚠️ MEASURED on the real Crossing: all twelve roads lean a different way, and FOUR PAIRS ARE OPPOSITE POLES
+ *  OF ONE AXIS — Dusklow dark against Kindlerow light, Greenmarch life against Greyhearth death, Stair Hollow
+ *  angelic against the Low Market demonic, Gearsflat mechanical against Thinwater spiritual. Those four pairs
+ *  must read as opposites or the lens is decoration.
+ *
+ *  Pure, and seeded: the same quarter every paint. */
+export const LEANS = {
+  "dark_light-": { kind: "dark", n: 16, spread: 0.62, jitter: 0.85, size: 7, rows: false },
+  "dark_light+": { kind: "light", n: 9, spread: 1.15, jitter: 0.25, size: 9, rows: false },
+  "mechanical_spiritual-": { kind: "mechanical", n: 14, spread: 0.8, jitter: 0.12, size: 10, rows: true },
+  "mechanical_spiritual+": { kind: "spiritual", n: 7, spread: 1.25, jitter: 0.45, size: 7, rows: false },
+  "death_life+": { kind: "life", n: 18, spread: 1.0, jitter: 0.7, size: 7, rows: false },
+  "death_life-": { kind: "death", n: 13, spread: 0.72, jitter: 0.1, size: 5, rows: true },
+  "body_mind+": { kind: "mind", n: 8, spread: 0.9, jitter: 0.3, size: 8, rows: true },
+  "body_mind-": { kind: "body", n: 15, spread: 0.85, jitter: 0.55, size: 9, rows: false },
+  "space_time+": { kind: "time", n: 11, spread: 1.3, jitter: 0.2, size: 11, rows: true },
+  "space_time-": { kind: "space", n: 14, spread: 0.55, jitter: 0.5, size: 8, rows: false },
+  "falsehood_truth+": { kind: "truth", n: 7, spread: 0.95, jitter: 0.08, size: 9, rows: true },
+  "falsehood_truth-": { kind: "falsehood", n: 15, spread: 0.9, jitter: 0.95, size: 8, rows: false },
+  "demonic_angelic+": { kind: "angelic", n: 9, spread: 1.05, jitter: 0.22, size: 10, rows: false },
+  "demonic_angelic-": { kind: "demonic", n: 14, spread: 0.75, jitter: 0.9, size: 8, rows: false },
+  "destruction_creation-": { kind: "destruction", n: 16, spread: 0.85, jitter: 1.0, size: 8, rows: false },
+  "destruction_creation+": { kind: "creation", n: 12, spread: 0.95, jitter: 0.35, size: 9, rows: true },
+  "chaos_order+": { kind: "order", n: 13, spread: 0.85, jitter: 0.06, size: 8, rows: true },
+  "chaos_order-": { kind: "chaos", n: 15, spread: 0.85, jitter: 1.0, size: 8, rows: false },
+  "violence_peace+": { kind: "peace", n: 10, spread: 1.0, jitter: 0.3, size: 8, rows: false },
+  "violence_peace-": { kind: "violence", n: 14, spread: 0.7, jitter: 0.7, size: 8, rows: false },
+  "concrete_abstract+": { kind: "abstract", n: 9, spread: 1.1, jitter: 0.6, size: 7, rows: false },
+  "concrete_abstract-": { kind: "concrete", n: 14, spread: 0.8, jitter: 0.15, size: 10, rows: true },
+  "emotional_logical+": { kind: "logical", n: 12, spread: 0.85, jitter: 0.1, size: 8, rows: true },
+  "emotional_logical-": { kind: "emotional", n: 14, spread: 0.9, jitter: 0.8, size: 8, rows: false },
+};
+const PLAIN = { kind: "plain", n: 11, spread: 0.85, jitter: 0.5, size: 8, rows: false };
+
+/** The dominant axis of a spectrum, as the key `LEANS` is keyed by. ⛑ Ties break by name so the same world
+ *  always reads the same way — `Object.entries` order is not a guarantee worth leaning on. */
+export function leanOf(spectrum) {
+  const rows = Object.entries(spectrum || {}).filter(([, v]) => Number.isFinite(Number(v)) && v !== 0);
+  if (!rows.length) return null;
+  rows.sort((a, b) => Math.abs(b[1]) - Math.abs(a[1]) || a[0].localeCompare(b[0]));
+  const [axis, v] = rows[0];
+  return { axis, value: v, key: `${axis}${v >= 0 ? "+" : "-"}` };
+}
+
+/** ⛔ A loose arrangement outside each gate. Returns one quarter per avenue, each with its own character and
+ *  its huts already placed in canvas pixels. */
+export function faubourgs(avenues, { cx, cy, wallR, rimR, seed = 1, gap = 16, depth = null, W = 0, H = 0 } = {}) {
+  const S = typeof seed === "string" ? strSeed(seed) : seed;
+  const out = [];
+  const r0 = wallR + gap;
+  const r1 = depth != null ? r0 + depth : Math.max(r0 + 26, rimR - 34);
+  (avenues || []).forEach((a, ai) => {
+    const lean = a.lean || null;
+    const L = (lean && LEANS[lean.key]) || PLAIN;
+    // the quarter's own angular width: half the gap to each neighbour, so quarters never grow into each other
+    const prev = avenues[(ai - 1 + avenues.length) % avenues.length];
+    const next = avenues[(ai + 1) % avenues.length];
+    const dPrev = Math.abs(((a.bearingDeg - prev.bearingDeg + 540) % 360) - 180) || 30;
+    const dNext = Math.abs(((next.bearingDeg - a.bearingDeg + 540) % 360) - 180) || 30;
+    const halfWide = Math.min(26, Math.max(6, Math.min(dPrev, dNext) * 0.42)) * L.spread;
+    const huts = [];
+    for (let i = 0; i < L.n; i++) {
+      const u = (i + 0.5) / L.n;
+      // along the road, then off to one side of it
+      const along = r0 + (r1 - r0) * (L.rows ? u : (0.12 + 0.82 * rnd(S, ai * 131 + i, 1)));
+      const lane = L.rows
+        ? (i % 2 ? 1 : -1) * halfWide * (0.35 + 0.3 * ((i / L.n)))
+        : (rnd(S, ai * 211 + i, 2) * 2 - 1) * halfWide;
+      const jit = (rnd(S, ai * 307 + i, 3) * 2 - 1) * L.jitter;
+      const b = a.bearingDeg + lane + jit * 3.2;
+      const rr = along + jit * 9;
+      const rad = b * Math.PI / 180;
+      const sz = L.size * (0.7 + 0.6 * rnd(S, ai * 401 + i, 4));
+      // ⚠️ KEPT ON THE CANVAS. The jitter that makes a quarter look loose also throws the odd structure off
+      // the frame — measured, 2 of 157 — and a building drawn where nobody can see it is a building that did
+      // not get drawn. Pulled back along its own bearing, so it keeps its direction.
+      const lim = Math.max(wallR + 4, rimR - 4);
+      const rc = Math.min(rr, lim);
+      huts.push({
+        x: cx + Math.sin(rad) * rc, y: cy - Math.cos(rad) * rc,
+        w: sz, h: sz * (0.55 + 0.5 * rnd(S, ai * 503 + i, 5)),
+        rot: (L.rows ? rad : rad + (rnd(S, ai * 601 + i, 6) - 0.5) * 1.1),
+        t: rnd(S, ai * 701 + i, 7),
+      });
+    }
+    out.push({ to: a.to, name: a.name, bearingDeg: a.bearingDeg, lean, kind: L.kind, toward: a.toward || null, huts });
+  });
+  return out;
 }
 
 /** ⛔ AEVI X2 — the city fabric, generated and seeded: *"ring streets at fixed radii; blocks between ring streets

@@ -30,6 +30,7 @@
   "comes"
  ],
  "properties": {
+  "houseAt": { "type": "string", "description": "SNG-668: the Crossing place where this power keeps a house (a delegation, a chair among the Mavens' benches). Presence, never a claim on the ground: it lifts no danger and anchors no territory. Outlaws keep none." },
   "gateHeld": { "type": ["string", "null"], "description": "SNG-663 §2c: the location id of a Lattice arch this power holds as an ACT (closing it, charging for passage, garrisoning it). Content-authored seizure; the world tick writes powerState[id].gateHeld for one taken in play. Read by engine/gatehold.js. Never derived from holds." },
   "id": {
    "type": "string",

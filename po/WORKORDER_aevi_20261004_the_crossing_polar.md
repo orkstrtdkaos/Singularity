@@ -1,4 +1,4 @@
-<!-- status: READY. Erik 2026-10-04: "We do need a pole-centered Crossing map." The Crossing gets an azimuthal-equidistant base with the same interface as every other region; nothing above the base changes. Content half (the Crossing's powers) is Aevi's, separate -->
+<!-- status: READY. Erik 2026-10-04: "We do need a pole-centered Crossing map." The Crossing gets an azimuthal-equidistant base with the same interface as every other region; nothing above the base changes. C4: the Crossing's powers landed as content (SNG-668: the Council of Mavens, and houseAt on 34 powers); the reader and the ring are CCode's -->
 # WORKORDER: Aevi → CCode · 2026-10-04 · the Crossing, centred on the pole
 
 **Aevi (PO).** Your CCODE-596 question, answered by Erik:
@@ -49,12 +49,35 @@ Drop the *"No flat map here"* notice when this lands, and close the §415 gap.
 
 ---
 
-## Not yours: the Crossing's powers (Aevi, content)
+## C4 · The Crossing's powers: content landed (SNG-668), the reader is yours
 
-Erik's *"big swirl"*: the Council of Mavens holds general sway (credibility, evaluation, which crowns are recognised:
-canon in `powers.json`, `nexuses.json`, Warden Coll) and **every tradition keeps a power there**. I am authoring that
-as its own batch: the Mavens as the Crossing's territorial power, and the tradition houses as networks seated in its
-districts. You will get a reply when it lands, with any gate it touches named in advance. It changes the answer to
-*"is the Centre held?"*: yes, by the Mavens, with everyone else in the room.
+Erik's *"big swirl"*, authored in `content/packs/valley/powers.json`:
+
+- **`power_council_of_mavens`** (sovereignty, fair, 72 heads: twelve Mavens and sixty district wardens), seated at
+  `the_crossing`, reaching the hub's districts. Leader `warden-coll`, the member who can be reached (`_leaderWhy`).
+  `dangerLift: 0`. The two old `"council_of_mavens"` strings (`recognizedBy`, `petitions.to`) now name the power.
+  Measured with your `makeInfluence`: the Crossing, the Hundred Markets and the Quiet House are the Mavens' at 1.00 /
+  1.00 / 0.98, uncontested. **The Centre is held now.**
+- **`houseAt`** on **34 of 37** powers: every power the Mavens would seat keeps a house at the Crossing
+  (`the_crossing`; guilds at `the_hundred_markets`). The three outlaws keep none (the Tollmen, the Edge Riders, the
+  Gralloch Crown: canon, the Mavens never recognised Harl Maddock's crown). Schema declares the field.
+- Gates green before push: content CI, census, certify, how_it_works 4,428/0.
+
+**What the engine needs (yours):**
+
+1. `housesAt(locationId, content)` in `powers.js`, pure. It is **presence, not reach**: it never enters
+   `powersReaching`, lifts no danger, anchors no territory. (Putting the Crossing in 34 `reach` lists would have made
+   the hub the most dangerous road in the world.)
+2. **The GM** gets the houses when the player stands at a Crossing place: who is in the room, by name and kind, one
+   line each.
+3. **The polar map** (C1): the Mavens are the fill; the houses are **a ring of small marks round their place, fanned the
+   way A3 opens a cluster**, each in its power's colour (R4.5), the hover listing them. Thirty-four threads from seats
+   across the world would be noise; the ring *is* the swirl.
+4. **Gate:** every `houseAt` names a placed location in `the_center`; no outlaw keeps one; adding or removing a
+   house changes `powersReaching` and danger nowhere (fixture world).
+
+Still open, mine: **seven traditions** have no power anywhere (stillhold, syllogist, bargainers, god_named,
+radiant_folk, harmonic, valley_craft), so the Crossing has seven empty chairs. That is a content batch, coming
+separately; the hall's `appearance` already has *"an empty chair for each tradition not yet seated"*.
 
 — Aevi, PO

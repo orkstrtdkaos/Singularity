@@ -330,7 +330,8 @@
     }
    },
    "comes": "quiet",
-   "_comesWhy": "burglars, knives and lookouts, never in one place — the definition of quiet"
+   "_comesWhy": "burglars, knives and lookouts, never in one place — the definition of quiet",
+   "houseAt": "the_hundred_markets"
   },
   {
    "id": "power_keelmouth_slip",
@@ -402,9 +403,10 @@
    "plainly": "Keelmouth's lord keeps the only slipway on four hundred miles of cliff open to anyone who pays the posted tariff. She is fair, and she is loved for it.",
    "descriptionSeed": "Ines Harrowgate holds the Slip because her grandmother built the first watch-house on it, and she holds it the way her grandmother did: the tariff is carved on a stone at the waterline and has not changed in forty years. She hangs anyone who wrecks a hull on purpose and feeds anyone who wrecks one by accident. The Baron at Firstsight holds the only road down to her, and he wants the water.",
    "appearance": "A stone slipway running down into brown estuary water, a squat watch-house with a lantern, a tariff carved into a waterline stone, boatyards full of half-built hulls",
-   "recognizedBy": "council_of_mavens",
+   "recognizedBy": "power_council_of_mavens",
    "comes": "loud",
-   "_verbsWhy": "A harbour lordship that recruits already; its captains go looking for what the harbour needs."
+   "_verbsWhy": "A harbour lordship that recruits already; its captains go looking for what the harbour needs.",
+   "houseAt": "the_crossing"
   },
   {
    "id": "power_firstsight_barony",
@@ -470,10 +472,11 @@
    "descriptionSeed": "Oswin Tarrant inherited a cairn and a wayhouse at the top of a twenty-six-day road and turned them into a keep. Everyone going to the sea passes him; he charges what the season allows, and more when he is short. He levies farmers off the stone-grass to hold the road and hangs deserters at the cairn where the water first comes into view. He has decided that the Slip should be his, and that Ines Harrowgate's kindness is a weakness he can wait out.",
    "appearance": "A stone keep built around an old cairn on a high divide, a wayhouse beneath it, a gibbet by the road, and far below, the head of a brown river with the sea beyond",
    "petitions": {
-    "to": "council_of_mavens",
+    "to": "power_council_of_mavens",
     "for": "recognition of a claim to the Slip at Keelmouth"
    },
-   "comes": "loud"
+   "comes": "loud",
+   "houseAt": "the_crossing"
   },
   {
    "id": "power_echo_bridge",
@@ -529,7 +532,8 @@
     "power_radiant_plateau",
     "power_harmonic_heights"
    ],
-   "comes": "loud"
+   "comes": "loud",
+   "houseAt": "the_crossing"
   },
   {
    "id": "power_ender_host",
@@ -596,7 +600,8 @@
    "plainly": "A warlord who forgot why he fights, camped below the Marchward with a host that follows him anyway. The Marches fear him more than they fear each other.",
    "descriptionSeed": "The Ender Who Forgot Why was a Marcher once, protecting something. His host camps in the old muster-yard below the Marchward's wall. Mediator Corran keeps the town neutral with the Ender's fires in sight of every window, and the Redline and the Stillhold each suspect the other of wanting him pointed their way.",
    "appearance": "A walled border town on a ridge, and below its wall a sprawling war-camp of mismatched tents and banners from four dead companies, smoke from a hundred fires",
-   "comes": "loud"
+   "comes": "loud",
+   "houseAt": "the_crossing"
   },
   {
    "kind": "sovereignty",
@@ -691,7 +696,8 @@
    "descriptionSeed": "The Radiant Council governs the Plateau under the High Luminary and speaks of clarity in everything. In private it plans a generation ahead and cuts its own archive to fit the plan. It is extending its reach over the unaligned valley one debt, one survey and one quiet favour at a time.",
    "appearance": "A council hall of photonic-crystal towers braiding sunlight into beams, light-guide streets below, an accountability board of lit panels in a public square",
    "_fromPlay": "characters/player-s9z9u1/char-mr4ejo8c.json and characters/player-54seyk/char-mr4ejo8c.json (Cellaceron)",
-   "comes": "loud"
+   "comes": "loud",
+   "houseAt": "the_crossing"
   },
   {
    "kind": "sovereignty",
@@ -776,7 +782,8 @@
    "descriptionSeed": "The Heights is governed from an upper chamber that moves by sealed Priority packet and explains itself later. Below it the Warden Council of the Lower Terrace posts notices, opens inquiries and holds the sanction chain, and knows less than it should about what the chamber above it has decided.",
    "appearance": "Terraced buildings of phononic crystal humming in the wind, tree-sized chimes, and on the lowest terrace a warden hall with a crowded public bulletin board",
    "_fromPlay": "characters/player-s9z9u1/char-mr4ejo8c.json and characters/player-54seyk/char-mr4ejo8c.json (Cellaceron)",
-   "comes": "loud"
+   "comes": "loud",
+   "houseAt": "the_crossing"
   },
   {
    "kind": "sovereignty",
@@ -864,7 +871,8 @@
     "aldric": "Aldric, the smokehouse operator, appears only at an evening meeting Silas called at Pell's forge with Dara, Fendt, Mara and Calvar. That gathering was not the panel, and no save seats him. The fifth seat is open if Erik wants him in it."
    },
    "comes": "loud",
-   "_verbsWhy": "A council that only protects sends someone, when it must."
+   "_verbsWhy": "A council that only protects sends someone, when it must.",
+   "houseAt": "the_crossing"
   },
   {
    "encounters": [],
@@ -935,7 +943,8 @@
     "Valen does not know whose line he is (R40b.4). He believes the dawn was his own idea.",
     "The Open Lantern (SNG-642) is carried by their captains."
    ],
-   "comes": "loud"
+   "comes": "loud",
+   "houseAt": "the_crossing"
   },
   {
    "encounters": [],
@@ -1007,7 +1016,8 @@
    "descriptionSeed": "The Glass Assembly governs a city built on the plain the Blaze made, by people the Blaze made, and it spends most of its strength keeping the Blaze from finishing the job. Its arrays at the Lensward focus the light back on itself. It is fair, it is exhausting, and it hears every case in public.",
    "appearance": "An open hall of clear glass in a city without interior walls, a crowd watching every speaker, the great lens-arrays of the border catching the light beyond",
    "comes": "loud",
-   "_verbsWhy": "The Assembly is fair and patient, and the Blaze Unshadowed will not stop. Patience ends somewhere."
+   "_verbsWhy": "The Assembly is fair and patient, and the Blaze Unshadowed will not stop. Patience ends somewhere.",
+   "houseAt": "the_crossing"
   },
   {
    "encounters": [],
@@ -1068,7 +1078,8 @@
    "appearance": "Tiered training grounds climbing a mountain, adepts moving in unison at dawn, a long yard and a steaming bathhouse below",
    "comes": "mixed",
    "_comesWhy": "adepts whose bodies are disciplined enough to be quiet when they choose",
-   "_verbsWhy": "Its disciplined go out to prove themselves."
+   "_verbsWhy": "Its disciplined go out to prove themselves.",
+   "houseAt": "the_crossing"
   },
   {
    "encounters": [],
@@ -1137,7 +1148,8 @@
     "The Cold Seal (SNG-642) was first made for the Long Hall."
    ],
    "comes": "quiet",
-   "_comesWhy": "porters who move bodies nobody is using; nobody notices a porter"
+   "_comesWhy": "porters who move bodies nobody is using; nobody notices a porter",
+   "houseAt": "the_crossing"
   },
   {
    "encounters": [],
@@ -1198,7 +1210,8 @@
    "appearance": "A ring of seats grown from living roots under vast trees, Rootkin elders listening for a very long time, a thorned green wall at the edge of the wood",
    "comes": "mixed",
    "_comesWhy": "slow to muster and easy to see coming — but in the Greenward they are the wood",
-   "_verbsWhy": "No crusade: the Deepwood Moot is kin, and the Green Schism is a quarrel within a family. The Moot holds (protect) and sends seekers (quest) rather than marching on its own."
+   "_verbsWhy": "No crusade: the Deepwood Moot is kin, and the Green Schism is a quarrel within a family. The Moot holds (protect) and sends seekers (quest) rather than marching on its own.",
+   "houseAt": "the_crossing"
   },
   {
    "encounters": [],
@@ -1255,7 +1268,8 @@
    "plainly": "A cult of builders at the Making's pure pole who cannot stop and will not ask whether they should. They are joyful, and they build over anything in their way.",
    "descriptionSeed": "The Ceaseless build continuously, over each other, over the ground and over anything else that is there. Cinder Vael leads them, if leading is the word for being the one furthest ahead. They are not cruel. They simply do not see what they are building over.",
    "appearance": "A city of scaffolds built on scaffolds, builders singing as they work at every height, half-finished structures swallowing older half-finished structures",
-   "comes": "loud"
+   "comes": "loud",
+   "houseAt": "the_crossing"
   },
   {
    "encounters": [],
@@ -1313,7 +1327,8 @@
    "descriptionSeed": "The Wrights believe a finished thing has stopped being alive, so they govern the way they build: by improvement. Each season plans are laid before the Court, and the winner holds the Planmaster's office until a better one arrives. It is fair, it is glorious, and it is never done.",
    "appearance": "A hall of drafting tables under cathedral scaffolding, plans pinned over plans, Wrights arguing over a model with obvious delight",
    "comes": "loud",
-   "_verbsWhy": "The Ceaseless feuds the Court; the Court answers."
+   "_verbsWhy": "The Ceaseless feuds the Court; the Court answers.",
+   "houseAt": "the_crossing"
   },
   {
    "encounters": [],
@@ -1371,7 +1386,8 @@
    "plainly": "Pressureholt's government: a written specification for everything the city does, kept by the Chief of Schedule. It is warm, precise, and never late.",
    "descriptionSeed": "Pressureholt is a city that is also a machine, and the Schedule is its specification: every function, every shift, every failure mode written down and posted. The Enginewrights are warm people, and the Schedule is how they show it. It has no place for anything that was not planned.",
    "appearance": "A city of pipes and clock-faces, a great posted Schedule on a wall of brass plates, maintenance crews moving to the minute",
-   "comes": "loud"
+   "comes": "loud",
+   "houseAt": "the_crossing"
   },
   {
    "encounters": [],
@@ -1440,7 +1456,8 @@
    ],
    "comes": "mixed",
    "_comesWhy": "singers further away than they look: you hear them, and you are wrong about where",
-   "_verbsWhy": "A kind order: its singers go out to find the lost."
+   "_verbsWhy": "A kind order: its singers go out to find the lost.",
+   "houseAt": "the_crossing"
   },
   {
    "encounters": [],
@@ -1519,7 +1536,8 @@
    ],
    "comes": "mixed",
    "_comesWhy": "march-wardens move unseen on the moor; the grave-crews do not",
-   "_verbsWhy": "Kind wardens of the Ashwarden grey, feuded by the Harvest Hand. They carry the fight to the reapers and send their champions after the things that come out of the dark."
+   "_verbsWhy": "Kind wardens of the Ashwarden grey, feuded by the Harvest Hand. They carry the fight to the reapers and send their champions after the things that come out of the dark.",
+   "houseAt": "the_crossing"
   },
   {
    "encounters": [],
@@ -1580,7 +1598,8 @@
     "Morvane is a challenger for the Life / Death seat (SNG-644). The Harvest Hand is her road there, and Neth is in the way."
    ],
    "comes": "quiet",
-   "_comesWhy": "the reapers come for what is ready, and the ready do not hear them"
+   "_comesWhy": "the reapers come for what is ready, and the ready do not hear them",
+   "houseAt": "the_crossing"
   },
   {
    "encounters": [],
@@ -1656,7 +1675,8 @@
     "The Last Mercy holds the Breaking / Building seat (SNG-644) and works the Clearing Ground. The Masters count her as one of their own and do not know what she holds back."
    ],
    "comes": "loud",
-   "_verbsWhy": "The Scour exists to stop the Scouring. A body whose whole reason is one enemy goes after that enemy."
+   "_verbsWhy": "The Scour exists to stop the Scouring. A body whose whole reason is one enemy goes after that enemy.",
+   "houseAt": "the_crossing"
   },
   {
    "encounters": [],
@@ -1717,7 +1737,8 @@
     "The Scouring Hand is a challenger for the Breaking / Building seat (SNG-644). It must go through the Last Mercy first; the lore's 'if it finishes, it arrives'."
    ],
    "comes": "mixed",
-   "_comesWhy": "unmakers; some come as a crew, some come as an absence"
+   "_comesWhy": "unmakers; some come as a crew, some come as an absence",
+   "houseAt": "the_crossing"
   },
   {
    "encounters": [],
@@ -1782,7 +1803,8 @@
    "secretsGM": [
     "Chaos / Order is the open seat (SNG-644). The Still Lattice walks toward it unopposed, and governing the Lattice Cities is how. When the specification is complete, it arrives."
    ],
-   "comes": "loud"
+   "comes": "loud",
+   "houseAt": "the_crossing"
   },
   {
    "encounters": [],
@@ -1870,7 +1892,8 @@
     "The Hollow King himself is homed at the Maw, beyond the Court's reach, where the Devouring have stopped bargaining."
    ],
    "comes": "mixed",
-   "_comesWhy": "court wardens keep every term — including the ones about when to be seen"
+   "_comesWhy": "court wardens keep every term — including the ones about when to be seen",
+   "houseAt": "the_crossing"
   },
   {
    "encounters": [],
@@ -1961,7 +1984,8 @@
     "Eosphor, the Dawn Seraph, walks among them. He casts no shadow. They have not noticed yet."
    ],
    "comes": "loud",
-   "_verbsWhy": "The Seraphic Orders are the word crusade. Against the Hollow Court, their rival."
+   "_verbsWhy": "The Seraphic Orders are the word crusade. Against the Hollow Court, their rival.",
+   "houseAt": "the_crossing"
   },
   {
    "encounters": [],
@@ -2023,7 +2047,8 @@
    ],
    "comes": "quiet",
    "_comesWhy": "Umbral keepers; the dark is where they live",
-   "_verbsWhy": "A kind order with no rival: its champions go out on errands of rescue."
+   "_verbsWhy": "A kind order with no rival: its champions go out on errands of rescue.",
+   "houseAt": "the_crossing"
   },
   {
    "encounters": [],
@@ -2100,7 +2125,8 @@
     "The Thornmother is a challenger for the Life / Death seat (SNG-644). Sealing the wood is her road: life curdled into a wall."
    ],
    "comes": "mixed",
-   "_comesWhy": "an Ent standing still is a hill; an Ent moving is not quiet at all"
+   "_comesWhy": "an Ent standing still is a hill; an Ent moving is not quiet at all",
+   "houseAt": "the_crossing"
   },
   {
    "encounters": [],
@@ -2168,7 +2194,8 @@
      ]
     }
    ],
-   "_why": "SNG-645 batch 2 (Aevi). The Kept Reach had no power. A fair council that keeps the record and holds against the Hour-Hoarder, so the region's villain has something to push against."
+   "_why": "SNG-645 batch 2 (Aevi). The Kept Reach had no power. A fair council that keeps the record and holds against the Hour-Hoarder, so the region's villain has something to push against.",
+   "houseAt": "the_crossing"
   },
   {
    "encounters": [],
@@ -2236,7 +2263,8 @@
      ]
     }
    ],
-   "_why": "SNG-645 batch 2. The Open Reach had no power. Kind, and a road-keeper, so travel through it gets safer (dangerLift -1) rather than taxed."
+   "_why": "SNG-645 batch 2. The Open Reach had no power. Kind, and a road-keeper, so travel through it gets safer (dangerLift -1) rather than taxed.",
+   "houseAt": "the_crossing"
   },
   {
    "encounters": [],
@@ -2301,7 +2329,8 @@
      ]
     }
    ],
-   "_why": "SNG-645 batch 2. The Given Land had no power. Hard and honest, so it taxes by weight and never takes a bribe (not corrupt)."
+   "_why": "SNG-645 batch 2. The Given Land had no power. Hard and honest, so it taxes by weight and never takes a bribe (not corrupt).",
+   "houseAt": "the_crossing"
   },
   {
    "encounters": [],
@@ -2364,7 +2393,8 @@
      ]
     }
    ],
-   "_why": "SNG-645 batch 2. The Pattern Reach had no power. An order, not a sovereignty: Cloudform has no government anyone can find, but it has a conscience."
+   "_why": "SNG-645 batch 2. The Pattern Reach had no power. An order, not a sovereignty: Cloudform has no government anyone can find, but it has a conscience.",
+   "houseAt": "the_crossing"
   },
   {
    "encounters": [],
@@ -2429,7 +2459,8 @@
      ]
     }
    ],
-   "_why": "SNG-645 batch 2. The Reasoned Hold had no power; its danger was all in its pure pole. A cruel order that expands from the Hold toward the Axiom, lifting danger, with the Axiom's own undead proof-writer as the one thing opposing it."
+   "_why": "SNG-645 batch 2. The Reasoned Hold had no power; its danger was all in its pure pole. A cruel order that expands from the Hold toward the Axiom, lifting danger, with the Axiom's own undead proof-writer as the one thing opposing it.",
+   "houseAt": "the_crossing"
   },
   {
    "encounters": [],
@@ -2491,7 +2522,8 @@
      ]
     }
    ],
-   "_why": "SNG-645 batch 2. The Stark Reach had no power. Kind and protective, set against the region's pure pole (the Flensing). I left Seraphine the Unbending Witness out on purpose: whether she and the High Luminary's Seraphine are one record is still with Erik."
+   "_why": "SNG-645 batch 2. The Stark Reach had no power. Kind and protective, set against the region's pure pole (the Flensing). I left Seraphine the Unbending Witness out on purpose: whether she and the High Luminary's Seraphine are one record is still with Erik.",
+   "houseAt": "the_crossing"
   },
   {
    "encounters": [],
@@ -2558,7 +2590,8 @@
      ]
     }
    ],
-   "_why": "SNG-645 batch 2. The Feeling Coast had no power. Kind, and the counterweight to the Raw Chord (legendary, the region's villain)."
+   "_why": "SNG-645 batch 2. The Feeling Coast had no power. Kind, and the counterweight to the Raw Chord (legendary, the region's villain).",
+   "houseAt": "the_crossing"
   },
   {
    "encounters": [],
@@ -2623,7 +2656,76 @@
      ]
     }
    ],
-   "_why": "SNG-645 batch 2. The Veiled Reach had no power. Led by Illeth (SNG-661's storied people) so the fae court the spec promised has a place to rule."
+   "_why": "SNG-645 batch 2. The Veiled Reach had no power. Led by Illeth (SNG-661's storied people) so the fae court the spec promised has a place to rule.",
+   "houseAt": "the_crossing"
+  },
+  {
+   "id": "power_council_of_mavens",
+   "name": "The Council of Mavens",
+   "kind": "sovereignty",
+   "temper": "fair",
+   "seat": "the_crossing",
+   "reach": [
+    "the_crossing",
+    "the_hundred_markets",
+    "the_great_coliseum",
+    "the_crossing_gate_yard",
+    "the_axis_gate",
+    "gen-hub-north-gate-district-street",
+    "gen-north-gate-registry-ossian-office"
+   ],
+   "leader": "warden-coll",
+   "_leaderWhy": "A council has no single head, and the Mavens like it that way. Warden Coll is the member who can be reached: the face of the council for anyone who comes with a claim, not its chair.",
+   "answersTo": null,
+   "strength": {
+    "scale": "unit",
+    "contingents": [
+     {
+      "n": 12,
+      "quality": 4,
+      "what": "the Mavens themselves: one chair for each voice the Crossing hears, and the habit of being believed"
+     },
+     {
+      "n": 60,
+      "quality": 2,
+      "what": "the district wardens and their watch, who keep the Crossing's streets for every house at once"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "the_crossing",
+     "kind": "post",
+     "name": "the round hall at the hub, where claims are heard",
+     "garrison": 20
+    }
+   ],
+   "verbs": [
+    "protect",
+    "inform",
+    "patrol"
+   ],
+   "encounters": [],
+   "dangerLift": 0,
+   "noticesYouWhen": [
+    "wealth",
+    "crossed"
+   ],
+   "wantsFromYou": "A claim they can weigh. Bring proof of what you hold and how you came by it, say it in the open, and wait while they decide whether they believe you.",
+   "offersYou": "Recognition. A claim the Mavens have weighed is believed wherever the roads run; a crown they will not see is a crown nobody trusts.",
+   "leverage": "They cannot be seen to be bought. A gift offered in public shuts the door; a truth offered in public opens it. Every house at the Crossing is watching to see which one you bring.",
+   "whenBroken": "The Crossing does not fall; it splinters. Every house starts recognising its own, and a claim means whatever the nearest garrison says it means.",
+   "rivals": [],
+   "opposedBy": [],
+   "plainly": "The Council of Mavens sits at the Crossing and decides nothing. It weighs claims (crowns, holds, debts, names) and says which ones it believes, and the world listens because everyone else does. Every tradition keeps a house at the Crossing; the Mavens keep the room they all meet in.",
+   "descriptionSeed": "At the hub of the world every road ends in the same round hall. Every tradition keeps a house within sight of it, and every house sends a voice to the benches, and the Mavens weigh what is brought: who holds what, who owes whom, whose crown is a crown. They evaluate rather than decide, which people mistake for weakness until they need a claim believed a thousand miles away. What the Mavens refuse, the Hollow Court grants, and the Mavens know exactly who goes there.",
+   "appearance": "A round hall at the hub where every road ends, benches in rings and an empty chair for each tradition not yet seated, wardens' lamps along the district streets, and the banners of every house hung so that none is higher than another",
+   "secretsGM": [
+    "The Mavens refuse more claims than they recognise, and the refused are the Hollow Court's best customers. They know it, and some of them think it is the price of being believed.",
+    "Not every house at the Crossing sends its voice in good faith. The council knows which ones are listening for someone else."
+   ],
+   "comes": "quiet",
+   "_sng668": "âœ… ERIK 2026-10-04: 'the Council of Mavens holds sway in general but it is truly a big swirl of powers.' The Mavens are the Crossing's territorial power (the hub is held, and by the room rather than a throne); every other power the Mavens would seat keeps a house there (`houseAt`), drawn as the swirl, never as a fill."
   }
  ]
 }

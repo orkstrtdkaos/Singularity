@@ -26316,6 +26316,7 @@ console.log("\n── §336 · a decision inside a stage, and an ending that can
 console.log("\n── §337 · who a shared-world row is about ──");
 {
   const TV = await import("../engine/travelers.js");
+  const RC337 = await import("../engine/reconcile.js");
   const ledgerRows = [];
   for (const f of readdirSync(join(root, "world/ledger")).filter(x => x.endsWith(".json"))) {
     const j = rj(`world/ledger/${f}`);
@@ -26324,7 +26325,20 @@ console.log("\n── §337 · who a shared-world row is about ──");
   const saves337 = new Map();
   for (const d of readdirSync(join(root, "characters"))) {
     let files = []; try { files = readdirSync(join(root, `characters/${d}`)); } catch { continue; }
-    for (const f of files.filter(x => x.endsWith(".json"))) { try { const j = rj(`characters/${d}/${f}`); if (j?.id) saves337.set(j.id, j); } catch { /* a save mid-write is not this gate's business */ } }
+    // ⚠️ RECONCILED FIRST, because a save FILE is the shape before the app has opened it and no player ever sees
+    // that shape. Courtney's save carries `sister_vreni` beside `sister-vreni` — one person forked by a writer that
+    // did not ask the rule the reader has used since CCODE-24 — and step 95 merges them on load. Asking this gate's
+    // question of the unreconciled file was asking it of a state the product repairs before anything reads it.
+    // ⛑ THE FORK ITSELF IS NOT WAVED THROUGH: §410 drives the writer that can no longer make one and the step that
+    // heals one, on fixtures, so this convenience cannot hide a defect that is still live.
+    for (const f of files.filter(x => x.endsWith(".json"))) {
+      try {
+        const j = rj(`characters/${d}/${f}`);
+        if (!j?.id) continue;
+        try { RC337.reconcile(j, "character", {}); } catch { /* an unreconcilable save is still a save this gate may read */ }
+        saves337.set(j.id, j);
+      } catch { /* a save mid-write is not this gate's business */ }
+    }
   }
   check("§337: ⚠️ the fixture reads the REAL shared ledger and the REAL saves — a zero here would pass every claim below vacuously",
     ledgerRows.length >= 40 && saves337.size >= 5, `${ledgerRows.length} rows · ${saves337.size} saves`);
@@ -35307,6 +35321,132 @@ console.log("\n── §409 · build & work ──");
   check("§409: ⚠️ …and the alerts that answered with a control in that panel point at the tab it is on now",
     /said: "nobody is keeping it", tab: "build"/.test(A409) && /said: "failing", tab: "build"/.test(A409)
     && !/go: "Open People"/.test(A409));
+}
+
+/* ══════════ §410 · ONE PERSON, HOWEVER THE ID IS PUNCTUATED ══════════ */
+// ⛔ FOUND 2026-10-04 by a red that arrived with play, not with a change of mine. Of 137 registry people across every
+// live save, exactly ONE pair normalised to the same person: Courtney's Adelheid held `sister-vreni` (name "Sister
+// Vreni", a role, met 23, relationship 4, firstMet day 2) beside `sister_vreni` — a stub whose NAME WAS ITS OWN ID,
+// carrying nothing but `questState: "allied"`.
+//
+// ⚠️ THE READER ALREADY KNEW THEY WERE ONE PERSON. CCODE-24 taught `findExistingNpc` that `keeper_ilma` and
+// `keeper-ilma` are the same soul. `quests.js` wrote its ally marker keyed by the RAW content id and never asked — so
+// the side that JOINS them was hardened and the side that FORKS them was not, and the marker stranded on an orphan
+// where the woman the quest allied with could not see it. A reader that joins what a writer forks hides the fork
+// until something counts the registry.
+//
+// ⛑ §337 reconciles the saves it reads, because a save file is a shape no player ever sees. These checks are what
+// stops that convenience from waving a live defect through: the writer is driven, and so is the repair.
+console.log("\n── §410 · one person, however the id is punctuated ──");
+{
+  const Q410 = await import("../engine/quests.js");
+  const RC410 = await import("../engine/reconcile.js");
+  const NM410 = await import("../engine/namematch.js");
+
+  /* ---- 1 · ⛔ ONE DEFINITION OF THE RULE ---- */
+  // ⚠️ It was a private const in npcs.js, which quests.js cannot import without a cycle (npcs imports quests).
+  // Writing it out a second time is two definitions of one rule, and two definitions drift.
+  check("§410: ⛔ THE `_`≡`-` RULE HAS ONE DEFINITION, in the module both sides already import",
+    typeof NM410.canonNpcId === "function"
+    && NM410.canonNpcId("sister_vreni") === NM410.canonNpcId("sister-vreni")
+    && NM410.canonNpcId("Sister_Vreni") === "sister-vreni"
+    && !/const canonNpcId = x =>/.test(rd("engine/npcs.js"))
+    && /canonNpcId/.test(rd("engine/quests.js")));
+
+  /* ---- 2 · ⛔ THE WRITER CANNOT FORK A PERSON ANY MORE ---- */
+  // ⛑ DRIVEN THROUGH THE REAL EFFECT PATH, with the registry holding the hyphen id and the quest naming the
+  // underscore one — which is exactly the shape that produced the live fork.
+  check("§410: ⛔ A QUEST THAT ALLIES `sister_vreni` WRITES ONTO `sister-vreni` — the marker lands on the person, not an orphan",
+    (() => {
+      const c = { npcRegistry: { "sister-vreni": { id: "sister-vreni", name: "Sister Vreni", role: "Wayhouse sister", met: 23, relationship: 4 } } };
+      const fn = Q410.applyQuestEffects || Q410.applyEffects || null;
+      if (fn) { try { fn(c, [{ kind: "npc_state", npc: "sister_vreni", state: "allied" }], {}); } catch { /* shape below */ } }
+      // ⚠️ IF THE EFFECT PATH IS NOT REACHABLE FROM HERE, the source is asserted instead — but never INSTEAD OF
+      // the behaviour when the behaviour can be had, which is why the driven case is tried first.
+      const keys = Object.keys(c.npcRegistry);
+      if (keys.length === 2) return false;                    // it forked — the defect, live
+      const src = rd("engine/quests.js");
+      return keys.length === 1 && keys[0] === "sister-vreni"
+        && /const want = canonNpcId\(e\.npc\);/.test(src)
+        && /Object\.keys\(character\.npcRegistry \|\| \{\}\)\.find\(x => canonNpcId\(x\) === want\)/.test(src);
+    })());
+
+  /* ---- 3 · ⛔ AND A SAVE THAT ALREADY CARRIES A FORK IS HEALED, THROUGH THE RUNNER ---- */
+  // ⚠️ THROUGH `reconcile()`, NOT by calling the step's `apply` on a copy. This file has recorded a step that
+  // could never run twice over: one numbered below the runner, and one whose method was named `run`. So the proof is
+  // the runner's own version gate, and `reconcileVersion` is observed to MOVE.
+  check("§410: ⛔ A SAVE THAT ALREADY HOLDS THE FORK IS HEALED ON LOAD — richer record wins, marker carried, old id remembered",
+    (() => {
+      const c = {
+        id: "t410", reconcileVersion: 94,
+        npcRegistry: {
+          "sister-vreni": { id: "sister-vreni", name: "Sister Vreni", role: "Wayhouse sister", met: 23, relationship: 4, firstMet: { day: 2 }, history: ["met"] },
+          "sister_vreni": { id: "sister_vreni", name: "sister_vreni", questState: "allied", questNote: null },
+          "other-person": { id: "other-person", name: "Someone Else", met: 3 },
+        },
+      };
+      RC410.reconcile(c, "character", {});
+      const keep = c.npcRegistry["sister-vreni"];
+      return c.reconcileVersion > 94                                   // the step actually ran
+        && Object.keys(c.npcRegistry).length === 2                     // one went, and only one
+        && !c.npcRegistry["sister_vreni"]
+        && keep.name === "Sister Vreni" && keep.met === 23 && keep.relationship === 4
+        && keep.questState === "allied"                                // ⛔ the one thing only the stub held
+        && (keep.formerIds || []).includes("sister_vreni")
+        && c.npcRegistry["other-person"]?.met === 3;                   // and nobody else was touched
+    })());
+  // ⛑ THE RICHER RECORD WINS ON WHAT IT HOLDS, never on which id looks tidier — so the rule survives a fork the
+  // other way round, where the UNDERSCORE id is the real person.
+  check("§410: ⚠️ …and it is the record with a life that survives, whichever id that is",
+    (() => {
+      const c = {
+        id: "t410b", reconcileVersion: 94,
+        npcRegistry: {
+          "keeper-ilma": { id: "keeper-ilma", name: "keeper-ilma", questState: "allied" },
+          "keeper_ilma": { id: "keeper_ilma", name: "Keeper Ilma", role: "A keeper", met: 11, history: ["met"] },
+        },
+      };
+      RC410.reconcile(c, "character", {});
+      const keep = c.npcRegistry["keeper_ilma"];
+      return Object.keys(c.npcRegistry).length === 1 && !!keep
+        && keep.name === "Keeper Ilma" && keep.met === 11 && keep.questState === "allied";
+    })());
+  // ⛑ AND IT IS IDEMPOTENT, which is what lets every load run it.
+  check("§410: ⛑ …and running it again changes nothing, so every load may run it",
+    (() => {
+      const mk = () => ({ id: "t410c", reconcileVersion: 94, npcRegistry: {
+        "a-b": { id: "a-b", name: "A B", met: 4 }, "a_b": { id: "a_b", name: "a_b", questState: "allied" } } });
+      const one = mk(); RC410.reconcile(one, "character", {});
+      const two = JSON.parse(JSON.stringify(one)); RC410.reconcile(two, "character", {});
+      return JSON.stringify(one.npcRegistry) === JSON.stringify(two.npcRegistry);
+    })());
+
+  /* ---- 3b · ⛔ AND A NULL IS NOT A NOTE ---- */
+  // ⛔ FOUND BY THE SAME RED. `quests.js` wrote `questNote: e.note || null` while `person.schema.json` declares
+  // `questNote` a STRING under `additionalProperties: false` — so every quest state carrying no note wrote an
+  // INVALID person, and had done since the line was written. It surfaced only when the first one reached the repo.
+  // ⚠️ The schema is right and the writer was wrong: the field is optional, so an absent note is ABSENT.
+  check("§410: ⛔ A QUEST STATE WITH NO NOTE LEAVES `questNote` OUT — the schema says string, and a null is not one",
+    (() => {
+      // ⚠️ CODE ONLY. The comment beside the fix QUOTES the line it replaced, so reading the raw source made this
+      // check match my own explanation and fail against correct code — the fourth time this file has recorded a
+      // source regex reading its own comments.
+      const S = rd("engine/quests.js").split(NEWLINE_RE).filter(l => !/^\s*(\/\/|\*|\/\*)/.test(l)).join("\n");
+      if (!/if \(e\.note\) rec\.questNote = String\(e\.note\); else delete rec\.questNote;/.test(S)) return false;
+      if (/questNote: e\.note \|\| null/.test(S)) return false;
+      // ⛑ and the schema really does forbid it, so this is not a rule I invented for the writer to obey
+      const sch = JSON.parse(rd("schemas/person.schema.json"));
+      return sch?.properties?.questNote?.type === "string" && sch.additionalProperties === false;
+    })());
+
+  /* ---- 4 · ⚠️ WHETHER ANY LIVE SAVE STILL CARRIES ONE — AND WHY THAT IS NOT ASKED HERE ---- */
+  // ⛔ §364 FORBIDS IT, AND §364 IS RIGHT: "no new gate may walk the live save directory — eleven already do and
+  // each is named; the list may shrink, never grow." I wrote a twelfth and it reddened within the minute.
+  // ⛑ So the rule is asserted above over records this section BUILDS, where it cannot go quiet because the corpus
+  // changed; and the live sweep is a tool, `po/tools/drive_canon_merge.mjs`, which reads every save, reconciles a
+  // COPY and reports any fork that survives. Measured 2026-10-04: 137 people, one fork, healed.
+  // ⚠️ A rule proven on built records and a sweep run by hand is the trade §364 asks for — the alternative is a
+  // gate whose subject is whatever happens to be in somebody's save this week.
 }
 
 /* ══════════ REPORT ══════════ */

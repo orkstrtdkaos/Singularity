@@ -9,7 +9,7 @@
 // unresolvable op SURFACES a note instead of vanishing, and a "start" that resolves to an
 // existing quest doesn't fork a duplicate. Giver/location tie to codex entityIds.
 
-import { namesMatch, resolveByName, smartClamp } from "./namematch.js";
+import { namesMatch, resolveByName, smartClamp, canonNpcId } from "./namematch.js";
 import { recordQuestOutcome, resolveEvent, actorOf, priorBoardFor, questKey } from "./worldevents.js";   // CCODE-354: a world-tier ending is a world fact
 import { traditionOf } from "./traditions.js";
 import { createWake } from "./wake.js"; // SNG-204: a significant outcome leaves a wake the world continues from
@@ -655,7 +655,25 @@ function applyQuestEffects(character, quest, effects, ctx = {}) {
     switch (e.type) {
       // NPC + people keys are authored content ids (underscores intact) — never slugify them.
       case "npc_state": {
-        if (e.npc) { const k = e.npc; character.npcRegistry[k] = { id: character.npcRegistry[k]?.id || k, ...(character.npcRegistry[k] || {}), name: character.npcRegistry[k]?.name || e.npc, questState: e.state, questNote: e.note || null }; } // CCODE-20: STAMP id — an id-less giver stub throws in findExistingNpc and poisons every meet
+        if (e.npc) {
+          // ⛔ CCODE-24, THE OTHER HALF. `findExistingNpc` has known since CCODE-24 that `keeper_ilma` and
+          // `keeper-ilma` are one person; THIS line did not ask, and keyed the registry by the raw content id. In
+          // Courtney's save that forked `sister-vreni` (met 23, relationship 4, a role, a history) into a second
+          // record `sister_vreni` carrying nothing but the ally marker — so the marker stranded on an orphan and
+          // the person the quest allied with never knew. ⚠️ A reader that joins what a writer forks hides the
+          // fork until something counts the registry.
+          // ⛑ Resolve against what is already there FIRST, by the same rule the reader uses.
+          const want = canonNpcId(e.npc);
+          const k = Object.keys(character.npcRegistry || {}).find(x => canonNpcId(x) === want) || e.npc;
+          const rec = { id: character.npcRegistry[k]?.id || k, ...(character.npcRegistry[k] || {}), name: character.npcRegistry[k]?.name || e.npc, questState: e.state };
+          // ⛔ A NULL IS NOT A NOTE. This wrote `questNote: e.note || null`, and `person.schema.json` declares
+          // `questNote` a STRING with `additionalProperties: false` — so every quest state carrying no note wrote an
+          // INVALID person, and had since the line was written. It surfaced only when the first one reached the repo.
+          // ⚠️ The field is optional (it is on 3% of people), so the answer is to leave it out, not to teach the
+          // schema to accept nothing — and a stale one is cleared, or a note would outlive the quest that set it.
+          if (e.note) rec.questNote = String(e.note); else delete rec.questNote;
+          character.npcRegistry[k] = rec;
+        } // CCODE-20: STAMP id — an id-less giver stub throws in findExistingNpc and poisons every meet
         applied.push({ type: "npc_state", npc: e.npc, state: e.state });
         break;
       }

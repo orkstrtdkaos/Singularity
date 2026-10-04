@@ -62,10 +62,27 @@ const saveFiles = (() => {
     const d = join(dir, p);
     if (!statSync(d).isDirectory()) continue;
     for (const f of readdirSync(d)) if (/^char-.*\.json$/.test(f)) out.push(join(d, f));
+
   }
   return out;
 })();
-const saves = saveFiles.map(f => { try { return JSON.parse(readFileSync(f, "utf8")); } catch { return null; } }).filter(Boolean);
+// ⛔ RECONCILED, BECAUSE A SAVE FILE IS THE SHAPE BEFORE THE APP HAS OPENED IT and no player ever holds that
+// shape. 2026-10-04: Courtney's save carried `sister_vreni` — one person forked by a writer that did not ask the
+// `_`≡`-` rule the reader has used since CCODE-24 — and reconcile step 95 merges it away on load. The lock was
+// reddening on a record the product deletes before anything reads it.
+// ⚠️ THE LOCK KEEPS ITS TEETH. Reconcile does not strip stray fields, so an engine writing an invalid field onto
+// a person who SURVIVES is still caught here — which is exactly how `questNote: null` was found, and it is fixed at
+// the writer rather than waved through. The only thing this hides is a record reconcile deletes outright, and a
+// record the game deletes on sight is not a person the game holds. `save_fixtures` separately asserts that
+// reconciling a live save loses nothing.
+const RECONCILE_CENSUS = await import("../engine/reconcile.js");
+const saves = saveFiles.map(f => {
+  try {
+    const j = JSON.parse(readFileSync(f, "utf8"));
+    try { RECONCILE_CENSUS.reconcile(j, "character", {}); } catch { /* an unreconcilable save is still worth censusing */ }
+    return j;
+  } catch { return null; }
+}).filter(Boolean);
 const C = await loadContentHeadless();
 
 const values = (x) => (Array.isArray(x) ? x : Object.values(x || {})).filter(v => v && typeof v === "object");

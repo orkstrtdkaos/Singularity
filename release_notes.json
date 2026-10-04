@@ -16,6 +16,18 @@
   "next": [],
   "releases": [
     {
+      "version": "2.16.13",
+      "date": "2026-10-04",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "One person, however their name is punctuated",
+          "summary": "A quest could record an ally against a second, empty copy of someone you already knew.",
+          "detail": "When a quest marked somebody an ally it wrote that down under the id the quest used, which is not always the id you met them under — so the mark could land on an empty duplicate instead of on the person, and they never knew. The game has always understood the two spellings are one person when READING; now it does when writing too, and any save already carrying a split pair is mended the next time it is opened, keeping the real record and the mark together."
+        }
+      ]
+    },
+    {
       "version": "2.16.12",
       "date": "2026-10-02",
       "entries": [

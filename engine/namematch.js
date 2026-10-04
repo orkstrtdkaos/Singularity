@@ -173,3 +173,12 @@ export function namesToAvoid(characters = [], limit = 24) {
     .slice(0, limit)
     .map(([name]) => name);
 }
+
+/** ⛔ ONE PERSON, HOWEVER THE ID IS PUNCTUATED. Content ids are authored with underscores (`keeper_ilma`) and a
+ *  meet slugifies to hyphens (`keeper-ilma`); CCODE-24 taught `findExistingNpc` to treat them as one person, but only
+ *  on the READING side. A writer that keys the registry by the raw id forks the record the reader knows how to join
+ *  — measured live in Courtney's save, where `sister_vreni` carried an ally marker beside the real `sister-vreni`
+ *  (met 23, relationship 4) and the marker stranded on the orphan.
+ *  ⚠️ IT LIVES HERE because `npcs.js` imports `quests.js`, so the id-matching rule cannot live in either of them
+ *  without a cycle — and writing it out twice is two definitions of one rule, which drift. Pure. */
+export const canonNpcId = (x) => String(x || "").toLowerCase().replace(/_/g, "-");

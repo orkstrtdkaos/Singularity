@@ -1779,6 +1779,69 @@ export const CHARACTER_STEPS = [
     }
   },
   {
+    version: 95, id: "npc-registry-canon-id-merge", playerFacing: false,
+    // ⛔ CCODE-24's OTHER HALF, HEALED IN THE DATA. `findExistingNpc` has known since CCODE-24 that `keeper_ilma`
+    // and `keeper-ilma` are one person. `quests.js` wrote its ally/questState marker keyed by the RAW content id and
+    // never asked — so a person the reader joins was forked by the writer.
+    //
+    // ⛑ MEASURED on 2026-10-04 across every live save: 137 registry people, exactly ONE forked pair — Courtney's
+    // Adelheid holding `sister-vreni` (name "Sister Vreni", a role, met 23, relationship 4, firstMet day 2) beside
+    // `sister_vreni` ({ id, name: "sister_vreni", questState: "allied", questNote: null }). The ally marker was
+    // stranded on the orphan, so the woman the quest allied with did not know it.
+    //
+    // ⚠️ THE RICHER RECORD WINS AND THE MARKER MOVES TO IT. Which is richer is decided by what the record HOLDS,
+    // never by which id looks tidier: a stub whose `name` is its own id is not a person, and the real record's
+    // `met`/`history`/`relationship` are the evidence. Fields the survivor lacks are carried across rather than
+    // dropped — a merge that loses what only one side held is the failure this file has recorded by name.
+    apply: (c) => {
+      const reg = c.npcRegistry;
+      if (!reg || typeof reg !== "object") return {};
+      const canon = (x) => String(x || "").toLowerCase().replace(/_/g, "-");
+      const groups = new Map();
+      for (const key of Object.keys(reg)) {
+        const k = canon(key);
+        if (!groups.has(k)) groups.set(k, []);
+        groups.get(k).push(key);
+      }
+      // ⛑ how much of a person a record actually is — a stub named after its own key scores nothing
+      const weight = (n, key) => {
+        if (!n || typeof n !== "object") return -1;
+        let w = 0;
+        if (n.name && canon(n.name) !== canon(key)) w += 4;           // a real name, not the id wearing one
+        if (n.role) w += 2;
+        if (Number(n.met) > 0) w += 2;
+        if (n.firstMet) w += 1;
+        for (const f of ["history", "knownFacts", "skillsObserved", "creditedQuests", "completions"]) {
+          if (Array.isArray(n[f]) && n[f].length) w += 1;
+        }
+        return w;
+      };
+      const merged = [];
+      for (const [, keys] of groups) {
+        if (keys.length < 2) continue;
+        const ranked = keys.slice().sort((a, b) => weight(reg[b], b) - weight(reg[a], a) || a.localeCompare(b));
+        const keep = ranked[0];
+        for (const drop of ranked.slice(1)) {
+          const from = reg[drop], into = reg[keep];
+          if (!from || !into) { delete reg[drop]; continue; }
+          // ⚠️ ONLY WHAT THE SURVIVOR DOES NOT ALREADY HAVE, and never the id or the name — those are the
+          // survivor's by the ranking above, and taking the stub's would undo the merge.
+          for (const [f, v] of Object.entries(from)) {
+            if (f === "id" || f === "name") continue;
+            if (v == null || v === "") continue;
+            if (into[f] == null || into[f] === "" || (Array.isArray(into[f]) && !into[f].length)) into[f] = v;
+          }
+          // ⛑ and the fork is remembered, so a later meet under the old id lands on the survivor
+          into.formerIds = [...new Set([...(Array.isArray(into.formerIds) ? into.formerIds : []), drop])];
+          delete reg[drop];
+          merged.push(`${drop} → ${keep}`);
+        }
+      }
+      if (merged.length) console.log(`[reconcile] ccode-24b: merged ${merged.length} forked registry entr${merged.length === 1 ? "y" : "ies"} — ${merged.join(", ")}`);
+      return {};   // silent hygiene — the player never saw the fork and does not need to hear about the merge
+    }
+  },
+  {
     version: 20, id: "npc-registry-id-backfill", playerFacing: false,
     // CCODE-20. A quest/hunt-effect giver stub (quests.js npc_state/ally) was written {name, questState}
     // with NO `id` field. findExistingNpc reads `n.id.split(...)` on EVERY npcUpdate, so ONE id-less stub

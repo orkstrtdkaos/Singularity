@@ -7,7 +7,7 @@
 
 import { slugify } from "./quests.js";
 import { recordPledge, releasePledge } from "./death.js";   // SNG-653: "have they said so" — a promise, kept beside the bond it is not
-import { smartClamp, normName } from "./namematch.js"; // SNG-152: model prose clamps on a word boundary, never mid-word
+import { smartClamp, normName, canonNpcId } from "./namematch.js"; // SNG-152: model prose clamps on a word boundary, never mid-word   // ⛔ CCODE-24's `_`≡`-` rule, now shared with the WRITERS
 import { isMinorSubject, ageGateGap } from "./art.js";
 const ADULT_YEARS = 18;   // SNG-556 (Erik 2026-09-13): "adult is 18" — the one line the age gate turns on.
 import { applyCodexUpdates } from "./codex.js"; // SNG-199 §5: meeting someone MUST write the codex — direct, never injected
@@ -256,7 +256,8 @@ export function findExistingNpc(reg, id, name = "") {
 // conventions — so the registry write paths (applyNpcUpdates slugify, quest-effect raw underscore,
 // reconcileGeneratedNpcWithMeet raw npcId) can never fork the same person by keying differently. Module-local:
 // the reads normalize; the write sites keep their own convention (quests.js deliberately keeps content ids).
-const canonNpcId = x => String(x || "").toLowerCase().replace(/_/g, "-");
+// ⛑ `canonNpcId` MOVED TO namematch.js so the writing side can ask it too — it was private here, and
+// quests.js (which npcs.js imports from) could not reach it without a cycle.
 
 /** Names that are really ids ("davan_channel_worker", "millbrook.elder_woman")
  *  become readable ("Davan Channel Worker", "Elder Woman"). */

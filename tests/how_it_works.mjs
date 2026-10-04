@@ -35930,8 +35930,24 @@ console.log("\n── §414 · whose ground is this ──");
   check("§414: ⛔ …and the model is Aevi's: seat 1.0 · hold 0.8 · reach 0.55, floor 0.22, contested within 15%",
     INF.ANCHOR_WEIGHT.seat === 1 && INF.ANCHOR_WEIGHT.hold === 0.8 && INF.ANCHOR_WEIGHT.reach === 0.55
     && INF.CLAIM_FLOOR === 0.22 && INF.CONTEST_RATIO === 0.85
-    && Math.abs(INF.radiusDegOf({ strength: { contingents: [{ n: 20 }] } }) - 2.63) < 0.01
-    && Math.abs(INF.radiusDegOf({ strength: { contingents: [{ n: 160 }] } }) - 5.25) < 0.01);
+    && Math.abs(INF.radiusDegOf({ strength: { contingents: [{ n: 20 }] } }) - 1.40) < 0.01
+    && Math.abs(INF.radiusDegOf({ strength: { contingents: [{ n: 160 }] } }) - 4.97) < 0.01);
+  // ⚠️ AND THE PROPERTY THAT SURVIVES A RE-TUNE. The two numbers above are a DIAL, ruled under R4.4 and
+  // re-rulable in one constant; pinning only their values makes this gate redden the day Erik answers. What
+  // must hold whatever the dial says is the ORDERING: more heads is always more ground, on either curve.
+  check("§414: ⚠️ …and whatever the curve is tuned to, more heads is always more ground",
+    (() => {
+      const r = (n, curve) => INF.radiusDegOf({ strength: { contingents: [{ n }] } }, { curve });
+      // B2's retired curve, built here rather than imported: the engine should not carry an export that
+      // only this gate calls. The numbers are documented beside REACH.
+      const asBuilt = { base: 1.2, k: 0.32, e: 0.5, floor: 10 };
+      for (const curve of [INF.REACH, asBuilt]) {
+        let last = -1;
+        for (const n of [10, 20, 40, 80, 160, 320]) { const v = r(n, curve); if (!(v > last)) return false; last = v; }
+      }
+      // and the floor is a power's privilege, not a hold's: an emptied outpost reaches its own doorstep
+      return r(4, INF.REACH) > INF.radiusDegOf({ strength: { contingents: [{ n: 4 }] } }, { curve: INF.REACH, floor: 0 });
+    })());
   // ⛔ GROUND OR NETWORK. Painting a guild as a country would be a lie about what it has.
   check("§414: ⛔ …and only ground-holding kinds get territory — a guild holds people and routes, not land",
     INF.isTerritorial({ kind: "sovereignty" }) && INF.isTerritorial({ kind: "lordship" })
@@ -36017,12 +36033,34 @@ console.log("\n── §414 · whose ground is this ──");
     })());
   // ⛑ AND AN ANCHOR JUST OUTSIDE THE FRAME IS CHARGED, NOT SKIPPED. My first cut skipped past a 4-cell margin
   // while the filter admitted anything within 10°, and a whole region fell down the gap between the two rules.
+  // ⚠️ DRIVEN, NOT GREPPED. This check used to pin the two SOURCE LINES that do the charging, and went red the
+  // day R4.2 renamed `R` to a per-anchor radius — a change that did not touch the rule at all. A gate that pins
+  // the typography of a line reddens when the line is edited for an unrelated reason, which trains you to
+  // re-green gates instead of reading them.
   check("§414: ⛑ …while one just outside it is charged the real distance in, rather than skipped or pinned free",
     (() => {
-      const src = rd("engine/influence.js");
-      return /const outside = Math\.hypot\(here\.lat - a\.lat, lonDelta\(here\.lon, aLon\) \* cl\);/.test(src)
-        && /const c0 = outside \+ R \* Math\.sqrt\(Math\.max\(0, -2 \* Math\.log\(a\.w\)\)\);/.test(src);
-    })());
+      const ext = { la0: -10, la1: 10, lo0: -10, lo1: 10 };
+      const ts = (lon, lat, w, h) => ({ x: ((lon - ext.lo0) / 20) * w, y: (1 - (lat - ext.la0) / 20) * h });
+      const tw = (x, y, w, h) => ({ lon: ext.lo0 + (x / w) * 20, lat: ext.la0 + (1 - y / h) * 20 });
+      const flat = (aLat, aLon, bLat, bLon) => Math.hypot(bLat - aLat, bLon - aLon);
+      // the same power, seated just inside the frame and then progressively further outside it
+      const at = (lon) => {
+        const p = { id: "p", kind: "sovereignty", seat: "S", strength: { contingents: [{ n: 120 }] } };
+        const locs = { S: { worldPos: { longitude: lon, colatitude: 90 } } };   // lat 0
+        const T = INF.territoryByGround([p], locs, { W: 200, H: 200, step: flat, toScreen: ts, toWorld: tw, cell: 4, extent: ext });
+        if (!T) return null;
+        // read the claim at the frame's western edge, the nearest ground to all three seats
+        const i = Math.floor(T.gh / 2) * T.gw + 1;
+        return T.cellAt(i).strength;
+      };
+      // all three stay inside the proximity pad on purpose: past it the power is dropped and the reader
+      // returns null, which is a different claim (nothing to draw) and is checked just above.
+      const inside = at(-8), near = at(-12), far = at(-16);
+      if (inside == null || near == null || far == null) return false;
+      // ⛔ NOT SKIPPED: a seat just outside still reaches the ground beside it …
+      // ⛑ … ⚠️ AND NOT FREE: each step further out is strictly weaker at the same point.
+      return near > 0.05 && inside > near && near > far;
+    })(), "a clamp that pinned an off-frame anchor to a corner for free is what put a power from the far side of the world in Erik's valley");
   // ⚠️ HER Float32 TRAP, KEPT IN HER WORDS: the popped double compared GREATER than its own stored cost and the
   // search died at its seeds, drawing every realm as a dot.
   check("§414: ⚠️ …and the costs are Float64, which is the trap Aevi hit and wrote down",
@@ -36215,6 +36253,170 @@ console.log("\n── §415 · roads that are roads ──");
       return !!e && e.polar === true;
     })(),
     "when this closes, the_center gets a real regional map for the first time");
+}
+
+/* ══════════ §416 · THE WORLD AS IT STANDS ══════════ */
+// ✅ ERIK, 2026-10-04: *"Make sure changes to power sources and local lords and powers are able to be reflected in
+// the map. I want to see how far the band of the Fell Pell's holds provide influence in their local areas. This is
+// the reason we had decided the watch and patrolling were more than just seeing a raid. Plus territory should grow
+// with influence and army size that is able to exert that influence."*
+//
+// ⚠️ WITHOUT `realms.js` THE MAP DREW DAY ONE FOREVER. `influence.js` reads the AUTHORED strength; everything
+// that happens in play lives on the save. The resolver is the only thing that reads a character, which is what
+// keeps the evaluator pure enough for the GM and the globe to ask it the same question.
+//
+// ⛑ CONSTRUCTED POPULATION, per §364 — no new gate may walk the live saves. The live sweep is
+// `po/drive_realms.mjs`, which is what caught the one number below that we and Aevi disagree about.
+console.log("\n── §416 · the world as it stands ──");
+{
+  const RE = await import("../engine/realms.js");
+  const IN416 = await import("../engine/influence.js");
+  const { loadContentHeadless: lch416 } = await import("./headless_content.mjs");
+  const C416 = await lch416();
+  const cfg416 = { ...C416.rules.economy.holdStore, features: C416.rules.economy.holdFeatures };
+
+  const POW = (id, heads, seat, holds = []) => ({
+    id, name: id, kind: "sovereignty", seat, holds: holds.map((at) => ({ at })),
+    strength: { contingents: [{ n: heads }] },
+  });
+  const LOC416 = {
+    A: { name: "A", worldPos: { longitude: 0, colatitude: 90 } },
+    B: { name: "B", worldPos: { longitude: 4, colatitude: 90 } },
+    G: { name: "G", worldPos: { longitude: 2, colatitude: 92 } },
+  };
+
+  /* ---- 1 · ⛔ THE POWERS AS THEY STAND, NOT AS THEY WERE AUTHORED ---- */
+  check("§416: ⛔ A POWER THE PLAYER HAS BLED IS SMALLER ON THE MAP — the whole of 'losses persist', one layer up",
+    (() => {
+      const content = { powers: [POW("p", 100, "A")] };
+      const fresh = RE.resolvedPowers({}, content);
+      const bled = RE.resolvedPowers({ powerState: { p: { lost: { 0: 60 } } } }, content);
+      if (fresh.length !== 1 || bled.length !== 1) return false;
+      return IN416.headsOf(fresh[0]) === 100 && IN416.headsOf(bled[0]) === 40
+        && IN416.radiusDegOf(bled[0]) < IN416.radiusDegOf(fresh[0]);
+    })());
+  check("§416: ⛔ …and one that GREW is larger, because Erik asked for ground that grows with the army",
+    (() => {
+      const content = { powers: [POW("p", 100, "A")] };
+      const grown = RE.resolvedPowers({ powerState: { p: { grownHeads: 120 } } }, content);
+      return IN416.headsOf(grown[0]) > 100 && IN416.radiusDegOf(grown[0]) > IN416.radiusDegOf(RE.resolvedPowers({}, content)[0]);
+    })());
+  check("§416: ⛔ …and a BROKEN power holds no ground at all, rather than quietly keeping its country",
+    RE.resolvedPowers({ powerState: { p: { broken: true } } }, { powers: [POW("p", 100, "A")] }).length === 0);
+  check("§416: ⛔ …and a hold the player has TAKEN stops being its anchor",
+    (() => {
+      const content = { powers: [POW("p", 100, "A", ["B"])] };
+      const before = RE.resolvedPowers({}, content)[0];
+      const after = RE.resolvedPowers({ powerState: { p: { holdsTaken: { B: true } } } }, content)[0];
+      return before.anchors.some((a) => a.at === "B") && !after.anchors.some((a) => a.at === "B");
+    })());
+  // ⛑ and a garrison ground down keeps the PLACE without the REACH — its own doorstep, which is the empty weight
+  check("§416: ⛑ …while one whose garrison was ground down keeps the place and loses the reach",
+    (() => {
+      const content = { powers: [POW("p", 100, "A", ["B"])] };
+      const a = RE.resolvedPowers({ powerState: { p: { holdLost: { B: 9 } } } })[0];
+      const after = RE.resolvedPowers({ powerState: { p: { holdLost: { B: 9 } } } }, content)[0];
+      const anchor = after.anchors.find((x) => x.at === "B");
+      return !!anchor && anchor.w === RE.EMPTY_HOLD && a === undefined;
+    })());
+
+  /* ---- 2 · ⛔ A PLAYER'S HOLDS AND BANDS ARE A REALM ---- */
+  const mkChar = ({ garrison = 1, raised = 4, bandWhole = 20, watch = 1 } = {}) => ({
+    id: "c", name: "Fixture", holdings: [
+      { id: "home", name: "Home", locationId: "A", garrison: Array.from({ length: garrison }, (_, i) => `g${i}`),
+        features: Array.from({ length: watch }, () => ({ kind: "sentries", count: 1 })) },
+      { id: "out", name: "Outpost", locationId: "B", garrison: [], features: [] },
+    ],
+    bands: [{ id: "b", name: "The Band", from: "home", contingents: [{ n: bandWhole - raised }, { n: raised, from: "out" }] }],
+  });
+  check("§416: ⛔ A PLAYER'S HOLDS AND BAND ARE A TERRITORIAL POWER — the same rule as every lord, no special case",
+    (() => {
+      const rm = RE.realmsOf(mkChar(), LOC416, cfg416)[0];
+      if (!rm || rm.kind !== "lordship" || !IN416.isTerritorial(rm)) return false;
+      const home = rm.holds.find((h) => h.hold === "home"), out = rm.holds.find((h) => h.hold === "out");
+      // ⛑ the seat fields the WHOLE band — it can march from there; the outpost fields what stands in it
+      return !!home && !!out && home.seat && !out.seat && home.heads === 20 && out.heads === 4
+        && home.radiusDeg > out.radiusDeg && rm.reachFloor === 0;
+    })());
+  // ⚠️ THE WATCH IS THE REACH — the thing Erik said the watch was FOR, and which CCODE-568 found nothing implemented
+  check("§416: ⚠️ AND THE WATCH CARRIES THE GROUND OUT — empty the watch and the realm shrinks back to its walls",
+    (() => {
+      const many = RE.realmsOf(mkChar({ watch: 3 }), LOC416, cfg416)[0];
+      const none = RE.realmsOf(mkChar({ watch: 0, garrison: 0 }), LOC416, cfg416)[0];
+      const h1 = many?.holds.find((h) => h.hold === "home"), h0 = none?.holds.find((h) => h.hold === "home");
+      if (!h1 || !h0) return false;
+      return h1.eyes > h0.eyes && h1.radiusDeg > h0.radiusDeg;
+    })(), "Erik: 'this is the reason we had decided the watch and patrolling were more than just seeing a raid'");
+  // ⚠️ AND A HOLD WHOSE PLACE IS MISSING IS REPORTED, NOT DROPPED. Two of Silas's five holds sit at GROWN
+  // places; a caller handed authored locations alone loses them, and the realm silently shrinks by 40%.
+  check("§416: ⚠️ …and a hold whose place the caller did not hand over is REPORTED, never silently dropped",
+    (() => {
+      const rm = RE.realmsOf(mkChar(), { A: LOC416.A }, cfg416)[0];
+      return !!rm && rm.holds.length === 1 && rm.unplaced.length === 1 && rm.unplaced[0].at === "B";
+    })());
+  // ⛑ a hold is not a crown: no ten-head floor, or an emptied outpost would borrow a country it does not have
+  check("§416: ⛑ …and an emptied hold reaches its own doorstep, not the ten imagined heads a crown gets",
+    (() => {
+      const rm = RE.realmsOf(mkChar({ raised: 0, garrison: 0, watch: 0, bandWhole: 0 }), LOC416, cfg416)[0];
+      const out = rm?.holds.find((h) => h.hold === "out");
+      return !!out && out.heads === 0 && out.radiusDeg < IN416.radiusDegOf({ strength: { contingents: [{ n: 0 }] } });
+    })());
+
+  /* ---- 3 · ⛔ NEUTRAL UNLESS THEY CLASH ---- */
+  // ✅ ERIK: *"others… are ok to be assumed neutral to each other unless they clash. This will be fertile ground
+  // for alliances, trade, vassals, betrayals and narratives."* ⚠️ Before this, every overlap was a stripe, which
+  // painted every pair of neighbours as at war.
+  const PA = POW("a", 50, "A"), PB = POW("b", 50, "B");
+  check("§416: ⛔ TWO NEIGHBOURS ARE NEUTRAL UNTIL THEY CLASH — an overlap is not a war",
+    RE.powerRelation(PA, PB, {}, { allPowers: [PA, PB] }) === "neutral");
+  check("§416: ⛔ …and a clash makes a rival: blood, a hold taken, or a standing gone sour",
+    (() => {
+      const mine = { id: "realm:c", yours: true };
+      const blood = { powerState: { b: { lost: { 0: 3 } } } };
+      const took = { powerState: { b: { holdsTaken: { B: true } } } };
+      const sour = { powerState: { b: { standing: -4 } } };
+      return RE.powerRelation(mine, PB, blood) === "rival"
+        && RE.powerRelation(mine, PB, took) === "rival"
+        && RE.powerRelation(mine, PB, sour) === "rival"
+        && RE.powerRelation(mine, PB, {}) === "neutral";
+    })());
+  check("§416: ⛔ …and a good standing is an ally, as are two characters of one player",
+    RE.powerRelation({ id: "realm:c", yours: true }, PB, { powerState: { b: { standing: 5 } } }) === "ally"
+    && RE.powerRelation({ id: "r1", yours: true }, { id: "r2", yours: true }, {}) === "ally");
+  // ⛑ content's own word still counts between two powers neither of which is yours
+  check("§416: ⛑ …and authored rivals stay rivals even where the player has never been",
+    (() => {
+      const x = { ...POW("x", 10, "A"), rivals: ["y"] }, y = POW("y", 10, "B");
+      return RE.powerRelation(x, y, {}, { allPowers: [x, y] }) === "rival"
+        && RE.powerRelation(POW("m", 10, "A"), POW("n", 10, "B"), {}, { allPowers: [] }) === "neutral";
+    })());
+
+  /* ---- 4 · ⚠️ THE CACHE STAMP, or the map changes a session after the world does ---- */
+  check("§416: ⚠️ THE STAMP MOVES WHEN THE WORLD DOES — a cached picture that cannot tell is a stale one",
+    (() => {
+      const content = { powers: [POW("p", 100, "A")] };
+      const base = RE.resolvedPowers({}, content);
+      const s0 = RE.stateStamp({}, base);
+      const bledCh = { powerState: { p: { lost: { 0: 60 } } } };
+      const s1 = RE.stateStamp(bledCh, RE.resolvedPowers(bledCh, content));
+      const withHold = { holdings: [{ id: "h", locationId: "A", garrison: ["g"] }] };
+      const s2 = RE.stateStamp(withHold, base);
+      return s0 !== s1 && s0 !== s2 && s0 === RE.stateStamp({}, RE.resolvedPowers({}, content));
+    })());
+
+  // ⛔ AEVI'S `sense` CLAUSE HAS NO POPULATION. R4.2 counts eyes as the watch *"+ `sense` features it does not
+  // already count (the tower)"*, but 0 of 45 feature kinds carry a `sense` field, so the clause adds nothing and
+  // the tower she named is never counted. ⚠️ It is the ONE number her mock and this engine disagree about:
+  // driven on Silas's save we agree on 9 of 10 figures across five holds, and the tenth is Stillwater's Trouble,
+  // which has a tower — 4 eyes here against her 5. The reader is left reading `sense` rather than hard-coding
+  // `tower`, because the field is the right abstraction and the kinds are content's business.
+  gap("§416: no feature kind carries `sense`, so a tower that watches without being manned counts for nothing",
+    (() => {
+      const kinds = C416.rules?.economy?.holdFeatures?.kinds || {};
+      const all = Object.values(kinds);
+      return all.length > 20 && all.every((f) => !f?.sense);
+    })(),
+    "when this closes, re-drive po/drive_realms.mjs and Stillwater's Trouble should read 5 eyes, not 4");
 }
 
 /* ══════════ REPORT ══════════ */

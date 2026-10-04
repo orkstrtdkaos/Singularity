@@ -47,6 +47,10 @@ import { sourcesHere, meaningDensity } from "./engine/substrate.js";   // ✅ Er
 import { groundForDecl, groundTag, substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace, groundHere, groundCardFor, naniteAt, bandFactor, peoplePresentAt } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
 import { sceneImage, itemImage, artworkStyle, getArtMode, setArtMode, imagesEnabled, ensureImage, aestheticFor, regenPromptFor, onImageMinted, onComposedLookup, swapImageUrl, forgetImageUrl, bustedURL, isBustedURL, mintAction, IMAGE_MIN_BYTES, regenerateImage, acceptImage, isGeneratedImage, toggleKeep, likenessClause, houseStyleFor, sanitizeImagePrompt, imageURLFor, isMinorSubject, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor, lookFor, serviceRefusal, refusedSaid} from "./engine/art.js"; // SNG-401: draw it again without destroying the one they have
 import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, regionExtent, bendRoad, roadNetwork, clipToFrame, routeRoads, makeGroundCost, GROUND_COST } from "./engine/worldglobe.js";
+// ⛔ ROUND 4 — whose ground is this, as things stand today. `realms.js` resolves the SAVE (losses, growth,
+// broken powers, taken holds, your own realm); `influence.js` stays pure and just evaluates.
+import { groundHolders, stateStamp, powerRelation } from "./engine/realms.js";
+import { makeInfluence } from "./engine/influence.js";
 import { glyphFor, drawGlyph } from "./engine/mapicons.mjs";   // SNG-409 §4: a pole must never read as a town   // SNG-390: the globe, read-only
 import { walkingDays, milesFor, worldPosForGenerated, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout, fieldBlobs, fieldAlpha, placeLabels } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
@@ -184,7 +188,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.17.0";
+const APP_VERSION = "2.17.1";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -12419,6 +12423,45 @@ function smoothRoad(pts, passes = 2) {
   return p;
 }
 
+/** ⛔ R4.1 — WHOSE GROUND IS THIS, resolved for THIS character and cached until the world moves.
+ *  ⚠️ THE STAMP IS THE WHOLE POINT OF THE CACHE. Without it the answer is computed once and then kept across
+ *  a raid, a lost hold and a grown band — a map that is wrong about something, which nobody reports as a bug
+ *  because it just looks like the map. `stateStamp` counts what has actually happened, so the picture changes
+ *  on the turn the world does. */
+let _ground = { key: null, at: null, holders: null, mine: null };
+function groundReader() {
+  if (!CONTENT?.locations || !character) return null;
+  const cfg = { ...(CONTENT.rules?.economy?.holdStore || {}), features: CONTENT.rules?.economy?.holdFeatures };
+  const holders = groundHolders(character, CONTENT, CONTENT.locations, cfg);
+  const key = `${stateStamp(character, holders)}|${Object.keys(CONTENT.locations).length}`;
+  if (_ground.key !== key) {
+    _ground = {
+      key, holders,
+      at: makeInfluence(holders, CONTENT.locations).at,
+      mine: holders.find((h) => h.yours) || null,
+    };
+  }
+  return _ground;
+}
+
+/** One line of plain words for who holds a place, in the player's terms rather than the model's. */
+function groundLine(loc) {
+  const g = groundReader();
+  if (!g?.at || !loc?.worldPos) return "";
+  const a = g.at(Number(loc.worldPos.colatitude) - 90, Number(loc.worldPos.longitude));
+  if (!a?.owner) return "held by nobody";
+  const own = g.holders.find((h) => h.id === a.owner);
+  if (!own) return "";
+  if (own.yours) return `your ground — ${esc(own.name)}`;
+  // ⛔ R4.3: neutral unless they clash, so a neighbour is not announced as an enemy
+  const rel = g.mine ? powerRelation(g.mine, own, character, { allPowers: g.holders }) : "neutral";
+  const word = rel === "ally" ? "ally" : rel === "rival" ? "rival" : "neutral";
+  const other = a.contested && a.rival ? g.holders.find((h) => h.id === a.rival) : null;
+  return other
+    ? `${esc(own.name)} · contested with ${esc(other.name)}`
+    : `${esc(own.name)} · ${word}`;
+}
+
 const TIER_RANK = { region: 3, settlement: 2, site: 1 };
 function clusterMarks(marks, radius = REGION_HIT) {
   const seen = new Set(), out = [];
@@ -13084,8 +13127,12 @@ function wireRegionGroundMap(selectedId) {
       : `${days < 1 ? days.toFixed(1) : Math.round(days)} day${days >= 1 && Math.round(days) === 1 ? "" : "s"} from ${esc(lead.name)}`;
     const kind = esc(String(l.tier || "place"));
     chip.hidden = false;
+    // ⛑ AND WHOSE GROUND IT IS — Aevi's B2 done-when was *"the GM and the hover can both ask whose ground is
+    // this without a painter in the room"*, and this is the hover half.
+    const whose = groundLine(l);
     chip.innerHTML = `<div class="rmc-what"><strong>${esc(l.name || hit.id)}</strong> <span class="hint">${kind}</span></div>`
       + (far ? `<div class="hint rmc-far">${far}</div>` : "")
+      + (whose ? `<div class="hint rmc-whose">${whose}</div>` : "")
       + `<div class="rmc-acts"><button class="opt" data-rmc-inside="${esc(hit.id)}">Look inside</button>`
       + `<button class="opt" data-rmc-travel="${esc(hit.id)}">Travel</button></div>`;
     // ⚠️ PLACED IN CSS PIXELS over the canvas, and kept inside it — a chip half off the right edge is a button

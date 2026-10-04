@@ -16,6 +16,30 @@
   "next": [],
   "releases": [
     {
+      "version": "2.17.1",
+      "date": "2026-10-04",
+      "entries": [
+        {
+          "kind": "change",
+          "title": "The map will show the world as it is now",
+          "summary": "Groundwork: a power you have bled, grown or broken no longer looks untouched.",
+          "detail": "Until now the engine worked out who holds which ground from the written record of each power — the strength it was given on the first day. Everything you have actually done to them lives on your save. So a crown whose soldiers you had cut down, or whose hold you had taken, still drew the same country it always had. The engine now resolves every power as it stands for you before anyone asks whose ground this is: losses and growth count, a broken power holds nothing, a hold you took stops being theirs, and a gate someone seized becomes ground for whoever holds it. Nothing is on screen yet — this is what the territory map will draw from."
+        },
+        {
+          "kind": "feature",
+          "title": "Your holds and your band are a realm",
+          "summary": "Your own ground, worked out by the same rule as every lord in the world.",
+          "detail": "Your holdings and the band you raised are now read as a power like any other, with no special case for being yours. The hold your band calls home is its seat and reaches with the whole band behind it, because that is where it can march from; every other hold reaches with the hands actually standing in it. And the watch is what carries it: each pair of eyes on the walls widens that hold's reach, so keeping a watch is worth something beyond spotting a raid coming. Empty the watch and your ground draws back to the walls."
+        },
+        {
+          "kind": "change",
+          "title": "Neighbouring powers are neutral until they clash",
+          "summary": "An overlap on the map is no longer treated as a war.",
+          "detail": "Where two powers' ground met, the map used to show a contested border — which quietly said every pair of neighbours was at each other's throat. Now a rivalry has to be earned: blood spilt either way, a hold taken, a standing gone sour, or two powers written as rivals from the start. Everything else is neutral, and a good standing or one of their people riding with your band reads as an alliance. The first raid is what turns a quiet border into a contested one, and you will see it change."
+        }
+      ]
+    },
+    {
       "version": "2.17.0",
       "date": "2026-10-04",
       "entries": [

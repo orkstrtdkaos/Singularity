@@ -300,9 +300,15 @@ console.log("\n── §6 · the death ladder ──");
     D.deathDepth(sunk, 2) > before, `${before} -> ${D.deathDepth(sunk, 2)}`);
   // "Five traditions share one set of verbs."
   for (const v of ["retrieve", "sink", "seal", "hold", "slow"]) check(`§6: the doc names the verb '${v}'`, new RegExp(`\`${v}\``).test(doc));
-  // ⛔ PROPOSED: undeath.
-  gap("§6 PROPOSED: undeath (cocoon / narrowing / Afterling) is not built",
-    !/cocoonStage|afterling|narrowing/i.test(rd("engine/death.js")));
+  // ⛔ PROPOSED: undeath — BUILT 2026-10-04 (§424). ⚠️ AND THE OLD LINE HERE WOULD HAVE STAYED GREEN THROUGH
+  // IT. It read `rd("engine/death.js")` for the words `cocoonStage|afterling|narrowing`, and the model went
+  // into `engine/undeath.js` — so a gate watching for a capability was actually watching ONE FILENAME, and
+  // would have reported the gap still open with the whole thing shipped and driven beside it.
+  // ⛑ A GATE MAY NOT NAME THE FILE IT EXPECTS THE ANSWER IN. It asks whether the capability is REACHABLE,
+  // and §424 below drives it. This line keeps only the honest half: the DOC still has to stop saying
+  // PROPOSED, because a doc asserting a gap that is closed is the inverse of the gate asserting one that is not.
+  check("§6: …and the undeath model is no longer PROPOSED in the doc — §424 drives it",
+    !/PROPOSED \(§48\): undeath/.test(doc), "docs/HOW_IT_WORKS.md §6 still calls undeath PROPOSED");
 }
 
 /* ══════════ §7 — COMPANIONS ══════════ */
@@ -37258,6 +37264,264 @@ console.log("\n── §423 · generation makes whole things ──");
       if (!o || !(o.connections || []).length) return false;
       return (o.connections || []).every((id) => typeof id === "string" && id.length > 0);
     })());
+}
+
+/* ══════════ §424 · UNDEATH — A POWER PUT INTO A VESSEL (SYSTEM_SPEC §48) ══════════ */
+// ✅ ERIK, 2026-10-04: *"you have afterlife work to do too."* ⛔ §48 WAS RATIFIED 2026-08-24 AND §48.10 LISTS
+// WHAT IT OWED ME. Measured at HEAD before a line was written, and the measurement moved the work:
+//
+//   | §48.10 owed                     | the table said | measured 2026-10-04                        |
+//   | `heal` → `decay` on undead       | not built      | ✅ BUILT — typed healing, CCODE-316        |
+//   | the lash-out attack shape        | not built      | ⛔ not built — the word `lash` was absent  |
+//   | divergent raise/retrieve curves  | ladder only    | ⛔ not built — no `priorRaisings` anywhere  |
+//
+// ⚠️ AND THE FIRST ROW IS WHY THIS SECTION IS LONGER THAN THREE CHECKS. "Built" was not "reaches anything":
+// `affinityOf` reads `sheet.affinity[type]`, and the word `affinity` appeared in `npcsheet.js` ZERO TIMES —
+// so every crew a player raised was minted ALIVE to the arithmetic, and the inversion shipped in August had
+// nothing to invert ON. ⛔ Half the AUTHORED undead were the same story: four creatures declare
+// `class: narrowed_dead`, and two of them authored none of §48.4's traits.
+//
+// ⛑ WHAT THIS SECTION REFUSES TO ASSERT. §48.3's deciding rule — narrowing versus a stable Afterling — is
+// ⛔ ERIK's and UNRULED, and §48.10 calls it the load-bearing one. The gate asserts that the engine REPORTS
+// the four candidate signals and DECIDES NOTHING; a check that pinned an answer would have made my guess
+// into his ruling, which is a thing that has already happened once on this project and held for three weeks.
+console.log("\n── §424 · undeath: three kinds, a cocoon, and two roads that diverge ──");
+{
+  const U424 = await import("../engine/undeath.js");
+  const D424 = await import("../engine/death.js");
+  const NS424 = await import("../engine/npcsheet.js");
+  const SB424 = await import("../engine/skill_battle.js");
+  const { loadContentHeadless: lch424 } = await import("./headless_content.mjs");
+  const C424 = await lch424();
+  const rules424 = C424.rules || {};
+  const sbEng424 = C424.skillBattle?.engine || null;   // ⚠️ NOT `rules.skillBattleSystem` — that key does not exist, and my first driver passed null for an hour
+  const spec424 = rd("SYSTEM_SPEC.md");
+
+  /* ---- 1 · ⛔ THE COCOON IS A CLOCK, AND IT MOVES ---- */
+  // §48.2: *"the undead body is like a COCOON … as it wears, THE ENTITY GETS STRONGER AND MORE CAPABLE."*
+  // ⛑ THIS IS THE CHECK THAT CAUGHT THE WORST BUG IN THE BUILD. `enterUndeath` stores `shellWear: null` for
+  // every record that does not set one, and `Number(null)` is **0, WHICH IS FINITE** — so the wear override
+  // claimed every undead in the world was 0% worn and the phase NEVER LEFT `set`. Day 400 read `set`. Wither
+  // destroyed everything and freed nothing, the lash could never fire, and §6's one ruled derivation could
+  // never reach `emerged`: three features dead from one coerced null, with `node --check` and 32 suites green
+  // over it. ⚠️ A DEFAULT THAT BEHAVES LIKE A VALUE, for the fifth logged time on this project.
+  const crew424 = (d) => U424.enterUndeath({ id: "c424" }, { kind: "mindless", day: 0 }) && U424.cocoonPhase(U424.enterUndeath({ id: "c424b" }, { kind: "mindless", day: 0 }), d, rules424).phase;
+  check("§424: ⛔ THE COCOON ADVANCES — set → breaching → emerged, and a record with no authored wear still moves",
+    crew424(0) === "set" && crew424(10) === "set" && crew424(30) === "breaching" && crew424(119) === "breaching" && crew424(400) === "emerged",
+    `day 0=${crew424(0)} 30=${crew424(30)} 400=${crew424(400)} — all-"set" is the Number(null)===0 defect`);
+
+  /* ---- 2 · §48.8 · THREE OUTCOMES FROM ONE ACT, AND THE WARDEN DOES NOT CHOOSE ---- */
+  // ⛔ *"SO THE CRAFT MEANT TO UN-MAKE UNDEAD IS HOW AN AFTERLING IS BORN, AND A WARDEN WHO DID NOT KNOW
+  // THAT HAS MADE ONE."* The three outcomes are asserted TOGETHER, because the whole mechanic is that they
+  // are indistinguishable beforehand — a gate on one of them would pass over a Wither that always destroys.
+  const wither424 = (d) => U424.witherOutcome(U424.enterUndeath({ id: "w424" }, { kind: "mindless", day: 0 }), { currentDay: d, rules: rules424 });
+  check("§424: ⛔ §48.8 — Wither DESTROYS an intact shell, leaves a breaching one VULNERABLE, and FREES an emerged one",
+    wither424(0).outcome === "destroyed" && wither424(60).outcome === "vulnerable" && wither424(400).outcome === "freed"
+    && wither424(400).freed === true,
+    `${wither424(0).outcome}/${wither424(60).outcome}/${wither424(400).outcome}`);
+  check("§424: ⛔ …and the warden does not CHOOSE which — every outcome reports `chosen: false`",
+    [0, 60, 400].every((d) => wither424(d).chosen === false) && !!wither424(400).warning,
+    "a surface that let a player pick this would be telling them a lie §48.8 spends a paragraph on");
+  check("§424: ⛑ …and the spec's own text is still what this implements", /FREED\. The cocoon was the last thing holding it in/.test(spec424));
+
+  /* ---- 3 · §48.6 / §6 · DEATHSENSE IS A DIAGNOSTIC, AND IT REPORTS ITS OWN LIMIT ---- */
+  // ✅ ERIK: *"Deathsense would read the NEGATIVE LIFE POWER — it would make a great undead detector."*
+  // ⛔ AND §6 IS THE HARDER HALF: *"A mindless crew arrives UNFELT … So silence means a tool, and anything
+  // you can feel is either further along the cocoon or a person — AND TELLING THOSE TWO APART IS THE WARDEN'S
+  // ACTUAL PROBLEM."* ⚠️ So the check that MATTERS is the negative one: the craft must NOT return the kind.
+  // Returning `kind: "afterling"` would have handed the warden their actual problem, solved, by the engine —
+  // which is the problem being deleted rather than built, and it was the easiest thing in the file to do.
+  const sense424 = (ent, o = {}) => U424.deathsenseRead(ent, { rules: rules424, ...o });
+  const mindlessFresh = U424.enterUndeath({ id: "s1" }, { kind: "mindless", day: 0 });
+  const mindlessOn = U424.enterUndeath({ id: "s2" }, { kind: "mindless", day: 0 });
+  const after424 = U424.enterUndeath({ id: "s3" }, { kind: "afterling", day: 0 });
+  check("§424: ⛔ §48.6 — Deathsense reads life POSITIVE in the living, FALLING in the dying, INVERTED in the undead",
+    sense424({ id: "a" }).reads === "positive" && sense424({ id: "b" }, { dying: true }).reads === "falling"
+    && sense424(after424, { currentDay: 0 }).reads === "inverted" && sense424({ id: "c", status: "dead" }).reads === "nothing");
+  check("§424: ⛔ …a mindless crew with its shell intact arrives UNFELT — there is no self in one to give it away",
+    sense424(mindlessFresh, { currentDay: 0 }).felt === false && sense424(mindlessFresh, { currentDay: 0 }).reads === "unfelt");
+  check("§424: ⛔ …AND IT DOES NOT TELL THE WARDEN WHICH — anything felt is 'further along the cocoon OR a person'",
+    (() => {
+      const a = sense424(mindlessOn, { currentDay: 60 }), b = sense424(after424, { currentDay: 0 });
+      return a.felt && b.felt && a.tells === false && b.tells === false
+        && !("kind" in a) && !("kind" in b)                       // ⛔ the kind must not leak out of a sense craft
+        && a.ambiguous?.length === 2 && a.reads === b.reads;      // ⚠️ and the two read IDENTICALLY, which is the point
+    })(), "a sense craft that names the kind has deleted §6's stated problem instead of building it");
+
+  /* ---- 4 · §48.7 · TWO CURVES, AND THE ORDERING IS THE RULING ---- */
+  // ✅ ERIK: *"it's too hard to raise them back to living, but they CAN CONTINUE IN UNDEATH."*
+  // ⛑ THE CHECK IS THE CONSEQUENCE, NEVER THE DIAL. `retrievePerPriorRaising` is 18 because that is what
+  // makes his sentence true, not because 18 is right — a gate pinned to it reddens the day he improves it.
+  // ⚠️ AND IT IS DRIVEN THROUGH `retrievalOdds` ITSELF. My first measurement computed `pct − penalty`
+  // OUTSIDE the function and reached 0%; the real function returned 5%, because `retrieval.floor` is 5. So
+  // the toll had to become an early return like `refusedByThem`, and a number proven beside the path it has
+  // to hold on is not proven.
+  const deadAt = (n, depth = 0) => ({ status: "dead", priorRaisings: n,
+    deathState: { diedDay: 0, bodyStatus: "intact", sealed: false, depthOverride: depth } });
+  const ret424 = (n, depth = 0, rank = 3, bond = 10) => D424.retrievalOdds(deadAt(n, depth), { rank, currentDay: 0, rules: rules424, bond });
+  check("§424: ⛔ §48.7 — each return costs more than the last: the road back falls monotonically with prior raisings",
+    (() => { let last = 101; for (let n = 0; n <= 9; n++) { const p = ret424(n).pct; if (p > last) return false; last = p; } return true; })(),
+    [0, 1, 2, 3, 4, 5, 6, 7].map((n) => ret424(n).pct).join(" → "));
+  check("§424: ⛔ …and it CLOSES — 'eventually impossible', past `retrieval.floor` rather than resting on it",
+    (() => { const shut = [...Array(10).keys()].find((n) => ret424(n).exhausted === true);
+      return shut != null && ret424(shut).pct === 0; })(),
+    "a toll that only subtracts lands on floor 5 forever, and 'eventually impossible' reads as 'always a chance'");
+  check("§424: ⛔ …WHILE CONTINUING IN UNDEATH STAYS OPEN — the whole reason the old heroes are undead",
+    (() => { const shut = [...Array(10).keys()].find((n) => ret424(n).exhausted === true);
+      if (shut == null) return false;
+      const raise = U424.raiseOdds(deadAt(shut), { rank: 1, rules: rules424 });
+      return raise.open === true && raise.pct > 0; })(),
+    "✅ 'a hero four centuries dead cannot be made alive and CAN be made to continue'");
+  check("§424: ⛑ …and the DEEP DARK closes first, which is §48.7's own sentence rather than a coincidence",
+    (() => { const deep = [...Array(10).keys()].find((n) => ret424(n, 2).exhausted === true);
+      const shallow = [...Array(10).keys()].find((n) => ret424(n, 0).exhausted === true);
+      return deep != null && shallow != null && deep < shallow; })(),
+    "depth should make the road back close SOONER, not later");
+  check("§424: ⚠️ …and the toll is VISIBLE to the player, not a silent subtraction",
+    (ret424(2).terms || []).some((x) => /brought back/.test(x.label) && x.value < 0));
+
+  /* ---- 5 · §48.5 · THE ARITHMETIC REACHES WHAT IT IS FOR ---- */
+  // ⛔ THE FLOOR IS A FLOOR. `the_narrowed` authors `decay: absorb` and keeps it at every phase, because
+  // §48.5's third row is an authored aura — so Aevi's escape hatch from any of this is to author the
+  // opposite, and she needs no flag from me.
+  const roster424 = (C424.bestiary?.roster || []).filter((r) => r.class === "narrowed_dead");
+  check("§424: ⛔ §48.5 — every creature declaring `narrowed_dead` answers a mending with a burn (it was 2 of 4)",
+    roster424.length >= 4 && roster424.every((r) => SB424.affinityOf({ ...r, affinity: U424.undeadAffinity(r, { rules: rules424 }).affinity }, "vitality", sbEng424) === "vulnerable"),
+    `${roster424.filter((r) => r.affinity?.vitality === "vulnerable").length} of ${roster424.length} author it themselves`);
+  check("§424: ⛔ …and AUTHORED WINS — `the_narrowed`'s own `decay: absorb` survives the floor",
+    (() => { const n = roster424.find((r) => r.id === "the_narrowed"); if (!n) return false;
+      const a = U424.undeadAffinity(n, { rules: rules424 });
+      return a.affinity.decay === "absorb" && Object.keys(a.added).length === 0; })());
+  check("§424: ⛔ …and `decay: absorb` IS NOT A BLANKET UNDEAD TRAIT — §48.5 forbids that in capitals",
+    (() => { const fresh = U424.freshRaisedAffinity({});
+      return fresh.decay === "vulnerable" && fresh.vitality === "vulnerable"; })(),
+    "✅ Erik: 'not all undead would absorb Wither — just the ones who would be STRONGER WITHOUT THE COCOON'");
+  // ⛔ AND THE MINTER. This is the door that was shut: the reader was live and the writer wrote nothing.
+  const setHand424 = Object.values(C424.abilities || {}).find((a) => a.id === "set_hand");
+  check("§424: ⛔ A BODY A PLAYER RAISES IS MINTED UNDEAD — `summonSheetFor` wrote no affinity at all before this",
+    (() => { if (!setHand424) return false;
+      const s = NS424.summonSheetFor({ ...setHand424, summon: { ...setHand424.summon, raises: true } }, 5, { rank: 1, cfg: rules424 });
+      return SB424.affinityOf(s, "vitality", sbEng424) === "vulnerable" && SB424.affinityOf(s, "decay", sbEng424) === "vulnerable" && s.undead === true; })(),
+    "the word `affinity` appeared in npcsheet.js zero times");
+  // ⚠️ AND THE HONEST HALF: the declaration is Aevi's and TODAY NOBODY MAKES IT. A gate that hid this
+  // behind its own fixture would be a fixture that invents the field it tests for — so it is asserted as a
+  // POPULATION OF ZERO, which reddens the day she authors the word and is a true statement until then.
+  const raisers424 = Object.values(C424.abilities || {}).filter((a) => a.summon?.raises === true || a.summon?.undead === true);
+  check("§424: ⚠️ …and the DECLARATION is content's, not the engine's — 0 crafts declare a raising today, and the reader is proven by fixture only",
+    raisers424.length === 0,
+    "⛑ WHEN THIS GOES RED, AEVI HAS AUTHORED `summon.raises` AND THE CHECK ABOVE IS LIVE ON REAL CONTENT — move this line to count hers");
+
+  /* ---- 6 · `wornBenefits` — AUTHORED, AND IT HAD NO READER ---- */
+  // ✅ ERIK 2026-08-24: *"INCREASED RANKS SHOULD GIVE YOU SOME OF THE BENEFITS OF THE UNDEAD — necrotic
+  // absorb, immunity to cold, unnatural strength."* ⚠️ `deathless`'s own authored note says `wornBenefits`
+  // "needs a READER but invents no vocabulary" — and nobody built one, so three ranks of a capstone did
+  // nothing. ⛔ BOTH HALVES ARE DRIVEN HERE, because proving the producer is not proving the reader.
+  const deathless424 = Object.values(C424.abilities || {}).find((a) => a.id === "deathless");
+  check("§424: ⛔ `wornBenefits` HAS A READER — `deathless` r2 grants `cold: immune` + `decay: absorb`",
+    (() => { const w = U424.wornAffinityFor(deathless424, 2);
+      return w?.affinity?.cold === "immune" && w.affinity.decay === "absorb"; })());
+  check("§424: ⛔ …and it rides onto the LIVE effect and into the fight — driven through `battleRound`",
+    (() => {
+      const mk = (n) => ({ id: n, name: n, level: 5, health: 40, maxHealth: 40, energy: 20, soak: 2,
+        attributes: { might: 3, grace: 3, wits: 3, presence: 3 }, affinity: { cold: "vulnerable" } });
+      // ⛑ 0.1 LANDS IT; 0.5 FAILS THE CRAFT, and a failed craft correctly leaves nothing standing — my first
+      // run read that empty list as a wiring defect for ten minutes.
+      const r = SB424.battleRound({
+        playerDecl: { function: "sustain", name: deathless424.name, id: deathless424.id, rank: 2, tier: 3, intensity: "standard", mechanic: deathless424.mechanic },
+        oppDecl: { function: "strike", name: "a blow", rank: 1, tier: 1, damageType: "cold" },
+        playerSheet: mk("warden"), oppSheet: mk("foe"),
+        state: { effects: [], momentum: 0, playerEnergy: 20, opponentEnergy: 20 }, rules: rules424, sb: sbEng424, rng: () => 0.1 });
+      const worn = (r.effects || []).filter((fx) => fx.affinity && fx.side === "player");
+      if (!worn.length) return false;
+      const folded = U424.withWornAffinity(mk("warden"), r.effects, "player");
+      // ⛔ THE GRANT WINS over her own `cold: vulnerable` — which is the whole reason she cast it
+      return SB424.affinityOf(folded, "cold", sbEng424) === "immune" && SB424.affinityOf(folded, "decay", sbEng424) === "absorb";
+    })(), "the grant must reach the sheet the damage path reads, not sit on the definition");
+  check("§424: ✅ …and the WEARER IS NOT MADE BURNABLE — Erik: 'STOP THE NEGATIVE ASPECTS OF HEROIC SKILLS!!'",
+    (() => { const w = U424.wornAffinityFor(deathless424, 3);
+      return !w.affinity.vitality && !w.affinity.living; })(),
+    "I had authored 'healing harms you' onto the wearer and he struck it — the reader must not put it back");
+  check("§424: ⛑ …and a fight with no worn craft in it pays nothing",
+    (() => { const s = { id: "x", affinity: { cold: "vulnerable" } };
+      return U424.withWornAffinity(s, [], "player") === s && U424.withWornAffinity(s, [{ side: "opponent", affinity: { cold: "immune" } }], "player") === s; })());
+
+  /* ---- 7 · ⛔ WHAT THE ENGINE REFUSES TO DECIDE ---- */
+  // §48.3: *"WHAT DECIDES WHICH IS NOT RULED."* §48.10: ⛔ **ERIK — unruled, and it is the load-bearing one.**
+  // ⚠️ THIS IS THE MOST IMPORTANT CHECK IN THE SECTION. A derivation here becomes the ruling by default and
+  // nobody notices — which has already happened once on this project, where my summary of Erik's position
+  // became a `po` table row reading "Erik's ruling" beside a dial he never ruled on, and it held for three
+  // weeks on every road in the world.
+  const sig424 = U424.narrowingSignals(U424.enterUndeath({ id: "n424" }, { kind: "mindless", day: 0 }), { depthRaisedFrom: 2, rules: rules424 });
+  check("§424: ⛔ THE ENGINE DOES NOT RULE §48.3 — it reports the four candidate signals and decides nothing",
+    sig424 && sig424.ruled === false && sig424.rule === "report"
+    && ["depthRaisedFrom", "purposeGiven", "attended", "nameKept"].every((k) => k in sig424.signals),
+    "⚠️ if this ever reads `ruled: true` with no ruling in SYSTEM_SPEC §48.3, the engine has made Erik's call for him");
+  check("§424: ⛔ …and the spec still says so, so the refusal is anchored to the text and not to my memory of it",
+    /WHAT DECIDES WHICH IS NOT RULED/.test(spec424) && /unruled, and it is the load-bearing one/.test(spec424));
+  // ⛑ §6's ONE RULED DERIVATION, which the engine DOES make because the doc states it outright
+  check("§424: ⛑ …but §6's one RULED derivation does fire — a mindless one that ran the cocoon and was released is a SPIRIT",
+    (() => { const m = U424.enterUndeath({ id: "k424" }, { kind: "mindless", day: 0 });
+      if (U424.undeathKind(m, 10, rules424) !== "mindless") return false;
+      m.undeath.released = true;
+      return U424.undeathKind(m, 400, rules424) === "spirit"; })(),
+    "✅ §6: 'A SPIRIT is what a mindless one becomes if it is left to proceed through the cocoon phases and is then released'");
+
+  /* ---- 8 · §48.2's attack shape, and §48.9's two halves ---- */
+  const lash424 = (d) => U424.lashOut(U424.enterUndeath({ id: "l424" }, { kind: "mindless", day: 0 }), { currentDay: d, rules: rules424 });
+  check("§424: ⛔ §48.2 — THE LASH IS THE MIDDLE PHASE ONLY: not from a dormant shell, not from a thing already out",
+    lash424(0).ok === false && lash424(60).ok === true && lash424(400).ok === false,
+    `set=${lash424(0).ok} breaching=${lash424(60).ok} emerged=${lash424(400).ok}`);
+  check("§424: ⛔ …and it goes PAST ARMOUR AND PAST POSITION — 'the corpse is the delivery system and it is not the threat'",
+    lash424(60).piercesSoak === true && lash424(60).ignoresPosition === true && lash424(60).from === "inside the shell");
+  check("§424: ⚠️ …and it says its damage type is UNAUTHORED rather than inventing one — an untyped blow is invisible to affinities",
+    lash424(60).typeUnauthored === true && lash424(60).damageType === null,
+    "⛑ one authored word on the creature closes this, and it is Aevi's word");
+  /* ---- 9 · ⛔ THE DOOR INTO PLAY, which is the half a model like this usually ships without ---- */
+  // ⚠️ THE WIRING AUDIT CAUGHT THIS AND IT WAS RIGHT. Five of this module's exports were reachable only
+  // from the section above — `deathsenseRead`, `witherOutcome`, `lashOut`, `raiseOdds`, `repairPathFor` —
+  // and the ratchet's own words are *"it passes CI and CANNOT FIRE IN PLAY. Wire it or delete it."* ⛔ §48
+  // would have shipped as a model with two dozen green gates and no way for a player to ever meet it.
+  const regSrc424 = rd("engine/gm_registry.js");
+  const appSrc424 = rd("app.js");
+  const gmSrc424 = rd("engine/gm.js");
+  check("§424: ⛔ THE READ DOOR — the GM is told who in the room is not alive (`undeadDetail` is a registry row)",
+    /key: "undeadDetail"/.test(regSrc424) && /undeadForGM\(env\.character/.test(regSrc424),
+    "a model nothing narrates is a model no player meets");
+  check("§424: ⛔ THE WRITE DOOR — `deathOps` op `raise`, or nothing can ever BECOME undead and §48's population is zero forever",
+    /kind === "raise"/.test(appSrc424) && /enterUndeath\(ent, \{ kind:/.test(appSrc424)
+    && /"hold \| slow \| retrieve \| release \| raise"/.test(gmSrc424),
+    "the retrieval ladder had four verbs and every one of them was about the road BACK");
+  check("§424: ⛔ …and the GM is TOLD about the verb — a door nothing knows to knock on is not a door",
+    /18d\. RAISING IS NOT RETRIEVING/.test(gmSrc424) && /HEALING HARMS THEM/.test(gmSrc424));
+  // ⛑ AND IT CARRIES WHAT THE PLAYER CAN PERCEIVE SEPARATELY FROM WHAT IS TRUE. A narrator handed only the
+  // truth would have the warden simply know which standing figure is an Afterling.
+  check("§424: ⛔ …and the block does NOT let the warden tell a cocoon from a person — the two read identically",
+    (() => {
+      const crew = U424.enterUndeath({ id: "n1", name: "the mill crew", status: "dead" }, { kind: "mindless", day: 40 });
+      const afterling = U424.enterUndeath({ id: "n2", name: "Orsolya", status: "dead" }, { kind: "afterling", day: 10 });
+      const ch = { name: "Silas", npcRegistry: { n1: crew, n2: afterling } };
+      const b = U424.undeadForGM(ch, C424, 100, rules424);
+      if (!b || b.undead.length !== 2) return false;
+      const [a, c] = b.undead;
+      // the GM is told the kinds; the SENSE line is identical for both, which is §6's whole last sentence
+      return a.kind === "mindless" && c.kind === "afterling" && a.deathsense === c.deathsense
+        && /IT DOES NOT TELL THEM WHICH/.test(a.deathsense);
+    })(), "✅ §6: 'telling those two apart is the warden's actual problem'");
+  check("§424: ⛑ …and an empty world yields NO BLOCK rather than an empty one — today's honest answer",
+    U424.undeadForGM({ name: "Silas", npcRegistry: {} }, C424, 100, rules424) === null,
+    "⚠️ nothing writes an `undeath` record until a `raise` op lands, so this surface has a population of ZERO until one does");
+  check("§424: ⛔ …and §48.7's other half reaches the GM — whose road back has closed, and what continuing would cost",
+    (() => {
+      const ch = { name: "Silas", npcRegistry: { v: { id: "v", name: "Vail", status: "dead", priorRaisings: 3,
+        deathState: { diedDay: 0, bodyStatus: "intact", sealed: false, depthOverride: 1 } } } };
+      const b = U424.undeadForGM(ch, C424, 100, rules424);
+      return b?.couldContinue?.length === 1 && b.couldContinue[0].raiseChance > 0; })(),
+    "a dead figure nobody can retrieve any more is not a dead end, and without this the GM never learns the door exists");
+
+  check("§424: ⛑ §48.9 — MAINTENANCE, NOT MEDICINE: the body has a craft, the spirit has none, and a mending burns",
+    (() => { const rp = U424.repairPathFor(U424.enterUndeath({ id: "r424" }, { day: 0 }), { currentDay: 40, rules: rules424 });
+      return rp.body.works === true && rp.body.craft === "kept_vigil" && rp.spirit.works === false && rp.healing.works === false; })(),
+    "✅ Erik: 'we need a way to heal undead — by MAINTENANCE for the body, or OTHER POWERS for the spirit'");
 }
 
 /* ══════════ REPORT ══════════ */

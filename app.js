@@ -174,6 +174,8 @@ import { capabilityMenu, resolveTier } from "./engine/capabilities.js";
 // effect audit. A threshold nothing counts toward is a duration that never elapses.
 import { tickAllProjects, openProject, projectProgress, interruptProject, resumeProject, sabotageProject, inheritProject } from "./engine/projects.js";   // CCODE-295: the four verbs the content already depends on
 import { holdOpen, releaseHold, slowSink, canReach, resolveRetrieval } from "./engine/death.js"; // CCODE-270: the player's road back — the seven retrieval crafts had no door
+import { deathDepth, DEATH_DEPTH_NAMES } from "./engine/death.js";   // §48.7: a raising reads the depth it is reaching into, and names it in the note
+import { enterUndeath, raiseOdds } from "./engine/undeath.js";       // §48: the OTHER road — `retrieve` brings them back to life, `raise` does not
 import { alliesOf } from "./engine/combatants.js"; // CCODE-276: the roster the party block renders
 import { championsFor, resolveChampion, creditChampion, championLine, sendingIsGrim } from "./engine/champion.js"; // SNG-587: somebody else takes the fight
 // ⛔ CCODE-404 (Erik) — `addContingent` and `musteredFrom` are new; `unitComposition` and `bandGaps` had NO caller outside the tests.
@@ -194,7 +196,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.18.6";
+const APP_VERSION = "2.19.0";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -9688,6 +9690,37 @@ function applyTurn(turn, resolution, playerWords = null) {
         }
       } else if (kind === "slow") {
         slowSink(ent, Number(op.factor) || 2);
+      } else if (kind === "raise") {
+        // ═════ §48 · THE OTHER ROAD, AND WITHOUT IT §48 HAS A POPULATION OF ZERO FOREVER ═════
+        // ⛔ `retrieve` BRINGS SOMEONE BACK TO LIFE AND THIS DOES NOT. Erik, §48.7: *"it's too hard to raise
+        // them back to living, but they CAN CONTINUE IN UNDEATH."* The retrieval ladder had four verbs and
+        // every one of them was about the road back; nothing in the game could put power into a vessel.
+        // ⚠️ AND THE CURVES DIVERGE ON PURPOSE: the toll in `retrievalOdds` eventually closes the first road
+        // outright, while `raiseOdds` stays open — which is the whole reason the old heroes are undead.
+        const rab = fullCatalog()[String(op.abilityId || "")];
+        const rowned = rab ? (character.abilities || []).find(x => x.abilityId === rab.id) : null;
+        const ro = raiseOdds(ent, { rank: rowned?.level || 1, rules: CONTENT.rules, currentDay: day,
+          depth: deathDepth(ent, day, CONTENT.rules) });
+        const rolled = Math.floor(Math.random() * 100) + 1;
+        if (!ro.open || rolled > ro.pct) {
+          character._deathNotes = [...(character._deathNotes || []).slice(-2),
+            `${ent.name || who} does not answer the raising (${rolled} against ${ro.pct}%)`];
+          continue;
+        }
+        // ⛑ THE KIND IS THE GM's TO NAME AND THE ENGINE DOES NOT DERIVE IT — §48.3's deciding rule is
+        // UNRULED and is Erik's, so a default here would quietly become that ruling. `mindless` is what
+        // §6 says most raising PRODUCES and what most raisers INTEND, which makes it the honest fallback
+        // rather than a hidden answer to the open question.
+        enterUndeath(ent, { kind: String(op.undeathKind || "mindless"), day, by: character.name || "you",
+          // ⛑ `smartClamp`, NOT `.slice` — the wiring audit's `rawProseCaps` ratchet caught the raw cut in
+          // the same run that added it. A fixed-length slice of model prose ends mid-word, and this string
+          // goes into a record the GM will later be shown back; 29 other sites in this file already route
+          // through the word-boundary clamp.
+          purposeGiven: op.purpose ? smartClamp(String(op.purpose), 120) : null,
+          attended: op.attended == null ? null : !!op.attended });
+        if (ent.undeath) ent.undeath.depthRaisedFrom = deathDepth(ent, day, CONTENT.rules);
+        character._deathNotes = [...(character._deathNotes || []).slice(-2),
+          `${ent.name || who} stands up — ${ent.undeath?.kind || "mindless"}, raised from ${DEATH_DEPTH_NAMES[ent.undeath?.depthRaisedFrom ?? 0] || "the threshold"} (${rolled} against ${ro.pct}%)`];
       } else if (kind === "retrieve") {
         // ⛔ RANK GATES THE REACH, and REFUSED IS NOT FAILED. A failure sinks them and can seal them, so a
         // reach the character simply cannot make must cost nothing — telling someone "that is past you" is

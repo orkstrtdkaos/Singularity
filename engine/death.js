@@ -1,6 +1,7 @@
 // engine/death.js — SNG-209: death is a STATE, not a terminus.
 
 import { smartClamp } from "./namematch.js";   // SNG-653: the GM's own words about a pledge, clamped at a word boundary
+import { raisingPenalty } from "./undeath.js";   // §48.7: each return costs more than the last, and eventually it cannot be paid
 //
 // A dead entity is not removed from the world — it is IN THE DEATH STATE at a DEPTH, still on the board,
 // potentially retrievable. Depth grades the wall (0 the threshold · 1 the near dark · 2 the deep dark ·
@@ -253,8 +254,28 @@ export function retrievalOdds(entity, { rank = 1, intensity = "standard", curren
   // TIER is what a GREATER FIGURE brings — the world tick's own reaches, where there is no craft rank to read.
   const tr = Math.max(0, Math.floor(Number(tier) || 0));
   if (tr > 0) { const v = tr * perTier; pct += v; terms.push({ label: `what they are in the world`, value: v }); }
+  // ═════ §48.7 · RAISING GETS HARDER EACH TIME, AND THAT IS WHY THE OLD HEROES ARE UNDEAD ═════
+  // ✅ ERIK: *"I don't agree with cannot be raised twice — however there should be a DIFFICULTY THAT
+  // INCREASES PER TIME… which is probably a good reason why after a long time SOME HEROES BECOME UNDEAD:
+  // it's too hard to raise them back to living, but they CAN CONTINUE IN UNDEATH."*
+  // ⛔ "CANNOT BE RAISED TWICE" WAS HIS OWN PROPOSAL AND HE WITHDREW IT — a wall where a curve belongs.
+  const toll = raisingPenalty(entity, { to: "living", rules });
+  if (toll.penalty > 0) { pct -= toll.penalty; terms.push({ label: `they have been brought back ${toll.priorRaisings} time${toll.priorRaisings === 1 ? "" : "s"} already`, value: -toll.penalty }); }
+  // ⛔ AND THE TOLL CAN CLOSE THE ROAD, WHICH A TERM ALONE CANNOT.
+  // ⚠️ MEASURED, AND IT IS WHY THIS IS A GATE AND NOT JUST A MINUS: `floor` is 5, so `Math.max(floor, …)`
+  // holds a −108 toll at a live 5% forever — "eventually impossible" would have read as "always a chance".
+  // ⛑ I had it right in a driver that computed `pct − penalty` OUTSIDE this function and reached 0%; through
+  // the real function the same inputs came back 5%. A number proven beside the path it has to hold on is not
+  // proven. ✅ So it returns early, exactly as `refusedByThem` and a failed `canReach` already do — the two
+  // other things on this ladder that mean "not at any odds".
+  if (pct <= 0) {
+    return { pct: 0, terms, at, reach: gate.reach ?? null, sealed: false, exhausted: true,
+      priorRaisings: toll.priorRaisings,
+      why: `⛔ brought back ${toll.priorRaisings} time${toll.priorRaisings === 1 ? "" : "s"} already — the road back has closed. ⚠️ Continuing in undeath has not.` };
+  }
   const clamped = Math.max(floor, Math.min(ceil, Math.round(pct)));
   return { pct: clamped, terms, at, reach: gate.reach ?? null, sealed: false,
+    ...(toll.penalty > 0 ? { priorRaisings: toll.priorRaisings } : {}),
     clampedFrom: clamped !== Math.round(pct) ? Math.round(pct) : null };
 }
 

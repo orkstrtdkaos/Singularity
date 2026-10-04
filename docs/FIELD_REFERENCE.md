@@ -39,8 +39,8 @@ file is replaced.**
 
 | bucket | n | means |
 |---|---|---|
-| ✅ **READ** | **101** | a play-path file names it outside a comment |
-| ⛔ **DARK** | **15** | **no literal reader anywhere** — see the four lies below |
+| ✅ **READ** | **102** | a play-path file names it outside a comment |
+| ⛔ **DARK** | **14** | **no literal reader anywhere** — see the four lies below |
 | ⚠️ **CI-ONLY** | **2** | the only consumer is a test. **That is a real consumer for correctness and not one for play** |
 | ⚠️ **COLLISION** | **0** | the name is live, but on a *different owner* |
 
@@ -751,7 +751,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `awaitingEngine` | 1 | `mechanic`×1 | ⛔ DARK | — |
 | `questions` | 1 | `mechanic`×1 | ✅ READ | `waygate.js`, `app.js` |
 | `killCost` | 1 | `mechanic`×1 | ✅ READ | `skill_battle.js` |
-| `wornBenefits` | 1 | `mechanic`×1 | ⛔ DARK | — |
+| `wornBenefits` | 1 | `mechanic`×1 | ✅ READ | `undeath.js` |
 | `accord` | 1 | `root`×1 | ✅ READ | `combatants.js`, `progression.js`, `state.js` |
 | `emotions` | 1 | `mechanic`×1 | ⛔ DARK | — |
 | `carriesEmotion` | 1 | `mechanic`×1 | ⛔ DARK | — |

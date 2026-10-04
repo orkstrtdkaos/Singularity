@@ -59,6 +59,7 @@ import { legendsForGM, tierForArc, tierRank } from "./legends.js"; // SNG-208 wi
 import { wakesForGM } from "./wake.js"; // SNG-204: the aftermath waiting to become the next thread
 import { priceLine } from "./economy.js";   // SNG-302: what a thing fetches HERE, so the GM can be honest about it
 import { reachableDeadForGM } from "./death.js"; // SNG-209: the dead who are NOT gone — reachable in the death state, latent hooks
+import { undeadForGM } from "./undeath.js";     // §48: and the ones who are not gone because they are standing up
 import { threatToPlayer, guardiansFor, worldRoster } from "./worldtick.js"; // SNG-310: the mark the world engine leaves for the GM to narrate
 import { npcRegistryForGM, npcQuestSeedBlock, bearersOf, carriedForGM, findExistingNpc, agesMissingForGM, whoCouldBeHere} from "./npcs.js";
 import { debtRefusalAt } from "./holdings.js";   // §177: "The GM block reads it" — now it does
@@ -511,6 +512,18 @@ export const GM_CONTEXT = [
   { key: "reachableDeadDetail", builder: "death.reachableDeadForGM (SNG-209)", carries: ["the dead still within reach", "how deep each has sunk (the wall)"],
     reachedBy: "always (a figure has died and is not yet sealed)", spec: "SNG-209 §1", views: ["turn", "ask"],
     build: (env) => reachableDeadForGM(env.character, env.CONTENT, env.character?.worldState?.lastTickWorldDay ?? null) },
+
+  // §48 — ⛔ THE OTHER KIND OF NOT-GONE. The row above is the dead who can be reached; this one is the dead
+  // who are already standing up, and the two are different narrative objects: one is a rescue and one is in
+  // the room with you. ⚠️ IT CARRIES WHAT THE GM KNOWS AND WHAT THE PLAYER CAN PERCEIVE SEPARATELY, because
+  // §6's whole last line is that a warden cannot tell a cocoon further along from a person who never left.
+  // ⛑ THE DAY COMES FROM THE SAME PLACE THE ROW ABOVE TAKES IT. §232 once caught a row of mine reading
+  // `env.day`, which does not exist — a registry row with a wrong env path is a block that silently never
+  // fills, so it takes the neighbour's path verbatim rather than one that merely looks right.
+  { key: "undeadDetail", builder: "undeath.undeadForGM (§48)",
+    carries: ["who in the room is not alive", "how worn each cocoon is", "what Wither would leave", "whose road back has closed and who could be made to continue"],
+    reachedBy: "a figure carries an undeath record, or a dead figure has been reached for before", spec: "SYSTEM_SPEC §48", views: ["turn", "ask"],
+    build: (env) => undeadForGM(env.character, env.CONTENT, env.character?.worldState?.lastTickWorldDay ?? null, env.CONTENT?.rules || {}) },
 
   // SNG-310 — ⚠️ SOMEBODY IS OUT TO GET YOU, AND THE GM HAS TO KNOW OR IT NEVER HAPPENS. Erik: "yes the
   // player can be struck, but that event is a GM narrated encounter. The fact that someone is out to get you

@@ -25,6 +25,7 @@ import { abilityTier } from "./skilltree.js";
 import { normName } from "./namematch.js";              // SNG-572: the registry-to-authored join matches on normalised names
 import { freeFloorVerbs } from "./capabilities.js";   // R47/R50: a kit whose free floor HARMS needs no bare strike
 import { pcBodyAt, SUB_OF, craftSubAttribute } from "./progression.js";   // ✅ Erik 2026-09-11: a person carries a player's body
+import { freshRaisedAffinity, undeadAffinity } from "./undeath.js";   // §48.5: a raised body answers a mending with a burn
 const num = (v, d = 0) => (v == null || v === "" || !Number.isFinite(Number(v)) ? d : Number(v));
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 
@@ -912,11 +913,44 @@ export function summonSheetFor(ability, casterLevel, { rank = 1, degree = "succe
   const count = Array.isArray(ca) ? num(ca[Math.max(0, num(rank, 1) - 1)], num(ca[ca.length - 1], 1))
     : ca && typeof ca === "object" ? num(ca[String(num(rank, 1))], 1) : num(ca, 1);
   const sheet = sheetFor(rec, { cfg, levelOverride: level });
+  // ═════ §48.5 · A RAISED BODY IS UNDEAD TO THE ARITHMETIC, AND IT WAS NOT ═════
+  // ⛔ MEASURED 2026-10-04: `affinityOf` reads `sheet.affinity[type]`, and THE WORD `affinity` APPEARED IN
+  // THIS FILE ZERO TIMES. So every crew a player raised through `set_hand` or `given_errand` was minted ALIVE
+  // to the damage path — a mending mended it, Wither did not rot it, cold bit it. ⚠️ THE READER WAS LIVE AND
+  // THE WRITER WROTE NOTHING, which is the four-doors failure in the one subsystem whose whole point is an
+  // inverted body. Typed healing (CCODE-316) has inverted a mending on a `vitality: vulnerable` sheet since
+  // August and had nothing to invert it ON.
+  //
+  // ⛑ THREE WAYS IT CAN BE TOLD, in order, and NONE of them is a hardcoded ability id — a list of two craft
+  // names here would be an instance pin that goes stale the first time Aevi authors a third raising:
+  //   1. the entry IS an authored undead creature (`class: narrowed_dead`) — 4 of those exist today;
+  //   2. the craft DECLARES it (`summon.raises`/`summon.undead`) — ⚠️ 0 crafts declare it today, and the two
+  //      that raise bodies are `set_hand` and `given_errand`. One authored word each closes that, and it is
+  //      Aevi's word, not mine. Reported, not invented.
+  //   3. the craft AUTHORS the affinity outright (`summon.affinity`) — which wins over any derivation.
+  const declaresRaise = ability?.summon?.raises === true || ability?.summon?.undead === true;
+  const entryIsUndead = String(entry?.class || "") === "narrowed_dead";
+  const authoredAff = ability?.summon?.affinity && typeof ability.summon.affinity === "object" ? ability.summon.affinity : null;
+  let affinity = sheet.affinity || entry?.affinity || null;
+  let undeadWhy = null;
+  if (entryIsUndead) {
+    const u = undeadAffinity({ ...(entry || {}), affinity: affinity || entry?.affinity }, { cfg });
+    affinity = u.affinity; undeadWhy = u.why;
+  } else if (declaresRaise) {
+    // ⛑ FRESHLY RAISED IS `set`: the shell is intact, so `decay: vulnerable` — rotting it destroys what is in
+    // it. A crew raised this morning is the most rottable undead in the world and that is not a special case.
+    const floor = freshRaisedAffinity({ kind: ability?.summon?.undeathKind || "mindless" });
+    affinity = { ...floor, ...(affinity || {}) };
+    undeadWhy = "freshly raised — the shell is intact, so a mending burns it and Wither destroys it";
+  }
+  if (authoredAff) affinity = { ...(affinity || {}), ...authoredAff };
   return {
     ...sheet, level, summonedBy: ability?.id || null, gap: g,
     count: Math.max(1, count),
     duration: ability?.summon?.duration ?? null,
     contributions: ability?.summon?.contributions || null,
+    ...(affinity && Object.keys(affinity).length ? { affinity } : {}),
+    ...(undeadWhy ? { undead: true, undeadWhy } : {}),
   };
 }
 

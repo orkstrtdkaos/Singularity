@@ -16,6 +16,48 @@
   "next": [],
   "releases": [
     {
+      "version": "2.19.0",
+      "date": "2026-10-04",
+      "entries": [
+        {
+          "kind": "feature",
+          "title": "The dead who kept walking",
+          "summary": "Undeath is built — and a raised body is finally undead to the rules, not just in the telling.",
+          "detail": "Three kinds, and they are not degrees of one thing. The MINDLESS are automatons — there is no self in one and they want nothing. A SPIRIT is what a mindless one becomes if it is left to run its course and is then released, and it is dangerous in a way an automaton is not, because it wants something and nobody chose what. An AFTERLING is an undead person: the same mind, the same wants, the same grudges, and the closest to living a dead person can be. Healing harms all three and decay mends them — so a mercy-healing laid on an Afterling burns it, and the one who cast it does not learn that until it is done."
+        },
+        {
+          "kind": "fix",
+          "title": "A crew you raised was, mechanically, alive",
+          "summary": "Every body raised through Raised Hand or Driven Shade was built as a living thing.",
+          "detail": "The rule that a mending burns the undead has worked since August. It had almost nothing to work on. A raised body was minted with no affinities at all, so a healer mended your crew, Wither would not rot it, and cold bit it as though it had ever been warm. Two of the four undead creatures already written into the world had the same hole. Both are closed: a raised body now answers a mending with a burn, and a creature that declares itself one of the raised dead carries the traits of one — unless its own sheet says otherwise, which still wins."
+        },
+        {
+          "kind": "feature",
+          "title": "Rotting an undead may be how you free it",
+          "summary": "A raised body is a cocoon, and what Wither does to it depends on how worn it is.",
+          "detail": "Rot an intact shell and you destroy what is inside: that is what a warden usually intends. Rot one that is wearing through and something comes out early, exposed — a window to finish it, or to save it. Rot one that is nearly spent and you have FREED it, because the shell was the last thing holding it in. You cannot tell which by looking, and you do not choose. The craft meant to un-make the undead is one of the ways an Afterling is born."
+        },
+        {
+          "kind": "feature",
+          "title": "Deathsense tells you what it cannot tell you",
+          "summary": "It reads the dead as inverted life — and is honest about the one thing it cannot settle.",
+          "detail": "Life reads positive in the living and falling in the dying. A corpse reads as nothing. A mindless crew with its shell intact reads as nothing too — there is no self in one to give it away — so silence means a tool. Anything you CAN feel is the opposite of nothing: it wants something, and wanting is weather. But whether it is a cocoon further along or a person who never left, the craft will not say, because that is the warden's problem and not the craft's. Against a settled Afterling, knowing is a social problem rather than a tactical one: you know, loudly, and without being subtle."
+        },
+        {
+          "kind": "change",
+          "title": "Each return costs more than the last",
+          "summary": "The road back closes for good. Continuing in undeath never does.",
+          "detail": "Bringing someone back used to cost the same the fourth time as the first. Now every prior raising makes the road back steeper, and eventually it closes outright — after three, out of the deep dark, and after seven for a fresh death reached by a great warden. The screen says so in those words rather than quietly lowering a number. And the other road stays open: a hero four centuries dead cannot be made alive and CAN be made to continue. The oldest and most storied undead in the world are the people nobody could afford to bring back properly."
+        },
+        {
+          "kind": "fix",
+          "title": "Deathless now grants what it promised",
+          "summary": "Three ranks of an authored capstone had never done anything at all.",
+          "detail": "Deathless lends the wearer the advantages of the undead — immunity to cold, and necrotic work that first resists and then outright mends. Every rank of that was written down and nothing in the engine had ever read it. It is read now, and it beats whatever your own body says: a warden who feels the cold is immune to it while she wears it. It costs nothing in exchange — a mending still mends her."
+        }
+      ]
+    },
+    {
       "version": "2.18.6",
       "date": "2026-10-04",
       "entries": [

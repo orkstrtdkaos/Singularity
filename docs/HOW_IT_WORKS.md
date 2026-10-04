@@ -592,7 +592,7 @@ working papers; **this is the answer.**
 | 09-30 | ✅ **THE HOLD SHEET STAYS OPEN, AND EVERY JOB IS ONE LIST (CCODE-567)** | ⛔ Erik, in play, two things at once: *"whenever I click things in the holding manage screen it kicks me back out to the screen behind it"* and *"we can choose a name and have them work the holding, or guard it… then we also have the jobs list below. These should probably be one and the same. In addition, the expansion work should be on the list too."* ⛑ **THE FIRST WAS ONE MISSING ARGUMENT.** `renderHoldingsTab(manageId, tab)` takes the OPEN SHEET as its first parameter and `again()` called it bare, so every button inside the sheet re-rendered with the sheet shut — and the comment directly above it claimed the opposite in as many words (*"lands in the same state rather than bouncing the player"*), for as long as the sheet has existed. ⛑ **THE SECOND WAS REAL DUPLICATION, and the engine already agreed with him:** `workMods().watch` folds everyone at Guarding or Patrolling into the SAME watch the garrison feeds, so "post a guard" and the Guarding job were one mechanism wearing two controls. The keeper, the hands and the watch are now the first three rows of one list, the eight work kinds follow, and clearing ground is the last — each routing to the function its old button routed to (`appointKeeper`, `setCrew`, `setGarrison`, `assignWork`), so it is a surface change and §395 gates that it stays one. | `§395`, 7 checks: the sheet surviving a click and the ways OUT still closing it; the three roles as rows with the old picker and its three verbs GONE; the expansion row on the same list; both directions routing to the same engine calls; and **the eight things only the old surface carried, named one by one** | ⛔ **§106 CAUGHT THE HALF I HAD LEFT:** three handlers still bound to buttons that no longer render — *"a handler bound to a control nothing renders is a feature that left the screen."* And four gates (§74, §178, §179, §345) asserted the merged-away controls and went red together, which is the executable doc working; each re-pointed to what survives rather than deleted — §345's claim (*a card naming a problem must carry the verb for it*) is now satisfied by the list's FIRST ROW. ⚡ The scope scan caught `g` read out of scope in the new block before a click could, the second time in two days it has stopped a live crash in this pane |
 | 09-30 | ✅ **GUARDING IS THE WATCH (CCODE-568)** | ✅ **ERIK:** *"yes, merge guarding into the watch - proceed."* ⛑ They were one mechanism wearing two controls: `workMods().watch` folded everyone at the Guarding job into the SAME watch `holding.garrison` feeds, and the `guard` kind reached **nothing else** — a second door onto one room, which is what he saw on the card as "post a guard" beside "put someone to Guarding". ⚡ **MEASURED BEFORE TOUCHING IT:** both cost 3 a pass (`garrisonUpkeepPerHand` equals `wagePerHand`) and **zero person-assignments in the live saves sat on guard-work**, so the merge moves nobody and changes nobody's keep. Retired from `WORK_KINDS` and from Aevi's authored `holdWork.kinds` together, because a dead authored key reads as a live feature; `workMods().watch` now reads `patrol` alone. | `§330`, re-pointed and extended: the offered kinds are seven; and **GUARDING IS THE WATCH** asserted as the READER BOTH WAYS — patrol joins the watch, the garrison IS it, and putting somebody to "guard" is refused in words — rather than as a bare absence, which would fire the day Erik changes his mind. Step 92 moves anyone a save still holds at `work.guard` onto the watch, driven through the runner with the version moving | ⛔ **A RETIRED KIND STRANDS WHOEVER WAS ON IT** — not counted by the watch, not assignable, not rendered: a paid hand who does nothing on a screen that cannot show them. The migration was written for a population of ZERO, which is exactly when it is cheap. ⚠️ And re-pointing §330's fixture, I first put the band's hands in `tended.garrison` ALONE — a posted hand costs upkeep, so the "kept accounts are a tenth less" comparison started measuring the watch's wage bill instead. The garrison sits on BOTH fixtures now. ⬜ **PATROLLING IS IN THE SAME POSITION AND WAS LEFT ALONE:** it too reaches only the watch, and its own line promises eyes on the road that nothing implements — that goes to Erik as its own question rather than being answered in passing |
 
-**Last verified: 2026-10-04 · v2.18.6 · 432 crafts.**
+**Last verified: 2026-10-04 · v2.19.0 · 432 crafts.**
 
 ---
 
@@ -1555,7 +1555,7 @@ them permanently.** ⚠️ **Using the craft badly is how a person becomes unrea
 **Five traditions answer this ladder differently and share one set of verbs** — `retrieve` · `sink` ·
 `seal` · `hold` · `slow`. Ashwardens drag, Numinous invite, Threnody delays, Rootkin pay a price.
 
-⛔ **PROPOSED (§48): undeath. THREE KINDS, AND THEY ARE NOT DEGREES OF ONE THING.**
+⛔ **UNDEATH (§48), BUILT 2026-10-04. THREE KINDS, AND THEY ARE NOT DEGREES OF ONE THING.**
 
 **The MINDLESS are automatons.** They do the raiser's will, simply. There is no self in one, they want
 nothing, and what they are told is all they are. **This is what most raising produces and what most raisers
@@ -1570,6 +1570,42 @@ something and nobody chose what.
 to living a dead person can be.** No cocoon, nothing grew, nothing emerged — they are simply still here.
 
 **Healing harms all three, decay mends them**, and Deathsense reads them as inverted life.
+
+⛔ **AND "BUILT" WAS NOT THE SAME AS "REACHED ANYTHING", WHICH IS THE WHOLE STORY OF THIS SECTION.** The
+inversion — a mending that burns — has worked since August, because Aevi typed 25 healing crafts `vitality`
+and the damage path reads a sheet's affinities. ⚠️ **It had nothing to work ON.** `summonSheetFor` minted
+every body a player raised with **no affinity at all** — the word did not appear in that file — so a raised
+crew was alive to the arithmetic: a mending mended it, Wither did not rot it, cold bit it. And of the four
+authored creatures declaring `class: narrowed_dead`, **two authored none of the traits either.** ⛑ So the
+rule was real, the reader was live, and the population was nearly empty.
+
+**THE COCOON IS A CLOCK.** The body wears from **set** (intact, the occupant dormant) through **breaching**
+(thinning — and it can strike from inside) to **emerged** (spent). ⛔ **Wearing-down is GESTATION, not decay.**
+
+| the shell | what Wither does to it | what Deathsense reads |
+|---|---|---|
+| **set** | ⛔ **DESTROYED** — what a warden usually intends | ⛔ **UNFELT**, if it is mindless |
+| **breaching** | ⚠️ **VULNERABLE** — out early, exposed | **inverted life** |
+| **emerged** | ⛔ **FREED** — the cocoon was the last thing holding it in | **inverted life** |
+
+⚠️ **SO THE CRAFT MEANT TO UN-MAKE AN UNDEAD IS HOW AN AFTERLING IS BORN, AND THE WARDEN DOES NOT CHOOSE
+WHICH.** It follows the phase, and a warden cannot tell the phase by looking.
+
+**AND DEATHSENSE DOES NOT SOLVE ITS OWN PROBLEM.** Silence means a tool. Anything you can feel is *either*
+further along the cocoon *or* a person — **and the craft reports that it cannot tell those apart**, because
+telling them apart is the warden's actual problem and an engine that answered it would have deleted the
+problem rather than built it.
+
+⛔ **TWO ROADS, AND THEY DIVERGE.** Each return costs more than the last: the road back to living falls
+steeply with every prior raising and **eventually closes outright** — at three prior raisings out of the deep
+dark, at seven for a shallow death reached by a great warden. ⚠️ **Continuing in undeath does not close.**
+**That is why the oldest and most storied undead in the world are the people nobody could afford to bring
+back properly. Each is somebody's failure and somebody's mercy.**
+
+⚠️ **WHAT DECIDES WHETHER AN UNDEAD NARROWS TO UNMINDED PURPOSE OR STAYS A WHOLE PERSON IS NOT RULED, AND
+THE ENGINE REFUSES TO GUESS.** It records the four candidates §48.3 names — the depth raised from, whether
+they were *given* a purpose or merely set, whether anyone attended them, whether a name was kept — and
+reports them unweighed, with `ruled: false`. **That call is Erik's and it is the load-bearing one.**
 
 **And Deathsense is a diagnostic before it is anything else.** A mindless crew arrives **unfelt** — there is
 no self in one to give it away. **A spirit or an Afterling reads fine: they want something, and wanting is
@@ -2390,7 +2426,7 @@ reaches it** — and that gap has produced a specific, repeated defect described
 ### 12.1 · THE SHAPE — one document, one shell, 47 screens
 
 **Singularity is a single-page app with no build step and no framework.** `index.html` is 75 lines; the
-whole interface is **`app.js`, 25,058 lines**, and there are **55 `render*` functions** that paint into one
+whole interface is **`app.js`, 25,091 lines**, and there are **55 `render*` functions** that paint into one
 shell function, `chrome()`, called from **57 sites**. ⚠️ **THERE IS NO ROUTER AND NO SCREEN VARIABLE.**
 A screen does not "navigate" — it **calls the next render function directly**. `renderCompanionStep`'s
 done-button *is* the edge into `renderBioStep`.

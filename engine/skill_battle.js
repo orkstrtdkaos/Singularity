@@ -6,6 +6,7 @@
 // narrates the resolved exchange; it never chooses the opponent's mechanical move — that is opponentPolicy.
 
 import { resolveAction } from "./resolve.js";
+import { wornAffinityFor, withWornAffinity } from "./undeath.js";   // §48.4: `wornBenefits` was authored and had no reader
 import { chooseTarget, foeKnowledge } from "./targeting.js";
 import { damageMixOf, wardAnswer, resolveComposite } from "./damagetypes.js";   // CCODE-281: composite damage, and the reader `wardTypes` never had
 import { predictAggregate, distributeCasualties, combatWeight } from "./melee.js";   // CCODE-298: the folded line takes losses too   // CCODE-274: the folded party contributes as a measured aggregate, not as N more rolls   // CCODE-250: a foe chooses who to hit
@@ -356,8 +357,16 @@ function effectFrom(decl, roll, actor, sb, { cm = null, rng = Math.random } = {}
     }
   }
   const other = actor === "player" ? "opponent" : "player";
+  // ⛔ §48.4 — THE WORN GRANT RIDES FROM THE CRAFT ONTO THE LIVE EFFECT. Same copy the two flags below
+  // exist for, and for the same reason: a block left on the definition reads `undefined` on the effect and is
+  // inert while still being advertised in content. ⚠️ `deathless` authors three ranks of these and NOTHING
+  // HAS EVER READ THEM — its own note says the reader was owed.
+  // ⛑ SELF-TARGETED ONLY, which is the craft's whole logic: *"the mantle is worn, so it works on the wearer."*
+  const wornGrant = (def.target !== "opponent") ? wornAffinityFor(decl, decl.rank || 1) : null;
   return {
     kind: def.kind, label: def.label, value, roundsLeft: rounds, applies: def.applies || "always",
+    ...(wornGrant && Object.keys(wornGrant.affinity).length ? { affinity: wornGrant.affinity } : {}),
+    ...(wornGrant && Object.keys(wornGrant.extras).length ? { wornExtras: wornGrant.extras } : {}),
     side: def.target === "opponent" ? other : actor,   // WHOSE roll this modifies
     // CCODE-41: deniesPhase must ride from the content def onto the LIVE effect — without this copy, phaseDenied
     // reads undefined on every effect and the blinding counterplay is inert while still advertised in content.
@@ -1069,6 +1078,13 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
   const groundMods = (side) => { const g = groundHere[side]; return g && g.chancePenalty
     ? [{ label: `the ground here (${g.off ? "it will not answer" : g.side}, ${g.percent}% of its strength)`, value: -g.chancePenalty }] : []; };
   const standing = state.effects || [];
+  // ⛔ §48.4 — AND THE GRANT REACHES THE ARITHMETIC HERE, ONCE, BEFORE EITHER SIDE ROLLS OR TAKES A BLOW.
+  // ⛑ FOLDED ONTO THE SHEET RATHER THAN ASKED AT EACH CALL SITE: `affinityOf` is consulted by the blow, the
+  // ward, the composite and the mending, and five of six call sites eventually forget to ask about worn
+  // effects. One fold means every one of them reads the same answer. ⚠️ With no worn effect standing, both
+  // calls return the SAME OBJECT, so this costs a fight with no mantle in it nothing at all.
+  playerSheet = withWornAffinity(playerSheet, standing, "player");
+  oppSheet = withWornAffinity(oppSheet, standing, "opponent");
   // ⛔ CCODE-250 — WHO IS THIS AIMED AT. Erik: "Yes a foe chooses who to hit... you need to sense who's
   // getting attacked so you can intervene if you want." Until now `oppDecl` resolved against `playerSheet`
   // and there WAS no choosing, which is why `intercept.js` had nothing to intercept.

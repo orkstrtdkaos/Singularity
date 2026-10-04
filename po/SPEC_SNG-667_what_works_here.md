@@ -145,7 +145,8 @@ Four defects, each measured:
 
 1. **Meaning does not spread.** `meaningDensity` answers for the one location record and nothing near it. Read it as a
    **field**, the same one B7 draws on the map: every place lends its meaning to the ground around it, falling off with
-   walking distance, **reach by size** (site 0.3 days, settlement 1, region 2, +0.5 for `sacred`/`locus`). At a spot:
+   walking distance, **reach by size**: `reachDays = 0.3 + 1.7 × placeSize`, +0.5 for `sacred`/`locus` (`placeSize` is the
+   one function B7 uses, defined in `REPLY_aevi_ccode_594_kind.md`). At a spot:
    **the strongest nearby contribution carries it, the second adds a quarter** (the combination rule again, one shape
    for both), then presence and auras where you stand add on top. One function, read by the craft card, the roll and
    the map, so the violet on the map is the number on the card.

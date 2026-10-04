@@ -27,6 +27,12 @@ there, still doing what they were imagined to do.
 
 You live in the aftermath, which people mostly call ordinary life.
 
+**And it goes deep.** The craving for power that drove the old nanotechnology reached past the surface
+and into the world's core: bores sunk toward the heart of the world, drawing it up as power and as the stuff
+nanite was made from. That harvest is part of why Exesa is a third the size it was, and the name was always
+a confession: gnawed hollow, from within. The heat still rises through the bores, and in some places the old
+works turned it into **kept suns**, true daylight in vaults far underground, with fields beneath them.
+
 ---
 
 ## II · The Three, and the disagreement

@@ -70,6 +70,118 @@ export function drawAxis(character, { catalog = {}, index = null, rng = Math.ran
   return out;
 }
 
+/* ═════ Y · THE BENCH — WHO FIGHTS AT THE CROSSING, AND WHERE THEY ARE FROM ═════
+ *
+ * ✅ ERIK, 2026-10-04: *"every reach and distinct people should have at least one gladiator, if not a whole
+ * bench. The coliseum is central in the culture here."*
+ *
+ * ⛑ THE CONTENT IS AEVI'S (SNG-669) AND THIS IS ONLY THE READER. `challengerPools.coliseum_bench` carries ten
+ * heads — each reach's existing champion by `npcId` — and thirty-two contenders and novices. Measured: all 38
+ * regions covered, and the pool beside it (`saehara_challengers`, an arc's) carries no `reach` at all, so a
+ * reach-keyed reader excludes it without needing to know its name. */
+
+/** ⛔ THE BENCH BY REACH. Pure. Heads and challengers grouped by where they are from, so "our Haldor fights at
+ *  the Crossing" is a thing the GM can say ANYWHERE in that reach, not only at the sand. */
+export function benchAt(content, { reach = null } = {}) {
+  const pools = content?.challengerPools;
+  const by = {};
+  const push = (where, slot, row) => {
+    const k = String(where || "").trim();
+    if (!k) return;                        // ⛑ no reach, not a bench member — that is what keeps other pools out
+    (by[k] = by[k] || { reach: k, heads: [], challengers: [] })[slot].push(row);
+  };
+  for (const pool of Object.values(pools && typeof pools === "object" ? pools : {})) {
+    if (pool?.kind !== "challenger_pool") continue;
+    for (const h of pool.heads || []) push(h?.reach, "heads", h);
+    for (const c of pool.challengers || []) push(c?.reach, "challengers", c);
+  }
+  return reach ? (by[reach] || { reach, heads: [], challengers: [] }) : by;
+}
+
+/** ⚠️ WEIGHTED BY THE ORDER THEY ARE LISTED IN. Aevi's Y2: the blind-grid four come from `families`
+ *  *"(weighted, the fourth drawn from all eight, exactly as `drawAxis` does for a competitor)"* — but a bench
+ *  member has a flat list where a player has ability ranks, so there is no weight in the data.
+ *  ⛑ MY READING, AND IT IS A READING: the first family listed is the one they are known for, so it is
+ *  likeliest. Two families weight 2:1, three weight 3:2:1. Equal weights were the other option and would make
+ *  "weighted" mean nothing. Asked in po/CCODE_20261004_the_bench.md.
+ *
+ *  ⛔ THE REST OF THE RULE IS `drawAxis`'s, UNCHANGED, and deliberately so: three from what they practise, the
+ *  fourth from all eight including families they have never trained. A specialist does not become harder to
+ *  read; they become more exposed. */
+export function benchAxis(member, { rng = Math.random, slots = 4, fromPractice = 3 } = {}) {
+  const fams = (member?.families || []).filter((f) => FUNCTION_FAMILIES.includes(f));
+  const weights = {};
+  fams.forEach((f, i) => { weights[f] = fams.length - i; });
+  const out = [], taken = new Set();
+  const practised = { ...weights };
+  for (let i = 0; i < Math.min(fromPractice, slots); i++) {
+    const fam = drawWeighted(practised, rng);
+    if (!fam) break;
+    delete practised[fam];
+    taken.add(fam);
+    out.push({ family: fam, from: "practice", weight: weights[fam] });
+  }
+  while (out.length < slots) {
+    const open = FUNCTION_FAMILIES.filter((f) => !taken.has(f));
+    if (!open.length) break;
+    const fam = open[Math.floor(rng() * open.length)];
+    taken.add(fam);
+    out.push({ family: fam, from: weights[fam] ? "wild (also practised)" : "wild", weight: weights[fam] || 0 });
+  }
+  return out;
+}
+
+/** ⛔ A BOUT FROM THE BENCH — by reach, by people, by rank, in any combination. Returns the challenger and the
+ *  four they bring, so the caller can hand it straight to the grid.
+ *  ⛑ A HEAD IS NOT OFFERED HERE. Aevi: *"Heads keep their authored encounters."* They are a reach's champion
+ *  and they have a written fight; drawing one as a random bout would throw that away. */
+export function benchBout(content, { reach = null, people = null, rank = null, rng = Math.random, exclude = [] } = {}) {
+  const all = Object.values(benchAt(content)).flatMap((r) => r.challengers);
+  const skip = new Set(exclude);
+  const pool = all.filter((c) =>
+    !skip.has(c.id)
+    && (!reach || c.reach === reach)
+    && (!people || String(c.people || "").toLowerCase() === String(people).toLowerCase())
+    && (!rank || String(c.rank || "").toLowerCase() === String(rank).toLowerCase()));
+  if (!pool.length) return null;
+  const pick = pool[Math.floor(rng() * pool.length)];
+  return { challenger: pick, axis: benchAxis(pick, { rng }), reach: pick.reach, people: pick.people || null };
+}
+
+/** ⛔ WHO IS ON THE CARD TODAY, for the GM. ⚠️ IT SAYS WHERE THEY ARE FROM, because that is the whole point of
+ *  the bench: Erik asked for *"every reach and distinct people"*, and a card that does not say which reach a
+ *  fighter carries is a list of names.
+ *  ⛑ `here` is the reach the player is standing in; its own bench is called out separately so the GM can
+ *  mention it away from the Crossing — *"our Haldor fights at the Crossing."* */
+export function benchForGM(content, { here = null, npcs = null, day = 0, card = 3 } = {}) {
+  const by = benchAt(content);
+  const reaches = Object.keys(by);
+  if (!reaches.length) return null;
+  const all = reaches.flatMap((r) => by[r].challengers);
+  if (!all.length) return null;
+  // ⛑ ROTATED BY THE DAY, NOT ROLLED — the same rule `verbForPass` uses, so the card is reproducible and a
+  // fighter works their way round rather than appearing five days running by luck.
+  const n = Math.max(1, Math.min(card, all.length));
+  const today = [];
+  for (let i = 0; i < n; i++) today.push(all[(Math.abs(Math.round(day)) * n + i) % all.length]);
+  const nameOf = (id) => (npcs && npcs[id]?.name) || id;
+  const say = (c) => `${c.name} — ${c.rank || "fighter"} of ${c.reach}${c.people ? `, ${c.people}` : ""}${c.record ? ` (${c.record})` : ""}`;
+  const mine = here && by[here] ? by[here] : null;
+  return {
+    note: "A HOUSE OF THE CROSSING, not a side-show: every reach keeps fighters here, and a reach's own bench is "
+      + "something its people talk about at home. Heads are that reach's champion and have their own encounters; "
+      + "the contenders and novices below are who can be matched today.",
+    onTheCard: today.map((c) => ({ id: c.id, name: c.name, reach: c.reach, people: c.people || null,
+      rank: c.rank || null, style: c.style || null, say: say(c) })),
+    fromHere: mine ? {
+      reach: here,
+      champion: (mine.heads || []).map((h) => ({ npcId: h.npcId, name: nameOf(h.npcId), cell: h.cell || null })),
+      fighters: (mine.challengers || []).map((c) => ({ id: c.id, name: c.name, rank: c.rank || null, say: say(c) })),
+    } : null,
+    reaches: reaches.length,
+  };
+}
+
 /** The cell two families meet in. The pair is UNORDERED — HARM vs RESTORE and RESTORE vs HARM are the same
  *  contest — and a family against itself is a legal cell (both competitors' best is the same thing). */
 export function cellFor(famA, famB, grid) {

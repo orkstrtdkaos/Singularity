@@ -3166,5 +3166,48 @@ for (const pack of PACKS) {
       : "");
 }
 
+{
+  /* ═════ SNG-669 · THE COLISEUM'S BENCH ═════ */
+  // ✅ ERIK, 2026-10-04: *"every reach and distinct people should have at least one gladiator, if not a whole
+  // bench. The coliseum is central in the culture here."*
+  // ⛑ THE RULE lives in how_it_works §422 on a fixture; THESE are claims about the authored content, so they
+  // belong here and will still be checked the day Aevi grows the benches (her next pass is two or three a reach).
+  {
+    const { loadContentHeadless: lch669 } = await import("./headless_content.mjs");
+    const C669 = await lch669();
+    const bench = (C669.challengerPools && C669.challengerPools.coliseum_bench) || null;
+    check("SNG-669: the Coliseum's bench is loaded, as a challenger pool with no arc",
+      !!bench && bench.kind === "challenger_pool" && !bench.arcId,
+      bench ? `kind ${bench.kind}, arcId ${String(bench.arcId)}` : "not in challengerPools");
+    if (bench) {
+      const members = [...(bench.heads || []), ...(bench.challengers || [])];
+      // ⛔ EVERY REACH HAS SOMEBODY. This is Erik's ask in one line, and it is the claim most likely to rot as
+      // Aevi adds regions — the peoples' pockets alone will add fifteen.
+      const reaches = new Set(Object.values(C669.locations || {})
+        .map((l) => l.regionId || l.region).filter(Boolean));
+      const covered = new Set(members.map((m) => m.reach).filter(Boolean));
+      const bare = [...reaches].filter((r) => !covered.has(r));
+      check("SNG-669: every reach in the world keeps at least one fighter at the Crossing",
+        bare.length === 0, bare.length ? `${bare.length} with nobody: ${bare.slice(0, 6).join(", ")}` : `${reaches.size} reaches`);
+      // ⚠️ AND EVERY FAMILY IS ONE OF THE EIGHT, or the blind grid is handed a column it has no cell for
+      const FAM = ["HARM", "RESTORE", "PROTECT", "KNOW", "SHAPE", "INFLUENCE", "MOVE", "SUSTAIN"];
+      const strayFam = (bench.challengers || []).flatMap((c) => (c.families || []).filter((f) => !FAM.includes(f)));
+      check("SNG-669: every `families` entry is one of the eight function families",
+        strayFam.length === 0, [...new Set(strayFam)].join(", "));
+      check("SNG-669: …and every challenger declares at least one, so a bout can always be drawn",
+        (bench.challengers || []).every((c) => (c.families || []).length > 0));
+      // ⛔ AND EVERY HEAD RESOLVES. A champion named by an id nobody has is a fight that cannot happen.
+      const ghosts = (bench.heads || []).filter((h) => !C669.npcs?.[h.npcId]);
+      check("SNG-669: every head's `npcId` resolves to a real person",
+        ghosts.length === 0, ghosts.map((h) => h.npcId).join(", "));
+      // ⛑ the peoples Erik asked for: this is a world beyond human, and the gate says so out loud
+      const peoples = new Set((bench.challengers || []).map((c) => c.people).filter(Boolean));
+      check("SNG-669: …and the bench fields more than one people, which is what it is for",
+        peoples.size >= 5, `${peoples.size} peoples: ${[...peoples].slice(0, 8).join(", ")}`);
+    }
+  }
+
+}
+
 console.log(failures === 0 ? "\nContent CI: all checks passed." : `\nContent CI: ${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

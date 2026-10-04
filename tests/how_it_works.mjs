@@ -37044,6 +37044,136 @@ console.log("\n── §421 · a hub drawn as a city ──");
     })());
 }
 
+/* ══════════ §422 · THE COLISEUM'S BENCH ══════════ */
+// ✅ ERIK, 2026-10-04: *"every reach and distinct people should have at least one gladiator, if not a whole
+// bench. The coliseum is central in the culture here."*
+//
+// ⛑ THE RULE IS GATED HERE ON A FIXTURE; the claims about the authored bench — every reach covered, every
+// family one of the eight, every head's npcId resolving — live in `content_ci`, which is where claims about
+// content belong and where they will still be checked the day Aevi grows the benches.
+console.log("\n── §422 · the Coliseum's bench ──");
+{
+  const CO422 = await import("../engine/coliseum.js");
+  const { FUNCTION_FAMILIES: FAM422 } = await import("../engine/functions.js");
+  // a deterministic rng, so a draw that depends on luck cannot pass by luck
+  const mkRng = (s) => { let x = s; return () => { x = (x * 1103515245 + 12345) & 0x7fffffff; return x / 0x7fffffff; }; };
+
+  const fx422 = {
+    challengerPools: {
+      bench: { kind: "challenger_pool", heads: [{ npcId: "champ", reach: "north", cell: "HARM" }],
+        challengers: [
+          { id: "a", name: "A", reach: "north", people: "ent", families: ["HARM", "MOVE"], rank: "contender" },
+          { id: "b", name: "B", reach: "north", people: "human", families: ["KNOW"], rank: "novice" },
+          { id: "c", name: "C", reach: "south", people: "fae", families: ["SHAPE", "KNOW"], rank: "contender" },
+        ] },
+      // ⛑ an arc's pool, with no `reach` on anybody — it must not leak into the bench
+      arc: { kind: "challenger_pool", challengers: [{ id: "z", name: "Z", band: 3 }] },
+    },
+  };
+
+  /* ---- 1 · ⛔ THE BENCH IS BY REACH, AND ONLY THE BENCH ---- */
+  check("§422: ⛔ THE BENCH GROUPS BY REACH — which is the whole point: a fighter carries where they are from",
+    (() => {
+      const by = CO422.benchAt(fx422);
+      return Object.keys(by).length === 2 && by.north.heads.length === 1
+        && by.north.challengers.length === 2 && by.south.challengers.length === 1;
+    })());
+  // ⚠️ A POOL WITH NO REACH IS NOT A BENCH. `saehara_challengers` is an arc's pool sitting in the same map,
+  // and a reader that swept every pool would have put an arc's opponents on the Coliseum's card.
+  check("§422: ⚠️ …and a pool whose people carry no reach stays out, without the reader knowing its name",
+    (() => {
+      const by = CO422.benchAt(fx422);
+      return !Object.values(by).some((r) => r.challengers.some((c) => c.id === "z"));
+    })());
+  check("§422: ⛑ …and asking for one reach gives that reach, or an empty bench rather than nothing at all",
+    (() => {
+      const one = CO422.benchAt(fx422, { reach: "south" });
+      const none = CO422.benchAt(fx422, { reach: "nowhere" });
+      return one.challengers.length === 1 && none.reach === "nowhere"
+        && none.challengers.length === 0 && none.heads.length === 0;
+    })());
+
+  /* ---- 2 · ⛔ THE BLIND-GRID FOUR, BY THE SAME RULE A COMPETITOR GETS ---- */
+  // ✅ AEVI Y2: *"their blind-grid four come from `families` (weighted, the fourth drawn from all eight, exactly
+  // as `drawAxis` does for a competitor)."*
+  check("§422: ⛔ A BENCH FIGHTER BRINGS FOUR FAMILIES, all of the eight and never the same one twice",
+    (() => {
+      const rng = mkRng(7);
+      for (let i = 0; i < 500; i++) {
+        for (const c of fx422.challengerPools.bench.challengers) {
+          const ax = CO422.benchAxis(c, { rng });
+          if (ax.length !== 4) return false;
+          if (new Set(ax.map((a) => a.family)).size !== 4) return false;
+          if (ax.some((a) => !FAM422.includes(a.family))) return false;
+        }
+      }
+      return true;
+    })());
+  // ⛔ AND THE NARROW FIGHTER IS NOT PROTECTED, which is `drawAxis`'s own rule kept rather than re-decided:
+  // a specialist does not become harder to read, they become more exposed.
+  check("§422: ⛔ …and one who practises a single family still fields four — the rest drawn from all eight",
+    (() => {
+      const rng = mkRng(3);
+      const ax = CO422.benchAxis({ families: ["KNOW"] }, { rng });
+      return ax.length === 4 && ax.filter((a) => a.from === "practice").length === 1
+        && ax.filter((a) => String(a.from).startsWith("wild")).length === 3;
+    })());
+  // ⚠️ THE ORDER IS WEIGHTED BY THE LIST. Measured on the authored bench: all 32 fighters carry exactly TWO
+  // families, so both always reach the axis and the weight decides only which leads — the first-listed takes
+  // the first column about 2 times in 3, which is the 2:1 weight exactly. Reported to Aevi, because "weighted"
+  // could have meant it decides INCLUSION, and on this content it cannot.
+  check("§422: ⚠️ …and the family listed first leads the axis more often than the second, by its weight",
+    (() => {
+      const rng = mkRng(11);
+      let first = 0, n = 6000;
+      for (let i = 0; i < n; i++) if (CO422.benchAxis({ families: ["HARM", "MOVE"] }, { rng })[0].family === "HARM") first++;
+      const share = first / n;
+      return share > 0.58 && share < 0.76;      // 2:1 is 0.667; the band is wide enough not to be a seed pin
+    })());
+
+  /* ---- 3 · ⛔ A BOUT IS CHOSEN, AND A CHAMPION IS NOT DRAWN AS ONE ---- */
+  check("§422: ⛔ A BOUT CAN BE ASKED FOR BY REACH, BY PEOPLE AND BY RANK, in any combination",
+    (() => {
+      const rng = mkRng(5);
+      const byReach = CO422.benchBout(fx422, { reach: "south", rng });
+      const byPeople = CO422.benchBout(fx422, { people: "ent", rng });
+      const byRank = CO422.benchBout(fx422, { rank: "novice", rng });
+      const both = CO422.benchBout(fx422, { reach: "north", people: "fae", rng });
+      return byReach?.challenger.id === "c" && byPeople?.challenger.id === "a"
+        && byRank?.challenger.id === "b" && both === null       // ⛑ no such fighter: null, not a wrong one
+        && byReach.axis.length === 4;
+    })());
+  // ✅ AEVI: *"Heads keep their authored encounters."* A champion drawn as a random bout throws that away.
+  check("§422: ⛔ …and a HEAD is never offered as a random bout — a champion has a written fight",
+    (() => {
+      const rng = mkRng(9);
+      for (let i = 0; i < 300; i++) {
+        const b = CO422.benchBout(fx422, { rng });
+        if (!b || b.challenger.npcId === "champ" || b.challenger.id === undefined) return false;
+      }
+      return true;
+    })());
+
+  /* ---- 4 · ⛑ AND THE GM IS TOLD WHERE THEY ARE FROM ---- */
+  check("§422: ⛑ THE GM'S CARD NAMES THE REACH, because a card that does not is a list of names",
+    (() => {
+      const gm = CO422.benchForGM(fx422, { here: "north", day: 2, card: 2 });
+      if (!gm || gm.onTheCard.length !== 2) return false;
+      if (!gm.onTheCard.every((c) => c.reach && /of (north|south)/.test(c.say))) return false;
+      return gm.fromHere?.reach === "north" && gm.fromHere.champion.length === 1
+        && gm.fromHere.fighters.length === 2 && gm.reaches === 2;
+    })());
+  // ⛑ rotated by the day rather than rolled, the same rule `verbForPass` uses, so a card is reproducible
+  check("§422: ⛑ …and the card is the same card on the same day, and a different one tomorrow",
+    (() => {
+      const a = CO422.benchForGM(fx422, { day: 4, card: 2 });
+      const b = CO422.benchForGM(fx422, { day: 4, card: 2 });
+      const c = CO422.benchForGM(fx422, { day: 5, card: 2 });
+      const ids = (g) => g.onTheCard.map((x) => x.id).join(",");
+      return ids(a) === ids(b) && ids(a) !== ids(c);
+    })());
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

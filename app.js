@@ -23,7 +23,7 @@ import { getApiKey, setApiKey, callClaude, callClaudeJSON, parseLooseJSON, setCa
 import { armDevCapture, recordCall, annotateLatest, devCaptures, clearCaptures, recordCombatRound, combatRounds } from "./engine/devcapture.js"; // SNG-186 §2f: see the machine
 import { unearnedDepth, generate, ensureGenerated, generatedRecords, recordAttention, livingWorldForGM, isSurfaceable, findGenerated, nominationsFor, effectiveWeight, NOMINATE_AT, buildBraidPrompt, validateBraidAuthored } from "./engine/generate.js";
 import { checkBorn, describeBorn, contractedTypes } from "./engine/borncontract.js";
-import { drawAxis, resolvePick, readOfPick, championPick, drawBackgroundAxis } from "./engine/coliseum.js"; // SNG-149: the Coliseum blind grid
+import { drawAxis, resolvePick, readOfPick, championPick, drawBackgroundAxis, benchBout, benchAxis } from "./engine/coliseum.js"; // SNG-149: the Coliseum blind grid · SNG-669: the bench
 import { critFor } from "./engine/craftmechanics.js"; // CCODE-76: a craft's own critical, in its own words
 import { authoredBlock } from "./engine/craftmechanics.js";                 // CCODE-311: the rank-walking reader a guard block needs
 import { protectionFromCraft, tickProtections } from "./engine/intercept.js"; // CCODE-311: the writer state.protections never had
@@ -194,7 +194,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.18.3";
+const APP_VERSION = "2.18.4";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -10602,8 +10602,20 @@ function coliseumBoutFor(def, oppSheet) {
     const theirAbilities = (oppSheet?.skills || []).map((s, n) => ({ abilityId: `opp-${n}`, level: s.tier || 1 }));
     const theirCat = {};
     (oppSheet?.skills || []).forEach((s, n) => { theirCat[`opp-${n}`] = { functions: [s.function].filter(Boolean) }; });
-    const theirs = drawAxis({ abilities: theirAbilities }, { catalog: theirCat, index: FN_INDEX, rng: Math.random });
-    return { yours, theirs, picked: null };
+    // ⛔ Y2 · AND IF NOBODY BROUGHT A SHEET, THE BENCH DOES. ✅ ERIK: *"every reach and distinct people should
+    // have at least one gladiator… the coliseum is central in the culture here."* A fighter from the bench has
+    // `families` where a champion has skills, so their four are drawn by the same rule from what they practise.
+    // ⛑ A BOUT IS STILL A BOUT: the grid, the blind pick and the resolution below are untouched — this only
+    // answers "who is across the sand" when the encounter did not name anybody.
+    let bench = null;
+    if (!theirAbilities.length) {
+      const here = CONTENT.locations?.[character?.currentLocationId];
+      bench = benchBout(CONTENT, { reach: here?.regionId || here?.region || null, rng: Math.random })
+        || benchBout(CONTENT, { rng: Math.random });   // the home reach first, then anyone on the card
+    }
+    const theirs = bench ? bench.axis
+      : drawAxis({ abilities: theirAbilities }, { catalog: theirCat, index: FN_INDEX, rng: Math.random });
+    return { yours, theirs, picked: null, bench: bench?.challenger || null };
   } catch { return null; }   // a bout that cannot draw its grid is still a fight; it is never a crash
 }
 

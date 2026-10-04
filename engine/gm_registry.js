@@ -88,6 +88,7 @@ import { worldCount, worldCountLabel, positionedPlace } from "./worldtime.js";
 import { holdsNearForGM } from "./sharedholds.js";
 import { nemesisForGM } from "./nemesis.js";   // ⛔ SNG-648: who the antagonist IS — `pacing.js` never had one to point at   // CCODE-383: a hold nearby is known
 import { powersHoldingForGM, housesForGM } from "./powers.js";
+import { benchForGM } from "./coliseum.js";
 import { holderOfGate, isLatticeGate, latticeGates } from "./gatehold.js";   // ✅ SNG-663 §2c: whose arch this is, and whether it is one of the Lattice's   // SNG-634 C5: who holds the ground you are standing on
 import { journeyForGM } from "./journeyplan.js";   // CCODE-387: a journey agreed and not yet walked
 import { journeyUnderwayForGM } from "./journeyroad.js";   // CCODE-390: a journey on the road, stopped part-way
@@ -738,6 +739,21 @@ export const GM_CONTEXT = [
     reachedBy: "always (empty at the 120 of 143 places nobody holds)", spec: "SNG-634", views: ["turn", "ask"],
     build: (env) => powersHoldingForGM(env.location?.id || env.character?.currentLocationId,
       { content: env.CONTENT, character: env.character }) },
+  // ⛔ Y3 · ✅ ERIK, 2026-10-04: *"every reach and distinct people should have at least one gladiator, if not a
+  // whole bench. The coliseum is central in the culture here."*
+  // ⛑ IT REACHES FURTHER THAN THE SAND. A reach's own bench is a fair thing to mention ANYWHERE in that reach
+  // — *"our Haldor fights at the Crossing"* — so the block carries both the card and the local fighters, and
+  // the GM is told which is which.
+  { key: "benchDetail", builder: "coliseum.benchForGM (SNG-669 Y3)", carries: ["who is on the Coliseum's card today, by name, reach and people", "the fighters this reach keeps at the Crossing", "that a head is a reach's champion with their own encounter"],
+    reachedBy: "always — the bench covers all 38 reaches, and a character standing in any of them has a local one", spec: "SNG-416", views: ["turn", "ask"],
+    build: (env) => benchForGM(env.CONTENT, {
+      here: env.location?.regionId || env.location?.region || null,
+      npcs: env.CONTENT?.npcs || null,
+      // ⚠️ `env.day` DOES NOT EXIST. §232 caught it as a dark wire: a builder reading a key no caller sets,
+      // so the card would have frozen on day 0 forever and looked like a deliberate fixed card. The bag carries
+      // `time.worldDay`, the same one `livingWorldForGM` and the news rows read.
+      day: (() => { try { return env.time?.worldDay ?? env.time?.day ?? env.character?.clock?.day ?? 0; } catch { return 0; } })(),
+    }) },
   // ⛔ C4.2 — ✅ ERIK, 2026-10-04: *"it's more that every tradition had powers there… it is truly a big swirl
   // of powers."* ⚠️ Deliberately a SEPARATE key from `powersHereDetail`: that one is reach, this one is
   // presence, and folding thirty-three embassies into the reach list would have made the hub read as the most

@@ -26036,12 +26036,23 @@ console.log("\n── §334 · the field — the authored 44 named, any window a
   const withBands = world334.coverage("precursor", { window: world334.sampleWindow({ w: 72, h: 36 }) });
   const without = FD.makeField({ ...data334, bands: {} }).coverage("precursor", { window: world334.sampleWindow({ w: 72, h: 36 }) });
   check("§334: ⛔ THE BANDS RIDE WITH THE DATA, BECAUSE A MISSING TABLE READS AS AN EMPTY WORLD — asking `the_substrate.sourceBands` for `precursor` answers nothing (it is bands per authored SOURCE, not per field kind), and the reading came back a silent zero for every band-driven kind until the model carried its own bands; and the extracted model holds the three tables that lived only in the prototype",
+    // ⚠️ THESE USED TO BE `=== 39`, `=== 21`, `=== 10`, `=== 8` — a census of Aevi's world living in my gate,
+    // the same fault as the ratified settlement count, found the same day and for the same reason: she asked
+    // whether to give fifteen new pockets a field baseline and the honest answer was *"not unless you want to
+    // renegotiate a number in CCode's test file"*, which is content being shaped around a gate.
+    // ⛑ WHAT THIS CHECK IS ACTUALLY FOR is that the three tables RIDE WITH THE DATA — a missing one reads as
+    // an empty world and every band-driven kind comes back a silent zero. That is a property, and a property
+    // survives her authoring: every region carries a state from the known vocabulary, all three states are in
+    // use, and the nanite table covers every region the model knows.
     Object.keys(data334.bands).length >= 5 && withBands > 0.2 && without === 0
-    && data334.voters.length > 100 && Object.keys(data334.nanByRegion).length === 39
-    && Object.values(model334.regions).filter(r => r.state === "ordered").length === 21
-    && Object.values(model334.regions).filter(r => r.state === "wild").length === 10
-    && Object.values(model334.regions).filter(r => r.state === "clear").length === 8,
-    JSON.stringify({ bands: Object.keys(data334.bands), withBands: +(withBands * 100).toFixed(0) + "%", without: +(without * 100).toFixed(0) + "%", voters: data334.voters.length }));
+    && data334.voters.length > 100
+    && Object.keys(data334.nanByRegion).length === Object.keys(model334.regions).length
+    && Object.values(model334.regions).every(r => ["ordered", "wild", "clear"].includes(r.state))
+    && ["ordered", "wild", "clear"].every(s => Object.values(model334.regions).some(r => r.state === s))
+    && Object.keys(model334.regions).length >= 30,
+    JSON.stringify({ bands: Object.keys(data334.bands), withBands: +(withBands * 100).toFixed(0) + "%", without: +(without * 100).toFixed(0) + "%", voters: data334.voters.length,
+      regions: Object.keys(model334.regions).length, nanByRegion: Object.keys(data334.nanByRegion).length,
+      states: Object.values(model334.regions).reduce((a, r) => (a[r.state] = (a[r.state] || 0) + 1, a), {}) }));
 
   // ⛔ A4 — THE ANTIMERIDIAN, UNWRAPPED INSIDE `sampleWindow` SO NO CALLER CAN GET IT WRONG. SNG-414 found it first (min/max gave
   // the Centre a 394° window and Umbral Depths 485° — not a possible width for anything) and Aevi's region prototype rediscovered

@@ -1,0 +1,26 @@
+{
+  "_note": "⛔ THE RATIFIED CENSUS — how many places of each tier the world is AGREED to have. It is a ratified decision, not a measurement: `content_ci` fails when the world disagrees with this file, so a place added or retyped by accident is caught, and a place added on purpose is a deliberate edit HERE saying so.",
+  "_whyItLivesHere": "⚠️ IT USED TO LIVE IN `tests/content_ci.mjs`, as the literals 25 / 96 / 37 — which meant Erik's ruling sat in CCode's test file, and every time Aevi authored a place her push was blocked until he moved a number for her. It is content's count, ratified by Erik, so it belongs beside the content. Moving it here costs the gate nothing: an accidental change still fails, because the only way to pass is to come here and write down what was ratified.",
+  "_howToChangeIt": "Erik rules the number; whoever lands the content updates this file in the SAME commit as the places it counts, with his words in `ratifications`. Never edit it to make a red gate green — that is the one thing this file exists to prevent.",
+
+  "tiers": {
+    "region": 25,
+    "settlement": 96,
+    "site": 37
+  },
+
+  "ratifications": [
+    {
+      "when": "2026-09",
+      "by": "Erik",
+      "became": { "region": 25, "settlement": 96, "site": 14 },
+      "why": "SNG-392/398/396 — the hierarchy settled: regions, the settlements inside them, and the sites that hang off a parent."
+    },
+    {
+      "when": "2026-10",
+      "by": "Erik",
+      "became": { "region": 25, "settlement": 96, "site": 37 },
+      "why": "SNG-396 — places authored in play became sites with parents of their own."
+    }
+  ]
+}

@@ -1034,8 +1034,28 @@ for (const pack of PACKS) {
     // in a market square."* ⛑ 22 + 15 = 37, and NOT ONE SETTLEMENT OR REGION MOVED: the towns are all still there, which
     // is what makes this a yard added rather than a place re-read. `po/staged_content/SNG-663_gate_yards.json` is the
     // authoring; 37 gate yards and all of them sites of their own town is what the line now ratifies.
-    check("SNG-392/398/396: the hierarchy matches the RATIFIED census — 25 regions, 96 settlements, 37 authored-in-play sites",
-      tiers.region === 25 && tiers.settlement === 96 && tiers.site === 37, JSON.stringify(tiers));
+    // ⛔ THE RATIFIED NUMBER NOW LIVES WITH THE CONTENT IT COUNTS, in
+    // `content/packs/core/world/ratified_census.json`, and this reads it.
+    //
+    // ⚠️ IT USED TO BE THE LITERALS `25 / 96 / 37` RIGHT HERE — which put Erik's ruling inside CCode's test
+    // file and made every one of Aevi's content pushes wait on CCode to move a number. 2026-10-04 is the second
+    // time it blocked her (SNG-670's fifteen peoples' pockets, 96 → 111), and the first time it was my own note
+    // that *"a gate may not pin the SIZE of Aevi's world"*. A gate that only its author can satisfy is a gate
+    // that stops being about the world and starts being about who is awake.
+    //
+    // ⛑ IT LOSES NO TEETH. An accidental place, or one retyped from site to settlement, still fails here —
+    // the only way to pass is to open that file and write down what was ratified, which is exactly the
+    // deliberate act the check exists to demand. What changes is WHO can perform it.
+    const CENSUS = rj("content/packs/core/world/ratified_census.json");
+    const want = CENSUS.tiers || {};
+    check("SNG-392/398/396: the hierarchy matches the RATIFIED census in content/packs/core/world/ratified_census.json",
+      tiers.region === want.region && tiers.settlement === want.settlement && tiers.site === want.site,
+      `ratified ${JSON.stringify(want)} · measured ${JSON.stringify(tiers)}`);
+    // ⚠️ AND THE FILE MUST SAY WHO RATIFIED IT. Without this the census could be quietly edited to whatever
+    // the world happens to be, which is the drift the whole check exists to catch, performed politely.
+    check("SNG-392: …and the census carries its ratifications, so a number can be traced to a ruling",
+      Array.isArray(CENSUS.ratifications) && CENSUS.ratifications.length > 0
+      && CENSUS.ratifications.every((r) => r.by && r.why && r.became));
     const ids = new Set(allLocs.map((l) => l.id));
     const badParent = allLocs.filter((l) => l.parentId !== null && !ids.has(l.parentId));
     check("SNG-392: every parentId resolves and every site HAS a parent",

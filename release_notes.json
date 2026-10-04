@@ -16,6 +16,18 @@
   "next": [],
   "releases": [
     {
+      "version": "2.18.1",
+      "date": "2026-10-04",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "Adding places to the world no longer waits on the engine",
+          "summary": "Internal: the agreed count of places moved to where the places live.",
+          "detail": "The world has an agreed number of regions, settlements and sites, and a check refuses to let it drift by accident. That agreed number was written into one of the engine's own test files, which meant every time new places were authored the work sat and waited for someone to go and change a number somewhere else. It now lives beside the places it counts, with the ruling that set it recorded next to it. The check is exactly as strict — it still refuses an accidental place and still refuses to be edited without a stated ruling — it just no longer needs a second person awake."
+        }
+      ]
+    },
+    {
       "version": "2.18.0",
       "date": "2026-10-04",
       "entries": [

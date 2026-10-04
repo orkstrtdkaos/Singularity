@@ -6428,8 +6428,22 @@ await (async () => {
   }
   {
     const globe = bodyOf("wireWorldGlobe");
+    // ⚠️ THIS USED TO PIN `onmousedown` AND `onwheel`, which are the two handlers that were the bug. ✅ ERIK,
+    // 2026-10-04, on a phone: *"I can't seem to spin the world."* — the globe was bound to a mouse and read
+    // `e.offsetX`, which a touch event has not got, so a gate asserting those handlers exist was asserting
+    // precisely the thing that did not work on half the devices it runs on.
+    // ⛑ IT ASSERTS THE CAPABILITY NOW: the globe binds a gesture, and that gesture moves the view and scales
+    // it. Which events carry it is the binding's business.
     check("168/390: the world tier is navigable — the globe spins and zooms in place of the SVG viewport",
-      /onmousedown/.test(globe) && /onwheel/.test(globe) && /view\.yaw/.test(globe) && /view\.r =/.test(globe));
+      /bindGesture\(cv/.test(globe) && /view\.yaw/.test(globe) && /view\.r =/.test(globe));
+    // ⛔ AND IT TAKES TOUCH, which is the half that was missing. One binding serves the globe and the region
+    // map, and it carries pinch — `touches[1]` is what SNG-168 found appeared NOWHERE in this repo.
+    check("168/390: …and it answers a finger as well as a mouse — drag, pinch, and a tap that goes somewhere",
+      (() => {
+        const bind = src.slice(src.indexOf("function bindGesture("), src.indexOf("function bindGesture(") + 4200);
+        return /touchstart/.test(bind) && /touchmove/.test(bind) && /touches\.length >= 2/.test(bind)
+          && /touchAction/.test(bind) && /onTap/.test(bind) && /onTap:/.test(globe);
+      })(), "a phone that can see the map and not move it reads as broken, not as unimplemented");
     check("168/390: …and the world tier still drills into a region, which the card grid also did",
       /mapTier = "region"/.test(globe) && /renderMap\(\)/.test(globe));
   }

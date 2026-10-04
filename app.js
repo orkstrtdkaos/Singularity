@@ -194,7 +194,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.18.4";
+const APP_VERSION = "2.18.5";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -13192,6 +13192,93 @@ function paintCrossingCity(ctx, regionId, W, H) {
   return plan;
 }
 
+/** ⛔ ONE GESTURE BINDING FOR EVERY MAP SURFACE — mouse, touch and pinch.
+ *
+ *  ✅ ERIK, 2026-10-04, on a phone: *"I can't seem to spin the world or pinch to zoom on the region map."*
+ *
+ *  ⚠️ BOTH SURFACES WERE MOUSE-ONLY, and one of them was mine from this morning. The globe read `e.offsetX`,
+ *  which a touch event does not have at all, and the region map's zoom was `onwheel` with a `mousedown` drag.
+ *  On a phone neither did anything — the map simply did not respond, which reads as broken rather than as
+ *  unimplemented.
+ *  ⛑ THE SKILL WHEEL ALREADY SOLVED THIS and its own comment says why: *"Zoom was wheel-only and a phone has
+ *  no wheel — `touches[1]` appeared zero times in the whole repo."* That was SNG-168, and nobody carried it to
+ *  the other two surfaces. So this is ONE binding both now use, because three copies of a gesture is three
+ *  chances for one of them to stop working on a device nobody here is holding.
+ *
+ *  ⚠️ AND `touch-action: none`, or the browser keeps the gesture for itself: a one-finger drag scrolls the
+ *  page and a pinch zooms the whole document, and the canvas never sees either.
+ *
+ *  Coordinates are CSS pixels inside the element, which is what `offsetX` was. Listeners REPLACE rather than
+ *  stack, because every one of these wirings runs again on a repaint. */
+function bindGesture(el, { onDown = null, onMove = null, onUp = null, onZoom = null, onTap = null } = {}) {
+  if (!el) return;
+  if (el._gesture) {
+    for (const [type, fn, target] of el._gesture) (target || el).removeEventListener(type, fn);
+  }
+  const bound = [];
+  const on = (type, fn, opts, target) => { (target || el).addEventListener(type, fn, opts); bound.push([type, fn, target]); };
+  const local = (cx, cy) => { const r = el.getBoundingClientRect(); return { x: cx - r.left, y: cy - r.top }; };
+  let drag = null, pinch = null;
+
+  const start = (cx, cy) => { const p = local(cx, cy); drag = { ...p, moved: false }; onDown?.(p.x, p.y); };
+  const moveTo = (cx, cy) => {
+    if (!drag) return;
+    const p = local(cx, cy);
+    const dx = p.x - drag.x, dy = p.y - drag.y;
+    if (Math.abs(dx) + Math.abs(dy) > 3) drag.moved = true;
+    onMove?.(p.x, p.y, dx, dy);
+    drag.x = p.x; drag.y = p.y;
+  };
+  const finish = () => { const d = drag; drag = null; onUp?.(d?.moved === true); };
+
+  on("mousedown", (e) => start(e.clientX, e.clientY));
+  on("mousemove", (e) => moveTo(e.clientX, e.clientY), undefined, window);
+  on("mouseup", () => { if (drag) finish(); }, undefined, window);
+  on("wheel", (e) => {
+    if (!onZoom) return;
+    e.preventDefault();
+    const p = local(e.clientX, e.clientY);
+    onZoom(e.deltaY < 0 ? 1.18 : 1 / 1.18, p.x, p.y);
+  }, { passive: false });
+
+  // ⛑ ONE FINGER DRAGS, TWO PINCH ABOUT THEIR MIDPOINT — the gesture everyone already expects, and the same
+  // shape the skill wheel uses so the three surfaces feel like one app.
+  const spanOf = (tt) => Math.hypot(tt[0].clientX - tt[1].clientX, tt[0].clientY - tt[1].clientY);
+  const midOf = (tt) => ({ x: (tt[0].clientX + tt[1].clientX) / 2, y: (tt[0].clientY + tt[1].clientY) / 2 });
+  on("touchstart", (e) => {
+    if (e.touches.length >= 2) { pinch = { span: spanOf(e.touches) }; if (drag) finish(); }
+    else if (e.touches[0]) { pinch = null; start(e.touches[0].clientX, e.touches[0].clientY); }
+  }, { passive: false });
+  on("touchmove", (e) => {
+    if (pinch && e.touches.length >= 2) {
+      e.preventDefault();
+      const span = spanOf(e.touches);
+      if (pinch.span > 0 && onZoom) {
+        const m = local(midOf(e.touches).x, midOf(e.touches).y);
+        onZoom(span / pinch.span, m.x, m.y);
+      }
+      pinch.span = span;                       // ⛑ incremental, so a slow pinch is not a jump at the end
+      return;
+    }
+    if (e.touches[0]) { e.preventDefault(); moveTo(e.touches[0].clientX, e.touches[0].clientY); }
+  }, { passive: false });
+  on("touchend", (e) => {
+    if (e.touches.length < 2) pinch = null;
+    if (drag && !e.touches.length) {
+      const wasMoved = drag.moved;
+      const at = { x: drag.x, y: drag.y };
+      finish();
+      // ⚠️ A TAP IS NOT A CLICK ON TOUCH. Without this a phone can see the map but never select a place,
+      // because `click` after a canvas touch is not something to rely on.
+      if (!wasMoved) onTap?.(at.x, at.y);
+    }
+  }, { passive: false });
+  on("touchcancel", () => { pinch = null; if (drag) finish(); }, { passive: true });
+
+  el.style.touchAction = "none";
+  el._gesture = bound;
+}
+
 const TIER_RANK = { region: 3, settlement: 2, site: 1 };
 function clusterMarks(marks, radius = REGION_HIT) {
   const seen = new Set(), out = [];
@@ -13367,7 +13454,6 @@ function sizeRegionCanvas(cv) {
  *  the alternative is a 3-second pause every time somebody turns the wheel. Capped at 4× for that reason. */
 let _regionView = { k: 1, cx: 0.5, cy: 0.5, sx: 0, sy: 0, sw: 0, sh: 0 };
 let _regionOff = null;
-let _regionDragOn = null;   // the one pair of window listeners the pan uses
 
 /** Re-show the painted map at the current zoom and pan. No repaint, no recomputation. */
 function blitRegion() {
@@ -14159,53 +14245,54 @@ function wireRegionGroundMap(selectedId) {
   };
   cv.onmouseleave = () => { cv.style.cursor = "default"; _drag = null; };
   // ⛔ ZOOM AT THE POINTER, which is the only kind that does not feel like fighting the map: the world point
-  // under the cursor stays under the cursor.
-  cv.onwheel = (e) => {
-    e.preventDefault();
-    const r = cv.getBoundingClientRect();
-    const mx = (e.clientX - r.left) * (cv.width / r.width), my = (e.clientY - r.top) * (cv.height / r.height);
-    const at = unview(mx, my, cv.width, cv.height);
-    const was = _regionView.k;
-    const k = Math.max(1, Math.min(4, was * (e.deltaY < 0 ? 1.18 : 1 / 1.18)));
-    if (Math.abs(k - was) < 1e-6) return;
-    // keep `at` under the pointer: solve for the centre that puts it back at the same canvas fraction
-    const fx = mx / cv.width, fy = my / cv.height;
-    _regionView.k = k;
-    _regionView.cx = (at.x - (fx - 0.5) * (cv.width / k)) / cv.width;
-    _regionView.cy = (at.y - (fy - 0.5) * (cv.height / k)) / cv.height;
-    hideChip();
-    blitRegion();
-  };
+  // under the pointer stays under the pointer. ✅ ERIK, on a phone: *"I can't seem to… pinch to zoom on the
+  // region map."* — it was `onwheel` and a `mousedown` drag, and a phone has neither.
+  // ⛑ ONE BINDING, SHARED WITH THE GLOBE, so neither can quietly stop working on a device nobody here holds.
+  const toCv = (x, y) => { const r = cv.getBoundingClientRect(); return { x: x * (cv.width / r.width), y: y * (cv.height / r.height) }; };
   let _drag = null;
-  cv.onmousedown = (e) => {
-    if (_regionView.k <= 1.01) return;                 // nothing to pan at full view
-    const r = cv.getBoundingClientRect();
-    _drag = { x: (e.clientX - r.left) * (cv.width / r.width), y: (e.clientY - r.top) * (cv.height / r.height),
-      cx: _regionView.cx, cy: _regionView.cy, moved: false };
-  };
-  // ⚠️ ONE PAIR OF WINDOW LISTENERS, REPLACED — never added. This function runs again on every re-wire, and
-  // `addEventListener` with a fresh closure each time stacks them: after a dozen openings one drag would run a
-  // dozen handlers, each blitting. The map would still look right, which is what makes this kind of leak keep.
-  if (_regionDragOn) {
-    window.removeEventListener("mousemove", _regionDragOn.move);
-    window.removeEventListener("mouseup", _regionDragOn.up);
-  }
-  _regionDragOn = {
-    move: (e) => {
+  bindGesture(cv, {
+    onZoom: (factor, lx, ly) => {
+      const m = toCv(lx, ly);
+      const at = unview(m.x, m.y, cv.width, cv.height);
+      const was = _regionView.k;
+      const k = Math.max(1, Math.min(4, was * factor));
+      if (Math.abs(k - was) < 1e-6) return;
+      const fx = m.x / cv.width, fy = m.y / cv.height;
+      _regionView.k = k;
+      _regionView.cx = (at.x - (fx - 0.5) * (cv.width / k)) / cv.width;
+      _regionView.cy = (at.y - (fy - 0.5) * (cv.height / k)) / cv.height;
+      hideChip();
+      blitRegion();
+    },
+    onDown: (lx, ly) => {
+      if (_regionView.k <= 1.01) { _drag = null; return; }   // nothing to pan at full view
+      const m = toCv(lx, ly);
+      _drag = { x: m.x, y: m.y, cx: _regionView.cx, cy: _regionView.cy, moved: false };
+    },
+    onMove: (lx, ly) => {
       if (!_drag) return;
-      const r = cv.getBoundingClientRect();
-      const x = (e.clientX - r.left) * (cv.width / r.width), y = (e.clientY - r.top) * (cv.height / r.height);
-      const dx = (x - _drag.x) / _regionView.k / cv.width, dy = (y - _drag.y) / _regionView.k / cv.height;
-      if (Math.abs(x - _drag.x) + Math.abs(y - _drag.y) > 3) _drag.moved = true;
+      const m = toCv(lx, ly);
+      const dx = (m.x - _drag.x) / _regionView.k / cv.width, dy = (m.y - _drag.y) / _regionView.k / cv.height;
+      if (Math.abs(m.x - _drag.x) + Math.abs(m.y - _drag.y) > 3) _drag.moved = true;
       _regionView.cx = _drag.cx - dx; _regionView.cy = _drag.cy - dy;
+      _drag.x = m.x; _drag.y = m.y; _drag.cx = _regionView.cx; _drag.cy = _regionView.cy;
       cv.style.cursor = "grabbing";
       hideChip();
       blitRegion();
     },
-    up: () => { if (_drag) cv.style.cursor = "default"; _drag = null; },
-  };
-  window.addEventListener("mousemove", _regionDragOn.move);
-  window.addEventListener("mouseup", _regionDragOn.up);
+    onUp: (moved) => { if (_drag) cv.style.cursor = "default"; if (_drag) _drag.moved = moved; },
+    // ⚠️ A TAP SELECTS. Without this a phone could see the map and never choose a place on it — `click`
+    // after a canvas touch is not something to rely on, and the chip is a hover the finger never produces.
+    onTap: (lx, ly) => {
+      const m = toCv(lx, ly);
+      const p = unview(m.x, m.y, cv.width, cv.height);
+      const hit = pickAt(p.x, p.y);
+      if (!hit) { if (_regionFan) { _regionFan = null; hideChip(); repaint(); } return; }
+      if (hit.kind === "seal") { _regionFan = { key: hit.cluster.key }; hideChip(); repaint(); return; }
+      _regionFan = null;
+      showChip(hit, p.x, p.y);
+    },
+  });
   // ⛑ double-click resets, and the readout in the corner says so
   cv.ondblclick = () => { _regionView.k = 1; _regionView.cx = 0.5; _regionView.cy = 0.5; hideChip(); blitRegion(); };
   cv.onclick = (e) => {
@@ -14325,7 +14412,7 @@ function wireWorldGlobe() {
   // ⚠️ the opening framing is the VIEWER's, not a number retyped here — see DEFAULT_VIEW's note:
   // it faces the inhabited southern hemisphere, and a gate holds it there.
   const view = { ...DEFAULT_VIEW, r: Math.min(cv.width, cv.height) * 0.44, cx: cv.width / 2, cy: cv.height / 2 };
-  let layer = "topo", source = "precursor", dragging = false, lastX = 0, lastY = 0, pins = [];
+  let layer = "topo", source = "precursor", dragging = false, pins = [];
   // ⛔ SNG-402 — THE GENERATOR IS THE DETAIL, AND IT HAS BEEN IN THE REPO UNUSED SINCE SNG-391.
   // scripts/world/terrain.mjs says so in its own header: "Terrain generator with VIEW CULLING — only the
   // parameters that can affect the current window are considered, which is what makes a regional zoom
@@ -14604,24 +14691,56 @@ function wireWorldGlobe() {
     return best;
   };
 
-  cv.onmousedown = (e) => { dragging = true; lastX = e.offsetX; lastY = e.offsetY; };
-  window.addEventListener("mouseup", () => { if (dragging) { dragging = false; paint(false); } });
+  // ⛔ ✅ ERIK, 2026-10-04, on a phone: *"I can't seem to spin the world."* ⚠️ IT READ `e.offsetX`, WHICH A
+  // TOUCH EVENT DOES NOT HAVE, and bound only `mousedown`/`mousemove`/`wheel` — so on a phone the globe simply
+  // did not move, which reads as broken rather than as unimplemented. One shared binding now, with the region
+  // map, so neither can quietly stop working on a device nobody here is holding.
+  const spinBy = (dx, dy) => {
+    // ⛔ DRAG THE SURFACE, NOT THE ANGLE — the conversion below is unchanged, only where it gets its pixels.
+    const DEG = 180 / Math.PI;
+    const cLat = Math.max(0.15, Math.cos(view.pitch * Math.PI / 180));
+    view.yaw += (dx / view.r) * DEG / cLat;
+    view.pitch = Math.max(-89, Math.min(89, view.pitch + (dy / view.r) * DEG));
+    paint(true);
+  };
+  const zoomBy = (factor) => {
+    // ⛑ the same rule the wheel always used; a pinch is just another way to ask for it
+    const next = view.r * factor;
+    const px = Math.min(cv.width, cv.height);
+    if (next > floorRadius(px)) {
+      const c = unproject(view.cx, view.cy, view);
+      const rid = c ? regionNearest(c.lon, c.lat) : null;
+      if (rid) {
+        if (readout) readout.textContent = `The world map ends near ${WORLD_TIER_FLOOR_DEG}° — below it the ground is drawn, not generated. Entering ${CONTENT.locations?.[rid]?.name || rid}.`;
+        mapTier = "region"; mapFocus = rid; renderMap(); return;
+      }
+    }
+    view.r = Math.max(120, Math.min(floorRadius(px), next));
+    paint(true); clearTimeout(cv._z); cv._z = setTimeout(() => paint(false), 140);
+  };
+  bindGesture(cv, {
+    onDown: () => { dragging = true; },
+    onMove: (x, y, dx, dy) => { if (dragging) spinBy(dx, dy); },
+    onUp: () => { if (dragging) { dragging = false; paint(false); } },
+    onZoom: (factor) => zoomBy(factor),
+    // ⚠️ A TAP FRAMES A PLACE, exactly as a click does — the same `nearest` and the same `flyTo`, so a phone
+    // and a mouse agree about what tapping the world does.
+    // ⛑ My first cut called `pickAt`, which is the REGION map's picker and does not exist in this scope. The
+    // scope scan caught it before it ever ran: an undeclared read here would have thrown on the first tap.
+    onTap: (x, y) => {
+      const p = nearest(x, y);
+      if (!p) return;
+      const wp = CONTENT.locations?.[p.id]?.worldPos;
+      if (!wp) return;
+      const isRegion = p.kind === "region";
+      flyTo(wp.colatitude - 90, wp.longitude, isRegion ? 26 : 8);
+      if (readout) readout.textContent = `${p.name}${isRegion ? " — the region, framed" : ""} · tap again to go closer, or use the breadcrumb for the list`;
+    },
+  });
   cv.onmousemove = (e) => {
     if (dragging) {
-      // ⛔ DRAG THE SURFACE, NOT THE ANGLE. A fixed 0.35° per pixel is only ever right at one zoom and
-      // one latitude. Zoomed in to r≈1900 it moves the world TWELVE TIMES too fast, so the ground flies
-      // out from under the cursor and reads as inverted — which is what Erik saw the second time, on a
-      // sign that had already been corrected and was right.
-      // ⚠️ The projection gives the exact conversion: a point sits at x = cos(lat)·sin(lon+yaw)·r, so
-      // ∂x/∂yaw = r·cos(lat) near the view centre and a pixel of drag is (dx / (r·cos(lat))) radians.
-      // Latitude matters as much as zoom: near the Crossing cos(lat) is small, so the same pixel is a
-      // much larger turn — the pole is exactly where the old constant felt worst.
-      const DEG = 180 / Math.PI;
-      const cLat = Math.max(0.15, Math.cos(view.pitch * Math.PI / 180));
-      view.yaw += ((e.offsetX - lastX) / view.r) * DEG / cLat;
-      view.pitch = Math.max(-89, Math.min(89, view.pitch + ((e.offsetY - lastY) / view.r) * DEG));
-      lastX = e.offsetX; lastY = e.offsetY;
-      paint(true);
+      // ⛑ the spin itself is `spinBy` above, driven by whichever pointer arrived. This branch exists only
+      // to keep the HOVER work below from running mid-drag.
       return;
     }
     const p = nearest(e.offsetX, e.offsetY);
@@ -14686,36 +14805,8 @@ function wireWorldGlobe() {
     const rid = CONTENT.locations?.[p.id]?.regionId || CONTENT.locations?.[p.id]?.region || p.region;
     if (rid) { mapTier = "region"; mapFocus = rid; renderMap(); }
   };
-  cv.onwheel = (e) => {
-    e.preventDefault();
-    // ⚠️ THE CAP MOVED BECAUSE THE FLOOR MOVED. 1.6× stopped at a ~48° span, which was as far as the
-    // raster could be pushed before it read as blocks; the generator has no resolution limit, so the
-    // ceiling is now what the eye wants rather than what the bake could hold.
-    // ⚠️ AND THE GESTURE STAYS CHEAP: coarse while the wheel turns, sharp 140ms after it stops — so the
-    // detail patch is built once per SETTLED view, never once per wheel tick, which is what lets its
-    // budget be generous without the zoom feeling heavy.
-    const next = view.r * (e.deltaY > 0 ? 0.9 : 1.11);
-    const px = Math.min(cv.width, cv.height);
-    // ⛔ THE WORLD TIER BOTTOMS OUT WHERE IT STOPS SAYING ANYTHING (SNG-414). Zooming past the floor
-    // does not zoom — it HANDS OFF to the region, which is authored and therefore has something to say
-    // at that scale. ⚠️ Measured, not chosen: below ~0.25° of ground the generator produces no new
-    // structure, which lands the floor at a ~10° span. Everything below it was magnification.
-    if (next > floorRadius(px)) {
-      const c = unproject(view.cx, view.cy, view);
-      const rid = c ? regionNearest(c.lon, c.lat) : null;
-      if (rid) {
-        // ⚠️ say WHY the globe stopped, or the handoff reads as the map giving up
-        // ⚠️ say WHY the globe stopped, or the handoff reads as the map giving up. ⛔ AND SAY IT THROUGH
-        // A SURFACE THAT EXISTS: my first version called an `announce()` that does not exist in this
-        // file, inside a try/catch — a silent no-op, which is the failure class this suite keeps
-        // catching. The readout is the element the globe already talks through.
-        if (readout) readout.textContent = `The world map ends near ${WORLD_TIER_FLOOR_DEG}° — below it the ground is drawn, not generated. Entering ${CONTENT.locations?.[rid]?.name || rid}.`;
-        mapTier = "region"; mapFocus = rid; renderMap(); return;
-      }
-    }
-    view.r = Math.max(120, Math.min(floorRadius(px), next));
-    paint(true); clearTimeout(cv._z); cv._z = setTimeout(() => paint(false), 140);
-  };
+  // ⛑ THE WHEEL IS `bindGesture`'s NOW, and so is the pinch — both arrive at `zoomBy` above, which is the
+  // body this handler used to hold, floor handoff and all. One rule, two ways of asking for it.
   for (const b of app.querySelectorAll("[data-globelayer]")) b.onclick = () => {
     layer = b.dataset.globelayer;
     for (const o of app.querySelectorAll("[data-globelayer]")) o.classList.toggle("selected", o === b);

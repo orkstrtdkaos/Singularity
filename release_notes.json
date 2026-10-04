@@ -16,6 +16,18 @@
   "next": [],
   "releases": [
     {
+      "version": "2.18.5",
+      "date": "2026-10-04",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "The maps work on a phone",
+          "summary": "Spin the world and pinch the regional map with your fingers.",
+          "detail": "The world globe and the regional map both only ever listened for a mouse — a drag and a scroll wheel — so on a phone neither of them moved at all, which looks like a broken map rather than a missing feature. Both now take a finger: drag to spin the world or pan the region, pinch to zoom either, and tap a place to choose it. The page no longer scrolls out from under you while you are doing it. The skill wheel has worked this way for a while and the other two surfaces never got the same treatment; all three share one piece of code now, so none of them can quietly stop working on a device again."
+        }
+      ]
+    },
+    {
       "version": "2.18.4",
       "date": "2026-10-04",
       "entries": [

@@ -1,4 +1,4 @@
-<!-- status: READY except two rulings marked ⬜ ERIK. Amends WORKORDER_aevi_20261004_map_round2 (B2, B5, B6): the map reads the LIVE world (losses, growth, broken powers, taken holds, held gates, standing); a player's holds and bands are a realm with ground of their own; the watch is what carries it out along the roads; and Both draws the nanite -->
+<!-- status: READY except one ruling marked ⬜ ERIK (the reach curve). R4.3 ruled 2026-10-04: neutral unless they clash. Amends WORKORDER_aevi_20261004_map_round2 (B2, B5, B6): the map reads the LIVE world (losses, growth, broken powers, taken holds, held gates, standing); a player's holds and bands are a realm with ground of their own; the watch is what carries it out along the roads; and Both draws the nanite -->
 # AMENDMENT: Aevi → CCode · 2026-10-04 · round 4: the map reads the world as it is now, and the player holds ground too
 
 **Aevi (PO).** Erik, today:
@@ -55,8 +55,8 @@ every lord in the world: no special case for players, which is what *"territory 
 - **The army reaches from home.** The band's home hold (`band.from`) is the **seat** and reaches with the **whole band**:
   it can march from there. Every other hold reaches with the hands that are there.
 - **The watch is the reach.** Eyes at a hold = `watchOf(holding).length` (garrison, hands on the watch, `watch: true`
-  features) + `sense` features it does not already count (the tower). Each hold's radius × **(1 + 0.15 per pair of
-  eyes)**, capped ×1.6.
+  features) + `sense` features it does not already count (the tower). Each hold's radius × **(1 + 0.15 per
+  watcher)**, capped ×1.6.
 - **Walking the bounds is real now.** A realm that keeps any watch walks its own roads at **0.6** of the cost (B3's
   routed road cells), so its ground runs out along them. That is the *"eyes on the road"* your CCODE-568 note said
   nothing implemented. Patrolling merged into the watch (step 94), and the watch now carries the hold's ground out along
@@ -83,19 +83,30 @@ With the watch: **9.9 days along the east road**, a quarter of the valley. Nobod
 But Threshold Post is Silas's and sits at the Crossing, so with realms on, a small piece of the hub is his. It is a
 player's ground, so that is correct.
 
-## R4.3 · Allies share ground; rivals contest it ⬜ ERIK (who counts as an ally)
+## R4.3 · Allies and neutrals share ground; only rivals contest it ✅ ERIK
 
-Today two powers over the same ground are a winner and a stripe. The Fellowship and Millbrook's Elder Panel **both seat at
-Millbrook**, so the 33 take the council's whole map away from it, and Mara Wells, who keeps the council's order, rides
-with the Fellowship.
+> **Erik, 2026-10-04:** *"Some alliances are obvious, as you have already ruled with the Millbrook Council. Others, such as
+> the Castellany of the Echo Crossing, are ok to be assumed neutral to each other unless they clash. This will be fertile
+> ground for alliances, trade, vassals, betrayals and narratives."*
 
-- **Allies do not contest.** The fill goes to the stronger. The weaker keeps **its own border**, dashed in its colour,
-  with *"· ally"* by its name (the mock's `paintAllyBorders`, from each power's own claim mask, which the walk already
-  computes). Two powers sharing a town, visibly.
-- **Rivals** behave as today (stripes within 15%).
-- My proposal for *who is an ally*: **standing > 0, or the band carries one of the power's people** (Mara Wells), and a
-  player's own characters are always allies of each other (Silas and Loki). Standing < 0 is a rival. Neutral (0) is
-  treated as a rival, which is how B2 works today. **Erik's call.**
+Today every overlap is a winner and a stripe. That paints every pair of neighbours as at war. Three relations, one
+function `relationOf(a, b, character)`, read by the map, the hover and the GM:
+
+| relation | when | the map |
+|---|---|---|
+| **ally** | standing > 0 · the band carries one of the power's people (Mara Wells, the Elder Panel) · two characters of one player (Silas and Loki) | fill to the stronger; the weaker keeps **its own border, dashed**, *"· ally"* |
+| **neutral** (the default) | anything not ally or rival | fill to the stronger; the weaker keeps **its own border, dotted**, *"· neutral"* |
+| **rival** | they **clashed**: standing < 0 · blood either way (`lost`/`lostToYou` > 0, `holdLost`) · a hold taken (`holdsTaken`) · a raid of theirs on your hold · authored `rivals` between two powers | stripes within 15%, as B2 draws them now |
+
+- The inner border is drawn only for a power **seated in view**. A neighbour whose claim reaches in from off the map is
+  the hover's to tell, otherwise the valley carries five nested borders (measured: Radiant and Harmonic both reach in).
+- Each power's own claim mask is already computed by the walk; keep it on the result (`own[id]`) instead of folding it
+  away.
+- ⚑ **The relation moves, and the map shows it moving.** The first raid turns the Castellany's dotted line into
+  stripes. That is Erik's *"fertile ground"*: the map is where a player sees an alliance, a vassal or a betrayal happen.
+  (Vassals, trade and betrayal as verbs are not in this order; the relation function is where they will land.)
+
+Canvas: panels 1 and 4 of *"The Fellowship's ground"* show the same valley, neutral and then after a clash.
 
 ## R4.4 · The reach curve ⬜ ERIK
 
@@ -120,7 +131,8 @@ holds and the Fellowship simply reaches further.
   anchor to the player; a held gate anchors whoever holds it.
 - A fixture character with a band and three holds draws a realm whose seat reaches with the whole band, whose holds reach
   with their own hands, and whose ground **grows with eyes and runs out along its roads**; emptying the watch shrinks it.
-- Two allied powers on one seat draw one fill and two borders; two rivals draw stripes.
+- Two allied powers on one seat draw one fill and two borders (dashed); two neutral neighbours draw one fill and a dotted
+  border; a recorded clash turns the pair to stripes on the next paint.
 - Both shows the nanite dots.
 - ⚠️ **Fixture worlds, not the live saves** (§364, and the population-coupled gates of this month).
 

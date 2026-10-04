@@ -121,3 +121,47 @@ to count the same thing twice. Delete the branch and the block together; note it
 - the gates in §4.3 are green on fixtures
 
 — Aevi, PO
+
+---
+
+## §8 · AMENDMENT 2026-10-04 · meaning is read where you stand, not only from the place's own tags
+
+> **Erik:** *"Make sure the meaning isn't just limited to the immediate location, especially for holds that can move like
+> the Standing Annex. It is located at the Made Gate right now, which is next to the Whistling Woman Post and close to
+> Millbrook... so there should be a decent amount of meaning nearby."*
+
+**Measured on Loki** (9 people present, as the game counts them):
+
+| | meaning read | his ten meaning crafts |
+|---|---|---|
+| today: the annex's own place, its own tags only | **0.10** + presence | **65%**, *little meaning* |
+| with §8.1–§8.3 | **0.53** + presence | **86%**, Workable (near Strong) |
+
+What is around him, from the Made Gate: Millbrook 0.45 at 0.15 days, the Watershed Road 0.35 at 0.15, the Made Gate
+itself 0.35 (with its hold's shrine and memorial), the Whistling Woman Post 0.20 at 0.11, the Kindly Rest (sacred)
+0.70 at 1.5 days. None of it reaches a craft today.
+
+Four defects, each measured:
+
+1. **Meaning does not spread.** `meaningDensity` answers for the one location record and nothing near it. Read it as a
+   **field**, the same one B7 draws on the map: every place lends its meaning to the ground around it, falling off with
+   walking distance, **reach by size** (site 0.3 days, settlement 1, region 2, +0.5 for `sacred`/`locus`). At a spot:
+   **the strongest nearby contribution carries it, the second adds a quarter** (the combination rule again, one shape
+   for both), then presence and auras where you stand add on top. One function, read by the craft card, the roll and
+   the map, so the violet on the map is the number on the card.
+2. **A hold's shrine counts only for its owner.** `holdingMeaningAura(character, …)` walks the reader's own holds. The
+   shrine and memorial at the Made Gate are Silas Weir's hold, so Loki standing beside them gets none of it. A shrine is
+   a shrine: read meaning features from **every** hold at the place (`world/holds/<region>.json` already lists them), not
+   just the reader's. (Pools and sinks, `holdingFieldDelta`, have the same owner-only shape: same fix.)
+3. **A moving hold leaves its place behind.** The Standing Annex is a powered hold now at `gen-the-made-gate`, but its
+   own place `gen-the-standing-annex` still sits where it was minted: **1.0 walking day** from the Made Gate. Standing in
+   the annex reads the ground a day away. When a hold moves, its place's `worldPos` follows its `locationId` (and the
+   ground, meaning and field are read there). Reconcile repairs the annex once.
+4. **Generated places have no tier**, so they never get the settlement bonus: the Made Gate (a gate, a ward-line, a
+   waygate, a memorial, a shrine and a mine) reads tier *"–"*. A place that carries a hold reads at least `settlement`.
+
+⚠️ One thing for Erik rather than CCode: the **annex itself** carries a watchtower and a barracks in Loki's save; the
+shrine at the Made Gate belongs to Silas's hold there. With §8.2 that shrine counts for Loki anyway.
+
+*Done when:* Loki in the annex at the Made Gate reads **0.5 or more** meaning before presence, his meaning crafts read
+Workable or better, and moving the annex moves the number.

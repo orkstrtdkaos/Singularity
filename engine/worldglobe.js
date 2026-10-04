@@ -739,6 +739,14 @@ export function regionExtent(regionId, locations, { padFrac = 0.18, authored = n
     lo0: centre.lon - Math.min(180, r / conv), lo1: centre.lon + Math.min(180, r / conv),
     // a circle that swallows a hemisphere has no useful 2D map and wants splitting
     global: r > 80,
+    // ⛔ AND NEITHER HAS A CIRCLE ON THE POLE. `conv` is clamped at 0.12 because near the pole a degree of
+    // longitude is almost no ground at all — but the clamp does not make the box true, it only stops it being
+    // infinite. MEASURED on `the_center`: 11 places spanning **0.76° of actual ground** get a box **171° of
+    // longitude wide**, and 10 of its own 11 members fall OUTSIDE it. Twelve real roads drew nothing.
+    // ⚠️ A CALLER MUST SAY SO RATHER THAN DRAW AN EMPTY FRAME. At the pole longitude carries no ground
+    // distance, so two places 0.1° apart land on opposite sides of the map; no rectangle fixes that, only a
+    // polar projection or a world that does not stack a country on the axis. Both are above this function.
+    polar: conv <= 0.12,
   };
 }
 
@@ -835,6 +843,158 @@ export function roadNetwork(locations, { k = 1.08 } = {}) {
     } else kept.push(e);
   }
   return { roads: kept, folded: dropped, positions: P };
+}
+
+/** ⛔ ROADS THAT ARE ROADS — each connection routed least-cost over the real ground, instead of an arc drawn
+ *  between two dots. (AEVI B3, from Erik: *"the map itself should show roads between the places."*)
+ *
+ *  ⛑ THE CONNECTION GRAPH IS UNTOUCHED. `roadNetwork` still says WHICH places are joined and `walkingDays` still
+ *  says HOW FAR; this changes only the line. A road that looked like a straight hop over a ridge now goes round it,
+ *  and the hop still takes the same number of days.
+ *
+ *  ⚠️ A USED CELL COSTS `reuse` (0.32), SO ROADS JOIN INTO TRUNKS. Routed independently they run as a bundle of
+ *  near-parallel lines through the same pass; made cheap to share, a later road bends to MEET an earlier one and
+ *  they travel together, which is how roads actually grow. Primary-first then shortest-first, so trunks form around
+ *  the roads that matter and the tracks hang off them.
+ *
+ *  ⚠️ WHICH MEANS THE ORDER IS PART OF THE RULE, and ties in it must break the same way every run or the same
+ *  world routes differently twice. Hence the id tiebreak: without it `sort` is free to reorder equal-length roads
+ *  and the trunks move.
+ *
+ *  ⚠️ AND A RIM PENALTY, or a route slides along the frame edge because that is cheaper than crossing the ground
+ *  — an artefact of where the canvas was cut, not a fact about the world.
+ *
+ *  ⛑ PURE, and expensive (Aevi measured 0.9–3.9s a region): the caller caches. `step` is B1's one ground-cost
+ *  rule, handed in; `toScreen`/`toWorld` are the region base's own projection. Returns screen-space paths. */
+/** ⛑ Where a segment leaves the grid: a parametric clip of here→away against the cell rectangle, returning the
+ *  last cell still inside. That is the EXIT POINT — the spot on the frame a road runs to before it stops. */
+function frameCellToward(here, away, gw, gh) {
+  const dx = away.x - here.x, dy = away.y - here.y;
+  if (!dx && !dy) return null;
+  let tMax = 1;
+  const slab = (p, d, lo, hi) => {
+    if (Math.abs(d) < 1e-12) return;
+    const t1 = (lo - p) / d, t2 = (hi - p) / d;
+    const exit = Math.max(t1, t2);
+    if (exit < tMax) tMax = Math.max(0, exit);
+  };
+  slab(here.x, dx, 0, gw - 1);
+  slab(here.y, dy, 0, gh - 1);
+  const x = Math.max(0, Math.min(gw - 1, Math.round(here.x + dx * tMax)));
+  const y = Math.max(0, Math.min(gh - 1, Math.round(here.y + dy * tMax)));
+  const i = y * gw + x;
+  return (i === here.y * gw + here.x) ? null : { x, y, i };
+}
+
+export function routeRoads(roads, locations, { W, H, step, toScreen, toWorld, extent = null,
+  cell = 2, reuse = 0.32, rim = 4, budgetMs = 0 } = {}) {
+  if (!W || !H || typeof step !== "function" || typeof toScreen !== "function" || typeof toWorld !== "function") return null;
+  const gw = Math.ceil(W / cell), gh = Math.ceil(H / cell), N = gw * gh;
+  // ⚠️ ONE LONGITUDE CONVENTION. A region extent runs UNWRAPPED while a stored longitude is ±180; comparing them
+  // raw is the trap that put a power from the far side of the world in Erik's valley (CCODE-595) and drew a road
+  // 357° round the planet to join two places 3° apart (CCODE-594).
+  const inF = (lon) => {
+    if (!extent) return lon;
+    const mid = (extent.lo0 + extent.lo1) / 2;
+    let v = lon; while (v - mid > 180) v -= 360; while (mid - v > 180) v += 360; return v;
+  };
+  const cellOf = (id) => {
+    const l = locations[id];
+    if (!l?.worldPos) return null;
+    const s = toScreen(inF(Number(l.worldPos.longitude)), Number(l.worldPos.colatitude) - 90, W, H);
+    const x = Math.floor(s.x / cell), y = Math.floor(s.y / cell);
+    return { x, y, i: y * gw + x, onFrame: x >= 0 && y >= 0 && x < gw && y < gh, s };
+  };
+  const world = new Array(N);
+  for (let y = 0; y < gh; y++) for (let x = 0; x < gw; x++) world[y * gw + x] = toWorld(x * cell + cell / 2, y * cell + cell / 2, W, H);
+  const atRim = new Uint8Array(N);
+  for (let y = 0; y < gh; y++) for (let x = 0; x < gw; x++) atRim[y * gw + x] = Math.min(x, y, gw - 1 - x, gh - 1 - y) < 3 ? 1 : 0;
+
+  const used = new Uint8Array(N);                       // cells an earlier road already runs through
+  const tierOf = (id) => String(locations[id]?.tier || "");
+  const lives = (id) => tierOf(id) === "settlement" || tierOf(id) === "region";
+  // ⛑ PRIMARY is a road between two places people LIVE in; anything touching a site is a TRACK — somewhere you
+  // go TO. That is the whole classification, and it is what decides cased-and-cream against dashed.
+  const primary = (e) => lives(e.a) && lives(e.b);
+
+  // ⛑ A HEAP, local on purpose: a binary heap is a DATA STRUCTURE, not a rule. Two copies of a RULE drift — that
+  // is what this codebase keeps getting bitten by — and two copies of a heap do not.
+  const mkHeap = () => { const k = [], v = []; return {
+    get size() { return k.length; },
+    push(key, val) { k.push(key); v.push(val); let i = k.length - 1;
+      while (i > 0) { const p = (i - 1) >> 1; if (k[p] <= k[i]) break; [k[p], k[i]] = [k[i], k[p]]; [v[p], v[i]] = [v[i], v[p]]; i = p; } },
+    pop() { const key = k[0], val = v[0], lk = k.pop(), lv = v.pop();
+      if (k.length) { k[0] = lk; v[0] = lv; for (let i = 0; ;) { const l = 2 * i + 1, r = l + 1; let m = i;
+        if (l < k.length && k[l] < k[m]) m = l; if (r < k.length && k[r] < k[m]) m = r; if (m === i) break;
+        [k[m], k[i]] = [k[i], k[m]]; [v[m], v[i]] = [v[i], v[m]]; i = m; } }
+      return [key, val]; } }; };
+
+  const order = (roads || []).slice().sort((x, y) =>
+    (primary(y) ? 1 : 0) - (primary(x) ? 1 : 0)
+    || (x.d || 0) - (y.d || 0)
+    || `${x.a}\u0000${x.b}`.localeCompare(`${y.a}\u0000${y.b}`));
+
+  const out = [], exits = [];
+  const cost = new Float64Array(N), prev = new Int32Array(N);
+  const t0 = Date.now();
+  let unrouted = 0, ranOut = false;
+  for (const e of order) {
+    if (budgetMs && Date.now() - t0 > budgetMs) { ranOut = true; unrouted++; continue; }
+    const A = cellOf(e.a), B = cellOf(e.b);
+    if (!A || !B) { unrouted++; continue; }
+    // ⛔ A ROAD THAT LEAVES THE REGION STILL RUNS TO THE EDGE AND STOPS, the way every paper road atlas does
+    // (SNG-423). Both ends outside and it is not this region's road at all.
+    if (!A.onFrame && !B.onFrame) continue;
+    let from = A, to = B, leaving = null;
+    if (!A.onFrame || !B.onFrame) {
+      const here = A.onFrame ? A : B, away = A.onFrame ? B : A;
+      // ⚠️ THE EXIT IS WHERE THE ROAD CROSSES THE FRAME, NOT WHERE THE TOWN IS. My first cut recorded the
+      // town's own cell, so every leaving road went undrawn and its label landed on top of the place name
+      // instead of out at the edge — a pile of destinations sitting on the one place they are not.
+      const edge = frameCellToward(here, away, gw, gh);
+      if (!edge) continue;
+      from = here; to = edge;
+      leaving = { from: A.onFrame ? e.a : e.b, to: A.onFrame ? e.b : e.a };
+    }
+    cost.fill(Infinity); prev.fill(-1);
+    const h = mkHeap();
+    cost[from.i] = 0; h.push(0, from.i);
+    let done = false;
+    while (h.size) {
+      const [c, i] = h.pop();
+      if (c > cost[i]) continue;
+      if (i === to.i) { done = true; break; }
+      const x = i % gw, y = (i / gw) | 0, a = world[i];
+      for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
+        if (!dx && !dy) continue;
+        const X = x + dx, Y = y + dy;
+        if (X < 0 || Y < 0 || X >= gw || Y >= gh) continue;
+        const j = Y * gw + X;
+        let w = step(a.lat, a.lon, world[j].lat, world[j].lon);   // the one ground rule
+        if (used[j]) w *= reuse;                                   // cheaper where a road already runs
+        if (atRim[j]) w *= rim;                                    // dearer along the frame
+        const c2 = c + w;
+        if (c2 < cost[j]) { cost[j] = c2; prev[j] = i; h.push(c2, j); }
+      }
+    }
+    if (!done) { unrouted++; continue; }
+    const path = [];
+    for (let i = to.i; i !== -1; i = prev[i]) { path.push(i); if (i === from.i) break; }
+    path.reverse();
+    // ⚠️ SHARED IS READ BEFORE THE PATH IS MARKED. Marked first, every cell is used and every road reports 1.0.
+    const shared = path.length ? path.reduce((n, i) => n + (used[i] ? 1 : 0), 0) / path.length : 0;
+    for (const i of path) used[i] = 1;
+    const pts = path.map((i) => ({ x: (i % gw) * cell + cell / 2, y: ((i / gw) | 0) * cell + cell / 2 }));
+    out.push({
+      a: e.a, b: e.b, d: e.d, primary: primary(e), track: !primary(e), shared, points: pts,
+      leaves: !!leaving,
+    });
+    // ⛑ and it says where it is going, which is the only true thing about its far end on this map
+    if (leaving) exits.push({ ...leaving, at: pts[pts.length - 1], primary: primary(e) });
+  }
+  // ⛑ `unrouted` is reported rather than swallowed: a caller that caps the work must be able to tell a finished
+  // map from a half-drawn one.
+  return { roads: out, exits, unrouted, ranOut, ms: Date.now() - t0, gw, gh, cell };
 }
 
 /** ⛔ SNG-421 — A ROAD BENDS BECAUSE SOMEBODY FOUND THE WAY ROUND, so derive the bend from the ground

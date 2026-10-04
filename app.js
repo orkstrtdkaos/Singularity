@@ -46,7 +46,7 @@ import { contributionsBy, lookKey } from "./engine/canon.js";   // CCODE-422: wh
 import { sourcesHere, meaningDensity } from "./engine/substrate.js";   // ✅ Erik 2026-10-04: the map’s meaning register reads the SAME function the metaphysical ceiling does   // ⛔ Erik 2026-09-12: the four sources and how well each answers HERE
 import { groundForDecl, groundTag, substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace, groundHere, groundCardFor, naniteAt, bandFactor, peoplePresentAt } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
 import { sceneImage, itemImage, artworkStyle, getArtMode, setArtMode, imagesEnabled, ensureImage, aestheticFor, regenPromptFor, onImageMinted, onComposedLookup, swapImageUrl, forgetImageUrl, bustedURL, isBustedURL, mintAction, IMAGE_MIN_BYTES, regenerateImage, acceptImage, isGeneratedImage, toggleKeep, likenessClause, houseStyleFor, sanitizeImagePrompt, imageURLFor, isMinorSubject, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor, lookFor, serviceRefusal, refusedSaid} from "./engine/art.js"; // SNG-401: draw it again without destroying the one they have
-import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, regionExtent, bendRoad, roadNetwork, clipToFrame } from "./engine/worldglobe.js";
+import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, regionExtent, bendRoad, roadNetwork, clipToFrame, routeRoads, makeGroundCost, GROUND_COST } from "./engine/worldglobe.js";
 import { glyphFor, drawGlyph } from "./engine/mapicons.mjs";   // SNG-409 §4: a pole must never read as a town   // SNG-390: the globe, read-only
 import { walkingDays, milesFor, worldPosForGenerated, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout, fieldBlobs, fieldAlpha, placeLabels } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
@@ -184,7 +184,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.16.21";
+const APP_VERSION = "2.17.0";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -12376,6 +12376,49 @@ let _regionEsc = null;
 /** ⛔ A STACK IS WHATEVER A SINGLE CLICK CANNOT SEPARATE, which is a question about the SCREEN, not about whether
  *  two places share a coordinate. 21 of 157 places share an exact point; 39 of 95 are inside another's click radius.
  *  ⚠️ Single-link, so a chain of near-neighbours is one fan rather than several overlapping ones. */
+/** ⛔ B3 · ROUTED ROADS, CACHED PER REGION. Erik: *"the map itself should show roads between the places."*
+ *  MEASURED across all 38 regions: **640ms a region on average, 2.97s at worst** (the Echo Vale, which has 40
+ *  roads on its frame and 30 of them leaving) — inside Aevi's 0.9–3.9s estimate.
+ *  ⚠️ AND MY FIRST MEASUREMENT OF THIS SAID 165ms, because at the time a road that left the region was not being
+ *  drawn at all. The cheap number was the bug's number. Re-measured after the fix.
+ *  ⛑ STILL CACHED RATHER THAN BAKED: paid once per region per session, against a build artefact and a whole
+ *  staleness class forever. `routeRoads` takes a `budgetMs` if that trade ever stops holding — deliberately NOT
+ *  used here, because a half-drawn road map is worse than a slow one.
+ *  ⚠️ Keyed on the TERRAIN OBJECT so a terrain reload invalidates by identity rather than by my remembering
+ *  to clear it, and on the place count so authoring new content does too. */
+const _roadsByTerrain = new WeakMap();
+function routedRoadsFor(regionId, netRoads, ext, base, W, H) {
+  if (!_terrain || !ext || ext.polar) return null;
+  let by = _roadsByTerrain.get(_terrain);
+  if (!by) { by = new Map(); _roadsByTerrain.set(_terrain, by); }
+  const key = `${regionId}|${Math.round(W)}|${Math.round(H)}|${Object.keys(CONTENT.locations || {}).length}`;
+  if (by.has(key)) return by.get(key);
+  const G = makeGroundCost(_terrain, { ...GROUND_COST.road, extent: ext });
+  const out = routeRoads(netRoads, CONTENT.locations, {
+    W, H, step: G.step, toScreen: base.toScreen, toWorld: base.toWorld, extent: ext, cell: 2,
+  });
+  by.set(key, out);
+  return out;
+}
+
+/** ⛑ A least-cost path on a 2px grid moves in eight directions, so it arrives as a staircase. The SMOOTHING
+ *  LIVES HERE, in the drawing, and not in the router: the router returns the route that was actually cheapest,
+ *  and a smoothed copy of it is a picture of that route. Two passes of Chaikin, which keeps the ends pinned. */
+function smoothRoad(pts, passes = 2) {
+  let p = pts;
+  for (let n = 0; n < passes && p.length > 2; n++) {
+    const out = [p[0]];
+    for (let i = 0; i < p.length - 1; i++) {
+      const a = p[i], b = p[i + 1];
+      out.push({ x: a.x * 0.75 + b.x * 0.25, y: a.y * 0.75 + b.y * 0.25 });
+      out.push({ x: a.x * 0.25 + b.x * 0.75, y: a.y * 0.25 + b.y * 0.75 });
+    }
+    out.push(p[p.length - 1]);
+    p = out;
+  }
+  return p;
+}
+
 const TIER_RANK = { region: 3, settlement: 2, site: 1 };
 function clusterMarks(marks, radius = REGION_HIT) {
   const seen = new Set(), out = [];
@@ -12708,52 +12751,75 @@ function paintRegionMap(regionId) {
     // ⚠️ These are STRAIGHT. A road bends for a reason and a straight arc erases the reason — but a
     // straight road that exists beats a bent one that is somewhere else, and Aevi's bends can ride on top
     // the moment her waypoints and the positions agree.
-    ctx.save();
-    ctx.strokeStyle = "rgba(206,182,136,0.62)"; ctx.lineWidth = 1.4;
-    ctx.lineJoin = "round"; ctx.lineCap = "round";
-    // ⚠️ the network folds journeys that go through another town onto their legs, so a triangle does not
-    // draw its third side alongside the other two (SNG-422)
+    // ⛔ B3 · THESE ARE ROUTED, NOT ARCED. Erik: *"The lines on the map currently are just arcing connectors.
+    // These connectors are probably fine to determine distance or days to travel and connections, but the map
+    // itself should show roads between the places."* So each one is now a least-cost path over the real ground.
+    // ⛑ THE CONNECTION GRAPH IS UNCHANGED. `roadNetwork` still says which places are joined and `walkingDays`
+    // still says how far — only the LINE changed. MEASURED on the valley: 9 of 17 roads bend more than 6% off
+    // the straight line, the worst going 1.96× round, and 11 of 17 share ground with another as a trunk.
+    // ⚠️ the network folds journeys that go through another town onto their legs, so a triangle does not draw
+    // its third side alongside the other two (SNG-422)
     const net = roadNetwork(CONTENT.locations, { k: 1.1 });
-    const isRoad = new Set(net.roads.map((e) => (e.a < e.b ? e.a + "|" + e.b : e.b + "|" + e.a)));
+    const routed = routedRoadsFor(regionId, net.roads, ext, base, W, H);
     const exits = [];
-    const drawn = new Set();
-    for (const id of Object.keys(CONTENT.locations || {})) {
-      const l = CONTENT.locations[id];
-      if (!l?.worldPos || (l.regionId || l.region) !== regionId) continue;
-      const a0 = base.toScreen(l.worldPos.longitude, l.worldPos.colatitude - 90, W, H);
-      for (const other of l.connections || []) {
-        const key = id < other ? id + "|" + other : other + "|" + id;
-        if (drawn.has(key)) continue;
-        drawn.add(key);
-        if (!isRoad.has(key)) continue;                        // this journey is carried by its legs
-        const o2 = CONTENT.locations[other];
-        if (!o2?.worldPos) continue;
-        // ⚠️ AN EDGE LEAVING THE REGION still draws, running off the frame — a region with no roads out
-        // reads as a cul-de-sac, which is a lie about nearly all of them.
-        // ⛔ AND IT BENDS FOR A REASON. `bendRoad` searches sideways offsets and keeps the one costing the
-        // least CLIMB, which is why real roads follow valleys — so the shape comes from the ground rather
-        // than from invention. 143 of 182 edges find a detour worth taking; 39 stay straight because none
-        // does, and a straight road on flat ground is the honest answer rather than a missing feature.
-        // ⛔ A ROAD THAT LEAVES RUNS TO THE FRAME AND STOPS. Measured on this very region: 3 roads
-        // inside it, 20 leaving — drawing the leavers whole streaked twenty long lines across a map with
-        // three real roads on it, in near-parallel bundles because many head for the same far country.
-        const clip = clipToFrame({ lon: l.worldPos.longitude, lat: l.worldPos.colatitude - 90 },
-          { lon: o2.worldPos.longitude, lat: o2.worldPos.colatitude - 90 }, ext);
-        const route = bendRoad(_terrain, [l.worldPos.colatitude - 90, l.worldPos.longitude],
-          [clip.end.lat, clip.end.lon]);
-        const first = base.toScreen(route.points[0][1], route.points[0][0], W, H);
-        ctx.beginPath(); ctx.moveTo(first.x, first.y);
-        for (let i = 1; i < route.points.length; i++) {
-          const q = base.toScreen(route.points[i][1], route.points[i][0], W, H);
-          ctx.lineTo(q.x, q.y);
-        }
-        ctx.stroke();
-        // ⚠️ and it says where it is going, which is the only true thing about its far end on this map
-        if (clip.clipped) exits.push({ at: base.toScreen(clip.end.lon, clip.end.lat, W, H),
-          name: o2.name || other });
+    if (routed) {
+      const lines = routed.roads.map((r) => ({ r, pts: smoothRoad(r.points) }));
+      // ⚠️ EVERY CASING FIRST, THEN EVERY FILL. Cased road by cased road, a later road's dark edge cuts a
+      // notch straight across an earlier road's cream fill at each crossing, and a junction reads as a break
+      // in the road rather than a join.
+      const trace = (pts) => {
+        ctx.beginPath(); ctx.moveTo(pts[0].x, pts[0].y);
+        for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i].x, pts[i].y);
+      };
+      // a trunk is a road others chose to share, so it carries more traffic and draws heavier
+      const widthOf = (r) => (r.primary ? (r.shared > 0.25 ? 3.2 : 2.2) : 1.3);
+      ctx.save();
+      ctx.lineJoin = "round"; ctx.lineCap = "round";
+      ctx.strokeStyle = "rgba(24,20,14,0.55)";
+      for (const { r, pts } of lines) {
+        if (!r.primary || pts.length < 2) continue;
+        ctx.lineWidth = widthOf(r) + 2.4; trace(pts); ctx.stroke();
+      }
+      ctx.strokeStyle = "rgba(226,206,158,0.92)";
+      for (const { r, pts } of lines) {
+        if (!r.primary || pts.length < 2) continue;
+        ctx.lineWidth = widthOf(r); trace(pts); ctx.stroke();
+      }
+      // ⛑ A TRACK IS DASHED because it is not the same kind of thing: it ends at a site, somewhere you go TO,
+      // and a solid line of equal weight would claim a road where there is a path.
+      ctx.setLineDash([3.5, 3.5]);
+      ctx.strokeStyle = "rgba(198,176,132,0.72)";
+      for (const { r, pts } of lines) {
+        if (r.primary || pts.length < 2) continue;
+        ctx.lineWidth = widthOf(r); trace(pts); ctx.stroke();
+      }
+      ctx.setLineDash([]);
+      ctx.restore();
+      // ⚠️ ONE LABEL PER EXIT POINT, NAMING EVERY DESTINATION. Roads that leave toward the same far country
+      // leave through nearly the same spot, and a label apiece stacked them into an illegible pile — which is
+      // the same complaint Erik made about the lines themselves arriving in near-parallel bundles.
+      for (const x of routed.exits) {
+        const near = exits.find((g) => Math.hypot(g.at.x - x.at.x, g.at.y - x.at.y) < 26);
+        const name = CONTENT.locations?.[x.to]?.name || x.to;
+        if (near) { if (!near.names.includes(name)) near.names.push(name); }
+        else exits.push({ at: x.at, names: [name] });
       }
     }
-    ctx.restore();
+    // ⛔ AND A FRAME THAT CANNOT BE DRAWN SAYS SO. `the_center` sits on the axis: its 11 places span 0.76° of
+    // ground but their lon/lat box comes out 171° of longitude wide, and 10 of the 11 fall outside it — so a
+    // regional map of the Crossing would show an almost empty sheet with one building on it. A blank frame
+    // reads as a broken feature; a frame that explains itself is a finding somebody can act on.
+    if (ext.polar) {
+      ctx.save();
+      ctx.fillStyle = "rgba(226,214,180,0.72)";
+      ctx.font = "italic 600 11px system-ui, sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText("No flat map here — this ground sits on the world's axis.", W / 2, H / 2 - 7);
+      ctx.font = "italic 10px system-ui, sans-serif";
+      ctx.fillStyle = "rgba(226,214,180,0.5)";
+      ctx.fillText("Every road out is a bearing, not a line. Use the globe.", W / 2, H / 2 + 9);
+      ctx.restore();
+    }
     // the destinations, lettered at the frame — a road atlas exits its roads and names them
     ctx.save();
     ctx.fillStyle = "rgba(226,214,180,0.9)";
@@ -12761,7 +12827,10 @@ function paintRegionMap(regionId) {
     for (const ex of exits) {
       ctx.textAlign = ex.at.x > W * 0.72 ? "right" : ex.at.x < W * 0.28 ? "left" : "center";
       const dx = ex.at.x > W * 0.72 ? -4 : ex.at.x < W * 0.28 ? 4 : 0;
-      ctx.fillText("→ " + String(ex.name).slice(0, 20), ex.at.x + dx, Math.max(10, Math.min(H - 4, ex.at.y - 3)));
+      // two names, then a count: "Scour, Blocklands +1 →"
+      const shown = ex.names.slice(0, 2).map((n) => String(n).slice(0, 18)).join(", ");
+      const more = ex.names.length > 2 ? ` +${ex.names.length - 2}` : "";
+      ctx.fillText(shown + more + " →", ex.at.x + dx, Math.max(10, Math.min(H - 4, ex.at.y - 3)));
     }
     ctx.restore();
 

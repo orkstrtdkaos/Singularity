@@ -16,6 +16,24 @@
   "next": [],
   "releases": [
     {
+      "version": "2.17.0",
+      "date": "2026-10-04",
+      "entries": [
+        {
+          "kind": "feature",
+          "title": "The roads on a regional map are roads",
+          "summary": "Lines between places now follow the ground instead of cutting straight across it.",
+          "detail": "A road on a regional map used to be an arc drawn between two dots, which erased the reason the road is where it is. Each one is now routed over the real terrain, so it climbs round a ridge and keeps off the water the way a road built by people would. Roads heading the same way join into a trunk and travel together rather than running as a pair of near-parallel lines, and a track to an outlying site is drawn as a track rather than as a highway. Where a road leaves the map it still runs to the edge and says where it is going, but one label now names every destination leaving through that point instead of stacking a label apiece. None of this changes how far anywhere is or how many days it takes to get there."
+        },
+        {
+          "kind": "fix",
+          "title": "The Crossing says why it has no regional map",
+          "summary": "The hub of the world sits on the planet's axis, where a flat map cannot be drawn.",
+          "detail": "Every place in the Centre sits within three-quarters of a degree of the world's axis. On a flat sheet that corner of the world spreads across almost half the planet's longitude, so ten of its eleven places fell off their own map and the roads between them drew nothing at all. The map now says so plainly instead of showing an empty sheet, and points you at the globe, where those distances are true."
+        }
+      ]
+    },
+    {
       "version": "2.16.21",
       "date": "2026-10-04",
       "entries": [

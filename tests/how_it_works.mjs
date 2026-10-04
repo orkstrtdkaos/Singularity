@@ -36029,6 +36029,194 @@ console.log("\n── §414 · whose ground is this ──");
     /const cost = new Float64Array\(N\);/.test(rd("engine/influence.js")));
 }
 
+/* ══════════ §415 · ROADS THAT ARE ROADS ══════════ */
+// ✅ ERIK on the round-1 mockups: *"One primary thing we still need are ACTUAL roads drawn between places. The
+// lines on the map currently are just arcing connectors. These connectors are probably fine to determine distance
+// or days to travel and connections, but the map itself should show roads between the places."*
+//
+// ⛑ SO THE CONNECTION GRAPH IS UNTOUCHED, and this section asserts it: `roadNetwork` still decides WHICH places
+// are joined and `walkingDays` still decides HOW FAR. What changes is the LINE.
+//
+// ⚠️ THE RULE IS ASSERTED OVER A CONSTRUCTED SURFACE, not over the live world: the reuse discount makes the
+// result depend on ROUTING ORDER, so a gate that pinned today's roads would redden the day Aevi places a town.
+// The live sweep is `po/measure_roads.mjs`.
+console.log("\n── §415 · roads that are roads ──");
+{
+  const WG415 = await import("../engine/worldglobe.js");
+  const { loadContentHeadless: lch415 } = await import("./headless_content.mjs");
+  const C415 = await lch415();
+  const W415 = 160, H415 = 120;
+  // a flat world, 1 cost a step, so anything that bends is bending for a REASON the gate put there
+  const flat415 = (aLat, aLon, bLat, bLon) => Math.hypot(bLat - aLat, bLon - aLon);
+  const ext415 = { la0: 0, la1: 12, lo0: 0, lo1: 16 };
+  const toScreen415 = (lon, lat, w, h) => ({ x: ((lon - ext415.lo0) / 16) * w, y: (1 - (lat - ext415.la0) / 12) * h });
+  const toWorld415 = (x, y, w, h) => ({ lon: ext415.lo0 + (x / w) * 16, lat: ext415.la0 + (1 - y / h) * 12 });
+  // a location stores colatitude, so the fixture does too rather than inventing a shape the engine never sees
+  const L415 = (lat, lon, tier) => ({ tier, worldPos: { latitude: lat, colatitude: lat + 90, longitude: lon } });
+  const locs415 = {
+    west: L415(6, 2, "settlement"), east: L415(6, 14, "settlement"),
+    nw: L415(10, 2, "settlement"), ne: L415(10, 14, "settlement"),
+    near: L415(8, 2, "settlement"), nearE: L415(8, 14, "settlement"),
+    camp: L415(2, 8, "site"), faraway: L415(6, 300, "settlement"),
+  };
+  const opt415 = (over = {}) => ({ W: W415, H: H415, step: flat415, toScreen: toScreen415, toWorld: toWorld415, extent: ext415, cell: 4, ...over });
+
+  /* ---- 1 · ⛔ IT DRAWS A ROAD, AND THE CLASSIFICATION IS WHO LIVES AT THE ENDS ---- */
+  const one415 = WG415.routeRoads([{ a: "west", b: "east", d: 12 }], locs415, opt415());
+  check("§415: ⛔ A CONNECTION BECOMES A ROUTED LINE — a path of cells across the ground, not two dots and an arc",
+    !!one415 && one415.roads.length === 1 && one415.roads[0].points.length > 20
+    && one415.unrouted === 0 && one415.exits.length === 0);
+  check("§415: ⛔ …and a road between two places people LIVE in is primary, while anything touching a site is a track",
+    (() => {
+      const r = WG415.routeRoads([{ a: "west", b: "east", d: 12 }, { a: "west", b: "camp", d: 7 }], locs415, opt415());
+      if (!r || r.roads.length !== 2) return false;
+      const by = Object.fromEntries(r.roads.map((x) => [`${x.a}-${x.b}`, x]));
+      return !!by["west-east"] && !!by["west-camp"]
+        && by["west-east"].primary && !by["west-east"].track
+        && !by["west-camp"].primary && by["west-camp"].track;
+    })());
+  // ⛑ PRIMARY FIRST is what makes the trunks form around the roads that matter, so the order is part of the rule
+  check("§415: ⛑ …and the primary road is laid FIRST, so the track hangs off it rather than the other way round",
+    (() => {
+      const r = WG415.routeRoads([{ a: "west", b: "camp", d: 7 }, { a: "west", b: "east", d: 12 }], locs415, opt415());
+      return !!r && r.roads.length === 2 && r.roads[0].a === "west" && r.roads[0].b === "east";
+    })());
+
+  /* ---- 2 · ⚠️ A USED CELL IS CHEAPER, SO ROADS JOIN INTO TRUNKS ---- */
+  // two parallel roads across a flat sheet. Routed independently they stay parallel; made cheap to share, the
+  // second bends to MEET the first and they travel together, which is how roads actually grow.
+  // ⛑ MEASURED REACH: the discount pulls a parallel road in from 2.5 cells (shared 0.83), 5 cells (0.75) and
+  // 7.5 cells (0.65), and at 10 cells it stops — the detour costs more than the sharing saves. That limit is
+  // right rather than a shortfall: two roads a long way apart are two roads, and merging them would be a lie
+  // about the ground between. `near` sits 5 cells off, comfortably inside the reach and not on its edge.
+  const pair415 = [{ a: "west", b: "east", d: 12 }, { a: "near", b: "nearE", d: 12 }];
+  const joined415 = WG415.routeRoads(pair415, locs415, opt415());
+  const apart415 = WG415.routeRoads(pair415, locs415, opt415({ reuse: 1 }));
+  check("§415: ⚠️ A LATER ROAD JOINS AN EARLIER ONE — at reuse 1 two parallel roads share nothing and run as a bundle",
+    !!joined415 && !!apart415 && joined415.roads.length === 2 && apart415.roads.length === 2
+    && apart415.roads[1].shared === 0 && joined415.roads[1].shared > 0.3,
+    "this is the artefact Erik named: 'you would have two nearly parallel roads usually'");
+  // ⚠️ AND `shared` IS READ BEFORE THE PATH IS MARKED. Marked first, every cell is used and every road on the
+  // map reports 1.0 — a number that looks like a measurement and is only an ordering mistake.
+  check("§415: ⚠️ …and the FIRST road can share nothing, because nothing was laid before it",
+    !!joined415 && joined415.roads[0].shared === 0);
+
+  /* ---- 3 · ⚠️ A RIM PENALTY, OR THE ROAD FOLLOWS THE CUT OF THE CANVAS ---- */
+  // a ridge spanning the full height whose ONLY gap lies inside the rim band, so the edge is the cheap way round.
+  // ⚠️ THE GATE ASKS WHETHER THE PENALTY MOVES THE ROAD, not where its tipping point sits. My first cut
+  // asserted that `rim: 4` beats a 9× ridge — and it does NOT, correctly: when the only dry way really is round
+  // the edge, round the edge is the truth, and a road cost carrying `water: 30` must be able to say so. The rim
+  // penalty is there for the other case, where the edge is ordinary ground and the route slides along it because
+  // of where the canvas was cut. Pinning the tipping point would also pin `rim`'s default, which is a dial.
+  check("§415: ⚠️ A RIM PENALTY MOVES A ROAD OFF THE FRAME — the edge is a cut in the paper, not a feature of the world",
+    (() => {
+      const ridge = (aLat, aLon, bLat, bLon) => {
+        const base = Math.hypot(bLat - aLat, bLon - aLon);
+        return base * (Math.abs(bLon - 8) < 1.2 && bLat > 0.9 && bLat < 11.1 ? 9 : 1);
+      };
+      const band = (rim) => {
+        const r = WG415.routeRoads([{ a: "west", b: "east", d: 12 }], locs415, opt415({ step: ridge, rim }));
+        if (!r?.roads?.length) return -1;
+        return r.roads[0].points.filter((p) => p.y < 12 || p.y > H415 - 12).length;
+      };
+      const free = band(1), charged = band(16);
+      // the fixture must actually tempt the road onto the edge, or this check is vacuous
+      return free > 4 && charged === 0;
+    })());
+
+  /* ---- 4 · ⛔ THE SAME WORLD MUST ROUTE THE SAME WAY TWICE ---- */
+  // ⚠️ the reuse discount makes the result ORDER-DEPENDENT, so ties in the sort have to break the same way
+  // every run, or the trunks move between two renders of one unchanged map.
+  check("§415: ⛔ ROUTING IS REPRODUCIBLE — equal-length roads break their tie by id, not by sort order",
+    (() => {
+      const eq = [{ a: "west", b: "east", d: 12 }, { a: "nw", b: "ne", d: 12 }];
+      const sig = (r) => r.roads.map((x) => `${x.a}>${x.b}:${x.points.length}:${x.shared.toFixed(6)}`).join("|");
+      const a = WG415.routeRoads(eq, locs415, opt415());
+      const b = WG415.routeRoads(eq.slice().reverse(), locs415, opt415());
+      return !!a && !!b && a.roads.length === 2 && sig(a) === sig(b);
+    })());
+
+  /* ---- 5 · ⛔ THE CONNECTION GRAPH IS UNCHANGED, which is Erik's whole constraint ---- */
+  check("§415: ⛔ ROUTING TOUCHES NEITHER THE GRAPH NOR THE PLACES — distance and days are decided elsewhere",
+    (() => {
+      const edges = [{ a: "west", b: "east", d: 12 }, { a: "west", b: "camp", d: 7 }];
+      const before = JSON.stringify({ edges, locs: locs415 });
+      WG415.routeRoads(edges, locs415, opt415());
+      return JSON.stringify({ edges, locs: locs415 }) === before;
+    })(), "if this drifts, a cosmetic change to the map has silently changed how long a journey takes");
+
+  /* ---- 6 · ⛔ OFF THE FRAME IS AN EXIT, NEVER A CLAMPED ROUTE ---- */
+  // ⚠️ A CLAMP IS WHERE A WRONG COORDINATE HIDES — the same trap that put a power from the far side of the
+  // world in Erik's valley (§414) and drew a road 357° round the planet to join two places 3° apart.
+  // ⚠️ AND IT IS STILL DRAWN, RUNNING TO THE EDGE. My first cut recorded the exit at the TOWN and drew no road
+  // at all, so every destination leaving a region stacked its label on top of the one place it was not — caught
+  // only by rendering the valley and looking at it, because a suite does not paint a canvas.
+  check("§415: ⛔ A ROAD THAT LEAVES THE FRAME RUNS TO THE EDGE AND IS LABELLED THERE — not at the town it left",
+    (() => {
+      const r = WG415.routeRoads([{ a: "west", b: "faraway", d: 90 }], locs415, opt415());
+      if (!r || r.roads.length !== 1 || r.exits.length !== 1) return false;
+      const road = r.roads[0], x = r.exits[0];
+      if (!road.leaves || road.points.length < 4) return false;
+      const endp = road.points[road.points.length - 1];
+      const start = road.points[0];
+      const onEdge = (p) => p.x <= opt415().cell || p.y <= opt415().cell
+        || p.x >= W415 - opt415().cell * 2 || p.y >= H415 - opt415().cell * 2;
+      // it ENDS on the frame and STARTS at the town, and the label sits at the end, not the start
+      return x.from === "west" && x.to === "faraway" && onEdge(endp) && !onEdge(start)
+        && x.at.x === endp.x && x.at.y === endp.y;
+    })());
+
+  /* ---- 7 · ⛔ DRIVEN ON THE REAL WORLD ---- */
+  check("§415: ⛔ AND ON THE REAL VALLEY the roads bend round real ground, rather than arriving as straight lines",
+    (() => {
+      const RM415 = JSON.parse(rd("content/packs/core/world/region_maps.json"));
+      const terr415 = WG415.decodeTerrain(JSON.parse(rd("content/packs/core/world/terrain.json")));
+      const ext = WG415.regionExtent("valley", C415.locations, { authored: RM415.valley || null });
+      if (!ext || ext.polar) return false;
+      const net = WG415.roadNetwork(C415.locations, { k: 1.1 });
+      if (net.roads.length < 50) return false;
+      const G = WG415.makeGroundCost(terr415, { ...WG415.GROUND_COST.road, extent: ext });
+      const ts = (lon, lat, w, h) => ({ x: ((lon - ext.lo0) / (ext.lo1 - ext.lo0)) * w, y: (1 - (lat - ext.la0) / (ext.la1 - ext.la0)) * h });
+      const tw = (x, y, w, h) => ({ lon: ext.lo0 + (x / w) * (ext.lo1 - ext.lo0), lat: ext.la0 + (1 - y / h) * (ext.la1 - ext.la0) });
+      const R = WG415.routeRoads(net.roads, C415.locations, { W: 400, H: 210, step: G.step, toScreen: ts, toWorld: tw, extent: ext, cell: 4 });
+      if (!R || R.roads.length < 6 || R.unrouted !== 0) return false;
+      let bent = 0;
+      for (const r of R.roads) {
+        let len = 0;
+        for (let i = 1; i < r.points.length; i++) len += Math.hypot(r.points[i].x - r.points[i - 1].x, r.points[i].y - r.points[i - 1].y);
+        const a = r.points[0], b = r.points[r.points.length - 1];
+        const straight = Math.hypot(b.x - a.x, b.y - a.y);
+        if (straight > 8 && len / straight > 1.06) bent++;
+      }
+      return bent >= 3;        // some roads are genuinely straight; a map where NONE bends is an arc map again
+    })());
+
+  /* ---- 8 · ⛔ A POLAR REGION HAS NO FLAT MAP, and the engine must say so rather than draw an empty frame ---- */
+  check("§415: ⛔ A REGION ON THE POLE IS FLAGGED, because a lon/lat box there is fabricated, not merely wide",
+    (() => {
+      const pole = { p1: L415(-89.6, 0, "settlement"), p2: L415(-89.6, 120, "settlement") };
+      for (const k of Object.keys(pole)) pole[k].regionId = "axis";
+      const e = WG415.regionExtent("axis", pole);
+      const mid = WG415.regionExtent("valley", C415.locations);
+      return !!e && e.polar === true && !!mid && mid.polar === false;
+    })(), "at the pole longitude carries no ground distance, so two places a tenth of a degree apart land on opposite sides of the map");
+
+  // ⛔ THE HUB OF THE WORLD HAS NO FLAT MAP. MEASURED: `the_center`'s 11 places span **0.76° of actual ground**
+  // — all of them within three-quarters of a degree of one another — but sitting on the axis their lon/lat box
+  // comes out **171° of longitude wide**, and **10 of its own 11 members fall outside it**. Twelve real roads
+  // between them drew nothing at all.
+  // ⚠️ WHERE THE CROSSING SITS IS NOT MINE TO MOVE: whether the hub is literally on the axis is a world fact
+  // (Erik's) and where its places sit is content (Aevi's). The engine's job is to refuse to draw a frame it knows
+  // is false — hence `regionExtent().polar`. Asked in po/CCODE_20261004_roads_that_are_roads.md.
+  gap("§415: the Crossing sits on the axis, so no region lens can frame it — roads, field and territory alike",
+    (() => {
+      const RMg = JSON.parse(rd("content/packs/core/world/region_maps.json"));
+      const e = WG415.regionExtent("the_center", C415.locations, { authored: RMg.the_center || null });
+      return !!e && e.polar === true;
+    })(),
+    "when this closes, the_center gets a real regional map for the first time");
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

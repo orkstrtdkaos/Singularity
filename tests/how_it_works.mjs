@@ -35439,6 +35439,29 @@ console.log("\n── §410 · one person, however the id is punctuated ──")
       return sch?.properties?.questNote?.type === "string" && sch.additionalProperties === false;
     })());
 
+  /* ---- 3c · ⛔ A NAME NOBODY CHOSE ---- */
+  // ✅ AEVI asked for this by name: "no registry person whose `name` equals its own `id`. That is never a name
+  // somebody chose." ⚠️ AND THE RULE NEEDED ONE WORD. Measured over all 137 live people before building it:
+  // read as slugify-and-compare it fails on 82 of 137, because a healthy id IS a slug of its name — `mara-wells`
+  // ← "Mara Wells" is the normal case. Read as `===`, character for character, it is 1 before reconcile and 0
+  // after: exactly the stub and nothing else.
+  // ⛑ The shape test is better again, because it catches a name that LOOKS like an id even after a rekey has made
+  // it differ from its own key — and it scores the same 1 → 0 on the corpus.
+  check("§410: ⛔ A NAME IS NEVER AN ID — a record named after its own key is a stub, not a person",
+    (() => {
+      const idShaped = (s) => /^[a-z0-9]+([_-][a-z0-9]+)*$/.test(String(s || ""));
+      // ⛔ the two forms, on built records: the slugify compare would condemn the healthy case
+      if (idShaped("Mara Wells")) return false;                     // a real name is not id-shaped
+      if (!idShaped("sister_vreni")) return false;                  // the stub's is
+      const reg = {
+        "mara-wells": { id: "mara-wells", name: "Mara Wells" },     // ✅ healthy: the id is a slug of the name
+        "grey-braided-woman": { id: "grey-braided-woman", name: "Grey-braided woman" },
+        "sister_vreni": { id: "sister_vreni", name: "sister_vreni" },   // ⛔ the stub
+      };
+      const flagged = Object.entries(reg).filter(([id, n]) => String(n.name) === String(id) || idShaped(n.name)).map(([id]) => id);
+      return flagged.length === 1 && flagged[0] === "sister_vreni";
+    })(), "slugify-and-compare would condemn 82 of 137 live people; `===` and the shape test find the one stub");
+
   /* ---- 4 · ⚠️ WHETHER ANY LIVE SAVE STILL CARRIES ONE — AND WHY THAT IS NOT ASKED HERE ---- */
   // ⛔ §364 FORBIDS IT, AND §364 IS RIGHT: "no new gate may walk the live save directory — eleven already do and
   // each is named; the list may shrink, never grow." I wrote a twelfth and it reddened within the minute.

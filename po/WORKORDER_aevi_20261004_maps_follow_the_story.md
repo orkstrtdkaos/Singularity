@@ -68,13 +68,35 @@ sharedholds, so territory and shared holds agree about a hold founded at a minte
 6. Negative: the frozen index alone (live overlay ignored) fails gates 1 and 3. That is the proof each gate reads
    the live record.
 
-## For Erik (one question, not blocking M1–M5)
+## M6 · The maps show what the character knows (Erik ruled 2026-10-04: "Yes")
 
-**Should the maps show only places the character knows?** Today the canvas maps show every authored place from
-the first minute, and only the older diagram view (app.js:14439) checks `isPlaceKnown`. If the story is to
-**reveal** places, the map has to start without them. My lean is yes, with three layers: places you have been,
-places you have heard of (drawn faint) and places nobody told you (not drawn). Regions and the great powers'
-borders stay visible regardless, because everyone knows roughly where the Blaze is. It is a big change to how
-the map feels, so it is your ruling.
+Today the canvas maps show every authored place from the first minute. Only the older diagram view
+(app.js:14439) checks `isPlaceKnown`. For the story to **reveal** places, the map has to start without them.
+Three layers, read from the save:
+
+| layer | drawn as |
+|---|---|
+| **been** (visited, or a hold of yours) | full marker, icon, label, roads |
+| **heard of** (a rumour, a quest, a map bought, an NPC's `knowledge`, a GM `revealed`) | faint marker and label; roads to it drawn only where known |
+| **unknown** | not drawn. Not a fog cell, not a "?" — absent |
+
+What every character knows from the start stays visible: regions, the great powers' borders, the Crossing, and
+the places their origin would know. Nobody has to discover where the Blaze is. The GM's `revealed` change
+(M3) moves a place from unknown to heard of. Arriving there moves it to been.
+
+⛔ **Territory still counts every place.** Knowledge gates the drawing, never the world. A power's reach over
+ground you have never heard of is still a reach. You see its border, not the places inside it.
+
+Gates: a fresh character sees no un-heard-of place on any surface. `revealed` makes it faint on both the regional
+map and the globe. Arriving makes it full. The territory lens's numbers are identical with gating on and off.
+
+## Rulings carried here
+
+- **The census moves when the narrative makes places** (Erik: *"increment it when the narrative makes new
+  ones"*). It is recorded in `ratified_census.json` as `standing`. This touches the maps only through
+  promotion: a place promoted from a save into content gets its frozen-index row and its census line in the
+  same commit. See WORKORDER_aevi_20261004_born_whole G4.
+- **Every generated place is whole before it reaches a map.** See that work order, whose G0 is the reason M1
+  matters: the `generateRequest` location path is not only unplaced, it is rejected outright.
 
 — Aevi, PO

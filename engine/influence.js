@@ -268,6 +268,7 @@ export function territoryByGround(powers, locations, { W, H, step, toScreen, toW
   const near = (powers || []).filter(isTerritorial).filter((p) => anchorsOf(p, locations).some(inBox));
   if (!near.length) return null;
 
+  const own = {};                           // R4.3: id -> this power's own claim at every cell
   const best = new Float64Array(N), second = new Float64Array(N);
   const bid = new Int16Array(N).fill(-1), sid = new Int16Array(N).fill(-1);
   const cost = new Float64Array(N);
@@ -328,13 +329,22 @@ export function territoryByGround(powers, locations, { W, H, step, toScreen, toW
         if (c2 < cost[j]) { cost[j] = c2; src[j] = src[i]; h.push(c2, j); }
       }
     }
+    // ✅ R4.3 — KEEP EACH POWER'S OWN CLAIM. *"Each power's own claim mask is already computed by the walk;
+    // keep it on the result (`own[id]`) instead of folding it away."*
+    // ⚠️ THE FOLD WAS THROWING AWAY THE BORDER. Only the best two claims survived per cell, so a power could
+    // be contoured only where it WON — and a border drawn from the winner's mask is the edge of what it beat,
+    // not the edge of what it claims. Two neighbours' real borders overlap; that overlap is the thing R4.3
+    // wants drawn as ally, neutral or rival, and it does not exist in a winner-takes-the-cell grid.
+    const mine = new Float32Array(N);
     for (let i = 0; i < N; i++) {
       if (!Number.isFinite(cost[i])) continue;
       const Ri = (src[i] >= 0 && radii[src[i]] > 0) ? radii[src[i]] : R;
       const v = Math.exp(-(cost[i] * cost[i]) / (2 * Ri * Ri));
+      mine[i] = v;
       if (v > best[i]) { second[i] = best[i]; sid[i] = bid[i]; best[i] = v; bid[i] = pi; }
       else if (v > second[i]) { second[i] = v; sid[i] = pi; }
     }
+    own[p.id] = mine;
   });
 
   const cellAt = (i) => {
@@ -350,7 +360,7 @@ export function territoryByGround(powers, locations, { W, H, step, toScreen, toW
   const area = {};
   for (let i = 0; i < N; i++) { const o = cellAt(i); if (o.owner) area[o.owner] = (area[o.owner] || 0) + 1; }
   return {
-    gw, gh, cell, powers: near,
+    gw, gh, cell, powers: near, own,
     /** whose ground is this SCREEN point on */
     at: (x, y) => cellAt(Math.min(gh - 1, Math.max(0, Math.floor(y / cell))) * gw
       + Math.min(gw - 1, Math.max(0, Math.floor(x / cell)))),

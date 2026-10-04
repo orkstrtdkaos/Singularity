@@ -16,6 +16,24 @@
   "next": [],
   "releases": [
     {
+      "version": "2.18.0",
+      "date": "2026-10-04",
+      "entries": [
+        {
+          "kind": "feature",
+          "title": "The map shows whose ground you are standing on",
+          "summary": "Territory, drawn — including your own.",
+          "detail": "A new layer fills the ground in the colour of whoever holds it, fading out to the edge of their reach, with every power's own border drawn round what it claims rather than only what it won. Your holdings and band are drawn the same way as any lord, named as your realm, with a small keep at each hold and a pennant on the one your band calls home. A neighbour's border is dotted where you are neutral and dashed where you are allies; ground two rivals both claim is striped in both their colours. Guilds, orders and road gangs are never filled — they get threads from their seat and rings on the places they work, because they hold people and routes, not land."
+        },
+        {
+          "kind": "feature",
+          "title": "Zoom and pan the regional map",
+          "summary": "Turn the wheel to look closer, drag to move around, double-click to go back.",
+          "detail": "The regional map is dense — roads, borders, the field and every place name share one sheet — and at a glance some of it was too small to read. The wheel now zooms in on whatever is under the pointer, up to four times, and you can drag the map around once you are in. Double-clicking puts it back. Clicking a place still selects the place you clicked, at any zoom. It magnifies the map rather than redrawing it, so lines and lettering soften as you go in — that is the trade for it being instant instead of pausing to work the roads out again every time you turn the wheel."
+        }
+      ]
+    },
+    {
       "version": "2.17.4",
       "date": "2026-10-04",
       "entries": [

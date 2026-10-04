@@ -36779,6 +36779,87 @@ console.log("\n── §419 · the geometry a lens is made of ──");
     })());
 }
 
+/* ══════════ §420 · WHOSE GROUND, DRAWN ══════════ */
+// ✅ AEVI B5: *"Fill in the owner's colour, fading to the reach's edge; borders by contouring each owner's
+// blurred membership at 0.5… Guilds, orders and road gangs: dashed threads from the seat, rings on the places
+// they work, **never a fill**."*
+// ✅ R4.3 (ERIK): *"ok to be assumed neutral to each other unless they clash."*
+console.log("\n── §420 · whose ground, drawn ──");
+{
+  const IN420 = await import("../engine/influence.js");
+  const RE420 = await import("../engine/realms.js");
+  const LN420 = await import("../engine/lenses.js");
+  const { loadContentHeadless: lch420 } = await import("./headless_content.mjs");
+  const C420 = await lch420();
+
+  const ext420 = { la0: -6, la1: 6, lo0: -10, lo1: 10 };
+  const ts420 = (lon, lat, w, h) => ({ x: ((lon - ext420.lo0) / 20) * w, y: (1 - (lat - ext420.la0) / 12) * h });
+  const tw420 = (x, y, w, h) => ({ lon: ext420.lo0 + (x / w) * 20, lat: ext420.la0 + (1 - y / h) * 12 });
+  const flat420 = (aLat, aLon, bLat, bLon) => Math.hypot(bLat - aLat, bLon - aLon);
+  const POW420 = (id, heads, seat) => ({ id, name: id, kind: "sovereignty", seat,
+    strength: { contingents: [{ n: heads }] } });
+  const LOC420 = {
+    big: { worldPos: { longitude: -2, colatitude: 90 } },
+    small: { worldPos: { longitude: 2, colatitude: 90 } },
+  };
+
+  /* ---- 1 · ⛔ EVERY POWER KEEPS ITS OWN CLAIM, including one that wins nothing ---- */
+  // ⚠️ THE FOLD WAS THROWING AWAY THE BORDER. Only the best two claims survived per cell, so a power could be
+  // contoured only where it WON — and a border drawn from the winner's grid is the edge of what a power BEAT,
+  // not the edge of what it claims. MEASURED in the valley: 7,479 cells are claimed by somebody who does not
+  // hold them, and two of the five powers in frame win no cell at all yet plainly have ground.
+  const T420 = IN420.territoryByGround([POW420("big", 400, "big"), POW420("small", 20, "small")], LOC420,
+    { W: 400, H: 240, step: flat420, toScreen: ts420, toWorld: tw420, cell: 4, extent: ext420 });
+  check("§420: ⛔ EVERY POWER KEEPS ITS OWN CLAIM MASK — a border is the edge of what it CLAIMS, not of what it beat",
+    (() => {
+      if (!T420 || !T420.own) return false;
+      const big = T420.own.big, small = T420.own.small;
+      if (!big || !small) return false;
+      const N = T420.gw * T420.gh;
+      let wonBySmall = 0, claimedBySmall = 0, overlap = 0;
+      for (let i = 0; i < N; i++) {
+        if (T420.cellAt(i).owner === "small") wonBySmall++;
+        if (small[i] >= IN420.CLAIM_FLOOR) claimedBySmall++;
+        if (small[i] >= IN420.CLAIM_FLOOR && big[i] >= IN420.CLAIM_FLOOR) overlap++;
+      }
+      // the small power is swamped, and must STILL have a claim and a contour of its own
+      return claimedBySmall > 0 && overlap > 0 && claimedBySmall > wonBySmall
+        && LN420.isoLines(LN420.blurGrid(small, T420.gw, T420.gh, 2), T420.gw, T420.gh, 0.5).length > 0;
+    })(), "two of the valley's five powers win no cell and would have had no border at all");
+
+  /* ---- 2 · ⛔ A NETWORK IS NEVER FILLED, AND CANNOT BE ---- */
+  // ⚠️ AND THE PAINTER CANNOT GET ONE BY ACCIDENT. `groundHolders` is territorial by construction, which is
+  // right — and meant my first network pass filtered THAT list for non-territorial powers and drew nothing,
+  // ever. Measured 0 of 26. The networks have to come from `resolvedPowers` on purpose.
+  check("§420: ⛔ A GUILD OR AN ORDER CAN NEVER BE FILLED AS A COUNTRY — `groundHolders` is territorial by construction",
+    (() => {
+      const all = RE420.resolvedPowers({}, C420);
+      const nets = all.filter((p) => !IN420.isTerritorial(p));
+      const held = RE420.groundHolders({}, C420, C420.locations, null);
+      if (nets.length < 5 || !held.length) return false;
+      const ids = new Set(held.map((p) => p.id));
+      return nets.every((p) => !ids.has(p.id)) && held.every((p) => IN420.isTerritorial(p));
+    })(), "painting a guild as a country would be a lie about what it has");
+  // ⛑ …and they still have somewhere to be drawn: rings on the places they work
+  check("§420: ⛑ …and the networks ARE reachable, with places to put their rings on",
+    (() => {
+      const nets = RE420.resolvedPowers({}, C420).filter((p) => !IN420.isTerritorial(p) && (p.reach || []).length);
+      if (nets.length < 5) return false;
+      return nets.every((p) => (p.reach || []).some((id) => C420.locations[id]?.worldPos));
+    })());
+
+  /* ---- 3 · ⛔ THE FILL FADES TO THE REACH'S EDGE ---- */
+  check("§420: ⛔ THE FILL FADES OUT — strongest at the seat, nothing past the claim floor",
+    (() => {
+      if (!T420) return false;
+      const seat = ts420(-2, 0, 400, 240);
+      const atSeat = T420.at(seat.x, seat.y);
+      const far = T420.at(399, 1);
+      return atSeat.owner === "big" && atSeat.strength > 0.8
+        && (!far.owner || far.strength < atSeat.strength);
+    })());
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

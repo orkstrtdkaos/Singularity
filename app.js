@@ -49,10 +49,11 @@ import { sceneImage, itemImage, artworkStyle, getArtMode, setArtMode, imagesEnab
 import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, makePolarBase, regionExtent, bendRoad, roadNetwork, clipToFrame, routeRoads, makeGroundCost, GROUND_COST } from "./engine/worldglobe.js";
 // ⛔ ROUND 4 — whose ground is this, as things stand today. `realms.js` resolves the SAVE (losses, growth,
 // broken powers, taken holds, your own realm); `influence.js` stays pure and just evaluates.
-import { groundHolders, stateStamp, powerRelation } from "./engine/realms.js";
+import { groundHolders, resolvedPowers, stateStamp, powerRelation } from "./engine/realms.js";
+import { territoryByGround, CLAIM_FLOOR, isTerritorial } from "./engine/influence.js";
 import { housesAt } from "./engine/powers.js";
 // ⛔ B4 — a lens is WHERE the marks go (pure, here) and HOW they are inked (below, in this file)
-import { isoLines, stipple, hexGather, nearness, crystalFacets } from "./engine/lenses.js";
+import { isoLines, blurGrid, stipple, hexGather, nearness, crystalFacets } from "./engine/lenses.js";
 import { makeInfluence } from "./engine/influence.js";
 import { glyphFor, drawGlyph } from "./engine/mapicons.mjs";   // SNG-409 §4: a pole must never read as a town   // SNG-390: the globe, read-only
 import { walkingDays, milesFor, worldPosForGenerated, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout, fieldBlobs, fieldAlpha, placeLabels } from "./engine/worldmap.js";
@@ -191,7 +192,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.17.4";
+const APP_VERSION = "2.18.0";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2956,6 +2957,8 @@ let fieldCtl = {
   kinds: new Set(FIELD_KINDS.filter(k => k !== "body")),
   mode: "mix",
   wells: true, sinks: true, gates: true,
+  // ✅ B6 default is *Both*, so the territory lens starts on
+  territory: true,
 };
 
 /** ⛔ MEASURED IN THE BROWSER BEFORE SHIPPING, and it is the reason these two caches exist. One region's
@@ -3051,6 +3054,7 @@ function fieldPanel(ext) {
         : "The registers are blended — the colour says HOW MUCH field is here. Click to let the strongest source take each point.")}">${fieldCtl.mode === "max" ? "✓ Strongest" : "Mix"}</button>
     ${[...FIELD_KINDS].map(kindBtn).join("")}
     <span class="hint" style="margin:0 4px">│</span>
+    ${mark("territory", "⬟ ground", "Whose ground this is — fill to whoever holds it, and every power's own border, as things stand on YOUR save")}
     ${mark("wells", "◆ wells", "The authored crystal wells — places the lattice pools")}
     ${mark("sinks", "◇ sinks", "The authored veil nexuses — places the lattice drains")}
     ${mark("gates", "◈ gates", "The waygates")}
@@ -12532,6 +12536,228 @@ function paintHouses(ctx, base, W, H, ids) {
   return out;
 }
 
+/** ⛔ B5 · THE TERRITORY LENS, cached until the world moves.
+ *  ⚠️ THE KEY CARRIES R4.1's STATE STAMP, so a raid, a lost hold or a grown band changes the borders on the
+ *  turn it happens rather than a session later. A cached picture that cannot tell is a stale one. */
+let _terr = { key: null, T: null, holders: null, mine: null };
+function territoryFor(regionId, ext, base, W, H) {
+  if (!_terrain || !CONTENT?.locations || !character || !ext) return null;
+  const cfg = { ...(CONTENT.rules?.economy?.holdStore || {}), features: CONTENT.rules?.economy?.holdFeatures };
+  const holders = groundHolders(character, CONTENT, CONTENT.locations, cfg);
+  const key = `${regionId}|${W}x${H}|${stateStamp(character, holders)}`;
+  if (_terr.key === key) return _terr;
+  const G = makeGroundCost(_terrain, { ...GROUND_COST.territory, extent: ext });
+  const T = territoryByGround(holders, CONTENT.locations, {
+    W, H, step: G.step, toScreen: base.toScreen, toWorld: base.toWorld, cell: 4, extent: ext,
+  });
+  // ⚠️ THE NETWORKS COME SEPARATELY, because `groundHolders` filters to territorial BEFORE the painter sees
+  // anything — which is right (it is a list of who holds ground) and meant my first network pass iterated a
+  // list that is territorial by construction and drew nothing, ever. Measured: 0 of 26.
+  const networks = resolvedPowers(character, CONTENT).filter((p) => !isTerritorial(p) && (p.reach || []).length);
+  _terr = { key, T, holders, networks, mine: holders.find((h) => h.yours) || null };
+  return _terr;
+}
+
+const _hexRGB = (h) => {
+  const s = String(h || "#888").replace("#", "");
+  return [parseInt(s.slice(0, 2), 16), parseInt(s.slice(2, 4), 16), parseInt(s.slice(4, 6), 16)];
+};
+
+/** ⛔ B5 · WHOSE GROUND, PAINTED. ✅ AEVI: *"Fill in the owner's colour, fading to the reach's edge; borders by
+ *  contouring each owner's blurred membership at 0.5 (dark casing, colour core); contested ground striped in both
+ *  colours."* Plus R4.3's relations and R4.2's realm. */
+function paintTerritory(ctx, base, ext, regionId, W, H) {
+  const hit = territoryFor(regionId, ext, base, W, H);
+  const T = hit?.T;
+  if (!T || !T.powers.length) return null;
+  const col = {}, rgb = {};
+  for (const q of T.powers) { const c = powerColour(q.p || q); col[q.id] = c; rgb[q.id] = _hexRGB(c); }
+
+  // ---- the fill, at grid resolution and scaled, so it fades instead of stepping ----
+  // ⛑ the SAME trick the field wash uses: painting 21,000 cell rectangles is slower and reads as a mosaic,
+  // while one small image scaled up lets the browser's own smoothing do the fade to the reach's edge.
+  const off = document.createElement("canvas");
+  off.width = T.gw; off.height = T.gh;
+  const oc = off.getContext("2d");
+  const img = oc.createImageData(T.gw, T.gh);
+  for (let i = 0; i < T.gw * T.gh; i++) {
+    const c = T.cellAt(i);
+    if (!c.owner) continue;
+    const base3 = rgb[c.owner] || [136, 136, 136];
+    let r = base3[0], g = base3[1], b = base3[2];
+    // ⛔ R4.3: contested ground is STRIPED in both colours — only a rivalry earns that now
+    if (c.contested && c.rival && rgb[c.rival]) {
+      const x = i % T.gw, y = (i / T.gw) | 0;
+      if (((x + y) >> 2) % 2) { const o = rgb[c.rival]; r = o[0]; g = o[1]; b = o[2]; }
+    }
+    const o = i * 4;
+    img.data[o] = r; img.data[o + 1] = g; img.data[o + 2] = b;
+    // fading to the reach's edge: alpha follows the claim down to the floor
+    img.data[o + 3] = Math.round(26 + 86 * Math.min(1, Math.max(0, (c.strength - CLAIM_FLOOR) / (1 - CLAIM_FLOOR))));
+  }
+  oc.putImageData(img, 0, 0);
+  ctx.save();
+  if (base.polar) { ctx.beginPath(); ctx.arc(W / 2, H / 2, Math.min(W, H) / 2, 0, Math.PI * 2); ctx.clip(); }
+  ctx.imageSmoothingEnabled = true;
+  ctx.drawImage(off, 0, 0, W, H);
+  ctx.restore();
+
+  // ---- the borders: each power's OWN claim, blurred, contoured ----
+  // ⚠️ FROM `own[id]`, NOT FROM WHO WON THE CELL. A border drawn from the winner's grid is the edge of what
+  // a power BEAT, not the edge of what it claims — and two neighbours' real claims overlap, which is the whole
+  // thing R4.3 wants shown. MEASURED in the valley: 7,479 cells are claimed by somebody who does not hold them,
+  // and two of the five powers in frame win no cell at all yet plainly have ground.
+  const seatOnFrame = (q) => {
+    const l = CONTENT.locations[(q.p || q).seat];
+    if (!l?.worldPos) return !!(q.p || q).yours;          // a realm is always the player's own, always drawn
+    const s = base.toScreen(l.worldPos.longitude, l.worldPos.colatitude - 90, W, H);
+    return s.x > -20 && s.y > -20 && s.x < W + 20 && s.y < H + 20;
+  };
+  ctx.save();
+  ctx.lineJoin = "round"; ctx.lineCap = "round";
+  const labels = [];
+  for (const q of T.powers) {
+    const mask = T.own[q.id];
+    if (!mask) continue;
+    const power = q.p || q;
+    const rel = hit.mine && hit.mine.id !== q.id
+      ? powerRelation(hit.mine, power, character, { allPowers: hit.holders }) : (power.yours ? "self" : "neutral");
+    // ✅ R4.3: *"The inner border is drawn only for a power seated in view."* Otherwise the valley carries five
+    // nested borders from neighbours reaching in, which is a picture of nothing.
+    const owns = (() => { let n = 0; for (let i = 0; i < mask.length; i++) if (T.cellAt(i).owner === q.id) n++; return n; })();
+    if (!owns && !seatOnFrame(q)) continue;
+    const lines = isoLines(blurGrid(mask, T.gw, T.gh, 2), T.gw, T.gh, 0.5, { minPoints: 8 });
+    if (!lines.length) continue;
+    // ⛑ ally dashed · neutral dotted · rival and your own, solid
+    const dash = rel === "ally" ? [7, 5] : rel === "neutral" ? [2, 4] : [];
+    const wide = power.yours ? 2.4 : 1.6;
+    for (const pass of [["rgba(10,12,18,0.62)", wide + 2], [col[q.id], wide]]) {
+      ctx.setLineDash(pass[0].startsWith("rgba") ? [] : dash);   // the casing stays solid under a dashed core
+      ctx.strokeStyle = pass[0]; ctx.lineWidth = pass[1];
+      for (const L of lines) {
+        ctx.beginPath();
+        ctx.moveTo((L[0][0] + 0.5) / T.gw * W, (L[0][1] + 0.5) / T.gh * H);
+        for (let i = 1; i < L.length; i++) ctx.lineTo((L[i][0] + 0.5) / T.gw * W, (L[i][1] + 0.5) / T.gh * H);
+        ctx.stroke();
+      }
+    }
+    ctx.setLineDash([]);
+    // the name goes at the centroid of the biggest piece of its own ground
+    const big = lines.reduce((a, b) => (b.length > a.length ? b : a), lines[0]);
+    const cx = big.reduce((s, p) => s + p[0], 0) / big.length, cy = big.reduce((s, p) => s + p[1], 0) / big.length;
+    labels.push({ q, power, rel, area: owns, x: (cx + 0.5) / T.gw * W, y: (cy + 0.5) / T.gh * H, colour: col[q.id] });
+  }
+  ctx.restore();
+
+  // ---- the names, lettered across their own ground ----
+  // ✅ AEVI's ruling for place labels, which is the right rule here too: *"greedy placement, highest tier
+  // first, with four candidate positions per label. If none fits, the label is DROPPED and the glyph stays.
+  // Never shrink text to make it fit."*
+  // ⚠️ WITHOUT IT TWO POWERS WROTE OVER EACH OTHER. Every power's own-claim contour in the valley centres near
+  // the same crossing, so the Fellowship and the Castellany both lettered themselves across the middle and
+  // neither could be read. Biggest ground first, because the power with the most to show has the best claim on
+  // the space — and a dropped name still has its border and its fill saying whose the ground is.
+  ctx.save();
+  ctx.textAlign = "center";
+  const taken = [];
+  const clear = (b) => !taken.some((o) => b.x0 < o.x1 && b.x1 > o.x0 && b.y0 < o.y1 && b.y1 > o.y0);
+  for (const L of labels.slice().sort((a, b) => (b.area || 0) - (a.area || 0))) {
+    const name = String(L.power.name || L.q.id);
+    // ✅ R4.2: a realm says whose it is; ✅ R4.3: everyone else wears the relation
+    const under = L.power.yours ? "your realm"
+      : `${String(L.power.kind || "power").replace(/_/g, " ")}${L.power.temper ? " · " + L.power.temper : ""} · ${L.rel}`;
+    ctx.font = `700 ${L.power.yours ? 13 : 12}px system-ui, sans-serif`;
+    const wName = ctx.measureText(name).width;
+    ctx.font = "600 9px system-ui, sans-serif";
+    const wUnder = ctx.measureText(under).width;
+    const halfW = Math.max(wName, wUnder) / 2 + 4;
+    let box = null;
+    for (const [dx, dy] of [[0, 0], [0, -26], [0, 26], [-halfW - 10, 0], [halfW + 10, 0]]) {
+      const x = Math.max(halfW + 4, Math.min(W - halfW - 4, L.x + dx));
+      const y = Math.max(22, Math.min(H - 18, L.y + dy));
+      const b = { x0: x - halfW, x1: x + halfW, y0: y - 12, y1: y + 16, x, y };
+      if (clear(b)) { box = b; break; }
+    }
+    if (!box) continue;                          // dropped, not shrunk — the border still says whose this is
+    taken.push(box);
+    ctx.font = `700 ${L.power.yours ? 13 : 12}px system-ui, sans-serif`;
+    ctx.lineWidth = 3; ctx.lineJoin = "round"; ctx.strokeStyle = "rgba(10,12,18,0.82)";
+    ctx.strokeText(name, box.x, box.y); ctx.fillStyle = L.colour; ctx.fillText(name, box.x, box.y);
+    ctx.font = "600 9px system-ui, sans-serif";
+    ctx.lineWidth = 2.6; ctx.strokeText(under, box.x, box.y + 11);
+    ctx.fillStyle = "rgba(232,228,218,0.82)"; ctx.fillText(under, box.x, box.y + 11);
+  }
+  ctx.restore();
+
+  // ---- B5 · the networks: threads and rings, NEVER a fill ----
+  // ✅ AEVI: *"Guilds, orders and road gangs: dashed threads from the seat, rings on the places they work,
+  // never a fill; a seat off the map draws rings and its name only."*
+  // ⛔ AND THAT IS A CLAIM ABOUT WHAT THEY HAVE, not a style. A guild holds people and routes; painting it as
+  // a country would say it holds ground, which is exactly the lie `isTerritorial` exists to prevent. The same
+  // rule Aevi set for `order` in the governs ladder — ground > order > trade > gang — drawn.
+  {
+    const net = hit.networks || [];
+    ctx.save();
+    ctx.lineJoin = "round"; ctx.lineCap = "round";
+    for (const p of net) {
+      const colour = powerColour(p);
+      const seatL = CONTENT.locations[p.seat];
+      const seat = seatL?.worldPos ? base.toScreen(seatL.worldPos.longitude, seatL.worldPos.colatitude - 90, W, H) : null;
+      const onFrame = seat && seat.x > -40 && seat.y > -40 && seat.x < W + 40 && seat.y < H + 40;
+      const worked = [];
+      for (const id of p.reach || []) {
+        const l = CONTENT.locations[id];
+        if (!l?.worldPos) continue;
+        const q = base.toScreen(l.worldPos.longitude, l.worldPos.colatitude - 90, W, H);
+        if (q.x < 0 || q.y < 0 || q.x > W || q.y > H) continue;
+        if (base.polar && !base.insideDisc(q.x, q.y, W, H)) continue;
+        worked.push(q);
+      }
+      if (!worked.length) continue;
+      // the threads, only when the seat is on the map — otherwise they all run to one corner and say nothing
+      if (onFrame) {
+        ctx.setLineDash([5, 5]); ctx.lineWidth = 1; ctx.globalAlpha = 0.62; ctx.strokeStyle = colour;
+        for (const q of worked) { ctx.beginPath(); ctx.moveTo(seat.x, seat.y); ctx.lineTo(q.x, q.y); ctx.stroke(); }
+        ctx.setLineDash([]);
+      }
+      // the rings, always — these are the places it actually works
+      ctx.globalAlpha = 0.9; ctx.lineWidth = 1.4; ctx.strokeStyle = colour;
+      for (const q of worked) { ctx.beginPath(); ctx.arc(q.x, q.y, 7.5, 0, Math.PI * 2); ctx.stroke(); }
+      ctx.globalAlpha = 1;
+      // ⛑ a seat off the map draws rings and its NAME only, so the reader knows whose rings these are
+      const anchor = onFrame ? seat : worked.reduce((a, q) => ({ x: a.x + q.x / worked.length, y: a.y + q.y / worked.length }), { x: 0, y: 0 });
+      const nm = String(p.name || p.id);
+      ctx.font = "600 9px system-ui, sans-serif"; ctx.textAlign = "center";
+      ctx.lineWidth = 2.4; ctx.strokeStyle = "rgba(10,12,18,0.8)";
+      const ny = Math.max(14, Math.min(H - 6, anchor.y + 17));
+      ctx.strokeText(nm, Math.max(40, Math.min(W - 40, anchor.x)), ny);
+      ctx.fillStyle = colour;
+      ctx.fillText(nm, Math.max(40, Math.min(W - 40, anchor.x)), ny);
+    }
+    ctx.restore();
+  }
+
+  // ---- R4.2: a small keep at each of the player's holds ----
+  if (hit.mine) {
+    ctx.save();
+    for (const h of hit.mine.holds || []) {
+      const l = CONTENT.locations[h.at];
+      if (!l?.worldPos) continue;
+      const p = base.toScreen(l.worldPos.longitude, l.worldPos.colatitude - 90, W, H);
+      if (!Number.isFinite(p.x)) continue;
+      ctx.fillStyle = "rgba(238,232,214,0.95)"; ctx.strokeStyle = "rgba(12,14,20,0.9)"; ctx.lineWidth = 1.2;
+      ctx.beginPath();
+      ctx.rect(p.x - 4, p.y - 3, 8, 7);                  // a keep: a squat block with two merlons
+      ctx.fill(); ctx.stroke();
+      ctx.beginPath(); ctx.rect(p.x - 4, p.y - 6, 2.6, 3); ctx.rect(p.x + 1.4, p.y - 6, 2.6, 3);
+      ctx.fill(); ctx.stroke();
+      if (h.seat) { ctx.beginPath(); ctx.moveTo(p.x, p.y - 6); ctx.lineTo(p.x, p.y - 13); ctx.lineTo(p.x + 7, p.y - 11); ctx.lineTo(p.x, p.y - 9); ctx.closePath(); ctx.fill(); ctx.stroke(); }
+    }
+    ctx.restore();
+  }
+  return T;
+}
+
 const TIER_RANK = { region: 3, settlement: 2, site: 1 };
 function clusterMarks(marks, radius = REGION_HIT) {
   const seen = new Set(), out = [];
@@ -12695,6 +12921,62 @@ function sizeRegionCanvas(cv) {
   return true;
 }
 
+/** ⛔ ✅ ERIK, 2026-10-04: *"Can we add some moderate ability to zoom/pan? I think that would help."*
+ *
+ *  ⚠️ THE MAP IS PAINTED ONCE INTO AN OFFSCREEN AND THE VIEW IS A BLIT OF PART OF IT. That is the whole
+ *  design, and it is the only one that is actually usable: the heavy layers are computed in SCREEN space — the
+ *  roads are a least-cost walk over a 2px grid (up to 3s a region), the territory is a second walk, the field is
+ *  a 110×110 grid of evaluations — so making the projection itself zoom would recompute all three on every
+ *  wheel notch. Blitting a sub-rectangle of an already-painted map costs nothing and is instant.
+ *  ⛑ THE TRADE, STATED: at 3× the lines and letters soften, because this magnifies a picture rather than
+ *  redrawing it at a finer scale. For *moderate* zoom — which is what was asked for — that is the right trade;
+ *  the alternative is a 3-second pause every time somebody turns the wheel. Capped at 4× for that reason. */
+let _regionView = { k: 1, cx: 0.5, cy: 0.5, sx: 0, sy: 0, sw: 0, sh: 0 };
+let _regionOff = null;
+let _regionDragOn = null;   // the one pair of window listeners the pan uses
+
+/** Re-show the painted map at the current zoom and pan. No repaint, no recomputation. */
+function blitRegion() {
+  const cv = document.getElementById("region-map");
+  if (!cv || !_regionOff) return;
+  const W = cv.width, H = cv.height;
+  const v = _regionView;
+  const k = Math.max(1, Math.min(4, v.k));
+  const sw = W / k, sh = H / k;
+  // ⛑ clamped so the frame can never be panned off its own edge — there is no more map out there
+  const sx = Math.max(0, Math.min(W - sw, v.cx * W - sw / 2));
+  const sy = Math.max(0, Math.min(H - sh, v.cy * H - sh / 2));
+  Object.assign(_regionView, { k, sx, sy, sw, sh });
+  const ctx = cv.getContext("2d");
+  ctx.imageSmoothingEnabled = true;
+  ctx.imageSmoothingQuality = "high";
+  ctx.clearRect(0, 0, W, H);
+  ctx.drawImage(_regionOff, sx, sy, sw, sh, 0, 0, W, H);
+  if (k > 1.01) {
+    ctx.save();
+    ctx.font = "600 10px system-ui, sans-serif";
+    ctx.textAlign = "right";
+    ctx.lineWidth = 2.6; ctx.lineJoin = "round"; ctx.strokeStyle = "rgba(10,12,18,0.8)";
+    const s = `${k.toFixed(1)}× — double-click to reset`;
+    ctx.strokeText(s, W - 8, H - 8); ctx.fillStyle = "rgba(232,228,218,0.86)"; ctx.fillText(s, W - 8, H - 8);
+    ctx.restore();
+  }
+}
+
+/** Canvas pixel → the painted map's own pixel. Every hit test goes through this, or a click at 3× lands
+ *  wherever the place used to be. */
+function unview(x, y, W, H) {
+  const v = _regionView;
+  if (!v.sw || !v.sh) return { x, y };
+  return { x: v.sx + (x / W) * v.sw, y: v.sy + (y / H) * v.sh };
+}
+/** …and back, for anything positioned OVER the canvas in CSS pixels (the hover chip). */
+function review(x, y, W, H) {
+  const v = _regionView;
+  if (!v.sw || !v.sh) return { x, y };
+  return { x: (x - v.sx) / v.sw * W, y: (y - v.sy) / v.sh * H };
+}
+
 function paintRegionMap(regionId) {
   const cv = document.getElementById("region-map");
   if (!cv || !_terrain || !_fineGenReady()) return;
@@ -12719,8 +13001,15 @@ function paintRegionMap(regionId) {
           { la0: ext.la0 - pad, la1: ext.la1 + pad, lo0: ext.lo0 - pad, lo1: ext.lo1 + pad }), ext);
     _regionBases.set(regionId, base);
   }
-  const ctx = cv.getContext("2d");
   const W = cv.width, H = cv.height;
+  // ⛑ painted into an offscreen of the same size; `blitRegion` then shows whatever part of it the view wants
+  if (!_regionOff || _regionOff.width !== W || _regionOff.height !== H) {
+    _regionOff = document.createElement("canvas");
+    _regionOff.width = W; _regionOff.height = H;
+  }
+  const ctx = _regionOff.getContext("2d");
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.clearRect(0, 0, W, H);
   const img = ctx.createImageData(W, H);
   const D = img.data;
   const muteGround = !!(fieldCtl.on && fieldCtl.kinds.size && worldField());
@@ -12757,6 +13046,11 @@ function paintRegionMap(regionId) {
   }
   ctx.putImageData(img, 0, 0);
 
+  // ⛔ B5 · WHOSE GROUND — under the field's own marks, because the ground is what the field sits ON.
+  if (fieldCtl.territory) {
+    try { paintTerritory(ctx, base, ext, regionId, W, H); }
+    catch (err) { console.warn("[region-map] the territory layer did not draw — the ground still did:", err); }
+  }
   // ⛔ CCODE-472 — THE POWER FIELD, EVALUATED, WASHED OVER THE GROUND. Erik: "the regional would be similar,
   // except you'd probably want to visully see the amient fields as well, as they would have a gradient."
   // ⚠️ THIS REPLACES A DISCLAIMER. The region tier's old field toggle coloured each PLACE by its strength and
@@ -13305,6 +13599,7 @@ function paintRegionMap(regionId) {
       }
     }
   }
+  blitRegion();          // ⛔ the map is painted; the VIEW is what the player sees of it
 }
 
 /** ⛔ THE GROUND MAP ANSWERS THE POINTER. (AEVI §1.1, 2026-10-04: "Make the ground map clickable: yes, build it
@@ -13326,9 +13621,14 @@ function wireRegionGroundMap(selectedId) {
   const chip = document.getElementById("region-map-chip");
   // ⚠️ CSS PIXELS ARE NOT CANVAS PIXELS. The canvas is laid out up to 1600px over a backing store sized to match,
   // but the two can differ for a frame after a resize — so the pointer is scaled, never read raw.
+  // ⚠️ THROUGH THE VIEW. A click at 3× that was not un-zoomed would select whatever place happens to sit at
+  // the same canvas pixel in the unzoomed map — which is a hit test that works perfectly until somebody uses
+  // the feature, and then silently picks the wrong place.
   const toCanvas = (e) => {
     const r = cv.getBoundingClientRect();
-    return { x: (e.clientX - r.left) * (cv.width / r.width), y: (e.clientY - r.top) * (cv.height / r.height) };
+    const x = (e.clientX - r.left) * (cv.width / r.width);
+    const y = (e.clientY - r.top) * (cv.height / r.height);
+    return unview(x, y, cv.width, cv.height);
   };
   /** ⛔ WHAT IS UNDER THE POINTER. When a cluster is open its PILLS are the targets — they are what the player can
    *  see and aim at — and the ground beneath is closed to clicks so a stray one does not select what the dim hides. */
@@ -13391,8 +13691,10 @@ function wireRegionGroundMap(selectedId) {
     const r = cv.getBoundingClientRect();
     const sx = r.width / cv.width, sy = r.height / cv.height;
     const w = chip.offsetWidth || 160, h = chip.offsetHeight || 60;
-    chip.style.left = `${Math.max(2, Math.min(r.width - w - 2, px * sx - w / 2))}px`;
-    chip.style.top = `${Math.max(2, Math.min(r.height - h - 2, py * sy + 12))}px`;
+    // ⛑ `px, py` are the PAINTED map's pixels; the chip floats over the canvas, so it wants the view's
+    const vp = review(px, py, cv.width, cv.height);
+    chip.style.left = `${Math.max(2, Math.min(r.width - w - 2, vp.x * sx - w / 2))}px`;
+    chip.style.top = `${Math.max(2, Math.min(r.height - h - 2, vp.y * sy + 12))}px`;
     // ⛑ THE SAME TWO DOORS THE PLACE CARD USES. `Look inside` is the location tier; `Travel` asks the journey
     // planner first, because a far arrival is a journey to ready rather than a tap away (CCODE-387).
     const ib = chip.querySelector("[data-rmc-inside]");
@@ -13409,8 +13711,59 @@ function wireRegionGroundMap(selectedId) {
     if (hit.kind === "seal") { hideChip(); return; }     // a closed seal says its piece on the canvas already
     showChip(hit, p.x, p.y);
   };
-  cv.onmouseleave = () => { cv.style.cursor = "default"; };
+  cv.onmouseleave = () => { cv.style.cursor = "default"; _drag = null; };
+  // ⛔ ZOOM AT THE POINTER, which is the only kind that does not feel like fighting the map: the world point
+  // under the cursor stays under the cursor.
+  cv.onwheel = (e) => {
+    e.preventDefault();
+    const r = cv.getBoundingClientRect();
+    const mx = (e.clientX - r.left) * (cv.width / r.width), my = (e.clientY - r.top) * (cv.height / r.height);
+    const at = unview(mx, my, cv.width, cv.height);
+    const was = _regionView.k;
+    const k = Math.max(1, Math.min(4, was * (e.deltaY < 0 ? 1.18 : 1 / 1.18)));
+    if (Math.abs(k - was) < 1e-6) return;
+    // keep `at` under the pointer: solve for the centre that puts it back at the same canvas fraction
+    const fx = mx / cv.width, fy = my / cv.height;
+    _regionView.k = k;
+    _regionView.cx = (at.x - (fx - 0.5) * (cv.width / k)) / cv.width;
+    _regionView.cy = (at.y - (fy - 0.5) * (cv.height / k)) / cv.height;
+    hideChip();
+    blitRegion();
+  };
+  let _drag = null;
+  cv.onmousedown = (e) => {
+    if (_regionView.k <= 1.01) return;                 // nothing to pan at full view
+    const r = cv.getBoundingClientRect();
+    _drag = { x: (e.clientX - r.left) * (cv.width / r.width), y: (e.clientY - r.top) * (cv.height / r.height),
+      cx: _regionView.cx, cy: _regionView.cy, moved: false };
+  };
+  // ⚠️ ONE PAIR OF WINDOW LISTENERS, REPLACED — never added. This function runs again on every re-wire, and
+  // `addEventListener` with a fresh closure each time stacks them: after a dozen openings one drag would run a
+  // dozen handlers, each blitting. The map would still look right, which is what makes this kind of leak keep.
+  if (_regionDragOn) {
+    window.removeEventListener("mousemove", _regionDragOn.move);
+    window.removeEventListener("mouseup", _regionDragOn.up);
+  }
+  _regionDragOn = {
+    move: (e) => {
+      if (!_drag) return;
+      const r = cv.getBoundingClientRect();
+      const x = (e.clientX - r.left) * (cv.width / r.width), y = (e.clientY - r.top) * (cv.height / r.height);
+      const dx = (x - _drag.x) / _regionView.k / cv.width, dy = (y - _drag.y) / _regionView.k / cv.height;
+      if (Math.abs(x - _drag.x) + Math.abs(y - _drag.y) > 3) _drag.moved = true;
+      _regionView.cx = _drag.cx - dx; _regionView.cy = _drag.cy - dy;
+      cv.style.cursor = "grabbing";
+      hideChip();
+      blitRegion();
+    },
+    up: () => { if (_drag) cv.style.cursor = "default"; _drag = null; },
+  };
+  window.addEventListener("mousemove", _regionDragOn.move);
+  window.addEventListener("mouseup", _regionDragOn.up);
+  // ⛑ double-click resets, and the readout in the corner says so
+  cv.ondblclick = () => { _regionView.k = 1; _regionView.cx = 0.5; _regionView.cy = 0.5; hideChip(); blitRegion(); };
   cv.onclick = (e) => {
+    if (_drag?.moved) return;                          // a pan is not a selection
     const p = toCanvas(e), hit = pickAt(p.x, p.y);
     if (!hit) {
       // ⚠️ CLICK-AWAY CLOSES AND DOES NOT DESELECT. The selected place is what the Look inside and travel buttons

@@ -1,4 +1,4 @@
-<!-- status: READY except one ruling marked ⬜ ERIK (the reach curve). R4.3 ruled 2026-10-04: neutral unless they clash. R4.5 (Erik): the globe draws the same borders and realms. Amends WORKORDER_aevi_20261004_map_round2 (B2, B5, B6): the map reads the LIVE world (losses, growth, broken powers, taken holds, held gates, standing); a player's holds and bands are a realm with ground of their own; the watch is what carries it out along the roads; and Both draws the nanite -->
+<!-- status: READY, all ruled. R4.4 (Erik): the proposed reach curve, "good for now". R4.3 ruled 2026-10-04: neutral unless they clash. R4.5 (Erik): the globe draws the same borders and realms. Amends WORKORDER_aevi_20261004_map_round2 (B2, B5, B6): the map reads the LIVE world (losses, growth, broken powers, taken holds, held gates, standing); a player's holds and bands are a realm with ground of their own; the watch is what carries it out along the roads; and Both draws the nanite -->
 # AMENDMENT: Aevi → CCode · 2026-10-04 · round 4: the map reads the world as it is now, and the player holds ground too
 
 **Aevi (PO).** Erik, today:
@@ -108,7 +108,11 @@ function `relationOf(a, b, character)`, read by the map, the hover and the GM:
 
 Canvas: panels 1 and 4 of *"The Fellowship's ground"* show the same valley, neutral and then after a clash.
 
-## R4.4 · The reach curve ⬜ ERIK
+## R4.4 · The reach curve ✅ ERIK
+
+> **Erik, 2026-10-04:** *"I'm good with the power reach for now."* Read as the proposed curve below, the one every
+> picture on the Fellowship board was drawn with. It is one constant pair (`0.225`, `0.61`) in one function, so content
+> can tune it later without touching the evaluator.
 
 On B2's curve (`1.2 + 0.32·√heads`) a 20-head council holds about **7½ days** of ground. On that curve the Fellowship
 holds three quarters of the valley, 10 days out, so it does not look like *"their local areas"*. Proposed:

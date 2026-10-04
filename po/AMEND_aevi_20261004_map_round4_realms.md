@@ -1,4 +1,4 @@
-<!-- status: READY except one ruling marked ⬜ ERIK (the reach curve). R4.3 ruled 2026-10-04: neutral unless they clash. Amends WORKORDER_aevi_20261004_map_round2 (B2, B5, B6): the map reads the LIVE world (losses, growth, broken powers, taken holds, held gates, standing); a player's holds and bands are a realm with ground of their own; the watch is what carries it out along the roads; and Both draws the nanite -->
+<!-- status: READY except one ruling marked ⬜ ERIK (the reach curve). R4.3 ruled 2026-10-04: neutral unless they clash. R4.5 (Erik): the globe draws the same borders and realms. Amends WORKORDER_aevi_20261004_map_round2 (B2, B5, B6): the map reads the LIVE world (losses, growth, broken powers, taken holds, held gates, standing); a player's holds and bands are a realm with ground of their own; the watch is what carries it out along the roads; and Both draws the nanite -->
 # AMENDMENT: Aevi → CCode · 2026-10-04 · round 4: the map reads the world as it is now, and the player holds ground too
 
 **Aevi (PO).** Erik, today:
@@ -125,6 +125,30 @@ The great powers keep 76–90% of their ground; small powers become local; growt
 which is Erik's *"grow with army size"*. One curve for every power and every realm. If Erik keeps B2's curve, R4.2 still
 holds and the Fellowship simply reaches further.
 
+## R4.5 · The world view draws the same borders ✅ ERIK
+
+> **Erik, 2026-10-04:** *"Don't forget that the world state needs to show the same power borders and player hold
+> influences as well."*
+
+This moves **the world-tier territory layer** out of *"Not in this order"* and into it. One answer to *whose ground is
+this*, at every zoom:
+
+- **The same powers.** The globe runs `makeInfluence` (crow-flies) over the **same resolved list** as the region map:
+  live heads and broken powers (R4.1), the player's realms (R4.2), the relations (R4.3), the curve (R4.4).
+- **No jump on zoom.** Where a region's travel-cost grid is already walked and cached, the globe reads **that region's
+  owner** for points inside its frame; crow-flies answers only for regions nobody has opened. You measured 100% agreement
+  over the confident cells. The disagreement sits at the edges, which is exactly where a border would jump between the
+  world and the region, so the region's answer wins there.
+- **One colour per power, everywhere.** The mock colours by area rank *within a region*, so the Castellany is one colour
+  in the valley and another in the Echo Vale. Colour is keyed to the **power's id** (an authored `colour` if content gives
+  one, else a stable hash into the palette), and the globe, the region map, the legend and the hover use the same one.
+- **What the globe draws:** fill and border per owner, the same ally (dashed) / neutral (dotted) / rival (stripes)
+  styles, power names at world scale for the larger realms. **The player's realm is always drawn and always named**, with
+  a keep at each hold. Silas's realm reads as ground at Millbrook, an outpost in the Palelands (Stillwater's Trouble)
+  and a toe-hold at the Crossing (Threshold Post). Islands are honest: holds that far apart are not one country.
+- **The same cache stamp** as R4.1, so a raid, a lost hold or a grown band changes the globe and the region on the same
+  turn.
+
 ## Done when
 
 - Bleeding a power in a fixture shrinks its ground on the next paint; breaking it removes it; taking its hold moves the
@@ -134,6 +158,8 @@ holds and the Fellowship simply reaches further.
 - Two allied powers on one seat draw one fill and two borders (dashed); two neutral neighbours draw one fill and a dotted
   border; a recorded clash turns the pair to stripes on the next paint.
 - Both shows the nanite dots.
+- The globe and the region map answer the same owner for the same point, in the same colour, and the player's realm is
+  on both.
 - ⚠️ **Fixture worlds, not the live saves** (§364, and the population-coupled gates of this month).
 
 — Aevi, PO

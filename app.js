@@ -43,7 +43,7 @@ import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, AD
 import { smartClamp, playerText, normName } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
 import { LIBRARY_INDEX, loreToHtml, libMdToHtml, circleRows } from "./engine/library.js";
 import { contributionsBy, lookKey } from "./engine/canon.js";   // CCODE-422: where a look is filed   // ⛔ SNG-584: who made the shared world — tallied since SNG-128, read by nobody until now   // SNG-538 §4: the Library's index and renderers — pure, gated by §181
-import { sourcesHere } from "./engine/substrate.js";   // ⛔ Erik 2026-09-12: the four sources and how well each answers HERE
+import { sourcesHere, meaningDensity } from "./engine/substrate.js";   // ✅ Erik 2026-10-04: the map’s meaning register reads the SAME function the metaphysical ceiling does   // ⛔ Erik 2026-09-12: the four sources and how well each answers HERE
 import { groundForDecl, groundTag, substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace, groundHere, groundCardFor, naniteAt, bandFactor, peoplePresentAt } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
 import { sceneImage, itemImage, artworkStyle, getArtMode, setArtMode, imagesEnabled, ensureImage, aestheticFor, regenPromptFor, onImageMinted, onComposedLookup, swapImageUrl, forgetImageUrl, bustedURL, isBustedURL, mintAction, IMAGE_MIN_BYTES, regenerateImage, acceptImage, isGeneratedImage, toggleKeep, likenessClause, houseStyleFor, sanitizeImagePrompt, imageURLFor, isMinorSubject, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor, lookFor, serviceRefusal, refusedSaid} from "./engine/art.js"; // SNG-401: draw it again without destroying the one they have
 import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, regionExtent, bendRoad, roadNetwork, clipToFrame } from "./engine/worldglobe.js";
@@ -184,7 +184,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.16.16";
+const APP_VERSION = "2.16.17";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2924,7 +2924,12 @@ function worldField() {
   const fields = _terrain?.fields;
   if (!fields?.voters?.length || !CONTENT?.locations) return null;
   try {
-    const data = fieldDataFrom(fields, WORLD_FIELD_MODEL, { content: CONTENT, substrate: CONTENT?.rules?.the_substrate || null });
+    // ✅ ERIK 2026-10-04 — THE MEANING READER, HANDED IN. `field.js` imports nothing and stays that way; this is the
+    // same function the metaphysical CEILING is built from (R38a/b), so the picture and the rule cannot disagree
+    // about where meaning is. ⚠️ `present` and `aura` are left out on purpose: both are a SAVE's facts (who is
+    // standing there, whose temple it is) and the world field is the world's, not one character's.
+    const data = fieldDataFrom(fields, WORLD_FIELD_MODEL, { content: CONTENT, substrate: CONTENT?.rules?.the_substrate || null,
+      meaningOf: (loc) => meaningDensity(loc, { data: CONTENT?.substrateModel || null }) });
     _field = makeField(data);
   } catch (err) { console.warn("[field] could not build the field:", err); _field = null; }
   return _field;

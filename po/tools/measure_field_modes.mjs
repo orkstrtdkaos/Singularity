@@ -15,6 +15,7 @@
 import fs from "node:fs";
 import { loadContentHeadless } from "../../tests/headless_content.mjs";
 import { makeField, fieldDataFrom } from "../../engine/field.js";
+import { meaningDensity } from "../../engine/substrate.js";
 import { decodeTerrain, regionExtent } from "../../engine/worldglobe.js";
 
 const CONTENT = await loadContentHeadless();
@@ -22,7 +23,9 @@ const terrain = decodeTerrain(JSON.parse(fs.readFileSync("content/packs/core/wor
 const MODEL = JSON.parse(fs.readFileSync("content/packs/core/world/field_model.json", "utf8"));
 const REGION_MAPS = JSON.parse(fs.readFileSync("content/packs/core/world/region_maps.json", "utf8"));
 
-const data = fieldDataFrom(terrain.fields, MODEL, { content: CONTENT, substrate: CONTENT?.rules?.the_substrate || null });
+// ⛑ the reader handed in exactly as app.js hands it, or this measures a field the app does not have
+const data = fieldDataFrom(terrain.fields, MODEL, { content: CONTENT, substrate: CONTENT?.rules?.the_substrate || null,
+  meaningOf: (loc) => meaningDensity(loc, { data: CONTENT?.substrateModel || null }) });
 const F = makeField(data);
 
 /* ⚠️ THE PAINTER'S OWN NUMBERS, not approximations of them: a 96×96 window (`fieldWindowFor(ext, 96, 96)`),

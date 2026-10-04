@@ -377,7 +377,36 @@ export function makeField({
  *  magnitude, and `rules/the_substrate.json`'s `sourceBands` is a different table (bands per authored SOURCE, not
  *  per field kind, which is why asking it for `precursor` answers nothing). ⚠️ `bands` rides in the returned data
  *  so a caller cannot forget it and read a silent zero. */
-export function fieldDataFrom(fields = {}, model = null, { content = null, substrate = null } = {}) {
+/** ⛔ THE MEANING ROWS, from the places the world declares. `[id, lat, lon, strength, r1, r2]` — the shape is
+ *  `meaningAt`'s own, which is its only definition: `Rm = 4.5 + 16·r1 + 7·r2` degrees of carry, and the value is
+ *  multiplied by a Gaussian over that.
+ *
+ *  ⚠️ THE RADIUS IS THE ONE NUMBER NOBODY HAS RULED. `meaningDensity` gives a place's VALUE and says nothing about
+ *  how far it carries, so this does not invent a distance: `r1`/`r2` are 0 — the formula's own 4.5° base — unless
+ *  the authored model supplies `meaning.radiusDeg` or a per-tier `meaning.tierRadius`. Author either and it takes
+ *  effect with no code change; until then every place carries the same honest default.
+ *  ⛑ A place with no position cannot be placed, and one at the floor is not worth a row. Pure. */
+export function meansFrom(content, meaningOf, model = null) {
+  if (!content?.locations || typeof meaningOf !== "function") return [];
+  const mm = model?.meaning || content?.substrateModel?.meaning || null;
+  const flat = Number(mm?.radiusDeg);
+  const perTier = mm?.tierRadius && typeof mm.tierRadius === "object" ? mm.tierRadius : null;
+  const out = [];
+  for (const [id, l] of Object.entries(content.locations)) {
+    if (!l?.worldPos || l.supersededBy) continue;
+    let v = 0;
+    try { v = Number(meaningOf(l)) || 0; } catch { continue; }
+    if (!(v > 0)) continue;
+    // ⚠️ the extra degrees a place carries beyond the 4.5° base, expressed in the row's own r1 term (×16)
+    const extra = Number(perTier?.[String(l.tier || "")] ?? flat);
+    const r1 = Number.isFinite(extra) && extra > 0 ? extra / 16 : 0;
+    const lon = Number(l.worldPos.longitude);
+    out.push([id, Number(l.worldPos.colatitude) - 90, lon > 180 ? lon - 360 : lon, v, r1, 0]);
+  }
+  return out;
+}
+
+export function fieldDataFrom(fields = {}, model = null, { content = null, substrate = null, meaningOf = null } = {}) {
   const nanByRegion = {};
   for (const [rid, row] of Object.entries(model?.regions || {})) nanByRegion[rid] = [LETTER[row.state] || "c", Number(row.value) || 0];
   const authored = content ? loadSources({ ...content, fieldModel: model }) : [];
@@ -392,7 +421,17 @@ export function fieldDataFrom(fields = {}, model = null, { content = null, subst
     voters: fields.voters || [],
     densByRegion: substrate?.substrateDensity || fields.densByRegion || {},
     nanByRegion,
-    means: [],   // ⬜ the meaning rows and the roads arrive with the layer; the field reads them when they do
+    // ✅ ERIK 2026-10-04: *"I do want the meaning fields to populate."* ⛑ THE MEANING WAS ALREADY RULED AND ALREADY
+    // COMPUTED — `substrate.meaningDensity` answers for 157 of 157 places from his own R38a/b weights — and this was
+    // the only surface that did not read it, so the register drew a flat 0.05 and its toggle did nothing.
+    // ⚠️ HANDED IN, NOT IMPORTED. This module imports nothing by design, and `substrate.js` pulls in `worldmap.js`
+    // and `melee.js`; taking that graph into a pure evaluator to reach one function would be the wrong trade. The
+    // caller passes the reader, exactly as `worldtick` hands `divert` to `tickStore`.
+    // ⛑ ONE MEANING, TWO SURFACES. The map now shows the same number the CEILING on a metaphysical craft is built
+    // from. Deriving a second meaning here from tags would be two callers computing one thing, and they would drift.
+    means: meansFrom(content, meaningOf, model),
+    // ⬜ ROADS STILL ARRIVE WITH THE LAYER — and they are NOT a prerequisite: `meaningAt` takes the MAX of the places
+    // loop and the roads loop, so roads add the carrying-between rather than enabling the places.
     roads: [],
     bands: model?.bands || {},
     arcs: model?.arcs || [],

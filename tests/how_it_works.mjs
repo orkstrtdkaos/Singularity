@@ -35614,6 +35614,118 @@ console.log("\n── §411 · the ground map answers the pointer ──");
     && /max-width:1600px/.test(A411));
 }
 
+/* ══════════ §412 · THE MAP'S MEANING IS THE RULES' MEANING ══════════ */
+// ⛔ ERIK, 2026-10-04: *"I do want the meaning fields to populate but that might have to wait until the roads are in."*
+//
+// ⛑ IT DID NOT HAVE TO WAIT, and the measurement is why. `meaningAt` takes `Math.max` of an INDEPENDENT places loop
+// and an INDEPENDENT roads loop — roads add the carrying-between, they do not enable the places. And the meaning was
+// already ruled and already computed: `substrate.meaningDensity` answers for 157 of 157 places, 0.200–1.000, from
+// Erik's own R38a/b weights. `means: []` was a WIRING gap, not a content one, and the register drew a flat 0.05.
+//
+// ⚠️ ONE MEANING, TWO SURFACES. The map now reads the same function the CEILING on a metaphysical craft is built
+// from. Deriving a second meaning here from tags would be two callers computing one thing, and they would drift —
+// the map would say a place is holy where the rules said it was not.
+console.log("\n── §412 · the map's meaning is the rules' meaning ──");
+{
+  const FJ412 = await import("../engine/field.js");
+  const SB412 = await import("../engine/substrate.js");
+  const { loadContentHeadless: lch412 } = await import("./headless_content.mjs");
+  const C412 = await lch412();
+  const meaningOf412 = (loc) => SB412.meaningDensity(loc, { data: C412?.substrateModel || null });
+
+  /* ---- 1 · ⛔ THE ROWS COME FROM THE RULED READER ---- */
+  check("§412: ⛔ THE MEANING ROWS ARE BUILT FROM `meaningDensity` — the same reader the metaphysical ceiling uses",
+    (() => {
+      const rows = FJ412.meansFrom(C412, meaningOf412);
+      if (rows.length < 50) return false;
+      // ⛑ every row is a real place with a position, and its strength IS that place's ruled meaning
+      return rows.every(r => Array.isArray(r) && r.length === 6
+        && C412.locations[r[0]] && Number.isFinite(r[1]) && Number.isFinite(r[2])
+        && Math.abs(r[3] - meaningOf412(C412.locations[r[0]])) < 1e-9);
+    })());
+  // ⚠️ AND NO ROW IS INVENTED. A place with no position cannot be placed; a superseded one is not a place.
+  check("§412: ⚠️ …and only places that HAVE a position and are not superseded get one",
+    (() => {
+      const rows = FJ412.meansFrom(C412, meaningOf412);
+      const ids = new Set(rows.map(r => r[0]));
+      for (const [id, l] of Object.entries(C412.locations)) {
+        if (ids.has(id) && (!l?.worldPos || l.supersededBy)) return false;
+      }
+      return true;
+    })());
+  // ⛔ AND IT IS HANDED IN, NOT IMPORTED. `field.js` imports nothing; `substrate.js` pulls `worldmap.js` and
+  // `melee.js`, and taking that graph into a pure evaluator to reach one function is the wrong trade.
+  check("§412: ⛔ …and the reader is HANDED IN — `field.js` still imports nothing at all",
+    !/^\s*import /m.test(rd("engine/field.js"))
+    && /meaningOf: \(loc\) => meaningDensity\(loc, \{ data: CONTENT\?\.substrateModel \|\| null \}\)/.test(rd("app.js")));
+  check("§412: ⚠️ …and a caller that hands in nothing still gets a field, with no rows rather than a crash",
+    FJ412.meansFrom(null, null).length === 0
+    && FJ412.meansFrom(C412, null).length === 0
+    && FJ412.meansFrom(C412, () => { throw new Error("no"); }).length === 0);
+
+  /* ---- 2 · ⛔ THE REGISTER IS NO LONGER FLAT ---- */
+  // ⚠️ DRIVEN THROUGH `strengthAt`, the reader the painter asks — not by inspecting the rows. A row list that the
+  // evaluator ignored would pass every check above and still draw nothing, which is exactly the state this fixes.
+  check("§412: ⛔ THE `metaphysical` REGISTER ANSWERS DIFFERENTLY IN DIFFERENT PLACES — it read a flat 0.05 everywhere",
+    (() => {
+      const mk = (rows) => FJ412.makeField({ sources: [], voters: [], densByRegion: {}, nanByRegion: {},
+        means: rows, roads: [], bands: {}, arcs: [] });
+      const rows = FJ412.meansFrom(C412, meaningOf412);
+      const withRows = mk(rows), without = mk([]);
+      const at = (F) => {
+        const vals = [];
+        for (const r of rows.slice(0, 40)) vals.push(F.strengthAt("metaphysical", r[1], r[2]));
+        return vals;
+      };
+      const a = at(withRows), b = at(without);
+      // ⛑ flat before, varied after — and the high points are AT the places the rules call meaningful
+      return b.every(v => Math.abs(v - 0.05) < 1e-9)
+        && new Set(a.map(v => v.toFixed(3))).size > 5
+        && Math.max(...a) > 0.5;
+    })());
+  // ⛔ AND ROADS WERE NEVER A PREREQUISITE, which is the whole of Erik's question. Driven with roads EMPTY.
+  check("§412: ⛔ …with NO roads at all, which is what makes “wait until the roads are in” unnecessary",
+    (() => {
+      const rows = FJ412.meansFrom(C412, meaningOf412);
+      const F = FJ412.makeField({ sources: [], voters: [], densByRegion: {}, nanByRegion: {},
+        means: rows, roads: [], bands: {}, arcs: [] });
+      const hi = rows.filter(r => r[3] > 0.8).slice(0, 10);
+      return hi.length > 0 && hi.every(r => F.strengthAt("metaphysical", r[1], r[2]) > 0.5);
+    })());
+
+  /* ---- 3 · ⬜ THE RADIUS IS THE ONE NUMBER NOBODY HAS RULED ---- */
+  // ⛔ `meaningDensity` gives a place's VALUE and says nothing about how far it carries. So this does NOT invent a
+  // distance: the row's radius terms are 0 — the formula's own 4.5° base — and an authored `meaning.radiusDeg` or a
+  // per-tier `meaning.tierRadius` takes over with no code change. ⚠️ ASSERTED BOTH WAYS, so the lever cannot rot:
+  // absent today, and honoured the moment it is written.
+  check("§412: ⬜ THE CARRY RADIUS IS A DIAL THE AUTHOR OWNS — unset today, honoured the moment it is authored",
+    (() => {
+      const rows = FJ412.meansFrom(C412, meaningOf412);
+      if (!rows.every(r => r[4] === 0 && r[5] === 0)) return false;          // nothing invented today
+      const model = { meaning: { ...(C412.substrateModel?.meaning || {}), radiusDeg: 8 } };
+      const authored = FJ412.meansFrom(C412, meaningOf412, model);
+      if (!authored.length || !authored.every(r => Math.abs(r[4] - 8 / 16) < 1e-9)) return false;
+      // ⛑ and per-tier beats the flat one, so a region can carry further than a site
+      const byTier = { meaning: { ...(C412.substrateModel?.meaning || {}), radiusDeg: 8, tierRadius: { site: 2 } } };
+      const mixed = FJ412.meansFrom(C412, meaningOf412, byTier);
+      const site = mixed.find(r => C412.locations[r[0]]?.tier === "site");
+      return !!site && Math.abs(site[4] - 2 / 16) < 1e-9;
+    })(), "if this reddens the radius has been authored or hard-coded — one of those is fine and the other is not");
+  // ⚠️ AND A WIDER CARRY REALLY CARRIES FURTHER, so the dial is wired to the evaluator and not just to the row.
+  check("§412: ⚠️ …and the dial reaches the evaluator — a wider carry really does reach further ground",
+    (() => {
+      const mk = (model) => FJ412.makeField({ sources: [], voters: [], densByRegion: {}, nanByRegion: {},
+        means: FJ412.meansFrom(C412, meaningOf412, model), roads: [], bands: {}, arcs: [] });
+      const base = mk(null), wide = mk({ meaning: { radiusDeg: 12 } });
+      const rows = FJ412.meansFrom(C412, meaningOf412);
+      const r0 = rows.find(r => r[3] > 0.8);
+      if (!r0) return false;
+      // a point 5° away: outside the 4.5° default, inside a 16.5° carry
+      const lat = r0[1] + 5;
+      return wide.strengthAt("metaphysical", lat, r0[2]) > base.strengthAt("metaphysical", lat, r0[2]);
+    })());
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

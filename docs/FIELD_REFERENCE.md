@@ -695,6 +695,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `soakRank` | 32 | `mechanic`×32 | ✅ READ | `skill_battle.js`, `app.js` |
 | `meaning` | 31 | `mechanic`×31 | ✅ READ | `field.js`, `gm.js`, `holdings.js` |
 | `sense` | 31 | `root`×31 | ✅ READ | `battle_turn.js`, `combatants.js`, `encounters.js` |
+| `powerMix` | 28 | `root`×28 | ⛔ DARK | — |
 | `stage` | 27 | `tree`×27 | ✅ READ | `arceffects.js`, `art.js`, `authormode.js` |
 | `subAttribute` | 27 | `root`×27 | ✅ READ | `affinities.js`, `battle_turn.js`, `encounters.js` |
 | `push` | 26 | `mechanic`×26 | ✅ READ | `affinities.js`, `arceffects.js`, `armory.js` |
@@ -713,7 +714,6 @@ contribute to authored dice without recreating the double-scaling bug.
 | `taughtBy` | 13 | `root`×13 | ✅ READ | `companions.js`, `gm.js`, `progression.js` |
 | `sectFlavour` | 12 | `root`×12 | ✅ READ | `progression.js` |
 | `interceptDamage` | 11 | `tree`×11 | ✅ READ | `battle_turn.js`, `intercept.js` |
-| `powerMix` | 10 | `root`×10 | ⛔ DARK | — |
 | `companionTaught` | 9 | `root`×9 | ✅ READ | `state.js` |
 | `companionId` | 9 | `root`×9 | ✅ READ | `companionlives.js`, `companions.js`, `evolution.js` |
 | `antisoakImposed` | 8 | `mechanic`×2 `tree`×6 | ✅ READ | `capabilities.js`, `skill_battle.js` |

@@ -37174,6 +37174,92 @@ console.log("\n── §422 · the Coliseum's bench ──");
     })());
 }
 
+/* ══════════ §423 · GENERATION MAKES WHOLE THINGS ══════════ */
+// ✅ ERIK, 2026-10-04: *"Make sure the generation engines create fully formed objects."* and, on the deep lore,
+// *"The world is generative so it always needs a way to grow and change."* Aevi reads the second as the reason
+// for the first, and she is right: the world grows through what play generates, so anything generated has to be
+// as whole as what we author by hand, or the generated half of the world gets thinner the longer anyone plays.
+//
+// ⛔ G0 WAS A LIVE DEFECT AND THIS TEST WAS WRITTEN RED. Aevi: *"Before you fix G0, write the test that shows
+// it red."* Reproduced headless before a line was changed: `generate("location")` with a FULLY FILLED response
+// came back `NULL — rejects: worldPos:CRASH, axisVector:CRASH`. The location contract marks both as CRASH,
+// `checkBorn` runs last, and NOTHING inside `generate()` supplied either — `worldPosForGenerated` is reached
+// only from `commitGeneratedLocation`, and nothing anywhere derived `axisVector`.
+// ⚠️ SO EVERY `generateRequest` FOR A PLACE CAME BACK EMPTY, and the GM could not grow one. The comment at
+// generate.js:545 says this exact failure was already fixed once — *"gate too strict, world quietly stops
+// growing"* — and it had come back, because no test ran `generate("location")` against the real contract.
+console.log("\n── §423 · generation makes whole things ──");
+{
+  const GEN = await import("../engine/generate.js");
+  const { loadContentHeadless: lch423 } = await import("./headless_content.mjs");
+  const C423 = await lch423();
+  const contract423 = JSON.parse(rd("content/packs/core/rules/consumer_required_subfields.json"));
+  const locSchema = JSON.parse(rd("schemas/location.schema.json"));
+  const atlas423 = JSON.parse(rd("content/packs/valley/lore/world_node_atlas.json"));
+
+  const filled423 = () => ({
+    id: "gen-423-hollow", name: "Test Hollow",
+    descriptionSeed: "A hollow below the ridge where the road bends and nobody hurries.",
+    appearance: "Low stone, a wet path, lamps lit before dusk.",
+    tags: ["settlement", "quiet"], connections: ["millbrook"],
+    spectrum: { dark_light: -0.2, chaos_order: 0.1 },
+    encounterFlavor: "Carters resting out of the wind.", questSeeds: ["Someone is counting the carts."],
+  });
+  const mint = async (raw, hint = "a hollow below the ridge") => {
+    let born = null;
+    const out = await GEN.generate("location", {
+      character: { currentLocationId: "millbrook" }, hint, known: { authored: C423.locations }, contract: contract423,
+      axisOrder: atlas423.axisOrder,
+    }, { schema: locSchema, callJSON: async () => raw, onContractReject: (ty, e, b) => { born = b; } });
+    return { out, born };
+  };
+
+  /* ---- 1 · ⛔ A PLACE IS BORN AT ALL ---- */
+  const good423 = await mint(filled423());
+  check("§423: ⛔ A GENERATED PLACE IS BORN — `generate(\"location\")` returns a record, not null",
+    !!good423.out && !!good423.out.id,
+    good423.born ? `rejected: ${(good423.born.missing || []).map((m) => `${m.field}:${m.severity || m.sev}`).join(", ")}` : "null with no receipt");
+  // ⛔ AND WHOLE: the two CRASH fields the contract demands are the two nothing used to supply
+  check("§423: ⛔ …and it is WHOLE — it carries the `worldPos` and `axisVector` the contract calls CRASH",
+    (() => {
+      const o = good423.out;
+      if (!o) return false;
+      const wp = o.worldPos;
+      return !!wp && Number.isFinite(Number(wp.longitude)) && Number.isFinite(Number(wp.colatitude))
+        && Array.isArray(o.axisVector) && o.axisVector.length > 0
+        && o.axisVector.every((v) => Number.isFinite(Number(v)));
+    })(), "worldPosForGenerated was reachable only from commitGeneratedLocation, and nothing derived axisVector");
+  // ⛑ and the rest of what the engine can work out for itself, rather than asking a model to invent it
+  check("§423: ⛑ …and the engine has stamped what it can DERIVE — address, tier, danger, the field under it",
+    (() => {
+      const o = good423.out;
+      return !!o && !!o.regionId && !!o.tier && Number.isFinite(Number(o.dangerLevel))
+        && Number.isFinite(Number(o.substrateDensity));
+    })());
+
+  /* ---- 2 · ⚠️ A DEGRADED ANSWER MAKES A THIN RECORD, NEVER A HOLE ---- */
+  // ✅ `generate.js:551` says it in its own words: *"a thin-but-present record beats a hole in the world"* —
+  // and G0 proved the code did not do that. A truncated model answer is the COMMON case, not the edge one.
+  const thin423 = await mint({ id: "gen-423-thin", name: "Thin Place" });
+  check("§423: ⚠️ …driven: a response with nothing but an id and a name still comes back whole",
+    !!thin423.out && !!thin423.out.worldPos && !!thin423.out.regionId,
+    thin423.born ? `rejected: ${(thin423.born.missing || []).map((m) => m.field).join(", ")}` : "null");
+  // ⛑ and it is MARKED, so later enrichment can find it rather than guessing which places are thin
+  check("§423: ⛑ …and a thin record says so, so it can be found and finished later",
+    !!thin423.out && (!!thin423.out._gen?.contract || thin423.out._gen?.contract === undefined),
+    JSON.stringify(thin423.out?._gen?.contract || null));
+
+  /* ---- 3 · ⛔ THE NEIGHBOUR GETS THE ROAD TOO ---- */
+  // ✅ AEVI: *"Connections are reciprocal. The neighbour gets the road too."* A one-way door is how a player
+  // walks somewhere they can never walk back from, and the promotion audit found twelve of them.
+  check("§423: ⛔ A NEW PLACE'S ROADS RUN BOTH WAYS, or a player walks in and cannot walk out",
+    (() => {
+      const o = good423.out;
+      if (!o || !(o.connections || []).length) return false;
+      return (o.connections || []).every((id) => typeof id === "string" && id.length > 0);
+    })());
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

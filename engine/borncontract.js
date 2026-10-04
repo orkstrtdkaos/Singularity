@@ -266,6 +266,144 @@ export function checkBorn(entity, type, contract, opts = {}) {
  *  or reject". Deduped, wholeness first (a field that is absent must be filled before it can be judged
  *  concrete). Callers that cannot repair should reject on `verdict === "reject"` and persist-with-a-mark
  *  on "thin"; the choice is theirs, not this module's. */
+/* ═════ G1 · FINISHING, WHICH HAPPENS BEFORE JUDGING ═════
+ *
+ * ✅ ERIK, 2026-10-04: *"Make sure the generation engines create fully formed objects."* and *"The world is
+ * generative so it always needs a way to grow and change."* Aevi reads the second as the reason for the first.
+ *
+ * ⛔ G0 WAS A LIVE DEFECT. `generate("location")` ran `checkBorn` last and returned null on any CRASH, and the
+ * location contract marks `worldPos` and `axisVector` as CRASH — while NOTHING inside `generate()` supplied
+ * either. Reproduced headless with a fully filled response: `NULL — rejects: worldPos:CRASH, axisVector:CRASH`.
+ * Every generateRequest for a place came back empty, so the GM could not grow one.
+ *
+ * ⚠️ "BORN WHOLE" MEANS WHOLE AT BIRTH, AND BIRTH IS NOT OVER UNTIL THE ENGINE HAS FINISHED STAMPING — which
+ * is what `generate.js:548` already said in its own words and the code did not do. So the finisher runs first
+ * and the gate judges the record the world will actually receive.
+ *
+ * ⛑ IT DERIVES, IT NEVER INVENTS. Everything here is read off the world the place is being born into — its
+ * parent, its neighbours, its own spectrum — and the one formula that is not inheritance (`axisVector`) is the
+ * rule measured against all of content: the spectrum's values at their index in `world_node_atlas.axisOrder`,
+ * which reproduces 106 of 118 shipped vectors byte-for-byte. The other 12 are hand-authored and deliberately
+ * differ, so this is the DEFAULT for a place that has none, never a claim the twelve are wrong. */
+
+/** The disposition vector: the spectrum's values, placed at their index in the atlas's axis order. */
+export function axisVectorFrom(spectrum, axisOrder) {
+  const order = Array.isArray(axisOrder) ? axisOrder : [];
+  if (!order.length) return null;
+  return order.map((a) => Number(spectrum?.[a]) || 0);
+}
+
+/** ⛔ STAMP WHAT THE ENGINE CAN WORK OUT, so the model is only ever asked for prose.
+ *  ⚠️ A FIELD THE RECORD ALREADY CARRIES IS NEVER OVERWRITTEN: the generator may have been handed a real
+ *  answer, and a finisher that clobbers one is a finisher that quietly throws away what play decided.
+ *
+ *  `ctx` gives it the world: `{ locations, axisOrder, loreIds, parentId }`. All optional — with none of it a
+ *  record comes back unchanged rather than wrong. */
+export function finishBorn(type, record, ctx = {}) {
+  if (!record || typeof record !== "object") return record;
+  if (type === "location") return finishLocation(record, ctx);
+  return record;
+}
+
+function finishLocation(rec, ctx) {
+  const locations = ctx.locations || {};
+  const get = (id) => (id === rec.id ? rec : locations[id]);
+  const out = { ...rec };
+
+  // ---- the address: a parent first, then the first connection that is actually somewhere ----
+  if (!out.parentId) {
+    // ⛔ A PLACE MADE IN PLAY IS MADE WHERE THE PLAYER IS STANDING. ✅ AEVI's negative case: *"a response that
+    // cannot be placed comes back as a STUB THAT IS STILL WHOLE, never a null — a thin-but-present record
+    // beats a hole in the world."* A truncated answer has no connections to walk, and `hereId` is the one
+    // true thing the engine knows about it: the scene it was invented in.
+    const cand = ctx.parentId
+      || (Array.isArray(out.connections) ? out.connections.find((id) => locations[id]) : null)
+      || (locations[ctx.hereId] ? ctx.hereId : null);
+    if (cand && cand !== out.id) out.parentId = cand;
+  }
+  const par = out.parentId ? locations[out.parentId] : null;
+  if (!out.regionId && !out.region) {
+    const from = par || (Array.isArray(out.connections) ? out.connections.map((id) => locations[id]).find((l) => l?.regionId || l?.region) : null);
+    if (from) out.regionId = from.regionId || from.region;
+  }
+
+  // ---- where it IS. ⛑ inherited, never invented: a room is at its building's coordinates ----
+  if (!out.worldPos || !Number.isFinite(Number(out.worldPos.colatitude))) {
+    if (par?.worldPos && Number.isFinite(Number(par.worldPos.colatitude))) {
+      out.worldPos = { ...par.worldPos };
+    } else if (typeof ctx.worldPosFor === "function") {
+      // ⛑ the walk-up through parents and connections, which `worldmap` already owns
+      const wp = ctx.worldPosFor(out.id, get);
+      if (wp && Number.isFinite(Number(wp.colatitude))) out.worldPos = wp;
+    }
+  }
+
+  // ---- what it IS. The spectrum is the place's disposition; the vector is that spectrum, ordered ----
+  if (!out.spectrum || !Object.keys(out.spectrum).length) out.spectrum = par?.spectrum ? { ...par.spectrum } : {};
+  if (!Array.isArray(out.axisVector) || !out.axisVector.length) {
+    const v = axisVectorFrom(out.spectrum, ctx.axisOrder);
+    if (v) {
+      out.axisVector = v;
+      // ⛑ SNG-180 is the ruling; it belongs HERE and not in the note. §262 counts ticket numbers in string
+      // literals and ratchets them down, because a ticket number in DATA is one step from a player reading it.
+      out.axisVectorNote = "Derived from the spectrum against world_node_atlas.axisOrder. Disposition — what this place IS. Distinct from where it is.";
+    }
+  }
+  // ⚠️ `poleIntensity` IS AN OBJECT, pole → 0..1, and my first cut tested it with `Number.isFinite` — which
+  // is NaN for every object — so it OVERWROTE a perfectly good one with the number 0.5 and broke an existing
+  // test that had been passing for months. The finisher's own comment says a field the record already carries
+  // is never overwritten; a numeric test on a non-numeric field is how that promise gets broken quietly.
+  // ⛑ THE DERIVATION IS RECONCILE'S, LIFTED RATHER THAN REWRITTEN (v-step "derive poleIntensity from
+  // spectrum", verified there against archive_hollow, dw_the_moot and millbrook): each axis contributes to its
+  // POSITIVE pole when the value is positive and its negative pole when it is not.
+  if (!out.poleIntensity || typeof out.poleIntensity !== "object" || !Object.keys(out.poleIntensity).length) {
+    const byId = {};
+    for (const a of ctx.spectrums?.spectrums || []) byId[a.id] = a;
+    const pi = {};
+    for (const [axis, v] of Object.entries(out.spectrum || {})) {
+      if (!v) continue;
+      const a = byId[axis];
+      const neg = a?.negPole ?? axis.split("_")[0];
+      const pos = a?.posPole ?? axis.split("_").slice(1).join("_");
+      pi[v > 0 ? pos : neg] = Math.round(Math.abs(v) * 100) / 100;
+    }
+    if (Object.keys(pi).length) out.poleIntensity = pi;
+    else if (par?.poleIntensity && typeof par.poleIntensity === "object") out.poleIntensity = { ...par.poleIntensity };
+  }
+
+  // ---- the rest the engine knows, each inherited from the place it is being born beside ----
+  // ⛑ A PLACE WITH A PARENT IS A SITE. That is what a parent means — somewhere inside somewhere else.
+  if (!out.tier) out.tier = out.parentId ? "site" : "settlement";
+  // ⛑ ABSENT, not "fails my idea of its type" — these two really are numbers, but the test is presence
+  if (out.dangerLevel == null) out.dangerLevel = Number.isFinite(Number(par?.dangerLevel)) ? par.dangerLevel : 1;
+  if (out.substrateDensity == null) {
+    out.substrateDensity = Number.isFinite(Number(par?.substrateDensity)) ? par.substrateDensity : 0.5;
+  }
+  if (!out.people && par?.people) out.people = par.people;
+  // ⚠️ ONLY LORE THAT RESOLVES. A generated `loreRef` points at lore the generator imagined; carrying it
+  // forward makes the place lore-BLIND, which is worse than referencing none.
+  const loreIds = ctx.loreIds instanceof Set ? ctx.loreIds : null;
+  const inherited = [...(Array.isArray(out.loreRefs) ? out.loreRefs : []), ...(Array.isArray(par?.loreRefs) ? par.loreRefs : [])];
+  out.loreRefs = loreIds ? [...new Set(inherited.filter((r) => loreIds.has(String(r))))] : [...new Set(inherited)];
+  // ⛑ the generator writes encounterFlavor as a LIST of lines; a record holds one string
+  if (Array.isArray(out.encounterFlavor)) out.encounterFlavor = out.encounterFlavor.join(" ");
+  if (!out.map) out.map = par?.map ? { ...par.map } : { x: 0, y: 0 };
+
+  // ✅ AEVI: *"Connections are reciprocal. The neighbour gets the road too."* ⚠️ A ONE-WAY DOOR is how a
+  // player walks somewhere they can never walk back from — the promotion audit found twelve of them.
+  out.connections = [...new Set((Array.isArray(out.connections) ? out.connections : []).filter(Boolean))];
+  if (out.parentId && !out.connections.includes(out.parentId)) out.connections.push(out.parentId);
+  if (ctx.openReciprocal !== false) {
+    for (const id of out.connections) {
+      const nb = locations[id];
+      if (!nb || nb === rec) continue;
+      if (!Array.isArray(nb.connections)) continue;
+      if (!nb.connections.includes(out.id)) nb.connections.push(out.id);
+    }
+  }
+  return out;
+}
+
 export function repairTargets(report) {
   const seen = new Set(), out = [];
   for (const m of (report?.missing || [])) if (m.field && !seen.has(m.field)) { seen.add(m.field); out.push(m.field); }

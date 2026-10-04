@@ -648,7 +648,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `cannot` | 1216 | `tree`×1216 | ✅ READ | `art.js`, `assignments.js`, `authormode.js` |
 | `gains` | 1186 | `tree`×1186 | ✅ READ | `encounters.js`, `gm.js`, `roundreceipt.js` |
 | `gainAxes` | 1127 | `tree`×1127 | ✅ READ | `capabilities.js` |
-| `axis` | 511 | `rankDeltas`×511 | ✅ READ | `cityplan.js`, `coliseum.js`, `craftmechanics.js` |
+| `axis` | 511 | `rankDeltas`×511 | ✅ READ | `borncontract.js`, `cityplan.js`, `coliseum.js` |
 | `delta` | 511 | `rankDeltas`×511 | ✅ READ | `arceffects.js`, `companions.js`, `economy.js` |
 | `from` | 511 | `rankDeltas`×511 | ✅ READ | `affiliation.js`, `armory.js`, `art.js` |
 | `kind` | 489 | `rankDeltas`×489 | ✅ READ | `arceffects.js`, `armory.js`, `art.js` |

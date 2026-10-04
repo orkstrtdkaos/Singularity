@@ -16,6 +16,18 @@
   "next": [],
   "releases": [
     {
+      "version": "2.18.6",
+      "date": "2026-10-04",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "The world can grow places again",
+          "summary": "Somewhere the story invented was being thrown away instead of kept.",
+          "detail": "When the telling made a new place, the engine checked it for completeness before it had finished filling it in — so every single one failed that check and was discarded. The world had quietly stopped being able to grow a location through play. Worse, a well-written answer was being judged against a list that included things the engine works out for itself, so it was rejected and replaced with a bare stub, losing the roads and the description it came with. The engine now finishes a new place first and judges it after: it works out where the place sits from its neighbours, what it is from its own character, how dangerous it is, and what lore it inherits, and it opens the road back from the neighbour as well. A place invented in the middle of a scene with nothing to anchor it to is placed where you are standing. A thin record that is still whole beats a hole in the world."
+        }
+      ]
+    },
+    {
       "version": "2.18.5",
       "date": "2026-10-04",
       "entries": [

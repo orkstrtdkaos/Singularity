@@ -19,10 +19,11 @@
 import { isDescriptiveNotName } from "./state.js";
 import { slugify } from "./quests.js";
 import { namesMatch, smartClamp } from "./namematch.js";
+import { worldPosForGenerated } from "./worldmap.js";   // G0: the address walk the finisher needs
 import { affiliationAt } from "./affiliation.js";   // SNG-185: the ONE affiliation impl · CCODE-413: the whole chain now lives there
 import { validate, missingRequired, defaultFor } from "./genschema.js";
 import { isLegalEmergent } from "./braids.js";   // SNG-197 §4: the ONE emergent-verb gate (no second impl to drift)
-import { checkBorn, describeBorn } from "./borncontract.js";  // SNG-250 §4: the ONE born-whole gate (the same fn content_ci runs over authored content)
+import { checkBorn, describeBorn, finishBorn } from "./borncontract.js";  // SNG-250 §4: the ONE born-whole gate (the same fn content_ci runs over authored content)
 import { drawTier, evidenceFor } from "./npcsheet.js";
 import { isMinorSubject } from "./art.js";   // SNG-556: the ONE minor floor - this file used to carry a second, differing copy   // ⛔ SPEC §2.1/§2.2 — rarity + evidence at the mint
 
@@ -452,7 +453,24 @@ export async function generate(type, context = {}, deps = {}) {
     } catch { raw = null; }
   }
 
-  const repairedOut = repairEntity(type, raw, context, schema);
+  // ⛔ G0/G1 · STAMP BEFORE VALIDATING, not after. ⚠️ THIS ORDERING IS THE WHOLE FIX AND IT TOOK TWO GOES.
+  // The location schema's `required` lists fourteen fields and SIX OF THEM ARE THINGS THE ENGINE DERIVES —
+  // regionId, loreRefs, map, poleIntensity, schemaVersion, communityId. So a model answer that correctly omits
+  // them is INVALID, falls to the last-resort stub, and loses its `connections` and its prose on the way —
+  // measured: a fully-written response came back with `connections: []` and `descriptionSeed: ""`.
+  // ⛑ AND THE CONNECTIONS ARE WHAT THE ADDRESS IS DERIVED FROM, so stamping afterwards had nothing left to
+  // work with. Finish first, and the model is only ever judged on the prose it was actually asked for.
+  const ctxBorn = {
+    locations: { ...(known.authored || {}), ...generatedPool },
+    axisOrder: context.axisOrder || deps.axisOrder || null,
+    loreIds: context.loreIds || deps.loreIds || null,
+    parentId: context.parentId || null,
+    // ⛑ where the scene is: the last resort for a place that arrived with nothing to anchor to
+    hereId: context.hereId || context.character?.currentLocationId || null,
+    spectrums: context.spectrums || deps.spectrums || null,   // pole names, when content has them
+    worldPosFor: (id, get) => worldPosForGenerated(id, get),
+  };
+  const repairedOut = repairEntity(type, finishBorn(type, raw, ctxBorn), context, schema);
   // THE FLOORS — absolute, rating-independent, at the birth-validator (before anything persists)
   const floored = enforceFloors(repairedOut.entity, type, context, schema);
   const entity = floored.entity;
@@ -552,15 +570,23 @@ export async function generate(type, context = {}, deps = {}) {
   // A CRASH-severity failure REJECTS (return null) — SNG-234 universalized: never ship a hollow
   // anything. Anything softer is kept and stamped, because a thin-but-present record beats a hole in
   // the world, and `_gen.contract` makes it findable for later enrichment. Never throws, never halts.
-  const born = checkBorn(entity, type, deps.contract || context.contract || null, { vocabs: deps.vocabs || context.vocabs || {} });
+  // ⛔ G1 · FINISH BEFORE JUDGING. ✅ ERIK: *"Make sure the generation engines create fully formed objects."*
+  // ⚠️ THIS LINE IS THE FIX FOR G0. The gate below marks `worldPos` and `axisVector` CRASH for a location and
+  // nothing in here supplied either, so EVERY generated place was rejected and the world could not grow one
+  // through the GM. The comment above says birth is not over until the engine has finished stamping; now it
+  // actually finishes first, and the gate judges the record the world will receive.
+  // ⛑ AND AGAIN AFTER THE FLOORS, because `enforceFloors` may rewrite the record and the gate below must
+  // judge what the world will actually receive. Idempotent: every branch fills only what is absent.
+  const whole = finishBorn(type, entity, ctxBorn) || entity;
+  const born = checkBorn(whole, type, deps.contract || context.contract || null, { vocabs: deps.vocabs || context.vocabs || {} });
   if (born.gated && born.verdict === "reject") {
-    try { deps.onContractReject?.(type, entity, born); } catch { /* telemetry is a convenience */ }
+    try { deps.onContractReject?.(type, whole, born); } catch { /* telemetry is a convenience */ }
     return null;
   }
   if (born.gated && born.verdict !== "clean") {
-    entity._gen.contract = { verdict: born.verdict, worst: born.worst, missing: born.missing.map(m => m.field), vague: born.vague.map(v => v.id), why: describeBorn(born) };
+    whole._gen.contract = { verdict: born.verdict, worst: born.worst, missing: born.missing.map(m => m.field), vague: born.vague.map(v => v.id), why: describeBorn(born) };
   }
-  return persistGenerated(context.character, type, entity, deps);
+  return persistGenerated(context.character, type, whole, deps);
 }
 
 // ---------- SNG-BATCH-9 §2: engagement governor + canon tiers ----------

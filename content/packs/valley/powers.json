@@ -2794,9 +2794,9 @@
    "name": "The Ones Called",
    "kind": "order",
    "temper": "hard",
-   "seat": "the_long_span",
+   "seat": "stair_hollow",
    "reach": [
-    "the_long_span",
+    "stair_hollow",
     "the_wayhouse"
    ],
    "leader": "the_one_called_zeus",
@@ -2818,9 +2818,9 @@
    },
    "holds": [
     {
-     "at": "the_long_span",
+     "at": "stair_hollow",
      "kind": "post",
-     "name": "a pavilion at the Long Span crossroads, where the Ones Called sit facing the road",
+     "name": "the oath-hall at Stair Hollow, where the Ones Called hold court beneath the Ascent",
      "garrison": 6
     }
    ],
@@ -2841,9 +2841,9 @@
    "whenBroken": "The names go back to wherever they came from, the retinues go home, and for a season the Wayhouse is just an inn.",
    "rivals": [],
    "opposedBy": [],
-   "plainly": "The God-Named: people who wear the names of gods and carry an authority that is entirely real and entirely unverifiable. They hold court at the Long Span, in front of the Wayhouse, under the One Called Zeus. They are the Seraphs' more human, more fallible kin, with much the same power.",
-   "descriptionSeed": "At the Long Span, the crossroads in front of the Wayhouse where nobody's name can be checked, the God-Named sit in a pavilion facing the road. The One Called Zeus is first among them, Athena keeps the office and Ares the watch. Their grandeur is borrowed and worn slightly wrong, and it works anyway: retinues swear to the name, petitioners kneel to it, and the Seraphs watch them with something between kinship and alarm.",
-   "appearance": "Bleached linen and old gold leaf under a pavilion at a crossroads where the world's far roads meet, three figures lit from high behind so their faces are half in shadow, a carried sigil on the table in front of each",
+   "plainly": "The God-Named: people who wear the names of gods and carry an authority that is entirely real and entirely unverifiable. They hold court at Stair Hollow, beneath the Ascent, under the One Called Zeus. They are the Seraphs' more human, more fallible kin, with much the same power.",
+   "descriptionSeed": "At Stair Hollow, among the courts and oath-halls beneath the Ascent, the God-Named hold court: judgement you can appeal, from people whose names nobody can check. The One Called Zeus is first among them, Athena keeps the office and Ares the watch. Their grandeur is borrowed and worn slightly wrong, and it works anyway: retinues swear to the name, petitioners kneel to it, and the Seraphs above watch them with something between kinship and alarm.",
+   "appearance": "Bleached linen and old gold leaf in an oath-hall cut into the foot of the Ascent, three figures lit from high behind so their faces are half in shadow, a carried sigil on the table in front of each",
    "secretsGM": [
     "None of the Ones Called will say how they came by their names, and at least one of them does not know.",
     "The One Called Loki sits at the same inn and keeps the Bargainers' table. The God-Named call him one of their own; he has never agreed to it."
@@ -2851,17 +2851,17 @@
    "houseAt": "the_crossing",
    "comes": "loud",
    "_sng668": "✅ ERIK 2026-10-04: every tradition keeps a power at the Crossing. The God-Named (Service, a seraphic fidelity relation per Erik 2026-08-15) had three Ones Called at the Wayhouse and no power.",
-   "_seatWhy": "Seats are exclusive (seatsAreExclusive) and the Wayhouse is the Horizon Compact's. The Ones Called live at the Wayhouse and hold court at the crossroads in front of it, where every far road arrives."
+   "_seatWhy": "Stair Hollow's own canon: 'the god-named hold court here.' Corrected 2026-10-04 from the Long Span, which I chose before reading it. The Ones Called still keep rooms at the Wayhouse, where their names cannot be checked."
   },
   {
    "id": "power_table_of_kept_terms",
    "name": "The Table of Kept Terms",
    "kind": "guild",
    "temper": "fair",
-   "seat": "the_crossing_gate_yard",
+   "seat": "the_low_market",
    "reach": [
+    "the_low_market",
     "the_crossing_gate_yard",
-    "the_hundred_markets",
     "the_wayhouse"
    ],
    "leader": "the_one_called_loki",
@@ -2883,9 +2883,9 @@
    },
    "holds": [
     {
-     "at": "the_crossing_gate_yard",
+     "at": "the_low_market",
      "kind": "enterprise",
-     "name": "a plain table and a single lamp in the Hub Yard, where every caravan has to stop",
+     "name": "a plain table and a single lamp in the Low Market, where the terms are written down",
      "garrison": 2
     }
    ],
@@ -2904,7 +2904,7 @@
    "whenBroken": "The tally-sticks stop matching. Every deal the Table witnessed is suddenly a matter of who remembers what, and the Hundred Markets get louder.",
    "rivals": [],
    "opposedBy": [],
-   "plainly": "The Bargainers: brokers who name every term aloud and keep it exactly. Their table sits in the Hub Yard at the Crossing, where every caravan has to stop, and the One Called Loki keeps another in the Wayhouse's back room.",
+   "plainly": "The Bargainers: brokers who name every term aloud and keep it exactly. Their table is at the Low Market, the honest end of the Descent's trade; their house at the Crossing is in the Hub Yard; and the One Called Loki keeps another in the Wayhouse's back room.",
    "descriptionSeed": "The Bargainers deal in terms, not goods. You sit across a plain table under a single lamp, you say what you want, and the Broker tells you the price before you swear; the witness splits a tally-stick and each of you keeps half. The Hollow Court also grants exactly what is asked, but it never says what it takes. The Table always says. That is the whole difference, and it is everything.",
    "appearance": "A plain table under a single lamp in a caravan yard, ledger paper and wax seals, a jar of split tally-sticks, and a man in worn brass buttons who is smiling slightly too early",
    "secretsGM": [
@@ -2913,7 +2913,7 @@
    "houseAt": "the_crossing_gate_yard",
    "comes": "quiet",
    "_sng668": "✅ ERIK 2026-10-04: every tradition keeps a power at the Crossing. The Bargainers (Terms: abyssal 0.5, verist 0.3, mason 0.2) had their Broker at the Wayhouse and no power.",
-   "_seatWhy": "Seats are exclusive and the Wayhouse is the Horizon Compact's. The Table sits in the Hub Yard at the Crossing, so its seat is its house; the One Called Loki lives at the Wayhouse and keeps a second table in its back room."
+   "_seatWhy": "The Low Market's own canon: 'the honest end of the Descent's trade: bargains with the terms written down.' Corrected 2026-10-04 from the Hub Yard, which I chose before reading it. The Table keeps its house at the Crossing in the Hub Yard; the One Called Loki keeps a second table in the Wayhouse's back room."
   }
  ]
 }

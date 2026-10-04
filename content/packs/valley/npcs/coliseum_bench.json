@@ -1,0 +1,830 @@
+{
+ "schemaVersion": 1,
+ "id": "coliseum_bench",
+ "kind": "challenger_pool",
+ "arcId": null,
+ "note": "✅ ERIK 2026-10-04: \"Every reach and distinct people should have at least one gladiator, if not a whole bench. The coliseum is central in the culture here.\" SNG-669 · THE BENCH. The Great Coliseum's roster by reach: `heads` are the reach's existing champions (the eight cell champions, Saehara, Kesh Ardent), `challengers` are contenders and novices, one at least for every region of the world. Each challenger is a duel opponent in the saehara_challengers shape (concept, style, voiceHints, duelStakes) plus `reach`, `people`, `families` (the function families its practice draws from, for the blind grid's four), `rank` and `record`. No arc: this pool is read by the Coliseum, not by recurrence.",
+ "_coverage": "Every region but the Crossing has at least one bench member; the Crossing's own is Saehara. Peoples fielded beyond human: valleyfolk, precursor-construct, glade-born, djinn, ent, fae, minotaur, gorgon, keener, revenant.",
+ "heads": [
+  {
+   "npcId": "kestrin_riven",
+   "reach": "riven_marches",
+   "cell": "HARM"
+  },
+  {
+   "npcId": "vantia_stillhold",
+   "reach": "riven_marches",
+   "cell": "PROTECT",
+   "_note": "the Stillhold sits inside the Riven Marches"
+  },
+  {
+   "npcId": "the_edge_that_holds",
+   "reach": "riven_marches"
+  },
+  {
+   "npcId": "lys_vane",
+   "reach": "the_veiled_reach",
+   "cell": "INFLUENCE"
+  },
+  {
+   "npcId": "sethran_hold",
+   "reach": "the_reasoned_hold",
+   "cell": "KNOW"
+  },
+  {
+   "npcId": "aro_horizon",
+   "reach": "the_open_reach",
+   "cell": "MOVE"
+  },
+  {
+   "npcId": "oreth_quiet",
+   "reach": "the_feeling_coast",
+   "cell": "RESTORE"
+  },
+  {
+   "npcId": "bricke_making",
+   "reach": "the_making",
+   "cell": "SHAPE"
+  },
+  {
+   "npcId": "hallis_pale",
+   "reach": "the_palelands",
+   "cell": "SUSTAIN"
+  },
+  {
+   "npcId": "the_undefeated",
+   "reach": "the_center",
+   "_note": "Saehara the Undefeated, the Coliseum's own; his challengers are the saehara_challengers pool"
+  }
+ ],
+ "challengers": [
+  {
+   "id": "bench_corra_wade",
+   "name": "Corra Wade of Millbrook",
+   "reach": "valley",
+   "people": "valleyfolk",
+   "traditions": [
+    "valley_craft"
+   ],
+   "families": [
+    "SUSTAIN",
+    "PROTECT"
+   ],
+   "rank": "contender",
+   "record": "11–6",
+   "concept": "A millhand who came to the Crossing with a flail she uses for threshing and has never once apologised for. The valley's crowd comes to see her lose and stays to watch her not.",
+   "style": "threshing-flail and a farmer's patience; she outlasts rather than outfights",
+   "tacticTags": [
+    "outlasts",
+    "plants-her-feet",
+    "works-the-body"
+   ],
+   "voiceHints": "Short sentences, a laugh at the wrong moment, calls everyone 'love'.",
+   "duelStakes": "prestige: a bout at the Great Coliseum ends at the bell or a yield, never at a grave"
+  },
+  {
+   "id": "bench_patience",
+   "name": "Patience, of Archive Hollow",
+   "reach": "valley",
+   "people": "precursor-construct",
+   "traditions": [
+    "valley_craft"
+   ],
+   "families": [
+    "PROTECT",
+    "KNOW"
+   ],
+   "rank": "novice",
+   "record": "3–2",
+   "concept": "A Precursor construct that walked out of Archive Hollow, registered at the Coliseum under the only name anyone has called it, and has been learning to fight by watching. It does not yet understand why the crowd cheers.",
+   "style": "a guard copied from whoever it last lost to, improving bout by bout",
+   "tacticTags": [
+    "copies-the-last-opponent",
+    "never-the-same-mistake-twice",
+    "waits"
+   ],
+   "voiceHints": "Speaks rarely, in complete and slightly too formal sentences; asks the crowd questions.",
+   "duelStakes": "prestige: a bout at the Great Coliseum ends at the bell or a yield, never at a grave"
+  },
+  {
+   "id": "bench_thistle",
+   "name": "Thistle, glade-born",
+   "reach": "the_echo_vale",
+   "people": "glade-born",
+   "traditions": [
+    "lattice"
+   ],
+   "families": [
+    "MOVE",
+    "KNOW"
+   ],
+   "rank": "contender",
+   "record": "9–4",
+   "concept": "Glade-born from below Harmonic Heights, who fights to the echo of the arena itself: she hears your step come back off the far wall before you take it.",
+   "style": "barefoot, light, always circling toward the loud side of the sand",
+   "tacticTags": [
+    "reads-the-echo",
+    "circles",
+    "never-where-you-swing"
+   ],
+   "voiceHints": "Hums. Answers a question with the note it was asked in.",
+   "duelStakes": "prestige: a bout at the Great Coliseum ends at the bell or a yield, never at a grave"
+  },
+  {
+   "id": "bench_nyx_harrow",
+   "name": "Nyx Harrow, Who Fights With the Lamps Out",
+   "reach": "umbral_depths",
+   "people": "human",
+   "traditions": [
+    "umbral"
+   ],
+   "families": [
+    "KNOW",
+    "MOVE"
+   ],
+   "rank": "contender",
+   "record": "14–5",
+   "concept": "An Umbral who asks, every bout, that the sand-lamps be put out. The Coliseum refuses, every bout, and she wins anyway, eyes closed.",
+   "style": "eyes shut, a short blade, sees by other means",
+   "tacticTags": [
+    "fights-blind",
+    "hears-the-breath",
+    "punishes-a-feint"
+   ],
+   "voiceHints": "Low, unhurried, says your name as if she has always known it.",
+   "duelStakes": "prestige: a bout at the Great Coliseum ends at the bell or a yield, never at a grave"
+  },
+  {
+   "id": "bench_qadir_glassborn",
+   "name": "Qadir Glassborn",
+   "reach": "radiant_wastes",
+   "people": "djinn",
+   "traditions": [
+    "blazeborn"
+   ],
+   "families": [
+    "HARM",
+    "INFLUENCE"
+   ],
+   "rank": "contender",
+   "record": "17–8",
+   "concept": "A djinn out of the Radiant Wastes who fights in a glare he makes himself. The front rows wear smoked glass when he is on the card.",
+   "style": "a blade of light that does not diffuse, swung from inside the brightest spot on the sand",
+   "tacticTags": [
+    "blinds",
+    "pressures",
+    "shows-off"
+   ],
+   "voiceHints": "Grand, generous, a showman who means every word; tips the sand-sweepers.",
+   "duelStakes": "prestige: a bout at the Great Coliseum ends at the bell or a yield, never at a grave"
+  },
+  {
+   "id": "bench_old_hornbeam",
+   "name": "Old Hornbeam",
+   "reach": "the_quickwood",
+   "people": "human",
+   "traditions": [
+    "rootkin"
+   ],
+   "families": [
+    "SUSTAIN",
+    "RESTORE"
+   ],
+   "rank": "contender",
+   "record": "20–12",
+   "concept": "A Rootkin wrestler from Grovehome who seems to grow a little over the course of a bout, and a little more over a season. Nobody has thrown him in the last third of a fight.",
+   "style": "grappling, rooted, slow to start and impossible to finish",
+   "tacticTags": [
+    "roots",
+    "recovers",
+    "wins-late"
+   ],
+   "voiceHints": "Talks about weather and seasons; never about the fight.",
+   "duelStakes": "prestige: a bout at the Great Coliseum ends at the bell or a yield, never at a grave"
+  },
+  {
+   "id": "bench_isk",
+   "name": "Isk the Perfect Form",
+   "reach": "somatic_reaches",
+   "people": "human",
+   "traditions": [
+    "somatic"
+   ],
+   "families": [
+    "MOVE",
+    "HARM"
+   ],
+   "rank": "contender",
+   "record": "22–3",
+   "concept": "A Somatic from the High Temple of the Body for whom a bout is a recital. She would rather lose beautifully than win ugly, and has never had to choose.",
+   "style": "open-handed, flowing, every strike a finished shape",
+   "tacticTags": [
+    "flows",
+    "turns-defence-into-strike",
+    "never-wastes-a-step"
+   ],
+   "voiceHints": "Precise and warm; corrects your stance kindly, mid-bout.",
+   "duelStakes": "prestige: a bout at the Great Coliseum ends at the bell or a yield, never at a grave"
+  },
+  {
+   "id": "bench_tamsin",
+   "name": "Tamsin Twice-Thrown",
+   "reach": "unspooling",
+   "people": "human",
+   "traditions": [
+    "churnfolk"
+   ],
+   "families": [
+    "MOVE",
+    "INFLUENCE"
+   ],
+   "rank": "novice",
+   "record": "6–6",
+   "concept": "Churnfolk from Spindrift Hollow who has never fought the same way twice and does not believe it is possible to. The bookmakers hate her.",
+   "style": "whatever the moment suggests; she changes weapons between rounds",
+   "tacticTags": [
+    "unpredictable",
+    "switches-styles",
+    "baits"
+   ],
+   "voiceHints": "Laughs, contradicts herself, means both.",
+   "duelStakes": "prestige: a bout at the Great Coliseum ends at the bell or a yield, never at a grave"
+  },
+  {
+   "id": "bench_greaveroot",
+   "name": "Greaveroot",
+   "reach": "manifest_domain",
+   "people": "ent",
+   "traditions": [
+    "rootkin"
+   ],
+   "families": [
+    "PROTECT",
+    "SUSTAIN"
+   ],
+   "rank": "contender",
+   "record": "8–1",
+   "concept": "An ent of the Deepwood who agreed to one bout a century ago to settle a question, and has stayed because the question keeps coming back. His bouts end at sundown, by his rule and nobody else's.",
+   "style": "immovable; lets you exhaust yourself on bark",
+   "tacticTags": [
+    "immovable",
+    "absorbs-and-waits",
+    "ends-at-sundown"
+   ],
+   "voiceHints": "Very slow speech; long pauses; occasionally answers last week's question.",
+   "duelStakes": "prestige: a bout at the Great Coliseum ends at the bell or a yield, never at a grave"
+  },
+  {
+   "id": "bench_unit_seven",
+   "name": "Seven-Ascending",
+   "reach": "the_lattice_cities",
+   "people": "human",
+   "traditions": [
+    "lattice"
+   ],
+   "families": [
+    "KNOW",
+    "PROTECT"
+   ],
+   "rank": "contender",
+   "record": "19–2",
+   "concept": "A Lattice-City citizen who enters with a written plan for the bout and executes it to the second. Two losses, both to people who did not do what anyone should.",
+   "style": "scheduled, exact, guard always where the plan says it should be",
+   "tacticTags": [
+    "follows-the-plan",
+    "exact-timing",
+    "punishes-the-expected"
+   ],
+   "voiceHints": "Polite, unsettling, refers to the bout by its tier and minute.",
+   "duelStakes": "prestige: a bout at the Great Coliseum ends at the bell or a yield, never at a grave"
+  },
+  {
+   "id": "bench_cass_ratchet",
+   "name": "Cass Ratchet",
+   "reach": "the_gearlands",
+   "people": "human",
+   "traditions": [
+    "enginewright"
+   ],
+   "families": [
+    "SHAPE",
+    "PROTECT"
+   ],
+   "rank": "contender",
+   "record": "13–7",
+   "concept": "An Enginewright from Pressureholt who fights in a rig she built, and rebuilds between rounds. The Coliseum's rules on what counts as a weapon were rewritten twice because of her.",
+   "style": "a pressure-rig with a hammer arm, tuned between rounds",
+   "tacticTags": [
+    "rebuilds-mid-bout",
+    "armoured",
+    "heavy-hits"
+   ],
+   "voiceHints": "Talks to the rig, not to you. Swears in gauge readings.",
+   "duelStakes": "prestige: a bout at the Great Coliseum ends at the bell or a yield, never at a grave"
+  },
+  {
+   "id": "bench_lampless_sister",
+   "name": "The Lampless Sister",
+   "reach": "the_numinous_reach",
+   "people": "human",
+   "traditions": [
+    "numinous"
+   ],
+   "families": [
+    "INFLUENCE",
+    "RESTORE"
+   ],
+   "rank": "novice",
+   "record": "4–1",
+   "concept": "A Numinous from the Lampless Hermitage who may not be entirely present. Opponents report fighting someone a step to the left of where she stands.",
+   "style": "barely there; turns your strike aside with a word",
+   "tacticTags": [
+    "hard-to-locate",
+    "unsettles",
+    "mends-herself"
+   ],
+   "voiceHints": "Whispers. Finishes your sentence, wrongly.",
+   "duelStakes": "prestige: a bout at the Great Coliseum ends at the bell or a yield, never at a grave"
+  },
+  {
+   "id": "bench_hedda_plainspoken",
+   "name": "Hedda Plainspoken",
+   "reach": "the_stark_reach",
+   "people": "human",
+   "traditions": [
+    "verist"
+   ],
+   "families": [
+    "KNOW",
+    "HARM"
+   ],
+   "rank": "contender",
+   "record": "16–9",
+   "concept": "A Verist from the Told Ground who announces every blow before she throws it, and still lands most of them. The crowd counts along.",
+   "style": "a maul, called aloud, thrown exactly as named",
+   "tacticTags": [
+    "names-the-blow",
+    "honest-feints-only",
+    "relentless"
+   ],
+   "voiceHints": "Says exactly what is so. 'Left shoulder.' 'You are tired.' 'I am going to win.'",
+   "duelStakes": "prestige: a bout at the Great Coliseum ends at the bell or a yield, never at a grave"
+  },
+  {
+   "id": "bench_velvet_asks",
+   "name": "Velvet Asks",
+   "reach": "the_descent",
+   "people": "fae",
+   "traditions": [
+    "abyssal"
+   ],
+   "families": [
+    "INFLUENCE",
+    "HARM"
+   ],
+   "rank": "contender",
+   "record": "15–4",
+   "concept": "A fae of the Descent who offers every opponent a better fight before the bell, for a price that is always slightly more than it sounds. Most refuse. The ones who accept remember it.",
+   "style": "a whip and an offer; fights warmly and to the hilt",
+   "tacticTags": [
+    "offers-a-bargain",
+    "charms",
+    "punishes-greed"
+   ],
+   "voiceHints": "Velvet-voiced, affectionate, always asking what you want.",
+   "duelStakes": "prestige: a bout at the Great Coliseum ends at the bell or a yield, never at a grave"
+  },
+  {
+   "id": "bench_brother_caliel",
+   "name": "Brother Caliel of the Lower Court",
+   "reach": "the_ascent",
+   "people": "human",
+   "traditions": [
+    "seraphic"
+   ],
+   "families": [
+    "PROTECT",
+    "RESTORE"
+   ],
+   "rank": "contender",
+   "record": "18–6",
+   "concept": "A Seraphic brother who refuses to strike anyone on the ground and has lost three bouts for it. He considers those his best.",
+   "style": "shield and mace, luminous, merciful past the point of sense",
+   "tacticTags": [
+    "will-not-strike-the-fallen",
+    "covers",
+    "heals-the-opponent"
+   ],
+   "voiceHints": "Gentle, certain, a little condescending; blesses the sand before he steps on it.",
+   "duelStakes": "prestige: a bout at the Great Coliseum ends at the bell or a yield, never at a grave"
+  },
+  {
+   "id": "bench_haldor",
+   "name": "Haldor Bedrock-Born",
+   "reach": "the_given_land",
+   "people": "minotaur",
+   "traditions": [
+    "mason"
+   ],
+   "families": [
+    "HARM",
+    "PROTECT"
+   ],
+   "rank": "contender",
+   "record": "21–5",
+   "concept": "A minotaur Mason from Bedrock who insists the sand be weighed before every bout, and once refused to fight on ground that was three pounds light.",
+   "style": "horns, a stone-headed hammer, and ground he has tested with his own hooves",
+   "tacticTags": [
+    "charges",
+    "holds-ground",
+    "tests-the-footing"
+   ],
+   "voiceHints": "Deep, deliberate, distrusts anything he cannot touch, including compliments.",
+   "duelStakes": "prestige: a bout at the Great Coliseum ends at the bell or a yield, never at a grave"
+  },
+  {
+   "id": "bench_sythe",
+   "name": "Sythe of the Figure-Works",
+   "reach": "the_pattern_reach",
+   "people": "gorgon",
+   "traditions": [
+    "figurist"
+   ],
+   "families": [
+    "KNOW",
+    "INFLUENCE"
+   ],
+   "rank": "contender",
+   "record": "12–3",
+   "concept": "A gorgon Figurist whose gaze freezes a pattern, never a person: the Coliseum's oldest special rule. She stops your next move in its idea before you make it.",
+   "style": "veiled until the bell, then the gaze; fights the shape of your intent",
+   "tacticTags": [
+    "freezes-the-pattern",
+    "reads-intent",
+    "unveils-late"
+   ],
+   "voiceHints": "Speaks in figures; finds you interesting, which is not reassuring.",
+   "duelStakes": "prestige: a bout at the Great Coliseum ends at the bell or a yield, never at a grave"
+  },
+  {
+   "id": "bench_marten_slowhand",
+   "name": "Marten Slowhand",
+   "reach": "the_kept_reach",
+   "people": "human",
+   "traditions": [
+    "hourkeeper"
+   ],
+   "families": [
+    "SUSTAIN",
+    "KNOW"
+   ],
+   "rank": "contender",
+   "record": "17–10",
+   "concept": "An Hourkeeper who wins on the bell more often than anyone living. He knows exactly how long is left, and fights as if he has already seen the end.",
+   "style": "a quarterstaff and a clock in his head; never in a hurry",
+   "tacticTags": [
+    "counts-down-the-bell",
+    "patient",
+    "times-the-finish"
+   ],
+   "voiceHints": "Speaks slowly, in the past tense about things that have not happened yet.",
+   "duelStakes": "prestige: a bout at the Great Coliseum ends at the bell or a yield, never at a grave"
+  },
+  {
+   "id": "bench_ender_nell",
+   "name": "Ender Nell",
+   "reach": "the_unmade",
+   "people": "human",
+   "traditions": [
+    "unmaker"
+   ],
+   "families": [
+    "HARM",
+    "SHAPE"
+   ],
+   "rank": "contender",
+   "record": "14–2",
+   "concept": "An Unmaker from the Scouring who ends a bout the way her people end anything: cleanly, without cruelty, and a little sooner than you were ready for.",
+   "style": "two short blades, a clean stop, nothing wasted",
+   "tacticTags": [
+    "finishes-clean",
+    "dismantles-the-guard",
+    "no-wasted-motion"
+   ],
+   "voiceHints": "Calm, kind, a little sad; thanks you at the end.",
+   "duelStakes": "prestige: a bout at the Great Coliseum ends at the bell or a yield, never at a grave"
+  },
+  {
+   "id": "bench_liss_keener",
+   "name": "Liss the Keener",
+   "reach": "the_feeling_coast",
+   "people": "keener",
+   "traditions": [
+    "threnodist"
+   ],
+   "families": [
+    "INFLUENCE",
+    "RESTORE"
+   ],
+   "rank": "novice",
+   "record": "5–3",
+   "concept": "A keener from Wellspring who sings the bout as she fights it. The grief in it is real; the crowd weeps; opponents lose their footing in it.",
+   "style": "a long knife and a keening song that rises with the fight",
+   "tacticTags": [
+    "moves-the-crowd",
+    "unsettles-with-grief",
+    "rallies"
+   ],
+   "voiceHints": "Sings more than she speaks. When she speaks, it is to ask who you have lost.",
+   "duelStakes": "prestige: a bout at the Great Coliseum ends at the bell or a yield, never at a grave"
+  },
+  {
+   "id": "bench_fenn_lampguide",
+   "name": "Fenn the Lamp-Guide",
+   "reach": "foothill_dusklow",
+   "people": "human",
+   "traditions": [
+    "umbral"
+   ],
+   "families": [
+    "KNOW",
+    "MOVE"
+   ],
+   "rank": "novice",
+   "record": "7–5",
+   "concept": "A Dusklow guide who takes people down into the dark for a living and treats the sand like a stair: one careful step, then another, then the one you did not see.",
+   "style": "a lantern-pole and a guide's sense of footing",
+   "tacticTags": [
+    "careful",
+    "leads-you-wrong",
+    "finds-the-gap"
+   ],
+   "voiceHints": "Discreet, wry, keeps your confidences and his own.",
+   "duelStakes": "prestige: a bout at the Great Coliseum ends at the bell or a yield, never at a grave"
+  },
+  {
+   "id": "bench_tobin_patch",
+   "name": "Tobin Patch",
+   "reach": "foothill_gearsflat",
+   "people": "human",
+   "traditions": [
+    "enginewright"
+   ],
+   "families": [
+    "SHAPE",
+    "SUSTAIN"
+   ],
+   "rank": "novice",
+   "record": "8–8",
+   "concept": "A Gearsflat salvager who fixes his kit mid-bout with whatever is to hand, including, once, a piece of his opponent's.",
+   "style": "salvaged armour, a wrench, and an inexhaustible supply of wire",
+   "tacticTags": [
+    "repairs-mid-bout",
+    "improvises",
+    "scrappy"
+   ],
+   "voiceHints": "Cheerful, oily, always asking if you are using that.",
+   "duelStakes": "prestige: a bout at the Great Coliseum ends at the bell or a yield, never at a grave"
+  },
+  {
+   "id": "bench_rowan",
+   "name": "Rowan Neither-Side",
+   "reach": "foothill_greenmarch",
+   "people": "human",
+   "traditions": [
+    "rootkin"
+   ],
+   "families": [
+    "SUSTAIN",
+    "MOVE"
+   ],
+   "rank": "novice",
+   "record": "6–4",
+   "concept": "A Greenmarch forager who will not be told which side of anything they are on, including which corner of the sand. Fights from wherever the opponent is not.",
+   "style": "a forager's hook-knife, quick feet, no fixed corner",
+   "tacticTags": [
+    "refuses-the-corner",
+    "evasive",
+    "lives-off-the-ground"
+   ],
+   "voiceHints": "Friendly, evasive, changes the subject to mushrooms.",
+   "duelStakes": "prestige: a bout at the Great Coliseum ends at the bell or a yield, never at a grave"
+  },
+  {
+   "id": "bench_mattock_greave",
+   "name": "Mattock Greave",
+   "reach": "foothill_greyhearth",
+   "people": "human",
+   "traditions": [
+    "ashwarden"
+   ],
+   "families": [
+    "SUSTAIN",
+    "HARM"
+   ],
+   "rank": "contender",
+   "record": "12–7",
+   "concept": "A Greyhearth gravedigger who digs in, literally: he plants a spade-blade in the sand and fights from beside it. He has buried two former opponents, at their request, years later.",
+   "style": "a spade, a lot of shoulder, all the time in the world",
+   "tacticTags": [
+    "digs-in",
+    "outlasts",
+    "heavy-swing"
+   ],
+   "voiceHints": "Quiet, courteous, measures you with his eyes for something.",
+   "duelStakes": "prestige: a bout at the Great Coliseum ends at the bell or a yield, never at a grave"
+  },
+  {
+   "id": "bench_corwin_returned",
+   "name": "Corwin Who Came Back",
+   "reach": "foothill_hardline",
+   "people": "revenant",
+   "traditions": [
+    "marcher"
+   ],
+   "families": [
+    "HARM",
+    "PROTECT"
+   ],
+   "rank": "contender",
+   "record": "10–1",
+   "concept": "A Hardline revenant who trains in the yard where marchers and stillholders train together, and who once lost a bout so badly he did not get up for a year. He came back for the rematch. He won.",
+   "style": "marcher forms, a stillholder's patience, and no particular fear of the end",
+   "tacticTags": [
+    "unafraid",
+    "holds-the-line",
+    "comes-back-harder"
+   ],
+   "voiceHints": "Flat, dry, a gallows joke about every wound.",
+   "duelStakes": "prestige: a bout at the Great Coliseum ends at the bell or a yield, never at a grave"
+  },
+  {
+   "id": "bench_wick_assayer",
+   "name": "Wick Assayer",
+   "reach": "foothill_kindlerow",
+   "people": "human",
+   "traditions": [
+    "blazeborn"
+   ],
+   "families": [
+    "SHAPE",
+    "HARM"
+   ],
+   "rank": "novice",
+   "record": "9–6",
+   "concept": "A Kindlerow lamp-maker who treats light as a trade: flash-pans, mirrors, a shuttered lantern that opens at exactly the wrong moment for you.",
+   "style": "a lamp-hook and a satchel of flash-pans",
+   "tacticTags": [
+    "flash-and-strike",
+    "tinkers",
+    "times-the-glare"
+   ],
+   "voiceHints": "Brisk, practical, quotes prices.",
+   "duelStakes": "prestige: a bout at the Great Coliseum ends at the bell or a yield, never at a grave"
+  },
+  {
+   "id": "bench_pell_farrow",
+   "name": "Pell Farrow, Just Arrived",
+   "reach": "foothill_longshore",
+   "people": "human",
+   "traditions": [
+    "horizon"
+   ],
+   "families": [
+    "MOVE",
+    "SUSTAIN"
+   ],
+   "rank": "novice",
+   "record": "4–4",
+   "concept": "A Longshore outfitter who is always about to leave, including mid-bout. Opponents chase him around the sand and lose on the bell.",
+   "style": "a walking-staff and a traveller's stamina",
+   "tacticTags": [
+    "keeps-moving",
+    "outlasts",
+    "slips-away"
+   ],
+   "voiceHints": "Always just arrived or about to go; asks where you are headed.",
+   "duelStakes": "prestige: a bout at the Great Coliseum ends at the bell or a yield, never at a grave"
+  },
+  {
+   "id": "bench_arbiter_joss",
+   "name": "Arbiter Joss",
+   "reach": "foothill_plainstead",
+   "people": "human",
+   "traditions": [
+    "verist"
+   ],
+   "families": [
+    "KNOW",
+    "PROTECT"
+   ],
+   "rank": "contender",
+   "record": "13–4",
+   "concept": "A Plainstead arbitrator who fights to a decision, not a knockout. She wins on the judges' count more than anyone, and the judges are scared of her.",
+   "style": "sword-and-buckler, textbook, scored",
+   "tacticTags": [
+    "fights-to-points",
+    "never-overcommits",
+    "argues-the-call"
+   ],
+   "voiceHints": "Measured, fair, slightly bored; cites precedent.",
+   "duelStakes": "prestige: a bout at the Great Coliseum ends at the bell or a yield, never at a grave"
+  },
+  {
+   "id": "bench_one_called_nike",
+   "name": "The One Called Nike",
+   "reach": "foothill_stair_hollow",
+   "people": "human",
+   "traditions": [
+    "god_named"
+   ],
+   "families": [
+    "INFLUENCE",
+    "HARM"
+   ],
+   "rank": "contender",
+   "record": "24–1",
+   "concept": "Of the God-Named who hold court at Stair Hollow, she wears the name of victory and has the record to make it hard to argue. The one loss is the bout everyone at the Crossing still talks about.",
+   "style": "spear and a borrowed radiance; fights as if the outcome were already written",
+   "tacticTags": [
+    "certain",
+    "presses-the-advantage",
+    "plays-to-the-crowd"
+   ],
+   "voiceHints": "Regal, warm, refers to herself by the name; wants to be addressed, not believed.",
+   "duelStakes": "prestige: a bout at the Great Coliseum ends at the bell or a yield, never at a grave"
+  },
+  {
+   "id": "bench_doss_terms_aloud",
+   "name": "Doss Terms-Aloud",
+   "reach": "foothill_the_low_market",
+   "people": "human",
+   "traditions": [
+    "bargainers"
+   ],
+   "families": [
+    "INFLUENCE",
+    "KNOW"
+   ],
+   "rank": "contender",
+   "record": "15–7",
+   "concept": "A Low Market bargainer who names the terms of his own loss before the bell: what he will pay, what he will concede, what he will never do. Then he keeps every word, whichever way it goes.",
+   "style": "a cudgel and a ledger; fights to the letter of what he said",
+   "tacticTags": [
+    "names-the-terms",
+    "keeps-the-terms",
+    "exploits-loopholes-honestly"
+   ],
+   "voiceHints": "Courteous, exact, writes things down; offers you a better rate.",
+   "duelStakes": "prestige: a bout at the Great Coliseum ends at the bell or a yield, never at a grave"
+  },
+  {
+   "id": "bench_breaker_una",
+   "name": "Breaker Una",
+   "reach": "foothill_the_worn_yard",
+   "people": "human",
+   "traditions": [
+    "unmaker"
+   ],
+   "families": [
+    "SHAPE",
+    "HARM"
+   ],
+   "rank": "novice",
+   "record": "8–3",
+   "concept": "A Worn Yard demolisher who takes your guard apart the way her crew takes a building apart: properly, in order, load-bearing pieces last.",
+   "style": "a pry-bar and a demolisher's eye for what is holding everything up",
+   "tacticTags": [
+    "finds-the-load-bearing",
+    "methodical",
+    "dismantles"
+   ],
+   "voiceHints": "Professional, blunt, narrates what she is taking off you next.",
+   "duelStakes": "prestige: a bout at the Great Coliseum ends at the bell or a yield, never at a grave"
+  },
+  {
+   "id": "bench_selk_listener",
+   "name": "Selk the Listener",
+   "reach": "foothill_thinwater",
+   "people": "human",
+   "traditions": [
+    "numinous"
+   ],
+   "families": [
+    "KNOW",
+    "RESTORE"
+   ],
+   "rank": "novice",
+   "record": "5–2",
+   "concept": "A Thinwater pattern-reader who listens to the bout rather than watching it, and hears the opening before it opens.",
+   "style": "a staff and a listening stillness",
+   "tacticTags": [
+    "listens",
+    "anticipates",
+    "steadies"
+   ],
+   "voiceHints": "Soft, attentive, asks you to stop talking so she can hear.",
+   "duelStakes": "prestige: a bout at the Great Coliseum ends at the bell or a yield, never at a grave"
+  }
+ ]
+}

@@ -1047,8 +1047,19 @@ export function makeGroundCost(t, { climb = 7, water = 30, extent = null, sample
       const lon = lo0 + (lo1 - lo0) * ((j + 0.5) / samples);
       if (wetAt(lat, lon)) continue;                       // ⚠️ the sea is flat and would drag the reference down
       const dLat = (la1 - la0) / samples, dLon = (lo1 - lo0) / samples;
-      diffs.push(Math.abs(elevAt(lat + dLat, lon) - elevAt(lat, lon)));
-      diffs.push(Math.abs(elevAt(lat, lon + dLon) - elevAt(lat, lon)));
+      // ⛔ A GRADIENT, NOT A RISE — rise per DEGREE of ground, so each side divides by its own distance.
+      // ⚠️ AEVI, CCODE-596: *"the ground-cost slope is a rise, not a gradient… so almost nothing bends a
+      // road."* She found it by opening the valley in the game: the main east–west road ran ruler-straight
+      // across a frame the map draws contour after contour over, and I had looked at the same picture and
+      // called it flat ground.
+      // ⚠️ THE REAL FAULT IS THAT THE COST DEPENDED ON THE CANVAS. This reference was a rise measured a
+      // forty-eighth of the region apart, and `step` compared it against a rise across ONE ROUTING CELL — so
+      // the same terrain priced differently at cell 2 and cell 4, and on a bigger canvas the ground got
+      // flatter. MEASURED before the fix: the climb term averaged **0.043 against a base of 1**, about 4% of
+      // what B1 intended, and `min(1.5, …)` never came close to binding.
+      const clRef = Math.max(1e-6, Math.cos(lat * RAD));
+      diffs.push(Math.abs(elevAt(lat + dLat, lon) - elevAt(lat, lon)) / dLat);
+      diffs.push(Math.abs(elevAt(lat, lon + dLon) - elevAt(lat, lon)) / (dLon * clRef));
     }
   }
   diffs.sort((a, b) => a - b);
@@ -1057,14 +1068,19 @@ export function makeGroundCost(t, { climb = 7, water = 30, extent = null, sample
   // this a rough region's realms would simply be smaller, which is a claim about the world nobody made.
   const mults = diffs.map((d) => 1 + climb * Math.min(1.5, d / slopeRef) ** 2).sort((a, b) => a - b);
   const typical = mults[Math.floor(mults.length / 2)] || 1;
-  /** the multiplier at a point: 1 on easy dry ground, higher on a slope, much higher in water */
+  /** the multiplier at a point: 1 on easy dry ground, higher on a slope, much higher in water.
+   *  ⚠️ `slope` is a GRADIENT — rise per degree of ground — and so is `slopeRef`. Passing a bare rise here
+   *  is the CCODE-598 defect: it makes the climb term depend on how long the step happened to be. */
   const at = (lat, lon, slope = 0) =>
     (1 + climb * Math.min(1.5, slope / slopeRef) ** 2 + water * (wetAt(lat, lon) ? 1 : 0)) / typical;
   /** the cost of ONE step a→b: ground distance × the multiplier of the ground it lands on */
   const step = (aLat, aLon, bLat, bLon) => {
     const cl = Math.cos(((aLat + bLat) / 2) * RAD);
     const d = Math.hypot(bLat - aLat, (bLon - aLon) * cl);
-    return d * at(bLat, bLon, Math.abs(elevAt(bLat, bLon) - elevAt(aLat, aLon)));
+    // ⛑ …and the other side of the same comparison: rise per degree, so a step of any length prices the
+    // same slope the same way. This is what makes the surface SCALE-INVARIANT, which is the property §417 gates.
+    const rise = Math.abs(elevAt(bLat, bLon) - elevAt(aLat, aLon));
+    return d * at(bLat, bLon, d > 1e-12 ? rise / d : 0);
   };
   return { at, step, slopeRef, typical, elevAt, wetAt };
 }

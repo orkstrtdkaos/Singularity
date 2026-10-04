@@ -36013,7 +36013,15 @@ console.log("\n── §414 · whose ground is this ──");
         const w = toWorld(x * T.cell, y * T.cell, W, H);
         if (inf414.at(w.lat, w.lon).owner === g.owner) agree++;
       }
-      return sure >= 20 && agree === sure;
+      // ⚠️ NOT 100%, AND IT SHOULD NOT BE. When this gate was written the ground reader was pricing slopes at
+      // about 4% of what B1 intended (§417), so it was very nearly the crow-flies reader and agreed with it
+      // perfectly. Now that a ridge really does bend a border, the two must differ exactly where terrain
+      // intervenes — demanding perfect agreement would be demanding the ground reader ignore the ground.
+      // ⛑ MEASURED on the corrected surface: valley 20/22, Echo Vale 25/25, Unspooling 50/50 — 95 of 97.
+      // ✅ AEVI R4.5 already ruled what to do where they differ: *"The disagreement sits at the edges, which is
+      // exactly where a border would jump between the world and the region, so the region's answer wins there."*
+      // What this still catches is the defect it was written for: the far-anchor clamp scored 0%.
+      return sure >= 20 && agree / sure >= 0.85;
     })(), "if these drift the GM and the map answer the player differently about the ground under their feet");
   // ⛔ AND A POWER ON THE FAR SIDE OF THE WORLD HOLDS NOTHING HERE — the bug the agreement check found.
   check("§414: ⛔ …and a power whose anchors are a world away seeds nothing in this frame",
@@ -36417,6 +36425,106 @@ console.log("\n── §416 · the world as it stands ──");
       return all.length > 20 && all.every((f) => !f?.sense);
     })(),
     "when this closes, re-drive po/drive_realms.mjs and Stillwater's Trouble should read 5 eyes, not 4");
+}
+
+/* ══════════ §417 · THE SLOPE IS A GRADIENT ══════════ */
+// ⛔ AEVI, CCODE-596 reply: *"The valley's main east–west road runs ruler-straight across the whole frame… over
+// ground the map draws with contour after contour crossing it. You checked the relief and called it flat ground.
+// The ground is not the cause. The cost reads slopes about ten times shallower than they are."*
+//
+// ⚠️ SHE FOUND IT BY OPENING THE GAME. I had looked at the same picture, measured the relief (140–175), and
+// concluded flat ground — a measurement that was true and an inference that was wrong.
+//
+// ⛔ THE PROPERTY THAT BROKE IS SCALE INVARIANCE, which is hers too. `slopeRef` was a RISE taken a forty-eighth
+// of a region apart; `step` compared it against a RISE across one routing cell. Same slope, shorter step, smaller
+// number — so the same terrain priced differently at cell 2 and cell 4, and the ground got flatter the bigger
+// the canvas. MEASURED before the fix: the climb term averaged 0.043 against a base of 1.
+//
+// ⛑ FIXTURE TERRAIN, not the live world — also hers. A gate that reads the baked raster reddens the day she
+// re-bakes it, and this is a claim about arithmetic, not about any particular mountain.
+console.log("\n── §417 · the slope is a gradient ──");
+{
+  const WG417 = await import("../engine/worldglobe.js");
+  const INF417 = await import("../engine/influence.js");
+  // a north–south ridge at longitude 0, with a pass in the south — plain arrays, the shape `decodeTerrain` makes
+  const ridge417 = (peak = 220, gapLatBelow = -40) => {
+    const ew = 360, eh = 180, n = ew * eh;
+    const c3 = new Float64Array(n);
+    for (let y = 0; y < eh; y++) {
+      const lat = 90 - (y + 0.5) / eh * 180;
+      for (let x = 0; x < ew; x++) {
+        const lon = (x + 0.5) / ew * 360 - 180;
+        const across = Math.exp(-(lon * lon) / (2 * 2.2 * 2.2));
+        c3[y * ew + x] = lat < gapLatBelow ? 0 : peak * across;   // the pass
+      }
+    }
+    return { ew, eh, w: ew, h: eh, c3, c0: new Uint8Array(n).fill(1), c1: new Uint8Array(n), c2: new Uint8Array(n), biomes: [] };
+  };
+  const ext417 = { la0: -60, la1: 10, lo0: -18, lo1: 18 };
+
+  /* ---- 1 · ⛔ SCALE INVARIANCE: the same ground costs the same per degree however finely you walk it ---- */
+  check("§417: ⛔ THE SAME TERRAIN COSTS THE SAME PER DEGREE AT ANY STEP SIZE — a cost that depends on the grid is not a cost",
+    (() => {
+      const G = WG417.makeGroundCost(ridge417(), { climb: 7, water: 30, extent: ext417 });
+      // walk one straight line across the ridge, at three step sizes, and compare cost per degree
+      const walk = (steps) => {
+        const a = { lat: -5, lon: -12 }, b = { lat: -5, lon: 12 };
+        let c = 0;
+        for (let i = 0; i < steps; i++) {
+          const t0 = i / steps, t1 = (i + 1) / steps;
+          c += G.step(a.lat + (b.lat - a.lat) * t0, a.lon + (b.lon - a.lon) * t0,
+                      a.lat + (b.lat - a.lat) * t1, a.lon + (b.lon - a.lon) * t1);
+        }
+        return c / 24;                                     // per degree of ground
+      };
+      const coarse = walk(24), mid = walk(48), fine = walk(96);
+      if (!(coarse > 0)) return false;
+      // ⚠️ within grid error, not exactly equal: a coarser walk cuts corners off the ridge's own curve
+      const spread = Math.max(coarse, mid, fine) / Math.min(coarse, mid, fine);
+      return spread < 1.25;
+    })(), "before the fix this ratio tracked the step size itself — halve the cell and the mountain half vanished");
+
+  /* ---- 2 · ⛔ AND A RIDGE ACTUALLY BENDS A ROAD ---- */
+  // ⚠️ THIS IS THE CHECK THAT WOULD HAVE CAUGHT IT. A gate on `slopeRef`'s value, or on the road existing,
+  // passes happily while every road runs straight through a mountain.
+  check("§417: ⛔ A ROAD GOES ROUND A MOUNTAIN — the whole point of costing the ground at all",
+    (() => {
+      const W = 360, H = 280, cell = 4;
+      const G = WG417.makeGroundCost(ridge417(), { climb: 7, water: 30, extent: ext417 });
+      const ts = (lon, lat, w, h) => ({ x: ((lon - ext417.lo0) / (ext417.lo1 - ext417.lo0)) * w, y: (1 - (lat - ext417.la0) / (ext417.la1 - ext417.la0)) * h });
+      const tw = (x, y, w, h) => ({ lon: ext417.lo0 + (x / w) * (ext417.lo1 - ext417.lo0), lat: ext417.la0 + (1 - y / h) * (ext417.la1 - ext417.la0) });
+      const locs = {
+        west: { tier: "settlement", worldPos: { longitude: -12, colatitude: 85 } },   // lat -5
+        east: { tier: "settlement", worldPos: { longitude: 12, colatitude: 85 } },
+      };
+      const R = WG417.routeRoads([{ a: "west", b: "east", d: 24 }], locs, { W, H, step: G.step, toScreen: ts, toWorld: tw, extent: ext417, cell });
+      if (!R?.roads?.length) return false;
+      const pts = R.roads[0].points;
+      let len = 0;
+      for (let i = 1; i < pts.length; i++) len += Math.hypot(pts[i].x - pts[i - 1].x, pts[i].y - pts[i - 1].y);
+      const straight = Math.hypot(pts[pts.length - 1].x - pts[0].x, pts[pts.length - 1].y - pts[0].y);
+      // and it must go SOUTH, toward the pass, rather than straight over the peak
+      const south = Math.max(...pts.map((p) => p.y)) - pts[0].y;
+      return len / straight > 1.15 && south > H * 0.12;
+    })(), "a road that crosses a 220-unit ridge in a straight line is the CCODE-598 defect, whatever the suite says");
+
+  /* ---- 3 · ⛑ AND THE SAME RULE REACHES THE BORDERS ---- */
+  // ⚠️ AEVI: *"It is the same function under `territoryByGround`… So B2's borders have been ignoring ridges
+  // for the same reason. Fix it before B5, or the territory lens ships the same flatness."*
+  check("§417: ⛑ …and a ridge is a border too — the territory walk prices the SAME ground with the SAME rule",
+    (() => {
+      const G = WG417.makeGroundCost(ridge417(), { climb: 7, water: 30, extent: ext417 });
+      const ts = (lon, lat, w, h) => ({ x: ((lon - ext417.lo0) / (ext417.lo1 - ext417.lo0)) * w, y: (1 - (lat - ext417.la0) / (ext417.la1 - ext417.la0)) * h });
+      const tw = (x, y, w, h) => ({ lon: ext417.lo0 + (x / w) * (ext417.lo1 - ext417.lo0), lat: ext417.la0 + (1 - y / h) * (ext417.la1 - ext417.la0) });
+      const locs = { W: { worldPos: { longitude: -9, colatitude: 85 } }, E: { worldPos: { longitude: 9, colatitude: 85 } } };
+      const pw = (id, seat) => ({ id, kind: "sovereignty", seat, strength: { contingents: [{ n: 120 }] } });
+      const T = INF417.territoryByGround([pw("w", "W"), pw("e", "E")], locs, { W: 360, H: 280, step: G.step, toScreen: ts, toWorld: tw, cell: 4, extent: ext417 });
+      if (!T) return false;
+      // north of the pass the ridge divides them; each seat's own side must be its own
+      const atLL = (lat, lon) => { const s = ts(lon, lat, 360, 280); return T.cellAt(Math.min(T.gh - 1, Math.max(0, Math.floor(s.y / 4))) * T.gw + Math.min(T.gw - 1, Math.max(0, Math.floor(s.x / 4)))); };
+      const west = atLL(-5, -7), east = atLL(-5, 7);
+      return west.owner === "w" && east.owner === "e";
+    })());
 }
 
 /* ══════════ REPORT ══════════ */

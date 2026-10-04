@@ -16,6 +16,18 @@
   "next": [],
   "releases": [
     {
+      "version": "2.17.2",
+      "date": "2026-10-04",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "Roads and borders follow the hills again",
+          "summary": "The ground was being read as about twenty times flatter than it is.",
+          "detail": "Roads on a regional map are routed over the real terrain, and territory borders are worked out the same way — but the steepness of the ground was being measured as a bare rise rather than a rise over a distance. The effect was that a slope counted for almost nothing, so roads ran straight across hillsides the map was drawing contour lines over, and a ridge did not divide one power's ground from another's. Both now measure steepness properly. Roads wander where the ground makes them wander — in the Valley of Echoes the typical road is now a third longer than the straight line between its ends, where before it was a twentieth — and a ridge reads as the border it is."
+        }
+      ]
+    },
+    {
       "version": "2.17.1",
       "date": "2026-10-04",
       "entries": [

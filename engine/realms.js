@@ -26,6 +26,18 @@ import { REACH, radiusDegOf, ANCHOR_WEIGHT, isTerritorial } from "./influence.js
 export const EMPTY_HOLD = 0.3;
 /** Each pair of eyes widens a hold's reach by this much, to this cap. ⛑ R4.2: *"the watch is the reach."* */
 export const WATCH_LIFT = 0.15, WATCH_CAP = 1.6;
+/** ⛔ THE DOORSTEP — the ground a hold holds by standing on it, before anybody is counted.
+ *
+ *  ⚠️ WITHOUT IT, `EMPTY_HOLD` WAS ATTACHED TO AN INERT ANCHOR. The reach curve has no floor for a hold
+ *  (R4.4, correctly: a hold is not a crown and must not borrow ten imagined heads), so a hold with nobody in it
+ *  came out at radius **0** — and the watch lift is multiplicative, so a tower on an empty hold multiplied zero
+ *  and still saw nothing. The 0.3 "its own doorstep" weight had nothing to weigh.
+ *  ⛑ Found by driving the tower case for §416: the eyes counted 1 against 0 exactly as they should, and both
+ *  radii came back 0.0000.
+ *  ⚠️ IT IS A DIAL AND AEVI'S TO RULE. 0.06° is about seven kilometres — a hold, its yard and its fields, and
+ *  nothing anybody would call a country. It changes no hold that has people in it: every one of Silas's five
+ *  has heads, so its own reach is larger and this floor never binds. */
+export const DOORSTEP_DEG = 0.06;
 
 const headsRecord = (n) => ({ strength: { contingents: [{ n: Math.max(0, Number(n) || 0) }] } });
 
@@ -127,7 +139,8 @@ export function realmsOf(character, locations = {}, cfg = null) {
     const heads = isSeat ? Math.max(bandAt.get(h.id) || 0, raised + garrison) : raised + garrison;
     const eyes = watchOf(h, cfg).length + senseOnly(h, cfg);
     // ⛔ floor 0: a hold is not a crown. An emptied outpost reaches its doorstep, not ten imagined heads.
-    const base = radiusDegOf(headsRecord(heads), { floor: 0 });
+    // ⛔ floor 0 on the HEADS (a hold is not a crown), then a floor on the GROUND (a hold stands somewhere)
+    const base = Math.max(DOORSTEP_DEG, radiusDegOf(headsRecord(heads), { floor: 0 }));
     const r = base * Math.min(WATCH_CAP, 1 + WATCH_LIFT * eyes);
     const w = isSeat ? ANCHOR_WEIGHT.seat : (heads > 0 || eyes > 0) ? ANCHOR_WEIGHT.hold : EMPTY_HOLD;
     anchors.push({ at, kind: isSeat ? "seat" : "hold", w, r });
@@ -136,7 +149,7 @@ export function realmsOf(character, locations = {}, cfg = null) {
   // ⛑ a gate you hold is ground you hold, the same as it is for a power (R4.1)
   for (const at of Object.keys(gates)) {
     if (!locations[at] || anchors.some((a) => a.at === at)) continue;
-    const r = radiusDegOf(headsRecord(0), { floor: 0 });
+    const r = DOORSTEP_DEG;
     anchors.push({ at, kind: "hold", w: EMPTY_HOLD, r });
     rows.push({ hold: null, name: locations[at]?.name || at, at, heads: 0, eyes: 0, seat: false, gate: true, radiusDeg: r });
   }
@@ -158,21 +171,23 @@ export function realmsOf(character, locations = {}, cfg = null) {
   }];
 }
 
-/** Features that watch without being counted by `watchOf` — the tower sees, but nobody stands in it.
+/** ⛔ Features that watch without anybody standing in them — the tower sees, and `watchOf` does not count it.
  *
- *  ⚠️ THIS READER HAS NO POPULATION YET, AND THAT IS AEVI'S TO AUTHOR. R4.2 says eyes are the watch *"+ `sense`
- *  features it does not already count (the tower)"* — but **0 of 45 feature kinds carry a `sense` field**, so the
- *  clause adds nothing and the tower she named is never counted.
- *  ⛑ MEASURED, and it is exactly the one number our two implementations disagree about: driven on Silas's save,
- *  her mock and this engine agree on 9 of 10 figures across five holds, and the tenth is Stillwater's Trouble —
- *  4 eyes here against her 5, because Stillwater's HAS a tower. The reader stays as written rather than
- *  hard-coding `tower` by name, because the field is the right abstraction and the kind is content's business.
- *  §416 keeps it as a gap, so it goes loud the day the field is authored. */
+ *  ✅ AEVI, correcting her own R4.2 wording: *"R4.2 said `sense` features, and I should have written it as the
+ *  field it is. The tag is `property: \"sense\"`."* (SNG-627, ✅ ERIK 2026-09-18: *"a watchtower and scouts are
+ *  both `sense`."*) Three kinds carry it — `watch` and `sentries`, which are already `watch: true` and so already
+ *  counted, and `tower`, which is not.
+ *
+ *  ⚠️ I HAD READ `def.sense`, A FIELD NO KIND CARRIES, so this returned 0 for every hold in the world and the
+ *  clause added nothing. It was the ONE number her independent mock and this engine disagreed about — driven on
+ *  Silas's save we matched on 9 of 10 figures across five holds, and the tenth was Stillwater's Trouble, which
+ *  has a tower: 4 eyes here against her 5. Two implementations differing by exactly one is a better bug report
+ *  than either of us reading our own code again. */
 function senseOnly(holding, cfg) {
   let n = 0;
   for (const f of featuresOf(holding) || []) {
     const def = featureDef(f.kind, cfg);
-    if (def?.sense && !def?.watch) n += Math.max(1, Number(f.count) || 1);
+    if (def?.property === "sense" && !def?.watch) n += Math.max(1, Number(f.count) || 1);
   }
   return n;
 }

@@ -51,6 +51,8 @@ import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW,
 // broken powers, taken holds, your own realm); `influence.js` stays pure and just evaluates.
 import { groundHolders, stateStamp, powerRelation } from "./engine/realms.js";
 import { housesAt } from "./engine/powers.js";
+// ⛔ B4 — a lens is WHERE the marks go (pure, here) and HOW they are inked (below, in this file)
+import { isoLines, stipple, hexGather, nearness, crystalFacets } from "./engine/lenses.js";
 import { makeInfluence } from "./engine/influence.js";
 import { glyphFor, drawGlyph } from "./engine/mapicons.mjs";   // SNG-409 §4: a pole must never read as a town   // SNG-390: the globe, read-only
 import { walkingDays, milesFor, worldPosForGenerated, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout, fieldBlobs, fieldAlpha, placeLabels } from "./engine/worldmap.js";
@@ -77,7 +79,7 @@ import { carriageOf, voyageOf, isMoored, canSail, sailHolding, voyageLine, featu
 import { roomOf, roomRefusal, promotionOffer, promoteHolding, trainingAt, mountsAt, healingAt, quarteringOf, vaultOf, chargeOf, chargeWord, depositToVault, withdrawFromVault, holdingFieldSources, sellPlanFor, stockPolicyFor, clearingQuote, startClearing, clearingHands, setClearingHands, payArrears, arrearsSaid } from "./engine/holdings.js";   // ⛔ CCODE-429: a hold has room · CCODE-430: a yard trains   // B6b: the holding that moves
 import { raidRisk, watchReadout, watchOdds, craftPlacementCost, defenceOf, featureCost, featureDef, featureDoes, featureCategory, allFeatures, refreshImprovement, canBeAskedToWork, holdingFactsLine, answerFeatureOffer, holdingLedger, addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, yieldsFor, upkeepFor, appointKeeper, reclaimHolding, improveHolding, setCrew, setGarrison, holdingGround, addFeature, removeFeature, renameHolding, featureKinds, residentsOf, holdingMeaningAura, holdingFieldDelta } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
 import { buildDevReport, unknownOpsIn } from "./engine/devreport.js";   // SNG-559: the Play/Dev instrument
-import { makeField, fieldDataFrom, FIELD_KINDS, KIND_LABEL, MEMBERSHIP } from "./engine/field.js";
+import { makeField, fieldDataFrom, FIELD_KINDS, KIND_LABEL, MEMBERSHIP, loadSources } from "./engine/field.js";
 import { deedAgainstSupply, supplyDeedLine, artifactsHeld, artifactUsed, forbiddenByHeld, marksFromHeld } from "./engine/sovereign.js";   // ⛔ SNG-641 §1 (C13): breaking or taking a supply-line power is a deed against the arc its Sovereign arrives on
 import { assaultableAt, garrisonContingents, noteHoldLoss, takeHold, encounterOwnerFilter, seedPowerKnowledge, isKnownPower, powersReaching, dangerLiftAt, movePowerStanding, exposeMarket, marketFeeAt} from "./engine/powers.js";
 import { buildNemesisPrompt, applyNemesisChoice } from "./engine/nemesis.js";   // ⛔ SNG-648: the choosing call   // SNG-634 C5: their holds are places you can take   // CCODE-457: why the ground here reads the way it does · CCODE-472: and the layer the map draws
@@ -189,7 +191,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.17.3";
+const APP_VERSION = "2.17.4";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -12721,6 +12723,7 @@ function paintRegionMap(regionId) {
   const W = cv.width, H = cv.height;
   const img = ctx.createImageData(W, H);
   const D = img.data;
+  const muteGround = !!(fieldCtl.on && fieldCtl.kinds.size && worldField());
   const step = contourStepFor(ext.polar ? 2 * ext.poleRadiusDeg
     : Math.max(ext.la1 - ext.la0, (ext.lo1 - ext.lo0) * base.conv));
   for (let y = 0; y < H; y++) {
@@ -12735,6 +12738,15 @@ function paintRegionMap(regionId) {
         // the same hypsometric ramp and contour rule the globe uses, so the two tiers look like one world
         c = colorAt(_terrain, w.lon, w.lat, { layer: "topo", contourStep: step,
           fine: () => ({ type: sm.type, raw: sm.raw, elevDelta: 0 }) });
+      }
+      // ⛔ B4 · AEVI: *"Ground muted (saturation ×0.35, luminance kept) while it is on."*
+      // ⚠️ SATURATION, NOT BRIGHTNESS, and that distinction is Erik's: *"I liked the brighter map… isn't
+      // there a way to make the text of the sites darker instead of making the map dimmer?"* Dimming the ground
+      // trades away the thing the region map is for. Draining its colour leaves every ridge and shoreline
+      // exactly as legible while giving the field's own colours somewhere to land.
+      if (muteGround) {
+        const lum = 0.299 * c[0] + 0.587 * c[1] + 0.114 * c[2];
+        c = [lum + (c[0] - lum) * 0.35, lum + (c[1] - lum) * 0.35, lum + (c[2] - lum) * 0.35];
       }
       const o = (y * W + x) * 4;
       // ⛑ C1: the disc IS the map. Beyond its rim there is no ground to draw, so it reads as the frame's
@@ -12756,42 +12768,134 @@ function paintRegionMap(regionId) {
   // over a ~12° region is 0.09° a texel, which is finer than `TERRAIN_FEATURE_FLOOR_DEG` (0.25°, the
   // resolution below which the generator has nothing left to say), so the browser's own smoothing is showing
   // the field at better than its information content rather than inventing any.
+  // ⛔ B4 · THE FIELD LENS — ONE TREATMENT PER REGISTER, because they are not one substance.
+  // ✅ AEVI: *"Crystal lattice and veil as LINES… wild nanite as a scattered stipple… ordered nanite as the
+  // same dots on a tidy hex lattice, gathered."*
+  //
+  // ⚠️ THIS REPLACES A SINGLE WASH, and the wash was the problem: summing five registers into one RGB said
+  // only *how much field is here*, which is the one question nobody asks. A lattice that runs in LINES and a
+  // wild scatter that runs in DOTS are legible together at a glance; two tints of the same wash are not.
+  // ⛑ The dots are deterministic (hashed, not random), so the same world stipples identically every repaint
+  // — a field that re-scattered each frame would read as a world that keeps changing.
   if (fieldCtl.on && fieldCtl.kinds.size && worldField()) {
     try {
-      const kindKey = [...fieldCtl.kinds].sort().join(",");
-      const texKey = `${ext.polar ? `polar:${ext.poleRadiusDeg}` : `${ext.la0},${ext.lo0},${ext.la1},${ext.lo1}`}|${kindKey}|${fieldCtl.mode}`;
-      let hit = _fieldTex.get(texKey);
-      if (!hit) {
-        const fw96 = fieldWindowFor(ext, 96, 96, base);
-        hit = { fw: fw96, rgb: worldField().texture({ window: fw96, kinds: [...fieldCtl.kinds], mode: fieldCtl.mode }) };
-        _fieldTex.set(texKey, hit);
+      const F = worldField();
+      const GW = 110, GH = 110;
+      const lensKey = `${ext.polar ? `p${ext.poleRadiusDeg}` : `${ext.la0},${ext.lo0},${ext.la1},${ext.lo1}`}|${W}x${H}|${[...fieldCtl.kinds].sort().join(",")}`;
+      let lens = _fieldTex.get(lensKey);
+      if (!lens) {
+        const grids = {};
+        for (const k of fieldCtl.kinds) grids[k] = new Float32Array(GW * GH);
+        for (let j = 0; j < GH; j++) for (let i = 0; i < GW; i++) {
+          const w2 = base.toWorld(((i + 0.5) / GW) * W, ((j + 0.5) / GH) * H, W, H);
+          for (const k of fieldCtl.kinds) grids[k][j * GW + i] = F.strengthAt(k, w2.lat, w2.lon);
+        }
+        lens = { grids, GW, GH };
+        _fieldTex.set(lensKey, lens);
       }
-      const fw = hit.fw, rgb = hit.rgb;
-      const off = document.createElement("canvas");
-      off.width = fw.w; off.height = fw.h;
-      const oi = off.getContext("2d").createImageData(fw.w, fw.h);
-      for (let i = 0; i < fw.w * fw.h; i++) {
-        oi.data[i * 4] = rgb[i * 3]; oi.data[i * 4 + 1] = rgb[i * 3 + 1]; oi.data[i * 4 + 2] = rgb[i * 3 + 2];
-        // ⚠️ ALPHA CARRIES THE STRENGTH, so clear ground stays GROUND. A flat alpha would tint the whole
-        // region evenly and read as a filter over the map rather than as a thing in the world.
-        oi.data[i * 4 + 3] = Math.min(210, (rgb[i * 3] + rgb[i * 3 + 1] + rgb[i * 3 + 2]) / 3 * 2.0);
-      }
-      off.getContext("2d").putImageData(oi, 0, 0);
+      const gx = (p) => (p[0] + 0.5) / lens.GW * W, gy = (p) => (p[1] + 0.5) / lens.GH * H;
+      // bilinear read of a grid at SCREEN pixels, for the two scatterers
+      const readAt = (grid) => (x, y) => {
+        const fx = Math.max(0, Math.min(lens.GW - 1, (x / W) * lens.GW - 0.5));
+        const fy = Math.max(0, Math.min(lens.GH - 1, (y / H) * lens.GH - 0.5));
+        const x0 = Math.floor(fx), y0 = Math.floor(fy);
+        const x1 = Math.min(lens.GW - 1, x0 + 1), y1 = Math.min(lens.GH - 1, y0 + 1);
+        const tx = fx - x0, ty = fy - y0;
+        const a = grid[y0 * lens.GW + x0], b = grid[y0 * lens.GW + x1];
+        const c2 = grid[y1 * lens.GW + x0], d2 = grid[y1 * lens.GW + x1];
+        return (a * (1 - tx) + b * tx) * (1 - ty) + (c2 * (1 - tx) + d2 * tx) * ty;
+      };
+      const onMap = (x, y) => (!base.polar || base.insideDisc(x, y, W, H));
+      const dry = (x, y) => { const w2 = base.toWorld(x, y, W, H); return base.sample(w2.lon, w2.lat).type !== 0; };
+
       ctx.save();
-      // ⛔ `overlay`, AND THE GROUND KEEPS EVERY BIT OF ITS BRIGHTNESS. Erik, on the first version: "I liked
-      // the brighter map… isn't there a way to make the text of the sites darker instead of making the map
-      // dimmer?" He is right, and the honest answer is that dimming was me solving the wrong problem.
-      // ⚠️ MY FIRST TRY SCREENED the field over the topographic ramp, which was invisible — the field's mean
-      // texel is 69/255 and adding that to bright greens and tans moves almost nothing — so I dimmed the
-      // ground by 58% to make room. That trades away the thing the region map is FOR.
-      // ⛑ Measured three blends side by side on the real Echo Vale ground: `color` keeps the brightness but
-      // eats the terrain's own hue (the mountains lose their tan); `soft-light` is faithful but faint;
-      // `overlay` keeps the relief, the contours and the full brightness AND shows the strongest field
-      // variation of the three. An overlay is exactly the right operator here: it preserves the ground's
-      // LUMINANCE — which is the relief — and pushes the field's hue through it. No dimming needed at all.
-      ctx.globalCompositeOperation = "overlay";
-      ctx.imageSmoothingEnabled = true;
-      ctx.drawImage(off, 0, 0, fw.w, fw.h, 0, 0, W, H);
+      ctx.lineJoin = "round"; ctx.lineCap = "round";
+
+      // ⛔ LINES, for the two registers that run in veins: solid at the membership line, dashed above it.
+      // ⛑ MEMBERSHIP is field.js's one literal — the same 0.55 the probe and the coverage share use, so the
+      // line on the map is the same line the card means when it says a craft is "in" this ground.
+      const LINE = { precursor: "rgba(116,176,255,0.95)", veil: "rgba(255,110,110,0.92)" };
+      const TINT = { precursor: "rgba(116,176,255,0.13)", veil: "rgba(255,110,110,0.13)" };
+      for (const k of ["precursor", "veil"]) {
+        if (!fieldCtl.kinds.has(k) || !lens.grids[k]) continue;
+        // ⛔ A CONTOUR HAS NOTHING TO DRAW WHEN THE WHOLE FRAME IS INSIDE IT, and that is not the same as
+        // nothing being here. MEASURED at the Crossing: the crystal lattice reads above the membership line
+        // across **100% of the frame**, and above 0.8 across 100% too — so the line treatment drew NOTHING at
+        // the most lattice-saturated place in the world, under a chip that said "✓ crystal lattice 100%".
+        // ⚠️ AN EMPTY LAYER IS A CLAIM, and the claim it made was the opposite of the truth. A faint tint says
+        // "all of this" where a line would have said "the edge is here".
+        // ⛑ It costs nothing where a register has a real boundary: the valley's lattice is 51% above the line,
+        // so no tint is drawn there at all. The threshold and the colour are a visual choice and Aevi's to
+        // restyle; what is not optional is that saturation reads as something.
+        const share = (() => { const g = lens.grids[k]; let n = 0; for (let i = 0; i < g.length; i++) if (g[i] > MEMBERSHIP) n++; return n / g.length; })();
+        if (share > 0.9) {
+          ctx.save();
+          ctx.fillStyle = TINT[k];
+          if (base.polar) { ctx.beginPath(); ctx.arc(W / 2, H / 2, Math.min(W, H) / 2, 0, Math.PI * 2); ctx.fill(); }
+          else ctx.fillRect(0, 0, W, H);
+          ctx.restore();
+        }
+        for (const [level, dash, wdt, alpha] of [[MEMBERSHIP, null, 1.6, 0.95], [0.8, [5, 4], 1.2, 0.8]]) {
+          const lines = isoLines(lens.grids[k], lens.GW, lens.GH, level);
+          if (!lines.length) continue;
+          ctx.setLineDash(dash || []);
+          ctx.globalAlpha = alpha;
+          // a dark casing under the colour, so a vein reads on bright upland AND on near-black water
+          for (const pass of [["rgba(10,12,18,0.5)", wdt + 1.8], [LINE[k], wdt]]) {
+            ctx.strokeStyle = pass[0]; ctx.lineWidth = pass[1];
+            for (const L of lines) {
+              ctx.beginPath(); ctx.moveTo(gx(L[0]), gy(L[0]));
+              for (let i = 1; i < L.length; i++) ctx.lineTo(gx(L[i]), gy(L[i]));
+              ctx.stroke();
+            }
+          }
+        }
+      }
+      ctx.setLineDash([]); ctx.globalAlpha = 1;
+
+      // ⛔ A SCATTER, for the wild register. Density IS the value; no single dot is a reading.
+      if (fieldCtl.kinds.has("wild") && lens.grids.wild) {
+        const v = readAt(lens.grids.wild);
+        const dots = stipple(W, H, (x, y) => v(x, y) * 0.9, { cell: 7, seed: 11,
+          keepAt: (x, y) => onMap(x, y) && dry(x, y) });   // ⛑ land only: the wild does not scatter on water
+        ctx.fillStyle = "rgba(104,226,138,0.85)";
+        for (const d of dots) { ctx.beginPath(); ctx.arc(d.x, d.y, 1.15, 0, Math.PI * 2); ctx.fill(); }
+      }
+
+      // ⛔ THE SAME DOTS, ARRANGED — the ordered register on a hex lattice, gathered where somebody tends it.
+      // ⚠️ THE LATTICE IS THE WHOLE STATEMENT: wild and ordered are one substance in two states, and side by
+      // side a scatter against a lattice says that in a way two tints never could.
+      if (fieldCtl.kinds.has("nanite") && lens.grids.nanite) {
+        const tended = [];
+        for (const id of Object.keys(CONTENT.locations || {})) {
+          const l = CONTENT.locations[id];
+          if (!l?.worldPos) continue;
+          const tier = String(l.tier || "");
+          if (tier !== "settlement" && tier !== "region") continue;
+          const p = base.toScreen(l.worldPos.longitude, l.worldPos.colatitude - 90, W, H);
+          if (!Number.isFinite(p.x)) continue;
+          tended.push({ x: p.x, y: p.y, r: tier === "region" ? 150 : 95 });
+        }
+        // ✅ AEVI: *"settlements, and wells at 1.4× reach"* — a well is tended harder than a town is
+        for (const s of loadSources(CONTENT)) {
+          if (!(Number(s.strength) > 0)) continue;                  // a sink gathers nothing
+          const sp = base.toScreen(s.lon, s.lat, W, H);
+          if (Number.isFinite(sp.x)) tended.push({ x: sp.x, y: sp.y, r: 95 * 1.4 });
+        }
+        const near = nearness(tended);
+        const v = readAt(lens.grids.nanite);
+        const dots = hexGather(W, H, v, near, { pitch: 9, seed: 5, keepAt: (x, y) => onMap(x, y) && dry(x, y) });
+        ctx.fillStyle = "rgba(255,214,96,0.9)";
+        for (const d of dots) { ctx.beginPath(); ctx.arc(d.x, d.y, 1.25, 0, Math.PI * 2); ctx.fill(); }
+      }
+
+      // ⛑ B7's register is broad and overlaps everything by design, so it stays a soft wash rather than a mark
+      if (fieldCtl.kinds.has("metaphysical") && lens.grids.metaphysical) {
+        const v = readAt(lens.grids.metaphysical);
+        const dots = stipple(W, H, (x, y) => Math.max(0, v(x, y) - 0.2) * 1.4, { cell: 11, seed: 23, keepAt: onMap });
+        ctx.fillStyle = "rgba(198,124,255,0.32)";
+        for (const d of dots) { ctx.beginPath(); ctx.arc(d.x, d.y, 4.2, 0, Math.PI * 2); ctx.fill(); }
+      }
       ctx.restore();
     } catch (err) { console.warn("[region-map] the field layer did not draw — the ground still did:", err); }
   }
@@ -12800,6 +12904,9 @@ function paintRegionMap(regionId) {
   // this: all 44 appear on neither the globe nor the region tier, so "see the power sources" was unmet in
   // the plainest possible sense — the field was visible as colour and its causes were invisible.
   // ⚠️ Well or sink is the SIGN of the draw, not a second authored field, so the two can never disagree.
+  // ⛑ which places this map puts a marker on — a source co-located with one of them does not need a second
+  const drawnHere = new Set(Object.keys(CONTENT.locations || {})
+    .filter((id) => (CONTENT.locations[id]?.regionId || CONTENT.locations[id]?.region) === regionId));
   for (const s of fieldSourcesIn(ext)) {
     const well = s.strength >= 0;
     if (well ? !fieldCtl.wells : !fieldCtl.sinks) continue;
@@ -12813,21 +12920,85 @@ function paintRegionMap(regionId) {
     // ⚠️ DARK AND SATURATED, NOT PALE. A pale blue glow and pale blue text were chosen against a dimmed
     // ground; on a bright topographic map they vanish. Dark ink with a light halo reads on the bright
     // uplands AND on the near-black water, which is the only pair of grounds this map actually has.
-    const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, rpx);
-    grad.addColorStop(0, well ? "rgba(16,68,132,0.44)" : "rgba(140,18,30,0.42)");
-    grad.addColorStop(1, "rgba(0,0,0,0)");
-    ctx.fillStyle = grad;
-    ctx.beginPath(); ctx.arc(p.x, p.y, rpx, 0, Math.PI * 2); ctx.fill();
-    const ink = well ? "#0b3f78" : "#8a1020";
-    ctx.lineWidth = 2.6; ctx.strokeStyle = "rgba(248,250,255,0.88)"; ctx.lineJoin = "round";
-    ctx.fillStyle = ink;
-    ctx.font = "700 12px system-ui, sans-serif";
-    ctx.textAlign = "center";
-    ctx.strokeText(well ? "\u25c6" : "\u25c7", p.x, p.y + 4);
-    ctx.fillText(well ? "\u25c6" : "\u25c7", p.x, p.y + 4);
+    // ⛔ B4 · ✅ AEVI: *"a well is a faceted crystal with rays sized by |strength|, halo to 2σ, dashed ring at
+    // 1σ; a sink is a dark vortex, `multiply`-blended."*
+    // ⛑ σ IS THE SOURCE'S OWN REACH, drawn to scale from `radiusWorld` — so the dashed ring is not decoration,
+    // it is the edge of what this source actually touches, and the halo is where it has faded to nothing.
+    const mag = Math.min(1, Math.abs(Number(s.strength) || 0) / 0.35);
+    ctx.save();
+    if (well) {
+      const halo = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, rpx * 2);
+      halo.addColorStop(0, "rgba(96,164,255,0.34)");
+      halo.addColorStop(0.5, "rgba(60,120,210,0.13)");
+      halo.addColorStop(1, "rgba(0,0,0,0)");
+      ctx.fillStyle = halo;
+      ctx.beginPath(); ctx.arc(p.x, p.y, rpx * 2, 0, Math.PI * 2); ctx.fill();
+      // the rays: longer where the source is stronger, so a glance ranks them
+      ctx.strokeStyle = "rgba(170,214,255,0.72)"; ctx.lineWidth = 1.1;
+      for (let i = 0; i < 8; i++) {
+        const a = (i / 8) * Math.PI * 2;
+        const r0 = 7 + mag * 3, r1 = r0 + 5 + mag * 13;
+        ctx.beginPath();
+        ctx.moveTo(p.x + Math.cos(a) * r0, p.y + Math.sin(a) * r0);
+        ctx.lineTo(p.x + Math.cos(a) * r1, p.y + Math.sin(a) * r1);
+        ctx.stroke();
+      }
+      ctx.setLineDash([4, 4]);
+      ctx.strokeStyle = "rgba(150,200,255,0.5)"; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.arc(p.x, p.y, rpx, 0, Math.PI * 2); ctx.stroke();
+      ctx.setLineDash([]);
+      // ⛔ ✅ AEVI: *"a source that is also a place wears only 'well +0.20' beside it."* The reach marks above
+      // always draw — they are what the source DOES — but the crystal body is a marker, and this place already
+      // has one. MEASURED: I drew it anyway and found three surviving pixels, because the places layer paints
+      // after this one and a 7px crystal sits exactly under a place glyph.
+      // ⛑ It still draws for a source whose place is NOT on this map — one in a neighbouring region reaching
+      // into the frame — which is precisely when a reader has no other mark to read.
+      if (!drawnHere.has(s.id)) {
+        const fac = crystalFacets(p.x, p.y, 7 + mag * 3, { points: 6 });
+        ctx.beginPath();
+        ctx.moveTo(fac[0][0], fac[0][1]);
+        for (let i = 1; i < fac.length; i++) ctx.lineTo(fac[i][0], fac[i][1]);
+        ctx.closePath();
+        ctx.fillStyle = "rgba(196,228,255,0.95)";
+        ctx.strokeStyle = "rgba(12,40,80,0.92)"; ctx.lineWidth = 1.4; ctx.lineJoin = "round";
+        ctx.fill(); ctx.stroke();
+      }
+    } else {
+      // ⚠️ `multiply`, SO A SINK TAKES LIGHT OUT OF THE GROUND rather than laying more ink on top of it. That
+      // is the whole difference between a thing that drains the field and a thing that is merely drawn dark.
+      ctx.globalCompositeOperation = "multiply";
+      const vort = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, rpx * 2);
+      vort.addColorStop(0, "rgba(58,18,30,0.95)");
+      vort.addColorStop(0.45, "rgba(120,70,80,0.55)");
+      vort.addColorStop(1, "rgba(255,255,255,0)");
+      ctx.fillStyle = vort;
+      ctx.beginPath(); ctx.arc(p.x, p.y, rpx * 2, 0, Math.PI * 2); ctx.fill();
+      ctx.globalCompositeOperation = "source-over";
+      ctx.setLineDash([4, 4]);
+      ctx.strokeStyle = "rgba(226,140,150,0.52)"; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.arc(p.x, p.y, rpx, 0, Math.PI * 2); ctx.stroke();
+      ctx.setLineDash([]);
+      // a vortex: two turns of a spiral inward, which reads as drawn-in rather than as a hole
+      ctx.strokeStyle = "rgba(242,196,204,0.86)"; ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      for (let k = 0; k <= 56; k++) {
+        const a = (k / 56) * Math.PI * 4, r = (9 + mag * 4) * (1 - k / 56);
+        const x = p.x + Math.cos(a) * r, y = p.y + Math.sin(a) * r;
+        if (k === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+    }
+    ctx.restore();
     // ⚠️ THE LABEL IS KEPT INSIDE THE CANVAS. The Sunken Choir sits at x=708 of 800 and its name ran
     // off the right edge — a marker correctly placed and a name half gone. Anchored to the near edge
     // instead of centred once it is within its own width of one, so it always reads.
+    // ⚠️ THE LABEL SETS ITS OWN INK. The glyph block above is wrapped in save/restore, so after it the stroke
+    // and fill are whatever they were BEFORE — and the two lines that used to set them were inside the block I
+    // replaced. The label kept drawing, in whatever colour the field layer had left behind, which is the kind of
+    // thing that looks like a style choice until somebody asks why one map's labels are green.
+    ctx.lineWidth = 2.6; ctx.lineJoin = "round";
+    ctx.strokeStyle = "rgba(248,250,255,0.88)";
+    ctx.fillStyle = well ? "#0b3f78" : "#8a1020";
     ctx.font = "700 10px system-ui, sans-serif";
     const label = `${s.name} ${s.strength >= 0 ? "+" : ""}${s.strength.toFixed(2)}`;
     const halfW = ctx.measureText(label).width / 2;

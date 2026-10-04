@@ -36407,19 +36407,29 @@ console.log("\n── §416 · the world as it stands ──");
       return s0 !== s1 && s0 !== s2 && s0 === RE.stateStamp({}, RE.resolvedPowers({}, content));
     })());
 
-  // ⛔ AEVI'S `sense` CLAUSE HAS NO POPULATION. R4.2 counts eyes as the watch *"+ `sense` features it does not
-  // already count (the tower)"*, but 0 of 45 feature kinds carry a `sense` field, so the clause adds nothing and
-  // the tower she named is never counted. ⚠️ It is the ONE number her mock and this engine disagree about:
-  // driven on Silas's save we agree on 9 of 10 figures across five holds, and the tenth is Stillwater's Trouble,
-  // which has a tower — 4 eyes here against her 5. The reader is left reading `sense` rather than hard-coding
-  // `tower`, because the field is the right abstraction and the kinds are content's business.
-  gap("§416: no feature kind carries `sense`, so a tower that watches without being manned counts for nothing",
+  // ✅ CLOSED 2026-10-04. The gap read *"no feature kind carries `sense`, so a tower that watches without being
+  // manned counts for nothing"*, and the answer was that the tag was never a `sense` field: it is
+  // `property: "sense"`, carried by `watch`, `sentries` and `tower`. Aevi, correcting her own R4.2 wording:
+  // *"I should have written it as the field it is."*
+  // ⛑ AND THE TWO IMPLEMENTATIONS NOW AGREE 10 OF 10. Driven on Silas's five holds, her independent mock and
+  // this engine matched on 9 figures and differed by exactly one eye at Stillwater's Trouble, which has a tower.
+  // Two readers differing by one is a better bug report than either of us re-reading our own code.
+  check("§416: ⛔ A TOWER WATCHES THOUGH NOBODY STANDS IN IT — `property: \"sense\"`, counted once per tower",
     (() => {
       const kinds = C416.rules?.economy?.holdFeatures?.kinds || {};
-      const all = Object.values(kinds);
-      return all.length > 20 && all.every((f) => !f?.sense);
-    })(),
-    "when this closes, re-drive po/drive_realms.mjs and Stillwater's Trouble should read 5 eyes, not 4");
+      const sensing = Object.entries(kinds).filter(([, f]) => f?.property === "sense");
+      if (sensing.length < 3) return false;
+      // the ones that are also a watch are already counted by watchOf; the tower is the one that is not
+      const unmanned = sensing.filter(([, f]) => !f.watch).map(([k]) => k);
+      if (!unmanned.includes("tower")) return false;
+      const hold = { id: "h", locationId: "A", garrison: [], features: [{ kind: "tower", count: 1 }] };
+      const bare = { id: "h", locationId: "A", garrison: [], features: [] };
+      const locs = { A: { worldPos: { longitude: 0, colatitude: 90 } } };
+      const withTower = RE.realmsOf({ id: "c", holdings: [hold] }, locs, cfg416)[0];
+      const without = RE.realmsOf({ id: "c", holdings: [bare] }, locs, cfg416)[0];
+      return withTower?.holds[0].eyes === 1 && without?.holds[0].eyes === 0
+        && withTower.holds[0].radiusDeg > without.holds[0].radiusDeg;
+    })(), "I had read `def.sense`, a field no kind carries, so this returned 0 for every hold in the world");
 }
 
 /* ══════════ §417 · THE SLOPE IS A GRADIENT ══════════ */
@@ -36649,6 +36659,123 @@ console.log("\n── §418 · the Crossing, centred on the pole ──");
         if (p.kind === "outlaw_band" || p.kind === "outlaw_crown") return false;   // the Mavens never recognised them
       }
       return true;
+    })());
+}
+
+/* ══════════ §419 · THE GEOMETRY A LENS IS MADE OF ══════════ */
+// ✅ AEVI B4: *"Crystal lattice and veil as LINES: solid glowing at MEMBERSHIP 0.55, dashed at 0.8. Wild nanite as
+// a scattered stipple… Ordered nanite as the same dots on a tidy hex lattice, gathered."*
+//
+// ⛑ CHECKED AGAINST SHAPES WHOSE ANSWER IS ARITHMETIC, not against a picture. The 0.5 contour of a cone of
+// radius R is a circle of radius R/2, and that is a fact a gate can hold whatever the lens is later restyled to.
+console.log("\n── §419 · the geometry a lens is made of ──");
+{
+  const LN = await import("../engine/lenses.js");
+
+  /* ---- 1 · ⛔ A CONTOUR IS WHERE THE VALUE CROSSES, and it is STITCHED ---- */
+  const W419 = 101, H419 = 101, R419 = 50;
+  const cone419 = new Float32Array(W419 * H419);
+  for (let y = 0; y < H419; y++) for (let x = 0; x < W419; x++) {
+    cone419[y * W419 + x] = Math.max(0, 1 - Math.hypot(x - 50, y - 50) / R419);
+  }
+  check("§419: ⛔ A CONTOUR SITS WHERE THE VALUE CROSSES — the 0.5 line of a cone is a circle of HALF its radius",
+    (() => {
+      for (const [level, want] of [[0.5, 25], [0.8, 10]]) {
+        const lines = LN.isoLines(cone419, W419, H419, level);
+        if (lines.length !== 1) return false;
+        for (const p of lines[0]) if (Math.abs(Math.hypot(p[0] - 50, p[1] - 50) - want) > 0.05) return false;
+      }
+      return true;
+    })(), "interpolated on the crossed edge, not snapped to the cell — the same trick the shoreline uses");
+  // ⚠️ STITCHED, and this is why it is not twenty lines. A dashed stroke over disconnected two-point segments
+  // restarts its dash pattern at every cell boundary, so the line reads as a dotted smear instead of a dashed
+  // vein — and B4 asks for exactly one solid line and one dashed one.
+  check("§419: ⚠️ …and it comes back as ONE JOINED PATH, which is what makes the dashed line at 0.8 drawable",
+    (() => {
+      const lines = LN.isoLines(cone419, W419, H419, 0.5);
+      if (lines.length !== 1 || lines[0].length < 60) return false;
+      const a = lines[0][0], b = lines[0][lines[0].length - 1];
+      if (Math.hypot(a[0] - b[0], a[1] - b[1]) > 0.1) return false;      // a ring closes
+      // and consecutive points are neighbours, never a jump across the grid
+      for (let i = 1; i < lines[0].length; i++) {
+        const p = lines[0][i - 1], q = lines[0][i];
+        if (Math.hypot(q[0] - p[0], q[1] - p[1]) > 2) return false;
+      }
+      return true;
+    })());
+  // ⛔ TWO HILLS ARE TWO LINES. One polyline through both would draw a vein where there is open ground.
+  check("§419: ⛔ …and two separate hills give two separate lines, never one joining them across the gap",
+    (() => {
+      const g = new Float32Array(W419 * H419);
+      for (let y = 0; y < H419; y++) for (let x = 0; x < W419; x++) {
+        g[y * W419 + x] = Math.max(Math.max(0, 1 - Math.hypot(x - 25, y - 50) / 18),
+                                   Math.max(0, 1 - Math.hypot(x - 75, y - 50) / 18));
+      }
+      return LN.isoLines(g, W419, H419, 0.5).length === 2;
+    })());
+  // ⛑ and a field entirely above or entirely below its level has NO line — which is true, and is the reason
+  // the painter draws a tint when a register saturates (the Crossing's lattice is 100% above the membership line)
+  check("§419: ⛑ …and a field wholly above its level has no contour at all, which the painter must answer for",
+    LN.isoLines(new Float32Array(400).fill(0.95), 20, 20, 0.55).length === 0
+    && LN.isoLines(new Float32Array(400).fill(0.1), 20, 20, 0.55).length === 0);
+
+  /* ---- 2 · ⚠️ DENSITY IS THE VALUE, AND IT HOLDS STILL ---- */
+  check("§419: ⚠️ A STIPPLE'S DENSITY IS THE FIELD — no single dot is a reading, the crowd of them is",
+    (() => {
+      for (const v of [0.15, 0.5, 0.9]) {
+        const dots = LN.stipple(400, 400, () => v, { cell: 6 });
+        const cells = Math.ceil(400 / 6) ** 2;
+        if (Math.abs(dots.length / cells - v) > 0.05) return false;
+      }
+      return true;
+    })());
+  check("§419: ⚠️ …and it is the SAME stipple every repaint, or the ground appears to crawl",
+    (() => {
+      const a = LN.stipple(300, 300, () => 0.5, { cell: 6 });
+      const b = LN.stipple(300, 300, () => 0.5, { cell: 6 });
+      return a.length > 100 && a.length === b.length && a.every((p, i) => p.x === b[i].x && p.y === b[i].y);
+    })(), "a field that re-scattered each frame would read as a world that keeps changing");
+
+  /* ---- 3 · ⛔ THE ORDERED REGISTER IS THE SAME SUBSTANCE, ARRANGED ---- */
+  // ⛑ THE LATTICE IS THE STATEMENT: wild scatters, ordered sits on a lattice, and side by side that says
+  // "one material in two states" in a way two tints of a wash never could.
+  check("§419: ⛔ THE ORDERED REGISTER SITS ON A HEX LATTICE — rows a true √3/2 apart, with no jitter",
+    (() => {
+      const pitch = 10;
+      const dots = LN.hexGather(400, 400, () => 1, () => 1, { pitch });
+      if (dots.length < 200) return false;
+      // ⚠️ the raw y values, NOT rounded: my first cut quantised them to a thousandth and then demanded the
+      // gaps match within a millionth, which is a gate failing its own arithmetic rather than the code's.
+      const rows = [...new Set(dots.map((p) => p.y))].sort((a, b) => a - b);
+      if (rows.length < 5) return false;
+      const want = pitch * Math.sqrt(3) / 2;
+      for (let i = 1; i < rows.length; i++) if (Math.abs((rows[i] - rows[i - 1]) - want) > 1e-9) return false;
+      return true;
+    })());
+  check("§419: ⛔ …and it is GATHERED — nothing lands outside the reach of something tended",
+    (() => {
+      const near = LN.nearness([{ x: 100, y: 100, r: 80 }]);
+      const dots = LN.hexGather(400, 400, () => 1, near, { pitch: 10 });
+      return dots.length > 20 && dots.every((p) => Math.hypot(p.x - 100, p.y - 100) <= 80);
+    })(), "Aevi: 'density = the field's ordered value × nearness to a tended point'");
+  check("§419: ⛑ …and nearness falls off smoothly, 1 at the centre and 0 at the rim, with no hard edge",
+    (() => {
+      const n = LN.nearness([{ x: 0, y: 0, r: 100 }]);
+      return Math.abs(n(0, 0) - 1) < 1e-9 && n(100, 0) === 0 && Math.abs(n(50, 0) - 0.5) < 1e-9
+        && n(25, 0) > n(50, 0) && n(50, 0) > n(75, 0);
+    })());
+
+  /* ---- 4 · ⛑ AND IT KNOWS NOTHING ABOUT A CANVAS ---- */
+  // ⚠️ COMMENTS STRIPPED FIRST. My first cut matched the word "canvas" in this file's OWN doc comment —
+  // *"the geometry a map lens is made of, with no canvas in the room"* — so the check reddened on the very
+  // sentence promising the thing it was testing for. Fifth time a source regex here has read its own prose.
+  const codeOnly419 = (s) => String(s || "").split(NEWLINE_RE)
+    .filter((l) => !/^\s*(\/\/|\*|\/\*)/.test(l)).join(String.fromCharCode(10));
+  check("§419: ⛑ THE LENS GEOMETRY IS PURE AND IMPORT-FREE — where the marks go is arithmetic, how they are inked is not",
+    (() => {
+      const code = codeOnly419(rd("engine/lenses.js"));
+      return code.length > 1500 && !/^\s*import /m.test(code)
+        && !/\bctx\.|\bcanvas\b|\bdocument\./.test(code);
     })());
 }
 

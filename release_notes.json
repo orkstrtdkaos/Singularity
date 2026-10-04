@@ -16,6 +16,24 @@
   "next": [],
   "releases": [
     {
+      "version": "2.17.4",
+      "date": "2026-10-04",
+      "entries": [
+        {
+          "kind": "feature",
+          "title": "The power field is drawn as what it is",
+          "summary": "Each kind of field now has its own mark instead of all of them sharing one wash.",
+          "detail": "Turning the field on used to tint the map with the sum of every register at once, which could only ever tell you how much field was there — the one question nobody asks. Now each reads as itself. The crystal lattice and the veil run as lines, solid where the ground crosses into them and dashed where it runs deep. Wild nanite scatters as loose dots whose thickness is the strength. Ordered nanite is the same dots arranged on a lattice, gathered close to the places people tend — side by side the two say plainly that it is one substance in two states. The ground drains its colour while a lens is on, so every ridge and shoreline stays exactly as readable while the field has somewhere to land. And where a register fills the whole view, the map says so instead of showing you an empty layer."
+        },
+        {
+          "kind": "change",
+          "title": "Wells and sinks look like wells and sinks",
+          "summary": "A crystal well is a cut crystal with rays; a veil sink draws the light out of the ground.",
+          "detail": "Both used to be a small diamond with a coloured glow. A well is now a faceted crystal whose rays grow with its strength, ringed with a dashed line at the edge of its true reach and fading to nothing at twice that. A sink is a spiral drawn into itself, and it darkens the ground beneath rather than laying ink on top — so it reads as a thing taking the field out of the world, which is what it is."
+        }
+      ]
+    },
+    {
       "version": "2.17.3",
       "date": "2026-10-04",
       "entries": [

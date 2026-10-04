@@ -184,7 +184,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.16.13";
+const APP_VERSION = "2.16.16";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -3014,6 +3014,14 @@ function fieldPanel(ext) {
   const mark = (key, label, title) => `<button class="opt field-mark${fieldCtl[key] ? " selected" : ""}" data-fieldmark="${key}" title="${esc(title)}">${fieldCtl[key] ? "✓ " : ""}${label}</button>`;
   return `<div class="field-ctl" data-field-panel="1" style="margin-bottom:8px;display:flex;gap:6px;flex-wrap:wrap;align-items:center">
     ${mark("on", "◈ Field", "The evaluated power field, washed over the ground. Turning a SOURCE KIND off re-renders it; these marker buttons only hide markers.")}
+    ${/* ⛔ THE SECOND MODE, WHICH HAS EXISTED SINCE `texture()` WAS WRITTEN AND HAD NO CONTROL. Its own comment:
+          "mix sums and normalises (HOW MUCH FIELD IS HERE); max gives the texel to the strongest source (WHICH
+          SOURCE OWNS THIS GROUND)." ⚠️ Measured over six regions: chroma ×3.44 — the mixed wash averages five hues
+          into one grey-blue, and this is the toggle that stops it. `mix` stays the default. */""}
+    <button class="opt field-mark${fieldCtl.mode === "max" ? " selected" : ""}" data-fieldmode="1"
+      title="${esc(fieldCtl.mode === "max"
+        ? "Strongest source wins each point — the colour says WHICH source is here. Click for the blend."
+        : "The registers are blended — the colour says HOW MUCH field is here. Click to let the strongest source take each point.")}">${fieldCtl.mode === "max" ? "✓ strongest" : "blended"}</button>
     ${[...FIELD_KINDS].map(kindBtn).join("")}
     <span class="hint" style="margin:0 4px">│</span>
     ${mark("wells", "◆ wells", "The authored crystal wells — places the lattice pools")}
@@ -3028,7 +3036,11 @@ function fieldPanel(ext) {
 /** ⛔ DRAW THE FIELD PANEL AGAIN once the terrain has actually landed. ⚠️ IT REPLACES IN PLACE rather than
  *  re-rendering the screen, because the screen holds a canvas that has just been painted and a `<details>` the player
  *  may have opened — a full re-render would throw both away to show a row of buttons.
- *  ⛑ A NO-OP WHEN THERE IS NOTHING NEW: if the field still will not build, the panel keeps the sentence it has. */
+ *  ⛑ A NO-OP WHEN THERE IS NOTHING NEW: if the field still will not build, the panel keeps the sentence it has.
+ *  ⚠️ `repaint` MUST BE THE TIER'S OWN — the one that re-renders the panel, not one that only repaints a canvas.
+ *  This function RE-WIRES every control it redraws, so the repaint handed in here becomes what those controls call
+ *  for the rest of the screen's life. Hand it a canvas-only repaint and the toggles keep working while their labels
+ *  freeze, which is exactly what happened between CCODE-587 and CCODE-592. */
 function refreshFieldPanel(ext, repaint) {
   const host = app.querySelector("[data-field-panel]");
   if (!host || !worldField()) return false;
@@ -3045,6 +3057,12 @@ function wireFieldPanel(repaint) {
   for (const b of app.querySelectorAll("[data-fieldkind]")) b.onclick = () => {
     const k = b.dataset.fieldkind;
     if (fieldCtl.kinds.has(k)) fieldCtl.kinds.delete(k); else fieldCtl.kinds.add(k);
+    repaint();
+  };
+  // ✅ ERIK'S "more obvious" — the mode flips and the tier repaints through its own `repaint`, exactly as a kind
+  // toggle does. ⚠️ The texture cache is keyed on the mode already, so both modes stay warm after the first look.
+  for (const b of app.querySelectorAll("[data-fieldmode]")) b.onclick = () => {
+    fieldCtl.mode = fieldCtl.mode === "max" ? "mix" : "max";
     repaint();
   };
   for (const b of app.querySelectorAll("[data-fieldmark]")) b.onclick = () => {
@@ -12339,6 +12357,53 @@ let _regionBases = new Map();
 // 4 of 38 regions have one today; the other 34 draw ground and places and nothing else, which is the
 // dominant case and must look deliberate rather than broken.
 let _regionMaps = null;
+/** ⛔ WHAT THE GROUND MAP DREW, KEPT. `paintRegionMap` computed `marks416` — id, name, screen x/y for every place —
+ *  and threw it away when it returned, which is why the canvas had no click handler: there was nothing to hit-test
+ *  against. Kept here, it is the same array the painter drew from, so the picture and the pointer cannot disagree. */
+let _regionPick = null;      // { regionId, marks:[{id,name,x,y}], clusters:[{x,y,members:[mark]}] }
+/** ⛔ THE OPEN FAN, in canvas pixels. Null when nothing is fanned. */
+let _regionFan = null;       // { key, cx, cy, members:[{id,name,x,y}] }
+/** ⛑ THE CLICK RADIUS THE GLOBE HAS USED ALL ALONG (`nearest` in `wireWorldGlobe`), so one map does not feel
+ *  tighter than the other — and the radius that the 41% was measured at. */
+const REGION_HIT = 14;
+/** ⛔ A STACK IS WHATEVER A SINGLE CLICK CANNOT SEPARATE, which is a question about the SCREEN, not about whether
+ *  two places share a coordinate. 21 of 157 places share an exact point; 39 of 95 are inside another's click radius.
+ *  ⚠️ Single-link, so a chain of near-neighbours is one fan rather than several overlapping ones. */
+function clusterMarks(marks, radius = REGION_HIT) {
+  const seen = new Set(), out = [];
+  for (const m of marks) {
+    if (seen.has(m.id)) continue;
+    const group = [m]; seen.add(m.id);
+    for (let i = 0; i < group.length; i++) {
+      for (const o of marks) {
+        if (seen.has(o.id)) continue;
+        if (Math.hypot(o.x - group[i].x, o.y - group[i].y) < radius) { group.push(o); seen.add(o.id); }
+      }
+    }
+    // ⛑ THE MARK SITS WHERE THE PLACES ARE, not at a tidy centroid of a chain: the mean of the group.
+    const cx = group.reduce((a, g) => a + g.x, 0) / group.length;
+    const cy = group.reduce((a, g) => a + g.y, 0) / group.length;
+    out.push({ x: cx, y: cy, members: group, key: group.map(g => g.id).sort().join("|") });
+  }
+  return out;
+}
+/** ⛔ WHERE A FANNED MEMBER SITS. OverlappingMarkerSpiderfier's own geometry: a CIRCLE up to 8, a spiral above.
+ *  ⚠️ Measured 2026-10-04: every cluster in the world is 2 to 7, so the spiral has no population and is not
+ *  built — if one is ever needed this is the single place that learns it. */
+function fanPositions(n, cx, cy, W, H, minR = 0) {
+  // ⚠️ THE RING GROWS WITH WHAT IT CARRIES. A fixed radius made a seven-member fan draw seven labels on top of one
+  // another: clickable, unreadable. The painter measures the widest name and asks for the radius that separates them.
+  const r = Math.max(26, 13 + n * 5, minR);
+  const out = [];
+  for (let i = 0; i < n; i++) {
+    // ⛑ start at the top and go clockwise, so the order on screen is the order in the list beside it
+    const a = -Math.PI / 2 + (i / n) * Math.PI * 2;
+    // ⚠️ nudged back inside the canvas, or a fan near an edge puts half its members where nobody can click them
+    out.push({ x: Math.max(14, Math.min(W - 14, cx + Math.cos(a) * r)),
+               y: Math.max(14, Math.min(H - 14, cy + Math.sin(a) * r)) });
+  }
+  return out;
+}
 fetch("content/packs/core/world/region_maps.json?v=" + APP_VERSION)
   .then((r) => r.json()).then((d) => { _regionMaps = d; })
   .catch(() => { /* the ground still draws */ });
@@ -12371,7 +12436,10 @@ function queueRegionMap(regionId) {
   // this fires BEFORE the element is in the document — one requestAnimationFrame was not enough, the
   // painter kept returning at `!cv`, and a blank canvas survived a green suite twice because of it.
   const tryPaint = (left) => {
-    if (document.getElementById("region-map")) {
+    const cvQ = document.getElementById("region-map");
+    if (cvQ) {
+      // ⚠️ BEFORE the paint, because assigning `width` clears the canvas and resets the context.
+      sizeRegionCanvas(cvQ);
       // ⚠️ A CATCH THAT HIDES ITS REASON IS THE BUG I KEEP FINDING IN OTHER PEOPLE'S CODE. The diagram
       // below genuinely is a working fallback, so this must not throw — but it must SAY why it fell back.
       try { paintRegionMap(regionId); }
@@ -12385,12 +12453,31 @@ function queueRegionMap(regionId) {
       tryPaint(60);
       // ✅ …AND THE FIELD PANEL, which was built before this promise resolved and has been saying so ever since.
       try {
+        // ⚠️ `() => renderMap()`, THE TIER'S OWN REPAINT — not a canvas-only one. `refreshFieldPanel` RE-WIRES the
+        // panel with whatever it is handed, so handing it a canvas repaint quietly downgraded every control on it:
+        // the field redrew and the panel did not, leaving each ✓ claiming a state that was no longer true. Found by
+        // clicking a toggle and watching its own label refuse to move.
         refreshFieldPanel(regionExtent(regionId, CONTENT.locations, { authored: (_regionMaps && _regionMaps[regionId]) || null }),
-          () => paintRegionMap(regionId));
+          () => renderMap());
       } catch (err) { console.warn("[region-map] the field panel could not be redrawn:", err); }
     })
     .catch(() => { /* enhancement only — the connection diagram below is still a working map */ });
 }
+/** ⛔ THE BACKING STORE FOLLOWS THE LAYOUT. (AEVI §1.3: "let the canvas use the window, filling the available width
+ *  up to about 1600px".) ⚠️ THE ASPECT IS HELD AT THE ORIGINAL 800:420. `base.toScreen` maps the region's extent
+ *  onto W×H whatever they are, so a different ratio would STRETCH the ground — every authored way and every bent
+ *  road would land somewhere slightly else. Widening is a resolution change here, never a reframing.
+ *  ⛑ Returns true when it actually changed, because setting `width` CLEARS the canvas: the caller must paint after. */
+const REGION_ASPECT = 420 / 800;
+function sizeRegionCanvas(cv) {
+  if (!cv) return false;
+  const want = Math.max(320, Math.min(1600, Math.round(cv.getBoundingClientRect().width || 800)));
+  const h = Math.round(want * REGION_ASPECT);
+  if (cv.width === want && cv.height === h) return false;
+  cv.width = want; cv.height = h;
+  return true;
+}
+
 function paintRegionMap(regionId) {
   const cv = document.getElementById("region-map");
   if (!cv || !_terrain || !_fineGenReady()) return;
@@ -12701,6 +12788,155 @@ function paintRegionMap(regionId) {
     ctx.strokeStyle = "#e8c14a"; ctx.lineWidth = 1.6;
     ctx.beginPath(); ctx.arc(hereMark.p.x, hereMark.p.y, 13, 0, Math.PI * 2); ctx.stroke();
   }
+
+  /* ══ ⛔ AEVI §1.1/§1.2 — THE GROUND MAP IS CLICKABLE, AND A STACK OPENS ══ */
+  // ⛑ KEPT, NOT RECOMPUTED. These are the marks this function just drew, so the pointer and the picture are the
+  // same arithmetic. Recomputing them for the hit test would be two callers answering "where is this place".
+  _regionPick = {
+    regionId,
+    marks: marks416.map(m => ({ id: m.id, name: m.name, x: m.p.x, y: m.p.y })),
+    clusters: clusterMarks(marks416.map(m => ({ id: m.id, name: m.name, x: m.p.x, y: m.p.y }))),
+  };
+  // ⚠️ A FAN BELONGS TO ITS STACK. If the region changed or the places moved under it, the open fan is stale and
+  // goes — otherwise a click would select a place that is no longer where the ring says it is.
+  if (_regionFan && !_regionPick.clusters.some(c => c.key === _regionFan.key)) _regionFan = null;
+
+  // ⛔ A STACK SAYS IT IS ONE, on the mark itself. The label already carries "+N" through `placeLabels`, but a
+  // label can be the one hidden; the ring is on the thing you click.
+  for (const c of _regionPick.clusters) {
+    if (c.members.length < 2) continue;
+    ctx.strokeStyle = "rgba(232,230,221,0.55)"; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.arc(c.x, c.y, 11, 0, Math.PI * 2); ctx.stroke();
+    ctx.fillStyle = "rgba(10,12,16,0.78)";
+    ctx.beginPath(); ctx.arc(c.x + 9, c.y - 9, 6.5, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = "#e8e6dd"; ctx.font = "600 9px system-ui, sans-serif"; ctx.textAlign = "center";
+    ctx.fillText(String(c.members.length), c.x + 9, c.y - 6);
+  }
+
+  // ⛔ AND THE OPEN FAN. Spokes first so a mark sits on top of its own line.
+  if (_regionFan) {
+    ctx.font = "600 10px system-ui, sans-serif";
+    const n416 = _regionFan.members.length;
+    // ⛑ THE RADIUS THE NAMES NEED. Neighbours on the ring are 2πr/n apart; a label is at most `widest` across, so
+    // the ring has to be at least n·(widest+gap)/2π for two adjacent names not to touch. Capped, because a fan that
+    // fills the canvas is its own kind of unreadable — and the radial placement below carries the rest.
+    const widest = Math.max(...(_regionFan.members.map(m => ctx.measureText(m.name).width)), 40);
+    const need = Math.min(0.34 * Math.min(W, H), (n416 * (widest * 0.62 + 10)) / (2 * Math.PI));
+    const pos = fanPositions(n416, _regionFan.cx, _regionFan.cy, W, H, need);
+    _regionFan.members.forEach((m, i) => { m.x = pos[i].x; m.y = pos[i].y; });
+    ctx.strokeStyle = "rgba(232,193,74,0.5)"; ctx.lineWidth = 1;
+    for (const m of _regionFan.members) {
+      ctx.beginPath(); ctx.moveTo(_regionFan.cx, _regionFan.cy); ctx.lineTo(m.x, m.y); ctx.stroke();
+    }
+    ctx.font = "600 10px system-ui, sans-serif"; ctx.textAlign = "center";
+    for (const m of _regionFan.members) {
+      ctx.fillStyle = "rgba(10,12,16,0.88)";
+      ctx.beginPath(); ctx.arc(m.x, m.y, 7, 0, Math.PI * 2); ctx.fill();
+      ctx.strokeStyle = m.id === here ? "#e8c14a" : "rgba(232,230,221,0.8)"; ctx.lineWidth = 1.4;
+      ctx.beginPath(); ctx.arc(m.x, m.y, 7, 0, Math.PI * 2); ctx.stroke();
+      // ⚠️ THE NAME IS THE POINT OF THE FAN — "every member nameable and clickable". A plate under it, because a
+      // fan opens over whatever ground the stack sat on and unplated text on a hillside is unreadable.
+      // ⛔ AND IT GOES RADIALLY OUTWARD. Centred-below put seven labels on top of each other; away from the ring's
+      // centre is away from the neighbours, which is the whole trick.
+      const w = ctx.measureText(m.name).width;
+      const ux = m.x - _regionFan.cx, uy = m.y - _regionFan.cy;
+      const ul = Math.hypot(ux, uy) || 1;
+      const side = ux / ul;
+      let lx = m.x, ly = m.y, align = "center";
+      if (side > 0.34) { align = "left"; lx = m.x + 11; ly = m.y + 3; }
+      else if (side < -0.34) { align = "right"; lx = m.x - 11; ly = m.y + 3; }
+      else { ly = uy < 0 ? m.y - 12 : m.y + 19; }     // top of the ring reads above, bottom reads below
+      ctx.textAlign = align;
+      const px = align === "left" ? lx - 3 : align === "right" ? lx - w - 3 : lx - w / 2 - 3;
+      ctx.fillStyle = "rgba(10,12,16,0.82)";
+      ctx.fillRect(px, ly - 9, w + 6, 12);
+      ctx.fillStyle = "#e8e6dd";
+      ctx.fillText(m.name, lx, ly);
+      ctx.textAlign = "center";
+    }
+  }
+}
+
+/** ⛔ THE GROUND MAP ANSWERS THE POINTER. (AEVI §1.1, 2026-10-04: "Make the ground map clickable: yes, build it
+ *  now. It is foundational to every design below.")
+ *
+ *  ⛑ IT WAS NEVER WIRED AT ALL. `region-map` appeared six times in this file and every one of them PAINTED it — no
+ *  click, no hover, no cursor — while the canvas drew eight place names a player could reasonably click. The map
+ *  that worked was the schematic 856px further down the page.
+ *
+ *  ⚠️ AND A HIT TEST ALONE WOULD HAVE MADE IT WORSE. Measured at this radius: 39 of 95 drawn places sit inside
+ *  another's click radius, 11 of 17 in the Valley, in clusters up to seven. Nearest-wins on that would hand back
+ *  whichever place the cursor happened to favour, confidently and wrongly. So a stack opens instead.
+ *
+ *  ⛑ ONE SELECTION DOOR. A pick routes to `renderMap(id)`, which is exactly what a `[data-mapsel]` node does, so
+ *  selecting from the picture and selecting from the diagram are one behaviour rather than two that drift. */
+function wireRegionGroundMap(selectedId) {
+  const cv = document.getElementById("region-map");
+  if (!cv) return;
+  const readout = document.getElementById("region-map-readout");
+  // ⚠️ CSS PIXELS ARE NOT CANVAS PIXELS. The canvas is 800×420 of backing store laid out at up to 100% width, so
+  // the pointer has to be scaled into the frame the marks were computed in or every hit is off by the ratio.
+  const toCanvas = (e) => {
+    const r = cv.getBoundingClientRect();
+    return { x: (e.clientX - r.left) * (cv.width / r.width), y: (e.clientY - r.top) * (cv.height / r.height) };
+  };
+  const pickAt = (x, y) => {
+    const P = _regionPick;
+    if (!P) return null;
+    // ⛔ A FANNED MEMBER WINS, because it is drawn on top and the player opened it to reach exactly that.
+    if (_regionFan) {
+      let best = null, bd = REGION_HIT * REGION_HIT;
+      for (const m of _regionFan.members) {
+        const d = (m.x - x) ** 2 + (m.y - y) ** 2;
+        if (d < bd) { bd = d; best = { kind: "place", id: m.id, name: m.name }; }
+      }
+      if (best) return best;
+    }
+    let best = null, bd = REGION_HIT * REGION_HIT;
+    for (const c of P.clusters) {
+      const d = (c.x - x) ** 2 + (c.y - y) ** 2;
+      if (d < bd) { bd = d; best = c; }
+    }
+    if (!best) return null;
+    return best.members.length > 1
+      ? { kind: "stack", cluster: best, name: `${best.members[0].name} +${best.members.length - 1}` }
+      : { kind: "place", id: best.members[0].id, name: best.members[0].name };
+  };
+  const repaint = () => { try { paintRegionMap(_regionPick?.regionId || mapFocus || currentRegionId()); } catch { /* the diagram below is still a map */ } };
+
+  cv.style.cursor = "default";
+  cv.onmousemove = (e) => {
+    const p = toCanvas(e), hit = pickAt(p.x, p.y);
+    cv.style.cursor = hit ? "pointer" : "default";
+    // ⛑ THE NAME UNDER THE POINTER. Aevi's hover CARD is hers to draw; this is the one line that makes the map
+    // feel answerable, and it is the same `pickAt` the card will read when it lands.
+    if (readout) {
+      readout.textContent = hit
+        ? (hit.kind === "stack" ? `${hit.name} — ${hit.cluster.members.length} places here, click to open` : hit.name)
+        : "";
+    }
+  };
+  cv.onmouseleave = () => { cv.style.cursor = "default"; if (readout) readout.textContent = ""; };
+  cv.onclick = (e) => {
+    const p = toCanvas(e), hit = pickAt(p.x, p.y);
+    if (!hit) {
+      // ⚠️ A CLICK ON EMPTY GROUND CLOSES THE FAN AND NOTHING ELSE. It must not deselect: the selected place is
+      // what the Look inside / travel buttons below read, and losing it on a stray click is the "it kicks me back
+      // out" complaint in a new shape.
+      if (_regionFan) { _regionFan = null; repaint(); }
+      return;
+    }
+    if (hit.kind === "stack") {
+      _regionFan = _regionFan && _regionFan.key === hit.cluster.key
+        ? null                                             // clicking the open stack closes it
+        : { key: hit.cluster.key, cx: hit.cluster.x, cy: hit.cluster.y,
+            members: hit.cluster.members.map(m => ({ id: m.id, name: m.name, x: m.x, y: m.y })) };
+      repaint();
+      return;
+    }
+    _regionFan = null;
+    renderMap(hit.id === selectedId ? null : hit.id);      // the diagram's own door
+  };
 }
 
 /** WORLD tier — regions as territories. Individual settlements are noise at this scale; the
@@ -13529,7 +13765,13 @@ function renderMap(selectedId = null) {
           can't drift the way the old hardcoded "92 places across 24 regions" line silently did. */""}
     <p class="hint" style="margin-bottom:8px">${locs.length} place${locs.length === 1 ? "" : "s"} in this region, on real ground. Gold ring: you are here.</p>
     ${mapTierBar()}
-    <canvas id="region-map" width="800" height="420" style="width:100%;max-width:800px;border-radius:8px;display:block;margin-bottom:6px;background:#0a0c10"></canvas>
+    ${/* ✅ AEVI §1.3 — "let the canvas use the window, filling the available width up to about 1600px". The backing
+          store is sized to the pane on open (`sizeRegionCanvas`), so the marks, the hit test and the labels are all
+          computed in the frame that is actually on screen. ⚠️ A canvas laid out wider than its backing store blurs
+          AND throws the pointer off by the ratio — which is why the two are set together, never in CSS alone. */""}
+    <canvas id="region-map" width="800" height="420" style="width:100%;max-width:1600px;border-radius:8px;display:block;background:#0a0c10"></canvas>
+    ${/* ⛑ the name under the pointer. Empty until something is under it, so it costs no height when idle. */""}
+    <div id="region-map-readout" class="hint" style="min-height:14px;margin:2px 0 6px"></div>
     ${fieldPanel(regionExtent(focusRegion, CONTENT.locations, { authored: (_regionMaps && _regionMaps[focusRegion]) || null }))}
     <p class="hint" style="margin-bottom:10px">⛰ The ground as it is — generated once at the scale where the world still has features, and kept. ◈ The field over it is EVALUATED at every point, not washed between the places — a source turned off re-renders it. The diagram below shows how the places CONNECT, which the ground does not say.</p>
     <div style="margin-bottom:8px"><button class="opt ${mapShowKG ? "selected" : ""}" id="map-kg-toggle" title="People you've met (solid) and threads you've only heard of (dimmed diamonds) — where they live">${mapShowKG ? "✓ " : ""}Show what you know</button>
@@ -13567,6 +13809,7 @@ function renderMap(selectedId = null) {
   document.getElementById("map-sub-toggle").onclick = () => { mapShowSub = !mapShowSub; renderMap(selectedId); };
   for (const g of app.querySelectorAll("[data-kgtopic]")) g.onclick = () => renderCodexScreen("", g.dataset.kgtopic);
   for (const g of app.querySelectorAll("[data-mapsel]")) g.onclick = () => renderMap(g.dataset.mapsel === selectedId ? null : g.dataset.mapsel);
+  wireRegionGroundMap(selectedId);
   wireMapTierBar(); // SNG-154 stage 6
   const insideBtn = document.getElementById("map-lookinside");
   if (insideBtn) insideBtn.onclick = () => { mapTier = "location"; mapFocus = insideBtn.dataset.inside; renderMap(); };

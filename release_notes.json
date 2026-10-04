@@ -16,6 +16,60 @@
   "next": [],
   "releases": [
     {
+      "version": "2.16.16",
+      "date": "2026-10-04",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "The field buttons show what they did",
+          "summary": "A toggle changed the map and then kept its old label.",
+          "detail": "Turning a power register off really did redraw the field — but the button's own tick never moved, so it went on claiming a setting you had just changed. The panel redraws with the map now."
+        }
+      ]
+    },
+    {
+      "version": "2.16.15",
+      "date": "2026-10-04",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "The names in an opened stack no longer sit on each other",
+          "summary": "A fan of seven places wrote seven labels in the same spot.",
+          "detail": "Opening a stack showed every place in it, with every name drawn in the same place under its mark — so you could click them all and read none of them. The names now sit outward from the ring, away from each other, and the ring opens wider when the names are long."
+        }
+      ]
+    },
+    {
+      "version": "2.16.14",
+      "date": "2026-10-04",
+      "entries": [
+        {
+          "kind": "change",
+          "title": "The map answers when you click it",
+          "summary": "Places on the ground map can be pointed at, named and opened — they never could before.",
+          "detail": "The picture of your region drew its places and then ignored you: no cursor, no hover, no click. The working map was the diagram further down the page. Now the ground itself answers — hover to read a name, click to select, and the same Look inside and travel buttons follow."
+        },
+        {
+          "kind": "change",
+          "title": "Places stacked on one spot fan out",
+          "summary": "Where several places share a dot, clicking it opens them into a ring.",
+          "detail": "A room of Millbrook really is at Millbrook, so the map draws them as one mark with a count beside it — and clicking that mark opens every place there into a small ring you can read and click. In your own valley that is eleven of seventeen places that a single click could not have told apart."
+        },
+        {
+          "kind": "change",
+          "title": "The power field can show which source holds the ground",
+          "summary": "A new button beside the field toggles: blended, or strongest source wins.",
+          "detail": "The field was drawn as a blend of all five registers, which averaged five colours into one grey-blue — so a source only showed where it was overwhelming. The new setting gives each point to whatever source is strongest there, so the colour tells you WHICH power is under your feet. Blended is still what the map opens on."
+        },
+        {
+          "kind": "change",
+          "title": "The map uses the width you give it",
+          "summary": "The region map grows with the window instead of stopping at 800 pixels.",
+          "detail": "It drew at a fixed size whatever room it had. It now fills the available width, drawn at that size rather than scaled up to it, so the ground stays sharp."
+        }
+      ]
+    },
+    {
       "version": "2.16.13",
       "date": "2026-10-04",
       "entries": [

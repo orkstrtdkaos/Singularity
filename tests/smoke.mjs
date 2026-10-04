@@ -7726,7 +7726,12 @@ await (async () => {
     // The card grid existed because the globe could not resolve a region; it can, so a region is a ZOOM
     // LEVEL of the world rather than a separate screen. ⚠️ The old drill-down is not deleted — it moves
     // to double-click and the breadcrumb, because a list is still the fastest way to find a place by name.
-    const appSrc405 = readFileSync(join(root, "app.js"), "utf8");
+    const appSrc405raw = readFileSync(join(root, "app.js"), "utf8");
+    // ⚠️ SCOPED TO THE GLOBE'S OWN WIRING. This sliced from the FIRST `cv.onclick` in the whole file, which was the
+    // globe's only because nothing else had one — an index pin standing in for "the globe's". The region ground map
+    // got a click handler on 2026-10-04 and it sits earlier in the file, so the slice silently moved to the wrong
+    // canvas and this check started asking its question of a different screen.
+    const appSrc405 = appSrc405raw.slice(appSrc405raw.indexOf("function wireWorldGlobe("));
     const clickBody = appSrc405.slice(appSrc405.indexOf("cv.onclick"), appSrc405.indexOf("cv.ondblclick"));
     const dblBody = appSrc405.slice(appSrc405.indexOf("cv.ondblclick"), appSrc405.indexOf("cv.onwheel"));
     check("405: a single click FRAMES the place on the globe instead of leaving for the card grid",

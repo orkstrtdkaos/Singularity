@@ -35472,6 +35472,148 @@ console.log("\n── §410 · one person, however the id is punctuated ──")
   // gate whose subject is whatever happens to be in somebody's save this week.
 }
 
+/* ══════════ §411 · THE GROUND MAP ANSWERS THE POINTER, AND A STACK OPENS ══════════ */
+// ✅ AEVI, 2026-10-04 §1.1–§1.3: *"Make the ground map clickable: yes, build it now… Stacks: fan them out on the map.
+// Do not offset at mint… Let the canvas use the window."*
+//
+// ⛔ IT WAS NEVER WIRED AT ALL. `region-map` appeared six times in app.js and every one PAINTED it — no click, no
+// hover, no cursor — under eight place names a player could reasonably click. The working map was the schematic
+// 856px down the page.
+//
+// ⚠️ AND A HIT TEST ALONE WOULD HAVE MADE IT WORSE, which is why the fan ships with it rather than after it.
+// Measured at the globe's own 14px radius: 39 of 95 drawn places sit inside another's click radius, 11 of 17 in the
+// Valley, in clusters up to SEVEN. Nearest-wins on that is a confident wrong answer.
+console.log("\n── §411 · the ground map answers the pointer ──");
+{
+  const A411 = rd("app.js");
+  // ⛑ THE REAL FIELD, built the way `worldField()` builds it, so the mode check below is DRIVEN rather than
+  // asserted from the source. A control over a mode that answered the same both ways would be a button on nothing.
+  const FIELD411 = await (async () => {
+    try {
+      const FJ = await import("../engine/field.js");
+      const WG = await import("../engine/worldglobe.js");
+      const { loadContentHeadless: lch411 } = await import("./headless_content.mjs");
+      const C411 = await lch411();
+      const terr411 = WG.decodeTerrain(JSON.parse(rd("content/packs/core/world/terrain.json")));
+      const model411 = JSON.parse(rd("content/packs/core/world/field_model.json"));
+      return FJ.makeField(FJ.fieldDataFrom(terr411.fields, model411, { content: C411, substrate: C411?.rules?.the_substrate || null }));
+    } catch { return null; }
+  })();
+  const paint411 = A411.slice(A411.indexOf("function paintRegionMap("), A411.indexOf("function wireRegionGroundMap("));
+  const wire411 = A411.slice(A411.indexOf("function wireRegionGroundMap("), A411.indexOf("/** WORLD tier"));
+
+  /* ---- 1 · ⛔ THE MARKS ARE KEPT, NOT RECOMPUTED ---- */
+  // ⛑ The pointer must hit-test the SAME arithmetic the painter drew. A second projection for the pointer is two
+  // callers answering "where is this place", which this repo has lost a day to before.
+  check("§411: ⛔ THE PAINTER KEEPS WHAT IT DREW — the pointer hit-tests the marks the picture was made from",
+    /_regionPick = \{/.test(paint411) && /marks: marks416\.map\(m => \(\{ id: m\.id, name: m\.name, x: m\.p\.x, y: m\.p\.y \}\)\)/.test(paint411)
+    && /clusters: clusterMarks\(/.test(paint411));
+  check("§411: ⛔ …and the canvas is wired at all, which it never was — cursor, hover and click",
+    /cv\.onmousemove = /.test(wire411) && /cv\.onclick = /.test(wire411) && /cv\.style\.cursor = hit \? "pointer"/.test(wire411)
+    && /wireRegionGroundMap\(selectedId\);/.test(A411));
+  // ⛔ ONE SELECTION DOOR. Picking on the picture and picking on the diagram must be one behaviour.
+  check("§411: ⛔ …and a pick routes to `renderMap`, the SAME door the schematic's nodes use",
+    /renderMap\(hit\.id === selectedId \? null : hit\.id\)/.test(wire411)
+    && /data-mapsel/.test(A411));
+  // ⚠️ CSS pixels are not canvas pixels, and this is the bug that survives a glance: the click lands, just not
+  // where you clicked. The canvas may now be laid out wider than its backing store, so the scale is not optional.
+  check("§411: ⚠️ …and the pointer is scaled into the canvas frame, not read as CSS pixels",
+    /\(e\.clientX - r\.left\) \* \(cv\.width \/ r\.width\)/.test(wire411)
+    && /\(e\.clientY - r\.top\) \* \(cv\.height \/ r\.height\)/.test(wire411));
+
+  /* ---- 2 · ⛔ THE CLUSTERING RULE, DRIVEN ---- */
+  check("§411: ⛔ A STACK IS WHAT A CLICK CANNOT SEPARATE — single-link, so a chain is one fan and not three",
+    (() => {
+      const F = new Function("marks", "radius", `${A411.slice(A411.indexOf("function clusterMarks("), A411.indexOf("/** \u26d4 WHERE A FANNED MEMBER SITS"))}
+        return clusterMarks(marks, radius);`);
+      const far = [{ id: "a", name: "A", x: 10, y: 10 }, { id: "b", name: "B", x: 400, y: 300 }];
+      const stack = [{ id: "a", name: "A", x: 100, y: 100 }, { id: "b", name: "B", x: 101, y: 100 }, { id: "c", name: "C", x: 102, y: 101 }];
+      // ⚠️ A CHAIN: a–b and b–c are each inside the radius, a–c is not. Single-link makes it ONE stack; a naive
+      // pairwise grouping would make overlapping fans that fight for the same clicks.
+      const chain = [{ id: "a", name: "A", x: 100, y: 100 }, { id: "b", name: "B", x: 112, y: 100 }, { id: "c", name: "C", x: 124, y: 100 }];
+      const c1 = F(far, 14), c2 = F(stack, 14), c3 = F(chain, 14);
+      return c1.length === 2 && c1.every(c => c.members.length === 1)
+        && c2.length === 1 && c2[0].members.length === 3
+        && c3.length === 1 && c3[0].members.length === 3
+        // ⛑ the mark sits among its places, not at a corner of them
+        && Math.abs(c2[0].x - 101) < 1.5;
+    })());
+  // ⛔ EVERY PLACE IS IN EXACTLY ONE STACK. A place in two fans, or in none, is a place you cannot reach.
+  check("§411: ⛔ …and every place lands in exactly one stack — none shared, none dropped",
+    (() => {
+      const F = new Function("marks", "radius", `${A411.slice(A411.indexOf("function clusterMarks("), A411.indexOf("/** \u26d4 WHERE A FANNED MEMBER SITS"))}
+        return clusterMarks(marks, radius);`);
+      const marks = [];
+      for (let i = 0; i < 40; i++) marks.push({ id: "m" + i, name: "M" + i, x: (i * 37) % 700 + 20, y: (i * 53) % 380 + 20 });
+      const cl = F(marks, 14);
+      const seen = cl.flatMap(c => c.members.map(m => m.id));
+      return seen.length === marks.length && new Set(seen).size === marks.length;
+    })());
+
+  /* ---- 3 · ⛔ THE FAN'S GEOMETRY ---- */
+  // ⛑ OverlappingMarkerSpiderfier's own rule is a circle up to 8 and a spiral above. ⚠️ Every cluster in the world
+  // today is 2 to 7, so the spiral has NO POPULATION and is deliberately not built — recorded here so the absence is
+  // a decision rather than an oversight.
+  check("§411: ⛔ A FAN IS A RING, AND IT STAYS ON THE CANVAS — a member off the edge is a member nobody can click",
+    (() => {
+      // ⚠️ SLICED TO A REAL MARKER. My first cut took a fixed 900 characters from the start of the function,
+      // which overran into the next statement and pulled a browser `fetch` into the evaluated body.
+      const F = new Function("n", "cx", "cy", "W", "H", `${A411.slice(A411.indexOf("function fanPositions("), A411.indexOf('fetch("content/packs/core/world/region_maps.json'))}
+        return fanPositions(n, cx, cy, W, H);`);
+      const mid = F(7, 400, 210, 800, 420);
+      if (mid.length !== 7) return false;
+      const spread = new Set(mid.map(p => `${Math.round(p.x)},${Math.round(p.y)}`));
+      if (spread.size !== 7) return false;                      // seven distinct places to click
+      // ⚠️ at the very corner, every member is still inside the frame
+      const corner = F(7, 2, 2, 800, 420);
+      return corner.every(p => p.x >= 0 && p.y >= 0 && p.x <= 800 && p.y <= 420);
+    })());
+  check("§411: ⛑ …and the open fan is dropped when its stack is no longer on screen",
+    /if \(_regionFan && !_regionPick\.clusters\.some\(c => c\.key === _regionFan\.key\)\) _regionFan = null;/.test(paint411));
+  // ⚠️ A CLICK ON EMPTY GROUND MUST NOT DESELECT. The selected place is what the Look inside and travel buttons
+  // read; losing it on a stray click is the "it kicks me back out" complaint wearing new clothes.
+  check("§411: ⚠️ …and a click on empty ground closes the fan WITHOUT deselecting the place",
+    /if \(!hit\) \{[\s\S]{0,600}?if \(_regionFan\) \{ _regionFan = null; repaint\(\); \}[\s\S]{0,60}?return;/.test(wire411)
+    && !/if \(!hit\) \{[\s\S]{0,600}?renderMap\(null\)/.test(wire411));
+
+  /* ---- 4 · ⛔ THE MODE THAT EXISTED AND COULD NOT BE REACHED ---- */
+  // ⛔ ERIK: "I want the power sources to be more obvious." `texture()` has had the answer since it was written —
+  // its own comment names both modes — and `fieldCtl.mode` was set to "mix" at birth and never written again.
+  // ⚠️ Measured over six regions at the painter's own window and alpha rule: chroma ×3.44, mean texel ×1.87.
+  check("§411: ⛔ THE FIELD'S SECOND MODE HAS A CONTROL — it was built, plumbed, cached, and unreachable",
+    /data-fieldmode="1"/.test(A411)
+    && /fieldCtl\.mode = fieldCtl\.mode === "max" \? "mix" : "max";/.test(A411)
+    // ⛑ and the engine really does answer differently, so the control is not a label on nothing
+    && /mode = "mix"/.test(rd("engine/field.js")));
+  check("§411: ⚠️ …and `mix` is still what the map opens on — a control, not a new default",
+    /^\s*mode: "mix",\s*$/m.test(A411));
+  // ⛔ THE TWO MODES REALLY DIFFER, driven on the engine rather than asserted from the source.
+  check("§411: ⛔ …and the two modes answer differently — `max` is further from grey than `mix`",
+    (() => {
+      const F411 = FIELD411;
+      if (!F411) return false;
+      const win = F411.sampleWindow({ lat0: 20, lat1: -20, lon0: -40, lon1: 40, w: 48, h: 48 });
+      const kinds = ["precursor", "nanite", "veil", "wild"];
+      const chroma = (rgb) => { let c = 0; const n = win.w * win.h;
+        for (let i = 0; i < n; i++) { const r = rgb[i * 3], g = rgb[i * 3 + 1], b = rgb[i * 3 + 2];
+          c += Math.max(r, g, b) - Math.min(r, g, b); } return c / n; };
+      const cMix = chroma(F411.texture({ window: win, kinds, mode: "mix" }));
+      const cMax = chroma(F411.texture({ window: win, kinds, mode: "max" }));
+      return cMax > cMix * 1.5;
+    })(), "if these ever converge the control stops being worth a button");
+
+  /* ---- 5 · ⚠️ THE CANVAS MAY USE THE WINDOW, AT THE SAME SHAPE ---- */
+  // ⚠️ `max-width` ALONE WOULD HAVE BEEN A BUG: the backing store would stay 800×420 and the browser would scale
+  // it, so the ground softens and every label draws at half the resolution it is shown at. And the ASPECT is held,
+  // because `toScreen` maps the extent onto W×H — a different ratio stretches every authored way on the ground.
+  check("§411: ⚠️ THE BACKING STORE FOLLOWS THE LAYOUT, and the aspect is held so the ground is not stretched",
+    /const REGION_ASPECT = 420 \/ 800;/.test(A411)
+    && /function sizeRegionCanvas\(cv\)/.test(A411)
+    && /cv\.width = want; cv\.height = h;/.test(A411)
+    && /sizeRegionCanvas\(cvQ\);/.test(A411)
+    && /max-width:1600px/.test(A411));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

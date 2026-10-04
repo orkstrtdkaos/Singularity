@@ -35906,6 +35906,129 @@ console.log("\n── §413 · one ground-cost rule, and the seam ──");
     })());
 }
 
+/* ══════════ §414 · WHOSE GROUND IS THIS ══════════ */
+// ✅ AEVI B2, 2026-10-04: *"Point-first `at(lat, lon)` → { owner, strength, rival, contested }, pure, no canvas,
+// exactly the shape of `field.js`… Done when the GM and the hover can both ask whose ground is this without a
+// painter in the room."*
+//
+// ⛑ TWO READERS, ONE MODEL, as we named them in CCODE-590: crow-flies for the GLOBE (projection-free, so it works
+// under an orthographic half-world) and travel-cost on a grid for the REGION (terrain bends the borders). They must
+// not disagree about who holds a place, or the GM and the map would answer the player differently.
+console.log("\n── §414 · whose ground is this ──");
+{
+  const INF = await import("../engine/influence.js");
+  const WG414 = await import("../engine/worldglobe.js");
+  const { loadContentHeadless: lch414 } = await import("./headless_content.mjs");
+  const C414 = await lch414();
+
+  /* ---- 1 · ⛔ IT IS A WORLD FACT, NOT A LENS ---- */
+  check("§414: ⛔ THE READER IS PURE AND IMPORT-FREE — a reader only a screen can call is one the engine cannot use",
+    !/^\s*import /m.test(rd("engine/influence.js"))
+    && typeof INF.makeInfluence === "function" && typeof INF.territoryByGround === "function");
+  // ⚠️ THE NUMBERS ARE HERS, and the radius comment in her appendix was stale (1.4° / ~4° is the formula WITHOUT
+  // its 1.2 base); her §5 prose had the right ones and these match the prose.
+  check("§414: ⛔ …and the model is Aevi's: seat 1.0 · hold 0.8 · reach 0.55, floor 0.22, contested within 15%",
+    INF.ANCHOR_WEIGHT.seat === 1 && INF.ANCHOR_WEIGHT.hold === 0.8 && INF.ANCHOR_WEIGHT.reach === 0.55
+    && INF.CLAIM_FLOOR === 0.22 && INF.CONTEST_RATIO === 0.85
+    && Math.abs(INF.radiusDegOf({ strength: { contingents: [{ n: 20 }] } }) - 2.63) < 0.01
+    && Math.abs(INF.radiusDegOf({ strength: { contingents: [{ n: 160 }] } }) - 5.25) < 0.01);
+  // ⛔ GROUND OR NETWORK. Painting a guild as a country would be a lie about what it has.
+  check("§414: ⛔ …and only ground-holding kinds get territory — a guild holds people and routes, not land",
+    INF.isTerritorial({ kind: "sovereignty" }) && INF.isTerritorial({ kind: "lordship" })
+    && INF.isTerritorial({ kind: "outlaw_crown" })
+    && !INF.isTerritorial({ kind: "guild" }) && !INF.isTerritorial({ kind: "order" })
+    && !INF.isTerritorial({ kind: "outlaw_band" }));
+
+  /* ---- 2 · ⛔ DRIVEN ON THE REAL WORLD ---- */
+  const inf414 = INF.makeInfluence(C414.powers, C414.locations);
+  check("§414: ⛔ EVERY POWER HOLDS ITS OWN SEAT — a model that cannot say that says nothing",
+    (() => {
+      if (inf414.powers.length < 10) return false;
+      for (const q of inf414.powers) {
+        const seat = INF.anchorsOf(q.p, C414.locations).find((a) => a.kind === "seat");
+        if (!seat) continue;
+        if (inf414.at(seat.lat, seat.lon).owner !== q.id) return false;
+      }
+      return true;
+    })());
+  // ⚠️ AND IT IS NOT A WASH. A reader that answered "held" everywhere would pass the check above and mean nothing;
+  // most of the world is wilderness and must read as such.
+  check("§414: ⚠️ …and most of the world belongs to nobody, which is what a floor is for",
+    (() => {
+      let held = 0, n = 0;
+      for (let la = -80; la <= 80; la += 4) for (let lo = -180; lo < 180; lo += 6) {
+        n++; if (inf414.at(la, lo).owner) held++;
+      }
+      const pct = 100 * held / n;
+      return pct > 2 && pct < 45;
+    })());
+
+  /* ---- 3 · ⛔ THE TWO LONGITUDE CONVENTIONS, WHICH THIS FILE MUST SURVIVE ---- */
+  // ⛔ FOUND BY ASKING THE TWO READERS WHETHER THEY AGREE: they agreed 0% of the time. `anchorsOf` normalises to
+  // ±180 while a region extent runs UNWRAPPED, so the Gralloch Crown — seat on the far side of the world — was
+  // seeding ground in Erik's valley, because an off-frame anchor was CLAMPED onto a corner cell.
+  // ⚠️ A CLAMP IS WHERE A WRONG COORDINATE HIDES. The fourth time this convention pair has bitten this codebase.
+  check("§414: ⛔ ONE LONGITUDE CONVENTION — ±180 and unwrapped describe the same meridian and must compare equal",
+    typeof INF.inFrame === "function"
+    && Math.abs(INF.inFrame(-107.9, 232.9, 270.9) - 252.1) < 1e-9
+    && Math.abs(INF.inFrame(252.1, -180, 180) - (-107.9)) < 1e-9
+    && INF.inFrame(45, 0, 90) === 45);
+
+  /* ---- 4 · ⛔ THE REGION READER, AND THE TWO AGREEING ---- */
+  check("§414: ⛔ THE GROUND READER AND THE CROW-FLIES READER NAME THE SAME POWER where the ground is sure",
+    (() => {
+      const RM = JSON.parse(rd("content/packs/core/world/region_maps.json"));
+      const terr = WG414.decodeTerrain(JSON.parse(rd("content/packs/core/world/terrain.json")));
+      const ext = WG414.regionExtent("valley", C414.locations, { authored: RM.valley || null });
+      if (!ext) return false;
+      const W = 534, H = 280;                       // half-size: this is a gate, not a frame
+      const G = WG414.makeGroundCost(terr, { ...WG414.GROUND_COST.territory, extent: ext });
+      const toScreen = (lon, lat, w, h) => ({ x: ((lon - ext.lo0) / (ext.lo1 - ext.lo0)) * w, y: (1 - (lat - ext.la0) / (ext.la1 - ext.la0)) * h });
+      const toWorld = (x, y, w, h) => ({ lon: ext.lo0 + (x / w) * (ext.lo1 - ext.lo0), lat: ext.la0 + (1 - y / h) * (ext.la1 - ext.la0) });
+      const T = INF.territoryByGround(C414.powers, C414.locations, { W, H, step: G.step, toScreen, toWorld, cell: 4, extent: ext });
+      if (!T) return false;
+      // ⛑ the valley must be held by SOMEBODY, or this check is vacuous
+      if (!Object.keys(T.area).length) return false;
+      let sure = 0, agree = 0;
+      for (let y = 0; y < T.gh; y += 3) for (let x = 0; x < T.gw; x += 3) {
+        const g = T.cellAt(y * T.gw + x);
+        if (!g.owner || g.strength < 0.6 || g.contested) continue;
+        sure++;
+        const w = toWorld(x * T.cell, y * T.cell, W, H);
+        if (inf414.at(w.lat, w.lon).owner === g.owner) agree++;
+      }
+      return sure >= 20 && agree === sure;
+    })(), "if these drift the GM and the map answer the player differently about the ground under their feet");
+  // ⛔ AND A POWER ON THE FAR SIDE OF THE WORLD HOLDS NOTHING HERE — the bug the agreement check found.
+  check("§414: ⛔ …and a power whose anchors are a world away seeds nothing in this frame",
+    (() => {
+      const far = { id: "far", kind: "sovereignty", seat: "FAR", strength: { contingents: [{ n: 100 }] } };
+      const near = { id: "near", kind: "sovereignty", seat: "NEAR", strength: { contingents: [{ n: 100 }] } };
+      const locs = {
+        FAR: { worldPos: { longitude: 40, colatitude: 68 } },     // lat -22
+        NEAR: { worldPos: { longitude: 251, colatitude: 20 } },   // lat -70, inside the frame
+      };
+      const ext = { la0: -76, la1: -63, lo0: 233, lo1: 271 };
+      const toScreen = (lon, lat, w, h) => ({ x: ((lon - ext.lo0) / (ext.lo1 - ext.lo0)) * w, y: (1 - (lat - ext.la0) / (ext.la1 - ext.la0)) * h });
+      const toWorld = (x, y, w, h) => ({ lon: ext.lo0 + (x / w) * (ext.lo1 - ext.lo0), lat: ext.la0 + (1 - y / h) * (ext.la1 - ext.la0) });
+      const flat = (aLat, aLon, bLat, bLon) => Math.hypot(bLat - aLat, (bLon - aLon) * Math.cos(aLat * Math.PI / 180));
+      const T = INF.territoryByGround([far, near], locs, { W: 200, H: 120, step: flat, toScreen, toWorld, cell: 4, extent: ext });
+      return !!T && T.powers.length === 1 && T.powers[0].id === "near" && !T.area.far;
+    })());
+  // ⛑ AND AN ANCHOR JUST OUTSIDE THE FRAME IS CHARGED, NOT SKIPPED. My first cut skipped past a 4-cell margin
+  // while the filter admitted anything within 10°, and a whole region fell down the gap between the two rules.
+  check("§414: ⛑ …while one just outside it is charged the real distance in, rather than skipped or pinned free",
+    (() => {
+      const src = rd("engine/influence.js");
+      return /const outside = Math\.hypot\(here\.lat - a\.lat, lonDelta\(here\.lon, aLon\) \* cl\);/.test(src)
+        && /const c0 = outside \+ R \* Math\.sqrt\(Math\.max\(0, -2 \* Math\.log\(a\.w\)\)\);/.test(src);
+    })());
+  // ⚠️ HER Float32 TRAP, KEPT IN HER WORDS: the popped double compared GREATER than its own stored cost and the
+  // search died at its seeds, drawing every realm as a dot.
+  check("§414: ⚠️ …and the costs are Float64, which is the trap Aevi hit and wrote down",
+    /const cost = new Float64Array\(N\);/.test(rd("engine/influence.js")));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

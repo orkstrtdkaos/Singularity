@@ -245,12 +245,25 @@ export function territoryByGround(powers, locations, { W, H, step, toScreen, toW
   // rewrote her code; the 0% agreement between the two readers is what found it.
   // ⚠️ `inFrame` because an anchor is ±180 and an extent is unwrapped: comparing them raw puts every power either
   // everywhere or nowhere.
+  // ⛑ `pad` is in degrees of ground; the projection says what that is in pixels here. Measured at the frame's
+  // centre with a one-degree step, so it is right for whichever base was handed in.
+  const padPx = (() => {
+    const c = toWorld(W / 2, H / 2, W, H);
+    const a0 = toScreen(c.lon, c.lat, W, H), a1 = toScreen(c.lon, c.lat + 1, W, H);
+    const perDeg = Math.hypot(a1.x - a0.x, a1.y - a0.y);
+    return pad * (perDeg > 1e-9 ? perDeg : 1);
+  })();
   const inBox = (a) => {
     if (!extent) return true;
-    const lon = inFrame(a.lon, extent.lo0, extent.lo1);
-    const la0 = Math.min(extent.la0, extent.la1), la1 = Math.max(extent.la0, extent.la1);
-    const lo0 = Math.min(extent.lo0, extent.lo1), lo1 = Math.max(extent.lo0, extent.lo1);
-    return a.lat > la0 - pad && a.lat < la1 + pad && lon > lo0 - pad && lon < lo1 + pad;
+    // ⛔ C2 — ASK THE PROJECTION, NOT A BOX. A pole-centred frame has no meaningful lon/lat rectangle: the
+    // Crossing's box runs 171° of longitude for a city 0.6° across, so a box test there admits half the world
+    // and rejects the hub's own districts. Projecting the anchor and testing the CANVAS answers correctly under
+    // either base, which is what makes one evaluator serve both.
+    // ⚠️ The ±180-vs-unwrapped normalisation stays for a rectangular frame — that is the CCODE-595 bug and it
+    // is still live. A polar frame needs none: its `toScreen` is trigonometric, so 252° and −108° land together.
+    const lon = (extent && !extent.polar) ? inFrame(a.lon, extent.lo0, extent.lo1) : a.lon;
+    const sp = toScreen(lon, a.lat, W, H);
+    return sp.x > -padPx && sp.y > -padPx && sp.x < W + padPx && sp.y < H + padPx;
   };
   const near = (powers || []).filter(isTerritorial).filter((p) => anchorsOf(p, locations).some(inBox));
   if (!near.length) return null;
@@ -281,7 +294,7 @@ export function territoryByGround(powers, locations, { W, H, step, toScreen, toW
       ai++;
       radii.push(Number.isFinite(a.r) ? a.r : R);
       if (!inBox(a)) continue;
-      const aLon = extent ? inFrame(a.lon, extent.lo0, extent.lo1) : a.lon;
+      const aLon = (extent && !extent.polar) ? inFrame(a.lon, extent.lo0, extent.lo1) : a.lon;
       const s = toScreen(aLon, a.lat, W, H);
       // ⛔ AN ANCHOR OUTSIDE THE CANVAS IS STILL REAL — a realm whose seat sits beyond the frame reaches into it,
       // and its radius (2.8–6.4°) is larger than most frames' margins. So it is clamped to the nearest edge cell

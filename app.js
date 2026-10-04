@@ -46,10 +46,11 @@ import { contributionsBy, lookKey } from "./engine/canon.js";   // CCODE-422: wh
 import { sourcesHere, meaningDensity } from "./engine/substrate.js";   // ✅ Erik 2026-10-04: the map’s meaning register reads the SAME function the metaphysical ceiling does   // ⛔ Erik 2026-09-12: the four sources and how well each answers HERE
 import { groundForDecl, groundTag, substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace, groundHere, groundCardFor, naniteAt, bandFactor, peoplePresentAt } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
 import { sceneImage, itemImage, artworkStyle, getArtMode, setArtMode, imagesEnabled, ensureImage, aestheticFor, regenPromptFor, onImageMinted, onComposedLookup, swapImageUrl, forgetImageUrl, bustedURL, isBustedURL, mintAction, IMAGE_MIN_BYTES, regenerateImage, acceptImage, isGeneratedImage, toggleKeep, likenessClause, houseStyleFor, sanitizeImagePrompt, imageURLFor, isMinorSubject, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor, lookFor, serviceRefusal, refusedSaid} from "./engine/art.js"; // SNG-401: draw it again without destroying the one they have
-import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, regionExtent, bendRoad, roadNetwork, clipToFrame, routeRoads, makeGroundCost, GROUND_COST } from "./engine/worldglobe.js";
+import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, makePolarBase, regionExtent, bendRoad, roadNetwork, clipToFrame, routeRoads, makeGroundCost, GROUND_COST } from "./engine/worldglobe.js";
 // ⛔ ROUND 4 — whose ground is this, as things stand today. `realms.js` resolves the SAVE (losses, growth,
 // broken powers, taken holds, your own realm); `influence.js` stays pure and just evaluates.
 import { groundHolders, stateStamp, powerRelation } from "./engine/realms.js";
+import { housesAt } from "./engine/powers.js";
 import { makeInfluence } from "./engine/influence.js";
 import { glyphFor, drawGlyph } from "./engine/mapicons.mjs";   // SNG-409 §4: a pole must never read as a town   // SNG-390: the globe, read-only
 import { walkingDays, milesFor, worldPosForGenerated, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout, fieldBlobs, fieldAlpha, placeLabels } from "./engine/worldmap.js";
@@ -188,7 +189,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.17.2";
+const APP_VERSION = "2.17.3";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2969,9 +2970,24 @@ let _fieldCov = new Map();
 /** The window for a region's extent, TOP-DOWN so its rows match screen rows. `makeRegionBase.toScreen`
  *  flips latitude (north up); `sampleWindow` walks lat0 → lat1. Handing it la1 → la0 makes the two agree
  *  with no flipping code, which is one fewer place to get a sign wrong. */
-function fieldWindowFor(ext, w = 128, h = 128) {
+function fieldWindowFor(ext, w = 128, h = 128, base = null) {
   const f = worldField();
-  return f ? f.sampleWindow({ lat0: ext.la1, lat1: ext.la0, lon0: ext.lo0, lon1: ext.lo1, w, h }) : null;
+  if (!f) return null;
+  // ⛔ C1/C2 — A POLAR FRAME HAS NO lat/lon RECTANGLE, so its window is built in the PROJECTED plane and the
+  // lat/lon of each texel is read back out of it. `texture()` only ever asks a window for `w`, `h`, `lats` and
+  // `lons`, so this is the same contract by a different route — which is what C2 means by routing a caller
+  // through the base instead of through the box.
+  if (ext?.polar && base?.toWorld) {
+    const n = w * h;
+    const lats = new Float32Array(n), lons = new Float32Array(n);
+    for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+      const p = base.toWorld(((x + 0.5) / w) * 1000, ((y + 0.5) / h) * 1000, 1000, 1000);
+      const i = y * w + x;
+      lats[i] = p.lat; lons[i] = ((p.lon + 180) % 360 + 360) % 360 - 180;
+    }
+    return { w, h, lats, lons };
+  }
+  return f.sampleWindow({ lat0: ext.la1, lat1: ext.la0, lon0: ext.lo0, lon1: ext.lo1, w, h });
 }
 
 /** ⛔ EVERY AUTHORED WELL AND SINK INSIDE A WINDOW. Measured: the 44 authored sources are drawn on NO map —
@@ -12392,7 +12408,7 @@ let _regionEsc = null;
  *  to clear it, and on the place count so authoring new content does too. */
 const _roadsByTerrain = new WeakMap();
 function routedRoadsFor(regionId, netRoads, ext, base, W, H) {
-  if (!_terrain || !ext || ext.polar) return null;
+  if (!_terrain || !ext) return null;
   let by = _roadsByTerrain.get(_terrain);
   if (!by) { by = new Map(); _roadsByTerrain.set(_terrain, by); }
   const key = `${regionId}|${Math.round(W)}|${Math.round(H)}|${Object.keys(CONTENT.locations || {}).length}`;
@@ -12429,6 +12445,7 @@ function smoothRoad(pts, passes = 2) {
  *  because it just looks like the map. `stateStamp` counts what has actually happened, so the picture changes
  *  on the turn the world does. */
 let _ground = { key: null, at: null, holders: null, mine: null };
+let _houseMarks = [];   // C4.3: where each house mark landed, for the hover
 function groundReader() {
   if (!CONTENT?.locations || !character) return null;
   const cfg = { ...(CONTENT.rules?.economy?.holdStore || {}), features: CONTENT.rules?.economy?.holdFeatures };
@@ -12460,6 +12477,57 @@ function groundLine(loc) {
   return other
     ? `${esc(own.name)} · contested with ${esc(other.name)}`
     : `${esc(own.name)} · ${word}`;
+}
+
+/** ⛔ R4.5 · ONE COLOUR PER POWER, EVERYWHERE. Aevi: *"the mock colours by area rank within a region, so the
+ *  Castellany is one colour in the valley and another in the Echo Vale."* Keyed to the power's ID instead, so the
+ *  globe, the region map, the legend and the hover all agree — an authored `colour` wins, else a stable hash.
+ *  ⚠️ STABLE MEANS STABLE ACROSS RUNS: a hash of the id, never an index into a list that re-sorts. */
+const POWER_HUES = ["#c8705a", "#6f9ec4", "#b8975a", "#7fa86a", "#a97fb8", "#5fa5a0", "#c48aa0", "#8a9bd1",
+  "#b4a05f", "#6fae86", "#bd8468", "#8f87c2"];
+function powerColour(p) {
+  const authored = typeof p === "object" ? p?.colour : null;
+  if (authored) return String(authored);
+  const id = String(typeof p === "object" ? (p?.id || "") : p);
+  let h = 0;
+  for (let i = 0; i < id.length; i++) h = (h * 31 + id.charCodeAt(i)) >>> 0;
+  return POWER_HUES[h % POWER_HUES.length];
+}
+
+/** ⛔ C4.3 · THE HOUSES AS A RING. ✅ ERIK: *"it is truly a big swirl of powers."*
+ *  ⚠️ A RING, NOT THIRTY-FOUR THREADS. Drawing a line from each house back to its seat across the world would
+ *  be thirty-four lines leaving a frame 0.6° wide, which is the near-parallel-bundle artefact Erik already named
+ *  about roads. Aevi's C4: *"the ring IS the swirl."*
+ *  ⛑ PRESENCE, NOT GROUND: these marks sit beside the place, never fill it. The Mavens hold the Crossing; the
+ *  rest are guests with a door key. */
+function paintHouses(ctx, base, W, H, ids) {
+  if (!CONTENT?.locations) return [];
+  const out = [];
+  for (const id of ids) {
+    const l = CONTENT.locations[id];
+    if (!l?.worldPos) continue;
+    const houses = housesAt(id, CONTENT);
+    if (!houses.length) continue;
+    const c = base.toScreen(l.worldPos.longitude, l.worldPos.colatitude - 90, W, H);
+    // fanned the way A3 opens a cluster: an arc above the place, widening with the count
+    const r = 13 + Math.min(9, houses.length * 0.35);
+    const spread = Math.min(Math.PI * 1.7, 0.34 * houses.length);
+    const a0 = -Math.PI / 2 - spread / 2;
+    ctx.save();
+    for (let i = 0; i < houses.length; i++) {
+      const a = a0 + (houses.length === 1 ? spread / 2 : (i / (houses.length - 1)) * spread);
+      const x = c.x + Math.cos(a) * r, y = c.y + Math.sin(a) * r;
+      ctx.beginPath();
+      ctx.arc(x, y, 2.1, 0, Math.PI * 2);
+      ctx.fillStyle = powerColour(houses[i]);
+      ctx.globalAlpha = 0.92;
+      ctx.fill();
+      ctx.lineWidth = 0.6; ctx.strokeStyle = "rgba(14,14,18,0.75)"; ctx.stroke();
+      out.push({ at: id, x, y, power: houses[i] });
+    }
+    ctx.restore();
+  }
+  return out;
 }
 
 const TIER_RANK = { region: 3, settlement: 2, site: 1 };
@@ -12637,15 +12705,24 @@ function paintRegionMap(regionId) {
   let base = _regionBases.get(regionId);
   if (!base) {
     const pad = 2;
-    base = makeRegionBase(_terrain, _fineGenShared.make(_fineGenShared.gp,
-      { la0: ext.la0 - pad, la1: ext.la1 + pad, lo0: ext.lo0 - pad, lo1: ext.lo1 + pad }), ext);
+    // ⛔ C1 · ✅ ERIK: *"We do need a pole-centered Crossing map."* A region on the axis gets an azimuthal
+    // equidistant base instead of a lon/lat one. It returns the SAME shape, so the painter below, the roads,
+    // the field, the territory walk and the clicks all carry on without knowing which they hold.
+    // ⚠️ The generator window is the disc's own band: all 360° of longitude, latitude from the pole out to R.
+    base = ext.polar
+      ? makePolarBase(_terrain, _fineGenShared.make(_fineGenShared.gp, ext.pole < 0
+          ? { la0: -90, la1: -90 + ext.poleRadiusDeg * 1.15 + pad, lo0: -180, lo1: 180 }
+          : { la0: 90 - ext.poleRadiusDeg * 1.15 - pad, la1: 90, lo0: -180, lo1: 180 }), ext)
+      : makeRegionBase(_terrain, _fineGenShared.make(_fineGenShared.gp,
+          { la0: ext.la0 - pad, la1: ext.la1 + pad, lo0: ext.lo0 - pad, lo1: ext.lo1 + pad }), ext);
     _regionBases.set(regionId, base);
   }
   const ctx = cv.getContext("2d");
   const W = cv.width, H = cv.height;
   const img = ctx.createImageData(W, H);
   const D = img.data;
-  const step = contourStepFor(Math.max(ext.la1 - ext.la0, (ext.lo1 - ext.lo0) * base.conv));
+  const step = contourStepFor(ext.polar ? 2 * ext.poleRadiusDeg
+    : Math.max(ext.la1 - ext.la0, (ext.lo1 - ext.lo0) * base.conv));
   for (let y = 0; y < H; y++) {
     for (let x = 0; x < W; x++) {
       const w = base.toWorld(x + 0.5, y + 0.5, W, H);
@@ -12660,6 +12737,9 @@ function paintRegionMap(regionId) {
           fine: () => ({ type: sm.type, raw: sm.raw, elevDelta: 0 }) });
       }
       const o = (y * W + x) * 4;
+      // ⛑ C1: the disc IS the map. Beyond its rim there is no ground to draw, so it reads as the frame's
+      // margin rather than as a country that happens to be circular.
+      if (base.polar && !base.insideDisc(x + 0.5, y + 0.5, W, H)) { c = [14, 16, 20]; }
       D[o] = c[0]; D[o + 1] = c[1]; D[o + 2] = c[2]; D[o + 3] = 255;
     }
   }
@@ -12679,10 +12759,10 @@ function paintRegionMap(regionId) {
   if (fieldCtl.on && fieldCtl.kinds.size && worldField()) {
     try {
       const kindKey = [...fieldCtl.kinds].sort().join(",");
-      const texKey = `${ext.la0},${ext.lo0},${ext.la1},${ext.lo1}|${kindKey}|${fieldCtl.mode}`;
+      const texKey = `${ext.polar ? `polar:${ext.poleRadiusDeg}` : `${ext.la0},${ext.lo0},${ext.la1},${ext.lo1}`}|${kindKey}|${fieldCtl.mode}`;
       let hit = _fieldTex.get(texKey);
       if (!hit) {
-        const fw96 = fieldWindowFor(ext, 96, 96);
+        const fw96 = fieldWindowFor(ext, 96, 96, base);
         hit = { fw: fw96, rgb: worldField().texture({ window: fw96, kinds: [...fieldCtl.kinds], mode: fieldCtl.mode }) };
         _fieldTex.set(texKey, hit);
       }
@@ -12848,21 +12928,14 @@ function paintRegionMap(regionId) {
         else exits.push({ at: x.at, names: [name] });
       }
     }
-    // ⛔ AND A FRAME THAT CANNOT BE DRAWN SAYS SO. `the_center` sits on the axis: its 11 places span 0.76° of
-    // ground but their lon/lat box comes out 171° of longitude wide, and 10 of the 11 fall outside it — so a
-    // regional map of the Crossing would show an almost empty sheet with one building on it. A blank frame
-    // reads as a broken feature; a frame that explains itself is a finding somebody can act on.
-    if (ext.polar) {
-      ctx.save();
-      ctx.fillStyle = "rgba(226,214,180,0.72)";
-      ctx.font = "italic 600 11px system-ui, sans-serif";
-      ctx.textAlign = "center";
-      ctx.fillText("No flat map here — this ground sits on the world's axis.", W / 2, H / 2 - 7);
-      ctx.font = "italic 10px system-ui, sans-serif";
-      ctx.fillStyle = "rgba(226,214,180,0.5)";
-      ctx.fillText("Every road out is a bearing, not a line. Use the globe.", W / 2, H / 2 + 9);
-      ctx.restore();
-    }
+    // ⛔ C4.3 · the houses, where any place here keeps them — the Crossing's swirl
+    _houseMarks = paintHouses(ctx, base, W, H,
+      Object.keys(CONTENT.locations || {}).filter((id) => (CONTENT.locations[id]?.regionId || CONTENT.locations[id]?.region) === regionId));
+
+    // ⛑ THE NOTICE IS GONE because the map exists. It said *"No flat map here — this ground sits on the
+    // world's axis"*, which was true for a lon/lat frame and stopped being true the moment Erik ruled
+    // *"we do need a pole-centered Crossing map"*. A message that outlives its mechanism is the defect this
+    // codebase keeps finding, so it goes out with the thing it described.
     // the destinations, lettered at the frame — a road atlas exits its roads and names them
     ctx.save();
     ctx.fillStyle = "rgba(226,214,180,0.9)";
@@ -13130,9 +13203,16 @@ function wireRegionGroundMap(selectedId) {
     // ⛑ AND WHOSE GROUND IT IS — Aevi's B2 done-when was *"the GM and the hover can both ask whose ground is
     // this without a painter in the room"*, and this is the hover half.
     const whose = groundLine(l);
+    // ⛑ C4.3: and who keeps a house here — presence, listed, never folded into the ground line
+    const houses = housesAt(hit.id, CONTENT);
+    const houseLine = houses.length
+      ? `${houses.length} ${houses.length === 1 ? "power keeps a house" : "powers keep houses"} here: `
+        + esc(houses.slice(0, 3).map((p) => p.name).join(", ")) + (houses.length > 3 ? ` +${houses.length - 3}` : "")
+      : "";
     chip.innerHTML = `<div class="rmc-what"><strong>${esc(l.name || hit.id)}</strong> <span class="hint">${kind}</span></div>`
       + (far ? `<div class="hint rmc-far">${far}</div>` : "")
       + (whose ? `<div class="hint rmc-whose">${whose}</div>` : "")
+      + (houseLine ? `<div class="hint rmc-houses">${houseLine}</div>` : "")
       + `<div class="rmc-acts"><button class="opt" data-rmc-inside="${esc(hit.id)}">Look inside</button>`
       + `<button class="opt" data-rmc-travel="${esc(hit.id)}">Travel</button></div>`;
     // ⚠️ PLACED IN CSS PIXELS over the canvas, and kept inside it — a chip half off the right edge is a button

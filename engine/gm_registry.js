@@ -87,7 +87,7 @@ import { renderNamesDeep } from "./names.js"; // SNG-182
 import { worldCount, worldCountLabel, positionedPlace } from "./worldtime.js";
 import { holdsNearForGM } from "./sharedholds.js";
 import { nemesisForGM } from "./nemesis.js";   // ⛔ SNG-648: who the antagonist IS — `pacing.js` never had one to point at   // CCODE-383: a hold nearby is known
-import { powersHoldingForGM } from "./powers.js";
+import { powersHoldingForGM, housesForGM } from "./powers.js";
 import { holderOfGate, isLatticeGate, latticeGates } from "./gatehold.js";   // ✅ SNG-663 §2c: whose arch this is, and whether it is one of the Lattice's   // SNG-634 C5: who holds the ground you are standing on
 import { journeyForGM } from "./journeyplan.js";   // CCODE-387: a journey agreed and not yet walked
 import { journeyUnderwayForGM } from "./journeyroad.js";   // CCODE-390: a journey on the road, stopped part-way
@@ -738,6 +738,13 @@ export const GM_CONTEXT = [
     reachedBy: "always (empty at the 120 of 143 places nobody holds)", spec: "SNG-634", views: ["turn", "ask"],
     build: (env) => powersHoldingForGM(env.location?.id || env.character?.currentLocationId,
       { content: env.CONTENT, character: env.character }) },
+  // ⛔ C4.2 — ✅ ERIK, 2026-10-04: *"it's more that every tradition had powers there… it is truly a big swirl
+  // of powers."* ⚠️ Deliberately a SEPARATE key from `powersHereDetail`: that one is reach, this one is
+  // presence, and folding thirty-three embassies into the reach list would have made the hub read as the most
+  // contested ground in the world when it is the one place everyone is a guest.
+  { key: "housesHereDetail", builder: "powers.housesForGM (C4.2)", carries: ["a power that keeps a house at this place", "its name and what kind of power it is", "the plain statement that a house is presence and not a claim on the ground"],
+    reachedBy: "a place where any power keeps a house — today the Crossing (33) and the Hundred Markets (1)", spec: "SNG-416", views: ["turn", "ask"],
+    build: (env) => housesForGM(env.location?.id || env.character?.currentLocationId, { content: env.CONTENT }) },
   // ⛔ SNG-648 — Erik: "I want you to make sure the game engine and GM know to do this." This is the GM half.
   { key: "nemesisDetail", builder: "nemesis.nemesisForGM (SNG-648 §3.1)", carries: ["who this character's nemesis is and why in plain words", "where they are and in what state", "what they want", "the personal arc's legend tie", "the pacing line — the nemesis acts on its own clock", "whether the character has even MET them"],
     reachedBy: "a character with a bound nemesis (reconcile binds every existing one)", spec: "SNG-648", views: ["turn", "ask"],

@@ -36247,20 +36247,15 @@ console.log("\n── §415 · roads that are roads ──");
       return !!e && e.polar === true && !!mid && mid.polar === false;
     })(), "at the pole longitude carries no ground distance, so two places a tenth of a degree apart land on opposite sides of the map");
 
-  // ⛔ THE HUB OF THE WORLD HAS NO FLAT MAP. MEASURED: `the_center`'s 11 places span **0.76° of actual ground**
-  // — all of them within three-quarters of a degree of one another — but sitting on the axis their lon/lat box
-  // comes out **171° of longitude wide**, and **10 of its own 11 members fall outside it**. Twelve real roads
-  // between them drew nothing at all.
-  // ⚠️ WHERE THE CROSSING SITS IS NOT MINE TO MOVE: whether the hub is literally on the axis is a world fact
-  // (Erik's) and where its places sit is content (Aevi's). The engine's job is to refuse to draw a frame it knows
-  // is false — hence `regionExtent().polar`. Asked in po/CCODE_20261004_roads_that_are_roads.md.
-  gap("§415: the Crossing sits on the axis, so no region lens can frame it — roads, field and territory alike",
+  // ✅ CLOSED 2026-10-04 by Erik's ruling (*"We do need a pole-centered Crossing map"*) and §418. This gap used
+  // to read *"the Crossing sits on the axis, so no region lens can frame it"*; the frame now exists, so the gap
+  // goes out with it rather than sitting here green forever describing a solved problem.
+  check("§415: ⛔ …and the Crossing, which has no lon/lat frame at all, is drawn by a pole-centred one",
     (() => {
-      const RMg = JSON.parse(rd("content/packs/core/world/region_maps.json"));
-      const e = WG415.regionExtent("the_center", C415.locations, { authored: RMg.the_center || null });
-      return !!e && e.polar === true;
-    })(),
-    "when this closes, the_center gets a real regional map for the first time");
+      const RMc = JSON.parse(rd("content/packs/core/world/region_maps.json"));
+      const e = WG415.regionExtent("the_center", C415.locations, { authored: RMc.the_center || null });
+      return !!e && e.polar === true && Number.isFinite(e.poleRadiusDeg) && e.poleRadiusDeg >= 0.6;
+    })());
 }
 
 /* ══════════ §416 · THE WORLD AS IT STANDS ══════════ */
@@ -36524,6 +36519,136 @@ console.log("\n── §417 · the slope is a gradient ──");
       const atLL = (lat, lon) => { const s = ts(lon, lat, 360, 280); return T.cellAt(Math.min(T.gh - 1, Math.max(0, Math.floor(s.y / 4))) * T.gw + Math.min(T.gw - 1, Math.max(0, Math.floor(s.x / 4)))); };
       const west = atLL(-5, -7), east = atLL(-5, 7);
       return west.owner === "w" && east.owner === "e";
+    })());
+}
+
+/* ══════════ §418 · THE CROSSING, CENTRED ON THE POLE ══════════ */
+// ✅ ERIK, 2026-10-04, answering CCODE-596: *"We do need a pole-centered Crossing map. And it's more that every
+// tradition had powers there… the Council of Mavens holds sway in general but it is truly a big swirl of powers."*
+//
+// ⛔ THE AXIS STAYS AND THE MAP COMES TO IT. The Crossing's places sit within 0.5° of the world's pole; a lon/lat
+// frame gave them a box 171° of longitude wide that excluded ten of its own eleven members and drew none of its
+// twelve roads. An azimuthal-equidistant base dissolves that rather than working around it.
+//
+// ⛑ SAME OBJECT SHAPE AS `makeRegionBase`, which is the whole design: the ground painter, the roads, the field,
+// the territory walk and the clicks never learn which projection they are holding.
+console.log("\n── §418 · the Crossing, centred on the pole ──");
+{
+  const WG418 = await import("../engine/worldglobe.js");
+  const PW418 = await import("../engine/powers.js");
+  const { loadContentHeadless: lch418 } = await import("./headless_content.mjs");
+  const C418 = await lch418();
+
+  // ⛑ A FIXTURE WORLD with a polar region — eleven places round an axis, as Aevi's C3 asks. Not the live one:
+  // this is a claim about a projection, not about where she has put the Crossing this week.
+  const hub418 = {};
+  for (let i = 0; i < 11; i++) {
+    const colat = i === 0 ? 0 : 0.12 + (i % 4) * 0.12;        // 0 .. 0.48 from the pole
+    const lon = (i * 360) / 11 - 180;
+    hub418[`h${i}`] = { tier: i === 0 ? "region" : "settlement", regionId: "axis", name: `H${i}`,
+      worldPos: { longitude: lon, colatitude: colat }, connections: i === 0 ? [] : ["h0"] };
+  }
+  hub418.h0.connections = Object.keys(hub418).filter((k) => k !== "h0");
+  const ext418 = WG418.regionExtent("axis", hub418);
+  const gen418 = () => ({ raw: 120, type: 1 });
+  const B418 = ext418?.polar ? WG418.makePolarBase(null, gen418, ext418) : null;
+  const W418 = 800, H418 = 420;
+
+  /* ---- 1 · ⛔ THE FRAME EXISTS AND HOLDS ITS OWN MEMBERS ---- */
+  check("§418: ⛔ A REGION ON THE AXIS GETS A POLE-CENTRED FRAME, and every one of its places is ON it",
+    (() => {
+      if (!ext418?.polar || !B418) return false;
+      let on = 0;
+      for (const id of Object.keys(hub418)) {
+        const l = hub418[id];
+        const s = B418.toScreen(l.worldPos.longitude, l.worldPos.colatitude - 90, W418, H418);
+        if (B418.insideDisc(s.x, s.y, W418, H418)) on++;
+      }
+      return on === 11;
+    })(), "a lon/lat frame put 1 of the Crossing's 11 places on its own map");
+
+  /* ---- 2 · ⛔ EQUIDISTANCE — the property a hub map is FOR ---- */
+  check("§418: ⛔ DISTANCE FROM THE HUB IS TRUE EVERYWHERE — pixels from the centre track colatitude exactly",
+    (() => {
+      const k = Math.min(W418, H418) / (2 * ext418.poleRadiusDeg);
+      for (const colat of [0.05, 0.17, 0.3, 0.45]) {
+        for (const lon of [-170, -40, 0, 95]) {
+          const s = B418.toScreen(lon, colat - 90, W418, H418);
+          const px = Math.hypot(s.x - W418 / 2, s.y - H418 / 2);
+          if (Math.abs(px / k - colat) > 1e-6) return false;
+        }
+      }
+      return true;
+    })());
+  // ⛔ AND THE 360° PROBLEM IS GONE, not worked around: these two places ARE 0.6° apart.
+  check("§418: ⛔ …so two places at colatitude 0.3 on opposite meridians are 0.6° apart, not a world apart",
+    (() => {
+      const k = Math.min(W418, H418) / (2 * ext418.poleRadiusDeg);
+      const a = B418.toScreen(0, 0.3 - 90, W418, H418), b = B418.toScreen(180, 0.3 - 90, W418, H418);
+      return Math.abs(Math.hypot(b.x - a.x, b.y - a.y) / k - 0.6) < 1e-6;
+    })());
+  check("§418: ⛑ …and screen→world is the exact inverse, or every click lands somewhere else",
+    (() => {
+      for (const [lon, colat] of [[0, 0.1], [73, 0.42], [-140, 0.25]]) {
+        const s = B418.toScreen(lon, colat - 90, W418, H418);
+        const w = B418.toWorld(s.x, s.y, W418, H418);
+        if (Math.abs(w.lat - (colat - 90)) > 1e-6) return false;
+        const dLon = Math.abs(((w.lon - lon + 540) % 360) - 180);
+        if (dLon > 1e-6) return false;
+      }
+      return true;
+    })());
+
+  /* ---- 3 · ⛔ AND THE ROADS BETWEEN ITS PLACES ARE DRAWN ---- */
+  check("§418: ⛔ EVERY ROAD BETWEEN TWO OF ITS PLACES IS DRAWN — the Crossing drew none of its twelve",
+    (() => {
+      const net = WG418.roadNetwork(hub418, { k: 1.1 });
+      const flat = (aLat, aLon, bLat, bLon) => Math.hypot(bLat - aLat, bLon - aLon);
+      const R = WG418.routeRoads(net.roads, hub418, { W: W418, H: H418, step: flat,
+        toScreen: B418.toScreen, toWorld: B418.toWorld, extent: ext418, cell: 4 });
+      if (!R) return false;
+      const internal = net.roads.filter((e) => hub418[e.a] && hub418[e.b]);
+      return internal.length >= 8 && R.roads.length >= internal.length && R.unrouted === 0;
+    })());
+  // ⚠️ AND THE WRAP NORMALISATION IS OFF HERE. Unwrapping against a fabricated box would pull two places on
+  // opposite meridians apart again — the two-longitude-conventions trap from the other side (Aevi, C2).
+  check("§418: ⚠️ …and the road router does NOT unwrap longitude on a polar frame, which would re-open the 360° bug",
+    (() => {
+      const src = rd("engine/worldglobe.js");
+      const cut = src.slice(src.indexOf("export function routeRoads("));
+      return /if \(!extent \|\| extent\.polar\) return lon;/.test(cut.slice(0, 2600));
+    })());
+
+  /* ---- 4 · ⛔ C4 · A HOUSE IS PRESENCE, NOT REACH ---- */
+  // ⚠️ AEVI: *"Putting the Crossing in 34 `reach` lists would have made the hub the most dangerous road in
+  // the world."* That is the whole reason this is its own reader.
+  check("§418: ⛔ A HOUSE IS PRESENCE, NOT REACH — it lifts no danger and anchors no ground",
+    (() => {
+      const base = { powers: [
+        { id: "a", name: "A", kind: "sovereignty", seat: "s1", reach: ["s1"], houseAt: "hub", dangerLift: 3, strength: { contingents: [{ n: 40 }] } },
+        { id: "b", name: "B", kind: "guild", seat: "s2", reach: ["s2"], houseAt: "hub", strength: { contingents: [{ n: 10 }] } },
+      ] };
+      const none = { powers: base.powers.map(({ houseAt, ...p }) => p) };
+      const withH = PW418.powersReaching("hub", { content: base, character: {} });
+      const without = PW418.powersReaching("hub", { content: none, character: {} });
+      const liftA = PW418.dangerLiftAt("hub", { content: base, character: {} });
+      const liftB = PW418.dangerLiftAt("hub", { content: none, character: {} });
+      return PW418.housesAt("hub", base).length === 2 && PW418.housesAt("hub", none).length === 0
+        && withH.length === without.length && liftA === liftB;
+    })(), "adding or removing a house must change reach and danger NOWHERE");
+  // ⛑ and the content Aevi landed says what she said it says
+  check("§418: ⛑ …and every authored house names a placed location, with the outlaws keeping none",
+    (() => {
+      const ps = Array.isArray(C418.powers) ? C418.powers : Object.values(C418.powers);
+      const houses = ps.filter((p) => p?.houseAt);
+      if (houses.length < 20) return false;
+      for (const p of houses) {
+        const l = C418.locations[p.houseAt];
+        if (!l?.worldPos) return false;
+        if ((l.regionId || l.region) !== "the_center") return false;
+        if (p.kind === "outlaw_band" || p.kind === "outlaw_crown") return false;   // the Mavens never recognised them
+      }
+      return true;
     })());
 }
 

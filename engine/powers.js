@@ -83,6 +83,43 @@ export function contingentsOf(power, character) {
   }).filter(c => (Number(c.n) || 0) > 0);
 }
 
+/** ⛔ C4 · WHO KEEPS A HOUSE HERE. ✅ ERIK, 2026-10-04: *"it's more that every tradition had powers there… the
+ *  Council of Mavens holds sway in general but it is truly a big swirl of powers."*
+ *
+ *  ⚠️ THIS IS PRESENCE, NOT REACH, AND THE DISTINCTION IS THE WHOLE POINT. A house is an embassy: somebody of
+ *  theirs is in the room. It is deliberately NOT a `reach` entry, never enters `powersReaching`, lifts no danger
+ *  and anchors no territory — Aevi's C4 names the reason outright, that putting the Crossing into 34 powers'
+ *  `reach` lists *"would have made the hub the most dangerous road in the world"*.
+ *  ⛑ The hub is held by the Mavens, who are seated there. Everyone else is a guest with a door key. PURE. */
+export function housesAt(locationId, content) {
+  if (!locationId) return [];
+  const here = String(locationId);
+  return (powersFrom(content) || [])
+    .filter((p) => p?.houseAt && String(p.houseAt) === here)
+    .map((p) => ({ id: p.id, name: p.name || p.id, kind: p.kind || null, tradition: p.tradition || null, seat: p.seat || null }))
+    .sort((a, b) => String(a.name).localeCompare(String(b.name)));
+}
+
+/** ⛔ C4.2 · WHO IS IN THE ROOM, for the GM. ✅ ERIK: *"every tradition had powers there… it is truly a big
+ *  swirl of powers."* One line each, by name and kind, so the narrator can have a Maven's clerk and a Bedrock
+ *  factor both standing in the same hall without inventing either.
+ *  ⚠️ IT SAYS PLAINLY THAT A HOUSE IS NOT A CLAIM, because the nearest thing the GM already has —
+ *  `powersHoldingForGM` — is about reach, and a narrator handed both without that line would read thirty-three
+ *  embassies as thirty-three armies. PURE. */
+export function housesForGM(locationId, { content = null } = {}) {
+  const here = housesAt(locationId, content);
+  if (!here.length) return null;
+  const word = { sovereignty: "a crown", lordship: "a lord", outlaw_crown: "an outlaw crown",
+    guild: "a guild", order: "an order", outlaw_band: "a band", trade_house: "a trade house" };
+  return {
+    n: here.length,
+    note: "A HOUSE IS PRESENCE, NOT A CLAIM: these powers keep a door and somebody of theirs here. They hold no "
+      + "ground at this place and lift no danger on its roads — who HOLDS it is in powersHereDetail.",
+    houses: here.map((p) => ({ name: p.name, kind: p.kind,
+      say: `${p.name} — ${word[p.kind] || p.kind || "a power"}${p.seat ? `, seated at ${p.seat}` : ""}` })),
+  };
+}
+
 /** ⛔ EVERY POWER WHOSE REACH COVERS A PLACE. `reach` is a list of location ids — the places a power's
  *  presence is FELT, which is deliberately wider than the places it holds.
  *  ⚠️ STANDING ONLY BY DEFAULT: a broken power reaches nowhere. Pass `{ standingOnly: false }` to ask who

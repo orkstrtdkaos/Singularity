@@ -628,6 +628,89 @@ export const MARKER_STYLE = {
  *  axis scaled by cos(lat) so the ground is not stretched. At region scale that distortion is small and
  *  the gain is large — no projection maths per pixel, which is the cost that made the globe slow down
  *  here in the first place. */
+/** ⛔ C1 · A POLE-CENTRED BASE, for a region sitting on the world's axis.
+ *  ✅ ERIK, 2026-10-04: *"We do need a pole-centered Crossing map."* — answering CCODE-596, where the Crossing's
+ *  eleven places spanned 0.76° of real ground and got a lon/lat box 171° wide that excluded ten of them.
+ *
+ *  ⛑ SAME OBJECT SHAPE AS `makeRegionBase` ON PURPOSE (`sample`, `toScreen`, `toWorld`, `extent`, `samples`), so
+ *  the ground painter, the roads, the field, the territory walk and the clicks keep working without ever asking
+ *  which base they are holding. That is Aevi's C1 in one sentence and it is the whole design.
+ *
+ *  ⚠️ AZIMUTHAL EQUIDISTANT: ρ is colatitude measured from the pole, θ is longitude, and screen distance from
+ *  the hub is proportional to ρ everywhere — which is the one property a hub map must have. Longitude 0 points up.
+ *  ⛔ AND IT DISSOLVES THE 360° PROBLEM rather than working around it: two places at colatitude 0.3 on opposite
+ *  meridians are 0.6° apart here, because they ARE 0.6° apart. A lon/lat frame put them a world apart. */
+export function makePolarBase(t, gen, extent, opts) {
+  const o = opts || {};
+  const RAD = Math.PI / 180, DEG = 180 / Math.PI;
+  const floorDeg = o.floorDeg || 0.25;
+  const pole = extent.pole || (extent.centre?.lat < 0 ? -1 : 1);
+  const R = Math.max(1e-6, extent.poleRadiusDeg || Math.max(0.6, (extent.radiusDeg || 1) * 1.25));
+  // ρ ↔ latitude, for whichever pole this region sits on
+  const rhoOf = (lat) => (pole < 0 ? lat + 90 : 90 - lat);
+  const latOf = (rho) => (pole < 0 ? rho - 90 : 90 - rho);
+  // the projected plane, in degrees: u = ρ·sinθ (east), v = ρ·cosθ (toward longitude 0)
+  const uvOf = (lon, lat) => { const r = rhoOf(lat), a = lon * RAD; return { u: r * Math.sin(a), v: r * Math.cos(a) }; };
+
+  // ⛑ sampled on a CARTESIAN grid in the projected plane, so the samples are evenly spaced on the ground
+  const n = Math.max(24, Math.min(512, Math.ceil((2 * R) / floorDeg)));
+  const raw = new Float32Array(n * n), typ = new Uint8Array(n * n);
+  for (let j = 0; j < n; j++) {
+    const v = -R + (j / (n - 1)) * 2 * R;
+    for (let i = 0; i < n; i++) {
+      const u = -R + (i / (n - 1)) * 2 * R;
+      const rho = Math.hypot(u, v);
+      const lat = latOf(Math.min(rho, 180));
+      const lon = Math.atan2(u, v) * DEG;
+      const g = gen(lon, lat);
+      raw[j * n + i] = g.raw; typ[j * n + i] = g.type;
+    }
+  }
+  const at = (arr, lon, lat) => {
+    const { u, v } = uvOf(lon, lat);
+    const fx = Math.max(0, Math.min(n - 1, ((u + R) / (2 * R)) * (n - 1)));
+    const fy = Math.max(0, Math.min(n - 1, ((v + R) / (2 * R)) * (n - 1)));
+    const x0 = Math.floor(fx), y0 = Math.floor(fy);
+    const x1 = Math.min(n - 1, x0 + 1), y1 = Math.min(n - 1, y0 + 1);
+    const tx = fx - x0, ty = fy - y0;
+    const a = arr[y0 * n + x0], b = arr[y0 * n + x1], c = arr[y1 * n + x0], d = arr[y1 * n + x1];
+    return (a * (1 - tx) + b * tx) * (1 - ty) + (c * (1 - tx) + d * tx) * ty;
+  };
+  const base = {
+    extent, nx: n, ny: n, polar: true, pole, radiusDeg: R,
+    // ⚠️ `conv` exists so a caller that reads it gets something sane rather than `undefined` doing arithmetic.
+    // It is a LIE at this scale, which is why C2 re-points every caller at `toScreen`/`toWorld` instead.
+    conv: 1,
+    /** the same shoreline trick: sign(raw) IS the coast, so it is finer than the samples that drew it */
+    sample(lon, lat) {
+      const r = at(raw, lon, lat);
+      const { u, v } = uvOf(lon, lat);
+      const fx = Math.round(Math.max(0, Math.min(n - 1, ((u + R) / (2 * R)) * (n - 1))));
+      const fy = Math.round(Math.max(0, Math.min(n - 1, ((v + R) / (2 * R)) * (n - 1))));
+      const near = typ[fy * n + fx];
+      return { type: r > 0 ? (near === 0 ? 1 : near) : 0, raw: r, elevation: elevFromRaw(t, r, r > 0 ? 1 : 0) };
+    },
+    toScreen(lon, lat, w, h) {
+      const k = Math.min(w, h) / (2 * R);
+      const { u, v } = uvOf(lon, lat);
+      return { x: w / 2 + k * u, y: h / 2 - k * v };
+    },
+    toWorld(x, y, w, h) {
+      const k = Math.min(w, h) / (2 * R);
+      const u = (x - w / 2) / k, v = -(y - h / 2) / k;
+      const rho = Math.hypot(u, v);
+      return { lon: Math.atan2(u, v) * DEG, lat: latOf(Math.min(rho, 180)) };
+    },
+    /** ⛑ the disc is the map; outside it is the frame's margin, not ground */
+    insideDisc(x, y, w, h) {
+      const k = Math.min(w, h) / (2 * R);
+      return Math.hypot(x - w / 2, y - h / 2) <= k * R + 1e-9;
+    },
+  };
+  base.samples = n * n;
+  return base;
+}
+
 export function makeRegionBase(t, gen, extent, opts) {
   const o = opts || {};
   const floorDeg = o.floorDeg || 0.25;                          // the measured information floor
@@ -747,6 +830,14 @@ export function regionExtent(regionId, locations, { padFrac = 0.18, authored = n
     // distance, so two places 0.1° apart land on opposite sides of the map; no rectangle fixes that, only a
     // polar projection or a world that does not stack a country on the axis. Both are above this function.
     polar: conv <= 0.12,
+    // ⛑ C1 — WHAT A POLAR BASE NEEDS, worked out here because this is the one function that walks the members.
+    // The projection centre is the POLE, never the authored centre: at colatitude 0.3 a "centre longitude" is not
+    // the middle of anything. ⚠️ R IS NOT `radiusDeg`: that is a bounding circle about the authored centre, while
+    // this is how far the farthest member sits from the AXIS, which is what sets the frame of a hub map.
+    // ✅ AEVI: *"Frame radius R = the farthest member × 1.25, floor 0.6°, not the general 3° floor. That floor
+    // would make eleven places a dot."*
+    pole: centre.lat < 0 ? -1 : 1,
+    poleRadiusDeg: Math.max(0.6, 1.25 * pts.reduce((mx, q) => Math.max(mx, Math.abs(Math.abs(q[0]) - 90)), 0)),
   };
 }
 
@@ -894,7 +985,9 @@ export function routeRoads(roads, locations, { W, H, step, toScreen, toWorld, ex
   // raw is the trap that put a power from the far side of the world in Erik's valley (CCODE-595) and drew a road
   // 357° round the planet to join two places 3° apart (CCODE-594).
   const inF = (lon) => {
-    if (!extent) return lon;
+    // ⛔ C2: a polar frame needs no unwrapping — its `toScreen` is trigonometric, so 252° and −108° are the
+    // same bearing and land on the same pixel. Unwrapping against a fabricated box would move them apart.
+    if (!extent || extent.polar) return lon;
     const mid = (extent.lo0 + extent.lo1) / 2;
     let v = lon; while (v - mid > 180) v -= 360; while (mid - v > 180) v += 360; return v;
   };
@@ -1040,13 +1133,31 @@ export function makeGroundCost(t, { climb = 7, water = 30, extent = null, sample
   // global reference would call the valley flat and the Palelands sheer, which is the opposite of what is wanted.
   const la0 = extent ? Math.min(extent.la0, extent.la1) : -80, la1 = extent ? Math.max(extent.la0, extent.la1) : 80;
   const lo0 = extent ? extent.lo0 : -180, lo1 = extent ? extent.lo1 : 180;
+  // ⛔ C2 — A POLAR REGION'S lon/lat BOX IS A FABRICATION, so sampling it would take this reference across 171°
+  // of longitude for a city 0.6° wide. Sample the DISC instead: an even grid in the projected plane, which is an
+  // even grid on the ground. ⚠️ Same trap as the two longitude conventions, from the other side (Aevi, C2).
+  const polar = !!extent?.polar;
+  const pole = extent?.pole || -1, R = extent?.poleRadiusDeg || 1;
+  const DEG = 180 / Math.PI;
   const diffs = [];
   for (let i = 0; i < samples; i++) {
     for (let j = 0; j < samples; j++) {
-      const lat = la0 + (la1 - la0) * ((i + 0.5) / samples);
-      const lon = lo0 + (lo1 - lo0) * ((j + 0.5) / samples);
+      let lat, lon;
+      if (polar) {
+        const u = -R + ((i + 0.5) / samples) * 2 * R, v = -R + ((j + 0.5) / samples) * 2 * R;
+        const rho = Math.hypot(u, v);
+        if (rho > R) continue;                              // outside the disc is not this region's ground
+        lat = pole < 0 ? rho - 90 : 90 - rho;
+        lon = Math.atan2(u, v) * DEG;
+      } else {
+        lat = la0 + (la1 - la0) * ((i + 0.5) / samples);
+        lon = lo0 + (lo1 - lo0) * ((j + 0.5) / samples);
+      }
       if (wetAt(lat, lon)) continue;                       // ⚠️ the sea is flat and would drag the reference down
-      const dLat = (la1 - la0) / samples, dLon = (lo1 - lo0) / samples;
+      // ⛑ the sample spacing is the DISC's where the frame is polar — a gradient needs the true ground distance
+      // between its two samples, and (la1-la0)/samples would be the fabricated box's again.
+      const dLat = polar ? (2 * R) / samples : (la1 - la0) / samples;
+      const dLon = polar ? (2 * R) / samples / Math.max(1e-6, Math.cos(lat * RAD)) : (lo1 - lo0) / samples;
       // ⛔ A GRADIENT, NOT A RISE — rise per DEGREE of ground, so each side divides by its own distance.
       // ⚠️ AEVI, CCODE-596: *"the ground-cost slope is a rise, not a gradient… so almost nothing bends a
       // road."* She found it by opening the valley in the game: the main east–west road ran ruler-straight

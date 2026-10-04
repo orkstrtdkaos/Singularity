@@ -263,7 +263,8 @@
   "community": 0.1,
   "perPerson": 0.04,
   "presentCap": 0.2,
-  "ceilingFloor": 0.35
+  "ceilingFloor": 0.5,
+  "_ceilingFloorWhy": "Erik 2026-10-04, agreeing to Aevi's measurement: at 0.35 an ordinary town (meaning 0.35) capped a metaphysical craft near 58%, and with crowding Loki's ten metaphysical crafts sat at 42% at his own hold and at Gearsflat, Radiant Plateau and the Scour alike: half a kit at half strength anywhere not holy. At 0.5 a town reads Workable (about 68%) and only sacred ground reaches full. Was 0.35."
  },
  "_crowdBySource": "⬜ ERIK 2026-09-11: 'thinking about removing the above band penalty. at least for some sources.' A dial keyed by a craft's SOURCE (wild, veil, metaphysical, precursor, nanite, combination): `{ crowdSlope, crowdFloor }` overrides SUBSTRATE_TUNING's crowding for every craft of that source, whichever band it resolves (its tradition's, its school's or the source's). `crowdSlope: 0` = abundance never hurts it. EMPTY = today. The measured options are in REPLY_ccode_20260911c.",
   "crowdBySource": {},

@@ -451,7 +451,7 @@
     -38.25,
     52.25
    ],
-   "lengthDeg": 4.0
+   "lengthDeg": 4
   }
  ],
  "fens": [
@@ -486,10 +486,15 @@
    "extent": "17.0°",
    "why": "⛔ RESTORED. My authored address survived; CCode's write-back had collapsed it onto the Stairfen's polygon and I blamed my own data for it. ⚠️ The wetland complex between here and Stair Hollow genuinely broke up — this name now leans on its town, which is the honest state and is pinned in the census.",
    "centroid": [
+    -40.24,
+    -63.34
+   ],
+   "extentDeg": 17,
+   "_centroidWas_20261004": [
     -38.75,
     -48.56
    ],
-   "extentDeg": 17
+   "_splitCall_20261004": "SNG-394, Aevi's split call, made at SNG-676: the Marchfen and the Stairfen both bound marsh 21 through their towns. The Marchfen keeps it, by its own address now, and the water keeps its name though Greenmarch has moved onto the Heartroot's bearing. The Stairfen detaches into the census: no fen lies within 5° of the real Stair Hollow, and a name is not moved onto water that is not there."
   },
   {
    "id": "the_echofen",
@@ -573,14 +578,15 @@
     -43.73,
     -75.51
    ],
-   "extentDeg": 7.9
+   "extentDeg": 7.9,
+   "_detached_20261004": "SNG-676: Stair Hollow moved onto Choirheight's bearing and no fen lies within 5° of it. In the census until a fen is authored there or the name is retired (Aevi's call, with Erik)."
   },
   {
    "id": "the_upper_mire",
    "name": "The Upper Mire",
    "near": "disputed_zone_fringe",
    "centroid": [
-    -56.0,
+    -56,
     -102.3
    ],
    "extentDeg": 4.8,

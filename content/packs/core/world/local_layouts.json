@@ -310,18 +310,18 @@
  },
  "greyhearth": {
   "_measured": {
-   "riverBearing": -85,
-   "riverDistanceDeg": 2.24,
-   "uphillBearing": 135,
-   "relief": 0.236,
+   "riverBearing": -91,
+   "riverDistanceDeg": 5.66,
+   "uphillBearing": -60,
+   "relief": 0.962,
    "roadsOut": [
     {
      "to": "the_crossing",
-     "bearing": -150
+     "bearing": -180
     },
     {
      "to": "the_quiet_ground",
-     "bearing": 30
+     "bearing": 0
     }
    ],
    "_wasAuthored": {
@@ -330,7 +330,14 @@
     "uphillBearing": 135,
     "relief": 0.104
    },
-   "_remeasured_20260906": "⛔ RE-DERIVED FROM THE LIVE TERRAIN, 2026-09-06. Erik: 'the land is set now — we will move things as needed to fit.' ⚠️ SNG-404 had 16 drifts between Aevi's hand-authored `_measured` block and `measureGradients` reading the same world, because the cluster MOVED (SNG-427, SNG-434, and the 09-06 gate move) and the readings did not follow. ⛔ THE LAND IS THE TRUTH AND THE READING IS THE THING THAT MOVES — taken with the same call the gate uses, so they cannot disagree by construction. ⚑ `_wasAuthored` keeps what she measured by hand, because a reading replaced is not a reading that never happened."
+   "_remeasured_20260906": "⛔ RE-DERIVED FROM THE LIVE TERRAIN, 2026-09-06. Erik: 'the land is set now — we will move things as needed to fit.' ⚠️ SNG-404 had 16 drifts between Aevi's hand-authored `_measured` block and `measureGradients` reading the same world, because the cluster MOVED (SNG-427, SNG-434, and the 09-06 gate move) and the readings did not follow. ⛔ THE LAND IS THE TRUTH AND THE READING IS THE THING THAT MOVES — taken with the same call the gate uses, so they cannot disagree by construction. ⚑ `_wasAuthored` keeps what she measured by hand, because a reading replaced is not a reading that never happened.",
+   "_before_20261004": {
+    "riverBearing": -85,
+    "riverDistanceDeg": 2.24,
+    "uphillBearing": 135,
+    "relief": 0.236
+   },
+   "_remeasured_20261004": "SNG-676: the town moved onto its pole's bearing (Erik 2026-10-04), so the ground under it is new. Re-measured with the gate's own call, as on 2026-09-06: the land is the truth and the reading is the thing that moves."
   },
   "_reading": "'A town that buries for every road that meets here — the Crossing's dead and the Palelands' both.' ⛔ A BURYING TOWN'S LAYOUT IS ITS TRAFFIC: the dead arrive by road and go uphill.",
   "radiusMetres": 380,
@@ -339,7 +346,7 @@
     "id": "greyhearth_receiving",
     "name": "The Receiving Yard",
     "localMap": {
-     "bearing": -150,
+     "bearing": -180,
      "metres": 200
     },
     "why": "⛔ On the Crossing road. The dead arrive from where the roads meet, so the yard faces that way.",
@@ -347,17 +354,19 @@
     "toward": {
      "road": "the_crossing",
      "relation": "on"
-    }
+    },
+    "_bearingWas_20261004": -150
    },
    {
     "id": "greyhearth_grounds",
     "name": "The Burying Grounds",
     "localMap": {
-     "bearing": 135,
+     "bearing": -60,
      "metres": 320
     },
     "why": "⛔ UPHILL, on the measured bearing — drainage. Every real burying ground sits above its town.",
-    "basis": "uphill"
+    "basis": "uphill",
+    "_bearingWas_20261004": 135
    },
    {
     "id": "greyhearth_hearth",
@@ -383,7 +392,7 @@
     "id": "greyhearth_quiet_road",
     "name": "The Quiet Road",
     "localMap": {
-     "bearing": 30,
+     "bearing": 0,
      "metres": 260
     },
     "why": "⛔ On the bearing to the Quiet Ground, which is where the dying go BEFORE. The two towns are one process.",
@@ -391,7 +400,8 @@
     "toward": {
      "road": "the_quiet_ground",
      "relation": "on"
-    }
+    },
+    "_bearingWas_20261004": 30
    }
   ]
  },
@@ -544,18 +554,18 @@
  },
  "kindlerow": {
   "_measured": {
-   "riverBearing": 179,
-   "riverDistanceDeg": 6.47,
-   "uphillBearing": -30,
-   "relief": 0.645,
+   "riverBearing": -139,
+   "riverDistanceDeg": 1.69,
+   "uphillBearing": -180,
+   "relief": 0.232,
    "roadsOut": [
     {
      "to": "the_crossing",
-     "bearing": 125
+     "bearing": -180
     },
     {
      "to": "the_blaze",
-     "bearing": -55
+     "bearing": -1
     }
    ],
    "_wasAuthored": {
@@ -564,7 +574,14 @@
     "uphillBearing": 330,
     "relief": 0.541
    },
-   "_remeasured_20260906": "⛔ RE-DERIVED FROM THE LIVE TERRAIN, 2026-09-06. Erik: 'the land is set now — we will move things as needed to fit.' ⚠️ SNG-404 had 16 drifts between Aevi's hand-authored `_measured` block and `measureGradients` reading the same world, because the cluster MOVED (SNG-427, SNG-434, and the 09-06 gate move) and the readings did not follow. ⛔ THE LAND IS THE TRUTH AND THE READING IS THE THING THAT MOVES — taken with the same call the gate uses, so they cannot disagree by construction. ⚑ `_wasAuthored` keeps what she measured by hand, because a reading replaced is not a reading that never happened."
+   "_remeasured_20260906": "⛔ RE-DERIVED FROM THE LIVE TERRAIN, 2026-09-06. Erik: 'the land is set now — we will move things as needed to fit.' ⚠️ SNG-404 had 16 drifts between Aevi's hand-authored `_measured` block and `measureGradients` reading the same world, because the cluster MOVED (SNG-427, SNG-434, and the 09-06 gate move) and the readings did not follow. ⛔ THE LAND IS THE TRUTH AND THE READING IS THE THING THAT MOVES — taken with the same call the gate uses, so they cannot disagree by construction. ⚑ `_wasAuthored` keeps what she measured by hand, because a reading replaced is not a reading that never happened.",
+   "_before_20261004": {
+    "riverBearing": 179,
+    "riverDistanceDeg": 6.47,
+    "uphillBearing": -30,
+    "relief": 0.645
+   },
+   "_remeasured_20261004": "SNG-676: the town moved onto its pole's bearing (Erik 2026-10-04), so the ground under it is new. Re-measured with the gate's own call, as on 2026-09-06: the land is the truth and the reading is the thing that moves."
   },
   "_ruleFinding": "⚠️ RELIEF 0.541 — the STEEPEST of the eight, and no water within 9°. ⛔ THE MIRROR OF GREYWATER: here uphill is the dominant axis and water is unusable. The Kindlespine runs behind the town (SNG-393). A forge town with no river gets its water from the hill, which is a fact the layout should state.",
   "radiusMetres": 300,
@@ -573,7 +590,7 @@
     "id": "kindlerow_row",
     "name": "The Row",
     "localMap": {
-     "bearing": 125,
+     "bearing": -180,
      "metres": 0
     },
     "why": "⛔ The town is a ROW and the name says so — forges strung along the Crossing road, not clustered round a square.",
@@ -581,13 +598,14 @@
     "toward": {
      "road": "the_crossing",
      "relation": "on"
-    }
+    },
+    "_bearingWas_20261004": 125
    },
    {
     "id": "kindlerow_assay_house",
     "name": "The Assay House",
     "localMap": {
-     "bearing": 125,
+     "bearing": -1,
      "metres": 170
     },
     "why": "'Tells you honestly what your metal is worth.' ⚠️ At the road end where metal ARRIVES — you are assayed before you are sold to.",
@@ -595,13 +613,14 @@
     "toward": {
      "road": "the_crossing",
      "relation": "on"
-    }
+    },
+    "_bearingWas_20261004": 125
    },
    {
     "id": "kindlerow_lamp_makers",
     "name": "The Lamp-Makers' Sheds",
     "localMap": {
-     "bearing": -55,
+     "bearing": -180,
      "metres": 160
     },
     "why": "⛔ On the road to the Blaze. Lamps go where the light doctrine is, and Kindlerow sells to them without joining them.",
@@ -609,29 +628,33 @@
     "toward": {
      "road": "the_blaze",
      "relation": "on"
-    }
+    },
+    "_bearingWas_20261004": -55
    },
    {
     "id": "kindlerow_charcoal_slope",
     "name": "The Charcoal Slope",
     "localMap": {
-     "bearing": 330,
+     "bearing": -180,
      "metres": 250
     },
     "why": "⛔ Uphill on the measured bearing — fuel comes down to a forge, never up.",
-    "basis": "uphill"
+    "basis": "uphill",
+    "_bearingWas_20261004": 330
    },
    {
     "id": "kindlerow_catch_cistern",
     "name": "The Catch-Cistern",
     "localMap": {
-     "bearing": 345,
+     "bearing": -180,
      "metres": 190
     },
     "why": "⚠️ NO RIVER WITHIN 9°, AND A FORGE MUST QUENCH. Uphill catchment is the only honest answer; the terrain forced this one into existence.",
-    "basis": "uphill"
+    "basis": "uphill",
+    "_bearingWas_20261004": 345
    }
-  ]
+  ],
+  "_ruleFinding_20261004": "SNG-676: re-sited onto the Blaze's bearing, at the nearest dry ground that keeps it a forge town with no river (the move searched for exactly that). Measured now: relief 0.232, the nearest river 1.69° off, just past the 1.5° the placer will use. So the water is still uphill catchment and the Catch-Cistern stands; it is no longer the steepest of the eight, and 'no water within 9°' is now 'none within reach'."
  },
  "the_service_ways": {
   "_measured": {

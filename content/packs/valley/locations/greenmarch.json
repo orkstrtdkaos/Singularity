@@ -50,10 +50,11 @@
  "axisVectorNote": "Derived from authored spectrum against world_node_atlas.axisOrder (SNG-180). ⚠️ Every component is |0.45| or less by construction: a foothill is not extreme on any axis, which is what distinguishes it from its pole capital.",
  "worldPos": {
   "colatitude": 45,
-  "longitude": 308,
+  "longitude": 255,
   "depth": 0
  },
- "worldPosNote": "⚠️ THE LITERAL MIDPOINT between the Crossing and the_heartroot, taking the short way round on longitude. The world position states the philosophy: a foothill sits half the distance out from the centre toward its pole, and the geography and the fiction say the same thing.",
+ "_worldPosWas_20261004": {"colatitude":45,"longitude":308,"why":"SNG-676: placed at half its pole's longitude (averaged with the Crossing's 0, which the pole does not have); moved onto the_heartroot's bearing (Erik 2026-10-04)."},
+ "worldPosNote": "SNG-676 (Erik 2026-10-04): ON ITS POLE'S BEARING, between the Crossing and its pole. The Crossing is the pole and has no longitude, so the line from it to anywhere runs along that place's own meridian; the first placement averaged with the Crossing's stored 0 and halved every bearing. Distance is the nearest dry solid land to the old one.",
  "foothillOf": [
   "rootkin",
   "valley_craft",

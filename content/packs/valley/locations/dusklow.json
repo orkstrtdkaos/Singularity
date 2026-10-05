@@ -57,10 +57,11 @@
  ],
  "axisVectorNote": "Derived from authored spectrum against world_node_atlas.axisOrder (SNG-180). ⚠️ Every component is |0.45| or less by construction: a foothill is not extreme on any axis, which is what distinguishes it from its pole capital.",
  "worldPos": {
-  "colatitude": 46.2,
-  "longitude": 1.8,
+  "colatitude": 46,
+  "longitude": 357,
   "depth": 0
  },
+ "_worldPosWas_20261004": {"colatitude":46.2,"longitude":1.8,"why":"SNG-676: placed at half its pole's longitude (averaged with the Crossing's 0, which the pole does not have); moved onto the_underlight's bearing (Erik 2026-10-04)."},
  "worldPosNote": "⛔ SNG-407: moved 4.38° (7 walking days) onto the nearest coast the built terrain actually has. Erik: 'keep the land as ground truth now and move the locations slightly to fit the land.' Was colatitude 42, longitude 360.",
  "foothillOf": [
   "umbral",

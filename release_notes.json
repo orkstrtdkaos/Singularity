@@ -16,6 +16,24 @@
   "next": [],
   "releases": [
     {
+      "version": "2.19.4",
+      "date": "2026-10-05",
+      "entries": [
+        {
+          "kind": "change",
+          "title": "The field stops drowning the land",
+          "summary": "The ambient field was drawn as thousands of motes over the whole map, so the ground underneath disappeared.",
+          "detail": "Wild nanite sits at a low level almost everywhere, and the map drew a dot wherever it was present at all — about 2,700 of them across a single frame, which read as a texture over the world rather than as anything about a place. The motes now appear only where the wild actually runs high, with a hard limit per frame, and the coloured wash over the ground is half as strong. The land keeps its own colour and the field still says where it is strong."
+        },
+        {
+          "kind": "fix",
+          "title": "Powers no longer all share one colour",
+          "summary": "Seven different powers were being drawn in the same violet.",
+          "detail": "Each power's ground and border are drawn in its own colour, picked from a palette of twelve by its name. With forty-one powers in the world that meant collisions, and the most common one put seven powers — including Millbrook's Elder Panel — in the same violet, so neighbouring realms were indistinguishable. The colours are now assigned across the powers actually on screen, largest first, so the ones you can see at once are always different from each other."
+        }
+      ]
+    },
+    {
       "version": "2.19.3",
       "date": "2026-10-05",
       "entries": [

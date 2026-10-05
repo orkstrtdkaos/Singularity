@@ -127,7 +127,15 @@ export function blurGrid(grid, w, h, r = 1) {
  *  the thing that makes it read as wild rather than as noise is that it holds still.
  *
  *  `valueAt(x, y)` is in SCREEN pixels and returns 0..1; `keepAt` is an optional mask (land only, inside a disc). */
-export function stipple(W, H, valueAt, { cell = 7, seed = 1, keepAt = null, max = 1 } = {}) {
+export function stipple(W, H, valueAt, { cell = 7, seed = 1, keepAt = null, max = 1, floor = 0, cap = 0 } = {}) {
+  // ⛔ M4 (SNG-675) — A FLOOR AND A CAP, because "density IS the value" alone fills a frame.
+  // ✅ AEVI: *"hundreds of green motes over the whole frame (wild nanite at 27%) … in the mock the motes are
+  // SPARSE, drawn only where wild nanite runs high, and capped."*
+  // ⚠️ A FIELD THAT IS WEAKLY EVERYWHERE IS THE COMMON CASE, not the edge one: at 0.27 over a 977×513 frame
+  // on a 7px grid this scattered ~2,500 dots, which reads as a texture over the whole map rather than as a
+  // claim about anywhere. `floor` is the value below which the wild is not worth marking at all.
+  // ⛑ AND THE CAP KEEPS THE STRONGEST, NEVER THE FIRST. Truncating the list would bias every capped frame to
+  // its top-left corner — the dots are generated in scan order — so a cap sorts by value and keeps the head.
   const out = [];
   const cols = Math.ceil(W / cell), rows = Math.ceil(H / cell);
   for (let j = 0; j < rows; j++) {
@@ -137,9 +145,14 @@ export function stipple(W, H, valueAt, { cell = 7, seed = 1, keepAt = null, max 
       if (x >= W || y >= H) continue;
       if (keepAt && !keepAt(x, y)) continue;
       const v = Math.max(0, Math.min(max, Number(valueAt(x, y)) || 0));
+      if (v < floor) continue;                           // M4: below this the wild is not worth marking
       if (hash2(i, j, seed + 7919) > v) continue;         // density IS the value
       out.push({ x, y, v });
     }
+  }
+  if (cap > 0 && out.length > cap) {
+    out.sort((a, b) => b.v - a.v);
+    out.length = cap;
   }
   return out;
 }

@@ -6522,6 +6522,45 @@ await (async () => {
       && /labelText\(l\.name \|\| id, "place", 24\)/.test(src),
       "Aevi reported the resulting \"The Disputed Zone — Fr\" as a label drawn twice");
 
+    /* ═════ M4 + M5 (SNG-675) · THE FIELD STOPS DROWNING THE LAND, AND THE POWERS STOP SHARING A HUE ═════
+     * ✅ AEVI, M4: *"hundreds of green motes over the whole frame … in the mock they are SPARSE, drawn only
+     * where wild nanite runs high, and capped; wash opacity halved; the land keeps its colour."*
+     * ⛑ MEASURED THROUGH THE PAINTER'S OWN CALL, including its ×0.9: at the valley's stated ambient of 0.27
+     * the stipple put **2,409 dots** on a 977×513 frame. With the floor and cap it is **420** — and weak
+     * ground (0.12) draws **nothing**, which is the "only where it runs high" half.
+     * ⚠️ THE FLOOR IS TUNED, NOT CHOSEN. At 0.30 the valley drew nothing AT ALL, which is more than she
+     * asked for and would have removed a layer Erik can see today. 0.18 keeps her ambient and bares the weak.
+     *
+     * ✅ AEVI, M5: *"no fill, one violet."* ⛔ MEASURED, AND IT IS A COLLISION, NOT A MISSING PATH: the fill
+     * and border always used the power's own colour, but **0 of 41 powers carry an authored one**, so all 41
+     * hash into a 12-hue palette and `#8f87c2` — a violet — comes out for **SEVEN**, Millbrook's Elder Panel
+     * among them. A global hash promises a stable colour per id; it cannot promise two NEIGHBOURS differ. */
+    const LENS675 = await import("../engine/lenses.js");
+    check("675/M4: ⛔ the wild scatter takes a FLOOR and a CAP — 2,409 dots on one frame is a texture, not a claim",
+      (() => {
+        const flat = (v) => () => v;
+        const before = LENS675.stipple(977, 513, (x, y) => flat(0.27)(x, y) * 0.9, { cell: 7, seed: 11 }).length;
+        const after = LENS675.stipple(977, 513, (x, y) => flat(0.27)(x, y) * 0.9, { cell: 7, seed: 11, floor: 0.18, cap: 420 }).length;
+        const weak = LENS675.stipple(977, 513, (x, y) => flat(0.12)(x, y) * 0.9, { cell: 7, seed: 11, floor: 0.18, cap: 420 }).length;
+        return before > 2000 && after === 420 && weak === 0;
+      })(), "the density IS the value, which is right — and a field that is weakly everywhere therefore fills the frame");
+    check("675/M4: ⛑ …and the cap keeps the STRONGEST, never the first — scan order would bias every capped frame to its corner",
+      (() => {
+        // a field that rises to the right: a truncating cap keeps the left, a sorting cap keeps the right
+        const ramp = (x) => x / 977;
+        const got = LENS675.stipple(977, 513, (x) => ramp(x), { cell: 7, seed: 11, cap: 200 });
+        const meanX = got.reduce((a, d) => a + d.x, 0) / (got.length || 1);
+        return got.length === 200 && meanX > 977 * 0.6;
+      })(), "the dots are generated in scan order, so truncating the list is a spatial bias with no warning");
+    check("675/M4: ✅ …and the painter asks for both, with the wash halved",
+      /floor: FIELD_LOOK\.wildFloor, cap: FIELD_LOOK\.wildCap/.test(src)
+      && /alpha \* FIELD_LOOK\.washMult/.test(src) && /washMult: 0\.5/.test(src));
+    check("675/M5: ⛔ the powers ON SCREEN take distinct hues — a global hash gave SEVEN of 41 the same violet",
+      /const byGround = T\.powers\.slice\(\)\.sort/.test(src)
+      && /const free = POWER_HUES\.find\(\(h\) => !taken\.has\(h\)\)/.test(src)
+      && /const authored = \(q\.p \|\| q\)\?\.colour;/.test(src),
+      "⚠⚠ an authored colour must still win outright — the frame only decides what the hash would have guessed");
+
     // ⛔ AND IT TAKES TOUCH, which is the half that was missing. One binding serves the globe and the region
     // map, and it carries pinch — `touches[1]` is what SNG-168 found appeared NOWHERE in this repo.
     check("168/390: …and it answers a finger as well as a mouse — drag, pinch, and a tap that goes somewhere",

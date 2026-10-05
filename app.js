@@ -46,7 +46,7 @@ import { contributionsBy, lookKey } from "./engine/canon.js";   // CCODE-422: wh
 import { sourcesHere, meaningDensity } from "./engine/substrate.js";   // ✅ Erik 2026-10-04: the map’s meaning register reads the SAME function the metaphysical ceiling does   // ⛔ Erik 2026-09-12: the four sources and how well each answers HERE
 import { groundForDecl, groundTag, substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace, groundHere, groundCardFor, naniteAt, bandFactor, peoplePresentAt } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
 import { sceneImage, itemImage, artworkStyle, getArtMode, setArtMode, imagesEnabled, ensureImage, aestheticFor, regenPromptFor, onImageMinted, onComposedLookup, swapImageUrl, forgetImageUrl, bustedURL, isBustedURL, mintAction, IMAGE_MIN_BYTES, regenerateImage, acceptImage, isGeneratedImage, toggleKeep, likenessClause, houseStyleFor, sanitizeImagePrompt, imageURLFor, isMinorSubject, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor, lookFor, serviceRefusal, refusedSaid} from "./engine/art.js"; // SNG-401: draw it again without destroying the one they have
-import { drawLabel, labelText, labelSpace, powerSize } from "./engine/maplabel.js";   // M2/D1: one table, one collision space
+import { drawLabel, labelText, labelSpace, powerSize, applyStyle } from "./engine/maplabel.js";   // M2/D1: one table, one collision space
 import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, makePolarBase, regionExtent, bendRoad, roadNetwork, clipToFrame, routeRoads, makeGroundCost, GROUND_COST } from "./engine/worldglobe.js";
 // ⛔ ROUND 4 — whose ground is this, as things stand today. `realms.js` resolves the SAVE (losses, growth,
 // broken powers, taken holds, your own realm); `influence.js` stays pure and just evaluates.
@@ -197,7 +197,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.19.3";
+const APP_VERSION = "2.19.4";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -12540,6 +12540,22 @@ function groundLine(loc) {
  *  Castellany is one colour in the valley and another in the Echo Vale."* Keyed to the power's ID instead, so the
  *  globe, the region map, the legend and the hover all agree — an authored `colour` wins, else a stable hash.
  *  ⚠️ STABLE MEANS STABLE ACROSS RUNS: a hash of the id, never an index into a list that re-sorts. */
+/* ═════ M4 (SNG-675) · HOW LOUD THE FIELD IS ALLOWED TO BE ═════
+ * ✅ AEVI's mock against the game: *"the field drowns the land … the motes are sparse, drawn only where wild
+ * nanite runs high, and capped; the wash opacity halved; the land keeps its colour."*
+ * ⛑ DIALS, NOT CONSTANTS BURIED IN THE PAINTER, because every one of these is a LOOK and the look is hers.
+ * ⚠️ `wildFloor` IS THE ONE THAT MATTERS AND IT IS ABSOLUTE, not a percentile of the frame: a percentile
+ * would always draw the same share of a map, so a region with no wild nanite in it would still be speckled.
+ * Below this value the wild is not worth marking, and a frame that is uniformly below it draws nothing —
+ * which is the correct answer, not an empty one. */
+const FIELD_LOOK = { wildFloor: 0.18, wildCap: 420, washMult: 0.5 };
+// ⛑ 0.18 IS TUNED, NOT CHOSEN. The stipple reads the value AFTER the painter's ×0.9, so Aevi's stated
+// ambient of 0.27 arrives as 0.243. At 0.30 the valley drew **nothing at all** — more than she asked for,
+// and it would have removed a layer Erik can currently see. At 0.18 her ambient survives and is capped
+// (2,409 → 420 on a 977×513 frame, −83%) while genuinely weak ground (0.12) goes bare, which is the
+// "sparse, only where it runs high" she asked for with the CAP doing the sparseness and the floor doing
+// the bareness. ⚠️ All three numbers are a LOOK and the look is hers — these are the dials to turn.
+
 const POWER_HUES = ["#c8705a", "#6f9ec4", "#b8975a", "#7fa86a", "#a97fb8", "#5fa5a0", "#c48aa0", "#8a9bd1",
   "#b4a05f", "#6fae86", "#bd8468", "#8f87c2"];
 function powerColour(p) {
@@ -12623,8 +12639,27 @@ function paintTerritory(ctx, base, ext, regionId, W, H) {
   const hit = territoryFor(regionId, ext, base, W, H);
   const T = hit?.T;
   if (!T || !T.powers.length) return null;
+  // ⛔ M5 (SNG-675) — ✅ AEVI: *"no fill, one violet … the mock fills each power's ground in its own hue."*
+  // ⚠️ MEASURED, AND IT IS A COLLISION, NOT A MISSING PATH. The fill and the border have always used the
+  // power's own colour — but **0 of 41 powers carry an authored one**, so all 41 hash into a 12-hue palette
+  // and `#8f87c2`, a violet, comes out for **SEVEN** of them, Millbrook's Elder Panel among them. A global
+  // hash cannot promise that two powers SIDE BY SIDE differ; it only promises a given id is stable.
+  // ⛑ SO THE FRAME ASSIGNS. The powers actually on screen take distinct hues in order of ground held, which
+  // is the only scope in which "distinct" is a claim anyone can see. An authored colour still wins outright,
+  // and past the palette's length it falls back to the hash rather than repeating the biggest power's hue.
   const col = {}, rgb = {};
-  for (const q of T.powers) { const c = powerColour(q.p || q); col[q.id] = c; rgb[q.id] = _hexRGB(c); }
+  const byGround = T.powers.slice().sort((a, b) => (b.area || 0) - (a.area || 0));
+  const taken = new Set();
+  for (const q of byGround) {
+    const authored = (q.p || q)?.colour;
+    let c = authored ? String(authored) : null;
+    if (!c) {
+      const free = POWER_HUES.find((h) => !taken.has(h));
+      c = free || powerColour(q.p || q);
+    }
+    taken.add(c);
+    col[q.id] = c; rgb[q.id] = _hexRGB(c);
+  }
 
   // ---- the fill, at grid resolution and scaled, so it fades instead of stepping ----
   // ⛑ the SAME trick the field wash uses: painting 21,000 cell rectangles is slower and reads as a mosaic,
@@ -13773,7 +13808,7 @@ function paintRegionMap(regionId) {
           const lines = isoLines(lens.grids[k], lens.GW, lens.GH, level);
           if (!lines.length) continue;
           ctx.setLineDash(dash || []);
-          ctx.globalAlpha = alpha;
+          ctx.globalAlpha = alpha * FIELD_LOOK.washMult;   // ✅ M4: *"wash opacity halved"* — the land keeps its colour
           // a dark casing under the colour, so a vein reads on bright upland AND on near-black water
           for (const pass of [["rgba(10,12,18,0.5)", wdt + 1.8], [LINE[k], wdt]]) {
             ctx.strokeStyle = pass[0]; ctx.lineWidth = pass[1];
@@ -13790,7 +13825,15 @@ function paintRegionMap(regionId) {
       // ⛔ A SCATTER, for the wild register. Density IS the value; no single dot is a reading.
       if (fieldCtl.kinds.has("wild") && lens.grids.wild) {
         const v = readAt(lens.grids.wild);
+        // ⛔ M4 (SNG-675) — ✅ AEVI: *"hundreds of green motes over the whole frame … in the mock the motes are
+        // SPARSE, drawn only where wild nanite runs high, and capped. The land keeps its colour."*
+        // ⚠️ MEASURED: at the valley's wild nanite of ~0.27 this put **2,692 dots** on a 977×513 frame — a
+        // texture over the whole map rather than a claim about anywhere. Density IS the value, which is right,
+        // and a field that is weakly everywhere is the COMMON case, so proportionality alone fills the frame.
+        // ⛑ BOTH DIALS, AND THE PROPORTIONALITY IS KEPT: the floor says where the wild is worth marking at
+        // all, the cap bounds the frame, and between them density still follows the value.
         const dots = stipple(W, H, (x, y) => v(x, y) * 0.9, { cell: 7, seed: 11,
+          floor: FIELD_LOOK.wildFloor, cap: FIELD_LOOK.wildCap,
           keepAt: (x, y) => onMap(x, y) && dry(x, y) });   // ⛑ land only: the wild does not scatter on water
         ctx.fillStyle = "rgba(104,226,138,0.85)";
         for (const d of dots) { ctx.beginPath(); ctx.arc(d.x, d.y, 1.15, 0, Math.PI * 2); ctx.fill(); }
@@ -14118,8 +14161,12 @@ function paintRegionMap(regionId) {
     marks416.push({ id, l, p, name: labelText(l.name || id, "place", 24) });
   }
   // ✅ M2 — *"place | serif, bold, 12–13px, 3px dark halo"*, from the table rather than from a local const.
-  const LABEL_FONT = (here416) => { drawLabel(ctx, "", 0, 0, "place", { here: here416 }); return ctx.font; };
-  LABEL_FONT(false);
+  // ⛑ IT SETS THE STATE; IT DOES NOT RETURN A STRING. My first cut returned `ctx.font` and a caller below did
+  // `ctx.font = LABEL_FONT` — assigning a FUNCTION to a font property, which the canvas silently ignores,
+  // leaving the place names in whatever font the pass before them happened to set. Nothing throws, nothing
+  // reds, and the one thing M2 exists to fix quietly does not happen.
+  const setPlaceFont = (isHere) => applyStyle(ctx, "place", { here: isHere });
+  setPlaceFont(false);
   const rank416 = (m) => (m.id === here ? 0 : m.l.waygate ? 1 : m.l.tier === "site" ? 3 : 2);
   // ⛔ ERIK'S MAP, 2026-10-01 — A LABEL IS PLACED AT THE WIDTH IT IS ACTUALLY DRAWN AT.
   // ⚠️ This measured `m.name` and then drew `m.name + " +N"`. The badge `placeLabels` itself produces was not in
@@ -14149,8 +14196,7 @@ function paintRegionMap(regionId) {
     const g = glyphFor({ ...meta, k: meta.k });
     if (g) drawGlyph(ctx, g, m.p.x, m.p.y, m.id === here ? 9 : 7, {});
   }
-  ctx.fillStyle = "rgba(232,230,221,0.85)";
-  ctx.font = LABEL_FONT;
+  setPlaceFont(false);
   ctx.textAlign = "center";
   for (const m of marks416) {
     if (!labels416.shown.has(m.id)) continue;
@@ -14163,7 +14209,10 @@ function paintRegionMap(regionId) {
       if (inside) continue;
     }
     const more = labels416.hiddenBy[m.id];
-    ctx.fillText(m.name + (more ? ` +${more}` : ""), m.p.x, m.p.y + 18);
+    // ✅ M2: through the table, so the 3px dark halo lands — a bare `fillText` had none, which is why a name
+    // over light ground was the one that disappeared.
+    drawLabel(ctx, m.name + (more ? ` +${more}` : ""), m.p.x, m.p.y + 18, "place",
+      { here: m.id === here, raw: true, align: "center" });
   }
   const hereMark = marks416.find(m => m.id === here);
   if (hereMark) {

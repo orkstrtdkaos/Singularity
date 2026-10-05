@@ -12,13 +12,13 @@
   {
    "id": "the_axewater",
    "_why": "same: a named water with no polygon under it. Kept deliberately rather than bound to the nearest thing, which would invent a geography"
+  },
+  {
+   "id": "the_stairfen",
+   "_why": "SNG-676: Stair Hollow moved onto Choirheight's bearing and no fen lies within 5° of it. Detached rather than moved onto water that is not there; it waits for a fen to be authored there or for the name to be retired."
   }
  ],
  "fenCollisions": [
-  {
-   "pair": "The Marchfen + The Stairfen",
-   "_why": "two fens resolving onto one polygon. ⚠️ PENDING AEVI'S SPLIT CALL (SNG-394) — she has since ruled it on the SNG-676 branch: the Marchfen keeps marsh 21 by its own address and the Stairfen detaches into `unresolvedNames`, because no fen lies within 5° of the real Stair Hollow. This row leaves with that commit."
-  },
   {
    "pair": "The Milljaw + The Quiet Fen",
    "_why": "the Plateau pair: the Quiet Fen sits on the Milljaw's polygon. Known and kept"
@@ -40,8 +40,9 @@
   {
    "from": "kindlerow",
    "to": "the_blaze",
-   "phrase": "outward and widdershins",
-   "_source": "Aevi, SNG-386 §2. ⛔ AEVI IS AMENDING THIS ROW ON THE SNG-676 BRANCH to \"outward\": the widdershins WAS THE BUG — Kindlerow sat 90° off the Blaze's bearing because every foothill was placed at half its pole's longitude. Correcting the placement is the point of the fix, so the row follows the world."
+   "phrase": "outward",
+   "_source": "Aevi, SNG-386 §2, amended at SNG-676: the widdershins was the bug (Kindlerow sat 90° off the Blaze's bearing). Kindlerow now stands on that bearing, and the road goes straight out.",
+   "_phraseWas": "outward and widdershins"
   },
   {
    "from": "the_old_warden_post",
@@ -74,6 +75,18 @@
    "by": "CCode",
    "_what": "these three censuses move out of the test files and into content, so a content ruling no longer waits on a test edit",
    "_where": "po/REQUEST_aevi_20261004_foothills_checks.md — Aevi's own suggestion, and the CCODE-602 pattern"
+  },
+  {
+   "on": "2026-10-05",
+   "by": "Aevi",
+   "_what": "SNG-394 split call: the Marchfen keeps marsh 21 by its own address; the Stairfen detaches into unresolvedNames. SNG-386 §2 row kindlerow→the_blaze amended to \"outward\".",
+   "_where": "SNG-676, po/REQUEST_aevi_20261004_foothills_checks.md"
+  },
+  {
+   "on": "2026-10-05",
+   "by": "Erik",
+   "_what": "\"You can rename those rivers\": the Kindle Run becomes the Passwater, the Longshore Water becomes the Ashrun (ids kept). The Outrun keeps its name.",
+   "_where": "SNG-676"
   }
  ],
  "_fieldNames": "⛑ THE DIAGNOSES ARE `_why`, NOT `why`. §262 counts ticket references that reach a player, and it reads the LEAF NAME: a `why` is a field a player can be shown, a `_why` is a note for whoever maintains the census. These are engineering notes and they cite ticket numbers, so they carry the underscore and the gate is right to insist."

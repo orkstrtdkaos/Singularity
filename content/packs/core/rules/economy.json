@@ -291,7 +291,6 @@
   },
   "slots": {
    "clearing": {
-
     "baseGoods": {
      "raw_material": 6
     },
@@ -2951,7 +2950,7 @@
   },
   {
    "regionId": "foothill_hardline",
-   "tradition": "(frontier market — Hardline, Firstsight, Keelmouth)",
+   "tradition": "(frontier market — Hardline)",
    "goods": {
     "mech_parts": [
      "ordinary",
@@ -3003,7 +3002,8 @@
     ]
    },
    "deadList": [],
-   "note": "SNG-654 (Aevi): the outward frontier and Keelmouth's harbour. Everybody leaving buys a blade: arms at high need, scarce (×3.6); timber and hide for the boats at high. Luxuries come in by sea (abundant). ⚑ Longshore is 26 days away — the closest market pair on the ring."
+   "note": "SNG-654 (Aevi), re-sited at SNG-676: Hardline on the Redline's bearing, the last market before the line. Everybody going on buys a blade: arms at high need, scarce. The coast trade it used to share went with Firstsight and Keelmouth to the Outrun Coast.",
+   "_traditionWas_20261005": "(frontier market — Hardline, Firstsight, Keelmouth)"
   },
   {
    "regionId": "foothill_longshore",
@@ -3620,6 +3620,62 @@
    },
    "deadList": [],
    "note": "SNG-654 (Aevi): the market at the lip of the Descent — it buys what people need to go down and what they bring up: salvage at high and scarce (×3.6), arms at high. Down there, a keepsake is worth nothing (luxuries abundant)."
+  },
+  {
+   "regionId": "the_outrun_coast",
+   "tradition": "(the Outrun coast — Firstsight, Keelmouth)",
+   "goods": {
+    "mech_parts": [
+     "ordinary",
+     "ordinary"
+    ],
+    "living_stock": [
+     "ordinary",
+     "scarce"
+    ],
+    "raw_material": [
+     "high",
+     "ordinary"
+    ],
+    "worked_light": [
+     "ordinary",
+     "ordinary"
+    ],
+    "cut_stone": [
+     "ordinary",
+     "ordinary"
+    ],
+    "precursor_salvage": [
+     "ordinary",
+     "ordinary"
+    ],
+    "medicines": [
+     "high",
+     "ordinary"
+    ],
+    "instruments": [
+     "ordinary",
+     "ordinary"
+    ],
+    "documents": [
+     "ordinary",
+     "ordinary"
+    ],
+    "arms": [
+     "high",
+     "scarce"
+    ],
+    "nanite_tech": [
+     "little",
+     "scarce"
+    ],
+    "luxuries": [
+     "ordinary",
+     "abundant"
+    ]
+   },
+   "deadList": [],
+   "note": "SNG-654 (Aevi), carried at SNG-676: the outward frontier and Keelmouth's harbour, unchanged — the market went where the harbour is. Everybody leaving buys a blade: arms at high need, scarce; timber and hide for the boats at high. Luxuries come in by sea (abundant). The Worn Yard is twenty-three days off over the divide."
   }
  ],
  "visibility": "⚠️ REQUIRED, per Erik: THE NUMBERS ARE VISIBLE AND PRECISE; THE NARRATION DOES NOT RECITE THEM. Show the purse as a permanent row, show a price as a number when a trade is on the table, and show conversion math so a player can decide whether to convert here or wait. The trader SAYS 'ten for those, and I'm being generous'; the interface SAYS 10. Both.",

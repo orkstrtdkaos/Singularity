@@ -35,7 +35,7 @@
   "**It gives the Accords teeth.** A waygate is not a convenience; **it is a supply line.**",
   "**It is why the Numinous built the waygates** — and why they do not use them. They are dissolving. They no longer need to arrive anywhere."
  ],
- "substrateDensity": {
+ "substrateDensity": {"the_outrun_coast":0.45,
   "the_gearlands": 0.98,
   "the_lattice_cities": 0.94,
   "manifest_domain": 0.9,
@@ -337,7 +337,7 @@
    "wild": "Deployed, then abandoned, and it BLOOMED. Former farmland, irrigation grids, soil-conditioning fields — structured nanite spent into purpose century after century with nobody re-ordering it, until the whole field went feral. ⚠️ THESE ARE THE GREENMARCH CONDITIONS: absurdly fertile, overgrown, unpredictable, and dangerous in a way that has nothing to do with anyone's intent. The Churnfolk harvest here. Found in POCKETS throughout the map, not in one region.",
    "clear": "No nanite worth the name — and there are TWO WAYS to be clear, which is the interesting part. ⚠️ NATURALLY CLEAR: the tech never had a reason to be here. No farmland, no works, no settlement — deep stone, open water, high scree. ⛔ CLEARED BY INTENT: someone took it out. The Ents strip structured nanite from their holdings deliberately, and a place that was cleared reads the same as a place that was never seeded — until you ask why."
   },
-  "byRegion": {
+  "byRegion": {"the_outrun_coast":{"state":"clear","v":0.45,"why":"SNG-676: a short river off the divide to tidewater, a wayhouse and a slipway. Nobody here works nanite and nobody abandoned any; the coast is plain ground, which is what a shipwright wants."},
    "the_gearlands": {
     "state": "ordered",
     "v": 0.95,
@@ -549,7 +549,7 @@
    "terraformed_reverted": "Worked once and deliberately undone. Reads as natural until you ask why it is so clean."
   },
   "_renderNote": "⚠️ `the_foothills` carries `natural: varies` DELIBERATELY. It is the waypoint network, not a territory — 22 towns at road-midpoints across every longitude. ⛔ A region fill would draw a biome that does not exist. Render each foothill town from its NEIGHBOURS' biome.",
-  "byRegion": {
+  "byRegion": {"the_outrun_coast":{"natural":"stone_grass","worked":"terraformed_roadside","naturalNote":"Keelmouth's own words: the water arrives flat and brown off the stone-grass.","workedNote":"The shore-road's verge-works and the slip-yard: roadside craft, the same as every foothill's."},
    "the_center": {
     "natural": "plain",
     "naturalNote": "The old floodplain of three converging rivers — flat, fertile, and the natural place for roads to meet before anyone decided it should be.",
@@ -1068,7 +1068,7 @@
  },
  "_sng414": "⚠️ THE TWELVE FOOTHILL REGIONS INHERIT THE FOOTHILLS' AUTHORED FIELDS. The SNG-414 split relabels ground, it does not move it — the nanite state, density and biome the Foothills carried apply to every part of what it was. ⛔ INHERITED, NOT AUTHORED: Aevi may want to differentiate them now that they are twelve countries rather than one, and this note is here so that decision is hers to make rather than one she has to discover.",
  "_foothillsSplitNote": "⛔ SNG-414. Twelve regions authored from MEASURED terrain plus each town's own trade. ⚠️ THREE ARE NOT `ordered`, and that is the substance of the differentiation: GREYHEARTH IS CLEAR — a burying town does not want structured nanite in its ground, because things must end correctly and that means nothing keeps working after. GREENMARCH AND THINWATER ARE WILD — growers who will not be told which side of the Accord they are on, and a place where the water runs thin and so does everything else. The other nine remain ordered because somebody is working at it, which was always the real claim.",
- "regionHomeTradition": {
+ "regionHomeTradition": {"the_outrun_coast":"horizon",
   "foothill_dusklow": "umbral",
   "foothill_gearsflat": "enginewright",
   "foothill_greenmarch": "rootkin",

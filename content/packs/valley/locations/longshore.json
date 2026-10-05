@@ -16,11 +16,10 @@
   "settlement"
  ],
  "connections": [
-  "firstsight",
   "the_crossing",
   "the_long_span"
  ],
- "descriptionSeed": "Longshore — the waygate town: outfitters, bridge-wrights, and people who know how long a road really takes. Everyone here is either leaving or has just arrived, and it is the one place on any road where nobody asks where you are from. ⚠️ AND THE NAME IS NOT ABOUT THIS TOWN. Longshore is a mountain town at seventy-seven above the sea and four hundred and ninety-six miles from it; the shore in its name is the one at the far end of the road that starts here. THE LONG SHORE-ROAD — twenty-six days outward to Firstsight, seven more down the Outrun to Keelmouth and a hull. People arrive expecting a harbour about twice a season. The outfitters have stopped correcting them and started selling them boots.",
+ "descriptionSeed": "Longshore — the waygate town: outfitters, bridge-wrights, and people who know how long a road really takes. Everyone here is either leaving or has just arrived, and it is the one place on any road where nobody asks where you are from. And the name is true: the inner sea is a day and a half down the slope, and the road to the Long Span runs along its shore. People still arrive expecting a deep-water port, and get a long pebble beach, a dozen boats, and outfitters who sell boots to the ones walking on.",
  "loreRefs": [],
  "npcsPresent": [],
  "encounterFlavor": "traders, apprentices and people from three domains who have learned to share a street",
@@ -59,7 +58,11 @@
   "longitude": 131,
   "depth": 0
  },
- "_worldPosWas_20261004": {"colatitude":36,"longitude":68,"why":"SNG-676: placed at half its pole's longitude (averaged with the Crossing's 0, which the pole does not have); moved onto the_long_span's bearing (Erik 2026-10-04)."},
+ "_worldPosWas_20261004": {
+  "colatitude": 36,
+  "longitude": 68,
+  "why": "SNG-676: placed at half its pole's longitude (averaged with the Crossing's 0, which the pole does not have); moved onto the_long_span's bearing (Erik 2026-10-04)."
+ },
  "worldPosNote": "SNG-676 (Erik 2026-10-04): ON ITS POLE'S BEARING, between the Crossing and its pole. The Crossing is the pole and has no longitude, so the line from it to anywhere runs along that place's own meridian; the first placement averaged with the Crossing's stored 0 and halved every bearing. Distance is the nearest dry solid land to the old one.",
  "foothillOf": [
   "horizon",
@@ -71,6 +74,7 @@
  "tier": "settlement",
  "parentId": null,
  "role": "waypoint",
- "nameNote": "⛔ SNG-537, ratified by Erik 2026-09-11. MEASURED: biome `mountain`, elevation 205 against a sea level of 128 (+77), 416mi from the nearest sea, and its own namesake river The Longshore Water runs 174mi away and never touches it. ⚠️ THE GM HAD ALREADY TOLD A PLAYER OTHERWISE — Brynjar, in a live save: 'Longshore is the nearest deep-water hire port.' Nothing lied and nobody authored a port; the word *shore* was the only field carrying a claim and the GM read it, which is what a good reader does with the only evidence it has. ⛔ THE FIX IS NOT A RENAME AND NOT A MOVE. Longshore is the seat of `foothill_longshore` and terrain.json's voter array is baked and in sync across all 38 seats — moving a seat desyncs it, and terrain must not be rebuilt (Erik: 'the world stays as it is basically'). So the name becomes true instead: the long shore-road BEGINS here. Every existing line in the save survives, Brynjar's included, as the half-truth a waypoint-keeper would actually tell.",
- "appearance": "A waygate town along a shoreline — outfitters' shops and bridge-wrights' yards fronting a cobbled road, with a stone arch standing at the landward end. Packs, rope and timber stacked under awnings; boats drawn up on the shingle below."
+ "nameNote": "⛔ SNG-537, ratified by Erik 2026-09-11. MEASURED: biome `mountain`, elevation 205 against a sea level of 128 (+77), 416mi from the nearest sea, and its own namesake river The Longshore Water runs 174mi away and never touches it. ⚠️ THE GM HAD ALREADY TOLD A PLAYER OTHERWISE — Brynjar, in a live save: 'Longshore is the nearest deep-water hire port.' Nothing lied and nobody authored a port; the word *shore* was the only field carrying a claim and the GM read it, which is what a good reader does with the only evidence it has. ⛔ THE FIX IS NOT A RENAME AND NOT A MOVE. Longshore is the seat of `foothill_longshore` and terrain.json's voter array is baked and in sync across all 38 seats — moving a seat desyncs it, and terrain must not be rebuilt (Erik: 'the world stays as it is basically'). So the name becomes true instead: the long shore-road BEGINS here. Every existing line in the save survives, Brynjar's included, as the half-truth a waypoint-keeper would actually tell. ⛔ SUPERSEDED 2026-10-05 (SNG-676): Erik moved the foothills onto their poles' bearings and Longshore now stands 1° from the inner sea. The name needs no excuse; the shore-road to Firstsight belongs to the Outrun Coast and the Worn Yard now.",
+ "appearance": "A waygate town along a shoreline — outfitters' shops and bridge-wrights' yards fronting a cobbled road, with a stone arch standing at the landward end. Packs, rope and timber stacked under awnings; boats drawn up on the shingle below.",
+ "_descriptionSeedWas_20261005": "Longshore — the waygate town: outfitters, bridge-wrights, and people who know how long a road really takes. Everyone here is either leaving or has just arrived, and it is the one place on any road where nobody asks where you are from. ⚠️ AND THE NAME IS NOT ABOUT THIS TOWN. Longshore is a mountain town at seventy-seven above the sea and four hundred and ninety-six miles from it; the shore in its name is the one at the far end of the road that starts here. THE LONG SHORE-ROAD — twenty-six days outward to Firstsight, seven more down the Outrun to Keelmouth and a hull. People arrive expecting a harbour about twice a season. The outfitters have stopped correcting them and started selling them boots."
 }

@@ -16,6 +16,18 @@
   "next": [],
   "releases": [
     {
+      "version": "2.19.5",
+      "date": "2026-10-05",
+      "entries": [
+        {
+          "kind": "change",
+          "title": "The region map opens where you are",
+          "summary": "It used to open showing the whole region, with your corner of it filling about a fifth of the frame.",
+          "detail": "Opening a region framed the entire region whether or not you had ever been to most of it — so the knot of places you actually know sat small in one part of the map. It now opens framed on the places you know and the holds you keep, with a margin, and zooming out to the rest is a scroll away. A region you know nothing about still opens showing the whole of it."
+        }
+      ]
+    },
+    {
       "version": "2.19.4",
       "date": "2026-10-05",
       "entries": [

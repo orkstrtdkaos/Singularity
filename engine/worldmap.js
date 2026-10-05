@@ -593,6 +593,40 @@ export function bearingsToKnown(from, locations = {}, { isKnown = null, limit = 
  *  top of each other as one unreadable smear. Greedy by `rank` (lower first — where you stand, then gates, then settlements,
  *  then sites), ties in the order given. Each item is a label's box: `x` its centre, `y` its baseline, `w`/`h` its size.
  *  The PLACE is still drawn by the caller; only its name yields. Pure → { shown: Set of ids, hiddenBy: { shownId: n } }. */
+/** ⛔ M3 (SNG-675) — THE OPENING FRAME: where the map should be looking when you arrive.
+ *
+ *  ✅ AEVI: *"Today it opens zoomed to the whole region, so Millbrook's knot of places fills about a fifth of
+ *  the frame. The mock opens framed on the known places plus the player's realm, with a margin."*
+ *
+ *  ⛑ IT RETURNS A VIEW, NOT A PROJECTION. The region's extent is unchanged — this only says which part of the
+ *  already-painted map to show, through the same zoom the player can pan afterwards. That matters because the
+ *  heavy layers (the road walk, the territory walk, the field grid) are computed in screen space ONCE: making
+ *  the projection itself frame differently would recompute all three, while moving the view costs nothing.
+ *
+ *  ⚠️ AND IT REFUSES RATHER THAN INVENTS. With no points, one point, or points that already fill the frame,
+ *  it returns `null` and the caller leaves the view alone — a map of a region the player knows nothing about
+ *  should open showing the region, which is the honest answer and today's behaviour.
+ *
+ *  `pts` are map pixels; `maxK` is the view's own zoom cap, so this can never ask for a zoom the player
+ *  cannot then pan out of. */
+export function openingFrame(pts = [], W = 0, H = 0, { margin = 0.18, maxK = 4, minSpan = 80 } = {}) {
+  const ok = (p) => p && Number.isFinite(Number(p.x)) && Number.isFinite(Number(p.y));
+  const good = (Array.isArray(pts) ? pts : []).filter(ok);
+  if (good.length < 2 || !(W > 0) || !(H > 0)) return null;
+  let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+  for (const p of good) {
+    if (p.x < x0) x0 = p.x; if (p.x > x1) x1 = p.x;
+    if (p.y < y0) y0 = p.y; if (p.y > y1) y1 = p.y;
+  }
+  // ⛑ A MARGIN IN THE BOX'S OWN TERMS, with a floor — a knot of places a few pixels across would otherwise
+  // ask for a zoom of hundreds, and the floor is what makes "a cluster" and "one place" behave the same way.
+  const bw = Math.max(minSpan, (x1 - x0) * (1 + margin * 2));
+  const bh = Math.max(minSpan, (y1 - y0) * (1 + margin * 2));
+  const k = Math.min(maxK, W / bw, H / bh);
+  if (!(k > 1.05)) return null;                     // it already fills the frame; leave the view alone
+  return { k, cx: ((x0 + x1) / 2) / W, cy: ((y0 + y1) / 2) / H, box: { x0, y0, x1, y1 } };
+}
+
 export function placeLabels(items = [], { pad = 2 } = {}) {
   // ✅ `hiddenInto` IS NEW: hidden id → the id that displaced it. This function has always computed it (`hit.id`)
   // and thrown the pairing away, keeping only the tally — so a caller that places twice could not carry a dropped

@@ -6535,6 +6535,32 @@ await (async () => {
      * and border always used the power's own colour, but **0 of 41 powers carry an authored one**, so all 41
      * hash into a 12-hue palette and `#8f87c2` — a violet — comes out for **SEVEN**, Millbrook's Elder Panel
      * among them. A global hash promises a stable colour per id; it cannot promise two NEIGHBOURS differ. */
+    /* ═════ M3 (SNG-675) · THE OPENING FRAME ═════
+     * ✅ AEVI: *"it opens zoomed to the whole region, so Millbrook's knot of places fills about a fifth of the
+     * frame … the mock opens framed on the known places plus the player's realm, with a margin."*
+     * ⛑ `knownPlaces` IS A REAL FIELD, not an inference — Silas's save carries 19, beside 22 in `placeMemory`.
+     * ⚠️ AND IT REFUSES RATHER THAN INVENTS, which is the half worth gating: with nothing known, one place, or
+     * a spread that already fills the frame, it returns null and the caller leaves the view alone. ⛔ MEASURED
+     * ON SILAS: his 8 known valley places already span the region, so the frame DECLINES there — the mechanism
+     * is right and that save is not the one that shows it. Reported to Aevi rather than tuned until it fired. */
+    const WM675 = await import("../engine/worldmap.js");
+    check("675/M3: ⛔ the opening frame REFUSES when it has nothing to say — no points, one point, or a spread that already fills",
+      WM675.openingFrame([], 977, 513) === null
+      && WM675.openingFrame([{ x: 100, y: 100 }], 977, 513) === null
+      && WM675.openingFrame([{ x: 10, y: 10 }, { x: 960, y: 500 }], 977, 513) === null,
+      "a region the player knows nothing about should open showing the region — the honest answer, and today's");
+    check("675/M3: ⛔ …and it frames a knot, within the view's own zoom cap so the player can always pan out",
+      (() => {
+        const f = WM675.openingFrame([{ x: 300, y: 200 }, { x: 420, y: 280 }, { x: 360, y: 240 }], 977, 513, { maxK: 4 });
+        if (!f) return false;
+        return f.k > 1 && f.k <= 4 && f.cx > 0.3 && f.cx < 0.45 && f.cy > 0.4 && f.cy < 0.55;
+      })());
+    check("675/M3: ⛑ …and two touching places do not ask for a zoom of hundreds — `minSpan` is what makes a cluster and a point behave alike",
+      (WM675.openingFrame([{ x: 400, y: 250 }, { x: 404, y: 252 }], 977, 513, { maxK: 4 }) || {}).k === 4);
+    check("675/M3: ✅ …and the caller frames ONCE PER REGION, or a pan would snap back on the next repaint",
+      /_framedFor !== regionId/.test(src) && /_framedFor = regionId;/.test(src)
+      && /character\?\.knownPlaces/.test(src));
+
     const LENS675 = await import("../engine/lenses.js");
     check("675/M4: ⛔ the wild scatter takes a FLOOR and a CAP — 2,409 dots on one frame is a texture, not a claim",
       (() => {

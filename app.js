@@ -46,7 +46,8 @@ import { contributionsBy, lookKey } from "./engine/canon.js";   // CCODE-422: wh
 import { sourcesHere, meaningDensity } from "./engine/substrate.js";   // ✅ Erik 2026-10-04: the map’s meaning register reads the SAME function the metaphysical ceiling does   // ⛔ Erik 2026-09-12: the four sources and how well each answers HERE
 import { groundForDecl, groundTag, substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace, groundHere, groundCardFor, naniteAt, bandFactor, peoplePresentAt } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
 import { sceneImage, itemImage, artworkStyle, getArtMode, setArtMode, imagesEnabled, ensureImage, aestheticFor, regenPromptFor, onImageMinted, onComposedLookup, swapImageUrl, forgetImageUrl, bustedURL, isBustedURL, mintAction, IMAGE_MIN_BYTES, regenerateImage, acceptImage, isGeneratedImage, toggleKeep, likenessClause, houseStyleFor, sanitizeImagePrompt, imageURLFor, isMinorSubject, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor, lookFor, serviceRefusal, refusedSaid} from "./engine/art.js"; // SNG-401: draw it again without destroying the one they have
-import { drawLabel, labelText, labelSpace, powerSize, applyStyle } from "./engine/maplabel.js";   // M2/D1: one table, one collision space
+import { drawLabel, labelText, labelSpace, powerSize, applyStyle } from "./engine/maplabel.js";
+import { openingFrame } from "./engine/worldmap.js";   // M3: open framed on what the player knows   // M2/D1: one table, one collision space
 import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, makePolarBase, regionExtent, bendRoad, roadNetwork, clipToFrame, routeRoads, makeGroundCost, GROUND_COST } from "./engine/worldglobe.js";
 // ⛔ ROUND 4 — whose ground is this, as things stand today. `realms.js` resolves the SAVE (losses, growth,
 // broken powers, taken holds, your own realm); `influence.js` stays pure and just evaluates.
@@ -197,7 +198,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.19.4";
+const APP_VERSION = "2.19.5";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -13570,6 +13571,9 @@ function sizeRegionCanvas(cv) {
  *  redrawing it at a finer scale. For *moderate* zoom — which is what was asked for — that is the right trade;
  *  the alternative is a 3-second pause every time somebody turns the wheel. Capped at 4× for that reason. */
 let _regionView = { k: 1, cx: 0.5, cy: 0.5, sx: 0, sy: 0, sw: 0, sh: 0 };
+// ⛔ M3 — WHICH REGION THE OPENING FRAME HAS ALREADY BEEN SET FOR. Without this the frame would be recomputed
+// on every repaint and snap the view back the instant the player panned, which is worse than not framing at all.
+let _framedFor = null;
 let _regionOff = null;
 // ⛔ M2/D1 — ONE COLLISION SPACE FOR THE WHOLE MAP, made fresh at the top of each paint. The region map had
 // SIX label passes; four could not see each other at all and the two that avoided collisions kept SEPARATE
@@ -14167,6 +14171,23 @@ function paintRegionMap(regionId) {
   // reds, and the one thing M2 exists to fix quietly does not happen.
   const setPlaceFont = (isHere) => applyStyle(ctx, "place", { here: isHere });
   setPlaceFont(false);
+  // ═════ M3 · OPEN ON WHAT THE PLAYER KNOWS ═════
+  // ✅ AEVI: *"it opens zoomed to the whole region, so Millbrook's knot fills about a fifth of the frame … the
+  // mock opens framed on the known places plus the player's realm, with a margin."*
+  // ⛑ `knownPlaces` IS A REAL FIELD AND NOT A GUESS — Silas's save carries 19 of them, beside `placeMemory`
+  // (22). So "what the player knows" is read, never inferred from where they happen to be standing.
+  // ⚠️ ONCE PER REGION, not per paint: recomputing it would snap the view back the moment anyone panned.
+  if (_framedFor !== regionId) {
+    _framedFor = regionId;
+    const known416 = new Set([...(character?.knownPlaces || []), ...Object.keys(character?.placeMemory || {})]);
+    const mine416 = new Set((character?.holdings || []).map((h) => h?.locationId).filter(Boolean));
+    const pts416 = marks416
+      .filter((m) => m.id === here || known416.has(m.id) || mine416.has(m.id))
+      .map((m) => m.p);
+    const fr416 = openingFrame(pts416, W, H, { maxK: 4 });
+    if (fr416) { _regionView.k = fr416.k; _regionView.cx = fr416.cx; _regionView.cy = fr416.cy; }
+    else { _regionView.k = 1; _regionView.cx = 0.5; _regionView.cy = 0.5; }
+  }
   const rank416 = (m) => (m.id === here ? 0 : m.l.waygate ? 1 : m.l.tier === "site" ? 3 : 2);
   // ⛔ ERIK'S MAP, 2026-10-01 — A LABEL IS PLACED AT THE WIDTH IT IS ACTUALLY DRAWN AT.
   // ⚠️ This measured `m.name` and then drew `m.name + " +N"`. The badge `placeLabels` itself produces was not in

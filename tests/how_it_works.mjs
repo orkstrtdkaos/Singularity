@@ -35553,9 +35553,13 @@ console.log("\n── §411 · the ground map answers the pointer ──");
     && /data-mapsel/.test(A411));
   // ⚠️ CSS pixels are not canvas pixels, and this is the bug that survives a glance: the click lands, just not
   // where you clicked. The canvas may now be laid out wider than its backing store, so the scale is not optional.
+  // ⛑ THE FRAME IS NAMED, NOT PINNED (re-pointed 2026-10-04). This read `cv.width / r.width` literally, and
+  // M1's correction renamed the frame to a CSS-unit variable while keeping exactly the behaviour this check
+  // exists for. THIRD TIME IN ONE DAY that one of my own gates pinned an identifier instead of the rule — the
+  // question is whether the pointer is SCALED by the frame, never what the frame is called.
   check("§411: ⚠️ …and the pointer is scaled into the canvas frame, not read as CSS pixels",
-    /\(e\.clientX - r\.left\) \* \(cv\.width \/ r\.width\)/.test(wire411)
-    && /\(e\.clientY - r\.top\) \* \(cv\.height \/ r\.height\)/.test(wire411));
+    /\(e\.clientX - r\.left\) \* \([\w.()\/ ]+ \/ r\.width\)/.test(wire411)
+    && /\(e\.clientY - r\.top\) \* \([\w.()\/ ]+ \/ r\.height\)/.test(wire411));
 
   /* ---- 2 · ⛔ THE CLUSTERING RULE, DRIVEN ---- */
   check("§411: ⛔ A STACK IS WHAT A CLICK CANNOT SEPARATE — single-link, so a chain is one fan and not three",

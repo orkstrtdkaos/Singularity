@@ -16,6 +16,18 @@
   "next": [],
   "releases": [
     {
+      "version": "2.19.2",
+      "date": "2026-10-05",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "Map labels are the right size again",
+          "summary": "Yesterday's sharpening work made every name and marker on the map half size on a phone.",
+          "detail": "Drawing the maps at the screen's real resolution made the picture twice as detailed — and, because text is measured in pixels, made every place-name, marker and road label come out at half the size it was meant to be. The maps now draw at full resolution AND at the intended size. If the names looked suddenly tiny, that was this, and it is fixed."
+        }
+      ]
+    },
+    {
       "version": "2.19.1",
       "date": "2026-10-05",
       "entries": [

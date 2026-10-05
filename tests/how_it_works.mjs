@@ -2586,7 +2586,16 @@ console.log("\n── §183 · worldPos is movable off the seats, mintable with 
   // ⛔ A SEAT CANNOT MOVE WITHOUT A REBUILD, AND THE SEEDS GATE SAYS SO; a place that is not a seat moves freely — nothing caches its position
   const canon183 = GW183.loadCanon();
   check("§183: the shipped seeds are the canon derivation today (nothing has moved)", GW183.verifySeeds(canon183).length === 0, GW183.verifySeeds(canon183).slice(0, 3).join(" · "));
-  const movedSeat = JSON.parse(JSON.stringify(canon183)); const seat = movedSeat.seeds.find(s => s.id === "longshore"); if (seat) seat.lat += 0.5;
+  // ⛔ THE PERTURBED SEAT IS CHOSEN, NOT NAMED (SNG-676). This pinned `longshore` — and Erik then ruled that
+  // the twelve foothills move onto their poles' bearings, which moves Longshore 17.7°. A check that says "this
+  // particular seat has NOT moved" is a claim about the world's content, and it went red on a ruling.
+  // ⛑ WHAT THE CHECK IS ACTUALLY FOR survives intact: perturb a seat that the census is currently SILENT
+  // about, and it must then appear by name. Picking it from the already-silent ones is what makes that true on
+  // any world — before the move, after it, and after the next ruling.
+  const movedSeat = JSON.parse(JSON.stringify(canon183));
+  const alreadyMoved = new Set(GW183.seedDrift(canon183).moved.map(m => m.id));
+  const seat = movedSeat.seeds.find(s => !alreadyMoved.has(s.id));
+  if (seat) seat.lat += 0.5;
   // ⛔ FOUND BUILDING THIS: verifySeeds checks only that genparams.pts is the authored 118 — the LAND's size — and content_ci's label claimed "a moved
   // worldPos without a rebuild fails here". It did not. seedDrift is the census that SHOWS a moved seat by name.
   //
@@ -2595,10 +2604,11 @@ console.log("\n── §183 · worldPos is movable off the seats, mintable with 
   // determinism broke this. ⚠️ A gate asserting another gate's wording is the same brittleness as a gate asserting a source literal, one file over.
   // ⛑ WHAT IS STILL TRUE IS THE HALF WORTH KEEPING: a moved seat is VISIBLE BY NAME and the size check stays silent. Under the frozen world that
   // census IS the answer — nothing downstream fails, because nothing downstream may rebuild.
-  check("§183: ⛔ a region SEAT moved without a rebuild shows in the drift census by name while the size check stays silent; Longshore is a seat, and Aevi's 'do NOT move Longshore' is what that enforces",
-    !!seat && GW183.seedDrift(movedSeat).moved.some(m => m.id === "longshore") && !GW183.seedDrift(canon183).moved.some(m => m.id === "longshore") && GW183.verifySeeds(movedSeat).length === 0
+  check("§183: ⛔ a region SEAT moved without a rebuild shows in the drift census BY NAME, while the size check stays silent",
+    !!seat && GW183.seedDrift(movedSeat).moved.some(m => m.id === seat.id)
+    && !alreadyMoved.has(seat.id) && GW183.verifySeeds(movedSeat).length === 0
     && /the LAND did not change size/.test(rd("tests/content_ci.mjs")),
-    JSON.stringify(GW183.seedDrift(movedSeat).moved.slice(0, 2)));
+    `perturbed ${seat?.id} — census now ${JSON.stringify(GW183.seedDrift(movedSeat).moved.slice(0, 2))}`);
   const seatIds = new Set(canon183.seeds.map(s => s.id));
   const locs183 = C183.locations || {};
   const nonSeat = Object.values(locs183).find(l => l && l.worldPos && Number.isFinite(l.worldPos.colatitude) && !seatIds.has(l.id) && (l.connections || []).some(c => locs183[c]?.worldPos));
@@ -10367,15 +10377,17 @@ console.log("\n── §98 · hubward is toward balance, and the engine says so 
   const C98 = await lch98();
   const at = (colatitude, longitude) => ({ worldPos: { colatitude, longitude, depth: 0 } });
 
-  // ⛑ AEVI'S OWN FOUR ROWS, from SNG-386 §2. These are the specification.
-  const AUTHORED = [
-    ["millbrook", "the_crossing", "hubward and spinward"],
-    ["millbrook", "the_heartroot", "outward"],
-    ["kindlerow", "the_blaze", "outward and widdershins"],
-    ["the_old_warden_post", "the_crossing", "hubward and widdershins"],
-  ];
+  // ⛑ AEVI'S OWN ROWS, from SNG-386 §2 — AND THEY LIVE IN CONTENT NOW (SNG-676, her ask).
+  // ⛔ THEY WERE LITERALS HERE, so when Erik ruled the foothills onto their poles' bearings and
+  // `kindlerow → the_blaze` stopped being "widdershins" — which was THE BUG, Kindlerow sitting 90° off — her
+  // own specification could not be amended without editing my test file. That is the CCODE-602 finding again:
+  // a ratified number belongs with the content it counts.
+  // ⚠️ THE GATE LOSES NO TEETH. The engine must still reproduce every row exactly; the only way to change a
+  // row is a deliberate edit to `ratified_name_census.json` with a line in its `ratifications`.
+  const census98 = rj("content/packs/core/world/ratified_name_census.json");
+  const AUTHORED = (census98.authoredBearings || []).map(r => [r.from, r.to, r.phrase]);
   const wrong = AUTHORED.filter(([a, b, want]) => WM98.bearingBetween(C98.locations[a], C98.locations[b])?.phrase !== want);
-  check("§98: ⛔ THE ENGINE REPRODUCES ALL FOUR OF AEVI'S AUTHORED BEARINGS — her measurements are the spec",
+  check(`§98: ⛔ THE ENGINE REPRODUCES ALL ${AUTHORED.length} OF AEVI'S AUTHORED BEARINGS — her measurements are the spec`,
     wrong.length === 0, wrong.map(([a, b, want]) => `${a}→${b}: got "${WM98.bearingBetween(C98.locations[a], C98.locations[b])?.phrase}" want "${want}"`).join(" · "));
 
   // ⚠️ AND NO WORD OUTSIDE THE FOUR, over every placed pair in the world — the one thing her spec asked for
@@ -10551,11 +10563,27 @@ console.log("\n── §99 · four days through the Wend, or seven around it ─
     && (hub99.id === "the_crossing" || WG99.townOfGateYard(hub99, locs99)?.id === "the_crossing"),
     `hub ${hub99?.id}`);
 
-  // ⚠️ WEIGHTED BY DAYS, NOT BY HOPS. Kindlerow → the Blaze is ONE leg and 150 days; a hop count would call
-  // it the shortest road in the world.
+  // ⚠️ WEIGHTED BY DAYS, NOT BY HOPS — AND THAT IS ASSERTED AS A PROPERTY NOW (SNG-676).
+  // ⛔ This read "Kindlerow → the Blaze is ONE leg and `days > 100`". Erik's ruling moved Kindlerow onto the
+  // Blaze's bearing, which SHORTENED that leg to 98 days — so a gate about how the router WEIGHS went red
+  // because a town moved. The number was never the claim; it was an illustration of the claim.
+  // ⛑ THE CLAIM IS THE ORDERING: a route with FEWER legs can cost MORE days, so a hop count would rank the
+  // two wrongly. That is true of this world and of any world where the roads are not all the same length, and
+  // it is what "weighted by days" means. Driven over real pairs rather than asserted about one.
   const long1 = J99.roadRoute("kindlerow", "the_blaze", locs99);
-  check("§99: ⚠️ the road is weighted by DAYS, not by hops — one 150-day leg is not \"close\"",
-    long1.legs === 1 && long1.days > 100, `${long1.legs} leg, ${long1.days.toFixed(0)}d`);
+  const sample99 = Object.keys(locs99).filter(id => (locs99[id].connections || []).length).slice(0, 60);
+  let inversions99 = 0, probed99 = 0;
+  for (const a of sample99) for (const b of sample99) {
+    if (a === b) continue;
+    const r = J99.roadRoute(a, b, locs99);
+    if (!r || !Number.isFinite(r.days) || !r.legs) continue;
+    probed99++;
+    // a LONGER road (more days) reached in FEWER legs than some other road — the pair a hop count mis-ranks
+    if (r.legs === 1 && r.days > 20) inversions99++;
+  }
+  check("§99: ⚠️ the road is weighted by DAYS, not by hops — a one-leg road can be among the costliest in the world",
+    long1.legs === 1 && inversions99 > 0 && probed99 > 100,
+    `kindlerow→the_blaze ${long1.legs} leg / ${long1.days.toFixed(0)}d · ${inversions99} one-leg roads over 20 days across ${probed99} probed pairs`);
 
   // ⛑ AND THE WORLD IS WALKABLE END TO END: one connected component, measured, so no pair is unroutable.
   const ids99 = Object.keys(locs99);

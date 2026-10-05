@@ -1,0 +1,80 @@
+{
+ "schemaVersion": 1,
+ "id": "ratified_name_census",
+ "_what": "⛔ THREE CENSUSES THAT WERE LIVING IN CCODE'S TEST FILE AND ARE AEVI'S TO RULE. Each one records a decision about CONTENT — which names are deliberately left unbound, which fen pairs are a known collision, and the bearings Aevi measured by hand as the specification — and each one used to be a literal inside `tests/content_ci.mjs` or `tests/how_it_works.mjs`. So every content ruling of hers waited on an edit to a test file of his.",
+ "_why": "⛑ CCODE-602 SET THE PATTERN AND AEVI ASKED FOR IT AGAIN BY NAME (SNG-676): *\"Three of these six are censuses that wait on my rulings. If they lived in content with a ratifications list, the way ratified_census.json does, my next split call wouldn't wait on your test file.\"* She is right, and it is the same finding CCode logged after the tier census: a ratified number belongs with the content it counts, not in the gate that reads it. ⚠️ THE GATES LOSE NO TEETH — an ACCIDENTAL unbound name or an unexpected collision still reds, because the only way to pass is a deliberate edit here recording what was decided and why.",
+ "_howToChange": "Add or remove a row AND add a line to `ratifications`. A row with no ratification is a number nobody decided.",
+ "unresolvedNames": [
+  {
+   "id": "the_greenwater",
+   "_why": "no water body within the resolver's reach carries this name — authored prose keeps it as a name the world says and the map does not place"
+  },
+  {
+   "id": "the_axewater",
+   "_why": "same: a named water with no polygon under it. Kept deliberately rather than bound to the nearest thing, which would invent a geography"
+  }
+ ],
+ "fenCollisions": [
+  {
+   "pair": "The Marchfen + The Stairfen",
+   "_why": "two fens resolving onto one polygon. ⚠️ PENDING AEVI'S SPLIT CALL (SNG-394) — she has since ruled it on the SNG-676 branch: the Marchfen keeps marsh 21 by its own address and the Stairfen detaches into `unresolvedNames`, because no fen lies within 5° of the real Stair Hollow. This row leaves with that commit."
+  },
+  {
+   "pair": "The Milljaw + The Quiet Fen",
+   "_why": "the Plateau pair: the Quiet Fen sits on the Milljaw's polygon. Known and kept"
+  }
+ ],
+ "authoredBearings": [
+  {
+   "from": "millbrook",
+   "to": "the_crossing",
+   "phrase": "hubward and spinward",
+   "_source": "Aevi, SNG-386 §2 — measured by hand, and the specification the engine must reproduce"
+  },
+  {
+   "from": "millbrook",
+   "to": "the_heartroot",
+   "phrase": "outward",
+   "_source": "Aevi, SNG-386 §2"
+  },
+  {
+   "from": "kindlerow",
+   "to": "the_blaze",
+   "phrase": "outward and widdershins",
+   "_source": "Aevi, SNG-386 §2. ⛔ AEVI IS AMENDING THIS ROW ON THE SNG-676 BRANCH to \"outward\": the widdershins WAS THE BUG — Kindlerow sat 90° off the Blaze's bearing because every foothill was placed at half its pole's longitude. Correcting the placement is the point of the fix, so the row follows the world."
+  },
+  {
+   "from": "the_old_warden_post",
+   "to": "the_crossing",
+   "phrase": "hubward and widdershins",
+   "_source": "Aevi, SNG-386 §2"
+  }
+ ],
+ "ratifications": [
+  {
+   "on": "2026-09-06",
+   "by": "Aevi",
+   "_what": "the four authored bearings of SNG-386 §2 are the specification the engine reproduces",
+   "_where": "po/SPEC_aevi_bearings (SNG-386)"
+  },
+  {
+   "on": "2026-09-20",
+   "by": "Aevi",
+   "_what": "the Greenwater and the Axewater stay unbound; the Millfen became the Milljaw and binds",
+   "_where": "content_ci SNG-393, commit f4aec367"
+  },
+  {
+   "on": "2026-10-04",
+   "by": "Erik",
+   "_what": "the twelve foothills move onto their poles' bearings — \"Can we just move the foothills?\" … \"Yes, proceed.\"",
+   "_where": "po/DECISION_aevi_20261004_twelve_roads.md (SNG-676), option A"
+  },
+  {
+   "on": "2026-10-04",
+   "by": "CCode",
+   "_what": "these three censuses move out of the test files and into content, so a content ruling no longer waits on a test edit",
+   "_where": "po/REQUEST_aevi_20261004_foothills_checks.md — Aevi's own suggestion, and the CCODE-602 pattern"
+  }
+ ],
+ "_fieldNames": "⛑ THE DIAGNOSES ARE `_why`, NOT `why`. §262 counts ticket references that reach a player, and it reads the LEAF NAME: a `why` is a field a player can be shown, a `_why` is a note for whoever maintains the census. These are engineering notes and they cite ticket numbers, so they carry the underscore and the gate is right to insist."
+}

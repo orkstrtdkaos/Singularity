@@ -918,7 +918,11 @@ for (const pack of PACKS) {
   // ⚠️ Aevi's f4aec367 shrank this census the designed way: the Millfen became the Milljaw and binds
   // its southern fragment by signature; the Upper Mire names the northern one. The Choirwater was
   // RENAMED (the Drowned Reach) but not re-anchored, so it stays here until she sites it.
-  const KNOWN_UNRESOLVED = new Set(["the_greenwater", "the_axewater"]);
+  // ⛑ THE CENSUS LIVES IN CONTENT (SNG-676, Aevi's ask — the CCODE-602 pattern). It was a literal here, so
+  // every deliberate unbinding of hers waited on an edit to this file. An ACCIDENTAL unresolved name still
+  // reds: the only way to pass is a row in `ratified_name_census.json` saying which name and why.
+  const nameCensus = rj("content/packs/core/world/ratified_name_census.json");
+  const KNOWN_UNRESOLVED = new Set((nameCensus.unresolvedNames || []).map(r => r.id));
   const unexpected = res.placeNames.unresolved.filter((u) => !KNOWN_UNRESOLVED.has(u.id));
   check("SNG-393: every name binds by signature, or sits in the KNOWN census with its diagnosis",
     unexpected.length === 0, unexpected.map((u) => u.name + " (" + u.reason + ")").join(" · "));
@@ -979,7 +983,9 @@ for (const pack of PACKS) {
   // ⚠️ THE CENSUS TRACKS HER WORK, WHICH IS THE POINT OF A CENSUS: her resite cleared the Terrace/
   // Plateau pair she minted last round and moved the Quiet Fen onto the Milljaw's polygon, so the list
   // turns over rather than shrinking monotonically. Marchfen + Stairfen persist pending her split call.
-  const KNOWN_FEN_COLLISIONS = ["The Marchfen + The Stairfen", "The Milljaw + The Quiet Fen"];
+  // ⛑ ALSO CONTENT NOW. Aevi's SNG-394 split call — the Marchfen keeps marsh 21, the Stairfen detaches — is
+  // a CONTENT decision, and it used to be unmakeable without editing this line.
+  const KNOWN_FEN_COLLISIONS = (rj("content/packs/core/world/ratified_name_census.json").fenCollisions || []).map(r => r.pair);
   const fenCollide = collisions(res.placeNames.fens, "polyIndex");
   check("SNG-394: fen collisions match the KNOWN census exactly — both names reported, neither dropped, Aevi decides",
     JSON.stringify(fenCollide) === JSON.stringify(KNOWN_FEN_COLLISIONS),
@@ -1189,12 +1195,29 @@ for (const pack of PACKS) {
     check("SNG-404 §2: the placer reproduces Aevi's hand-authored bearings for every basis the GROUND alone decides",
       selfPlacing.every((b) => medOf(b) !== null && medOf(b) <= 2),
       selfPlacing.map((b) => `${b} ${medOf(b)}°`).join(", "));
-    // ⚠️ AND THE CONVERSE IS ASSERTED, because it is the finding: a referent-needing basis CANNOT be
-    // placed from the corpus as it stands. If this ever passes, `toward` has been authored and the
-    // reproduction gate above should grow to cover `road` too.
-    check("SNG-404 §2: …and a referent-needing basis CANNOT be reproduced without one — the corpus records `which road` only in prose",
-      medOf("road") !== null && medOf("road") > 20,
-      `road median ${medOf("road")}° across ${(byBasis.road || []).length} placements`);
+    /* ⚠️ THE CONVERSE RETIRES, BECAUSE ITS PREMISE IS GONE (SNG-676).
+     * It asserted `medOf("road") > 20` and said why: *"a referent-needing basis CANNOT be placed from the
+     * corpus as it stands — the corpus records which road only in prose. If this ever passes, `toward` has
+     * been authored and the reproduction gate above should grow to cover `road` too."*
+     * ⛔ MEASURED 2026-10-04: **29 of 29 road-basis sites carry `toward`**, and every one of them has a
+     * `localMap`. The authoring the old check was waiting for is DONE. ⛑ So the number it pinned is no longer
+     * measuring what its own sentence claims — it is measuring how far Aevi's HAND-AUTHORED road bearings sit
+     * from what the placer computes, which falls every time she re-places a layout with the builder (she
+     * re-placed two on the foothills branch and it went 20+ → 13). That is a convergence, not a rule, and a
+     * gate that pins a convergence goes red when the work succeeds.
+     * ⛑ WHAT REPLACES IT IS THE AUTHORING CLAIM THE OLD COMMENT WAS ACTUALLY ASKING FOR — asserted over the
+     * corpus, true on both worlds, and red the moment a road site is authored without saying which road. The
+     * OBEDIENCE half is already driven below, against a fixture, where it belongs. */
+    const roadSites404 = [];
+    for (const id of ids) for (const s of (layouts404[id].sites || [])) if (s.basis === "road") roadSites404.push({ id, s });
+    const noReferent404 = roadSites404.filter(({ s }) => !s.toward);
+    check("SNG-404 §2: ⛔ every road-basis site says WHICH road — the authoring the converse check was waiting for",
+      roadSites404.length > 0 && noReferent404.length === 0,
+      `${roadSites404.length - noReferent404.length} of ${roadSites404.length} carry \`toward\`` +
+      (noReferent404.length ? ` — missing: ${noReferent404.slice(0, 4).map((x) => `${x.id}/${x.s.id}`).join(", ")}` : ""));
+    // ⛑ REPORTED, NOT ASSERTED: how far the placer sits from her hand-authored road bearings. It falls as she
+    // re-places layouts with the builder, so it is a number to watch and not a line to hold.
+    console.log(`  note  SNG-404 §2 CONVERGENCE: road median ${medOf("road")}° across ${(byBasis.road || []).length} placement(s) — the gap between Aevi's hand bearings and the placer, which closes as layouts are re-placed`);
 
     // ⛔ A REFERENT, WHEN GIVEN, IS OBEYED — which is what makes the authoring ask worth making.
     const roads = { river: null, uphill: null, roads: [{ to: "a", bearing: -88 }, { to: "b", bearing: 91 }, { to: "c", bearing: 12 }] };

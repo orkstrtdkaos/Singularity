@@ -201,7 +201,7 @@ const LEDGER = [
     how: "engine/localbuilder.mjs assembles a question from MEASURED facts and throws the model's geometry away — the answer supplies basis and why, the measurements decide where",
     gates: ["SNG-404 §2: the prompt states the MEASURED ground and forbids the model to invent geometry",
             "SNG-404 §2: the placer reproduces Aevi's hand-authored bearings for every basis the GROUND alone decides",
-            "SNG-404 §2: …and a referent-needing basis CANNOT be reproduced without one — the corpus records `which road` only in prose",
+            "SNG-404 §2: ⛔ every road-basis site says WHICH road — the authoring the converse check was waiting for",
             "SNG-404 §2: a `toward` referent is obeyed, and its absence is REPORTED as a guess rather than hidden",
             "SNG-404 §2: a proposal the ground cannot support is DROPPED with a reason — no dock in a town with no river",
             "SNG-404 §2: …and everything that DOES ship carries both reasons — what the text argued and what the geometry did"],

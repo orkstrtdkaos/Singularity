@@ -37524,6 +37524,67 @@ console.log("\n── §424 · undeath: three kinds, a cocoon, and two roads tha
     "✅ Erik: 'we need a way to heal undead — by MAINTENANCE for the body, or OTHER POWERS for the spirit'");
 }
 
+/* ══════════ §425 · A PLACE'S POSITION IS AUTHORED TWICE, AND THE TWO STORES MUST AGREE ══════════ */
+// ⚠️ WRITTEN BEFORE THE EDIT IT PROTECTS, AND IT PASSES TODAY. Aevi's SNG-676 decision proposes moving the
+// twelve foothills onto their poles' bearings. Checking her plan I found the thing that would have gone wrong
+// quietly: a foothill's position is authored in TWO places, in TWO DIFFERENT CONVENTIONS.
+//
+//   `content/packs/valley/locations/<id>.json` → `worldPos`  — { colatitude, longitude }, longitude in 0–360
+//   `content/packs/core/world/terrain.json`    → `seats.foothill_<id>` — [ latitude, longitude, id ],
+//                                                 latitude SIGNED (= colatitude − 90), longitude WRAPPED to ±180
+//
+// ⛔ CHANGE ONE AND THE REGION FIELD VOTES FROM THE OLD SPOT WHILE THE MAP DRAWS THE NEW ONE — a place that
+// IS somewhere and whose ground answers to somewhere else, with nothing anywhere going red.
+// ⚠️ AND THE CONVENTIONS ARE THE TRAP, NOT THE DUPLICATION: Aevi's option-A table gives distances as
+// COLATITUDE, so copying her `Kindlerow 30.5` into the terrain seat as `−30.5` would land it 29° from where
+// she means. Twenty-four numbers across two files is exactly the size of edit where that happens once.
+// ⛑ SO THE GATE ASSERTS THE RELATION, NOT THE VALUES. It says nothing about WHERE a foothill is — it is
+// silent on the whole question Erik has yet to rule — and it goes red the moment the two stores disagree.
+console.log("\n── §425 · one place, two position stores, one answer ──");
+{
+  const terr425 = rj("content/packs/core/world/terrain.json");
+  const { readdirSync: rdd425 } = await import("node:fs");
+  const wrap425 = (d) => { let x = Number(d); while (x > 180) x -= 360; while (x < -180) x += 360; return x; };
+  const recs425 = new Map();
+  for (const f of rdd425(new URL("../content/packs/valley/locations/", import.meta.url))) {
+    if (!f.endsWith(".json")) continue;
+    const doc = rj(`content/packs/valley/locations/${f}`);
+    for (const l of (Array.isArray(doc) ? doc : doc.locations || [doc])) if (l?.id) recs425.set(l.id, l);
+  }
+  const seats425 = Object.entries(terr425.seats || {}).filter(([k]) => /^foothill_/.test(k));
+  const disagree = [], orphan = [];
+  for (const [key, v] of seats425) {
+    const id = v?.[2]; const rec = id ? recs425.get(id) : null;
+    if (!rec?.worldPos || !Number.isFinite(Number(rec.worldPos.longitude))) { orphan.push(key); continue; }
+    const dLon = Math.abs(wrap425(Number(rec.worldPos.longitude) - Number(v[1])));
+    const dLat = Math.abs(Number(v[0]) - (Number(rec.worldPos.colatitude) - 90));
+    if (dLon > 0.5 || dLat > 0.5) disagree.push(`${id} Δlon ${dLon.toFixed(1)} Δlat ${dLat.toFixed(1)}`);
+  }
+  check(`§425: ⛔ EVERY SEAT AND ITS RECORD AGREE — ${seats425.length} foothill seat(s), longitude on one meridian and latitude = colatitude − 90`,
+    seats425.length >= 12 && disagree.length === 0 && orphan.length === 0,
+    [...disagree, ...orphan.map((o) => `${o}: no record`)].slice(0, 6).join(" · ") || "clean");
+  // ⛑ AND THE GATE CAN GO RED. A check over two stores that happen to agree is worth nothing unless a
+  // disagreement is proven to fail it — which is the same self-test the wiring audit's guards carry.
+  check("§425: ⛑ …and it CATCHES a half-edit — the same comparison refuses a seat moved without its record",
+    (() => {
+      const [, v] = seats425[0] || [];
+      if (!v) return false;
+      const rec = recs425.get(v[2]);
+      const moved = [Number(v[0]), wrap425(Number(v[1]) + 40), v[2]];      // somebody edited terrain.json only
+      const dLon = Math.abs(wrap425(Number(rec.worldPos.longitude) - Number(moved[1])));
+      return dLon > 0.5;
+    })());
+  // ⚠️ IT SAYS NOTHING ABOUT WHERE THEY ARE. The bearings are Erik's to rule (SNG-676) and this gate is
+  // deliberately silent on them — asserting today's wrong bearings would freeze the bug, and asserting the
+  // corrected ones would redden until a ruling that may never come.
+  // ⚠️ AND THERE IS DELIBERATELY NO THIRD CHECK HERE. My first cut asserted that this section is SILENT on
+  // the bearings, by grepping its own source for `betweenCrossingAnd` — which (a) matched its own comment
+  // block, the §419 self-reading trap, and (b) was gating the ABSENCE of a rule, which my own notes forbid
+  // twice over. ⛑ The silence is a decision, and a decision belongs in a comment. The bearings are Erik's
+  // to rule (SNG-676): asserting today's would freeze the bug, and asserting the corrected ones would redden
+  // until a ruling that may never come. When he rules, the bearing gate goes in beside this one.
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

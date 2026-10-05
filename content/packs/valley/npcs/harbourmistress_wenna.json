@@ -1,0 +1,126 @@
+{
+ "schemaVersion": 1,
+ "id": "harbourmistress_wenna",
+ "name": "Wenna Saltsdown",
+ "tier": "regional",
+ "level": 16,
+ "role": "Harbourmistress of the Saltmarch: runs the stilt-town's salt and fish trade and asks nothing about where you are going",
+ "people": "saltfolk",
+ "gender": "woman",
+ "pronouns": "she/her",
+ "sex": "female",
+ "romanceEligible": false,
+ "homeLocation": "the_saltmarch",
+ "communityId": "pocket_the_saltmarch.the_saltmarch",
+ "domains": {
+  "primary": "horizon",
+  "secondary": "bargainers",
+  "tertiary": "mason"
+ },
+ "spectrum": {
+  "chaos_order": -0.2,
+  "concrete_abstract": -0.4
+ },
+ "assistTags": [
+  "bargain",
+  "study",
+  "travel"
+ ],
+ "appearance": "Salt-cracked hands, a sou'wester, a ledger tied to her belt with net-cord, and a voice that carries across water.",
+ "personality": {
+  "warmth": 0.5,
+  "trust": 0.4,
+  "candor": 0.6,
+  "patience": 0.5
+ },
+ "voiceHints": "Plain-spoken, practical, names the price of salt by the tide.",
+ "wants": "That the Saltmarch stay too useful to everyone for anyone to take.",
+ "fears": "The salt-pans flooding in a storm year.",
+ "knowledge": [
+  "Who has bought salt and how much, and what that says about their plans",
+  "Every smuggler's landing on the western sea"
+ ],
+ "reactsToReputation": {
+  "honest": "gives you the honest price",
+  "greedy": "gives you the other price",
+  "evasive": "asks nothing, which is the point",
+  "any": "names the tide's price of salt"
+ },
+ "questSeeds": [
+  "Someone is buying enough salt to preserve an army",
+  "A boat came in with no crew and full nets"
+ ],
+ "gear": [
+  "a harbour-ledger",
+  "a gutting knife"
+ ],
+ "purse": {
+  "crystal": 200
+ },
+ "closed": [],
+ "title": "Harbourmistress of the Saltmarch",
+ "_sng670": "Pass 2: the leader of the pocket's ruling power.",
+ "vocation": "BROKER",
+ "fullName": "Wenna Brine Saltsdown",
+ "subAttributes": {
+  "strength": 12,
+  "agility": 11,
+  "reason": 12,
+  "insight": 13,
+  "presence": 13,
+  "rapport": 13,
+  "craft": 12,
+  "wits": 14
+ },
+ "physicality": "ADULT, middle-aged. Weathered and broad. WHAT CATCHES THE EYE: salt-cracked hands and a ledger tied on with net-cord.",
+ "abilities": [
+  {
+   "abilityId": "rivercraft",
+   "level": 2,
+   "why": "horizon primary: boats, currents and weather"
+  },
+  {
+   "abilityId": "way_sense",
+   "level": 2,
+   "why": "knows every landing on the western sea"
+  },
+  {
+   "abilityId": "land_knowledge",
+   "level": 2,
+   "why": "commands by knowing what others do not"
+  },
+  {
+   "abilityId": "folded_pace",
+   "level": 1,
+   "why": "a gutting knife, fast"
+  },
+  {
+   "abilityId": "keen_appraisal",
+   "level": 2,
+   "why": "mason tertiary: values a cargo at a glance"
+  },
+  {
+   "abilityId": "worth_the_work",
+   "level": 2,
+   "why": "prices salt by the tide"
+  },
+  {
+   "abilityId": "sound_read",
+   "level": 1,
+   "why": "names a boat's or a stilt's weak point by touch"
+  },
+  {
+   "abilityId": "known_way",
+   "level": 1,
+   "why": "the western sea's roads"
+  }
+ ],
+ "intimacyNotes": "ELIGIBLE: twice widowed by the sea, wry about it, and not looking.",
+ "nameKnown": "world",
+ "aliases": [
+  "Wenna",
+  "the Harbourmistress"
+ ],
+ "_reactsWhy": "tag -> response, from corpus tags (NPC_AUTHORING_TEMPLATE #4)",
+ "_authoredWhy": "SNG-670 pass 2 (Erik 2026-10-04: 'make sure you are following the npc authoring fully: full schema, levels, powers'). Full sheet per NPC_AUTHORING_TEMPLATE: tier and level at or above the rung floor, eight sub-attributes, crafts by id from the leader's three traditions with a reason each, reputation as tags."
+}

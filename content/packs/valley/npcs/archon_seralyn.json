@@ -1,0 +1,138 @@
+{
+ "schemaVersion": 1,
+ "id": "archon_seralyn",
+ "name": "Seralyn of Highmere",
+ "tier": "heroic",
+ "level": 31,
+ "role": "Archon of Highmere: rules the elven sky city drifting over the Pattern Reach's high ground, and decides when its stair touches the earth",
+ "people": "elven",
+ "gender": "woman",
+ "pronouns": "she/her",
+ "sex": "female",
+ "romanceEligible": false,
+ "homeLocation": "highmere",
+ "communityId": "pocket_highmere.highmere",
+ "domains": {
+  "primary": "figurist",
+  "secondary": "seraphic",
+  "tertiary": "syllogist"
+ },
+ "spectrum": {
+  "concrete_abstract": 0.7,
+  "dark_light": 0.4,
+  "emotional_logical": 0.3
+ },
+ "assistTags": [
+  "study",
+  "talk",
+  "lead"
+ ],
+ "appearance": "Very tall, white-robed, with eyes that seem to be looking at the idea of you rather than at you.",
+ "personality": {
+  "warmth": 0.3,
+  "trust": 0.3,
+  "candor": 0.6,
+  "patience": 0.7
+ },
+ "voiceHints": "Calm, faintly bored, treats conversation as a proof she has already finished.",
+ "wants": "To keep Highmere aloft without anyone understanding how.",
+ "fears": "That the Figurists are right about what holds it up.",
+ "knowledge": [
+  "Every Figurist theory of how Highmere flies, and which are close",
+  "Where Highmere will drift next season"
+ ],
+ "reactsToReputation": {
+  "scholar": "debates you, and enjoys losing a point",
+  "dismissive": "lets the stair rise while you are on it",
+  "seeking": "answers one question",
+  "any": "treats the conversation as a proof she has already finished"
+ },
+ "questSeeds": [
+  "Highmere has dropped twenty feet this year and the Archon has ordered no one to mention it",
+  "A Figurist has climbed the stair and refuses to come down"
+ ],
+ "gear": [
+  "a white staff",
+  "a chart of the drift"
+ ],
+ "purse": {
+  "crystal": 200
+ },
+ "closed": [],
+ "title": "Archon of Highmere",
+ "_sng670": "Pass 2: the leader of the pocket's ruling power.",
+ "vocation": "READER",
+ "fullName": "Seralyn Aethrin Highmere",
+ "subAttributes": {
+  "strength": 8,
+  "agility": 12,
+  "reason": 17,
+  "insight": 17,
+  "presence": 16,
+  "rapport": 10,
+  "craft": 12,
+  "wits": 14
+ },
+ "physicality": "ADULT, ageless. Very tall, white-robed. WHAT CATCHES THE EYE: eyes that seem to look at the idea of you.",
+ "abilities": [
+  {
+   "abilityId": "pattern_sense",
+   "level": 3,
+   "why": "figurist primary: sees the pattern under everything"
+  },
+  {
+   "abilityId": "the_true_figure",
+   "level": 3,
+   "why": "reads a scene's figure at a glance"
+  },
+  {
+   "abilityId": "walking_figure",
+   "level": 2,
+   "why": "sends a made figure to do her errands below"
+  },
+  {
+   "abilityId": "drawn_ascent",
+   "level": 3,
+   "why": "Highmere stays up; she can follow it"
+  },
+  {
+   "abilityId": "cutting_figure",
+   "level": 2,
+   "why": "a line across a target, imposed"
+  },
+  {
+   "abilityId": "named_exclusion",
+   "level": 2,
+   "why": "the stair keeps out whom she names"
+  },
+  {
+   "abilityId": "shielding_light",
+   "level": 2,
+   "why": "seraphic secondary: the sky-wardens' light"
+  },
+  {
+   "abilityId": "weighed_word",
+   "level": 2,
+   "why": "speaks with authority she does not explain"
+  },
+  {
+   "abilityId": "contradiction",
+   "level": 2,
+   "why": "syllogist tertiary: exposes the flaw in your argument"
+  },
+  {
+   "abilityId": "known_price",
+   "level": 1,
+   "why": "knows what Highmere's sinking will cost"
+  }
+ ],
+ "intimacyNotes": "NOT AVAILABLE: the city is sinking, and she has decided nothing else is worth her attention until it stops.",
+ "nameKnown": "world",
+ "aliases": [
+  "Seralyn",
+  "the Archon",
+  "the Archon of Highmere"
+ ],
+ "_reactsWhy": "tag -> response, from corpus tags (NPC_AUTHORING_TEMPLATE #4)",
+ "_authoredWhy": "SNG-670 pass 2 (Erik 2026-10-04: 'make sure you are following the npc authoring fully: full schema, levels, powers'). Full sheet per NPC_AUTHORING_TEMPLATE: tier and level at or above the rung floor, eight sub-attributes, crafts by id from the leader's three traditions with a reason each, reputation as tags."
+}

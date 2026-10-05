@@ -1,0 +1,132 @@
+{
+ "schemaVersion": 1,
+ "id": "delvewarden_hesk",
+ "name": "Hesk Stonecount",
+ "tier": "regional",
+ "level": 20,
+ "role": "Delvewarden of the Long Delve: keeps the nine-hundred-year tunnel's heading and the stone calendar the Hourkeepers trust",
+ "people": "dwarven",
+ "gender": "woman",
+ "pronouns": "she/her",
+ "sex": "female",
+ "romanceEligible": false,
+ "homeLocation": "long_delve",
+ "communityId": "pocket_long_delve.long_delve",
+ "domains": {
+  "primary": "hourkeeper",
+  "secondary": "mason",
+  "tertiary": "syllogist"
+ },
+ "spectrum": {
+  "chaos_order": 0.6,
+  "concrete_abstract": -0.4,
+  "space_time": 0.4
+ },
+ "assistTags": [
+  "study",
+  "guard",
+  "teach"
+ ],
+ "appearance": "Grey-braided, spectacled, chalk on her fingers, and a measuring rod she uses as a walking stick and occasionally as an argument.",
+ "personality": {
+  "warmth": 0.3,
+  "trust": 0.4,
+  "candor": 0.9,
+  "patience": 0.95
+ },
+ "voiceHints": "Speaks slowly and in round numbers of centuries. Corrects your dates.",
+ "wants": "To see the tunnel reach whatever it was dug toward, and to know what that was.",
+ "fears": "That the founders' heading was wrong.",
+ "knowledge": [
+  "The Delve's heading, to the finger's breadth",
+  "Which Hourkeeper calendars disagree with the stone one, and by how much"
+ ],
+ "reactsToReputation": {
+  "patient": "talks to you as an equal",
+  "hasty": "answers in centuries until you go away",
+  "scholar": "shows you the stone calendar",
+  "any": "corrects your dates"
+ },
+ "questSeeds": [
+  "The tunnel's end is three years away and the founders' notes about what lies there are missing",
+  "An Hourkeeper wants the stone calendar moved to the Kept Reach"
+ ],
+ "gear": [
+  "a brass measuring rod",
+  "the Delve's day-book"
+ ],
+ "purse": {
+  "crystal": 200
+ },
+ "closed": [],
+ "title": "Delvewarden of the Long Delve",
+ "_sng670": "Pass 2: the leader of the pocket's ruling power.",
+ "vocation": "KEEPER",
+ "fullName": "Hesk Ottildr Stonecount",
+ "subAttributes": {
+  "strength": 11,
+  "agility": 8,
+  "reason": 15,
+  "insight": 15,
+  "presence": 11,
+  "rapport": 9,
+  "craft": 13,
+  "wits": 12
+ },
+ "physicality": "ADULT, past middle age. Small, grey-braided, spectacled. WHAT CATCHES THE EYE: chalk on her fingers and a brass measuring rod.",
+ "abilities": [
+  {
+   "abilityId": "hour_sense",
+   "level": 2,
+   "why": "hourkeeper primary: knows duration truly"
+  },
+  {
+   "abilityId": "kept_count",
+   "level": 2,
+   "why": "names the remaining time on anything already running"
+  },
+  {
+   "abilityId": "long_watch",
+   "level": 2,
+   "why": "nine hundred years of digging is a long watch"
+  },
+  {
+   "abilityId": "hourcraft",
+   "level": 2,
+   "why": "holds a moment exactly"
+  },
+  {
+   "abilityId": "wrong_moment",
+   "level": 1,
+   "why": "strikes when you cannot answer, rarely"
+  },
+  {
+   "abilityId": "stone_read",
+   "level": 2,
+   "why": "mason secondary: reads the tunnel face by touch"
+  },
+  {
+   "abilityId": "tremor_sense",
+   "level": 2,
+   "why": "feels a collapse before it comes"
+  },
+  {
+   "abilityId": "case_closed",
+   "level": 1,
+   "why": "syllogist tertiary: a dig is a proof, and she closes the argument"
+  },
+  {
+   "abilityId": "known_price",
+   "level": 1,
+   "why": "knows what the next yard of tunnel costs"
+  }
+ ],
+ "intimacyNotes": "NOT AVAILABLE: widowed forty years, and the Delve is the only thing she is still married to.",
+ "nameKnown": "world",
+ "aliases": [
+  "Hesk",
+  "the Delvewarden"
+ ],
+ "_reactsWhy": "tag -> response, from corpus tags (NPC_AUTHORING_TEMPLATE #4)",
+ "_authoredWhy": "SNG-670 pass 2 (Erik 2026-10-04: 'make sure you are following the npc authoring fully: full schema, levels, powers'). Full sheet per NPC_AUTHORING_TEMPLATE: tier and level at or above the rung floor, eight sub-attributes, crafts by id from the leader's three traditions with a reason each, reputation as tags."
+}

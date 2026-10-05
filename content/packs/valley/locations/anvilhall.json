@@ -1,0 +1,61 @@
+{
+ "schemaVersion": 1,
+ "id": "anvilhall",
+ "name": "The Anvilhall",
+ "regionId": "pocket_anvilhall",
+ "communityId": "anvilhall",
+ "spectrum": {
+  "concrete_abstract": -0.4,
+  "mechanical_spiritual": -0.3
+ },
+ "poleIntensity": {
+  "concrete": 0.4,
+  "mechanical": 0.3
+ },
+ "tags": [
+  "settlement",
+  "pocket"
+ ],
+ "connections": [
+  "gearsflat"
+ ],
+ "descriptionSeed": "The greatest of the dwarven holds: a mountain hollowed into halls east of Gearsflat, its forges fed by the same deep heat the Gearlands pipe for their engines. Gearsflat buys its steel. Almost nobody from Gearsflat has been inside.",
+ "loreRefs": [],
+ "npcsPresent": [],
+ "encounterFlavor": "smiths, ore-haulers, and dwarven wardens who count everyone who passes and write the number down",
+ "dangerLevel": 2,
+ "questSeeds": [],
+ "map": {
+  "x": 390,
+  "y": 192
+ },
+ "encounterSeeds": [],
+ "axisVector": [
+  0,
+  0,
+  0,
+  0,
+  -0.4,
+  -0.3,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0
+ ],
+ "axisVectorNote": "Derived from authored spectrum against world_node_atlas.axisOrder (SNG-180).",
+ "substrateDensity": 0.6,
+ "worldPos": {
+  "colatitude": 44.25,
+  "longitude": 69,
+  "depth": 0
+ },
+ "worldPosNote": "SNG-670: placed on the world's own mountain (Erik 2026-10-04: \"they live in pockets across the world, in the typical places of their kind\").",
+ "people": "dwarven",
+ "tier": "settlement",
+ "parentId": null,
+ "role": "waypoint",
+ "appearance": "A mountain face cut into a gate three storeys high, smoke from a hundred vents along the ridge, and a switchback road crowded with ore-carts going up empty and coming down heavy.",
+ "_sng670": "A pocket: a centre with its own ground, the way a foothill is. Its people are not a tradition; its ruling power and leader come in pass 2."
+}

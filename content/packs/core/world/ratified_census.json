@@ -2,31 +2,64 @@
   "_note": "⛔ THE RATIFIED CENSUS — how many places of each tier the world is AGREED to have. It is a ratified decision, not a measurement: `content_ci` fails when the world disagrees with this file, so a place added or retyped by accident is caught, and a place added on purpose is a deliberate edit HERE saying so.",
   "_whyItLivesHere": "⚠️ IT USED TO LIVE IN `tests/content_ci.mjs`, as the literals 25 / 96 / 37 — which meant Erik's ruling sat in CCode's test file, and every time Aevi authored a place her push was blocked until he moved a number for her. It is content's count, ratified by Erik, so it belongs beside the content. Moving it here costs the gate nothing: an accidental change still fails, because the only way to pass is to come here and write down what was ratified.",
   "_howToChangeIt": "Erik rules the number; whoever lands the content updates this file in the SAME commit as the places it counts, with his words in `ratifications`. Never edit it to make a red gate green — that is the one thing this file exists to prevent.",
-
   "tiers": {
     "region": 25,
-    "settlement": 100,
-    "site": 38
+    "settlement": 117,
+    "site": 41
   },
-
   "ratifications": [
     {
       "when": "2026-09",
       "by": "Erik",
-      "became": { "region": 25, "settlement": 96, "site": 14 },
+      "became": {
+        "region": 25,
+        "settlement": 96,
+        "site": 14
+      },
       "why": "SNG-392/398/396 — the hierarchy settled: regions, the settlements inside them, and the sites that hang off a parent."
     },
     {
       "when": "2026-10",
       "by": "Erik",
-      "became": { "region": 25, "settlement": 96, "site": 37 },
+      "became": {
+        "region": 25,
+        "settlement": 96,
+        "site": 37
+      },
       "why": "SNG-396 — places authored in play became sites with parents of their own."
     },
     {
       "when": "2026-10",
       "by": "Erik",
-      "became": { "region": 25, "settlement": 100, "site": 38 },
+      "became": {
+        "region": 25,
+        "settlement": 100,
+        "site": 38
+      },
       "why": "Aevi's list of what was left, 2026-10-07: 'Write the places that don't exist yet: the Last Cairn and Cairnsend, the Churn, Cassa's port, and a seat for Harrow.' Erik: 'Proceed'. Cairnsend, the Churn, Loose Moorings and the Fitting House are settlements; the Last Cairn is a site of Cairnsend."
+    },
+    {
+      "when": "2026-10-04",
+      "by": "Erik",
+      "became": {
+        "region": 25,
+        "settlement": 115,
+        "site": 38
+      },
+      "why": "SNG-670 — the peoples' pockets, fifteen settlements each with its own ground. Erik: \"They live in pockets across the world. In the typical places of their kind. Dwarves have mountain holds and underground kingdoms. Elves have sky cities and forest territories. And don't forget to populate the seas and oceans.\" On the fifteen sites: \"Yes, proceed.\" On this number: \"Go on the settlement count and increment it when the narrative makes new ones.\"",
+      "standing": "Erik 2026-10-04: \"increment it when the narrative makes new ones.\" A place the story makes that is kept into content (promoted from a save, or authored from play) moves this count in the same commit, with the beat that made it named here. This is a standing ratification for places the narrative makes, not a licence to edit the count to quiet a gate: an ACCIDENTAL place still fails.",
+      "_landedAfter_20261007": "Shifted by the five places of 2026-10-07 (+4 settlements, +1 site), which reached origin first."
+    },
+    {
+      "when": "2026-10-04",
+      "by": "Erik",
+      "became": {
+        "region": 25,
+        "settlement": 117,
+        "site": 41
+      },
+      "why": "SNG-671 — the deep places: Sunfold and the Hanging Weather under kept suns (settlements), the Long Noon, the Orchard Gone Out and the First Bore (sites). Erik, asked whether to add them: \"Yes to both.\"",
+      "_landedAfter_20261007": "Shifted by the five places of 2026-10-07 (+4 settlements, +1 site), which reached origin first."
     }
   ]
 }

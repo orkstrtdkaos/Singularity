@@ -1,0 +1,61 @@
+{
+ "schemaVersion": 1,
+ "id": "the_long_noon",
+ "name": "the Long Noon",
+ "regionId": "pocket_sunfold",
+ "communityId": "sunfold",
+ "parentId": "sunfold",
+ "tier": "site",
+ "tags": [
+  "site",
+  "underground",
+  "kept-sun"
+ ],
+ "connections": [
+  "sunfold"
+ ],
+ "descriptionSeed": "A kept sun gone wild. Its cycle failed generations ago and it has not set since; under it the growth has never stopped. A jungle in a cavern, hot and wet and roaring, wild nanite blooming the way it does on the Greenmarch but with no winter and no night to check it. Sunfold's west wall is the border, and the Sunwardens cut it back every season. It comes back every season.",
+ "appearance": "A wall of green filling a cavern from floor to roof, lit from above by a sun that never moves: vines as thick as towers, flowers the size of carts, and mist steaming off everything. No shadows anywhere, because the light comes straight down and never stops.",
+ "encounterFlavor": "Sunfold cutting-crews with long blades and longer patience; things in the canopy that grew up without ever seeing a night; a Rootkin pilgrim who came down to see what life does when nothing stops it, and has not decided whether to leave",
+ "loreRefs": [
+  "the_deep_below"
+ ],
+ "questSeeds": [],
+ "dangerLevel": 4,
+ "spectrum": {
+  "death_life": 0.8,
+  "chaos_order": -0.6,
+  "dark_light": 0.5
+ },
+ "axisVector": [
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  -0.6,
+  0.5,
+  0.8,
+  0,
+  0,
+  0
+ ],
+ "poleIntensity": {
+  "life": 0.8,
+  "chaos": 0.6,
+  "light": 0.5
+ },
+ "substrateDensity": 0.2,
+ "map": {
+  "x": 440,
+  "y": 282
+ },
+ "worldPos": {
+  "colatitude": 84.53,
+  "longitude": 140.97,
+  "depth": -2
+ },
+ "_sng671": "A deep site (Erik 2026-10-04, the deep below).",
+ "worldPosNote": "SNG-671: inside its parent's ground (CCODE-466: a site is within a day of its parent), 2 strata down."
+}

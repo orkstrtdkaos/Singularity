@@ -1,0 +1,62 @@
+{
+ "schemaVersion": 1,
+ "id": "the_saltmarch",
+ "name": "The Saltmarch",
+ "regionId": "pocket_the_saltmarch",
+ "communityId": "the_saltmarch",
+ "spectrum": {
+  "chaos_order": -0.15,
+  "concrete_abstract": -0.2
+ },
+ "poleIntensity": {
+  "chaos": 0.15,
+  "concrete": 0.2
+ },
+ "tags": [
+  "settlement",
+  "pocket"
+ ],
+ "connections": [
+  "the_figure_works",
+  "stair_hollow"
+ ],
+ "descriptionSeed": "A stilt-town over the shallows of the western sea: salt-pans, net-lofts, and boats for streets. The Saltmarch fishes, salts and sells to anyone, and asks nothing about where you are going.",
+ "loreRefs": [],
+ "npcsPresent": [],
+ "encounterFlavor": "saltfolk, net-menders, and buyers from the Pattern Reach who want salt and no questions",
+ "dangerLevel": 2,
+ "questSeeds": [],
+ "map": {
+  "x": 200,
+  "y": 245
+ },
+ "encounterSeeds": [],
+ "axisVector": [
+  0,
+  0,
+  0,
+  0,
+  -0.2,
+  0,
+  -0.15,
+  0,
+  0,
+  0,
+  0,
+  0
+ ],
+ "axisVectorNote": "Derived from authored spectrum against world_node_atlas.axisOrder (SNG-180).",
+ "substrateDensity": 0.25,
+ "worldPos": {
+  "colatitude": 61.94,
+  "longitude": 290.78,
+  "depth": 0
+ },
+ "worldPosNote": "SNG-670: placed on the world's own sea (Erik 2026-10-04: \"they live in pockets across the world, in the typical places of their kind\").",
+ "people": "saltfolk",
+ "tier": "settlement",
+ "parentId": null,
+ "role": "waypoint",
+ "appearance": "Houses on stilts over grey shallows, white salt-pans in square rows, nets drying on every rail, and boats tied up where streets would be.",
+ "_sng670": "A pocket: a centre with its own ground, the way a foothill is. Its people are not a tradition; its ruling power and leader come in pass 2."
+}

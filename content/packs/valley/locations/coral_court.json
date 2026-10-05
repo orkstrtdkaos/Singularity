@@ -1,0 +1,61 @@
+{
+ "schemaVersion": 1,
+ "id": "coral_court",
+ "name": "The Coral Court",
+ "regionId": "pocket_coral_court",
+ "communityId": "coral_court",
+ "spectrum": {
+  "emotional_logical": -0.2,
+  "chaos_order": 0.2
+ },
+ "poleIntensity": {
+  "emotional": 0.2,
+  "order": 0.2
+ },
+ "tags": [
+  "settlement",
+  "pocket"
+ ],
+ "connections": [
+  "thinwater"
+ ],
+ "descriptionSeed": "A merfolk court in the reefs of the Inner Sea, the largest water inside the world's ring. Its envoys come ashore at Thinwater on the full tide and leave on the next, and the Mavens keep a pool in the Crossing for them.",
+ "loreRefs": [],
+ "npcsPresent": [],
+ "encounterFlavor": "merfolk envoys, reef-gardeners, and land-traders up to their waists in the meeting-ring",
+ "dangerLevel": 2,
+ "questSeeds": [],
+ "map": {
+  "x": 350,
+  "y": 180
+ },
+ "encounterSeeds": [],
+ "axisVector": [
+  -0.2,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0.2,
+  0,
+  0,
+  0,
+  0,
+  0
+ ],
+ "axisVectorNote": "Derived from authored spectrum against world_node_atlas.axisOrder (SNG-180).",
+ "substrateDensity": 0.3,
+ "worldPos": {
+  "colatitude": 49.75,
+  "longitude": 349.5,
+  "depth": 0
+ },
+ "worldPosNote": "SNG-670: placed on the world's own sea (Erik 2026-10-04: \"they live in pockets across the world, in the typical places of their kind\").",
+ "people": "merfolk",
+ "tier": "settlement",
+ "parentId": null,
+ "role": "waypoint",
+ "appearance": "A reef city just under the surface, its coral spires breaking the water at low tide, lit from below, with a ring of standing stones in the shallows where land-folk are met.",
+ "_sng670": "A pocket: a centre with its own ground, the way a foothill is. Its people are not a tradition; its ruling power and leader come in pass 2."
+}

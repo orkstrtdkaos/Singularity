@@ -1,0 +1,61 @@
+{
+ "schemaVersion": 1,
+ "id": "the_first_bore",
+ "name": "the First Bore",
+ "regionId": "the_gearlands",
+ "communityId": "enginewright.serviceways",
+ "parentId": "the_service_ways",
+ "tier": "site",
+ "tags": [
+  "site",
+  "underground",
+  "bore"
+ ],
+ "connections": [
+  "the_service_ways"
+ ],
+ "descriptionSeed": "The head of the oldest harvest bore, where the Service Ways end in a capped shaft wide enough to lose a town in. The cap is iron and older than anything the Enginewrights have built. It is warm to the touch, and on quiet days it hums. The Boreborn of the Hanging Weather keep it, and the Wrights keep watch on the Boreborn, and neither will say what the other is afraid of. Below the cap, the bore goes down toward what is left of the core.",
+ "appearance": "A circular cavern at the bottom of the Service Ways, its floor almost entirely one great iron cap, riveted and banded, older than any work around it. Galleries ring the walls with the dead machinery of the harvest. Heat rises off the cap like a summer road, and the air shimmers.",
+ "encounterFlavor": "Boreborn cap-keepers checking the bands with hammers and listening to the ring; an Enginewright observer who logs every visitor; a sound from under the cap, very rarely, that everyone present remembers and nobody describes the same way",
+ "loreRefs": [
+  "the_deep_below"
+ ],
+ "questSeeds": [],
+ "dangerLevel": 5,
+ "spectrum": {
+  "mechanical_spiritual": -0.6,
+  "destruction_creation": -0.4,
+  "space_time": 0.4
+ },
+ "axisVector": [
+  0,
+  0,
+  0,
+  0,
+  0,
+  -0.6,
+  0,
+  0,
+  0,
+  0.4,
+  0,
+  -0.4
+ ],
+ "poleIntensity": {
+  "mechanical": 0.6,
+  "destruction": 0.4,
+  "time": 0.4
+ },
+ "substrateDensity": 0.7,
+ "map": {
+  "x": 460,
+  "y": 145
+ },
+ "worldPos": {
+  "colatitude": 86.02,
+  "longitude": 146.02,
+  "depth": -6
+ },
+ "_sng671": "A deep site (Erik 2026-10-04, the deep below).",
+ "worldPosNote": "SNG-671: inside its parent's ground (CCODE-466: a site is within a day of its parent), 6 strata down."
+}

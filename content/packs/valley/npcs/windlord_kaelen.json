@@ -1,0 +1,143 @@
+{
+ "schemaVersion": 1,
+ "id": "windlord_kaelen",
+ "name": "Kaelen Ashwing",
+ "tier": "heroic",
+ "level": 26,
+ "role": "Windlord of Windspire: rules the elven sky city chained to the eastern peaks, and flies the anchor-lines himself",
+ "people": "elven",
+ "gender": "man",
+ "pronouns": "he/him",
+ "sex": "male",
+ "romanceEligible": false,
+ "homeLocation": "windspire",
+ "communityId": "pocket_windspire.windspire",
+ "domains": {
+  "primary": "horizon",
+  "secondary": "somatic",
+  "tertiary": "marcher"
+ },
+ "spectrum": {
+  "concrete_abstract": 0.3,
+  "violence_peace": -0.2,
+  "body_mind": -0.3
+ },
+ "assistTags": [
+  "move",
+  "scout",
+  "lead",
+  "strike"
+ ],
+ "appearance": "Wiry, wind-burned, hair cropped short for the glider, and a scar across both palms from the anchor-chains.",
+ "personality": {
+  "warmth": 0.6,
+  "trust": 0.4,
+  "candor": 0.7,
+  "patience": 0.3
+ },
+ "voiceHints": "Breezy, quick, restless on the ground. Treats danger as weather.",
+ "wants": "To fly the longest anchor-line in the world and come back.",
+ "fears": "A chain snapping in the night.",
+ "knowledge": [
+  "The state of every anchor-chain",
+  "Which Somatic climbers have tried the chains and how far they got"
+ ],
+ "reactsToReputation": {
+  "brave": "takes you up the chain-lift himself",
+  "reckless": "likes you, and keeps an eye on you",
+  "cautious": "is bored",
+  "any": "asks if you have flown"
+ },
+ "questSeeds": [
+  "The eastern anchor-chain has been filed halfway through",
+  "A Somatic climber has reached Windspire from below and wants to fight the Windlord"
+ ],
+ "gear": [
+  "a glider-harness",
+  "chain-gloves"
+ ],
+ "purse": {
+  "crystal": 200
+ },
+ "closed": [],
+ "title": "Windlord of Windspire",
+ "_sng670": "Pass 2: the leader of the pocket's ruling power.",
+ "vocation": "WALKER",
+ "fullName": "Kaelen Vaeris Ashwing",
+ "subAttributes": {
+  "strength": 13,
+  "agility": 18,
+  "reason": 11,
+  "insight": 12,
+  "presence": 14,
+  "rapport": 13,
+  "craft": 11,
+  "wits": 15
+ },
+ "physicality": "ADULT. Wiry, wind-burned, hair cropped for the glider. WHAT CATCHES THE EYE: chain-scars across both palms.",
+ "abilities": [
+  {
+   "abilityId": "stepped_span",
+   "level": 2,
+   "why": "horizon primary: flight as a bridge made one pace at a time"
+  },
+  {
+   "abilityId": "spanwork",
+   "level": 3,
+   "why": "covers the anchor-lines faster than anyone"
+  },
+  {
+   "abilityId": "long_reach",
+   "level": 3,
+   "why": "the glider-rider's strike from height"
+  },
+  {
+   "abilityId": "road_ahead",
+   "level": 2,
+   "why": "keeps moving or falls"
+  },
+  {
+   "abilityId": "kept_distance",
+   "level": 2,
+   "why": "keeps the ground far away"
+  },
+  {
+   "abilityId": "way_sense",
+   "level": 2,
+   "why": "knows the winds"
+  },
+  {
+   "abilityId": "skydancer",
+   "level": 3,
+   "why": "somatic secondary: acrobatics on the chains"
+  },
+  {
+   "abilityId": "perfect_motion",
+   "level": 2,
+   "why": "every move finished"
+  },
+  {
+   "abilityId": "second_wind",
+   "level": 2,
+   "why": "climbs back up"
+  },
+  {
+   "abilityId": "edge",
+   "level": 2,
+   "why": "marcher tertiary: twin blades"
+  },
+  {
+   "abilityId": "advance",
+   "level": 1,
+   "why": "dives first"
+  }
+ ],
+ "intimacyNotes": "ELIGIBLE, carefully: he falls for people who are not afraid of heights, and they tend to fall in other ways too.",
+ "nameKnown": "world",
+ "aliases": [
+  "Kaelen",
+  "the Windlord"
+ ],
+ "_reactsWhy": "tag -> response, from corpus tags (NPC_AUTHORING_TEMPLATE #4)",
+ "_authoredWhy": "SNG-670 pass 2 (Erik 2026-10-04: 'make sure you are following the npc authoring fully: full schema, levels, powers'). Full sheet per NPC_AUTHORING_TEMPLATE: tier and level at or above the rung floor, eight sub-attributes, crafts by id from the leader's three traditions with a reason each, reputation as tags."
+}

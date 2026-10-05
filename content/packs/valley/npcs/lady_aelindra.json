@@ -1,0 +1,143 @@
+{
+ "schemaVersion": 1,
+ "id": "lady_aelindra",
+ "name": "Aelindra of the Evenwood",
+ "tier": "heroic",
+ "level": 32,
+ "role": "Lady of the Evenwood: rules the elven forest territory where the great western forest meets the Deepwood, and keeps the oldest agreement with the ents",
+ "people": "elven",
+ "gender": "woman",
+ "pronouns": "she/her",
+ "sex": "female",
+ "romanceEligible": false,
+ "homeLocation": "evenwood",
+ "communityId": "pocket_evenwood.evenwood",
+ "domains": {
+  "primary": "rootkin",
+  "secondary": "numinous",
+  "tertiary": "threnodist"
+ },
+ "spectrum": {
+  "death_life": 0.6,
+  "mechanical_spiritual": 0.4,
+  "violence_peace": 0.3
+ },
+ "assistTags": [
+  "mend",
+  "study",
+  "lead",
+  "track"
+ ],
+ "appearance": "Tall, ageless, silver-haired with leaves caught in it on purpose, dressed in green that seems to change with the light under the trees.",
+ "personality": {
+  "warmth": 0.5,
+  "trust": 0.4,
+  "candor": 0.4,
+  "patience": 0.95
+ },
+ "voiceHints": "Unhurried, gently amused, says less than she knows and lets you notice.",
+ "wants": "That the Deepwood stays open to her people even if the Rootbound seal it to everyone else.",
+ "fears": "The agreement with the ents being said aloud.",
+ "knowledge": [
+  "The Deepwood Moot's argument, from both sides",
+  "Which of the ents is older than her, and which she is older than"
+ ],
+ "reactsToReputation": {
+  "kind": "walks with you a while",
+  "callous": "the paths stop being paths",
+  "beast-friend": "lets you see the ents",
+  "any": "is gently amused"
+ },
+ "questSeeds": [
+  "The Rootbound want the Evenwood to side with them on sealing the wood",
+  "An ent has stopped walking and is putting down roots in the Evenwood's hall"
+ ],
+ "gear": [
+  "a living staff that is still growing",
+  "a lantern of slow light"
+ ],
+ "purse": {
+  "crystal": 200
+ },
+ "closed": [],
+ "title": "Lady of the Evenwood",
+ "_sng670": "Pass 2: the leader of the pocket's ruling power.",
+ "vocation": "ATTENDANT",
+ "fullName": "Aelindra Ithilwen Evenwood",
+ "subAttributes": {
+  "strength": 9,
+  "agility": 14,
+  "reason": 13,
+  "insight": 18,
+  "presence": 16,
+  "rapport": 15,
+  "craft": 11,
+  "wits": 13
+ },
+ "physicality": "ADULT, ageless. Tall, silver-haired with leaves caught in it on purpose. WHAT CATCHES THE EYE: green that changes with the light.",
+ "abilities": [
+  {
+   "abilityId": "speaking_grove",
+   "level": 3,
+   "why": "rootkin primary: the old trees answer her"
+  },
+  {
+   "abilityId": "quickening",
+   "level": 3,
+   "why": "the Evenwood heals what comes into it"
+  },
+  {
+   "abilityId": "graftlife",
+   "level": 2,
+   "why": "regrows what was lost"
+  },
+  {
+   "abilityId": "root_road",
+   "level": 3,
+   "why": "moves through the forest with the forest"
+  },
+  {
+   "abilityId": "green_claim",
+   "level": 2,
+   "why": "the living wood strikes for her"
+  },
+  {
+   "abilityId": "lifesense",
+   "level": 2,
+   "why": "knows every living thing in her wood"
+  },
+  {
+   "abilityId": "planted_years",
+   "level": 2,
+   "why": "plants a tree with a question in it"
+  },
+  {
+   "abilityId": "steady_soul",
+   "level": 2,
+   "why": "numinous secondary: older than her doubts"
+  },
+  {
+   "abilityId": "hallowed_ground",
+   "level": 2,
+   "why": "the root-hall is consecrated"
+  },
+  {
+   "abilityId": "carried_name",
+   "level": 2,
+   "why": "threnodist tertiary: holds how a person actually is"
+  },
+  {
+   "abilityId": "the_true_feeling",
+   "level": 2,
+   "why": "hears what is actually felt"
+  }
+ ],
+ "intimacyNotes": "NOT AVAILABLE: she has outlived three loves and keeps their names in the eldest tree.",
+ "nameKnown": "world",
+ "aliases": [
+  "Aelindra",
+  "the Lady of the Evenwood"
+ ],
+ "_reactsWhy": "tag -> response, from corpus tags (NPC_AUTHORING_TEMPLATE #4)",
+ "_authoredWhy": "SNG-670 pass 2 (Erik 2026-10-04: 'make sure you are following the npc authoring fully: full schema, levels, powers'). Full sheet per NPC_AUTHORING_TEMPLATE: tier and level at or above the rung floor, eight sub-attributes, crafts by id from the leader's three traditions with a reason each, reputation as tags."
+}

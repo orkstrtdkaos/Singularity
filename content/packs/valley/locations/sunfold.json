@@ -1,0 +1,69 @@
+{
+ "schemaVersion": 1,
+ "id": "sunfold",
+ "name": "Sunfold",
+ "regionId": "pocket_sunfold",
+ "communityId": "sunfold",
+ "spectrum": {
+  "death_life": 0.5,
+  "dark_light": 0.4,
+  "chaos_order": 0.3
+ },
+ "poleIntensity": {
+  "life": 0.5,
+  "light": 0.4,
+  "order": 0.3
+ },
+ "tags": [
+  "settlement",
+  "pocket",
+  "underground",
+  "kept-sun"
+ ],
+ "connections": [
+  "the_measured_engine",
+  "the_service_ways",
+  "the_long_noon"
+ ],
+ "descriptionSeed": "A farming town two strata down, under a kept sun. The vault is a day's walk across, and the sun in its roof rises and sets on a cycle somebody set before the Transition and nobody since has been able to change. Wheat, orchards, bees that have never seen a sky. The Sunwardens keep the sun's works and the town keeps the Sunwardens, and between them they feed half the Near Under. The rock under your feet is warm: the old harvest bore passes a mile east, and that is where the light comes from.",
+ "loreRefs": [
+  "the_deep_below"
+ ],
+ "npcsPresent": [],
+ "encounterFlavor": "sun-browned farmers who have never seen the sky and do not miss it; Sunwardens climbing the long ladders to the works at dawn; traders down from the Near Under buying grain; and every few years, someone from the surface who weeps the first time the sun comes up",
+ "dangerLevel": 1,
+ "questSeeds": [],
+ "map": {
+  "x": 440,
+  "y": 282
+ },
+ "encounterSeeds": [],
+ "axisVector": [
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0.3,
+  0.4,
+  0.5,
+  0,
+  0,
+  0
+ ],
+ "axisVectorNote": "Derived from authored spectrum against world_node_atlas.axisOrder (SNG-180).",
+ "substrateDensity": 0.45,
+ "worldPos": {
+  "colatitude": 84.5,
+  "longitude": 141,
+  "depth": -2
+ },
+ "worldPosNote": "SNG-671: under a kept sun, 2 strata down (Erik 2026-10-04, the deep below: \"true sunlight equivalence in some areas in the underground\").",
+ "people": "sunfolk",
+ "tier": "settlement",
+ "parentId": null,
+ "role": "waypoint",
+ "appearance": "A vast vault of pale rock, the far walls lost in haze, and in its roof a sun: a disc too bright to look at, ringed with old dark machinery. Below it, fields in strips, orchards, a river, a walled town of whitewashed stone with a clock-tower that strikes the sun's hours. At dusk the sun dims to amber and then to nothing, and the stars are lamps on the farmhouses.",
+ "_sng671": "A deep pocket: a centre with its own ground, under a kept sun. Its ruling power and leader are authored with it."
+}

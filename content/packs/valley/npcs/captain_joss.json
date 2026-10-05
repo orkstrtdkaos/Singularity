@@ -1,0 +1,133 @@
+{
+ "schemaVersion": 1,
+ "id": "captain_joss",
+ "name": "Joss Hullmarrow",
+ "tier": "regional",
+ "level": 22,
+ "role": "Captain-Elect of the Tidewrought: elected for one season to steer the city of lashed hulls, and re-elected seven times",
+ "people": "saltfolk",
+ "gender": "man",
+ "pronouns": "he/him",
+ "sex": "male",
+ "romanceEligible": false,
+ "homeLocation": "tidewrought",
+ "communityId": "pocket_tidewrought.tidewrought",
+ "domains": {
+  "primary": "horizon",
+  "secondary": "churnfolk",
+  "tertiary": "bargainers"
+ },
+ "spectrum": {
+  "chaos_order": -0.4,
+  "concrete_abstract": -0.2,
+  "violence_peace": -0.1
+ },
+ "assistTags": [
+  "travel",
+  "bargain",
+  "lead",
+  "strike"
+ ],
+ "appearance": "Sun-dark and grinning, a captain's coat with no two buttons alike, and a tide-chart tattooed down one forearm.",
+ "personality": {
+  "warmth": 0.7,
+  "trust": 0.5,
+  "candor": 0.6,
+  "patience": 0.4
+ },
+ "voiceHints": "Cheerful, salty, talks about the swell like a lover. Everyone is 'mate'.",
+ "wants": "To take the Tidewrought round the whole world ocean once before he is voted out.",
+ "fears": "Calm water. A city of hulls that stops moving starts to rot.",
+ "knowledge": [
+  "Every coast the Tidewrought has traded on, and what they owe",
+  "Where the leviathans are running this season"
+ ],
+ "reactsToReputation": {
+  "brave": "offers you a berth",
+  "reckless": "offers you a berth and a warning",
+  "cautious": "offers you passage, nothing more",
+  "any": "calls you 'mate'"
+ },
+ "questSeeds": [
+  "The city's council wants to anchor for good and Joss wants one more voyage",
+  "A Tidewrought ship came back from the far north with a passenger no one remembers taking aboard"
+ ],
+ "gear": [
+  "a captain's speaking-trumpet",
+  "a tide-chart he drew himself"
+ ],
+ "purse": {
+  "crystal": 200
+ },
+ "closed": [],
+ "title": "Captain-Elect of the Tidewrought",
+ "_sng670": "Pass 2: the leader of the pocket's ruling power.",
+ "vocation": "COMMANDER",
+ "fullName": "Joss Tamsin Hullmarrow",
+ "subAttributes": {
+  "strength": 13,
+  "agility": 14,
+  "reason": 11,
+  "insight": 12,
+  "presence": 15,
+  "rapport": 15,
+  "craft": 11,
+  "wits": 14
+ },
+ "physicality": "ADULT. Sun-dark, grinning, sea-steady. WHAT CATCHES THE EYE: a tide-chart tattooed down one forearm.",
+ "abilities": [
+  {
+   "abilityId": "rivercraft",
+   "level": 3,
+   "why": "horizon primary: the ocean is a road"
+  },
+  {
+   "abilityId": "way_sense",
+   "level": 2,
+   "why": "has never once lost his heading at sea"
+  },
+  {
+   "abilityId": "long_reach",
+   "level": 2,
+   "why": "a cutlass at boarding distance"
+  },
+  {
+   "abilityId": "road_ahead",
+   "level": 2,
+   "why": "one more voyage"
+  },
+  {
+   "abilityId": "made_crossing",
+   "level": 2,
+   "why": "finds a passage where there is none"
+  },
+  {
+   "abilityId": "catch_as_catch_can",
+   "level": 2,
+   "why": "churnfolk secondary: improvises everything"
+  },
+  {
+   "abilityId": "probability_tilt",
+   "level": 1,
+   "why": "the swell favours him"
+  },
+  {
+   "abilityId": "misdirect",
+   "level": 1,
+   "why": "every vote is a little bit of theatre"
+  },
+  {
+   "abilityId": "the_way_out",
+   "level": 1,
+   "why": "always knows the way off a sinking deck"
+  }
+ ],
+ "intimacyNotes": "ELIGIBLE: has a sweetheart in every harbour and has told every one of them about the others.",
+ "nameKnown": "world",
+ "aliases": [
+  "Joss",
+  "the Captain-Elect"
+ ],
+ "_reactsWhy": "tag -> response, from corpus tags (NPC_AUTHORING_TEMPLATE #4)",
+ "_authoredWhy": "SNG-670 pass 2 (Erik 2026-10-04: 'make sure you are following the npc authoring fully: full schema, levels, powers'). Full sheet per NPC_AUTHORING_TEMPLATE: tier and level at or above the rung floor, eight sub-attributes, crafts by id from the leader's three traditions with a reason each, reputation as tags."
+}

@@ -1,0 +1,61 @@
+{
+ "schemaVersion": 1,
+ "id": "leviathan_road",
+ "name": "The Leviathan Road",
+ "regionId": "pocket_leviathan_road",
+ "communityId": "leviathan_road",
+ "spectrum": {
+  "violence_peace": -0.2,
+  "chaos_order": -0.2
+ },
+ "poleIntensity": {
+  "violence": 0.2,
+  "chaos": 0.2
+ },
+ "tags": [
+  "settlement",
+  "pocket"
+ ],
+ "connections": [
+  "the_blaze"
+ ],
+ "descriptionSeed": "The migration road of the great leviathans across the world ocean, and the people who follow them: riders who live on the backs of beasts the size of towns, and come to land only to trade and to fight.",
+ "loreRefs": [],
+ "npcsPresent": [],
+ "encounterFlavor": "leviathan-riders, merfolk outriders, and the very brave",
+ "dangerLevel": 3,
+ "questSeeds": [],
+ "map": {
+  "x": 680,
+  "y": 360
+ },
+ "encounterSeeds": [],
+ "axisVector": [
+  0,
+  0,
+  0,
+  -0.2,
+  0,
+  0,
+  -0.2,
+  0,
+  0,
+  0,
+  0,
+  0
+ ],
+ "axisVectorNote": "Derived from authored spectrum against world_node_atlas.axisOrder (SNG-180).",
+ "substrateDensity": 0.1,
+ "worldPos": {
+  "colatitude": 95.76,
+  "longitude": 178.71,
+  "depth": 0
+ },
+ "worldPosNote": "SNG-670: placed on the world's own sea (Erik 2026-10-04: \"they live in pockets across the world, in the typical places of their kind\").",
+ "people": "merfolk",
+ "tier": "settlement",
+ "parentId": null,
+ "role": "waypoint",
+ "appearance": "A line of vast backs breaking the ocean surface, huts and harness-rigging on them, and riders standing on the swell as if it were a road.",
+ "_sng670": "A pocket: a centre with its own ground, the way a foothill is. Its people are not a tradition; its ruling power and leader come in pass 2."
+}

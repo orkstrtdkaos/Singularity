@@ -1,0 +1,128 @@
+{
+ "schemaVersion": 1,
+ "id": "the_orchardman",
+ "name": "Tobin Ashgrove",
+ "tier": "notable",
+ "level": 6,
+ "role": "Afterling, the Orchardman of the Orchard Gone Out: was tending the kept sun's orchard the day it went out, and has gone on pruning the dead trees ever since",
+ "people": "human",
+ "gender": "man",
+ "pronouns": "he/him",
+ "sex": "male",
+ "romanceEligible": false,
+ "homeLocation": "the_orchard_gone_out",
+ "communityId": "umbral.market",
+ "afterling": {
+  "door": "unattended",
+  "since": "nobody agrees, and he is not sure himself",
+  "note": "The orchard died standing when its sun went out, and so did he: the cold took him in the first winter without light. He did not stop. A habit became a life, as it did for Owain Fellowes at the Palelands sluice."
+ },
+ "domains": {
+  "primary": "rootkin",
+  "secondary": "hourkeeper",
+  "tertiary": "umbral"
+ },
+ "spectrum": {
+  "death_life": -0.3,
+  "dark_light": -0.4,
+  "space_time": 0.4
+ },
+ "assistTags": [
+  "tend",
+  "recall",
+  "comfort"
+ ],
+ "appearance": "A thin old man in an orchard-keeper's smock gone grey with stone dust, pruning shears always in hand, and a ladder he carries from tree to tree. He blinks at lamplight like someone remembering it.",
+ "personality": {
+  "warmth": 0.7,
+  "trust": 0.5,
+  "candor": 0.7,
+  "patience": 1
+ },
+ "voiceHints": "Talks about the trees as if they will fruit next season. Tells the time by a sun that is not there: 'it's near noon', in the dark.",
+ "wants": "For the sun to come back on. He believes it can, because of how it went out.",
+ "fears": "Nothing much, any more, except the Umbrals' silence when he asks them about that day.",
+ "knowledge": [
+  "That the sun did not dwindle: it went out in one breath, the way a lamp does when someone turns it down, and he heard the works in the roof stop",
+  "That Umbrals walked the rows the next day without lamps and said nothing to him, and have said nothing since",
+  "Which trees were the sweetest, and he will tell you"
+ ],
+ "reactsToReputation": {
+  "kind": "shows you the tree he likes best",
+  "honest": "tells you how the sun went out",
+  "thief": "asks you to put the stone fruit back",
+  "any": "offers you a stone apple, apologising that it is not ripe"
+ },
+ "_reactsWhy": "tag -> response, from corpus tags (NPC_AUTHORING_TEMPLATE #4)",
+ "questSeeds": [
+  "He has found a key-hole in the dead sun's machinery and asks you to climb up to it",
+  "A Sunwarden from Sunfold has come to look at the dead sun, and he wants to know if she can light it"
+ ],
+ "gear": [
+  "pruning shears",
+  "an orchard ladder",
+  "a pocketful of stone fruit"
+ ],
+ "purse": {
+  "crystal": 2
+ },
+ "closed": [],
+ "title": "the Orchardman",
+ "vocation": "ATTENDANT",
+ "fullName": "Tobin Hale Ashgrove",
+ "nameKnown": "few",
+ "aliases": [
+  "the Orchardman"
+ ],
+ "_nameKnownWhy": "The Umbrals of the Lampless Market know his name, and the old traders. Everyone else calls him the Orchardman.",
+ "subAttributes": {
+  "strength": 8,
+  "agility": 9,
+  "reason": 10,
+  "insight": 13,
+  "presence": 8,
+  "rapport": 12,
+  "craft": 11,
+  "wits": 9
+ },
+ "physicality": "ADULT; old when he died, and that was long ago. Thin, stooped, stone dust on his smock. WHAT CATCHES THE EYE: the pruning shears, and the way he blinks at a lamp as if he remembers it.",
+ "intimacyNotes": "NOT AVAILABLE: his wife picked these trees with him. He keeps her row as she left it.",
+ "abilities": [
+  {
+   "abilityId": "greenlore",
+   "level": 1,
+   "why": "rootkin primary: an orchard-keeper's whole knowledge, now about dead trees"
+  },
+  {
+   "abilityId": "speaking_grove",
+   "level": 1,
+   "why": "he still talks to the trees; they stopped answering"
+  },
+  {
+   "abilityId": "lifesense",
+   "level": 1,
+   "why": "knows when anything living walks the rows, which is rarely"
+  },
+  {
+   "abilityId": "hour_sense",
+   "level": 2,
+   "why": "hourkeeper secondary: still keeps the sun's hours to the minute"
+  },
+  {
+   "abilityId": "kept_count",
+   "level": 1,
+   "why": "knows exactly how long since the sun went out, and will not say it aloud"
+  },
+  {
+   "abilityId": "long_watch",
+   "level": 1,
+   "why": "has watched the same rows for longer than anyone has watched anything"
+  },
+  {
+   "abilityId": "darksight",
+   "level": 1,
+   "why": "umbral tertiary: the dark taught him to see in it"
+  }
+ ],
+ "_authoredWhy": "SNG-674 (Erik 2026-10-04: 'there should be Afterlings in various places underground'). Full sheet per NPC_AUTHORING_TEMPLATE; `afterling` in SNG-649's shape, awaiting its reader (C19)."
+}

@@ -1,0 +1,68 @@
+{
+ "schemaVersion": 1,
+ "id": "the_hanging_weather",
+ "name": "the Hanging Weather",
+ "regionId": "pocket_the_hanging_weather",
+ "communityId": "the_hanging_weather",
+ "spectrum": {
+  "space_time": -0.4,
+  "chaos_order": -0.2,
+  "concrete_abstract": -0.3
+ },
+ "poleIntensity": {
+  "space": 0.4,
+  "concrete": 0.3,
+  "chaos": 0.2
+ },
+ "tags": [
+  "settlement",
+  "pocket",
+  "underground",
+  "kept-sun"
+ ],
+ "connections": [
+  "the_flesh_temple",
+  "deepmark"
+ ],
+ "descriptionSeed": "A vault so high it keeps its own weather. The kept sun in its roof is so far up that cloud forms under it, and it rains on the town below: real rain, from a real sky, two strata under the Given Land. The Boreborn live here, descended from the crews who worked the harvest bores, and they keep the caps on the old shafts still. They read the vault's weather the way surface sailors read the sea, because a storm in a closed sky has nowhere to go.",
+ "loreRefs": [
+  "the_deep_below"
+ ],
+ "npcsPresent": [],
+ "encounterFlavor": "Boreborn cap-keepers with harvest tattoos on their forearms; weather-readers on the high galleries arguing about tomorrow's storm; dwarves from Deepmark who come up to buy rain; and lightning, once a season, that nobody under the ground is ready for",
+ "dangerLevel": 2,
+ "questSeeds": [],
+ "map": {
+  "x": 200,
+  "y": 560
+ },
+ "encounterSeeds": [],
+ "axisVector": [
+  0,
+  0,
+  0,
+  0,
+  -0.3,
+  0,
+  -0.2,
+  0,
+  0,
+  -0.4,
+  0,
+  0
+ ],
+ "axisVectorNote": "Derived from authored spectrum against world_node_atlas.axisOrder (SNG-180).",
+ "substrateDensity": 0.45,
+ "worldPos": {
+  "colatitude": 82.5,
+  "longitude": 108,
+  "depth": -2
+ },
+ "worldPosNote": "SNG-671: under a kept sun, 2 strata down (Erik 2026-10-04, the deep below: \"true sunlight equivalence in some areas in the underground\").",
+ "people": "boreborn",
+ "tier": "settlement",
+ "parentId": null,
+ "role": "waypoint",
+ "appearance": "A town of tall narrow stone houses clinging to the foot of a vault wall that climbs out of sight into cloud. Far above, a kept sun shows as a bright smear through the overcast. Rope-walks and lifts climb the wall to old harvest galleries. Gutters everywhere, rain-barrels on every roof, and the constant sound of water.",
+ "_sng671": "A deep pocket: a centre with its own ground, under a kept sun. Its ruling power and leader are authored with it."
+}

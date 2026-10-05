@@ -1,0 +1,62 @@
+{
+ "schemaVersion": 1,
+ "id": "greywater_deep",
+ "name": "The Greywater Deep",
+ "regionId": "pocket_greywater_deep",
+ "communityId": "greywater_deep",
+ "spectrum": {
+  "death_life": -0.2,
+  "emotional_logical": -0.25
+ },
+ "poleIntensity": {
+  "death": 0.2,
+  "emotional": 0.25
+ },
+ "tags": [
+  "settlement",
+  "pocket"
+ ],
+ "connections": [
+  "the_hollowing",
+  "the_old_warden_post"
+ ],
+ "descriptionSeed": "A grey sea off the Palelands, and the selkies who keep it. They come ashore at the Ashwardens' cairns to sing for the drowned, and take their skins back before morning.",
+ "loreRefs": [],
+ "npcsPresent": [],
+ "encounterFlavor": "selkies, Ashwarden cairn-keepers, and mourners who come to hear the singing",
+ "dangerLevel": 2,
+ "questSeeds": [],
+ "map": {
+  "x": 570,
+  "y": 330
+ },
+ "encounterSeeds": [],
+ "axisVector": [
+  -0.25,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  -0.2,
+  0,
+  0,
+  0
+ ],
+ "axisVectorNote": "Derived from authored spectrum against world_node_atlas.axisOrder (SNG-180).",
+ "substrateDensity": 0.2,
+ "worldPos": {
+  "colatitude": 62.05,
+  "longitude": 71.9,
+  "depth": 0
+ },
+ "worldPosNote": "SNG-670: placed on the world's own sea (Erik 2026-10-04: \"they live in pockets across the world, in the typical places of their kind\").",
+ "people": "selkie",
+ "tier": "settlement",
+ "parentId": null,
+ "role": "waypoint",
+ "appearance": "A grey harbour of seal-rocks and kelp, a ring of cairns on the shore, and grey heads in the water watching anyone who comes down to the tide-line.",
+ "_sng670": "A pocket: a centre with its own ground, the way a foothill is. Its people are not a tradition; its ruling power and leader come in pass 2."
+}

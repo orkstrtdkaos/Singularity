@@ -1,0 +1,149 @@
+{
+ "schemaVersion": 1,
+ "id": "thane_borrik",
+ "name": "Thane Borrik Anvilheart",
+ "tier": "heroic",
+ "level": 28,
+ "role": "Thane of the Anvilhall: keeps the greatest of the dwarven forges and sells Gearsflat its steel at a price he sets once a decade",
+ "people": "dwarven",
+ "gender": "man",
+ "pronouns": "he/him",
+ "sex": "male",
+ "romanceEligible": false,
+ "homeLocation": "anvilhall",
+ "communityId": "pocket_anvilhall.anvilhall",
+ "domains": {
+  "primary": "enginewright",
+  "secondary": "mason",
+  "tertiary": "marcher"
+ },
+ "spectrum": {
+  "concrete_abstract": -0.6,
+  "mechanical_spiritual": -0.4,
+  "chaos_order": 0.4
+ },
+ "assistTags": [
+  "craft",
+  "guard",
+  "bargain",
+  "lead"
+ ],
+ "appearance": "Broad as a door, beard braided with iron rings, forge-scars to the elbow, and an apron he wears to council because he came straight from the anvil.",
+ "personality": {
+  "warmth": 0.4,
+  "trust": 0.3,
+  "candor": 0.8,
+  "patience": 0.5
+ },
+ "voiceHints": "Says what a thing weighs before he says what it is. Laughs from the belly, rarely, and means it.",
+ "wants": "To have the Anvilhall's steel in every good blade at the Crossing, and his name on none of them.",
+ "fears": "A forge going cold in his lifetime.",
+ "knowledge": [
+  "Which Gearsflat workshop is buying more steel than it can use",
+  "What the deep heat under the mountain is doing, and that it is changing"
+ ],
+ "reactsToReputation": {
+  "honest": "names you a fair price and keeps it for life",
+  "reliable": "lets you past the market hall, which almost nobody gets",
+  "greedy": "doubles the price and tells you why",
+  "any": "weighs you before he greets you"
+ },
+ "questSeeds": [
+  "The mountain's heat is rising and Borrik does not know why",
+  "A Gearlands engineer wants into the deep forges and will pay anything"
+ ],
+ "gear": [
+  "a forge-hammer he made at sixteen",
+  "a ring of the Anvilhall's keys"
+ ],
+ "purse": {
+  "crystal": 200
+ },
+ "closed": [],
+ "title": "Thane of the Anvilhall",
+ "_sng670": "Pass 2: the leader of the pocket's ruling power.",
+ "vocation": "MAKER",
+ "fullName": "Borrik Durgasson Anvilheart",
+ "subAttributes": {
+  "strength": 17,
+  "agility": 9,
+  "reason": 12,
+  "insight": 11,
+  "presence": 15,
+  "rapport": 10,
+  "craft": 18,
+  "wits": 11
+ },
+ "physicality": "ADULT. Broad as a door, short and immensely heavy. WHAT CATCHES THE EYE: forge-scars to the elbow, and an apron worn to council.",
+ "abilities": [
+  {
+   "abilityId": "enginecraft",
+   "level": 3,
+   "why": "enginewright primary: the forges are machines, and he knows every one"
+  },
+  {
+   "abilityId": "command_engine",
+   "level": 2,
+   "why": "the deep forges answer him"
+  },
+  {
+   "abilityId": "mechanical_defense",
+   "level": 2,
+   "why": "a hold built to take a blow"
+  },
+  {
+   "abilityId": "fault_strike",
+   "level": 2,
+   "why": "a smith knows where steel fails, and so where a man does"
+  },
+  {
+   "abilityId": "mend_device",
+   "level": 2,
+   "why": "he mends what he made"
+  },
+  {
+   "abilityId": "mech_sense",
+   "level": 2,
+   "why": "reads a mechanism on sight"
+  },
+  {
+   "abilityId": "thingcraft",
+   "level": 3,
+   "why": "mason secondary: knows a thing's true weight by touch"
+  },
+  {
+   "abilityId": "worth_the_work",
+   "level": 3,
+   "why": "sets the price of steel once a decade, and it holds"
+  },
+  {
+   "abilityId": "keystone_blow",
+   "level": 2,
+   "why": "finds the one stone a thing rests on"
+  },
+  {
+   "abilityId": "plain_weight",
+   "level": 2,
+   "why": "the forge-hammer, swung honestly"
+  },
+  {
+   "abilityId": "held_line",
+   "level": 2,
+   "why": "marcher tertiary: the forge-gate holds"
+  },
+  {
+   "abilityId": "soldiers_hand",
+   "level": 1,
+   "why": "he has led wardens"
+  }
+ ],
+ "intimacyNotes": "NOT AVAILABLE: he has been married to the Anvilhall's forges for sixty years and says so without irony.",
+ "nameKnown": "world",
+ "aliases": [
+  "Borrik",
+  "the Thane",
+  "the Thane of the Anvilhall"
+ ],
+ "_reactsWhy": "tag -> response, from corpus tags (NPC_AUTHORING_TEMPLATE #4)",
+ "_authoredWhy": "SNG-670 pass 2 (Erik 2026-10-04: 'make sure you are following the npc authoring fully: full schema, levels, powers'). Full sheet per NPC_AUTHORING_TEMPLATE: tier and level at or above the rung floor, eight sub-attributes, crafts by id from the leader's three traditions with a reason each, reputation as tags."
+}

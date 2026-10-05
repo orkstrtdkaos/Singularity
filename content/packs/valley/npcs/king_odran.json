@@ -1,0 +1,143 @@
+{
+ "schemaVersion": 1,
+ "id": "king_odran",
+ "name": "Odran Under-the-Stone",
+ "tier": "heroic",
+ "level": 30,
+ "role": "King of Deepmark, the dwarven kingdom in the deep stone under the Given Land, who holds that the deepest stone has never lied",
+ "people": "dwarven",
+ "gender": "man",
+ "pronouns": "he/him",
+ "sex": "male",
+ "romanceEligible": false,
+ "homeLocation": "deepmark",
+ "communityId": "pocket_deepmark.deepmark",
+ "domains": {
+  "primary": "mason",
+  "secondary": "verist",
+  "tertiary": "umbral"
+ },
+ "spectrum": {
+  "concrete_abstract": -0.7,
+  "falsehood_truth": 0.5,
+  "dark_light": -0.3
+ },
+ "assistTags": [
+  "study",
+  "lead",
+  "guard"
+ ],
+ "appearance": "Pale from never seeing the sun, beard to the floor and tucked into his belt, a crown of unpolished stone, and eyes that adjust to lamplight slowly.",
+ "personality": {
+  "warmth": 0.2,
+  "trust": 0.2,
+  "candor": 0.95,
+  "patience": 0.9
+ },
+ "voiceHints": "Speaks in weights and measures. Says 'that is heavy' when he means 'that is true'.",
+ "wants": "To go deeper than any dwarf has gone and hear what the stone says there.",
+ "fears": "Something under Deepmark that is not stone.",
+ "knowledge": [
+  "What the Masons above are building, by the weight on his ceiling",
+  "That the deepest shaft has started to ring"
+ ],
+ "reactsToReputation": {
+  "honest": "receives you, and remembers it",
+  "truthful": "gives you a stone token that opens Deepmark's lower doors",
+  "evasive": "ends the audience",
+  "any": "weighs every word you say"
+ },
+ "questSeeds": [
+  "The deepest shaft rings like a bell at the same hour every day",
+  "The Masons of Bedrock want a right-of-way down"
+ ],
+ "gear": [
+  "a stone crown",
+  "a plumb-line of black iron"
+ ],
+ "purse": {
+  "crystal": 200
+ },
+ "closed": [],
+ "title": "King of Deepmark",
+ "_sng670": "Pass 2: the leader of the pocket's ruling power.",
+ "vocation": "KEEPER",
+ "fullName": "Odran Brandsson Deepmark",
+ "subAttributes": {
+  "strength": 15,
+  "agility": 7,
+  "reason": 14,
+  "insight": 17,
+  "presence": 16,
+  "rapport": 7,
+  "craft": 14,
+  "wits": 12
+ },
+ "physicality": "ADULT, ancient. Pale from a life without sun, beard to the floor. WHAT CATCHES THE EYE: a crown of unpolished stone.",
+ "abilities": [
+  {
+   "abilityId": "stone_read",
+   "level": 3,
+   "why": "mason primary: the first gift of the Given, taken further down than the Masons go"
+  },
+  {
+   "abilityId": "thingcraft",
+   "level": 3,
+   "why": "knows the weight of every word as of a stone"
+  },
+  {
+   "abilityId": "shatterpoint",
+   "level": 3,
+   "why": "finds the point where a thing breaks"
+  },
+  {
+   "abilityId": "reduction",
+   "level": 2,
+   "why": "reduces a soaring claim to the fact under it"
+  },
+  {
+   "abilityId": "raised_road",
+   "level": 2,
+   "why": "the deep stone carries him"
+  },
+  {
+   "abilityId": "keystone_blow",
+   "level": 2,
+   "why": "strikes the stone a thing is resting on"
+  },
+  {
+   "abilityId": "weight_of_truth",
+   "level": 3,
+   "why": "verist secondary: says 'that is heavy' when he means 'that is true'"
+  },
+  {
+   "abilityId": "held_truth",
+   "level": 2,
+   "why": "the deepest stone has never lied, and neither does he"
+  },
+  {
+   "abilityId": "unbearable_word",
+   "level": 2,
+   "why": "a king's plain sentence"
+  },
+  {
+   "abilityId": "darksight",
+   "level": 2,
+   "why": "umbral tertiary: Deepmark has no sun"
+  },
+  {
+   "abilityId": "known_in_the_dark",
+   "level": 2,
+   "why": "knows where everyone is in his halls"
+  }
+ ],
+ "intimacyNotes": "NOT AVAILABLE: his queen died a century ago, and he keeps her chair empty and her stone uncut.",
+ "nameKnown": "world",
+ "aliases": [
+  "Odran",
+  "the King Under-the-Stone",
+  "King Odran"
+ ],
+ "_reactsWhy": "tag -> response, from corpus tags (NPC_AUTHORING_TEMPLATE #4)",
+ "_authoredWhy": "SNG-670 pass 2 (Erik 2026-10-04: 'make sure you are following the npc authoring fully: full schema, levels, powers'). Full sheet per NPC_AUTHORING_TEMPLATE: tier and level at or above the rung floor, eight sub-attributes, crafts by id from the leader's three traditions with a reason each, reputation as tags."
+}

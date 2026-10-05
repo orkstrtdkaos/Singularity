@@ -1,0 +1,139 @@
+{
+ "schemaVersion": 1,
+ "id": "queen_marisol",
+ "name": "Marisol of the Reef",
+ "tier": "heroic",
+ "level": 28,
+ "role": "Queen of the Coral Court: rules the merfolk reef-city in the Inner Sea and meets land-folk only in the ring of stones at the tide-line",
+ "people": "merfolk",
+ "gender": "woman",
+ "pronouns": "she/her",
+ "sex": "female",
+ "romanceEligible": false,
+ "homeLocation": "coral_court",
+ "communityId": "pocket_coral_court.coral_court",
+ "domains": {
+  "primary": "threnodist",
+  "secondary": "horizon",
+  "tertiary": "stillhold"
+ },
+ "spectrum": {
+  "emotional_logical": -0.4,
+  "chaos_order": 0.3,
+  "death_life": 0.3
+ },
+ "assistTags": [
+  "mend",
+  "talk",
+  "lead",
+  "study"
+ ],
+ "appearance": "Silver-scaled, crowned with living coral, hair moving as if still under water even when she is not.",
+ "personality": {
+  "warmth": 0.6,
+  "trust": 0.4,
+  "candor": 0.5,
+  "patience": 0.6
+ },
+ "voiceHints": "Musical, curious about land things, asks what your feet feel like, and listens to the answer.",
+ "wants": "A seat among the Mavens that does not need a pool carried in for it.",
+ "fears": "The Inner Sea going sour.",
+ "knowledge": [
+  "Every ship on the Inner Sea and what it carries",
+  "That the water near Thinwater is warming"
+ ],
+ "reactsToReputation": {
+  "kind": "gives you a pearl and her name",
+  "callous": "the tide goes out under your boat",
+  "beast-friend": "lets you swim the reef",
+  "any": "asks what your feet feel like"
+ },
+ "questSeeds": [
+  "The reef near Thinwater is dying and the Queen thinks someone ashore is doing it",
+  "A land-born child has been found living in the reef"
+ ],
+ "gear": [
+  "a coral crown",
+  "a conch that is heard across the Inner Sea"
+ ],
+ "purse": {
+  "crystal": 200
+ },
+ "closed": [],
+ "title": "Queen of the Coral Court",
+ "_sng670": "Pass 2: the leader of the pocket's ruling power.",
+ "vocation": "ATTENDANT",
+ "fullName": "Marisol Nerea Reefborn",
+ "subAttributes": {
+  "strength": 11,
+  "agility": 14,
+  "reason": 12,
+  "insight": 16,
+  "presence": 17,
+  "rapport": 16,
+  "craft": 11,
+  "wits": 13
+ },
+ "physicality": "ADULT. Silver-scaled, crowned with living coral. WHAT CATCHES THE EYE: hair that moves as if still under water.",
+ "abilities": [
+  {
+   "abilityId": "carried_name",
+   "level": 3,
+   "why": "threnodist primary: holds how her people are, and pulls them back toward it"
+  },
+  {
+   "abilityId": "harmonic_voice",
+   "level": 3,
+   "why": "the conch's calm"
+  },
+  {
+   "abilityId": "voice_of_the_flock",
+   "level": 3,
+   "why": "a reef moves as one"
+  },
+  {
+   "abilityId": "the_true_feeling",
+   "level": 2,
+   "why": "reads land-folk better than they read themselves"
+  },
+  {
+   "abilityId": "keening",
+   "level": 2,
+   "why": "a wail with the sea in it"
+  },
+  {
+   "abilityId": "names_of_the_lost",
+   "level": 2,
+   "why": "sings the drowned"
+  },
+  {
+   "abilityId": "rivercraft",
+   "level": 3,
+   "why": "horizon secondary: the water-roads are hers"
+  },
+  {
+   "abilityId": "way_sense",
+   "level": 2,
+   "why": "knows every current of the Inner Sea"
+  },
+  {
+   "abilityId": "safe_ground",
+   "level": 2,
+   "why": "stillhold tertiary: the ring of stones is truce-ground"
+  },
+  {
+   "abilityId": "calm_word",
+   "level": 2,
+   "why": "meets land-folk in peace"
+  }
+ ],
+ "intimacyNotes": "NOT AVAILABLE: married to the reef, and the reef is dying, and she will not think of anything else.",
+ "nameKnown": "world",
+ "aliases": [
+  "Marisol",
+  "the Reef Queen",
+  "the Queen of the Coral Court"
+ ],
+ "_reactsWhy": "tag -> response, from corpus tags (NPC_AUTHORING_TEMPLATE #4)",
+ "_authoredWhy": "SNG-670 pass 2 (Erik 2026-10-04: 'make sure you are following the npc authoring fully: full schema, levels, powers'). Full sheet per NPC_AUTHORING_TEMPLATE: tier and level at or above the rung floor, eight sub-attributes, crafts by id from the leader's three traditions with a reason each, reputation as tags."
+}

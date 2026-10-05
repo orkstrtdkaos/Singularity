@@ -1,0 +1,138 @@
+{
+ "schemaVersion": 1,
+ "id": "the_grey_mother",
+ "name": "The Grey Mother",
+ "tier": "heroic",
+ "level": 27,
+ "role": "Eldest of the Greywater selkies: leads the kin who sing for the drowned at the Ashwardens' cairns",
+ "people": "selkie",
+ "gender": "woman",
+ "pronouns": "she/her",
+ "sex": "female",
+ "romanceEligible": false,
+ "homeLocation": "greywater_deep",
+ "communityId": "pocket_greywater_deep.greywater_deep",
+ "domains": {
+  "primary": "ashwarden",
+  "secondary": "threnodist",
+  "tertiary": "stillhold"
+ },
+ "spectrum": {
+  "death_life": -0.3,
+  "emotional_logical": -0.4,
+  "violence_peace": 0.3
+ },
+ "assistTags": [
+  "mend",
+  "comfort",
+  "study"
+ ],
+ "appearance": "Grey-haired and dark-eyed, wrapped in a sealskin she never puts down, voice low enough to feel more than hear.",
+ "personality": {
+  "warmth": 0.5,
+  "trust": 0.3,
+  "candor": 0.5,
+  "patience": 0.95
+ },
+ "voiceHints": "Soft, slow, sad and dry at once; asks who you have lost.",
+ "wants": "That every drowned soul off the Palelands is sung for.",
+ "fears": "Someone taking a selkie's skin and not giving it back.",
+ "knowledge": [
+  "Every drowning off the Palelands for three hundred years",
+  "Which Ashwardens keep the cairns properly"
+ ],
+ "reactsToReputation": {
+  "kind": "sings for your dead",
+  "thief": "remembers you forever",
+  "fearful": "comforts you",
+  "any": "asks who you have lost to the sea"
+ },
+ "questSeeds": [
+  "A selkie's skin has been stolen and is being sold at the Crossing",
+  "The drowned off the Palelands have started to come ashore on their own"
+ ],
+ "gear": [
+  "her sealskin",
+  "a cairn-stone from the first cairn"
+ ],
+ "purse": {
+  "crystal": 200
+ },
+ "closed": [],
+ "title": "Eldest of the Greywater Kin",
+ "_sng670": "Pass 2: the leader of the pocket's ruling power.",
+ "vocation": "ATTENDANT",
+ "fullName": "Muirne Ronagh Greywater",
+ "subAttributes": {
+  "strength": 10,
+  "agility": 12,
+  "reason": 12,
+  "insight": 18,
+  "presence": 15,
+  "rapport": 15,
+  "craft": 10,
+  "wits": 13
+ },
+ "physicality": "ADULT, old. Grey-haired and dark-eyed. WHAT CATCHES THE EYE: a sealskin she never puts down.",
+ "abilities": [
+  {
+   "abilityId": "the_attended_end",
+   "level": 3,
+   "why": "ashwarden primary: she has sung for three hundred years of drowned"
+  },
+  {
+   "abilityId": "kept_vigil",
+   "level": 3,
+   "why": "holds the dying where they are"
+  },
+  {
+   "abilityId": "ask_the_dead",
+   "level": 2,
+   "why": "the drowned answer her"
+  },
+  {
+   "abilityId": "death_ward",
+   "level": 2,
+   "why": "wards the shore against deaths that should not happen"
+  },
+  {
+   "abilityId": "grey_road",
+   "level": 2,
+   "why": "goes where the drowned went"
+  },
+  {
+   "abilityId": "hastened_grey",
+   "level": 1,
+   "why": "a touch that ends what is already failing"
+  },
+  {
+   "abilityId": "names_of_the_lost",
+   "level": 3,
+   "why": "threnodist secondary: sings every name"
+  },
+  {
+   "abilityId": "last_lament",
+   "level": 2,
+   "why": "the complete lament"
+  },
+  {
+   "abilityId": "shared_weight",
+   "level": 2,
+   "why": "takes the grief meant for someone else"
+  },
+  {
+   "abilityId": "broker_truce",
+   "level": 1,
+   "why": "stillhold tertiary: the cairns are neutral ground"
+  }
+ ],
+ "intimacyNotes": "NOT AVAILABLE: her mate was taken by the sea a century ago, and his name is the first she sings.",
+ "nameKnown": "few",
+ "aliases": [
+  "the Eldest",
+  "the Mother of the Greywater"
+ ],
+ "_reactsWhy": "tag -> response, from corpus tags (NPC_AUTHORING_TEMPLATE #4)",
+ "_authoredWhy": "SNG-670 pass 2 (Erik 2026-10-04: 'make sure you are following the npc authoring fully: full schema, levels, powers'). Full sheet per NPC_AUTHORING_TEMPLATE: tier and level at or above the rung floor, eight sub-attributes, crafts by id from the leader's three traditions with a reason each, reputation as tags.",
+ "_nameKnownWhy": "Her own name is a kin-name, sung once at her birth and used only among the Greywater selkies and the very old. The world calls her the Grey Mother."
+}

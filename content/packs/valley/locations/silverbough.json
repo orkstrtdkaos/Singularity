@@ -1,0 +1,62 @@
+{
+ "schemaVersion": 1,
+ "id": "silverbough",
+ "name": "The Silverbough",
+ "regionId": "pocket_silverbough",
+ "communityId": "silverbough",
+ "spectrum": {
+  "death_life": 0.35,
+  "dark_light": 0.2
+ },
+ "poleIntensity": {
+  "life": 0.35,
+  "light": 0.2
+ },
+ "tags": [
+  "settlement",
+  "pocket"
+ ],
+ "connections": [
+  "the_greenward",
+  "dw_the_thinedge"
+ ],
+ "descriptionSeed": "Elven halls built into the high canopy of the southern forest, silver-barked and lantern-lit. You can walk a day beneath it and not know it is there; Greyspire's dwarves can see it from their walls and never let anyone forget it.",
+ "loreRefs": [],
+ "npcsPresent": [],
+ "encounterFlavor": "elven archers, canopy-walkers, and traders who came for the silverwood and were allowed up",
+ "dangerLevel": 2,
+ "questSeeds": [],
+ "map": {
+  "x": 590,
+  "y": 290
+ },
+ "encounterSeeds": [],
+ "axisVector": [
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0.2,
+  0.35,
+  0,
+  0,
+  0
+ ],
+ "axisVectorNote": "Derived from authored spectrum against world_node_atlas.axisOrder (SNG-180).",
+ "substrateDensity": 0.2,
+ "worldPos": {
+  "colatitude": 70,
+  "longitude": 250,
+  "depth": 0
+ },
+ "worldPosNote": "SNG-670: placed on the world's own forest (Erik 2026-10-04: \"they live in pockets across the world, in the typical places of their kind\").",
+ "people": "elven",
+ "tier": "settlement",
+ "parentId": null,
+ "role": "waypoint",
+ "appearance": "Silver-barked trees, bridges and halls in the canopy, lantern-light seen from below as a silver haze, and a rope-stair that is only let down for guests.",
+ "_sng670": "A pocket: a centre with its own ground, the way a foothill is. Its people are not a tradition; its ruling power and leader come in pass 2."
+}

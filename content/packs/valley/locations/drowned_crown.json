@@ -1,0 +1,62 @@
+{
+ "schemaVersion": 1,
+ "id": "drowned_crown",
+ "name": "The Drowned Crown",
+ "regionId": "pocket_drowned_crown",
+ "communityId": "drowned_crown",
+ "spectrum": {
+  "death_life": -0.3,
+  "chaos_order": 0.3
+ },
+ "poleIntensity": {
+  "death": 0.3,
+  "order": 0.3
+ },
+ "tags": [
+  "settlement",
+  "pocket"
+ ],
+ "connections": [
+  "the_scouring",
+  "the_clearing_ground"
+ ],
+ "descriptionSeed": "A kingdom that went under the ocean and did not stop being a kingdom. Its people breathe the sea now, keep their old court on the drowned stairs, and send their crown's claims to the Mavens, who have never known what to do with them.",
+ "loreRefs": [],
+ "npcsPresent": [],
+ "encounterFlavor": "the drowned court, salvagers who dive too deep, and envoys who must be carried down",
+ "dangerLevel": 3,
+ "questSeeds": [],
+ "map": {
+  "x": 560,
+  "y": 490
+ },
+ "encounterSeeds": [],
+ "axisVector": [
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0.3,
+  0,
+  -0.3,
+  0,
+  0,
+  0
+ ],
+ "axisVectorNote": "Derived from authored spectrum against world_node_atlas.axisOrder (SNG-180).",
+ "substrateDensity": 0.45,
+ "worldPos": {
+  "colatitude": 96.61,
+  "longitude": 61.36,
+  "depth": -1
+ },
+ "worldPosNote": "SNG-670: placed on the world's own sea (Erik 2026-10-04: \"they live in pockets across the world, in the typical places of their kind\"). Below ground: depth -1.",
+ "people": "drowned",
+ "tier": "settlement",
+ "parentId": null,
+ "role": "waypoint",
+ "appearance": "A palace on the sea floor, its towers still upright, banners moving slowly in the current, and drowned courtiers keeping a ceremony that has gone on for three hundred years.",
+ "_sng670": "A pocket: a centre with its own ground, the way a foothill is. Its people are not a tradition; its ruling power and leader come in pass 2."
+}

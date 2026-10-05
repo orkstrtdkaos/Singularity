@@ -1,0 +1,61 @@
+{
+ "schemaVersion": 1,
+ "id": "evenwood",
+ "name": "The Evenwood",
+ "regionId": "pocket_evenwood",
+ "communityId": "evenwood",
+ "spectrum": {
+  "death_life": 0.4,
+  "mechanical_spiritual": 0.2
+ },
+ "poleIntensity": {
+  "life": 0.4,
+  "spiritual": 0.2
+ },
+ "tags": [
+  "settlement",
+  "pocket"
+ ],
+ "connections": [
+  "ent_deepwood"
+ ],
+ "descriptionSeed": "An elven forest territory where the great western forest meets the Deepwood. The elves and the ents are the two oldest things in it, and they have an agreement about which of them is older that neither will say aloud.",
+ "loreRefs": [],
+ "npcsPresent": [],
+ "encounterFlavor": "elven wardens of the wood, foragers, and the occasional ent who walks through without stopping",
+ "dangerLevel": 2,
+ "questSeeds": [],
+ "map": {
+  "x": 40,
+  "y": 300
+ },
+ "encounterSeeds": [],
+ "axisVector": [
+  0,
+  0,
+  0,
+  0,
+  0,
+  0.2,
+  0,
+  0,
+  0.4,
+  0,
+  0,
+  0
+ ],
+ "axisVectorNote": "Derived from authored spectrum against world_node_atlas.axisOrder (SNG-180).",
+ "substrateDensity": 0.2,
+ "worldPos": {
+  "colatitude": 76,
+  "longitude": 260,
+  "depth": 0
+ },
+ "worldPosNote": "SNG-670: placed on the world's own forest (Erik 2026-10-04: \"they live in pockets across the world, in the typical places of their kind\").",
+ "people": "elven",
+ "tier": "settlement",
+ "parentId": null,
+ "role": "waypoint",
+ "appearance": "Old trees with halls grown into their roots, paths that are not quite paths, and lanterns hung so high they look like slow stars.",
+ "_sng670": "A pocket: a centre with its own ground, the way a foothill is. Its people are not a tradition; its ruling power and leader come in pass 2."
+}

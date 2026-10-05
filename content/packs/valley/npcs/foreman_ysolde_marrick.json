@@ -1,0 +1,139 @@
+{
+ "schemaVersion": 1,
+ "id": "foreman_ysolde_marrick",
+ "name": "Ysolde Marrick",
+ "tier": "regional",
+ "level": 14,
+ "role": "Afterling, Foreman of the Long Shift: died in the First Bore the year before the Transition, and has kept her crew's tally ever since",
+ "people": "human",
+ "gender": "woman",
+ "pronouns": "she/her",
+ "sex": "female",
+ "romanceEligible": false,
+ "homeLocation": "the_first_bore",
+ "communityId": "enginewright.serviceways",
+ "afterling": {
+  "door": "unattended",
+  "since": "four centuries",
+  "note": "Died when a gallery of the First Bore came down, the year before the Transition stopped the harvest. Nobody raised her and nobody attended her; she got up and finished the shift, and then the next one. She has kept herself a person by talking, and she makes every crew that comes down talk back."
+ },
+ "domains": {
+  "primary": "mason",
+  "secondary": "enginewright",
+  "tertiary": "horizon"
+ },
+ "spectrum": {
+  "concrete_abstract": -0.5,
+  "death_life": -0.5,
+  "chaos_order": 0.4
+ },
+ "assistTags": [
+  "guard",
+  "navigate-wilds",
+  "recall"
+ ],
+ "appearance": "A tall woman gone grey in every sense: grey skin, grey braid, a harvest crew's grey canvas so old it has worn to the weave. A foreman's tally-board on a strap, the marks on it four hundred years deep. Her breath does not fog.",
+ "personality": {
+  "warmth": 0.6,
+  "trust": 0.4,
+  "candor": 0.9,
+  "patience": 0.9
+ },
+ "voiceHints": "Calls everyone 'crew'. Asks for news of the surface before anything else, and listens to the answer as if it were water. Counts under her breath.",
+ "wants": "To find her husband, who went further down the bore after the collapse and has narrowed into one of the driven, and to bring him back to talking. And for the Long Shift to be relieved, by someone, at last.",
+ "fears": "Narrowing. She has watched it happen to half her crew: one errand, and nothing left around it. She talks so that it does not happen to her.",
+ "knowledge": [
+  "What the harvest drew up the First Bore, in the crews' words, not the engineers'",
+  "How far down the bore the driven are, and which of them were her crew",
+  "That the cap was laid from below, by the last crew, who did not come up"
+ ],
+ "reactsToReputation": {
+  "honest": "tells you what is under the cap, as far as she knows",
+  "kind": "asks you to carry a message to the Hanging Weather",
+  "reckless": "puts herself between you and the cap",
+  "any": "asks you what the sky looks like now"
+ },
+ "_reactsWhy": "tag -> response, from corpus tags (NPC_AUTHORING_TEMPLATE #4)",
+ "questSeeds": [
+  "Her husband has been seen higher up the bore than he has come in a hundred years",
+  "The Grave-Callers have offered to take the Long Shift on as a paid crew, and half of it wants to go"
+ ],
+ "gear": [
+  "a foreman's tally-board",
+  "a harvest crew's lamp, unlit",
+  "a ring of shaft-keys nobody living can match"
+ ],
+ "purse": {
+  "crystal": 10
+ },
+ "closed": [],
+ "title": "Foreman of the Long Shift",
+ "vocation": "KEEPER",
+ "fullName": "Ysolde Anwen Marrick",
+ "nameKnown": "few",
+ "aliases": [
+  "the Foreman",
+  "the Grey Foreman"
+ ],
+ "_nameKnownWhy": "The Boreborn know her name; it is in their cap-books as an ancestor. The surface knows only 'the Foreman of the Long Shift'.",
+ "subAttributes": {
+  "strength": 14,
+  "agility": 9,
+  "reason": 11,
+  "insight": 14,
+  "presence": 13,
+  "rapport": 12,
+  "craft": 13,
+  "wits": 11
+ },
+ "physicality": "ADULT; died at about forty, four centuries ago. Tall, gaunt, grey all over. WHAT CATCHES THE EYE: the tally-board, and that her breath does not fog in the cold.",
+ "intimacyNotes": "NOT AVAILABLE: still married, to a man who is somewhere further down the bore and no longer knows her. She goes looking.",
+ "abilities": [
+  {
+   "abilityId": "stonewise",
+   "level": 2,
+   "why": "mason primary: four hundred years of reading what holds"
+  },
+  {
+   "abilityId": "sound_read",
+   "level": 2,
+   "why": "rings a cap and knows if it is sound"
+  },
+  {
+   "abilityId": "tremor_sense",
+   "level": 2,
+   "why": "feels the driven moving in the bore below"
+  },
+  {
+   "abilityId": "echo_sense",
+   "level": 1,
+   "why": "maps a gallery by its echo, no lamp"
+  },
+  {
+   "abilityId": "thingcraft",
+   "level": 1,
+   "why": "knows the true weight of any piece of harvest iron"
+  },
+  {
+   "abilityId": "mech_sense",
+   "level": 2,
+   "why": "enginewright secondary: she ran the harvest engines"
+  },
+  {
+   "abilityId": "mend_device",
+   "level": 1,
+   "why": "keeps the old winches turning"
+  },
+  {
+   "abilityId": "way_sense",
+   "level": 1,
+   "why": "horizon tertiary: knows every gallery off the bore"
+  },
+  {
+   "abilityId": "road_ahead",
+   "level": 2,
+   "why": "walks the long ways and does not tire, because she cannot"
+  }
+ ],
+ "_authoredWhy": "SNG-674 (Erik 2026-10-04: 'there should be Afterlings in various places underground'). Full sheet per NPC_AUTHORING_TEMPLATE; `afterling` in SNG-649's shape, awaiting its reader (C19)."
+}

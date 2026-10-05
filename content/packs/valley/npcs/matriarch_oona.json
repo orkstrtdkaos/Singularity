@@ -1,0 +1,138 @@
+{
+ "schemaVersion": 1,
+ "id": "matriarch_oona",
+ "name": "Oona Deepcaller",
+ "tier": "heroic",
+ "level": 27,
+ "role": "Matriarch of the Leviathan Road: leads the riders who live on the backs of the great leviathans across the world ocean",
+ "people": "merfolk",
+ "gender": "woman",
+ "pronouns": "she/her",
+ "sex": "female",
+ "romanceEligible": false,
+ "homeLocation": "leviathan_road",
+ "communityId": "pocket_leviathan_road.leviathan_road",
+ "domains": {
+  "primary": "horizon",
+  "secondary": "rootkin",
+  "tertiary": "threnodist"
+ },
+ "spectrum": {
+  "violence_peace": -0.2,
+  "chaos_order": -0.3,
+  "death_life": 0.4
+ },
+ "assistTags": [
+  "move",
+  "lead",
+  "strike",
+  "track"
+ ],
+ "appearance": "Huge-voiced and weathered, merfolk scales gone dull with salt-sun, a harpoon she leans on like a staff, and a conch on her hip.",
+ "personality": {
+  "warmth": 0.6,
+  "trust": 0.4,
+  "candor": 0.7,
+  "patience": 0.6
+ },
+ "voiceHints": "Big laugh, big gestures, talks about leviathans like old friends and about land-folk like children.",
+ "wants": "That the leviathans keep their road and no one hunts them.",
+ "fears": "A leviathan dying under her riders.",
+ "knowledge": [
+  "Where every leviathan of the Road is this season",
+  "What lives under the ocean that the leviathans avoid"
+ ],
+ "reactsToReputation": {
+  "beast-friend": "lets you ride",
+  "cruel": "the whole Road is your enemy",
+  "brave": "laughs and slaps your back",
+  "any": "asks if you have hunted a leviathan, and watches your face"
+ },
+ "questSeeds": [
+  "A leviathan has been harpooned and the riders want blood",
+  "The leviathans have turned from their road toward the north for the first time in living memory"
+ ],
+ "gear": [
+  "a harpoon-spear",
+  "a calling-conch"
+ ],
+ "purse": {
+  "crystal": 200
+ },
+ "closed": [],
+ "title": "Matriarch of the Leviathan Road",
+ "_sng670": "Pass 2: the leader of the pocket's ruling power.",
+ "vocation": "WALKER",
+ "fullName": "Oona Kelda Deepcaller",
+ "subAttributes": {
+  "strength": 16,
+  "agility": 13,
+  "reason": 10,
+  "insight": 14,
+  "presence": 17,
+  "rapport": 14,
+  "craft": 10,
+  "wits": 13
+ },
+ "physicality": "ADULT, old and huge-voiced. Merfolk scales gone dull with salt-sun. WHAT CATCHES THE EYE: the harpoon she leans on like a staff.",
+ "abilities": [
+  {
+   "abilityId": "rivercraft",
+   "level": 3,
+   "why": "horizon primary: the ocean is a road and she rides the biggest thing on it"
+  },
+  {
+   "abilityId": "spanwork",
+   "level": 2,
+   "why": "the Road crosses the ocean in a season"
+  },
+  {
+   "abilityId": "long_reach",
+   "level": 3,
+   "why": "the harpoon"
+  },
+  {
+   "abilityId": "way_sense",
+   "level": 3,
+   "why": "knows where every leviathan is"
+  },
+  {
+   "abilityId": "road_ahead",
+   "level": 2,
+   "why": "never stops moving"
+  },
+  {
+   "abilityId": "beastfriend",
+   "level": 3,
+   "why": "rootkin secondary: talks to leviathans like old friends"
+  },
+  {
+   "abilityId": "grown_guardian",
+   "level": 2,
+   "why": "a leviathan at flood is something else"
+  },
+  {
+   "abilityId": "staunch",
+   "level": 1,
+   "why": "harness-wounds"
+  },
+  {
+   "abilityId": "harmonic_voice",
+   "level": 2,
+   "why": "threnodist tertiary: the calling-conch"
+  },
+  {
+   "abilityId": "keening",
+   "level": 1,
+   "why": "a wail that carries under water"
+  }
+ ],
+ "intimacyNotes": "NOT AVAILABLE: matriarch of four generations of riders and wholly occupied by them.",
+ "nameKnown": "world",
+ "aliases": [
+  "Oona",
+  "the Matriarch of the Road"
+ ],
+ "_reactsWhy": "tag -> response, from corpus tags (NPC_AUTHORING_TEMPLATE #4)",
+ "_authoredWhy": "SNG-670 pass 2 (Erik 2026-10-04: 'make sure you are following the npc authoring fully: full schema, levels, powers'). Full sheet per NPC_AUTHORING_TEMPLATE: tier and level at or above the rung floor, eight sub-attributes, crafts by id from the leader's three traditions with a reason each, reputation as tags."
+}

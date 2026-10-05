@@ -4,7 +4,7 @@
  "kind": "challenger_pool",
  "arcId": null,
  "note": "✅ ERIK 2026-10-04: \"Every reach and distinct people should have at least one gladiator, if not a whole bench. The coliseum is central in the culture here.\" SNG-669 · THE BENCH. The Great Coliseum's roster by reach: `heads` are the reach's existing champions (the eight cell champions, Saehara, Kesh Ardent), `challengers` are contenders and novices, one at least for every region of the world. Each challenger is a duel opponent in the saehara_challengers shape (concept, style, voiceHints, duelStakes) plus `reach`, `people`, `families` (the function families its practice draws from, for the blind grid's four), `rank` and `record`. No arc: this pool is read by the Coliseum, not by recurrence.",
- "_coverage": "Every region but the Crossing has at least one bench member; the Crossing's own is Saehara. Peoples fielded beyond human: valleyfolk, precursor-construct, glade-born, djinn, ent, fae, minotaur, gorgon, keener, revenant.",
+ "_coverage": "Every region but the Crossing has at least one bench member; the Crossing's own is Saehara. Peoples fielded beyond human: valleyfolk, precursor-construct, glade-born, djinn, ent, fae, minotaur, gorgon, keener, revenant, dwarven, elven, merfolk, saltfolk, selkie, drowned sunfolk, boreborn (SNG-670/671: every pocket fields its own).",
  "heads": [
   {
    "npcId": "kestrin_riven",
@@ -824,6 +824,424 @@
     "steadies"
    ],
    "voiceHints": "Soft, attentive, asks you to stop talking so she can hear.",
+   "duelStakes": "prestige: a bout at the Great Coliseum ends at the bell or a yield, never at a grave"
+  },
+  {
+   "id": "bench_brannoc",
+   "name": "Brannoc Ironvein of the Anvilhall",
+   "reach": "pocket_anvilhall",
+   "people": "dwarven",
+   "traditions": [
+    "enginewright",
+    "mason"
+   ],
+   "families": [
+    "HARM",
+    "PROTECT"
+   ],
+   "rank": "contender",
+   "record": "26–4",
+   "concept": "The Anvilhall's champion, who forged his own hammer and has refused every offer to buy it. He fights like a hold: everything behind a wall, and then the gate opens.",
+   "style": "hammer and a tower shield, armour he made himself",
+   "tacticTags": [
+    "walls-up",
+    "counter-strike",
+    "unmovable"
+   ],
+   "voiceHints": "Gruff, proud of his work, judges your gear before he judges you.",
+   "duelStakes": "prestige: a bout at the Great Coliseum ends at the bell or a yield, never at a grave"
+  },
+  {
+   "id": "bench_maeve_delve",
+   "name": "Maeve Stonecount",
+   "reach": "pocket_long_delve",
+   "people": "dwarven",
+   "traditions": [
+    "hourkeeper",
+    "mason"
+   ],
+   "families": [
+    "SUSTAIN",
+    "KNOW"
+   ],
+   "rank": "contender",
+   "record": "18–7",
+   "concept": "A tunneler from the Long Delve who fights at the pace of a nine-hundred-year dig. She has never been rushed, and wins on the bell more often than anyone but Marten Slowhand.",
+   "style": "a mattock and endless patience",
+   "tacticTags": [
+    "patient",
+    "outlasts",
+    "counts-down-the-bell"
+   ],
+   "voiceHints": "Slow, dry, measures time in tunnel-lengths.",
+   "duelStakes": "prestige: a bout at the Great Coliseum ends at the bell or a yield, never at a grave"
+  },
+  {
+   "id": "bench_orrin_greyspire",
+   "name": "Orrin of Greyspire",
+   "reach": "pocket_greyspire",
+   "people": "dwarven",
+   "traditions": [
+    "marcher",
+    "mason"
+   ],
+   "families": [
+    "HARM",
+    "MOVE"
+   ],
+   "rank": "contender",
+   "record": "14–6",
+   "concept": "A Greyspire warden who learned to fight on the long stair down to the trees, and fights every bout as if someone above him is about to cut the rope.",
+   "style": "axe and a climber's footing",
+   "tacticTags": [
+    "fights-uphill",
+    "relentless",
+    "hates-elves-loudly"
+   ],
+   "voiceHints": "Loud, quick to insult elves, quicker to buy one a drink after.",
+   "duelStakes": "prestige: a bout at the Great Coliseum ends at the bell or a yield, never at a grave"
+  },
+  {
+   "id": "bench_hask_deepmark",
+   "name": "Hask of the Deep Stone",
+   "reach": "pocket_deepmark",
+   "people": "dwarven",
+   "traditions": [
+    "mason"
+   ],
+   "families": [
+    "PROTECT",
+    "SUSTAIN"
+   ],
+   "rank": "contender",
+   "record": "20–2",
+   "concept": "From the kingdom under the Given Land. He insists on fighting on bare stone and has the Coliseum lift a panel of sand for every bout.",
+   "style": "stone-knuckled gauntlets and no weapon at all",
+   "tacticTags": [
+    "immovable",
+    "absorbs-and-waits",
+    "tests-the-footing"
+   ],
+   "voiceHints": "Very few words, all of them true; distrusts anything above ground.",
+   "duelStakes": "prestige: a bout at the Great Coliseum ends at the bell or a yield, never at a grave"
+  },
+  {
+   "id": "bench_ylva_undermere",
+   "name": "Ylva of Undermere",
+   "reach": "pocket_undermere",
+   "people": "dwarven",
+   "traditions": [
+    "umbral",
+    "abyssal"
+   ],
+   "families": [
+    "KNOW",
+    "HARM"
+   ],
+   "rank": "novice",
+   "record": "6–2",
+   "concept": "A lake-boatwoman from Undermere who fights by lamplight and asks the crowd to keep quiet so she can hear the water that is not there.",
+   "style": "boat-hook and a lantern on her belt",
+   "tacticTags": [
+    "fights-in-the-dark",
+    "hooks-and-pulls",
+    "listens"
+   ],
+   "voiceHints": "Quiet, watchful, speaks of the surface world as 'up there'.",
+   "duelStakes": "prestige: a bout at the Great Coliseum ends at the bell or a yield, never at a grave"
+  },
+  {
+   "id": "bench_aelith_evenwood",
+   "name": "Aelith of the Evenwood",
+   "reach": "pocket_evenwood",
+   "people": "elven",
+   "traditions": [
+    "rootkin"
+   ],
+   "families": [
+    "MOVE",
+    "RESTORE"
+   ],
+   "rank": "contender",
+   "record": "17–3",
+   "concept": "An Evenwood ranger who rarely lets a blade near her. She counts her three losses as lessons and can tell you exactly what each one taught. The ents taught her to be still; she taught herself the rest.",
+   "style": "longknife and stillness, moving only when it matters",
+   "tacticTags": [
+    "evasive",
+    "waits-for-the-gap",
+    "mends-between-rounds"
+   ],
+   "voiceHints": "Calm, ancient-sounding, a little amused by everything.",
+   "duelStakes": "prestige: a bout at the Great Coliseum ends at the bell or a yield, never at a grave"
+  },
+  {
+   "id": "bench_sylas_silverbough",
+   "name": "Sylas of the Silverbough",
+   "reach": "pocket_silverbough",
+   "people": "elven",
+   "traditions": [
+    "rootkin",
+    "veilwright"
+   ],
+   "families": [
+    "HARM",
+    "MOVE"
+   ],
+   "rank": "contender",
+   "record": "19–5",
+   "concept": "A Silverbough archer who was told bows were not allowed in the Coliseum and so learned the spear, badly at first and now very well. He will tell you he prefers the bow.",
+   "style": "spear, light feet, and a hunter's patience",
+   "tacticTags": [
+    "keeps-range",
+    "strikes-from-reach",
+    "taunts-dwarves"
+   ],
+   "voiceHints": "Elegant, condescending, devastating at the exact moment you stop listening.",
+   "duelStakes": "prestige: a bout at the Great Coliseum ends at the bell or a yield, never at a grave"
+  },
+  {
+   "id": "bench_ithriel_highmere",
+   "name": "Ithriel of Highmere",
+   "reach": "pocket_highmere",
+   "people": "elven",
+   "traditions": [
+    "figurist",
+    "seraphic"
+   ],
+   "families": [
+    "INFLUENCE",
+    "KNOW"
+   ],
+   "rank": "contender",
+   "record": "15–4",
+   "concept": "A Highmere envoy who fights as an argument: every exchange a premise, and the last one the conclusion. Figurists come down to the Crossing just to watch.",
+   "style": "a slender sword and a mind that is three moves ahead",
+   "tacticTags": [
+    "reads-intent",
+    "reframes",
+    "unsettles"
+   ],
+   "voiceHints": "Polite, faintly bored, treats the bout as a debate she has already won.",
+   "duelStakes": "prestige: a bout at the Great Coliseum ends at the bell or a yield, never at a grave"
+  },
+  {
+   "id": "bench_kael_windspire",
+   "name": "Kael of Windspire",
+   "reach": "pocket_windspire",
+   "people": "elven",
+   "traditions": [
+    "horizon",
+    "somatic"
+   ],
+   "families": [
+    "MOVE",
+    "HARM"
+   ],
+   "rank": "contender",
+   "record": "21–6",
+   "concept": "A Windspire glider-rider who fights as if the sand were a long way down and he had wings. He mostly does not, in the arena. He mostly wins anyway.",
+   "style": "twin blades and acrobatics learned on the anchor-chains",
+   "tacticTags": [
+    "aerial",
+    "never-still",
+    "dives"
+   ],
+   "voiceHints": "Breezy, reckless, laughs on the way down.",
+   "duelStakes": "prestige: a bout at the Great Coliseum ends at the bell or a yield, never at a grave"
+  },
+  {
+   "id": "bench_nerys_coral",
+   "name": "Nerys of the Coral Court",
+   "reach": "pocket_coral_court",
+   "people": "merfolk",
+   "traditions": [
+    "threnodist"
+   ],
+   "families": [
+    "INFLUENCE",
+    "SUSTAIN"
+   ],
+   "rank": "contender",
+   "record": "11–4",
+   "concept": "A merfolk champion who fights in the Coliseum's flooded pit on the full tide, the only bout of the month in water. Land-folk who accept her challenge learn what a current is.",
+   "style": "trident and a net, at home in waist-deep water",
+   "tacticTags": [
+    "nets-and-drowns",
+    "uses-the-water",
+    "patient"
+   ],
+   "voiceHints": "Musical, curious about land things, asks what your feet feel like.",
+   "duelStakes": "prestige: a bout at the Great Coliseum ends at the bell or a yield, never at a grave"
+  },
+  {
+   "id": "bench_garr_saltmarch",
+   "name": "Garr Netmender",
+   "reach": "pocket_the_saltmarch",
+   "people": "saltfolk",
+   "traditions": [
+    "horizon"
+   ],
+   "families": [
+    "SUSTAIN",
+    "PROTECT"
+   ],
+   "rank": "novice",
+   "record": "7–5",
+   "concept": "A Saltmarch fisherman who fights the way he hauls a net: steady, low, and he does not let go.",
+   "style": "a weighted net and a gutting knife",
+   "tacticTags": [
+    "entangles",
+    "holds-on",
+    "outlasts"
+   ],
+   "voiceHints": "Plain-spoken, salt-cracked, asks nothing about where you are from.",
+   "duelStakes": "prestige: a bout at the Great Coliseum ends at the bell or a yield, never at a grave"
+  },
+  {
+   "id": "bench_moira_greywater",
+   "name": "Moira of the Greywater",
+   "reach": "pocket_greywater_deep",
+   "people": "selkie",
+   "traditions": [
+    "ashwarden",
+    "threnodist"
+   ],
+   "families": [
+    "RESTORE",
+    "MOVE"
+   ],
+   "rank": "contender",
+   "record": "9–2",
+   "concept": "A selkie who comes up from the Greywater Deep for one season of bouts a year and sings for the drowned before each one. She keeps her sealskin in a locked box at the Coliseum, and the key on her.",
+   "style": "bare hands, seal-quick, singing",
+   "tacticTags": [
+    "slippery",
+    "rallies",
+    "recovers"
+   ],
+   "voiceHints": "Soft, sad, wry; asks you who you have lost to the sea.",
+   "duelStakes": "prestige: a bout at the Great Coliseum ends at the bell or a yield, never at a grave"
+  },
+  {
+   "id": "bench_jory_tidewrought",
+   "name": "Jory Hullborn",
+   "reach": "pocket_tidewrought",
+   "people": "saltfolk",
+   "traditions": [
+    "horizon",
+    "churnfolk"
+   ],
+   "families": [
+    "MOVE",
+    "INFLUENCE"
+   ],
+   "rank": "contender",
+   "record": "16–9",
+   "concept": "Born on a deck of the Tidewrought and never on land until he was twenty. He fights as if the sand were rolling and wins because it is not.",
+   "style": "cutlass and a sailor's balance",
+   "tacticTags": [
+    "unbalancing",
+    "improvises",
+    "boards-the-guard"
+   ],
+   "voiceHints": "Cheerful, salty, homesick for the swell.",
+   "duelStakes": "prestige: a bout at the Great Coliseum ends at the bell or a yield, never at a grave"
+  },
+  {
+   "id": "bench_saelor_drowned",
+   "name": "Ser Saelor of the Drowned Crown",
+   "reach": "pocket_drowned_crown",
+   "people": "drowned",
+   "traditions": [
+    "ashwarden"
+   ],
+   "families": [
+    "PROTECT",
+    "HARM"
+   ],
+   "rank": "contender",
+   "record": "12–4",
+   "concept": "A knight of the kingdom under the ocean, who fights in the Coliseum with his helm full of seawater. He has lost four bouts, every one of them on land that was too dry, and he fights for his crown's claim, which the Mavens have not yet recognised.",
+   "style": "longsword and drowned plate, slow and certain",
+   "tacticTags": [
+    "unafraid",
+    "relentless",
+    "holds-the-line"
+   ],
+   "voiceHints": "Courtly, archaic, speaks as if from a long way off.",
+   "duelStakes": "prestige: a bout at the Great Coliseum ends at the bell or a yield, never at a grave"
+  },
+  {
+   "id": "bench_tala_leviathan",
+   "name": "Tala Swellrider",
+   "reach": "pocket_leviathan_road",
+   "people": "merfolk",
+   "traditions": [
+    "horizon"
+   ],
+   "families": [
+    "MOVE",
+    "HARM"
+   ],
+   "rank": "contender",
+   "record": "13–5",
+   "concept": "A leviathan-rider from the Road who came ashore to fight because the leviathan she rides is resting, and she is bored. She has never stood still on anything that was not moving.",
+   "style": "harpoon-spear and a rider's balance",
+   "tacticTags": [
+    "charges",
+    "never-still",
+    "reckless"
+   ],
+   "voiceHints": "Big laugh, big gestures, talks about her leviathan like a friend.",
+   "duelStakes": "prestige: a bout at the Great Coliseum ends at the bell or a yield, never at a grave"
+  },
+  {
+   "id": "bench_wren_sunfold",
+   "name": "Wren of Sunfold",
+   "reach": "pocket_sunfold",
+   "people": "sunfolk",
+   "traditions": [
+    "rootkin"
+   ],
+   "families": [
+    "RESTORE",
+    "HARM"
+   ],
+   "rank": "novice",
+   "record": "5–4",
+   "concept": "A cutting-crew girl from Sunfold who learned to fight at the Long Noon's edge, against things that grow back. She hits everything twice on principle, and she is still learning that people mostly do not grow back.",
+   "style": "a hooked cutting-blade and a farmer's stamina",
+   "tacticTags": [
+    "relentless",
+    "cuts-back",
+    "outlasts"
+   ],
+   "voiceHints": "Cheerful, sunburnt, keeps asking where the sun is up here.",
+   "duelStakes": "prestige: a bout at the Great Coliseum ends at the bell or a yield, never at a grave"
+  },
+  {
+   "id": "bench_garrow_capwarden",
+   "name": "Garrow Ringhand",
+   "reach": "pocket_the_hanging_weather",
+   "people": "boreborn",
+   "traditions": [
+    "horizon",
+    "enginewright"
+   ],
+   "families": [
+    "PROTECT",
+    "HARM"
+   ],
+   "rank": "contender",
+   "record": "14–6",
+   "concept": "A Boreborn cap-keeper who fights with a ringing-hammer and listens to your guard the way he listens to a cap: for the flat note where it will give.",
+   "style": "a long-handled hammer and an oilskin coat",
+   "tacticTags": [
+    "finds-the-flaw",
+    "patient",
+    "holds-the-line"
+   ],
+   "voiceHints": "Few words, all of them about sound. Taps your shield before the bell to hear it.",
    "duelStakes": "prestige: a bout at the Great Coliseum ends at the bell or a yield, never at a grave"
   },
   {

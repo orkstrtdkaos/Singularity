@@ -1,0 +1,61 @@
+{
+ "schemaVersion": 1,
+ "id": "windspire",
+ "name": "Windspire",
+ "regionId": "pocket_windspire",
+ "communityId": "windspire",
+ "spectrum": {
+  "concrete_abstract": 0.35,
+  "violence_peace": -0.15
+ },
+ "poleIntensity": {
+  "abstract": 0.35,
+  "violence": 0.15
+ },
+ "tags": [
+  "settlement",
+  "pocket"
+ ],
+ "connections": [
+  "the_middle_way"
+ ],
+ "descriptionSeed": "An elven sky city anchored to the eastern peaks by chains a mile long. Its people come down to trade and to fight at the Crossing, and climb back up as though the ground were slightly embarrassing.",
+ "loreRefs": [],
+ "npcsPresent": [],
+ "encounterFlavor": "elven glider-riders, anchor-wardens, and Somatic climbers who have come to try the chains",
+ "dangerLevel": 3,
+ "questSeeds": [],
+ "map": {
+  "x": 160,
+  "y": 520
+ },
+ "encounterSeeds": [],
+ "axisVector": [
+  0,
+  0,
+  0,
+  -0.15,
+  0.35,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0
+ ],
+ "axisVectorNote": "Derived from authored spectrum against world_node_atlas.axisOrder (SNG-180).",
+ "substrateDensity": 0.5,
+ "worldPos": {
+  "colatitude": 49.3,
+  "longitude": 118.5,
+  "depth": 0
+ },
+ "worldPosNote": "SNG-670: placed on the world's own mountain (Erik 2026-10-04: \"they live in pockets across the world, in the typical places of their kind\").",
+ "people": "elven",
+ "tier": "settlement",
+ "parentId": null,
+ "role": "waypoint",
+ "appearance": "Spires on a floating crag, chains as thick as a man running down to anchor-forts on the peaks, and gliders circling the anchor-lines.",
+ "_sng670": "A pocket: a centre with its own ground, the way a foothill is. Its people are not a tradition; its ruling power and leader come in pass 2."
+}

@@ -1,0 +1,61 @@
+{
+ "schemaVersion": 1,
+ "id": "the_orchard_gone_out",
+ "name": "the Orchard Gone Out",
+ "regionId": "umbral_depths",
+ "communityId": "umbral.market",
+ "parentId": "the_lampless_market",
+ "tier": "site",
+ "tags": [
+  "site",
+  "underground",
+  "dead-sun"
+ ],
+ "connections": [
+  "the_lampless_market"
+ ],
+ "descriptionSeed": "A dead orchard in the dark, one stratum below the Lampless Market. The kept sun that grew it went out, nobody agrees when, and the trees died standing. Its shape is still on the ceiling, a disc of dark machinery. It is on the Umbral border, and the Umbrals say they did not put it out. They say it with a care that makes people wonder.",
+ "appearance": "Rows of dead fruit trees in perfect order, grey and leafless, reaching up toward a dead sun: a great dark disc ringed with machinery in the cavern roof. Fallen fruit turned to stone on the floor. Lamplight shows only a few rows at a time.",
+ "encounterFlavor": "Umbrals who walk the rows without lamps and will not say why they come; a surface scholar measuring the dead sun's machinery and getting nowhere; petrified fruit sold at the Market as luck-charms",
+ "loreRefs": [
+  "the_deep_below"
+ ],
+ "questSeeds": [],
+ "dangerLevel": 2,
+ "spectrum": {
+  "dark_light": -0.6,
+  "death_life": -0.4,
+  "emotional_logical": -0.3
+ },
+ "axisVector": [
+  -0.3,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  -0.6,
+  -0.4,
+  0,
+  0,
+  0
+ ],
+ "poleIntensity": {
+  "dark": 0.6,
+  "death": 0.4,
+  "emotional": 0.3
+ },
+ "substrateDensity": 0.35,
+ "map": {
+  "x": 40,
+  "y": 300
+ },
+ "worldPos": {
+  "colatitude": 81.43,
+  "longitude": 357.03,
+  "depth": -2
+ },
+ "_sng671": "A deep site (Erik 2026-10-04, the deep below).",
+ "worldPosNote": "SNG-671: inside its parent's ground (CCODE-466: a site is within a day of its parent), 2 strata down."
+}

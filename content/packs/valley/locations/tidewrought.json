@@ -1,0 +1,61 @@
+{
+ "schemaVersion": 1,
+ "id": "tidewrought",
+ "name": "The Tidewrought",
+ "regionId": "pocket_tidewrought",
+ "communityId": "tidewrought",
+ "spectrum": {
+  "chaos_order": -0.3,
+  "concrete_abstract": -0.1
+ },
+ "poleIntensity": {
+  "chaos": 0.3,
+  "concrete": 0.1
+ },
+ "tags": [
+  "settlement",
+  "pocket"
+ ],
+ "connections": [
+  "the_told_ground"
+ ],
+ "descriptionSeed": "A city of hulls lashed together on the open ocean, never in the same place twice. It trades along every coast the world has, and every season some ship comes into a harbour that says the Tidewrought sent it.",
+ "loreRefs": [],
+ "npcsPresent": [],
+ "encounterFlavor": "saltfolk sailors, ocean traders, and people who came aboard to get somewhere and never got off",
+ "dangerLevel": 3,
+ "questSeeds": [],
+ "map": {
+  "x": 225,
+  "y": 400
+ },
+ "encounterSeeds": [],
+ "axisVector": [
+  0,
+  0,
+  0,
+  0,
+  -0.1,
+  0,
+  -0.3,
+  0,
+  0,
+  0,
+  0,
+  0
+ ],
+ "axisVectorNote": "Derived from authored spectrum against world_node_atlas.axisOrder (SNG-180).",
+ "substrateDensity": 0.25,
+ "worldPos": {
+  "colatitude": 93.56,
+  "longitude": 195.2,
+  "depth": 0
+ },
+ "worldPosNote": "SNG-670: placed on the world's own sea (Erik 2026-10-04: \"they live in pockets across the world, in the typical places of their kind\").",
+ "people": "saltfolk",
+ "tier": "settlement",
+ "parentId": null,
+ "role": "waypoint",
+ "appearance": "Hundreds of hulls lashed into one floating town, masts like a forest, rope bridges between decks, and a market on the biggest deck that never closes.",
+ "_sng670": "A pocket: a centre with its own ground, the way a foothill is. Its people are not a tradition; its ruling power and leader come in pass 2."
+}

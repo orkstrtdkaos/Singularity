@@ -435,24 +435,8 @@
  },
  "_poleWarning": "⛔ 12 locations are `pole` — pure extremities like the Blaze, the Scouring, the Numen. THEY ARE NOT TOWNS and an icon that says 'settlement' would lie about the most dangerous places in the world. ⚠️ They want their own mark.",
  "kinds": {
-  "cairnsend": {
-   "kind": "town",
-   "from": "authored"
-  },
-  "the_last_cairn": {
-   "kind": "shrine",
-   "from": "authored"
-  },
-  "the_churn": {
-   "kind": "strange",
-   "from": "authored"
-  },
-  "loose_moorings": {
-   "kind": "harbour",
-   "from": "authored"
-  },
-  "the_fitting_house": {
-   "kind": "works",
+  "anvilhall": {
+   "kind": "hold",
    "from": "authored"
   },
   "archive_hollow": {
@@ -471,6 +455,10 @@
    "kind": "waygate",
    "from": "waygate:true"
   },
+  "cairnsend": {
+   "kind": "town",
+   "from": "authored"
+  },
   "choirheight": {
    "kind": "waygate",
    "from": "waygate:true"
@@ -479,9 +467,21 @@
    "kind": "waygate",
    "from": "waygate:true"
   },
+  "coral_court": {
+   "kind": "city",
+   "from": "authored"
+  },
+  "deepmark": {
+   "kind": "underplace",
+   "from": "authored"
+  },
   "disputed_zone_fringe": {
    "kind": "region",
    "from": "tier"
+  },
+  "drowned_crown": {
+   "kind": "underplace",
+   "from": "authored"
   },
   "dusklow": {
    "kind": "town",
@@ -506,6 +506,14 @@
   "ent_deepwood": {
    "kind": "underplace",
    "from": "depth<0"
+  },
+  "evenwood": {
+   "kind": "grove",
+   "from": "authored"
+  },
+  "firstsight": {
+   "kind": "road",
+   "from": "authored"
   },
   "gearsflat": {
    "kind": "underplace",
@@ -591,6 +599,14 @@
    "kind": "town",
    "from": "authored"
   },
+  "greyspire": {
+   "kind": "hold",
+   "from": "authored"
+  },
+  "greywater_deep": {
+   "kind": "harbour",
+   "from": "authored"
+  },
   "greywater_stilts": {
    "kind": "fen_town",
    "from": "authored"
@@ -607,6 +623,14 @@
    "kind": "terrace",
    "from": "authored"
   },
+  "highmere": {
+   "kind": "skyhold",
+   "from": "authored"
+  },
+  "keelmouth": {
+   "kind": "harbour",
+   "from": "authored"
+  },
   "kestrels_roost": {
    "kind": "eyrie",
    "from": "authored"
@@ -615,8 +639,20 @@
    "kind": "works",
    "from": "authored"
   },
+  "leviathan_road": {
+   "kind": "road",
+   "from": "authored"
+  },
+  "long_delve": {
+   "kind": "hold",
+   "from": "authored"
+  },
   "longshore": {
    "kind": "town",
+   "from": "authored"
+  },
+  "loose_moorings": {
+   "kind": "harbour",
    "from": "authored"
   },
   "millbrook": {
@@ -639,6 +675,10 @@
    "kind": "towers",
    "from": "authored"
   },
+  "silverbough": {
+   "kind": "grove",
+   "from": "authored"
+  },
   "spindrift_hollow": {
    "kind": "strange",
    "from": "authored"
@@ -647,9 +687,17 @@
    "kind": "hall",
    "from": "authored"
   },
+  "sunfold": {
+   "kind": "underplace",
+   "from": "authored"
+  },
   "sunken_choir": {
    "kind": "underplace",
    "from": "depth<0"
+  },
+  "the-low-lamp-inn": {
+   "kind": "inn",
+   "from": "authored"
   },
   "the_appetite_halls": {
    "kind": "hall",
@@ -683,6 +731,10 @@
    "kind": "pole",
    "from": "authored"
   },
+  "the_churn": {
+   "kind": "strange",
+   "from": "authored"
+  },
   "the_churn_edge": {
    "kind": "strange",
    "from": "authored"
@@ -704,6 +756,14 @@
    "from": "authored"
   },
   "the_figure_works": {
+   "kind": "works",
+   "from": "authored"
+  },
+  "the_first_bore": {
+   "kind": "works",
+   "from": "authored"
+  },
+  "the_fitting_house": {
    "kind": "works",
    "from": "authored"
   },
@@ -763,6 +823,10 @@
    "kind": "waygate",
    "from": "waygate:true"
   },
+  "the_hanging_weather": {
+   "kind": "underplace",
+   "from": "authored"
+  },
   "the_harborward": {
    "kind": "harbour",
    "from": "authored"
@@ -799,6 +863,10 @@
    "kind": "market",
    "from": "authored"
   },
+  "the_last_cairn": {
+   "kind": "shrine",
+   "from": "authored"
+  },
   "the_last_mask": {
    "kind": "pole",
    "from": "authored"
@@ -815,13 +883,13 @@
    "kind": "waste",
    "from": "authored"
   },
+  "the_long_noon": {
+   "kind": "grove",
+   "from": "authored"
+  },
   "the_long_span": {
    "kind": "region",
    "from": "tier"
-  },
-  "the-low-lamp-inn": {
-   "kind": "inn",
-   "from": "authored"
   },
   "the_low_market": {
    "kind": "underplace",
@@ -847,12 +915,20 @@
    "kind": "waygate",
    "from": "waygate:true"
   },
+  "the_mountain_pass": {
+   "kind": "gate",
+   "from": "authored"
+  },
   "the_numen": {
    "kind": "pole",
    "from": "authored"
   },
   "the_old_warden_post": {
    "kind": "hold",
+   "from": "authored"
+  },
+  "the_orchard_gone_out": {
+   "kind": "ruin",
    "from": "authored"
   },
   "the_proof_halls": {
@@ -873,6 +949,10 @@
   },
   "the_redline": {
    "kind": "hold",
+   "from": "authored"
+  },
+  "the_saltmarch": {
+   "kind": "fen_town",
    "from": "authored"
   },
   "the_scour": {
@@ -979,12 +1059,20 @@
    "kind": "grove",
    "from": "authored"
   },
+  "tidewrought": {
+   "kind": "fen_town",
+   "from": "authored"
+  },
   "tier_seven": {
    "kind": "waygate",
    "from": "waygate:true"
   },
   "tumbledown_market": {
    "kind": "market",
+   "from": "authored"
+  },
+  "undermere": {
+   "kind": "underplace",
    "from": "authored"
   },
   "waystone": {
@@ -995,53 +1083,45 @@
    "kind": "waygate",
    "from": "waygate:true"
   },
-  "firstsight": {
-   "kind": "road",
-   "from": "authored"
-  },
-  "keelmouth": {
-   "kind": "harbour",
-   "from": "authored"
-  },
-  "the_mountain_pass": {
-   "kind": "gate",
+  "windspire": {
+   "kind": "skyhold",
    "from": "authored"
   }
  },
  "_counts": {
   "waygate": 28,
-  "underplace": 17,
+  "underplace": 22,
   "hall": 12,
   "pole": 12,
-  "works": 9,
+  "works": 10,
+  "grove": 8,
+  "hold": 7,
   "region": 7,
-  "grove": 5,
-  "road": 4,
-  "market": 4,
-  "hold": 4,
+  "road": 5,
   "town": 4,
+  "market": 4,
+  "harbour": 4,
   "strange": 4,
   "shrine": 4,
+  "city": 3,
+  "ruin": 3,
+  "fen_town": 3,
+  "skyhold": 3,
   "terrace": 2,
-  "ruin": 2,
   "gate": 2,
   "archive": 2,
-  "city": 2,
-  "harbour": 3,
   "waste": 2,
   "street": 1,
   "shop": 1,
-  "fen_town": 1,
   "eyrie": 1,
   "village": 1,
   "towers": 1,
-  "skyhold": 1,
+  "inn": 1,
   "temple": 1,
   "arena": 1,
   "cathedral": 1,
   "march": 1,
   "hermitage": 1,
-  "inn": 1,
   "bridge": 1
  },
  "_regionDisplay": "⛔ SNG-426 (Erik): 'you have STAIRS as the Harmonic Heights Lower Terrace. That should be HARMONIC HEIGHTS at this region view, period, and a TOWN icon. Once clicked to go local, then you show the lower terrace and upper terrace.' ⚠️ HE IS RIGHT AND THE RULE GENERALISES: A REGION MAP NAMES PLACES; A LOCAL MAP NAMES PARTS OF A PLACE. `regionName` and `regionKind` below override `name` and `kind` AT REGION SCALE ONLY. Where absent, the location's own name and kind stand. ⛔ THE LOCAL TIER IS UNAFFECTED — the terraces are still terraces once you are inside.",

@@ -1,0 +1,62 @@
+{
+ "schemaVersion": 1,
+ "id": "highmere",
+ "name": "Highmere",
+ "regionId": "pocket_highmere",
+ "communityId": "highmere",
+ "spectrum": {
+  "concrete_abstract": 0.45,
+  "dark_light": 0.25
+ },
+ "poleIntensity": {
+  "abstract": 0.45,
+  "light": 0.25
+ },
+ "tags": [
+  "settlement",
+  "pocket"
+ ],
+ "connections": [
+  "the_figure_works",
+  "stair_hollow"
+ ],
+ "descriptionSeed": "An elven sky city that drifts above the high ground at the Pattern Reach's edge. The Figurists say it is held up by an idea; the elves say that is the same thing, and come down to the Pattern Reach to argue the point.",
+ "loreRefs": [],
+ "npcsPresent": [],
+ "encounterFlavor": "elven envoys, Figurist scholars staring upward, and people waiting under the stair",
+ "dangerLevel": 2,
+ "questSeeds": [],
+ "map": {
+  "x": 200,
+  "y": 245
+ },
+ "encounterSeeds": [],
+ "axisVector": [
+  0,
+  0,
+  0,
+  0,
+  0.45,
+  0,
+  0,
+  0.25,
+  0,
+  0,
+  0,
+  0
+ ],
+ "axisVectorNote": "Derived from authored spectrum against world_node_atlas.axisOrder (SNG-180).",
+ "substrateDensity": 0.5,
+ "worldPos": {
+  "colatitude": 61.75,
+  "longitude": 292,
+  "depth": 0
+ },
+ "worldPosNote": "SNG-670: placed on the world's own mountain (Erik 2026-10-04: \"they live in pockets across the world, in the typical places of their kind\").",
+ "people": "elven",
+ "tier": "settlement",
+ "parentId": null,
+ "role": "waypoint",
+ "appearance": "White towers on a floating island of rock, waterfalls running off its edges and becoming cloud before they land, and a long pale stair that only reaches the ground when Highmere wants it to.",
+ "_sng670": "A pocket: a centre with its own ground, the way a foothill is. Its people are not a tradition; its ruling power and leader come in pass 2."
+}

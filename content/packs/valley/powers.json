@@ -2914,6 +2914,998 @@
    "comes": "quiet",
    "_sng668": "✅ ERIK 2026-10-04: every tradition keeps a power at the Crossing. The Bargainers (Terms: abyssal 0.5, verist 0.3, mason 0.2) had their Broker at the Wayhouse and no power.",
    "_seatWhy": "The Low Market's own canon: 'the honest end of the Descent's trade: bargains with the terms written down.' Corrected 2026-10-04 from the Hub Yard, which I chose before reading it. The Table keeps its house at the Crossing in the Hub Yard; the One Called Loki keeps a second table in the Wayhouse's back room."
+  },
+  {
+   "id": "power_anvilhall",
+   "name": "The Thanehold of the Anvilhall",
+   "kind": "lordship",
+   "temper": "hard",
+   "seat": "anvilhall",
+   "reach": [
+    "anvilhall",
+    "gearsflat"
+   ],
+   "leader": "thane_borrik",
+   "answersTo": null,
+   "strength": {
+    "scale": "unit",
+    "contingents": [
+     {
+      "n": 60,
+      "quality": 3,
+      "what": "hold-wardens in forge-plate"
+     },
+     {
+      "n": 120,
+      "quality": 1,
+      "what": "smiths and ore-haulers who will pick up a hammer"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "anvilhall",
+     "kind": "post",
+     "name": "the forge-gate, three storeys of iron",
+     "garrison": 40
+    }
+   ],
+   "verbs": [
+    "protect",
+    "tax",
+    "recruit"
+   ],
+   "encounters": [],
+   "dangerLift": 0,
+   "noticesYouWhen": [
+    "wealth",
+    "neighbour"
+   ],
+   "wantsFromYou": "A fair price, paid on the day, and no questions about what is under the mountain.",
+   "offersYou": "Steel no one else can make, and a thane's word that it will be there next season too.",
+   "leverage": "The forges are hungry. Whoever controls the ore road down from the ridge controls the Thane's temper.",
+   "whenBroken": "The forges go cold one by one, and for a year Gearsflat mends what it cannot replace.",
+   "rivals": [],
+   "opposedBy": [],
+   "plainly": "The greatest dwarven hold: a mountain hollowed into forge-halls east of Gearsflat. The Thane sells steel to everyone and lets almost no one in.",
+   "descriptionSeed": "The Anvilhall was old when the Gearlands built their first engine, and it does not let anyone forget it. Thane Borrik keeps the forges, sets the price of steel once a decade, and lets the world in as far as the market hall and no further. Below the market hall, the mountain is warm in a way it was not a generation ago.",
+   "appearance": "A mountain gate three storeys high, vents smoking along the ridge, ore-carts on the switchbacks, and the sound of a hundred hammers coming out of the rock",
+   "comes": "loud",
+   "houseAt": "the_crossing",
+   "_sng670": "Pass 2 (Erik 2026-10-04): the pocket's ruling power. A people is not a tradition; the power is how the pocket meets the world."
+  },
+  {
+   "id": "power_long_delve",
+   "name": "The Wardens of the Long Delve",
+   "kind": "lordship",
+   "temper": "fair",
+   "seat": "long_delve",
+   "reach": [
+    "long_delve",
+    "the_drawn_hour"
+   ],
+   "leader": "delvewarden_hesk",
+   "answersTo": null,
+   "strength": {
+    "scale": "unit",
+    "contingents": [
+     {
+      "n": 40,
+      "quality": 2,
+      "what": "tunnel-wardens"
+     },
+     {
+      "n": 80,
+      "quality": 1,
+      "what": "diggers on the long shift"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "long_delve",
+     "kind": "post",
+     "name": "the narrow gate under the stone clock",
+     "garrison": 25
+    }
+   ],
+   "verbs": [
+    "protect",
+    "inform"
+   ],
+   "encounters": [],
+   "dangerLift": 0,
+   "noticesYouWhen": [
+    "crossed"
+   ],
+   "wantsFromYou": "Patience. Nothing at the Delve happens this week.",
+   "offersYou": "Dates you can trust, and stone that does not move.",
+   "leverage": "They will trade almost anything for a page of the founders' notes.",
+   "whenBroken": "The digging stops. Nobody in the Kept Reach can agree what day it is.",
+   "rivals": [],
+   "opposedBy": [],
+   "plainly": "A dwarven hold in the Kept Reach range that has been driving one tunnel west for nine hundred years, and keeps the calendar everyone else checks against.",
+   "descriptionSeed": "The Long Delve is a hold, a calendar and a promise. The founders set a heading and a pace and died, and their grandchildren's grandchildren are still digging. Delvewarden Hesk keeps the heading; the Hourkeepers trust her calendar more than their own, which annoys them.",
+   "appearance": "A narrow gate in a sheer face, a stone clock carved by the century above it, and a lamplit tunnel running away so straight you can see where it will be in a hundred years",
+   "comes": "quiet",
+   "houseAt": "the_crossing",
+   "_sng670": "Pass 2 (Erik 2026-10-04): the pocket's ruling power. A people is not a tradition; the power is how the pocket meets the world."
+  },
+  {
+   "id": "power_greyspire",
+   "name": "Greyspire Hold",
+   "kind": "lordship",
+   "temper": "hard",
+   "seat": "greyspire",
+   "reach": [
+    "greyspire",
+    "kindlerow"
+   ],
+   "leader": "holdmother_ragna",
+   "answersTo": null,
+   "strength": {
+    "scale": "unit",
+    "contingents": [
+     {
+      "n": 45,
+      "quality": 2,
+      "what": "spire-wardens and rope-crews"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "greyspire",
+     "kind": "post",
+     "name": "the crown-wall of the grey spire",
+     "garrison": 20
+    }
+   ],
+   "verbs": [
+    "protect",
+    "patrol",
+    "tax"
+   ],
+   "encounters": [],
+   "dangerLift": 1,
+   "noticesYouWhen": [
+    "neighbour",
+    "crossed"
+   ],
+   "wantsFromYou": "Respect for the stair, and a toll for the timber.",
+   "offersYou": "A safe road down into the forest, and a dwarf's word on the price.",
+   "leverage": "Ragna cannot resist an argument about elves, and loses her temper on it.",
+   "whenBroken": "The spire stands empty and the Silverbough's elves come down to look at it, and do not gloat.",
+   "rivals": [],
+   "opposedBy": [],
+   "plainly": "The westernmost dwarven hold, on a grey spire above the southern forest's canopy, trading and arguing across the tree-line with the Silverbough's elves.",
+   "descriptionSeed": "Greyspire was built to watch the forest, and has spent four hundred years watching the elves in it. Dwarves and elves have argued across that tree-line for longer than either will admit, and traded across it longer still; Hold-Mother Ragna keeps both habits alive.",
+   "appearance": "A grey spire standing out of a green sea of canopy, walls wrapped round its crown, rope-lifts and a long stair down to the trees",
+   "comes": "mixed",
+   "houseAt": "the_crossing",
+   "_sng670": "Pass 2 (Erik 2026-10-04): the pocket's ruling power. A people is not a tradition; the power is how the pocket meets the world."
+  },
+  {
+   "id": "power_deepmark",
+   "name": "The Kingdom of Deepmark",
+   "kind": "sovereignty",
+   "temper": "fair",
+   "seat": "deepmark",
+   "reach": [
+    "deepmark",
+    "bedrock"
+   ],
+   "leader": "king_odran",
+   "answersTo": null,
+   "strength": {
+    "scale": "unit",
+    "contingents": [
+     {
+      "n": 90,
+      "quality": 2,
+      "what": "stone-guard of the deep halls"
+     },
+     {
+      "n": 150,
+      "quality": 1,
+      "what": "deep-miners"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "deepmark",
+     "kind": "post",
+     "name": "the stair-gate in the Given Land's bedrock",
+     "garrison": 35
+    }
+   ],
+   "verbs": [
+    "protect",
+    "inform",
+    "tax"
+   ],
+   "encounters": [],
+   "dangerLift": 0,
+   "noticesYouWhen": [
+    "wealth",
+    "crossed"
+   ],
+   "wantsFromYou": "The truth, weighed. Deepmark deals only with people who say what they mean.",
+   "offersYou": "Stone that will bear any weight, and a king's honest measure.",
+   "leverage": "Odran cannot abide a lie, even a kind one, and will break a deal over it.",
+   "whenBroken": "The stair-gate closes, and the Masons above feel their floor go hollow.",
+   "rivals": [],
+   "opposedBy": [],
+   "plainly": "An underground dwarven kingdom in the deep stone beneath the Given Land, ruled by a king who trusts only what has never been above ground.",
+   "descriptionSeed": "The Masons of the Given Land believe only what can be touched. The dwarves under them went further: they believe only what has never been touched by daylight. Deepmark's king measures every word as he would a block of stone, and lately the deepest shaft has started to ring.",
+   "appearance": "A stair cut into bedrock that does not stop, halls of black stone lit by forge-glow, and a throne carved from the floor",
+   "comes": "quiet",
+   "houseAt": "the_crossing",
+   "_sng670": "Pass 2 (Erik 2026-10-04): the pocket's ruling power. A people is not a tradition; the power is how the pocket meets the world."
+  },
+  {
+   "id": "power_undermere",
+   "name": "The Undermere Crown",
+   "kind": "sovereignty",
+   "temper": "hard",
+   "seat": "undermere",
+   "reach": [
+    "undermere",
+    "the_bargain_gate"
+   ],
+   "leader": "lakequeen_sigrun",
+   "answersTo": null,
+   "strength": {
+    "scale": "unit",
+    "contingents": [
+     {
+      "n": 50,
+      "quality": 2,
+      "what": "lake-guard in black wool"
+     },
+     {
+      "n": 70,
+      "quality": 1,
+      "what": "boatmen and cavern-farmers"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "undermere",
+     "kind": "post",
+     "name": "the double-locked door at the top of the stair",
+     "garrison": 25
+    }
+   ],
+   "verbs": [
+    "protect",
+    "smuggle",
+    "inform"
+   ],
+   "encounters": [],
+   "dangerLift": 1,
+   "noticesYouWhen": [
+    "wealth",
+    "crossed"
+   ],
+   "wantsFromYou": "To be watched the whole time you are here, and to accept it.",
+   "offersYou": "The only safe trade route between the Descent and everyone else.",
+   "leverage": "The Queen fears the Descent more than she shows; an ally against it would be worth anything.",
+   "whenBroken": "The lower door opens and the Bargain Gate's traders walk up the stair unwatched.",
+   "rivals": [],
+   "opposedBy": [],
+   "plainly": "A dwarven kingdom around an underground lake in the caverns beside the Descent, trading with the Abyssal Choir and keeping its doors locked from both sides.",
+   "descriptionSeed": "Undermere sits between the world and the Descent and makes its living from that. Lake-Queen Sigrun trades with the Abyssal Choir and with everyone else, and keeps a lock on each face of her door, because she knows what the Choir sells and how it is paid for.",
+   "appearance": "A black lake under a cavern roof, stone quays, lamplit boats, a city in tiers round the water, and a great door with a lock on each face",
+   "comes": "quiet",
+   "houseAt": "the_crossing",
+   "_sng670": "Pass 2 (Erik 2026-10-04): the pocket's ruling power. A people is not a tradition; the power is how the pocket meets the world."
+  },
+  {
+   "id": "power_evenwood",
+   "name": "The Court of the Evenwood",
+   "kind": "sovereignty",
+   "temper": "kind",
+   "seat": "evenwood",
+   "reach": [
+    "evenwood",
+    "ent_deepwood"
+   ],
+   "leader": "lady_aelindra",
+   "answersTo": null,
+   "strength": {
+    "scale": "unit",
+    "contingents": [
+     {
+      "n": 60,
+      "quality": 3,
+      "what": "wardens of the wood, bow and longknife"
+     },
+     {
+      "n": 90,
+      "quality": 1,
+      "what": "foragers and wood-tenders"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "evenwood",
+     "kind": "post",
+     "name": "the root-hall under the eldest tree",
+     "garrison": 25
+    }
+   ],
+   "verbs": [
+    "protect",
+    "patrol"
+   ],
+   "encounters": [],
+   "dangerLift": 0,
+   "noticesYouWhen": [
+    "crossed",
+    "neighbour"
+   ],
+   "wantsFromYou": "To walk softly, take nothing living, and leave before the lanterns rise.",
+   "offersYou": "Safe passage through the deep forest, and healing no one outside it can do.",
+   "leverage": "The Evenwood will do much to keep the ents' agreement private.",
+   "whenBroken": "The lanterns go out in the high trees and the forest closes over the paths.",
+   "rivals": [],
+   "opposedBy": [],
+   "plainly": "An elven forest territory where the great western forest meets the Deepwood. The elves and the ents are the two oldest things in it.",
+   "descriptionSeed": "The Evenwood's elves have shared the deep forest with the ents for longer than either people has been counting, under an agreement about which of them is older that neither will say aloud. Now the Deepwood's Rootbound want to seal the wood, and the Lady of the Evenwood has not said which side her people are on.",
+   "appearance": "Old trees with halls grown into their roots, paths that are not quite paths, and lanterns hung so high they look like slow stars",
+   "comes": "quiet",
+   "houseAt": "the_crossing",
+   "_sng670": "Pass 2 (Erik 2026-10-04): the pocket's ruling power. A people is not a tradition; the power is how the pocket meets the world."
+  },
+  {
+   "id": "power_silverbough",
+   "name": "The Court of the Silverbough",
+   "kind": "sovereignty",
+   "temper": "fair",
+   "seat": "silverbough",
+   "reach": [
+    "silverbough",
+    "the_greenward"
+   ],
+   "leader": "lord_thalanor",
+   "answersTo": null,
+   "strength": {
+    "scale": "unit",
+    "contingents": [
+     {
+      "n": 70,
+      "quality": 3,
+      "what": "canopy archers"
+     },
+     {
+      "n": 60,
+      "quality": 1,
+      "what": "canopy-walkers and silverwood cutters"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "silverbough",
+     "kind": "post",
+     "name": "the rope-stair's anchor hall",
+     "garrison": 20
+    }
+   ],
+   "verbs": [
+    "protect",
+    "patrol",
+    "inform"
+   ],
+   "encounters": [],
+   "dangerLift": 0,
+   "noticesYouWhen": [
+    "crossed",
+    "neighbour"
+   ],
+   "wantsFromYou": "To be invited. Nobody climbs to the Silverbough uninvited and comes down the same way.",
+   "offersYou": "Silverwood, elven bows, and a view of the world from above the trees.",
+   "leverage": "The Silverbough cannot bear to be seen. Whoever can show them to the world below has their attention.",
+   "whenBroken": "The halls go dark and the rope-stair hangs down for anyone, which is worse.",
+   "rivals": [],
+   "opposedBy": [],
+   "plainly": "Elven halls built into the high canopy of the southern forest. You can walk a day beneath it and not know it is there.",
+   "descriptionSeed": "The Silverbough is a city nobody below has seen, and its lord intends to keep it that way. Greyspire's dwarves can see its lanterns from their walls, and the two holds have argued and traded across the tree-line for four centuries; lately the rope-stair has been drawn up.",
+   "appearance": "Silver-barked trees with halls and bridges in the canopy, lantern-light seen from below as a silver haze, and a rope-stair let down only for guests",
+   "comes": "quiet",
+   "houseAt": "the_crossing",
+   "_sng670": "Pass 2 (Erik 2026-10-04): the pocket's ruling power. A people is not a tradition; the power is how the pocket meets the world."
+  },
+  {
+   "id": "power_highmere",
+   "name": "The Highmere Conclave",
+   "kind": "sovereignty",
+   "temper": "fair",
+   "seat": "highmere",
+   "reach": [
+    "highmere",
+    "the_figure_works"
+   ],
+   "leader": "archon_seralyn",
+   "answersTo": null,
+   "strength": {
+    "scale": "unit",
+    "contingents": [
+     {
+      "n": 40,
+      "quality": 3,
+      "what": "sky-wardens"
+     },
+     {
+      "n": 40,
+      "quality": 1,
+      "what": "tenders of the floating gardens"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "highmere",
+     "kind": "post",
+     "name": "the foot of the pale stair",
+     "garrison": 15
+    }
+   ],
+   "verbs": [
+    "protect",
+    "inform"
+   ],
+   "encounters": [],
+   "dangerLift": 0,
+   "noticesYouWhen": [
+    "crossed"
+   ],
+   "wantsFromYou": "To come up only when the stair is down, and to stop asking how it stays up.",
+   "offersYou": "The view from above everything, and elven learning no one below can match.",
+   "leverage": "The city is sinking. Whoever can help the Archon without being told why has her favour.",
+   "whenBroken": "The stair comes down for the last time, and the city drifts away over the Pattern Reach and is not seen again.",
+   "rivals": [],
+   "opposedBy": [],
+   "plainly": "An elven sky city drifting above the high ground at the Pattern Reach's edge. The Figurists say it is held up by an idea.",
+   "descriptionSeed": "Highmere floats, and nobody below understands why. The Figurists say it is held up by an idea; the elves say that is the same thing, and the Archon lets them argue. This year the city has dropped twenty feet, and the Archon has ordered that no one mention it.",
+   "appearance": "White towers on a floating island of rock, waterfalls turning to cloud before they land, and a long pale stair that reaches the ground only when Highmere wants it to",
+   "comes": "quiet",
+   "houseAt": "the_crossing",
+   "_sng670": "Pass 2 (Erik 2026-10-04): the pocket's ruling power. A people is not a tradition; the power is how the pocket meets the world."
+  },
+  {
+   "id": "power_windspire",
+   "name": "The Windspire Anchorage",
+   "kind": "sovereignty",
+   "temper": "fair",
+   "seat": "windspire",
+   "reach": [
+    "windspire",
+    "the_middle_way"
+   ],
+   "leader": "windlord_kaelen",
+   "answersTo": null,
+   "strength": {
+    "scale": "unit",
+    "contingents": [
+     {
+      "n": 50,
+      "quality": 3,
+      "what": "glider-riders"
+     },
+     {
+      "n": 60,
+      "quality": 2,
+      "what": "anchor-wardens on the peaks"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "windspire",
+     "kind": "post",
+     "name": "the anchor-fort on the eastern peak",
+     "garrison": 30
+    }
+   ],
+   "verbs": [
+    "protect",
+    "patrol",
+    "recruit"
+   ],
+   "encounters": [],
+   "dangerLift": 0,
+   "noticesYouWhen": [
+    "crossed",
+    "neighbour"
+   ],
+   "wantsFromYou": "Nerve. Windspire trades with anyone who will ride the chain-lift up.",
+   "offersYou": "Elven gliders, and fighters who come down to the Crossing to win.",
+   "leverage": "The chains are everything. Whoever threatens them, or guards them, has the Windlord's whole attention.",
+   "whenBroken": "A chain parts and Windspire swings out over the range; its people come down for good, and hate the ground.",
+   "rivals": [],
+   "opposedBy": [],
+   "plainly": "An elven sky city anchored to the eastern peaks by chains a mile long. Its people come down to trade and to fight at the Crossing.",
+   "descriptionSeed": "Windspire floats like Highmere but does not drift: it is chained to the eastern peaks, and its people fly the anchor-lines for sport. The Windlord sends his best to the Crossing's Coliseum every season, and they climb back up as though the ground were slightly embarrassing.",
+   "appearance": "Spires on a floating crag, chains as thick as a man running down to anchor-forts on the peaks, and gliders circling the lines",
+   "comes": "loud",
+   "houseAt": "the_crossing",
+   "_sng670": "Pass 2 (Erik 2026-10-04): the pocket's ruling power. A people is not a tradition; the power is how the pocket meets the world."
+  },
+  {
+   "id": "power_coral_court",
+   "name": "The Coral Court",
+   "kind": "sovereignty",
+   "temper": "kind",
+   "seat": "coral_court",
+   "reach": [
+    "coral_court",
+    "thinwater"
+   ],
+   "leader": "queen_marisol",
+   "answersTo": null,
+   "strength": {
+    "scale": "unit",
+    "contingents": [
+     {
+      "n": 80,
+      "quality": 2,
+      "what": "reef-guard with trident and net"
+     },
+     {
+      "n": 100,
+      "quality": 1,
+      "what": "reef-gardeners"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "coral_court",
+     "kind": "post",
+     "name": "the ring of standing stones in the shallows",
+     "garrison": 20
+    }
+   ],
+   "verbs": [
+    "protect",
+    "inform"
+   ],
+   "encounters": [],
+   "dangerLift": 0,
+   "noticesYouWhen": [
+    "crossed",
+    "wealth"
+   ],
+   "wantsFromYou": "To meet in the ring, on the full tide, and to keep your promises to the sea.",
+   "offersYou": "Safe passage on the Inner Sea, pearls, and merfolk healing.",
+   "leverage": "The Queen wants a seat among the Mavens that does not have to be carried in. Help with that is remembered.",
+   "whenBroken": "The reef city goes dark and the Inner Sea's ships start to founder where they never did.",
+   "rivals": [],
+   "opposedBy": [],
+   "plainly": "A merfolk court in the reefs of the Inner Sea. Its envoys come ashore at Thinwater on the full tide; the Mavens keep a pool in the Crossing for them.",
+   "descriptionSeed": "The Coral Court is the largest people of the Inner Sea, and the gentlest, until the sea is threatened. Queen Marisol meets land-folk in a ring of stones at the tide-line, and this year the reef nearest Thinwater has begun to die.",
+   "appearance": "A reef city just under the surface, coral spires breaking the water at low tide, lit from below, and a ring of standing stones in the shallows",
+   "comes": "quiet",
+   "houseAt": "the_crossing",
+   "_sng670": "Pass 2 (Erik 2026-10-04): the pocket's ruling power. A people is not a tradition; the power is how the pocket meets the world."
+  },
+  {
+   "id": "power_saltmarch",
+   "name": "The Saltmarch Netguild",
+   "kind": "guild",
+   "temper": "fair",
+   "seat": "the_saltmarch",
+   "reach": [
+    "the_saltmarch",
+    "the_figure_works"
+   ],
+   "leader": "harbourmistress_wenna",
+   "answersTo": null,
+   "strength": {
+    "scale": "unit",
+    "contingents": [
+     {
+      "n": 20,
+      "quality": 2,
+      "what": "harbour-watch"
+     },
+     {
+      "n": 70,
+      "quality": 1,
+      "what": "fishers and salters"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "the_saltmarch",
+     "kind": "post",
+     "name": "the harbour-house on the tallest stilts",
+     "garrison": 10
+    }
+   ],
+   "verbs": [
+    "tax",
+    "smuggle",
+    "inform"
+   ],
+   "encounters": [],
+   "dangerLift": 0,
+   "noticesYouWhen": [
+    "wealth"
+   ],
+   "wantsFromYou": "Coin for salt, and no trouble on the stilts.",
+   "offersYou": "Salt, fish, boats, and silence about where you are going.",
+   "leverage": "The Netguild sells to everyone; whoever would make them choose a side makes an enemy of the whole town.",
+   "whenBroken": "The pans flood, the nets rot, and the Pattern Reach goes without salt for a season.",
+   "rivals": [],
+   "opposedBy": [],
+   "plainly": "A stilt-town over the shallows of the western sea: salt-pans, net-lofts, boats for streets. It sells to anyone.",
+   "descriptionSeed": "The Saltmarch fishes, salts and sells to anyone, and the Netguild that runs it has stayed independent by being useful to everyone at once. Harbourmistress Wenna knows who is buying what, which is most of what anyone needs to know about the western sea.",
+   "appearance": "Houses on stilts over grey shallows, white salt-pans in square rows, nets drying on every rail, and boats tied up where streets would be",
+   "comes": "mixed",
+   "houseAt": "the_hundred_markets",
+   "_sng670": "Pass 2 (Erik 2026-10-04): the pocket's ruling power. A people is not a tradition; the power is how the pocket meets the world."
+  },
+  {
+   "id": "power_greywater_kin",
+   "name": "The Greywater Kin",
+   "kind": "order",
+   "temper": "kind",
+   "seat": "greywater_deep",
+   "reach": [
+    "greywater_deep",
+    "the_hollowing"
+   ],
+   "leader": "the_grey_mother",
+   "answersTo": null,
+   "strength": {
+    "scale": "unit",
+    "contingents": [
+     {
+      "n": 40,
+      "quality": 2,
+      "what": "selkies of the grey sea"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "greywater_deep",
+     "kind": "post",
+     "name": "the seal-rocks below the cairns",
+     "garrison": 10
+    }
+   ],
+   "verbs": [
+    "protect",
+    "inform"
+   ],
+   "encounters": [],
+   "dangerLift": 0,
+   "noticesYouWhen": [
+    "crossed"
+   ],
+   "wantsFromYou": "To leave the skins alone, and to mourn your dead honestly.",
+   "offersYou": "Songs for the drowned, and safe water off the Palelands.",
+   "leverage": "A stolen skin is the one thing the kin will do anything to recover.",
+   "whenBroken": "The singing stops, and the Palelands' drowned stop resting.",
+   "rivals": [],
+   "opposedBy": [],
+   "plainly": "The selkies of the Greywater Deep, a grey sea off the Palelands. They come ashore at the Ashwardens' cairns to sing for the drowned.",
+   "descriptionSeed": "The Greywater Kin are as much a mourning-order as a people. They come ashore at the Ashwardens' cairns to sing for whoever the sea has taken, and take their skins back before morning; the Ashwardens consider them colleagues.",
+   "appearance": "A grey harbour of seal-rocks and kelp, a ring of cairns on the shore, and grey heads in the water watching the tide-line",
+   "comes": "quiet",
+   "houseAt": "the_crossing",
+   "_sng670": "Pass 2 (Erik 2026-10-04): the pocket's ruling power. A people is not a tradition; the power is how the pocket meets the world."
+  },
+  {
+   "id": "power_tidewrought",
+   "name": "The Tidewrought Compact",
+   "kind": "sovereignty",
+   "temper": "fair",
+   "seat": "tidewrought",
+   "reach": [
+    "tidewrought",
+    "the_told_ground"
+   ],
+   "leader": "captain_joss",
+   "answersTo": null,
+   "strength": {
+    "scale": "unit",
+    "contingents": [
+     {
+      "n": 90,
+      "quality": 2,
+      "what": "deck-hands who fight"
+     },
+     {
+      "n": 200,
+      "quality": 1,
+      "what": "the city's sailors and traders"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "tidewrought",
+     "kind": "post",
+     "name": "the captain's deck, at the city's heart",
+     "garrison": 30
+    }
+   ],
+   "verbs": [
+    "protect",
+    "smuggle",
+    "recruit",
+    "expand"
+   ],
+   "encounters": [],
+   "dangerLift": 1,
+   "noticesYouWhen": [
+    "wealth",
+    "crossed"
+   ],
+   "wantsFromYou": "Hands for the season, or coin for passage, and a vote if you stay.",
+   "offersYou": "Passage anywhere the ocean touches, and trade from every coast.",
+   "leverage": "The captain is elected each season; whoever can sway the vote steers the city.",
+   "whenBroken": "The hulls are cut apart and sail off in a hundred directions, and the ocean has no city.",
+   "rivals": [],
+   "opposedBy": [],
+   "plainly": "A city of hulls lashed together on the open ocean, never in the same place twice. It elects its captain every season.",
+   "descriptionSeed": "The Tidewrought is a city, a fleet and an argument. Its captain is elected for a season at a time, and Joss Hullmarrow has been elected seven times by promising one more voyage. Every season, some ship comes into some harbour and says the Tidewrought sent it.",
+   "appearance": "Hundreds of hulls lashed into one floating town, masts like a forest, rope bridges between decks, and a market on the biggest deck that never closes",
+   "comes": "loud",
+   "houseAt": "the_crossing",
+   "_sng670": "Pass 2 (Erik 2026-10-04): the pocket's ruling power. A people is not a tradition; the power is how the pocket meets the world."
+  },
+  {
+   "id": "power_drowned_crown",
+   "name": "The Drowned Crown",
+   "kind": "sovereignty",
+   "temper": "hard",
+   "seat": "drowned_crown",
+   "reach": [
+    "drowned_crown",
+    "the_scouring"
+   ],
+   "leader": "king_aldric_drowned",
+   "answersTo": null,
+   "strength": {
+    "scale": "unit",
+    "contingents": [
+     {
+      "n": 60,
+      "quality": 3,
+      "what": "drowned knights in sea-dark plate"
+     },
+     {
+      "n": 120,
+      "quality": 1,
+      "what": "the drowned court and its people"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "drowned_crown",
+     "kind": "post",
+     "name": "the palace on the drowned stairs",
+     "garrison": 30
+    }
+   ],
+   "verbs": [
+    "protect",
+    "inform"
+   ],
+   "encounters": [],
+   "dangerLift": 1,
+   "noticesYouWhen": [
+    "crossed",
+    "wealth"
+   ],
+   "wantsFromYou": "To be addressed as a kingdom, and to bring its claims to the Mavens.",
+   "offersYou": "Treasure from the sea floor, and the loyalty of a court that does not die.",
+   "leverage": "Recognition is everything to the Drowned King; whoever carries his claim to the Mavens has his favour.",
+   "whenBroken": "The court finally stops; the palace becomes a wreck, and the treasure becomes salvage.",
+   "rivals": [],
+   "opposedBy": [],
+   "plainly": "A kingdom that went under the ocean and did not stop being a kingdom. Its claims go to the Mavens, who have never known what to do with them.",
+   "descriptionSeed": "Three hundred years ago a kingdom sank, and its people kept their court on the drowned stairs and learned to breathe the sea. King Aldric sends his crown's claims to the Mavens every season, and every season the Mavens decline to decide; this year he has sent a knight to the Coliseum to win the claim by renown instead.",
+   "appearance": "A palace on the sea floor, its towers still upright, banners moving slowly in the current, and drowned courtiers keeping a ceremony three centuries long",
+   "comes": "quiet",
+   "houseAt": "the_crossing",
+   "_sng670": "Pass 2 (Erik 2026-10-04): the pocket's ruling power. A people is not a tradition; the power is how the pocket meets the world.",
+   "petitions": {
+    "to": "power_council_of_mavens",
+    "for": "recognition of a crown that went under the sea and did not end"
+   }
+  },
+  {
+   "id": "power_leviathan_road",
+   "name": "The Riders of the Leviathan Road",
+   "kind": "order",
+   "temper": "fair",
+   "seat": "leviathan_road",
+   "reach": [
+    "leviathan_road",
+    "the_blaze"
+   ],
+   "leader": "matriarch_oona",
+   "answersTo": null,
+   "strength": {
+    "scale": "unit",
+    "contingents": [
+     {
+      "n": 50,
+      "quality": 3,
+      "what": "leviathan-riders"
+     },
+     {
+      "n": 60,
+      "quality": 1,
+      "what": "outriders and harness-tenders"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "leviathan_road",
+     "kind": "post",
+     "name": "the harness-camp on the lead leviathan's back",
+     "garrison": 15
+    }
+   ],
+   "verbs": [
+    "protect",
+    "patrol",
+    "feud"
+   ],
+   "encounters": [],
+   "dangerLift": 1,
+   "noticesYouWhen": [
+    "crossed"
+   ],
+   "wantsFromYou": "To leave the leviathans unhunted. That is the whole of it.",
+   "offersYou": "Passage across the ocean at the speed of a leviathan, and riders who fight like nothing else alive.",
+   "leverage": "Anyone who harms a leviathan has the whole Road as an enemy; anyone who saves one has it as a friend.",
+   "whenBroken": "The riders scatter, and the leviathans are hunted on every coast within a generation.",
+   "rivals": [],
+   "opposedBy": [],
+   "plainly": "The riders who follow the great leviathans across the world ocean, living on the backs of beasts the size of towns.",
+   "descriptionSeed": "The Leviathan Road is a migration and a people. The riders live on the leviathans' backs and come ashore only to trade and to fight, and they have one law: nobody hunts a leviathan. This season, for the first time in living memory, the leviathans have turned north.",
+   "appearance": "A line of vast backs breaking the ocean surface, huts and harness-rigging on them, and riders standing on the swell as if it were a road",
+   "comes": "loud",
+   "houseAt": "the_crossing",
+   "_sng670": "Pass 2 (Erik 2026-10-04): the pocket's ruling power. A people is not a tradition; the power is how the pocket meets the world."
+  },
+  {
+   "id": "power_sunfold",
+   "name": "The Sunwardens of Sunfold",
+   "kind": "order",
+   "temper": "fair",
+   "seat": "sunfold",
+   "reach": [
+    "sunfold",
+    "the_long_noon"
+   ],
+   "leader": "sunwarden_maelis",
+   "answersTo": null,
+   "strength": {
+    "scale": "unit",
+    "contingents": [
+     {
+      "n": 30,
+      "quality": 2,
+      "what": "Sunwardens who climb the works"
+     },
+     {
+      "n": 150,
+      "quality": 1,
+      "what": "cutting-crews and farmers who hold the line against the Long Noon"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "sunfold",
+     "kind": "post",
+     "name": "the clock-tower, which strikes the sun's hours",
+     "garrison": 20
+    }
+   ],
+   "verbs": [
+    "protect",
+    "tax",
+    "recruit"
+   ],
+   "encounters": [],
+   "dangerLift": 0,
+   "noticesYouWhen": [
+    "neighbour",
+    "wealth"
+   ],
+   "wantsFromYou": "Hands at the cut line in the growing season, and anything you know about how a kept sun works.",
+   "offersYou": "Grain, bread, and a bed under a sun, which is worth more than it sounds two strata down.",
+   "leverage": "Half the Near Under eats Sunfold's grain. Whoever threatens the sun threatens all of them, and the Sunwardens know it.",
+   "whenBroken": "The fields go untended, the Long Noon crosses the west wall in a season, and the Near Under is hungry by winter.",
+   "rivals": [],
+   "opposedBy": [],
+   "plainly": "The farming town under a kept sun, two strata down, and the order that keeps the sun rising.",
+   "descriptionSeed": "The Sunwardens keep a machine nobody alive built, so that a town can farm under it. They are farmers first and keepers second, and they are getting better at the second because they have to.",
+   "appearance": "Sun-browned people in work-clothes with brass keys on chains, climbing ladders into a sun.",
+   "comes": "quiet",
+   "houseAt": "the_crossing",
+   "_sng671": "Erik 2026-10-04: 'yes' to the deep places. The ruling power of a kept-sun town."
+  },
+  {
+   "id": "power_hanging_weather",
+   "name": "The Capwardens of the Hanging Weather",
+   "kind": "order",
+   "temper": "hard",
+   "seat": "the_hanging_weather",
+   "reach": [
+    "the_hanging_weather",
+    "the_first_bore"
+   ],
+   "leader": "capwarden_tolvar",
+   "answersTo": null,
+   "strength": {
+    "scale": "unit",
+    "contingents": [
+     {
+      "n": 40,
+      "quality": 3,
+      "what": "cap-keepers who know every shaft"
+     },
+     {
+      "n": 90,
+      "quality": 1,
+      "what": "Boreborn haulers and gallery-hands"
+     }
+    ]
+   },
+   "holds": [
+    {
+     "at": "the_hanging_weather",
+     "kind": "post",
+     "name": "the high gallery, where the weather is read",
+     "garrison": 15
+    },
+    {
+     "at": "the_first_bore",
+     "kind": "post",
+     "name": "the cap-keepers' ring round the First Bore",
+     "garrison": 12
+    }
+   ],
+   "verbs": [
+    "protect",
+    "patrol"
+   ],
+   "encounters": [],
+   "dangerLift": 0,
+   "noticesYouWhen": [
+    "neighbour",
+    "crossed"
+   ],
+   "wantsFromYou": "To stay away from the caps, or to help keep them shut.",
+   "offersYou": "Guides down the old harvest ways, and rain.",
+   "leverage": "The Enginewrights need the Boreborn to keep the caps and do not trust them; the Boreborn need the Wrights' iron and do not trust them back.",
+   "whenBroken": "The caps go unwatched. Nobody knows what that means, which is the reason they were watched.",
+   "rivals": [],
+   "opposedBy": [],
+   "plainly": "The descendants of the harvest crews, who live in a vault with its own weather and keep the caps on the old bores.",
+   "descriptionSeed": "The Boreborn's ancestors drew the core up those shafts. The Boreborn keep them shut, and are not sure whether that is penance, duty, or fear.",
+   "appearance": "Weathered people in oilskins with harvest tattoos on their arms, ringing iron caps with hammers and listening.",
+   "comes": "quiet",
+   "houseAt": "the_crossing",
+   "_sng671": "Erik 2026-10-04: 'yes' to the deep places. The keepers of the caps."
   }
  ]
 }

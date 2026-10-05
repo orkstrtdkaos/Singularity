@@ -1,0 +1,61 @@
+{
+ "schemaVersion": 1,
+ "id": "long_delve",
+ "name": "The Long Delve",
+ "regionId": "pocket_long_delve",
+ "communityId": "long_delve",
+ "spectrum": {
+  "concrete_abstract": -0.3,
+  "chaos_order": 0.4
+ },
+ "poleIntensity": {
+  "concrete": 0.3,
+  "order": 0.4
+ },
+ "tags": [
+  "settlement",
+  "pocket"
+ ],
+ "connections": [
+  "the_drawn_hour"
+ ],
+ "descriptionSeed": "A dwarven hold in the Kept Reach range that has been driving the same tunnel west for nine hundred years. The Hourkeepers trust its calendars more than their own, because the Delve keeps them in stone and does not hurry.",
+ "loreRefs": [],
+ "npcsPresent": [],
+ "encounterFlavor": "tunnelers, stone-calendar keepers, and Hourkeeper scholars come to check a date",
+ "dangerLevel": 2,
+ "questSeeds": [],
+ "map": {
+  "x": 318,
+  "y": 165
+ },
+ "encounterSeeds": [],
+ "axisVector": [
+  0,
+  0,
+  0,
+  0,
+  -0.3,
+  0,
+  0.4,
+  0,
+  0,
+  0,
+  0,
+  0
+ ],
+ "axisVectorNote": "Derived from authored spectrum against world_node_atlas.axisOrder (SNG-180).",
+ "substrateDensity": 0.6,
+ "worldPos": {
+  "colatitude": 80,
+  "longitude": 307,
+  "depth": 0
+ },
+ "worldPosNote": "SNG-670: placed on the world's own mountain (Erik 2026-10-04: \"they live in pockets across the world, in the typical places of their kind\").",
+ "people": "dwarven",
+ "tier": "settlement",
+ "parentId": null,
+ "role": "waypoint",
+ "appearance": "A narrow gate in a sheer face, a stone clock above it carved by the century, and lamplight running away down a tunnel so straight you can see where it will be in a hundred years.",
+ "_sng670": "A pocket: a centre with its own ground, the way a foothill is. Its people are not a tradition; its ruling power and leader come in pass 2."
+}

@@ -1,0 +1,138 @@
+{
+ "schemaVersion": 1,
+ "id": "sunwarden_maelis",
+ "name": "Maelis Orrow",
+ "tier": "regional",
+ "level": 18,
+ "role": "Sunwarden of Sunfold: keeps the kept sun's works and its dawn, and the town that lives under it",
+ "people": "sunfolk",
+ "gender": "woman",
+ "pronouns": "she/her",
+ "sex": "female",
+ "romanceEligible": true,
+ "homeLocation": "sunfold",
+ "communityId": "pocket_sunfold.sunfold",
+ "domains": {
+  "primary": "rootkin",
+  "secondary": "hourkeeper",
+  "tertiary": "enginewright"
+ },
+ "spectrum": {
+  "death_life": 0.6,
+  "chaos_order": 0.4,
+  "dark_light": 0.3
+ },
+ "assistTags": [
+  "tend",
+  "mend",
+  "lead"
+ ],
+ "appearance": "Sun-browned and broad-handed, with a farmer's squint and soot from the works under her nails. Wears a Sunwarden's brass key on a chain and a straw hat she does not need.",
+ "personality": {
+  "warmth": 0.8,
+  "trust": 0.6,
+  "candor": 0.7,
+  "patience": 0.7
+ },
+ "voiceHints": "Talks about the sun as a neighbour who needs looking after. Tells the time by it without looking up.",
+ "wants": "To understand the sun's works well enough to fix them when they fail, instead of only keeping them from failing.",
+ "fears": "That Sunfold's sun goes the way of the Long Noon, or the Orchard Gone Out, and that she will be the Sunwarden on duty.",
+ "knowledge": [
+  "The kept sun's cycle to the minute, and the three places in the works where it has started to drift",
+  "Which of the Near Under's towns would starve in a season without Sunfold's grain",
+  "That the Long Noon was a tended sun once, and roughly when it stopped setting"
+ ],
+ "reactsToReputation": {
+  "honest": "talks plainly about the sun's drift",
+  "kind": "takes you up the ladders to see the works",
+  "reckless": "keeps you away from the works",
+  "any": "offers you bread and asks what the sky looks like"
+ },
+ "_reactsWhy": "tag -> response, from corpus tags (NPC_AUTHORING_TEMPLATE #4)",
+ "questSeeds": [
+  "The sun is drifting: dawn came eleven minutes late this month, and the Sunwardens' oldest notes do not say what to do",
+  "A cutting-crew went into the Long Noon and came out one short"
+ ],
+ "gear": [
+  "the Sunwarden's brass key",
+  "a pruning hook",
+  "a book of dawn-times copied from older books"
+ ],
+ "purse": {
+  "crystal": 120
+ },
+ "closed": [],
+ "title": "Sunwarden of Sunfold",
+ "vocation": "KEEPER",
+ "fullName": "Maelis Daina Orrow",
+ "nameKnown": "world",
+ "aliases": [
+  "Maelis",
+  "the Sunwarden"
+ ],
+ "subAttributes": {
+  "strength": 12,
+  "agility": 10,
+  "reason": 12,
+  "insight": 13,
+  "presence": 12,
+  "rapport": 14,
+  "craft": 13,
+  "wits": 11
+ },
+ "physicality": "ADULT, in her forties. Sturdy, sun-browned, broad hands. WHAT CATCHES THE EYE: the brass key on its chain and a straw hat worn under a sun two strata underground.",
+ "intimacyNotes": "AVAILABLE, slowly. Unmarried; the town assumes she is married to the sun. She would like someone who asks about the works and listens to the answer.",
+ "abilities": [
+  {
+   "abilityId": "quickening",
+   "level": 2,
+   "why": "rootkin primary: brings a failing field back"
+  },
+  {
+   "abilityId": "greenlore",
+   "level": 2,
+   "why": "a farmer's whole knowledge of what grows and what cures"
+  },
+  {
+   "abilityId": "speaking_grove",
+   "level": 2,
+   "why": "talks to the orchards, and to the Long Noon when she has to"
+  },
+  {
+   "abilityId": "lifesense",
+   "level": 1,
+   "why": "counts what is alive at the jungle's edge"
+  },
+  {
+   "abilityId": "bark_and_briar",
+   "level": 1,
+   "why": "stands at the cut line when the Long Noon pushes back"
+  },
+  {
+   "abilityId": "hour_sense",
+   "level": 2,
+   "why": "hourkeeper secondary: knows the sun's hour without looking"
+  },
+  {
+   "abilityId": "kept_count",
+   "level": 2,
+   "why": "knows how long the sun has left in any cycle"
+  },
+  {
+   "abilityId": "stretched_hour",
+   "level": 1,
+   "why": "makes a failing lamp, or a failing dawn, last a little longer"
+  },
+  {
+   "abilityId": "mech_sense",
+   "level": 2,
+   "why": "enginewright tertiary: reads the sun's works on sight"
+  },
+  {
+   "abilityId": "mend_device",
+   "level": 2,
+   "why": "keeps the works running with her own hands"
+  }
+ ],
+ "_authoredWhy": "SNG-671 (Erik 2026-10-04, 'yes' to the deep places). Full sheet per NPC_AUTHORING_TEMPLATE: tier and level at or above the rung floor, eight sub-attributes, crafts by id from her three traditions with a reason each, reputation as tags."
+}

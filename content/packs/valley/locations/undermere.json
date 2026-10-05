@@ -1,0 +1,61 @@
+{
+ "schemaVersion": 1,
+ "id": "undermere",
+ "name": "Undermere",
+ "regionId": "pocket_undermere",
+ "communityId": "undermere",
+ "spectrum": {
+  "dark_light": -0.3,
+  "demonic_angelic": -0.15
+ },
+ "poleIntensity": {
+  "dark": 0.3,
+  "demonic": 0.15
+ },
+ "tags": [
+  "settlement",
+  "pocket"
+ ],
+ "connections": [
+  "the_bargain_gate"
+ ],
+ "descriptionSeed": "A dwarven kingdom around an underground lake in the caverns beside the Descent. It trades with the Abyssal Choir above it, and keeps its doors locked from both sides.",
+ "loreRefs": ["the_deep_below"],
+ "npcsPresent": [],
+ "encounterFlavor": "lake-boatmen, cavern-farmers, and traders from the Descent who are watched the whole time they are here",
+ "dangerLevel": 3,
+ "questSeeds": [],
+ "map": {
+  "x": 330,
+  "y": 470
+ },
+ "encounterSeeds": [],
+ "axisVector": [
+  0,
+  0,
+  -0.15,
+  0,
+  0,
+  0,
+  0,
+  -0.3,
+  0,
+  0,
+  0,
+  0
+ ],
+ "axisVectorNote": "Derived from authored spectrum against world_node_atlas.axisOrder (SNG-180).",
+ "substrateDensity": 0.45,
+ "worldPos": {
+  "colatitude": 80.85,
+  "longitude": 28,
+  "depth": -1
+ },
+ "worldPosNote": "SNG-670: placed on the world's own cavern (Erik 2026-10-04: \"they live in pockets across the world, in the typical places of their kind\"). Below ground: depth -1.",
+ "people": "dwarven",
+ "tier": "settlement",
+ "parentId": null,
+ "role": "waypoint",
+ "appearance": "A black lake under a cavern roof, stone quays and lamplit boats, a city built in tiers around the water, and a great door at the top of the stair with a lock on each face.",
+ "_sng670": "A pocket: a centre with its own ground, the way a foothill is. Its people are not a tradition; its ruling power and leader come in pass 2."
+}

@@ -1,0 +1,132 @@
+{
+ "schemaVersion": 1,
+ "id": "holdmother_ragna",
+ "name": "Ragna Greyspire",
+ "tier": "regional",
+ "level": 21,
+ "role": "Hold-Mother of Greyspire: keeps the westernmost dwarven hold above the elven canopy, and keeps the argument with the Silverbough going",
+ "people": "dwarven",
+ "gender": "woman",
+ "pronouns": "she/her",
+ "sex": "female",
+ "romanceEligible": false,
+ "homeLocation": "greyspire",
+ "communityId": "pocket_greyspire.greyspire",
+ "domains": {
+  "primary": "mason",
+  "secondary": "marcher",
+  "tertiary": "rootkin"
+ },
+ "spectrum": {
+  "violence_peace": -0.3,
+  "concrete_abstract": -0.5
+ },
+ "assistTags": [
+  "guard",
+  "bargain",
+  "lead",
+  "intimidate"
+ ],
+ "appearance": "Short, grey, iron-shouldered, with a pipe she never lights and an elven longbow on her wall that she will not explain.",
+ "personality": {
+  "warmth": 0.5,
+  "trust": 0.3,
+  "candor": 0.9,
+  "patience": 0.4
+ },
+ "voiceHints": "Blunt, funny, insults elves with real affection and real precision.",
+ "wants": "That Greyspire outlast the Silverbough, out of spite and love both.",
+ "fears": "That the treaty-stair burns.",
+ "knowledge": [
+  "Every timber deal across the tree-line for forty years",
+  "Why the elven longbow is on her wall"
+ ],
+ "reactsToReputation": {
+  "brave": "pours you a drink",
+  "evasive": "asks again, louder",
+  "kind": "pretends not to notice and is pleased",
+  "any": "asks what you think of elves"
+ },
+ "questSeeds": [
+  "The Silverbough has stopped letting the rope-stair down and nobody at Greyspire knows why",
+  "A Greyspire youth has run off up into the canopy"
+ ],
+ "gear": [
+  "an unlit pipe",
+  "a war-axe she has not needed in thirty years"
+ ],
+ "purse": {
+  "crystal": 200
+ },
+ "closed": [],
+ "title": "Hold-Mother of Greyspire",
+ "_sng670": "Pass 2: the leader of the pocket's ruling power.",
+ "vocation": "COMMANDER",
+ "fullName": "Ragna Haldisdottir Greyspire",
+ "subAttributes": {
+  "strength": 15,
+  "agility": 10,
+  "reason": 11,
+  "insight": 12,
+  "presence": 15,
+  "rapport": 11,
+  "craft": 12,
+  "wits": 13
+ },
+ "physicality": "ADULT, old and iron-shouldered. Short, grey, solid. WHAT CATCHES THE EYE: a pipe she never lights.",
+ "abilities": [
+  {
+   "abilityId": "boundary_stone",
+   "level": 2,
+   "why": "mason primary: Greyspire's edge is a ward"
+  },
+  {
+   "abilityId": "stonewise",
+   "level": 2,
+   "why": "reads the spire for what will fail"
+  },
+  {
+   "abilityId": "plain_weight",
+   "level": 2,
+   "why": "the war-axe, swung honestly"
+  },
+  {
+   "abilityId": "set_word",
+   "level": 2,
+   "why": "says the plain thing and the hold obeys"
+  },
+  {
+   "abilityId": "near_way",
+   "level": 1,
+   "why": "knows every stair of the spire"
+  },
+  {
+   "abilityId": "held_line",
+   "level": 2,
+   "why": "marcher secondary: the crown-wall holds"
+  },
+  {
+   "abilityId": "edge",
+   "level": 2,
+   "why": "an axe she has not needed in thirty years, and has not forgotten"
+  },
+  {
+   "abilityId": "read_field",
+   "level": 1,
+   "why": "reads a fight before it starts"
+  },
+  {
+   "abilityId": "speaking_grove",
+   "level": 1,
+   "why": "rootkin tertiary: four hundred years beside the canopy, and the trees know her voice"
+  }
+ ],
+ "intimacyNotes": "NOT AVAILABLE: a widow with eleven grandchildren in the hold, and the longbow on her wall is a story she does not tell.",
+ "nameKnown": "world",
+ "aliases": [
+  "Ragna",
+  "the Hold-Mother"
+ ],
+ "_reactsWhy": "tag -> response, from corpus tags (NPC_AUTHORING_TEMPLATE #4)",
+ "_authoredWhy": "SNG-670 pass 2 (Erik 2026-10-04: 'make sure you are following the npc authoring fully: full schema, levels, powers'). Full sheet per NPC_AUTHORING_TEMPLATE: tier and level at or above the rung floor, eight sub-attributes, crafts by id from the leader's three traditions with a reason each, reputation as tags."
+}

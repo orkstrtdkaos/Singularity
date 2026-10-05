@@ -1,0 +1,63 @@
+{
+ "schemaVersion": 1,
+ "id": "deepmark",
+ "name": "Deepmark",
+ "regionId": "pocket_deepmark",
+ "communityId": "deepmark",
+ "spectrum": {
+  "concrete_abstract": -0.45,
+  "falsehood_truth": 0.2
+ },
+ "poleIntensity": {
+  "concrete": 0.45,
+  "truth": 0.2
+ },
+ "tags": [
+  "settlement",
+  "pocket"
+ ],
+ "connections": [
+  "bedrock",
+  "the_weighing_yard",
+  "the_hanging_weather"
+ ],
+ "descriptionSeed": "An underground dwarven kingdom in the deep stone beneath the Given Land. The Masons above hold that only what can be touched is real; the dwarves of Deepmark hold that the deepest stone is the only thing in the world that has never lied, and they have gone down to live next to it.",
+ "loreRefs": ["the_deep_below"],
+ "npcsPresent": [],
+ "encounterFlavor": "deep-miners, stone-readers, and a court that speaks only in weights and measures",
+ "dangerLevel": 2,
+ "questSeeds": [],
+ "map": {
+  "x": 140,
+  "y": 300
+ },
+ "encounterSeeds": [],
+ "axisVector": [
+  0,
+  0.2,
+  0,
+  0,
+  -0.45,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0
+ ],
+ "axisVectorNote": "Derived from authored spectrum against world_node_atlas.axisOrder (SNG-180).",
+ "substrateDensity": 0.45,
+ "worldPos": {
+  "colatitude": 81.25,
+  "longitude": 117,
+  "depth": -1
+ },
+ "worldPosNote": "SNG-670: placed on the world's own deep_stone (Erik 2026-10-04: \"they live in pockets across the world, in the typical places of their kind\"). Below ground: depth -1.",
+ "people": "dwarven",
+ "tier": "settlement",
+ "parentId": null,
+ "role": "waypoint",
+ "appearance": "A stair cut into the Given Land's bedrock that does not stop, then halls of black stone lit by forge-glow, and a throne carved from the floor rather than set on it.",
+ "_sng670": "A pocket: a centre with its own ground, the way a foothill is. Its people are not a tradition; its ruling power and leader come in pass 2."
+}

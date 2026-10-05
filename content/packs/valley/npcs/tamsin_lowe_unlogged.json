@@ -1,0 +1,129 @@
+{
+ "schemaVersion": 1,
+ "id": "tamsin_lowe_unlogged",
+ "name": "Tamsin Lowe",
+ "tier": "notable",
+ "level": 9,
+ "role": "Afterling, the unlogged mapper of the Service Ways: an Enginewright apprentice who died mapping the ways and kept mapping",
+ "people": "human",
+ "gender": "woman",
+ "pronouns": "she/her",
+ "sex": "female",
+ "romanceEligible": true,
+ "homeLocation": "the_service_ways",
+ "communityId": "enginewright.serviceways",
+ "afterling": {
+  "door": "unattended",
+  "since": "seventy years",
+  "note": "Fell in an unmapped shaft of the Service Ways on her apprentice survey and climbed out dead with the survey still in her hand. The Wrights do not log the dead who keep working, which is a policy, and do not discuss it, which is another."
+ },
+ "domains": {
+  "primary": "enginewright",
+  "secondary": "mason",
+  "tertiary": "horizon"
+ },
+ "spectrum": {
+  "mechanical_spiritual": -0.6,
+  "chaos_order": 0.4,
+  "death_life": -0.4
+ },
+ "assistTags": [
+  "navigate-wilds",
+  "investigate",
+  "craft"
+ ],
+ "appearance": "A young woman in an apprentice's oiled jacket gone stiff with age, ink on her grey fingers, a survey-board and plumb-line, and a chalk mark on every wall she passes, numbered.",
+ "personality": {
+  "warmth": 0.6,
+  "trust": 0.5,
+  "candor": 0.8,
+  "patience": 0.8
+ },
+ "voiceHints": "Quick and precise. Gives distances in paces and depths in flights. Gets a little sharp when anyone mentions the Wrights' logs.",
+ "wants": "To finish her map of the Service Ways, and to have her name written in the Wrights' book: as a member, not a record.",
+ "fears": "Finishing the map, a little: she does not know what she is for after that.",
+ "knowledge": [
+  "More of the Service Ways than any living Wright, by about a third",
+  "Where the errand that the Wrights will not interrupt is running, because she has watched it",
+  "Seven other unlogged dead in the ways, by name"
+ ],
+ "reactsToReputation": {
+  "honest": "shows you her map",
+  "reliable": "asks you to carry a page of it to the Wrights",
+  "evasive": "gives you a wrong heading, gently",
+  "any": "asks if you have seen a chalk mark she has not numbered"
+ },
+ "_reactsWhy": "tag -> response, from corpus tags (NPC_AUTHORING_TEMPLATE #4)",
+ "questSeeds": [
+  "Her map shows a passage from the Service Ways down to the First Bore that the Wrights' maps do not",
+  "She wants to be logged, and needs someone living to put the question to the Wrights"
+ ],
+ "gear": [
+  "a survey-board",
+  "a plumb-line",
+  "a stub of chalk, always"
+ ],
+ "purse": {
+  "crystal": 5
+ },
+ "closed": [],
+ "title": "the unlogged mapper",
+ "vocation": "WALKER",
+ "fullName": "Tamsin Orla Lowe",
+ "nameKnown": "few",
+ "aliases": [
+  "the Mapper",
+  "the unlogged"
+ ],
+ "_nameKnownWhy": "The Wrights know her name and do not write it down. Everyone else who meets her in the ways learns it, because she introduces herself.",
+ "subAttributes": {
+  "strength": 9,
+  "agility": 12,
+  "reason": 14,
+  "insight": 11,
+  "presence": 9,
+  "rapport": 10,
+  "craft": 13,
+  "wits": 12
+ },
+ "physicality": "ADULT; died at about twenty-five, seventy years ago. Slight, quick, grey-skinned. WHAT CATCHES THE EYE: ink on her fingers and a numbered chalk mark wherever she has been.",
+ "intimacyNotes": "AVAILABLE: died before she had the chance to fall for anyone, and finds the idea now more interesting than sad. Cold hands; she will warn you.",
+ "abilities": [
+  {
+   "abilityId": "mech_sense",
+   "level": 2,
+   "why": "enginewright primary: reads Precursor works on sight"
+  },
+  {
+   "abilityId": "mend_device",
+   "level": 1,
+   "why": "an apprentice's mending, kept sharp"
+  },
+  {
+   "abilityId": "seized_works",
+   "level": 1,
+   "why": "jams a running mechanism when it moves at the wrong moment"
+  },
+  {
+   "abilityId": "near_way",
+   "level": 2,
+   "why": "mason secondary: finds her way through built spaces by how they are made"
+  },
+  {
+   "abilityId": "sound_read",
+   "level": 1,
+   "why": "knows if a gantry will take her weight, and it usually will now"
+  },
+  {
+   "abilityId": "way_sense",
+   "level": 2,
+   "why": "horizon tertiary: always knows where she is in the ways"
+  },
+  {
+   "abilityId": "known_way",
+   "level": 1,
+   "why": "holds the routes she has mapped"
+  }
+ ],
+ "_authoredWhy": "SNG-674 (Erik 2026-10-04: 'there should be Afterlings in various places underground'). Full sheet per NPC_AUTHORING_TEMPLATE; `afterling` in SNG-649's shape, awaiting its reader (C19)."
+}

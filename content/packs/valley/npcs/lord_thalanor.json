@@ -1,0 +1,143 @@
+{
+ "schemaVersion": 1,
+ "id": "lord_thalanor",
+ "name": "Thalanor Silverbough",
+ "tier": "heroic",
+ "level": 29,
+ "role": "Lord of the Silverbough: keeps the elven halls in the high canopy of the southern forest, and the rope-stair that is only let down for guests",
+ "people": "elven",
+ "gender": "man",
+ "pronouns": "he/him",
+ "sex": "male",
+ "romanceEligible": false,
+ "homeLocation": "silverbough",
+ "communityId": "pocket_silverbough.silverbough",
+ "domains": {
+  "primary": "rootkin",
+  "secondary": "veilwright",
+  "tertiary": "horizon"
+ },
+ "spectrum": {
+  "death_life": 0.4,
+  "dark_light": 0.3,
+  "falsehood_truth": -0.2
+ },
+ "assistTags": [
+  "track",
+  "conceal",
+  "lead",
+  "bargain"
+ ],
+ "appearance": "Lean and pale-gold, silver threads woven through his clothes so he vanishes against the bark, and a dwarven war-axe hanging behind his chair that he will not explain.",
+ "personality": {
+  "warmth": 0.3,
+  "trust": 0.2,
+  "candor": 0.3,
+  "patience": 0.8
+ },
+ "voiceHints": "Silken, ironic, precise. Speaks of Greyspire's dwarves with exaggerated courtesy that is almost fondness.",
+ "wants": "To keep the Silverbough unseen from below for another thousand years.",
+ "fears": "That someone has found a way up that is not the stair.",
+ "knowledge": [
+  "Every dwarf of Greyspire by name and grudge",
+  "Why the dwarven war-axe hangs behind his chair"
+ ],
+ "reactsToReputation": {
+  "clever": "invites you up the stair",
+  "loose-lipped": "draws the stair up behind you",
+  "maker": "shows you the silverwood",
+  "any": "is exquisitely polite, which is a warning"
+ },
+ "questSeeds": [
+  "The rope-stair has been drawn up and Thalanor will not say why",
+  "A dwarven youth from Greyspire has climbed into the canopy and been hidden there"
+ ],
+ "gear": [
+  "a silverwood bow",
+  "the key to the rope-stair"
+ ],
+ "purse": {
+  "crystal": 200
+ },
+ "closed": [],
+ "title": "Lord of the Silverbough",
+ "_sng670": "Pass 2: the leader of the pocket's ruling power.",
+ "vocation": "EDGE",
+ "fullName": "Thalanor Caerith Silverbough",
+ "subAttributes": {
+  "strength": 11,
+  "agility": 17,
+  "reason": 13,
+  "insight": 15,
+  "presence": 15,
+  "rapport": 10,
+  "craft": 12,
+  "wits": 15
+ },
+ "physicality": "ADULT, ageless. Lean and pale-gold. WHAT CATCHES THE EYE: silver threads in his clothes that make him vanish against bark.",
+ "abilities": [
+  {
+   "abilityId": "root_road",
+   "level": 3,
+   "why": "rootkin primary: the canopy is his road"
+  },
+  {
+   "abilityId": "bark_and_briar",
+   "level": 2,
+   "why": "the silverwood guards him"
+  },
+  {
+   "abilityId": "snaring_green",
+   "level": 2,
+   "why": "the canopy holds what climbs uninvited"
+  },
+  {
+   "abilityId": "lifesense",
+   "level": 2,
+   "why": "knows who is under his trees"
+  },
+  {
+   "abilityId": "beastfriend",
+   "level": 2,
+   "why": "the canopy birds are his watch"
+  },
+  {
+   "abilityId": "staunch",
+   "level": 1,
+   "why": "field-craft"
+  },
+  {
+   "abilityId": "blend_in",
+   "level": 3,
+   "why": "veilwright secondary: you can walk a day beneath the Silverbough and not know it is there"
+  },
+  {
+   "abilityId": "maintained_veil",
+   "level": 2,
+   "why": "keeps the city unseen"
+  },
+  {
+   "abilityId": "false_door",
+   "level": 2,
+   "why": "the rope-stair is not the only way, and he hides the others"
+  },
+  {
+   "abilityId": "long_reach",
+   "level": 2,
+   "why": "horizon tertiary: the archer's harm, at range"
+  },
+  {
+   "abilityId": "kept_distance",
+   "level": 2,
+   "why": "keeps a threat far below"
+  }
+ ],
+ "intimacyNotes": "NOT AVAILABLE: the dwarven war-axe behind his chair is the whole answer, and he will not give it.",
+ "nameKnown": "world",
+ "aliases": [
+  "Thalanor",
+  "the Lord of the Silverbough"
+ ],
+ "_reactsWhy": "tag -> response, from corpus tags (NPC_AUTHORING_TEMPLATE #4)",
+ "_authoredWhy": "SNG-670 pass 2 (Erik 2026-10-04: 'make sure you are following the npc authoring fully: full schema, levels, powers'). Full sheet per NPC_AUTHORING_TEMPLATE: tier and level at or above the rung floor, eight sub-attributes, crafts by id from the leader's three traditions with a reason each, reputation as tags."
+}

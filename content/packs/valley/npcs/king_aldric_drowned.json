@@ -1,0 +1,138 @@
+{
+ "schemaVersion": 1,
+ "id": "king_aldric_drowned",
+ "name": "Aldric the Drowned",
+ "tier": "heroic",
+ "level": 33,
+ "role": "King of the Drowned Crown: rules a kingdom that went under the ocean three hundred years ago and did not stop being a kingdom",
+ "people": "drowned",
+ "gender": "man",
+ "pronouns": "he/him",
+ "sex": "male",
+ "romanceEligible": false,
+ "homeLocation": "drowned_crown",
+ "communityId": "pocket_drowned_crown.drowned_crown",
+ "domains": {
+  "primary": "ashwarden",
+  "secondary": "seraphic",
+  "tertiary": "mason"
+ },
+ "spectrum": {
+  "death_life": -0.5,
+  "chaos_order": 0.5,
+  "space_time": 0.3
+ },
+ "assistTags": [
+  "lead",
+  "study",
+  "guard"
+ ],
+ "appearance": "Grey-green and still, a drowned king in ceremonial plate, crown dark with sea-growth, voice that arrives a moment after his mouth moves.",
+ "personality": {
+  "warmth": 0.3,
+  "trust": 0.2,
+  "candor": 0.8,
+  "patience": 0.95
+ },
+ "voiceHints": "Courtly and archaic; speaks of three centuries ago as last week.",
+ "wants": "That the Mavens recognise his crown.",
+ "fears": "That his people will forget they were ever a kingdom.",
+ "knowledge": [
+  "The kingdom's laws, its lines of descent and its claims, three hundred years out of date",
+  "What sank them"
+ ],
+ "reactsToReputation": {
+  "honest": "names you a friend of the Crown",
+  "dismissive": "has you shown out by the drowned knights",
+  "seeking": "tells you what sank them",
+  "any": "addresses you as a subject of a kingdom you have never heard of"
+ },
+ "questSeeds": [
+  "The Mavens have refused the Drowned Crown's claim for the hundredth time and the King has sent a knight to the Coliseum to win it by renown",
+  "Salvagers have been taking the drowned kingdom's treasure"
+ ],
+ "gear": [
+  "a crown dark with sea-growth",
+  "the kingdom's charter, sealed in wax that has never dried"
+ ],
+ "purse": {
+  "crystal": 200
+ },
+ "closed": [],
+ "title": "King of the Drowned Crown",
+ "_sng670": "Pass 2: the leader of the pocket's ruling power.",
+ "vocation": "KEEPER",
+ "fullName": "Aldric Maelor Vane",
+ "subAttributes": {
+  "strength": 16,
+  "agility": 9,
+  "reason": 13,
+  "insight": 15,
+  "presence": 18,
+  "rapport": 9,
+  "craft": 11,
+  "wits": 12
+ },
+ "physicality": "ADULT, three centuries drowned. Grey-green and still. WHAT CATCHES THE EYE: a crown dark with sea-growth, and a voice that arrives a moment after his mouth moves.",
+ "abilities": [
+  {
+   "abilityId": "deathless",
+   "level": 3,
+   "why": "ashwarden primary: a king who did not stop when he drowned"
+  },
+  {
+   "abilityId": "kept_breath",
+   "level": 3,
+   "why": "refuses an ending already begun"
+  },
+  {
+   "abilityId": "set_hand",
+   "level": 2,
+   "why": "his knights are his to raise"
+  },
+  {
+   "abilityId": "last_cold",
+   "level": 2,
+   "why": "the deep water's cold, sent"
+  },
+  {
+   "abilityId": "soul_stare",
+   "level": 2,
+   "why": "shows you your own drowning"
+  },
+  {
+   "abilityId": "ask_the_dead",
+   "level": 2,
+   "why": "his whole court is the dead"
+  },
+  {
+   "abilityId": "majesty",
+   "level": 3,
+   "why": "seraphic secondary: a crown is a crown"
+  },
+  {
+   "abilityId": "measured_sentence",
+   "level": 2,
+   "why": "judgement, three hundred years out of date"
+  },
+  {
+   "abilityId": "sustained_order",
+   "level": 2,
+   "why": "the ceremony continues"
+  },
+  {
+   "abilityId": "boundary_stone",
+   "level": 1,
+   "why": "mason tertiary: the drowned stairs are his border"
+  }
+ ],
+ "intimacyNotes": "NOT AVAILABLE: his queen did not survive the drowning, and he still keeps her place at table.",
+ "nameKnown": "world",
+ "aliases": [
+  "Aldric",
+  "the Drowned King",
+  "the King Beneath"
+ ],
+ "_reactsWhy": "tag -> response, from corpus tags (NPC_AUTHORING_TEMPLATE #4)",
+ "_authoredWhy": "SNG-670 pass 2 (Erik 2026-10-04: 'make sure you are following the npc authoring fully: full schema, levels, powers'). Full sheet per NPC_AUTHORING_TEMPLATE: tier and level at or above the rung floor, eight sub-attributes, crafts by id from the leader's three traditions with a reason each, reputation as tags."
+}

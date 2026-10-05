@@ -1,0 +1,133 @@
+{
+ "schemaVersion": 1,
+ "id": "corran_the_drowned_lamplighter",
+ "name": "Corran Vey",
+ "tier": "notable",
+ "level": 8,
+ "role": "Afterling, the drowned lamplighter of Undermere: went into the black lake with his boat, came back up the quay steps, and still lights the lamps for the living",
+ "people": "dwarven",
+ "gender": "man",
+ "pronouns": "he/him",
+ "sex": "male",
+ "romanceEligible": true,
+ "homeLocation": "undermere",
+ "communityId": "undermere",
+ "afterling": {
+  "door": "unattended",
+  "since": "sixty years",
+  "note": "Drowned when the black lake took his boat. Came back up the quay steps three nights later with the lamp-pole still in his hand, and lit the evening lamps. Nobody raised him; the Lake-Queen's court counts him a subject, not a dead man."
+ },
+ "domains": {
+  "primary": "umbral",
+  "secondary": "threnodist",
+  "tertiary": "mason"
+ },
+ "spectrum": {
+  "dark_light": -0.4,
+  "death_life": -0.5,
+  "emotional_logical": -0.3
+ },
+ "assistTags": [
+  "guard",
+  "comfort",
+  "travel"
+ ],
+ "appearance": "A stocky dwarf with lake-weed still in his beard that he has stopped picking out, skin the grey-blue of deep water, and a lamplighter's pole with a hook and a wick. His clothes never quite dry.",
+ "personality": {
+  "warmth": 0.8,
+  "trust": 0.7,
+  "candor": 0.6,
+  "patience": 0.8
+ },
+ "voiceHints": "Hums while he works. Talks to the lake as if it can hear him, and apologises to it when he raises his voice.",
+ "wants": "Someone to sit with on the quay at the end of the night who does not flinch at his hands.",
+ "fears": "That the lake will want him back, and that he will go.",
+ "knowledge": [
+  "Every boat the black lake has taken in sixty years, and whose",
+  "Which of the drowned came back up, and which are still down there, and he says some of them are"
+ ],
+ "reactsToReputation": {
+  "kind": "walks you home along the quay with a lamp",
+  "fearful": "keeps his hands in his sleeves",
+  "honest": "tells you about the ones still down there",
+  "any": "lights a lamp for you, whether you need one or not"
+ },
+ "_reactsWhy": "tag -> response, from corpus tags (NPC_AUTHORING_TEMPLATE #4)",
+ "questSeeds": [
+  "A lamp he lit on the far shore keeps burning, and nobody lives on the far shore",
+  "A drowned girl came up the quay steps last week and will not speak to anyone but him"
+ ],
+ "gear": [
+  "a lamplighter's pole",
+  "a tin of wicks",
+  "a boat-hook he no longer uses for boats"
+ ],
+ "purse": {
+  "crystal": 15
+ },
+ "closed": [],
+ "title": "Lamplighter of Undermere",
+ "vocation": "ATTENDANT",
+ "fullName": "Corran Brisk Vey",
+ "nameKnown": "world",
+ "aliases": [
+  "Corran",
+  "the Lamplighter",
+  "the drowned lamplighter"
+ ],
+ "subAttributes": {
+  "strength": 11,
+  "agility": 8,
+  "reason": 9,
+  "insight": 12,
+  "presence": 9,
+  "rapport": 13,
+  "craft": 11,
+  "wits": 10
+ },
+ "physicality": "ADULT; drowned at about eighty, which is middle age for a dwarf. Stocky, grey-blue, lake-weed in his beard. WHAT CATCHES THE EYE: the lamplighter's pole, and clothes that never dry.",
+ "intimacyNotes": "AVAILABLE, shyly. Widowed by his own drowning; his wife remarried, kindly, and he lights her lamp first. He would like company that does not mind the cold.",
+ "abilities": [
+  {
+   "abilityId": "felt_room",
+   "level": 1,
+   "why": "umbral primary: knows the quays entire without a lamp of his own"
+  },
+  {
+   "abilityId": "long_dark",
+   "level": 1,
+   "why": "the dark costs him nothing now"
+  },
+  {
+   "abilityId": "known_in_the_dark",
+   "level": 1,
+   "why": "knows who is on the quay by their step"
+  },
+  {
+   "abilityId": "line_and_knot",
+   "level": 2,
+   "why": "a lake-man's rope-work, and he came back up holding his"
+  },
+  {
+   "abilityId": "the_true_feeling",
+   "level": 1,
+   "why": "threnodist secondary: hears what the drowned felt going down"
+  },
+  {
+   "abilityId": "storykeeper",
+   "level": 1,
+   "why": "keeps the names of everyone the lake took"
+  },
+  {
+   "abilityId": "shared_weight",
+   "level": 1,
+   "why": "stands in front of whoever the lake is reaching for"
+  },
+  {
+   "abilityId": "stone_read",
+   "level": 1,
+   "why": "mason tertiary: knows which quay steps will hold"
+  }
+ ],
+ "_authoredWhy": "SNG-674 (Erik 2026-10-04: 'there should be Afterlings in various places underground'). Full sheet per NPC_AUTHORING_TEMPLATE; `afterling` in SNG-649's shape, awaiting its reader (C19)."
+}

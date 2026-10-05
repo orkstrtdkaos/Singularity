@@ -1,0 +1,134 @@
+{
+ "schemaVersion": 1,
+ "id": "grimma_shiftkeeper",
+ "name": "Grimma Stonesworn",
+ "tier": "notable",
+ "level": 10,
+ "role": "Afterling, Shift-Keeper of Deepmark's collapsed ways: died in a collapse, was dug out and asked, and said yes",
+ "people": "dwarven",
+ "gender": "woman",
+ "pronouns": "she/her",
+ "sex": "female",
+ "romanceEligible": false,
+ "homeLocation": "deepmark",
+ "communityId": "deepmark",
+ "afterling": {
+  "door": "raised",
+  "consented": true,
+  "raisedBy": "the shift-keepers of Deepmark, by the kingdom's custom of asking",
+  "since": "two hundred years",
+  "note": "Dug out of the Hollow Gallery collapse and asked, by custom, whether she would keep the shift. She said yes. The Vigil of Cairnsend holds Deepmark up as the proof that the asking can be done, and she is the dwarf they usually mean."
+ },
+ "domains": {
+  "primary": "mason",
+  "secondary": "ashwarden",
+  "tertiary": "stillhold"
+ },
+ "spectrum": {
+  "concrete_abstract": -0.6,
+  "falsehood_truth": 0.4,
+  "death_life": -0.4
+ },
+ "assistTags": [
+  "guard",
+  "navigate-wilds",
+  "comfort"
+ ],
+ "appearance": "A broad dwarf in a miner's leather apron, grey-skinned, with the dust of the Hollow Gallery still in the creases of her hands. A shift-keeper's iron badge on her chest, and a lamp she carries for other people.",
+ "personality": {
+  "warmth": 0.6,
+  "trust": 0.6,
+  "candor": 0.9,
+  "patience": 0.9
+ },
+ "voiceHints": "Speaks of her death as 'my collapse', the way others say 'my wedding'. Matter-of-fact about everything, and kind about it.",
+ "wants": "For the asking to be the law everywhere, not only in Deepmark, and to go to Cairnsend once to say so to the Vigil's face.",
+ "fears": "That the custom will lapse in her kingdom the way customs do, and the next dwarf dug out will not be asked.",
+ "knowledge": [
+  "Every collapsed way under Deepmark and which can be reopened",
+  "The words of the asking, and the three dwarves in her lifetime who said no, and were buried with honour"
+ ],
+ "reactsToReputation": {
+  "honest": "takes you into the collapsed ways",
+  "reliable": "trusts you with a lamp and a heading",
+  "reckless": "turns you back at the first gallery",
+  "any": "asks whether, where you come from, the dead are asked"
+ },
+ "_reactsWhy": "tag -> response, from corpus tags (NPC_AUTHORING_TEMPLATE #4)",
+ "questSeeds": [
+  "A collapse in the deep galleries has trapped a crew, and one of them is already dead and has not been asked yet",
+  "The Grave-Callers have sent an envoy to Deepmark to learn the words of the asking, and Grimma does not trust why"
+ ],
+ "gear": [
+  "a shift-keeper's iron badge",
+  "a miner's pick",
+  "a lamp, for other people"
+ ],
+ "purse": {
+  "crystal": 30
+ },
+ "closed": [],
+ "title": "Shift-Keeper of the Collapsed Ways",
+ "vocation": "KEEPER",
+ "fullName": "Grimma Hallasdottir Stonesworn",
+ "nameKnown": "world",
+ "aliases": [
+  "Grimma",
+  "the Shift-Keeper"
+ ],
+ "subAttributes": {
+  "strength": 13,
+  "agility": 8,
+  "reason": 10,
+  "insight": 13,
+  "presence": 11,
+  "rapport": 12,
+  "craft": 12,
+  "wits": 10
+ },
+ "physicality": "ADULT; died at about a hundred and ten, middle age for a dwarf, two hundred years ago. Broad, grey-skinned, dust in the creases of her hands. WHAT CATCHES THE EYE: the iron shift-keeper's badge, and a lamp she does not need.",
+ "intimacyNotes": "NOT AVAILABLE: married to a living dwarf, Hrafna, since before the collapse, and they are still married. Deepmark thinks nothing of it.",
+ "abilities": [
+  {
+   "abilityId": "stonewise",
+   "level": 2,
+   "why": "mason primary: reads what holds in a collapsed way"
+  },
+  {
+   "abilityId": "near_way",
+   "level": 2,
+   "why": "finds the route through a fall nobody else would see"
+  },
+  {
+   "abilityId": "tremor_sense",
+   "level": 2,
+   "why": "feels the next collapse before it comes"
+  },
+  {
+   "abilityId": "stone_read",
+   "level": 1,
+   "why": "the first gift of the deep stone"
+  },
+  {
+   "abilityId": "boundary_stone",
+   "level": 1,
+   "why": "sets a ward at a gallery mouth to keep the small things out"
+  },
+  {
+   "abilityId": "deathsense",
+   "level": 1,
+   "why": "ashwarden secondary: knows when someone under the rock has died, and that it is time to ask"
+  },
+  {
+   "abilityId": "kept_vigil",
+   "level": 1,
+   "why": "holds a trapped miner where they are until the dig reaches them"
+  },
+  {
+   "abilityId": "calm_word",
+   "level": 1,
+   "why": "stillhold tertiary: talks a trapped crew down from panic"
+  }
+ ],
+ "_authoredWhy": "SNG-674 (Erik 2026-10-04: 'there should be Afterlings in various places underground'). Full sheet per NPC_AUTHORING_TEMPLATE; `afterling` in SNG-649's shape (with `consented`, which Deepmark's custom makes the point of), awaiting its reader (C19)."
+}

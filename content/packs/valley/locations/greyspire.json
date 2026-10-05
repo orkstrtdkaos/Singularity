@@ -1,0 +1,62 @@
+{
+ "schemaVersion": 1,
+ "id": "greyspire",
+ "name": "Greyspire Hold",
+ "regionId": "pocket_greyspire",
+ "communityId": "greyspire",
+ "spectrum": {
+  "violence_peace": -0.2,
+  "concrete_abstract": -0.3
+ },
+ "poleIntensity": {
+  "violence": 0.2,
+  "concrete": 0.3
+ },
+ "tags": [
+  "settlement",
+  "pocket"
+ ],
+ "connections": [
+  "kindlerow",
+  "the_mountain_pass"
+ ],
+ "descriptionSeed": "The westernmost dwarven hold, built on a grey spire above the southern forest's canopy. Dwarves and elves have argued across that tree-line for longer than either will admit, and traded across it for longer still.",
+ "loreRefs": [],
+ "npcsPresent": [],
+ "encounterFlavor": "dwarven wardens, timber-buyers, and elves who came up the stair to haggle and stayed to argue",
+ "dangerLevel": 3,
+ "questSeeds": [],
+ "map": {
+  "x": 510,
+  "y": 325
+ },
+ "encounterSeeds": [],
+ "axisVector": [
+  0,
+  0,
+  0,
+  -0.2,
+  -0.3,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0
+ ],
+ "axisVectorNote": "Derived from authored spectrum against world_node_atlas.axisOrder (SNG-180).",
+ "substrateDensity": 0.6,
+ "worldPos": {
+  "colatitude": 45.75,
+  "longitude": 244,
+  "depth": 0
+ },
+ "worldPosNote": "SNG-670: placed on the world's own mountain (Erik 2026-10-04: \"they live in pockets across the world, in the typical places of their kind\").",
+ "people": "dwarven",
+ "tier": "settlement",
+ "parentId": null,
+ "role": "waypoint",
+ "appearance": "A grey stone spire standing out of green canopy, walls wrapped round its crown, rope-lifts and a long stair down to the trees.",
+ "_sng670": "A pocket: a centre with its own ground, the way a foothill is. Its people are not a tradition; its ruling power and leader come in pass 2."
+}

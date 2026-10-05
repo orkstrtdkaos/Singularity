@@ -1,0 +1,133 @@
+{
+ "schemaVersion": 1,
+ "id": "capwarden_tolvar",
+ "name": "Tolvar Breck",
+ "tier": "regional",
+ "level": 16,
+ "role": "Capwarden of the Hanging Weather: first among the Boreborn who keep the caps on the old harvest bores, and reader of the vault's weather",
+ "people": "boreborn",
+ "gender": "man",
+ "pronouns": "he/him",
+ "sex": "male",
+ "romanceEligible": false,
+ "homeLocation": "the_hanging_weather",
+ "communityId": "pocket_the_hanging_weather.the_hanging_weather",
+ "domains": {
+  "primary": "horizon",
+  "secondary": "enginewright",
+  "tertiary": "mason"
+ },
+ "spectrum": {
+  "space_time": -0.4,
+  "concrete_abstract": -0.4,
+  "falsehood_truth": 0.3
+ },
+ "assistTags": [
+  "guard",
+  "navigate-wilds",
+  "craft"
+ ],
+ "appearance": "Long-boned and weathered, harvest tattoos from wrist to elbow on both arms, an oilskin coat always damp at the hem, and a hammer on his belt he uses to ring the caps.",
+ "personality": {
+  "warmth": 0.4,
+  "trust": 0.3,
+  "candor": 0.8,
+  "patience": 0.8
+ },
+ "voiceHints": "Short sentences. Talks about weather and caps in the same breath. Says 'below' as if it were a name.",
+ "wants": "For the caps to hold for one more generation, and for someone to tell him honestly what his ancestors pulled up those shafts.",
+ "fears": "That someone will open the First Bore, and that he will be asked to help.",
+ "knowledge": [
+  "Every cap the Boreborn keep, its age, and the note it rings when it is sound",
+  "The vault's weather, three days out",
+  "That the First Bore's hum has changed pitch twice in his lifetime"
+ ],
+ "reactsToReputation": {
+  "honest": "tells you what the caps sound like now",
+  "reckless": "will not let you near a cap",
+  "cautious": "trusts you sooner than most",
+  "any": "asks whether you have ever been rained on underground"
+ },
+ "_reactsWhy": "tag -> response, from corpus tags (NPC_AUTHORING_TEMPLATE #4)",
+ "questSeeds": [
+  "The First Bore's cap rang flat this week, and the Wrights have asked to send a team down without the Boreborn",
+  "A storm is building in the vault that the weather-readers cannot read"
+ ],
+ "gear": [
+  "a ringing-hammer",
+  "an oilskin coat",
+  "the cap-book of the Hanging Weather"
+ ],
+ "purse": {
+  "crystal": 80
+ },
+ "closed": [],
+ "title": "Capwarden of the Hanging Weather",
+ "vocation": "WALKER",
+ "fullName": "Tolvar Ansel Breck",
+ "nameKnown": "world",
+ "aliases": [
+  "Tolvar",
+  "the Capwarden"
+ ],
+ "subAttributes": {
+  "strength": 13,
+  "agility": 12,
+  "reason": 11,
+  "insight": 14,
+  "presence": 11,
+  "rapport": 9,
+  "craft": 13,
+  "wits": 12
+ },
+ "physicality": "ADULT, in his fifties. Tall, long-boned, weathered. WHAT CATCHES THE EYE: harvest tattoos from wrist to elbow, and a ringing-hammer on his belt.",
+ "intimacyNotes": "NOT AVAILABLE: married thirty years to a weather-reader who is the only person he lets argue with him.",
+ "abilities": [
+  {
+   "abilityId": "wayfinding",
+   "level": 2,
+   "why": "horizon primary: reads weather-sign in a closed sky"
+  },
+  {
+   "abilityId": "way_sense",
+   "level": 2,
+   "why": "knows every gallery and shaft between the Hanging Weather and the First Bore"
+  },
+  {
+   "abilityId": "road_ahead",
+   "level": 2,
+   "why": "walks the long ways down without tiring"
+  },
+  {
+   "abilityId": "kept_distance",
+   "level": 1,
+   "why": "keeps a crowd back from an open shaft"
+  },
+  {
+   "abilityId": "known_way",
+   "level": 1,
+   "why": "holds the Boreborn ways the way Marchers hold roads"
+  },
+  {
+   "abilityId": "mech_sense",
+   "level": 2,
+   "why": "enginewright secondary: reads a harvest engine on sight"
+  },
+  {
+   "abilityId": "mend_device",
+   "level": 1,
+   "why": "keeps the cap-bands tight"
+  },
+  {
+   "abilityId": "fault_strike",
+   "level": 1,
+   "why": "knows exactly where a cap would fail, which is how he knows where to guard it"
+  },
+  {
+   "abilityId": "worth_the_work",
+   "level": 1,
+   "why": "mason tertiary: prices stone and iron by the ring"
+  }
+ ],
+ "_authoredWhy": "SNG-671 (Erik 2026-10-04, 'yes' to the deep places). Full sheet per NPC_AUTHORING_TEMPLATE: tier and level at or above the rung floor, eight sub-attributes, crafts by id from his three traditions with a reason each, reputation as tags."
+}

@@ -16,6 +16,24 @@
   "next": [],
   "releases": [
     {
+      "version": "2.19.3",
+      "date": "2026-10-05",
+      "entries": [
+        {
+          "kind": "change",
+          "title": "The map's names have a voice now",
+          "summary": "Place names are serif with a dark halo; a power's name is lettered across its ground in its own colour, sized to how much it holds.",
+          "detail": "Every label on the map was the same plain typeface at nearly the same size, so a great power's name read no louder than a hut's. Place names are now serif and haloed so they hold against the ground; a realm or lordship is lettered in spaced capitals in its own hue, scaled to how much ground it actually holds, with a quiet italic line under it saying what it is."
+        },
+        {
+          "kind": "fix",
+          "title": "Map labels stop landing on top of each other",
+          "summary": "Six different kinds of label were being drawn without any of them knowing the others existed.",
+          "detail": "Place names, power names, named ground, field sources, road exits and city landmarks were each drawn by their own pass, and four of the six did not check whether anything was already there. They all share one space now, so a region's name no longer sits across a town and the road signs stay clear of the places they point to. Long names also break on a word instead of being cut mid-word."
+        }
+      ]
+    },
+    {
       "version": "2.19.2",
       "date": "2026-10-05",
       "entries": [

@@ -46,6 +46,7 @@ import { contributionsBy, lookKey } from "./engine/canon.js";   // CCODE-422: wh
 import { sourcesHere, meaningDensity } from "./engine/substrate.js";   // ✅ Erik 2026-10-04: the map’s meaning register reads the SAME function the metaphysical ceiling does   // ⛔ Erik 2026-09-12: the four sources and how well each answers HERE
 import { groundForDecl, groundTag, substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace, groundHere, groundCardFor, naniteAt, bandFactor, peoplePresentAt } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
 import { sceneImage, itemImage, artworkStyle, getArtMode, setArtMode, imagesEnabled, ensureImage, aestheticFor, regenPromptFor, onImageMinted, onComposedLookup, swapImageUrl, forgetImageUrl, bustedURL, isBustedURL, mintAction, IMAGE_MIN_BYTES, regenerateImage, acceptImage, isGeneratedImage, toggleKeep, likenessClause, houseStyleFor, sanitizeImagePrompt, imageURLFor, isMinorSubject, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor, lookFor, serviceRefusal, refusedSaid} from "./engine/art.js"; // SNG-401: draw it again without destroying the one they have
+import { drawLabel, labelText, labelSpace, powerSize } from "./engine/maplabel.js";   // M2/D1: one table, one collision space
 import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, makePolarBase, regionExtent, bendRoad, roadNetwork, clipToFrame, routeRoads, makeGroundCost, GROUND_COST } from "./engine/worldglobe.js";
 // ⛔ ROUND 4 — whose ground is this, as things stand today. `realms.js` resolves the SAVE (losses, growth,
 // broken powers, taken holds, your own realm); `influence.js` stays pure and just evaluates.
@@ -196,7 +197,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.19.2";
+const APP_VERSION = "2.19.3";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -12711,33 +12712,33 @@ function paintTerritory(ctx, base, ext, regionId, W, H) {
   // the space — and a dropped name still has its border and its fill saying whose the ground is.
   ctx.save();
   ctx.textAlign = "center";
-  const taken = [];
-  const clear = (b) => !taken.some((o) => b.x0 < o.x1 && b.x1 > o.x0 && b.y0 < o.y1 && b.y1 > o.y0);
+  // ⛑ THE SHARED SPACE, with a fallback so this function still works if it is ever called outside a paint.
+  const space = _labelSpace || labelSpace();
+  // ⚠️ A MEASURING CONTEXT, because a width has to be known BEFORE a box can be asked for, and measuring
+  // by drawing at -9999 would otherwise leave the real context's font and spacing set to the probe's.
+  const mctx = ctx;
   for (const L of labels.slice().sort((a, b) => (b.area || 0) - (a.area || 0))) {
     const name = String(L.power.name || L.q.id);
     // ✅ R4.2: a realm says whose it is; ✅ R4.3: everyone else wears the relation
     const under = L.power.yours ? "your realm"
       : `${String(L.power.kind || "power").replace(/_/g, " ")}${L.power.temper ? " · " + L.power.temper : ""} · ${L.rel}`;
-    ctx.font = `700 ${L.power.yours ? 13 : 12}px system-ui, sans-serif`;
-    const wName = ctx.measureText(name).width;
-    ctx.font = "600 9px system-ui, sans-serif";
-    const wUnder = ctx.measureText(under).width;
-    const halfW = Math.max(wName, wUnder) / 2 + 4;
-    let box = null;
-    for (const [dx, dy] of [[0, 0], [0, -26], [0, 26], [-halfW - 10, 0], [halfW + 10, 0]]) {
-      const x = Math.max(halfW + 4, Math.min(W - halfW - 4, L.x + dx));
-      const y = Math.max(22, Math.min(H - 18, L.y + dy));
-      const b = { x0: x - halfW, x1: x + halfW, y0: y - 12, y1: y + 16, x, y };
-      if (clear(b)) { box = b; break; }
-    }
+    // ✅ M2 — AEVI'S POWER STYLE: *"spaced capitals in the power's own hue, size scaled to its ground
+    // (15–22px), with an italic line under."* ⛔ Before this a power's name was `700 12px system-ui`, which
+    // is *"no louder than a hut's"* — her words, and the whole point of the row.
+    const size = powerSize(L.area || 0, (T.gw * T.gh) || 1);
+    const sOpt = { colour: L.colour, size };
+    const wName = (drawLabel(mctx, name, -9999, -9999, "power", sOpt)?.w) || 0;
+    const wUnder = (drawLabel(mctx, under, -9999, -9999, "powerUnder", {})?.w) || 0;
+    const wide = Math.max(wName, wUnder);
+    // ⛔ D1 — THE SHARED SPACE, not a local list. The place names, the named ground, the field sources and
+    // the road exits all reserve from the same one, so a power can no longer be lettered across a town.
+    const box = space.place(L.x, L.y, wide, Math.round(size) + 14,
+      { kind: "power", clampTo: { w: W, h: H },
+        offsets: [[0, 0], [0, -(size + 20)], [0, size + 20], [-wide / 2 - 12, 0], [wide / 2 + 12, 0]] });
     if (!box) continue;                          // dropped, not shrunk — the border still says whose this is
-    taken.push(box);
-    ctx.font = `700 ${L.power.yours ? 13 : 12}px system-ui, sans-serif`;
-    ctx.lineWidth = 3; ctx.lineJoin = "round"; ctx.strokeStyle = "rgba(10,12,18,0.82)";
-    ctx.strokeText(name, box.x, box.y); ctx.fillStyle = L.colour; ctx.fillText(name, box.x, box.y);
-    ctx.font = "600 9px system-ui, sans-serif";
-    ctx.lineWidth = 2.6; ctx.strokeText(under, box.x, box.y + 11);
-    ctx.fillStyle = "rgba(232,228,218,0.82)"; ctx.fillText(under, box.x, box.y + 11);
+    ctx.textAlign = "center";
+    drawLabel(ctx, name, box.x, box.y, "power", sOpt);
+    drawLabel(ctx, under, box.x, box.y + 12, "powerUnder", {});
   }
   ctx.restore();
 
@@ -13535,6 +13536,10 @@ function sizeRegionCanvas(cv) {
  *  the alternative is a 3-second pause every time somebody turns the wheel. Capped at 4× for that reason. */
 let _regionView = { k: 1, cx: 0.5, cy: 0.5, sx: 0, sy: 0, sw: 0, sh: 0 };
 let _regionOff = null;
+// ⛔ M2/D1 — ONE COLLISION SPACE FOR THE WHOLE MAP, made fresh at the top of each paint. The region map had
+// SIX label passes; four could not see each other at all and the two that avoided collisions kept SEPARATE
+// sets, which is the pile-up Aevi reported. There was no such thing as "the labels of this map".
+let _labelSpace = null;
 let _rasterOff = null;        // M1: the region raster's own CSS-frame surface, drawn through the transform
 let _globeRasterOff = null;   // …and the globe's, for the same reason: putImageData ignores a transform
 
@@ -13620,6 +13625,7 @@ function paintRegionMap(regionId) {
     _regionOff.width = offW; _regionOff.height = offH;
   }
   const ctx = _regionOff.getContext("2d");
+  _labelSpace = labelSpace();        // M2/D1: every pass below reserves from this one, in style rank order
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   ctx.clearRect(0, 0, W, H);
   // ⛑ THE RASTER IS COMPUTED IN THE MAP'S OWN (CSS) FRAME and drawn through the transform, so it rasterises
@@ -13961,10 +13967,16 @@ function paintRegionMap(regionId) {
         ctx.fillStyle = grad;
         ctx.beginPath(); ctx.arc(p.x, p.y, Math.max(2, rpx), 0, Math.PI * 2); ctx.fill();
       }
-      ctx.fillStyle = (g.level || 0) < 0 ? "rgba(190,180,225,0.92)" : "rgba(236,226,196,0.92)";
-      ctx.font = (g.kind === "area" ? "italic 600 11px" : "600 10px") + " system-ui, sans-serif";
-      ctx.textAlign = "center";
-      ctx.fillText(String(g.name || g.id) + ((g.level || 0) < 0 ? ` ▾${g.level}` : ""), p.x, p.y);
+      // ✅ M2/D1 — THROUGH THE TABLE AND THE SHARED SPACE. This pass had NO halo and NO collision box at all,
+      // so a named ground could be lettered straight across a town's name with nothing to stop it.
+      {
+        const gText = String(g.name || g.id) + ((g.level || 0) < 0 ? ` ▾${g.level}` : "");
+        const gOpt = { below: (g.level || 0) < 0 };
+        ctx.textAlign = "center";
+        const gw2 = (drawLabel(ctx, gText, -9999, -9999, "ground", gOpt)?.w) || 0;
+        const gbox = (_labelSpace || labelSpace()).place(p.x, p.y, gw2, 13, { kind: "ground", clampTo: { w: W, h: H } });
+        if (gbox) drawLabel(ctx, gText, gbox.x, gbox.y, "ground", gOpt);
+      }
     }
     // ⛔ ROADS COME FROM THE GRAPH, WHICH IS ALWAYS CONSISTENT. Erik: "the roads are only important in
     // that we need some roads — they can be redrawn." A `connections` edge between two placed locations
@@ -14039,15 +14051,22 @@ function paintRegionMap(regionId) {
     // codebase keeps finding, so it goes out with the thing it described.
     // the destinations, lettered at the frame — a road atlas exits its roads and names them
     ctx.save();
-    ctx.fillStyle = "rgba(226,214,180,0.9)";
-    ctx.font = "600 9px system-ui, sans-serif";
+    // ✅ M2/D1: the table gives these a halo they never had, and the shared space keeps them off the places
+    // they point at. A road atlas naming its exits over its own towns is the pile-up in miniature.
+    const exSpace = _labelSpace || labelSpace();
     for (const ex of exits) {
       ctx.textAlign = ex.at.x > W * 0.72 ? "right" : ex.at.x < W * 0.28 ? "left" : "center";
       const dx = ex.at.x > W * 0.72 ? -4 : ex.at.x < W * 0.28 ? 4 : 0;
       // two names, then a count: "Scour, Blocklands +1 →"
       const shown = ex.names.slice(0, 2).map((n) => String(n).slice(0, 18)).join(", ");
       const more = ex.names.length > 2 ? ` +${ex.names.length - 2}` : "";
-      ctx.fillText(shown + more + " →", ex.at.x + dx, Math.max(10, Math.min(H - 4, ex.at.y - 3)));
+      {
+        const eText = shown + more + " →";
+        const ew = (drawLabel(ctx, eText, -9999, -9999, "exit", {})?.w) || 0;
+        const ex0 = ex.at.x + dx, ey0 = Math.max(10, Math.min(H - 4, ex.at.y - 3));
+        const ebox = exSpace.place(ex0, ey0, ew, 12, { kind: "exit", clampTo: { w: W, h: H } });
+        if (ebox) drawLabel(ctx, eText, ebox.x, ebox.y, "exit", { align: ctx.textAlign });
+      }
     }
     ctx.restore();
 
@@ -14093,10 +14112,14 @@ function paintRegionMap(regionId) {
     const m = city ? city.marks.find((q) => q.id === id) : null;
     const p = m ? { x: m.x, y: m.y } : base.toScreen(l.worldPos.longitude, l.worldPos.colatitude - 90, W, H);
     if (p.x < -20 || p.y < -20 || p.x > W + 20 || p.y > H + 20) continue;
-    marks416.push({ id, l, p, name: String(l.name || id).slice(0, 22) });
+    // ⛔ M7's REAL CAUSE. Aevi reported *"The Disputed Zone — Fr +3"* as a label drawn twice; the location is
+    // named "The Disputed Zone — Fringe" (26 chars) and `.slice(0, 22)` cuts it to exactly that string — a
+    // HARD CUT MID-WORD, which `smartClamp` has existed to prevent since SNG-152. `labelText` breaks on a word.
+    marks416.push({ id, l, p, name: labelText(l.name || id, "place", 24) });
   }
-  const LABEL_FONT = "600 10px system-ui, sans-serif";
-  ctx.font = LABEL_FONT;
+  // ✅ M2 — *"place | serif, bold, 12–13px, 3px dark halo"*, from the table rather than from a local const.
+  const LABEL_FONT = (here416) => { drawLabel(ctx, "", 0, 0, "place", { here: here416 }); return ctx.font; };
+  LABEL_FONT(false);
   const rank416 = (m) => (m.id === here ? 0 : m.l.waygate ? 1 : m.l.tier === "site" ? 3 : 2);
   // ⛔ ERIK'S MAP, 2026-10-01 — A LABEL IS PLACED AT THE WIDTH IT IS ACTUALLY DRAWN AT.
   // ⚠️ This measured `m.name` and then drew `m.name + " +N"`. The badge `placeLabels` itself produces was not in

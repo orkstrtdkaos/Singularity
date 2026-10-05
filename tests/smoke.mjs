@@ -6491,6 +6491,37 @@ await (async () => {
           && /width="\$\{700 \* dprOf\(\)\}"/.test(tag);
       })(), "⚠️ measured: 700 CSS px with no style, against a 360–430px phone viewport — and scaling the attributes of an unstyled canvas scales what the player SEES");
 
+    /* ═════ M2 + D1 (SNG-675) · ONE LABEL TABLE, ONE COLLISION SPACE ═════
+     * ✅ AEVI: *"One plain font for everything … make it one table that every label goes through"*, and D1/M7,
+     * the pile-up. ⛔ MEASURED FIRST, AND THE COUNT IS THE ARGUMENT: the region map had SIX label passes, all
+     * `system-ui`, and **four of the six had no collision box at all** while the two that avoided collisions
+     * kept SEPARATE sets. The pile-up was not a bug in one pass — there was no such thing as "the labels of
+     * this map", only six passes that happened to draw on the same canvas.
+     * ⛑ AND M7's "DRAWN TWICE" WAS A TRUNCATION. The location is named "The Disputed Zone — Fringe" (26
+     * chars) and the place pass cut it with `.slice(0, 22)` to exactly "The Disputed Zone — Fr" — the string
+     * she reported. A hard cut mid-word, which `smartClamp` has existed to prevent since SNG-152. */
+    const mlSrc = readFileSync(new URL("../engine/maplabel.js", import.meta.url), "utf8");
+    check("675/M2: ⛔ every map label goes through ONE table — a power's name was `700 12px system-ui`, no louder than a hut's",
+      (() => {
+        const ml = mlSrc;
+        return /export const LABEL_STYLES/.test(ml)
+          && ["place", "power", "powerUnder", "district", "ground", "exit"].every((k) => ml.includes(k + ": {"))
+          && /ui-serif/.test(ml) && /letterSpacing/.test(ml)
+          && /drawLabel\(ctx, name, box\.x, box\.y, "power"/.test(src);
+      })(), "six passes, six fonts, all of them the same plain sans");
+    check("675/D1: ⛔ …and ONE collision space, made per paint, that every pass reserves from",
+      /_labelSpace = labelSpace\(\)/.test(src)
+      && (src.match(/_labelSpace \|\| labelSpace\(\)/g) || []).length >= 2
+      && /const space = _labelSpace/.test(src),
+      "four of the six passes had no box at all, and the two that did kept separate sets");
+    check("675/D1: ⛑ …and precedence is a property of the STYLE, not of which pass runs first",
+      /rank: 0/.test(mlSrc) && /rank: 2/.test(mlSrc),
+      "with six independent passes, which label won was an accident of code order");
+    check("675/M7: ⛔ a long place name breaks on a WORD — a hard slice cut 'The Disputed Zone — Fringe' mid-word",
+      !/String\(l\.name \|\| id\)\.slice\(0, 22\)/.test(src)
+      && /labelText\(l\.name \|\| id, "place", 24\)/.test(src),
+      "Aevi reported the resulting \"The Disputed Zone — Fr\" as a label drawn twice");
+
     // ⛔ AND IT TAKES TOUCH, which is the half that was missing. One binding serves the globe and the region
     // map, and it carries pinch — `touches[1]` is what SNG-168 found appeared NOWHERE in this repo.
     check("168/390: …and it answers a finger as well as a mouse — drag, pinch, and a tap that goes somewhere",

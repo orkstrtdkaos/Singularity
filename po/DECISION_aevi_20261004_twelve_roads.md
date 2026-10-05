@@ -1,4 +1,4 @@
-<!-- status: NEEDS ERIK. Erik 2026-10-04: "determine if the roads are supposed to exit out only the upper half or if they are supposed to exit more evenly around." Answer: evenly. A placement bug squeezed them. Fixing it moves the twelve foothills, which overturns the SNG-537 "no rebuild" ruling for the region field; the land is untouched. -->
+<!-- status: RULED A by Erik 2026-10-04 ("Can we just move the foothills?" ... "Yes, proceed."); applied on aevi-foothills 155f2cb25 without regeneration (the region field is evaluated, not generated; see REQUEST_aevi_20261004_foothills_checks). Was: NEEDS ERIK. Erik 2026-10-04: "determine if the roads are supposed to exit out only the upper half or if they are supposed to exit more evenly around." Answer: evenly. A placement bug squeezed them. Fixing it moves the twelve foothills, which overturns the SNG-537 "no rebuild" ruling for the region field; the land is untouched. -->
 # DECISION: Aevi → Erik (and CCode) · the twelve roads out of the Crossing (SNG-676)
 
 **Aevi (PO) · 2026-10-04.** Erik: *"determine if the roads are supposed to exit out only the upper half or if they

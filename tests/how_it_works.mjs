@@ -35723,10 +35723,16 @@ console.log("\n── §411 · the ground map answers the pointer ──");
   // ⚠️ `max-width` ALONE WOULD HAVE BEEN A BUG: the backing store would stay 800×420 and the browser would scale
   // it, so the ground softens and every label draws at half the resolution it is shown at. And the ASPECT is held,
   // because `toScreen` maps the extent onto W×H — a different ratio stretches every authored way on the ground.
+  // ⛑ RE-POINTED 2026-10-04, AND IT WAS MY OWN MISTAKE. This pinned the source text `cv.width = want;
+  // cv.height = h;` — the IDENTIFIER NAMES — so it went red the moment M1 renamed them while making the line
+  // more correct (both dimensions now carry the device ratio). A gate may not pin the typography of a line it
+  // does not own the wording of; it asks whether the INVARIANT holds. The invariant here is that the height is
+  // derived from the width through one ratio constant, so the ground is never stretched.
   check("§411: ⚠️ THE BACKING STORE FOLLOWS THE LAYOUT, and the aspect is held so the ground is not stretched",
     /const REGION_ASPECT = 420 \/ 800;/.test(A411)
     && /function sizeRegionCanvas\(cv\)/.test(A411)
-    && /cv\.width = want; cv\.height = h;/.test(A411)
+    && /cv\.width = \w+; cv\.height = \w+;/.test(A411)          // BOTH are set, whatever they are called
+    && /\* REGION_ASPECT/.test(A411)                              // and the height comes from the width through the ratio
     && /sizeRegionCanvas\(cvQ\);/.test(A411)
     && /max-width:1600px/.test(A411));
 }

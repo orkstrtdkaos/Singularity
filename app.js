@@ -196,7 +196,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.19.0";
+const APP_VERSION = "2.19.1";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -12468,7 +12468,10 @@ function routedRoadsFor(regionId, netRoads, ext, base, W, H) {
   if (by.has(key)) return by.get(key);
   const G = makeGroundCost(_terrain, { ...GROUND_COST.road, extent: ext });
   const out = routeRoads(netRoads, CONTENT.locations, {
-    W, H, step: G.step, toScreen: base.toScreen, toWorld: base.toWorld, extent: ext, cell: 2,
+    // ⛑ `cell` SCALES WITH THE RATIO so the walk's grid holds its CELL COUNT. A fixed 2px cell on a canvas
+    // that just doubled is four times the cells and four times the 3-second worst case; 2×dpr is the same
+    // number of cells, the same cost, and the route is then drawn as a stroke at full device resolution.
+    W, H, step: G.step, toScreen: base.toScreen, toWorld: base.toWorld, extent: ext, cell: 2 * dprOf(),
   });
   by.set(key, out);
   return out;
@@ -12597,7 +12600,7 @@ function territoryFor(regionId, ext, base, W, H) {
   if (_terr.key === key) return _terr;
   const G = makeGroundCost(_terrain, { ...GROUND_COST.territory, extent: ext });
   const T = territoryByGround(holders, CONTENT.locations, {
-    W, H, step: G.step, toScreen: base.toScreen, toWorld: base.toWorld, cell: 4, extent: ext,
+    W, H, step: G.step, toScreen: base.toScreen, toWorld: base.toWorld, cell: 4 * dprOf(), extent: ext,
   });
   // ⚠️ THE NETWORKS COME SEPARATELY, because `groundHolders` filters to territorial BEFORE the painter sees
   // anything — which is right (it is a list of who holds ground) and meant my first network pass iterated a
@@ -13466,12 +13469,47 @@ function queueRegionMap(regionId) {
  *  road would land somewhere slightly else. Widening is a resolution change here, never a reframing.
  *  ⛑ Returns true when it actually changed, because setting `width` CLEARS the canvas: the caller must paint after. */
 const REGION_ASPECT = 420 / 800;
+
+/* ═════ M1 · DEVICE PIXELS — ✅ AEVI (SNG-675): *"most of the 'looks different' is this"* ═════
+ *
+ * ⛔ THERE WAS NO `devicePixelRatio` ANYWHERE IN THIS FILE. Every canvas had a backing store equal to its CSS
+ * size, so on the phone Erik plays on (DPR 2–3) every line and every letter was upscaled by the browser and
+ * soft. Her mocks are drawn at full resolution, and that is most of the difference.
+ *
+ * ⚠️ BUT NOT "SIZE THE BACKING STORE AND LEAVE THE DRAWING CODE ALONE", which is what her note suggests and
+ * what I would have done without measuring the layers. THREE OF THEM ARE COMPUTED IN SCREEN SPACE:
+ *   · the roads are a least-cost walk on a `cell: 2` grid — up to 3s for a region already;
+ *   · the territory is a second walk on a `cell: 4` grid;
+ *   · the terrain raster is a PER-OUTPUT-PIXEL loop, 336,000 of them at 800×420.
+ * At DPR 2 all three quadruple. The road walk alone would go to ~12 seconds a repaint.
+ *
+ * ⛑ SO THE SPLIT IS BY WHAT THE LAYER *IS*, and the codebase already had the pattern: the territory fill is
+ * painted small and scaled up, because (its own comment) *"one small image scaled up lets the browser's own
+ * smoothing do the fade"*. Terrain is the same kind of thing — a smooth continuous field, a photograph of
+ * ground — and upscaling it costs almost nothing visually. Lines and letters are the opposite: they are where
+ * every soft edge shows, and they are cheap.
+ *   ✅ VECTORS — roads, borders, labels, the city, the pins — draw at FULL DEVICE RESOLUTION.
+ *   ✅ RASTERS — terrain, the field wash, the territory fill — stay at BASE resolution and scale up.
+ *   ✅ The two WALKS keep their cell counts, by scaling `cell` with the ratio.
+ * Cost is flat and the thing that was soft is sharp. */
+const DPR_CAP = 2;   // ⚠️ A DIAL, AND CAPPED. A DPR-3 phone would want 9× the canvas memory for a gain over 2× that nobody can see; 2 is where the visible win is.
+function dprOf() {
+  const d = Number(typeof window !== "undefined" ? window.devicePixelRatio : 1);
+  return Math.max(1, Math.min(DPR_CAP, Number.isFinite(d) && d > 0 ? Math.round(d) : 1));
+}
+
 function sizeRegionCanvas(cv) {
   if (!cv) return false;
   const want = Math.max(320, Math.min(1600, Math.round(cv.getBoundingClientRect().width || 800)));
-  const h = Math.round(want * REGION_ASPECT);
-  if (cv.width === want && cv.height === h) return false;
-  cv.width = want; cv.height = h;
+  // ⛑ BOTH DIMENSIONS TIMES THE SAME RATIO, so the intrinsic ASPECT is unchanged — the element is styled
+  // `width:100%` with no CSS height, so its displayed height follows the attribute ratio. Scaling both leaves
+  // the layout untouched and only the resolution moves. (This is also why no `setTransform` is wanted:
+  // `base.toScreen` maps the extent onto W×H whatever they are, so the vector layers are already
+  // resolution-independent and simply draw finer.)
+  const dpr = dprOf();
+  const w = Math.round(want * dpr), h = Math.round(want * REGION_ASPECT * dpr);
+  if (cv.width === w && cv.height === h) return false;
+  cv.width = w; cv.height = h;
   return true;
 }
 
@@ -13487,6 +13525,7 @@ function sizeRegionCanvas(cv) {
  *  the alternative is a 3-second pause every time somebody turns the wheel. Capped at 4× for that reason. */
 let _regionView = { k: 1, cx: 0.5, cy: 0.5, sx: 0, sy: 0, sw: 0, sh: 0 };
 let _regionOff = null;
+let _rasterOff = null;   // M1: the terrain raster's own base-resolution surface, scaled up into the map
 
 /** Re-show the painted map at the current zoom and pan. No repaint, no recomputation. */
 function blitRegion() {
@@ -13563,7 +13602,14 @@ function paintRegionMap(regionId) {
   const ctx = _regionOff.getContext("2d");
   ctx.setTransform(1, 0, 0, 1, 0, 0);
   ctx.clearRect(0, 0, W, H);
-  const img = ctx.createImageData(W, H);
+  // ⛑ THE RASTER IS COMPUTED AT BASE RESOLUTION AND SCALED UP (M1). This loop is per OUTPUT PIXEL — 336,000
+  // of them at 800×420 — so computing it at device resolution would quadruple the one layer that gains least
+  // from it: terrain is a smooth continuous field, and the browser's own smoothing upscales it indistinguishably.
+  // ⚠️ `toWorld` AND `insideDisc` BOTH TAKE THE FRAME, so the raster simply asks them for its OWN frame
+  // (`rw×rh`) rather than scaling coordinates by hand — which is the version that cannot drift by half a pixel.
+  const RS = dprOf();
+  const rw = Math.max(1, Math.round(W / RS)), rh = Math.max(1, Math.round(H / RS));
+  const img = ctx.createImageData(rw, rh);
   const D = img.data;
   // ⛔ X · A POLAR REGION IS DRAWN AS A CITY, not as ground. ✅ ERIK on the polar terrain: *"really bad"* — and
   // he was right: at ~1° across the Crossing is below the terrain's 0.25° information floor, so what he saw was
@@ -13574,9 +13620,9 @@ function paintRegionMap(regionId) {
   const muteGround = !city && !!(fieldCtl.on && fieldCtl.kinds.size && worldField());
   const step = contourStepFor(ext.polar ? 2 * ext.poleRadiusDeg
     : Math.max(ext.la1 - ext.la0, (ext.lo1 - ext.lo0) * base.conv));
-  for (let y = 0; city ? false : y < H; y++) {
-    for (let x = 0; x < W; x++) {
-      const w = base.toWorld(x + 0.5, y + 0.5, W, H);
+  for (let y = 0; city ? false : y < rh; y++) {
+    for (let x = 0; x < rw; x++) {
+      const w = base.toWorld(x + 0.5, y + 0.5, rw, rh);
       const sm = base.sample(w.lon, w.lat);
       let c;
       if (sm.type === 0) {
@@ -13596,14 +13642,28 @@ function paintRegionMap(regionId) {
         const lum = 0.299 * c[0] + 0.587 * c[1] + 0.114 * c[2];
         c = [lum + (c[0] - lum) * 0.35, lum + (c[1] - lum) * 0.35, lum + (c[2] - lum) * 0.35];
       }
-      const o = (y * W + x) * 4;
+      const o = (y * rw + x) * 4;
       // ⛑ C1: the disc IS the map. Beyond its rim there is no ground to draw, so it reads as the frame's
       // margin rather than as a country that happens to be circular.
-      if (base.polar && !base.insideDisc(x + 0.5, y + 0.5, W, H)) { c = [14, 16, 20]; }
+      if (base.polar && !base.insideDisc(x + 0.5, y + 0.5, rw, rh)) { c = [14, 16, 20]; }
       D[o] = c[0]; D[o + 1] = c[1]; D[o + 2] = c[2]; D[o + 3] = 255;
     }
   }
-  if (!city) ctx.putImageData(img, 0, 0);
+  if (!city) {
+    if (RS === 1) ctx.putImageData(img, 0, 0);
+    else {
+      // ⛑ THE SAME TRICK THE TERRITORY FILL AND THE FIELD WASH ALREADY USE — a small image scaled up, with
+      // the browser's smoothing doing the interpolation. `putImageData` IGNORES the transform and would have
+      // painted the small raster into the top-left corner at 1:1, which is why it goes through an offscreen.
+      if (!_rasterOff || _rasterOff.width !== rw || _rasterOff.height !== rh) {
+        _rasterOff = document.createElement("canvas");
+        _rasterOff.width = rw; _rasterOff.height = rh;
+      }
+      _rasterOff.getContext("2d").putImageData(img, 0, 0);
+      ctx.imageSmoothingEnabled = true;
+      ctx.drawImage(_rasterOff, 0, 0, rw, rh, 0, 0, W, H);
+    }
+  }
 
   // ⛔ B5 · WHOSE GROUND — under the field's own marks, because the ground is what the field sits ON.
   if (fieldCtl.territory && !city) {
@@ -14394,7 +14454,13 @@ function renderMapWorld() {
     <p class="hint" style="margin-bottom:8px">${nodes.length} regions${nodes.reduce((n, r) => n + r.gates.length, 0) ? ` · ${nodes.reduce((n, r) => n + r.gates.length, 0)} waygates` : ""}. The scale where the question is <em>which Reach am I in</em>.</p>
     ${mapTierBar()}
     <div class="globe-wrap">
-      <canvas id="world-globe" width="700" height="540" aria-label="The world. Drag to spin, scroll to zoom, click a place to enter its region."></canvas>
+      <!-- ⛔ M1 · THIS CANVAS HAD NO CSS AT ALL — no rule for #world-globe, none for .globe-wrap, no inline
+           style — so 700×540 was its DISPLAYED size and on a 375px phone it overflowed the viewport by 325px.
+           ⚠️ That is a layout bug in its own right and it had to be fixed before the resolution could move,
+           because scaling the attributes of an unstyled canvas scales what the player SEES.
+           ⛑ width:100% + max-width:700px + no CSS height keeps today's desktop size exactly, fits a phone,
+           and makes the attributes a pure resolution choice — the same arrangement #region-map already had. -->
+      <canvas id="world-globe" width="${700 * dprOf()}" height="${540 * dprOf()}" style="width:100%;max-width:700px;height:auto;display:block" aria-label="The world. Drag to spin, scroll to zoom, click a place to enter its region."></canvas>
       <div class="globe-ctl">
         ${[["topo", "topographic"], ["biome", "land"], ["lattice", "⛰ lattice"], ["nanite", "✵ nanite"], ["ground", "whose ground"]]
           .map(([k, label]) => `<button class="opt globe-layer${k === "topo" ? " selected" : ""}" data-globelayer="${k}">${esc(label)}</button>`).join("")}
@@ -14748,7 +14814,11 @@ function wireWorldGlobe() {
         mapTier = "region"; mapFocus = rid; renderMap(); return;
       }
     }
-    view.r = Math.max(120, Math.min(floorRadius(px), next));
+    // ⛑ THE ONE ABSOLUTE IN THE GLOBE'S VIEW, AND IT HAD TO SCALE. Everything else is relative already
+    // (`r: min(cv.width, cv.height) * 0.44`, `cx: cv.width / 2`), so the globe renders identically at any
+    // backing-store size — but this floor is in PIXELS, and left at 120 it would let a device-resolution
+    // canvas zoom out twice as far as a CSS-resolution one. The same picture must have the same limits.
+    view.r = Math.max(120 * dprOf(), Math.min(floorRadius(px), next));
     paint(true); clearTimeout(cv._z); cv._z = setTimeout(() => paint(false), 140);
   };
   bindGesture(cv, {

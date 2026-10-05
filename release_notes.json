@@ -16,6 +16,24 @@
   "next": [],
   "releases": [
     {
+      "version": "2.19.1",
+      "date": "2026-10-05",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "The maps are drawn at your screen's real resolution",
+          "summary": "Every map was being drawn at half or a third of the detail your phone can show, then stretched.",
+          "detail": "The canvases were sized to their layout box rather than to the device, so on a phone every coastline, road and place-name was drawn small and upscaled by the browser — soft edges on everything. They now draw at the screen's own resolution. Roads, borders, labels and the city get the full detail; the ground itself is still painted at the old size and smoothed up, because terrain is a continuous surface and nobody can tell, which is what keeps the map as fast as it was."
+        },
+        {
+          "kind": "fix",
+          "title": "The world map no longer runs off the side of a phone",
+          "summary": "The globe was a fixed 700 pixels wide with nothing telling it to fit the screen.",
+          "detail": "On any phone the world map was wider than the window, so part of it sat off the edge and the page scrolled sideways. It now fits the screen it is on, at the same size as before on a desktop."
+        }
+      ]
+    },
+    {
       "version": "2.19.0",
       "date": "2026-10-04",
       "entries": [

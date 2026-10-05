@@ -6436,6 +6436,55 @@ await (async () => {
     // it. Which events carry it is the binding's business.
     check("168/390: the world tier is navigable — the globe spins and zooms in place of the SVG viewport",
       /bindGesture\(cv/.test(globe) && /view\.yaw/.test(globe) && /view\.r =/.test(globe));
+    /* ═════ M1 (SNG-675) · DEVICE PIXELS ═════
+     * ✅ AEVI: *"No devicePixelRatio, anywhere in app.js … most of the 'looks different' is this."* Measured and
+     * true — zero occurrences in the file. Her gate was *"at DPR 2, canvas.width === 2 × clientWidth"*, which
+     * a Node suite cannot run, so this asserts the mechanism. ⛑ VERIFIED IN THE BROWSER AT DPR 2: the region
+     * map came back 1954×1026 behind a displayed 977×513 — ratio exactly 2.0 — and the paint cost 75ms
+     * against 79ms at DPR 1, so the design below holds its cost.
+     *
+     * ⚠️ THE TWO CHECKS THAT MATTER ARE THE SECOND AND THIRD, because they are what a later "just scale the
+     * canvas" edit would quietly drop and nothing would go red:
+     *   · the two least-cost WALKS scale their `cell`, or the road walk's 3-second worst case becomes 12;
+     *   · the terrain RASTER stays at base resolution, because it is a per-output-pixel loop (336,000 of them
+     *     at 800×420) over a smooth field that upscales indistinguishably. Vectors get the device pixels;
+     *     rasters do not. */
+    check("675/M1: ⛔ the canvas backing store follows the DEVICE, not the CSS box — and the aspect is preserved",
+      /function dprOf\(\)/.test(src) && /DPR_CAP/.test(src)
+      && /cv\.width = w; cv\.height = h;/.test(src)
+      && /const w = Math\.round\(want \* dpr\), h = Math\.round\(want \* REGION_ASPECT \* dpr\);/.test(src),
+      "there was no `devicePixelRatio` anywhere in app.js, so every line and letter was upscaled on a phone");
+    check("675/M1: ⛔ …and the two least-cost WALKS keep their cell COUNT — or a doubled canvas quadruples a 3s walk",
+      /cell: 2 \* dprOf\(\)/.test(src) && /cell: 4 \* dprOf\(\)/.test(src),
+      "the roads and the territory are computed in SCREEN space; a fixed pixel cell is 4× the cells at DPR 2");
+    check("675/M1: ⛔ …and the terrain RASTER stays at base resolution and is scaled up, like the territory fill already was",
+      (() => {
+        // ⛑ BOUNDED BY CONTENT, NOT BY A CHARACTER COUNT. My first cut sliced `i + 3000` and the blit sits at
+        // +3401, so the gate failed on code that was correct — the same brittle-slice mistake as §227 and §411.
+        const i = src.indexOf("const RS = dprOf();");
+        if (i < 0) return false;
+        const end = src.indexOf("B5 · WHOSE GROUND", i);          // the next section of the painter
+        if (end < 0) return false;
+        const body = src.slice(i, end);
+        // it must compute in its OWN frame — asking toWorld/insideDisc for rw×rh, not W×H — and blit through
+        // an offscreen, because putImageData ignores the transform and would paint it 1:1 in the corner
+        return /base\.toWorld\(x \+ 0\.5, y \+ 0\.5, rw, rh\)/.test(body)
+          && /base\.insideDisc\(x \+ 0\.5, y \+ 0\.5, rw, rh\)/.test(body)
+          && /_rasterOff/.test(body) && /drawImage\(_rasterOff, 0, 0, rw, rh, 0, 0, W, H\)/.test(body);
+      })(), "a per-pixel loop at device resolution is 4× the work on the layer that gains least from it");
+    // ⛔ AND THE GLOBE HAD NO CSS AT ALL — which was a layout bug before it was a resolution one.
+    check("675/M1: ⛔ the globe canvas has a CSS width — it had NONE, so 700×540 was its DISPLAYED size on a phone",
+      (() => {
+        const m = src.match(/<canvas id="world-globe"[^>]*>/);
+        if (!m) return false;
+        const tag = m[0];
+        return /style="[^"]*width:100%[^"]*"/.test(tag) && /max-width:700px/.test(tag)
+          && /width="\$\{700 \* dprOf\(\)\}"/.test(tag);
+      })(), "⚠️ measured: 700 CSS px with no style, against a 360–430px phone viewport — and scaling the attributes of an unstyled canvas scales what the player SEES");
+    check("675/M1: ⛑ …and the globe's one ABSOLUTE radius scales with it, so the same picture keeps the same limits",
+      /Math\.max\(120 \* dprOf\(\)/.test(src),
+      "every other term in the globe's view is relative to cv.width already; this floor was in raw pixels");
+
     // ⛔ AND IT TAKES TOUCH, which is the half that was missing. One binding serves the globe and the region
     // map, and it carries pinch — `touches[1]` is what SNG-168 found appeared NOWHERE in this repo.
     check("168/390: …and it answers a finger as well as a mouse — drag, pinch, and a tap that goes somewhere",

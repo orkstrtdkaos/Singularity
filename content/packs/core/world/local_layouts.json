@@ -52,56 +52,56 @@
     "id": "mb_river",
     "name": "The Echo",
     "kind": "water",
-    "bearing": -134,
-    "fromMetres": 3200,
-    "widthMetres": 260,
-    "flowBearing": 162,
-    "why": "⛔ 2.2 MILES OFF — outside the village proper. The town is on the terrace above the floodplain, which is why it has survived spring floods."
+    "bearing": 71,
+    "fromMetres": 230,
+    "widthMetres": 180,
+    "flowBearing": 161,
+    "why": "⛔ ON THE RIVER (Erik 2026-10-06). The channel's centre is 230 m east of the well and runs along the village's east edge on the measured flow; the near bank is the waterfront. 'Water wheels turn along the Echo River' — at the end of the street, not a two-mile walk."
    },
    {
     "id": "mb_floodplain",
     "name": "The Wet Meadows",
     "kind": "field",
-    "bearing": -134,
-    "fromMetres": 1400,
-    "radiusMetres": 1500,
-    "why": "⚠️ Between the village and the bank. Hay and grazing — flooded most springs, which is why nobody builds there."
+    "bearing": 120,
+    "fromMetres": 900,
+    "radiusMetres": 600,
+    "why": "⚠️ Downstream and ACROSS the water, on the low east bank. Hay and grazing, flooded most springs, which is why the village is on the higher west bank and nobody builds over there."
    },
    {
     "id": "mb_open_fields",
     "name": "The Open Fields",
     "kind": "field",
-    "bearing": 30,
-    "fromMetres": 520,
-    "radiusMetres": 600,
-    "why": "⛔ The grain ground, on the flat away from the river. The encounterFlavor is farmers arguing about irrigation shares — these are what they argue over."
+    "bearing": -40,
+    "fromMetres": 650,
+    "radiusMetres": 300,
+    "why": "⛔ The grain ground on this bank, north of the houses between the north road and the terraces. The encounterFlavor is farmers arguing about irrigation shares — ditches off the river feed these."
    },
    {
     "id": "mb_terraces",
     "name": "The Terraced Gardens",
     "kind": "field",
-    "bearing": 300,
-    "fromMetres": 420,
-    "radiusMetres": 420,
-    "why": "'Terraced gardens climb the lower slopes' — on the measured uphill at 300°, relief 0.062."
+    "bearing": -90,
+    "fromMetres": 450,
+    "radiusMetres": 350,
+    "why": "'Terraced gardens climb the lower slopes' — on the measured uphill, which is due west (−90) since the village moved onto the river."
    },
    {
     "id": "mb_coppice",
     "name": "The Coppice",
     "kind": "wood",
-    "bearing": 250,
-    "fromMetres": 600,
-    "radiusMetres": 320,
-    "why": "⚠️ NOBODY WROTE THIS DOWN AND THE VILLAGE REQUIRES IT: water wheels need timber and repair, and a farming village coppices rather than fells. Upslope of the terraces, downwind of the houses."
+    "bearing": -125,
+    "fromMetres": 650,
+    "radiusMetres": 300,
+    "why": "⚠️ Wheels need timber and repair; a farming village coppices rather than fells. Upslope of the houses and away from the floodable bank."
    },
    {
     "id": "mb_built",
     "name": "The Village",
     "kind": "built",
-    "bearing": 0,
-    "fromMetres": 0,
+    "bearing": -110,
+    "fromMetres": 60,
     "radiusMetres": 230,
-    "why": "⛔ THE BUILT GROUND — a few hundred people, so about 230 m across. Everything else on this map is what they work."
+    "why": "⛔ THE BUILT GROUND, a few hundred people, running from the waterfront back up toward the terraces."
    }
   ],
   "sites": [
@@ -113,8 +113,12 @@
      "metres": 0
     },
     "basis": "prose",
-    "why": "⛔ ONE OF THE TWO CENTRES the seed names — and it is a WELL, dug because the river is two miles off. That is why the village has one.",
-    "kind": "well"
+    "why": "⛔ ONE OF THE TWO CENTRES the seed names. In the village, 140 m from the water. It was never meant to be IN the river (Erik, August); the river was never meant to be two miles off (Erik, October).",
+    "kind": "well",
+    "_localMapWas_20261006": {
+     "bearing": 0,
+     "metres": 0
+    }
    },
    {
     "id": "millbrook_green",
@@ -125,8 +129,12 @@
      "metres": 90
     },
     "basis": "prose",
-    "why": "⚠️ Beside the well. Where the irrigation-share arguments actually happen.",
-    "_kindWas_20261006": "open"
+    "why": "⚠️ Beside the well, running down toward the water. Where the irrigation-share arguments actually happen.",
+    "_kindWas_20261006": "open",
+    "_localMapWas_20261006": {
+     "bearing": 80,
+     "metres": 90
+    }
    },
    {
     "id": "millbrook_smithy",
@@ -169,51 +177,68 @@
     "id": "millbrook_mill_lane",
     "name": "The Mill Lane",
     "localMap": {
-     "bearing": -134,
-     "metres": 210
+     "bearing": 112,
+     "metres": 150
     },
     "basis": "river",
-    "why": "⛔ THE LANE TO THE WATER. The village is not on the river; this is how it reaches it, and it runs 2 miles to the wheels.",
-    "kind": "street"
+    "why": "The lane along the waterfront from the green to the wheels.",
+    "kind": "street",
+    "_localMapWas_20261006": {
+     "bearing": -134,
+     "metres": 210
+    }
    },
    {
     "id": "millbrook_wheels",
     "name": "The Water Wheels",
     "localMap": {
-     "bearing": -134,
-     "metres": 3040
+     "bearing": 120,
+     "metres": 226
     },
     "basis": "river",
-    "why": "⛔ ON THE BANK, 2.1 MILES OUT — not in the village. 'Water wheels turn ALONG the Echo River.' ⚠️ The mills are a walk from the houses, which is normal and which the old layout got wrong by putting the river through the square.",
+    "why": "⛔ 'Water wheels turn along the Echo River' — on the near bank, 200 m downstream of the dock so the boats are not fighting the race.",
     "_metresWas_20261006": 3400,
     "_fixNote_20261006": "⛔ DRAWN 2026-10-06, IT WAS ON THE WRONG BANK: the Echo is authored at 3200 m on −134°, 260 m wide, flowing 162°, and at the old distance this site fell beyond the far bank. Now on the village side of the water.",
-    "kind": "mill"
+    "kind": "mill",
+    "_localMapWas_20261006": {
+     "bearing": -134,
+     "metres": 3040
+    }
    },
    {
     "id": "millbrook_landing",
-    "name": "The Landing",
+    "name": "The River Dock",
     "localMap": {
+     "bearing": 60,
+     "metres": 150
+    },
+    "basis": "river",
+    "why": "⛔ THE OTHER CENTRE the seed names — 'the village well and the river dock are the two centres of daily life.' On the waterfront at the end of the green. ⚠️ Half the grain is across the water in the Long Fields, so the punts that carry the plough-teams over are why the dock is a centre at all.",
+    "_metresWas_20261006": 3500,
+    "_fixNote_20261006": "⛔ DRAWN 2026-10-06, IT WAS ON THE WRONG BANK: the Echo is authored at 3200 m on −134°, 260 m wide, flowing 162°, and at the old distance this site fell beyond the far bank. Now on the village side of the water. Still just downstream of the wheels.",
+    "kind": "dock",
+    "_localMapWas_20261006": {
      "bearing": -140,
      "metres": 3230
     },
-    "basis": "river",
-    "why": "⚠️ Just downstream of the wheels so boats are not fighting the race. The seed's 'river dock' — and it is at the river, not at the well.",
-    "_metresWas_20261006": 3500,
-    "_fixNote_20261006": "⛔ DRAWN 2026-10-06, IT WAS ON THE WRONG BANK: the Echo is authored at 3200 m on −134°, 260 m wide, flowing 162°, and at the old distance this site fell beyond the far bank. Now on the village side of the water. Still just downstream of the wheels.",
-    "kind": "dock"
+    "_nameWas_20261006": "The Landing"
    },
    {
     "id": "millbrook_ford",
     "name": "The Old Ford",
     "localMap": {
-     "bearing": -120,
-     "metres": 2940
+     "bearing": -7,
+     "metres": 1124
     },
     "basis": "river",
-    "why": "⛔ NOBODY WROTE THIS DOWN AND THE GEOGRAPHY REQUIRES IT: 14 miles above the Crossing, someone crossed here before the bridge existed. It is why the bridge was built downstream, where the banks are granite.",
+    "why": "⛔ A kilometre upstream, where the Echo spreads wide and shallow before the narrows: the Old Ford. Someone crossed here before there was a bridge; it is why the bridge, 14 miles down, was built where the banks are granite instead.",
     "_metresWas_20261006": 3300,
     "_fixNote_20261006": "⛔ DRAWN 2026-10-06: a ford is IN the river, and at 3300 m it sat 350 m beyond the far bank. Now mid-channel.",
-    "kind": "ford"
+    "kind": "ford",
+    "_localMapWas_20261006": {
+     "bearing": -120,
+     "metres": 2940
+    }
    },
    {
     "id": "millbrook_fields",
@@ -224,12 +249,51 @@
      "metres": 520
     },
     "basis": "anti-uphill",
-    "why": "⛔ ERIK NAMED THESE IN THE SEED — 'the docks in Millbrook on the river, the smithy, THE FIELDS' — and they were the one thing never placed. ⚑ THE FLAT GROUND, DEFINED BY THE SLOPE IT IS NOT ON: uphill measures -75°, so the fields take 105°, directly away from it. ⚠️ This layout's own `_derivation` said so all along — 'Terraces and orchards go uphill. FIELDS TAKE THE FLAT.' ⛔ AND IT IS WHY THE VILLAGE IS WHERE IT IS: Millbrook sits on the terrace above the floodplain, so its arable is not the wet meadow by the Echo — it is the dry flat behind the town, away from the rise.",
+    "why": "⛔ ERIK NAMED THESE IN THE SEED — 'the docks in Millbrook on the river, the smithy, THE FIELDS.' On the flat opposite the measured uphill, which since the move is ACROSS THE WATER on the east bank: the dock's punts carry the teams over.",
     "_bearingWas_20261006": 105,
     "_followNote_20261006": "anti-uphill: the measured uphill moved to -90 when the village moved onto the Echo"
    }
   ],
-  "_antiUphillNote_20260906": "⛑ AUTHORED 2026-09-06 to close SNG-404 §2. ⚠️ THE GATE ASSERTED THE PLACER REPRODUCES FOUR GROUND-DECIDED BASES and `anti-uphill` returned NULL — because NO LAYOUT IN THE CORPUS USED IT. ⛔ A basis with a branch in the engine, a name in `SITE_BASES`, and no content is a reader with no writer, and the gate was asserting agreement on nothing (CCode's own §3 rule). ✅ Fixed from the CONTENT side rather than by narrowing the gate: `anti-uphill` is a real basis, Erik named the fields in the original seed, and Millbrook had every other seed noun placed but not them."
+  "_antiUphillNote_20260906": "⛑ AUTHORED 2026-09-06 to close SNG-404 §2. ⚠️ THE GATE ASSERTED THE PLACER REPRODUCES FOUR GROUND-DECIDED BASES and `anti-uphill` returned NULL — because NO LAYOUT IN THE CORPUS USED IT. ⛔ A basis with a branch in the engine, a name in `SITE_BASES`, and no content is a reader with no writer, and the gate was asserting agreement on nothing (CCode's own §3 rule). ✅ Fixed from the CONTENT side rather than by narrowing the gate: `anti-uphill` is a real basis, Erik named the fields in the original seed, and Millbrook had every other seed noun placed but not them.",
+  "_extentWas_20261006": [
+   {
+    "id": "mb_river",
+    "bearing": -134,
+    "fromMetres": 3200,
+    "widthMetres": 260
+   },
+   {
+    "id": "mb_floodplain",
+    "bearing": -134,
+    "fromMetres": 1400,
+    "radiusMetres": 1500
+   },
+   {
+    "id": "mb_open_fields",
+    "bearing": 30,
+    "fromMetres": 520,
+    "radiusMetres": 600
+   },
+   {
+    "id": "mb_terraces",
+    "bearing": 300,
+    "fromMetres": 420,
+    "radiusMetres": 420
+   },
+   {
+    "id": "mb_coppice",
+    "bearing": 250,
+    "fromMetres": 600,
+    "radiusMetres": 320
+   },
+   {
+    "id": "mb_built",
+    "bearing": 0,
+    "fromMetres": 0,
+    "radiusMetres": 230
+   }
+  ],
+  "_rebuiltNote_20261006": "⛔ ERIK 2026-10-06: 'Millbrook should be ON the river.' REBUILT A SECOND TIME. SNG-427 (August) answered 'you have the Well IN the river' by moving the river two miles off. That answered the wrong noun: the WELL was wrong, the town was not. The village now stands on the west bank of the Echo (worldPos moved onto terrain.json river 89, the authored water). The channel runs along its east edge on its measured flow; the dock and the wheels are at the waterfront; the well is in the village, 140 m from the water; the uphill (−90, re-measured) is behind it to the west, where the terraces and the coppice are."
  },
  "echo_river_crossing": {
   "_measured": {

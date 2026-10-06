@@ -269,19 +269,34 @@
   {
    "id": "the_echo",
    "name": "The Echo",
-   "nearHead": "the_hundred_markets",
-   "nearMouth": "kestrels_roost",
-   "span": "91.5°",
-   "why": "⛔ THE GREAT RIVER. It rises near the Hundred Markets and runs most of the way round the world before it ends near Kestrel's Roost. Echo River Crossing is named for it; Millbrook's wheels turn on it. ⚠️ It is the only named thing on the map that touches nearly every disposition, and it is water, which the Numinous consider significant and the Enginewrights consider a shipping lane.",
+   "nearHead": "archive_hollow",
+   "nearMouth": "waystone",
+   "span": "7.2°",
+   "why": "⛔ THE VALLEY'S RIVER, and the reason the valley's towns are where they are. It rises above Archive Hollow, runs past Millbrook's waterfront, narrows between granite shoulders at Echo River Crossing 14 miles on, and passes Waystone to its mouth. Authored water (waterauth.json: Millbrook 'a RIVERSIDE farming village', the Crossing 'where the Echo River narrows', Archive Hollow 'UPSTREAM of the crossing'). About 190 miles end to end.",
+   "_whyWas_20261006": "⛔ THE GREAT RIVER. It rises near the Hundred Markets and runs most of the way round the world before it ends near Kestrel's Roost. Echo River Crossing is named for it; Millbrook's wheels turn on it. ⚠️ It is the only named thing on the map that touches nearly every disposition, and it is water, which the Numinous consider significant and the Enginewrights consider a shipping lane.",
+   "_reanchored_20261006": "⛔ ITS SIGNATURE POINTED AT THE WRONG WATER: terrain.json river 80, five points near the antimeridian at latitude −60, more than 60° of longitude from every town the name is about — and shared with the Drowned Reach. The water that actually runs through Archive Hollow, Millbrook and Echo River Crossing is river 89. Re-anchored there when Erik put Millbrook on the river.",
+   "_signatureWas_20261006": {
+    "head": [
+     -62.75,
+     -179.75
+    ],
+    "mouth": [
+     -57.75,
+     175.25
+    ],
+    "nearHead": "the_hundred_markets",
+    "nearMouth": "kestrels_roost",
+    "lengthDeg": 110.8
+   },
    "head": [
-    -62.75,
-    -179.75
+    -64.25,
+    -111.75
    ],
    "mouth": [
-    -57.75,
-    175.25
+    -71.25,
+    -107.75
    ],
-   "lengthDeg": 110.8
+   "lengthDeg": 7.24
   },
   {
    "id": "the_greenwater",

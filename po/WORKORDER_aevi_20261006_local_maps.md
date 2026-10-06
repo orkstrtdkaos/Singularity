@@ -1,16 +1,68 @@
-<!-- status: OPEN for CCode. Erik 2026-10-06. Read against origin 8c49e6f86. Follows SNG-677 §0 (label precedence) and P (the place card). -->
+<!-- status: OPEN for CCode. Erik 2026-10-06 (twice: build the local maps, and keep the local tier the ring stood in for). Read against origin 8c49e6f86. Follows SNG-677 §0 (label precedence) and P (the place card). -->
 # WORKORDER: Aevi → CCode · the local maps, and then the diagrams go (SNG-678)
 
 **Aevi (PO) · 2026-10-06.** Erik:
 
 > *"We need the local maps done. Then we can finally retire that geometric view."*
 
-This is the fifth item of your own BACKLOG_ccode_regional_and_local_maps (2026-09-18): *"Inside a place, the authored
-ground where a local layout exists; the ring where none does."* Erik's ruling goes further: **no ring at all.** Every place
-gets ground. After that, the two diagrams retire:
+Then, correcting how I first read it:
 
-- the **location tier's ring** (`renderMapLocation`, app.js:15266, laid out by `interiorLayout` in worldmap.js:177);
-- the **region tier's connection diagram**, the SVG under the ground map (app.js:15535).
+> *"Yes - but we need to keep the local map level that the geometric one was supposed to represent. You had started
+> these before. Find your work."*
+
+**The local tier stays. Only its drawing changes.** The ring was a stand-in for the third of Erik's three zoom levels
+(SNG-383 §4, 2026-08-08):
+
+1. **World:** regions and their gates.
+2. **Region:** the places.
+3. **Settlement:** *"its sites lay out as a local map."*
+
+SNG-426 (August) authored the split in `location_kinds.json` → `regionDisplay`:
+
+- **Seven sites marked `suppressAtRegion`:** the Low Lamp Inn, Mara Wells' Store, the Watershed Road, the Hundred
+  Markets, the Quiet House, and the Cogitarium's entrance hall and third terrace.
+- **Places renamed at region scale:** "Harmonic Heights", not "Harmonic Heights — Lower Terrace", with a city icon; "Echo River
+  Crossing" as a `bridge`; "Greywater", not "The Greywater Stilts".
+
+⛔ **Nothing reads it.** `regionDisplay` has no reader anywhere in app.js or engine/, so the region map still says
+"Harmonic Heights — Lower Terrace" and still draws the inn on top of its district. That is the other half of this
+order, **L0** below. The local map is where suppressed sites go, so the two land together. Retire the ring without
+the local tier and those places have nowhere to be drawn. The ring retires once the local tier exists, and the
+region diagram after both.
+
+This is also the fifth item of your BACKLOG_ccode_regional_and_local_maps (2026-09-18).
+
+- the **location tier's ring** (`renderMapLocation`, app.js:15266, laid out by `interiorLayout` in worldmap.js:177) is
+  **replaced** by the local map;
+- the **region tier's connection diagram**, the SVG under the ground map (app.js:15535), **retires** once its jobs
+  have moved (the parity list below).
+
+## The work this builds on (mine, August)
+
+I started this in August and it never reached a renderer. Read these before you draw:
+
+| | what it settled |
+|---|---|
+| **SPEC_SNG-403** (2026-08-09) | §1: the local map is a **new layer, not a further zoom**, because the terrain's finest feature is ~33 km. The frame is `localMap: {bearing, metres}` from the centre. The three gradients (river, uphill, roads) place everything: *water trades go riverward, terraces uphill, fields take the flat, gates and markets on the road bearings.* §4a: interiors need a vertical axis. |
+| **SPEC_SNG-404** | The detailing engine: the **precedence order** (§2, corrected in §7: prose outranks gradient), every placement **emits its reason** (§4), new places get a layout **on creation** (§5), and `kind` is authored in `location_kinds.json` (§8). |
+| **SPEC_SNG-417** | Four more layouts chosen **from save data**, the places characters actually stand in. The relief threshold narrowed to about 0.08. |
+| **SPEC_SNG-423** | The Echo Vale as the **template**, both tiers complete. §4 is the authoring style the rest follow. |
+| **SNG-419 / 422 / 427** | The rest of the 18. **427 rebuilt Millbrook** after Erik's review: the well was in the river. It added the `extent` layer: water, wet meadows, open fields, terraced gardens, coppice and built ground. |
+| **SNG-426** | Region maps **name places**; local maps **name parts of a place**. `regionDisplay` gives the region-scale name and kind, and suppresses sites. **Authored, never read** (L0). |
+
+**Erik's review of my first render (2026-08-11) is the visual brief, and it still stands:**
+
+> *"Where are their woods, fields, buildings (if local is a town like this)… at this zoom level (the most detailed
+> we get) the river should have bends and sandbars and banks and rapids… If you don't have the capacity to make a
+> nice looking town map, then maybe just keep the locations and layout ready to hand to ccode."*
+
+The locations and layout are what I kept, and this is the hand-off he meant.
+
+**The target picture:** `po/img/local_mock_millbrook.png`, drawn from `local_layouts.json` and nothing else. The
+named things are all authored. The texture under them is the kind of thing L2 generates: field strips, roofs, tree
+crowns, the meander, sandbars on the insides of the bends, reed banks, the narrows with rapids above the ford, and
+contours across the uphill. Sites near the centre drop at the full frame and show in an enlargement of the built
+ground. That is the SNG-677 §0 rule applied at a new scale, not a special case.
 
 ## What exists already
 
@@ -25,19 +77,31 @@ Most of the pieces are built. Nothing draws them.
 | a city | `cityPlan` (engine/cityplan.js:50) | the Crossing, drawn |
 | the label table, the space, the card | maplabel.js, `flushLabels`, SNG-677 P | shared |
 
-places.js:254 says it plainly: *"it is not a map. There is no place-level canvas."* That canvas is this order.
+places.js:255 says it plainly: *"it is not a map. There is no place-level canvas."* That canvas is this order.
 
 ## The work
 
+**L0 · The region map reads `regionDisplay`.** At region scale, use `regionName` and `regionKind` where present,
+and skip `suppressAtRegion` sites. A suppressed site's parent shows its +N, and the site itself appears on the
+parent's local map (L6). The gate: every suppressed id is absent from the region labels and present on its parent's
+local map.
+
 **L1 · A local canvas.** "Look inside" opens a canvas tier in the region map's style, centred on the place.
 
-- **Scale:** the frame shows `radiusMetres × 2.5`, widened to include every `extent` feature and every site. Show the
-  scale in a corner, in the units places.js already speaks: metres under a mile, miles over.
-- **Ground:** SNG-403 §1 holds: the terrain has nothing at this scale, so the local map must not upsample the region
-  raster. Draw a plain ground in the region palette. Tint the slope toward `uphillBearing`, scaled by `relief`, so a
-  hill town reads as a hill town.
-- **Extent first:** water as a band across the frame at its bearing, distance and width, flowing on `flowBearing`.
-  Fields and woods as soft areas.
+- **Scale:** the frame fits every site and the near edge of every `extent` feature, the way the mock frames the
+  wheels and the ford 3.4 km out. When the built ground comes out under about 150 px across, it gets an
+  **enlargement** with the central sites in it. Show the scale in a corner, in the units places.js already speaks:
+  metres under a mile, miles over, plus the walk ("500 m · about six minutes' walk").
+- **Ground:** SNG-403 §1 holds: the terrain has nothing at this scale, so **never upsample the region raster.**
+  Paper ground, with contours running across `uphillBearing`, tightening with `relief`, so a hill town reads as a
+  hill town.
+- **Extent, drawn as what it is**, not as soft blobs (Erik's brief):
+  - **water:** a channel of its authored width on `flowBearing`. It meanders, has banks and a reed edge, sandbars
+    on the insides of the bends, and a narrows with rapids where the layout or the kind calls for one.
+  - **field:** strip patchwork, oriented to the nearest road.
+  - **wood:** tree crowns; coppice shows cut stools.
+  - **built:** roofs along the roads, and around any `open` site such as a green.
+  - The texture is seeded from the place id, so it never moves between visits.
 - **Roads out:** from the `_measured.roadsOut` bearings, each leaving the frame with an exit label that names the
   destination, as the region map's exits do. The road nearest a site's `toward.road` passes it.
 - **Sites:** glyphs by `kind` with names through the label table, at the SNG-677 §0 precedence. The site you are at,
@@ -109,12 +173,35 @@ Two cautions:
    `map-kg-toggle`). Re-point them at behaviour (does the toggle draw people on the ground?), not at the new ids. Don't
    delete them.
 
+## Data fixes found by drawing it (mine, in this commit), and two questions I still own
+
+Drawing Millbrook from the file showed four sites the file got wrong. They are fixed in `local_layouts.json`, with
+the old values kept beside the new ones:
+
+1. **The wheels, the landing and the ford were on the wrong bank.** The Echo is authored at 3200 m on −134°, 260 m
+   wide, flowing 162°. At their old distances (3400, 3500 and 3300 m) all three fell beyond the far bank. They now
+   sit at 3040 m (the wheels, on the near bank), 3230 m (the landing, just downstream of the wheels) and 2940 m (the
+   ford, mid-channel). The river stays where it is, and §50's "The Echo — 2.0 mi south-west" still reads true.
+2. **Mara Wells' Store** named the Crossing road, but its bearing (−13°) is the north road to the Disputed Zone. The
+   `toward` now names that road.
+
+Two I haven't resolved yet, both mine:
+
+- **`_measured` says the nearest traced river is 311 mi away**, but the layout and `placenames` both put the Echo
+  two miles from Millbrook. The authored ground is canon (R28), so the local map draws the Echo. I will reconcile
+  the region tier, either with SPEC_local_geology's local-geology route or by re-checking the measurement.
+- **The west road to the Sunken Choir crosses the Echo with no crossing authored.** It needs a ferry, or it should
+  bend to the Old Ford. My guess is the ford: that is what a ford is for. I'll rule on it in content. Draw the road
+  to whatever the file says.
+
 ## Done when
 
 - **Every one** of the 158 places opens a local map, and there is no ring anywhere in the app.
-- **Millbrook** draws the Well at the centre, the Green just east, the Smithy on the Crossing road, the Mill Lane
-  running south-west, and the Echo two miles out past the Wet Meadows, with the Water Wheels on it. That is its
-  authored file, read as a picture, and it is the template.
+- **Millbrook** reads like `po/img/local_mock_millbrook.png`: the well at the centre, the green just east, the
+  smithy on the Crossing road, the Mill Lane running south-west, and the Echo two miles out past the Wet Meadows,
+  with the wheels and the landing on its near bank and the ford in the water. The style needn't match the mock; the facts must.
+- **All seven `suppressAtRegion` sites** are off the region map and on their settlement's local map, and the
+  region map shows the `regionName`s.
 - **A generated place**, any of the 140, draws the same on a reload, and a new place minted in play has a local map
   on its first open.
 - At 390 px wide, the local map, its labels and the card all fit without scrolling the page.
@@ -123,7 +210,7 @@ Two cautions:
 
 ## Order
 
-SNG-677 §0 (label precedence) and P (the card) first, because every map here uses both. Then L1 on the 18 authored
+SNG-677 §0 (label precedence) and P (the card) first, because every map here uses both. Then L0 with L1 on the 18 authored
 places, L2, L3, L6, L7, and L4. L5 when it's ready. The diagrams last, after the parity list.
 
 The content side is mine. If a generated layout comes out wrong in a way that is the data's fault (a site with no

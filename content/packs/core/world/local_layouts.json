@@ -142,11 +142,13 @@
     },
     "basis": "road",
     "toward": {
-     "road": "echo_river_crossing",
+     "road": "gen-disputed-zone-left-branch-entrance",
      "relation": "on"
     },
     "why": "⛔ Promoted from play. On the north road, between the well and the way out.",
-    "_towardFix": "⛔ its named road left the connection set; re-pointed at echo_river_crossing"
+    "_towardFix": "⛔ its named road left the connection set; re-pointed at echo_river_crossing",
+    "_towardWas_20261006": "echo_river_crossing",
+    "_fixNote_20261006": "⛔ Its bearing (−13) is the NORTH road, which runs to the Disputed Zone; the Crossing road is at 174. The 2026-08 re-point named the wrong road."
    },
    {
     "id": "millbrook_mill_lane",
@@ -163,30 +165,36 @@
     "name": "The Water Wheels",
     "localMap": {
      "bearing": -134,
-     "metres": 3400
+     "metres": 3040
     },
     "basis": "river",
-    "why": "⛔ ON THE BANK, 2.1 MILES OUT — not in the village. 'Water wheels turn ALONG the Echo River.' ⚠️ The mills are a walk from the houses, which is normal and which the old layout got wrong by putting the river through the square."
+    "why": "⛔ ON THE BANK, 2.1 MILES OUT — not in the village. 'Water wheels turn ALONG the Echo River.' ⚠️ The mills are a walk from the houses, which is normal and which the old layout got wrong by putting the river through the square.",
+    "_metresWas_20261006": 3400,
+    "_fixNote_20261006": "⛔ DRAWN 2026-10-06, IT WAS ON THE WRONG BANK: the Echo is authored at 3200 m on −134°, 260 m wide, flowing 162°, and at the old distance this site fell beyond the far bank. Now on the village side of the water."
    },
    {
     "id": "millbrook_landing",
     "name": "The Landing",
     "localMap": {
      "bearing": -140,
-     "metres": 3500
+     "metres": 3230
     },
     "basis": "river",
-    "why": "⚠️ Just downstream of the wheels so boats are not fighting the race. The seed's 'river dock' — and it is at the river, not at the well."
+    "why": "⚠️ Just downstream of the wheels so boats are not fighting the race. The seed's 'river dock' — and it is at the river, not at the well.",
+    "_metresWas_20261006": 3500,
+    "_fixNote_20261006": "⛔ DRAWN 2026-10-06, IT WAS ON THE WRONG BANK: the Echo is authored at 3200 m on −134°, 260 m wide, flowing 162°, and at the old distance this site fell beyond the far bank. Now on the village side of the water. Still just downstream of the wheels."
    },
    {
     "id": "millbrook_ford",
     "name": "The Old Ford",
     "localMap": {
      "bearing": -120,
-     "metres": 3300
+     "metres": 2940
     },
     "basis": "river",
-    "why": "⛔ NOBODY WROTE THIS DOWN AND THE GEOGRAPHY REQUIRES IT: 14 miles above the Crossing, someone crossed here before the bridge existed. It is why the bridge was built downstream, where the banks are granite."
+    "why": "⛔ NOBODY WROTE THIS DOWN AND THE GEOGRAPHY REQUIRES IT: 14 miles above the Crossing, someone crossed here before the bridge existed. It is why the bridge was built downstream, where the banks are granite.",
+    "_metresWas_20261006": 3300,
+    "_fixNote_20261006": "⛔ DRAWN 2026-10-06: a ford is IN the river, and at 3300 m it sat 350 m beyond the far bank. Now mid-channel."
    },
    {
     "id": "millbrook_fields",

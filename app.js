@@ -198,7 +198,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.19.13";
+const APP_VERSION = "2.19.16";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -13665,15 +13665,20 @@ let _exitBoxes = [];
  * anything the space no longer holds. ⛑ It also fixes the z-order for free: better ranks draw last and so
  * sit on top, which is the one thing drawing-as-you-go got right only by accident. */
 let _labelQueue = [];
+// ⛔ THE ROAD EXITS ARE THEIR OWN BAND (SNG-677 §0). ✅ AEVI: *"road exits at the frame edge are in their own
+// band and only compete with each other."* They sit at the frame's rim where nothing else is laid out, so
+// putting them in the shared space only let them take ground from towns they are nowhere near.
+let _exitSpace = null;
 // ⛑ `dy` RIDES THE SAME BOX. A power's second line sits under its first and is covered by the same
 // reservation; queueing it as `{ ...box, y: box.y + 12 }` made a NEW object, which `holds()` then refused
 // — my own guard silently dropped every power's italic under-line (3 of 20 on the Valley).
-function queueLabel(ctx, text, box, kind, opts, dy = 0) { if (box) _labelQueue.push({ ctx, text, box, kind, dy, opts: opts || {} }); }
+function queueLabel(ctx, text, box, kind, opts, dy = 0, space = null) { if (box) _labelQueue.push({ ctx, text, box, kind, dy, space, opts: opts || {} }); }
 function flushLabels() {
   const rankOf = (k) => (LABEL_STYLES[k] || {}).rank ?? 9;
-  let drawn = 0, overruled = 0;
+  let drawn = 0, overruled = 0; const lost = [];
   for (const q of _labelQueue.slice().sort((a, b) => rankOf(b.kind) - rankOf(a.kind))) {
-    if (_labelSpace && !_labelSpace.holds(q.box)) { overruled++; continue; }   // overruled after it was queued
+    const sp = q.space || _labelSpace;
+    if (sp && !sp.holds(q.box)) { overruled++; lost.push(q.kind); continue; }   // overruled after it was queued
     drawLabel(q.ctx, q.text, q.box.x, q.box.y + (q.dy || 0), q.kind, q.opts);
     drawn++;
   }
@@ -13682,7 +13687,7 @@ function flushLabels() {
   // ⛑ A COUNT, BECAUSE A DEFERRED DRAW FAILS SILENTLY. Nothing throws when a queue empties into nothing
   // and the map simply comes back without names — which is exactly how I shipped it once, and the line
   // that found the last bug (3 of 20 overruled by my own guard).
-  if (_labelQueue.length) console.log(`[labels] ${drawn} drawn, ${overruled} overruled, of ${_labelQueue.length} queued`);
+  if (_labelQueue.length) console.log(`[labels] ${drawn} drawn, ${overruled} overruled (${[...new Set(lost)].join(", ") || "none"}), of ${_labelQueue.length} queued`);
   _labelQueue = [];
 }
 let _regionOff = null;
@@ -13778,6 +13783,7 @@ function paintRegionMap(regionId) {
   _labelSpace = labelSpace();        // M2/D1: every pass below reserves from this one, in style rank order
   _exitBoxes = [];                   // M11: rebuilt each paint, like every other hit target on this canvas
   _labelQueue = [];                  // D1: every label is queued and flushed once, in rank order
+  _exitSpace = labelSpace();         // §0: the exits' own band, at the frame's rim
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   ctx.clearRect(0, 0, W, H);
   // ⛑ THE RASTER IS COMPUTED IN THE MAP'S OWN (CSS) FRAME and drawn through the transform, so it rasterises
@@ -13839,6 +13845,111 @@ function paintRegionMap(regionId) {
   }
 
   // ⛔ B5 · WHOSE GROUND — under the field's own marks, because the ground is what the field sits ON.
+  /* ═════ §0 · THE PLACES ARE DECIDED AND RESERVED BEFORE ANYTHING LOWER CAN TAKE THEIR GROUND ═════
+   * ✅ AEVI (SNG-677 §0), reading the shipped map: *"'Millbrook +8' is not drawn at all. It is the town Silas
+   * is standing in, under THE FELLOWSHIP OF THE FELL PELL."* ⛔ And her diagnosis is the one that matters:
+   * *"the reservation has to happen in that order too, not only the flush. Otherwise rank still means paint
+   * order, which is what D1 was about."*
+   * ⚠️ SHE IS RIGHT, AND THE RANKS ALONE DID NOT FIX IT. The powers reserve inside `paintTerritory`, which
+   * runs some five hundred lines before the place pass — so whatever the table said, the powers always met an
+   * empty space and the towns always met a full one. This block is the place pass's DECISION (which names
+   * survive, at what width) and its RESERVATION, moved above the territory paint. The DRAWING stays where it
+   * was, because the queue already defers every label's ink to one flush.
+   * ⛑ It needs only `base`, `city`, `W`, `H` and the character — all settled by here. */
+  // the places, by their real position and their authored kind
+  // ⛔ CCODE-416: a promoted stub (superseded, or aliased onto its canonical place) is not drawn — the schematic below already
+  // drops it (regionTierNodes); and a name that would land on another yields to it (`placeLabels`), the glyph still drawn
+  const here = character.currentLocationId;
+  const aliased416 = character?.locationAliases || {};
+  const marks416 = [];
+  for (const id of Object.keys(CONTENT.locations)) {
+    const l = CONTENT.locations[id];
+    if (!l?.worldPos || (l.regionId || l.region) !== regionId) continue;
+    if (l.supersededBy || aliased416[id]) continue;
+    // ⛔ ON A CITY THE PLAN IS THE PROJECTION. Reading `base.toScreen` here would put the hub's eleven places
+    // back on one pixel at the pole — which is the whole thing the city exists to fix — and the labels, the
+    // cluster seals and every click would go with them.
+    const m = city ? city.marks.find((q) => q.id === id) : null;
+    const p = m ? { x: m.x, y: m.y } : base.toScreen(l.worldPos.longitude, l.worldPos.colatitude - 90, W, H);
+    if (p.x < -20 || p.y < -20 || p.x > W + 20 || p.y > H + 20) continue;
+    // ⛔ M7's REAL CAUSE. Aevi reported *"The Disputed Zone — Fr +3"* as a label drawn twice; the location is
+    // named "The Disputed Zone — Fringe" (26 chars) and `.slice(0, 22)` cuts it to exactly that string — a
+    // HARD CUT MID-WORD, which `smartClamp` has existed to prevent since SNG-152. `labelText` breaks on a word.
+    marks416.push({ id, l, p, name: labelText(l.name || id, "place", 24) });
+  }
+  // ✅ M2 — *"place | serif, bold, 12–13px, 3px dark halo"*, from the table rather than from a local const.
+  // ⛑ IT SETS THE STATE; IT DOES NOT RETURN A STRING. My first cut returned `ctx.font` and a caller below did
+  // `ctx.font = LABEL_FONT` — assigning a FUNCTION to a font property, which the canvas silently ignores,
+  // leaving the place names in whatever font the pass before them happened to set. Nothing throws, nothing
+  // reds, and the one thing M2 exists to fix quietly does not happen.
+  const setPlaceFont = (isHere) => applyStyle(ctx, "place", { here: isHere });
+  setPlaceFont(false);
+  // ═════ M3 · OPEN ON WHAT THE PLAYER KNOWS ═════
+  // ✅ AEVI: *"it opens zoomed to the whole region, so Millbrook's knot fills about a fifth of the frame … the
+  // mock opens framed on the known places plus the player's realm, with a margin."*
+  // ⛑ `knownPlaces` IS A REAL FIELD AND NOT A GUESS — Silas's save carries 19 of them, beside `placeMemory`
+  // (22). So "what the player knows" is read, never inferred from where they happen to be standing.
+  // ⚠️ ONCE PER REGION, not per paint: recomputing it would snap the view back the moment anyone panned.
+  if (_framedFor !== regionId) {
+    _framedFor = regionId;
+    const known416 = new Set([...(character?.knownPlaces || []), ...Object.keys(character?.placeMemory || {})]);
+    const mine416 = new Set((character?.holdings || []).map((h) => h?.locationId).filter(Boolean));
+    const pts416 = marks416
+      .filter((m) => m.id === here || known416.has(m.id) || mine416.has(m.id))
+      .map((m) => m.p);
+    const fr416 = openingFrame(pts416, W, H, { maxK: 4 });
+    if (fr416) { _regionView.k = fr416.k; _regionView.cx = fr416.cx; _regionView.cy = fr416.cy; }
+    else { _regionView.k = 1; _regionView.cx = 0.5; _regionView.cy = 0.5; }
+  }
+  const rank416 = (m) => (m.id === here ? 0 : m.l.waygate ? 1 : m.l.tier === "site" ? 3 : 2);
+  // ⛔ ERIK'S MAP, 2026-10-01 — A LABEL IS PLACED AT THE WIDTH IT IS ACTUALLY DRAWN AT.
+  // ⚠️ This measured `m.name` and then drew `m.name + " +N"`. The badge `placeLabels` itself produces was not in
+  // the box `placeLabels` reserved, so it hung over its neighbour and the neighbour was drawn into it — measured on
+  // the Valley of Echoes, where "The Standing Annex +2", "The Moth Gate +4" and "Echo River Crossing" overlap.
+  // ⛑ TWO PASSES, because N is not knowable before the first. Pass 1 decides who is hidden and therefore what each
+  // survivor will SAY; pass 2 re-places the survivors at their true drawn widths. A wider box can only hide more, so
+  // pass 2 never resurrects what pass 1 dropped. ⚠️ AND A SURVIVOR DROPPED IN PASS 2 HANDS ITS TALLY ON, through
+  // `hiddenInto` — the pairing the engine always had — so no place vanishes off the screen uncounted.
+  const text416 = (m, by) => m.name + (by[m.id] ? ` +${by[m.id]}` : "");
+  const boxes416 = (ms, by) => ms.map(m => ({ id: m.id, x: m.p.x, y: m.p.y + 18, w: ctx.measureText(text416(m, by)).width, h: 10, rank: rank416(m) }));
+  const pass1 = placeLabels(boxes416(marks416, {}));
+  const kept1 = marks416.filter(m => pass1.shown.has(m.id));
+  const pass2 = placeLabels(boxes416(kept1, pass1.hiddenBy));
+  const hidden416 = { ...pass1.hiddenBy };
+  for (const m of kept1) {
+    if (pass2.shown.has(m.id)) continue;
+    const taker = pass2.hiddenInto[m.id];
+    const carry = (hidden416[m.id] || 0) + 1;      // the places it stood for, plus itself
+    delete hidden416[m.id];
+    if (taker) hidden416[taker] = (hidden416[taker] || 0) + carry;
+  }
+  for (const id of Object.keys(hidden416)) if (!pass2.shown.has(id)) delete hidden416[id];
+  const labels416 = { shown: pass2.shown, hiddenBy: hidden416 };
+  // ═════ D1 · THE PLACES JOIN THE SHARED SPACE ═════
+  // ✅ AEVI, from the code rather than from the screen: *"`labels416` is decided by its own two `placeLabels`
+  // passes and the names are then drawn WITHOUT a `_labelSpace` reservation. The powers reserve from
+  // `_labelSpace` and find it empty where the towns are, so they take the middle."*
+  // ⛑ `placeLabels` STAYS — it is the better placer for places (two passes, and it carries a dropped name's
+  // tally onto whoever displaced it). What was missing is that its answer never reached the shared space, so
+  // every other pass painted as if the towns were not there. Each surviving name now RESERVES its drawn box.
+  // ⚠️ AND A NAME THE SPACE REFUSES IS DROPPED, not drawn anyway: rank decides (a power may overrule a town
+  // and take its ground), and Aevi's own A3 rule is that a dropped label leaves its GLYPH, which it does —
+  // the glyphs are painted above this loop and are untouched by any of it.
+  const placeBox = new Map();
+  for (const m of marks416) {
+    if (!labels416.shown.has(m.id)) continue;
+    const more0 = labels416.hiddenBy[m.id];
+    const txt0 = m.name + (more0 ? ` +${more0}` : "");
+    // ⛔ M10 — ✅ AEVI: *"landmarks unreadable … the mock has DARK SERIF WITH A LIGHT HALO."* On the city's
+    // own cream paper the `place` style is cream ink in a dark halo, which is a smudge round every letter.
+    // ⛑ THE GROUND DECIDES, not the kind of thing: same serif, ink and halo swapped, wherever a city is drawn.
+    const kind0 = city ? "landmark" : "place";
+    const w0 = (drawLabel(ctx, txt0, -9999, -9999, kind0, { here: m.id === here, raw: true })?.w) || 0;
+    const b0 = (_labelSpace || labelSpace()).place(m.p.x, m.p.y + 18, w0, 12,
+      { kind: kind0, clampTo: { w: W, h: H }, offsets: [[0, 0]], opts: { here: m.id === here } });
+    if (b0) placeBox.set(m.id, b0);
+  }
+
   if (fieldCtl.territory && !city) {
     try { paintTerritory(ctx, base, ext, regionId, W, H); }
     catch (err) { console.warn("[region-map] the territory layer did not draw — the ground still did:", err); }
@@ -14246,7 +14357,7 @@ function paintRegionMap(regionId) {
     ctx.save();
     // ✅ M2/D1: the table gives these a halo they never had, and the shared space keeps them off the places
     // they point at. A road atlas naming its exits over its own towns is the pile-up in miniature.
-    const exSpace = _labelSpace || labelSpace();
+    const exSpace = _exitSpace || labelSpace();
     for (const ex of exits) {
       ctx.textAlign = ex.at.x > W * 0.72 ? "right" : ex.at.x < W * 0.28 ? "left" : "center";
       const dx = ex.at.x > W * 0.72 ? -4 : ex.at.x < W * 0.28 ? 4 : 0;
@@ -14259,7 +14370,7 @@ function paintRegionMap(regionId) {
         const ex0 = ex.at.x + dx, ey0 = Math.max(10, Math.min(H - 4, ex.at.y - 3));
         const ebox = exSpace.place(ex0, ey0, ew, 12, { kind: "exit", clampTo: { w: W, h: H } });
         if (ebox) {
-          queueLabel(ctx, eText, ebox, "exit", { align: ctx.textAlign });
+          queueLabel(ctx, eText, ebox, "exit", { align: ctx.textAlign }, 0, exSpace);
           // ⛑ M11's OTHER HALF, and it costs almost nothing now that M2's label space hands back a BOX: the
           // yard keeps its name on hover. `showChip` takes a location id and a yard IS a location, so the
           // chip that already describes a place describes this one with no new rendering at all.
@@ -14296,75 +14407,6 @@ function paintRegionMap(regionId) {
     }
   }
 
-  // the places, by their real position and their authored kind
-  // ⛔ CCODE-416: a promoted stub (superseded, or aliased onto its canonical place) is not drawn — the schematic below already
-  // drops it (regionTierNodes); and a name that would land on another yields to it (`placeLabels`), the glyph still drawn
-  const here = character.currentLocationId;
-  const aliased416 = character?.locationAliases || {};
-  const marks416 = [];
-  for (const id of Object.keys(CONTENT.locations)) {
-    const l = CONTENT.locations[id];
-    if (!l?.worldPos || (l.regionId || l.region) !== regionId) continue;
-    if (l.supersededBy || aliased416[id]) continue;
-    // ⛔ ON A CITY THE PLAN IS THE PROJECTION. Reading `base.toScreen` here would put the hub's eleven places
-    // back on one pixel at the pole — which is the whole thing the city exists to fix — and the labels, the
-    // cluster seals and every click would go with them.
-    const m = city ? city.marks.find((q) => q.id === id) : null;
-    const p = m ? { x: m.x, y: m.y } : base.toScreen(l.worldPos.longitude, l.worldPos.colatitude - 90, W, H);
-    if (p.x < -20 || p.y < -20 || p.x > W + 20 || p.y > H + 20) continue;
-    // ⛔ M7's REAL CAUSE. Aevi reported *"The Disputed Zone — Fr +3"* as a label drawn twice; the location is
-    // named "The Disputed Zone — Fringe" (26 chars) and `.slice(0, 22)` cuts it to exactly that string — a
-    // HARD CUT MID-WORD, which `smartClamp` has existed to prevent since SNG-152. `labelText` breaks on a word.
-    marks416.push({ id, l, p, name: labelText(l.name || id, "place", 24) });
-  }
-  // ✅ M2 — *"place | serif, bold, 12–13px, 3px dark halo"*, from the table rather than from a local const.
-  // ⛑ IT SETS THE STATE; IT DOES NOT RETURN A STRING. My first cut returned `ctx.font` and a caller below did
-  // `ctx.font = LABEL_FONT` — assigning a FUNCTION to a font property, which the canvas silently ignores,
-  // leaving the place names in whatever font the pass before them happened to set. Nothing throws, nothing
-  // reds, and the one thing M2 exists to fix quietly does not happen.
-  const setPlaceFont = (isHere) => applyStyle(ctx, "place", { here: isHere });
-  setPlaceFont(false);
-  // ═════ M3 · OPEN ON WHAT THE PLAYER KNOWS ═════
-  // ✅ AEVI: *"it opens zoomed to the whole region, so Millbrook's knot fills about a fifth of the frame … the
-  // mock opens framed on the known places plus the player's realm, with a margin."*
-  // ⛑ `knownPlaces` IS A REAL FIELD AND NOT A GUESS — Silas's save carries 19 of them, beside `placeMemory`
-  // (22). So "what the player knows" is read, never inferred from where they happen to be standing.
-  // ⚠️ ONCE PER REGION, not per paint: recomputing it would snap the view back the moment anyone panned.
-  if (_framedFor !== regionId) {
-    _framedFor = regionId;
-    const known416 = new Set([...(character?.knownPlaces || []), ...Object.keys(character?.placeMemory || {})]);
-    const mine416 = new Set((character?.holdings || []).map((h) => h?.locationId).filter(Boolean));
-    const pts416 = marks416
-      .filter((m) => m.id === here || known416.has(m.id) || mine416.has(m.id))
-      .map((m) => m.p);
-    const fr416 = openingFrame(pts416, W, H, { maxK: 4 });
-    if (fr416) { _regionView.k = fr416.k; _regionView.cx = fr416.cx; _regionView.cy = fr416.cy; }
-    else { _regionView.k = 1; _regionView.cx = 0.5; _regionView.cy = 0.5; }
-  }
-  const rank416 = (m) => (m.id === here ? 0 : m.l.waygate ? 1 : m.l.tier === "site" ? 3 : 2);
-  // ⛔ ERIK'S MAP, 2026-10-01 — A LABEL IS PLACED AT THE WIDTH IT IS ACTUALLY DRAWN AT.
-  // ⚠️ This measured `m.name` and then drew `m.name + " +N"`. The badge `placeLabels` itself produces was not in
-  // the box `placeLabels` reserved, so it hung over its neighbour and the neighbour was drawn into it — measured on
-  // the Valley of Echoes, where "The Standing Annex +2", "The Moth Gate +4" and "Echo River Crossing" overlap.
-  // ⛑ TWO PASSES, because N is not knowable before the first. Pass 1 decides who is hidden and therefore what each
-  // survivor will SAY; pass 2 re-places the survivors at their true drawn widths. A wider box can only hide more, so
-  // pass 2 never resurrects what pass 1 dropped. ⚠️ AND A SURVIVOR DROPPED IN PASS 2 HANDS ITS TALLY ON, through
-  // `hiddenInto` — the pairing the engine always had — so no place vanishes off the screen uncounted.
-  const text416 = (m, by) => m.name + (by[m.id] ? ` +${by[m.id]}` : "");
-  const boxes416 = (ms, by) => ms.map(m => ({ id: m.id, x: m.p.x, y: m.p.y + 18, w: ctx.measureText(text416(m, by)).width, h: 10, rank: rank416(m) }));
-  const pass1 = placeLabels(boxes416(marks416, {}));
-  const kept1 = marks416.filter(m => pass1.shown.has(m.id));
-  const pass2 = placeLabels(boxes416(kept1, pass1.hiddenBy));
-  const hidden416 = { ...pass1.hiddenBy };
-  for (const m of kept1) {
-    if (pass2.shown.has(m.id)) continue;
-    const taker = pass2.hiddenInto[m.id];
-    const carry = (hidden416[m.id] || 0) + 1;      // the places it stood for, plus itself
-    delete hidden416[m.id];
-    if (taker) hidden416[taker] = (hidden416[taker] || 0) + carry;
-  }
-  for (const id of Object.keys(hidden416)) if (!pass2.shown.has(id)) delete hidden416[id];
-  const labels416 = { shown: pass2.shown, hiddenBy: hidden416 };
   for (const m of marks416) {
     const meta = _terrain.locations[m.id] || {};
     const g = glyphFor({ ...meta, k: meta.k });
@@ -14372,30 +14414,6 @@ function paintRegionMap(regionId) {
   }
   setPlaceFont(false);
   ctx.textAlign = "center";
-  // ═════ D1 · THE PLACES JOIN THE SHARED SPACE ═════
-  // ✅ AEVI, from the code rather than from the screen: *"`labels416` is decided by its own two `placeLabels`
-  // passes and the names are then drawn WITHOUT a `_labelSpace` reservation. The powers reserve from
-  // `_labelSpace` and find it empty where the towns are, so they take the middle."*
-  // ⛑ `placeLabels` STAYS — it is the better placer for places (two passes, and it carries a dropped name's
-  // tally onto whoever displaced it). What was missing is that its answer never reached the shared space, so
-  // every other pass painted as if the towns were not there. Each surviving name now RESERVES its drawn box.
-  // ⚠️ AND A NAME THE SPACE REFUSES IS DROPPED, not drawn anyway: rank decides (a power may overrule a town
-  // and take its ground), and Aevi's own A3 rule is that a dropped label leaves its GLYPH, which it does —
-  // the glyphs are painted above this loop and are untouched by any of it.
-  const placeBox = new Map();
-  for (const m of marks416) {
-    if (!labels416.shown.has(m.id)) continue;
-    const more0 = labels416.hiddenBy[m.id];
-    const txt0 = m.name + (more0 ? ` +${more0}` : "");
-    // ⛔ M10 — ✅ AEVI: *"landmarks unreadable … the mock has DARK SERIF WITH A LIGHT HALO."* On the city's
-    // own cream paper the `place` style is cream ink in a dark halo, which is a smudge round every letter.
-    // ⛑ THE GROUND DECIDES, not the kind of thing: same serif, ink and halo swapped, wherever a city is drawn.
-    const kind0 = city ? "landmark" : "place";
-    const w0 = (drawLabel(ctx, txt0, -9999, -9999, kind0, { here: m.id === here, raw: true })?.w) || 0;
-    const b0 = (_labelSpace || labelSpace()).place(m.p.x, m.p.y + 18, w0, 12,
-      { kind: kind0, clampTo: { w: W, h: H }, offsets: [[0, 0]] });
-    if (b0) placeBox.set(m.id, b0);
-  }
   for (const m of marks416) {
     if (!labels416.shown.has(m.id)) continue;
     if (!placeBox.has(m.id)) continue;             // the space gave its ground to something that outranks it

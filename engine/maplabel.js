@@ -32,23 +32,35 @@
  *  gets unspaced capitals rather than no label. */
 export const LABEL_STYLES = {
   // ✅ "place | serif, bold, 12–13px, 3px dark halo"
+  /* ⛔ THE PRECEDENCE IS AEVI'S, AND IT USED TO BE UPSIDE DOWN (SNG-677 §0, 2026-10-06).
+   * She read the shipped map: *"'Millbrook +8' is not drawn at all. It is the town Silas is standing in, under
+   * THE FELLOWSHIP OF THE FELL PELL. A map that names the realm and drops the town you are in has the order
+   * backwards."* ⚠️ `power` was rank 0 and `place` rank 2, so a realm's name beat the town under it every time.
+   * Her rule, and it is the right one — a map is read for where things ARE before it is read for whose they are:
+   *   1. the place you are IN never drops  → rank -1, which nothing can evict
+   *   2. places → 0, field sources → 1, named ground → 2
+   *   3. powers → 3, LAST: a power has five candidate offsets and should spend them moving off the towns, and
+   *      drop before it covers one. Its border still says whose ground it is.
+   *   4. road exits are their own band and compete only with each other (the painter gives them their own space). */
   place: {
     font: (o) => `700 ${o?.here ? 13 : 12}px ui-serif, Georgia, "Times New Roman", serif`,
     fill: (o) => (o?.here ? "#f6d8bf" : "rgba(238,235,226,0.94)"),
-    halo: "rgba(10,12,18,0.86)", haloWidth: 3, rank: 2,
+    halo: "rgba(10,12,18,0.86)", haloWidth: 3, rank: 0,
+    // ⛑ the one label on the map that may never be dropped: it answers "where am I".
+    rankOf: (o) => (o?.here ? -1 : 0),
   },
   // ✅ "power | spaced capitals in the power's own hue, size scaled to its ground (15–22px)"
   power: {
     font: (o) => `700 ${Math.round(Math.max(15, Math.min(22, o?.size ?? 15)))}px ui-serif, Georgia, serif`,
     fill: (o) => o?.colour || "rgba(238,235,226,0.94)",
     halo: "rgba(10,12,18,0.86)", haloWidth: 3, letterSpacing: "0.14em",
-    transform: (t) => String(t).toUpperCase(), rank: 0,
+    transform: (t) => String(t).toUpperCase(), rank: 3,
   },
   // ✅ "with an italic line under"
   powerUnder: {
     font: () => `italic 600 10px ui-serif, Georgia, serif`,
     fill: () => "rgba(232,228,218,0.82)",
-    halo: "rgba(10,12,18,0.78)", haloWidth: 2.4, rank: 0,
+    halo: "rgba(10,12,18,0.78)", haloWidth: 2.4, rank: 3,
   },
   // ✅ "district / quarter | spaced capitals, faint" — and the names LANDED (M13, `crossing_wards.json`).
   // ⛑ RANK 6, BELOW THE ROAD EXITS AT 5, because Aevi asked for exactly that ordering: *"below the gate
@@ -67,7 +79,8 @@ export const LABEL_STYLES = {
   landmark: {
     font: (o) => `700 ${o?.here ? 13 : 12}px ui-serif, Georgia, "Times New Roman", serif`,
     fill: () => "rgba(26,22,16,0.94)",
-    halo: "rgba(248,244,232,0.88)", haloWidth: 3, rank: 2,
+    halo: "rgba(248,244,232,0.88)", haloWidth: 3, rank: 0,
+    rankOf: (o) => (o?.here ? -1 : 0),
   },
   // ⛑ …and the italic line under it. ⚠️ NO POPULATION: Aevi's mock lines ("a bench from every reach" for
   // the Coliseum) are HERS, written for the mock — nothing in content carries them. The reader is here and
@@ -76,13 +89,13 @@ export const LABEL_STYLES = {
   landmarkUnder: {
     font: () => `italic 600 10px ui-serif, Georgia, serif`,
     fill: () => "rgba(48,40,30,0.78)",
-    halo: "rgba(248,244,232,0.80)", haloWidth: 2.4, rank: 3,
+    halo: "rgba(248,244,232,0.80)", haloWidth: 2.4, rank: 1,
   },
   // the two the map already drew and had no row for
   ground: {
     font: (o) => `italic 600 11px ui-serif, Georgia, serif`,
     fill: (o) => (o?.below ? "rgba(190,180,225,0.92)" : "rgba(236,226,196,0.92)"),
-    halo: "rgba(10,12,18,0.72)", haloWidth: 2.6, rank: 3,
+    halo: "rgba(10,12,18,0.72)", haloWidth: 2.6, rank: 2,
   },
   // a field source names a CAUSE, not a place: a well or a sink and how strong. Rank 1 — above a town's name,
   // below a power's, because it explains something the map cannot otherwise say.
@@ -152,9 +165,12 @@ export function labelSpace() {
   return {
     boxes: taken,
     /** Try each candidate offset in turn; returns the placed box, or null if every one collides. */
-    place(x, y, w, h, { kind = "place", offsets = null, clampTo = null } = {}) {
+    place(x, y, w, h, { kind = "place", offsets = null, clampTo = null, opts = {} } = {}) {
       const half = w / 2 + 2;
-      const rank = (LABEL_STYLES[kind] || {}).rank ?? 9;
+      // ⛑ A STYLE MAY RANK PER LABEL. The place you are standing in is the same STYLE as every other town and
+      // a different CLAIM, so the style decides from the options rather than the caller picking a second kind.
+      const st = LABEL_STYLES[kind] || {};
+      const rank = typeof st.rankOf === "function" ? st.rankOf(opts) : (st.rank ?? 9);
       const cand = offsets || [[0, 0], [0, -(h + 6)], [0, h + 6], [-half - 8, 0], [half + 8, 0]];
       const made = (dx, dy) => {
         let cx = x + dx, cy = y + dy;

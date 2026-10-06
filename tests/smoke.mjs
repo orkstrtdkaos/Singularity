@@ -6551,20 +6551,44 @@ await (async () => {
         }
         return placed > 0 && sp.overlaps().length === 0;
       })(), "⚠️ the old form asserted that `labelSpace()` is CALLED, which no map can fail");
-    check("675/D1: ⛔ …and RANK decides, not the order the painter happens to run in",
+    /* ═════ §0 (SNG-677) · THE PRECEDENCE, AND IT USED TO BE UPSIDE DOWN ═════
+     * ⛔ THIS CHECK ASSERTED THE WRONG RULE. It said a power evicts a town and a town may never evict a power
+     * — which is what the table said and what the map did, and ✅ Aevi read the shipped result: *"'Millbrook
+     * +8' is not drawn at all. It is the town Silas is standing in, under THE FELLOWSHIP OF THE FELL PELL. A
+     * map that names the realm and drops the town you are in has the order backwards."*
+     * ⚠️ So the gate was green over a map that had dropped the one label answering "where am I". A gate can
+     * be right about the mechanism and wrong about the rule, and this one was. */
+    check("675/D1: ⛔ THE PLACE YOU ARE STANDING IN IS NEVER DROPPED — a power moves off it, or goes undrawn",
       (() => {
         const sp = ML675.labelSpace();
-        const town = sp.place(500, 250, 90, 12, { kind: "place", offsets: [[0, 0]] });
-        if (!town) return false;
-        // a power arrives later at the same spot with ONE candidate, so it must either evict or be dropped
-        const power = sp.place(500, 250, 90, 12, { kind: "power", offsets: [[0, 0]] });
-        if (!power || !sp.evicted.some((e) => e.kind === "place")) return false;
-        // ⛑ and never the other way: a worse rank may not push aside a better one
+        const here = sp.place(500, 250, 90, 12, { kind: "place", offsets: [[0, 0]], opts: { here: true } });
+        if (!here) return false;
+        // a power with its five candidate offsets must MOVE rather than take the town's ground
+        const moved = sp.place(500, 250, 180, 26, { kind: "power" });
+        if (!moved || moved.y === 250 || sp.evicted.length || sp.overlaps().length) return false;
+        // and one with nowhere to go DROPS rather than covering it
         const sp2 = ML675.labelSpace();
-        sp2.place(500, 250, 90, 12, { kind: "power", offsets: [[0, 0]] });
-        const loser = sp2.place(500, 250, 90, 12, { kind: "place", offsets: [[0, 0]] });
-        return loser === null && sp2.evicted.length === 0 && sp.overlaps().length === 0;
-      })(), "a shared list does not help if whoever runs first simply wins");
+        sp2.place(500, 250, 90, 12, { kind: "place", offsets: [[0, 0]], opts: { here: true } });
+        const stuck = sp2.place(500, 250, 180, 26, { kind: "power", offsets: [[0, 0]] });
+        return stuck === null && sp2.evicted.length === 0;
+      })(), "✅ Aevi: a power *\"has five candidate offsets; it should use them to move off the towns, and drop before it covers one. Its border still says whose ground it is.\"*");
+    check("675/D1: ⛔ …and the table's order is hers — places, then sources, then ground, then powers LAST",
+      (() => {
+        const r = (k, o) => { const s = ML675.LABEL_STYLES[k]; return typeof s.rankOf === "function" ? s.rankOf(o || {}) : s.rank; };
+        return r("place", { here: true }) < r("place") && r("place") < r("source")
+          && r("source") < r("ground") && r("ground") < r("power") && r("power") === r("powerUnder");
+      })(), "a map is read for where things ARE before it is read for whose they are");
+    check("675/D1: ⛔ …and the RESERVATION runs in that order too, not only the flush",
+      (() => {
+        // the places must decide and reserve ABOVE the territory paint, where the powers reserve
+        const iPlace = src.indexOf("const placeBox = new Map();");
+        const iTerr = src.indexOf("if (fieldCtl.territory && !city) {");
+        return iPlace > 0 && iTerr > 0 && iPlace < iTerr;
+      })(), "✅ Aevi: *\"otherwise rank still means paint order, which is what D1 was about\"* — the powers reserve inside paintTerritory, five hundred lines before the place pass used to run");
+    check("675/D1: ⛑ …and the road exits are their own band, competing only with each other",
+      /_exitSpace = labelSpace\(\)/.test(src) && /const exSpace = _exitSpace/.test(src),
+      "they sit at the frame's rim, so sharing the towns' space only let them take ground they are nowhere near");
+
     check("675/D1: ⛔ …and a spaced-capital label MEASURES SPACED — a box narrower than its ink is worse than no box",
       (() => {
         // a stub context: `measureText` answers wider while letterSpacing is set, which is what a real one does

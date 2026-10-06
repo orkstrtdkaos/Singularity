@@ -979,8 +979,13 @@ for (const pack of PACKS) {
   // whole river. ⚠️ So the census pins it rather than forcing a winner, and the missing concept is
   // reported to her (po/REPLY_ccode_SNG-396_398_applied.md §3) instead of being papered over by
   // renaming a river nobody wanted renamed.
-  const KNOWN_RIVER_COLLISIONS = ["The Drowned Reach + The Echo"];
-  check("SNG-394: river names collide only where a REACH shares its river — the known census, both names kept",
+  /* ⛑ CONTENT NOW, THE WAY CCODE-612 MOVED THE FENS. ✅ Aevi: *"Please move the river census into
+   * `ratified_name_census.json` … so an empty census is a content fact I can ratify."* ⚠️ The literal here
+   * was my reading of a degenerate trace — "the 129.6° main stem IS the Echo" — and it was wrong: the Echo
+   * through Echo River Crossing is river 89, and her re-anchor empties this census. A literal in a test is a
+   * content decision nobody can make without editing a test, which is exactly what held her branch. */
+  const KNOWN_RIVER_COLLISIONS = (rj("content/packs/core/world/ratified_name_census.json").riverCollisions || []).map(r => r.pair);
+  check("SNG-394: river names collide only where a REACH shares its river — the ratified census, both names kept",
     JSON.stringify(riverCollide) === JSON.stringify(KNOWN_RIVER_COLLISIONS),
     "expected [" + KNOWN_RIVER_COLLISIONS.join(" | ") + "] got [" + riverCollide.join(" | ") + "]");
   // ⚠️ f4aec367 cleared the Stiltfen pair — and MINTED a new one: the Terrace Fen was re-sited to the
@@ -1003,6 +1008,9 @@ for (const pack of PACKS) {
   rb.head = [...ra.head]; rb.mouth = [...ra.mouth];
   const resTwin = RA.resolvePlaceNames(twin, built.hydrology, { seedPos: seedPos393 });
   const twinCollide = collisions(resTwin.placeNames.rivers, "pathIndex");
+  /* ⛑ AND THIS IS WHY THE DETECTOR IS PROVED ON A TWIN RATHER THAN ON THE LIVE CENSUS: the moment her
+   * re-anchor lands, the real collision list is EMPTY — and a detector whose only evidence is "I found the
+   * one that is there" cannot tell an empty world from a broken check. The twin is built here, every run. */
   check("SNG-394: …and the detector FIRES — two rivers given one address surface as a named pair",
     twinCollide.length === 1 && twinCollide[0].includes(ra.name) && twinCollide[0].includes(rb.name),
     "got [" + twinCollide.join(" | ") + "]");

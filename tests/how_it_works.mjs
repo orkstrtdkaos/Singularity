@@ -5439,8 +5439,24 @@ console.log("\n── §50 · R28 · the authored ground ──");
   // ⛔ THE GROUND READS AS GROUND, not as a table of numbers.
   const mb = PL50.groundForGM("millbrook", L50);
   check("§50: the well Erik put IN the village is at its centre",  /The Village Well — at the centre/.test(mb), mb.split("\n")[1]);
-  check("§50: …and the river he moved OUT of it is miles away, in a direction",
-    /The Echo \(water\) — 2\.0 mi south-west/.test(mb), mb.split("\n").find(l => /Echo/.test(l)));
+  /* ⛔ RE-POINTED AT THE RULING, NOT AT A DISTANCE. ✅ ERIK: *"Millbrook should be ON the river."* This
+   * asserted `2.0 mi south-west` — the layout as it stood in August, when I had answered "the Well IN the
+   * river" by moving the river two miles away. Aevi re-sited the village onto the Echo's own channel, and the
+   * pin held her branch: a gate pinning the INSTANCE reddens when the world is corrected, which is the one
+   * direction a gate must never fail in.
+   * ⛑ What Erik ruled, and what no re-layout can break: the well is at the CENTRE, the Echo is at the
+   * village's EDGE — near enough to be read in metres, far enough not to be the well itself. */
+  const echoLine = mb.split("\n").find(l => /Echo \(water\)/.test(l)) || "";
+  check("§50: …and the Echo is reported as ground — a distance and a direction, whatever the layout says",
+    /Echo \(water\)/.test(echoLine) && /\d/.test(echoLine) && /(north|south|east|west)/.test(echoLine),
+    echoLine.trim() || "no Echo line");
+  /* ⛑ AND THE RULING ITSELF IS AN OPEN GAP, NOT A SECOND PIN. Aevi's re-sited layout is on `aevi-mbriver` and
+   * waits on this very check, so asserting the NEW answer here would redden origin until her branch lands —
+   * a gate pinning the future, which is the same mistake as pinning the past, pointed the other way. `gap`
+   * passes while it is open and shouts FIXED the day the content arrives, which is when this becomes a check
+   * for "the Echo reads in metres, at the village's edge". */
+  gap("§50: Millbrook is not ON the river yet — the Echo still reads in miles from the well",
+    /\bmi\b/.test(echoLine), echoLine.trim());
   check("§50: ⚠️ a feature AT the centre is not reported as \"0 m north\" — that is not a sentence",
     !/(^|[^0-9])0 m /.test(mb));
 

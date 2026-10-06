@@ -67,7 +67,8 @@ import { isoLines, blurGrid, stipple, hexGather, nearness, crystalFacets } from 
 // ⛔ ✅ ERIK: *"Can we make it look like a big city with these places laid out?"*
 import { cityPlan, blockPath, blockRoofs, faubourgs, beltRoofs, leanOf } from "./engine/cityplan.js";
 import { makeInfluence } from "./engine/influence.js";
-import { glyphFor, drawGlyph } from "./engine/mapicons.mjs";   // SNG-409 §4: a pole must never read as a town   // SNG-390: the globe, read-only
+import { glyphFor, drawGlyph } from "./engine/mapicons.mjs";
+import { bakeEarthRGB, earthCityLights } from "./engine/earth.js";   // ⛔ SNG-680: the first world the film shows IS Earth   // SNG-409 §4: a pole must never read as a town   // SNG-390: the globe, read-only
 import { walkingDays, milesFor, worldPosForGenerated, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout, fieldBlobs, fieldAlpha, placeLabels } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
 import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities, isKinAdjacent, kinSecondaryOptions, domainsLegal, domainOf, domainOfTradition, sectOf } from "./engine/traditions.js";
@@ -206,7 +207,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.21.2";
+const APP_VERSION = "2.21.3";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -7204,12 +7205,52 @@ function defaultStart(originId) { const c = startingLocationChoices(originId); r
  * ⛑ `prefers-reduced-motion` reaches here as `reduced`, and O4's rule is that the frames go STILL rather
  * than slower: the caller stops the clock and paints one representative late frame of each shot.
  */
+/* ═════ THE TWO WORLDS, BAKED ONCE ═════
+ * ✅ ERIK, on the first cut: *"The performance on the opening video is pretty bad … The first world it shows
+ * should be earth now."*
+ * ⛔ BOTH HALVES OF THAT ARE THE SAME CHANGE. The first cut sampled `colorAt` per screen pixel per frame —
+ * 15,600 samples at 11.5ms for a capped globe, measured in the browser — so the ground could only be redrawn
+ * every 2° of turn, which is a globe that JUMPS. Baking each world into an equirectangular grid ONCE
+ * (Exesa 720×360 from its own `colorAt`, Earth from `engine/earth.js`) makes a frame an array lookup per
+ * pixel: the turn is smooth, the cost is a tenth, and there is room left in the frame for a sky.
+ * ⛑ And it is what makes Earth possible at all: the film says "This was Earth" — it should be Earth, not
+ * Exesa in blue and green, or the whole first movement reads as fantasy. */
+let _opBakes = {};
+function openingBake(which) {
+  if (_opBakes[which]) return _opBakes[which];
+  if (which === "earth") {
+    const b = bakeEarthRGB(720, 360);
+    _opBakes.earth = { ...b, lights: earthCityLights(720, 360, { mask: b.mask }) };
+    return _opBakes.earth;
+  }
+  if (!_terrain) return null;                       // Exesa's bake needs the asset; the caller falls back
+  const w = 720, h = 360;
+  const rgb = new Uint8ClampedArray(w * h * 3);
+  const mask = new Uint8Array(w * h);
+  const dens = new Uint8Array(w * h);
+  for (let y = 0; y < h; y++) {
+    const lat = 90 - (y + 0.5) * (180 / h);
+    for (let x = 0; x < w; x++) {
+      const lon = -180 + (x + 0.5) * (360 / w);
+      const s = sampleAt(_terrain, lon, lat);
+      const c = colorAt(_terrain, lon, lat, { layer: "topo" }) || [60, 60, 60];
+      const i = y * w + x;
+      rgb[i * 3] = c[0]; rgb[i * 3 + 1] = c[1]; rgb[i * 3 + 2] = c[2];
+      mask[i] = s ? (s.type === 1 ? 1 : 0) : 0;
+      dens[i] = s ? Math.round(Math.max(0, Math.min(1, s.density)) * 255) : 0;
+    }
+  }
+  _opBakes.exesa = { w, h, rgb, mask, dens, lights: [] };
+  return _opBakes.exesa;
+}
+
 const OPENING_EARTH = { sea: [38, 72, 128], land: [58, 104, 62], ice: [226, 232, 238] };
 const OPENING_R_CAP = 210;        // ✅ her cut: "caps it at 210 px and holds frame rate"
 // The ring of poles sits 55° out from the Crossing: far enough off centre to read as a ring around it, close
 // enough that all 24 are on the near face at once (at 55° the far rim is still 35° from the limb).
 const OPENING_RING_LAT = -35;
 const OPENING_SAMPLES = 52000;    // the sample budget one frame of ground may spend
+const OPENING_SUN_DEG = 62;       // how far round from the camera the sun stands — see `openingRaster`
 
 /** Deterministic, so frame N of a shot agrees with frame N-1 and a still frame is a real frame of the film
  *  rather than a reshuffle. (A `Math.random()` field would boil — and would freeze to noise under `reduced`.) */
@@ -7241,11 +7282,21 @@ function openingNodes() {
   return out;
 }
 
+/** Earth's cities as the net's nodes — the same list the night side lights up. */
+let _opEarthNodes = null;
+function openingEarthNodes() {
+  if (_opEarthNodes) return _opEarthNodes;
+  const b = openingBake("earth");
+  _opEarthNodes = (b?.lights || []).map(([lon, lat, w]) => ({ lat, lon, d: w }));
+  return _opEarthNodes;
+}
+
 /** The net: each city to its two nearest neighbours, once. ⚠️ The longitude factor is `cos(latitude)` and
  *  the difference wraps at the seam — both of which I have had wrong in this file before. */
-function openingEdges() {
-  if (_opEdges) return _opEdges;
-  const n = openingNodes();
+function openingEdges(nodesIn = null) {
+  const n = nodesIn || openingNodes();
+  const slot = nodesIn ? "_opEdgesEarth" : "_opEdges";
+  if (openingEdges[slot]) return openingEdges[slot];
   if (!n.length) return [];
   const out = [];
   for (let i = 0; i < n.length; i++) {
@@ -7260,8 +7311,8 @@ function openingEdges() {
     for (const e of near.slice(0, 2)) out.push(e.j > i ? [i, e.j] : [e.j, i]);
   }
   const seen = new Set();
-  _opEdges = out.filter(([a, b]) => { const k = `${a}|${b}`; if (seen.has(k)) return false; seen.add(k); return true; });
-  return _opEdges;
+  openingEdges[slot] = out.filter(([a, b]) => { const k = `${a}|${b}`; if (seen.has(k)) return false; seen.add(k); return true; });
+  return openingEdges[slot];
 }
 
 /* ⛔ THE POLES ARE THE RING ITSELF — G5, and it is the best idea in the work order. ✅ AEVI: *"turn the globe
@@ -7321,10 +7372,51 @@ let _opStars = null;
 function openingStars(w, h) {
   const key = `${w}x${h}`;
   if (_opStars && _opStars.key === key) return _opStars.pts;
+  /* ⛑ A SKY HAS DEPTH, AND 240 EQUAL DOTS DO NOT. ✅ Erik: *"It has the elements we need but not the
+   * pizazz."* Real starfields are mostly faint with a few bright ones, and they crowd along one band. Three
+   * things, all cheap: a brightness curve that leaves most of them dim, a size that follows it, and a soft
+   * band across the frame for the galaxy. Fixed positions, so it is a sky and not a boiling screen. */
   const pts = [];
-  for (let k = 0; k < 240; k++) pts.push([opRand(k, 31) * w, opRand(k, 37) * h, 0.3 + opRand(k, 41) * 0.7]);
+  for (let k = 0; k < 520; k++) {
+    const x = opRand(k, 31) * w;
+    let y = opRand(k, 37) * h;
+    // a third of them pulled toward the band, which runs corner to corner behind the world
+    if (opRand(k, 43) < 0.34) y = y * 0.35 + (h * 0.82 - x * 0.55) * 0.65 + (opRand(k, 47) - 0.5) * h * 0.18;
+    const m = Math.pow(opRand(k, 41), 2.6);                 // most are faint; a few are not
+    pts.push([x, (y + h) % h, 0.18 + m * 0.82, m > 0.82 ? 1.7 : m > 0.5 ? 1.2 : 1]);
+  }
   _opStars = { key, pts };
   return pts;
+}
+
+/* ⛔ THE AIR. A world drawn to a hard edge reads as a disc; a world with air reads as a world. Two strokes:
+ * a soft halo OUTSIDE the limb in the sky's own blue, and a bright crescent ON the limb where the sun is —
+ * the one on the sunward side, falling off around the terminator. Both are canvas gradients, so they cost
+ * nothing per frame and they are the single biggest thing between "a painted ball" and "a photograph". */
+function paintOpeningAir(ctx, view, { sunward = -0.6, tint = "earth", strength = 1 } = {}) {
+  const { cx, cy, r } = view;
+  const sky = tint === "earth" ? [92, 150, 230] : [126, 150, 196];
+  ctx.save();
+  const halo = ctx.createRadialGradient(cx, cy, r * 0.99, cx, cy, r * 1.12);
+  halo.addColorStop(0, `rgba(${sky[0]},${sky[1]},${sky[2]},${0.5 * strength})`);
+  halo.addColorStop(0.4, `rgba(${sky[0]},${sky[1]},${sky[2]},${0.16 * strength})`);
+  halo.addColorStop(1, `rgba(${sky[0]},${sky[1]},${sky[2]},0)`);
+  ctx.fillStyle = halo;
+  ctx.beginPath(); ctx.arc(cx, cy, r * 1.17, 0, Math.PI * 2); ctx.fill();
+  /* ⛔ THE AIRGLOW IS A STROKE ON THE LIMB, NOT A FILL OVER THE DISC. ⚠️ Twice I drew it as a radial
+   * gradient centred on a point out at the limb — and a radial gradient paints its LAST STOP everywhere
+   * beyond its outer radius, so the far half of the world got a flat 0.3 of pale blue over it and the
+   * continents came out lavender. Measured by looking at it, twice; the arithmetic was invisible both times.
+   * ⛑ An arc stroke with a blur sits exactly where air is: a bright band along the sunward limb, nothing in
+   * the middle of the face at all. */
+  ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.clip();
+  const a0 = Math.PI * sunward - Math.PI * 0.62, a1 = Math.PI * sunward + Math.PI * 0.62;
+  ctx.lineWidth = r * 0.085;
+  ctx.strokeStyle = `rgba(206,232,255,${0.5 * strength})`;
+  ctx.shadowColor = `rgba(${sky[0] + 70},${sky[1] + 60},255,${0.9 * strength})`;
+  ctx.shadowBlur = r * 0.14;
+  ctx.beginPath(); ctx.arc(cx, cy, r * 0.99, a0, a1); ctx.stroke();
+  ctx.restore();
 }
 
 /* ⛔ "THE REAL OTHERS" IS HALF-AUTHORED, AND THE DRAWING SAYS WHICH HALF. ✅ *"In the game these are the
@@ -7369,7 +7461,11 @@ function openingGlobeView(w, h, { shrunk = 0, yaw = 0 } = {}) {
 /* The ground, rasterised once per key and blitted thereafter. */
 let _opRaster = null;
 function openingRaster(view, { exesa = 0, mode = "", lights = 1, w = 900, h = 560 } = {}) {
-  if (!_terrain) return null;
+  /* ⛔ EARTH UNTIL THE WORLD IS RENAMED, EXESA AFTER. The palette already crossed on the shots that pay the
+   * cost; now the GROUND does too, and the two agree: everything up to the bores is Earth being spent, and
+   * from `shrink` on it is the world we play in. That is the film's own argument, drawn rather than said. */
+  const bake = openingBake(exesa < 0.5 ? "earth" : "exesa");
+  if (!bake) return null;
   const x0 = Math.max(0, Math.floor(view.cx - view.r)), x1 = Math.min(w, Math.ceil(view.cx + view.r));
   const y0 = Math.max(0, Math.floor(view.cy - view.r)), y1 = Math.min(h, Math.ceil(view.cy + view.r));
   const gw = Math.max(1, x1 - x0), gh = Math.max(1, y1 - y0);
@@ -7381,40 +7477,62 @@ function openingRaster(view, { exesa = 0, mode = "", lights = 1, w = 900, h = 56
    * ⚠️ AND THE BUDGET IS STILL THERE, because the radius is not the only thing that can grow. */
   const cellPx = view.r * 0.75 * Math.PI / 180;
   const step = Math.max(2, Math.min(4, Math.max(Math.round(cellPx), Math.ceil(Math.sqrt((gw * gh) / OPENING_SAMPLES)))));
-  const key = [Math.round(view.yaw / 2), Math.round(view.pitch), Math.round(view.r), Math.round(view.cx), Math.round(view.cy),
-    Math.round(exesa * 20), mode, Math.round(lights * 4), step].join(",");
+  /* ⛑ HALF A DEGREE, NOT TWO. With the ground baked, a frame is an array lookup per pixel — so the globe
+   * can be redrawn as it turns instead of stepping every 2°, which is what made the first cut look like a
+   * slideshow even when the frame rate was fine. */
+  const key = [Math.round(view.yaw * 2), Math.round(view.pitch), Math.round(view.r), Math.round(view.cx), Math.round(view.cy),
+    exesa < 0.5 ? "e" : "x", mode, Math.round(lights * 4), step].join(",");
   if (_opRaster && _opRaster.key === key) return _opRaster;
-  const cv = document.createElement("canvas");
-  cv.width = gw; cv.height = gh;
+  /* ⛑ ONE OFFSCREEN CANVAS, REUSED. The first cut allocated a fresh one for every re-raster — a canvas and
+   * an ImageData per turn step, for the garbage collector to find later. */
+  const cv = _opRaster && _opRaster.cv && _opRaster.cv.width === gw && _opRaster.cv.height === gh
+    ? _opRaster.cv : Object.assign(document.createElement("canvas"), { width: gw, height: gh });
   const c2 = cv.getContext("2d");
   const img = c2.createImageData(gw, gh);
-  const D = img.data, E = OPENING_EARTH;
+  const D = img.data;
+  const BW = bake.w, BH = bake.h, BR = bake.rgb, BM = bake.mask, BD = bake.dens || null;
+  /* ⛔ THE SUN IS OFF TO ONE SIDE, AND THAT IS THE WHOLE SHOT. ✅ AEVI: *"Night. The globe turning, blue
+   * oceans, full size; cloud; the lights of cities on the dark side."* ⚠️ Measured by looking at the first
+   * cut: `sun = -view.yaw` puts the sun exactly BEHIND THE CAMERA — the disc's centre is longitude −yaw — so
+   * the whole visible face was in full daylight, there was no terminator, and the city-light branch (which
+   * needs `day < 0.3`) never fired once. A third of a turn to the left gives a lit crescent, a terminator
+   * across the face, and a night side with the lights on, which is the picture she wrote. */
+  const sun = -view.yaw + OPENING_SUN_DEG;
   for (let y = y0; y < y1; y += step) {
     for (let x = x0; x < x1; x += step) {
       let r = 0, g = 0, b = 0, a = 0;
       const p = unproject(x + 0.5, y + 0.5, view);
       if (p) {
-        const s = sampleAt(_terrain, p.lon, p.lat);
-        if (s) {
-          a = 255;
-          const ex = colorAt(_terrain, p.lon, p.lat, { layer: "topo" }) || [60, 60, 60];
-          const polar = Math.abs(p.lat) > 66;
-          const ea = polar ? E.ice : (s.type === 0 ? E.sea : E.land);
-          r = ea[0] + (ex[0] - ea[0]) * exesa;
-          g = ea[1] + (ex[1] - ea[1]) * exesa;
-          b = ea[2] + (ex[2] - ea[2]) * exesa;
-          // night: the sun sits off the left of frame, so the terminator moves as the globe turns
-          const night = Math.max(0, Math.min(1, (Math.sin((p.lon + view.yaw) * Math.PI / 180) + 0.15) * 1.8));
-          const k = 1 - 0.74 * night;
-          r *= k; g *= k; b *= k;
-          if (s.type === 1 && night > 0.55 && s.density > 0.5 && lights > 0) {
-            const q = lights * (s.density - 0.5) * 2.4 * night;
-            r += 150 * q; g += 118 * q; b += 44 * q;
-          }
-          if (mode === "drain") { r *= 0.42; g *= 0.44; b *= 0.46; const m = (r + g + b) / 3; r = r * 0.35 + m * 0.65; g = g * 0.35 + m * 0.65; b = b * 0.35 + m * 0.65; }
-          if (mode === "dark") { r *= 0.3; g *= 0.3; b *= 0.34; }
-          if (mode === "lattice" && s.type === 1) { const f = 0.3 + s.density * 0.9; r = 20 + 22 * f; g = 26 + 36 * f; b = 40 + 86 * f; }
+        a = 255;
+        const bx = Math.min(BW - 1, Math.max(0, Math.floor((p.lon + 180) * (BW / 360))));
+        const by = Math.min(BH - 1, Math.max(0, Math.floor((90 - p.lat) * (BH / 180))));
+        const bi = by * BW + bx;
+        r = BR[bi * 3]; g = BR[bi * 3 + 1]; b = BR[bi * 3 + 2];
+        const land = BM[bi] === 1;
+        /* ⛔ A REAL TERMINATOR, NOT A WASH. ✅ *"Night. The globe turning … the lights of cities on the dark
+         * side."* The lit side falls off as the cosine of the angle to the sun, the way a lit sphere does,
+         * with a thin warm band at the line between — which is the single thing that makes a drawn globe
+         * read as a photograph rather than a map. */
+        const cosSun = Math.cos((p.lon - sun) * Math.PI / 180) * Math.cos(p.lat * Math.PI / 180 * 0.55);
+        /* ⚠️ A LIT SPHERE IS MOSTLY LIT. At (cosSun + 0.06) × 1.35 the brightest point of the visible face
+         * came out at 82% and everything fell away from there — a world under cloud, not under a sun. The
+         * curve saturates inside about 70° of the sun point and crosses to night over the last few degrees,
+         * which is what gives a hard terminator and a dark side worth putting lights on. */
+        const day = Math.max(0, Math.min(1, (cosSun + 0.02) * 2.6));
+        const k = 0.05 + 1.12 * day;
+        // ⛑ dusk is a LINE, not a glaze — a narrow warm band right at the terminator and nothing either side
+        const dusk = Math.max(0, 1 - Math.abs(cosSun) * 16);
+        r = r * k + 38 * dusk; g = g * k + 15 * dusk; b = b * k + 4 * dusk;
+        // the sea takes a sheen where the sun is straight on, which is what tells sea from land at a glance
+        if (!land && day > 0.86) { const sp = (day - 0.86) * 5; r += 30 * sp; g += 42 * sp; b += 58 * sp; }
+        if (day < 0.45 && lights > 0) {
+          const q = lights * (0.45 - day) * 2.4;
+          const lit = BD ? Math.max(0, (BD[bi] / 255) - 0.5) * 2.4 : 0;
+          if (lit > 0 && land) { r += 150 * q * lit; g += 118 * q * lit; b += 44 * q * lit; }
         }
+        if (mode === "drain") { const m = (r + g + b) / 3; r = r * 0.3 + m * 0.52; g = g * 0.3 + m * 0.55; b = b * 0.3 + m * 0.58; }
+        if (mode === "dark") { r *= 0.3; g *= 0.3; b *= 0.34; }
+        if (mode === "lattice" && land) { const f = 0.3 + (BD ? BD[bi] / 255 : 0.5) * 0.9; r = 20 + 22 * f; g = 26 + 36 * f; b = 40 + 86 * f; }
       }
       for (let dy = 0; dy < step && y + dy < y1; dy++) {
         for (let dx = 0; dx < step && x + dx < x1; dx++) {
@@ -7680,7 +7798,10 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
   ctx.fillStyle = "#04050b"; ctx.fillRect(0, 0, w, h);
   if (V === "bores" || V === "bores_capped") return paintOpeningCutaway(ctx, { w, h, u, capped: V === "bores_capped" });
   // the sky first, so the veil has stars to take out of it
-  for (const [sx, sy, sa] of openingStars(w, h)) { ctx.fillStyle = `rgba(226,232,246,${0.1 + sa * 0.3})`; ctx.fillRect(sx, sy, sa > 0.8 ? 1.6 : 1, sa > 0.8 ? 1.6 : 1); }
+  for (const [sx, sy, sa, ss] of openingStars(w, h)) {
+    ctx.fillStyle = `rgba(${226 - (1 - sa) * 40},${232 - (1 - sa) * 30},246,${0.08 + sa * 0.62})`;
+    ctx.fillRect(sx, sy, ss, ss);
+  }
 
   // ⛑ THE OLD OUTLINE, THE SIZE IT WAS — the only way a watcher can SEE that a third of the world is gone
   // instead of being told. ✅ *"The old outline stays faint behind it, the size it was."*
@@ -7731,14 +7852,48 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
     : V === "lights_out" ? Math.max(0, 0.25 - u * 0.25) : V === "title" ? 0.3 : 0;
   opGround(ctx, frame, { exesa, mode, lights, w, h });
 
+  /* ⛑ AFTER THE GROUND, BEFORE EVERYTHING ELSE: the air belongs to the world, and the net, the glitter and
+   * the arcs all sit above it. Skipped on the close frames, where the limb is off-screen and a halo would be
+   * a blue ring across the middle of a region. */
+  if (!placeSpan && !coda && V !== "title") {
+    // ⛑ the air's lit crescent stands where the sun does, or the glow and the light disagree
+    paintOpeningAir(ctx, frame, { tint: exesa < 0.5 ? "earth" : "exesa", strength: mode === "dark" ? 0.4 : 1,
+      sunward: -0.5 - OPENING_SUN_DEG / 180 });
+  }
   const P = (lat, lon, rad) => project(lon, lat, frame, rad == null ? 1 : rad);
-  const nodes = openingNodes();
+  /* ⛔ IN THE FIRST MOVEMENT THE NET IS EARTH'S OWN. ✅ *"the lights of cities on the dark side"* → *"Lines of
+   * light run between the cities"*. Those have to be the same points or the shot does not follow from the one
+   * before it — so while the world is Earth, the net's nodes ARE the city lights, and from `shrink` on they
+   * are Exesa's lattice, which is the same argument the film makes in words. */
+  const onEarth = exesa < 0.5;
+  const nodes = onEarth ? openingEarthNodes() : openingNodes();
   // ⛑ O4: the clock is stopped by the CALLER under `prefers-reduced-motion`, so what is left to do here is
   // make the still frame calmer rather than busier — a frozen blizzard of grains is agitation without motion.
   const grains = reduced ? 0.45 : 1;
   const inFrame = (p) => p && p.x >= -8 && p.x <= w + 8 && p.y >= -8 && p.y <= h + 8;
   ctx.save();
   ctx.lineCap = "round";
+
+  if (onEarth && mode !== "dark" && lights > 0) {
+    /* ⛔ THE CITY LIGHTS ARE POINTS, AND THEY ONLY SHOW ON THE NIGHT SIDE. The raster's own light branch
+     * reads a DENSITY plane, which Exesa's bake has and Earth's does not — Earth's cities are a list of
+     * places, not a field, so they are drawn here where they can be points of light rather than a tint. */
+    const sunLon = -frame.yaw + OPENING_SUN_DEG;
+    for (const [lon, lat, wgt] of (openingBake("earth")?.lights || [])) {
+      const cosSun = Math.cos((lon - sunLon) * Math.PI / 180) * Math.cos(lat * Math.PI / 180 * 0.55);
+      const night = Math.max(0, Math.min(1, (0.08 - cosSun) * 4));
+      if (night <= 0) continue;
+      const p = P(lat, lon, 1.001);
+      if (!inFrame(p)) continue;
+      /* ⛑ BRIGHT ENOUGH TO BE THE POINT OF THE SHOT. ✅ *"the lights of cities on the dark side"* — at a
+       * third of this they were a dusting nobody would name. Every city gets a dot; the big ones get a
+       * halo, which is what makes a cluster read as a city rather than as noise. */
+      const a = night * lights * (0.5 + wgt * 0.5);
+      ctx.fillStyle = `rgba(255,222,166,${Math.min(1, 1.15 * a)})`;
+      ctx.fillRect(p.x - 0.7, p.y - 0.7, 1.7, 1.7);
+      if (wgt > 0.55) opGlow(ctx, p.x, p.y, 3 + wgt * 5, `rgba(255,208,136,${0.62 * a})`, "rgba(255,180,90,0)");
+    }
+  }
 
   if (V === "earth") {
     // cloud: a few soft bands over the day side, and nothing else — this shot is the world as it was
@@ -7753,7 +7908,7 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
     /* ✅ *"Lines of light run between the cities, faster and finer, until the night side is a net."* — then
      * *"doubling, then doubling again; it begins to glow on the day side too."* So `network` draws a growing
      * share of the real net, and `network_runaway` draws all of it plus the chords that pass over the day. */
-    const edges = openingEdges();
+    const edges = openingEdges(onEarth ? nodes : null);
     const run = V === "network_runaway";
     const n = run ? edges.length : Math.floor(edges.length * Math.min(1, u * 1.25));
     ctx.strokeStyle = run ? "rgba(188,226,255,0.6)" : "rgba(150,206,255,0.42)";
@@ -8122,7 +8277,7 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
   if (V === "lights_out") {
     /* ✅ *"The glitter falls like ash. The net goes dark, a region at a time, not all at once."* ⛑ "A region
      * at a time" is a real ordering: the net dies by LONGITUDE band, so a watcher sees it cross the world. */
-    const edges = openingEdges();
+    const edges = openingEdges(onEarth ? nodes : null);
     const dead = Math.min(1, u * 1.15);
     ctx.strokeStyle = "rgba(150,206,255,0.3)"; ctx.lineWidth = 0.8;
     ctx.beginPath();

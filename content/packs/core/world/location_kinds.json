@@ -284,7 +284,7 @@
     "named": 6,
     "described": 25
    },
-   "_search": "Days of searching before the one sent finds the culprit, on top of the travel to where the culprit is. A culprit with a hold is looked for there first. Unseen damage is never traced: the locals mend it and remember.",
+   "_search": "Days of searching before the one sent finds the culprit, on top of the travel to where the culprit is. A culprit with a hold is looked for there first. Unseen damage is not traced by the locals themselves: they mend it and remember, and post an investigation job (jobs.labels.investigate) that anyone may take.",
    "outcomes": [
     "pay",
     "work it off",
@@ -379,6 +379,26 @@
       "family": "PROTECT",
       "weight": 1
      }
+    ],
+    "hunt": [
+     {
+      "family": "KNOW",
+      "weight": 2
+     },
+     {
+      "family": "MOVE",
+      "weight": 1
+     }
+    ],
+    "investigate": [
+     {
+      "family": "KNOW",
+      "weight": 2
+     },
+     {
+      "family": "INFLUENCE",
+      "weight": 1
+     }
     ]
    },
    "effortDays": {
@@ -393,10 +413,23 @@
     "mend": "{Mend} the {thing} at {place}",
     "makeGood": "Make good the {thing} at {place}",
     "remake": "Make the gate at {place} again",
-    "resettle": "Resettle {name}"
+    "resettle": "Resettle {name}",
+    "hunt": "Find whoever {did} the {thing} at {place}",
+    "investigate": "Learn who {did} the {thing} at {place}"
    },
    "from": "the people of {place}",
-   "giftLine": "Done as a gift. Nothing asked."
+   "giftLine": "Done as a gift. Nothing asked.",
+   "hunt": {
+    "bountyShare": 0.25,
+    "localsSendAfterDays": 7,
+    "effortDays": {
+     "named": 3,
+     "described": 8
+    },
+    "investigateEffortDays": 5
+   },
+   "_hunt": "Erik, 2026-10-06: the hunt for the culprit is a local job. The locals post it to nearby boards; anyone but the culprit may take it. The bounty is a share of the repair value, paid by the locals, so it adds to what the culprit owes. If nobody takes it within localsSendAfterDays, the locals send their own. Unseen damage posts an investigation instead; finding the culprit turns it into a hunt. SNG-679 R7.",
+   "_makeGood": "Erik, 2026-10-06: the culprit is offered the chance to make good, and may decline it. Offered once, first on their board; declining takes it off and costs nothing by itself. The debt and the hunt go on either way, and the offer comes back in the scene when they are found."
   },
   "_numbers": "First cut. Erik rules the numbers."
  },

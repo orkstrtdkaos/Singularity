@@ -4,25 +4,25 @@
  "_derivation": "⛔ THE THREE GRADIENTS THE WORLD ALREADY KNOWS, measured at each settlement: (1) RIVER BEARING and distance — from the traced hydrology; (2) UPHILL BEARING — sample the generator's raw elevation around the point; (3) ROAD BEARINGS — from connections' worldPos. ⚠️ Water trades go riverward. Terraces and orchards go uphill. Fields take the flat. Gates and markets sit on the road bearings. Everything else fills the middle.",
  "millbrook": {
   "_measured": {
-   "riverBearing": -11,
-   "riverDistanceMi": 311.2,
+   "riverBearing": -10,
+   "riverDistanceMi": 117.5,
    "riverFlowBearing": 162,
-   "uphillBearing": -75,
-   "relief": 0.067,
+   "uphillBearing": -90,
+   "relief": 0.071,
    "roadsOut": [
     {
      "to": "echo_river_crossing",
-     "bearing": 174,
+     "bearing": 166,
      "mi": 14
     },
     {
      "to": "gen-disputed-zone-left-branch-entrance",
-     "bearing": -13,
+     "bearing": -15,
      "mi": 146
     },
     {
      "to": "sunken_choir",
-     "bearing": -86,
+     "bearing": -112,
      "mi": 503
     }
    ],
@@ -34,8 +34,15 @@
     "relief": 0.062,
     "riverFlowBearing": 162
    },
-   "riverDistanceDeg": 4.51,
-   "_remeasured_20260906": "⛔ RE-DERIVED FROM THE LIVE TERRAIN, 2026-09-06. Erik: 'the land is set now — we will move things as needed to fit.' ⚠️ SNG-404 had 16 drifts between Aevi's hand-authored `_measured` block and `measureGradients` reading the same world, because the cluster MOVED (SNG-427, SNG-434, and the 09-06 gate move) and the readings did not follow. ⛔ THE LAND IS THE TRUTH AND THE READING IS THE THING THAT MOVES — taken with the same call the gate uses, so they cannot disagree by construction. ⚑ `_wasAuthored` keeps what she measured by hand, because a reading replaced is not a reading that never happened."
+   "riverDistanceDeg": 4.52,
+   "_remeasured_20260906": "⛔ RE-DERIVED FROM THE LIVE TERRAIN, 2026-09-06. Erik: 'the land is set now — we will move things as needed to fit.' ⚠️ SNG-404 had 16 drifts between Aevi's hand-authored `_measured` block and `measureGradients` reading the same world, because the cluster MOVED (SNG-427, SNG-434, and the 09-06 gate move) and the readings did not follow. ⛔ THE LAND IS THE TRUTH AND THE READING IS THE THING THAT MOVES — taken with the same call the gate uses, so they cannot disagree by construction. ⚑ `_wasAuthored` keeps what she measured by hand, because a reading replaced is not a reading that never happened.",
+   "_remeasured_20261006": "⛔ RE-MEASURED after Millbrook moved onto the Echo. ⚠️ THIS BLOCK IS THE HANDSHAKE WITH content_ci, WHICH MEASURES AGAINST THE REBUILT WORLD (SNG-391 drift) — there the nearest traced river is 4.52°. On the SHIPPED map the Echo is 0.05° away: the village is on it. The old riverDistanceMi (311.2) was also in Earth miles (69/°); this one is the world's 26/°.",
+   "_wasBefore_20261006": {
+    "riverBearing": -11,
+    "riverDistanceDeg": 4.51,
+    "uphillBearing": -75,
+    "relief": 0.067
+   }
   },
   "_rebuiltNote": "⛔ SNG-427 REBUILT. Erik: 'you have the Well IN the river.' He was right — the well sat at 0,0 while the river ran 11 miles away, so the dock at 300 m reached water it could not reach. ⚠️ MILLBROOK IS NOW 2.2 MILES FROM THE ECHO, 14 MILES ABOVE THE CROSSING. The layout is rebuilt on the measured channel: river at −134°, flowing 162°, uphill at 300°.",
   "radiusMetres": 900,
@@ -123,7 +130,7 @@
     "id": "millbrook_smithy",
     "name": "The Smithy",
     "localMap": {
-     "bearing": 174,
+     "bearing": 166,
      "metres": 150
     },
     "basis": "road",
@@ -131,13 +138,15 @@
      "road": "echo_river_crossing",
      "relation": "on"
     },
-    "why": "On the Crossing road at the edge of the built ground — a smith sits where the carts stop, and downwind."
+    "why": "On the Crossing road at the edge of the built ground — a smith sits where the carts stop, and downwind.",
+    "_bearingWas_20261006": 174,
+    "_followNote_20261006": "on the Crossing road, which now leaves at its re-measured bearing"
    },
    {
     "id": "gen-mara-wells-store",
     "name": "Mara Wells' Store",
     "localMap": {
-     "bearing": -13,
+     "bearing": -15,
      "metres": 110
     },
     "basis": "road",
@@ -148,7 +157,9 @@
     "why": "⛔ Promoted from play. On the north road, between the well and the way out.",
     "_towardFix": "⛔ its named road left the connection set; re-pointed at echo_river_crossing",
     "_towardWas_20261006": "echo_river_crossing",
-    "_fixNote_20261006": "⛔ Its bearing (−13) is the NORTH road, which runs to the Disputed Zone; the Crossing road is at 174. The 2026-08 re-point named the wrong road."
+    "_fixNote_20261006": "⛔ Its bearing (−13) is the NORTH road, which runs to the Disputed Zone; the Crossing road is at 174. The 2026-08 re-point named the wrong road.",
+    "_bearingWas_20261006": -13,
+    "_followNote_20261006": "on the north road, at its re-measured bearing"
    },
    {
     "id": "millbrook_mill_lane",
@@ -201,11 +212,13 @@
     "name": "The Long Fields",
     "kind": "field",
     "localMap": {
-     "bearing": 105,
+     "bearing": 90,
      "metres": 520
     },
     "basis": "anti-uphill",
-    "why": "⛔ ERIK NAMED THESE IN THE SEED — 'the docks in Millbrook on the river, the smithy, THE FIELDS' — and they were the one thing never placed. ⚑ THE FLAT GROUND, DEFINED BY THE SLOPE IT IS NOT ON: uphill measures -75°, so the fields take 105°, directly away from it. ⚠️ This layout's own `_derivation` said so all along — 'Terraces and orchards go uphill. FIELDS TAKE THE FLAT.' ⛔ AND IT IS WHY THE VILLAGE IS WHERE IT IS: Millbrook sits on the terrace above the floodplain, so its arable is not the wet meadow by the Echo — it is the dry flat behind the town, away from the rise."
+    "why": "⛔ ERIK NAMED THESE IN THE SEED — 'the docks in Millbrook on the river, the smithy, THE FIELDS' — and they were the one thing never placed. ⚑ THE FLAT GROUND, DEFINED BY THE SLOPE IT IS NOT ON: uphill measures -75°, so the fields take 105°, directly away from it. ⚠️ This layout's own `_derivation` said so all along — 'Terraces and orchards go uphill. FIELDS TAKE THE FLAT.' ⛔ AND IT IS WHY THE VILLAGE IS WHERE IT IS: Millbrook sits on the terrace above the floodplain, so its arable is not the wet meadow by the Echo — it is the dry flat behind the town, away from the rise.",
+    "_bearingWas_20261006": 105,
+    "_followNote_20261006": "anti-uphill: the measured uphill moved to -90 when the village moved onto the Echo"
    }
   ],
   "_antiUphillNote_20260906": "⛑ AUTHORED 2026-09-06 to close SNG-404 §2. ⚠️ THE GATE ASSERTED THE PLACER REPRODUCES FOUR GROUND-DECIDED BASES and `anti-uphill` returned NULL — because NO LAYOUT IN THE CORPUS USED IT. ⛔ A basis with a branch in the engine, a name in `SITE_BASES`, and no content is a reader with no writer, and the gate was asserting agreement on nothing (CCode's own §3 rule). ✅ Fixed from the CONTENT side rather than by narrowing the gate: `anti-uphill` is a real basis, Erik named the fields in the original seed, and Millbrook had every other seed noun placed but not them."

@@ -173,33 +173,39 @@ Two cautions:
    `map-kg-toggle`). Re-point them at behaviour (does the toggle draw people on the ground?), not at the new ids. Don't
    delete them.
 
-## Data fixes found by drawing it (mine, in this commit), and two questions I still own
+## Millbrook is ON the river (Erik, 2026-10-06), and what that changed
 
-Drawing Millbrook from the file showed four sites the file got wrong. They are fixed in `local_layouts.json`, with
-the old values kept beside the new ones:
+> *"Millbrook should be ON the river."*
 
-1. **The wheels, the landing and the ford were on the wrong bank.** The Echo is authored at 3200 m on −134°, 260 m
-   wide, flowing 162°. At their old distances (3400, 3500 and 3300 m) all three fell beyond the far bank. They now
-   sit at 3040 m (the wheels, on the near bank), 3230 m (the landing, just downstream of the wheels) and 2940 m (the
-   ford, mid-channel). The river stays where it is, and §50's "The Echo — 2.0 mi south-west" still reads true.
-2. **Mara Wells' Store** named the Crossing road, but its bearing (−13°) is the north road to the Disputed Zone. The
-   `toward` now names that road.
+The first mock still showed the August reading: the village two miles back from the Echo, with the wheels and the
+landing out on the bank. That reading answered his August "you have the Well IN the river" by moving the river
+away. He meant the well, not the town, and the seed always said "a riverside farming village".
 
-Two I haven't resolved yet, both mine:
+- **World tier (pushed with this note):** Millbrook's `worldPos` is on the Echo's channel, the authored water at
+  `terrain.json` river 89, which also runs through Echo River Crossing and past Archive Hollow. The village stands
+  about 230 m off the west bank. Mara Wells' Store and the Watershed Road moved with it, since they share its exact
+  position. `_measured` is re-taken: uphill −90, the Crossing road 166, the north road −15. The Long Fields, the
+  Smithy and the store follow those bearings.
+- **Local tier (on branch `aevi-mbriver`):**
+  - The channel runs along the village's east edge, and the well sits 140 m from the water.
+  - The River Dock (the seed's name for it) and the wheels are on the waterfront, with the wheels 200 m downstream.
+  - The Old Ford is a kilometre upstream.
+  - The Long Fields lie across the water, which is why the dock is a centre of daily life.
+  - The terraces and the coppice are up the measured slope to the west.
+- **The name "The Echo"** pointed at the wrong water: a 5-point fragment near the antimeridian, shared with the
+  Drowned Reach. The branch re-anchors it to river 89.
 
-- **`_measured` says the nearest traced river is 311 mi away**, but the layout and `placenames` both put the Echo
-  two miles from Millbrook. The authored ground is canon (R28), so the local map draws the Echo. I will reconcile
-  the region tier, either with SPEC_local_geology's local-geology route or by re-checking the measurement.
-- **The west road to the Sunken Choir crosses the Echo with no crossing authored.** It needs a ferry, or it should
-  bend to the Old Ford. My guess is the ford: that is what a ford is for. I'll rule on it in content. Draw the road
-  to whatever the file says.
+The branch waits on two pins of yours, both in `po/NOTE_aevi_ccode_millbrook_on_the_river.md`: §50's "2.0 mi
+south-west", and the `KNOWN_RIVER_COLLISIONS` literal. My open questions from this morning are answered by this.
+The "311 mi" was content_ci's rebuilt world (SNG-391 drift) measured in Earth miles. The west road no longer
+crosses the river, because the village is on the west bank.
 
 ## Done when
 
 - **Every one** of the 158 places opens a local map, and there is no ring anywhere in the app.
-- **Millbrook** reads like `po/img/local_mock_millbrook.png`: the well at the centre, the green just east, the
-  smithy on the Crossing road, the Mill Lane running south-west, and the Echo two miles out past the Wet Meadows,
-  with the wheels and the landing on its near bank and the ford in the water. The style needn't match the mock; the facts must.
+- **Millbrook** reads like `po/img/local_mock_millbrook.png` once the branch lands: a village on the west bank of
+  the Echo, the well in the village and not in the water, the River Dock and the wheels on the waterfront, the
+  Long Fields across the water, and the ford upstream. The style needn't match the mock; the facts must.
 - **All seven `suppressAtRegion` sites** are off the region map and on their settlement's local map, and the
   region map shows the `regionName`s.
 - **A generated place**, any of the 140, draws the same on a reload, and a new place minted in play has a local map

@@ -1,0 +1,310 @@
+{
+ "schemaVersion": 1,
+ "id": "film_arcs_and_powers",
+ "kind": "film",
+ "name": "Where Power Comes From",
+ "_what": "Info film, two halves: the power sources as told publicly (lattice, nanite ordered and wild, the Veil, metaphysical craft, the body), then what an arc is and the greater arcs by their first-stage publicFace only. No Sovereigns, no hidden truths, no figures. Unlocked always.",
+ "_canon": "EXESA_o1.md III (four sources in two pairs, a pure thing and its approximation; lattice wants dense ground; ordered and wild one source in two states; the conversion argument between four traditions, nobody calling it a war, who decides what a place is for; wild thrives in the gaps; the Veil, the Void as absence of the rules, subtraction, thin ground; metaphysical needs meaning and thin apparatus; meaning gathers where people are), VI (great figures at their own work, most never heard of you); power_systems_o1.md (a craft draws on one or a mix; magic is structured nanite spent into purpose; goes wild, river and wheel; wild processed back, a reason to fight over a spent yard; Veil anti-power to lattice; metaphysical asks everything of the practitioner; body asks nothing, thin ground is quiet ground); tradition_profiles_f1.json powerSources[precursor].oneLine/theCraft (grammar; queried not commanded); power_cosmology_f1.json theConversion.breakers/orderers; ARCS_o1.md first rule and PLAYERS_GUIDE_f1.md arcs section (turn without you; proximity decides; resolve completely, permanent; wakes; the weather at one moment; an arc you ignore does not wait politely); greater_arcs_f1.json arcs[].name and stages[0].publicFace; locations_f1.json descriptionSeed for the_service_ways, the_spent_yard, the_kept_shrine, the_grindstone. No underscore, gm, notes or hidden-truth fields used.",
+ "pacing": {
+  "secondsBase": 1.6,
+  "secondsPerWord": 0.28,
+  "fadeSeconds": 1.2
+ },
+ "unlock": {
+  "always": true
+ },
+ "movements": [
+  {
+   "id": "draw",
+   "name": "What a craft draws on",
+   "shots": [
+    {
+     "id": "film_arcs_and_powers_1",
+     "visual": "lattice",
+     "lines": [
+      "Every craft draws on something.",
+      "There are four sources, in two pairs: a pure thing, and a human approximation of it."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "lattice",
+   "name": "The lattice",
+   "shots": [
+    {
+     "id": "film_arcs_and_powers_2",
+     "visual": "source",
+     "lines": [
+      "The lattice is the old apparatus, still running, strongest where the works lie thick.",
+      "It is queried, and nobody commands it. It answers those who learn its grammar."
+     ],
+     "source": "precursor"
+    },
+    {
+     "id": "film_arcs_and_powers_3",
+     "visual": "place",
+     "lines": [
+      "Under the Gearlands, something in the old tunnels is still running its original errand. The Enginewrights are careful not to interrupt it."
+     ],
+     "place": "the_service_ways"
+    }
+   ]
+  },
+  {
+   "id": "nanite",
+   "name": "The made copy",
+   "shots": [
+    {
+     "id": "film_arcs_and_powers_4",
+     "visual": "source",
+     "lines": [
+      "Nanite is the made copy.",
+      "What the world calls magic is ordered nanite spent into purpose: asked, answering, scattering."
+     ],
+     "source": "nanite_ordered"
+    },
+    {
+     "id": "film_arcs_and_powers_5",
+     "visual": "source",
+     "lines": [
+      "It does not run out. It goes wild, like a river used up turning a wheel: still there, no longer doing what you asked."
+     ],
+     "source": "nanite_wild"
+    },
+    {
+     "id": "film_arcs_and_powers_6",
+     "visual": "place",
+     "lines": [
+      "Wild nanite thrives in the gaps, where nobody keeps a place.",
+      "Gathered, it can be ordered again, which is a reason to fight over a spent yard."
+     ],
+     "place": "the_spent_yard"
+    },
+    {
+     "id": "film_arcs_and_powers_7",
+     "visual": "ring",
+     "lines": [
+      "The Rootkin and the Churnfolk break ordered nanite back to wild. The Enginewrights and the Seraphic Orders order it again.",
+      "Nobody calls it a war. It is about who decides what a place is for."
+     ],
+     "traditions": [
+      "rootkin",
+      "churnfolk",
+      "enginewright",
+      "seraphic"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "veil",
+   "name": "The Veil",
+   "shots": [
+    {
+     "id": "film_arcs_and_powers_8",
+     "visual": "source",
+     "lines": [
+      "The Veil is the pure absence, and its craft wants thin ground. Past it lies the Void: the absence of the rules themselves.",
+      "Veil craft is subtraction."
+     ],
+     "source": "veil"
+    },
+    {
+     "id": "film_arcs_and_powers_9",
+     "visual": "veil",
+     "lines": [
+      "Where the lattice is weak, the Veil is thin. Thinning one strengthens the other."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "mind",
+   "name": "Mind past matter",
+   "shots": [
+    {
+     "id": "film_arcs_and_powers_10",
+     "visual": "source",
+     "lines": [
+      "Metaphysical craft is the Veil reached from the human side: mind past matter. It asks everything of the one who practises it."
+     ],
+     "source": "metaphysical"
+    },
+    {
+     "id": "film_arcs_and_powers_11",
+     "visual": "source",
+     "lines": [
+      "It needs meaning to work on and thin apparatus to work through.",
+      "The places thick with meaning are usually thick with lattice too."
+     ],
+     "source": "metaphysical"
+    },
+    {
+     "id": "film_arcs_and_powers_12",
+     "visual": "place",
+     "lines": [
+      "Meaning gathers where people are. A village has it by being lived in.",
+      "A place that empties loses it."
+     ],
+     "place": "the_kept_shrine"
+    }
+   ]
+  },
+  {
+   "id": "body",
+   "name": "The body",
+   "shots": [
+    {
+     "id": "film_arcs_and_powers_13",
+     "visual": "source",
+     "lines": [
+      "And the body: breath, the hand and its years. It asks nothing of the ground, and it is best where the lattice is worst."
+     ],
+     "source": "body"
+    },
+    {
+     "id": "film_arcs_and_powers_14",
+     "visual": "place",
+     "lines": [
+      "At the Grindstone, body-workers come to see what real use does to a person."
+     ],
+     "place": "the_grindstone"
+    }
+   ]
+  },
+  {
+   "id": "what_arcs_are",
+   "name": "What an arc is",
+   "shots": [
+    {
+     "id": "film_arcs_and_powers_15",
+     "visual": "globe",
+     "lines": [
+      "The arcs turn without you, and which one you meet depends on where you stand."
+     ]
+    },
+    {
+     "id": "film_arcs_and_powers_16",
+     "visual": "globe",
+     "lines": [
+      "Each resolves completely, one way or another, and what it leaves is permanent.",
+      "New arcs rise from what is left."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "turning",
+   "name": "The arcs now turning",
+   "shots": [
+    {
+     "id": "film_arcs_and_powers_17",
+     "visual": "arc",
+     "lines": [
+      "The Poles Pull.",
+      "Each Reach is leaning harder into its own extreme. Travellers notice the edges of the world getting sharper."
+     ],
+     "arc": "arc_the_poles_pull"
+    },
+    {
+     "id": "film_arcs_and_powers_18",
+     "visual": "arc",
+     "lines": [
+      "What Wakes Beneath.",
+      "Deep sites report faint stirrings, far apart from one another."
+     ],
+     "arc": "arc_what_wakes_beneath"
+    },
+    {
+     "id": "film_arcs_and_powers_19",
+     "visual": "arc",
+     "lines": [
+      "The Second Manifestation.",
+      "A new domain has manifested where none was. Scholars argue whether it is the first of many."
+     ],
+     "arc": "arc_manifestation_storm"
+    },
+    {
+     "id": "film_arcs_and_powers_20",
+     "visual": "arc",
+     "lines": [
+      "The Green Schism.",
+      "In the Deepwood the Moot is arguing, slowly, whether to seal the wood from humankind. The Rootbound are gaining ground."
+     ],
+     "arc": "arc_green_schism"
+    },
+    {
+     "id": "film_arcs_and_powers_21",
+     "visual": "arc",
+     "lines": [
+      "The Long Petition.",
+      "People are asking for more than they used to, a word put in, a door held open, and most of the asking is being answered."
+     ],
+     "arc": "arc_the_long_petition"
+    },
+    {
+     "id": "film_arcs_and_powers_22",
+     "visual": "arc",
+     "lines": [
+      "The Glare.",
+      "More is said in public than it used to be. People confess before they are asked, and the boards are full."
+     ],
+     "arc": "arc_the_glare"
+    },
+    {
+     "id": "film_arcs_and_powers_23",
+     "visual": "arc",
+     "lines": [
+      "The Long Sleep.",
+      "More people are sleeping longer. Nobody is sick. They are resting, and waking a little further away."
+     ],
+     "arc": "arc_the_long_sleep"
+    },
+    {
+     "id": "film_arcs_and_powers_24",
+     "visual": "arc",
+     "lines": [
+      "The Widening.",
+      "People who part are not meeting again. Nobody decided it. The roads just got longer."
+     ],
+     "arc": "arc_the_widening"
+    }
+   ]
+  },
+  {
+   "id": "close",
+   "name": "The weather",
+   "shots": [
+    {
+     "id": "film_arcs_and_powers_25",
+     "visual": "many",
+     "lines": [
+      "Out on the roads, a great many people are leaning on these already. Most of them have never heard of you."
+     ]
+    },
+    {
+     "id": "film_arcs_and_powers_26",
+     "visual": "many",
+     "lines": [
+      "Each is pushing on something, and being pushed back. So are you, and an arc you ignore does not wait politely."
+     ]
+    },
+    {
+     "id": "film_arcs_and_powers_27",
+     "visual": "many",
+     "lines": [
+      "This is the weather at one moment.",
+      "A season from now it will not be the same."
+     ]
+    }
+   ]
+  }
+ ],
+ "title": {
+  "line1": "Where Power Comes From",
+  "line2": "The Arcs of Exesa",
+  "seconds": 6,
+  "visual": "title"
+ }
+}

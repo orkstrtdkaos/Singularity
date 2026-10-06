@@ -1,0 +1,327 @@
+{
+ "schemaVersion": 1,
+ "id": "film_span_spirit",
+ "kind": "film",
+ "name": "Span and Spirit",
+ "_what": "Info film for the Span and Spirit domain: the Horizon-Walkers, the Hourkeepers and the Numinous, their homes, schools, cults, costs, a hero each where canon has one, and the arguments across their axes. Written to films/BRIEF.md.",
+ "_canon": "EXESA_o1.md VII (Span and Spirit paragraph) and III (metaphysical: meaning, lattice); tradition_profiles_f1.json traditions[horizon|hourkeeper|numinous] (oneLine, theCraft, withMastery, theTrade, whoPractices, acrossTheAxis, distribution.modes/tail); locations_f1.json descriptionSeed/appearance of the_long_span, the_wayhouse, the_unlanded, the_slow_hour, the_forward_archive, the_stopped, the_thinning, the_lampless_hermitage, the_numen; powers_f1.json power_keepers_of_the_slow_hour (appearance, plainly); npcs_f1.json aro_horizon (role, wants), warden_isolde (role, voiceHints); greater_arcs_f1.json arc_the_widening stage 1 publicFace; the_twelve_reaches_f1.json reaches[mechanical_spiritual].crisis. Per-shot map in film_span_spirit_sources.md",
+ "pacing": {
+  "secondsBase": 1.6,
+  "secondsPerWord": 0.28,
+  "fadeSeconds": 1.2
+ },
+ "unlock": {
+  "traditions": [
+   "horizon",
+   "hourkeeper",
+   "numinous"
+  ],
+  "places": [
+   "the_long_span",
+   "the_slow_hour",
+   "the_numen",
+   "the_thinning"
+  ]
+ },
+ "movements": [
+  {
+   "id": "span_spirit",
+   "name": "Span and Spirit",
+   "shots": [
+    {
+     "id": "film_span_spirit_1",
+     "visual": "ring",
+     "traditions": [
+      "horizon",
+      "hourkeeper",
+      "numinous"
+     ],
+     "lines": [
+      "Span and Spirit.",
+      "Three peoples who will not take distance, duration or matter as given."
+     ]
+    },
+    {
+     "id": "film_span_spirit_2",
+     "visual": "lattice",
+     "lines": [
+      "The waygates and the archives that run forward are Precursor works.",
+      "Span walks on someone else's road."
+     ]
+    },
+    {
+     "id": "film_span_spirit_3",
+     "visual": "source",
+     "source": "metaphysical",
+     "lines": [
+      "Spirit needs meaning to work on, and the places thick with meaning are usually thick with lattice too."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "horizon",
+   "name": "The Horizon-Walkers",
+   "shots": [
+    {
+     "id": "film_span_spirit_4",
+     "visual": "place",
+     "place": "the_long_span",
+     "lines": [
+      "The Long Span moves: tents, roads and carts, open country ahead.",
+      "The Horizon-Walkers have no fixed anything, and think that a completed thought."
+     ]
+    },
+    {
+     "id": "film_span_spirit_5",
+     "visual": "ring",
+     "traditions": [
+      "horizon"
+     ],
+     "lines": [
+      "Distance is a claim. Argue with it long enough and it gives."
+     ]
+    },
+    {
+     "id": "film_span_spirit_6",
+     "visual": "place",
+     "place": "the_wayhouse",
+     "lines": [
+      "Their one fixed house is the Wayhouse, and they are embarrassed by it.",
+      "Its gate stands in the yard, unfenced and unwatched."
+     ]
+    },
+    {
+     "id": "film_span_spirit_7",
+     "visual": "ring",
+     "traditions": [
+      "horizon"
+     ],
+     "lines": [
+      "Walkers know the road. Spanners fold it."
+     ],
+     "after": [
+      "The Leavers take a party into the far country, and fold out without them."
+     ]
+    },
+    {
+     "id": "film_span_spirit_8",
+     "visual": "place",
+     "place": "the_unlanded",
+     "lines": [
+      "The Unlanded have walked so long they cannot stop.",
+      "Meeting them on a road is one of the loneliest things there is."
+     ]
+    },
+    {
+     "id": "film_span_spirit_9",
+     "visual": "region",
+     "place": "the_long_span",
+     "lines": [
+      "Past the edge of the map there is no quick way back.",
+      "Horizon-Walkers are famously bad at staying."
+     ]
+    },
+    {
+     "id": "film_span_spirit_10",
+     "visual": "figure",
+     "figure": "aro_horizon",
+     "lines": [
+      "Aro of the Horizon Reach has never been hit on the Coliseum's sand.",
+      "He wants someone fast enough to make it a bout."
+     ]
+    },
+    {
+     "id": "film_span_spirit_11",
+     "visual": "arc",
+     "arc": "arc_the_widening",
+     "lines": [
+      "Lately the roads are longer. People who part are not meeting again."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "across_span",
+   "name": "Across Span",
+   "shots": [
+    {
+     "id": "film_span_spirit_12",
+     "visual": "axis",
+     "traditions": [
+      "horizon",
+      "hourkeeper"
+     ],
+     "lines": [
+      "The Horizon-Walker refuses distance. The Hourkeeper refuses duration.",
+      "Both are arguments with a limit, and both eventually win."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "hourkeeper",
+   "name": "The Hourkeepers",
+   "shots": [
+    {
+     "id": "film_span_spirit_13",
+     "visual": "place",
+     "place": "the_slow_hour",
+     "lines": [
+      "The Slow Hour: clock-towers, all slightly out of step.",
+      "The Hourkeepers remember, and remember forward, and pay for both."
+     ]
+    },
+    {
+     "id": "film_span_spirit_14",
+     "visual": "ring",
+     "traditions": [
+      "hourkeeper"
+     ],
+     "lines": [
+      "They are the saddest people in the world and among the kindest, because they know how much time everything has."
+     ]
+    },
+    {
+     "id": "film_span_spirit_15",
+     "visual": "place",
+     "place": "the_forward_archive",
+     "lines": [
+      "The Forward Archive files what has not happened yet.",
+      "The wrong entries are kept too. They are the most-read shelves."
+     ]
+    },
+    {
+     "id": "film_span_spirit_16",
+     "visual": "ring",
+     "traditions": [
+      "hourkeeper"
+     ],
+     "lines": [
+      "Keepers give time. Watchers keep the long vigil."
+     ],
+     "after": [
+      "The Hour-Thieves stretch a person's worst moment until it breaks them."
+     ]
+    },
+    {
+     "id": "film_span_spirit_17",
+     "visual": "place",
+     "place": "the_stopped",
+     "lines": [
+      "The Stopped have held one hour so hard they are still inside it.",
+      "They have been in it for two hundred years."
+     ]
+    },
+    {
+     "id": "film_span_spirit_18",
+     "visual": "region",
+     "place": "the_slow_hour",
+     "lines": [
+      "Foreseeing binds: what you have seen changes what you do, and so changes what you saw."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "numinous",
+   "name": "The Numinous",
+   "shots": [
+    {
+     "id": "film_span_spirit_19",
+     "visual": "place",
+     "place": "the_thinning",
+     "lines": [
+      "The Numinous live at the Thinning, where the Veil is thin enough to feel.",
+      "Nothing there is set in foundations."
+     ]
+    },
+    {
+     "id": "film_span_spirit_20",
+     "visual": "ring",
+     "traditions": [
+      "numinous"
+     ],
+     "lines": [
+      "Attend to something completely enough, and the material softens around what it means."
+     ]
+    },
+    {
+     "id": "film_span_spirit_21",
+     "visual": "place",
+     "place": "the_lampless_hermitage",
+     "lines": [
+      "At the Lampless Hermitage they sit for years doing what looks like nothing.",
+      "It is the hardest thing anyone in this world attempts."
+     ]
+    },
+    {
+     "id": "film_span_spirit_22",
+     "visual": "ring",
+     "traditions": [
+      "numinous"
+     ],
+     "lines": [
+      "Attenders hold meaning open. It must be there already: they gather it, and rarely make it."
+     ],
+     "after": [
+      "The Dimmers take it out of a life, and leave the life working and empty."
+     ]
+    },
+    {
+     "id": "film_span_spirit_23",
+     "visual": "place",
+     "place": "the_numen",
+     "lines": [
+      "At the far end, the Numen: empty halls, and people gone too far into the practice to come back.",
+      "They are the most peaceful thing in the world. That is the problem."
+     ]
+    },
+    {
+     "id": "film_span_spirit_24",
+     "visual": "figure",
+     "figure": "warden_isolde",
+     "lines": [
+      "Warden Isolde keeps the Green Accord at Thornwake Glade.",
+      "She tests intent before skill, and welcome before trust."
+     ]
+    },
+    {
+     "id": "film_span_spirit_25",
+     "visual": "axis",
+     "traditions": [
+      "numinous",
+      "enginewright"
+     ],
+     "lines": [
+      "The Enginewright repairs what is broken. The Numinous hold open what is closing."
+     ],
+     "after": [
+      "Now the Great Engine is waking old works the Numinous say must stay asleep."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "close",
+   "name": "The empty chair",
+   "shots": [
+    {
+     "id": "film_span_spirit_26",
+     "visual": "place",
+     "place": "the_slow_hour",
+     "lines": [
+      "In the Slow Hour's council, one chair is always kept empty,",
+      "for someone who has not arrived yet."
+     ]
+    }
+   ]
+  }
+ ],
+ "title": {
+  "line1": "Span and Spirit",
+  "line2": "The far road, the long hour, the thin place",
+  "seconds": 6,
+  "visual": "title"
+ }
+}

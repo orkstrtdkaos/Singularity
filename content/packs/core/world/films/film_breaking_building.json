@@ -1,0 +1,327 @@
+{
+ "schemaVersion": 1,
+ "id": "film_breaking_building",
+ "kind": "film",
+ "name": "Breaking and Building",
+ "_what": "Info film for the Breaking / Building domain: the Marchers and the Stillhold (violence and peace), the Unmakers and the Wrights of the New (ending and making), their homes, schools, costs, a figure or two each, the two arguments across the axes, and a close on the Marchward. Every string in lines, after, name and title is player-facing.",
+ "_canon": "tradition_profiles_f1.json traditions[marcher,stillhold,unmaker,wright]: theCraft, oneLine, theTrade, acrossTheAxis, distribution.modes/tail; locations_f1.json descriptionSeed/appearance for the_redline, the_stillhold, the_scour, the_clearing_ground, the_scouring, the_forge_eternal, the_half_cathedral, the_ceaseless, the_marchward, hardline; reach_riven_marches_f1.json descriptionSeed/encounterFlavor; npcs_f1.json role/wants/fears/poleSignature.tell/appearance for veyra_lance, dame_iseult_hardline, vantia_stillhold, master_endmore, planmaster_wyncote; powers_f1.json plainly/descriptionSeed/appearance/holds for power_stillhold_calm, power_the_scour, power_scaffold_court, power_the_ceaseless, power_ender_host; greater_arcs_f1.json arc_the_poles_pull stage 1 publicFace; EXESA_o1.md VI/VII; PLAYERS_GUIDE_f1.md XII. Per-shot sources in film_breaking_building_sources.md.",
+ "pacing": {
+  "secondsBase": 1.6,
+  "secondsPerWord": 0.28,
+  "fadeSeconds": 1.2
+ },
+ "unlock": {
+  "traditions": [
+   "marcher",
+   "unmaker",
+   "wright",
+   "stillhold"
+  ],
+  "places": [
+   "the_redline",
+   "the_stillhold",
+   "the_scour",
+   "the_forge_eternal"
+  ]
+ },
+ "movements": [
+  {
+   "id": "domain",
+   "name": "Breaking and Building",
+   "shots": [
+    {
+     "id": "film_breaking_building_1",
+     "visual": "ring",
+     "traditions": [
+      "marcher",
+      "stillhold",
+      "unmaker",
+      "wright"
+     ],
+     "lines": [
+      "Four peoples work where things break and where things are built.",
+      "Two argue about the fight, two about the made thing."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "marchers",
+   "name": "The Marchers",
+   "shots": [
+    {
+     "id": "film_breaking_building_2",
+     "visual": "place",
+     "place": "the_redline",
+     "lines": [
+      "The Redline. Duelling floors in the squares, red lines on every boundary.",
+      "Duels settle law here, and children learn the Edge like their letters."
+     ]
+    },
+    {
+     "id": "film_breaking_building_3",
+     "visual": "ring",
+     "traditions": [
+      "marcher"
+     ],
+     "lines": [
+      "The Marchers hold that force will be used whether or not anyone is skilled, and that skill keeps a fight from spreading."
+     ]
+    },
+    {
+     "id": "film_breaking_building_4",
+     "visual": "region",
+     "place": "the_redline",
+     "lines": [
+      "The Line takes the weapon rather than the life.",
+      "The Enders kept the craft and dropped the restraint."
+     ]
+    },
+    {
+     "id": "film_breaking_building_5",
+     "visual": "region",
+     "place": "the_redline",
+     "lines": [
+      "Killing where the forms forbid costs a Marcher their standing.",
+      "And being good at violence does not make you right about when to use it."
+     ]
+    },
+    {
+     "id": "film_breaking_building_6",
+     "visual": "figure",
+     "figure": "veyra_lance",
+     "lines": [
+      "Veyra of the Levelled Lance: twenty-two challenges on the Redline circuit, twenty-two stops.",
+      "What she fears is killing one."
+     ]
+    },
+    {
+     "id": "film_breaking_building_7",
+     "visual": "figure",
+     "figure": "dame_iseult_hardline",
+     "lines": [
+      "Iseult of the Kept Word rides out of Hardline with forty who swore to her, not to a lord.",
+      "She repeats your promise back before she agrees."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "stillhold",
+   "name": "The Stillhold",
+   "shots": [
+    {
+     "id": "film_breaking_building_8",
+     "visual": "place",
+     "place": "the_stillhold",
+     "lines": [
+      "The Stillhold. White walls, swept streets, gardens at every junction. No weapons, no raised voices, no violence in living memory."
+     ]
+    },
+    {
+     "id": "film_breaking_building_9",
+     "visual": "place",
+     "place": "the_stillhold",
+     "lines": [
+      "Inside the gate stands a rack of surrendered weapons that nobody comes back for.",
+      "The calm is beautiful, and slightly wrong."
+     ]
+    },
+    {
+     "id": "film_breaking_building_10",
+     "visual": "ring",
+     "traditions": [
+      "stillhold"
+     ],
+     "lines": [
+      "Here peace is a craft. Mediators bind truces to what both sides value. Interposers stand between, with their bodies.",
+      "The Quieters end a conflict by ending whoever will not stop."
+     ]
+    },
+    {
+     "id": "film_breaking_building_11",
+     "visual": "region",
+     "place": "the_stillhold",
+     "lines": [
+      "Stillcraft is slow, and it is not gentle. The Price Shown leaves a reckoning in a person that they cannot unthink."
+     ]
+    },
+    {
+     "id": "film_breaking_building_12",
+     "visual": "figure",
+     "figure": "vantia_stillhold",
+     "lines": [
+      "Vantia of the Stillhold does not advance. Nine wins in the Coliseum, and not one blow struck in attack.",
+      "Two she could not hold. She remembers both."
+     ]
+    },
+    {
+     "id": "film_breaking_building_13",
+     "visual": "axis",
+     "traditions": [
+      "marcher",
+      "stillhold"
+     ],
+     "lines": [
+      "Both are honest that violence is coming. One answers by being excellent at it, the other by making it unnecessary."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "unmakers",
+   "name": "The Unmakers",
+   "shots": [
+    {
+     "id": "film_breaking_building_14",
+     "visual": "place",
+     "place": "the_scour",
+     "lines": [
+      "The Scour. Towers taken down to clean stumps, the stone sorted and stacked beside them, the ground swept."
+     ]
+    },
+    {
+     "id": "film_breaking_building_15",
+     "visual": "ring",
+     "traditions": [
+      "unmaker"
+     ],
+     "lines": [
+      "Things end whether or not anyone is skilled about it. Ruinwork finds where a thing wants to break, and takes it apart there."
+     ]
+    },
+    {
+     "id": "film_breaking_building_16",
+     "visual": "place",
+     "place": "the_clearing_ground",
+     "lines": [
+      "To the Clearing Ground people bring what should end: a failing house, a life's work become a cage, a war.",
+      "Almost nobody thanks them."
+     ]
+    },
+    {
+     "id": "film_breaking_building_17",
+     "visual": "place",
+     "place": "the_scouring",
+     "lines": [
+      "The Enders-Well honour what they end. The Clearers halt the rot.",
+      "Up the road, the Scouring stopped asking whether a thing should end."
+     ],
+     "after": [
+      "The asking was the last thing they ended."
+     ]
+    },
+    {
+     "id": "film_breaking_building_18",
+     "visual": "region",
+     "place": "the_scour",
+     "lines": [
+      "Ruinwork cannot touch the living, and it does not un-break. Undone is still gone."
+     ]
+    },
+    {
+     "id": "film_breaking_building_19",
+     "visual": "figure",
+     "figure": "master_endmore",
+     "lines": [
+      "Master Endmore licenses every demolition in the Scour, and asks each one the same question first: should this end?"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "wrights",
+   "name": "The Wrights of the New",
+   "shots": [
+    {
+     "id": "film_breaking_building_20",
+     "visual": "place",
+     "place": "the_forge_eternal",
+     "lines": [
+      "The Forge-Eternal. Half-built cathedrals under scaffolding, cranes on the unfinished roofs.",
+      "None of it is done, and its people are so happy."
+     ]
+    },
+    {
+     "id": "film_breaking_building_21",
+     "visual": "ring",
+     "traditions": [
+      "wright"
+     ],
+     "lines": [
+      "The Wrights hold that a finished thing has stopped being alive.",
+      "Makers build and mend. Improvers make a thing better than it was."
+     ]
+    },
+    {
+     "id": "film_breaking_building_22",
+     "visual": "place",
+     "place": "the_ceaseless",
+     "lines": [
+      "At the pure pole, the Ceaseless build over each other and over anything that is there.",
+      "Their making now includes things nobody asked for."
+     ]
+    },
+    {
+     "id": "film_breaking_building_23",
+     "visual": "region",
+     "place": "the_forge_eternal",
+     "lines": [
+      "True making cannot be hurried. A masterwork can be made once, and a thing built to outlast you will."
+     ]
+    },
+    {
+     "id": "film_breaking_building_24",
+     "visual": "figure",
+     "figure": "planmaster_wyncote",
+     "lines": [
+      "Each season the best plan governs the Making. Planmaster Wyncote governs now, and hopes to lose to a plan he wishes he had drawn."
+     ]
+    },
+    {
+     "id": "film_breaking_building_25",
+     "visual": "axis",
+     "traditions": [
+      "unmaker",
+      "wright"
+     ],
+     "lines": [
+      "The Wright raises; the Unmaker ends. The same eye for structure, pointed opposite ways.",
+      "Each is the other's best consultant."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "close",
+   "name": "The March between",
+   "shots": [
+    {
+     "id": "film_breaking_building_26",
+     "visual": "arc",
+     "arc": "arc_the_poles_pull",
+     "lines": [
+      "Every Reach is leaning harder into its own extreme. Travellers say the edges of the world are getting sharper."
+     ]
+    },
+    {
+     "id": "film_breaking_building_27",
+     "visual": "region",
+     "place": "the_marchward",
+     "lines": [
+      "Between the red lines and the white walls, the Marchward stays neutral, with a warlord's fires in sight of every window."
+     ],
+     "after": [
+      "He was a Marcher once, protecting something."
+     ]
+    }
+   ]
+  }
+ ],
+ "title": {
+  "line1": "Breaking and Building",
+  "line2": "The Marchers, the Stillhold, the Unmakers, the Wrights",
+  "seconds": 6,
+  "visual": "title"
+ }
+}

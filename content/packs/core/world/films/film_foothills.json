@@ -1,0 +1,396 @@
+{
+ "schemaVersion": 1,
+ "id": "film_foothills",
+ "kind": "film",
+ "name": "The Valley and the Foothills",
+ "_what": "Info film: the Crossing, the Valley of Echoes (valleyfolk and their crafts, the Harmonic Heights, the Radiant Plateau) and the twelve foothill towns that teach a pole's craft without owning it, with the God-Named at Stair Hollow and the Bargainers at the Low Market. Ring shots light the part of the ring each folk craft descends from and each foothill teaches. Deliberately not framed on the water crisis.",
+ "_canon": "PLAYERS_GUIDE_f1.md (foothill rule and the Hardline line, Millbrook and Echo River Crossing, valley folk); EXESA_o1.md IV, VI, VII; tradition_profiles_f1.json folkCrafts harmonic, radiant_folk, valley_craft (theCraft, theTrade, whoPractices, acrossTheAxis, distribution, parents) and foothills god_named, bargainers; locations_f1.json descriptionSeed of the_crossing, millbrook, echo_river_crossing, harmonic_heights_terrace, radiant_plateau_edge and the twelve foothill waypoints; powers_f1.json power_the_ones_called and power_table_of_kept_terms (plainly, descriptionSeed); npcs_f1.json pell, the_high_luminary, dame_iseult_hardline; legends_f1.json sister_alder (signature, wants); the_twelve_reaches_f1.json the_valley_placement; greater_arcs_f1.json arc_the_widening stage 1 publicFace. Line-by-line in film_foothills_sources.md.",
+ "pacing": {
+  "secondsBase": 1.6,
+  "secondsPerWord": 0.28,
+  "fadeSeconds": 1.2
+ },
+ "unlock": {
+  "traditions": [],
+  "places": [
+   "millbrook",
+   "echo_river_crossing",
+   "harmonic_heights_terrace",
+   "radiant_plateau_edge",
+   "hardline",
+   "stair_hollow",
+   "the_low_market",
+   "kindlerow",
+   "dusklow",
+   "plainstead",
+   "greenmarch",
+   "greyhearth",
+   "thinwater",
+   "gearsflat",
+   "the_worn_yard",
+   "longshore"
+  ]
+ },
+ "movements": [
+  {
+   "id": "middle",
+   "name": "The middle",
+   "shots": [
+    {
+     "id": "film_foothills_1",
+     "visual": "place",
+     "place": "the_crossing",
+     "lines": [
+      "Every road ends at the Crossing, where no pole wins.",
+      "Nobody is from here. Everybody is here."
+     ]
+    },
+    {
+     "id": "film_foothills_2",
+     "visual": "ring",
+     "traditions": [
+      "somatic",
+      "cogitant",
+      "churnfolk",
+      "lattice",
+      "mason",
+      "figurist",
+      "umbral",
+      "blazeborn",
+      "abyssal",
+      "seraphic",
+      "unmaker",
+      "wright",
+      "threnodist",
+      "syllogist",
+      "veilwright",
+      "verist",
+      "enginewright",
+      "numinous",
+      "horizon",
+      "hourkeeper",
+      "marcher",
+      "stillhold",
+      "rootkin",
+      "ashwarden"
+     ],
+     "lines": [
+      "Outward stand the poles, each one a disposition taken all the way.",
+      "The poles are lonely places."
+     ]
+    },
+    {
+     "id": "film_foothills_3",
+     "visual": "ring",
+     "traditions": [
+      "marcher",
+      "stillhold"
+     ],
+     "lines": [
+      "Between them lie the foothills. A foothill is a place, not a people. It teaches crafts it did not invent."
+     ],
+     "after": [
+      "Hardline teaches the Edge; it does not own it."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "valley",
+   "name": "The valley floor",
+   "shots": [
+    {
+     "id": "film_foothills_4",
+     "visual": "place",
+     "place": "millbrook",
+     "lines": [
+      "The Valley of Echoes lies near the middle, where the pull is gentle.",
+      "Millbrook farms the bank of the Echo, with water wheels and a fen the road goes round."
+     ]
+    },
+    {
+     "id": "film_foothills_5",
+     "visual": "place",
+     "place": "echo_river_crossing",
+     "lines": [
+      "Everyone crosses the Echo at the old stone-and-cable bridge, which is why everyone meets there."
+     ]
+    },
+    {
+     "id": "film_foothills_6",
+     "visual": "ring",
+     "traditions": [
+      "stillhold",
+      "wright",
+      "rootkin"
+     ],
+     "lines": [
+      "Most valleyfolk follow no tradition. They know tracking, herbs, repair, riverwork, a fire people gather at.",
+      "None of it reaches past the valley. All of it works."
+     ],
+     "after": [
+      "A few turn a hunter's strike on people, and look like everyone."
+     ]
+    },
+    {
+     "id": "film_foothills_7",
+     "visual": "figure",
+     "figure": "pell",
+     "lines": [
+      "Pell Ran Marsh runs the forge at Millbrook and fights beside the people she feeds.",
+      "She looks at your hands before your face."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "heights",
+   "name": "The Harmonic Heights",
+   "shots": [
+    {
+     "id": "film_foothills_8",
+     "visual": "place",
+     "place": "harmonic_heights_terrace",
+     "lines": [
+      "On the Harmonic Heights, buildings grown from crystal hum at a pitch you feel in your teeth.",
+      "Wind chimes the size of trees tune the weather."
+     ]
+    },
+    {
+     "id": "film_foothills_9",
+     "visual": "ring",
+     "traditions": [
+      "threnodist",
+      "lattice",
+      "mason"
+     ],
+     "lines": [
+      "The Harmonic hears what a thing is made of: a wall, a crowd, a wound, a lie.",
+      "Find its note, and you can sing it steadier, quieter, or apart."
+     ]
+    },
+    {
+     "id": "film_foothills_10",
+     "visual": "region",
+     "place": "harmonic_heights_terrace",
+     "lines": [
+      "The Choir quiets rooms and steadies companies. The Silencers find the note of a heart, and hold it until it stops."
+     ],
+     "after": [
+      "Nothing a Harmonic does is quiet."
+     ]
+    },
+    {
+     "id": "film_foothills_11",
+     "visual": "region",
+     "place": "harmonic_heights_terrace",
+     "lines": [
+      "Sister Alder's ward has never broken. She arrives in the last moment before someone dies who should not."
+     ],
+     "after": [
+      "She means to be there in time, every time. She knows she cannot."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "plateau",
+   "name": "The Radiant Plateau",
+   "shots": [
+    {
+     "id": "film_foothills_12",
+     "visual": "place",
+     "place": "radiant_plateau_edge",
+     "lines": [
+      "On the Radiant Plateau, crystal towers braid the sun into working beams.",
+      "At dusk the streets glow from below."
+     ]
+    },
+    {
+     "id": "film_foothills_13",
+     "visual": "ring",
+     "traditions": [
+      "blazeborn",
+      "wright",
+      "lattice"
+     ],
+     "lines": [
+      "The Radiant works light the way a smith works metal.",
+      "What survives being seen clearly is what deserved to."
+     ]
+    },
+    {
+     "id": "film_foothills_14",
+     "visual": "region",
+     "place": "radiant_plateau_edge",
+     "lines": [
+      "Lantern-Keepers tend light and warmth. The Lance takes it to war. The Scourers burn it into an eye until nothing behind it works."
+     ],
+     "after": [
+      "And a Radiant glows. There is no hiding in it."
+     ]
+    },
+    {
+     "id": "film_foothills_15",
+     "visual": "figure",
+     "figure": "the_high_luminary",
+     "lines": [
+      "Seraphine, the High Luminary, does not argue. She explains what will happen.",
+      "She wants the valley under one hand."
+     ]
+    },
+    {
+     "id": "film_foothills_16",
+     "visual": "region",
+     "place": "echo_river_crossing",
+     "lines": [
+      "Heights and Plateau do not teach each other."
+     ],
+     "after": [
+      "The Radiant makes a thing visible. The Harmonic makes it audible, then makes it fall."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "foothills",
+   "name": "The foothills",
+   "shots": [
+    {
+     "id": "film_foothills_17",
+     "visual": "place",
+     "place": "hardline",
+     "lines": [
+      "Further out stand the foothill towns.",
+      "At Hardline, marcher and stillholder train in the same yard."
+     ]
+    },
+    {
+     "id": "film_foothills_18",
+     "visual": "figure",
+     "figure": "dame_iseult_hardline",
+     "lines": [
+      "Iseult of the Kept Word rides with forty who swore to her, and to no lord.",
+      "She repeats your promise back in your own words before she agrees."
+     ]
+    },
+    {
+     "id": "film_foothills_19",
+     "visual": "place",
+     "place": "stair_hollow",
+     "lines": [
+      "At Stair Hollow, beneath the Ascent, the God-Named hold court under names nobody can check."
+     ]
+    },
+    {
+     "id": "film_foothills_20",
+     "visual": "ring",
+     "traditions": [
+      "seraphic"
+     ],
+     "lines": [
+      "They carry the Seraphic Orders' bearing where nobody can write and ask. It works.",
+      "Some are frauds. Some were, and are not any more."
+     ],
+     "after": [
+      "Somebody, eventually, can check."
+     ]
+    },
+    {
+     "id": "film_foothills_21",
+     "visual": "place",
+     "place": "the_low_market",
+     "lines": [
+      "The Low Market is the honest end of the Descent's trade. The price is on everything."
+     ]
+    },
+    {
+     "id": "film_foothills_22",
+     "visual": "ring",
+     "traditions": [
+      "abyssal"
+     ],
+     "lines": [
+      "The Bargainers learned the struck term from the Abyssal Choir, and left the hunger behind.",
+      "They name the price before you swear, and they are watched at the table."
+     ]
+    },
+    {
+     "id": "film_foothills_23",
+     "visual": "place",
+     "place": "kindlerow",
+     "lines": [
+      "Kindlerow sells light as a trade rather than a doctrine."
+     ]
+    },
+    {
+     "id": "film_foothills_24",
+     "visual": "ring",
+     "traditions": [
+      "blazeborn",
+      "umbral",
+      "verist"
+     ],
+     "lines": [
+      "Dusklow hires you a guide into the dark, and repeats nothing.",
+      "Plainstead will just tell you who owns the field."
+     ]
+    },
+    {
+     "id": "film_foothills_25",
+     "visual": "ring",
+     "traditions": [
+      "rootkin",
+      "ashwarden",
+      "numinous",
+      "enginewright"
+     ],
+     "lines": [
+      "Greenmarch trades through the Quickwood's argument. Greyhearth buries for every road.",
+      "At Thinwater you ask about the Numen, then have lunch. Gearsflat fixes your pump."
+     ]
+    },
+    {
+     "id": "film_foothills_26",
+     "visual": "ring",
+     "traditions": [
+      "unmaker",
+      "horizon"
+     ],
+     "lines": [
+      "The Worn Yard ends things and clears the site.",
+      "At Longshore nobody asks where you are from."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "close",
+   "name": "The roads",
+   "shots": [
+    {
+     "id": "film_foothills_27",
+     "visual": "arc",
+     "arc": "arc_the_widening",
+     "lines": [
+      "Lately the roads are longer. People who part are not meeting again."
+     ]
+    },
+    {
+     "id": "film_foothills_28",
+     "visual": "many",
+     "lines": [
+      "The foothills teach whoever comes.",
+      "What holds against that is a road somebody keeps, and people who will still make the crossing."
+     ]
+    }
+   ]
+  }
+ ],
+ "title": {
+  "line1": "The Foothills",
+  "line2": "and the Valley of Echoes",
+  "seconds": 6,
+  "visual": "title"
+ }
+}

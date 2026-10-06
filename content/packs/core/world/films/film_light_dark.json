@@ -1,0 +1,327 @@
+{
+ "schemaVersion": 1,
+ "id": "film_light_dark",
+ "kind": "film",
+ "name": "Light and Dark",
+ "_what": "Info film for the Light and Dark domain: the Blazeborn, Verists, Umbrals and Veilwrights, their homes, schools, costs, extremes and the two arguments across the line; closes on the Glare and the Slow Stair landing. Unlocked by any of the four traditions or their home places.",
+ "_canon": "EXESA_o1.md VII (Light and Dark table, 'Dark is an exact mirror of Light'), V (The Poles Pull, The Glare), VI (Valen Sunwrack, the Deep Lantern); PLAYERS_GUIDE_f1.md Part XII table; tradition_profiles_f1.json traditions[blazeborn|verist|umbral|veilwright] oneLine, theCraft, theTrade, acrossTheAxis, distribution.modes/tail (no underscore fields); locations_f1.json descriptionSeed/appearance for glasshome, the_blaze, the_lensward, the_unblinking_stone, the_told_ground, the_flensing, the_underlight, the_harborward, the_unlit_deep, the_hall_of_mirrors, the_kindly_court, the_last_mask, the_slow_stair; npcs_f1.json sunwrack_valen, ceriad, illeth_turned_coat (role, appearance, voiceHints, wants only; no storyRule/questSeeds/secrets); powers_f1.json power_blaze_unshadowed.descriptionSeed, power_glass_assembly.plainly; greater_arcs_f1.json arc_the_glare stage 1 publicFace. Per-shot sourcing in film_light_dark_sources.md.",
+ "pacing": {
+  "secondsBase": 1.6,
+  "secondsPerWord": 0.28,
+  "fadeSeconds": 1.2
+ },
+ "unlock": {
+  "traditions": [
+   "blazeborn",
+   "verist",
+   "umbral",
+   "veilwright"
+  ],
+  "places": [
+   "the_blaze",
+   "glasshome",
+   "the_unblinking_stone",
+   "the_underlight",
+   "the_hall_of_mirrors"
+  ]
+ },
+ "movements": [
+  {
+   "id": "mirror",
+   "name": "Light and dark",
+   "shots": [
+    {
+     "id": "film_light_dark_1",
+     "visual": "ring",
+     "lines": [
+      "Four peoples live between light and dark.",
+      "Dark is an exact mirror of Light."
+     ],
+     "traditions": [
+      "blazeborn",
+      "verist",
+      "umbral",
+      "veilwright"
+     ]
+    },
+    {
+     "id": "film_light_dark_2",
+     "visual": "arc",
+     "lines": [
+      "Every Reach leans harder into its own extreme. The Blaze burns brighter."
+     ],
+     "arc": "arc_the_poles_pull"
+    }
+   ]
+  },
+  {
+   "id": "blazeborn",
+   "name": "The Blazeborn",
+   "shots": [
+    {
+     "id": "film_light_dark_3",
+     "visual": "place",
+     "lines": [
+      "The Blazeborn live in a light that has burned their land to glass.",
+      "Glasshome has no inside walls. To them, a room nobody can see into is a confession."
+     ],
+     "place": "glasshome"
+    },
+    {
+     "id": "film_light_dark_4",
+     "visual": "place",
+     "lines": [
+      "Beyond it lies the Blaze, its edge still fusing into glass. It comes a little further every year."
+     ],
+     "place": "the_blaze"
+    },
+    {
+     "id": "film_light_dark_5",
+     "visual": "place",
+     "lines": [
+      "At the Lensward they hold the Blaze back with lenses. It is the only place they learn tact."
+     ],
+     "place": "the_lensward"
+    },
+    {
+     "id": "film_light_dark_6",
+     "visual": "ring",
+     "lines": [
+      "The Kindlers tend fire and give it. The Burning find what is false by what burns off first.",
+      "The Assayers burn people to learn what they are. It works."
+     ],
+     "traditions": [
+      "blazeborn"
+     ]
+    },
+    {
+     "id": "film_light_dark_7",
+     "visual": "ring",
+     "lines": [
+      "A Blazeborn is always seen, and a truth burned free cannot be put back."
+     ],
+     "traditions": [
+      "blazeborn"
+     ]
+    },
+    {
+     "id": "film_light_dark_8",
+     "visual": "figure",
+     "lines": [
+      "Valen Sunwrack burned the dark out of a whole Reach and called it dawn. He casts no shadow.",
+      "Every village his zealots reach loses its curtains, its locks and its secrets."
+     ],
+     "figure": "sunwrack_valen"
+    }
+   ]
+  },
+  {
+   "id": "verists",
+   "name": "The Verists",
+   "shots": [
+    {
+     "id": "film_light_dark_9",
+     "visual": "place",
+     "lines": [
+      "The Verists live in the Unblinking Stone: no ornament, no comfort, no lies.",
+      "Many are gentle. They will still tell you what nobody has told you, on the day you meet."
+     ],
+     "place": "the_unblinking_stone"
+    },
+    {
+     "id": "film_light_dark_10",
+     "visual": "place",
+     "lines": [
+      "The Told Ground is a field of stones, each carrying one true sentence somebody could not say in life.",
+      "Nobody may remove one. The Verists picnic there."
+     ],
+     "place": "the_told_ground"
+    },
+    {
+     "id": "film_light_dark_11",
+     "visual": "ring",
+     "lines": [
+      "The Witnesses establish what is so. The Plain live by it.",
+      "Verity does not choose whose secret surfaces. You can be right and change nothing."
+     ],
+     "traditions": [
+      "verist"
+     ]
+    },
+    {
+     "id": "film_light_dark_12",
+     "visual": "place",
+     "lines": [
+      "At the Flensing they tell everyone everything and call the ruin honesty.",
+      "They are not lying. That is the whole horror of them."
+     ],
+     "place": "the_flensing"
+    }
+   ]
+  },
+  {
+   "id": "umbrals",
+   "name": "The Umbrals",
+   "shots": [
+    {
+     "id": "film_light_dark_13",
+     "visual": "place",
+     "lines": [
+      "The Umbrals see by other means. Their city, the Underlight, has windows that face only more dark.",
+      "Nobody there is hiding. They are home."
+     ],
+     "place": "the_underlight"
+    },
+    {
+     "id": "film_light_dark_14",
+     "visual": "place",
+     "lines": [
+      "At the Harborward they keep what the light would burn. Some of it should not be kept.",
+      "They keep it anyway. The alternative is a place that decides."
+     ],
+     "place": "the_harborward"
+    },
+    {
+     "id": "film_light_dark_15",
+     "visual": "figure",
+     "lines": [
+      "Ceriad keeps the Harborward. She never asks what you did."
+     ],
+     "figure": "ceriad"
+    },
+    {
+     "id": "film_light_dark_16",
+     "visual": "ring",
+     "lines": [
+      "The Harbor hides people. The Quiet Hands move the unseen trade.",
+      "Their craft shelters and hides, and loses to anyone who can simply make the room bright."
+     ],
+     "traditions": [
+      "umbral"
+     ]
+    },
+    {
+     "id": "film_light_dark_17",
+     "visual": "place",
+     "lines": [
+      "Past the harbor the dark stops being a home and becomes a doctrine. The Unlit would put out every light in the world."
+     ],
+     "place": "the_unlit_deep"
+    },
+    {
+     "id": "film_light_dark_18",
+     "visual": "axis",
+     "lines": [
+      "The Blazeborn believe what survives being seen is what deserved to.",
+      "The Umbrals know who that argument has been used against."
+     ],
+     "traditions": [
+      "blazeborn",
+      "umbral"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "veilwrights",
+   "name": "The Veilwrights",
+   "shots": [
+    {
+     "id": "film_light_dark_19",
+     "visual": "place",
+     "lines": [
+      "In the Hall of Mirrors every truth is a made thing, so the Veilwrights make better ones.",
+      "Everyone is scrupulously honest about the fact that they are lying."
+     ],
+     "place": "the_hall_of_mirrors"
+    },
+    {
+     "id": "film_light_dark_20",
+     "visual": "ring",
+     "lines": [
+      "The Storytellers find the better story. The Falsewrights build covers that hold.",
+      "Their best liars are their best detectors. They know the joinery."
+     ],
+     "traditions": [
+      "veilwright"
+     ]
+    },
+    {
+     "id": "film_light_dark_21",
+     "visual": "place",
+     "lines": [
+      "At the Kindly Court they build a truth a person can survive today, until they can bear the real one.",
+      "The Verists call it the greatest lie of all."
+     ],
+     "place": "the_kindly_court"
+    },
+    {
+     "id": "film_light_dark_22",
+     "visual": "figure",
+     "lines": [
+      "Illeth, Queen of the Turned Coat, welcomes every guest. None may leave until they have told a true story."
+     ],
+     "figure": "illeth_turned_coat"
+    },
+    {
+     "id": "film_light_dark_23",
+     "visual": "place",
+     "lines": [
+      "Tell a lie well enough and you may forget it was one.",
+      "At the Last Mask no original remains under the masks, and you cannot check."
+     ],
+     "place": "the_last_mask"
+    },
+    {
+     "id": "film_light_dark_24",
+     "visual": "axis",
+     "lines": [
+      "Falsecraft asks what a person can carry. Verity asks what is so.",
+      "Neither has won. Both keep producing people the other saved."
+     ],
+     "traditions": [
+      "verist",
+      "veilwright"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "close",
+   "name": "The landing",
+   "shots": [
+    {
+     "id": "film_light_dark_25",
+     "visual": "arc",
+     "lines": [
+      "People confess before they are asked. The light is offered as safety, and it does not switch off."
+     ],
+     "arc": "arc_the_glare"
+    },
+    {
+     "id": "film_light_dark_26",
+     "visual": "many",
+     "lines": [
+      "Between the two extremes, refusing both, walks the Deep Lantern. She sees without light.",
+      "She holds no side, which is why either extreme starves against her."
+     ]
+    },
+    {
+     "id": "film_light_dark_27",
+     "visual": "place",
+     "lines": [
+      "Halfway up the Slow Stair, people from the dark and people from the light share a landing and wait for their eyes.",
+      "It is the most honest room in the world."
+     ],
+     "place": "the_slow_stair"
+    }
+   ]
+  }
+ ],
+ "title": {
+  "line1": "Light and Dark",
+  "line2": "The Blazeborn, the Verists, the Umbrals, the Veilwrights",
+  "seconds": 6,
+  "visual": "title"
+ }
+}

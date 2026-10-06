@@ -1,0 +1,316 @@
+{
+ "schemaVersion": 1,
+ "id": "film_angelic_demonic",
+ "kind": "film",
+ "name": "The Ascent and the Descent",
+ "_what": "Info film for the Angelic and Demonic domain: the Seraphic Orders (Choir-Height) and the Abyssal Choir (the Bargain Gate and the Maw), per films/BRIEF.md.",
+ "_canon": "tradition_profiles_f1.json traditions[seraphic,abyssal] (oneLine, theCraft, theTrade, whoPractices, acrossTheAxis, distribution.modes/tail); locations_f1.json descriptionSeed/appearance for choirheight, choirheight_gate_yard, the_mercy_house, the_unfallen, the_bargain_gate, the_bargain_gate_gate_yard, the_appetite_halls, the_maw, stair_hollow, the_low_market; npcs_f1.json hierarch_brightmantle, speaker_istvane (role, appearance, knowledge); powers_f1.json power_seraphic_orders and power_hollow_court (plainly, descriptionSeed, bodies, appearance); EXESA_o1.md III and the Angelic/Demonic table; greater_arcs_f1.json arc_the_poles_pull stage 1 publicFace. No underscore, gm, secrets or notes fields used.",
+ "pacing": {
+  "secondsBase": 1.6,
+  "secondsPerWord": 0.28,
+  "fadeSeconds": 1.2
+ },
+ "unlock": {
+  "traditions": [
+   "seraphic",
+   "abyssal"
+  ],
+  "places": [
+   "choirheight",
+   "the_maw"
+  ]
+ },
+ "movements": [
+  {
+   "id": "two_ends",
+   "name": "Two ends of one argument",
+   "shots": [
+    {
+     "id": "film_angelic_demonic_1",
+     "visual": "ring",
+     "lines": [
+      "The old books called the two sides angels and demons.",
+      "Two peoples stand at those ends now: one goes up, one goes down."
+     ],
+     "traditions": [
+      "seraphic",
+      "abyssal"
+     ]
+    },
+    {
+     "id": "film_angelic_demonic_2",
+     "visual": "veil",
+     "lines": [
+      "The Abyssals draw on the far side directly, being the other half of the same argument."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ascent",
+   "name": "The Ascent",
+   "shots": [
+    {
+     "id": "film_angelic_demonic_3",
+     "visual": "source",
+     "lines": [
+      "The Seraphic Orders are human. Ordered nanite has made them radiant, and they bleed gold."
+     ],
+     "after": [
+      "They take wild nanite and put it in order."
+     ],
+     "source": "nanite_ordered"
+    },
+    {
+     "id": "film_angelic_demonic_4",
+     "visual": "place",
+     "lines": [
+      "Choir-Height: white spires in stepped rings, gold light from the high arches, and a choral certainty that is hard to bear."
+     ],
+     "place": "choirheight"
+    },
+    {
+     "id": "film_angelic_demonic_5",
+     "visual": "place",
+     "lines": [
+      "Arrivals come in at the foot, in the Lower Court, where the sisters watch who flinches."
+     ],
+     "after": [
+      "You may go up. You will be looked at first."
+     ],
+     "place": "choirheight_gate_yard"
+    },
+    {
+     "id": "film_angelic_demonic_6",
+     "visual": "region",
+     "lines": [
+      "A Seraph sees what a person has done and what they still carry, and lifts it, or pronounces on it."
+     ],
+     "after": [
+      "Neither is gentle."
+     ],
+     "place": "choirheight"
+    },
+    {
+     "id": "film_angelic_demonic_7",
+     "visual": "place",
+     "lines": [
+      "The Mercy-House keeps its doors open. A Seraph who lifts a weight carries it after. The house is full of them, still standing."
+     ],
+     "place": "the_mercy_house"
+    },
+    {
+     "id": "film_angelic_demonic_8",
+     "visual": "ring",
+     "lines": [
+      "Almost nothing runs unbroken from the world before the Transition. The Orders do.",
+      "Most judge and charter. A few, the Vessel-Keepers, keep the long-lived going."
+     ],
+     "traditions": [
+      "seraphic"
+     ]
+    },
+    {
+     "id": "film_angelic_demonic_9",
+     "visual": "figure",
+     "lines": [
+      "Hierarch Brightmantle governs from Choir-Height. Her mercy costs her, and it shows at the eyes."
+     ],
+     "after": [
+      "She knows what each Seraph has left to give."
+     ],
+     "figure": "hierarch_brightmantle"
+    },
+    {
+     "id": "film_angelic_demonic_10",
+     "visual": "region",
+     "lines": [
+      "Inside the Orders an inquisition gains ground: a higher law with no mercy under it.",
+      "Some pronounce the Sentence: judgment on someone who never agreed to be weighed, binding whether or not it is true."
+     ],
+     "place": "choirheight"
+    },
+    {
+     "id": "film_angelic_demonic_11",
+     "visual": "place",
+     "lines": [
+      "Higher still burn the Unfallen, who hold that mercy without judgment is complicity."
+     ],
+     "after": [
+      "Their walls are blackened on the facing sides."
+     ],
+     "place": "the_unfallen"
+    },
+    {
+     "id": "film_angelic_demonic_12",
+     "visual": "region",
+     "lines": [
+      "They weigh anyone, at any distance, without their knowing.",
+      "A judgment that binds cannot be taken back. A mercy given wrongly is still given."
+     ],
+     "place": "the_mercy_house"
+    }
+   ]
+  },
+  {
+   "id": "descent",
+   "name": "The Descent",
+   "shots": [
+    {
+     "id": "film_angelic_demonic_13",
+     "visual": "place",
+     "lines": [
+      "Across the world stands the Bargain Gate: horned gables, dark stone, stone tables set out in the open."
+     ],
+     "place": "the_bargain_gate"
+    },
+    {
+     "id": "film_angelic_demonic_14",
+     "visual": "ring",
+     "lines": [
+      "The Abyssal Choir names what you actually want, and its true price. Both sides pay."
+     ],
+     "after": [
+      "The bargains are perfectly fair. That is the horror."
+     ],
+     "traditions": [
+      "abyssal"
+     ]
+    },
+    {
+     "id": "film_angelic_demonic_15",
+     "visual": "place",
+     "lines": [
+      "On the Asking Floor every price is written on the wall a yard high."
+     ],
+     "after": [
+      "Armies are offered terms. Most take them."
+     ],
+     "place": "the_bargain_gate_gate_yard"
+    },
+    {
+     "id": "film_angelic_demonic_16",
+     "visual": "place",
+     "lines": [
+      "In the Appetite-Halls the Choir says aloud the wants people cannot admit to."
+     ],
+     "after": [
+      "Nobody is forgiven. Some call it the most liberating hour of their lives. Some never recover."
+     ],
+     "place": "the_appetite_halls"
+    },
+    {
+     "id": "film_angelic_demonic_17",
+     "visual": "region",
+     "lines": [
+      "Most of the Choir are traders. Others work the Hollow, naming a want the way a healer names a sickness."
+     ],
+     "place": "the_appetite_halls"
+    },
+    {
+     "id": "film_angelic_demonic_18",
+     "visual": "figure",
+     "lines": [
+      "Speaker Istvane hears every petition in public and sets terms that are always exactly fair."
+     ],
+     "after": [
+      "Beside him is an empty chair he never looks at."
+     ],
+     "figure": "speaker_istvane"
+    },
+    {
+     "id": "film_angelic_demonic_20",
+     "visual": "place",
+     "lines": [
+      "Below, the Maw: a city built downward around a shaft, its lights fewer the deeper it goes."
+     ],
+     "after": [
+      "The Devouring there have stopped bargaining, because a bargain implies a price."
+     ],
+     "place": "the_maw"
+    },
+    {
+     "id": "film_angelic_demonic_21",
+     "visual": "region",
+     "lines": [
+      "Anyone who says the abyss cannot compel has met only its traders."
+     ],
+     "after": [
+      "The Maw prices a bargain against what cannot be refused: a child, a name, a breath."
+     ],
+     "place": "the_maw"
+    },
+    {
+     "id": "film_angelic_demonic_22",
+     "visual": "region",
+     "lines": [
+      "A bargain catches only someone who already wanted it. And what the abyss eats does not come back."
+     ],
+     "place": "the_bargain_gate"
+    }
+   ]
+  },
+  {
+   "id": "between",
+   "name": "Between",
+   "shots": [
+    {
+     "id": "film_angelic_demonic_23",
+     "visual": "axis",
+     "lines": [
+      "The Ascent weighs what you have done. The Descent names what you want."
+     ],
+     "after": [
+      "Only one of them offers you a deal."
+     ],
+     "traditions": [
+      "seraphic",
+      "abyssal"
+     ]
+    },
+    {
+     "id": "film_angelic_demonic_24",
+     "visual": "place",
+     "lines": [
+      "Below the Ascent, at Stair Hollow, you can bring a case, lose, and go home."
+     ],
+     "place": "stair_hollow"
+    },
+    {
+     "id": "film_angelic_demonic_25",
+     "visual": "place",
+     "lines": [
+      "Short of the Maw, at the Low Market, everything is for sale and the price is on it."
+     ],
+     "place": "the_low_market"
+    },
+    {
+     "id": "film_angelic_demonic_26",
+     "visual": "arc",
+     "lines": [
+      "Each Reach is leaning harder into its own extreme. At the top the walls scorch. At the bottom the lights thin."
+     ],
+     "arc": "arc_the_poles_pull"
+    },
+    {
+     "id": "film_angelic_demonic_27",
+     "visual": "axis",
+     "lines": [
+      "One will weigh you. One will name what you want. Neither waits to be asked."
+     ],
+     "traditions": [
+      "seraphic",
+      "abyssal"
+     ],
+     "seconds": 5
+    }
+   ]
+  }
+ ],
+ "title": {
+  "line1": "Angelic and Demonic",
+  "line2": "The Seraphic Orders and the Abyssal Choir",
+  "seconds": 6,
+  "visual": "title"
+ }
+}

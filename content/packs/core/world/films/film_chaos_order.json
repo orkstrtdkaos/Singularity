@@ -1,0 +1,314 @@
+{
+ "schemaVersion": 1,
+ "id": "film_chaos_order",
+ "kind": "film",
+ "name": "Chaos and Order",
+ "_what": "Info film for the Chaos/Order domain: the Churnfolk, the Enginewrights and the Lattice-Cities, the wild/ordered nanite quarrel, the two courts of the Churn, and the room on no plan.",
+ "_canon": "EXESA_o1.md (III conversion, V poles, VI two courts, Rethe, Cassa, Harrow, VII domain table); tradition_profiles_f1.json traditions[churnfolk,enginewright,lattice] theCraft/oneLine/theTrade/distribution/acrossTheAxis, powerSources[wild_current]; locations_f1.json descriptionSeed/appearance; npcs_f1.json role/wants/voiceHints/appearance; powers_f1.json plainly/descriptionSeed; the_twelve_reaches_f1.json chaos_order crisis; greater_arcs_f1.json arc_the_poles_pull stage 1 publicFace. Per-shot map in film_chaos_order_sources.md.",
+ "pacing": {
+  "secondsBase": 1.6,
+  "secondsPerWord": 0.28,
+  "fadeSeconds": 1.2
+ },
+ "unlock": {
+  "traditions": [
+   "churnfolk",
+   "enginewright",
+   "lattice"
+  ],
+  "places": [
+   "the_churn_edge",
+   "pressureholt",
+   "the_great_engine",
+   "tier_seven",
+   "the_grand_lattice"
+  ]
+ },
+ "movements": [
+  {
+   "id": "road",
+   "name": "Chaos and Order",
+   "shots": [
+    {
+     "id": "film_chaos_order_1",
+     "visual": "ring",
+     "lines": [
+      "Between chaos and order runs a long road.",
+      "At one end nothing keeps its shape. At the other, nothing is unplanned."
+     ],
+     "traditions": [
+      "churnfolk",
+      "enginewright",
+      "lattice"
+     ]
+    },
+    {
+     "id": "film_chaos_order_2",
+     "visual": "source",
+     "lines": [
+      "Under both ends runs the same nanite, in two states.",
+      "Ordered, it goes where it is put. Wild, it thrives in the gaps nobody keeps."
+     ],
+     "source": "nanite_ordered"
+    },
+    {
+     "id": "film_chaos_order_3",
+     "visual": "source",
+     "lines": [
+      "The Churnfolk break ordered nanite back to wild. The Enginewrights order the wild again.",
+      "Nobody calls it a war. It is an argument about who decides what a place is for."
+     ],
+     "source": "nanite_wild"
+    }
+   ]
+  },
+  {
+   "id": "churnfolk",
+   "name": "The Churnfolk",
+   "shots": [
+    {
+     "id": "film_chaos_order_4",
+     "visual": "place",
+     "lines": [
+      "The Churn Edge.",
+      "Things here are mostly reliable, which means they were reliable the last time anyone checked."
+     ],
+     "place": "the_churn_edge"
+    },
+    {
+     "id": "film_chaos_order_5",
+     "visual": "ring",
+     "lines": [
+      "The Churnfolk ride luck and read the grain of a thing as it comes apart.",
+      "They are best where the plan has stopped working."
+     ],
+     "traditions": [
+      "churnfolk"
+     ]
+    },
+    {
+     "id": "film_chaos_order_6",
+     "visual": "place",
+     "lines": [
+      "Tumbledown has never been in the same place twice.",
+      "You can find anything there once. You can never find it twice."
+     ],
+     "place": "tumbledown_market"
+    },
+    {
+     "id": "film_chaos_order_7",
+     "visual": "ring",
+     "lines": [
+      "Improvisers thrive where others founder. Riders surf the collapse. Unspoolers break things for the joy of it."
+     ],
+     "after": [
+      "None of it works the same way twice."
+     ],
+     "traditions": [
+      "churnfolk"
+     ]
+    },
+    {
+     "id": "film_chaos_order_8",
+     "visual": "figure",
+     "lines": [
+      "Cassa Redsail takes ships nobody insures.",
+      "She wants one take big enough to stop. She has said that four times."
+     ],
+     "figure": "cassa_redsail"
+    },
+    {
+     "id": "film_chaos_order_9",
+     "visual": "region",
+     "lines": [
+      "Deeper in, in the wildest place in the world, there are two courts.",
+      "One keeps every promise to the letter, at a price named aloud. You leave richer, and hollowed."
+     ],
+     "place": "the_churn_edge"
+    },
+    {
+     "id": "film_chaos_order_10",
+     "visual": "figure",
+     "lines": [
+      "The other will not trade at all.",
+      "Urd Stonefast has built the same hall for two hundred years, and rebuilds it each time the Churn takes it, cheerfully."
+     ],
+     "figure": "stonefast_urd"
+    }
+   ]
+  },
+  {
+   "id": "enginewrights",
+   "name": "The Enginewrights",
+   "shots": [
+    {
+     "id": "film_chaos_order_11",
+     "visual": "place",
+     "lines": [
+      "Pressureholt is a city that is also a machine.",
+      "Its people are warm, and it comes out as maintenance: they will mend your boots, your argument and your marriage, unasked."
+     ],
+     "place": "pressureholt"
+    },
+    {
+     "id": "film_chaos_order_12",
+     "visual": "figure",
+     "lines": [
+      "Chief Kettering keeps the Schedule.",
+      "She asks when you will be leaving before she asks your name, and means it kindly."
+     ],
+     "figure": "chief_kettering"
+    },
+    {
+     "id": "film_chaos_order_13",
+     "visual": "ring",
+     "lines": [
+      "Enginecraft reads what a mechanism is for, and tells it what to become.",
+      "The old doors under the world still half-listen to them."
+     ],
+     "traditions": [
+      "enginewright"
+     ]
+    },
+    {
+     "id": "film_chaos_order_14",
+     "visual": "place",
+     "lines": [
+      "The Great Engine: a mechanism the size of a mountain range, still running.",
+      "Here everything is a machine, including you."
+     ],
+     "place": "the_great_engine"
+    },
+    {
+     "id": "film_chaos_order_15",
+     "visual": "region",
+     "lines": [
+      "Mechanists mend and command. Deep-Workers make great works that change the maker.",
+      "The craft needs a mechanism to talk to. The wild gives it nothing to hold."
+     ],
+     "place": "the_great_engine"
+    },
+    {
+     "id": "film_chaos_order_16",
+     "visual": "figure",
+     "lines": [
+      "Each person he improves becomes a device with a function, and thanks him."
+     ],
+     "after": [
+      "He wants a world of perfect mechanisms, people included."
+     ],
+     "figure": "harrow_the_hollowing"
+    },
+    {
+     "id": "film_chaos_order_17",
+     "visual": "region",
+     "lines": [
+      "Rethe is becoming the Engine, part by considered part, and still asks to be talked out of it.",
+      "That asking is the whole of him."
+     ],
+     "place": "the_great_engine"
+    }
+   ]
+  },
+  {
+   "id": "lattice",
+   "name": "The Lattice-Cities",
+   "shots": [
+    {
+     "id": "film_chaos_order_18",
+     "visual": "place",
+     "lines": [
+      "One floor of one arcology. Work, meals, rest: all planned, all better than you would have chosen."
+     ],
+     "after": [
+      "The people will tell you so, and it is true."
+     ],
+     "place": "tier_seven"
+    },
+    {
+     "id": "film_chaos_order_19",
+     "visual": "ring",
+     "lines": [
+      "Latticework binds possibility down until it is reliably true. What it binds stays bound.",
+      "It cannot improvise. Anything that has to grow resists it."
+     ],
+     "traditions": [
+      "lattice"
+     ]
+    },
+    {
+     "id": "film_chaos_order_20",
+     "visual": "region",
+     "lines": [
+      "Orderers set things right. Registrars keep the charter and the claim.",
+      "Fixers bind a person to the approved possibilities, from outside, without asking."
+     ],
+     "place": "tier_seven"
+    },
+    {
+     "id": "film_chaos_order_21",
+     "visual": "place",
+     "lines": [
+      "The Grand Lattice, where order became a faith.",
+      "Nothing is unplanned and nothing is free, and the second is the point."
+     ],
+     "place": "the_grand_lattice"
+    },
+    {
+     "id": "film_chaos_order_22",
+     "visual": "figure",
+     "lines": [
+      "Corvane, the Deep Warden, goes into the old works where no one returns from, and returns.",
+      "The lattice shows at their edges now."
+     ],
+     "figure": "the_deep_warden"
+    }
+   ]
+  },
+  {
+   "id": "open",
+   "name": "The room on no plan",
+   "shots": [
+    {
+     "id": "film_chaos_order_23",
+     "visual": "axis",
+     "lines": [
+      "Wildcraft rides collapse. Latticework prevents it. Each is strongest where the other is blind."
+     ],
+     "after": [
+      "The Lattice spreads its order outward and calls it peace. The Churn is the last place it cannot predict."
+     ],
+     "traditions": [
+      "churnfolk",
+      "lattice"
+     ]
+    },
+    {
+     "id": "film_chaos_order_24",
+     "visual": "arc",
+     "lines": [
+      "Each Reach is leaning harder into its own extreme. The edges of the world are getting sharper."
+     ],
+     "arc": "arc_the_poles_pull"
+    },
+    {
+     "id": "film_chaos_order_25",
+     "visual": "place",
+     "lines": [
+      "In the Grand Lattice there is one room on no plan. Nobody knows who made it."
+     ],
+     "after": [
+      "People go there, and come back unable to say what for."
+     ],
+     "place": "the_unplanned_room"
+    }
+   ]
+  }
+ ],
+ "title": {
+  "line1": "Chaos and Order",
+  "line2": "The Churn, the Engine, the Lattice",
+  "seconds": 6,
+  "visual": "title"
+ }
+}

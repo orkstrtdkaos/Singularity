@@ -1,0 +1,359 @@
+{
+ "schemaVersion": 1,
+ "id": "film_mind_body",
+ "kind": "film",
+ "name": "Mind and Body",
+ "_what": "Info film for the Mind and Body domain: its five peoples (Cogitants, Somatics, Syllogists, Figurists, Masons of the Give), their homes, costs, heretics or pure poles, one figure each, and the two cross-axis arguments. Every string in lines, after, name and title is player-facing.",
+ "_canon": "tradition_profiles_f1.json traditions[cogitant,somatic,syllogist,figurist,mason] oneLine/theCraft/theTrade/acrossTheAxis/distribution; locations_f1.json descriptionSeed/appearance for the_cogitarium, the_flesh_temple, the_middle_way, the_axiom, the_axiom_gate_yard, the_proof_halls, the_bloodless_hold, cloudform, the_figure_works, bedrock, the_weighing_yard, the_leaden_deep, the_held_yard; npcs_f1.json role/wants/appearance/voiceHints/physicality/poleSignature for sesh_the_quiet_blow, marn_two_forms, quillon_vey_unending, seren_unlooked_at, asterion_given_maze; powers_f1.json plainly/descriptionSeed for power_flesh_temple, power_vacated_custody; the_twelve_reaches_f1.json body_mind crisis/environs; greater_arcs_f1.json arc_the_poles_pull stage 1 publicFace; EXESA_o1.md IV, V, VI, VII; PLAYERS_GUIDE_f1.md accords. Per-shot map in film_mind_body_sources.md.",
+ "pacing": {
+  "secondsBase": 1.6,
+  "secondsPerWord": 0.28,
+  "fadeSeconds": 1.2
+ },
+ "unlock": {
+  "traditions": [
+   "cogitant",
+   "syllogist",
+   "figurist",
+   "somatic",
+   "mason"
+  ],
+  "places": [
+   "the_cogitarium",
+   "the_flesh_temple",
+   "the_axiom",
+   "cloudform",
+   "bedrock"
+  ]
+ },
+ "movements": [
+  {
+   "id": "axis",
+   "name": "Mind and Body",
+   "shots": [
+    {
+     "id": "film_mind_body_1",
+     "visual": "ring",
+     "traditions": [
+      "cogitant",
+      "syllogist",
+      "figurist",
+      "somatic",
+      "mason"
+     ],
+     "lines": [
+      "Mind and body: five peoples.",
+      "Three belong to Mind, the only domain with three sects and three sources of power."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cogitants",
+   "name": "The Cogitants",
+   "shots": [
+    {
+     "id": "film_mind_body_2",
+     "visual": "place",
+     "place": "the_cogitarium",
+     "lines": [
+      "The Cogitarium.",
+      "Pale halls float above open ground. Beneath them, nothing."
+     ]
+    },
+    {
+     "id": "film_mind_body_3",
+     "visual": "ring",
+     "traditions": [
+      "cogitant"
+     ],
+     "lines": [
+      "Cogitants train memory, focus and reason until thought acts on the world.",
+      "Sharp, not wise. They are clear about the difference."
+     ],
+     "after": [
+      "Their heretics, the Openers, read minds that never opened."
+     ]
+    },
+    {
+     "id": "film_mind_body_4",
+     "visual": "region",
+     "place": "the_cogitarium",
+     "lines": [
+      "They have nearly left their bodies behind, and they are dying of it.",
+      "Custodians keep the bodies, bed after bed, for a fee."
+     ]
+    },
+    {
+     "id": "film_mind_body_5",
+     "visual": "figure",
+     "figure": "sesh_the_quiet_blow",
+     "lines": [
+      "Sesh of the Quiet Blow ends fights with a thought. She reads the decision, not the body."
+     ],
+     "after": [
+      "She would like to be surprised, once."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "somatics",
+   "name": "The Somatics",
+   "shots": [
+    {
+     "id": "film_mind_body_6",
+     "visual": "place",
+     "place": "the_flesh_temple",
+     "lines": [
+      "The High Temple of the Body climbs a mountain in terraces.",
+      "Every soul on it trains breath, poise and endurance, as devotion."
+     ]
+    },
+    {
+     "id": "film_mind_body_7",
+     "visual": "ring",
+     "traditions": [
+      "somatic"
+     ],
+     "lines": [
+      "Somatics train the body until it answers the will completely: breath, heartbeat, pain, fear.",
+      "Control, past where control should end."
+     ]
+    },
+    {
+     "id": "film_mind_body_8",
+     "visual": "region",
+     "place": "the_flesh_temple",
+     "lines": [
+      "Thought neglected, the Temple is forgetting how to warn itself.",
+      "It looks down at the Cogitarium with a grief it rarely says aloud."
+     ]
+    },
+    {
+     "id": "film_mind_body_9",
+     "visual": "figure",
+     "figure": "marn_two_forms",
+     "lines": [
+      "When one person must stop a fight, the Temple sends Marn of Two Forms.",
+      "His first form ends fights without ending people."
+     ]
+    },
+    {
+     "id": "film_mind_body_10",
+     "visual": "axis",
+     "traditions": [
+      "somatic",
+      "cogitant"
+     ],
+     "lines": [
+      "Soma works the will through the body, Noesis through the mind.",
+      "Both are the same refusal of an ordinary ceiling."
+     ]
+    },
+    {
+     "id": "film_mind_body_11",
+     "visual": "place",
+     "place": "the_middle_way",
+     "lines": [
+      "Between them, the Middle Way trains body and mind under one roof.",
+      "Both poles call it a compromise. It calls them cautionary tales."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "syllogists",
+   "name": "The Syllogists",
+   "shots": [
+    {
+     "id": "film_mind_body_12",
+     "visual": "place",
+     "place": "the_axiom",
+     "lines": [
+      "The Axiom is a city built like an argument, from premises, in order.",
+      "Its people drop any position the moment it is shown false."
+     ]
+    },
+    {
+     "id": "film_mind_body_13",
+     "visual": "ring",
+     "traditions": [
+      "syllogist"
+     ],
+     "lines": [
+      "Syllogists build arguments that compel the reasonable. The craft proves only what is true, and fails against anyone who simply refuses."
+     ],
+     "after": [
+      "To be irrefutably right is a lonely country."
+     ]
+    },
+    {
+     "id": "film_mind_body_14",
+     "visual": "place",
+     "place": "the_proof_halls",
+     "lines": [
+      "In the Proof-Halls every argument they ever made is kept, its errors signed by the people who made them."
+     ]
+    },
+    {
+     "id": "film_mind_body_15",
+     "visual": "place",
+     "place": "the_bloodless_hold",
+     "lines": [
+      "At their pure pole, the Bloodless Hold: reason purified of feeling, which turns out to be something with reason's face."
+     ]
+    },
+    {
+     "id": "film_mind_body_16",
+     "visual": "figure",
+     "figure": "quillon_vey_unending",
+     "lines": [
+      "Quillon Vey wrote himself into a proof, and cannot die while it stands.",
+      "Those who try to refute it and fail, he kills."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "figurists",
+   "name": "The Figurists",
+   "shots": [
+    {
+     "id": "film_mind_body_17",
+     "visual": "place",
+     "place": "cloudform",
+     "lines": [
+      "Cloudform resists being mapped.",
+      "Its streets change width as you look along them."
+     ]
+    },
+    {
+     "id": "film_mind_body_18",
+     "visual": "ring",
+     "traditions": [
+      "figurist"
+     ],
+     "lines": [
+      "Figurists draw marks that do in the world what they mean.",
+      "Draw the figure truly, and the world briefly consents to match it."
+     ],
+     "after": [
+      "The Shapers hold a person to a figure they cannot step out of."
+     ]
+    },
+    {
+     "id": "film_mind_body_19",
+     "visual": "place",
+     "place": "the_figure_works",
+     "lines": [
+      "At the Figure-Works the meanings do exactly what they mean.",
+      "Not always what was wanted: the whole history of their disasters."
+     ]
+    },
+    {
+     "id": "film_mind_body_20",
+     "visual": "figure",
+     "figure": "seren_unlooked_at",
+     "lines": [
+      "Seren, Who Is Not Looked At, lives veiled among statues of those she loved.",
+      "She wants to meet someone's eyes and have them still be there."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "masons",
+   "name": "The Masons of the Give",
+   "shots": [
+    {
+     "id": "film_mind_body_21",
+     "visual": "place",
+     "place": "bedrock",
+     "lines": [
+      "Bedrock. Dressed stone in deep courses, cranes at every corner.",
+      "The Masons build things that outlast the arguments about them."
+     ]
+    },
+    {
+     "id": "film_mind_body_22",
+     "visual": "ring",
+     "traditions": [
+      "mason"
+     ],
+     "lines": [
+      "To the Masons of the Give, the real is what you can touch, weigh and set.",
+      "Everything else is a claim awaiting proof."
+     ],
+     "after": [
+      "The Levellers take a person's meaning apart in front of them."
+     ]
+    },
+    {
+     "id": "film_mind_body_23",
+     "visual": "place",
+     "place": "the_weighing_yard",
+     "lines": [
+      "The Weighing Yard has never been wrong about a material.",
+      "It has been catastrophically wrong about several things that were not."
+     ]
+    },
+    {
+     "id": "film_mind_body_24",
+     "visual": "figure",
+     "figure": "asterion_given_maze",
+     "lines": [
+      "In the Leaden Deep, where no prayer lands, Asterion keeps the Masons' maze.",
+      "He has never seen the sky. He asks every visitor to describe it."
+     ]
+    },
+    {
+     "id": "film_mind_body_25",
+     "visual": "axis",
+     "traditions": [
+      "mason",
+      "figurist"
+     ],
+     "lines": [
+      "Mason and Figurist are one argument, centuries old. Where a Mason stands, a figure fails."
+     ],
+     "after": [
+      "Neither has won, and both are correct."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "pull",
+   "name": "The pull",
+   "shots": [
+    {
+     "id": "film_mind_body_26",
+     "visual": "arc",
+     "arc": "arc_the_poles_pull",
+     "lines": [
+      "Every Reach is leaning harder into its own extreme.",
+      "The Cogitarium abandons more bodies."
+     ]
+    },
+    {
+     "id": "film_mind_body_27",
+     "visual": "place",
+     "place": "the_held_yard",
+     "lines": [
+      "At the Held Yard, one side stops the fight. The other works out why it started."
+     ],
+     "after": [
+      "Neither has convinced the other that its half is harder."
+     ]
+    }
+   ]
+  }
+ ],
+ "title": {
+  "line1": "Mind and Body",
+  "line2": "Five peoples of the ring",
+  "seconds": 6,
+  "visual": "title"
+ }
+}

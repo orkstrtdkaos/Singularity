@@ -1,0 +1,310 @@
+{
+ "schemaVersion": 1,
+ "id": "film_life_death",
+ "kind": "film",
+ "name": "Life and Death",
+ "_what": "Info film for the Life and Death domain: the Rootkin, the Ashwardens and the Threnodists, their homes, crafts, schools, costs and a few public figures, with the Deepwood's Moot and the Afterlings at the edges. Every string in lines/after/name/title is player-facing.",
+ "_canon": "tradition_profiles_f1.json traditions[rootkin|ashwarden|threnodist] oneLine/theCraft/theTrade/distribution/acrossTheAxis; EXESA_o1.md V (The Poles Pull, The Green Schism) and VII (Life/Death table); PLAYERS_GUIDE_f1.md Part XII; the_twelve_reaches_f1.json reaches[0].crisis; locations_f1.json descriptionSeed of the_heartroot, the_slow_orchard, the_greenward, dw_the_moot, the_quiet_ground, cairnhold, the_long_grey, the_hollowing, wellspring, the_grief_house, the_wellspring_deep; powers_f1.json power_harvest_hand.plainly; greater_arcs_f1.json arc_green_schism stage 1 publicFace; npcs_f1.json role/wants/voiceHints/appearance of thessa_root, walker_elder_thren, warden_mother_redgate, the_unfinished_of_the_last_cairn, maud_who_sings_before; the_afterlings_f1.md (the five doors, Cairnsend). Per-shot map in film_life_death_sources.md.",
+ "pacing": {
+  "secondsBase": 1.6,
+  "secondsPerWord": 0.28,
+  "fadeSeconds": 1.2
+ },
+ "unlock": {
+  "traditions": [
+   "rootkin",
+   "ashwarden",
+   "threnodist"
+  ],
+  "places": [
+   "the_heartroot",
+   "cairnhold",
+   "wellspring"
+  ]
+ },
+ "movements": [
+  {
+   "id": "life_death",
+   "name": "Life and Death",
+   "shots": [
+    {
+     "id": "film_life_death_1",
+     "visual": "ring",
+     "traditions": [
+      "rootkin",
+      "ashwarden",
+      "threnodist"
+     ],
+     "lines": [
+      "Life and Death. Three peoples live here: one tends growth, one tends endings, one tends grief."
+     ]
+    },
+    {
+     "id": "film_life_death_2",
+     "visual": "arc",
+     "arc": "arc_the_poles_pull",
+     "lines": [
+      "The Quickwood and the Palelands are one Reach, and should balance. Something is pulling it toward the Pale."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "rootkin",
+   "name": "The Rootkin",
+   "shots": [
+    {
+     "id": "film_life_death_3",
+     "visual": "place",
+     "place": "the_heartroot",
+     "lines": [
+      "The Heartroot was grown, over four hundred years. Its first planters are still alive, and call it a promising start."
+     ]
+    },
+    {
+     "id": "film_life_death_4",
+     "visual": "ring",
+     "traditions": [
+      "rootkin"
+     ],
+     "lines": [
+      "The Rootkin's craft is life at flood. Growth is a force, and a Rootkin can point it.",
+      "The further they go, the more it pulls them toward life."
+     ]
+    },
+    {
+     "id": "film_life_death_5",
+     "visual": "place",
+     "place": "the_slow_orchard",
+     "lines": [
+      "In the Slow Orchard trees take a human lifetime to fruit. The Rootkin explain themselves by walking you through it and saying nothing."
+     ]
+    },
+    {
+     "id": "film_life_death_6",
+     "visual": "figure",
+     "figure": "thessa_root",
+     "lines": [
+      "Thessa Root planted a tree here three hundred years ago, for someone who has not come."
+     ],
+     "after": [
+      "She means to be there when it fruits."
+     ]
+    },
+    {
+     "id": "film_life_death_7",
+     "visual": "place",
+     "place": "the_greenward",
+     "lines": [
+      "The Greenward is their one concession to urgency: a wall of thorn, grown by people who would rather not have needed it."
+     ]
+    },
+    {
+     "id": "film_life_death_8",
+     "visual": "ring",
+     "traditions": [
+      "rootkin"
+     ],
+     "lines": [
+      "The Quickeners bring land back. The Grafters regrow what was lost. The Bloom-Wrights force growth on bodies that did not ask."
+     ]
+    },
+    {
+     "id": "film_life_death_9",
+     "visual": "place",
+     "place": "dw_the_moot",
+     "lines": [
+      "Past the Eaves lies the Deepwood. Its Moot is arguing whether to seal the wood from humankind, and the Rootbound are gaining ground."
+     ]
+    },
+    {
+     "id": "film_life_death_10",
+     "visual": "figure",
+     "figure": "walker_elder_thren",
+     "lines": [
+      "Thren, Walker of the Thin Edge, argues to keep the wood woven into the world. He knows exactly how the argument is losing."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "threshold",
+   "name": "The threshold",
+   "shots": [
+    {
+     "id": "film_life_death_11",
+     "visual": "axis",
+     "traditions": [
+      "rootkin",
+      "ashwarden"
+     ],
+     "lines": [
+      "A Rootkin refuses a death. An Ashwarden attends one."
+     ],
+     "after": [
+      "Both are sometimes the mercy. The one doing it does not always get to know which."
+     ]
+    },
+    {
+     "id": "film_life_death_12",
+     "visual": "place",
+     "place": "the_quiet_ground",
+     "lines": [
+      "At the Quiet Ground the two share a roof and a rota. Nobody there is hurried toward an ending, or held back from one."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ashwardens",
+   "name": "The Ashwardens",
+   "shots": [
+    {
+     "id": "film_life_death_13",
+     "visual": "place",
+     "place": "cairnhold",
+     "lines": [
+      "Cairnhold is the least frightening place in the world once you are inside it."
+     ],
+     "after": [
+      "Every house has a second door, toward the fields. The dead leave by it."
+     ]
+    },
+    {
+     "id": "film_life_death_14",
+     "visual": "ring",
+     "traditions": [
+      "ashwarden"
+     ],
+     "lines": [
+      "The Ashwardens hold that someone has to be competent at the end of things. They ask the dead what they knew, and ease endings already begun."
+     ],
+     "after": [
+      "They can draw a life down, too. What goes all the way down does not recover."
+     ]
+    },
+    {
+     "id": "film_life_death_15",
+     "visual": "figure",
+     "figure": "warden_mother_redgate",
+     "lines": [
+      "Warden-Mother Redgate calls death the end of the road, and means nothing sad by it."
+     ],
+     "after": [
+      "She wants no one reaped who was not ready."
+     ]
+    },
+    {
+     "id": "film_life_death_16",
+     "visual": "ring",
+     "traditions": [
+      "ashwarden"
+     ],
+     "lines": [
+      "The Grave-Callers raise the dead to work, and do not ask first. Half the tradition calls it obscene. The other half has done it for four hundred years."
+     ]
+    },
+    {
+     "id": "film_life_death_17",
+     "visual": "place",
+     "place": "the_long_grey",
+     "lines": [
+      "Past the last cairn the tending stops. The ones who go out into the Long Grey tend to keep going."
+     ],
+     "after": [
+      "Reapers work out there. They end what is ready, and have stopped asking what that means."
+     ]
+    },
+    {
+     "id": "film_life_death_18",
+     "visual": "figure",
+     "figure": "the_unfinished_of_the_last_cairn",
+     "lines": [
+      "Some of the dead stay. Orsolya refused her own ending, and has stood at the Last Cairn for forty years, still having the argument."
+     ],
+     "after": [
+      "Behind her grew Cairnsend, for the dead who would not lie down."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "threnodists",
+   "name": "The Threnodists",
+   "shots": [
+    {
+     "id": "film_life_death_19",
+     "visual": "place",
+     "place": "wellspring",
+     "lines": [
+      "The Threnodists hold that feeling is the only true knowing. In Wellspring nobody feels anything privately.",
+      "Visitors weep within a day, or flee."
+     ]
+    },
+    {
+     "id": "film_life_death_20",
+     "visual": "place",
+     "place": "the_grief_house",
+     "lines": [
+      "At the Grief-House strangers sit with your loss for as long as it takes. It has never turned anyone away."
+     ]
+    },
+    {
+     "id": "film_life_death_21",
+     "visual": "ring",
+     "traditions": [
+      "threnodist"
+     ],
+     "lines": [
+      "The Carriers hold grief for others. The Lament gives a people's mourning its shape."
+     ],
+     "after": [
+      "The singer carries what she moves, for as long as it stays moved."
+     ]
+    },
+    {
+     "id": "film_life_death_22",
+     "visual": "figure",
+     "figure": "maud_who_sings_before",
+     "lines": [
+      "Maud sings the death of anyone who will die within the week, and cannot stop herself."
+     ],
+     "after": [
+      "She wants, once, to sing for someone who lives through it."
+     ]
+    },
+    {
+     "id": "film_life_death_23",
+     "visual": "place",
+     "place": "the_wellspring_deep",
+     "lines": [
+      "In the Wellspring Deep are the Raw, who turned feeling past all judgment. Near them you feel things that are not yours, and cannot tell."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "close",
+   "name": "The long road",
+   "shots": [
+    {
+     "id": "film_life_death_24",
+     "visual": "place",
+     "place": "the_hollowing",
+     "lines": [
+      "At the Hollowing the grey runs out toward a green nobody there has walked to."
+     ],
+     "after": [
+      "The road to the Greenward takes most of a year. Every Warden has met someone who made it."
+     ]
+    }
+   ]
+  }
+ ],
+ "title": {
+  "line1": "Life and Death",
+  "line2": "The Rootkin, the Ashwardens, the Threnodists",
+  "seconds": 6,
+  "visual": "title"
+ }
+}

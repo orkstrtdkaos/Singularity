@@ -1,0 +1,30 @@
+# film_life_death: sources per shot
+
+Canon root: `/mnt/user-data/uploads/Singularity/.aevi_scratch/` (films/ = `*_f1`, open/ = `*_o1`). TP = films/tradition_profiles_f1.json `traditions[]`; LOC = films/locations_f1.json `descriptionSeed`; NPC = films/npcs_f1.json.
+
+- **film_life_death_1** (ring rootkin/ashwarden/threnodist): open/EXESA_o1.md VII "Life ⟷ Death" table (three traditions in the domain); PLAYERS_GUIDE_f1.md Part XII (Ashwardens "tend endings as the Rootkin tend growth"); EXESA VII Threnodists "grief as a working".
+- **film_life_death_2** (arc arc_the_poles_pull): films/the_twelve_reaches_f1.json `reaches[0].name` (The Quickwood / The Palelands is one Reach) and `.crisis` ("supposed to balance; something is pulling the whole Reach toward the Pale"); EXESA V The Poles Pull ("The Pale wins ground from the Quick").
+- **film_life_death_3** (place the_heartroot): LOC the_heartroot (grown over four hundred years, first planters alive, "a promising start").
+- **film_life_death_4** (ring rootkin): TP rootkin `oneLine` ("Life at flood… growth is a force, and a Rootkin can point it"); `theTrade` (deeper craft pulls the wielder toward life).
+- **film_life_death_5** (place the_slow_orchard): LOC the_slow_orchard (human lifetime to fruit; explain themselves by walking you through it and saying nothing).
+- **film_life_death_6** (figure thessa_root): NPC thessa_root `role` (planted a tree three hundred years ago for a person who has not come), `wants` ("To be there when it fruits"). nameKnown absent, tier notable, home the_slow_orchard.
+- **film_life_death_7** (place the_greenward): LOC the_greenward (only concession to urgency; thorned wall grown by people who would rather not have needed to).
+- **film_life_death_8** (ring rootkin): TP rootkin `distribution.modes` (Quickeners: land brought back; Grafters: regrowing what was lost) and `distribution.tail` (Bloom-Wrights force growth into a body that did not ask).
+- **film_life_death_9** (place dw_the_moot): LOC the_quickwood_eaves (Quickwood thins into the Deepwood); EXESA V The Green Schism + "The argument in the wood"; films/greater_arcs_f1.json arc_green_schism stage "The Argument" `publicFace` (Moot arguing whether to seal the wood from humankind; the Rootbound gaining ground).
+- **film_life_death_10** (figure walker_elder_thren): NPC walker_elder_thren `role` (arguing to keep the Deepwood woven into the world), `knowledge` ("The Walker case at the Moot, and exactly how it's losing"). nameKnown absent, tier leader.
+- **film_life_death_11** (axis rootkin/ashwarden): TP ashwarden `acrossTheAxis` (a Vivimancer refuses a death, a Palework attends one; both sometimes the merciful act; the practitioner does not always get to know which).
+- **film_life_death_12** (place the_quiet_ground): LOC the_quiet_ground (both poles share a roof and a rota; nobody hurried toward an ending, nobody held back from one).
+- **film_life_death_13** (place cairnhold): LOC cairnhold (least frightening place once inside; every house has a second door toward the fields, the door the dead leave by).
+- **film_life_death_14** (ring ashwarden): TP ashwarden `theCraft` (someone has to be competent at the end of things; asks the dead what they knew; eases an ending already begun; draws vitality out of the living) and `theTrade` (what is drawn entirely down does not recover).
+- **film_life_death_15** (figure warden_mother_redgate): NPC warden_mother_redgate `voiceHints` (calls death "the end of the road" and means nothing sad by it), `wants` (no one reaped who was not ready). nameKnown absent, tier heroic.
+- **film_life_death_16** (ring ashwarden): TP ashwarden `distribution.tail` The Grave-Callers (raise, do not ask first; polite half calls it obscene; other half doing it four hundred years).
+- **film_life_death_17** (place the_long_grey): LOC the_long_grey (past the last cairn the tending stops; the ones who go tend to keep going); powers_f1.json power_harvest_hand `plainly` (reapers of the Long Grey; end what is ready; stopped asking what that means).
+- **film_life_death_18** (figure the_unfinished_of_the_last_cairn): NPC `role` (refused her own ending, standing at the Last Cairn still having the argument), `wants` (forty years); films/the_afterlings_f1.md "the five doors" (refused: the Unfinished, Orsolya forty years) and "Where they live" (Cairnsend grew behind the Last Cairn as the dead who would not lie down came). nameKnown world, tier legendary.
+- **film_life_death_19** (place wellspring): PLAYERS_GUIDE_f1.md Part XII (Threnodists hold that feeling is the only true knowing); LOC wellspring (nobody feels anything privately; visitors weep or flee within a day).
+- **film_life_death_20** (place the_grief_house): LOC the_grief_house (people who do not know you sit with it beside you as long as it takes; never turned anyone away).
+- **film_life_death_21** (ring threnodist): TP threnodist `distribution.modes` (THE CARRIERS: feeling held for others; THE LAMENT: a people's feeling given shape) and `theTrade` (you carry what you move, for as long as it stays moved; lands on the singer).
+- **film_life_death_22** (figure maud_who_sings_before): NPC `role` (sings the death of anyone who will die within the week, cannot stop herself), `wants` (to sing once for someone who lives through it). nameKnown absent, tier leader.
+- **film_life_death_23** (place the_wellspring_deep): LOC the_wellspring_deep (the Raw amplified feeling past all judgment; near them you feel things not yours and cannot tell).
+- **film_life_death_24** (place the_hollowing): LOC the_hollowing (grey runs out toward a green nobody here has walked to; road to the Greenward takes most of a year; every Warden has met someone who made it).
+- **title**: EXESA VII domain heading "Life ⟷ Death" and its three peoples.
+- **unlock**: TP ids rootkin, ashwarden, threnodist; homes per EXESA VII: the_heartroot (LOC region), cairnhold (LOC, "The Ashwardens' city"; `the_palelands` is a region id, not a location), wellspring (LOC region).

@@ -16,6 +16,46 @@
   "next": [],
   "releases": [
     {
+      "version": "2.19.13",
+      "date": "2026-10-06",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "The world map has roads on it",
+          "summary": "At the opening view of the world there were no roads at all.",
+          "detail": "The world map faded its roads in only once you had zoomed well past the whole-globe view — so the tier whose whole question is which Reach you are in showed a world with no ways between its Reaches. The main roads now come in faint at the full globe and strengthen as you zoom; the small paths to outlying sites still wait until closer in, because dozens of them at world scale say nothing."
+        },
+        {
+          "kind": "change",
+          "title": "World roads follow the ground, and say what kind they are",
+          "summary": "Every road was a straight line of the same weight.",
+          "detail": "A road on the world map ran dead straight from one place to the next, over mountains as readily as along a valley, and a great trunk road looked exactly like a footpath to a ruin. Roads now bend toward the easier ground the way they do on the region map, and a road between places people live is drawn as a road while a path to an outlying site is drawn as a track."
+        }
+      ]
+    },
+    {
+      "version": "2.19.12",
+      "date": "2026-10-06",
+      "entries": [
+        {
+          "kind": "internal",
+          "title": "Maintenance",
+          "summary": ""
+        }
+      ]
+    },
+    {
+      "version": "2.19.11",
+      "date": "2026-10-06",
+      "entries": [
+        {
+          "kind": "internal",
+          "title": "Maintenance",
+          "summary": ""
+        }
+      ]
+    },
+    {
       "version": "2.19.10",
       "date": "2026-10-06",
       "entries": [

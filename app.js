@@ -198,7 +198,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.19.10";
+const APP_VERSION = "2.19.13";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -14824,6 +14824,20 @@ function wireWorldGlobe() {
   // ⚠️ FUNCTIONS, NOT CONSTANTS: the backing store changes when the element is re-rendered at a new width,
   // and a constant captured here would be the size the globe had when it was first wired.
   const GW = () => cv.width / dprOf(), GH = () => cv.height / dprOf();
+  // ⛔ THE BEND, MEMOISED BY TERRAIN. `bendRoad` was imported into this file and CALLED BY NOTHING — built,
+  // tested, carrying its own measured ±180-seam fix, and never once run. It is the world-scale answer to what
+  // the region map does with a least-cost walk: a few samples per road rather than a grid walk per frame.
+  let _bendFor = null, _bendTerrain = null;
+  const globeBend = (a, b) => {
+    if (!_terrain) return null;
+    if (_bendTerrain !== _terrain) { _bendFor = new Map(); _bendTerrain = _terrain; }
+    const k = `${a[0].toFixed(3)},${a[1].toFixed(3)}|${b[0].toFixed(3)},${b[1].toFixed(3)}`;
+    if (_bendFor.has(k)) return _bendFor.get(k);
+    let pts = null;
+    try { pts = bendRoad(_terrain, a, b)?.points || null; } catch { pts = null; }
+    _bendFor.set(k, pts);
+    return pts;
+  };
   // ⚠️ the opening framing is the VIEWER's, not a number retyped here — see DEFAULT_VIEW's note:
   // it faces the inhabited southern hemisphere, and a gate holds it there.
   const view = { ...DEFAULT_VIEW, r: Math.min(GW(), GH()) * 0.44, cx: GW() / 2, cy: GH() / 2 };
@@ -15017,9 +15031,15 @@ function wireWorldGlobe() {
     // ⚠️ A player without the craft sees roads and gates and NO lines — which is the fiction exactly:
     // "Precursors laid the lines, someone else built the gates, and people walk neither."
     const hasOldRoads = (character.abilities || []).some((a) => a.abilityId === "old_roads");
+    // ✅ ERIK, 2026-10-06: *"the world map needs the roads updates like the region map has now."*
+    // ⛑ THE BENT PATHS ARE CACHED BY TERRAIN, NOT RECOMPUTED PER FRAME. `bendRoad` samples the ground for
+    // each road; doing that on every drag frame would cost what the region map's walk costs and buy nothing,
+    // so it is memoised exactly as `_roadsByTerrain` memoises the region map's routes.
     const net = networkPaths(_terrain, view, { locations: CONTENT.locations, precursor: _precursorLines,
-      showPrecursor: hasOldRoads, canvasPx: Math.min(GW(), GH()) });
-    if (net.fade > 0) {
+      showPrecursor: hasOldRoads, canvasPx: Math.min(GW(), GH()),
+      tierOf: (l) => l?.tier,
+      bend: coarse ? null : globeBend });
+    if (net.fade > 0 || net.trunkFade > 0) {
       ctx.save();
       ctx.lineJoin = "round"; ctx.lineCap = "round";
       // buried first, so the roads above them draw over
@@ -15031,12 +15051,33 @@ function wireWorldGlobe() {
         ctx.stroke();
       }
       ctx.setLineDash([]);
-      ctx.globalAlpha = 0.42 * net.fade; ctx.strokeStyle = "#c9b48a"; ctx.lineWidth = 0.9;
-      for (const run of net.roads) {
+      // ═════ THE REGION MAP'S GRAMMAR, AT WORLD SCALE ═════
+      // ⛔ EVERY CASING FIRST, THEN EVERY FILL — the same rule and the same reason as the region map: cased
+      // road by cased road, a later road's dark edge cuts a notch across an earlier road's fill at each
+      // crossing, and a junction reads as a break in the road rather than a join.
+      // ⚠️ AND A TRACK IS DASHED, because it is not the same kind of thing: it ends at a site, somewhere you
+      // go TO, and a solid line of equal weight would claim a road where there is a path.
+      const trace = (run) => {
         ctx.beginPath(); ctx.moveTo(run[0][0], run[0][1]);
         for (let i = 1; i < run.length; i++) ctx.lineTo(run[i][0], run[i][1]);
-        ctx.stroke();
+      };
+      ctx.globalAlpha = 0.55 * net.trunkFade; ctx.strokeStyle = "rgba(24,20,14,0.62)";
+      for (const r of net.roads) {
+        if (!r.primary || r.run.length < 2) continue;
+        ctx.lineWidth = 2.4; trace(r.run); ctx.stroke();
       }
+      ctx.globalAlpha = 0.72 * net.trunkFade; ctx.strokeStyle = "#dfc89a";
+      for (const r of net.roads) {
+        if (!r.primary || r.run.length < 2) continue;
+        ctx.lineWidth = 1.3; trace(r.run); ctx.stroke();
+      }
+      ctx.globalAlpha = 0.46 * net.fade; ctx.strokeStyle = "rgba(198,176,132,0.78)";
+      ctx.setLineDash([3, 3.5]); ctx.lineWidth = 0.9;
+      for (const r of net.roads) {
+        if (r.primary || r.run.length < 2) continue;
+        trace(r.run); ctx.stroke();
+      }
+      ctx.setLineDash([]);
       ctx.restore();
     }
     const hyd = hydrologyPaths(_terrain, view, Math.min(GW(), GH()));

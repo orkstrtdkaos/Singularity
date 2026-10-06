@@ -1323,7 +1323,24 @@ export function areaMembers(area, locations) {
  *
  *  Great-circle arcs, subdivided, because a straight screen line between two far points is not the path
  *  the world takes and would cross the limb wrongly. */
-export function networkPaths(t, view, { locations, precursor, showPrecursor = false, canvasPx = 700 } = {}) {
+/* ═════ ✅ ERIK, 2026-10-06: *"the world map needs the roads updates like the region map has now."* ═════
+ *
+ * ⛔ AND HE IS RIGHT TWICE OVER, because the globe's roads were doing LESS than they look:
+ *   · every edge was a straight great-circle arc — no terrain at all, so a road ran over a mountain range
+ *     exactly as readily as along a valley, while the region map walks the ground;
+ *   · every edge drew the SAME — 0.9px of cream at 0.42 alpha — so a trunk between two seats and a track to
+ *     an outlying site were indistinguishable;
+ *   · and `bendRoad`, which exists to bend a road over terrain and carries its own measured bug-fix from the
+ *     ±180 seam, HAS NEVER BEEN CALLED. Imported into app.js and called by nothing: the four-doors shape, in
+ *     the one place a player looks at the whole world.
+ *
+ * ⛑ WHAT IS NOT COPIED FROM THE REGION MAP, AND WHY. The region map ROUTES: a least-cost walk over a 2px
+ * grid, up to three seconds for one region. That is right there — you can see the ground it is avoiding — and
+ * it would be wrong here: at world span a mountain is a few pixels, the walk would cost seconds on every view
+ * change, and nobody could see what it bought. `bendRoad` is the world-scale answer: a handful of samples per
+ * road, bent toward the cheaper ground, computed once per terrain and cached by the caller. */
+export function networkPaths(t, view, { locations, precursor, showPrecursor = false, canvasPx = 700,
+  bend = null, tierOf = null } = {}) {
   const arc = (a, b, radius, steps) => {
     // spherical interpolation between two [lat, lon] points, projected per step
     const R2 = Math.PI / 180;
@@ -1352,11 +1369,26 @@ export function networkPaths(t, view, { locations, precursor, showPrecursor = fa
   };
 
   const span = spanDeg(view, canvasPx);
-  const out = { roads: [], precursor: [], fade: Math.min(1, Math.max(0, (90 - span) / 30)) };
-  if (out.fade <= 0) return out;
+  // ⛔ TWO FADES, BECAUSE A TRUNK AND A TRACK ARE NOT THE SAME CLAIM AT THE SAME SCALE.
+  // ✅ ERIK, 2026-10-06, looking at the WORLD view: *"the world map needs the roads updates."* ⚠️ At the
+  // opening span of 180° there were no roads AT ALL — one fade governed everything and it reaches zero above
+  // 90°, so the tier whose whole question is *which Reach am I in* showed a world with no ways between its
+  // Reaches. ⛑ The fade was right about TRACKS: 75 paths to outlying sites at world span is a hairball that
+  // says nothing. It was wrong about TRUNKS: the ways between places people live ARE the shape of the world,
+  // and they come in from 150°, faint, so the first thing you see is that the Reaches are connected.
+  const out = {
+    roads: [], precursor: [],
+    fade: Math.min(1, Math.max(0, (90 - span) / 30)),          // tracks, the precursor lines, hydrology
+    trunkFade: Math.min(1, Math.max(0, (200 - span) / 70)),    // the ways between places people live, faint at the full globe
+  };
+  if (out.fade <= 0 && out.trunkFade <= 0) return out;
 
   // roads — every connection edge, drawn once per pair
+  // ⚠️ A ROAD IS A TRUNK OR A TRACK, and the distinction is the same one the region map draws: a way between
+  // two places people live is a road, a way ending at a SITE is a path to something. `tierOf` is injected so
+  // this module still reads no content of its own.
   const seen = new Set();
+  const tier = typeof tierOf === "function" ? tierOf : (l) => l?.tier;
   for (const id of Object.keys(locations || {})) {
     const l = locations[id];
     if (!l?.worldPos) continue;
@@ -1366,8 +1398,29 @@ export function networkPaths(t, view, { locations, precursor, showPrecursor = fa
       seen.add(key);
       const o2 = locations[other];
       if (!o2?.worldPos) continue;
-      for (const run of arc([l.worldPos.colatitude - 90, l.worldPos.longitude],
-                            [o2.worldPos.colatitude - 90, o2.worldPos.longitude], 1.0)) out.roads.push(run);
+      const a = [l.worldPos.colatitude - 90, l.worldPos.longitude];
+      const b = [o2.worldPos.colatitude - 90, o2.worldPos.longitude];
+      const primary = tier(l) !== "site" && tier(o2) !== "site";
+      // ⛔ BENT OVER THE GROUND WHEN THE CALLER SUPPLIES A BEND, straight when it does not — so a caller with
+      // no terrain in hand still gets a map, which is what `fade` already promises at a wide span.
+      const pts = bend ? bend(a, b) : null;
+      const runs = [];
+      if (pts && pts.length > 1) {
+        // ⛑ ONE CHAIN, NOT A RUN PER SEGMENT. Arcing each segment separately gave 1,637 runs for 226 roads —
+        // eight `beginPath`s per road, each stroked and cased on its own, which both costs and leaves a seam at
+        // every join where two casings meet. The bent path is walked ONCE and broken only where the projection
+        // fails, which is the limb, exactly as `arc` breaks a single segment.
+        let run = [];
+        for (const pt of pts) {
+          const pr = project(pt[1], pt[0], view, 1.0);
+          if (!pr) { if (run.length > 1) runs.push(run); run = []; continue; }
+          run.push([pr.x, pr.y]);
+        }
+        if (run.length > 1) runs.push(run);
+      } else {
+        for (const run of arc(a, b, 1.0)) runs.push(run);
+      }
+      for (const run of runs) out.roads.push({ run, primary });
     }
   }
 

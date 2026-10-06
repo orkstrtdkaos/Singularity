@@ -1466,8 +1466,14 @@ for (const pack of PACKS) {
     check("SNG-409 §3: the buried lines are visible ONLY to a character who can sense them — old_roads is the gate",
       without.precursor.length === 0 && withIt.precursor.length > 5,
       `${without.precursor.length} without the craft, ${withIt.precursor.length} with it`);
+    // ⛑ THE SHAPE CHANGED WITH THE WORLD MAP'S ROADS (CCODE-620): a road is `{ run, primary }` now, not a
+    // bare run — because ✅ Erik asked for *"the roads updates like the region map has now"*, and the first
+    // thing the region map says about a road is whether it is a trunk or a track.
     check("SNG-409 §3: …and the roads draw for everyone, derived from the graph a player actually walks",
-      without.roads.length > 50 && without.roads.every((r) => r.length > 1));
+      without.roads.length > 50 && without.roads.every((r) => Array.isArray(r.run) && r.run.length > 1));
+    check("SNG-409 §3: …and a road says whether it is a TRUNK or a TRACK — a way between places people live, or a path to a site",
+      without.roads.some((r) => r.primary) && without.roads.some((r) => !r.primary),
+      `${without.roads.filter((r) => r.primary).length} trunk(s), ${without.roads.filter((r) => !r.primary).length} track(s)`);
 
     // ⚠️ HER RENDERING NOTE IS A FACT ABOUT THE WORLD, NOT A STYLE: the spans run UNDER the ground, so
     // they project at a radius inside the sphere and the limb occludes them sooner than the surface.

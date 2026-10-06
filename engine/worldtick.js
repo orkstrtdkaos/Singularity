@@ -616,7 +616,7 @@ export function clashNewsItem(line, { worldDay = null, arcId = null, regionId = 
  *  nothing behind them. `ladder` is the sub-attribute ladder from the rules bag; absent, every holding
  *  drifts exactly as it did before, which is the correct behaviour for a caller that has not been
  *  updated rather than a silent loss of the milestone. */
-export function advanceHoldings({ character, now = Date.now(), ladder = null, content = null, rng = Math.random }) {
+export function advanceHoldings({ character, now = Date.now(), ladder = null, content = null, rng = Math.random, roadRoutes = null }) {
   const holdEffects = ladder ? milestoneEffects(ladder, character).live : null;
   const news = [];
   // ✅ B6b (SPEC_mobile_holdings): A VOYAGE ARRIVES ON WORLD TIME, on the pass that already moves holdings — so a ship sent out
@@ -692,7 +692,9 @@ export function advanceHoldings({ character, now = Date.now(), ladder = null, co
     // store a target. Needs the economy dials and the place; a caller without content sees the tick it saw before.
     // ✅ ERIK 2026-09-12: a hull under way answers with the nearest place to the point she has reached, so the danger she is under,
     // the region beneath her and her ground are all where she IS — not where she left. A holding at anchor answers with its own place.
-    const whereNow = whereaboutsOf(h, { worldDay: (() => { try { return absoluteWorldDay(); } catch { return null; } })(), locations: content?.locations || {} });
+    // ⛑ SNG-679 H2: `routes` rides in, so the point this raid is decided from is the point a map would draw
+    // her at. Aevi's instruction was that the lerp be replaced INSIDE `voyagePosition` for exactly this.
+    const whereNow = whereaboutsOf(h, { worldDay: (() => { try { return absoluteWorldDay(); } catch { return null; } })(), locations: content?.locations || {}, routes: roadRoutes });
     const loc = content?.locations?.[whereNow.locationId] || null;
     // ✅ Q18: a KEPT hold climbs on its own, one rung per passesPerClimb, to the ceiling its keeper's tier allows.
     const holdCfg = content?.rules?.economy?.holdStore ? { ...content.rules.economy.holdStore, features: content.rules.economy.holdFeatures || null } : null;
@@ -842,7 +844,7 @@ export function advanceHoldings({ character, now = Date.now(), ladder = null, co
   return { news: news.map(t => ({ text: t, section: "yours" })), moved };
 }
 
-export async function runWorldTick({ character, content, currentDay, advanceAssignments = rollAssignmentAdvancement, rng = Math.random }) {
+export async function runWorldTick({ character, content, currentDay, advanceAssignments = rollAssignmentAdvancement, rng = Math.random, roadRoutes = null }) {
   if (!character.worldState) character.worldState = initWorldState(currentDay);
   const ws = character.worldState;
   // ⛔ CCODE-473 — AND A `worldState` THAT EXISTS BUT IS MISSING A FIELD, which the line above does not
@@ -864,7 +866,7 @@ export async function runWorldTick({ character, content, currentDay, advanceAssi
   // that early return is what Silas has been parked on for 915 actions. Only THIS block is lifted.
   const delegated = await advanceDelegatedWork({ character, content, advanceAssignments, currentDay, rng });
   // ⛔ SNG-356 — the ladder rides in, or presence 14/18/20 are three sentences with nothing behind them.
-  const holdings358 = advanceHoldings({ character, ladder: content?.rules?.subAttributeLadder, content, rng });
+  const holdings358 = advanceHoldings({ character, ladder: content?.rules?.subAttributeLadder, content, rng, roadRoutes });
   // ✅ Q5-B (SPEC_debts_and_reception): a debt is held by a PERSON and escalation is THEIR decision — the same cadence as
   // `unavenged`, one pass, its own news. ✅ R37: and growth WRITES — what the story showed a person doing becomes a craft
   // on their record at r1, and the world says so.

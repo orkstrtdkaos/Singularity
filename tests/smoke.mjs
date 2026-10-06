@@ -8066,6 +8066,118 @@ await (async () => {
       WG2.markerKind({ t: "region", wg: 1 }) === "gate" && WG2.markerKind({ t: "region" }) === "region",
       "if this reddens, `markerKind` changed its branch order and the seat rule should be re-read, not re-pointed");
 
+  /* ═════ SNG-679 H2 · WHERE A MOVING THING IS, ON THE GLOBE ═════
+ * ✅ AEVI, reading origin: *"A moving hold's position exists but is LINEAR in longitude and colatitude.
+ * From longitude 350 to 10 she sails the long way round through 180. Near the Crossing it is the same pole
+ * error as the measuring script in CCODE_20261006. `nearestId` (what raids her) inherits it."*
+ * ⛔ AND §187 ABOVE WAS GREEN OVER THAT BUG FOR A MONTH, FOR A REASON WORTH WRITING DOWN: its fixture puts
+ * Keelmouth and Firstsight at the SAME LONGITUDE, and between two points on one meridian the great circle
+ * IS linear in colatitude. The one geometry where the defect cannot show is the geometry the gate used —
+ * `Math.abs(pos71.worldPos.colatitude - (51.75 + 47.75) / 2) < 0.01` passes under either rule. That gate is
+ * left exactly as it is, because its claim ("the position moves with the date") is true and still worth
+ * holding; what it needed was a NEIGHBOUR that can see what it cannot.
+ * ⚠️ Measured over all 12,403 placed pairs: median divergence 14.4° (375 miles), p90 122.9°, max 180.0° —
+ * the antipode — and in 1,286 pairs the error exceeds the whole distance between the ports. */
+{
+  // ⛑ SELF-CONTAINED: its own imports, because a block reaching for another block's `const` is the
+  // ReferenceError that took a whole suite down twice today.
+  const CRh2 = await import("../engine/carriage.js");
+  const CVh2 = await import("../engine/caravan.js");
+  const WMh2 = await import("../engine/worldmap.js");
+  const Lh2 = {
+    west: { id: "west", name: "West", worldPos: { colatitude: 40, longitude: 350, depth: 0 }, tags: ["coast"] },
+    east: { id: "east", name: "East", worldPos: { colatitude: 40, longitude: 10, depth: 0 }, tags: ["coast"] },
+    far: { id: "far", name: "Far", worldPos: { colatitude: 40, longitude: 180, depth: 0 }, tags: ["coast"] },
+    hub: { id: "hub", name: "The Crossing", worldPos: { colatitude: 0, longitude: 0, depth: 0 }, tags: ["coast"] },
+    byhub: { id: "byhub", name: "By the hub", worldPos: { colatitude: 0.5, longitude: 290, depth: 0 }, tags: ["coast"] },
+  };
+  const hullh2 = (from, to) => ({ name: "Hull", locationId: from, garrison: [],
+    carriage: { moves: "crewed", needsCrew: 0, voyage: { from, to, days: 10, startedDay: 0, arriveDay: 10 } } });
+
+  // ⛔ THE SEAM. The lerp put her at longitude 180 half-way from 350 to 10: the far side of the world.
+  const seam = CRh2.voyagePosition(hullh2("west", "east"), { worldDay: 5, locations: Lh2 });
+  const lonSeam = ((seam.worldPos.longitude + 540) % 360) - 180;
+  check("§679 H2: ⛔ a voyage from longitude 350 to 10 goes the SHORT way — the lerp sent her through 180, the far side of the world",
+    Math.abs(lonSeam) < 1, `half-way she is at longitude ${lonSeam.toFixed(2)}, and the lerp said 180`);
+  check("§679 H2: …and half-way means EQUIDISTANT from both ports, which is the property a midpoint actually has",
+    (() => { const a = WMh2.geodesic({ worldPos: seam.worldPos }, Lh2.west), b = WMh2.geodesic({ worldPos: seam.worldPos }, Lh2.east);
+      return a != null && b != null && Math.abs(a - b) < 1e-6; })(),
+    "a lerp's midpoint is not equidistant from its ends unless the two share a meridian — which is exactly §187's fixture");
+  // ⛔ AND THE RAID FOLLOWS. `nearestId` is what decides who can reach her.
+  check("§679 H2: …and `nearestId` follows the corrected point — the nearest place to longitude 180 is not the nearest place to 0",
+    seam.nearestId !== "far" && ["west", "east"].includes(seam.nearestId),
+    `nearest is ${seam.nearestId}; under the lerp she was beside Far, 170° from either port`);
+
+  // ⛔ THE POLE. The Crossing is colatitude 0, where a difference of longitude is not a distance.
+  const atPole = CRh2.voyagePosition(hullh2("hub", "byhub"), { worldDay: 5, locations: Lh2 });
+  check("§679 H2: ⛔ …and a voyage off the Crossing stays within half a degree of it — at a pole a longitude gap is not a distance",
+    (() => { const d = WMh2.geodesic({ worldPos: atPole.worldPos }, Lh2.hub);
+      return d != null && (d * 180 / Math.PI) <= 0.5 + 1e-6; })(),
+    "the same error class as the Hundred Markets reported 27° from the Crossing when it is 0.29° out");
+
+  // ⛔ THE ENDS ARE EXACT. A hull at fraction 0 is AT her port — the routed grid is 2° a cell and used to be a degree out.
+  const at0 = CRh2.voyagePosition(hullh2("west", "east"), { worldDay: 0, locations: Lh2 });
+  const at1 = CRh2.voyagePosition(hullh2("west", "east"), { worldDay: 10, locations: Lh2 });
+  check("§679 H2: …and she starts AT her port and ends AT her destination, exactly",
+    Math.abs(at0.worldPos.colatitude - 40) < 1e-9 && Math.abs(at1.worldPos.colatitude - 40) < 1e-9
+    && at0.nearestId === "west" && at1.nearestId === "east",
+    JSON.stringify({ start: at0.worldPos, end: at1.worldPos }));
+
+  // ⛔ MONOTONIC: she only gets further from where she set out.
+  check("§679 H2: …and she never doubles back — the distance from her port only grows",
+    (() => { let last = -1;
+      for (let d = 0; d <= 10.0001; d += 0.5) {
+        const p = CRh2.voyagePosition(hullh2("west", "east"), { worldDay: d, locations: Lh2 });
+        const g = WMh2.geodesic({ worldPos: p.worldPos }, Lh2.west);
+        if (g == null || g < last - 1e-9) return false; last = g; }
+      return true; })());
+
+  // ⛔ ONE DOOR: every reader of her whereabouts gets the same point.
+  const vp = CRh2.voyagePosition(hullh2("west", "east"), { worldDay: 5, locations: Lh2 });
+  const wa = CRh2.whereaboutsOf(hullh2("west", "east"), { worldDay: 5, locations: Lh2 });
+  check("§679 H2: …and `whereaboutsOf` cannot disagree with `voyagePosition` — the lerp was replaced INSIDE it, which is the point",
+    wa.worldPos.colatitude === vp.worldPos.colatitude && wa.worldPos.longitude === vp.worldPos.longitude
+    && wa.locationId === vp.nearestId,
+    "✅ Aevi: *\"Replace the lerp inside `voyagePosition` (not beside it, so raids and the maps agree)\"*");
+
+  // ⛔ A ROUTED LINE WINS OVER THE ARC WHERE THERE IS ONE, and says which answered.
+  const fakeRoute = new Map([["east|west", [[-50, 350], [-52, 355], [-50, 0], [-48, 5], [-50, 10]]]]);
+  const routed = CRh2.voyagePosition(hullh2("west", "east"), { worldDay: 5, locations: Lh2, routes: fakeRoute });
+  check("§679 H2: …and a ROUTED line is followed where one exists, with `onRoad` saying which rule answered",
+    routed.onRoad === true && vp.onRoad === false
+    && Math.abs(routed.worldPos.colatitude - vp.worldPos.colatitude) > 0.5,
+    `routed ${routed.worldPos.colatitude.toFixed(2)} vs great circle ${vp.worldPos.colatitude.toFixed(2)}`);
+  check("§679 H2: …and the routed walk measures FRACTION OF LENGTH, not of point count — a route's points are grid-spaced",
+    (() => { const p = WMh2.pointAlongPath([[0, 0], [0, 1], [0, 2], [0, 30]], 0.5);
+      return p && Math.abs(p.longitude - 15) < 0.5; })(),
+    "legs of 1°, 1° and 28°: half the LENGTH is longitude 15, while half the POINTS would be about 2");
+
+  // ⛔ AND THE TICK PASSES THE ROUTES, or the routed half has no reader in play.
+  check("§679 H2: …and the raid path is wired to it — the tick hands `roadRoutes` to `whereaboutsOf`",
+    /roadRoutes = null \}\)/.test(readFileSync(join(root, "engine/worldtick.js"), "utf8"))
+    && /routes: roadRoutes/.test(readFileSync(join(root, "engine/worldtick.js"), "utf8"))
+    && /roadRoutes: _worldRoutes\?\.byPair/.test(readFileSync(join(root, "app.js"), "utf8")));
+
+  // ⛔ THE CARAVAN HALF: a point between, and `placeId` untouched.
+  const carh2 = { id: "c", path: ["west", "far", "east"], days: 8, departedDay: 0, danger: 3 };
+  const mid = CVh2.positionOnRoad(carh2, 2, Lh2);
+  const ends = [CVh2.positionOnRoad(carh2, 0, Lh2), CVh2.positionOnRoad(carh2, 8, Lh2)];
+  check("§679 H2: ⛔ a caravan has a point BETWEEN its places — it used to jump from `path[i]` to `path[i+1]` with nothing in between",
+    !!mid.worldPos && mid.stepFraction > 0 && mid.stepFraction < 1
+    && !!ends[0].worldPos && !!ends[1].worldPos,
+    JSON.stringify({ at2: mid.worldPos, within: mid.stepFraction }));
+  /* ⚠️ WRITTEN ONCE WITH AN ESCAPE HATCH, AND CAUGHT BY READING IT BACK: the condition was
+   *     a && b && c && d || c
+   * which JavaScript groups as `(a && b && c && d) || c` — so it passed on `mid.placeId === "west"` alone
+   * and the three facts beside it were decoration. The same shape as the `|| doc.includes("**47 …**")`
+   * fallback §12 used to carry: a gate with an escape hatch is a gate that cannot fail. */
+  check("§679 H2: …and `placeId` is UNCHANGED, because it is what decides the danger she is under",
+    ends[0].placeId === "west" && ends[1].placeId === "east" && mid.placeId === "west"
+    && mid.index === 0 && mid.danger === CVh2.positionOnRoad({ ...carh2, days: 8 }, 0, Lh2).danger,
+    "✅ Aevi: *\"`positionOnRoad` KEEPS `placeId` and ADDS `worldPos`\"* — every existing caller keeps the answer it had");
+}
+
+
     /* ═════ SNG-677 · THE WORLD MAP'S ROADS ARE ROUTED, NOT ARCED ═════
      * ✅ ERIK, 2026-10-06: *"The world map still shows the straight line routes between places. It needs to
      * show the drawn roads from the region maps (at least the major trunks)."*

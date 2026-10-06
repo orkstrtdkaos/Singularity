@@ -16,6 +16,17 @@
   "next": [],
   "releases": [
     {
+      "version": "2.20.1",
+      "date": "2026-10-06",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "A ship under way is where she actually is",
+          "summary": "Her position between two ports was worked out in a way that could place her on the far side of the world — and that position is what decides who can reach her. She now follows the curve of the world, and the road where there is one. Caravans have a real position between stops too, instead of jumping from one to the next."
+        }
+      ]
+    },
+    {
       "version": "2.20.0",
       "date": "2026-10-06",
       "entries": [

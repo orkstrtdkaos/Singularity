@@ -2881,6 +2881,16 @@ console.log("\n── §187 · five kinds of carriage, a crew that is the engine
     steps.map(s => s.placeId).join(",") === "keelmouth,keelmouth,firstsight,longshore"   // three places over six days: on day 42 she is still short of the second && steps[0].daysOut === 0 && steps[3].daysLeft === 0
     && /the danger WHERE THEY ARE on this day/.test(rd("engine/caravan.js")) && /const at = positionOnRoad\(car, now - \(elapsed - 1 - i\), locations\);/.test(rd("engine/caravan.js")),
     JSON.stringify(steps.map(s => s.placeId)));
+
+  /* ⛑ THE H2 GATES THAT COMPLETE THIS STORY LIVE IN `tests/smoke.mjs`, not here, and the reason is
+   * mechanical: `verification_ledger.mjs` runs smoke, content_ci and wiring_audit — not this file — so a
+   * requirement cannot cite a gate written here. SNG-679 H2 needed to be citable, so its checks sit there.
+   * ⛔ WHAT THEY SAY ABOUT THE CHECK DIRECTLY ABOVE IS WORTH KNOWING HERE: §187's fixture puts Keelmouth and
+   * Firstsight at the SAME LONGITUDE, and between two points on one meridian a great circle IS linear in
+   * colatitude — so `|colatitude - (51.75 + 47.75)/2| < 0.01` passed for a month while every moving thing in
+   * the world was positioned by a lerp that could be 180° wrong. The one geometry where the defect cannot
+   * show is the geometry this gate uses. It is left exactly as it is, because its own claim is true. */
+
   check("§187: …and the hazard READS the place it happened at rather than being handed it and dropping it",
     // ⚠️ THIS PINNED THE SIGNATURE'S TAIL — `where = null } = {}) {` — so adding any parameter after
     // `where` reddened a claim about whether `where` is READ. A gate may not pin its neighbours.

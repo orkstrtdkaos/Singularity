@@ -56,6 +56,8 @@ function ensureCaravans(character) {
  *  position on the road is the fraction of the journey elapsed, taken to the step of `path` it falls in; that step's own danger is
  *  what can reach them today. ⚠️ `roadDanger` (the worst on the whole road) STAYS — it is what a player is told before setting out,
  *  and it is the right number for that question. This is the other question: what is out there right now. Pure. */
+import { worldPosBetween } from "./worldmap.js";   // ⛔ SNG-679 H2: a caravan is somewhere BETWEEN two places
+
 export function positionOnRoad(car, day = null, locations = {}) {
   const path = Array.isArray(car?.path) && car.path.length ? car.path : [car?.to].filter(Boolean);
   const total = Math.max(0.0001, num(car?.days, 0));
@@ -64,7 +66,25 @@ export function positionOnRoad(car, day = null, locations = {}) {
   const f = total ? elapsed / total : 1;
   const i = Math.max(0, Math.min(path.length - 1, Math.floor(f * (path.length - 1) + 0.0001)));
   const placeId = path[i] || null;
-  return { index: i, placeId, name: locations?.[placeId]?.name || placeId, danger: num(locations?.[placeId]?.dangerLevel, num(car?.danger, 0)), fraction: f, daysOut: elapsed, daysLeft: Math.max(0, total - elapsed) };
+  /* ═════ SNG-679 H2 · AND A POINT BETWEEN THE TWO, NOT ONLY THE STEP SHE IS IN ═════
+   * ✅ AEVI, reading origin: *"A caravan's position jumps from place to place (`path[i]`); nothing gives a
+   * point between."* ✅ And her instruction: *"`positionOnRoad` keeps `placeId` and adds `worldPos`,
+   * interpolated between `path[i]` and `path[i+1]` the same way."*
+   * ⛑ `placeId` IS UNCHANGED, deliberately. It is what decides the danger she is under — Erik's *"a road is
+   * as safe as its ugliest mile"* reading — and every caller of that answer keeps the answer it had. This
+   * ADDS where she is, for the maps and for anything that wants to draw her.
+   * ⛑ Great-circle, through the same `worldPosBetween` a hull under way uses, so a cart and a hull are not
+   * two different claims about what "half way" means. Null when either end has no position, which is the
+   * honest answer `geodesic` already gives for an unplaced place. */
+  const here = locations?.[placeId];
+  const next = locations?.[path[Math.min(path.length - 1, i + 1)]];
+  // the fraction WITHIN this step: the whole journey is split evenly across the steps, as `i` already assumes
+  const steps = Math.max(1, path.length - 1);
+  const within = Math.max(0, Math.min(1, f * steps - i));
+  const worldPos = (here?.worldPos && next?.worldPos)
+    ? worldPosBetween(here, next, within)
+    : (here?.worldPos ? { ...here.worldPos } : null);
+  return { index: i, placeId, name: locations?.[placeId]?.name || placeId, danger: num(locations?.[placeId]?.dangerLevel, num(car?.danger, 0)), fraction: f, daysOut: elapsed, daysLeft: Math.max(0, total - elapsed), worldPos, stepFraction: within };
 }
 
 export function roadDanger(path = [], locations = {}) {

@@ -23,7 +23,7 @@
 // field — terrain lives on the REGION, as prose. `tags` is on 135 of 135 places, so a crewed carriage requires one of the water tags
 // the content authors (Keelmouth: harbour · river · shipyard) and a grove wants ground. No new field and no second graph.
 
-import { geodesic, DAYS_PER_RADIUS } from "./worldmap.js";   // ⛔ Erik 2026-09-12: a hull under way is SOMEWHERE, and the nearest place decides what can reach her
+import { geodesic, DAYS_PER_RADIUS, worldPosBetween, pointAlongPath } from "./worldmap.js";   // ⛔ Erik 2026-09-12: a hull under way is SOMEWHERE, and the nearest place decides what can reach her
 const num = (v, d = null) => (Number.isFinite(Number(v)) ? Number(v) : d);
 export const CARRIAGE_KINDS = ["crewed", "powered", "drifting", "living", "willed"];
 
@@ -58,10 +58,18 @@ export function isMoored(holding) {
  *  her between the two ports, and the nearest known place to that point is the danger she is under. `locationId` still only changes
  *  on arrival (a null would let `reconcile` teleport her to a shore), so this is a DERIVED position and nothing to keep in sync.
  *
- *  ⚑ The interpolation is linear in colatitude and longitude rather than a great circle. At this world's scale (1° ≈ 26 miles) the
- *  two differ by less than a day's sail on any voyage the map allows, and the answer it feeds is "which place is she near", which is
- *  robust to that. Pure. */
-export function voyagePosition(holding, { worldDay = null, locations = {} } = {}) {
+ *  ⛔ THE INTERPOLATION USED TO BE LINEAR IN COLATITUDE AND LONGITUDE, AND THIS COMMENT DEFENDED IT: *"At this world's scale
+ *  (1° ≈ 26 miles) the two differ by less than a day's sail on any voyage the map allows, and the answer it feeds is 'which
+ *  place is she near', which is robust to that."*
+ *  ⚠️ NOBODY HAD MEASURED IT AND IT IS WRONG BY THREE ORDERS OF MAGNITUDE. Over all 12,403 placed pairs the lerp and the great
+ *  circle diverge by a MEDIAN of 14.4° (375 miles), a p90 of 122.9° (3,195 miles) and a maximum of 180.0° — the antipode. In
+ *  1,286 pairs the error exceeds the entire distance between the two ports.
+ *  ✅ Aevi found it by reading: *"From longitude 350 to 10 she sails the long way round through 180. Near the Crossing it is the
+ *  same pole error as the measuring script in CCODE_20261006. `nearestId` (what raids her) inherits it."*
+ *  ⛑ SO IT IS A GREAT CIRCLE NOW, and a ROUTED LINE where one exists — replaced INSIDE this function rather than beside it,
+ *  which is her instruction and the reason it is safe: every reader of a hull's whereabouts, the raid included, moves together.
+ *  Pure, with the routes injected. */
+export function voyagePosition(holding, { worldDay = null, locations = {}, routes = null } = {}) {
   const carriage = carriageOf(holding);
   const v = carriage?.voyage;
   if (!v) return null;
@@ -70,10 +78,29 @@ export function voyagePosition(holding, { worldDay = null, locations = {} } = {}
   const day = num(worldDay, num(v.startedDay, 0));
   const elapsed = Math.max(0, Math.min(total, day - num(v.startedDay, 0)));
   const f = total ? elapsed / total : 1;
-  const lerp = (a, b) => a + (b - a) * f;
-  const pos = from?.worldPos && to?.worldPos
-    ? { colatitude: lerp(Number(from.worldPos.colatitude), Number(to.worldPos.colatitude)), longitude: lerp(Number(from.worldPos.longitude), Number(to.worldPos.longitude)), depth: 0 }
-    : null;
+  /* ⛔ THE ROUTED LINE FIRST, WHERE THERE IS ONE. ✅ Aevi (H2): *"along the routed line between `from` and `to` when one exists
+   * (`worldRoadRoutes`, CCODE-626) at `fraction` of its length; otherwise a great-circle interpolation."*
+   * ⛑ `routes` IS INJECTED, like `locations`, because the routed set needs the terrain and this module must stay pure — the same
+   * reason `visiblePins` takes a `worldPosOf` rather than reading content itself. With nothing injected, every caller still gets
+   * the great circle, which is already right; the route only makes it follow the road. */
+  const key = v.from < v.to ? `${v.from}|${v.to}` : `${v.to}|${v.from}`;
+  const stored = routes && typeof routes.get === "function" ? routes.get(key) : null;
+  // ⚠️ A ROUTE IS STORED FOR AN UNORDERED PAIR, so it may run the other way; walk it from whichever end is `from`.
+  const path = stored && stored.length > 1 ? (v.from < v.to ? stored : [...stored].reverse()) : null;
+  /* ⛔ AND ITS ENDS ARE REPLACED BY THE PORTS THEMSELVES. The routed grid is 2° a cell, so the route's own
+   * first and last points sit up to a degree — 26 miles — from the places they are the route BETWEEN.
+   * ⚠️ Measured before this: a hull on her first day reported 1° off `cloudform`, and `nearestId` named
+   * `cloudform_gate_yard` instead of the port she had not yet left. A hull at fraction 0 is AT her port and
+   * at fraction 1 is AT her destination; those two are exact facts and nothing approximate may overwrite
+   * them. ⛑ Splicing the exact ends in also keeps the arc-length walk honest, because the first and last
+   * legs then measure the real distance from the quay rather than from the nearest grid cell. */
+  const exact = (loc) => [Number(loc.worldPos.colatitude) - 90, Number(loc.worldPos.longitude)];
+  const walk = (path && from?.worldPos && to?.worldPos)
+    ? [exact(from), ...path.slice(1, -1), exact(to)]
+    : path;
+  const pos = walk
+    ? pointAlongPath(walk, f)
+    : (from?.worldPos && to?.worldPos ? worldPosBetween(from, to, f) : null);
   // the nearest known place to where she is — the one whose danger she is under, and the one a player would name
   let nearestId = f < 0.5 ? v.from : v.to, best = Infinity;
   if (pos) for (const [id, loc] of Object.entries(locations || {})) {
@@ -81,20 +108,24 @@ export function voyagePosition(holding, { worldDay = null, locations = {} } = {}
     const d = geodesic({ worldPos: pos }, loc);
     if (d != null && d < best) { best = d; nearestId = id; }
   }
-  return { from: v.from, to: v.to, fraction: f, daysOut: elapsed, daysLeft: Math.max(0, total - elapsed), days: total, worldPos: pos, nearestId, nearestDays: best === Infinity ? null : best * DAYS_PER_RADIUS };   // CCODE-471b: one constant, imported
+  // ⛑ `onRoad` says WHICH rule answered, because "she is 14° from where she was" is a thing a reader of a
+  // save needs to be able to attribute — a routed hull and a great-circle hull are both correct and different.
+  return { from: v.from, to: v.to, fraction: f, daysOut: elapsed, daysLeft: Math.max(0, total - elapsed), days: total, worldPos: pos, onRoad: !!walk, nearestId, nearestDays: best === Infinity ? null : best * DAYS_PER_RADIUS };   // CCODE-471b: one constant, imported
 }
 
 /** ⛔ WHERE SHE IS FOR EVERYTHING THAT ASKS — the raid, the danger, the region under her. A holding at anchor answers with its own
  *  place, unchanged; one under way answers with the nearest place to the point she has reached, and says she is at sea. Pure. */
-export function whereaboutsOf(holding, { worldDay = null, locations = {} } = {}) {
-  const p = voyagePosition(holding, { worldDay, locations });
+export function whereaboutsOf(holding, { worldDay = null, locations = {}, routes = null } = {}) {
+  // ⛑ `routes` RIDES THROUGH. Taking the option here and dropping it would make this reader disagree with
+  // `voyagePosition` about where she is, which is exactly what replacing the lerp "inside" was for.
+  const p = voyagePosition(holding, { worldDay, locations, routes });
   if (!p) return { locationId: holding?.locationId || null, atSea: false };
   return { locationId: p.nearestId, atSea: true, from: p.from, to: p.to, daysOut: p.daysOut, daysLeft: p.daysLeft, fraction: p.fraction, worldPos: p.worldPos };
 }
 
 /** The line a player reads for a hull under way: "two days out of Keelmouth, nearest Firstsight, three to go". Pure. */
-export function voyageLine(holding, { worldDay = null, locations = {}, nameOf = null } = {}) {
-  const p = voyagePosition(holding, { worldDay, locations });
+export function voyageLine(holding, { worldDay = null, locations = {}, nameOf = null, routes = null } = {}) {
+  const p = voyagePosition(holding, { worldDay, locations, routes });
   if (!p) return null;
   const nm = (id) => (nameOf ? nameOf(id) : (locations?.[id]?.name || id));
   const d = (n) => (n < 1 ? "under a day" : `${Math.round(n)} day${Math.round(n) === 1 ? "" : "s"}`);

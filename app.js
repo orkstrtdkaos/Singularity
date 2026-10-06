@@ -198,7 +198,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.20.0";
+const APP_VERSION = "2.20.1";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -6947,7 +6947,8 @@ async function maybeTick() {
     }
     character._lastProjectDay = currentDay;
   }
-  await runWorldTick({ character, content: CONTENT, currentDay });
+  // ⛑ H2: `roadRoutes` rides in so `whereaboutsOf` inside the tick follows the road a map would draw.
+  await runWorldTick({ character, content: CONTENT, currentDay, roadRoutes: _worldRoutes?.byPair || null });
   if (_projectNews.length && character.worldState) {
     character.worldState.unseenNews = [...(character.worldState.unseenNews || []),
       ..._projectNews.map(text => ({ text, day: currentDay, kind: "project" }))];
@@ -12458,6 +12459,15 @@ let _globeLookAt = null;     // regionId under the camera centre, or null before
 // ⛑ THE ONE Esc LISTENER FOR THE GLOBE, kept so each re-render REPLACES it (the region map's `_regionEsc`
 // exists for the same reason, and for the same bug: a stacked listener holding a canvas that is gone).
 let _globeEsc = null;
+/* ⛔ SNG-679 H2 · THE ROUTED ROADS, AT MODULE LEVEL, BECAUSE THE RAID NEEDS THEM TOO.
+ * ✅ AEVI: *"Replace the lerp inside `voyagePosition` (NOT BESIDE IT, so raids and the maps agree)."* The
+ * function takes the routed set as an option; this is where the one copy lives, so the globe that draws a
+ * hull and the tick that decides who raids her read the same lines.
+ * ⚠️ IT IS `null` UNTIL A MAP HAS BUILT IT, and that is deliberate: building costs ~520ms and a world tick
+ * may not spend that. Until then `voyagePosition` falls back to the great circle — which is the CORRECT
+ * answer, just less specific than the road, and either way the 180° lerp error is gone. The two readers can
+ * differ for one day's derived position before any map has been opened; they cannot differ once one has. */
+let _worldRoutes = null;
 /** ⛔ THE OPEN FAN, in canvas pixels. Null when nothing is fanned. */
 let _regionFan = null;       // { key, cx, cy, members:[{id,name,x,y}] }
 /** ⛑ THE CLICK RADIUS THE GLOBE HAS USED ALL ALONG (`nearest` in `wireWorldGlobe`), so one map does not feel
@@ -14979,13 +14989,14 @@ function wireWorldGlobe() {
    * complaint for another. So the first frame draws with the arc, the routes are built once the frame is on
    * screen, and the globe repaints itself when they land. ⚠️ ONE ATTEMPT PER TERRAIN: `_worldRoutesTried`
    * is set BEFORE the work, or a 520ms computation that happens to fail would be retried on every frame. */
-  let _worldRoutes = null, _worldRoutesTried = null;
+  let _worldRoutesTried = null;
   const ensureWorldRoutes = () => {
     if (!_terrain || _worldRoutesTried === _terrain) return;
     _worldRoutesTried = _terrain;
     setTimeout(() => {
       try {
         _worldRoutes = worldRoadRoutes(_terrain, CONTENT.locations, { tierOf: (l) => l?.tier });
+        // ⛑ H2: the same object the tick reads, so a hull's drawn position and her raided position are one.
         console.log(`[globe roads] ${_worldRoutes.kept} of ${_worldRoutes.input} routed in ${_worldRoutes.ms}ms`
           + (_worldRoutes.seamDropped ? ` · ${_worldRoutes.seamDropped} dropped at the ±180 seam` : ""));
         if (document.getElementById("world-globe")) paint(false);

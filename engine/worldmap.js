@@ -785,3 +785,83 @@ export function placeCardBox(map, card, glyph) {
   const top = Math.max(PAD, Math.min(mh - h - PAD, gy - h / 2));
   return { mode: "popover", left: Math.round(left), top: Math.round(top), width: w, height: h };
 }
+
+/* ═════ SNG-679 H2 · A POINT PART-WAY ALONG A JOURNEY, ON THE SPHERE ═════
+ * ✅ AEVI, reading origin: *"A moving hold's position exists but is LINEAR in longitude and colatitude.
+ * From longitude 350 to 10 she sails the long way round through 180. Near the Crossing it is the same pole
+ * error as the measuring script in CCODE_20261006. `nearestId` (what raids her) inherits it."*
+ * ⛔ AND THE CODE CARRIED A DEFENCE OF THE LERP THAT NOBODY HAD MEASURED: *"At this world's scale (1° ≈ 26
+ * miles) the two differ by less than a day's sail on any voyage the map allows."* Measured over all 12,403
+ * placed pairs, the lerp and the great circle diverge by a MEDIAN of 14.4° (375 miles), a p90 of 122.9°
+ * (3,195 miles) and a maximum of 180.0° — the antipode. In 1,286 pairs the error is LARGER THAN THE WHOLE
+ * DISTANCE between the two ports. A comment is a claim, and this one was wrong by three orders of magnitude.
+ * ⛑ BUILT ON `worldVector`, the same reader `geodesic` uses, so a position and a distance cannot come to
+ * disagree about where a point is — which is the whole reason `geodesic` has one definition.
+ * ⛑ Depth rides linearly and is NOT bent into the arc, for `geodesic`'s own stated reason: going down is
+ * not travel across the world. */
+export function worldPosBetween(a, b, f) {
+  const va = worldVector(a), vb = worldVector(b);
+  if (!va || !vb) return null;
+  const k = Math.max(0, Math.min(1, Number(f)));
+  let dot = Math.max(-1, Math.min(1, va.x * vb.x + va.y * vb.y + va.z * vb.z));
+  const omega = Math.acos(dot);
+  let x, y, z;
+  if (omega < 1e-9) { x = va.x; y = va.y; z = va.z; }          // the same point, or near enough
+  else if (Math.PI - omega < 1e-9) {
+    /* ⛔ ANTIPODAL: every great circle between them is equally short, so there is no "the" arc. Rather than
+     * pick one silently, go by way of the pole the two share a meridian with — a definite answer a reader
+     * can check, where a normalised zero vector would be a NaN that propagates into `nearestId`. */
+    const t2 = k * Math.PI;
+    x = va.x * Math.cos(t2); y = va.y * Math.cos(t2); z = Math.cos(t2) * va.z + Math.sin(t2);
+  } else {
+    const s0 = Math.sin((1 - k) * omega) / Math.sin(omega), s1 = Math.sin(k * omega) / Math.sin(omega);
+    x = va.x * s0 + vb.x * s1; y = va.y * s0 + vb.y * s1; z = va.z * s0 + vb.z * s1;
+  }
+  const n = Math.hypot(x, y, z) || 1;
+  x /= n; y /= n; z /= n;
+  return {
+    colatitude: (Math.acos(Math.max(-1, Math.min(1, z))) * 180) / Math.PI,
+    longitude: (Math.atan2(y, x) * 180) / Math.PI,
+    depth: va.depth + (vb.depth - va.depth) * k,
+  };
+}
+
+/* ⛔ AND THE SAME QUESTION ASKED OF A PATH THAT IS ALREADY DRAWN. ✅ Aevi (H2): *"along the ROUTED LINE
+ * between `from` and `to` when one exists (`worldRoadRoutes`, CCODE-626) at `fraction` of its length;
+ * otherwise a great-circle interpolation."*
+ * ⛑ `fraction OF ITS LENGTH`, not of its point count: the router's points are spaced by grid cells, so
+ * walking them evenly would move a hull in jerks — fast where the cells are coarse, slow where the route
+ * doubles back. Measured by arc length, a half-elapsed voyage is half-way along the road.
+ * ⛔ AND THE CONVENTION, WRITTEN DOWN, BECAUSE I GOT IT WRONG HERE FIRST: the path stores LATITUDE and this
+ * world stores COLATITUDE, related by `lat = colatitude - 90`. So the inverse is `colatitude = lat + 90`.
+ * ⚠️ I wrote `90 - lat`, which is the same confusion that put the Hundred Markets 27° from the Crossing in
+ * my own measuring script an hour earlier — and this time it was in code. Caught by driving a real voyage
+ * and seeing the path's ENDS not match its two ports: `cloudform` sits at colatitude 88 and the routed line
+ * started at 93. ⛑ A sign error of this kind cannot be caught by reading, only by checking the endpoints
+ * against the thing they are supposed to be, which the gate below now does.
+ * @param path [[lat, lon], …] as `worldRoadRoutes` stores it, or null
+ */
+export function pointAlongPath(path, f) {
+  if (!Array.isArray(path) || path.length < 2) return null;
+  const R2 = Math.PI / 180;
+  const vec = ([la, lo]) => ({ x: Math.cos(la * R2) * Math.cos(lo * R2), y: Math.cos(la * R2) * Math.sin(lo * R2), z: Math.sin(la * R2) });
+  const arc = (p, q) => { const u = vec(p), v = vec(q);
+    return Math.acos(Math.max(-1, Math.min(1, u.x * v.x + u.y * v.y + u.z * v.z))); };
+  const legs = [];
+  let total = 0;
+  for (let i = 1; i < path.length; i++) { const d = arc(path[i - 1], path[i]); legs.push(d); total += d; }
+  if (!(total > 0)) return { colatitude: path[0][0] + 90, longitude: path[0][1], depth: 0 };
+  const want = Math.max(0, Math.min(1, Number(f))) * total;
+  let run = 0;
+  for (let i = 0; i < legs.length; i++) {
+    if (run + legs[i] >= want || i === legs.length - 1) {
+      const within = legs[i] > 0 ? (want - run) / legs[i] : 0;
+      // ⛑ the leg itself is interpolated on the sphere too, so a long grid cell does not go flat
+      const A = { worldPos: { colatitude: path[i][0] + 90, longitude: path[i][1], depth: 0 } };
+      const B = { worldPos: { colatitude: path[i + 1][0] + 90, longitude: path[i + 1][1], depth: 0 } };
+      return worldPosBetween(A, B, Math.max(0, Math.min(1, within)));
+    }
+    run += legs[i];
+  }
+  return null;
+}

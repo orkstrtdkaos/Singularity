@@ -63,6 +63,13 @@ export const LABEL_STYLES = {
     fill: (o) => (o?.below ? "rgba(190,180,225,0.92)" : "rgba(236,226,196,0.92)"),
     halo: "rgba(10,12,18,0.72)", haloWidth: 2.6, rank: 3,
   },
+  // a field source names a CAUSE, not a place: a well or a sink and how strong. Rank 1 — above a town's name,
+  // below a power's, because it explains something the map cannot otherwise say.
+  source: {
+    font: () => `700 10px ui-serif, Georgia, serif`,
+    fill: (o) => (o?.well ? "#0b3f78" : "#8a1020"),
+    halo: "rgba(248,250,255,0.88)", haloWidth: 2.6, rank: 1,
+  },
   exit: {
     font: () => `600 10px ui-serif, Georgia, serif`,
     fill: () => "rgba(226,214,180,0.92)",
@@ -112,22 +119,61 @@ export function labelText(text, kind, max = 0) {
 export function labelSpace() {
   const taken = [];
   const hits = (b) => taken.find((o) => b.x0 < o.x1 && b.x1 > o.x0 && b.y0 < o.y1 && b.y1 > o.y0);
+  // ⛔ RANK IS THE SPACE'S BUSINESS NOW, NOT THE PAINTER'S ORDER. ✅ AEVI, after reading the code: *"Places
+  // are rank 2 in the table and powers rank 0, but in the paint the powers reserve first. The rank is the
+  // table's on paper and still the CODE ORDER'S in practice."* She is exactly right, and it is the whole
+  // reason a shared space did not fix the pile-up: one list does not help if whoever runs first simply wins.
+  // ⛑ SO A BETTER-RANKED LABEL MAY EVICT WORSE-RANKED ONES and take their ground. The evicted are reported
+  // rather than silently lost, because a caller that has already DRAWN one needs to know it was overruled —
+  // which is why every pass must reserve before it draws.
+  const evicted = [];
+  const rankOf = (b) => (b && Number.isFinite(b.rank) ? b.rank : 9);
   return {
     boxes: taken,
     /** Try each candidate offset in turn; returns the placed box, or null if every one collides. */
     place(x, y, w, h, { kind = "place", offsets = null, clampTo = null } = {}) {
       const half = w / 2 + 2;
+      const rank = (LABEL_STYLES[kind] || {}).rank ?? 9;
       const cand = offsets || [[0, 0], [0, -(h + 6)], [0, h + 6], [-half - 8, 0], [half + 8, 0]];
-      for (const [dx, dy] of cand) {
+      const made = (dx, dy) => {
         let cx = x + dx, cy = y + dy;
         if (clampTo) {
           cx = Math.max(half + 2, Math.min(clampTo.w - half - 2, cx));
           cy = Math.max(h + 2, Math.min(clampTo.h - 4, cy));
         }
-        const b = { x0: cx - half, x1: cx + half, y0: cy - h, y1: cy + 4, x: cx, y: cy, kind };
-        if (!hits(b)) { taken.push(b); return b; }
+        return { x0: cx - half, x1: cx + half, y0: cy - h, y1: cy + 4, x: cx, y: cy, kind, rank };
+      };
+      // ⛑ A FREE SPOT FIRST, ALWAYS. Eviction is the last resort, not the first move — a power that can sit
+      // beside a town rather than through it should.
+      for (const [dx, dy] of cand) { const b = made(dx, dy); if (!hits(b)) { taken.push(b); return b; } }
+      // ⛔ THEN, AND ONLY THEN, RANK DECIDES. A box may take a spot it collides with when every box it
+      // collides with is WORSE ranked; it may never push aside an equal or better one.
+      for (const [dx, dy] of cand) {
+        const b = made(dx, dy);
+        const clash = taken.filter((o) => b.x0 < o.x1 && b.x1 > o.x0 && b.y0 < o.y1 && b.y1 > o.y0);
+        if (!clash.length || !clash.every((o) => rankOf(o) > rank)) continue;
+        for (const o of clash) { evicted.push(o); taken.splice(taken.indexOf(o), 1); }
+        taken.push(b);
+        return b;
       }
-      return null;
+      return null;                                   // dropped, not shrunk — Aevi's A3 rule
+    },
+    /** What was overruled, so a pass that reserved earlier can skip drawing what it lost. */
+    evicted,
+    /** ⛔ IS THIS BOX STILL HELD? The question a deferred draw has to ask, because a box reserved early can be
+     *  evicted by something better-ranked arriving later — and ink already on the canvas cannot be taken back. */
+    holds: (b) => !!b && taken.includes(b),
+    /** ⛔ THE CHECK A GATE CAN RUN: no two reserved boxes intersect. Aevi: *"that gate could not have passed
+     *  this map."* It is the boxes that matter, and asserting the source text is how mine stayed green. */
+    overlaps() {
+      const bad = [];
+      for (let i = 0; i < taken.length; i++) {
+        for (let j = i + 1; j < taken.length; j++) {
+          const a = taken[i], b = taken[j];
+          if (a.x0 < b.x1 && b.x0 < a.x1 && a.y0 < b.y1 && b.y0 < a.y1) bad.push([a, b]);
+        }
+      }
+      return bad;
     },
     /** Reserve an exact box without trying alternatives — for a label that must sit where it sits. */
     claim(b) { if (hits(b)) return null; taken.push(b); return b; },
@@ -142,8 +188,14 @@ export function drawLabel(ctx, text, x, y, kind = "place", opts = {}) {
   if (!t) return null;
   ctx.strokeText(t, x, y);
   ctx.fillText(t, x, y);
+  // ⛔ MEASURE BEFORE RESETTING THE SPACING. ✅ AEVI found this in the browser: *"drawLabel sets
+  // letterSpacing to 0px and THEN calls measureText, so the `w` it returns for `power` (0.14em) and
+  // `powerUnder` (0.22em) is the UNSPACED width. The power pass sizes its box from that, so every power's
+  // box is narrower than its ink."* ⚠️ A box narrower than its ink is worse than no box: the space thinks
+  // it has reserved the label and the label overhangs it on both sides.
+  const w = ctx.measureText(t).width;
   if ("letterSpacing" in ctx) ctx.letterSpacing = "0px";
-  return { text: t, x, y, w: ctx.measureText(t).width };
+  return { text: t, x, y, w };
 }
 
 /** ⛑ HOW BIG A POWER'S NAME IS, from how much ground it holds — Aevi's "size scaled to its ground (15–22px)".

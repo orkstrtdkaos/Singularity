@@ -16,6 +16,40 @@
   "next": [],
   "releases": [
     {
+      "version": "2.19.9",
+      "date": "2026-10-06",
+      "entries": [
+        {
+          "kind": "internal",
+          "title": "Maintenance",
+          "summary": ""
+        }
+      ]
+    },
+    {
+      "version": "2.19.8",
+      "date": "2026-10-06",
+      "entries": [
+        {
+          "kind": "internal",
+          "title": "Maintenance",
+          "summary": ""
+        }
+      ]
+    },
+    {
+      "version": "2.19.7",
+      "date": "2026-10-06",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "Map labels stop printing through each other",
+          "summary": "A power's name was being lettered straight across the town underneath it.",
+          "detail": "Every kind of label now reserves its space before it draws — place names, power names, named ground, field sources and road signs — and which one wins where they compete is decided by what kind of label it is rather than by which happened to be drawn first. A name that cannot find room is dropped and its marker stays, so nothing is hidden by being overprinted."
+        }
+      ]
+    },
+    {
       "version": "2.19.6",
       "date": "2026-10-06",
       "entries": [

@@ -6505,6 +6505,8 @@ await (async () => {
           && /width="\$\{700 \* dprOf\(\)\}"/.test(tag);
       })(), "⚠️ measured: 700 CSS px with no style, against a 360–430px phone viewport — and scaling the attributes of an unstyled canvas scales what the player SEES");
 
+    const LENS675 = await import("../engine/lenses.js");
+    const ML675 = await import("../engine/maplabel.js");
     /* ═════ M2 + D1 (SNG-675) · ONE LABEL TABLE, ONE COLLISION SPACE ═════
      * ✅ AEVI: *"One plain font for everything … make it one table that every label goes through"*, and D1/M7,
      * the pile-up. ⛔ MEASURED FIRST, AND THE COUNT IS THE ARGUMENT: the region map had SIX label passes, all
@@ -6521,16 +6523,64 @@ await (async () => {
         return /export const LABEL_STYLES/.test(ml)
           && ["place", "power", "powerUnder", "district", "ground", "exit"].every((k) => ml.includes(k + ": {"))
           && /ui-serif/.test(ml) && /letterSpacing/.test(ml)
-          && /drawLabel\(ctx, name, box\.x, box\.y, "power"/.test(src);
+          && /, "power", sOpt\)/.test(src) && /"powerUnder"/.test(src);
       })(), "six passes, six fonts, all of them the same plain sans");
-    check("675/D1: ⛔ …and ONE collision space, made per paint, that every pass reserves from",
-      /_labelSpace = labelSpace\(\)/.test(src)
-      && (src.match(/_labelSpace \|\| labelSpace\(\)/g) || []).length >= 2
-      && /const space = _labelSpace/.test(src),
-      "four of the six passes had no box at all, and the two that did kept separate sets");
-    check("675/D1: ⛑ …and precedence is a property of the STYLE, not of which pass runs first",
-      /rank: 0/.test(mlSrc) && /rank: 2/.test(mlSrc),
-      "with six independent passes, which label won was an accident of code order");
+    /* ═════ D1, PROPERLY · THE GATE CHECKS BOXES, BECAUSE THE SOURCE-TEXT ONE WAS GREEN OVER A BROKEN MAP ═════
+     * ⛔ AEVI CHECKED THE BATCH IN THE BROWSER AND D1 WAS NOT MET. *"THE FELLOWSHIP OF THE FELL PELL is
+     * lettered straight through 'Millbrook +8' … the field-source label 'Archive Hollow +0.20' is drawn over
+     * 'The Disputed Zone… +3'."* Then she read the code and named all three causes:
+     *   1. the place pass never joined the shared space — so the powers found it empty where the towns were;
+     *   2. `drawLabel` reset `letterSpacing` BEFORE `measureText`, so a spaced-capital box was narrower than
+     *      its own ink;
+     *   3. the field sources reserved nowhere.
+     * ⚠️ AND HER SHARPEST POINT IS ABOUT THIS GATE: *"the smoke gate checks the source text, not boxes — so
+     * it was green while the map was not."* It asserted that `_labelSpace = labelSpace()` appears in app.js.
+     * It could not have failed. ⛑ THE QUESTION IS WHETHER ANY TWO RESERVED BOXES INTERSECT, so that is what
+     * is asked now, driven, over a deliberately crowded frame.
+     * ⛔ AND RANK IS THE SPACE'S BUSINESS NOW: *"places are rank 2 and powers rank 0, but in the paint the
+     * powers reserve first. The rank is the table's on paper and still the CODE ORDER'S in practice."* */
+    check("675/D1: ⛔ NO TWO RESERVED LABEL BOXES INTERSECT — driven over a crowded frame, not read off the source",
+      (() => {
+        const sp = ML675.labelSpace();
+        // forty labels of mixed kinds piled onto one knot, which is the Valley's centre in miniature
+        let placed = 0;
+        for (let i = 0; i < 40; i++) {
+          const kind = ["place", "power", "ground", "source", "exit"][i % 5];
+          const b = sp.place(480 + (i % 7) * 6, 250 + (i % 5) * 5, 90, 12, { kind, clampTo: { w: 977, h: 513 } });
+          if (b) placed++;
+        }
+        return placed > 0 && sp.overlaps().length === 0;
+      })(), "⚠️ the old form asserted that `labelSpace()` is CALLED, which no map can fail");
+    check("675/D1: ⛔ …and RANK decides, not the order the painter happens to run in",
+      (() => {
+        const sp = ML675.labelSpace();
+        const town = sp.place(500, 250, 90, 12, { kind: "place", offsets: [[0, 0]] });
+        if (!town) return false;
+        // a power arrives later at the same spot with ONE candidate, so it must either evict or be dropped
+        const power = sp.place(500, 250, 90, 12, { kind: "power", offsets: [[0, 0]] });
+        if (!power || !sp.evicted.some((e) => e.kind === "place")) return false;
+        // ⛑ and never the other way: a worse rank may not push aside a better one
+        const sp2 = ML675.labelSpace();
+        sp2.place(500, 250, 90, 12, { kind: "power", offsets: [[0, 0]] });
+        const loser = sp2.place(500, 250, 90, 12, { kind: "place", offsets: [[0, 0]] });
+        return loser === null && sp2.evicted.length === 0 && sp.overlaps().length === 0;
+      })(), "a shared list does not help if whoever runs first simply wins");
+    check("675/D1: ⛔ …and a spaced-capital label MEASURES SPACED — a box narrower than its ink is worse than no box",
+      (() => {
+        // a stub context: `measureText` answers wider while letterSpacing is set, which is what a real one does
+        const mk = () => ({ letterSpacing: "0px", font: "", lineWidth: 0, lineJoin: "", strokeStyle: "", fillStyle: "",
+          textAlign: "", strokeText() {}, fillText() {},
+          measureText(s) { const em = parseFloat(this.letterSpacing) || 0; return { width: s.length * 6 + s.length * em * 10 }; } });
+        const spaced = ML675.drawLabel(mk(), "FELLOWSHIP", 0, 0, "power", { size: 18 });
+        const plain = ML675.drawLabel(mk(), "FELLOWSHIP", 0, 0, "place", {});
+        return spaced.w > plain.w;
+      })(), "✅ Aevi: `drawLabel` set letterSpacing to 0px and THEN measured, so every power's box was narrower than its ink");
+    check("675/D1: ✅ …and every pass in the painter reserves — places, powers, named ground, field sources, road exits",
+      (src.match(/_labelSpace \|\| labelSpace\(\)/g) || []).length >= 4
+      && /const space = _labelSpace/.test(src)
+      && /kind: "source", clampTo/.test(src) && /kind: "place", clampTo/.test(src),
+      "⚠️ one pass that does not reserve is enough to put the map back where it started");
+
     check("675/M7: ⛔ a long place name breaks on a WORD — a hard slice cut 'The Disputed Zone — Fringe' mid-word",
       !/String\(l\.name \|\| id\)\.slice\(0, 22\)/.test(src)
       && /labelText\(l\.name \|\| id, "place", 24\)/.test(src),
@@ -6575,7 +6625,6 @@ await (async () => {
       /_framedFor !== regionId/.test(src) && /_framedFor = regionId;/.test(src)
       && /character\?\.knownPlaces/.test(src));
 
-    const LENS675 = await import("../engine/lenses.js");
     const CITYSRC675 = readFileSync(new URL("../engine/cityplan.js", import.meta.url), "utf8");
     /* ═════ M9 + M11 (SNG-675) · ENOUGH CITY, AND A RING THAT NAMES WHERE THE ROAD GOES ═════
      * ✅ M9: *"the mock fills the wall with hundreds of lots … the game has about 74 slabs in the outer ring

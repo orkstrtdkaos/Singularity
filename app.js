@@ -46,7 +46,7 @@ import { contributionsBy, lookKey } from "./engine/canon.js";   // CCODE-422: wh
 import { sourcesHere, meaningDensity } from "./engine/substrate.js";   // ✅ Erik 2026-10-04: the map’s meaning register reads the SAME function the metaphysical ceiling does   // ⛔ Erik 2026-09-12: the four sources and how well each answers HERE
 import { groundForDecl, groundTag, substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace, groundHere, groundCardFor, naniteAt, bandFactor, peoplePresentAt } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
 import { sceneImage, itemImage, artworkStyle, getArtMode, setArtMode, imagesEnabled, ensureImage, aestheticFor, regenPromptFor, onImageMinted, onComposedLookup, swapImageUrl, forgetImageUrl, bustedURL, isBustedURL, mintAction, IMAGE_MIN_BYTES, regenerateImage, acceptImage, isGeneratedImage, toggleKeep, likenessClause, houseStyleFor, sanitizeImagePrompt, imageURLFor, isMinorSubject, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor, lookFor, serviceRefusal, refusedSaid} from "./engine/art.js"; // SNG-401: draw it again without destroying the one they have
-import { drawLabel, labelText, labelSpace, powerSize, applyStyle } from "./engine/maplabel.js";
+import { drawLabel, labelText, labelSpace, powerSize, applyStyle, LABEL_STYLES } from "./engine/maplabel.js";
 import { openingFrame } from "./engine/worldmap.js";   // M3: open framed on what the player knows   // M2/D1: one table, one collision space
 import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, makePolarBase, regionExtent, bendRoad, roadNetwork, clipToFrame, routeRoads, makeGroundCost, GROUND_COST } from "./engine/worldglobe.js";
 // ⛔ ROUND 4 — whose ground is this, as things stand today. `realms.js` resolves the SAVE (losses, growth,
@@ -198,7 +198,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.19.6";
+const APP_VERSION = "2.19.9";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -12773,8 +12773,8 @@ function paintTerritory(ctx, base, ext, regionId, W, H) {
         offsets: [[0, 0], [0, -(size + 20)], [0, size + 20], [-wide / 2 - 12, 0], [wide / 2 + 12, 0]] });
     if (!box) continue;                          // dropped, not shrunk — the border still says whose this is
     ctx.textAlign = "center";
-    drawLabel(ctx, name, box.x, box.y, "power", sOpt);
-    drawLabel(ctx, under, box.x, box.y + 12, "powerUnder", {});
+    queueLabel(ctx, name, box, "power", sOpt);
+    queueLabel(ctx, under, box, "powerUnder", {}, 12);
   }
   ctx.restore();
 
@@ -13625,6 +13625,35 @@ let _regionView = { k: 1, cx: 0.5, cy: 0.5, sx: 0, sy: 0, sw: 0, sh: 0 };
 let _framedFor = null;
 // ⛔ M11 · the ring labels' own boxes, so a road's far end can be hovered for the yard it actually arrives in
 let _exitBoxes = [];
+/* ═════ D1 · RESERVE, THEN DRAW — AND THE ORDER OF THE INK IS THE TABLE'S, NOT THE PAINTER'S ═════
+ * ✅ AEVI: *"places are rank 2 and powers rank 0, but in the paint the powers reserve first. The rank is the
+ * table's on paper and still the CODE ORDER'S in practice."*
+ * ⛔ AND RANK ALONE DOES NOT FIX IT WHILE EACH PASS DRAWS AS IT GOES. A better-ranked label arriving later
+ * can take a worse-ranked one's ground — but that one's INK IS ALREADY ON THE CANVAS, and nothing can take it
+ * back. So every label is queued rather than drawn, and the queue is flushed once, in rank order, skipping
+ * anything the space no longer holds. ⛑ It also fixes the z-order for free: better ranks draw last and so
+ * sit on top, which is the one thing drawing-as-you-go got right only by accident. */
+let _labelQueue = [];
+// ⛑ `dy` RIDES THE SAME BOX. A power's second line sits under its first and is covered by the same
+// reservation; queueing it as `{ ...box, y: box.y + 12 }` made a NEW object, which `holds()` then refused
+// — my own guard silently dropped every power's italic under-line (3 of 20 on the Valley).
+function queueLabel(ctx, text, box, kind, opts, dy = 0) { if (box) _labelQueue.push({ ctx, text, box, kind, dy, opts: opts || {} }); }
+function flushLabels() {
+  const rankOf = (k) => (LABEL_STYLES[k] || {}).rank ?? 9;
+  let drawn = 0, overruled = 0;
+  for (const q of _labelQueue.slice().sort((a, b) => rankOf(b.kind) - rankOf(a.kind))) {
+    if (_labelSpace && !_labelSpace.holds(q.box)) { overruled++; continue; }   // overruled after it was queued
+    drawLabel(q.ctx, q.text, q.box.x, q.box.y + (q.dy || 0), q.kind, q.opts);
+    drawn++;
+  }
+  // ⛑ A COUNT, BECAUSE A DEFERRED DRAW FAILS SILENTLY. Nothing throws when a queue empties into nothing, and
+  // the map simply comes back without names — which is how this shipped once already.
+  // ⛑ A COUNT, BECAUSE A DEFERRED DRAW FAILS SILENTLY. Nothing throws when a queue empties into nothing
+  // and the map simply comes back without names — which is exactly how I shipped it once, and the line
+  // that found the last bug (3 of 20 overruled by my own guard).
+  if (_labelQueue.length) console.log(`[labels] ${drawn} drawn, ${overruled} overruled, of ${_labelQueue.length} queued`);
+  _labelQueue = [];
+}
 let _regionOff = null;
 // ⛔ M2/D1 — ONE COLLISION SPACE FOR THE WHOLE MAP, made fresh at the top of each paint. The region map had
 // SIX label passes; four could not see each other at all and the two that avoided collisions kept SEPARATE
@@ -13717,6 +13746,7 @@ function paintRegionMap(regionId) {
   const ctx = _regionOff.getContext("2d");
   _labelSpace = labelSpace();        // M2/D1: every pass below reserves from this one, in style rank order
   _exitBoxes = [];                   // M11: rebuilt each paint, like every other hit target on this canvas
+  _labelQueue = [];                  // D1: every label is queued and flushed once, in rank order
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   ctx.clearRect(0, 0, W, H);
   // ⛑ THE RASTER IS COMPUTED IN THE MAP'S OWN (CSS) FRAME and drawn through the transform, so it rasterises
@@ -14029,17 +14059,16 @@ function paintRegionMap(regionId) {
     // and fill are whatever they were BEFORE — and the two lines that used to set them were inside the block I
     // replaced. The label kept drawing, in whatever colour the field layer had left behind, which is the kind of
     // thing that looks like a style choice until somebody asks why one map's labels are green.
-    ctx.lineWidth = 2.6; ctx.lineJoin = "round";
-    ctx.strokeStyle = "rgba(248,250,255,0.88)";
-    ctx.fillStyle = well ? "#0b3f78" : "#8a1020";
-    ctx.font = "700 10px system-ui, sans-serif";
+    // ⛔ D1 — THE FIELD SOURCES RESERVE TOO. ✅ AEVI: *"the only callers of the shared space I found are the
+    // powers, the named ground and the road exits … the screen shows them overprinting"* — and she was right:
+    // "Archive Hollow +0.20" was drawn over "The Disputed Zone… +3". A pass that does not reserve is a pass
+    // the space cannot see, and one such pass is enough to put the map back where it started.
     const label = `${s.name} ${s.strength >= 0 ? "+" : ""}${s.strength.toFixed(2)}`;
-    const halfW = ctx.measureText(label).width / 2;
-    ctx.textAlign = p.x - halfW < 2 ? "left" : p.x + halfW > W - 2 ? "right" : "center";
-    const lx = ctx.textAlign === "left" ? 2 : ctx.textAlign === "right" ? W - 2 : p.x;
-    const ly = Math.max(11, p.y - 9);
-    ctx.strokeText(label, lx, ly);   // the halo first, so the ink sits inside it
-    ctx.fillText(label, lx, ly);
+    ctx.textAlign = "center";
+    const sw = (drawLabel(ctx, label, -9999, -9999, "source", { well })?.w) || 0;
+    const sbox = (_labelSpace || labelSpace()).place(p.x, Math.max(11, p.y - 9), sw, 12,
+      { kind: "source", clampTo: { w: W, h: H } });
+    queueLabel(ctx, label, sbox, "source", { well, align: "center" });
   }
 
   // ⛔ HER LAYER, OVER THE GROUND. bearing + km from the region centre — the same frame localMap uses
@@ -14074,7 +14103,7 @@ function paintRegionMap(regionId) {
         ctx.textAlign = "center";
         const gw2 = (drawLabel(ctx, gText, -9999, -9999, "ground", gOpt)?.w) || 0;
         const gbox = (_labelSpace || labelSpace()).place(p.x, p.y, gw2, 13, { kind: "ground", clampTo: { w: W, h: H } });
-        if (gbox) drawLabel(ctx, gText, gbox.x, gbox.y, "ground", gOpt);
+        queueLabel(ctx, gText, gbox, "ground", gOpt);
       }
     }
     // ⛔ ROADS COME FROM THE GRAPH, WHICH IS ALWAYS CONSISTENT. Erik: "the roads are only important in
@@ -14174,7 +14203,7 @@ function paintRegionMap(regionId) {
         const ex0 = ex.at.x + dx, ey0 = Math.max(10, Math.min(H - 4, ex.at.y - 3));
         const ebox = exSpace.place(ex0, ey0, ew, 12, { kind: "exit", clampTo: { w: W, h: H } });
         if (ebox) {
-          drawLabel(ctx, eText, ebox.x, ebox.y, "exit", { align: ctx.textAlign });
+          queueLabel(ctx, eText, ebox, "exit", { align: ctx.textAlign });
           // ⛑ M11's OTHER HALF, and it costs almost nothing now that M2's label space hands back a BOX: the
           // yard keeps its name on hover. `showChip` takes a location id and a yard IS a location, so the
           // chip that already describes a place describes this one with no new rendering at all.
@@ -14287,8 +14316,29 @@ function paintRegionMap(regionId) {
   }
   setPlaceFont(false);
   ctx.textAlign = "center";
+  // ═════ D1 · THE PLACES JOIN THE SHARED SPACE ═════
+  // ✅ AEVI, from the code rather than from the screen: *"`labels416` is decided by its own two `placeLabels`
+  // passes and the names are then drawn WITHOUT a `_labelSpace` reservation. The powers reserve from
+  // `_labelSpace` and find it empty where the towns are, so they take the middle."*
+  // ⛑ `placeLabels` STAYS — it is the better placer for places (two passes, and it carries a dropped name's
+  // tally onto whoever displaced it). What was missing is that its answer never reached the shared space, so
+  // every other pass painted as if the towns were not there. Each surviving name now RESERVES its drawn box.
+  // ⚠️ AND A NAME THE SPACE REFUSES IS DROPPED, not drawn anyway: rank decides (a power may overrule a town
+  // and take its ground), and Aevi's own A3 rule is that a dropped label leaves its GLYPH, which it does —
+  // the glyphs are painted above this loop and are untouched by any of it.
+  const placeBox = new Map();
   for (const m of marks416) {
     if (!labels416.shown.has(m.id)) continue;
+    const more0 = labels416.hiddenBy[m.id];
+    const txt0 = m.name + (more0 ? ` +${more0}` : "");
+    const w0 = (drawLabel(ctx, txt0, -9999, -9999, "place", { here: m.id === here, raw: true })?.w) || 0;
+    const b0 = (_labelSpace || labelSpace()).place(m.p.x, m.p.y + 18, w0, 12,
+      { kind: "place", clampTo: { w: W, h: H }, offsets: [[0, 0]] });
+    if (b0) placeBox.set(m.id, b0);
+  }
+  for (const m of marks416) {
+    if (!labels416.shown.has(m.id)) continue;
+    if (!placeBox.has(m.id)) continue;             // the space gave its ground to something that outranks it
     // ⛔ AEVI A3: "labels of other places inside it hide (glyphs stay)". A name left under an open cluster reads as
     // one of its members, which is the confusion the dim exists to prevent — the GLYPH stays, so the place does not
     // vanish, only its name steps back.
@@ -14299,10 +14349,13 @@ function paintRegionMap(regionId) {
     }
     const more = labels416.hiddenBy[m.id];
     // ✅ M2: through the table, so the 3px dark halo lands — a bare `fillText` had none, which is why a name
-    // over light ground was the one that disappeared.
-    drawLabel(ctx, m.name + (more ? ` +${more}` : ""), m.p.x, m.p.y + 18, "place",
+    // over light ground was the one that disappeared. ⛑ QUEUED, like every other pass: the box was reserved
+    // above, and the ink waits until the whole frame has had its say.
+    queueLabel(ctx, m.name + (more ? ` +${more}` : ""), placeBox.get(m.id), "place",
       { here: m.id === here, raw: true, align: "center" });
   }
+  // ⛔ AND HERE THE INK LANDS, ONCE, IN RANK ORDER. Nothing above this line has drawn a label.
+  flushLabels();
   const hereMark = marks416.find(m => m.id === here);
   if (hereMark) {
     ctx.strokeStyle = "#e8c14a"; ctx.lineWidth = 1.6;

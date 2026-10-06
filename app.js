@@ -48,7 +48,7 @@ import { groundForDecl, groundTag, substrateVerdict, locationDensity, carriedSub
 import { sceneImage, itemImage, artworkStyle, getArtMode, setArtMode, imagesEnabled, ensureImage, aestheticFor, regenPromptFor, onImageMinted, onComposedLookup, swapImageUrl, forgetImageUrl, bustedURL, isBustedURL, mintAction, IMAGE_MIN_BYTES, regenerateImage, acceptImage, isGeneratedImage, toggleKeep, likenessClause, houseStyleFor, sanitizeImagePrompt, imageURLFor, isMinorSubject, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor, lookFor, serviceRefusal, refusedSaid} from "./engine/art.js"; // SNG-401: draw it again without destroying the one they have
 import { drawLabel, labelText, labelSpace, powerSize, applyStyle, LABEL_STYLES } from "./engine/maplabel.js";
 import { openingFrame } from "./engine/worldmap.js";   // M3: open framed on what the player knows   // M2/D1: one table, one collision space
-import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, makePolarBase, regionExtent, bendRoad, roadNetwork, clipToFrame, routeRoads, makeGroundCost, GROUND_COST } from "./engine/worldglobe.js";
+import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, globeClickAction, REGION_FRAME_DEG, regionVoteAt, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, makePolarBase, regionExtent, bendRoad, roadNetwork, clipToFrame, routeRoads, makeGroundCost, GROUND_COST } from "./engine/worldglobe.js";
 // ⛔ ROUND 4 — whose ground is this, as things stand today. `realms.js` resolves the SAVE (losses, growth,
 // broken powers, taken holds, your own realm); `influence.js` stays pure and just evaluates.
 import { groundHolders, resolvedPowers, stateStamp, powerRelation } from "./engine/realms.js";
@@ -198,7 +198,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.19.16";
+const APP_VERSION = "2.19.19";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -12412,7 +12412,11 @@ function currentRegionId() {
 
 /** The tier strip + breadcrumb. Always shows where you are in the hierarchy and how to go up. */
 function mapTierBar() {
-  const rid = mapTier === "region" ? (mapFocus || currentRegionId()) : currentRegionId();
+  // ⛑ W2: on the WORLD tier the crumb names the region under the camera; on the region tier it names the
+  // region you are focused on. `_globeLookAt` is null until the globe has painted once, so the fallback is
+  // the old behaviour rather than an empty crumb.
+  const rid = mapTier === "region" ? (mapFocus || currentRegionId())
+    : (mapTier === "world" ? (_globeLookAt || currentRegionId()) : currentRegionId());
   const rName = (CONTENT.regions || []).find(r => r.regionId === rid)?.name || String(rid || "").replace(/_/g, " ");
   const locName = mapTier === "location" ? (CONTENT.locations[mapFocus]?.name || mapFocus) : null;
   const crumb = (label, tier, focus, active) =>
@@ -12422,7 +12426,7 @@ function mapTierBar() {
     <span class="hint">›</span>
     ${crumb(rName || "Region", "region", rid, mapTier === "region")}
     ${locName ? `<span class="hint">›</span>${crumb("⌂ " + locName, "location", mapFocus, true)}` : ""}
-    <span class="hint" style="margin-left:auto">${mapTier === "world" ? "Click a region to enter it" : mapTier === "region" ? "Click a place, then “Look inside”" : "What's inside this place"}</span>
+    <span class="hint" style="margin-left:auto">${mapTier === "world" ? "Click a region to frame it, again to enter" : mapTier === "region" ? "Click a place, then “Look inside”" : "What's inside this place"}</span>
   </div>`;
 }
 
@@ -12441,6 +12445,16 @@ let _regionMaps = null;
  *  and threw it away when it returned, which is why the canvas had no click handler: there was nothing to hit-test
  *  against. Kept here, it is the same array the painter drew from, so the picture and the pointer cannot disagree. */
 let _regionPick = null;      // { regionId, marks:[{id,name,x,y}], clusters:[{x,y,members:[mark]}] }
+/* ═════ W2 · THE REGION UNDER THE CAMERA, WHICH IS NOT THE REGION YOU ARE STANDING IN ═════
+ * ✅ AEVI (SNG-677 W2): *"`mapTierBar` on the world tier always names `currentRegionId()`, the character's
+ * region. That is the 'doesn't change' Erik sees."* ⚠️ She is right, and it is the whole of the complaint:
+ * you could fly the globe to the far side of the world and the crumb still read "The Valley of Echoes".
+ * ⛑ The globe writes this as it paints; `mapTierBar` reads it on the world tier and nowhere else, so the
+ * region tier's crumb keeps naming the region you are IN. Null until a globe paint has run — which is why
+ * every reader falls back to `currentRegionId()` rather than treating null as an answer.
+ * ⛔ And "you are here" stays its OWN mark: the gold ring and its name are drawn from
+ * `character.currentLocationId` in the pin pass, untouched by the camera. */
+let _globeLookAt = null;     // regionId under the camera centre, or null before the first globe paint
 /** ⛔ THE OPEN FAN, in canvas pixels. Null when nothing is fanned. */
 let _regionFan = null;       // { key, cx, cy, members:[{id,name,x,y}] }
 /** ⛑ THE CLICK RADIUS THE GLOBE HAS USED ALL ALONG (`nearest` in `wireWorldGlobe`), so one map does not feel
@@ -14983,6 +14997,23 @@ function wireWorldGlobe() {
     }
     return best;
   };
+  /* ═════ W2 · WHICH REGION IS THIS GROUND, AND IT IS NOT THE NEAREST SEAT ═════
+   * ✅ AEVI specced *"`regionNearest` of the unprojected centre, the same call `zoomBy` already makes."*
+   * ⛔ I MEASURED THE TWO READINGS AGAINST EACH OTHER AND THEY DISAGREE ON 45.1% OF THE SPHERE
+   * (area-weighted; 97% of the band from lat 60 to 90). They are different questions: `regionNearest` is a
+   * Voronoi cell on 39 medoids, `regionVoteAt` is the inverse-distance vote of 118 voters — and the VOTE is
+   * what `paintTerritory` fills and what W4's edges will be drawn from. ⚠️ So her reading would have made
+   * the crumb name one region while the ground under it was painted as another, half the time, and would
+   * have made the floor handoff ENTER the wrong region just as often.
+   * ⛑ The vote first, the seat only as a fallback where the vote has nothing to say. Her intent — name the
+   * region under the camera — is what is shipped; the reading that serves it is the one that agrees with
+   * the picture. The 45.1% is in po/, hers to overrule. */
+  const regionUnder = (lon, lat) => {
+    if (lon == null || lat == null) return null;
+    let v = null;
+    try { v = regionVoteAt(_terrain, lon, lat); } catch { v = null; }
+    return v || regionNearest(lon, lat);
+  };
 
   const bandFor = () => CONTENT.substrateModel?.sourceBands?.sources?.[source]?.band || null;
   const worldPosOf = (id) => CONTENT.locations?.[id]?.worldPos || null;
@@ -15002,6 +15033,26 @@ function wireWorldGlobe() {
     // ⚠️ NO GENERATOR WHILE DRAGGING. It is a real per-pixel cost; coarse-while-moving already exists
     // for the raster path and the same trade applies harder here.
     const span = spanDeg(view, Math.min(GW(), GH()));
+    /* ═════ W2 · THE CAMERA SAYS WHICH REGION IT IS LOOKING AT, EVERY FRAME ═════
+     * ✅ AEVI: *"name the region under the camera's centre: `regionNearest` of the unprojected centre, the
+     * same call `zoomBy` already makes … and update it while dragging."*
+     * ⛑ It costs one unproject and one pass over `_terrain.seats` — 38 of them — so it is affordable on a
+     * drag frame, where the per-pixel generator is not. ⛔ THE CRUMB IS WRITTEN DIRECTLY rather than through
+     * `renderMap`: re-rendering the whole screen under the mouse is the stutter that half-resolution
+     * dragging exists to avoid, and the crumb is one text node. */
+    {
+      const c0 = unproject(view.cx, view.cy, view);
+      const look = c0 ? regionUnder(c0.lon, c0.lat) : null;
+      if (look && look !== _globeLookAt) {
+        _globeLookAt = look;
+        const btn = document.querySelector('.map-tiers [data-maptier="region"]');
+        if (btn) {
+          const nm = (CONTENT.regions || []).find(r => r.regionId === look)?.name || String(look).replace(/_/g, " ");
+          btn.textContent = nm;
+          btn.dataset.mapfocus = look;      // ⛔ or the crumb would ENTER a region it no longer names
+        }
+      }
+    }
     const fine = coarse ? null : fineFor(span);
     // one closure per paint rather than a lookup per pixel; null when no areas are loaded
     const zone = _areas && _areas.disputed_zone;
@@ -15194,7 +15245,7 @@ function wireWorldGlobe() {
     const px = Math.min(GW(), GH());
     if (next > floorRadius(px)) {
       const c = unproject(view.cx, view.cy, view);
-      const rid = c ? regionNearest(c.lon, c.lat) : null;
+      const rid = c ? regionUnder(c.lon, c.lat) : null;
       if (rid) {
         if (readout) readout.textContent = `The world map ends near ${WORLD_TIER_FLOOR_DEG}° — below it the ground is drawn, not generated. Entering ${CONTENT.locations?.[rid]?.name || rid}.`;
         mapTier = "region"; mapFocus = rid; renderMap(); return;
@@ -15255,9 +15306,16 @@ function wireWorldGlobe() {
   // from the breadcrumb, because a list of places is still the fastest way to find one by NAME.
   const flyTo = (lat, lon, targetSpan) => {
     const startYaw = view.yaw, startPitch = view.pitch, startR = view.r;
-    // the r that produces the requested span — the inverse of spanDeg
-    const endR = Math.max(120, Math.min(Math.min(GW(), GH()) * 12,
-      (Math.min(GW(), GH()) / 2) / Math.sin(targetSpan / 2 * Math.PI / 180)));
+    /* ⛔ W1 · THE FLIGHT STOPS AT THE FLOOR, WHICH IT NEVER USED TO DO.
+     * ✅ AEVI: *"`zoomBy` hands off to the region map when it passes `floorRadius`. `flyTo`, used by both
+     * click and tap, never checks the floor. That makes click and tap a dead end below the floor, and the
+     * wheel the only way in."* ⚠️ The old cap was `min(GW,GH) * 12`; the floor is `≈ 5.73 × px`, so every
+     * target span under 10° flew straight through it. That is exactly the 8° frame she found: *"the globe
+     * is the world raster scaled up into visible blocks, with two white dots and no labels"* — which is
+     * also W6, because nothing below the floor should ever be painted at all. */
+    const px = Math.min(GW(), GH());
+    const endR = Math.max(120, Math.min(floorRadius(px),
+      (px / 2) / Math.sin(targetSpan / 2 * Math.PI / 180)));
     const endYaw = -lon, endPitch = Math.max(-89, Math.min(89, lat));
     // ⚠️ yaw takes the SHORT way round — without this a click across the meridian spins the long way
     let dYaw = ((endYaw - startYaw + 540) % 360) - 180;
@@ -15275,23 +15333,35 @@ function wireWorldGlobe() {
     };
     requestAnimationFrame(step);
   };
+  /* ═════ W1 · ONE CLICK FRAMES A REGION, A SECOND ENTERS IT ═════
+   * ✅ AEVI: *"Double-click entry is unreliable, because the first click starts a flight and the second
+   * lands on a moved pin. A phone has no double-click at all."* ⛔ So the dblclick handler is GONE and its
+   * job moved here: the second single click on a region you are already framing enters it. One gesture a
+   * finger can make, and the pin is not moving when the deciding click lands.
+   * ⛑ `_framed` is the region the camera was last flown to. Any other click — a different region, a drag,
+   * a zoom — is not the second half of a double, so it only reframes. */
+  let _framed = null;
+  const enterRegion = (rid, selectId) => {
+    if (!rid) return false;
+    mapTier = "region"; mapFocus = rid; renderMap(selectId || null); return true;
+  };
+  // ⛑ THE RULE IS `globeClickAction`'S; THIS IS ONLY THE HANDS. The handler finds the pin, performs what
+  // the engine decided, and reports it — so a test can prove the navigation without a canvas.
+  const regionOf = (id) => { const l = CONTENT.locations?.[id]; return l?.regionId || l?.region || null; };
   cv.onclick = (e) => {
     const p = nearest(e.offsetX, e.offsetY);
     if (!p) return;
-    const loc = CONTENT.locations?.[p.id];
-    const wp = loc?.worldPos;
+    const wp = CONTENT.locations?.[p.id]?.worldPos;
     if (!wp) return;
-    // a region seat frames its whole region; anywhere else frames the place and its neighbours
-    const isRegion = p.kind === "region";
-    flyTo(wp.colatitude - 90, wp.longitude, isRegion ? 26 : 8);
-    if (readout) readout.textContent = `${p.name}${isRegion ? " — the region, framed" : ""} · click again to go closer, or use the breadcrumb for the list`;
-  };
-  // ⚠️ double-click still ENTERS — the old navigation is a gesture away, not deleted
-  cv.ondblclick = (e) => {
-    const p = nearest(e.offsetX, e.offsetY);
-    if (!p) return;
-    const rid = CONTENT.locations?.[p.id]?.regionId || CONTENT.locations?.[p.id]?.region || p.region;
-    if (rid) { mapTier = "region"; mapFocus = rid; renderMap(); }
+    const act = globeClickAction(p, { framed: _framed, regionOf });
+    if (!act) return;
+    if (act.action === "enter") {
+      if (readout) readout.textContent = `Entering ${p.name}…`;
+      if (enterRegion(act.regionId, act.selectId)) return;
+    }
+    _framed = act.regionId;
+    flyTo(wp.colatitude - 90, wp.longitude, act.span || REGION_FRAME_DEG);
+    if (readout) readout.textContent = `${p.name} — framed · click again to enter, or use the breadcrumb for the list`;
   };
   // ⛑ THE WHEEL IS `bindGesture`'s NOW, and so is the pinch — both arrive at `zoomBy` above, which is the
   // body this handler used to hold, floor handoff and all. One rule, two ways of asking for it.

@@ -8011,18 +8011,47 @@ await (async () => {
     // The card grid existed because the globe could not resolve a region; it can, so a region is a ZOOM
     // LEVEL of the world rather than a separate screen. ⚠️ The old drill-down is not deleted — it moves
     // to double-click and the breadcrumb, because a list is still the fastest way to find a place by name.
-    const appSrc405raw = readFileSync(join(root, "app.js"), "utf8");
-    // ⚠️ SCOPED TO THE GLOBE'S OWN WIRING. This sliced from the FIRST `cv.onclick` in the whole file, which was the
-    // globe's only because nothing else had one — an index pin standing in for "the globe's". The region ground map
-    // got a click handler on 2026-10-04 and it sits earlier in the file, so the slice silently moved to the wrong
-    // canvas and this check started asking its question of a different screen.
-    const appSrc405 = appSrc405raw.slice(appSrc405raw.indexOf("function wireWorldGlobe("));
-    const clickBody = appSrc405.slice(appSrc405.indexOf("cv.onclick"), appSrc405.indexOf("cv.ondblclick"));
-    const dblBody = appSrc405.slice(appSrc405.indexOf("cv.ondblclick"), appSrc405.indexOf("cv.onwheel"));
-    check("405: a single click FRAMES the place on the globe instead of leaving for the card grid",
-      /flyTo\(/.test(clickBody) && !/renderMap\(\)/.test(clickBody));
-    check("405: …and the old drill-down survives on double-click — moved, not deleted",
-      /mapTier = "region"/.test(dblBody) && /renderMap\(\)/.test(dblBody));
+    /* ═════ W1 · RE-POINTED AT THE BEHAVIOUR, BECAUSE THE SOURCE TEXT MOVED ═════
+     * ⛔ BOTH OF THESE USED TO READ app.js AS A STRING: two `indexOf` slices between `cv.onclick`,
+     * `cv.ondblclick` and `cv.onwheel`. ⚠️ WHEN THE DBLCLICK HANDLER WAS DELETED THEY DID NOT REPORT THAT
+     * — `indexOf` returned -1, both slices ran to the end of the file, and two checks failed with nothing
+     * wrong in either rule. The same -1-slices-to-EOF shape that blocked a push for an hour in September.
+     * ✅ And it is the defect Aevi named on D1: *"the smoke gate checks the source text, not boxes — so it
+     * was green while the map was not."* ⛑ So the rule moved into `globeClickAction`, and these drive it.
+     * ✅ ERIK's standing rule, which is what makes this possible: *"harnesses simulate the real game; move
+     * play logic into the engine, app.js and tests call the same functions."* */
+    const regionOf405 = (id) => ({ millbrook: "valley", the_crossing: "the_center" })[id] || null;
+    const seat405 = { id: "valley", kind: "region", name: "The Valley of Echoes" };
+    check("405/W1: one click FRAMES a region — it does not leave the globe for the card grid",
+      (() => { const a = WG2.globeClickAction(seat405, { framed: null, regionOf: regionOf405 });
+        return a?.action === "frame" && a.regionId === "valley" && a.span === WG2.REGION_FRAME_DEG; })(),
+      "the card grid existed because the globe could not resolve a region; it can");
+    check("405/W1: …and a SECOND click on the region it is already framing enters it — the drill-down moved off dblclick, not deleted",
+      (() => { const a = WG2.globeClickAction(seat405, { framed: "valley", regionOf: regionOf405 });
+        return a?.action === "enter" && a.regionId === "valley" && !a.selectId; })(),
+      "✅ Aevi: *\"the first click starts a flight and the second lands on a moved pin. A phone has no double-click at all.\"*");
+    check("405/W1: …and a PLACE click enters its region with the place selected, never an 8° frame below the floor",
+      (() => { const a = WG2.globeClickAction({ id: "millbrook", kind: "settlement", name: "Millbrook" },
+          { framed: null, regionOf: regionOf405 });
+        return a?.action === "enter" && a.regionId === "valley" && a.selectId === "millbrook"; })(),
+      "✅ Aevi: *\"The place-level 8° frame should not exist on the globe\"* — it sat below floorRadius, so it could only paint upscaled blocks");
+    check("405/W1: …and the region frame stays ABOVE the floor, so a framed region is never drawn past the raster's resolution",
+      WG2.REGION_FRAME_DEG > WG2.WORLD_TIER_FLOOR_DEG,
+      "W6: if any frame paints the raster past its own resolution, that frame is the bug");
+    /* ⛔ AND THE CASE THE BROWSER FOUND THAT NO GATE WOULD HAVE: a region seat that is ALSO a waygate draws
+     * with the GATE icon, because `markerKind` tests the waygate branch before the region branch. Four of
+     * the twenty-five seats are like that — The Thin Edge, The Marchward, The Middle Way, The Thinning — so
+     * navigation reading `kind` would have entered them on the first click while the other twenty-one framed.
+     * ⚠️ A declaration order becoming a priority rule, which is the gang-outranks-an-order defect again. */
+    check("405/W1: …and a region seat that DRAWS AS A WAYGATE still frames — the icon's kind is not the navigation's question",
+      (() => { const seat = { id: "the_thinning", kind: "gate", tier: "region", name: "The Thinning" };
+        const a = WG2.globeClickAction(seat, { framed: null, regionOf: () => null });
+        const b = WG2.globeClickAction(seat, { framed: "the_thinning", regionOf: () => null });
+        return a?.action === "frame" && a.regionId === "the_thinning" && b?.action === "enter"; })(),
+      "4 of 25 seats carry a waygate; `markerKind` returns \"gate\" for them before it ever tests `t === \"region\"`");
+    check("405/W1: …and the two questions are still asked of the SAME record — markerKind keeps the icon, tier keeps the navigation",
+      WG2.markerKind({ t: "region", wg: 1 }) === "gate" && WG2.markerKind({ t: "region" }) === "region",
+      "if this reddens, `markerKind` changed its branch order and the seat rule should be re-read, not re-pointed");
 
     // ⛔ SNG-405 — A PATCH DECLINES OUTSIDE ITS WINDOW; IT DOES NOT CLAMP. Every read was pinned into
     // range with Math.min/Math.max, so a point beyond the patch returned its EDGE sample — the area

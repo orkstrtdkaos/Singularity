@@ -46,6 +46,52 @@ export const DEFAULT_VIEW = { yaw: 20, pitch: -52 };
  *  point we start to lose meaningful information, so we should switch to the regional map." */
 export const WORLD_TIER_FLOOR_DEG = 10;
 
+/* ═════ SNG-677 W1 · WHAT A CLICK ON A GLOBE PIN DOES ═════
+ * ✅ ERIK's standing rule: *"harnesses simulate the real game; move play logic into the engine, app.js and
+ * tests call the same functions."* ⛔ THIS USED TO LIVE IN THE HANDLER, AND THE GATE READ ITS SOURCE TEXT
+ * — two `indexOf` slices between `cv.onclick`, `cv.ondblclick` and `cv.onwheel`. ⚠️ Which is the defect
+ * Aevi named on D1: *"the smoke gate checks the source text, not boxes — so it was green while the map was
+ * not."* And it broke the moment the behaviour it described MOVED: deleting the dblclick handler left both
+ * slices running to the end of the file, so both checks failed without either rule being wrong.
+ * ⛑ The decision is pure — a pin, what is currently framed, and a way to ask which region an id is in —
+ * so it belongs here, where a test can drive it with no canvas at all. */
+export const REGION_FRAME_DEG = 26;
+
+/**
+ * @param pin        {{id, kind, tier, name}} the pin under the pointer, from `visiblePins`
+ * @param framed     the region id the camera was last flown to, or null
+ * @param regionOf   (id) => regionId, so this module needs no CONTENT
+ * @returns {{action:"frame"|"enter", regionId, selectId, span}}
+ */
+export function globeClickAction(pin, { framed = null, regionOf = null } = {}) {
+  if (!pin || !pin.id) return null;
+  /* ⛔ "IS THIS A REGION SEAT" IS `tier`, NOT `kind` — measured 2026-10-06, and it cost 4 of 25 seats.
+   * `markerKind` is the ICON vocabulary and it tests the waygate branch FIRST:
+   *     if (m.ro === "gate" || m.wg) return "gate";
+   *     if (m.t === "region")        return "region";
+   * ⚠️ So a region seat that is ALSO a waygate draws as a gate and, if navigation read `kind`, would skip
+   * framing and enter on the first click — The Thin Edge, The Marchward, The Middle Way and The Thinning,
+   * four of the twenty-five, behaving differently from the other twenty-one for a reason nobody chose.
+   * ⛑ Same shape as the key order that made a gang outrank an order: a declaration order quietly became a
+   * priority rule. `kind` answers "what shape do I draw"; `tier` answers "is this a region". Two questions,
+   * so two readings — and `kind` is kept as the fallback for any caller that has no tier to offer. */
+  const isSeat = pin.tier ? pin.tier === "region" : pin.kind === "region";
+  const rid = (regionOf ? regionOf(pin.id) : null) || (isSeat ? pin.id : null);
+  // ⛔ A PLACE CLICK ENTERS; IT DOES NOT FRAME. ✅ Aevi: *"The place-level 8° frame should not exist on the
+  // globe. A place click enters its region with the place selected."* That frame sat BELOW `floorRadius`,
+  // so it could only ever paint the raster past its own resolution — W6's bug, reached by a click.
+  if (!isSeat) {
+    return rid
+      ? { action: "enter", regionId: rid, selectId: pin.id, span: null }
+      // ⛑ no region to enter is not a reason to do nothing: frame it and let the next click try again.
+      : { action: "frame", regionId: null, selectId: null, span: REGION_FRAME_DEG };
+  }
+  // ⛔ ONE CLICK FRAMES, A SECOND ENTERS. ✅ Aevi: *"Double-click entry is unreliable, because the first
+  // click starts a flight and the second lands on a moved pin. A phone has no double-click at all."*
+  if (framed === pin.id) return { action: "enter", regionId: rid || pin.id, selectId: null, span: null };
+  return { action: "frame", regionId: pin.id, selectId: null, span: REGION_FRAME_DEG };
+}
+
 /** The camera radius at which the world tier bottoms out, for a given canvas. */
 export function floorRadius(canvasPx) {
   return (canvasPx / 2) / Math.sin((WORLD_TIER_FLOOR_DEG / 2) * Math.PI / 180);
@@ -77,6 +123,19 @@ export function decodeTerrain(doc) {
     // normalisation constants ride too, because a detail patch must reproduce the SAME hypsometry as the
     // baked raster or the two draw different worlds at the seam.
     hydrology: doc.hydrology || null, placeNames: doc.placeNames || null, fields: doc.fields || null,
+    /* ⛔ AND `seats` IS THE SAME FAILURE AGAIN, ONE FIELD LATER — found 2026-10-06 driving SNG-677 W2.
+     * The asset has carried a seat for all 39 regions (`{regionId: [lat, lon, placeId]}`) the whole time,
+     * and this decoder dropped it, so `_terrain.seats` was `undefined` on every frame the globe ever drew.
+     * ⚠️ IT HAD TWO READERS AND NO WRITER, AND BOTH FAILED SILENTLY because `regionNearest` returns null
+     * over an empty map rather than throwing:
+     *   1. `zoomBy`'s floor handoff — `const rid = c ? regionNearest(...) : null; if (rid) {…}` — so the
+     *      wheel has NEVER ONCE entered a region. ✅ Aevi read it from the source and concluded *"that makes
+     *      click and tap a dead end below the floor, and the wheel the only way in"*; in fact there was no
+     *      way in at all except the breadcrumb, which is why W1 matters more than the order says.
+     *   2. W2's "which region is the camera over", which is what sent me looking.
+     * ⛑ A null-tolerant guard is where a missing field hides — the same shape as `if (!creature) continue`
+     * swallowing a reader pointed at the wrong level of the bestiary. */
+    seats: doc.seats || null,
     RLO: doc.generatedBy?.RLO ?? null, RHI: doc.generatedBy?.RHI ?? null,
   };
 }

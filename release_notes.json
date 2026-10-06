@@ -16,6 +16,49 @@
   "next": [],
   "releases": [
     {
+      "version": "2.19.19",
+      "date": "2026-10-06",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "Every region seat on the world map behaves the same",
+          "summary": "Four region seats that also hold a waygate were drawn with the waygate's mark, and that mark was deciding how a click behaved — so those four jumped straight into their region while the other twenty-one framed first."
+        }
+      ]
+    },
+    {
+      "version": "2.19.18",
+      "date": "2026-10-06",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "The world map can be entered again",
+          "summary": "Zooming past the world map's limit was supposed to take you into the region you were over, and never did — the world's region seats were being dropped as the map loaded, so the map could not tell which region you were looking at. Clicking and the breadcrumb were the only ways in."
+        }
+      ]
+    },
+    {
+      "version": "2.19.17",
+      "date": "2026-10-06",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "Clicking the world map takes you somewhere",
+          "summary": "One click frames a region and a second takes you into it — on a mouse or a phone. Clicking a place takes you straight to its region with that place already chosen. Before, only the scroll wheel could get you in."
+        },
+        {
+          "kind": "fix",
+          "title": "The world map stops where its ground stops",
+          "summary": "It used to keep zooming past the point where there was anything to show, into blocks of upscaled colour with nothing named on them."
+        },
+        {
+          "kind": "fix",
+          "title": "The world map says which region you are looking at",
+          "summary": "The name above the map follows the camera instead of always naming the region you are standing in. Where you are keeps its own gold mark."
+        }
+      ]
+    },
+    {
       "version": "2.19.16",
       "date": "2026-10-06",
       "entries": [

@@ -2,6 +2,7 @@
  "schemaVersion": 1,
  "id": "greater_arcs",
  "kind": "meta_arc",
+ "_places_20261006": "The three regional arcs carry `places` (location ids) for what `crossesRegions` says in prose, so the opening coda can find the arc nearest a start: the Green Schism in the Deepwood and the Quickwood, the Bleeding Grammar in the Blocklands and at the Great Engine, the Widening at the high pass. No `regions` yet: that would also confine the arcs' stage effects, and the Deepwood shares its region with every manifest domain, so that reach is a separate decision. World arcs carry none; they are everywhere.",
  "note": "World-spanning arcs BEYOND the six Valley-centered ones in world_superstructure. These run across Reaches and domains, at a larger scale and slower burn — the grain of the whole world, not just the Valley basin. Same doctrine: grain not rails; the world-tick advances them offscreen; the player can join, deflect, ignore-and-feel, or become the hinge. Each names hinge NPCs (legends + domain factions) and which regions it crosses. Authored by Aevi (PO), extending the superstructure to world scale.",
  "arcs": [
   {
@@ -499,6 +500,7 @@
   },
   {
    "id": "arc_block_bleed",
+   "places": ["the_blocklands", "the_great_engine"],
    "name": "The Bleeding Grammar",
    "scale": "regional",
    "pressure": "medium",
@@ -634,6 +636,7 @@
   },
   {
    "id": "arc_green_schism",
+   "places": ["ent_deepwood", "dw_the_moot", "dw_the_thinedge", "dw_the_burnscar", "thornwake_glade", "the_quickwood_eaves", "gen-quickwood-margin", "the_heartroot"],
    "name": "The Green Schism",
    "scale": "regional",
    "pressure": "slow-building",
@@ -1106,6 +1109,7 @@
   },
   {
    "id": "arc_the_widening",
+   "places": ["kestrels_roost"],
    "name": "The Widening",
    "scale": "regional",
    "pressure": "slow and far",

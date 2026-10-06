@@ -319,6 +319,12 @@
  "begin": "Begin",
  "coda": {
   "_what": "Played once, after the character is made and before the first scene. The same globe, now the world as it is: it turns to the character's starting place and zooms to its region. The lines are filled from live data; `{arcFace}` is the publicFace of the current stage of the nearest arc to that place (proximity decides; never the water by default).",
+  "arcPreference": [
+   "arc_the_long_petition",
+   "arc_the_poles_pull",
+   "arc_the_widening"
+  ],
+  "_arcPreference": "When no arc names the starting place or its region, the coda takes the first of these that is still turning. The Long Petition first: its first face is about people asking, which a newcomer meets on the first day. Never the water.",
   "shots": [
    {
     "id": "coda_1",
@@ -356,7 +362,9 @@
  "controls": {
   "skip": "Skip",
   "watchAgain": "Watch the opening",
-  "next": "Next"
+  "next": "Next",
+  "unlockLine": "A film about {film} is in the Library.",
+  "_unlockLine": "Said once in the scene news when a film unlocks. {film} is the film's `name`."
  },
  "visuals": {
   "_direction": "One globe from the first shot to the last; it is the game's own globe (worldglobe.js) wherever it can be, so the world the player is shown at the end is the world they play in. Each token below names what is on screen. Draw with the game's own palette and type; no faces, no named figures, nothing that confirms a Precursor or a Sovereign.",

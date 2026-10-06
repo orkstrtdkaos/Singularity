@@ -16,6 +16,50 @@
   "next": [],
   "releases": [
     {
+      "version": "2.20.9",
+      "date": "2026-10-06",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "No name on the world map without its mark",
+          "summary": "Zoomed in, names of places and holds outside the view were being pulled to the edge of the map with nothing under them."
+        }
+      ]
+    },
+    {
+      "version": "2.20.8",
+      "date": "2026-10-06",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "Your holds keep their names on the world map",
+          "summary": "Three of five were losing their names to ground that should not have outranked them."
+        }
+      ]
+    },
+    {
+      "version": "2.20.7",
+      "date": "2026-10-06",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "Your holds are named on the world map",
+          "summary": "Their marks were drawn at every width but none of them said what it was."
+        }
+      ]
+    },
+    {
+      "version": "2.20.6",
+      "date": "2026-10-06",
+      "entries": [
+        {
+          "kind": "feature",
+          "title": "Your holds are on the world map too",
+          "summary": "The same marks the region map shows, on the globe — and a ship under way is on the water there, with her course behind and ahead of her. Your own holds keep their names at any width you can read them at."
+        }
+      ]
+    },
+    {
       "version": "2.20.5",
       "date": "2026-10-06",
       "entries": [

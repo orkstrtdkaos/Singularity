@@ -8066,6 +8066,38 @@ await (async () => {
       WG2.markerKind({ t: "region", wg: 1 }) === "gate" && WG2.markerKind({ t: "region" }) === "region",
       "if this reddens, `markerKind` changed its branch order and the seat rule should be re-read, not re-pointed");
 
+    /* ═════ SNG-677 W3 / SNG-679 H3 · A NAME MUST HAVE ITS MARK UNDER IT ═════
+     * ⛔ `project` REFUSES ONLY WHAT IS BEHIND THE LIMB (z <= 0), NOT WHAT IS OUTSIDE THE FRAME. So at any
+     * span narrower than the full globe, a place or a hold well away from the view centre still gets a
+     * position — one that lands far outside the canvas. Its mark draws where nobody can see it, and
+     * `clampTo` pulls its LABEL back into the frame: a name at the frame's edge with nothing beneath it.
+     * ⚠️ MY OWN DEFECT, FROM W3 THIS MORNING, and the hold pass inherited it. Measured on the live globe
+     * zoomed in: 228 gold pixels hugging the frame edges against 346 inside it, and the diagnostic said
+     * "5 drawn of 5" the whole time — because drawing off-canvas is still drawing. After the cull: 0 at the
+     * edges, 696 inside, and the label pass reports "97 off the frame" at a 60° span, which is the size of
+     * what had been competing for space it had no claim to.
+     * ⛑ Gated on the PROJECTION's contract rather than on the painter's source, because the contract is the
+     * thing that surprised me: a caller must not assume a non-null point is a visible one. */
+    {
+      const WGf = await import("../engine/worldglobe.js");
+      const viewF = { yaw: 0, pitch: 0, r: 4000, cx: 350, cy: 270 };   // deeply zoomed in
+      const centre = WGf.project(0, 0, viewF, 1);
+      const far = WGf.project(40, 0, viewF, 1);                        // 40° away: on the near face, far off-frame
+      check("677/W3: ⛔ `project` returns a point for anything on the NEAR FACE, even far outside the frame — a non-null point is not a visible one",
+        !!centre && !!far && far.x > 700 + 24,
+        far ? `a place 40° off centre lands at x=${far.x.toFixed(0)} on a 700px canvas` : "null");
+      check("677/W3: …and the painter culls by the FRAME before it reserves a label, so nothing is named where its mark cannot be seen",
+        (() => { const src = readFileSync(join(root, "app.js"), "utf8");
+          if (!/const inFrame3 = \(p\) =>/.test(src)) return false;
+          // every one of the four passes has to use it, or the one that does not puts a name back at the edge
+          // ⚠️ FOUR, not five: the DEFINITION reads `const inFrame3 = (p) =>` and so does not match a call.
+          // My first cut asked for five and reddened on correct code — a gate whose arithmetic is wrong
+          // accuses the thing it is guarding.
+          const uses = (src.match(/inFrame3\(/g) || []).length;
+          return uses >= 4; })(),
+        "the places, the region seats, a hold's label and a hold's mark — all four passes, or the one that skips it puts a name back at the edge");
+    }
+
     /* ═════ SNG-679 H1 + H3 + H4 · HOLDS ON THE MAPS ═════
      * ✅ ERIK: *"Make sure traveling holds can show up on all the map levels."* ⛔ Aevi's read of origin:
      * *"NO MAP DRAWS A HOLDING. `character.holdings` is read only for framing the world view."* */

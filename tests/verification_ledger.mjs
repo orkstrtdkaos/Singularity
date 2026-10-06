@@ -100,6 +100,8 @@ const LEDGER = [
             "677/W3: …and the zoom gating is ORDERED — a waygate survives a wider view than a town, a town than a site",
             "677/W3: …and a region SEAT is lettered once, not as a place and again as its region",
             "677/W3: …and the FLUSH asks the style for a per-label rank exactly as the space does",
+            "677/W3: ⛔ `project` returns a point for anything on the NEAR FACE, even far outside the frame — a non-null point is not a visible one",
+            "677/W3: …and the painter culls by the FRAME before it reserves a label, so nothing is named where its mark cannot be seen",
             "677: the world map's roads are ROUTED over the ground, not arced between endpoints",
             "677: …and a routed road departs from the straight line MORE than the arc it replaced — which is the whole of Erik's report",
             "677: …and the ±180 SEAM IS GUARDED — a plate-carrée grid cannot see that the seam is a seam",

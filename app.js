@@ -202,7 +202,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.20.5";
+const APP_VERSION = "2.20.9";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -12472,6 +12472,10 @@ let _globeEsc = null;
  * answer, just less specific than the road, and either way the 180° lerp error is gone. The two readers can
  * differ for one day's derived position before any map has been opened; they cannot differ once one has. */
 let _worldRoutes = null;
+/* ⛔ SNG-679 H3 · WHAT THE GLOBE'S HOLD PASS DREW, KEPT — so a hold can be tapped there as well, which is
+ * H3's last clause ("Tapping one opens the SNG-677 card"). Its own list rather than the region map's,
+ * because the two maps are never on screen together and sharing one would make a stale read possible. */
+let _globeHoldPick = [];
 /** ⛔ THE OPEN FAN, in canvas pixels. Null when nothing is fanned. */
 let _regionFan = null;       // { key, cx, cy, members:[{id,name,x,y}] }
 /* ⛔ SNG-679 H3 · WHAT THE HOLD PASS DREW, KEPT — the same reason `_regionPick` is kept: a mark nothing
@@ -15458,7 +15462,62 @@ function wireWorldGlobe() {
         const pid = (_terrain.seats[rid] || [])[2];
         if (pid) seatName.set(pid, String((CONTENT.regions || []).find((r) => r.regionId === rid)?.name || rid.replace(/_/g, " ")));
       }
-      let qRegion = 0, qPlace = 0, qSkippedDup = 0;
+      let qRegion = 0, qPlace = 0, qSkippedDup = 0, qOffFrame = 0;
+      /* ═════ A NAME MUST HAVE ITS MARK UNDER IT ═════
+       * ⛔ `project` RETURNS A POINT FOR THE WHOLE NEAR HEMISPHERE, whatever the zoom: it refuses only what
+       * is behind the limb (z <= 0). So at any span narrower than the full globe, a place or a hold well away
+       * from the view centre still gets a position — one that lands far OUTSIDE the canvas. Its mark then
+       * draws where nobody can see it, and `clampTo` pulls its LABEL back into the frame, which puts a name
+       * at the frame's edge with nothing beneath it.
+       * ⚠️ MEASURED on the live globe, zoomed in: 228 gold pixels hugging the frame edges against 346 inside
+       * it — and it is MY OWN defect from this morning's W3, now inherited by the hold pass. The diagnostic
+       * said "5 drawn of 5" the whole time, because drawing off-canvas is still drawing.
+       * ⛑ So the frame decides, before anything is reserved. The margin is generous (a label's own height),
+       * because a mark just inside the edge may legitimately carry a name that leans inward. */
+      const inFrame3 = (p) => !!p && p.x > -24 && p.y > -24 && p.x < W3 + 24 && p.y < H3 + 24;
+
+      /* ═════ SNG-679 H3 · THE WORLD MAP'S HOLDS, RESERVED IN RANK ORDER ═════
+       * ✅ ERIK: *"Make sure traveling holds can show up on ALL the map levels."*
+       * ⛔ AND THE ORDER OF THESE PASSES IS THE WHOLE CORRECTNESS OF IT — which is §0's lesson, and I had
+       * just repeated the mistake it exists for. My first cut ran the hold pass AFTER the places and the
+       * region names, so holds reserved LAST despite ranking first, and the globe reported "5 drawn of 5
+       * held, 2 named": three of the player's own holds silently lost their names to ground that outranked
+       * nothing. ✅ Aevi, on §0: *"the reservation has to happen in that order too, not only the flush.
+       * Otherwise rank still means paint order."*
+       * ⛑ So the order below is her amended precedence, exactly: the place you are in (-1) → YOUR holds
+       * (-0.5) → places (0) → OTHER players' holds (0.5) → … → region names (6). The MARKS are drawn in one
+       * sweep at the end, because marks do not compete for the label space and only their z-order is at
+       * stake; it is the RESERVATIONS that have to be in rank order.
+       * ⛑ No unwrap and no region filter here: `project` feeds the longitude to sin and cos, which are
+       * periodic, and this is the whole world, so every hold belongs on it. The limb culls the far side. */
+      const heldG = mapHolds(character, { sharedStore: sharedHolds, locations: CONTENT.locations,
+        worldDay: (() => { try { return absoluteWorldDay(); } catch { return null; } })(),
+        routes: _worldRoutes?.byPair || null, content: CONTENT,
+        nameOf: (id) => character?.npcRegistry?.[id]?.name || CONTENT.npcs?.[id]?.name || null });
+      let qHold = 0;
+      const holdAt = (row) => {
+        if (!row.worldPos) return null;
+        const pr2 = project(row.worldPos.longitude, row.worldPos.colatitude - 90, view, 1);
+        if (!pr2) return null;
+        const m = holdMarker(row);
+        const moving = m.moving;
+        return { x: pr2.x + (moving ? 0 : 9), y: pr2.y + (moving ? 0 : -7), m };
+      };
+      const reserveHold = (row) => {
+        // ⛔ YOUR OWN HOLD IS ALWAYS NAMED; another player's is gated like a town. There are a handful of
+        // yours and there can be many of theirs, and yours is the mark you put on the world.
+        if (row.own === false && glyphSpan > SHOW.settlement) return;
+        const at2 = holdAt(row);
+        if (!at2) return;
+        if (!inFrame3(at2)) { qOffFrame++; return; }
+        const kind = row.own !== false ? "holdOwn" : "holdOther";
+        const nm2 = String(row.name || row.id);
+        const w2 = wOf(nm2, kind, {});
+        const box2 = sp3.place(at2.x, at2.y - at2.m.r - 7, w2, 12,
+          { kind, clampTo: { w: W3, h: H3 },
+            offsets: [[0, 0], [0, at2.m.r * 2 + 16], [-w2 / 2 - 8, at2.m.r + 6], [w2 / 2 + 8, at2.m.r + 6]] });
+        if (box2) { ctx.textAlign = "center"; queueLabel(ctx, nm2, box2, kind, {}); qHold++; }
+      };
 
       // ── 1 · the place you are standing in, always ──
       const hereP = pins.find((p) => p.id === here);
@@ -15471,11 +15530,15 @@ function wireWorldGlobe() {
         if (box) { ctx.textAlign = "center"; queueLabel(ctx, nm, box, "place", { here: true }); qPlace++; }
       }
 
+      // ── 1b · YOUR holds, above every place but the one you stand in ──
+      for (const row of heldG.rows) if (row.own !== false) reserveHold(row);
+
       // ── 2 · the other places, by what the zoom allows ──
       for (const p of pins) {
         if (p.id === here) continue;
         const lim = SHOW[p.kind] ?? SHOW.settlement;
         if (glyphSpan > lim) continue;
+        if (!inFrame3(p)) { qOffFrame++; continue; }   // its glyph is off-canvas; a clamped name would be a lie
         const nm = String(p.name || p.id);
         if (seatName.get(p.id) === nm) { qSkippedDup++; continue; }   // the region pass letters this very word here
         const w = wOf(nm, "place", {});
@@ -15484,6 +15547,9 @@ function wireWorldGlobe() {
             offsets: [[0, 0], [0, 25], [-w / 2 - 9, 6], [w / 2 + 9, 6]] });
         if (box) { ctx.textAlign = "center"; queueLabel(ctx, nm, box, "place", {}); qPlace++; }
       }
+
+      // ── 2b · OTHER players' holds, below the places and above the field sources ──
+      for (const row of heldG.rows) if (row.own === false) reserveHold(row);
 
       // ── 3 · the region names, at their seats ──
       // ⛔ THE SEAT IS THE ASSET'S, not a centroid of this module's own invention — and it only became
@@ -15494,6 +15560,7 @@ function wireWorldGlobe() {
         const s = seats3[rid];
         const pr = project(Number(s[1]), Number(s[0]), view, 1);
         if (!pr) continue;                                   // behind the limb
+        if (!inFrame3(pr)) { qOffFrame++; continue; }         // …or off the frame, which `project` does not refuse
         const nm = String((CONTENT.regions || []).find((r) => r.regionId === rid)?.name || rid.replace(/_/g, " "));
         // ⛑ the region under the camera is the one you are about to enter (W2), so it is the one that is not
         // dimmed. Every other name is context.
@@ -15505,10 +15572,25 @@ function wireWorldGlobe() {
         if (box) { ctx.textAlign = "center"; queueLabel(ctx, nm, box, "region", opts); qRegion++; }
       }
 
+      /* ⛑ THE MARKS, IN ONE SWEEP. They do not compete for the label space — only for z-order — so they
+       * are drawn after every reservation is settled and before the one flush. */
+      _globeHoldPick = [];
+      for (const row of heldG.rows) {
+        // ⛑ the frame culls the MARK as well, so "drawn" counts what a player can actually see
+        const hit = paintHoldRow(ctx, row, (lon, lat) => {
+          const pr2 = project(lon, lat, view, 1);
+          return inFrame3(pr2) ? pr2 : null;
+        });
+        if (hit) _globeHoldPick.push(hit);
+      }
+      if (!coarse && heldG.rows.length) console.log(`[holds] globe: ${_globeHoldPick.length} drawn of ${heldG.rows.length} held, ${qHold} named`);
+
       flushLabels();
       // ⛑ THE COUNT, because a deferred draw fails silently and this pass is the whole of W3. If a change
       // ever empties it, the globe comes back looking exactly as Aevi found it and nothing throws.
-      if (!coarse) console.log(`[globe labels] span ${glyphSpan.toFixed(0)}° · queued ${qRegion} region + ${qPlace} place${qSkippedDup ? ` · ${qSkippedDup} seat name(s) left to the region pass` : ""}`);
+      if (!coarse) console.log(`[globe labels] span ${glyphSpan.toFixed(0)}° · queued ${qRegion} region + ${qPlace} place`
+        + `${qSkippedDup ? ` · ${qSkippedDup} seat name(s) left to the region pass` : ""}`
+        + `${qOffFrame ? ` · ${qOffFrame} off the frame` : ""}`);
     }
   }
 

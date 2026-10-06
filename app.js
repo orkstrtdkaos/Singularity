@@ -47,7 +47,7 @@ import { sourcesHere, meaningDensity } from "./engine/substrate.js";   // ✅ Er
 import { groundForDecl, groundTag, substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace, groundHere, groundCardFor, naniteAt, bandFactor, peoplePresentAt } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
 import { sceneImage, itemImage, artworkStyle, getArtMode, setArtMode, imagesEnabled, ensureImage, aestheticFor, regenPromptFor, onImageMinted, onComposedLookup, swapImageUrl, forgetImageUrl, bustedURL, isBustedURL, mintAction, IMAGE_MIN_BYTES, regenerateImage, acceptImage, isGeneratedImage, toggleKeep, likenessClause, houseStyleFor, sanitizeImagePrompt, imageURLFor, isMinorSubject, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor, lookFor, serviceRefusal, refusedSaid} from "./engine/art.js"; // SNG-401: draw it again without destroying the one they have
 import { drawLabel, labelText, labelSpace, powerSize, applyStyle, LABEL_STYLES } from "./engine/maplabel.js";
-import { openingFrame } from "./engine/worldmap.js";   // M3: open framed on what the player knows   // M2/D1: one table, one collision space
+import { openingFrame, placeCardBox } from "./engine/worldmap.js";   // M3: open framed on what the player knows   // M2/D1: one table, one collision space
 import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, globeClickAction, REGION_FRAME_DEG, regionVoteAt, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, makePolarBase, regionExtent, bendRoad, roadNetwork, clipToFrame, routeRoads, makeGroundCost, GROUND_COST } from "./engine/worldglobe.js";
 // ⛔ ROUND 4 — whose ground is this, as things stand today. `realms.js` resolves the SAVE (losses, growth,
 // broken powers, taken holds, your own realm); `influence.js` stays pure and just evaluates.
@@ -198,7 +198,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.19.19";
+const APP_VERSION = "2.19.21";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -14666,6 +14666,71 @@ function wireRegionGroundMap(selectedId) {
     if (tb) tb.onclick = (e) => { e.stopPropagation(); const d = tb.dataset.rmcTravel; _regionFan = null; if (!planJourneyTo(d)) travelTo(d); };
   };
 
+  /* ═════ SNG-677 P1–P4 · THE FULL CARD, ON THE MAP, ANCHORED TO ITS GLYPH ═════
+   * ✅ ERIK: *"the place info should pop up on the map instead of below it"*, and on a phone the old card was
+   * a scroll away from the place you had just tapped — the region map is about 400px tall, the card sat under
+   * it, and tapping a glyph moved nothing you could see.
+   * ⛑ ONE DOOR, AND IT IS `selectedId`. This is called at the end of the wiring from whatever
+   * `renderMap(id)` was handed — so a click on the picture, a click on the diagram, and an arrival from the
+   * globe with a place selected (W7) all open the card by the same path. The comment above this function
+   * already promised that: *"selecting from the picture and selecting from the diagram are one behaviour
+   * rather than two that drift."* The card is the third.
+   * ⚠️ AND IT IS POSITIONED THROUGH `review()`, the chip's own mapping, not through the mark's raw x/y —
+   * the marks are in the PAINTED map's pixels and the card floats over the canvas as laid out, so a card
+   * placed from raw marks would sit right at k=1 and drift with every zoom. */
+  const hidePlaceCard = () => {
+    const el = document.getElementById("place-card");
+    if (el) { el.hidden = true; el.innerHTML = ""; el.classList.remove("sheet"); }
+  };
+  const showPlaceCard = (id) => {
+    const el = document.getElementById("place-card");
+    if (!el) return;
+    const body = placeCardHTML(id);
+    if (!body) return hidePlaceCard();
+    /* ⛔ NO GLYPH IS NOT A REASON NOT TO OPEN. ⚠️ My first cut returned early when the place had no mark of
+     * its own, and that is wrong at exactly the width Aevi's done-when names: at 390px the map is 358×188,
+     * places collapse into clusters, and a clustered place HAS NO INDIVIDUAL MARK — so tapping it opened
+     * nothing at all on a phone while working perfectly on a desk. Measured: card 0×0, `sheet` class absent.
+     * ⛑ The anchor decides WHERE the popover sits, never WHETHER the card opens. The sheet never needed one:
+     * it is pinned to the map's own bottom edge. */
+    const mark = (_regionPick?.marks || []).find((m) => m.id === id) || null;
+    // ⛔ P2 · TWO LAYOUTS, DECIDED BY THE MAP'S OWN WIDTH, never by the window's — the map is what the card
+    // has to fit inside, and on a desktop with a narrow pane those are different numbers.
+    const r = cv.getBoundingClientRect();
+    const narrow = r.width <= 640;
+    el.hidden = false;
+    el.classList.toggle("sheet", narrow);
+    el.innerHTML = `<button class="place-card-x" data-cardclose="1" title="Close" aria-label="Close">✕</button>`
+      + (narrow ? `<div class="place-card-handle" aria-hidden="true"></div>` : "")
+      + body;
+    wirePlaceCard(el);
+    const xb = el.querySelector("[data-cardclose]");
+    if (xb) xb.onclick = (e) => { e.stopPropagation(); hidePlaceCard(); };   // ⛑ P4: closing keeps the selection
+    /* ⛑ THE PLACEMENT IS `placeCardBox`'S NOW; THIS IS ONLY THE HANDS. The arithmetic lives in the engine
+     * so the gate measures the numbers the browser lays out with rather than a second copy of them — Erik's
+     * harness rule, and the answer to Aevi's D1 complaint that a gate reading source text was green while
+     * the map was wrong.
+     * ⚠️ The glyph goes through `review()` FIRST. The marks are in the PAINTED map's pixels and the card
+     * floats over the canvas AS LAID OUT, so a card placed from raw marks would sit right at k=1 and drift
+     * with every zoom — which is the same mapping the hover chip has always used. */
+    const glyph = mark ? (() => {
+      const sx = r.width / (cv.width / dprOf()), sy = r.height / (cv.height / dprOf());
+      const vp = review(mark.x, mark.y, cv.width / dprOf(), cv.height / dprOf());
+      return { x: vp.x * sx, y: vp.y * sy };
+    })() : null;
+    const box = placeCardBox({ w: r.width, h: r.height },
+      { w: el.offsetWidth || 320, h: el.offsetHeight || 220 }, glyph);
+    if (box.mode === "sheet") {
+      el.style.left = "0px"; el.style.right = "0px"; el.style.top = "auto"; el.style.bottom = "0px";
+      el.style.width = "auto"; el.style.maxHeight = `${box.height}px`;
+      return;
+    }
+    el.style.right = "auto"; el.style.bottom = "auto"; el.style.width = "";
+    el.style.maxHeight = `${Math.max(160, Math.round(r.height - 8))}px`;
+    el.style.left = `${box.left}px`;
+    el.style.top = `${box.top}px`;
+  };
+
   cv.style.cursor = "default";
   cv.onmousemove = (e) => {
     const p = toCanvas(e), hit = pickAt(p.x, p.y);
@@ -14718,14 +14783,24 @@ function wireRegionGroundMap(selectedId) {
     onUp: (moved) => { if (_drag) cv.style.cursor = "default"; if (_drag) _drag.moved = moved; },
     // ⚠️ A TAP SELECTS. Without this a phone could see the map and never choose a place on it — `click`
     // after a canvas touch is not something to rely on, and the chip is a hover the finger never produces.
+    /* ⛔ A TAP OPENS THE CARD, NOT THE CHIP (SNG-677 P3). ✅ AEVI: *"On a mouse, hover shows the short chip
+     * and click opens the card. On touch there is no hover: the first tap opens the card."*
+     * ⚠️ THIS WAS THE ONE PLACE THE PHONE STILL GOT THE OLD BEHAVIOUR, and the phone is Erik's actual
+     * complaint — *"the place info should pop up on the map instead of below it"*, which on a 390px screen
+     * meant the card was a scroll away from the glyph. A tap showed the two-verb chip and the full card
+     * never opened at all, so on touch this whole order would have changed nothing.
+     * ⛑ It routes through `renderMap(hit.id)` — the same selection door the click uses — so tap and click
+     * are one behaviour rather than two that drift, which is what the note at the top of this function
+     * promised about the picture and the diagram. */
     onTap: (lx, ly) => {
       const m = toCv(lx, ly);
       const p = unview(m.x, m.y, mapDims().mw, mapDims().mh);
       const hit = pickAt(p.x, p.y);
-      if (!hit) { if (_regionFan) { _regionFan = null; hideChip(); repaint(); } return; }
+      if (!hit) { hidePlaceCard(); if (_regionFan) { _regionFan = null; hideChip(); repaint(); } return; }
       if (hit.kind === "seal") { _regionFan = { key: hit.cluster.key }; hideChip(); repaint(); return; }
-      _regionFan = null;
-      showChip(hit, p.x, p.y);
+      if (hit.kind === "pill" && hit.pill?.kind === "lead") { _regionFan = null; hideChip(); repaint(); return; }
+      _regionFan = null; hideChip();
+      renderMap(hit.id === selectedId ? null : hit.id);
     },
   });
   // ⛑ double-click resets, and the readout in the corner says so
@@ -14734,8 +14809,11 @@ function wireRegionGroundMap(selectedId) {
     if (_drag?.moved) return;                          // a pan is not a selection
     const p = toCanvas(e), hit = pickAt(p.x, p.y);
     if (!hit) {
-      // ⚠️ CLICK-AWAY CLOSES AND DOES NOT DESELECT. The selected place is what the Look inside and travel buttons
-      // under the map read; losing it on a stray click is "it kicks me back out" in a new shape.
+      // ⚠️ CLICK-AWAY CLOSES AND DOES NOT DESELECT. The selected place is what the Look inside and travel
+      // buttons read; losing it on a stray click is "it kicks me back out" in a new shape.
+      // ⛑ P4: and the card closes the same way, on the same rule — Aevi: *"Closing keeps the selection, as
+      // the region map's chip already does."*
+      hidePlaceCard();
       if (_regionFan) { _regionFan = null; hideChip(); repaint(); }
       return;
     }
@@ -14748,11 +14826,24 @@ function wireRegionGroundMap(selectedId) {
   // re-render would leave another listener behind holding a stale `_regionPick`.
   if (_regionEsc) window.removeEventListener("keydown", _regionEsc);
   _regionEsc = (e) => {
-    if (e.key !== "Escape" || !_regionFan) return;
+    if (e.key !== "Escape") return;
     if (!document.getElementById("region-map")) { window.removeEventListener("keydown", _regionEsc); _regionEsc = null; return; }
+    // ⛑ P4: Esc closes the card first — it is the thing in front — and only then the fan. Two presses, two
+    // layers, which is what a reader expects of a stack. ⚠️ The old guard returned early unless a fan was
+    // open, so hanging the card off it would have made Esc work only while a cluster happened to be fanned.
+    const card = document.getElementById("place-card");
+    if (card && !card.hidden) { hidePlaceCard(); return; }
+    if (!_regionFan) return;
     _regionFan = null; hideChip(); repaint();
   };
   window.addEventListener("keydown", _regionEsc);
+  /* ⛔ AND THIS IS THE ONE DOOR. ⛑ `selectedId` is whatever `renderMap(id)` was handed — a click on the
+   * picture, a click on the diagram, or an arrival from the globe with a place selected (W1, and W7 when it
+   * lands). All three open the card here, so none of them can drift from the others.
+   * ⚠️ AFTER the Esc binding, because `showPlaceCard` reads `_regionPick`, which `paintRegionMap` fills —
+   * and `hidePlaceCard` is what a re-render without a selection must do, or a card for the place you just
+   * left would hang over the new one. */
+  if (selectedId) showPlaceCard(selectedId); else hidePlaceCard();
 }
 
 /** WORLD tier — regions as territories. Individual settlements are noise at this scale; the
@@ -15507,6 +15598,144 @@ function wireMapTierBar() {
   };
 }
 
+/* ═════ SNG-677 P1 · THE PLACE CARD, AS ONE FUNCTION, SO ONE CARD CAN BE DRAWN IN FOUR PLACES ═════
+ * ✅ ERIK: *"the place info should pop up on the map instead of below it."* ✅ AEVI (P5): *"The globe, the
+ * region map, the city and the local map all use this one card. The card BELOW the map is deleted, not
+ * hidden. Two cards is the drift this order is meant to end."*
+ * ⛔ IT TAKES ONLY A LOCATION ID AND ASSEMBLES THE REST ITSELF. Every local it used to read off
+ * `renderMap` — `here`, `isVisited`, `isKnown`, the reachability, the two route answers — is derived here
+ * instead of handed in. ⚠️ That is deliberate, and it is the lesson from the two config bags that crossed
+ * four times: a caller that assembles a slice of the context is a caller that can assemble it WRONG, and
+ * four callers assembling it four ways is exactly the drift Aevi is asking me to end. One door, no bag.
+ * ⛑ The markup is unchanged from the inline version, because this commit MOVES the card and changes
+ * nothing about it — the floating frame and the two layouts come next, and a refactor that also redesigns
+ * is a refactor nobody can check. */
+/* ⛔ THE CARD'S FOUR DOORS, MOVED WITH IT. ⚠️ They used to be bound at the end of `renderMap` by
+ * `document.getElementById`, which worked only because the card was rendered exactly once, into the page.
+ * A floating card is re-rendered on every selection, so a one-time binding against a replaced element is a
+ * button that silently stops working — the shape that left three handlers bound to buttons nothing renders.
+ * ⛑ `img[data-lightbox]` is NOT here on purpose: it is already delegated once at the document (line ~2644),
+ * so the picture keeps working wherever the card lands. The fifth family, `[data-nethop]`, belongs to the
+ * gate network panel BELOW the map and stays bound in `renderMap` where its `netGates` lives. */
+function wirePlaceCard(root) {
+  if (!root) return;
+  const insideBtn = root.querySelector("#map-lookinside");
+  if (insideBtn) insideBtn.onclick = () => { mapTier = "location"; mapFocus = insideBtn.dataset.inside; renderMap(); };
+  const travelBtn = root.querySelector("#map-travel");
+  if (travelBtn) travelBtn.onclick = () => { if (!planJourneyTo(travelBtn.dataset.dest)) travelTo(travelBtn.dataset.dest); };   // CCODE-387: far is a journey
+  const wgBtn = root.querySelector("#map-waygate");
+  if (wgBtn) wgBtn.onclick = () => (wgBtn.dataset.wgopen   // CCODE-418: aimed open pays the hop, like a network fold
+    ? travelTo(wgBtn.dataset.wgdest, { cost: { hours: Number(wgBtn.dataset.wghours) || 0, energy: Number(wgBtn.dataset.wgenergy) || 0 } })
+    : travelTo(wgBtn.dataset.wgdest)); // SNG-148: the click IS the confirmed intent; transit is real travel
+  for (const b of root.querySelectorAll("[data-subgo]")) b.onclick = () => {
+    const pm = character.placeMemory?.[b.dataset.subloc];
+    const sp = pm?.subPlaces?.[b.dataset.subgo];
+    if (!sp) return;
+    if (b.dataset.subloc !== character.currentLocationId) { alert("Travel to " + (CONTENT.locations[b.dataset.subloc]?.name || "that place") + " first — then head to the " + sp.name + "."); return; }
+    renderPlay(character.activeScene?.lastTurn || null, {});
+    onFreeform(`Head to the ${sp.name}`);
+  };
+}
+
+function placeCardHTML(selectedId) {
+  if (!selectedId || !CONTENT.locations[selectedId]) return "";
+  const here = character.currentLocationId;
+  // ⛑ the two predicates renderMap defines inline, recreated rather than read off its scope — they are two
+  // lines each, and a card that needs its caller's closure is not a card that can float.
+  const isVisited = (id) => (character.placeMemory?.[id]?.visits || 0) > 0 || id === here;
+  const isKnown = (id) => isPlaceKnown(character, id, CONTENT.locations);
+    const l = CONTENT.locations[selectedId];
+    const visited = isVisited(l.id);
+    const known = isKnown(l.id); // SNG-117
+    const pm = character.placeMemory?.[l.id];
+    // SNG-330: SYMMETRIC. Reading only `connectedToHere` lost the Travel button on any place whose
+    // reciprocal edge was written to AUTHORED content and therefore never saved.
+    const reachable = canTravelBetween(here, l.id, CONTENT.locations, character.placeEdges);
+    // ⛔ CCODE-526 · ERIK: "I can't travel most places via the map because it claims they aren't connected."
+    // ⚠️ MEASURED: the graph averages 2.76 direct edges per place — 12 of 143 offered from Millbrook, 20 from
+    // the Crossing, 1 from a generated margin — while the world is ONE connected component and `planJourney`
+    // answers for 33–40 of 40 sampled destinations for every character. The planner was gated behind the
+    // one-hop check, so it could only be offered for journeys the player could already walk in a single step.
+    // ⛑ A route the planner can lay is a way there. Only a place nothing can reach is refused.
+    const routePlan = (!reachable && l.id !== here && known) ? journeyPlanFor(l.id) : null;
+    // ⛔ AND A NULL PLAN IS TWO DIFFERENT ANSWERS. `planJourney` returns null when there is no route AND when
+    // the trip is TOO SHORT TO BE A JOURNEY (`isJourneyRoute` — rightly: you do not mount an expedition for a
+    // seven-hour walk). The map read both as "no way there" and refused places three hours down the road:
+    // measured on the live screen, the Made Gate at 0.3 days and the Whistling Woman Post at 0.4 were told
+    // there was no road and no route. ⛑ `routeBetween` answers the other question on its own.
+    const routeShort = (!reachable && !routePlan && l.id !== here && known)
+      ? (() => { try { const r = routeBetween(here, l.id, CONTENT.locations, { traveller: character, rules: CONTENT.rules }); return (r?.options || []).length ? r : null; } catch { return null; } })()
+      : null;
+    return `<div class="map-details">
+      <div class="map-details-head">
+        <h3>${esc(known ? l.name : "An unknown place")}${!visited && known ? ` <span class="hint">— known of, not yet been</span>` : ""}</h3>
+        ${(l.dangerLevel | 0) >= 1 ? `<span class="rep-band danger-chip dl${Math.min(5, l.dangerLevel | 0)}">${esc(dangerLabel(Math.min(5, l.dangerLevel | 0)))}</span>${infoDot("world.danger")}` : `<span class="rep-band trusted">safe</span>`}
+        ${visited ? (() => { const d = locationDensity(l, CONTENT.substrateModel); if (d == null) return ""; const lab = d < 0.34 ? "thin lattice" : d > 0.66 ? "dense lattice" : "even lattice"; return `<span class="rep-band" title="Substrate density here: ${Math.round(d * 100)}%. Continuous craft thrives dense, starves thin; Returned craft the reverse.">${lab}</span>`; })() : ""}
+        ${l.id === here ? `<span class="rep-band trusted">you are here</span>` : ""}
+        ${(() => { const s = l.communityId ? standingWith(character, l.communityId, CONTENT.rules) : null; return s?.score ? `<span class="rep-band ${s.band}" title="Your standing here — ${s.band} (${s.score})">${esc(s.band)}</span>` : ""; })()}
+      </div>
+      ${(() => { const ppl = knownPeopleAt(character, l.id, { locations: CONTENT.locations, npcs: CONTENT.npcs }); return ppl.length ? `<div class="loc-people"><span class="hint">You know here: </span>${ppl.map(p => `<span class="known-here">${esc(p.name)} <span class="cost">${esc(p.label)}</span></span>`).join(", ")}</div>` : ""; })()}
+      ${visited && locationImageFor(l.id) ? `<img class="location-image" src="${esc(locationImageFor(l.id))}" alt="${esc(l.name)}" data-lightbox="location" data-regen-kind="location" data-regen-subject="${esc(l.id)}" loading="lazy" onerror="this.style.display='none'">` : ""}
+      ${visited
+        ? `<p class="map-details-desc">${esc(l.descriptionSeed)}</p>${/* SNG-076: authored descriptionSeed renders IN FULL */""}
+           ${(() => { const vs = vectorSummary(character, l.id, l, CONTENT.spectrums, CONTENT.rules); return vs ? `<div class="place-vectors">${esc(vs)}</div>` : ""; })()}
+           ${pm?.visits ? `<div class="hint">${pm.visits} visit${pm.visits > 1 ? "s" : ""}${pm.lastVisit != null ? ` · last on day ${pm.lastVisit}` : ""}</div>` : ""}
+           ${pm?.notes?.length ? `<div class="map-details-notes">${pm.notes.slice(-3).map(n => `<div class="codex-fact">${esc(n)}</div>`).join("")}</div>` : ""}
+           ${Object.keys(pm?.subPlaces || {}).length ? `<div class="sub-places"><span class="hint">Places within: </span>${Object.entries(pm.subPlaces).map(([slug, sp]) => `<button class="codex-link ${sp.visited ? "" : "dead"}" data-subgo="${esc(slug)}" data-subloc="${esc(l.id)}" title="${esc(sp.note || (sp.visited ? "you have been here" : "heard of only"))}">${esc(sp.name)}</button>`).join(" ")}</div>` : ""}`
+        : `<p class="map-details-desc">You've heard travelers mention it, nothing more. Someone would have to go and see.</p>`}
+      ${l.id !== here ? ((reachable || routePlan || routeShort)
+        ? `<button class="btn" id="map-travel" data-dest="${esc(l.id)}" style="margin-top:8px">${(() => {
+            /* ⛔ THE TRAVEL BUTTON HAS NEVER ONCE SHOWN ITS LABEL, AND A `//` COMMENT IS WHY.
+             * This line used to read, all on one line:
+             *     ${(() => { const jp = routePlan || journeyPlanFor(l.id);   // …not a second run of it return jp ? …
+             * ⚠️ So the `//` swallowed the `return`, the closing `})()}` AND the `</button>` — everything to
+             * the end of the line. The arrow function then ran on into the NEXT `${(() => {` block and
+             * returned ITS value, so the button's label was the walking-distance hint and the button was
+             * never closed: measured on the live card, `#map-travel` contained a single `div.hint` reading
+             * "about 2 days (about 26 miles) on foot" and the words "Plan the journey" appeared nowhere in
+             * the document. It survived because the handler binds by id and `data-dest` was intact, so the
+             * button WORKED and its text read like something you would press.
+             * ⛑ Found by reading the rendered DOM while moving the card, not by any gate — and no gate
+             * would have found it, because every check here asks about behaviour or source text and this
+             * was neither: it was correct source that a comment had eaten. ✅ It is in scope because Aevi's
+             * done-when is *"'Plan the journey' and 'Look inside' work from the card."*
+             * ⚠️ A BLOCK COMMENT NOW, on its own lines. The `//` form is what made a one-line join lethal. */
+            const jp = routePlan || journeyPlanFor(l.id);   // the plan already laid for the gate above, not a second run of it
+            return jp ? `Plan the journey (about ${chosenWay(jp).days} days)` : `Travel here (+${ADVANCE.travel}h)`;
+          })()}</button>${(() => {
+            // SNG-180: how far this actually is, in the world's own geometry. Erik's year-to-walk
+            // scale makes the number mean something — a neighbouring Reach is weeks and your
+            // antipode is most of a year, which is what turns waygates into infrastructure.
+            const days = walkingDays(CONTENT.locations[character.currentLocationId], l);
+            const mi = milesFor(days, WORLD_SCALE);   // SNG-537 B6a: the first distance the player has ever been shown in a unit
+            return days == null ? "" : `<div class="hint" style="margin-top:4px">${days < 1 ? "less than a day" : `about ${Math.round(days)} day${Math.round(days) === 1 ? "" : "s"}`}${mi ? ` (about ${mi} miles)` : ""} on foot — ${days > 40 ? "a waygate is the difference between a journey and a life" : "walkable, if you have the season for it"}.</div>`;
+          })()}`
+        + `<button class="opt" id="map-lookinside" data-inside="${esc(l.id)}" style="margin:8px 0 0 6px" title="What's within this place">⌂ Look inside</button>`
+        : `<div class="hint" style="margin-top:6px">No road and no route reach ${esc(l.name || l.id)} from ${esc(CONTENT.locations[here]?.name || "here")}${(() => {
+            // SNG-330 hardening 1 — ⚠️ SAY WHY, AND SAY WHICH. "travel via a connected place" told the player
+            // nothing they did not already know; the data to name one is sitting in `connections`. A refusal
+            // that does not point anywhere is a dead end wearing an explanation.
+            const via = (CONTENT.locations[l.id]?.connections || [])
+              .filter(c => canTravelBetween(here, c, CONTENT.locations, character.placeEdges))
+              .map(c => CONTENT.locations[c]?.name).filter(Boolean).slice(0, 2);
+            return via.length ? ` — go by way of ${via.join(" or ")}.` : " — travel via a connected place.";
+          })()}</div>`) : ""}
+      ${(() => { // SNG-148: standing at a gate, aiming at another gate — routing decides (named/hub); never a failure
+        const r = l.id !== here ? resolveWaygateTransit({ character, destId: l.id, locations: CONTENT.locations, rules: CONTENT.rules }) : null;
+        if (!r) return "";
+        // ⛔ CCODE-418: aimed open — the gate folds straight to this place, priced like any hop on the distance folded
+        if (r.routed === "open") {
+          const cost = gateHopCost(walkingDays(CONTENT.locations[here], l) || 0);
+          return `<button class="btn" id="map-waygate" data-wgdest="${esc(r.destId)}" data-wgopen="1" data-wghours="${cost.hours}" data-wgenergy="${cost.energy}" style="margin-top:6px">◈ Aim the gate straight at ${esc(l.name)} (+${cost.hours}h · ${cost.energy}⚡)</button>`;
+        }
+        const destName = CONTENT.locations[r.destId]?.name || l.name;
+        const note = r.routed === "hub" && r.destId !== l.id
+          ? ` — the gate carries you to ${esc(destName)}, the hub (${!r.known ? "an undiscovered gate can't be aimed at" : "beyond your wayfaring to aim true"})` : ` to ${esc(destName)}`;
+        return `<button class="btn" id="map-waygate" data-wgdest="${esc(r.destId)}" style="margin-top:6px">◈ Step through the waygate${note} (+${ADVANCE.travel}h)</button>`;
+      })()}
+    </div>`;
+}
+
 function renderMap(selectedId = null) {
   if (mapTier === "world") return renderMapWorld();
   if (mapTier === "location") return renderMapLocation(mapFocus);
@@ -15616,82 +15845,6 @@ function renderMap(selectedId = null) {
         <text x="${e.x}" y="${e.y - 9}" text-anchor="middle" class="map-kg-label">${esc(e.label.slice(0, 18))}</text>
       </g>`).join("")}
   </g></svg>`;
-  // details panel for the selected node — travel is an explicit button, never a stray click
-  let details = "";
-  if (selectedId && CONTENT.locations[selectedId]) {
-    const l = CONTENT.locations[selectedId];
-    const visited = isVisited(l.id);
-    const known = isKnown(l.id); // SNG-117
-    const pm = character.placeMemory?.[l.id];
-    // SNG-330: SYMMETRIC. Reading only `connectedToHere` lost the Travel button on any place whose
-    // reciprocal edge was written to AUTHORED content and therefore never saved.
-    const reachable = canTravelBetween(here, l.id, CONTENT.locations, character.placeEdges);
-    // ⛔ CCODE-526 · ERIK: "I can't travel most places via the map because it claims they aren't connected."
-    // ⚠️ MEASURED: the graph averages 2.76 direct edges per place — 12 of 143 offered from Millbrook, 20 from
-    // the Crossing, 1 from a generated margin — while the world is ONE connected component and `planJourney`
-    // answers for 33–40 of 40 sampled destinations for every character. The planner was gated behind the
-    // one-hop check, so it could only be offered for journeys the player could already walk in a single step.
-    // ⛑ A route the planner can lay is a way there. Only a place nothing can reach is refused.
-    const routePlan = (!reachable && l.id !== here && known) ? journeyPlanFor(l.id) : null;
-    // ⛔ AND A NULL PLAN IS TWO DIFFERENT ANSWERS. `planJourney` returns null when there is no route AND when
-    // the trip is TOO SHORT TO BE A JOURNEY (`isJourneyRoute` — rightly: you do not mount an expedition for a
-    // seven-hour walk). The map read both as "no way there" and refused places three hours down the road:
-    // measured on the live screen, the Made Gate at 0.3 days and the Whistling Woman Post at 0.4 were told
-    // there was no road and no route. ⛑ `routeBetween` answers the other question on its own.
-    const routeShort = (!reachable && !routePlan && l.id !== here && known)
-      ? (() => { try { const r = routeBetween(here, l.id, CONTENT.locations, { traveller: character, rules: CONTENT.rules }); return (r?.options || []).length ? r : null; } catch { return null; } })()
-      : null;
-    details = `<div class="map-details">
-      <div class="map-details-head">
-        <h3>${esc(known ? l.name : "An unknown place")}${!visited && known ? ` <span class="hint">— known of, not yet been</span>` : ""}</h3>
-        ${(l.dangerLevel | 0) >= 1 ? `<span class="rep-band danger-chip dl${Math.min(5, l.dangerLevel | 0)}">${esc(dangerLabel(Math.min(5, l.dangerLevel | 0)))}</span>${infoDot("world.danger")}` : `<span class="rep-band trusted">safe</span>`}
-        ${visited ? (() => { const d = locationDensity(l, CONTENT.substrateModel); if (d == null) return ""; const lab = d < 0.34 ? "thin lattice" : d > 0.66 ? "dense lattice" : "even lattice"; return `<span class="rep-band" title="Substrate density here: ${Math.round(d * 100)}%. Continuous craft thrives dense, starves thin; Returned craft the reverse.">${lab}</span>`; })() : ""}
-        ${l.id === here ? `<span class="rep-band trusted">you are here</span>` : ""}
-        ${(() => { const s = l.communityId ? standingWith(character, l.communityId, CONTENT.rules) : null; return s?.score ? `<span class="rep-band ${s.band}" title="Your standing here — ${s.band} (${s.score})">${esc(s.band)}</span>` : ""; })()}
-      </div>
-      ${(() => { const ppl = knownPeopleAt(character, l.id, { locations: CONTENT.locations, npcs: CONTENT.npcs }); return ppl.length ? `<div class="loc-people"><span class="hint">You know here: </span>${ppl.map(p => `<span class="known-here">${esc(p.name)} <span class="cost">${esc(p.label)}</span></span>`).join(", ")}</div>` : ""; })()}
-      ${visited && locationImageFor(l.id) ? `<img class="location-image" src="${esc(locationImageFor(l.id))}" alt="${esc(l.name)}" data-lightbox="location" data-regen-kind="location" data-regen-subject="${esc(l.id)}" loading="lazy" onerror="this.style.display='none'">` : ""}
-      ${visited
-        ? `<p class="map-details-desc">${esc(l.descriptionSeed)}</p>${/* SNG-076: authored descriptionSeed renders IN FULL */""}
-           ${(() => { const vs = vectorSummary(character, l.id, l, CONTENT.spectrums, CONTENT.rules); return vs ? `<div class="place-vectors">${esc(vs)}</div>` : ""; })()}
-           ${pm?.visits ? `<div class="hint">${pm.visits} visit${pm.visits > 1 ? "s" : ""}${pm.lastVisit != null ? ` · last on day ${pm.lastVisit}` : ""}</div>` : ""}
-           ${pm?.notes?.length ? `<div class="map-details-notes">${pm.notes.slice(-3).map(n => `<div class="codex-fact">${esc(n)}</div>`).join("")}</div>` : ""}
-           ${Object.keys(pm?.subPlaces || {}).length ? `<div class="sub-places"><span class="hint">Places within: </span>${Object.entries(pm.subPlaces).map(([slug, sp]) => `<button class="codex-link ${sp.visited ? "" : "dead"}" data-subgo="${esc(slug)}" data-subloc="${esc(l.id)}" title="${esc(sp.note || (sp.visited ? "you have been here" : "heard of only"))}">${esc(sp.name)}</button>`).join(" ")}</div>` : ""}`
-        : `<p class="map-details-desc">You've heard travelers mention it, nothing more. Someone would have to go and see.</p>`}
-      ${l.id !== here ? ((reachable || routePlan || routeShort)
-        ? `<button class="btn" id="map-travel" data-dest="${esc(l.id)}" style="margin-top:8px">${(() => { const jp = routePlan || journeyPlanFor(l.id);   // ⛑ the plan already laid for the gate above, not a second run of it return jp ? `Plan the journey (about ${chosenWay(jp).days} days)` : `Travel here (+${ADVANCE.travel}h)`; })()}</button>${(() => {
-            // SNG-180: how far this actually is, in the world's own geometry. Erik's year-to-walk
-            // scale makes the number mean something — a neighbouring Reach is weeks and your
-            // antipode is most of a year, which is what turns waygates into infrastructure.
-            const days = walkingDays(CONTENT.locations[character.currentLocationId], l);
-            const mi = milesFor(days, WORLD_SCALE);   // SNG-537 B6a: the first distance the player has ever been shown in a unit
-            return days == null ? "" : `<div class="hint" style="margin-top:4px">${days < 1 ? "less than a day" : `about ${Math.round(days)} day${Math.round(days) === 1 ? "" : "s"}`}${mi ? ` (about ${mi} miles)` : ""} on foot — ${days > 40 ? "a waygate is the difference between a journey and a life" : "walkable, if you have the season for it"}.</div>`;
-          })()}`
-        + `<button class="opt" id="map-lookinside" data-inside="${esc(l.id)}" style="margin:8px 0 0 6px" title="What's within this place">⌂ Look inside</button>`
-        : `<div class="hint" style="margin-top:6px">No road and no route reach ${esc(l.name || l.id)} from ${esc(CONTENT.locations[here]?.name || "here")}${(() => {
-            // SNG-330 hardening 1 — ⚠️ SAY WHY, AND SAY WHICH. "travel via a connected place" told the player
-            // nothing they did not already know; the data to name one is sitting in `connections`. A refusal
-            // that does not point anywhere is a dead end wearing an explanation.
-            const via = (CONTENT.locations[l.id]?.connections || [])
-              .filter(c => canTravelBetween(here, c, CONTENT.locations, character.placeEdges))
-              .map(c => CONTENT.locations[c]?.name).filter(Boolean).slice(0, 2);
-            return via.length ? ` — go by way of ${via.join(" or ")}.` : " — travel via a connected place.";
-          })()}</div>`) : ""}
-      ${(() => { // SNG-148: standing at a gate, aiming at another gate — routing decides (named/hub); never a failure
-        const r = l.id !== here ? resolveWaygateTransit({ character, destId: l.id, locations: CONTENT.locations, rules: CONTENT.rules }) : null;
-        if (!r) return "";
-        // ⛔ CCODE-418: aimed open — the gate folds straight to this place, priced like any hop on the distance folded
-        if (r.routed === "open") {
-          const cost = gateHopCost(walkingDays(CONTENT.locations[here], l) || 0);
-          return `<button class="btn" id="map-waygate" data-wgdest="${esc(r.destId)}" data-wgopen="1" data-wghours="${cost.hours}" data-wgenergy="${cost.energy}" style="margin-top:6px">◈ Aim the gate straight at ${esc(l.name)} (+${cost.hours}h · ${cost.energy}⚡)</button>`;
-        }
-        const destName = CONTENT.locations[r.destId]?.name || l.name;
-        const note = r.routed === "hub" && r.destId !== l.id
-          ? ` — the gate carries you to ${esc(destName)}, the hub (${!r.known ? "an undiscovered gate can't be aimed at" : "beyond your wayfaring to aim true"})` : ` to ${esc(destName)}`;
-        return `<button class="btn" id="map-waygate" data-wgdest="${esc(r.destId)}" style="margin-top:6px">◈ Step through the waygate${note} (+${ADVANCE.travel}h)</button>`;
-      })()}
-    </div>`;
-  }
   // SNG-243 §4: the gate NETWORK panel — when you STAND at a networked gate, fold direct to any gate you know,
   // hub-and-spoke, for a hop cost (a fraction of the overland time + an energy toll). The made gate's default
   // endpoint leads. This is the infrastructure surface: the network is legible, not buried in per-place routing.
@@ -15717,7 +15870,13 @@ function renderMap(selectedId = null) {
     <div class="rm-wrap" style="position:relative;max-width:1600px">
     <canvas id="region-map" width="800" height="420" style="width:100%;border-radius:8px;display:block;background:#0a0c10"></canvas>
     ${/* ⛑ the name under the pointer. Empty until something is under it, so it costs no height when idle. */""}
-    <div id="region-map-chip" class="rm-chip" hidden></div></div>
+    <div id="region-map-chip" class="rm-chip" hidden></div>
+    ${/* ═════ P1 · THE CARD ITSELF, OVER THE MAP ═════
+         ✅ ERIK: *"the place info should pop up on the map instead of below it."* ✅ AEVI (P2): a popover beside
+         the glyph over 640px, a bottom sheet on a phone. ⛑ It lives in `.rm-wrap`, the chip's own positioned
+         parent, so it shares the chip's `review()` mapping and tracks pan and zoom for free — and it sits
+         INSIDE `app`, which is what keeps every delegated handler in this file able to find its buttons. */""}
+    <div id="place-card" class="place-card" hidden></div></div>
     ${/* ⛑ the name under the pointer stays as the quiet fallback; the chip is what carries the verbs. */""}
     <div id="region-map-readout" class="hint" style="min-height:14px;margin:2px 0 6px"></div>
     ${fieldPanel(regionExtent(focusRegion, CONTENT.locations, { authored: (_regionMaps && _regionMaps[focusRegion]) || null }))}
@@ -15738,7 +15897,11 @@ function renderMap(selectedId = null) {
       ${svg}
     </div>
     ${netBlock}
-    ${details}
+    ${/* ⛔ P5 · THE CARD BELOW THE MAP IS GONE, NOT HIDDEN. ✅ AEVI: *"Two cards is the drift this order is
+         meant to end."* ⚠️ And it had to go in the same commit as the floating one, not after it: both cards
+         carry `id="map-travel"`, `id="map-lookinside"` and `id="map-waygate"`, so leaving this one in place
+         for a release would have put duplicate ids in the document and `getElementById` would have bound
+         whichever came first — a travel button that moves the wrong card's selection. */""}
     <button class="btn secondary" id="map-back" style="margin-top:12px">Back</button>
   </div>`);
   setGraphSurface("map");   // SNG-168: the region tier keeps its own view
@@ -15759,26 +15922,11 @@ function renderMap(selectedId = null) {
   for (const g of app.querySelectorAll("[data-mapsel]")) g.onclick = () => renderMap(g.dataset.mapsel === selectedId ? null : g.dataset.mapsel);
   wireRegionGroundMap(selectedId);
   wireMapTierBar(); // SNG-154 stage 6
-  const insideBtn = document.getElementById("map-lookinside");
-  if (insideBtn) insideBtn.onclick = () => { mapTier = "location"; mapFocus = insideBtn.dataset.inside; renderMap(); };
-  const travelBtn = document.getElementById("map-travel");
-  if (travelBtn) travelBtn.onclick = () => { if (!planJourneyTo(travelBtn.dataset.dest)) travelTo(travelBtn.dataset.dest); };   // CCODE-387: far is a journey
-  const wgBtn = document.getElementById("map-waygate");
-  if (wgBtn) wgBtn.onclick = () => (wgBtn.dataset.wgopen   // CCODE-418: aimed open pays the hop, like a network fold
-    ? travelTo(wgBtn.dataset.wgdest, { cost: { hours: Number(wgBtn.dataset.wghours) || 0, energy: Number(wgBtn.dataset.wgenergy) || 0 } })
-    : travelTo(wgBtn.dataset.wgdest)); // SNG-148: the click IS the confirmed intent; transit is real travel
+  wirePlaceCard(app);     // ⛑ P1: the card's own doors, wherever the card is drawn
   // SNG-243 §4: a network hop — fold to a known gate across the network, paying the gate-hop cost (not the flat travel hours).
   for (const b of app.querySelectorAll("[data-nethop]")) b.onclick = () => {
     const g = netGates.find(x => x.id === b.dataset.nethop);
     travelTo(b.dataset.nethop, { cost: g ? g.cost : gateHopCost(0) });
-  };
-  for (const b of app.querySelectorAll("[data-subgo]")) b.onclick = () => {
-    const pm = character.placeMemory?.[b.dataset.subloc];
-    const sp = pm?.subPlaces?.[b.dataset.subgo];
-    if (!sp) return;
-    if (b.dataset.subloc !== character.currentLocationId) { alert("Travel to " + (CONTENT.locations[b.dataset.subloc]?.name || "that place") + " first — then head to the " + sp.name + "."); return; }
-    renderPlay(character.activeScene?.lastTurn || null, {});
-    onFreeform(`Head to the ${sp.name}`);
   };
   document.getElementById("map-back").onclick = () => { graphViews[graphSurface] = null; renderPlay(character.activeScene?.lastTurn || null, {}); };
 }

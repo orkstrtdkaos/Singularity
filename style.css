@@ -2510,3 +2510,48 @@ table.ob-matrix { border-collapse: collapse; width: 100%; min-width: 640px; font
 .rm-chip .rmc-acts { display: flex; gap: 6px; }
 .rm-chip .rmc-acts .opt { padding: 3px 8px; font-size: 11px; }
 
+/* ═════ SNG-677 P2 · THE PLACE CARD, ON THE MAP ═════
+   ✅ ERIK: "the place info should pop up on the map instead of below it." Two layouts, because a popover
+   beside a glyph is right on a desk and wrong on a phone, where the glyph is a thumb wide and the card
+   would cover the thing it describes.
+   ⛑ Both are positioned by `showPlaceCard` in CSS pixels inside `.rm-wrap`; everything here is the look
+   and the scrolling, so the geometry lives in one place and the paint in the other. */
+.place-card { position: absolute; z-index: 7; width: 360px; max-width: calc(100% - 8px);
+  overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch;
+  background: rgba(12,15,20,0.975); border: 1px solid var(--line); border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.55); padding: 10px 12px 12px; }
+.place-card[hidden] { display: none; }
+/* ⛔ THE CARD SCROLLS INSIDE ITSELF — Aevi's done-when is "tapping a place shows its card WITHOUT scrolling
+   the page", so the one thing this must never do is make the page taller. */
+.place-card .map-details { margin: 0; padding: 0; border: 0; background: none; }
+.place-card .location-image { max-height: 150px; object-fit: cover; width: 100%; border-radius: 6px; }
+.place-card-x { position: absolute; top: 4px; right: 6px; z-index: 2; background: none; border: 0;
+  color: var(--ink-dim); font-size: 16px; line-height: 1; padding: 4px 6px; cursor: pointer; }
+.place-card-x:hover { color: var(--ink); }
+.place-card .map-details-head h3 { padding-right: 22px; }  /* ⛑ clear of the ✕ */
+
+/* the phone layout: a sheet across the bottom of the MAP, never of the viewport */
+.place-card.sheet { width: auto; border-radius: 12px 12px 0 0; border-bottom: 0;
+  box-shadow: 0 -8px 26px rgba(0,0,0,0.6); padding-top: 14px; }
+.place-card-handle { position: absolute; top: 6px; left: 50%; transform: translateX(-50%);
+  width: 38px; height: 4px; border-radius: 2px; background: var(--line); }
+
+/* ⛔ NO ENTRANCE ANIMATION ON THIS CARD, AND IT IS A CORRECTNESS CHOICE RATHER THAN A TASTE ONE.
+   ⚠️ It first faded in from `opacity: 0` with `transform: translateY(4px)`, and on the live card the
+   computed transform STAYED at `matrix(1, 0, 0, 1, 0, 4)`: the sheet sat 4px below the map it is pinned
+   inside, and the decoration had become the layout.
+   ⛑ THE CAUSE IS GENERAL AND WORTH WRITING DOWN. A document that is not being rendered does not advance
+   its animation timeline. Measured on a hidden pane: 0 animation frames in 600ms, `document.timeline`
+   advanced 0ms, and every running animation in the page reported `currentTime: 0` while its `playState`
+   still said "running". ⚠️ So FRAME 0 IS THE RENDERED STATE whenever the document is hidden, and an
+   entrance whose first keyframe hides or displaces its element ships that hiding or displacement AS the
+   layout. Fading from zero opacity would only have traded 4px of displacement for an invisible card.
+   ⛑ And the first time I looked at this I "measured" it by setting a flag inside `requestAnimationFrame`
+   and reading the flag in the same function — which cannot have fired yet, so it proved nothing. The
+   numbers above come from awaiting real frames and sampling the timeline.
+   ✅ Aevi's done-when for P is measured in boxes — *"assert the card's box lies inside the map's box at both
+   widths"* — so this was the difference between that gate passing and failing for a reason with nothing to
+   do with the card. A transform on an absolutely positioned popover fights its own left/top regardless.
+   120ms of fade is not worth either failure mode. */
+
+

@@ -743,3 +743,45 @@ export function layoutCoherence(locations, pos, { k = 6 } = {}) {
     return { id: t.id, overlap: byWorld.size ? hit / byWorld.size : 1 };
   });
 }
+
+/* ═════ SNG-677 P2 · WHERE THE PLACE CARD GOES, AS ARITHMETIC ═════
+ * ✅ AEVI's done-when for P: *"A gate drives it headless: select a place, and assert the card's box lies
+ * inside the map's box at both widths."* ⛔ THIS PROJECT HAS NO DOM IN ITS SUITE and no dependencies at all,
+ * so "drives it headless" cannot mean a real browser box. It can mean something better: the placement is
+ * arithmetic, so it belongs in a function that the painter and the gate both call, and then the gate is
+ * measuring the same numbers the browser lays out with rather than a reimplementation of them.
+ * ✅ Which is Erik's standing rule — *"app.js and tests call the same functions"* — and the answer to the
+ * complaint Aevi made on D1, that a gate checking source text was green while the map was wrong.
+ *
+ * @param map    {{w,h}} the canvas's laid-out size in CSS pixels
+ * @param card   {{w,h}} the card's measured size
+ * @param glyph  {{x,y}} the selected glyph in the same frame, or null when it has no mark of its own
+ * @returns {{mode, left, top, width, height}} — `left`/`top` relative to the map's top-left
+ */
+export function placeCardBox(map, card, glyph) {
+  const mw = Math.max(1, Number(map?.w) || 0), mh = Math.max(1, Number(map?.h) || 0);
+  const PAD = 4, GAP = 18;
+  // ⛔ THE SHEET IS DECIDED BY THE MAP'S WIDTH, NOT THE WINDOW'S. A narrow pane on a wide desktop is the
+  // case that separates them, and the card has to fit the MAP.
+  if (mw <= 640) {
+    // ✅ *"about 45% of the map's height"*, pinned to the map's bottom edge — so the selected glyph stays
+    // visible above it. ⚠️ A sheet sized against the VIEWPORT instead would cover the glyph it describes
+    // on exactly the devices this layout exists for.
+    const h = Math.round(mh * 0.45);
+    return { mode: "sheet", left: 0, top: mh - h, width: mw, height: h };
+  }
+  const w = Math.min(Number(card?.w) || 320, mw - PAD * 2);
+  const h = Math.min(Number(card?.h) || 220, mh - PAD * 2);
+  if (!glyph || !Number.isFinite(Number(glyph.x)) || !Number.isFinite(Number(glyph.y))) {
+    // ⛑ no glyph to sit beside: the frame's top-right, out of the way of the cluster it is hiding in.
+    return { mode: "popover", left: Math.max(PAD, mw - w - 8), top: 8, width: w, height: h };
+  }
+  const gx = Number(glyph.x), gy = Number(glyph.y);
+  // ✅ *"It flips to whichever side has room and never runs off the canvas."* Right if the whole card fits
+  // there, else left if it fits there, else clamped — so the last case is still inside the frame.
+  const left = (gx + GAP + w <= mw - PAD) ? gx + GAP
+    : (gx - GAP - w >= PAD) ? gx - GAP - w
+    : Math.max(PAD, Math.min(mw - w - PAD, gx - w / 2));
+  const top = Math.max(PAD, Math.min(mh - h - PAD, gy - h / 2));
+  return { mode: "popover", left: Math.round(left), top: Math.round(top), width: w, height: h };
+}

@@ -8053,6 +8053,77 @@ await (async () => {
       WG2.markerKind({ t: "region", wg: 1 }) === "gate" && WG2.markerKind({ t: "region" }) === "region",
       "if this reddens, `markerKind` changed its branch order and the seat rule should be re-read, not re-pointed");
 
+    /* ═════ SNG-677 P · THE PLACE CARD STAYS INSIDE THE MAP, AT BOTH WIDTHS ═════
+     * ✅ AEVI's done-when: *"A gate drives it headless: select a place, and assert the card's box lies inside
+     * the map's box at both widths."* ⛔ There is no DOM in this suite and no dependency to add one, so the
+     * placement is arithmetic in `placeCardBox` and the painter and this gate call the SAME function — which
+     * is better than a DOM gate would have been, because it cannot drift from what the browser lays out.
+     * ⚠️ AND IT IS THE REASON THE CARD HAS NO ENTRANCE ANIMATION. A `transform` on the first keyframe stayed
+     * applied on a document that was not rendering (0 frames in 600ms, `document.timeline` advanced 0ms,
+     * every animation pinned at `currentTime: 0`), and the sheet sat 4px below the map it is pinned inside.
+     * A box gate and a decorative transform cannot both be right about where a card is. */
+    {
+      const WM677 = await import("../engine/worldmap.js");
+      const inside = (box, map) => box.left >= -0.001 && box.top >= -0.001
+        && box.left + box.width <= map.w + 0.001 && box.top + box.height <= map.h + 0.001;
+      // the two widths she named, with the map heights the app actually lays out at them
+      const PHONE = { w: 358, h: 188 };      // measured at 390×844 in the browser
+      const DESK = { w: 977, h: 513 };       // measured at 1024 wide
+      const CARD = { w: 360, h: 220 };
+      const corners = (map) => [null, { x: 0, y: 0 }, { x: map.w, y: 0 }, { x: 0, y: map.h },
+        { x: map.w, y: map.h }, { x: map.w / 2, y: map.h / 2 }];
+      let worst = null;
+      for (const map of [PHONE, DESK]) for (const g of corners(map)) {
+        const box = WM677.placeCardBox(map, CARD, g);
+        if (!inside(box, map)) { worst = { map, g, box }; break; }
+      }
+      check("677/P: the card's box lies INSIDE the map's box — at 390px and at 1024px, and at every corner a glyph can sit in",
+        worst === null,
+        worst ? `escaped at map ${worst.map.w}×${worst.map.h}, glyph ${JSON.stringify(worst.g)} → ${JSON.stringify(worst.box)}`
+              : "a card half off the canvas is a card nobody can read, and the buttons are the half that leaves");
+      check("677/P: …and a narrow map gets the SHEET, a wide one the popover — decided by the MAP's width, never the window's",
+        WM677.placeCardBox(PHONE, CARD, null).mode === "sheet"
+        && WM677.placeCardBox(DESK, CARD, { x: 100, y: 100 }).mode === "popover"
+        && WM677.placeCardBox({ w: 640, h: 400 }, CARD, null).mode === "sheet"
+        && WM677.placeCardBox({ w: 641, h: 400 }, CARD, null).mode === "popover",
+        "a narrow pane on a wide desktop is the case that separates the two, and the card has to fit the MAP");
+      check("677/P: …and the sheet is 45% of the MAP's height, pinned to its bottom, so the glyph stays visible above it",
+        (() => { const b = WM677.placeCardBox(PHONE, CARD, { x: 10, y: 10 });
+          return b.mode === "sheet" && b.height === Math.round(PHONE.h * 0.45) && b.top + b.height === PHONE.h; })(),
+        "✅ Aevi: *\"The selected glyph stays visible above it\"* — a sheet sized against the VIEWPORT would cover the thing it describes");
+      check("677/P: …and the popover FLIPS rather than running off — a glyph at the right edge puts the card to its left",
+        (() => { const right = WM677.placeCardBox(DESK, CARD, { x: DESK.w - 10, y: 200 });
+          const left = WM677.placeCardBox(DESK, CARD, { x: 10, y: 200 });
+          return right.left < DESK.w - 10 && left.left > 10 && inside(right, DESK) && inside(left, DESK); })(),
+        "✅ Aevi: *\"It flips to whichever side has room and never runs off the canvas\"*");
+      // ⛔ AND THE CARD HAS A READER, which is the door this whole order turns on.
+      const appP = readFileSync(join(root, "app.js"), "utf8");
+      check("677/P: …and there is exactly ONE card — `placeCardHTML` is built in one place and the copy below the map is gone",
+        (appP.match(/function placeCardHTML\(/g) || []).length === 1
+        && (appP.match(/placeCardHTML\(/g) || []).length >= 2
+        && !/\$\{details\}\n\s*<button class="btn secondary" id="map-back"/.test(appP),
+        "✅ Aevi (P5): *\"The card BELOW the map is deleted, not hidden. Two cards is the drift this order is meant to end.\"*");
+      /* ⛑ AND THE TAP, WHICH IS A SOURCE CHECK AND I AM SAYING SO. The tap handler lives inside a closure
+       * that needs a canvas and `bindGesture`, so there is no headless way to drive it and no DOM to drive
+       * it in. ⚠️ Aevi's D1 objection to source checks was that one *"checks the source text, not boxes —
+       * so it was green while the map was not"*; this one is narrower than that: it asserts a STRUCTURAL
+       * invariant — tap and click reach the same selection door — rather than any formatting. If someone
+       * puts the chip back on tap, this reddens, which is exactly the regression worth catching: on touch
+       * the card would never open at all, and touch is the case Erik actually complained about.
+       * ✅ The behaviour itself was verified on the live map at 390×844. */
+      check("677/P: …and a TAP opens the card, not the chip — tap and click reach the same selection door",
+        (() => { const i = appP.indexOf("onTap: (lx, ly) =>");
+          if (i < 0) return false;
+          const body = appP.slice(i, appP.indexOf("},", i));
+          return /renderMap\(hit\.id/.test(body) && !/showChip\(/.test(body); })(),
+        "✅ Aevi (P3): *\"On touch there is no hover: the first tap opens the card.\"*");
+      check("677/P: …and its four doors are re-bound wherever it is drawn, not once against a page that has been replaced",
+        /function wirePlaceCard\(root\)/.test(appP)
+        && /wirePlaceCard\(el\)/.test(appP)
+        && !/document\.getElementById\("map-travel"\)/.test(appP),
+        "a floating card is re-rendered on every selection, so a one-time `getElementById` binding is a button that silently stops working");
+    }
+
     // ⛔ SNG-405 — A PATCH DECLINES OUTSIDE ITS WINDOW; IT DOES NOT CLAMP. Every read was pinned into
     // range with Math.min/Math.max, so a point beyond the patch returned its EDGE sample — the area
     // outside the tile got painted with whatever sat on its border, in tile-shaped rectangles. That is

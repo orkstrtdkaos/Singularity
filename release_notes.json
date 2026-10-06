@@ -16,6 +16,22 @@
   "next": [],
   "releases": [
     {
+      "version": "2.19.25",
+      "date": "2026-10-06",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "The world map's roads follow the ground",
+          "summary": "They were drawn as gentle arcs between places, which at world scale read as straight lines. They are routed over the terrain now, the same way the region maps route theirs, and the main roads stay visible at the widest view instead of fading almost away."
+        },
+        {
+          "kind": "fix",
+          "title": "A place's card no longer vanishes a moment after you tap it",
+          "summary": "On a touchscreen the tap and the click the browser sends after it were both being counted, so the second one undid the first. Tapping a place you already had selected also re-opens its card now, instead of doing nothing."
+        }
+      ]
+    },
+    {
       "version": "2.19.24",
       "date": "2026-10-06",
       "entries": [

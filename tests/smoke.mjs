@@ -8066,6 +8066,64 @@ await (async () => {
       WG2.markerKind({ t: "region", wg: 1 }) === "gate" && WG2.markerKind({ t: "region" }) === "region",
       "if this reddens, `markerKind` changed its branch order and the seat rule should be re-read, not re-pointed");
 
+    /* ═════ SNG-677 · THE WORLD MAP'S ROADS ARE ROUTED, NOT ARCED ═════
+     * ✅ ERIK, 2026-10-06: *"The world map still shows the straight line routes between places. It needs to
+     * show the drawn roads from the region maps (at least the major trunks)."*
+     * ⛔ HE WAS RIGHT ABOUT A THING I HAD ALREADY "FIXED". CCODE-620 shipped `bendRoad`, which is a
+     * one-parameter arc — nine samples, one sideways push capped at 0.28 of the separation. Measured as a
+     * fraction of each road's own length: arc 8.2% median, routed walk 23.5%. On screen at the opening 180°
+     * view: arc 4.7px median trunk sag, routed 9.3px, p90 36px → 95px. Five pixels is a straight line.
+     * ⛑ These gates assert the SHAPE of the claim — that routing bends more than arcing, and that the seam
+     * guard exists — never the pixel counts, which are a judgement about one view on one canvas. */
+    {
+      // ⛑ SELF-CONTAINED. `loadContentHeadless` is imported per block in this suite, never at module
+      // scope, so reaching for an outer one is the ReferenceError that took the whole run down once today.
+      const WGr = await import("../engine/worldglobe.js");
+      const { loadContentHeadless: loadCr } = await import("./headless_content.mjs");
+      const Cr = await loadCr();
+      const docR = JSON.parse(readFileSync(join(root, "content/packs/core/world/terrain.json"), "utf8"));
+      const tR = WGr.decodeTerrain(docR);
+      const routes = WGr.worldRoadRoutes(tR, Cr.locations, { tierOf: (l) => l?.tier });
+      check("677: the world map's roads are ROUTED over the ground, not arced between endpoints",
+        !!routes && routes.byPair instanceof Map && routes.kept > 100 && routes.input > routes.kept,
+        routes ? `${routes.kept} of ${routes.input} routed in ${routes.ms}ms` : "no routes at all");
+      // ⛔ the claim Erik's report rests on: a routed path bends MORE than the arc it replaced.
+      const frac = (path) => { if (!path || path.length < 3) return 0;
+        const R2 = Math.PI / 180;
+        const gc = (a, b) => Math.acos(Math.max(-1, Math.min(1, Math.sin(a[0]*R2)*Math.sin(b[0]*R2)
+          + Math.cos(a[0]*R2)*Math.cos(b[0]*R2)*Math.cos((a[1]-b[1])*R2)))) / R2;
+        const L = gc(path[0], path[path.length-1]); if (L < 1) return 0;
+        let w = 0;
+        for (const p of path) { const d = Math.abs(gc(path[0], p) + gc(p, path[path.length-1]) - L); w = Math.max(w, d); }
+        return w / L; };
+      const routedFracs = [...routes.byPair.values()].map(frac).filter((x) => x > 0).sort((a, b) => a - b);
+      const arcFracs = [];
+      for (const [key] of routes.byPair) {
+        const [ia, ib] = key.split("|");
+        const wa = Cr.locations[ia]?.worldPos, wb = Cr.locations[ib]?.worldPos;
+        if (!wa || !wb) continue;
+        const norm = (lo) => { let v = +lo; while (v > 180) v -= 360; while (v < -180) v += 360; return v; };
+        let p = null;
+        try { p = WGr.bendRoad(tR, [+wa.colatitude - 90, norm(wa.longitude)], [+wb.colatitude - 90, norm(wb.longitude)])?.points; } catch {}
+        const f = frac(p); if (f > 0) arcFracs.push(f);
+      }
+      arcFracs.sort((a, b) => a - b);
+      const medR = routedFracs[Math.floor(routedFracs.length / 2)] || 0;
+      const medA = arcFracs[Math.floor(arcFracs.length / 2)] || 0;
+      check("677: …and a routed road departs from the straight line MORE than the arc it replaced — which is the whole of Erik's report",
+        medR > medA * 1.4 && routedFracs.length > 50 && arcFracs.length > 50,
+        `routed median ${(medR * 100).toFixed(1)}% of its own length vs arc ${(medA * 100).toFixed(1)}% (n routed ${routedFracs.length}, n arc ${arcFracs.length})`);
+      check("677: …and the ±180 SEAM IS GUARDED — a plate-carrée grid cannot see that the seam is a seam",
+        typeof routes.seamDropped === "number" && routes.seamDropped >= 0
+        && [...routes.byPair.values()].every((p) => p.every(([la, lo]) => la >= -90.5 && la <= 90.5 && lo >= -180.5 && lo <= 180.5)),
+        `${routes.seamDropped} route(s) discarded — this repo has drawn a road 357° round the planet to join two places 3° apart`);
+      check("677: …and the TRUNKS stay visible at the view the player opens on, which is the one they judge the map by",
+        (() => { const wide = WGr.networkPaths(tR, { yaw: 20, pitch: -52, r: 700 * 0.44, cx: 350, cy: 270 },
+            { locations: Cr.locations, canvasPx: 700, tierOf: (l) => l?.tier });
+          return wide.trunkFade >= 0.6 && wide.fade <= 0.01; })(),
+        "the trunks were at 0.29 alpha and the tracks at a hard 0 above 90°, so the opening view showed faint near-straight lines and nothing else");
+    }
+
     /* ═════ SNG-677 W3 · THE GLOBE HAS NAMES ═════
      * ✅ AEVI: *"The globe draws NO NAMES AT ALL: the only `fillText` in its paint is the cluster count."*
      * ⛑ The names themselves are canvas ink and no suite here renders a canvas, so what is gated is what can
@@ -8175,7 +8233,8 @@ await (async () => {
         (() => { const i = appP.indexOf("onTap: (lx, ly) =>");
           if (i < 0) return false;
           const body = appP.slice(i, appP.indexOf("},", i));
-          return /renderMap\(hit\.id/.test(body) && !/showChip\(/.test(body); })(),
+          // the call moved to `pickPlace`, the one door both the click and the tap now use (§411)
+          return /pickPlace\(hit\.id\)/.test(body) && !/showChip\(/.test(body); })(),
         "✅ Aevi (P3): *\"On touch there is no hover: the first tap opens the card.\"*");
       check("677/P: …and its four doors are re-bound wherever it is drawn, not once against a page that has been replaced",
         /function wirePlaceCard\(root\)/.test(appP)

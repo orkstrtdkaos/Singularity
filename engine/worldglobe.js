@@ -1441,7 +1441,13 @@ export function networkPaths(t, view, { locations, precursor, showPrecursor = fa
   const out = {
     roads: [], precursor: [],
     fade: Math.min(1, Math.max(0, (90 - span) / 30)),          // tracks, the precursor lines, hydrology
-    trunkFade: Math.min(1, Math.max(0, (200 - span) / 70)),    // the ways between places people live, faint at the full globe
+    /* ⛔ THE TRUNKS KEEP A FLOOR, because the view the player OPENS on is the one they judge the map by.
+     * ⚠️ This was `(200 - span) / 70`, which is 0.29 at the full 180° globe — and `fade` (the tracks) is a
+     * hard 0 anywhere above 90°. So the opening view showed 115 trunk roads at under a third alpha and
+     * nothing else, which with a five-pixel bend is exactly ✅ Erik's *"straight line routes"*. The trunks
+     * are the thing he asked to see; the tracks still fade out, because a site track at hemisphere scale is
+     * a texture rather than information. */
+    trunkFade: Math.min(1, Math.max(0.62, (260 - span) / 110)),    // the ways between places people live, faint at the full globe
   };
   if (out.fade <= 0 && out.trunkFade <= 0) return out;
 
@@ -1465,7 +1471,9 @@ export function networkPaths(t, view, { locations, precursor, showPrecursor = fa
       const primary = tier(l) !== "site" && tier(o2) !== "site";
       // ⛔ BENT OVER THE GROUND WHEN THE CALLER SUPPLIES A BEND, straight when it does not — so a caller with
       // no terrain in hand still gets a map, which is what `fade` already promises at a wide span.
-      const pts = bend ? bend(a, b) : null;
+      // ⛑ THE IDS RIDE ALONG. A routed path is stored per PAIR, and keying a lookup on rounded coordinates
+      // instead would be a second identity for a thing that already has one.
+      const pts = bend ? bend(a, b, id, other) : null;
       const runs = [];
       if (pts && pts.length > 1) {
         // ⛑ ONE CHAIN, NOT A RUN PER SEGMENT. Arcing each segment separately gave 1,637 runs for 226 roads —
@@ -1555,4 +1563,67 @@ export function visiblePins(t, view, worldPosOf) {
       x: p.x, y: p.y, z: p.z });
   }
   return out.sort((a, b) => a.z - b.z);
+}
+
+/* ═════ SNG-677 · THE WORLD MAP'S ROADS ARE ROUTED, NOT ARCED ═════
+ * ✅ ERIK, 2026-10-06: *"The world map still shows the straight line routes between places. It needs to show
+ * the drawn roads from the region maps (at least the major trunks)."* ⛔ HE IS RIGHT AND I MEASURED BOTH.
+ * `bendRoad` — what CCODE-620 shipped — is a ONE-PARAMETER ARC: nine samples, seven candidate sideways
+ * offsets, capped at 0.28 of the separation. Measured as a fraction of each road's own length, its median
+ * bend is 8.2% (p90 29%). The region map's roads are a least-cost WALK, and routed over a world grid the
+ * same roads bend a median 23.5% (p90 79%, max 216% — a road that goes right around something), with 7 to
+ * 229 points instead of nine samples. At the opening 180° view an 8% bend over a 700px canvas is about five
+ * pixels. Five pixels is a straight line.
+ *
+ * ⚠️ WHY NOT JUST RUN THE REGION MAP'S ROUTER: it is measured in this repo at 640ms a region and 2.97s at
+ * worst, times 38 regions — about 24 seconds. So this routes ONE world grid instead of 38 regional ones:
+ * 194 of 200 roads in ~535ms at 360×180 with a 2px cell, paid ONCE per terrain and cached. The remaining six
+ * fall back to the arc, which is what the caller already does when no bend is offered.
+ * ⛑ 360×180 rather than 720×360 (2.1s) because the globe's own information floor is about a quarter of a
+ * degree — SNG-403 measured that — so a finer grid buys detail the map cannot draw.
+ *
+ * ⛔ AND THE ±180 SEAM IS GUARDED, because this project has been bitten by it twice: a road drawn 357° round
+ * the planet to join two places 3° apart, and a power from the far side of the world placed in Erik's valley.
+ * A plate-carrée grid cannot see that the seam is a seam, so any route whose path length wildly exceeds the
+ * great-circle distance between its ends is DISCARDED rather than drawn, and the count is returned.
+ */
+const _worldRoutes = new WeakMap();
+export function worldRoadRoutes(t, locations, { tierOf = null, gridW = 360 } = {}) {
+  if (!t || !locations) return null;
+  let hit = _worldRoutes.get(t);
+  const stamp = `${gridW}|${Object.keys(locations).length}`;
+  if (hit && hit.stamp === stamp) return hit;
+
+  const gw = gridW, gh = Math.round(gridW / 2);
+  const toScreen = (lon, lat) => ({ x: ((lon + 180) / 360) * gw, y: ((90 - lat) / 180) * gh });
+  const toWorld = (x, y) => ({ lon: (x / gw) * 360 - 180, lat: 90 - (y / gh) * 180 });
+  const extent = { lo0: -180, lo1: 180, la0: -90, la1: 90, polar: false };
+  const net = roadNetwork(locations, { tierOf });
+  const G = makeGroundCost(t, { ...GROUND_COST.road, extent });
+  const t0 = Date.now();
+  const out = routeRoads(net.roads, locations, {
+    W: gw, H: gh, step: G.step, toScreen, toWorld, extent, cell: 2,
+  });
+  const byPair = new Map();
+  let seamDropped = 0, kept = 0;
+  const R2 = Math.PI / 180;
+  const gcDeg = (a, b) => Math.acos(Math.max(-1, Math.min(1,
+    Math.sin(a[0] * R2) * Math.sin(b[0] * R2) +
+    Math.cos(a[0] * R2) * Math.cos(b[0] * R2) * Math.cos((a[1] - b[1]) * R2)))) / R2;
+  for (const r of (out?.roads || [])) {
+    const pts = r.points || [];
+    if (pts.length < 2) continue;
+    const path = pts.map((p) => { const w = toWorld(p.x, p.y); return [w.lat, w.lon]; });
+    // ⛔ the seam guard: walk the path in ground degrees and compare to the straight-line separation
+    let walked = 0;
+    for (let i = 1; i < path.length; i++) walked += gcDeg(path[i - 1], path[i]);
+    const straight = gcDeg(path[0], path[path.length - 1]);
+    if (straight > 0.5 && walked > straight * 4) { seamDropped++; continue; }
+    const key = r.a < r.b ? `${r.a}|${r.b}` : `${r.b}|${r.a}`;
+    byPair.set(key, path);
+    kept++;
+  }
+  hit = { stamp, byPair, kept, seamDropped, input: net.roads.length, ms: Date.now() - t0, gw, gh };
+  _worldRoutes.set(t, hit);
+  return hit;
 }

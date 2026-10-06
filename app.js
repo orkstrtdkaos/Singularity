@@ -48,7 +48,7 @@ import { groundForDecl, groundTag, substrateVerdict, locationDensity, carriedSub
 import { sceneImage, itemImage, artworkStyle, getArtMode, setArtMode, imagesEnabled, ensureImage, aestheticFor, regenPromptFor, onImageMinted, onComposedLookup, swapImageUrl, forgetImageUrl, bustedURL, isBustedURL, mintAction, IMAGE_MIN_BYTES, regenerateImage, acceptImage, isGeneratedImage, toggleKeep, likenessClause, houseStyleFor, sanitizeImagePrompt, imageURLFor, isMinorSubject, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor, lookFor, serviceRefusal, refusedSaid} from "./engine/art.js"; // SNG-401: draw it again without destroying the one they have
 import { drawLabel, labelText, labelSpace, powerSize, applyStyle, LABEL_STYLES } from "./engine/maplabel.js";
 import { openingFrame, placeCardBox } from "./engine/worldmap.js";   // M3: open framed on what the player knows   // M2/D1: one table, one collision space
-import { decodeTerrain, sampleAt, colorAt, unproject, project, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, globeClickAction, REGION_FRAME_DEG, regionVoteAt, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, makePolarBase, regionExtent, bendRoad, roadNetwork, clipToFrame, routeRoads, makeGroundCost, GROUND_COST } from "./engine/worldglobe.js";
+import { decodeTerrain, sampleAt, colorAt, unproject, project, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, globeClickAction, REGION_FRAME_DEG, regionVoteAt, worldRoadRoutes, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, makePolarBase, regionExtent, bendRoad, roadNetwork, clipToFrame, routeRoads, makeGroundCost, GROUND_COST } from "./engine/worldglobe.js";
 // ⛔ ROUND 4 — whose ground is this, as things stand today. `realms.js` resolves the SAVE (losses, growth,
 // broken powers, taken holds, your own realm); `influence.js` stays pure and just evaluates.
 import { groundHolders, resolvedPowers, stateStamp, powerRelation } from "./engine/realms.js";
@@ -198,7 +198,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.19.24";
+const APP_VERSION = "2.19.25";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -13320,6 +13320,32 @@ function paintCrossingCity(ctx, regionId, W, H) {
  *
  *  Coordinates are CSS pixels inside the element, which is what `offsetX` was. Listeners REPLACE rather than
  *  stack, because every one of these wirings runs again on a repaint. */
+/* ═════ THE GHOST CLICK, AND IT WAS EATING EVERY TAP'S RESULT ═════
+ * ✅ ERIK, 2026-10-06: *"when I click a place on the region map it pops up information then disappears after
+ * a second."* ⛔ REPRODUCED EXACTLY: the tap opens the card, and the `click` a touchscreen synthesises some
+ * 300ms after `touchend` runs the SAME handler again — and that handler is a TOGGLE
+ * (`renderMap(hit.id === selectedId ? null : hit.id)`), so the second pass deselects what the first selected
+ * and the card closes on its own.
+ * ⚠️ IT IS MINE, FROM SNG-677 P3. Before that, `onTap` called `showChip`, which does not re-render — so the
+ * tap drew a chip and the ghost click did the one real selection. Routing the tap through `renderMap` to
+ * open the card gave both events the same side effect, and two of the same toggle is none.
+ * ⚠️ AND IT BROKE THE GLOBE THE SAME WAY, unseen: a tap FRAMES a region, then the ghost click arrives at an
+ * already-framed region and ENTERS it. On a phone, one tap on a region left the world map entirely.
+ * ⛑ THE GUARD IS A TIMESTAMP, NOT A TARGET CHECK, because `onTap` re-renders the screen and REPLACES the
+ * canvas — so by the time the ghost click lands, the element the tap happened on is detached and
+ * `ev.target === el` is false. A listener scoped to the element could not have caught it.
+ * ⛑ Capture phase on the window, so it runs before any `onclick` the new screen has bound. */
+let _tapAt = 0;
+const GHOST_MS = 700;
+if (typeof window !== "undefined") {
+  window.addEventListener("click", (e) => {
+    if (!_tapAt || Date.now() - _tapAt > GHOST_MS) return;
+    _tapAt = 0;                                  // one tap is followed by at most one ghost
+    e.stopPropagation();
+    e.preventDefault();
+  }, true);
+}
+
 function bindGesture(el, { onDown = null, onMove = null, onUp = null, onZoom = null, onTap = null } = {}) {
   if (!el) return;
   if (el._gesture) {
@@ -13380,7 +13406,9 @@ function bindGesture(el, { onDown = null, onMove = null, onUp = null, onZoom = n
       finish();
       // ⚠️ A TAP IS NOT A CLICK ON TOUCH. Without this a phone can see the map but never select a place,
       // because `click` after a canvas touch is not something to rely on.
-      if (!wasMoved) onTap?.(at.x, at.y);
+      // ⛔ AND THE CLICK THE BROWSER SENDS NEXT IS SWALLOWED — see `_tapAt` above. A tap and its ghost are one
+      // gesture, and any handler whose effect is a TOGGLE turns two of them back into none.
+      if (!wasMoved) { _tapAt = Date.now(); onTap?.(at.x, at.y); }
     }
   }, { passive: false });
   on("touchcancel", () => { pinch = null; if (drag) finish(); }, { passive: true });
@@ -14678,6 +14706,16 @@ function wireRegionGroundMap(selectedId) {
   // ⛑ P/W7: the card is `openPlaceCard`'s now — one function, every map surface. This map's anchor is a
   // mark from `_regionPick`, run through `review()` because the marks are in the PAINTED map's pixels while
   // the card floats over the canvas as laid out.
+  /* ═════ WHAT A SECOND CLICK ON THE SAME PLACE MEANS ═════
+   * ⛔ THE TOGGLE WAS ON `selectedId` ALONE, AND THE CARD OUTLIVES NEITHER. P4 says *"Closing keeps the
+   * selection, as the region map's chip already does"* — so after ✕ or Esc the place is STILL selected while
+   * its card is gone, and the old rule then read a tap on it as "deselect". ⚠️ Measured: close a card, tap
+   * the same town, nothing appears; tap it twice and it comes back. Which reads exactly like the bug Erik
+   * reported from the other direction, and is the same one wearing different clothes.
+   * ⛑ So the question is not "is this place selected" but "is this place's card in front of me". Tapping a
+   * place OPENS its card; tapping the place whose card is already open closes it. */
+  const cardShowing = () => { const c = document.getElementById("place-card"); return !!c && !c.hidden; };
+  const pickPlace = (id) => renderMap(id === selectedId && cardShowing() ? null : id);
   const hidePlaceCard = () => closePlaceCard();
   const showPlaceCard = (id) => {
     const mark = (_regionPick?.marks || []).find((m) => m.id === id) || null;
@@ -14759,7 +14797,7 @@ function wireRegionGroundMap(selectedId) {
       if (hit.kind === "seal") { _regionFan = { key: hit.cluster.key }; hideChip(); repaint(); return; }
       if (hit.kind === "pill" && hit.pill?.kind === "lead") { _regionFan = null; hideChip(); repaint(); return; }
       _regionFan = null; hideChip();
-      renderMap(hit.id === selectedId ? null : hit.id);
+      pickPlace(hit.id);
     },
   });
   // ⛑ double-click resets, and the readout in the corner says so
@@ -14779,7 +14817,7 @@ function wireRegionGroundMap(selectedId) {
     if (hit.kind === "seal") { _regionFan = { key: hit.cluster.key }; hideChip(); repaint(); return; }
     if (hit.kind === "pill" && hit.pill.kind === "lead") { _regionFan = null; hideChip(); repaint(); return; }
     _regionFan = null; hideChip();
-    renderMap(hit.id === selectedId ? null : hit.id);    // the diagram's own door
+    pickPlace(hit.id);                                   // the diagram's own door
   };
   // ⛔ AND ESC CLOSES IT (AEVI A3). ⚠️ Bound on the WINDOW and removed when the screen is replaced, or every
   // re-render would leave another listener behind holding a stale `_regionPick`.
@@ -14911,19 +14949,48 @@ function wireWorldGlobe() {
   // and a constant captured here would be the size the globe had when it was first wired.
   const GW = () => cv.width / dprOf(), GH = () => cv.height / dprOf();
   const HGLOBE = GH;   // ⛑ W3 reads the height under its own name so the label pass cannot be misread as using GW twice
-  // ⛔ THE BEND, MEMOISED BY TERRAIN. `bendRoad` was imported into this file and CALLED BY NOTHING — built,
-  // tested, carrying its own measured ±180-seam fix, and never once run. It is the world-scale answer to what
-  // the region map does with a least-cost walk: a few samples per road rather than a grid walk per frame.
+  /* ═════ THE ROADS: A ROUTED PATH WHERE THERE IS ONE, THE ARC WHERE THERE IS NOT ═════
+   * ✅ ERIK: *"the world map still shows the straight line routes … It needs to show the drawn roads from the
+   * region maps (at least the major trunks)."* ⛔ `bendRoad` is a one-parameter arc and measures as such — a
+   * median bend of 8.2% of each road's length against the routed walk's 23.5% — so `worldRoadRoutes` does
+   * the real thing on one world grid, 162 of 200 roads in ~520ms, once per terrain and cached.
+   * ⛑ THE ARC STAYS AS THE FALLBACK for the 38 the router could not finish and the 3 the seam guard threw
+   * out, because a road drawn approximately is better than a road not drawn — which is what this caller
+   * already does when no bend is offered at all. */
   let _bendFor = null, _bendTerrain = null;
-  const globeBend = (a, b) => {
+  const globeBend = (a, b, idA, idB) => {
     if (!_terrain) return null;
+    const routed = _worldRoutes && _worldRoutes.byPair;
+    if (routed && idA && idB) {
+      const k = idA < idB ? `${idA}|${idB}` : `${idB}|${idA}`;
+      const p = routed.get(k);
+      if (p && p.length > 1) return p;
+    }
     if (_bendTerrain !== _terrain) { _bendFor = new Map(); _bendTerrain = _terrain; }
-    const k = `${a[0].toFixed(3)},${a[1].toFixed(3)}|${b[0].toFixed(3)},${b[1].toFixed(3)}`;
-    if (_bendFor.has(k)) return _bendFor.get(k);
+    const k2 = `${a[0].toFixed(3)},${a[1].toFixed(3)}|${b[0].toFixed(3)},${b[1].toFixed(3)}`;
+    if (_bendFor.has(k2)) return _bendFor.get(k2);
     let pts = null;
     try { pts = bendRoad(_terrain, a, b)?.points || null; } catch { pts = null; }
-    _bendFor.set(k, pts);
+    _bendFor.set(k2, pts);
     return pts;
+  };
+  /* ⛔ COMPUTED OFF THE FIRST PAINT, NOT BEFORE IT. 520ms is a visible hitch, and the globe already has a
+   * "reading the world…" frame; making the player wait longer for it to appear at all would trade one
+   * complaint for another. So the first frame draws with the arc, the routes are built once the frame is on
+   * screen, and the globe repaints itself when they land. ⚠️ ONE ATTEMPT PER TERRAIN: `_worldRoutesTried`
+   * is set BEFORE the work, or a 520ms computation that happens to fail would be retried on every frame. */
+  let _worldRoutes = null, _worldRoutesTried = null;
+  const ensureWorldRoutes = () => {
+    if (!_terrain || _worldRoutesTried === _terrain) return;
+    _worldRoutesTried = _terrain;
+    setTimeout(() => {
+      try {
+        _worldRoutes = worldRoadRoutes(_terrain, CONTENT.locations, { tierOf: (l) => l?.tier });
+        console.log(`[globe roads] ${_worldRoutes.kept} of ${_worldRoutes.input} routed in ${_worldRoutes.ms}ms`
+          + (_worldRoutes.seamDropped ? ` · ${_worldRoutes.seamDropped} dropped at the ±180 seam` : ""));
+        if (document.getElementById("world-globe")) paint(false);
+      } catch (err) { console.warn("[globe roads] could not route — the arc still draws them:", err); }
+    }, 0);
   };
   // ⚠️ the opening framing is the VIEWER's, not a number retyped here — see DEFAULT_VIEW's note:
   // it faces the inhabited southern hemisphere, and a gate holds it there.
@@ -15166,6 +15233,7 @@ function wireWorldGlobe() {
     // ⛑ THE BENT PATHS ARE CACHED BY TERRAIN, NOT RECOMPUTED PER FRAME. `bendRoad` samples the ground for
     // each road; doing that on every drag frame would cost what the region map's walk costs and buy nothing,
     // so it is memoised exactly as `_roadsByTerrain` memoises the region map's routes.
+    ensureWorldRoutes();
     const net = networkPaths(_terrain, view, { locations: CONTENT.locations, precursor: _precursorLines,
       showPrecursor: hasOldRoads, canvasPx: Math.min(GW(), GH()),
       tierOf: (l) => l?.tier,

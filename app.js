@@ -48,7 +48,7 @@ import { groundForDecl, groundTag, substrateVerdict, locationDensity, carriedSub
 import { sceneImage, itemImage, artworkStyle, getArtMode, setArtMode, imagesEnabled, ensureImage, aestheticFor, regenPromptFor, onImageMinted, onComposedLookup, swapImageUrl, forgetImageUrl, bustedURL, isBustedURL, mintAction, IMAGE_MIN_BYTES, regenerateImage, acceptImage, isGeneratedImage, toggleKeep, likenessClause, houseStyleFor, sanitizeImagePrompt, imageURLFor, isMinorSubject, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor, lookFor, serviceRefusal, refusedSaid} from "./engine/art.js"; // SNG-401: draw it again without destroying the one they have
 import { drawLabel, labelText, labelSpace, powerSize, applyStyle, LABEL_STYLES } from "./engine/maplabel.js";
 import { openingFrame, placeCardBox } from "./engine/worldmap.js";   // M3: open framed on what the player knows   // M2/D1: one table, one collision space
-import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, globeClickAction, REGION_FRAME_DEG, regionVoteAt, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, makePolarBase, regionExtent, bendRoad, roadNetwork, clipToFrame, routeRoads, makeGroundCost, GROUND_COST } from "./engine/worldglobe.js";
+import { decodeTerrain, sampleAt, colorAt, unproject, project, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, globeClickAction, REGION_FRAME_DEG, regionVoteAt, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, makePolarBase, regionExtent, bendRoad, roadNetwork, clipToFrame, routeRoads, makeGroundCost, GROUND_COST } from "./engine/worldglobe.js";
 // ⛔ ROUND 4 — whose ground is this, as things stand today. `realms.js` resolves the SAVE (losses, growth,
 // broken powers, taken holds, your own realm); `influence.js` stays pure and just evaluates.
 import { groundHolders, resolvedPowers, stateStamp, powerRelation } from "./engine/realms.js";
@@ -198,7 +198,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.19.21";
+const APP_VERSION = "2.19.22";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -13688,19 +13688,25 @@ let _exitSpace = null;
 // — my own guard silently dropped every power's italic under-line (3 of 20 on the Valley).
 function queueLabel(ctx, text, box, kind, opts, dy = 0, space = null) { if (box) _labelQueue.push({ ctx, text, box, kind, dy, space, opts: opts || {} }); }
 function flushLabels() {
-  const rankOf = (k) => (LABEL_STYLES[k] || {}).rank ?? 9;
+  /* ⛔ THE FLUSH MUST ASK THE STYLE THE SAME WAY THE SPACE DOES — and it did not.
+   * ⚠️ §0 gave `place` and `landmark` a `rankOf(opts)` so the place you are standing in ranks -1 and nothing
+   * can evict it. `labelSpace` reads that function; THIS sort read the static `rank` only, so the queue was
+   * ordered as if `here` were an ordinary place. It cost nothing visible — the sort decides DRAW ORDER and
+   * both are rank 0, so "where am I" was merely drawn in arbitrary order among its neighbours rather than
+   * last and on top — but the two readers of one table disagreeing is the defect, not its current symptom.
+   * ⛑ One expression, asked of the same style object, exactly as `labelSpace` asks it. */
+  const rankOf = (k, opts) => { const s = LABEL_STYLES[k] || {};
+    return typeof s.rankOf === "function" ? s.rankOf(opts || {}) : (s.rank ?? 9); };
   let drawn = 0, overruled = 0; const lost = [];
-  for (const q of _labelQueue.slice().sort((a, b) => rankOf(b.kind) - rankOf(a.kind))) {
+  for (const q of _labelQueue.slice().sort((a, b) => rankOf(b.kind, b.opts) - rankOf(a.kind, a.opts))) {
     const sp = q.space || _labelSpace;
     if (sp && !sp.holds(q.box)) { overruled++; lost.push(q.kind); continue; }   // overruled after it was queued
     drawLabel(q.ctx, q.text, q.box.x, q.box.y + (q.dy || 0), q.kind, q.opts);
     drawn++;
   }
-  // ⛑ A COUNT, BECAUSE A DEFERRED DRAW FAILS SILENTLY. Nothing throws when a queue empties into nothing, and
-  // the map simply comes back without names — which is how this shipped once already.
-  // ⛑ A COUNT, BECAUSE A DEFERRED DRAW FAILS SILENTLY. Nothing throws when a queue empties into nothing
-  // and the map simply comes back without names — which is exactly how I shipped it once, and the line
-  // that found the last bug (3 of 20 overruled by my own guard).
+  // ⛑ A COUNT, BECAUSE A DEFERRED DRAW FAILS SILENTLY. Nothing throws when a queue empties into nothing and
+  // the map simply comes back without names — which is exactly how I shipped it once, and the line that
+  // found the bug after that (3 of 20 powers overruled by my own `holds` guard).
   if (_labelQueue.length) console.log(`[labels] ${drawn} drawn, ${overruled} overruled (${[...new Set(lost)].join(", ") || "none"}), of ${_labelQueue.length} queued`);
   _labelQueue = [];
 }
@@ -14947,6 +14953,7 @@ function wireWorldGlobe() {
   // ⚠️ FUNCTIONS, NOT CONSTANTS: the backing store changes when the element is re-rendered at a new width,
   // and a constant captured here would be the size the globe had when it was first wired.
   const GW = () => cv.width / dprOf(), GH = () => cv.height / dprOf();
+  const HGLOBE = GH;   // ⛑ W3 reads the height under its own name so the label pass cannot be misread as using GW twice
   // ⛔ THE BEND, MEMOISED BY TERRAIN. `bendRoad` was imported into this file and CALLED BY NOTHING — built,
   // tested, carrying its own measured ±180-seam fix, and never once run. It is the world-scale answer to what
   // the region map does with a least-cost walk: a few samples per road rather than a grid walk per frame.
@@ -15114,6 +15121,13 @@ function wireWorldGlobe() {
   // — the standard trade, and the sharpening on release is what makes it feel solid rather than cheap.
   function paint(coarse) {
     if (!_terrain) return;
+    /* ⛔ W3 · ONE COLLISION SPACE AND ONE QUEUE, THE SAME TWO THE REGION MAP USES. ✅ AEVI: *"Use the same
+     * `labelSpace` and queue, and the rank rule from §0."* ⛑ Reset here, at the top of the paint, for the
+     * same reason the region map resets at the top of its own: a space that outlived a frame would refuse
+     * ground to a label standing where last frame's label stood, and on a globe you can DRAG, so every
+     * frame is a new arrangement of the same names. */
+    _labelSpace = labelSpace();
+    _labelQueue = [];
     const step = coarse ? 2 : 1;
     // ⛑ THE SAME TWO RULES AS THE REGION MAP: the loop runs in the CSS frame, so it does not grow with the
     // device; and it goes out through `drawImage` rather than `putImageData`, because putImageData IGNORES
@@ -15309,6 +15323,94 @@ function wireWorldGlobe() {
         }
       }
       if (isHere) { ctx.strokeStyle = "#e8c14a"; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(p.x, p.y, 9, 0, Math.PI * 2); ctx.stroke(); }
+    }
+
+    /* ═════ W3 · NAMES ON THE GLOBE, WHICH IT HAS NEVER HAD ═════
+     * ✅ AEVI, reading the shipped map: *"The globe draws NO NAMES AT ALL: the only `fillText` in its paint is
+     * the cluster count."* ⚠️ True, and the reason it looked acceptable is that the glyphs are legible — a
+     * map can be full of marks and still not answer "where is this".
+     * ⛑ RESERVED IN RANK ORDER, which §0 established is the half that actually decides: `here` first (rank -1,
+     * which nothing can evict), then the places, then the region names last at rank 6. Everything is queued
+     * and `flushLabels` draws once, so a better-ranked name arriving later cannot find a worse one's ink
+     * already on the canvas.
+     * ⛑ AND THE ZOOM GATES WHAT IS EVEN OFFERED. ✅ *"Settlements and waygates by rank as the zoom allows.
+     * Below the zoom where they collide, drop them, and the glyph stays."* At a 180° view there are 96
+     * settlements on the near face and no arrangement of them is readable, so they are not queued at all and
+     * the region names get the room. The glyph stays either way, which is what makes dropping a name cheap. */
+    {
+      const W3 = GW(), H3 = HGLOBE();
+      const sp3 = _labelSpace;
+      const mctx = ctx;
+      const wOf = (s, kind, opts) => (drawLabel(mctx, s, -9999, -9999, kind, opts || {})?.w) || 0;
+      /* ⛑ the spans are a judgement about legibility, not a measurement — and they are in one place, so they
+       * can be moved once. A gate pins the ORDERING (regional shows more than global), never the numbers.
+       * ⛔ AND THERE IS NO `region` KEY HERE, BECAUSE A SEAT IS NOT A SEPARATE ZOOM QUESTION. My first cut
+       * had `region: 1e9` in this table meaning "a region name always shows" — but THIS table is read by the
+       * PLACES loop, as `SHOW[p.kind]`, and `markerKind` returns "region" for all 25 region-tier pins. So
+       * every seat bypassed the zoom gate and was lettered as a PLACE as well as a region: measured at span
+       * 180°, 13 place labels where only "where am I" should have drawn, most of them the same word twice
+       * thirteen pixels apart (the seat of `the_pattern_reach` is `cloudform` and the region is named
+       * "Cloudform"). ⚠️ One key answering two questions, which is the defect I keep writing down. */
+      const SHOW = { gate: 110, settlement: 70, site: 26, waypoint: 26, region: 70 };
+      // ⛑ and the seats whose region name the region pass is about to draw AT THE SAME POINT — lettering the
+      // place as well would be the same name twice. It is skipped only while the names MATCH: a seat whose
+      // own name differs from its region's is a real second fact about that spot.
+      const seatName = new Map();
+      for (const rid of Object.keys(_terrain.seats || {})) {
+        const pid = (_terrain.seats[rid] || [])[2];
+        if (pid) seatName.set(pid, String((CONTENT.regions || []).find((r) => r.regionId === rid)?.name || rid.replace(/_/g, " ")));
+      }
+      let qRegion = 0, qPlace = 0, qSkippedDup = 0;
+
+      // ── 1 · the place you are standing in, always ──
+      const hereP = pins.find((p) => p.id === here);
+      if (hereP) {
+        const nm = String(CONTENT.locations?.[here]?.name || here);
+        const w = wOf(nm, "place", { here: true });
+        const box = sp3.place(hereP.x, hereP.y - 14, w, 13,
+          { kind: "place", opts: { here: true }, clampTo: { w: W3, h: H3 },
+            offsets: [[0, 0], [0, 26], [-w / 2 - 10, 7], [w / 2 + 10, 7]] });
+        if (box) { ctx.textAlign = "center"; queueLabel(ctx, nm, box, "place", { here: true }); qPlace++; }
+      }
+
+      // ── 2 · the other places, by what the zoom allows ──
+      for (const p of pins) {
+        if (p.id === here) continue;
+        const lim = SHOW[p.kind] ?? SHOW.settlement;
+        if (glyphSpan > lim) continue;
+        const nm = String(p.name || p.id);
+        if (seatName.get(p.id) === nm) { qSkippedDup++; continue; }   // the region pass letters this very word here
+        const w = wOf(nm, "place", {});
+        const box = sp3.place(p.x, p.y - 13, w, 12,
+          { kind: "place", clampTo: { w: W3, h: H3 },
+            offsets: [[0, 0], [0, 25], [-w / 2 - 9, 6], [w / 2 + 9, 6]] });
+        if (box) { ctx.textAlign = "center"; queueLabel(ctx, nm, box, "place", {}); qPlace++; }
+      }
+
+      // ── 3 · the region names, at their seats ──
+      // ⛔ THE SEAT IS THE ASSET'S, not a centroid of this module's own invention — and it only became
+      // reachable in this commit's predecessor, because `decodeTerrain` had been dropping `seats` entirely.
+      const seats3 = _terrain.seats || {};
+      const lookAt = _globeLookAt;
+      for (const rid of Object.keys(seats3)) {
+        const s = seats3[rid];
+        const pr = project(Number(s[1]), Number(s[0]), view, 1);
+        if (!pr) continue;                                   // behind the limb
+        const nm = String((CONTENT.regions || []).find((r) => r.regionId === rid)?.name || rid.replace(/_/g, " "));
+        // ⛑ the region under the camera is the one you are about to enter (W2), so it is the one that is not
+        // dimmed. Every other name is context.
+        const opts = { size: glyphSpan > 60 ? 13 : 11, dim: rid !== lookAt };
+        const w = wOf(nm, "region", opts);
+        const box = sp3.place(pr.x, pr.y, w, Math.round(opts.size) + 4,
+          { kind: "region", clampTo: { w: W3, h: H3 },
+            offsets: [[0, 0], [0, -20], [0, 20], [-w / 2 - 12, 0], [w / 2 + 12, 0]] });
+        if (box) { ctx.textAlign = "center"; queueLabel(ctx, nm, box, "region", opts); qRegion++; }
+      }
+
+      flushLabels();
+      // ⛑ THE COUNT, because a deferred draw fails silently and this pass is the whole of W3. If a change
+      // ever empties it, the globe comes back looking exactly as Aevi found it and nothing throws.
+      if (!coarse) console.log(`[globe labels] span ${glyphSpan.toFixed(0)}° · queued ${qRegion} region + ${qPlace} place${qSkippedDup ? ` · ${qSkippedDup} seat name(s) left to the region pass` : ""}`);
     }
   }
 

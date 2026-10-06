@@ -72,6 +72,24 @@ export const LABEL_STYLES = {
     halo: "rgba(246,241,228,0.72)", haloWidth: 2, letterSpacing: "0.22em",
     transform: (t) => String(t).toUpperCase(), rank: 6,
   },
+  /* ⛔ W3 · A REGION'S NAME ON THE GLOBE — THE DISTRICT'S LETTERFORMS, IN INK THAT READS ON DARK GROUND.
+   * ✅ AEVI (SNG-677 W3): *"Region names in the district style (spaced capitals, faint), at the region's seat."*
+   * ⚠️ The LOOK she names is right and the ROW is not reusable as it stands: `district` is dark ink
+   * (rgba(60,52,40,…)) on a LIGHT halo, because M10 put it on the city's own paper — *"the mock has DARK
+   * SERIF WITH A LIGHT HALO."* The globe's ground is terrain at 4–20% lightness, so lettering a region in
+   * district ink is dark on dark; only its halo would carry it.
+   * ⛑ So this is the same letterforms — spaced capitals, serif, faint, rank 6 — with `place`'s cream-in-dark
+   * ink, which is the pair already proven over terrain. One row rather than a `colour` option on `district`,
+   * because the point of this table is that the PAINTER never decides a look: a call site passing its own
+   * hue is how the map ends up with two answers for one kind of thing.
+   * ⛑ Bigger than district's 10px because a region is the widest thing named on the globe, and the only
+   * label that answers "what part of the world am I looking at". ✅ The size and the fade are Aevi's to move. */
+  region: {
+    font: (o) => `600 ${o?.size || 12}px ui-serif, Georgia, serif`,
+    fill: (o) => o?.dim ? "rgba(232,222,198,0.52)" : "rgba(238,232,212,0.80)",
+    halo: "rgba(10,12,18,0.80)", haloWidth: 2.6, letterSpacing: "0.22em",
+    transform: (t) => String(t).toUpperCase(), rank: 6,
+  },
   // ⛔ M10 · A LANDMARK SITS ON THE CITY'S OWN PAPER, WHICH IS LIGHT. ✅ AEVI: *"the mock has DARK SERIF
   // WITH A LIGHT HALO."* ⚠️ The `place` style is cream ink in a dark halo, which is right over terrain and
   // muddy over cream paper — a dark halo on a light ground is a smudge round every letter. Same family, ink

@@ -8053,6 +8053,53 @@ await (async () => {
       WG2.markerKind({ t: "region", wg: 1 }) === "gate" && WG2.markerKind({ t: "region" }) === "region",
       "if this reddens, `markerKind` changed its branch order and the seat rule should be re-read, not re-pointed");
 
+    /* ═════ SNG-677 W3 · THE GLOBE HAS NAMES ═════
+     * ✅ AEVI: *"The globe draws NO NAMES AT ALL: the only `fillText` in its paint is the cluster count."*
+     * ⛑ The names themselves are canvas ink and no suite here renders a canvas, so what is gated is what can
+     * be: the style row exists and letters the way she asked, the zoom gating is ORDERED (a regional view
+     * offers more than a global one) without pinning any of its numbers, and a region seat is lettered ONCE.
+     * ⚠️ The last of those is a real defect this gate would have caught. `markerKind` returns "region" for
+     * all 25 region-tier pins, and my first cut had a `region` key in the places loop's own zoom table
+     * meaning "a region name always shows" — so every seat bypassed the gate and was lettered as a place AS
+     * WELL as a region, most of them the same word twice thirteen pixels apart. Measured at span 180°: 13
+     * place labels where only "where am I" should have drawn. */
+    /* ⛑ SELF-CONTAINED ON PURPOSE. My first cut of this block reached for the maplabel import and the
+     * app.js source held by the §675 block five hundred lines up — both are `const`s inside ANOTHER block,
+     * so this threw a ReferenceError and took the whole suite down at its first check.
+     * ⚠️ It failed LOUDLY, which is the good case. A block that reached a STALE outer binding instead would
+     * have passed while asking its question of the wrong file. Its own import, its own read. */
+    const ML3 = await import("../engine/maplabel.js");
+    const appW3 = readFileSync(join(root, "app.js"), "utf8").split("\r").join("");
+    check("677/W3: the label table has a `region` row — spaced capitals, faint, and rank 6 like the district style Aevi named",
+      (() => { const s = ML3.LABEL_STYLES.region;
+        return !!s && s.rank === 6 && s.letterSpacing === "0.22em"
+          && s.transform("the valley") === "THE VALLEY"
+          && /ui-serif|Georgia|serif/.test(s.font({})); })(),
+      "✅ Aevi (W3): *\"Region names in the district style (spaced capitals, faint), at the region's seat.\"*");
+    check("677/W3: …and it is NOT the district row — district is dark ink on a light halo, which is dark-on-dark over terrain",
+      (() => { const r = ML3.LABEL_STYLES.region, d = ML3.LABEL_STYLES.district;
+        return r.fill({}) !== d.fill({}) && r.halo !== d.halo; })(),
+      "M10 put `district` on the city's own light paper; the globe's ground is terrain at 4–20% lightness");
+    check("677/W3: …and the zoom gating is ORDERED — a waygate survives a wider view than a town, a town than a site",
+      (() => { const m = /const SHOW = \{([^}]*)\}/.exec(appW3);
+        if (!m) return false;
+        const n = (k) => { const g = new RegExp(k + ":\\s*(\\d+)").exec(m[1]); return g ? Number(g[1]) : null; };
+        const gate = n("gate"), settlement = n("settlement"), site = n("site");
+        return gate !== null && settlement !== null && site !== null
+          && gate > settlement && settlement > site; })(),
+      "⛑ the ORDERING is the rule and the numbers are a judgement — pinning 110/70/26 would redden the day anyone tunes them");
+    check("677/W3: …and a region SEAT is lettered once, not as a place and again as its region",
+      /seatName\.get\(p\.id\) === nm/.test(appW3) && /const SHOW = \{[^}]*region: 70/.test(appW3),
+      "the seat of `the_pattern_reach` is `cloudform` and that region is NAMED \"Cloudform\" — the same word twice, 13px apart");
+    check("677/W3: …and the globe resets the ONE collision space and queue at the top of its paint, as the region map does",
+      (() => { const i = appW3.indexOf("function paint(coarse) {");
+        const head = appW3.slice(i, i + 1200);
+        return /_labelSpace = labelSpace\(\)/.test(head) && /_labelQueue = \[\]/.test(head); })(),
+      "✅ Aevi (W3): *\"Use the same `labelSpace` and queue, and the rank rule from §0\"* — and a globe can be DRAGGED, so every frame is a new arrangement of the same names");
+    check("677/W3: …and the FLUSH asks the style for a per-label rank exactly as the space does",
+      /rankOf\(b\.kind, b\.opts\) - rankOf\(a\.kind, a\.opts\)/.test(appW3),
+      "§0 gave `place` a `rankOf(opts)` so `here` ranks -1; the flush was still sorting by the static rank, so two readers of one table disagreed");
+
     /* ═════ SNG-677 P · THE PLACE CARD STAYS INSIDE THE MAP, AT BOTH WIDTHS ═════
      * ✅ AEVI's done-when: *"A gate drives it headless: select a place, and assert the card's box lies inside
      * the map's box at both widths."* ⛔ There is no DOM in this suite and no dependency to add one, so the

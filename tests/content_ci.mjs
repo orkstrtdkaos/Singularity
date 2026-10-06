@@ -85,10 +85,16 @@ for (const pack of PACKS) {
   // that. Her words: "a rule I have to remember is a rule I will break." Any directory the manifest points
   // into is now fully covered by it, automatically; the explicit list stays as a FLOOR so nothing that had
   // coverage can lose it.
+  /* ⚠️ THE REFERENCED DIRECTORY IS THE PATH'S OWN, NOT ITS FIRST SEGMENT. Every manifest path was one
+   * level deep when this was written (`rules/x.json`), so the two readings agreed; SNG-681 registers
+   * `world/films/*.json`, and the first-segment reading made the referenced dir `world` — which then
+   * demanded that all 13 unrelated files in `world/` be manifest-listed, and failed on every one of them.
+   * ⛑ Taking the directory keeps today's coverage exactly (one-level paths are unchanged) and extends the
+   * rule, as written, to a nested one: "any directory the manifest points INTO is covered by it". */
   const referencedDirs = new Set();
   for (const v of Object.values(provides))
     for (const path of (Array.isArray(v) ? v : [v]))
-      if (String(path).includes("/")) referencedDirs.add(String(path).split("/")[0]);
+      if (String(path).includes("/")) referencedDirs.add(String(path).split("/").slice(0, -1).join("/"));
   for (const sub of new Set([...(STRICT_DIRS[pack.key] || []), ...referencedDirs])) {
     const dirAbs = join(root, pack.dir, sub);
     if (!existsSync(dirAbs)) continue;

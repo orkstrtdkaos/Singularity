@@ -758,7 +758,7 @@ export async function loadContent() {
   // fold the two that mutate already-loaded maps (accords tag abilities, legends hydrate into npcs).
   // Failure semantics preserved exactly: `region` stays fatal; every optional one keeps its fallback.
   const [region, substrate, greaterArcs, sovereignMarksDoc, sovereignSeatsDoc, genNpc, genLoc, genArc, genCreature, originsDoc, backgroundsDoc, regionsDoc,
-         accords, helpDoc, substrateModel, powerSourcesDoc, foothillsDoc, prologue, legendsLoaded, traitReadoutsDoc, traditionAestheticsDoc, frameContentDoc, frameKindsDoc, receiptLineDoc, consumerMapDoc, moveHintsDoc, ribbonCopyDoc, earnedPowerDoc, localLayoutsDoc, locationKindsDoc, openingDoc, theVeilDoc, powerCosmologyDoc, tierSignalsDoc, tierRarityDoc] = await Promise.all([
+         accords, helpDoc, substrateModel, powerSourcesDoc, foothillsDoc, prologue, legendsLoaded, traitReadoutsDoc, traditionAestheticsDoc, frameContentDoc, frameKindsDoc, receiptLineDoc, consumerMapDoc, moveHintsDoc, ribbonCopyDoc, earnedPowerDoc, localLayoutsDoc, locationKindsDoc, openingDoc, filmDocs, theVeilDoc, powerCosmologyDoc, tierSignalsDoc, tierRarityDoc] = await Promise.all([
     fetchJSON("world/regions/valley.json"),
     fetchJSON("content/packs/valley/lore/generative_substrate.json").catch(() => null),           // generation off on a miss
     fetchJSON("content/packs/valley/lore/greater_arcs.json").then(x => x.arcs || []).catch(() => []), // no arc few-shot
@@ -840,6 +840,15 @@ export async function loadContent() {
      * file today found registered and unloaded, after `location_kinds.json`. A `.catch(() => null)` like its
      * neighbours: a missing script costs the opening and nothing else. */
     fetchJSON("content/packs/core/world/opening.json").catch(() => null),
+    /* ⛔ SNG-681 · THE NINE OTHER FILMS, FROM THE PACK'S OWN REGISTRY. ✅ AEVI (F4): *"A film can be
+     * rewritten, or added, as a content change alone."* ⛑ Which is a claim about THIS LINE: a literal list
+     * of nine paths here would make every new film a code change, so the list lives in the manifest beside
+     * `rules` and `encounters` and this reads whatever is in it. ⚠️ They arrived registered nowhere — the
+     * third authored world file this week to be written, committed, and read by nothing (`location_kinds`,
+     * `opening`, and now these), which is what the manifest's own note means by "REGISTERED IN THE SAME
+     * COMMIT AS THE FILE — the discipline that took 27 invisible files to learn".
+     * ⛑ Tolerant per film: one unreadable film costs that film and not the other nine. */
+    Promise.all((index.provides.films || []).map((p) => fetchJSON(`content/packs/core/${p}`).catch(() => null))),
     // ⛔ SNG-448 / SNG-446 — THE VEIL AND THE POWER COSMOLOGY, REGISTERED SINCE 08-15 AND LOADED BY NOTHING. Aevi:
     // "we built the Void on them this week" — R40/R41's Sovereigns, R38b's two grounds, the Assay's four conditions,
     // all authored against cosmology the engine had never seen. Same fault as `earned_power_guidance` above,
@@ -978,7 +987,7 @@ export async function loadContent() {
   // passes is a dial nobody reads. ⚠ `tierFromRole` returns null without it, so nothing moves until it lands.
   if (tierSignalsDoc && rules?.npcStanding) rules.npcStanding.tierSignals = tierSignalsDoc;
   if (tierRarityDoc && rules?.npcStanding) rules.npcStanding.tierRarity = tierRarityDoc;   // §2.1: the target pyramid, beside the role signals
-  const content = { craftMechanics, damageFamilies, spectrums, rules, foothills: foothillsDoc, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, challengerPools, events, companions, encounters, randomEncounters, lore, region, substrate, greaterArcs, sovereignMarks: sovereignMarksDoc || null, sovereignSeats: sovereignSeatsDoc || null, genSchemas, legends, traditions, traditionIndex, prologue, origins, backgrounds, quests, traditionArcs, npcQuests, regions, accords, helpText, substrateModel, powerSources: powerSourcesDoc || null, romanceGuidance, skillBattle, functionVocabulary, worldClock, schools, classArchetypes, repairPanelManifest, trait_readouts: traitReadoutsDoc?.readouts || traitReadoutsDoc || {}, traditionVisualAesthetics: traditionAestheticsDoc?.traditions || {}, visualAesthetics: traditionAestheticsDoc || {},   /* SNG-435 §C3: the WHOLE doc — `powerSystems` was flattened away at load */  bestiary, powers, tradeCompanies, traditionMotivations, npcInteriority, encounterFrameContent: frameContentDoc || {}, frameKinds: frameKindsDoc?.frameKinds || {}, receiptLine: receiptLineDoc || {}, consumerContract: consumerMapDoc || { contentTypes: {} }, moveHints: moveHintsDoc || { byKind: {}, default: {} }, ribbonCopy: ribbonCopyDoc || {}, earnedPowerGuidance: earnedPowerDoc || { bands: {} }, theVeil: theVeilDoc || null, regionRules: regionsDoc || null,   /* § the dials beside `regions` */ powerCosmology: powerCosmologyDoc || null, mapStates: locationKindsDoc?.mapStates || null, locationKinds: locationKindsDoc || null, opening: openingDoc || null, startingLocation: valley.startingLocation };
+  const content = { craftMechanics, damageFamilies, spectrums, rules, foothills: foothillsDoc, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, challengerPools, events, companions, encounters, randomEncounters, lore, region, substrate, greaterArcs, sovereignMarks: sovereignMarksDoc || null, sovereignSeats: sovereignSeatsDoc || null, genSchemas, legends, traditions, traditionIndex, prologue, origins, backgrounds, quests, traditionArcs, npcQuests, regions, accords, helpText, substrateModel, powerSources: powerSourcesDoc || null, romanceGuidance, skillBattle, functionVocabulary, worldClock, schools, classArchetypes, repairPanelManifest, trait_readouts: traitReadoutsDoc?.readouts || traitReadoutsDoc || {}, traditionVisualAesthetics: traditionAestheticsDoc?.traditions || {}, visualAesthetics: traditionAestheticsDoc || {},   /* SNG-435 §C3: the WHOLE doc — `powerSystems` was flattened away at load */  bestiary, powers, tradeCompanies, traditionMotivations, npcInteriority, encounterFrameContent: frameContentDoc || {}, frameKinds: frameKindsDoc?.frameKinds || {}, receiptLine: receiptLineDoc || {}, consumerContract: consumerMapDoc || { contentTypes: {} }, moveHints: moveHintsDoc || { byKind: {}, default: {} }, ribbonCopy: ribbonCopyDoc || {}, earnedPowerGuidance: earnedPowerDoc || { bands: {} }, theVeil: theVeilDoc || null, regionRules: regionsDoc || null,   /* § the dials beside `regions` */ powerCosmology: powerCosmologyDoc || null, mapStates: locationKindsDoc?.mapStates || null, locationKinds: locationKindsDoc || null, opening: openingDoc || null, films: (filmDocs || []).filter(f => f && f.id), startingLocation: valley.startingLocation };
   // SNG-022: bring every loaded record up to current (derive missing additive fields,
   // flag dangling cross-refs). In-memory only — Pages files are static.
   try { reconcileContent(content); } catch (err) { console.warn("[loadContent] reconcile skipped:", err.message); }
@@ -1464,8 +1473,23 @@ export function loadCharacter(id) {
 }
 
 export function saveProfile(p) { localStorage.setItem(LS.profile(p.playerKey), JSON.stringify(p)); }
+/* ⛔ A PROFILE THAT PREDATES A FIELD IS NOT A PROFILE WITHOUT ONE. `newProfile` has written
+ * `charactersPlayed: []` since v2, and both of app.js's writers do `profile.charactersPlayed.includes(...)`
+ * with no guard — so an older or hand-made profile throws there and the CHARACTER IS LOST: `finish()` dies
+ * at that line, after the creation screens and before `saveCharacter`, with no message and nothing saved.
+ * ⚠️ FOUND IN PLAY, NOT IN THEORY: `player-0jwfjo` in this very preview's store carries
+ * `{playerKey, name, rating, uiSidebar}` and no `charactersPlayed` — one real profile, one click from the
+ * roster, and a whole character made and thrown away.
+ * ⛑ Filled at the ONE DOOR every reader comes through, rather than at the two call sites that happen to
+ * read it today — the third reader would have the same bug, and would find it the same way. */
 export function loadProfile(playerKey) {
-  try { return JSON.parse(localStorage.getItem(LS.profile(playerKey))); } catch { return null; }
+  try {
+    const p = JSON.parse(localStorage.getItem(LS.profile(playerKey)));
+    if (!p || typeof p !== "object") return p;
+    if (!Array.isArray(p.charactersPlayed)) p.charactersPlayed = [];
+    if (!Array.isArray(p.history)) p.history = [];
+    return p;
+  } catch { return null; }
 }
 
 /** Export/import for moving saves between machines until GitHub sync is configured. */

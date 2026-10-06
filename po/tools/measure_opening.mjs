@@ -9,7 +9,7 @@
 import { loadContentHeadless } from "../../tests/headless_content.mjs";
 import { ringOrder } from "../../engine/traditions.js";
 import { walkingDays } from "../../engine/worldmap.js";
-import { openingReel, shotSeconds, codaShots, codaArc, codaRegionLine } from "../../engine/opening.js";
+import { openingReel, shotSeconds, codaShots, codaArc, codaRegionLine } from "../../engine/films.js";
 import { arcReachesRegion } from "../../engine/arceffects.js";
 import { decodeTerrain, sampleAt, colorAt, unproject } from "../../engine/worldglobe.js";
 import { readFileSync } from "node:fs";

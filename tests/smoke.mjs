@@ -8106,7 +8106,7 @@ await (async () => {
      * watching it once: a caption the code invented, a shot that outlives its words, a coda that names the
      * wrong region, a ring in the wrong order. Everything below is that half. */
     {
-      const OP = await import("../engine/opening.js");
+      const OP = await import("../engine/films.js");
       const { loadContentHeadless: lch680 } = await import("./headless_content.mjs");
       const C680 = await lch680();
       const raw680 = readFileSync(join(root, "content/packs/core/world/opening.json"), "utf8");
@@ -8299,6 +8299,181 @@ await (async () => {
           && /typeof a\.color === "string"/.test(polesFn)
           && /axes\.indexOf\(axis\)/.test(polesFn),
           `${ring.filter((id) => aes[id]?.axis).length}/${ring.length} stations carry an axis; ${ring.filter((id) => /#[0-9a-f]{3,8}/i.test(JSON.stringify(aes[id] || {}))).length} carry a hex; ${roleRules.length} ring rules in style.css are all by role`);
+      }
+    }
+
+    /* ═════ CCODE-633 · A PROFILE THAT PREDATES A FIELD STILL MAKES A CHARACTER ═════
+     * ⛔ FOUND IN PLAY: `finish()` does `profile.charactersPlayed.includes(...)` with no guard, so a profile
+     * written before that field existed throws there — after every creation screen and BEFORE
+     * `saveCharacter`. The character is made and lost, silently. One such profile is in the preview store
+     * right now (`{playerKey, name, rating, uiSidebar}`), one click from the roster.
+     * ⛑ Gated at the door that fixes it, and on both halves: the loader fills the lists, and app.js's two
+     * writers still assume an array — which is now safe because nothing reaches them another way. */
+    {
+      const ST633 = await import("../engine/state.js");
+      const old = { playerKey: "player-old", name: "Old", rating: "PG-13", uiSidebar: {} };
+      const store = {};
+      const g = globalThis;
+      const hadLS = "localStorage" in g;
+      const fake = { getItem: (k) => (k in store ? store[k] : null), setItem: (k, v) => { store[k] = String(v); },
+        removeItem: (k) => { delete store[k]; }, key: (i) => Object.keys(store)[i] ?? null, get length() { return Object.keys(store).length; } };
+      const prevLS = hadLS ? g.localStorage : undefined;
+      try {
+        Object.defineProperty(g, "localStorage", { value: fake, configurable: true, writable: true });
+        store["singularity.profile.player-old"] = JSON.stringify(old);
+        const back = ST633.loadProfile("player-old");
+        check("CCODE-633: ⛔ a profile written before `charactersPlayed` existed comes back WITH it — the field is filled at the loader, not at the two call sites that read it",
+          Array.isArray(back?.charactersPlayed) && back.charactersPlayed.length === 0 && Array.isArray(back.history)
+          && back.name === "Old" && !("charactersPlayed" in old),
+          "the stored record is untouched; the one handed to the app is complete");
+        check("CCODE-633: …and a missing profile is still null, not an empty one — absence stays absence",
+          ST633.loadProfile("player-nobody") === null, "no profile is not a blank profile");
+        const src633 = readFileSync(join(root, "app.js"), "utf8");
+        check("CCODE-633: …and the two writers that threw are the two this fixes — if a third appears it has the same guarantee",
+          (src633.match(/profile\.charactersPlayed\.includes\(/g) || []).length === 2,
+          "both go through `loadProfile`");
+      } finally {
+        if (hadLS) Object.defineProperty(g, "localStorage", { value: prevLS, configurable: true, writable: true });
+        else delete g.localStorage;
+      }
+    }
+
+    /* ═════ SNG-681 G1–G4 · TEN FILMS, ONE PLAYER ═════
+     * ✅ ERIK: *"We should make a few more of these as short info films about the peoples and their heroes,
+     * legends, etc. Their primary cities and sites… and one about the arcs and the power sources."*
+     * ⛔ THE FILMS ARE 272 SHOTS OF CONTENT POINTING AT OTHER CONTENT — 80 places, 29 people, 24 traditions,
+     * 8 arcs — and every one of those ids is a way for a film to go quietly wrong: a shot whose subject does
+     * not resolve still plays, with a globe and a caption and nothing it is about. That is what G1 is for. */
+    {
+      const FM = await import("../engine/films.js");
+      const { loadContentHeadless: lch681 } = await import("./headless_content.mjs");
+      const C681 = await lch681();
+      const src681 = readFileSync(join(root, "app.js"), "utf8");
+      const films = FM.allFilms(C681);
+
+      /* G1 · ONE PLAYER. ✅ *"Every film in `films/` and `opening.json` plays through `renderFilm` to its title
+       * card, with no missing visual, place, figure, tradition or arc id. Tested on the data, not the
+       * canvas."* ⛑ Including the thing that nearly went wrong first: the nine films are REGISTERED. They
+       * arrived on disk listed nowhere, which is the third authored world file this week to do that. */
+      check("681/G1: ⛔ the nine films are registered in the pack manifest and reach CONTENT — a film on disk and in no registry is a film nobody can watch",
+        (() => {
+          const mani = JSON.parse(readFileSync(join(root, "content/packs/core/manifest.json"), "utf8"));
+          const listed = (mani.provides?.films || []).length;
+          const onDisk = readdirSync(join(root, "content/packs/core/world/films")).filter((f) => f.endsWith(".json")).length;
+          return listed === onDisk && onDisk >= 9 && (C681.films || []).length === onDisk;
+        })(),
+        `${(C681.films || []).length} loaded of ${readdirSync(join(root, "content/packs/core/world/films")).filter((f) => f.endsWith(".json")).length} on disk`);
+
+      check("681/G1: …and every film reads as a reel with movements, a title card and words",
+        films.length === 10 && films.every((d) => {
+          const r = FM.filmReel(d);
+          return r && r.shots.length >= 20 && r.movements.length >= 3 && r.title?.line1 && r.shots.every((s) => s.visual && (s.lines || []).length);
+        }), `${films.length} films, ${films.reduce((n, d) => n + FM.filmReel(d).shots.length, 0)} shots`);
+
+      {
+        // every id a shot names, resolved against the real content
+        const bad = [];
+        const trads = new Set(Object.keys(C681.traditionIndex?.byId || {}));
+        const arcIds = new Set((C681.greaterArcs || []).map((a) => a.id));
+        const SOURCES = new Set(["precursor", "nanite_ordered", "nanite_wild", "veil", "metaphysical", "body"]);
+        for (const d of films) for (const s of FM.filmReel(d).shots) {
+          const at = `${d.id || "opening"}#${s.id}`;
+          if (s.place && !C681.locations?.[s.place]) bad.push(`${at}: place ${s.place}`);
+          if (s.figure && !C681.npcs?.[s.figure]) bad.push(`${at}: figure ${s.figure}`);
+          if (s.arc && !arcIds.has(s.arc)) bad.push(`${at}: arc ${s.arc}`);
+          if (s.source && !SOURCES.has(s.source)) bad.push(`${at}: source ${s.source}`);
+          for (const tr of (s.traditions || [])) if (!trads.has(tr)) bad.push(`${at}: tradition ${tr}`);
+        }
+        check("681/G1: …and every place, figure, tradition, arc and source a shot names RESOLVES — a shot whose subject is missing still plays, about nothing",
+          bad.length === 0, bad.length ? bad.slice(0, 4).join(" · ") : "80 places, 29 figures, 24 traditions, 8 arcs, 6 sources");
+      }
+      {
+        // and the painter has a case for every token, with the SAME detector G1 of SNG-680 uses
+        const i0 = src681.indexOf("SNG-680 O2 · ONE GLOBE"), i1 = src681.indexOf("function renderCreate() {", i0);
+        const codeOnly = src681.slice(i0, i1).replace(/\/\*[\s\S]*?\*\//g, " ").replace(/^\s*\/\/.*$/gm, " ");
+        const tokens = [...new Set(films.flatMap((d) => FM.filmReel(d).shots.map((s) => s.visual)))];
+        const missing = tokens.filter((k) => !codeOnly.includes(`"${k}"`));
+        const fixture = [...tokens, "_fixture_undrawn_token"].filter((k) => !codeOnly.includes(`"${k}"`));
+        check("681/G1: …and the painter has a case for every visual token across all ten films",
+          tokens.length >= 30 && missing.length === 0 && fixture.length === 1,
+          missing.length ? `no case for: ${missing.join(", ")}` : `${tokens.length} distinct tokens drawn`);
+      }
+
+      /* G2 · THE PUBLIC RULE. ✅ *"no figure has `nameKnown` `gm` or `few`, no figure is mythic, none has people
+       * `sovereign`, `precursor` or `seraph`, and no name card shows a title that names something the save
+       * hasn't learned (Istvane is the known case)."* */
+      {
+        const figs = [...new Set(films.flatMap((d) => FM.filmReel(d).shots.map((s) => s.figure).filter(Boolean)))];
+        const barred = new Set(["sovereign", "precursor", "seraph"]);
+        const bad = figs.filter((id) => {
+          const n = C681.npcs?.[id] || {};
+          return ["gm", "few"].includes(String(n.nameKnown || "")) || n.mythic || /myth/i.test(String(n.kind || "")) || barred.has(String(n.people || ""));
+        });
+        check("681/G2: ⛔ every person a film names is public — no `gm`/`few` name, nothing mythic, no Sovereign, Precursor or Seraph",
+          figs.length >= 25 && bad.length === 0, bad.length ? bad.join(", ") : `${figs.length} figures, all public`);
+
+        /* ⚠️ AND THE TITLE SEAL IS MEASURED AGAINST HER GROUND TRUTH, not asserted. *"The cut shows no title
+         * for him"* — so the rule must seal Istvane and NOT the other seventeen. My first rule, content-word
+         * n-grams (the shape `content_ci` uses for a restated secret), sealed two of eighteen at a run of 2
+         * and none at a run of 3; capitalised phrases seal exactly one. Both ends are gated here, because a
+         * seal that withholds everything passes "nothing leaked" while making every card wrong. */
+        const sealed = FM.sealedNames(C681);
+        const titled = figs.filter((id) => C681.npcs?.[id]?.title);
+        const withheld = titled.filter((id) => FM.cardTitle(C681.npcs[id], { sealed, arcNamed: () => false }) == null);
+        const shownWhenKnown = titled.filter((id) => FM.cardTitle(C681.npcs[id], { sealed, arcNamed: () => true }) != null);
+        check("681/G2: …and the name card withholds EXACTLY the title that names a sealed reveal — Istvane's, and nobody else's",
+          withheld.length === 1 && withheld[0] === "speaker_istvane" && shownWhenKnown.length === titled.length,
+          `${withheld.length} of ${titled.length} withheld (${withheld.join(", ")}); all ${shownWhenKnown.length} shown once the save knows the name`);
+        check("681/G2: …and the seal is computed from the ARCS, so it is the Long Petition's three names and nothing hand-listed",
+          sealed.size >= 1 && [...sealed.values()].every((a) => a === "arc_the_long_petition")
+          && [...sealed.keys()].includes("Hollow Court"),
+          [...sealed.keys()].join(" · "));
+      }
+
+      /* G3 · §29.7 across every film. */
+      {
+        const BAD681 = /\b(SNG|CCODE)-\d|\.json\b|\.js\b|schemaVersion|TODO|FIXME/i;
+        const strings = films.flatMap((d) => {
+          const r = FM.filmReel(d);
+          return [...r.shots.flatMap((s) => [...(s.lines || []), ...(s.after || [])]),
+            r.title?.line1, r.title?.line2, r.begin, ...Object.values(r.controls || {})].filter(Boolean).map(String);
+        });
+        const dirty = strings.filter((s) => BAD681.test(s));
+        check("681/G3: §29.7 — no player-facing string in any of the ten films carries a ticket id, a file name or a build word",
+          // ⛑ a floor PER FILM, not a total I guessed: 480 strings across ten films today, and the check
+          // keeps meaning the same thing when she writes the eleventh.
+          strings.length >= films.length * 30 && dirty.length === 0,
+          dirty.length ? dirty.slice(0, 2).join(" · ") : `${strings.length} strings across ${films.length} films, clean`);
+      }
+
+      /* G4 · UNLOCKS. ✅ *"A fresh character has the opening and Where Power Comes From only. Meeting a Rootkin
+       * unlocks Life and Death. Standing at Millbrook unlocks The Foothills. No unlock autoplays."* — her
+       * three samples, run against the real roster. */
+      {
+        const ch = { id: "c681", currentLocationId: "the_crossing", npcRegistry: {}, placeMemory: {} };
+        const fresh = FM.noteFilmUnlocks(ch, C681, { worldDay: 1 });
+        const open = () => FM.filmsFor(ch, C681).map((f) => f.id).sort();
+        check("681/G4: ⛔ a fresh character has the opening and `Where Power Comes From`, and nothing else",
+          open().join(",") === "film_arcs_and_powers,opening", open().join(", "));
+        const rootkin = Object.values(C681.npcs || {}).find((n) => n?.domains?.primary === "rootkin");
+        ch.npcRegistry[rootkin.id] = { name: rootkin.name, domains: { primary: "rootkin" } };
+        const met = FM.noteFilmUnlocks(ch, C681, { worldDay: 3 });
+        check("681/G4: …meeting a Rootkin opens `Life and Death`, on the day it happened",
+          met.includes("film_life_death") && ch.filmsUnlocked.film_life_death === 3,
+          `${rootkin.id} → ${met.join(", ") || "nothing"}`);
+        ch.currentLocationId = "millbrook";
+        const stood = FM.noteFilmUnlocks(ch, C681, { worldDay: 5 });
+        check("681/G4: …and standing at Millbrook opens `The Foothills`",
+          stood.includes("film_foothills"), stood.join(", ") || "nothing");
+        check("681/G4: …and an unlock is recorded, not played — nothing in the film code autoplays anything but the opening",
+          /shouldAutoplayOpening\(profile, CONTENT\)/.test(src681)
+          && (src681.match(/renderFilm\(/g) || []).length >= 4
+          && !/noteFilmUnlocks[\s\S]{0,200}renderFilm\(/.test(src681),
+          "the unlock writes `filmsUnlocked` and the Library grows a row");
+        // ⛑ and twice is once: the same meeting on a later day must not re-open or re-date it
+        const again = FM.noteFilmUnlocks(ch, C681, { worldDay: 9 });
+        check("681/G4: …and a film opens ONCE — the second meeting changes neither the list nor the day",
+          again.length === 0 && ch.filmsUnlocked.film_life_death === 3, `${again.length} re-opened`);
       }
     }
 

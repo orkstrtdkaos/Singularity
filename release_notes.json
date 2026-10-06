@@ -16,6 +16,22 @@
   "next": [],
   "releases": [
     {
+      "version": "2.21.1",
+      "date": "2026-10-06",
+      "entries": [
+        {
+          "kind": "feature",
+          "title": "Nine more films",
+          "summary": "Short films about the world: where power comes from, the Foothills and the Valley of Echoes, and one for each pair of peoples across the great circle. The first is there from the start; the others appear in the Library when you meet those people or stand in their places. They never autoplay and they gate nothing — they are a way to learn the world, not a requirement."
+        },
+        {
+          "kind": "fix",
+          "title": "An older player profile could lose a character at the last step",
+          "summary": "A profile made before the game kept a list of characters played would fail at the moment a new character was finished — after every choice, with nothing saved and nothing said. Those profiles are filled in as they load."
+        }
+      ]
+    },
+    {
       "version": "2.21.0",
       "date": "2026-10-06",
       "entries": [

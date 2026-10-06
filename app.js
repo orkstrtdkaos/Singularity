@@ -53,7 +53,8 @@ import { mapStateOf, mapStateWord } from "./engine/mapstate.js";
 // ⛔ SNG-679 H1: ONE hold reader for all three tiers. "Nothing draws a hold any other way."
 import { mapHolds, holdMarker } from "./engine/mapholds.js";
 // ⛔ SNG-680: the film is DATA. Not one of its words is written in this file.
-import { openingReel, shotSeconds, codaShots, shouldAutoplayOpening } from "./engine/opening.js";
+import { filmReel, openingReel, shotSeconds, codaShots, shouldAutoplayOpening,
+  filmsFor, noteFilmUnlocks, sealedNames, cardTitle } from "./engine/films.js";
 import { arcReachesRegion } from "./engine/arceffects.js";   // M3: open framed on what the player knows   // M2/D1: one table, one collision space
 import { decodeTerrain, sampleAt, colorAt, unproject, project, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, globeClickAction, REGION_FRAME_DEG, regionVoteAt, worldRoadRoutes, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, makePolarBase, regionExtent, bendRoad, roadNetwork, clipToFrame, routeRoads, makeGroundCost, GROUND_COST } from "./engine/worldglobe.js";
 // ⛔ ROUND 4 — whose ground is this, as things stand today. `realms.js` resolves the SAVE (losses, growth,
@@ -92,7 +93,7 @@ import { roomOf, roomRefusal, promotionOffer, promoteHolding, trainingAt, mounts
 import { raidRisk, watchReadout, watchOdds, craftPlacementCost, defenceOf, featureCost, featureDef, featureDoes, featureCategory, allFeatures, refreshImprovement, canBeAskedToWork, holdingFactsLine, answerFeatureOffer, holdingLedger, addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, yieldsFor, upkeepFor, appointKeeper, reclaimHolding, improveHolding, setCrew, setGarrison, holdingGround, addFeature, removeFeature, renameHolding, featureKinds, residentsOf, holdingMeaningAura, holdingFieldDelta } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
 import { buildDevReport, unknownOpsIn } from "./engine/devreport.js";   // SNG-559: the Play/Dev instrument
 import { makeField, fieldDataFrom, FIELD_KINDS, KIND_LABEL, MEMBERSHIP, loadSources } from "./engine/field.js";
-import { deedAgainstSupply, supplyDeedLine, artifactsHeld, artifactUsed, forbiddenByHeld, marksFromHeld } from "./engine/sovereign.js";   // ⛔ SNG-641 §1 (C13): breaking or taking a supply-line power is a deed against the arc its Sovereign arrives on
+import { deedAgainstSupply, supplyDeedLine, artifactsHeld, artifactUsed, forbiddenByHeld, marksFromHeld, knowsSovereign, sovereignOfArc } from "./engine/sovereign.js";   // ⛔ SNG-641 §1 (C13): breaking or taking a supply-line power is a deed against the arc its Sovereign arrives on
 import { assaultableAt, garrisonContingents, noteHoldLoss, takeHold, encounterOwnerFilter, seedPowerKnowledge, isKnownPower, powersReaching, dangerLiftAt, movePowerStanding, exposeMarket, marketFeeAt} from "./engine/powers.js";
 import { buildNemesisPrompt, applyNemesisChoice } from "./engine/nemesis.js";   // ⛔ SNG-648: the choosing call   // SNG-634 C5: their holds are places you can take   // CCODE-457: why the ground here reads the way it does · CCODE-472: and the layer the map draws
 import { FIRE_TESTS, diffKeys } from "./engine/firetests.js";   // SNG-560: the parts that have never been used
@@ -205,7 +206,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.21.0";
+const APP_VERSION = "2.21.1";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -7514,6 +7515,73 @@ function opStroke(ctx, pts, style, width) {
   ctx.stroke();
 }
 
+/* ═════ SNG-681 F2 · THE NAME CARD ═════
+ * ✅ AEVI: *"A name card shows the place's name, with the movement name as kicker"* / *"a name card (name,
+ * title) over the figure's `homeLocation`"* / *"The name card reads the place or person from content, under
+ * the same public rule as the films."*
+ * ⛔ READ FROM CONTENT, NEVER WRITTEN HERE — the same rule as every caption: the card's words are a place's
+ * `name`, a person's `name`, their `title` where the save may see it, and the movement's own `name`.
+ * ⛑ Drawn low-left, clear of the caption line, in the game's display face. */
+/* ⛔ THE TITLE IS GATED THE WAY AN ARC'S `onceNamed` IS, AND THROUGH THE SAME READER. ✅ Aevi: *"The card
+ * must not show that title until the save knows the name."* `knowsSovereign(character, sovereignOfArc(...))`
+ * is what `worldArcsPublic` already passes as `named`, so the film asks exactly what the arcs panel asks —
+ * one definition of "this save knows that name", not a second one that could drift.
+ * ⛑ Cached per render pass: `sealedNames` walks every stage of every arc, and a film has 30 figure cards. */
+let _filmSealed = null;
+function filmCardTitle(npc) {
+  if (!_filmSealed) _filmSealed = sealedNames(CONTENT);
+  return cardTitle(npc, {
+    sealed: _filmSealed,
+    arcNamed: (arcId) => {
+      try {
+        const arc = (CONTENT.greaterArcs || []).find((a) => a.id === arcId);
+        return !!(arc && character && knowsSovereign(character, sovereignOfArc(arc.id, CONTENT.npcs || {})));
+      } catch { return false; }
+    },
+  });
+}
+
+function paintNameCard(ctx, { name, kicker = null, title = null, w = 900, h = 560, u = 1 } = {}) {
+  if (!name) return;
+  const on = Math.max(0, Math.min(1, u * 3));           // it arrives with the shot, not after it
+  /* ⚠️ ABOVE THE CAPTION BAND, MEASURED. The captions sit 74px off the bottom (O4) and run to three lines
+   * on these films, so their top edge is around y=396 — and a card at h−168 put the place's name underneath
+   * the first line of the sentence that names it. 320 clears a four-line caption with room over. */
+  const x = 40, y = h - 240;
+  ctx.save();
+  ctx.globalAlpha = on;
+  ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
+  ctx.shadowColor = "rgba(0,0,0,0.9)"; ctx.shadowBlur = 16;
+  if (kicker) {
+    ctx.font = '600 11px system-ui, "Segoe UI", sans-serif';   // the UI face: a canvas takes no var()
+    ctx.fillStyle = "rgba(214,222,238,0.72)";
+    ctx.fillText(String(kicker).toUpperCase().split("").join("\u2009"), x, y - 24);
+  }
+  ctx.font = opFont(30);
+  ctx.fillStyle = "rgba(246,242,232,0.97)";
+  ctx.fillText(String(name), x, y);
+  if (title) {
+    ctx.font = opFont(16, "400");
+    ctx.fillStyle = "rgba(216,208,190,0.86)";
+    ctx.fillText(String(title), x, y + 24);
+  }
+  // one hairline under it, the width of the longest line
+  const wide = Math.max(ctx.measureText(String(title || "")).width, (ctx.font = opFont(30), ctx.measureText(String(name)).width));
+  ctx.globalAlpha = on * 0.5;
+  ctx.strokeStyle = "rgba(226,232,246,0.5)"; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(x, y + (title ? 38 : 14)); ctx.lineTo(x + Math.min(w - x * 2, wide), y + (title ? 38 : 14)); ctx.stroke();
+  ctx.restore();
+}
+
+/** The camera on one place, at a given span — the world map's own arithmetic, shared by the coda and by
+ *  `place`, `region` and `figure`. ⛑ `pitch` IS the latitude: see the gate, and the day it cost me. */
+function openingPlaceView(loc, { w = 900, h = 560, span = 26 } = {}) {
+  const colat = Number(loc?.worldPos?.colatitude), lon0 = Number(loc?.worldPos?.longitude);
+  if (!Number.isFinite(colat) || !Number.isFinite(lon0)) return null;
+  return { yaw: -(((lon0 + 540) % 360) - 180), pitch: colat - 90,
+    r: (w / 2) / Math.max(0.02, Math.sin(Math.max(2, span) / 2 * Math.PI / 180)), cx: w / 2, cy: h / 2 };
+}
+
 /* ⛔ THE CUTAWAY IS THE ONE SHOT THAT IS NOT THE GLOBE. ✅ *"Cutaway: shafts of fire driven down into the
  * core. The core's glow is drawn upward through them into the workings above, and the core shrinks."* There
  * is no cross-section in the terrain asset — it is a surface raster — so this is the film's own diagram,
@@ -7560,9 +7628,21 @@ function paintOpeningCutaway(ctx, { w = 900, h = 560, u = 0, capped = false } = 
 
 /* ⛔ THE DISPATCHER. One case per authored token, and the token list is hers: a token with no case here
  * would silently draw the bare globe, so a gate holds the two lists against each other. */
-function paintOpeningShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 560, startId = null, u = 1, index = 0 } = {}) {
+function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 560, startId = null, u = 1, index = 0 } = {}) {
   const V = String(shot?.visual || "earth");
   const coda = V === "zoom_to_start" || V === "nearest_arc";
+  /* ══ SNG-681 · THE SHOTS THAT NAME WHAT THEY ARE ABOUT ══
+   * ✅ *"Each shot names a `visual` and the key it needs. All are drawn on the game's own globe."* So the
+   * subject is resolved ONCE here, from content, and the cases below read it. An id that does not resolve
+   * draws the plain globe rather than nothing — and G1 holds that none of the 272 fails to resolve. */
+  const subject = (() => {
+    if (shot?.place) return { kind: "place", loc: (CONTENT.locations || {})[shot.place] || null };
+    if (shot?.figure) {
+      const who = (CONTENT.npcs || {})[shot.figure] || null;
+      return { kind: "figure", who, loc: who ? (CONTENT.locations || {})[who.homeLocation] || null : null };
+    }
+    return null;
+  })();
   /* ⛔ "IS THE WORLD SMALL YET" IS A POSITION IN THE REEL, NOT A LIST OF TOKENS. The shrink happens at the
    * shot whose visual is `shrink` and every shot after it is of the smaller world — so it is read from where
    * this shot SITS, and a rewrite that moves the shrink or writes three new shots after it stays right. A
@@ -7570,7 +7650,10 @@ function paintOpeningShot(ctx, shot, { reel = null, reduced = false, w = 900, h 
    * the script, which is precisely the coupling her "read it from the file" rule is about.
    * ⛑ The coda is always of the small world: it is Exesa, today, with the player standing in it. */
   const shrinkAt = reel ? reel.shots.findIndex((s) => s.visual === "shrink") : -1;
-  const shrunk = coda ? 1 : (shrinkAt >= 0 && index >= shrinkAt ? 1 : 0);
+  /* ⛑ AND A FILM WITH NO `shrink` SHOT IS ALREADY IN THE PRESENT. The nine films of SNG-681 are about Exesa
+   * as it is, so their world is the small one from their first frame; only the opening, which contains the
+   * shrink, shows the old size — and only before it. Same rule, read off the reel either way. */
+  const shrunk = coda ? 1 : (shrinkAt < 0 ? 1 : (index >= shrinkAt ? 1 : 0));
   // the palette crosses on the shots that pay the cost: `drain` begins it, `shrink` completes it
   const EX = { earth: 0, network: 0, network_runaway: 0, swarm: 0, swarm_ordered: 0.1, workings: 0.2, drain: 0.45, bores: 0.5 };
   const exesa = V in EX ? EX[V] : 1;
@@ -7582,10 +7665,16 @@ function paintOpeningShot(ctx, shot, { reel = null, reduced = false, w = 900, h 
    * turn happens DURING `poles_ignite` and unwinds during `lights_out`, so neither is a cut; and the yaw
    * stops as it comes pole-on, because a spinning ring is not the ring the player is about to choose from. */
   const polar = V === "poles_ignite" ? Math.min(1, u / 0.45)
-    : (V === "poles_pull" || V === "middle_closes") ? 1
+    : (V === "poles_pull" || V === "middle_closes" || V === "ring" || V === "axis") ? 1
     : V === "lights_out" ? Math.max(0, 1 - u / 0.45) : 0;
   const view = openingGlobeView(w, h, { shrunk, yaw: yaw * (1 - polar) });
   view.pitch = -14 + (-90 + 14) * polar;
+  /* ⛑ AND THE COMPOSITION LIFTS AS IT TURNS. Pole-on, the ring is drawn clear of the limb at 1.3× the
+   * radius, which makes the picture half as tall again — and the captions live low (O4). Measured on the
+   * first render of a ring shot: a three-line caption crossed the ring's bottom arc and sat on two of the
+   * four labels. Raising the centre to 38% of the frame clears it, and it travels with the same `polar`
+   * ramp the turn does, so nothing jumps. */
+  view.cy = h * (0.5 - 0.12 * polar);
 
   ctx.setTransform(dprOf(), 0, 0, dprOf(), 0, 0);
   ctx.fillStyle = "#04050b"; ctx.fillRect(0, 0, w, h);
@@ -7603,7 +7692,15 @@ function paintOpeningShot(ctx, shot, { reel = null, reduced = false, w = 900, h 
   }
 
   let frame = view;
-  if (coda) {
+  /* ✅ *"`place`: the globe turns to the place and closes in … `region`: the same, framed wider (the region
+   * as SNG-677 frames it)"* — and a `figure` is framed on their home, which is why the three share one
+   * camera. ⚠️ 9 of the 29 people the films name have no resolvable home; those fall back to the turning
+   * globe, which is what her F2 says to do. */
+  const placeSpan = V === "place" ? 9 : V === "region" ? REGION_FRAME_DEG : V === "figure" ? 16 : 0;
+  if (placeSpan && subject?.loc) {
+    const close = V === "place" ? (1 - Math.min(1, u * 1.6)) * 26 : 0;   // closes in over the shot
+    frame = openingPlaceView(subject.loc, { w, h, span: placeSpan + close }) || view;
+  } else if (coda) {
     /* ⛔ THE CODA IS FRAMED THE WAY THE WORLD MAP FRAMES A REGION — same constant, same arithmetic, because
      * ✅ *"the way the world map frames it"* is a promise about a screen the player is thirty seconds from
      * opening. `spanDeg` inverted: r = half / sin(span/2). */
@@ -7785,6 +7882,176 @@ function paintOpeningShot(ctx, shot, { reel = null, reduced = false, w = 900, h 
     // either way the surface wears: the shape stays, the colour goes
     ctx.fillStyle = `rgba(120,112,104,${0.22 * Math.min(1, u)})`;
     ctx.beginPath(); ctx.arc(frame.cx, frame.cy, frame.r, 0, Math.PI * 2); ctx.fill();
+  }
+
+  if (V === "globe") {
+    /* ✅ SNG-681: *"`globe`: the world as it is, turning."* ⛑ AND NOTHING OVER IT, WHICH IS THE POINT OF THE
+     * SHOT — the ground has already been drawn above in Exesa's own palette, and every mark this film could
+     * add belongs to a shot that names one. A token with no case would reach exactly this picture by
+     * accident; this one reaches it on purpose, and the gate can tell the two apart. */
+  }
+
+  if (V === "ring" || V === "axis") {
+    /* ✅ *"pole-on to the Crossing, with the real ring (`ringOrder`, the tradition colours). The listed
+     * traditions are lit and labelled, with threads in toward the middle. 24 lit is the whole ring,
+     * unlabelled."* + *"`axis`: as `ring`, with the two facing peoples joined across the Crossing."*
+     * ⛑ The threads run IN, to the Crossing at the centre, because that is the claim the shot makes: these
+     * peoples all pull on the same middle. An axis joins its two straight through it. */
+    const poles = openingPoles();
+    const want = new Set((shot?.traditions || []).map(String));
+    const whole = want.size >= poles.length;
+    const lit = (pl) => whole || want.has(pl.id);
+    const arrive = Math.min(1, u * 1.5);
+    /* ⚠️ ABOVE THE WORLD, NOT ON IT. At the ring's latitude a station projects to 82% of the globe's radius,
+     * which pole-on puts it INSIDE the disc — measured on the first render: four lit stations and a label
+     * sitting on dark ground, with no ring to see. `project`'s radius parameter is a multiplier on the
+     * sphere, so 1.3 lifts the ring clear of the limb and it reads as what it is: a ring around the world,
+     * the same circle the player chooses from at the door. */
+    const RING_UP = 1.3, LABEL_UP = 1.52;
+    poles.forEach((pl) => {
+      const p = P(pl.lat, pl.lon, RING_UP);
+      if (!p) return;
+      const on = lit(pl) ? arrive : 0.22;
+      if (lit(pl)) {
+        // the thread in toward the middle
+        ctx.save(); ctx.globalAlpha = 0.5 * arrive;
+        ctx.strokeStyle = pl.ink || `hsla(${pl.hue},72%,66%,1)`; ctx.lineWidth = 1.1;
+        ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(frame.cx, frame.cy); ctx.stroke(); ctx.restore();
+      }
+      opGlow(ctx, p.x, p.y, lit(pl) ? 20 * arrive : 8, pl.ink || `hsla(${pl.hue},82%,${pl.lit}%,${0.85 * on})`, `hsla(${pl.hue},82%,${pl.lit}%,0)`);
+      ctx.globalAlpha = on;
+      ctx.fillStyle = pl.ink || `hsla(${pl.hue},90%,${Math.min(88, pl.lit + 26)}%,1)`;
+      ctx.beginPath(); ctx.arc(p.x, p.y, lit(pl) ? 3 : 1.8, 0, Math.PI * 2); ctx.fill();
+      ctx.globalAlpha = 1;
+      // ⛔ THE LABEL IS THE PEOPLE'S OWN NAME, from the tradition index — not a word written here.
+      if (lit(pl) && !whole) {
+        const nm = (() => { try { return traditionLabel(pl.id); } catch { return null; } })();
+        if (nm) {
+          const q = P(pl.lat, pl.lon, LABEL_UP) || p;
+          /* ⛑ A LABEL THAT FALLS IN THE CAPTION'S BAND GIVES WAY TO IT. The ring's lower arc lands where the
+           * captions live (O4: low and left), and a name under a sentence is two things competing to be
+           * read. It fades rather than vanishing, so the ring stays whole — and the words win, which is the
+           * right way round for a film whose argument is carried by its words. */
+          const underCaption = q.y > h - 190;
+          ctx.save(); ctx.globalAlpha = arrive * (underCaption ? 0.3 : 1);
+          ctx.font = opFont(13, "600");
+          ctx.textAlign = q.x < frame.cx ? "right" : "left"; ctx.textBaseline = "middle";
+          ctx.shadowColor = "rgba(0,0,0,0.85)"; ctx.shadowBlur = 10;
+          ctx.fillStyle = "rgba(240,238,230,0.95)";
+          ctx.fillText(String(nm), q.x + (q.x < frame.cx ? -6 : 6), q.y);
+          ctx.restore();
+        }
+      }
+    });
+    if (V === "axis") {
+      const two = (shot?.traditions || []).map((id) => poles.find((pl) => pl.id === id)).filter(Boolean);
+      if (two.length === 2) {
+        const a = P(two[0].lat, two[0].lon, RING_UP), b = P(two[1].lat, two[1].lon, RING_UP);
+        if (a && b) {
+          ctx.save(); ctx.globalAlpha = 0.75 * arrive;
+          const grad = ctx.createLinearGradient(a.x, a.y, b.x, b.y);
+          grad.addColorStop(0, two[0].ink || `hsla(${two[0].hue},85%,66%,1)`);
+          grad.addColorStop(0.5, "rgba(236,232,220,0.9)");
+          grad.addColorStop(1, two[1].ink || `hsla(${two[1].hue},85%,66%,1)`);
+          ctx.strokeStyle = grad; ctx.lineWidth = 2.2;
+          ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); ctx.restore();
+        }
+      }
+    }
+  }
+
+  if (V === "place" || V === "region" || V === "figure") {
+    /* ⛔ THE MARK IS THE MAP'S OWN GLYPH, so the place a film names is the mark the player will click. */
+    if (subject?.loc) {
+      const colat = Number(subject.loc.worldPos?.colatitude), lon0 = Number(subject.loc.worldPos?.longitude);
+      const p = P(colat - 90, ((lon0 + 540) % 360) - 180, 1.002);
+      if (inFrame(p)) {
+        opGlow(ctx, p.x, p.y, 34, "rgba(255,236,186,0.42)", "rgba(255,210,120,0)");
+        try { drawGlyph(ctx, glyphFor({ kind: subject.loc.kind, t: subject.loc.tier }) || "town", p.x, p.y, 13, { ink: "#fdf6e6" }); }
+        catch { ctx.fillStyle = "#fdf6e6"; ctx.beginPath(); ctx.arc(p.x, p.y, 4, 0, Math.PI * 2); ctx.fill(); }
+      }
+    }
+    // ⛑ the card's words: a place's name with the movement as kicker; a person's name with their title,
+    // and the title only where the save may see it (the seal lives in films.js, measured against her sample)
+    if (subject?.kind === "place") paintNameCard(ctx, { name: subject.loc?.name || null, kicker: shot?.movementName || null, w, h, u });
+    if (subject?.kind === "figure" && subject.who) {
+      paintNameCard(ctx, { name: subject.who.name || null, kicker: shot?.movementName || null, title: filmCardTitle(subject.who), w, h, u });
+    }
+  }
+
+  if (V === "source") {
+    /* ✅ *"`precursor` is the lattice through a dimmed surface · `nanite_ordered` is the glitter settling into
+     * grids, with workings blooming · `nanite_wild` is the same glitter loose and green-white, going its own
+     * way · `veil` is the absence beside the globe · `metaphysical` is a soft radiance on thin ground, with
+     * the Veil faint · `body` is quiet lights: breath, hearth, green."*
+     * ⛑ Each one reuses the opening's own pass for the same thing, so the film that EXPLAINS the lattice
+     * draws the lattice the opening showed — one picture per idea, across ten films. */
+    const S = String(shot?.source || "");
+    if (S === "precursor" || S === "metaphysical") {
+      const edges = openingEdges();
+      ctx.strokeStyle = S === "precursor" ? "rgba(150,186,255,0.5)" : "rgba(226,214,255,0.34)";
+      ctx.lineWidth = 0.7;
+      ctx.beginPath();
+      for (const [ai, bi] of edges) {
+        const a = nodes[ai], b = nodes[bi];
+        const pa = P(a.lat, a.lon, 0.985), pb = P(b.lat, b.lon, 0.985);
+        if (!pa || !pb) continue;
+        ctx.moveTo(pa.x, pa.y); ctx.lineTo(pb.x, pb.y);
+      }
+      ctx.stroke();
+    }
+    if (S === "metaphysical") {
+      for (let k = 0; k < 7; k++) {
+        const nd = nodes[(k * 23) % Math.max(1, nodes.length)];
+        if (!nd) break;
+        const p = P(nd.lat, nd.lon, 1.01);
+        if (inFrame(p)) opGlow(ctx, p.x, p.y, 30, `rgba(226,214,255,${0.3 + 0.2 * Math.sin(u * Math.PI * 2 + k)})`, "rgba(200,180,255,0)");
+      }
+    }
+    if (S === "nanite_ordered" || S === "nanite_wild") {
+      const ord = S === "nanite_ordered";
+      ctx.fillStyle = ord ? "rgba(236,246,255,0.85)" : "rgba(196,255,214,0.8)";
+      for (let k = 0; k < Math.round(820 * grains); k++) {
+        let lat = -88 + opRand(k, 1) * 176, lon = -180 + opRand(k, 2) * 360;
+        if (ord) { lat = Math.round(lat / 9) * 9; lon = Math.round(lon / 9) * 9; }
+        else { lat += Math.sin(u * 4 + k) * 3; lon += Math.cos(u * 3 + k * 0.7) * 4; }
+        const p = P(lat, lon, 1.012);
+        if (!inFrame(p)) continue;
+        ctx.globalAlpha = 0.3 + 0.6 * opRand(k, 6);
+        ctx.fillRect(p.x, p.y, 1.2, 1.2);
+      }
+      ctx.globalAlpha = 1;
+      if (ord) {
+        for (const nd of nodes.filter((_, i) => i % 19 === 3).slice(0, 7)) {
+          const p = P(nd.lat, nd.lon);
+          if (inFrame(p)) opGlow(ctx, p.x, p.y, 26, "rgba(255,214,122,0.7)", "rgba(255,186,60,0)");
+        }
+      }
+    }
+    if (S === "veil") {
+      const g = P(-26, 58, 1.01);
+      if (g) {
+        const rr = frame.r * 0.62;
+        ctx.save();
+        ctx.globalCompositeOperation = "destination-out";
+        const rg = ctx.createRadialGradient(g.x, g.y, 0, g.x, g.y, rr);
+        rg.addColorStop(0, "rgba(0,0,0,1)"); rg.addColorStop(0.72, "rgba(0,0,0,0.92)"); rg.addColorStop(1, "rgba(0,0,0,0)");
+        ctx.fillStyle = rg; ctx.beginPath(); ctx.arc(g.x, g.y, rr, 0, Math.PI * 2); ctx.fill();
+        ctx.restore();
+        ctx.save(); ctx.strokeStyle = "rgba(164,126,214,0.38)"; ctx.lineWidth = 1.4;
+        ctx.beginPath(); ctx.arc(g.x, g.y, rr * 0.76, 0, Math.PI * 2); ctx.stroke(); ctx.restore();
+      }
+    }
+    if (S === "body") {
+      nodes.forEach((nd, i) => {
+        const s = sampleAt(_terrain, nd.lon, nd.lat);
+        const wood = /wood|forest|taiga|jungle/i.test(String(s?.biome || ""));
+        const p = P(nd.lat, nd.lon);
+        if (!inFrame(p)) return;
+        if (wood) opGlow(ctx, p.x, p.y, 12, "rgba(126,196,124,0.45)", "rgba(126,196,124,0)");
+        else if (i % 5 === 0) opGlow(ctx, p.x, p.y, 9, "rgba(255,186,110,0.5)", "rgba(255,150,70,0)");
+      });
+    }
   }
 
   if (V === "poles_ignite" || V === "poles_pull" || V === "middle_closes") {
@@ -7988,7 +8255,7 @@ function paintOpeningShot(ctx, shot, { reel = null, reduced = false, w = 900, h 
     }
   }
 
-  if (V === "arcs" || V === "many" || V === "you" || V === "nearest_arc") {
+  if (V === "arcs" || V === "many" || V === "you" || V === "nearest_arc" || V === "arc") {
     /* ✅ *"The globe as it is now, Exesa, the game's own. Bands of moving light sweep across it: the arcs,
      * each a current going its own way."* ⛔ ONE CURRENT PER AUTHORED ARC, in authored order — so the number
      * of lights on screen is the number of arcs in the game, and an eleventh arc appears in the film the day
@@ -7999,9 +8266,14 @@ function paintOpeningShot(ctx, shot, { reel = null, reduced = false, w = 900, h 
      * and a seventh appears the day she writes one. A regional arc is not a band across the globe. */
     const all = Array.isArray(CONTENT?.greaterArcs) ? CONTENT.greaterArcs.filter(Boolean) : [];
     const arcs = all.filter((a) => String(a.scale || "").toLowerCase() === "world");
+    /* ✅ SNG-681: *"`arc`: that arc's band of moving light, bright, with the others faint."* — so the shot's
+     * own arc is drawn last and bright over the rest, and the rest are still there, which is the point of
+     * the shot: one current among many going its own way. */
     const only = V === "nearest_arc"
       ? (shot?.arcId ? all.filter((a) => a.id === shot.arcId) : arcs.slice(0, 1))
+      : V === "arc" ? arcs
       : arcs;
+    const spotlight = V === "arc" && shot?.arc ? String(shot.arc) : null;
     // in the coda the band is drawn THROUGH the start, because at a region's span a world-scale circle
     // chosen by index usually passes nowhere near the frame — measured, at the Crossing, on this shot
     const start = V === "nearest_arc" && startId ? (CONTENT.locations || {})[startId] : null;
@@ -8012,12 +8284,13 @@ function paintOpeningShot(ctx, shot, { reel = null, reduced = false, w = 900, h 
       const inc = (wide ? 22 + k * 17 : 56 + k * 9) % 84;   // its own great circle, one per arc
       const node = ((k * 67) % 360) - 180;
       const hue = Math.round((k * 360 / Math.max(1, only.length) + 190) % 360);
+      const dim = spotlight && arc.id !== spotlight ? 0.22 : 1;
       const band = (a, b) => through ? opCurrentThrough(frame, sLat, sLon, 68 + k * 23, a - 180, b - 180)
         : opCurrent(frame, inc, node, a, b);
-      opStroke(ctx, band(0, 360), `hsla(${hue},78%,66%,0.22)`, 5);
+      opStroke(ctx, band(0, 360), `hsla(${hue},78%,66%,${0.22 * dim})`, 5);
       // the current itself: a bright run moving along the band
       const head = ((u * (wide ? 0.55 : 0.8) + k * 0.13) % 1) * 360;
-      opStroke(ctx, band(head, head + 56), `hsla(${hue},92%,74%,0.85)`, 2.6);
+      opStroke(ctx, band(head, head + 56), `hsla(${hue},92%,74%,${0.85 * dim})`, dim < 1 ? 1.6 : 2.6);
     });
     if (V === "many") {
       /* ✅ *"Small lights all over the globe, moving: some with the currents, some against them."* — and
@@ -8109,8 +8382,14 @@ function stopOpening() {
   if (_openingKeys) { window.removeEventListener("keydown", _openingKeys); _openingKeys = null; }
 }
 
-function renderOpening({ mode = "film", after = null, startId = null } = {}) {
-  const reel = openingReel(CONTENT);
+function renderFilm(doc, { mode = "film", after = null, startId = null } = {}) {
+  /* ═════ SNG-681 F1 · ONE FILM PLAYER ═════
+   * ✅ AEVI: *"`renderFilm(film, { coda })` plays any film in this schema. The opening is the one with a
+   * `coda`."* ⛑ So the document is the PARAMETER, not something this function goes and fetches: the opening
+   * and the nine are the same shape, and the only thing that distinguishes them here is that one of them has
+   * a coda to play. Everything below — the clock, the captions, the track, the controls, reduced motion — is
+   * SNG-680's, unchanged, which is what "generalise" is supposed to mean. */
+  const reel = filmReel(doc);
   // ⛑ NO SCRIPT, NO FILM — and the caller carries on rather than facing an empty screen. The loader's own
   // `.catch(() => null)` means a missing `opening.json` costs the opening and nothing else.
   if (!reel) { if (typeof after === "function") after(); return false; }
@@ -8135,7 +8414,15 @@ function renderOpening({ mode = "film", after = null, startId = null } = {}) {
   let i = 0, paused = false;
   const reduced = (() => { try { return window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch { return false; } })();
 
-  const C = reel.controls || {};
+  /* ⛔ A FILM WITH NO `controls` TAKES THE OPENING'S — WHICH ARE STILL HER WORDS, FROM HER FILE. ✅ F1:
+   * *"Captions, pacing, controls, reduced motion and the progress track work as in SNG-680 O4."* Measured:
+   * all nine of the new films carry `pacing` and neither `controls` nor `begin`, so without this line a film
+   * has no Skip, no Next and no Begin on its title card — a film you can only leave by pressing Escape.
+   * ⛑ Falling back to the OPENING's block keeps G1 exactly: no word here comes from code, and a film that
+   * authors its own still wins. */
+  const CO = openingReel(CONTENT)?.controls || {};
+  const C = reel.controls && Object.keys(reel.controls).length ? reel.controls : CO;
+  const beginWord = reel.begin || openingReel(CONTENT)?.begin || null;
   chrome(`<div class="screen screen-opening" id="op-screen">
     <div class="op-stage${reduced ? " op-fade" : ""}" style="--op-fade:${Math.max(0.2, Number(reel.pacing?.fadeSeconds) || 1.2)}s">
       <canvas id="op-prev" width="900" height="560" aria-hidden="true"></canvas>
@@ -8153,7 +8440,7 @@ function renderOpening({ mode = "film", after = null, startId = null } = {}) {
         <button class="opt op-icon" id="op-pause" title="${esc(String(C.pause || ""))}"></button>
         ${C.next ? `<button class="opt" id="op-next">${esc(String(C.next))}</button>` : ""}
         ${C.skip ? `<button class="opt" id="op-skip">${esc(String(C.skip))}</button>` : ""}
-        ${reel.begin ? `<button class="opt op-begin" id="op-begin" hidden>${esc(String(reel.begin))}</button>` : ""}
+        ${beginWord ? `<button class="opt op-begin" id="op-begin" hidden>${esc(String(beginWord))}</button>` : ""}
       </div>
     </div>
   </div>`, { hero: true });   // ⛑ `chrome` takes `hero`, not `bare` — there is no chromeless mode to ask for
@@ -8224,7 +8511,7 @@ function renderOpening({ mode = "film", after = null, startId = null } = {}) {
     prev.style.transition = ""; cv.style.transition = "";
     prev.style.opacity = "0"; cv.style.opacity = "1";
   };
-  const frameAt = (u) => { try { paintOpeningShot(ctx, frames[i], { reel, reduced, w: 900, h: 560, startId, u, index: i }); } catch (err) { console.warn("[opening] shot skipped:", err?.message); } };
+  const frameAt = (u) => { try { paintFilmShot(ctx, frames[i], { reel, reduced, w: 900, h: 560, startId, u, index: i }); } catch (err) { console.warn("[film] shot skipped:", err?.message); } };
   const tick = () => {
     _openingRaf = null;
     // ⛑ the screen moved on under us — stop rather than paint into a canvas nobody is showing
@@ -8796,7 +9083,7 @@ function renderCreate() {
      * they stop being equal the first time the character walks anywhere — and this same function's own
      * comment (CCODE-483) says so, about a field nothing had ever written. The coda is about where they
      * BEGAN, so it asks the field that means that. ⛑ Four shots, then `enterPlay` either way. */
-    renderOpening({ mode: "coda", startId: character.startingLocation, after: () => enterPlay() });
+    renderFilm(CONTENT.opening, { mode: "coda", startId: character.startingLocation, after: () => enterPlay() });
   }
 
   // ---------- SNG-062: THE PROLOGUE — creation as a played scene ----------
@@ -8832,7 +9119,7 @@ function renderCreate() {
     // ✅ *"After that the door has a quiet link, `controls.watchAgain`, beside the three doors."* — her word
     // or no link: a button labelled by code is the thing G1 forbids.
     const again = document.getElementById("door-again");
-    if (again) again.onclick = () => renderOpening({ mode: "film", after: () => renderCreateDoor() });
+    if (again) again.onclick = () => renderFilm(CONTENT.opening, { mode: "film", after: () => renderCreateDoor() });
   }
 
   // ---------- SNG-086: THE THIRD DOOR — "describe yourself" → a placement on the great circle ----------
@@ -9128,7 +9415,7 @@ function renderCreate() {
    * ⛑ `renderOpening` either plays and calls `after` when it ends, or returns false having ALREADY called
    * `after` — so there is exactly one call here and no branch that can show a blank screen. The decision
    * itself is `shouldAutoplayOpening`, in the pure module, where it can be gated without a browser. */
-  if (shouldAutoplayOpening(profile, CONTENT)) renderOpening({ mode: "film", after: () => renderCreateDoor() });
+  if (shouldAutoplayOpening(profile, CONTENT)) renderFilm(CONTENT.opening, { mode: "film", after: () => renderCreateDoor() });
   else renderCreateDoor();
 }
 
@@ -10488,6 +10775,16 @@ function applyTurn(turn, resolution, playerWords = null) {
   // is the only code that knows which of the many rooms here was just entered, so the scene takes its answer from
   // there rather than re-deriving it — and it is read AFTER the step, so a refused or capped write cannot move us.
   { const entered = lastEnteredSubPlace(character, location.id); if (entered && entered.slug !== sceneSubPlace?.slug) sceneSubPlace = entered; }
+  /* ⛔ SNG-681 F3 — A MEETING OR AN ARRIVAL OPENS A FILM, and this is the one beat that knows both happened.
+   * ✅ Erik: *"a film appears when the character first meets that people."* ✅ Aevi: *"Meeting means a scene
+   * with them, as the roster records it"* — which is `npcRegistry`, written by the `npcUpdates` step three
+   * lines above; and `placeUpdates`/`notePlaceVisit` have recorded where we are standing. ⛑ Reading it here
+   * means the unlock lands on the same turn as the meeting, not a beat later. It never autoplays: the opened
+   * ids are kept on the character and the Library grows a row. */
+  // ⛑ NOT AN `applyStep`: §171's fingerprint covers the families the MODEL writes, and this is the engine
+  // reading what the steps above already recorded. Running it through `applyStep` put `filmUnlocks` in the
+  // op-family list, which would have been a quiet lie about what the model may send.
+  try { noteFilmUnlocks(character, CONTENT, { worldDay: absoluteWorldDay() }); } catch (err) { console.warn("[films] unlock skipped:", err?.message); }
   applyStep("codexUpdates", () => applyCodexUpdates(character, turn.codexUpdates || [], memCtx));
   // ⛔ R49 — A MYSTERY THE CODEX REFUSED TO STORE BARE IS ASKED FOR AS A STORY, on this same turn. The
   // request rides the turn's own generateRequest list, which handleGenerateRequests reads after apply.
@@ -23742,13 +24039,28 @@ async function libWhoMadeThis(path) {
 async function renderLibrary(catIdx = 0, entryId = null) {
   const raw = LIBRARY_INDEX[catIdx] || LIBRARY_INDEX[0];
   // the film's entry is named by the film, and is absent when the film is
-  const libLabel = (e) => e.label || (e.kind === "film" ? String(CONTENT.opening?.controls?.watchAgain || "") : "");
-  const cat = { ...raw, entries: raw.entries.filter(e => e.kind !== "film" || !!CONTENT.opening).map(e => ({ ...e, label: libLabel(e) })) };
+  /* ══ SNG-681 F3 · ONE ROW PER FILM THIS CHARACTER MAY WATCH ══
+   * ✅ *"On unlock, the Library entry appears"* — so the single `film` row in LIBRARY_INDEX expands into the
+   * open ones at render time, named by the film's own `name` (the opening by its `controls.watchAgain`).
+   * ⛑ With no character, `filmsFor` answers the opening and whatever unlocks `always` — which is exactly
+   * what a player browsing from the roster should see, and needs no second rule. */
+  const expand = (e) => {
+    if (e.kind !== "film") return [{ ...e }];
+    return filmsFor(character, CONTENT).map((f) => ({
+      id: `film_${f.id}`, kind: "film", filmId: f.id,
+      label: f.id === "opening" ? String(CONTENT.opening?.controls?.watchAgain || "") : String(f.name || ""),
+    })).filter((r) => r.label);
+  };
+  const cat = { ...raw, entries: raw.entries.flatMap(expand) };
   const entry = (cat.entries.find(e => e.id === entryId)) || cat.entries[0];
   /* ✅ *"In the Library, as an entry under the world, so a player can watch it again from inside a game."*
    * ⛑ Its label is `controls.watchAgain` from the film's own file, which is why the entry in LIBRARY_INDEX
    * carries no label of its own — and the entry is filtered out entirely when there is no film to watch. */
-  if (entry.kind === "film") { renderOpening({ mode: "film", after: () => renderLibrary(catIdx, entry.id) }); return; }
+  if (entry.kind === "film") {
+    const doc = entry.filmId === "opening" ? CONTENT.opening
+      : (CONTENT.films || []).find((f) => f.id === entry.filmId) || null;
+    if (doc) { renderFilm(doc, { mode: "film", after: () => renderLibrary(catIdx, entry.id) }); return; }
+  }
   let body = "";
   if (entry.kind === "circle") body = libGreatCircle();
   else if (entry.kind === "made") body = await libWhoMadeThis(entry.path);

@@ -1,4 +1,4 @@
-// engine/opening.js — SNG-680. THE OPENING FILM, AS DATA AND ARITHMETIC.
+// engine/films.js — SNG-680 + SNG-681. EVERY FILM IN THE GAME, AS DATA AND ARITHMETIC.
 //
 // ✅ ERIK: *"We should have some sort of opening cinematic or equivalent. Something that tells the story of
 // the Earth at the AI singularity event … and how you are one of many — pushing on and being pushed by …
@@ -16,8 +16,7 @@
  *  how the script is WRITTEN and how the progress track is DRAWN; they are not a second axis to step along.
  *  ⛑ Each shot carries its movement's id and name, so the progress track needs no second lookup and cannot
  *  disagree with the shot it is showing. */
-export function openingReel(content) {
-  const doc = content?.opening || null;
+export function filmReel(doc) {
   if (!doc) return null;
   const shots = [];
   for (const mv of (doc.movements || [])) {
@@ -35,7 +34,128 @@ export function openingReel(content) {
     pacing: doc.pacing || {},
     visuals: doc.visuals || {},
     coda: doc.coda || null,
+    // ✅ SNG-681: a film carries its own name and its unlock; the opening carries neither and is not
+    // listed, because ✅ *"it is there from the start"* is not a rule a film has to declare.
+    id: doc.id || null,
+    name: doc.name || null,
+    unlock: doc.unlock || null,
   };
+}
+
+/** The opening and the nine, in one list — the only place that knows the opening is a film too. */
+export function allFilms(content) {
+  const out = [];
+  if (content?.opening) out.push(content.opening);
+  for (const f of (Array.isArray(content?.films) ? content.films : [])) if (f?.id) out.push(f);
+  return out;
+}
+
+/* ═════ SNG-681 F3 · WHEN A FILM CAN BE WATCHED ═════
+ * ✅ ERIK: *"a film appears when the character first meets that people."* ✅ AEVI: *"`unlock.always` … in the
+ * Library from the start … `unlock.traditions`: the first time the character meets a person whose primary
+ * tradition is in the list … `unlock.places`: the first time the character is at any listed place … Watched
+ * or not, the films never gate anything."*
+ * ⛑ PER CHARACTER, because they are about what THIS person has met — unlike `seenOpening`, which is about
+ * the world and sits on the profile. The two are different questions and they live in different places.
+ * ⚠️ AND AN UNLOCK IS A DAY, NOT A BOOLEAN: `filmsUnlocked[id] = worldDay` says when, so the Library can
+ * sort by what is new and a news line can say "today" without a second record.
+ */
+export function filmUnlockedBy(film, character, { npcs = {} } = {}) {
+  const un = film?.unlock || null;
+  if (!un) return null;                                   // the opening: no rule to meet
+  if (un.always) return { how: "always" };
+  const met = character?.npcRegistry || {};
+  for (const want of (un.traditions || [])) {
+    for (const id of Object.keys(met)) {
+      // ⛑ the SAVE's own record first, then the authored one: a grown person is met the same way, and the
+      // registry entry is what the roster actually holds.
+      const who = met[id] || null;
+      const trad = who?.domains?.primary || npcs[id]?.domains?.primary || null;
+      if (trad && trad === want) return { how: "met", tradition: want, who: id };
+    }
+  }
+  const here = character?.currentLocationId || null;
+  const been = character?.placeMemory || {};
+  for (const want of (un.places || [])) {
+    if (here === want || been[want]) return { how: "stood", place: want };
+  }
+  return null;
+}
+
+/** Record what is newly open. Returns the ids that opened THIS call, so a caller can offer them once. */
+export function noteFilmUnlocks(character, content, { worldDay = null, npcs = null } = {}) {
+  if (!character) return [];
+  const people = npcs || content?.npcs || {};
+  character.filmsUnlocked = character.filmsUnlocked && typeof character.filmsUnlocked === "object" ? character.filmsUnlocked : {};
+  const opened = [];
+  for (const film of allFilms(content)) {
+    if (!film.unlock || character.filmsUnlocked[film.id] != null) continue;
+    if (!filmUnlockedBy(film, character, { npcs: people })) continue;
+    character.filmsUnlocked[film.id] = Number.isFinite(Number(worldDay)) ? Number(worldDay) : 0;
+    opened.push(film.id);
+  }
+  return opened;
+}
+
+/** Every film this character may watch, newest unlock first — what the Library lists. */
+export function filmsFor(character, content) {
+  const out = [];
+  for (const film of allFilms(content)) {
+    const open = !film.unlock || character?.filmsUnlocked?.[film.id] != null
+      || !!(film.unlock?.always);
+    if (open) out.push({ id: film.id || "opening", name: film.name || null, film, since: character?.filmsUnlocked?.[film.id] ?? null });
+  }
+  return out;
+}
+
+/* ═════ SNG-681 F2 · THE NAME CARD'S SEAL ═════
+ * ✅ AEVI: *"`speaker_istvane.title` is 'Speaker of the Hollow Court', and 'the Hollow Court' is an
+ * `onceNamed` reveal in the Long Petition. The card must not show that title until the save knows the name.
+ * Gate it the way arc stages gate `onceNamed`."*
+ *
+ * ⛔ SO THE SEAL IS COMPUTED FROM THE ARCS, NOT FROM A LIST OF NAMES. A proper name that appears in an arc's
+ * SEALED layers (`onceNamed`, `onceLineKnown`) and in no `publicFace` anywhere is a name the public does not
+ * have; a title containing one is withheld until that arc is named for this save.
+ * ⚠️ AND I MEASURED IT AGAINST HER GROUND TRUTH BEFORE BUILDING IT, because the first rule I tried was
+ * wrong in both directions. Content-word n-grams (the shape `content_ci` uses for restated secrets) sealed
+ * TWO of the eighteen titles at a run of 2 — Istvane, and "Who Left No Shadow Standing" against the Glare's
+ * lowercase "left no shadow" — and ZERO at a run of 3. Capitalised phrases seal exactly one: his. The three
+ * sealed names in the whole corpus are the Hollow King, the Hollow Court and the Wild Half, all the Long
+ * Petition's, which is what she said.
+ * ⛑ Conservative where it is uncertain: the ONLY thing withheld is the title. The name is never withheld,
+ * because the film names the person out loud and a card with no name is not a card.
+ */
+export function sealedNames(content) {
+  const out = new Map();
+  const pub = new Set();
+  const namesIn = (text) => {
+    const found = new Set();
+    for (const m of String(text || "").matchAll(/(?<![.!?]\s|^)\b((?:[A-Z][a-z'’]+)(?:\s+(?:of|the|and)?\s*[A-Z][a-z'’]+)+)/g)) found.add(m[1].trim());
+    return found;
+  };
+  for (const arc of (content?.greaterArcs || [])) for (const s of (arc?.stages || [])) {
+    for (const n of namesIn(s?.publicFace)) pub.add(n);
+  }
+  for (const arc of (content?.greaterArcs || [])) for (const s of (arc?.stages || [])) {
+    for (const key of ["onceNamed", "onceLineKnown"]) {
+      for (const n of namesIn(s?.[key])) if (!pub.has(n) && !out.has(n)) out.set(n, arc.id);
+    }
+  }
+  return out;
+}
+
+/** The title a name card may show — or null, which is a card with a name and no title.
+ *  @param arcNamed (arcId) => boolean — injected, so this module imports no sovereign logic */
+export function cardTitle(npc, { content = null, arcNamed = null, sealed = null } = {}) {
+  const title = npc?.title ? String(npc.title) : null;
+  if (!title) return null;
+  const map = sealed || sealedNames(content);
+  for (const [name, arcId] of map) {
+    if (!title.includes(name)) continue;
+    const known = typeof arcNamed === "function" ? !!arcNamed(arcId) : false;
+    if (!known) return null;
+  }
+  return title;
 }
 
 /* ⛔ HOW LONG A SHOT HOLDS. ✅ Aevi: *"A shot lasts `secondsBase` + words × `secondsPerWord` unless it names
@@ -177,6 +297,8 @@ export function codaShots(content, { startId = null, locations = {}, regions = [
  *  ⛑ A PROFILE FIELD, not a character one: the film is about the world, so a player watches it once and not
  *  once per character. ⚠️ And it answers false with no script, because a film with no words is not a film
  *  somebody skipped. */
+export function openingReel(content) { return filmReel(content?.opening || null); }
+
 export function shouldAutoplayOpening(profile, content) {
   if (!content?.opening) return false;
   if (!profile) return true;

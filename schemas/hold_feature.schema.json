@@ -8,6 +8,7 @@
   "upkeep",
   "family",
   "label",
+  "siteKind",
   "property",
   "category",
   "what",
@@ -43,6 +44,10 @@
   "label": {
    "type": "string",
    "description": "present on 44 of 44"
+  },
+  "siteKind": {
+   "type": "string",
+   "description": "the site kind this feature draws as on a local map, from the closed vocabulary in location_kinds (_vocabulary + _siteVocabulary); SNG-679"
   },
   "hullable": {
    "type": "boolean",

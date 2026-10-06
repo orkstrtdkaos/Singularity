@@ -56,6 +56,190 @@
   "outcrop": "bare rock standing out of the land"
  },
  "_siteVocabularyNote": "Local-map sites: a site's `kind` is a location kind from _vocabulary or one of these site-scale kinds. Closed: a new value is added here with a one-line meaning before it is used.",
+ "mapStates": {
+  "_what": "The states every thing on the maps can be in, and the words a player reads for them. The engine keeps one ladder (whole, damaged, ruined, destroyed) and a handful of changes; these are the world's words for each kind of thing. `{name}`, `{old}` and `{from}` are filled in when shown. Build notes stay under `_`. SNG-679.",
+  "ladder": [
+   "whole",
+   "damaged",
+   "ruined",
+   "destroyed"
+  ],
+  "changes": [
+   "added",
+   "damaged",
+   "ruined",
+   "destroyed",
+   "repaired",
+   "moved",
+   "renamed",
+   "revealed",
+   "hidden"
+  ],
+  "words": {
+   "place": {
+    "damaged": "battered",
+    "ruined": "in ruins",
+    "destroyed": "razed",
+    "trace": "where {name} stood",
+    "added": "newly founded",
+    "repaired": "rebuilt",
+    "moved": "come here from near {from}",
+    "renamed": "once called {old}"
+   },
+   "site": {
+    "damaged": "damaged",
+    "ruined": "fallen in",
+    "destroyed": "torn down",
+    "trace": "where {name} was",
+    "added": "newly made",
+    "repaired": "mended",
+    "moved": "set up anew here",
+    "renamed": "once called {old}"
+   },
+   "ground": {
+    "damaged": "spoiled",
+    "ruined": "laid waste",
+    "destroyed": "stripped bare",
+    "trace": "bare ground",
+    "added": "newly broken",
+    "repaired": "coming back"
+   },
+   "water": {
+    "damaged": "fouled",
+    "ruined": "running low",
+    "destroyed": "run dry",
+    "trace": "a dry bed",
+    "added": "newly cut",
+    "repaired": "running clean",
+    "moved": "turned from its old course",
+    "renamed": "once called {old}"
+   },
+   "road": {
+    "damaged": "hard going",
+    "ruined": "blocked",
+    "destroyed": "cut",
+    "trace": "the line of an old road",
+    "added": "newly opened",
+    "repaired": "open again",
+    "moved": "taking a new line"
+   },
+   "waygate": {
+    "damaged": "unsteady",
+    "ruined": "dark",
+    "destroyed": "broken",
+    "trace": "a dead gate-stone",
+    "added": "newly made",
+    "repaired": "lit again"
+   },
+   "hold": {
+    "damaged": "damaged",
+    "ruined": "wrecked",
+    "destroyed": "lost",
+    "trace": "where {name} stood",
+    "added": "newly claimed",
+    "repaired": "made good",
+    "moved": "set up anew here",
+    "renamed": "once called {old}"
+   },
+   "feature": {
+    "damaged": "damaged",
+    "ruined": "out of use",
+    "destroyed": "gone",
+    "trace": "where the {name} was",
+    "added": "newly built",
+    "repaired": "mended"
+   },
+   "region": {
+    "renamed": "once called {old}"
+   }
+  },
+  "knowledge": {
+   "heardOf": "heard of",
+   "lastKnown": "as you last knew it",
+   "unseen": "not seen"
+  },
+  "effects": {
+   "feature": {
+    "damaged": 0.5,
+    "ruined": 0,
+    "destroyed": 0,
+    "_why": "Multiplies what the feature gives (yield, defence, aura, beds, facility). A ruined feature still takes its room; a destroyed one frees it."
+   },
+   "hold": {
+    "_why": "A hold's own state caps its features: a damaged hold has nothing better than damaged features, a ruined hold nothing better than ruined."
+   },
+   "road": {
+    "damaged": {
+     "daysMult": 1.5
+    },
+    "ruined": {
+     "daysMult": 2,
+     "carts": false
+    },
+    "destroyed": {
+     "open": false
+    },
+    "_why": "A blocked road is still walkable, slowly; carts, caravans and moving holds cannot take it. A cut road is gone from the way-finding until it is opened again."
+   },
+   "waygate": {
+    "damaged": {
+     "extraDays": 1
+    },
+    "ruined": {
+     "open": false
+    },
+    "destroyed": {
+     "open": false,
+     "remake": true
+    },
+    "_why": "A broken gate is not repaired; it is made again, at the cost of making one."
+   },
+   "place": {
+    "ruined": {
+     "services": false,
+     "anchor": false,
+     "roadEnd": true
+    },
+    "destroyed": {
+     "services": false,
+     "anchor": false,
+     "roadEnd": false
+    },
+    "_why": "A ruin can still be walked to; a razed place is a trace on the map and roads no longer end there."
+   },
+   "water": {
+    "damaged": {
+     "featuresOnIt": 0.5
+    },
+    "ruined": {
+     "featuresOnIt": 0
+    },
+    "destroyed": {
+     "featuresOnIt": 0,
+     "crossing": "dry"
+    },
+    "_why": "Applies to the water-fed features of places and holds on that water: mills, docks, fisheries."
+   },
+   "ground": {
+    "damaged": {
+     "featuresOnIt": 0.5
+    },
+    "ruined": {
+     "featuresOnIt": 0
+    },
+    "destroyed": {
+     "featuresOnIt": 0
+    },
+    "_why": "Applies to the features worked from that ground: fields, herds, quarries."
+   }
+  },
+  "repairCost": {
+   "damaged": 0.25,
+   "ruined": 0.6,
+   "_why": "A fraction of the thing's build cost to bring it back to whole. Destroyed is a full rebuild."
+  },
+  "_numbers": "First cut. Erik rules the numbers."
+ },
  "_poleWarning": "⛔ 12 locations are `pole` — pure extremities like the Blaze, the Scouring, the Numen. THEY ARE NOT TOWNS and an icon that says 'settlement' would lie about the most dangerous places in the world. ⚠️ They want their own mark.",
  "kinds": {
   "archive_hollow": {
@@ -727,5 +911,5 @@
    "why": "⛔ Kept — it is the gate OF the Crossing but it is 12 days out, so it is a place you travel to."
   }
  },
- "_suppressionRule": "⛔ GENERAL RULE, and it fixes the label collisions too: ANY location whose `parentId` is another location AND which sits within 0.5° of that parent is SUPPRESSED at region scale. ⚠️ 24 of the 37 label collisions I measured are exactly this case. The explicit list above is for the ones where the name ALSO needs changing."
+ "_suppressionRule": "⛔ GENERAL RULE, and it fixes the label collisions too: ANY location whose `parentId` is another location AND which sits within 0.5° of that parent is SUPPRESSED at region scale. ⚠️ 24 of the 37 label collisions I measured are exactly this case. An entry in `regionDisplay` is an explicit decision about that place and the general rule does not reach it: `suppressAtRegion` suppresses it, and any other entry (a `regionName`, or only a `why`) KEEPS it. The 0.5° rule decides only the places with no entry."
 }

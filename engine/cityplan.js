@@ -243,10 +243,23 @@ export function faubourgs(avenues, { cx, cy, wallR, rimR, seed = 1, gap = 16, de
  *
  *  ⚠️ NOTHING IS HAND-PLACED. Every block here is derived from the ring it sits in and the avenues either side of
  *  it, so a new road out moves the blocks around it and the city stays consistent with its own data. */
-export function cityFabric({ cx, cy, wallR, rHall, marks = [], avenues = [], seed = 1, foot = () => 26 } = {}) {
+/* ⛔ M9 (SNG-675) · NOT ENOUGH CITY. ✅ AEVI: *"The mock fills the wall with hundreds of lots, several ring
+ * streets, radial lanes and green yards. The game has about 74 slabs in the outer ring and a bare band inside
+ * it. Carry the fabric inward and split slabs into lots."*
+ * ⛑ THE BARE BAND WAS ARITHMETIC, NOT A MISSING FEATURE: the first ring sat at `rHall + 46` and rings stepped
+ * by 44, so at the letterbox frame's `wallR` of 169 there was room for THREE rings — two bands — and the
+ * innermost 76px was empty by construction. M8's square frame already takes `wallR` to 297 and the fabric from
+ * 24 blocks to 132; these three dials are the rest of her ask.
+ * ⚠️ THEY ARE A LOOK AND THE LOOK IS HERS, so they are named parameters with the old values documented, not
+ * constants buried in a loop. */
+export function cityFabric({ cx, cy, wallR, rHall, marks = [], avenues = [], seed = 1, foot = () => 26,
+  innerGap = 26,       // was 46 — how far outside the hall the first ring street runs
+  ringStep = 32,       // was 44 — the gap between ring streets
+  lotArc = 22,         // was 34 — the arc a single lot occupies, which is what "split slabs into lots" means
+} = {}) {
   const rings = [];
-  const first = rHall + 46;
-  for (let r = first; r < wallR - 16; r += 44) rings.push(r);
+  const first = rHall + innerGap;
+  for (let r = first; r < wallR - 16; r += ringStep) rings.push(r);
   const bearings = avenues.length
     ? avenues.map((a) => a.bearingDeg).slice().sort((x, y) => x - y)
     : [0, 60, 120, 180, 240, 300];
@@ -262,9 +275,9 @@ export function cityFabric({ cx, cy, wallR, rHall, marks = [], avenues = [], see
       const a1 = bi + 1 < bearings.length ? bearings[bi + 1] : bearings[0] + 360;
       const sweep = a1 - a0;
       if (sweep <= 0.5) continue;
-      // minor radials about every 34px at this ring's radius, so blocks stay block-sized at any distance
+      // minor radials about every `lotArc` px at this ring's radius, so lots stay lot-sized at any distance
       const arc = (sweep / 360) * TAU * ((r0 + r1) / 2);
-      const cuts = Math.max(1, Math.round(arc / 34));
+      const cuts = Math.max(1, Math.round(arc / lotArc));
       for (let ci = 0; ci < cuts; ci++) {
         const s0 = a0 + (ci / cuts) * sweep + 1.2, s1 = a0 + ((ci + 1) / cuts) * sweep - 1.2;
         if (s1 <= s0) continue;

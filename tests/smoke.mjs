@@ -6455,10 +6455,24 @@ await (async () => {
      * ⚠️ SO THE CHECKS BELOW ARE ABOUT THE UNIT, and the unit is CSS map pixels everywhere except one
      * `drawImage` per canvas. Three corrections I had written — scaled cells, a divided raster frame, and a
      * dpr-scaled zoom floor — all went away when the unit stopped being ambiguous. */
-    check("675/M1: ⛔ the canvas backing store follows the DEVICE, not the CSS box — and the aspect is preserved",
+    // ⛑ THE ASPECT IS NOW CHOSEN, NOT CONSTANT (M8), so this asserts the RULE rather than the old literal:
+    // both dimensions carry the device ratio, and the one aspect in the expression is whichever the region
+    // asked for. Pinning `* REGION_ASPECT` here reddened the moment a round city stopped being letterboxed.
+    check("675/M1: ⛔ the canvas backing store follows the DEVICE, not the CSS box — and ONE aspect governs both dimensions",
       /function dprOf\(\)/.test(src) && /DPR_CAP/.test(src)
-      && /const w = Math\.round\(want \* dpr\), h = Math\.round\(want \* REGION_ASPECT \* dpr\);/.test(src),
+      && /const aspect = regionIsPolar\(regionId\) \? CITY_ASPECT : REGION_ASPECT;/.test(src)
+      && /const w = Math\.round\(want \* dpr\), h = Math\.round\(want \* aspect \* dpr\);/.test(src),
       "there was no `devicePixelRatio` anywhere in app.js, so every line and letter was upscaled on a phone");
+    /* ═════ M8 (SNG-675) · A ROUND CITY DOES NOT BELONG IN A LETTERBOX ═════
+     * ✅ AEVI: *"it is drawn in the region frame, which is 1.9 times wider than it is tall, so the city is
+     * about 480px tall with empty sides. The mock is square."*
+     * ⛔ AND THE ARITHMETIC IS `cityPlan`'s: `wallR = Math.min(W, H) * wallFrac`. In a 1.9:1 frame the HEIGHT
+     * binds, so widening the canvas buys the city NOTHING. Measured at a 977px canvas: wallR 169 → 297, a
+     * 1.75× radius and 3.1× the area, and the fabric 24 blocks → 132 from the frame change alone. */
+    check("675/M8: ⛔ a polar region takes a squarer frame — a disc is bound by min(W,H), so a wide frame is empty sides",
+      /const CITY_ASPECT = 0\.92;/.test(src) && /function regionIsPolar\(regionId\)/.test(src)
+      && /sizeRegionCanvas\(cvQ, regionId\);/.test(src),
+      "⚠️ §411 holds the aspect fixed for a RECTANGULAR base, where a different ratio stretches the ground — a polar base draws a disc, so a squarer frame shows MORE of it at the same scale");
     check("675/M1: ⛔ …and BOTH painters draw in CSS units through a transform — or every font renders half size",
       (() => {
         // the region map and the globe each: set the ratio transform, and derive their frame by dividing it out
@@ -6562,6 +6576,38 @@ await (async () => {
       && /character\?\.knownPlaces/.test(src));
 
     const LENS675 = await import("../engine/lenses.js");
+    const CITYSRC675 = readFileSync(new URL("../engine/cityplan.js", import.meta.url), "utf8");
+    /* ═════ M9 + M11 (SNG-675) · ENOUGH CITY, AND A RING THAT NAMES WHERE THE ROAD GOES ═════
+     * ✅ M9: *"the mock fills the wall with hundreds of lots … the game has about 74 slabs in the outer ring
+     * and a bare band inside it."* ⛑ THE BARE BAND WAS ARITHMETIC: the first ring sat at `rHall + 46` and
+     * rings stepped by 44, so at the letterbox `wallR` of 169 there was room for four rings and the middle was
+     * empty by construction. Measured on the REAL Crossing with its 11 marks: **58 blocks → 303**, rings 4 → 8.
+     * ✅ M11: *"the game names gate yards — 'Intake Level', 'the Lit Apron'. Those are the arrival yards at the
+     * far end, and they mean nothing to a player standing at the Crossing."* ⛑ A YARD ALREADY KNOWS WHERE IT
+     * GOES: `the_lensward_gate_yard` carries `region: radiant_wastes`. Measured: **26 of 26** yards resolve to
+     * a region name. ⚠️ My first cut read `CONTENT.rules.regions`, which is `undefined` — it resolved 0 of 26
+     * and would have shipped looking right and changing nothing, because the fallback is the yard's own name. */
+    const CITY675 = await import("../engine/cityplan.js");
+    check("675/M9: ⛔ the city fabric carries inward and the slabs are cut into lots",
+      (() => {
+        const av = [...Array(12)].map((_, i) => ({ bearingDeg: i * 30 }));
+        const at = (wallR, o) => CITY675.cityFabric({ cx: 500, cy: 450, wallR, rHall: 30, marks: [], avenues: av, seed: 1, foot: () => 26, ...o });
+        const before = at(169, { innerGap: 46, ringStep: 44, lotArc: 34 });
+        const after = at(297, {});
+        return before.rings.length <= 2 && after.rings.length >= 7 && after.blocks.length > before.blocks.length * 8;
+      })(), "at the letterbox radius there was room for two rings, so the middle of the city was empty by arithmetic");
+    check("675/M9: ⛑ …and the three spacings are DIALS, because a city's grain is a look",
+      /innerGap = 26/.test(CITYSRC675) && /ringStep = 32/.test(CITYSRC675) && /lotArc = 22/.test(CITYSRC675));
+    check("675/M11: ⛔ a road out of the Crossing names the COUNTRY it reaches, not the yard it arrives in",
+      /function exitNameFor\(dest, fallbackId, fromRegionId\)/.test(src)
+      && /const list = Array\.isArray\(CONTENT\?\.regions\) \? CONTENT\.regions : \[\];/.test(src)
+      && /if \(rid && rid !== fromRegionId\)/.test(src),
+      "⚠️ and only when it LEAVES — a yard in this same region is a door across town, and naming it after the region you are standing in says nothing");
+    check("675/M11: ✅ …and the yard keeps its name on hover, which costs nothing now the label space hands back a box",
+      /_exitBoxes\.push\(/.test(src) && /return \{ kind: "exit", id: b\.id \};/.test(src),
+      "`showChip` takes a location id and a yard IS a location, so the chip that describes a place describes this one with no new rendering");
+
+
     check("675/M4: ⛔ the wild scatter takes a FLOOR and a CAP — 2,409 dots on one frame is a texture, not a claim",
       (() => {
         const flat = (v) => () => v;

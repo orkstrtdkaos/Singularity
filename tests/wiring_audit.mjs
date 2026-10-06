@@ -664,9 +664,26 @@ const unauthoredRulesKeys = (() => {
   for (const m of stateSrc.matchAll(/\brules\.([A-Za-z_$][\w$]*)\s*=/g)) provided.add(m[1]);
   const all = engineSrc + "\n" + appSrc;
   const written = new Set([...all.matchAll(/\brules\.([A-Za-z_$][\w$]*)\s*=/g)].map(m => m[1]));
+  // ⛔ CODE ONLY — THIS SCANNED COMMENTS AND WAS TRIPPED BY PROSE ABOUT ITS OWN SUBJECT (2026-10-06).
+  // ⚠️ A comment explaining that `CONTENT.rules.regions` DOES NOT EXIST counted as a read OF it, so writing
+  // down the finding made the ratchet go red. Two of the hits were comments I had just written and one was a
+  // comment at app.js:17938 from an earlier pass saying the same thing — the note that would have saved the
+  // rediscovery was the note being punished.
+  // ⛑ §419 learned this on a source regex that matched the word "canvas" in `lenses.js`'s own doc comment,
+  // and `codeOnly` was the fix there. A detector that reads prose is measuring what people SAY about the code.
+  // ⛔ CRLF FIRST, AND THAT IS NOT TIDINESS. `.` DOES NOT MATCH `\r`, so on a CRLF checkout a `//.*$`
+  // regex cannot match a line comment AT ALL — `.*` stops before the `\r` and `$` then fails. The stripper
+  // I added an hour ago looked right, ran, and removed NOTHING; the ratchet stayed red over a comment, and
+  // I nearly reworded accurate prose to satisfy a scanner that was broken.
+  // ⚠️ THE SAME LF/CRLF ASYMMETRY ALREADY BLOCKED A PUSH OF AEVI'S FOR AN HOUR, through an `indexOf` that
+  // sliced to EOF on every clone. Normalising at the door is what `rd` does, for exactly this reason.
+  const codeOnly = (s) => String(s).replace(/\r\n/g, "\n")
+    .replace(/\/\*[\s\S]*?\*\//g, " ")
+    .split("\n").map((l) => { const i = l.indexOf("//"); return i < 0 ? l : l.slice(0, i); }).join("\n");
+  const allCode = codeOnly(all);
   const readKeys = new Set();
   for (const re of [/\bCONTENT\.rules\??\.([A-Za-z_$][\w$]*)/g, /\bcontent\.rules\??\.([A-Za-z_$][\w$]*)/g]) {
-    for (const m of all.matchAll(re)) readKeys.add(m[1]);
+    for (const m of allCode.matchAll(re)) readKeys.add(m[1]);
   }
   return [...readKeys].filter(k => !provided.has(k) && !written.has(k)).sort();
 })();

@@ -16,6 +16,30 @@
   "next": [],
   "releases": [
     {
+      "version": "2.19.6",
+      "date": "2026-10-06",
+      "entries": [
+        {
+          "kind": "change",
+          "title": "The Crossing is drawn as a city, not a stripe",
+          "summary": "The round city was being drawn in the wide region frame, so it was bound by the frame's height with empty space either side.",
+          "detail": "A city map is a disc, and a disc in a frame nearly twice as wide as it is tall can only grow until it hits the top and bottom — so widening the window bought the city nothing and left blank margins. The Crossing now opens in a near-square frame: the walls are about three-quarters larger across, and there is room inside them for the city to actually be a city."
+        },
+        {
+          "kind": "change",
+          "title": "There is a city inside the walls now",
+          "summary": "The Crossing had a ring of blocks around the edge and a bare band in the middle.",
+          "detail": "The street rings began well outside the great hall and stepped widely, so at the old size there was only room for two of them and the middle of the city was empty by arithmetic rather than by design. The fabric now carries inward and the blocks are cut into lots: hundreds of them, several ring streets, radial lanes, courtyards and green yards."
+        },
+        {
+          "kind": "fix",
+          "title": "The roads out of the Crossing say where they go",
+          "summary": "They were labelled with the name of the yard you arrive in at the far end.",
+          "detail": "A road leaving the Crossing was labelled \"Intake Level\" or \"the Plain Yard\" — the arrival yard on the other side of the gate, which means nothing to someone standing at the Crossing deciding where to go. Each road now names the country it leads to: the Palelands, the Given Land, the Valley of Echoes. The yard still has its name — hover the label and it tells you which one you arrive in."
+        }
+      ]
+    },
+    {
       "version": "2.19.5",
       "date": "2026-10-05",
       "entries": [

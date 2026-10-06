@@ -35762,10 +35762,15 @@ console.log("\n── §411 · the ground map answers the pointer ──");
   // derived from the width through one ratio constant, so the ground is never stretched.
   check("§411: ⚠️ THE BACKING STORE FOLLOWS THE LAYOUT, and the aspect is held so the ground is not stretched",
     /const REGION_ASPECT = 420 \/ 800;/.test(A411)
-    && /function sizeRegionCanvas\(cv\)/.test(A411)
+    && /function sizeRegionCanvas\(/.test(A411)                  // named, not pinned to its parameters
     && /cv\.width = \w+; cv\.height = \w+;/.test(A411)          // BOTH are set, whatever they are called
-    && /\* REGION_ASPECT/.test(A411)                              // and the height comes from the width through the ratio
-    && /sizeRegionCanvas\(cvQ\);/.test(A411)
+    // ⛑ RE-POINTED AGAIN (M8). The height still comes from the width through ONE ratio — that is the claim,
+    // and it is what stops the ground stretching — but the ratio is now CHOSEN: a rectangular base keeps
+    // 420:800, a polar base draws a disc and takes a squarer frame. Pinning `* REGION_ASPECT` asserted which
+    // constant rather than that there is one.
+    && /const aspect = regionIsPolar\(regionId\) \? CITY_ASPECT : REGION_ASPECT;/.test(A411)
+    && /want \* aspect \* dpr/.test(A411)
+    && /sizeRegionCanvas\(cvQ/.test(A411)                        // …and the painter calls it, whatever else it now passes
     && /max-width:1600px/.test(A411));
 }
 

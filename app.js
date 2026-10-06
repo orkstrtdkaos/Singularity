@@ -198,7 +198,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.19.5";
+const APP_VERSION = "2.19.6";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -13476,7 +13476,7 @@ function queueRegionMap(regionId) {
     const cvQ = document.getElementById("region-map");
     if (cvQ) {
       // ⚠️ BEFORE the paint, because assigning `width` clears the canvas and resets the context.
-      sizeRegionCanvas(cvQ);
+      sizeRegionCanvas(cvQ, regionId);
       // ⚠️ A CATCH THAT HIDES ITS REASON IS THE BUG I KEEP FINDING IN OTHER PEOPLE'S CODE. The diagram
       // below genuinely is a working fallback, so this must not throw — but it must SAY why it fell back.
       try { paintRegionMap(regionId); }
@@ -13545,7 +13545,54 @@ function dprOf() {
   return Math.max(1, Math.min(DPR_CAP, Number.isFinite(d) && d > 0 ? Math.round(d) : 1));
 }
 
-function sizeRegionCanvas(cv) {
+/* ═════ M8 (SNG-675) · A ROUND CITY DOES NOT BELONG IN A LETTERBOX ═════
+ * ✅ AEVI: *"It is drawn in the region frame, which is 1.9 times wider than it is tall, so the city is about
+ * 480px tall with empty sides. The mock is square."*
+ * ⛔ AND THE ARITHMETIC IS IN `cityPlan`: `wallR = Math.min(W, H) * wallFrac`. In a 1.9:1 frame the HEIGHT
+ * binds, so widening the canvas buys the city nothing and the extra width is empty on both sides. The only
+ * thing that makes the city bigger is making the frame less wide relative to its height.
+ * ⚠️ §411 HOLDS THE ASPECT FIXED SO THE GROUND IS NOT STRETCHED, and that reasoning is about a RECTANGULAR
+ * base: `toScreen` maps a lat/lon extent onto W×H, so a different ratio stretches every authored way. ⛑ A
+ * POLAR base is azimuthal — it draws a DISC whose radius is `min(W, H)` — so a squarer frame shows MORE of the
+ * same disc at the same scale rather than a distorted version of it. Nothing stretches; the city grows. */
+/** ⛔ M11 · WHAT TO CALL A ROAD'S FAR END. A gate yard is somewhere you ARRIVE, and its name is a fact about
+ *  the far country, not about the road leaving this one. ⛑ The yard's own `region` is the answer, and
+ *  `rules.regions` is a list of `{ regionId, name }` — so the region's real name ("The Palelands") replaces
+ *  the yard's ("the Plain Yard"), and the yard is still what the hover chip shows, because the chip takes a
+ *  location id and a yard is a location. */
+function regionNameOf(rid) {
+  // ⛑ `CONTENT.regions`, NOT `CONTENT.rules.regions` — which is `undefined`, and `rules.regionRules` is the
+  // render-guidance doc rather than the list. My first cut read the rules bag and resolved **0 of 26** yards,
+  // so M11 would have shipped looking right and changing nothing: the fallback is the yard's own name, which
+  // is exactly what it was already showing. A reader that returns null for its whole population is the
+  // failure that looks most like success.
+  const list = Array.isArray(CONTENT?.regions) ? CONTENT.regions : [];
+  const hit = list.find((r) => r && (r.regionId || r.id) === rid);
+  return hit?.name || null;
+}
+function exitNameFor(dest, fallbackId, fromRegionId) {
+  if (dest?.waygate) {
+    const rid = dest.regionId || dest.region;
+    // ⚠️ ONLY WHEN IT ACTUALLY LEAVES. A yard in this same region is a door across town, and naming it
+    // after the region you are standing in says nothing at all.
+    if (rid && rid !== fromRegionId) {
+      const rn = regionNameOf(rid);
+      if (rn) return rn;
+    }
+  }
+  return dest?.name || fallbackId;
+}
+
+const CITY_ASPECT = 0.92;   // slightly wider than tall: square enough for the disc, short enough to sit under the tier bar
+function regionIsPolar(regionId) {
+  if (!regionId || !CONTENT?.locations) return false;
+  try {
+    const authored = _regionMaps && _regionMaps[regionId];
+    return !!regionExtent(regionId, CONTENT.locations, { authored: authored || null })?.polar;
+  } catch { return false; }
+}
+
+function sizeRegionCanvas(cv, regionId = null) {
   if (!cv) return false;
   const want = Math.max(320, Math.min(1600, Math.round(cv.getBoundingClientRect().width || 800)));
   // ⛑ BOTH DIMENSIONS TIMES THE SAME RATIO, so the intrinsic ASPECT is unchanged — the element is styled
@@ -13554,7 +13601,9 @@ function sizeRegionCanvas(cv) {
   // `base.toScreen` maps the extent onto W×H whatever they are, so the vector layers are already
   // resolution-independent and simply draw finer.)
   const dpr = dprOf();
-  const w = Math.round(want * dpr), h = Math.round(want * REGION_ASPECT * dpr);
+  // ⛑ THE ASPECT FOLLOWS WHAT IS BEING DRAWN. A disc wants a square; a lat/lon rectangle must keep 420:800.
+  const aspect = regionIsPolar(regionId) ? CITY_ASPECT : REGION_ASPECT;
+  const w = Math.round(want * dpr), h = Math.round(want * aspect * dpr);
   if (cv.width === w && cv.height === h) return false;
   cv.width = w; cv.height = h;
   return true;
@@ -13574,6 +13623,8 @@ let _regionView = { k: 1, cx: 0.5, cy: 0.5, sx: 0, sy: 0, sw: 0, sh: 0 };
 // ⛔ M3 — WHICH REGION THE OPENING FRAME HAS ALREADY BEEN SET FOR. Without this the frame would be recomputed
 // on every repaint and snap the view back the instant the player panned, which is worse than not framing at all.
 let _framedFor = null;
+// ⛔ M11 · the ring labels' own boxes, so a road's far end can be hovered for the yard it actually arrives in
+let _exitBoxes = [];
 let _regionOff = null;
 // ⛔ M2/D1 — ONE COLLISION SPACE FOR THE WHOLE MAP, made fresh at the top of each paint. The region map had
 // SIX label passes; four could not see each other at all and the two that avoided collisions kept SEPARATE
@@ -13665,6 +13716,7 @@ function paintRegionMap(regionId) {
   }
   const ctx = _regionOff.getContext("2d");
   _labelSpace = labelSpace();        // M2/D1: every pass below reserves from this one, in style rank order
+  _exitBoxes = [];                   // M11: rebuilt each paint, like every other hit target on this canvas
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   ctx.clearRect(0, 0, W, H);
   // ⛑ THE RASTER IS COMPUTED IN THE MAP'S OWN (CSS) FRAME and drawn through the transform, so it rasterises
@@ -14081,11 +14133,20 @@ function paintRegionMap(regionId) {
       // ⚠️ ONE LABEL PER EXIT POINT, NAMING EVERY DESTINATION. Roads that leave toward the same far country
       // leave through nearly the same spot, and a label apiece stacked them into an illegible pile — which is
       // the same complaint Erik made about the lines themselves arriving in near-parallel bundles.
+      // ⛔ M11 (SNG-675) — ✅ AEVI: *"the game names gate yards — 'Intake Level', 'the Lit Apron', 'the Plain
+      // Yard'. Those are the arrival yards at the far end, and they mean nothing to a player standing at the
+      // Crossing. Label the ring with the destination region's name, and keep the yard name for hover."*
+      // ⛑ AND A YARD ALREADY KNOWS WHERE IT GOES: `the_lensward_gate_yard` ("the Lit Apron") carries
+      // `region: radiant_wastes`. So this is a read, not a new mapping — the yard's own region IS the
+      // destination, and `rules.regions` carries that region's display name.
       for (const x of routed.exits) {
         const near = exits.find((g) => Math.hypot(g.at.x - x.at.x, g.at.y - x.at.y) < 26);
-        const name = CONTENT.locations?.[x.to]?.name || x.to;
-        if (near) { if (!near.names.includes(name)) near.names.push(name); }
-        else exits.push({ at: x.at, names: [name] });
+        const dest = CONTENT.locations?.[x.to];
+        const name = exitNameFor(dest, x.to, regionId);
+        if (near) {
+          if (!near.names.includes(name)) near.names.push(name);
+          if (x.to && !near.toIds.includes(x.to)) near.toIds.push(x.to);
+        } else exits.push({ at: x.at, names: [name], toIds: x.to ? [x.to] : [] });
       }
     }
     // ⛔ C4.3 · the houses, where any place here keeps them — the Crossing's swirl
@@ -14112,7 +14173,14 @@ function paintRegionMap(regionId) {
         const ew = (drawLabel(ctx, eText, -9999, -9999, "exit", {})?.w) || 0;
         const ex0 = ex.at.x + dx, ey0 = Math.max(10, Math.min(H - 4, ex.at.y - 3));
         const ebox = exSpace.place(ex0, ey0, ew, 12, { kind: "exit", clampTo: { w: W, h: H } });
-        if (ebox) drawLabel(ctx, eText, ebox.x, ebox.y, "exit", { align: ctx.textAlign });
+        if (ebox) {
+          drawLabel(ctx, eText, ebox.x, ebox.y, "exit", { align: ctx.textAlign });
+          // ⛑ M11's OTHER HALF, and it costs almost nothing now that M2's label space hands back a BOX: the
+          // yard keeps its name on hover. `showChip` takes a location id and a yard IS a location, so the
+          // chip that already describes a place describes this one with no new rendering at all.
+          if (ex.toIds?.length) _exitBoxes.push({ x0: ebox.x - ew / 2 - 4, x1: ebox.x + ew / 2 + 4,
+            y0: ebox.y - 13, y1: ebox.y + 5, id: ex.toIds[0] });
+        }
       }
     }
     ctx.restore();
@@ -14372,6 +14440,12 @@ function wireRegionGroundMap(selectedId) {
   const pickAt = (x, y) => {
     const P = _regionPick;
     if (!P) return null;
+    // ⛔ M11 — A RING LABEL IS A TARGET. It names the far COUNTRY; hovering it says which yard you arrive in,
+    // which is the fact the label gave up to become readable. Checked FIRST because these sit at the frame's
+    // edge where nothing else competes, and a label a player can read and not query is a dead end.
+    for (const b of _exitBoxes) {
+      if (x >= b.x0 && x <= b.x1 && y >= b.y0 && y <= b.y1) return { kind: "exit", id: b.id };
+    }
     if (_regionFan?.pills) {
       for (const p of _regionFan.pills) {
         const w = (p.w || 60) / 2 + 2, h = (p.h || PILL_H) / 2 + 2;

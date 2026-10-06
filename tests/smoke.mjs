@@ -8030,11 +8030,24 @@ await (async () => {
       (() => { const a = WG2.globeClickAction(seat405, { framed: "valley", regionOf: regionOf405 });
         return a?.action === "enter" && a.regionId === "valley" && !a.selectId; })(),
       "✅ Aevi: *\"the first click starts a flight and the second lands on a moved pin. A phone has no double-click at all.\"*");
-    check("405/W1: …and a PLACE click enters its region with the place selected, never an 8° frame below the floor",
+    /* ⛔ RE-POINTED BECAUSE THE BEHAVIOUR MOVED, NOT BECAUSE THE GATE WAS WRONG. This asserted that a place
+     * click ENTERS its region, which is what W1 shipped — and W1's own sentence defers: *"A place click
+     * enters its region with the place selected, WHICH IS W7."* ✅ W7 is the authoritative reading: *"A tap
+     * on a place pin opens the card over the globe … and 'Show on region map' enters the region with that
+     * place selected."* So entering is a button on the card now. ⛑ What the gate is FOR is unchanged and is
+     * still asserted below: there is no 8° place frame, because that frame sat under `floorRadius`. */
+    check("405/W1+W7: a PLACE click opens its card over the globe — never an 8° frame below the floor",
       (() => { const a = WG2.globeClickAction({ id: "millbrook", kind: "settlement", name: "Millbrook" },
           { framed: null, regionOf: regionOf405 });
-        return a?.action === "enter" && a.regionId === "valley" && a.selectId === "millbrook"; })(),
+        return a?.action === "card" && a.selectId === "millbrook" && a.span == null; })(),
       "✅ Aevi: *\"The place-level 8° frame should not exist on the globe\"* — it sat below floorRadius, so it could only paint upscaled blocks");
+    check("405/W1+W7: …and the card still carries the region, because \"Show on region map\" needs somewhere to go",
+      (() => { const a = WG2.globeClickAction({ id: "millbrook", kind: "settlement", name: "Millbrook" },
+          { framed: null, regionOf: regionOf405 });
+        const orphan = WG2.globeClickAction({ id: "nowhere", kind: "settlement", name: "Nowhere" },
+          { framed: null, regionOf: () => null });
+        return a.regionId === "valley" && orphan?.action === "card" && orphan.regionId == null; })(),
+      "a place whose region cannot be resolved still opens its card — it just offers no way in, rather than refusing to open");
     check("405/W1: …and the region frame stays ABOVE the floor, so a framed region is never drawn past the raster's resolution",
       WG2.REGION_FRAME_DEG > WG2.WORLD_TIER_FLOOR_DEG,
       "W6: if any frame paints the raster past its own resolution, that frame is the bug");

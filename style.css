@@ -2533,6 +2533,12 @@ table.ob-matrix { border-collapse: collapse; width: 100%; min-width: 640px; font
 /* the phone layout: a sheet across the bottom of the MAP, never of the viewport */
 .place-card.sheet { width: auto; border-radius: 12px 12px 0 0; border-bottom: 0;
   box-shadow: 0 -8px 26px rgba(0,0,0,0.6); padding-top: 14px; }
+/* ⛔ W7 · THE GLOBE'S WRAPPER IS THE CARD'S POSITIONED PARENT, and it had NO RULE AT ALL until now.
+   ⚠️ `.globe-wrap` appeared in the markup and nowhere in this stylesheet — M1's own note in app.js says so
+   about this very element — so an absolutely positioned card inside it would have resolved its left/top
+   against whatever distant ancestor happened to be positioned, which is not the canvas and need not even be
+   on screen. The region map's `.rm-wrap` carries `position:relative` inline for exactly this reason. */
+.globe-wrap { position: relative; }
 .place-card-handle { position: absolute; top: 6px; left: 50%; transform: translateX(-50%);
   width: 38px; height: 4px; border-radius: 2px; background: var(--line); }
 

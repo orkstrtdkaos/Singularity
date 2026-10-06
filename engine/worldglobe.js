@@ -61,7 +61,7 @@ export const REGION_FRAME_DEG = 26;
  * @param pin        {{id, kind, tier, name}} the pin under the pointer, from `visiblePins`
  * @param framed     the region id the camera was last flown to, or null
  * @param regionOf   (id) => regionId, so this module needs no CONTENT
- * @returns {{action:"frame"|"enter", regionId, selectId, span}}
+ * @returns {{action:"frame"|"enter"|"card", regionId, selectId, span}}
  */
 export function globeClickAction(pin, { framed = null, regionOf = null } = {}) {
   if (!pin || !pin.id) return null;
@@ -77,14 +77,17 @@ export function globeClickAction(pin, { framed = null, regionOf = null } = {}) {
    * so two readings — and `kind` is kept as the fallback for any caller that has no tier to offer. */
   const isSeat = pin.tier ? pin.tier === "region" : pin.kind === "region";
   const rid = (regionOf ? regionOf(pin.id) : null) || (isSeat ? pin.id : null);
-  // ⛔ A PLACE CLICK ENTERS; IT DOES NOT FRAME. ✅ Aevi: *"The place-level 8° frame should not exist on the
-  // globe. A place click enters its region with the place selected."* That frame sat BELOW `floorRadius`,
-  // so it could only ever paint the raster past its own resolution — W6's bug, reached by a click.
+  /* ⛔ A PLACE CLICK OPENS ITS CARD, OVER THE GLOBE. It used to ENTER, and that was W1 read on its own.
+   * ✅ W1 says *"A place click enters its region with the place selected, which is W7"* — pointing at W7 for
+   * the detail — and ✅ W7 is explicit: *"A tap on a place pin opens the card over the globe. 'Look inside'
+   * and 'Travel' work from there, and 'Show on region map' enters the region with that place selected."*
+   * ⚠️ So entering is a BUTTON ON THE CARD, not the click. W1 shipped the entering form because there was
+   * no card over the globe to open yet; now there is, and this is the authoritative reading.
+   * ⛑ What has NOT changed is the thing W1 was actually for: there is no 8° place frame. That frame sat
+   * below `floorRadius`, so it could only ever paint the raster past its own resolution — W6's bug, reached
+   * by a click. `regionId` still rides along, because the card's extra button needs somewhere to go. */
   if (!isSeat) {
-    return rid
-      ? { action: "enter", regionId: rid, selectId: pin.id, span: null }
-      // ⛑ no region to enter is not a reason to do nothing: frame it and let the next click try again.
-      : { action: "frame", regionId: null, selectId: null, span: REGION_FRAME_DEG };
+    return { action: "card", regionId: rid, selectId: pin.id, span: null };
   }
   // ⛔ ONE CLICK FRAMES, A SECOND ENTERS. ✅ Aevi: *"Double-click entry is unreliable, because the first
   // click starts a flight and the second lands on a moved pin. A phone has no double-click at all."*

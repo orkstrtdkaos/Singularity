@@ -198,7 +198,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.19.22";
+const APP_VERSION = "2.19.24";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -12455,6 +12455,9 @@ let _regionPick = null;      // { regionId, marks:[{id,name,x,y}], clusters:[{x,
  * ⛔ And "you are here" stays its OWN mark: the gold ring and its name are drawn from
  * `character.currentLocationId` in the pin pass, untouched by the camera. */
 let _globeLookAt = null;     // regionId under the camera centre, or null before the first globe paint
+// ⛑ THE ONE Esc LISTENER FOR THE GLOBE, kept so each re-render REPLACES it (the region map's `_regionEsc`
+// exists for the same reason, and for the same bug: a stacked listener holding a canvas that is gone).
+let _globeEsc = null;
 /** ⛔ THE OPEN FAN, in canvas pixels. Null when nothing is fanned. */
 let _regionFan = null;       // { key, cx, cy, members:[{id,name,x,y}] }
 /** ⛑ THE CLICK RADIUS THE GLOBE HAS USED ALL ALONG (`nearest` in `wireWorldGlobe`), so one map does not feel
@@ -14672,69 +14675,19 @@ function wireRegionGroundMap(selectedId) {
     if (tb) tb.onclick = (e) => { e.stopPropagation(); const d = tb.dataset.rmcTravel; _regionFan = null; if (!planJourneyTo(d)) travelTo(d); };
   };
 
-  /* ═════ SNG-677 P1–P4 · THE FULL CARD, ON THE MAP, ANCHORED TO ITS GLYPH ═════
-   * ✅ ERIK: *"the place info should pop up on the map instead of below it"*, and on a phone the old card was
-   * a scroll away from the place you had just tapped — the region map is about 400px tall, the card sat under
-   * it, and tapping a glyph moved nothing you could see.
-   * ⛑ ONE DOOR, AND IT IS `selectedId`. This is called at the end of the wiring from whatever
-   * `renderMap(id)` was handed — so a click on the picture, a click on the diagram, and an arrival from the
-   * globe with a place selected (W7) all open the card by the same path. The comment above this function
-   * already promised that: *"selecting from the picture and selecting from the diagram are one behaviour
-   * rather than two that drift."* The card is the third.
-   * ⚠️ AND IT IS POSITIONED THROUGH `review()`, the chip's own mapping, not through the mark's raw x/y —
-   * the marks are in the PAINTED map's pixels and the card floats over the canvas as laid out, so a card
-   * placed from raw marks would sit right at k=1 and drift with every zoom. */
-  const hidePlaceCard = () => {
-    const el = document.getElementById("place-card");
-    if (el) { el.hidden = true; el.innerHTML = ""; el.classList.remove("sheet"); }
-  };
+  // ⛑ P/W7: the card is `openPlaceCard`'s now — one function, every map surface. This map's anchor is a
+  // mark from `_regionPick`, run through `review()` because the marks are in the PAINTED map's pixels while
+  // the card floats over the canvas as laid out.
+  const hidePlaceCard = () => closePlaceCard();
   const showPlaceCard = (id) => {
-    const el = document.getElementById("place-card");
-    if (!el) return;
-    const body = placeCardHTML(id);
-    if (!body) return hidePlaceCard();
-    /* ⛔ NO GLYPH IS NOT A REASON NOT TO OPEN. ⚠️ My first cut returned early when the place had no mark of
-     * its own, and that is wrong at exactly the width Aevi's done-when names: at 390px the map is 358×188,
-     * places collapse into clusters, and a clustered place HAS NO INDIVIDUAL MARK — so tapping it opened
-     * nothing at all on a phone while working perfectly on a desk. Measured: card 0×0, `sheet` class absent.
-     * ⛑ The anchor decides WHERE the popover sits, never WHETHER the card opens. The sheet never needed one:
-     * it is pinned to the map's own bottom edge. */
     const mark = (_regionPick?.marks || []).find((m) => m.id === id) || null;
-    // ⛔ P2 · TWO LAYOUTS, DECIDED BY THE MAP'S OWN WIDTH, never by the window's — the map is what the card
-    // has to fit inside, and on a desktop with a narrow pane those are different numbers.
-    const r = cv.getBoundingClientRect();
-    const narrow = r.width <= 640;
-    el.hidden = false;
-    el.classList.toggle("sheet", narrow);
-    el.innerHTML = `<button class="place-card-x" data-cardclose="1" title="Close" aria-label="Close">✕</button>`
-      + (narrow ? `<div class="place-card-handle" aria-hidden="true"></div>` : "")
-      + body;
-    wirePlaceCard(el);
-    const xb = el.querySelector("[data-cardclose]");
-    if (xb) xb.onclick = (e) => { e.stopPropagation(); hidePlaceCard(); };   // ⛑ P4: closing keeps the selection
-    /* ⛑ THE PLACEMENT IS `placeCardBox`'S NOW; THIS IS ONLY THE HANDS. The arithmetic lives in the engine
-     * so the gate measures the numbers the browser lays out with rather than a second copy of them — Erik's
-     * harness rule, and the answer to Aevi's D1 complaint that a gate reading source text was green while
-     * the map was wrong.
-     * ⚠️ The glyph goes through `review()` FIRST. The marks are in the PAINTED map's pixels and the card
-     * floats over the canvas AS LAID OUT, so a card placed from raw marks would sit right at k=1 and drift
-     * with every zoom — which is the same mapping the hover chip has always used. */
     const glyph = mark ? (() => {
+      const r = cv.getBoundingClientRect();
       const sx = r.width / (cv.width / dprOf()), sy = r.height / (cv.height / dprOf());
       const vp = review(mark.x, mark.y, cv.width / dprOf(), cv.height / dprOf());
       return { x: vp.x * sx, y: vp.y * sy };
     })() : null;
-    const box = placeCardBox({ w: r.width, h: r.height },
-      { w: el.offsetWidth || 320, h: el.offsetHeight || 220 }, glyph);
-    if (box.mode === "sheet") {
-      el.style.left = "0px"; el.style.right = "0px"; el.style.top = "auto"; el.style.bottom = "0px";
-      el.style.width = "auto"; el.style.maxHeight = `${box.height}px`;
-      return;
-    }
-    el.style.right = "auto"; el.style.bottom = "auto"; el.style.width = "";
-    el.style.maxHeight = `${Math.max(160, Math.round(r.height - 8))}px`;
-    el.style.left = `${box.left}px`;
-    el.style.top = `${box.top}px`;
+    openPlaceCard({ canvas: cv, id, glyph });
   };
 
   cv.style.cursor = "default";
@@ -14907,7 +14860,11 @@ function renderMapWorld() {
           ${["precursor", "wild", "metaphysical", "veil", "nanite", "body"].map(s => `<option value="${esc(s)}">${esc(s)}</option>`).join("")}
         </select>
       </div>
-      <div class="hint" id="globe-read">Drag to spin · scroll to zoom · click a place to enter its region.</div>
+      ${/* ⛔ W7 · THE CARD OVER THE GLOBE. ✅ AEVI (P5): *"The globe, the region map, the city and the local
+           map all use this one card."* ⛑ Same id as the region map's, because only one map tier is rendered
+           at a time — so `openPlaceCard` finds whichever is on screen without the host having to say which. */""}
+      <div id="place-card" class="place-card" hidden></div>
+      <div class="hint" id="globe-read">Drag to spin · scroll to zoom · click a place for its card.</div>
     </div>
     ${arcPanel}
     <button class="btn secondary" id="map-back" style="margin-top:12px">Back</button>
@@ -15414,6 +15371,17 @@ function wireWorldGlobe() {
     }
   }
 
+  /* ⛑ W7/P4 · Esc CLOSES THE CARD OVER THE GLOBE TOO, and the listener is replaced rather than stacked —
+   * every re-render of this screen would otherwise leave another one on the window holding a stale canvas. */
+  if (_globeEsc) window.removeEventListener("keydown", _globeEsc);
+  _globeEsc = (e) => {
+    if (e.key !== "Escape") return;
+    if (!document.getElementById("world-globe")) { window.removeEventListener("keydown", _globeEsc); _globeEsc = null; return; }
+    const card = document.getElementById("place-card");
+    if (card && !card.hidden) closePlaceCard();
+  };
+  window.addEventListener("keydown", _globeEsc);
+
   const nearest = (mx, my) => {
     let best = null, bd = 14 * 14;
     for (const p of pins) { const d = (p.x - mx) ** 2 + (p.y - my) ** 2; if (d < bd) { bd = d; best = p; } }
@@ -15548,6 +15516,18 @@ function wireWorldGlobe() {
     if (!wp) return;
     const act = globeClickAction(p, { framed: _framed, regionOf });
     if (!act) return;
+    /* ⛔ W7 · THE CARD, OVER THE GLOBE. ⛑ The anchor is the pin's own screen point — `visiblePins` has
+     * already projected it, and the globe does no zoom-blit, so there is no second mapping to apply the way
+     * the region map needs `review()`. That is exactly why `openPlaceCard` takes a point rather than a mark.
+     * ✅ *"'Show on region map' enters the region with that place selected"* — the one extra button, which is
+     * the behaviour W1 had put on the click itself. */
+    if (act.action === "card") {
+      const rid = act.regionId;
+      openPlaceCard({ canvas: cv, id: act.selectId, glyph: { x: p.x * (cv.getBoundingClientRect().width / GW()), y: p.y * (cv.getBoundingClientRect().height / HGLOBE()) },
+        extra: rid ? { label: "◱ Show on region map", onClick: () => { closePlaceCard(); enterRegion(rid, act.selectId); } } : null });
+      if (readout) readout.textContent = `${p.name} · Esc or ✕ closes`;
+      return;
+    }
     if (act.action === "enter") {
       if (readout) readout.textContent = `Entering ${p.name}…`;
       if (enterRegion(act.regionId, act.selectId)) return;
@@ -15719,6 +15699,66 @@ function wireMapTierBar() {
  * ⛑ `img[data-lightbox]` is NOT here on purpose: it is already delegated once at the document (line ~2644),
  * so the picture keeps working wherever the card lands. The fifth family, `[data-nethop]`, belongs to the
  * gate network panel BELOW the map and stays bound in `renderMap` where its `netGates` lives. */
+/* ═════ SNG-677 P1–P4 + W7 · THE CARD, ON WHICHEVER MAP IS ASKING ═════
+ * ✅ ERIK: *"the place info should pop up on the map instead of below it."* ✅ AEVI (P5): *"The globe, the
+ * region map, the city and the local map all use this one card."*
+ * ⛔ IT WAS A CLOSURE INSIDE `wireRegionGroundMap` AND THAT WAS ONE SURFACE TOO FEW. W7 asks for the card
+ * over the GLOBE as well, and SNG-678's local maps will be a third host — so the moment there were two, a
+ * function reaching for one canvas's `_regionPick` and one canvas's `review()` was the wrong shape. The host
+ * now hands in its own canvas and its own glyph point; everything else is shared.
+ * ⛑ `glyph` is in CSS pixels RELATIVE TO THE CANVAS, already through whatever mapping that surface uses —
+ * the region map's `review()`, the globe's `project` — because converting is the host's job and the only
+ * thing this function may assume is the frame it is given. A single mapping baked in here is how one of
+ * these surfaces would silently start placing cards at the wrong zoom.
+ * @param extra  optional {label, onClick} for one more button — W7's "Show on region map"
+ */
+function closePlaceCard() {
+  const el = document.getElementById("place-card");
+  if (el) { el.hidden = true; el.innerHTML = ""; el.classList.remove("sheet"); }
+}
+function openPlaceCard({ canvas, id, glyph = null, extra = null }) {
+  const el = document.getElementById("place-card");
+  if (!el || !canvas) return false;
+  const body = placeCardHTML(id);
+  if (!body) { closePlaceCard(); return false; }
+  const r = canvas.getBoundingClientRect();
+  el.hidden = false;
+  el.classList.toggle("sheet", r.width <= 640);
+  el.innerHTML = `<button class="place-card-x" data-cardclose="1" title="Close" aria-label="Close">✕</button>`
+    + (r.width <= 640 ? `<div class="place-card-handle" aria-hidden="true"></div>` : "")
+    + body
+    + (extra ? `<button class="opt" data-cardextra="1" style="margin:8px 0 0">${esc(extra.label)}</button>` : "");
+  wirePlaceCard(el);
+  const xb = el.querySelector("[data-cardclose]");
+  if (xb) xb.onclick = (e) => { e.stopPropagation(); closePlaceCard(); };   // ⛑ P4: closing keeps the selection
+  const xt = el.querySelector("[data-cardextra]");
+  if (xt && extra?.onClick) xt.onclick = (e) => { e.stopPropagation(); extra.onClick(); };
+  // ⛔ MEASURED AFTER THE INK IS IN, because the box depends on the card's own height and that is not known
+  // until the content is there. `placeCardBox` holds the arithmetic so the gate measures these same numbers.
+  const box = placeCardBox({ w: r.width, h: r.height },
+    { w: el.offsetWidth || 320, h: el.offsetHeight || 220 }, glyph);
+  /* ⛔ THE BOX IS MEASURED AGAINST THE CANVAS AND APPLIED AGAINST THE POSITIONED PARENT, and those are not
+   * the same element. ⚠️ On the region map `.rm-wrap` hugs its canvas, so the two agreed and the offset was
+   * invisible. On the globe `.globe-wrap` is 977px wide around a canvas capped at 700 — measured live — and
+   * it only still agreed because the canvas happens to sit at the wrap's left edge. The day anyone centres
+   * that canvas, or puts anything above it inside the wrap, every card would place by that much off and
+   * nothing would throw. ⛑ So the offset is READ rather than assumed to be zero. */
+  const host = el.offsetParent;
+  const hr = host ? host.getBoundingClientRect() : r;
+  const offX = Math.round(r.left - hr.left), offY = Math.round(r.top - hr.top);
+  if (box.mode === "sheet") {
+    el.style.left = `${offX}px`; el.style.right = "auto"; el.style.top = `${offY + box.top}px`;
+    el.style.bottom = "auto"; el.style.width = `${Math.round(box.width)}px`;
+    el.style.maxHeight = `${box.height}px`;
+    return true;
+  }
+  el.style.right = "auto"; el.style.bottom = "auto"; el.style.width = "";
+  el.style.maxHeight = `${Math.max(160, Math.round(r.height - 8))}px`;
+  el.style.left = `${offX + box.left}px`;
+  el.style.top = `${offY + box.top}px`;
+  return true;
+}
+
 function wirePlaceCard(root) {
   if (!root) return;
   const insideBtn = root.querySelector("#map-lookinside");

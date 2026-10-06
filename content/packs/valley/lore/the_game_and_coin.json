@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "the_game_and_coin",
   "kind": "system_content",
-  "note": "Two linked systems, content-defined, needing light engine support (flagged): (1) THE GAME \u2014 a formal ladder of skill-contests played for stakes, the diegetic way to earn coin, standing, favors, and even recruits; inspired by Stile's Game in the Blue Adept / Apprentice Adept series. (2) COIN \u2014 the money system underneath it and the whole economy. The Game is HOW a moneyless newcomer climbs; coin is WHAT they climb with. This resolves Erik's money-system and recruit-for-pay asks together. Engine work needed is minimal and flagged in buildNeeds; the CONTENT (currencies, the Game's structure, contest types, stakes) is authored here. Authored by Aevi (PO), from Erik's Blue Adept framing.",
+  "_note": "Two linked systems, content-defined, needing light engine support (flagged): (1) THE GAME \u2014 a formal ladder of skill-contests played for stakes, the diegetic way to earn coin, standing, favors, and even recruits; inspired by Stile's Game in the Blue Adept / Apprentice Adept series. (2) COIN \u2014 the money system underneath it and the whole economy. The Game is HOW a moneyless newcomer climbs; coin is WHAT they climb with. This resolves Erik's money-system and recruit-for-pay asks together. Engine work needed is minimal and flagged in buildNeeds; the CONTENT (currencies, the Game's structure, contest types, stakes) is authored here. Authored by Aevi (PO), from Erik's Blue Adept framing.",
 
   "coin": {
     "principle": "Wealth is real, tracked, and local. No single currency rules the whole valley \u2014 different powers mint different trust. This keeps money textured and makes MONEY-CHANGERS and FAVORS matter.",
@@ -41,5 +41,5 @@
     "buildNeeds_engine": "GM-EYES: recruit as a party-member with a joinReason {pay|purpose|bond}, a wage or a cause reference, and a loyalty check on stress. Reuses the companion/bond machinery + the new wallet. Flagged for the spec."
   },
 
-  "buildNeeds_summary": "Content here is authorable-now and mostly done. Engine needs, to spec as one batch (money+Game+recruitment share machinery): a wallet + wealthLevel; location-flavored prices; a Game-standing track + stake-transfer resolution; recruit-as-party-member with joinReason + loyalty. All reuse existing check/challenge/bond engines \u2014 this is a medium spec, not a rebuild. Aevi to write it when Erik greenlights turning from content to systems."
+  "_buildNeeds_summary": "Content here is authorable-now and mostly done. Engine needs, to spec as one batch (money+Game+recruitment share machinery): a wallet + wealthLevel; location-flavored prices; a Game-standing track + stake-transfer resolution; recruit-as-party-member with joinReason + loyalty. All reuse existing check/challenge/bond engines \u2014 this is a medium spec, not a rebuild. Aevi to write it when Erik greenlights turning from content to systems."
 }

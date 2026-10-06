@@ -1,7 +1,7 @@
 # The Satiated Sovereigns
 
-⚠️ **DISCOVERABLE, NOT KNOWN.** No common person in the Valley has heard this word. The Abyssal Choir has
-a rule about how far down you go, and the rule exists because of what is under the floor. ⛔ **A GM should
+**DISCOVERABLE, NOT KNOWN.** No common person in the Valley has heard this word. The Abyssal Choir has
+a rule about how far down you go, and the rule exists because of what is under the floor. **A GM should
 never confirm a Sovereign. Confirm an AGENT, and let the shape behind them stay unproven.**
 
 ---
@@ -9,57 +9,57 @@ never confirm a Sovereign. Confirm an AGENT, and let the shape behind them stay 
 ## What they are, and what they are not
 
 The Precursors are the greatest thing that ever **built**. They made a substrate, seeded a world, and left
-an apparatus running long enough that people mistake it for physics. ⚠️ **Every act of theirs was an
+an apparatus running long enough that people mistake it for physics. **Every act of theirs was an
 accommodation with limit** — this material, this tolerance, this much and no more.
 
-⛔ **The Satiated Sovereigns are the greatest thing that ever REFUSED.** They built nothing. They are what
+**The Satiated Sovereigns are the greatest thing that ever REFUSED.** They built nothing. They are what
 remains when something declines every constraint in turn — including, at the end, the constraint of having
 a body to be constrained in.
 
 ➡️ **They are not the Precursors' equivalents in origin. They are their equals in scale and their opposite
 in kind.**
 
-> ⛔ **With one exception, and he is the eldest.** *Erik, 2026-09-24:* **Lucifer was a true Seraph — a Precursor
+> **With one exception, and he is the eldest.** **Lucifer was a true Seraph — a Precursor
 > being**, not a human made radiant by ordered nanite. He made the first light, and the distinction it cast — lit and
-> unlit, seen and unseen — was the most he had ever felt. ⚠️ **He could not stop wanting it.** ➡️ **So the one
+> unlit, seen and unseen — was the most he had ever felt. **He could not stop wanting it.** ➡️ **So the one
 > Sovereign that began as a builder is the proof that the opposition is a choice and not a nature:** he is what a
 > Precursor becomes when the accommodation with limit is refused. *(See "Lucifer, who holds Light".)*
 
-⚠️ **AND THIS IS WHY THE VEIL IS THERE.** It is not a wall someone built. **It is the shape of the gap that
+**AND THIS IS WHY THE VEIL IS THERE.** It is not a wall someone built. **It is the shape of the gap that
 opens when a thing refuses hard enough.** The lattice runs dense where the Precursors worked; the Veil runs
 thin where the Sovereigns pushed. ➡️ **Two ancient powers, and the world between them is where both of
 their leavings still work.**
 
 ---
 
-## ⛔ THE VEIL SIDE IS THE VOID
+## THE VEIL SIDE IS THE VOID
 
-> **Erik, 2026-09-04:** *"The Veil side of the great battle is the VOID."*
+> *The Veil side of the great battle is the VOID.*
 
-⚠️ **This names what has been described only by its shape until now.** The Veil is *"the gap that opens when
-a thing refuses hard enough"* — ⛔ **and what is on the other side of that gap is not a place with different
+**This names what has been described only by its shape until now.** The Veil is *"the gap that opens when
+a thing refuses hard enough"* — **and what is on the other side of that gap is not a place with different
 rules. It is the ABSENCE OF THE RULES.**
 
 | | |
 |---|---|
-| **the lattice** | ⚑ what the Precursors BUILT — density, structure, an apparatus that runs |
-| ⛔ **the Void** | ⚑ **what is left where nothing was built and nothing refused to stop** |
+| **the lattice** | what the Precursors BUILT — density, structure, an apparatus that runs |
+| **the Void** | **what is left where nothing was built and nothing refused to stop** |
 
-➡️ ⚠️ **AND IT EXPLAINS THE BANDS.** Precursor craft wants **dense** ground `{0.90}`; veil craft wants
-**thin** `{0.10}` — ⛔ **because veil craft is not drawing on a THING, it is drawing on the absence of one.**
-✅ *"Thinning one strengthens the other"* stops being a tuning note and becomes a statement about what the
+➡️ **AND IT EXPLAINS THE BANDS.** Precursor craft wants **dense** ground (0.90); veil craft wants
+**thin** (0.10) — **because veil craft is not drawing on a THING, it is drawing on the absence of one.**
+*"Thinning one strengthens the other"* stops being a tuning note and becomes a statement about what the
 two sources ARE.
 
-➡️ ⛔ **AND IT IS WHY THE SOVEREIGNS ARE THERE.** They refused every constraint including having a body to be
-constrained in. ⚠️ **The only place a thing like that can persist is where there are no constraints to
+➡️ **AND IT IS WHY THE SOVEREIGNS ARE THERE.** They refused every constraint including having a body to be
+constrained in. **The only place a thing like that can persist is where there are no constraints to
 refuse** — **so they did not go to the Void. THE VOID IS WHAT THEIR REFUSING LEFT, and they live in it.**
 
-⚑ **A VEIL CRAFT IS THEREFORE NOT "DARK MAGIC". IT IS SUBTRACTION.** `stopped_breath` r2 does not hide the
-world from someone — ⛔ **it puts a little of the Void where the world was, and a little of it stays in the
+**A VEIL CRAFT IS THEREFORE NOT "DARK MAGIC". IT IS SUBTRACTION.** Stopped Breath r2 does not hide the
+world from someone — **it puts a little of the Void where the world was, and a little of it stays in the
 room afterwards.**
 
-⚠️ **Kenosis is the exact inverse and now reads clearly:** a being that *"emptied itself and took a body
-capable of loss."* ⛔ **It emptied itself INTO limit. The Sovereigns emptied themselves OUT of it.** ✅ **Same
+**Kenosis is the exact inverse and now reads clearly:** a being that *"emptied itself and took a body
+capable of loss."* **It emptied itself INTO limit. The Sovereigns emptied themselves OUT of it.** **Same
 act, opposite direction — which is why what remains of Kenosis IS the Veil.**
 
 ---
@@ -68,108 +68,108 @@ act, opposite direction — which is why what remains of Kenosis IS the Veil.**
 
 The Abyssals never called it hell. They call it **the Deep**, and they go down because the going-down is
 where the honest bargains are. The things they meet there want, plainly, and say what they want, and pay.
-⚠️ A Choir singer will tell you the surface is worse — up here people want things they will not name and
+A Choir singer will tell you the surface is worse — up here people want things they will not name and
 take them anyway.
 
 But there is a rule about how far you go, and everyone breaks it once.
 
-⛔ **What you find past the last honest hunger is not hungrier. IT IS FINISHED.** Something that got the
+**What you find past the last honest hunger is not hungrier. IT IS FINISHED.** Something that got the
 whole of what it wanted and did not stop existing afterward — which is the part that should frighten you.
-⚠️ **It has no appetite to trade against. It cannot be offered a lesser.**
+**It has no appetite to trade against. It cannot be offered a lesser.**
 
-Every craft the Choir has — `the_read_hunger`, `appetite_sense`, `offered_lesser`, `struck_term` — is a set
-of tools for negotiating with **need**. ⛔ **These have none.**
+Every craft the Choir has — The Read Hunger, Appetite Sense, Offered Lesser, Struck Term — is a set
+of tools for negotiating with **need**. **These have none.**
 
-⚠️ **THEY ARE COURTEOUS. That is the thing nobody is ready for.** They are courteous and they are not
+**THEY ARE COURTEOUS. That is the thing nobody is ready for.** They are courteous and they are not
 interested, and the two together are worse than any hunger.
 
 ---
 
-## ⛔ SEVEN. ONE TO AN AXIS.
+## SEVEN. ONE TO AN AXIS.
 
 **Not seven appetites. Seven refusals that succeeded.** Each is the total embrace of one half of existence
 with the other half declined entirely.
 
 | axis | the refusal |
 |---|---|
-| **Light / Dark** | ⚑ **Lucifer** — see below |
-| **Mind / Body** | ⚑ **the Unbodied** (`the_ninefold_ascendant`) — Mind, refused Body |
-| **Angelic / Demonic** | ⚑ **the Hollow King** (`the_hollow_king`) — Demonic, refused Angelic |
-| **Span** | ⚑ **the Unmet** (`the_unmet`) — distance entire, refused nearness. ⚠️ **THIN AND RECENT** (SNG-643) |
-| **Life / Death** | ⛑ **HELD BY THE SAVIOR SIDE — Neth, Who Has Buried More Than She Has Known** (`neth_the_stayed`). Challenged by the Thornmother (Life) and Morvane (Death) — either must beat her first (SNG-644) |
-| **Breaking / Building** | ⛑ **HELD BY THE SAVIOR SIDE — the Last Mercy** (`the_last_mercy`). Challenged by the Scouring Hand (Breaking) and Cinder Vael (Building) |
-| **Chaos / Order** | ⬜ **open** — the Still Lattice walks toward it with nobody in the way |
+| **Light / Dark** | **Lucifer** — see below |
+| **Mind / Body** | **the Unbodied** — Mind, refused Body |
+| **Angelic / Demonic** | **the Hollow King** — Demonic, refused Angelic |
+| **Span** | **the Unmet** — distance entire, refused nearness. **THIN AND RECENT** |
+| **Life / Death** | **HELD BY THE SAVIOR SIDE — Neth, Who Has Buried More Than She Has Known**. Challenged by the Thornmother (Life) and Morvane (Death) — either must beat her first |
+| **Breaking / Building** | **HELD BY THE SAVIOR SIDE — the Last Mercy**. Challenged by the Scouring Hand (Breaking) and Cinder Vael (Building) |
+| **Chaos / Order** | **open** — the Still Lattice walks toward it with nobody in the way |
 
-> ⛔ **Span is DISTANCE** (Erik, 2026-09-24). *Spirit* is being allocated across several axes and is no longer this
+> **Span is DISTANCE**. *Spirit* is being allocated across several axes and is no longer this
 > seat's other half; what Span refused is **nearness**, and the name of that half waits on the Spirit work.
 
-⚠️ **The seven deadly sins are not the Sovereigns. They are what a mortal looks like PARTWAY THERE** —
+**The seven deadly sins are not the Sovereigns. They are what a mortal looks like PARTWAY THERE** —
 pride is the Angelic axis with its counterweight refused, gluttony the Life axis, wrath the Breaking axis.
 ➡️ **The sins are the shape of the road, not the thing at the end of it.**
 
-⛔ **THE FOUR HORSEMEN ARE NOT MORE SOVEREIGNS. They are a REACH** — what one sends when it has stopped
+**THE FOUR HORSEMEN ARE NOT MORE SOVEREIGNS. They are a REACH** — what one sends when it has stopped
 negotiating. Conquest, war, famine and death are all outcomes of unrestraint, which is what a Sovereign is
 made of.
 
-⬜ **DO NOT LET THE SEVEN BE TIDY.** Seven axes and seven seats is a lookup table, and a lookup table is
-inert. ⚠️ **An eighth that got there another way, or one axis with two claimants who cannot both be
+**DO NOT LET THE SEVEN BE TIDY.** Seven axes and seven seats is a lookup table, and a lookup table is
+inert. **An eighth that got there another way, or one axis with two claimants who cannot both be
 sovereign, is what keeps this from being arithmetic.**
 
-> ⛔ **THE SEATS BY DESIGN — Erik, 2026-09-24:** *some seats solidly filled, one thin, some open, and some filled with
-> the opposite. This provides world balance and tension.* ⚠️ **And a filled seat is not a kept seat.** A Sovereign
+> **THE SEATS BY DESIGN:** *some seats solidly filled, one thin, some open, and some filled with
+> the opposite. This provides world balance and tension.* **And a filled seat is not a kept seat.** A Sovereign
 > can be slain, starved past recrossing, or displaced by a claimant who finishes — the seat is a position, not a
 > possession.
 >
-> ⛑ **"FILLED WITH THE OPPOSITE" — Erik, 2026-09-24:** *"the axis is dominated by the savior side. Someone holds the
+> **"FILLED WITH THE OPPOSITE":** *"the axis is dominated by the savior side. Someone holds the
 > axis and would need to be beaten by the sovereign challenger."* ➡️ **A held seat is held by RESTRAINT** — someone
 > standing on the axis who refuses neither half. They are not stronger than the challengers; they are in the way.
-> ⚠️ **A challenger cannot take a held seat by finishing; it has to go THROUGH the holder** — and that is where a
+> **A challenger cannot take a held seat by finishing; it has to go THROUGH the holder** — and that is where a
 > player's help matters most.
 
 ---
 
 ## Lucifer, who holds Light
 
-⛔ **He did not want to be GOOD. He wanted to never again be UNSEEN.**
+**He did not want to be GOOD. He wanted to never again be UNSEEN.**
 
 Not glory — **visibility**. To be looked at, always, by everything, with nothing of himself in shadow and
-nothing withheld. He took the whole of the Light axis and refused the Dark entirely, and ⚠️ **what he
+nothing withheld. He took the whole of the Light axis and refused the Dark entirely, and **what he
 refused was privacy**: the right to be partly unknown, to hold something back, to have an inside.
 
 ➡️ **So he has none.** He is entirely surface, radiant through and through, and there is nothing behind it —
-⛔ **not because he is hollow, but because he gave away the capacity to be hidden.** He cannot lie, cannot
+**not because he is hollow, but because he gave away the capacity to be hidden.** He cannot lie, cannot
 rest, cannot be unwitnessed. He shines constantly at everything and nothing shines back into him, because
 there is no in.
 
-⚠️ The Seraphic Orders will tell you he is the enemy. The Abyssals will tell you he is the one Sovereign who
+The Seraphic Orders will tell you he is the enemy. The Abyssals will tell you he is the one Sovereign who
 would still take a bargain, if you could find a coin he does not already own. **Neither is certain.**
 
-### ⛔ What he was — Erik, 2026-09-24
+### What he was
 
 **A true Seraph.** The Seraphs of the world are humans made radiant by ordered nanite, and they bleed gold because
-that is what is in them. ⚑ **He is what they are patterned on:** a Precursor being, from before there was anything
+that is what is in them. **He is what they are patterned on:** a Precursor being, from before there was anything
 to pattern. He made the first light — and *shadow came when light came to the Void*, so he also made the first dark
-that was only relative. ⚠️ **He was addicted to the distinction** — lit and unlit, seen and unseen — and he fell
+that was only relative. **He was addicted to the distinction** — lit and unlit, seen and unseen — and he fell
 toward the Void to keep having it.
 
-- ⛔ **He walks as Eosphor, the Dawn Seraph.** *Eosphoros* is the morning star in a tongue few still read. The mask is
+- **He walks as Eosphor, the Dawn Seraph.** *Eosphoros* is the morning star in a tongue few still read. The mask is
   flawless because it is what he was.
 - **The tells:** he casts no shadow · he is never seen resting · he cannot lie, and turns a question with a truer,
-  more interesting thing · ⛔ **he bleeds light, not gold** — white, and it does not pool. Only drawn blood is
-  conclusive, and it is canon (Erik, 2026-09-24) that every Seraph wound shows gold.
-- ⚑ **Why the Starless hates him:** his first light is the reason the Void is not total. Every shadow is his.
+  more interesting thing · **he bleeds light, not gold** — white, and it does not pool. Only drawn blood is
+  conclusive, and it is canon that every Seraph wound shows gold.
+- **Why the Starless hates him:** his first light is the reason the Void is not total. Every shadow is his.
 
 ---
 
-## ⛔ THEY MUST BE FED
+## THEY MUST BE FED
 
 **Satiation is not a state they reached. It is a state they MAINTAIN.**
 
-⚠️ **That is the real cost of refusing every limit: it does not finish, it becomes a REQUIREMENT.** A thing
+**That is the real cost of refusing every limit: it does not finish, it becomes a REQUIREMENT.** A thing
 that will not be told there is something it does not get has to keep getting, forever, or it stops being
 what it made itself into.
 
-⛔ **THEY ARE NOT FULL. THEY ARE BEING FED.**
+**THEY ARE NOT FULL. THEY ARE BEING FED.**
 
 ➡️ **Which means the Choir's tools work on a Sovereign perfectly well. They simply do not work on a
 Sovereign TODAY.**
@@ -178,25 +178,25 @@ Sovereign TODAY.**
 
 ## The agents are not servants. They are a supply line.
 
-⚠️ **This is why they are everywhere and why none of them look coordinated.** An agent is not carrying out
+**This is why they are everywhere and why none of them look coordinated.** An agent is not carrying out
 a plan. **An agent is a conduit that happens to be a person.**
 
 Someone was read down to the want under the want, offered the true price, and took it — and now produces a
-steady yield of exactly the thing one Sovereign requires. ⚠️ **Lucifer's agents generate BEING SEEN**:
+steady yield of exactly the thing one Sovereign requires. **Lucifer's agents generate BEING SEEN**:
 spectacle, reputation, record, the compulsive witnessing of everything. **They think they are ambitious.**
 
-⛔ **AN AGENT IS NOT POSSESSED. AN AGENT IS CORRECT.** They are the most effective person in the room and
+**AN AGENT IS NOT POSSESSED. AN AGENT IS CORRECT.** They are the most effective person in the room and
 will not be told otherwise.
 
-➡️ ⚠️ **YOU DO NOT DETECT A SOVEREIGN. You detect a run of decisions that are all individually reasonable
+➡️ **YOU DO NOT DETECT A SOVEREIGN. You detect a run of decisions that are all individually reasonable
 and cumulatively impossible.**
 
 ---
 
-## ⛔ WHY ONE NEVER COMES — AND WHAT MAKES ONE COME
+## WHY ONE NEVER COMES — AND WHAT MAKES ONE COME
 
 **Coming here means accepting a place, a shape and a duration — the exact constraints it refused.**
-⚠️ **Manifesting costs a Sovereign the thing it IS.** That, and not distance, is why none has been seen.
+**Manifesting costs a Sovereign the thing it IS.** That, and not distance, is why none has been seen.
 
 **So interruption is the whole game, and it is a genuinely bad trade:**
 
@@ -204,12 +204,12 @@ and cumulatively impossible.**
 |---|---|
 | cut a supply line | the Sovereign **thins** |
 | cut enough of them | it becomes **HUNGRY** — negotiable, offerable-a-lesser, open to every craft the Choir has |
-| ⛔ keep cutting | ⚠️ **IT COMES TO SEE ABOUT IT** |
+| keep cutting | **IT COMES TO SEE ABOUT IT** |
 
-⚠️ **It arrives DIMINISHED, because arriving IS diminishment** — it must accept a shape to act here, and
+**It arrives DIMINISHED, because arriving IS diminishment** — it must accept a shape to act here, and
 the shape is a fraction of what stood behind the Veil.
 
-⛔ **IT IS ALSO THE FIRST TIME THAT THING HAS BEEN HUNGRY IN AN AGE, AND IT IS HERE, AND IT KNOWS WHO DID
+**IT IS ALSO THE FIRST TIME THAT THING HAS BEEN HUNGRY IN AN AGE, AND IT IS HERE, AND IT KNOWS WHO DID
 IT.**
 
 ➡️ **The only way to make a Sovereign negotiable is to make it come.** Every Choir singer knows the rule.
@@ -217,70 +217,70 @@ Everyone breaks it once.
 
 ---
 
-## ⚠️ THE ECONOMY IS ALREADY IN THE GAME, ONE RUNG DOWN
+## THE ECONOMY IS ALREADY IN THE GAME, ONE RUNG DOWN
 
-`offered_lesser` r2 — *"set a standing offering: a place regularly fed, so what lives near it does not take
+Offered Lesser r2 — *"set a standing offering: a place regularly fed, so what lives near it does not take
 what you care about."*
 
-⛔ **That is the whole system in miniature.** The Choir has been running a small, honest version of what the
+**That is the whole system in miniature.** The Choir has been running a small, honest version of what the
 Sovereigns run at scale — which is why they of all people understand it, and why they are the only
 tradition that could ever interrupt one.
 
-⚠️ **And `the_gathering` (bestiary) is the same shape at the bottom** — a thing that thickens on endings
+**And the Gathering is the same shape at the bottom** — a thing that thickens on endings
 nobody attended. **Feeding is not a metaphor down there. It is infrastructure.**
 
 ---
 
-## ⛔ WHO STARVES THEM — and it is not a rescue party
+## WHO STARVES THEM — and it is not a rescue party
 
-⚠️ **ERIK 2026-09-02, and it corrects an earlier framing in this file:** *"They come because they were
+**ERIK 2026-09-02, and it corrects an earlier framing in this file:** *"They come because they were
 starved. And those who are starving them are the ones who can stop them — that's the whole point of world
 arcs and these powerful figures pushing in their ways in this game. And the player is one of them."*
 
-⛔ **THE COUNTERWEIGHT IS NOT SUMMONED BY A SOVEREIGN'S SUCCESS. IT IS ALREADY WORKING.**
+**THE COUNTERWEIGHT IS NOT SUMMONED BY A SOVEREIGN'S SUCCESS. IT IS ALREADY WORKING.**
 
 **Neth** was attending deaths nobody sent for long before anyone named Morvane. **The Deep Lantern** already
-walks the dark. **Halcyon** already made one perfect thing and stopped. ⚠️ **None of them ROSE in response
+walks the dark. **Halcyon** already made one perfect thing and stopped. **None of them ROSE in response
 to anything.** Each was pushing their axis against the foreclosure — ➡️ **and that pushing IS the
 starvation.**
 
-⚠️ **A Sovereign eventually notices who has been costing it.**
+**A Sovereign eventually notices who has been costing it.**
 
-➡️ ⛔ **WHICH IS WHY THE ARRIVAL TARGETS THEM SPECIFICALLY.** Not *"you produced an opponent"* — **"you are
-the reason I am hungry, and you are therefore the only thing that can finish me."** ⚑ **Starving it and
+➡️ **WHICH IS WHY THE ARRIVAL TARGETS THEM SPECIFICALLY.** Not *"you produced an opponent"* — **"you are
+the reason I am hungry, and you are therefore the only thing that can finish me."** **Starving it and
 being able to kill it are the same act at different depths.**
 
-### ⚑ AND THE PLAYER IS ONE OF THEM
+### AND THE PLAYER IS ONE OF THEM
 
-⛔ **NOT the conditions that let a great figure stand. ONE OF THE FIGURES.**
+**NOT the conditions that let a great figure stand. ONE OF THE FIGURES.**
 
-`arc_the_poles_pull` already says it: *"a player who understands the coordinate model can become **an agent
-of the open** against the whole world's drift."* ⚠️ **An agent — alongside Neth, the Deep Lantern, Kesh
+The Poles Pull already says it: *"a player who understands the coordinate model can become **an agent
+of the open** against the whole world's drift."* **An agent — alongside Neth, the Deep Lantern, Kesh
 Ardent, Rethe.** A player at the 30–60 band with a hold, a band and allies is one of them **by the same
 measure the others are.**
 
-### ⚠️ SO IT IS ONE SYSTEM, NOT THREE
+### SO IT IS ONE SYSTEM, NOT THREE
 
 | | |
 |---|---|
 | **greater arcs** | powerful figures pushing in their directions |
 | **foreclosure** | what happens where nobody pushes |
 | **a Sovereign** | what gets fed by foreclosure |
-| ⛔ **the arrival** | what comes when you push hard enough — **because you are the one doing it** |
+| **the arrival** | what comes when you push hard enough — **because you are the one doing it** |
 
 ---
 
-## ⛔ NINETEEN OF TWENTY VILLAINS ALREADY CARRY THEIR COUNTERWEIGHT
+## NINETEEN OF TWENTY VILLAINS ALREADY CARRY THEIR COUNTERWEIGHT
 
-`tradition_epics.json` → `rivals`. ⚠️ **These were authored before any of this and they are structural, not
+**Each of them already has a rival, and the rivalries are structural, not
 thematic:**
 
 | the foreclosure | who has been costing it |
 |---|---|
-| **Valen Sunwrack** — burned the dark out of a Reach | **The Deep Lantern**, who *"sees without light"* — ⚠️ **and who also opposes The Starless One.** She holds no side; she works in the MIDDLE, which is why either extreme starves against her |
+| **Valen Sunwrack** — burned the dark out of a Reach | **The Deep Lantern**, who *"sees without light"* — **and who also opposes The Starless One.** She holds no side; she works in the MIDDLE, which is why either extreme starves against her |
 | **The Unbodied** — dissolved and would take everyone | **The One Who Stayed Embodied** — reached the edge of leaving and chose the flesh |
-| **Harrow** — makes people into mechanisms | **Rethe** — becoming a machine and *"still asking to be talked out of it."* ⚑ **He opposes Harrow because Harrow STOPPED ASKING, which is what a Sovereign is** |
-| **The Lidded Calm** — keeps calm by keeping the wound | **The Keeper of the Unsaid** — ⚠️ **the same act, and the difference is whether you know what it costs** |
+| **Harrow** — makes people into mechanisms | **Rethe** — becoming a machine and *"still asking to be talked out of it."* **He opposes Harrow because Harrow STOPPED ASKING, which is what a Sovereign is** |
+| **The Lidded Calm** — keeps calm by keeping the wound | **The Keeper of the Unsaid** — **the same act, and the difference is whether you know what it costs** |
 | **Morvane** — stopped attending and started dealing | **Neth**, who never once looked away |
 | **The Choirmaster Who Would Not Return** | **The Last Choirmistress** |
 | **The Ender Who Forgot Why** | **Kesh Ardent, the Edge That Holds** |
@@ -290,99 +290,97 @@ thematic:**
 | **The Appetite** | **The Hundred Hands** |
 | **The Final Argument** | **The Kind Liar** |
 
-⬜ **Three carry unresolved or absent rivals** — `the_hollow_king` names `maren_ossitide`, **which does not exist on the roster.** (His other named rival,
-once `seraphine_unbending`, is `the_unbending_witness`, the Verist Seraphine; a different woman from the High
-Luminary, who is Sera. Resolved 2026-09-28.)
+**Three have no named rival yet.**
 
 ---
 
-## ⚠️ SOVEREIGNTY IS ACHIEVED, NOT INNATE — so they are not all the same size
+## SOVEREIGNTY IS ACHIEVED, NOT INNATE — so they are not all the same size
 
-⛔ **These are things that BECAME.** A refusal carried far enough that it succeeded. ➡️ **Which means they
+**These are things that BECAME.** A refusal carried far enough that it succeeded. ➡️ **Which means they
 differ in age, reach and how completely they hold their axis.**
 
-**Lucifer is ancient and holds Light entire.** ⚠️ **A RECENT one — something that reached satiation a
+**Lucifer is ancient and holds Light entire.** **A RECENT one — something that reached satiation a
 generation ago — is THIN:** a small supply line, few agents, an incomplete hold. **Beatable in the 30–60
 band, if the pipeline is found before it sets.**
 
-⬜ **AND IT MAKES AN AUTHORED VILLAIN A TRAJECTORY RATHER THAN A TIER.** The Scouring Hand *"unmakes for the
-joy of it until nothing is left to end."* ⛔ **If it ever finishes, it does not die — IT ARRIVES.**
-⚠️ **A villain you fail to stop is not a defeat. It is a promotion.**
+**AND IT MAKES AN AUTHORED VILLAIN A TRAJECTORY RATHER THAN A TIER.** The Scouring Hand *"unmakes for the
+joy of it until nothing is left to end."* **If it ever finishes, it does not die — IT ARRIVES.**
+**A villain you fail to stop is not a defeat. It is a promotion.**
 
 ---
 
-## ⛔ HELD, NOT OPPOSED
+## HELD, NOT OPPOSED
 
 **The great figures are the counterweight, and mostly do not know it.** Not because they are stronger —
-because ⚠️ **a Sovereign is a thing that took one half of an axis entirely, and the great ones are those
+because **a Sovereign is a thing that took one half of an axis entirely, and the great ones are those
 who REFUSED TO.**
 
 - **Neth** has buried more than she has known and did not stop attending.
 - **The One Who Stayed Embodied** could have gone up, and stayed in the flesh.
-- **Rethe** is replacing himself with the engine and is *still asking to be talked out of it* — ⚠️ **and
+- **Rethe** is replacing himself with the engine and is *still asking to be talked out of it* — **and
   that asking is the whole of what holds a Sovereign back, because a Sovereign is exactly a thing that
   stopped asking.**
 
-➡️ ⛔ **THE BALANCE IS NOT POWER AGAINST POWER. IT IS RESTRAINT AGAINST UNRESTRAINT — and restraint is
+➡️ **THE BALANCE IS NOT POWER AGAINST POWER. IT IS RESTRAINT AGAINST UNRESTRAINT — and restraint is
 thinner, and it holds anyway.**
 
 ---
 
-## ⛔ HOW ONE ESCALATES — and why you need holds, legions and allies
+## HOW ONE ESCALATES — and why you need holds, legions and allies
 
-⚠️ **A Sovereign does not notice you until you cost it something.** Escalation is a function of **how far
+**A Sovereign does not notice you until you cost it something.** Escalation is a function of **how far
 below fed it has fallen**, not of how impressive you are.
 
 | its state | what it does |
 |---|---|
-| **fully fed** | ⬜ **nothing.** You are not visible. It is not being coy — you are genuinely beneath notice |
-| **first losses** | ⚠️ **existing agents are REDIRECTED.** Not sent — redirected. Someone already in your region simply becomes interested in you, and they are correct, effective, and reasonable about it |
-| **sustained interruption** | ⛔ **a CAMPAIGN.** Organised opposition, resources you cannot match, assassins. ⚠️ **It is still not present** — it is spending its remaining supply to protect the rest of it |
-| ⛔ **furthest from fed** | ⚠️ **IT COMES.** Diminished, because arriving is diminishment — and hungry for the first time in an age, and it knows who did it |
+| **fully fed** | **nothing.** You are not visible. It is not being coy — you are genuinely beneath notice |
+| **first losses** | **existing agents are REDIRECTED.** Not sent — redirected. Someone already in your region simply becomes interested in you, and they are correct, effective, and reasonable about it |
+| **sustained interruption** | **a CAMPAIGN.** Organised opposition, resources you cannot match, assassins. **It is still not present** — it is spending its remaining supply to protect the rest of it |
+| **furthest from fed** | **IT COMES.** Diminished, because arriving is diminishment — and hungry for the first time in an age, and it knows who did it |
 
-➡️ ⛔ **THIS IS WHY THE 30–60 BAND IS OUTPOSTS, BANDS AND STRONGHOLDS.** A lone figure can interrupt a
-supply line once. ⚠️ **Only a hold survives the campaign that answers it** — and the arrival is not
+➡️ **THIS IS WHY THE 30–60 BAND IS OUTPOSTS, BANDS AND STRONGHOLDS.** A lone figure can interrupt a
+supply line once. **Only a hold survives the campaign that answers it** — and the arrival is not
 survivable alone at all.
 
-⚠️ **AND THE TRADE NEVER STOPS BEING BAD:** the only way to make a Sovereign negotiable is to starve it,
+**AND THE TRADE NEVER STOPS BEING BAD:** the only way to make a Sovereign negotiable is to starve it,
 and a starved Sovereign is the only kind that comes.
 
 ---
 
 ## THE HOLLOW KING OF THE WILD HALF — the court, and the mandate
 
-*Authored figure, Demonic axis. `tradition_epics.json` → `the_hollow_king`.*
+*Demonic axis.*
 
 > *"Rules a court that keeps every promise to the letter and none in spirit. Grants exactly what you ask.
 > You leave richer and hollowed, and it is years before you find the seam."*
 > **Wants: to be asked. He never takes; he is given.**
 
-⛔ **HE REFUSED THE ANGELIC — authority by decree, the higher law imposed from above.** He took the whole
+**HE REFUSED THE ANGELIC — authority by decree, the higher law imposed from above.** He took the whole
 Demonic half: bargain, consent, the thing freely given.
 
-➡️ ⚠️ **SO EVERY SCRAP OF HIS AUTHORITY MUST BE CONFERRED. That is not a preference, it is the shape of his
+➡️ **SO EVERY SCRAP OF HIS AUTHORITY MUST BE CONFERRED. That is not a preference, it is the shape of his
 refusal.** *"He never takes; he is given"* is not a style — **it is a structural incapacity.**
 
-### ⚑ His hunger is PETITION
+### His hunger is PETITION
 
 **Supplicants. People coming to him and asking.** Every request is a grain of legitimacy.
-⚠️ **The mandate of heaven is the exact frame, because a mandate is REVOCABLE** — conferred authority has
+**The mandate of heaven is the exact frame, because a mandate is REVOCABLE** — conferred authority has
 to keep being conferred or it evaporates.
 
-⛔ **Which is why the court keeps every promise to the letter. HE CANNOT AFFORD TO BE VISIBLY UNJUST.** If
-people stopped asking he would thin. ⚠️ **The seam you find years later is the most he can take without
+**Which is why the court keeps every promise to the letter. HE CANNOT AFFORD TO BE VISIBLY UNJUST.** If
+people stopped asking he would thin. **The seam you find years later is the most he can take without
 breaking the thing that feeds him.**
 
-### ⚠️ THE LORD OF THE SOVEREIGNS CANNOT COMMAND THE SOVEREIGNS
+### THE LORD OF THE SOVEREIGNS CANNOT COMMAND THE SOVEREIGNS
 
-**Because commanding is the thing he gave up.** He can only be *acknowledged*. ⛔ **A throne that must be
+**Because commanding is the thing he gave up.** He can only be *acknowledged*. **A throne that must be
 granted, forever, by everyone who uses it** — and the other six took their axes by refusal and owe him
 nothing.
 
-⬜ Whether the court is a genuine first-among-Sovereigns or a very good imitation of one is **not settled,
+Whether the court is a genuine first-among-Sovereigns or a very good imitation of one is **not settled,
 and should not be.**
 
-### ⛔ HIS INTERDICTION IS THE ONE HOLDS ANSWER
+### HIS INTERDICTION IS THE ONE HOLDS ANSWER
 
 **You do not fight him. YOU STOP ASKING.**
 
@@ -392,64 +390,63 @@ and should not be.**
 | a **legion** | does not need a favour |
 | **allies** | mean you have somewhere else to go |
 
-➡️ ⚠️ **He is the Sovereign whose starvation looks like ordinary competence** — a region that solved its own
+➡️ **He is the Sovereign whose starvation looks like ordinary competence** — a region that solved its own
 problems. **Nobody fighting him would describe themselves as fighting anything.**
 
 ---
 
 ## THE UNBODIED — the vessel trade
 
-*Authored figure, Mind axis. `tradition_epics.json` → `the_ninefold_ascendant`.*
+*Mind axis.*
 
 > *"Dissolved into pure thought and would take everyone out of the flesh with them. Abandons bodies the way
 > others abandon worn clothes, and cannot understand why anyone would grieve the leaving."*
 
-⛔ **ITS POWER IS THE REFUSAL. ITS HUNGER IS THE THING IT REFUSED.**
+**ITS POWER IS THE REFUSAL. ITS HUNGER IS THE THING IT REFUSED.**
 
-It gave up the body, and being unbodied is the whole of its sovereignty. ⚠️ **But it wants a body and what a
+It gave up the body, and being unbodied is the whole of its sovereignty. **But it wants a body and what a
 body feels** — and it can never resolve that, because **taking one back permanently would end the
 sovereignty.** It would be a person again: constrained, mortal, ordinary.
 
 ➡️ **So it wears them BORROWED. One after another. Forever.** Unconstrained, and starving for the exact
 constraint it gave away.
 
-⚠️ **Which is why *"cannot understand why anyone would grieve the leaving"* is in its text. IT IS A BUYER
+**Which is why *"cannot understand why anyone would grieve the leaving"* is in its text. IT IS A BUYER
 REASSURING A SELLER.**
 
-### ⚑ The pipeline: abandoned bodies in good condition
+### The pipeline: abandoned bodies in good condition
 
 **Every ascension practice, every dissolution rite, every Cogitant who reasons their way out of the flesh
 leaves a vessel behind.**
 
-⛔ **AND THE ARC ALREADY SAYS SO.** `arc_the_poles_pull` — a world-scale arc at stage 1 — reads:
+**AND THE WORLD ALREADY SAYS SO.** The Poles Pull, the world-scale arc in its first stage, reads:
 *"the Lattice orders more, the Blaze burns brighter, **THE COGITARIUM ABANDONS MORE BODIES**, the Pale wins
-ground from the Quick."* ⚠️ **That was authored as world-drift. It is a supply line.**
+ground from the Quick."* **That is world-drift. It is also a supply line.**
 
-**Its agent is authored too:** `the_choirmaster_who_would_not_return` — *"would take everyone else out of
-the flesh with him. Not evil; certain, which is worse."* ⛔ **He is not recruiting believers. He is a
+**It has an agent too, the Choirmaster Who Would Not Return** — *"would take everyone else out of
+the flesh with him. Not evil; certain, which is worse."* **He is not recruiting believers. He is a
 supplier who believes he is a liberator.**
 
-### ⛔ ITS COUNTERWEIGHT IS NAMED IN ITS OWN RECORD
+### ITS COUNTERWEIGHT IS NAMED IN ITS OWN RECORD
 
-`rivals: ["the_one_who_stayed_embodied"]` — Mind, hero, who **could have gone up and stayed in the flesh.**
+Its rival is the One Who Stayed Embodied — Mind, hero, who **could have gone up and stayed in the flesh.**
 
-⚠️ **Under this she is not a rival. She is the INTERDICTION** — the proof that the leaving is a choice
+**Under this she is not a rival. She is the INTERDICTION** — the proof that the leaving is a choice
 rather than a destination. ➡️ **You do not starve this one by killing agents. You starve it by staying.**
 
-⬜ **And Rethe fits the same pipeline from the other side** — a man replacing himself with a machine is
+**And Rethe fits the same pipeline from the other side** — a man replacing himself with a machine is
 leaving the flesh by a different road, and he is *"still asking to be talked out of it."*
 
 ---
 
-## ⬜ OPEN, AND DELIBERATELY
+## OPEN, AND DELIBERATELY
 
-⚠️ **Erik 2026-09-02: *"we need to document it and think about it."*** These are recorded as questions, not
-answers:
+These are open questions, not answers:
 
-1. ⛔ **Does a fed Sovereign ADVANCE its arc's stage, or is its feeding the stage's EFFECT?** The first
+1. **Does a fed Sovereign ADVANCE its arc's stage, or is its feeding the stage's EFFECT?** The first
    makes them the engine of the world-drift; the second makes them beneficiaries of a drift with other
-   causes. ⚠️ **The first is stronger and much harder to walk back.**
+   causes. **The first is stronger and much harder to walk back.**
 2. **Does a Sovereign have an ARRIVAL STAGE on an existing arc**, rather than an event of its own?
-   ⬜ If starving one is what makes it come, the arrival is a late stage of an arc already running — which
-   would mean **every greater arc has been building toward this.** ⚠️ Either the right answer or too much.
-3. ⬜ **The four remaining seats** (six when written). ⛔ **Do not fill them in one pass.**
+   If starving one is what makes it come, the arrival is a late stage of an arc already running — which
+   would mean **every greater arc has been building toward this.** Either the right answer or too much.
+3. **The four remaining seats** (six when written). **Do not fill them in one pass.**

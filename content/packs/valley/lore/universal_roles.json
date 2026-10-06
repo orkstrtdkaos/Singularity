@@ -2,7 +2,7 @@
  "schemaVersion": 1,
  "id": "universal_roles",
  "kind": "world_structure",
- "note": "Loose roles common THROUGHOUT the world — the familiar shapes every culture produces (mediator, warrior, warden, healer, keeper, maker, seeker, trader). The role is universal; the METHOD comes entirely from training + locale + disposition. Same role, opposite expression across the axes: a Stillhold mediator buries the truth to keep peace; a Marchward mediator speaks it plainly. This is the connective tissue that makes the world legible (you always know roughly what a 'warrior' or 'healer' does) AND infinitely varied (HOW they do it is local). Weaves through NPCs, origins, generation (SNG-020), and the Reaches. Authored by Aevi (PO), from Erik's universal-roles direction.",
+ "note": "Loose roles common THROUGHOUT the world — the familiar shapes every culture produces (mediator, warrior, warden, healer, keeper, maker, seeker, trader). The role is universal; the METHOD comes entirely from training + locale + disposition. Same role, opposite expression across the axes: a Stillhold mediator buries the truth to keep peace; a Marchward mediator speaks it plainly. This is the connective tissue that makes the world legible (you always know roughly what a 'warrior' or 'healer' does) AND infinitely varied (HOW they do it is local). Weaves through NPCs, origins, generation, and the Reaches. Authored by Aevi (PO), from Erik's universal-roles direction.",
  "principle": "A role is a NEED every human community has — someone to settle disputes, someone to fight, someone to tend the hurt, someone to keep the knowledge. The need is universal; the answer is local. The same role, dropped into different dispositions, becomes wildly different practice — and that difference IS the world's texture. When you meet a 'mediator' you know their function; you do NOT know their method until you know where they trained and what disposition steeps them. The diversity and the extremes drive the narrative: a life-warden finds meaning tending the neglected bodies of the mind-obsessed Cogitants precisely because the role travels and the need appears where a locale can't meet it itself.",
  "roles": [
   {
@@ -76,7 +76,7 @@
     },
     {
      "where": "the Cogitarium (mind, bodies failing)",
-     "how": "The Life-Warden who found their work — a Vivimancer or body-tender who travels to the Cogitarium because the mind-obsessed neglect their own failing bodies; finds meaning tending flesh a whole culture has abandoned. The role appearing exactly where the locale can't meet its own need. (Erik's example, canon.)"
+     "how": "The Life-Warden who found their work — a Vivimancer or body-tender who travels to the Cogitarium because the mind-obsessed neglect their own failing bodies; finds meaning tending flesh a whole culture has abandoned. The role appearing exactly where the locale can't meet its own need."
     },
     {
      "where": "Thornwake / the Deepwood (life+spirit)",
@@ -164,8 +164,8 @@
  ],
  "weaveGuidance": {
   "forNpcs": "Every NPC is (at least loosely) one of these roles + a local method. When authoring or generating an NPC, pick the ROLE (the need they fill) then let their locale/disposition set the METHOD. This is why the same role reads utterly different across the world and why the player can still orient ('ah, a warrior — but a Cogitarium war-thinker, not a Redline duelist').",
-  "forOrigins": "Character origins can be framed as role + homeland: a Redline Warrior, a Hollow-March Warden, a Wend Keeper. The role gives the player a familiar handle; the homeland gives them the method and craft-access (ties SNG-017 creation).",
-  "forGeneration": "SNG-020 generation picks a role for a needed NPC, then derives method from the current area's disposition — a generated 'healer' in the Cogitarium is a body-tender working against the local grain; a generated 'mediator' in the Stillhold buries truth. Role + disposition = a consistent, varied, never-generic person.",
+  "forOrigins": "Character origins can be framed as role + homeland: a Redline Warrior, a Hollow-March Warden, a Wend Keeper. The role gives the player a familiar handle; the homeland gives them the method and craft-access.",
+  "forGeneration": "Generation picks a role for a needed NPC, then derives method from the current area's disposition — a generated 'healer' in the Cogitarium is a body-tender working against the local grain; a generated 'mediator' in the Stillhold buries truth. Role + disposition = a consistent, varied, never-generic person.",
   "forTravel": "Roles TRAVEL. A warden goes where bodies are neglected; a mediator where disputes fester; a maker where something must be built. An NPC far from home is often a role carrying its craft to a need the locale can't meet — instant story (the life-warden in the Cogitarium). The GM should place traveled-roles as living evidence the world's needs cross its regions.",
   "theEngine": "Diversity and extremes drive narrative: put two expressions of the same role in a room (a Redline warrior and a Cogitarium war-thinker; a life-warden and an Ashwarden) and they generate story by contrast alone — same need, opposite method, mutual incomprehension or hard-won respect. Populate for this friction."
  },
@@ -202,6 +202,6 @@
     "conceal"
    ]
   },
-  "generationTie": "When generating a role-instance, ensure their abilities cover their role's functions via the local domain's methods — a Cogitarium Warden covers heal/shield by Noesis-adjacent body-tending against the grain; a Redline Warrior covers strike/shield by the Edge."
+  "gmGenerationTie": "When generating a role-instance, ensure their abilities cover their role's functions via the local domain's methods — a Cogitarium Warden covers heal/shield by Noesis-adjacent body-tending against the grain; a Redline Warrior covers strike/shield by the Edge."
  }
 }

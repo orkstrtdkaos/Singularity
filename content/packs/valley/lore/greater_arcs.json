@@ -191,7 +191,7 @@
     {
      "id": "node_the_reclamation_site",
      "name": "The Reclamation Site (Echo Watershed)",
-     "origin": "the quest 'What the Water Remembers' (content/packs/valley/quests.json) — the authored quest-face of this arc node",
+     "origin": "the quest 'What the Water Remembers' — the quest-face of this arc node",
      "what": "A pre-Transition nanite reclamation system in the upper Disputed Zone, disturbed and partially reactivated, running a standing instruction: 'prepare the watershed.' The same source the water_crisis event points at (its GM-EYES-ONLY truth), now also reachable as a real quest with a decided, branching outcome per player. The ambient event and the quest are two faces of one thing: the crisis is the shared world-arc pressure; the quest is a player's handle on it.",
      "significance": "Same fork as The Carried Sleeper, at industrial rather than living scale: sealed (foreclosure, lose the system and whatever it was for) / let finish (opening, the watershed transformed into something unknown) / redirected (the instruction amended on purpose — the hardest-earned, requires the technical or death-sensed truth of the quest's middle stages).",
      "watchers": [
@@ -1207,8 +1207,8 @@
   }
  ],
  "convergence": "These five greater arcs all feed the single world-question: as the substrate wakes (What Wakes Beneath), the poles pull harder (The Poles Pull) and reality manifests anew (The Second Manifestation), and the whole world tends toward foreclosure — pole by pole, domain by domain — unless someone holds the aperture open. The Valley's six arcs are the near, local, playable faces of these. A character's whole journey, across Reaches and domains, is which way they tip the world: toward the pure dead poles, or toward the open, mixed, living middle. The map is the argument, and the player is a vote in it.",
- "designNote": {
-  "note": "⚠️ SNG-273/2.0.0. A stage carried only `publicFace` and `pressureOnAdvance` — both NARRATION — so the whole world-sim chain resolved into a number that changed a sentence. `effects[]` is what makes a stage MEAN something. THE DESIGN RULE: a stage changes THE WORLD'S BEHAVIOUR, never taxes the player's sheet. A flat -1 to rolls is a punishment; grammar-work costing double in the Bleed is a WORLD, and a player can route around it.",
+ "_designNote": {
+  "note": "SNG-273/2.0.0. A stage carried only `publicFace` and `pressureOnAdvance` — both NARRATION — so the whole world-sim chain resolved into a number that changed a sentence. `effects[]` is what makes a stage MEAN something. THE DESIGN RULE: a stage changes THE WORLD'S BEHAVIOUR, never taxes the player's sheet. A flat -1 to rolls is a punishment; grammar-work costing double in the Bleed is a WORLD, and a player can route around it.",
   "kinds": {
    "craftCost": "multiplier on energy/skill cost. `match.traditions` may list traditions or the special token `__crossDomain__`, which multiplies cost for any craft outside the character's own domain.",
    "encounterBias": "weight multiplier on the named encounter tags in the random pool.",
@@ -1216,7 +1216,7 @@
    "travelCost": "multiplier on route time / passage difficulty.",
    "npcMood": "how a tradition's NPCs receive the player; `traditions: ['*']` means everyone."
   },
-  "visibility": "⚠️ REQUIRED, per Erik: mechanics must be VISIBLE. Show the active effects in plain words on the World tab, AND at the point of use — a raised cost reads 'Latticework — 12 energy (+4, the Bleed)'. A player must never have to open a screen to learn why something got harder.",
+  "visibility": "REQUIRED, per Erik: mechanics must be VISIBLE. Show the active effects in plain words on the World tab, AND at the point of use — a raised cost reads 'Latticework — 12 energy (+4, the Bleed)'. A player must never have to open a screen to learn why something got harder.",
   "upsides": "Not every stage is decay. What Wakes Beneath makes precursor craft answer more easily; the Manifestation Storm does the same for figure-work and the numinous. Some people want these arcs to advance, and they are not wrong to."
  }
 }

@@ -1724,6 +1724,25 @@ that renders.**
 corpus exists to be argued with, not extended by hand forever.
 
 
+### 29.7 ⛔ PLAYER-FACING WORDING CARRIES NO BUILD WORDS
+
+**Erik, 2026-10-06:** *"Just make sure to remove any wording you added that shouldn't be player facing… like .json
+and generating and if it's a fix, etc. Make this a general rule for your output products."*
+
+Anything a player can read, or the GM reads as the world, must be written in the world's own terms. That includes
+place and site names and descriptions, lore, NPC prose, map labels and the text in mock-ups. It never contains:
+
+- file names or extensions (`.json`, `.md`);
+- ticket ids (SNG-, CCODE-);
+- "authored", "generated" or "generator" about the build;
+- "fix", "corrected", "was", "moved" or "rebuilt";
+- Erik's or anyone's dated rulings as attributions;
+- test or measurement talk;
+- authoring glyphs.
+
+Build history goes in `_`-prefixed keys, `why` fields that no reader shows, `po/` files and commit messages.
+Before shipping content, read the strings the way a player would meet them.
+
 ---
 
 ## 30. The Power Cosmology, the Veil, and the 14-Tradition Restructure (2026-08-15)

@@ -2,7 +2,7 @@
  "schemaVersion": 1,
  "id": "crossing_wards",
  "kind": "lore",
- "note": "SNG-675 M13 (the mocks next to the game): the Crossing's districts inside the wall. Erik 2026-10-04 asked for the Crossing to look like a big city with its places laid out; the four names in Aevi's mock were placeholders. Now that the twelve roads leave in twelve true directions (SNG-676), each avenue's ward takes its character from the road it lines, the same derivation CCODE-604 used for the quarters outside the gates. Inside the wall the wards are the city's own; outside, the quarters are the road's. Keyed by the foothill each avenue runs to.",
+ "_note": "the Crossing's districts inside the wall. Erik 2026-10-04 asked for the Crossing to look like a big city with its places laid out; the four names in Aevi's mock were placeholders. Now that the twelve roads leave in twelve true directions, each avenue's ward takes its character from the road it lines, the same derivation CCODE-604 used for the quarters outside the gates. Inside the wall the wards are the city's own; outside, the quarters are the road's. Keyed by the foothill each avenue runs to.",
  "principle": "The Crossing is every tradition's market, so its wards are the traditions' trades in miniature, arranged by which gate they face. A ward is not a territory and nobody rules it; it is the street a stranger from that direction finds familiar first.",
  "wards": {
   "dusklow": { "name": "the Lanternless Ward", "faces": "the Underlight", "character": "Lamps hooded at dusk by custom, and nobody complains. Umbral traders lodge here, and so do people who would rather not be looked at." },
@@ -18,6 +18,6 @@
   "greenmarch": { "name": "the Green Ward", "faces": "the Heartroot", "character": "Gardens, herbalists and the city's orchards, running up to the edge of the Ent Grove. The only ward with birds." },
   "thinwater": { "name": "the Thin Ward", "faces": "the Numen", "character": "Shrines, hermitages and the quietest streets in the Crossing. People come here to be told nothing, kindly." }
  },
- "forTheMap": "One name per avenue, drawn inside the wall along its avenue in the district style (spaced capitals, faint). The quarter outside the same gate keeps its own character from the road (CCODE-604); the ward inside is the city's half of it.",
+ "_forTheMap": "One name per avenue, drawn inside the wall along its avenue in the district style (spaced capitals, faint). The quarter outside the same gate keeps its own character from the road; the ward inside is the city's half of it.",
  "gmMandate": "When a scene is in the Crossing, the ward is the texture: say which ward the street is in, and let it be the one facing the way the character came in or is heading out."
 }

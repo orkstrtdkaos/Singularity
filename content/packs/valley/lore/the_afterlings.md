@@ -1,16 +1,12 @@
 # The Afterlings: the dead who stayed
 
-*Canon profile. Aevi (PO), 2026-09-25, from Erik's rulings of 2026-08-24, 09-09 and 09-13 (SNG-567) and his ask of
-2026-09-25: "the undead people — the afterlings — get a full profile and a home and power structures." Places,
-powers and people: `po/staged_content/changesets/SNG-649_the_afterlings.json`.*
-
 ---
 
-## ⛔ What an Afterling is
+## What an Afterling is
 
 **An undead person. The same mind, the same wants, the same grudges.** An Afterling is not a Raised Hand, which is a
 body *set* to work that doesn't think or remember. An Afterling thinks, remembers, and keeps its crafts and its
-people. SNG-567: *"anything else is a new character with your name on it, and the point is that it is still you."*
+people: anything else would be a new character with the old name on it, and the point is that it is still them.
 
 **What is missing, and what they can tell is missing:**
 - They are cold, and they don't tire, sleep or heal.
@@ -22,17 +18,17 @@ people. SNG-567: *"anything else is a new character with your name on it, and th
 errand until nothing but the errand is left is *the driven*: unminded purpose, extremely dangerous, and not a person.
 An Afterling is the stable end: *"it can be talked to, hired, married, wronged."*
 
-## ⚑ The five doors
+## The five doors
 
 How someone becomes an Afterling decides what they carry. The Vigil asks every newcomer which door they came through.
 
 | door | how | what it leaves them with |
 |---|---|---|
-| **raised** | a Grave-Caller held the body past its ending and set it working; somewhere in the work, someone started doing the working | ⚠️ **nobody asked them.** Most of Cairnsend came this way, and the question of consent is its politics |
+| **raised** | a Grave-Caller held the body past its ending and set it working; somewhere in the work, someone started doing the working | **nobody asked them.** Most of Cairnsend came this way, and the question of consent is its politics |
 | **refused** | they would not accept their ending and did not get the road back either: **the Unfinished** | the argument. Orsolya at the Last Cairn has been having it for forty years |
-| **failed retrieval** | someone who loved them reached into the dark and got it wrong (SNG-567) | ⛔ **the cruellest door is the kind one.** *"They came, and this is what came back."* A player can walk through it and play the second half of the game as an Afterling |
+| **failed retrieval** | someone who loved them reached into the dark and got it wrong | **the cruellest door is the kind one.** *"They came, and this is what came back."* A player can walk through it and play the second half of the game as an Afterling |
 | **unattended** | nobody raised them and nobody attended them; they simply did not stop | a habit that became a life. Owain Fellowes has kept the same sluice for ninety years |
-| ⚑ **made** | **only one.** A Wright closed the last joint of a person the way a maker closes a joint | see §4. She is not arguing with her ending. She has none left |
+| **made** | **only one.** A Wright closed the last joint of a person the way a maker closes a joint | see §4. She is not arguing with her ending. She has none left |
 
 ## Where they live: Cairnsend, at the end of the tending
 
@@ -52,12 +48,12 @@ ordinary.
 
 ## Under the ground
 
-Erik, 2026-10-04: *"There should be Afterlings in various places underground."* The under-world is cold, sleepless
+*There should be Afterlings in various places underground.* The under-world is cold, sleepless
 and dug by crews, so the dead who stayed are thick down there. There is **the Long Shift** along the harvest bores,
 four centuries unattended, some still people and some narrowed into the driven. There are **the drowned of
 Undermere**, **the shift-keepers of Deepmark**, where the dead are asked (the Vigil's proof that asking can be done),
 the keeper of **the Orchard Gone Out**, and the uncounted mappers of **the Service Ways**. They keep to the dark
-strata, because a kept sun is daylight and daylight hurts. Full canon: `the_deep_below` → `theDeadBelow`.
+strata, because a kept sun is daylight and daylight hurts. Full canon: The Deep Below, the dead below.
 
 ## Who holds power over them
 
@@ -72,7 +68,7 @@ strata, because a kept sun is daylight and daylight hurts. Full canon: `the_deep
 point out that the Palelands drink because of the crews. Half the Vigil were raised that way themselves, and would
 not exist if someone had asked first. Nobody on either side is a villain, and that is why it hasn't been settled.
 
-## ⛔ §4 — The Finished, who is the only one of her kind
+## §4 — The Finished, who is the only one of her kind
 
 **Idra Clary Hollin** was a Wright's apprentice at the Forge-Eternal: Silas Weir's apprentice, the first person he
 taught. She died when a scaffold of the Ceaseless came down over the Wrights' north workshop. Cinder Vael's builders
@@ -88,7 +84,7 @@ wright's close, the last joint pressed home.** He finished her.
 - **She is three things, and she can't tell where the seams are.** Part of her is who Idra was when she died. Part is
   who Silas believed she was going to become, filled in from a teacher's idea of his student. The part neither of
   them knew was filled from the thin place, from nothing. *"Half-made in his image and half-made in nothing's."*
-- **She can't tire and she can't heal, because nothing is missing.** ⛔ **She can't be carried back.** *Carried Name*
+- **She can't tire and she can't heal, because nothing is missing.** **She can't be carried back.** *Carried Name*
   pulls toward how a person actually is, and she is exactly how she is.
 - **Deathsense reads her as neither living nor inverted, but as a still point.** A warden who meets her doesn't have
   a word for what they're sensing.
@@ -103,6 +99,5 @@ the thin place with the door closing behind him.
 endings, and she never had to. The Vigil doesn't know what she is. Grave-Master Dunstane would very much like to know
 how it was done. And **the Ceaseless have heard that there is a finished thing in the world that a Wright can build
 onto forever.**
-
-*For the GM: her part in Silas's arc (stages 2 and 3) and the tie to his nemesis are in her record's `secretsGM` and in
-`po/SPEC_SNG-649`. Nothing here forecloses his routes.*
+
+*For the GM: her part in Silas's arc (stages 2 and 3) and the tie to his nemesis are in her own GM-eyes record. Nothing here forecloses his routes.*

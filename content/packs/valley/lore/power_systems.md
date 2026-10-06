@@ -1,9 +1,5 @@
 # Power Systems — How Abilities Work in the World
 
-Amended 2026-08-08 (SNG-376/377, Erik-ratified). The previous version opened "All power in this world
-is nanite-mediated." That was the founding claim and it is no longer true — it was already partly
-overturned by SNG-172 in July, and the cosmology below overturns the rest.
-
 ## The Precursors
 
 The Precursors are the entities Genesis describes — Father, Son, Holy Spirit, the angels. Very powerful
@@ -66,9 +62,7 @@ processing."
    same way twice.
 4. Metaphysical — mind reaching past matter, opened by the Transition. It wants THIN ground:**
    a mind reaching past matter is interfered with by a dense lattice, not helped by it. It asks little of
-   the place and everything of the practitioner. *(Corrected 2026-08-08: an earlier draft said it asks
-   nothing of the ground, which contradicted the ratified school ruling — the Reaching Mind wants thin
-   ground and the Instrumented wants dense, and that opposition is the whole point of schools.)*
+   the place and everything of the practitioner.
 5. **Body and technique — trained flesh, breath, hand, and years. It asks nothing of anything.
    Thin ground is quiet ground: natural craft is at its best where the lattice is at its worst.**
 
@@ -115,10 +109,6 @@ about it, and they do not love the Abyssals.**
 - Radiant (photonic) — light-bending, spectra-sight, coherent beams, mirage and revelation.
 
 ## The unexplored north
-
-AMENDED 2026-08-09 (Erik). The previous line read "beyond the mountains, five great civilizations
-shape whole climates with their own systems" — written when the Valley was the whole game, and the number
-was a Valley-scale guess about a world that has since been mapped.
 
 North of the known coast the world frays out into open water, and beyond it there is land nobody on this
 map has walked: landmasses and island chains, unnamed, uncounted.** Not "five civilizations" — an

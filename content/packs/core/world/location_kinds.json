@@ -313,6 +313,91 @@
     "remembered": "{place} has not forgotten the {thing}."
    }
   },
+  "jobs": {
+   "_what": "Mending is work on the job list, like any other job: do it yourself, send people, or assign a band. One job brings a thing up one rung (destroyed to ruined, ruined to damaged, damaged to whole). Erik, 2026-10-06: they are like quests you can delegate or assign people to, or just do yourself. SNG-679 R6.",
+   "needs": {
+    "default": [
+     {
+      "family": "RESTORE",
+      "weight": 2
+     },
+     {
+      "family": "SHAPE",
+      "weight": 1
+     }
+    ],
+    "road": [
+     {
+      "family": "RESTORE",
+      "weight": 2
+     },
+     {
+      "family": "MOVE",
+      "weight": 1
+     }
+    ],
+    "waygate": [
+     {
+      "family": "SHAPE",
+      "weight": 2
+     },
+     {
+      "family": "KNOW",
+      "weight": 1
+     }
+    ],
+    "water": [
+     {
+      "family": "RESTORE",
+      "weight": 2
+     },
+     {
+      "family": "SUSTAIN",
+      "weight": 1
+     }
+    ],
+    "ground": [
+     {
+      "family": "SUSTAIN",
+      "weight": 2
+     },
+     {
+      "family": "RESTORE",
+      "weight": 1
+     }
+    ],
+    "resettle": [
+     {
+      "family": "SUSTAIN",
+      "weight": 2
+     },
+     {
+      "family": "SHAPE",
+      "weight": 1
+     },
+     {
+      "family": "PROTECT",
+      "weight": 1
+     }
+    ]
+   },
+   "effortDays": {
+    "destroyed": 12,
+    "ruined": 6,
+    "damaged": 2
+   },
+   "onBoardMax": 3,
+   "withinDays": 2,
+   "_board": "At most three mending jobs on a board at once, nearest first, from things the character knows of within two days of where they are or of one of their holds. The place card lists them all.",
+   "labels": {
+    "mend": "{Mend} the {thing} at {place}",
+    "makeGood": "Make good the {thing} at {place}",
+    "remake": "Make the gate at {place} again",
+    "resettle": "Resettle {name}"
+   },
+   "from": "the people of {place}",
+   "giftLine": "Done as a gift. Nothing asked."
+  },
   "_numbers": "First cut. Erik rules the numbers."
  },
  "_poleWarning": "⛔ 12 locations are `pole` — pure extremities like the Blaze, the Scouring, the Numen. THEY ARE NOT TOWNS and an icon that says 'settlement' would lie about the most dangerous places in the world. ⚠️ They want their own mark.",

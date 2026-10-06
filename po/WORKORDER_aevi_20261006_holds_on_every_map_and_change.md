@@ -294,7 +294,7 @@ a reward they pay) and the change was `named` or `described`:
 **R4 · Or a player does the work, and is rewarded.**
 
 - Every game shows the job at the place, drawn from the shared record: `wanted` ("Wanted at {place}: hands to
-  {mend} the {thing}"). Use the SNG-677 card, and the place's job list where there is one.
+  {mend} the {thing}"). It appears on the SNG-677 card, **and on the character's job list (R6)**.
 - A player can:
   - **pay** for materials and hands: the repair value in goods from their store or in currency;
   - **or do the work** in passes, the way clearing a hold's room works (`holdStore.slots.clearing`).
@@ -319,6 +319,58 @@ a reward they pay) and the change was `named` or `described`:
 (`repair`), at `repairCost` from the hold's store. No locals and no job board are involved. Another player can't mend
 your hold uninvited. Gifting work to a hold is a later question.
 
+**R6 · Mending is a job on the job list.** Erik:
+
+> *"You could have local jobs like that show up on the job list — they're like quests you can delegate or assign
+> people to, or just do yourself."*
+
+So R4's work goes through the job system that exists: `jobstate.js` holds the board, `jobs.js` the plan and the roll.
+It needs no new machinery for who goes. You can send yourself (`"player"`), people, a delegate or a band, the same way
+you send anyone on a job.
+
+- **Posting.**
+  - Each damaged, ruined or destroyed thing the character **knows of** (S7) that is within `jobs.withinDays` of where
+    they are, or of one of their holds, is posted to their board with `postJob`.
+  - At most `jobs.onBoardMax` mending jobs are on a board at once, nearest first. The board's cap is 12, and mending
+    must not crowd out the GM's jobs. The place card lists all of them.
+  - **The id is derived from the shared key and the rung,** for example `mend:road:a|b:ruined`. Re-posting it
+    replaces it, and a rung that has been mended takes its job off every board on the next adopt.
+- **One job is one rung:** destroyed → ruined → damaged → whole. A razed bridge is three jobs, and the scaffolding
+  shows between them.
+- **The job.**
+
+  | field | value |
+  |---|---|
+  | `label` | `jobs.labels.mend` with `{Mend}` = `reckoning.words.mend[state]`, capitalised |
+  | `where` | the place |
+  | `from` | `jobs.from` |
+  | `needs` | `jobs.needs[class]`, else `default` |
+  | `effort` | `jobs.effortDays[state]` |
+  | `level` | from the thing's build value, like any priced job |
+
+  The stakes are `crystal`, the R4 reward for that rung inside `normalizeJob`'s level clamp; `standing`,
+  `repair.playerReward.standingSteps[state]` clamped to the job's ±2; and a new **`mend`**.
+- **`stakes.mend = { key, from, to, goods }`, built like CCODE-452's `raise`:**
+  - a success climbs the rung through `applyMapChange`, as `repaired` with `by` set to the character;
+  - anything short of a critical failure gives the goods back;
+  - a critical failure spends them.
+
+  The team's share goes into the shared `repair.byPlayers[characterId]` on landing, and that is what R3's debt and
+  R4's reward read.
+- **Three variants of the same job:**
+  - **The gift.** The player can mark it as a gift before sending. The stakes then carry no crystal, the card reads
+    `jobs.giftLine`, the standing is still earned, and the share is gifted (R4).
+  - **The culprit's own job:** `jobs.labels.makeGood`. It carries no crystal; a success reduces the `damages` debt by
+    the rung's value; and it is always on the culprit's board, past `onBoardMax`, while the debt stands.
+  - **What the locals won't do:** `remake` for a broken gate, at the cost of making one, and `resettle` for a razed
+    place. A successful resettle founds the place through SNG-672 M1 at the trace's position, with the old name
+    offered back.
+- **Two players on the same rung** both work it. Whoever lands the success completes the rung, and both are paid by
+  share (R4). A job whose rung was finished elsewhere while the team was out comes home with "someone got there
+  first". The team keeps its time spent and is paid for the share it did.
+- **The GM** sees mending jobs in `jobsForGM` like any other, and can offer one from a scene. "The miller asks if
+  you'd help with the wheel" is the same job, posted by the GM.
+
 ## Content shipped with this order (mine, on origin with this commit)
 
 - **`economy.json` → `holdFeatures.kinds[*].siteKind`:** all 44 feature kinds name their site glyph from the closed
@@ -331,7 +383,8 @@ your hold uninvited. Gifting work to a hold is a later question.
 - **`location_kinds.json` → `mapStates`:** the ladder, the changes, the player-facing words for every class in S0,
   `knowledge` words, `effects` and `repairCost`. Also `repair`, which holds the locals' pace, what they won't mend and
   the player reward, and `reckoning`, which holds the debt kind, the search pacing, the outcomes and the lines a player
-  reads. The words are world language only (SYSTEM_SPEC §29.7). Build notes sit under `_`.
+  reads. `jobs` holds, for mending jobs, the needs by class, the effort by rung, the board cap and reach, and the
+  labels. The words are world language only (SYSTEM_SPEC §29.7). Build notes sit under `_`.
 - **Your ruling from CCODE_20261006 (`regionDisplay` precedence): your reading is right. Implement it.** An entry is
   an explicit decision: `suppressAtRegion` suppresses, any other entry keeps, and the 0.5° rule decides only places
   with no entry. `_suppressionRule` now says so.
@@ -387,6 +440,13 @@ your hold uninvited. Gifting work to a hold is a later question.
   - No path pays coin.
   - The culprit's own work pays nothing and reduces their debt instead.
   - A burning mended entirely by gifted work leaves no debt and sends nobody.
+- **G14 · Mending is a job.**
+  - A ruined road two days from the character is on their board, with RESTORE in its needs.
+  - Sending a team of the player, a delegate or a band works the same way.
+  - A success makes it damaged on the shared record, and the next rung's job replaces it.
+  - A gifted success pays no crystal and still gives standing.
+  - The culprit's own job pays nothing, reduces the debt, and stays on the board past the cap.
+  - A rung finished by another player takes the job off this board on the next adopt.
 - **G9 · Player-facing words.** Every string in `mapStates.words` and `knowledge` passes the §29.7 check (no ticket
   id, no file name, no build words).
 
@@ -398,7 +458,7 @@ your hold uninvited. Gifting work to a hold is a later question.
 3. **H1 + H3 + H4** (holds on the world and region maps).
 4. **S5 + S6 + S3 + S4** (state drawn and played; the channels).
 5. **H6 + H7**, once SNG-678 L1/L2 are in (holds and features on local maps).
-6. **Part R** (the locals' repair, the reckoning, the reward), once S1–S6 are in.
+6. **Part R** (the locals' repair, the reckoning, the reward, and mending on the job list), once S1–S6 are in.
 7. **H5, S7, S8.**
 
 **Ruled (Erik):** one world. The first draft of this order asked whether state was per save; S2 and Part R are his

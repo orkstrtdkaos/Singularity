@@ -493,7 +493,7 @@ leader when you meet again, and nobody arranged that — the world grew while yo
 # PART X · WHERE YOU BEGIN
 
 Exesa has a hundred and forty authored places across thirty-eight regions, and you do not all begin
-in the same one.** Where you start decides which of the world's troubles is *yours* — the water crisis
+in the same one. Where you start decides which of the world's troubles is *yours* — the water crisis
 belongs to the valley, and someone who begins in the Deepwood will meet a different quarrel entirely.
 
 What a starting place has in common with every other one:
@@ -501,14 +501,14 @@ What a starting place has in common with every other one:
 | | |
 |---|---|
 | **somewhere ordinary** | a village, a crossing, a stilt-town. **Nothing has happened there yet**, and that is the point of it |
-| **somewhere close that is not ordinary | a few hours' walk. You will hear about it before you see it |
-| people who were there before you** | with their own work, their own debts, and their own opinion of you |
-| **a road | going somewhere worse, and somewhere better, and the choice is not marked |
+| somewhere close that is not ordinary | a few hours' walk. You will hear about it before you see it |
+| people who were there before you | with their own work, their own debts, and their own opinion of you |
+| a road | going somewhere worse, and somewhere better, and the choice is not marked |
 
 ## The valley, as an example of one
 
 If you begin in the valley: Millbrook is a riverside farming village on the Echo, water wheels along the
-bank, a fen to the south the road has to go round. Ordinary on purpose.**
+bank, a fen to the south the road has to go round. Ordinary on purpose.
 
 | | |
 |---|---|
@@ -522,20 +522,20 @@ bank, a fen to the south the road has to go round. Ordinary on purpose.**
 And seven kilometres east, the fringe of a Disputed Zone — where you feel a quarrel that is 113 walking
 days away and not yours.
 
-**Every region has its own version of this list. Yours will not be these places.
+Every region has its own version of this list. Yours will not be these places.
 
 ## What is pressing, where you are
 
-There is no single story waiting for you.** The valley carries **six live arcs** at once, and they move
+There is no single story waiting for you. The valley carries six live arcs at once, and they move
 whether you touch them or not. The one nearest your hand depends on where you are standing — start in
 the Deepwood and the water is somebody else's problem, and stays that way.
 
 | arc | pressure | what it is doing |
 |---|---|---|
-| **The Second River | high | contamination spreading from the Echo outward — well-water, then gardens, then the cities' lower districts |
-| The Patient Buyer | medium | someone buying pass-debts cheaply and patiently, assembling the free crossroads by arithmetic instead of force** |
+| The Second River | high | contamination spreading from the Echo outward — well-water, then gardens, then the cities' lower districts |
+| The Patient Buyer | medium | someone buying pass-debts cheaply and patiently, assembling the free crossroads by arithmetic instead of force |
 | **The Long Reach | medium | two aligned cities extending quiet control over unaligned places — safety in exchange for autonomy** |
-| **The Question of Knowledge | medium | the Lost Archive, and the pressure to seize, burn or open it building from every side |
+| The Question of Knowledge | medium | the Lost Archive, and the pressure to seize, burn or open it building from every side |
 | What Sleeps Under | slow-building | the Precursor lattice stirring beneath the valley |
 | The Failing Accord | slow-building | the Green Accord failing as the Old Stag dies |
 
@@ -557,13 +557,13 @@ good or ill is play — and an arc you ignore does not wait politely.
 
 ## Who you deal with
 
-Ten accords hold the valley together and they are things you deal with**, not factions you join:
+Ten accords hold the valley together and they are things you deal with, not factions you join:
 
 - **The Water Authority** decides who gets the river. Since the shoreline moved, that decision is
  worth more than it was, and everyone knows it.
-- **The Masons' road-and-bridge accord keeps the crossings open. They are the reason you can get
- anywhere, and they are owed by everyone.
-- The burying trades at Greyhearth** handle every road's dead. Nobody finds it grim. Everyone there
+- **The Masons' road-and-bridge accord keeps the crossings open. They are the reason you can get**
+** anywhere, and they are owed by everyone.**
+**- The burying trades at Greyhearth** handle every road's dead. Nobody finds it grim. Everyone there
  has handled it. An accord is a standing arrangement, not a membership. You do not sign up. You come to it with
 something it wants, or you come to it needing something, and either way it remembers which.
 
@@ -573,18 +573,18 @@ something it wants, or you come to it needing something, and either way it remem
 
 ## The nine who might walk with you
 
-**A companion is not a resource. Everything they bring, they bring because of what they are — and when
+A companion is not a resource. Everything they bring, they bring because of what they are — and when
 one goes down, you lose the specific thing they were doing, not a percentage.
 
 | | what it is | what it costs when it goes down |
 |---|---|---|
 | Aevi** | a curious swarm of nanite-motes | **the perimeter goes dark — no warning breath before danger. It is scattered, not killed; the motes drift back over hours, dimmer, and wary of that ground |
-| Bristle | a scarred marsh-hound with more sense than most people | the pack-read is gone — no plain answer on whether a danger is people-shaped or place-shaped**. And the party fights the rest of it angry |
+| Bristle | a scarred marsh-hound with more sense than most people | the pack-read is gone — no plain answer on whether a danger is people-shaped or place-shaped. And the party fights the rest of it angry |
 | **Coil | a Precursor maintenance-thing that has adopted you | Precursor mechanisms stop answering, and anything Coil was quietly keeping working starts failing** |
 | **Ember | a Glade-touched fox-thing that chose to walk out of the Glade | you walk onto Precursor-active ground blind. It goes back to the Glade to heal, and whether it returns is a real question** |
 | **Hush | a thing of the deep dark that finds you interesting | the kept dark lifts and you are abruptly present**, mid-scene, at the worst moment |
-| **Marrow | a carrion bird that attends endings, including yours | nothing is attended — in a fight where people are dying, you lose the only thing that knows the schedule |
-| Quill | a disgraced Heights scholar chasing a question the colleges closed | no surfaced fragment, no unexpected approach. Going down confirms something they already suspect about themselves** |
+| Marrow | a carrion bird that attends endings, including yours | nothing is attended — in a fight where people are dying, you lose the only thing that knows the schedule |
+| Quill | a disgraced Heights scholar chasing a question the colleges closed | no surfaced fragment, no unexpected approach. Going down confirms something they already suspect about themselves |
 | **Sprig | a Rootkin cutting slowly becoming someone | the rooting stops and what it had rooted is at risk** — a wound it was closing right may close wrong |
 | **Tal | a road-met apprentice who would not be shaken off | a second pair of hands becomes one. They went down doing your work, beside you** |
 
@@ -597,14 +597,14 @@ not a limit it has — and a choice implies somebody else made the other one.
 
 ## People you will meet
 
-- **Ama, in Millbrook. She finishes what she is doing before she turns.
+- Ama, in Millbrook. She finishes what she is doing before she turns.
 - Mara Wells, who runs the supply store — a close-ledger woman who reacts to what a person is actually
  worth to her, and remembers.
-- Calvar**, past sixty, a **pre-Transition filtration engineer**. Decades at a drafting surface, in a
+- Calvar, past sixty, a pre-Transition filtration engineer. Decades at a drafting surface, in a
  valley whose water is moving. He is the most important person in Millbrook and does not think so.
-- **Veth Ondra**, eleven years a warden, still and direct. **She teaches by refusing to soften a
- reckoning**, which is not the same as being unkind.
-- **Siol, a tall Elven traveller, quiet-attention rather than indifference. Has been on the road a long
+- Veth Ondra, eleven years a warden, still and direct. She teaches by refusing to soften a
+ reckoning, which is not the same as being unkind.
+- Siol, a tall Elven traveller, quiet-attention rather than indifference. Has been on the road a long
  time and is not lost.
 
 ## What can go wrong
@@ -612,7 +612,7 @@ not a limit it has — and a choice implies somebody else made the other one.
 Relationships here are held by attention, not by status. A companion's bond deepens because you
 kept using what they gave you, and it thins because you stopped.
 
-The specific way it breaks is different for each of them**, and two are worth knowing up front:
+The specific way it breaks is different for each of them, and two are worth knowing up front:
 Ember is half-wild and can decline to come back. Hush had not finished deciding about you, and
 being made abruptly present in front of everyone does not help it decide well.
 
@@ -620,7 +620,7 @@ being made abruptly present in front of everyone does not help it decide well.
 
 # PART XII · The traditions, one by one
 
-Twenty-four poles on twelve axes, plus three folk who are neither. **You do not pick a side of an
+Twenty-four poles on twelve axes, plus three folk who are neither. You do not pick a side of an
 axis and lose the other — you learn where you can reach, and reaching against your own grain is where
 the interesting crafts come from.
 
@@ -658,13 +658,13 @@ craft is that claim applied until it works.
 
 | | |
 |---|---|
-| The God-Named — `Service` | heavily augmented humans who never wanted the Transition. They serve, and the question of whom is the whole of them** |
-| **The Bargainers** — `Terms` | **the god-named who went DOWN instead of up. Augmented the same way and answering to something else |
+| The God-Named — `Service` | heavily augmented humans who never wanted the Transition. They serve, and the question of whom is the whole of them |
+| The Bargainers — `Terms` | the god-named who went DOWN instead of up. Augmented the same way and answering to something else |
 | Valley folk** | **no tradition at all — most people. The crafts in this guide are what a few can do, not what everyone does |
 
 ## What this means at a table
 
-A tradition is not a class and it is not a faction.** It is a way of working that a place teaches.
+A tradition is not a class and it is not a faction. It is a way of working that a place teaches.
 Two Ashwardens from different valleys will disagree about mercy, and both will be practising
 correctly.
 

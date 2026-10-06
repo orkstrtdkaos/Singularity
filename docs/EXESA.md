@@ -16,13 +16,13 @@ habitable. Then they disappeared, and everything they left is still running.
 
 That last clause is the whole setting.
 
-Under the ground there is a **lattice — buried lines, seamless joins, waygate arches — laid in one working
-by something that did not need to try twice. It was built to take instruction. It is not broken and it is
-not abandoned. It is dormant, and dormant things have an owner.**
+Under the ground there is a **lattice — buried lines, seamless joins, waygate arches — laid in one working**
+**by something that did not need to try twice. It was built to take instruction. It is not broken and it is**
+**not abandoned. It is dormant, and dormant things have an owner.**
 
-Then came **the Transition**, and nobody agrees what it was. What it did is not in dispute: it made the
-world's fiction *real*. Traditions that had been ideas became **powers**. Places that had been described
-became **places**. Things that had been imagined started **walking around, and some of them are still out
+Then came the Transition, and nobody agrees what it was. What it did is not in dispute: it made the
+world's fiction *real*. Traditions that had been ideas became powers. Places that had been described
+became places. Things that had been imagined started walking around, and some of them are still out
 there, still doing what they were imagined to do.
 
 You live in the aftermath, which people mostly call ordinary life.
@@ -38,7 +38,7 @@ works turned it into **kept suns**, true daylight in vaults far underground, wit
 ## II · The Three, and the disagreement
 
 There were three, and one of them took a side. This is the oldest thing in the world and the least
-known.**
+known.
 
 **AKINETOS** — *the unmoved*. It laid the lattice and stopped. It never left and it never woke. A Precursor
 site does not resist you and does not admit you — it is a floor that registers your weight and has
@@ -46,16 +46,16 @@ assessed it as unimportant. The works are dormant. Their owner has not answered 
 whether that stop was a decision, an interruption, or a scheduled pause is the most dangerous open
 question in the world.
 
-**KENOSIS** — *the emptying*. A being that had made itself deathless **emptied itself, took a body capable
+KENOSIS — *the emptying*. A being that had made itself deathless emptied itself, took a body capable
 of loss, and lost. It agreed to end, and it did. There is no resurrection in this. What is left of it
 is the Veil — a hole in the world shaped like something enormous that stopped being present.
 
-PARAKLETOS** — *the one called alongside*. It never had a shape to appear in. **It appears as
-answering.** It does not speak; it responds early — the world arriving a half-beat ahead, the latch already
+PARAKLETOS — *the one called alongside*. It never had a shape to appear in. It appears as
+answering. It does not speak; it responds early — the world arriving a half-beat ahead, the latch already
 lifted, the thing you were about to need already to hand. It distributed itself into the substrate, which
 means it is not somewhere. It is *underneath*.
 
-**the argument between them never ended. IT PAUSED. What is beyond the Veil is not another species — it
+the argument between them never ended. IT PAUSED. What is beyond the Veil is not another species — it
 is the same people, still disagreeing, with the world standing in the middle of it.
 
 ---
@@ -69,11 +69,11 @@ Precursor is to ordered nanite as Veil is to metaphysical
 ```
 
 PRECURSOR is the lattice itself — structure, density, the old apparatus still running. It wants dense
-ground** and works best where the works are thick.
+ground and works best where the works are thick.
 
 **NANITE** is the made copy — and ordered and wild are one source in two states, not two materials.
 
-**Wild is not neglect. It is somebody's work. Rootkin and Churnfolk break ordered nanite back to wild.
+Wild is not neglect. It is somebody's work. Rootkin and Churnfolk break ordered nanite back to wild.
 Seraphim and Enginewrights order wild nanite into ordered. That conversion is a live argument between
 four traditions over which direction the same material should run, and it is going on right now, in
 several places at once, without anybody calling it a war.
@@ -87,18 +87,18 @@ absence of the rules. Veil craft is not dark magic. It is subtraction.** It want
 it draws on the lack of a thing rather than the thing.
 
 METAPHYSICAL is the Veil reached from the human side — mind past matter, will made effective. It asks
-everything of the practitioner, and it is the only source that reads TWO grounds at once.**
+everything of the practitioner, and it is the only source that reads TWO grounds at once.
 
 It needs MEANING to work on and THIN APPARATUS to work through, and those pull against each other.
 Meaning is a ceiling, not a penalty: in a place that means nothing to anyone, a metaphysical craft is
 capped rather than merely made harder. And lattice in the ground gets in the way of the reaching.
 
-**Which is the Numinous's whole problem. The places thick with meaning — old shrines, ground people
+Which is the Numinous's whole problem. The places thick with meaning — old shrines, ground people
 have died on, somewhere a thing was decided — are usually thick with lattice too, so they live where the
 meaning is and are permanently, slightly obstructed by the floor they must stand on to reach it.
 
 Meaning gathers where people are. A shrine has it. A temple has more. A village has it simply by being
-lived in — and a place that empties loses it.**
+lived in — and a place that empties loses it.
 
 **and thinning one strengthens the other**, which is not a tuning note. It is a statement about what the
 two sides of the Veil *are*.
@@ -107,7 +107,7 @@ two sides of the Veil *are*.
 
 ## IV · THE RING
 
-Twenty-four traditions stand on a ring, in twelve opposed pairs, gathered into fourteen domains. **The ring
+Twenty-four traditions stand on a ring, in twelve opposed pairs, gathered into fourteen domains. The ring
 is the map and the map is the ring — where two traditions sit relative to each other is their disposition,
 their geography, and what it costs you to learn across.
 
@@ -115,7 +115,7 @@ Your opposite is your antipode. It is not closed to you. It is expensive and sha
 and both the price and the ceiling ease together if you genuinely carry some of that far pole. The
 barrier is to dabbling, not to crossing.
 
-And there are foothills — the Harmonic Heights, the Radiant Plateau — which are places, not peoples.**
+And there are foothills — the Harmonic Heights, the Radiant Plateau — which are places, not peoples.
 They teach crafts they did not invent. *Hardline teaches the Edge; it does not own it.* That is what makes a
 foothill worth travelling to, and why the world has roads.
 
@@ -136,17 +136,17 @@ less between them. The Marches narrow. The few balanced places become the last r
 the open* against the whole world's drift.
 
 ### What wakes beneath — *world scale, the deep clock*
-**The substrate is stirring. Not only under the Valley — worldwide, and the Valley's water is merely the
+The substrate is stirring. Not only under the Valley — worldwide, and the Valley's water is merely the
 nearest tremor. The thing that runs every craft, every manifestation, every disposition is turning over.
 
 Untended it builds toward a substrate-scale event: crafts surging and failing, manifestations flickering,
-the poles spiking. The engine of the world, misfiring.**
+the poles spiking. The engine of the world, misfiring.
 
 ### the Second Manifestation — *world scale, building*
-The Transition manifested fiction once. **It is beginning again. New domains blooming, old ones bleeding,
+The Transition manifested fiction once. It is beginning again. New domains blooming, old ones bleeding,
 creatures appearing out of native context.
 
-A place could wake tomorrow running on a fiction nobody chose.** Wonder and catastrophe in the same
+A place could wake tomorrow running on a fiction nobody chose. Wonder and catastrophe in the same
 wave.
 
 ### the Bleeding Grammar — *regional*
@@ -155,9 +155,9 @@ craftable units where it should not. Two ordered dispositions cross-contaminatin
 lethal and strange.
 
 ### The Green Schism — *regional, glacial*
-The Deepwood's Rootbound faction is winning the Moot's argument to **seal the wood from humankind. That
-would withdraw the Green Accord and let the living green retreat from the world. The Moot is slow. It
-is also winning.**
+The Deepwood's Rootbound faction is winning the Moot's argument to **seal the wood from humankind. That**
+**would withdraw the Green Accord and let the living green retreat from the world. The Moot is slow. It**
+**is also winning.**
 
 ### the disagreement — *cosmic, the oldest clock*
 The Precursors' argument, still paused. The lattice was built to take instruction and its owner is
@@ -169,8 +169,8 @@ Untended, the argument resumes with the world still standing in the middle of it
 People are trading things they cannot get back for things they want now — a name, a harvest, a year. The
 bargains start as favours and end as the only way anything gets done.
 
-Untended, every road runs through somebody's grant, and the grant is the hunger. **The counter is a
-settlement that can still refuse** — and somebody who will say so out loud.
+Untended, every road runs through somebody's grant, and the grant is the hunger. **The counter is a**
+**settlement that can still refuse** — and somebody who will say so out loud.
 
 ### The Glare — *world scale, brightening*
 Privacy has started to look like guilt. A shut door is a question; a drawn curtain gets you marked. The
@@ -190,15 +190,15 @@ turns out to be harder to supply than a wall.
 The world is getting bigger in the wrong direction. A road that took four days takes five. A milestone's
 count does not come down however far you walk toward it, and nobody can say when that started.
 
-Untended, places stop being reachable at all — not walled off, just further every time you try. **The counter
-is a road somebody keeps**, and people who will still make the crossing.
+Untended, places stop being reachable at all — not walled off, just further every time you try. **The counter**
+**is a road somebody keeps**, and people who will still make the crossing.
 
 ---
 
 ## VI · Who is out there
 
 A hundred and thirty-one great figures walk Exesa, spread across a hundred and fifty-eight authored places — and
-**most of them have never heard of you. They are doing their own work — and the world counts what they do
+most of them have never heard of you. They are doing their own work — and the world counts what they do
 whether or not you are in the room. The trickster you brushed past in a market may be a gang leader when you
 meet again, and nobody arranged that.
 
@@ -212,8 +212,8 @@ answer stick.
 
 Something under the ground is stirring, and the question is whether to help it.
 
-Morvane of the Harvest Hand** and **Harrow, who makes people into mechanisms** want it awake and are
-working toward it. **the Choirmaster who would not return has already dissolved far enough into the
+Morvane of the Harvest Hand** and **Harrow, who makes people into mechanisms** want it awake and are**
+**working toward it. **the Choirmaster who would not return has already dissolved far enough into the
 practice that he cannot come back, and calls what is coming a homecoming.
 
 Against them: Neth, who has buried more than she has known, the deep teacher of the attending craft,
@@ -231,11 +231,11 @@ least of what they are arguing about.
 The world's dispositions are intensifying. Every extreme is getting more extreme, and the middle is getting
 harder to stand in.
 
-Thirty-two people are in this one — eleven pushing and twenty-one holding the middle**, which tells you
+Thirty-two people are in this one — eleven pushing and twenty-one holding the middle, which tells you
 something about how it is going.
 
-**VALEN SUNWRACK burned the dark out of an entire Reach and called it dawn: nothing unseen, nowhere to
-rest, no mercy of the unlit. the Starless One** would put out every light in the world. **THE HOLLOW KING
+VALEN SUNWRACK burned the dark out of an entire Reach and called it dawn: nothing unseen, nowhere to
+rest, no mercy of the unlit. the Starless One would put out every light in the world. THE HOLLOW KING
 of the wild half rules a court out of the Churn and keeps every promise to the letter and none in spirit.
 
 And standing between them, refusing both: the Deep Lantern, who walks where light won't. She sees
@@ -255,8 +255,8 @@ Who called the first moot are what stands against her, and they are losing slowl
 The Transition made fiction real once. As the substrate stirs, it may do it again — and some people are
 helping.
 
-Cinder Vael, the wright who would not stop** and **the Gate That Gapes** are on the making side.
-**Halcyon, who built one perfect thing is not, and the difference between them is one decision made a long
+Cinder Vael, the wright who would not stop** and **the Gate That Gapes** are on the making side.**
+****Halcyon, who built one perfect thing is not, and the difference between them is one decision made a long
 time ago.
 
 ### The argument about the grammar
@@ -270,22 +270,22 @@ one closed and airless proof, does not — and being right about the danger does
 ### The two courts of the Churn
 
 In the wildest place in the world, where nothing keeps its shape, there are two courts and they are not
-enemies because one of them is good.**
+enemies because one of them is good.
 
-**The Hollow King's court does not lie. Every member gives you precisely what you asked for, at a price
-named aloud before you agree. The Bright Bargain is delighted to see you and tells you the cost first,
-every time, and it is always fair. The Keeper of Small Debts is very sorry to bring this up, but you
-accepted a kindness eleven years ago and she has the date. You leave richer and hollowed, and it is years
-before you find the seam.**
+**The Hollow King's court does not lie. Every member gives you precisely what you asked for, at a price**
+**named aloud before you agree. The Bright Bargain is delighted to see you and tells you the cost first,**
+**every time, and it is always fair. The Keeper of Small Debts is very sorry to bring this up, but you**
+**accepted a kindness eleven years ago and she has the date. You leave richer and hollowed, and it is years**
+**before you find the seam.**
 
 The Unbought Court is what stands against that, and it is not kinder. Elves, dwarves, slower things and
-two dragons, living in the one place where nothing stays and refusing to dissolve into it. **AELITH OF THE
-FIRST SHAPE** remembers what everything was before. **URD STONEFAST has been building the same hall for
+two dragons, living in the one place where nothing stays and refusing to dissolve into it. AELITH OF THE
+FIRST SHAPE remembers what everything was before. URD STONEFAST has been building the same hall for
 two hundred years and rebuilds it every time the Churn takes it, cheerfully. THE SLOW GREEN is a wood
 that grows where nothing is allowed to finish growing.
 
 They will not trade at all. What they give they give freely; what they withhold cannot be bought. There
-is no price, no term, and no lever — and if they judge you unworthy, there is nothing you can offer.**
+is no price, no term, and no lever — and if they judge you unworthy, there is nothing you can offer.
 
 One court will always deal with you. The other might simply decline.
 
@@ -294,7 +294,7 @@ One court will always deal with you. The other might simply decline.
 The Ashen Wyrm and the Bright Devourer are domains that resolved wrong and will not resolve back — hazards
 the size of a hill, with a broken directive and no grievance.
 
-**A true dragon is a person. Older than the Transition, wearing whichever shape the conversation needs.
+A true dragon is a person. Older than the Transition, wearing whichever shape the conversation needs.
 YSENKAR has been at your table and did not lie about it — you simply did not ask. TOLVESS is three
 hundred years old, which the court considers impulsive, and mostly wants to be useful to Urd's building.
 
@@ -306,24 +306,24 @@ Some people's answer to a problem is the edge of something, and they are as prec
 
 Veyra of the Levelled Lance rides the Redline duelling circuit: twenty-two challenges, twenty-two
 stops, never the same person twice. She names the terms before the first pass and does not renegotiate.
-What she is afraid of is killing one.**
+What she is afraid of is killing one.
 
-**Sesh of the Quiet Blow ends fights with a thought. She does not read the body, she reads the decision —
-the exact moment a fighter commits. What frightens her is that she has met people with nothing underneath
-the reading at all.**
+**Sesh of the Quiet Blow ends fights with a thought. She does not read the body, she reads the decision —**
+**the exact moment a fighter commits. What frightens her is that she has met people with nothing underneath**
+**the reading at all.**
 
-**Marn of Two Forms is sent by the Flesh-Temples where a fight must be stopped by one person. He bows
+Marn of Two Forms is sent by the Flesh-Temples where a fight must be stopped by one person. He bows
 before and after, to everyone, including things that cannot bow back. The first form ends fights without
 ending people. He has used the second four times and remembers all four — and one of the four is still
 alive and looking for him.
 
 CASSA REDSAIL takes ships nobody insures and is very hard to be angry at. She is laughing before you are
 and she is not where you last looked. She wants one take big enough to stop, and she has said that four
-times.**
+times.
 
 ### The ones who are followed
 
-**Orrun Shieldbreaker captains one ship out of the Longshore reach. Nine seasons, and the crew has voted
+Orrun Shieldbreaker captains one ship out of the Longshore reach. Nine seasons, and the crew has voted
 him back every one of them — his authority is re-sworn each season or it is not. He asks what your people
 get out of a thing before he asks what you want. He has come back with fewer twice, and he can name them.
 
@@ -355,10 +355,10 @@ Wherever you land, expect the same kinds of people:
 | | |
 |---|---|
 | someone who keeps the place running | a store-keeper, a water-keeper, a ferryman. They know what everyone owes and they never say |
-| someone who teaches** | and the good ones test you before they offer |
+| someone who teaches | and the good ones test you before they offer |
 | **someone who holds a threshold** | a warden, a toll-hand, unofficial law at a pass |
-| **someone carrying an unfinished thing | a work stopped deliberately, a debt unpaid, a question they were expelled for asking |
-| someone the town is wrong about** | in either direction |
+| someone carrying an unfinished thing | a work stopped deliberately, a debt unpaid, a question they were expelled for asking |
+| someone the town is wrong about | in either direction |
 
 And what someone will not do is usually the most useful thing to know about them.
 
@@ -369,16 +369,16 @@ And what someone will not do is usually the most useful thing to know about them
 Exesa never had one. The world's people navigate by what the world is actually shaped like, and the words
 are older than any of the traditions that use them.
 
-**Hubward is toward the Crossing — the centre, the waygate hub, the one place where no disposition wins.
-Outward is away from it, toward whichever pole lies ahead of you. Spinward** and **widdershins are
+Hubward is toward the Crossing — the centre, the waygate hub, the one place where no disposition wins.
+Outward is away from it, toward whichever pole lies ahead of you. Spinward and widdershins are
 the two ways around the circuit, lateral to that.
 
-The compass and the argument are the same axis**, which is why the words carry more than a bearing. Going
+The compass and the argument are the same axis, which is why the words carry more than a bearing. Going
 outward means going somewhere more committed than where you started. Coming hubward means coming back
 toward the middle, and everyone means it both ways at once. *"He went outward and did not come back"* is a
 sentence about a road and about a person, and nobody in Exesa hears only one of those.
 
-Distance is counted in **days' walk. A wayfarer who tells you the Palelands are forty days outward has
+Distance is counted in days' walk. A wayfarer who tells you the Palelands are forty days outward has
 told you everything you need and nothing you cannot verify with your feet.
 
 ---
@@ -391,7 +391,7 @@ tradition's home is where its disposition is thickest on the ground.
 ### Mind ⟷ Body
 | | | where |
 |---|---|---|
-| The Cogitants** | Noesis — thought as force | **The Cogitarium** |
+| The Cogitants | Noesis — thought as force | The Cogitarium |
 | **The Syllogists** | Logos — the argument that holds | **The Axiom** |
 | **The Figurists** | Formcraft — the imposed shape | **The Cloudform** |
 | **The Somatics** | Soma — the trained body | **The Flesh-Temples** |
@@ -414,12 +414,12 @@ tradition's home is where its disposition is thickest on the ground.
 |---|---|---|
 | **The Rootkin** | Vivimancy — growth, and the long patience of it | **The Heartroot** |
 | **The Ashwardens** | Palework — attending what ends | **the Palelands** |
-| **The Threnodists** | Pathos — grief as a working, tidal and ungoverned | **The Wellspring |
+| The Threnodists | Pathos — grief as a working, tidal and ungoverned | The Wellspring |
 
 ### Angelic ⟷ Demonic
 | | | where |
 |---|---|---|
-| The Seraphic Orders** | Ascent — mercy administered as machinery | **The Choir-Height** |
+| The Seraphic Orders | Ascent — mercy administered as machinery | The Choir-Height |
 | **The Abyssal Choir** | Descent — the honest bargain, struck downward | **The Maw** |
 
 *The Abyssals draw on the far side directly, being the other half of the same argument.*
@@ -451,7 +451,7 @@ else's road. And Spirit's problem is in its own second source: it needs meaning 
 apparatus to work through, and the places thick with meaning are usually thick with lattice too.
 
 ### And the foothills
-The Harmonic Heights. The Radiant Plateau. Valley Craft. **These are PLACES, not peoples. They
+The Harmonic Heights. The Radiant Plateau. Valley Craft. These are PLACES, not peoples. They
 teach crafts they did not invent, to whoever comes — which is what makes them worth the walk, and why
 Exesa has roads.
 
@@ -466,7 +466,7 @@ start in the Deepwood and the water crisis is not yours. The great figures are a
 carry on without you.
 
 What you can do is hold something open. A road that stays safe. An ending that gets attended. A place
-that keeps enough people in it to still mean something. A middle that does not close.**
+that keeps enough people in it to still mean something. A middle that does not close.
 
 And that is not preparation for the story. It is the story — because the things that would rather the
 middle closed are patient, they are already fed, and they only notice you when you start costing them

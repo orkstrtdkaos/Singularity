@@ -58,6 +58,19 @@ export const KIND_GLYPH = {
  * HOLDS SOMETHING IN", so it is a ring of marks rather than a ring. Each case below cites its line.
  * ⚠️ These sit at SITE scale, inside a place's own frame, so they are lighter than a town's silhouette:
  * one or two strokes each. A site drawn as heavily as the town containing it reads as a second town. */
+/* ═════ SNG-679 H3 · THE THREE MARKS A HOLD TAKES ═════
+ * ✅ AEVI: *"A new `markerKind` for holds, with one shape for fixed holds and one for moving ones. The rung
+ * or frame sets the size. Your own holds and other players' holds are told apart by COLOUR, NOT SHAPE."*
+ * ⛔ SHAPE SAYS WHAT, COLOUR SAYS WHOSE, and keeping those on separate channels is what lets a glance answer
+ * both at once. It is the rule `markerKind` already follows for places, where a waygate and a village never
+ * share a shape — and the reason `holdMarker` returns `own` as its own field rather than a fourth shape.
+ * ⛑ A HOLD IS NOT A PLACE AND MUST NOT READ AS ONE. These three are deliberately unlike the place alphabet:
+ * a hold is a thing the player BUILT, sitting beside a place rather than being one, so it carries a filled
+ * body where a place glyph is drawn in line only. The size comes from the rung, so a keep reads bigger than
+ * a shed without needing a different silhouette. */
+export const HOLD_GLYPH = { holdFixed: "holdFixed", holdMoving: "holdMoving", caravan: "caravanMark" };
+export const ALL_HOLD_GLYPHS = [...new Set(Object.values(HOLD_GLYPH))];
+
 export const SITE_GLYPH = {
   well: "well", green: "green", square: "square", quarter: "quarter", field: "field",
   mill: "mill", dock: "dock", ford: "ford", yard: "yard", burial: "burial",
@@ -257,6 +270,35 @@ export function drawGlyph(ctx, glyph, x, y, s, style) {
       ctx.beginPath(); ctx.arc(x, y, s * 0.3, 0, Math.PI * 2); ctx.stroke();
       break;
     }
+    /* ═════ SNG-679 H3 · THE HOLD MARKS ═════ */
+    case "holdFixed":
+      /* a hold that stands: a filled body on its own ground line, so it reads as BUILT rather than as ground.
+       * ⚠️ REDRAWN ONCE. A house-shaped pentagon measured 46% the same as the `gate` glyph — and the
+       * rasteriser the similarity gate uses traces OUTLINES and ignores `fill()`, so the one thing that
+       * actually separated them was invisible to the measurement. Rather than argue with the instrument, the
+       * silhouette differs too: a diamond body on a base, where `gate` is an upright rectangle with a lintel. */
+      ctx.fillStyle = ink;
+      P([[0, -0.9], [0.75, -0.1], [0, 0.7], [-0.75, -0.1]], true);
+      ctx.fill(); ctx.stroke();
+      P([[-0.95, 0.9], [0.95, 0.9]]); ctx.stroke();
+      break;
+    case "holdMoving":
+      // a hold under way: the same weight, on water — a hull, with its line beneath it
+      ctx.fillStyle = ink;
+      ctx.beginPath();
+      ctx.moveTo(x - s * 0.9, y - s * 0.2);
+      ctx.lineTo(x + s * 0.9, y - s * 0.2);
+      ctx.lineTo(x + s * 0.45, y + s * 0.6);
+      ctx.lineTo(x - s * 0.45, y + s * 0.6);
+      ctx.closePath(); ctx.fill(); ctx.stroke();
+      P([[0, -0.2], [0, -0.95]]); ctx.stroke();
+      break;
+    case "caravanMark":
+      // smaller, and plainly in motion: a body leaning forward with its load behind
+      ctx.fillStyle = ink;
+      P([[-0.85, 0.55], [-0.2, 0.55], [0.1, -0.1], [-0.55, -0.1]], true); ctx.fill(); ctx.stroke();
+      P([[0.2, 0.55], [0.85, 0.55]]); ctx.stroke();
+      break;
     /* ═════ SNG-678 · THE SITE-SCALE FIFTEEN ═════
      * Each cites the line it was drawn from. They are lighter than the place glyphs above on purpose: a
      * site sits INSIDE a place's frame, and one drawn as heavily as its town reads as a second town. */

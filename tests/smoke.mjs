@@ -8066,6 +8066,105 @@ await (async () => {
       WG2.markerKind({ t: "region", wg: 1 }) === "gate" && WG2.markerKind({ t: "region" }) === "region",
       "if this reddens, `markerKind` changed its branch order and the seat rule should be re-read, not re-pointed");
 
+    /* ═════ SNG-679 H1 + H3 + H4 · HOLDS ON THE MAPS ═════
+     * ✅ ERIK: *"Make sure traveling holds can show up on all the map levels."* ⛔ Aevi's read of origin:
+     * *"NO MAP DRAWS A HOLDING. `character.holdings` is read only for framing the world view."* */
+    {
+      const MHh = await import("../engine/mapholds.js");
+      const SHh = await import("../engine/sharedholds.js");
+      const MLh = await import("../engine/maplabel.js");
+      const Lh = {
+        millbrook: { id: "millbrook", name: "Millbrook", regionId: "valley", worldPos: { colatitude: 20.31, longitude: 251.9, depth: 0 } },
+        keelmouth: { id: "keelmouth", name: "Keelmouth", regionId: "the_outrun_coast", worldPos: { colatitude: 51.75, longitude: 52.25, depth: 0 } },
+        firstsight: { id: "firstsight", name: "Firstsight", regionId: "the_outrun_coast", worldPos: { colatitude: 47.75, longitude: 54.75, depth: 0 } },
+      };
+      const hull = () => ({ id: "h-hull", name: "The Long Gull", locationId: "keelmouth", rung: "tower", condition: "holding",
+        garrison: [], carriage: { moves: "crewed", needsCrew: 0, voyage: { from: "keelmouth", to: "firstsight", days: 8, startedDay: 0, arriveDay: 8 } } });
+      const fixed = { id: "h-fixed", name: "The Fell Pell", locationId: "millbrook", rung: "hall", condition: "thriving",
+        features: [{ name: "The Outer Wall", siteKind: "wall", state: "ruined" }, { name: "The Cellar", siteKind: "cistern", state: "damaged" }] };
+      const me = { id: "c-me", name: "Silas", holdings: [fixed, hull()],
+        caravans: [{ id: "car1", path: ["millbrook", "keelmouth"], days: 6, departedDay: 0, to: "keelmouth" }] };
+
+      check("679/H1: ⛔ ONE READER returns a row per hold the character can know about — before this, no map drew a holding at all",
+        (() => { const out = MHh.mapHolds(me, { locations: Lh, worldDay: 4 });
+          return out.rows.length === 3 && out.sources.own === 2 && out.sources.caravan === 1
+            && out.rows.every((r) => r.key && r.kind && r.name); })(),
+        "✅ Aevi (H1): *\"All three tiers read it. Nothing draws a hold any other way.\"*");
+
+      check("679/H1: …and a moored hold answers with its place while one under way answers with her point on the water",
+        (() => { const out = MHh.mapHolds(me, { locations: Lh, worldDay: 4 });
+          const f = out.rows.find((r) => r.id === "h-fixed"), s = out.rows.find((r) => r.id === "h-hull");
+          return f && !f.atSea && f.placeId === "millbrook"
+            && s && s.atSea && Math.abs(s.fraction - 0.5) < 0.01
+            && s.worldPos && Math.abs(s.worldPos.colatitude - 51.75) > 0.5; })(),
+        "through `whereaboutsOf`, H2's one reader — so the map and the raid cannot disagree about where she is");
+
+      /* ⛔ ONE READER, ONE LONGITUDE CONVENTION. ⚠️ MEASURED ON ITS FIRST RUN: an authored place came back at
+       * longitude 251.9 and a caravan beside it at −108.0 — the SAME longitude in the two conventions this
+       * project has twice been bitten by. Projection survives it (sin and cos are periodic) so it would have
+       * shipped looking right and broken the first time anything compared, sorted or measured between rows. */
+      check("679/H1: …and every row speaks ONE longitude convention, however its position was derived",
+        (() => { const out = MHh.mapHolds(me, { locations: Lh, worldDay: 4 });
+          return out.rows.every((r) => !r.worldPos
+            || (r.worldPos.longitude >= -180.0001 && r.worldPos.longitude <= 180.0001)); })(),
+        "content stores 0–360 and `Math.atan2` returns ±180; a reader that claims to be THE reader cannot hand out both");
+
+      // ⛔ THE FOURTH SOURCE IS NOT BUILT AND SAYS SO, rather than approximating three moving places.
+      check("679/H1: …and the unbuilt fourth source REPORTS itself rather than approximating — moving places are H5",
+        (() => { const out = MHh.mapHolds(me, { locations: Lh, worldDay: 4 });
+          return out.movingPlacesBuilt === false && out.sources.movingPlace === 0; })(),
+        "the Unlanded's own text promises a player who arrives on the wrong day finds ruts and nothing else — a guess there would be a lie");
+
+      /* ⛔ H4 · A HULL IS PUBLISHED WHERE SHE IS. ✅ Aevi: *"Another player's hold under way is published at
+       * its PORT: `holdCard` takes `worldPos` from `locationId` only."* */
+      check("679/H4: ⛔ a hull under way is PUBLISHED on the water, not at the port she left",
+        (() => { const other = { id: "c-loki", name: "Loki" };
+          const atPort = SHh.holdCard(other, hull(), { locations: Lh });
+          const atSea = SHh.holdCard(other, hull(), { locations: Lh, worldDay: 4 });
+          return atPort && atSea && atSea.atSea === true
+            && atSea.from === "keelmouth" && atSea.to === "firstsight"
+            && Math.abs(atSea.fraction - 0.5) < 0.01
+            && JSON.stringify(atPort.worldPos) !== JSON.stringify(atSea.worldPos); })(),
+        "so other players see her on the water; `locationId` still only changes on arrival, so the position is DERIVED");
+
+      check("679/H4: …and the card publishes only what a VISITOR could know — the outward features, never the store or the crew",
+        (() => { const card = SHh.holdCard({ id: "c-loki", name: "Loki" }, fixed, { locations: Lh, worldDay: 1 });
+          const names = (card.outward || []).map((f) => f.name);
+          return names.includes("The Outer Wall") && !names.includes("The Cellar")
+            && !("store" in card) && !("garrison" in card)
+            && card.rung === "hall" && card.condition === "thriving"; })(),
+        "✅ S2: the card publishes its state and its OUTWARD features — a burned wall is visible from the road, a damaged cellar is not");
+
+      /* ⛔ H3 · THE AMENDED PRECEDENCE. ✅ Aevi: *"the place you're in → your holds → places → other players'
+       * holds → field sources → named ground → powers."* */
+      check("679/H3: ⛔ the label precedence is Aevi's amended order — your holds above places, other players' below them",
+        (() => { const S = MLh.LABEL_STYLES;
+          const r = (k, o) => { const s = S[k]; return typeof s.rankOf === "function" ? s.rankOf(o || {}) : s.rank; };
+          const order = [r("place", { here: true }), r("holdOwn"), r("place"), r("holdOther"), r("source"), r("ground"), r("power")];
+          return order.every((v, i) => i === 0 || v > order[i - 1]); })(),
+        "amends SNG-677 §0 — and the two new rungs are FRACTIONAL so none of her existing six had to be renumbered");
+
+      check("679/H3: …and shape says WHAT while colour says WHOSE — a fixed hold, a moving one and a caravan differ in shape, never by owner",
+        (() => { const row = (o) => ({ kind: "hold", rung: "keep", own: o, atSea: false, onRoad: false, state: "whole" });
+          const mine = MHh.holdMarker(row(true)), theirs = MHh.holdMarker(row(false));
+          const moving = MHh.holdMarker({ kind: "hold", rung: "keep", own: true, atSea: true, state: "whole" });
+          const car = MHh.holdMarker({ kind: "caravan", own: true, onRoad: true, state: "whole" });
+          return mine.kind === theirs.kind && mine.own !== theirs.own
+            && moving.kind !== mine.kind && car.kind !== mine.kind && car.kind !== moving.kind; })(),
+        "✅ Aevi (H3): *\"told apart by COLOUR, NOT SHAPE\"* — keeping those on separate channels is what lets a glance answer both questions");
+
+      check("679/H3: …and the rung sets the SIZE, so a keep reads bigger than a hall and a caravan smaller than both",
+        (() => { const r = (rung, kind = "hold") => MHh.holdMarker({ kind, rung, own: true, state: "whole" }).r;
+          return r("keep") > r("hall") && r("hall") > r("shed") && r(null, "caravan") < r("shed"); })());
+
+      // ⛔ AND THE REGION MAP DRAWS ONLY THE HOLDS THAT ARE IN IT.
+      check("679/H3: …and the region map filters to its own region — a hold in another Reach is not drawn on this one's ground",
+        (() => { const src = readFileSync(join(root, "app.js"), "utf8");
+          return /const regionOfRow = \(row\) =>/.test(src)
+            && /if \(regionOfRow\(row\) !== regionId\) \{ offRegion\+\+; continue; \}/.test(src); })(),
+        "measured live: Silas holds five places and the valley's map drew all five, one of them in `the_palelands`, while the log called it \"5 drawn of 5\"");
+    }
+
     /* ═════ SNG-679 S1 + S2 · EVERYTHING ON THE MAPS CAN CHANGE, THROUGH ONE DOOR ═════
      * ✅ ERIK: *"Every single thing that exists needs to be able to be added, damaged, ruined, moved, etc by
      * the game."* And, asked whether the world's state is per save or shared: *"It's one world."*

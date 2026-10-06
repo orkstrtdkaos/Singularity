@@ -72,6 +72,29 @@ export const LABEL_STYLES = {
     halo: "rgba(246,241,228,0.72)", haloWidth: 2, letterSpacing: "0.22em",
     transform: (t) => String(t).toUpperCase(), rank: 6,
   },
+  /* ═════ SNG-679 H3 · A HOLD'S NAME, AND IT AMENDS §0's PRECEDENCE ═════
+   * ✅ AEVI (H3), amending the order she set in SNG-677 §0: *"the place you're in → YOUR HOLDS → places →
+   * OTHER PLAYERS' HOLDS → field sources → named ground → powers."*
+   * ⛔ FRACTIONAL RANKS, AND THAT IS THE CAREFUL CHOICE RATHER THAN THE LAZY ONE. The two new rungs go
+   * BETWEEN existing ones, and renumbering the six rows below them would redden every gate that pins a rank
+   * — §0's own checks among them — for a change that moves nothing. The sort is numeric, so -0.5 and 0.5
+   * insert exactly where she put them and nothing else has to move.
+   * ⛑ WHY YOUR HOLD OUTRANKS A TOWN: it is the one mark on the map you put there yourself, and a player
+   * looking for it is looking for it by name. Someone else's outranks a field source for the same reason and
+   * ranks below a town because a town is where you can go.
+   * ⚠️ Colour, not shape, tells the two apart (H3) — so these two styles differ ONLY in ink and weight, and
+   * the mark beneath them is `holdMarker`'s business. */
+  holdOwn: {
+    font: () => `700 12px ui-serif, Georgia, "Times New Roman", serif`,
+    fill: () => "#e8c14a",
+    halo: "rgba(10,12,18,0.88)", haloWidth: 3, rank: -0.5,
+  },
+  holdOther: {
+    font: () => `600 11px ui-serif, Georgia, "Times New Roman", serif`,
+    fill: () => "rgba(214,196,150,0.86)",
+    halo: "rgba(10,12,18,0.82)", haloWidth: 2.6, rank: 0.5,
+  },
+
   /* ⛔ W3 · A REGION'S NAME ON THE GLOBE — THE DISTRICT'S LETTERFORMS, IN INK THAT READS ON DARK GROUND.
    * ✅ AEVI (SNG-677 W3): *"Region names in the district style (spaced capitals, faint), at the region's seat."*
    * ⚠️ The LOOK she names is right and the ROW is not reusable as it stands: `district` is dark ink

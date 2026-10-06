@@ -16,6 +16,28 @@
   "next": [],
   "releases": [
     {
+      "version": "2.20.5",
+      "date": "2026-10-06",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "A hold shows on its own region's map",
+          "summary": "A hold in another Reach was being drawn on whichever region map you had open."
+        }
+      ]
+    },
+    {
+      "version": "2.20.4",
+      "date": "2026-10-06",
+      "entries": [
+        {
+          "kind": "feature",
+          "title": "Your holds are on the maps",
+          "summary": "No map drew a holding at all before now. Your holds appear on the region map beside the places they stand in, sized by their rung, in your own gold — other players' in a cooler cream. A hold under way is drawn on the water where she actually is, with the part of the voyage sailed solid and the part still to come dashed."
+        }
+      ]
+    },
+    {
       "version": "2.20.3",
       "date": "2026-10-06",
       "entries": [

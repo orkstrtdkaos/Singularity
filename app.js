@@ -49,7 +49,9 @@ import { sceneImage, itemImage, artworkStyle, getArtMode, setArtMode, imagesEnab
 import { drawLabel, labelText, labelSpace, powerSize, applyStyle, LABEL_STYLES } from "./engine/maplabel.js";
 import { openingFrame, placeCardBox } from "./engine/worldmap.js";
 // ⛔ SNG-679 S2: ONE READER for what state anything on a map is in, and the word a player reads for it.
-import { mapStateOf, mapStateWord } from "./engine/mapstate.js";   // M3: open framed on what the player knows   // M2/D1: one table, one collision space
+import { mapStateOf, mapStateWord } from "./engine/mapstate.js";
+// ⛔ SNG-679 H1: ONE hold reader for all three tiers. "Nothing draws a hold any other way."
+import { mapHolds, holdMarker } from "./engine/mapholds.js";   // M3: open framed on what the player knows   // M2/D1: one table, one collision space
 import { decodeTerrain, sampleAt, colorAt, unproject, project, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, globeClickAction, REGION_FRAME_DEG, regionVoteAt, worldRoadRoutes, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, makePolarBase, regionExtent, bendRoad, roadNetwork, clipToFrame, routeRoads, makeGroundCost, GROUND_COST } from "./engine/worldglobe.js";
 // ⛔ ROUND 4 — whose ground is this, as things stand today. `realms.js` resolves the SAVE (losses, growth,
 // broken powers, taken holds, your own realm); `influence.js` stays pure and just evaluates.
@@ -200,7 +202,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.20.3";
+const APP_VERSION = "2.20.5";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -12472,6 +12474,9 @@ let _globeEsc = null;
 let _worldRoutes = null;
 /** ⛔ THE OPEN FAN, in canvas pixels. Null when nothing is fanned. */
 let _regionFan = null;       // { key, cx, cy, members:[{id,name,x,y}] }
+/* ⛔ SNG-679 H3 · WHAT THE HOLD PASS DREW, KEPT — the same reason `_regionPick` is kept: a mark nothing
+ * hit-tests against is a mark a player cannot tap, and Aevi's H3 asks that tapping one opens the card. */
+let _holdPick = [];
 /** ⛑ THE CLICK RADIUS THE GLOBE HAS USED ALL ALONG (`nearest` in `wireWorldGlobe`), so one map does not feel
  *  tighter than the other — and the radius that the 41% was measured at. */
 const REGION_HIT = 14;
@@ -14503,6 +14508,61 @@ function paintRegionMap(regionId) {
     if (line) queueLabel(ctx, String(line), placeBox.get(m.id), "landmarkUnder", { raw: true, align: "center" }, 12);
   }
   // ⛔ AND HERE THE INK LANDS, ONCE, IN RANK ORDER. Nothing above this line has drawn a label.
+  /* ═════ SNG-679 H3 · THE REGION MAP DRAWS HOLDS ═════
+   * ✅ ERIK: *"Make sure traveling holds can show up on all the map levels."* ⛔ Before this, Aevi's read:
+   * *"NO MAP DRAWS A HOLDING."*
+   * ⚠️ THE LONGITUDE HAS TO BE UNWRAPPED AGAINST THIS REGION'S EXTENT, and that is not a detail. `mapHolds`
+   * normalises every row to ±180 so its rows can be compared; `base.toScreen` runs UNWRAPPED against the
+   * region's own box. Feeding one to the other raw is the exact trap that once drew a real field source at
+   * x = −599 on an 800px canvas, and `routeRoads` carries the same `inF` unwrap for the same reason. A hold
+   * at longitude −108 in a region whose box runs 250–255 belongs at 252, not off the left edge.
+   * ⛑ RESERVED THROUGH THE SHARED SPACE at H3's amended precedence — your holds above places, other
+   * players' below them — so a hold's name takes a town's ground only when it has earned it. */
+  {
+    const unwrap = (lon) => {
+      if (!ext || ext.polar) return lon;          // a polar frame is trigonometric: 252 and −108 land together
+      const mid = (ext.lo0 + ext.lo1) / 2;
+      let v = Number(lon);
+      while (v - mid > 180) v -= 360;
+      while (mid - v > 180) v += 360;
+      return v;
+    };
+    const held = mapHolds(character, { sharedStore: sharedHolds, locations: CONTENT.locations,
+      worldDay: (() => { try { return absoluteWorldDay(); } catch { return null; } })(),
+      routes: _worldRoutes?.byPair || null, content: CONTENT,
+      nameOf: (id) => character?.npcRegistry?.[id]?.name || CONTENT.npcs?.[id]?.name || null });
+    _holdPick = [];
+    let offRegion = 0;
+    const mctxH = ctx;
+    /* ⛔ ONLY THE HOLDS IN THIS REGION. ⚠️ CAUGHT BY MEASURING WHAT "5 drawn of 5" MEANT: Silas holds five
+     * places and the valley's map drew all five — but `the_old_warden_post` is in `the_palelands`. The
+     * diagnostic was counting rows it had been handed, not rows that belong here, so a hold from another
+     * region landed on this one's ground and the log called it a success.
+     * ⛑ A HULL UNDER WAY SHOWS ON THE REGION SHE IS NEAREST, which is what `placeId` already answers for her
+     * (H2's `nearestId`) — so she appears on the map of the water she is actually crossing.
+     * ⛑ The count of what was skipped is kept, so "no holds here" never reads the same as "no holds at all". */
+    const regionOfRow = (row) => {
+      const l = row.placeId ? CONTENT.locations?.[row.placeId] : null;
+      return l ? (l.regionId || l.region || null) : null;
+    };
+    for (const row of held.rows) {
+      if (regionOfRow(row) !== regionId) { offRegion++; continue; }
+      const hit = paintHoldRow(ctx, row, (lon, lat) => base.toScreen(unwrap(lon), lat, W, H), {
+        labelOf: (r, at, m) => {
+          const kind = r.own !== false ? "holdOwn" : "holdOther";
+          const nm = String(r.name || r.id);
+          const w = (drawLabel(mctxH, nm, -9999, -9999, kind, {})?.w) || 0;
+          const box = _labelSpace.place(at.x, at.y - m.r - 7, w, 12,
+            { kind, clampTo: { w: W, h: H },
+              offsets: [[0, 0], [0, m.r * 2 + 16], [-w / 2 - 8, m.r + 6], [w / 2 + 8, m.r + 6]] });
+          if (box) { ctx.textAlign = "center"; queueLabel(ctx, nm, box, kind, {}); }
+        },
+      });
+      if (hit) _holdPick.push(hit);
+    }
+    if (held.rows.length) console.log(`[holds] region ${regionId}: ${_holdPick.length} drawn`
+      + `, ${offRegion} in other regions, of ${held.rows.length} held (${JSON.stringify(held.sources)})`);
+  }
   flushLabels();
   const hereMark = marks416.find(m => m.id === here);
   if (hereMark) {
@@ -15838,6 +15898,52 @@ function openPlaceCard({ canvas, id, glyph = null, extra = null }) {
   el.style.left = `${offX + box.left}px`;
   el.style.top = `${offY + box.top}px`;
   return true;
+}
+
+/* ═════ SNG-679 H3 · DRAWING A HOLD, ONCE, FOR WHICHEVER MAP IS ASKING ═════
+ * ✅ AEVI (H1): *"All three tiers read it. Nothing draws a hold any other way."* That is a claim about the
+ * READER; this is the same claim about the PAINTER, and it has to hold too — two maps with their own hold-
+ * drawing code is how the three map tiers drifted apart in the first place (SNG-677 exists because of it).
+ * ⛔ COLOUR SAYS WHOSE, SHAPE SAYS WHAT (H3). Your own holds take the gold the "you are here" ring uses;
+ * other players' take a cooler cream. The shape comes from `holdMarker`, never from here.
+ * ⛑ AND A HOLD'S ROUTE IS DRAWN SOLID BEHIND HER AND DASHED AHEAD — Aevi: *"the part sailed is solid, the
+ * part to come is dashed"* — which is what makes a glance say which way she is going.
+ * @param at (lon, lat) => {x, y} | null — the asking map's own projection, so this function holds none
+ */
+function paintHoldRow(ctx, row, at, { labelOf = null } = {}) {
+  if (!row || typeof at !== "function" || !row.worldPos) return null;
+  const p = at(row.worldPos.longitude, row.worldPos.colatitude - 90);
+  if (!p) return null;
+  const m = holdMarker(row);
+  const ink = row.own !== false ? "#e8c14a" : "rgba(226,214,184,0.92)";
+  // ⛔ A RUINED THING IS DRAWN FAINTER, which is S5's half of this: the mark says it is there, the weight
+  // says how it is doing. A destroyed hold still draws — "where it stood" is a fact a map should carry.
+  const alpha = row.state === "destroyed" ? 0.42 : row.state === "ruined" ? 0.6 : row.state === "damaged" ? 0.8 : 1;
+  ctx.save();
+  ctx.globalAlpha = alpha;
+  // the route, behind the mark, when she is going somewhere
+  if ((row.atSea || row.onRoad) && row.from && row.to) {
+    const a = CONTENT.locations?.[row.from]?.worldPos, b = CONTENT.locations?.[row.to]?.worldPos;
+    const pa = a ? at(a.longitude, a.colatitude - 90) : null;
+    const pb = b ? at(b.longitude, b.colatitude - 90) : null;
+    if (pa && pb) {
+      ctx.strokeStyle = ink; ctx.lineWidth = 1;
+      ctx.globalAlpha = alpha * 0.5;
+      ctx.setLineDash([]);                        // sailed
+      ctx.beginPath(); ctx.moveTo(pa.x, pa.y); ctx.lineTo(p.x, p.y); ctx.stroke();
+      ctx.setLineDash([3, 3]);                    // still to come
+      ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(pb.x, pb.y); ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.globalAlpha = alpha;
+    }
+  }
+  // ⛑ A MOORED HOLD SITS BESIDE ITS PLACE'S PIN, OFFSET so it never covers it (H3). A moving one is at her
+  // own point, where nothing else is.
+  const dx = m.moving ? 0 : 9, dy = m.moving ? 0 : -7;
+  drawGlyph(ctx, m.kind, p.x + dx, p.y + dy, m.r, { ink, fill: "rgba(20,22,28,0.6)" });
+  ctx.restore();
+  if (typeof labelOf === "function") labelOf(row, { x: p.x + dx, y: p.y + dy }, m);
+  return { x: p.x + dx, y: p.y + dy, r: m.r, row };
 }
 
 function wirePlaceCard(root) {

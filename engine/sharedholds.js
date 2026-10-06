@@ -13,6 +13,9 @@
 // Another traveler's GM hears of those within two walking days, and the play screen says one line.
 
 import { positionedPlace } from "./worldtime.js";
+// ⛔ SNG-679 H4: a hull under way is published WHERE SHE IS. `whereaboutsOf` is H2's one reader, so a
+// visitor's map and her owner's map cannot disagree about the water she is on.
+import { whereaboutsOf } from "./carriage.js";
 import { walkingDays } from "./worldmap.js";
 import { whereOf } from "./travelers.js";
 import { smartClamp } from "./namematch.js";
@@ -24,10 +27,30 @@ export const HOLD_NEAR_DAYS = 2;
 
 /** One holding as the road knows it. Null for nothing to publish. `nameOf` resolves a person's id to their name (the owner's world
  *  knows its own people). Pure. */
-export function holdCard(character, h, { locations = {}, nameOf = null, economy = null, cfg = null } = {}) {
+/* ⛔ WHAT A VISITOR SEES FROM OUTSIDE (SNG-679 S2). The martial family and the works that stand up out of
+ *  the ground — a burned wall or a fallen tower is visible from the road; a damaged cellar is not. Closed on
+ *  purpose: a feature kind not named here publishes nothing, which is the safe direction for a card that
+ *  crosses between players' worlds. */
+const OUTWARD_FEATURES = new Set(["wall", "gate", "tower", "keep", "yard", "dock", "mill", "circle", "outcrop", "burial"]);
+
+export function holdCard(character, h, { locations = {}, nameOf = null, economy = null, cfg = null,
+                                         worldDay = null, routes = null } = {}) {
   if (!character?.id || !h?.id) return null;
   const loc = h.locationId ? (locations?.[h.locationId] || null) : null;
-  const pos = h.locationId ? positionedPlace(locations || {}, h.locationId)?.worldPos : null;
+  /* ═════ SNG-679 H4 · WHERE SHE IS, NOT WHERE SHE LEFT ═════
+   * ✅ AEVI, reading origin: *"Another player's hold under way is published at its PORT: `holdCard` takes
+   * `worldPos` from `locationId` only."* And her instruction: *"`holdCard` publishes
+   * `whereaboutsOf(h).worldPos` when she is under way, with `atSea`, `from`, `to` and `fraction`, so other
+   * players see her on the water and not at her port."*
+   * ⛑ THROUGH `whereaboutsOf`, which is H2's one reader — so a visitor's map, her owner's map and the raid
+   * that reaches her all read the same point. A second position rule here is what H2 existed to remove.
+   * ⚠️ `locationId` STILL ONLY CHANGES ON ARRIVAL, so this is a DERIVED position and nothing to keep in
+   * sync; a card built with no `worldDay` falls back to the port, which is what every existing caller gets
+   * until it passes one. */
+  const away = whereaboutsOf(h, { worldDay, locations, routes });
+  const pos = away?.atSea
+    ? away.worldPos
+    : (h.locationId ? positionedPlace(locations || {}, h.locationId)?.worldPos : null);
   const where = h.locationId ? whereOf({ currentLocationId: h.locationId }, locations || {}) : null;
   const nm = (id) => (id && nameOf ? nameOf(id) : null) || null;
   return {
@@ -39,6 +62,22 @@ export function holdCard(character, h, { locations = {}, nameOf = null, economy 
       ? { colatitude: Number(pos.colatitude), longitude: Number(pos.longitude), ...(Number.isFinite(Number(pos.depth)) ? { depth: Number(pos.depth) } : {}) } : null,
     keeperId: h.steward || null, keeperName: nm(h.steward),
     condition: h.condition || null,
+    /* ⛔ FORTUNE AND FABRIC BOTH, BECAUSE A VISITOR CAN SEE ONE AND BE TOLD THE OTHER. `condition` is how
+     * the place is DOING; `state` (SNG-679 Part S) is whether anything is broken. ✅ Aevi: *"a thriving hold
+     * can have a burned wall."* ⛑ And the card stays *"what a visitor could know"* — the rung, the frame and
+     * a burned wall are all things you can see from the road; the store and the crew's names are not, and
+     * they are still absent. */
+    rung: h.rung || null, frame: h.frame || null,
+    state: h.state || "whole",
+    // ⛑ H4's four: so a reader can draw her on the water and say how far along she is.
+    ...(away?.atSea ? { atSea: true, from: away.from || null, to: away.to || null,
+      fraction: Number.isFinite(Number(away.fraction)) ? Number(away.fraction) : null } : {}),
+    // ⛔ THE OUTWARD FEATURES ONLY. ✅ S2: *"its card publishes the hold's own `state` and the state of its
+    // OUTWARD features (the martial family: wall, gate, tower, keep and so on), because those are what a
+    // visitor would see."* An inward feature's state is its owner's business.
+    outward: (h.features || []).filter((f) => OUTWARD_FEATURES.has(String(f?.siteKind || f?.kind || "").toLowerCase()))
+      .map((f) => ({ name: f?.name || f?.kind || null, siteKind: f?.siteKind || null, state: f?.state || "whole" }))
+      .filter((f) => f.name).slice(0, 5),
     has: (h.features || []).map(f => f?.name || f?.kind).filter(Boolean).slice(0, 5),
     guardedBy: (h.garrison || []).map(nm).filter(Boolean).slice(0, 3),
     // ⛔ CCODE-388: only a hold its owner OPENED to trade says what it sells — its goods, how many, and the price at its own Reach

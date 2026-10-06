@@ -2561,3 +2561,49 @@ table.ob-matrix { border-collapse: collapse; width: 100%; min-width: 640px; font
    120ms of fade is not worth either failure mode. */
 
 
+
+/* ═════ SNG-680 · THE OPENING FILM (O4) ═════
+ * ✅ AEVI: *"Captions: low and left on wide screens, low with a 16 px gutter on phones."*
+ * ⛔ THE STAGE IS THE WHOLE SCREEN AND THE CANVAS IS A FIXED 900×560 PICTURE INSIDE IT. The painter works
+ * in those units (the dpr transform does the rest), so the canvas is scaled by CSS and never re-measured —
+ * which is what keeps a phone and a desktop showing the same frame rather than two different crops.
+ * ⛑ `#op-prev` is the crossfade's other half: under reduced motion the outgoing frame is copied into it and
+ * faded out while the new one fades in, because *"crossfades between still frames"* is her rule for that
+ * case and a hard cut between stills is the one thing it rules out. */
+.screen-opening { padding: 0; }
+.op-stage { position: relative; width: 100%; max-width: 900px; margin: 0 auto; background: #04050b;
+  border: 1px solid var(--border); border-radius: 10px; overflow: hidden; cursor: pointer; }
+.op-stage canvas { display: block; width: 100%; height: auto; }
+.op-stage #op-prev { position: absolute; inset: 0; opacity: 0; pointer-events: none; }
+.op-stage.op-fade #op-canvas, .op-stage.op-fade #op-prev { transition: opacity var(--op-fade, 1.2s) linear; }
+.op-caption { position: absolute; left: 32px; right: 32px; bottom: 74px; pointer-events: none; }
+/* ⚠️ `--font-display` IS NOT DEFINED ANYWHERE — the game's display face is `--font` (Georgia), and a var()
+   fallback meant this rule ran on its own fallback rather than on the game's stack. (Two older rules,
+   `.world-arcs-head` and `.lore-title`, name the same missing variable and have been running on
+   `--font-ui` since they were written; that is a look question, so it is Aevi's to call, not mine.) */
+.op-line { font-family: var(--font); font-size: 21px; line-height: 1.42; color: #f2efe6;
+  text-shadow: 0 2px 14px rgba(0,0,0,.95), 0 0 34px rgba(0,0,0,.7); max-width: 34em; }
+.op-line + .op-line { margin-top: 6px; }
+.op-after { color: #cfc8b6; font-size: 18px; font-style: italic; }
+.op-title + .op-caption .op-line:first-child { font-size: 38px; letter-spacing: .04em; }
+.op-track { position: absolute; left: 32px; right: 32px; bottom: 54px; display: flex; gap: 3px; align-items: center; }
+.op-seg { height: 2px; background: rgba(226,232,246,.18); border-radius: 2px; }
+.op-seg.on { background: rgba(226,232,246,.72); }
+.op-mv { margin-left: 10px; font-family: var(--font-ui); font-size: 10.5px; letter-spacing: .08em;
+  text-transform: uppercase; color: rgba(226,232,246,.5); white-space: nowrap; }
+.op-ctl { position: absolute; right: 14px; bottom: 12px; display: flex; gap: 6px; }
+.op-ctl .opt { background: rgba(8,10,16,.66); border-color: rgba(226,232,246,.22); color: #e6e9f2;
+  padding: 6px 12px; font-size: 12px; }
+.op-ctl .op-icon { min-width: 36px; letter-spacing: 1px; }
+.op-ctl .op-begin { background: var(--accent); border-color: var(--accent); color: #0b0d14; font-weight: 600; }
+.door-again-row { margin-top: 14px; text-align: center; }
+@media (max-width: 640px) {
+  .op-stage { border-radius: 0; border-left: 0; border-right: 0; }
+  .op-caption { left: 16px; right: 16px; bottom: 60px; }
+  .op-line { font-size: 16px; }
+  .op-after { font-size: 14px; }
+  .op-title + .op-caption .op-line:first-child { font-size: 26px; }
+  .op-track { left: 16px; right: 16px; bottom: 44px; }
+  .op-mv { display: none; }
+  .op-ctl { right: 8px; bottom: 6px; }
+}

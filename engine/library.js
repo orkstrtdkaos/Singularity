@@ -19,6 +19,12 @@ export const LIBRARY_INDEX = [
     // authorship of the shared store since SNG-128 and had NO READER IN PLAY — the one export on Aevi's
     // "critical path" that was genuinely unreached. ⚑ It reads TWO players off the live store today.
     { id: "made_by", label: "Who made this world", path: "world/canon/valley.json", kind: "made" },
+    /* ✅ SNG-680 O1: *"In the Library, as an entry under the world, so a player can watch it again from
+     * inside a game."* ⛔ NO `label` AND NO `path` ON PURPOSE: the film names itself from
+     * `opening.controls.watchAgain`, and every other string in this index is a label in code — which is the
+     * one thing her G1 forbids for the film. The renderer supplies the label and drops this row when
+     * `opening.json` is absent, so a pack without a film shows no entry rather than a dead one. */
+    { id: "opening", kind: "film" },
   ] },
   { cat: "What You Can Be", entries: [
     { id: "vocations", label: "The Eight Vocations", path: "docs/VOCATIONS.md", kind: "md" },

@@ -2680,8 +2680,13 @@ console.log("\n── §184 · the claim, not its capitals; the stamp keeps the 
   // ⛔ AND THE COVERAGE IS ASSERTED, NOT ASSUMED: every entry in the index is either rendered by §181 (it has a path) or by the check
   // above (it is the circle). A new pathless entry fails here until it is covered, instead of being silently skipped.
   const entries184 = LB184.LIBRARY_INDEX.flatMap(c => c.entries);
-  check(`§184: ⛔ every Library entry is covered by a gate that RENDERS it — ${entries184.filter(e => e.path).length} by path (§181), ${entries184.filter(e => !e.path).length} drawn (here)`,
-    entries184.length >= 15 && entries184.every(e => e.path || e.kind === "circle"), entries184.filter(e => !e.path && e.kind !== "circle").map(e => e.id).join(", "));
+  /* ⛑ A THIRD KIND OF COVERAGE, NOT A LOOSER RULE. §181 covers the entries that FETCH a path; the great
+   * circle is drawn and covered here. SNG-680's film entry does neither: it has no path and renders a
+   * canvas, and its coverage is the five 680 gates in smoke.mjs — so it is named by kind, with the gate
+   * that covers it named back, rather than being let through by a weakened predicate. */
+  const COVERED184 = { circle: "drawn here", film: "SNG-680 G1–G5 in smoke.mjs" };
+  check(`§184: ⛔ every Library entry is covered by a gate that RENDERS it — ${entries184.filter(e => e.path).length} by path (§181), ${entries184.filter(e => !e.path).length} drawn (${Object.entries(COVERED184).map(([k, w]) => `${k}: ${w}`).join("; ")})`,
+    entries184.length >= 15 && entries184.every(e => e.path || COVERED184[e.kind]), entries184.filter(e => !e.path && !COVERED184[e.kind]).map(e => e.id).join(", "));
 }
 
 /* ══════════ §185 — B2: NINE REGISTERED RULES FILES THAT REACHED NOTHING (Erik 2026-09-12: "proceed with B2") ══════════ */

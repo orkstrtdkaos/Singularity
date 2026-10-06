@@ -8098,6 +8098,210 @@ await (async () => {
         "the places, the region seats, a hold's label and a hold's mark — all four passes, or the one that skips it puts a name back at the edge");
     }
 
+    /* ═════ SNG-680 G1–G5 · THE OPENING FILM ═════
+     * ✅ ERIK: *"We should have some sort of opening cinematic or equivalent … and how you are one of many —
+     * pushing on and being pushed by … the Arcs of Exesa."*
+     * ⛔ THE FILM IS PURE RENDER AND NO SUITE CAN WATCH IT. What a suite CAN hold is the half that is
+     * arithmetic over content — which is also the half that can be wrong in a way nobody would see by
+     * watching it once: a caption the code invented, a shot that outlives its words, a coda that names the
+     * wrong region, a ring in the wrong order. Everything below is that half. */
+    {
+      const OP = await import("../engine/opening.js");
+      const { loadContentHeadless: lch680 } = await import("./headless_content.mjs");
+      const C680 = await lch680();
+      const raw680 = readFileSync(join(root, "content/packs/core/world/opening.json"), "utf8");
+      const src680 = readFileSync(join(root, "app.js"), "utf8");
+      const reel = OP.openingReel(C680);
+      const TR = await import("../engine/traditions.js");
+
+      /* G1 · THE WORDS ARE CONTENT. ✅ *"Every caption and label the film shows is read from `opening.json`.
+       * A test renders the shot list and asserts that each string appears in the file. No literal narration
+       * lives in app.js."* ⛑ Both halves: every line the reel yields is IN the file (so nothing is
+       * synthesised), and the film's own code carries no `|| "Some Words"` fallback — which is the exact
+       * shape that broke this rule in my first pass, where `C.skip || "Skip"` put an English word in app.js
+       * that would never show while she kept authoring hers. */
+      const everyLine = [...reel.shots.flatMap((s) => [...(s.lines || []), ...(s.after || [])]),
+        reel.title?.line1, reel.title?.line2, reel.begin,
+        ...Object.values(reel.controls || {}),
+        ...(reel.coda?.shots || []).flatMap((s) => s.lines || []),
+        reel.coda?.regionLine, reel.coda?.regionLineAtCrossing].filter(Boolean).map(String);
+      check("680/G1: ⛔ every caption, label and title the film shows is a string FROM `opening.json` — nothing is synthesised",
+        everyLine.length > 40 && everyLine.every((l) => raw680.includes(l)),
+        `${everyLine.length} strings checked, ${everyLine.filter((l) => !raw680.includes(l)).length} not in the file`);
+      {
+        // the film's own region of app.js, comments stripped: a comment QUOTES her prose, which is not narration
+        const i0 = src680.indexOf("SNG-680 O2 · ONE GLOBE"), i1 = src680.indexOf("function renderCreate() {", i0);
+        const region = i0 > 0 && i1 > i0 ? src680.slice(i0, i1) : "";
+        const codeOnly = region.replace(/\/\*[\s\S]*?\*\//g, " ").replace(/^\s*\/\/.*$/gm, " ").replace(/<!--[\s\S]*?-->/g, " ");
+        // a fallback that puts words on screen: `|| "Skip"`, `|| 'Next'` — but not `|| ""` and not an id
+        const WORDED = /\|\|\s*"[A-Z][a-z]+[^"]*"/g;
+        const fallbacks = codeOnly.match(WORDED) || [];
+        /* ⛑ THE DETECTOR IS PROVED ON A FIXTURE, BECAUSE THE LIVE POPULATION IS MEANT TO BE EMPTY. A gate
+         * whose only evidence is "I found nothing" cannot tell a clean file from a broken pattern — and this
+         * pattern has already been broken once in this session by a raw string eating its own escapes. The
+         * fixture is the exact line my first pass shipped. */
+        const CAUGHT = String.raw`const s = esc(String(C.skip || "Skip"));`.match(WORDED) || [];
+        const MISSED = String.raw`const t = String(C.skip || "");` .match(WORDED) || [];
+        check("680/G1: …and no literal narration lives in app.js — not even as a `||` fallback nobody would ever see",
+          region.length > 8000 && fallbacks.length === 0 && CAUGHT.length === 1 && MISSED.length === 0,
+          fallbacks.length ? `fallback(s): ${fallbacks.join(" · ")}` : `${region.length} chars of film code, no worded fallback (detector catches \`|| "Skip"\`, allows \`|| ""\`)`);
+        check("680/G1: …and every visual token the author wrote has a case in the painter — an unknown token would draw the bare globe in silence",
+          (() => {
+            const tokens = Object.keys(reel.visuals || {}).filter((k) => !k.startsWith("_"));
+            const missing = tokens.filter((k) => !codeOnly.includes(`"${k}"`));
+            // ⛑ and the same filter, over a token nobody has drawn, must find exactly that one
+            const fixture = [...tokens, "_fixture_undrawn_token"].filter((k) => !codeOnly.includes(`"${k}"`));
+            return tokens.length >= 24 && missing.length === 0 && fixture.length === 1;
+          })(),
+          (() => { const tokens = Object.keys(reel.visuals || {}).filter((k) => !k.startsWith("_"));
+            const missing = tokens.filter((k) => !codeOnly.includes(`"${k}"`));
+            return missing.length ? `no case for: ${missing.join(", ")}` : `${tokens.length} tokens, all drawn`; })());
+        check("680/G1: …and the two words of `name_wears` are read from the shot's own `nameFrom`/`nameTo`, which she authored",
+          codeOnly.includes("shot?.nameFrom") && codeOnly.includes("shot?.nameTo")
+          && reel.shots.some((s) => s.nameFrom && s.nameTo),
+          "a reader that invents its own field name reports the CONTENT as missing");
+      }
+
+      /* G2 · §29.7. ✅ *"Every player-facing string in `opening.json` passes the wording check: no ticket id,
+       * no file name, no build words."* */
+      {
+        const BAD = /\b(SNG|CCODE)-\d|\.json\b|\.js\b|schemaVersion|TODO|FIXME|\bnull\b|undefined/i;
+        const bad = everyLine.filter((l) => BAD.test(l));
+        check("680/G2: §29.7 — no player-facing string in the film carries a ticket id, a file name or a build word",
+          bad.length === 0, bad.length ? bad.slice(0, 2).join(" · ") : `${everyLine.length} strings clean`);
+        // ⛑ and the shots hold long enough to READ: her own pacing dials, applied to her own words
+        const tooFast = reel.shots.filter((s) => {
+          const words = [...(s.lines || []), ...(s.after || [])].join(" ").trim().split(/\s+/).filter(Boolean).length;
+          return words > 0 && OP.shotSeconds(s, reel.pacing) / words < 0.18;   // under ~330 words a minute
+        });
+        check("680/G2: …and no shot asks a player to read faster than the pacing promises",
+          tooFast.length === 0, tooFast.length ? tooFast.map((s) => s.id).join(", ") : `${reel.shots.length} shots, ${(reel.shots.reduce((n, s) => n + OP.shotSeconds(s, reel.pacing), 0) / 60).toFixed(2)} min`);
+      }
+
+      /* G3 · IT PLAYS ONCE, THEN WAITS TO BE ASKED. ✅ *"A fresh profile autoplays it on its first new
+       * character. A second new character goes straight to the door, which offers `watchAgain`. Skip lands
+       * on the title card, then the door."* */
+      check("680/G3: ⛔ a fresh profile autoplays the film; a profile that has seen it does not — and the decision is on the PROFILE, not the character",
+        OP.shouldAutoplayOpening({ playerKey: "p" }, C680) === true
+        && OP.shouldAutoplayOpening({ playerKey: "p", seenOpening: true }, C680) === false
+        && OP.shouldAutoplayOpening(null, C680) === true
+        && OP.shouldAutoplayOpening({ playerKey: "p" }, {}) === false,
+        "a film with no script is not a film somebody skipped");
+      check("680/G3: …and the door offers `watchAgain` by her word, the title card holds until `begin`, and Skip lands ON the title",
+        /shouldAutoplayOpening\(profile, CONTENT\)/.test(src680)
+        && /controls\?\.watchAgain/.test(src680)
+        && /atTitle\(\)/.test(src680)
+        && /i = frames\.length - 1; show\(\);/.test(src680)
+        && !!reel.controls?.watchAgain && !!reel.begin,
+        `watchAgain=${JSON.stringify(reel.controls?.watchAgain)} begin=${JSON.stringify(reel.begin)}`);
+
+      /* G4 · THE CODA IS THE CHARACTER'S. ✅ *"For a Millbrook start, the region line names the Valley of
+       * Echoes and 34 days. For a Crossing start, it reads `regionLineAtCrossing`. The arc face is the
+       * nearest arc's current-stage `publicFace`, and is never the water's unless the water is nearest and
+       * unresolved."* ⛑ Her sample, run against the real content, including the 34. */
+      {
+        const WM680 = await import("../engine/worldmap.js");
+        const AE680 = await import("../engine/arceffects.js");
+        const days = (a, b) => WM680.walkingDays(C680.locations?.[a], C680.locations?.[b]);
+        const codaFor = (id) => OP.codaShots(C680, { startId: id, locations: C680.locations, regions: C680.regions, daysFrom: days, reaches: AE680.arcReachesRegion });
+        const mill = OP.codaRegionLine(C680, { startId: "millbrook", locations: C680.locations, regions: C680.regions, daysFrom: days });
+        check("680/G4: ⛔ a Millbrook start reads the Valley of Echoes and 34 days — her own sample, on the real content",
+          /Valley of Echoes/.test(mill) && /\b34\b/.test(mill), JSON.stringify(mill));
+        // the Crossing is colatitude 0, and places sit AT it that are not it
+        const atCrossing = Object.keys(C680.locations || {})
+          .filter((id) => Math.abs(Number(C680.locations[id]?.worldPos?.colatitude)) <= 0.1);
+        const cross = OP.codaRegionLine(C680, { startId: atCrossing[0], locations: C680.locations, regions: C680.regions, daysFrom: days });
+        check("680/G4: …and a start AT the Crossing reads `regionLineAtCrossing` — which is a colatitude, not an id (4 places sit there, only one of them IS it)",
+          atCrossing.length >= 2 && cross === String(C680.opening.coda.regionLineAtCrossing),
+          `${atCrossing.length} places at the Crossing; first is ${atCrossing[0]}`);
+        const arc = OP.codaArc(C680, { startId: "millbrook", locations: C680.locations, reaches: AE680.arcReachesRegion });
+        const stageOf = (a) => (a.stages || []).find((s) => Number(s.stage) === Number(a.currentStage)) || (a.stages || [])[0];
+        check("680/G4: …and the face is the CURRENT stage's `publicFace` of a world arc, never `onceLineKnown` — the character knows nothing yet",
+          !!arc && arc.face === String(stageOf(arc.arc).publicFace)
+          && String(arc.arc.scale).toLowerCase() === "world"
+          && !String(stageOf(arc.arc).onceLineKnown || "").includes(arc.face),
+          `${arc?.arc?.id} · ${arc?.arcBy}`);
+        /* ⚠️ AND HER LADDER'S FIRST TWO RUNGS HAVE NO DATA, WHICH THE GATE SAYS OUT LOUD RATHER THAN
+         * PASSING QUIETLY. "The nearest arc with a hinge, front or connection at or near that place" cannot
+         * be asked: the 38 authored stages carry stage/name/publicFace/pressureOnAdvance/effects/
+         * onceLineKnown/onceNamed and nothing else, 0 of them name any of the 158 locations, and 0 of 10
+         * arcs carries a `regions` list. So the coda's arc is the same for every start in the game, by
+         * declaration order, until one line of `coda.arcPreference` or one `regions` list exists — and
+         * `arcBy` is required to admit it, so no caller can mistake it for proximity. */
+        const stageFields = new Set((C680.greaterArcs || []).flatMap((a) => (a.stages || []).flatMap((s) => Object.keys(s))));
+        const scoped = (C680.greaterArcs || []).filter((a) => Array.isArray(a.regions) && a.regions.length);
+        const preferred = Array.isArray(C680.opening?.coda?.arcPreference) && C680.opening.coda.arcPreference.length;
+        const located = !stageFields.has("fronts") && !stageFields.has("hingeNpcs") && !scoped.length && !preferred;
+        check("680/G4: …and while nothing can LOCATE an arc, the coda admits it chose by authored order (and stops admitting it the day one is authored)",
+          located ? arc?.arcBy === "authored order (nothing chose)" : ["named by a stage", "region", "authored preference"].includes(arc?.arcBy),
+          located ? `no stage carries a place (fields: ${[...stageFields].join("/")}), 0/${(C680.greaterArcs || []).length} scoped, no arcPreference` : `now locatable: ${arc?.arcBy}`);
+      }
+
+      /* ══ THE CAMERA CONVENTION, WHICH IS WHAT THE CODA GOT WRONG ══
+       * ⛔ `pitch` IS THE LATITUDE IT CENTRES, NOT ITS NEGATION. `project` computes y as sin(lat − pitch), so
+       * a frame built with `pitch: -lat` centres the ANTIPODE — and a frame of the far side of a world is
+       * still a frame full of terrain, which is why nothing threw and nothing looked broken.
+       * ⚠️ MEASURED ON THE LIVE CODA: Millbrook is at latitude −69.7° and projected to NULL in its own
+       * region frame — 139° of arc away — under a caption that named the Valley of Echoes. One sign.
+       * ⛑ Gated HERE, on the projection's own contract and on a real authored place, because this is a rule
+       * about `worldglobe.js` that every future caller needs, not a fact about one screen. Both directions:
+       * the right sign centres it, the wrong sign loses it. */
+      {
+        const WG680 = await import("../engine/worldglobe.js");
+        const bad = [];
+        for (const id of ["millbrook", "the_crossing"]) {
+          const wp = C680.locations?.[id]?.worldPos;
+          const lat = Number(wp?.colatitude) - 90, lon = ((Number(wp?.longitude) + 540) % 360) - 180;
+          if (!Number.isFinite(lat)) { bad.push(`${id}: no world position`); continue; }
+          const r = 450 / Math.sin(WG680.REGION_FRAME_DEG / 2 * Math.PI / 180);
+          const right = WG680.project(lon, lat, { yaw: -lon, pitch: lat, r, cx: 450, cy: 280 }, 1.002);
+          const wrong = WG680.project(lon, lat, { yaw: -lon, pitch: -lat, r, cx: 450, cy: 280 }, 1.002);
+          if (!right || Math.hypot(right.x - 450, right.y - 280) > 0.5) bad.push(`${id}: pitch=+lat did not centre it`);
+          if (Math.abs(lat) > 1 && wrong) bad.push(`${id}: pitch=−lat still projected — the gate cannot see the defect`);
+        }
+        check("680/O3: ⛔ a region frame's `pitch` IS the latitude it centres — negate it and the camera frames the antipode",
+          bad.length === 0, bad.length ? bad.join(" · ") : "millbrook (−69.7°) and the Crossing (−90°) both land dead centre; the negated pitch loses both");
+        check("680/O3: …and the coda's own frame uses it in that sense, at the world map's own span",
+          /pitch: colat - 90, r, cx: w \/ 2, cy: h \/ 2/.test(src680) && /REGION_FRAME_DEG \+ \(V === "zoom_to_start"/.test(src680),
+          "the same constant the world map frames a region with");
+      }
+
+      /* G5 · THE RING IS THE RING. ✅ *"The pole colours and order in `poles_ignite` equal `ringOrder` and
+       * the tradition colours."*
+       * ⚠️ HALF OF THAT PREMISE DOES NOT EXIST, MEASURED. `domainCircleSVG` has eleven colour rules in
+       * style.css and every one is by ROLE (`.gc-primary`, `.gc-closed`, the ring, the labels) — the ring is
+       * monochrome until you choose — and 0 of the 24 traditions carries a hex colour anywhere in content.
+       * So the ORDER is held exactly, and the colour is gated BOTH WAYS: derived from each station's
+       * authored `axis` today, and read from `color`/`hex` the day she writes one. A gate that asserted "no
+       * colour is authored" would go red the moment she authored one, which is the wrong way for a gate to
+       * fail. */
+      {
+        const ring = TR.ringOrder(C680.traditionIndex);
+        const aes = C680.traditionVisualAesthetics || {};
+        const css680 = readFileSync(join(root, "style.css"), "utf8");
+        const roleRules = (css680.match(/\.gc-[a-z-]+[^{]*\{[^}]*\}/g) || []).filter((r) => /fill:|stroke:/.test(r));
+        /* ⚠️ BOUND TO THE FUNCTION, NOT TO "EVERYTHING AFTER IT". `ringOrder(idx)` appears at three other call
+         * sites further down app.js (the door's own circle among them), so a slice that runs to the end of
+         * the file would have answered yes for a `openingPoles` that never called it. */
+        const polesFn = (() => {
+          const a = src680.indexOf("function openingPoles");
+          const b = src680.indexOf("\nfunction ", a + 10);
+          return a > 0 && b > a ? src680.slice(a, b) : "";
+        })();
+        check("680/G5: ⛔ the film's ring IS the door's ring — same `ringOrder`, same clock positions, one definition between them",
+          ring.length === 24
+          && polesFn.length > 400 && polesFn.length < 3000
+          && /ringOrder\(idx\)/.test(polesFn)
+          && /lon: \(k \* 360 \/ n\)/.test(polesFn),
+          `${ring.length} stations; pole-on at the Crossing a point's screen bearing IS its longitude`);
+        check("680/G5: …and the pole colour reads an authored one where there is one and derives from the authored `axis` where there is not",
+          ring.every((id) => !!aes[id]?.axis)
+          && /typeof a\.color === "string"/.test(polesFn)
+          && /axes\.indexOf\(axis\)/.test(polesFn),
+          `${ring.filter((id) => aes[id]?.axis).length}/${ring.length} stations carry an axis; ${ring.filter((id) => /#[0-9a-f]{3,8}/i.test(JSON.stringify(aes[id] || {}))).length} carry a hex; ${roleRules.length} ring rules in style.css are all by role`);
+      }
+    }
+
     /* ═════ SNG-679 H1 + H3 + H4 · HOLDS ON THE MAPS ═════
      * ✅ ERIK: *"Make sure traveling holds can show up on all the map levels."* ⛔ Aevi's read of origin:
      * *"NO MAP DRAWS A HOLDING. `character.holdings` is read only for framing the world view."* */

@@ -234,9 +234,9 @@ export function legGambitFor(leg, ctx, { abilities = {}, energy = null } = {}) {
 /** ⛔ GO AROUND — the road to the journey's end that does not pass through the perilous place, offered only when it is a real way round
  *  (no more than `altFactor` of what is left) and never when the perilous place IS the journey's end. `option` is a way as `planJourney` takes
  *  one; `days` is what it will take this traveller. Null otherwise. Pure. */
-export function aroundLeg(plan, leg, locations = {}, { altFactor = 1.6, march = 0 } = {}) {
+export function aroundLeg(plan, leg, locations = {}, { altFactor = 1.6, march = 0, character = null, content = null } = {}) {
   if (!plan || !leg || leg.toId === plan.destId) return null;
-  const r = roadRoute(leg.fromId, plan.destId, locations, { banned: [leg.toId] });
+  const r = roadRoute(leg.fromId, plan.destId, locations, { banned: [leg.toId], character, content });
   if (!r?.path?.length || r.path.includes(leg.toId)) return null;
   const ahead = (chosenWay(plan)?.legs || []).slice(Number(plan.underway?.legIndex) || 0).reduce((n, l) => n + (Number(l.days) || 0), 0);
   const days = r.days * (1 - (Number(march) || 0));

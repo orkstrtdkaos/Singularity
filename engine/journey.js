@@ -15,6 +15,14 @@
 
 import { walkingDays } from "./worldmap.js";
 import { isNetworkGate, waygateTierOf, wayfaringTier, hubWaygate, gateHopCost, aimsOpen, knowsGate } from "./waygate.js";
+/* ⛔ SNG-679 S6 — A ROUTE IS WHERE A BROKEN ROAD IS FELT. ✅ Erik: *"Every single thing that exists needs to
+ * be able to be … damaged, ruined … by the game."* ✅ Aevi: *"Roads: damaged ×1.5 days. Ruined ×2 days and
+ * closed to carts, caravans and moving holds. Destroyed is out of `routeBetween` until it is repaired."*
+ * ⛑ Imported rather than injected, unlike `walkingDays`'s neighbours here: a route that silently ignores the
+ * state of the roads it routes over is worse than one that cannot be built, and an optional hook is a thing
+ * eleven callers can forget. The state is read only when a caller hands in a character AND the content — with
+ * neither, every answer is exactly today's. */
+import { roadLeg, gateLeg } from "./mapstate.js";
 
 /** ⚑ THE ROAD GRAPH IS `connections`, WEIGHTED BY REAL DISTANCE. Measured on the shipped world: 135 places,
  *  182 undirected edges, ONE connected component, and not a single asymmetric edge — so a road always goes
@@ -23,7 +31,7 @@ import { isNetworkGate, waygateTierOf, wayfaringTier, hubWaygate, gateHopCost, a
  *  ⚠️ THE WEIGHT IS `walkingDays`, NOT A HOP COUNT. Measured, a road runs 1.0x to 2.0x the straight line, and
  *  counting hops instead would call a single 150-day leg "closer" than three 2-day ones. `banned` lets a
  *  caller ask for the way round something, which is how the second option gets found. PURE. */
-export function roadDistances(fromId, locations = {}, { banned = null } = {}) {
+export function roadDistances(fromId, locations = {}, { banned = null, character = null, content = null, carts = false } = {}) {
   const skip = banned instanceof Set ? banned : new Set(banned || []);
   skip.delete(fromId);
   const dist = { [fromId]: 0 }, prev = {}, done = new Set();
@@ -36,8 +44,17 @@ export function roadDistances(fromId, locations = {}, { banned = null } = {}) {
     done.add(u);
     for (const v of (locations[u]?.connections || [])) {
       if (!locations[v] || skip.has(v) || done.has(v)) continue;
-      const w = walkingDays(locations[u], locations[v]);
+      let w = walkingDays(locations[u], locations[v]);
       if (w == null) continue;                   // an unplaced end has no measurable leg — skip, never guess
+      /* ⛔ S6 · THE LEG'S STATE, ON THE ONE EDGE THE WHOLE GRAPH IS WALKED BY. Every route in the game — the
+       * travel screen, a caravan's run, a job's reach, a band's march — comes through here, so a road that is
+       * out is out everywhere at once, and a slow road is slow everywhere at once. ⛑ `roadLeg` also answers
+       * for the two places: a DESTROYED place is not a road end (S6), so its roads close with it. */
+      if (character && content) {
+        const leg = roadLeg(character, u, v, w, { content, carts });
+        if (!leg.open) continue;
+        w = leg.days;
+      }
       const nd = d + w;
       if (dist[v] === undefined || nd < dist[v]) { dist[v] = nd; prev[v] = u; queue.push([nd, v]); }
     }
@@ -79,12 +96,12 @@ export function pathFrom({ dist, prev }, fromId, toId) {
 }
 
 /** One origin, one destination — the common case, and the shape every caller already wanted. */
-export function roadRoute(fromId, toId, locations = {}, { banned = null } = {}) {
+export function roadRoute(fromId, toId, locations = {}, { banned = null, character = null, content = null, carts = false } = {}) {
   if (!locations[fromId] || !locations[toId]) return null;
   if (fromId === toId) return { days: 0, path: [fromId], legs: 0 };
   const skip = banned instanceof Set ? new Set(banned) : new Set(banned || []);
   skip.delete(fromId); skip.delete(toId);        // never ban the ends — that is not a route, it is a refusal
-  return pathFrom(roadDistances(fromId, locations, { banned: skip }), fromId, toId);
+  return pathFrom(roadDistances(fromId, locations, { banned: skip, character, content, carts }), fromId, toId);
 }
 /** ⛔ WHICH GATES THIS TRAVELLER MAY AIM AT — and it is a far shorter list than the network. Measured on
  *  Silas: 26 network gates exist and he can aim at TWO. Discovery and wayfaring tier are what keep walking a
@@ -142,12 +159,15 @@ const gateName = (name) => { const b = bare(name); return /\bgate$/i.test(b) ? `
  *  road here. ⛑ `soleOption` says so out loud, so a caller never has to infer it from the array's length.
  *
  *  PURE over locations + the traveller's own knowledge. */
-export function routeBetween(fromId, toId, locations = {}, { traveller = null, altFactor = 1.6, gateEnergy = true, rules = {} } = {}) {
+export function routeBetween(fromId, toId, locations = {}, { traveller = null, altFactor = 1.6, gateEnergy = true, rules = {}, character = null, content = null, carts = false } = {}) {
+  // ⛑ the traveller IS the character on every in-play call; `character` stays separate because a planning
+  // tool may ask what the WORLD offers someone who is not standing anywhere, and that caller passes neither.
+  const who = character || traveller;
   if (!locations[fromId] || !locations[toId]) return null;
   if (fromId === toId) return { from: fromId, to: toId, options: [], soleOption: false, note: "you are already there" };
 
   const options = [];
-  const road = roadRoute(fromId, toId, locations);
+  const road = roadRoute(fromId, toId, locations, { character: who, content, carts });
   if (road) {
     const via = viaName(road.path, locations);
     options.push({
@@ -160,9 +180,13 @@ export function routeBetween(fromId, toId, locations = {}, { traveller = null, a
   // ⛔ THE SECOND SEARCH RUNS FROM THE DESTINATION AND IS READ BACKWARDS, which is only sound because the
   // road graph is symmetric — measured, 364 directed edges and not one of them one-way. §99 asserts it, so a
   // future one-way road fails a gate instead of quietly making every gate route wrong.
-  const gates = gatesUsableBy(traveller, locations);
-  const fromAll = roadDistances(fromId, locations);
-  const toAll = roadDistances(toId, locations);
+  /* ✅ S6: *"Waygates: damaged is +1 day. Ruined and destroyed are out of the network."* ⛑ Filtered where the
+   * list is BUILT, so every one of the four places this function reaches for a gate sees the same list — the
+   * gate-to-gate search, the aimed-open fold, and both ends of the walk. */
+  const gateState = (id) => (who && content ? gateLeg(who, id, { content }) : { open: true, extraDays: 0 });
+  const gates = gatesUsableBy(traveller, locations).filter((id) => gateState(id).open);
+  const fromAll = roadDistances(fromId, locations, { character: who, content, carts });
+  const toAll = roadDistances(toId, locations, { character: who, content, carts });
   let bestGate = null;
   for (const g1 of gates) {
     const inDays = fromAll.dist[g1];
@@ -172,7 +196,9 @@ export function routeBetween(fromId, toId, locations = {}, { traveller = null, a
       const outDays = toAll.dist[g2];
       if (outDays === undefined) continue;
       const hop = gateHopCost(walkingDays(locations[g1], locations[g2]) || 0);
-      const days = inDays + hop.hours / 24 + outDays;
+      // a damaged gate at either end costs its extra day — the fold is slower, not shut
+      const slow = gateState(g1).extraDays + gateState(g2).extraDays;
+      const days = inDays + hop.hours / 24 + outDays + slow;
       if (!bestGate || days < bestGate.days) bestGate = { days, g1, g2, hop, inDays, outDays };
     }
   }
@@ -192,7 +218,7 @@ export function routeBetween(fromId, toId, locations = {}, { traveller = null, a
       const inDays = fromAll.dist[g1];
       if (inDays === undefined || g1 === toId) continue;
       const hop = gateHopCost(walkingDays(locations[g1], dest) || 0);
-      const days = inDays + hop.hours / 24;
+      const days = inDays + hop.hours / 24 + gateState(g1).extraDays;
       if (!open || days < open.days) open = { days, g1, g2: toId, hop, inDays, outDays: 0, open: true };
     }
     if (open && (!bestGate || open.days < bestGate.days)) {

@@ -359,3 +359,97 @@ export function mapStateWord(content, cls, state, { name = "", old = "", from = 
   if (!w) return null;
   return String(w).replace(/\{name\}/g, name).replace(/\{old\}/g, old).replace(/\{from\}/g, from);
 }
+
+/* ═════ SNG-679 S6 · A STATE THAT ONLY SHOWS IS A PICTURE, NOT A RULE ═════
+ * ✅ ERIK: *"Every single thing that exists needs to be able to be added, damaged, ruined, moved, etc by the
+ * game."* ✅ AEVI (S6): *"State changes play, not just pictures. The numbers are in `mapStates.effects` and
+ * `repairCost`, read from content (first cut, Erik rules them)."*
+ * ⛔ UNTIL THIS, THE WHOLE LADDER WAS DECORATION. `applyMapChange` wrote, `mapStateOf` read, and the only
+ * consumers were three marks on two maps: a ruined road cost nothing, a destroyed waygate still folded, a
+ * razed place still had a market. Measured before building — `mapStateOf` had four callers in the whole
+ * repo and not one of them asked what the state DID.
+ * ⛑ EVERY NUMBER IS HERS. Nothing here invents a multiplier or a threshold; this is the reader that turns
+ * `content.mapStates.effects` into the three questions a caller actually asks: may I go this way, how much
+ * longer does it take, and what does this thing still give.
+ */
+
+/** The authored effect block for one class at one state, or null. Absent is "no effect", never a guess. */
+export function stateEffect(content, cls, state) {
+  const e = content?.mapStates?.effects?.[cls];
+  if (!e || !state || state === "whole") return null;
+  const v = e[state];
+  return v && typeof v === "object" ? v : (typeof v === "number" ? { mult: v } : null);
+}
+
+/* ⛔ ONE LEG OF ROAD, AND THE TWO PLACES IT JOINS. ✅ *"A blocked road is still walkable, slowly; carts,
+ * caravans and moving holds cannot take it. A cut road is gone from the way-finding until it is opened
+ * again."* ✅ And a place: *"Ruined: … still a road end, so you can walk to a ruin. Destroyed: not a road
+ * end."* ⛑ So the leg answers for all three records at once — the road's own state and both ends' — because
+ * a caller walking a graph must not have to remember that a destroyed place also takes its roads with it. */
+export function roadLeg(character, aId, bId, baseDays, { content = null, carts = false } = {}) {
+  const out = { open: true, days: Number(baseDays) };
+  if (!Number.isFinite(out.days)) return { open: false, days: null };
+  for (const id of [aId, bId]) {
+    const st = mapStateOf(character, `place:${id}`, { content })?.state;
+    const pe = stateEffect(content, "place", st);
+    if (pe && pe.roadEnd === false) return { open: false, days: null };
+  }
+  const st = mapStateOf(character, roadKey(aId, bId), { content })?.state;
+  const re = stateEffect(content, "road", st);
+  if (!re) return out;
+  if (re.open === false) return { open: false, days: null };
+  if (carts && re.carts === false) return { open: false, days: null };
+  if (Number.isFinite(Number(re.daysMult))) out.days *= Number(re.daysMult);
+  return out;
+}
+
+/** A waygate's own state: whether it still folds, and what a damaged one costs. */
+export function gateLeg(character, placeId, { content = null } = {}) {
+  const st = mapStateOf(character, `gate:${placeId}`, { content })?.state;
+  const ge = stateEffect(content, "waygate", st);
+  if (!ge) return { open: true, extraDays: 0, remake: false };
+  return { open: ge.open !== false, extraDays: Number(ge.extraDays) || 0, remake: !!ge.remake };
+}
+
+/** What a place still is. ✅ *"Ruined: no services (market, inn, trade) and no territory anchor, but still a
+ *  road end … Destroyed: not a road end, no anchor; a trace."* */
+export function placeAllows(character, placeId, { content = null } = {}) {
+  const st = mapStateOf(character, `place:${placeId}`, { content })?.state;
+  const pe = stateEffect(content, "place", st);
+  return { state: st || "whole",
+    services: !pe || pe.services !== false,
+    anchor: !pe || pe.anchor !== false,
+    roadEnd: !pe || pe.roadEnd !== false };
+}
+
+/* ⛔ WHAT A FEATURE STILL GIVES, AND THE HOLD'S STATE CAPS IT. ✅ *"The effect multiplies what the feature
+ * gives (yield, defence, aura, beds, facility). A ruined feature keeps its room; a destroyed one frees it."*
+ * ✅ *"A hold's own state caps its features: a damaged hold has nothing better than damaged features, a ruined
+ * hold nothing better than ruined."* ⛑ The cap is on the LADDER, not on the multiplier — the two are the same
+ * only by today's numbers, and a cap written in multipliers would quietly stop meaning "no better than" the
+ * day she gives damaged features 0.6. */
+export function featureScale(character, { hold = null, feature = null, content = null, water = null, ground = null } = {}) {
+  // ⛑ `rungOf` takes the CONTENT first — the ladder is authored, and a one-argument call would have read
+  // every state as rung 0 and silently capped nothing.
+  const worst = (a, b) => (rungOf(content, a) >= rungOf(content, b) ? a : b);
+  let state = feature?.state || "whole";
+  if (hold) state = worst(state, hold.state || "whole");
+  let mult = 1;
+  const fe = stateEffect(content, "feature", state);
+  if (fe && Number.isFinite(Number(fe.mult))) mult = Number(fe.mult);
+  // ✅ *"Water and ground: the multiplier applies to the water-fed and ground-worked features of the places
+  // and holds on them (mills, docks and fisheries; fields, herds and quarries)."*
+  for (const [cls, st] of [["water", water], ["ground", ground]]) {
+    const e = stateEffect(content, cls, st);
+    const m = e && Number.isFinite(Number(e.featuresOnIt)) ? Number(e.featuresOnIt) : null;
+    if (m != null) mult *= m;
+  }
+  return { mult, state, roomTaken: rungOf(content, state) < rungOf(content, "destroyed") };
+}
+
+/** What it costs to bring a thing back, as a fraction of building it. Destroyed is a full rebuild (1). */
+export function repairFraction(content, state) {
+  const c = content?.mapStates?.repairCost || {};
+  const v = Number(c[state]);
+  return Number.isFinite(v) ? v : (state === "destroyed" ? 1 : 0);
+}

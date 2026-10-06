@@ -34,6 +34,7 @@ import { walkingDays } from "./worldmap.js";
 import { workMods } from "./holdwork.js";   // ⛔ CCODE-450: standing work — who joins the watch, the yields and the upkeep while it is done
 import { chargedWith } from "./assignments.js";   // ✅ Aevi item 8: whoever is CHARGED with a hold's growth is a hand on that job
 import { postJob } from "./jobstate.js";   // ⛔ CCODE-452: a raise is a job on the board     // …within gateWithinDays of it
+import { featureScale } from "./mapstate.js";   // ⛔ SNG-679 S6: a damaged feature gives less, and a hold caps its features
 
 export const HOLDING_KINDS = ["post", "enterprise"];
 /** ⚠️ WHICH SIDE AN UNKNOWN WORD FALLS ON. A holding that PRODUCES is an enterprise; everything else holds
@@ -2643,15 +2644,15 @@ export function renameHolding(character, id, name, { worldCount = null } = {}) {
 }
 
 /** Defence points: every martial feature's `defence` × its count. */
-export function defenceOf(holding, cfg = null) {
+export function defenceOf(holding, cfg = null, { content = null } = {}) {
   let d = 0;
-  for (const f of featuresOf(holding)) { const def = featureDef(f.kind, cfg); if (def?.family === "martial") d += (Number(def.defence) || 0) * (Number(f.count) || 1) * levelMult(f, def, "defence"); }   // CCODE-452
+  for (const f of featuresOf(holding)) { const def = featureDef(f.kind, cfg); if (def?.family === "martial") d += (Number(def.defence) || 0) * (Number(f.count) || 1) * levelMult(f, def, "defence", { holding: holding, content }); }   // CCODE-452
   return d;
 }
 /** The hands a hold can work: the growth cap plus what its quarters add. */
-export function handsCap(holding, cfg = null) {
+export function handsCap(holding, cfg = null, { content = null } = {}) {
   let cap = Number(cfg?.growth?.maxHands) || 0;
-  for (const f of featuresOf(holding)) { const def = featureDef(f.kind, cfg); if (def?.family === "people") cap += (Number(def.hands) || 0) * (Number(f.count) || 1) * levelMult(f, def, "hands"); }   // CCODE-452
+  for (const f of featuresOf(holding)) { const def = featureDef(f.kind, cfg); if (def?.family === "people") cap += (Number(def.hands) || 0) * (Number(f.count) || 1) * levelMult(f, def, "hands", { holding: holding, content }); }   // CCODE-452
   return cap;
 }
 /** ⛔ CCODE-404 — HOW MANY MORE HANDS THIS PLACE CAN PUT UNDER ARMS, and the answer is the place's OWN authored capacity: the same
@@ -2772,13 +2773,13 @@ export function holdingLedger(holding, { economy = null, cfg = null, regionId = 
  *  goods come from — measured on the live saves, 4 of 6 holds produce only through a mine or a fishery. ⛑ And a
  *  tended place makes a quarter more (`workMods().yieldMult`, CCODE-450), which is part of what it makes and so
  *  belongs here rather than at one caller. PURE. */
-export function producesPerPass(holding, cfg, { density = null } = {}) {
+export function producesPerPass(holding, cfg, { density = null, content = null } = {}) {
   const tendMult = workMods(holding).yieldMult;
-  return yieldsFor(holding, cfg, { density })
+  return yieldsFor(holding, cfg, { density, content })
     .map(y => (tendMult !== 1 && y.units > 0 ? { ...y, units: Math.round(y.units * tendMult), tended: true } : y));
 }
 
-export function yieldsFor(holding, cfg, { density = null } = {}) {
+export function yieldsFor(holding, cfg, { density = null, content = null } = {}) {
   const out = [];
   const own = yieldFor(holding, cfg, { density });
   if (own) out.push(own);
@@ -2790,7 +2791,7 @@ export function yieldsFor(holding, cfg, { density = null } = {}) {
     if (def?.family !== "material" || !good) continue;
     const proto = { ...holding, kind: "enterprise", yields: good };
     const y = yieldFor(proto, cfg, { density });
-    if (y) out.push({ ...y, units: Math.round(y.units * (Number(f.count) || 1) * levelMult(f, def, "yield")), feature: f.name || f.kind });   // CCODE-452
+    if (y) out.push({ ...y, units: Math.round(y.units * (Number(f.count) || 1) * levelMult(f, def, "yield", { holding, content })), feature: f.name || f.kind });   // CCODE-452 · SNG-679 S6
   }
   return out;
 }
@@ -2811,12 +2812,21 @@ export const LEVEL_DEFAULTS = {
 };
 export function featureLevel(f) { return Math.max(1, Math.min(3, Math.floor(Number(f?.level) || 1))); }
 /** What a feature's level multiplies `key` by (pilgrims: how many MORE). Pure. */
-export function levelMult(f, def, key) {
+export function levelMult(f, def, key, { holding = null, content = null } = {}) {
   const row = LEVEL_DEFAULTS[def?.family]?.[key];
   const floor = key === "pilgrims" ? 0 : 1;
-  if (!Array.isArray(row)) return floor;
-  const v = Number(row[featureLevel(f) - 1]);
-  return Number.isFinite(v) ? v : floor;
+  const v0 = Array.isArray(row) ? Number(row[featureLevel(f) - 1]) : floor;
+  const lvl = Number.isFinite(v0) ? v0 : floor;
+  /* ⛔ SNG-679 S6 — AND ITS STATE MULTIPLIES WHAT IT GIVES, AT THE ONE PLACE A FEATURE'S MULTIPLIER IS
+   * COMPUTED. ✅ Aevi: *"the effect multiplies what the feature gives (yield, defence, aura, beds,
+   * facility)"*, and *"a hold's own state caps its features."* ⛑ Folded into `levelMult` rather than added
+   * at the seven call sites, because a feature's effect already has exactly one multiplier reader — and the
+   * seventh caller to be written would otherwise be the one that forgot. A raised, damaged wall is ×2 ×0.5.
+   * ⚠️ `upkeep` is deliberately NOT scaled: a broken mill still has to be kept, and halving its keep would
+   * pay the owner for the damage. Her effect list names what a feature GIVES, and keep is what it costs. */
+  if (key === "upkeep" || !content) return lvl;
+  const sc = featureScale(null, { feature: f, hold: holding, content });
+  return lvl * (Number.isFinite(sc.mult) ? sc.mult : 1);
 }
 const MAKER_KINDS = ["forge", "smithy"];   // the armory's makers (armory.js ARMORY_DEFAULTS.makers) — a craft level speeds what they make
 /** What raising a kind WOULD change, as words for a level — or null when a level would change nothing wired. Pure. */
@@ -3006,7 +3016,7 @@ function vaultSaid(h, items = null) {
 /** ✅ R46b: REVENUE FROM PILGRIMS — a hold that earns from ATTENDANCE rather than production. *"A temple yields because
  *  people come, not because it makes a good."* The take scales with the MEANING of the place, which is the thing they come
  *  for; it is paid into the purse, because a pilgrim leaves coin and not ore. */
-export function pilgrimIncome(holding, { cfg = null, meaning = 0 } = {}) {
+export function pilgrimIncome(holding, { cfg = null, meaning = 0, content = null } = {}) {
   // ⚠️ the dials sit with the KINDS that name the pilgrims (economy.holdFeatures), not with the store's own numbers
   const p = cfg?.features?.pilgrims || cfg?.pilgrims || null;
   const rate = Number(p?.perPilgrim);
@@ -3014,15 +3024,15 @@ export function pilgrimIncome(holding, { cfg = null, meaning = 0 } = {}) {
   let heads = 0;
   for (const f of featuresOf(holding)) {
     const def = featureDef(f.kind, cfg);
-    heads += (Number(def?.pilgrims) || 0) * (Number(f.count) || 1) + (Number(def?.pilgrims) > 0 ? levelMult(f, def, "pilgrims") * (Number(f.count) || 1) : 0);   // CCODE-452
+    heads += (Number(def?.pilgrims) || 0) * (Number(f.count) || 1) + (Number(def?.pilgrims) > 0 ? levelMult(f, def, "pilgrims", { holding: holding, content }) * (Number(f.count) || 1) : 0);   // CCODE-452
   }
   if (!heads) return 0;
   const draw = 1 + Math.max(0, Number(meaning) || 0) * (Number(p.perMeaning) || 0);
   return Math.max(0, Math.round(heads * rate * draw));
 }
 
-export function holdingMeaningAura(character, locationId, cfg = null) {
+export function holdingMeaningAura(character, locationId, cfg = null, { content = null } = {}) {
   let aura = 0;
-  for (const h of holdingsAt(character, locationId)) for (const f of featuresOf(h)) { const def = featureDef(f.kind, cfg); if (def?.family === "meaning") aura += (Number(def.aura) || 0) * (Number(f.count) || 1) * levelMult(f, def, "aura"); }
+  for (const h of holdingsAt(character, locationId)) for (const f of featuresOf(h)) { const def = featureDef(f.kind, cfg); if (def?.family === "meaning") aura += (Number(def.aura) || 0) * (Number(f.count) || 1) * levelMult(f, def, "aura", { holding: h, content }); }
   return Math.round(aura * 1000) / 1000;
 }

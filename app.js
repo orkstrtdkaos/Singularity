@@ -49,7 +49,7 @@ import { sceneImage, itemImage, artworkStyle, getArtMode, setArtMode, imagesEnab
 import { drawLabel, labelText, labelSpace, powerSize, applyStyle, LABEL_STYLES } from "./engine/maplabel.js";
 import { openingFrame, placeCardBox } from "./engine/worldmap.js";
 // ⛔ SNG-679 S2: ONE READER for what state anything on a map is in, and the word a player reads for it.
-import { mapStateOf, mapStateWord } from "./engine/mapstate.js";
+import { mapStateOf, mapStateWord, placeAllows } from "./engine/mapstate.js";
 // ⛔ SNG-679 H1: ONE hold reader for all three tiers. "Nothing draws a hold any other way."
 import { mapHolds, holdMarker } from "./engine/mapholds.js";
 // ⛔ SNG-680: the film is DATA. Not one of its words is written in this file.
@@ -206,7 +206,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.21.1";
+const APP_VERSION = "2.21.2";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -10905,11 +10905,11 @@ function applyTurn(turn, resolution, playerWords = null) {
       // ✅ SNG-654 A — THE GM'S DOOR TO A STANDING RUN, beside the one-off caravan below. `route: null` stops it.
       else if (kind === "route") { const h = (character.holdings || []).find(x => x.id === id);
         const to = op.toId || op.to || op.locationId || null;
-        if (h && to) { const r = setRoute(character, id, { toId: to, carriers: op.npcIds || (h.crew || []).slice(0, 2), locations: CONTENT.locations, day: absoluteWorldDay() });
+        if (h && to) { const r = setRoute(character, id, { toId: to, carriers: op.npcIds || (h.crew || []).slice(0, 2), locations: CONTENT.locations, content: CONTENT, day: absoluteWorldDay() });
           said(r.ok ? `A run stands out of ${h.name} to ${r.to}.` : `No run out of ${h.name} — ${r.why}`); }
         else if (h) { const r = clearRoute(character, id); if (r.ok) said(`The run out of ${h.name} has stopped.`); } }
       else if (kind === "caravan") {
-        const r = sendCaravan(character, { holdingId: id, toId: op.toId || op.to || op.locationId || null,
+        const r = sendCaravan(character, { holdingId: id, content: CONTENT, toId: op.toId || op.to || op.locationId || null,
           goods: op.goods || null, carriers: op.npcIds || (op.npcId ? [op.npcId] : []), locations: CONTENT.locations,
           cfg: holdCfgNow(), day: absoluteWorldDay(), traveller: character });
         if (!r.ok) console.warn("[holdingOps] caravan refused:", r.why);   // prose-cap-ok: a console diagnostic
@@ -13099,7 +13099,7 @@ function buildTravelDirective(ti) {
   // found — a route through a gate they have never heard of is a road that does not exist for them.
   const routeNote = (() => {
     if (!ti.destId || ti.destId === character.currentLocationId) return "";
-    const r = routeBetween(character.currentLocationId, ti.destId, CONTENT.locations, { traveller: character, rules: CONTENT.rules });
+    const r = routeBetween(character.currentLocationId, ti.destId, CONTENT.locations, { traveller: character, rules: CONTENT.rules, character, content: CONTENT });
     const line = r ? routeLine(r, CONTENT.locations) : null;
     return line ? ` THE WAYS THERE (engine-measured — use these durations and names; do not invent a different one, and do not offer a gate that is not listed): ${line}.` : "";
   })();
@@ -13409,7 +13409,7 @@ function journeyPlanFor(destId) {
   try {
     const reg = character?.npcRegistry || {};
     const nameOf = (id) => reg[id]?.name || CONTENT.npcs?.[id]?.name || null;
-    return planJourney({ character, destId, locations: CONTENT.locations, rules: CONTENT.rules, catalog: CONTENT.items || {}, abilities: fullCatalog(),
+    return planJourney({ character, destId, content: CONTENT, locations: CONTENT.locations, rules: CONTENT.rules, catalog: CONTENT.items || {}, abilities: fullCatalog(),
       worldDay: absoluteWorldDay(), companyNames: activeCompany(character).map(m => nameOf(m?.npcId)).filter(Boolean) });
   } catch (err) { console.warn("[journey] plan skipped:", err?.message); return null; }
 }
@@ -13519,7 +13519,7 @@ async function walkRoad(plan) {
     if (!leg) { await arriveByRoad(plan); return; }
     if (legEarnsGambit(leg, CONTENT.rules)) {
       const g = legGambitFor(leg, roadCtx(leg.toId), { abilities: fullCatalog(), energy: energyAfterLeg(character, plan, { rules: CONTENT.rules, abilities: fullCatalog() }) });
-      g.around = aroundLeg(plan, leg, CONTENT.locations, { march: journeyCraftsOf(character, CONTENT.rules, fullCatalog()).march?.share || 0 });
+      g.around = aroundLeg(plan, leg, CONTENT.locations, { character, content: CONTENT, march: journeyCraftsOf(character, CONTENT.rules, fullCatalog()).march?.share || 0 });
       plan.underway.pending = g;
       noteRoadOn(character, plan, null, roadNoteOpts());
       saveCharacter(character);
@@ -13666,7 +13666,7 @@ async function goAroundDanger() {
   if (busy || roadWalking) return;
   const plan = character?.journey, g = plan?.underway?.pending;
   if (!g?.around) return;
-  const next = planJourney({ character, destId: plan.destId, locations: CONTENT.locations, rules: CONTENT.rules, catalog: CONTENT.items || {}, abilities: fullCatalog(),
+  const next = planJourney({ character, destId: plan.destId, content: CONTENT, locations: CONTENT.locations, rules: CONTENT.rules, catalog: CONTENT.items || {}, abilities: fullCatalog(),
     worldDay: absoluteWorldDay(), route: { options: [g.around.option] }, companyNames: plan.company || [] });
   if (!next) { renderPlay(character.activeScene?.lastTurn || null, { aside: `There is no way round ${g.toName} from here.` }); return; }
   logJourney(next);
@@ -13999,7 +13999,8 @@ function groundReader() {
   if (_ground.key !== key) {
     _ground = {
       key, holders,
-      at: makeInfluence(holders, CONTENT.locations).at,
+      // ⛔ SNG-679 S6: a ruined or razed place is no longer an anchor for anybody's claim
+      at: makeInfluence(holders, CONTENT.locations, { allows: (id) => placeAllows(character, id, { content: CONTENT }).anchor }).at,
       mine: holders.find((h) => h.yours) || null,
     };
   }
@@ -14105,6 +14106,7 @@ function territoryFor(regionId, ext, base, W, H) {
   if (_terr.key === key) return _terr;
   const G = makeGroundCost(_terrain, { ...GROUND_COST.territory, extent: ext });
   const T = territoryByGround(holders, CONTENT.locations, {
+    allows: (id) => placeAllows(character, id, { content: CONTENT }).anchor,   // ⛔ S6: a ruin holds no ground
     W, H, step: G.step, toScreen: base.toScreen, toWorld: base.toWorld, cell: 4, extent: ext,
   });
   // ⚠️ THE NETWORKS COME SEPARATELY, because `groundHolders` filters to territorial BEFORE the painter sees
@@ -17524,7 +17526,7 @@ function placeCardHTML(selectedId) {
     // measured on the live screen, the Made Gate at 0.3 days and the Whistling Woman Post at 0.4 were told
     // there was no road and no route. ⛑ `routeBetween` answers the other question on its own.
     const routeShort = (!reachable && !routePlan && l.id !== here && known)
-      ? (() => { try { const r = routeBetween(here, l.id, CONTENT.locations, { traveller: character, rules: CONTENT.rules }); return (r?.options || []).length ? r : null; } catch { return null; } })()
+      ? (() => { try { const r = routeBetween(here, l.id, CONTENT.locations, { traveller: character, rules: CONTENT.rules, character, content: CONTENT }); return (r?.options || []).length ? r : null; } catch { return null; } })()
       : null;
     return `<div class="map-details">
       <div class="map-details-head">
@@ -19097,7 +19099,7 @@ function wireHoldingOffers() {
     // ⛔ THROUGH `standingCrewFor`, NOT AN INLINE SLICE. This line WAS the decision about who walks a standing run,
     // while the card forecast a flat two — so four of the six holds in the world were quoted two wages they will never
     // pay and an escorted road they will never walk. One function, both readers.
-    const r = setRoute(character, holdId, { toId, carriers: standingCrewFor(h, holdCfgNow()), locations: CONTENT.locations || {}, day: absoluteWorldDay() });
+    const r = setRoute(character, holdId, { toId, carriers: standingCrewFor(h, holdCfgNow()), locations: CONTENT.locations || {}, content: CONTENT, day: absoluteWorldDay() });
     if (!r.ok) { console.warn("[route] refused:", r.why); return; }   // prose-cap-ok: a console diagnostic
     saveCharacter(character); again();
   };
@@ -19785,7 +19787,7 @@ function renderHoldingsTab(manageId = null, tab = null) {
           // waiting stock reads as safe and every long haul looks better than it is.
           // ✅ SNG-652 §6 / C1 — AND THE COMPANIES, or the card computes no hire rows and the whole feature is
           // unreachable from the game. Measured before this line existed: 0 hire rows on 4 holds.
-          try { ex = storeExits(character, h, { powers: CONTENT.powers || [], rules: CONTENT.rules, cfg: sCfg, economy: econ, locations: CONTENT.locations || {}, regionId: reg,
+          try { ex = storeExits(character, h, { content: CONTENT, powers: CONTENT.powers || [], rules: CONTENT.rules, cfg: sCfg, economy: econ, locations: CONTENT.locations || {}, regionId: reg,
             dangerLevel: Number(CONTENT.locations?.[h.locationId]?.dangerLevel) || 0, companies: CONTENT.tradeCompanies || [],
             people: holdPeople, npcCfg: npcSheetCfg, day: absoluteWorldDay() }); } catch { ex = null; }
           // ✅ SNG-652 §6 — WITH `rules`, so the readout can carry the detection term §7's watch now provides.
@@ -20575,7 +20577,7 @@ function renderHoldingsTab(manageId = null, tab = null) {
             // ⛑ a run's worth per pass, from the SAME reader the comparison card uses
             const valueOf = (r) => {
               try {
-                const path = (routeBetween(h.locationId, r.toId, CONTENT.locations || {}, { traveller: r.by ? null : character })?.options || [])
+                const path = (routeBetween(h.locationId, r.toId, CONTENT.locations || {}, { traveller: r.by ? null : character, character, content: CONTENT, carts: true })?.options || [])
                   .slice().sort((a, b) => (a.days ?? 1e9) - (b.days ?? 1e9))[0] || null;
                 return routeValue(character, h, { powers: CONTENT.powers || [], rules: CONTENT.rules, toId: r.toId,
                   days: path?.days ?? null, path: path?.path || null, cfg: sc, economy: eco, locations: CONTENT.locations || {},
@@ -20588,7 +20590,7 @@ function renderHoldingsTab(manageId = null, tab = null) {
               const v = valueOf(r);
               const carrier = r.by ? (co.find(c => c.id === r.by)?.name || r.by) : "your own cart";
               const out = (character.caravans || []).find(c => c && c.runId === r.id && (c.status === "travelling" || c.status === "returning"));
-              const tgt = (() => { try { return runLoadTarget(character, h, r, { locations: CONTENT.locations || {}, cfg: sc, perPass: row.getting }); } catch { return null; } })();
+              const tgt = (() => { try { return runLoadTarget(character, h, r, { locations: CONTENT.locations || {}, content: CONTENT, cfg: sc, perPass: row.getting }); } catch { return null; } })();
               // ⛑ the run earns its per-pass rate SCALED BY WHAT IT ACTUALLY CARRIES: `routeValue` prices a whole pass's
               // product, and a run that takes four of fourteen earns four fourteenths of it. One reader, one scaling.
               const share = s.total > 0 ? row.getting / s.total : 0;
@@ -22756,7 +22758,7 @@ function renderJobsTab(selId = null) {
   let pool = [], routeOf = null;
   try {
     pool = jobPoolOf(character, { content: CONTENT, abilityCatalog: fullCatalog(), worldDay, locations: CONTENT.locations });
-    routeOf = jobRouteOf(character, { locations: CONTENT.locations, rules: CONTENT.rules, abilityCatalog: fullCatalog() });
+    routeOf = jobRouteOf(character, { locations: CONTENT.locations, content: CONTENT, rules: CONTENT.rules, abilityCatalog: fullCatalog() });
   } catch (err) { console.warn("[jobs] pool failed:", err?.message); }
   const ctx = { rules: CONTENT.rules, fnIndex: FN_INDEX, routeOf, location: job ? (CONTENT.locations?.[job.where] || null) : null, nowHours };
 

@@ -90,7 +90,12 @@ export function radiusDegOf(p, { floor = null, curve = REACH } = {}) {
 /** Where a power's claim is anchored: its seat, the places it holds, the places it reaches.
  *  ⚠️ Normalised to ±180 here so every consumer gets one convention; `lonDelta` then makes the comparison safe
  *  whichever convention the CALLER's point arrives in. */
-export function anchorsOf(p, locations = {}) {
+/* ⛔ SNG-679 S6 · A RUINED PLACE IS NO LONGER AN ANCHOR. ✅ Aevi: *"Ruined: no services … and no territory
+ * anchor."* ⛑ INJECTED, not imported: this module is deliberately pure and knows nothing of saves or content
+ * (its own header says so), so the caller hands in `allows(placeId)` the way the map hands in `toScreen`. With
+ * no predicate every anchor stands, which is exactly today's answer. */
+export function anchorsOf(p, locations = {}, { allows = null } = {}) {
+  const standing = (id) => (typeof allows === "function" ? !!allows(id) : true);
   // ⛔ R4.2 — A CALLER MAY HAND ITS OWN ANCHORS. A player's realm is not seat-and-holds-and-reach: its home
   // hold reaches with the whole band while every other hold reaches with the hands actually standing in it, so
   // the radius is a property of the ANCHOR, not of the power. A power that supplies `anchors` is taken at its
@@ -102,6 +107,7 @@ export function anchorsOf(p, locations = {}) {
       const lat = a?.lat != null ? Number(a.lat) : (l?.worldPos ? Number(l.worldPos.colatitude) - 90 : null);
       const lonRaw = a?.lon != null ? Number(a.lon) : (l?.worldPos ? Number(l.worldPos.longitude) : null);
       if (!Number.isFinite(lat) || !Number.isFinite(lonRaw)) continue;
+      if (a?.at && !standing(a.at)) continue;
       made.push({ id: a.at || a.id || null, kind: a.kind || "hold", w: Number(a.w) || ANCHOR_WEIGHT.hold,
         r: Number.isFinite(Number(a.r)) ? Number(a.r) : null,
         lat, lon: lonRaw > 180 ? lonRaw - 360 : lonRaw });
@@ -111,7 +117,7 @@ export function anchorsOf(p, locations = {}) {
   const out = [], seen = new Set();
   const add = (id, kind) => {
     const l = locations[id];
-    if (!l?.worldPos || seen.has(id + kind)) return;
+    if (!l?.worldPos || seen.has(id + kind) || !standing(id)) return;
     seen.add(id + kind);
     const lon = Number(l.worldPos.longitude);
     out.push({ id, kind, w: ANCHOR_WEIGHT[kind], lat: Number(l.worldPos.colatitude) - 90, lon: lon > 180 ? lon - 360 : lon });
@@ -141,10 +147,10 @@ function segDist2(lat, lon, a, b, cl) {
 // powers a floor of 10 heads because a crown with a token guard still has a country; a player's hold has no such
 // claim and `realmsOf` sets 0. Deriving that from "did the caller hand me anchors" would have tied two unrelated
 // facts together, and the day something else supplied anchors it would have silently changed the other.
-export function makeInfluence(powers = [], locations = {}, { curve = REACH } = {}) {
+export function makeInfluence(powers = [], locations = {}, { curve = REACH, allows = null } = {}) {
   const P = (powers || [])
     .filter(isTerritorial)
-    .map((p) => ({ p, id: p.id, anchors: anchorsOf(p, locations),
+    .map((p) => ({ p, id: p.id, anchors: anchorsOf(p, locations, { allows }),
       r: radiusDegOf(p, { curve, floor: Number.isFinite(p?.reachFloor) ? p.reachFloor : null }) }))
     .filter((x) => x.anchors.length);
 
@@ -234,7 +240,7 @@ function heap() {
  *  ⚠️ COSTS IN `Float64Array`, which is Aevi's trap and worth keeping her words for: in `Float32Array` the popped
  *  double compared GREATER than its own stored cost, so the search died at its seeds and drew every realm as a dot.
  */
-export function territoryByGround(powers, locations, { W, H, step, toScreen, toWorld, cell = 3, extent = null, pad = 10, curve = REACH } = {}) {
+export function territoryByGround(powers, locations, { W, H, step, toScreen, toWorld, cell = 3, extent = null, pad = 10, curve = REACH, allows = null } = {}) {
   if (!W || !H || typeof step !== "function" || typeof toScreen !== "function" || typeof toWorld !== "function") {
     return null;
   }
@@ -265,7 +271,7 @@ export function territoryByGround(powers, locations, { W, H, step, toScreen, toW
     const sp = toScreen(lon, a.lat, W, H);
     return sp.x > -padPx && sp.y > -padPx && sp.x < W + padPx && sp.y < H + padPx;
   };
-  const near = (powers || []).filter(isTerritorial).filter((p) => anchorsOf(p, locations).some(inBox));
+  const near = (powers || []).filter(isTerritorial).filter((p) => anchorsOf(p, locations, { allows }).some(inBox));
   if (!near.length) return null;
 
   const own = {};                           // R4.3: id -> this power's own claim at every cell
@@ -291,7 +297,7 @@ export function territoryByGround(powers, locations, { W, H, step, toScreen, toW
     const radii = [];
     const h = heap();
     let ai = -1;
-    for (const a of anchorsOf(p, locations)) {
+    for (const a of anchorsOf(p, locations, { allows })) {
       ai++;
       radii.push(Number.isFinite(a.r) ? a.r : R);
       if (!inBox(a)) continue;

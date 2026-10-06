@@ -33,6 +33,7 @@ import { unitWorth, producesPerPass, worthOfGoods, crewKeepPerPass, featuresOf, 
 import { earnAt, saidEarned, incomeHere } from "./money.js";   // ⛔ CCODE-437: sold for the market's own money — `earnAt` goes through `credit`   // ⛔ CCODE-437: a load is sold for the money of the market it reaches
 import { enterDeathState } from "./death.js";
 import { routeBetween, roadDistances, pathFrom } from "./journey.js";   // ⛑ SNG-654 B: ONE search from the hold answers every market at once — 38 regions for the cost of one route
+import { placeAllows } from "./mapstate.js";   // ⛔ SNG-679 S6: a ruined place has no services
 import { storeWorth } from "./holdings.js";
 import { marketDials, marketFeeAt } from "./powers.js";   // ✅ SNG-663 §2d: the market held by a power charges for the right to sell   // §6b: the comparison prices the store through the one reader that prices it
 
@@ -101,6 +102,7 @@ export function roadDanger(path = [], locations = {}) {
  *  consequence. `carriers` are npcIds; an empty escort is allowed and is its own answer — see `tickCaravans`. */
 export function sendCaravan(character, {
   holdingId, toId, goods = null, carriers = [], locations = {}, cfg = null, day = null, traveller = null,
+  content = null,   // ✅ SNG-679 S6: the state of the roads it would take — a caravan is a cart, and a ruined road is closed to carts
   company = null,   // ✅ SNG-652 §6 / C1: {id, cut, guards, knowsGates} — a hired company walks ITS roads, not yours
   carry = null,     // ✅ SNG-665: the pile a run has gathered — given, not scraped off the store
 } = {}) {
@@ -116,7 +118,7 @@ export function sendCaravan(character, {
   // and don't trust them" — must be gate-BLIND rather than merely unlucky. ⚠️ This exact line read `character` and made
   // the card's 1.6-day quote into a 135.3-day walk, priced per day for hazard the whole way. One reading for both.
   const carrier = company ? (company.knowsGates ? null : { knownPlaces: [], abilities: [] }) : (traveller || character);
-  const route = routeBetween(h.locationId, toId, locations, { traveller: carrier });
+  const route = routeBetween(h.locationId, toId, locations, { traveller: carrier, character, content, carts: true });
   // ⛔ SNG-654 — THE FASTEST WAY, NOT THE FIRST ONE IN THE LIST, and this was a live defect: `options[0]` is the ROAD
   // and the gate leg comes after it, so a load out of the Made Gate walked 34.6 days to the Axis Gate while the
   // comparison card — which sorts by days — priced the same run at 1.7 through Silas's own waygate. ⚠️ A card and an
@@ -180,14 +182,14 @@ export function sendCaravan(character, {
 
 /** ⛔ SET THE ROUTE. Refuses for the same reasons `sendCaravan` refuses, because a route that cannot be walked is not
  *  a route — and it refuses BEFORE it writes, so a save never carries a standing run to nowhere. */
-export function setRoute(character, holdingId, { toId = null, carriers = [], locations = {}, day = null } = {}) {
+export function setRoute(character, holdingId, { toId = null, carriers = [], locations = {}, day = null, content = null } = {}) {
   const h = (character?.holdings || []).find(x => x && x.id === holdingId);
   if (!h) return { ok: false, why: "no such holding" };
   if (!h.locationId) return { ok: false, why: "that holding is not anywhere yet — it has no road out" };
   if (!locations[h.locationId]) return { ok: false, why: "the hold's place is not on the map" };
   if (!locations[toId]) return { ok: false, why: "nowhere by that name" };
   if (toId === h.locationId) return { ok: false, why: "the load is already there" };
-  const route = routeBetween(h.locationId, toId, locations, { traveller: character });
+  const route = routeBetween(h.locationId, toId, locations, { traveller: character, character, content, carts: true });
   if (!(route?.options || []).length) return { ok: false, why: "no way there from the hold" };
   h.route = { toId, crew: [...new Set((carriers || []).filter(Boolean))], setDay: day, lastDepartureDay: null, runs: 0 };
   return { ok: true, route: h.route, to: locations[toId]?.name || toId };
@@ -450,13 +452,13 @@ export function allocatePass(character, holding, { cfg = null, economy = null, l
 
 /** ⛑ SET, ADD AND REMOVE A RUN. A run is a destination plus how much of a pass goes to it; the carrier is either your
  *  own people or a hired company, exactly as `setRoute`/`hireCompany` already decide. */
-export function addRun(character, holdingId, { toId = null, units = 0, carriers = [], companyId = null,
+export function addRun(character, holdingId, { toId = null, units = 0, carriers = [], companyId = null, content = null,
   companies = null, locations = {}, cfg = null, day = null } = {}) {
   const h = (character?.holdings || []).find(x => x && x.id === holdingId);
   if (!h) return { ok: false, why: "no such holding" };
   if (!locations[toId]) return { ok: false, why: "nowhere by that name" };
   if (toId === h.locationId) return { ok: false, why: "the load is already there" };
-  const route = routeBetween(h.locationId, toId, locations, { traveller: character });
+  const route = routeBetween(h.locationId, toId, locations, { traveller: character, character, content, carts: true });
   if (!(route?.options || []).length) return { ok: false, why: "no way there from the hold" };
   const runs = ensureRuns(h);
   if (runs.some(r => r?.toId === toId && (r.by || null) === (companyId || null))) return { ok: false, why: "a run already goes there with those carriers" };
@@ -534,7 +536,7 @@ export function divertToRuns(character, holding, { cfg = null, economy = null, l
  *  ⚠️ The spec also says "capped by what the carrier can carry" and NOTHING AUTHORS A CAPACITY. There is no cap here
  *  rather than a number I chose — `trade.carryCap` is read the day Aevi writes one, and until then the cap is the road.
  *  PURE. */
-export function runLoadTarget(character, holding, run, { locations = {}, cfg = null, day = null, perPass = null } = {}) {
+export function runLoadTarget(character, holding, run, { locations = {}, cfg = null, day = null, perPass = null, content = null } = {}) {
   // ⛔ THE DRAW, NOT THE DIAL. A `wholeProduct` run has no `units` — it asks for whatever is spare — so reading the
   // dial gave it a target of zero and its cart would have left every pass with whatever was in the pile, however far
   // the market. `perPass` is the allocator's own `getting` for this run, which is the only place that number exists.
@@ -544,7 +546,7 @@ export function runLoadTarget(character, holding, run, { locations = {}, cfg = n
   const carrier = co ? (co.knowsGates ? null : { knownPlaces: [], abilities: [] }) : character;
   let days = 0;
   try {
-    const rt = routeBetween(holding?.locationId, run?.toId, locations, { traveller: carrier });
+    const rt = routeBetween(holding?.locationId, run?.toId, locations, { traveller: carrier, character, content, carts: true });
     const leg = (rt?.options || []).slice().sort((a, b) => (a.days ?? 1e9) - (b.days ?? 1e9))[0];
     const carriage = carriageFor(character, holding, { toId: run?.toId, locations, cfg, company: !!run?.by });
     days = leg ? num(leg.days, 0) / Math.max(0.1, num(carriage.mult, 1)) : 0;
@@ -823,7 +825,7 @@ export function routeValue(character, holding, {
  *
  *  ⬜ WHAT IS NOT HERE IS NOT PRICED: visiting traders and hired companies are unbuilt, so a hired-company row
  *  appears only when a caller passes a cut, and says plainly that it is a quote rather than an offer. Pure. */
-export function storeExits(character, holding, { cfg = null, economy = null, locations = {}, regionId = null, companyCut = null, maxMarkets = null, density = null, dangerLevel = null, people = {}, npcCfg = {}, day = null, powers = null, rules = null, companies = null } = {}) {
+export function storeExits(character, holding, { content = null, cfg = null, economy = null, locations = {}, regionId = null, companyCut = null, maxMarkets = null, density = null, dangerLevel = null, people = {}, npcCfg = {}, day = null, powers = null, rules = null, companies = null } = {}) {
   // ⚠️ `maxMarkets` WAS 4 AND THAT WAS THE DEFECT AEVI MEASURED: two 147-day markets at ×3.6 took both slots and the
   // Crossing, 33 days out at ×1.8, never appeared. It is now an override for a caller that wants one, and content
   // decides (`trade.showMarkets`, chosen over `trade.candidates` valued). ⛑ `density` is the ground under the hold —
@@ -896,12 +898,18 @@ export function storeExits(character, holding, { cfg = null, economy = null, loc
     basket: madeBasket, cfg, economy, regionId: homeRegion, dangerLevel: danger654, people, npcCfg, day });
   const show = Math.max(1, Math.floor(Number(maxMarkets ?? t654.showMarkets ?? 3)));
   const consider = Math.max(show, Math.floor(num(t654.candidates, 12)));
-  const dd = (() => { try { return roadDistances(holding.locationId, locations); } catch { return null; } })();
+  const dd = (() => { try { return roadDistances(holding.locationId, locations, { character, content, carts: true }); } catch { return null; } })();
   const perRegion = new Map();
   for (const [id, loc] of Object.entries(locations || {})) {
     if (!loc || !loc.regionId || loc.regionId === homeRegion || id === holding.locationId) continue;
     const d = dd?.dist?.[id];
     if (!Number.isFinite(d)) continue;                       // no road from here: not an option, not a bad one
+    /* ⛔ SNG-679 S6 — A RUIN DOES NOT TRADE. ✅ Aevi: *"Ruined: no services (market, inn, trade) and no
+     * territory anchor, but still a road end, so you can walk to a ruin."* ⛑ Filtered where the candidate is
+     * admitted rather than where it is scored, so a burned market never reaches the ranking at all and the
+     * card's "why you see no markets" line stays true. With no content handed in, nothing is filtered — the
+     * answer is exactly today's. */
+    if (content && !placeAllows(character, id, { content }).services) continue;
     const cur = perRegion.get(loc.regionId);
     if (!cur || d < cur.days) perRegion.set(loc.regionId, { id, loc, days: Math.round(d * 10) / 10 });
   }
@@ -927,7 +935,7 @@ export function storeExits(character, holding, { cfg = null, economy = null, loc
   for (const m of markets) {
     // ⚑ NOW ask the roads AND THE GATES for the rows that will be shown — a gate turns a 236-day walk into 3.9 days
     // for a traveller who has found it, and that is a real column on this card.
-    const route = (() => { try { return routeBetween(holding.locationId, m.id, locations, { traveller: character }); } catch { return null; } })();
+    const route = (() => { try { return routeBetween(holding.locationId, m.id, locations, { traveller: character, character, content, carts: true }); } catch { return null; } })();
     const opt = (route?.options || []).slice().sort((a, b) => (a.days ?? 99) - (b.days ?? 99))[0] || null;
     const days = opt ? num(opt.days, m.days) : m.days;
     const path = opt?.path?.length ? opt.path : m.path;
@@ -1373,7 +1381,7 @@ export function caravansForGM(character, locations = {}) {
  *  ⚠️ `withinDays` IS THE HOLD-TO-DEPOT LEG, and it is a real constraint rather than a flourish: the Keelmouth
  *  lighters cannot carry out of a hold in the Deepwood. Measured on the live holds: the Crossing's porters reach all
  *  six, the Keelmouth lighters reach none of them. PURE. */
-export function companiesFor(character, holding, { companies = null, locations = {}, cfg = null, withinDays = null, dist = null } = {}) {
+export function companiesFor(character, holding, { companies = null, locations = {}, cfg = null, withinDays = null, dist = null, content = null } = {}) {
   const list = Array.isArray(companies) ? companies.filter(c => c && c.id) : [];
   if (!list.length || !holding?.locationId) return [];
   if (!locations[holding.locationId]) return [];
@@ -1386,7 +1394,7 @@ export function companiesFor(character, holding, { companies = null, locations =
   // ⚠️ A ROAD, NOT A GEODESIC. The leg from a hold to a company's depot is one the load actually travels, and a
   // straight-line reading would have put the Keelmouth lighters eight days from a hold with no road to the coast at all.
   // ⛑ And `storeExits` already ran this Dijkstra, so it hands the map in: one search per card, not one per company.
-  const dd = dist || (() => { try { return roadDistances(holding.locationId, locations)?.dist || {}; } catch { return {}; } })();
+  const dd = dist || (() => { try { return roadDistances(holding.locationId, locations, { character, content, carts: true })?.dist || {}; } catch { return {}; } })();
   const out = [];
   for (const c of list) {
     let best = null;

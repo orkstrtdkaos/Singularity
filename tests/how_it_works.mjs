@@ -23920,10 +23920,23 @@ console.log("\n── §299 · a gate aimed open — a wayfarer good enough fold
   check("§299: ⛔ the GM's gate block tells it a good wayfarer can aim open — and only for them, or it would promise what the engine refuses",
     /AIM THIS GATE OPEN/.test(W299.waygateBlockForGM(sharp299, L299, RU299) || "") && !/AIM THIS GATE OPEN/.test(W299.waygateBlockForGM(dull299, L299, RU299) || ""));
   const A299 = rd("app.js").replace(/\r\n/g, "\n");
+  /* ⚠️ PINNED ON WHAT IT MEANS, NOT ON THE ARGUMENT LIST. This asserted the two call sites' options bags
+   * CHARACTER FOR CHARACTER — `{ traveller: character, rules: CONTENT.rules }` — so it went red the day
+   * `routeBetween` learned `content` for SNG-679 S6, which is the gate failing because the code got better.
+   * The claim is that these two callers hand the router the RULES (so the aims-open rule the GM is told about
+   * is the one the router uses); it is now written as that, and tolerates the bag growing. */
+  const asksWithRules = (src, call) => {
+    // ⛑ the call is a LITERAL with brackets and dots in it, so it is found by `indexOf` rather than turned
+    // into a pattern — building a regex out of source text is how the escaping goes wrong twice.
+    const i = src.indexOf(call);
+    if (i < 0) return false;
+    const upto = src.slice(i, i + 400).split(";")[0];
+    return /traveller: character/.test(upto) && /rules/.test(upto);
+  };
   check("§299: …the registry hands that block the rules, and the travel directive and the journey plan ask for routes with them",
     /waygateBlockForGM\(env\.character, env\.CONTENT\.locations, env\.CONTENT\.rules\)/.test(rd("engine/gm_registry.js"))
-    && /routeBetween\(character\.currentLocationId, ti\.destId, CONTENT\.locations, \{ traveller: character, rules: CONTENT\.rules \}\)/.test(A299)
-    && /routeBetween\(fromId, destId, locations, \{ traveller: character, rules \}\)/.test(rd("engine/journeyplan.js")));
+    && asksWithRules(A299, "routeBetween(character.currentLocationId, ti.destId")
+    && asksWithRules(rd("engine/journeyplan.js"), "routeBetween(fromId, destId"));
   check("§299: …and at a network gate the map's place panel offers the fold for a place they know, paid like any hop",
     /r\.routed === "open"/.test(A299) && /data-wgopen="1"/.test(A299) && /wgBtn\.dataset\.wgopen/.test(A299));
 }

@@ -8302,6 +8302,137 @@ await (async () => {
       }
     }
 
+    /* ═════ SNG-679 S6 · A STATE THAT DOES NOTHING IS A PICTURE ═════
+     * ✅ ERIK: *"Every single thing that exists needs to be able to be added, damaged, ruined, moved, etc by the
+     * game."* ✅ AEVI (S6): *"State changes play, not just pictures."*
+     * ⛔ BEFORE THIS, THE LADDER WAS DECORATION: `mapStateOf` had four callers in the repo and not one asked
+     * what a state DID — a ruined road cost nothing, a destroyed waygate still folded, a razed place still
+     * had a market. Every number below is hers, from `mapStates.effects`; the gate asserts the EFFECT, so a
+     * dial she retunes moves the game and not this test. */
+    {
+      const MS = await import("../engine/mapstate.js");
+      const JY = await import("../engine/journey.js");
+      const { loadContentHeadless: lch679 } = await import("./headless_content.mjs");
+      const C679 = await lch679();
+      const L679 = C679.locations;
+      const ctx679 = { content: C679, locations: L679, worldDay: 10 };
+      const E = C679.mapStates?.effects || {};
+
+      // the authored numbers exist at all — a reader over an empty table passes by having nothing to read
+      check("679/S6: ⛔ the effects are AUTHORED, for every class the inventory names — a multiplier the engine invents is a rule nobody ruled",
+        ["feature", "road", "waygate", "place", "water", "ground"].every((k) => E[k] && typeof E[k] === "object")
+        && Number.isFinite(Number(E.road?.damaged?.daysMult)) && E.road?.ruined?.carts === false
+        && E.place?.ruined?.services === false && E.place?.destroyed?.roadEnd === false,
+        `${Object.keys(E).filter((k) => !k.startsWith("_")).join(", ")}`);
+
+      {
+        // a road, down the ladder, through the real router
+        const A = "millbrook", B = "the_crossing";
+        const whole = JY.roadRoute(A, B, L679);
+        const path = whole?.path || [];
+        const [u, v] = [path[0], path[1]];
+        const ch = { id: "char-s6gate" };
+        const walkNow = () => JY.roadRoute(A, B, L679, { character: ch, content: C679 });
+        const cartNow = () => JY.roadRoute(A, B, L679, { character: ch, content: C679, carts: true });
+        const base = walkNow()?.days;
+        MS.applyMapChange(ch, { key: MS.roadKey(u, v), change: "damaged", by: "the world", cause: "the flood", day: 10 }, ctx679);
+        const dmg = walkNow()?.days;
+        MS.applyMapChange(ch, { key: MS.roadKey(u, v), change: "ruined", by: "the world", cause: "the flood", day: 10 }, ctx679);
+        const ruinWalk = walkNow()?.days, ruinCart = cartNow()?.days;
+        MS.applyMapChange(ch, { key: MS.roadKey(u, v), change: "destroyed", by: "the world", cause: "the flood", day: 10 }, ctx679);
+        const goneWalk = walkNow()?.days;
+        check("679/S6: …a damaged road costs more days and a ruined one costs more again — on the SAME router every traveller in the game uses",
+          base > 0 && dmg > base && ruinWalk > dmg,
+          `${u}→${v}: whole ${base?.toFixed(1)} · damaged ${dmg?.toFixed(1)} · ruined ${ruinWalk?.toFixed(1)}`);
+        check("679/S6: …and a ruined road is CLOSED TO CARTS, so a caravan goes round where a walker goes slowly",
+          ruinCart > ruinWalk, `walk ${ruinWalk?.toFixed(1)} · cart ${ruinCart?.toFixed(1)} (a different way)`);
+        check("679/S6: …and a destroyed road is out of the way-finding, which is not the same as being slow",
+          goneWalk > ruinWalk && (JY.roadRoute(A, B, L679)?.days === base || true),
+          `destroyed → ${goneWalk?.toFixed(1)} the long way`);
+        check("679/S6: ⛑ …and a caller that hands in NO character gets exactly today's answer — the state is read, never assumed",
+          JY.roadRoute(A, B, L679)?.days === whole?.days, `blind ${whole?.days?.toFixed(1)}, unchanged`);
+      }
+
+      {
+        // a place, and what it stops being
+        const ch = { id: "char-s6place" };
+        MS.applyMapChange(ch, { key: "place:millbrook", change: "ruined", by: "the world", cause: "the fire", day: 10 }, ctx679);
+        const ruined = MS.placeAllows(ch, "millbrook", { content: C679 });
+        MS.applyMapChange(ch, { key: "place:millbrook", change: "destroyed", by: "the world", cause: "the fire", day: 10 }, ctx679);
+        const razed = MS.placeAllows(ch, "millbrook", { content: C679 });
+        check("679/S6: ⛔ a RUINED place keeps its roads and loses its services and its anchor — you can still walk to a ruin",
+          ruined.services === false && ruined.anchor === false && ruined.roadEnd === true,
+          JSON.stringify(ruined));
+        check("679/S6: …and a DESTROYED place is not a road end, so the roads into it close with it",
+          razed.roadEnd === false && MS.roadLeg(ch, "millbrook", "the_crossing", 4, { content: C679 }).open === false,
+          JSON.stringify(razed));
+      }
+
+      {
+        // a waygate
+        const ch = { id: "char-s6gate2" };
+        MS.applyMapChange(ch, { key: "gate:the_crossing", change: "damaged", by: "a power", cause: "the war", day: 10 }, ctx679);
+        const slow = MS.gateLeg(ch, "the_crossing", { content: C679 });
+        MS.applyMapChange(ch, { key: "gate:the_crossing", change: "ruined", by: "a power", cause: "the war", day: 10 }, ctx679);
+        const shut = MS.gateLeg(ch, "the_crossing", { content: C679 });
+        MS.applyMapChange(ch, { key: "gate:the_crossing", change: "destroyed", by: "a power", cause: "the war", day: 10 }, ctx679);
+        const gone = MS.gateLeg(ch, "the_crossing", { content: C679 });
+        check("679/S6: ⛔ a damaged waygate still folds and costs a day; a ruined one is out of the network; a destroyed one must be MADE again",
+          slow.open === true && slow.extraDays === 1 && shut.open === false && gone.open === false && gone.remake === true,
+          `${JSON.stringify(slow)} → ${JSON.stringify(shut)} → ${JSON.stringify(gone)}`);
+      }
+
+      {
+        // a feature, and the hold's cap on it
+        const ch = { id: "char-s6f" };
+        const f = (args) => MS.featureScale(ch, { content: C679, ...args });
+        check("679/S6: ⛔ a hold's own state CAPS its features — a whole wall in a ruined keep is a ruined wall, and the cap is on the LADDER, not on the multiplier",
+          f({ feature: { state: "whole" } }).mult === 1
+          && f({ feature: { state: "damaged" } }).mult === Number(E.feature.damaged)
+          && f({ feature: { state: "whole" }, hold: { state: "ruined" } }).state === "ruined"
+          && f({ feature: { state: "ruined" }, hold: { state: "whole" } }).state === "ruined",
+          "worst of the two, by rung");
+        check("679/S6: …and ruined keeps its room while destroyed frees it, which is what `roomOf` has to see",
+          f({ feature: { state: "ruined" } }).roomTaken === true && f({ feature: { state: "destroyed" } }).roomTaken === false,
+          "a ruin still stands in the way; a razed thing does not");
+        check("679/S6: …and damaged ground or water multiplies what the features on it give, on top of their own state",
+          f({ feature: { state: "whole" }, ground: "damaged" }).mult === Number(E.ground.damaged.featuresOnIt)
+          && f({ feature: { state: "damaged" }, water: "damaged" }).mult === Number(E.feature.damaged) * Number(E.water.damaged.featuresOnIt),
+          "the two compound, because a damaged mill on a damaged river is both");
+      }
+
+      /* ⛑ AND THE READERS HAVE CALLERS. A reader with no caller is the same picture by another name — that is
+       * what this whole section exists to end — so the callers are named here, by file, and the day one of them
+       * stops handing in the content this goes red instead of going quiet. */
+      {
+        const src = (f) => readFileSync(join(root, f), "utf8");
+        const wired = [
+          ["engine/journey.js", /roadLeg\(character, u, v, w, \{ content, carts \}\)/],
+          ["engine/journey.js", /gatesUsableBy\(traveller, locations\)\.filter\(\(id\) => gateState\(id\)\.open\)/],
+          ["engine/caravan.js", /placeAllows\(character, id, \{ content \}\)\.services/],
+          ["app.js", /territoryByGround\(holders, CONTENT\.locations, \{\s*\n\s*allows:/],
+          ["app.js", /routeBetween\(character\.currentLocationId[^;]*content: CONTENT/],
+        ];
+        const missing = wired.filter(([f, re]) => !re.test(src(f))).map(([f]) => f);
+        check("679/S6: ⛔ and every reader has a CALLER — the router, the gate list, the markets, the ground and the travel screen all hand in the content",
+          missing.length === 0, missing.length ? `not wired: ${missing.join(", ")}` : "five call sites, named");
+
+        /* ⚠️ AND THE ONE HALF THAT IS NOT LIVE YET SAYS SO, IN A CHECK, rather than passing quietly.
+         * `featureScale` is read by `levelMult` — the single multiplier every family of feature effect goes
+         * through — and `levelMult` only applies it when its caller hands in the content. `yieldsFor` and
+         * `producesPerPass` take it; the ~30 hold-economy functions between them and the app do not, so a
+         * damaged wall still defends in play today. Threading those is its own change, and this check holds
+         * the SHAPE that makes it possible: the multiplier has exactly one home, and `upkeep` is out of it
+         * on purpose (a broken mill is still kept — halving its keep would pay the owner for the damage). */
+        const H679 = src("engine/holdings.js");
+        const callsWithState = (H679.match(/levelMult\([^)]*\{ holding[^)]*\}\)/g) || []).length;
+        const upkeepCall = /levelMult\(f, def, "upkeep"\)/.test(H679);
+        check("679/S6: ⛑ …and the FEATURE half has one home and one exception — every family goes through `levelMult`, and upkeep deliberately does not scale",
+          callsWithState >= 5 && upkeepCall && /if \(key === "upkeep" \|\| !content\) return lvl;/.test(H679),
+          `${callsWithState} family call(s) carry the hold and the content; upkeep does not — and the hold economy's own signatures still have to carry \`content\` down to them, which is the change after this one`);
+      }
+    }
+
     /* ═════ CCODE-633 · A PROFILE THAT PREDATES A FIELD STILL MAKES A CHARACTER ═════
      * ⛔ FOUND IN PLAY: `finish()` does `profile.charactersPlayed.includes(...)` with no guard, so a profile
      * written before that field existed throws there — after every creation screen and BEFORE

@@ -190,10 +190,10 @@ function wayOf(o, i, locations, march = 0) {
 }
 
 /** ⛔ AGREEING TO A JOURNEY: the plan it logs. Null when the way cannot be measured, or the trip is a step rather than a journey. Pure. */
-export function planJourney({ character, destId, locations = {}, rules = {}, catalog = {}, worldDay = null, route = null, companyNames = [], abilities = {} } = {}) {
+export function planJourney({ character, destId, content = null, locations = {}, rules = {}, catalog = {}, worldDay = null, route = null, companyNames = [], abilities = {} } = {}) {
   const fromId = character?.currentLocationId;
   if (!fromId || !destId || fromId === destId || !locations[fromId] || !locations[destId]) return null;
-  const r = route || routeBetween(fromId, destId, locations, { traveller: character, rules });
+  const r = route || routeBetween(fromId, destId, locations, { traveller: character, rules, character, content });
   if (!isJourneyRoute(r, rules)) return null;
   // ⛔ CCODE-518 — THE LAND IS THE ARBITER, AND A GRAPH CAN BE WRONG ABOUT IT.
   // Erik, in play: "why is the journey to Whistling woman Post popping up as 36.1 days when everyone literally

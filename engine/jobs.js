@@ -977,14 +977,14 @@ export function rollErrands({ character, content = {}, assignments = [], worldCo
 
 /** ⛔ EACH PERSON'S OWN ROAD — the journey planner's, from where they stand, at their own wayfaring (their wits; the gates the character
  *  has found), with the crafts that carry a road shortening the walked part as a journey's march does. `routeOf(person, whereId)`. Pure. */
-export function jobRouteOf(character, { locations = {}, rules = {}, abilityCatalog = {} } = {}) {
+export function jobRouteOf(character, { locations = {}, rules = {}, abilityCatalog = {}, content = null } = {}) {
   return (person, whereId) => {
     const from = person?.locationId;
     if (!from || !whereId || !locations[from] || !locations[whereId]) return null;
     if (from === whereId) return { days: 0, label: "already there" };
     const traveller = { knownPlaces: character?.knownPlaces || [], regionsKnown: person.regionsKnown || {}, subAttributes: { wits: person.wits },
       abilities: person.abilities || [] };
-    const r = routeBetween(from, whereId, locations, { traveller, rules });
+    const r = routeBetween(from, whereId, locations, { traveller, rules, character, content });
     if (!r?.options?.length) return null;
     // ⛔ CCODE-432: from where you keep mounts they ride — the better of the ride and a craft's march, never both
     const march = Math.max(journeyCraftsOf({ abilities: person.abilities || [] }, rules, abilityCatalog).march?.share || 0,

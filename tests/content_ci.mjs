@@ -1611,6 +1611,27 @@ for (const pack of PACKS) {
       MI.ALL_GLYPHS.length < authored.length && MI.ALL_GLYPHS.length >= 12,
       `${authored.length} kinds → ${MI.ALL_GLYPHS.length} glyphs`);
 
+    /* ═════ SNG-678 · THE SITE VOCABULARY JOINS THE SAME RULE ═════
+     * ✅ AEVI (2026-10-06): *"Those fifteen need glyphs … The vocabulary is closed: a new value goes in there
+     * with its meaning before anything uses it, the same rule as the location kinds."*
+     * ⛔ AND THE GATE ABOVE DID NOT COVER THEM. It reads `location_kinds.json → kinds`, the per-location
+     * assignments, so fifteen new kinds could be authored and used by 85 sites with the suite staying green.
+     * ⚠️ That is the "ask about the population the CONTENT DECLARES, not the one that already passes" trap:
+     * the gate was exhaustive over the population it happened to look at. */
+    const siteVocab = Object.keys(kindDoc._siteVocabulary || {});
+    const siteUnmapped = siteVocab.filter((k) => !MI.glyphFor({ k }));
+    check("SNG-678: every site-scale kind in `_siteVocabulary` has a glyph too — the same rule as the location kinds",
+      siteVocab.length >= 15 && siteUnmapped.length === 0,
+      siteUnmapped.length ? "no glyph for: " + siteUnmapped.join(", ") : `${siteVocab.length} site kinds, all drawable`);
+    // ⛔ AND EVERY KIND ANY SITE ACTUALLY USES, which is the population that reaches the painter.
+    const layDoc = rj("content/packs/core/world/local_layouts.json");
+    const usedKinds = new Set();
+    for (const k of Object.keys(layDoc)) { if (k.startsWith("_")) continue;
+      for (const s of (layDoc[k].sites || [])) if (s.kind) usedKinds.add(s.kind); }
+    const usedUnmapped = [...usedKinds].filter((k) => !MI.glyphFor({ k }));
+    check("SNG-678: …and every kind an authored site actually USES resolves to a glyph",
+      usedKinds.size >= 10 && usedUnmapped.length === 0,
+      usedUnmapped.length ? "used but undrawable: " + usedUnmapped.join(", ") : `${usedKinds.size} kinds in use across the layouts`);
     // ⛔ THE PRECEDENCE, WHICH IS NOT ALPHABETICAL: pole outranks everything, and a waygate outranks the
     // tier it sits on because stepping through it is what changes a player's route.
     check("SNG-409 §4: a POLE is never drawn as a settlement — even one flagged as a waygate",
@@ -1664,11 +1685,62 @@ for (const pack of PACKS) {
       grids.every((g) => g.some((v) => v)) && worstSimilarity < 0.45,
       `most-similar pair ${worstPair} overlaps ${(100 * worstSimilarity).toFixed(0)}%`);
 
-    // and every glyph must actually put ink down — an unimplemented case that silently draws nothing
-    // is the same failure as an unmapped kind, one layer along
-    const blank = MI.ALL_GLYPHS.filter((g) => !raster(g).some((v) => v));
-    check("SNG-409 §4: …and every glyph in the set actually draws something",
+    /* and every glyph must actually put ink down — an unimplemented case that silently draws nothing
+     * is the same failure as an unmapped kind, one layer along.
+     * ⛔ BOTH ALPHABETS (SNG-678). This read `ALL_GLYPHS` only, so the fifteen site-scale glyphs could have
+     * been mapped and never drawn: `drawGlyph` is a `switch` with NO DEFAULT, so an unimplemented name
+     * strokes nothing, nothing throws, and the mapping gate above stays green. ⚠️ I nearly added a second,
+     * weaker check with a stub context instead of widening this one — two overlapping gates asking the same
+     * question worse is how a suite grows without getting stronger. */
+    const everyGlyph = [...MI.ALL_GLYPHS, ...MI.ALL_SITE_GLYPHS];
+    const blank = everyGlyph.filter((g) => !raster(g).some((v) => v));
+    check("SNG-409 §4 + SNG-678: …and every glyph in BOTH alphabets actually draws something",
       blank.length === 0, "blank: " + blank.join(", "));
+
+    /* ⛑ PLACED HERE, BELOW `raster`, AND THAT IS NOT COSMETIC. I first put this block up with the mapping
+     * checks and it threw `ReferenceError: Cannot access 'raster' before initialization` — a `const` in the
+     * same block, read above its own line. Loud, which is the good case; a block that reached a STALE outer
+     * binding would have measured the wrong thing in silence. */
+    /* ═════ SNG-678 · AND THE FIFTEEN SITE GLYPHS MUST BE TELLABLE APART ═════
+     * ⛔ "EVERY ONE DRAWS SOMETHING" IS A WEAKER CLAIM THAN IT SOUNDS. Fifteen marks that each put ink down
+     * and all look like a small ring would pass it and be useless. The place glyphs have had a similarity
+     * check since SNG-409 for exactly this reason, over four of them; this asks it of the whole site set,
+     * pairwise, on the same rasteriser.
+     * ⚠️ IT FOUND TWO THINGS WHEN I FIRST RAN IT, both of which are fixed in `mapicons.mjs`: `burial` put
+     * down 15 ink cells against 42–102 for its neighbours, because its mound arc ran outside the glyph's own
+     * box and was clipped; and a closed-oval `green` measured 46% the same as `arena`, the nearest place
+     * glyph it could be confused with. Now 51 cells and 29%.
+     * ⛑ THE THRESHOLD IS THE ONE SNG-409 ALREADY USES (0.45), not a new number, and the INK FLOOR is
+     * relative to the set's own median rather than an absolute — a glyph alphabet is judged against itself. */
+    {
+      const siteNames = MI.ALL_SITE_GLYPHS;
+      const siteGrids = siteNames.map(raster);
+      const ink = siteGrids.map((g) => g.reduce((s, v) => s + v, 0));
+      const median = [...ink].sort((a, b) => a - b)[Math.floor(ink.length / 2)];
+      const faint = siteNames.filter((_, i) => ink[i] < median * 0.4);
+      check("SNG-678: no site glyph is a faint scratch beside the rest of its own alphabet",
+        faint.length === 0 && median > 20,
+        faint.length ? `too little ink: ${faint.join(", ")} (median ${median})` : `ink ${Math.min(...ink)}–${Math.max(...ink)}, median ${median}`);
+      const overlap = (a, b) => { let u = 0, s = 0;
+        for (let c = 0; c < a.length; c++) { if (a[c] || b[c]) u++; if (a[c] && b[c]) s++; }
+        return u ? s / u : 1; };
+      let worst = 0, worstPair = "";
+      for (let i = 0; i < siteNames.length; i++) for (let j = i + 1; j < siteNames.length; j++) {
+        const sim = overlap(siteGrids[i], siteGrids[j]);
+        if (sim > worst) { worst = sim; worstPair = siteNames[i] + "/" + siteNames[j]; }
+      }
+      check("SNG-678: …and no two site glyphs read the same — measured pairwise on the drawn pixels, at site size",
+        worst < 0.45, `most-similar pair ${worstPair} overlaps ${(worst * 100).toFixed(0)}%`);
+      // ⛔ AND ACROSS THE TWO ALPHABETS, because a local map draws both: its place and the sites within it.
+      const placeGrids = MI.ALL_GLYPHS.map(raster);
+      let xWorst = 0, xPair = "";
+      for (let i = 0; i < siteNames.length; i++) for (let j = 0; j < MI.ALL_GLYPHS.length; j++) {
+        const sim = overlap(siteGrids[i], placeGrids[j]);
+        if (sim > xWorst) { xWorst = sim; xPair = siteNames[i] + " vs " + MI.ALL_GLYPHS[j]; }
+      }
+      check("SNG-678: …and no site glyph reads as a PLACE glyph, since a local map draws its place and its sites together",
+        xWorst < 0.45, `most-similar pair ${xPair} overlaps ${(xWorst * 100).toFixed(0)}%`);
+    }
   }
 
   // ══ SNG-404 — THE LOCAL DETAILING ENGINE, MEASURED AGAINST THE EIGHT AUTHORED LAYOUTS.
@@ -1711,6 +1783,33 @@ for (const pack of PACKS) {
       else if (hers.uphillBearing != null) {
         const d = Math.abs(((hers.uphillBearing - mine.uphillBearing + 540) % 360) - 180);
         if (d > 2) drift.push(`${id}: uphill ${hers.uphillBearing} vs ${mine.uphillBearing}`);
+      }
+      /* ═════ AND THE ROADS, WHICH THIS HANDSHAKE NEVER LOOKED AT (SNG-678) ═════
+       * ✅ AEVI, 2026-10-06: *"Re-measuring `roadsOut` from the places' current positions moved roads at 9 of
+       * 18 layouts, some by more than 90° … The content gate never caught this, because the handshake
+       * compares river and uphill but not roads. A `roadsOut` check against `roadsOut(loc, locations)`
+       * would have: worth adding beside it."*
+       * ⛔ SHE IS RIGHT, AND THE DATA WAS ALREADY HERE. `measureGradients` has returned `roadsOut` all along
+       * — the comparison simply was not written, so two of three gradients were held and the third drifted
+       * for weeks. From Echo River Crossing the road to Millbrook was authored at 92° and measures −14°.
+       * ⚠️ A road's bearing is only meaningful WITH ITS DESTINATION (SNG-404 §5, her own rule: *"a bearing
+       * alone is only meaningful while the destination stays put"*), so this compares per destination and
+       * reports a missing or extra road as its own kind of drift — a road that has GONE is not a road that
+       * has moved 0°. ⛑ Modulo 360 and to the same 2° as the uphill, since both are rounded bearings. */
+      if (Array.isArray(hers.roadsOut) && hers.roadsOut.length) {
+        const byDest = new Map((mine.roadsOut || []).map((r) => [r.to, r.bearing]));
+        for (const road of hers.roadsOut) {
+          if (!road || !road.to || road.bearing == null) continue;
+          if (!byDest.has(road.to)) { drift.push(`${id}: road to ${road.to} is authored and no longer exists`); continue; }
+          const d = Math.abs(((road.bearing - byDest.get(road.to) + 540) % 360) - 180);
+          if (d > 2) drift.push(`${id}: road to ${road.to} ${road.bearing}° vs ${byDest.get(road.to)}° (${d.toFixed(0)}° out)`);
+        }
+        /* ⛔ AND NOT THE OTHER DIRECTION. I wrote "a road that exists and is not authored" as drift too, and
+         * it fired 18 times across 7 layouts — because `_measured.roadsOut` is the roads Aevi RECORDED for
+         * placement, not an enumeration of every connection the graph has. Millbrook alone has nine
+         * connections she never listed, and nothing about that is drift.
+         * ⚠️ A gate asserting more than the content claims is a gate that reddens on correct content. Her ask
+         * was specific: catch a road whose BEARING moved. That is what is held. */
       }
     }
     check("SNG-404: the engine reproduces Aevi's own measurements across all eight authored layouts",

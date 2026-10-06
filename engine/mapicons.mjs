@@ -44,6 +44,26 @@ export const KIND_GLYPH = {
   region: "region",
 };
 
+/* ═════ SNG-678 · THE FIFTEEN SITE-SCALE KINDS ═════
+ * ✅ AEVI (2026-10-06): *"A site's kind is either a location kind from `_vocabulary`, which already has
+ * glyphs, or one of 15 site-scale kinds defined beside it in `_siteVocabulary`. Those fifteen need glyphs.
+ * Each has a one-line meaning in the file. The vocabulary is closed."*
+ * ⛔ A SEPARATE MAP, BECAUSE IT IS A SEPARATE VOCABULARY. She declared these in `_siteVocabulary`, not in
+ * `_vocabulary`, and the two answer different questions: one is what a PLACE looks like from outside, the
+ * other what a thing INSIDE a place looks like from above. Merging them into `KIND_GLYPH` would also have
+ * quietly broken the reduction gate, which counts location kinds against drawable glyphs — and a gate
+ * reddening because of a bookkeeping merge teaches nothing.
+ * ⛑ DRAWN FROM HER DEFINITIONS, not from the words. `yard` is "an open working ground WITH A PURPOSE", so
+ * it is an enclosure with a way in rather than a plain square; `circle` is "a figure laid on the ground that
+ * HOLDS SOMETHING IN", so it is a ring of marks rather than a ring. Each case below cites its line.
+ * ⚠️ These sit at SITE scale, inside a place's own frame, so they are lighter than a town's silhouette:
+ * one or two strokes each. A site drawn as heavily as the town containing it reads as a second town. */
+export const SITE_GLYPH = {
+  well: "well", green: "green", square: "square", quarter: "quarter", field: "field",
+  mill: "mill", dock: "dock", ford: "ford", yard: "yard", burial: "burial",
+  camp: "camp", cistern: "cistern", wall: "wall", circle: "circle", outcrop: "outcrop",
+};
+
 /** ⚠️ ORDER MATTERS AND IT IS NOT ALPHABETICAL: what you DO at a place outranks what it is made of. A
  *  waygate cut into a city is still drawn as a waygate, because the fast-travel network is the fact that
  *  changes a player's route. Pole outranks everything — Aevi's warning is explicit. */
@@ -52,7 +72,9 @@ export function glyphFor(meta) {
   const kind = meta.k || meta.kind || null;
   if (kind === "pole") return "pole";
   if (meta.wg || meta.role === "gate") return "waygate";
-  return KIND_GLYPH[kind] || (meta.t === "region" ? "region" : null);
+  // ⛑ A SITE KIND IS LOOKED UP SECOND, so a value that exists in both vocabularies keeps its PLACE
+  // meaning — `field`, `grove` and `road` appear in each, and at region scale the place is what matters.
+  return KIND_GLYPH[kind] || SITE_GLYPH[kind] || (meta.t === "region" ? "region" : null);
 }
 
 /** Draw a glyph centred at (x, y) on a 2D context. `s` is the nominal half-size in pixels.
@@ -235,6 +257,118 @@ export function drawGlyph(ctx, glyph, x, y, s, style) {
       ctx.beginPath(); ctx.arc(x, y, s * 0.3, 0, Math.PI * 2); ctx.stroke();
       break;
     }
+    /* ═════ SNG-678 · THE SITE-SCALE FIFTEEN ═════
+     * Each cites the line it was drawn from. They are lighter than the place glyphs above on purpose: a
+     * site sits INSIDE a place's frame, and one drawn as heavily as its town reads as a second town. */
+    case "well":
+      // "a well or spring people draw water from" — the shaft, and the windlass over it
+      ctx.beginPath(); ctx.arc(x, y + s * 0.2, s * 0.5, 0, Math.PI * 2); ctx.stroke();
+      P([[-0.7, -0.5], [0.7, -0.5]]); ctx.stroke();
+      P([[0, -0.5], [0, -0.3]]); ctx.stroke();
+      break;
+    case "green":
+      /* "open common ground inside or beside a settlement" — open, with the grass showing.
+       * ⛑ The ring is BROKEN and the grass stands above it, because a closed oval measured 46% the same as
+       * `arena`, which is the nearest place glyph it could be mistaken for. Common ground has no edge. */
+      ctx.beginPath(); ctx.ellipse(x, y + s * 0.25, s * 0.9, s * 0.5, 0, Math.PI * 0.08, Math.PI * 0.92); ctx.stroke();
+      ctx.beginPath(); ctx.ellipse(x, y + s * 0.25, s * 0.9, s * 0.5, 0, Math.PI * 1.08, Math.PI * 1.92); ctx.stroke();
+      for (const dx of [-0.45, -0.15, 0.15, 0.45]) { P([[dx, 0.3], [dx + 0.08, -0.55]]); ctx.stroke(); }
+      break;
+    case "square":
+      /* "the open middle of a place, where people gather".
+       * ⚠️ MEASURED AND REDRAWN TWICE. A plain rectangle outline overlapped the existing `gate` glyph 50%
+       * and `yard` 73% at the gate's raster size (half-size 7, where strokes merge). ⛑ FOUR CORNERS AND AN
+       * EMPTY MIDDLE: the silhouette is the corners, which no other glyph in either alphabet has, and the
+       * emptiness is the content — it is the OPEN middle. */
+      for (const [sx, sy] of [[-1, -1], [1, -1], [-1, 1], [1, 1]]) {
+        P([[sx * 0.8, sy * 0.75], [sx * 0.8, sy * 0.3]]); ctx.stroke();
+        P([[sx * 0.8, sy * 0.75], [sx * 0.32, sy * 0.75]]); ctx.stroke();
+      }
+      break;
+    case "quarter":
+      // "a part of a town with its own character" — a block of roofs, one of them its own
+      P([[-0.95, 0.8], [-0.95, -0.1], [-0.35, -0.6], [0.25, -0.1], [0.25, 0.8]]); ctx.stroke();
+      P([[0.25, 0.8], [0.25, 0.1], [0.65, -0.25], [1.0, 0.1], [1.0, 0.8]]); ctx.stroke();
+      break;
+    case "field":
+      // "worked ground: crops, hay, grazing" — furrows, which is what makes it worked rather than open
+      P([[-0.95, 0.75], [-0.6, -0.6], [0.95, -0.6], [0.6, 0.75]], true); ctx.stroke();
+      for (const k of [-0.3, 0.1, 0.5]) { P([[k - 0.25, 0.75], [k, -0.6]]); ctx.stroke(); }
+      break;
+    case "mill":
+      // "a wheel or works driven by water or wind" — the wheel is the whole of it
+      ctx.beginPath(); ctx.arc(x, y, s * 0.72, 0, Math.PI * 2); ctx.stroke();
+      for (let i = 0; i < 4; i++) { const a = (i / 4) * Math.PI;
+        P([[Math.cos(a) * 0.72, Math.sin(a) * 0.72], [-Math.cos(a) * 0.72, -Math.sin(a) * 0.72]]); ctx.stroke(); }
+      break;
+    case "dock":
+      // "a landing for boats" — a jetty standing out over water, so the water is drawn under it
+      P([[-0.2, -0.6], [-0.2, 0.3], [0.95, 0.3]]); ctx.stroke();
+      ctx.globalAlpha = 0.7;
+      P([[-0.95, 0.65], [0.95, 0.65]]); ctx.stroke();
+      P([[-0.95, 0.9], [0.95, 0.9]]); ctx.stroke();
+      break;
+    case "ford":
+      // "a shallow place to cross water on foot" — the water, broken by the stones you cross on
+      ctx.globalAlpha = 0.7;
+      P([[-0.95, -0.25], [0.95, -0.25]]); ctx.stroke();
+      P([[-0.95, 0.55], [0.95, 0.55]]); ctx.stroke();
+      ctx.globalAlpha = 1;
+      for (const dx of [-0.45, 0, 0.45]) { P([[dx, -0.45], [dx, 0.75]]); ctx.stroke(); }
+      break;
+    case "yard":
+      /* "an open working ground WITH A PURPOSE".
+       * ⚠️ MEASURED AND REDRAWN. My first cut was a rectangle with a gap in one side, and at half-size 7
+       * the gap closes: it measured 73% the same as both `square` and the existing `gate`. ⛑ The PURPOSE is
+       * now what carries the mark — an enclosure open at the top, crossed by the work being done in it. The
+       * diagonal is the stroke no rectangle has, and `gate` opens downward where this opens up. */
+      P([[-0.85, -0.7], [-0.85, 0.8], [0.85, 0.8], [0.85, -0.7]]); ctx.stroke();
+      P([[-0.85, -0.7], [0.85, 0.8]]); ctx.stroke();
+      break;
+    case "burial":
+      /* "where the dead are laid" — a low mound and one upright.
+       * ⚠️ MEASURED AND REDRAWN. The mound was `arc(y + 0.75s, r = 0.85s)`, which reaches y + 1.6s: most of
+       * it fell outside the glyph's own box and was clipped away, leaving 15 ink cells where its neighbours
+       * put down 42 to 102. It read as a faint scratch rather than a mark. The mound sits on the baseline
+       * now and the upright is the tallest thing in it, which is what a burial ground looks like from above
+       * anyway: a rise with a stone standing out of it. */
+      ctx.beginPath(); ctx.arc(x, y + s * 0.8, s * 0.95, Math.PI * 1.15, Math.PI * 1.85); ctx.stroke();
+      P([[-0.95, 0.8], [0.95, 0.8]]); ctx.stroke();
+      P([[0, 0.3], [0, -0.85]]); ctx.stroke();
+      P([[-0.34, -0.55], [0.34, -0.55]]); ctx.stroke();
+      break;
+    case "camp":
+      // "people staying, under canvas or in billets, NOT LIVING HERE" — canvas, which is why it is open
+      // at the foot: a tent is struck, a house is not
+      P([[-0.85, 0.8], [0, -0.75], [0.85, 0.8]]); ctx.stroke();
+      P([[-0.4, 0.8], [0, 0.1], [0.4, 0.8]]); ctx.stroke();
+      break;
+    case "cistern":
+      // "stored water" — a vessel, with the water line inside it
+      P([[-0.7, -0.6], [-0.55, 0.8], [0.55, 0.8], [0.7, -0.6]]); ctx.stroke();
+      ctx.globalAlpha = 0.75;
+      P([[-0.62, 0.05], [0.62, 0.05]]); ctx.stroke();
+      break;
+    case "wall":
+      // "a wall that DEFINES a place" — so it is crenellated and it runs past the frame
+      P([[-1.05, 0.7], [1.05, 0.7]]); ctx.stroke();
+      P([[-1.05, 0.7], [-1.05, -0.1], [-0.6, -0.1], [-0.6, -0.5], [-0.15, -0.5], [-0.15, -0.1],
+         [0.3, -0.1], [0.3, -0.5], [0.75, -0.5], [0.75, -0.1], [1.05, -0.1], [1.05, 0.7]]); ctx.stroke();
+      break;
+    case "circle":
+      // "a figure laid on the ground that HOLDS SOMETHING IN" — a ring of marks, not a ring: the gaps
+      // are where it is entered, and the inner mark is what it holds
+      for (let i = 0; i < 8; i++) { const a = (i / 8) * Math.PI * 2;
+        ctx.beginPath(); ctx.arc(x + Math.cos(a) * s * 0.85, y + Math.sin(a) * s * 0.85, Math.max(0.6, s * 0.13), 0, Math.PI * 2); ctx.stroke(); }
+      ctx.globalAlpha = 0.6;
+      ctx.beginPath(); ctx.arc(x, y, s * 0.3, 0, Math.PI * 2); ctx.stroke();
+      break;
+    case "outcrop":
+      // "bare rock standing out of the land" — angular, and it breaks the ground line
+      P([[-1.0, 0.8], [-0.5, 0.8], [-0.15, -0.3], [0.3, 0.35], [0.6, -0.65], [1.0, 0.8]]); ctx.stroke();
+      ctx.globalAlpha = 0.65;
+      P([[-0.15, -0.3], [0.1, 0.8]]); ctx.stroke();
+      break;
     case "region":
       // the map's own furniture — a seat, not a building
       ctx.strokeStyle = (style && style.regionInk) || "#e8d6a0";
@@ -250,3 +384,6 @@ export function drawGlyph(ctx, glyph, x, y, s, style) {
 
 /** The glyphs, for a legend and for a gate that wants to draw every one. */
 export const ALL_GLYPHS = [...new Set(Object.values(KIND_GLYPH))];
+// ⛑ KEPT APART from ALL_GLYPHS so the reduction gate keeps counting what it was written to count: how far
+// the 34 LOCATION kinds fold onto drawable place glyphs. The site alphabet is its own claim.
+export const ALL_SITE_GLYPHS = [...new Set(Object.values(SITE_GLYPH))];

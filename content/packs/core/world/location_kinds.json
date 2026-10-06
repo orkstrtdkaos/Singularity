@@ -238,6 +238,81 @@
    "ruined": 0.6,
    "_why": "A fraction of the thing's build cost to bring it back to whole. Destroyed is a full rebuild."
   },
+  "repair": {
+   "_ruling": "One world. A change made in one game is a change in every game, folded the way shared fates are. A damaged thing stays damaged until someone mends it: the locals, who then go after whoever did it, or a player, who may be rewarded. SNG-679 Part R.",
+   "localsBeginAfterDays": 3,
+   "localDays": {
+    "damaged": 12,
+    "ruined": 45,
+    "destroyed": 120
+   },
+   "localsWillNot": [
+    "place:destroyed",
+    "waygate:destroyed",
+    "water:destroyed",
+    "hold",
+    "feature"
+   ],
+   "_localsWillNot": "A razed place has no locals left to rebuild it; a broken gate needs a maker; a dried river is beyond a village. Holds and their features belong to their keepers, not to the locals. These wait for a player.",
+   "playerReward": {
+    "share": 1,
+    "currencies": [
+     "scrip",
+     "crystal"
+    ],
+    "standingSteps": {
+     "damaged": 1,
+     "ruined": 2,
+     "destroyed": 3
+    }
+   },
+   "_playerReward": "A player who does the work is paid the value of the repair (repairCost x build) in the Reach's scrip or crystal, never coin, and gains standing with the community. Work shared with the locals is paid in proportion. First cut, Erik rules the numbers."
+  },
+  "reckoning": {
+   "_what": "What the locals do when they bore the repair themselves. A debt for the damages, held by a named local, and someone sent to find whoever did it. Builds on the debt ladder (holdings.js recordDebt / advanceDebts). SNG-679 Part R.",
+   "seen": [
+    "named",
+    "described",
+    "unseen"
+   ],
+   "debtKind": "damages",
+   "searchBeginsAfterDays": {
+    "named": 2,
+    "described": 7
+   },
+   "findWithinDays": {
+    "named": 6,
+    "described": 25
+   },
+   "_search": "Days of searching before the one sent finds the culprit, on top of the travel to where the culprit is. A culprit with a hold is looked for there first. Unseen damage is never traced: the locals mend it and remember.",
+   "outcomes": [
+    "pay",
+    "work it off",
+    "refuse",
+    "fight",
+    "flee"
+   ],
+   "words": {
+    "did": {
+     "damaged": "damaged",
+     "ruined": "wrecked",
+     "destroyed": "destroyed"
+    },
+    "mend": {
+     "damaged": "mend",
+     "ruined": "restore",
+     "destroyed": "rebuild"
+    },
+    "asking": "People from {place} are asking after whoever {did} the {thing}.",
+    "sent": "{name} has been sent from {place} to find whoever {did} the {thing}.",
+    "found": "{name} has come from {place} about the {thing}.",
+    "wanted": "Wanted at {place}: hands to {mend} the {thing}.",
+    "mending": "The people of {place} are at work on the {thing}.",
+    "mended": "The {thing} at {place} stands again.",
+    "thanked": "{place} remembers who helped {mend} the {thing}.",
+    "remembered": "{place} has not forgotten the {thing}."
+   }
+  },
   "_numbers": "First cut. Erik rules the numbers."
  },
  "_poleWarning": "⛔ 12 locations are `pole` — pure extremities like the Blaze, the Scouring, the Numen. THEY ARE NOT TOWNS and an icon that says 'settlement' would lie about the most dangerous places in the world. ⚠️ They want their own mark.",

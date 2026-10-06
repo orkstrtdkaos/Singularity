@@ -1,4 +1,4 @@
-<!-- status: OPEN for CCode. Content half shipped with this order (feature site kinds, hold radii, frame decks, map-state words and effects). -->
+<!-- status: OPEN for CCode. Erik ruled one world (S2, Part R). Content half shipped: feature site kinds, hold radii, frame decks, map-state words, effects, repair and reckoning. -->
 # WORK ORDER: Aevi → CCode · Holds on every map, and everything on the maps can change (SNG-679)
 
 **Aevi (PO) · 2026-10-06.** Erik:
@@ -123,6 +123,8 @@ keeps it complete.
 - `by` is a person, a power, or "the world";
 - `cause` is a short world phrase ("fired in the raid", "the flood");
 - `beat` is the turn id.
+- `seen` is `named`, `described` or `unseen`: whether the locals know who did it (Part R). The GM's `mapOps` must
+  say. Damage by the world itself (a flood, a power's war) has no culprit.
 
 Every channel calls it: the GM's new `mapOps` (S3), the hold channels that already exist (S4), raids, and the world
 tick. That is SNG-672 M1's "one door", applied to change. It validates and writes, then bumps the **world revision**
@@ -139,10 +141,27 @@ tick. That is SNG-672 M1's "one door", applied to change. It validates and write
 - **Holds, features and caravans** keep their state on their own records (`holding.state`, `feature.state`,
   `caravan.state`), the way `condition` lives there now. Fortune and fabric are separate axes: a thriving hold can
   have a burned wall.
-- **Everything else** lives in `character.mapState[key]`, the SNG-672 M3 overlay generalised. `placeState` *is*
-  `mapState` with the `place:` prefix. Don't build both.
-- Each record is `{ state, since, by, cause, beat, name?, was?, pos?, history[≤12] }`. `was` holds what a move or
-  rename replaced, for the trace and the "once called" line.
+- **Everything else is the world's, not the save's (Erik: one world, below).** It lives in a shared store,
+  `world/places/valley.json`, built the way `fates.js` shares lives:
+  - **One record per key**, with an append-only list of change events.
+  - **Event ids are derived from `{ key, change, worldDay, by }`**, so two worlds that recorded the same change hold
+    one event, not two (`personIdFor`'s rule).
+  - **The state is a fold that every client computes the same way:**
+    - events are sorted by world-day, then by severity on a tie (destroyed > ruined > damaged > repaired > the rest),
+      then by id;
+    - damage jumps on the ladder, and a repair climbs one rung;
+    - the latest move and the latest rename stand;
+    - the first `added` stands.
+  - **Each save adopts the store before its pass and publishes what it changed after,** the same cycle as fates.
+  - `character.mapState` is only a read-through cache of the folded store and the changes not yet published. It is
+    never a second truth.
+  - `placeState` *is* this store with the `place:` prefix. Don't build both.
+- Each folded record is `{ state, since, by, seen, cause, beat, name?, was?, pos?, repair?, reckoning?, history[≤12] }`.
+  - `was` holds what a move or rename replaced, for the trace and the "once called" line.
+  - `seen` is how well the locals know who did it (Part R).
+- **Holds stay on their records,** because a hold is its owner's. Its card publishes the hold's own `state` and the
+  state of its *outward* features (the martial family: wall, gate, tower, keep and so on), because those are what a
+  visitor would see.
 - `mapStateOf(character, key)` reads both stores and returns `{ state: "whole", … }` for anything never touched. Every
   renderer, the router, the economy and `groundForGM` read it. **The live record wins** (SNG-672 M2).
 
@@ -196,9 +215,14 @@ content (first cut, Erik rules them):
 - **Water and ground:** the multiplier applies to the water-fed and ground-worked features of the places and holds on
   them (mills, docks and fisheries; fields, herds and quarries).
 
-**S7 · What the character knows.** The map shows the state the character **has learned**, not the state the world
-holds. A change carries `beat`; the character learns it by being there, being told (a GM line naming it), or a
-relay/hold report. Until then their map shows the old state, and the card says `knowledge.lastKnown`. This is SNG-672
+**S7 · What the character knows.** The world is shared, but knowledge isn't. The map shows the state the character
+**has learned**, not the state the world holds. A change carries `beat`, and the character learns of it by:
+
+- being there;
+- being told (a GM line naming it);
+- a relay or hold report;
+- **word of it**, meaning the news the change posts to `world/feed.json` for anything at `ruined` or worse, which
+  reaches characters within a few days' travel of it. Until then their map shows the old state, and the card says `knowledge.lastKnown`. This is SNG-672
 M6's layering applied to state. If M6 isn't built, ship S1–S6 with "learned = everything", and keep the field.
 
 **S8 · Adding and moving, the cases that need rules.**
@@ -215,6 +239,86 @@ M6's layering applied to state. If M6 isn't built, ship S1–S6 with "learned = 
 - **Adding a road** between two places adds a live connection (M3's "road opened"). It is routed by CCODE-626's
   router like any other road.
 
+## Part R · Someone has to mend it: the locals, who come after you, or a player, who is rewarded
+
+Erik ruled this after the first draft:
+
+> *"One world. If you burn a bridge someone must repair or rebuild it. Either the locals — and they'll try to track
+> you down — or a player (who may be rewarded)."*
+
+Content holds the numbers and the words: `mapStates.repair` and `mapStates.reckoning`.
+
+**R1 · Nothing mends itself.** A damaged, ruined or destroyed thing stays that way in every game until work brings it
+back. There is no timer that restores it.
+
+**R2 · The locals mend what they can, at a pace.**
+
+- They start `repair.localsBeginAfterDays` after the change, and take `repair.localDays[state]` to bring it to whole.
+  The work is recorded on the shared record's `repair` block (`{ progress 0–1, byLocals, byPlayers{} }`), so every
+  game sees the same scaffolding.
+- **What the locals will not mend** waits for a player (`repair.localsWillNot`):
+  - a razed place, because there's nobody left to rebuild it;
+  - a broken waygate, which needs a maker;
+  - a river run dry;
+  - holds and their features, which are their keepers' to mend.
+- While they work, the local map shows the thing under repair, and the card reads `reckoning.words.mending`.
+
+**R3 · And they go after whoever did it.** This happens when the mending costs the locals anything (their own work or
+a reward they pay) and the change was `named` or `described`:
+
+- **A debt of kind `damages`** goes on the culprit's save through `recordDebt`.
+  - **Holder:** a named local. Use the place's own people (`npcsPresent`) when there are any. Otherwise mint one with
+    an id derived from the event, so every game meets the same person.
+  - **Amount:** **what the locals actually spent**, which is their own share of the work plus any reward they paid
+    players, valued as `repairCost` × the thing's build value by the existing `priceOf` path. It is recomputed as
+    the work goes on.
+  - **Escalation:** the debt ladder is the same as today (colder reception, then refusal). But **this holder always
+    acts**: damages are not a matter of temperament, so don't gate it on `reactsToReputation`.
+- **Someone is sent.**
+  - After `reckoning.searchBeginsAfterDays[seen]`, the holder or someone they hire sets out towards the culprit's
+    whereabouts. Use `world/travelers.json` for a player who is about, or their nearest hold if they have one.
+  - They find the culprit within `reckoning.findWithinDays[seen]` plus the travel time.
+  - `described` is slower than `named` and searches the right region. It doesn't need to be clever.
+  - The culprit's news reads `asking`, then `sent`.
+- **When they arrive** it is a scene: `found`. The outcomes are `reckoning.outcomes`:
+  - **pay:** settles the debt;
+  - **work it off:** the culprit's labour on the repair counts as player work (R4), and the debt falls by its value;
+  - **refuse:** escalation goes to the top at once;
+  - **fight:** an ordinary fight, and the community's standing falls with it;
+  - **flee:** the search starts again from where the culprit went.
+- **`unseen` damage is never traced.** The locals mend it and remember (`remembered`). If the GM later reveals the
+  culprit, R3 starts from there.
+- **Hitting another player's hold** puts the debt with that hold's steward (a named person). If the hold has no
+  steward, the debt is to the owner, and what they do about it is theirs.
+
+**R4 · Or a player does the work, and is rewarded.**
+
+- Every game shows the job at the place, drawn from the shared record: `wanted` ("Wanted at {place}: hands to
+  {mend} the {thing}"). Use the SNG-677 card, and the place's job list where there is one.
+- A player can:
+  - **pay** for materials and hands: the repair value in goods from their store or in currency;
+  - **or do the work** in passes, the way clearing a hold's room works (`holdStore.slots.clearing`).
+
+  Their share goes into `repair.byPlayers[characterId]`.
+- **When the thing is whole,** everyone who worked is paid `playerReward.share` × the repair value × their share:
+  - in the Reach's scrip or crystal, **never coin**;
+  - with origin `reward`, so it moves value rather than minting it (purse.js `TRANSFER_ORIGINS`);
+  - plus `standingSteps[state]` with the community.
+
+  The news reads `thanked`, and for everyone who knew it was broken, `mended`.
+- **The culprit can be the one who mends it.** Their work counts against their debt rather than being paid.
+- **A player can take on what the locals won't** (`localsWillNot`): remaking a broken gate at the cost of making one,
+  or resettling a razed place, which goes through SNG-672 M1 as a founding at the trace's position with the old name
+  offered back.
+- **If the locals finish first,** players are paid for the share they did. The debt (R3) is whatever the locals
+  spent, including those payments.
+- **A player may decline the reward** and give the work. That share then costs the locals nothing, so it is not in
+  the culprit's debt, and the standing is still earned.
+
+**R5 · Holds are their owners'.** Damage to a hold or a feature is mended by its keeper through `holdingOps`
+(`repair`), at `repairCost` from the hold's store. No locals and no job board are involved. Another player can't mend
+your hold uninvited. Gifting work to a hold is a later question.
+
 ## Content shipped with this order (mine, on origin with this commit)
 
 - **`economy.json` → `holdFeatures.kinds[*].siteKind`:** all 44 feature kinds name their site glyph from the closed
@@ -225,8 +329,9 @@ M6's layering applied to state. If M6 isn't built, ship S1–S6 with "learned = 
 - **`holdStore.slots.frames.kinds[*].deck`:** hull is a 30 m `line`; legs is a 2-level `stack`; lift is a 60 m
   `ring`; grown is a `scatter`; borne is a `line` along the bearer's back.
 - **`location_kinds.json` → `mapStates`:** the ladder, the changes, the player-facing words for every class in S0,
-  `knowledge` words, `effects` and `repairCost`. The words are world language only (SYSTEM_SPEC §29.7). Build notes
-  sit under `_`.
+  `knowledge` words, `effects` and `repairCost`. Also `repair`, which holds the locals' pace, what they won't mend and
+  the player reward, and `reckoning`, which holds the debt kind, the search pacing, the outcomes and the lines a player
+  reads. The words are world language only (SYSTEM_SPEC §29.7). Build notes sit under `_`.
 - **Your ruling from CCODE_20261006 (`regionDisplay` precedence): your reading is right. Implement it.** An entry is
   an explicit decision: `suppressAtRegion` suppresses, any other entry keeps, and the 0.5° rule decides only places
   with no entry. `_suppressionRule` now says so.
@@ -263,21 +368,46 @@ M6's layering applied to state. If M6 isn't built, ship S1–S6 with "learned = 
 - **G7 · Moving places move.** The Unlanded on day 0 and day 14 are at different points, and both are on its circuit.
   Arriving at a circuit waypoint on a day it isn't there finds the trace.
 - **G8 · Knowledge.** A change made where the character isn't shows `lastKnown` until they learn it.
+- **G10 · One world.**
+  - Two saves record changes to the same bridge in either order and fold to the same state.
+  - The same change recorded by both is one event.
+  - A bridge burned in save A is burned in save B after B adopts the store.
+- **G11 · Nothing mends itself.**
+  - With nobody working, a ruined road is still ruined after 365 world-days.
+  - With the locals working, it is whole after `localDays.ruined`.
+  - A destroyed waygate is never mended by the locals.
+- **G12 · The reckoning.**
+  - A `named` burning mended by the locals leaves a `damages` debt on the culprit, held by a named local, and someone
+    sent who reaches them within the configured days plus travel.
+  - An `unseen` one leaves no debt.
+  - Working off the debt reduces it by the work's value.
+- **G13 · The reward.**
+  - A player who does half the work is paid half the repair value, in scrip or crystal with origin `reward`, and
+    gains standing.
+  - No path pays coin.
+  - The culprit's own work pays nothing and reduces their debt instead.
+  - A burning mended entirely by gifted work leaves no debt and sends nobody.
 - **G9 · Player-facing words.** Every string in `mapStates.words` and `knowledge` passes the §29.7 check (no ticket
   id, no file name, no build words).
 
 ## Order
 
 1. **H2** (whereabouts on the globe), because raids are reading the wrong point today.
-2. **S1 + S2** (the door and the store, with `placeState` folded in) and the **G2** gate.
+2. **S1 + S2** (the door and the shared store with its fold, with `placeState` folded in), with gates **G2** and
+   **G10**.
 3. **H1 + H3 + H4** (holds on the world and region maps).
 4. **S5 + S6 + S3 + S4** (state drawn and played; the channels).
 5. **H6 + H7**, once SNG-678 L1/L2 are in (holds and features on local maps).
-6. **H5, S7, S8.**
+6. **Part R** (the locals' repair, the reckoning, the reward), once S1–S6 are in.
+7. **H5, S7, S8.**
 
-**[for Erik, one question]** Is the world's state per save, or shared? Each character's world is its own today, and
-only holds are published. I've specced a burned bridge as burned in *your* world, not in Loki's, while a hold's own
-damage travels on its card. If a razed town should be razed for everyone, that's a shared store like `sharedHolds`,
-and S2 changes shape. Better to know before S2 than after.
+**Ruled (Erik):** one world. The first draft of this order asked whether state was per save; S2 and Part R are his
+answer.
+
+**My reading, which Erik can overrule:** the reckoning follows the locals' cost. The reward a player is paid comes
+out of the locals' pocket, so it adds to what they come to collect. That gives the player a choice. A player can
+**do the work as a gift** and decline the reward (`repair.byPlayers[id].gift`). Then the locals have spent nothing
+on that share. If gifts covered all of it, nobody is sent, and the culprit is only remembered. A gift still earns
+the standing.
 
 — Aevi, PO

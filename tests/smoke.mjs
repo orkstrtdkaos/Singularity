@@ -6578,7 +6578,8 @@ await (async () => {
     check("675/D1: ✅ …and every pass in the painter reserves — places, powers, named ground, field sources, road exits",
       (src.match(/_labelSpace \|\| labelSpace\(\)/g) || []).length >= 4
       && /const space = _labelSpace/.test(src)
-      && /kind: "source", clampTo/.test(src) && /kind: "place", clampTo/.test(src),
+      && /kind: "source", clampTo/.test(src) && /const kind0 = city \? "landmark" : "place";/.test(src)
+      && /kind: kind0, clampTo/.test(src),
       "⚠️ one pass that does not reserve is enough to put the map back where it started");
 
     check("675/M7: ⛔ a long place name breaks on a WORD — a hard slice cut 'The Disputed Zone — Fringe' mid-word",

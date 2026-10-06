@@ -193,6 +193,48 @@ export function leanOf(spectrum) {
 
 /** ⛔ A loose arrangement outside each gate. Returns one quarter per avenue, each with its own character and
  *  its huts already placed in canvas pixels. */
+/** ⛔ M12 (SNG-675) · THE CITY SAT IN A VOID. ✅ AEVI: *"Outside the wall there are the twelve road quarters
+ *  (CCODE-604; keep them, Erik asked for them) and nothing else, so the city sits in a void. The mock had a
+ *  low, dark belt of outlying roofs all the way round. Add a thin, low-density belt between the quarters; the
+ *  quarters stay where they are."*
+ *
+ *  ⛑ BETWEEN, NOT OVER. The quarters are the twelve places where people deliberately settled along a road;
+ *  this is the ordinary spill that fills the gaps between them, and it must never compete with one — so each
+ *  avenue's own angular span is left clear by the same arithmetic `faubourgs` uses to size a quarter.
+ *  ⚠️ AND IT IS THIN BY CONSTRUCTION, not by taste: one roof per `perDeg` degrees of the ring, jittered, with
+ *  nothing drawn inside a quarter's span. A belt that competed with the quarters would undo CCODE-604. */
+export function beltRoofs(avenues, { cx, cy, wallR, rimR, seed = 1, perDeg = 2.6, gap = 16, clearMult = 0 } = {}) {
+  const S = typeof seed === "string" ? strSeed(seed) : seed;
+  // ⛔ THE BELT SITS BEYOND THE QUARTERS, NOT IN GAPS BETWEEN THEM — MEASURED, AND IT CHANGED THE DESIGN.
+  // My first cut cleared each quarter's angular span and produced **3 roofs**: at twelve evenly-spaced avenues
+  // a quarter is ±14.5° of a 30° slot, so the quarters already cover the ring and there is no "between" to
+  // put anything in. ⛑ `faubourgs` runs from `wallR + 16` out to about `rimR - 34`, so the belt takes the thin
+  // annulus OUTSIDE that — which is what "a low, dark belt all the way round" actually describes, and it
+  // cannot compete with a quarter because it is never at a quarter's radius.
+  const r0 = Math.max(wallR + gap, rimR - 32), r1 = rimR - 6;
+  if (!(r1 > r0)) return [];
+  // the angular half-width each quarter occupies, by `faubourgs`' own rule, so the two cannot disagree
+  const spans = (avenues || []).map((a, ai) => {
+    const prev = avenues[(ai - 1 + avenues.length) % avenues.length];
+    const next = avenues[(ai + 1) % avenues.length];
+    const dPrev = Math.abs(((a.bearingDeg - prev.bearingDeg + 540) % 360) - 180) || 30;
+    const dNext = Math.abs(((next.bearingDeg - a.bearingDeg + 540) % 360) - 180) || 30;
+    return { b: a.bearingDeg, half: Math.min(26, Math.max(6, Math.min(dPrev, dNext) * 0.42)) * clearMult };
+  });
+  const inQuarter = (deg) => spans.some((s) => Math.abs(((deg - s.b + 540) % 360) - 180) < s.half);
+  const out = [];
+  const n = Math.max(12, Math.round(360 / Math.max(0.5, perDeg)));
+  for (let i = 0; i < n; i++) {
+    const deg = (i / n) * 360 + (rnd(S, i, 3) - 0.5) * (360 / n);
+    if (clearMult > 0 && inQuarter(deg)) continue;   // kept as a dial; at 0 the belt runs unbroken
+    const rr = r0 + (r1 - r0) * (0.1 + 0.8 * rnd(S, i, 5));
+    const a = deg * Math.PI / 180;
+    out.push({ x: cx + Math.sin(a) * rr, y: cy - Math.cos(a) * rr,
+      w: 3 + rnd(S, i, 7) * 3, h: 2.5 + rnd(S, i, 11) * 2.5, rot: a });
+  }
+  return out;
+}
+
 export function faubourgs(avenues, { cx, cy, wallR, rimR, seed = 1, gap = 16, depth = null, W = 0, H = 0 } = {}) {
   const S = typeof seed === "string" ? strSeed(seed) : seed;
   const out = [];

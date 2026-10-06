@@ -57,7 +57,7 @@ import { housesAt } from "./engine/powers.js";
 // ⛔ B4 — a lens is WHERE the marks go (pure, here) and HOW they are inked (below, in this file)
 import { isoLines, blurGrid, stipple, hexGather, nearness, crystalFacets } from "./engine/lenses.js";
 // ⛔ ✅ ERIK: *"Can we make it look like a big city with these places laid out?"*
-import { cityPlan, blockPath, blockRoofs, faubourgs, leanOf } from "./engine/cityplan.js";
+import { cityPlan, blockPath, blockRoofs, faubourgs, beltRoofs, leanOf } from "./engine/cityplan.js";
 import { makeInfluence } from "./engine/influence.js";
 import { glyphFor, drawGlyph } from "./engine/mapicons.mjs";   // SNG-409 §4: a pole must never read as a town   // SNG-390: the globe, read-only
 import { walkingDays, milesFor, worldPosForGenerated, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout, fieldBlobs, fieldAlpha, placeLabels } from "./engine/worldmap.js";
@@ -198,7 +198,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.19.9";
+const APP_VERSION = "2.19.10";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -13010,6 +13010,26 @@ function paintFaubourgs(ctx, plan, quarters) {
       ctx.restore();
     }
   }
+
+  // ═════ M12 (SNG-675) · THE CITY NO LONGER SITS IN A VOID ═════
+  // ✅ AEVI: *"Outside the wall there are the twelve road quarters and nothing else, so the city sits in a
+  // void. The mock had a low, dark belt of outlying roofs all the way round. Add a thin, low-density belt
+  // between the quarters; the quarters stay where they are."*
+  // ⛑ MEASURED, AND IT CHANGED THE DESIGN: at twelve evenly-spaced avenues each quarter spans ±14.5° of a
+  // 30° slot, so the quarters already cover the ring and clearing their spans left **3 roofs**. The belt sits
+  // in the thin annulus OUTSIDE their depth instead — 138 roofs, unbroken — which is what "all the way round"
+  // describes, and it cannot compete with a quarter because it is never at a quarter's radius.
+  {
+    const belt = beltRoofs(plan.avenues, { cx: plan.cx, cy: plan.cy, wallR: plan.wallR, rimR: plan.rimR, seed: "belt" });
+    ctx.save();
+    ctx.fillStyle = "rgba(38,32,26,0.52)";          // low and dark: outlying, not part of the city proper
+    for (const b of belt) {
+      ctx.save(); ctx.translate(b.x, b.y); ctx.rotate(b.rot);
+      ctx.fillRect(-b.w / 2, -b.h / 2, b.w, b.h);
+      ctx.restore();
+    }
+    ctx.restore();
+  }
 }
 
 /** ⛔ X3 · THE LANDMARKS, one drawing each by location id. ✅ ERIK: *"The coliseum is central in the culture
@@ -13444,6 +13464,17 @@ function clusterLayout(cluster, W, H, widthOf) {
 fetch("content/packs/core/world/region_maps.json?v=" + APP_VERSION)
   .then((r) => r.json()).then((d) => { _regionMaps = d; })
   .catch(() => { /* the ground still draws */ });
+// ⛔ M13 · THE WARDS ARE LOADED STRUCTURED, BECAUSE THE LORE BAG FLATTENS THEM TO PROSE.
+// ⚠️ `CONTENT.lore.crossing_wards` IS A STRING — the loader renders a lore file into the text the GM reads,
+// which is right for the GM and useless for a map that needs twelve names keyed by foothill. My first reader
+// did `(CONTENT.lore || []).find(...)`, and `lore` is an OBJECT of strings: it would have thrown inside the
+// painter, where the catch falls back to the connection diagram without saying why.
+// ⛑ Loaded exactly as `region_maps.json` is, for the same reason: a structured world file the map needs and
+// the prose pipeline cannot carry.
+let _crossingWards = null;
+fetch("content/packs/valley/lore/crossing_wards.json?v=" + APP_VERSION)
+  .then((r) => r.json()).then((d) => { _crossingWards = d?.wards || null; })
+  .catch(() => { /* the city still draws, without its ward names */ });
 // ⚠️ ONE GENERATOR, SHARED BY BOTH TIERS. It was a closure-local inside the globe, which meant the
 // region map could not reach it without a second fetch of the same module and params. Hoisted rather
 // than duplicated — two copies of a deterministic generator is two chances to drift.
@@ -14178,7 +14209,32 @@ function paintRegionMap(regionId) {
         } else exits.push({ at: x.at, names: [name], toIds: x.to ? [x.to] : [] });
       }
     }
-    // ⛔ C4.3 · the houses, where any place here keeps them — the Crossing's swirl
+    // ═════ M13 (SNG-675) · THE WARDS, ONE PER AVENUE ═════
+  // ✅ AEVI's note: *"draw each ward's `name` inside the wall along its own avenue, in the district style …
+  // place it on the SAME BEARING the gate label uses rather than a fixed slot, so a future road move carries
+  // its ward with it."* ⛑ Which is why this reads `avenue.to` — the foothill the road runs to — and her file
+  // is keyed by exactly that. The roads moved last week (SNG-676) and the wards move with them for free.
+  // ⚠️ AND THEY DROP FIRST when the frame runs out: the district style is rank 6, below the road exits at 5,
+  // because *"below the zoom where the gate labels thin, drop the wards first."*
+  if (city && city.avenues) {
+    const wards = _crossingWards;
+    if (wards) {
+      ctx.textAlign = "center";
+      for (const a of city.avenues || []) {
+        const ward = wards[a.to];
+        if (!ward?.name) continue;
+        // along its own avenue, inside the wall — far enough in to read as the city's, not the gate's
+        const rr = city.wallR * 0.62;
+        const ang = (Number(a.bearingDeg) || 0) * Math.PI / 180;
+        const wx = city.cx + Math.sin(ang) * rr, wy = city.cy - Math.cos(ang) * rr;
+        const ww = (drawLabel(ctx, ward.name, -9999, -9999, "district", {})?.w) || 0;
+        const wb = (_labelSpace || labelSpace()).place(wx, wy, ww, 12, { kind: "district", clampTo: { w: W, h: H } });
+        queueLabel(ctx, ward.name, wb, "district", {});
+      }
+    }
+  }
+
+  // ⛔ C4.3 · the houses, where any place here keeps them — the Crossing's swirl
     _houseMarks = paintHouses(ctx, base, W, H,
       Object.keys(CONTENT.locations || {}).filter((id) => (CONTENT.locations[id]?.regionId || CONTENT.locations[id]?.region) === regionId), city);
 
@@ -14331,9 +14387,13 @@ function paintRegionMap(regionId) {
     if (!labels416.shown.has(m.id)) continue;
     const more0 = labels416.hiddenBy[m.id];
     const txt0 = m.name + (more0 ? ` +${more0}` : "");
-    const w0 = (drawLabel(ctx, txt0, -9999, -9999, "place", { here: m.id === here, raw: true })?.w) || 0;
+    // ⛔ M10 — ✅ AEVI: *"landmarks unreadable … the mock has DARK SERIF WITH A LIGHT HALO."* On the city's
+    // own cream paper the `place` style is cream ink in a dark halo, which is a smudge round every letter.
+    // ⛑ THE GROUND DECIDES, not the kind of thing: same serif, ink and halo swapped, wherever a city is drawn.
+    const kind0 = city ? "landmark" : "place";
+    const w0 = (drawLabel(ctx, txt0, -9999, -9999, kind0, { here: m.id === here, raw: true })?.w) || 0;
     const b0 = (_labelSpace || labelSpace()).place(m.p.x, m.p.y + 18, w0, 12,
-      { kind: "place", clampTo: { w: W, h: H }, offsets: [[0, 0]] });
+      { kind: kind0, clampTo: { w: W, h: H }, offsets: [[0, 0]] });
     if (b0) placeBox.set(m.id, b0);
   }
   for (const m of marks416) {
@@ -14351,8 +14411,15 @@ function paintRegionMap(regionId) {
     // ✅ M2: through the table, so the 3px dark halo lands — a bare `fillText` had none, which is why a name
     // over light ground was the one that disappeared. ⛑ QUEUED, like every other pass: the box was reserved
     // above, and the ink waits until the whole frame has had its say.
-    queueLabel(ctx, m.name + (more ? ` +${more}` : ""), placeBox.get(m.id), "place",
+    const kindM = city ? "landmark" : "place";
+    queueLabel(ctx, m.name + (more ? ` +${more}` : ""), placeBox.get(m.id), kindM,
       { here: m.id === here, raw: true, align: "center" });
+    // ⛑ M10's OTHER HALF — THE ITALIC LINE UNDER A LANDMARK, read and not invented. ⚠️ Aevi's mock lines
+    // ("a bench from every reach" for the Coliseum) are HERS, written for the mock: nothing in content
+    // carries them, and deriving a caption from `descriptionSeed` is the regex-over-prose she forbade in
+    // SNG-404. So the reader is here and draws whatever is authored — today, for nobody.
+    const line = city ? (m.l.mapLine || m.l.epithet || null) : null;
+    if (line) queueLabel(ctx, String(line), placeBox.get(m.id), "landmarkUnder", { raw: true, align: "center" }, 12);
   }
   // ⛔ AND HERE THE INK LANDS, ONCE, IN RANK ORDER. Nothing above this line has drawn a label.
   flushLabels();

@@ -50,12 +50,33 @@ export const LABEL_STYLES = {
     fill: () => "rgba(232,228,218,0.82)",
     halo: "rgba(10,12,18,0.78)", haloWidth: 2.4, rank: 0,
   },
-  // ✅ "district / quarter | spaced capitals, faint"  ⚠️ NO POPULATION YET — the names are M13, and Aevi's.
+  // ✅ "district / quarter | spaced capitals, faint" — and the names LANDED (M13, `crossing_wards.json`).
+  // ⛑ RANK 6, BELOW THE ROAD EXITS AT 5, because Aevi asked for exactly that ordering: *"below the gate
+  // labels in weight … below the zoom where the gate labels thin, DROP THE WARDS FIRST."* A ward is the
+  // city's own character and the gate label is how you leave; when the frame runs out, the way out wins.
   district: {
     font: () => `600 10px ui-serif, Georgia, serif`,
-    fill: () => "rgba(228,222,206,0.52)",
-    halo: "rgba(10,12,18,0.55)", haloWidth: 2, letterSpacing: "0.22em",
-    transform: (t) => String(t).toUpperCase(), rank: 4,
+    fill: () => "rgba(60,52,40,0.62)",
+    halo: "rgba(246,241,228,0.72)", haloWidth: 2, letterSpacing: "0.22em",
+    transform: (t) => String(t).toUpperCase(), rank: 6,
+  },
+  // ⛔ M10 · A LANDMARK SITS ON THE CITY'S OWN PAPER, WHICH IS LIGHT. ✅ AEVI: *"the mock has DARK SERIF
+  // WITH A LIGHT HALO."* ⚠️ The `place` style is cream ink in a dark halo, which is right over terrain and
+  // muddy over cream paper — a dark halo on a light ground is a smudge round every letter. Same family, ink
+  // and halo swapped, because the GROUND changed and not the kind of thing being named.
+  landmark: {
+    font: (o) => `700 ${o?.here ? 13 : 12}px ui-serif, Georgia, "Times New Roman", serif`,
+    fill: () => "rgba(26,22,16,0.94)",
+    halo: "rgba(248,244,232,0.88)", haloWidth: 3, rank: 2,
+  },
+  // ⛑ …and the italic line under it. ⚠️ NO POPULATION: Aevi's mock lines ("a bench from every reach" for
+  // the Coliseum) are HERS, written for the mock — nothing in content carries them. The reader is here and
+  // reports zero, rather than deriving a caption from `descriptionSeed`, which is the regex-over-prose she
+  // forbade in SNG-404.
+  landmarkUnder: {
+    font: () => `italic 600 10px ui-serif, Georgia, serif`,
+    fill: () => "rgba(48,40,30,0.78)",
+    halo: "rgba(248,244,232,0.80)", haloWidth: 2.4, rank: 3,
   },
   // the two the map already drew and had no row for
   ground: {

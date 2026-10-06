@@ -16,6 +16,30 @@
   "next": [],
   "releases": [
     {
+      "version": "2.19.10",
+      "date": "2026-10-06",
+      "entries": [
+        {
+          "kind": "feature",
+          "title": "The Crossing's wards are on the map",
+          "summary": "Twelve named wards inside the wall, each along the avenue it lines.",
+          "detail": "The city's twelve wards — the Lanternless, the Bargain, the Breakers', the Grey and the rest — are drawn inside the wall along their own avenues, each taking its character from the road it lines. They sit on the road's real bearing, so if a road ever moves its ward moves with it, and they are the first names dropped when the map runs out of room."
+        },
+        {
+          "kind": "change",
+          "title": "The city no longer sits in a void",
+          "summary": "Outside the wall there were twelve road quarters and nothing else.",
+          "detail": "A low belt of outlying roofs now runs all the way round beyond the quarters, so the city has a fringe instead of an edge. The quarters are untouched."
+        },
+        {
+          "kind": "fix",
+          "title": "Landmark names read on the city's own paper",
+          "summary": "Cream letters in a dark outline on cream ground was a smudge round every word.",
+          "detail": "Names on the region map sit on dark terrain and are drawn light with a dark outline. Inside a city, the ground is pale paper, so the same treatment made every landmark hard to read. Landmarks in a city are now dark serif with a light halo."
+        }
+      ]
+    },
+    {
       "version": "2.19.9",
       "date": "2026-10-06",
       "entries": [

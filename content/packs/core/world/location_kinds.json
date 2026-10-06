@@ -38,6 +38,24 @@
   "strange": "⚠️ the rules are not steady here",
   "region": "a whole region, not a place you stand in"
  },
+ "_siteVocabulary": {
+  "well": "a well or spring people draw water from",
+  "green": "open common ground inside or beside a settlement",
+  "square": "the open middle of a place, where people gather",
+  "quarter": "a part of a town with its own character",
+  "field": "worked ground: crops, hay, grazing",
+  "mill": "a wheel or works driven by water or wind",
+  "dock": "a landing for boats",
+  "ford": "a shallow place to cross water on foot",
+  "yard": "an open working ground with a purpose",
+  "burial": "where the dead are laid",
+  "camp": "people staying, under canvas or in billets, not living here",
+  "cistern": "stored water",
+  "wall": "a wall that defines a place",
+  "circle": "a figure laid on the ground that holds something in",
+  "outcrop": "bare rock standing out of the land"
+ },
+ "_siteVocabularyNote": "Local-map sites: a site's `kind` is a location kind from _vocabulary or one of these site-scale kinds. Closed: a new value is added here with a one-line meaning before it is used.",
  "_poleWarning": "⛔ 12 locations are `pole` — pure extremities like the Blaze, the Scouring, the Numen. THEY ARE NOT TOWNS and an icon that says 'settlement' would lie about the most dangerous places in the world. ⚠️ They want their own mark.",
  "kinds": {
   "archive_hollow": {
@@ -690,12 +708,18 @@
    "regionKind": "arena"
   },
   "the_hundred_markets": {
-   "suppressAtRegion": true,
-   "why": "⚠️ A district of the Crossing."
+   "why": "Between the Crossing and the Great Coliseum, half a day out: a place you go to, so it keeps its own mark at region scale.",
+   "_was_20261006": {
+    "suppressAtRegion": true,
+    "why": "⚠️ A district of the Crossing."
+   }
   },
   "the_quiet_house": {
-   "suppressAtRegion": true,
-   "why": "A hall in the Crossing."
+   "why": "A little way out from the Crossing, most of a day's walk, because quiet is easier there: a place you go to, so it keeps its own mark at region scale.",
+   "_was_20261006": {
+    "suppressAtRegion": true,
+    "why": "A hall in the Crossing."
+   }
   },
   "the_axis_gate": {
    "regionName": "The Axis Gate",

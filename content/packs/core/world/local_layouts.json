@@ -23,7 +23,7 @@
     {
      "to": "sunken_choir",
      "bearing": -112,
-     "mi": 503
+     "mi": 500
     }
    ],
    "_refreshed": "⛔ SNG-434: roadsOut re-derived after the SNG-427 cluster move and the waystone region fix. ⚠️ WAYSTONE IS NOW 29 MI AWAY — a real neighbour, where before it was in another region 2600 miles off.",
@@ -113,18 +113,20 @@
      "metres": 0
     },
     "basis": "prose",
-    "why": "⛔ ONE OF THE TWO CENTRES the seed names — and it is a WELL, dug because the river is two miles off. That is why the village has one."
+    "why": "⛔ ONE OF THE TWO CENTRES the seed names — and it is a WELL, dug because the river is two miles off. That is why the village has one.",
+    "kind": "well"
    },
    {
     "id": "millbrook_green",
     "name": "The Green",
-    "kind": "open",
+    "kind": "green",
     "localMap": {
      "bearing": 80,
      "metres": 90
     },
     "basis": "prose",
-    "why": "⚠️ Beside the well. Where the irrigation-share arguments actually happen."
+    "why": "⚠️ Beside the well. Where the irrigation-share arguments actually happen.",
+    "_kindWas_20261006": "open"
    },
    {
     "id": "millbrook_smithy",
@@ -140,7 +142,8 @@
     },
     "why": "On the Crossing road at the edge of the built ground — a smith sits where the carts stop, and downwind.",
     "_bearingWas_20261006": 174,
-    "_followNote_20261006": "on the Crossing road, which now leaves at its re-measured bearing"
+    "_followNote_20261006": "on the Crossing road, which now leaves at its re-measured bearing",
+    "kind": "works"
    },
    {
     "id": "gen-mara-wells-store",
@@ -159,7 +162,8 @@
     "_towardWas_20261006": "echo_river_crossing",
     "_fixNote_20261006": "⛔ Its bearing (−13) is the NORTH road, which runs to the Disputed Zone; the Crossing road is at 174. The 2026-08 re-point named the wrong road.",
     "_bearingWas_20261006": -13,
-    "_followNote_20261006": "on the north road, at its re-measured bearing"
+    "_followNote_20261006": "on the north road, at its re-measured bearing",
+    "kind": "shop"
    },
    {
     "id": "millbrook_mill_lane",
@@ -169,7 +173,8 @@
      "metres": 210
     },
     "basis": "river",
-    "why": "⛔ THE LANE TO THE WATER. The village is not on the river; this is how it reaches it, and it runs 2 miles to the wheels."
+    "why": "⛔ THE LANE TO THE WATER. The village is not on the river; this is how it reaches it, and it runs 2 miles to the wheels.",
+    "kind": "street"
    },
    {
     "id": "millbrook_wheels",
@@ -181,7 +186,8 @@
     "basis": "river",
     "why": "⛔ ON THE BANK, 2.1 MILES OUT — not in the village. 'Water wheels turn ALONG the Echo River.' ⚠️ The mills are a walk from the houses, which is normal and which the old layout got wrong by putting the river through the square.",
     "_metresWas_20261006": 3400,
-    "_fixNote_20261006": "⛔ DRAWN 2026-10-06, IT WAS ON THE WRONG BANK: the Echo is authored at 3200 m on −134°, 260 m wide, flowing 162°, and at the old distance this site fell beyond the far bank. Now on the village side of the water."
+    "_fixNote_20261006": "⛔ DRAWN 2026-10-06, IT WAS ON THE WRONG BANK: the Echo is authored at 3200 m on −134°, 260 m wide, flowing 162°, and at the old distance this site fell beyond the far bank. Now on the village side of the water.",
+    "kind": "mill"
    },
    {
     "id": "millbrook_landing",
@@ -193,7 +199,8 @@
     "basis": "river",
     "why": "⚠️ Just downstream of the wheels so boats are not fighting the race. The seed's 'river dock' — and it is at the river, not at the well.",
     "_metresWas_20261006": 3500,
-    "_fixNote_20261006": "⛔ DRAWN 2026-10-06, IT WAS ON THE WRONG BANK: the Echo is authored at 3200 m on −134°, 260 m wide, flowing 162°, and at the old distance this site fell beyond the far bank. Now on the village side of the water. Still just downstream of the wheels."
+    "_fixNote_20261006": "⛔ DRAWN 2026-10-06, IT WAS ON THE WRONG BANK: the Echo is authored at 3200 m on −134°, 260 m wide, flowing 162°, and at the old distance this site fell beyond the far bank. Now on the village side of the water. Still just downstream of the wheels.",
+    "kind": "dock"
    },
    {
     "id": "millbrook_ford",
@@ -205,7 +212,8 @@
     "basis": "river",
     "why": "⛔ NOBODY WROTE THIS DOWN AND THE GEOGRAPHY REQUIRES IT: 14 miles above the Crossing, someone crossed here before the bridge existed. It is why the bridge was built downstream, where the banks are granite.",
     "_metresWas_20261006": 3300,
-    "_fixNote_20261006": "⛔ DRAWN 2026-10-06: a ford is IN the river, and at 3300 m it sat 350 m beyond the far bank. Now mid-channel."
+    "_fixNote_20261006": "⛔ DRAWN 2026-10-06: a ford is IN the river, and at 3300 m it sat 350 m beyond the far bank. Now mid-channel.",
+    "kind": "ford"
    },
    {
     "id": "millbrook_fields",
@@ -231,6 +239,35 @@
    "relief": 0.06,
    "roadsOut": [
     {
+     "to": "archive_hollow",
+     "bearing": -12,
+     "mi": 133
+    },
+    {
+     "to": "disputed_zone_fringe",
+     "bearing": -16,
+     "mi": 160
+    },
+    {
+     "to": "greywater_stilts",
+     "bearing": -156,
+     "mi": 1027
+    },
+    {
+     "to": "millbrook",
+     "bearing": -14,
+     "mi": 14
+    }
+   ],
+   "_wasAuthored": {
+    "riverBearing": 168,
+    "riverDistanceDeg": 3.83,
+    "uphillBearing": 75,
+    "relief": 0.017
+   },
+   "_remeasured_20260906": "⛔ RE-DERIVED FROM THE LIVE TERRAIN, 2026-09-06. Erik: 'the land is set now — we will move things as needed to fit.' ⚠️ SNG-404 had 16 drifts between Aevi's hand-authored `_measured` block and `measureGradients` reading the same world, because the cluster MOVED (SNG-427, SNG-434, and the 09-06 gate move) and the readings did not follow. ⛔ THE LAND IS THE TRUTH AND THE READING IS THE THING THAT MOVES — taken with the same call the gate uses, so they cannot disagree by construction. ⚑ `_wasAuthored` keeps what she measured by hand, because a reading replaced is not a reading that never happened.",
+   "_roadsOutWas_20261006": [
+    {
      "to": "millbrook",
      "bearing": 92
     },
@@ -246,14 +283,7 @@
      "to": "greywater_stilts",
      "bearing": 116
     }
-   ],
-   "_wasAuthored": {
-    "riverBearing": 168,
-    "riverDistanceDeg": 3.83,
-    "uphillBearing": 75,
-    "relief": 0.017
-   },
-   "_remeasured_20260906": "⛔ RE-DERIVED FROM THE LIVE TERRAIN, 2026-09-06. Erik: 'the land is set now — we will move things as needed to fit.' ⚠️ SNG-404 had 16 drifts between Aevi's hand-authored `_measured` block and `measureGradients` reading the same world, because the cluster MOVED (SNG-427, SNG-434, and the 09-06 gate move) and the readings did not follow. ⛔ THE LAND IS THE TRUTH AND THE READING IS THE THING THAT MOVES — taken with the same call the gate uses, so they cannot disagree by construction. ⚑ `_wasAuthored` keeps what she measured by hand, because a reading replaced is not a reading that never happened."
+   ]
   },
   "_dataFlag": "⛔ ITS NEAREST TRACED RIVER IS 3.83° AWAY — about 425 km — AND ITS ENTIRE IDENTITY IS A BRIDGE OVER THE ECHO. `waterauth.json` authors a river here and the built hydrology does not carry one to it. ⚠️ I am placing the bridge on the fiction, not on the measurement, and flagging the gap rather than quietly bending the layout around bad data. SNG-403b.",
   "radiusMetres": 300,
@@ -266,42 +296,59 @@
      "metres": 0
     },
     "why": "⛔ The town IS the bridge. Centre by definition; everything else is which END you are on.",
-    "basis": "prose"
+    "basis": "prose",
+    "kind": "bridge"
    },
    {
     "id": "erc_waygate_stone",
     "name": "The Old Bridge-Stone",
     "localMap": {
+     "bearing": -103,
+     "metres": 45
+    },
+    "why": "'The old bridge-stone at the crossing is a waygate, and the least ceremonious one in the world' — at the west bridgehead, where the Millbrook road comes down the bank to the bridge.",
+    "basis": "prose",
+    "kind": "waygate",
+    "_localMapWas_20261006": {
      "bearing": 10,
      "metres": 40
-    },
-    "why": "'The old bridge-stone at the crossing is a waygate, and the least ceremonious one in the world — carters queue behind it.' ⚠️ A QUEUE IS A PLACEMENT: it sits at the bridge mouth, not off to one side.",
-    "basis": "prose"
+    }
    },
    {
     "id": "erc_carters_queue",
     "name": "The Carters' Queue",
     "localMap": {
-     "bearing": 92,
+     "bearing": -35,
      "metres": 150
     },
-    "why": "⛔ On the Millbrook road bearing — the queue forms along the road people arrive by.",
+    "why": "The queue forms on the Millbrook road as it comes down the west bank to the bridge — behind the bridge-stone.",
     "basis": "road",
     "toward": {
      "road": "millbrook",
-     "relation": "on"
+     "relation": "near"
+    },
+    "kind": "road",
+    "_bearingWas_20261006": 92,
+    "_localMapWas_20261006": {
+     "bearing": 92,
+     "metres": 150
     }
    },
    {
     "id": "erc_fisher_shacks",
     "name": "The Empty Fisher Shacks",
     "localMap": {
+     "bearing": -30,
+     "metres": 230
+    },
+    "why": "'Upstream the water sheets gray-green over the rocks … fisher shacks stand empty' — upstream on the west bank, where the contamination shows worst.",
+    "basis": "river",
+    "_rebearing": "⛔ SNG-407 drift: was -124°, now 168° — its river moved when the town did.",
+    "kind": "ruin",
+    "_localMapWas_20261006": {
      "bearing": 168,
      "metres": 220
-    },
-    "why": "⚠️ 'Fisher shacks stand empty' — riverward and UPSTREAM, where the contamination is worst. They are empty for a reason and the position says why.",
-    "basis": "river",
-    "_rebearing": "⛔ SNG-407 drift: was -124°, now 168° — its river moved when the town did."
+    }
    },
    {
     "id": "erc_granite_shoulders",
@@ -311,21 +358,49 @@
      "metres": 190
     },
     "why": "On the measured uphill — 'where the river narrows between granite shoulders'.",
-    "basis": "uphill"
+    "basis": "uphill",
+    "kind": "outcrop"
    },
    {
     "id": "erc_survey_camp",
     "name": "The Survey Camp",
     "localMap": {
-     "bearing": 116,
-     "metres": 230
+     "bearing": 10,
+     "metres": 260
     },
-    "why": "⚠️ Contamination teams from Heights and Plateau, camped apart from the town and from each other.",
+    "why": "Contamination teams camped on the east bank, upstream toward where the water runs worst, and apart from the town.",
     "basis": "road",
     "toward": {
-     "road": "millbrook",
+     "road": "disputed_zone_fringe",
      "relation": "near"
+    },
+    "kind": "camp",
+    "_bearingWas_20261006": 116,
+    "_localMapWas_20261006": {
+     "bearing": 116,
+     "metres": 230
     }
+   }
+  ],
+  "extent": [
+   {
+    "id": "erc_river",
+    "name": "The Echo",
+    "kind": "water",
+    "bearing": 0,
+    "fromMetres": 0,
+    "widthMetres": 60,
+    "flowBearing": 167,
+    "why": "The town IS the bridge, so the river runs through its middle. Narrow here — 'where the Echo River narrows between granite shoulders' — on the channel's measured flow."
+   },
+   {
+    "id": "erc_bridgehead",
+    "name": "The Bridgehead",
+    "kind": "built",
+    "bearing": 95,
+    "fromMetres": 90,
+    "radiusMetres": 150,
+    "why": "The houses, yards and inns gather on the east bank, where all the roads arrive."
    }
   ]
  },
@@ -338,11 +413,13 @@
    "roadsOut": [
     {
      "to": "the_crossing",
-     "bearing": -180
+     "bearing": -180,
+     "mi": 1118
     },
     {
      "to": "the_quiet_ground",
-     "bearing": 0
+     "bearing": 0,
+     "mi": 1118
     }
    ],
    "_wasAuthored": {
@@ -376,7 +453,8 @@
      "road": "the_crossing",
      "relation": "on"
     },
-    "_bearingWas_20261004": -150
+    "_bearingWas_20261004": -150,
+    "kind": "yard"
    },
    {
     "id": "greyhearth_grounds",
@@ -387,7 +465,8 @@
     },
     "why": "⛔ UPHILL, on the measured bearing — drainage. Every real burying ground sits above its town.",
     "basis": "uphill",
-    "_bearingWas_20261004": 135
+    "_bearingWas_20261004": 135,
+    "kind": "burial"
    },
    {
     "id": "greyhearth_hearth",
@@ -397,7 +476,8 @@
      "metres": 0
     },
     "why": "The town's name and its centre — the fire that gives the trades their work.",
-    "basis": "prose"
+    "basis": "prose",
+    "kind": "shrine"
    },
    {
     "id": "greyhearth_singers",
@@ -407,7 +487,8 @@
      "metres": 150
     },
     "why": "'Everyone here has sung over one.' ⚠️ Between the hearth and the grounds — on the walk.",
-    "basis": "between"
+    "basis": "between",
+    "kind": "hall"
    },
    {
     "id": "greyhearth_quiet_road",
@@ -422,7 +503,28 @@
      "road": "the_quiet_ground",
      "relation": "on"
     },
-    "_bearingWas_20261004": 30
+    "_bearingWas_20261004": 30,
+    "kind": "road"
+   }
+  ],
+  "extent": [
+   {
+    "id": "gh_town",
+    "name": "Greyhearth",
+    "kind": "built",
+    "bearing": 0,
+    "fromMetres": 0,
+    "radiusMetres": 180,
+    "why": "The town round its hearth."
+   },
+   {
+    "id": "gh_crags",
+    "name": "The Grey Crags",
+    "kind": "rock",
+    "bearing": -60,
+    "fromMetres": 600,
+    "radiusMetres": 250,
+    "why": "The ground climbs hard here (relief 0.96), and above the burying grounds it is bare rock."
    }
   ]
  },
@@ -435,11 +537,13 @@
    "roadsOut": [
     {
      "to": "the_middle_way",
-     "bearing": 167
+     "bearing": 169,
+     "mi": 690
     },
     {
      "to": "the_held_yard",
-     "bearing": -60
+     "bearing": -61,
+     "mi": 207
     }
    ],
    "_wasAuthored": {
@@ -466,7 +570,8 @@
     "toward": {
      "road": "the_middle_way",
      "relation": "on"
-    }
+    },
+    "kind": "hall"
    },
    {
     "id": "gen-cogitarium-third-terrace",
@@ -477,7 +582,19 @@
      "level": 3
     },
     "why": "⛔ LEVEL 3 — it is the THIRD terrace and the name says so. Uphill side, because a terrace climbs the slope it is cut into.",
-    "basis": "uphill"
+    "basis": "uphill",
+    "kind": "terrace"
+   }
+  ],
+  "extent": [
+   {
+    "id": "cog_halls",
+    "name": "The Thought-Halls",
+    "kind": "built",
+    "bearing": 0,
+    "fromMetres": 0,
+    "radiusMetres": 120,
+    "why": "'Floating thought-halls' — the whole of it is built; there is no ground."
    }
   ]
  },
@@ -491,6 +608,30 @@
    "roadsOut": [
     {
      "to": "millbrook",
+     "bearing": 159,
+     "mi": 1038
+    },
+    {
+     "to": "disputed_zone_fringe",
+     "bearing": 154,
+     "mi": 1155
+    },
+    {
+     "to": "echo_river_crossing",
+     "bearing": 159,
+     "mi": 1027
+    }
+   ],
+   "_wasAuthored": {
+    "riverBearing": -12,
+    "riverDistanceDeg": 6.94,
+    "uphillBearing": 90,
+    "relief": 0.002
+   },
+   "_remeasured_20260906": "⛔ RE-DERIVED FROM THE LIVE TERRAIN, 2026-09-06. Erik: 'the land is set now — we will move things as needed to fit.' ⚠️ SNG-404 had 16 drifts between Aevi's hand-authored `_measured` block and `measureGradients` reading the same world, because the cluster MOVED (SNG-427, SNG-434, and the 09-06 gate move) and the readings did not follow. ⛔ THE LAND IS THE TRUTH AND THE READING IS THE THING THAT MOVES — taken with the same call the gate uses, so they cannot disagree by construction. ⚑ `_wasAuthored` keeps what she measured by hand, because a reading replaced is not a reading that never happened.",
+   "_roadsOutWas_20261006": [
+    {
+     "to": "millbrook",
      "bearing": 85
     },
     {
@@ -501,14 +642,7 @@
      "to": "echo_river_crossing",
      "bearing": -58
     }
-   ],
-   "_wasAuthored": {
-    "riverBearing": -12,
-    "riverDistanceDeg": 6.94,
-    "uphillBearing": 90,
-    "relief": 0.002
-   },
-   "_remeasured_20260906": "⛔ RE-DERIVED FROM THE LIVE TERRAIN, 2026-09-06. Erik: 'the land is set now — we will move things as needed to fit.' ⚠️ SNG-404 had 16 drifts between Aevi's hand-authored `_measured` block and `measureGradients` reading the same world, because the cluster MOVED (SNG-427, SNG-434, and the 09-06 gate move) and the readings did not follow. ⛔ THE LAND IS THE TRUTH AND THE READING IS THE THING THAT MOVES — taken with the same call the gate uses, so they cannot disagree by construction. ⚑ `_wasAuthored` keeps what she measured by hand, because a reading replaced is not a reading that never happened."
+   ]
   },
   "_ruleFinding": "⛔ RELIEF 0.002 — DEAD FLAT. 'Uphill' is a MEANINGLESS AXIS here and the engine must not use it: bearing 90 is noise, not a slope. ⚠️ THE ORGANISING AXIS IS THE WATER — the marsh is 0.37° away and the town stands ON it. New rule: WHEN RELIEF < ~0.05, DROP THE UPHILL GRADIENT AND ORGANISE ON WATER AND ROADS. Millbrook's terraces exist because Millbrook has a slope; here there is nothing to climb.",
   "radiusMetres": 340,
@@ -521,7 +655,8 @@
      "metres": 0
     },
     "why": "⛔ A stilt town has no ground, so its centre is a BUILT thing. The largest platform is the square.",
-    "basis": "prose"
+    "basis": "prose",
+    "kind": "square"
    },
    {
     "id": "stilts_ropewalks",
@@ -531,13 +666,14 @@
      "metres": 150
     },
     "why": "'Rope-walks lace between platforms.' ⚠️ NOT A PLACE SO MUCH AS THE STREETS — laced between, so placed between the platforms rather than at a point.",
-    "basis": "between"
+    "basis": "between",
+    "kind": "street"
    },
    {
     "id": "stilts_skiff_landing",
     "name": "The Skiff Landing",
     "localMap": {
-     "bearing": 85,
+     "bearing": 159,
      "metres": 220
     },
     "why": "⛔ On the ROAD bearing, not the water bearing — in a marsh town the skiffs ARE the road, so the landing faces where travellers come from.",
@@ -545,7 +681,9 @@
     "toward": {
      "road": "millbrook",
      "relation": "on"
-    }
+    },
+    "kind": "dock",
+    "_bearingWas_20261006": 85
    },
    {
     "id": "stilts_deep_platforms",
@@ -559,7 +697,8 @@
     "toward": {
      "road": "echo_river_crossing",
      "relation": "away"
-    }
+    },
+    "kind": "quarter"
    },
    {
     "id": "stilts_pole_yard",
@@ -569,7 +708,38 @@
      "metres": 190
     },
     "why": "⛔ A stilt town's only real industry is REPLACING ITS OWN LEGS. Nobody wrote this down; the town's existence requires it.",
-    "basis": "inferred"
+    "basis": "inferred",
+    "kind": "yard"
+   }
+  ],
+  "extent": [
+   {
+    "id": "st_marsh",
+    "name": "The Southern Marsh",
+    "kind": "marsh",
+    "bearing": 0,
+    "fromMetres": 0,
+    "radiusMetres": 700,
+    "why": "'A town built on stilts over the southern marsh.'"
+   },
+   {
+    "id": "st_channel",
+    "name": "The Skiff Channel",
+    "kind": "water",
+    "bearing": 159,
+    "fromMetres": 0,
+    "why": "'Skiffs slide the channels below' — the main channel runs out on the road bearing, because in a marsh town the channel is the road.",
+    "widthMetres": 25,
+    "flowBearing": 159
+   },
+   {
+    "id": "st_platforms",
+    "name": "The Platforms",
+    "kind": "built",
+    "bearing": 0,
+    "fromMetres": 0,
+    "radiusMetres": 260,
+    "why": "'Rope-walks lace between platforms.'"
    }
   ]
  },
@@ -582,11 +752,13 @@
    "roadsOut": [
     {
      "to": "the_crossing",
-     "bearing": -180
+     "bearing": -180,
+     "mi": 806
     },
     {
      "to": "the_blaze",
-     "bearing": -1
+     "bearing": -1,
+     "mi": 1534
     }
    ],
    "_wasAuthored": {
@@ -620,13 +792,14 @@
      "road": "the_crossing",
      "relation": "on"
     },
-    "_bearingWas_20261004": 125
+    "_bearingWas_20261004": 125,
+    "kind": "works"
    },
    {
     "id": "kindlerow_assay_house",
     "name": "The Assay House",
     "localMap": {
-     "bearing": -1,
+     "bearing": -180,
      "metres": 170
     },
     "why": "'Tells you honestly what your metal is worth.' ⚠️ At the road end where metal ARRIVES — you are assayed before you are sold to.",
@@ -635,13 +808,15 @@
      "road": "the_crossing",
      "relation": "on"
     },
-    "_bearingWas_20261004": 125
+    "_bearingWas_20261004": 125,
+    "kind": "shop",
+    "_bearingWas_20261006": -1
    },
    {
     "id": "kindlerow_lamp_makers",
     "name": "The Lamp-Makers' Sheds",
     "localMap": {
-     "bearing": -180,
+     "bearing": -1,
      "metres": 160
     },
     "why": "⛔ On the road to the Blaze. Lamps go where the light doctrine is, and Kindlerow sells to them without joining them.",
@@ -650,7 +825,9 @@
      "road": "the_blaze",
      "relation": "on"
     },
-    "_bearingWas_20261004": -55
+    "_bearingWas_20261004": -55,
+    "kind": "works",
+    "_bearingWas_20261006": -180
    },
    {
     "id": "kindlerow_charcoal_slope",
@@ -661,7 +838,8 @@
     },
     "why": "⛔ Uphill on the measured bearing — fuel comes down to a forge, never up.",
     "basis": "uphill",
-    "_bearingWas_20261004": 330
+    "_bearingWas_20261004": 330,
+    "kind": "works"
    },
    {
     "id": "kindlerow_catch_cistern",
@@ -672,10 +850,31 @@
     },
     "why": "⚠️ NO RIVER WITHIN 9°, AND A FORGE MUST QUENCH. Uphill catchment is the only honest answer; the terrain forced this one into existence.",
     "basis": "uphill",
-    "_bearingWas_20261004": 345
+    "_bearingWas_20261004": 345,
+    "kind": "cistern"
    }
   ],
-  "_ruleFinding_20261004": "SNG-676: re-sited onto the Blaze's bearing, at the nearest dry ground that keeps it a forge town with no river (the move searched for exactly that). Measured now: relief 0.232, the nearest river 1.69° off, just past the 1.5° the placer will use. So the water is still uphill catchment and the Catch-Cistern stands; it is no longer the steepest of the eight, and 'no water within 9°' is now 'none within reach'."
+  "_ruleFinding_20261004": "SNG-676: re-sited onto the Blaze's bearing, at the nearest dry ground that keeps it a forge town with no river (the move searched for exactly that). Measured now: relief 0.232, the nearest river 1.69° off, just past the 1.5° the placer will use. So the water is still uphill catchment and the Catch-Cistern stands; it is no longer the steepest of the eight, and 'no water within 9°' is now 'none within reach'.",
+  "extent": [
+   {
+    "id": "kr_town",
+    "name": "Kindlerow",
+    "kind": "built",
+    "bearing": -180,
+    "fromMetres": 120,
+    "radiusMetres": 200,
+    "why": "Forges strung along the Crossing road."
+   },
+   {
+    "id": "kr_woods",
+    "name": "The Charcoal Woods",
+    "kind": "wood",
+    "bearing": -180,
+    "fromMetres": 520,
+    "radiusMetres": 260,
+    "why": "Upslope of the Charcoal Slope: a forge town burns charcoal, and charcoal is coppice."
+   }
+  ]
  },
  "the_service_ways": {
   "_measured": {
@@ -684,6 +883,30 @@
    "uphillBearing": -75,
    "relief": 0.048,
    "roadsOut": [
+    {
+     "to": "pressureholt",
+     "bearing": 117,
+     "mi": 347
+    },
+    {
+     "to": "the_axis_gate",
+     "bearing": -180,
+     "mi": 2240
+    },
+    {
+     "to": "the_gearlands_verge",
+     "bearing": 148,
+     "mi": 557
+    }
+   ],
+   "_wasAuthored": {
+    "riverBearing": 129,
+    "riverDistanceDeg": 6.73,
+    "uphillBearing": 285,
+    "relief": 0.018
+   },
+   "_remeasured_20260906": "⛔ RE-DERIVED FROM THE LIVE TERRAIN, 2026-09-06. Erik: 'the land is set now — we will move things as needed to fit.' ⚠️ SNG-404 had 16 drifts between Aevi's hand-authored `_measured` block and `measureGradients` reading the same world, because the cluster MOVED (SNG-427, SNG-434, and the 09-06 gate move) and the readings did not follow. ⛔ THE LAND IS THE TRUTH AND THE READING IS THE THING THAT MOVES — taken with the same call the gate uses, so they cannot disagree by construction. ⚑ `_wasAuthored` keeps what she measured by hand, because a reading replaced is not a reading that never happened.",
+   "_roadsOutWas_20261006": [
     {
      "to": "pressureholt",
      "bearing": 117
@@ -696,14 +919,7 @@
      "to": "the_gearlands_verge",
      "bearing": 146
     }
-   ],
-   "_wasAuthored": {
-    "riverBearing": 129,
-    "riverDistanceDeg": 6.73,
-    "uphillBearing": 285,
-    "relief": 0.018
-   },
-   "_remeasured_20260906": "⛔ RE-DERIVED FROM THE LIVE TERRAIN, 2026-09-06. Erik: 'the land is set now — we will move things as needed to fit.' ⚠️ SNG-404 had 16 drifts between Aevi's hand-authored `_measured` block and `measureGradients` reading the same world, because the cluster MOVED (SNG-427, SNG-434, and the 09-06 gate move) and the readings did not follow. ⛔ THE LAND IS THE TRUTH AND THE READING IS THE THING THAT MOVES — taken with the same call the gate uses, so they cannot disagree by construction. ⚑ `_wasAuthored` keeps what she measured by hand, because a reading replaced is not a reading that never happened."
+   ]
   },
   "radiusMetres": null,
   "_radiusNote_20261006": "The reach of the main galleries: a tunnel network measured in depth more than spread, so the frame is the galleries, not a town's edge.",
@@ -723,13 +939,14 @@
     "toward": {
      "road": "pressureholt",
      "relation": "on"
-    }
+    },
+    "kind": "underplace"
    },
    {
     "id": "sw_mapped_reach",
     "name": "The Mapped Reach",
     "localMap": {
-     "bearing": -118,
+     "bearing": -180,
      "metres": 600,
      "level": -2
     },
@@ -738,7 +955,9 @@
     "toward": {
      "road": "the_axis_gate",
      "relation": "on"
-    }
+    },
+    "kind": "underplace",
+    "_bearingWas_20261006": -118
    },
    {
     "id": "sw_unadmitted",
@@ -749,9 +968,11 @@
      "level": -4
     },
     "why": "⛔ 'Under places the Wrights have not admitted to.' Deep, far, and deliberately vague — ⚠️ the position is a CLAIM ABOUT SECRECY, and metres here are a shrug rather than a measurement.",
-    "basis": "inferred"
+    "basis": "inferred",
+    "kind": "underplace"
    }
-  ]
+  ],
+  "_extentNote_20261006": "No surface extent: this place is an interior and draws by level (SNG-678 L5)."
  },
  "the_figure_works": {
   "_measured": {
@@ -762,7 +983,8 @@
    "roadsOut": [
     {
      "to": "cloudform",
-     "bearing": 26
+     "bearing": 27,
+     "mi": 348
     }
    ],
    "_wasAuthored": {
@@ -784,7 +1006,8 @@
      "metres": 0
     },
     "why": "'Where symbols are made that ACT.' The centre of the figure, because a figure has one.",
-    "basis": "tradition"
+    "basis": "tradition",
+    "kind": "hall"
    },
    {
     "id": "figure_works_proving",
@@ -794,7 +1017,8 @@
      "metres": 180
     },
     "why": "⛔ 'The meanings do exactly what they mean, which is not always what was wanted.' A yard at a THIRD of the circle — you test a made meaning away from where you made it.",
-    "basis": "tradition"
+    "basis": "tradition",
+    "kind": "yard"
    },
    {
     "id": "figure_works_containment",
@@ -804,7 +1028,8 @@
      "metres": 180
     },
     "why": "⛔ The other third. 'The entire history of this people's disasters' — this is where the disasters are kept, and its position completes the triangle.",
-    "basis": "tradition"
+    "basis": "tradition",
+    "kind": "circle"
    },
    {
     "id": "figure_works_gate",
@@ -818,7 +1043,19 @@
     "toward": {
      "road": "cloudform",
      "relation": "on"
-    }
+    },
+    "kind": "gate"
+   }
+  ],
+  "extent": [
+   {
+    "id": "fw_works",
+    "name": "The Figure-Works",
+    "kind": "built",
+    "bearing": 0,
+    "fromMetres": 0,
+    "radiusMetres": 170,
+    "why": "The hall, the yard and the figures, laid out as one figure."
    }
   ]
  },
@@ -835,6 +1072,30 @@
    "roadsOut": [
     {
      "to": "millbrook",
+     "bearing": 160,
+     "mi": 947
+    },
+    {
+     "to": "disputed_zone_fringe",
+     "bearing": 156,
+     "mi": 1072
+    },
+    {
+     "to": "sunken_choir",
+     "bearing": 127,
+     "mi": 722
+    }
+   ],
+   "_wasAuthored": {
+    "riverBearing": -126,
+    "riverDistanceDeg": 7.4,
+    "uphillBearing": 45,
+    "relief": 0.001
+   },
+   "_remeasured_20260906": "⛔ RE-DERIVED FROM THE LIVE TERRAIN, 2026-09-06. Erik: 'the land is set now — we will move things as needed to fit.' ⚠️ SNG-404 had 16 drifts between Aevi's hand-authored `_measured` block and `measureGradients` reading the same world, because the cluster MOVED (SNG-427, SNG-434, and the 09-06 gate move) and the readings did not follow. ⛔ THE LAND IS THE TRUTH AND THE READING IS THE THING THAT MOVES — taken with the same call the gate uses, so they cannot disagree by construction. ⚑ `_wasAuthored` keeps what she measured by hand, because a reading replaced is not a reading that never happened.",
+   "_roadsOutWas_20261006": [
+    {
+     "to": "millbrook",
      "bearing": 80
     },
     {
@@ -845,14 +1106,7 @@
      "to": "sunken_choir",
      "bearing": 82
     }
-   ],
-   "_wasAuthored": {
-    "riverBearing": -126,
-    "riverDistanceDeg": 7.4,
-    "uphillBearing": 45,
-    "relief": 0.001
-   },
-   "_remeasured_20260906": "⛔ RE-DERIVED FROM THE LIVE TERRAIN, 2026-09-06. Erik: 'the land is set now — we will move things as needed to fit.' ⚠️ SNG-404 had 16 drifts between Aevi's hand-authored `_measured` block and `measureGradients` reading the same world, because the cluster MOVED (SNG-427, SNG-434, and the 09-06 gate move) and the readings did not follow. ⛔ THE LAND IS THE TRUTH AND THE READING IS THE THING THAT MOVES — taken with the same call the gate uses, so they cannot disagree by construction. ⚑ `_wasAuthored` keeps what she measured by hand, because a reading replaced is not a reading that never happened."
+   ]
   },
   "_ruleFinding": "⛔ RELIEF 0.001 — the flattest reading in the corpus, flatter than Greywater. ⚠️ AND YET IT IS A TERRACE, on a Heights. The world layer is measuring the VALLEY FLOOR the terrace meets; the terrace itself is below the generator's floor. ⛔ THIS IS THE CASE WHERE PROSE MUST OUTRANK GRADIENT OUTRIGHT: 'the lowest terrace… where the sonic civilization MEETS THE VALLEY FLOOR' says the slope direction, and no measurement here can.",
   "radiusMetres": 380,
@@ -866,7 +1120,8 @@
      "level": 1
     },
     "basis": "prose",
-    "why": "⛔ 'Wind chimes THE SIZE OF TREES tune the weather.' Upslope from the terrace edge, level 1 — they must be above what they are tuning."
+    "why": "⛔ 'Wind chimes THE SIZE OF TREES tune the weather.' Upslope from the terrace edge, level 1 — they must be above what they are tuning.",
+    "kind": "towers"
    },
    {
     "id": "hht_crystal_row",
@@ -877,13 +1132,14 @@
      "level": 0
     },
     "basis": "prose",
-    "why": "'Buildings GROWN from phononic crystal hum at frequencies you feel in your teeth.' The terrace proper."
+    "why": "'Buildings GROWN from phononic crystal hum at frequencies you feel in your teeth.' The terrace proper.",
+    "kind": "street"
    },
    {
     "id": "hht_terrace_edge",
     "name": "The Terrace Edge",
     "localMap": {
-     "bearing": 80,
+     "bearing": 160,
      "metres": 260,
      "level": 0
     },
@@ -892,7 +1148,13 @@
      "road": "millbrook",
      "relation": "on"
     },
-    "why": "⛔ WHERE IT MEETS THE VALLEY FLOOR — the seed's own words, and the roads all leave on this bearing because down is where everyone else is."
+    "why": "⛔ WHERE IT MEETS THE VALLEY FLOOR — the seed's own words, and the roads all leave on this bearing because down is where everyone else is.",
+    "kind": "terrace",
+    "_localMapWas_20261006": {
+     "bearing": 80,
+     "metres": 260,
+     "level": 0
+    }
    },
    {
     "id": "hht_quiet_room",
@@ -903,13 +1165,14 @@
      "level": 0
     },
     "basis": "prose",
-    "why": "⚠️ 'Everything resonates.' A civilisation of sound needs ONE ROOM THAT DOES NOT, and someone will have built it. Nobody wrote this down; the place requires it."
+    "why": "⚠️ 'Everything resonates.' A civilisation of sound needs ONE ROOM THAT DOES NOT, and someone will have built it. Nobody wrote this down; the place requires it.",
+    "kind": "hall"
    },
    {
     "id": "hht_survey_billet",
     "name": "The Survey Billet",
     "localMap": {
-     "bearing": 82,
+     "bearing": 127,
      "metres": 330,
      "level": 0
     },
@@ -918,7 +1181,39 @@
      "road": "sunken_choir",
      "relation": "near"
     },
-    "why": "The contamination teams stage from here — set back off the road, and pointedly not sharing quarters with the Plateau's people."
+    "why": "The contamination teams stage from here — set back off the road, and pointedly not sharing quarters with the Plateau's people.",
+    "kind": "camp",
+    "_bearingWas_20261006": 82
+   }
+  ],
+  "extent": [
+   {
+    "id": "hht_lower",
+    "name": "The Lower Terrace",
+    "kind": "built",
+    "bearing": 0,
+    "fromMetres": 0,
+    "radiusMetres": 260,
+    "why": "'The lowest terrace of the Harmonic Heights.'"
+   },
+   {
+    "id": "hht_halls",
+    "name": "The Resonance Halls",
+    "kind": "built",
+    "bearing": 45,
+    "fromMetres": 700,
+    "radiusMetres": 300,
+    "why": "'The Resonance Halls above are visible as terraces … climbing into cloud' — up the slope.",
+    "level": 2
+   },
+   {
+    "id": "hht_floor",
+    "name": "The Valley Floor",
+    "kind": "field",
+    "bearing": 160,
+    "fromMetres": 520,
+    "radiusMetres": 300,
+    "why": "'Where the sonic civilization meets the valley floor' — farmed flat below the terrace edge."
    }
   ]
  },
@@ -931,6 +1226,30 @@
    "roadsOut": [
     {
      "to": "the_lampless_hermitage",
+     "bearing": 99,
+     "mi": 341
+    },
+    {
+     "to": "the_numen",
+     "bearing": 70,
+     "mi": 222
+    },
+    {
+     "to": "the_axis_gate",
+     "bearing": 180,
+     "mi": 2258
+    }
+   ],
+   "_wasAuthored": {
+    "riverBearing": -10,
+    "riverDistanceDeg": 4.3,
+    "uphillBearing": 330,
+    "relief": 0.05
+   },
+   "_remeasured_20260906": "⛔ RE-DERIVED FROM THE LIVE TERRAIN, 2026-09-06. Erik: 'the land is set now — we will move things as needed to fit.' ⚠️ SNG-404 had 16 drifts between Aevi's hand-authored `_measured` block and `measureGradients` reading the same world, because the cluster MOVED (SNG-427, SNG-434, and the 09-06 gate move) and the readings did not follow. ⛔ THE LAND IS THE TRUTH AND THE READING IS THE THING THAT MOVES — taken with the same call the gate uses, so they cannot disagree by construction. ⚑ `_wasAuthored` keeps what she measured by hand, because a reading replaced is not a reading that never happened.",
+   "_roadsOutWas_20261006": [
+    {
+     "to": "the_lampless_hermitage",
      "bearing": 99
     },
     {
@@ -941,14 +1260,7 @@
      "to": "the_axis_gate",
      "bearing": 154
     }
-   ],
-   "_wasAuthored": {
-    "riverBearing": -10,
-    "riverDistanceDeg": 4.3,
-    "uphillBearing": 330,
-    "relief": 0.05
-   },
-   "_remeasured_20260906": "⛔ RE-DERIVED FROM THE LIVE TERRAIN, 2026-09-06. Erik: 'the land is set now — we will move things as needed to fit.' ⚠️ SNG-404 had 16 drifts between Aevi's hand-authored `_measured` block and `measureGradients` reading the same world, because the cluster MOVED (SNG-427, SNG-434, and the 09-06 gate move) and the readings did not follow. ⛔ THE LAND IS THE TRUTH AND THE READING IS THE THING THAT MOVES — taken with the same call the gate uses, so they cannot disagree by construction. ⚑ `_wasAuthored` keeps what she measured by hand, because a reading replaced is not a reading that never happened."
+   ]
   },
   "_ruleFinding": "⚠️ RELIEF 0.05 sits exactly ON the bracket I could not narrow (0.053–0.541). ⛔ AND IT DOES NOT MATTER HERE, because the prose overrides anyway: 'buildings are PROVISIONAL — the Numinous find permanent architecture a slightly embarrassing attachment.' A town that does not commit to buildings does not commit to a slope either.",
   "radiusMetres": 300,
@@ -961,7 +1273,8 @@
      "metres": 0
     },
     "basis": "prose",
-    "why": "⛔ THE THINNING IS ITSELF A TIER-2 WAYGATE — the arch is the one permanent thing, and it is the centre because everything else moves around it."
+    "why": "⛔ THE THINNING IS ITSELF A TIER-2 WAYGATE — the arch is the one permanent thing, and it is the centre because everything else moves around it.",
+    "kind": "waygate"
    },
    {
     "id": "thinning_provisional_ring",
@@ -971,7 +1284,8 @@
      "metres": 160
     },
     "basis": "prose",
-    "why": "⚠️ 'Buildings here are PROVISIONAL.' Not a district — a ring of things that will be somewhere else next season. Its position is an average, honestly."
+    "why": "⚠️ 'Buildings here are PROVISIONAL.' Not a district — a ring of things that will be somewhere else next season. Its position is an average, honestly.",
+    "kind": "quarter"
    },
    {
     "id": "thinning_pole_road",
@@ -985,7 +1299,8 @@
      "road": "the_numen",
      "relation": "on"
     },
-    "why": "⛔ The road to the pure pole, and almost nobody takes it. 318 km to a place with nothing left to come back to."
+    "why": "⛔ The road to the pure pole, and almost nobody takes it. 318 km to a place with nothing left to come back to.",
+    "kind": "road"
    },
    {
     "id": "thinning_sitting_stones",
@@ -999,7 +1314,28 @@
      "road": "the_lampless_hermitage",
      "relation": "on"
     },
-    "why": "On the hermitage road. ⚠️ People stop here on the way to sitting for years, and some of them do not go on."
+    "why": "On the hermitage road. ⚠️ People stop here on the way to sitting for years, and some of them do not go on.",
+    "kind": "shrine"
+   }
+  ],
+  "extent": [
+   {
+    "id": "th_town",
+    "name": "The Thinning",
+    "kind": "built",
+    "bearing": 0,
+    "fromMetres": 0,
+    "radiusMetres": 180,
+    "why": "'Buildings here are provisional.'"
+   },
+   {
+    "id": "th_empty",
+    "name": "The Empty Way",
+    "kind": "waste",
+    "bearing": 69,
+    "fromMetres": 520,
+    "radiusMetres": 260,
+    "why": "Out along the road to the pole, where there is nothing, and people say the nothing is the point."
    }
   ]
  },
@@ -1009,7 +1345,108 @@
    "riverDistanceDeg": 3.75,
    "uphillBearing": 15,
    "relief": 0.026,
-   "roadsOut": [],
+   "roadsOut": [
+    {
+     "to": "dusklow",
+     "bearing": -3,
+     "mi": 1196
+    },
+    {
+     "to": "gearsflat",
+     "bearing": 148,
+     "mi": 845
+    },
+    {
+     "to": "gen-north-gate-registry-ossian-office",
+     "bearing": 0,
+     "mi": 0
+    },
+    {
+     "to": "gen-the-ent-grove",
+     "bearing": 34,
+     "mi": 12
+    },
+    {
+     "to": "greenmarch",
+     "bearing": -105,
+     "mi": 1170
+    },
+    {
+     "to": "greyhearth",
+     "bearing": 73,
+     "mi": 1118
+    },
+    {
+     "to": "hardline",
+     "bearing": 93,
+     "mi": 1144
+    },
+    {
+     "to": "kindlerow",
+     "bearing": -179,
+     "mi": 806
+    },
+    {
+     "to": "longshore",
+     "bearing": 131,
+     "mi": 936
+    },
+    {
+     "to": "plainstead",
+     "bearing": -161,
+     "mi": 988
+    },
+    {
+     "to": "stair_hollow",
+     "bearing": -144,
+     "mi": 1092
+    },
+    {
+     "to": "the_axis_gate",
+     "bearing": 0,
+     "mi": 5
+    },
+    {
+     "to": "the_great_coliseum",
+     "bearing": 40,
+     "mi": 11
+    },
+    {
+     "to": "the_hundred_markets",
+     "bearing": 27,
+     "mi": 8
+    },
+    {
+     "to": "the_low_market",
+     "bearing": 30,
+     "mi": 1170
+    },
+    {
+     "to": "the_null_stone",
+     "bearing": 0,
+     "mi": 9
+    },
+    {
+     "to": "the_quiet_house",
+     "bearing": -70,
+     "mi": 13
+    },
+    {
+     "to": "the_worn_yard",
+     "bearing": 67,
+     "mi": 988
+    },
+    {
+     "to": "thinwater",
+     "bearing": -27,
+     "mi": 1183
+    },
+    {
+     "to": "the_crossing_gate_yard",
+     "bearing": 0,
+     "mi": 1
+    }
+   ],
    "_roadNote": "⛔ `roadsOut` IS EMPTY ON PURPOSE. Every connection the Crossing has is one of its own SITES, at identical coordinates, so the computed bearings all read 0° — CCode's 'a room's position is a duplicate, not an observation', arriving in the road maths. ⚠️ THE TWELVE ROADS ARE FICTION, NOT GRAPH: 'twelve roads leave the Crossing, one per axis.' They are placed at 30° intervals below.",
    "_wasAuthored": {
     "riverBearing": 0,
@@ -1029,7 +1466,8 @@
      "metres": 0
     },
     "basis": "prose",
-    "why": "⛔ 'Every axis crosses here at nothing.' The exact centre, and the only place in the world where every axis reads zero."
+    "why": "⛔ 'Every axis crosses here at nothing.' The exact centre, and the only place in the world where every axis reads zero.",
+    "kind": "shrine"
    },
    {
     "id": "crossing_twelve_mouths",
@@ -1039,7 +1477,8 @@
      "metres": 300
     },
     "basis": "prose",
-    "why": "⚠️ Where the roads separate — a ring at 300 m, not a point. You can stand at the Null Stone and see every axis leave."
+    "why": "⚠️ Where the roads separate — a ring at 300 m, not a point. You can stand at the Null Stone and see every axis leave.",
+    "kind": "street"
    },
    {
     "id": "crossing_common_table",
@@ -1049,7 +1488,8 @@
      "metres": 140
     },
     "basis": "prose",
-    "why": "⛔ 'An Umbral and a Blazeborn drink at the same table because NEITHER HAS THE STANDING TO MAKE THE OTHER LEAVE.' The most important furniture in the world."
+    "why": "⛔ 'An Umbral and a Blazeborn drink at the same table because NEITHER HAS THE STANDING TO MAKE THE OTHER LEAVE.' The most important furniture in the world.",
+    "kind": "inn"
    },
    {
     "id": "crossing_made_arch",
@@ -1059,7 +1499,8 @@
      "metres": 220
     },
     "basis": "prose",
-    "why": "⛔ WHERE THE MADE GATE WAS CUT — the 27th waygate and the first BUILT, by an Ashwarden. A PLAYER did this, and it stands here because that is where a wright who tends endings was standing."
+    "why": "⛔ WHERE THE MADE GATE WAS CUT — the 27th waygate and the first BUILT, by an Ashwarden. A PLAYER did this, and it stands here because that is where a wright who tends endings was standing.",
+    "kind": "waygate"
    },
    {
     "id": "crossing_north_gate",
@@ -1069,7 +1510,19 @@
      "metres": 420
     },
     "basis": "prose",
-    "why": "Its street and its registry are already canon from play (SNG-396). ⚠️ Named for the road it sits on, which is how districts get named."
+    "why": "Its street and its registry are already canon from play (SNG-396). ⚠️ Named for the road it sits on, which is how districts get named.",
+    "kind": "quarter"
+   }
+  ],
+  "extent": [
+   {
+    "id": "cr_city",
+    "name": "The Crossing",
+    "kind": "built",
+    "bearing": 0,
+    "fromMetres": 0,
+    "radiusMetres": 520,
+    "why": "The walled city. 'Nobody is from here. Everybody is here.'"
    }
   ]
  },
@@ -1080,6 +1533,35 @@
    "uphillBearing": 75,
    "relief": 0.678,
    "roadsOut": [
+    {
+     "to": "the_redline",
+     "bearing": 4,
+     "mi": 807
+    },
+    {
+     "to": "the_stillhold",
+     "bearing": -13,
+     "mi": 743
+    },
+    {
+     "to": "the_gralloch",
+     "bearing": -89,
+     "mi": 1133
+    },
+    {
+     "to": "the_axis_gate",
+     "bearing": -180,
+     "mi": 1508
+    }
+   ],
+   "_wasAuthored": {
+    "riverBearing": -176,
+    "riverDistanceDeg": 13.8,
+    "uphillBearing": 75,
+    "relief": 0.346
+   },
+   "_remeasured_20260906": "⛔ RE-DERIVED FROM THE LIVE TERRAIN, 2026-09-06. Erik: 'the land is set now — we will move things as needed to fit.' ⚠️ SNG-404 had 16 drifts between Aevi's hand-authored `_measured` block and `measureGradients` reading the same world, because the cluster MOVED (SNG-427, SNG-434, and the 09-06 gate move) and the readings did not follow. ⛔ THE LAND IS THE TRUTH AND THE READING IS THE THING THAT MOVES — taken with the same call the gate uses, so they cannot disagree by construction. ⚑ `_wasAuthored` keeps what she measured by hand, because a reading replaced is not a reading that never happened.",
+   "_roadsOutWas_20261006": [
     {
      "to": "the_redline",
      "bearing": 3
@@ -1096,14 +1578,7 @@
      "to": "the_axis_gate",
      "bearing": -123
     }
-   ],
-   "_wasAuthored": {
-    "riverBearing": -176,
-    "riverDistanceDeg": 13.8,
-    "uphillBearing": 75,
-    "relief": 0.346
-   },
-   "_remeasured_20260906": "⛔ RE-DERIVED FROM THE LIVE TERRAIN, 2026-09-06. Erik: 'the land is set now — we will move things as needed to fit.' ⚠️ SNG-404 had 16 drifts between Aevi's hand-authored `_measured` block and `measureGradients` reading the same world, because the cluster MOVED (SNG-427, SNG-434, and the 09-06 gate move) and the readings did not follow. ⛔ THE LAND IS THE TRUTH AND THE READING IS THE THING THAT MOVES — taken with the same call the gate uses, so they cannot disagree by construction. ⚑ `_wasAuthored` keeps what she measured by hand, because a reading replaced is not a reading that never happened."
+   ]
   },
   "_ruleFinding": "⛔ RELIEF 0.346 — real ground, and the second-steepest town in the corpus after Kindlerow. ⚠️ BUT THE LAYOUT IS POLITICAL, NOT TOPOGRAPHIC: the Redline road (3°) and the Stillhold road (−10°) arrive only 13° apart, so the town's whole problem is that BOTH SIDES COME IN THE SAME GATE.",
   "radiusMetres": 400,
@@ -1112,7 +1587,7 @@
     "id": "marchward_the_gate",
     "name": "The Shared Gate",
     "localMap": {
-     "bearing": -4,
+     "bearing": 4,
      "metres": 280
     },
     "basis": "road",
@@ -1120,7 +1595,9 @@
      "road": "the_redline",
      "relation": "on"
     },
-    "why": "⛔ THE TWO ROADS CONVERGE 13° APART AND MEET HERE. One gate, both sides, deliberately — 'a place that touches both extremes learns to speak plainly or die.'"
+    "why": "⛔ THE TWO ROADS CONVERGE 13° APART AND MEET HERE. One gate, both sides, deliberately — 'a place that touches both extremes learns to speak plainly or die.'",
+    "kind": "gate",
+    "_bearingWas_20261006": -4
    },
    {
     "id": "marchward_plain_hall",
@@ -1130,13 +1607,14 @@
      "metres": 0
     },
     "basis": "prose",
-    "why": "⚠️ 'TRUTH runs high.' Where the speaking-plainly is done, and where both sides are heard in the same room."
+    "why": "⚠️ 'TRUTH runs high.' Where the speaking-plainly is done, and where both sides are heard in the same room.",
+    "kind": "hall"
    },
    {
     "id": "marchward_outfitters",
     "name": "The Outfitters",
     "localMap": {
-     "bearing": -123,
+     "bearing": -180,
      "metres": 230
     },
     "basis": "road",
@@ -1144,7 +1622,9 @@
      "road": "the_axis_gate",
      "relation": "on"
     },
-    "why": "⛔ 'The natural base for exploring the Marches.' On the road OUT, because that is who buys."
+    "why": "⛔ 'The natural base for exploring the Marches.' On the road OUT, because that is who buys.",
+    "kind": "shop",
+    "_bearingWas_20261006": -123
    },
    {
     "id": "marchward_upper_watch",
@@ -1154,13 +1634,14 @@
      "metres": 310
     },
     "basis": "uphill",
-    "why": "⛔ Uphill on the measured bearing — relief 0.346 gives them a real height, and a town between two poles watches both roads at once."
+    "why": "⛔ Uphill on the measured bearing — relief 0.346 gives them a real height, and a town between two poles watches both roads at once.",
+    "kind": "tower"
    },
    {
     "id": "marchward_churn_road",
     "name": "The Churn Road",
     "localMap": {
-     "bearing": -76,
+     "bearing": -89,
      "metres": 250
     },
     "basis": "road",
@@ -1168,7 +1649,38 @@
      "road": "the_gralloch",
      "relation": "on"
     },
-    "why": "⚠️ The third road, to Unspooling — the way out that is neither side, which some people take."
+    "why": "⚠️ The third road, to Unspooling — the way out that is neither side, which some people take.",
+    "kind": "road",
+    "_bearingWas_20261006": -76
+   }
+  ],
+  "extent": [
+   {
+    "id": "mw_town",
+    "name": "The Marchward",
+    "kind": "built",
+    "bearing": 0,
+    "fromMetres": 0,
+    "radiusMetres": 220,
+    "why": "The border-town."
+   },
+   {
+    "id": "mw_neutral",
+    "name": "The Neutral Ground",
+    "kind": "waste",
+    "bearing": 4,
+    "fromMetres": 240,
+    "radiusMetres": 100,
+    "why": "'A waygate sits inside the ward's neutral ground, under truce-law.'"
+   },
+   {
+    "id": "mw_heights",
+    "name": "The Watch Heights",
+    "kind": "rock",
+    "bearing": 75,
+    "fromMetres": 520,
+    "radiusMetres": 260,
+    "why": "The ground rises steeply on the measured uphill (relief 0.68); the Upper Watch stands below it."
    }
   ]
  },
@@ -1181,15 +1693,18 @@
    "roadsOut": [
     {
      "to": "the_heartroot",
-     "bearing": 4
+     "bearing": 4,
+     "mi": 339
     },
     {
      "to": "the_slow_orchard",
-     "bearing": 33
+     "bearing": 34,
+     "mi": 280
     },
     {
      "to": "the_quickwood_eaves",
-     "bearing": 160
+     "bearing": 161,
+     "mi": 221
     }
    ],
    "_wasAuthored": {
@@ -1211,7 +1726,8 @@
      "metres": 0
     },
     "basis": "prose",
-    "why": "⛔ 'The ONLY Quickwood settlement that keeps human hours, BECAUSE TRADE REQUIRES IT.' The town exists for this ring; it is the centre by function."
+    "why": "⛔ 'The ONLY Quickwood settlement that keeps human hours, BECAUSE TRADE REQUIRES IT.' The town exists for this ring; it is the centre by function.",
+    "kind": "market"
    },
    {
     "id": "grovehome_hour_post",
@@ -1221,7 +1737,8 @@
      "metres": 90
     },
     "basis": "prose",
-    "why": "⚠️ 'The Rootkin find that funny.' Somebody has to keep the human hours visible, and a people who measure in seasons would build it as a joke that works."
+    "why": "⚠️ 'The Rootkin find that funny.' Somebody has to keep the human hours visible, and a people who measure in seasons would build it as a joke that works.",
+    "kind": "tower"
    },
    {
     "id": "grovehome_root_gate",
@@ -1235,7 +1752,8 @@
      "road": "the_heartroot",
      "relation": "on"
     },
-    "why": "⛔ The way IN to the grown city. Not a wall's gate — where the tended wood begins to be a street."
+    "why": "⛔ The way IN to the grown city. Not a wall's gate — where the tended wood begins to be a street.",
+    "kind": "gate"
    },
    {
     "id": "grovehome_orchard_way",
@@ -1249,7 +1767,8 @@
      "road": "the_slow_orchard",
      "relation": "on"
     },
-    "why": "To the trees that take a lifetime to fruit. ⚠️ Walked mostly by people who will not see the fruit."
+    "why": "To the trees that take a lifetime to fruit. ⚠️ Walked mostly by people who will not see the fruit.",
+    "kind": "road"
    },
    {
     "id": "grovehome_patience_house",
@@ -1263,7 +1782,46 @@
      "road": "the_quickwood_eaves",
      "relation": "near"
     },
-    "why": "⛔ 'Patient in a way that reads as either profound hospitality or a very slow trap.' Where outsiders wait, on the road out, and both readings are available to them while they do."
+    "why": "⛔ 'Patient in a way that reads as either profound hospitality or a very slow trap.' Where outsiders wait, on the road out, and both readings are available to them while they do.",
+    "kind": "inn"
+   }
+  ],
+  "extent": [
+   {
+    "id": "gv_town",
+    "name": "Grovehome",
+    "kind": "built",
+    "bearing": 0,
+    "fromMetres": 0,
+    "radiusMetres": 200,
+    "why": "The grown town round the Trade Ring."
+   },
+   {
+    "id": "gv_quickwood",
+    "name": "The Quickwood",
+    "kind": "wood",
+    "bearing": 4,
+    "fromMetres": 600,
+    "radiusMetres": 550,
+    "why": "Toward the Heartroot: the Rootkin's forest."
+   },
+   {
+    "id": "gv_orchards",
+    "name": "The Slow Orchards",
+    "kind": "wood",
+    "bearing": 33,
+    "fromMetres": 460,
+    "radiusMetres": 220,
+    "why": "Trees that take a lifetime to fruit, out along the Orchard Way."
+   },
+   {
+    "id": "gv_eaves",
+    "name": "The Eaves",
+    "kind": "wood",
+    "bearing": 160,
+    "fromMetres": 480,
+    "radiusMetres": 300,
+    "why": "The forest edge toward the Quickwood Eaves."
    }
   ]
  },
@@ -1276,11 +1834,13 @@
    "roadsOut": [
     {
      "to": "the_marchward",
-     "bearing": 168
+     "bearing": 169,
+     "mi": 743
     },
     {
      "to": "the_held_yard",
-     "bearing": 117
+     "bearing": 117,
+     "mi": 231
     }
    ],
    "_wasAuthored": {
@@ -1302,7 +1862,8 @@
      "metres": 330
     },
     "basis": "prose",
-    "why": "⛔ A RING, NOT A POINT — the defining structure. 'No violence in living memory, no weapons, no raised voices.' The wall is the claim and everything inside is the evidence."
+    "why": "⛔ A RING, NOT A POINT — the defining structure. 'No violence in living memory, no weapons, no raised voices.' The wall is the claim and everything inside is the evidence.",
+    "kind": "wall"
    },
    {
     "id": "stillhold_ordered_quarters",
@@ -1312,7 +1873,8 @@
      "metres": 0
     },
     "basis": "prose",
-    "why": "'Beautiful, ordered, and subtly WRONG.' The city proper."
+    "why": "'Beautiful, ordered, and subtly WRONG.' The city proper.",
+    "kind": "quarter"
    },
    {
     "id": "stillhold_the_unasked",
@@ -1322,7 +1884,8 @@
      "metres": 210
     },
     "basis": "prose",
-    "why": "⛔ 'The stillness rests on something NO ONE IS SAYING.' ⚠️ Nobody wrote this place down and the city requires it: there is somewhere the unsaid thing is kept, and everyone knows not to go. Placed opposite the gate, which is where you put a thing you are not discussing."
+    "why": "⛔ 'The stillness rests on something NO ONE IS SAYING.' ⚠️ Nobody wrote this place down and the city requires it: there is somewhere the unsaid thing is kept, and everyone knows not to go. Placed opposite the gate, which is where you put a thing you are not discussing.",
+    "kind": "waste"
    },
    {
     "id": "stillhold_marchward_gate",
@@ -1336,7 +1899,19 @@
      "road": "the_marchward",
      "relation": "on"
     },
-    "why": "⚠️ The only road out that matters, and it goes to the town that has to live with both poles."
+    "why": "⚠️ The only road out that matters, and it goes to the town that has to live with both poles.",
+    "kind": "gate"
+   }
+  ],
+  "extent": [
+   {
+    "id": "sh_city",
+    "name": "The Stillhold",
+    "kind": "built",
+    "bearing": 0,
+    "fromMetres": 0,
+    "radiusMetres": 320,
+    "why": "'A walled city of absolute peace' — everything inside the Wall."
    }
   ]
  },
@@ -1349,11 +1924,13 @@
    "roadsOut": [
     {
      "to": "millbrook",
-     "bearing": -89
+     "bearing": -169,
+     "mi": 1154
     },
     {
      "to": "kestrels_roost",
-     "bearing": 92
+     "bearing": 148,
+     "mi": 1061
     }
    ],
    "_wasAuthored": {
@@ -1362,7 +1939,17 @@
     "uphillBearing": 0,
     "relief": 0.029
    },
-   "_remeasured_20260906": "⛔ RE-DERIVED FROM THE LIVE TERRAIN, 2026-09-06. Erik: 'the land is set now — we will move things as needed to fit.' ⚠️ SNG-404 had 16 drifts between Aevi's hand-authored `_measured` block and `measureGradients` reading the same world, because the cluster MOVED (SNG-427, SNG-434, and the 09-06 gate move) and the readings did not follow. ⛔ THE LAND IS THE TRUTH AND THE READING IS THE THING THAT MOVES — taken with the same call the gate uses, so they cannot disagree by construction. ⚑ `_wasAuthored` keeps what she measured by hand, because a reading replaced is not a reading that never happened."
+   "_remeasured_20260906": "⛔ RE-DERIVED FROM THE LIVE TERRAIN, 2026-09-06. Erik: 'the land is set now — we will move things as needed to fit.' ⚠️ SNG-404 had 16 drifts between Aevi's hand-authored `_measured` block and `measureGradients` reading the same world, because the cluster MOVED (SNG-427, SNG-434, and the 09-06 gate move) and the readings did not follow. ⛔ THE LAND IS THE TRUTH AND THE READING IS THE THING THAT MOVES — taken with the same call the gate uses, so they cannot disagree by construction. ⚑ `_wasAuthored` keeps what she measured by hand, because a reading replaced is not a reading that never happened.",
+   "_roadsOutWas_20261006": [
+    {
+     "to": "millbrook",
+     "bearing": -89
+    },
+    {
+     "to": "kestrels_roost",
+     "bearing": 92
+    }
+   ]
   },
   "_stackNote": "⛔ `the-low-lamp-inn` sits at 0.00° from this location — it is a SITE of the Edge District and is authored below as one, not as a peer.",
   "radiusMetres": 420,
@@ -1375,7 +1962,8 @@
      "metres": 0
     },
     "basis": "prose",
-    "why": "⛔ 'Streets are PAVED with light-guides; at dusk the whole district glows FROM BELOW.' The streets are the infrastructure — they are not lit, they are the light."
+    "why": "⛔ 'Streets are PAVED with light-guides; at dusk the whole district glows FROM BELOW.' The streets are the infrastructure — they are not lit, they are the light.",
+    "kind": "street"
    },
    {
     "id": "rpe_braiding_towers",
@@ -1386,7 +1974,8 @@
      "level": 2
     },
     "basis": "prose",
-    "why": "⚠️ 'Photonic-crystal towers catch and BRAID the sunlight into working beams.' Level 2 — they must be above the streets to catch anything."
+    "why": "⚠️ 'Photonic-crystal towers catch and BRAID the sunlight into working beams.' Level 2 — they must be above the streets to catch anything.",
+    "kind": "towers"
    },
    {
     "id": "the-low-lamp-inn",
@@ -1397,7 +1986,8 @@
      "level": -1
     },
     "basis": "prose",
-    "why": "⛔ ALREADY CANON FROM PLAY, and its own seed places it: 'tucked into the LOWER TIER of the Edge District where the light-guides run dim.' ⚠️ LEVEL −1 — the one place here that is deliberately below the light. That is why people drink in it."
+    "why": "⛔ ALREADY CANON FROM PLAY, and its own seed places it: 'tucked into the LOWER TIER of the Edge District where the light-guides run dim.' ⚠️ LEVEL −1 — the one place here that is deliberately below the light. That is why people drink in it.",
+    "kind": "inn"
    },
    {
     "id": "rpe_dim_quarter",
@@ -1408,13 +1998,14 @@
      "level": -1
     },
     "basis": "prose",
-    "why": "Where the light-guides run dim generally. ⛔ A city of light needs somewhere unlit, and it will be the lower tier every time."
+    "why": "Where the light-guides run dim generally. ⛔ A city of light needs somewhere unlit, and it will be the lower tier every time.",
+    "kind": "quarter"
    },
    {
     "id": "rpe_valley_road",
     "name": "The Valley Road",
     "localMap": {
-     "bearing": -89,
+     "bearing": -169,
      "metres": 340
     },
     "basis": "road",
@@ -1422,7 +2013,29 @@
      "road": "millbrook",
      "relation": "on"
     },
-    "why": "Down to the valley floor. ⚠️ The contamination teams go out this way toward the Echo."
+    "why": "Down to the valley floor. ⚠️ The contamination teams go out this way toward the Echo.",
+    "kind": "road",
+    "_bearingWas_20261006": -89
+   }
+  ],
+  "extent": [
+   {
+    "id": "rp_district",
+    "name": "The Edge District",
+    "kind": "built",
+    "bearing": 0,
+    "fromMetres": 0,
+    "radiusMetres": 300,
+    "why": "'Streets are paved with light-guides.'"
+   },
+   {
+    "id": "rp_rim",
+    "name": "The Rim",
+    "kind": "rock",
+    "bearing": 180,
+    "fromMetres": 380,
+    "radiusMetres": 320,
+    "why": "'The rim of the Radiant Plateau' — the escarpment falls away on the downhill side (relief 0.67)."
    }
   ]
  },
@@ -1431,7 +2044,13 @@
    "riverDistanceDeg": 12.45,
    "uphillBearing": 30,
    "relief": 1.043,
-   "roadsOut": [],
+   "roadsOut": [
+    {
+     "to": "the_cogitarium",
+     "bearing": 0,
+     "mi": 0
+    }
+   ],
    "_wasAuthored": {
     "riverDistanceDeg": 12.3,
     "uphillBearing": 30,
@@ -1452,7 +2071,8 @@
      "level": 0
     },
     "basis": "prose",
-    "why": "⛔ On the Middle Way bearing — an entrance faces the road people arrive by, and this is the only thing in the hall that touches outside."
+    "why": "⛔ On the Middle Way bearing — an entrance faces the road people arrive by, and this is the only thing in the hall that touches outside.",
+    "kind": "gate"
    },
    {
     "id": "coghall_slate_wall",
@@ -1463,7 +2083,8 @@
      "level": 0
     },
     "basis": "tradition",
-    "why": "⚠️ Cogitants work in chalk. A hall where people arrive is a hall where the current problem is posted, and it faces the door."
+    "why": "⚠️ Cogitants work in chalk. A hall where people arrive is a hall where the current problem is posted, and it faces the door.",
+    "kind": "archive"
    },
    {
     "id": "coghall_stair_up",
@@ -1474,9 +2095,11 @@
      "level": 0
     },
     "basis": "prose",
-    "why": "⛔ The way to the third terrace — uphill bearing, because a terrace climbs the slope it is cut into. THE ONE PLACEMENT THAT LINKS TWO SITES OF THE SAME PARENT."
+    "why": "⛔ The way to the third terrace — uphill bearing, because a terrace climbs the slope it is cut into. THE ONE PLACEMENT THAT LINKS TWO SITES OF THE SAME PARENT.",
+    "kind": "street"
    }
-  ]
+  ],
+  "_extentNote_20261006": "No surface extent: this place is an interior and draws by level (SNG-678 L5)."
  },
  "old_switchback": {
   "_measured": {
@@ -1485,6 +2108,30 @@
    "uphillBearing": -15,
    "relief": 0.019,
    "roadsOut": [
+    {
+     "to": "kestrels_roost",
+     "bearing": 135,
+     "mi": 878
+    },
+    {
+     "to": "thornwake_glade",
+     "bearing": 123,
+     "mi": 272
+    },
+    {
+     "to": "gen-cogitarium-third-terrace",
+     "bearing": 28,
+     "mi": 1438
+    }
+   ],
+   "_wasAuthored": {
+    "riverBearing": 115,
+    "riverDistanceDeg": 5.1,
+    "uphillBearing": 345,
+    "relief": 0.01
+   },
+   "_remeasured_20260906": "⛔ RE-DERIVED FROM THE LIVE TERRAIN, 2026-09-06. Erik: 'the land is set now — we will move things as needed to fit.' ⚠️ SNG-404 had 16 drifts between Aevi's hand-authored `_measured` block and `measureGradients` reading the same world, because the cluster MOVED (SNG-427, SNG-434, and the 09-06 gate move) and the readings did not follow. ⛔ THE LAND IS THE TRUTH AND THE READING IS THE THING THAT MOVES — taken with the same call the gate uses, so they cannot disagree by construction. ⚑ `_wasAuthored` keeps what she measured by hand, because a reading replaced is not a reading that never happened.",
+   "_roadsOutWas_20261006": [
     {
      "to": "kestrels_roost",
      "bearing": 93
@@ -1497,14 +2144,7 @@
      "to": "gen-cogitarium-third-terrace",
      "bearing": 10
     }
-   ],
-   "_wasAuthored": {
-    "riverBearing": 115,
-    "riverDistanceDeg": 5.1,
-    "uphillBearing": 345,
-    "relief": 0.01
-   },
-   "_remeasured_20260906": "⛔ RE-DERIVED FROM THE LIVE TERRAIN, 2026-09-06. Erik: 'the land is set now — we will move things as needed to fit.' ⚠️ SNG-404 had 16 drifts between Aevi's hand-authored `_measured` block and `measureGradients` reading the same world, because the cluster MOVED (SNG-427, SNG-434, and the 09-06 gate move) and the readings did not follow. ⛔ THE LAND IS THE TRUTH AND THE READING IS THE THING THAT MOVES — taken with the same call the gate uses, so they cannot disagree by construction. ⚑ `_wasAuthored` keeps what she measured by hand, because a reading replaced is not a reading that never happened."
+   ]
   },
   "_ruleFinding": "⛔ RELIEF 0.01 AND IT IS A MOUNTAIN ROAD. Second case after the Harmonic terrace where the world layer measures the ground the feature MEETS rather than the feature: switchbacks are cut into a face whose scale is below the generator's floor. ⚠️ PROSE CARRIES IT ENTIRELY — 'stone-cut switchbacks CLINGING TO THE MOUNTAINSIDE', 'up toward the HIGH PASS'.",
   "radiusMetres": 700,
@@ -1519,13 +2159,14 @@
      "level": 0
     },
     "basis": "prose",
-    "why": "⛔ 'A single ruined waystation marks THE HALFWAY POINT, roof half-gone, HEARTH STILL USABLE.' The centre by the seed's own arithmetic — and the hearth is why anyone stops."
+    "why": "⛔ 'A single ruined waystation marks THE HALFWAY POINT, roof half-gone, HEARTH STILL USABLE.' The centre by the seed's own arithmetic — and the hearth is why anyone stops.",
+    "kind": "ruin"
    },
    {
     "id": "switchback_lower_bend",
     "name": "The Lower Bend",
     "localMap": {
-     "bearing": 111,
+     "bearing": 123,
      "metres": 420,
      "level": -1
     },
@@ -1534,7 +2175,9 @@
      "road": "thornwake_glade",
      "relation": "on"
     },
-    "why": "⛔ LEVEL −1. You come up from the wilds; the first hairpin is below the waystation and out of sight of it."
+    "why": "⛔ LEVEL −1. You come up from the wilds; the first hairpin is below the waystation and out of sight of it.",
+    "kind": "road",
+    "_bearingWas_20261006": 111
    },
    {
     "id": "switchback_upper_bend",
@@ -1545,13 +2188,14 @@
      "level": 1
     },
     "basis": "uphill",
-    "why": "⚠️ Above the waystation on the measured uphill. From here you can see whether anyone is at the hearth before you commit to arriving."
+    "why": "⚠️ Above the waystation on the measured uphill. From here you can see whether anyone is at the hearth before you commit to arriving.",
+    "kind": "road"
    },
    {
     "id": "switchback_the_pass",
     "name": "The High Pass",
     "localMap": {
-     "bearing": 10,
+     "bearing": 28,
      "metres": 650,
      "level": 2
     },
@@ -1560,13 +2204,15 @@
      "road": "gen-cogitarium-third-terrace",
      "relation": "on"
     },
-    "why": "⛔ THE TOP, AND THE WAY OUT OF THE VALE. Erik: 'a way out of the Valley, connecting to other parts of the world.' Level 2 — everything else here is below it."
+    "why": "⛔ THE TOP, AND THE WAY OUT OF THE VALE. Erik: 'a way out of the Valley, connecting to other parts of the world.' Level 2 — everything else here is below it.",
+    "kind": "gate",
+    "_bearingWas_20261006": 10
    },
    {
     "id": "switchback_roost_fork",
     "name": "The Roost Fork",
     "localMap": {
-     "bearing": 93,
+     "bearing": 135,
      "metres": 300,
      "level": 0
     },
@@ -1575,7 +2221,20 @@
      "road": "kestrels_roost",
      "relation": "on"
     },
-    "why": "⚠️ Where the Roost trail leaves the switchback. 'Travelers between the Roost, the wilds, and the pass' — three ways, and this is where two of them part."
+    "why": "⚠️ Where the Roost trail leaves the switchback. 'Travelers between the Roost, the wilds, and the pass' — three ways, and this is where two of them part.",
+    "kind": "road",
+    "_bearingWas_20261006": 93
+   }
+  ],
+  "extent": [
+   {
+    "id": "sb_mountain",
+    "name": "The Mountainside",
+    "kind": "rock",
+    "bearing": -15,
+    "fromMetres": 350,
+    "radiusMetres": 450,
+    "why": "'Stone-cut switchbacks clinging to the mountainside.'"
    }
   ]
  },
@@ -1589,6 +2248,30 @@
    "roadsOut": [
     {
      "to": "disputed_zone_fringe",
+     "bearing": 161,
+     "mi": 1164
+    },
+    {
+     "to": "old_switchback",
+     "bearing": -80,
+     "mi": 272
+    },
+    {
+     "to": "ent_deepwood",
+     "bearing": 162,
+     "mi": 2442
+    }
+   ],
+   "_wasAuthored": {
+    "riverBearing": -51,
+    "riverDistanceDeg": 5.4,
+    "uphillBearing": 15,
+    "relief": 0.011
+   },
+   "_remeasured_20260906": "⛔ RE-DERIVED FROM THE LIVE TERRAIN, 2026-09-06. Erik: 'the land is set now — we will move things as needed to fit.' ⚠️ SNG-404 had 16 drifts between Aevi's hand-authored `_measured` block and `measureGradients` reading the same world, because the cluster MOVED (SNG-427, SNG-434, and the 09-06 gate move) and the readings did not follow. ⛔ THE LAND IS THE TRUTH AND THE READING IS THE THING THAT MOVES — taken with the same call the gate uses, so they cannot disagree by construction. ⚑ `_wasAuthored` keeps what she measured by hand, because a reading replaced is not a reading that never happened.",
+   "_roadsOutWas_20261006": [
+    {
+     "to": "disputed_zone_fringe",
      "bearing": 85
     },
     {
@@ -1599,14 +2282,7 @@
      "to": "ent_deepwood",
      "bearing": 47
     }
-   ],
-   "_wasAuthored": {
-    "riverBearing": -51,
-    "riverDistanceDeg": 5.4,
-    "uphillBearing": 15,
-    "relief": 0.011
-   },
-   "_remeasured_20260906": "⛔ RE-DERIVED FROM THE LIVE TERRAIN, 2026-09-06. Erik: 'the land is set now — we will move things as needed to fit.' ⚠️ SNG-404 had 16 drifts between Aevi's hand-authored `_measured` block and `measureGradients` reading the same world, because the cluster MOVED (SNG-427, SNG-434, and the 09-06 gate move) and the readings did not follow. ⛔ THE LAND IS THE TRUTH AND THE READING IS THE THING THAT MOVES — taken with the same call the gate uses, so they cannot disagree by construction. ⚑ `_wasAuthored` keeps what she measured by hand, because a reading replaced is not a reading that never happened."
+   ]
   },
   "_ruleFinding": "⚠️ relief 0.011, no usable gradient, no water within 5°. ⛔ PROSE CARRIES ALL OF IT — and the prose is unusually specific about ARRANGEMENT, which is the layout instruction.",
   "radiusMetres": 320,
@@ -1619,7 +2295,8 @@
      "metres": 0
     },
     "basis": "prose",
-    "why": "⛔ 'CLEARINGS THAT SEEM ARRANGED.' The central one, and the word is 'seem' — nobody will say by whom."
+    "why": "⛔ 'CLEARINGS THAT SEEM ARRANGED.' The central one, and the word is 'seem' — nobody will say by whom.",
+    "kind": "green"
    },
    {
     "id": "thornwake_deliberate_trees",
@@ -1629,13 +2306,14 @@
      "metres": 170
     },
     "basis": "prose",
-    "why": "⚠️ 'Old trees grown STRANGE AND DELIBERATE.' Placed uphill because that is where you notice the arrangement — you look up the slope and the spacing is wrong."
+    "why": "⚠️ 'Old trees grown STRANGE AND DELIBERATE.' Placed uphill because that is where you notice the arrangement — you look up the slope and the spacing is wrong.",
+    "kind": "grove"
    },
    {
     "id": "thornwake_warden_edge",
     "name": "The Warden Edge",
     "localMap": {
-     "bearing": 85,
+     "bearing": 161,
      "metres": 260
     },
     "basis": "road",
@@ -1643,7 +2321,9 @@
      "road": "disputed_zone_fringe",
      "relation": "on"
     },
-    "why": "⛔ 'The few who live AT ITS EDGE call themselves wardens and won't say more.' At the edge, on the road in — they meet you before you are inside."
+    "why": "⛔ 'The few who live AT ITS EDGE call themselves wardens and won't say more.' At the edge, on the road in — they meet you before you are inside.",
+    "kind": "march",
+    "_bearingWas_20261006": 85
    },
    {
     "id": "thornwake_watching_ground",
@@ -1653,13 +2333,14 @@
      "metres": 190
     },
     "basis": "prose",
-    "why": "⚠️ 'Animals that watch TOO KNOWINGLY.' Away from every road — the part of the grove nobody has a reason to cross, which is where you notice being watched."
+    "why": "⚠️ 'Animals that watch TOO KNOWINGLY.' Away from every road — the part of the grove nobody has a reason to cross, which is where you notice being watched.",
+    "kind": "grove"
    },
    {
     "id": "thornwake_deepwood_path",
     "name": "The Deepwood Path",
     "localMap": {
-     "bearing": 47,
+     "bearing": 162,
      "metres": 250
     },
     "basis": "road",
@@ -1667,8 +2348,31 @@
      "road": "ent_deepwood",
      "relation": "on"
     },
-    "why": "⛔ Toward the Ents. 'Something tends this place' — and the Ents are three days that way, which the wardens do not comment on either."
+    "why": "⛔ Toward the Ents. 'Something tends this place' — and the Ents are three days that way, which the wardens do not comment on either.",
+    "kind": "road",
+    "_bearingWas_20261006": 47
+   }
+  ],
+  "extent": [
+   {
+    "id": "tw_glade",
+    "name": "The Glade",
+    "kind": "wood",
+    "bearing": 0,
+    "fromMetres": 0,
+    "radiusMetres": 330,
+    "why": "'Old trees grown strange and deliberate.'"
+   },
+   {
+    "id": "tw_deepwood",
+    "name": "The Deepwood Margin",
+    "kind": "wood",
+    "bearing": 162,
+    "fromMetres": 650,
+    "radiusMetres": 400,
+    "why": "Toward the Ents, along the Deepwood Path."
    }
   ]
- }
+ },
+ "_extentKindsNote_20261006": "Extent kinds: water (a channel: widthMetres + flowBearing), marsh, field, wood, rock, waste, built. Radius features are soft areas centred at bearing/fromMetres."
 }

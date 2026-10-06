@@ -8066,6 +8066,149 @@ await (async () => {
       WG2.markerKind({ t: "region", wg: 1 }) === "gate" && WG2.markerKind({ t: "region" }) === "region",
       "if this reddens, `markerKind` changed its branch order and the seat rule should be re-read, not re-pointed");
 
+    /* ═════ SNG-679 S1 + S2 · EVERYTHING ON THE MAPS CAN CHANGE, THROUGH ONE DOOR ═════
+     * ✅ ERIK: *"Every single thing that exists needs to be able to be added, damaged, ruined, moved, etc by
+     * the game."* And, asked whether the world's state is per save or shared: *"It's one world."*
+     * ⛔ WHAT WAS TRUE BEFORE: Aevi's read of origin found *"No GM channel can change a place, site, ground,
+     * road, river or waygate"* and, on `holdingOps`' fifteen kinds, *"No damage, ruin, destroy, repair or
+     * move."* A hold had a `condition` — its FORTUNE — and nothing physical. */
+    {
+      const MS = await import("../engine/mapstate.js");
+      const kindsS = JSON.parse(readFileSync(join(root, "content/packs/core/world/location_kinds.json"), "utf8"));
+      const contentS = { mapStates: kindsS.mapStates };
+      const chS = (key, change, extra = {}) => ({ key, change, by: "the_raiders", cause: "fired in the raid", beat: "b1", ...extra });
+
+      check("679/S1: the door REFUSES with a reason rather than writing — an unknown class, a change the class does not take, a move with nowhere to go",
+        (() => {
+          const cases = [["nonsense:x", "damaged"], ["region:valley", "ruined"], ["caravan:c1", "repaired"],
+            ["place:millbrook", "moved"], ["place:millbrook", "renamed"]];
+          return cases.every(([k, c]) => { const r = MS.validateMapChange(chS(k, c), { content: contentS });
+            return r.ok === false && typeof r.why === "string" && r.why.length > 8; }); })(),
+        "a refused GM op has to be able to say why in the scene, which is the rule `canSail` already follows");
+
+      // ⛔ A REGION IS NEVER DAMAGED: S0 gives it rename and reveal only. "The Valley of Echoes is ruined" is
+      // not a fact the world can hold about a sixth of itself.
+      check("679/S1: …and the S0 inventory is what decides — a region takes a rename and never a rung on the ladder",
+        MS.MAP_CLASSES.region.allows.includes("renamed")
+        && !MS.MAP_CLASSES.region.allows.includes("ruined")
+        && MS.MAP_CLASSES.place.allows.includes("ruined"));
+
+      check("679/S1: …and damage may JUMP the ladder while a repair climbs ONE rung",
+        (() => { const A = { id: "a" };
+          const key = MS.roadKey("millbrook", "echo_river_crossing");
+          const fire = MS.applyMapChange(A, chS(key, "destroyed"), { content: contentS, worldDay: 10 });
+          if (!(fire.was === "whole" && fire.state === "destroyed")) return false;
+          const steps = [20, 30, 40].map((d) => MS.applyMapChange(A, chS(key, "repaired", { by: "the_locals" }), { content: contentS, worldDay: d }).state);
+          return steps.join(">") === "ruined>damaged>whole"; })(),
+        "✅ Aevi: *\"A fire can take a mill from whole to destroyed in one change. Repair climbs one rung per change.\"*");
+
+      check("679/S1: …and a road's key is SORTED, so one road is one key however it is named",
+        MS.roadKey("b", "a") === MS.roadKey("a", "b") && MS.roadKey("a", "b") === "road:a|b",
+        "two saves that burned the same bridge from opposite ends must fold ONE event");
+
+      check("679/S1: …and a destroyed waygate is refused a repair — it has to be made again",
+        (() => { const C = { id: "c" };
+          MS.applyMapChange(C, chS("gate:millbrook", "destroyed"), { content: contentS, worldDay: 3 });
+          const rep = MS.applyMapChange(C, chS("gate:millbrook", "repaired"), { content: contentS, worldDay: 4 });
+          const made = MS.applyMapChange(C, chS("gate:millbrook", "added", { by: "a_wright" }), { content: contentS, worldDay: 5 });
+          return rep.ok === false && made.ok === true && made.state === "whole"; })(),
+        "S0's own column, and `mapStates.repair.localsWillNot` lists `waygate:destroyed` as beyond the locals too");
+
+      /* ⛔ G10 · ONE WORLD. ✅ Aevi: *"Two saves record changes to the same bridge in either order and fold to
+       * the same state. The same change recorded by both is one event."*
+       * ⚠️ THE TIE-BREAK IS THE WHOLE OF IT, and it is why this gate drives a burning and a mending on the SAME
+       * world-day: without a stated order those two fold to "damaged" in one client and "whole" in the other,
+       * and "one world" is a claim that fails silently. Severity first, then the derived id. */
+      check("679/S2 G10: ⛔ the fold is ORDER-INDEPENDENT — the same events in any order give the same state, even on one day",
+        (() => { const key = MS.roadKey("millbrook", "echo_river_crossing");
+          const raw = [{ key, change: "damaged", by: "x", day: 5 },
+            { key, change: "ruined", by: "the_flood", day: 9 },
+            { key, change: "repaired", by: "the_locals", day: 9 }];
+          const evs = raw.map((e) => ({ ...e, id: MS.eventIdFor({ key: e.key, change: e.change, worldDay: e.day, by: e.by }) }));
+          const folds = [evs, [...evs].reverse(), [evs[2], evs[0], evs[1]], [evs[1], evs[2], evs[0]]]
+            .map((o) => MS.foldKey(o, contentS).state);
+          return new Set(folds).size === 1; })(),
+        "a burning and a mending on the same day must not depend on which client read them first");
+
+      check("679/S2 G10: …and the same change recorded twice is ONE event, because the id is DERIVED and not minted",
+        (() => { const B = { id: "b" };
+          const same = chS(MS.roadKey("a", "b"), "ruined");
+          const r1 = MS.applyMapChange(B, same, { content: contentS, worldDay: 12 });
+          const r2 = MS.applyMapChange(B, same, { content: contentS, worldDay: 12 });
+          return r1.event.id === r2.event.id && r2.duplicate === true && B.mapEvents.length === 1; })(),
+        "✅ `personIdFor`'s rule, through the same `fnvHex` — a second hash would be a second identity for one event");
+
+      check("679/S2 G10: …and the day is FLOORED, so day 12.4 in one world and 12.0 in another are one burning",
+        MS.eventIdFor({ key: "road:a|b", change: "ruined", worldDay: 12.4, by: "x" })
+        === MS.eventIdFor({ key: "road:a|b", change: "ruined", worldDay: 12, by: "x" }));
+
+      check("679/S2: `mapStateOf` answers WHOLE for anything never touched — a renderer must never need a `?? \"whole\"`",
+        (() => { const w = MS.mapStateOf({}, MS.roadKey("x", "y"), { content: contentS });
+          return w && w.state === "whole" && Array.isArray(w.history); })(),
+        "a null here would put a fallback at every call site, and one of them would be missed");
+
+      /* ⛔ FORTUNE AND FABRIC ARE SEPARATE AXES. ✅ Aevi: *"a thriving hold can have a burned wall."* */
+      check("679/S2: a hold keeps its state on its OWN record, and its `condition` is untouched — fortune and fabric are two axes",
+        (() => { const hold = { id: "h1", name: "The Annex", condition: "thriving" };
+          const D = { id: "d" };
+          const r = MS.applyMapChange(D, chS("hold:h1", "damaged", { cause: "the raid" }),
+            { content: contentS, worldDay: 7, recordOf: (cls, id) => (cls === "hold" && id === "h1" ? hold : null) });
+          return r.ok && hold.state === "damaged" && hold.condition === "thriving"
+            && (D.mapEvents || []).length === 0 && r.onRecord === true; })(),
+        "nothing in this module reads or writes `condition`");
+
+      check("679/S2: …and the word a player reads comes from `mapStates.words`, never composed in the engine",
+        MS.mapStateWord(contentS, "place", "destroyed") === "razed"
+        && MS.mapStateWord(contentS, "site", "destroyed") === "torn down"
+        && MS.mapStateWord(contentS, "place", "renamed", { old: "Mill Brook" }) === "once called Mill Brook"
+        && MS.mapStateWord(contentS, "place", "no_such_state") === null,
+        "a class with no word for a state is a content gap and says so rather than inventing one");
+
+      /* ═════ G2 · ONE DOOR ═════
+       * ✅ AEVI: *"Grep: nothing writes `mapState`, `holding.state`, `feature.state` or `caravan.state` except
+       * `applyMapChange`."* ⛑ A source check, and the right shape for this claim: "nothing ELSE writes it" is
+       * a statement about the whole codebase, which no driver can make.
+       * ⛔ TWO HALVES, AND THEY ARE NOT EQUALLY STRONG — worth saying rather than implying. `mapState` and
+       * `stateEvents` are distinctive names, so those are matched EXACTLY and the door's own body is cut out
+       * before matching. `.state =` is far too common a word to grep for on its own, so the three RECORD
+       * fields are matched by RECEIVER NAME, against the names this codebase actually uses for a hold, a
+       * feature and a caravan (measured: holdings are iterated as `h` throughout, and `holding`, `hold`,
+       * `feature`, `f`, `car`, `caravan` and `rec` are the other plausible spellings).
+       * ⚠️ THE POPULATION IS ZERO TODAY and that is the point of a ratchet, not a weakness in it — but it does
+       * mean the regex itself has to be proved rather than assumed, so the check below plants a violation and
+       * requires the matcher to catch it. A guard that matches nothing passes forever. */
+      check("679/S1 G2: ⛔ ONE DOOR — nothing outside `applyMapChange` writes a map state",
+        (() => {
+          const files = ["app.js", "engine/mapstate.js", "engine/worldtick.js", "engine/holdings.js",
+            "engine/carriage.js", "engine/caravan.js", "engine/sharedholds.js", "engine/holdtrade.js"];
+          const exact = /\.(mapState|stateEvents)\s*(\[[^\]]*\])?\s*=[^=]/g;
+          const byName = /\b(holding|hold|h|feature|f|car|caravan|rec)\.state\s*=[^=]/g;
+          const strip = (src) => src.replace(/\r/g, "").split("\n")
+            .map((l) => { const i = l.indexOf("//"); return i >= 0 ? l.slice(0, i) : l; }).join("\n");
+          const offenders = [];
+          for (const f of files) {
+            let src = "";
+            try { src = readFileSync(join(root, f), "utf8"); } catch { continue; }
+            const code = strip(src);
+            const body = f === "engine/mapstate.js"
+              ? code.slice(code.indexOf("export function applyMapChange"), code.indexOf("export function eventsFor"))
+              : "";
+            for (const re of [exact, byName]) {
+              for (const m of code.matchAll(re)) {
+                if (body && body.includes(m[0])) continue;
+                offenders.push(`${f}: ${m[0].trim()}`);
+              }
+            }
+          }
+          // ⛔ AND THE MATCHER MUST BE ABLE TO CATCH ONE. A guard that matches nothing passes forever.
+          const planted = strip('function elsewhere(c, h) { c.mapState["road:a|b"] = 1; h.state = "ruined"; }');
+          const caught = [...planted.matchAll(exact)].length + [...planted.matchAll(byName)].length;
+          if (caught < 2) return ["the matcher cannot catch a planted violation — this gate is vacuous"];
+          return offenders.length === 0 ? true : offenders;
+        })() === true,
+        "the GM's mapOps, the hold channels, a raid and the world tick must not grow four ideas of what \"ruined\" does");
+    }
+
   /* ═════ SNG-679 H2 · WHERE A MOVING THING IS, ON THE GLOBE ═════
  * ✅ AEVI, reading origin: *"A moving hold's position exists but is LINEAR in longitude and colatitude.
  * From longitude 350 to 10 she sails the long way round through 180. Near the Crossing it is the same pole

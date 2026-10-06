@@ -47,7 +47,9 @@ import { sourcesHere, meaningDensity } from "./engine/substrate.js";   // ✅ Er
 import { groundForDecl, groundTag, substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace, groundHere, groundCardFor, naniteAt, bandFactor, peoplePresentAt } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
 import { sceneImage, itemImage, artworkStyle, getArtMode, setArtMode, imagesEnabled, ensureImage, aestheticFor, regenPromptFor, onImageMinted, onComposedLookup, swapImageUrl, forgetImageUrl, bustedURL, isBustedURL, mintAction, IMAGE_MIN_BYTES, regenerateImage, acceptImage, isGeneratedImage, toggleKeep, likenessClause, houseStyleFor, sanitizeImagePrompt, imageURLFor, isMinorSubject, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor, lookFor, serviceRefusal, refusedSaid} from "./engine/art.js"; // SNG-401: draw it again without destroying the one they have
 import { drawLabel, labelText, labelSpace, powerSize, applyStyle, LABEL_STYLES } from "./engine/maplabel.js";
-import { openingFrame, placeCardBox } from "./engine/worldmap.js";   // M3: open framed on what the player knows   // M2/D1: one table, one collision space
+import { openingFrame, placeCardBox } from "./engine/worldmap.js";
+// ⛔ SNG-679 S2: ONE READER for what state anything on a map is in, and the word a player reads for it.
+import { mapStateOf, mapStateWord } from "./engine/mapstate.js";   // M3: open framed on what the player knows   // M2/D1: one table, one collision space
 import { decodeTerrain, sampleAt, colorAt, unproject, project, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, globeClickAction, REGION_FRAME_DEG, regionVoteAt, worldRoadRoutes, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, makePolarBase, regionExtent, bendRoad, roadNetwork, clipToFrame, routeRoads, makeGroundCost, GROUND_COST } from "./engine/worldglobe.js";
 // ⛔ ROUND 4 — whose ground is this, as things stand today. `realms.js` resolves the SAVE (losses, growth,
 // broken powers, taken holds, your own realm); `influence.js` stays pure and just evaluates.
@@ -198,7 +200,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.20.1";
+const APP_VERSION = "2.20.3";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -15893,6 +15895,25 @@ function placeCardHTML(selectedId) {
         ${(l.dangerLevel | 0) >= 1 ? `<span class="rep-band danger-chip dl${Math.min(5, l.dangerLevel | 0)}">${esc(dangerLabel(Math.min(5, l.dangerLevel | 0)))}</span>${infoDot("world.danger")}` : `<span class="rep-band trusted">safe</span>`}
         ${visited ? (() => { const d = locationDensity(l, CONTENT.substrateModel); if (d == null) return ""; const lab = d < 0.34 ? "thin lattice" : d > 0.66 ? "dense lattice" : "even lattice"; return `<span class="rep-band" title="Substrate density here: ${Math.round(d * 100)}%. Continuous craft thrives dense, starves thin; Returned craft the reverse.">${lab}</span>`; })() : ""}
         ${l.id === here ? `<span class="rep-band trusted">you are here</span>` : ""}
+        ${/* ═════ SNG-679 S5 · WHAT STATE THIS PLACE IS IN, IF ANYTHING HAS HAPPENED TO IT ═════
+             ✅ ERIK: *"Every single thing that exists needs to be able to be added, damaged, ruined, moved, etc
+             by the game."* ⛑ THE WORD IS THE WORLD'S, from `mapStates.words`, never composed here: a place
+             is "battered", "in ruins" or "razed" where a site is "damaged", "fallen in" or "torn down". A
+             class with no authored word for a state shows nothing rather than inventing one.
+             ⚠️ AND IT SHOWS ONLY WHEN SOMETHING HAS HAPPENED. `mapStateOf` answers "whole" for everything
+             never touched — which is almost everything — so a band on every card would be noise saying
+             nothing. ⛔ This is also the LIVE READER the wiring audit was right to demand: it named
+             `mapStateWord` as an export whose docstring claimed renderers read it while nothing did. */""}
+        ${(() => {
+          try {
+            const st = mapStateOf(character, `place:${l.id}`, { content: CONTENT });
+            if (!st || st.state === "whole") return "";
+            const word = mapStateWord(CONTENT, "place", st.state, { name: l.name || l.id });
+            if (!word) return "";
+            const since = st.since != null ? ` title="since day ${Math.round(Number(st.since))}${st.cause ? " — " + esc(String(st.cause)) : ""}"` : "";
+            return `<span class="rep-band danger-chip dl3"${since}>${esc(word)}</span>`;
+          } catch { return ""; }
+        })()}
         ${(() => { const s = l.communityId ? standingWith(character, l.communityId, CONTENT.rules) : null; return s?.score ? `<span class="rep-band ${s.band}" title="Your standing here — ${s.band} (${s.score})">${esc(s.band)}</span>` : ""; })()}
       </div>
       ${(() => { const ppl = knownPeopleAt(character, l.id, { locations: CONTENT.locations, npcs: CONTENT.npcs }); return ppl.length ? `<div class="loc-people"><span class="hint">You know here: </span>${ppl.map(p => `<span class="known-here">${esc(p.name)} <span class="cost">${esc(p.label)}</span></span>`).join(", ")}</div>` : ""; })()}

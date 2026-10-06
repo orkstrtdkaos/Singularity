@@ -16,6 +16,28 @@
   "next": [],
   "releases": [
     {
+      "version": "2.20.3",
+      "date": "2026-10-06",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "The map's own vocabulary reaches the game",
+          "summary": "The file that says what each kind of place looks like, what it can be called at region scale, and what state it can be in had never been loaded — so none of it reached the screen."
+        }
+      ]
+    },
+    {
+      "version": "2.20.2",
+      "date": "2026-10-06",
+      "entries": [
+        {
+          "kind": "feature",
+          "title": "Things on the map can be damaged, ruined and mended",
+          "summary": "Until now a hold could be doing badly but nothing could be physically broken — no burned mill, no fallen bridge, no razed town. Every place, site, field, channel, road and waygate can now be damaged, ruined, destroyed, repaired, moved or renamed, and a place's card says so in the world's own words. It is one world: a bridge burned in one game is burned in every game."
+        }
+      ]
+    },
+    {
       "version": "2.20.1",
       "date": "2026-10-06",
       "entries": [

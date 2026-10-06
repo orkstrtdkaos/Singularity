@@ -196,7 +196,12 @@ export function fateNews(adopted = [], { roster = [], content = null, worldDay =
 // ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
 
 /** Two FNV-1a passes over a string, as hex — stable across every client and every run. */
-function fnvHex(str) {
+/* ⛔ EXPORTED FOR SNG-679 S2, AND THE REASON MATTERS: a map change's event id is derived from
+ *  `{ key, change, worldDay, by }` so two worlds that recorded the same burning hold ONE event. That is
+ *  `personIdFor`'s rule applied to fabric instead of lives, and it only works if both use the SAME hash.
+ *  ⚠️ A second copy in `mapstate.js` would be a second identity for one event, which is precisely the
+ *  failure "one world" rests on not having. One hash, one definition, imported. */
+export function fnvHex(str) {
   const run = (text) => {
     let h = 2166136261;
     for (let i = 0; i < text.length; i++) { h ^= text.charCodeAt(i); h = Math.imul(h, 16777619); }

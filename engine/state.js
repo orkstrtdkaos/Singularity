@@ -758,7 +758,7 @@ export async function loadContent() {
   // fold the two that mutate already-loaded maps (accords tag abilities, legends hydrate into npcs).
   // Failure semantics preserved exactly: `region` stays fatal; every optional one keeps its fallback.
   const [region, substrate, greaterArcs, sovereignMarksDoc, sovereignSeatsDoc, genNpc, genLoc, genArc, genCreature, originsDoc, backgroundsDoc, regionsDoc,
-         accords, helpDoc, substrateModel, powerSourcesDoc, foothillsDoc, prologue, legendsLoaded, traitReadoutsDoc, traditionAestheticsDoc, frameContentDoc, frameKindsDoc, receiptLineDoc, consumerMapDoc, moveHintsDoc, ribbonCopyDoc, earnedPowerDoc, localLayoutsDoc, theVeilDoc, powerCosmologyDoc, tierSignalsDoc, tierRarityDoc] = await Promise.all([
+         accords, helpDoc, substrateModel, powerSourcesDoc, foothillsDoc, prologue, legendsLoaded, traitReadoutsDoc, traditionAestheticsDoc, frameContentDoc, frameKindsDoc, receiptLineDoc, consumerMapDoc, moveHintsDoc, ribbonCopyDoc, earnedPowerDoc, localLayoutsDoc, locationKindsDoc, theVeilDoc, powerCosmologyDoc, tierSignalsDoc, tierRarityDoc] = await Promise.all([
     fetchJSON("world/regions/valley.json"),
     fetchJSON("content/packs/valley/lore/generative_substrate.json").catch(() => null),           // generation off on a miss
     fetchJSON("content/packs/valley/lore/greater_arcs.json").then(x => x.arcs || []).catch(() => []), // no arc few-shot
@@ -822,6 +822,17 @@ export async function loadContent() {
     // ⛔ R28 — THE AUTHORED GROUND. 18 of 135 places, authored since 2026-08-14 and read by nothing but
     // a test. A miss leaves the other 117 exactly as they are, which is the dominant case.
     fetchJSON("content/packs/core/world/local_layouts.json").catch(() => null),
+    /* ⛔ SNG-679 · `location_kinds.json` WAS NEVER LOADED, AND THREE PIECES OF WORK NEED IT. It has been the
+     * authored home of the pictorial vocabulary since SNG-406 and it reached the engine only through tests
+     * reading the file off disk — so `CONTENT.mapStates` was `undefined` in the browser while every gate that
+     * asked about it passed, because each gate built its own content object straight from the file.
+     * ⚠️ THAT IS THE TRAP THIS PROJECT HAS WRITTEN DOWN TWICE: a gate that assembles its own bag cannot see
+     * a loader that never filled the real one. It was caught by rendering a card against a real save, which
+     * is the only thing that ever catches it.
+     * ⛑ THREE READERS WAIT ON THIS FILE: `mapStates` (SNG-679 S1/S2, the states everything can be in),
+     * `regionDisplay` (SNG-678 L0, which has had no reader since August), and `_siteVocabulary` (the fifteen
+     * site-scale kinds). Loaded whole, so none of them needs a second fetch. */
+    fetchJSON("content/packs/core/world/location_kinds.json").catch(() => null),
     // ⛔ SNG-448 / SNG-446 — THE VEIL AND THE POWER COSMOLOGY, REGISTERED SINCE 08-15 AND LOADED BY NOTHING. Aevi:
     // "we built the Void on them this week" — R40/R41's Sovereigns, R38b's two grounds, the Assay's four conditions,
     // all authored against cosmology the engine had never seen. Same fault as `earned_power_guidance` above,
@@ -841,6 +852,9 @@ export async function loadContent() {
   // ladder rule 250 lines up, where `localLayoutsDoc` does not exist yet — the exact temporal-dead-zone
   // shape the comment above the wave warns about. ⚠️ A fetch with no attach is a download thrown away.
   if (localLayoutsDoc) rules.localLayouts = localLayoutsDoc;
+  // ⛑ the whole doc on `rules`, so `regionDisplay`, `kinds` and `_siteVocabulary` are reachable without a
+  // second fetch; `mapStates` ALSO rides at the top level, because Aevi's S1 spec names `content.mapStates`.
+  if (locationKindsDoc) rules.locationKinds = locationKindsDoc;
   const genSchemas = {}; // SNG-BATCH-9 validation schemas that generate(type, context) authors against
   if (genNpc) genSchemas.npc = genNpc;
   if (genLoc) genSchemas.location = genLoc;
@@ -957,7 +971,7 @@ export async function loadContent() {
   // passes is a dial nobody reads. ⚠ `tierFromRole` returns null without it, so nothing moves until it lands.
   if (tierSignalsDoc && rules?.npcStanding) rules.npcStanding.tierSignals = tierSignalsDoc;
   if (tierRarityDoc && rules?.npcStanding) rules.npcStanding.tierRarity = tierRarityDoc;   // §2.1: the target pyramid, beside the role signals
-  const content = { craftMechanics, damageFamilies, spectrums, rules, foothills: foothillsDoc, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, challengerPools, events, companions, encounters, randomEncounters, lore, region, substrate, greaterArcs, sovereignMarks: sovereignMarksDoc || null, sovereignSeats: sovereignSeatsDoc || null, genSchemas, legends, traditions, traditionIndex, prologue, origins, backgrounds, quests, traditionArcs, npcQuests, regions, accords, helpText, substrateModel, powerSources: powerSourcesDoc || null, romanceGuidance, skillBattle, functionVocabulary, worldClock, schools, classArchetypes, repairPanelManifest, trait_readouts: traitReadoutsDoc?.readouts || traitReadoutsDoc || {}, traditionVisualAesthetics: traditionAestheticsDoc?.traditions || {}, visualAesthetics: traditionAestheticsDoc || {},   /* SNG-435 §C3: the WHOLE doc — `powerSystems` was flattened away at load */  bestiary, powers, tradeCompanies, traditionMotivations, npcInteriority, encounterFrameContent: frameContentDoc || {}, frameKinds: frameKindsDoc?.frameKinds || {}, receiptLine: receiptLineDoc || {}, consumerContract: consumerMapDoc || { contentTypes: {} }, moveHints: moveHintsDoc || { byKind: {}, default: {} }, ribbonCopy: ribbonCopyDoc || {}, earnedPowerGuidance: earnedPowerDoc || { bands: {} }, theVeil: theVeilDoc || null, regionRules: regionsDoc || null,   /* § the dials beside `regions` */ powerCosmology: powerCosmologyDoc || null, startingLocation: valley.startingLocation };
+  const content = { craftMechanics, damageFamilies, spectrums, rules, foothills: foothillsDoc, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, challengerPools, events, companions, encounters, randomEncounters, lore, region, substrate, greaterArcs, sovereignMarks: sovereignMarksDoc || null, sovereignSeats: sovereignSeatsDoc || null, genSchemas, legends, traditions, traditionIndex, prologue, origins, backgrounds, quests, traditionArcs, npcQuests, regions, accords, helpText, substrateModel, powerSources: powerSourcesDoc || null, romanceGuidance, skillBattle, functionVocabulary, worldClock, schools, classArchetypes, repairPanelManifest, trait_readouts: traitReadoutsDoc?.readouts || traitReadoutsDoc || {}, traditionVisualAesthetics: traditionAestheticsDoc?.traditions || {}, visualAesthetics: traditionAestheticsDoc || {},   /* SNG-435 §C3: the WHOLE doc — `powerSystems` was flattened away at load */  bestiary, powers, tradeCompanies, traditionMotivations, npcInteriority, encounterFrameContent: frameContentDoc || {}, frameKinds: frameKindsDoc?.frameKinds || {}, receiptLine: receiptLineDoc || {}, consumerContract: consumerMapDoc || { contentTypes: {} }, moveHints: moveHintsDoc || { byKind: {}, default: {} }, ribbonCopy: ribbonCopyDoc || {}, earnedPowerGuidance: earnedPowerDoc || { bands: {} }, theVeil: theVeilDoc || null, regionRules: regionsDoc || null,   /* § the dials beside `regions` */ powerCosmology: powerCosmologyDoc || null, mapStates: locationKindsDoc?.mapStates || null, locationKinds: locationKindsDoc || null, startingLocation: valley.startingLocation };
   // SNG-022: bring every loaded record up to current (derive missing additive fields,
   // flag dangling cross-refs). In-memory only — Pages files are static.
   try { reconcileContent(content); } catch (err) { console.warn("[loadContent] reconcile skipped:", err.message); }

@@ -1584,6 +1584,46 @@ for (const pack of PACKS) {
       `${baked.size} baked values vs ${evaled.size} evaluated across 4° through the strongest source`);
   }
 
+
+  /* ═════ SNG-679 · `location_kinds.json` MUST ARRIVE THROUGH THE LOADER, NOT OFF THE DISK ═════
+   * ⛔ THIS IS THE GATE MY OTHER TWELVE COULD NOT BE, AND THE DISTINCTION IS THE WHOLE LESSON. I shipped
+   * `engine/mapstate.js` with twelve green checks for the door, the ladder, the fold and the one-world rule —
+   * and every one of them built its own content object straight from the file:
+   *     const contentS = { mapStates: JSON.parse(readFileSync(…)).mapStates };
+   * ⚠️ Meanwhile `CONTENT.mapStates` was `undefined` in the browser, because `location_kinds.json` HAD NEVER
+   * BEEN LOADED AT ALL — authored since SNG-406, reaching the engine only through tests reading the disk. The
+   * card I wired to it rendered nothing, silently, and no gate could see it.
+   * ⛑ A GATE THAT ASSEMBLES ITS OWN BAG CANNOT SEE A LOADER THAT NEVER FILLED THE REAL ONE. So this one asks
+   * the loader the same question every renderer asks, and names the three readers that wait on this file. */
+  {
+    const { loadContentHeadless: loadLK } = await import("./headless_content.mjs");
+    const CLK = await loadLK();
+    check("SNG-679: `mapStates` reaches CONTENT THROUGH THE LOADER — not merely present in the file",
+      !!CLK.mapStates && Array.isArray(CLK.mapStates.ladder) && CLK.mapStates.ladder[0] === "whole"
+      && Array.isArray(CLK.mapStates.changes) && CLK.mapStates.changes.includes("ruined")
+      && !!CLK.mapStates.words,
+      CLK.mapStates ? `ladder ${(CLK.mapStates.ladder || []).join(">")}, ${(CLK.mapStates.changes || []).length} changes`
+        : "⛔ ABSENT — the engine cannot read a state it was never handed");
+    // ⛔ AND THE OTHER TWO READERS THAT WAIT ON THE SAME FILE, so neither is found missing one at a time.
+    check("SNG-679: …and so do `regionDisplay` and `_siteVocabulary` — the other two readers of that file",
+      !!CLK.locationKinds && !!CLK.locationKinds.regionDisplay && !!CLK.locationKinds._siteVocabulary
+      && Object.keys(CLK.locationKinds.regionDisplay).length >= 14
+      && Object.keys(CLK.locationKinds._siteVocabulary).length >= 15,
+      CLK.locationKinds
+        ? `${Object.keys(CLK.locationKinds.regionDisplay || {}).length} regionDisplay rows, ${Object.keys(CLK.locationKinds._siteVocabulary || {}).length} site kinds`
+        : "⛔ ABSENT");
+    // ⛔ AND THE DOOR MUST WORK WITH WHAT THE LOADER GIVES IT, not with a hand-built bag. Same call, real content.
+    const MSL = await import("../engine/mapstate.js");
+    check("SNG-679: …and `applyMapChange` works against the LOADER's content — the same call a channel in play makes",
+      (() => { const c = { id: "probe" };
+        const key = MSL.roadKey("millbrook", "echo_river_crossing");
+        const r = MSL.applyMapChange(c, { key, change: "ruined", by: "the_flood", cause: "the flood" },
+          { content: CLK, worldDay: 40 });
+        if (!r.ok || r.state !== "ruined") return false;
+        const word = MSL.mapStateWord(CLK, "road", "ruined");
+        return typeof word === "string" && word.length > 0; })(),
+      "a door proved only against a hand-built content object is a door proved against nothing a player uses");
+  }
   // ══ SNG-409 §4 — A POLE NEVER READS AS A TOWN.
   // Aevi: "`tier` is SIZE, `role` is FUNCTION, `kind` is SHAPE… a waygate and a village are both
   // `tier: settlement`; they should never share an icon." And the reason it is not decoration:

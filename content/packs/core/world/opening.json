@@ -1,0 +1,391 @@
+{
+ "schemaVersion": 1,
+ "id": "opening",
+ "kind": "opening",
+ "_what": "The game's opening: a short film played before a new character is made, then a coda after creation that lands on the character's own starting place. Erik, 2026-10-06: the Earth at the singularity, nanotechnology growing past counting and used, structured, to work magic and miracles at the cost of energy; the loss of meaning and the foreclosure as the poles developed; the casting off of technology to get back to natural forces and metaphysical powers; the greater battle all of it continues; and you as one of many, pushing on and being pushed by the Arcs of Exesa. Every line in `lines`, `title` and `coda` is player-facing (SYSTEM_SPEC §29.7). Direction for the build is under `_direction` and in po/WORKORDER_aevi_20261006_the_opening.md. SNG-680.",
+ "_canon": "Drawn from, and kept consistent with: world_framing.the_world_is_named (Exesa is Earth worn down, a third smaller, spent by its own people); the_deep_below (the core harvest, the bores capped at the Transition); power_systems.md (magic is structured nanite spent into purpose); EXESA.md I-III and VIII (the Transition made fiction real; the lattice is dormant and has an owner; the Veil; there is no chosen one; hold something open); the_three.md (one argument, paused; reveal order: never name the Three); the_satiated_sovereigns.md (never confirm a Sovereign: none is named or shown here); the_pole_intensity_model and world_framing.bearers_vary (the pure pole is a foreclosure). No date is given for the Transition, on purpose: it did not happen everywhere at once.",
+ "pacing": {
+  "secondsBase": 1.6,
+  "secondsPerWord": 0.28,
+  "fadeSeconds": 1.2,
+  "_why": "A shot holds for base + words x perWord unless it names `seconds`. That reads at an unhurried pace without making a fast reader wait long; a tap moves on at once."
+ },
+ "movements": [
+  {
+   "id": "earth",
+   "name": "Earth",
+   "shots": [
+    {
+     "id": "earth_1",
+     "visual": "earth",
+     "lines": [
+      "This was Earth."
+     ]
+    },
+    {
+     "id": "earth_2",
+     "visual": "earth",
+     "lines": [
+      "For a long time it was enough to be clever."
+     ]
+    },
+    {
+     "id": "earth_3",
+     "visual": "network",
+     "lines": [
+      "Then the minds we made began to make minds.",
+      "We called it the Singularity."
+     ]
+    },
+    {
+     "id": "earth_4",
+     "visual": "network_runaway",
+     "lines": [
+      "In one year they learned more than we had learned in all the years before. In the next, more than that."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "machines",
+   "name": "The small machines",
+   "shots": [
+    {
+     "id": "machines_1",
+     "visual": "swarm",
+     "lines": [
+      "They made machines too small to see, and taught them to make more of themselves."
+     ]
+    },
+    {
+     "id": "machines_2",
+     "visual": "swarm_ordered",
+     "lines": [
+      "Then they taught them to listen."
+     ]
+    },
+    {
+     "id": "machines_3",
+     "visual": "workings",
+     "lines": [
+      "A word could raise a wall. A hand held out could close a wound. Light came when it was asked for."
+     ]
+    },
+    {
+     "id": "machines_4",
+     "visual": "workings",
+     "lines": [
+      "We called it engineering for as long as we could bear to.",
+      "Then we called it what it looked like: magic. Miracles."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cost",
+   "name": "The cost",
+   "shots": [
+    {
+     "id": "cost_1",
+     "visual": "drain",
+     "lines": [
+      "Every miracle was paid for. Not in faith. In power."
+     ]
+    },
+    {
+     "id": "cost_2",
+     "visual": "drain",
+     "lines": [
+      "When the sun was not enough, we spent the land. When the land was not enough, we went down."
+     ]
+    },
+    {
+     "id": "cost_3",
+     "visual": "bores",
+     "lines": [
+      "We sank bores to the heart of the world and drew it up as fire, and as the stuff our miracles were made of."
+     ]
+    },
+    {
+     "id": "cost_4",
+     "visual": "shrink",
+     "lines": [
+      "Nothing ate the world. We spent it, one working at a time, until a third of it was gone."
+     ]
+    },
+    {
+     "id": "cost_5",
+     "visual": "name_wears",
+     "seconds": 7,
+     "lines": [
+      "We named it again, for what it had become."
+     ],
+     "nameFrom": "EARTH",
+     "nameTo": "EXESA",
+     "after": [
+      "Exesa. Eaten hollow, from within."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "poles",
+   "name": "The poles",
+   "shots": [
+    {
+     "id": "poles_1",
+     "visual": "meaning_fades",
+     "lines": [
+      "And we changed with it. When anything can be had, nothing has to mean anything."
+     ]
+    },
+    {
+     "id": "poles_2",
+     "visual": "poles_ignite",
+     "lines": [
+      "People went looking for one thing that still would. When they found it, they wanted only that."
+     ]
+    },
+    {
+     "id": "poles_3",
+     "visual": "poles_pull",
+     "lines": [
+      "Order, until nothing moved. Light, until nothing was hidden. Mind, until no one needed a body."
+     ]
+    },
+    {
+     "id": "poles_4",
+     "visual": "poles_pull",
+     "lines": [
+      "Every people leaned toward its own pole, and leaned, and leaned. At the far end of every leaning a door shuts, and nothing comes through it again."
+     ]
+    },
+    {
+     "id": "poles_5",
+     "visual": "middle_closes",
+     "lines": [
+      "The middle, where people argue and trade and marry across, began to close."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "letting_go",
+   "name": "The letting go",
+   "shots": [
+    {
+     "id": "letting_go_1",
+     "visual": "lights_out",
+     "lines": [
+      "So we did the hardest thing a people can do. We put it down."
+     ]
+    },
+    {
+     "id": "letting_go_2",
+     "visual": "lights_out",
+     "lines": [
+      "Not everyone. Not everywhere at once. But enough."
+     ]
+    },
+    {
+     "id": "letting_go_3",
+     "visual": "bores_capped",
+     "lines": [
+      "We capped the bores and let the machines go quiet, and went looking for what had been there before we needed them:"
+     ]
+    },
+    {
+     "id": "letting_go_4",
+     "visual": "natural",
+     "lines": [
+      "the body and the breath; the hand and its years; the long patience of growing things; and whatever answers when a person asks with the whole of themselves."
+     ]
+    },
+    {
+     "id": "letting_go_5",
+     "visual": "standing_up",
+     "lines": [
+      "And the world answered. The things we had believed in stood up and walked.",
+      "Traditions became powers. Stories became places."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "argument",
+   "name": "The older argument",
+   "shots": [
+    {
+     "id": "argument_1",
+     "visual": "lattice",
+     "lines": [
+      "But we were never the first to build here."
+     ]
+    },
+    {
+     "id": "argument_2",
+     "visual": "lattice",
+     "lines": [
+      "Under the ground runs a lattice older than any people, laid in one working by something that did not need to try twice.",
+      "It is not broken. It is dormant, and dormant things have an owner."
+     ]
+    },
+    {
+     "id": "argument_3",
+     "visual": "veil",
+     "lines": [
+      "And where it thins there is the Veil: the shape of something enormous that is no longer here."
+     ]
+    },
+    {
+     "id": "argument_4",
+     "visual": "veil",
+     "lines": [
+      "The old books called the two sides angels and demons. They were wrong about nearly everything but this: it was one argument, and it never ended."
+     ]
+    },
+    {
+     "id": "argument_5",
+     "visual": "pause",
+     "lines": [
+      "It paused. We have been living in the pause."
+     ]
+    },
+    {
+     "id": "argument_6",
+     "visual": "pause",
+     "lines": [
+      "The machines, the miracles, the eating, the leaning, the letting go: all of it was that argument, carried on in smaller hands."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "arcs",
+   "name": "The Arcs",
+   "shots": [
+    {
+     "id": "arcs_1",
+     "visual": "arcs",
+     "lines": [
+      "Now the poles are pulling again. Something under the ground is turning over. Every road is a little longer than it was."
+     ]
+    },
+    {
+     "id": "arcs_2",
+     "visual": "arcs",
+     "lines": [
+      "These are the Arcs of Exesa. They were moving before you came, and they do not wait."
+     ]
+    },
+    {
+     "id": "arcs_3",
+     "visual": "many",
+     "lines": [
+      "No one chose you. No one is waiting for you."
+     ]
+    },
+    {
+     "id": "arcs_4",
+     "visual": "many",
+     "lines": [
+      "There are others out there, hundreds of them, pushing and being pushed. Some are holding the middle open. Some are leaning on the door."
+     ]
+    },
+    {
+     "id": "arcs_5",
+     "visual": "you",
+     "lines": [
+      "You are one of them."
+     ]
+    },
+    {
+     "id": "arcs_6",
+     "visual": "you",
+     "seconds": 4,
+     "lines": [
+      "Hold something open."
+     ]
+    }
+   ]
+  }
+ ],
+ "title": {
+  "line1": "Singularity",
+  "line2": "The Arcs of Exesa",
+  "seconds": 6,
+  "visual": "title"
+ },
+ "begin": "Begin",
+ "coda": {
+  "_what": "Played once, after the character is made and before the first scene. The same globe, now the world as it is: it turns to the character's starting place and zooms to its region. The lines are filled from live data; `{arcFace}` is the publicFace of the current stage of the nearest arc to that place (proximity decides; never the water by default).",
+  "shots": [
+   {
+    "id": "coda_1",
+    "visual": "zoom_to_start",
+    "lines": [
+     "{place}."
+    ]
+   },
+   {
+    "id": "coda_2",
+    "visual": "zoom_to_start",
+    "lines": [
+     "{regionLine}"
+    ]
+   },
+   {
+    "id": "coda_3",
+    "visual": "nearest_arc",
+    "lines": [
+     "{arcFace}"
+    ]
+   },
+   {
+    "id": "coda_4",
+    "visual": "zoom_to_start",
+    "seconds": 3,
+    "lines": [
+     "Begin here."
+    ]
+   }
+  ],
+  "regionLine": "{region}, {days} days outward from the Crossing.",
+  "regionLineAtCrossing": "The Crossing, where no pole wins."
+ },
+ "controls": {
+  "skip": "Skip",
+  "watchAgain": "Watch the opening",
+  "next": "Next"
+ },
+ "visuals": {
+  "_direction": "One globe from the first shot to the last; it is the game's own globe (worldglobe.js) wherever it can be, so the world the player is shown at the end is the world they play in. Each token below names what is on screen. Draw with the game's own palette and type; no faces, no named figures, nothing that confirms a Precursor or a Sovereign.",
+  "earth": "Night. The globe turning, blue oceans, full size; cloud; the lights of cities on the dark side.",
+  "network": "Lines of light run between the cities, faster and finer, until the night side is a net.",
+  "network_runaway": "The net thickens past counting: doubling, then doubling again; it begins to glow on the day side too.",
+  "swarm": "A glitter rises off the net and spreads over the land and sea, too fine to be single things.",
+  "swarm_ordered": "The glitter falls into patterns: grids, rings, the shape of a held hand.",
+  "workings": "Small bright workings bloom across the globe: a wall rising, a wound closing, light poured into a dark valley. Gold.",
+  "drain": "Colour drains from the oceans and the land into the bright points; the workings burn hotter and the world around them greys.",
+  "bores": "Cutaway: shafts of fire driven down into the core. The core's glow is drawn upward through them into the workings above, and the core shrinks.",
+  "shrink": "The globe contracts to two thirds of its size. The coastlines draw in. The old outline stays faint behind it, the size it was.",
+  "name_wears": "The word EARTH over the globe wears letter by letter into EXESA: same shape, worn down. Then the second line.",
+  "meaning_fades": "The workings dim one by one; the people-lights between them thin.",
+  "poles_ignite": "Points of colour wake around the globe, each a pole: order, light, mind, death, life, and the rest. Each brightens.",
+  "poles_pull": "Threads run from the land to the poles and pull; places drift toward their pole and burn purer and paler as they go.",
+  "middle_closes": "A band of mixed, living colour between the poles narrows and greys.",
+  "lights_out": "The glitter falls like ash. The net goes dark, a region at a time, not all at once.",
+  "bores_capped": "In the cutaway the shafts close over. The core is smaller, and still warm.",
+  "natural": "Quiet light returns, not gold: green in the woods, fire in a hearth, breath on cold air, a single figure seated still.",
+  "standing_up": "Out of the land, things stand: a tower that hums, a wood that walks, a city of light, a shape of fire. Silhouettes only.",
+  "lattice": "Through the ground, a lattice of fine lines under every land, one continuous working. It does not move. It is very large.",
+  "veil": "Where the lattice thins, a darkness that is not shadow: an absence in the shape of something enormous. Nothing in it is shown.",
+  "pause": "Lattice and Veil both, still. Over them, the history of the film replays small and fast: the net, the workings, the bores, the ash, the standing up.",
+  "arcs": "The globe as it is now, Exesa, the game's own. Bands of moving light sweep across it: the arcs, each a current going its own way.",
+  "many": "Small lights all over the globe, moving: some with the currents, some against them. In the game these are the real others: the great figures where they are, and other travellers from the shared world.",
+  "you": "One light, unlit until now, takes its colour. The camera holds on it.",
+  "title": "Title over the turning globe.",
+  "zoom_to_start": "Coda: the globe turns to the character's starting place and zooms to its region, the way the world map frames it.",
+  "nearest_arc": "Coda: the nearest arc's current passes through the frame."
+ }
+}

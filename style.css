@@ -278,8 +278,6 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 .npc-group .known-npc { padding-left: 10px; }
 .grow-btn.practiced { background: var(--accent2); width: auto; padding: 0 6px; font-size: 10px; }
 .opt.practiced { border-color: var(--accent2); }
-.map-satellite.visited { fill: var(--accent2); stroke: none; }
-.map-satellite.heard { fill: transparent; stroke: var(--ink-dim); stroke-width: 1.2; }
 .npc-setname { background: none; border: 1px solid var(--border); color: var(--accent2); border-radius: 4px; font-size: 10px; padding: 0 4px; margin-left: 4px; }
 .npc-setname:hover { border-color: var(--accent2); }
 .place-vectors { color: var(--accent2); font-style: italic; font-size: 12px; margin-bottom: 6px; }
@@ -508,39 +506,6 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 .enc-frame-collapse.dim { color: var(--ink-dim); }
 /* ---------- world map ---------- */
 .world-map { width: 100%; background: radial-gradient(ellipse at 50% 40%, #1e2129, var(--bg)); border: 1px solid var(--border); border-radius: 10px; }
-.map-title { fill: var(--accent); font-family: var(--font); font-size: 18px; letter-spacing: 3px; }
-.map-sub { fill: var(--ink-dim); font-family: var(--font-ui); font-size: 11px; }
-.map-edge { stroke: var(--border); stroke-width: 1.5; stroke-dasharray: 4 4; }
-.map-edge.active { stroke: var(--accent2); stroke-dasharray: none; opacity: .7; }
-.map-node { cursor: pointer; }
-.map-node circle { fill: var(--panel2); stroke: var(--ink-dim); stroke-width: 1.5; }
-.map-node circle.hit { fill: transparent; stroke: none; }
-.map-node.here circle:not(.hit) { fill: var(--accent); stroke: var(--accent); }
-.map-node.reachable circle:not(.hit) { stroke: var(--accent2); stroke-width: 2.5; fill: #253038; }
-.map-node:hover circle:not(.hit) { stroke-width: 3.5; }
-.map-node.selected circle:not(.hit) { stroke: var(--accent); stroke-width: 3.5; }
-.map-node.unvisited circle:not(.hit) { opacity: .45; }
-.map-node.unvisited .map-label { opacity: .5; }
-.map-node.danger circle:not(.hit) { stroke: var(--danger); }
-/* SNG-046 Layer 1: iconography, terrain tints, KG overlay */
-.map-icon { font-size: 13px; pointer-events: none; }
-.map-node.unvisited .map-icon { display: none; }
-.map-node.terrain-abstract circle:not(.hit), .map-node.terrain-spiritual circle:not(.hit) { fill: #2b2540; }
-.map-node.terrain-order circle:not(.hit), .map-node.terrain-mechanical circle:not(.hit) { fill: #23303a; }
-.map-node.terrain-chaos circle:not(.hit), .map-node.terrain-churn circle:not(.hit) { fill: #3a2a23; }
-.map-node.terrain-life circle:not(.hit) { fill: #23361f; }
-.map-node.terrain-death circle:not(.hit) { fill: #2a2a2e; }
-.map-node.terrain-light circle:not(.hit) { fill: #3a361f; }
-.map-node.terrain-dark circle:not(.hit) { fill: #1e2026; }
-.map-kg { cursor: pointer; }
-.map-kg circle { fill: var(--accent2); stroke: #14110c; stroke-width: 1; }
-.map-kg.heard circle { fill: transparent; stroke: var(--accent2); stroke-dasharray: 2 2; }
-.map-kg-label { font-family: var(--font-ui); font-size: 9px; fill: var(--accent2); pointer-events: none; }
-.map-kg.heard .map-kg-label { opacity: .6; }
-/* SNG-083 rumours — heard-of threads (a dimmed diamond where they live) */
-.map-kg rect { fill: var(--accent2); stroke: #14110c; stroke-width: 1; }
-.map-kg.rumour rect { fill: transparent; stroke: #c9a24a; stroke-dasharray: 2 2; }
-.map-kg.rumour .map-kg-label { fill: #c9a24a; opacity: .7; }
 /* SNG-047 skill sidebar grouping */
 .skill-group { margin-bottom: 4px; }
 .skill-group > summary { cursor: pointer; font-family: var(--font-ui); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--accent2); padding: 3px 0; }
@@ -915,14 +880,6 @@ img[data-lightbox] { cursor: zoom-in; }
 .precursor-mark { fill: var(--accent); font-size: 8px; pointer-events: none; text-anchor: middle; }
 .precursor-mark.open { font-size: 9px; }
 .precursor-seal-note { font-family: var(--font-ui); font-size: 12px; color: var(--ink-dim); border-left: 3px solid var(--accent); padding: 6px 10px; margin-top: 6px; background: rgba(212,162,74,0.08); border-radius: 0 6px 6px 0; }
-/* SNG-082 real terrain on the world map */
-.map-terrain { pointer-events: none; }
-.map-region { fill-opacity: .5; stroke-width: 2; stroke-opacity: .55; }
-.map-region.expanding { stroke-dasharray: 6 4; stroke-width: 2.5; stroke-opacity: .85; }
-.map-region.wrong-noneuclid { stroke-dasharray: 1 6; transform-origin: center; }   /* resists mapping */
-.map-region.wrong-lying { stroke-dasharray: 10 3 3 3; stroke-opacity: .8; }          /* doubled, doesn't close */
-.map-region.wrong-uncertain { stroke-opacity: .3; stroke-dasharray: 2 8; }           /* loses confidence */
-.map-region-label { font-family: var(--font-ui); font-size: 10px; letter-spacing: .5px; opacity: .75; pointer-events: none; }
 /* SNG-207b: the author god-mode panel */
 .author-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
 .author-row label { flex: 0 0 150px; font-size: 13px; color: var(--ink-dim); }
@@ -949,12 +906,7 @@ img[data-lightbox] { cursor: zoom-in; }
 .world-arc.receded .wat-pip.on { background: var(--accent2, #6a8caf); }
 .world-arc.contested .wat-pip.on { background: var(--danger); }
 .world-arc-face { margin: 3px 0 0; font-size: 12.5px; color: var(--ink-dim); font-style: italic; }
-.map-edge.spine { stroke: var(--accent2); stroke-width: 2.5; opacity: .7; }           /* the Axis Gate's twelve roads */
-/* SNG-080 danger, findable on the map (graduated ring + chip) */
-.danger-ring { fill: none; stroke-width: 2; opacity: .85; pointer-events: none; }
-.danger-ring.dl2 { stroke: #c9a24a; }
-.danger-ring.dl3 { stroke: #d47a3a; }
-.danger-ring.dl4 { stroke: var(--danger); stroke-dasharray: 3 3; }
+/* SNG-080 danger, findable on the map — the chip on the place card (the diagram's graduated ring retired at CCODE-647) */
 .danger-chip.dl1 { border-color: #8a8a5a; color: #b7b77a; }
 .danger-chip.dl2 { border-color: #c9a24a; color: #c9a24a; }
 .danger-chip.dl3 { border-color: #d47a3a; color: #d47a3a; }
@@ -962,7 +914,6 @@ img[data-lightbox] { cursor: zoom-in; }
 /* ✅ ERIK 2026-09-26 — the sixth rung. Sixteen places are authored at danger 5 and every one of them drew as a 4,
    so the worst ground in the world looked exactly like ordinary deadly ground. Filled rather than outlined: at this
    rung the chip is the warning, not a label with a border. */
-.danger-ring.dl5 { stroke: var(--danger); stroke-width: 2; stroke-dasharray: 2 2; }
 .danger-chip.dl5 { border-color: var(--danger); background: color-mix(in srgb, var(--danger) 22%, transparent); color: var(--ink); }
 /* SNG-066 feedback */
 .fb-types { display: flex; gap: 8px; flex-wrap: wrap; }

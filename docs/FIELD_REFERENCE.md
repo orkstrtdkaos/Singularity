@@ -375,12 +375,16 @@ The damage families did not, which is why they were dark.**
 | `region_maps.json` | 8 of 38 | ✅ wired — `app.js:8213` |
 | `precursor_lines.json` | 2 blocks | ✅ wired — `networkPaths` |
 | `areas.json` | 11 | ✅ wired — `app.js:8259` |
-| `local_layouts.json` | **18 of 135** | ⛔ **only consumer is `content_ci.mjs`** |
+| `local_layouts.json` | **18 of 135** | ✅ wired — `engine/localmap.js` (CCODE-639, SNG-678 L1: authored is canon, the generator fills the rest) |
 | `scale.json` | 5 constants | ⛔ **zero consumers** |
 
 - ⛔ **`interiorLayout` ([worldmap.js:169](engine/worldmap.js:169)) places children procedurally on rings** —
   even angular spacing, a second ring past eight. **It never opens `local_layouts.json`**, which holds
   measured river bearings, road mileages, relief and uphill direction.
+- ✅ **2026-10-07 (SNG-678, CCODE-639→647): `interiorLayout` and `autoMapPositions` are gone.** The local tier draws
+  `local_layouts.json` as ground (`engine/localmap.js`), the ring and the region SVG diagram are deleted with their parity
+  list in the commits, and **`map.x/y` now has no reader in play** — `coordForGenerated` still mints one for a new place
+  because the location schema asks for it. Retiring the field is content's call.
 - ✅ **2026-09-12 (`§183`, SNG-537 B6a): `scale.json` has its reader** — `milesFor` in `worldmap.js`, shown on the travel card as *(about N
   miles)*, with `scaleAgrees` holding the file's `walkingDaysPerDegree` to canon `300/π` within 1%. The finding as it stood:
 - ⚠️ **`scale.json` was an unbuilt feature, not a wrong constant.** I checked for the hardcoded Earth radius

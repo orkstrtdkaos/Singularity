@@ -48,7 +48,7 @@ import { planPlayerDedup, dedupePlayers, resolvePlayerKey, findProfileByName, re
 import { applyStateOps, describeCorrection, detectAnomalies, anomaliesForGM, repairPanelForGM } from "../engine/corrections.js";
 import { isEventfulTurn, pressureTier, pressureDirective } from "../engine/pacing.js";
 import { revokeAdultGate } from "../engine/playerprofile.js";
-import { autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, convexHull, regionShape, knownOverlay, isPlaceKnown } from "../engine/worldmap.js";
+import { coordForGenerated, knownOverlay, isPlaceKnown } from "../engine/worldmap.js";
 import { loadLegends, tierBirthWeight, tierForArc, legendSurfacing, legendDeploymentForGM, LEGEND_TIER_WEIGHT, legendsForGM } from "../engine/legends.js";
 import { buildTraditionIndex, traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities, isKinAdjacent, kinSecondaryOptions, domainsLegal } from "../engine/traditions.js";
 
@@ -3165,36 +3165,13 @@ check("SNG-126/355: parting stops the benefits (trainerFor/liaison empty) AND KE
   store.clear();
 })();
 
-// --- SNG-046 Layer 1: world-map foundation (auto-position + icons + KG overlay) ---
+// --- SNG-046: a minted place's stable layout coord. ✅ CCODE-647 (SNG-678): the diagram this foundation drew —
+// auto-position, icons, the KG overlay — retired with its helpers; `coordForGenerated` remains because a new place
+// still writes `map` (the location schema asks for one), though nothing draws from it now ---
 (() => {
-  const locs = [
-    { id: "millbrook", map: { x: 200, y: 200 }, connections: ["dock"] },
-    { id: "dock", connections: ["millbrook"] },              // coordless → placed near millbrook
-    { id: "far-remnant", connections: [], regionId: "reach" } // orphan → hash grid
-  ];
-  const pos = autoMapPositions(locs);
-  check("SNG-046: authored coords are preserved exactly", pos.millbrook.x === 200 && pos.millbrook.y === 200);
-  check("SNG-046: a coordless location is placed near a positioned neighbour", pos.dock && Math.hypot(pos.dock.x - 200, pos.dock.y - 200) < 110);
-  check("SNG-046: an orphan location still gets stable coords", Number.isFinite(pos["far-remnant"].x) && Number.isFinite(pos["far-remnant"].y));
-  check("SNG-046: positioning is deterministic (same input → same output)", JSON.stringify(autoMapPositions(locs)) === JSON.stringify(pos));
-
   const c1 = coordForGenerated("new-hollow", { x: 300, y: 300 }, { a: { x: 300, y: 300 } });
   check("SNG-046: a generated location gets stable coords near its parent, not on top of it", Math.hypot(c1.x - 300, c1.y - 300) > 20 && Math.hypot(c1.x - 300, c1.y - 300) < 110);
   check("SNG-046: coordForGenerated is deterministic", JSON.stringify(coordForGenerated("new-hollow", { x: 300, y: 300 }, {})) === JSON.stringify(coordForGenerated("new-hollow", { x: 300, y: 300 }, {})));
-
-  check("SNG-046: tag→icon picks the specific glyph, falls back to a marker", iconForTags(["market"]) === "🏪" && iconForTags(["shrine"]) === "⛩" && iconForTags([]) === "◈");
-  check("SNG-046: terrain tint derives from the dominant pole", terrainClass({ poleIntensity: { abstract: 0.7 } }) === "terrain-abstract" && terrainClass({ poleIntensity: { order: 0.1 } }) === "terrain-neutral");
-
-  // KG overlay: a met person shows solid, a heard-of person dimmed; both near their home node
-  const char = {
-    codex: { topics: { warden: { id: "warden", kind: "person", entityId: "warden", label: "The Warden" }, kesh: { id: "kesh", kind: "person", entityId: "kesh", label: "Kesh" }, mill: { id: "mill", kind: "place", entityId: "millbrook", label: "Millbrook" } } },
-    npcRegistry: { warden: { id: "warden", homeLocation: "millbrook" } }
-  };
-  const npcs = { warden: { id: "warden", homeLocation: "millbrook" }, kesh: { id: "kesh", homeLocation: "millbrook" } };
-  const overlay = kgOverlayEntities(char, pos, npcs);
-  check("SNG-046: KG overlay places person-entities with a resolvable home (place topics excluded)", overlay.length === 2 && overlay.every(e => e.locationId === "millbrook"));
-  check("SNG-046: a met person is discovered (solid), a heard-of one is not", overlay.find(e => e.entityId === "warden").discovered === true && overlay.find(e => e.entityId === "kesh").discovered === false);
-  check("SNG-046: overlay entities carry a codex topicId for click-through", overlay.every(e => !!e.topicId));
 })();
 
 // --- SNG-044: item relevance + bonus-count cap (best tool, not a pile) ---
@@ -4295,16 +4272,6 @@ await (async () => {
   check("SNG-081: legacy string turns pass through unchanged", renderSceneHistory(["an old plain summary"]) === "an old plain summary");
 })();
 
-// --- SNG-082: region terrain hull geometry ---
-(() => {
-  const box = [{ x: 0, y: 0 }, { x: 10, y: 0 }, { x: 10, y: 10 }, { x: 0, y: 10 }, { x: 5, y: 5 }]; // square + interior point
-  const hull = convexHull(box);
-  check("SNG-082: the convex hull drops interior points (a region wraps only its outline)", hull.length === 4 && !hull.some(p => p.x === 5 && p.y === 5));
-  const shape = regionShape(box, 10);
-  check("SNG-082: regionShape pads the hull OUTWARD so terrain wraps the nodes with a margin", shape.length === 4 && shape.every(p => p.x < -1 || p.x > 11 || p.y < -1 || p.y > 11));
-  check("SNG-082: a 1-2 point region has no polygon (a blob is drawn instead)", regionShape([{ x: 1, y: 1 }]) === null && regionShape([{ x: 1, y: 1 }, { x: 2, y: 2 }]) === null);
-})();
-
 // --- SNG-083: "show what you know" — people AND rumours (heard-of things appear, dimmed) ---
 (() => {
   const positions = { millbrook: { x: 100, y: 100 }, the_underlight: { x: 300, y: 200 } };
@@ -4995,7 +4962,7 @@ await (async () => {
     /if \(selfUses > 0\) continue;\s*\/\/ internal helper — LIVE/.test(auditSrc));
   const appSrc12 = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
   check("CCODE-12: renderMap calls the TESTED regionTierNodes instead of an inline duplicate",
-    /const \{ locations: locs, edges: regionEdges \} = regionTierNodes\(/.test(appSrc12) &&
+    /const \{ locations: locs[^}]*\} = regionTierNodes\(CONTENT, character, focusRegion\)/.test(appSrc12) &&
     !/for \(const l of locs\) for \(const c of l\.connections \|\| \[\]\)/.test(appSrc12));
 }
 
@@ -5051,29 +5018,9 @@ await (async () => {
   check("166: a place with nothing recorded inside yields an empty interior, not a crash",
     wm.locationTierNodes(ch, CONTENT, "far_hall").children.length === 0);
 
-  // ⛑ SNG-678: the ring and its `interiorLayout` are gone — the local tier is the canvas (678/L1, L5); the
-  // children it drew are the canvas's sites, gated there
-  const minSep = (pts) => { let m = Infinity; for (let i = 0; i < pts.length; i++) for (let k = i + 1; k < pts.length; k++) m = Math.min(m, Math.hypot(pts[i].x - pts[k].x, pts[i].y - pts[k].y)); return m; };
-  // The line I had to draw: an EXACT tie is data loss (one place is invisible and unclickable) and
-  // must be broken; a NEAR tie only crowds labels, and fixing it would move authored coordinates,
-  // which SNG-046 contracts as exact. Authored geography wins.
-  const nearTie = wm.autoMapPositions([{ id: "a", map: { x: 100, y: 100 } }, { id: "b", map: { x: 118, y: 104 } }]);
-  check("166: NEAR-tied authored coords are left exactly where the author put them (SNG-046 holds)",
-    nearTie.a.x === 100 && nearTie.a.y === 100 && nearTie.b.x === 118 && nearTie.b.y === 104);
-  const exactTie = wm.autoMapPositions([{ id: "a", map: { x: 40, y: 300 } }, { id: "b", map: { x: 40, y: 300 } }]);
-  check("166: an EXACT tie moves only the LATER id — the first authored coord is never touched",
-    exactTie.a.x === 40 && exactTie.a.y === 300 && (exactTie.b.x !== 40 || exactTie.b.y !== 300));
-
-  // the PO-reported collision: two AUTHORED places sharing one coordinate hid each other
-  const collide = wm.autoMapPositions([
-    { id: "ent_deepwood", map: { x: 40, y: 300 } },
-    { id: "the_lampless_market", map: { x: 40, y: 300 } }
-  ]);
-  check("166: two places authored at the SAME coordinate are separated deterministically",
-    `${collide.ent_deepwood.x},${collide.ent_deepwood.y}` !== `${collide.the_lampless_market.x},${collide.the_lampless_market.y}`);
-  check("166: and the separation is stable across renders",
-    JSON.stringify(collide) === JSON.stringify(wm.autoMapPositions([
-      { id: "ent_deepwood", map: { x: 40, y: 300 } }, { id: "the_lampless_market", map: { x: 40, y: 300 } }])));
+  // ⛑ SNG-678: the ring and its `interiorLayout` are gone (CCODE-646), and the region diagram with its
+  // `autoMapPositions` (CCODE-647) — the tie-breaking its layout needed has no subject now. The local tier is the
+  // canvas (678/L1, L5), and a place on the ground is where its worldPos says.
 
   const appSrc166 = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
   check("166: the region tier's count is DERIVED, not the hardcoded '92 places across 24 regions'",
@@ -5326,7 +5273,7 @@ await (async () => {
 {
   const { applyPlaceUpdates, findSubPlaceParent } = await import('../engine/places.js');
   const { CHARACTER_STEPS } = await import('../engine/reconcile.js');
-  const { autoMapPositions } = await import('../engine/worldmap.js');
+  const { regionFaceOf } = await import('../engine/localmap.js');
   const resolveId = (ref, locs) => Object.keys(locs || {}).find(id => id === ref || locs[id]?.name === ref) || null;
   const locs = { millbrook: { id: "millbrook", name: "Millbrook" }, the_inn: { id: "the_inn", name: "The Low Lamp Inn" } };
 
@@ -5352,12 +5299,14 @@ await (async () => {
   check("154: findSubPlaceParent recovers what a promoted place was inside of",
     findSubPlaceParent(c3, "The Low Lamp Inn")?.parentId === "edge" && findSubPlaceParent(c3, "nothing here") === null);
 
-  // the REPORTED map bug: a parentless place hash-grids; with a parent it anchors beside it
-  const far = autoMapPositions([{ id: "edge", map: { x: 700, y: 100 } }, { id: "inn" }]);
-  const near = autoMapPositions([{ id: "edge", map: { x: 700, y: 100 } }, { id: "inn", parentId: "edge" }]);
-  const dist = (a, b) => Math.hypot(a.x - b.x, a.y - b.y);
-  check("154: a place with a parentId is placed BESIDE its parent, not hash-gridded across the map",
-    dist(near.inn, near.edge) < 110 && dist(near.inn, near.edge) < dist(far.inn, far.edge));
+  // the REPORTED map bug: the diagram hash-gridded a parentless place across the map. ✅ CCODE-647: that diagram is
+  // gone; on the ground a promoted place is where it IS (at its building, SNG-396) and `regionFaceOf` folds it INTO
+  // its parent at region scale — suppressed, tallied as the parent's +N, drawn on the parent's local map (678/L0).
+  const edge154 = { id: "edge", worldPos: { colatitude: 40, longitude: 10 } };
+  const near154 = { locations: { edge: edge154, inn: { id: "inn", parentId: "edge", worldPos: { colatitude: 40.1, longitude: 10 } } } };
+  const far154 = { locations: { edge: edge154, inn: { id: "inn", worldPos: { colatitude: 40.1, longitude: 10 } } } };
+  check("154: a place with a parentId belongs to its parent on the ground — folded into it at region scale, never hash-gridded across the map",
+    regionFaceOf("inn", near154).suppressed === true && regionFaceOf("inn", near154).tallyTo === "edge" && regionFaceOf("inn", far154).suppressed === false);
 
   // stage 4 — repair, on the shape of Erik's real save
   const step = CHARACTER_STEPS.find(s => s.id === "place-containment");
@@ -5371,9 +5320,10 @@ await (async () => {
     c4.generated.location["the-low-lamp-inn"].parentId === "edge");
   check("154: repair INVALIDATES the stale coord — parentId alone can't move it, since a stored map wins",
     c4.generated.location["the-low-lamp-inn"].map === undefined);
-  check("154: and it then re-derives beside the parent", (() => {
-    const pos = autoMapPositions([{ id: "edge", map: { x: 700, y: 100 } }, { id: "the-low-lamp-inn", parentId: "edge" }]);
-    return Math.hypot(pos["the-low-lamp-inn"].x - pos.edge.x, pos["the-low-lamp-inn"].y - pos.edge.y) < 110;
+  check("154: and the repaired record then folds into its parent on the ground — the container it regained is what the region map reads", (() => {
+    const inn = c4.generated.location["the-low-lamp-inn"];
+    const view = { locations: { edge: edge154, [inn.id]: { ...inn, worldPos: { ...edge154.worldPos } } } };   // a room is at its building (SNG-396)
+    return regionFaceOf(inn.id, view).suppressed === true && regionFaceOf(inn.id, view).tallyTo === "edge";
   })());
   check("154: repair collapses truncation twins, keeping the FULLER name",
     Object.keys(c4.placeMemory.millbrook.subPlaces).length === 1 &&
@@ -6413,15 +6363,12 @@ await (async () => {
   // mechanism was how that truth happened to be spelled when all three tiers were SVG.
   // ⛔ THE WORLD TIER IS STILL ASSERTED, just against what it actually is — dropping the gate because my
   // change broke it would be exactly the move this suite exists to prevent.
-  // ⚠️ SNG-678 L1 MOVED THE LOCATION TIER ONTO A CANVAS, so the SVG viewport this pinned lives on in
-  // `renderMapLocationRing` — the ring the order keeps for interiors until L5. The location CANVAS is asserted
-  // navigable by its own means (drag, wheel, pinch through `bindGesture`) in the SNG-678 block below, which is
-  // the same re-pointing the world tier got when it became a globe: the invariant, not the mechanism.
-  for (const [fn, label] of [["renderMap(selectedId", "region"]]) {
-    const body = bodyOf(fn);
-    check(`168: the ${label} tier has a viewport group`, /class="graph-vp"/.test(body));
-    check(`168: the ${label} tier wires pan/zoom`, /wireSkillGraphViewport\(\)/.test(body));
-  }
+  // ⚠️ SNG-678 MOVED THE LOCATION TIER ONTO A CANVAS (L1, CCODE-639) AND RETIRED THE REGION DIAGRAM (CCODE-647),
+  // so no tier holds the shared SVG viewport any more: each map canvas is navigable by its own means — drag, wheel
+  // and pinch through `bindGesture` — the same re-pointing the world tier got when it became a globe: the
+  // invariant, not the mechanism. The region's two gates keep their names and ask the ground canvas.
+  check("168: the region tier has a viewport group", /bindGesture\(cv/.test(bodyOf("wireRegionGroundMap")) && /onZoom/.test(bodyOf("wireRegionGroundMap")));
+  check("168: the region tier wires pan/zoom", /wireRegionGroundMap\(selectedId\);/.test(bodyOf("renderMap(selectedId")));
   // ✅ SNG-678: the location tier is a CANVAS and its viewport is the shared gesture — drag pans, wheel and pinch zoom
   check("168: the location tier has a viewport group", /bindGesture\(cv/.test(bodyOf("wireLocalCanvas")) && /onZoom/.test(bodyOf("wireLocalCanvas")));
   check("168: the location tier wires pan/zoom", /_localView\.dx/.test(bodyOf("wireLocalCanvas")) && /paintLocalCanvas\(locationId\)/.test(bodyOf("wireLocalCanvas")));
@@ -6726,11 +6673,16 @@ await (async () => {
   // ⚠️ FOUR, NOT FIVE, SINCE SNG-390: the world tier left the shared SVG viewport for its own canvas,
   // so it no longer declares a surface. The invariant is that every surface USING the shared viewport names
   // itself — the count is a consequence of that, not the point.
-  // ⚠️ THREE SINCE SNG-678: the location tier left the shared SVG viewport for its own canvas (the local map,
-  // with `_localView` and the shared gesture), as the world tier did at SNG-390 — so it no longer declares one.
+  // ⚠️ THREE SINCE SNG-678, TWO SINCE CCODE-647: the location tier and then the region tier left the shared SVG
+  // viewport for their own canvases (`_localView`, `_regionView`, the shared gesture), as the world tier did at
+  // SNG-390. ⛑ THE RULE, NOT THE COUNT — pinned at four, then three, it reddened on every tier that left: every
+  // `wireSkillGraphViewport()` call site declares its surface first, the surfaces are as many as the call sites,
+  // and no tier that paints its own canvas declares one.
+  const vpCalls = [...src.matchAll(/wireSkillGraphViewport\(\);/g)].map(m => m.index);
   check("168: every pan/zoom surface declares which one it is",
-    new Set(surfaces).size === 3 && ["map", "wheel", "graph"].every(x => surfaces.includes(x))
-    && !surfaces.includes("world") && !surfaces.includes("location"));
+    vpCalls.length >= 2 && new Set(surfaces).size === vpCalls.length
+    && vpCalls.every(i => /setGraphSurface\("\w+"\);/.test(src.slice(Math.max(0, i - 300), i)))
+    && !["world", "map", "region", "location"].some(x => surfaces.includes(x)));
 
   // The null-guard is what made one wiring safe to call from five places.
   check("168: the tier-only zoom controls are null-guarded, so the wiring cannot throw elsewhere",
@@ -7602,56 +7554,28 @@ await (async () => {
       && sb385.sourcesHere(sd385 && { id: "x", regionId: "valley", tags: [] } || {}, sd385, {}).some(r => r.id === "nanite" && r.field === "nanite"));
   }
 
-  // ══ SNG-386 — RENDER THE FIELD, NOT THE DOTS. Erik: "can it show colors with density that
-  // represents the power source? so the density of the color becomes more transparent the further from
-  // the source?"
-  //
-  // ⛔ THE SPEC'S OWN METHOD WOULD HAVE DRAWN A BEAUTIFUL LIE, and measuring first is the only reason
-  // it did not ship: §5 said to draw each SOURCE as a radial gradient at its authored `radius`. But a
-  // source's `radiusWorld` (radians on the sphere, what the mechanics use) and its `radius` (legacy map
-  // units) select COMPLETELY DIFFERENT neighbourhoods — by angle a typical source reaches 1 location, by
-  // map radius 8 to 20, and only 1 of 43 agreed. `map.x/y` is an authored layout, not a projection of
-  // `worldPos`, so a circle sized in sphere-radians cannot be drawn in map units without asserting
-  // something false about where power reaches.
+  // ══ SNG-386 — RENDER THE FIELD, NOT THE DOTS. Erik: "can it show colors with density that represents the power
+  // source? so the density of the color becomes more transparent the further from the source?"
+  // ⛔ THE SPEC'S OWN METHOD WOULD HAVE DRAWN A BEAUTIFUL LIE (a source's `radiusWorld` and its map `radius` select
+  // different neighbourhoods — 1 of 43 agreed), so the diagram painted each place's RESOLVED value as a blob and summed.
+  // ✅ CCODE-647 (SNG-678): that diagram is gone, and with it `fieldBlobs`, `fieldAlpha` and the two exclusive per-place
+  // toggles. Erik's ruling — "two fields, two colours, independently togglable … must not render the same", never an
+  // average of two geographies — is asserted where the field is drawn now: on the ground, EVALUATED at every painted
+  // point (`worldField().strengthAt`), one colour and one toggle per source kind.
   {
-    const wm386 = await import("../engine/worldmap.js");
-    const { loadContentHeadless: lch386 } = await import("./headless_content.mjs");
-    const C386 = await lch386();
-    const sb386 = sb;
-    const locs386 = Object.values(C386.locations);
-    const pos386 = wm386.autoMapPositions(locs386);
-    const lat = wm386.fieldBlobs(locs386, pos386, { valueOf: l => (typeof l.substrateDensity === "number" ? l.substrateDensity : null) });
-    const nan = wm386.fieldBlobs(locs386, pos386, { valueOf: l => sb386.naniteAt(l, C386.substrateModel)?.v ?? null });
-    check("386: the field is built from the RESOLVED per-location values, so every placed location contributes",
-      lat.length > 100 && nan.length > 100 && lat.every(b => b.x != null && b.y != null && b.r > 0));
-    // ⚠️ NULL IS UNSURVEYED AND DRAWS NOTHING. Painting a 0 where there is no reading would render
-    // "no power here" over a place nobody has measured.
-    check("386: a location with no reading on this field draws NOTHING, rather than a zero",
-      wm386.fieldBlobs([{ id: "x" }], { x: { x: 10, y: 10 } }, { valueOf: () => null }).length === 0);
-    // ⚠️ THE SPREAD IS DERIVED FROM THE LAYOUT, not hand-picked — a radius chosen to look right on
-    // this map is wrong on the next one. Median nearest-neighbour spacing is what makes blobs meet.
-    const tight = wm386.fieldBlobs([{ id: "a" }, { id: "b" }], { a: { x: 0, y: 0 }, b: { x: 10, y: 0 } }, { valueOf: () => 1 });
-    const wide = wm386.fieldBlobs([{ id: "a" }, { id: "b" }], { a: { x: 0, y: 0 }, b: { x: 200, y: 0 } }, { valueOf: () => 1 });
-    check("386: the falloff radius scales with how far apart the places actually are",
-      tight[0].r < wide[0].r && tight[0].r > 0);
-    // ⛔ THE TWO FIELDS MUST DRAW DIFFERENTLY, which is the whole ask.
-    const heart386 = C386.locations.the_heartroot;
-    const latV = heart386.substrateDensity, nanV = sb386.naniteAt(heart386, C386.substrateModel).v;
-    check("386: the two fields disagree where it matters — the Heartroot is faint on one and strong on the other",
-      wm386.fieldAlpha(latV) < 0.05 && wm386.fieldAlpha(nanV) > 0.3);
-    check("386: alpha is bounded so a saturated plateau stays readable rather than becoming a slab",
-      wm386.fieldAlpha(1) <= 0.55 && wm386.fieldAlpha(5) === wm386.fieldAlpha(1));
-    // Wired, and the two toggles are exclusive — stacking them blends two geographies into a third
-    // colour that is true of neither, which Erik ruled out in the ask itself.
-    const app386 = readFileSync(join(root, "app.js"), "utf8");
-    check("386: both fields are togglable and EXCLUSIVE — never stacked into an average of two geographies",
-      /mapField = mapField === key \? null : key/.test(app386) && /map-field-lat/.test(app386) && /map-field-nan/.test(app386));
-    check("386: …and the layer is actually rendered into the svg, under the terrain",
-      /\$\{fieldLayer\}/.test(app386) && /class="map-field"/.test(app386));
-    // ⚠️ THE SCREEN SAYS WHAT IS ASSERTED. The values are the mechanic; the wash between them is
-    // interpolation, and a picture that does not say so is a claim nobody agreed to.
-    check("386: the caption tells the player the wash is interpolation, not a claim about reach",
-      /interpolation, not a claim about reach/.test(app386));
+    const app386 = readFileSync(join(root, "app.js"), "utf8").replace(/\r\n/g, "\n");
+    const body386 = (fn) => { const a = app386.indexOf("function " + fn); const b = app386.indexOf("\nfunction ", a + 10); return a < 0 ? "" : app386.slice(a, b < 0 ? a + 60000 : b); };
+    const paint386 = body386("paintRegionMap"), map386 = body386("renderMap(selectedId"), panel386 = body386("fieldPanel(");
+    check("386: the two fields are source KINDS on the ground — each its own toggle, evaluated at every painted point, never a per-place blob",
+      /data-fieldkind=/.test(panel386) && /fieldCtl\.kinds\.has\(k\) \? " selected" : ""/.test(panel386)
+      && /for \(const k of fieldCtl\.kinds\) grids\[k\]\[j \* GW \+ i\] = F\.strengthAt\(k, w2\.lat, w2\.lon\);/.test(paint386)
+      && !/fieldBlobs|fieldAlpha|\bmapField\b/.test(app386));
+    check("386: …and each kind keeps its own colour — the lattice and the veil are two lines in two hues, the wild register a scatter, the ordered one a hex lattice — never one hue for 'power'",
+      (() => { const m = paint386.match(/const LINE = \{ precursor: "([^"]+)", veil: "([^"]+)" \}/); return !!m && m[1] !== m[2]; })()
+      && /fieldCtl\.kinds\.has\("wild"\) && lens\.grids\.wild/.test(paint386) && /fieldCtl\.kinds\.has\("nanite"\) && lens\.grids\.nanite/.test(paint386));
+    check("386: the caption says what is asserted — the field is evaluated at every point, and a source turned off re-renders it",
+      /The field over it is EVALUATED at every point, not washed between the places — a source turned off re-renders it/.test(map386)
+      && !/interpolation, not a claim about reach/.test(map386));
   }
 
   // ══ SNG-395 — MILESTONE EFFECTS. The ladder authors 56 milestones and marks 16 ⚑ to mean "this
@@ -24224,6 +24148,18 @@ await (async () => {
     /id="rm-me"/.test(mapR) && /_regionView = \{ \.\.\._regionView, k: 2\.2, cx: mk\.x \/ mw, cy: mk\.y \/ mh \}/.test(mapR) && /blitRegion\(\);/.test(mapR));
   check("678/parity: the ring is gone — no `renderMapLocationRing`, no `localTierIsInterior`, no `interiorLayout` anywhere, and no handler left bound to a node nothing renders",
     !/renderMapLocationRing|localTierIsInterior|interiorLayout|data-mapinner/.test(srcR));
+  // ── part B (CCODE-647): the region SVG diagram itself ──
+  const wmR = readFileSync(join(root, "engine/worldmap.js"), "utf8").replace(/\r\n/g, "\n");
+  check("678/parity: the region diagram is gone — `renderMap` builds no svg, its helpers are deleted from worldmap.js, and no handler is left bound to a node nothing renders",
+    !/<svg/.test(mapR) && !/<\/svg>/.test(mapR)
+    && !/autoMapPositions|regionShape|fieldBlobs|fieldAlpha|terrainClass|iconForTags|kgOverlayEntities|convexHull|layoutCoherence|mapShowSub|data-mapsel|data-kgtopic|gz-me|setGraphSurface\("map"\)/.test(srcR)
+    && !/export function (autoMapPositions|regionShape|fieldBlobs|fieldAlpha|terrainClass|iconForTags|kgOverlayEntities|convexHull|layoutCoherence)\b/.test(wmR));
+  check("678/parity: what the diagram carried in its corner survives as the region's hint — the day, and the Valley's crisis stage, answered or not",
+    /Day \$\{readClock\(character\.clock\)\.day\}/.test(mapR) && /crisisAnswered354 \? "Water Crisis answered" : `Water Crisis stage \$\{stage\}`/.test(mapR));
+  check("678/parity: 'Show what you know' keeps its empty state, written by the painter that knows how many it drew — not by a chrome built before the marks exist",
+    /id="map-kg-hint"/.test(mapR) && /getElementById\("map-kg-hint"\)/.test(paintR) && /kgHint\.textContent = people\.length \?/.test(paintR));
+  check("678/parity: the two field toggles that read nothing on the ground are gone with the diagram — ◈ Field and its source kinds are the one control (386 gates them)",
+    !/map-field-lat|map-field-nan|\bmapField\b/.test(srcR) && /fieldPanel\(regionExtent\(focusRegion/.test(mapR) && /wireFieldPanel\(\(\) => renderMap\(\)\)/.test(mapR));
 }
 
 check("smoke: no checks are stranded after process.exit (dead tests report green forever)", (() => {

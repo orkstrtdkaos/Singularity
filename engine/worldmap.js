@@ -1,86 +1,16 @@
-// worldmap.js — SNG-046 Layer 1: the data-driven map foundation. Pure helpers the renderMap
-// SVG layer composes on top of:
-//   • auto-positioning — every location gets stable coords, even the ones authored without
-//     map.x/y and the BATCH-9 GENERATED locations minted mid-play (so they appear immediately
-//     and never jump between renders).
-//   • iconography — a tag-derived glyph + a disposition tint per place (the illustrated upgrade
-//     over bare circles).
-//   • KG overlay — the codex's known ENTITIES placed near their home node, solid (met) vs
-//     dimmed (only heard of) — the "see the things, not just the places" layer.
-// All deterministic + headless-testable; no DOM, no rng.
+// worldmap.js — the map's pure geometry, headless-testable: no DOM, no rng.
+//   • the three tiers' node lists (`worldTierNodes`, `regionTierNodes`, `locationTierNodes`) and what is KNOWN
+//     (`isPlaceKnown`; `knownOverlay` — people met and threads heard of, placed at their homes);
+//   • world positions and distances (`worldPosForGenerated`, `geodesic`, `walkingDays`, `milesFor`, the bearings);
+//   • label and card placement (`placeLabels`, `openingFrame`, `placeCardBox`) and the paths a journey draws.
+// ✅ SNG-678 (CCODE-647): the SVG diagram this file was written for (SNG-046) is retired — its auto-positioning,
+// hull, tint, icon and field-wash helpers went with it. `coordForGenerated` remains: a minted place still gets a
+// stable `map` coord because the location schema asks for one, though nothing draws from it now; retiring the
+// field is content's call.
 
 /** Stable integer hash of a string (deterministic — same id always lands the same place). */
 function hashN(s) { let h = 0; for (const ch of String(s || "")) h = ((h << 5) - h + ch.charCodeAt(0)) | 0; return Math.abs(h); }
 function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
-
-/** Deterministic coords for every location. Authored map.x/y are kept as-is; a location lacking
- *  them is placed near a positioned neighbour (offset by an id-hash angle/distance so it's stable
- *  and doesn't overlap), and any leftover lands on a hash grid. Same input → same output, so a
- *  place never moves between renders. Returns { [id]: {x,y} }. */
-export function autoMapPositions(locations, { width = 800, height = 440, margin = 40 } = {}) {
-  const out = {};
-  const need = [];
-  for (const l of locations || []) {
-    // ⛔ SNG-387 §1a — `map.x/y` IS A RENDER LAYOUT, NEVER A GEOGRAPHY. Nothing may read it for
-    // position, distance, bearing, adjacency or containment; `worldPos` is the sole positioning authority
-    // and a gate in content_ci enforces that this file is its only consumer.
-    // ⚠️ DEMOTED, NOT DELETED, and Aevi reversed her own call to say so: the schematic predicts the
-    // substrate field BETTER than the projection does (correlation 0.228 against 0.130), so it earns its
-    // place as the base for the SNG-386 field wash even though it says nothing true about where anywhere is.
-    if (l.map && Number.isFinite(l.map.x) && Number.isFinite(l.map.y)) out[l.id] = { x: l.map.x, y: l.map.y };
-    else need.push(l);
-  }
-  // resolve coordless locations relative to a positioned neighbour, a few passes so chains fill in.
-  // SNG-154: CONTAINMENT ANCHORS FIRST. A place promoted out of another place (the Low Lamp Inn was
-  // a sub-place of the Edge District before a generateRequest made it a location) belongs NEXT TO
-  // its parent. Without parentId the only fallbacks were a connected neighbour or — failing that —
-  // a hash grid, which is literally why the Inn rendered on the far side of the map. `parentId`
-  // outranks `connections` because containment is a stronger claim about where a place IS.
-  for (let pass = 0; pass < 4 && need.length; pass++) {
-    for (let i = need.length - 1; i >= 0; i--) {
-      const l = need[i];
-      const anchor = (l.parentId && out[l.parentId]) || (l.connections || []).map(c => out[c]).find(Boolean);
-      if (!anchor) continue;
-      const h = hashN(l.id);
-      const ang = (h % 360) * Math.PI / 180;
-      const dist = 55 + (h % 45);
-      out[l.id] = { x: clamp(anchor.x + Math.cos(ang) * dist, margin, width - margin), y: clamp(anchor.y + Math.sin(ang) * dist, margin, height - margin) };
-      need.splice(i, 1);
-    }
-  }
-  // anything still unplaced (no positioned neighbour): a deterministic hash grid
-  for (const l of need) {
-    const h = hashN(l.id);
-    out[l.id] = { x: margin + (h % (width - 2 * margin)), y: margin + (Math.floor(h / 97) % (height - 2 * margin)) };
-  }
-  // CCODE-11 (PO finding): two AUTHORED locations can share an exact coordinate — ent_deepwood and
-  // the_lampless_market both sit at (40,300) — and one then hides the other completely. Separate
-  // them deterministically (never randomly: the map must look the same on every render) by nudging
-  // later ids onto a small ring around the shared point. Authored geography is respected; only an
-  // exact tie is broken.
-  // An EXACT tie is DATA LOSS — one place renders invisibly on top of another and cannot be
-  // clicked at all. Break it. A NEAR tie only crowds two labels, and separating those would mean
-  // MOVING AUTHORED COORDINATES, which SNG-046 contracts as preserved exactly: an author who
-  // places a location at (x,y) means it. (I first pushed near ties apart too and it broke that
-  // contract — the existing test caught it. Authored geography wins; a crowded label is the
-  // cheaper cost, and the tier split already removed most of the crowding.)
-  // Only the LATER id in sort order moves, so the first authored coord is always untouched.
-  const seenAt = new Map();
-  for (const id of Object.keys(out).sort()) {
-    const key = `${Math.round(out[id].x)},${Math.round(out[id].y)}`;
-    const prior = seenAt.get(key) || 0;
-    if (prior > 0) {
-      const ang = (hashN(id) % 360) * Math.PI / 180;
-      const r = 26 + prior * 10;
-      out[id] = {
-        x: clamp(out[id].x + Math.cos(ang) * r, margin, width - margin),
-        y: clamp(out[id].y + Math.sin(ang) * r, margin, height - margin)
-      };
-    }
-    seenAt.set(key, prior + 1);
-  }
-  return out;
-}
 
 // ---------- SNG-154 stage 6: THREE TIERS ----------
 // Zoom is NAVIGATION BETWEEN TIERS, not a scale slider. 95 locations on one 800×440 canvas is the
@@ -188,89 +118,6 @@ export function coordForGenerated(newId, parentMap, existing = {}, { width = 800
     if (!taken.some(t => Math.abs(t.x - x) < 24 && Math.abs(t.y - y) < 24)) return { x, y };
   }
   return { x: clamp(px + 30, margin, width - margin), y: clamp(py + 20, margin, height - margin) };
-}
-
-// ---------- iconography ----------
-
-// Tag → glyph, most-specific first (the first matching tag wins). Emoji reads at any zoom.
-const TAG_ICON = [
-  [/shrine|sacred|temple|altar/, "⛩"], [/market|stall|bazaar|trade/, "🏪"],
-  [/ruin|remnant|precursor|old.?road/, "🏛"], [/water|river|dock|well|spring/, "💧"],
-  [/forge|smith|workshop|craft/, "⚒"], [/forest|wild|grove|wood/, "🌲"],
-  [/mountain|height|peak|pass|cliff/, "⛰"], [/farm|field|orchard|mill/, "🌾"],
-  [/settle|town|village|hamlet|home/, "🏘"], [/cave|hollow|deep|under/, "🕳"],
-  [/churn|unstable|storm|char/, "🌀"], [/waystation|inn|camp|rest/, "🏕"]
-];
-
-/** A glyph for a place from its tags (falls back to a generic marker). Pure. */
-export function iconForTags(tags = []) {
-  const hay = (tags || []).join(" ").toLowerCase();
-  for (const [re, glyph] of TAG_ICON) if (re.test(hay)) return glyph;
-  return "◈";
-}
-
-/** SNG-082: convex hull (Andrew's monotone chain) of a set of {x,y} points, CCW. Pure. */
-export function convexHull(points = []) {
-  const pts = points.filter(p => p && Number.isFinite(p.x) && Number.isFinite(p.y))
-    .map(p => ({ x: p.x, y: p.y })).sort((a, b) => a.x - b.x || a.y - b.y);
-  if (pts.length <= 2) return pts;
-  const cross = (o, a, b) => (a.x - o.x) * (b.y - o.y) - (a.y - o.y) * (b.x - o.x);
-  const lower = [];
-  for (const p of pts) { while (lower.length >= 2 && cross(lower[lower.length - 2], lower[lower.length - 1], p) <= 0) lower.pop(); lower.push(p); }
-  const upper = [];
-  for (let i = pts.length - 1; i >= 0; i--) { const p = pts[i]; while (upper.length >= 2 && cross(upper[upper.length - 2], upper[upper.length - 1], p) <= 0) upper.pop(); upper.push(p); }
-  return lower.slice(0, -1).concat(upper.slice(0, -1));
-}
-
-/** A region's terrain SHAPE for the map: the hull of its locations, each vertex pushed OUTWARD from
- *  the centroid by `pad` so the fill wraps the nodes with a soft margin. Returns an array of {x,y}
- *  (a polygon); a 1–2 point region returns null (draw a blob at the point instead). Pure. */
-export function regionShape(points = [], pad = 30) {
-  const hull = convexHull(points);
-  if (hull.length < 3) return null;
-  const cx = hull.reduce((s, p) => s + p.x, 0) / hull.length;
-  const cy = hull.reduce((s, p) => s + p.y, 0) / hull.length;
-  return hull.map(p => { const dx = p.x - cx, dy = p.y - cy, d = Math.hypot(dx, dy) || 1; return { x: p.x + dx / d * pad, y: p.y + dy / d * pad }; });
-}
-
-/** A disposition tint class from a place's dominant pole — the terrain fill hint. Pure. */
-export function terrainClass(location = {}) {
-  const pi = location.poleIntensity || {};
-  let top = null, mag = 0;
-  for (const [pole, v] of Object.entries(pi)) if (Math.abs(v) > mag) { mag = Math.abs(v); top = pole; }
-  if (!top || mag < 0.25) return "terrain-neutral";
-  return `terrain-${String(top).replace(/[^a-z]/gi, "").toLowerCase()}`;
-}
-
-// ---------- KG overlay ----------
-
-/** The known ENTITIES to overlay on the map: codex person-topics placed near their NPC's home
- *  location. `met` (in the npc registry) → discovered (solid); codex-only → heard (dimmed).
- *  positions = autoMapPositions output; npcs = { id: record } (authored + generated). Pure.
- *  Returns [{ entityId, label, x, y, discovered, locationId }]. */
-export function kgOverlayEntities(character, positions, npcs = {}) {
-  const topics = character?.codex?.topics || {};
-  const registry = character?.npcRegistry || {};
-  const out = [];
-  const placed = new Set();
-  for (const t of Object.values(topics)) {
-    if (t.kind !== "person" || !t.entityId) continue;
-    const npc = npcs[t.entityId] || registry[t.entityId];
-    const homeId = npc?.homeLocation;
-    const home = homeId && positions[homeId];
-    if (!home) continue;
-    if (placed.has(t.entityId)) continue;
-    placed.add(t.entityId);
-    // fan multiple entities around the same node so they don't stack
-    const n = out.filter(e => e.locationId === homeId).length;
-    const ang = (n * 55 + (hashN(t.entityId) % 40)) * Math.PI / 180;
-    out.push({
-      entityId: t.entityId, topicId: t.id || t.entityId, label: t.label || t.entityId,
-      x: home.x + Math.cos(ang) * 26, y: home.y + Math.sin(ang) * 26,
-      discovered: !!registry[t.entityId], locationId: homeId
-    });
-  }
-  return out;
 }
 
 /** SNG-117: a place is KNOWN — its name surfaces + it becomes a travel target — by ANY means, not just by
@@ -640,87 +487,6 @@ export function milesFor(days, scale) {
 export function scaleAgrees(scale, { tolerance = 0.01 } = {}) {
   const canon = 300 / 180, filed = Number(scale?.walkingDaysPerDegree);
   return Number.isFinite(filed) && Math.abs(filed - canon) / canon <= tolerance;
-}
-
-/* ═══ SNG-386 — RENDER THE FIELD, NOT THE DOTS. Erik: "can it show colors with density that represents
- * the power source? so the density of the color becomes more transparent the further from the source?"
- *
- * ⛔ THE SPEC SAID TO DRAW EACH SOURCE AS A RADIAL GRADIENT AT ITS AUTHORED `radius`, AND THAT WOULD HAVE
- * BEEN A BEAUTIFUL LIE. Measured: a source's `radiusWorld` (radians on the sphere, what the mechanics use)
- * and its `radius` (legacy map units) select COMPLETELY DIFFERENT neighbourhoods — by angle a typical
- * source reaches 1 location, by map radius 8 to 20. Only 1 of 43 sources agreed between the two.
- * `map.x/y` is an authored 2D layout, NOT a projection of `worldPos`, so a circle sized in sphere-radians
- * cannot be drawn in map units without asserting something false about where power reaches.
- *
- * ⚠️ SO THE FIELD IS DRAWN FROM THE RESOLVED VALUES, WHICH ARE EXACT. Every location already carries the
- * true field value at its own point (`resolveSubstrateField` computed it, and the nanite field resolves per
- * region). Each dot contributes a soft radial falloff and they sum — an interpolation BETWEEN known-true
- * points rather than a claim about radii. The values are the mechanic; the smoothing is presentation, and
- * that distinction is the whole reason this is honest.
- *
- * ⚠️ AND IT ONLY WORKS BECAUSE THE MAP LAYOUT IS SPATIALLY COHERENT WITH THE FIELD — checked, not assumed:
- * mean |density difference| climbs monotonically with map distance (0.199 within 40 units, 0.367 beyond
- * 400). Had the layout been unrelated to the field, an interpolation would have rendered noise and I would
- * have had to say the map cannot show this yet.
- */
-
-/** One drawable blob per location that has a value on this field. Pure — returns geometry and alpha, never
- *  markup, so the renderer owns the palette and this stays testable.
- *
- *  `spread` is the falloff radius in MAP UNITS, defaulted from the typical spacing between locations so the
- *  blobs overlap into a field instead of reading as 118 separate discs. */
-export function fieldBlobs(locations, pos, { valueOf, spread = null, min = 0.02 } = {}) {
-  const pts = [];
-  for (const l of locations || []) {
-    const P = pos?.[l.id];
-    if (!P) continue;
-    const v = valueOf ? valueOf(l) : null;
-    if (typeof v !== "number" || !Number.isFinite(v)) continue;   // ⚠️ null is UNSURVEYED — draw nothing
-    pts.push({ id: l.id, x: P.x, y: P.y, v });
-  }
-  if (!pts.length) return [];
-  // ⚠️ SPREAD IS DERIVED FROM THE LAYOUT, not chosen: the median nearest-neighbour distance is what makes
-  // adjacent blobs just touch. A hand-picked radius looks right on this map and wrong on the next one.
-  let r = spread;
-  if (r == null) {
-    const nn = pts.map(a => Math.min(...pts.filter(b => b !== a).map(b => Math.hypot(a.x - b.x, a.y - b.y))));
-    nn.sort((a, b) => a - b);
-    r = (nn[Math.floor(nn.length / 2)] || 60) * 1.9;
-  }
-  return pts.filter(p => Math.abs(p.v) >= min).map(p => ({ ...p, r }));
-}
-
-/** The alpha a blob should paint at its centre — the value, clamped, with a ceiling so a saturated plateau
- *  stays readable rather than becoming a solid slab. */
-export function fieldAlpha(v, { max = 0.55 } = {}) {
-  return Math.max(0, Math.min(max, Math.abs(Number(v) || 0) * max));
-}
-
-/** ⛔ SNG-387 §1a — THE COHERENCE GATE, which is the fix for what the demotion was trying to prevent.
- *  The Hollowing sat 264 walking days from its own region and the schematic made it look fine.
- *
- *  ⚠️ IT COMPARES RANK ORDERS, NOT DISTANCES. The schematic is not a projection and never will be, so
- *  requiring agreement on distance would fail everywhere and teach everyone to ignore it. What must hold is
- *  weaker and sufficient: a place's nearest neighbours ON SCREEN should overlap its nearest neighbours IN
- *  THE WORLD. That is loose enough not to fire on the waypoint ring and tight enough to catch a location
- *  laid out in the wrong half of the world.
- *
- *  Returns one row per location: { id, overlap } — the share of its k geodesic-nearest that are also among
- *  its k screen-nearest. Pure; the caller decides the threshold. */
-export function layoutCoherence(locations, pos, { k = 6 } = {}) {
-  const placed = (locations || []).filter(l => l && l.id && pos?.[l.id] && worldVector(l));
-  const geo = (a, b) => {
-    const va = worldVector(a), vb = worldVector(b);
-    return Math.acos(Math.max(-1, Math.min(1, va.x * vb.x + va.y * vb.y + va.z * vb.z)));
-  };
-  const nearestBy = (target, metric) => placed.filter(l => l !== target)
-    .map(l => ({ id: l.id, d: metric(target, l) })).sort((a, b) => a.d - b.d).slice(0, k).map(x => x.id);
-  return placed.map(t => {
-    const byWorld = new Set(nearestBy(t, geo));
-    const byScreen = nearestBy(t, (a, b) => Math.hypot(pos[a.id].x - pos[b.id].x, pos[a.id].y - pos[b.id].y));
-    const hit = byScreen.filter(id => byWorld.has(id)).length;
-    return { id: t.id, overlap: byWorld.size ? hit / byWorld.size : 1 };
-  });
 }
 
 /* ═════ SNG-677 P2 · WHERE THE PLACE CARD GOES, AS ARITHMETIC ═════

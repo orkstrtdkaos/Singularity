@@ -35625,14 +35625,14 @@ console.log("\n── §411 · the ground map answers the pointer ──");
    * condition — which it had to: ✅ ERIK, *"when I click a place on the region map it pops up information
    * then disappears after a second."* A selection now OUTLIVES its card (P4 keeps it on close), so "is this
    * place selected" stopped being the right question and "is this place's card in front of me" became it.
-   * ⛑ THE RULE IS THE DOOR, not the expression: both the picture's pick and the diagram's node reach
+   * ⛑ THE RULE IS THE DOOR, not the expression: the picture's pick (and the diagram's node, until CCODE-647) reaches
    * `renderMap`, and they reach it through the SAME call rather than two copies of a condition. Pinning the
    * condition is how a gate reddens when the thing it protects gets fixed. */
-  check("§411: ⛔ …and a pick routes to `renderMap`, the SAME door the schematic's nodes use",
+  check("§411: ⛔ …and a pick routes to `renderMap`, the one door — the schematic's nodes used it too, until CCODE-647 retired them",
     /pickPlace\(hit\.id\)/.test(wire411)                       // the canvas pick
     && /const pickPlace = \(id\) => renderMap\(/.test(wire411)  // …and the one door it goes through
     && (wire411.match(/pickPlace\(hit\.id\)/g) || []).length === 2   // click AND tap, not one of them
-    && /data-mapsel/.test(A411));
+    && !/data-mapsel/.test(A411));   // ✅ CCODE-647: the schematic's nodes are gone — the door stands alone
   // ⚠️ CSS pixels are not canvas pixels, and this is the bug that survives a glance: the click lands, just not
   // where you clicked. The canvas may now be laid out wider than its backing store, so the scale is not optional.
   // ⛑ THE FRAME IS NAMED, NOT PINNED (re-pointed 2026-10-04). This read `cv.width / r.width` literally, and

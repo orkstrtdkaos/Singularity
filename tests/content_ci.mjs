@@ -581,8 +581,9 @@ for (const pack of PACKS) {
       .flatMap(d => (d.locations ? Object.values(d.locations) : [d])).filter(l => l && l.id);
   } catch { }
 
-  // ⛔ ONE CONSUMER ONLY. `autoMapPositions` turns the layout into screen coordinates; anything else
-  // reading `map.x` is treating a schematic as a map of the world, which is the whole defect.
+  // ⛔ ONE CONSUMER ONLY. `coordForGenerated` mints a layout coord for a new place (the diagram that drew from
+  // it retired at CCODE-647); anything else reading `map.x` is treating a schematic as a map of the world, which
+  // is the whole defect.
   const readers = [];
   for (const f of [...readdirSync(join(root, "engine")).filter(x => x.endsWith(".js")).map(x => `engine/${x}`), "app.js"]) {
     if (f === "engine/worldmap.js") continue;                       // the renderer's own layout function

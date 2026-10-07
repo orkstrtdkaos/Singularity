@@ -1758,11 +1758,12 @@ export const CHARACTER_STEPS = [
             const hit = subs[slug] || Object.values(subs).find(sp => String(sp?.name || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "") === slug);
             if (hit) {
               rec.parentId = locId; rec._promotedFromSubPlace = true; linked++;
-              // Relinking the parent is not enough on its own: `autoMapPositions` prefers a STORED
-              // `map` coord over any anchor, so the hash-gridded coordinate the place was born with
-              // would keep it across the map even once it knows its container. `map` is a DERIVED
-              // CACHE of position, not the truth — so invalidate it and let it re-derive beside the
-              // parent. (Caught in the browser: parentId was right and the Inn was still 416px away.)
+              // Relinking the parent is not enough on its own: the diagram's layout preferred a STORED `map`
+              // coord over any anchor, so the hash-gridded coordinate the place was born with kept it across
+              // the map even once it knew its container. `map` is a DERIVED CACHE of position, not the truth —
+              // so it is still invalidated here. (Caught in the browser: parentId was right and the Inn was
+              // still 416px away.) ✅ CCODE-647: that diagram is gone and nothing draws from `map` any more; on
+              // the ground a place is where its `worldPos` says, and a promoted one folds into its parent.
               delete rec.map;
               break;
             }

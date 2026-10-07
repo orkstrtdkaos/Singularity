@@ -70,7 +70,7 @@ import { makeInfluence } from "./engine/influence.js";
 import { glyphFor, drawGlyph } from "./engine/mapicons.mjs";
 import { localLayoutFor, localFrame, localModel, paintLocalMap, enlargementFor, paintEnlargement, regionFaceOf, levelsOf, levelWord, isCityPlace, cityPlacesOf } from "./engine/localmap.js";   // SNG-678 L0/L1/L2/L4/L5
 import { bakeEarthRGB, earthCityLights } from "./engine/earth.js";   // ⛔ SNG-680: the first world the film shows IS Earth   // SNG-409 §4: a pole must never read as a town   // SNG-390: the globe, read-only
-import { walkingDays, milesFor, worldPosForGenerated, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, fieldBlobs, fieldAlpha, placeLabels } from "./engine/worldmap.js";
+import { walkingDays, milesFor, worldPosForGenerated, coordForGenerated, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, placeLabels } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
 import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities, isKinAdjacent, kinSecondaryOptions, domainsLegal, domainOf, domainOfTradition, sectOf } from "./engine/traditions.js";
 import { sheetFor as personSheetFor, personRecordFor, battleSkillsFor, playerSheetFor } from "./engine/npcsheet.js";  // the person-keyed sheet, and SNG-571's player-facing one
@@ -208,7 +208,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.22.3";
+const APP_VERSION = "2.22.4";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -939,11 +939,6 @@ let sharedCanonRead = false; // ⛔ CCODE-422: has THIS PAGE read the shared wor
 let sharedCreaturePool = [];
 let sceneArtCount = 0;   // SNG-035: moment-art mints this scene (clamp ~1/scene)
 let mapShowKG = false;   // SNG-046: knowledge-overlay toggle on the world map
-// ⛔ SNG-386: TWO FIELDS, TWO TOGGLES. Erik: "two fields, two colours, independently togglable — a
-// Precursor vault and a wild bloom must not render the same." One switch showing "power" would merge two
-// geographies into an average true of neither.
-let mapField = null;     // null | "substrate" | "nanite"
-let mapShowSub = false;  // SNG-082b: sub-place satellites toggle (off by default — the clean look)
 let mapShowLinks = false; // ✅ SNG-678: "Connections" — the threads between places, on the ground, off by default
 let _lightboxWired = false; // SNG-053: one-time lightbox click delegation (referenced by boot)
 let tuneOpen = null;             // SNG-015 Part B: index of the choice whose tune panel is open
@@ -16780,6 +16775,12 @@ function paintRegionMap(regionId) {
       _regionPeople.push({ x: e.x, y: e.y, label: e.label, topicId: e.topicId || null, kind: e.kind, heard });
     }
     ctx.restore();
+    // ⛑ THE EMPTY STATE IS WRITTEN BY THE PAINTER THAT KNOWS HOW MANY IT DREW. The chrome is built before the marks
+    // exist, so it leaves a slot; the diagram's hint sat in the chrome and read a list the chrome had laid out itself.
+    if (typeof document !== "undefined") {
+      const kgHint = document.getElementById("map-kg-hint");
+      if (kgHint) kgHint.textContent = people.length ? "◆ dimmed = heard of · ● solid = met" : "Nobody you've met or heard of lives in this region yet. Play on.";
+    }
   }
   flushLabels();
   const hereMark = marks416.find(m => m.id === here);
@@ -16893,8 +16894,8 @@ function paintRegionMap(regionId) {
  *  another's click radius, 11 of 17 in the Valley, in clusters up to seven. Nearest-wins on that would hand back
  *  whichever place the cursor happened to favour, confidently and wrongly. So a stack opens instead.
  *
- *  ⛑ ONE SELECTION DOOR. A pick routes to `renderMap(id)`, which is exactly what a `[data-mapsel]` node does, so
- *  selecting from the picture and selecting from the diagram are one behaviour rather than two that drift. */
+ *  ⛑ ONE SELECTION DOOR. A pick routes to `renderMap(id)` — the diagram's nodes went through the same door until
+ *  CCODE-647 retired them — so every way of selecting a place is one behaviour, never two that drift. */
 function wireRegionGroundMap(selectedId) {
   const cv = document.getElementById("region-map");
   if (!cv) return;
@@ -17119,7 +17120,7 @@ function wireRegionGroundMap(selectedId) {
     if (hit.kind === "person") { hideChip(); if (hit.id) renderCodexScreen("", hit.id); return; }   // ✅ SNG-678: the codex
     if (hit.kind === "pill" && hit.pill.kind === "lead") { _regionFan = null; hideChip(); repaint(); return; }
     _regionFan = null; hideChip();
-    pickPlace(hit.id);                                   // the diagram's own door
+    pickPlace(hit.id);                                   // the one door
   };
   // ⛔ AND ESC CLOSES IT (AEVI A3). ⚠️ Bound on the WINDOW and removed when the screen is replaced, or every
   // re-render would leave another listener behind holding a stale `_regionPick`.
@@ -17137,7 +17138,7 @@ function wireRegionGroundMap(selectedId) {
   };
   window.addEventListener("keydown", _regionEsc);
   /* ⛔ AND THIS IS THE ONE DOOR. ⛑ `selectedId` is whatever `renderMap(id)` was handed — a click on the
-   * picture, a click on the diagram, or an arrival from the globe with a place selected (W1, and W7 when it
+   * picture, a pick in a fanned cluster, or an arrival from the globe with a place selected (W1, and W7 when it
    * lands). All three open the card here, so none of them can drift from the others.
    * ⚠️ AFTER the Esc binding, because `showPlaceCard` reads `_regionPick`, which `paintRegionMap` fills —
    * and `hidePlaceCard` is what a re-render without a selection must do, or a card for the place you just
@@ -18623,111 +18624,20 @@ function renderMap(selectedId = null) {
   if (mapTier === "world") return renderMapWorld();
   if (mapTier === "location") return renderMapLocation(mapFocus);
   const focusRegion = mapFocus || currentRegionId();
-  // ⛔ SNG-414 TIER 2 — THE REGION IS GEOGRAPHY NOW, NOT A LAYOUT. Everything below this line is the
-  // original auto-positioned diagram, which Erik called "no longer that useful" — and it was right to
-  // be: `autoMapPositions` places nodes for legibility, so the picture answers "what connects to what"
-  // and cannot answer "what is near me", which is the question this tier exists for.
-  // ⚠️ The list stays underneath on purpose. A diagram is still the fastest way to find a place by NAME,
-  // and deleting it would trade one kind of usefulness for another.
+  // ⛔ SNG-414 TIER 2 — THE REGION IS GEOGRAPHY, NOT A LAYOUT. ✅ SNG-678 (CCODE-647): the auto-positioned
+  // diagram that sat under the canvas is GONE — its jobs moved onto the ground first, and the parity list is in
+  // that commit: the people and threads, the connections, ◎ me, the field, the card. ⚠️ What it carried in its
+  // corner — the day, and the Valley's crisis stage — survives as the hint under the title.
   queueRegionMap(focusRegion);
   // CCODE-12: call the TESTED function instead of re-deriving it here. The inline filter this
   // replaces was written 90 minutes after regionTierNodes shipped with 8 passing tests, and dropped
   // the region-boundary edge filtering the real one does — so an edge leaving the region drew as if
   // it belonged to it. The reachability audit caught its own author; this is that finding closed.
-  const { locations: locs, edges: regionEdges } = regionTierNodes(CONTENT, character, focusRegion);
+  // ⛑ The edges are the painter's now — the Connections toggle reads them through the same function.
+  const { locations: locs } = regionTierNodes(CONTENT, character, focusRegion);
   const here = character.currentLocationId;
-  const connectedToHere = CONTENT.locations[here]?.connections || [];
-  // CCODE-12: edges come from regionTierNodes too. The inline version this replaces accepted ANY
-  // connection whose target merely existed in CONTENT.locations — including targets in a DIFFERENT
-  // region, which at the region tier drew a line to a node that isn't on the canvas. That is the
-  // untested divergence the audit predicted from the duplicate existing at all.
-  const edges = regionEdges;
   const stage = character.worldState?.eventStages?.water_crisis?.stage ?? 1;
   const crisisAnswered354 = !!character.worldState?.eventStages?.water_crisis?.resolved;   // CCODE-354
-  const isVisited = id => (character.placeMemory?.[id]?.visits || 0) > 0 || id === here;
-  const isKnown = id => isPlaceKnown(character, id, CONTENT.locations); // SNG-117: heard-of / adjacent / en-route, not just visited
-  // SNG-046 Layer 1: every location gets stable coords (authored kept; coordless + generated
-  // placed deterministically), a tag-derived icon, and a disposition terrain tint.
-  const pos = autoMapPositions(locs);
-  const kg = mapShowKG ? knownOverlay(character, pos, CONTENT) : []; // SNG-083: people AND rumours
-  // SNG-082: real terrain — each region drawn as a palette-filled hull of its locations. Data-driven
-  // (regions.json), so a generated place inherits the right ground. Three regions LOOK WRONG on purpose.
-  const WRONG = { the_pattern_reach: "wrong-noneuclid", the_veiled_reach: "wrong-lying", the_numinous_reach: "wrong-uncertain" };
-  const EXPANDING = new Set(["radiant_wastes", "unspooling", "the_scour", "the_ceaseless", "scour", "ceaseless"]);
-  const regionOf = {};
-  for (const l of locs) if (l.regionId) (regionOf[l.regionId] = regionOf[l.regionId] || []).push(pos[l.id]);
-  const terrain = (CONTENT.regions || []).map(rg => {
-    const pts = regionOf[rg.regionId]; if (!pts || !pts.length) return "";
-    const pal = rg.palette || {}; const shape = pts.length >= 3 ? regionShape(pts, 34) : null;
-    const cx = pts.reduce((s, p) => s + p.x, 0) / pts.length, cy = pts.reduce((s, p) => s + p.y, 0) / pts.length;
-    const cls = `map-region ${WRONG[rg.regionId] || ""} ${EXPANDING.has(rg.regionId) ? "expanding" : ""}`;
-    const body = shape
-      ? `<polygon points="${shape.map(p => `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(" ")}" class="${cls}" fill="${esc(pal.base || "#2a2f28")}" stroke="${esc(pal.edge || pal.base || "#333")}"><title>${esc(rg.name + " — " + (rg.terrain || ""))}</title></polygon>`
-      : `<circle cx="${cx}" cy="${cy}" r="46" class="${cls}" fill="${esc(pal.base || "#2a2f28")}" stroke="${esc(pal.edge || "#333")}"><title>${esc(rg.name)}</title></circle>`;
-    return `${body}<text x="${cx.toFixed(1)}" y="${cy.toFixed(1)}" text-anchor="middle" class="map-region-label" fill="${esc(pal.accent || "#8a8")}">${esc(rg.name)}</text>`;
-  }).join("");
-  // ⛔ SNG-386 — THE FIELD, DRAWN FROM THE RESOLVED VALUES. The spec said to draw each SOURCE as a
-  // radial gradient at its authored `radius`. Measured first, and that would have been a beautiful lie: a
-  // source's `radiusWorld` (what mechanics use) and its `radius` (legacy map units) select completely
-  // different neighbourhoods — 1 location by angle against 8-20 by map radius, agreeing for 1 of 43.
-  // `map.x/y` is an authored layout, not a projection of `worldPos`.
-  // ⚠️ So each LOCATION paints its own true value and they sum: an interpolation between known-true
-  // points rather than a claim about how far power reaches. The values are the mechanic, the smoothing is
-  // presentation, and only the first is being asserted — the caption on screen says so too.
-  const fieldLayer = (() => {
-    if (!mapField) return "";
-    const nanite = mapField === "nanite";
-    const blobs = fieldBlobs(locs, pos, {
-      valueOf: (l) => nanite ? (naniteAt(l, CONTENT.substrateModel)?.v ?? null)
-                             : (typeof l.substrateDensity === "number" ? l.substrateDensity : null),
-    });
-    if (!blobs.length) return "";
-    const hue = nanite ? "134,192,108" : "212,162,74";   // the bloom green against the lattice gold
-    const defs = blobs.map((b, i) => `<radialGradient id="fb${i}"><stop offset="0%" stop-color="rgba(${hue},${fieldAlpha(b.v).toFixed(3)})"/><stop offset="100%" stop-color="rgba(${hue},0)"/></radialGradient>`).join("");
-    const discs = blobs.map((b, i) => `<circle cx="${b.x.toFixed(1)}" cy="${b.y.toFixed(1)}" r="${b.r.toFixed(1)}" fill="url(#fb${i})"/>`).join("");
-    return `<defs>${defs}</defs><g class="map-field">${discs}</g>`;
-  })();
-  const svg = `<svg id="skill-svg" viewBox="0 0 800 440" class="world-map" preserveAspectRatio="xMidYMid meet"><g class="graph-vp">
-    <g class="map-terrain">${terrain}</g>${fieldLayer}
-    <text x="20" y="30" class="map-title">THE VALLEY OF ECHOES</text>
-    <text x="20" y="50" class="map-sub">Day ${readClock(character.clock).day} · ${crisisAnswered354 ? "Water Crisis answered" : `Water Crisis stage ${stage}`}${mapShowKG ? " · showing what you know" : ""}</text>
-    ${edges.map(([a, b]) => { const A = pos[a], B = pos[b]; const spine = a === "the_axis_gate" || b === "the_axis_gate" || a === "the_crossing" || b === "the_crossing";
-      return `<line x1="${A.x}" y1="${A.y}" x2="${B.x}" y2="${B.y}" class="map-edge ${a === here || b === here ? "active" : ""} ${spine ? "spine" : ""}"/>`; }).join("")}
-    ${locs.map((l, li) => {
-      const P = pos[l.id];
-      const visited = isVisited(l.id);
-      const reachable = canTravelBetween(here, l.id, CONTENT.locations, character.placeEdges);
-      const pm = character.placeMemory?.[l.id];
-      const dl = Math.max(0, Math.min(5, l.dangerLevel | 0)); // SNG-080: graduated danger, findable on the map · ✅ Erik: the scale tops out at 5
-      const cls = `map-node ${terrainClass(l)} dl${dl} ${l.id === here ? "here" : ""} ${reachable ? "reachable" : ""} ${visited ? "" : "unvisited"} ${dl >= 3 ? "danger" : ""} ${selectedId === l.id ? "selected" : ""}`;
-      const known = isKnown(l.id); // SNG-117
-      const tip = visited
-        ? `${l.name}${l.id === here ? " — you are here" : ""}${pm?.visits ? ` · ${pm.visits} visit${pm.visits > 1 ? "s" : ""}` : ""}${dl >= 1 ? ` · ${dangerLabel(dl)}` : ""}${reachable ? " · one travel away" : ""}`
-        : known
-          ? `${l.name} — you know of it, not yet been${reachable ? " · one travel away" : ""}`
-          : `Unknown place — you've only heard of it${reachable ? " · one travel away" : ""}`;
-      return `<g class="${cls}" data-mapsel="${esc(l.id)}">
-        <title>${esc(tip)}</title>
-        <circle class="hit" cx="${P.x}" cy="${P.y}" r="24"/>
-        ${dl >= 2 ? `<circle class="danger-ring dl${dl}" cx="${P.x}" cy="${P.y}" r="${(l.id === here ? 14 : 10) + 4}"/>` : ""}
-        <circle cx="${P.x}" cy="${P.y}" r="${l.id === here ? 14 : 10}"/>
-        ${visited ? `<text x="${P.x}" y="${P.y + 5}" text-anchor="middle" class="map-icon">${iconForTags(l.tags)}</text>` : ""}
-        ${mapShowSub ? (() => { const sps = Object.values(character.placeMemory?.[l.id]?.subPlaces || {}); return sps.slice(0, 6).map((sp, si) => {
-          const ang = (si / Math.max(1, Math.min(sps.length, 6))) * Math.PI * 2 - Math.PI / 2;
-          const sx = P.x + Math.cos(ang) * 22, sy = P.y + Math.sin(ang) * 22;
-          return `<circle cx="${sx}" cy="${sy}" r="4" class="map-satellite ${sp.visited ? "visited" : "heard"}"><title>${esc(sp.name)}${sp.note ? " — " + esc(sp.note) : ""}${sp.visited ? "" : " (heard of)"}</title></circle>`;
-        }).join(""); })() : ""}
-        <text x="${P.x}" y="${P.y + (P.y > 300 ? 32 : -20)}" text-anchor="middle" class="map-label">${esc(known ? l.name : "?")}</text>
-        ${visited && pm?.visits > 1 ? `<text x="${P.x}" y="${P.y + (P.y > 300 ? 46 : -6)}" text-anchor="middle" class="map-visits">×${pm.visits}</text>` : ""}
-      </g>`; }).join("")}
-    ${kg.map(e => `<g class="map-kg ${e.kind} ${e.discovered ? "met" : "heard"}" ${e.topicId ? `data-kgtopic="${esc(e.topicId)}"` : ""}>
-        <title>${esc(e.label)}${e.kind === "rumour" ? " — a thread you've only heard of" + (e.note ? ": " + esc(e.note) : "") : e.discovered ? " — you've met them" : " — you've only heard of them"}</title>
-        ${e.kind === "rumour"
-          ? `<rect x="${e.x - 5}" y="${e.y - 5}" width="10" height="10" transform="rotate(45 ${e.x} ${e.y})"/>`
-          : `<circle cx="${e.x}" cy="${e.y}" r="6"/>`}
-        <text x="${e.x}" y="${e.y - 9}" text-anchor="middle" class="map-kg-label">${esc(e.label.slice(0, 18))}</text>
-      </g>`).join("")}
-  </g></svg>`;
   // SNG-243 §4: the gate NETWORK panel — when you STAND at a networked gate, fold direct to any gate you know,
   // hub-and-spoke, for a hop cost (a fraction of the overland time + an energy toll). The made gate's default
   // endpoint leads. This is the infrastructure surface: the network is legible, not buried in per-place routing.
@@ -18744,7 +18654,8 @@ function renderMap(selectedId = null) {
     <h2>${esc((CONTENT.regions || []).find(r => r.regionId === focusRegion)?.name || "Region")}</h2>
     ${/* SNG-154 stage 6: this count is now the REGION's, not the world's — and it is derived, so it
           can't drift the way the old hardcoded "92 places across 24 regions" line silently did. */""}
-    <p class="hint" style="margin-bottom:8px">${locs.length} place${locs.length === 1 ? "" : "s"} in this region, on real ground. Gold ring: you are here.</p>
+    ${/* ⛑ the diagram's corner line, kept: the day, and — on the Valley, whose authored event it is — the crisis stage */""}
+    <p class="hint" style="margin-bottom:8px">${locs.length} place${locs.length === 1 ? "" : "s"} in this region, on real ground · Day ${readClock(character.clock).day}${focusRegion === "valley" ? ` · ${crisisAnswered354 ? "Water Crisis answered" : `Water Crisis stage ${stage}`}` : ""}. Gold ring: you are here.</p>
     ${mapTierBar()}
     ${/* ✅ AEVI §1.3 — "let the canvas use the window, filling the available width up to about 1600px". The backing
           store is sized to the pane on open (`sizeRegionCanvas`), so the marks, the hit test and the labels are all
@@ -18763,23 +18674,11 @@ function renderMap(selectedId = null) {
     ${/* ⛑ the name under the pointer stays as the quiet fallback; the chip is what carries the verbs. */""}
     <div id="region-map-readout" class="hint" style="min-height:14px;margin:2px 0 6px"></div>
     ${fieldPanel(regionExtent(focusRegion, CONTENT.locations, { authored: (_regionMaps && _regionMaps[focusRegion]) || null }))}
-    <p class="hint" style="margin-bottom:10px">⛰ The ground as it is — generated once at the scale where the world still has features, and kept. ◈ The field over it is EVALUATED at every point, not washed between the places — a source turned off re-renders it. The diagram below shows how the places CONNECT, which the ground does not say.</p>
+    <p class="hint" style="margin-bottom:10px">⛰ The ground as it is — generated once at the scale where the world still has features, and kept. ◈ The field over it is EVALUATED at every point, not washed between the places — a source turned off re-renders it. Connections draws the threads between the places, which the ground does not say.</p>
     <div style="margin-bottom:8px"><button class="opt ${mapShowKG ? "selected" : ""}" id="map-kg-toggle" title="People you've met (solid) and threads you've only heard of (dimmed diamonds) — where they live">${mapShowKG ? "✓ " : ""}Show what you know</button>
       <button class="opt ${mapShowLinks ? "selected" : ""}" id="map-links-toggle" title="The threads between places — which places CONNECT, which the ground does not say" style="margin-left:6px">${mapShowLinks ? "✓ " : ""}Connections</button>
       <button class="opt" id="rm-me" title="Centre the map on where you stand" style="margin-left:6px">◎ me</button>
-      <button class="opt ${mapField === "substrate" ? "selected" : ""}" id="map-field-lat" title="The lattice field — where the Precursors built, pooled and drained by 43 authored sources" style="margin-left:6px">${mapField === "substrate" ? "✓ " : ""}⛰ Lattice field</button>
-      <button class="opt ${mapField === "nanite" ? "selected" : ""}" id="map-field-nan" title="The nanite field — a SECOND geography: where the tech was deployed before the Transition, and what became of it" style="margin-left:6px">${mapField === "nanite" ? "✓ " : ""}✵ Nanite field</button>
-      ${mapField ? `<span class="hint" style="margin-left:8px">colour = strength at each place; the wash between them is interpolation, not a claim about reach</span>` : ""}
-      ${mapShowKG && !kg.length ? `<span class="hint" style="margin-left:8px">You haven't met anyone or heard a rumour yet — the world is still a rumour. Play on.</span>` : mapShowKG ? `<span class="hint" style="margin-left:8px">◆ dimmed = heard of · ● solid = met</span>` : ""}</div>
-    <div class="graph-wrap" id="graph-wrap">
-      <div class="graph-zoom-ctl">
-        <button id="gz-in" title="Zoom in">＋</button>
-        <button id="gz-out" title="Zoom out">－</button>
-        <button id="gz-fit" title="Fit to view">⤢</button>
-        <button id="gz-me" title="Centre on me">◎</button>
-      </div>
-      ${svg}
-    </div>
+      ${mapShowKG ? `<span id="map-kg-hint" class="hint" style="margin-left:8px"></span>` : ""}</div>
     ${netBlock}
     ${/* ⛔ P5 · THE CARD BELOW THE MAP IS GONE, NOT HIDDEN. ✅ AEVI: *"Two cards is the drift this order is
          meant to end."* ⚠️ And it had to go in the same commit as the floating one, not after it: both cards
@@ -18788,19 +18687,8 @@ function renderMap(selectedId = null) {
          whichever came first — a travel button that moves the wrong card's selection. */""}
     <button class="btn secondary" id="map-back" style="margin-top:12px">Back</button>
   </div>`);
-  setGraphSurface("map");   // SNG-168: the region tier keeps its own view
-  wireSkillGraphViewport();
-  const meBtn = document.getElementById("gz-me");
-  if (meBtn) meBtn.onclick = () => { const p = pos[here]; if (!p) return; const k = 2.2; graphViews[graphSurface] = { k, tx: 400 - p.x * k, ty: 220 - p.y * k };
-    const vp = document.querySelector("#skill-svg .graph-vp"); if (vp) vp.setAttribute("transform", `translate(${graphViews[graphSurface].tx} ${graphViews[graphSurface].ty}) scale(${k})`); };
   wireFieldPanel(() => renderMap());   // CCODE-472: one wiring, three tiers
   document.getElementById("map-kg-toggle").onclick = () => { mapShowKG = !mapShowKG; renderMap(selectedId); };
-  // ⚠️ EACH TOGGLE TURNS THE OTHER OFF. The two fields are different geographies and stacking them
-  // would blend two colours into a third that means nothing — the merge Erik explicitly ruled out.
-  for (const [id, key] of [["map-field-lat", "substrate"], ["map-field-nan", "nanite"]]) {
-    const b = document.getElementById(id);
-    if (b) b.onclick = () => { mapField = mapField === key ? null : key; renderMap(selectedId); };
-  }
   document.getElementById("map-links-toggle").onclick = () => { mapShowLinks = !mapShowLinks; renderMap(selectedId); };
   // ✅ SNG-678: centre on me — the diagram's ◎, on the ground: the view zooms to where you stand and blits
   { const me = document.getElementById("rm-me");
@@ -18812,8 +18700,6 @@ function renderMap(selectedId = null) {
       _regionView = { ..._regionView, k: 2.2, cx: mk.x / mw, cy: mk.y / mh };
       blitRegion();
     }; }
-  for (const g of app.querySelectorAll("[data-kgtopic]")) g.onclick = () => renderCodexScreen("", g.dataset.kgtopic);
-  for (const g of app.querySelectorAll("[data-mapsel]")) g.onclick = () => renderMap(g.dataset.mapsel === selectedId ? null : g.dataset.mapsel);
   wireRegionGroundMap(selectedId);
   wireMapTierBar(); // SNG-154 stage 6
   wirePlaceCard(app);     // ⛑ P1: the card's own doors, wherever the card is drawn
@@ -18822,7 +18708,7 @@ function renderMap(selectedId = null) {
     const g = netGates.find(x => x.id === b.dataset.nethop);
     travelTo(b.dataset.nethop, { cost: g ? g.cost : gateHopCost(0) });
   };
-  document.getElementById("map-back").onclick = () => { graphViews[graphSurface] = null; renderPlay(character.activeScene?.lastTurn || null, {}); };
+  document.getElementById("map-back").onclick = () => renderPlay(character.activeScene?.lastTurn || null, {});
 }
 
 // ---------- skill KG graph (SNG-011 Phase 3a — rendered like the world map) ----------

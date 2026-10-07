@@ -8976,6 +8976,56 @@ await (async () => {
 }
 
 
+    /* ═════ THE 35 AGAIN (Aevi, 2026-10-07) · G1–G3 folded into the eased table, and the renderer's small faults ═════
+     * Driven through `filmTargets` (the table is data) and anchored in the raster and the painter where the fault was. */
+    {
+      const FT35 = await import("../engine/films.js");
+      const row = (v) => FT35.filmTargets(v, { index: 5, shrinkAt: 0 });
+      check("35/G1: ⛔ the pops are ROWS — the net thins under the swarm (1 → 0.8), the pull and the grey carry into `middle_closes`, the ring and the pull fade through `lights_out`, the cutaway is a weight, and the others stay lit through `you`",
+        row("swarm").net === 1 && row("swarm_ordered").net === 0.8
+        && row("middle_closes").pull === 1.25 && row("middle_closes").grey === 1
+        && row("lights_out").poles === 0.2 && row("lights_out").pull === 0.3 && row("lights_out").dark === 1
+        && row("bores").cut === 1 && row("bores_capped").cut === 1 && row("network").cut === 0
+        && row("you").many === 1);
+      check("35/G2: ⛔ how deep the shadow is IS PER SHOT — `night` is the depth (1 = the sun's full terminator): earth 0.55, runaway 0.7, workings 0.45, drain 0.4, natural 0.5 — and the lights-out darkening is its own weight, `dark`",
+        FT35.FILM_BASE.night === 1 && FT35.FILM_BASE.dark === 0
+        && row("earth").night === 0.55 && row("network_runaway").night === 0.7 && row("workings").night === 0.45 && row("drain").night === 0.4 && row("natural").night === 0.5
+        && row("network").night === 1 && row("lights_out").dark === 1 && row("natural").dark === 1 && row("standing_up").dark === 1 && row("earth").dark === 0);
+      const src35 = readFileSync(join(root, "app.js"), "utf8").replace(/\r\n/g, "\n");
+      const raster35 = src35.slice(src35.indexOf("function openingRaster("), src35.indexOf("function opGround("));
+      check("35/G2: …and the raster shades `(1 − night) + night · sun` with the sun vector untouched and the dusk line going with the terminator, and darkens the world by `dark`, never by the shadow",
+        /const k = \(1 - NIGHT\) \+ NIGHT \* \(0\.05 \+ 1\.12 \* day\);/.test(raster35) && /\* 30\) \* NIGHT;/.test(raster35)
+        && /if \(DARK > 0\) \{ r \*= 1 - 0\.7 \* DARK;/.test(raster35) && !/if \(NIGHT > 0\)/.test(raster35)
+        && /dark: T\.dark/.test(src35) && /strength: 1 - 0\.6 \* T\.dark/.test(src35));
+      check("35/G3: ⛔ the old outline belongs to the shrink — 1 at `shrink`, 0.6 at `name_wears`, 0 from `meaning_fades` on — and the nine films (no shrink, no row) never draw it, because the painter's alpha is the weight and nothing else",
+        row("shrink").outline === 1 && row("name_wears").outline === 0.6 && row("meaning_fades").outline === 0 && row("globe").outline === 0 && row("ring").outline === 0
+        && /ctx\.globalAlpha = 0\.3 \* T\.outline \* shrunk;/.test(src35) && !/0\.12 \+ 0\.18 \* T\.outline/.test(src35));
+      check("35/C2: ⛔ the sample sits where the scaled draw puts the pixel's CENTRE — `x + step / 2` — which was the notch in the limb",
+        /unproject\(x \+ step \/ 2, y \+ step \/ 2, view\)/.test(raster35)
+        && /const nx = \(x \+ step \/ 2 - view\.cx\) \/ view\.r, ny = -\(y \+ step \/ 2 - view\.cy\) \/ view\.r;/.test(raster35));
+      check("35/C3: ⛔ the sea's sheen is a smooth ramp, not a threshold that drew a second disc inside the first",
+        /const st = Math\.min\(1, \(day - 0\.8\) \/ 0\.17\); const sp = st \* st \* \(3 - 2 \* st\);/.test(raster35) && !/day > 0\.86/.test(raster35));
+      const shot35 = src35.slice(src35.indexOf("function paintFilmShot("), src35.indexOf("function renderFilm("));
+      check("35/C4: ⛔ the particles can be seen — the glitter, the ash and the others draw at 1.8 px and up under `lighter`, alpha by what faces you, never by night",
+        (shot35.match(/ctx\.fillRect\(p\.x, p\.y, 1\.8, 1\.8\);/g) || []).length === 2 && (shot35.match(/globalCompositeOperation = "lighter"/g) || []).length >= 6
+        && /T\.swarm \* \(0\.35 \+ 0\.65 \* p\.z\)/.test(shot35) && /\(0\.25 \+ 0\.5 \* \(1 - fall\)\) \* \(0\.35 \+ 0\.65 \* p\.z\)/.test(shot35)
+        && /o\.own \? 2\.6 : o\.pad \? 1\.5 : 2\.1/.test(shot35) && !/fillRect\(p\.x, p\.y, 1\.1, 1\.1\)/.test(shot35));
+      check("35/C8: ⛔ Earth's clouds are culled by depth and clipped to the disc — no puff outside the limb",
+        /if \(inFrame\(p\) && p\.z > 0\.15\) opGlow\(ctx, p\.x, p\.y, 26/.test(shot35)
+        && /CLIPPED TO THE DISC[^\n]*\n\s*ctx\.save\(\); ctx\.beginPath\(\); ctx\.arc\(frame\.cx, frame\.cy, frame\.r, 0, Math\.PI \* 2\); ctx\.clip\(\);/.test(shot35));
+      check("35/G1: ⛔ …and the cutaway FADES OVER THE GLOBE at the globe's own radius — no early return, `cut` eased like every other weight",
+        /if \(T\.cut > 0\.01\) \{/.test(shot35) && /paintOpeningCutaway\(ctx, \{ w, h, u, capped: V === "bores_capped", cx: frame\.cx, cy: frame\.cy, R: frame\.r \}\)/.test(shot35)
+        && !/return paintOpeningCutaway\(/.test(shot35) && /cx: cxIn = null, cy: cyIn = null, R: RIn = null/.test(src35));
+      const film35 = src35.slice(src35.indexOf("function renderFilm("), src35.indexOf("function renderCreate("));
+      const opening35 = JSON.parse(readFileSync(join(root, "content/packs/core/world/opening.json"), "utf8").replace(/^﻿/, ""));
+      check("35/E1: ⛔ from the Library the end card offers `controls.back` beside `watchAgain` — her words, authored — and Watch again WATCHES AGAIN instead of leaving",
+        /id="op-back"/.test(film35) && /mode === "library" && C\.back/.test(film35) && /\["op-back", atTitle\(\)\]/.test(film35)
+        && /if \(mode === "library"\) \{ i = 0; show\(\); \} else end\(\);/.test(film35) && /backBtn\.onclick = \(e\) => \{ e\.stopPropagation\(\); end\(\); \}/.test(film35)
+        && typeof opening35.controls?.back === "string" && opening35.controls.back.length > 0);
+      check("35/E2: ⛔ Escape on the title card LEAVES — `skip()` landed on the card it was already on, so nothing happened",
+        /e\.key === "Escape"\) \{ e\.preventDefault\(\); if \(atTitle\(\)\) end\(\); else skip\(\); \}/.test(film35));
+    }
+
     /* ═════ SNG-677 · THE WORLD MAP'S ROADS ARE ROUTED, NOT ARCED ═════
      * ✅ ERIK, 2026-10-06: *"The world map still shows the straight line routes between places. It needs to
      * show the drawn roads from the region maps (at least the major trunks)."*
@@ -24007,12 +24057,14 @@ await (async () => {
   check("680/G: …and every row names only keys the BASE declares — a weight nobody reads is a target nobody reaches",
     Object.values(OPG.FILM_TARGETS).every((row) => Object.keys(row).every((k) => k in OPG.FILM_BASE)));
   // the two cuts she named, as target vectors
-  const ra = OPG.filmTargets("network_runaway", { index: 3, shrinkAt: 11 }), sw = OPG.filmTargets("swarm", { index: 4, shrinkAt: 11 });
-  check("680/G: at the cut network_runaway → swarm the net's target goes 1 → 0.35, not to nothing — it THINS through swarm",
-    ra.net === 1 && ra.runaway === 1 && sw.net === 0.35 && sw.runaway === 0 && sw.swarm === 1);
+  const ra = OPG.filmTargets("network_runaway", { index: 3, shrinkAt: 11 }), sw = OPG.filmTargets("swarm", { index: 4, shrinkAt: 11 }), so = OPG.filmTargets("swarm_ordered", { index: 5, shrinkAt: 11 });
+  // ✅ the 35 again (G1): *"the net is gone by swarm_ordered — net 1 → 1 → 0.8; it thins under the swarm"*
+  check("680/G: at the cuts network_runaway → swarm → swarm_ordered the net's target goes 1 → 1 → 0.8, not to nothing — it THINS under the swarm",
+    ra.net === 1 && ra.runaway === 1 && sw.net === 1 && sw.runaway === 0 && sw.swarm === 1 && so.net === 0.8 && so.order === 1);
   const pm = OPG.filmTargets("middle_closes", { index: 17, shrinkAt: 11 }), lo = OPG.filmTargets("lights_out", { index: 18, shrinkAt: 11 });
-  check("680/G: at the cut middle_closes → lights_out the ring's target goes 1 → 0 and the pole-on turn unwinds — the ring FADES",
-    pm.poles === 1 && pm.polar === 1 && lo.poles === 0 && lo.polar === 0 && lo.night === 1);
+  // ✅ the 35 again (G1): *"the whole ring is gone at lights_out — poles 0.2, pull 0.3; the ring fades as the lights go"*
+  check("680/G: at the cut middle_closes → lights_out the ring's target goes 1 → 0.2 and the pull 1.25 → 0.3 as the lights go out, and the pole-on turn unwinds — the ring FADES",
+    pm.poles === 1 && pm.polar === 1 && pm.pull === 1.25 && lo.poles === 0.2 && lo.pull === 0.3 && lo.polar === 0 && lo.dark === 1);
   // the world's size and palette are positions in the reel
   const before = OPG.filmTargets("drain", { index: 8, shrinkAt: 11 }), at = OPG.filmTargets("shrink", { index: 11, shrinkAt: 11 }), after = OPG.filmTargets("arcs", { index: 29, shrinkAt: 11 }), present = OPG.filmTargets("globe", { index: 0, shrinkAt: -1 });
   check("680/G: `shrunk` and `world` are read off where the shot sits relative to the shrink — Earth and large before it, Exesa and small from it on, and a film with no shrink is already in the present",
@@ -24034,14 +24086,14 @@ await (async () => {
   const shotG = bodyG("paintFilmShot"), filmG = bodyG("renderFilm");
   check("680/G: `paintFilmShot` takes `cur` and reads the amounts off it — polar, shrunk, world, lights, night, grey, dim and every layer's weight — while the subjects stay on the shot",
     /cur = null \} = \{\}\)/.test(shotG) && /const T = cur \|\| filmTargets\(V, \{ index, shrinkAt \}\)/.test(shotG) && /const polar = T\.polar/.test(shotG)
-      && /world: coda \? 1 : T\.world, night: T\.night, grey: T\.grey, dim: T\.dim, lights/.test(shotG)
-      && ["net", "swarm", "works", "poles", "pull", "natural", "standing", "lattice", "veil", "pause", "many", "you", "title"].every((k) => shotG.includes(`if (T.${k} > 0.01)`))
+      && /world: coda \? 1 : T\.world, night: T\.night, dark: T\.dark, grey: T\.grey, dim: T\.dim, lights/.test(shotG)
+      && ["net", "swarm", "works", "poles", "pull", "natural", "standing", "lattice", "veil", "pause", "many", "you", "title", "cut"].every((k) => shotG.includes(`if (T.${k} > 0.01)`))
       && /if \(shot\?\.place\) return \{ kind: "place"/.test(shotG));
   check("680/G: …and `renderFilm` keeps ONE eased vector across every cut — `cur` lives outside the shot, eased by this frame's own dt toward the shot's targets, and handed to the painter",
     /let cur = null, lastFrameMs = 0;/.test(filmG) && /cur = cur \? filmEase\(cur, target, dt, \{ reduced \}\) : target;/.test(filmG) && /index: i, cur \}/.test(filmG));
   check("680/G: …and the raster takes amounts, not a mode word — world, night, grey and dim are 0..1 weights in its key and its pixel arithmetic",
-    /function openingRaster\(view, \{ world = 1, lights = 1, w = 900, h = 560, sun = null, night = 0, grey = 0, dim = 0, fine = null \}/.test(srcG)
-      && /Math\.round\(NIGHT \* 8\), Math\.round\(GREY \* 8\), Math\.round\(DIM \* 8\)/.test(srcG) && !/mode === "dark"/.test(srcG));
+    /function openingRaster\(view, \{ world = 1, lights = 1, w = 900, h = 560, sun = null, night = 1, dark = 0, grey = 0, dim = 0, fine = null \}/.test(srcG)
+      && /Math\.round\(NIGHT \* 8\), Math\.round\(DARK \* 8\), Math\.round\(GREY \* 8\), Math\.round\(DIM \* 8\)/.test(srcG) && !/mode === "dark"/.test(srcG));
 }
 
 // --- SNG-680 ruling 2 · the fine patch for close shots ---

@@ -208,7 +208,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.22.4";
+const APP_VERSION = "2.22.5";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -7558,7 +7558,7 @@ function openingGlobeView(w, h, { shrunk = 0, yaw = 0 } = {}) {
 let _opRaster = null;
 /* ✅ G (Aevi): the raster takes AMOUNTS, not a mode word — `world` (the Earth→Exesa cross), `night`, `grey` and
  * `dim` are each 0..1 and ease across a cut, so the ground never pops from one look to the next. */
-function openingRaster(view, { world = 1, lights = 1, w = 900, h = 560, sun = null, night = 0, grey = 0, dim = 0, fine = null } = {}) {
+function openingRaster(view, { world = 1, lights = 1, w = 900, h = 560, sun = null, night = 1, dark = 0, grey = 0, dim = 0, fine = null } = {}) {
   /* ⛔ EARTH UNTIL THE WORLD IS RENAMED, EXESA AFTER. The palette already crossed on the shots that pay the
    * cost; now the GROUND does too, and the two agree: everything up to the bores is Earth being spent, and
    * from `shrink` on it is the world we play in. That is the film's own argument, drawn rather than said. */
@@ -7569,7 +7569,7 @@ function openingRaster(view, { world = 1, lights = 1, w = 900, h = 560, sun = nu
   const blend = Math.max(0, Math.min(1, Number(world) || 0));
   const bake = openingBake(blend >= 1 ? "exesa" : "earth");
   const other = blend > 0 && blend < 1 ? openingBake("exesa") : null;
-  const NIGHT = Math.max(0, Math.min(1, Number(night) || 0)), GREY = Math.max(0, Math.min(1, Number(grey) || 0)), DIM = Math.max(0, Math.min(1, Number(dim) || 0));
+  const NIGHT = Math.max(0, Math.min(1, Number(night) || 0)), DARK = Math.max(0, Math.min(1, Number(dark) || 0)), GREY = Math.max(0, Math.min(1, Number(grey) || 0)), DIM = Math.max(0, Math.min(1, Number(dim) || 0));
   if (!bake) return null;
   const x0 = Math.max(0, Math.floor(view.cx - view.r)), x1 = Math.min(w, Math.ceil(view.cx + view.r));
   const y0 = Math.max(0, Math.floor(view.cy - view.r)), y1 = Math.min(h, Math.ceil(view.cy + view.r));
@@ -7592,7 +7592,7 @@ function openingRaster(view, { world = 1, lights = 1, w = 900, h = 560, sun = nu
    * slideshow even when the frame rate was fine. */
   const SUN = sun || openingSun(0);   // ⛑ above the key, which reads it — a `const` below it is a TDZ, not a default
   const key = [Math.round(view.yaw * 2), Math.round(view.pitch), Math.round(view.r), Math.round(view.cx), Math.round(view.cy),
-    Math.round(blend * 12), Math.round(NIGHT * 8), Math.round(GREY * 8), Math.round(DIM * 8), Math.round(lights * 4), step, fine ? fine.id : "",
+    Math.round(blend * 12), Math.round(NIGHT * 8), Math.round(DARK * 8), Math.round(GREY * 8), Math.round(DIM * 8), Math.round(lights * 4), step, fine ? fine.id : "",
     SUN.map((c) => Math.round(c * 20)).join("/")].join(",");
   if (_opRaster && _opRaster.key === key) return _opRaster;
   /* ⛑ ONE OFFSCREEN CANVAS, REUSED. The first cut allocated a fresh one for every re-raster — a canvas and
@@ -7613,7 +7613,9 @@ function openingRaster(view, { world = 1, lights = 1, w = 900, h = 560, sun = nu
   for (let y = y0; y < y1; y += step) {
     for (let x = x0; x < x1; x += step) {
       let r = 0, g = 0, b = 0, a = 0;
-      const p = unproject(x + 0.5, y + 0.5, view);
+      // ✅ C2 (the 35 again): the sample sits where the scaled draw puts this pixel's CENTRE — a half-step short of it
+      // shifted the ground down and right by up to 2.5 px, and the clip showed the gap as a notch in the limb
+      const p = unproject(x + step / 2, y + step / 2, view);
       if (p) {
         a = 255;
         /* ✅ Aevi: *"The coastline still stairs after D — the stairs that remain are the BAKE's own cells,
@@ -7666,7 +7668,7 @@ function openingRaster(view, { world = 1, lights = 1, w = 900, h = 560, sun = nu
          * where the pixel already is, so it costs two divisions and a square root. A longitude sun made the
          * terminator a meridian: a vertical line side-on and a diameter pole-on, which is the black half of
          * every poles shot. */
-        const nx = (x + 0.5 - view.cx) / view.r, ny = -(y + 0.5 - view.cy) / view.r;
+        const nx = (x + step / 2 - view.cx) / view.r, ny = -(y + step / 2 - view.cy) / view.r;
         const nz = Math.sqrt(Math.max(0, 1 - nx * nx - ny * ny));
         const cosSun = nx * SUN[0] + ny * SUN[1] + nz * SUN[2];
         /* ⚠️ A LIT SPHERE IS MOSTLY LIT. At (cosSun + 0.06) × 1.35 the brightest point of the visible face
@@ -7674,13 +7676,17 @@ function openingRaster(view, { world = 1, lights = 1, w = 900, h = 560, sun = nu
          * curve saturates inside about 70° of the sun point and crosses to night over the last few degrees,
          * which is what gives a hard terminator and a dark side worth putting lights on. */
         const day = Math.max(0, Math.min(1, (cosSun + 0.02) * 2.6));
-        const k = 0.05 + 1.12 * day;
+        /* ✅ G2 (the 35 again): HOW DEEP THE SHADOW IS, PER SHOT. `night` eases between 1 — the sun's own curve, 5% on
+         * the dark side — and 0, a world lit whole; an Earth shot at 0.55 keeps about half its colour on the night side
+         * and the lights still read. The sun vector is untouched; only the depth of the shadow moves. */
+        const k = (1 - NIGHT) + NIGHT * (0.05 + 1.12 * day);
         // ⛑ dusk is a LINE, not a glaze — a narrow warm band right at the terminator and nothing either side
         // ✅ K: *"the terminator's warm band reads as an orange arc. Narrow and dim it."*
-        const dusk = Math.max(0, 1 - Math.abs(cosSun) * 30);
+        const dusk = Math.max(0, 1 - Math.abs(cosSun) * 30) * NIGHT;   // no terminator, no dusk line
         r = r * k + 19 * dusk; g = g * k + 8 * dusk; b = b * k + 2 * dusk;
         // the sea takes a sheen where the sun is straight on, which is what tells sea from land at a glance
-        if (!land && day > 0.86) { const sp = (day - 0.86) * 5; r += 30 * sp; g += 42 * sp; b += 58 * sp; }
+        // ✅ C3 (the 35 again): a RAMP, not a threshold — a hard edge at 0.86 drew a second, lighter disc inside the first
+        if (!land && day > 0.8) { const st = Math.min(1, (day - 0.8) / 0.17); const sp = st * st * (3 - 2 * st); r += 30 * sp; g += 42 * sp; b += 58 * sp; }
         if (day < 0.45 && lights > 0) {
           const q = lights * (0.45 - day) * 2.4;
           const lit = BD ? Math.max(0, (BD[bi] / 255) - 0.5) * 2.4 : 0;
@@ -7688,7 +7694,7 @@ function openingRaster(view, { world = 1, lights = 1, w = 900, h = 560, sun = nu
         }
         // ✅ G: each look is a WEIGHT, the old mode arithmetic at weight 1 and the untouched pixel at weight 0
         if (GREY > 0) { const m = (r + g + b) / 3; r = r * (1 - 0.7 * GREY) + m * 0.52 * GREY; g = g * (1 - 0.7 * GREY) + m * 0.55 * GREY; b = b * (1 - 0.7 * GREY) + m * 0.58 * GREY; }
-        if (NIGHT > 0) { r *= 1 - 0.7 * NIGHT; g *= 1 - 0.7 * NIGHT; b *= 1 - 0.66 * NIGHT; }
+        if (DARK > 0) { r *= 1 - 0.7 * DARK; g *= 1 - 0.7 * DARK; b *= 1 - 0.66 * DARK; }   // the lights go out: what `night` used to mean
         // ✅ I: *"land recoloured to periwinkle blocks → the surface DIMS (0.25), and the lattice is bright lines
         // on top under `lighter`"* — the ground keeps its own colours, only quieter, so the lines are the subject
         if (DIM > 0) { r *= 1 - 0.72 * DIM; g *= 1 - 0.7 * DIM; b *= 1 - 0.6 * DIM; }
@@ -7932,8 +7938,10 @@ function openingPlaceView(loc, { w = 900, h = 560, span = 26 } = {}) {
  * is no cross-section in the terrain asset — it is a surface raster — so this is the film's own diagram,
  * and it is drawn as a diagram rather than pretending to be ground. ✅ *"…the shafts close over. The core is
  * smaller, and still warm."* */
-function paintOpeningCutaway(ctx, { w = 900, h = 560, u = 0, capped = false } = {}) {
-  const cx = w / 2, cy = h / 2, R = Math.min(Math.min(w, h) * 0.42, OPENING_R_CAP) * (capped ? 0.67 : 1);
+function paintOpeningCutaway(ctx, { w = 900, h = 560, u = 0, capped = false, cx: cxIn = null, cy: cyIn = null, R: RIn = null } = {}) {
+  const cx = cxIn == null ? w / 2 : cxIn, cy = cyIn == null ? h / 2 : cyIn;
+  // ✅ G1: at the globe's own centre and radius when the globe is under it; its old size only when drawn alone
+  const R = RIn == null ? Math.min(Math.min(w, h) * 0.42, OPENING_R_CAP) * (capped ? 0.67 : 1) : RIn;
   const core = R * (capped ? 0.2 : 0.34 - 0.12 * u);
   ctx.save();
   // the mantle, in section
@@ -8040,7 +8048,6 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
 
   ctx.setTransform(dprOf(), 0, 0, dprOf(), 0, 0);
   ctx.fillStyle = "#04050b"; ctx.fillRect(0, 0, w, h);
-  if (V === "bores" || V === "bores_capped") return paintOpeningCutaway(ctx, { w, h, u, capped: V === "bores_capped" });
   // the sky first, so the veil has stars to take out of it
   for (const [sx, sy, sa, ss] of openingStars(w, h)) {
     ctx.fillStyle = `rgba(${226 - (1 - sa) * 40},${232 - (1 - sa) * 30},246,${0.08 + sa * 0.62})`;
@@ -8049,12 +8056,14 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
 
   // ⛑ THE OLD OUTLINE, THE SIZE IT WAS — the only way a watcher can SEE that a third of the world is gone
   // instead of being told. ✅ *"The old outline stays faint behind it, the size it was."*
-  if (shrunk > 0.01) {
+  if (shrunk > 0.01 && T.outline > 0.01) {
     /* ✅ E (Aevi): *"The old outline is centred on `view.cy`. Pole-on, `cy` lifts by 12% while the outline
      * didn't, and it hung off centre."* It takes the same composition as the world it is the ghost of. */
     const old = openingGlobeView(w, h, { shrunk: 0, yaw, polar });
     old.cy = view.cy;
-    ctx.save(); ctx.globalAlpha = (0.12 + 0.18 * T.outline) * shrunk;
+    // ✅ G3 (the 35 again): the outline belongs to the SHRINK — 1 there, 0.6 at `name_wears`, 0 from `meaning_fades` on; the
+    // nine films have no shrink and no row, so they never draw it. The alpha is the weight and nothing else.
+    ctx.save(); ctx.globalAlpha = 0.3 * T.outline * shrunk;
     ctx.strokeStyle = "#7f93c0"; ctx.lineWidth = 1;
     ctx.beginPath(); ctx.arc(old.cx, old.cy, old.r, 0, Math.PI * 2); ctx.stroke(); ctx.restore();
   }
@@ -8096,7 +8105,7 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
   const sun = openingSun(polar);
   // ✅ RULING 2: a close shot — place, region, figure — draws the fine window around its subject where it covers
   const fine = placeSpan && subject?.loc ? filmFineWindow(subject.loc, placeSpan) : null;
-  opGround(ctx, frame, { world: coda ? 1 : T.world, night: T.night, grey: T.grey, dim: T.dim, lights, w, h, sun, fine });
+  opGround(ctx, frame, { world: coda ? 1 : T.world, night: T.night, dark: T.dark, grey: T.grey, dim: T.dim, lights, w, h, sun, fine });
 
   /* ⛑ AFTER THE GROUND, BEFORE EVERYTHING ELSE: the air belongs to the world, and the net, the glitter and
    * the arcs all sit above it. Skipped on the close frames, where the limb is off-screen and a halo would be
@@ -8105,10 +8114,17 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
     /* ⛔ B · DERIVED FROM THE SAME SUN THE GROUND IS LIT BY, so the two cannot disagree again. ✅ Aevi: *"the
      * air crescent is drawn at −152°, on the left, over the night … derive `sunward` from the same sun the
      * raster uses."* The sun's screen bearing is `atan2(−sy, sx)`; in π units, that is `sunward`. */
-    paintOpeningAir(ctx, frame, { tint: exesa < 0.5 ? "earth" : "exesa", strength: 1 - 0.6 * T.night,
+    paintOpeningAir(ctx, frame, { tint: exesa < 0.5 ? "earth" : "exesa", strength: 1 - 0.6 * T.dark,
       sunward: Math.atan2(-sun[1], sun[0]) / Math.PI });
   }
   const P = (lat, lon, rad) => project(lon, lat, frame, rad == null ? 1 : rad);
+  /* ✅ G1 (the 35 again): THE CUTAWAY FADES OVER THE GLOBE AT THE GLOBE'S OWN RADIUS. It was a hard cut both ways —
+   * globe → cutaway → globe — and the cutaway was smaller. `cut` eases 0 → 1 → 0 like every other weight. */
+  if (T.cut > 0.01) {
+    ctx.save(); ctx.globalAlpha = T.cut;
+    paintOpeningCutaway(ctx, { w, h, u, capped: V === "bores_capped", cx: frame.cx, cy: frame.cy, R: frame.r });
+    ctx.restore();
+  }
   /* ⛔ IN THE FIRST MOVEMENT THE NET IS EARTH'S OWN. ✅ *"the lights of cities on the dark side"* → *"Lines of
    * light run between the cities"*. Those have to be the same points or the shot does not follow from the one
    * before it — so while the world is Earth, the net's nodes ARE the city lights, and from `shrink` on they
@@ -8146,11 +8162,14 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
 
   if (V === "earth") {
     // cloud: a few soft bands over the day side, and nothing else — this shot is the world as it was
+    // ✅ C8 (the 35 again): culled by depth and CLIPPED TO THE DISC — a band near the limb drew its puff off the world
+    ctx.save(); ctx.beginPath(); ctx.arc(frame.cx, frame.cy, frame.r, 0, Math.PI * 2); ctx.clip();
     for (let k = 0; k < 7; k++) {
       const lat = -60 + opRand(k, 3) * 120, lon = -180 + ((opRand(k, 7) * 360 + u * 22) % 360);
       const p = P(lat, lon);
-      if (inFrame(p)) opGlow(ctx, p.x, p.y, 26 + opRand(k, 11) * 34, "rgba(236,242,250,0.2)", "rgba(236,242,250,0)");
+      if (inFrame(p) && p.z > 0.15) opGlow(ctx, p.x, p.y, 26 + opRand(k, 11) * 34, "rgba(236,242,250,0.2)", "rgba(236,242,250,0)");
     }
+    ctx.restore();
   }
 
   if (T.net > 0.01) {
@@ -8206,6 +8225,9 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
      * lattice of parallels and meridians, so it reads as the same swarm obeying rather than a new effect.
      * ✅ G: `cur.order` IS the snap — the grains ease onto the grid as the weight rises, at the cut's own pace. */
     const ord = T.order;
+    /* ✅ C4 (the 35 again): at 1.1 px under source-over the glitter could not be seen on a lit globe — 1.8 px under
+     * `lighter`, alpha by what faces you and never by night. "Too fine to be single things" is a density, not invisibility. */
+    ctx.save(); ctx.globalCompositeOperation = "lighter";
     ctx.fillStyle = "rgba(236,246,255,0.8)";
     for (let k = 0; k < Math.round(900 * grains); k++) {
       let lat = -88 + opRand(k, 1) * 176, lon = -180 + opRand(k, 2) * 360;
@@ -8217,10 +8239,10 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
       const rise = ord > 0.5 ? 1.012 : 1 + 0.03 * Math.min(1, u) * opRand(k, 4);
       const p = P(lat, lon, rise);
       if (!inFrame(p)) continue;
-      ctx.globalAlpha = (0.3 + 0.6 * opRand(k, 6)) * T.swarm;
-      ctx.fillRect(p.x, p.y, 1.1, 1.1);
+      ctx.globalAlpha = (0.3 + 0.6 * opRand(k, 6)) * T.swarm * (0.35 + 0.65 * p.z);
+      ctx.fillRect(p.x, p.y, 1.8, 1.8);
     }
-    ctx.globalAlpha = 1;
+    ctx.globalAlpha = 1; ctx.restore();
     if (ord > 0.01) {
       // the rings
       ctx.save(); ctx.globalAlpha = ord * T.swarm;
@@ -8620,16 +8642,17 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
       ctx.moveTo(pa.x, pa.y); ctx.lineTo(pb.x, pb.y);
     }
     ctx.stroke();
-    ctx.fillStyle = "rgba(188,186,180,0.55)";
+    ctx.save(); ctx.globalCompositeOperation = "lighter";   // ✅ C4: the ash could not be seen either
+    ctx.fillStyle = "rgba(188,186,180,0.8)";
     for (let k = 0; k < Math.round(700 * grains); k++) {
       const lat = -88 + opRand(k, 1) * 176, lon = -180 + opRand(k, 2) * 360;
       const fall = ((u * 0.9 + opRand(k, 8)) % 1);
       const p = P(lat, lon, 1.035 - 0.035 * fall);
       if (!inFrame(p)) continue;
-      ctx.globalAlpha = 0.25 + 0.5 * (1 - fall);
-      ctx.fillRect(p.x, p.y, 1.2, 1.2);
+      ctx.globalAlpha = (0.25 + 0.5 * (1 - fall)) * (0.35 + 0.65 * p.z);
+      ctx.fillRect(p.x, p.y, 1.8, 1.8);
     }
-    ctx.globalAlpha = 1;
+    ctx.globalAlpha = 1; ctx.restore();
   }
 
   if (T.natural > 0.01) {
@@ -8829,6 +8852,7 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
       for (let k = others.length; k < padTo; k++) {
         others.push({ lat: Math.asin(-1 + 2 * opRand(k, 51)) * 180 / Math.PI, lon: opRand(k, 53) * 360 - 180, own: false, pad: true });
       }
+      ctx.save(); ctx.globalCompositeOperation = "lighter";   // ✅ C4: the others only showed on the night side
       others.forEach((o, i) => {
         const dir = opRand(i, 13) < 0.38 ? -1 : 1;                       // some against
         const swing = Math.sin(u * Math.PI * 2 * 0.6 + i) * 2.2 * dir;
@@ -8837,9 +8861,10 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
         const on = Math.min(1, Math.max(0, u * 1.6 - opRand(i, 17) * 0.6)) * T.many;
         if (on <= 0) return;
         if (o.own) { opGlow(ctx, p.x, p.y, 10, `rgba(255,238,196,${0.8 * on})`, "rgba(255,220,150,0)"); }
-        ctx.fillStyle = `rgba(236,244,255,${(o.own ? 0.95 : o.pad ? 0.4 : 0.68) * on})`;
-        ctx.beginPath(); ctx.arc(p.x, p.y, o.own ? 2.2 : o.pad ? 1 : 1.6, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = `rgba(236,244,255,${(o.own ? 0.95 : o.pad ? 0.4 : 0.68) * on * (0.4 + 0.6 * p.z)})`;
+        ctx.beginPath(); ctx.arc(p.x, p.y, o.own ? 2.6 : o.pad ? 1.5 : 2.1, 0, Math.PI * 2); ctx.fill();
       });
+      ctx.restore();
     }
     if (T.you > 0.01) {
       /* ✅ *"One light, unlit until that shot. It has no position yet (the character doesn't exist); centre
@@ -9039,6 +9064,7 @@ function renderFilm(doc, { mode = "film", after = null, startId = null } = {}) {
         ${C.next ? `<button class="opt" id="op-next">${esc(String(C.next))}</button>` : ""}
         ${C.skip ? `<button class="opt" id="op-skip">${esc(String(C.skip))}</button>` : ""}
         ${beginWord ? `<button class="opt op-begin" id="op-begin" hidden>${esc(String(beginWord))}</button>` : ""}
+        ${mode === "library" && C.back ? `<button class="opt op-begin" id="op-back" hidden>${esc(String(C.back))}</button>` : ""}
       </div>
     </div>
   </div>`;
@@ -9209,7 +9235,7 @@ function renderFilm(doc, { mode = "film", after = null, startId = null } = {}) {
     }
     if (cv) cv.classList.toggle("op-title", s.visual === "title");
     // ⛑ at the title, Begin replaces the playback controls — there is nothing left to pause or skip
-    for (const [id, on] of [["op-begin", atTitle()], ["op-pause", !atTitle()], ["op-next", !atTitle()], ["op-skip", !atTitle()]]) {
+    for (const [id, on] of [["op-begin", atTitle()], ["op-back", atTitle()], ["op-pause", !atTitle()], ["op-next", !atTitle()], ["op-skip", !atTitle()]]) {
       const b = document.getElementById(id);
       if (b) b.hidden = !on;
     }
@@ -9266,7 +9292,11 @@ function renderFilm(doc, { mode = "film", after = null, startId = null } = {}) {
   const nextBtn = document.getElementById("op-next");
   const next = () => { if (atTitle()) return end(); i++; i < frames.length ? show() : end(); };
   const beginBtn = document.getElementById("op-begin");
-  if (beginBtn) beginBtn.onclick = (e) => { e.stopPropagation(); end(); };
+  /* ✅ E1 (the 35 again): FROM THE LIBRARY, "Watch again" WATCHES AGAIN and `controls.back` is the way out — both her
+   * words. Before this the end card's only exit was a tap anywhere, which nobody will guess, and Watch again LEFT. */
+  if (beginBtn) beginBtn.onclick = (e) => { e.stopPropagation(); if (mode === "library") { i = 0; show(); } else end(); };
+  const backBtn = document.getElementById("op-back");
+  if (backBtn) backBtn.onclick = (e) => { e.stopPropagation(); end(); };
   if (nextBtn) nextBtn.onclick = (e) => { e.stopPropagation(); next(); };
   const skipBtn = document.getElementById("op-skip");
   if (skipBtn) skipBtn.onclick = (e) => { e.stopPropagation(); skip(); };
@@ -9278,7 +9308,7 @@ function renderFilm(doc, { mode = "film", after = null, startId = null } = {}) {
     if (!document.getElementById("op-canvas")) { stopOpening(); return; }
     if (e.key === "ArrowRight" || e.key === " ") { e.preventDefault(); step(1); }
     else if (e.key === "ArrowLeft") { e.preventDefault(); step(-1); }
-    else if (e.key === "Escape") { e.preventDefault(); skip(); }
+    else if (e.key === "Escape") { e.preventDefault(); if (atTitle()) end(); else skip(); }   // ✅ E2: on the title card Escape LEAVES — skip() landed on the card it was already on
   };
   window.addEventListener("keydown", _openingKeys);
 

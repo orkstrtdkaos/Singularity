@@ -94,8 +94,8 @@ const LEDGER = [
   {
     id: "SNG-680 G", ask: "(Aevi, frame by frame) G · Continuity: the one architectural change — every shot is painted from nothing, so at every cut the net, the poles, the lights, the radius, the ground and the palette pop on or off at once",
     how: "`FILM_BASE` and `FILM_TARGETS` in engine/films.js (pure; a row per visual token, amounts only), `filmTargets` reading the world's size and palette off the reel position, `filmEase` at Aevi's 0.18 per second; `renderFilm` keeps one eased vector across every cut and hands it to `paintFilmShot`, which reads every amount off it and gates every layer on its weight; the raster takes world/night/grey/dim as weights",
-    gates: ["680/G: at the cut network_runaway → swarm the net's target goes 1 → 0.35, not to nothing — it THINS through swarm",
-            "680/G: at the cut middle_closes → lights_out the ring's target goes 1 → 0 and the pole-on turn unwinds — the ring FADES",
+    gates: ["680/G: at the cuts network_runaway → swarm → swarm_ordered the net's target goes 1 → 1 → 0.8, not to nothing — it THINS under the swarm",
+            "680/G: at the cut middle_closes → lights_out the ring's target goes 1 → 0.2 and the pull 1.25 → 0.3 as the lights go out, and the pole-on turn unwinds — the ring FADES",
             "680/G: `shrunk` and `world` are read off where the shot sits relative to the shrink — Earth and large before it, Exesa and small from it on, and a film with no shrink is already in the present",
             "680/G: driven — one second of easing closes 82% of the gap (Aevi's 0.18), two seconds at 60 fps settle within 3%, and the step is frame-rate independent",
             "680/G: …and under reduced motion the frame IS the target — k = 1, no easing, so the stills and the crossfade stay as they were",

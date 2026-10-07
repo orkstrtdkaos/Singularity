@@ -208,37 +208,44 @@ export function shotSeconds(shot, pacing = {}) {
  * ⛑ `world` is the Earth→Exesa cross (0 Earth, 1 Exesa) and `shrunk` the old size → the small world; both are
  * positions in the reel rather than rows — `filmTargets` reads them off where the shot sits relative to the
  * `shrink` shot, so a rewrite that moves the shrink stays right. */
+/* ✅ AEVI, THE 35 AGAIN (G2): `night` is HOW DEEP THE SHADOW IS — 1 is the sun's full terminator, 0 a world lit whole —
+ * eased per shot, so an Earth shot keeps 30–60% of its colour on the dark side and the lights still read. `dark` is
+ * what `night` used to mean: the lights-out darkening of the whole world (`lights_out`, `natural`, `standing_up`).
+ * `cut` is the cutaway (G1), faded over the globe at the globe's own radius instead of cut to and back. */
 export const FILM_BASE = Object.freeze({
-  polar: 0, shrunk: 1, world: 1, outline: 0, lights: 0, night: 0, grey: 0, dim: 0,
+  polar: 0, shrunk: 1, world: 1, outline: 0, lights: 0, night: 1, dark: 0, grey: 0, dim: 0, cut: 0,
   net: 0, runaway: 0, swarm: 0, order: 0, works: 0, drain: 0,
   poles: 0, pull: 0, middle: 0, natural: 0, standing: 0, lattice: 0, veil: 0, pause: 0,
   arcs: 0, many: 0, you: 0, title: 0,
 });
 export const FILM_TARGETS = Object.freeze({
-  earth:           { lights: 1 },
+  // ✅ G1 (the 35 again): the pops are ROWS — the net thins under the swarm (1 → 0.8), the pull and the grey carry
+  // into `middle_closes`, the ring and the pull fade through `lights_out`, the cutaway is a weight, and the others
+  // stay lit through `you` ("you are one of them"). ✅ G2: `night` per shot. ✅ G3: the outline is the shrink's.
+  earth:           { lights: 1, night: 0.55 },
   network:         { lights: 1, net: 1 },
-  network_runaway: { lights: 0.8, net: 1, runaway: 1 },
-  swarm:           { lights: 0.8, net: 0.35, swarm: 1 },
-  swarm_ordered:   { lights: 0.8, swarm: 1, order: 1 },
-  workings:        { lights: 0.8, works: 1 },
-  drain:           { lights: 0.5, works: 1, drain: 1, grey: 1 },
-  bores:           { },
+  network_runaway: { lights: 0.8, net: 1, runaway: 1, night: 0.7 },
+  swarm:           { lights: 0.8, net: 1, swarm: 1 },
+  swarm_ordered:   { lights: 0.8, net: 0.8, swarm: 1, order: 1 },
+  workings:        { lights: 0.8, works: 1, night: 0.45 },
+  drain:           { lights: 0.5, works: 1, drain: 1, grey: 1, night: 0.4 },
+  bores:           { cut: 1 },
   shrink:          { outline: 1 },
-  name_wears:      { outline: 0.4 },
+  name_wears:      { outline: 0.6 },
   meaning_fades:   { works: 1, grey: 1 },
   poles_ignite:    { polar: 1, poles: 1 },
   poles_pull:      { polar: 1, poles: 1, pull: 1 },
-  middle_closes:   { polar: 1, poles: 1, middle: 1 },
-  lights_out:      { night: 1 },
-  bores_capped:    { },
-  natural:         { night: 1, natural: 1 },
-  standing_up:     { night: 1, standing: 1 },
+  middle_closes:   { polar: 1, poles: 1, middle: 1, pull: 1.25, grey: 1 },
+  lights_out:      { dark: 1, poles: 0.2, pull: 0.3 },
+  bores_capped:    { cut: 1 },
+  natural:         { dark: 1, natural: 1, night: 0.5 },
+  standing_up:     { dark: 1, standing: 1 },
   lattice:         { dim: 1, lattice: 1 },
   veil:            { dim: 1, lattice: 1, veil: 1 },
   pause:           { dim: 1, lattice: 1, veil: 1, pause: 1 },
   arcs:            { arcs: 1 },
   many:            { arcs: 1, many: 1 },
-  you:             { arcs: 1, many: 0.4, you: 1 },
+  you:             { arcs: 1, many: 1, you: 1 },
   title:           { lights: 0.3, title: 1 },
   zoom_to_start:   { },
   nearest_arc:     { arcs: 1 },

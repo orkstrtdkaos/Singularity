@@ -70,7 +70,7 @@ import { makeInfluence } from "./engine/influence.js";
 import { glyphFor, drawGlyph } from "./engine/mapicons.mjs";
 import { localLayoutFor, localFrame, localModel, paintLocalMap, enlargementFor, paintEnlargement, regionFaceOf, levelsOf, levelWord, isCityPlace, cityPlacesOf } from "./engine/localmap.js";   // SNG-678 L0/L1/L2/L4/L5
 import { bakeEarthRGB, earthCityLights } from "./engine/earth.js";   // ⛔ SNG-680: the first world the film shows IS Earth   // SNG-409 §4: a pole must never read as a town   // SNG-390: the globe, read-only
-import { walkingDays, milesFor, worldPosForGenerated, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout, fieldBlobs, fieldAlpha, placeLabels } from "./engine/worldmap.js";
+import { walkingDays, milesFor, worldPosForGenerated, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, fieldBlobs, fieldAlpha, placeLabels } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
 import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities, isKinAdjacent, kinSecondaryOptions, domainsLegal, domainOf, domainOfTradition, sectOf } from "./engine/traditions.js";
 import { sheetFor as personSheetFor, personRecordFor, battleSkillsFor, playerSheetFor } from "./engine/npcsheet.js";  // the person-keyed sheet, and SNG-571's player-facing one
@@ -208,7 +208,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.22.2";
+const APP_VERSION = "2.22.3";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -944,6 +944,7 @@ let mapShowKG = false;   // SNG-046: knowledge-overlay toggle on the world map
 // geographies into an average true of neither.
 let mapField = null;     // null | "substrate" | "nanite"
 let mapShowSub = false;  // SNG-082b: sub-place satellites toggle (off by default — the clean look)
+let mapShowLinks = false; // ✅ SNG-678: "Connections" — the threads between places, on the ground, off by default
 let _lightboxWired = false; // SNG-053: one-time lightbox click delegation (referenced by boot)
 let tuneOpen = null;             // SNG-015 Part B: index of the choice whose tune panel is open
 let tuneSel = { abilityId: undefined, intensity: "standard" }; // current tune selection
@@ -15878,6 +15879,7 @@ let _regionView = { k: 1, cx: 0.5, cy: 0.5, sx: 0, sy: 0, sw: 0, sh: 0 };
 let _framedFor = null;
 // ⛔ M11 · the ring labels' own boxes, so a road's far end can be hovered for the yard it actually arrives in
 let _exitBoxes = [];
+let _regionPeople = [];   // ✅ SNG-678: the people and threads drawn on the ground, for the pointer
 /* ═════ D1 · RESERVE, THEN DRAW — AND THE ORDER OF THE INK IS THE TABLE'S, NOT THE PAINTER'S ═════
  * ✅ AEVI: *"places are rank 2 and powers rank 0, but in the paint the powers reserve first. The rank is the
  * table's on paper and still the CODE ORDER'S in practice."*
@@ -16737,6 +16739,48 @@ function paintRegionMap(regionId) {
     if (held.rows.length) console.log(`[holds] region ${regionId}: ${_holdPick.length} drawn`
       + `, ${offRegion} in other regions, of ${held.rows.length} held (${JSON.stringify(held.sources)})`);
   }
+  /* ═════ SNG-678 · THE DIAGRAM'S JOBS MOVE ONTO THE GROUND ═════
+   * ✅ AEVI's parity list: *"which places CONNECT ('which the ground does not say') → a Connections toggle on the
+   * region map. It draws the edges that are not roads (waygate links, paths), as THREADS, never fills (B5's rule)"*
+   * and *"'Show what you know': people met, threads heard of, where they live → the same toggle on the region map.
+   * People as small marks at their places, in the label rank below places."*
+   * ⛑ The positions are the MARKS' — the same points the glyphs and the clicks use — so a person stands at the
+   * place the player can tap, not at a diagram coordinate nothing else on this screen knows. */
+  _regionPeople = [];
+  if (mapShowLinks) {
+    const at416 = new Map(marks416.map((m) => [m.id, m.p]));
+    const { edges: edges416 } = regionTierNodes(CONTENT, character, regionId);
+    ctx.save(); ctx.strokeStyle = "rgba(200,212,236,0.38)"; ctx.lineWidth = 1; ctx.setLineDash([4, 5]);
+    for (const [a, b] of edges416) {
+      const A = at416.get(a), B = at416.get(b);
+      if (!A || !B) continue;
+      ctx.beginPath(); ctx.moveTo(A.x, A.y); ctx.lineTo(B.x, B.y); ctx.stroke();
+    }
+    ctx.setLineDash([]); ctx.restore();
+  }
+  if (mapShowKG) {
+    const pos416 = {};
+    for (const m of marks416) pos416[m.id] = { x: m.p.x, y: m.p.y };
+    const people = knownOverlay(character, pos416, CONTENT);
+    ctx.save();
+    for (const e of people) {
+      const heard = !e.discovered;
+      ctx.globalAlpha = heard ? 0.62 : 0.95;
+      ctx.fillStyle = e.kind === "rumour" ? "rgba(190,200,230,0.9)" : "rgba(246,240,226,0.95)";
+      ctx.strokeStyle = "rgba(10,12,18,0.85)"; ctx.lineWidth = 1;
+      ctx.beginPath();
+      // ● met · ◆ heard of — the diagram's own grammar, kept
+      if (e.kind === "rumour" || heard) { ctx.moveTo(e.x, e.y - 4.5); ctx.lineTo(e.x + 4.5, e.y); ctx.lineTo(e.x, e.y + 4.5); ctx.lineTo(e.x - 4.5, e.y); ctx.closePath(); }
+      else ctx.arc(e.x, e.y, 3.2, 0, Math.PI * 2);
+      ctx.fill(); ctx.stroke();
+      const nm = String(e.label || "").slice(0, 18);
+      const w = (drawLabel(ctx, nm, -9999, -9999, "person", { heard })?.w) || 0;
+      const box = _labelSpace.place(e.x, e.y - 8, w, 11, { kind: "person", clampTo: { w: W, h: H }, offsets: [[0, 0], [0, 20], [w / 2 + 8, 4], [-w / 2 - 8, 4]] });
+      if (box) { ctx.textAlign = "center"; queueLabel(ctx, nm, box, "person", { heard }); }
+      _regionPeople.push({ x: e.x, y: e.y, label: e.label, topicId: e.topicId || null, kind: e.kind, heard });
+    }
+    ctx.restore();
+  }
   flushLabels();
   const hereMark = marks416.find(m => m.id === here);
   if (hereMark) {
@@ -16881,6 +16925,10 @@ function wireRegionGroundMap(selectedId) {
     for (const b of _exitBoxes) {
       if (x >= b.x0 && x <= b.x1 && y >= b.y0 && y <= b.y1) return { kind: "exit", id: b.id };
     }
+    // ✅ SNG-678: a person on the ground is a target — their codex topic is one tap away
+    for (const p of _regionPeople) {
+      if (Math.hypot(p.x - x, p.y - y) <= 9) return { kind: "person", id: p.topicId, name: p.label, person: p };
+    }
     if (_regionFan?.pills) {
       for (const p of _regionFan.pills) {
         const w = (p.w || 60) / 2 + 2, h = (p.h || PILL_H) / 2 + 2;
@@ -16980,6 +17028,12 @@ function wireRegionGroundMap(selectedId) {
     cv.style.cursor = hit ? "pointer" : "default";
     if (!hit) return;                                   // ⛑ the chip stays until the pointer finds something else
     if (hit.kind === "seal") { hideChip(); return; }     // a closed seal says its piece on the canvas already
+    if (hit.kind === "person") {                          // ✅ SNG-678: who they are, where they live
+      hideChip();
+      const ro = document.getElementById("region-map-readout");
+      if (ro) ro.textContent = `${hit.name}${hit.person?.heard ? " — heard of" : " — met"}${hit.id ? " · tap for the codex" : ""}`;
+      return;
+    }
     showChip(hit, p.x, p.y);
   };
   cv.onmouseleave = () => { cv.style.cursor = "default"; _drag = null; };
@@ -17041,6 +17095,7 @@ function wireRegionGroundMap(selectedId) {
       const hit = pickAt(p.x, p.y);
       if (!hit) { hidePlaceCard(); if (_regionFan) { _regionFan = null; hideChip(); repaint(); } return; }
       if (hit.kind === "seal") { _regionFan = { key: hit.cluster.key }; hideChip(); repaint(); return; }
+      if (hit.kind === "person") { hideChip(); if (hit.id) renderCodexScreen("", hit.id); return; }
       if (hit.kind === "pill" && hit.pill?.kind === "lead") { _regionFan = null; hideChip(); repaint(); return; }
       _regionFan = null; hideChip();
       pickPlace(hit.id);
@@ -17061,6 +17116,7 @@ function wireRegionGroundMap(selectedId) {
       return;
     }
     if (hit.kind === "seal") { _regionFan = { key: hit.cluster.key }; hideChip(); repaint(); return; }
+    if (hit.kind === "person") { hideChip(); if (hit.id) renderCodexScreen("", hit.id); return; }   // ✅ SNG-678: the codex
     if (hit.kind === "pill" && hit.pill.kind === "lead") { _regionFan = null; hideChip(); repaint(); return; }
     _regionFan = null; hideChip();
     pickPlace(hit.id);                                   // the diagram's own door
@@ -18027,15 +18083,14 @@ function localSourcesPanel(locationId) {
 
 /* ═════ SNG-678 L1/L2 · THE LOCAL CANVAS — THE THIRD TIER, DRAWN AS GROUND ═════
  * ✅ ERIK: *"We need the local maps done. Then we can finally retire that geometric view."* And: *"we need to
- * keep the local map level that the geometric one was supposed to represent."* The ring below (`renderMapLocationRing`)
- * was that level's stand-in; this is the level. ✅ AEVI (L1): *"'Look inside' opens a canvas tier in the region
+ * keep the local map level that the geometric one was supposed to represent."* The ring was that level's stand-in
+ * and is gone (SNG-678, the diagrams' retirement); this is the level. ✅ AEVI (L1): *"'Look inside' opens a canvas tier in the region
  * map's style, centred on the place"* — paper ground, contours across the measured uphill, the extent drawn as
  * what it is, roads out with exit labels, sites by kind through the shared label table.
  * ⛔ THE GEOMETRY LIVES IN `engine/localmap.js` AND THIS FUNCTION ONLY HOLDS THE DOM: the same model the film
  * draws and the gates measure, so "the well is in the village and not in the water" is one computation.
- * ⚠️ L5 IS NOT BUILT, AND THE ORDER SAYS WHAT TO DO: *"If this is the long pole, ship L1–L4 first and leave
- * interiors on the ring until L5 lands. Say so in the commit. Don't fake a floor plan."* A place whose sites
- * are all BELOW ground, and an underplace with no authored layout, keep the ring — `localTierIsInterior`. */
+ * ✅ L5 LANDED: a place with depth draws one level at a time on this canvas, so no place is an interior the
+ * canvas cannot draw, and the ring that stood in for interiors is deleted. */
 let _localView = { k: 1, dx: 0, dy: 0 };     // the tier's own pan and zoom, in CSS map pixels of the unzoomed frame
 let _localViewFor = null;
 let _localLevel = 0;                           // ✅ L5: the level the tier is showing — the surface, or −1, −2 …
@@ -18043,11 +18098,6 @@ let _localHits = { sites: [], exits: [], inset: null };
 let _localDragged = false;
 const LOCAL_ASPECT = 0.62;
 
-/* ✅ L5 LANDED: a place with depth draws one level at a time on the canvas, so no place is an "interior" the
- * canvas cannot draw — the ring below is kept only until the diagrams retire with their parity list. */
-function localTierIsInterior(layout) {
-  return false && layout;
-}
 
 /** The layout for a place, with the sub-places the ring used to draw handed in as children (L2: *"its sub-places
  *  from `locationTierNodes`, the same list the ring draws today"*), and the miles of each road out. */
@@ -18065,9 +18115,8 @@ function localLayoutHere(locationId) {
 
 function renderMapLocation(locationId) {
   const id = locationId || character.currentLocationId;
-  const { host, children, layout } = localLayoutHere(id);
+  const { host, layout } = localLayoutHere(id);
   const name = host?.name || CONTENT.locations[id]?.name || id;
-  if (localTierIsInterior(layout)) return renderMapLocationRing(id, { host, children, name });
   const here = character.currentLocationId === id;
   const nSites = (layout.sites || []).length;
   chrome(`<div class="screen screen-ground">
@@ -18297,46 +18346,6 @@ function wireLocalCanvas(locationId) {
     cv.style.cursor = hit ? "pointer" : "grab";
     if (ro && hit) ro.textContent = hit.kind === "exit" ? `→ ${hit.name}` : `${hit.site?.name || hit.id} — ${hit.site?.kind || ""}`;
   };
-}
-
-/** ⚠️ THE RING, KEPT FOR INTERIORS UNTIL L5. The order: *"leave interiors on the ring until L5 lands … Don't
- *  fake a floor plan."* Unchanged from the tier it was. */
-function renderMapLocationRing(locationId, { host, children, name }) {
-  const laid = interiorLayout(children);
-  const nodes = laid.map((c, i) => `<g class="map-node ${c.visited ? "" : "unvisited"} ${c.promoted ? "reachable" : ""}" data-mapinner="${esc(c.id)}" data-innerkind="${esc(c.kind)}">
-      <title>${esc(c.name)}${c.promoted ? " — a place of its own now, still inside " + esc(name) : ""}${c.note ? " — " + esc(c.note) : ""}${c.visited ? "" : " (heard of, not seen)"}</title>
-      <circle class="hit" cx="${c.x.toFixed(1)}" cy="${c.y.toFixed(1)}" r="22"/>
-      <circle cx="${c.x.toFixed(1)}" cy="${c.y.toFixed(1)}" r="${c.promoted ? 11 : 8}"/>
-      ${/* CCODE-11: stagger the label's distance by index so two adjacent ring nodes can never put
-            their labels in the same horizontal band — measured 3 colliding pairs in the Edge
-            District (long authored names) before this. The full name stays in the <title>. */""}
-      <text x="${c.x.toFixed(1)}" y="${(c.y + (c.y > 230 ? 26 + (i % 2) * 14 : -14 - (i % 2) * 14)).toFixed(1)}" text-anchor="middle" class="map-label">${esc(c.name.length > 20 ? c.name.slice(0, 19) + "…" : c.name)}</text>
-    </g>`).join("");
-  chrome(`<div class="screen screen-ground">
-    <h2>${esc(name)} — inside</h2>
-    <p class="hint" style="margin-bottom:8px">${children.length ? `${children.length} place${children.length === 1 ? "" : "s"} within.` : "Nothing recorded inside here yet — the places you visit and the GM names will appear here."} A ringed node is somewhere that grew into a place of its own. This is a place with depth — its levels are drawn as a ring until the local map learns to stack them.</p>
-    ${mapTierBar()}
-    ${fieldPanel(null)}
-    <div class="field-split">
-    <div class="graph-wrap"><svg id="skill-svg" viewBox="0 0 800 460" class="world-map" preserveAspectRatio="xMidYMid meet"><g class="graph-vp">
-      <circle cx="400" cy="230" r="34" class="map-node here"/>
-      <text x="400" y="235" text-anchor="middle" class="map-icon">${iconForTags(host?.tags || [])}</text>
-      <text x="400" y="286" text-anchor="middle" class="map-label">${esc(name)}</text>
-      ${laid.map(c => `<line x1="400" y1="230" x2="${c.x.toFixed(1)}" y2="${c.y.toFixed(1)}" class="map-edge"/>`).join("")}
-      ${nodes}
-    </g></svg></div>
-    ${localSourcesPanel(locationId)}
-    </div>
-    <button class="btn secondary" id="map-back" style="margin-top:12px">Back</button>
-  </div>`);
-  // a promoted interior is a real location — you can step into ITS interior too (nesting)
-  for (const g of app.querySelectorAll("[data-mapinner]")) g.onclick = () => {
-    if (g.dataset.innerkind === "location" && CONTENT.locations[g.dataset.mapinner]) { mapFocus = g.dataset.mapinner; renderMap(); }
-  };
-  wireFieldPanel(() => renderMap());   // CCODE-472
-  setGraphSurface("location"); wireSkillGraphViewport();   // SNG-168: the location tier too
-  wireMapTierBar();
-  document.getElementById("map-back").onclick = () => renderPlay(character.activeScene?.lastTurn || null, {});
 }
 
 function wireMapTierBar() {
@@ -18756,7 +18765,8 @@ function renderMap(selectedId = null) {
     ${fieldPanel(regionExtent(focusRegion, CONTENT.locations, { authored: (_regionMaps && _regionMaps[focusRegion]) || null }))}
     <p class="hint" style="margin-bottom:10px">⛰ The ground as it is — generated once at the scale where the world still has features, and kept. ◈ The field over it is EVALUATED at every point, not washed between the places — a source turned off re-renders it. The diagram below shows how the places CONNECT, which the ground does not say.</p>
     <div style="margin-bottom:8px"><button class="opt ${mapShowKG ? "selected" : ""}" id="map-kg-toggle" title="People you've met (solid) and threads you've only heard of (dimmed diamonds) — where they live">${mapShowKG ? "✓ " : ""}Show what you know</button>
-      <button class="opt ${mapShowSub ? "selected" : ""}" id="map-sub-toggle" title="The places WITHIN each location (satellites around each node)" style="margin-left:6px">${mapShowSub ? "✓ " : ""}Show sub-places</button>
+      <button class="opt ${mapShowLinks ? "selected" : ""}" id="map-links-toggle" title="The threads between places — which places CONNECT, which the ground does not say" style="margin-left:6px">${mapShowLinks ? "✓ " : ""}Connections</button>
+      <button class="opt" id="rm-me" title="Centre the map on where you stand" style="margin-left:6px">◎ me</button>
       <button class="opt ${mapField === "substrate" ? "selected" : ""}" id="map-field-lat" title="The lattice field — where the Precursors built, pooled and drained by 43 authored sources" style="margin-left:6px">${mapField === "substrate" ? "✓ " : ""}⛰ Lattice field</button>
       <button class="opt ${mapField === "nanite" ? "selected" : ""}" id="map-field-nan" title="The nanite field — a SECOND geography: where the tech was deployed before the Transition, and what became of it" style="margin-left:6px">${mapField === "nanite" ? "✓ " : ""}✵ Nanite field</button>
       ${mapField ? `<span class="hint" style="margin-left:8px">colour = strength at each place; the wash between them is interpolation, not a claim about reach</span>` : ""}
@@ -18791,7 +18801,17 @@ function renderMap(selectedId = null) {
     const b = document.getElementById(id);
     if (b) b.onclick = () => { mapField = mapField === key ? null : key; renderMap(selectedId); };
   }
-  document.getElementById("map-sub-toggle").onclick = () => { mapShowSub = !mapShowSub; renderMap(selectedId); };
+  document.getElementById("map-links-toggle").onclick = () => { mapShowLinks = !mapShowLinks; renderMap(selectedId); };
+  // ✅ SNG-678: centre on me — the diagram's ◎, on the ground: the view zooms to where you stand and blits
+  { const me = document.getElementById("rm-me");
+    if (me) me.onclick = () => {
+      const cvR = document.getElementById("region-map");
+      const mk = _regionPick?.marks?.find((m) => m.id === here);
+      if (!cvR || !mk) return;
+      const mw = cvR.width / dprOf(), mh = cvR.height / dprOf();
+      _regionView = { ..._regionView, k: 2.2, cx: mk.x / mw, cy: mk.y / mh };
+      blitRegion();
+    }; }
   for (const g of app.querySelectorAll("[data-kgtopic]")) g.onclick = () => renderCodexScreen("", g.dataset.kgtopic);
   for (const g of app.querySelectorAll("[data-mapsel]")) g.onclick = () => renderMap(g.dataset.mapsel === selectedId ? null : g.dataset.mapsel);
   wireRegionGroundMap(selectedId);

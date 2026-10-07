@@ -145,6 +145,14 @@ export const LABEL_STYLES = {
     fill: (o) => (o?.well ? "#0b3f78" : "#8a1020"),
     halo: "rgba(248,250,255,0.88)", haloWidth: 2.6, rank: 1,
   },
+  /* ✅ SNG-678 · PEOPLE ON THE GROUND. The region diagram's "Show what you know" moved onto the canvas: *"People as
+   * small marks at their places, in the label rank below places"* (Aevi's parity list). Rank 1, with `source` —
+   * a person's name never takes a town's ground, and a town never takes a person's. */
+  person: {
+    font: () => `italic 600 10px ui-serif, Georgia, serif`,
+    fill: (o) => (o?.heard ? "rgba(214,206,186,0.72)" : "rgba(246,240,226,0.95)"),
+    halo: "rgba(10,12,18,0.8)", haloWidth: 2.4, rank: 1,
+  },
   exit: {
     font: () => `600 10px ui-serif, Georgia, serif`,
     fill: () => "rgba(226,214,180,0.92)",

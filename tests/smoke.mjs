@@ -5051,17 +5051,9 @@ await (async () => {
   check("166: a place with nothing recorded inside yields an empty interior, not a crash",
     wm.locationTierNodes(ch, CONTENT, "far_hall").children.length === 0);
 
-  const laid = wm.interiorLayout(loc.children);
-  check("166: interior layout is deterministic (same map every time you open it)",
-    JSON.stringify(laid) === JSON.stringify(wm.interiorLayout(loc.children)));
-  check("166: interior children never stack on one point", new Set(laid.map(c => `${Math.round(c.x)},${Math.round(c.y)}`)).size === laid.length);
-  // Readability is the whole point of the tier, so the GEOMETRY that produces it is asserted here —
-  // measured in a real browser at 0 colliding labels for both interiors (was 2 and 3).
+  // ⛑ SNG-678: the ring and its `interiorLayout` are gone — the local tier is the canvas (678/L1, L5); the
+  // children it drew are the canvas's sites, gated there
   const minSep = (pts) => { let m = Infinity; for (let i = 0; i < pts.length; i++) for (let k = i + 1; k < pts.length; k++) m = Math.min(m, Math.hypot(pts[i].x - pts[k].x, pts[i].y - pts[k].y)); return m; };
-  check("166: interior nodes keep real breathing room (even spacing, no jitter pile-ups)", laid.length < 2 || minSep(laid) > 40);
-  const many = wm.interiorLayout(Array.from({ length: 14 }, (_, i) => ({ id: "s" + i, name: "Place " + i })));
-  check("166: past 8 children it opens a SECOND ring rather than crowding one", new Set(many.map(c => c.ring)).size === 2);
-  check("166: and the two rings interleave rather than aligning spokes", minSep(many) > 30);
   // The line I had to draw: an EXACT tie is data loss (one place is invisible and unclickable) and
   // must be broken; a NEAR tie only crowds labels, and fixing it would move authored coordinates,
   // which SNG-046 contracts as exact. Authored geography wins.
@@ -6425,11 +6417,14 @@ await (async () => {
   // `renderMapLocationRing` — the ring the order keeps for interiors until L5. The location CANVAS is asserted
   // navigable by its own means (drag, wheel, pinch through `bindGesture`) in the SNG-678 block below, which is
   // the same re-pointing the world tier got when it became a globe: the invariant, not the mechanism.
-  for (const [fn, label] of [["renderMapLocationRing", "location"], ["renderMap(selectedId", "region"]]) {
+  for (const [fn, label] of [["renderMap(selectedId", "region"]]) {
     const body = bodyOf(fn);
     check(`168: the ${label} tier has a viewport group`, /class="graph-vp"/.test(body));
     check(`168: the ${label} tier wires pan/zoom`, /wireSkillGraphViewport\(\)/.test(body));
   }
+  // ✅ SNG-678: the location tier is a CANVAS and its viewport is the shared gesture — drag pans, wheel and pinch zoom
+  check("168: the location tier has a viewport group", /bindGesture\(cv/.test(bodyOf("wireLocalCanvas")) && /onZoom/.test(bodyOf("wireLocalCanvas")));
+  check("168: the location tier wires pan/zoom", /_localView\.dx/.test(bodyOf("wireLocalCanvas")) && /paintLocalCanvas\(locationId\)/.test(bodyOf("wireLocalCanvas")));
   {
     const globe = bodyOf("wireWorldGlobe");
     // ⚠️ THIS USED TO PIN `onmousedown` AND `onwheel`, which are the two handlers that were the bug. ✅ ERIK,
@@ -6731,9 +6726,11 @@ await (async () => {
   // ⚠️ FOUR, NOT FIVE, SINCE SNG-390: the world tier left the shared SVG viewport for its own canvas,
   // so it no longer declares a surface. The invariant is that every surface USING the shared viewport names
   // itself — the count is a consequence of that, not the point.
+  // ⚠️ THREE SINCE SNG-678: the location tier left the shared SVG viewport for its own canvas (the local map,
+  // with `_localView` and the shared gesture), as the world tier did at SNG-390 — so it no longer declares one.
   check("168: every pan/zoom surface declares which one it is",
-    new Set(surfaces).size === 4 && ["location", "map", "wheel", "graph"].every(x => surfaces.includes(x))
-    && !surfaces.includes("world"));
+    new Set(surfaces).size === 3 && ["map", "wheel", "graph"].every(x => surfaces.includes(x))
+    && !surfaces.includes("world") && !surfaces.includes("location"));
 
   // The null-guard is what made one wiring safe to call from five places.
   check("168: the tier-only zoom controls are null-guarded, so the wiring cannot throw elsewhere",
@@ -23911,7 +23908,7 @@ await (async () => {
   // the tier itself
   const tier678 = bodyOf678("renderMapLocation");
   check("678/L1: 'Look inside' opens the local CANVAS — and the ring survives only for interiors, which the order says to leave on it until L5 (\"Don't fake a floor plan\")",
-    /id="local-map"/.test(tier678) && /localTierIsInterior\(layout\)/.test(tier678) && /renderMapLocationRing\(/.test(tier678) && /class="graph-vp"/.test(bodyOf678("renderMapLocationRing")));
+    /id="local-map"/.test(tier678) && !/renderMapLocationRing|localTierIsInterior/.test(src678) && !/interiorLayout/.test(src678));
   const paintT = bodyOf678("paintLocalCanvas");
   check("678/L1: the tier's labels go through the shared space and queue and are flushed once — nothing in this tier draws a label any other way",
     /_labelSpace = labelSpace\(\)/.test(paintT) && /queue: queueLabel/.test(paintT) && /flushLabels\(\)/.test(paintT) && !/\.fillText\(|\.strokeText\(/.test(paintT));
@@ -24206,7 +24203,27 @@ await (async () => {
   const tier5 = body4("renderMapLocation"), paint5 = body4("paintLocalCanvas");
   check("678/L5: the tier shows a level switch only when the place has levels, keeps the chosen level, hands it to the model and the enlargement — and no place is an interior the canvas cannot draw",
     /data-lmlevel=/.test(tier5) && /levelsOf\(layout\)/.test(tier5) && /_localLevel = Number\(b\.dataset\.lmlevel\) \|\| 0; renderMap\(\);/.test(tier5)
-      && /level: _localLevel \}\)/.test(paint5) && /hereSite, level: _localLevel \}\)/.test(paint5) && /return false && layout;/.test(body4("localTierIsInterior")));
+      && /level: _localLevel \}\)/.test(paint5) && /hereSite, level: _localLevel \}\)/.test(paint5) && !src4.includes("function localTierIsInterior"));
+}
+
+// --- SNG-678 · the diagrams retire, part A: the ring is gone and the region diagram's jobs are on the ground ---
+{
+  const srcR = readFileSync(join(root, "app.js"), "utf8").replace(/\r\n/g, "\n");
+  const bodyR = (fn) => { const a = srcR.indexOf("function " + fn); const b = srcR.indexOf("\nfunction ", a + 10); return a < 0 ? "" : srcR.slice(a, b < 0 ? a + 60000 : b); };
+  const paintR = bodyR("paintRegionMap"), wireR = bodyR("wireRegionGroundMap"), mapR = bodyR("renderMap(selectedId");
+  const ML = await import("../engine/maplabel.js");
+  check("678/parity: the label table has a `person` row at rank 1 — people are named in the rank below places, and a heard-of name is dimmer than a met one",
+    ML.LABEL_STYLES.person?.rank === 1 && ML.LABEL_STYLES.person.fill({ heard: true }) !== ML.LABEL_STYLES.person.fill({}));
+  check("678/parity: 'Show what you know' draws on the GROUND — `knownOverlay` at the marks' own points, ● met and ◆ heard, named through the shared space and queue",
+    /knownOverlay\(character, pos416, CONTENT\)/.test(paintR) && /pos416\[m\.id\] = \{ x: m\.p\.x, y: m\.p\.y \}/.test(paintR) && /queueLabel\(ctx, nm, box, "person", \{ heard \}\)/.test(paintR) && /_regionPeople\.push/.test(paintR));
+  check("678/parity: the Connections toggle draws the region's edges as THREADS on the ground (dashed, never fills) — which places connect, which the ground does not say",
+    /if \(mapShowLinks\)/.test(paintR) && /regionTierNodes\(CONTENT, character, regionId\)/.test(paintR) && /setLineDash\(\[4, 5\]\)/.test(paintR) && /id="map-links-toggle"/.test(mapR));
+  check("678/parity: a person on the ground is a target — hover says who and whether met, a tap opens their codex topic, on both the mouse and the touch door",
+    /kind: "person", id: p\.topicId/.test(wireR) && (wireR.match(/hit\.kind === "person"/g) || []).length >= 3 && (wireR.match(/renderCodexScreen\("", hit\.id\)/g) || []).length >= 2);
+  check("678/parity: ◎ centre on me lives on the ground — it zooms the canvas's view to where you stand and blits, no repaint",
+    /id="rm-me"/.test(mapR) && /_regionView = \{ \.\.\._regionView, k: 2\.2, cx: mk\.x \/ mw, cy: mk\.y \/ mh \}/.test(mapR) && /blitRegion\(\);/.test(mapR));
+  check("678/parity: the ring is gone — no `renderMapLocationRing`, no `localTierIsInterior`, no `interiorLayout` anywhere, and no handler left bound to a node nothing renders",
+    !/renderMapLocationRing|localTierIsInterior|interiorLayout|data-mapinner/.test(srcR));
 }
 
 check("smoke: no checks are stranded after process.exit (dead tests report green forever)", (() => {

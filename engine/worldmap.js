@@ -172,27 +172,6 @@ export function locationTierNodes(character, CONTENT, locationId) {
   return { host, children: [...promoted, ...subs] };
 }
 
-/** PURE. Lay children out on a ring inside the interior view — deterministic, never overlapping,
- *  and stable across renders (the same place sits in the same spot every time you open it). */
-export function interiorLayout(children, { cx = 400, cy = 230, r = 150 } = {}) {
-  const n = children.length;
-  if (!n) return [];
-  if (n === 1) return [{ ...children[0], x: cx, y: cy - r, ring: 0 }];
-  // Deterministic jitter LOOKED organic and cost readability: neighbours landed at similar radii
-  // and their labels overlapped (measured: 2–3 colliding pairs per interior). Even angular spacing,
-  // and a second ring past 8, so no two labels ever share a band. Readability beats prettiness —
-  // this tier exists to be READ.
-  const inner = n <= 8 ? children : children.slice(0, Math.ceil(n / 2));
-  const outer = n <= 8 ? [] : children.slice(Math.ceil(n / 2));
-  const place = (list, radius, ringIdx, offset) => list.map((c, i) => {
-    const ang = (i / list.length) * Math.PI * 2 - Math.PI / 2 + offset;
-    return { ...c, x: cx + Math.cos(ang) * radius, y: cy + Math.sin(ang) * radius, ring: ringIdx, angle: ang };
-  });
-  return [
-    ...place(inner, outer.length ? r * 0.62 : r, 0, 0),
-    ...place(outer, r * 1.08, 1, Math.PI / Math.max(1, outer.length)) // offset so rings interleave, never align
-  ];
-}
 
 /** Assign a stable coord to a freshly-generated location near its parent, avoiding existing
  *  points. Deterministic from the new id (no rng). Returns {x,y}. */

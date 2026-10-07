@@ -196,6 +196,82 @@ export function shotSeconds(shot, pacing = {}) {
   return Math.max(0.2, base + words * per);
 }
 
+/* ═════ G · CONTINUITY: THE ONE ARCHITECTURAL CHANGE ═════
+ * ✅ AEVI (frame by frame, G): *"Every shot is painted from nothing, from (visual, u). So at EVERY CUT these all
+ * pop on or off at once: the net, the poles, the lights, the radius, the ground and the palette … a BASE of
+ * continuous parameters; a target table V[visual] that lists only what that shot changes; every frame,
+ * cur[k] += (target[k] − cur[k]) · (1 − 0.18^dt); every layer drawn whenever its weight is above 0.01, at that
+ * weight. The net THINS through `swarm` instead of vanishing. The ring FADES through `lights_out`."*
+ * ⛔ THE TABLE LIVES HERE, BESIDE `shotSeconds`, BECAUSE IT IS PURE AND A GATE CAN WALK IT: every visual token the
+ * content writes has a row, or the painter would draw the bare globe in silence for it. Subjects (`place`,
+ * `figure`, `traditions`, `source`, `arc`) stay on the shot; only AMOUNTS live here.
+ * ⛑ `world` is the Earth→Exesa cross (0 Earth, 1 Exesa) and `shrunk` the old size → the small world; both are
+ * positions in the reel rather than rows — `filmTargets` reads them off where the shot sits relative to the
+ * `shrink` shot, so a rewrite that moves the shrink stays right. */
+export const FILM_BASE = Object.freeze({
+  polar: 0, shrunk: 1, world: 1, outline: 0, lights: 0, night: 0, grey: 0, dim: 0,
+  net: 0, runaway: 0, swarm: 0, order: 0, works: 0, drain: 0,
+  poles: 0, pull: 0, middle: 0, natural: 0, standing: 0, lattice: 0, veil: 0, pause: 0,
+  arcs: 0, many: 0, you: 0, title: 0,
+});
+export const FILM_TARGETS = Object.freeze({
+  earth:           { lights: 1 },
+  network:         { lights: 1, net: 1 },
+  network_runaway: { lights: 0.8, net: 1, runaway: 1 },
+  swarm:           { lights: 0.8, net: 0.35, swarm: 1 },
+  swarm_ordered:   { lights: 0.8, swarm: 1, order: 1 },
+  workings:        { lights: 0.8, works: 1 },
+  drain:           { lights: 0.5, works: 1, drain: 1, grey: 1 },
+  bores:           { },
+  shrink:          { outline: 1 },
+  name_wears:      { outline: 0.4 },
+  meaning_fades:   { works: 1, grey: 1 },
+  poles_ignite:    { polar: 1, poles: 1 },
+  poles_pull:      { polar: 1, poles: 1, pull: 1 },
+  middle_closes:   { polar: 1, poles: 1, middle: 1 },
+  lights_out:      { night: 1 },
+  bores_capped:    { },
+  natural:         { night: 1, natural: 1 },
+  standing_up:     { night: 1, standing: 1 },
+  lattice:         { dim: 1, lattice: 1 },
+  veil:            { dim: 1, lattice: 1, veil: 1 },
+  pause:           { dim: 1, lattice: 1, veil: 1, pause: 1 },
+  arcs:            { arcs: 1 },
+  many:            { arcs: 1, many: 1 },
+  you:             { arcs: 1, many: 0.4, you: 1 },
+  title:           { lights: 0.3, title: 1 },
+  zoom_to_start:   { },
+  nearest_arc:     { arcs: 1 },
+  globe:           { },
+  ring:            { polar: 1 },
+  axis:            { polar: 1 },
+  place:           { },
+  region:          { },
+  figure:          { },
+  source:          { },
+  arc:             { arcs: 1 },
+});
+/** The targets for one shot: the table's row over the base, with the world's size and palette read off the reel. */
+export function filmTargets(visual, { index = 0, shrinkAt = -1 } = {}) {
+  const row = FILM_TARGETS[String(visual || "")] || null;
+  const t = { ...FILM_BASE, ...(row || {}) };
+  const after = shrinkAt < 0 ? true : index >= shrinkAt;
+  t.shrunk = after ? 1 : 0;
+  t.world = after ? 1 : 0;
+  return t;
+}
+/** One step of the easing: `cur` toward `target` over `dtSeconds`, Aevi's 0.18 — 82% of the gap closes in a
+ *  second, 97% in two. Under reduced motion the frame IS the target. Pure; returns a new object. */
+export function filmEase(cur, target, dtSeconds, { reduced = false, rate = 0.18 } = {}) {
+  const k = reduced ? 1 : 1 - Math.pow(rate, Math.max(0, Math.min(1, Number(dtSeconds) || 0)));
+  const out = {};
+  for (const key of Object.keys(target)) {
+    const a = Number(cur?.[key] ?? target[key]), b = Number(target[key]);
+    const v = a + (b - a) * k;
+    out[key] = Math.abs(b - v) < 0.004 ? b : v;
+  }
+  return out;
+}
 /* ⛑ THERE IS NO `reelSeconds` HERE, AND THAT IS THE WIRING AUDIT'S RULE, NOT AN OVERSIGHT. A whole-film
  *  total is asked by a gate and by a report and by nothing in play, which makes it an export reachable only
  *  from a test — the exact shape of the eight built-and-unreached capabilities that ratchet exists for. It

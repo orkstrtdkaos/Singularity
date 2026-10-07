@@ -54,7 +54,7 @@ import { mapStateOf, mapStateWord, placeAllows } from "./engine/mapstate.js";
 import { mapHolds, holdMarker } from "./engine/mapholds.js";
 // ⛔ SNG-680: the film is DATA. Not one of its words is written in this file.
 import { filmReel, openingReel, shotSeconds, codaShots, shouldAutoplayOpening,
-  filmsFor, noteFilmUnlocks, sealedNames, cardTitle } from "./engine/films.js";
+  filmsFor, noteFilmUnlocks, sealedNames, cardTitle, filmTargets, filmEase } from "./engine/films.js";
 import { arcReachesRegion } from "./engine/arceffects.js";   // M3: open framed on what the player knows   // M2/D1: one table, one collision space
 import { decodeTerrain, sampleAt, colorAt, unproject, project, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, globeClickAction, REGION_FRAME_DEG, regionVoteAt, worldRoadRoutes, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, makePolarBase, regionExtent, bendRoad, roadNetwork, clipToFrame, routeRoads, makeGroundCost, GROUND_COST } from "./engine/worldglobe.js";
 // ⛔ ROUND 4 — whose ground is this, as things stand today. `realms.js` resolves the SAVE (losses, growth,
@@ -208,7 +208,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.22.0";
+const APP_VERSION = "2.22.1";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -7504,7 +7504,9 @@ function openingGlobeView(w, h, { shrunk = 0, yaw = 0 } = {}) {
 
 /* The ground, rasterised once per key and blitted thereafter. */
 let _opRaster = null;
-function openingRaster(view, { exesa = 0, mode = "", lights = 1, w = 900, h = 560, mix = 0, sun = null } = {}) {
+/* ✅ G (Aevi): the raster takes AMOUNTS, not a mode word — `world` (the Earth→Exesa cross), `night`, `grey` and
+ * `dim` are each 0..1 and ease across a cut, so the ground never pops from one look to the next. */
+function openingRaster(view, { world = 1, lights = 1, w = 900, h = 560, sun = null, night = 0, grey = 0, dim = 0 } = {}) {
   /* ⛔ EARTH UNTIL THE WORLD IS RENAMED, EXESA AFTER. The palette already crossed on the shots that pay the
    * cost; now the GROUND does too, and the two agree: everything up to the bores is Earth being spent, and
    * from `shrink` on it is the world we play in. That is the film's own argument, drawn rather than said. */
@@ -7512,9 +7514,10 @@ function openingRaster(view, { exesa = 0, mode = "", lights = 1, w = 900, h = 56
    * between two worlds reads as a mistake. `blend` crosses the two bakes per pixel during the shot that
    * renames the world; everywhere else it is 0 or 1 and only one bake is read, so the cost is paid in one
    * shot of thirty-five. */
-  const blend = Math.max(0, Math.min(1, Number(mix) || 0));
-  const bake = openingBake(blend >= 1 || (blend <= 0 && exesa >= 0.5) ? "exesa" : "earth");
+  const blend = Math.max(0, Math.min(1, Number(world) || 0));
+  const bake = openingBake(blend >= 1 ? "exesa" : "earth");
   const other = blend > 0 && blend < 1 ? openingBake("exesa") : null;
+  const NIGHT = Math.max(0, Math.min(1, Number(night) || 0)), GREY = Math.max(0, Math.min(1, Number(grey) || 0)), DIM = Math.max(0, Math.min(1, Number(dim) || 0));
   if (!bake) return null;
   const x0 = Math.max(0, Math.floor(view.cx - view.r)), x1 = Math.min(w, Math.ceil(view.cx + view.r));
   const y0 = Math.max(0, Math.floor(view.cy - view.r)), y1 = Math.min(h, Math.ceil(view.cy + view.r));
@@ -7537,7 +7540,7 @@ function openingRaster(view, { exesa = 0, mode = "", lights = 1, w = 900, h = 56
    * slideshow even when the frame rate was fine. */
   const SUN = sun || openingSun(0);   // ⛑ above the key, which reads it — a `const` below it is a TDZ, not a default
   const key = [Math.round(view.yaw * 2), Math.round(view.pitch), Math.round(view.r), Math.round(view.cx), Math.round(view.cy),
-    exesa < 0.5 ? "e" : "x", Math.round(blend * 12), mode, Math.round(lights * 4), step,
+    Math.round(blend * 12), Math.round(NIGHT * 8), Math.round(GREY * 8), Math.round(DIM * 8), Math.round(lights * 4), step,
     SUN.map((c) => Math.round(c * 20)).join("/")].join(",");
   if (_opRaster && _opRaster.key === key) return _opRaster;
   /* ⛑ ONE OFFSCREEN CANVAS, REUSED. The first cut allocated a fresh one for every re-raster — a canvas and
@@ -7610,11 +7613,12 @@ function openingRaster(view, { exesa = 0, mode = "", lights = 1, w = 900, h = 56
           const lit = BD ? Math.max(0, (BD[bi] / 255) - 0.5) * 2.4 : 0;
           if (lit > 0 && land) { r += 150 * q * lit; g += 118 * q * lit; b += 44 * q * lit; }
         }
-        if (mode === "drain") { const m = (r + g + b) / 3; r = r * 0.3 + m * 0.52; g = g * 0.3 + m * 0.55; b = b * 0.3 + m * 0.58; }
-        if (mode === "dark") { r *= 0.3; g *= 0.3; b *= 0.34; }
+        // ✅ G: each look is a WEIGHT, the old mode arithmetic at weight 1 and the untouched pixel at weight 0
+        if (GREY > 0) { const m = (r + g + b) / 3; r = r * (1 - 0.7 * GREY) + m * 0.52 * GREY; g = g * (1 - 0.7 * GREY) + m * 0.55 * GREY; b = b * (1 - 0.7 * GREY) + m * 0.58 * GREY; }
+        if (NIGHT > 0) { r *= 1 - 0.7 * NIGHT; g *= 1 - 0.7 * NIGHT; b *= 1 - 0.66 * NIGHT; }
         // ✅ I: *"land recoloured to periwinkle blocks → the surface DIMS (0.25), and the lattice is bright lines
         // on top under `lighter`"* — the ground keeps its own colours, only quieter, so the lines are the subject
-        if (mode === "lattice") { r *= 0.28; g *= 0.3; b *= 0.4; }
+        if (DIM > 0) { r *= 1 - 0.72 * DIM; g *= 1 - 0.7 * DIM; b *= 1 - 0.6 * DIM; }
       }
       const i = (Math.floor((y - y0) / step) * sw + Math.floor((x - x0) / step)) * 4;
       D[i] = r; D[i + 1] = g; D[i + 2] = b; D[i + 3] = a;
@@ -7896,7 +7900,7 @@ function paintOpeningCutaway(ctx, { w = 900, h = 560, u = 0, capped = false } = 
 
 /* ⛔ THE DISPATCHER. One case per authored token, and the token list is hers: a token with no case here
  * would silently draw the bare globe, so a gate holds the two lists against each other. */
-function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 560, startId = null, u = 1, index = 0 } = {}) {
+function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 560, startId = null, u = 1, index = 0, cur = null } = {}) {
   const V = String(shot?.visual || "earth");
   const coda = V === "zoom_to_start" || V === "nearest_arc";
   /* ══ SNG-681 · THE SHOTS THAT NAME WHAT THEY ARE ABOUT ══
@@ -7925,14 +7929,13 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
    * to two thirds of its size"* is an event: it belongs inside the shot that names it, eased so the contraction
    * reads, and settled by the end so every shot after it is simply the smaller world. */
   const ease = (x) => (x <= 0 ? 0 : x >= 1 ? 1 : x * x * (3 - 2 * x));
-  const shrunk = coda ? 1
-    : shrinkAt < 0 ? 1
-    : index > shrinkAt ? 1
-    : index === shrinkAt ? ease(Math.min(1, u * 1.25))
-    : 0;
-  // the palette crosses on the shots that pay the cost: `drain` begins it, `shrink` completes it
-  const EX = { earth: 0, network: 0, network_runaway: 0, swarm: 0, swarm_ordered: 0.1, workings: 0.2, drain: 0.45, bores: 0.5 };
-  const exesa = V in EX ? EX[V] : 1;
+  /* ═════ G · THE AMOUNTS COME OFF `cur`, THE SUBJECTS OFF THE SHOT ═════
+   * ✅ AEVI: *"let `paintFilmShot` take `cur` alongside the shot. Keep reading shot-specific SUBJECTS off the shot.
+   * Read every AMOUNT off `cur`."* `cur` is the eased vector `renderFilm` keeps across cuts; a caller without
+   * one (a still, a test) gets the shot's own targets, which is the eased vector at rest. */
+  const T = cur || filmTargets(V, { index, shrinkAt });
+  const shrunk = coda ? 1 : T.shrunk;
+  const exesa = coda ? 1 : T.world;        // the Earth→Exesa cross, read by the air's tint and the node set
   /* ⛔ ONE CLOCK FOR THE WHOLE FILM, AND THE WORLD NEVER TURNS BACK. ✅ ERIK: *"the world skips backwards
    * sometimes. each scene should flow smoothly to the next."* ⚠️ He is describing arithmetic: the turn was
    * `18 + index×7 + u×9`, so at every cut the index added 7° while `u` fell from 1 to 0 and took 9° away —
@@ -7950,9 +7953,9 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
    * world's south pole, so pitch −90 puts it dead centre and the 24 stations become a ring around it. ⛑ The
    * turn happens DURING `poles_ignite` and unwinds during `lights_out`, so neither is a cut; and the yaw
    * stops as it comes pole-on, because a spinning ring is not the ring the player is about to choose from. */
-  const polar = V === "poles_ignite" ? Math.min(1, u / 0.45)
-    : (V === "poles_pull" || V === "middle_closes" || V === "ring" || V === "axis") ? 1
-    : V === "lights_out" ? Math.max(0, 1 - u / 0.45) : 0;
+  // ✅ G: the pole-on turn is `cur.polar` easing toward the table's 1 — it begins at the cut and takes about two
+  // seconds, and unwinds the same way into `lights_out`, so neither end is a jump
+  const polar = T.polar;
   const view = openingGlobeView(w, h, { shrunk, yaw: yaw * (1 - polar) });
   view.pitch = -14 + (-90 + 14) * polar;
   /* ⛑ AND THE COMPOSITION LIFTS AS IT TURNS. Pole-on, the ring is drawn clear of the limb at 1.3× the
@@ -7973,12 +7976,12 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
 
   // ⛑ THE OLD OUTLINE, THE SIZE IT WAS — the only way a watcher can SEE that a third of the world is gone
   // instead of being told. ✅ *"The old outline stays faint behind it, the size it was."*
-  if (shrunk) {
+  if (shrunk > 0.01) {
     /* ✅ E (Aevi): *"The old outline is centred on `view.cy`. Pole-on, `cy` lifts by 12% while the outline
      * didn't, and it hung off centre."* It takes the same composition as the world it is the ghost of. */
     const old = openingGlobeView(w, h, { shrunk: 0, yaw, polar });
     old.cy = view.cy;
-    ctx.save(); ctx.globalAlpha = V === "shrink" ? 0.3 : 0.12;
+    ctx.save(); ctx.globalAlpha = (0.12 + 0.18 * T.outline) * shrunk;
     ctx.strokeStyle = "#7f93c0"; ctx.lineWidth = 1;
     ctx.beginPath(); ctx.arc(old.cx, old.cy, old.r, 0, Math.PI * 2); ctx.stroke(); ctx.restore();
   }
@@ -8014,17 +8017,11 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
       : { ...view, r };
   }
 
-  const mode = (V === "drain" || V === "meaning_fades") ? "drain"
-    : (V === "lattice" || V === "veil" || V === "pause") ? "lattice"
-    : (V === "lights_out" || V === "natural" || V === "standing_up") ? "dark" : "";
-  const lights = V === "earth" || V === "network" ? 1
-    : V === "network_runaway" || V === "swarm" || V === "swarm_ordered" || V === "workings" ? 0.8
-    : V === "drain" ? 0.5 : V === "meaning_fades" ? Math.max(0, 0.5 - u * 0.5)
-    : V === "lights_out" ? Math.max(0, 0.25 - u * 0.25) : V === "title" ? 0.3 : 0;
-  // the world crosses during the shot that renames it, and is settled either side of it
-  const mix = shrinkAt < 0 ? 1 : index > shrinkAt ? 1 : index === shrinkAt ? ease(Math.min(1, u * 1.25)) : 0;
+  // ✅ G: the ground's looks are weights off `cur` — the night, the grey of the drain, the dim under the lattice,
+  // the city lights and the Earth→Exesa cross all ease across a cut instead of switching at it
+  const lights = T.lights;
   const sun = openingSun(polar);
-  opGround(ctx, frame, { exesa, mode, lights, w, h, mix: coda ? 1 : mix, sun });
+  opGround(ctx, frame, { world: coda ? 1 : T.world, night: T.night, grey: T.grey, dim: T.dim, lights, w, h, sun });
 
   /* ⛑ AFTER THE GROUND, BEFORE EVERYTHING ELSE: the air belongs to the world, and the net, the glitter and
    * the arcs all sit above it. Skipped on the close frames, where the limb is off-screen and a halo would be
@@ -8033,7 +8030,7 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
     /* ⛔ B · DERIVED FROM THE SAME SUN THE GROUND IS LIT BY, so the two cannot disagree again. ✅ Aevi: *"the
      * air crescent is drawn at −152°, on the left, over the night … derive `sunward` from the same sun the
      * raster uses."* The sun's screen bearing is `atan2(−sy, sx)`; in π units, that is `sunward`. */
-    paintOpeningAir(ctx, frame, { tint: exesa < 0.5 ? "earth" : "exesa", strength: mode === "dark" ? 0.4 : 1,
+    paintOpeningAir(ctx, frame, { tint: exesa < 0.5 ? "earth" : "exesa", strength: 1 - 0.6 * T.night,
       sunward: Math.atan2(-sun[1], sun[0]) / Math.PI });
   }
   const P = (lat, lon, rad) => project(lon, lat, frame, rad == null ? 1 : rad);
@@ -8050,7 +8047,7 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
   ctx.save();
   ctx.lineCap = "round";
 
-  if (onEarth && mode !== "dark" && lights > 0) {
+  if (onEarth && lights > 0.01) {          // ✅ G: the city lights' own weight is `cur.lights`, which goes out with them
     /* ⛔ THE CITY LIGHTS ARE POINTS, AND THEY ONLY SHOW ON THE NIGHT SIDE. The raster's own light branch
      * reads a DENSITY plane, which Exesa's bake has and Earth's does not — Earth's cities are a list of
      * places, not a field, so they are drawn here where they can be points of light rather than a tint. */
@@ -8081,21 +8078,23 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
     }
   }
 
-  if (V === "network" || V === "network_runaway") {
+  if (T.net > 0.01) {
     /* ✅ *"Lines of light run between the cities, faster and finer, until the night side is a net."* — then
      * *"doubling, then doubling again; it begins to glow on the day side too."* So `network` draws a growing
-     * share of the real net, and `network_runaway` draws all of it plus the chords that pass over the day. */
+     * share of the real net, and `network_runaway` draws all of it plus the chords that pass over the day.
+     * ✅ G: drawn at `cur.net` — so the net THINS through `swarm` (its row keeps 0.35) instead of vanishing. */
     const edges = openingEdges(onEarth ? nodes : null);
-    const run = V === "network_runaway";
-    const n = run ? edges.length : Math.floor(edges.length * Math.min(1, u * 1.25));
+    const run = T.runaway;
+    const n = Math.round(edges.length * Math.max(run, Math.min(1, u * 1.25)));
     /* ⛔ J · ARCS, NOT CHORDS, AND LIGHT ADDS TO LIGHT. Each line follows the great circle between its two
      * cities, lifted a little at mid-span, and the half behind the limb is dropped by the projector — so the
      * net lies ON the world instead of across its face. `lighter` is what makes a hundred faint lines read as
      * a glow where they cross rather than as a grey wash. */
     ctx.save();
     ctx.globalCompositeOperation = "lighter";
-    ctx.strokeStyle = run ? "rgba(150,196,236,0.5)" : "rgba(120,176,230,0.36)";
-    ctx.lineWidth = run ? 1.1 : 0.9;
+    ctx.globalAlpha = T.net;
+    ctx.strokeStyle = run > 0.5 ? "rgba(150,196,236,0.5)" : "rgba(120,176,230,0.36)";
+    ctx.lineWidth = 0.9 + 0.2 * run;
     ctx.beginPath();
     for (let i = 0; i < n; i++) {
       const a = nodes[edges[i][0]], b = nodes[edges[i][1]];
@@ -8106,8 +8105,9 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
       }
     }
     ctx.stroke();
-    if (run) {
+    if (run > 0.01) {
       // the doubling: long arcs over the whole globe, and they do not wait for night
+      ctx.globalAlpha = T.net * run;
       ctx.strokeStyle = "rgba(190,220,250,0.34)"; ctx.lineWidth = 0.8;
       ctx.beginPath();
       for (let k = 0; k < Math.floor(260 * grains * Math.min(1, u * 1.5)); k++) {
@@ -8125,36 +8125,40 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
     ctx.restore();
   }
 
-  if (V === "swarm" || V === "swarm_ordered") {
+  if (T.swarm > 0.01) {
     /* ✅ *"A glitter rises off the net and spreads over the land and sea, too fine to be single things."* →
      * *"The glitter falls into patterns: grids, rings."* ⛑ The ordered pass snaps the SAME grains to a
-     * lattice of parallels and meridians, so it reads as the same swarm obeying rather than a new effect. */
-    const ord = V === "swarm_ordered";
+     * lattice of parallels and meridians, so it reads as the same swarm obeying rather than a new effect.
+     * ✅ G: `cur.order` IS the snap — the grains ease onto the grid as the weight rises, at the cut's own pace. */
+    const ord = T.order;
     ctx.fillStyle = "rgba(236,246,255,0.8)";
     for (let k = 0; k < Math.round(900 * grains); k++) {
       let lat = -88 + opRand(k, 1) * 176, lon = -180 + opRand(k, 2) * 360;
-      if (ord) {
-        const f = Math.min(1, u * 1.4);
+      if (ord > 0.01) {
+        const f = ord;
         lat = lat * (1 - f) + Math.round(lat / 9) * 9 * f;
         lon = lon * (1 - f) + Math.round(lon / 9) * 9 * f;
       }
-      const rise = ord ? 1.012 : 1 + 0.03 * Math.min(1, u) * opRand(k, 4);
+      const rise = ord > 0.5 ? 1.012 : 1 + 0.03 * Math.min(1, u) * opRand(k, 4);
       const p = P(lat, lon, rise);
       if (!inFrame(p)) continue;
-      ctx.globalAlpha = 0.3 + 0.6 * opRand(k, 6);
+      ctx.globalAlpha = (0.3 + 0.6 * opRand(k, 6)) * T.swarm;
       ctx.fillRect(p.x, p.y, 1.1, 1.1);
     }
     ctx.globalAlpha = 1;
-    if (ord) {
+    if (ord > 0.01) {
       // the rings
+      ctx.save(); ctx.globalAlpha = ord * T.swarm;
       for (let k = 0; k < 3; k++) {
         const pts = opCurrent(frame, 20 + k * 30, -60 + k * 70, 0, 360);
         opStroke(ctx, pts, "rgba(206,232,255,0.4)", 0.9);
       }
+      ctx.restore();
     }
   }
 
-  if (V === "workings" || V === "drain" || V === "meaning_fades") {
+  if (T.works > 0.01) {
+    ctx.save(); ctx.globalAlpha = T.works;        // ✅ G: the workings fade in and out at the cut's pace
     /* ✅ *"Small bright workings bloom across the globe: a wall rising, a wound closing, light poured into a
      * dark valley. Gold."* → the cost: *"Colour drains … into the bright points; the workings burn hotter
      * and the world around them greys."* → *"The workings dim one by one."* Same nine points all three
@@ -8169,9 +8173,9 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
       opGlow(ctx, p.x, p.y, 34 * heat * pulse, `rgba(255,214,122,${0.78 * heat})`, "rgba(255,186,60,0)");
       ctx.fillStyle = `rgba(255,243,206,${0.9 * heat})`;
       ctx.beginPath(); ctx.arc(p.x, p.y, 2.4, 0, Math.PI * 2); ctx.fill();
-      if (V === "drain") {
+      if (T.drain > 0.01) {
         // the colour running in: streaks from the land around each working, toward it
-        ctx.strokeStyle = "rgba(180,196,174,0.5)"; ctx.lineWidth = 0.9;
+        ctx.strokeStyle = `rgba(180,196,174,${0.5 * T.drain})`; ctx.lineWidth = 0.9;
         ctx.beginPath();
         for (let s = 0; s < 10; s++) {
           const a = (s / 10) * Math.PI * 2 + k;
@@ -8183,6 +8187,7 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
         ctx.stroke();
       }
     });
+    ctx.restore();
   }
 
   if (V === "name_wears") {
@@ -8426,21 +8431,25 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
     }
   }
 
-  if (V === "poles_ignite" || V === "poles_pull" || V === "middle_closes") {
+  if (T.poles > 0.01) {
+    /* ✅ G: the ring is drawn at `cur.poles` — it FADES through `lights_out` (whose row carries no `poles`) instead
+     * of vanishing at the cut; the ignite order inside the first shot is still the shot's own `u`. */
     const poles = openingPoles();
     const lit = V === "poles_ignite" ? Math.min(1, u * 1.1) : 1;
+    ctx.save(); ctx.globalAlpha = T.poles;
     poles.forEach((pl, k) => {
       const on = V === "poles_ignite" ? Math.max(0, Math.min(1, lit * poles.length - k)) : 1;
       if (on <= 0) return;
       const p = P(pl.lat, pl.lon, OPENING_RING_UP);   // V3: outside the limb, like the other branch
       if (!inFrame(p)) return;
       opGlow(ctx, p.x, p.y, 22 * on, pl.ink || `hsla(${pl.hue},82%,${pl.lit}%,${0.8 * on})`, `hsla(${pl.hue},82%,${pl.lit}%,0)`);
-      ctx.globalAlpha = on;
+      ctx.globalAlpha = on * T.poles;
       ctx.fillStyle = pl.ink || `hsla(${pl.hue},90%,${Math.min(88, pl.lit + 26)}%,1)`;
       ctx.beginPath(); ctx.arc(p.x, p.y, 2.6, 0, Math.PI * 2); ctx.fill();
-      ctx.globalAlpha = 1;
+      ctx.globalAlpha = T.poles;
     });
-    if (V === "poles_pull") {
+    ctx.restore();
+    if (T.pull > 0.01) {
       /* ✅ I · *"`poles_pull` tints the land toward its ring sector"* — ✅ AEVI's cut: *"conic `soft-light` at
        * α ≤ 0.42, plus a `source-over` pass at 0.08, plus a warm middle glow at the Crossing."* ⛔ THE SECTORS
        * ARE THE STATIONS' OWN SCREEN ANGLES, pole-on: each station's projected point gives the angle its
@@ -8458,12 +8467,12 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
             g.addColorStop(1, stops[0].ink);
             ctx.save();
             ctx.beginPath(); ctx.arc(frame.cx, frame.cy, frame.r, 0, Math.PI * 2); ctx.clip();
-            ctx.globalCompositeOperation = op; ctx.globalAlpha = alpha * Math.min(1, u * 1.4);
+            ctx.globalCompositeOperation = op; ctx.globalAlpha = alpha * T.pull;
             ctx.fillStyle = g; ctx.fillRect(frame.cx - frame.r, frame.cy - frame.r, frame.r * 2, frame.r * 2);
             ctx.restore();
           };
           try { tintAt(0.42, "soft-light"); tintAt(0.08, "source-over"); } catch { /* an old canvas: the shot stays as it was */ }
-          opGlow(ctx, frame.cx, frame.cy, frame.r * 0.34, `rgba(255,220,160,${0.32 * Math.min(1, u * 1.4)})`, "rgba(255,200,120,0)");
+          opGlow(ctx, frame.cx, frame.cy, frame.r * 0.34, `rgba(255,220,160,${0.32 * T.pull})`, "rgba(255,200,120,0)");
         }
       }
       /* ✅ *"Threads run from the land to the poles and pull; places drift toward their pole and burn purer
@@ -8477,13 +8486,13 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
         const sector = Math.round((((nd.lon % 360) + 360) % 360) / (360 / n24)) % n24;
         const best = poles[sector] || poles[0];
         if (!best) return;
-        const f = Math.min(1, u * 1.2) * 0.55;
+        const f = T.pull * 0.55;                      // ✅ G: the drift is the weight, so it eases at the cut
         const lat = nd.lat + (best.lat - nd.lat) * f;
         const lon = nd.lon + ((((best.lon - nd.lon + 540) % 360) - 180)) * f;
         const a = P(nd.lat, nd.lon), b = P(lat, lon, 1.01), q = P(best.lat, best.lon, OPENING_RING_UP);
         if (a && q) {
           // ⛑ J: the thread climbs the great circle from the land to its station, rising off the ground as it goes
-          ctx.save(); ctx.globalAlpha = 0.26; ctx.globalCompositeOperation = "lighter";
+          ctx.save(); ctx.globalAlpha = 0.26 * T.pull; ctx.globalCompositeOperation = "lighter";
           ctx.strokeStyle = best.ink || `hsla(${best.hue},70%,70%,1)`;
           ctx.lineWidth = 0.7;
           opStroke(ctx, opArc(P, nd, best, { lift: 0.02, steps: 8, rA: 1.0, rB: OPENING_RING_UP }), ctx.strokeStyle, 0.7);
@@ -8548,7 +8557,8 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
     ctx.globalAlpha = 1;
   }
 
-  if (V === "natural") {
+  if (T.natural > 0.01) {
+    ctx.save(); ctx.globalAlpha = T.natural;       // ✅ G: the quiet lights come up at the cut's pace
     /* ✅ *"Quiet light returns, not gold: green in the woods, fire in a hearth, breath on cold air, a single
      * figure seated still."* ⛑ The greens go where the woods are — the raster's own biome field — so this
      * shot is as sited as the net was. Silhouette only, no face: her rule for the whole film. */
@@ -8579,9 +8589,11 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
         ctx.restore();
       }
     }
+    ctx.restore();
   }
 
-  if (V === "standing_up") {
+  if (T.standing > 0.01) {
+    ctx.save(); ctx.globalAlpha = T.standing;
     /* ✅ *"Out of the land, things stand: a tower that hums, a wood that walks, a city of light, a shape of
      * fire. Silhouettes only."* Four, on the limb, rising with the shot. */
     /* ✅ I · AEVI: *"four silhouettes at fixed lat/lon, all off the visible face of Exesa, so the shot is
@@ -8612,9 +8624,10 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
       if (kind === "fire") { ctx.beginPath(); ctx.moveTo(-9, 0); ctx.quadraticCurveTo(-3, -H * 0.7, 0, -H); ctx.quadraticCurveTo(3, -H * 0.7, 9, 0); ctx.fill(); ctx.stroke(); opGlow(ctx, 0, -H * 0.6, 24, "rgba(255,150,70,0.5)", "rgba(255,110,40,0)"); }
       ctx.restore();
     });
+    ctx.restore();
   }
 
-  if (V === "lattice" || V === "veil" || V === "pause") {
+  if (T.lattice > 0.01) {
     /* ✅ *"Through the ground, a lattice of fine lines under every land, one continuous working. It does not
      * move. It is very large."* ⛔ UNDER: `project`'s radius parameter is a multiplier on the sphere, so
      * 0.985 draws beneath the surface and the limb occludes it earlier than the ground above it — the same
@@ -8622,6 +8635,7 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
     const edges = openingEdges();
     ctx.save();
     ctx.globalCompositeOperation = "lighter";                       // ✅ I: bright lines on a dimmed world
+    ctx.globalAlpha = T.lattice;                                    // ✅ G: at its weight
     ctx.strokeStyle = "rgba(150,186,255,0.62)"; ctx.lineWidth = 0.8;
     ctx.beginPath();
     for (const [ai, bi] of edges) {
@@ -8633,7 +8647,7 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
     ctx.stroke();
     for (const nd of nodes) { const p = P(nd.lat, nd.lon, 0.985); if (inFrame(p)) { ctx.fillStyle = "rgba(196,220,255,0.7)"; ctx.fillRect(p.x, p.y, 1.4, 1.4); } }
     ctx.restore();
-    if (V === "veil" || V === "pause") {
+    if (T.veil > 0.01) {
       /* ✅ *"Where the lattice thins, a darkness that is not shadow: an absence in the shape of something
        * enormous. Nothing in it is shown."* + *"an absence with a faint violet rim that takes the stars out
        * of the sky behind it."*
@@ -8656,19 +8670,21 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
       {
         ctx.save();
         ctx.globalCompositeOperation = "destination-out";
+        ctx.globalAlpha = T.veil;                                    // G: the absence deepens at the cut's pace
         const rg = ctx.createRadialGradient(g.x, g.y, 0, g.x, g.y, rr);
         rg.addColorStop(0, "rgba(0,0,0,1)"); rg.addColorStop(0.72, "rgba(0,0,0,0.92)"); rg.addColorStop(1, "rgba(0,0,0,0)");
         ctx.fillStyle = rg;
         ctx.beginPath(); ctx.arc(g.x, g.y, rr, 0, Math.PI * 2); ctx.fill();
         ctx.restore();
         ctx.save();
+        ctx.globalAlpha = T.veil;
         ctx.strokeStyle = "rgba(164,126,214,0.42)"; ctx.lineWidth = 1.4;
         ctx.shadowColor = "rgba(150,110,220,0.8)"; ctx.shadowBlur = rr * 0.12;   // ✅ the violet rim, soft
         ctx.beginPath(); ctx.arc(g.x, g.y, rr * 0.76, 0, Math.PI * 2); ctx.stroke();
         ctx.restore();
       }
     }
-    if (V === "pause") {
+    if (T.pause > 0.01) {
       /* ✅ *"Over them, the history of the film replays small and fast: the net, the workings, the bores, the
        * ash, the standing up."* ⛑ Five marks in a row, the one on top cycling — the film's own argument
        * carried in miniature, which is what the caption beneath it says in words. */
@@ -8676,7 +8692,7 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
       const on = Math.floor((u * 5.5) % strip.length);
       strip.forEach((kind, k) => {
         const x = w / 2 + (k - 2) * 52, y = h - 56, lit = k === on ? 1 : 0.28;
-        ctx.save(); ctx.globalAlpha = lit;
+        ctx.save(); ctx.globalAlpha = lit * T.pause;
         ctx.strokeStyle = "rgba(210,226,255,0.9)"; ctx.fillStyle = "rgba(210,226,255,0.9)"; ctx.lineWidth = 1;
         if (kind === "net") { ctx.beginPath(); for (let s = 0; s < 5; s++) { ctx.moveTo(x - 14, y - 10 + s * 5); ctx.lineTo(x + 14, y - 8 + s * 4); } ctx.stroke(); }
         if (kind === "gold") { ctx.fillStyle = "rgba(255,214,122,0.95)"; for (let s = 0; s < 3; s++) { ctx.beginPath(); ctx.arc(x - 10 + s * 10, y - 2 + (s % 2) * 6, 3, 0, Math.PI * 2); ctx.fill(); } }
@@ -8688,7 +8704,8 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
     }
   }
 
-  if (V === "arcs" || V === "many" || V === "you" || V === "nearest_arc" || V === "arc") {
+  if (T.arcs > 0.01 || V === "nearest_arc" || V === "arc") {
+    const wtArcs = (V === "nearest_arc" || V === "arc") ? 1 : T.arcs;   // ✅ G: the currents at their weight
     /* ✅ *"The globe as it is now, Exesa, the game's own. Bands of moving light sweep across it: the arcs,
      * each a current going its own way."* ⛔ ONE CURRENT PER AUTHORED ARC, in authored order — so the number
      * of lights on screen is the number of arcs in the game, and an eleventh arc appears in the film the day
@@ -8720,12 +8737,12 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
       const dim = spotlight && arc.id !== spotlight ? 0.22 : 1;
       const band = (a, b) => through ? opCurrentThrough(frame, sLat, sLon, 68 + k * 23, a - 180, b - 180)
         : opCurrent(frame, inc, node, a, b);
-      opStroke(ctx, band(0, 360), `hsla(${hue},78%,66%,${0.22 * dim})`, 5);
+      opStroke(ctx, band(0, 360), `hsla(${hue},78%,66%,${0.22 * dim * wtArcs})`, 5);
       // the current itself: a bright run moving along the band
       const head = ((u * (wide ? 0.55 : 0.8) + k * 0.13) % 1) * 360;
-      opStroke(ctx, band(head, head + 56), `hsla(${hue},92%,74%,${0.85 * dim})`, dim < 1 ? 1.6 : 2.6);
+      opStroke(ctx, band(head, head + 56), `hsla(${hue},92%,74%,${0.85 * dim * wtArcs})`, dim < 1 ? 1.6 : 2.6);
     });
-    if (V === "many") {
+    if (T.many > 0.01) {
       /* ✅ *"Small lights all over the globe, moving: some with the currents, some against them."* — and
        * `openingOthers` says above exactly which of them are real and which are places standing in for
        * people the content does not place. */
@@ -8742,21 +8759,21 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
         const swing = Math.sin(u * Math.PI * 2 * 0.6 + i) * 2.2 * dir;
         const p = P(o.lat + swing * 0.4, o.lon + swing, 1.008);
         if (!inFrame(p)) return;
-        const on = Math.min(1, Math.max(0, u * 1.6 - opRand(i, 17) * 0.6));
+        const on = Math.min(1, Math.max(0, u * 1.6 - opRand(i, 17) * 0.6)) * T.many;
         if (on <= 0) return;
         if (o.own) { opGlow(ctx, p.x, p.y, 10, `rgba(255,238,196,${0.8 * on})`, "rgba(255,220,150,0)"); }
         ctx.fillStyle = `rgba(236,244,255,${(o.own ? 0.95 : o.pad ? 0.4 : 0.68) * on})`;
         ctx.beginPath(); ctx.arc(p.x, p.y, o.own ? 2.2 : o.pad ? 1 : 1.6, 0, Math.PI * 2); ctx.fill();
       });
     }
-    if (V === "you") {
+    if (T.you > 0.01) {
       /* ✅ *"One light, unlit until that shot. It has no position yet (the character doesn't exist); centre
        * it on the visible face."* ⛔ SO IT IS NOT A PLACE, AND IT MUST NOT BECOME ONE. `you` runs twice, in
        * `arcs`, before the door — there is no character, no start, nothing to be near. Putting it on a real
        * location would be the film telling the player where they live before they have chosen. */
       const p = { x: frame.cx, y: frame.cy };
       if (p) {
-        const on = Math.min(1, u * 1.6);
+        const on = Math.min(1, u * 1.6) * T.you;
         opGlow(ctx, p.x, p.y, 30 * on, `rgba(255,236,186,${0.85 * on})`, "rgba(255,210,120,0)");
         ctx.fillStyle = `rgba(255,250,238,${on})`;
         ctx.beginPath(); ctx.arc(p.x, p.y, 3.4, 0, Math.PI * 2); ctx.fill();
@@ -8782,9 +8799,9 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
     }
   }
 
-  if (V === "title") {
-    // the words are the caption layer's, from content; the stage simply darkens behind them
-    ctx.fillStyle = "rgba(4,5,11,0.45)"; ctx.fillRect(0, 0, w, h);
+  if (T.title > 0.01) {
+    // the words are the caption layer's, from content; the stage simply darkens behind them — at the cut's pace
+    ctx.fillStyle = `rgba(4,5,11,${0.45 * T.title})`; ctx.fillRect(0, 0, w, h);
   }
   ctx.restore();
 }
@@ -9043,7 +9060,22 @@ function renderFilm(doc, { mode = "film", after = null, startId = null } = {}) {
     prev.style.transition = ""; cv.style.transition = "";
     prev.style.opacity = "0"; cv.style.opacity = "1";
   };
-  const frameAt = (u) => { try { paintFilmShot(ctx, frames[i], { reel, reduced, w: vw, h: vh, startId, u, index: i }); } catch (err) { console.warn("[film] shot skipped:", err?.message); } };
+  /* ═════ G · ONE EASED VECTOR ACROSS EVERY CUT ═════
+   * ✅ AEVI: *"every frame, cur[k] += (target[k] − cur[k]) · (1 − 0.18^dt)"*. `cur` lives here, outside the shot,
+   * which is the whole point: a cut changes the TARGET and the picture follows it over about two seconds, so the
+   * net thins, the ring fades, the ground's looks cross. ⛑ `dt` is this frame's own, capped so a tab that was
+   * hidden for a minute does not snap when it returns; under reduced motion the frame IS the target (k = 1), and
+   * the crossfade between stills stays exactly as it was. */
+  let cur = null, lastFrameMs = 0;
+  const shrinkAtF = reel.shots.findIndex((s) => s.visual === "shrink");
+  const frameAt = (u) => {
+    const now = nowMs();
+    const dt = lastFrameMs ? Math.min(0.25, Math.max(0, (now - lastFrameMs) / 1000)) : 0;
+    lastFrameMs = now;
+    const target = filmTargets(frames[i]?.visual, { index: i, shrinkAt: coda ? -1 : shrinkAtF });
+    cur = cur ? filmEase(cur, target, dt, { reduced }) : target;
+    try { paintFilmShot(ctx, frames[i], { reel, reduced, w: vw, h: vh, startId, u, index: i, cur }); } catch (err) { console.warn("[film] shot skipped:", err?.message); }
+  };
   const tick = () => {
     _openingRaf = null;
     // ⛑ the screen moved on under us — stop rather than paint into a canvas nobody is showing

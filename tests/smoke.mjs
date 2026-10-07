@@ -8153,9 +8153,12 @@ await (async () => {
         check("680/G1: …and every visual token the author wrote has a case in the painter — an unknown token would draw the bare globe in silence",
           (() => {
             const tokens = Object.keys(reel.visuals || {}).filter((k) => !k.startsWith("_"));
-            const missing = tokens.filter((k) => !codeOnly.includes(`"${k}"`));
+            // ✅ G: the AMOUNTS a token asks for live in `FILM_TARGETS` (films.js) and the SUBJECT cases in the
+            // painter — a token is drawn when it has a row, or a case for what it names
+            const drawn = (k) => (OP.FILM_TARGETS && k in OP.FILM_TARGETS) || codeOnly.includes(`"${k}"`);
+            const missing = tokens.filter((k) => !drawn(k));
             // ⛑ and the same filter, over a token nobody has drawn, must find exactly that one
-            const fixture = [...tokens, "_fixture_undrawn_token"].filter((k) => !codeOnly.includes(`"${k}"`));
+            const fixture = [...tokens, "_fixture_undrawn_token"].filter((k) => !drawn(k));
             return tokens.length >= 24 && missing.length === 0 && fixture.length === 1;
           })(),
           (() => { const tokens = Object.keys(reel.visuals || {}).filter((k) => !k.startsWith("_"));
@@ -8592,8 +8595,9 @@ await (async () => {
         const i0 = src681.indexOf("SNG-680 O2 · ONE GLOBE"), i1 = src681.indexOf("function renderCreate() {", i0);
         const codeOnly = src681.slice(i0, i1).replace(/\/\*[\s\S]*?\*\//g, " ").replace(/^\s*\/\/.*$/gm, " ");
         const tokens = [...new Set(films.flatMap((d) => FM.filmReel(d).shots.map((s) => s.visual)))];
-        const missing = tokens.filter((k) => !codeOnly.includes(`"${k}"`));
-        const fixture = [...tokens, "_fixture_undrawn_token"].filter((k) => !codeOnly.includes(`"${k}"`));
+        // ✅ G: a token's AMOUNTS live in `FILM_TARGETS` (films.js); a token is drawn when it has a row, or a case for what it names
+        const missing = tokens.filter((k) => !codeOnly.includes(`"${k}"`) && !(k in FM.FILM_TARGETS));
+        const fixture = [...tokens, "_fixture_undrawn_token"].filter((k) => !codeOnly.includes(`"${k}"`) && !(k in FM.FILM_TARGETS));
         check("681/G1: …and the painter has a case for every visual token across all ten films",
           tokens.length >= 30 && missing.length === 0 && fixture.length === 1,
           missing.length ? `no case for: ${missing.join(", ")}` : `${tokens.length} distinct tokens drawn`);
@@ -23935,13 +23939,14 @@ await (async () => {
   const src680ij = readFileSync(join(root, "app.js"), "utf8");
   const bodyOfIJ = (fn) => { const a = src680ij.indexOf("function " + fn); const b = src680ij.indexOf("\nfunction ", a + 10); return a < 0 ? "" : src680ij.slice(a, b < 0 ? a + 40000 : b); };
   const shotFn = bodyOfIJ("paintFilmShot");
-  const caseOf = (token) => { const a = shotFn.indexOf(`if (V === "${token}"`); const b = shotFn.indexOf("\n  if (V === ", a + 10); return a < 0 ? "" : shotFn.slice(a, b < 0 ? a + 6000 : b); };
+  // ✅ G: a layer is gated on its WEIGHT (`if (T.standing > 0.01)`), not on the token — the anchor is the weight's name
+  const caseOf = (weight) => { const a = shotFn.indexOf(`if (T.${weight} > 0.01)`); const b = shotFn.indexOf("\n  if (", a + 10); return a < 0 ? "" : shotFn.slice(a, b < 0 ? a + 6000 : b); };
   // I · the Veil is placed by the frame, never by a longitude
-  const veil = (() => { const a = shotFn.indexOf('if (V === "veil" || V === "pause")'); return a < 0 ? "" : shotFn.slice(a, a + 3200); })();
+  const veil = (() => { const a = shotFn.indexOf('if (T.veil > 0.01)'); return a < 0 ? "" : shotFn.slice(a, a + 3400); })();
   check("680/I: the Veil is placed BESIDE the globe in screen space (frame.cx/cy and r), not at a latitude and longitude that can be behind the face",
     /frame\.cx \+ frame\.r \* 1\.25/.test(veil) && !/P\(-26, 58/.test(veil) && /destination-out/.test(veil) && /shadowBlur/.test(veil));
   // I · the silhouettes stand along the upper limb in screen space, seven of them, rising in turn
-  const standing = caseOf("standing_up");
+  const standing = caseOf("standing");
   check("680/I: `standing_up` draws SEVEN silhouettes along the upper limb in screen space, rotated to the normal and rising in turn — never at a fixed lat/lon",
     /kinds = \["tower", "wood", "city", "fire", "tower", "wood", "city"\]/.test(standing) && /frame\.cx \+ Math\.cos\(ang\) \* frame\.r/.test(standing)
       && /ctx\.rotate\(ang \+ Math\.PI \/ 2\)/.test(standing) && !/P\(lat, lon, 1\.0\)/.test(standing) && /k \* 0\.12/.test(standing));
@@ -23953,15 +23958,15 @@ await (async () => {
   const lattice = caseOf("lattice");
   const raster = bodyOfIJ("openingRaster");
   check("680/I: under `lattice` the SURFACE dims (its own colours, quieter) and the lattice is drawn `lighter` on top — not land recoloured to periwinkle blocks",
-    /mode === "lattice"\) \{ r \*= 0\.28/.test(raster) && !/periwinkle|20 \+ 22 \* f/.test(raster.slice(raster.indexOf('mode === "lattice"'), raster.indexOf('mode === "lattice"') + 200))
+    /if \(DIM > 0\) \{ r \*= 1 - 0\.72 \* DIM/.test(raster) && !/20 \+ 22 \* f/.test(raster.replace(/\/\/[^\n]*/g, ""))
       && /globalCompositeOperation = "lighter"/.test(lattice));
   // I · poles_pull tints the world toward its sectors, from the stations' own screen angles
-  const pull = (() => { const a = shotFn.indexOf('if (V === "poles_pull") {'); return a < 0 ? "" : shotFn.slice(a, a + 6500); })();
+  const pull = (() => { const a = shotFn.indexOf('if (T.pull > 0.01) {'); return a < 0 ? "" : shotFn.slice(a, a + 6500); })();
   check("680/I: `poles_pull` tints the land toward its ring sector — a conic `soft-light` at 0.42 from the stations' OWN screen angles, a `source-over` pass at 0.08, and a warm middle glow — guarded on createConicGradient",
     /createConicGradient/.test(pull) && /tintAt\(0\.42, "soft-light"\)/.test(pull) && /tintAt\(0\.08, "source-over"\)/.test(pull)
       && /Math\.atan2\(q\.y - frame\.cy, q\.x - frame\.cx\)/.test(pull) && /opGlow\(ctx, frame\.cx, frame\.cy/.test(pull));
   // J · arcs, not chords — the helper, driven through the film's own projector arithmetic
-  const net = caseOf("network");
+  const net = caseOf("net");
   check("680/J: the net between the cities is drawn through `opArc` under `lighter` — great-circle steps, lifted at mid-span — and not as `moveTo(pa) → lineTo(pb)` chords",
     (net.match(/opArc\(P, /g) || []).length >= 2 && /globalCompositeOperation = "lighter"/.test(net) && !/ctx\.moveTo\(pa\.x, pa\.y\); ctx\.lineTo\(pb\.x, pb\.y\)/.test(net));
   check("680/J: …and the pull threads climb the great circle from the land to the station off the limb (rA 1 → rB the ring's radius)",
@@ -24058,6 +24063,62 @@ await (async () => {
   check("678/L0: the region map asks `regionFaceOf` for every place — skips the suppressed, names by `regionName`, draws by `regionKind`, and counts the skipped into the parent's +N",
     /regionFaceOf\(id, CONTENT\)/.test(paint0) && /face416\[id\]\?\.name/.test(paint0) && /m\.regionKind \|\| meta\.k/.test(paint0) && /suppressed416\[face\.tallyTo\]/.test(paint0)
       && /hidden416\[pid\] = \(hidden416\[pid\] \|\| 0\) \+ n/.test(paint0));
+}
+
+// --- SNG-680 G · continuity: the one architectural change ---
+/* ✅ AEVI (G): *"a BASE of continuous parameters; a target table V[visual] that lists only what that shot changes;
+ * every frame, cur[k] += (target[k] − cur[k]) · (1 − 0.18^dt); every layer drawn whenever its weight is above 0.01,
+ * at that weight. The net THINS through `swarm` instead of vanishing. The ring FADES through `lights_out`."* And:
+ * *"put the target table in engine/films.js beside shotSeconds. It's pure and testable, and a test can assert that
+ * every visual in the content has a row."* ⛔ So the table is gated over the CONTENT's population of tokens, the
+ * easing is driven, and the two cuts she named are measured as target vectors rather than read off a comment. */
+{
+  const OPG = await import("../engine/films.js");
+  const { loadContentHeadless: lchG } = await import("./headless_content.mjs");
+  const CG = await lchG();
+  // the population the table owes: every visual token across the opening and the nine films, walked here
+  const toks = [...new Set([CG.opening, ...(CG.films || [])].filter(Boolean).flatMap((d) => Object.keys(d.visuals || {}).filter((k) => !k.startsWith("_"))))].sort();
+  const noRow = toks.filter((k) => !(k in OPG.FILM_TARGETS));
+  check(`680/G: every visual token the content writes (${toks.length}, across the opening and the nine films) has a row in FILM_TARGETS`,
+    toks.length >= 24 && noRow.length === 0, noRow.join(", "));
+  check("680/G: …and every row names only keys the BASE declares — a weight nobody reads is a target nobody reaches",
+    Object.values(OPG.FILM_TARGETS).every((row) => Object.keys(row).every((k) => k in OPG.FILM_BASE)));
+  // the two cuts she named, as target vectors
+  const ra = OPG.filmTargets("network_runaway", { index: 3, shrinkAt: 11 }), sw = OPG.filmTargets("swarm", { index: 4, shrinkAt: 11 });
+  check("680/G: at the cut network_runaway → swarm the net's target goes 1 → 0.35, not to nothing — it THINS through swarm",
+    ra.net === 1 && ra.runaway === 1 && sw.net === 0.35 && sw.runaway === 0 && sw.swarm === 1);
+  const pm = OPG.filmTargets("middle_closes", { index: 17, shrinkAt: 11 }), lo = OPG.filmTargets("lights_out", { index: 18, shrinkAt: 11 });
+  check("680/G: at the cut middle_closes → lights_out the ring's target goes 1 → 0 and the pole-on turn unwinds — the ring FADES",
+    pm.poles === 1 && pm.polar === 1 && lo.poles === 0 && lo.polar === 0 && lo.night === 1);
+  // the world's size and palette are positions in the reel
+  const before = OPG.filmTargets("drain", { index: 8, shrinkAt: 11 }), at = OPG.filmTargets("shrink", { index: 11, shrinkAt: 11 }), after = OPG.filmTargets("arcs", { index: 29, shrinkAt: 11 }), present = OPG.filmTargets("globe", { index: 0, shrinkAt: -1 });
+  check("680/G: `shrunk` and `world` are read off where the shot sits relative to the shrink — Earth and large before it, Exesa and small from it on, and a film with no shrink is already in the present",
+    before.shrunk === 0 && before.world === 0 && at.shrunk === 1 && at.world === 1 && after.shrunk === 1 && after.world === 1 && present.shrunk === 1 && present.world === 1);
+  // the easing, driven
+  let cur = OPG.filmTargets("earth", { index: 0, shrinkAt: 11 });
+  const tgt = OPG.filmTargets("network", { index: 2, shrinkAt: 11 });
+  const one = OPG.filmEase(cur, tgt, 1);
+  let c2 = cur; for (let k = 0; k < 120; k++) c2 = OPG.filmEase(c2, tgt, 1 / 60);
+  check("680/G: driven — one second of easing closes 82% of the gap (Aevi's 0.18), two seconds at 60 fps settle within 3%, and the step is frame-rate independent",
+    Math.abs(one.net - 0.82) < 0.01 && Math.abs(c2.net - 1) < 0.04 && Math.abs(OPG.filmEase(cur, tgt, 0.5).net - (1 - Math.pow(0.18, 0.5))) < 0.01, `${one.net.toFixed(3)} / ${c2.net.toFixed(3)}`);
+  check("680/G: …and under reduced motion the frame IS the target — k = 1, no easing, so the stills and the crossfade stay as they were",
+    OPG.filmEase(cur, tgt, 0.016, { reduced: true }).net === 1);
+  check("680/G: …and a step that lands within 0.004 snaps to the target, so a layer's weight reaches exactly 0 and stops drawing",
+    OPG.filmEase({ net: 0.003 }, { net: 0 }, 0.016).net === 0);
+  // the dispatcher reads amounts off `cur`, the clock keeps it across cuts
+  const srcG = readFileSync(join(root, "app.js"), "utf8");
+  const bodyG = (fn) => { const a = srcG.indexOf("function " + fn); const b = srcG.indexOf("\nfunction ", a + 10); return a < 0 ? "" : srcG.slice(a, b < 0 ? a + 40000 : b); };
+  const shotG = bodyG("paintFilmShot"), filmG = bodyG("renderFilm");
+  check("680/G: `paintFilmShot` takes `cur` and reads the amounts off it — polar, shrunk, world, lights, night, grey, dim and every layer's weight — while the subjects stay on the shot",
+    /cur = null \} = \{\}\)/.test(shotG) && /const T = cur \|\| filmTargets\(V, \{ index, shrinkAt \}\)/.test(shotG) && /const polar = T\.polar/.test(shotG)
+      && /world: coda \? 1 : T\.world, night: T\.night, grey: T\.grey, dim: T\.dim, lights/.test(shotG)
+      && ["net", "swarm", "works", "poles", "pull", "natural", "standing", "lattice", "veil", "pause", "many", "you", "title"].every((k) => shotG.includes(`if (T.${k} > 0.01)`))
+      && /if \(shot\?\.place\) return \{ kind: "place"/.test(shotG));
+  check("680/G: …and `renderFilm` keeps ONE eased vector across every cut — `cur` lives outside the shot, eased by this frame's own dt toward the shot's targets, and handed to the painter",
+    /let cur = null, lastFrameMs = 0;/.test(filmG) && /cur = cur \? filmEase\(cur, target, dt, \{ reduced \}\) : target;/.test(filmG) && /index: i, cur \}/.test(filmG));
+  check("680/G: …and the raster takes amounts, not a mode word — world, night, grey and dim are 0..1 weights in its key and its pixel arithmetic",
+    /function openingRaster\(view, \{ world = 1, lights = 1, w = 900, h = 560, sun = null, night = 0, grey = 0, dim = 0 \}/.test(srcG)
+      && /Math\.round\(NIGHT \* 8\), Math\.round\(GREY \* 8\), Math\.round\(DIM \* 8\)/.test(srcG) && !/mode === "dark"/.test(srcG));
 }
 
 check("smoke: no checks are stranded after process.exit (dead tests report green forever)", (() => {

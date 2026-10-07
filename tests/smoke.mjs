@@ -23807,7 +23807,7 @@ await (async () => {
   const LM = await import("../engine/localmap.js");
   const { loadContentHeadless: lch678 } = await import("./headless_content.mjs");
   const C678 = await lch678();
-  const src678 = readFileSync(join(root, "app.js"), "utf8");
+  const src678 = readFileSync(join(root, "app.js"), "utf8").replace(/\r\n/g, "\n");   // ⛑ CRLF-proof: a rebase can hand back a CRLF checkout
   const bodyOf678 = (fn) => { const a = src678.indexOf("function " + fn); const b = src678.indexOf("\nfunction ", a + 10); return a < 0 ? "" : src678.slice(a, b < 0 ? a + 12000 : b); };
   const stub678 = () => {
     const counts = {};
@@ -23936,7 +23936,7 @@ await (async () => {
  * placed by the FRAME; and the net is gated on the arc helper, driven: a chord's midpoint lies inside the sphere, an
  * arc's lies on or above it. */
 {
-  const src680ij = readFileSync(join(root, "app.js"), "utf8");
+  const src680ij = readFileSync(join(root, "app.js"), "utf8").replace(/\r\n/g, "\n");   // ⛑ CRLF-proof: a rebase can hand back a CRLF checkout
   const bodyOfIJ = (fn) => { const a = src680ij.indexOf("function " + fn); const b = src680ij.indexOf("\nfunction ", a + 10); return a < 0 ? "" : src680ij.slice(a, b < 0 ? a + 40000 : b); };
   const shotFn = bodyOfIJ("paintFilmShot");
   // ✅ G: a layer is gated on its WEIGHT (`if (T.standing > 0.01)`), not on the token — the anchor is the weight's name
@@ -24058,7 +24058,7 @@ await (async () => {
   });
   check("678/L0: …and every suppressed site is PRESENT on its parent's local map — the one place it goes when the region map stops drawing it",
     onParent.every((o) => o.ok), onParent.filter((o) => !o.ok).map((o) => `${o.id} (${o.why})`).join(", "));
-  const src0 = readFileSync(join(root, "app.js"), "utf8");
+  const src0 = readFileSync(join(root, "app.js"), "utf8").replace(/\r\n/g, "\n");   // ⛑ CRLF-proof: a rebase can hand back a CRLF checkout
   const paint0 = (() => { const a = src0.indexOf("function paintRegionMap("); return src0.slice(a, a + 60000); })();
   check("678/L0: the region map asks `regionFaceOf` for every place — skips the suppressed, names by `regionName`, draws by `regionKind`, and counts the skipped into the parent's +N",
     /regionFaceOf\(id, CONTENT\)/.test(paint0) && /face416\[id\]\?\.name/.test(paint0) && /m\.regionKind \|\| meta\.k/.test(paint0) && /suppressed416\[face\.tallyTo\]/.test(paint0)
@@ -24106,7 +24106,7 @@ await (async () => {
   check("680/G: …and a step that lands within 0.004 snaps to the target, so a layer's weight reaches exactly 0 and stops drawing",
     OPG.filmEase({ net: 0.003 }, { net: 0 }, 0.016).net === 0);
   // the dispatcher reads amounts off `cur`, the clock keeps it across cuts
-  const srcG = readFileSync(join(root, "app.js"), "utf8");
+  const srcG = readFileSync(join(root, "app.js"), "utf8").replace(/\r\n/g, "\n");   // ⛑ CRLF-proof: a rebase can hand back a CRLF checkout
   const bodyG = (fn) => { const a = srcG.indexOf("function " + fn); const b = srcG.indexOf("\nfunction ", a + 10); return a < 0 ? "" : srcG.slice(a, b < 0 ? a + 40000 : b); };
   const shotG = bodyG("paintFilmShot"), filmG = bodyG("renderFilm");
   check("680/G: `paintFilmShot` takes `cur` and reads the amounts off it — polar, shrunk, world, lights, night, grey, dim and every layer's weight — while the subjects stay on the shot",

@@ -1,0 +1,42 @@
+diff --git a/app.js b/app.js
+index d82cfd6..da637bd 100644
+--- a/app.js
++++ b/app.js
+@@ -8348,8 +8348,33 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
+       const on = lit(pl) ? arrive : 0.22;
+       if (lit(pl)) {
+-        // the thread in toward the middle
+-        ctx.save(); ctx.globalAlpha = 0.5 * arrive;
+-        ctx.strokeStyle = pl.ink || `hsla(${pl.hue},72%,66%,1)`; ctx.lineWidth = 1.1;
+-        ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(frame.cx, frame.cy); ctx.stroke(); ctx.restore();
++        const LAND = whole ? [] : (() => {
++          const own = (shot?.landings || []).filter((x) => x && x.from === pl.id).map((x) => x.place);
++          const seat = CONTENT.opening?.ringSeats?.[pl.id];
++          return (own.length ? own : (seat ? [seat] : [])).map((id) => CONTENT.locations?.[id]).filter((l) => l && l.worldPos);
++        })();
++        if (!LAND.length) {
++          ctx.save(); ctx.globalAlpha = 0.5 * arrive;
++          ctx.strokeStyle = pl.ink || `hsla(${pl.hue},72%,66%,1)`; ctx.lineWidth = 1.1;
++          ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(frame.cx, frame.cy); ctx.stroke(); ctx.restore();
++        }
++        for (const loc of LAND) {
++          const la = Number(loc.worldPos.colatitude) - 90, lo = ((Number(loc.worldPos.longitude) + 540) % 360) - 180;
++          const pts = opArc(P, { lat: pl.lat, lon: pl.lon }, { lat: la, lon: lo }, { lift: 0.03, steps: 18, rA: RING_UP, rB: 1.0 });
++          const k = Math.max(2, Math.ceil(pts.length * Math.min(1, arrive)));
++          ctx.save(); ctx.globalCompositeOperation = "lighter"; ctx.globalAlpha = 0.75;
++          opStroke(ctx, pts.slice(0, k), pl.ink || `hsla(${pl.hue},72%,66%,1)`, 1.4); ctx.restore();
++          const q = P(la, lo, 1.002);
++          if (q && arrive >= 0.98) {
++            const pulse = 1 + 0.25 * Math.sin(u * Math.PI * 4);
++            ctx.save(); ctx.globalCompositeOperation = "lighter";
++            opGlow(ctx, q.x, q.y, 20 * pulse, pl.ink || `hsla(${pl.hue},82%,${pl.lit}%,0.9)`, `hsla(${pl.hue},82%,${pl.lit}%,0)`);
++            ctx.restore();
++            try { drawGlyph(ctx, glyphFor({ kind: loc.kind, t: loc.tier }) || "town", q.x, q.y, 12, { ink: "#fdf6e6" }); }
++            catch { ctx.fillStyle = "#fdf6e6"; ctx.beginPath(); ctx.arc(q.x, q.y, 3, 0, Math.PI * 2); ctx.fill(); }
++            ctx.save(); ctx.font = opFont(12, "600"); ctx.textAlign = "left"; ctx.textBaseline = "middle";
++            ctx.shadowColor = "rgba(0,0,0,0.9)"; ctx.shadowBlur = 8; ctx.fillStyle = "rgba(240,238,230,0.92)";
++            ctx.globalAlpha = q.y > h - 190 ? 0.35 : 1; ctx.fillText(String(loc.name || ""), q.x + 11, q.y - 9); ctx.restore();
++          }
++        }
+       }
+       opGlow(ctx, p.x, p.y, lit(pl) ? 20 * arrive : 8, pl.ink || `hsla(${pl.hue},82%,${pl.lit}%,${0.85 * on})`, `hsla(${pl.hue},82%,${pl.lit}%,0)`);

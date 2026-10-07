@@ -8162,6 +8162,33 @@ await (async () => {
           "a reader that invents its own field name reports the CONTENT as missing");
       }
 
+      /* ══ AEVI, FRAME BY FRAME: THE TWO BUGS IN THE AIR AND THE ONE IN THE LIGHT ══
+       * ⛔ A RADIAL GRADIENT PAINTS ITS FIRST STOP EVERYWHERE INSIDE ITS INNER RADIUS, as well as its last
+       * one everywhere beyond its outer radius. I was caught by both ends of that in one function: the limb
+       * crescent washed the far half of the world (fixed in CCODE-635), and the halo — a full disc filled
+       * with a gradient whose inner stop is half-opacity sky blue — lay over the ENTIRE globe. ✅ Her reading:
+       * *"the periwinkle ocean, the lavender land, and the pale translucent half-disc Erik is pointing at."*
+       * ⛔ AND A SUN DEFINED BY LONGITUDE PUTS THE TERMINATOR ON A MERIDIAN — which pole-on is a DIAMETER, so
+       * half of every poles shot was black with the ring crossing it. The light is camera-space now: the
+       * sphere normal of each pixel against one sun vector.
+       * ⛑ Gated on the source, because this is a painter: what can be held here is that the air is an
+       * annulus, that the light reads a normal and not a longitude, and that one sun feeds both. */
+      {
+        const air = src680.slice(src680.indexOf("function paintOpeningAir"), src680.indexOf("function paintOpeningCutaway"));
+        check("680/O2: ⛔ the air is an ANNULUS — a gradient-filled disc paints its inner stop over the whole world",
+          /ctx\.fill\("evenodd"\)/.test(air) && /arc\(cx, cy, r, 0, Math\.PI \* 2, true\)/.test(air)
+          && !/ctx\.arc\(cx, cy, r \* 1\.17, 0, Math\.PI \* 2\);\s*ctx\.fill\(\);/.test(air),
+          "the globe's own circle is punched out of the halo");
+        check("680/O2: …and the light is a DIRECTION in camera space, not a longitude — so the terminator is a curve and never a diameter",
+          /const nz = Math\.sqrt\(Math\.max\(0, 1 - nx \* nx - ny \* ny\)\);/.test(src680)
+          && /const cosSun = nx \* SUN\[0\] \+ ny \* SUN\[1\] \+ nz \* SUN\[2\];/.test(src680)
+          && !/OPENING_SUN_DEG/.test(src680),
+          "one sun vector, eased from side-on to front-on as the globe turns pole-on");
+        check("680/O2: …and the air's crescent is derived from that same sun, so the glow and the light cannot disagree again",
+          /sunward: Math\.atan2\(-sun\[1\], sun\[0\]\) \/ Math\.PI/.test(src680),
+          "her fix: derive it, do not re-pick a side");
+      }
+
       /* ══ ERIK: *"the world skips backwards sometimes"* ══
        * ⛔ THAT WAS ARITHMETIC, NOT A FEELING. The turn was `18 + index×7 + u×9`: at every cut the index added
        * 7° while `u` fell from 1 to 0 and took 9° back — a 2.00° step BACKWARDS at each of the 35 shot

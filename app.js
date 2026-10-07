@@ -207,7 +207,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.21.4";
+const APP_VERSION = "2.21.5";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -7259,7 +7259,25 @@ const OPENING_RING_SCREEN = 1.4, OPENING_LABEL_SCREEN = 1.62;
 const OPENING_RING_UP = OPENING_RING_SCREEN / Math.max(0.2, Math.cos(OPENING_RING_LAT * Math.PI / 180));
 const OPENING_LABEL_UP = OPENING_LABEL_SCREEN / Math.max(0.2, Math.cos(OPENING_RING_LAT * Math.PI / 180));
 const OPENING_SAMPLES = 52000;    // the sample budget one frame of ground may spend
-const OPENING_SUN_DEG = 62;       // how far round from the camera the sun stands — see `openingRaster`
+/* ═════ C · THE SUN IS A DIRECTION, NOT A LONGITUDE ═════
+ * ✅ AEVI, frame by frame: *"A sun defined by longitude puts the terminator on a meridian. Side-on, that is a
+ * straight vertical line. Pole-on, every meridian is a radius, so the terminator becomes a DIAMETER and half
+ * the world goes black. That black half is the grey wedge in every poles shot, with the stations and threads
+ * crossing it."*
+ * ⛔ SO THE LIGHT IS CAMERA-SPACE, THE WAY A LIT SPHERE ACTUALLY WORKS: every pixel inside the disc has a
+ * sphere normal straight out of its screen position — `nx = (x−cx)/r`, `ny = −(y−cy)/r`, `nz = √(1−nx²−ny²)`
+ * — and the lit side is `n · SUN`. The terminator is then a curve, as it is on a photograph, and it does not
+ * care which way the globe is turned underneath it.
+ * ⛑ TWO SUNS, EASED. Side-on the film wants a night side to put the cities on; pole-on it wants the whole of
+ * Exesa lit, because ✅ *"the middle is literally the middle"* needs to be seen. Her probe's two vectors. */
+const OPENING_SUN_SIDE = [0.84, 0.36, 0.41];     // a night side for the cities
+const OPENING_SUN_FRONT = [0.30, 0.42, 0.86];    // pole-on: the whole ring lit
+function openingSun(polar = 0) {
+  const k = Math.max(0, Math.min(1, polar));
+  const v = OPENING_SUN_SIDE.map((a, i) => a + (OPENING_SUN_FRONT[i] - a) * k);
+  const m = Math.hypot(v[0], v[1], v[2]) || 1;
+  return [v[0] / m, v[1] / m, v[2] / m];
+}
 const OPENING_TURN_DEG_S = 2.2;   // the world's turn, in degrees a second of film — one clock, never stepped
 
 /** Deterministic, so frame N of a shot agrees with frame N-1 and a still frame is a real frame of the film
@@ -7407,12 +7425,22 @@ function paintOpeningAir(ctx, view, { sunward = -0.6, tint = "earth", strength =
   const { cx, cy, r } = view;
   const sky = tint === "earth" ? [92, 150, 230] : [126, 150, 196];
   ctx.save();
+  /* ⛔ A · THE HALO IS AN ANNULUS. ✅ AEVI: *"A radial gradient paints its FIRST stop everywhere INSIDE its
+   * inner radius, not only its last stop beyond its outer one. The fill is a full disc, so
+   * `rgba(92,150,230,0.5)` lies over the entire globe."* ⚠️ That one line is the periwinkle ocean, the
+   * lavender land and the pale half-disc in Erik's frame — and it is the same trap as the one the comment
+   * below describes, read from the other end. I fixed the outer end and left the inner one.
+   * ⛑ `evenodd` with the globe's own circle punched out: the air is outside the world, which is where air
+   * on a photograph of a world is. */
   const halo = ctx.createRadialGradient(cx, cy, r * 0.99, cx, cy, r * 1.12);
   halo.addColorStop(0, `rgba(${sky[0]},${sky[1]},${sky[2]},${0.5 * strength})`);
   halo.addColorStop(0.4, `rgba(${sky[0]},${sky[1]},${sky[2]},${0.16 * strength})`);
   halo.addColorStop(1, `rgba(${sky[0]},${sky[1]},${sky[2]},0)`);
   ctx.fillStyle = halo;
-  ctx.beginPath(); ctx.arc(cx, cy, r * 1.17, 0, Math.PI * 2); ctx.fill();
+  ctx.beginPath();
+  ctx.arc(cx, cy, r * 1.17, 0, Math.PI * 2);
+  ctx.arc(cx, cy, r, 0, Math.PI * 2, true);
+  ctx.fill("evenodd");
   /* ⛔ THE AIRGLOW IS A STROKE ON THE LIMB, NOT A FILL OVER THE DISC. ⚠️ Twice I drew it as a radial
    * gradient centred on a point out at the limb — and a radial gradient paints its LAST STOP everywhere
    * beyond its outer radius, so the far half of the world got a flat 0.3 of pale blue over it and the
@@ -7421,11 +7449,11 @@ function paintOpeningAir(ctx, view, { sunward = -0.6, tint = "earth", strength =
    * the middle of the face at all. */
   ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.clip();
   const a0 = Math.PI * sunward - Math.PI * 0.62, a1 = Math.PI * sunward + Math.PI * 0.62;
-  // ⚠️ soft: at 0.5 alpha on a 1024px frame this read as a hard white band rather than as air
-  ctx.lineWidth = r * 0.06;
+  // ✅ B: *"thin the band to r·0.03, blur r·0.05, alpha 0.3"* — her measured numbers, not my guess at soft
+  ctx.lineWidth = r * 0.03;
   ctx.strokeStyle = `rgba(206,232,255,${0.3 * strength})`;
-  ctx.shadowColor = `rgba(${sky[0] + 70},${sky[1] + 60},255,${0.75 * strength})`;
-  ctx.shadowBlur = r * 0.18;
+  ctx.shadowColor = `rgba(${sky[0] + 70},${sky[1] + 60},255,${0.6 * strength})`;
+  ctx.shadowBlur = r * 0.05;
   ctx.beginPath(); ctx.arc(cx, cy, r * 0.99, a0, a1); ctx.stroke();
   ctx.restore();
 }
@@ -7471,7 +7499,7 @@ function openingGlobeView(w, h, { shrunk = 0, yaw = 0 } = {}) {
 
 /* The ground, rasterised once per key and blitted thereafter. */
 let _opRaster = null;
-function openingRaster(view, { exesa = 0, mode = "", lights = 1, w = 900, h = 560, mix = 0 } = {}) {
+function openingRaster(view, { exesa = 0, mode = "", lights = 1, w = 900, h = 560, mix = 0, sun = null } = {}) {
   /* ⛔ EARTH UNTIL THE WORLD IS RENAMED, EXESA AFTER. The palette already crossed on the shots that pay the
    * cost; now the GROUND does too, and the two agree: everything up to the bores is Earth being spent, and
    * from `shrink` on it is the world we play in. That is the film's own argument, drawn rather than said. */
@@ -7497,8 +7525,10 @@ function openingRaster(view, { exesa = 0, mode = "", lights = 1, w = 900, h = 56
   /* ⛑ HALF A DEGREE, NOT TWO. With the ground baked, a frame is an array lookup per pixel — so the globe
    * can be redrawn as it turns instead of stepping every 2°, which is what made the first cut look like a
    * slideshow even when the frame rate was fine. */
+  const SUN = sun || openingSun(0);   // ⛑ above the key, which reads it — a `const` below it is a TDZ, not a default
   const key = [Math.round(view.yaw * 2), Math.round(view.pitch), Math.round(view.r), Math.round(view.cx), Math.round(view.cy),
-    exesa < 0.5 ? "e" : "x", Math.round(blend * 12), mode, Math.round(lights * 4), step].join(",");
+    exesa < 0.5 ? "e" : "x", Math.round(blend * 12), mode, Math.round(lights * 4), step,
+    SUN.map((c) => Math.round(c * 20)).join("/")].join(",");
   if (_opRaster && _opRaster.key === key) return _opRaster;
   /* ⛑ ONE OFFSCREEN CANVAS, REUSED. The first cut allocated a fresh one for every re-raster — a canvas and
    * an ImageData per turn step, for the garbage collector to find later. */
@@ -7514,7 +7544,6 @@ function openingRaster(view, { exesa = 0, mode = "", lights = 1, w = 900, h = 56
    * the whole visible face was in full daylight, there was no terminator, and the city-light branch (which
    * needs `day < 0.3`) never fired once. A third of a turn to the left gives a lit crescent, a terminator
    * across the face, and a night side with the lights on, which is the picture she wrote. */
-  const sun = -view.yaw + OPENING_SUN_DEG;
   for (let y = y0; y < y1; y += step) {
     for (let x = x0; x < x1; x += step) {
       let r = 0, g = 0, b = 0, a = 0;
@@ -7535,11 +7564,13 @@ function openingRaster(view, { exesa = 0, mode = "", lights = 1, w = 900, h = 56
           b += (other.rgb[oi * 3 + 2] - b) * blend;
           if (blend > 0.5) land = other.mask[oi] === 1;
         }
-        /* ⛔ A REAL TERMINATOR, NOT A WASH. ✅ *"Night. The globe turning … the lights of cities on the dark
-         * side."* The lit side falls off as the cosine of the angle to the sun, the way a lit sphere does,
-         * with a thin warm band at the line between — which is the single thing that makes a drawn globe
-         * read as a photograph rather than a map. */
-        const cosSun = Math.cos((p.lon - sun) * Math.PI / 180) * Math.cos(p.lat * Math.PI / 180 * 0.55);
+        /* ⛔ THE LIT SIDE IS `n · SUN`, with `n` the sphere normal of THIS PIXEL in camera space — which is
+         * where the pixel already is, so it costs two divisions and a square root. A longitude sun made the
+         * terminator a meridian: a vertical line side-on and a diameter pole-on, which is the black half of
+         * every poles shot. */
+        const nx = (x + 0.5 - view.cx) / view.r, ny = -(y + 0.5 - view.cy) / view.r;
+        const nz = Math.sqrt(Math.max(0, 1 - nx * nx - ny * ny));
+        const cosSun = nx * SUN[0] + ny * SUN[1] + nz * SUN[2];
         /* ⚠️ A LIT SPHERE IS MOSTLY LIT. At (cosSun + 0.06) × 1.35 the brightest point of the visible face
          * came out at 82% and everything fell away from there — a world under cloud, not under a sun. The
          * curve saturates inside about 70° of the sun point and crosses to night over the last few degrees,
@@ -7547,8 +7578,9 @@ function openingRaster(view, { exesa = 0, mode = "", lights = 1, w = 900, h = 56
         const day = Math.max(0, Math.min(1, (cosSun + 0.02) * 2.6));
         const k = 0.05 + 1.12 * day;
         // ⛑ dusk is a LINE, not a glaze — a narrow warm band right at the terminator and nothing either side
-        const dusk = Math.max(0, 1 - Math.abs(cosSun) * 16);
-        r = r * k + 38 * dusk; g = g * k + 15 * dusk; b = b * k + 4 * dusk;
+        // ✅ K: *"the terminator's warm band reads as an orange arc. Narrow and dim it."*
+        const dusk = Math.max(0, 1 - Math.abs(cosSun) * 30);
+        r = r * k + 19 * dusk; g = g * k + 8 * dusk; b = b * k + 2 * dusk;
         // the sea takes a sheen where the sun is straight on, which is what tells sea from land at a glance
         if (!land && day > 0.86) { const sp = (day - 0.86) * 5; r += 30 * sp; g += 42 * sp; b += 58 * sp; }
         if (day < 0.45 && lights > 0) {
@@ -7896,18 +7928,18 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
     : V === "lights_out" ? Math.max(0, 0.25 - u * 0.25) : V === "title" ? 0.3 : 0;
   // the world crosses during the shot that renames it, and is settled either side of it
   const mix = shrinkAt < 0 ? 1 : index > shrinkAt ? 1 : index === shrinkAt ? ease(Math.min(1, u * 1.25)) : 0;
-  opGround(ctx, frame, { exesa, mode, lights, w, h, mix: coda ? 1 : mix });
+  const sun = openingSun(polar);
+  opGround(ctx, frame, { exesa, mode, lights, w, h, mix: coda ? 1 : mix, sun });
 
   /* ⛑ AFTER THE GROUND, BEFORE EVERYTHING ELSE: the air belongs to the world, and the net, the glitter and
    * the arcs all sit above it. Skipped on the close frames, where the limb is off-screen and a halo would be
    * a blue ring across the middle of a region. */
   if (!placeSpan && !coda && V !== "title") {
-    /* ⛑ THE AIR'S CRESCENT STANDS WHERE THE SUN DOES — and it took looking at it to get the sign right. The
-     * sun is `OPENING_SUN_DEG` of LONGITUDE round from the camera, and a longitude offset moves a point to
-     * the RIGHT of the disc (x = cos(lat)·sin(lon + yaw)), so the lit limb is the right one: screen bearing
-     * 0. My first value put the glow on the night side, which read as a white band over the city lights. */
+    /* ⛔ B · DERIVED FROM THE SAME SUN THE GROUND IS LIT BY, so the two cannot disagree again. ✅ Aevi: *"the
+     * air crescent is drawn at −152°, on the left, over the night … derive `sunward` from the same sun the
+     * raster uses."* The sun's screen bearing is `atan2(−sy, sx)`; in π units, that is `sunward`. */
     paintOpeningAir(ctx, frame, { tint: exesa < 0.5 ? "earth" : "exesa", strength: mode === "dark" ? 0.4 : 1,
-      sunward: 0 });
+      sunward: Math.atan2(-sun[1], sun[0]) / Math.PI });
   }
   const P = (lat, lon, rad) => project(lon, lat, frame, rad == null ? 1 : rad);
   /* ⛔ IN THE FIRST MOVEMENT THE NET IS EARTH'S OWN. ✅ *"the lights of cities on the dark side"* → *"Lines of
@@ -7927,13 +7959,14 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
     /* ⛔ THE CITY LIGHTS ARE POINTS, AND THEY ONLY SHOW ON THE NIGHT SIDE. The raster's own light branch
      * reads a DENSITY plane, which Exesa's bake has and Earth's does not — Earth's cities are a list of
      * places, not a field, so they are drawn here where they can be points of light rather than a tint. */
-    const sunLon = -frame.yaw + OPENING_SUN_DEG;
+    // ⛑ the SAME sun, read from where the city lands on screen — `project` already returns the normal's z
     for (const [lon, lat, wgt] of (openingBake("earth")?.lights || [])) {
-      const cosSun = Math.cos((lon - sunLon) * Math.PI / 180) * Math.cos(lat * Math.PI / 180 * 0.55);
-      const night = Math.max(0, Math.min(1, (0.08 - cosSun) * 4));
-      if (night <= 0) continue;
       const p = P(lat, lon, 1.001);
       if (!inFrame(p)) continue;
+      const nx = (p.x - frame.cx) / frame.r, ny = -(p.y - frame.cy) / frame.r;
+      const cosSun = nx * sun[0] + ny * sun[1] + p.z * sun[2];
+      const night = Math.max(0, Math.min(1, (0.08 - cosSun) * 4));
+      if (night <= 0) continue;
       /* ⛑ BRIGHT ENOUGH TO BE THE POINT OF THE SHOT. ✅ *"the lights of cities on the dark side"* — at a
        * third of this they were a dusting nobody would name. Every city gets a dot; the big ones get a
        * halo, which is what makes a cluster read as a city rather than as noise. */

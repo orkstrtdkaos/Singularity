@@ -139,7 +139,9 @@ export function bakeEarthRGB(w = 720, h = 360) {
       let c;
       if (m === 2) c = ICE;
       else if (m === 0) {
-        c = mix(SHELF, DEEP, Math.min(1, (dist[y * w + x] - 1) / 5));
+        /* ⚠️ NARROW. At six cells the shelf is ~3° of pale blue around every coast, and on a globe that
+         * fills the frame it reads as a glow around the continents rather than as shallow water. Two cells. */
+        c = mix(SHELF, DEEP, Math.min(1, (dist[y * w + x] - 1) / 2));
       } else {
         // the land's own bands: ice-edge tundra, taiga, the temperate belt, the desert latitudes, the tropics
         const desert = Math.exp(-((al - 24) ** 2) / 90);          // the two desert belts

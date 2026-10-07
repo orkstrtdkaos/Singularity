@@ -207,7 +207,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.21.5";
+const APP_VERSION = "2.21.6";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -7245,7 +7245,11 @@ function openingBake(which) {
 }
 
 const OPENING_EARTH = { sea: [38, 72, 128], land: [58, 104, 62], ice: [226, 232, 238] };
-const OPENING_R_CAP = 210;        // ✅ her cut: "caps it at 210 px and holds frame rate"
+/* ⛔ 210 CAPS THE SAMPLE BUFFER, NOT THE WORLD. ✅ AEVI: *"`OPENING_R_CAP = 210` reads my cut as 'the globe is
+ * 210 px'. In the cut, 210 caps the SAMPLE BUFFER, which is then drawn scaled to the real radius. The globe can
+ * be as large as the frame wants."* ⚠️ I had read her performance note as a size, and so capped the world
+ * itself — which is why the globe sat small in a full-screen frame however big the screen was. */
+const OPENING_R_CAP = 210;        // the sampled radius, in buffer pixels — the drawn radius is the frame's
 // The ring of poles sits 55° out from the Crossing: far enough off centre to read as a ring around it, close
 // enough that all 24 are on the near face at once (at 55° the far rim is still 35° from the limb).
 const OPENING_RING_LAT = -35;
@@ -7493,7 +7497,7 @@ function openingOthers() {
 /** The camera. ⛔ THE SHRINK IS REAL GEOMETRY, NOT A ZOOM: Exesa is a third smaller than Earth, so the
  *  radius is the fact being shown, and the old outline stays behind it at the size it was. */
 function openingGlobeView(w, h, { shrunk = 0, yaw = 0 } = {}) {
-  const r0 = Math.min(Math.min(w, h) * 0.44, OPENING_R_CAP);
+  const r0 = Math.min(w, h) * 0.44;   // ✅ as large as the frame wants; the CAP is on the sampling, below
   return { yaw, pitch: -14, r: r0 * (1 - 0.33 * Math.max(0, Math.min(1, shrunk))), cx: w / 2, cy: h / 2 };
 }
 
@@ -7514,14 +7518,19 @@ function openingRaster(view, { exesa = 0, mode = "", lights = 1, w = 900, h = 56
   const x0 = Math.max(0, Math.floor(view.cx - view.r)), x1 = Math.min(w, Math.ceil(view.cx + view.r));
   const y0 = Math.max(0, Math.floor(view.cy - view.r)), y1 = Math.min(h, Math.ceil(view.cy + view.r));
   const gw = Math.max(1, x1 - x0), gh = Math.max(1, y1 - y0);
-  /* ⛔ THE STEP IS THE RASTER'S OWN RESOLUTION, NOT A GUESS. The asset is a 0.75° grid, so at radius r one
-   * terrain cell covers r·0.75·π/180 screen pixels — 2.7px at the capped radius. Sampling every 2px there
-   * samples the same cell twice and pays twice for it: measured 34,634 samples at 26.2ms a frame against
-   * 19,600 at 15ms for the same picture. The coda frames 26° of world, where a cell is 26px, and the clamp
-   * holds it at 4 so a region frame costs 31,500 samples (10.4ms) instead of filling the canvas at step 2.
-   * ⚠️ AND THE BUDGET IS STILL THERE, because the radius is not the only thing that can grow. */
+  /* ⛔ THE STEP IS HOW FINELY THE WORLD IS SAMPLED, AND THE BUFFER IS THAT SIZE. ✅ Aevi (D): *"The raster
+   * still samples every `step` px, but it writes ONE PIXEL PER SAMPLE into a `ceil(gw/step) × ceil(gh/step)`
+   * canvas, which `opGround` draws scaled with `imageSmoothingEnabled`, clipped to the disc. It costs the
+   * same and gives no step-blocks."* ⚠️ Before this the sample was SMEARED over a step×step square, which is
+   * exactly a block of that size — the same number of samples, drawn as a mosaic instead of an image.
+   * ⛑ Three things set the step, and the largest wins: the cap on the sampled radius (210 buffer pixels, her
+   * cut's number, read as a sampling budget rather than as a size), the terrain's own 0.75° cell, and the
+   * whole-frame sample budget for the wide region shots. */
   const cellPx = view.r * 0.75 * Math.PI / 180;
-  const step = Math.max(2, Math.min(4, Math.max(Math.round(cellPx), Math.ceil(Math.sqrt((gw * gh) / OPENING_SAMPLES)))));
+  const step = Math.max(1, Math.min(6, Math.max(
+    Math.ceil(view.r / OPENING_R_CAP),
+    Math.round(cellPx),
+    Math.ceil(Math.sqrt((gw * gh) / OPENING_SAMPLES)))));
   /* ⛑ HALF A DEGREE, NOT TWO. With the ground baked, a frame is an array lookup per pixel — so the globe
    * can be redrawn as it turns instead of stepping every 2°, which is what made the first cut look like a
    * slideshow even when the frame rate was fine. */
@@ -7532,10 +7541,11 @@ function openingRaster(view, { exesa = 0, mode = "", lights = 1, w = 900, h = 56
   if (_opRaster && _opRaster.key === key) return _opRaster;
   /* ⛑ ONE OFFSCREEN CANVAS, REUSED. The first cut allocated a fresh one for every re-raster — a canvas and
    * an ImageData per turn step, for the garbage collector to find later. */
-  const cv = _opRaster && _opRaster.cv && _opRaster.cv.width === gw && _opRaster.cv.height === gh
-    ? _opRaster.cv : Object.assign(document.createElement("canvas"), { width: gw, height: gh });
+  const sw = Math.max(1, Math.ceil(gw / step)), sh = Math.max(1, Math.ceil(gh / step));
+  const cv = _opRaster && _opRaster.cv && _opRaster.cv.width === sw && _opRaster.cv.height === sh
+    ? _opRaster.cv : Object.assign(document.createElement("canvas"), { width: sw, height: sh });
   const c2 = cv.getContext("2d");
-  const img = c2.createImageData(gw, gh);
+  const img = c2.createImageData(sw, sh);
   const D = img.data;
   const BW = bake.w, BH = bake.h, BR = bake.rgb, BM = bake.mask, BD = bake.dens || null;
   /* ⛔ THE SUN IS OFF TO ONE SIDE, AND THAT IS THE WHOLE SHOT. ✅ AEVI: *"Night. The globe turning, blue
@@ -7550,10 +7560,21 @@ function openingRaster(view, { exesa = 0, mode = "", lights = 1, w = 900, h = 56
       const p = unproject(x + 0.5, y + 0.5, view);
       if (p) {
         a = 255;
-        const bx = Math.min(BW - 1, Math.max(0, Math.floor((p.lon + 180) * (BW / 360))));
-        const by = Math.min(BH - 1, Math.max(0, Math.floor((90 - p.lat) * (BH / 180))));
-        const bi = by * BW + bx;
-        r = BR[bi * 3]; g = BR[bi * 3 + 1]; b = BR[bi * 3 + 2];
+        /* ✅ Aevi: *"The coastline still stairs after D — the stairs that remain are the BAKE's own cells,
+         * read nearest-neighbour. Sample the bake bilinearly."* Four lookups and a lerp, at about 20k samples
+         * a frame. ⛑ The MASK stays nearest — "is this land" is a decision, and a blended decision is a
+         * coastline of half-land, which the city lights and the lattice would both read wrong. */
+        const fx = (p.lon + 180) * (BW / 360) - 0.5, fy = (90 - p.lat) * (BH / 180) - 0.5;
+        const x0b = Math.floor(fx), y0b = Math.floor(fy);
+        const tx = fx - x0b, ty = fy - y0b;
+        const wrap = (v) => ((v % BW) + BW) % BW;
+        const clampY = (v) => Math.min(BH - 1, Math.max(0, v));
+        const i00 = (clampY(y0b) * BW + wrap(x0b)) * 3, i10 = (clampY(y0b) * BW + wrap(x0b + 1)) * 3;
+        const i01 = (clampY(y0b + 1) * BW + wrap(x0b)) * 3, i11 = (clampY(y0b + 1) * BW + wrap(x0b + 1)) * 3;
+        const lerp2 = (c) => (BR[i00 + c] * (1 - tx) + BR[i10 + c] * tx) * (1 - ty)
+          + (BR[i01 + c] * (1 - tx) + BR[i11 + c] * tx) * ty;
+        r = lerp2(0); g = lerp2(1); b = lerp2(2);
+        const bi = clampY(Math.round(fy)) * BW + wrap(Math.round(fx));
         let land = BM[bi] === 1;
         if (other) {
           // the same point on the other world, crossed by `blend` — the renaming, made of light
@@ -7592,16 +7613,12 @@ function openingRaster(view, { exesa = 0, mode = "", lights = 1, w = 900, h = 56
         if (mode === "dark") { r *= 0.3; g *= 0.3; b *= 0.34; }
         if (mode === "lattice" && land) { const f = 0.3 + (BD ? BD[bi] / 255 : 0.5) * 0.9; r = 20 + 22 * f; g = 26 + 36 * f; b = 40 + 86 * f; }
       }
-      for (let dy = 0; dy < step && y + dy < y1; dy++) {
-        for (let dx = 0; dx < step && x + dx < x1; dx++) {
-          const i = (((y + dy) - y0) * gw + ((x + dx) - x0)) * 4;
-          D[i] = r; D[i + 1] = g; D[i + 2] = b; D[i + 3] = a;
-        }
-      }
+      const i = (Math.floor((y - y0) / step) * sw + Math.floor((x - x0) / step)) * 4;
+      D[i] = r; D[i + 1] = g; D[i + 2] = b; D[i + 3] = a;
     }
   }
   c2.putImageData(img, 0, 0);
-  _opRaster = { key, cv, x0, y0 };
+  _opRaster = { key, cv, x0, y0, gw, gh, r: view.r, cx: view.cx, cy: view.cy };
   return _opRaster;
 }
 
@@ -7616,7 +7633,15 @@ function opGround(ctx, view, opts) {   // opts carries `mix`, the Earth→Exesa 
     ctx.beginPath(); ctx.arc(view.cx, view.cy, view.r, 0, Math.PI * 2); ctx.fill(); ctx.restore();
     return;
   }
-  ctx.drawImage(R.cv, R.x0, R.y0);
+  /* ⛑ SCALED AND SMOOTHED, CLIPPED TO THE WORLD. The buffer holds one pixel per sample, so the browser's own
+   * bilinear upscale does what a step×step smear cannot — and the clip keeps the smoothing from bleeding a
+   * soft fringe outside the limb, which is the one place it would show as a halo nobody drew. */
+  ctx.save();
+  ctx.beginPath(); ctx.arc(view.cx, view.cy, view.r, 0, Math.PI * 2); ctx.clip();
+  ctx.imageSmoothingEnabled = true;
+  try { ctx.imageSmoothingQuality = "high"; } catch { /* not everywhere */ }
+  ctx.drawImage(R.cv, 0, 0, R.cv.width, R.cv.height, R.x0, R.y0, R.gw, R.gh);
+  ctx.restore();
 }
 
 /* ⛔ A CANVAS WILL NOT TAKE A CSS VARIABLE IN `ctx.font`, AND IT DOES NOT SAY SO. `ctx.font = "600 46px
@@ -7882,7 +7907,10 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
   // ⛑ THE OLD OUTLINE, THE SIZE IT WAS — the only way a watcher can SEE that a third of the world is gone
   // instead of being told. ✅ *"The old outline stays faint behind it, the size it was."*
   if (shrunk) {
-    const old = openingGlobeView(w, h, { shrunk: 0, yaw });
+    /* ✅ E (Aevi): *"The old outline is centred on `view.cy`. Pole-on, `cy` lifts by 12% while the outline
+     * didn't, and it hung off centre."* It takes the same composition as the world it is the ghost of. */
+    const old = openingGlobeView(w, h, { shrunk: 0, yaw, polar });
+    old.cy = view.cy;
     ctx.save(); ctx.globalAlpha = V === "shrink" ? 0.3 : 0.12;
     ctx.strokeStyle = "#7f93c0"; ctx.lineWidth = 1;
     ctx.beginPath(); ctx.arc(old.cx, old.cy, old.r, 0, Math.PI * 2); ctx.stroke(); ctx.restore();

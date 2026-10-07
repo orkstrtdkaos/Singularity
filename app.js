@@ -54,7 +54,7 @@ import { mapStateOf, mapStateWord, placeAllows } from "./engine/mapstate.js";
 import { mapHolds, holdMarker } from "./engine/mapholds.js";
 // ⛔ SNG-680: the film is DATA. Not one of its words is written in this file.
 import { filmReel, openingReel, shotSeconds, codaShots, shouldAutoplayOpening,
-  filmsFor, noteFilmUnlocks, sealedNames, cardTitle, filmTargets, filmEase } from "./engine/films.js";
+  filmsFor, noteFilmUnlocks, sealedNames, cardTitle, filmTargets, filmEase, filmFrame } from "./engine/films.js";
 import { arcReachesRegion } from "./engine/arceffects.js";   // M3: open framed on what the player knows   // M2/D1: one table, one collision space
 import { decodeTerrain, sampleAt, colorAt, unproject, project, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, globeClickAction, REGION_FRAME_DEG, regionVoteAt, worldRoadRoutes, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, makePolarBase, regionExtent, bendRoad, roadNetwork, clipToFrame, routeRoads, makeGroundCost, GROUND_COST, fineWindowBox } from "./engine/worldglobe.js";
 // ⛔ ROUND 4 — whose ground is this, as things stand today. `realms.js` resolves the SAVE (losses, growth,
@@ -208,7 +208,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.22.6";
+const APP_VERSION = "2.22.7";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -7537,9 +7537,11 @@ function openingOthers() {
 
 /** The camera. ⛔ THE SHRINK IS REAL GEOMETRY, NOT A ZOOM: Exesa is a third smaller than Earth, so the
  *  radius is the fact being shown, and the old outline stays behind it at the size it was. */
-function openingGlobeView(w, h, { shrunk = 0, yaw = 0 } = {}) {
-  const r0 = Math.min(w, h) * 0.44;   // ✅ as large as the frame wants; the CAP is on the sampling, below
-  return { yaw, pitch: -14, r: r0 * (1 - 0.33 * Math.max(0, Math.min(1, shrunk))), cx: w / 2, cy: h / 2 };
+function openingGlobeView(w, h, { shrunk = 0, yaw = 0, polar = 0, close = 0 } = {}) {
+  // ✅ C1 (the 35 again): the size and the place are ONE rule in films.js, driven by a gate over a spread of frames —
+  // 0.31 of the frame, the arcs shots closer, right of middle on a wide screen and clear of the captions, the ring inside.
+  const f = filmFrame(w, h, { shrunk, polar, close });
+  return { yaw, pitch: -14, r: f.r, cx: f.cx, cy: f.cy };
 }
 
 /* The ground, rasterised once per key and blitted thereafter. */
@@ -8025,14 +8027,14 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
   // ✅ G: the pole-on turn is `cur.polar` easing toward the table's 1 — it begins at the cut and takes about two
   // seconds, and unwinds the same way into `lights_out`, so neither end is a jump
   const polar = T.polar;
-  const view = openingGlobeView(w, h, { shrunk, yaw: yaw * (1 - polar) });
+  const view = openingGlobeView(w, h, { shrunk, yaw: yaw * (1 - polar), polar, close: T.close });
   view.pitch = -14 + (-90 + 14) * polar;
   /* ⛑ AND THE COMPOSITION LIFTS AS IT TURNS. Pole-on, the ring is drawn clear of the limb at 1.3× the
    * radius, which makes the picture half as tall again — and the captions live low (O4). Measured on the
    * first render of a ring shot: a three-line caption crossed the ring's bottom arc and sat on two of the
    * four labels. Raising the centre to 38% of the frame clears it, and it travels with the same `polar`
    * ramp the turn does, so nothing jumps. */
-  view.cy = h * (0.5 - 0.12 * polar);
+  // ✅ C1: the lift with `polar` is inside `filmFrame` now, beside the rest of the composition
 
   ctx.setTransform(dprOf(), 0, 0, dprOf(), 0, 0);
   ctx.fillStyle = "#04050b"; ctx.fillRect(0, 0, w, h);

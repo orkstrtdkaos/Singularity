@@ -9022,6 +9022,31 @@ await (async () => {
         /id="op-back"/.test(film35) && /mode === "library" && C\.back/.test(film35) && /\["op-back", atTitle\(\)\]/.test(film35)
         && /if \(mode === "library"\) \{ i = 0; show\(\); \} else end\(\);/.test(film35) && /backBtn\.onclick = \(e\) => \{ e\.stopPropagation\(\); end\(\); \}/.test(film35)
         && typeof opening35.controls?.back === "string" && opening35.controls.back.length > 0);
+      /* ── C1 · the globe's size and place, driven over a spread of frames ── */
+      const CSS35 = readFileSync(join(root, "style.css"), "utf8");
+      check("35/C1: ⛔ the caption box the frame clears IS the stylesheet's — left 48, right 48, bottom 92, 24px lines at 1.42, 34em wide",
+        /\.op-caption \{ position: absolute; left: 48px; right: 48px; bottom: 92px;/.test(CSS35) && /\.op-line \{ font-family: var\(--font\); font-size: 24px; line-height: 1\.42;/.test(CSS35)
+        && /max-width: 34em; \}/.test(CSS35) && /@media \(min-aspect-ratio: 13\/10\) \{ \.op-line \{ max-width: min\(34em, 46vw\); \} \}/.test(CSS35)
+        && FT35.FILM_CAPTION.left === 48 && FT35.FILM_CAPTION.bottom === 92 && FT35.FILM_CAPTION.linePx === 34 && FT35.FILM_CAPTION.maxLinePx === 816 && FT35.FILM_CAPTION.wideVw === 0.46);
+      const frames35 = [[1920, 1080], [1600, 900], [1366, 768], [1280, 720], [1024, 640], [900, 560], [390, 844], [768, 1024]];
+      const inside = (p, b) => p.x >= b.x0 && p.x <= b.x1 && p.y >= b.y0 && p.y <= b.y1;
+      const disc = (fr, p) => Math.hypot(p.x - fr.cx, p.y - fr.cy) <= fr.r;
+      const nearest = (fr, b) => ({ x: Math.max(b.x0, Math.min(b.x1, fr.cx)), y: Math.max(b.y0, Math.min(b.y1, fr.cy)) });
+      check("35/C1: ⛔ the globe is 0.31 of the frame, a third smaller after the shrink, closer again for the arcs — 1 → 0.67 → 0.78",
+        frames35.every(([w, h]) => { const a0 = FT35.filmFrame(w, h, {}), a1 = FT35.filmFrame(w, h, { shrunk: 1 }), a2 = FT35.filmFrame(w, h, { shrunk: 1, close: 1 });
+          return Math.abs(a0.r - Math.min(w, h) * 0.31) < 0.5 && Math.abs(a1.r / a0.r - 0.67) < 0.01 && Math.abs(a2.r / a0.r - 0.78) < 0.01; }));
+      check("35/C1: ⛔ on every LANDSCAPE frame no caption line crosses the disc — Earth, the small world and the arcs alike — and the globe sits right of middle",
+        frames35.filter(([w, h]) => w >= 1.3 * h).every(([w, h]) => [{}, { shrunk: 1 }, { shrunk: 1, close: 1 }].every((o) => {
+          const fr = FT35.filmFrame(w, h, o), b = FT35.filmCaptionBox(w, h);
+          return fr.wide && fr.cx > w / 2 && !disc(fr, nearest(fr, b)); })),
+        frames35.filter(([w, h]) => w >= 1.3 * h).map(([w, h]) => { const fr = FT35.filmFrame(w, h, {}); return `${w}×${h}: r ${fr.r.toFixed(0)} cx ${fr.cx.toFixed(0)}`; }).join(" · "));
+      check("35/C1: ⛔ pole-on, the ring's outer edge — stations plus glow — stays inside the frame with a margin, on every frame",
+        frames35.every(([w, h]) => { const fr = FT35.filmFrame(w, h, { shrunk: 1, polar: 1 }); const reach = FT35.FILM_RING_REACH * fr.r + FT35.FILM_RING_GLOW;
+          return fr.cy - reach >= 8 && fr.cy + reach <= h - 8 && fr.cx - reach >= 8 && fr.cx + reach <= w - 8; }),
+        frames35.map(([w, h]) => { const fr = FT35.filmFrame(w, h, { shrunk: 1, polar: 1 }); return `${w}×${h}: top ${(fr.cy - FT35.FILM_RING_REACH * fr.r - FT35.FILM_RING_GLOW).toFixed(0)}`; }).join(" · "));
+      check("35/C1: ⛔ …and the painter frames through the SAME function — `openingGlobeView` is `filmFrame`, with `polar` and the `close` weight handed in",
+        /const f = filmFrame\(w, h, \{ shrunk, polar, close \}\);/.test(src35) && /openingGlobeView\(w, h, \{ shrunk, yaw: yaw \* \(1 - polar\), polar, close: T\.close \}\)/.test(src35)
+        && !/Math\.min\(w, h\) \* 0\.44/.test(src35) && row("arcs").close === 1 && row("many").close === 1 && row("you").close === 1 && row("earth").close === 0);
       check("35/E2: ⛔ Escape on the title card LEAVES — `skip()` landed on the card it was already on, so nothing happened",
         /e\.key === "Escape"\) \{ e\.preventDefault\(\); if \(atTitle\(\)\) end\(\); else skip\(\); \}/.test(film35));
     }

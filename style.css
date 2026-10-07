@@ -2544,6 +2544,8 @@ table.ob-matrix { border-collapse: collapse; width: 100%; min-width: 640px; font
 .op-line { font-family: var(--font); font-size: 24px; line-height: 1.42; color: #f2efe6;
   text-shadow: 0 2px 14px rgba(0,0,0,.95), 0 0 34px rgba(0,0,0,.7); max-width: 34em; }
 .op-line + .op-line { margin-top: 6px; }
+/* ✅ C1 (the 35 again): on a wide frame the words stay low and LEFT of the globe — `filmFrame` clears the disc of this box */
+@media (min-aspect-ratio: 13/10) { .op-line { max-width: min(34em, 46vw); } }
 .op-after { color: #cfc8b6; font-size: 18px; font-style: italic; }
 .op-title + .op-caption .op-line:first-child { font-size: 38px; letter-spacing: .04em; }
 .op-track { position: absolute; left: 48px; right: 48px; bottom: 66px; display: flex; gap: 3px; align-items: center; }

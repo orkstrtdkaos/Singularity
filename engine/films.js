@@ -213,7 +213,7 @@ export function shotSeconds(shot, pacing = {}) {
  * what `night` used to mean: the lights-out darkening of the whole world (`lights_out`, `natural`, `standing_up`).
  * `cut` is the cutaway (G1), faded over the globe at the globe's own radius instead of cut to and back. */
 export const FILM_BASE = Object.freeze({
-  polar: 0, shrunk: 1, world: 1, outline: 0, lights: 0, night: 1, dark: 0, grey: 0, dim: 0, cut: 0,
+  polar: 0, shrunk: 1, world: 1, outline: 0, lights: 0, night: 1, dark: 0, grey: 0, dim: 0, cut: 0, close: 0,
   net: 0, runaway: 0, swarm: 0, order: 0, works: 0, drain: 0,
   poles: 0, pull: 0, middle: 0, natural: 0, standing: 0, lattice: 0, veil: 0, pause: 0,
   arcs: 0, many: 0, you: 0, title: 0,
@@ -243,12 +243,12 @@ export const FILM_TARGETS = Object.freeze({
   lattice:         { dim: 1, lattice: 1 },
   veil:            { dim: 1, lattice: 1, veil: 1 },
   pause:           { dim: 1, lattice: 1, veil: 1, pause: 1 },
-  arcs:            { arcs: 1 },
-  many:            { arcs: 1, many: 1 },
-  you:             { arcs: 1, many: 1, you: 1 },
+  arcs:            { arcs: 1, close: 1 },
+  many:            { arcs: 1, many: 1, close: 1 },
+  you:             { arcs: 1, many: 1, you: 1, close: 1 },
   title:           { lights: 0.3, title: 1 },
   zoom_to_start:   { },
-  nearest_arc:     { arcs: 1 },
+  nearest_arc:     { arcs: 1, close: 1 },
   globe:           { },
   ring:            { polar: 1 },
   axis:            { polar: 1 },
@@ -256,7 +256,7 @@ export const FILM_TARGETS = Object.freeze({
   region:          { },
   figure:          { },
   source:          { },
-  arc:             { arcs: 1 },
+  arc:             { arcs: 1, close: 1 },
 });
 /** The targets for one shot: the table's row over the base, with the world's size and palette read off the reel. */
 export function filmTargets(visual, { index = 0, shrinkAt = -1 } = {}) {
@@ -279,6 +279,51 @@ export function filmEase(cur, target, dtSeconds, { reduced = false, rate = 0.18 
   }
   return out;
 }
+/* ═════ C1 (the 35 again) · THE GLOBE'S SIZE AND PLACE, AS ONE RULE ═════
+ * ✅ AEVI: *"`r0 = min(w, h) · 0.44` makes the globe 88% of the frame's height … the captions sit on its lower third;
+ * pole-on, the ring at 1.4 r is 123% of the height, so its top runs off the frame … The cut uses 0.31 · min(w, h),
+ * then R 1 → 0.67 after the shrink → 0.78 for the arcs, and on a wide screen centres the globe 10% right of middle,
+ * which clears the captions (low, left). The ask, in words that survive any resize: the ring's outer edge (stations
+ * plus glow) stays inside the frame with a margin; no caption line crosses the disc on a landscape frame."*
+ * ⛑ PURE, so the painter and the gate call the same arithmetic — the gate drives it over a spread of frames rather
+ * than reading a number off the source. The caption box mirrors style.css's `.op-caption`/`.op-line` (a gate holds
+ * the two to the same literals). `close` is a weight (the arcs shots), so the camera eases in like everything else. */
+export const FILM_CAPTION = Object.freeze({ left: 48, right: 48, bottom: 92, linePx: 34, gapPx: 6, maxLinePx: 816, wideVw: 0.46, lines: 3 });
+export function filmCaptionBox(w, h, { lines = FILM_CAPTION.lines } = {}) {
+  // ⛑ on a wide frame the stylesheet caps a line at 46vw (so the words stay low and LEFT of the globe), and a line
+  // that no longer fits wraps — so the box is as tall as the wrapped lines, which is what the disc must clear
+  const wide = w >= 1.3 * h;
+  const lineW = Math.max(120, Math.min(FILM_CAPTION.maxLinePx, w - FILM_CAPTION.left - FILM_CAPTION.right, wide ? FILM_CAPTION.wideVw * w : Infinity));
+  const wrapped = lines * Math.ceil(FILM_CAPTION.maxLinePx / lineW);
+  const x0 = FILM_CAPTION.left, x1 = x0 + lineW;
+  const y1 = h - FILM_CAPTION.bottom, y0 = y1 - wrapped * FILM_CAPTION.linePx - (wrapped - 1) * FILM_CAPTION.gapPx;
+  return { x0, y0, x1, y1, lineW, wrapped };
+}
+export const FILM_RING_REACH = 1.62, FILM_RING_GLOW = 22;   // the label ring (OPENING_LABEL_SCREEN) and a station's glow
+export function filmFrame(w, h, { shrunk = 0, polar = 0, close = 0, margin = 10 } = {}) {
+  const c01 = (x) => Math.max(0, Math.min(1, Number(x) || 0));
+  const wide = w >= 1.3 * h;
+  let r = Math.min(w, h) * 0.31 * (1 - 0.33 * c01(shrunk)) * (1 + 0.164 * c01(close));   // 1 → 0.67 → 0.78
+  const cy = h * (0.5 - 0.12 * c01(polar));                                               // the ring shots lift
+  // pole-on, the ring's outer edge stays inside the frame top and bottom — the radius gives way, never the ring
+  if (c01(polar) > 0) r = Math.min(r, Math.max(1, (Math.min(cy, h - cy) - FILM_RING_GLOW - margin) / FILM_RING_REACH));
+  let cx = wide ? w * 0.6 : w / 2;
+  if (wide) {
+    // no caption line crosses the disc: the centre moves right until the disc clears the caption box's corner
+    const box = filmCaptionBox(w, h);
+    const dy = Math.max(0, box.y0 - cy), rr = r + margin;   // the margin is on the DISTANCE to the corner
+    if (dy < rr) cx = Math.max(cx, box.x1 + Math.sqrt(rr * rr - dy * dy));
+    // …and the picture stays inside the frame's right edge — the ring's reach pole-on, the disc's otherwise
+    const reach = c01(polar) > 0 ? FILM_RING_REACH * r + FILM_RING_GLOW : r;
+    cx = Math.min(cx, w - margin - reach);
+    // a frame that cannot hold both: the radius gives way, never the words
+    const nx = Math.max(box.x0, Math.min(box.x1, cx)), ny = Math.max(box.y0, Math.min(box.y1, cy));
+    const d = Math.hypot(cx - nx, cy - ny);
+    if (d < r + margin) r = Math.max(1, d - margin);
+  }
+  return { r, cx, cy, wide };
+}
+
 /* ⛑ THERE IS NO `reelSeconds` HERE, AND THAT IS THE WIRING AUDIT'S RULE, NOT AN OVERSIGHT. A whole-film
  *  total is asked by a gate and by a report and by nothing in play, which makes it an export reachable only
  *  from a test — the exact shape of the eight built-and-unreached capabilities that ratchet exists for. It

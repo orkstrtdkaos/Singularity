@@ -155,6 +155,16 @@
      ]
     },
     {
+     "id": "film_light_dark_witness",
+     "visual": "figure",
+     "figure": "the_unbending_witness",
+     "lines": [
+      "The Unbending Witness says what is actually there, whatever it costs.",
+      "She has never softened a truth, and never once used one as a weapon."
+     ],
+     "_why_20261007": "P1: an epic. Named by her title only: the foothills film already has a Seraphine (the High Luminary)."
+    },
+    {
      "id": "film_light_dark_12",
      "visual": "place",
      "lines": [
@@ -198,7 +208,10 @@
     {
      "id": "film_light_dark_16",
      "landings": [
-      { "from": "umbral", "place": "the_harborward" }
+      {
+       "from": "umbral",
+       "place": "the_harborward"
+      }
      ],
      "visual": "ring",
      "lines": [
@@ -309,11 +322,13 @@
     },
     {
      "id": "film_light_dark_26",
-     "visual": "many",
+     "visual": "figure",
      "lines": [
       "Between the two extremes, refusing both, walks the Deep Lantern. She sees without light.",
       "She holds no side, which is why either extreme starves against her."
-     ]
+     ],
+     "figure": "the_deep_lantern",
+     "_visualWas_20261007": "many"
     },
     {
      "id": "film_light_dark_27",

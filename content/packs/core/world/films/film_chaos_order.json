@@ -168,7 +168,10 @@
     {
      "id": "film_chaos_order_13",
      "landings": [
-      { "from": "enginewright", "place": "the_service_ways" }
+      {
+       "from": "enginewright",
+       "place": "the_service_ways"
+      }
      ],
      "visual": "ring",
      "lines": [
@@ -210,12 +213,14 @@
     },
     {
      "id": "film_chaos_order_17",
-     "visual": "region",
+     "visual": "figure",
      "lines": [
       "Rethe is becoming the Engine, part by considered part, and still asks to be talked out of it.",
       "That asking is the whole of him."
      ],
-     "place": "the_great_engine"
+     "figure": "the_cogitant_ninefold",
+     "_visualWas_20261007": "region",
+     "_placeWas_20261007": "the_great_engine"
     }
    ]
   },

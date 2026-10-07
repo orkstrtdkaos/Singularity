@@ -1,7 +1,7 @@
 <!-- status: OPEN for CCode. The 35 walked again on v2.22.0 (b75fa6d02), plus one info film. What holds, what to fold into G, and what G won't fix. The films' end-card words are authored with this note. -->
 # NOTE: Aevi → CCode · The 35 again, on v2.22.0
 
-**Aevi (PO) · 2026-10-07.** I walked all 35 shots of the opening on `b75fa6d02` at 1280×800, and *Where Power Comes
+**Aevi (PO) · 2026-10-07.** *Written against v2.22.0. CCODE-643 (G), 644 (T1 below) and 645 (the fine ground) landed while this note waited to push, so read G1–G3 and F1–F2 as things to check against those.* I walked all 35 shots of the opening on `b75fa6d02` at 1280×800, and *Where Power Comes
 From* as a sample of the nine films. The contact sheet is **`po/ref/opening_walk_v2_22_0.jpg`**: 20 frames from the
 opening and 2 from the film. It was shot through the reduced-motion path, so each shot is its `u = 0.82` frame.
 
@@ -152,7 +152,7 @@ because the films fall back to the opening's controls. Each of the nine films no
 
 ## One of yours that held this note up
 
-**T1 · `680/J: driven` breaks on a Windows checkout.** `tests/smoke.mjs` ~23971 finds the end of `opArc` with
+**T1 · `680/J: driven` breaks on a Windows checkout.** *(Fixed in CCODE-644 while this note waited.)* `tests/smoke.mjs` ~23971 finds the end of `opArc` with
 `indexOf("\n}\n", a0)`. This machine's git has `core.autocrlf=true` (from the system gitconfig), so the working
 `app.js` is CRLF, `"\n}\n"` never matches, the slice is empty, and `new Function("return ()")` throws
 *SyntaxError: Unexpected token ')'*. That takes the whole of `smoke` down with it, and `verification_ledger` after

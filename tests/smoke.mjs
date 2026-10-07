@@ -9047,6 +9047,35 @@ await (async () => {
       check("35/C1: ⛔ …and the painter frames through the SAME function — `openingGlobeView` is `filmFrame`, with `polar` and the `close` weight handed in",
         /const f = filmFrame\(w, h, \{ shrunk, polar, close \}\);/.test(src35) && /openingGlobeView\(w, h, \{ shrunk, yaw: yaw \* \(1 - polar\), polar, close: T\.close \}\)/.test(src35)
         && !/Math\.min\(w, h\) \* 0\.44/.test(src35) && row("arcs").close === 1 && row("many").close === 1 && row("you").close === 1 && row("earth").close === 0);
+      /* ── C5 · C7 · F1 · F2 ── */
+      const veil35 = shot35.slice(shot35.indexOf("if (T.veil > 0.01) {"), shot35.indexOf("if (T.pause > 0.01) {"));
+      check("35/C5: ⛔ the Veil is an ABSENCE beside the globe — an irregular 96-point edge at 1.25 r, cut out of the sky under six feathered near-black fills, and NO stroke",
+        /const rr = frame\.r \* 1\.25 \* grow;/.test(veil35) && /const n = 96;/.test(veil35) && /globalCompositeOperation = "destination-out"/.test(veil35)
+        && /for \(let i = 0; i < 6; i\+\+\) \{ veilPath\(1\.0 - i \* 0\.025\);/.test(veil35) && /shadowColor = "rgba\(150,110,220,0\.5\)"/.test(veil35)
+        && !/\.stroke\(\)/.test(veil35) && !/ctx\.arc\(g\.x, g\.y/.test(veil35));
+      check("35/C5: …and it sits BESIDE the globe where C1 leaves the room — upper left on a wide frame, above on a narrow one — its centre a globe's radius plus most of its own away, so the edges brush and never bite",
+        /const gap = frame\.r \+ rr \* 0\.92;/.test(veil35) && /const left = at\(Math\.PI \+ 0\.7\), above = at\(-Math\.PI \/ 2\);/.test(veil35)
+        && /const g = left\.x - rr >= 6 && left\.y - rr >= 6 \? left : above;/.test(veil35));
+      check("35/C7: ⛔ the title card is SET over the globe — the arcs at 0.5, the others at 0.6, the air on, no lights over the density field, a lighter scrim — and the words are large and centred on the world",
+        row("title").arcs === 0.5 && row("title").many === 0.6 && row("title").lights === 0 && row("title").title === 1
+        && !/V !== "title"\) \{/.test(shot35) && /rgba\(4,5,11,\$\{0\.28 \* T\.title\}\)/.test(shot35)
+        && /cap\.style\.setProperty\("--op-shift", s\.visual === "title" \? `\$\{Math\.round\(2 \* \(filmFrame\(vw, vh, \{ shrunk: 1 \}\)\.cx - vw \/ 2\)\)\}px` : "0px"\)/.test(film35)
+        && /\.op-title \+ \.op-caption \{ left: 0; right: 0; top: 0; bottom: 0; display: flex;[^\n]*padding-left: var\(--op-shift, 0px\); \}/.test(CSS35)
+        && /\.op-title \+ \.op-caption \.op-line:first-child \{ font-size: 64px;/.test(CSS35));
+      const lm35 = src35.slice(src35.indexOf("function filmLocalMap("), src35.indexOf("function openingPlaceView("));
+      const LM35 = await import("../engine/localmap.js");
+      check("35/F1: ⛔ in a film the local map is NIGHT PAPER — multiplied to about 55% and vignetted toward the film's black — with no inset, so the white words can be read and there is no second, smaller copy of the map",
+        /globalCompositeOperation = "multiply"; c2\.fillStyle = "rgb\(140,142,152\)"/.test(lm35) && /createRadialGradient\(w \/ 2, h \/ 2, Math\.min\(w, h\) \* 0\.3/.test(lm35)
+        && /inset: null, labelMinPx: 0/.test(lm35) && !/enlargementFor\(model\)/.test(lm35) && !/paintEnlargement\(/.test(lm35));
+      check("35/F1: ⛔ …and a place BELOW THE GROUND draws as one — the film shows the host's own level (its depth read down) when the layout has it, never surface roads converging on a point",
+        /const lv = levelsOf\(layout\), own = -Math\.abs\(siteLevel\(loc\)\);/.test(lm35) && /const level = lv\.includes\(own\) \? own : \(lv\[0\] \?\? 0\);/.test(lm35) && /nameOf, level \}\)/.test(lm35)
+        // ⚠️ a host writes its depth NEGATIVE (the Service Ways is −4) and a site positive-down — minus the magnitude is −4 for both
+        && (() => { const host = { worldPos: { depth: -4 } }, site = { worldPos: { depth: 4 } };
+          return -Math.abs(LM35.siteLevel(host)) === -4 && -Math.abs(LM35.siteLevel(site)) === -4 && LM35.siteLevel({ worldPos: { depth: 0 } }) === 0; })());
+      check("35/F2: ⛔ dark space to bright paper is a CUT no more — `map` is a weight: off for the first part of a place shot (the globe closes in), on from 0.3, eased at the cut's own pace, and the painter's alpha is that weight",
+        FT35.FILM_BASE.map === 0 && FT35.filmTargets("place", { u: 0.1 }).map === 0 && FT35.filmTargets("place", { u: 0.3 }).map === 1 && FT35.filmTargets("place", { u: 1 }).map === 1
+        && FT35.filmTargets("earth", { u: 1 }).map === 0 && /localA = T\.map;/.test(shot35)
+        && /const target = filmTargets\(frames\[i\]\?\.visual, \{ index: i, shrinkAt: coda \? -1 : shrinkAtF, u \}\);/.test(film35));
       check("35/E2: ⛔ Escape on the title card LEAVES — `skip()` landed on the card it was already on, so nothing happened",
         /e\.key === "Escape"\) \{ e\.preventDefault\(\); if \(atTitle\(\)\) end\(\); else skip\(\); \}/.test(film35));
     }
@@ -23942,7 +23971,8 @@ await (async () => {
   // I · the Veil is placed by the frame, never by a longitude
   const veil = (() => { const a = shotFn.indexOf('if (T.veil > 0.01)'); return a < 0 ? "" : shotFn.slice(a, a + 3400); })();
   check("680/I: the Veil is placed BESIDE the globe in screen space (frame.cx/cy and r), not at a latitude and longitude that can be behind the face",
-    /frame\.cx \+ frame\.r \* 1\.25/.test(veil) && !/P\(-26, 58/.test(veil) && /destination-out/.test(veil) && /shadowBlur/.test(veil));
+    // ✅ C5 (the 35 again): still by the frame — a gap of the globe's radius plus most of the absence's own, at an angle off the centre
+    /frame\.cx \+ gap \* Math\.cos\(ang\)/.test(veil) && /const gap = frame\.r \+ rr \* 0\.92;/.test(veil) && !/P\(-26, 58/.test(veil) && /destination-out/.test(veil) && /shadowBlur/.test(veil));
   // I · the silhouettes stand along the upper limb in screen space, seven of them, rising in turn
   const standing = caseOf("standing");
   check("680/I: `standing_up` draws SEVEN silhouettes along the upper limb in screen space, rotated to the normal and rising in turn — never at a fixed lat/lon",

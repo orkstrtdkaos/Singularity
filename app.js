@@ -68,7 +68,7 @@ import { isoLines, blurGrid, stipple, hexGather, nearness, crystalFacets } from 
 import { cityPlan, blockPath, blockRoofs, faubourgs, beltRoofs, leanOf } from "./engine/cityplan.js";
 import { makeInfluence } from "./engine/influence.js";
 import { glyphFor, drawGlyph } from "./engine/mapicons.mjs";
-import { localLayoutFor, localFrame, localModel, paintLocalMap, enlargementFor, paintEnlargement, regionFaceOf, levelsOf, levelWord, isCityPlace, cityPlacesOf } from "./engine/localmap.js";   // SNG-678 L0/L1/L2/L4/L5
+import { localLayoutFor, localFrame, localModel, paintLocalMap, enlargementFor, paintEnlargement, regionFaceOf, levelsOf, levelWord, isCityPlace, cityPlacesOf, siteLevel } from "./engine/localmap.js";   // SNG-678 L0/L1/L2/L4/L5
 import { bakeEarthRGB, earthCityLights } from "./engine/earth.js";   // ⛔ SNG-680: the first world the film shows IS Earth   // SNG-409 §4: a pole must never read as a town   // SNG-390: the globe, read-only
 import { walkingDays, milesFor, worldPosForGenerated, coordForGenerated, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, placeLabels } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
@@ -208,7 +208,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.22.7";
+const APP_VERSION = "2.22.8";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -7899,12 +7899,25 @@ function filmLocalMap(placeId, loc, w, h) {
     const roadsMiles = (a, b) => { const la = CONTENT.locations?.[a], lb = CONTENT.locations?.[b]; const d = la && lb ? walkingDays(la, lb) : null; return d == null ? null : milesFor(d, WORLD_SCALE); };
     const layout = localLayoutFor(placeId, { content: CONTENT, character: null, children, roadsMiles });
     const frame = localFrame(layout, { w, h, pad: Math.round(Math.min(w, h) * 0.1) });
-    const model = localModel(layout, frame, { placeName: loc?.name || placeId, placeId, nameOf });
-    const inset = enlargementFor(model);
+    /* ✅ the 35 again (the Service Ways): A PLACE BELOW THE GROUND DRAWS AS ONE — its own level, not surface roads converging
+     * on a point. The host's level is its depth read down (`siteLevel`), and the film shows that level when the layout has it. */
+    // ⚠️ TWO SIGNS FOR ONE IDEA: a host's `worldPos.depth` is NEGATIVE below ground (the Service Ways −4), a site's is
+    // positive-down through `siteLevel` (depth 2 → level −2). Minus the magnitude is the level either way it was written.
+    const lv = levelsOf(layout), own = -Math.abs(siteLevel(loc));
+    const level = lv.includes(own) ? own : (lv[0] ?? 0);
+    const model = localModel(layout, frame, { placeName: loc?.name || placeId, placeId, nameOf, level });
+    /* ✅ F1 (the 35 again): NO INSET IN A FILM — *"on screen for 6 s it reads as a second, smaller copy of the same map."* */
     const space = labelSpace();
-    if (inset) space.claim({ x0: inset.x - 4, x1: inset.x + inset.w + 4, y0: inset.y - 4, y1: inset.y + inset.h + 4, rank: -2, kind: "inset" });
-    paintLocalMap(c2, model, { space, reveal: true, inset, labelMinPx: inset ? inset.builtRadiusPx * 1.6 + 12 : 0 });
-    if (inset) paintEnlargement(c2, layout, inset, { placeName: loc?.name || placeId, placeId, reveal: true });
+    paintLocalMap(c2, model, { space, reveal: true, inset: null, labelMinPx: 0 });
+    /* ✅ F1: NIGHT PAPER. *"White captions and the white name card over cream paper"* could not be read; in a film the
+     * map is multiplied to about 55% and its edges vignette toward the film's black, so the words sit on dark ground. */
+    c2.setTransform(dpr, 0, 0, dpr, 0, 0);
+    c2.save(); c2.globalCompositeOperation = "multiply"; c2.fillStyle = "rgb(140,142,152)"; c2.fillRect(0, 0, w, h); c2.restore();
+    c2.save();
+    const vg = c2.createRadialGradient(w / 2, h / 2, Math.min(w, h) * 0.3, w / 2, h / 2, Math.max(w, h) * 0.64);
+    vg.addColorStop(0, "rgba(4,5,11,0)"); vg.addColorStop(1, "rgba(4,5,11,0.92)");
+    c2.fillStyle = vg; c2.fillRect(0, 0, w, h);
+    c2.restore();
     _filmLocal = { key, cv };
     return cv;
   } catch (err) {
@@ -8100,7 +8113,7 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
   /* ⛑ AFTER THE GROUND, BEFORE EVERYTHING ELSE: the air belongs to the world, and the net, the glitter and
    * the arcs all sit above it. Skipped on the close frames, where the limb is off-screen and a halo would be
    * a blue ring across the middle of a region. */
-  if (!placeSpan && !coda && V !== "title") {
+  if (!placeSpan && !coda) {   // ✅ C7: the air stays on under the title
     /* ⛔ B · DERIVED FROM THE SAME SUN THE GROUND IS LIT BY, so the two cannot disagree again. ✅ Aevi: *"the
      * air crescent is drawn at −152°, on the left, over the night … derive `sunward` from the same sun the
      * raster uses."* The sun's screen bearing is `atan2(−sy, sx)`; in π units, that is `sunward`. */
@@ -8411,7 +8424,7 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
      * frame size and kept, so the film pays a drawImage a frame and not a repaint. */
     let localA = 0;
     if (V === "place" && subject?.loc && shot?.place) {
-      localA = ease(Math.max(0, Math.min(1, (u - 0.3) / 0.28)));
+      localA = T.map;   // ✅ F2: a weight — the dissolve is the cut's own easing, after the close-in
       if (localA > 0) {
         const lm = filmLocalMap(shot.place, subject.loc, w, h);
         if (lm) {
@@ -8750,25 +8763,39 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
        * by the frame, not by a longitude: upper right of the disc where there is room, above it where there is
        * not (a tall phone), and never off the canvas. */
       const grow = V === "pause" ? 1 : Math.min(1, 0.4 + u * 0.75);
-      const rr = frame.r * 0.62 * grow;
-      const side = frame.cx + frame.r * 1.25 + rr * 0.6 <= w - 6;
-      const g = side
-        ? { x: frame.cx + frame.r * 1.25 * Math.cos(-0.55), y: frame.cy + frame.r * 1.25 * Math.sin(-0.55) }
-        : { x: frame.cx + frame.r * 0.35, y: Math.max(rr * 0.7, frame.cy - frame.r * 1.25) };
+      /* ✅ C5 (the 35 again): AN ABSENCE, NOT A LENS. ✅ AEVI: *"a thin outlined, perfectly round disc at 0.62 r that bites the
+       * globe's limb … The cut differs in four ways: an irregular edge (fbm on 96 points); 1.25 r; set BESIDE the globe;
+       * six nested near-black fills feathered by a violet shadowBlur, and no stroke."* ⛑ Beside the globe is the room C1
+       * leaves: on a wide frame the globe sits right of middle, so the absence takes the upper LEFT, above the captions;
+       * on a narrow frame it sits above. It never bites the limb — its centre is the globe's radius plus most of its own
+       * from the globe's, so the two edges brush. The edge is a stable noise, the same shape every frame, 96 points. */
+      const rr = frame.r * 1.25 * grow;
+      const gap = frame.r + rr * 0.92;
+      const at = (ang) => ({ x: frame.cx + gap * Math.cos(ang), y: frame.cy + gap * Math.sin(ang) });
+      const left = at(Math.PI + 0.7), above = at(-Math.PI / 2);
+      const g = left.x - rr >= 6 && left.y - rr >= 6 ? left : above;
+      const edge = (k, n) => 1 + 0.16 * Math.sin((k / n) * Math.PI * 6 + 0.7) + 0.09 * Math.sin((k / n) * Math.PI * 14 + 2.1) + 0.05 * Math.sin((k / n) * Math.PI * 26 + 4.4);
+      const veilPath = (scale) => {
+        const n = 96;
+        ctx.beginPath();
+        for (let k = 0; k < n; k++) {
+          const ang = (k / n) * Math.PI * 2, d = rr * scale * edge(k, n);
+          const x = g.x + Math.cos(ang) * d, y = g.y + Math.sin(ang) * d;
+          if (k === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+        }
+        ctx.closePath();
+      };
       {
         ctx.save();
-        ctx.globalCompositeOperation = "destination-out";
+        ctx.globalCompositeOperation = "destination-out";             // it takes the stars and the lattice with it
         ctx.globalAlpha = T.veil;                                    // G: the absence deepens at the cut's pace
-        const rg = ctx.createRadialGradient(g.x, g.y, 0, g.x, g.y, rr);
-        rg.addColorStop(0, "rgba(0,0,0,1)"); rg.addColorStop(0.72, "rgba(0,0,0,0.92)"); rg.addColorStop(1, "rgba(0,0,0,0)");
-        ctx.fillStyle = rg;
-        ctx.beginPath(); ctx.arc(g.x, g.y, rr, 0, Math.PI * 2); ctx.fill();
+        veilPath(0.96); ctx.fillStyle = "rgba(0,0,0,0.96)"; ctx.fill();
         ctx.restore();
         ctx.save();
         ctx.globalAlpha = T.veil;
-        ctx.strokeStyle = "rgba(164,126,214,0.42)"; ctx.lineWidth = 1.4;
-        ctx.shadowColor = "rgba(150,110,220,0.8)"; ctx.shadowBlur = rr * 0.12;   // ✅ the violet rim, soft
-        ctx.beginPath(); ctx.arc(g.x, g.y, rr * 0.76, 0, Math.PI * 2); ctx.stroke();
+        ctx.shadowColor = "rgba(150,110,220,0.5)"; ctx.shadowBlur = rr * 0.3;   // the violet is a feather, not a line
+        // ⛑ a TIGHT stack — stepped 0.07 apart the six fills read as six violet rings, not one absence with a halo
+        for (let i = 0; i < 6; i++) { veilPath(1.0 - i * 0.025); ctx.fillStyle = `rgba(3,2,8,${0.3 + i * 0.1})`; ctx.fill(); }
         ctx.restore();
       }
     }
@@ -8891,7 +8918,7 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
 
   if (T.title > 0.01) {
     // the words are the caption layer's, from content; the stage simply darkens behind them — at the cut's pace
-    ctx.fillStyle = `rgba(4,5,11,${0.45 * T.title})`; ctx.fillRect(0, 0, w, h);
+    ctx.fillStyle = `rgba(4,5,11,${0.28 * T.title})`; ctx.fillRect(0, 0, w, h);   // ✅ C7: a lighter scrim — the globe shows through, with its air
   }
   ctx.restore();
 }
@@ -9163,7 +9190,7 @@ function renderFilm(doc, { mode = "film", after = null, startId = null } = {}) {
     const now = nowMs();
     const dt = lastFrameMs ? Math.min(0.25, Math.max(0, (now - lastFrameMs) / 1000)) : 0;
     lastFrameMs = now;
-    const target = filmTargets(frames[i]?.visual, { index: i, shrinkAt: coda ? -1 : shrinkAtF });
+    const target = filmTargets(frames[i]?.visual, { index: i, shrinkAt: coda ? -1 : shrinkAtF, u });
     cur = cur ? filmEase(cur, target, dt, { reduced }) : target;
     try { paintFilmShot(ctx, frames[i], { reel, reduced, w: vw, h: vh, startId, u, index: i, cur }); } catch (err) { console.warn("[film] shot skipped:", err?.message); }
   };
@@ -9224,6 +9251,9 @@ function renderFilm(doc, { mode = "film", after = null, startId = null } = {}) {
       cap.classList.add("op-cap-in");
     }
     if (cv) cv.classList.toggle("op-title", s.visual === "title");
+    // ✅ C7 (the 35 again): the title is set large and CENTRED OVER THE GLOBE — the caption carries the globe's offset from the
+    // frame's middle (C1 sets it right of middle on a wide frame), so the words sit on the world, not on the frame
+    if (cap) cap.style.setProperty("--op-shift", s.visual === "title" ? `${Math.round(2 * (filmFrame(vw, vh, { shrunk: 1 }).cx - vw / 2))}px` : "0px");
     // ⛑ at the title, Begin replaces the playback controls — there is nothing left to pause or skip
     for (const [id, on] of [["op-begin", atTitle()], ["op-back", atTitle()], ["op-pause", !atTitle()], ["op-next", !atTitle()], ["op-skip", !atTitle()]]) {
       const b = document.getElementById(id);

@@ -213,7 +213,7 @@ export function shotSeconds(shot, pacing = {}) {
  * what `night` used to mean: the lights-out darkening of the whole world (`lights_out`, `natural`, `standing_up`).
  * `cut` is the cutaway (G1), faded over the globe at the globe's own radius instead of cut to and back. */
 export const FILM_BASE = Object.freeze({
-  polar: 0, shrunk: 1, world: 1, outline: 0, lights: 0, night: 1, dark: 0, grey: 0, dim: 0, cut: 0, close: 0,
+  polar: 0, shrunk: 1, world: 1, outline: 0, lights: 0, night: 1, dark: 0, grey: 0, dim: 0, cut: 0, close: 0, map: 0,
   net: 0, runaway: 0, swarm: 0, order: 0, works: 0, drain: 0,
   poles: 0, pull: 0, middle: 0, natural: 0, standing: 0, lattice: 0, veil: 0, pause: 0,
   arcs: 0, many: 0, you: 0, title: 0,
@@ -246,7 +246,7 @@ export const FILM_TARGETS = Object.freeze({
   arcs:            { arcs: 1, close: 1 },
   many:            { arcs: 1, many: 1, close: 1 },
   you:             { arcs: 1, many: 1, you: 1, close: 1 },
-  title:           { lights: 0.3, title: 1 },
+  title:           { title: 1, arcs: 0.5, many: 0.6 },   // ✅ C7: the arcs at 0.5, the others at 0.6, the air on; no lights over the density field
   zoom_to_start:   { },
   nearest_arc:     { arcs: 1, close: 1 },
   globe:           { },
@@ -259,12 +259,16 @@ export const FILM_TARGETS = Object.freeze({
   arc:             { arcs: 1, close: 1 },
 });
 /** The targets for one shot: the table's row over the base, with the world's size and palette read off the reel. */
-export function filmTargets(visual, { index = 0, shrinkAt = -1 } = {}) {
+export function filmTargets(visual, { index = 0, shrinkAt = -1, u = 1 } = {}) {
   const row = FILM_TARGETS[String(visual || "")] || null;
   const t = { ...FILM_BASE, ...(row || {}) };
   const after = shrinkAt < 0 ? true : index >= shrinkAt;
   t.shrunk = after ? 1 : 0;
   t.world = after ? 1 : 0;
+  /* ✅ F2 (the 35 again): *"Close in on the globe for the first part of the shot, then cross-dissolve to the map. With G,
+   * that's a `map` weight like any other."* ⛑ The target turns on at 0.3 of the shot — the first part is the globe's — and
+   * from there `cur.map` eases at the cut's own pace, which IS the dissolve. Under reduced motion the frame is the target. */
+  if (String(visual || "") === "place") t.map = Number(u) >= 0.3 ? 1 : 0;
   return t;
 }
 /** One step of the easing: `cur` toward `target` over `dtSeconds`, Aevi's 0.18 — 82% of the gap closes in a

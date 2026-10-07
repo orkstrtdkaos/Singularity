@@ -2547,7 +2547,11 @@ table.ob-matrix { border-collapse: collapse; width: 100%; min-width: 640px; font
 /* ✅ C1 (the 35 again): on a wide frame the words stay low and LEFT of the globe — `filmFrame` clears the disc of this box */
 @media (min-aspect-ratio: 13/10) { .op-line { max-width: min(34em, 46vw); } }
 .op-after { color: #cfc8b6; font-size: 18px; font-style: italic; }
-.op-title + .op-caption .op-line:first-child { font-size: 38px; letter-spacing: .04em; }
+/* ✅ C7 (the 35 again): the title is SET — large, centred over the globe in the display face, its second line under it */
+.op-title + .op-caption { left: 0; right: 0; top: 0; bottom: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding-left: var(--op-shift, 0px); }
+.op-title + .op-caption .op-line { max-width: none; }
+.op-title + .op-caption .op-line:first-child { font-size: 64px; letter-spacing: .08em; }
+.op-title + .op-caption .op-line + .op-line { font-size: 22px; letter-spacing: .12em; text-transform: uppercase; color: #d9d3c4; margin-top: 10px; }
 .op-track { position: absolute; left: 48px; right: 48px; bottom: 66px; display: flex; gap: 3px; align-items: center; }
 .op-seg { height: 2px; background: rgba(226,232,246,.18); border-radius: 2px; }
 .op-seg.on { background: rgba(226,232,246,.72); }
@@ -2564,7 +2568,8 @@ table.ob-matrix { border-collapse: collapse; width: 100%; min-width: 640px; font
   .op-caption { left: 16px; right: 16px; bottom: 60px; }
   .op-line { font-size: 16px; }
   .op-after { font-size: 14px; }
-  .op-title + .op-caption .op-line:first-child { font-size: 26px; }
+  .op-title + .op-caption .op-line:first-child { font-size: 40px; }
+  .op-title + .op-caption .op-line + .op-line { font-size: 15px; }
   .op-track { left: 16px; right: 16px; bottom: 44px; }
   .op-mv { display: none; }
   .op-ctl { right: 8px; bottom: 6px; }

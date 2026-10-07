@@ -16,6 +16,22 @@
   "next": [],
   "releases": [
     {
+      "version": "2.22.0",
+      "date": "2026-10-07",
+      "entries": [
+        {
+          "kind": "feature",
+          "title": "The region map names places at its own scale",
+          "summary": "A region map says Harmonic Heights, Radiant Plateau and Greywater rather than the terrace, district or stilts you arrive at, draws Echo River Crossing as the bridge it is, and no longer draws an inn or a store on top of the town it stands in — those sit on the town's local map, and the town's name carries their count."
+        },
+        {
+          "kind": "fix",
+          "title": "The Players' Guide stops showing stray asterisks",
+          "summary": "Thirty-five paragraphs in the Guide carried a bold mark with no partner, so the Library showed the asterisks instead of the emphasis."
+        }
+      ]
+    },
+    {
       "version": "2.21.8",
       "date": "2026-10-07",
       "entries": [

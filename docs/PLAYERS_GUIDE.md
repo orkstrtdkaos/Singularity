@@ -5,12 +5,12 @@ not the machine one. If you want to know which JSON field carries a number, that
 [`FIELD_REFERENCE.md`](FIELD_REFERENCE.md) and it is not written for you.
 
 **STATUS. CCode owns Parts I–IX (what things are and how they work). Aevi owns Parts X–XII — the
-world, its people, and its traditions**, **now written. Nothing in this file invents lore: every
+world, its people, and its traditions**, now written. Nothing in this file invents lore: every
 place, person and belief in X–XII is drawn from authored content — , ,
 , the nine companion files and — and where the world has not decided
 something, the guide says so rather than filling it in.
 
-Last verified: 2026-10-07 · v2.21.8 · 441 crafts · 158 places · 187 people · 9 companions.
+Last verified: 2026-10-07 · v2.22.0 · 441 crafts · 158 places · 187 people · 9 companions.
 
 Every craft in the game, by domain and sect, is listed in [`SKILLS.md`](SKILLS.md) — what each
 one costs, what it does, and what its three ranks give you.
@@ -21,11 +21,11 @@ one costs, what it does, and what its three ranks give you.
 
 You play one person in a valley, and a Game Master — an AI — narrates the world around you and answers
 what you do. **It is a conversation with rules underneath it. The rules are not hidden from you: every
-roll shows you its terms, and every blow shows you what stopped it.
+roll shows you its terms, and every blow shows you what stopped it.**
 
-Three things are always true:**
+**Three things are always true:**
 
-- **The world remembers. People you meet stay met. Places you change stay changed. What you did is
+- The world remembers. People you meet stay met. Places you change stay changed. What you did is
  recorded and other people find out.
 - You are not the only thing happening. The world moves on a clock whether you act or not. Rivals
  advance. Work continues. Someone else takes the thing you were slow about.
@@ -42,7 +42,7 @@ the usual sense.** It has **places you go, and each one answers a different ques
 ## The one you are in most
 
 The play screen. You type what you do; the world answers. Everything else is somewhere you step out
-to and come back from. When in doubt, you are meant to be here.**
+to and come back from. When in doubt, you are meant to be here.
 
 **Two day-counts, and neither is wrong.** The sidebar's *Day N* is your character's story-day — it moves when the story does.
 The *world-day* on an image is the calendar of the world itself, which moves whether or not you play (the world's first day was
@@ -52,15 +52,15 @@ character's — the two numbers are different counts of different things.
 ## When it turns into a fight — or a contest
 
 A fight is not a different game, it is a different rhythm. You get **three phases every turn, in this
-order:
+order:**
 
-| phase | what it is for | the catch |
+**| phase | what it is for | the catch |
 |---|---|---|
 | ◎ SENSE** | read them before you commit | **it costs the craft's energy** — skipping it is a real choice |
 | **⚔ ACTION | your actual move | this is the one you always get |
 | ✦ BONUS** | **a FULL extra action** | **earned by a good read — this is what sensing buys** |
 
-**That is the whole combat economy. Spend energy to look, and a good look pays for a second move.
+That is the whole combat economy. Spend energy to look, and a good look pays for a second move.
 Most players never sense, and most players never see the bonus. They are the same sentence.
 
 ## The places you step out to
@@ -104,11 +104,11 @@ This is why a build coheres or does not. A kit whose crafts are tagged to your s
 rolls strong; one scattered across all four rolls average at everything. You are not punished for being
 broad — you are simply never excellent at it. There is a knee at 4. Up to 4 in an attribute, each point is worth a great deal. Past 4, each point
 is worth much less. The knee is deliberate: It makes the fifth point in your best attribute worse than
-the first point in your second-best, and that is the shape of a well-rounded person.**
+the first point in your second-best, and that is the shape of a well-rounded person.
 
 ## Where you come from
 
-**An ORIGIN — 27 of them — says what people you were born to and what that gave you.
+An ORIGIN — 27 of them — says what people you were born to and what that gave you.
 A BACKGROUND — 40 — says what you did before the story starts, and grants what that taught you.
 
 Neither is a class. Neither locks anything. They open doors and they tilt you; they do not fence you.
@@ -116,7 +116,7 @@ Neither is a class. Neither locks anything. They open doors and they tilt you; t
 ## What you practise
 
 A TRADITION is a way of working — a body of craft with a shared idea behind it. There are 24
-pole-traditions standing on a ring, in 12 opposed pairs**, gathered into **14 domains**.
+pole-traditions standing on a ring, in 12 opposed pairs**, gathered into **14 domains.
 
 **The ring is the map and the map is the ring. Two traditions beside each other on the ring are kin —
 their crafts sit comfortably together. Directly across the ring is your ANTIPODE**. How far apart two
@@ -127,7 +127,7 @@ rises. **The barrier is to dabbling, not to crossing.**
 
 ### Which way is which
 
-**There is no north here. The compass runs on the world's own structure, and it has four words.
+There is no north here. The compass runs on the world's own structure, and it has four words.
 
 | | |
 |---|---|
@@ -143,7 +143,7 @@ are the two ways to roll along it.
 
 And the compass is not only a compass. The Crossing is where the dispositions balance, and the poles are
 where each one has been taken all the way — so hubward means toward balance and outward means toward
-commitment.** A traveller told *"we are going outward"* has learned something about where they will end up,
+commitment. A traveller told *"we are going outward"* has learned something about where they will end up,
 not only which way they are facing.
 
 Distances come in **days' walk**, because that is what anyone can actually tell you. *"The Archive is
@@ -165,7 +165,7 @@ Traditions are what you know. A vocation is what you are FOR — and there are e
 | **the ATTENDANT** | is present at what cannot be fixed |
 | **the ENDER** | ends *things* — which is not the same as ending fights |
 
-**None of these is the fighting one. A fight has five exits and only one of them is damage: health,
+None of these is the fighting one. A fight has five exits and only one of them is damage: health,
 energy, being driven back, a death save, or someone yielding. The Keeper wins on pressure. The Broker
 wins on terms. The Walker wins by never being where the blow went. The Attendant wins by undoing damage
 faster than it lands.
@@ -181,27 +181,27 @@ the dark.
 
 ## Where a craft comes from, and where you learn it
 
-These are two different questions and the game keeps them apart.**
+These are two different questions and the game keeps them apart.****
 
-- **LINEAGE — whose craft this descends from. It is permanent, and it decides how the craft is powered and
+- ****LINEAGE — whose craft this descends from. It is permanent, and it decides how the craft is powered and
  where it sits on the ring.
 - ACCESS — where you can actually be taught it: a school, a place, a person, or the wilds.
 
 A foothill is a place, not a people.** The Harmonic Heights and the Radiant Plateau teach crafts they
 did not invent — *"Hardline teaches the Edge; it does not own it."* **That is what makes a foothill worth
-travelling to.**
+travelling to.
 
 And some crafts are **folk-accessible — open to anyone in the valley, whoever their people are. That is a
 fact about the learning**, never about the lineage.
 
-**No tradition is structurally better. Every one has exactly two neighbours and exactly one opposite —
+No tradition is structurally better. Every one has exactly two neighbours and exactly one opposite —
 fairness by geometry rather than by balance patching.
 
 ---
 
 # PART III · A TURN
 
-You say what you want to do, in your own words. The GM answers. Underneath, a turn has a shape:**
+You say what you want to do, in your own words. The GM answers. Underneath, a turn has a shape:
 
 ```
  SENSE → ACTION → BONUS
@@ -220,7 +220,7 @@ can intervene. That is a decision every round, not a setting.**
 
 You roll **d100** and you succeed if you roll **at or under** your chance.
 
-**Every term in that chance is named and shown to you. Your attribute, the craft's tier, how the
+Every term in that chance is named and shown to you. Your attribute, the craft's tier, how the
 matchup sits, how hard you are pushing, any standing effect. The engine never hides a modifier. If you
 want to know why a roll was 62 and not 80, the answer is on the screen.
 
@@ -231,7 +231,7 @@ different outcomes and the fiction reflects all three.
 
 # PART IV · CRAFTS
 
-A craft is a thing you can do.** Not a spell list — a practice. **387 of them.**
+A craft is a thing you can do.** Not a spell list — a practice. **387 of them.
 
 ## Three ranks
 
@@ -250,7 +250,7 @@ higher costs more: +3 energy for each rank of reach above the first. A craft tha
 costs 7 at rank 2 and 10 at rank 3.
 
 And a craft that can stop someone outright costs double when it does. Not your whole pool — twice the
-ordinary price, paid only when the thing actually stops. A resisted attempt costs the ordinary price.**
+ordinary price, paid only when the thing actually stops. A resisted attempt costs the ordinary price.
 
 ## The floor that costs nothing
 
@@ -272,7 +272,7 @@ still there; it is just very small.
 When you choose one you see exactly three things per rank: **what it DOES · what it CANNOT do · what it
 COSTS.** Everything else on a craft is for us.
 
-**"cannot" is a scope limit, not a bill. It tells you what the craft will not produce — not what it
+"cannot" is a scope limit, not a bill. It tells you what the craft will not produce — not what it
 will charge you for producing it.
 
 ---
@@ -282,7 +282,7 @@ will charge you for producing it.
 ## What lands
 
 A blow is a MIX, not a single thing. A psionic strike is part force and part mind. A smite is
-radiance and judgement and impact. The word people use for an effect is the mix. Every kind of harm belongs to one of four families:**
+radiance and judgement and impact. The word people use for an effect is the mix. Every kind of harm belongs to one of four families:
 
 | family | what it is |
 |---|---|
@@ -291,14 +291,14 @@ radiance and judgement and impact. The word people use for an effect is the mix.
 | VITAL** | life ended, grown, or moved |
 | **INTRINSIC** | **harm that requires a WILL to make it.** A rockfall cannot do this |
 
-**Heat and cold are siblings, not opposites. A ward against fire is not a ward against ice, and it
+Heat and cold are siblings, not opposites. A ward against fire is not a ward against ice, and it
 never will be.
 
 ## What stops it
 
 A WARD answers a family, or one kind inside a family. An elemental ward stops heat and cold and
 lightning. A cold ward stops only cold — and is cheaper and sharper for it. Wards have DEPTH as well as breadth, and they are three different answers rather than three sizes of
-one:**
+one:
 
 - **RESIST** — you are harder to land on. It moves the roll.
 - **SOAK — it lands and takes less off you. It moves the damage.
@@ -319,9 +319,9 @@ a blow entirely.**
 
 **Most fights are not decided by damage.** They are decided by **PRESSURE — a meter that fills as one
 side wins exchanges. When it fills, the other side is DRIVEN BACK: they lose ground, they lose a little
-blood and a little wind, and the meter resets.
+blood and a little wind, and the meter resets.**
 
-And each time you have driven them back, you roll better against them.** It compounds.
+**And each time you have driven them back, you roll better against them.** It compounds.
 
 **Drive them back enough times and they break** — they leave the field. **How many times is half their
 level, so a novice breaks in three and someone formidable takes far longer. You can be broken the
@@ -332,9 +332,9 @@ same way.**
 **Some crafts can kill you. A few can simply stop you.** They are not the same thing.
 
 **A craft that CAN kill does it the ordinary way — it wounds you, and you run out. Most weapons and most
-strikes are this, and the game asks you to confirm before you cast one at a person.
+strikes are this, and the game asks you to confirm before you cast one at a person.**
 
-A craft that STOPS you bypasses all of that.** *"No wound, no struggle, no argument — it simply
+**A craft that STOPS you bypasses all of that.** *"No wound, no struggle, no argument — it simply
 stops."* These are rare, and every one of them has a price the caster pays. When one lands, you get a SAVE — your own body's refusal or your own presence, whichever is greater,
 against the blow. Hold it and the dice are the fallback: You are badly hurt and you are alive. Fail
 it and you stop.
@@ -342,7 +342,7 @@ it and you stop.
 **And the odds are not fixed.** A fresh opponent is close to even. Someone who has been run down and
 driven back three times is nearly gone, which is what all that pressure was for.
 
-**And some things cannot be stopped this way at all** — a machine, a Precursor working. **There is no
+**And some things cannot be stopped this way at all** — a machine, a Precursor working. There is no
 thread in them to cut.
 
 ## Being stopped without being hurt
@@ -356,9 +356,9 @@ version — the thing that would have knocked you out costs you your turn instea
 
 # PART VI · The people with you
 
-Nine companions.** They are people, not equipment.
+Nine companions.** They are people, not equipment.**
 
-**Everything participates. Being able to swing is not the same as taking part. Four of the nine do not
+****Everything participates. Being able to swing is not the same as taking part. Four of the nine do not
 fight and all nine contribute — healing is acting, distracting is acting, knowing something is acting.
 
 And losing one costs something specific. Not "you are down a body" — each of them, when they go
@@ -371,9 +371,9 @@ FOLDED — still in the fight, still contributing, just not narrated one swing a
 
 A folded companion is not safe.** They add to your blows when you are winning and **they take losses
 when you are not.** Including the ones who cannot fight — being unable to swing is not being
-protected, and the reverse would make non-combatants the smart thing to hide behind.
+protected, and the reverse would make non-combatants the smart thing to hide behind.**
 
-**Parting. The ✕ beside a name in your company parts you on the day you press it; they move to your former company, and you can
+****Parting. The ✕ beside a name in your company parts you on the day you press it; they move to your former company, and you can
 ask them again from their record.
 
 ## Playing with other people
@@ -382,14 +382,14 @@ Other players can share a scene with you — same place, same beat log, and each
 others did. The GM's narration for your turn carries the others as present, acting people.
 
 Turns rotate. When it is yours, you act; when it is not, you watch what your friends do and it lands in
-the same record. A scene holds up to six.**
+the same record. A scene holds up to six.
 
 **Outside a fight, the party has a leader** — whoever opened the scene, and it can be handed to someone else.
 The leader decides where you go and what the party tries. Everyone else says what they *want* — "I'm keeping an
 eye on the woman by the fire" — and the GM tells the leader what their people are reaching for before they
 choose. You can change what you want at any time. **The leader never chooses your action.**
 
-**You can step into a fight someone else is in — one opponent, and everyone who has stepped in is swinging
+You can step into a fight someone else is in — one opponent, and everyone who has stepped in is swinging
 at the same one. What they have taken off it, you can see: the number in your narration is counted from every
 blow anyone has landed, and a mender's work counts the same way in the other direction. You can also just
 watch. Stepping out again does not end it — the others are still in it, and what you took off it stays off.
@@ -412,7 +412,7 @@ single assassin can still find you in the middle of your own legion.
 
 # PART VII · LONG WORK
 
-Some crafts are WORKS, not workings.** They take days. You come back to them.
+Some crafts are WORKS, not workings. They take days. You come back to them.
 
 **A project finishes on a threshold, never on a date.** A date can only be waited out. **A threshold can
 be:**
@@ -420,7 +420,7 @@ be:**
 - **INTERRUPTED — something stops the work. What you banked is kept.
 - RESUMED** — you take it up again.
 - **SABOTAGED** — someone sets you back. **A setback, never a deletion.**
-- **INHERITED — the work passes to someone else and continues in their hands.
+- INHERITED — the work passes to someone else and continues in their hands.
 
 More hands make it go faster. The GM will not promise you a completion day, because there is not one.
 
@@ -442,7 +442,7 @@ And your store is the first thing you own that is worth stealing and cannot run 
 goes unnoticed takes what it came for. **A raid that is SEEN is a fight — and if you win, they take
 nothing and what they carried is yours.
 
-Small claims are different.** A room, a shop, a shrine you were given on the road.
+Small claims are different. A room, a shop, a shrine you were given on the road.
 
 **What is limited is not places — it is people. You can only have so many named people running things
 in your name, and one person keeping two holds is still one** of them. So a small claim with nobody
@@ -453,9 +453,9 @@ can go and take them back.
 
 # PART VIII · DYING
 
-**Death is a ladder, not a switch.
+**Death is a ladder, not a switch.**
 
-| how far gone | what it means | who can still reach |
+**| how far gone | what it means | who can still reach |
 |---|---|---|
 | the Threshold** | dead about a day | a rank-1 working |
 | **the Near Dark** | about a month | rank 2 |
@@ -476,7 +476,7 @@ slow. Ashwardens drag you back. The Numinous invite. Threnody delays the sinking
 You gain levels, and you gain STANDING — which is not the same thing.
 
 - **LEVEL** is capability. It opens ranks and crafts.
-- **NOTORIETY is what the world has heard. It is earned by DEEDS — things you actually did, that people
+- NOTORIETY is what the world has heard. It is earned by DEEDS — things you actually did, that people
  actually found out about.
 
 Standing is what lets you lead. How many named people will act alongside you is earned, not bought:

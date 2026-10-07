@@ -57,6 +57,41 @@ export function rngOf(seed) {
 }
 
 // ───────────────────────────────────────────────────────────────────────────────────────────────────
+// ⛔ L0 · THE REGION MAP READS `regionDisplay`. ✅ AEVI: *"SNG-426 (August) authored the split in `location_kinds.json`
+// → `regionDisplay`: seven sites marked `suppressAtRegion` … places renamed at region scale: 'Harmonic Heights', not
+// 'Harmonic Heights — Lower Terrace', with a city icon … ⛔ Nothing reads it."* And her general rule: *"ANY location
+// whose `parentId` is another location AND which sits within 0.5° of that parent is SUPPRESSED at region scale. An
+// entry in `regionDisplay` is an explicit decision about that place and the general rule does not reach it."*
+// ⛑ One reader for the three answers (name, kind, suppressed), pure, so the region map and the gate ask the same
+// function and the +N a suppressed site adds to its parent is counted where the suppression is decided.
+export function regionFaceOf(id, content, { locations = null } = {}) {
+  const locs = locations || content?.locations || {};
+  const l = locs[id] || null;
+  const disp = content?.locationKinds?.regionDisplay?.[id] || null;
+  const parentId = l?.parentId && locs[l.parentId] ? l.parentId : null;
+  let suppressed = false, by = null;
+  if (disp && typeof disp === "object" && !String(id).startsWith("_")) {
+    suppressed = disp.suppressAtRegion === true;
+    by = suppressed ? "regionDisplay" : null;
+  } else if (parentId && l?.worldPos && locs[parentId]?.worldPos) {
+    const a = l.worldPos, b = locs[parentId].worldPos;
+    const dLat = Number(a.colatitude) - Number(b.colatitude);
+    const dLon = (((Number(a.longitude) - Number(b.longitude)) + 540) % 360) - 180;
+    const lat = Number(b.colatitude) - 90;
+    const deg = Math.hypot(dLat, dLon * Math.cos(lat * Math.PI / 180));
+    suppressed = Number.isFinite(deg) && deg <= 0.5;
+    by = suppressed ? "within 0.5° of its parent" : null;
+  }
+  return {
+    id, parentId,
+    name: (disp && typeof disp.regionName === "string" && disp.regionName) || l?.name || id,
+    kind: (disp && typeof disp.regionKind === "string" && disp.regionKind) || null,
+    suppressed, by,
+    tallyTo: suppressed ? parentId : null,
+  };
+}
+
+// ───────────────────────────────────────────────────────────────────────────────────────────────────
 // ⛔ THE FRAME. ✅ AEVI (L1): *"the frame fits every site and the near edge of every `extent` feature, the way
 // the mock frames the wheels and the ford 3.4 km out."* A frame that fit only `radiusMetres` would leave
 // Millbrook's wheels, landing and ford — the three sites its own seed calls a centre of daily life — off the

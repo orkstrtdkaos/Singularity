@@ -6612,7 +6612,8 @@ await (async () => {
 
     check("675/M7: ⛔ a long place name breaks on a WORD — a hard slice cut 'The Disputed Zone — Fringe' mid-word",
       !/String\(l\.name \|\| id\)\.slice\(0, 22\)/.test(src)
-      && /labelText\(l\.name \|\| id, "place", 24\)/.test(src),
+      // ⛑ SNG-678 L0: the name may be the region-scale one (`regionFaceOf`), still through `labelText` at 24
+      && /labelText\(face416\[id\]\?\.name \|\| l\.name \|\| id, "place", 24\)/.test(src),
       "Aevi reported the resulting \"The Disputed Zone — Fr\" as a label drawn twice");
 
     /* ═════ M4 + M5 (SNG-675) · THE FIELD STOPS DROWNING THE LAND, AND THE POWERS STOP SHARING A HUE ═════
@@ -24017,6 +24018,46 @@ await (async () => {
     check("680/coda: …and a named place 60° off is not 'near' — the rung yields to the authored preference rather than crossing the world for it",
       none?.arc?.id === "arc_world" && /authored preference/.test(none?.arcBy || ""), none?.arcBy);
   }
+}
+
+// --- SNG-678 L0: the region map reads regionDisplay ---
+{
+  const LM0 = await import("../engine/localmap.js");
+  const { loadContentHeadless: lch678b } = await import("./headless_content.mjs");
+  const C0 = await lch678b();
+  const rd = C0.locationKinds?.regionDisplay || {};
+  const entries = Object.keys(rd).filter((k) => !k.startsWith("_"));
+  const sup = entries.filter((id) => rd[id]?.suppressAtRegion === true);
+  check(`678/L0: regionDisplay is loaded and read — ${entries.length} entries, ${sup.length} suppressed sites, and every suppressed id is suppressed by the reader`,
+    entries.length >= 7 && sup.length >= 5 && sup.every((id) => LM0.regionFaceOf(id, C0).suppressed && LM0.regionFaceOf(id, C0).by === "regionDisplay"), sup.join(", "));
+  check("678/L0: …and a renamed place answers with its region-scale name and kind — Harmonic Heights, a city; Echo River Crossing, a bridge",
+    LM0.regionFaceOf("harmonic_heights_terrace", C0).name === "Harmonic Heights" && LM0.regionFaceOf("harmonic_heights_terrace", C0).kind === "city"
+      && LM0.regionFaceOf("echo_river_crossing", C0).kind === "bridge");
+  // the general rule: a child within 0.5° of its parent, with no entry, is suppressed; one with an entry keeps its own decision
+  const locs0 = { p: { id: "p", worldPos: { colatitude: 60, longitude: 10 } }, near: { id: "near", parentId: "p", worldPos: { colatitude: 60.2, longitude: 10.1 } },
+    far: { id: "far", parentId: "p", worldPos: { colatitude: 63, longitude: 10 } }, kept: { id: "kept", parentId: "p", worldPos: { colatitude: 60.1, longitude: 10 } } };
+  const c0 = { locations: locs0, locationKinds: { regionDisplay: { kept: { why: "an explicit decision keeps it" } } } };
+  check("678/L0: the general rule — a child within 0.5° of its parent is suppressed and tallies to the parent; one 3° off is not; one with ANY regionDisplay entry keeps its own decision",
+    LM0.regionFaceOf("near", c0).suppressed && LM0.regionFaceOf("near", c0).tallyTo === "p" && LM0.regionFaceOf("near", c0).by === "within 0.5° of its parent"
+      && !LM0.regionFaceOf("far", c0).suppressed && !LM0.regionFaceOf("kept", c0).suppressed);
+  // every suppressed site is reachable on its parent's local map: it is a location with a parentId, so the parent's
+  // tier lists it as a promoted child and the layout places it (L2 adds the sub-places the authored file does not name)
+  const WM0 = await import("../engine/worldmap.js");
+  const onParent = sup.map((id) => {
+    const l = C0.locations[id]; const pid = l?.parentId;
+    if (!pid) return { id, ok: false, why: "no parentId" };
+    const ch = { placeMemory: {}, generated: { x: { [id]: { ...l, _gen: { type: "location" } } } } };
+    const kids = WM0.locationTierNodes(ch, C0, pid).children.map((c) => c.kind === "location" ? { ...c, worldPos: C0.locations[c.id]?.worldPos || null } : c);
+    const lay = LM0.localLayoutFor(pid, { content: C0, character: null, children: kids });
+    return { id, ok: (lay.sites || []).some((s) => s.id === id), why: pid };
+  });
+  check("678/L0: …and every suppressed site is PRESENT on its parent's local map — the one place it goes when the region map stops drawing it",
+    onParent.every((o) => o.ok), onParent.filter((o) => !o.ok).map((o) => `${o.id} (${o.why})`).join(", "));
+  const src0 = readFileSync(join(root, "app.js"), "utf8");
+  const paint0 = (() => { const a = src0.indexOf("function paintRegionMap("); return src0.slice(a, a + 60000); })();
+  check("678/L0: the region map asks `regionFaceOf` for every place — skips the suppressed, names by `regionName`, draws by `regionKind`, and counts the skipped into the parent's +N",
+    /regionFaceOf\(id, CONTENT\)/.test(paint0) && /face416\[id\]\?\.name/.test(paint0) && /m\.regionKind \|\| meta\.k/.test(paint0) && /suppressed416\[face\.tallyTo\]/.test(paint0)
+      && /hidden416\[pid\] = \(hidden416\[pid\] \|\| 0\) \+ n/.test(paint0));
 }
 
 check("smoke: no checks are stranded after process.exit (dead tests report green forever)", (() => {

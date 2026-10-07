@@ -68,7 +68,7 @@ import { isoLines, blurGrid, stipple, hexGather, nearness, crystalFacets } from 
 import { cityPlan, blockPath, blockRoofs, faubourgs, beltRoofs, leanOf } from "./engine/cityplan.js";
 import { makeInfluence } from "./engine/influence.js";
 import { glyphFor, drawGlyph } from "./engine/mapicons.mjs";
-import { localLayoutFor, localFrame, localModel, paintLocalMap, enlargementFor, paintEnlargement } from "./engine/localmap.js";   // SNG-678 L1/L2
+import { localLayoutFor, localFrame, localModel, paintLocalMap, enlargementFor, paintEnlargement, regionFaceOf } from "./engine/localmap.js";   // SNG-678 L0/L1/L2
 import { bakeEarthRGB, earthCityLights } from "./engine/earth.js";   // ⛔ SNG-680: the first world the film shows IS Earth   // SNG-409 §4: a pole must never read as a town   // SNG-390: the globe, read-only
 import { walkingDays, milesFor, worldPosForGenerated, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout, fieldBlobs, fieldAlpha, placeLabels } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
@@ -208,7 +208,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.21.8";
+const APP_VERSION = "2.22.0";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -15970,10 +15970,21 @@ function paintRegionMap(regionId) {
   const here = character.currentLocationId;
   const aliased416 = character?.locationAliases || {};
   const marks416 = [];
+  /* ═════ SNG-678 L0 · THE REGION MAP READS `regionDisplay` ═════
+   * ✅ AEVI: *"At region scale, use `regionName` and `regionKind` where present, and skip `suppressAtRegion`
+   * sites. A suppressed site's parent shows its +N, and the site itself appears on the parent's local map."*
+   * ⛔ Authored in August and read by nothing until now — the region map said "Harmonic Heights — Lower Terrace"
+   * and drew the inn on top of its district. The decision is `regionFaceOf`'s, one pure reader the gate drives
+   * too; here it only skips, renames, and counts the skipped into the parent's tally. */
+  const suppressed416 = {};
+  const face416 = {};
   for (const id of Object.keys(CONTENT.locations)) {
     const l = CONTENT.locations[id];
     if (!l?.worldPos || (l.regionId || l.region) !== regionId) continue;
     if (l.supersededBy || aliased416[id]) continue;
+    const face = regionFaceOf(id, CONTENT);
+    if (face.suppressed) { if (face.tallyTo) suppressed416[face.tallyTo] = (suppressed416[face.tallyTo] || 0) + 1; continue; }
+    face416[id] = face;
     // ⛔ ON A CITY THE PLAN IS THE PROJECTION. Reading `base.toScreen` here would put the hub's eleven places
     // back on one pixel at the pole — which is the whole thing the city exists to fix — and the labels, the
     // cluster seals and every click would go with them.
@@ -15983,7 +15994,7 @@ function paintRegionMap(regionId) {
     // ⛔ M7's REAL CAUSE. Aevi reported *"The Disputed Zone — Fr +3"* as a label drawn twice; the location is
     // named "The Disputed Zone — Fringe" (26 chars) and `.slice(0, 22)` cuts it to exactly that string — a
     // HARD CUT MID-WORD, which `smartClamp` has existed to prevent since SNG-152. `labelText` breaks on a word.
-    marks416.push({ id, l, p, name: labelText(l.name || id, "place", 24) });
+    marks416.push({ id, l, p, name: labelText(face416[id]?.name || l.name || id, "place", 24), regionKind: face416[id]?.kind || null });
   }
   // ✅ M2 — *"place | serif, bold, 12–13px, 3px dark halo"*, from the table rather than from a local const.
   // ⛑ IT SETS THE STATE; IT DOES NOT RETURN A STRING. My first cut returned `ctx.font` and a caller below did
@@ -16031,6 +16042,8 @@ function paintRegionMap(regionId) {
     delete hidden416[m.id];
     if (taker) hidden416[taker] = (hidden416[taker] || 0) + carry;
   }
+  // ⛑ L0: a site suppressed at this scale counts under its parent's name, with the names the placer hid
+  for (const [pid, n] of Object.entries(suppressed416)) hidden416[pid] = (hidden416[pid] || 0) + n;
   for (const id of Object.keys(hidden416)) if (!pass2.shown.has(id)) delete hidden416[id];
   const labels416 = { shown: pass2.shown, hiddenBy: hidden416 };
   // ═════ D1 · THE PLACES JOIN THE SHARED SPACE ═════
@@ -16517,7 +16530,8 @@ function paintRegionMap(regionId) {
 
   for (const m of marks416) {
     const meta = _terrain.locations[m.id] || {};
-    const g = glyphFor({ ...meta, k: meta.k });
+    // ⛑ L0: the region-scale kind wins over the stamped one — "Echo River Crossing" is a bridge at this scale
+    const g = glyphFor({ ...meta, k: m.regionKind || meta.k });
     if (g) drawGlyph(ctx, g, m.p.x, m.p.y, m.id === here ? 9 : 7, {});
   }
   setPlaceFont(false);

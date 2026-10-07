@@ -1198,6 +1198,141 @@
           "name": "Splarf"
         }
       }
+    },
+    "holloway": {
+      "id": "holloway",
+      "name": "Holloway",
+      "canonId": "holloway",
+      "intro": {
+        "role": "Millbrook farmer, upper terraces",
+        "description": "Tall, sharp-gestured farmer whose upper terraces depend on reliable irrigation flow — short-tempered under pressure but not unreasonable.",
+        "firstSeenDay": 1,
+        "where": "millbrook",
+        "metBy": {
+          "characterId": "char-mr6eq1a5",
+          "name": "Usnea Beard"
+        }
+      }
+    },
+    "renn": {
+      "id": "renn",
+      "name": "Renn",
+      "canonId": "renn",
+      "intro": {
+        "role": "Millbrook farmer, lower channel",
+        "description": "Stocky, jaw-set farmer managing the lower irrigation channel — cites precedent and compact; stubborn but has the law on his side.",
+        "firstSeenDay": 1,
+        "where": "millbrook",
+        "metBy": {
+          "characterId": "char-mr6eq1a5",
+          "name": "Usnea Beard"
+        }
+      }
+    },
+    "third-farmer": {
+      "id": "third-farmer",
+      "name": "Hessa Orm",
+      "canonId": "third_farmer",
+      "intro": {
+        "role": "Millbrook farmer, bystander at the well",
+        "description": "A quieter third party to the irrigation argument — has been staring at the gray bowl of water; his silence feels weighted, not empty.",
+        "firstSeenDay": 1,
+        "where": "millbrook",
+        "metBy": {
+          "characterId": "char-mr6eq1a5",
+          "name": "Usnea Beard"
+        }
+      }
+    },
+    "dockside-child": {
+      "id": "dockside-child",
+      "name": "Sela",
+      "canonId": "dockside_child",
+      "intro": {
+        "role": "Child witness — docks",
+        "description": "Eight or nine years old, sits alone on the dock's lowest plank listening to the river with the particular patience of someone who has already given up on adults believing her.",
+        "firstSeenDay": 4,
+        "where": "millbrook",
+        "metBy": {
+          "characterId": "char-mr6eq1a5",
+          "name": "Usnea Beard"
+        }
+      }
+    },
+    "gateline-warden": {
+      "id": "gateline-warden",
+      "name": "Tuning-warden (gateline)",
+      "canonId": "gateline_warden",
+      "intro": {
+        "role": "Gateline warden, Lower Terrace, Harmonic Heights",
+        "description": "A gray-layered warden with a chord-staff and the practiced neutrality of someone following instructions he doesn't fully agree with.",
+        "firstSeenDay": 4,
+        "where": "harmonic_heights_terrace",
+        "metBy": {
+          "characterId": "char-mr6eq1a5",
+          "name": "Usnea Beard"
+        }
+      }
+    },
+    "orla": {
+      "id": "orla",
+      "name": "Orla",
+      "canonId": "orla",
+      "intro": {
+        "role": "Optics-weaver, Edge District, Radiant Plateau",
+        "description": "A precise woman in an amber collar who weaves optical records — light-impressions. Assesses materials and people with the same professional calm; noticed Usnea's Radiant-origin light-hold from across the lane.",
+        "firstSeenDay": 6,
+        "where": "radiant_plateau_edge",
+        "metBy": {
+          "characterId": "char-mr6eq1a5",
+          "name": "Usnea Beard"
+        }
+      }
+    },
+    "amber-lath-keeper": {
+      "id": "amber-lath-keeper",
+      "name": "Amber Lath Keeper",
+      "canonId": "amber_lath_keeper",
+      "intro": {
+        "role": "Wayhouse keeper, Edge District, Radiant Plateau",
+        "description": "A small, deliberate woman who runs a quiet house on word-of-mouth — reads people fast, asks no names, and offers practical comfort without sentiment.",
+        "firstSeenDay": 7,
+        "where": "radiant_plateau_edge",
+        "metBy": {
+          "characterId": "char-mr6eq1a5",
+          "name": "Usnea Beard"
+        }
+      }
+    },
+    "brynjar-andyrsson": {
+      "id": "brynjar-andyrsson",
+      "name": "Brynjar Andyrsson",
+      "canonId": "brynjar_andyrsson",
+      "intro": {
+        "role": "Traveler, arrived from beyond the new pass",
+        "description": "Broad-shouldered, travel-worn at the boots, with the stillness of someone who arrived early and has been watching the room.",
+        "firstSeenDay": 9,
+        "where": "millbrook",
+        "metBy": {
+          "characterId": "char-mr6eq1a5",
+          "name": "Usnea Beard"
+        }
+      }
+    },
+    "councilor-dresh": {
+      "id": "councilor-dresh",
+      "name": "Councilor Dresh",
+      "canonId": "councilor_dresh",
+      "intro": {
+        "role": "Millbrook elder, leads the Thursday presentation",
+        "description": "Broad-shouldered woman seated at the table's center — came early, composed herself since dawn, leads with preference not command.",
+        "firstSeenDay": 9,
+        "where": "millbrook",
+        "metBy": {
+          "characterId": "char-mr6eq1a5",
+          "name": "Usnea Beard"
+        }
+      }
     }
   },
   "fates": {
@@ -1633,12 +1768,12 @@
     },
     "the_kind_liar": {
       "status": "stopped",
-      "stoppedUntilDay": 40,
-      "stoppedBy": "neth_the_stayed",
-      "atWorldDay": 37,
+      "stoppedUntilDay": 42,
+      "stoppedBy": "the_ender_who_forgot",
+      "atWorldDay": 39,
       "fateBy": {
-        "characterId": "char-msgpisca",
-        "name": "Splarf"
+        "characterId": "char-mr6eq1a5",
+        "name": "Usnea Beard"
       }
     },
     "the_unravelled_mind": {
@@ -1704,23 +1839,20 @@
       }
     },
     "the_farwalker": {
-      "status": "dead",
+      "status": "active",
       "sinceWorldDay": 99,
       "stoppedUntilDay": 87,
       "stoppedBy": "the_deep_lantern",
       "diedWorldDay": 99,
       "killedBy": "the_kind_liar",
-      "deathState": {
-        "diedDay": 99,
-        "bodyStatus": "intact",
-        "sealed": false,
-        "depthOverride": null,
-        "cause": "killed by The Kind Liar"
+      "returnedFromDeath": {
+        "day": 99,
+        "changed": "came back changed"
       },
       "atWorldDay": 99,
       "fateBy": {
-        "characterId": "char-msgpisca",
-        "name": "Splarf"
+        "characterId": "char-mr6eq1a5",
+        "name": "Usnea Beard"
       }
     },
     "the_edge_that_holds": {

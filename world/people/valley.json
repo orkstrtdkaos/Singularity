@@ -190,6 +190,46 @@
       },
       "tradition": "blazeborn",
       "homeland": "the_blaze"
+    },
+    "person-efeb8943b0a0dd2b": {
+      "id": "person-efeb8943b0a0dd2b",
+      "name": "Kirra Bywater the Distance",
+      "epithet": "the one who took The Farwalker's place",
+      "provisional": false,
+      "tier": "notable",
+      "weight": 10,
+      "wants": "to be more than the one they settled for",
+      "originKind": "faction_leaderless",
+      "region": "the_long_span",
+      "arcAffinity": {
+        "arcId": "arc_manifestation_storm",
+        "dir": 1
+      },
+      "arcAffinities": [
+        {
+          "arcId": "arc_manifestation_storm",
+          "dir": 1,
+          "weight": 2
+        },
+        {
+          "arcId": "arc_what_wakes_beneath",
+          "dir": -1,
+          "weight": 1
+        }
+      ],
+      "wantArcId": "arc_manifestation_storm",
+      "personalVerbs": [
+        "holding a thing together that was not theirs to hold",
+        "learning what the old one knew"
+      ],
+      "mintedWorldDay": 99,
+      "origin": "sent by the Long Span to take up what The Farwalker left unfinished",
+      "legend": {
+        "tier": "notable",
+        "weight": 10
+      },
+      "tradition": "horizon",
+      "homeland": "the_long_span"
     }
   },
   "lives": {
@@ -1384,12 +1424,13 @@
     },
     "the_burning_certainty": {
       "status": "stopped",
-      "stoppedUntilDay": 49,
-      "stoppedBy": "the_last_choirmistress",
-      "atWorldDay": 46,
+      "stoppedUntilDay": 102,
+      "stoppedBy": "the_last_seraph",
+      "sinceWorldDay": 99,
+      "atWorldDay": 99,
       "fateBy": {
-        "characterId": "char-mrhs8286",
-        "name": "Silas Weir"
+        "characterId": "char-msgpisca",
+        "name": "Splarf"
       }
     },
     "the_hundred_hands": {
@@ -1662,14 +1703,23 @@
       }
     },
     "the_farwalker": {
-      "status": "stopped",
-      "sinceWorldDay": 84,
+      "status": "dead",
+      "sinceWorldDay": 99,
       "stoppedUntilDay": 87,
       "stoppedBy": "the_deep_lantern",
-      "atWorldDay": 84,
+      "diedWorldDay": 99,
+      "killedBy": "the_kind_liar",
+      "deathState": {
+        "diedDay": 99,
+        "bodyStatus": "intact",
+        "sealed": false,
+        "depthOverride": null,
+        "cause": "killed by The Kind Liar"
+      },
+      "atWorldDay": 99,
       "fateBy": {
-        "characterId": "char-mr4ejo8c",
-        "name": "Cellaceron"
+        "characterId": "char-msgpisca",
+        "name": "Splarf"
       }
     },
     "the_edge_that_holds": {
@@ -1768,6 +1818,17 @@
       "stoppedUntilDay": 101,
       "stoppedBy": "the_scouring_hand",
       "atWorldDay": 98,
+      "fateBy": {
+        "characterId": "char-msgpisca",
+        "name": "Splarf"
+      }
+    },
+    "the_gate_that_gapes": {
+      "status": "stopped",
+      "sinceWorldDay": 99,
+      "stoppedUntilDay": 102,
+      "stoppedBy": "the_raw_chord",
+      "atWorldDay": 99,
       "fateBy": {
         "characterId": "char-msgpisca",
         "name": "Splarf"

@@ -23847,7 +23847,9 @@ await (async () => {
     `${LM.scaleLegend({ pxPerMetre: 0.2 }).text} | ${LM.scaleLegend({ pxPerMetre: 0.04 }).text}`);
   const drawn678 = authored678.map((id) => {
     try { const m = modelOf(id); const r = LM.paintLocalMap(stub678(), m.model, { reveal: true });
-      return { id, ok: r.labelled.length > 0 && m.model.sites.length === (m.layout.sites || []).length }; }
+      // ✅ L5: the model holds ONE level's sites; every authored site must be on some level of the place
+      const covered = new Set(LM.levelsOf(m.layout).flatMap((L) => LM.sitesAtLevel(m.layout, L).map((s) => s.id)));
+      return { id, ok: r.labelled.length > 0 && (m.layout.sites || []).every((s) => covered.has(s.id)) }; }
     catch (e) { return { id, ok: false, err: e.message }; }
   });
   check(`678/L1: all ${authored678.length} authored layouts model and paint — every site placed, at least one name on the ground, nothing thrown`,
@@ -24117,8 +24119,94 @@ await (async () => {
   check("680/G: …and `renderFilm` keeps ONE eased vector across every cut — `cur` lives outside the shot, eased by this frame's own dt toward the shot's targets, and handed to the painter",
     /let cur = null, lastFrameMs = 0;/.test(filmG) && /cur = cur \? filmEase\(cur, target, dt, \{ reduced \}\) : target;/.test(filmG) && /index: i, cur \}/.test(filmG));
   check("680/G: …and the raster takes amounts, not a mode word — world, night, grey and dim are 0..1 weights in its key and its pixel arithmetic",
-    /function openingRaster\(view, \{ world = 1, lights = 1, w = 900, h = 560, sun = null, night = 0, grey = 0, dim = 0 \}/.test(srcG)
+    /function openingRaster\(view, \{ world = 1, lights = 1, w = 900, h = 560, sun = null, night = 0, grey = 0, dim = 0, fine = null \}/.test(srcG)
       && /Math\.round\(NIGHT \* 8\), Math\.round\(GREY \* 8\), Math\.round\(DIM \* 8\)/.test(srcG) && !/mode === "dark"/.test(srcG));
+}
+
+// --- SNG-680 ruling 2 · the fine patch for close shots ---
+/* ✅ AEVI: *"The fine patch for close shots: yes, do it. Hoist `makeFinePatch` so the film and the map share one
+ * sampler. 83 of 272 shots are close, and the blocky coast is the first thing a player sees when a film names
+ * their home."* ⛔ The box is pure and driven; the sampler is the MAP's (`_fineGenShared` → `makeFinePatch` →
+ * `colorAt` with `fine`), which the source gate holds; and the window is filled a band of rows a frame, because a
+ * quarter-second freeze at a cut reads as a slide. */
+{
+  const WG2 = await import("../engine/worldglobe.js");
+  const b9 = WG2.fineWindowBox({ lat: -69.7, lon: 56.2 }, 9), b26 = WG2.fineWindowBox({ lat: -69.7, lon: 56.2 }, 26);
+  check("680/R2: the window's box covers 0.7 × the span either side of the place, with the longitude half widened by 1/cos(lat) — at latitude −69.7 nearly three times the latitude half",
+    Math.abs(b9.half - 6.3) < 0.01 && Math.abs((b9.la1 - b9.la0) - 12.6) < 0.02 && Math.abs((b9.lo1 - b9.lo0) / (b9.la1 - b9.la0) - 1 / Math.cos(-69.7 * Math.PI / 180)) < 0.02
+      && b26.half > b9.half && b9.n === 220, `half ${b9.half}, lon/lat ${((b9.lo1 - b9.lo0) / (b9.la1 - b9.la0)).toFixed(2)}`);
+  const bp = WG2.fineWindowBox({ lat: -90, lon: 0 }, 9);
+  check("680/R2: …and at the pole the box is clamped short of it and its longitude half capped, so the Crossing's close shot has a window rather than a NaN",
+    bp.la0 >= -90 && Number.isFinite(bp.lo0) && Number.isFinite(bp.lo1) && bp.lo1 - bp.lo0 <= 360 && bp.lat === -89.5);
+  check("680/R2: …and a texel of the 9° window is 0.057°, thirteen times finer than the bake's 0.75° cell", Math.abs((b9.la1 - b9.la0) / b9.n - 0.0573) < 0.001);
+  const src2 = readFileSync(join(root, "app.js"), "utf8").replace(/\r\n/g, "\n");   // ⛑ CRLF-proof: a rebase can hand back a CRLF checkout
+  const bodyR2 = (fn) => { const a = src2.indexOf("function " + fn); const b = src2.indexOf("\nfunction ", a + 10); return a < 0 ? "" : src2.slice(a, b < 0 ? a + 40000 : b); };
+  const winF = bodyR2("filmFineWindow");
+  check("680/R2: the film's window is the MAP's sampler — `_fineGenShared` → `makeFinePatch` → `colorAt` with `fine` — one generator, one patch maker, one colour path for both",
+    /_fineGenShared\.make\(_fineGenShared\.gp, cull\)/.test(winF) && /makeFinePatch\(_terrain, /.test(winF) && /colorAt\(_terrain, lo, la, \{ layer: "topo", contourStep: win\.step, fine: win\.patch \}\)/.test(winF)
+      && /loadWorldGenerator\(\); return null;/.test(winF));
+  check("680/R2: …filled a band of rows a frame and used only when `ready` — the bake draws until then; a patch that is not worth it (`worthIt`) leaves the bake in place",
+    /FILM_FINE_ROWS_PER_FRAME = 36/.test(src2) && /win\.row \+ FILM_FINE_ROWS_PER_FRAME/.test(winF) && /if \(win\.row >= n\) win\.ready = true;/.test(winF) && /patch && patch\.worthIt \? patch : null/.test(winF)
+      && /_filmFine\.size > 6/.test(winF));
+  const raster2 = bodyR2("openingRaster");
+  check("680/R2: the raster reads the window where it covers, bilinearly, feathered over its outer tenth, with the pixel's longitude unwrapped to the window's side — and only on the Exesa ground",
+    /if \(fine && blend >= 1\)/.test(raster2) && /while \(lonU - fine\.lon > 180\) lonU -= 360/.test(raster2) && /const wgt = Math\.max\(0, Math\.min\(1, edge \/ 0\.1\)\)/.test(raster2)
+      && /fine \? fine\.id : ""/.test(raster2));
+  const shot2 = bodyR2("paintFilmShot");
+  check("680/R2: a close shot — place, region, figure — asks for the window around its subject at the shot's own span; the wide shots never do",
+    /const fine = placeSpan && subject\?\.loc \? filmFineWindow\(subject\.loc, placeSpan\) : null;/.test(shot2) && /lights, w, h, sun, fine \}\)/.test(shot2));
+}
+
+// --- SNG-678 L4 · cities use the city; L5 · depth ---
+{
+  const LM4 = await import("../engine/localmap.js");
+  const CP4 = await import("../engine/cityplan.js");
+  const { loadContentHeadless: lch4 } = await import("./headless_content.mjs");
+  const C4 = await lch4();
+  // L4 · which places are cities
+  const cities = Object.keys(C4.locations).filter((id) => LM4.isCityPlace(id, C4));
+  check(`678/L4: a place whose kind is a city draws through the city — the_crossing (the hub) and every \`city\` kind, ${cities.length} places, and no village`,
+    cities.includes("the_crossing") && cities.length >= 3 && cities.every((id) => id === "the_crossing" || LM4.placeKindOf(id, { content: C4 }) === "city") && !LM4.isCityPlace("millbrook", C4), cities.join(", "));
+  // L4 · the Crossing's five sites through the planner, every one inside the wall
+  const layC = LM4.localLayoutFor("the_crossing", { content: C4, character: null, children: [] });
+  const cp = LM4.cityPlacesOf(layC, { nameOf: (id) => C4.locations[id]?.name || id });
+  const plan = CP4.cityPlan(cp.places, { W: 800, H: 520, hallId: cp.hallId, roadsOut: cp.roadsOut, gates: [], seed: "the_crossing" });
+  const inside = plan.marks.filter((m) => Math.hypot(m.x - plan.cx, m.y - plan.cy) <= plan.wallR + 1);
+  check("678/L4: driven — the Crossing's authored sites become the planner's places (distance over the radius, the authored bearing), the centre-most is the hall, and every mark lands inside the wall",
+    cp.places.length === (layC.sites || []).length && cp.places.length >= 5 && cp.hallId && plan.marks.length === cp.places.length && inside.length === plan.marks.length
+      && cp.roadsOut.length === (layC._measured?.roadsOut || []).length, `${inside.length}/${plan.marks.length} inside, hall ${cp.hallId}, ${cp.roadsOut.length} roads`);
+  const src4 = readFileSync(join(root, "app.js"), "utf8").replace(/\r\n/g, "\n");   // ⛑ CRLF-proof: a rebase can hand back a CRLF checkout
+  const body4 = (fn) => { const a = src4.indexOf("function " + fn); const b = src4.indexOf("\nfunction ", a + 10); return a < 0 ? "" : src4.slice(a, b < 0 ? a + 40000 : b); };
+  check("678/L4: ONE city painter for two tiers — `paintCityPlan` draws the region's Crossing and a city place's own ground; the local tier builds its plan from `cityPlacesOf` and takes its hits from the plan's marks",
+    /return paintCityPlan\(ctx, plan, W, H\);/.test(body4("paintCrossingCity")) && /function paintCityPlan\(ctx, plan, W, H, \{ ring = true, rim = true \}/.test(src4)
+      && /if \(isCityPlace\(locationId, CONTENT\)\)/.test(body4("paintLocalCanvas")) && /cityPlacesOf\(layout, \{ nameOf: nameOfC \}\)/.test(body4("paintLocalCanvas"))
+      && /paintCityPlan\(ctx, plan, W, H, \{ ring: false, rim: true \}\)/.test(body4("paintLocalCanvas")) && /plan\.marks\.map\(\(m\) => \(\{ id: m\.id, x: m\.x, y: m\.y/.test(body4("paintLocalCanvas")));
+  // L5 · depth
+  const sw = LM4.localLayoutFor("the_service_ways", { content: C4, character: null, children: [] });
+  const lv = LM4.levelsOf(sw);
+  check("678/L5: a place with depth has levels — the Service Ways run surface, −1, −2, −4, top down", lv[0] === 0 && lv.includes(-1) && lv.includes(-2) && lv.includes(-4) && lv.every((v, i) => i === 0 || v < lv[i - 1]), lv.join(","));
+  check("678/L5: `siteLevel` reads an authored `localMap.level`, a grown place's `worldPos.depth` read DOWN, and the surface for everything else",
+    LM4.siteLevel({ localMap: { level: -2 } }) === -2 && LM4.siteLevel({ worldPos: { depth: 3 } }) === -3 && LM4.siteLevel({ localMap: { bearing: 10, metres: 50 } }) === 0 && LM4.siteLevel({ localMap: { level: 3 } }) === 3);
+  const at1 = LM4.sitesAtLevel(sw, -1), at2 = LM4.sitesAtLevel(sw, -2);
+  check("678/L5: one level at a time — level −1 draws its own sites and the way DOWN from −2 (an underplace below is the stair seen from above); level −2 draws its own and the way down to −4 only if one joins",
+    at1.some((s) => LM4.siteLevel(s) === -1) && at1.some((s) => LM4.siteLevel(s) === -2 && LM4.joinsLevels(s)) && at2.every((s) => LM4.siteLevel(s) === -2 || (LM4.joinsLevels(s) && LM4.siteLevel(s) === -3)),
+    `−1: ${at1.map((s) => s.id + "@" + LM4.siteLevel(s)).join(" ")}`);
+  check("678/L5: a stair, a shaft, a ladder or a lift joins levels by its name; an underplace below ground joins by its kind; a hall does not",
+    LM4.joinsLevels({ name: "The Pressureholt Stair", kind: "underplace", localMap: { level: -1 } }) && LM4.joinsLevels({ name: "A Shaft", kind: "yard" }) && !LM4.joinsLevels({ name: "The Hall", kind: "hall", localMap: { level: -1 } }));
+  const fr5 = LM4.localFrame(sw, { w: 400, h: 300 });
+  const m5 = LM4.localModel(sw, fr5, { placeId: "the_service_ways", level: -1 });
+  const m0 = LM4.localModel(sw, fr5, { placeId: "the_service_ways", level: 0 });
+  check("678/L5: below ground the model lays out only that level's sites, cut into a hollow with rock beyond it, and no roads out — a delve's ways out are its stairs",
+    m5.level === -1 && m5.sites.every((s) => LM4.siteLevel(s) <= -1) && m5.roads.length === 0 && m5.features.some((f) => f.kind === "rock") && m5.features.some((f) => f.kind === "built") && m0.roads.length === (sw._measured?.roadsOut || []).length);
+  const stub5 = () => { const counts = {}; return new Proxy({}, { get(_, k) { if (k === "counts") return counts; if (k === "measureText") return (s) => ({ width: String(s).length * 6 }); return typeof k === "string" ? () => { counts[k] = (counts[k] || 0) + 1; } : undefined; }, set() { return true; } }); };
+  const r5 = LM4.paintLocalMap(stub5(), m5, { reveal: true });
+  check("678/L5: …and it paints — the level's sites drawn and named, nothing thrown", r5.sites.length === m5.sites.length && r5.labelled.length >= 1);
+  check("678/L5: the words on the switch — surface, −1 · one level down, −2 · 2 levels down, +1 · one level up",
+    LM4.levelWord(0) === "surface" && LM4.levelWord(-1) === "-1 · one level down" && LM4.levelWord(-2) === "-2 · 2 levels down" && LM4.levelWord(1) === "+1 · one level up");
+  const tier5 = body4("renderMapLocation"), paint5 = body4("paintLocalCanvas");
+  check("678/L5: the tier shows a level switch only when the place has levels, keeps the chosen level, hands it to the model and the enlargement — and no place is an interior the canvas cannot draw",
+    /data-lmlevel=/.test(tier5) && /levelsOf\(layout\)/.test(tier5) && /_localLevel = Number\(b\.dataset\.lmlevel\) \|\| 0; renderMap\(\);/.test(tier5)
+      && /level: _localLevel \}\)/.test(paint5) && /hereSite, level: _localLevel \}\)/.test(paint5) && /return false && layout;/.test(body4("localTierIsInterior")));
 }
 
 check("smoke: no checks are stranded after process.exit (dead tests report green forever)", (() => {

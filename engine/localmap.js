@@ -92,6 +92,72 @@ export function regionFaceOf(id, content, { locations = null } = {}) {
 }
 
 // ───────────────────────────────────────────────────────────────────────────────────────────────────
+// ⛔ L5 · DEPTH. ✅ AEVI: *"SNG-403 §4a: interiors need a vertical axis. The pocket halls, the delves and the deep
+// places are stacked, not spread. v1: a place whose sub-places carry `depth` draws one level at a time, with a
+// level switch (surface, −1, −2…). Each level is laid out like L1. The shafts and stairs that join two levels
+// show on both."* ⛑ A level is `localMap.level` on an authored site (the Cogitarium's hall at 0 and its third
+// terrace at 3 share a footprint; the Service Ways run −1, −2, −4), or a grown place's `worldPos.depth` read
+// down (depth 2 is level −2). The surface is level 0, and a site with no level is on it.
+export function siteLevel(site) {
+  const l = Number(site?.localMap?.level);
+  if (Number.isFinite(l)) return Math.round(l);
+  const d = Number(site?.worldPos?.depth);
+  return Number.isFinite(d) && d !== 0 ? -Math.round(d) : 0;
+}
+/** The levels a layout has, sorted top down (surface first, then −1, −2 …; a terrace above the surface comes first). */
+export function levelsOf(layout) {
+  const set = new Set([0]);
+  for (const s of layout?.sites || []) set.add(siteLevel(s));
+  return [...set].sort((a, b) => b - a);
+}
+/** ⛔ THE WAY DOWN SHOWS ON BOTH LEVELS. A site that JOINS two levels — a stair, a shaft, a ladder, a lift, a well
+ *  cut through, or any underplace that is the way into the level below — is drawn on its own level and on the one
+ *  above it, so a watcher on the surface sees where the delve begins. Pure: the test is the name and the kind. */
+export function joinsLevels(site) {
+  if (/\b(stair|stairs|stairway|shaft|ladder|lift|descent|climb|the way down|the way up|hatch|trapdoor)\b/i.test(String(site?.name || ""))) return true;
+  return site?.kind === "underplace" && siteLevel(site) < 0;
+}
+/** The sites drawn on one level: its own, plus the joins from the level directly below (seen from above). */
+export function sitesAtLevel(layout, level) {
+  const L = Number(level) || 0;
+  return (layout?.sites || []).filter((s) => {
+    const sl = siteLevel(s);
+    if (sl === L) return true;
+    return joinsLevels(s) && sl === L - 1;
+  });
+}
+/** The word a level wears on the switch and in the chip. */
+export function levelWord(level) {
+  const L = Number(level) || 0;
+  if (L === 0) return "surface";
+  return L < 0 ? `${L} · ${-L === 1 ? "one level down" : `${-L} levels down`}` : `+${L} · ${L === 1 ? "one level up" : `${L} levels up`}`;
+}
+
+// ───────────────────────────────────────────────────────────────────────────────────────────────────
+// ⛔ L4 · CITIES USE THE CITY. ✅ AEVI: *"A place whose kind is a city draws through `cityPlan`, as the Crossing does
+// now."* `cityPlan` lays a city out from RADIAL places — a distance from the hall (`rho`) and a bearing — which is
+// exactly the frame a local layout is written in. So a city's sites become its places: the site at the centre is
+// the hall, the rest stand at their authored distance and bearing, and the roads out become the avenues. Pure, so
+// the gate can drive the Crossing's five sites through the planner and find every one inside the wall.
+export function isCityPlace(placeId, content) {
+  if (placeId === "the_crossing") return true;              // the hub: its region map IS the city, so its own ground is too
+  return placeKindOf(placeId, { content }) === "city";
+}
+export function cityPlacesOf(layout, { nameOf = null } = {}) {
+  const radius = Math.max(1, Number(layout?.radiusMetres) || 400);
+  const sites = layout?.sites || [];
+  const places = sites.map((s) => ({
+    id: s.id, name: s.name || s.id, tier: s.location ? "settlement" : "site",
+    rho: Math.max(0, Number(s.localMap?.metres) || 0) / radius, bearingDeg: Number(s.localMap?.bearing) || 0, big: false,
+  }));
+  const hall = places.slice().sort((a, b) => a.rho - b.rho)[0] || null;
+  const roadsOut = (layout?._measured?.roadsOut || []).map((r) => ({
+    to: r.to, name: (typeof nameOf === "function" ? nameOf(r.to) : null) || r.to, bearingDeg: Number(r.bearing) || 0, mi: r.mi ?? null,
+  }));
+  return { places, hallId: hall ? hall.id : null, roadsOut };
+}
+
+// ───────────────────────────────────────────────────────────────────────────────────────────────────
 // ⛔ THE FRAME. ✅ AEVI (L1): *"the frame fits every site and the near edge of every `extent` feature, the way
 // the mock frames the wheels and the ford 3.4 km out."* A frame that fit only `radiusMetres` would leave
 // Millbrook's wheels, landing and ford — the three sites its own seed calls a centre of daily life — off the
@@ -477,25 +543,34 @@ function exitPoint(pts, w, h, inset = 6) {
 }
 
 /** ⛔ THE WHOLE MODEL FOR ONE FRAME. `layout` from `localLayoutFor`; `frame` from `localFrame`. */
-export function localModel(layout, frame, { placeName = "", placeId = "", nameOf = null } = {}) {
+export function localModel(layout, frame, { placeName = "", placeId = "", nameOf = null, level = 0 } = {}) {
   const id = placeId || layout?.placeId || "place";
-  const rnd = rngOf(seedOf("model:" + id));
-  const sites = (layout?.sites || []).map((s) => {
+  const rnd = rngOf(seedOf("model:" + id + (level ? ":L" + level : "")));
+  // ✅ L5: one level at a time — its own sites, and the way down from the level below
+  const sites = sitesAtLevel(layout, level).map((s) => {
     const p = frame.toXY(s.localMap?.bearing, s.localMap?.metres);
     return { ...s, x: p.x, y: p.y, glyph: glyphFor({ kind: s.kind }) || "hall" };
   });
   const meas = layout?._measured || {};
-  const built = (layout?.extent || []).find((f) => f.kind === "built") || null;
+  /* ✅ L5: BELOW GROUND THERE IS NO FIELD AND NO RIVER. A level under the surface is laid out like L1 — the same
+   * frame, the same label space — but its ground is the hollow it is cut into: a built extent the size of the
+   * place, and rock beyond it. The surface extent is the surface's. */
+  const extentAtLevel = (Number(level) || 0) < 0
+    ? [{ id: `${id}:hollow`, name: null, kind: "built", bearing: 0, fromMetres: 0, radiusMetres: Math.round((Number(layout?.radiusMetres) || 300) * 0.8), generated: true },
+       { id: `${id}:rockN`, name: null, kind: "rock", bearing: 45, fromMetres: Math.round((Number(layout?.radiusMetres) || 300) * 1.15), radiusMetres: Math.round((Number(layout?.radiusMetres) || 300) * 0.6), generated: true },
+       { id: `${id}:rockS`, name: null, kind: "rock", bearing: -135, fromMetres: Math.round((Number(layout?.radiusMetres) || 300) * 1.15), radiusMetres: Math.round((Number(layout?.radiusMetres) || 300) * 0.6), generated: true }]
+    : (layout?.extent || []);
+  const built = extentAtLevel.find((f) => f.kind === "built") || null;
   const builtR = built ? (Number(built.radiusMetres) || 200) * frame.pxPerMetre : (Number(layout?.radiusMetres) || 300) * 0.4 * frame.pxPerMetre;
   const builtAt = built ? frame.toXY(built.bearing, built.fromMetres) : { x: frame.cx, y: frame.cy };
-  // roads out, each through the site that names it
-  const roads = (meas.roadsOut || []).map((r, i) => {
+  // roads out, each through the site that names it — none below ground: a delve's ways out are its stairs
+  const roads = ((Number(level) || 0) < 0 ? [] : (meas.roadsOut || [])).map((r, i) => {
     const through = sites.find((s) => s.toward === r.to) || null;
     const pts = roadPath(r.bearing, frame, rngOf(seedOf(`road:${id}:${r.to || i}`)), { through });
     return { ...r, name: (typeof nameOf === "function" ? nameOf(r.to) : null) || r.name || r.to, pts, exit: exitPoint(pts, frame.w, frame.h) };
   });
   // the extent, each as what it is
-  const features = (layout?.extent || []).map((f) => {
+  const features = extentAtLevel.map((f) => {
     const frnd = rngOf(seedOf(`extent:${id}:${f.id}`));
     const at = frame.toXY(f.bearing, f.fromMetres);
     const rPx = (Number(f.radiusMetres) || 150) * frame.pxPerMetre;
@@ -575,7 +650,7 @@ export function localModel(layout, frame, { placeName = "", placeId = "", nameOf
     }
     return { lines: out, strength, spacing };
   })();
-  return { id, placeName, frame, layout, sites, roads, lanes, features, contours, built: { ...builtAt, r: builtR }, water, rnd };
+  return { id, placeName, frame, layout, sites, roads, lanes, features, contours, built: { ...builtAt, r: builtR }, water, rnd, level: Number(level) || 0 };
 }
 
 // ───────────────────────────────────────────────────────────────────────────────────────────────────
@@ -874,7 +949,7 @@ function paintRoofs(ctx, model, rnd) {
 }
 
 /** the "you are here" ring, the glyph and the hit target for a site; dimmed when only heard of */
-function paintSite(ctx, site, { here = false, know = "seen", scale = 1 }) {
+function paintSite(ctx, site, { here = false, know = "seen", scale = 1, level = 0 }) {
   const dim = know === "heard";
   ctx.save();
   if (dim) ctx.globalAlpha = 0.5;
@@ -889,6 +964,15 @@ function paintSite(ctx, site, { here = false, know = "seen", scale = 1 }) {
   }
   try { drawGlyph(ctx, site.glyph, site.x, site.y, sz, { ink: INK.glyph, fill: INK.glyphFill, accent: INK.glyphAccent }); }
   catch { ctx.fillStyle = INK.glyph; ctx.beginPath(); ctx.arc(site.x, site.y, 3, 0, Math.PI * 2); ctx.fill(); }
+  // ✅ L5: the way down (or up) wears a small arrow, so a stair is read as a stair on both the levels it joins
+  if (joinsLevels(site)) {
+    const down = siteLevel(site) <= level;          // seen from the level above, or on its own level: the way down
+    ctx.fillStyle = INK.glyph;
+    ctx.beginPath();
+    if (down) { ctx.moveTo(site.x + sz + 3, site.y - 3); ctx.lineTo(site.x + sz + 9, site.y - 3); ctx.lineTo(site.x + sz + 6, site.y + 3); }
+    else { ctx.moveTo(site.x + sz + 3, site.y + 3); ctx.lineTo(site.x + sz + 9, site.y + 3); ctx.lineTo(site.x + sz + 6, site.y - 3); }
+    ctx.closePath(); ctx.fill();
+  }
   ctx.restore();
   return { id: site.id, x: site.x, y: site.y, r: sz + 6, site };
 }
@@ -1006,7 +1090,7 @@ export function paintLocalMap(ctx, model, {
     if (kn === "unknown") { out.withheld.push(s.id); continue; }
     if (s.x < -20 || s.y < -20 || s.x > w + 20 || s.y > h + 20) continue;
     if (kn === "heard") out.dimmed.push(s.id);
-    const hit = paintSite(ctx, s, { here: hereSite === s.id, know: kn, scale: clamp(Math.sqrt(frame.k), 1, 1.6) });
+    const hit = paintSite(ctx, s, { here: hereSite === s.id, know: kn, scale: clamp(Math.sqrt(frame.k), 1, 1.6), level: model.level });
     out.sites.push(hit);
     // ⛑ a site close to the centre is labelled in the ENLARGEMENT when there is one (SNG-677 §0 at this scale)
     const dC = Math.hypot(s.x - model.built.x, s.y - model.built.y);
@@ -1095,9 +1179,9 @@ export function enlargementFor(model, { minPx = 150 } = {}) {
 }
 
 /** The inset drawn: a panel, the same model re-framed at `focusMetres`, with its own scale. */
-export function paintEnlargement(ctx, layout, panel, { placeName = "", placeId = "", space = null, queue = null, character = null, known = null, reveal = false, hereSite = null } = {}) {
+export function paintEnlargement(ctx, layout, panel, { placeName = "", placeId = "", space = null, queue = null, character = null, known = null, reveal = false, hereSite = null, level = 0 } = {}) {
   const frame = localFrame(layout, { w: panel.w, h: panel.h, focusMetres: panel.focusMetres, pad: 12 });
-  const model = localModel(layout, frame, { placeName, placeId });
+  const model = localModel(layout, frame, { placeName, placeId, level });
   ctx.save();
   ctx.translate(panel.x, panel.y);
   // ⛑ no exits and no compass inside the panel — they are the frame's, and a road's name in a 150 px panel

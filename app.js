@@ -56,7 +56,7 @@ import { mapHolds, holdMarker } from "./engine/mapholds.js";
 import { filmReel, openingReel, shotSeconds, codaShots, shouldAutoplayOpening,
   filmsFor, noteFilmUnlocks, sealedNames, cardTitle, filmTargets, filmEase } from "./engine/films.js";
 import { arcReachesRegion } from "./engine/arceffects.js";   // M3: open framed on what the player knows   // M2/D1: one table, one collision space
-import { decodeTerrain, sampleAt, colorAt, unproject, project, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, globeClickAction, REGION_FRAME_DEG, regionVoteAt, worldRoadRoutes, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, makePolarBase, regionExtent, bendRoad, roadNetwork, clipToFrame, routeRoads, makeGroundCost, GROUND_COST } from "./engine/worldglobe.js";
+import { decodeTerrain, sampleAt, colorAt, unproject, project, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, globeClickAction, REGION_FRAME_DEG, regionVoteAt, worldRoadRoutes, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, makePolarBase, regionExtent, bendRoad, roadNetwork, clipToFrame, routeRoads, makeGroundCost, GROUND_COST, fineWindowBox } from "./engine/worldglobe.js";
 // ⛔ ROUND 4 — whose ground is this, as things stand today. `realms.js` resolves the SAVE (losses, growth,
 // broken powers, taken holds, your own realm); `influence.js` stays pure and just evaluates.
 import { groundHolders, resolvedPowers, stateStamp, powerRelation } from "./engine/realms.js";
@@ -68,7 +68,7 @@ import { isoLines, blurGrid, stipple, hexGather, nearness, crystalFacets } from 
 import { cityPlan, blockPath, blockRoofs, faubourgs, beltRoofs, leanOf } from "./engine/cityplan.js";
 import { makeInfluence } from "./engine/influence.js";
 import { glyphFor, drawGlyph } from "./engine/mapicons.mjs";
-import { localLayoutFor, localFrame, localModel, paintLocalMap, enlargementFor, paintEnlargement, regionFaceOf } from "./engine/localmap.js";   // SNG-678 L0/L1/L2
+import { localLayoutFor, localFrame, localModel, paintLocalMap, enlargementFor, paintEnlargement, regionFaceOf, levelsOf, levelWord, isCityPlace, cityPlacesOf } from "./engine/localmap.js";   // SNG-678 L0/L1/L2/L4/L5
 import { bakeEarthRGB, earthCityLights } from "./engine/earth.js";   // ⛔ SNG-680: the first world the film shows IS Earth   // SNG-409 §4: a pole must never read as a town   // SNG-390: the globe, read-only
 import { walkingDays, milesFor, worldPosForGenerated, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout, fieldBlobs, fieldAlpha, placeLabels } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
@@ -208,7 +208,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.22.1";
+const APP_VERSION = "2.22.2";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -7217,6 +7217,62 @@ function defaultStart(originId) { const c = startingLocationChoices(originId); r
  * ⛑ And it is what makes Earth possible at all: the film says "This was Earth" — it should be Earth, not
  * Exesa in blue and green, or the whole first movement reads as fantasy. */
 let _opBakes = {};
+/* ═════ RULING 2 · THE FINE PATCH FOR CLOSE SHOTS ═════
+ * ✅ AEVI: *"The fine patch for close shots: yes, do it. Hoist `makeFinePatch` so the film and the map share one
+ * sampler. 83 of 272 shots are close, and the blocky coast is the first thing a player sees when a film names
+ * their home."*
+ * ⛔ ONE SAMPLER, THE MAP'S: `_fineGenShared` (the generator the region map already loads) → `makeFinePatch` →
+ * `colorAt` with `fine`, which is exactly the region map's per-pixel path. The film bakes it ONCE per place into a
+ * square window (`fineWindowBox`) and the raster reads the window where it covers — so the film pays a texture
+ * lookup a pixel, as it does for the bake, not a `colorAt` a pixel a frame.
+ * ⚠️ FILLED ACROSS FRAMES, NOT IN ONE. The patch costs ~120 ms and the 220² of `colorAt` another ~150 ms, and a
+ * quarter-second freeze at a cut is the kind of thing that reads as a slide. The patch is built on the first frame
+ * (one hitch, under the crossfade); the texture is then filled a band of rows a frame and the window is used only
+ * when `ready` — the bake draws until then, which is a handful of frames.
+ * ⛑ No generator yet (the opening can play before the region map ever loaded it) is the bake, not a wait: the
+ * loader is kicked and the window arrives for the next close shot. */
+let _filmFine = new Map();
+const FILM_FINE_ROWS_PER_FRAME = 36;
+function filmFineWindow(loc, spanDeg) {
+  if (!_terrain || !loc?.worldPos) return null;
+  if (!_fineGenShared) { loadWorldGenerator(); return null; }
+  const lat = Number(loc.worldPos.colatitude) - 90, lon = ((Number(loc.worldPos.longitude) + 540) % 360) - 180;
+  if (!Number.isFinite(lat) || !Number.isFinite(lon)) return null;
+  const span = Math.max(4, Math.min(40, Math.round(Number(spanDeg) || 9)));
+  const id = `${loc.id || `${lon},${lat}`}|${span}`;
+  let win = _filmFine.get(id);
+  if (!win) {
+    const box = fineWindowBox({ lat, lon }, span);
+    let patch = null;
+    try {
+      const cull = { la0: Math.max(-90, box.la0 - 1), la1: Math.min(90, box.la1 + 1), lo0: box.lo0 - 1, lo1: box.lo1 + 1 };
+      patch = makeFinePatch(_terrain, _fineGenShared.make(_fineGenShared.gp, cull), { lat, lon }, box.half * 1.5, { budgetMs: 120 });
+    } catch { patch = null; }
+    win = { id, ...box, patch: patch && patch.worthIt ? patch : null, row: 0, ready: false,
+      rgb: new Uint8ClampedArray(box.n * box.n * 3), mask: new Uint8Array(box.n * box.n), step: contourStepFor(span) };
+    if (!win.patch) win.ready = false, win.none = true;      // the patch declined: the bake is the honest picture
+    _filmFine.set(id, win);
+    if (_filmFine.size > 6) _filmFine.delete(_filmFine.keys().next().value);
+  }
+  if (win.none || win.ready) return win.none ? null : win;
+  // a band of rows this frame
+  const n = win.n, rows = Math.min(n, win.row + FILM_FINE_ROWS_PER_FRAME);
+  for (let y = win.row; y < rows; y++) {
+    const la = win.la1 - ((y + 0.5) / n) * (win.la1 - win.la0);
+    for (let x = 0; x < n; x++) {
+      const lo = win.lo0 + ((x + 0.5) / n) * (win.lo1 - win.lo0);
+      const c = colorAt(_terrain, lo, la, { layer: "topo", contourStep: win.step, fine: win.patch }) || [60, 60, 60];
+      const i = y * n + x;
+      win.rgb[i * 3] = c[0]; win.rgb[i * 3 + 1] = c[1]; win.rgb[i * 3 + 2] = c[2];
+      const f = win.patch(lo, la);
+      win.mask[i] = f ? (f.type === 1 ? 1 : 0) : (sampleAt(_terrain, lo, la)?.type === 1 ? 1 : 0);
+    }
+  }
+  win.row = rows;
+  if (win.row >= n) win.ready = true;
+  return win.ready ? win : null;
+}
+
 function openingBake(which) {
   if (_opBakes[which]) return _opBakes[which];
   if (which === "earth") {
@@ -7506,7 +7562,7 @@ function openingGlobeView(w, h, { shrunk = 0, yaw = 0 } = {}) {
 let _opRaster = null;
 /* ✅ G (Aevi): the raster takes AMOUNTS, not a mode word — `world` (the Earth→Exesa cross), `night`, `grey` and
  * `dim` are each 0..1 and ease across a cut, so the ground never pops from one look to the next. */
-function openingRaster(view, { world = 1, lights = 1, w = 900, h = 560, sun = null, night = 0, grey = 0, dim = 0 } = {}) {
+function openingRaster(view, { world = 1, lights = 1, w = 900, h = 560, sun = null, night = 0, grey = 0, dim = 0, fine = null } = {}) {
   /* ⛔ EARTH UNTIL THE WORLD IS RENAMED, EXESA AFTER. The palette already crossed on the shots that pay the
    * cost; now the GROUND does too, and the two agree: everything up to the bores is Earth being spent, and
    * from `shrink` on it is the world we play in. That is the film's own argument, drawn rather than said. */
@@ -7540,7 +7596,7 @@ function openingRaster(view, { world = 1, lights = 1, w = 900, h = 560, sun = nu
    * slideshow even when the frame rate was fine. */
   const SUN = sun || openingSun(0);   // ⛑ above the key, which reads it — a `const` below it is a TDZ, not a default
   const key = [Math.round(view.yaw * 2), Math.round(view.pitch), Math.round(view.r), Math.round(view.cx), Math.round(view.cy),
-    Math.round(blend * 12), Math.round(NIGHT * 8), Math.round(GREY * 8), Math.round(DIM * 8), Math.round(lights * 4), step,
+    Math.round(blend * 12), Math.round(NIGHT * 8), Math.round(GREY * 8), Math.round(DIM * 8), Math.round(lights * 4), step, fine ? fine.id : "",
     SUN.map((c) => Math.round(c * 20)).join("/")].join(",");
   if (_opRaster && _opRaster.key === key) return _opRaster;
   /* ⛑ ONE OFFSCREEN CANVAS, REUSED. The first cut allocated a fresh one for every re-raster — a canvas and
@@ -7580,6 +7636,27 @@ function openingRaster(view, { world = 1, lights = 1, w = 900, h = 560, sun = nu
         r = lerp2(0); g = lerp2(1); b = lerp2(2);
         const bi = clampY(Math.round(fy)) * BW + wrap(Math.round(fx));
         let land = BM[bi] === 1;
+        /* ✅ RULING 2 · INSIDE THE FINE WINDOW THE WINDOW ANSWERS, feathered over its outer tenth so the bake and
+         * the window meet without a square edge. The window's longitudes are unwrapped about its centre, so the
+         * pixel's is brought to the same side before the compare. */
+        if (fine && blend >= 1) {
+          let lonU = p.lon; while (lonU - fine.lon > 180) lonU -= 360; while (fine.lon - lonU > 180) lonU += 360;
+          const u = (lonU - fine.lo0) / (fine.lo1 - fine.lo0), v = (fine.la1 - p.lat) / (fine.la1 - fine.la0);
+          if (u > 0 && u < 1 && v > 0 && v < 1) {
+            const n = fine.n;
+            const fx2 = u * n - 0.5, fy2 = v * n - 0.5;
+            const x0f = Math.max(0, Math.min(n - 1, Math.floor(fx2))), y0f = Math.max(0, Math.min(n - 1, Math.floor(fy2)));
+            const x1f = Math.min(n - 1, x0f + 1), y1f = Math.min(n - 1, y0f + 1);
+            const tx2 = Math.max(0, Math.min(1, fx2 - x0f)), ty2 = Math.max(0, Math.min(1, fy2 - y0f));
+            const FR = fine.rgb;
+            const j00 = (y0f * n + x0f) * 3, j10 = (y0f * n + x1f) * 3, j01 = (y1f * n + x0f) * 3, j11 = (y1f * n + x1f) * 3;
+            const lf = (c) => (FR[j00 + c] * (1 - tx2) + FR[j10 + c] * tx2) * (1 - ty2) + (FR[j01 + c] * (1 - tx2) + FR[j11 + c] * tx2) * ty2;
+            const edge = Math.min(u, 1 - u, v, 1 - v);
+            const wgt = Math.max(0, Math.min(1, edge / 0.1));
+            r += (lf(0) - r) * wgt; g += (lf(1) - g) * wgt; b += (lf(2) - b) * wgt;
+            if (wgt > 0.5) land = fine.mask[Math.round(fy2) * n + Math.round(fx2)] === 1;
+          }
+        }
         if (other) {
           // the same point on the other world, crossed by `blend` — the renaming, made of light
           const oi = Math.min(other.h - 1, Math.max(0, Math.floor((90 - p.lat) * (other.h / 180)))) * other.w
@@ -8021,7 +8098,9 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
   // the city lights and the Earth→Exesa cross all ease across a cut instead of switching at it
   const lights = T.lights;
   const sun = openingSun(polar);
-  opGround(ctx, frame, { world: coda ? 1 : T.world, night: T.night, grey: T.grey, dim: T.dim, lights, w, h, sun });
+  // ✅ RULING 2: a close shot — place, region, figure — draws the fine window around its subject where it covers
+  const fine = placeSpan && subject?.loc ? filmFineWindow(subject.loc, placeSpan) : null;
+  opGround(ctx, frame, { world: coda ? 1 : T.world, night: T.night, grey: T.grey, dim: T.dim, lights, w, h, sun, fine });
 
   /* ⛑ AFTER THE GROUND, BEFORE EVERYTHING ELSE: the air belongs to the world, and the net, the glitter and
    * the arcs all sit above it. Skipped on the close frames, where the limb is off-screen and a halo would be
@@ -15295,6 +15374,12 @@ const CITY = {
 function paintCrossingCity(ctx, regionId, W, H) {
   const plan = cityFor(regionId, W, H);
   if (!plan) return null;
+  return paintCityPlan(ctx, plan, W, H);
+}
+/** ✅ L4: ONE CITY PAINTER FOR TWO TIERS. The region tier hands it the Crossing's plan (the whole polar region as a
+ *  city); the local tier hands it a city-kind place's own plan, built from its sites. The ring of poles and the rim
+ *  names are the region's business and are left out on a place's ground. */
+function paintCityPlan(ctx, plan, W, H, { ring = true, rim = true } = {}) {
   const { cx, cy, wallR, rimR } = plan;
   const rad = (d) => d * Math.PI / 180;
 
@@ -15354,6 +15439,8 @@ function paintCrossingCity(ctx, regionId, W, H) {
 
   // ---- the gate ring: poles the arch reaches, at their true bearing ----
   ctx.save();
+  if (!ring) { ctx.restore(); }
+  else {
   ctx.strokeStyle = "rgba(120,180,255,0.30)"; ctx.lineWidth = 1;
   ctx.setLineDash([3, 5]);
   ctx.beginPath(); ctx.arc(cx, cy, Math.min(W, H) * 0.5 - 30, 0, Math.PI * 2); ctx.stroke();
@@ -15371,13 +15458,14 @@ function paintCrossingCity(ctx, regionId, W, H) {
     ctx.fillText(nm, g.x + (left ? -5 : 5), g.y + 3);
   }
   ctx.restore();
+  }
 
   // ---- X3 · the landmarks, over the fabric ----
   paintLandmarks(ctx, plan);
 
   // ---- the foothill each avenue runs to, lettered on the rim ----
   ctx.font = "600 9px system-ui, sans-serif";
-  for (const a of plan.avenues) {
+  for (const a of (rim ? plan.avenues : [])) {
     const left = a.rim.x < cx;
     ctx.textAlign = left ? "right" : "left";
     ctx.lineWidth = 2.4; ctx.strokeStyle = "rgba(10,12,18,0.85)"; ctx.lineJoin = "round";
@@ -17950,14 +18038,15 @@ function localSourcesPanel(locationId) {
  * are all BELOW ground, and an underplace with no authored layout, keep the ring — `localTierIsInterior`. */
 let _localView = { k: 1, dx: 0, dy: 0 };     // the tier's own pan and zoom, in CSS map pixels of the unzoomed frame
 let _localViewFor = null;
+let _localLevel = 0;                           // ✅ L5: the level the tier is showing — the surface, or −1, −2 …
 let _localHits = { sites: [], exits: [], inset: null };
 let _localDragged = false;
 const LOCAL_ASPECT = 0.62;
 
+/* ✅ L5 LANDED: a place with depth draws one level at a time on the canvas, so no place is an "interior" the
+ * canvas cannot draw — the ring below is kept only until the diagrams retire with their parity list. */
 function localTierIsInterior(layout) {
-  const sites = layout?.sites || [];
-  const below = sites.length > 0 && sites.every((s) => (Number(s.localMap?.level) || 0) < 0);
-  return below || (layout?.kind === "underplace" && !layout?.authored);
+  return false && layout;
 }
 
 /** The layout for a place, with the sub-places the ring used to draw handed in as children (L2: *"its sub-places
@@ -17965,7 +18054,9 @@ function localTierIsInterior(layout) {
 function localLayoutHere(locationId) {
   const { host, children } = locationTierNodes(character, CONTENT, locationId);
   const kids = children.map((c) => c.kind === "location"
-    ? { ...c, worldPos: CONTENT.locations[c.id]?.worldPos || null, placeKind: CONTENT.locationKinds?.kinds?.[c.id]?.kind || CONTENT.locations[c.id]?.kind || null }
+    ? { ...c, worldPos: CONTENT.locations[c.id]?.worldPos || null, placeKind: CONTENT.locationKinds?.kinds?.[c.id]?.kind || CONTENT.locations[c.id]?.kind || null,
+        // ✅ L5: a grown place's depth is its level, read down
+        ...(Number(CONTENT.locations[c.id]?.worldPos?.depth) ? { level: -Math.round(Number(CONTENT.locations[c.id].worldPos.depth)) } : {}) }
     : c);
   const roadsMiles = (a, b) => { const la = CONTENT.locations[a], lb = CONTENT.locations[b]; const d = la && lb ? walkingDays(la, lb) : null; return d == null ? null : milesFor(d, WORLD_SCALE); };
   const layout = localLayoutFor(locationId, { content: CONTENT, character, children: kids, roadsMiles });
@@ -17983,6 +18074,14 @@ function renderMapLocation(locationId) {
     <h2>${esc(name)}</h2>
     <p class="hint" style="margin-bottom:8px">${layout.authored ? "Authored ground" : "Ground laid out from the measured land"} — ${nSites} named ${nSites === 1 ? "site" : "sites"}${here ? ". You are here." : "."}${layout.generated ? " Drawn from the roads, the water and the slope the world measures here, and it draws the same way every time." : ""} Drag to pan, scroll or pinch to zoom; tap a site for its card.</p>
     ${mapTierBar()}
+    ${(() => {
+      /* ✅ L5 · THE LEVEL SWITCH: shown only when the place HAS levels, surface first, then down. ⛑ Not a tier —
+       * the crumb stays where it is; this is which floor of the same place the canvas shows. */
+      const lv = levelsOf(layout);
+      if (lv.length < 2) return "";
+      if (!lv.includes(_localLevel)) _localLevel = lv[0];
+      return `<div class="map-tiers lm-levels" style="margin:-2px 0 8px;display:flex;gap:6px;align-items:center;flex-wrap:wrap"><span class="hint">level</span>${lv.map((L) => `<button class="opt ${L === _localLevel ? "selected" : ""}" data-lmlevel="${L}">${esc(levelWord(L))}</button>`).join("")}</div>`;
+    })()}
     ${fieldPanel(null)}
     <div class="field-split">
     <div class="rm-wrap lm-wrap" style="position:relative;flex:1 1 460px;min-width:280px;max-width:1600px">
@@ -17995,9 +18094,10 @@ function renderMapLocation(locationId) {
     <div id="local-map-readout" class="hint" style="min-height:14px;margin:2px 0 6px"></div>
     <button class="btn secondary" id="map-back" style="margin-top:12px">Back</button>
   </div>`);
-  if (_localViewFor !== id) { _localView = { k: 1, dx: 0, dy: 0 }; _localViewFor = id; }
+  if (_localViewFor !== id) { _localView = { k: 1, dx: 0, dy: 0 }; _localViewFor = id; _localLevel = levelsOf(layout)[0] ?? 0; }
   paintLocalCanvas(id);
   wireLocalCanvas(id);
+  for (const b of app.querySelectorAll("[data-lmlevel]")) b.onclick = () => { _localLevel = Number(b.dataset.lmlevel) || 0; renderMap(); };
   wireFieldPanel(() => renderMap());   // CCODE-472: one wiring, three tiers
   wireMapTierBar();
   document.getElementById("map-back").onclick = () => renderPlay(character.activeScene?.lastTurn || null, {});
@@ -18022,13 +18122,39 @@ function paintLocalCanvas(locationId) {
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   ctx.clearRect(0, 0, W, H);
   _labelSpace = labelSpace(); _exitSpace = labelSpace(); _labelQueue = [];
+  /* ═════ L4 · A CITY DRAWS THROUGH THE CITY ═════
+   * ✅ AEVI: *"A place whose kind is a city draws through `cityPlan`, as the Crossing does now."* The sites become
+   * the planner's places (`cityPlacesOf`, pure), the roads out its avenues, and the ONE city painter the region
+   * tier uses draws the wall, the fabric, the gates and the quarters. The hits are the plan's marks. */
+  if (isCityPlace(locationId, CONTENT)) {
+    const nameOfC = (pid) => CONTENT.locations[pid]?.name || pid;
+    const cp = cityPlacesOf(layout, { nameOf: nameOfC });
+    if (cp.places.length) {
+      const plan = cityPlan(cp.places, { W, H, hallId: cp.hallId, roadsOut: cp.roadsOut, gates: [], seed: locationId });
+      const withLean = plan.avenues.map((a) => { const l = CONTENT.locations[a.to]; return { ...a, lean: leanOf(l?.spectrum), toward: l?.betweenCrossingAnd || null }; });
+      try { plan.quarters = faubourgs(withLean, { cx: plan.cx, cy: plan.cy, wallR: plan.wallR, rimR: plan.rimR, seed: locationId, W, H }); } catch { plan.quarters = []; }
+      paintCityPlan(ctx, plan, W, H, { ring: false, rim: true });
+      if (character.currentLocationId === locationId) {
+        ctx.save(); ctx.strokeStyle = "#b8860b"; ctx.lineWidth = 1.8;
+        ctx.beginPath(); ctx.arc(plan.cx, plan.cy, Math.max(12, plan.rHall + 6), 0, Math.PI * 2); ctx.stroke(); ctx.restore();
+      }
+      flushLabels();
+      const sitesC = plan.marks.map((m) => ({ id: m.id, x: m.x, y: m.y, r: 12, site: (layout.sites || []).find((s) => s.id === m.id) || { id: m.id, name: m.name, kind: "quarter" } }));
+      _localHits = { sites: sitesC, exits: plan.avenues.map((a) => ({ id: a.to, name: a.name, x0: a.rim.x - 40, x1: a.rim.x + 40, y0: a.rim.y - 8, y1: a.rim.y + 8 })), inset: null };
+      const roC = document.getElementById("local-map-readout");
+      if (roC) roC.textContent = `${sitesC.length} sites inside the wall · ${plan.avenues.length} roads out · drawn as a city`;
+      return { sites: sitesC, exits: _localHits.exits, labelled: [], dimmed: [], withheld: [] };
+    }
+  }
   const frame = localFrame(layout, { w: W, h: H, view: _localView });
   const nameOf = (pid) => CONTENT.locations[pid]?.name || pid;
-  const model = localModel(layout, frame, { placeName: name, placeId: locationId, nameOf });
+  const model = localModel(layout, frame, { placeName: name, placeId: locationId, nameOf, level: _localLevel });
   const known = (pid) => isPlaceKnown(character, pid, CONTENT.locations);
   const here = character.currentLocationId === locationId;
   const hereSite = here ? (lastEnteredSubPlace(character, locationId)?.slug || null) : null;
-  const inset = _localView.k <= 1.01 ? enlargementFor(model) : null;
+  // ⛑ an enlargement of a centre with nothing in it is an empty panel: only when a site sits near the centre
+  const nearCentre = model.sites.some((s) => Math.hypot(s.x - model.built.x, s.y - model.built.y) <= model.built.r * 1.3);
+  const inset = _localView.k <= 1.01 && nearCentre ? enlargementFor(model) : null;
   if (inset) _labelSpace.claim({ x0: inset.x - 4, x1: inset.x + inset.w + 4, y0: inset.y - 4, y1: inset.y + inset.h + 4, rank: -2, kind: "inset" });
   const res = paintLocalMap(ctx, model, { space: _labelSpace, queue: queueLabel, exitSpace: _exitSpace, character, known, hereSite, inset,
     labelMinPx: inset ? inset.builtRadiusPx * 1.6 + 12 : 0 });
@@ -18060,7 +18186,7 @@ function paintLocalCanvas(locationId) {
     }
   } catch (err) { console.warn("[local] holds skipped:", err?.message); }
   let insetRes = null;
-  if (inset) insetRes = paintEnlargement(ctx, layout, inset, { placeName: name, placeId: locationId, character, known, hereSite });
+  if (inset) insetRes = paintEnlargement(ctx, layout, inset, { placeName: name, placeId: locationId, character, known, hereSite, level: _localLevel });
   flushLabels();
   _localHits = { sites: [...res.sites, ...(insetRes?.sites || [])], exits: res.exits, inset };
   const ro = document.getElementById("local-map-readout");
@@ -18068,7 +18194,7 @@ function paintLocalCanvas(locationId) {
     const all = res.sites.length + res.withheld.length;
     ro.textContent = all === 0 ? "Nothing named here yet — the places you visit and the GM names will appear on this ground."
       : res.sites.length === 0 ? "You have not been told of anything here yet. The ground, the roads and the way in are drawn; the rest is found by looking."
-      : `${res.sites.length} of ${all} sites drawn${res.dimmed.length ? ` · ${res.dimmed.length} heard of, not yet seen` : ""}${res.withheld.length ? ` · ${res.withheld.length} not yet found` : ""}${inset ? " · the centre is enlarged in the panel" : ""}${_localView.k > 1.01 ? ` · ×${_localView.k.toFixed(1)}` : ""}`;
+      : `${res.sites.length} of ${all} sites drawn${_localLevel ? ` on ${levelWord(_localLevel)}` : ""}${res.dimmed.length ? ` · ${res.dimmed.length} heard of, not yet seen` : ""}${res.withheld.length ? ` · ${res.withheld.length} not yet found` : ""}${inset ? " · the centre is enlarged in the panel" : ""}${_localView.k > 1.01 ? ` · ×${_localView.k.toFixed(1)}` : ""}`;
   }
   return res;
 }

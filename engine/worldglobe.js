@@ -454,6 +454,25 @@ export function groundFactorAt(t, lon, lat, band, bandFn) {
 }
 
 /** The colour of one point on one layer. Returns [r,g,b]. */
+/** ⛔ THE BOX A CLOSE SHOT'S FINE WINDOW COVERS (SNG-680, Aevi's ruling 2). A film that names a place closes in to
+ *  9°, and at that span the 0.75° bake is a blocky coast — so the film bakes a square window of `colorAt` through
+ *  a fine patch around the place, and the raster reads it where it covers. The box is 0.7 × the span either side
+ *  (the frame's half-height is span/2; the margin pays for the turn), the longitude half widened by 1/cos(lat)
+ *  and capped, the latitude clamped short of the poles. `n` texels a side: at 9° that is 0.057° a texel, thirteen
+ *  times the bake's cell. Pure. */
+export function fineWindowBox(centre, spanDeg, { n = 220 } = {}) {
+  const lat = Math.max(-89.5, Math.min(89.5, Number(centre?.lat) || 0));
+  const lon = ((Number(centre?.lon) || 0) + 540) % 360 - 180;
+  const half = Math.max(2, Math.min(40, (Number(spanDeg) || 9) * 0.7));
+  const conv = Math.max(0.12, Math.cos(lat * Math.PI / 180));
+  const lonHalf = Math.min(180, half / conv);
+  return {
+    la0: Math.max(-90, lat - half), la1: Math.min(90, lat + half),
+    lo0: lon - lonHalf, lo1: lon + lonHalf,              // unwrapped: a reader compares an unwrapped longitude
+    half, n: Math.max(32, Math.round(n)), lat, lon,
+  };
+}
+
 export function colorAt(t, lon, lat, opts) {
   const o = opts || {};
   const layer = o.layer || "topo";

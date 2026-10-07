@@ -1,0 +1,139 @@
+{
+  "schemaVersion": 1,
+  "id": "dev_report",
+  "at": "2026-10-07T22:28:14.750Z",
+  "build": "2.22.11",
+  "field": {
+    "where": "radiant_plateau_edge",
+    "lat": -65,
+    "lon": 49,
+    "density": 0.46,
+    "ordered": 0.5,
+    "wild": 0,
+    "anchor": null,
+    "inside": []
+  },
+  "character": {
+    "id": "char-mr6eq1a5",
+    "name": "Usnea Beard",
+    "playerKey": "player-s9z9u1",
+    "level": 5,
+    "rev": 63,
+    "day": 12,
+    "turns": 2,
+    "countingSince": null,
+    "countsCoverWholeLife": false
+  },
+  "contract": {
+    "axesDropped": [],
+    "axesDroppedN": 0,
+    "handoverRefused": [],
+    "handoverRefusedN": 0
+  },
+  "ops": {
+    "emitted": {
+      "sceneSummary": 2,
+      "choices": 2,
+      "offer": 2,
+      "scene": 2,
+      "npcUpdates": 2,
+      "codexUpdates": 2,
+      "imagePrompt": 2,
+      "gambitApt": 2,
+      "sceneEnded": 2,
+      "characterDeltas": 1,
+      "factUpdates": 1,
+      "placeUpdates": 1,
+      "timeOps": 1
+    },
+    "outcomes": {
+      "offer": {
+        "applied": 3,
+        "rejected": 0,
+        "lastWhy": null,
+        "exceedsEmissions": true
+      }
+    },
+    "never": [
+      "adoptSchool",
+      "arcOps",
+      "bandOps",
+      "deathOps",
+      "debtOps",
+      "deeds",
+      "delegateOps",
+      "deriveItem",
+      "discovery",
+      "encounterOps",
+      "exchangeOps",
+      "gambitOps",
+      "generateRequest",
+      "holdTrades",
+      "holdingOps",
+      "imageMedium",
+      "intentsHeard",
+      "itemUpdates",
+      "jobOps",
+      "ledgerEvents",
+      "markDefiningMoment",
+      "markTeacher",
+      "moveTo",
+      "newAbility",
+      "newEncounter",
+      "offerAcquisition",
+      "offerIntent",
+      "offerPromotion",
+      "partyOps",
+      "projectOps",
+      "questUpdates",
+      "stageOps",
+      "standingOps",
+      "stateOps",
+      "strikeOps",
+      "unlockPrecursor",
+      "unlockSubstrate"
+    ],
+    "neverCount": 37,
+    "knownCount": 48,
+    "unknown": {},
+    "inProse": {},
+    "emptyClaims": 0
+  },
+  "coverage": {
+    "npcRegistry": {
+      "n": 15,
+      "fields": {
+        "age": 0,
+        "sex": 12,
+        "gender": 12,
+        "pronouns": 12,
+        "role": 13,
+        "description": 13,
+        "bondType": 0,
+        "relationship": 15,
+        "status": 15,
+        "knownFacts": 13,
+        "skillsObserved": 12,
+        "deeds": 0,
+        "domains": 13,
+        "inventory": 0
+      }
+    },
+    "inventory": {
+      "n": 8,
+      "fields": {
+        "customName": 0,
+        "aliases": 0,
+        "kind": 8,
+        "description": 8
+      }
+    }
+  },
+  "fireTests": null,
+  "promptRows": null,
+  "world": {
+    "locations": 165,
+    "abilities": 441,
+    "npcs": 196
+  }
+}

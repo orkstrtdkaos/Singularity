@@ -141,6 +141,30 @@ export function sealedNames(content) {
       for (const n of namesIn(s?.[key])) if (!pub.has(n) && !out.has(n)) out.set(n, arc.id);
     }
   }
+  /* ══ ERIK'S RULING, 2026-10-06 (SNG-682): THE NAME IS PUBLIC; WHAT STANDS BEHIND IT IS NOT ══
+   * ✅ AEVI: *"the names in the world guide and the player's guide are public … What stays sealed is what
+   * stands behind a name, not the name. 'The Hollow King' is public. That he is the power the Long Petition
+   * feeds is not. So the title seal should subtract every name a public record carries, along with its court,
+   * from the sealed set. Istvane's 'Speaker of the Hollow Court' then shows."*
+   * ⛑ "Along with its court" is the machine-readable half: a sealed phrase that shares a proper word with a
+   * public record's own name belongs to that public thing — the Hollow Court is the Hollow King's. So the
+   * subtraction is by shared proper word, with the handful of words that are not names of anything left out.
+   * ⚠️ `onceNamed` still gates the arc's LINE. This only governs whether a NAME may be shown on a card; the
+   * sentence that connects that name to the arc is sealed exactly as it was. */
+  const COMMON = new Set(["The", "Of", "A", "An", "And", "Who", "Would", "Not", "Her", "His", "First", "Great", "Old", "Last"]);
+  const publicWords = new Set();
+  for (const n of Object.values(content?.npcs || {})) {
+    if (String(n?.nameKnown || "") !== "world") continue;
+    for (const field of [n.name, n.fullName, n.title, ...(Array.isArray(n.aliases) ? n.aliases : [])]) {
+      for (const word of String(field || "").split(/[^A-Za-z'’]+/)) {
+        if (word && /^[A-Z]/.test(word) && !COMMON.has(word)) publicWords.add(word);
+      }
+    }
+  }
+  for (const name of [...out.keys()]) {
+    const words = name.split(/\s+/).filter((w) => /^[A-Z]/.test(w) && !COMMON.has(w));
+    if (words.length && words.some((w) => publicWords.has(w))) out.delete(name);
+  }
   return out;
 }
 

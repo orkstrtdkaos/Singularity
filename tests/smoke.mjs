@@ -8162,6 +8162,43 @@ await (async () => {
           "a reader that invents its own field name reports the CONTENT as missing");
       }
 
+      /* ══ ERIK: *"the world skips backwards sometimes"* ══
+       * ⛔ THAT WAS ARITHMETIC, NOT A FEELING. The turn was `18 + index×7 + u×9`: at every cut the index added
+       * 7° while `u` fell from 1 to 0 and took 9° back — a 2.00° step BACKWARDS at each of the 35 shot
+       * changes, in the same direction every time. It is read off the film's own timeline now, which is
+       * monotonic by construction, and this holds that: the same formula the painter uses, over every frame
+       * of the reel, with the formula it replaced measured beside it so the gate says what it is for.
+       * ⛑ Pure — the yaw is a function of the reel alone, so no canvas is needed to prove it. */
+      {
+        const TURN = 2.2;   // OPENING_TURN_DEG_S in app.js, held by the source check below
+        const secs = (s) => OP.shotSeconds(s?.title || s, reel.pacing);
+        const frames680 = [...reel.shots, { id: "_title", title: reel.title, seconds: reel.title?.seconds }];
+        const yawAt = (index, u) => {
+          const before = reel.shots.slice(0, Math.max(0, index)).reduce((n, s) => n + secs(s), 0);
+          return 18 + (before + Math.max(0, Math.min(1, u)) * secs(frames680[index])) * TURN;
+        };
+        let back = 0, prev = -Infinity, n = 0;
+        for (let i = 0; i < frames680.length; i++) for (let k = 0; k <= 20; k++) {
+          const y = yawAt(i, k / 20); n++;
+          if (y < prev) back = Math.max(back, prev - y);
+          prev = y;
+        }
+        let oldBack = 0, oldPrev = -Infinity;
+        for (let i = 0; i < frames680.length; i++) for (let k = 0; k <= 20; k++) {
+          const y = 18 + i * 7 + (k / 20) * 9;
+          if (y < oldPrev) oldBack = Math.max(oldBack, oldPrev - y);
+          oldPrev = y;
+        }
+        check("680/O2: ⛔ the world never turns BACK — the turn is one clock over the whole film, not a per-shot ramp that resets at every cut",
+          back === 0 && oldBack > 1 && n > 700,
+          `${n} samples, 0° backwards; the per-shot ramp it replaces stepped back ${oldBack.toFixed(2)}° at each of ${frames680.length - 1} cuts`);
+        check("680/O2: …and the painter reads that same clock, so the gate is about the film and not about a copy of it",
+          /const yaw = 18 \+ elapsed \* OPENING_TURN_DEG_S;/.test(src680)
+          && new RegExp(`OPENING_TURN_DEG_S = ${TURN}`).test(src680)
+          && /reel\.shots\.slice\(0, Math\.max\(0, index\)\)/.test(src680),
+          "one formula, in app.js, measured here");
+      }
+
       /* G2 · §29.7. ✅ *"Every player-facing string in `opening.json` passes the wording check: no ticket id,
        * no file name, no build words."* */
       {
@@ -8548,17 +8585,37 @@ await (async () => {
          * n-grams (the shape `content_ci` uses for a restated secret), sealed two of eighteen at a run of 2
          * and none at a run of 3; capitalised phrases seal exactly one. Both ends are gated here, because a
          * seal that withholds everything passes "nothing leaked" while making every card wrong. */
+        /* ══ ERIK'S RULING (SNG-682): THE NAME IS PUBLIC, WHAT STANDS BEHIND IT IS NOT ══
+         * ✅ Aevi set `nameKnown: "world"` on the fifteen records the guides name, including the Hollow King
+         * of the Wild Half — so the seal subtracts every name a public record carries along with its court,
+         * and the live sealed set is now EMPTY and Istvane's title shows. ⚠️ WHICH IS EXACTLY WHEN A SEAL
+         * PROVES NOTHING: a gate whose only evidence is "nothing was withheld" cannot tell a correct seal
+         * from a broken one. Both halves are held — today's answer on the real content, and the detector on
+         * a fixture built to be sealed. */
         const sealed = FM.sealedNames(C681);
         const titled = figs.filter((id) => C681.npcs?.[id]?.title);
         const withheld = titled.filter((id) => FM.cardTitle(C681.npcs[id], { sealed, arcNamed: () => false }) == null);
-        const shownWhenKnown = titled.filter((id) => FM.cardTitle(C681.npcs[id], { sealed, arcNamed: () => true }) != null);
-        check("681/G2: …and the name card withholds EXACTLY the title that names a sealed reveal — Istvane's, and nobody else's",
-          withheld.length === 1 && withheld[0] === "speaker_istvane" && shownWhenKnown.length === titled.length,
-          `${withheld.length} of ${titled.length} withheld (${withheld.join(", ")}); all ${shownWhenKnown.length} shown once the save knows the name`);
-        check("681/G2: …and the seal is computed from the ARCS, so it is the Long Petition's three names and nothing hand-listed",
-          sealed.size >= 1 && [...sealed.values()].every((a) => a === "arc_the_long_petition")
-          && [...sealed.keys()].includes("Hollow Court"),
-          [...sealed.keys()].join(" · "));
+        check("681/G2: …and no title is withheld now that the names are public — Erik's ruling, on the real content",
+          withheld.length === 0 && titled.length >= 15,
+          `${titled.length} titles, none withheld; sealed set ${sealed.size ? [...sealed.keys()].join(", ") : "empty"}`);
+        {
+          // the fixture: an arc that reveals a name no public record carries, and a person who wears it
+          const fixtureArc = { id: "_fixture_arc", currentStage: 1,
+            stages: [{ stage: 1, publicFace: "Something is happening in the west.",
+              onceNamed: "It is the work of the Pallid Quorum, and it is older than the road." }] };
+          const C2 = { ...C681, greaterArcs: [...(C681.greaterArcs || []), fixtureArc],
+            npcs: { ...(C681.npcs || {}), _fixture_voice: { id: "_fixture_voice", name: "Haral", title: "Voice of the Pallid Quorum" } } };
+          const s2 = FM.sealedNames(C2);
+          const hidden = FM.cardTitle(C2.npcs._fixture_voice, { sealed: s2, arcNamed: () => false });
+          const shown = FM.cardTitle(C2.npcs._fixture_voice, { sealed: s2, arcNamed: () => true });
+          check("681/G2: …and the seal still FIRES — a title naming something only an `onceNamed` says is withheld until the save knows it",
+            s2.has("Pallid Quorum") && hidden === null && shown === "Voice of the Pallid Quorum",
+            "proved on a fixture, because the live sealed set is empty by ruling");
+          // ⛑ and the ruling's own half: make that name public and it stops being sealed
+          const C3 = { ...C2, npcs: { ...C2.npcs, _fixture_known: { id: "_fixture_known", nameKnown: "world", name: "The Pallid Quorum" } } };
+          check("681/G2: …and a name a public record carries is NOT sealed, along with its court — which is the ruling",
+            !FM.sealedNames(C3).has("Pallid Quorum"), "public is public");
+        }
       }
 
       /* G3 · §29.7 across every film. */

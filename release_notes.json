@@ -16,6 +16,22 @@
   "next": [],
   "releases": [
     {
+      "version": "2.21.4",
+      "date": "2026-10-07",
+      "entries": [
+        {
+          "kind": "feature",
+          "title": "The films are read aloud",
+          "summary": "Every film now speaks its own words, in the voice you chose in Settings, and each shot waits for its narration rather than running ahead of it. There is a speaker button beside Pause to turn it off, and the game remembers. With no voices installed, the films play exactly as before."
+        },
+        {
+          "kind": "fix",
+          "title": "A film plays full-screen, and flows",
+          "summary": "A film takes the whole window instead of a strip inside the page, and leaving it puts you back where you were. Each shot now crossfades into the next, the world turns on one clock from the first frame to the last — it used to step backwards a little at every change of shot — and Earth becomes Exesa during the shot that renames it rather than in a cut. The ring of peoples stands outside the world where it can be read, and the Library no longer prints its asterisks."
+        }
+      ]
+    },
+    {
       "version": "2.21.3",
       "date": "2026-10-06",
       "entries": [

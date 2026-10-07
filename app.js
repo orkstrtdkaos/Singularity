@@ -207,7 +207,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.21.3";
+const APP_VERSION = "2.21.4";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -7249,8 +7249,18 @@ const OPENING_R_CAP = 210;        // ✅ her cut: "caps it at 210 px and holds f
 // The ring of poles sits 55° out from the Crossing: far enough off centre to read as a ring around it, close
 // enough that all 24 are on the near face at once (at 55° the far rim is still 35° from the limb).
 const OPENING_RING_LAT = -35;
+/* ⛔ V3 · WHERE THE RING STANDS, IN ONE PLACE. ✅ AEVI: *"Draw the stations at the same bearings on a ring
+ * outside the limb, about 1.4 × the radius."* ⚠️ TWO BRANCHES DRAW THIS RING — the opening's `poles_*` and
+ * SNG-681's `ring`/`axis` — and my first pass moved only the second, so the shot she was looking at did not
+ * change at all. ⛑ And a radius multiplier is not a screen radius: pole-on at this latitude a station
+ * projects to `rad × cos(lat)` of the globe's radius, so the multiplier is derived FROM the screen radius she
+ * asked for and stays right if the ring's latitude ever moves. */
+const OPENING_RING_SCREEN = 1.4, OPENING_LABEL_SCREEN = 1.62;
+const OPENING_RING_UP = OPENING_RING_SCREEN / Math.max(0.2, Math.cos(OPENING_RING_LAT * Math.PI / 180));
+const OPENING_LABEL_UP = OPENING_LABEL_SCREEN / Math.max(0.2, Math.cos(OPENING_RING_LAT * Math.PI / 180));
 const OPENING_SAMPLES = 52000;    // the sample budget one frame of ground may spend
 const OPENING_SUN_DEG = 62;       // how far round from the camera the sun stands — see `openingRaster`
+const OPENING_TURN_DEG_S = 2.2;   // the world's turn, in degrees a second of film — one clock, never stepped
 
 /** Deterministic, so frame N of a shot agrees with frame N-1 and a still frame is a real frame of the film
  *  rather than a reshuffle. (A `Math.random()` field would boil — and would freeze to noise under `reduced`.) */
@@ -7411,10 +7421,11 @@ function paintOpeningAir(ctx, view, { sunward = -0.6, tint = "earth", strength =
    * the middle of the face at all. */
   ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.clip();
   const a0 = Math.PI * sunward - Math.PI * 0.62, a1 = Math.PI * sunward + Math.PI * 0.62;
-  ctx.lineWidth = r * 0.085;
-  ctx.strokeStyle = `rgba(206,232,255,${0.5 * strength})`;
-  ctx.shadowColor = `rgba(${sky[0] + 70},${sky[1] + 60},255,${0.9 * strength})`;
-  ctx.shadowBlur = r * 0.14;
+  // ⚠️ soft: at 0.5 alpha on a 1024px frame this read as a hard white band rather than as air
+  ctx.lineWidth = r * 0.06;
+  ctx.strokeStyle = `rgba(206,232,255,${0.3 * strength})`;
+  ctx.shadowColor = `rgba(${sky[0] + 70},${sky[1] + 60},255,${0.75 * strength})`;
+  ctx.shadowBlur = r * 0.18;
   ctx.beginPath(); ctx.arc(cx, cy, r * 0.99, a0, a1); ctx.stroke();
   ctx.restore();
 }
@@ -7460,11 +7471,17 @@ function openingGlobeView(w, h, { shrunk = 0, yaw = 0 } = {}) {
 
 /* The ground, rasterised once per key and blitted thereafter. */
 let _opRaster = null;
-function openingRaster(view, { exesa = 0, mode = "", lights = 1, w = 900, h = 560 } = {}) {
+function openingRaster(view, { exesa = 0, mode = "", lights = 1, w = 900, h = 560, mix = 0 } = {}) {
   /* ⛔ EARTH UNTIL THE WORLD IS RENAMED, EXESA AFTER. The palette already crossed on the shots that pay the
    * cost; now the GROUND does too, and the two agree: everything up to the bores is Earth being spent, and
    * from `shrink` on it is the world we play in. That is the film's own argument, drawn rather than said. */
-  const bake = openingBake(exesa < 0.5 ? "earth" : "exesa");
+  /* ⛔ THE ONE CUT THE FILM MUST NOT HAVE IS EARTH→EXESA. It is the film's whole argument, and a hard swap
+   * between two worlds reads as a mistake. `blend` crosses the two bakes per pixel during the shot that
+   * renames the world; everywhere else it is 0 or 1 and only one bake is read, so the cost is paid in one
+   * shot of thirty-five. */
+  const blend = Math.max(0, Math.min(1, Number(mix) || 0));
+  const bake = openingBake(blend >= 1 || (blend <= 0 && exesa >= 0.5) ? "exesa" : "earth");
+  const other = blend > 0 && blend < 1 ? openingBake("exesa") : null;
   if (!bake) return null;
   const x0 = Math.max(0, Math.floor(view.cx - view.r)), x1 = Math.min(w, Math.ceil(view.cx + view.r));
   const y0 = Math.max(0, Math.floor(view.cy - view.r)), y1 = Math.min(h, Math.ceil(view.cy + view.r));
@@ -7481,7 +7498,7 @@ function openingRaster(view, { exesa = 0, mode = "", lights = 1, w = 900, h = 56
    * can be redrawn as it turns instead of stepping every 2°, which is what made the first cut look like a
    * slideshow even when the frame rate was fine. */
   const key = [Math.round(view.yaw * 2), Math.round(view.pitch), Math.round(view.r), Math.round(view.cx), Math.round(view.cy),
-    exesa < 0.5 ? "e" : "x", mode, Math.round(lights * 4), step].join(",");
+    exesa < 0.5 ? "e" : "x", Math.round(blend * 12), mode, Math.round(lights * 4), step].join(",");
   if (_opRaster && _opRaster.key === key) return _opRaster;
   /* ⛑ ONE OFFSCREEN CANVAS, REUSED. The first cut allocated a fresh one for every re-raster — a canvas and
    * an ImageData per turn step, for the garbage collector to find later. */
@@ -7508,7 +7525,16 @@ function openingRaster(view, { exesa = 0, mode = "", lights = 1, w = 900, h = 56
         const by = Math.min(BH - 1, Math.max(0, Math.floor((90 - p.lat) * (BH / 180))));
         const bi = by * BW + bx;
         r = BR[bi * 3]; g = BR[bi * 3 + 1]; b = BR[bi * 3 + 2];
-        const land = BM[bi] === 1;
+        let land = BM[bi] === 1;
+        if (other) {
+          // the same point on the other world, crossed by `blend` — the renaming, made of light
+          const oi = Math.min(other.h - 1, Math.max(0, Math.floor((90 - p.lat) * (other.h / 180)))) * other.w
+            + Math.min(other.w - 1, Math.max(0, Math.floor((p.lon + 180) * (other.w / 360))));
+          r += (other.rgb[oi * 3] - r) * blend;
+          g += (other.rgb[oi * 3 + 1] - g) * blend;
+          b += (other.rgb[oi * 3 + 2] - b) * blend;
+          if (blend > 0.5) land = other.mask[oi] === 1;
+        }
         /* ⛔ A REAL TERMINATOR, NOT A WASH. ✅ *"Night. The globe turning … the lights of cities on the dark
          * side."* The lit side falls off as the cosine of the angle to the sun, the way a lit sphere does,
          * with a thin warm band at the line between — which is the single thing that makes a drawn globe
@@ -7549,7 +7575,7 @@ function openingRaster(view, { exesa = 0, mode = "", lights = 1, w = 900, h = 56
 
 /** The disc, from the cache. ⛔ `drawImage`, never `putImageData` on the live context — M1's measured rule:
  *  putImageData ignores the transform and would paint a quarter of the world into the corner at dpr 2. */
-function opGround(ctx, view, opts) {
+function opGround(ctx, view, opts) {   // opts carries `mix`, the Earth→Exesa cross (see `openingRaster`)
   const R = openingRaster(view, opts);
   if (!R) {
     // ⛑ NO TERRAIN YET IS NOT A BLANK SCREEN: the asset is lazy (617KB) and the film may open before it
@@ -7771,12 +7797,30 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
   /* ⛑ AND A FILM WITH NO `shrink` SHOT IS ALREADY IN THE PRESENT. The nine films of SNG-681 are about Exesa
    * as it is, so their world is the small one from their first frame; only the opening, which contains the
    * shrink, shows the old size — and only before it. Same rule, read off the reel either way. */
-  const shrunk = coda ? 1 : (shrinkAt < 0 ? 1 : (index >= shrinkAt ? 1 : 0));
+  /* ⛑ AND THE SHRINK HAPPENS, rather than being true from the shot's first frame. ✅ *"The globe contracts
+   * to two thirds of its size"* is an event: it belongs inside the shot that names it, eased so the contraction
+   * reads, and settled by the end so every shot after it is simply the smaller world. */
+  const ease = (x) => (x <= 0 ? 0 : x >= 1 ? 1 : x * x * (3 - 2 * x));
+  const shrunk = coda ? 1
+    : shrinkAt < 0 ? 1
+    : index > shrinkAt ? 1
+    : index === shrinkAt ? ease(Math.min(1, u * 1.25))
+    : 0;
   // the palette crosses on the shots that pay the cost: `drain` begins it, `shrink` completes it
   const EX = { earth: 0, network: 0, network_runaway: 0, swarm: 0, swarm_ordered: 0.1, workings: 0.2, drain: 0.45, bores: 0.5 };
   const exesa = V in EX ? EX[V] : 1;
-  // one continuous turn across the whole film, and it is the only motion a still frame keeps
-  const yaw = 18 + index * 7 + u * 9;
+  /* ⛔ ONE CLOCK FOR THE WHOLE FILM, AND THE WORLD NEVER TURNS BACK. ✅ ERIK: *"the world skips backwards
+   * sometimes. each scene should flow smoothly to the next."* ⚠️ He is describing arithmetic: the turn was
+   * `18 + index×7 + u×9`, so at every cut the index added 7° while `u` fell from 1 to 0 and took 9° away —
+   * a 2° STEP BACKWARDS at each of the thirty-five shot changes, every time, in the same direction.
+   * ⛑ So the yaw is read off the film's own timeline instead: the seconds of every shot before this one,
+   * plus however far into this one we are. That is monotonic by construction — there is no pair of frames in
+   * the film, in any order of stepping, where the second shows less turn than the first — and it needs no
+   * wall clock, so a still frame under `prefers-reduced-motion` sits exactly where the moving one would. */
+  const secs = (s) => { try { return shotSeconds(s?.title || s, reel?.pacing); } catch { return 3; } };
+  const before = reel ? reel.shots.slice(0, Math.max(0, index)).reduce((n, s) => n + secs(s), 0) : index * 3;
+  const elapsed = before + Math.max(0, Math.min(1, u)) * secs(shot);
+  const yaw = 18 + elapsed * OPENING_TURN_DEG_S;
   /* ⛔ THE GLOBE TURNS POLE-ON FOR THE POLES, AND THAT IS A STATEMENT, NOT A CAMERA MOVE. ✅ *"turn the globe
    * pole-on to the Crossing (latitude −90), so the middle is literally the middle."* The Crossing is this
    * world's south pole, so pitch −90 puts it dead centre and the 24 stations become a ring around it. ⛑ The
@@ -7850,15 +7894,20 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
     : V === "network_runaway" || V === "swarm" || V === "swarm_ordered" || V === "workings" ? 0.8
     : V === "drain" ? 0.5 : V === "meaning_fades" ? Math.max(0, 0.5 - u * 0.5)
     : V === "lights_out" ? Math.max(0, 0.25 - u * 0.25) : V === "title" ? 0.3 : 0;
-  opGround(ctx, frame, { exesa, mode, lights, w, h });
+  // the world crosses during the shot that renames it, and is settled either side of it
+  const mix = shrinkAt < 0 ? 1 : index > shrinkAt ? 1 : index === shrinkAt ? ease(Math.min(1, u * 1.25)) : 0;
+  opGround(ctx, frame, { exesa, mode, lights, w, h, mix: coda ? 1 : mix });
 
   /* ⛑ AFTER THE GROUND, BEFORE EVERYTHING ELSE: the air belongs to the world, and the net, the glitter and
    * the arcs all sit above it. Skipped on the close frames, where the limb is off-screen and a halo would be
    * a blue ring across the middle of a region. */
   if (!placeSpan && !coda && V !== "title") {
-    // ⛑ the air's lit crescent stands where the sun does, or the glow and the light disagree
+    /* ⛑ THE AIR'S CRESCENT STANDS WHERE THE SUN DOES — and it took looking at it to get the sign right. The
+     * sun is `OPENING_SUN_DEG` of LONGITUDE round from the camera, and a longitude offset moves a point to
+     * the RIGHT of the disc (x = cos(lat)·sin(lon + yaw)), so the lit limb is the right one: screen bearing
+     * 0. My first value put the glow on the night side, which read as a white band over the city lights. */
     paintOpeningAir(ctx, frame, { tint: exesa < 0.5 ? "earth" : "exesa", strength: mode === "dark" ? 0.4 : 1,
-      sunward: -0.5 - OPENING_SUN_DEG / 180 });
+      sunward: 0 });
   }
   const P = (lat, lon, rad) => project(lon, lat, frame, rad == null ? 1 : rad);
   /* ⛔ IN THE FIRST MOVEMENT THE NET IS EARTH'S OWN. ✅ *"the lights of cities on the dark side"* → *"Lines of
@@ -8062,7 +8111,13 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
      * sitting on dark ground, with no ring to see. `project`'s radius parameter is a multiplier on the
      * sphere, so 1.3 lifts the ring clear of the limb and it reads as what it is: a ring around the world,
      * the same circle the player chooses from at the door. */
-    const RING_UP = 1.3, LABEL_UP = 1.52;
+    /* ⛔ V3 · OUTSIDE THE LIMB, AND THE ARITHMETIC IS WHY THE FIRST TRY WASN'T. ✅ AEVI: *"In `poles_*` the 24
+     * stations are drawn on the globe's edge, inside the disc … Draw the stations at the same bearings on a
+     * ring outside the limb, about 1.4 × the radius."* ⚠️ A radius multiplier is not a screen radius: pole-on
+     * at latitude −35 a station projects to `rad × cos(35°)` of the globe's radius, so my 1.3 landed at
+     * 1.065r — exactly on the edge, which is what she saw. The multiplier is now derived FROM the screen
+     * radius she asked for, so the ring is where it is meant to be whatever latitude the ring sits at. */
+    const RING_UP = OPENING_RING_UP, LABEL_UP = OPENING_LABEL_UP;
     poles.forEach((pl) => {
       const p = P(pl.lat, pl.lon, RING_UP);
       if (!p) return;
@@ -8215,7 +8270,7 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
     poles.forEach((pl, k) => {
       const on = V === "poles_ignite" ? Math.max(0, Math.min(1, lit * poles.length - k)) : 1;
       if (on <= 0) return;
-      const p = P(pl.lat, pl.lon, 1.02);
+      const p = P(pl.lat, pl.lon, OPENING_RING_UP);   // V3: outside the limb, like the other branch
       if (!inFrame(p)) return;
       opGlow(ctx, p.x, p.y, 22 * on, pl.ink || `hsla(${pl.hue},82%,${pl.lit}%,${0.8 * on})`, `hsla(${pl.hue},82%,${pl.lit}%,0)`);
       ctx.globalAlpha = on;
@@ -8238,7 +8293,7 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
         const f = Math.min(1, u * 1.2) * 0.55;
         const lat = nd.lat + (best.lat - nd.lat) * f;
         const lon = nd.lon + ((((best.lon - nd.lon + 540) % 360) - 180)) * f;
-        const a = P(nd.lat, nd.lon), b = P(lat, lon, 1.01), q = P(best.lat, best.lon, 1.02);
+        const a = P(nd.lat, nd.lon), b = P(lat, lon, 1.01), q = P(best.lat, best.lon, OPENING_RING_UP);
         if (a && q) {
           ctx.save(); ctx.globalAlpha = 0.22;
           ctx.strokeStyle = best.ink || `hsla(${best.hue},70%,70%,1)`;
@@ -8258,14 +8313,16 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
        * for this movement. The disc at the centre IS the Crossing, where no pole wins, and it closes:
        * every hue of the ring mixed into it at the start, grey and nearly shut at the end. ⛑ Drawn as a
        * conic sweep of the ring's own hues so the thing that is being lost is visibly made OF the poles. */
+      /* ✅ *"the sector tint becomes a pinwheel that hides the land"* — it is the Crossing's own disc closing,
+       * so it starts smaller and reads as a disc at the centre rather than as a wheel over the world. */
       const shut = Math.min(1, u);
-      const rr = frame.r * (0.52 - 0.44 * shut);
+      const rr = frame.r * (0.34 - 0.3 * shut);
       const n24 = Math.max(1, poles.length);
       ctx.save();
       ctx.beginPath(); ctx.arc(frame.cx, frame.cy, Math.max(1, rr), 0, Math.PI * 2); ctx.clip();
       poles.forEach((pl, k) => {
         const a0 = (k / n24) * Math.PI * 2 - Math.PI / 2 - Math.PI / n24;
-        ctx.fillStyle = `hsla(${pl.hue},${Math.round(64 * (1 - shut))}%,${Math.round(60 - 26 * shut)}%,${0.5 - 0.18 * shut})`;
+        ctx.fillStyle = `hsla(${pl.hue},${Math.round(64 * (1 - shut))}%,${Math.round(60 - 26 * shut)}%,${0.34 - 0.14 * shut})`;
         ctx.beginPath(); ctx.moveTo(frame.cx, frame.cy);
         ctx.arc(frame.cx, frame.cy, Math.max(1, rr), a0, a0 + Math.PI * 2 / n24); ctx.closePath(); ctx.fill();
       });
@@ -8525,13 +8582,61 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
  * open. ⚠️ The raster is the cost, so its radius is capped (she measured 210px holding frame rate).
  * @param after what to do when it ends or is skipped — the door, or the first scene for the coda
  */
+/* ═════ THE FILM IS READ ALOUD ═════
+ * ✅ ERIK: *"Please add narration to the films too."*
+ * ⛔ THROUGH THE VOICE THE GAME ALREADY HAS. `pickVoice` ranks the installed voices on quality markers
+ * (SNG-155 §1: the default voice is usually the worst one installed), `chunkForSpeech` breaks a passage where
+ * a reader would breathe, and the player's own `ttsVoice`/`ttsRate`/`ttsPitch` from Settings are what the
+ * film speaks in. A second voice picker here would drift from that one the first time either changed.
+ * ⛑ TIER 0 IS SILENCE, NOT AN ERROR: a browser with no `speechSynthesis` and a device with no voices both
+ * play the film exactly as before. ⚠️ And a film is always entered by a click — the Library's row, the New
+ * Character button — which is what keeps this inside the browsers' autoplay rule, and is why Aevi's O4 said
+ * to start nothing until a tap.
+ */
+let _filmVoiceOn = true, _filmSpoke = 0;
+function filmNarrate(lines, { onDone = null } = {}) {
+  const text = (Array.isArray(lines) ? lines : [lines]).filter(Boolean).map(String).join(" ").trim();
+  if (!_filmVoiceOn || !ttsAvailable() || !text) return false;
+  /* ⛔ NO VOICES IS NOT A SLOW FILM. A browser can have `speechSynthesis` and no installed voices — the
+   * pane this was built in is one — and then `speak()` makes no sound AND never fires `onend`. Since the
+   * shot waits for its narration, that would hold every shot to the three-times ceiling and run the whole
+   * film at a third speed, in silence. Tier 0 has to mean "exactly as before", so an empty voice list is a
+   * refusal here rather than a promise the platform cannot keep. */
+  const voices = ttsVoices();
+  if (!voices.length) return false;
+  stopSpeaking();
+  const voice = pickVoice(voices, { preferredName: profile?.ttsVoice || null, lang: "en" });
+  const chunks = chunkForSpeech(text);
+  if (!chunks.length) return false;
+  const mine = ++_filmSpoke;
+  let left = chunks.length;
+  for (const c of chunks) {
+    const u = new SpeechSynthesisUtterance(c);
+    if (voice) { u.voice = voice; u.lang = voice.lang || "en"; }
+    // ⛑ a shade slower than the GM's voice: this is a film, and the pictures are doing half the work
+    u.rate = (Number(profile?.ttsRate) || 0.98) * 0.94;
+    u.pitch = Number(profile?.ttsPitch) || 1;
+    const settle = () => { if (mine === _filmSpoke && --left <= 0 && typeof onDone === "function") onDone(); };
+    u.onend = settle;
+    u.onerror = settle;   // ⚠️ a voice that fails must not hold the film on one shot for ever
+    try { window.speechSynthesis.speak(u); } catch { return false; }
+  }
+  return true;
+}
+
 let _openingTimer = null, _openingKeys = null, _openingRaf = null;
 /* ⛑ THREE HANDLES, AND ALL THREE HAVE TO GO. A film that is skipped mid-shot leaves a frame loop running
  * over a canvas that the next screen has already replaced — which is not a crash, it is worse: a paint every
  * 16ms against a detached element for as long as the session lasts, and `renderOpening` can be entered twice
  * (watch again) so the loops would stack. The loop also stops itself when the canvas is gone, as a second
  * line of defence for the path where something else renders over the film without telling it. */
+/* ⚠️ AND STOPPING THE CLOCK IS NOT CLOSING THE FILM. My first cut had this remove the overlay too — and
+ * `renderFilm` calls it near the end to clear any previous run before installing its key handler, so the film
+ * deleted the stage it had just built and dropped straight back to the Library. One function, two jobs: the
+ * overlay is taken down by `end()` and by the next `renderFilm`, both of which mean to close it. */
 function stopOpening() {
+  _filmSpoke++;                                        // anything still speaking belongs to a film that is over
+  try { stopSpeaking(); } catch { /* tier 0 */ }
   if (_openingTimer) { clearTimeout(_openingTimer); _openingTimer = null; }
   if (_openingRaf != null) { try { window.cancelAnimationFrame(_openingRaf); } catch { /* no rAF: nothing to cancel */ } _openingRaf = null; }
   if (_openingKeys) { window.removeEventListener("keydown", _openingKeys); _openingKeys = null; }
@@ -8549,7 +8654,7 @@ function renderFilm(doc, { mode = "film", after = null, startId = null } = {}) {
   // `.catch(() => null)` means a missing `opening.json` costs the opening and nothing else.
   if (!reel) { if (typeof after === "function") after(); return false; }
 
-  const coda = mode === "coda";
+  const coda = mode === "coda";   // ⛑ `film` and `library` differ only in the end card's word (V2)
   const shots = coda
     ? codaShots(CONTENT, { startId, locations: CONTENT.locations, regions: CONTENT.regions,
         /* ⛔ ONE DEFINITION OF "HOW FAR IS THAT". `walkingDays` is the game's own reader — the great circle
@@ -8577,11 +8682,31 @@ function renderFilm(doc, { mode = "film", after = null, startId = null } = {}) {
    * authors its own still wins. */
   const CO = openingReel(CONTENT)?.controls || {};
   const C = reel.controls && Object.keys(reel.controls).length ? reel.controls : CO;
-  const beginWord = reel.begin || openingReel(CONTENT)?.begin || null;
-  chrome(`<div class="screen screen-opening" id="op-screen">
-    <div class="op-stage${reduced ? " op-fade" : ""}" style="--op-fade:${Math.max(0.2, Number(reel.pacing?.fadeSeconds) || 1.2)}s">
-      <canvas id="op-prev" width="900" height="560" aria-hidden="true"></canvas>
-      <canvas id="op-canvas" width="900" height="560" aria-hidden="true"></canvas>
+  /* ⛔ V2 · "BEGIN" ONLY MEANS SOMETHING BEFORE A CHARACTER EXISTS. ✅ AEVI: *"From the Library, offer
+   * `controls.watchAgain` and a way back to the Library instead. Keep `begin` for the pre-creation run and its
+   * coda."* ⛑ So the end card's word is chosen by WHY the film is playing, and both words are hers. */
+  const beginWord = mode === "library" ? (C.watchAgain || null) : (reel.begin || openingReel(CONTENT)?.begin || null);
+  /* ═════ V1 · A FILM TAKES THE WHOLE SCREEN ═════
+   * ✅ AEVI, watching it: *"In the Library the film plays in a strip, not a frame … under the masthead and the
+   * update banner, in a box about 500px tall. The caption sits over the lower third of the globe, and the
+   * poles shot reads as a coloured disc. A film should take the whole viewport, as an overlay like the cut.
+   * Close or Esc puts the player back where they opened it."*
+   * ⛔ SO IT IS AN OVERLAY, NOT A SCREEN. `chrome()` replaces the page's column and keeps the masthead, which
+   * is right for every other surface in the game and wrong for this one. An overlay over the body also means
+   * the screen underneath is untouched, so "back where they opened it" costs nothing: the film removes itself
+   * and whatever was there is still there.
+   * ⛑ And the picture is sized to the VIEWPORT, not to 900×560 scaled — the painter already takes its own
+   * width and height, so the globe is as big as the screen allows and the captions sit where O4 puts them. */
+  const vw = Math.max(480, Math.min(1920, Math.round(window.innerWidth || 900)));
+  const vh = Math.max(360, Math.min(1200, Math.round(window.innerHeight || 560)));
+  document.getElementById("op-overlay")?.remove();
+  const overlay = document.createElement("div");
+  overlay.id = "op-overlay";
+  overlay.className = "op-overlay";
+  overlay.innerHTML = `<div class="screen-opening" id="op-screen">
+    <div class="op-stage op-fade" style="--op-fade:${(reduced ? 1 : 0.5) * Math.max(0.2, Number(reel.pacing?.fadeSeconds) || 1.2)}s">
+      <canvas id="op-prev" width="${vw}" height="${vh}" aria-hidden="true"></canvas>
+      <canvas id="op-canvas" width="${vw}" height="${vh}" aria-hidden="true"></canvas>
       <div class="op-caption" id="op-caption" aria-live="polite"></div>
       <div class="op-track" id="op-track"></div>
       <div class="op-ctl">
@@ -8593,19 +8718,24 @@ function renderFilm(doc, { mode = "film", after = null, startId = null } = {}) {
              control is a GLYPH, which is not narration and needs no translation; 'controls.pause' /
              'controls.resume' are read if she ever writes them, and the ask is in the work order. -->
         <button class="opt op-icon" id="op-pause" title="${esc(String(C.pause || ""))}"></button>
+        <!-- ⛔ A GLYPH AGAIN, for the same reason as pause: her 'controls' has no word for the voice, and
+             inventing one in code is what G1 forbids. The player's choice is kept on the profile, so a film
+             they silenced stays silent the next time. -->
+        ${ttsAvailable() ? `<button class="opt op-icon" id="op-voice" title="${esc(String(C.voice || ""))}"></button>` : ""}
         ${C.next ? `<button class="opt" id="op-next">${esc(String(C.next))}</button>` : ""}
         ${C.skip ? `<button class="opt" id="op-skip">${esc(String(C.skip))}</button>` : ""}
         ${beginWord ? `<button class="opt op-begin" id="op-begin" hidden>${esc(String(beginWord))}</button>` : ""}
       </div>
     </div>
-  </div>`, { hero: true });   // ⛑ `chrome` takes `hero`, not `bare` — there is no chromeless mode to ask for
+  </div>`;
+  document.body.appendChild(overlay);
 
   const cv = document.getElementById("op-canvas");
   const ctx = cv ? cv.getContext("2d") : null;
   const cap = document.getElementById("op-caption");
   const track = document.getElementById("op-track");
   if (!ctx) { stopOpening(); if (typeof after === "function") after(); return false; }
-  cv.width = 900 * dprOf(); cv.height = 560 * dprOf();
+  cv.width = vw * dprOf(); cv.height = vh * dprOf();
   { const pv = document.getElementById("op-prev"); if (pv) { pv.width = cv.width; pv.height = cv.height; } }
   ctx.setTransform(dprOf(), 0, 0, dprOf(), 0, 0);   // M1's one rule: the loop runs in CSS pixels
   /* ⛔ THE FILM IS DRAWN ON THE REAL TERRAIN, AND THE REAL TERRAIN IS LAZY. `loadTerrain` is deliberately
@@ -8636,7 +8766,7 @@ function renderFilm(doc, { mode = "film", after = null, startId = null } = {}) {
    * rate over a disc that is redrawn a few times a second.
    * ⛑ AND UNDER `prefers-reduced-motion` THERE IS NO LOOP AT ALL (O4): one representative late frame of each
    * shot, held for the shot's own length. Not a slower animation — no animation. */
-  let t0 = 0, held = 0;
+  let t0 = 0, held = 0, spoken = false, spokenDone = false;
   const atTitle = () => frames[i]?.id === "_title";
   const nowMs = () => (typeof performance !== "undefined" && performance.now ? performance.now() : Date.now());
   const durMs = () => Math.max(300, Math.round(shotSeconds(frames[i]?.title || frames[i], reel.pacing) * 1000));
@@ -8646,8 +8776,12 @@ function renderFilm(doc, { mode = "film", after = null, startId = null } = {}) {
    * would dip to the black stage between shots, which is a flicker, not a crossfade. Only under `reduced`:
    * at frame rate there is nothing to cross, and copying 900×560 pixels 60 times a second would be the most
    * expensive thing in the film. The duration is her own `pacing.fadeSeconds`. */
+  /* ⛔ EVERY SHOT CHANGE IS A CROSSFADE NOW. ✅ ERIK: *"each scene should flow smoothly to the next."* The
+   * two-canvas fade was built for `prefers-reduced-motion`, where there is nothing but stills to cross — but
+   * a hard swap between two moving shots is the same cut, and it was the other half of what he saw. One
+   * `drawImage` of the outgoing frame per shot change, which is thirty-five of them in a four-minute film. */
   const prev = document.getElementById("op-prev");
-  const pctx = prev && reduced ? prev.getContext("2d") : null;
+  const pctx = prev ? prev.getContext("2d") : null;
   const crossfade = () => {
     if (!pctx || !cv) return;
     try { pctx.setTransform(1, 0, 0, 1, 0, 0); pctx.clearRect(0, 0, prev.width, prev.height); pctx.drawImage(cv, 0, 0); } catch { return; }
@@ -8666,7 +8800,7 @@ function renderFilm(doc, { mode = "film", after = null, startId = null } = {}) {
     prev.style.transition = ""; cv.style.transition = "";
     prev.style.opacity = "0"; cv.style.opacity = "1";
   };
-  const frameAt = (u) => { try { paintFilmShot(ctx, frames[i], { reel, reduced, w: 900, h: 560, startId, u, index: i }); } catch (err) { console.warn("[film] shot skipped:", err?.message); } };
+  const frameAt = (u) => { try { paintFilmShot(ctx, frames[i], { reel, reduced, w: vw, h: vh, startId, u, index: i }); } catch (err) { console.warn("[film] shot skipped:", err?.message); } };
   const tick = () => {
     _openingRaf = null;
     // ⛑ the screen moved on under us — stop rather than paint into a canvas nobody is showing
@@ -8674,10 +8808,15 @@ function renderFilm(doc, { mode = "film", after = null, startId = null } = {}) {
     if (paused) { frameAt(Math.min(1, held / durMs())); return; }
     const el = held + Math.max(0, nowMs() - t0), d = durMs();
     frameAt(Math.min(1, el / d));
+    /* ⛔ A SHOT HOLDS UNTIL ITS NARRATION IS DONE. ✅ Aevi's pacing — `secondsBase` + words × `secondsPerWord`
+     * — was written for a reader's eye, and a voice is slower than an eye: without this the film runs two
+     * shots ahead of what is being said. ⚠️ WITH A CEILING, because `onend` is the least reliable event in
+     * the Web Speech API: at three times the written length the film moves on whatever the voice is doing. */
+    const voiceHold = spoken && !spokenDone && el < d * 3;
     /* ⛔ THE TITLE CARD HOLDS. ✅ *"Leaving: `begin` ("Begin") goes to the door. Skip goes to the title card,
      * and then the door."* — so the title is not a shot that expires, it is where the film waits. The globe
      * keeps turning behind it; nothing advances until the player says so. */
-    if (el >= d && !atTitle()) { i++; return i < frames.length ? show() : end(); }
+    if (el >= d && !voiceHold && !atTitle()) { i++; return i < frames.length ? show() : end(); }
     _openingRaf = window.requestAnimationFrame(tick);
   };
   const resume = () => {
@@ -8685,21 +8824,39 @@ function renderFilm(doc, { mode = "film", after = null, startId = null } = {}) {
     if (_openingRaf != null) { try { window.cancelAnimationFrame(_openingRaf); } catch { /* none pending */ } _openingRaf = null; }
     if (paused) return;
     t0 = nowMs();
-    if (reduced) { frameAt(0.82); if (!atTitle()) _openingTimer = setTimeout(() => { i++; i < frames.length ? show() : end(); }, Math.max(1, durMs() - held)); }
+    if (reduced) {
+      frameAt(0.82);
+      // ⛑ the still frames wait for the voice as well, or a reader who asked for no motion gets the film twice as fast
+      const go = () => { if (spoken && !spokenDone) { _openingTimer = setTimeout(go, 250); return; } i++; i < frames.length ? show() : end(); };
+      if (!atTitle()) _openingTimer = setTimeout(go, Math.max(1, durMs() - held));
+    }
     else _openingRaf = window.requestAnimationFrame(tick);
   };
 
   const show = () => {
     const s = frames[i];
     if (!s) return end();
-    if (reduced) crossfade();
+    crossfade();          // ✅ "each scene should flow smoothly to the next"
     held = 0;
+    /* ⛔ THE SAME WORDS THE CAPTION SHOWS, AND NOTHING ELSE. Not the movement's name, not the controls — the
+     * film's own `lines` and `after`, which is the speakable projection of a shot the way `speakableText` is
+     * the speakable projection of a turn. The title card speaks its two lines; the coda speaks its own. */
+    spokenDone = false;
+    spoken = filmNarrate(s.title ? [s.title.line1, s.title.line2] : [...(s.lines || []), ...(s.after || [])],
+      { onDone: () => { spokenDone = true; } });
     // ⛔ EVERY WORD FROM THE FILE. `lines` is what is said; `after` is what lands a beat later on the same
     // shot (she uses it once, for Exesa's naming), so it is shown beneath rather than replacing.
     const lines = (s.title ? [s.title.line1, s.title.line2] : (s.lines || [])).filter(Boolean);
     const extra = (s.after || []).filter(Boolean);
-    if (cap) cap.innerHTML = lines.map((l) => `<div class="op-line">${esc(String(l))}</div>`).join("")
-      + extra.map((l) => `<div class="op-line op-after">${esc(String(l))}</div>`).join("");
+    if (cap) {
+      cap.innerHTML = lines.map((l) => `<div class="op-line">${esc(String(l))}</div>`).join("")
+        + extra.map((l) => `<div class="op-line op-after">${esc(String(l))}</div>`).join("");
+      // ⛑ the words arrive with the picture: the caption is re-flowed, so restarting its animation is a
+      // class removed and re-added inside one frame — the standard way to replay a CSS animation.
+      cap.classList.remove("op-cap-in");
+      void cap.offsetHeight;
+      cap.classList.add("op-cap-in");
+    }
     if (cv) cv.classList.toggle("op-title", s.visual === "title");
     // ⛑ at the title, Begin replaces the playback controls — there is nothing left to pause or skip
     for (const [id, on] of [["op-begin", atTitle()], ["op-pause", !atTitle()], ["op-next", !atTitle()], ["op-skip", !atTitle()]]) {
@@ -8716,6 +8873,7 @@ function renderFilm(doc, { mode = "film", after = null, startId = null } = {}) {
   const skip = () => { if (coda) return end(); i = frames.length - 1; show(); };
   const end = () => {
     stopOpening();
+    document.getElementById("op-overlay")?.remove();   // V1: leaving the film takes its overlay with it
     // ⛑ MARKED ON THE PROFILE, not the character: the film is about the world, so it is watched once and
     // not once per character (G3). Marked when it ENDS OR IS SKIPPED, which is what Aevi asked.
     // ⛑ THE PROFILE IS ALREADY LOADED at module scope — `loadProfile` takes a KEY and would come back
@@ -8727,13 +8885,31 @@ function renderFilm(doc, { mode = "film", after = null, startId = null } = {}) {
     if (typeof after === "function") after();
   };
 
+  _filmVoiceOn = profile?.filmVoice !== false;
+  const voiceBtn = document.getElementById("op-voice");
+  const setVoice = () => { if (voiceBtn) voiceBtn.textContent = _filmVoiceOn ? "◂))" : "◂"; };
+  if (voiceBtn) voiceBtn.onclick = (e) => {
+    e.stopPropagation();
+    _filmVoiceOn = !_filmVoiceOn;
+    setVoice();
+    if (profile) { profile.filmVoice = _filmVoiceOn; try { saveProfile(profile); } catch { /* a preference is not worth failing a write for */ } }
+    if (!_filmVoiceOn) { try { stopSpeaking(); } catch { /* tier 0 */ } spoken = false; spokenDone = true; }
+    else { spokenDone = false; const s = frames[i];
+      spoken = filmNarrate(s?.title ? [s.title.line1, s.title.line2] : [...(s?.lines || []), ...(s?.after || [])], { onDone: () => { spokenDone = true; } }); }
+  };
+  setVoice();
   const pauseBtn = document.getElementById("op-pause");
   // ⚠️ A GLYPH, NOT A WORD — see the markup: "Pause" is not in her `controls`, and inventing it here is the
   // exact coupling her rule forbids. The title attribute carries her word if she ever authors one.
   const setPause = () => { if (pauseBtn) pauseBtn.textContent = paused ? "▶" : "❙❙"; };
   if (pauseBtn) pauseBtn.onclick = (e) => {
     e.stopPropagation();
-    if (!paused) { held += Math.max(0, nowMs() - t0); paused = true; setPause(); resume(); frameAt(Math.min(1, held / durMs())); return; }
+    if (!paused) {
+      held += Math.max(0, nowMs() - t0); paused = true; setPause(); resume(); frameAt(Math.min(1, held / durMs()));
+      try { window.speechSynthesis.pause(); } catch { /* tier 0 */ }
+      return;
+    }
+    try { window.speechSynthesis.resume(); } catch { /* tier 0 */ }
     paused = false; setPause(); resume();
   };
   setPause();
@@ -24216,7 +24392,12 @@ async function renderLibrary(catIdx = 0, entryId = null) {
   if (entry.kind === "film") {
     const doc = entry.filmId === "opening" ? CONTENT.opening
       : (CONTENT.films || []).find((f) => f.id === entry.filmId) || null;
-    if (doc) { renderFilm(doc, { mode: "film", after: () => renderLibrary(catIdx, entry.id) }); return; }
+    /* ⛑ V1/V2 · AND `after` IS NOTHING, WHICH IS THE WHOLE POINT OF AN OVERLAY. ✅ Aevi: *"Close or Esc puts
+     * the player back where they opened it."* The Library is still standing underneath, so ending the film
+     * only has to take the overlay off. ⚠️ My first cut passed `after: () => renderLibrary(catIdx, entry.id)`
+     * — which re-entered this very branch, saw `kind === "film"` again and played it back: an endless loop
+     * that looked like the film simply never ending. */
+    if (doc) { renderFilm(doc, { mode: "library" }); return; }
   }
   let body = "";
   if (entry.kind === "circle") body = libGreatCircle();

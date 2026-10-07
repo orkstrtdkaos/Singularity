@@ -135,13 +135,22 @@ export function libMdToHtml(md) {
   let html = "", inList = false, inTable = false, tableHeadDone = false;
   const closeList = () => { if (inList) { html += "</ul>"; inList = false; } };
   const closeTable = () => { if (inTable) { html += tableHeadDone ? "</tbody></table>" : "</tr></thead></table>"; inTable = false; tableHeadDone = false; } };
+  /* ⛔ EMPHASIS IS A PARAGRAPH'S, NOT A LINE'S. ✅ AEVI, from the browser: *"Even valid markdown, with bold
+   * running over a soft line break inside one paragraph, shows its asterisks, because the renderer applies
+   * `**` within a single line. Please render emphasis per paragraph."* ⛑ So the lines of a paragraph are
+   * gathered and `libInline` runs ONCE over the join — which is the only way a `**` that opens on one line and
+   * closes on the next can pair. Everything that ends a paragraph (a heading, a list, a table, a blank line,
+   * the end of the file) closes it first, or its lines would leak into the next block. */
+  const para = [];
+  const closePara = () => { if (para.length) { html += `<p class="lore-p">${ln(para.join(" "))}</p>`; para.length = 0; } };
   const ln = s => libInline(esc(playerText(s)));   // SNG-538 §4.1: the same door every craft surface has had since SNG-165
   for (const raw of lines) {
     const line = raw.trimEnd();
-    if (/^#{3,}\s/.test(line)) { closeList(); closeTable(); html += `<h4 class="lore-h">${ln(line.replace(/^#+\s/, ""))}</h4>`; }
-    else if (/^##\s/.test(line)) { closeList(); closeTable(); html += `<h3 class="lore-h">${ln(line.replace(/^#+\s/, ""))}</h3>`; }
-    else if (/^#\s/.test(line)) { closeList(); closeTable(); html += `<h2 class="lore-h">${ln(line.replace(/^#+\s/, ""))}</h2>`; }
+    if (/^#{3,}\s/.test(line)) { closeList(); closeTable(); closePara(); html += `<h4 class="lore-h">${ln(line.replace(/^#+\s/, ""))}</h4>`; }
+    else if (/^##\s/.test(line)) { closeList(); closeTable(); closePara(); html += `<h3 class="lore-h">${ln(line.replace(/^#+\s/, ""))}</h3>`; }
+    else if (/^#\s/.test(line)) { closeList(); closeTable(); closePara(); html += `<h2 class="lore-h">${ln(line.replace(/^#+\s/, ""))}</h2>`; }
     else if (/^\s*\|.*\|\s*$/.test(line)) {
+      closePara();
       // SNG-061 (2026-09-08): TABLES. EXESA.md and VOCATIONS.md are table-heavy and the reader rendered
       // every row as a paragraph of raw pipes. A separator row (|---|---|) closes the header.
       closeList();
@@ -155,10 +164,10 @@ export function libMdToHtml(md) {
       if (tableHeadDone) html += "</tr>";
       continue;
     }
-    else if (/^[-*]\s/.test(line)) { closeTable(); if (!inList) { html += "<ul class='lore-list'>"; inList = true; } html += `<li>${ln(line.replace(/^[-*]\s/, ""))}</li>`; }
-    else if (!line.trim()) { closeList(); closeTable(); }
-    else { closeList(); closeTable(); html += `<p class="lore-p">${ln(line)}</p>`; }
+    else if (/^[-*]\s/.test(line)) { closeTable(); closePara(); if (!inList) { html += "<ul class='lore-list'>"; inList = true; } html += `<li>${ln(line.replace(/^[-*]\s/, ""))}</li>`; }
+    else if (!line.trim()) { closeList(); closeTable(); closePara(); }
+    else { closeList(); closeTable(); para.push(line); }
   }
-  closeList(); closeTable();
+  closeList(); closeTable(); closePara();
   return html;
 }

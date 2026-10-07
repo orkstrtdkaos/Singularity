@@ -5457,8 +5457,8 @@ console.log("\n── §50 · R28 · the authored ground ──");
    * a gate pinning the future, which is the same mistake as pinning the past, pointed the other way. `gap`
    * passes while it is open and shouts FIXED the day the content arrives, which is when this becomes a check
    * for "the Echo reads in metres, at the village's edge". */
-  gap("§50: Millbrook is not ON the river yet — the Echo still reads in miles from the well",
-    /\bmi\b/.test(echoLine), echoLine.trim());
+  check("§50: Millbrook is ON the river — the Echo reads in metres, at the village's edge (gap closed with Aevi's layout, CCode's word 2026-10-07)",
+    !/\bmi\b/.test(echoLine) && /\b\d+ m\b/.test(echoLine), echoLine.trim());
   check("§50: ⚠️ a feature AT the centre is not reported as \"0 m north\" — that is not a sentence",
     !/(^|[^0-9])0 m /.test(mb));
 

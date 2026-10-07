@@ -227,6 +227,16 @@
       "keeperId": "halvex_coil",
       "keeperName": "Halvex Coil",
       "condition": "thriving",
+      "rung": null,
+      "frame": null,
+      "state": "whole",
+      "outward": [
+        {
+          "name": "a watchtower",
+          "siteKind": null,
+          "state": "whole"
+        }
+      ],
       "has": [
         "a watchtower",
         "Centcom"
@@ -237,7 +247,7 @@
           {
             "goods": "raw_material",
             "name": "hide, sinew, timber, ore",
-            "units": 2,
+            "units": 5,
             "each": 4
           }
         ]

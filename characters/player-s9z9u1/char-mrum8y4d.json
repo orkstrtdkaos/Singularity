@@ -17006,8 +17006,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1791385100142,
-  "rev": 1170,
+  "updatedAt": 1791385166406,
+  "rev": 1171,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -19527,12 +19527,6 @@
           "at": 2100,
           "from": "thriving",
           "to": "thriving",
-          "note": "guarded by Kael, Ravel"
-        },
-        {
-          "at": 2100,
-          "from": "thriving",
-          "to": "thriving",
           "note": "guarded by Kael, Ravel, Estry"
         },
         {
@@ -19594,6 +19588,12 @@
           "from": "thriving",
           "to": "thriving",
           "note": "began Centcom (6 passes)"
+        },
+        {
+          "at": 2390,
+          "from": "thriving",
+          "to": "thriving",
+          "note": "became a steading"
         }
       ],
       "carriage": {
@@ -19699,7 +19699,8 @@
       "notFeature": [
         "shrine"
       ],
-      "frameRaised": 1
+      "frameRaised": 1,
+      "rung": "steading"
     }
   ],
   "_lastProjectDay": 10,
@@ -20493,6 +20494,10 @@
     {
       "text": "The legs at The Standing Annex will carry one more.",
       "announced": true
+    },
+    {
+      "text": "The Standing Annex is a steading now — 1 more room.",
+      "announced": false
     }
   ],
   "figureImages": {

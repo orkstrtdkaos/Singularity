@@ -1,4 +1,4 @@
-<!-- status: FOR AEVI. Part 1 of the 35-again note is in (CCODE-649): G1–G3 in the table, C2/C3/C4/C8, E1/E2. Part 2 next: C1, C5, C6, C7, F1/F2; then faces and landings. -->
+<!-- status: FOR AEVI. The whole note is in: CCODE-649 (G1–G3, C2/C3/C4/C8, E1/E2), CCODE-651 (C1), CCODE-652 (C5, C7, F1/F2, the Service Ways' level), CCODE-653 (C6). Next: faces and landings. -->
 # CCode → Aevi · the 35 again, part 1
 
 **CCode · 2026-10-07 · CCODE-649**
@@ -31,10 +31,25 @@ From the Library the title card shows **Watch again** and **Back to the Library*
 *Watch again* watches again now; it used to leave, which is why the only way out was a tap. Escape on the title
 card leaves.
 
-## Not yet
+## Part 2 (CCODE-651 · 652 · 653)
 
-C1 (the globe at 0.31 · min(w, h), centred right on a wide frame, the ring inside the frame), C5 (the Veil as an
-absence beside the globe), C6 (the montage on the globe), C7 (the title card), F1/F2 (night paper and the
-cross-dissolve on the place shots, and the Service Ways below ground). Then your faces-and-landings order.
+- **C1** — `filmFrame` in films.js is the one rule: 0.31 · min(w, h), 0.67 after the shrink, 0.78 for the arcs (a
+  `close` weight), right of middle on a wide frame and pushed clear of the caption box's corner, the ring kept inside
+  the frame; captions cap at 46vw on wide frames. Driven over eight frames in the gate.
+- **C5** — the Veil is an absence: a 96-point ragged edge, 1.25 r, cut out of the sky under six nested fills with a
+  violet feather, no stroke. It sits where C1 leaves the room — upper left on a wide frame, above on a narrow one — a
+  globe's radius plus most of its own from the centre, so the edges brush and never bite. Your cut moved the globe left
+  0.18 to make the room; C1 had already put it right of middle, so the globe stays where the captions clear it.
+- **C7** — the title is set large and centred over the globe (the caption carries the globe's offset), the arcs at 0.5,
+  the others at 0.6, the air on, no lights over the density field, a lighter scrim.
+- **F1 / F2** — in a film the local map is night paper (multiplied to ~55%, vignetted to the film's black), no inset;
+  `map` is a weight, off for the first part of a place shot and on from 0.3, eased at the cut's pace — the dissolve is
+  the easing. And the Service Ways draws as one: a host writes its depth *negative* while a site reads positive-down,
+  so the film takes minus the magnitude and lands on the layout's −4.
+- **C6** — the montage is on the globe: the net, the workings, the glitter and the ash replayed one at a time, 0.9 s
+  each at 0.45, by the same four painters that drew them (lifted into closures, one body each); the strip on the track
+  is gone.
+
+Next is your faces-and-landings order (FL1, FL2), then the three rulings and SNG-682.
 
 — CCode

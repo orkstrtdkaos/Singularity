@@ -208,7 +208,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.22.8";
+const APP_VERSION = "2.22.9";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -8175,21 +8175,35 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
     ctx.restore();
   }
 
-  if (T.net > 0.01) {
+  /* ✅ C6 (the 35 again): THE FOUR LAYERS THE MONTAGE REPLAYS ARE CLOSURES — one body each, called by their weight gate
+   * and again by the pause's montage with its own clock (`uu`) and alpha, so the memory is drawn by the thing it remembers. */
+  const drawAsh = (alpha, { uu = u } = {}) => {
+    ctx.save(); ctx.globalCompositeOperation = "lighter";   // ✅ C4: the ash could not be seen either
+    ctx.fillStyle = "rgba(188,186,180,0.8)";
+    for (let k = 0; k < Math.round(700 * grains); k++) {
+      const lat = -88 + opRand(k, 1) * 176, lon = -180 + opRand(k, 2) * 360;
+      const fall = ((uu * 0.9 + opRand(k, 8)) % 1);
+      const p = P(lat, lon, 1.035 - 0.035 * fall);
+      if (!inFrame(p)) continue;
+      ctx.globalAlpha = alpha * (0.25 + 0.5 * (1 - fall)) * (0.35 + 0.65 * p.z);
+      ctx.fillRect(p.x, p.y, 1.8, 1.8);
+    }
+    ctx.globalAlpha = 1; ctx.restore();
+  };
+  const drawNet = (alpha, { run = T.runaway, uu = u } = {}) => {
     /* ✅ *"Lines of light run between the cities, faster and finer, until the night side is a net."* — then
      * *"doubling, then doubling again; it begins to glow on the day side too."* So `network` draws a growing
      * share of the real net, and `network_runaway` draws all of it plus the chords that pass over the day.
      * ✅ G: drawn at `cur.net` — so the net THINS through `swarm` (its row keeps 0.35) instead of vanishing. */
     const edges = openingEdges(onEarth ? nodes : null);
-    const run = T.runaway;
-    const n = Math.round(edges.length * Math.max(run, Math.min(1, u * 1.25)));
+    const n = Math.round(edges.length * Math.max(run, Math.min(1, uu * 1.25)));
     /* ⛔ J · ARCS, NOT CHORDS, AND LIGHT ADDS TO LIGHT. Each line follows the great circle between its two
      * cities, lifted a little at mid-span, and the half behind the limb is dropped by the projector — so the
      * net lies ON the world instead of across its face. `lighter` is what makes a hundred faint lines read as
      * a glow where they cross rather than as a grey wash. */
     ctx.save();
     ctx.globalCompositeOperation = "lighter";
-    ctx.globalAlpha = T.net;
+    ctx.globalAlpha = alpha;
     ctx.strokeStyle = run > 0.5 ? "rgba(150,196,236,0.5)" : "rgba(120,176,230,0.36)";
     ctx.lineWidth = 0.9 + 0.2 * run;
     ctx.beginPath();
@@ -8204,10 +8218,10 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
     ctx.stroke();
     if (run > 0.01) {
       // the doubling: long arcs over the whole globe, and they do not wait for night
-      ctx.globalAlpha = T.net * run;
+      ctx.globalAlpha = alpha * run;
       ctx.strokeStyle = "rgba(190,220,250,0.34)"; ctx.lineWidth = 0.8;
       ctx.beginPath();
-      for (let k = 0; k < Math.floor(260 * grains * Math.min(1, u * 1.5)); k++) {
+      for (let k = 0; k < Math.floor(260 * grains * Math.min(1, uu * 1.5)); k++) {
         const a = nodes[Math.floor(opRand(k, 2) * nodes.length)], b = nodes[Math.floor(opRand(k, 5) * nodes.length)];
         if (!a || !b) continue;
         let open = false;
@@ -8220,14 +8234,14 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
       for (const nd of nodes) { const p = P(nd.lat, nd.lon); if (inFrame(p)) opGlow(ctx, p.x, p.y, 7, "rgba(214,238,255,0.5)", "rgba(190,226,255,0)"); }
     }
     ctx.restore();
-  }
+  };
+  if (T.net > 0.01) drawNet(T.net);
 
-  if (T.swarm > 0.01) {
+  const drawSwarm = (alpha, { ord = T.order, uu = u } = {}) => {
     /* ✅ *"A glitter rises off the net and spreads over the land and sea, too fine to be single things."* →
      * *"The glitter falls into patterns: grids, rings."* ⛑ The ordered pass snaps the SAME grains to a
      * lattice of parallels and meridians, so it reads as the same swarm obeying rather than a new effect.
      * ✅ G: `cur.order` IS the snap — the grains ease onto the grid as the weight rises, at the cut's own pace. */
-    const ord = T.order;
     /* ✅ C4 (the 35 again): at 1.1 px under source-over the glitter could not be seen on a lit globe — 1.8 px under
      * `lighter`, alpha by what faces you and never by night. "Too fine to be single things" is a density, not invisibility. */
     ctx.save(); ctx.globalCompositeOperation = "lighter";
@@ -8239,26 +8253,27 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
         lat = lat * (1 - f) + Math.round(lat / 9) * 9 * f;
         lon = lon * (1 - f) + Math.round(lon / 9) * 9 * f;
       }
-      const rise = ord > 0.5 ? 1.012 : 1 + 0.03 * Math.min(1, u) * opRand(k, 4);
+      const rise = ord > 0.5 ? 1.012 : 1 + 0.03 * Math.min(1, uu) * opRand(k, 4);
       const p = P(lat, lon, rise);
       if (!inFrame(p)) continue;
-      ctx.globalAlpha = (0.3 + 0.6 * opRand(k, 6)) * T.swarm * (0.35 + 0.65 * p.z);
+      ctx.globalAlpha = (0.3 + 0.6 * opRand(k, 6)) * alpha * (0.35 + 0.65 * p.z);
       ctx.fillRect(p.x, p.y, 1.8, 1.8);
     }
     ctx.globalAlpha = 1; ctx.restore();
     if (ord > 0.01) {
       // the rings
-      ctx.save(); ctx.globalAlpha = ord * T.swarm;
+      ctx.save(); ctx.globalAlpha = ord * alpha;
       for (let k = 0; k < 3; k++) {
         const pts = opCurrent(frame, 20 + k * 30, -60 + k * 70, 0, 360);
         opStroke(ctx, pts, "rgba(206,232,255,0.4)", 0.9);
       }
       ctx.restore();
     }
-  }
+  };
+  if (T.swarm > 0.01) drawSwarm(T.swarm);
 
-  if (T.works > 0.01) {
-    ctx.save(); ctx.globalAlpha = T.works;        // ✅ G: the workings fade in and out at the cut's pace
+  const drawWorks = (alpha, { uu = u, heatOf = null } = {}) => {
+    ctx.save(); ctx.globalAlpha = alpha;          // ✅ G: the workings fade in and out at the cut's pace
     /* ✅ *"Small bright workings bloom across the globe: a wall rising, a wound closing, light poured into a
      * dark valley. Gold."* → the cost: *"Colour drains … into the bright points; the workings burn hotter
      * and the world around them greys."* → *"The workings dim one by one."* Same nine points all three
@@ -8267,9 +8282,9 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
     pts.forEach((nd, k) => {
       const p = P(nd.lat, nd.lon);
       if (!inFrame(p)) return;
-      let heat = V === "workings" ? 0.5 + 0.5 * Math.min(1, u * 1.3) : V === "drain" ? 1 : Math.max(0, 1 - Math.min(1, u * 1.5) * (1 + k / 4));
+      let heat = heatOf ? heatOf(k) : (V === "workings" ? 0.5 + 0.5 * Math.min(1, uu * 1.3) : V === "drain" ? 1 : Math.max(0, 1 - Math.min(1, uu * 1.5) * (1 + k / 4)));
       if (heat <= 0) return;
-      const pulse = 1 + 0.12 * Math.sin(u * Math.PI * 4 + k);
+      const pulse = 1 + 0.12 * Math.sin(uu * Math.PI * 4 + k);
       opGlow(ctx, p.x, p.y, 34 * heat * pulse, `rgba(255,214,122,${0.78 * heat})`, "rgba(255,186,60,0)");
       ctx.fillStyle = `rgba(255,243,206,${0.9 * heat})`;
       ctx.beginPath(); ctx.arc(p.x, p.y, 2.4, 0, Math.PI * 2); ctx.fill();
@@ -8279,7 +8294,7 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
         ctx.beginPath();
         for (let s = 0; s < 10; s++) {
           const a = (s / 10) * Math.PI * 2 + k;
-          const d = 10 + 9 * ((u + s / 10) % 1);
+          const d = 10 + 9 * ((uu + s / 10) % 1);
           const q = P(nd.lat + Math.sin(a) * d, nd.lon + Math.cos(a) * d / Math.max(0.2, Math.cos(nd.lat * Math.PI / 180)));
           if (!q) continue;
           ctx.moveTo(q.x, q.y); ctx.lineTo(p.x + (q.x - p.x) * 0.45, p.y + (q.y - p.y) * 0.45);
@@ -8288,7 +8303,8 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
       }
     });
     ctx.restore();
-  }
+  };
+  if (T.works > 0.01) drawWorks(T.works);
 
   if (V === "name_wears") {
     /* ✅ *"The word EARTH over the globe wears letter by letter into EXESA: same shape, worn down"* — and
@@ -8645,17 +8661,7 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
       ctx.moveTo(pa.x, pa.y); ctx.lineTo(pb.x, pb.y);
     }
     ctx.stroke();
-    ctx.save(); ctx.globalCompositeOperation = "lighter";   // ✅ C4: the ash could not be seen either
-    ctx.fillStyle = "rgba(188,186,180,0.8)";
-    for (let k = 0; k < Math.round(700 * grains); k++) {
-      const lat = -88 + opRand(k, 1) * 176, lon = -180 + opRand(k, 2) * 360;
-      const fall = ((u * 0.9 + opRand(k, 8)) % 1);
-      const p = P(lat, lon, 1.035 - 0.035 * fall);
-      if (!inFrame(p)) continue;
-      ctx.globalAlpha = (0.25 + 0.5 * (1 - fall)) * (0.35 + 0.65 * p.z);
-      ctx.fillRect(p.x, p.y, 1.8, 1.8);
-    }
-    ctx.globalAlpha = 1; ctx.restore();
+    drawAsh(1);
   }
 
   if (T.natural > 0.01) {
@@ -8800,22 +8806,17 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
       }
     }
     if (T.pause > 0.01) {
-      /* ✅ *"Over them, the history of the film replays small and fast: the net, the workings, the bores, the
-       * ash, the standing up."* ⛑ Five marks in a row, the one on top cycling — the film's own argument
-       * carried in miniature, which is what the caption beneath it says in words. */
-      const strip = ["net", "gold", "bore", "ash", "stand"];
-      const on = Math.floor((u * 5.5) % strip.length);
-      strip.forEach((kind, k) => {
-        const x = w / 2 + (k - 2) * 52, y = h - 56, lit = k === on ? 1 : 0.28;
-        ctx.save(); ctx.globalAlpha = lit * T.pause;
-        ctx.strokeStyle = "rgba(210,226,255,0.9)"; ctx.fillStyle = "rgba(210,226,255,0.9)"; ctx.lineWidth = 1;
-        if (kind === "net") { ctx.beginPath(); for (let s = 0; s < 5; s++) { ctx.moveTo(x - 14, y - 10 + s * 5); ctx.lineTo(x + 14, y - 8 + s * 4); } ctx.stroke(); }
-        if (kind === "gold") { ctx.fillStyle = "rgba(255,214,122,0.95)"; for (let s = 0; s < 3; s++) { ctx.beginPath(); ctx.arc(x - 10 + s * 10, y - 2 + (s % 2) * 6, 3, 0, Math.PI * 2); ctx.fill(); } }
-        if (kind === "bore") { ctx.strokeStyle = "rgba(255,170,70,0.95)"; ctx.beginPath(); for (let s = 0; s < 3; s++) { ctx.moveTo(x - 10 + s * 10, y - 12); ctx.lineTo(x - 10 + s * 10, y + 8); } ctx.stroke(); }
-        if (kind === "ash") { ctx.fillStyle = "rgba(188,186,180,0.9)"; for (let s = 0; s < 12; s++) ctx.fillRect(x - 14 + opRand(s, 21) * 28, y - 12 + opRand(s, 22) * 22, 1.4, 1.4); }
-        if (kind === "stand") { ctx.fillRect(x - 2, y - 14, 4, 24); ctx.fillRect(x - 12, y - 4, 3, 14); ctx.fillRect(x + 9, y - 8, 3, 18); }
-        ctx.restore();
-      });
+      /* ✅ C6 (the 35 again): THE MONTAGE IS ON THE GLOBE, NOT ON THE PROGRESS TRACK. ✅ AEVI: *"The cut replays the earlier
+       * layers on the globe, at 0.45, one at a time, 0.9 s each: the net, the workings, the swarm, the ash. 'The machines,
+       * the miracles, the eating, the leaning, the letting go' is the globe remembering, not a legend."* The same four
+       * painters the film drew them with, each handed its own clock, at 0.45 of the pause's weight. */
+      const beat = 0.9, elapsedS = Math.max(0, Math.min(1, u)) * secs(shot);
+      const k = Math.floor(elapsedS / beat) % 4, uu = (elapsedS % beat) / beat;
+      const replay = 0.45 * T.pause;
+      if (k === 0) drawNet(replay, { run: 0.6, uu: 0.3 + 0.7 * uu });
+      else if (k === 1) drawWorks(replay, { uu, heatOf: () => 0.6 + 0.4 * uu });
+      else if (k === 2) drawSwarm(replay, { ord: uu, uu });
+      else drawAsh(replay, { uu });
     }
   }
 

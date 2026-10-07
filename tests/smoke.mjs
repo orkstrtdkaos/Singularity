@@ -9008,7 +9008,7 @@ await (async () => {
       const shot35 = src35.slice(src35.indexOf("function paintFilmShot("), src35.indexOf("function renderFilm("));
       check("35/C4: ⛔ the particles can be seen — the glitter, the ash and the others draw at 1.8 px and up under `lighter`, alpha by what faces you, never by night",
         (shot35.match(/ctx\.fillRect\(p\.x, p\.y, 1\.8, 1\.8\);/g) || []).length === 2 && (shot35.match(/globalCompositeOperation = "lighter"/g) || []).length >= 6
-        && /T\.swarm \* \(0\.35 \+ 0\.65 \* p\.z\)/.test(shot35) && /\(0\.25 \+ 0\.5 \* \(1 - fall\)\) \* \(0\.35 \+ 0\.65 \* p\.z\)/.test(shot35)
+        && /alpha \* \(0\.35 \+ 0\.65 \* p\.z\)/.test(shot35) && /alpha \* \(0\.25 \+ 0\.5 \* \(1 - fall\)\) \* \(0\.35 \+ 0\.65 \* p\.z\)/.test(shot35)
         && /o\.own \? 2\.6 : o\.pad \? 1\.5 : 2\.1/.test(shot35) && !/fillRect\(p\.x, p\.y, 1\.1, 1\.1\)/.test(shot35));
       check("35/C8: ⛔ Earth's clouds are culled by depth and clipped to the disc — no puff outside the limb",
         /if \(inFrame\(p\) && p\.z > 0\.15\) opGlow\(ctx, p\.x, p\.y, 26/.test(shot35)
@@ -9076,6 +9076,15 @@ await (async () => {
         FT35.FILM_BASE.map === 0 && FT35.filmTargets("place", { u: 0.1 }).map === 0 && FT35.filmTargets("place", { u: 0.3 }).map === 1 && FT35.filmTargets("place", { u: 1 }).map === 1
         && FT35.filmTargets("earth", { u: 1 }).map === 0 && /localA = T\.map;/.test(shot35)
         && /const target = filmTargets\(frames\[i\]\?\.visual, \{ index: i, shrinkAt: coda \? -1 : shrinkAtF, u \}\);/.test(film35));
+      /* ── C6 · the montage on the globe ── */
+      check("35/C6: ⛔ the pause montage is ON THE GLOBE — the net, the workings, the glitter and the ash replayed one at a time, 0.9 s each, at 0.45 of the weight, by the SAME painters that drew them — and the strip on the progress track is gone",
+        /const beat = 0\.9, elapsedS = Math\.max\(0, Math\.min\(1, u\)\) \* secs\(shot\);/.test(shot35) && /const k = Math\.floor\(elapsedS \/ beat\) % 4, uu = \(elapsedS % beat\) \/ beat;/.test(shot35)
+        && /const replay = 0\.45 \* T\.pause;/.test(shot35) && /if \(k === 0\) drawNet\(replay/.test(shot35) && /else if \(k === 1\) drawWorks\(replay/.test(shot35)
+        && /else if \(k === 2\) drawSwarm\(replay/.test(shot35) && /else drawAsh\(replay/.test(shot35) && !/const strip = \["net", "gold", "bore", "ash", "stand"\]/.test(shot35));
+      check("35/C6: …and the four are ONE BODY EACH — a closure the weight gate calls (`if (T.net > 0.01) drawNet(T.net)`) and the montage calls again with its own clock, never a second copy of a layer",
+        ["net", "swarm", "works"].every((k) => shot35.includes(`if (T.${k} > 0.01) draw${k[0].toUpperCase() + k.slice(1)}(T.${k});`))
+        && /const drawAsh = \(alpha, \{ uu = u \} = \{\}\) => \{/.test(shot35) && /drawAsh\(1\);/.test(shot35)
+        && (shot35.match(/const draw(Net|Swarm|Works|Ash) = \(alpha, /g) || []).length === 4);
       check("35/E2: ⛔ Escape on the title card LEAVES — `skip()` landed on the card it was already on, so nothing happened",
         /e\.key === "Escape"\) \{ e\.preventDefault\(\); if \(atTitle\(\)\) end\(\); else skip\(\); \}/.test(film35));
     }
@@ -23994,7 +24003,8 @@ await (async () => {
     /createConicGradient/.test(pull) && /tintAt\(0\.42, "soft-light"\)/.test(pull) && /tintAt\(0\.08, "source-over"\)/.test(pull)
       && /Math\.atan2\(q\.y - frame\.cy, q\.x - frame\.cx\)/.test(pull) && /opGlow\(ctx, frame\.cx, frame\.cy/.test(pull));
   // J · arcs, not chords — the helper, driven through the film's own projector arithmetic
-  const net = caseOf("net");
+  // ✅ C6 (the 35 again): the net is a CLOSURE now (`drawNet`), called by its weight gate and again by the montage
+  const net = (() => { const a = shotFn.indexOf("const drawNet = "); const b = shotFn.indexOf("\n  const draw", a + 10); return a < 0 ? "" : shotFn.slice(a, b < 0 ? a + 4000 : b); })();
   check("680/J: the net between the cities is drawn through `opArc` under `lighter` — great-circle steps, lifted at mid-span — and not as `moveTo(pa) → lineTo(pb)` chords",
     (net.match(/opArc\(P, /g) || []).length >= 2 && /globalCompositeOperation = "lighter"/.test(net) && !/ctx\.moveTo\(pa\.x, pa\.y\); ctx\.lineTo\(pb\.x, pb\.y\)/.test(net));
   check("680/J: …and the pull threads climb the great circle from the land to the station off the limb (rA 1 → rB the ring's radius)",

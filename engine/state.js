@@ -11,6 +11,7 @@ import { reconcileContent } from "./reconcile.js";
 import { applySubstrateField } from "./substrate.js";
 import { stampCraftSubAttributes } from "./progression.js";
 import { loadLegends } from "./legends.js";
+import { libSkipKey } from "./library.js";   // ✅ Aevi: the GM reads lore by the Library's own skip rule, so build notes are not lore
 import { buildTraditionIndex } from "./traditions.js";
 import { bestiaryEncounters, frameExemplarEncounters } from "./random_encounters.js"; // SNG-229 §2b: synthesize monster encounters from the loaded bestiary
 
@@ -1023,7 +1024,9 @@ function loreValue(v, depth = 0) {
       return inner.includes("\n") ? inner.split("\n").map((l, i) => (i ? "  " + l : "- " + l)).join("\n") : `- ${inner}`;
     }).join("\n");
   }
-  const parts = Object.entries(v).filter(([k]) => !LORE_SKIP.has(k) && v[k] != null && v[k] !== "");
+  // ✅ AEVI: *"`loreToProse` still skips only `schemaVersion`, `id` and `kind`. Please give it the Library's
+  // `libSkipKey` rule, so the GM stops reading build notes as lore."* One rule for what a reader of lore may see.
+  const parts = Object.entries(v).filter(([k]) => !LORE_SKIP.has(k) && !libSkipKey(k) && v[k] != null && v[k] !== "");
   // A shallow object reads better inline; a deep one wants its own lines.
   const flat = parts.every(([, val]) => typeof val !== "object" || val === null);
   if (flat && depth > 0) return parts.map(([k, val]) => `${humanize(k)}: ${val}`).join(" · ");

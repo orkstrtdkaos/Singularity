@@ -16,6 +16,42 @@
   "next": [],
   "releases": [
     {
+      "version": "2.21.8",
+      "date": "2026-10-07",
+      "entries": [
+        {
+          "kind": "change",
+          "title": "The films draw their lines on the world",
+          "summary": "In the opening, the net between the cities follows the curve of the globe instead of cutting across its face, and the threads to the poles climb with it. The lattice shows as bright lines on a quietened world, the Veil sits beside the globe where it can be seen, the figures that stand up out of the land rise along the top of the world wherever it is turned, and the seated figure sits on its edge. The poles' pull tints the world toward each pole's colour."
+        },
+        {
+          "kind": "fix",
+          "title": "The film follows the window",
+          "summary": "Turning a phone or resizing the window while a film plays resizes the picture with it, instead of stretching the old one."
+        },
+        {
+          "kind": "feature",
+          "title": "A film that opens says so",
+          "summary": "When a meeting or an arrival unlocks a film, the scene says once that it is in the Library."
+        },
+        {
+          "kind": "change",
+          "title": "The opening's last shot picks the story nearest you",
+          "summary": "The arc the opening ends on is the one that names a place within your region's frame when there is one, before the one the film prefers in the abstract."
+        },
+        {
+          "kind": "fix",
+          "title": "Two Library titles wear the display face",
+          "summary": "The world-arcs heading and the lore title were naming a font that did not exist and falling back to the interface face."
+        },
+        {
+          "kind": "internal",
+          "title": "The GM reads lore by the Library's own skip rule",
+          "summary": "Build notes and secret fields are no longer rendered to the GM as lore."
+        }
+      ]
+    },
+    {
       "version": "2.21.7",
       "date": "2026-10-07",
       "entries": [

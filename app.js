@@ -208,7 +208,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.21.7";
+const APP_VERSION = "2.21.8";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -7612,7 +7612,9 @@ function openingRaster(view, { exesa = 0, mode = "", lights = 1, w = 900, h = 56
         }
         if (mode === "drain") { const m = (r + g + b) / 3; r = r * 0.3 + m * 0.52; g = g * 0.3 + m * 0.55; b = b * 0.3 + m * 0.58; }
         if (mode === "dark") { r *= 0.3; g *= 0.3; b *= 0.34; }
-        if (mode === "lattice" && land) { const f = 0.3 + (BD ? BD[bi] / 255 : 0.5) * 0.9; r = 20 + 22 * f; g = 26 + 36 * f; b = 40 + 86 * f; }
+        // ✅ I: *"land recoloured to periwinkle blocks → the surface DIMS (0.25), and the lattice is bright lines
+        // on top under `lighter`"* — the ground keeps its own colours, only quieter, so the lines are the subject
+        if (mode === "lattice") { r *= 0.28; g *= 0.3; b *= 0.4; }
       }
       const i = (Math.floor((y - y0) / step) * sw + Math.floor((x - x0) / step)) * 4;
       D[i] = r; D[i + 1] = g; D[i + 2] = b; D[i + 3] = a;
@@ -7701,6 +7703,37 @@ function opCurrentThrough(view, lat0, lon0, bearingDeg, from, to) {
     const lat = Math.asin(Math.sin(phi) * Math.cos(d) + Math.cos(phi) * Math.sin(d) * Math.cos(b));
     const lon = lam + Math.atan2(Math.sin(b) * Math.sin(d) * Math.cos(phi), Math.cos(d) - Math.sin(phi) * Math.sin(lat));
     const p = project(lon / R, lat / R, view, 1.004);
+    pts.push(p ? [p.x, p.y] : null);
+  }
+  return pts;
+}
+
+/* ⛔ J · LINES OVER A SPHERE ARE ARCS. ✅ AEVI: *"`network` / `network_runaway` draw `moveTo(pa) → lineTo(pb)` in
+ * screen space. A long chord cuts straight THROUGH the globe, and that is the 'web over the face' look. The cut
+ * steps along the great circle, slerps, lifts it 5% at mid-span, drops the segments with z < 0, and composites
+ * `lighter`."* ⛑ Slerp on unit vectors — a lerp of latitudes is not a great circle anywhere but the equator —
+ * and the lift is a sine bump so both ends sit on the ground. `P` is the shot's own projector, which returns
+ * null behind the limb, so the far half of a long arc is simply not there. The end radii may differ (a thread
+ * from the land to a station off the limb), so each is given. */
+function opArc(P, a, b, { lift = 0.05, steps = 10, rA = 1.0, rB = 1.0 } = {}) {
+  const R = Math.PI / 180;
+  const v = (lat, lon) => [Math.cos(lat * R) * Math.cos(lon * R), Math.cos(lat * R) * Math.sin(lon * R), Math.sin(lat * R)];
+  const va = v(a.lat, a.lon), vb = v(b.lat, b.lon);
+  const dot = Math.max(-1, Math.min(1, va[0] * vb[0] + va[1] * vb[1] + va[2] * vb[2]));
+  const om = Math.acos(dot);
+  const pts = [];
+  const n = Math.max(2, Math.round(steps * Math.max(0.25, om / 1.2)));
+  for (let i = 0; i <= n; i++) {
+    const tt = i / n;
+    let x, y, z;
+    if (om < 1e-4) { x = va[0]; y = va[1]; z = va[2]; }
+    else {
+      const s0 = Math.sin((1 - tt) * om) / Math.sin(om), s1 = Math.sin(tt * om) / Math.sin(om);
+      x = va[0] * s0 + vb[0] * s1; y = va[1] * s0 + vb[1] * s1; z = va[2] * s0 + vb[2] * s1;
+    }
+    const lat = Math.asin(Math.max(-1, Math.min(1, z))) / R, lon = Math.atan2(y, x) / R;
+    const rad = rA + (rB - rA) * tt + lift * Math.sin(tt * Math.PI);
+    const p = P(lat, lon, rad);
     pts.push(p ? [p.x, p.y] : null);
   }
   return pts;
@@ -8055,30 +8088,41 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
     const edges = openingEdges(onEarth ? nodes : null);
     const run = V === "network_runaway";
     const n = run ? edges.length : Math.floor(edges.length * Math.min(1, u * 1.25));
-    ctx.strokeStyle = run ? "rgba(188,226,255,0.6)" : "rgba(150,206,255,0.42)";
-    ctx.lineWidth = run ? 1.2 : 0.9;
+    /* ⛔ J · ARCS, NOT CHORDS, AND LIGHT ADDS TO LIGHT. Each line follows the great circle between its two
+     * cities, lifted a little at mid-span, and the half behind the limb is dropped by the projector — so the
+     * net lies ON the world instead of across its face. `lighter` is what makes a hundred faint lines read as
+     * a glow where they cross rather than as a grey wash. */
+    ctx.save();
+    ctx.globalCompositeOperation = "lighter";
+    ctx.strokeStyle = run ? "rgba(150,196,236,0.5)" : "rgba(120,176,230,0.36)";
+    ctx.lineWidth = run ? 1.1 : 0.9;
     ctx.beginPath();
     for (let i = 0; i < n; i++) {
       const a = nodes[edges[i][0]], b = nodes[edges[i][1]];
-      const pa = P(a.lat, a.lon), pb = P(b.lat, b.lon);
-      if (!pa || !pb) continue;
-      ctx.moveTo(pa.x, pa.y); ctx.lineTo(pb.x, pb.y);
+      let open = false;
+      for (const p of opArc(P, a, b, { lift: 0.03, steps: 6 })) {
+        if (!p) { open = false; continue; }
+        if (!open) { ctx.moveTo(p[0], p[1]); open = true; } else ctx.lineTo(p[0], p[1]);
+      }
     }
     ctx.stroke();
     if (run) {
-      // the doubling: long chords over the whole globe, and they do not wait for night
-      ctx.strokeStyle = "rgba(226,244,255,0.5)"; ctx.lineWidth = 0.8;
+      // the doubling: long arcs over the whole globe, and they do not wait for night
+      ctx.strokeStyle = "rgba(190,220,250,0.34)"; ctx.lineWidth = 0.8;
       ctx.beginPath();
       for (let k = 0; k < Math.floor(260 * grains * Math.min(1, u * 1.5)); k++) {
         const a = nodes[Math.floor(opRand(k, 2) * nodes.length)], b = nodes[Math.floor(opRand(k, 5) * nodes.length)];
         if (!a || !b) continue;
-        const pa = P(a.lat, a.lon), pb = P(b.lat, b.lon);
-        if (!pa || !pb) continue;
-        ctx.moveTo(pa.x, pa.y); ctx.lineTo(pb.x, pb.y);
+        let open = false;
+        for (const p of opArc(P, a, b, { lift: 0.06, steps: 12 })) {
+          if (!p) { open = false; continue; }
+          if (!open) { ctx.moveTo(p[0], p[1]); open = true; } else ctx.lineTo(p[0], p[1]);
+        }
       }
       ctx.stroke();
       for (const nd of nodes) { const p = P(nd.lat, nd.lon); if (inFrame(p)) opGlow(ctx, p.x, p.y, 7, "rgba(214,238,255,0.5)", "rgba(190,226,255,0)"); }
     }
+    ctx.restore();
   }
 
   if (V === "swarm" || V === "swarm_ordered") {
@@ -8397,6 +8441,31 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
       ctx.globalAlpha = 1;
     });
     if (V === "poles_pull") {
+      /* ✅ I · *"`poles_pull` tints the land toward its ring sector"* — ✅ AEVI's cut: *"conic `soft-light` at
+       * α ≤ 0.42, plus a `source-over` pass at 0.08, plus a warm middle glow at the Crossing."* ⛔ THE SECTORS
+       * ARE THE STATIONS' OWN SCREEN ANGLES, pole-on: each station's projected point gives the angle its
+       * wedge is centred on, so the tint and the ring cannot disagree about which colour sits where.
+       * ⛑ Guarded on `createConicGradient`, which every current browser has; without it the shot is what it
+       * was, not a thrown frame. */
+      if (typeof ctx.createConicGradient === "function" && poles.length >= 3) {
+        const stops = poles.map((pl) => { const q = P(pl.lat, pl.lon, OPENING_RING_UP); return q ? { ang: Math.atan2(q.y - frame.cy, q.x - frame.cx), ink: pl.ink || `hsla(${pl.hue},80%,62%,1)` } : null; }).filter(Boolean)
+          .sort((x, y) => x.ang - y.ang);
+        if (stops.length >= 3) {
+          const start = stops[0].ang;
+          const tintAt = (alpha, op) => {
+            const g = ctx.createConicGradient(start, frame.cx, frame.cy);
+            for (const s of stops) g.addColorStop(Math.max(0, Math.min(1, ((s.ang - start) + Math.PI * 4) % (Math.PI * 2) / (Math.PI * 2))), s.ink);
+            g.addColorStop(1, stops[0].ink);
+            ctx.save();
+            ctx.beginPath(); ctx.arc(frame.cx, frame.cy, frame.r, 0, Math.PI * 2); ctx.clip();
+            ctx.globalCompositeOperation = op; ctx.globalAlpha = alpha * Math.min(1, u * 1.4);
+            ctx.fillStyle = g; ctx.fillRect(frame.cx - frame.r, frame.cy - frame.r, frame.r * 2, frame.r * 2);
+            ctx.restore();
+          };
+          try { tintAt(0.42, "soft-light"); tintAt(0.08, "source-over"); } catch { /* an old canvas: the shot stays as it was */ }
+          opGlow(ctx, frame.cx, frame.cy, frame.r * 0.34, `rgba(255,220,160,${0.32 * Math.min(1, u * 1.4)})`, "rgba(255,200,120,0)");
+        }
+      }
       /* ✅ *"Threads run from the land to the poles and pull; places drift toward their pole and burn purer
        * and paler as they go."* + *"`poles_pull` tints the land toward its ring sector."*
        * ⛔ SO "ITS POLE" IS THE RING SECTOR IT FALLS UNDER, not the nearest point in space. Pole-on at the
@@ -8413,9 +8482,12 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
         const lon = nd.lon + ((((best.lon - nd.lon + 540) % 360) - 180)) * f;
         const a = P(nd.lat, nd.lon), b = P(lat, lon, 1.01), q = P(best.lat, best.lon, OPENING_RING_UP);
         if (a && q) {
-          ctx.save(); ctx.globalAlpha = 0.22;
+          // ⛑ J: the thread climbs the great circle from the land to its station, rising off the ground as it goes
+          ctx.save(); ctx.globalAlpha = 0.26; ctx.globalCompositeOperation = "lighter";
           ctx.strokeStyle = best.ink || `hsla(${best.hue},70%,70%,1)`;
-          ctx.lineWidth = 0.7; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(q.x, q.y); ctx.stroke(); ctx.restore();
+          ctx.lineWidth = 0.7;
+          opStroke(ctx, opArc(P, nd, best, { lift: 0.02, steps: 8, rA: 1.0, rB: OPENING_RING_UP }), ctx.strokeStyle, 0.7);
+          ctx.restore();
         }
         if (inFrame(b)) {
           // purer and paler as it goes: saturation falls, lightness rises, along its own radius
@@ -8490,35 +8562,54 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
       if (wood) opGlow(ctx, p.x, p.y, 13, `rgba(126,196,124,${0.5 * on})`, "rgba(126,196,124,0)");
       else if (i % 5 === 0) opGlow(ctx, p.x, p.y, 9, `rgba(255,186,110,${0.55 * on})`, "rgba(255,150,70,0)");
     });
-    const fx = w * 0.5, fy = h * 0.5 + frame.r + 34;
-    if (fy < h - 10) {
-      ctx.fillStyle = `rgba(16,18,24,${0.85 * Math.min(1, u * 2)})`;
-      ctx.beginPath(); ctx.arc(fx, fy - 16, 7, 0, Math.PI * 2); ctx.fill();          // the seated figure
-      ctx.beginPath(); ctx.moveTo(fx - 15, fy + 14); ctx.quadraticCurveTo(fx, fy - 16, fx + 15, fy + 14); ctx.fill();
-      opGlow(ctx, fx + 26, fy + 8, 16, "rgba(255,170,90,0.5)", "rgba(255,140,60,0)");  // the hearth beside them
+    /* ✅ I · AEVI: *"the seated figure at `h/2 + r + 34`, under the caption — beside the globe, or drop it; the
+     * green lights do the work."* ⛑ ON THE LIMB, lower right, rotated to the normal so they sit on the world
+     * rather than float under it — and dropped when the frame has no room there, as a tall phone has not. */
+    {
+      const ang = 0.62;                                              // lower right of the disc
+      const fx = frame.cx + Math.cos(ang) * frame.r, fy = frame.cy + Math.sin(ang) * frame.r;
+      const s = Math.max(5, frame.r * 0.05);
+      if (fx + s * 5 < w - 8 && fy + s * 4 < h - 100) {
+        ctx.save();
+        ctx.translate(fx, fy); ctx.rotate(ang - Math.PI / 2);
+        ctx.fillStyle = `rgba(16,18,24,${0.9 * Math.min(1, u * 2)})`;
+        ctx.beginPath(); ctx.arc(0, -s * 2.2, s * 0.9, 0, Math.PI * 2); ctx.fill();          // the head
+        ctx.beginPath(); ctx.moveTo(-s * 1.8, 0); ctx.quadraticCurveTo(0, -s * 2.4, s * 1.8, 0); ctx.fill();   // seated
+        opGlow(ctx, s * 3.2, -s * 0.6, s * 2.2, `rgba(255,170,90,${0.55 * Math.min(1, u * 2)})`, "rgba(255,140,60,0)");  // the hearth
+        ctx.restore();
+      }
     }
   }
 
   if (V === "standing_up") {
     /* ✅ *"Out of the land, things stand: a tower that hums, a wood that walks, a city of light, a shape of
      * fire. Silhouettes only."* Four, on the limb, rising with the shot. */
-    const kinds = ["tower", "wood", "city", "fire"];
+    /* ✅ I · AEVI: *"four silhouettes at fixed lat/lon, all off the visible face of Exesa, so the shot is
+     * empty — seven silhouettes in screen space along the upper limb, rotated to the normal, rising in
+     * turn."* ⛔ SCREEN SPACE, so they stand wherever the globe is turned to: a shot that depends on which
+     * meridian happens to face the camera is a shot that is sometimes blank. */
+    const kinds = ["tower", "wood", "city", "fire", "tower", "wood", "city"];
     kinds.forEach((kind, k) => {
-      const lat = -20 + k * 16, lon = -70 + k * 46;
-      const base = P(lat, lon, 1.0);
-      if (!inFrame(base)) return;
-      const up = Math.min(1, Math.max(0, u * 1.5 - k * 0.2));
+      const ang = (-160 + k * 22) * Math.PI / 180;                     // along the upper limb, left to right
+      const x = frame.cx + Math.cos(ang) * frame.r, y = frame.cy + Math.sin(ang) * frame.r;
+      if (x < 8 || x > w - 8 || y < 8) return;
+      const up = Math.min(1, Math.max(0, u * 1.6 - k * 0.12));
       if (up <= 0) return;
-      const H = 56 * up, x = base.x, y = base.y;
+      const H = Math.max(18, frame.r * 0.2) * up;
       ctx.save();
       ctx.translate(x, y);
       // out of the land: the silhouette grows along the local up, which is away from the globe's centre
-      ctx.rotate(Math.atan2(y - frame.cy, x - frame.cx) - Math.PI / 2);
+      ctx.rotate(ang + Math.PI / 2);
+      // ⛑ A SILHOUETTE AGAINST A NEAR-BLACK SKY NEEDS AN EDGE, or it is a shape nobody can see: a faint cool rim
+      // light on every form, the way a figure against a night sky is read by the sky behind it (measured in the
+      // browser at 412 px — seven forms drawn and none visible until this line).
       ctx.fillStyle = "rgba(10,12,18,0.9)";
-      if (kind === "tower") { ctx.fillRect(-5, -H, 10, H); opGlow(ctx, 0, -H, 16, "rgba(190,220,255,0.5)", "rgba(190,220,255,0)"); }
-      if (kind === "wood") { for (let s = 0; s < 4; s++) { ctx.fillRect(-14 + s * 8, -H * (0.6 + 0.12 * s), 4, H); } }
-      if (kind === "city") { for (let s = 0; s < 6; s++) { const hh = H * (0.3 + opRand(s, 12) * 0.7); ctx.fillRect(-18 + s * 6, -hh, 5, hh); } opGlow(ctx, 0, -H * 0.5, 26, "rgba(220,236,255,0.4)", "rgba(220,236,255,0)"); }
-      if (kind === "fire") { ctx.beginPath(); ctx.moveTo(-9, 0); ctx.quadraticCurveTo(-3, -H * 0.7, 0, -H); ctx.quadraticCurveTo(3, -H * 0.7, 9, 0); ctx.fill(); opGlow(ctx, 0, -H * 0.6, 24, "rgba(255,150,70,0.5)", "rgba(255,110,40,0)"); }
+      ctx.strokeStyle = `rgba(196,214,244,${0.6 * up})`; ctx.lineWidth = 1;
+      const form = (x0, y0, ww, hh) => { ctx.fillRect(x0, y0, ww, hh); ctx.strokeRect(x0, y0, ww, hh); };
+      if (kind === "tower") { form(-5, -H, 10, H); opGlow(ctx, 0, -H, 16, "rgba(190,220,255,0.5)", "rgba(190,220,255,0)"); }
+      if (kind === "wood") { for (let s = 0; s < 4; s++) { form(-14 + s * 8, -H * (0.6 + 0.12 * s), 4, H); } }
+      if (kind === "city") { for (let s = 0; s < 6; s++) { const hh = H * (0.3 + opRand(s, 12) * 0.7); form(-18 + s * 6, -hh, 5, hh); } opGlow(ctx, 0, -H * 0.5, 26, "rgba(220,236,255,0.4)", "rgba(220,236,255,0)"); }
+      if (kind === "fire") { ctx.beginPath(); ctx.moveTo(-9, 0); ctx.quadraticCurveTo(-3, -H * 0.7, 0, -H); ctx.quadraticCurveTo(3, -H * 0.7, 9, 0); ctx.fill(); ctx.stroke(); opGlow(ctx, 0, -H * 0.6, 24, "rgba(255,150,70,0.5)", "rgba(255,110,40,0)"); }
       ctx.restore();
     });
   }
@@ -8529,7 +8620,9 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
      * 0.985 draws beneath the surface and the limb occludes it earlier than the ground above it — the same
      * trick the precursor spans use. And it does not move: no `u` in any of these coordinates. */
     const edges = openingEdges();
-    ctx.strokeStyle = "rgba(150,186,255,0.5)"; ctx.lineWidth = 0.7;
+    ctx.save();
+    ctx.globalCompositeOperation = "lighter";                       // ✅ I: bright lines on a dimmed world
+    ctx.strokeStyle = "rgba(150,186,255,0.62)"; ctx.lineWidth = 0.8;
     ctx.beginPath();
     for (const [ai, bi] of edges) {
       const a = nodes[ai], b = nodes[bi];
@@ -8538,7 +8631,8 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
       ctx.moveTo(pa.x, pa.y); ctx.lineTo(pb.x, pb.y);
     }
     ctx.stroke();
-    for (const nd of nodes) { const p = P(nd.lat, nd.lon, 0.985); if (inFrame(p)) { ctx.fillStyle = "rgba(196,220,255,0.6)"; ctx.fillRect(p.x, p.y, 1.4, 1.4); } }
+    for (const nd of nodes) { const p = P(nd.lat, nd.lon, 0.985); if (inFrame(p)) { ctx.fillStyle = "rgba(196,220,255,0.7)"; ctx.fillRect(p.x, p.y, 1.4, 1.4); } }
+    ctx.restore();
     if (V === "veil" || V === "pause") {
       /* ✅ *"Where the lattice thins, a darkness that is not shadow: an absence in the shape of something
        * enormous. Nothing in it is shown."* + *"an absence with a faint violet rim that takes the stars out
@@ -8548,10 +8642,18 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
        * black of the stage. Nothing is inside it because there is nothing inside it; any fill, however dark,
        * would be a thing shown. ⛑ The violet rim is drawn AFTER, in `source-over`, so the rim survives its
        * own hole. It is the only edge the Veil gets, and it is faint. */
-      const g = P(-26, 58, 1.01);
-      if (g) {
-        const grow = V === "pause" ? 1 : Math.min(1, 0.4 + u * 0.75);
-        const rr = frame.r * 0.6 * grow;
+      /* ✅ I · AEVI: *"a `destination-out` hole at lat −26 lon 58, which is behind the face in those shots, so
+       * NOTHING SHOWS; the frame equals `lattice` — the absence sits BESIDE the globe in screen space: a feathered
+       * near-black shape, about 1.25 r, that takes the stars with it, under a violet rim."* ⛔ So it is placed
+       * by the frame, not by a longitude: upper right of the disc where there is room, above it where there is
+       * not (a tall phone), and never off the canvas. */
+      const grow = V === "pause" ? 1 : Math.min(1, 0.4 + u * 0.75);
+      const rr = frame.r * 0.62 * grow;
+      const side = frame.cx + frame.r * 1.25 + rr * 0.6 <= w - 6;
+      const g = side
+        ? { x: frame.cx + frame.r * 1.25 * Math.cos(-0.55), y: frame.cy + frame.r * 1.25 * Math.sin(-0.55) }
+        : { x: frame.cx + frame.r * 0.35, y: Math.max(rr * 0.7, frame.cy - frame.r * 1.25) };
+      {
         ctx.save();
         ctx.globalCompositeOperation = "destination-out";
         const rg = ctx.createRadialGradient(g.x, g.y, 0, g.x, g.y, rr);
@@ -8560,7 +8662,8 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
         ctx.beginPath(); ctx.arc(g.x, g.y, rr, 0, Math.PI * 2); ctx.fill();
         ctx.restore();
         ctx.save();
-        ctx.strokeStyle = "rgba(164,126,214,0.38)"; ctx.lineWidth = 1.4;
+        ctx.strokeStyle = "rgba(164,126,214,0.42)"; ctx.lineWidth = 1.4;
+        ctx.shadowColor = "rgba(150,110,220,0.8)"; ctx.shadowBlur = rr * 0.12;   // ✅ the violet rim, soft
         ctx.beginPath(); ctx.arc(g.x, g.y, rr * 0.76, 0, Math.PI * 2); ctx.stroke();
         ctx.restore();
       }
@@ -8742,7 +8845,7 @@ function filmNarrate(lines, { onDone = null } = {}) {
   return true;
 }
 
-let _openingTimer = null, _openingKeys = null, _openingRaf = null;
+let _openingTimer = null, _openingKeys = null, _openingRaf = null, _openingResize = null;
 /* ⛑ THREE HANDLES, AND ALL THREE HAVE TO GO. A film that is skipped mid-shot leaves a frame loop running
  * over a canvas that the next screen has already replaced — which is not a crash, it is worse: a paint every
  * 16ms against a detached element for as long as the session lasts, and `renderOpening` can be entered twice
@@ -8758,6 +8861,7 @@ function stopOpening() {
   if (_openingTimer) { clearTimeout(_openingTimer); _openingTimer = null; }
   if (_openingRaf != null) { try { window.cancelAnimationFrame(_openingRaf); } catch { /* no rAF: nothing to cancel */ } _openingRaf = null; }
   if (_openingKeys) { window.removeEventListener("keydown", _openingKeys); _openingKeys = null; }
+  if (_openingResize) { try { _openingResize.disconnect(); } catch { /* already gone */ } _openingResize = null; }
 }
 
 function renderFilm(doc, { mode = "film", after = null, startId = null } = {}) {
@@ -8815,8 +8919,8 @@ function renderFilm(doc, { mode = "film", after = null, startId = null } = {}) {
    * and whatever was there is still there.
    * ⛑ And the picture is sized to the VIEWPORT, not to 900×560 scaled — the painter already takes its own
    * width and height, so the globe is as big as the screen allows and the captions sit where O4 puts them. */
-  const vw = Math.max(480, Math.min(1920, Math.round(window.innerWidth || 900)));
-  const vh = Math.max(360, Math.min(1200, Math.round(window.innerHeight || 560)));
+  let vw = Math.max(480, Math.min(1920, Math.round(window.innerWidth || 900)));
+  let vh = Math.max(360, Math.min(1200, Math.round(window.innerHeight || 560)));
   document.getElementById("op-overlay")?.remove();
   const overlay = document.createElement("div");
   overlay.id = "op-overlay";
@@ -8853,9 +8957,30 @@ function renderFilm(doc, { mode = "film", after = null, startId = null } = {}) {
   const cap = document.getElementById("op-caption");
   const track = document.getElementById("op-track");
   if (!ctx) { stopOpening(); if (typeof after === "function") after(); return false; }
-  cv.width = vw * dprOf(); cv.height = vh * dprOf();
-  { const pv = document.getElementById("op-prev"); if (pv) { pv.width = cv.width; pv.height = cv.height; } }
-  ctx.setTransform(dprOf(), 0, 0, dprOf(), 0, 0);   // M1's one rule: the loop runs in CSS pixels
+  /* ✅ K (Aevi): *"Size it to the element with a `ResizeObserver` and redraw."* The frame is the viewport, so a
+   * phone turned sideways or a window dragged wider gets a canvas of the new size and the next frame paints
+   * into it — the loop reads `vw`/`vh` on every frame, and the reduced-motion path is repainted here because
+   * it paints one frame per shot and would otherwise keep the old picture stretched. ⛑ Disconnected in
+   * `stopOpening`, with the rest of the film's listeners. */
+  const sizeFilm = () => {
+    vw = Math.max(480, Math.min(1920, Math.round(window.innerWidth || 900)));
+    vh = Math.max(360, Math.min(1200, Math.round(window.innerHeight || 560)));
+    cv.width = vw * dprOf(); cv.height = vh * dprOf();
+    const pv = document.getElementById("op-prev"); if (pv) { pv.width = cv.width; pv.height = cv.height; }
+    ctx.setTransform(dprOf(), 0, 0, dprOf(), 0, 0);   // M1's one rule: the loop runs in CSS pixels
+  };
+  sizeFilm();
+  if (typeof ResizeObserver === "function") {
+    try {
+      _openingResize = new ResizeObserver(() => {
+        if (!document.getElementById("op-canvas")) return;
+        const was = `${vw}x${vh}`;
+        sizeFilm();
+        if (`${vw}x${vh}` !== was && reduced) frameAt(0.82);
+      });
+      _openingResize.observe(document.documentElement);
+    } catch { _openingResize = null; }
+  }
   /* ⛔ THE FILM IS DRAWN ON THE REAL TERRAIN, AND THE REAL TERRAIN IS LAZY. `loadTerrain` is deliberately
    * deferred (617KB, for a screen a player opens occasionally) — so the opening, which is the FIRST screen a
    * new player sees, must ask for it itself or the whole film plays on a blue disc. ⛑ Asked for here and
@@ -11233,7 +11358,18 @@ function applyTurn(turn, resolution, playerWords = null) {
   // ⛑ NOT AN `applyStep`: §171's fingerprint covers the families the MODEL writes, and this is the engine
   // reading what the steps above already recorded. Running it through `applyStep` put `filmUnlocks` in the
   // op-family list, which would have been a quiet lie about what the model may send.
-  try { noteFilmUnlocks(character, CONTENT, { worldDay: absoluteWorldDay() }); } catch (err) { console.warn("[films] unlock skipped:", err?.message); }
+  try {
+    const opened = noteFilmUnlocks(character, CONTENT, { worldDay: absoluteWorldDay() }) || [];
+    /* ✅ AEVI's `unlockLine` (opening.json): *"Said once in the scene news when a film unlocks. {film} is the
+     * film's `name`."* ⛑ It rides the same once-only aside the ledger's "Set right:" lines ride, which is the
+     * one line a scene already says once and then forgets — a second channel for one sentence would be a
+     * second thing to keep clearing. Nothing is said when the file has no line to say. */
+    const line = String(CONTENT.opening?.unlockLine || CONTENT.opening?.controls?.unlockLine || "");
+    if (line && Array.isArray(opened) && opened.length) {
+      const names = opened.map((id) => (CONTENT.films || []).find((f) => f.id === id)?.name).filter(Boolean);
+      if (names.length) character._correctionAside = [character._correctionAside, ...names.map((n) => line.replace("{film}", n))].filter(Boolean).join(" ");
+    }
+  } catch (err) { console.warn("[films] unlock skipped:", err?.message); }
   applyStep("codexUpdates", () => applyCodexUpdates(character, turn.codexUpdates || [], memCtx));
   // ⛔ R49 — A MYSTERY THE CODEX REFUSED TO STORE BARE IS ASKED FOR AS A STORY, on this same turn. The
   // request rides the turn's own generateRequest list, which handleGenerateRequests reads after apply.

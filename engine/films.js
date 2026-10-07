@@ -16,6 +16,8 @@
  *  how the script is WRITTEN and how the progress track is DRAWN; they are not a second axis to step along.
  *  ⛑ Each shot carries its movement's id and name, so the progress track needs no second lookup and cannot
  *  disagree with the shot it is showing. */
+import { degBetween } from "./localdetail.mjs";   // the coda's nearest-place rung: one great-circle rule, not a second
+
 export function filmReel(doc) {
   if (!doc) return null;
   const shots = [];
@@ -253,6 +255,29 @@ export function codaArc(content, { startId = null, locations = {}, reaches = nul
   // 2 · an arc SCOPED to this region, through the engine's own reader
   const scoped = (a) => Array.isArray(a.regions) && a.regions.length > 0;
   for (const a of arcs.filter(scoped)) { if (reach(a, regionId)) { const f = faceOf(a); if (f) return { ...f, arcBy: "region" }; } }
+  /* 2b · ✅ AEVI (2026-10-06): *"the coda reads an arc's `places` nearest-first before preference."* An arc that
+   * names a place a day's walk from the start is the story the player is about to walk into, and that beats
+   * what the file prefers in the abstract. Three arcs carry `places` today (block_bleed, green_schism, the
+   * widening); the rung costs nothing for the rest. The distance is the great circle in degrees, so the
+   * label can say how far. */
+  // ⛑ WITHIN THE REGION'S OWN FRAME (26°, the span the coda shows), or it is not "near": the first run of this rung
+  // chose the Widening for a start 29° — 750 miles — from the nearest place it names, over the world arcs the
+  // coda is for, which is what §G4 caught. A world arc stays the answer until a named place is actually close.
+  const CODA_NEAR_DEG = 26;
+  if (loc?.worldPos) {
+    const from = [Number(loc.worldPos.colatitude) - 90, Number(loc.worldPos.longitude)];
+    const near = arcs.map((a) => {
+      let best = Infinity;
+      for (const pid of (Array.isArray(a.places) ? a.places : [])) {
+        const l = locations[pid];
+        if (!l?.worldPos) continue;
+        const d = degBetween(from, [Number(l.worldPos.colatitude) - 90, Number(l.worldPos.longitude)]);
+        if (d < best) best = d;
+      }
+      return { a, d: best };
+    }).filter((x) => Number.isFinite(x.d) && x.d <= CODA_NEAR_DEG).sort((x, y) => x.d - y.d);
+    for (const { a, d } of near) { const f = faceOf(a); if (f) return { ...f, arcBy: `nearest named place (${Math.round(d)}° off)` }; }
+  }
   // 3 · what the content prefers for the opening, if it says
   const prefIds = [
     ...(Array.isArray(content?.opening?.coda?.arcPreference) ? content.opening.coda.arcPreference : []),

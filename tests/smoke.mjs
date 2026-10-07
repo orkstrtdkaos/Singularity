@@ -23920,6 +23920,105 @@ await (async () => {
     /filmLocalMap\(shot\.place/.test(bodyOf678("paintFilmShot")) && /paintLocalMap\(c2, model, \{ space, reveal: true/.test(bodyOf678("filmLocalMap")) && /character: null/.test(bodyOf678("filmLocalMap")));
 }
 
+// --- SNG-680 I/J/K · the shots that drew nothing draw, and lines over a sphere are arcs ---
+/* ✅ AEVI, frame by frame (po/NOTE_aevi_ccode_the_film_frame_by_frame.md): I — *"`veil`: a `destination-out` hole at
+ * lat −26 lon 58, which is behind the face in those shots, so NOTHING SHOWS"*, *"`standing_up`: four silhouettes at
+ * fixed lat/lon, all off the visible face, so the shot is empty"*, *"`natural`: the seated figure under the caption"*,
+ * *"`lattice`: land recoloured to periwinkle blocks"*, *"`poles_pull`: no sector tint"*; J — *"a long chord cuts
+ * straight THROUGH the globe, and that is the 'web over the face' look"*. ✅ ERIK: *"the films are still somewhat
+ * hokey … give them all another quality once over."* ⛔ EACH ONE IS GATED ON THE THING THAT MADE IT EMPTY: a shot
+ * placed by a longitude is a shot that is sometimes blank, so the gates ask that the Veil and the silhouettes are
+ * placed by the FRAME; and the net is gated on the arc helper, driven: a chord's midpoint lies inside the sphere, an
+ * arc's lies on or above it. */
+{
+  const src680ij = readFileSync(join(root, "app.js"), "utf8");
+  const bodyOfIJ = (fn) => { const a = src680ij.indexOf("function " + fn); const b = src680ij.indexOf("\nfunction ", a + 10); return a < 0 ? "" : src680ij.slice(a, b < 0 ? a + 40000 : b); };
+  const shotFn = bodyOfIJ("paintFilmShot");
+  const caseOf = (token) => { const a = shotFn.indexOf(`if (V === "${token}"`); const b = shotFn.indexOf("\n  if (V === ", a + 10); return a < 0 ? "" : shotFn.slice(a, b < 0 ? a + 6000 : b); };
+  // I · the Veil is placed by the frame, never by a longitude
+  const veil = (() => { const a = shotFn.indexOf('if (V === "veil" || V === "pause")'); return a < 0 ? "" : shotFn.slice(a, a + 3200); })();
+  check("680/I: the Veil is placed BESIDE the globe in screen space (frame.cx/cy and r), not at a latitude and longitude that can be behind the face",
+    /frame\.cx \+ frame\.r \* 1\.25/.test(veil) && !/P\(-26, 58/.test(veil) && /destination-out/.test(veil) && /shadowBlur/.test(veil));
+  // I · the silhouettes stand along the upper limb in screen space, seven of them, rising in turn
+  const standing = caseOf("standing_up");
+  check("680/I: `standing_up` draws SEVEN silhouettes along the upper limb in screen space, rotated to the normal and rising in turn — never at a fixed lat/lon",
+    /kinds = \["tower", "wood", "city", "fire", "tower", "wood", "city"\]/.test(standing) && /frame\.cx \+ Math\.cos\(ang\) \* frame\.r/.test(standing)
+      && /ctx\.rotate\(ang \+ Math\.PI \/ 2\)/.test(standing) && !/P\(lat, lon, 1\.0\)/.test(standing) && /k \* 0\.12/.test(standing));
+  // I · the seated figure sits on the limb, or is dropped — never under the caption
+  const natural = caseOf("natural");
+  check("680/I: the seated figure of `natural` sits ON the limb (lower right), rotated to the normal, and is dropped when the frame has no room — not under the caption",
+    /Math\.cos\(ang\) \* frame\.r/.test(natural) && /fy \+ s \* 4 < h - 100/.test(natural) && !/h \* 0\.5 \+ frame\.r \+ 34/.test(natural));
+  // I · the lattice is bright lines on a dimmed world
+  const lattice = caseOf("lattice");
+  const raster = bodyOfIJ("openingRaster");
+  check("680/I: under `lattice` the SURFACE dims (its own colours, quieter) and the lattice is drawn `lighter` on top — not land recoloured to periwinkle blocks",
+    /mode === "lattice"\) \{ r \*= 0\.28/.test(raster) && !/periwinkle|20 \+ 22 \* f/.test(raster.slice(raster.indexOf('mode === "lattice"'), raster.indexOf('mode === "lattice"') + 200))
+      && /globalCompositeOperation = "lighter"/.test(lattice));
+  // I · poles_pull tints the world toward its sectors, from the stations' own screen angles
+  const pull = (() => { const a = shotFn.indexOf('if (V === "poles_pull") {'); return a < 0 ? "" : shotFn.slice(a, a + 6500); })();
+  check("680/I: `poles_pull` tints the land toward its ring sector — a conic `soft-light` at 0.42 from the stations' OWN screen angles, a `source-over` pass at 0.08, and a warm middle glow — guarded on createConicGradient",
+    /createConicGradient/.test(pull) && /tintAt\(0\.42, "soft-light"\)/.test(pull) && /tintAt\(0\.08, "source-over"\)/.test(pull)
+      && /Math\.atan2\(q\.y - frame\.cy, q\.x - frame\.cx\)/.test(pull) && /opGlow\(ctx, frame\.cx, frame\.cy/.test(pull));
+  // J · arcs, not chords — the helper, driven through the film's own projector arithmetic
+  const net = caseOf("network");
+  check("680/J: the net between the cities is drawn through `opArc` under `lighter` — great-circle steps, lifted at mid-span — and not as `moveTo(pa) → lineTo(pb)` chords",
+    (net.match(/opArc\(P, /g) || []).length >= 2 && /globalCompositeOperation = "lighter"/.test(net) && !/ctx\.moveTo\(pa\.x, pa\.y\); ctx\.lineTo\(pb\.x, pb\.y\)/.test(net));
+  check("680/J: …and the pull threads climb the great circle from the land to the station off the limb (rA 1 → rB the ring's radius)",
+    /opArc\(P, nd, best, \{ lift: 0\.02, steps: 8, rA: 1\.0, rB: OPENING_RING_UP \}\)/.test(pull));
+  {
+    // ⛔ DRIVEN, not read: a chord's midpoint sits INSIDE the unit sphere; the arc's sits on or above it. The
+    // helper is lifted out of app.js by its text and run against a projector that returns the 3D point.
+    const a0 = src680ij.indexOf("function opArc("), a1 = src680ij.indexOf("\n}\n", a0);
+    const fn = new Function("return (" + src680ij.slice(a0, a1 + 2) + ")")();
+    const R = Math.PI / 180;
+    const P3 = (lat, lon, rad) => ({ x: rad * Math.cos(lat * R) * Math.cos(lon * R), y: rad * Math.cos(lat * R) * Math.sin(lon * R), z: rad * Math.sin(lat * R) });
+    const pts = fn(P3, { lat: 0, lon: 0 }, { lat: 0, lon: 90 }, { lift: 0.05, steps: 10 });
+    const mid = pts[Math.floor(pts.length / 2)];
+    const midR = Math.hypot(mid[0], mid[1]);                    // on the equator the arc stays in z = 0, so x,y carry its whole radius
+    const chordMidR = Math.hypot((1 + 0) / 2, (0 + 1) / 2);       // the straight chord's midpoint, 0.707 from the centre
+    check("680/J: driven — an arc between two cities 90° apart keeps its midpoint ON the sphere (lifted 5%), where the chord's midpoint sat 0.71 of the radius from the centre, inside the world",
+      pts.length >= 8 && pts.every(Boolean) && Math.abs(midR - 1.05) < 0.02 && chordMidR < 0.75, `mid radius ${midR.toFixed(3)}`);
+    const far = fn((lat, lon, rad) => (lon > 100 ? null : P3(lat, lon, rad)), { lat: 0, lon: 0 }, { lat: 0, lon: 180 }, { steps: 10 });
+    check("680/J: …and the segments the projector refuses (behind the limb) come back null, so the far half of a long arc is simply not drawn", far.some((p) => p === null) && far.some(Boolean));
+  }
+  // K · the canvas follows the viewport
+  const film = bodyOfIJ("renderFilm");
+  check("680/K: the film canvas follows the viewport — a ResizeObserver re-sizes both canvases and resets the transform, and `stopOpening` disconnects it",
+    /new ResizeObserver\(/.test(film) && /sizeFilm\(\)/.test(film) && /let vw = /.test(film) && /_openingResize\.disconnect\(\)/.test(bodyOfIJ("stopOpening")));
+  // the unlock line, said once
+  check("681/F3: a film that opens says so — `unlockLine` from opening.json rides the once-only scene aside with {film} replaced by the film's name",
+    /noteFilmUnlocks\(character, CONTENT/.test(src680ij) && /unlockLine/.test(src680ij) && /line\.replace\("\{film\}", n\)/.test(src680ij));
+  // Aevi's ruling 1 — the two titles wear the display face, and the missing name is gone
+  const css680 = readFileSync(join(root, "style.css"), "utf8");
+  check("680/ruling 1: `.world-arcs-head` and `.lore-title` use `var(--font)`, and no rule names the `--font-display` variable that never existed",
+    /\.world-arcs-head \{ font-family: var\(--font\);/.test(css680) && /\.lore-title \{ font-family: var\(--font\);/.test(css680) && !/var\(--font-display/.test(css680));
+  // Aevi's still-open item — the GM reads lore by the Library's skip rule
+  const stateSrc680 = readFileSync(join(root, "engine/state.js"), "utf8");
+  check("680/ruling 3: `loreToProse` skips what the Library skips (`libSkipKey`) — build notes and secret fields never reach the GM as lore",
+    /import \{ libSkipKey \} from ".\/library\.js"/.test(stateSrc680) && /!LORE_SKIP\.has\(k\) && !libSkipKey\(k\)/.test(stateSrc680));
+  {
+    const ST = await import("../engine/state.js");
+    const prose = ST.loreToProse(JSON.stringify({ name: "The Echo", _why: "BUILD NOTE: moved after SNG-427", about: "a river" }));
+    check("680/ruling 3: driven — an underscore field in a lore record is not rendered to the GM", /The Echo/.test(prose) && /a river/.test(prose) && !/BUILD NOTE/.test(prose), prose.slice(0, 120));
+  }
+  // the coda's nearest-place rung
+  {
+    const OPc = await import("../engine/films.js");
+    const locs = { here: { id: "here", worldPos: { colatitude: 60, longitude: 10 }, regionId: "r1" }, near: { id: "near", worldPos: { colatitude: 62, longitude: 12 } }, far: { id: "far", worldPos: { colatitude: 120, longitude: 100 } } };
+    const content = { greaterArcs: [
+      { id: "arc_far", scale: "world", stages: [{ stage: 1, publicFace: "the far face" }], places: ["far"] },
+      { id: "arc_near", scale: "regional", stages: [{ stage: 1, publicFace: "the near face" }], places: ["near"] },
+      { id: "arc_world", scale: "world", stages: [{ stage: 1, publicFace: "the world face" }] },
+    ], opening: { coda: { arcPreference: ["arc_world"] } } };
+    const pick = OPc.codaArc(content, { startId: "here", locations: locs });
+    check("680/coda: an arc whose `places` include a place within the region's frame is chosen NEAREST-FIRST, before the authored preference (Aevi 2026-10-06)",
+      pick?.arc?.id === "arc_near" && /nearest named place/.test(pick?.arcBy || ""), pick?.arcBy);
+    const none = OPc.codaArc({ ...content, greaterArcs: content.greaterArcs.filter((a) => a.id !== "arc_near") }, { startId: "here", locations: locs });
+    check("680/coda: …and a named place 60° off is not 'near' — the rung yields to the authored preference rather than crossing the world for it",
+      none?.arc?.id === "arc_world" && /authored preference/.test(none?.arcBy || ""), none?.arcBy);
+  }
+}
+
 check("smoke: no checks are stranded after process.exit (dead tests report green forever)", (() => {
   const src = readFileSync(join(root, "tests/smoke.mjs"), "utf8");
   const after = src.slice(src.indexOf("process.exit(failures") + 1);

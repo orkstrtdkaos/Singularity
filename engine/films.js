@@ -334,6 +334,28 @@ export function filmFrame(w, h, { shrunk = 0, polar = 0, close = 0, margin = 10 
  *  was also not a RULE: the rule is `shotSeconds`, and a sum over it is a sum. Both callers do their own.
  */
 
+/* ═════ FL2 (Aevi, for Erik) · WHERE A LIT STATION'S THREAD LANDS ═════
+ * ✅ ERIK: *"when specific areas are being referenced from the poles, make sure the leader lines land on the actual spots on
+ * the map that correspond to the areas being discussed."* ✅ AEVI: *"`shot.landings` for that people first, else
+ * `ringSeats[people]`. The whole ring (24 lit, unlabelled) keeps its threads into the Crossing, because the Crossing IS the
+ * real spot that shot is about."* Pure — ids in, the places with their positions out — so the gate drives the same resolution
+ * the painter draws, and the painter cannot drift from the content. A place with no `worldPos` is left out, never guessed. */
+export function filmLandings(shot, people, { ringSeats = null, locations = null, whole = false } = {}) {
+  if (whole) return [];
+  const id = String(people || "");
+  const own = (Array.isArray(shot?.landings) ? shot.landings : []).filter((x) => x && String(x.from) === id).map((x) => String(x.place));
+  const seat = ringSeats && ringSeats[id] ? [String(ringSeats[id])] : [];
+  const ids = own.length ? own : seat;
+  const out = [];
+  for (const placeId of ids) {
+    const l = locations?.[placeId], w = l?.worldPos;
+    if (!w || !Number.isFinite(Number(w.colatitude)) || !Number.isFinite(Number(w.longitude))) continue;
+    out.push({ from: id, placeId, name: l.name || placeId, lat: Number(w.colatitude) - 90, lon: ((Number(w.longitude) + 540) % 360) - 180,
+      depth: Number(w.depth) || 0, kind: l.kind || null, tier: l.tier || null, seat: !own.length });
+  }
+  return out;
+}
+
 /* ═════ O3 · THE CODA'S THREE SUBSTITUTIONS ═════
  * ✅ AEVI: *"Take the nearest arc with a hinge, front or connection at or near that place, then fall back to
  * the nearest world-scale arc."* + *"Never the water by default."*

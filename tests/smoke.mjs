@@ -8980,6 +8980,7 @@ await (async () => {
      * Driven through `filmTargets` (the table is data) and anchored in the raster and the painter where the fault was. */
     {
       const FT35 = await import("../engine/films.js");
+      const WG35 = await import("../engine/worldglobe.js");
       const row = (v) => FT35.filmTargets(v, { index: 5, shrinkAt: 0 });
       check("35/G1: ⛔ the pops are ROWS — the net thins under the swarm (1 → 0.8), the pull and the grey carry into `middle_closes`, the ring and the pull fade through `lights_out`, the cutaway is a weight, and the others stay lit through `you`",
         row("swarm").net === 1 && row("swarm_ordered").net === 0.8
@@ -9085,6 +9086,48 @@ await (async () => {
         ["net", "swarm", "works"].every((k) => shot35.includes(`if (T.${k} > 0.01) draw${k[0].toUpperCase() + k.slice(1)}(T.${k});`))
         && /const drawAsh = \(alpha, \{ uu = u \} = \{\}\) => \{/.test(shot35) && /drawAsh\(1\);/.test(shot35)
         && (shot35.match(/const draw(Net|Swarm|Works|Ash) = \(alpha, /g) || []).length === 4);
+      /* ── FL1 · FL2 (Aevi's faces-and-landings order, for Erik) ── */
+      const C35 = await (await import("./headless_content.mjs")).loadContentHeadless();
+      const films35 = FT35.allFilms(C35);
+      check("FL1: ⛔ ONE HELPER, TWO CALLERS — `figurePortrait` owns the card's look order (kept → canon → the seeded `whois-` mint, never a new subject), the whois card calls it, and nothing else composes that order",
+        (src35.match(/^function figurePortrait\(known\) \{/mg) || []).length === 1
+        && /const fp = figurePortrait\(known\);/.test(src35)
+        && !/lookOf\(canonSubjectOf\(/.test(src35.slice(src35.indexOf("function showWhoIs"), src35.indexOf("\nfunction ", src35.indexOf("function showWhoIs") + 10)))
+        && (src35.match(/ensureImage\(\{ \.\.\.artRec, id: artSeed \}/g) || []).length === 1 && /return url \? \{ url, artSeed \} : null;/.test(src35));
+      check("FL1: ⛔ …and a figure shot shows that face — the LIFE portrait, in an arched inset beside the name card on the side away from the captions, fading in from u 0.25, present at the held frame under reduced motion, and a tap on it opens the card's lightbox",
+        /const fp = figurePortrait\(\{ id: who\.id, codexId: who\.id, label: who\.name,[\s\S]{0,400}?dead: false \}\);/.test(shot35)
+        && /const fade = reduced \? 1 : Math\.max\(0, Math\.min\(1, \(u - 0\.25\) \/ 0\.2\)\);/.test(shot35) && /const ph = Math\.round\(h \* 0\.22\), pw = Math\.round\(ph \* 0\.8\);/.test(shot35)
+        && /_filmPortraitHit = \{ x, y, w: pw, h: ph, url: fp\.url, label: who\.name \|\| "", artSeed: fp\.artSeed \};/.test(shot35)
+        && /openLightbox\(\[\{ url: hit\.url, caption: hit\.label, regen \}\]\);/.test(film35) && /if \(x >= hit\.x && x <= hit\.x \+ hit\.w && y >= hit\.y && y <= hit\.y \+ hit\.h\)/.test(film35));
+      check("FL2: ⛔ CONTENT — every `landings[].place` and every `ringSeats` value resolves to a place with a world position, every `from` is lit in its shot, and the twenty-four peoples each have a seat",
+        (() => { const seats = C35.opening?.ringSeats || {}; const locs = C35.locations || {};
+          const placed = (id) => !!locs[id]?.worldPos && Number.isFinite(Number(locs[id].worldPos.colatitude));
+          const bad = [];
+          for (const [p, id] of Object.entries(seats)) if (!placed(id)) bad.push(`seat ${p} → ${id}`);
+          for (const d of films35) for (const sh of FT35.filmReel(d).shots) for (const L of (sh.landings || [])) {
+            if (!placed(L.place)) bad.push(`${d.id}#${sh.id}: ${L.place}`);
+            if (!(sh.traditions || []).includes(L.from)) bad.push(`${d.id}#${sh.id}: ${L.from} not lit`);
+          }
+          return Object.keys(seats).length === 24 && bad.length === 0; })(),
+        (() => { let n = 0; for (const d of films35) for (const sh of FT35.filmReel(d).shots) n += (sh.landings || []).length; return `${n} landings authored, ${Object.keys(C35.opening?.ringSeats || {}).length} seats`; })());
+      check("FL2: ⛔ DRIVEN — on `film_foothills_25` the four peoples land where their places ARE: the landing's lat/lon is the place's own world position, projected on the same frame to the same pixel; a people with no landing falls back to its seat; the whole ring lands nowhere",
+        (() => { const d = films35.find((x) => x.id === "film_foothills"); if (!d) return false;
+          const sh = FT35.filmReel(d).shots.find((x) => x.id === "film_foothills_25"); if (!sh) return false;
+          const opts = { ringSeats: C35.opening?.ringSeats || null, locations: C35.locations || null };
+          const want = { rootkin: "greenmarch", ashwarden: "greyhearth", numinous: "thinwater", enginewright: "gearsflat" };
+          const fr = FT35.filmFrame(900, 560, { shrunk: 1, polar: 1 }), view = { yaw: 0, pitch: -90, r: fr.r, cx: fr.cx, cy: fr.cy };
+          const ok = Object.entries(want).every(([people, place]) => { const L = FT35.filmLandings(sh, people, opts); if (L.length !== 1 || L[0].placeId !== place) return false;
+            const w = C35.locations[place].worldPos; const a = WG35.project(L[0].lon, L[0].lat, view, 1.002), b = WG35.project(((Number(w.longitude) + 540) % 360) - 180, Number(w.colatitude) - 90, view, 1.002);
+            return !!a && !!b && Math.hypot(a.x - b.x, a.y - b.y) < 1; });
+          const seat = FT35.filmLandings({ landings: [] }, "seraphic", opts);
+          return ok && seat.length === 1 && seat[0].seat === true && seat[0].placeId === String(C35.opening.ringSeats.seraphic) && FT35.filmLandings(sh, "rootkin", { ...opts, whole: true }).length === 0; })());
+      check("FL2: ⛔ …and the painter draws what the resolver says — an `opArc` from the station down to the ground in the people's colour, the glyph and glow and one expanding ring and the name at the landing, the last stretch dashed below ground, a chevron at the limb behind the world, and the thread's clock is the film's",
+        /filmLandings\(shot, pl\.id, \{ ringSeats: CONTENT\.opening\?\.ringSeats \|\| null, locations: CONTENT\.locations \|\| null, whole \}\)/.test(shot35)
+        && /opArc\(P, \{ lat: pl\.lat, lon: pl\.lon \}, \{ lat: L\.lat, lon: L\.lon \}, \{ lift: 0\.03, steps: 18, rA: RING_UP, rB: 1\.0 \}\)/.test(shot35)
+        && /ctx\.arc\(q\.x, q\.y, 6 \+ 26 \* f, 0, Math\.PI \* 2\)/.test(shot35) && /drawGlyph\(ctx, glyphFor\(\{ kind: L\.kind, t: L\.tier \}\)/.test(shot35)
+        && /if \(L\.depth < 0 && q\) \{/.test(shot35) && /ctx\.setLineDash\(\[4, 5\]\); opStroke\(ctx, pts\.slice\(cutAt - 1, n\)/.test(shot35)
+        && /behind the world: the thread ends at the limb/.test(shot35) && /if \(!_filmLandSince\.has\(key\)\) _filmLandSince\.set\(key, elapsed\);/.test(shot35)
+        && /_filmLandSince\.clear\(\);/.test(film35) && /if \(!lands\.length\) \{/.test(shot35));
       check("35/E2: ⛔ Escape on the title card LEAVES — `skip()` landed on the card it was already on, so nothing happened",
         /e\.key === "Escape"\) \{ e\.preventDefault\(\); if \(atTitle\(\)\) end\(\); else skip\(\); \}/.test(film35));
     }
@@ -14969,8 +15012,11 @@ await (async () => {
     // ⚠️ RE-AIMED (CCODE-171). It pinned `whois-${seed}` and the raw `codexId || id || label` fallback. The
     // property is that the seed is STABLE and derived from an id rather than a display name — which is now
     // MORE true, not less: it resolves to the canonical person first and keeps the old chain as fallback.
+    // ✅ FL1 (CCODE-654): the seed is built in `figurePortrait` now — ONE helper the card and the film both call
+    const helper364 = appSrc364.slice(appSrc364.indexOf("function figurePortrait("), appSrc364.indexOf("function rosterFigureOf("));
     check("364: …seeded on the stable id so the same figure keeps the same face",
-      /seedKey: artSeed/.test(card) && /canonicalPersonId\(character, \{ entityId: known\.codexId \|\| known\.id/.test(card) && /known\.codexId \|\| known\.id \|\| known\.label/.test(card));
+      /const fp = figurePortrait\(known\);/.test(card) && /seedKey: artSeed/.test(helper364)
+      && /canonicalPersonId\(character, \{ entityId: known\.codexId \|\| known\.id/.test(helper364) && /known\.codexId \|\| known\.id \|\| known\.label/.test(helper364));
     check("364: …and whoIs returns that id, so the seed survives a rename", /kind: "figure", id, lines/.test(whoisSrc));
     // A card taller than the phone is the SNG-353 lesson, one screen over.
     check("364: …and the card scrolls, with the portrait and the text in the same scroll region",
@@ -18109,7 +18155,8 @@ await (async () => {
   // ⚠️ ASSERT THE USE, NOT THE PRESENCE. My first version checked that the resolver was CALLED — so cutting
   // its result out of the seed left the gate green while the bug came straight back.
   check("CCODE-171: the whois card seeds on the canonical identity, not the topic id",
-    /const canonId = canonicalPersonId\(character, \{ entityId: known\.codexId \|\| known\.id, label: known\.label \}\);/.test(src171)
+    // ✅ FL1 (CCODE-654): in `figurePortrait`, guarded — the opening plays before a character exists
+    /const canonId = character \? canonicalPersonId\(character, \{ entityId: known\.codexId \|\| known\.id, label: known\.label \}\) : null;/.test(src171)
     && /const seedKey171 = canonId \|\| seed;/.test(src171)
     && /`whois-death-\$\{seedKey171\}` : `whois-\$\{seedKey171\}`/.test(src171));
   check("CCODE-171: and the codex page asks the same question, through the same helper",

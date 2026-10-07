@@ -54,7 +54,7 @@ import { mapStateOf, mapStateWord, placeAllows } from "./engine/mapstate.js";
 import { mapHolds, holdMarker } from "./engine/mapholds.js";
 // ⛔ SNG-680: the film is DATA. Not one of its words is written in this file.
 import { filmReel, openingReel, shotSeconds, codaShots, shouldAutoplayOpening,
-  filmsFor, noteFilmUnlocks, sealedNames, cardTitle, filmTargets, filmEase, filmFrame } from "./engine/films.js";
+  filmsFor, noteFilmUnlocks, sealedNames, cardTitle, filmTargets, filmEase, filmFrame, filmLandings } from "./engine/films.js";
 import { arcReachesRegion } from "./engine/arceffects.js";   // M3: open framed on what the player knows   // M2/D1: one table, one collision space
 import { decodeTerrain, sampleAt, colorAt, unproject, project, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, globeClickAction, REGION_FRAME_DEG, regionVoteAt, worldRoadRoutes, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, makePolarBase, regionExtent, bendRoad, roadNetwork, clipToFrame, routeRoads, makeGroundCost, GROUND_COST, fineWindowBox } from "./engine/worldglobe.js";
 // ⛔ ROUND 4 — whose ground is this, as things stand today. `realms.js` resolves the SAVE (losses, growth,
@@ -208,7 +208,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.22.9";
+const APP_VERSION = "2.22.10";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -544,46 +544,11 @@ function showWhoIs(known) {
   let whoPortrait = "";
   try {
     if (known.kind === "figure" || known.kind === "person" || known.kind === "npc") {
-      const seed = known.codexId || known.id || known.label;
-      // ⛔ NOT `lines[0]` — THAT IS THE TIER LINE. It reads "heroic — a name in their own country": a
-      // statement about RENOWN with nothing in it about a face, so every figure was drawn from a sentence
-      // about fame and came back as the same person. Feed the portrait what a portrait needs: an authored
-      // appearance if one exists, the figure's PEOPLE if not (SNG-367's layer, which reached the NPC path
-      // and not this one), and the role as what they DO rather than as what they look like.
-      const aesW = aestheticFor(known, CONTENT.visualAesthetics);   // SNG-435 §C3
-      // ⛔ SNG-399b — A DEAD FIGURE IS DRAWN FROM THEIR AUTHORED DEATH, NOT THEIR LIFE. Erik: "some
-      // characters are dying… I thought that was supposed to trigger a battle scene image?" The prompt is
-      // a STRING Aevi wrote, not a URL, and it is preferred over the living portrait the moment the world
-      // records the death. ⚠️ SEEDED SEPARATELY (`whois-death-`), so the end is its own stable image and
-      // minting it never overwrites the face they had while alive — both remain reachable.
-      const dyingArt = known.dead && known.deathAppearance ? String(known.deathAppearance) : null;
-      // ⛔ CCODE-171: ONE PERSON, ONE SEED. This read the codex TOPIC id, while the portrait path reads the
-      // REGISTRY id — so Mara Wells was `water-keeper` here and `mara-wells` there, and the same woman had
-      // two faces and two sets of kept looks. Five people on Erik's own save. Resolved to one identity now;
-      // someone the registry does not know keeps their own seed, which is what stops it over-merging.
-      const canonId = canonicalPersonId(character, { entityId: known.codexId || known.id, label: known.label });
-      const seedKey171 = canonId || seed;
-      const artSeed = dyingArt ? `whois-death-${seedKey171}` : `whois-${seedKey171}`;
-      // ⛔ SNG-401 (Erik, testing): A PICTURE THE PLAYER CHOSE WINS. This card re-mints from a stable seed
-      // every time it opens, so without this the chosen one would be drawn away again on the next open —
-      // and surviving is the entire point of Keep.
-      // ⛔ SNG-576: a player's OWN locked look wins at their table; beneath it is the WORLD'S look, not a
-    // generator. `lookOf` owns the order so these three surfaces cannot disagree about one person again —
-    // which is SNG-402's finding exactly: "the drift is BETWEEN pictures of the same subject".
-    const chosen = lookOf(canonSubjectOf(artSeed), { mine: character?.figureImages?.[artSeed] || null }).url;
-      // ⛔ CCODE-173: ONE RECORD, so the card and the Draw-again button describe the same person. This built
-      // its own synthetic object while the re-roll used the roster figure — two records, two fields, two
-      // people. `figureArtRecord` is now the only description either of them draws from.
-      const rosterFig = rosterFigureOf(artSeed);
-      const artRec = figureArtRecord(rosterFig, { dead: !!known.dead })
-        || { id: artSeed, name: known.label, role: known.role || "", gender: known.gender || undefined, appearance: dyingArt || known.appearance || "" };
-      const url = chosen || ensureImage({ ...artRec, id: artSeed },
-        "npc", { ratingLevel: viewerRatingLevel(), seedKey: artSeed, isMinor: false, promptOpts: { aesthetic: aesW, keeps: keepsForSubject("figure", artSeed) } });
-      // ⛔ Erik: "the popups that read the codex entry don't have an image popup at all." Correct — this img
-      // carried no `data-lightbox`, so of the nine places a picture appears this was the one that could not
-      // be opened. It is also the one that needs it most: a world figure is someone you only ever meet in a
-      // tick digest, so this card is their entire presence.
-      if (url) whoPortrait = `<img class="whois-portrait" src="${esc(url)}" alt="${esc(known.label)}" data-lightbox="figure" data-regen-kind="figure" data-regen-subject="${esc(artSeed)}" loading="lazy" title="Open it — and draw them again if this is not them" style="width:100%; max-height:240px; object-fit:cover; object-position:center 18%; border-radius:6px; margin-bottom:8px; cursor:zoom-in">`;
+      // ✅ FL1 (Aevi): ONE HELPER, TWO CALLERS. The film's figure shot shows THIS picture — `figurePortrait` owns the order
+      // (the kept look → the world's look → the seeded mint on `whois-<canonId>`), so the card and the film cannot drift apart.
+      const fp = figurePortrait(known);
+      const url = fp?.url || null, artSeed = fp?.artSeed || `whois-${known.codexId || known.id || known.label}`;
+      if (url) whoPortrait = `<img class="whois-portrait" src="${esc(url)}" alt="${esc(known.label)}" data-lightbox="figure" data-regen-kind="figure" data-regen-subject="${esc(artSeed)}" loading="lazy" title="Open it — and draw them again if this is not them" style="width:100%; max-height:240px; object-fit:cover; object-position:center 18%; border-radius:6px; margin-bottom:8px; cursor:zoom-in">`
     }
     // ⛔ CCODE-395: and the three new kinds get the picture their own record already draws — a place its authored look (CCODE-391), a
     // creature its bestiary look, a thing its own description. Same seeds as everywhere else, so the card and the banner agree.
@@ -1786,6 +1751,49 @@ function bestiaryOf(id) {
 
 /** SNG-401 §1: a whois portrait is seeded `whois-<figureId>` (or `whois-death-<figureId>` once the world
  *  records their death), and that seed is the only handle the card has. Map it back to the person. */
+/** ⛔ FL1 (Aevi, for Erik): *"we could use images the game has already generated when these characters are talked about in the
+ *  films."* ONE HELPER, TWO CALLERS — the whois card and a film's figure shot ask for the SAME picture of a person, in the card's
+ *  order since SNG-576: the player's own kept look, the world's canon look, else the seeded mint on `whois-<canonId>` — the exact
+ *  picture the card asked for, never a new subject (SNG-402: "the drift is BETWEEN pictures of the same subject"). Two copies of
+ *  this precedence would drift; this is the only one.
+ *  ⛑ Carried from the card, where each line was earned: SNG-364 (a figure met only in the tick digest needs a face most);
+ *  SNG-399b (a dead figure is drawn from the authored death, seeded SEPARATELY on `whois-death-` so the end never overwrites the
+ *  life); CCODE-171 (one person, one seed: the registry's canonical id, else the codex id); CCODE-173 (one record — `figureArtRecord`
+ *  — so the card and Draw-again describe the same person); SNG-435 §C3 (the people's aesthetic leads the prompt).
+ *  `known`: { id, codexId?, label, role?, gender?, appearance?, tradition?, dead?, deathAppearance? }. A film passes `dead: false`
+ *  always — the films describe who someone IS. → { url, artSeed } or null: art off with nothing cached, or no record, is the
+ *  name card alone. Never throws into a painter. */
+function figurePortrait(known) {
+  if (!known || !(known.label || known.id)) return null;
+  try {
+    const seed = known.codexId || known.id || known.label;
+    const aesW = aestheticFor(known, CONTENT.visualAesthetics);
+    const dyingArt = known.dead && known.deathAppearance ? String(known.deathAppearance) : null;
+    const canonId = character ? canonicalPersonId(character, { entityId: known.codexId || known.id, label: known.label }) : null;
+    const seedKey171 = canonId || seed;
+    const artSeed = dyingArt ? `whois-death-${seedKey171}` : `whois-${seedKey171}`;
+    const chosen = lookOf(canonSubjectOf(artSeed), { mine: character?.figureImages?.[artSeed] || null }).url;
+    const rosterFig = rosterFigureOf(artSeed);
+    const artRec = figureArtRecord(rosterFig, { dead: !!known.dead })
+      || { id: artSeed, name: known.label, role: known.role || "", gender: known.gender || undefined, appearance: dyingArt || known.appearance || "" };
+    const url = chosen || ensureImage({ ...artRec, id: artSeed },
+      "npc", { ratingLevel: viewerRatingLevel(), seedKey: artSeed, isMinor: false, promptOpts: { aesthetic: aesW, keeps: keepsForSubject("figure", artSeed) } });
+    return url ? { url, artSeed } : null;
+  } catch (err) { console.warn("[portrait]", err?.message); return null; }
+}
+/** ⛑ the film's portrait pictures, one Image per url, drawn once loaded; `crossOrigin` so a CORS-served picture does not taint the stage */
+const _filmPortraitImages = new Map();
+function filmPortraitImage(url) {
+  let img = _filmPortraitImages.get(url);
+  if (!img) { img = new Image(); img.crossOrigin = "anonymous"; img.decoding = "async"; img.src = url; _filmPortraitImages.set(url, img); }
+  return img;
+}
+/** the portrait inset's box on the stage, in CSS px, when a figure shot drew one — the tap target the stage's click reads */
+let _filmPortraitHit = null;
+/** ✅ FL2 (G): a landing's clock is the FILM's — `people|place` → the film second it first appeared — so a thread still drawn in
+ *  the next shot stays drawn rather than re-growing. Cleared when a film starts. */
+const _filmLandSince = new Map();
+
 function rosterFigureOf(seed) {
   const id = String(seed || "").replace(/^whois-(?:death-)?/, "");
   return (worldRoster(character?.worldState || {}, CONTENT) || []).find(f => f.id === id) || null;
@@ -7987,6 +7995,7 @@ function paintOpeningCutaway(ctx, { w = 900, h = 560, u = 0, capped = false, cx:
 function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 560, startId = null, u = 1, index = 0, cur = null } = {}) {
   const V = String(shot?.visual || "earth");
   const coda = V === "zoom_to_start" || V === "nearest_arc";
+  _filmPortraitHit = null;   // ✅ FL1: the portrait's tap target — set only by a figure shot that drew one this frame
   /* ══ SNG-681 · THE SHOTS THAT NAME WHAT THEY ARE ABOUT ══
    * ✅ *"Each shot names a `visual` and the key it needs. All are drawn on the game's own globe."* So the
    * subject is resolved ONCE here, from content, and the cases below read it. An id that does not resolve
@@ -8383,10 +8392,69 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
       if (!p) return;
       const on = lit(pl) ? arrive : 0.22;
       if (lit(pl)) {
-        // the thread in toward the middle
-        ctx.save(); ctx.globalAlpha = 0.5 * arrive;
-        ctx.strokeStyle = pl.ink || `hsla(${pl.hue},72%,66%,1)`; ctx.lineWidth = 1.1;
-        ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(frame.cx, frame.cy); ctx.stroke(); ctx.restore();
+        /* ✅ FL2 (Aevi, for Erik): A THREAD LANDS ON THE REAL PLACE. `shot.landings` for this people first, else its seat
+         * (`ringSeats`, the region-tier home of its reach); the whole ring keeps its threads into the Crossing, which IS the real
+         * spot that shot is about. The thread is an `opArc` from the station (`RING_UP`) down to the ground (1.0) in the people's
+         * colour under `lighter`, drawn out across its own clock so it is seen to travel and arrive. The landing is the map's own
+         * glyph — the mark the player will click — a glow in the people's colour, one ring that expands as the thread arrives and
+         * fades over about 0.6 s, and the place's name, small, fading under the caption band. Below ground the last stretch is
+         * dashed in the buried style (SNG-682 W5's rule, on the film tier). Behind the world the thread ends at the limb on the
+         * place's bearing with a small chevron — never on the wrong side. (G) a landing's clock is the FILM's, so a thread still
+         * drawn in the next shot stays drawn rather than re-growing. */
+        const lands = filmLandings(shot, pl.id, { ringSeats: CONTENT.opening?.ringSeats || null, locations: CONTENT.locations || null, whole });
+        const ink = pl.ink || `hsla(${pl.hue},72%,66%,1)`;
+        if (!lands.length) {
+          // the thread in toward the middle
+          ctx.save(); ctx.globalAlpha = 0.5 * arrive;
+          ctx.strokeStyle = ink; ctx.lineWidth = 1.1;
+          ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(frame.cx, frame.cy); ctx.stroke(); ctx.restore();
+        }
+        for (const L of lands) {
+          const key = `${pl.id}|${L.placeId}`;
+          if (!_filmLandSince.has(key)) _filmLandSince.set(key, elapsed);
+          const travel = Math.max(0.5, secs(shot) * 0.66);
+          const tr = reduced ? 1 : Math.max(0, Math.min(1, (elapsed - _filmLandSince.get(key)) / travel));
+          const pts = opArc(P, { lat: pl.lat, lon: pl.lon }, { lat: L.lat, lon: L.lon }, { lift: 0.03, steps: 18, rA: RING_UP, rB: 1.0 });
+          const n = Math.max(2, Math.ceil(pts.length * tr));
+          const q = P(L.lat, L.lon, 1.002);
+          ctx.save(); ctx.globalCompositeOperation = "lighter"; ctx.globalAlpha = 0.75;
+          if (L.depth < 0 && q) {
+            const cutAt = Math.max(2, Math.floor(n * 0.7));   // the last stretch is buried
+            opStroke(ctx, pts.slice(0, cutAt), ink, 1.4);
+            ctx.setLineDash([4, 5]); opStroke(ctx, pts.slice(cutAt - 1, n), "rgba(122,106,184,0.95)", 1.2); ctx.setLineDash([]);
+          } else opStroke(ctx, pts.slice(0, n), ink, 1.4);
+          ctx.restore();
+          if (!q) {
+            // behind the world: the thread ends at the limb on the place's bearing, with a chevron
+            const seen = pts.slice(0, n).filter(Boolean);
+            if (seen.length >= 2 && tr >= 0.98) {
+              const e2 = seen[seen.length - 1], e1 = seen[seen.length - 2];
+              const ang = Math.atan2(e2[1] - e1[1], e2[0] - e1[0]);
+              ctx.save(); ctx.strokeStyle = ink; ctx.lineWidth = 1.4; ctx.globalAlpha = 0.9;
+              ctx.beginPath();
+              ctx.moveTo(e2[0] - 7 * Math.cos(ang - 0.6), e2[1] - 7 * Math.sin(ang - 0.6)); ctx.lineTo(e2[0], e2[1]);
+              ctx.lineTo(e2[0] - 7 * Math.cos(ang + 0.6), e2[1] - 7 * Math.sin(ang + 0.6)); ctx.stroke(); ctx.restore();
+            }
+            continue;
+          }
+          if (tr >= 0.98) {
+            const pulse = 1 + 0.25 * Math.sin(u * Math.PI * 4);
+            ctx.save(); ctx.globalCompositeOperation = "lighter";
+            opGlow(ctx, q.x, q.y, 18 * pulse, ink, `hsla(${pl.hue},82%,${pl.lit}%,0)`);
+            const since = elapsed - (_filmLandSince.get(key) + travel);
+            if (since >= 0 && since < 0.6) {   // one ring, expanding from the spot as the thread arrives
+              const f = since / 0.6;
+              ctx.globalAlpha = 1 - f; ctx.strokeStyle = ink; ctx.lineWidth = 1.5;
+              ctx.beginPath(); ctx.arc(q.x, q.y, 6 + 26 * f, 0, Math.PI * 2); ctx.stroke();
+            }
+            ctx.restore();
+            try { drawGlyph(ctx, glyphFor({ kind: L.kind, t: L.tier }) || "town", q.x, q.y, 12, { ink: "#fdf6e6" }); }
+            catch { ctx.fillStyle = "#fdf6e6"; ctx.beginPath(); ctx.arc(q.x, q.y, 3, 0, Math.PI * 2); ctx.fill(); }
+            ctx.save(); ctx.font = opFont(12, "600"); ctx.textAlign = "left"; ctx.textBaseline = "middle";
+            ctx.shadowColor = "rgba(0,0,0,0.9)"; ctx.shadowBlur = 8; ctx.fillStyle = "rgba(240,238,230,0.92)";
+            ctx.globalAlpha = q.y > h - 190 ? 0.35 : 1; ctx.fillText(String(L.name), q.x + 11, q.y - 9); ctx.restore();
+          }
+        }
       }
       opGlow(ctx, p.x, p.y, lit(pl) ? 20 * arrive : 8, pl.ink || `hsla(${pl.hue},82%,${pl.lit}%,${0.85 * on})`, `hsla(${pl.hue},82%,${pl.lit}%,0)`);
       ctx.globalAlpha = on;
@@ -8469,6 +8537,35 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
     if (subject?.kind === "place") paintNameCard(ctx, { name: subject.loc?.name || null, kicker: shot?.movementName || null, w, h, u });
     if (subject?.kind === "figure" && subject.who) {
       paintNameCard(ctx, { name: subject.who.name || null, kicker: shot?.movementName || null, title: filmCardTitle(subject.who), w, h, u });
+      /* ✅ FL1 (Aevi): THE FACE THE PLAYER HAS ALREADY SEEN — the whois card's own picture through the one helper, the life
+       * portrait always, never a new mint of a new subject. A framed inset beside the name card, on the side away from the
+       * captions, about 22% of the frame's height, with a thin rule in the people's colour; it fades in after the globe has
+       * turned to the home (u 0.25 → 0.45), is present at the held frame under reduced motion, and a tap opens the card's lightbox.
+       * Art off, or no picture yet: the shot is the name card it was. */
+      const who = subject.who;
+      const fp = figurePortrait({ id: who.id, codexId: who.id, label: who.name, role: who.role, gender: who.gender || who.pronouns,
+        appearance: who.appearance || who.imagePrompt || who.form || "", tradition: who.tradition, kind: "figure", dead: false });
+      const img = fp?.url ? filmPortraitImage(fp.url) : null;
+      if (img && img.complete && img.naturalWidth > 0) {
+        const fade = reduced ? 1 : Math.max(0, Math.min(1, (u - 0.25) / 0.2));
+        if (fade > 0) {
+          const ph = Math.round(h * 0.22), pw = Math.round(ph * 0.8);
+          const x = w - pw - 28, y = h - 240 - ph + 12;
+          const arch = () => { ctx.beginPath(); ctx.moveTo(x, y + pw / 2); ctx.arc(x + pw / 2, y + pw / 2, pw / 2, Math.PI, 0); ctx.lineTo(x + pw, y + ph); ctx.lineTo(x, y + ph); ctx.closePath(); };
+          const pole = openingPoles().find((q) => q.id === who.tradition) || null;
+          const rule = pole ? (pole.ink || `hsla(${pole.hue},72%,66%,1)`) : "rgba(226,232,246,0.7)";
+          ctx.save(); ctx.globalAlpha = fade;
+          ctx.save(); arch(); ctx.clip();
+          const s = Math.max(pw / img.naturalWidth, ph / img.naturalHeight);   // cover, the crown kept (object-position 18%)
+          const dw = img.naturalWidth * s, dh = img.naturalHeight * s;
+          ctx.drawImage(img, x + (pw - dw) / 2, y + (ph - dh) * 0.18, dw, dh);
+          ctx.restore();
+          ctx.shadowColor = "rgba(0,0,0,0.85)"; ctx.shadowBlur = 14;
+          ctx.strokeStyle = rule; ctx.lineWidth = 1.2; arch(); ctx.stroke();
+          ctx.restore();
+          _filmPortraitHit = { x, y, w: pw, h: ph, url: fp.url, label: who.name || "", artSeed: fp.artSeed };
+        }
+      }
     }
   }
 
@@ -9186,6 +9283,7 @@ function renderFilm(doc, { mode = "film", after = null, startId = null } = {}) {
    * hidden for a minute does not snap when it returns; under reduced motion the frame IS the target (k = 1), and
    * the crossfade between stills stays exactly as it was. */
   let cur = null, lastFrameMs = 0;
+  _filmLandSince.clear();   // ✅ FL2 (G): the landings' clocks are the film's; a new film starts them afresh
   const shrinkAtF = reel.shots.findIndex((s) => s.visual === "shrink");
   const frameAt = (u) => {
     const now = nowMs();
@@ -9322,7 +9420,18 @@ function renderFilm(doc, { mode = "film", after = null, startId = null } = {}) {
   const skipBtn = document.getElementById("op-skip");
   if (skipBtn) skipBtn.onclick = (e) => { e.stopPropagation(); skip(); };
   const stage = document.querySelector(".op-stage");
-  if (stage) stage.onclick = () => next();   // a tap anywhere is Next
+  if (stage) stage.onclick = (e) => {   // a tap anywhere is Next — except on the portrait, which opens the card's lightbox (FL1)
+    const hit = _filmPortraitHit;
+    if (hit && e && Number.isFinite(e.clientX)) {
+      const r = stage.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
+      if (x >= hit.x && x <= hit.x + hit.w && y >= hit.y && y <= hit.y + hit.h) {
+        const regen = REGEN_KINDS.figure ? { kind: "figure", subjectId: hit.artSeed, label: REGEN_KINDS.figure.label(hit.artSeed), prompt: _regenPrompts.get(String(hit.url)) || null } : null;
+        openLightbox([{ url: hit.url, caption: hit.label, regen }]);
+        return;
+      }
+    }
+    next();
+  };
 
   stopOpening();
   _openingKeys = (e) => {

@@ -4,12 +4,48 @@
  "kind": "world_structure",
  "note": "SNG-082 — TERRAIN data so the world map can render actual terrestrial features instead of nodes on a dark panel (Erik 2026-07-12: 'especially if the background was an actual map with terrestrial features'). Data-driven, NOT an authored image: a region's terrain, elevation, palette, features and water are DERIVED from its dispositional identity, so a BATCH-9-generated location automatically inherits the right terrain. Authored by Aevi.",
  "renderGuidance": {
-  "regionShape": "Compute a hull/voronoi from each region's locations' map.x/y and fill it with the region's palette. Region boundaries need not be crisp — dispositional space has soft edges.",
+  "_what": "How the GROUND maps draw what the old region diagram used to draw. The diagram is gone (CCODE-646/647); every region map is now real terrain, one region at a time. Rewritten 2026-10-07 for that surface; the diagram-era text is kept below as `_diagramEra_20261007`.",
+  "regionShape": "No hull and no voronoi: a region's shape is its ground, as the terrain and the region vote give it. Edges stay soft because the vote is soft.",
   "water": "Draw each region's water features. The Echo River (valley) and THE SEA (the_feeling_coast) are the map's two great water landmarks.",
   "roads": "Location `connections` ARE the roads. The Axis Gate's twelve roads are the map's spine — draw them heaviest.",
   "elevation": "Use it for hatching/relief. The Ascent is the highest point; the Umbral Depths are BELOW the map.",
-  "honestFailures": "Three regions must LOOK wrong, deliberately: the_pattern_reach (resists mapping), the_veiled_reach (the map is lying), the_numinous_reach (the cartography loses confidence). Do not clean these up — the failure is the content.",
-  "growth": "The Blaze, the Churn Edge, the Scouring and the Ceaseless are all EXPANDING. If cheap, show it."
+  "honestFailures": {
+   "_why": "Three regions must LOOK wrong on their own maps, on purpose. The failure is the content: do not clean it up. Place marks always stay true and every place stays reachable and routable (Erik, 2026-10-07: you should be able to route a journey to any place). What fails is the drawing around them, never the way there.",
+   "the_pattern_reach": {
+    "treatment": "jitter",
+    "how": "Contours, coast and road lines are redrawn with a small seeded wobble that changes each time the map is OPENED (not each frame), so the map never draws the same twice. Marks and labels do not move.",
+    "say": "The lines here will not hold still."
+   },
+   "the_veiled_reach": {
+    "treatment": "decoy",
+    "how": "Each time the map is opened, one extra road is drawn exactly like a real one, between two places that have no road. It is never routed over, never a place's only way in, and never the same road twice running.",
+    "say": "Not everything drawn here is so."
+   },
+   "the_numinous_reach": {
+    "treatment": "fade",
+    "how": "Confidence falls with distance from the region's settled middle: past about 60% of the frame, contours thin and stop, coast and roads go to dashes and then end, labels set in italic, and a soft vignette closes the edge. Marks stay.",
+    "say": "The survey gives out here."
+   }
+  },
+  "growth": {
+   "_why": "Four places are EXPANDING. On their region map and their local map, show it; at world scale, nothing.",
+   "places": [
+    "the_blaze",
+    "the_churn_edge",
+    "the_scouring",
+    "the_ceaseless"
+   ],
+   "how": "A dashed outer edge a little beyond the place's drawn extent, with a faint hatch facing outward.",
+   "say": "{name} is spreading."
+  },
+  "_diagramEra_20261007": {
+   "regionShape": "Compute a hull/voronoi from each region's locations' map.x/y and fill it with the region's palette. Region boundaries need not be crisp — dispositional space has soft edges.",
+   "water": "Draw each region's water features. The Echo River (valley) and THE SEA (the_feeling_coast) are the map's two great water landmarks.",
+   "roads": "Location `connections` ARE the roads. The Axis Gate's twelve roads are the map's spine — draw them heaviest.",
+   "elevation": "Use it for hatching/relief. The Ascent is the highest point; the Umbral Depths are BELOW the map.",
+   "honestFailures": "Three regions must LOOK wrong, deliberately: the_pattern_reach (resists mapping), the_veiled_reach (the map is lying), the_numinous_reach (the cartography loses confidence). Do not clean these up — the failure is the content.",
+   "growth": "The Blaze, the Churn Edge, the Scouring and the Ceaseless are all EXPANDING. If cheap, show it."
+  }
  },
  "nearestTraditionWithinDeg": 15,
  "_nearestTraditionWithinDeg": "⛔ ERIK 2026-09-09: a person minted where no tradition is at home takes the one from the NEAREST place that has one — 'the nearest foothills or poles (by distance) unless the story narratively gives them a hook'. ⛑ 15°, AND THE HISTORY OF THIS NUMBER IS THE POINT. I set 45, measured that Millbrook and the Crossing got nothing, and RAISED it to 60 — reasoning from the two places ONE SAVE has been played in. ⚠️ Erik: \"I don't want to see 'the only two places play actually happens' ever again. This is a WHOLE WORLD, not a valley.\" And Aevi named the real fault: a cap that leaves Millbrook craftless was telling us MILLBROOK HAD NO HOME TRADITION, not that the cap was tight. ✅ She then authored all seventeen — 38 of 38 regions now have one and there are ZERO orphaned locations — so this rung is a dormant SAFETY NET rather than a workaround, and it should refuse a far import rather than reach for one. ⚑ The number came DOWN because the content came RIGHT.",

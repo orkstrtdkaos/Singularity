@@ -22037,6 +22037,122 @@
       },
       "kind": "village",
       "placeId": "gen-whistling-woman-post"
+    },
+    "gen-disputed-zone-left-branch-entrance": {
+      "radiusMetres": 200,
+      "extent": [
+        {
+          "id": "gen-disputed-zone-left-branch-entrance:built",
+          "name": null,
+          "kind": "built",
+          "bearing": 0,
+          "fromMetres": 0,
+          "radiusMetres": 60,
+          "generated": true
+        }
+      ],
+      "sites": [],
+      "generated": true,
+      "_measured": {
+        "uphillBearing": null,
+        "relief": null,
+        "riverBearing": null,
+        "riverDistanceDeg": null,
+        "roadsOut": [
+          {
+            "to": "millbrook",
+            "bearing": 168,
+            "mi": 146
+          }
+        ]
+      },
+      "kind": "gate",
+      "placeId": "gen-disputed-zone-left-branch-entrance"
+    },
+    "waystone": {
+      "radiusMetres": 260,
+      "extent": [
+        {
+          "id": "waystone:built",
+          "name": null,
+          "kind": "built",
+          "bearing": 0,
+          "fromMetres": 0,
+          "radiusMetres": 91,
+          "generated": true
+        }
+      ],
+      "sites": [],
+      "generated": true,
+      "_measured": {
+        "uphillBearing": null,
+        "relief": null,
+        "riverBearing": null,
+        "riverDistanceDeg": null,
+        "roadsOut": [
+          {
+            "to": "bedrock",
+            "bearing": -139,
+            "mi": 2455
+          },
+          {
+            "to": "the_long_span",
+            "bearing": -121,
+            "mi": 2116
+          }
+        ]
+      },
+      "kind": "bridge",
+      "placeId": "waystone"
+    },
+    "the_old_warden_post": {
+      "radiusMetres": 400,
+      "extent": [
+        {
+          "id": "the_old_warden_post:built",
+          "name": null,
+          "kind": "built",
+          "bearing": 0,
+          "fromMetres": 0,
+          "radiusMetres": 160,
+          "generated": true
+        },
+        {
+          "id": "the_old_warden_post:field0",
+          "name": null,
+          "kind": "field",
+          "bearing": 34.64357854425907,
+          "fromMetres": 241,
+          "radiusMetres": 146,
+          "generated": true
+        },
+        {
+          "id": "the_old_warden_post:wood0",
+          "name": null,
+          "kind": "wood",
+          "bearing": -134.72594675980508,
+          "fromMetres": 341,
+          "radiusMetres": 127,
+          "generated": true
+        }
+      ],
+      "sites": [],
+      "generated": true,
+      "_measured": {
+        "uphillBearing": null,
+        "relief": null,
+        "riverBearing": null,
+        "riverDistanceDeg": null,
+        "roadsOut": [
+          {
+            "to": "cairnhold",
+            "bearing": 44,
+            "mi": 108
+          }
+        ]
+      },
+      "kind": "hold",
+      "placeId": "the_old_warden_post"
     }
   }
 }

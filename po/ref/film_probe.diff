@@ -1,0 +1,151 @@
+diff --git a/app.js b/app.js
+index a7097dd..badf1e7 100644
+--- a/app.js
++++ b/app.js
+@@ -7251,5 +7251,7 @@ const OPENING_R_CAP = 210;        // ✅ her cut: "caps it at 210 px and holds f
+ const OPENING_RING_LAT = -35;
+ const OPENING_SAMPLES = 52000;    // the sample budget one frame of ground may spend
+-const OPENING_SUN_DEG = 62;       // how far round from the camera the sun stands — see `openingRaster`
++const OPENING_SUN_DEG = 62;
++let _opSun = [0.84, 0.36, 0.41];
++function opSunFor(front) { const side = [0.84, 0.36, 0.41], fr = [0.30, 0.42, 0.86]; const v = side.map((c, i) => c + (fr[i] - c) * front); const m = Math.hypot(...v); return v.map((c) => c / m); }       // how far round from the camera the sun stands — see `openingRaster`
+ 
+ /** Deterministic, so frame N of a shot agrees with frame N-1 and a still frame is a real frame of the film
+@@ -7403,5 +7405,5 @@ function paintOpeningAir(ctx, view, { sunward = -0.6, tint = "earth", strength =
+   halo.addColorStop(1, `rgba(${sky[0]},${sky[1]},${sky[2]},0)`);
+   ctx.fillStyle = halo;
+-  ctx.beginPath(); ctx.arc(cx, cy, r * 1.17, 0, Math.PI * 2); ctx.fill();
++  ctx.beginPath(); ctx.arc(cx, cy, r * 1.17, 0, Math.PI * 2); ctx.arc(cx, cy, r, 0, Math.PI * 2, true); ctx.fill("evenodd");
+   /* ⛔ THE AIRGLOW IS A STROKE ON THE LIMB, NOT A FILL OVER THE DISC. ⚠️ Twice I drew it as a radial
+    * gradient centred on a point out at the limb — and a radial gradient paints its LAST STOP everywhere
+@@ -7412,8 +7414,8 @@ function paintOpeningAir(ctx, view, { sunward = -0.6, tint = "earth", strength =
+   ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.clip();
+   const a0 = Math.PI * sunward - Math.PI * 0.62, a1 = Math.PI * sunward + Math.PI * 0.62;
+-  ctx.lineWidth = r * 0.085;
+-  ctx.strokeStyle = `rgba(206,232,255,${0.5 * strength})`;
++  ctx.lineWidth = r * 0.03;
++  ctx.strokeStyle = `rgba(206,232,255,${0.3 * strength})`;
+   ctx.shadowColor = `rgba(${sky[0] + 70},${sky[1] + 60},255,${0.9 * strength})`;
+-  ctx.shadowBlur = r * 0.14;
++  ctx.shadowBlur = r * 0.05;
+   ctx.beginPath(); ctx.arc(cx, cy, r * 0.99, a0, a1); ctx.stroke();
+   ctx.restore();
+@@ -7482,12 +7484,13 @@ function openingRaster(view, { exesa = 0, mode = "", lights = 1, w = 900, h = 56
+    * slideshow even when the frame rate was fine. */
+   const key = [Math.round(view.yaw * 2), Math.round(view.pitch), Math.round(view.r), Math.round(view.cx), Math.round(view.cy),
+-    exesa < 0.5 ? "e" : "x", mode, Math.round(lights * 4), step].join(",");
++    exesa < 0.5 ? "e" : "x", mode, Math.round(lights * 4), step, Math.round(_opSun[2] * 50)].join(",");
+   if (_opRaster && _opRaster.key === key) return _opRaster;
+   /* ⛑ ONE OFFSCREEN CANVAS, REUSED. The first cut allocated a fresh one for every re-raster — a canvas and
+    * an ImageData per turn step, for the garbage collector to find later. */
+-  const cv = _opRaster && _opRaster.cv && _opRaster.cv.width === gw && _opRaster.cv.height === gh
+-    ? _opRaster.cv : Object.assign(document.createElement("canvas"), { width: gw, height: gh });
++  const sw = Math.ceil(gw / step), sh = Math.ceil(gh / step);
++  const cv = _opRaster && _opRaster.cv && _opRaster.cv.width === sw && _opRaster.cv.height === sh
++    ? _opRaster.cv : Object.assign(document.createElement("canvas"), { width: sw, height: sh });
+   const c2 = cv.getContext("2d");
+-  const img = c2.createImageData(gw, gh);
++  const img = c2.createImageData(sw, sh);
+   const D = img.data;
+   const BW = bake.w, BH = bake.h, BR = bake.rgb, BM = bake.mask, BD = bake.dens || null;
+@@ -7514,5 +7517,6 @@ function openingRaster(view, { exesa = 0, mode = "", lights = 1, w = 900, h = 56
+          * with a thin warm band at the line between — which is the single thing that makes a drawn globe
+          * read as a photograph rather than a map. */
+-        const cosSun = Math.cos((p.lon - sun) * Math.PI / 180) * Math.cos(p.lat * Math.PI / 180 * 0.55);
++        const nx = (x + step / 2 - view.cx) / view.r, ny = -(y + step / 2 - view.cy) / view.r, nz = Math.sqrt(Math.max(0, 1 - nx * nx - ny * ny));
++        const cosSun = nx * _opSun[0] + ny * _opSun[1] + nz * _opSun[2];
+         /* ⚠️ A LIT SPHERE IS MOSTLY LIT. At (cosSun + 0.06) × 1.35 the brightest point of the visible face
+          * came out at 82% and everything fell away from there — a world under cloud, not under a sun. The
+@@ -7535,14 +7539,9 @@ function openingRaster(view, { exesa = 0, mode = "", lights = 1, w = 900, h = 56
+         if (mode === "lattice" && land) { const f = 0.3 + (BD ? BD[bi] / 255 : 0.5) * 0.9; r = 20 + 22 * f; g = 26 + 36 * f; b = 40 + 86 * f; }
+       }
+-      for (let dy = 0; dy < step && y + dy < y1; dy++) {
+-        for (let dx = 0; dx < step && x + dx < x1; dx++) {
+-          const i = (((y + dy) - y0) * gw + ((x + dx) - x0)) * 4;
+-          D[i] = r; D[i + 1] = g; D[i + 2] = b; D[i + 3] = a;
+-        }
+-      }
++      { const i = (((y - y0) / step) * sw + ((x - x0) / step)) * 4; D[i] = r; D[i + 1] = g; D[i + 2] = b; D[i + 3] = a; }
+     }
+   }
+   c2.putImageData(img, 0, 0);
+-  _opRaster = { key, cv, x0, y0 };
++  _opRaster = { key, cv, x0, y0, dw: sw * step, dh: sh * step };
+   return _opRaster;
+ }
+@@ -7559,5 +7558,7 @@ function opGround(ctx, view, opts) {
+     return;
+   }
+-  ctx.drawImage(R.cv, R.x0, R.y0);
++  ctx.save(); ctx.beginPath(); ctx.arc(view.cx, view.cy, view.r, 0, Math.PI * 2); ctx.clip();
++  ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = "high";
++  ctx.drawImage(R.cv, R.x0, R.y0, R.dw, R.dh); ctx.restore();
+ }
+ 
+@@ -7772,5 +7773,5 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
+    * as it is, so their world is the small one from their first frame; only the opening, which contains the
+    * shrink, shows the old size — and only before it. Same rule, read off the reel either way. */
+-  const shrunk = coda ? 1 : (shrinkAt < 0 ? 1 : (index >= shrinkAt ? 1 : 0));
++  const shrunk = coda ? 1 : (shrinkAt < 0 ? 1 : (index > shrinkAt ? 1 : index === shrinkAt ? Math.min(1, u * 1.4) : 0));
+   // the palette crosses on the shots that pay the cost: `drain` begins it, `shrink` completes it
+   const EX = { earth: 0, network: 0, network_runaway: 0, swarm: 0, swarm_ordered: 0.1, workings: 0.2, drain: 0.45, bores: 0.5 };
+@@ -7788,4 +7789,5 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
+   const view = openingGlobeView(w, h, { shrunk, yaw: yaw * (1 - polar) });
+   view.pitch = -14 + (-90 + 14) * polar;
++  _opSun = opSunFor(polar);
+   /* ⛑ AND THE COMPOSITION LIFTS AS IT TURNS. Pole-on, the ring is drawn clear of the limb at 1.3× the
+    * radius, which makes the picture half as tall again — and the captions live low (O4). Measured on the
+@@ -7807,5 +7809,5 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
+   // instead of being told. ✅ *"The old outline stays faint behind it, the size it was."*
+   if (shrunk) {
+-    const old = openingGlobeView(w, h, { shrunk: 0, yaw });
++    const old = openingGlobeView(w, h, { shrunk: 0, yaw }); old.cy = view.cy;
+     ctx.save(); ctx.globalAlpha = V === "shrink" ? 0.3 : 0.12;
+     ctx.strokeStyle = "#7f93c0"; ctx.lineWidth = 1;
+@@ -7859,5 +7861,5 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
+     // ⛑ the air's lit crescent stands where the sun does, or the glow and the light disagree
+     paintOpeningAir(ctx, frame, { tint: exesa < 0.5 ? "earth" : "exesa", strength: mode === "dark" ? 0.4 : 1,
+-      sunward: -0.5 - OPENING_SUN_DEG / 180 });
++      sunward: Math.atan2(-_opSun[1], _opSun[0]) / Math.PI });
+   }
+   const P = (lat, lon, rad) => project(lon, lat, frame, rad == null ? 1 : rad);
+@@ -7881,9 +7883,10 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
+     const sunLon = -frame.yaw + OPENING_SUN_DEG;
+     for (const [lon, lat, wgt] of (openingBake("earth")?.lights || [])) {
+-      const cosSun = Math.cos((lon - sunLon) * Math.PI / 180) * Math.cos(lat * Math.PI / 180 * 0.55);
+-      const night = Math.max(0, Math.min(1, (0.08 - cosSun) * 4));
+-      if (night <= 0) continue;
+       const p = P(lat, lon, 1.001);
+       if (!inFrame(p)) continue;
++      const qx = (p.x - frame.cx) / frame.r, qy = -(p.y - frame.cy) / frame.r, qz = Math.sqrt(Math.max(0, 1 - qx * qx - qy * qy));
++      const cosSun = qx * _opSun[0] + qy * _opSun[1] + qz * _opSun[2];
++      const night = Math.max(0, Math.min(1, (0.08 - cosSun) * 4));
++      if (night <= 0) continue;
+       /* ⛑ BRIGHT ENOUGH TO BE THE POINT OF THE SHOT. ✅ *"the lights of cities on the dark side"* — at a
+        * third of this they were a dusting nobody would name. Every city gets a dot; the big ones get a
+@@ -8216,7 +8219,7 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
+       const on = V === "poles_ignite" ? Math.max(0, Math.min(1, lit * poles.length - k)) : 1;
+       if (on <= 0) return;
+-      const p = P(pl.lat, pl.lon, 1.02);
++      const p = P(pl.lat, pl.lon, 1.3);
+       if (!inFrame(p)) return;
+-      opGlow(ctx, p.x, p.y, 22 * on, pl.ink || `hsla(${pl.hue},82%,${pl.lit}%,${0.8 * on})`, `hsla(${pl.hue},82%,${pl.lit}%,0)`);
++      opGlow(ctx, p.x, p.y, 12 * on, pl.ink || `hsla(${pl.hue},82%,${pl.lit}%,${0.8 * on})`, `hsla(${pl.hue},82%,${pl.lit}%,0)`);
+       ctx.globalAlpha = on;
+       ctx.fillStyle = pl.ink || `hsla(${pl.hue},90%,${Math.min(88, pl.lit + 26)}%,1)`;
+@@ -8233,4 +8236,5 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
+       const n24 = Math.max(1, poles.length);
+       nodes.forEach((nd, i) => {
++        if (i % 4) return;
+         const sector = Math.round((((nd.lon % 360) + 360) % 360) / (360 / n24)) % n24;
+         const best = poles[sector] || poles[0];
+@@ -8239,7 +8243,7 @@ function paintFilmShot(ctx, shot, { reel = null, reduced = false, w = 900, h = 5
+         const lat = nd.lat + (best.lat - nd.lat) * f;
+         const lon = nd.lon + ((((best.lon - nd.lon + 540) % 360) - 180)) * f;
+-        const a = P(nd.lat, nd.lon), b = P(lat, lon, 1.01), q = P(best.lat, best.lon, 1.02);
++        const a = P(nd.lat, nd.lon), b = P(lat, lon, 1.01), q = P(best.lat, best.lon, 1.3);
+         if (a && q) {
+-          ctx.save(); ctx.globalAlpha = 0.22;
++          ctx.save(); ctx.globalAlpha = 0.1;
+           ctx.strokeStyle = best.ink || `hsla(${best.hue},70%,70%,1)`;
+           ctx.lineWidth = 0.7; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(q.x, q.y); ctx.stroke(); ctx.restore();

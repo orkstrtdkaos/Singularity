@@ -1,0 +1,601 @@
+<title>Singularity Opening</title>
+<meta name="color-scheme" content="dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;1,300&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one full-bleed film frame; narration sits low and left like a reader's caption, the title alone is centred. */
+:root {
+  color-scheme: dark;
+  --void: #05070b;        /* space, and the frame */
+  --bone: #e8e2d4;        /* narration */
+  --bone-dim: #a39d8f;    /* secondary text, controls */
+  --gold: #e6b450;        /* workings, miracles */
+  --ember: #ff6a2a;       /* the bores */
+  --veil: #6b4f8a;        /* the rim of the absence */
+  --display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --body: "Spectral", "Iowan Old Style", Georgia, serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+[hidden] { display: none !important; }
+html, body { height: 100%; }
+body { margin: 0; background: var(--void); color: var(--bone); overflow: hidden; font-family: var(--body); }
+#stage { position: fixed; inset: 0; display: block; width: 100%; height: 100%; cursor: pointer; }
+.caption {
+  position: fixed; left: max(16px, 6vw); right: 16px; bottom: calc(max(56px, 11vh) + env(safe-area-inset-bottom, 0px));
+  max-width: 34ch; pointer-events: none;
+  font-family: var(--body); font-weight: 300; font-size: clamp(19px, 2.3vw, 28px); line-height: 1.42;
+  text-wrap: pretty; text-shadow: 0 1px 18px rgba(0,0,0,.85), 0 0 2px rgba(0,0,0,.9);
+}
+.caption p { margin: 0 0 .55em; opacity: 0; transform: translateY(6px); transition: opacity 1.1s ease, transform 1.4s ease; }
+.caption p.on { opacity: 1; transform: none; }
+.caption p.after { font-style: italic; color: var(--bone); }
+.titlecard { position: fixed; inset: 0; display: grid; place-content: center; text-align: center; pointer-events: none; gap: .4em; padding-inline: 16px; }
+.titlecard h1 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(44px, 9vw, 112px); letter-spacing: .06em; line-height: 1; text-wrap: balance; opacity: 0; transition: opacity 2.4s ease; text-shadow: 0 0 40px rgba(0,0,0,.9); }
+.titlecard h2 { margin: 0; font-family: var(--display); font-style: italic; font-weight: 400; font-size: clamp(20px, 3.2vw, 36px); letter-spacing: .04em; color: var(--bone); opacity: 0; transition: opacity 2.4s ease 1s; text-shadow: 0 0 30px rgba(0,0,0,.9); }
+.titlecard.on h1, .titlecard.on h2 { opacity: 1; }
+.endbar { position: fixed; left: 0; right: 0; bottom: calc(max(40px, 9vh) + env(safe-area-inset-bottom, 0px)); display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; padding-inline: 16px; }
+.btn {
+  font-family: var(--mono); font-size: 13px; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--bone); background: rgba(5,7,11,.55); border: 1px solid rgba(232,226,212,.35);
+  padding: 11px 20px; border-radius: 2px; cursor: pointer; transition: border-color .3s, background .3s;
+}
+.btn:hover { border-color: var(--bone); background: rgba(232,226,212,.08); }
+.btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.btn.primary { border-color: var(--gold); color: var(--gold); }
+.chrome { position: fixed; top: calc(14px + env(safe-area-inset-top, 0px)); right: 16px; display: flex; gap: 8px; }
+.chrome .btn { padding: 8px 14px; font-size: 11px; color: var(--bone-dim); border-color: rgba(232,226,212,.18); }
+.progress { position: fixed; left: max(16px, 6vw); right: max(16px, 6vw); bottom: calc(22px + env(safe-area-inset-bottom, 0px)); display: grid; gap: 6px; pointer-events: none; }
+.progress .track { display: flex; gap: 6px; height: 2px; }
+.progress .seg { flex: 1; background: rgba(232,226,212,.14); position: relative; overflow: hidden; }
+.progress .seg i { position: absolute; inset: 0; width: 0; background: rgba(232,226,212,.55); }
+.progress .label { font-family: var(--mono); font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--bone-dim); opacity: .8; }
+.note { position: fixed; top: calc(16px + env(safe-area-inset-top, 0px)); left: max(16px, 6vw); font-family: var(--mono); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--bone-dim); }
+@media (max-width: 520px) {
+  .caption { bottom: calc(64px + env(safe-area-inset-bottom, 0px)); font-size: 19px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .caption p { transition: opacity .4s linear; transform: none; }
+}
+</style>
+
+<canvas id="stage" aria-label="The opening film"></canvas>
+<div class="caption" id="caption" aria-live="polite"></div>
+<div class="titlecard" id="titlecard"><h1 id="t1"></h1><h2 id="t2"></h2></div>
+<div class="note" id="note" hidden></div>
+<div class="chrome" id="chrome">
+  <button class="btn" id="btn-pause" type="button" aria-label="Pause">Pause</button>
+  <button class="btn" id="btn-skip" type="button"></button>
+</div>
+<div class="endbar" id="endbar" hidden>
+  <button class="btn primary" id="btn-begin" type="button"></button>
+  <button class="btn" id="btn-again" type="button"></button>
+</div>
+<div class="progress" id="progress"><div class="track" id="track"></div><div class="label" id="plabel"></div></div>
+
+<script type="application/json" id="opening-data">{"schemaVersion": 1, "id": "opening", "kind": "opening", "_what": "The game's opening: a short film played before a new character is made, then a coda after creation that lands on the character's own starting place. Erik, 2026-10-06: the Earth at the singularity, nanotechnology growing past counting and used, structured, to work magic and miracles at the cost of energy; the loss of meaning and the foreclosure as the poles developed; the casting off of technology to get back to natural forces and metaphysical powers; the greater battle all of it continues; and you as one of many, pushing on and being pushed by the Arcs of Exesa. Every line in `lines`, `title` and `coda` is player-facing (SYSTEM_SPEC §29.7). Direction for the build is under `_direction` and in po/WORKORDER_aevi_20261006_the_opening.md. SNG-680.", "_canon": "Drawn from, and kept consistent with: world_framing.the_world_is_named (Exesa is Earth worn down, a third smaller, spent by its own people); the_deep_below (the core harvest, the bores capped at the Transition); power_systems.md (magic is structured nanite spent into purpose); EXESA.md I-III and VIII (the Transition made fiction real; the lattice is dormant and has an owner; the Veil; there is no chosen one; hold something open); the_three.md (one argument, paused; reveal order: never name the Three); the_satiated_sovereigns.md (never confirm a Sovereign: none is named or shown here); the_pole_intensity_model and world_framing.bearers_vary (the pure pole is a foreclosure). No date is given for the Transition, on purpose: it did not happen everywhere at once.", "pacing": {"secondsBase": 1.6, "secondsPerWord": 0.28, "fadeSeconds": 1.2, "_why": "A shot holds for base + words x perWord unless it names `seconds`. That reads at an unhurried pace without making a fast reader wait long; a tap moves on at once."}, "movements": [{"id": "earth", "name": "Earth", "shots": [{"id": "earth_1", "visual": "earth", "lines": ["This was Earth."]}, {"id": "earth_2", "visual": "earth", "lines": ["For a long time it was enough to be clever."]}, {"id": "earth_3", "visual": "network", "lines": ["Then the minds we made began to make minds.", "We called it the Singularity."]}, {"id": "earth_4", "visual": "network_runaway", "lines": ["In one year they learned more than we had learned in all the years before. In the next, more than that."]}]}, {"id": "machines", "name": "The small machines", "shots": [{"id": "machines_1", "visual": "swarm", "lines": ["They made machines too small to see, and taught them to make more of themselves."]}, {"id": "machines_2", "visual": "swarm_ordered", "lines": ["Then they taught them to listen."]}, {"id": "machines_3", "visual": "workings", "lines": ["A word could raise a wall. A hand held out could close a wound. Light came when it was asked for."]}, {"id": "machines_4", "visual": "workings", "lines": ["We called it engineering for as long as we could bear to.", "Then we called it what it looked like: magic. Miracles."]}]}, {"id": "cost", "name": "The cost", "shots": [{"id": "cost_1", "visual": "drain", "lines": ["Every miracle was paid for. Not in faith. In power."]}, {"id": "cost_2", "visual": "drain", "lines": ["When the sun was not enough, we spent the land. When the land was not enough, we went down."]}, {"id": "cost_3", "visual": "bores", "lines": ["We sank bores to the heart of the world and drew it up as fire, and as the stuff our miracles were made of."]}, {"id": "cost_4", "visual": "shrink", "lines": ["Nothing ate the world. We spent it, one working at a time, until a third of it was gone."]}, {"id": "cost_5", "visual": "name_wears", "seconds": 7, "lines": ["We named it again, for what it had become."], "nameFrom": "EARTH", "nameTo": "EXESA", "after": ["Exesa. Eaten hollow, from within."]}]}, {"id": "poles", "name": "The poles", "shots": [{"id": "poles_1", "visual": "meaning_fades", "lines": ["And we changed with it. When anything can be had, nothing has to mean anything."]}, {"id": "poles_2", "visual": "poles_ignite", "lines": ["People went looking for one thing that still would. When they found it, they wanted only that."]}, {"id": "poles_3", "visual": "poles_pull", "lines": ["Order, until nothing moved. Light, until nothing was hidden. Mind, until no one needed a body."]}, {"id": "poles_4", "visual": "poles_pull", "lines": ["Every people leaned toward its own pole, and leaned, and leaned. At the far end of every leaning a door shuts, and nothing comes through it again."]}, {"id": "poles_5", "visual": "middle_closes", "lines": ["The middle, where people argue and trade and marry across, began to close."]}]}, {"id": "letting_go", "name": "The letting go", "shots": [{"id": "letting_go_1", "visual": "lights_out", "lines": ["So we did the hardest thing a people can do. We put it down."]}, {"id": "letting_go_2", "visual": "lights_out", "lines": ["Not everyone. Not everywhere at once. But enough."]}, {"id": "letting_go_3", "visual": "bores_capped", "lines": ["We capped the bores and let the machines go quiet, and went looking for what had been there before we needed them:"]}, {"id": "letting_go_4", "visual": "natural", "lines": ["the body and the breath; the hand and its years; the long patience of growing things; and whatever answers when a person asks with the whole of themselves."]}, {"id": "letting_go_5", "visual": "standing_up", "lines": ["And the world answered. The things we had believed in stood up and walked.", "Traditions became powers. Stories became places."]}]}, {"id": "argument", "name": "The older argument", "shots": [{"id": "argument_1", "visual": "lattice", "lines": ["But we were never the first to build here."]}, {"id": "argument_2", "visual": "lattice", "lines": ["Under the ground runs a lattice older than any people, laid in one working by something that did not need to try twice.", "It is not broken. It is dormant, and dormant things have an owner."]}, {"id": "argument_3", "visual": "veil", "lines": ["And where it thins there is the Veil: the shape of something enormous that is no longer here."]}, {"id": "argument_4", "visual": "veil", "lines": ["The old books called the two sides angels and demons. They were wrong about nearly everything but this: it was one argument, and it never ended."]}, {"id": "argument_5", "visual": "pause", "lines": ["It paused. We have been living in the pause."]}, {"id": "argument_6", "visual": "pause", "lines": ["The machines, the miracles, the eating, the leaning, the letting go: all of it was that argument, carried on in smaller hands."]}]}, {"id": "arcs", "name": "The Arcs", "shots": [{"id": "arcs_1", "visual": "arcs", "lines": ["Now the poles are pulling again. Something under the ground is turning over. Every road is a little longer than it was."]}, {"id": "arcs_2", "visual": "arcs", "lines": ["These are the Arcs of Exesa. They were moving before you came, and they do not wait."]}, {"id": "arcs_3", "visual": "many", "lines": ["No one chose you. No one is waiting for you."]}, {"id": "arcs_4", "visual": "many", "lines": ["There are others out there, hundreds of them, pushing and being pushed. Some are holding the middle open. Some are leaning on the door."]}, {"id": "arcs_5", "visual": "you", "lines": ["You are one of them."]}, {"id": "arcs_6", "visual": "you", "seconds": 4, "lines": ["Hold something open."]}]}], "title": {"line1": "Singularity", "line2": "The Arcs of Exesa", "seconds": 6, "visual": "title"}, "begin": "Begin", "coda": {"_what": "Played once, after the character is made and before the first scene. The same globe, now the world as it is: it turns to the character's starting place and zooms to its region. The lines are filled from live data; `{arcFace}` is the publicFace of the current stage of the nearest arc to that place (proximity decides; never the water by default).", "shots": [{"id": "coda_1", "visual": "zoom_to_start", "lines": ["{place}."]}, {"id": "coda_2", "visual": "zoom_to_start", "lines": ["{regionLine}"]}, {"id": "coda_3", "visual": "nearest_arc", "lines": ["{arcFace}"]}, {"id": "coda_4", "visual": "zoom_to_start", "seconds": 3, "lines": ["Begin here."]}], "regionLine": "{region}, {days} days outward from the Crossing.", "regionLineAtCrossing": "The Crossing, where no pole wins."}, "controls": {"skip": "Skip", "watchAgain": "Watch the opening", "next": "Next"}, "visuals": {"_direction": "One globe from the first shot to the last; it is the game's own globe (worldglobe.js) wherever it can be, so the world the player is shown at the end is the world they play in. Each token below names what is on screen. Draw with the game's own palette and type; no faces, no named figures, nothing that confirms a Precursor or a Sovereign.", "earth": "Night. The globe turning, blue oceans, full size; cloud; the lights of cities on the dark side.", "network": "Lines of light run between the cities, faster and finer, until the night side is a net.", "network_runaway": "The net thickens past counting: doubling, then doubling again; it begins to glow on the day side too.", "swarm": "A glitter rises off the net and spreads over the land and sea, too fine to be single things.", "swarm_ordered": "The glitter falls into patterns: grids, rings, the shape of a held hand.", "workings": "Small bright workings bloom across the globe: a wall rising, a wound closing, light poured into a dark valley. Gold.", "drain": "Colour drains from the oceans and the land into the bright points; the workings burn hotter and the world around them greys.", "bores": "Cutaway: shafts of fire driven down into the core. The core's glow is drawn upward through them into the workings above, and the core shrinks.", "shrink": "The globe contracts to two thirds of its size. The coastlines draw in. The old outline stays faint behind it, the size it was.", "name_wears": "The word EARTH over the globe wears letter by letter into EXESA: same shape, worn down. Then the second line.", "meaning_fades": "The workings dim one by one; the people-lights between them thin.", "poles_ignite": "Points of colour wake around the globe, each a pole: order, light, mind, death, life, and the rest. Each brightens.", "poles_pull": "Threads run from the land to the poles and pull; places drift toward their pole and burn purer and paler as they go.", "middle_closes": "A band of mixed, living colour between the poles narrows and greys.", "lights_out": "The glitter falls like ash. The net goes dark, a region at a time, not all at once.", "bores_capped": "In the cutaway the shafts close over. The core is smaller, and still warm.", "natural": "Quiet light returns, not gold: green in the woods, fire in a hearth, breath on cold air, a single figure seated still.", "standing_up": "Out of the land, things stand: a tower that hums, a wood that walks, a city of light, a shape of fire. Silhouettes only.", "lattice": "Through the ground, a lattice of fine lines under every land, one continuous working. It does not move. It is very large.", "veil": "Where the lattice thins, a darkness that is not shadow: an absence in the shape of something enormous. Nothing in it is shown.", "pause": "Lattice and Veil both, still. Over them, the history of the film replays small and fast: the net, the workings, the bores, the ash, the standing up.", "arcs": "The globe as it is now, Exesa, the game's own. Bands of moving light sweep across it: the arcs, each a current going its own way.", "many": "Small lights all over the globe, moving: some with the currents, some against them. In the game these are the real others: the great figures where they are, and other travellers from the shared world.", "you": "One light, unlit until now, takes its colour. The camera holds on it.", "title": "Title over the turning globe.", "zoom_to_start": "Coda: the globe turns to the character's starting place and zooms to its region, the way the world map frames it.", "nearest_arc": "Coda: the nearest arc's current passes through the frame."}}</script>
+<script>
+(() => {
+"use strict";
+const DATA = JSON.parse(document.getElementById("opening-data").textContent);
+const REDUCED = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const TAU = Math.PI * 2;
+const cv = document.getElementById("stage"), ctx = cv.getContext("2d");
+const capEl = document.getElementById("caption"), titleEl = document.getElementById("titlecard");
+const endbar = document.getElementById("endbar"), noteEl = document.getElementById("note");
+document.getElementById("t1").textContent = DATA.title.line1;
+document.getElementById("t2").textContent = DATA.title.line2;
+document.getElementById("btn-skip").textContent = DATA.controls.skip;
+document.getElementById("btn-begin").textContent = DATA.begin;
+document.getElementById("btn-again").textContent = DATA.controls.watchAgain;
+
+// ---------- the shot list (film, then title, then the coda sample) ----------
+const P = DATA.pacing;
+const words = (ls) => ls.join(" ").split(/\s+/).filter(Boolean).length;
+const SHOTS = [];
+DATA.movements.forEach((m, mi) => m.shots.forEach((s) => SHOTS.push({
+  ...s, movement: mi, mname: m.name,
+  dur: s.seconds || (P.secondsBase + words([...s.lines, ...(s.after || [])]) * P.secondsPerWord)
+})));
+const TITLE_INDEX = SHOTS.length;
+SHOTS.push({ id: "title", visual: "title", lines: [], dur: DATA.title.seconds, movement: DATA.movements.length - 1 });
+// Coda, filled with a sample start so it can be seen here; in the game it is filled from the character.
+const SAMPLE = { place: "Millbrook", region: "The Valley of Echoes", days: 34, lat: -69.709, lon: 251.662,
+  arcFace: "People are asking for more than they used to — a word put in, a door held open — and most of the asking is being answered." };
+const fill = (t) => t.replace("{place}", SAMPLE.place)
+  .replace("{regionLine}", DATA.coda.regionLine.replace("{region}", SAMPLE.region).replace("{days}", SAMPLE.days))
+  .replace("{arcFace}", SAMPLE.arcFace);
+const CODA_START = SHOTS.length;
+DATA.coda.shots.forEach((s) => SHOTS.push({ ...s, coda: true, lines: s.lines.map(fill),
+  dur: s.seconds || (P.secondsBase + words(s.lines.map(fill)) * P.secondsPerWord) }));
+
+// progress track: one segment per movement
+const track = document.getElementById("track"), plabel = document.getElementById("plabel");
+const segs = DATA.movements.map(() => { const d = document.createElement("div"); d.className = "seg"; d.appendChild(document.createElement("i")); track.appendChild(d); return d; });
+
+// ---------- noise and the world texture ----------
+function hash(x, y, z) { let h = (x * 374761393 + y * 668265263 + z * 2147483647) | 0; h = (h ^ (h >>> 13)) * 1274126177 | 0; return ((h ^ (h >>> 16)) >>> 0) / 4294967295; }
+const fade = (t) => t * t * (3 - 2 * t);
+function vnoise(x, y, z) {
+  const xi = Math.floor(x), yi = Math.floor(y), zi = Math.floor(z), xf = fade(x - xi), yf = fade(y - yi), zf = fade(z - zi);
+  const L = (a, b, t) => a + (b - a) * t;
+  return L(L(L(hash(xi, yi, zi), hash(xi + 1, yi, zi), xf), L(hash(xi, yi + 1, zi), hash(xi + 1, yi + 1, zi), xf), yf),
+           L(L(hash(xi, yi, zi + 1), hash(xi + 1, yi, zi + 1), xf), L(hash(xi, yi + 1, zi + 1), hash(xi + 1, yi + 1, zi + 1), xf), yf), zf);
+}
+function fbm(x, y, z) { let a = 0, amp = .5, f = 1; for (let i = 0; i < 5; i++) { a += amp * vnoise(x * f, y * f, z * f); f *= 2.03; amp *= .5; } return a; }
+const TW = 512, TH = 256;
+const ELEV = new Float32Array(TW * TH);
+const EARTH_TEX = new Uint8ClampedArray(TW * TH * 3), EXESA_TEX = new Uint8ClampedArray(TW * TH * 3);
+const mix = (a, b, t) => a + (b - a) * t;
+function mixc(c1, c2, t) { return [mix(c1[0], c2[0], t), mix(c1[1], c2[1], t), mix(c1[2], c2[2], t)]; }
+const SEA_LEVEL = 0.53;
+(function buildTextures() {
+  for (let j = 0; j < TH; j++) {
+    const lat = (0.5 - (j + .5) / TH) * Math.PI;
+    for (let i = 0; i < TW; i++) {
+      const lon = ((i + .5) / TW) * TAU;
+      const x = Math.cos(lat) * Math.sin(lon), y = Math.sin(lat), z = Math.cos(lat) * Math.cos(lon);
+      const e = fbm(x * 1.6 + 11, y * 1.6 + 3, z * 1.6 + 7) * .82 + fbm(x * 5 + 2, y * 5, z * 5) * .18;
+      const k = j * TW + i; ELEV[k] = e;
+      const absLat = Math.abs(lat) / (Math.PI / 2);
+      let ce, cx;
+      if (e < SEA_LEVEL) {
+        const d = Math.min(1, (SEA_LEVEL - e) / .14);
+        ce = mixc([32, 92, 140], [9, 32, 66], d);
+        cx = mixc([34, 74, 82], [10, 30, 38], d);
+      } else {
+        const h = Math.min(1, (e - SEA_LEVEL) / .2), wet = vnoise(x * 4 + 40, y * 4, z * 4);
+        ce = mixc(mixc([66, 112, 54], [116, 120, 66], wet), [126, 104, 74], h * .8);
+        cx = mixc(mixc([120, 98, 66], [84, 90, 60], wet * .6), [104, 98, 90], h);
+        if (absLat > .82) { const ice = Math.min(1, (absLat - .82) / .1); ce = mixc(ce, [222, 232, 238], ice); cx = mixc(cx, [176, 172, 164], ice * .8); }
+      }
+      EARTH_TEX.set(ce, k * 3); EXESA_TEX.set(cx, k * 3);
+    }
+  }
+})();
+const elevAt = (lat, lon) => { let u = (((lon / TAU) % 1) + 1) % 1, v = 0.5 - lat / Math.PI; return ELEV[Math.min(TH - 1, Math.max(0, Math.floor(v * TH))) * TW + Math.floor(u * TW) % TW]; };
+const rnd = (() => { let s = 7; return () => (s = (s * 16807) % 2147483647) / 2147483647; })();
+function landPoint() { for (;;) { const lat = Math.asin(rnd() * 1.7 - .85), lon = rnd() * TAU; if (elevAt(lat, lon) > SEA_LEVEL + .01) return { lat, lon }; } }
+const CITIES = Array.from({ length: 230 }, landPoint);
+const sph = (lat, lon) => [Math.cos(lat) * Math.sin(lon), Math.sin(lat), Math.cos(lat) * Math.cos(lon)];
+const dot3 = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+CITIES.forEach((c) => c.v = sph(c.lat, c.lon));
+// the net: near links first, then the runaway
+const NEAR = [], FAR = [];
+CITIES.forEach((c, i) => {
+  const ds = CITIES.map((d, j) => [dot3(c.v, d.v), j]).filter(([, j]) => j !== i).sort((a, b) => b[0] - a[0]);
+  ds.slice(0, 3).forEach(([, j]) => { if (i < j) NEAR.push([i, j]); });
+  for (let k = 0; k < 3; k++) FAR.push([i, Math.floor(rnd() * CITIES.length)]);
+});
+NEAR.sort(() => rnd() - .5); FAR.sort(() => rnd() - .5);
+const SWARM = Array.from({ length: 900 }, () => { const p = landPoint(); return { lat: p.lat + (rnd() - .5) * .3, lon: p.lon, dl: (rnd() - .5) * .02, dn: (rnd() - .5) * .02, fall: rnd() }; });
+const WORKS = Array.from({ length: 42 }, () => ({ ...landPoint(), ph: rnd() * TAU, s: .5 + rnd() }));
+const MANY = Array.from({ length: 320 }, () => { const p = landPoint(); return { lat: p.lat, lon: p.lon, vl: (rnd() - .5) * .05, vn: (rnd() - .5) * .08, with: rnd() < .55, ph: rnd() * TAU }; });
+const NATURAL = Array.from({ length: 70 }, () => ({ ...landPoint(), kind: Math.floor(rnd() * 3), ph: rnd() * TAU }));
+const STARS = Array.from({ length: 520 }, () => ({ x: rnd(), y: rnd(), r: rnd() < .93 ? rnd() * .9 + .2 : rnd() * 1.6 + .9, a: rnd() * .6 + .15, tw: rnd() * TAU }));
+// the lattice: great circles through an icosahedron's vertices
+const LATTICE = [];
+(() => { const t = (1 + Math.sqrt(5)) / 2; const V = [[-1, t, 0], [1, t, 0], [-1, -t, 0], [1, -t, 0], [0, -1, t], [0, 1, t], [0, -1, -t], [0, 1, -t], [t, 0, -1], [t, 0, 1], [-t, 0, -1], [-t, 0, 1]].map((v) => { const n = Math.hypot(...v); return v.map((c) => c / n); });
+  for (let i = 0; i < V.length; i++) for (let j = i + 1; j < V.length; j++) { if (dot3(V[i], V[j]) > .4) LATTICE.push([V[i], V[j]]); }
+  // subdivide each edge's midpoints into a finer mesh
+  const extra = []; LATTICE.forEach(([a, b]) => { const m = [a[0] + b[0], a[1] + b[1], a[2] + b[2]]; const n = Math.hypot(...m); extra.push(m.map((c) => c / n)); });
+  for (let i = 0; i < extra.length; i++) for (let j = i + 1; j < extra.length; j++) { const d = dot3(extra[i], extra[j]); if (d > .8 && d < .99) LATTICE.push([extra[i], extra[j]]); }
+})();
+const POLE_COLORS = ["#9fb7d6", "#f4ead0", "#a48ad6", "#b2675a", "#6fb06a", "#cfc8b8", "#d2559a", "#7f8f9e", "#e2a54d", "#5fa7a3", "#c9c46a", "#8d6bb0",
+                     "#e07a4f", "#6c8fd1", "#b8d38a", "#d9d9e6", "#a3735a", "#7dc1d9", "#c46b8a", "#e3cf8f", "#76967a", "#b7a3d9", "#d08d5a", "#94b1b8"];
+const ARCBANDS = [ { tilt: .35, rot: 0, col: "#e6b450", sp: .05 }, { tilt: 1.1, rot: 1.3, col: "#9fb7d6", sp: -.04 }, { tilt: -.7, rot: 2.4, col: "#c46b8a", sp: .035 },
+                   { tilt: .9, rot: 3.6, col: "#6fb06a", sp: -.03 }, { tilt: -1.25, rot: 4.8, col: "#d9d9e6", sp: .045 } ];
+
+// ---------- camera, state and the per-visual targets ----------
+const BASE = { R: 1, zoom: 1, cx: 0, yaw: 0, pitch: -.32, spin: .06, exesa: 0, drain: 0, sat: 1, surface: 1, night: .55, cities: 0, net: 0, runaway: 0, swarm: 0, order: 0, works: 0,
+  cut: 0, bores: 0, core: 1, capped: 0, outline: 0, poles: 0, pull: 0, middle: 0, grey: 0, ash: 0, natural: 0, standing: 0, lattice: 0, veil: 0, montage: 0, arcs: 0, many: 0, you: 0, title: 0, focus: 0 };
+const V = {
+  earth: { cities: 1 },
+  network: { cities: 1, net: .45 },
+  network_runaway: { cities: 1, net: 1, runaway: 1, night: .7 },
+  swarm: { cities: .8, net: 1, runaway: .6, swarm: 1 },
+  swarm_ordered: { cities: .8, net: 1, runaway: .5, swarm: 1, order: 1 },
+  workings: { cities: .8, net: .8, runaway: .4, swarm: .7, order: .6, works: 1, night: .45 },
+  drain: { cities: .6, net: .6, runaway: .3, swarm: .5, works: 1.4, drain: .75, night: .4 },
+  bores: { cut: 1, bores: 1, core: .82, drain: .8, works: .6 },
+  shrink: { R: .67, outline: 1, drain: .7, exesa: .6, cities: .3, net: .3, works: .5, core: .7 },
+  name_wears: { R: .67, outline: .6, exesa: 1, drain: .45, cities: .3, net: .2, works: .3 },
+  meaning_fades: { R: .67, exesa: 1, drain: .5, cities: .15, net: .15, works: .12 },
+  poles_ignite: { R: .67, exesa: 1, drain: .45, pitch: -1.45, spin: .03, poles: 1, middle: 1, cities: .1, works: .1 },
+  poles_pull: { R: .67, exesa: 1, drain: .4, pitch: -1.45, spin: .03, poles: 1, pull: 1, middle: .7 },
+  middle_closes: { R: .67, exesa: 1, drain: .45, pitch: -1.45, spin: .02, poles: 1, pull: 1.25, middle: .22, grey: 1 },
+  lights_out: { R: .67, exesa: 1, drain: .5, ash: 1, net: .15, cities: .05, poles: .2, pull: .3, middle: .3 },
+  bores_capped: { R: .67, exesa: 1, cut: 1, bores: .05, capped: 1, core: .55, drain: .4 },
+  natural: { R: .67, exesa: 1, drain: .1, natural: 1, night: .5 },
+  standing_up: { R: .67, exesa: 1, drain: .05, natural: .8, standing: 1 },
+  lattice: { R: .67, exesa: 1, surface: .25, lattice: 1, natural: .2, spin: .03 },
+  veil: { R: .67, exesa: 1, surface: .3, lattice: .8, veil: 1, cx: -.18, spin: .02 },
+  pause: { R: .67, exesa: 1, surface: .4, lattice: .6, veil: .9, cx: -.12, montage: 1, spin: .02 },
+  arcs: { R: .78, exesa: 1, arcs: 1, night: .45 },
+  many: { R: .78, exesa: 1, arcs: .8, many: 1 },
+  you: { R: .78, exesa: 1, arcs: .6, many: 1, you: 1, zoom: 1.18 },
+  title: { R: .78, exesa: 1, arcs: .5, many: .6, you: .6, title: 1, spin: .04 },
+  zoom_to_start: { R: .78, exesa: 1, focus: 1, zoom: 2.3, many: .5, spin: 0 },
+  nearest_arc: { R: .78, exesa: 1, focus: 1, zoom: 2.3, arcs: .9, many: .5, spin: 0 }
+};
+const cur = { ...BASE, ...V.earth };
+let target = { ...BASE, ...V.earth };
+
+// ---------- playback ----------
+let idx = 0, tShot = 0, paused = false, ended = false, tAll = 0, last = performance.now();
+let nameAnim = null; // EARTH -> EXESA
+function setCaption(shot) {
+  capEl.innerHTML = "";
+  const ps = shot.lines.map((l) => { const p = document.createElement("p"); p.textContent = l; capEl.appendChild(p); return p; });
+  ps.forEach((p, i) => setTimeout(() => p.classList.add("on"), REDUCED ? 0 : 150 + i * 900));
+  if (shot.after) {
+    const a = document.createElement("p"); a.className = "after"; a.textContent = shot.after.join(" "); capEl.appendChild(a);
+    setTimeout(() => a.classList.add("on"), REDUCED ? 0 : 4200);
+  }
+}
+function go(i) {
+  idx = Math.max(0, Math.min(SHOTS.length - 1, i)); tShot = 0; ended = false; endbar.hidden = true;
+  const s = SHOTS[idx];
+  target = { ...BASE, ...(V[s.visual] || {}) };
+  if (s.coda) { target.focusLat = SAMPLE.lat * Math.PI / 180; target.focusLon = SAMPLE.lon * Math.PI / 180; }
+  nameAnim = s.visual === "name_wears" ? { t: 0 } : null;
+  titleEl.classList.toggle("on", s.visual === "title");
+  setCaption(s);
+  noteEl.hidden = !s.coda; noteEl.textContent = s.coda ? "After creation · sample start" : "";
+  document.getElementById("progress").hidden = !!s.coda;
+  if (REDUCED) Object.assign(cur, target);
+}
+function finish() {
+  ended = true; endbar.hidden = false; capEl.innerHTML = "";
+  document.getElementById("btn-begin").hidden = idx >= CODA_START;
+  titleEl.classList.toggle("on", idx < CODA_START);
+}
+function next() { if (ended) return; if (idx === TITLE_INDEX || idx === SHOTS.length - 1) return finish(); go(idx + 1); }
+cv.addEventListener("click", () => { if (!ended) next(); });
+document.getElementById("btn-skip").onclick = (e) => { e.stopPropagation(); go(TITLE_INDEX); };
+document.getElementById("btn-again").onclick = () => { titleEl.classList.remove("on"); go(0); };
+document.getElementById("btn-begin").onclick = () => { titleEl.classList.remove("on"); go(CODA_START); };
+const pb = document.getElementById("btn-pause");
+pb.onclick = (e) => { e.stopPropagation(); paused = !paused; pb.textContent = paused ? "Play" : "Pause"; pb.setAttribute("aria-label", pb.textContent); };
+window.addEventListener("keydown", (e) => {
+  if (e.key === "ArrowRight" || e.key === " ") { e.preventDefault(); next(); }
+  else if (e.key === "ArrowLeft") go(Math.min(idx, TITLE_INDEX) - 1);
+  else if (e.key === "Escape") go(TITLE_INDEX);
+});
+document.addEventListener("visibilitychange", () => { last = performance.now(); });
+
+// ---------- drawing ----------
+let W = 0, H = 0, DPR = 1;
+function resize() { DPR = Math.min(2, window.devicePixelRatio || 1); W = cv.width = Math.round(innerWidth * DPR); H = cv.height = Math.round(innerHeight * DPR); }
+addEventListener("resize", resize); resize();
+const buf = document.createElement("canvas"), bctx = buf.getContext("2d");
+let img = null, bufN = 0;
+const SUN = (() => { const s = [-.55, .35, .76]; const n = Math.hypot(...s); return s.map((c) => c / n); })();
+
+function project(lat, lon, G) {
+  const cl = Math.cos(lat), x1 = cl * Math.sin(lon + G.yaw), z1 = cl * Math.cos(lon + G.yaw), y1 = Math.sin(lat);
+  const cp = Math.cos(G.pitch), sp = Math.sin(G.pitch);
+  const y2 = y1 * cp - z1 * sp, z2 = y1 * sp + z1 * cp;
+  return { x: G.cx + x1 * G.r, y: G.cy - y2 * G.r, z: z2 };
+}
+function projectV(v, G) { return project(Math.asin(Math.max(-1, Math.min(1, v[1]))), Math.atan2(v[0], v[2]), G); }
+
+function drawGlobe(G) {
+  const ri = Math.max(60, Math.min(210, Math.round(G.r)));
+  const n = ri * 2;
+  if (n !== bufN) { buf.width = buf.height = n; img = bctx.createImageData(n, n); bufN = n; }
+  const d = img.data, cp = Math.cos(G.pitch), sp = Math.sin(G.pitch);
+  const ex = cur.exesa, drain = cur.drain, night = cur.night, surf = cur.surface;
+  for (let py = 0; py < n; py++) {
+    const ny = 1 - (py + .5) / ri;
+    for (let px = 0; px < n; px++) {
+      const o = (py * n + px) * 4, nx = (px + .5) / ri - 1, rr = nx * nx + ny * ny;
+      if (rr > 1) { d[o + 3] = 0; continue; }
+      const nz = Math.sqrt(1 - rr);
+      const y1 = ny * cp + nz * sp, z1 = -ny * sp + nz * cp;
+      const lat = Math.asin(y1), lon = Math.atan2(nx, z1) - G.yaw;
+      let u = (lon / TAU) % 1; if (u < 0) u += 1;
+      const k = (Math.min(TH - 1, Math.floor((0.5 - lat / Math.PI) * TH)) * TW + Math.floor(u * TW) % TW) * 3;
+      let r = EARTH_TEX[k] + (EXESA_TEX[k] - EARTH_TEX[k]) * ex, g = EARTH_TEX[k + 1] + (EXESA_TEX[k + 1] - EARTH_TEX[k + 1]) * ex, b = EARTH_TEX[k + 2] + (EXESA_TEX[k + 2] - EARTH_TEX[k + 2]) * ex;
+      if (drain > 0) { const l = r * .3 + g * .55 + b * .15; r += (l - r) * drain; g += (l - g) * drain; b += (l - b) * drain; }
+      const lam = nx * SUN[0] + ny * SUN[1] + nz * SUN[2];
+      const lit = Math.max(0, Math.min(1, lam * 1.4 + .25));
+      const shade = (1 - night) + night * lit;
+      const limb = .55 + .45 * Math.pow(nz, .45);
+      const f = shade * limb * surf;
+      d[o] = r * f; d[o + 1] = g * f; d[o + 2] = b * f; d[o + 3] = 255;
+    }
+  }
+  bctx.putImageData(img, 0, 0);
+  ctx.save(); ctx.imageSmoothingEnabled = true;
+  ctx.drawImage(buf, G.cx - G.r, G.cy - G.r, G.r * 2, G.r * 2);
+  // atmosphere
+  const atm = ctx.createRadialGradient(G.cx, G.cy, G.r * .96, G.cx, G.cy, G.r * 1.12);
+  atm.addColorStop(0, `rgba(120,170,230,${.28 * (1 - ex) * surf + .06})`); atm.addColorStop(1, "rgba(120,170,230,0)");
+  ctx.fillStyle = atm; ctx.beginPath(); ctx.arc(G.cx, G.cy, G.r * 1.12, 0, TAU); ctx.fill();
+  ctx.restore();
+}
+function nightness(p, G) { // 0 day .. 1 night, for screen point on globe
+  const nx = (p.x - G.cx) / G.r, ny = -(p.y - G.cy) / G.r, nz = Math.sqrt(Math.max(0, 1 - nx * nx - ny * ny));
+  return Math.max(0, Math.min(1, .5 - (nx * SUN[0] + ny * SUN[1] + nz * SUN[2]) * 2));
+}
+function glowDot(x, y, rad, col, a) { const g = ctx.createRadialGradient(x, y, 0, x, y, rad); g.addColorStop(0, col.replace("A", a)); g.addColorStop(1, col.replace("A", 0)); ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, rad, 0, TAU); ctx.fill(); }
+
+function drawCities(G, t) {
+  if (cur.cities < .01) return;
+  ctx.save(); ctx.globalCompositeOperation = "lighter";
+  CITIES.forEach((c, i) => { const p = project(c.lat, c.lon, G); if (p.z < .05) return; const nt = nightness(p, G); const a = cur.cities * (.25 + .75 * nt) * Math.min(1, p.z * 3);
+    ctx.fillStyle = `rgba(255,214,150,${a})`; ctx.fillRect(p.x - DPR * .8, p.y - DPR * .8, DPR * 1.6, DPR * 1.6); });
+  ctx.restore();
+}
+function arcPath(a, b, G, steps = 10) {
+  const va = a.v || sph(a.lat, a.lon), vb = b.v || sph(b.lat, b.lon); let started = false;
+  for (let s = 0; s <= steps; s++) { const t = s / steps; const v = [va[0] + (vb[0] - va[0]) * t, va[1] + (vb[1] - va[1]) * t, va[2] + (vb[2] - va[2]) * t]; const m = Math.hypot(...v) || 1; const lift = 1 + .05 * Math.sin(Math.PI * t);
+    const p = projectV(v.map((c) => c / m), G); const x = G.cx + (p.x - G.cx) * lift, y = G.cy + (p.y - G.cy) * lift;
+    if (p.z < 0) { started = false; continue; } if (!started) { ctx.moveTo(x, y); started = true; } else ctx.lineTo(x, y); }
+}
+function drawNet(G, t) {
+  if (cur.net < .01) return;
+  ctx.save(); ctx.globalCompositeOperation = "lighter"; ctx.lineWidth = DPR * .7;
+  const nN = Math.floor(NEAR.length * Math.min(1, cur.net)), nF = Math.floor(FAR.length * cur.runaway * Math.min(1, cur.net));
+  ctx.strokeStyle = `rgba(140,200,255,${.35 * Math.min(1, cur.net)})`; ctx.beginPath();
+  for (let i = 0; i < nN; i++) arcPath(CITIES[NEAR[i][0]], CITIES[NEAR[i][1]], G, 6);
+  ctx.stroke();
+  if (nF) { ctx.strokeStyle = `rgba(190,225,255,${.16 * cur.runaway})`; ctx.beginPath(); for (let i = 0; i < nF; i++) arcPath(CITIES[FAR[i][0]], CITIES[FAR[i][1]], G, 12); ctx.stroke(); }
+  ctx.restore();
+}
+function drawSwarm(G, t, dt) {
+  if (cur.swarm < .01 && cur.ash < .01) return;
+  ctx.save(); ctx.globalCompositeOperation = "lighter";
+  SWARM.forEach((s, i) => {
+    if (!REDUCED) { s.lat += s.dl * dt; s.lon += s.dn * dt; if (Math.abs(s.lat) > 1.3) s.dl *= -1; }
+    let lat = s.lat, lon = s.lon;
+    if (cur.order > .01) { const g = .1047; lat = mix(lat, Math.round(lat / g) * g, cur.order); lon = mix(lon, Math.round(lon / g) * g, cur.order); }
+    const p = project(lat, lon, G); if (p.z < 0) return;
+    let x = p.x, y = p.y, a = cur.swarm * .7 * p.z;
+    if (cur.ash > .01) { const fall = ((t * .08 + s.fall) % 1) * cur.ash; y += fall * G.r * .9; x += Math.sin(t + i) * fall * G.r * .05; a = Math.max(a * (1 - cur.ash), cur.ash * (1 - fall) * .5 * p.z); }
+    ctx.fillStyle = cur.ash > .3 ? `rgba(190,185,175,${a})` : `rgba(255,236,190,${a})`;
+    ctx.fillRect(x, y, DPR * 1.1, DPR * 1.1);
+  });
+  ctx.restore();
+}
+function drawWorkings(G, t) {
+  if (cur.works < .01) return;
+  ctx.save(); ctx.globalCompositeOperation = "lighter";
+  WORKS.forEach((w) => { const p = project(w.lat, w.lon, G); if (p.z < .1) return; const pulse = .6 + .4 * Math.sin(t * 1.3 + w.ph);
+    glowDot(p.x, p.y, G.r * .07 * w.s * Math.min(1.6, cur.works) * (.8 + .4 * pulse), "rgba(230,180,80,A)", Math.min(1, .55 * cur.works * pulse * p.z)); });
+  ctx.restore();
+}
+function drawCutaway(G, t) {
+  if (cur.cut < .01) return;
+  ctx.save(); ctx.globalAlpha = cur.cut;
+  const r = G.r; ctx.fillStyle = "#05070b"; ctx.beginPath(); ctx.arc(G.cx, G.cy, r * 1.02, 0, TAU); ctx.fill();
+  const lay = ctx.createRadialGradient(G.cx, G.cy, 0, G.cx, G.cy, r);
+  const coreR = .34 * cur.core;
+  lay.addColorStop(0, "#fff1b8"); lay.addColorStop(coreR * .6, "#ffb347"); lay.addColorStop(coreR, "#c2410c");
+  lay.addColorStop(Math.min(.95, coreR + .12), "#5a1d0e"); lay.addColorStop(.9, "#2a1a14"); lay.addColorStop(.97, "#5b4632"); lay.addColorStop(1, "#7a6a45");
+  ctx.fillStyle = lay; ctx.beginPath(); ctx.arc(G.cx, G.cy, r, 0, TAU); ctx.fill();
+  // bores
+  for (let i = 0; i < 9; i++) {
+    const a = -Math.PI / 2 + (i - 4) * .3 + Math.sin(i * 7.3) * .05;
+    const x0 = G.cx + Math.cos(a) * r, y0 = G.cy + Math.sin(a) * r, x1 = G.cx + Math.cos(a) * r * coreR * .95, y1 = G.cy + Math.sin(a) * r * coreR * .95;
+    ctx.lineWidth = DPR * 2.2; ctx.strokeStyle = `rgba(255,106,42,${.15 + .75 * cur.bores})`; ctx.beginPath(); ctx.moveTo(x0, y0); ctx.lineTo(x1, y1); ctx.stroke();
+    if (cur.bores > .05) { ctx.globalCompositeOperation = "lighter";
+      for (let k = 0; k < 4; k++) { const f = ((t * .35 + k / 4 + i * .13) % 1); const x = mix(x1, x0, f), y = mix(y1, y0, f); glowDot(x, y, r * .03, "rgba(255,170,90,A)", cur.bores * (1 - f) * .9); }
+      ctx.globalCompositeOperation = "source-over"; }
+    if (cur.capped > .05) { ctx.strokeStyle = `rgba(200,190,170,${cur.capped})`; ctx.lineWidth = DPR * 3; ctx.beginPath();
+      const px = -Math.sin(a) * r * .045, py = Math.cos(a) * r * .045; ctx.moveTo(x0 - px, y0 - py); ctx.lineTo(x0 + px, y0 + py); ctx.stroke(); }
+  }
+  ctx.restore();
+}
+function drawOutline(G) {
+  if (cur.outline < .01) return;
+  ctx.save(); ctx.setLineDash([DPR * 3, DPR * 7]); ctx.strokeStyle = `rgba(232,226,212,${.28 * cur.outline})`; ctx.lineWidth = DPR;
+  ctx.beginPath(); ctx.arc(G.cx, G.cy, G.r / cur.R, 0, TAU); ctx.stroke(); ctx.restore();
+}
+function drawPoles(G, t) {
+  if (cur.poles < .01) return;
+  const n = POLE_COLORS.length, ring = G.r * 1.42;
+  ctx.save();
+  if (cur.pull > .01 && ctx.createConicGradient) {
+    const cg = ctx.createConicGradient(t * .02, G.cx, G.cy); POLE_COLORS.forEach((c, i) => cg.addColorStop(i / n, c)); cg.addColorStop(1, POLE_COLORS[0]);
+    ctx.globalCompositeOperation = "soft-light"; ctx.globalAlpha = Math.min(.6, .42 * cur.pull);
+    ctx.fillStyle = cg; ctx.beginPath(); ctx.arc(G.cx, G.cy, G.r, 0, TAU); ctx.fill();
+    ctx.globalCompositeOperation = "source-over"; ctx.globalAlpha = .08 * cur.pull;
+    ctx.fillStyle = cg; ctx.beginPath(); ctx.arc(G.cx, G.cy, G.r, 0, TAU); ctx.fill();
+  }
+  ctx.globalAlpha = 1;
+  // the middle: the Crossing, held open in the centre
+  if (cur.middle > .01) {
+    const mr = G.r * .55 * cur.middle; const g = ctx.createRadialGradient(G.cx, G.cy, 0, G.cx, G.cy, mr);
+    const c = cur.grey > .5 ? "150,150,150" : "250,236,200";
+    g.addColorStop(0, `rgba(${c},${.32 * (1 - cur.grey * .5)})`); g.addColorStop(1, `rgba(${c},0)`);
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(G.cx, G.cy, mr, 0, TAU); ctx.fill();
+  }
+  // the ring of poles, and the threads
+  ctx.globalCompositeOperation = "lighter";
+  POLE_COLORS.forEach((col, i) => {
+    const a = (i / n) * TAU + t * .02, x = G.cx + Math.cos(a) * ring, y = G.cy + Math.sin(a) * ring;
+    const flick = .75 + .25 * Math.sin(t * 2 + i);
+    glowDot(x, y, G.r * (.05 + .05 * cur.pull), hexA(col), cur.poles * flick);
+    if (cur.pull > .01) { ctx.strokeStyle = hexA(col).replace("A", .12 * cur.pull); ctx.lineWidth = DPR * .8; ctx.beginPath();
+      for (let k = 0; k < 3; k++) { const ang = a + (k - 1) * .09, rr = G.r * (.35 + .5 * ((i * 7 + k * 3) % 10) / 10);
+        ctx.moveTo(G.cx + Math.cos(ang) * rr, G.cy + Math.sin(ang) * rr); ctx.lineTo(x, y); } ctx.stroke(); }
+  });
+  ctx.restore();
+}
+function hexA(h) { const n = parseInt(h.slice(1), 16); return `rgba(${n >> 16},${(n >> 8) & 255},${n & 255},A)`; }
+function drawNatural(G, t) {
+  if (cur.natural < .01) return;
+  ctx.save(); ctx.globalCompositeOperation = "lighter";
+  NATURAL.forEach((w) => { const p = project(w.lat, w.lon, G); if (p.z < .1) return; const pulse = .65 + .35 * Math.sin(t * .7 + w.ph);
+    const col = w.kind === 0 ? "rgba(120,200,120,A)" : w.kind === 1 ? "rgba(255,160,80,A)" : "rgba(220,230,255,A)";
+    glowDot(p.x, p.y, G.r * (w.kind === 2 ? .035 : .05), col, .5 * cur.natural * pulse * p.z); });
+  ctx.restore();
+}
+function drawStanding(G, t) {
+  if (cur.standing < .01) return;
+  const s = cur.standing; ctx.save();
+  const forms = ["tower", "tree", "spires", "flame", "tree", "tower", "spires"];
+  forms.forEach((f, i) => {
+    const a = -Math.PI * .92 + i * (Math.PI * .84 / (forms.length - 1)); // across the upper limb
+    const bx = G.cx + Math.cos(a) * G.r * .995, by = G.cy + Math.sin(a) * G.r * .995;
+    ctx.save(); ctx.translate(bx, by); ctx.rotate(a + Math.PI / 2);
+    const h = G.r * (.16 + .05 * (i % 3)) * Math.min(1, s * 1.3 - i * .04);
+    if (h <= 0) { ctx.restore(); return; }
+    ctx.fillStyle = "#0a0c10"; ctx.strokeStyle = `rgba(232,226,212,${.55 * s})`; ctx.lineWidth = DPR;
+    ctx.beginPath();
+    if (f === "tower") { ctx.rect(-h * .09, -h, h * .18, h); ctx.moveTo(-h * .13, -h); ctx.lineTo(0, -h * 1.22); ctx.lineTo(h * .13, -h); }
+    else if (f === "tree") { ctx.rect(-h * .04, -h * .5, h * .08, h * .5); ctx.moveTo(h * .26, -h * .55); ctx.arc(0, -h * .7, h * .28, 0, TAU); }
+    else if (f === "spires") { for (let k = -2; k <= 2; k++) { const hh = h * (1 - Math.abs(k) * .22); ctx.moveTo(k * h * .1 - h * .04, 0); ctx.lineTo(k * h * .1, -hh); ctx.lineTo(k * h * .1 + h * .04, 0); } }
+    else { const fl = Math.sin(t * 6 + i) * .05; ctx.moveTo(-h * .14, 0); ctx.quadraticCurveTo(-h * .2, -h * .5, (fl) * h, -h); ctx.quadraticCurveTo(h * .2, -h * .5, h * .14, 0); }
+    ctx.fill(); ctx.stroke();
+    if (f === "flame") { ctx.globalCompositeOperation = "lighter"; glowDot(0, -h * .4, h * .5, "rgba(255,140,60,A)", .35 * s); }
+    ctx.restore();
+  });
+  ctx.restore();
+}
+function drawLattice(G, t) {
+  if (cur.lattice < .01) return;
+  ctx.save(); ctx.globalCompositeOperation = "lighter"; ctx.lineWidth = DPR * .8;
+  LATTICE.forEach(([a, b], i) => {
+    const vx = cur.veil * Math.max(0, 1 - Math.abs(((i * 37) % 100) / 100 - .5) * 2); // thinner where the veil leans
+    ctx.strokeStyle = `rgba(150,215,235,${Math.max(0, .5 * cur.lattice - vx * .35)})`;
+    ctx.beginPath(); const steps = 14; let st = false;
+    for (let s = 0; s <= steps; s++) { const k = s / steps; const v = [a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k, a[2] + (b[2] - a[2]) * k]; const m = Math.hypot(...v);
+      const p = projectV(v.map((c) => c / m), G); if (p.z < 0) { st = false; continue; }
+      const x = G.cx + (p.x - G.cx) * .985, y = G.cy + (p.y - G.cy) * .985; if (!st) { ctx.moveTo(x, y); st = true; } else ctx.lineTo(x, y); }
+    ctx.stroke();
+  });
+  ctx.restore();
+}
+const VEIL_SHAPE = Array.from({ length: 96 }, (_, i) => { const a = (i / 96) * TAU; return { a, r: .78 + .3 * fbm(Math.cos(a) * 1.4 + 5, Math.sin(a) * 1.4 + 9, 3.3) + .12 * Math.sin(a * 3 + 1) }; });
+function drawVeil(G, t) {
+  if (cur.veil < .01) return;
+  const vx = G.cx + G.r * 2.05, vy = G.cy - G.r * .1, vr = G.r * 1.25;
+  ctx.save();
+  const breathe = 1 + .015 * Math.sin(t * .4);
+  const path = () => { ctx.beginPath(); VEIL_SHAPE.forEach((p, i) => { const rr = p.r * vr * breathe; const x = vx + Math.cos(p.a) * rr * 1.1, y = vy + Math.sin(p.a) * rr; i ? ctx.lineTo(x, y) : ctx.moveTo(x, y); }); ctx.closePath(); };
+  // an absence, not a thing: feathered from a faint violet rim to a black that takes the stars with it
+  const shape = (sc) => { ctx.beginPath(); VEIL_SHAPE.forEach((p, i) => { const rr = p.r * vr * breathe * sc; const x = vx + Math.cos(p.a) * rr * 1.1, y = vy + Math.sin(p.a) * rr; i ? ctx.lineTo(x, y) : ctx.moveTo(x, y); }); ctx.closePath(); };
+  ctx.shadowColor = "rgba(107,79,138,.75)"; ctx.shadowBlur = 60 * DPR;
+  [[1.16, .10], [1.1, .16], [1.05, .28], [1.0, .5], [.95, .8], [.88, 1]].forEach(([sc, a]) => { ctx.globalAlpha = a * cur.veil; shape(sc); ctx.fillStyle = "#020205"; ctx.fill(); ctx.shadowBlur = 0; });
+  ctx.restore();
+}
+function drawArcs(G, t) {
+  if (cur.arcs < .01) return;
+  ctx.save(); ctx.globalCompositeOperation = "lighter";
+  ARCBANDS.forEach((b, bi) => {
+    // a great circle: rotate the equator by tilt about x then by rot about y
+    const pts = []; for (let s = 0; s <= 120; s++) { const a = (s / 120) * TAU; let v = [Math.sin(a), 0, Math.cos(a)];
+      v = [v[0], v[1] * Math.cos(b.tilt) - v[2] * Math.sin(b.tilt), v[1] * Math.sin(b.tilt) + v[2] * Math.cos(b.tilt)];
+      v = [v[0] * Math.cos(b.rot) + v[2] * Math.sin(b.rot), v[1], -v[0] * Math.sin(b.rot) + v[2] * Math.cos(b.rot)];
+      const p = projectV(v, G); pts.push({ x: G.cx + (p.x - G.cx) * 1.03, y: G.cy + (p.y - G.cy) * 1.03, z: p.z }); }
+    for (const pass of [0, 1]) {
+      ctx.lineWidth = pass ? DPR * 1.4 : DPR * 7; ctx.strokeStyle = hexA(b.col).replace("A", (pass ? .7 : .1) * cur.arcs);
+      ctx.setLineDash(pass ? [DPR * 26, DPR * 18] : []); ctx.lineDashOffset = -t * 60 * b.sp * DPR * 10;
+      ctx.beginPath(); let st = false; pts.forEach((p) => { if (p.z < -.05) { st = false; return; } st ? ctx.lineTo(p.x, p.y) : (ctx.moveTo(p.x, p.y), st = true); }); ctx.stroke();
+    }
+  });
+  ctx.setLineDash([]); ctx.restore();
+}
+function drawMany(G, t, dt) {
+  if (cur.many < .01) return;
+  ctx.save(); ctx.globalCompositeOperation = "lighter";
+  MANY.forEach((m) => { if (!REDUCED) { m.lat += m.vl * dt * .2; m.lon += m.vn * dt * .2 * (m.with ? 1 : -1); if (Math.abs(m.lat) > 1.25) m.vl *= -1; }
+    const p = project(m.lat, m.lon, G); if (p.z < .05) return; const tw = .7 + .3 * Math.sin(t * 2 + m.ph);
+    ctx.fillStyle = m.with ? `rgba(255,236,200,${.75 * cur.many * tw * p.z})` : `rgba(180,200,255,${.6 * cur.many * tw * p.z})`;
+    ctx.beginPath(); ctx.arc(p.x, p.y, DPR * 1.5, 0, TAU); ctx.fill(); });
+  ctx.restore();
+}
+function drawYou(G, t) {
+  if (cur.you < .01) return;
+  const x = G.cx + G.r * .08, y = G.cy + G.r * .12;
+  ctx.save(); ctx.globalCompositeOperation = "lighter";
+  const k = Math.min(1, cur.you);
+  ctx.fillStyle = `rgba(${mix(120, 255, k)},${mix(120, 240, k)},${mix(130, 210, k)},${.5 + .5 * k})`;
+  ctx.beginPath(); ctx.arc(x, y, DPR * 2.6, 0, TAU); ctx.fill();
+  glowDot(x, y, G.r * .09, "rgba(255,230,190,A)", .5 * k);
+  if (!REDUCED) for (let i = 0; i < 2; i++) { const f = ((t * .35 + i * .5) % 1); ctx.strokeStyle = `rgba(255,230,190,${(1 - f) * .45 * k})`; ctx.lineWidth = DPR; ctx.beginPath(); ctx.arc(x, y, G.r * .05 + f * G.r * .3, 0, TAU); ctx.stroke(); }
+  ctx.restore();
+}
+function drawFocus(G, t) {
+  if (cur.focus < .01) return;
+  const p = project(SAMPLE.lat * Math.PI / 180, SAMPLE.lon * Math.PI / 180, G); if (p.z < 0) return;
+  ctx.save(); ctx.globalCompositeOperation = "lighter";
+  glowDot(p.x, p.y, G.r * .05, "rgba(255,236,200,A)", .8 * cur.focus);
+  ctx.strokeStyle = `rgba(255,236,200,${.6 * cur.focus})`; ctx.lineWidth = DPR; ctx.beginPath(); ctx.arc(p.x, p.y, G.r * .025, 0, TAU); ctx.stroke();
+  ctx.restore();
+}
+function drawName(dt) {
+  if (!nameAnim) return;
+  const from = DATA.movements[2].shots.find((s) => s.nameFrom)?.nameFrom || "EARTH", to = DATA.movements[2].shots.find((s) => s.nameTo)?.nameTo || "EXESA";
+  nameAnim.t += dt;
+  const fs = Math.min(W * .16, H * .2), y = H * .42;
+  ctx.save(); ctx.font = `${fs}px "IM Fell English", Georgia, serif`; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+  const letterW = fs * .78, x0 = W / 2 - letterW * 2;
+  for (let i = 0; i < 5; i++) {
+    const start = .8 + i * .55, p = Math.max(0, Math.min(1, (nameAnim.t - start) / 1.4));
+    const x = x0 + i * letterW;
+    if (from[i] === to[i]) { ctx.fillStyle = "rgba(232,226,212,.92)"; ctx.fillText(from[i], x, y); continue; }
+    // the old letter wears away grain by grain, the new one is what is left
+    ctx.globalAlpha = (1 - p) * .92; ctx.fillStyle = "#e8e2d4"; ctx.fillText(from[i], x + (REDUCED ? 0 : p * fs * .02), y);
+    if (!REDUCED && p > 0 && p < 1) { ctx.globalCompositeOperation = "destination-out"; for (let k = 0; k < 60 * p; k++) { ctx.globalAlpha = .8; ctx.fillRect(x + (hash(i, k, 1) - .5) * fs * .6, y + (hash(i, k, 2) - .5) * fs * .8, DPR * 2, DPR * 2); } ctx.globalCompositeOperation = "source-over"; }
+    ctx.globalAlpha = p * .92; ctx.fillText(to[i], x, y);
+  }
+  ctx.restore();
+}
+let montageT = 0;
+function frame(now) {
+  const rawDt = Math.min(.1, (now - last) / 1000); last = now;
+  const dt = paused ? 0 : rawDt; tAll += dt;
+  if (!ended && !paused) { tShot += dt; if (tShot >= SHOTS[idx].dur + (P.fadeSeconds || 0)) next(); }
+  // ease every parameter toward its target
+  const k = REDUCED ? 1 : 1 - Math.pow(.18, rawDt);
+  for (const key in BASE) if (key !== "yaw") cur[key] += ((target[key] ?? BASE[key]) - cur[key]) * k;
+  if (target.focusLat !== undefined && cur.focus > .01) {
+    // turn the globe so the start faces the viewer
+    const wantYaw = -target.focusLon, wantPitch = Math.max(-1.5, Math.min(1.5, target.focusLat));
+    let dy = ((wantYaw - cur.yaw) % TAU + TAU * 1.5) % TAU - Math.PI; cur.yaw += dy * k; cur.pitch += (wantPitch - cur.pitch) * k;
+  } else if (!REDUCED) cur.yaw += cur.spin * dt;
+  // progress
+  const s = SHOTS[idx];
+  if (!s.coda) {
+    const mi = Math.min(s.movement, segs.length - 1);
+    segs.forEach((g, i) => { g.firstChild.style.width = i < mi ? "100%" : i > mi ? "0%" : (100 * (SHOTS.filter((x, j) => j < idx && x.movement === mi && !x.coda && x.id !== "title").length / DATA.movements[mi].shots.length)).toFixed(1) + "%"; });
+    plabel.textContent = s.visual === "title" ? "" : DATA.movements[mi].name;
+  }
+  // draw
+  ctx.fillStyle = "#05070b"; ctx.fillRect(0, 0, W, H);
+  STARS.forEach((st) => { const a = st.a * (.75 + .25 * Math.sin(tAll * .8 + st.tw)); ctx.fillStyle = `rgba(232,226,212,${a})`; ctx.fillRect(st.x * W, st.y * H, st.r * DPR, st.r * DPR); });
+  const base = Math.min(W, H) * (W < H ? .40 : .31);
+  const G = { r: base * cur.R * cur.zoom, cx: W * (.5 + cur.cx) + (W > H ? W * .1 : 0), cy: H * (W < H ? .38 : .45), yaw: cur.yaw, pitch: cur.pitch };
+  drawVeil(G, tAll);
+  drawOutline(G);
+  drawGlobe(G);
+  drawNatural(G, tAll);
+  drawCities(G, tAll);
+  drawNet(G, tAll);
+  drawWorkings(G, tAll);
+  drawSwarm(G, tAll, dt);
+  drawPoles(G, tAll);
+  drawLattice(G, tAll);
+  if (cur.montage > .3 && !REDUCED) {
+    montageT += dt; const ph = Math.floor(montageT / .9) % 4; ctx.save(); ctx.globalAlpha = .45 * cur.montage;
+    const save = { net: cur.net, works: cur.works, bores: cur.bores, cut: cur.cut, ash: cur.ash, swarm: cur.swarm };
+    if (ph === 0) { cur.net = 1; drawNet(G, tAll); } else if (ph === 1) { cur.works = 1; drawWorkings(G, tAll); } else if (ph === 2) { cur.swarm = .8; drawSwarm(G, tAll, 0); } else { cur.ash = 1; drawSwarm(G, tAll, 0); }
+    Object.assign(cur, save); ctx.restore();
+  }
+  drawCutaway(G, tAll);
+  drawStanding(G, tAll);
+  drawArcs(G, tAll);
+  drawMany(G, tAll, dt);
+  drawYou(G, tAll);
+  drawFocus(G, tAll);
+  drawName(dt);
+  requestAnimationFrame(frame);
+}
+go(0);
+requestAnimationFrame(frame);
+})();
+</script>

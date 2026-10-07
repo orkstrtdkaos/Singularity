@@ -2358,14 +2358,6 @@
       {
         "day": 10,
         "worldDay": 93,
-        "text": "Word from The Maw — The Hollow King of the Wild Half: cataloguing what he has been given.",
-        "tier": "murmur",
-        "section": "world",
-        "locationId": "the_maw"
-      },
-      {
-        "day": 10,
-        "worldDay": 93,
         "text": "The Thornmother of the Closing Wood has not been seen at home in a long while — whatever is happening has all of them.",
         "tier": "murmur",
         "section": "world",
@@ -2543,11 +2535,18 @@
         "tier": "event",
         "section": "world",
         "figureId": "wayhouse-keeper"
+      },
+      {
+        "day": 10,
+        "worldDay": 99,
+        "text": "The legs at The Standing Annex will carry one more.",
+        "tier": "event",
+        "section": "yours"
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 2378,
-    "lastSharedReadAt": "2026-10-07T02:02:51.247Z",
+    "lastGenCount": 2390,
+    "lastSharedReadAt": "2026-10-07T14:58:08.743Z",
     "lastTickWorldDay": 99,
     "lastCanonWorldDay": 99,
     "turnsSinceOffer": 0,
@@ -2780,7 +2779,7 @@
         "kind": "shortage",
         "premise": "The shallow wells that sustain the scattered settlements are dropping faster each season than anyone has yet admitted aloud.",
         "cause": "The Palelands' sparse, chalky soil has always demanded more water to work than it naturally holds, and the settlements were founded at the margins of what the…",
-        "stage": 62,
+        "stage": 63,
         "seededAtCount": 660,
         "surfaced": true,
         "fate": "growing",
@@ -2855,7 +2854,7 @@
         "kind": "shortage",
         "premise": "Certain materials or substances needed for whatever work the Unmade does are being quietly stockpiled by one practitioner at the expense of communal supply, because she no longer trusts the…",
         "cause": "The Unmade is a place where things are taken apart, and grief for what is lost has no formal channel — it is expected to simply disperse, as everything else…",
-        "stage": 25,
+        "stage": 26,
         "seededAtCount": 1675,
         "surfaced": true,
         "fate": "growing",
@@ -2881,7 +2880,7 @@
         "kind": "shortage",
         "premise": "A foundational material used in the Making's core work has quietly been substituted with an inferior source for several production cycles, and nothing built from it has yet been tested under real…",
         "cause": "The two workshops already deadlocked over the shared tool have each independently begun sourcing their own materials rather than drawing from the common…",
-        "stage": 18,
+        "stage": 19,
         "seededAtCount": 1826,
         "surfaced": true,
         "fate": "growing",
@@ -2971,7 +2970,7 @@
         "kind": "shortage",
         "premise": "A particular binding material used across multiple workshops has been quietly borrowed-forward — promised to more projects than currently exist — and the craftsperson who tracks allocations has been…",
         "cause": "The Making runs on informal trust and reciprocal lending; no one formalized the ledger because the system always self-corrected before.",
-        "stage": 0,
+        "stage": 1,
         "seededAtCount": 2378,
         "surfaced": false,
         "fate": "growing",
@@ -10852,32 +10851,8 @@
       "the_war_ender": 84,
       "the_last_choirmistress": 90
     },
-    "updatesToldTo": "2.21.6",
+    "updatesToldTo": "2.22.4",
     "newsLog": [
-      {
-        "day": 5,
-        "worldDay": 82,
-        "text": "The Hour-Hoarder has stopped spending themselves on The Second Manifestation.",
-        "tier": "murmur",
-        "section": "world",
-        "figureId": "the_hour_hoarder",
-        "arcId": "arc_manifestation_storm",
-        "locationId": "the_stopped",
-        "placedBy": "figureId",
-        "loggedAt": "2026-09-20T01:00:05.315Z"
-      },
-      {
-        "day": 5,
-        "worldDay": 82,
-        "text": "The Cornerstone has stopped spending themselves on What Wakes Beneath.",
-        "tier": "murmur",
-        "section": "world",
-        "figureId": "the_cornerstone",
-        "arcId": "arc_what_wakes_beneath",
-        "locationId": "bedrock",
-        "placedBy": "figureId",
-        "loggedAt": "2026-09-20T01:00:05.315Z"
-      },
       {
         "day": 5,
         "worldDay": 82,
@@ -13275,6 +13250,22 @@
         "worldDay": 99,
         "text": "The game was updated to v2.21.6 — 25 new, 41 fixed, 21 changed.",
         "loggedAt": "2026-10-07T02:03:07.635Z"
+      },
+      {
+        "day": 10,
+        "worldDay": 99,
+        "text": "The legs at The Standing Annex will carry one more.",
+        "tier": "event",
+        "section": "yours",
+        "loggedAt": "2026-10-07T14:58:20.142Z"
+      },
+      {
+        "kind": "update",
+        "section": "world",
+        "version": "2.22.4",
+        "worldDay": 99,
+        "text": "The game was updated to v2.22.4 — 5 new, 3 fixed, 7 changed.",
+        "loggedAt": "2026-10-07T14:58:20.142Z"
       }
     ],
     "seatsTaken": {
@@ -17015,8 +17006,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1791338624062,
-  "rev": 1168,
+  "updatedAt": 1791385100142,
+  "rev": 1170,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -20501,7 +20492,7 @@
     },
     {
       "text": "The legs at The Standing Annex will carry one more.",
-      "announced": false
+      "announced": true
     }
   ],
   "figureImages": {
@@ -21538,7 +21529,7 @@
       },
       "lastVerb": "quest",
       "lastVerbDay": 10,
-      "wins": 1,
+      "wins": 2,
       "winHow": "quest",
       "grownHeads": 4,
       "grewDay": 8
@@ -21562,14 +21553,14 @@
       },
       "lastVerb": "patrol",
       "lastVerbDay": 10,
-      "losses": 0,
+      "losses": 1,
       "lost": {
         "0": 80
       },
       "wins": 0,
       "winHow": null,
-      "lossFrom": null,
-      "lossHow": null,
+      "lossFrom": "power_deepwood_moot",
+      "lossHow": "feud",
       "shrankDay": 10
     },
     "power_scaffold_court": {
@@ -21608,7 +21599,7 @@
       },
       "lossFrom": "power_harvest_hand",
       "lossHow": "feud",
-      "wins": 1,
+      "wins": 2,
       "winHow": "quest",
       "grownHeads": 32,
       "grewDay": 10
@@ -21636,7 +21627,7 @@
       },
       "lastVerb": "expand",
       "lastVerbDay": 10,
-      "wins": 0,
+      "wins": 1,
       "grownHeads": 52,
       "grewDay": 5,
       "winHow": "expand"
@@ -21652,9 +21643,9 @@
       "grownHeads": 30,
       "grewDay": 5,
       "winHow": "expand",
-      "lossFrom": "power_seraphic_orders",
-      "lossHow": "crusade",
-      "losses": 1,
+      "lossFrom": null,
+      "lossHow": null,
+      "losses": 0,
       "lost": {
         "0": 30
       },
@@ -21679,12 +21670,12 @@
       },
       "lastVerb": "feud",
       "lastVerbDay": 10,
-      "losses": 1,
+      "losses": 0,
       "lost": {
         "0": 16
       },
-      "lossFrom": "power_grovehome_moot",
-      "lossHow": "feud",
+      "lossFrom": null,
+      "lossHow": null,
       "shrankDay": 10
     },
     "power_switchback_tollmen": {
@@ -21706,7 +21697,7 @@
     "power_firstsight_barony": {
       "lastVerb": "expand",
       "lastVerbDay": 10,
-      "wins": 0,
+      "wins": 1,
       "grownHeads": 14,
       "grewDay": 5,
       "winHow": "expand"
@@ -21714,7 +21705,7 @@
     "power_blaze_unshadowed": {
       "lastVerb": "recruit",
       "lastVerbDay": 10,
-      "wins": 1,
+      "wins": 2,
       "grownHeads": 14,
       "grewDay": 5,
       "losses": 0,
@@ -21742,10 +21733,10 @@
       "wins": 0,
       "grownHeads": 10,
       "grewDay": 5,
-      "losses": 0,
+      "losses": 1,
       "winHow": null,
-      "lossFrom": null,
-      "lossHow": null,
+      "lossFrom": "power_scaffold_court",
+      "lossHow": "feud",
       "lost": {
         "0": 22
       },
@@ -21754,7 +21745,7 @@
     "power_long_choir": {
       "lastVerb": "recruit",
       "lastVerbDay": 10,
-      "wins": 1,
+      "wins": 2,
       "winHow": "recruit",
       "grownHeads": 12,
       "grewDay": 9
@@ -21781,7 +21772,7 @@
     "power_the_scouring": {
       "lastVerb": "expand",
       "lastVerbDay": 10,
-      "wins": 2,
+      "wins": 0,
       "grownHeads": 16,
       "grewDay": 5,
       "losses": 0,
@@ -21810,7 +21801,7 @@
     "power_hand_of_the_open_figure": {
       "lastVerb": "recruit",
       "lastVerbDay": 10,
-      "wins": 1,
+      "wins": 2,
       "winHow": "recruit",
       "grownHeads": 12,
       "grewDay": 10
@@ -21818,7 +21809,7 @@
     "power_the_bloodless_hold": {
       "lastVerb": "recruit",
       "lastVerbDay": 10,
-      "wins": 1,
+      "wins": 2,
       "winHow": "recruit",
       "grownHeads": 16,
       "grewDay": 10
@@ -21846,13 +21837,13 @@
     "power_the_ones_called": {
       "lastVerb": "recruit",
       "lastVerbDay": 10,
-      "wins": 1,
+      "wins": 2,
       "winHow": "recruit"
     },
     "power_table_of_kept_terms": {
       "lastVerb": "quest",
       "lastVerbDay": 10,
-      "wins": 1,
+      "wins": 2,
       "winHow": "quest"
     }
   },

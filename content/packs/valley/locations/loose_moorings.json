@@ -1,0 +1,67 @@
+{
+ "schemaVersion": 1,
+ "id": "loose_moorings",
+ "name": "Loose Moorings",
+ "regionId": "unspooling",
+ "communityId": "unspooling.loose_moorings",
+ "axisVector": [
+  0.0,
+  -0.3,
+  0.0,
+  -0.3,
+  0.0,
+  0.0,
+  -0.6,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0
+ ],
+ "spectrum": {
+  "chaos_order": -0.6,
+  "falsehood_truth": -0.3,
+  "violence_peace": -0.3
+ },
+ "tags": [
+  "churn",
+  "harbour",
+  "pirate",
+  "market",
+  "settlement"
+ ],
+ "connections": [
+  "the_churn",
+  "tumbledown_market"
+ ],
+ "descriptionSeed": "Loose Moorings is the Churn's harbour, on a grey gulf where the Unspooling comes down to the sea. Nothing here is insured and nothing is tied fast: the jetties are lashed rather than built, the boats belong to whoever is sailing them this week, and the harbour-master keeps her ledger in pencil. Cassa Redsail sails out of here. She takes ships nobody insures, she is very hard to be angry at, and she has said four times that the next take will be the one big enough to stop.",
+ "loreRefs": [
+  "reach_unspooling"
+ ],
+ "encounterFlavor": "A crew hiring with no questions asked; a cargo nobody will name; Cassa, already standing somewhere you did not see her go.",
+ "dangerLevel": 3,
+ "questSeeds": [
+  "Cassa took a cargo that was quietly not insured because it was not cargo, and somebody is looking for it",
+  "The harbour wants a light on the point and cannot agree whose it would be",
+  "A ship came in with every sail set and nobody aboard"
+ ],
+ "map": {
+  "x": 890,
+  "y": 150
+ },
+ "poleIntensity": {
+  "chaos": 0.6,
+  "falsehood": 0.3,
+  "violence": 0.3
+ },
+ "worldPos": {
+  "colatitude": 84.0,
+  "longitude": 44.0,
+  "depth": 0
+ },
+ "tier": "settlement",
+ "parentId": "the_churn_edge",
+ "appearance": "Jetties of lashed timber on a rocky shore, a dozen hulls of every make, sails patched in red. Houses built from ship timbers and tied to iron rings in the rock. A grey gulf opening to the open sea.",
+ "_placed_20261007": "Aevi, 2026-10-07. Probed with po/tools/probe_ground.mjs before placing: land, biome broken_hills, region vote `unspooling`; water 0.25° east — the shore of a gulf running from colatitude 82 out to the open sea past 94; the Churn 3° (5 days), Tumbledown Market 8° (13.4 days).",
+ "_why_20261007": "⛑ A PIRATE NEEDS A HARBOUR, AND THE UNSPOOLING HAS A SEA. Cassa's `homeLocation` was `unspooling`, a region, and her role says 'out of the unspooling reaches'. Probed: the Unspooling's own coast is a gulf at colatitude 82–93, lon 40–53, opening to the open sea; this is its western shore. ⚠️ `waterauth.json`'s Longshore note says Cassa and Orrun were 'authored to `foothill_longshore` before the town had water'. Her record has said `unspooling` since 2026-09-08 and Longshore is forty-odd days away, so that note is stale for her; I have not touched it, it is flagged in po/ for whoever owns it."
+}

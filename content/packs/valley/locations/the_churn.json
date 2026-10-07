@@ -1,0 +1,69 @@
+{
+ "schemaVersion": 1,
+ "id": "the_churn",
+ "name": "The Churn",
+ "regionId": "unspooling",
+ "communityId": "churn.unbought_court",
+ "axisVector": [
+  0.0,
+  0.0,
+  0.0,
+  -0.3,
+  0.0,
+  0.0,
+  -0.9,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.4
+ ],
+ "spectrum": {
+  "chaos_order": -0.9,
+  "destruction_creation": 0.4,
+  "violence_peace": -0.3
+ },
+ "tags": [
+  "churn",
+  "chaos",
+  "unstable",
+  "strange",
+  "court"
+ ],
+ "connections": [
+  "tumbledown_market",
+  "spindrift_hollow",
+  "loose_moorings"
+ ],
+ "descriptionSeed": "The Churn is the deep of the Unspooling, past every edge, where the ground does not keep its shape from one season to the next. A road here is a guess and a wall is a hope. The Churnfolk live in it gladly, and so do the peoples who refuse to dissolve into it: the Unbought Court, elven and dwarven and ent and walker together, who build in the Churn on purpose and rebuild when it takes what they built. Urd Stonefast has been at the same hall for two hundred years. There is always a half-built thing behind him.",
+ "loreRefs": [
+  "reach_unspooling",
+  "the_twelve_reaches"
+ ],
+ "encounterFlavor": "A mason of the Unbought Court who hands you a tool before saying hello; ground that was a path yesterday; Churnfolk who think your map is very funny.",
+ "dangerLevel": 4,
+ "questSeeds": [
+  "Urd will hand you a tool and expect you to help, and will not explain what you are building",
+  "A wall the Unbought Court raised last season is still standing, and the Court is more worried than pleased",
+  "Urd has never built anywhere easy and is afraid to find out why, and someone could ask him"
+ ],
+ "map": {
+  "x": 870,
+  "y": 170
+ },
+ "poleIntensity": {
+  "chaos": 0.9,
+  "creation": 0.4,
+  "violence": 0.3
+ },
+ "worldPos": {
+  "colatitude": 83.0,
+  "longitude": 41.0,
+  "depth": 0
+ },
+ "tier": "settlement",
+ "parentId": "the_churn_edge",
+ "appearance": "Broken hills that do not sit the same way twice. Patched halls of mismatched stone, propped and braced against ground that moves. Half-built walls, scaffolds, and the rubble of last season's work stacked for the next.",
+ "_placed_20261007": "Aevi, 2026-10-07. Probed with po/tools/probe_ground.mjs before placing: land, biome broken_hills, region vote `unspooling`; Spindrift Hollow 7.2° (12 days), Tumbledown Market 8.0° (13.4 days), Loose Moorings 3° (5 days).",
+ "_why_20261007": "⛑ URD BUILDS IN THE CHURN, AND THE CHURN WAS ONLY EVER AN EDGE. His `homeLocation` was `the_churn`, which resolved to nothing; the Churn Edge is 'the margin where the Unspooling starts unspooling', not where he is. Placed in the deep of the region between Tumbledown and Spindrift, on broken hills, with the Unbought Court's community id so the court has ground. Parent the Churn Edge, as Spindrift's and Tumbledown's are."
+}

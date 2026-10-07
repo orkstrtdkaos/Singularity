@@ -1,0 +1,69 @@
+{
+ "schemaVersion": 1,
+ "id": "cairnsend",
+ "name": "Cairnsend",
+ "regionId": "the_palelands",
+ "communityId": "afterling.cairnsend",
+ "axisVector": [
+  0.0,
+  0.0,
+  0.0,
+  0.3,
+  0.0,
+  0.0,
+  0.4,
+  0.0,
+  -0.7,
+  0.0,
+  0.0,
+  0.0
+ ],
+ "spectrum": {
+  "death_life": -0.7,
+  "chaos_order": 0.4,
+  "violence_peace": 0.3
+ },
+ "tags": [
+  "ashwarden",
+  "afterling",
+  "death",
+  "town",
+  "settlement"
+ ],
+ "connections": [
+  "the_last_cairn",
+  "the_quiet_ground",
+  "the_long_grey"
+ ],
+ "descriptionSeed": "Cairnsend grew up behind the Last Cairn one house at a time, as the dead who would not lie down came to stand where Orsolya stood. It is the one town in the world where an Afterling is ordinary. It is cold, orderly and very quiet at night, because nobody here sleeps: there is a lamp in every window at midnight. The living come to trade, to hire the tireless, to visit the people they buried, and sometimes to stay; a living woman here is married to a man who drowned forty years ago, and everybody came to the wedding. The Vigil sits all night in the long house under Speaker Barrowe and argues one cause, that nobody should be raised without being asked. The Grave-Callers' crews pass through on their way to the dykes, and were not asked. Two days out, at the edge of the Long Grey, the reapers of the Harvest Hand count the houses.",
+ "loreRefs": [
+  "the_afterlings",
+  "the_twelve_reaches"
+ ],
+ "encounterFlavor": "An Afterling who has not slept in forty years and is glad of the company; a living family come to visit a grave that walks; a Grave-Caller crew passing through, none of whom were asked.",
+ "dangerLevel": 2,
+ "questSeeds": [
+  "The Vigil wants a law that nobody is raised without asking, and needs someone living to carry it to Cairnhold",
+  "A family has come to take their raised father home, and he would rather stay",
+  "The Harvest Hand has started counting the houses"
+ ],
+ "map": {
+  "x": 705,
+  "y": 375
+ },
+ "poleIntensity": {
+  "death": 0.7,
+  "order": 0.4,
+  "peace": 0.3
+ },
+ "worldPos": {
+  "colatitude": 86.75,
+  "longitude": 73.95,
+  "depth": 0
+ },
+ "tier": "settlement",
+ "parentId": "cairnhold",
+ "appearance": "Low stone houses in straight rows, their roofs weighted with cairn-stones, every window lit at midnight. A long council house at the centre with its doors open all night. No gardens. Cold air, ash-grey ground, and very little noise.",
+ "_placed_20261007": "Aevi, 2026-10-07. Probed with po/tools/probe_ground.mjs before placing: land, biome scree, region vote `the_palelands`; the Quiet Ground 1.2° (2 days), the Long Grey 1.6° (2.7 days), the Last Cairn 0.53° (0.9 days).",
+ "_why_20261007": "⛑ THE TOWN THE FILM NAMES AND THE MAP DID NOT HAVE. film_life_death: 'Behind her grew Cairnsend, for the dead who would not lie down.' the_afterlings.md gives it whole (the five doors, the Vigil, the Grave-Callers, the Harvest Hand, the Wardens of Cairnhold, 'a lamp in every window at midnight') and it had no location. ⚑ PLACED AT THE END OF THE TENDING: past the Quiet Ground, short of the Long Grey, so Cairnhold's tending is behind it and Morvane's reapers are two days in front of it — which is its politics drawn as distance. Parent Cairnhold, as the Long Grey's and the Quiet Ground's are."
+}

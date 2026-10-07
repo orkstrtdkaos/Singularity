@@ -1,0 +1,67 @@
+{
+ "schemaVersion": 1,
+ "id": "the_fitting_house",
+ "name": "The Fitting House",
+ "regionId": "the_gearlands",
+ "communityId": "enginewright.fitting_house",
+ "axisVector": [
+  0.4,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  -0.9,
+  0.7,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0
+ ],
+ "spectrum": {
+  "mechanical_spiritual": -0.9,
+  "chaos_order": 0.7,
+  "emotional_logical": 0.4
+ },
+ "tags": [
+  "enginewright",
+  "mechanical",
+  "works",
+  "cult",
+  "dangerous"
+ ],
+ "connections": [
+  "the_great_engine",
+  "pressureholt"
+ ],
+ "descriptionSeed": "The Fitting House is a clean, quiet workshop a few days out from the Great Engine, and the people who come out of it have been improved. Harrow works here. He looks at what every part of a person is for and fits them to it, and what walks out is a device with a function, and thanks him. Pressureholt does not speak of the place. Families come to the door asking for someone back, and are shown, very politely, how well that someone is working.",
+ "loreRefs": [
+  "the_twelve_reaches"
+ ],
+ "encounterFlavor": "Someone improved, who is grateful and cannot remember what they wanted; a family come to ask for someone back; Harrow, looking at your joints while you talk.",
+ "dangerLevel": 5,
+ "questSeeds": [
+  "One of the improved is asking to be un-improved, and Harrow does not understand the request",
+  "Harrow cannot look at a thing with no function; bring him one",
+  "A Pressureholt family's son went in last month and wrote home that he has never been happier"
+ ],
+ "map": {
+  "x": 455,
+  "y": 105
+ },
+ "poleIntensity": {
+  "mechanical": 0.9,
+  "order": 0.7,
+  "logical": 0.4
+ },
+ "worldPos": {
+  "colatitude": 87.3,
+  "longitude": 152.5,
+  "depth": 0
+ },
+ "tier": "settlement",
+ "parentId": "pressureholt",
+ "appearance": "A long low workshop of pale stone and polished brass, spotless inside, with benches in rows and every tool hung to its drawn outline. It is very quiet. The people working here move exactly as much as they need to.",
+ "_placed_20261007": "Aevi, 2026-10-07. Probed with po/tools/probe_ground.mjs before placing: land, biome industrial_plain, region vote `the_gearlands`; the Great Engine 3.0° (5 days), Pressureholt 9.1° (15 days).",
+ "_why_20261007": "⛑ HARROW HAD NO HOME AT ALL. EXESA.md VI names him with Morvane as wanting what is under the ground awake and working toward it, so his seat is in the Gearlands a few days from the Great Engine, where Rethe — his counterweight in GREAT_FIGURES — is becoming the Engine. Surface, on industrial plain. Parent Pressureholt, as the Great Engine's is."
+}

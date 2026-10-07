@@ -197,7 +197,7 @@ Untended, places stop being reachable at all — not walled off, just further ev
 
 ## VI · Who is out there
 
-A hundred and thirty-one great figures walk Exesa, spread across a hundred and fifty-eight authored places — and
+A hundred and thirty-one great figures walk Exesa, spread across a hundred and sixty-three authored places — and
 most of them have never heard of you. They are doing their own work — and the world counts what they do
 whether or not you are in the room. The trickster you brushed past in a market may be a gang leader when you
 meet again, and nobody arranged that.

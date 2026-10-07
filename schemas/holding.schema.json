@@ -20,6 +20,7 @@
     "clearing": { "type": ["object", "null"], "description": "SNG-666 (CCODE-565): ground being cleared (or a frame built out) at this hold: budget, progress, passes." },
     "spotsCleared": { "type": "number", "description": "SNG-666: feature spots this hold has cleared by work; roomOf adds them to its rung's room." },
     "frameRaised": { "type": "number", "description": "SNG-666 §2.1: how many more features a MOVING hold's frame carries than its kind allows — raised by a clearing job finished on the frame (holdings.js: 'a frame is raised by engineering, not by growth'), never by growth. Written by the engine since CCODE-565; declared the day Loki's save first carried one (CCODE-640)." },
+    "rung": { "type": "string", "description": "CCODE-429 (SNG-666): the ladder rung the hold has been promoted TO — post · steading · hamlet · village · town · keep — written only when the player accepts a promotionOffer (acceptPromotion); roomOf takes the larger of this and what the features fit. Declared 2026-10-07 when Loki's play promoted the first hold." },
     "id": {
       "type": "string",
       "description": "100% — the stable key."

@@ -3,6 +3,12 @@
  "id": "film_breaking_building",
  "kind": "film",
  "name": "Breaking and Building",
+ "controls": {
+  "skip": "Skip",
+  "next": "Next",
+  "watchAgain": "Watch again",
+  "back": "Back to the Library"
+ },
  "_what": "Info film for the Breaking / Building domain: the Marchers and the Stillhold (violence and peace), the Unmakers and the Wrights of the New (ending and making), their homes, schools, costs, a figure or two each, the two arguments across the axes, and a close on the Marchward. Every string in lines, after, name and title is player-facing.",
  "_canon": "tradition_profiles_f1.json traditions[marcher,stillhold,unmaker,wright]: theCraft, oneLine, theTrade, acrossTheAxis, distribution.modes/tail; locations_f1.json descriptionSeed/appearance for the_redline, the_stillhold, the_scour, the_clearing_ground, the_scouring, the_forge_eternal, the_half_cathedral, the_ceaseless, the_marchward, hardline; reach_riven_marches_f1.json descriptionSeed/encounterFlavor; npcs_f1.json role/wants/fears/poleSignature.tell/appearance for veyra_lance, dame_iseult_hardline, vantia_stillhold, master_endmore, planmaster_wyncote; powers_f1.json plainly/descriptionSeed/appearance/holds for power_stillhold_calm, power_the_scour, power_scaffold_court, power_the_ceaseless, power_ender_host; greater_arcs_f1.json arc_the_poles_pull stage 1 publicFace; EXESA_o1.md VI/VII; PLAYERS_GUIDE_f1.md XII. Per-shot sources in film_breaking_building_sources.md.",
  "pacing": {

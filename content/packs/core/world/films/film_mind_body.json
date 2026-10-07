@@ -3,6 +3,12 @@
  "id": "film_mind_body",
  "kind": "film",
  "name": "Mind and Body",
+ "controls": {
+  "skip": "Skip",
+  "next": "Next",
+  "watchAgain": "Watch again",
+  "back": "Back to the Library"
+ },
  "_what": "Info film for the Mind and Body domain: its five peoples (Cogitants, Somatics, Syllogists, Figurists, Masons of the Give), their homes, costs, heretics or pure poles, one figure each, and the two cross-axis arguments. Every string in lines, after, name and title is player-facing.",
  "_canon": "tradition_profiles_f1.json traditions[cogitant,somatic,syllogist,figurist,mason] oneLine/theCraft/theTrade/acrossTheAxis/distribution; locations_f1.json descriptionSeed/appearance for the_cogitarium, the_flesh_temple, the_middle_way, the_axiom, the_axiom_gate_yard, the_proof_halls, the_bloodless_hold, cloudform, the_figure_works, bedrock, the_weighing_yard, the_leaden_deep, the_held_yard; npcs_f1.json role/wants/appearance/voiceHints/physicality/poleSignature for sesh_the_quiet_blow, marn_two_forms, quillon_vey_unending, seren_unlooked_at, asterion_given_maze; powers_f1.json plainly/descriptionSeed for power_flesh_temple, power_vacated_custody; the_twelve_reaches_f1.json body_mind crisis/environs; greater_arcs_f1.json arc_the_poles_pull stage 1 publicFace; EXESA_o1.md IV, V, VI, VII; PLAYERS_GUIDE_f1.md accords. Per-shot map in film_mind_body_sources.md.",
  "pacing": {

@@ -3,6 +3,12 @@
  "id": "film_chaos_order",
  "kind": "film",
  "name": "Chaos and Order",
+ "controls": {
+  "skip": "Skip",
+  "next": "Next",
+  "watchAgain": "Watch again",
+  "back": "Back to the Library"
+ },
  "_what": "Info film for the Chaos/Order domain: the Churnfolk, the Enginewrights and the Lattice-Cities, the wild/ordered nanite quarrel, the two courts of the Churn, and the room on no plan.",
  "_canon": "EXESA_o1.md (III conversion, V poles, VI two courts, Rethe, Cassa, Harrow, VII domain table); tradition_profiles_f1.json traditions[churnfolk,enginewright,lattice] theCraft/oneLine/theTrade/distribution/acrossTheAxis, powerSources[wild_current]; locations_f1.json descriptionSeed/appearance; npcs_f1.json role/wants/voiceHints/appearance; powers_f1.json plainly/descriptionSeed; the_twelve_reaches_f1.json chaos_order crisis; greater_arcs_f1.json arc_the_poles_pull stage 1 publicFace. Per-shot map in film_chaos_order_sources.md.",
  "pacing": {

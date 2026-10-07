@@ -3,6 +3,12 @@
  "id": "film_life_death",
  "kind": "film",
  "name": "Life and Death",
+ "controls": {
+  "skip": "Skip",
+  "next": "Next",
+  "watchAgain": "Watch again",
+  "back": "Back to the Library"
+ },
  "_what": "Info film for the Life and Death domain: the Rootkin, the Ashwardens and the Threnodists, their homes, crafts, schools, costs and a few public figures, with the Deepwood's Moot and the Afterlings at the edges. Every string in lines/after/name/title is player-facing.",
  "_canon": "tradition_profiles_f1.json traditions[rootkin|ashwarden|threnodist] oneLine/theCraft/theTrade/distribution/acrossTheAxis; EXESA_o1.md V (The Poles Pull, The Green Schism) and VII (Life/Death table); PLAYERS_GUIDE_f1.md Part XII; the_twelve_reaches_f1.json reaches[0].crisis; locations_f1.json descriptionSeed of the_heartroot, the_slow_orchard, the_greenward, dw_the_moot, the_quiet_ground, cairnhold, the_long_grey, the_hollowing, wellspring, the_grief_house, the_wellspring_deep; powers_f1.json power_harvest_hand.plainly; greater_arcs_f1.json arc_green_schism stage 1 publicFace; npcs_f1.json role/wants/voiceHints/appearance of thessa_root, walker_elder_thren, warden_mother_redgate, the_unfinished_of_the_last_cairn, maud_who_sings_before; the_afterlings_f1.md (the five doors, Cairnsend). Per-shot map in film_life_death_sources.md.",
  "pacing": {

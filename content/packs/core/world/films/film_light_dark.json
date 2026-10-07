@@ -3,6 +3,12 @@
  "id": "film_light_dark",
  "kind": "film",
  "name": "Light and Dark",
+ "controls": {
+  "skip": "Skip",
+  "next": "Next",
+  "watchAgain": "Watch again",
+  "back": "Back to the Library"
+ },
  "_what": "Info film for the Light and Dark domain: the Blazeborn, Verists, Umbrals and Veilwrights, their homes, schools, costs, extremes and the two arguments across the line; closes on the Glare and the Slow Stair landing. Unlocked by any of the four traditions or their home places.",
  "_canon": "EXESA_o1.md VII (Light and Dark table, 'Dark is an exact mirror of Light'), V (The Poles Pull, The Glare), VI (Valen Sunwrack, the Deep Lantern); PLAYERS_GUIDE_f1.md Part XII table; tradition_profiles_f1.json traditions[blazeborn|verist|umbral|veilwright] oneLine, theCraft, theTrade, acrossTheAxis, distribution.modes/tail (no underscore fields); locations_f1.json descriptionSeed/appearance for glasshome, the_blaze, the_lensward, the_unblinking_stone, the_told_ground, the_flensing, the_underlight, the_harborward, the_unlit_deep, the_hall_of_mirrors, the_kindly_court, the_last_mask, the_slow_stair; npcs_f1.json sunwrack_valen, ceriad, illeth_turned_coat (role, appearance, voiceHints, wants only; no storyRule/questSeeds/secrets); powers_f1.json power_blaze_unshadowed.descriptionSeed, power_glass_assembly.plainly; greater_arcs_f1.json arc_the_glare stage 1 publicFace. Per-shot sourcing in film_light_dark_sources.md.",
  "pacing": {

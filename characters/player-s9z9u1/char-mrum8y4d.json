@@ -21964,5 +21964,79 @@
     "film_light_dark": 99,
     "film_mind_body": 99,
     "film_span_spirit": 99
+  },
+  "localLayouts": {
+    "gen-whistling-woman-post": {
+      "radiusMetres": 450,
+      "extent": [
+        {
+          "id": "gen-whistling-woman-post:built",
+          "name": null,
+          "kind": "built",
+          "bearing": 0,
+          "fromMetres": 0,
+          "radiusMetres": 189,
+          "generated": true
+        },
+        {
+          "id": "gen-whistling-woman-post:field0",
+          "name": null,
+          "kind": "field",
+          "bearing": -55.66482844715938,
+          "fromMetres": 265,
+          "radiusMetres": 215,
+          "generated": true
+        },
+        {
+          "id": "gen-whistling-woman-post:field1",
+          "name": null,
+          "kind": "field",
+          "bearing": -46.6954146111384,
+          "fromMetres": 360,
+          "radiusMetres": 269,
+          "generated": true
+        },
+        {
+          "id": "gen-whistling-woman-post:wood0",
+          "name": null,
+          "kind": "wood",
+          "bearing": 120.10664795339108,
+          "fromMetres": 413,
+          "radiusMetres": 230,
+          "generated": true
+        }
+      ],
+      "sites": [
+        {
+          "id": "the-shrine",
+          "name": "The Shrine",
+          "kind": "shrine",
+          "localMap": {
+            "bearing": 162,
+            "metres": 270
+          },
+          "basis": "uphill",
+          "placedBecause": "its name says \"Shrine\"; nothing on this ground answered \"uphill\" — placed in the clear between the roads",
+          "generated": true,
+          "visited": true
+        }
+      ],
+      "generated": true,
+      "_measured": {
+        "uphillBearing": null,
+        "relief": null,
+        "riverBearing": null,
+        "riverDistanceDeg": null,
+        "roadsOut": [
+          {
+            "to": "gen-the-made-gate",
+            "bearing": -53,
+            "mi": 2
+          }
+        ]
+      },
+      "kind": "village",
+      "placeId": "gen-whistling-woman-post"
+    }
   }
 }
